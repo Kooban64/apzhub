@@ -1,0 +1,25 @@
+# Shared Postgres used by legacy fragments (e.g. n8n optional PG mode). Not APZHUB app DB.
+services:
+  apzpg:
+    image: ${APZ_IMAGE_POSTGRES16_ALPINE}
+    container_name: apzpg
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    ports:
+      - "127.0.0.1:${APZPG_PUBLISH_PORT:-54333}:5432"
+    environment:
+      POSTGRES_USER: ${APZPG_POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${APZPG_POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${APZPG_POSTGRES_DB:-apz}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${APZPG_POSTGRES_USER:-postgres} -d ${APZPG_POSTGRES_DB:-apz}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    volumes:
+      - apzpg_data:/var/lib/postgresql/data
+
+volumes:
+  apzpg_data:

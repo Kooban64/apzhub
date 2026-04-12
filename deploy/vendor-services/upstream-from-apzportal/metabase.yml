@@ -1,0 +1,63 @@
+# Metabase is distributed as a JVM image; building from Clojure source is not wired here by default.
+services:
+  metabase-db:
+    image: ${APZ_IMAGE_POSTGRES16_ALPINE}
+    container_name: apz-metabase-db
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    environment:
+      POSTGRES_USER: metabase
+      POSTGRES_DB: metabase
+      POSTGRES_PASSWORD: ${METABASE_DB_PASSWORD:-metabase}
+    volumes:
+      - metabase_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U metabase -d metabase"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  metabase:
+    image: ${APZ_IMAGE_METABASE}
+    container_name: apz-metabase
+    restart: unless-stopped
+    networks:
+      - apz_frontend
+      - apz_backend
+    ports:
+      - "127.0.0.1:${METABASE_PUBLISH_PORT:-18084}:3000"
+    depends_on:
+      metabase-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://127.0.0.1:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+    environment:
+      # Optional: avoids wrong absolute URLs behind TLS-terminated proxies (see env.production).
+      MB_SITE_URL: ${METABASE_SITE_URL:-}
+      # Best-effort "SSO-like" UX in iframe mode: keep sessions longer and
+      # ensure cross-origin embedding cookies are accepted by modern browsers.
+      MAX_SESSION_AGE: ${METABASE_MAX_SESSION_AGE:-43200}
+      MB_SESSION_COOKIE_SAMESITE: ${METABASE_SESSION_COOKIE_SAMESITE:-none}
+      MB_SESSION_COOKIES: ${METABASE_SESSION_COOKIES:-false}
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT: "5432"
+      MB_DB_USER: metabase
+      MB_DB_PASS: ${METABASE_DB_PASSWORD:-metabase}
+      MB_DB_HOST: metabase-db
+      JAVA_TIMEZONE: ${TZ:-UTC}
+      # Outbound email (shared SMTP_* in .env); enable in Metabase Admin after SMTP works.
+      MB_EMAIL_SMTP_HOST: ${SMTP_HOST:-}
+      MB_EMAIL_SMTP_PORT: ${SMTP_PORT:-587}
+      MB_EMAIL_SMTP_USERNAME: ${SMTP_USER:-}
+      MB_EMAIL_SMTP_PASSWORD: ${SMTP_PASS:-}
+      MB_EMAIL_FROM_ADDRESS: ${SMTP_FROM:-}
+      MB_EMAIL_SMTP_SECURITY: ${MB_EMAIL_SMTP_SECURITY:-starttls}
+
+volumes:
+  metabase_pg:

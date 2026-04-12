@@ -1,0 +1,60 @@
+# Force public URL scheme/host so Symfony does not emit http:// redirects behind TLS.
+# Without this, Secure session cookies are skipped on the intermediate http hop → login loop.
+# If you change the Kimai hostname, update host here and run: docker compose exec kimai /opt/kimai/bin/console kimai:reload --env=prod
+parameters:
+    router.request_context.scheme: 'https'
+    router.request_context.host: 'apztime.apzportal.apzor.com'
+
+# Default SameSite=Lax is fine for direct visits; some portal/embed + Chrome combinations still
+# omit the session cookie on POST → CSRF fails → 302 back to /en/login (looks like “bad password”).
+framework:
+    session:
+        cookie_secure: true
+        cookie_samesite: none
+
+kimai:
+    saml:
+        provider: authentik
+        activate: true
+        title: Login with SSO
+        mapping:
+            - { saml: $http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress, kimai: email }
+            - { saml: $http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name, kimai: alias }
+        roles:
+            resetOnLogin: true
+            attribute: http://schemas.xmlsoap.org/claims/Group
+            mapping:
+                - { saml: platform-admin, kimai: ROLE_SUPER_ADMIN }
+                - { saml: portal-admin, kimai: ROLE_SUPER_ADMIN }
+                - { saml: kimai-admin, kimai: ROLE_SUPER_ADMIN }
+                - { saml: manager, kimai: ROLE_ADMIN }
+                - { saml: pm, kimai: ROLE_TEAMLEAD }
+        connection:
+            idp:
+                entityId: "https://apzauth.apzportal.apzor.com/application/saml/kimai-saml/metadata/"
+                singleSignOnService:
+                    url: "https://apzauth.apzportal.apzor.com/application/saml/kimai-saml/sso/binding/redirect/"
+                    binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                singleLogoutService:
+                    url: "https://apzauth.apzportal.apzor.com/application/saml/kimai-saml/slo/binding/redirect/"
+                    binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                x509cert: "MIIFUzCCAzugAwIBAgIRAI9z1JtboERHg6mrMHBWICEwDQYJKoZIhvcNAQELBQAwHTEbMBkGA1UEAwwSYXV0aGVudGlrIDIwMjUuMi40MB4XDTI2MDMyNjAzNDY0MVoXDTI3MDMyNzAzNDY0MVowVjEqMCgGA1UEAwwhYXV0aGVudGlrIFNlbGYtc2lnbmVkIENlcnRpZmljYXRlMRIwEAYDVQQKDAlhdXRoZW50aWsxFDASBgNVBAsMC1NlbGYtc2lnbmVkMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEApZg2hRohAADAfi1ARJsiy6dRcjBi4hbRDvWbmwOsRX0YRhkgpih6kkSNQp5lR9q+NKSNBygLuw/XPTc54GpBS33L7Z9WpB4qoLJEqH+dhP+W6nA7ced2yz3sJwaEmkN4yI0ES6CeY6JxEisDpRHXHiFxI+FB5144ROl73yvHRF1rk/BOuxS2EfSVysiMWUgqkLCCcRQ+FCimS7dLyfq5Dw1hnpJs8JXfwHMdcXSpBxa5l4jp5j5c2/UAryEtSMCjUnnBmBNNic4kTg3gqqyyRsGZCpXh318dD2opIx9X/RfS3jSSjbyfO4wg6N/DIIUurAXuHPr9YbTi5v+F8rfYRltlxOPrSa0+RYSI41AlqKJaeIt3Ptgwvd2GvGnNPqEroU1m0xIS/gXS+MZHe7Ia4+8XA2s7zKX9r7dRQLgYquqEnGVSvWvBPKs1ibzsdPTNIvk4INtWAo3UxXPF7GumZ/YRtfUbMmGtU+DiDWSYQZB1eVYIcYrnTw4J4hn2KoD2Yl5/UWd67sANk9MOBdr0xq01MD501qglb5B0tI/DamRDPX0dk+VGp0lRD84nW7mPX91au3nfI2QvbvVVQpDVRXm0o0eMlIWno0Ubp+eqwj3SKwbJfBV7wFht3xwOchExpy+erJ/Xzx6DOY0X2CsUcZG61FoewLm2FxPjy5YgTKsCAwEAAaNVMFMwUQYDVR0RAQH/BEcwRYJDaVZXQk9yMWlnWGh1YmgxRkVPV0NTRHgxUklLbExIM25KZlZQY2loMy5zZWxmLXNpZ25lZC5nb2F1dGhlbnRpay5pbzANBgkqhkiG9w0BAQsFAAOCAgEAQQrQxrCaY0ABmmEC39gXEc60y4pvOQ6XmpNtcuHD9GHE6dJLEW3PW5MC0xr8Tp19L+/g/b+1eCJQ9UxZ1XdVfTjXVjRnPWIsoAyTCHvvQwgPLHRvyyuQEd75JfRYRidoGe+BeMkT9h98ENmobvTzvCAfHYtn2kLr3B36mPt2pVr/Na3VjfD6PBDoJSrG4CWW+pBRClVXNKAo8RdJJ2igs5PZ/LTuLdmp2sJVv/7lYrq/+0Y5CZDekIntzWI+ULJFF+YYUetJKXKk6miz2FHZbN1ESA42yNrimE1IQDgq6iVl/MMRVUcQqqDzltQSNqxW7QXnaokAOsVSXHiAsCHAeDBicZx3lgr5HNE0647bUCHAj9/JgKXX/De+ZuRqLFq7W3WiN7lq2e1IVGrJ7keUFG45LFokvBJnW2F/M4F33L+NnJOdaTPhiOpe7sHItlX1kws3kiM8hPZwWc1gTa0tAX8rG7xT5n4WMVSqerpLKWqZZIL5t9j5sHy4AvPW7TEW0wfb/542EENPbyo16hzW/EbZ80K8/NEXDtQ5elRAf9WdFETeJ3rGn2+nBak7uIME6ybCI2D3CqiwTO7aJ/Pmr+pCxn6aCMR4I9R1CazTxSBkpBqMspAMEm3cIcJgAe3fYbky41kbv/b0Na1gMViaDM1GzOBxWRRUvxrvxdT1fMI="
+            sp:
+                entityId: "https://apztime.apzportal.apzor.com/"
+                assertionConsumerService:
+                    url: "https://apztime.apzportal.apzor.com/auth/saml/acs"
+                    binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                singleLogoutService:
+                    url: "https://apztime.apzportal.apzor.com/auth/saml/logout"
+                    binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+            baseurl: "https://apztime.apzportal.apzor.com/auth/saml/"
+            strict: true
+            debug: false
+
+security:
+    firewalls:
+        secured_area:
+            form_login:
+                check_path: saml_acs
+            logout:
+                path: saml_logout

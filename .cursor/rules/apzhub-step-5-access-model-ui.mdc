@@ -1,0 +1,196 @@
+---
+description: APZHUB Step 5 — access model UI (Users, Matrix, Bundles, Services, provisioning, inspector)
+alwaysApply: true
+---
+
+# APZHUB Step 5 — Access model UI (locked)
+
+This is the **core of APZHUB**. Design the **admin interaction model for access control**, not just data tables.
+
+If this is clean, everything else becomes easy. If messy, the platform fails.
+
+## 5.1 Core principle
+
+Access must be:
+
+- **Visual**  
+- **Traceable**  
+- **Easy to assign**  
+- **Easy to override**  
+- **Impossible to misunderstand**  
+
+Instead of scattered forms:
+
+👉 **Matrix + Inspector + Bundles + Overrides**
+
+## 5.2 Admin access domains (left rail)
+
+Under Admin, access breaks into distinct purposes — **no overlap**:
+
+- Users  
+- Access Matrix  
+- Bundles  
+- Services  
+- Provisioning is **separate** but **linked**
+
+## 5.3 Users view (entry point)
+
+### Main canvas — Users list
+
+Table columns e.g.:
+
+- Name, Email  
+- Platform Role  
+- Status (active/inactive)  
+- Linked accounts  
+- Last login  
+- Access summary (compact)  
+- Flags (issues, conflicts)  
+
+### Selecting a user
+
+👉 Right panel = **User Access Inspector**
+
+## 5.3.1 User Access Inspector (critical)
+
+### Section A: Platform role
+
+- Dropdown selector  
+- Immediate update  
+
+### Section B: Access bundle(s)
+
+- Assigned bundles  
+- Add/remove bundle  
+- Expandable: what each bundle grants  
+
+### Section C: Service access list
+
+Table or grouped list. Columns:
+
+| Service     | Access   | Source            | Status |
+| ----------- | -------- | ----------------- | ------ |
+| (per row)   | effective role | Bundle / Manual override / System default | Provisioned / Pending / Failed |
+
+- **Access** = effective role  
+- **Source:** Bundle, Manual override, System default  
+- **Status:** Provisioned, Pending, Failed  
+
+### Section D: Override control
+
+Admin can: change role per service, remove access, add access.
+
+Overrides must be clearly marked: **“Manual override”**.
+
+### Section E: Linked accounts
+
+- Google connected / not (future: Microsoft, etc.)  
+
+### Section F: Actions
+
+- Re-provision user  
+- Remove all access  
+- Lock user  
+- Reset sessions  
+
+## 5.4 Access Matrix view (power feature)
+
+**Most important admin tool** — full system overview.
+
+### 5.4.1 Layout
+
+- **Rows:** Users  
+- **Columns:** Services  
+- **Cells:** Role assignment  
+
+### 5.4.2 Cell behavior
+
+Each cell must:
+
+- Show role clearly  
+- Color-code by level  
+- Be clickable to edit  
+- Show source (bundle/manual)  
+
+Click → inline selector or inspector panel.
+
+### 5.4.3 Filters
+
+Support: by service, by role, by bundle, by user group; **only conflicts**; **only overrides**.
+
+### 5.4.4 Use cases
+
+Audit access system-wide, detect inconsistencies, mass-adjust roles, validate provisioning logic.
+
+## 5.5 Bundles UI
+
+Bundles scale assignment.
+
+### 5.5.1 Bundle list
+
+Table: Bundle name, Description, Services covered, Number of users, Last updated.
+
+### 5.5.2 Bundle editor (main canvas)
+
+**Section A — Metadata:** name, description.
+
+**Section B — Service role assignments:** per-service role table (Service | Role).
+
+**Section C — Preview:** “This bundle gives:” — full resulting access list.
+
+**Section D — Users using bundle:** list + impact awareness.
+
+### 5.5.3 Behavior
+
+When bundle changes: users **inherit** updates **unless overridden**. Overrides **remain intact**.
+
+## 5.6 Services UI
+
+Defines how each system behaves.
+
+### 5.6.1 Service list
+
+Name, Type (internal/external), Auth type (OIDC / SAML / Vault / API / DB), Status, Provisioning method.
+
+### 5.6.2 Service detail view
+
+**Section A — General:** name, description, category.
+
+**Section B — Role mapping:** APZHUB role → service role (e.g. Viewer → read-only, Editor → contributor, Admin → admin).
+
+**Section C — Provisioning method:** API, SCIM, DB safe, Manual, Vault.
+
+**Section D — Health:** last sync, errors.
+
+## 5.7 Provisioning integration (linked UI)
+
+From any access change:
+
+- Provisioning job triggers  
+- Visible in provisioning queue  
+- Status reflected in user/service views  
+
+**Automatic and transparent.**
+
+## 5.8 Visual rules
+
+- Consistent **role colors**  
+- **Source** (bundle/manual) always visible  
+- **Status** always visible  
+- **No hidden logic**  
+
+## 5.9 Interaction flows
+
+**Assigning access to a user:** Open user → assign bundle → override if needed → save → system provisions automatically → status updates live.
+
+**Fixing an issue:** Alert → open user/service → see failed provisioning → fix role or retry → system updates.
+
+**Auditing access:** Open matrix → filter → inspect inconsistencies → adjust inline.
+
+## 5.10 What makes this powerful
+
+Clarity (matrix), speed (bundles), flexibility (overrides), control (mapping), visibility (status + audit) — design for **all five**.
+
+## Locked Step 5 statement
+
+**APZHUB access control is managed through a structured UI consisting of a user-centric inspector, a system-wide access matrix, reusable bundles, service-level role mapping, and automatic provisioning with visible status, allowing clear assignment, override, and audit of per-service roles for each user.**

@@ -1,0 +1,302 @@
+# Community edition images from Plane (artifacts.plane.so). Adapted from deployments/cli/community/docker-compose.yml.
+x-db-env: &plane-db-env
+  PGHOST: ${PGHOST:-plane-db}
+  PGDATABASE: ${PLANE_POSTGRES_DB:-plane}
+  POSTGRES_USER: ${PLANE_POSTGRES_USER:-plane}
+  POSTGRES_PASSWORD: ${PLANE_POSTGRES_PASSWORD:-plane}
+  POSTGRES_DB: ${PLANE_POSTGRES_DB:-plane}
+  POSTGRES_PORT: ${POSTGRES_PORT:-5432}
+  PGDATA: ${PGDATA:-/var/lib/postgresql/data}
+
+x-redis-env: &plane-redis-env
+  REDIS_HOST: ${REDIS_HOST:-plane-redis}
+  REDIS_PORT: ${REDIS_PORT:-6379}
+  REDIS_URL: ${REDIS_URL:-redis://plane-redis:6379/}
+
+x-minio-env: &plane-minio-env
+  MINIO_ROOT_USER: ${AWS_ACCESS_KEY_ID:-access-key}
+  MINIO_ROOT_PASSWORD: ${AWS_SECRET_ACCESS_KEY:-secret-key}
+
+x-aws-s3-env: &plane-aws-s3-env
+  AWS_REGION: ${AWS_REGION:-}
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-access-key}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-secret-key}
+  AWS_S3_ENDPOINT_URL: ${AWS_S3_ENDPOINT_URL:-http://plane-minio:9000}
+  AWS_S3_BUCKET_NAME: ${AWS_S3_BUCKET_NAME:-uploads}
+
+x-proxy-env: &plane-proxy-env
+  APP_DOMAIN: ${APP_DOMAIN:-localhost}
+  FILE_SIZE_LIMIT: ${FILE_SIZE_LIMIT:-5242880}
+  # CERT_EMAIL must be empty for local HTTP, or a full Caddy line: email you@example.com
+  CERT_EMAIL: ${CERT_EMAIL:-}
+  CERT_ACME_DNS: ${CERT_ACME_DNS:-}
+  # Do not pass CERT_ACME_CA here: an empty value breaks Caddy; the image Caddyfile uses {$CERT_ACME_CA:https://acme-v02.api.letsencrypt.org/directory} when unset.
+  LISTEN_HTTP_PORT: "80"
+  LISTEN_HTTPS_PORT: "443"
+  BUCKET_NAME: ${AWS_S3_BUCKET_NAME:-uploads}
+  SITE_ADDRESS: ${SITE_ADDRESS:-:80}
+
+x-mq-env: &plane-mq-env
+  RABBITMQ_HOST: ${RABBITMQ_HOST:-plane-mq}
+  RABBITMQ_PORT: ${RABBITMQ_PORT:-5672}
+  RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-plane}
+  RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-plane}
+  RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST:-plane}
+  RABBITMQ_VHOST: ${RABBITMQ_VHOST:-plane}
+
+x-live-env: &plane-live-env
+  API_BASE_URL: ${API_BASE_URL:-http://api:8000}
+  LIVE_SERVER_SECRET_KEY: ${LIVE_SERVER_SECRET_KEY:-change-me-plane-live-secret}
+
+x-app-env: &plane-app-env
+  WEB_URL: ${WEB_URL:-http://localhost:18085}
+  DEBUG: ${DEBUG:-0}
+  CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:18085}
+  GUNICORN_WORKERS: ${GUNICORN_WORKERS:-1}
+  USE_MINIO: ${USE_MINIO:-1}
+  DATABASE_URL: ${DATABASE_URL:-postgresql://plane:plane@plane-db/plane}
+  SECRET_KEY: ${SECRET_KEY:-change-me-plane-secret-key}
+  AMQP_URL: ${AMQP_URL:-amqp://plane:plane@plane-mq:5672/plane}
+  API_KEY_RATE_LIMIT: ${API_KEY_RATE_LIMIT:-60/minute}
+  MINIO_ENDPOINT_SSL: ${MINIO_ENDPOINT_SSL:-0}
+  LIVE_SERVER_SECRET_KEY: ${LIVE_SERVER_SECRET_KEY:-change-me-plane-live-secret}
+
+services:
+  plane-migrator:
+    image: ${APZ_IMAGE_PLANE_BACKEND}
+    container_name: apz-plane-migrator
+    restart: "no"
+    networks:
+      - apz_backend
+    command: ./bin/docker-entrypoint-migrator.sh
+    volumes:
+      - plane_logs_migrator:/code/plane/logs
+    environment:
+      <<: [*plane-app-env, *plane-db-env, *plane-redis-env, *plane-minio-env, *plane-aws-s3-env, *plane-proxy-env]
+    depends_on:
+      plane-db:
+        condition: service_healthy
+      plane-redis:
+        condition: service_started
+
+  plane-api:
+    image: ${APZ_IMAGE_PLANE_BACKEND}
+    container_name: apz-plane-api
+    restart: unless-stopped
+    networks:
+      apz_backend:
+        aliases:
+          - api
+    command: ./bin/docker-entrypoint-api.sh
+    volumes:
+      - plane_logs_api:/code/plane/logs
+    environment:
+      <<: [*plane-app-env, *plane-db-env, *plane-redis-env, *plane-minio-env, *plane-aws-s3-env, *plane-proxy-env, *plane-mq-env]
+    depends_on:
+      plane-migrator:
+        condition: service_completed_successfully
+      plane-db:
+        condition: service_started
+      plane-redis:
+        condition: service_started
+      plane-mq:
+        condition: service_started
+      plane-minio:
+        condition: service_started
+
+  plane-worker:
+    image: ${APZ_IMAGE_PLANE_BACKEND}
+    container_name: apz-plane-worker
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    command: ./bin/docker-entrypoint-worker.sh
+    volumes:
+      - plane_logs_worker:/code/plane/logs
+    environment:
+      <<: [*plane-app-env, *plane-db-env, *plane-redis-env, *plane-minio-env, *plane-aws-s3-env, *plane-proxy-env, *plane-mq-env]
+    depends_on:
+      plane-api:
+        condition: service_started
+      plane-db:
+        condition: service_started
+      plane-redis:
+        condition: service_started
+      plane-mq:
+        condition: service_started
+      plane-minio:
+        condition: service_started
+
+  plane-beat-worker:
+    image: ${APZ_IMAGE_PLANE_BACKEND}
+    container_name: apz-plane-beat
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    command: ./bin/docker-entrypoint-beat.sh
+    volumes:
+      - plane_logs_beat:/code/plane/logs
+    environment:
+      <<: [*plane-app-env, *plane-db-env, *plane-redis-env, *plane-minio-env, *plane-aws-s3-env, *plane-proxy-env, *plane-mq-env]
+    depends_on:
+      plane-api:
+        condition: service_started
+      plane-db:
+        condition: service_started
+      plane-redis:
+        condition: service_started
+      plane-mq:
+        condition: service_started
+      plane-minio:
+        condition: service_started
+
+  plane-web:
+    image: ${APZ_IMAGE_PLANE_FRONTEND}
+    container_name: apz-plane-web
+    restart: unless-stopped
+    networks:
+      apz_backend:
+        aliases:
+          - web
+    depends_on:
+      plane-api:
+        condition: service_started
+      plane-worker:
+        condition: service_started
+
+  plane-space:
+    image: ${APZ_IMAGE_PLANE_SPACE}
+    container_name: apz-plane-space
+    restart: unless-stopped
+    # Upstream image healthcheck uses curl; this slim image has no curl → false "unhealthy".
+    healthcheck:
+      disable: true
+    networks:
+      apz_backend:
+        aliases:
+          - space
+    depends_on:
+      plane-api:
+        condition: service_started
+      plane-worker:
+        condition: service_started
+      plane-web:
+        condition: service_started
+
+  plane-admin:
+    image: ${APZ_IMAGE_PLANE_ADMIN}
+    container_name: apz-plane-admin
+    restart: unless-stopped
+    networks:
+      apz_backend:
+        aliases:
+          - admin
+    depends_on:
+      plane-api:
+        condition: service_started
+      plane-web:
+        condition: service_started
+
+  plane-live:
+    image: ${APZ_IMAGE_PLANE_LIVE}
+    container_name: apz-plane-live
+    restart: unless-stopped
+    networks:
+      apz_backend:
+        aliases:
+          - live
+    environment:
+      <<: [*plane-live-env, *plane-redis-env]
+    depends_on:
+      plane-api:
+        condition: service_started
+      plane-web:
+        condition: service_started
+
+  plane-db:
+    image: ${APZ_IMAGE_PLANE_POSTGRES}
+    container_name: apz-plane-db
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    command: postgres -c max_connections=1000
+    environment:
+      <<: *plane-db-env
+    volumes:
+      - plane_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PLANE_POSTGRES_USER:-plane} -d ${PLANE_POSTGRES_DB:-plane}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  plane-redis:
+    image: ${APZ_IMAGE_VALKEY}
+    container_name: apz-plane-redis
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    volumes:
+      - plane_redisdata:/data
+
+  plane-mq:
+    image: ${APZ_IMAGE_RABBITMQ}
+    container_name: apz-plane-mq
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    environment:
+      <<: *plane-mq-env
+    volumes:
+      - plane_rabbitmq:/var/lib/rabbitmq
+
+  plane-minio:
+    image: ${APZ_IMAGE_MINIO}
+    container_name: apz-plane-minio
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    command: server /export --console-address ":9090"
+    environment:
+      <<: *plane-minio-env
+    volumes:
+      - plane_uploads:/export
+
+  plane-proxy:
+    image: ${APZ_IMAGE_PLANE_PROXY}
+    container_name: apz-plane-proxy
+    restart: unless-stopped
+    networks:
+      - apz_frontend
+      - apz_backend
+    ports:
+      - "127.0.0.1:${PLANE_PUBLISH_HTTP_PORT:-18085}:80"
+    environment:
+      <<: *plane-proxy-env
+    volumes:
+      - plane_proxy_config:/config
+      - plane_proxy_data:/data
+    depends_on:
+      plane-web:
+        condition: service_started
+      plane-api:
+        condition: service_started
+      plane-space:
+        condition: service_started
+      plane-admin:
+        condition: service_started
+      plane-live:
+        condition: service_started
+
+volumes:
+  plane_pgdata:
+  plane_redisdata:
+  plane_uploads:
+  plane_logs_api:
+  plane_logs_worker:
+  plane_logs_beat:
+  plane_logs_migrator:
+  plane_rabbitmq:
+  plane_proxy_config:
+  plane_proxy_data:

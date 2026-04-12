@@ -1,0 +1,125 @@
+name: apzhub-staging
+
+# Shared Docker network with vendor stacks (Plane, Kimai, …) on the same host.
+# Create once: `docker network create apzhub_internal`
+# See deploy/vendor-services/README.md in the repo root.
+
+# Single `build` on `web` only — `migrate` and `worker` reuse the same `image:` tag so Compose
+# does not run three parallel exports into one tag (avoids "image already exists" race).
+
+x-app-image: &app_image
+  image: apzhub:${APZHUB_IMAGE_TAG:-staging}
+
+x-app-build: &app_build
+  <<: *app_image
+  build:
+    context: ../..
+    dockerfile: deploy/docker/Dockerfile
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-apzhub}
+      POSTGRES_DB: ${POSTGRES_DB:-apzhub}
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    volumes:
+      - ${APZHUB_HOST_SECRETS_DIR:-./secrets}:/run/secrets:ro
+      # Named volume survives `docker compose up --build` / container restarts. Do not use `down -v` in prod.
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-apzhub} -d ${POSTGRES_DB:-apzhub}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    networks:
+      - vendor_shared
+
+  migrate:
+    <<: *app_image
+    restart: "no"
+    env_file:
+      - .env
+    environment:
+      APZHUB_DATABASE_URL_FILE: /run/secrets/db_url
+    volumes:
+      - ${APZHUB_HOST_SECRETS_DIR:-./secrets}:/run/secrets:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: ["npm", "run", "db:migrate"]
+    networks:
+      - vendor_shared
+
+  web:
+    <<: *app_build
+    env_file:
+      - .env
+    environment:
+      APZHUB_DATABASE_URL_FILE: /run/secrets/db_url
+      APZHUB_SESSION_SIGNING_SECRET_FILE: /run/secrets/session_signing_secret
+      APZHUB_LAUNCH_JWT_SIGNING_SECRET_FILE: /run/secrets/launch_jwt_signing_secret
+      APZHUB_LAUNCH_OIDC_STATE_SECRET_FILE: /run/secrets/launch_oidc_state_secret
+      APZHUB_SMTP_HOST_FILE: /run/secrets/smtp_host
+      APZHUB_SMTP_USER_FILE: /run/secrets/smtp_user
+      APZHUB_SMTP_PASSWORD_FILE: /run/secrets/smtp_password
+      APZHUB_SMTP_FROM_FILE: /run/secrets/smtp_from
+    volumes:
+      - ${APZHUB_HOST_SECRETS_DIR:-./secrets}:/run/secrets:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - "${APZHUB_WEB_PUBLISH_PORT:-3000}:3000"
+    networks:
+      - vendor_shared
+
+  worker:
+    <<: *app_image
+    # Same image as web includes a Next.js HEALTHCHECK; worker is not an HTTP server — disable it.
+    healthcheck:
+      disable: true
+    env_file:
+      - .env
+    environment:
+      APZHUB_DATABASE_URL_FILE: /run/secrets/db_url
+    volumes:
+      - ${APZHUB_HOST_SECRETS_DIR:-./secrets}:/run/secrets:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      web:
+        condition: service_healthy
+    command: ["npm", "run", "worker:provisioning"]
+    networks:
+      - vendor_shared
+
+  # One host with shared TLS: do **not** enable this on both stacks — use `deploy/edge` + `Caddyfile.dual-host.example` instead.
+  # On a **dedicated** host per stack: `docker compose --profile bundled-caddy up -d` (requires `./Caddyfile`).
+  caddy:
+    profiles: ["bundled-caddy"]
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      web:
+        condition: service_healthy
+    networks:
+      - vendor_shared
+
+networks:
+  vendor_shared:
+    external: true
+    name: apzhub_internal
+
+volumes:
+  postgres_data:
+  caddy_data:
+  caddy_config:

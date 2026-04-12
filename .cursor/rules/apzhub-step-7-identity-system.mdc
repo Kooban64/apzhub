@@ -1,0 +1,153 @@
+---
+description: APZHUB Step 7 — identity system (auth, session, federation, routing, audit, lifecycle)
+alwaysApply: true
+---
+
+# APZHUB Step 7 — Identity system (locked)
+
+This step locks the **authentication and identity boundary** for APZHUB.
+
+**Principle:** APZHUB must **own the login experience** even when federation sits underneath. Users sign into **APZHUB**, not unrelated identity products.
+
+## 7.1 Identity model (hybrid, separated concerns)
+
+Clear separation:
+
+- **A. Authentication** — how the user proves who they are  
+- **B. Identity profile** — who the user is **in APZHUB**  
+- **C. Federation** — how external IDPs connect  
+- **D. Service trust** — how downstream apps trust the authenticated user  
+
+Related, not the same.
+
+## 7.2 Core identity rule
+
+- **IDP** = auth engine (secure auth, standards compliance)  
+- **APZHUB** = identity **experience** and **orchestration** (system-of-engagement)  
+
+User sees APZHUB login; APZHUB manages routing, branding, session; IDP handles secure auth. **Right balance.**
+
+## 7.3 Login experience
+
+**One clean login page** only.
+
+**Include:** APZHUB branding, email/username, password, sign in, optional “Sign in with Google” when enabled, forgot password, minimal support/help.
+
+**Exclude:** marketing blocks, three-column layouts, long text, product promo, noisy illustrations.
+
+Feel: **controlled business desktop product** entry point.
+
+## 7.4 Login flow (default)
+
+1. Open APZHUB  
+2. Credentials on APZHUB login page  
+3. APZHUB authenticates through IDP  
+4. APZHUB establishes **its own** app session  
+5. Route to **end-user workspace** or **admin home** by effective platform role  
+
+## 7.5 Session model (two layers)
+
+**Layer 1 — Identity session:** IDP-managed; auth and federation continuity.
+
+**Layer 2 — APZHUB app session:** APZHUB-managed for UI routing, workspace assembly, access checks, launcher, profile/theme, linked account availability.
+
+APZHUB must **not** depend on raw IDP state for all UI behavior.
+
+## 7.6 User identity record in APZHUB
+
+Application-facing profile (IDP does auth; APZHUB owns app profile), e.g.:
+
+- Internal user ID, email, display name, status  
+- Platform role, linked accounts  
+- Theme, density preference  
+- Last login, session flags  
+- Service access assignments  
+
+## 7.7 Google account linking
+
+**Profile-level**, not forced login requirement.
+
+**Purpose:** calendar, recent mail, Google launch convenience, richer productivity context later.
+
+**Flow:** Profile → “Connect Google” → consent → secure token reference → widgets active.
+
+**If not linked:** proper connect state; no broken panels; no fake content.
+
+Google = **enrichment and convenience**, not the only identity model.
+
+## 7.8 Federation model
+
+**Phase 1:** local username/password through IDP-backed boundary; optional Google sign-in.
+
+**Phase 2:** OIDC federation, SAML for enterprise, possible JIT user creation, possible domain-based routing later.
+
+Design now for **local + social + enterprise** without changing the application model.
+
+## 7.9 Standards support
+
+- **OIDC** — modern apps, SSO, token identity flows, future internal federation  
+- **SAML** — enterprise legacy, specific third-party  
+- **JWT** — APZHUB FE/BE session claims, internal service trust, launch/session handoff  
+
+**OIDC/SAML** = federation/auth standards. **JWT** = token format and trust. **Do not conflate** in design.
+
+## 7.10 Role-aware post-login routing
+
+After login determine: who, platform role, admin capability, target workspace.
+
+**Defaults:** standard user → end-user home; admin/superadmin → admin home; mixed → **default assigned mode**, with authorized mode switch.
+
+Keeps experiences **separated**.
+
+## 7.11 Mode switching
+
+Users with **both** admin and user capability: **no blended UI**.
+
+- Log in once → default mode  
+- **Explicit** mode switch (profile / launcher / header): **Workspace** | **Admin**  
+
+Cleaner and safer than mixing controls.
+
+## 7.12 Identity lifecycle states
+
+Support clean lifecycle, e.g.: Invited, Active, Suspended, Disabled, Locked, Pending Federation, Pending Linked Account, Provisioning Pending.
+
+Identity is not only “exists or not.”
+
+## 7.13 Password and credential policy
+
+**APZHUB-native login:** password reset, secure session expiry, optional MFA later, lockout/rate limits, no plaintext storage, no local shortcuts around IDP.
+
+**Externally linked systems:** not user profile passwords — **Vault / service launch model** only.
+
+**Separate:** APZHUB profile credentials vs external service credentials.
+
+## 7.14 Identity admin functions
+
+Admin can: create/invite, activate/deactivate, suspend/lock, reset sessions, view linked accounts, auth/federation state, trigger reprovisioning, audit trail.
+
+**Must not** casually bypass security: no user passwords, no unsafe impersonation by default, no hidden auth shortcuts.
+
+## 7.15 Audit requirements
+
+Auditable: login success/failure, logout, password reset, account link/unlink, status change, session reset, federation events, mode switch where relevant.
+
+Critical as central work entry point.
+
+## 7.16 UI surfaces related to identity
+
+One coherent system across:
+
+- **Public login** — auth entry  
+- **Profile** — theme, linked accounts, session/device (later)  
+- **Admin / Users** — lifecycle and access  
+- **Header** — profile, mode switch, linked status  
+- **Launch system** — trust to downstream services  
+
+## 7.17 What must be avoided
+
+No: raw IDP UI to end users unless unavoidable; ugly federation-driven journeys; mandatory Google for core usage; merging APZHUB roles with service roles; admin identity controls spilling into end-user screens.
+
+## Locked Step 7 statement
+
+**APZHUB uses a hybrid identity architecture where a branded APZHUB login and application session sit in front of a standards-based IDP layer, supporting local authentication, optional Google linking, future OIDC/SAML federation, JWT-based internal trust, role-aware routing, and strict separation between identity, access, and downstream service permissions.**

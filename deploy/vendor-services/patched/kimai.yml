@@ -1,0 +1,65 @@
+# Kimai — paths adjusted for compose project root deploy/vendor-services/ (vendors/kimai).
+services:
+  kimai-db:
+    image: ${APZ_IMAGE_MYSQL}
+    container_name: apz-kimai-db
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    command: --default-storage-engine innodb --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - kimai_mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: kimai
+      MYSQL_USER: kimai
+      MYSQL_PASSWORD: ${KIMAI_DB_PASSWORD:-kimai}
+      MYSQL_ROOT_PASSWORD: ${KIMAI_MYSQL_ROOT_PASSWORD:-kimairoot}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" || exit 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  kimai:
+    build:
+      context: ../vendors/kimai
+      dockerfile: Dockerfile
+    image: ${APZ_IMAGE_KIMAI}
+    pull_policy: never
+    container_name: apz-kimai
+    restart: unless-stopped
+    networks:
+      - apz_frontend
+      - apz_backend
+    ports:
+      - "127.0.0.1:${KIMAI_PUBLISH_PORT:-18083}:8001"
+    depends_on:
+      kimai-db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: mysql://kimai:${KIMAI_DB_PASSWORD:-kimai}@kimai-db/kimai?charset=utf8mb4&serverVersion=8.4.0
+      TRUSTED_HOSTS: ${KIMAI_TRUSTED_HOSTS:-127\.0\.0\.1|localhost|kimai|apztime\.apzportal\.apzor\.com}
+      TRUSTED_PROXIES: ${KIMAI_TRUSTED_PROXIES:-127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
+      ADMINMAIL: ${KIMAI_ADMINMAIL:-admin@example.com}
+      ADMINPASS: ${KIMAI_ADMINPASS:-changeme}
+      TZ: ${TZ:-UTC}
+      MAILER_URL: ${KIMAI_MAILER_URL:-}
+    volumes:
+      - kimai_var:/opt/kimai/var
+      - ../vendors/kimai/config/packages/local.yaml:/opt/kimai/config/packages/local.yaml:ro
+      - ../vendors/kimai/templates/bundles/TablerBundle/security.html.twig:/opt/kimai/templates/bundles/TablerBundle/security.html.twig:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep apache2 >/dev/null || pgrep apache >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 90s
+
+volumes:
+  kimai_mysql:
+  kimai_var:

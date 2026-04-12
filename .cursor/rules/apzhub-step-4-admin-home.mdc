@@ -1,0 +1,148 @@
+---
+description: APZHUB Step 4 — admin home control plane (zones, rails, inspector, rules, separation from end-user)
+alwaysApply: true
+---
+
+# APZHUB Step 4 — Admin home (control plane) (locked)
+
+APZHUB admin must feel like a **control room**, not a productivity desk.
+
+Avoid: overloading admin with dashboards; mixing admin into the user workspace.
+
+## 4.1 Purpose of admin home
+
+When an admin logs in, the first screen must answer:
+
+- Is the system healthy?  
+- Are users correctly provisioned?  
+- Are there access or security issues?  
+- What needs intervention right now?  
+- Where do I go to act?  
+
+Admin home is **status + control + action entry points**.
+
+**Not:** charts for charts’ sake, decorative dashboards, duplicate user workspace.
+
+## 4.2 Admin first-load layout
+
+Same shell, different composition:
+
+- **Main canvas** — control panels, system state, queues, alerts  
+- **Secondary rail** — **active by default**; navigation within admin domain  
+- **Right utility panel** — inspector/details for selected item  
+
+## 4.3 Main canvas zones
+
+Structured **operational zones**:
+
+### Zone A: System health strip (top)
+
+Compact, always-visible platform state. **Signal-based**, not verbose. Include e.g.:
+
+- Connected services count  
+- Healthy vs degraded services  
+- Active / failed provisioning jobs  
+- Vault status  
+- IDP/auth status  
+
+Clickable → drill to details.
+
+### Zone B: Alerts and action required
+
+**Critical.** Show: provisioning failures, sync errors, access conflicts, connector failures, Vault access anomalies, authentication issues.
+
+Each item: **clear issue**, **affected user/service**, **direct action**.
+
+### Zone C: Provisioning queue
+
+Near real-time list: new user provisioning, role changes, service sync jobs, failed retries.
+
+Each entry: **user**, **service**, **action type**, **status** (pending, success, failed), **retry/action**.
+
+### Zone D: Quick control actions
+
+High-frequency, **direct** and **fast** (not buried deep), e.g.:
+
+- Add user  
+- Assign access bundle  
+- Override service role  
+- Link external account  
+- Trigger re-provision  
+- Rotate credential (Vault)  
+
+### Zone E: Recent admin activity
+
+Audit-style awareness feed: user created, access changed, bundle applied, Vault secret accessed, connector updated, login anomalies. Not logging-only — **operational awareness**.
+
+## 4.4 Secondary rail (admin)
+
+**Always active in admin mode.** Clean domains, **no mixing** — each domain isolated and focused:
+
+- Overview  
+- Users  
+- Access Matrix  
+- Bundles  
+- Services  
+- Provisioning  
+- Vault  
+- Audit  
+- Policies  
+- Connectors (IDP / Google / etc.)  
+
+## 4.5 Right utility panel (admin)
+
+**Inspector panel** for selection context.
+
+Examples:
+
+- **User selected:** platform role, service access, last login, linked accounts, quick actions  
+- **Service selected:** health, provisioning method, role mappings, last sync  
+- **Provisioning job selected:** payload, error, retry, logs  
+- **Vault secret access selected:** who, when, why (if required), rotation status  
+
+Keeps main canvas clean.
+
+## 4.6 Admin interaction rules
+
+1. **Everything traceable** — every action visible in audit.  
+2. **No silent failures** — provisioning failures visible immediately.  
+3. **No hidden automation** — automated processes show status.  
+4. **Reversible where possible** — role changes, bundle assignments, access removals.  
+5. **No clutter** — dense but clean, not overloaded.
+
+## 4.7 What admin home must not be
+
+Not: analytics dashboards, pretty charts with no action, duplicate user workspace, generic admin template.
+
+Admin must feel **precise**, **controlled**, **operational**.
+
+## 4.8 Admin vs end-user separation
+
+| Area        | End User           | Admin                    |
+| ----------- | ------------------ | ------------------------ |
+| Purpose     | Work               | Control                  |
+| UI style    | Panels, summaries  | Tables, matrix, queues   |
+| Actions     | Launch services    | Manage access/system     |
+| Data        | Personal           | Global/system-wide       |
+| Complexity  | Low                | High but structured      |
+
+If a user is **both** admin and end-user: they **switch modes** — do not mix everything in one view.
+
+## 4.9 First admin release scope (v1)
+
+Admin home must support:
+
+- System health overview  
+- Provisioning queue  
+- Alerts  
+- User creation  
+- Bundle assignment  
+- Service role override  
+- Vault access visibility  
+- Audit feed  
+
+No requirement to overbuild analytics in v1.
+
+## Locked Step 4 statement
+
+**The admin home is a control-plane workspace focused on system health, provisioning, access control, Vault visibility, and audit, with clear operational zones, a persistent admin navigation rail, and an inspector-style right panel, fully separated from the end-user experience.**

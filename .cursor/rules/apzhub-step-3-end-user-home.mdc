@@ -1,0 +1,173 @@
+---
+description: APZHUB Step 3 — end-user home and first-load workspace (zones, utility panel, rules, v1 modules)
+alwaysApply: true
+---
+
+# APZHUB Step 3 — End-user home and first-load workspace (locked)
+
+This step locks what a **normal user** sees after login.
+
+The goal is **not** to dump everything on one screen. The goal is a **stable daily command surface** that is useful in **under 10 seconds**.
+
+## 3.1 First-load purpose
+
+After login, the first screen must answer:
+
+- What needs my attention?  
+- What is happening today?  
+- Where do I go next?  
+- What services can I launch quickly?  
+
+The workspace home is a **view-and-launch surface**, not a working clone of all systems.
+
+## 3.2 First-load layout
+
+Default first-load layout: a **three-part workbench** inside the main shell:
+
+- **Main canvas** — primary daily information  
+- **Right utility panel** — today/context items  
+- **Persistent navigation** — header, footer, left rail  
+
+The main canvas is split into **structured zones**.
+
+## 3.3 Main canvas zones (end-user home)
+
+Zones in **this order**:
+
+### Zone A: Welcome/context strip
+
+Compact top strip:
+
+- User name  
+- Current workspace context  
+- Current date  
+- Optional short “today summary”  
+
+Keep it **small**. No large greeting banners. Informational only (e.g. greeting, “3 tasks need attention”, “2 meetings upcoming”).
+
+### Zone B: My attention panel
+
+**Most important area.** High-value summary cards only, e.g.:
+
+- My open tickets  
+- My pending timesheet items  
+- My active projects  
+- My upcoming meetings  
+- Important notifications  
+
+Each card: **count**, **status signal**, **one-line summary**, **direct launch** into the source service. **No fake inline editing** here.
+
+Answers: **what should I care about now?**
+
+### Zone C: My work lists
+
+Below or beside attention: **compact operational lists**, e.g.:
+
+- Recent tickets  
+- Active project items  
+- Timesheet status  
+- Recent notifications or approvals if relevant  
+
+Real data, actionable via launch/open. Does **not** fully replace the source app — enough to orient.
+
+### Zone D: App launcher area
+
+Clean **My Apps**: only apps the user can access (e.g. ApzProjects, ApzService, ApzTime, ApzAnalytics, ApzDocuments, Google, GitHub).
+
+Rules:
+
+- Only allowed apps  
+- Pinned/frequent first  
+- Internal vs external clearly distinguished  
+- Launch method follows access model  
+
+Critical: APZHUB is the **daily entry point**.
+
+### Zone E: Activity feed
+
+Lightweight **cross-service** activity relevant to the user (e.g. ticket assigned, timesheet approved, project updated, connector sync, new calendar item). **Concise and readable**, not noisy.
+
+## 3.4 Right utility panel (end-user home)
+
+Default to **daily context**, recommended order:
+
+### A. Today’s calendar
+
+- Next few events  
+- Current/upcoming meeting emphasis  
+- From linked Google where available  
+
+### B. Recent mail snapshot
+
+- Latest 5 emails: sender, subject, time  
+- Quick open/search entry  
+
+Snapshot only — **not** a full mail client.
+
+### C. Reminders / personal context
+
+- Deadlines, due items, timesheet reminders, internal notices  
+
+If Google is not linked: **proper connect state** — no broken or fake widgets.
+
+## 3.5 What must not appear on end-user home
+
+Do **not** put on normal workspace home:
+
+- Admin controls, provisioning, role matrices  
+- System policy settings, Vault secret management  
+- Large analytics dashboards  
+- Cluttered low-value charts  
+- Generic filler cards  
+
+Home must feel **personal**, **useful**, and **calm**.
+
+## 3.6 Interaction rules
+
+1. **View first, launch second** — summaries in APZHUB; execution in the service.  
+2. **No mixed admin behavior** — home stays a workspace, not an admin console, even for powerful users.  
+3. **Context is personalized** — adapt to service access, linked accounts, responsibilities, pinned apps, assigned work.  
+4. **No empty noise** — if a module has no real data: **omit** or show a **compact intentional empty state**.
+
+## 3.7 Default first-load modules (v1)
+
+Initial release should include:
+
+- Today Summary  
+- My Tickets  
+- My Projects  
+- My Timesheets  
+- My Apps  
+- Today’s Calendar  
+- Recent 5 Emails  
+- Cross-service Activity  
+
+Enough for a strong v1 without clutter.
+
+## 3.8 Customization rules (later)
+
+**Allowed:** reorder modules, pin favorite apps, collapse modules, choose theme, compact vs comfortable density.
+
+**Not allowed (v1):** arbitrary widget explosion, uncontrolled layout designer, full drag-anything-anywhere complexity.
+
+The home stays **curated**.
+
+## 3.9 Suggested visual structure
+
+**Main canvas**
+
+- Top: Today Summary strip  
+- Upper main: Attention cards  
+- Middle left: Work lists  
+- Middle right: My Apps  
+- Lower: Activity feed  
+
+**Right utility panel**
+
+- Calendar → recent mail → reminders  
+
+Balanced and operational.
+
+## Locked Step 3 statement
+
+**The end-user first-load workspace is a personalized view-and-launch home that shows today context, attention summaries, compact work lists, accessible apps, calendar snapshot, recent mail, and cross-service activity, while keeping all real execution inside the underlying services.**

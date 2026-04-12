@@ -1,0 +1,11 @@
+{
+  "launchMethods": {
+    "plane": "external",
+    "zammad": "external",
+    "kimai": "external",
+    "kiwi": "external",
+    "paperless": "external",
+    "n8n": "external"
+  },
+  "externalLaunchTemplates": {}
+}

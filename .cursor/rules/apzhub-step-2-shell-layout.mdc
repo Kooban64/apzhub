@@ -1,0 +1,190 @@
+---
+description: APZHUB Step 2 — shell layout zones (header, body, rails, canvas, utility panel, splits, responsive)
+alwaysApply: true
+---
+
+# APZHUB Step 2 — Shell layout zones (locked)
+
+This step locks the **physical structure** of APZHUB. The shell must be persistent and desktop-like so users do not feel they are bouncing between unrelated pages.
+
+## 2.1 Global shell structure
+
+The application layout must always be:
+
+**Header**  
+**Body area**
+
+- Left primary rail  
+- Optional secondary rail  
+- Main canvas  
+- Optional right utility panel  
+
+**Footer**
+
+Visually it behaves like a **desktop app frame**, not a website.
+
+## 2.2 Header
+
+The header is **always present**. High-value global controls only.
+
+### Left
+
+- APZHUB logo  
+- Current workspace title or current context  
+- Optional breadcrumb for deeper views  
+
+### Center
+
+- Global search bar  
+
+Search should eventually cover: apps, users, tickets, projects, timesheets, documentation, mail metadata, calendar items.
+
+### Right
+
+- Quick actions menu  
+- Notifications  
+- App launcher  
+- Linked account status  
+- Profile/avatar  
+
+Keep the header **clean**. Do not overload with stats, cards, or decorative text.
+
+## 2.3 Footer
+
+The footer is **persistent** and **subtle** — a system bar, not a marketing footer.
+
+Include as appropriate:
+
+- Environment label if needed  
+- Connectivity/status indicator  
+- Background sync/provisioning indicator  
+- Current tenant or workspace context if relevant  
+- Version/build info  
+- Help/support entry  
+
+## 2.4 Left primary rail
+
+Main navigation anchor: **always present**, icon-led, labels visible when expanded.
+
+**Top-level areas only** — never a dumping ground for every feature.
+
+### End-user mode
+
+- Home  
+- My Work  
+- Apps  
+- Calendar  
+- Mail  
+- Search  
+- Notifications  
+
+### Admin mode
+
+- Admin Home  
+- Users  
+- Access  
+- Bundles  
+- Services  
+- Provisioning  
+- Vault  
+- Audit  
+- Policies  
+
+Support: collapse/expand, active state, pinning favorites later if needed.
+
+## 2.5 Secondary rail
+
+Appears **only when needed**. **Contextual**, never global.
+
+Purpose: local navigation inside the selected area, filters, saved views, contextual actions.
+
+Examples:
+
+- **My Work:** Overview, Tickets, Projects, Timesheets  
+- **Admin / Users:** All Users, Pending Users, Linked Accounts, Role Exceptions  
+- **Services:** Internal, External, SSO Ready, Vault Managed, Provisioning Errors  
+
+## 2.6 Main canvas
+
+Core workspace. Must support:
+
+- Single panel views  
+- Two-column split views  
+- Resizable panels  
+- Detail drill-ins  
+- Modals and drawers for secondary actions  
+- Persistent state when moving around where practical  
+
+Workbench feel: list + detail, summary + detail, matrix + inspector, dashboard summaries with launch panels. Most user time is spent here.
+
+## 2.7 Right utility panel
+
+**Optional** and **collapsible**. Purpose is **context**, not navigation. The screen must work without it.
+
+**End users (examples):** today’s calendar, recent emails, reminders, activity context, item details.
+
+**Admin (examples):** provisioning job status, audit details, connector health, selected user/service info, Vault access history.
+
+## 2.8 End-user shell composition
+
+Default:
+
+- Header  
+- Left rail  
+- Main canvas  
+- Right utility panel when useful  
+- Footer  
+
+Main canvas defaults: summary widgets (top or left), operational lists center, launch-focused actions; no heavy admin controls, no policy jargon, no clutter. Daily work and visibility.
+
+## 2.9 Admin shell composition
+
+Same structural shell; different emphasis.
+
+Default:
+
+- Header  
+- Left rail  
+- Secondary rail **often** active  
+- Main canvas: tables, matrixes, provisioning queues  
+- Right utility inspector panel  
+- Footer  
+
+Favor: dense but readable information, strong filters, list/detail, matrix layouts, operational status. Deliberate and controlled, not decorative.
+
+## 2.10 Split-view rules
+
+Allowed patterns (do not exceed **two main splits** at once — avoid noise):
+
+- **Pattern A — List + detail:** left list, right detail  
+- **Pattern B — Matrix + inspector:** main matrix, right inspector  
+- **Pattern C — Summary + work area:** top summary, bottom live area  
+- **Pattern D — Two operational panels:** resizable left and right panes  
+
+## 2.11 Responsive behavior
+
+Desktop-first; degrade cleanly on smaller screens:
+
+- Left rail: icon-only or collapsible drawer  
+- Right utility: slide-over  
+- Footer: compact  
+- Split views: stack  
+
+Design priority: **desktop and laptop productivity**, not mobile-first.
+
+## 2.12 Visual behavior rules
+
+Premium shell:
+
+- Header, footer, rails, panels feel like **one system**  
+- Consistent spacing  
+- Subtle borders  
+- Clear panel hierarchy  
+- Calm hover and active states (not flashy)  
+- Minimal jumpy reflow between areas  
+
+The frame must feel **dependable**.
+
+## Locked Step 2 statement
+
+**APZHUB uses a persistent desktop-style shell with a global header, system footer, left primary rail, optional secondary rail, central resizable work canvas, and optional right utility panel, with the same shell structure assembling into distinct end-user and admin experiences.**

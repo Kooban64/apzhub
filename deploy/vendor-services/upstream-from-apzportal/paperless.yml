@@ -1,0 +1,94 @@
+services:
+  paperless-db:
+    image: ${APZ_IMAGE_POSTGRES16_ALPINE}
+    container_name: apz-paperless-db
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    volumes:
+      - paperless_pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: ${PAPERLESS_POSTGRES_PASSWORD:-paperless}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U paperless -d paperless"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  paperless-broker:
+    image: ${APZ_IMAGE_REDIS7_ALPINE}
+    container_name: apz-paperless-redis
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    volumes:
+      - paperless_redis:/data
+
+  paperless-web:
+    image: ${APZ_IMAGE_PAPERLESS_APP}
+    container_name: apz-paperless
+    restart: unless-stopped
+    networks:
+      - apz_frontend
+      - apz_backend
+    depends_on:
+      paperless-db:
+        condition: service_healthy
+      paperless-broker:
+        condition: service_started
+    ports:
+      - "127.0.0.1:${PAPERLESS_PUBLISH_PORT:-18082}:8000"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://127.0.0.1:8000/ -o /dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    volumes:
+      - paperless_data:/usr/src/paperless/data
+      - paperless_media:/usr/src/paperless/media
+      - paperless_export:/usr/src/paperless/export
+      - paperless_consume:/usr/src/paperless/consume
+      - ../paperless/apzportal_paperless_sync:/usr/src/paperless/src/apzportal_paperless_sync:ro
+    environment:
+      PAPERLESS_REDIS: redis://paperless-broker:6379
+      PAPERLESS_DBHOST: paperless-db
+      PAPERLESS_DBUSER: paperless
+      PAPERLESS_DBPASS: ${PAPERLESS_POSTGRES_PASSWORD:-paperless}
+      PAPERLESS_DBNAME: paperless
+      PAPERLESS_URL: ${PAPERLESS_URL:-http://localhost:18082}
+      # Behind nginx-gateway + TLS-terminating host: trust X-Forwarded-* so Django CSRF/session match https:// public URL.
+      PAPERLESS_USE_X_FORWARD_HOST: ${PAPERLESS_USE_X_FORWARD_HOST:-true}
+      PAPERLESS_USE_X_FORWARD_PORT: ${PAPERLESS_USE_X_FORWARD_PORT:-false}
+      # JSON list as string; override in docker-compose.override.yml if needed (e.g. HTTP-only lab).
+      PAPERLESS_PROXY_SSL_HEADER: '["HTTP_X_FORWARDED_PROTO", "https"]'
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY:-change-me-generate-long-random-string}
+      # First boot: set both to auto-create a superuser (see env.production). Safe to leave unset after the user exists.
+      PAPERLESS_ADMIN_USER: ${PAPERLESS_ADMIN_USER:-}
+      PAPERLESS_ADMIN_PASSWORD: ${PAPERLESS_ADMIN_PASSWORD:-}
+      PAPERLESS_TIME_ZONE: ${TZ:-UTC}
+      PAPERLESS_OCR_LANGUAGE: ${PAPERLESS_OCR_LANGUAGE:-eng}
+      # Outbound email (shared SMTP_* in .env).
+      PAPERLESS_EMAIL_HOST: ${SMTP_HOST:-}
+      PAPERLESS_EMAIL_PORT: ${SMTP_PORT:-587}
+      PAPERLESS_EMAIL_HOST_USER: ${SMTP_USER:-}
+      PAPERLESS_EMAIL_HOST_PASSWORD: ${SMTP_PASS:-}
+      PAPERLESS_EMAIL_FROM: ${SMTP_FROM:-}
+      PAPERLESS_EMAIL_USE_TLS: ${PAPERLESS_EMAIL_USE_TLS:-true}
+      # Optional HTTP remote user: trust a header set by *your* reverse proxy (self-hosted; no third-party IdP required).
+      # Point APZHUB/edge at the same header name when you wire SSO; until then you can set both to "false" and use Django login only.
+      PAPERLESS_ENABLE_HTTP_REMOTE_USER: ${PAPERLESS_ENABLE_HTTP_REMOTE_USER:-true}
+      PAPERLESS_ENABLE_HTTP_REMOTE_USER_API: ${PAPERLESS_ENABLE_HTTP_REMOTE_USER_API:-true}
+      PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: ${PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME:-HTTP_X_APZHUB_USER_EMAIL}
+      # Load APZ role mapper plugin for remote-user to service-role sync.
+      PAPERLESS_APPS: ${PAPERLESS_APPS:-},apzportal_paperless_sync
+
+volumes:
+  paperless_pgdata:
+  paperless_redis:
+  paperless_data:
+  paperless_media:
+  paperless_export:
+  paperless_consume:

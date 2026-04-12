@@ -1,0 +1,26 @@
+# Vendor stack (Plane, Kimai, …) on the same Docker network as APZHUB: `apzhub_internal`.
+# Run from this directory:
+#   docker network create apzhub_internal  # once per host
+#   docker compose --env-file image-pins.env --env-file .env.vendor up -d --build
+#
+# Stop any legacy ~/apzportal/docker stack first — fixed container_name values (apz-n8n, …) collide.
+
+name: apzhub-vendors
+
+networks:
+  apz_frontend:
+    external: true
+    name: apzhub_internal
+  apz_backend:
+    external: true
+    name: apzhub_internal
+
+include:
+  - path: fragments/apzpg.yml
+  - path: upstream-from-apzportal/plane.yml
+  - path: patched/kimai.yml
+  - path: upstream-from-apzportal/n8n.yml
+  - path: upstream-from-apzportal/paperless.yml
+  - path: upstream-from-apzportal/zammad.yml
+  - path: patched/kiwi.yml
+  - path: upstream-from-apzportal/metabase.yml

@@ -1,0 +1,24 @@
+# Single edge Caddy on the **host network** so `reverse_proxy 127.0.0.1:PORT` matches
+# staging/production `web` services published on distinct host ports (e.g. 3001 / 3000).
+#
+# Usage:
+#   cp ../Caddyfile.dual-host.example ./Caddyfile
+#   docker compose up -d
+#
+# Do not run this **and** `bundled-caddy` compose profiles on the same host.
+
+name: apzhub-edge
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    network_mode: host
+    volumes:
+      - ${APZHUB_EDGE_CADDYFILE:-./Caddyfile}:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

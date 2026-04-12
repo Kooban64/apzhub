@@ -1,0 +1,130 @@
+---
+description: APZHUB Step 6 — service launch model (OIDC, JWT, Vault, external; UX; audit; v1 scope)
+alwaysApply: true
+---
+
+# APZHUB Step 6 — Service launch model (locked)
+
+APZHUB does **not** host apps; it **routes users into apps correctly**.
+
+Goal:
+
+👉 **One click → correct access → no confusion → full audit**
+
+## 6.1 Core principle
+
+Every launch must:
+
+- Respect access rules  
+- Use the best available auth method  
+- Be secure  
+- Be fast  
+- Be auditable  
+
+## 6.2 Supported launch methods
+
+Each service declares a **launch type**. Four primary types:
+
+### Type 1: OIDC / SSO launch (best case)
+
+Internal apps, modern external apps.
+
+Flow: click app → redirect via IDP (silent if session exists) → user lands authenticated.
+
+UX: seamless, no login screen, no credential exposure. **Target state for most internal services.**
+
+### Type 2: Token-based (JWT / API session)
+
+Internal APIs, tightly integrated services.
+
+Flow: APZHUB issues signed token → redirect with token → service validates and logs user in.
+
+When: control both sides; tighter control than OIDC where needed.
+
+### Type 3: Vault-assisted launch (controlled credentials)
+
+Systems without SSO, shared admin, legacy.
+
+**Option A — Direct injection (preferred):** retrieve from Vault → inject into login (server-side or controlled client) → user lands inside. User **does not** see password.
+
+**Option B — Controlled reveal:** if injection impossible — “Access” with permission → Vault reveals temporarily → timer; optional auto-rotate. Requires: audit, optional reason, expiry.
+
+**Option C — Checkout/lease:** request credential → temporary lease → auto-expire; rotate after use.
+
+### Type 4: External launch (simple redirect)
+
+Google, AWS, GitHub, systems not fully controlled.
+
+Flow: open target URL; user authenticated if linked, else normal login. Prefer **linked accounts** where possible.
+
+## 6.3 Service launch configuration (admin)
+
+Per service define:
+
+- Launch type (OIDC / JWT / Vault / External)  
+- Launch URL  
+- Auth configuration  
+- Role mapping  
+- Provisioning method  
+- Access requirements  
+
+## 6.4 User experience rules
+
+1. **One-click launch** — no extra prompts, no “choose login method,” no confusion.  
+2. **No credential leakage** — passwords not shown unless explicitly required; never persist in UI; Vault-controlled.  
+3. **Clear failure handling** — clear message, reason (e.g. not provisioned), action (contact admin / retry).  
+4. **Launch context awareness** — who, role, provisioned?, session exists?  
+5. **Fast feedback** — instant or near-instant; on delay: loading state, never silent freeze.
+
+## 6.5 Launch flow logic
+
+On app click:
+
+**Step 1 — Access check:** has access? If no → block + message.
+
+**Step 2 — Provisioning check:** provisioned? If not → trigger provisioning, show status, retry when ready.
+
+**Step 3 — Launch execution:** by service type — OIDC, JWT, Vault, External.
+
+**Step 4 — Audit log:** user, service, time, method, success/failure.
+
+## 6.6 App launcher UI (user)
+
+- Only accessible apps  
+- Clear distinction: **internal**, **external**, **Vault-managed**  
+- Pinning favorites, frequency sort, search  
+
+## 6.7 Visual indicators
+
+Per app tile: access level (subtle), launch type (icon/badge), status: **ready**, **provisioning pending**, **error**.
+
+## 6.8 Linked accounts integration
+
+e.g. Google: link in profile → token stored securely → calendar widget, mail preview, SSO where possible.
+
+## 6.9 Admin visibility
+
+See: how each service launches, who accessed what, failed launches, Vault usage logs.
+
+## 6.10 Security controls
+
+Enforce: session validation before launch, role verification, token expiry, Vault access policies, audit trails.
+
+## 6.11 What must be avoided
+
+No: plaintext passwords in UI, unrestricted credential viewing, manual-login-only reliance, launch logic as UI hacks, hidden failures.
+
+## 6.12 First release scope (v1)
+
+Support:
+
+- OIDC for internal-ready apps  
+- Vault for non-SSO systems  
+- External redirect for third-party  
+- Basic JWT for internal APIs  
+
+Strong foundation without overbuilding.
+
+## Locked Step 6 statement
+
+**APZHUB uses a multi-mode service launch system supporting OIDC, JWT, Vault-assisted, and external launches, ensuring one-click access, no unnecessary credential exposure, automatic provisioning checks, and full audit visibility for all user interactions with connected systems.**

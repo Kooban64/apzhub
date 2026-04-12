@@ -1,0 +1,72 @@
+services:
+  kimai-db:
+    image: ${APZ_IMAGE_MYSQL}
+    container_name: apz-kimai-db
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    command: --default-storage-engine innodb --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - kimai_mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: kimai
+      MYSQL_USER: kimai
+      MYSQL_PASSWORD: ${KIMAI_DB_PASSWORD:-kimai}
+      MYSQL_ROOT_PASSWORD: ${KIMAI_MYSQL_ROOT_PASSWORD:-kimairoot}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" || exit 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  kimai:
+    build:
+      # Paths relative to this file (compose/): parent is project dir docker/
+      context: ..
+      dockerfile: kimai/Dockerfile
+    image: ${APZ_IMAGE_KIMAI}
+    # Local tag only — `docker compose pull` must not try to pull from a registry.
+    pull_policy: never
+    container_name: apz-kimai
+    restart: unless-stopped
+    networks:
+      - apz_frontend
+      - apz_backend
+    ports:
+      - "127.0.0.1:${KIMAI_PUBLISH_PORT:-18083}:8001"
+    depends_on:
+      kimai-db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: mysql://kimai:${KIMAI_DB_PASSWORD:-kimai}@kimai-db/kimai?charset=utf8mb4&serverVersion=8.4.0
+      # Symfony expects one regex (use | for alternation). Commas do NOT separate hosts — they break matching.
+      TRUSTED_HOSTS: ${KIMAI_TRUSTED_HOSTS:-127\.0\.0\.1|localhost|kimai|apztime\.apzportal\.apzor\.com}
+      # Docker bridge / private nets so Symfony trusts X-Forwarded-* from nginx-gateway (not hostname "nginx").
+      TRUSTED_PROXIES: ${KIMAI_TRUSTED_PROXIES:-127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
+      ADMINMAIL: ${KIMAI_ADMINMAIL:-admin@example.com}
+      ADMINPASS: ${KIMAI_ADMINPASS:-changeme}
+      TZ: ${TZ:-UTC}
+      # Optional Symfony mailer DSN (URL-encode @ in user and special chars in password).
+      MAILER_URL: ${KIMAI_MAILER_URL:-}
+    volumes:
+      - kimai_var:/opt/kimai/var
+      # Paths resolve relative to this compose fragment (compose/), so ../kimai/ reaches docker/kimai/.
+      - ../kimai/config/packages/local.yaml:/opt/kimai/config/packages/local.yaml:ro
+      # Tabler ships autocomplete="off" + new-password on login — breaks managers and can submit empty password.
+      - ../kimai/templates/bundles/TablerBundle/security.html.twig:/opt/kimai/templates/bundles/TablerBundle/security.html.twig:ro
+    # Image HTTP probe returns 400 for in-container curls (Symfony/Apache); check process instead.
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep apache2 >/dev/null || pgrep apache >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 90s
+
+volumes:
+  kimai_mysql:
+  kimai_var:

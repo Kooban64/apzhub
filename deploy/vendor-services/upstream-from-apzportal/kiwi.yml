@@ -1,0 +1,60 @@
+services:
+  kiwi-db:
+    image: ${APZ_IMAGE_MARIADB11}
+    container_name: apz-kiwi-db
+    restart: unless-stopped
+    networks:
+      - apz_backend
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - kiwi_db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${KIWI_MYSQL_ROOT_PASSWORD:-kiwiroot}
+      MYSQL_DATABASE: kiwi
+      MYSQL_USER: kiwi
+      MYSQL_PASSWORD: ${KIWI_DB_PASSWORD:-kiwi}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "healthcheck.sh --connect --innodb_initialized || exit 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+
+  kiwi-web:
+    image: ${APZ_IMAGE_KIWI}
+    container_name: apz-kiwi
+    restart: unless-stopped
+    networks:
+      - apz_frontend
+      - apz_backend
+    depends_on:
+      kiwi-db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${KIWI_PUBLISH_HTTP_PORT:-18086}:8080"
+      - "127.0.0.1:${KIWI_PUBLISH_HTTPS_PORT:-18443}:8443"
+    volumes:
+      - kiwi_uploads:/Kiwi/uploads
+      - ../kiwi/tcms_settings_dir:/venv/lib64/python3.11/site-packages/tcms_settings_dir:ro
+    environment:
+      KIWI_DB_HOST: kiwi-db
+      KIWI_DB_PORT: "3306"
+      KIWI_DB_NAME: kiwi
+      KIWI_DB_USER: kiwi
+      KIWI_DB_PASSWORD: ${KIWI_DB_PASSWORD:-kiwi}
+      KIWI_SITE_DOMAIN: ${KIWI_SITE_DOMAIN:-apztesting.apzportal.apzor.com}
+      KIWI_DONT_ENFORCE_HTTPS: ${KIWI_DONT_ENFORCE_HTTPS:-1}
+      KIWI_REMOTE_USER_HEADER: ${KIWI_REMOTE_USER_HEADER:-HTTP_X_FORWARDED_USER}
+      KIWI_ADMIN_GROUPS: ${KIWI_ADMIN_GROUPS:-platform-owner,portal-owner,platform-admin,portal-admin,kiwi-admin,admin,akadmin,authentik admins}
+    cap_drop:
+      - ALL
+
+volumes:
+  kiwi_db_data:
+  kiwi_uploads:

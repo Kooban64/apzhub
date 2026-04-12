@@ -1,0 +1,170 @@
+---
+description: APZHUB Step 10 — frontend architecture (Next.js, layers, routes, composition, testing, milestones)
+alwaysApply: true
+---
+
+# APZHUB Step 10 — Frontend application architecture (locked)
+
+**Rule:** The frontend **assembles** the platform; it **does not** contain business truth.
+
+Business truth lives in backend domains. Frontend owns: **shell**, **composition**, **rendering**, **interaction**, **local UI state**, **launch initiation**.
+
+## 10.1 Frontend foundation
+
+**Baseline:** Next.js (App Router), TypeScript **strict**, Tailwind CSS, shadcn/ui, Radix UI, **TanStack Query**, TanStack Table, **Zod**, Playwright, **Vitest**.
+
+## 10.2 Architectural principle — four layers
+
+1. **App shell** — global layout, persistent desktop frame  
+2. **Feature** — page-level and domain-specific features  
+3. **Shared UI** — reusable visual components  
+4. **Client infrastructure** — API client, auth/session, theme engine, query setup, validation  
+
+Prevents one giant mix of screens and components.
+
+## 10.3 App Router structure
+
+Reflect UX separation:
+
+- `/login`  
+- `/workspace/*`  
+- `/admin/*`  
+- `/profile/*`  
+- `/apps/*`  
+- `/search`  
+- `/notifications`  
+
+Clean **user vs admin** separation.
+
+## 10.4 Layout structure (nested layouts)
+
+**Root:** theme provider, query provider, global init, fonts, base styles.
+
+**Auth:** login and auth-specific screens.
+
+**Workspace:** persistent end-user shell — header, left rail, main canvas, optional right panel, footer.
+
+**Admin:** persistent admin shell — header, left rail, **secondary rail active**, main canvas, inspector, footer.
+
+Shell persistence = product feel.
+
+## 10.5 Component layering rules
+
+**Layer A — Shell (no business rules beyond UI composition):** e.g. `AppHeader`, `AppFooter`, `PrimaryRail`, `SecondaryRail`, `RightUtilityPanel`, `MainCanvas`, `SplitPaneLayout`, `AppLauncher`.
+
+**Layer B — Feature containers:** e.g. `WorkspaceHomeScreen`, `AdminHomeScreen`, `UsersScreen`, `AccessMatrixScreen`, `BundlesScreen`, `ServiceCatalogScreen`, `ProvisioningQueueScreen`, `ProfileAppearanceScreen` — coordinate data, layout, feature interaction.
+
+**Layer C — Domain components:** e.g. `UserAccessInspector`, `ProvisioningStatusBadge`, `BundleAssignmentPanel`, `ServiceLaunchTile`, `ThemeSelector`, `RecentMailPanel`, `CalendarPanel`, `AuditEventList`.
+
+**Layer D — Primitives / shared UI:** buttons, inputs, dialogs, tables, badges, cards, splitters, tabs, drawers, empty/loading — **generic**.
+
+## 10.6 Data ownership rules
+
+**Never invent truth on the client.**
+
+**Server-derived (API/query):** current user, workspace composition, service access, provisioning status, launcher entries, linked accounts, admin alerts, users, bundles, service definitions.
+
+**Local UI only:** panel open/close, splitter size, active tab, selected row, sort/filter, dialog visibility, temporary form input.
+
+**Non-negotiable** separation.
+
+## 10.7 Route-level rendering model
+
+Each major route should:
+
+1. Fetch route data — **typed** query hooks  
+2. Assemble feature screen — composition-friendly containers  
+3. Actions — **typed** mutations  
+
+**No** embedded backend logic in page files. Keep routes small and predictable.
+
+## 10.8 Dynamic workspace composition
+
+Render from **workspace configuration** from backend, not hardcoded assumptions.
+
+Example config flags: calendar widget, mail snapshot, tickets summary, launcher entries, admin mode switch, Google connect prompt → frontend renders modules from config.
+
+## 10.9 Screen composition pattern
+
+**A. Screen container** — queries, layout scaffolding, error/loading.  
+**B. Screen sections** — visual grouping, arrangement.  
+**C. Domain widgets** — focused UI logic.
+
+Aids testing and maintenance.
+
+## 10.10 Recommended folder structure
+
+- `app/`  
+- `components/` — `shell/`, `ui/`, `shared/`  
+- `features/` — `workspace/`, `admin/`, `users/`, `access/`, `bundles/`, `services/`, `provisioning/`, `launch/`, `profile/`, `linked-accounts/`, `audit/`  
+- `lib/` — `api/`, `auth/`, `theme/`, `utils/`, `validators/`  
+- `hooks/`, `types/`  
+- `test/` — `unit/`, `integration/`, `e2e/`  
+
+Domain features stay visible; avoid one giant `components/` dump.
+
+## 10.11 Typed API client model
+
+Typed layer: request functions, response schemas, **Zod at boundaries**, domain hooks.
+
+Examples: `useCurrentUser`, `useWorkspaceConfig`, `useUsers`, `useUserAccess`, `useProvisioningQueue`, `useServices`, `useLaunchApp`.
+
+## 10.12 State management recommendation
+
+**Do not** default to heavy global store.
+
+Use: React state for local UI; **TanStack Query** for server state; context for app-wide theme/session/shell only.
+
+## 10.13 Theme system architecture
+
+First-class themes: **CSS custom properties**, theme provider, profile-driven persistence, **hydration-safe** server-aware init.
+
+Themes (full token sets, not partial overrides): Mist Blue, Sage Green, Soft Charcoal, Graphite, Obsidian (align Step 1).
+
+## 10.14 Shell persistence behavior
+
+**Persist where practical:** rail collapsed/expanded, splitter positions, density, current mode, pinned utilities later.
+
+**Do not persist blindly:** stale forms, invalid selections across routes, unsafe admin state.
+
+Stable shell, not broken stickiness.
+
+## 10.15 Error and loading model
+
+Every screen/panel: loading skeletons, empty states, error states, retry where valid. No placeholder “coming soon” as fake functionality.
+
+## 10.16 Accessibility and usability
+
+Desktop-like → keyboard matters: visible focus, rails navigation, table keyboard nav, dialog a11y, contrast in **all** themes, readable compact and comfortable density — especially admin tables and matrix.
+
+## 10.17 Testing architecture (from day one)
+
+**Unit:** formatters, helpers, theme logic, local reducers, components with controlled props.
+
+**Integration:** feature screens + mocked API, query/mutation behavior, matrix, bundle assignment, launch readiness, workspace composition rendering.
+
+**Playwright e2e:** login, workspace load, admin home, user creation, access assignment, provisioning visibility, theme switch, launch flow, linked-account UI states.
+
+Start **immediately**, not later.
+
+## 10.18 Anti-patterns
+
+No: business logic in page files; random scattered fetches; untyped data; duplicated hardcoded workspace rules; casual admin/end-user blend; god-components; theme logic leaking into features.
+
+## 10.19 Frontend delivery rule
+
+Ship screens as: fully implemented, typed, tested, real or **properly defined** backend contracts; no decorative scaffolding. Missing dependency → **intentional** handling, not fake content.
+
+## 10.20 First frontend milestones (build order)
+
+1. Shell — header, footer, rails, canvas, panels, themes  
+2. Login and session — branded login, auth, route protection  
+3. End-user workspace home  
+4. Admin home  
+5. Access model — users, inspector, matrix, bundles, services  
+6. Provisioning — queue, failure detail, retry  
+7. Profile and linked accounts — themes, Google connect, prefs  
+
+## Locked Step 10 statement
+
+**APZHUB’s frontend should use a Next.js App Router architecture with persistent nested desktop-style layouts, strict domain-based feature separation, typed API hooks, backend-driven workspace composition, first-class theme tokens, lightweight local state, and full unit, integration, and Playwright coverage from the start, ensuring the UI remains modular, testable, and aligned with backend truth.**

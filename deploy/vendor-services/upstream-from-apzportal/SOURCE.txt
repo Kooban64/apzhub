@@ -1,0 +1,3 @@
+Copied from: /home/ubuntu/apzportal/docker/compose/*.yml
+Date: 2026-04-11
+Do not edit these snapshots for production — diff against ~/apzportal when refreshing; wire stacks to network apzhub_internal per README.

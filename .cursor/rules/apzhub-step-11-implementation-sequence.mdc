@@ -1,0 +1,152 @@
+---
+description: APZHUB Step 11 — implementation sequence and delivery phases (0–9, DoD, milestones, discipline)
+alwaysApply: true
+---
+
+# APZHUB Step 11 — Implementation sequence and delivery phases (locked)
+
+**Rule:** **Build the frame first, then identity, then workspace, then control, then orchestration.**
+
+Do **not** start with deep admin or integrations before shell and identity are stable.
+
+## 11.1 Delivery principle
+
+Each phase must produce something **real**, **testable**, **production-shaped**, **not throwaway**.
+
+Each phase ends with: working code, strict typing, tests, **no fake stubs**, **no placeholder screens**.
+
+## 11.2 Recommended build order
+
+### Phase 0: Foundation
+
+**Goal:** technical baseline.
+
+**Deliver:** Next.js App Router, strict TS, strict ESLint, formatting, Tailwind, shadcn/ui, Radix, TanStack Query, TanStack Table, Zod, Vitest, Playwright, CI lint/test, env/config, error boundary strategy, typed API client foundation.
+
+No business screens yet — must **compile**, **test**, enforce standards.
+
+### Phase 1: Desktop shell and theming
+
+**Goal:** APZHUB feels like APZHUB immediately.
+
+**Deliver:** Root shell, header, footer, left rail, optional secondary rail, main canvas, right utility panel, split-pane system, theme engine, **all five themes** (Mist Blue, Sage Green, Soft Charcoal, Graphite, Obsidian), density prefs, shell persistence (rail/split).
+
+**Tests:** shell render, layout transitions, theme switch, no theme contrast regressions, split behavior.
+
+First visible proof of platform.
+
+### Phase 2: Identity and route protection
+
+**Goal:** login boundary and session model.
+
+**Deliver:** Branded login, auth/session integration, route guards, current-user bootstrap, role-aware routing, workspace vs admin **mode switching**, **profile stub only** for identity/session essentials, session expiry, logout.
+
+**Tests:** login success/failure, protected routes, role-based landing, mode switch visibility, logout/expiry.
+
+Users can **securely enter** the platform.
+
+### Phase 3: End-user workspace home
+
+**Goal:** useful to normal users first.
+
+**Deliver:** End-user home, today summary, attention cards, work lists, app launcher, activity feed, right panel (calendar / mail / reminder states), proper empty states, launch entry points.
+
+**Tests:** workspace load, modules from config, hidden modules hidden, launcher allowed apps only, empty/unlinked states.
+
+Daily tool milestone.
+
+### Phase 4: Admin home
+
+**Goal:** control plane.
+
+**Deliver:** Admin landing, health strip, alerts/action required, provisioning queue summary, quick admin actions, recent audit activity, admin secondary rail, inspector panel behavior.
+
+**Tests:** admin routing, alerts, queue, admin-only visibility, inspector interactions.
+
+Operational core.
+
+### Phase 5: Access control model
+
+**Goal:** heart of the system.
+
+**Deliver:** Users list, user access inspector, access matrix, bundles list/editor, services list/detail, role mapping UI, source visibility (bundle / manual override), effective access display, access status badges.
+
+**Tests:** assign bundle, override role, matrix edit, source attribution, effective access rendering, admin visibility.
+
+**Most important** functional phase.
+
+### Phase 6: Provisioning engine and UI
+
+**Goal:** operational, not only descriptive.
+
+**Deliver:** Job generation, queue UI, job detail, retry, per-user per-service status, failure states, manual action states, deprovision visibility, admin feedback loop.
+
+**Tests:** job creation, retries, failures, status transitions, deprovision, queue updates.
+
+**Controlling** downstream state.
+
+### Phase 7: Service launch system
+
+**Goal:** open apps correctly and securely.
+
+**Deliver:** Launch decision engine, launch UI states, OIDC-ready path, JWT/internal path, Vault-managed path, external redirect, launch failures + audit hooks, **provisioning check before launch**.
+
+**Tests:** allowed/denied launch, provisioning-pending behavior, Vault path, external redirect, audit events.
+
+Real **entry point**.
+
+### Phase 8: Linked accounts and profile completion
+
+**Goal:** enrich without destabilizing core.
+
+**Deliver:** Profile page, theme UI, density, Google link flow, calendar/mail activation, linked status UI, disconnect.
+
+**Tests:** theme persistence, linked/unlinked, connect/disconnect, widget activation from linking, preference persistence.
+
+Completes **user experience** layer.
+
+### Phase 9: Audit, alerts, and hardening
+
+**Goal:** operationally safe and trustworthy.
+
+**Deliver:** Audit screens, alert center refinement, traceability (identity/access/provisioning/launch), error states, admin polish, system notifications, failure recovery UX, security hardening.
+
+**Tests:** audit visibility, alert lifecycle, trace continuity, privileged actions, regression across major flows.
+
+**Enterprise-ready** push.
+
+## 11.3 Why this order works
+
+Shell before screens; auth before sensitive UX; user workspace before heavy admin; **access before provisioning**; **provisioning before launch**; enrichment after stable control; audit/hardening when flows exist.
+
+Reduces rework; keeps architecture clean.
+
+## 11.4 What must not happen
+
+Do **not:** matrix before auth/session; Google before workspace shell; provisioning before effective access; launch before provisioning status modeled; audit last as afterthought; UI on guessed backend contracts.
+
+Each phase depends only on **stabilized** prior work.
+
+## 11.5 Definition of done (every phase)
+
+Complete only when: fully implemented, strict TS passes, ESLint passes, tests pass, **no placeholder screens**, backend contract **explicit**, UI states complete, errors and empty states handled.
+
+Avoid “looks complete, structurally unfinished.”
+
+## 11.6 First production-worthy milestones
+
+**After Phase 5:** real shell, auth, user workspace, admin home, access model — **structurally real** APZHUB.
+
+**After Phase 7:** control access + provision + launch — **first full operational** version.
+
+## 11.7 Recommended build discipline (agents)
+
+Work **phase by phase**, never skip.
+
+Per phase: final folder structure, real routes/components, **tests immediately**, no temporary placeholder logic, typed contracts, **stop** only when phase complete and **passing**.
+
+Do **not** scaffold far ahead of stable phases.
+
+## 11.8 Locked Step 11 statement
+
+**APZHUB should be implemented in a disciplined phase sequence beginning with technical foundation, desktop shell, identity, end-user workspace, admin home, access control, provisioning, service launch, linked accounts, and finally audit and hardening, with each phase fully implemented, typed, tested, and production-shaped before moving to the next.**

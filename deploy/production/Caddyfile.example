@@ -1,0 +1,7 @@
+# Copy to `Caddyfile` next to docker-compose.yml.
+# Production hostname (registered app domain).
+
+apzportal.apzor.com {
+  encode gzip
+  reverse_proxy web:3000
+}

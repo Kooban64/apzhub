@@ -1,0 +1,20 @@
+# Locked one-host layout (APZ): **one** edge Caddy, two hostnames, two published `web` ports.
+# Start app stacks **without** `--profile bundled-caddy`, then run [`deploy/edge`](edge/) Caddy with
+# `network_mode: host` so these `127.0.0.1` targets match `APZHUB_WEB_PUBLISH_PORT` on the host.
+#
+# Default port map (see `deploy/staging/env.example` vs `deploy/production/env.example`):
+#   staging web   → host :3001
+#   production web → host :3000
+#
+# Do **not** start the `caddy` service inside both staging and production compose files on this
+# same host (port 80/443 conflict). Use this file only with the edge stack.
+
+staging.apzportal.apzor.com {
+  encode gzip
+  reverse_proxy 127.0.0.1:3001
+}
+
+apzportal.apzor.com {
+  encode gzip
+  reverse_proxy 127.0.0.1:3000
+}

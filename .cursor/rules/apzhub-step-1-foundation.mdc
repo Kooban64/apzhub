@@ -1,0 +1,102 @@
+---
+description: APZHUB Step 1 — desktop workspace platform lock (shell, themes, standards, testing, no placeholders)
+alwaysApply: true
+---
+
+# APZHUB Step 1 — Locked foundation (non-negotiable)
+
+APZHUB is a **desktop-style web application**, not a generic dashboard and not a marketing site with tools attached.
+
+## 1.1 Core application shape (persistent shell)
+
+The default shell for the whole platform must feel like a **modern desktop workspace** with stable, familiar structure:
+
+- **Header** — top, always visible  
+- **Footer** — bottom, always visible  
+- **Left side rail** — primary navigation and app switching  
+- **Optional secondary rail/panel** — local navigation when a section needs it  
+- **Central work canvas** — active workspace  
+- **Right utility panel** — contextual information where needed  
+- **Resizable split-view panels** — in the main workspace  
+
+The shell must feel stable every day so users always know where they are.
+
+## 1.2 Separate theme model (full token sets, not tints)
+
+Each theme is **first-class** with its own full token set (not one theme recolored). Required tokens include: app background, elevated surfaces, panel backgrounds, borders, text hierarchy, accent colors, hover, selected, focus, and status colors.
+
+**Light themes**
+
+- Mist Blue  
+- Sage Green  
+- Soft Charcoal  
+
+**Dark themes**
+
+- Graphite  
+- Obsidian  
+
+Dark mode must be polished: layered dark surfaces, controlled contrast, no ugly flat black blocks unless Obsidian uses them deliberately; muted accents that still read clearly.
+
+## 1.3 Experience separation (one shell, two compositions)
+
+- **End-user workspace** — desktop/workbench style, productivity-oriented, panels and split views, summary and launch oriented.  
+- **Admin home** — clearly distinct, operational/control-focused (tables, matrices, provisioning, audit, connector health); can still launch all services.  
+
+Same technical shell; different composition and emphasis.
+
+## 1.4 Engineering standards (mandatory from day one)
+
+- **Strict TypeScript**  
+- **Strict ESLint**  
+- No `any` except at unavoidable external typing boundaries, explicitly contained  
+- No silent type bypassing  
+- No dead code  
+- No vague TODO scaffolding left across the codebase  
+
+Code must be production-shaped from the start.
+
+## 1.5 Testing standard (starts immediately)
+
+From the beginning the project must include:
+
+- **Unit tests**  
+- **Integration tests**  
+- **Playwright** end-to-end tests  
+
+Rules:
+
+- Every completed feature ships with tests.  
+- Every route/view/state transition must be testable from the start.  
+- No fake “we’ll wire this later” screens.
+
+## 1.6 No placeholders rule
+
+No stubs, placeholders, fake widgets, or empty cards promising the future.
+
+A screen or component may exist only if:
+
+- it is **fully implemented**, or  
+- it is **waiting on a real dependency** that is clearly identified  
+
+If waiting on a real dependency: explicit disabled state, clear reason, no broken interactions, no fake content pretending to be real.
+
+## 1.7 UI quality rule
+
+UI must be modern, intuitive, low clutter, spacious but efficient, consistent spacing and component behavior, **desktop-like not website-like**. Header, footer, rails, panels, split views, and dialogs belong to one coherent design system.
+
+## 1.8 Recommended implementation baseline
+
+- Next.js  
+- TypeScript  
+- Tailwind CSS  
+- shadcn/ui  
+- Radix UI  
+- TanStack Table  
+- Playwright  
+- Vitest or Jest  
+- Strict linting and formatting in CI  
+
+## Locked Step 1 statement (summary)
+
+**APZHUB is defined as a desktop-style, role-assembled workspace platform with a persistent shell, five separate user-selectable themes (each a full theme, not a tint), strict TypeScript/ESLint standards, full testing from day one, and no stubs or placeholder implementation.**

@@ -1,0 +1,189 @@
+---
+description: APZHUB Step 9 — data model and backend domain boundaries (modules, entities, APIs, events)
+alwaysApply: true
+---
+
+# APZHUB Step 9 — Data model and backend domain boundaries (locked)
+
+Locks **backend shape** so UI and platform logic do not tangle.
+
+**Rule:** APZHUB must be **modular in the backend** the way it is modular in the UI. **No** one giant “users/apps/admin” service with mixed concerns.
+
+## 9.1 Core backend principle
+
+Split into **clear domain modules**, each single responsibility.
+
+**Minimum domains:** Identity, Profile, Access Control, Service Catalog, Provisioning, Launch, Vault Integration, Linked Accounts, Workspace Composition, Audit, Notifications/System Events.
+
+May be **one deployable** at first; must be **separated logically** in code and **schema ownership**.
+
+## 9.2 Recommended module boundaries
+
+### A. Identity
+
+**Owns:** APZHUB user identity record, status lifecycle, platform role, session metadata, login-related state, auth linkage to IDP subject.
+
+**Does not own:** service roles, provisioning logic, linked Google tokens, Vault credentials.
+
+**Entities:** User, UserIdentity, UserStatusHistory, SessionRecord.
+
+### B. Profile
+
+**Owns:** display settings, theme, density, profile prefs, mode preference, pinned apps, layout prefs later.
+
+**Entities:** UserProfile, UserThemePreference, UserWorkspacePreference, UserPinnedApp.
+
+Keeps appearance/settings out of identity core.
+
+### C. Access Control
+
+**Owns:** platform roles, per-user services, bundles, per-service overrides, **effective access resolution inputs**, role mapping inputs.
+
+**Entities:** PlatformRole, ServiceAccessRole, AccessBundle, AccessBundleItem, UserBundleAssignment, UserServiceAccessOverride, EffectiveUserServiceAccess.
+
+**Critical module.**
+
+### D. Service Catalog
+
+**Owns:** what a service is, internal vs external, launch type, provisioning type, health metadata, role mapping definitions.
+
+**Entities:** Service, ServiceCategory, ServiceRoleMapping, ServiceLaunchConfig, ServiceProvisioningConfig, ServiceHealthState.
+
+Clean registry of connected systems.
+
+### E. Provisioning
+
+**Owns:** job creation, stages, retries, manual action state, verification state, bulk operations.
+
+**Entities:** ProvisioningJob, ProvisioningJobAttempt, ProvisioningBatch, ProvisioningDependency, ProvisioningFailureReason.
+
+**Fully separate from Access Control** (access changes trigger it).
+
+### F. Launch
+
+**Owns:** launch orchestration, readiness checks, launch decisions, token minting for internal launches, launch audit events.
+
+**Entities:** LaunchRequest, LaunchSession, LaunchPolicy, LaunchFailureEvent.
+
+**Not** provisioning.
+
+### G. Vault Integration
+
+**Owns:** secret **references** only, access policy, reveal/checkout/injection workflows, reveal logging, rotation requests/status.
+
+**Entities:** SecretReference, SecretAccessPolicy, SecretRevealEvent, SecretLease, SecretRotationEvent.
+
+**No raw secrets** in main application DB — references and metadata.
+
+### H. Linked Accounts
+
+**Owns:** Google (future Microsoft), token **references**, sync capability, linked account lifecycle.
+
+**Entities:** LinkedAccount, LinkedAccountTokenRef, LinkedAccountScope, LinkedAccountSyncState.
+
+References / proper encryption — **not** casual plaintext.
+
+### I. Workspace Composition
+
+**Owns:** modules for user, home composition, widget eligibility, mode-specific assembly, role-aware UI rules.
+
+**Entities:** WorkspaceModule, WorkspaceModuleRule, UserWorkspaceLayout, AdminWorkspaceLayout, WidgetEligibilityState.
+
+Dynamic UI without hardcoding everything in the frontend.
+
+### J. Audit
+
+**Owns:** immutable history — identity, access, provisioning, Vault reveal, launch, mode switches, admin actions.
+
+**Entities:** AuditEvent, AuditActor, AuditTarget, AuditContext.
+
+**Append-only** by design.
+
+### K. Notifications / System Events
+
+**Owns:** user notices, admin alerts, provisioning/launch failures, connector/system messages.
+
+**Entities:** Notification, NotificationRule, SystemAlert, EventEnvelope.
+
+## 9.3 Minimum relational backbone (tables)
+
+**Identity & profile:** `users`, `user_identities`, `user_profiles`, `user_theme_preferences`, `user_workspace_preferences`, `session_records`.
+
+**Access & roles:** `platform_roles`, `services`, `service_access_roles`, `service_role_mappings`, `access_bundles`, `access_bundle_items`, `user_bundle_assignments`, `user_service_access_overrides`, `effective_user_service_access`.
+
+**Provisioning:** `provisioning_jobs`, `provisioning_job_attempts`, `provisioning_batches`, `provisioning_dependencies`.
+
+**Launch:** `launch_requests`, `launch_sessions`, `launch_policies`.
+
+**Vault & linked:** `secret_references`, `secret_access_policies`, `secret_reveal_events`, `secret_leases`, `linked_accounts`, `linked_account_scopes`, `linked_account_sync_states`.
+
+**Workspace:** `workspace_modules`, `workspace_module_rules`, `user_workspace_layouts`.
+
+**Audit & alerts:** `audit_events`, `notifications`, `system_alerts`.
+
+## 9.4 Critical modeling rules
+
+1. **User identity ≠ service access** — no service roles on core user table. Identity = who; access = what/how.  
+2. **Materialize effective access** — compute from bundles + overrides + rules; **also** store resolved snapshot in `effective_user_service_access` (recompute on change) for matrix, launch, provisioning clarity.  
+3. **Service config first-class** — no scattered hardcoding; launch/provisioning/role mapping/eligibility/connector state live in **Service Catalog**.  
+4. **Jobs ≠ access** — jobs record **attempts** to sync; desired state = bundles + overrides + effective access.  
+5. **Audit append-only** — corrections = new events, never overwrite history.  
+6. **Theme/profile lightweight** — never contaminate security/access logic; profile/workspace domains only.
+
+## 9.5 Suggested API route groups
+
+Reflect domain separation even in one backend:
+
+`/auth/*`, `/users/*`, `/profiles/*`, `/services/*`, `/access/*`, `/bundles/*`, `/provisioning/*`, `/launch/*`, `/vault/*`, `/linked-accounts/*`, `/workspace/*`, `/audit/*`, `/notifications/*`.
+
+## 9.6 Frontend state ownership
+
+**Server state (API-backed):** users, services, access, provisioning jobs, workspace eligibility, linked accounts, notifications.
+
+**Client state only:** panel open/close, split sizes, filters, temporary selections, dialog state.
+
+**Never** sole source of truth for access/provisioning in client.
+
+## 9.7 Effective access resolution service
+
+**Dedicated module/service:** read bundles + overrides, apply precedence, detect conflicts, produce per-user per-service access, publish change events → provisioning.
+
+**Inputs:** user, bundles, overrides, service role rules. **Outputs:** resolved set, conflict flags, provisioning triggers. **Core domain**, not a loose helper.
+
+## 9.8 Workspace composition engine
+
+Backend rules for: visible modules, Google widget eligibility, admin mode availability, launcher apps, quick actions.
+
+**Inputs:** platform role, effective service access, linked accounts, feature flags, system state. **Output:** assembled workspace config for the frontend.
+
+## 9.9 Event flow example (assign bundle)
+
+1. Access records assignment  
+2. Effective access resolver recalculates  
+3. Provisioning creates jobs  
+4. Audit records action  
+5. Notifications emit status  
+6. Workspace composition updates visibility  
+7. Launch sees new readiness  
+
+**Platform rhythm.**
+
+## 9.10 Backend code structure
+
+Aim for: `modules/identity`, `profile`, `access`, `services`, `provisioning`, `launch`, `vault`, `linked-accounts`, `workspace`, `audit`, `notifications`.
+
+Per module: controller/router, service layer, repository, schema/models, validators, **tests**.
+
+## 9.11 Non-negotiable backend standards
+
+Strict TypeScript; schema validation on inputs; no untyped payload drift; clear domain DTOs; explicit error contracts; transactional updates where needed; idempotent provisioning triggers where possible; **full tests** for domain services.
+
+**Prioritize tests for:** effective access resolution, bundle + override precedence, job generation, launch readiness, workspace eligibility.
+
+## 9.12 What must be avoided
+
+No: monolithic “admin service”; UI layout mixed into access; raw service roles everywhere; provisioning only in button handlers; secrets in general tables; frontend inventing business truth.
+
+## Locked Step 9 statement
+
+**APZHUB should be backed by clearly separated domain modules for identity, profile, access control, service catalog, provisioning, launch, Vault integration, linked accounts, workspace composition, audit, and notifications, using a resolved effective-access model, service-first configuration, append-only audit, and domain-driven APIs to keep the platform scalable, testable, and operationally clear.**

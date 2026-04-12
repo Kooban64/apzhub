@@ -1,0 +1,164 @@
+---
+description: APZHUB Step 8 — provisioning end-to-end (jobs, stages, methods, resolution, UI, audit, v1)
+alwaysApply: true
+---
+
+# APZHUB Step 8 — Provisioning flow end-to-end (locked)
+
+**Operational backbone.** Weak provisioning = pretty shell + manual pain. Right provisioning = real control point.
+
+Goal:
+
+**Admin assigns once in APZHUB; the platform handles the rest visibly and safely.**
+
+## 8.1 Core provisioning principle
+
+Provisioning must be:
+
+- **Centralized**  
+- **Event-driven**  
+- **Status-visible**  
+- **Retryable**  
+- **Auditable**  
+- **Non-silent**  
+
+Admin must never wonder: did it work?, which systems updated?, what failed?, what still needs action?
+
+## 8.2 Provisioning trigger events
+
+Run whenever any of these occur:
+
+**User lifecycle:** created, activated, suspended, disabled, re-enabled.
+
+**Access:** bundle assigned/removed; service role override added/removed; platform role changed where relevant.
+
+**Identity/federation:** Google linked where app permissions depend on it; service account connected; connector config changed.
+
+**Service:** new service added; service role mapping changed; provisioning method changed.
+
+Provisioning is a **reactive system**, not a single manual action.
+
+## 8.3 Provisioning pipeline model
+
+Each trigger creates one or more **provisioning jobs** (unit of execution).
+
+Each job represents: **who**, **what service**, **what action**, **expected outcome**, **status** (e.g. User Sarah, Service ApzProjects, assign role Admin, Pending).
+
+## 8.4 Provisioning stages (job lifecycle)
+
+Visible in UI:
+
+1. **Queued** — accepted, waiting  
+2. **Validating** — user/service exists, role mapping valid, prerequisites, connector healthy  
+3. **Executing** — actual provisioning call  
+4. **Verifying** — confirm expected state applied  
+5. **Completed** — success  
+6. **Failed** — error; retry or intervention  
+7. **Manual action required** — cannot finish automatically  
+
+## 8.5 Provisioning methods by service
+
+Each service declares its method:
+
+1. **API provisioning** — preferred internal; create/update user, role, groups, deactivate  
+2. **SCIM** — where supported for identity lifecycle  
+3. **OIDC/SAML assignment only** — verify eligibility, claims/group mapping, launch readiness (no explicit user create if N/A)  
+4. **DB-safe** — only fully controlled systems, deliberate design; never casual shortcut (schema, safe transactions, integrity, version-aware writes)  
+5. **Vault-managed / manual credential association** — cannot provision “properly” but need controlled access  
+6. **Manual external** — record required manual step, track completion; **still visible** in APZHUB  
+
+## 8.6 User creation flow (admin)
+
+1. Create APZHUB user identity record  
+2. Assign platform role  
+3. Assign bundle(s)  
+4. Apply service overrides if any  
+5. **Resolve effective access** per service  
+6. **Generate provisioning jobs** per affected service  
+7. Execute jobs **asynchronously** and **visibly**  
+8. Update user and **per-service** status  
+
+Simple admin action; **disciplined** backend.
+
+## 8.7 Effective access resolution
+
+Before provisioning, compute final access per service:
+
+1. Start with **no access**  
+2. Apply **bundle** assignments  
+3. Apply **manual overrides** (precedence)  
+4. **Resolve conflicts** — deterministic rule (e.g. highest privilege **only if policy allows**; else **flag for admin**)  
+5. **Final effective service role** — this is what gets provisioned  
+
+Resolved output must be **inspectable in UI**.
+
+## 8.8 Provisioning dependencies
+
+Jobs may wait on prerequisites, e.g.: Google-dependent features until linked; degraded connector; identity before service access; launch blocked while provisioning pending. Jobs support **dependency awareness**.
+
+## 8.9 Verification model
+
+Do not stop at “request sent.” After execution: **verify** via API readback, identity/group lookup, safe DB check, launch readiness, connector acknowledgement.
+
+## 8.10 Retry model
+
+Failed jobs are not silent dead ends:
+
+- Auto-retry transient errors (capped)  
+- Capture failure reason  
+- Manual retry  
+- Escalate to manual action when retries exhausted  
+
+Transient: unavailable, timeout, rate limit. Manual: bad config, broken mapping, unsupported downstream state.
+
+## 8.11 Deprovisioning flow
+
+**Removal** is first-class. Triggers: suspend, disable, bundle removed, access removed, role downgrade, linked account revoked where required.
+
+Actions may include: remove role, deactivate, revoke session, remove groups, Vault lease inactive, disable launch. **As disciplined as grant.**
+
+## 8.12 Provisioning UI surfaces
+
+- **Admin home** — queue, failures, alerts  
+- **User inspector** — per-service status  
+- **Service detail** — health, method  
+- **Audit** — attempts, actor, outcome  
+- **Launch flow** — clear message if user opens app before ready  
+
+## 8.13 Status vocabulary (keep simple)
+
+**Per-service user access (recommended):** Not Assigned, Pending, Provisioned, Failed, Manual Action, Suspended, Revoked.
+
+**Job statuses:** Queued, Validating, Executing, Verifying, Completed, Failed, Cancelled.
+
+Do not proliferate variants.
+
+## 8.14 Admin experience rules
+
+1. **Assign first; provision automatically** — no separate “provision” click after save.  
+2. **Every affected service shows status** — no hidden propagation.  
+3. **Failures are specific** — service, user, action, why.  
+4. **Retry safely** — idempotent where possible.  
+5. **Bulk still traceable** — e.g. 20 users + bundle: downstream impact clear.
+
+## 8.15 Bulk provisioning
+
+Eventually: assign bundle to many users, bulk remove access, deactivate group, re-run provisioning for a service. Bulk actions → **many child jobs** under **one tracked operation**.
+
+## 8.16 Audit model
+
+Record: actor, timestamp, target user, service, requested change, **resolved effective role**, method, job result, retry history, manual intervention notes where relevant.
+
+## 8.17 What must be avoided
+
+No: mutating service access without job tracking; admin memory for failures; hidden partial failures; silent bundle-driven access changes; DB writes as default; mixing provisioning state with raw UI assumptions.
+
+## 8.18 First release scope (v1)
+
+Fully support: user creation, bundle assignment, manual service override, per-service job generation, job status tracking, retries, deprovision on removal/suspension, visibility in **admin home** and **user inspector**.
+
+Enough for **operationally credible** v1.
+
+## Locked Step 8 statement
+
+**APZHUB uses an event-driven provisioning pipeline where user, access, and service changes automatically generate per-service jobs that move through visible validation, execution, verification, and retry stages, ensuring centralized assignment, downstream replication, deprovisioning, and full operational auditability.**

@@ -1,0 +1,8 @@
+# Copy to `Caddyfile` next to docker-compose.yml.
+# Caddy obtains TLS certificates automatically for public hostnames (ports 80/443 must reach this host).
+
+# Staging hostname: add DNS A/AAAA for this name → your app host (e.g. 32.192.31.113).
+staging.apzportal.apzor.com {
+  encode gzip
+  reverse_proxy web:3000
+}
