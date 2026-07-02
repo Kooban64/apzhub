@@ -1,0 +1,26 @@
+manifestSchemaVersion: "1.0"
+id: shell-layout
+name: Shell Layout
+version: 0.1.0
+kind: component
+
+metadata:
+  category: shell
+  description: Composes header, activity bar, sidebar, workspace, and status bar.
+
+dependencies:
+  platform: []
+
+health:
+  enabled: false
+
+documentation:
+  storybook: packages/ui/src/components/shell-layout.stories.tsx
+
+tests:
+  unit: true
+  accessibility: true
+
+component:
+  theme:
+    supportsDarkMode: true

@@ -1,0 +1,26 @@
+manifestSchemaVersion: "1.0"
+id: button
+name: Button
+version: 0.1.0
+kind: component
+
+metadata:
+  category: primitive
+  description: Token-driven button primitive for APZHUB actions.
+
+dependencies:
+  platform: []
+
+health:
+  enabled: false
+
+documentation:
+  storybook: packages/ui/src/components/button.stories.tsx
+
+tests:
+  unit: true
+  accessibility: true
+
+component:
+  theme:
+    supportsDarkMode: true

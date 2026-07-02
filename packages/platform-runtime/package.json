@@ -1,0 +1,28 @@
+{
+  "name": "@apzhub/platform-runtime",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./manifest-engine": "./src/manifest-engine/index.ts",
+    "./version-manager": "./src/version-manager/index.ts",
+    "./capability": "./src/capability/index.ts",
+    "./dependency-graph": "./src/dependency-graph/index.ts",
+    "./discovery-engine": "./src/discovery-engine/index.ts",
+    "./capability-registry": "./src/capability-registry/index.ts",
+    "./lifecycle-manager": "./src/lifecycle-manager/index.ts",
+    "./runtime-orchestrator": "./src/runtime-orchestrator/index.ts",
+    "./configuration-manager": "./src/configuration-manager/index.ts",
+    "./health-manager": "./src/health-manager/index.ts",
+    "./server": "./src/server.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "yaml": "^2.8.0",
+    "zod": "^3.25.67"
+  }
+}

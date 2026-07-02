@@ -1,0 +1,10 @@
+:80 {
+	encode gzip
+	reverse_proxy host.docker.internal:3300
+}
+
+:443 {
+	tls internal
+	encode gzip
+	reverse_proxy host.docker.internal:3300
+}

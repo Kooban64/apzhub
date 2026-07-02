@@ -1,0 +1,10 @@
+manifestSchemaVersion: "1.0"
+id: custom-widget
+name: Widget
+version: 1.0.0
+kind: widget
+
+metadata: {}
+
+widget:
+  size: small

@@ -1,0 +1,18 @@
+manifestSchemaVersion: "1.0"
+id: fixture-platform-home
+name: Fixture Platform Home
+version: 1.0.0
+kind: module
+
+metadata:
+  category: platform
+
+module:
+  category: platform
+
+workbench:
+  actions:
+    - id: platform.home.navigate
+      label: Go to Home
+      handler: workbench-bridge:workbench.navigation.reveal
+      shortcut: Ctrl+Shift+H

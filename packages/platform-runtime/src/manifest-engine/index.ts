@@ -1,0 +1,45 @@
+export {
+  CAPABILITY_KINDS,
+  MANIFEST_SCHEMA_VERSION,
+  type CapabilityKind,
+  type ManifestSchemaVersion,
+} from "./capability-kinds";
+export {
+  parseCapabilityManifestYaml,
+  validateCapabilityManifest,
+  type ManifestValidationError,
+  type ManifestValidationErrorCode,
+  type ManifestValidationResult,
+} from "./validate";
+export {
+  capabilityManifestSchema,
+  getCapabilityManifestSchema,
+  type CapabilityManifest,
+  type ComponentCapabilityManifest,
+  type ModuleCapabilityManifest,
+  type ServiceCapabilityManifest,
+} from "./schemas";
+export {
+  collectWorkbenchActionManifests,
+  collectWorkbenchToolbarManifests,
+  hasWorkbenchActions,
+  hasWorkbenchNavigation,
+  hasWorkbenchToolbar,
+  hasWorkbenchView,
+  NAVIGATION_LEVELS,
+  optionalWorkbenchFields,
+  workbenchActionIdSchema,
+  workbenchActionSchema,
+  workbenchBlockSchema,
+  workbenchNavigationSchema,
+  workbenchToolbarItemSchema,
+  workbenchToolbarRegionSchema,
+  workbenchViewSchema,
+  type WorkbenchActionManifest,
+  type WorkbenchBlockManifest,
+  type WorkbenchNavigationLevel,
+  type WorkbenchNavigationManifest,
+  type WorkbenchToolbarItemManifest,
+  type WorkbenchToolbarRegionManifest,
+  type WorkbenchViewManifest,
+} from "./schemas/workbench";

@@ -1,0 +1,26 @@
+manifestSchemaVersion: "1.0"
+id: header
+name: Header
+version: 0.1.0
+kind: component
+
+metadata:
+  category: shell
+  description: Desktop shell header with branding, theme toggle, and session actions.
+
+dependencies:
+  platform: []
+
+health:
+  enabled: false
+
+documentation:
+  storybook: packages/ui/src/components/header.stories.tsx
+
+tests:
+  unit: true
+  accessibility: true
+
+component:
+  theme:
+    supportsDarkMode: true

@@ -1,0 +1,33 @@
+manifestSchemaVersion: "1.0"
+id: apzhub-default-theme
+name: APZHUB Default Theme
+version: 0.1.0
+kind: theme
+
+metadata:
+  category: platform
+  description: Default APZHUB theme token set.
+
+theme:
+  mode: system
+  tokenSet: packages/theme/src/tokens.css
+
+workbench:
+  actions:
+    - id: platform.theme.toggle
+      label: Toggle Theme
+      handler: service:theme-service:toggle
+      permission: platform.theme.manage
+      shortcut: Ctrl+Shift+T
+      palette: true
+      group: appearance
+      icon: sun
+      order: 10
+      description: Switch between light and dark theme modes.
+  toolbar:
+    - region: workspace
+      items:
+        - commandId: platform.theme.toggle
+          icon: sun
+          label: Toggle Theme
+          order: 10

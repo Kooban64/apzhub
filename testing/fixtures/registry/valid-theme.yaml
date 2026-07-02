@@ -1,0 +1,13 @@
+manifestSchemaVersion: "1.0"
+id: sample-theme
+name: APZHUB Light
+version: 1.0.0
+kind: theme
+
+metadata:
+  category: platform
+  description: Fixture theme capability.
+
+theme:
+  mode: light
+  tokenSet: packages/theme/src/tokens.css

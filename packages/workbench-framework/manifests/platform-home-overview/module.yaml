@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-home-overview
+name: Home Overview
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Sidebar navigation entry for the Home workspace.
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: home
+    parent: platform-home
+    label: Overview
+    icon: layout-dashboard
+    route: /workspace/home/overview
+    order: 10
+    permission: platform.nav.home.view
+  view:
+    title: Overview
+    workspace: home
+    route: /workspace/home/overview
+    permission: platform.nav.home.view

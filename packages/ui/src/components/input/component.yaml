@@ -1,0 +1,26 @@
+manifestSchemaVersion: "1.0"
+id: input
+name: Input
+version: 0.1.0
+kind: component
+
+metadata:
+  category: primitive
+  description: Labelled text input with optional validation message.
+
+dependencies:
+  platform: []
+
+health:
+  enabled: false
+
+documentation:
+  storybook: packages/ui/src/components/input.stories.tsx
+
+tests:
+  unit: true
+  accessibility: true
+
+component:
+  theme:
+    supportsDarkMode: true

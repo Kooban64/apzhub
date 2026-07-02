@@ -1,0 +1,18 @@
+manifestSchemaVersion: "1.0"
+id: platform-registry
+name: Platform Registry Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: platform
+  description: Internal platform registry coordination service.
+
+dependencies:
+  platform: []
+
+service:
+  category: platform
+
+health:
+  enabled: false

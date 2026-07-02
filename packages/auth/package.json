@@ -1,0 +1,21 @@
+{
+  "name": "@apzhub/auth",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "better-auth": "^1.2.9"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  }
+}

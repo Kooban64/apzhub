@@ -1,0 +1,12 @@
+manifestSchemaVersion: "1.0"
+id: discovery-app
+name: App Component
+version: 1.0.0
+kind: component
+
+metadata:
+  category: primitive
+
+component:
+  theme:
+    supportsDarkMode: true

@@ -1,0 +1,8 @@
+@import "@apzhub/theme/styles.css";
+@import "tailwindcss";
+
+html,
+body,
+#__next {
+  height: 100%;
+}

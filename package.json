@@ -1,0 +1,71 @@
+{
+  "name": "apzhub",
+  "version": "0.1.0-foundation",
+  "private": true,
+  "description": "APZHUB — Enterprise Operating Platform",
+  "packageManager": "pnpm@10.22.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @apzhub/web dev",
+    "build": "pnpm --filter @apzhub/web build",
+    "lint": "eslint .",
+    "typecheck": "pnpm -r --if-present run typecheck",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test --config testing/playwright/playwright.config.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "storybook": "storybook dev -p 6006 -c packages/ui/.storybook",
+    "build-storybook": "storybook build -c packages/ui/.storybook",
+    "docker:up": "docker compose -f infrastructure/docker/docker-compose.dev.yml up -d",
+    "docker:down": "docker compose -f infrastructure/docker/docker-compose.dev.yml down",
+    "docker:logs": "docker compose -f infrastructure/docker/docker-compose.dev.yml logs -f",
+    "db:generate": "pnpm --filter @apzhub/config db:generate",
+    "db:migrate": "tsx scripts/db-migrate.ts",
+    "db:seed": "tsx scripts/db-seed.ts",
+    "db:reset": "pnpm db:migrate && pnpm db:seed",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.28.0",
+    "@playwright/test": "^1.53.1",
+    "@storybook/addon-a11y": "^9.0.13",
+    "@storybook/addon-docs": "^9.0.13",
+    "@storybook/react-vite": "^9.0.13",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^20.19.43",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.5.2",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@axe-core/playwright": "^4.10.2",
+    "dotenv": "^16.5.0",
+    "eslint": "^9.28.0",
+    "husky": "^9.1.7",
+    "jsdom": "^26.1.0",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.5.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "storybook": "^9.0.13",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.0",
+    "vitest": "^3.2.4"
+  },
+  "lint-staged": {
+    "*.{js,mjs,ts,tsx,json,md,css,yml,yaml}": [
+      "prettier --write"
+    ],
+    "*.{js,mjs,ts,tsx}": [
+      "eslint --fix"
+    ]
+  }
+}

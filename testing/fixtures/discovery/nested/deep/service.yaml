@@ -1,0 +1,11 @@
+manifestSchemaVersion: "1.0"
+id: discovery-deep-service
+name: Deep Service
+version: 1.0.0
+kind: service
+
+metadata:
+  category: platform
+
+service:
+  category: platform

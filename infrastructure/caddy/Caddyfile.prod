@@ -1,0 +1,6 @@
+# Production Caddyfile scaffold — configure hostnames and TLS before deploy
+
+:80 {
+	encode gzip
+	reverse_proxy web:3300
+}

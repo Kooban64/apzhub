@@ -1,0 +1,11 @@
+manifestSchemaVersion: "1.0"
+id: bad-version
+name: Bad Version
+version: not-semver
+kind: component
+
+metadata: {}
+
+component:
+  theme:
+    supportsDarkMode: true

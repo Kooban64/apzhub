@@ -1,0 +1,13 @@
+manifestSchemaVersion: "1.0"
+id: graph-integration-d
+name: Integration D
+version: 1.0.0
+kind: integration
+
+metadata:
+  category: platform
+
+integration:
+  type: rest-api
+  capabilities:
+    - health

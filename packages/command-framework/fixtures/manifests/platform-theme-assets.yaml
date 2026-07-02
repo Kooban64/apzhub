@@ -1,0 +1,23 @@
+manifestSchemaVersion: "1.0"
+id: fixture-platform-theme
+name: Fixture Platform Theme
+version: 1.0.0
+kind: theme
+
+metadata:
+  category: platform
+
+theme:
+  mode: system
+
+workbench:
+  actions:
+    - id: platform.theme.toggle
+      label: Toggle Theme
+      handler: service:theme-service:toggle
+      shortcut: Ctrl+Shift+T
+  toolbar:
+    - region: workspace
+      items:
+        - commandId: platform.theme.toggle
+          icon: sun

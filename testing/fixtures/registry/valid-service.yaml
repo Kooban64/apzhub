@@ -1,0 +1,19 @@
+manifestSchemaVersion: "1.0"
+id: sample-service
+name: Sample Service
+version: 1.0.0
+kind: service
+
+metadata:
+  category: platform
+  description: Fixture service capability for validation tests.
+
+dependencies:
+  platform:
+    - identity
+
+health:
+  enabled: true
+
+service:
+  category: platform

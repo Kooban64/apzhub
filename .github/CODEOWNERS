@@ -1,0 +1,5 @@
+# Platform engineering owns foundation packages and apps/web
+
+/apps/ @apzhub-platform
+/packages/ @apzhub-platform
+/infrastructure/ @apzhub-platform

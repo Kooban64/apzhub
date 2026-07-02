@@ -1,0 +1,26 @@
+manifestSchemaVersion: "1.0"
+id: status-bar
+name: Status Bar
+version: 0.1.0
+kind: component
+
+metadata:
+  category: shell
+  description: Platform environment and connection status footer.
+
+dependencies:
+  platform: []
+
+health:
+  enabled: false
+
+documentation:
+  storybook: packages/ui/src/components/status-bar.stories.tsx
+
+tests:
+  unit: true
+  accessibility: true
+
+component:
+  theme:
+    supportsDarkMode: true

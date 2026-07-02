@@ -1,0 +1,15 @@
+manifestSchemaVersion: "1.0"
+id: graph-platform-seed
+name: Platform Seed Consumer
+version: 1.0.0
+kind: service
+
+metadata:
+  category: platform
+
+dependencies:
+  platform:
+    - identity
+
+service:
+  category: platform

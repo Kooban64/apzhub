@@ -1,0 +1,26 @@
+manifestSchemaVersion: "1.0"
+id: card
+name: Card
+version: 0.1.0
+kind: component
+
+metadata:
+  category: composite
+  description: Surface container with header and content regions.
+
+dependencies:
+  platform: []
+
+health:
+  enabled: false
+
+documentation:
+  storybook: packages/ui/src/components/card.stories.tsx
+
+tests:
+  unit: true
+  accessibility: true
+
+component:
+  theme:
+    supportsDarkMode: true

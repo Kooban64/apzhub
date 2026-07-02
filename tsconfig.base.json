@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowJs": false,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "declaration": true,
+    "declarationMap": true,
+    "paths": {
+      "@apzhub/ui": ["./packages/ui/src/index.ts"],
+      "@apzhub/types": ["./packages/types/src/index.ts"],
+      "@apzhub/config": ["./packages/config/src/index.ts"],
+      "@apzhub/theme": ["./packages/theme/src/index.ts"],
+      "@apzhub/auth": ["./packages/auth/src/index.ts"],
+      "@apzhub/sdk": ["./packages/sdk/src/index.ts"],
+      "@apzhub/workspace": ["./packages/workspace/src/index.ts"],
+      "@apzhub/events": ["./packages/events/src/index.ts"],
+      "@apzhub/search": ["./packages/search/src/index.ts"],
+      "@apzhub/notifications": ["./packages/notifications/src/index.ts"],
+      "@apzhub/shared": ["./packages/shared/src/index.ts"],
+      "@apzhub/platform-runtime": ["./packages/platform-runtime/src/index.ts"],
+      "@apzhub/platform-runtime/manifest-engine": [
+        "./packages/platform-runtime/src/manifest-engine/index.ts"
+      ],
+      "@apzhub/platform-runtime/version-manager": [
+        "./packages/platform-runtime/src/version-manager/index.ts"
+      ],
+      "@apzhub/platform-runtime/capability": [
+        "./packages/platform-runtime/src/capability/index.ts"
+      ],
+      "@apzhub/platform-runtime/dependency-graph": [
+        "./packages/platform-runtime/src/dependency-graph/index.ts"
+      ],
+      "@apzhub/platform-runtime/discovery-engine": [
+        "./packages/platform-runtime/src/discovery-engine/index.ts"
+      ],
+      "@apzhub/platform-runtime/capability-registry": [
+        "./packages/platform-runtime/src/capability-registry/index.ts"
+      ],
+      "@apzhub/platform-runtime/lifecycle-manager": [
+        "./packages/platform-runtime/src/lifecycle-manager/index.ts"
+      ],
+      "@apzhub/platform-runtime/runtime-orchestrator": [
+        "./packages/platform-runtime/src/runtime-orchestrator/index.ts"
+      ],
+      "@apzhub/platform-runtime/configuration-manager": [
+        "./packages/platform-runtime/src/configuration-manager/index.ts"
+      ],
+      "@apzhub/platform-runtime/health-manager": [
+        "./packages/platform-runtime/src/health-manager/index.ts"
+      ],
+      "@apzhub/platform-runtime/server": ["./packages/platform-runtime/src/server.ts"],
+      "@apzhub/platform-runtime/manifest-engine": [
+        "./packages/platform-runtime/src/manifest-engine/index.ts"
+      ],
+      "@apzhub/workbench-framework": ["./packages/workbench-framework/src/index.ts"],
+      "@apzhub/workbench-framework/server": [
+        "./packages/workbench-framework/src/server.ts"
+      ],
+      "@apzhub/workbench-framework/react": [
+        "./packages/workbench-framework/src/react/index.ts"
+      ],
+      "@apzhub/command-framework": ["./packages/command-framework/src/index.ts"],
+      "@apzhub/command-framework/server": [
+        "./packages/command-framework/src/server.ts"
+      ],
+      "@apzhub/command-framework/react": [
+        "./packages/command-framework/src/react/index.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "**/node_modules", "**/dist", "**/.next"]
+}

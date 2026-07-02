@@ -1,0 +1,11 @@
+manifestSchemaVersion: "1.0"
+id: graph-service-a
+name: Service A
+version: 1.0.0
+kind: service
+
+metadata:
+  category: platform
+
+service:
+  category: platform

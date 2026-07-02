@@ -1,0 +1,17 @@
+manifestSchemaVersion: "1.0"
+id: graph-module-c
+name: Module C
+version: 1.0.0
+kind: module
+
+metadata:
+  category: productivity
+
+dependencies:
+  modules:
+    - graph-module-b
+  integrations:
+    - graph-integration-d
+
+module:
+  status: enabled

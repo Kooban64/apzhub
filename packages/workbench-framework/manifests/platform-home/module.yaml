@@ -1,0 +1,41 @@
+manifestSchemaVersion: "1.0"
+id: platform-home
+name: Home
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Home workspace scaffold for the APZHUB workbench.
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: home
+    icon: home
+    route: /workspace/home
+    order: 10
+    permission: platform.nav.home.view
+  view:
+    title: Home
+    workspace: home
+    route: /workspace/home
+    default: true
+    permission: platform.nav.home.view
+  actions:
+    - id: platform.home.navigate
+      label: Go to Home
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: platform.nav.home.view
+      shortcut: Ctrl+Shift+H
+      palette: true
+      group: Navigation
+      icon: home
+      order: 5
+      description: Reveal the Home navigation item in the workbench shell.

@@ -1,0 +1,14 @@
+manifestSchemaVersion: "1.0"
+id: graph-cycle-a
+name: Cycle A
+version: 1.0.0
+kind: module
+
+metadata: {}
+
+dependencies:
+  modules:
+    - graph-cycle-b
+
+module:
+  status: enabled

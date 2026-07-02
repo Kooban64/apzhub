@@ -1,0 +1,30 @@
+manifestSchemaVersion: "1.0"
+id: platform-administration
+name: Administration
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Administration workspace scaffold for the APZHUB workbench.
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: administration
+    icon: shield
+    route: /workspace/administration
+    order: 20
+    permission: platform.nav.administration.view
+  view:
+    title: Administration
+    workspace: administration
+    route: /workspace/administration
+    default: true
+    permission: platform.nav.administration.view

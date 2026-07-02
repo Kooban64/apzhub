@@ -1,0 +1,26 @@
+manifestSchemaVersion: "1.0"
+id: sidebar
+name: Sidebar
+version: 0.1.0
+kind: component
+
+metadata:
+  category: shell
+  description: Workspace navigation sidebar for shell layout.
+
+dependencies:
+  platform: []
+
+health:
+  enabled: false
+
+documentation:
+  storybook: packages/ui/src/components/sidebar.stories.tsx
+
+tests:
+  unit: true
+  accessibility: true
+
+component:
+  theme:
+    supportsDarkMode: true

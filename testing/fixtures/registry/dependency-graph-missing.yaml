@@ -1,0 +1,14 @@
+manifestSchemaVersion: "1.0"
+id: graph-missing-dep
+name: Missing Dep
+version: 1.0.0
+kind: module
+
+metadata: {}
+
+dependencies:
+  services:
+    - nonexistent-service
+
+module:
+  status: enabled

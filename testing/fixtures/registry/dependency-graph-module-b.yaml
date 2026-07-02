@@ -1,0 +1,15 @@
+manifestSchemaVersion: "1.0"
+id: graph-module-b
+name: Module B
+version: 1.0.0
+kind: module
+
+metadata:
+  category: productivity
+
+dependencies:
+  services:
+    - graph-service-a
+
+module:
+  status: enabled

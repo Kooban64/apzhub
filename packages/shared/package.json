@@ -1,0 +1,17 @@
+{
+  "name": "@apzhub/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "ioredis": "^5.6.1"
+  }
+}

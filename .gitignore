@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Testing
+coverage/
+playwright-report/
+test-results/
+
+# Storybook (SPR-001)
+storybook-static/
+
+# Misc
+*.local
+
+# Secrets and local credentials (never commit)
+.secrets/
+
+# Cursor IDE
+.cursor/

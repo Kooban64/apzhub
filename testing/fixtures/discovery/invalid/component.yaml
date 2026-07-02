@@ -1,0 +1,11 @@
+manifestSchemaVersion: "1.0"
+id: INVALID-ID
+name: Bad
+version: 1.0.0
+kind: component
+
+metadata: {}
+
+component:
+  theme:
+    supportsDarkMode: true
