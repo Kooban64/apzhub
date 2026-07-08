@@ -19,7 +19,26 @@ See [Milestone 6 review](./docs/reviews/MILESTONE-006-event-notification-framewo
 - ADRs 0030–0032 · 1098 unit tests, 30 E2E tests, 90.75% coverage
 - [SPR-006 closeout](./docs/sprint/SPR-006-closeout.md)
 
-## [Unreleased] — LAW-015 Trust Accounting (Milestone Closed)
+## [Unreleased] — M16 Platform Engineering Review + LAW-015 Trust Accounting (Closed)
+
+### Added (M16 — Platform Stabilisation & Engineering Review — documentation only)
+
+- [APZHUB Platform Engineering Review](./docs/reviews/APZHUB-Platform-Engineering-Review.md) — subsystem ratings across M1–M7 + Law + Trust
+- [APZHUB Platform Dependency Review](./docs/architecture/APZHUB-Platform-Dependency-Review.md) — package boundaries, layering, platform vs product
+- [APZHUB Platform Duplication Review](./docs/architecture/APZHUB-Platform-Duplication-Review.md) — consolidation recommendations
+- [APZHUB Platform Naming Review](./docs/architecture/APZHUB-Platform-Naming-Review.md) — naming standards
+- [APZHUB Platform Security Review](./docs/architecture/APZHUB-Platform-Security-Review.md) — security area ratings
+- [APZHUB Platform Performance Review](./docs/architecture/APZHUB-Platform-Performance-Review.md) — optimisation recommendations
+- [APZHUB Platform Testing Review](./docs/architecture/APZHUB-Platform-Testing-Review.md) — test pyramid and CI readiness
+- [APZHUB Platform Documentation Review](./docs/architecture/APZHUB-Platform-Documentation-Review.md) — documentation gaps
+- [APZHUB Platform Technical Debt Register](./docs/architecture/APZHUB-Platform-Technical-Debt-Register.md) — consolidated cross-platform debt
+- [APZHUB Platform Roadmap Review](./docs/architecture/APZHUB-Platform-Roadmap-Review.md) — updated roadmap
+- [APZHUB Commercial Readiness Assessment](./docs/reviews/APZHUB-Commercial-Readiness-Assessment.md) — deployment tier ratings
+- [APZHUB v6.0 Architecture Review](./docs/reviews/APZHUB-v6.0-Architecture-Review.md) — **Verdict: VERY GOOD**
+- [APZHUB v6.0 Platform Review](./docs/releases/APZHUB-v6.0-Platform-Review.md) — engineering review release (no tag)
+- [M16 completion report](./docs/sprint/M16-completion-report.md)
+- **Verdict:** M16 COMPLETE — await owner approval before M8, refactoring, or new implementation
+- **No production code** — analysis and governance only
 
 ### Added (LAW-015-01 — documentation only)
 

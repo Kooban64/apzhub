@@ -1,8 +1,8 @@
 # APZHUB Platform Roadmap
 
-> **Status:** Complete — Milestone 7 (`v0.7.0-activity-timeline-framework`, tag pending owner instruction) · **Platform Version 5.0**  
-> **Authority:** [003 — Overall System Architecture](./003-overall-system-architecture-design-principles.md) · [021 — Notification & Activity](./021-notification-activity-attention-management-framework.md) · [Platform v5.0](../releases/APZHUB-Platform-v5.0.md)  
-> **Note:** Milestone 8 (Platform Identity, Administration & User Experience) is the next planning gate. Business capabilities remain Milestone 9+.
+> **Status:** M1–M7 complete · Platform v5.0 frozen · **M16 engineering review complete** · M8 next implementation gate  
+> **Authority:** [003 — Overall System Architecture](./003-overall-system-architecture-design-principles.md) · [021 — Notification & Activity](./021-notification-activity-attention-management-framework.md) · [Platform v5.0](../releases/APZHUB-Platform-v5.0.md) · [M16 Review](../reviews/APZHUB-v6.0-Architecture-Review.md)  
+> **Note:** Milestone 8 (Platform Identity, Administration & User Experience) is the next **implementation** gate. M16 was analysis-only. Law Platform validation (LAW-001–015) advanced in parallel.
 
 ---
 
@@ -37,7 +37,11 @@ M7 Activity & Timeline (SPR-007)      ✅ Complete — v0.7.0-activity-timeline-
         ↓
 Platform Version 5.0                  ✅ Permanent reference baseline
         ↓
-M8 Platform Identity, Administration & UX  ← Next planning gate (SPR-008)
+Law Platform Validation (LAW-001–015) ✅ Substantial — Trust closed
+M16 Platform Engineering Review       ✅ Complete — VERY GOOD (analysis only)
+        ↓
+M8 Platform Identity, Administration & UX  ← Next implementation gate (SPR-008)
+M17 CI/CD & App Bootstrap (recommended)
 M9 Business Capabilities
 M10 Enterprise Operations
 ```

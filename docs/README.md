@@ -2,7 +2,7 @@
 
 This directory is the canonical source for APZHUB product and architecture documentation.
 
-**Status:** Foundation documentation complete (000, 001–029). **Platform Version 5.0 established** (M1–M7). **Platform Validation Phase 1** (Law Platform planning) complete — await owner approval before LAW-001-01. **Milestone 8 not started.**
+**Status:** Foundation documentation complete (000, 001–029). **Platform Version 5.0 established** (M1–M7). **M16 engineering review complete** — VERY GOOD. Law Platform validation substantial (LAW-001–015, Trust closed). **Milestone 8 next implementation gate.**
 
 ## Document registry
 
@@ -100,6 +100,10 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [Event & Notification architecture](./architecture/event-notification-framework.md)                       | M6 combined layer — EN-017 complete                             |
 | [APZHUB Platform v5.0](./releases/APZHUB-Platform-v5.0.md)                                                | Official Platform 5.0 release — **permanent baseline**          |
 | [APZHUB v5.0 Platform Review](./reviews/APZHUB-v5.0-Platform-Review.md)                                   | M1–M7 platform review — APPROVED FOR PRODUCT VALIDATION         |
+| [APZHUB v6.0 Architecture Review](./reviews/APZHUB-v6.0-Architecture-Review.md)                           | M16 engineering review — **VERY GOOD**                          |
+| [APZHUB v6.0 Platform Review](./releases/APZHUB-v6.0-Platform-Review.md)                                  | M16 platform review release (no tag)                            |
+| [M16 Completion Report](./sprint/M16-completion-report.md)                                                | M16 stabilisation & engineering review — complete               |
+| [APZHUB Platform Technical Debt Register](./architecture/APZHUB-Platform-Technical-Debt-Register.md)      | Consolidated cross-platform technical debt                      |
 | [Platform Capability Matrix](./architecture/APZHUB-Platform-Capability-Matrix.md)                         | Cross-framework pattern reference (v5.0)                        |
 | [Product Validation Strategy](./strategy/APZHUB-Product-Validation-Strategy.md)                           | Law Firm Platform validation planning                           |
 | [Law Platform v1.0](./releases/APZHUB-Law-Platform-v1.0.md)                                               | Law Firm Platform planning baseline                             |

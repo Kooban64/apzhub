@@ -40,6 +40,23 @@ Changes to the baseline require an approved ADR.
 | [knowledge-registry-relationship.md](./knowledge-registry-relationship.md)               | Manifest → Knowledge Registry chain                        |
 | [knowledge-retrieval-ranking-model.md](./knowledge-retrieval-ranking-model.md)           | Retrieval and ranking model                                |
 | [APZHUB-Workbench-Surface-Pattern.md](./APZHUB-Workbench-Surface-Pattern.md)             | Palette, shortcuts, toolbar, context menu pattern          |
-| [platform-roadmap.md](./platform-roadmap.md)                                             | Milestone roadmap                                          |
+| [platform-roadmap.md](./platform-roadmap.md)                                             | Milestone roadmap (M16 complete)                           |
+
+## M16 — Platform Engineering Review (complete)
+
+| Document                                                                                          | Description                   |
+| ------------------------------------------------------------------------------------------------- | ----------------------------- |
+| [APZHUB-Platform-Engineering-Review.md](../reviews/APZHUB-Platform-Engineering-Review.md)         | Subsystem engineering ratings |
+| [APZHUB-Platform-Dependency-Review.md](./APZHUB-Platform-Dependency-Review.md)                    | Package dependency analysis   |
+| [APZHUB-Platform-Duplication-Review.md](./APZHUB-Platform-Duplication-Review.md)                  | Duplication and consolidation |
+| [APZHUB-Platform-Naming-Review.md](./APZHUB-Platform-Naming-Review.md)                            | Naming standards              |
+| [APZHUB-Platform-Security-Review.md](./APZHUB-Platform-Security-Review.md)                        | Security posture              |
+| [APZHUB-Platform-Performance-Review.md](./APZHUB-Platform-Performance-Review.md)                  | Performance analysis          |
+| [APZHUB-Platform-Testing-Review.md](./APZHUB-Platform-Testing-Review.md)                          | Testing maturity              |
+| [APZHUB-Platform-Documentation-Review.md](./APZHUB-Platform-Documentation-Review.md)              | Documentation gaps            |
+| [APZHUB-Platform-Technical-Debt-Register.md](./APZHUB-Platform-Technical-Debt-Register.md)        | Consolidated debt register    |
+| [APZHUB-Platform-Roadmap-Review.md](./APZHUB-Platform-Roadmap-Review.md)                          | Updated roadmap               |
+| [APZHUB-Commercial-Readiness-Assessment.md](../reviews/APZHUB-Commercial-Readiness-Assessment.md) | Commercial readiness          |
+| [APZHUB-v6.0-Architecture-Review.md](../reviews/APZHUB-v6.0-Architecture-Review.md)               | **Verdict: VERY GOOD**        |
 
 Migration of foundation docs into this folder is defined in [BUILD-001 Section 13](../build/BUILD-001-repository-bootstrap-guide.md).
