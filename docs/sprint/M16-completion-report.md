@@ -117,6 +117,14 @@ No code introduced in M16.
 
 ---
 
+## Baseline tag
+
+**Git tag:** `v6.0-platform-review` on commit `c056636`
+
+Preserves M16 as the baseline before M8 (Identity, Administration & UX). This is a documentation/governance marker — not a code release.
+
+---
+
 ## Engineering observations
 
 1. The platform exceeded original M9 timeline — Law validation happened before business capability milestone, which is positive but undocumented in `platform-roadmap.md` until M16

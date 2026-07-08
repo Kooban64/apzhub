@@ -38,6 +38,7 @@ See [Milestone 6 review](./docs/reviews/MILESTONE-006-event-notification-framewo
 - [APZHUB v6.0 Platform Review](./docs/releases/APZHUB-v6.0-Platform-Review.md) — engineering review release (no tag)
 - [M16 completion report](./docs/sprint/M16-completion-report.md)
 - **Verdict:** M16 COMPLETE — await owner approval before M8, refactoring, or new implementation
+- **Baseline tag:** `v6.0-platform-review` — preserve before M8
 - **No production code** — analysis and governance only
 
 ### Added (LAW-015-01 — documentation only)

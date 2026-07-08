@@ -3,7 +3,7 @@
 > **Version:** 6.0 (engineering review — not a code release)  
 > **Date:** 2026-07-08  
 > **Milestone:** M16 — Platform Stabilisation & Engineering Review  
-> **Release tag:** None  
+> **Release tag:** `v6.0-platform-review` (baseline before M8)  
 > **Authority:** [APZHUB v6.0 Architecture Review](../reviews/APZHUB-v6.0-Architecture-Review.md)
 
 ---
