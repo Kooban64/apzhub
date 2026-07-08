@@ -1,0 +1,22 @@
+meta {
+  name: GET /matters/{matterId}
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/matters/{matterId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Get matters by ID
+  Permission: legal.matter.view
+  Implementation: implemented
+}

@@ -1,0 +1,29 @@
+meta {
+  name: PATCH /tasks/{taskId}
+  type: http
+  seq: 1
+}
+
+patch {
+  url: {{baseUrl}}/tasks/{taskId}
+  body: json
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    
+  }
+}
+
+docs {
+  Update tasks
+  Permission: legal.task.edit
+  Implementation: implemented
+}

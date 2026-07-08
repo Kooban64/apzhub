@@ -1,0 +1,63 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"],
+      "@apzhub/auth": ["../../packages/auth/src/index.ts"],
+      "@apzhub/auth/server": ["../../packages/auth/src/server.ts"],
+      "@apzhub/config": ["../../packages/config/src/index.ts"],
+      "@apzhub/shared": ["../../packages/shared/src/index.ts"],
+      "@apzhub/theme": ["../../packages/theme/src/index.ts"],
+      "@apzhub/types": ["../../packages/types/src/index.ts"],
+      "@apzhub/ui": ["../../packages/ui/src/index.ts"],
+      "@apzhub/workspace": ["../../packages/workspace/src/index.ts"],
+      "@apzhub/command-framework": ["../../packages/command-framework/src/index.ts"],
+      "@apzhub/command-framework/server": [
+        "../../packages/command-framework/src/server.ts"
+      ],
+      "@apzhub/command-framework/react": [
+        "../../packages/command-framework/src/react/index.ts"
+      ],
+      "@apzhub/platform-runtime/server": [
+        "../../packages/platform-runtime/src/server.ts"
+      ],
+      "@apzhub/workbench-framework": [
+        "../../packages/workbench-framework/src/index.ts"
+      ],
+      "@apzhub/workbench-framework/server": [
+        "../../packages/workbench-framework/src/server.ts"
+      ],
+      "@apzhub/workbench-framework/react": [
+        "../../packages/workbench-framework/src/react/index.ts"
+      ],
+      "@apzhub/legal-business-core": ["../../packages/legal-business-core/src/index.ts"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  "exclude": ["node_modules"]
+}

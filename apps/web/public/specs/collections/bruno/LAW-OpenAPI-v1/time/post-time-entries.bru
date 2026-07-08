@@ -1,0 +1,29 @@
+meta {
+  name: POST /time-entries
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/time-entries
+  body: json
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    
+  }
+}
+
+docs {
+  Create time
+  Permission: legal.time.create
+  Implementation: implemented
+}

@@ -1,0 +1,29 @@
+meta {
+  name: POST /clients
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/clients
+  body: json
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    
+  }
+}
+
+docs {
+  Create clients
+  Permission: legal.client.create
+  Implementation: implemented
+}

@@ -25,9 +25,39 @@
       "@apzhub/auth": ["./packages/auth/src/index.ts"],
       "@apzhub/sdk": ["./packages/sdk/src/index.ts"],
       "@apzhub/workspace": ["./packages/workspace/src/index.ts"],
-      "@apzhub/events": ["./packages/events/src/index.ts"],
-      "@apzhub/search": ["./packages/search/src/index.ts"],
-      "@apzhub/notifications": ["./packages/notifications/src/index.ts"],
+      "@apzhub/event-notification-framework": [
+        "./packages/event-notification-framework/src/index.ts"
+      ],
+      "@apzhub/event-notification-framework/server": [
+        "./packages/event-notification-framework/src/server.ts"
+      ],
+      "@apzhub/event-notification-framework/server/event": [
+        "./packages/event-notification-framework/src/server/event/index.ts"
+      ],
+      "@apzhub/event-notification-framework/server/notification": [
+        "./packages/event-notification-framework/src/server/notification/index.ts"
+      ],
+      "@apzhub/event-notification-framework/react": [
+        "./packages/event-notification-framework/src/react/index.ts"
+      ],
+      "@apzhub/knowledge-discovery-framework": [
+        "./packages/knowledge-discovery-framework/src/index.ts"
+      ],
+      "@apzhub/knowledge-discovery-framework/server": [
+        "./packages/knowledge-discovery-framework/src/server.ts"
+      ],
+      "@apzhub/knowledge-discovery-framework/react": [
+        "./packages/knowledge-discovery-framework/src/react/index.ts"
+      ],
+      "@apzhub/activity-timeline-framework": [
+        "./packages/activity-timeline-framework/src/index.ts"
+      ],
+      "@apzhub/activity-timeline-framework/server": [
+        "./packages/activity-timeline-framework/src/server.ts"
+      ],
+      "@apzhub/activity-timeline-framework/react": [
+        "./packages/activity-timeline-framework/src/react/index.ts"
+      ],
       "@apzhub/shared": ["./packages/shared/src/index.ts"],
       "@apzhub/platform-runtime": ["./packages/platform-runtime/src/index.ts"],
       "@apzhub/platform-runtime/manifest-engine": [
@@ -77,7 +107,8 @@
       ],
       "@apzhub/command-framework/react": [
         "./packages/command-framework/src/react/index.ts"
-      ]
+      ],
+      "@apzhub/legal-business-core": ["./packages/legal-business-core/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "**/node_modules", "**/dist", "**/.next"]

@@ -1,0 +1,25 @@
+{
+  "name": "@apzhub/activity-timeline-framework",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts",
+    "./react": "./src/react/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@apzhub/command-framework": "workspace:*",
+    "@apzhub/event-notification-framework": "workspace:*",
+    "@apzhub/platform-runtime": "workspace:*",
+    "@apzhub/ui": "workspace:*",
+    "@apzhub/workbench-framework": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  }
+}

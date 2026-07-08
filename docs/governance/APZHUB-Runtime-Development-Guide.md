@@ -218,15 +218,66 @@ When adding a subsystem, wire into integrated diagnostics in orchestrator.
 
 ## Application integration
 
-| File                               | Role                                                |
-| ---------------------------------- | --------------------------------------------------- |
-| `apps/web/instrumentation.ts`      | Bootstrap hook                                      |
-| `apps/web/lib/runtime-init.ts`     | `Runtime.bootstrap()` helper                        |
-| `apps/web/app/api/health/route.ts` | Runtime summary + Action Framework `commands` field |
+| File                               | Role                                                                                                                                                                        |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apps/web/instrumentation.ts`      | Bootstrap hook                                                                                                                                                              |
+| `apps/web/lib/runtime-init.ts`     | `Runtime.bootstrap()` helper                                                                                                                                                |
+| `apps/web/app/api/health/route.ts` | Runtime summary + Action Framework `commands` + Knowledge `knowledge` + Event/Notification `events` / `notifications` + Activity/Timeline `activities` / `timelines` fields |
 
 Runtime runs **server-side only**. Client bundles must not import `@apzhub/platform-runtime/server`.
 
 Action Registry bootstrap (`bootstrapActionRegistry`) runs in `apps/web/lib/command-hydration.ts` after Runtime is ready — see [command-framework.md](../architecture/command-framework.md).
+
+Knowledge Registry bootstrap (`bootstrapKnowledgeRegistry`) runs in `apps/web/lib/knowledge-hydration.ts` with parallel Action and Workbench DTO registration for providers — see [knowledge-discovery-framework.md](../architecture/knowledge-discovery-framework.md).
+
+Event and Notification Registry bootstrap runs in `apps/web/lib/event-notification-hydration.ts` with shared `EventNotificationContext` — see [event-notification-framework.md](../architecture/event-notification-framework.md).
+
+### Event & Notification Framework (SPR-006)
+
+Manifest extraction supports `events` and `notifications.routes` blocks. Runtime discovers capability declarations; app bootstrap composes:
+
+```text
+bootstrapEventRegistry() + bootstrapNotificationRegistry()
+        ↓
+filterEventRegistryDto() + filterNotificationRegistryDto()
+        ↓
+createAppEventNotificationContext() + wireAppEventNotifications()
+```
+
+Health endpoint exposes `events` and `notifications` summaries alongside runtime, commands, and knowledge fields.
+
+**Rules:**
+
+- Runtime subsystems do not import `@apzhub/event-notification-framework/react`
+- Event Bus is in-process — no external broker in M6
+- Capabilities publish events; Notification Framework maps to notifications
+
+See [Event & Notification onboarding](../developer/event-notification-onboarding.md).
+
+### Activity & Timeline Framework (SPR-007)
+
+Manifest extraction supports `activities.types` and `activities.timelines` blocks. Runtime discovers capability declarations; app bootstrap composes:
+
+```text
+bootstrapActivityRegistry() + bootstrapTimelineRegistry()
+        ↓
+filterActivityRegistryDto() + filterTimelineRegistryDto()
+        ↓
+buildActivityTimelineHydrationBundle()
+        ↓
+ActivityTimelineProvider (client metadata only)
+```
+
+Activity Mapping wires via shared Event Bus in `wireAppActivityTimeline()` — parallel subscriber to notification mapping. Same `capability.action.executed` event may produce both notification and activity items.
+
+**Rules:**
+
+- Runtime subsystems do not import `@apzhub/activity-timeline-framework/react`
+- Activity Mapping subscribes only — never publishes events
+- Capabilities publish events; Activity Framework maps to timeline items
+- Session-scoped activity store — no persistence in M7
+
+See [Activity Timeline onboarding](../developer/activity-timeline-onboarding.md) · [activity-timeline-framework.md](../architecture/activity-timeline-framework.md).
 
 ---
 

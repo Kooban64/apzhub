@@ -2,7 +2,7 @@
 
 This directory is the canonical source for APZHUB product and architecture documentation.
 
-**Status:** Foundation documentation complete (000, 001–029). **Platform Baseline v1.0 frozen.** **Milestone 3 (Workbench Framework) complete.** **Milestone 4 (Action Framework) complete** — `v0.4.0-action-framework` (tag pending owner instruction).
+**Status:** Foundation documentation complete (000, 001–029). **Platform Version 5.0 established** (M1–M7). **Platform Validation Phase 1** (Law Platform planning) complete — await owner approval before LAW-001-01. **Milestone 8 not started.**
 
 ## Document registry
 
@@ -78,114 +78,218 @@ This directory is the canonical source for APZHUB product and architecture docum
 
 ## Architecture baseline & governance
 
-| Document                                                                                | Description                                            |
-| --------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| [Architecture Baseline v1.0](./architecture/APZHUB-Architecture-Baseline-v1.0.md)       | **Frozen** — definitive architectural reference        |
-| [Engineering Handbook](./governance/APZHUB-Engineering-Handbook.md)                     | Onboarding and platform development process            |
-| [Capability Development Guide](./governance/APZHUB-Capability-Development-Guide.md)     | How to build a capability (Example Capability)         |
-| [Workbench Development Guide](./governance/APZHUB-Workbench-Development-Guide.md)       | Safe Workbench extension                               |
-| [Runtime Development Guide](./governance/APZHUB-Runtime-Development-Guide.md)           | Safe Runtime extension                                 |
-| [v1.0 Baseline Review](./reviews/APZHUB-v1.0-Baseline-Review.md)                        | Baseline architecture review — READY WITH OBSERVATIONS |
-| [command-framework.md](./architecture/command-framework.md)                             | Action Framework architecture (M4)                     |
-| [action-framework-onboarding.md](./developer/action-framework-onboarding.md)            | Developer onboarding — add actions                     |
-| [v0.4.0-action-framework Release Notes](./releases/v0.4.0-action-framework.md)          | Prepared — tag pending                                 |
-| [SPR-004 Production Readiness Review](./reviews/SPR-004-production-readiness-review.md) | M4 readiness — READY WITH OBSERVATIONS                 |
+| Document                                                                                                  | Description                                                     |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [Architecture Baseline v1.0](./architecture/APZHUB-Architecture-Baseline-v1.0.md)                         | **Frozen** — definitive architectural reference                 |
+| [Engineering Handbook](./governance/APZHUB-Engineering-Handbook.md)                                       | Onboarding and platform development process                     |
+| [Capability Development Guide](./governance/APZHUB-Capability-Development-Guide.md)                       | How to build a capability (Example Capability)                  |
+| [Workbench Development Guide](./governance/APZHUB-Workbench-Development-Guide.md)                         | Safe Workbench extension                                        |
+| [Runtime Development Guide](./governance/APZHUB-Runtime-Development-Guide.md)                             | Safe Runtime extension                                          |
+| [v1.0 Baseline Review](./reviews/APZHUB-v1.0-Baseline-Review.md)                                          | Baseline architecture review — READY WITH OBSERVATIONS          |
+| [command-framework.md](./architecture/command-framework.md)                                               | Action Framework architecture (M4)                              |
+| [knowledge-discovery-framework.md](./architecture/knowledge-discovery-framework.md)                       | Knowledge & Discovery Framework architecture (M5)               |
+| [action-framework-onboarding.md](./developer/action-framework-onboarding.md)                              | Developer onboarding — add actions                              |
+| [knowledge-discovery-onboarding.md](./developer/knowledge-discovery-onboarding.md)                        | Developer onboarding — Knowledge Providers & Experiences        |
+| [event-notification-onboarding.md](./developer/event-notification-onboarding.md)                          | Developer onboarding — events, routes, Notification Experiences |
+| [v0.4.0-action-framework Release Notes](./releases/v0.4.0-action-framework.md)                            | Prepared — tag pending                                          |
+| [SPR-004 Production Readiness Review](./reviews/SPR-004-production-readiness-review.md)                   | M4 readiness — READY WITH OBSERVATIONS                          |
+| [SPR-005 Architecture Review](./reviews/SPR-005-architecture-review.md)                                   | M5 architecture — APPROVED WITH OBSERVATIONS                    |
+| [MILESTONE-005 Production Readiness](./reviews/MILESTONE-005-knowledge-discovery-production-readiness.md) | M5 readiness — PASS WITH OBSERVATIONS                           |
+| [SPR-006 Architecture Review](./reviews/SPR-006-architecture-review.md)                                   | M6 architecture — APPROVED WITH OBSERVATIONS                    |
+| [MILESTONE-006 Production Readiness](./reviews/MILESTONE-006-production-readiness.md)                     | M6 readiness — PASS WITH OBSERVATIONS                           |
+| [Event & Notification architecture](./architecture/event-notification-framework.md)                       | M6 combined layer — EN-017 complete                             |
+| [APZHUB Platform v5.0](./releases/APZHUB-Platform-v5.0.md)                                                | Official Platform 5.0 release — **permanent baseline**          |
+| [APZHUB v5.0 Platform Review](./reviews/APZHUB-v5.0-Platform-Review.md)                                   | M1–M7 platform review — APPROVED FOR PRODUCT VALIDATION         |
+| [Platform Capability Matrix](./architecture/APZHUB-Platform-Capability-Matrix.md)                         | Cross-framework pattern reference (v5.0)                        |
+| [Product Validation Strategy](./strategy/APZHUB-Product-Validation-Strategy.md)                           | Law Firm Platform validation planning                           |
+| [Law Platform v1.0](./releases/APZHUB-Law-Platform-v1.0.md)                                               | Law Firm Platform planning baseline                             |
+| [Law Platform Reference Architecture](./architecture/APZHUB-Law-Platform-Reference-Architecture.md)       | Platform → Law Platform layer model                             |
+| [Law Capability Map](./architecture/APZHUB-Law-Capability-Map.md)                                         | Legal modules → platform frameworks                             |
+| [Law Platform Validation Strategy](./strategy/APZHUB-Law-Platform-Validation-Strategy.md)                 | Measurable framework validation goals                           |
+| [LAW-001 Foundation Planning](./sprint/LAW-001-foundation-planning.md)                                    | Law Platform Sprint 1 — planning                                |
+| [Law Platform Backlog](./backlog/LAW-Platform-Backlog.md)                                                 | LAW-001–LAW-015 milestones                                      |
+| [Law Platform Architecture Index](./architecture/LAW-Architecture-Index.md)                               | LAW architecture document registry                              |
+| [LAW-015 Trust Accounting](./architecture/LAW-Trust-Reference-Architecture.md)                            | Trust subsystem — **milestone closed** (LAW-015-14)             |
+| [LAW-015 Backlog](./backlog/LAW-015-Trust-Accounting-Backlog.md)                                          | LAW-015-01–015-15 — milestone closed                            |
+| [LAW-015 Review](./reviews/LAW-015-Trust-Accounting-Review.md)                                            | Trust milestone review — PASS WITH OBSERVATIONS                 |
+| [LAW Trust v1.0](./releases/LAW-Trust-v1.0.md)                                                            | Trust Accounting release notes (no tag)                         |
+| [FIN-001 Architecture Review](./reviews/FIN-001-Architecture-Review.md)                                   | Financial Engine extraction — **DEFER EXTRACTION**              |
+| [Law Platform Readiness](./reviews/APZHUB-Law-Platform-Readiness.md)                                      | APPROVED FOR PRODUCT VALIDATION                                 |
+| [SPR-008 Readiness Review](./reviews/SPR-008-readiness-review.md)                                         | M8 planning readiness                                           |
+| [SPR-008 Sprint Guide](./sprint/SPR-008-platform-identity-administration-ux.md)                           | Platform Identity, Administration & UX — planning               |
+| [SPR-008 Backlog](./backlog/SPR-008-platform-identity-administration-ux-backlog.md)                       | IAUX-001–IAUX-018 engineering stories                           |
+| [APZHUB Platform v4.0](./releases/APZHUB-Platform-v4.0.md)                                                | Platform 4.0 — superseded by Platform 5.0                       |
+| [Platform Reference Patterns](./architecture/APZHUB-Platform-Reference-Patterns.md)                       | Authoritative patterns (v4.0)                                   |
+| [SPR-007 Readiness Review](./reviews/SPR-007-readiness-review.md)                                         | M7 planning readiness                                           |
+| [SPR-007 Sprint Guide](./sprint/SPR-007-activity-timeline-framework.md)                                   | Activity & Timeline Framework — **Closed**                      |
+| [SPR-007 Spec Index](./specs/SPR-007-spec-index.md)                                                       | AT-001–AT-016 specifications                                    |
+| [Activity & Timeline architecture](./architecture/activity-timeline-framework.md)                         | M7 combined layer — complete                                    |
+| [Activity Timeline onboarding](./developer/activity-timeline-onboarding.md)                               | Developer guide — activity types, timelines, E2E                |
+| [SPR-007 Architecture Review](./reviews/SPR-007-architecture-review.md)                                   | M7 architecture — APPROVED WITH OBSERVATIONS                    |
+| [MILESTONE-007 Production Readiness](./reviews/MILESTONE-007-production-readiness.md)                     | M7 readiness — PASS WITH OBSERVATIONS                           |
+| [MILESTONE-007 Review](./reviews/MILESTONE-007-activity-timeline-framework-review.md)                     | M7 milestone — PASS WITH OBSERVATIONS                           |
+| [SPR-007 Closeout](./sprint/SPR-007-closeout.md)                                                          | Sprint 007 closeout — complete                                  |
+| [v0.7.0 Release Notes](./releases/v0.7.0-activity-timeline-framework.md)                                  | Prepared — tag pending owner instruction                        |
+| [AT-016 Completion Report](./sprint/AT-016-completion-report.md)                                          | AT-016 complete — await M8 planning                             |
+| [SPR-007 Backlog](./backlog/SPR-007-activity-timeline-framework-backlog.md)                               | AT-001–AT-016 engineering stories                               |
+| [Platform Design Patterns](./architecture/APZHUB-Platform-Design-Patterns.md)                             | Canonical patterns — authoritative for M6+                      |
+| [APZHUB v3.0 Platform Review](./reviews/APZHUB-v3.0-Platform-Review.md)                                   | M1–M5 platform review                                           |
+| [SPR-006 Readiness Review](./reviews/SPR-006-readiness-review.md)                                         | M6 planning readiness                                           |
+| [SPR-006 Spec Index](./specs/SPR-006-spec-index.md)                                                       | EN-001–EN-018 specifications                                    |
+| [Event Framework architecture](./architecture/event-framework.md)                                         | M6 Event layer                                                  |
+| [Notification Framework architecture](./architecture/notification-framework.md)                           | M6 Notification layer                                           |
+| [EN-001 Completion Report](./sprint/EN-001-completion-report.md)                                          | EN-001 complete — await review                                  |
 
 ## Backlog
 
-| Document                                                                          | Description                                             |
-| --------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| [SPR-004 Action Framework Backlog](./backlog/SPR-004-action-framework-backlog.md) | Engineering stories AF-001–AF-022 — **AF-021 complete** |
+| Document                                                                                            | Description                                      |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| [SPR-004 Action Framework Backlog](./backlog/SPR-004-action-framework-backlog.md)                   | Engineering stories AF-001–AF-022 — **complete** |
+| [SPR-005 Knowledge & Discovery Backlog](./backlog/SPR-005-knowledge-discovery-framework-backlog.md) | Engineering stories DF-001–DF-018 — **complete** |
+| [SPR-006 Event & Notification Backlog](./backlog/SPR-006-event-notification-framework-backlog.md)   | Engineering stories EN-001–EN-018 — **complete** |
+| [SPR-007 Activity & Timeline Backlog](./backlog/SPR-007-activity-timeline-framework-backlog.md)     | Engineering stories AT-001–AT-016 — **complete** |
+| [LAW-015 Trust Accounting Backlog](./backlog/LAW-015-Trust-Accounting-Backlog.md)                   | LAW-015-01–015-15 — **milestone closed**         |
 
 ## Implementation sprints
 
-| ID      | Title                                                                                                     | Status                                |
-| ------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| SPR-001 | [Monorepo Foundation & Development Environment](./SPR-001-monorepo-foundation-development-environment.md) | **Complete**                          |
-| M2      | [Milestone 2 — Platform Runtime Review](./reviews/MILESTONE-002-platform-runtime-review.md)               | **Complete** — PASS                   |
-| M3      | [Milestone 3 — Workbench Framework Review](./reviews/MILESTONE-003-workbench-framework-review.md)         | **Complete** — PASS WITH OBSERVATIONS |
-| —       | [Platform Roadmap](./architecture/platform-roadmap.md)                                                    | Active — Milestones 4–9               |
-| SPR-003 | [Workbench Framework Sprint Guide](./sprint/SPR-003-workbench-framework.md)                               | **Closed** — Milestone 3 complete     |
-| —       | [SPR-003 Implementation Plan](./sprint/SPR-003-implementation-plan.md)                                    | Closed — Sprint 003 complete          |
-| —       | [SPR-003 Closeout](./sprint/SPR-003-closeout.md)                                                          | Complete — await owner approval       |
-| —       | [Workbench Framework architecture](./architecture/workbench-framework.md)                                 | Active — M3 layer                     |
-| —       | [Workbench Manager architecture](./architecture/workbench-manager.md)                                     | Active — M3 subsystems                |
-| —       | [SPR-003 Architecture Review](./reviews/SPR-003-architecture-review.md)                                   | Complete                              |
-| —       | [SPR-003 Architecture Refinement](./reviews/SPR-003-architecture-refinement.md)                           | Approved                              |
-| —       | [SPR-003 Phase 0 ADR Report](./reviews/SPR-003-phase-0-adr-report.md)                                     | Approved                              |
-| —       | [SPR-003 Phase 1 Report](./sprint/SPR-003-phase-1-report.md)                                              | Complete                              |
-| —       | [SPR-003 Phase 2 Report](./sprint/SPR-003-phase-2-report.md)                                              | Complete                              |
-| —       | [SPR-003 Phase 3–7 Reports](./sprint/)                                                                    | Complete                              |
-| —       | [SPR-003 Readiness Review](./reviews/SPR-003-readiness-review.md)                                         | Complete                              |
-| —       | [v0.3.0-workbench-framework Release Notes](./releases/v0.3.0-workbench-framework.md)                      | Prepared — tag pending                |
-| SPR-004 | [Action Framework Sprint Guide](./sprint/SPR-004-action-framework.md)                                     | **Complete** — M4; AF-021 docs done   |
-| —       | [SPR-004 Engineering Backlog](./backlog/SPR-004-action-framework-backlog.md)                              | AF-001–AF-021 complete                |
-| —       | [Action Framework architecture](./architecture/command-framework.md)                                      | Active — M4 layer                     |
-| —       | [v0.4.0-action-framework Release Notes](./releases/v0.4.0-action-framework.md)                            | Prepared — tag pending                |
-| —       | [SPR-004 Production Readiness Review](./reviews/SPR-004-production-readiness-review.md)                   | READY WITH OBSERVATIONS               |
-| —       | [AF-021 Completion Report](./sprint/AF-021-completion-report.md)                                          | Complete — await review               |
-| —       | [AF-020 Completion Report](./sprint/AF-020-completion-report.md)                                          | Complete                              |
-| —       | [AF-001 – AF-019 Completion Reports](./sprint/)                                                           | Complete                              |
-| —       | [SPR-004 Technical Spec Index](./specs/SPR-004-spec-index.md)                                             | Active                                |
-| SPR-002 | [Platform Registry & Discovery Framework](./sprint/SPR-002-platform-registry.md)                          | **Closed** — Milestone 2 complete     |
-| —       | [SPR-002 Implementation Plan](./sprint/SPR-002-implementation-plan.md)                                    | Closed — Sprint 002 complete          |
-| —       | [SPR-002 Phase 9 Report](./sprint/SPR-002-phase-9-report.md)                                              | Complete — Sprint closed              |
-| —       | [SPR-002 Architecture Review](./reviews/SPR-002-architecture-review.md)                                   | Complete                              |
-| —       | [v0.2.0-platform-runtime Release Notes](./releases/v0.2.0-platform-runtime.md)                            | Prepared — tag pending                |
-| —       | [SPR-002 Phase 7 Report](./sprint/SPR-002-phase-7-report.md)                                              | Complete                              |
-| —       | [SPR-002 Phase 5 Report](./sprint/SPR-002-phase-5-report.md)                                              | Complete                              |
-| —       | [SPR-002 Phase 4 Report](./sprint/SPR-002-phase-4-report.md)                                              | Complete                              |
-| —       | [SPR-002 Phase 3 Report](./sprint/SPR-002-phase-3-report.md)                                              | Complete                              |
-| —       | [SPR-002 Phase 2 Report](./sprint/SPR-002-phase-2-report.md)                                              | Complete                              |
-| —       | [SPR-002 Phase 1 Report](./sprint/SPR-002-phase-1-report.md)                                              | Complete                              |
-| —       | [SPR-002 Phase 0 Report](./sprint/SPR-002-phase-0-report.md)                                              | Complete                              |
-| —       | [SPR-001 Implementation Plan](./sprint/SPR-001-implementation-plan.md)                                    | Complete — execution blueprint        |
-| —       | [Sprint 001 quick reference](./sprint-001-quick-reference.md)                                             | Derived lookup (SPR-001)              |
+| ID      | Title                                                                                                          | Status                                 |
+| ------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| SPR-001 | [Monorepo Foundation & Development Environment](./SPR-001-monorepo-foundation-development-environment.md)      | **Complete**                           |
+| M2      | [Milestone 2 — Platform Runtime Review](./reviews/MILESTONE-002-platform-runtime-review.md)                    | **Complete** — PASS                    |
+| M3      | [Milestone 3 — Workbench Framework Review](./reviews/MILESTONE-003-workbench-framework-review.md)              | **Complete** — PASS WITH OBSERVATIONS  |
+| —       | [Platform Roadmap](./architecture/platform-roadmap.md)                                                         | Active — Milestones 4–9                |
+| SPR-003 | [Workbench Framework Sprint Guide](./sprint/SPR-003-workbench-framework.md)                                    | **Closed** — Milestone 3 complete      |
+| —       | [SPR-003 Implementation Plan](./sprint/SPR-003-implementation-plan.md)                                         | Closed — Sprint 003 complete           |
+| —       | [SPR-003 Closeout](./sprint/SPR-003-closeout.md)                                                               | Complete — await owner approval        |
+| —       | [Workbench Framework architecture](./architecture/workbench-framework.md)                                      | Active — M3 layer                      |
+| —       | [Workbench Manager architecture](./architecture/workbench-manager.md)                                          | Active — M3 subsystems                 |
+| —       | [SPR-003 Architecture Review](./reviews/SPR-003-architecture-review.md)                                        | Complete                               |
+| —       | [SPR-003 Architecture Refinement](./reviews/SPR-003-architecture-refinement.md)                                | Approved                               |
+| —       | [SPR-003 Phase 0 ADR Report](./reviews/SPR-003-phase-0-adr-report.md)                                          | Approved                               |
+| —       | [SPR-003 Phase 1 Report](./sprint/SPR-003-phase-1-report.md)                                                   | Complete                               |
+| —       | [SPR-003 Phase 2 Report](./sprint/SPR-003-phase-2-report.md)                                                   | Complete                               |
+| —       | [SPR-003 Phase 3–7 Reports](./sprint/)                                                                         | Complete                               |
+| —       | [SPR-003 Readiness Review](./reviews/SPR-003-readiness-review.md)                                              | Complete                               |
+| —       | [v0.3.0-workbench-framework Release Notes](./releases/v0.3.0-workbench-framework.md)                           | Prepared — tag pending                 |
+| SPR-004 | [Action Framework Sprint Guide](./sprint/SPR-004-action-framework.md)                                          | **Complete** — M4; AF-021 docs done    |
+| —       | [SPR-004 Engineering Backlog](./backlog/SPR-004-action-framework-backlog.md)                                   | AF-001–AF-021 complete                 |
+| —       | [Action Framework architecture](./architecture/command-framework.md)                                           | Active — M4 layer                      |
+| —       | [v0.4.0-action-framework Release Notes](./releases/v0.4.0-action-framework.md)                                 | Prepared — tag pending                 |
+| —       | [SPR-004 Production Readiness Review](./reviews/SPR-004-production-readiness-review.md)                        | READY WITH OBSERVATIONS                |
+| —       | [AF-021 Completion Report](./sprint/AF-021-completion-report.md)                                               | Complete — await review                |
+| —       | [AF-020 Completion Report](./sprint/AF-020-completion-report.md)                                               | Complete                               |
+| —       | [AF-001 – AF-019 Completion Reports](./sprint/)                                                                | Complete                               |
+| —       | [SPR-004 Technical Spec Index](./specs/SPR-004-spec-index.md)                                                  | Active                                 |
+| SPR-005 | [Knowledge & Discovery Sprint Guide](./sprint/SPR-005-knowledge-discovery-framework.md)                        | **Closed** — Milestone 5 complete      |
+| —       | [SPR-005 Closeout](./sprint/SPR-005-closeout.md)                                                               | Complete — await owner approval        |
+| —       | [v0.5.0-knowledge-discovery-framework Release Notes](./releases/v0.5.0-knowledge-discovery-framework.md)       | Prepared — tag pending                 |
+| —       | [MILESTONE-005 Review](./reviews/MILESTONE-005-knowledge-discovery-framework-review.md)                        | PASS WITH OBSERVATIONS                 |
+| —       | [SPR-005 Engineering Backlog](./backlog/SPR-005-knowledge-discovery-framework-backlog.md)                      | DF-001–DF-017 complete                 |
+| —       | [Knowledge & Discovery architecture](./architecture/knowledge-discovery-framework.md)                          | Active — M5 layer                      |
+| —       | [SPR-005 Technical Spec Index](./specs/SPR-005-spec-index.md)                                                  | Active                                 |
+| —       | [SPR-005 Architecture Review](./reviews/SPR-005-architecture-review.md)                                        | APPROVED WITH OBSERVATIONS             |
+| —       | [MILESTONE-005 Production Readiness](./reviews/MILESTONE-005-knowledge-discovery-production-readiness.md)      | PASS WITH OBSERVATIONS                 |
+| —       | [DF-001 – DF-018 Completion Reports](./sprint/)                                                                | Complete                               |
+| SPR-006 | [Event & Notification Sprint Guide](./sprint/SPR-006-event-notification-framework.md)                          | **Closed** — Milestone 6 complete      |
+| —       | [SPR-006 Closeout](./sprint/SPR-006-closeout.md)                                                               | Complete — await owner approval        |
+| —       | [v0.6.0-event-notification-framework Release Notes](./releases/v0.6.0-event-notification-framework.md)         | Prepared — tag pending                 |
+| —       | [MILESTONE-006 Review](./reviews/MILESTONE-006-event-notification-framework-review.md)                         | PASS WITH OBSERVATIONS                 |
+| —       | [SPR-006 Engineering Backlog](./backlog/SPR-006-event-notification-framework-backlog.md)                       | EN-001–EN-018 complete                 |
+| —       | [SPR-006 Spec Index](./specs/SPR-006-spec-index.md)                                                            | Complete                               |
+| —       | [Event & Notification architecture](./architecture/event-notification-framework.md)                            | Active — M6 layer                      |
+| —       | [Event & Notification onboarding](./developer/event-notification-onboarding.md)                                | Developer guide                        |
+| —       | [EN-001 – EN-018 Completion Reports](./sprint/)                                                                | Complete                               |
+| —       | [APZHUB Platform v4.0 Release](./releases/APZHUB-Platform-v4.0.md)                                             | Current architectural baseline         |
+| —       | [APZHUB Platform v3.0 Release](./releases/APZHUB-Platform-v3.0.md)                                             | Superseded by Platform 4.0             |
+| SPR-007 | [Activity & Timeline Sprint Guide](./sprint/SPR-007-activity-timeline-framework.md)                            | **Closed** — Milestone 7 complete      |
+| —       | [SPR-007 Closeout](./sprint/SPR-007-closeout.md)                                                               | Complete — await owner approval        |
+| —       | [v0.7.0-activity-timeline-framework Release Notes](./releases/v0.7.0-activity-timeline-framework.md)           | Prepared — tag pending                 |
+| —       | [MILESTONE-007 Review](./reviews/MILESTONE-007-activity-timeline-framework-review.md)                          | PASS WITH OBSERVATIONS                 |
+| —       | [SPR-007 Engineering Backlog](./backlog/SPR-007-activity-timeline-framework-backlog.md)                        | AT-001–AT-016 complete                 |
+| —       | [SPR-007 Spec Index](./specs/SPR-007-spec-index.md)                                                            | AT-001–AT-016 complete                 |
+| —       | [SPR-007 Architecture Review](./reviews/SPR-007-architecture-review.md)                                        | APPROVED WITH OBSERVATIONS             |
+| —       | [MILESTONE-007 Production Readiness](./reviews/MILESTONE-007-production-readiness.md)                          | PASS WITH OBSERVATIONS                 |
+| —       | [Activity Timeline onboarding](./developer/activity-timeline-onboarding.md)                                    | Developer guide                        |
+| —       | [AT-001 – AT-016 Completion Reports](./sprint/)                                                                | Complete                               |
+| —       | [@apzhub/activity-timeline-framework](../../packages/activity-timeline-framework/)                             | M7 implementation complete             |
+| SPR-008 | [Platform Identity, Administration & UX Sprint Guide](./sprint/SPR-008-platform-identity-administration-ux.md) | **Planning complete** — await IAUX-001 |
+| —       | [SPR-008 Engineering Backlog](./backlog/SPR-008-platform-identity-administration-ux-backlog.md)                | IAUX-001–IAUX-018 planned              |
+| —       | [SPR-008 Readiness Review](./reviews/SPR-008-readiness-review.md)                                              | APPROVED FOR M8 PLANNING               |
+| —       | [APZHUB v3.0 Platform Review](./reviews/APZHUB-v3.0-Platform-Review.md)                                        | PASS WITH OBSERVATIONS                 |
+| SPR-002 | [Platform Registry & Discovery Framework](./sprint/SPR-002-platform-registry.md)                               | **Closed** — Milestone 2 complete      |
+| —       | [SPR-002 Implementation Plan](./sprint/SPR-002-implementation-plan.md)                                         | Closed — Sprint 002 complete           |
+| —       | [SPR-002 Phase 9 Report](./sprint/SPR-002-phase-9-report.md)                                                   | Complete — Sprint closed               |
+| —       | [SPR-002 Architecture Review](./reviews/SPR-002-architecture-review.md)                                        | Complete                               |
+| —       | [v0.2.0-platform-runtime Release Notes](./releases/v0.2.0-platform-runtime.md)                                 | Prepared — tag pending                 |
+| —       | [SPR-002 Phase 7 Report](./sprint/SPR-002-phase-7-report.md)                                                   | Complete                               |
+| —       | [SPR-002 Phase 5 Report](./sprint/SPR-002-phase-5-report.md)                                                   | Complete                               |
+| —       | [SPR-002 Phase 4 Report](./sprint/SPR-002-phase-4-report.md)                                                   | Complete                               |
+| —       | [SPR-002 Phase 3 Report](./sprint/SPR-002-phase-3-report.md)                                                   | Complete                               |
+| —       | [SPR-002 Phase 2 Report](./sprint/SPR-002-phase-2-report.md)                                                   | Complete                               |
+| —       | [SPR-002 Phase 1 Report](./sprint/SPR-002-phase-1-report.md)                                                   | Complete                               |
+| —       | [SPR-002 Phase 0 Report](./sprint/SPR-002-phase-0-report.md)                                                   | Complete                               |
+| —       | [SPR-001 Implementation Plan](./sprint/SPR-001-implementation-plan.md)                                         | Complete — execution blueprint         |
+| —       | [Sprint 001 quick reference](./sprint-001-quick-reference.md)                                                  | Derived lookup (SPR-001)               |
 
 **Status:** Foundation documentation complete (000, 001–029). **BUILD-001** and **SPR-001** are **complete** — reviewed **PASS WITH OBSERVATIONS** and accepted for release as **`v0.1.0-foundation`** (tag pending owner instruction).
 
 ## Architecture decisions (`docs/adr/`)
 
-| ID       | Title                                                                                                | Status                |
-| -------- | ---------------------------------------------------------------------------------------------------- | --------------------- |
-| ADR-0001 | [Monorepo Strategy](./adr/ADR-0001-monorepo-strategy.md)                                             | Accepted              |
-| ADR-0002 | [Drizzle ORM Selection](./adr/ADR-0002-drizzle-orm-selection.md)                                     | Accepted              |
-| ADR-0003 | [Better Auth Session Validation](./adr/ADR-0003-better-auth-session-validation.md)                   | Accepted              |
-| ADR-0004 | [Platform Registry First Architecture](./adr/ADR-0004-platform-registry-first-architecture.md)       | Accepted              |
-| ADR-0005 | [Integration SDK Strategy](./adr/ADR-0005-integration-sdk-strategy.md)                               | Accepted              |
-| ADR-0006 | [Platform Service Architecture](./adr/ADR-0006-platform-service-architecture.md)                     | Accepted              |
-| ADR-0007 | [Event Driven Communication](./adr/ADR-0007-event-driven-communication.md)                           | Accepted              |
-| ADR-0008 | [Platform Core Package](./adr/ADR-0008-platform-core-package.md)                                     | Superseded → ADR-0018 |
-| ADR-0018 | [Platform Runtime Package](./adr/ADR-0018-platform-runtime-package.md)                               | Accepted              |
-| ADR-0009 | [Registry Hybrid Persistence](./adr/ADR-0009-registry-hybrid-persistence.md)                         | Accepted              |
-| ADR-0010 | [Registry Internal TypeScript API](./adr/ADR-0010-registry-internal-typescript-api.md)               | Accepted              |
-| ADR-0011 | [Unified Manifest Envelope](./adr/ADR-0011-unified-manifest-envelope.md)                             | Accepted              |
-| ADR-0012 | [Theme Manifest Registration](./adr/ADR-0012-theme-manifest-registration.md)                         | Accepted              |
-| ADR-0013 | [Registry Fail-Fast Policy](./adr/ADR-0013-registry-fail-fast-policy.md)                             | Accepted              |
-| ADR-0014 | [Registry Bootstrap Lifecycle](./adr/ADR-0014-registry-bootstrap-lifecycle.md)                       | Accepted              |
-| ADR-0015 | [Registry Boundaries and Discovery Scope](./adr/ADR-0015-registry-boundaries-and-discovery-scope.md) | Accepted              |
-| ADR-0016 | [Registry Testing Requirements](./adr/ADR-0016-registry-testing-requirements.md)                     | Accepted              |
-| ADR-0017 | [Phased Implementation Review Gate](./adr/ADR-0017-phased-implementation-review-gate.md)             | Accepted              |
-| ADR-0019 | [Workbench Framework Package](./adr/ADR-0019-workbench-framework-package.md)                         | Accepted              |
-| ADR-0020 | [Workbench Request Transport](./adr/ADR-0020-workbench-request-transport.md)                         | Accepted              |
-| ADR-0021 | [Workbench Session Persistence](./adr/ADR-0021-workbench-session-persistence.md)                     | Accepted              |
-| ADR-0022 | [Navigation Manifest Extension](./adr/ADR-0022-navigation-manifest-extension.md)                     | Accepted              |
-| ADR-0023 | [Workbench Permission Adapter](./adr/ADR-0023-workbench-permission-adapter.md)                       | Accepted              |
-| ADR-0024 | [Command Framework Package](./adr/ADR-0024-command-framework-package.md)                             | Accepted              |
-| ADR-0025 | [Workbench Commands Manifest Extension](./adr/ADR-0025-workbench-commands-manifest.md)               | Accepted              |
-| ADR-0026 | [Command Execution and Actor Model](./adr/ADR-0026-command-execution-model.md)                       | Accepted              |
+| ID       | Title                                                                                                  | Status                |
+| -------- | ------------------------------------------------------------------------------------------------------ | --------------------- |
+| ADR-0001 | [Monorepo Strategy](./adr/ADR-0001-monorepo-strategy.md)                                               | Accepted              |
+| ADR-0002 | [Drizzle ORM Selection](./adr/ADR-0002-drizzle-orm-selection.md)                                       | Accepted              |
+| ADR-0003 | [Better Auth Session Validation](./adr/ADR-0003-better-auth-session-validation.md)                     | Accepted              |
+| ADR-0004 | [Platform Registry First Architecture](./adr/ADR-0004-platform-registry-first-architecture.md)         | Accepted              |
+| ADR-0005 | [Integration SDK Strategy](./adr/ADR-0005-integration-sdk-strategy.md)                                 | Accepted              |
+| ADR-0006 | [Platform Service Architecture](./adr/ADR-0006-platform-service-architecture.md)                       | Accepted              |
+| ADR-0007 | [Event Driven Communication](./adr/ADR-0007-event-driven-communication.md)                             | Accepted              |
+| ADR-0008 | [Platform Core Package](./adr/ADR-0008-platform-core-package.md)                                       | Superseded → ADR-0018 |
+| ADR-0018 | [Platform Runtime Package](./adr/ADR-0018-platform-runtime-package.md)                                 | Accepted              |
+| ADR-0009 | [Registry Hybrid Persistence](./adr/ADR-0009-registry-hybrid-persistence.md)                           | Accepted              |
+| ADR-0010 | [Registry Internal TypeScript API](./adr/ADR-0010-registry-internal-typescript-api.md)                 | Accepted              |
+| ADR-0011 | [Unified Manifest Envelope](./adr/ADR-0011-unified-manifest-envelope.md)                               | Accepted              |
+| ADR-0012 | [Theme Manifest Registration](./adr/ADR-0012-theme-manifest-registration.md)                           | Accepted              |
+| ADR-0013 | [Registry Fail-Fast Policy](./adr/ADR-0013-registry-fail-fast-policy.md)                               | Accepted              |
+| ADR-0014 | [Registry Bootstrap Lifecycle](./adr/ADR-0014-registry-bootstrap-lifecycle.md)                         | Accepted              |
+| ADR-0015 | [Registry Boundaries and Discovery Scope](./adr/ADR-0015-registry-boundaries-and-discovery-scope.md)   | Accepted              |
+| ADR-0016 | [Registry Testing Requirements](./adr/ADR-0016-registry-testing-requirements.md)                       | Accepted              |
+| ADR-0017 | [Phased Implementation Review Gate](./adr/ADR-0017-phased-implementation-review-gate.md)               | Accepted              |
+| ADR-0019 | [Workbench Framework Package](./adr/ADR-0019-workbench-framework-package.md)                           | Accepted              |
+| ADR-0020 | [Workbench Request Transport](./adr/ADR-0020-workbench-request-transport.md)                           | Accepted              |
+| ADR-0021 | [Workbench Session Persistence](./adr/ADR-0021-workbench-session-persistence.md)                       | Accepted              |
+| ADR-0022 | [Navigation Manifest Extension](./adr/ADR-0022-navigation-manifest-extension.md)                       | Accepted              |
+| ADR-0023 | [Workbench Permission Adapter](./adr/ADR-0023-workbench-permission-adapter.md)                         | Accepted              |
+| ADR-0024 | [Command Framework Package](./adr/ADR-0024-command-framework-package.md)                               | Accepted              |
+| ADR-0025 | [Workbench Commands Manifest Extension](./adr/ADR-0025-workbench-commands-manifest.md)                 | Accepted              |
+| ADR-0026 | [Command Execution and Actor Model](./adr/ADR-0026-command-execution-model.md)                         | Accepted              |
+| ADR-0027 | [Knowledge Discovery Framework Package](./adr/ADR-0027-knowledge-discovery-framework-package.md)       | Accepted              |
+| ADR-0028 | [Knowledge Source Model](./adr/ADR-0028-knowledge-source-model.md)                                     | Accepted              |
+| ADR-0029 | [Knowledge Discovery Execution Routing](./adr/ADR-0029-knowledge-discovery-execution-routing.md)       | Accepted              |
+| ADR-0030 | [Event & Notification Framework Package](./adr/ADR-0030-event-notification-framework-package.md)       | Accepted              |
+| ADR-0031 | [Event Registry and In-Process Event Bus](./adr/ADR-0031-event-registry-and-bus.md)                    | Accepted              |
+| ADR-0032 | [Notification Routing and Event Separation](./adr/ADR-0032-notification-routing-model.md)              | Accepted              |
+| ADR-0033 | [Activity & Timeline Framework Package](./adr/ADR-0033-activity-timeline-framework-package.md)         | Accepted              |
+| ADR-0034 | [Activity Registry and Timeline Model](./adr/ADR-0034-activity-registry-and-timeline-model.md)         | Accepted              |
+| ADR-0035 | [Activity Execution Routing](./adr/ADR-0035-activity-execution-routing.md)                             | Accepted              |
+| ADR-0036 | [Trust Accounting as Law Platform Capability](./adr/ADR-0036-trust-accounting-law-capability.md)       | Accepted (planning)   |
+| ADR-0037 | [Immutable Trust Journal](./adr/ADR-0037-immutable-trust-journal.md)                                   | Accepted (planning)   |
+| ADR-0038 | [Matter Trust Balance Segregation](./adr/ADR-0038-matter-trust-balance-segregation.md)                 | Accepted (planning)   |
+| ADR-0039 | [Jurisdiction-Adaptive Compliance Profile](./adr/ADR-0039-jurisdiction-adaptive-compliance-profile.md) | Accepted (planning)   |
 
 > Legacy sprint ADRs: [docs/decisions/](./decisions/) · Index: [adr/README.md](./adr/README.md)
 
 ## Reviews
 
-| ID       | Title                                                                                           | Status                            |
-| -------- | ----------------------------------------------------------------------------------------------- | --------------------------------- |
-| REV-001  | [SPR-001 Architecture & Engineering Review](./reviews/SPR-001-architecture-review.md)           | Complete                          |
-| —        | [SPR-001 Closeout Report](./reviews/SPR-001-closeout.md)                                        | Complete                          |
-| ARCH-002 | [Platform Runtime Architecture Update](./reviews/ARCH-002-platform-runtime-update.md)           | Complete                          |
-| —        | [SPR-003 Architecture Review](./reviews/SPR-003-architecture-review.md)                         | Complete                          |
-| M3       | [Milestone 3 Workbench Framework Review](./reviews/MILESTONE-003-workbench-framework-review.md) | Complete — PASS WITH OBSERVATIONS |
+| ID       | Title                                                                                                           | Status                                |
+| -------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| REV-001  | [SPR-001 Architecture & Engineering Review](./reviews/SPR-001-architecture-review.md)                           | Complete                              |
+| —        | [SPR-001 Closeout Report](./reviews/SPR-001-closeout.md)                                                        | Complete                              |
+| ARCH-002 | [Platform Runtime Architecture Update](./reviews/ARCH-002-platform-runtime-update.md)                           | Complete                              |
+| —        | [SPR-003 Architecture Review](./reviews/SPR-003-architecture-review.md)                                         | Complete                              |
+| M3       | [Milestone 3 Workbench Framework Review](./reviews/MILESTONE-003-workbench-framework-review.md)                 | Complete — PASS WITH OBSERVATIONS     |
+| M5       | [Milestone 5 Knowledge & Discovery Review](./reviews/MILESTONE-005-knowledge-discovery-production-readiness.md) | Complete — PASS WITH OBSERVATIONS     |
+| —        | [SPR-005 Architecture Review](./reviews/SPR-005-architecture-review.md)                                         | Complete — APPROVED WITH OBSERVATIONS |
 
 > **Hierarchy:** [000](./000-apzhub-engineering-constitution.md) → foundation docs 001–029 → ADRs (`docs/adr/`, legacy `docs/decisions/`) → build guides → sprint guides. Build and sprint guides implement the constitution; they do not override it.
 

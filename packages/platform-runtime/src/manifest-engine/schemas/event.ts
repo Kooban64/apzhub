@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { envelopeFields } from "./envelope";
 import { optionalWorkbenchFields } from "./workbench";
+import { optionalKnowledgeFields } from "./knowledge";
 
 /** Document 029 — event definition capability manifest. */
 export const eventCapabilityManifestSchema = z
@@ -17,6 +18,7 @@ export const eventCapabilityManifestSchema = z
       })
       .strict(),
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 

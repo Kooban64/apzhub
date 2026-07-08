@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { compatibilitySchema, envelopeFields } from "./envelope";
 import { optionalWorkbenchFields } from "./workbench";
+import { optionalKnowledgeFields } from "./knowledge";
 
 export const themeCapabilityManifestSchema = z
   .object({
@@ -23,6 +24,7 @@ export const themeCapabilityManifestSchema = z
       .strict()
       .optional(),
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 
@@ -46,6 +48,7 @@ export const commandCapabilityManifestSchema = z
       .strict()
       .optional(),
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 
@@ -60,6 +63,7 @@ export const searchProviderCapabilityManifestSchema = z
       })
       .strict(),
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 
@@ -85,6 +89,7 @@ export const workerCapabilityManifestSchema = z
       .strict()
       .optional(),
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 
@@ -98,6 +103,7 @@ export const dashboardCapabilityManifestSchema = z
       })
       .strict(),
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 
@@ -111,6 +117,7 @@ export const widgetCapabilityManifestSchema = z
       })
       .strict(),
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 
@@ -124,6 +131,7 @@ export const reportCapabilityManifestSchema = z
       })
       .strict(),
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 
@@ -150,6 +158,7 @@ export const featureFlagCapabilityManifestSchema = z
       })
       .strict(),
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 

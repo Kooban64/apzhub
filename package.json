@@ -9,13 +9,16 @@
   },
   "scripts": {
     "dev": "pnpm --filter @apzhub/web dev",
+    "dev:law": "pnpm --filter @apzhub/law-platform dev",
     "build": "pnpm --filter @apzhub/web build",
+    "build:law": "pnpm --filter @apzhub/law-platform build",
     "lint": "eslint .",
     "typecheck": "pnpm -r --if-present run typecheck",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test:e2e": "playwright test --config testing/playwright/playwright.config.ts",
+    "test:e2e:law": "playwright test --config testing/playwright/playwright.law.config.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "storybook": "storybook dev -p 6006 -c packages/ui/.storybook",
@@ -27,6 +30,10 @@
     "db:migrate": "tsx scripts/db-migrate.ts",
     "db:seed": "tsx scripts/db-seed.ts",
     "db:reset": "pnpm db:migrate && pnpm db:seed",
+    "openapi:validate": "npx @apidevtools/swagger-cli validate docs/specs/LAW-OpenAPI-v1.yaml",
+    "openapi:postman": "node scripts/generate-law-postman-collection.mjs",
+    "openapi:bruno": "node scripts/generate-law-bruno-collection.mjs",
+    "openapi:collections": "pnpm openapi:postman && pnpm openapi:bruno",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -58,7 +65,8 @@
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.33.0",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "yaml": "^2.8.0"
   },
   "lint-staged": {
     "*.{js,mjs,ts,tsx,json,md,css,yml,yaml}": [

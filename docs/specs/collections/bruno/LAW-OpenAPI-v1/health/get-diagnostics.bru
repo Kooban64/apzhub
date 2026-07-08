@@ -1,0 +1,22 @@
+meta {
+  name: GET /diagnostics
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/diagnostics
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Authenticated scaffold diagnostics
+  Permission: legal.nav.dashboard.view
+  Implementation: implemented
+}

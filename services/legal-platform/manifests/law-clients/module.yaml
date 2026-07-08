@@ -1,0 +1,86 @@
+manifestSchemaVersion: "1.0"
+id: legal-clients
+name: Clients
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: Client Management UX validation module for the APZHUB Law Platform.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Clients
+    icon: users
+    route: /workspace/law/clients
+    order: 20
+    permission: legal.nav.clients.view
+  view:
+    title: Clients
+    workspace: law
+    route: /workspace/law/clients
+    permission: legal.nav.clients.view
+  actions:
+    - id: legal.open.clients
+      label: Open Clients
+      handler: workbench-bridge:workbench.view.open
+      permission: legal.nav.clients.view
+      palette: true
+      group: Client Management
+      icon: users
+      order: 20
+      description: Navigate to the Clients module.
+    - id: legal.client.open
+      label: Open Client
+      handler: service:legal-clients:open
+      permission: legal.client.view
+      palette: true
+      group: Client Management
+      icon: user
+      order: 21
+      description: Open a client record from the directory.
+    - id: legal.client.create
+      label: Create Client
+      handler: service:legal-clients:create
+      permission: legal.client.manage
+      palette: true
+      group: Client Management
+      icon: user-plus
+      order: 22
+      description: Open the create client form.
+    - id: legal.client.edit
+      label: Edit Client
+      handler: service:legal-clients:edit
+      permission: legal.client.manage
+      palette: true
+      group: Client Management
+      icon: edit
+      order: 23
+      description: Open the edit client form.
+    - id: legal.client.search
+      label: Search Clients
+      handler: service:legal-clients:search
+      permission: legal.client.view
+      palette: true
+      group: Client Management
+      icon: search
+      order: 24
+      description: Focus client search in the directory.
+    - id: legal.client.delete
+      label: Delete Client
+      handler: service:legal-clients:delete
+      permission: legal.client.manage
+      palette: true
+      group: Client Management
+      icon: trash
+      order: 25
+      description: Soft delete a client in the in-memory repository.

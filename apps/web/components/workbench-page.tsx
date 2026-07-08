@@ -10,12 +10,24 @@ import {
   useWorkbenchState,
 } from "@apzhub/workbench-framework/react";
 import { DesktopShell } from "@apzhub/workspace";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
+
+import { useE2eActivityTimelinePresentationRefresh } from "@/lib/e2e-activity-timeline-presentation-refresh";
+import { resolveCommandPaletteMode } from "@/lib/resolve-command-palette-mode";
 
 export function WorkbenchPage() {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const commandPaletteMode = resolveCommandPaletteMode(searchParams.get("paletteMode"));
+  const [activityTimelineRenderKey, setActivityTimelineRenderKey] = useState(0);
+  const refreshActivityTimelinePresentation = useCallback(() => {
+    setActivityTimelineRenderKey((key) => key + 1);
+  }, []);
+  useE2eActivityTimelinePresentationRefresh({
+    onRefresh: refreshActivityTimelinePresentation,
+  });
   const { data: session } = useSession();
   const activityBarPresentation = useActivityBarPresentation();
   const sidebarPresentation = useSidebarPresentation();
@@ -92,10 +104,16 @@ export function WorkbenchPage() {
       sidebarItems={sidebarItems}
       onSidebarSelect={selectSidebarItem}
       enableCommandPalette
+      commandPaletteMode={commandPaletteMode}
       enableGlobalShortcuts
       enableContextMenu
       enableToolbar
       toolbarRegion="workspace"
+      enableNotificationBadge
+      enableNotificationPanel
+      enableActivityTimeline
+      enableActivityTimelinePanel
+      activityTimelineRenderKey={activityTimelineRenderKey}
       contextMenuSurface="workspace"
       contextMenuInput={contextMenuInput}
     >

@@ -1,0 +1,22 @@
+meta {
+  name: GET /search
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/search
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Quick search across legal entities
+  Permission: legal.search.execute
+  Implementation: planned
+}

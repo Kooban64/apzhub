@@ -1,0 +1,29 @@
+meta {
+  name: PATCH /notifications/{notificationId}
+  type: http
+  seq: 1
+}
+
+patch {
+  url: {{baseUrl}}/notifications/{notificationId}
+  body: json
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    
+  }
+}
+
+docs {
+  Mark notification read/unread
+  Permission: legal.notification.edit
+  Implementation: planned
+}

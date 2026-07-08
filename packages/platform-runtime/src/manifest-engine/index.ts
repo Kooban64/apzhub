@@ -43,3 +43,16 @@ export {
   type WorkbenchToolbarRegionManifest,
   type WorkbenchViewManifest,
 } from "./schemas/workbench";
+export {
+  collectKnowledgeSourceManifests,
+  hasKnowledgeSources,
+  KNOWLEDGE_DOCUMENT_KINDS,
+  KNOWLEDGE_SOURCE_KINDS,
+  KNOWLEDGE_SOURCE_TIERS,
+  knowledgeBlockSchema,
+  knowledgeSourceIdSchema,
+  knowledgeSourceManifestSchema,
+  optionalKnowledgeFields,
+  type KnowledgeBlockManifest,
+  type KnowledgeSourceManifest,
+} from "./schemas/knowledge";

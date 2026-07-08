@@ -2,6 +2,31 @@ import { NextResponse, type NextRequest } from "next/server";
 
 const publicPaths = ["/login", "/register", "/forgot-password", "/api/health"];
 
+/** Paths reachable without session (Law API public endpoints + developer docs). */
+function isPublicPath(pathname: string): boolean {
+  if (publicPaths.some((p) => pathname === p || pathname.startsWith("/api/auth"))) {
+    return true;
+  }
+
+  if (pathname === "/api/law/v1/health" || pathname.startsWith("/api/law/v1/openapi")) {
+    return true;
+  }
+
+  if (pathname === "/api/docs" || pathname.startsWith("/api/docs/")) {
+    return true;
+  }
+
+  if (pathname === "/docs" || pathname.startsWith("/docs/")) {
+    return true;
+  }
+
+  if (pathname.startsWith("/specs/collections")) {
+    return true;
+  }
+
+  return false;
+}
+
 type SessionPayload = {
   session?: { expiresAt: string };
   user?: { id: string };
@@ -41,7 +66,7 @@ async function fetchValidatedSession(
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (publicPaths.some((p) => pathname === p || pathname.startsWith("/api/auth"))) {
+  if (isPublicPath(pathname)) {
     return NextResponse.next();
   }
 

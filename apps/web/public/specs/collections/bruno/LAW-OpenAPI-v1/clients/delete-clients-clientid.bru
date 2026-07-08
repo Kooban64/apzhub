@@ -1,0 +1,22 @@
+meta {
+  name: DELETE /clients/{clientId}
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/clients/{clientId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Archive client (soft delete).
+  Permission: legal.client.delete
+  Implementation: implemented
+}

@@ -1,0 +1,22 @@
+meta {
+  name: GET /calendar-events/{calendarEventId}
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/calendar-events/{calendarEventId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Get calendar by ID
+  Permission: legal.calendar.view
+  Implementation: implemented
+}

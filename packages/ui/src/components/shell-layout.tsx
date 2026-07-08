@@ -27,6 +27,7 @@ export interface ShellLayoutProps {
   onActivityBarSelect?: (id: string) => void;
   environment?: string;
   onSignOut?: () => void;
+  headerTrailing?: React.ReactNode;
   children: ReactNode;
 }
 
@@ -72,11 +73,16 @@ export function ShellLayout({
   onActivityBarSelect,
   environment,
   onSignOut,
+  headerTrailing,
   children,
 }: ShellLayoutProps) {
   return (
     <div className="flex h-full min-h-0 flex-col bg-[var(--color-background)] text-[var(--color-foreground)]">
-      <Header userName={userName} onSignOut={onSignOut} />
+      <Header
+        userName={userName}
+        onSignOut={onSignOut}
+        headerTrailing={headerTrailing}
+      />
       <div className="flex min-h-0 flex-1">
         <ActivityBar items={activityBarItems} onItemSelect={onActivityBarSelect} />
         <Sidebar items={sidebarItems} onSelect={onSidebarSelect} />

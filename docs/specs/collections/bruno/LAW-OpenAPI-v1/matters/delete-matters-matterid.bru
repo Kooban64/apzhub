@@ -1,0 +1,22 @@
+meta {
+  name: DELETE /matters/{matterId}
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/matters/{matterId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Archive matter.
+  Permission: legal.matter.archive
+  Implementation: implemented
+}

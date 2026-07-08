@@ -1,0 +1,29 @@
+meta {
+  name: PATCH /clients/{clientId}
+  type: http
+  seq: 1
+}
+
+patch {
+  url: {{baseUrl}}/clients/{clientId}
+  body: json
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    
+  }
+}
+
+docs {
+  Update clients
+  Permission: legal.client.edit
+  Implementation: implemented
+}

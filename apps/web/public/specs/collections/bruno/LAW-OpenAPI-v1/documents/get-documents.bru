@@ -1,0 +1,22 @@
+meta {
+  name: GET /documents
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/documents
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  List documents
+  Permission: legal.document.view
+  Implementation: implemented
+}

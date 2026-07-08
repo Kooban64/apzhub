@@ -81,3 +81,5 @@ export const schema = {
   verification,
   userRoles,
 };
+
+export { legalSchema, lawClient, lawMatter, lawOutboxEvent } from "./legal-schema";

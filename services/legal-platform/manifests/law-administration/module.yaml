@@ -1,0 +1,41 @@
+manifestSchemaVersion: "1.0"
+id: legal-administration
+name: Administration
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: Administration placeholder module for the APZHUB Law Platform.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Administration
+    icon: settings
+    route: /workspace/law/administration
+    order: 100
+    permission: legal.nav.administration.view
+  view:
+    title: Administration
+    workspace: law
+    route: /workspace/law/administration
+    permission: legal.nav.administration.view
+  actions:
+    - id: legal.open.administration
+      label: Open Administration
+      handler: workbench-bridge:workbench.view.open
+      permission: legal.nav.administration.view
+      palette: true
+      group: Law Platform
+      icon: settings
+      order: 100
+      description: Navigate to the Administration module.

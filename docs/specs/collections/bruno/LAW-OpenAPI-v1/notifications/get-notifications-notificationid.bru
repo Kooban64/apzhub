@@ -1,0 +1,22 @@
+meta {
+  name: GET /notifications/{notificationId}
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/notifications/{notificationId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Get notification by ID
+  Permission: legal.notification.view
+  Implementation: planned
+}

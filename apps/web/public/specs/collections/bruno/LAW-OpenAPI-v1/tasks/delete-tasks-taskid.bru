@@ -1,0 +1,22 @@
+meta {
+  name: DELETE /tasks/{taskId}
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/tasks/{taskId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Archive task.
+  Permission: legal.task.archive
+  Implementation: implemented
+}

@@ -1,0 +1,29 @@
+meta {
+  name: POST /documents
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/documents
+  body: json
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    
+  }
+}
+
+docs {
+  Create documents
+  Permission: legal.document.create
+  Implementation: implemented
+}

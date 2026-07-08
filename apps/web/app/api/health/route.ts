@@ -8,14 +8,38 @@ import { NextResponse } from "next/server";
 
 import { ensurePlatformRuntimeReady } from "@/lib/runtime-init";
 import { loadActionRegistryHealthSummary } from "@/lib/command-hydration";
+import {
+  loadEventFrameworkHealthSummary,
+  loadNotificationFrameworkHealthSummary,
+} from "@/lib/event-notification-hydration";
+import { loadKnowledgeHealthSummary } from "@/lib/knowledge-hydration";
+import {
+  loadActivityFrameworkHealthSummary,
+  loadTimelineFrameworkHealthSummary,
+} from "@/lib/activity-timeline-hydration";
 
 export async function GET() {
   const env = getEnv();
-  const [database, redis, bootstrap, commands] = await Promise.all([
+  const [
+    database,
+    redis,
+    bootstrap,
+    commands,
+    knowledge,
+    events,
+    notifications,
+    activities,
+    timelines,
+  ] = await Promise.all([
     checkDatabaseHealth(),
     checkRedisHealth(),
     ensurePlatformRuntimeReady().catch(() => null),
     loadActionRegistryHealthSummary().catch(() => undefined),
+    loadKnowledgeHealthSummary().catch(() => undefined),
+    loadEventFrameworkHealthSummary().catch(() => undefined),
+    loadNotificationFrameworkHealthSummary().catch(() => undefined),
+    loadActivityFrameworkHealthSummary().catch(() => undefined),
+    loadTimelineFrameworkHealthSummary().catch(() => undefined),
   ]);
 
   const dependencies = {
@@ -61,6 +85,11 @@ export async function GET() {
         }
       : undefined,
     commands,
+    knowledge,
+    events,
+    notifications,
+    activities,
+    timelines,
   };
 
   return NextResponse.json(body, {

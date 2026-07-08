@@ -6,16 +6,21 @@ Working name for a unified internal productivity platform — one desktop-style 
 
 Foundation documentation (**000**, **001–029**) is complete.
 
-**BUILD-001**, **SPR-001**, **SPR-002**, **SPR-003**, and **SPR-004** are **complete** — formally reviewed and accepted for release.
+**BUILD-001**, **SPR-001** through **SPR-007** are **complete** — formally reviewed and accepted for release.
 
-| Milestone              | Sprint  | Release                      | Status                                   |
-| ---------------------- | ------- | ---------------------------- | ---------------------------------------- |
-| M1 Foundation          | SPR-001 | `v0.1.0-foundation`          | Complete (tag pending owner instruction) |
-| M2 Platform Runtime    | SPR-002 | `v0.2.0-platform-runtime`    | Complete (tag pending owner instruction) |
-| M3 Workbench Framework | SPR-003 | `v0.3.0-workbench-framework` | Complete (tag pending owner instruction) |
-| M4 Action Framework    | SPR-004 | `v0.4.0-action-framework`    | Complete (tag pending owner instruction) |
+**Platform Version 5.0** — [release document](./docs/releases/APZHUB-Platform-v5.0.md) · Milestone 8 planning gate next
 
-**Next:** Sprint 004 closeout (AF-022). No business modules until Milestone 9.
+| Milestone                | Sprint  | Release                                | Status                                   |
+| ------------------------ | ------- | -------------------------------------- | ---------------------------------------- |
+| M1 Foundation            | SPR-001 | `v0.1.0-foundation`                    | Complete (tag pending owner instruction) |
+| M2 Platform Runtime      | SPR-002 | `v0.2.0-platform-runtime`              | Complete (tag pending owner instruction) |
+| M3 Workbench Framework   | SPR-003 | `v0.3.0-workbench-framework`           | Complete (tag pending owner instruction) |
+| M4 Action Framework      | SPR-004 | `v0.4.0-action-framework`              | Complete (tag pending owner instruction) |
+| M5 Knowledge & Discovery | SPR-005 | `v0.5.0-knowledge-discovery-framework` | Complete (tag pending owner instruction) |
+| M6 Event & Notification  | SPR-006 | `v0.6.0-event-notification-framework`  | Complete (tag pending owner instruction) |
+| M7 Activity & Timeline   | SPR-007 | `v0.7.0-activity-timeline-framework`   | Complete (tag pending owner instruction) |
+
+**Platform Version 4.0** — [release document](./docs/releases/APZHUB-Platform-v4.0.md) (superseded by Platform 5.0)
 
 | Baseline                   | Document                                                                                                           |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -91,7 +96,21 @@ See [docs/developer/getting-started.md](./docs/developer/getting-started.md).
 | [docs/command-palette-quick-reference.md](./docs/command-palette-quick-reference.md)                                                                                                       | One-page lookup (019) — Action Framework implemented (SPR-004) |
 | [docs/architecture/command-framework.md](./docs/architecture/command-framework.md)                                                                                                         | Action Framework architecture (M4)                             |
 | [docs/developer/action-framework-onboarding.md](./docs/developer/action-framework-onboarding.md)                                                                                           | How to add platform and capability actions                     |
+| [docs/architecture/knowledge-discovery-framework.md](./docs/architecture/knowledge-discovery-framework.md)                                                                                 | Knowledge & Discovery Framework architecture (M5)              |
+| [docs/architecture/event-notification-framework.md](./docs/architecture/event-notification-framework.md)                                                                                   | Event & Notification Framework architecture (M6)               |
+| [docs/releases/APZHUB-Platform-v4.0.md](./docs/releases/APZHUB-Platform-v4.0.md)                                                                                                           | Platform Version 4.0 — permanent baseline                      |
+| [docs/architecture/APZHUB-Platform-Reference-Patterns.md](./docs/architecture/APZHUB-Platform-Reference-Patterns.md)                                                                       | Authoritative platform patterns (v4.0)                         |
+| [docs/developer/event-notification-onboarding.md](./docs/developer/event-notification-onboarding.md)                                                                                       | How to add events, routes, and Notification Experiences        |
 | [docs/releases/v0.4.0-action-framework.md](./docs/releases/v0.4.0-action-framework.md)                                                                                                     | Milestone 4 release notes (tag pending)                        |
+| [docs/releases/v0.5.0-knowledge-discovery-framework.md](./docs/releases/v0.5.0-knowledge-discovery-framework.md)                                                                           | Milestone 5 release notes (tag pending)                        |
+| [docs/releases/v0.6.0-event-notification-framework.md](./docs/releases/v0.6.0-event-notification-framework.md)                                                                             | Milestone 6 release notes (tag pending)                        |
+| [docs/architecture/activity-timeline-framework.md](./docs/architecture/activity-timeline-framework.md)                                                                                     | Activity & Timeline Framework architecture (M7)                |
+| [docs/developer/activity-timeline-onboarding.md](./docs/developer/activity-timeline-onboarding.md)                                                                                         | How to add activity types, timelines, and Context Panel        |
+| [docs/releases/v0.7.0-activity-timeline-framework.md](./docs/releases/v0.7.0-activity-timeline-framework.md)                                                                               | Milestone 7 release notes (tag pending)                        |
+| [docs/releases/APZHUB-Platform-v5.0.md](./docs/releases/APZHUB-Platform-v5.0.md)                                                                                                           | Platform Version 5.0 — permanent baseline                      |
+| [docs/architecture/APZHUB-Platform-Capability-Matrix.md](./docs/architecture/APZHUB-Platform-Capability-Matrix.md)                                                                         | Cross-framework pattern matrix (v5.0)                          |
+| [docs/strategy/APZHUB-Product-Validation-Strategy.md](./docs/strategy/APZHUB-Product-Validation-Strategy.md)                                                                               | Product validation planning (Law Firm Platform)                |
+| [docs/reviews/APZHUB-v5.0-Platform-Review.md](./docs/reviews/APZHUB-v5.0-Platform-Review.md)                                                                                               | Platform 5.0 review — APPROVED FOR PRODUCT VALIDATION          |
 | [docs/unified-search-quick-reference.md](./docs/unified-search-quick-reference.md)                                                                                                         | One-page lookup (020)                                          |
 | [docs/notifications-activity-quick-reference.md](./docs/notifications-activity-quick-reference.md)                                                                                         | One-page lookup (021)                                          |
 | [docs/presentation-theme-quick-reference.md](./docs/presentation-theme-quick-reference.md)                                                                                                 | One-page lookup (022)                                          |

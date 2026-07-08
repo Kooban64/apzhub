@@ -1,0 +1,22 @@
+meta {
+  name: GET /tasks
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/tasks
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  List tasks
+  Permission: legal.task.view
+  Implementation: implemented
+}

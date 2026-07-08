@@ -1,0 +1,22 @@
+meta {
+  name: DELETE /calendar-events/{calendarEventId}
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/calendar-events/{calendarEventId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Cancel calendar event.
+  Permission: legal.calendar.cancel
+  Implementation: implemented
+}

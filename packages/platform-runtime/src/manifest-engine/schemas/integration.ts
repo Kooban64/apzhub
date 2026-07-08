@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { envelopeFields } from "./envelope";
 import { optionalWorkbenchFields } from "./workbench";
+import { optionalKnowledgeFields } from "./knowledge";
 
 /** Document 026 — integration capability manifest. */
 export const integrationCapabilityManifestSchema = z
@@ -15,6 +16,7 @@ export const integrationCapabilityManifestSchema = z
       })
       .strict(),
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 

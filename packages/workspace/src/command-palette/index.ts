@@ -1,5 +1,6 @@
 export { WorkbenchCommandPalette } from "./workbench-command-palette";
 export type { WorkbenchCommandPaletteProps } from "./workbench-command-palette";
+export type { CommandPaletteMode } from "./command-palette-mode";
 export {
   useCommandPaletteState,
   type CommandPaletteState,
@@ -14,6 +15,15 @@ export type {
   MapActionsToPaletteItemsOptions,
   PaletteActionSource,
 } from "./map-palette-items";
+export {
+  mapKnowledgeGroupsToPaletteItems,
+  countKnowledgePaletteItems,
+} from "./map-knowledge-groups-to-palette-items";
+export {
+  useCommandPaletteKnowledgeQuery,
+  type UseCommandPaletteKnowledgeQueryOptions,
+  type UseCommandPaletteKnowledgeQueryResult,
+} from "./use-command-palette-knowledge-query";
 export {
   COMMAND_PALETTE_QUERY_DEBOUNCE_MS,
   useDebouncedValue,

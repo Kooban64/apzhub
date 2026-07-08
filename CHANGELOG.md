@@ -8,6 +8,274 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 See [Milestone 3 review](./docs/reviews/MILESTONE-003-workbench-framework-review.md) and [release notes](./docs/releases/v0.3.0-workbench-framework.md).
 
+## [0.6.0-event-notification-framework] — Milestone 6 Complete
+
+See [Milestone 6 review](./docs/reviews/MILESTONE-006-event-notification-framework-review.md) and [release notes](./docs/releases/v0.6.0-event-notification-framework.md).
+
+### Added (Sprint 006 summary)
+
+- `@apzhub/event-notification-framework` — Event Registry, Event Bus, Notification Registry, Mapper, Service, Presentation Layer
+- Notification Experiences — Badge and Panel; Action audit → in-app notifications
+- ADRs 0030–0032 · 1098 unit tests, 30 E2E tests, 90.75% coverage
+- [SPR-006 closeout](./docs/sprint/SPR-006-closeout.md)
+
+## [Unreleased] — LAW-015 Trust Accounting (Milestone Closed)
+
+### Added (LAW-015-01 — documentation only)
+
+- [LAW Trust Accounting Reference Architecture](./docs/architecture/LAW-Trust-Accounting-Reference-Architecture.md) — canonical trust subsystem architecture
+- [LAW Trust Domain Model](./docs/architecture/LAW-Trust-Domain-Model.md) — entities, aggregates, immutability, lifecycles
+- [LAW Trust Accounting Specification](./docs/specs/LAW-Trust-Accounting-Specification.md) — posting rules, compliance profiles
+- [LAW Trust Events](./docs/specs/LAW-Trust-Events.md) — `legal.trust.*` event catalogue
+- [LAW Trust Permissions](./docs/specs/LAW-Trust-Permissions.md) — `legal.trust.*` permission keys
+- [LAW Trust Workbench Planning](./docs/specs/LAW-Trust-Workbench-Planning.md) — future workbench modules
+- [LAW-015 Backlog](./docs/backlog/LAW-015-Trust-Accounting-Backlog.md) — LAW-015-02 through LAW-015-15
+- [LAW-015 Readiness Review](./docs/reviews/LAW-015-Trust-Accounting-Readiness.md) — APPROVED FOR IMPLEMENTATION PLANNING
+- [LAW Architecture Index](./docs/architecture/LAW-Architecture-Index.md) — Law Platform architecture registry
+- ADRs 0036–0039 — trust capability, immutable journal, matter segregation, compliance profiles
+- **Verdict:** PLANNING COMPLETE — await owner approval before LAW-015-02 (Trust Ledger Engine)
+- **No production code** — UI, persistence, APIs, calculations not implemented
+
+### Added (LAW-015-02 — in-memory Trust Ledger Engine)
+
+- `apps/law-platform/lib/trust/` — TrustLedgerService, InMemoryTrustLedgerRepository, double-entry posting, balance projection, diagnostics
+- Foundation transaction types: opening_balance, deposit, withdrawal, adjustment, reversal
+- In-memory domain events: `legal.trust.ledger.opened`, `legal.trust.transaction.posted`, `legal.trust.transaction.reversed`
+- 14 unit tests · [LAW-015-02 completion report](./docs/sprint/LAW-015-02-completion-report.md)
+- **Verdict:** IN-MEMORY LEDGER ENGINE COMPLETE — await owner approval before LAW-015-03
+- No UI, APIs, persistence, reconciliation, interest, or reporting
+
+### Added (LAW-015-03 — Trust Transaction Workflow)
+
+- `TrustTransactionWorkflowService` — draft lifecycle, validation, idempotent post, reversal, audit
+- In-memory draft and audit repositories; workflow domain events
+- 11 workflow unit tests (25 total trust module) · [LAW-015-03 completion report](./docs/sprint/LAW-015-03-completion-report.md)
+- **Verdict:** WORKFLOW LAYER COMPLETE — await owner approval before LAW-015-04
+
+### Added (LAW-015-04 — Trust Allocations)
+
+- `TrustAllocationService` — client/matter/split/unallocated/adjustment/reversal allocations
+- Append-only allocation repository; balance projections; allocation diagnostics
+- In-memory domain events: `legal.trust.allocation.created`, `.updated`, `.reversed`
+- 13 allocation unit tests (38 total trust module) · [LAW-015-04 completion report](./docs/sprint/LAW-015-04-completion-report.md)
+- **Verdict:** ALLOCATION LAYER COMPLETE — await owner approval before LAW-015-05
+- No UI, APIs, persistence, reconciliation, interest, or reporting
+
+### Added (LAW-015-05 — Trust Reconciliation Engine)
+
+- `TrustReconciliationService` — read-only ledger vs allocation reconciliation, variance detection, immutable run records
+- Pure reconciliation engine; append-only run repository; reconciliation diagnostics
+- In-memory domain events: `legal.trust.reconciliation.started`, `.completed`, `.failed`
+- 12 reconciliation unit tests (50 total trust module) · [LAW-015-05 completion report](./docs/sprint/LAW-015-05-completion-report.md)
+- **Verdict:** RECONCILIATION ENGINE COMPLETE — await owner approval before LAW-015-06
+- No UI, APIs, persistence, bank feed import, interest, or reporting
+
+### Added (LAW-015-06 — Trust Interest)
+
+- `TrustInterestService` — interest calculation policies, accrual engine, draft → approved → posted workflow
+- Pure accrual engine (`simple_daily`, `simple_monthly`); rule and posting repositories; interest diagnostics
+- Ledger `interest` transaction type with expense/liability postings; per-line allocation on post
+- In-memory domain events: `legal.trust.interest.accrued`, `.approved`, `.posted`
+- 12 interest unit tests (62 total trust module) · [LAW-015-06 completion report](./docs/sprint/LAW-015-06-completion-report.md)
+- **Verdict:** INTEREST ENGINE COMPLETE — await owner approval before LAW-015-07
+- No UI, APIs, persistence, bank integration, reporting, or external rate sources
+
+### Added (LAW-015-07 — Trust Transfer Engine)
+
+- `TrustTransferService` — controlled fund movement via draft → approve → post workflow with reversal and cancellation
+- Paired `transfer_out` / `transfer_in` ledger postings through `TrustLedgerService`; append-only allocation updates
+- Transfer types: matter↔matter, client↔client, account↔account, allocation correction, reversal
+- In-memory domain events: `legal.trust.transfer.created`, `.approved`, `.posted`, `.reversed`
+- 12 transfer unit tests (74 total trust module) · [LAW-015-07 completion report](./docs/sprint/LAW-015-07-completion-report.md)
+- **Verdict:** TRANSFER ENGINE COMPLETE — await owner approval before LAW-015-08
+- No UI, APIs, persistence, bank integration, reporting, or external accounting integration
+
+### Added (LAW-015-08 — Trust Reporting Engine)
+
+- `TrustReportingService` — immutable read-only report projections from accounting services only
+- Ten report types: trial balance, ledger, journal, transactions, client/matter statements, allocation/interest/transfer/reconciliation summaries
+- Pure report builders; in-memory report repository; reporting diagnostics
+- Ledger read query methods: `listAccounts`, `getAccount`, `listTransactions`, `getBalances`
+- In-memory domain event: `legal.trust.report.generated`
+- 20 reporting unit tests (94 total trust module) · [LAW-015-08 completion report](./docs/sprint/LAW-015-08-completion-report.md)
+- **Verdict:** REPORTING ENGINE COMPLETE — await owner approval before LAW-015-09
+- No UI, APIs, persistence, PDF/Excel/CSV export, scheduled reports, email, or printing
+
+### Added (LAW-015-09 — Trust Dashboard & Workbench UI)
+
+- Trust Accounting workbench module — dashboard, accounts, transactions, allocations, reconciliation, interest, transfers, reports, diagnostics
+- `TrustWorkbenchService` + `TrustWorkflowProvider` wiring over in-memory trust engine
+- Manifest `legal-trust`, command palette actions, knowledge help, unified search source
+- Routes under `/workspace/law/trust/*` using Law UX Foundation components
+- 9 UI unit tests (103 total trust module) · [LAW-015-09 completion report](./docs/sprint/LAW-015-09-completion-report.md)
+- **Verdict:** TRUST WORKBENCH UI COMPLETE — await owner approval before LAW-015-10
+- No APIs, persistence, exports, bank integration, or Financial Engine extraction
+
+### Added (LAW-015-10 — Trust Approvals & Operational Controls)
+
+- `TrustApprovalService` — configurable approval governance over trust financial actions
+- Approval types: transaction, transfer, interest posting, allocation adjustment
+- Rule modes: no approval, single, dual, threshold-based, role-based
+- Append-only approval history; in-memory events (`legal.trust.approval.*`)
+- Integration gate on workflow, transfer, and interest services
+- 15 approval unit tests (118 total trust module) · [LAW-015-10 completion report](./docs/sprint/LAW-015-10-completion-report.md)
+- **Verdict:** TRUST APPROVAL GOVERNANCE COMPLETE — await owner approval before LAW-015-11
+- No APIs, persistence, email notifications, workflow designer, or bank integration
+
+### Added (LAW-015-12 — Trust Reports Export Pack)
+
+- CSV and print-friendly HTML export for all ten Trust report types via `trust-report-export.ts`
+- REST export route `GET /api/law/v1/trust/reports/{reportId}/export?format=csv|html` (PDF placeholder returns 422)
+- Trust Reports workbench: Export CSV and Print View buttons
+- 28 new tests (export serializers, API, UI) · [LAW-015-12 completion report](./docs/sprint/LAW-015-12-completion-report.md)
+- **Verdict:** TRUST REPORT EXPORTS COMPLETE — await owner approval before bank integration, scheduled reporting, outbox workers, or Financial Engine extraction
+- No PDF/Excel engines, scheduled reports, email delivery, bank feeds, or accounting integration
+
+### Added (LAW-015-11 — Trust Persistence & REST APIs)
+
+- PostgreSQL persistence for trust accounts, transactions, journal entries, balances, drafts, allocations, transfers, approvals, interest, reconciliation, reports
+- Migrations `0009_law_trust`, `0010_law_trust_rls`; Drizzle schema and `PostgresTrustStore`
+- REST API under `/api/law/v1/trust/*` — accounts, transactions, allocations, reconciliation, interest, transfers, approvals, reports, diagnostics
+- Outbox rows for `legal.trust.account.*` and `legal.trust.transaction.*` (no workers)
+- Memory mode preserved via `LAW_REPOSITORY_MODE=memory`
+- 14 new tests (Trust API, parity, postgres isolation/outbox) · [LAW-015-11 completion report](./docs/sprint/LAW-015-11-completion-report.md)
+- **Verdict:** TRUST PERSISTENCE AND REST APIs COMPLETE — await owner approval before exports, bank integration, outbox workers, or Financial Engine extraction
+- No PDF/Excel exports, bank feeds, payment gateway, or accounting integration
+
+### Added (LAW-015-12 — Trust Reports Export Pack)
+
+- CSV and print-friendly HTML export for all ten Trust report types via `trust-report-export.ts`
+- REST export route `GET /api/law/v1/trust/reports/{reportId}/export?format=csv|html` (PDF returns 422 placeholder)
+- Trust Reports workbench: Export CSV and Print View buttons after report generation
+- 28 new tests (export serializers, API, UI) · [LAW-015-12 completion report](./docs/sprint/LAW-015-12-completion-report.md)
+- **Verdict:** TRUST REPORT EXPORTS COMPLETE — await owner approval before bank integration, scheduled reporting, outbox workers, or Financial Engine extraction
+- No PDF/Excel engines, scheduled reports, email delivery, bank feeds, or accounting integration
+
+### Added (LAW-015-13 — Trust Accounting E2E Validation)
+
+- Playwright trust workflow spec (`law-015-trust-workflow.spec.ts`) and law-platform config (`playwright.law.config.ts`)
+- REST workflow validation test chaining account → transaction → reconciliation → interest → transfer → report → export
+- API, UI, and E2E validation matrices · [LAW-015-13 completion report](./docs/sprint/LAW-015-13-completion-report.md)
+- Route fix: unified `[trustTransactionId]` for post + reverse endpoints
+- Workbench client bundle fix: in-memory repositories in browser executor path
+- **Verdict:** TRUST E2E VALIDATION DELIVERED — Playwright execution blocked by environment (law-platform client bundle)
+
+### Added (LAW-015-14 — Trust Accounting Milestone Closeout)
+
+- [LAW Trust Reference Architecture](./docs/architecture/LAW-Trust-Reference-Architecture.md) — final as-built reference (ledger, workflow, allocations, reconciliation, interest, transfers, reporting, approvals, APIs, workbench)
+- [LAW Trust Domain Reference](./docs/architecture/LAW-Trust-Domain-Reference.md) — canonical aggregates, entities, value objects, events, state machines
+- [LAW Trust Developer Guide](./docs/developer/LAW-Trust-Developer-Guide.md) — service boundaries, repository model, API usage, extension points
+- [LAW Trust Operations Guide](./docs/operator/LAW-Trust-Operations-Guide.md) — daily ops, reconciliation, approvals, diagnostics, troubleshooting
+- [LAW-015 Trust Accounting Review](./docs/reviews/LAW-015-Trust-Accounting-Review.md) — **Verdict: PASS WITH OBSERVATIONS**
+- [LAW Trust v1.0 release notes](./docs/releases/LAW-Trust-v1.0.md) — milestone summary (no release tag)
+- [LAW-015-14 completion report](./docs/sprint/LAW-015-14-completion-report.md)
+- **Verdict:** TRUST ACCOUNTING MILESTONE CLOSED — await owner approval before Financial Engine extraction, banking, Phase 2, or new implementation
+- **No production code** — documentation and governance only
+
+### Added (FIN-001 — APZOR Financial Engine architecture extraction — planning only)
+
+- [APZOR Financial Engine Reference Architecture](./docs/architecture/APZOR-Financial-Engine-Reference-Architecture.md) — purpose, layering, boundaries, extension model
+- [APZOR Financial Engine Domain Model](./docs/architecture/APZOR-Financial-Engine-Domain-Model.md) — canonical generic financial domain
+- [APZOR Financial vs Law Separation](./docs/architecture/APZOR-Financial-vs-Law-Separation.md) — complete component separation matrix
+- [APZOR Financial Integration Model](./docs/architecture/APZOR-Financial-Integration-Model.md) — Law, Bank, Exchange, Wallet, Escrow integration patterns
+- [APZOR Financial Extraction Plan](./docs/architecture/APZOR-Financial-Extraction-Plan.md) — phased migration plan (not executed)
+- [FIN-001 Architecture Review](./docs/reviews/FIN-001-Architecture-Review.md) — **Verdict: DEFER EXTRACTION**
+- [FIN-001 completion report](./docs/sprint/FIN-001-completion-report.md)
+- **No production code** — no packages, refactoring, APIs, UI, persistence, or Platform changes
+
+## [Platform Validation Phase 1] — Law Firm Platform Planning
+
+See [Law Platform v1.0](./docs/releases/APZHUB-Law-Platform-v1.0.md) · [Law Platform Readiness](./docs/reviews/APZHUB-Law-Platform-Readiness.md) · [Law Platform Backlog](./docs/backlog/LAW-Platform-Backlog.md).
+
+### Added (Phase 1 planning — documentation only)
+
+- Law Firm Platform v1.0 planning baseline
+- Law Platform reference architecture and capability map
+- Law Platform validation strategy with measurable framework goals
+- LAW-001 foundation sprint plan and LAW-001–LAW-012 backlog
+- Law Platform readiness review — APPROVED FOR PRODUCT VALIDATION
+- Platform 5.0 remains frozen; Milestone 8 not started
+
+### Added (LAW-012 Persistence Foundation — LAW-012-02 through LAW-012-08)
+
+- PostgreSQL persistence for Client, Matter, Document, Task, Calendar, Time, Invoice (migrations 0001–0008)
+- Dual-mode repositories (`LAW_REPOSITORY_MODE=memory|postgres`), tenant context, RLS, transactional outbox
+- [LAW-012-07 closeout](./docs/sprint/LAW-012-07-completion-report.md) · [LAW-012-08 quality gate fix](./docs/sprint/LAW-012-08-completion-report.md) · [Foundation review](./docs/reviews/LAW-012-persistence-foundation-review.md)
+- Reference architecture, data model, technical debt register, and Phase 2 roadmap
+- **1538** tests passing; primary quality gates green (lint, typecheck, build, test, coverage)
+- **Verdict:** PERSISTENCE FOUNDATION CLOSED WITH OBSERVATIONS — ready for next-phase planning; not commercial GA
+- E2E not completed — Playwright Chromium unavailable in current environment (environmental limitation, not a code regression)
+
+## [Platform Version 5.0] — Permanent Architectural Baseline
+
+See [APZHUB Platform v5.0](./docs/releases/APZHUB-Platform-v5.0.md) · [Platform v5.0 Review](./docs/reviews/APZHUB-v5.0-Platform-Review.md) · [Capability Matrix](./docs/architecture/APZHUB-Platform-Capability-Matrix.md) · [Product Validation Strategy](./docs/strategy/APZHUB-Product-Validation-Strategy.md).
+
+### Added (Platform 5.0 declaration)
+
+- Platform Version 5.0 release document — M1–M7 collective baseline
+- Activity & Timeline Framework included in permanent baseline
+- Updated Platform Reference Architecture (v5.0)
+- APZHUB Platform Capability Matrix — cross-framework pattern reference
+- APZHUB Product Validation Strategy — Law Firm Platform planning
+- APZHUB Platform v5.0 Review — APPROVED FOR PRODUCT VALIDATION
+- Milestone 8 planning — Platform Identity, Administration & UX (SPR-008)
+- Platform Roadmap updated — M7 complete, M8 objectives renamed
+
+## [0.7.0-activity-timeline-framework] — Milestone 7 Complete
+
+See [Milestone 7 review](./docs/reviews/MILESTONE-007-activity-timeline-framework-review.md) and [release notes](./docs/releases/v0.7.0-activity-timeline-framework.md).
+
+### Added (Sprint 007 summary)
+
+- `@apzhub/activity-timeline-framework` — Activity Registry, Timeline Registry, Activity Mapper, Service, Presentation Layer, Timeline Experiences
+- Context Panel Activity tab — `WorkbenchActivityTimeline` in `@apzhub/workspace`
+- Action audit → in-app activity timeline (parallel to notifications)
+- ADRs 0033–0035 · 1308 unit tests, 36 E2E tests, 90.58% coverage
+- [SPR-007 closeout](./docs/sprint/SPR-007-closeout.md) · [Activity Timeline onboarding](./docs/developer/activity-timeline-onboarding.md)
+
+## [Platform Version 4.0] — Permanent Architectural Baseline
+
+See [APZHUB Platform v4.0](./docs/releases/APZHUB-Platform-v4.0.md) · [Platform v4.0 Review](./docs/reviews/APZHUB-v4.0-Platform-Review.md) · [Reference Patterns](./docs/architecture/APZHUB-Platform-Reference-Patterns.md).
+
+### Added (Platform 4.0 declaration)
+
+- Platform Version 4.0 release document — M1–M6 collective baseline
+- Updated Platform Reference Architecture (v4.0)
+- APZHUB Platform Reference Patterns — authoritative pattern reference
+- Updated Platform Governance (v4.0)
+- Milestone 7 planning — Activity & Timeline Framework (SPR-007 guide, backlog, readiness review)
+- Platform Roadmap v2 updated — M6 complete, M7 objectives
+
+## [Unreleased] — Platform Version 3.0 (historical)
+
+### Added
+
+- [APZHUB Platform v3.0 release](./docs/releases/APZHUB-Platform-v3.0.md) — M1–M5 collective baseline
+- [Platform Design Patterns](./docs/architecture/APZHUB-Platform-Design-Patterns.md) — canonical Registry, DTO, Hydration, Service, Experience patterns
+- [APZHUB v3.0 Platform Review](./docs/reviews/APZHUB-v3.0-Platform-Review.md) — PASS WITH OBSERVATIONS
+- [SPR-006 Event & Notification sprint guide](./docs/sprint/SPR-006-event-notification-framework.md) — planning complete
+- [SPR-006 backlog](./docs/backlog/SPR-006-event-notification-framework-backlog.md) — EN-001–EN-018
+- [SPR-006 readiness review](./docs/reviews/SPR-006-readiness-review.md) — APPROVED FOR M6 PLANNING
+- Platform Reference Architecture updated to v3.0
+- Platform Governance updated to v3.0
+- Platform Roadmap v2 — M5 complete, M6 Event & Notification Framework
+
+## [0.5.0-knowledge-discovery-framework] — Milestone 5 Complete
+
+See [Milestone 5 review](./docs/reviews/MILESTONE-005-knowledge-discovery-framework-review.md) and [release notes](./docs/releases/v0.5.0-knowledge-discovery-framework.md).
+
+### Added (Sprint 005 summary)
+
+- `@apzhub/knowledge-discovery-framework` — Knowledge Registry, providers, orchestrator, ranking engine, Knowledge Service
+- Knowledge Presentation Layer — grouping, mapping, selection delegation in `@apzhub/workspace`
+- Knowledge Experiences — Knowledge Overlay, Command Palette knowledge mode
+- Client hydration — `KnowledgeDiscoveryProvider`, `useKnowledgeRegistry()`, `useKnowledgeService()`
+- Server bootstrap — `bootstrapKnowledgeRegistry`, `filterKnowledgeSourceRegistryDto`, hydration diagnostics
+- Application integration — `ActionWorkbenchShellProvider`, health `knowledge` field, dev diagnostics
+- ADRs 0027–0029 — package boundaries, source model, execution routing
+- 872 unit tests, 24 E2E tests, 91.55% coverage
+- [SPR-005 closeout](./docs/sprint/SPR-005-closeout.md) · [Knowledge & Discovery architecture](./docs/architecture/knowledge-discovery-framework.md)
+
 ## [0.4.0-action-framework] — Milestone 4 Complete
 
 See [Production readiness review](./docs/reviews/SPR-004-production-readiness-review.md) and [release notes](./docs/releases/v0.4.0-action-framework.md).
@@ -24,7 +292,7 @@ See [Production readiness review](./docs/reviews/SPR-004-production-readiness-re
 - 672 unit tests, 19 E2E tests, 91.46% coverage
 - [AF-021 completion report](./docs/sprint/AF-021-completion-report.md) · [Action Framework architecture](./docs/architecture/command-framework.md)
 
-## [Unreleased] — Sprint 005 DF-001
+## [0.4.0-action-framework] — Milestone 4 Complete
 
 ### Added
 

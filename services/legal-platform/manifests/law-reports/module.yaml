@@ -1,0 +1,41 @@
+manifestSchemaVersion: "1.0"
+id: legal-reports
+name: Reports
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: Reports placeholder module for the APZHUB Law Platform.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Reports
+    icon: bar-chart
+    route: /workspace/law/reports
+    order: 90
+    permission: legal.nav.reports.view
+  view:
+    title: Reports
+    workspace: law
+    route: /workspace/law/reports
+    permission: legal.nav.reports.view
+  actions:
+    - id: legal.open.reports
+      label: Open Reports
+      handler: workbench-bridge:workbench.view.open
+      permission: legal.nav.reports.view
+      palette: true
+      group: Law Platform
+      icon: bar-chart
+      order: 90
+      description: Navigate to the Reports module.

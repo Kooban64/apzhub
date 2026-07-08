@@ -1,0 +1,95 @@
+manifestSchemaVersion: "1.0"
+id: legal-tasks
+name: Tasks
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: Task Management UX validation module for the APZHUB Law Platform.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Tasks
+    icon: check-square
+    route: /workspace/law/tasks
+    order: 60
+    permission: legal.nav.tasks.view
+  view:
+    title: Tasks
+    workspace: law
+    route: /workspace/law/tasks
+    permission: legal.nav.tasks.view
+  actions:
+    - id: legal.open.tasks
+      label: Open Tasks
+      handler: workbench-bridge:workbench.view.open
+      permission: legal.nav.tasks.view
+      palette: true
+      group: Task Management
+      icon: check-square
+      order: 60
+      description: Navigate to the Tasks module.
+    - id: legal.task.open
+      label: Open Task
+      handler: service:legal-tasks:open
+      permission: legal.task.view
+      palette: true
+      group: Task Management
+      icon: check-square
+      order: 61
+      description: Open a task record from the task list.
+    - id: legal.task.create
+      label: Create Task
+      handler: service:legal-tasks:create
+      permission: legal.task.manage
+      palette: true
+      group: Task Management
+      icon: plus
+      order: 62
+      description: Open the create task form.
+    - id: legal.task.edit
+      label: Edit Task
+      handler: service:legal-tasks:edit
+      permission: legal.task.manage
+      palette: true
+      group: Task Management
+      icon: edit
+      order: 63
+      description: Open the edit task form.
+    - id: legal.task.search
+      label: Search Tasks
+      handler: service:legal-tasks:search
+      permission: legal.task.view
+      palette: true
+      group: Task Management
+      icon: search
+      order: 64
+      description: Focus task search in the list.
+    - id: legal.task.complete
+      label: Complete Task
+      handler: service:legal-tasks:complete
+      permission: legal.task.manage
+      palette: true
+      group: Task Management
+      icon: check
+      order: 65
+      description: Mark a task complete in the in-memory repository.
+    - id: legal.task.archive
+      label: Archive Task
+      handler: service:legal-tasks:archive
+      permission: legal.task.manage
+      palette: true
+      group: Task Management
+      icon: archive
+      order: 66
+      description: Soft archive a task in the in-memory repository.

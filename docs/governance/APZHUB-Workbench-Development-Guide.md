@@ -95,6 +95,92 @@ See [command-framework.md](../architecture/command-framework.md).
 
 ---
 
+## Knowledge Experiences (SPR-005)
+
+The Workbench hosts **Knowledge Experiences** — discovery surfaces that consume the Knowledge Service:
+
+```text
+Knowledge Sources → Knowledge Registry → Knowledge Query API
+→ Knowledge Presentation Layer → Knowledge Experiences
+```
+
+| Surface                        | Package             | Consumes                                                        |
+| ------------------------------ | ------------------- | --------------------------------------------------------------- |
+| Knowledge Overlay              | `@apzhub/workspace` | `useKnowledgeService()` + Presentation Layer                    |
+| Command Palette knowledge mode | `@apzhub/workspace` | `useKnowledgeService()` via `useCommandPaletteKnowledgeQuery()` |
+
+Presentation helpers (`groupKnowledgeDocuments`, `delegateKnowledgeOverlaySelection`) live in `@apzhub/workspace` — the **Knowledge Presentation Layer**. They are not UI surfaces.
+
+When extending:
+
+- Experiences call **`useKnowledgeService()`** — not the orchestrator or `KnowledgeQueryClient`
+- Selection delegates through `createWorkbenchKnowledgeSelectionHandlers()` → Action `execute()` or `activateViewForRoute()`
+- Command Palette **commands mode** (default) remains on Action Registry — separate path
+
+Requires `KnowledgeDiscoveryProvider` ancestor (wired in `ActionWorkbenchShellProvider`).
+
+See [knowledge-discovery-framework.md](../architecture/knowledge-discovery-framework.md) · [Knowledge & Discovery onboarding](../developer/knowledge-discovery-onboarding.md).
+
+---
+
+## Notification Experiences (SPR-006)
+
+The Workbench hosts **Notification Experiences** — shell surfaces that consume the Notification Presentation Layer:
+
+```text
+Platform Capability → Domain Event → Event Bus → Notification Mapping
+→ Notification Service → Notification Presentation Layer → Notification Experiences
+```
+
+| Surface            | Package             | Consumes                                                |
+| ------------------ | ------------------- | ------------------------------------------------------- |
+| Notification Badge | `@apzhub/workspace` | `useNotificationPresentation()`                         |
+| Notification Panel | `@apzhub/workspace` | `useNotificationPresentation()` + mark-read via service |
+
+Presentation helpers (`mapNotificationItemToViewModel`, `groupNotificationsByPriority`, `formatNotificationRelativeTimestamp`) live in `@apzhub/event-notification-framework` — the **Notification Presentation Layer**. They are not UI surfaces.
+
+When extending:
+
+- Experiences call **`useNotificationPresentation()`** — not Event Bus or mapper internals
+- Mark read delegates through `useNotificationService()` — not direct store mutation
+- Action audit publishes `capability.action.executed` — primary M6 notification source
+
+Requires `NotificationRegistryProvider` + `NotificationServiceProvider` ancestors (wired in `ActionWorkbenchShellProvider`).
+
+See [event-notification-framework.md](../architecture/event-notification-framework.md) · [Event & Notification onboarding](../developer/event-notification-onboarding.md).
+
+---
+
+## Timeline Experiences (SPR-007)
+
+The Workbench hosts **Timeline Experiences** — shell surfaces that consume the Activity Presentation Layer:
+
+```text
+Platform Capability → Domain Event → Event Bus → Activity Mapping
+→ Activity Service → Activity Presentation Layer → Timeline Experiences → Context Panel
+```
+
+| Surface                    | Package             | Consumes                                         |
+| -------------------------- | ------------------- | ------------------------------------------------ |
+| Context Panel Activity tab | `@apzhub/workspace` | `useActivityTimelineExperienceDiagnostics()`     |
+| Inline activity feed       | `@apzhub/workspace` | `WorkbenchActivityTimeline` (`variant="inline"`) |
+
+Presentation helpers (`mapActivityDocumentToViewModel`, `presentActivities`, date grouping) live in `@apzhub/activity-timeline-framework` — the **Activity Presentation Layer**. They are not UI surfaces.
+
+When extending:
+
+- Experiences call **`useActivityTimelineExperienceDiagnostics()`** — not Event Bus, mapper, or `DefaultActivityService`
+- Action delegation from activity items with `actionRef` routes through `useCommandRegistry().execute()` — same as Knowledge selection
+- Action audit publishes `capability.action.executed` — primary M7 activity source (parallel to notifications)
+
+Requires `ActivityTimelineProvider` + `ActivityTimelineServiceProvider` ancestors (wired in `ActionWorkbenchShellProvider` after Notification providers).
+
+DesktopShell flags: `enableActivityTimeline`, `enableActivityTimelinePanel`.
+
+See [activity-timeline-framework.md](../architecture/activity-timeline-framework.md) · [Activity Timeline onboarding](../developer/activity-timeline-onboarding.md).
+
+---
+
 ## Engines
 
 | Engine     | Owns                         | Does not own             |
@@ -220,15 +306,22 @@ Session restore calls adapter to drop disallowed workspace/view IDs.
 
 ## App integration points
 
-| File                                                           | Purpose                                                 |
-| -------------------------------------------------------------- | ------------------------------------------------------- |
-| `apps/web/lib/workbench-hydration.ts`                          | Server workbench registry filter + DTO                  |
-| `apps/web/lib/command-hydration.ts`                            | Server action registry bootstrap + filter + diagnostics |
-| `apps/web/app/(platform)/action-workbench-shell-provider.tsx`  | Client Workbench + Command Registry + shared executor   |
-| `apps/web/lib/create-app-action-executor.ts`                   | Shared `DefaultActionExecutor` bundle for app wiring    |
-| `packages/workbench-framework/src/react/workbench-context.tsx` | React context + hooks; optional `resolveActionExecutor` |
+| File                                                           | Purpose                                                         |
+| -------------------------------------------------------------- | --------------------------------------------------------------- |
+| `apps/web/lib/workbench-hydration.ts`                          | Server workbench registry filter + DTO                          |
+| `apps/web/lib/command-hydration.ts`                            | Server action registry bootstrap + filter + diagnostics         |
+| `apps/web/lib/knowledge-hydration.ts`                          | Server knowledge registry bootstrap + health summary            |
+| `apps/web/lib/event-notification-hydration.ts`                 | Server event/notification registry bootstrap + health           |
+| `apps/web/lib/activity-timeline-hydration.ts`                  | Server activity/timeline registry bootstrap + health            |
+| `apps/web/lib/create-app-activity-timeline-context.ts`         | Shared ActivityTimelineContext composition root                 |
+| `apps/web/lib/wire-app-activity-timeline.ts`                   | Event Bus subscriber wiring for Activity Mapping                |
+| `apps/web/lib/use-app-event-notification-context.ts`           | Client shared EventNotificationContext hook                     |
+| `apps/web/lib/use-app-knowledge-service.ts`                    | Client Knowledge Service factory from hydrated DTOs             |
+| `apps/web/app/(platform)/action-workbench-shell-provider.tsx`  | Client Workbench + Command + Knowledge + Notification providers |
+| `apps/web/lib/create-app-action-executor.ts`                   | Shared `DefaultActionExecutor` bundle for app wiring            |
+| `packages/workbench-framework/src/react/workbench-context.tsx` | React context + hooks; optional `resolveActionExecutor`         |
 
-Changes to app wiring require E2E verification of navigation, session restore, and Action Framework surfaces (`spr-004-action-framework.spec.ts`).
+Changes to app wiring require E2E verification of navigation, session restore, Action Framework surfaces (`spr-004-action-framework.spec.ts`), Knowledge Service integration (`spr-005-knowledge-discovery-framework.spec.ts`), Event & Notification integration (`spr-006-event-notification-framework.spec.ts`), and Activity & Timeline integration (`spr-007-activity-timeline-framework.spec.ts`).
 
 ---
 

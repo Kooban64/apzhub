@@ -1,0 +1,22 @@
+meta {
+  name: GET /activities
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/activities
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  List activity timeline entries
+  Permission: legal.activity.view
+  Implementation: planned
+}

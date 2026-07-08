@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useTheme } from "@apzhub/theme";
 import { useEffect, useState } from "react";
 
@@ -8,9 +9,11 @@ import { Button } from "./button";
 export interface HeaderProps {
   userName?: string;
   onSignOut?: () => void;
+  /** Optional trailing shell actions (e.g. notification badge). */
+  headerTrailing?: ReactNode;
 }
 
-export function Header({ userName, onSignOut }: HeaderProps) {
+export function Header({ userName, onSignOut, headerTrailing }: HeaderProps) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -28,6 +31,7 @@ export function Header({ userName, onSignOut }: HeaderProps) {
         <span className="text-xs text-[var(--color-muted-foreground)]">Home</span>
       </div>
       <div className="flex items-center gap-2">
+        {headerTrailing}
         <Button
           type="button"
           variant="outline"

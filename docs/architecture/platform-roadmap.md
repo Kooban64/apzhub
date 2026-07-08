@@ -1,8 +1,8 @@
 # APZHUB Platform Roadmap
 
-> **Status:** Complete — Milestone 4 (`v0.4.0-action-framework`, tag pending owner instruction)  
-> **Authority:** [003 — Overall System Architecture](./003-overall-system-architecture-design-principles.md) · [019 — Command Palette](./019-universal-command-palette-action-framework.md) · [command-framework.md](./command-framework.md)  
-> **Note:** Milestone 5 (Search Framework) is the next planning gate. Business capabilities remain Milestone 9+.
+> **Status:** Complete — Milestone 7 (`v0.7.0-activity-timeline-framework`, tag pending owner instruction) · **Platform Version 5.0**  
+> **Authority:** [003 — Overall System Architecture](./003-overall-system-architecture-design-principles.md) · [021 — Notification & Activity](./021-notification-activity-attention-management-framework.md) · [Platform v5.0](../releases/APZHUB-Platform-v5.0.md)  
+> **Note:** Milestone 8 (Platform Identity, Administration & User Experience) is the next planning gate. Business capabilities remain Milestone 9+.
 
 ---
 
@@ -31,11 +31,15 @@ M1 Foundation (SPR-001)         ✅ Complete — v0.1.0-foundation
 M2 Platform Runtime (SPR-002)   ✅ Complete — v0.2.0-platform-runtime
 M3 Workbench Framework (SPR-003)  ✅ Complete — v0.3.0-workbench-framework (tag pending)
 M4 Action Framework (SPR-004)     ✅ Complete — v0.4.0-action-framework (tag pending)
-M5 Search Framework               ← Next planning gate
-M6 Notification Framework
-M7 Activity Framework
-M8 Identity & Administration
+M5 Knowledge & Discovery (SPR-005)  ✅ Complete — v0.5.0-knowledge-discovery-framework (tag pending)
+M6 Event & Notification (SPR-006)     ✅ Complete — v0.6.0-event-notification-framework (tag pending)
+M7 Activity & Timeline (SPR-007)      ✅ Complete — v0.7.0-activity-timeline-framework (tag pending)
+        ↓
+Platform Version 5.0                  ✅ Permanent reference baseline
+        ↓
+M8 Platform Identity, Administration & UX  ← Next planning gate (SPR-008)
 M9 Business Capabilities
+M10 Enterprise Operations
 ```
 
 ---
@@ -95,120 +99,183 @@ See [command-framework.md](./command-framework.md), [M4 release notes](../releas
 
 ---
 
-## Milestone 5 — Search Framework
+## Milestone 5 — Knowledge & Discovery Framework
+
+> **Status:** ✅ **Complete** — Sprint 005 (DF-001–DF-018). Recommended release: `v0.5.0-knowledge-discovery-framework`.
 
 ### Objectives
 
-Implement Unified Search per Document 020 — provider model, grouped results, permission-aware discovery.
+Implement the Unified Search, Knowledge & Discovery Framework per Document 020 — Knowledge Sources, registry, orchestrator query, ranking, Knowledge Service, Presentation Layer, and Knowledge Experiences integrated with Action and Workbench registries.
 
-### Platform capabilities
+### Delivered (SPR-005)
 
-- Search provider registration
-- Search orchestration engine
-- Result grouping and ranking (framework level)
-- Search UI integrated into header
-- Index abstraction (interface only; no business indexes)
+| Deliverable                                                     | Status |
+| --------------------------------------------------------------- | ------ |
+| `@apzhub/knowledge-discovery-framework` package                 | ✅     |
+| Knowledge Registry + bootstrap + DTO filter                     | ✅     |
+| Action + Workbench navigation providers                         | ✅     |
+| Orchestrator + RankingEngine                                    | ✅     |
+| Knowledge Service + `useKnowledgeService()`                     | ✅     |
+| Knowledge Presentation Layer + Overlay + palette knowledge mode | ✅     |
+| Application integration (`apps/web`)                            | ✅     |
+| E2E verification (spr-005)                                      | ✅     |
+| ADRs 0027–0029                                                  | ✅     |
+| Documentation, governance, closeout                             | ✅     |
+| 872 unit tests, 24 E2E tests                                    | ✅     |
 
-### Dependencies
-
-- Milestone 3 Workbench Framework (header search slot)
-- Milestone 4 Command Framework (search-as-command overlap)
-- Platform Runtime search-provider capability kind
-
-### Expected deliverables
-
-- Search Framework package
-- Provider API and scaffold providers
-- Search overlay UI
-- Documentation and tests
+See [knowledge-discovery-framework.md](./knowledge-discovery-framework.md), [M5 review](../reviews/MILESTONE-005-knowledge-discovery-framework-review.md), and [v0.5.0 release notes](../releases/v0.5.0-knowledge-discovery-framework.md).
 
 ---
 
-## Milestone 6 — Notification Framework
+## Milestone 5 (historical planning) — Search Framework
 
-### Objectives
+> **Superseded by delivered Milestone 5 above.** The sprint scope evolved from generic "Search Framework" to the full Knowledge & Discovery Framework with explicit layering (Sources → Registry → Query API → Presentation Layer → Experiences).
 
-Implement Notification, Activity & Attention Management per Document 021.
+### Original objectives (Document 020 alignment)
 
-### Platform capabilities
+Implement Unified Search — provider model, grouped results, permission-aware discovery.
 
-- Notification layer UI
-- Activity stream model
-- Attention engine (badge, priority)
-- Event-to-notification mapping (framework hooks)
-- Digest and quiet-hours hooks (interfaces)
+### Deferred to future milestones
 
-### Dependencies
-
-- Milestone 3 Workbench Framework (notification layer region)
-- Event Bus (Document 029 — likely parallel or prerequisite sprint)
-- Identity for user-scoped notifications
-
-### Expected deliverables
-
-- Notification Framework package
-- Notification centre UI
-- Activity stream scaffold
-- Framework notification providers
-- Documentation and tests
+| Item                     | Notes                                              |
+| ------------------------ | -------------------------------------------------- |
+| Header search UI         | Knowledge Overlay wired; shell activation deferred |
+| Semantic / vector search | Ranking scaffolds; index tier M8+                  |
+| Index persistence        | Interface-level abstraction only                   |
 
 ---
 
-## Milestone 7 — Activity Framework
+## Milestone 6 — Event & Notification Framework
+
+> **Status:** ✅ **Complete** — Sprint 006 (EN-001–EN-018). Recommended release: `v0.6.0-event-notification-framework`.
 
 ### Objectives
 
-Deliver the Activity Stream and attention surfaces that unify user activity across the platform — distinct from Activity Bar navigation.
+Implement the Event & Notification Framework per Documents 021 and 029 — Event Registry, Event Bus, Notification Registry, Mapper, Service, Presentation Layer, and in-app Notification Experiences integrated with Action audit.
 
-### Platform capabilities
+### Delivered (SPR-006)
 
-- Activity feed aggregation
-- Activity item model and rendering
-- Context panel activity tab integration
-- Real-time update hooks (WebSocket/SSE interfaces)
-- Activity filtering by permission and workspace
+| Deliverable                                         | Status |
+| --------------------------------------------------- | ------ |
+| `@apzhub/event-notification-framework` package      | ✅     |
+| Event Registry + Event Bus + bootstrap + DTO filter | ✅     |
+| Notification Registry + Mapper + Service            | ✅     |
+| Notification Presentation Layer + hooks             | ✅     |
+| Notification Badge + Panel Experiences              | ✅     |
+| Action audit → `capability.action.executed`         | ✅     |
+| Application integration (`apps/web`)                | ✅     |
+| E2E verification (spr-006)                          | ✅     |
+| ADRs 0030–0032                                      | ✅     |
+| Documentation, governance, closeout                 | ✅     |
+| 1098 unit tests, 30 E2E tests                       | ✅     |
 
-### Dependencies
+See [event-notification-framework.md](./event-notification-framework.md), [M6 review](../reviews/MILESTONE-006-event-notification-framework-review.md), and [v0.6.0 release notes](../releases/v0.6.0-event-notification-framework.md).
 
-- Milestone 6 Notification Framework
-- Milestone 3 Context Manager
-- Event Bus for activity events
+### Deferred to future milestones
 
-### Expected deliverables
-
-- Activity Framework package
-- Context panel activity integration
-- Activity manifest kind support
-- Documentation and tests
+| Item                          | Notes                                      |
+| ----------------------------- | ------------------------------------------ |
+| Toast / banner dedicated UI   | Routes registered; panel lists toast items |
+| Email / SMS / push / webhook  | Channel stubs; Delivery Service M8+        |
+| Persistent notification store | Session-scoped only                        |
+| External Event Bus transport  | In-process; broker M10                     |
+| Activity subscriber           | M7 Activity Framework                      |
+| Attention engine / digests    | Document 021 future scope                  |
 
 ---
 
-## Milestone 8 — Identity & Administration
+## Milestone 6 (historical planning) — Notification Framework
+
+> **Superseded by delivered Milestone 6 above.** Sprint scope delivered Event & Notification as a unified framework with explicit separation and the canonical seven-step pipeline.
+
+### Original objectives (Document 021 alignment)
+
+Implement Notification, Activity & Attention Management — notification layer UI, activity stream model, attention engine hooks.
+
+### Scope delivered vs deferred
+
+| Planned                                | Delivered in M6 | Deferred |
+| -------------------------------------- | --------------- | -------- |
+| Notification Framework package         | ✅              | —        |
+| Notification centre UI (badge + panel) | ✅              | —        |
+| Event-to-notification mapping          | ✅              | —        |
+| Activity stream                        | ✅              | M7       |
+| External delivery                      | —               | M8+      |
+| Digest / quiet hours                   | —               | M8+      |
+
+---
+
+## Milestone 7 — Activity & Timeline Framework
+
+> **Status:** ✅ **Complete** — Sprint 007 (AT-001–AT-016). Recommended release: `v0.7.0-activity-timeline-framework` (tag pending owner instruction).
 
 ### Objectives
 
-Complete IAM integration with the Workbench Framework and deliver administration scaffolding per Documents 007 and platform administration references.
+Deliver unified activity recording and timeline presentation from platform events — distinct from notifications and audit persistence.
+
+### Platform capabilities (delivered)
+
+- Activity Registry and Timeline Registry
+- Manifest bootstrap (`activities.types`, `activities.timelines`)
+- Event-to-Activity Mapper (parallel Event Bus subscriber)
+- Activity Service and Presentation Layer
+- Timeline Experiences and Context Panel Activity tab
+- Application integration and E2E verification
+- Complete documentation and governance
+
+### Dependencies
+
+- Milestone 6 Event & Notification Framework
+- Milestone 3 Workbench Framework (Context Panel)
+- Milestone 4 Action Framework (audit hook)
+
+### Deferred to future milestones
+
+- User state (viewed/unread) — M8+
+- Live subscriptions — post-M7
+- Persistent activity store — M8+
+- Search / filtering UI — product story
+- Event replay — M10+
+
+See [activity-timeline-framework.md](./activity-timeline-framework.md) · [SPR-007 closeout](../sprint/SPR-007-closeout.md).
+
+## Milestone 8 — Platform Identity, Administration & User Experience
+
+> **Status:** Planning complete — await owner approval before IAUX-001
+
+### Objectives
+
+Complete IAM integration with the Workbench Framework and deliver administration scaffolding and persistent user experience state per Documents 007 and 023.
 
 ### Platform capabilities
 
-- PermissionService consumed by Workbench Manager and sub-managers
-- Role-aware registry filtering
+- PermissionService consumed by Workbench Manager and all registry DTO filters
+- Role-aware registry filtering (real RBAC — replaces dev allow-all adapter)
+- User administration scaffold (platform users — not business HR)
+- Role administration scaffold
+- RBAC administration UI in admin workspace
+- User preferences persistence (Document 023)
+- Workspace and theme persistence
 - Administration workspace scaffold (no business admin)
-- User preferences service integration (Document 023)
-- Audit trail hooks for framework actions
+- Platform configuration visibility
+- Audit visibility for framework actions
+- Security review
 
 ### Dependencies
 
-- Milestone 3–7 framework layers
+- Platform Version 5.0 (Milestones 1–7)
 - `@apzhub/auth` enhancement
 - Platform data architecture (Document 011)
 
 ### Expected deliverables
 
-- Permission integration across shell regions
-- Administration framework routes (scaffold)
-- Preferences persistence
+- PermissionService and session adapter
+- Admin workspace with user/role views
+- Preference persistence service
 - Security review and documentation
+- `v0.8.0-platform-identity-administration-ux` release notes (tag pending)
+
+See [SPR-008 sprint guide](../sprint/SPR-008-platform-identity-administration-ux.md) · [SPR-008 readiness review](../reviews/SPR-008-readiness-review.md).
 
 ---
 
@@ -244,16 +311,16 @@ Introduce first business modules (Projects, Documents, Support, etc.) as capabil
 ## Cross-milestone dependencies
 
 ```text
-M2 Runtime ──► M3 Workbench ──► M4 Command ──► M5 Search
+M2 Runtime ──► M3 Workbench ──► M4 Command ──► M5 Knowledge & Discovery ──► M6 Notification
                     │                │
                     ▼                ▼
                M6 Notification ◄─────┘
                     │
                     ▼
-               M7 Activity
+               M7 Activity & Timeline ✅
                     │
                     ▼
-               M8 Identity/Admin
+               M8 Identity/Admin/UX ← Next planning gate
                     │
                     ▼
                M9 Business

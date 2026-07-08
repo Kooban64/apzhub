@@ -1,0 +1,86 @@
+manifestSchemaVersion: "1.0"
+id: legal-calendar
+name: Calendar
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: Calendar Management UX validation module for the APZHUB Law Platform.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Calendar
+    icon: calendar
+    route: /workspace/law/calendar
+    order: 50
+    permission: legal.nav.calendar.view
+  view:
+    title: Calendar
+    workspace: law
+    route: /workspace/law/calendar
+    permission: legal.nav.calendar.view
+  actions:
+    - id: legal.open.calendar
+      label: Open Calendar
+      handler: workbench-bridge:workbench.view.open
+      permission: legal.nav.calendar.view
+      palette: true
+      group: Calendar
+      icon: calendar
+      order: 50
+      description: Navigate to the Calendar module.
+    - id: legal.calendar.open
+      label: Open Calendar Event
+      handler: service:legal-calendar:open
+      permission: legal.calendar.view
+      palette: true
+      group: Calendar
+      icon: calendar
+      order: 51
+      description: Open a calendar event from the register.
+    - id: legal.calendar.create
+      label: Create Calendar Event
+      handler: service:legal-calendar:create
+      permission: legal.calendar.manage
+      palette: true
+      group: Calendar
+      icon: plus
+      order: 52
+      description: Open the create calendar event form.
+    - id: legal.calendar.edit
+      label: Edit Calendar Event
+      handler: service:legal-calendar:edit
+      permission: legal.calendar.manage
+      palette: true
+      group: Calendar
+      icon: edit
+      order: 53
+      description: Open the edit calendar event form.
+    - id: legal.calendar.search
+      label: Search Calendar Events
+      handler: service:legal-calendar:search
+      permission: legal.calendar.view
+      palette: true
+      group: Calendar
+      icon: search
+      order: 54
+      description: Focus calendar event search in the list.
+    - id: legal.calendar.cancel
+      label: Cancel Calendar Event
+      handler: service:legal-calendar:cancel
+      permission: legal.calendar.manage
+      palette: true
+      group: Calendar
+      icon: x
+      order: 55
+      description: Cancel a calendar event in the in-memory repository.

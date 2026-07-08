@@ -1,15 +1,15 @@
 # APZHUB Platform Governance
 
-> **Platform Version:** 2.0  
+> **Platform Version:** 5.0  
 > **Status:** Permanent governance reference  
 > **Authority:** [Document 000 — Engineering Constitution](../000-apzhub-engineering-constitution.md) · [Engineering Handbook](./APZHUB-Engineering-Handbook.md)  
-> **Scope:** All platform development from Milestone 5 onward
+> **Scope:** All platform development from Milestone 8 onward
 
 ---
 
 ## Purpose
 
-This document defines how the APZHUB platform is governed — lifecycle, decisions, standards, processes, and Definition of Done. Platform 2.0 establishes the baseline. This governance ensures future milestones **extend** the platform without redesigning it.
+This document defines how the APZHUB platform is governed — lifecycle, decisions, standards, processes, and Definition of Done. Platform 5.0 establishes the current baseline (M1–M7). This governance ensures future milestones **consume** the platform without redesigning it.
 
 ---
 
@@ -17,12 +17,14 @@ This document defines how the APZHUB platform is governed — lifecycle, decisio
 
 ### Version model
 
-| Version                        | Meaning                                                               |
-| ------------------------------ | --------------------------------------------------------------------- |
-| **Architecture Baseline v1.0** | Frozen architectural rules (ADR-gated changes only)                   |
-| **Platform Version 2.0**       | Collective M1–M4 deliverable — definitive reference                   |
-| **Milestone releases**         | `v0.x.0-{theme}` tags per sprint closeout                             |
-| **Platform Version 3.0**       | Future — when M5–M10 collective baseline is declared (owner decision) |
+| Version                        | Meaning                                                                 |
+| ------------------------------ | ----------------------------------------------------------------------- |
+| **Architecture Baseline v1.0** | Frozen architectural rules (ADR-gated changes only)                     |
+| **Platform Version 2.0**       | Collective M1–M4 deliverable — superseded by Platform 3.0 as reference  |
+| **Platform Version 3.0**       | Collective M1–M5 deliverable — superseded by Platform 4.0               |
+| **Platform Version 4.0**       | Collective M1–M6 deliverable — superseded by Platform 5.0               |
+| **Platform Version 5.0**       | Collective M1–M7 deliverable — **current permanent reference baseline** |
+| **Milestone releases**         | `v0.x.0-{theme}` tags per sprint closeout                               |
 
 ### Build order (non-negotiable)
 
@@ -35,13 +37,15 @@ Workbench Framework (M3)
         ↓
 Action Framework (M4) ✅ Platform 2.0
         ↓
-Knowledge & Discovery Framework (M5)
+Knowledge & Discovery Framework (M5) ✅ Platform 3.0
         ↓
-Notification Framework (M6)
+Event & Notification Framework (M6) ✅
         ↓
-Activity Framework (M7)
+Activity & Timeline Framework (M7) ✅
         ↓
-Identity & Administration (M8)
+Platform Version 5.0 ✅
+        ↓
+Platform Identity, Administration & UX (M8)
         ↓
 Business Capabilities (M9)
         ↓
@@ -98,17 +102,21 @@ Follow existing ADRs (0024–0026 as recent examples):
 - Status, date, context, decision, consequences
 - Index maintained in [docs/adr/README.md](../adr/README.md)
 
-### Platform 2.0 ADR inventory
+### Platform 3.0 ADR inventory
 
-**26 ADR documents** — 25 accepted, 1 superseded (ADR-0008 → ADR-0018).
+**32 ADR documents** accepted through Milestone 6 (0010–0032).
 
 Sprint-specific ADRs:
 
-| Sprint  | ADRs      |
-| ------- | --------- |
-| SPR-002 | 0010–0018 |
-| SPR-003 | 0019–0023 |
-| SPR-004 | 0024–0026 |
+| Sprint  | ADRs                           |
+| ------- | ------------------------------ |
+| SPR-002 | 0010–0018                      |
+| SPR-003 | 0019–0023                      |
+| SPR-004 | 0024–0026                      |
+| SPR-005 | 0027–0029                      |
+| SPR-006 | 0030–0032                      |
+| SPR-007 | 0033–0035 (accepted)           |
+| SPR-008 | 0036–0039 (planned — IAUX-001) |
 
 ---
 
@@ -148,7 +156,7 @@ Every change must comply with [Document 000](../000-apzhub-engineering-constitut
 
 ## Registry Pattern
 
-All platform indexes follow the [Registry Pattern](../architecture/APZHUB-Registry-Pattern.md):
+All platform indexes follow the [Registry Pattern](../architecture/APZHUB-Registry-Pattern.md) and [Platform Design Patterns](../architecture/APZHUB-Platform-Design-Patterns.md):
 
 1. **Declaration** — manifest or built-in catalogue
 2. **Server bootstrap** — extraction, validation, registration
@@ -157,7 +165,7 @@ All platform indexes follow the [Registry Pattern](../architecture/APZHUB-Regist
 5. **Read-only hydration** — client registry; no UI registration
 6. **Consumer** — surface or executor; not both storing and executing
 
-New registries (Discovery providers, notification routes) must follow this pattern.
+New registries (Activity Registry, Timeline Registry) must follow this pattern.
 
 ---
 
@@ -170,7 +178,7 @@ Workbench surfaces follow the [Workbench Surface Pattern](../architecture/APZHUB
 - No parallel handler maps in UI components
 - Surface catalogue in `workbench-surfaces.ts`
 
-Discovery UI (M5) is a **new surface category** — must consume registries, not create execution paths.
+Discovery UI (M5), Notification UI (M6), and Timeline UI (M7) are **Experience categories** — must consume Service APIs and registries, not create execution or publish paths.
 
 ---
 
@@ -194,16 +202,18 @@ Git tag created (owner instruction only)
 CHANGELOG updated
 ```
 
-### Recommended tags (Platform 2.0 components)
+### Recommended tags
 
-| Tag                          | Milestone |
-| ---------------------------- | --------- |
-| `v0.1.0-foundation`          | M1        |
-| `v0.2.0-platform-runtime`    | M2        |
-| `v0.3.0-workbench-framework` | M3        |
-| `v0.4.0-action-framework`    | M4        |
-
-**Platform Version 2.0** is the collective designation — not necessarily a single Git tag unless owner instructs.
+| Tag                                    | Milestone                                                                  |
+| -------------------------------------- | -------------------------------------------------------------------------- |
+| `v0.1.0-foundation`                    | M1                                                                         |
+| `v0.2.0-platform-runtime`              | M2                                                                         |
+| `v0.3.0-workbench-framework`           | M3                                                                         |
+| `v0.4.0-action-framework`              | M4                                                                         |
+| `v0.5.0-knowledge-discovery-framework` | M5                                                                         |
+| `v0.6.0-event-notification-framework`  | M6                                                                         |
+| `v0.7.0-activity-timeline-framework`   | M7                                                                         |
+| **Platform Version 5.0**               | M1–M7 collective — not necessarily a single Git tag unless owner instructs |
 
 ### Do not
 
@@ -275,11 +285,14 @@ Large sprints may use phases with phase reports and owner approval between phase
 
 ### Story ID conventions
 
-| Prefix        | Sprint                                    |
-| ------------- | ----------------------------------------- |
-| AF-NNN        | Action Framework (SPR-004)                |
-| DF-NNN        | Knowledge & Discovery Framework (SPR-005) |
-| Phase reports | SPR-00N-phase-N-report.md                 |
+| Prefix        | Sprint                                           |
+| ------------- | ------------------------------------------------ |
+| AF-NNN        | Action Framework (SPR-004)                       |
+| DF-NNN        | Knowledge & Discovery Framework (SPR-005)        |
+| EN-NNN        | Event & Notification Framework (SPR-006)         |
+| IAUX-NNN      | Platform Identity, Administration & UX (SPR-008) |
+| AT-NNN        | Activity & Timeline Framework (SPR-007)          |
+| Phase reports | SPR-00N-phase-N-report.md                        |
 
 ### Effort scale
 
@@ -341,9 +354,9 @@ pnpm test:e2e          # when UI or integration affected
 | E2E           | Playwright   | Authenticated shell, health, a11y     |
 | Accessibility | axe-core     | No critical violations on login/shell |
 
-### Platform 2.0 baseline
+### Platform 4.0 baseline
 
-**672** unit tests · **19** E2E tests · **91.46%** statement coverage
+**1098** unit tests · **30** E2E tests · **90.75%** statement coverage
 
 ---
 
@@ -367,7 +380,11 @@ Document 000 (Constitution) — supreme authority
         ↓
 Architecture Baseline v1.0 (frozen)
         ↓
-Platform Reference Architecture (v2.0 consolidation)
+Platform Reference Architecture (v4.0 consolidation)
+        ↓
+Platform Reference Patterns (authoritative — v4.0)
+        ↓
+Platform Design Patterns (historical v3.0)
         ↓
 Foundation docs 001–029
         ↓
@@ -436,4 +453,70 @@ A story is **Done** when all criteria are met:
 
 ---
 
-_APZHUB Platform Governance — Version 2.0._
+## Framework lifecycle
+
+Each platform framework follows the same lifecycle:
+
+```text
+Foundation document(s) + Roadmap milestone
+        ↓
+Sprint guide + engineering backlog (planning)
+        ↓
+Owner approval → EN/AF/DF-001 equivalent (ADRs + specs)
+        ↓
+Story-by-story implementation (one at a time)
+        ↓
+Architecture review + production readiness review
+        ↓
+Sprint closeout + milestone review
+        ↓
+Release notes + optional Git tag
+        ↓
+Platform version bump (collective — owner decision)
+```
+
+| Framework             | Sprint  | Status                                |
+| --------------------- | ------- | ------------------------------------- |
+| Platform Runtime      | SPR-002 | ✅ Complete                           |
+| Workbench Framework   | SPR-003 | ✅ Complete                           |
+| Action Framework      | SPR-004 | ✅ Complete                           |
+| Knowledge & Discovery | SPR-005 | ✅ Complete — Platform 3.0            |
+| Event & Notification  | SPR-006 | ✅ Complete — Platform 4.0            |
+| Activity & Timeline   | SPR-007 | ✅ Complete — Platform 5.0            |
+| Identity, Admin & UX  | SPR-008 | ⏳ Planning complete — await IAUX-001 |
+
+Frameworks **extend** lower layers. No framework may redesign Runtime, Workbench, or peer frameworks without ADR.
+
+---
+
+## Architecture review requirements
+
+| Trigger                      | Required review                                                  |
+| ---------------------------- | ---------------------------------------------------------------- |
+| Sprint closeout              | Subsystem architecture review (`SPR-NNN-architecture-review.md`) |
+| Milestone closeout           | Milestone review (`MILESTONE-NNN-*.md`)                          |
+| Platform version declaration | Platform review (`APZHUB-vN.0-Platform-Review.md`)               |
+| Next milestone gate          | Readiness review (`SPR-NNN-readiness-review.md`)                 |
+
+Reviews record **observations only** unless explicitly chartered for redesign. Platform 4.0 review covers M1–M6 subsystems.
+
+---
+
+## Documentation requirements (M7+)
+
+| Deliverable                   | When                              |
+| ----------------------------- | --------------------------------- |
+| Platform release doc          | Platform version declaration      |
+| Reference architecture update | Platform version declaration      |
+| Reference patterns doc        | Platform version declaration      |
+| Governance update             | Platform version declaration      |
+| Sprint guide + backlog        | Before first implementation story |
+| Readiness review              | Before first implementation story |
+| Subsystem architecture        | Documentation story (e.g. AT-015) |
+| Developer onboarding          | Documentation story               |
+
+Undocumented frameworks are **incomplete**.
+
+---
+
+_APZHUB Platform Governance — Version 4.0._

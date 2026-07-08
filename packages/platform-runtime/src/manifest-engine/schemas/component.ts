@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { envelopeFields } from "./envelope";
 import { optionalWorkbenchFields } from "./workbench";
+import { optionalKnowledgeFields } from "./knowledge";
 
 const componentPayloadSchema = z
   .object({
@@ -22,6 +23,7 @@ export const componentCapabilityManifestSchema = z
     kind: z.literal("component"),
     component: componentPayloadSchema,
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 

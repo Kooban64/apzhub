@@ -1,0 +1,22 @@
+meta {
+  name: GET /clients/{clientId}
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/clients/{clientId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Get clients by ID
+  Permission: legal.client.view
+  Implementation: implemented
+}

@@ -1,0 +1,29 @@
+meta {
+  name: POST /search
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/search
+  body: json
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    
+  }
+}
+
+docs {
+  Advanced search with structured query body
+  Permission: legal.search.execute
+  Implementation: planned
+}

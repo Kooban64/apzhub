@@ -1,0 +1,111 @@
+manifestSchemaVersion: "1.0"
+id: legal-platform
+name: APZHUB Law Platform
+version: 1.0.0
+kind: service
+
+metadata:
+  category: legal
+  description: Root Law Platform service for platform validation.
+
+dependencies:
+  platform: []
+
+service:
+  category: legal
+
+health:
+  enabled: true
+
+knowledge:
+  sources:
+    - id: legal.help.dashboard
+      label: Dashboard Help
+      kind: registry-projection
+      tier: T1
+      priority: 10
+      status: active
+      permission: legal.nav.dashboard.view
+      provides: [navigation]
+      version: "1.0.0"
+    - id: legal.help.clients
+      label: Clients Help
+      kind: registry-projection
+      tier: T1
+      priority: 20
+      status: active
+      permission: legal.nav.clients.view
+      provides: [navigation]
+      version: "1.0.0"
+    - id: legal.help.matters
+      label: Matters Help
+      kind: registry-projection
+      tier: T1
+      priority: 30
+      status: active
+      permission: legal.nav.matters.view
+      provides: [navigation]
+      version: "1.0.0"
+    - id: legal.help.documents
+      label: Documents Help
+      kind: registry-projection
+      tier: T1
+      priority: 40
+      status: active
+      permission: legal.nav.documents.view
+      provides: [navigation]
+      version: "1.0.0"
+    - id: legal.help.calendar
+      label: Calendar Help
+      kind: registry-projection
+      tier: T1
+      priority: 50
+      status: active
+      permission: legal.nav.calendar.view
+      provides: [navigation]
+      version: "1.0.0"
+    - id: legal.help.tasks
+      label: Tasks Help
+      kind: registry-projection
+      tier: T1
+      priority: 60
+      status: active
+      permission: legal.nav.tasks.view
+      provides: [navigation]
+      version: "1.0.0"
+    - id: legal.help.time
+      label: Time Help
+      kind: registry-projection
+      tier: T1
+      priority: 70
+      status: active
+      permission: legal.nav.time.view
+      provides: [navigation]
+      version: "1.0.0"
+    - id: legal.help.billing
+      label: Billing Help
+      kind: registry-projection
+      tier: T1
+      priority: 80
+      status: active
+      permission: legal.nav.billing.view
+      provides: [navigation]
+      version: "1.0.0"
+    - id: legal.help.reports
+      label: Reports Help
+      kind: registry-projection
+      tier: T1
+      priority: 90
+      status: active
+      permission: legal.nav.reports.view
+      provides: [navigation]
+      version: "1.0.0"
+    - id: legal.help.administration
+      label: Administration Help
+      kind: registry-projection
+      tier: T1
+      priority: 100
+      status: active
+      permission: legal.nav.administration.view
+      provides: [navigation]
+      version: "1.0.0"

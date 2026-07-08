@@ -1,7 +1,7 @@
 import type { ActionActor } from "./action-context";
 import type { ActionResultCode } from "./action-result";
 
-/** Audit entry — Event Bus wiring deferred (ADR-0026). */
+/** Audit entry — Event Bus wiring via publishActionExecutedEvent (EN-014). */
 export interface ActionAuditEntry {
   readonly auditReference: string;
   readonly actionId: string;

@@ -1,0 +1,86 @@
+manifestSchemaVersion: "1.0"
+id: legal-time
+name: Time
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: Time Recording UX validation module for the APZHUB Law Platform.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Time
+    icon: clock
+    route: /workspace/law/time
+    order: 70
+    permission: legal.nav.time.view
+  view:
+    title: Time
+    workspace: law
+    route: /workspace/law/time
+    permission: legal.nav.time.view
+  actions:
+    - id: legal.open.time
+      label: Open Time
+      handler: workbench-bridge:workbench.view.open
+      permission: legal.nav.time.view
+      palette: true
+      group: Time Recording
+      icon: clock
+      order: 70
+      description: Navigate to the Time module.
+    - id: legal.time.open
+      label: Open Time Entry
+      handler: service:legal-time:open
+      permission: legal.time.view
+      palette: true
+      group: Time Recording
+      icon: clock
+      order: 71
+      description: Open a time entry from the register.
+    - id: legal.time.create
+      label: Record Time
+      handler: service:legal-time:create
+      permission: legal.time.manage
+      palette: true
+      group: Time Recording
+      icon: plus
+      order: 72
+      description: Open the record time form.
+    - id: legal.time.edit
+      label: Edit Time Entry
+      handler: service:legal-time:edit
+      permission: legal.time.manage
+      palette: true
+      group: Time Recording
+      icon: edit
+      order: 73
+      description: Open the edit time entry form.
+    - id: legal.time.search
+      label: Search Time Entries
+      handler: service:legal-time:search
+      permission: legal.time.view
+      palette: true
+      group: Time Recording
+      icon: search
+      order: 74
+      description: Focus time entry search in the list.
+    - id: legal.time.delete
+      label: Delete Time Entry
+      handler: service:legal-time:delete
+      permission: legal.time.manage
+      palette: true
+      group: Time Recording
+      icon: trash
+      order: 75
+      description: Soft delete a time entry in the in-memory repository.

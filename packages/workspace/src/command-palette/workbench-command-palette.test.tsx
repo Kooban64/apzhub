@@ -196,6 +196,7 @@ describe("buildCommandPaletteDiagnostics", () => {
     });
 
     expect(diagnostics.surface).toBe("command-palette");
+    expect(diagnostics.mode).toBe("commands");
     expect(diagnostics.registryReady).toBe(true);
     expect(diagnostics.registryActionCount).toBe(2);
     expect(diagnostics.executionCount).toBe(1);

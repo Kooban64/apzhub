@@ -1,0 +1,63 @@
+export {
+  LAW_API_TRUST_VIEW_PERMISSION,
+  LAW_API_TRUST_MANAGE_PERMISSION,
+  LAW_API_TRUST_POST_PERMISSION,
+  LAW_API_TRUST_TRANSFER_PERMISSION,
+  LAW_API_TRUST_RECONCILE_PERMISSION,
+  LAW_API_TRUST_INTEREST_PERMISSION,
+  LAW_API_TRUST_REPORT_PERMISSION,
+  LAW_API_TRUST_AUDIT_PERMISSION,
+  LAW_API_TRUST_REVERSE_PERMISSION,
+  TRUST_AUTH,
+} from "./trust-api-permissions";
+
+export {
+  withTrustServiceBundle,
+  createTrustServiceBundleForContext,
+  resetTrustApiRepositories,
+} from "./trust-api-service";
+
+export {
+  mapTrustAccountToSummaryV1,
+  mapTrustBalanceToSummaryV1,
+  mapTrustTransactionToSummaryV1,
+  type TrustAccountSummaryV1,
+  type TrustAccountDetailV1,
+  type CreateTrustAccountV1Request,
+  type CreateTrustTransactionDraftV1Request,
+} from "./trust-dto-mapper";
+
+export {
+  handleListTrustAccounts,
+  handleGetTrustAccount,
+  handleCreateTrustAccount,
+  handleListTrustTransactions,
+  handleCreateTrustTransactionDraft,
+  handlePostTrustTransactionDraft,
+  handleListTrustTransfers,
+  handleListTrustApprovals,
+  handleListTrustReports,
+  handleTrustDiagnostics,
+  handleRunTrustReconciliation,
+  handleListTrustAllocations,
+  handleListTrustInterestPostings,
+  handleRunTrustInterestAccrual,
+  handleCreateTrustTransfer,
+  handleApproveTrustApproval,
+  handleRejectTrustApproval,
+  handleRequestTrustReversal,
+  handleGenerateTrustReport,
+  handleExportTrustReport,
+  TRUST_LIST_AUTH,
+  TRUST_READ_AUTH,
+  TRUST_CREATE_AUTH,
+  TRUST_POST_AUTH,
+  TRUST_RECONCILE_AUTH,
+  TRUST_DIAGNOSTICS_AUTH,
+  TRUST_TRANSFER_CREATE_AUTH,
+  TRUST_INTEREST_AUTH,
+  TRUST_REPORT_CREATE_AUTH,
+  TRUST_REPORT_EXPORT_AUTH,
+  TRUST_REVERSE_AUTH,
+  TRUST_APPROVAL_ACTION_AUTH,
+} from "./trust-api-handlers";

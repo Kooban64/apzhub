@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { envelopeFields } from "./envelope";
 import { optionalWorkbenchFields } from "./workbench";
+import { optionalKnowledgeFields } from "./knowledge";
 
 /** Document 027 — platform service capability manifest. */
 export const serviceCapabilityManifestSchema = z
@@ -23,6 +24,7 @@ export const serviceCapabilityManifestSchema = z
       .optional(),
     permissions: z.array(z.string()).optional(),
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 

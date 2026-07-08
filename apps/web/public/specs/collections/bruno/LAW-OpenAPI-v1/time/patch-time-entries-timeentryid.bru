@@ -1,0 +1,29 @@
+meta {
+  name: PATCH /time-entries/{timeEntryId}
+  type: http
+  seq: 1
+}
+
+patch {
+  url: {{baseUrl}}/time-entries/{timeEntryId}
+  body: json
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    
+  }
+}
+
+docs {
+  Update time
+  Permission: legal.time.edit
+  Implementation: implemented
+}

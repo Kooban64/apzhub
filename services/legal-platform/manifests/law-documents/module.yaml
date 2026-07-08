@@ -1,0 +1,86 @@
+manifestSchemaVersion: "1.0"
+id: legal-documents
+name: Documents
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: Document Management UX validation module for the APZHUB Law Platform.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Documents
+    icon: file-text
+    route: /workspace/law/documents
+    order: 40
+    permission: legal.nav.documents.view
+  view:
+    title: Documents
+    workspace: law
+    route: /workspace/law/documents
+    permission: legal.nav.documents.view
+  actions:
+    - id: legal.open.documents
+      label: Open Documents
+      handler: workbench-bridge:workbench.view.open
+      permission: legal.nav.documents.view
+      palette: true
+      group: Document Management
+      icon: file-text
+      order: 40
+      description: Navigate to the Documents module.
+    - id: legal.document.open
+      label: Open Document
+      handler: service:legal-documents:open
+      permission: legal.document.view
+      palette: true
+      group: Document Management
+      icon: file
+      order: 41
+      description: Open a document record from the library.
+    - id: legal.document.create
+      label: Upload Document
+      handler: service:legal-documents:create
+      permission: legal.document.manage
+      palette: true
+      group: Document Management
+      icon: upload
+      order: 42
+      description: Open the upload document placeholder form.
+    - id: legal.document.edit
+      label: Edit Document
+      handler: service:legal-documents:edit
+      permission: legal.document.manage
+      palette: true
+      group: Document Management
+      icon: edit
+      order: 43
+      description: Open the edit document metadata form.
+    - id: legal.document.search
+      label: Search Documents
+      handler: service:legal-documents:search
+      permission: legal.document.view
+      palette: true
+      group: Document Management
+      icon: search
+      order: 44
+      description: Focus document search in the library.
+    - id: legal.document.archive
+      label: Archive Document
+      handler: service:legal-documents:archive
+      permission: legal.document.manage
+      palette: true
+      group: Document Management
+      icon: archive
+      order: 45
+      description: Soft archive a document in the in-memory repository.

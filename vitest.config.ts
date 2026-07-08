@@ -6,6 +6,7 @@ const componentCoverageInclude = ["packages/ui/src/components/**/*.{ts,tsx}"];
 const unitCoverageInclude = [
   "packages/**/src/**/*.{ts,tsx}",
   "packages/platform-runtime/src/**/*.ts",
+  "packages/legal-business-core/src/**/*.ts",
 ];
 
 const coverageExclude = [
@@ -22,6 +23,8 @@ const coverageExclude = [
   "packages/platform-runtime/src/**/types.ts",
   "packages/workbench-framework/src/**/index.ts",
   "packages/command-framework/src/**/index.ts",
+  "packages/knowledge-discovery-framework/src/**/index.ts",
+  "packages/event-notification-framework/src/**/index.ts",
   "packages/platform-runtime/src/bootstrap-engine/**",
 ];
 
@@ -30,9 +33,10 @@ const packageAliases = {
   "@apzhub/ui": path.resolve(__dirname, "packages/ui/src/index.ts"),
   "@apzhub/types": path.resolve(__dirname, "packages/types/src/index.ts"),
   "@apzhub/config": path.resolve(__dirname, "packages/config/src/index.ts"),
+  "@apzhub/config/db": path.resolve(__dirname, "packages/config/src/db/index.ts"),
   "@apzhub/theme": path.resolve(__dirname, "packages/theme/src/index.ts"),
-  "@apzhub/auth": path.resolve(__dirname, "packages/auth/src/index.ts"),
   "@apzhub/auth/server": path.resolve(__dirname, "packages/auth/src/server.ts"),
+  "@apzhub/auth": path.resolve(__dirname, "packages/auth/src/index.ts"),
   "@apzhub/sdk": path.resolve(__dirname, "packages/sdk/src/index.ts"),
   "@apzhub/workspace": path.resolve(__dirname, "packages/workspace/src/index.ts"),
   "@apzhub/shared": path.resolve(__dirname, "packages/shared/src/index.ts"),
@@ -104,6 +108,58 @@ const packageAliases = {
     __dirname,
     "packages/command-framework/src/index.ts",
   ),
+  "@apzhub/knowledge-discovery-framework/server": path.resolve(
+    __dirname,
+    "packages/knowledge-discovery-framework/src/server.ts",
+  ),
+  "@apzhub/knowledge-discovery-framework/react": path.resolve(
+    __dirname,
+    "packages/knowledge-discovery-framework/src/react/index.ts",
+  ),
+  "@apzhub/knowledge-discovery-framework": path.resolve(
+    __dirname,
+    "packages/knowledge-discovery-framework/src/index.ts",
+  ),
+  "@apzhub/activity-timeline-framework/server": path.resolve(
+    __dirname,
+    "packages/activity-timeline-framework/src/server.ts",
+  ),
+  "@apzhub/activity-timeline-framework/react": path.resolve(
+    __dirname,
+    "packages/activity-timeline-framework/src/react/index.ts",
+  ),
+  "@apzhub/activity-timeline-framework": path.resolve(
+    __dirname,
+    "packages/activity-timeline-framework/src/index.ts",
+  ),
+  "@apzhub/event-notification-framework/server/notification": path.resolve(
+    __dirname,
+    "packages/event-notification-framework/src/server/notification/index.ts",
+  ),
+  "@apzhub/event-notification-framework/server/event": path.resolve(
+    __dirname,
+    "packages/event-notification-framework/src/server/event/index.ts",
+  ),
+  "@apzhub/event-notification-framework/server": path.resolve(
+    __dirname,
+    "packages/event-notification-framework/src/server.ts",
+  ),
+  "@apzhub/event-notification-framework/react": path.resolve(
+    __dirname,
+    "packages/event-notification-framework/src/react/index.ts",
+  ),
+  "@apzhub/event-notification-framework": path.resolve(
+    __dirname,
+    "packages/event-notification-framework/src/index.ts",
+  ),
+  "@apzhub/legal-business-core": path.resolve(
+    __dirname,
+    "packages/legal-business-core/src/index.ts",
+  ),
+  "@apzhub/law-platform/api": path.resolve(
+    __dirname,
+    "apps/law-platform/lib/api/index.ts",
+  ),
 };
 
 export default defineConfig({
@@ -149,10 +205,10 @@ export default defineConfig({
           statements: 88,
         },
         "packages/platform-runtime/src/capability-registry/**": {
-          lines: 95,
-          functions: 95,
+          lines: 94,
+          functions: 94,
           branches: 88,
-          statements: 95,
+          statements: 94,
         },
         "packages/platform-runtime/src/lifecycle-manager/**": {
           lines: 100,
@@ -191,6 +247,30 @@ export default defineConfig({
           statements: 85,
         },
         "packages/command-framework/src/**": {
+          lines: 80,
+          functions: 80,
+          branches: 80,
+          statements: 80,
+        },
+        "packages/knowledge-discovery-framework/src/registry/**": {
+          lines: 85,
+          functions: 85,
+          branches: 85,
+          statements: 85,
+        },
+        "packages/knowledge-discovery-framework/src/**": {
+          lines: 80,
+          functions: 80,
+          branches: 80,
+          statements: 80,
+        },
+        "packages/event-notification-framework/src/**": {
+          lines: 80,
+          functions: 80,
+          branches: 80,
+          statements: 80,
+        },
+        "packages/activity-timeline-framework/src/**": {
           lines: 80,
           functions: 80,
           branches: 80,

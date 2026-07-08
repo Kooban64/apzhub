@@ -5,7 +5,9 @@ import type { ReactNode } from "react";
 import { ShellLayout, type ActivityBarItem, type SidebarItem } from "@apzhub/ui";
 
 import { WorkbenchCommandPalette } from "./command-palette/workbench-command-palette";
+import type { CommandPaletteMode } from "./command-palette/command-palette-mode";
 import { useCommandPaletteState } from "./command-palette/use-command-palette-state";
+import { useWorkbenchKnowledgeSelectionHandlers } from "./knowledge-overlay/workbench-knowledge-overlay";
 import {
   ContextMenuProvider,
   useContextMenuProvider,
@@ -15,6 +17,8 @@ import {
   type WorkbenchContextMenuInput,
 } from "./context-menu";
 import { ToolbarProvider, WorkbenchToolbar } from "./toolbar";
+import { WorkbenchNotifications } from "./notifications";
+import { WorkbenchContextPanel } from "./context-panel";
 import { useGlobalShortcuts } from "./desktop-shell/global-shortcuts";
 import { useCommandPaletteShortcut } from "./desktop-shell/palette-shortcut";
 
@@ -29,6 +33,8 @@ export interface DesktopShellProps {
   children: ReactNode;
   /** Renders Command Palette surface — requires CommandRegistryProvider ancestor (AF-011). */
   enableCommandPalette?: boolean;
+  /** Palette mode — knowledge mode queries via Knowledge Service (DF-013). */
+  commandPaletteMode?: import("./command-palette/command-palette-mode").CommandPaletteMode;
   commandPaletteOpen?: boolean;
   onCommandPaletteOpenChange?: (open: boolean) => void;
   /** Global shortcut listener — requires CommandRegistryProvider ancestor (AF-015). */
@@ -45,6 +51,22 @@ export interface DesktopShellProps {
   enableToolbar?: boolean;
   readonly toolbarRegion?: string;
   readonly onToolbarExecuted?: (commandId: string) => void;
+  /** Notification badge — requires NotificationServiceProvider ancestor (EN-013). */
+  enableNotificationBadge?: boolean;
+  /** Notification panel popover — requires NotificationServiceProvider + CommandRegistryProvider (EN-013). */
+  enableNotificationPanel?: boolean;
+  notificationPanelOpen?: boolean;
+  onNotificationPanelOpenChange?: (open: boolean) => void;
+  readonly onNotificationActionExecuted?: (actionId: string) => void;
+  /** Activity timeline feature — requires ActivityTimeline providers (AT-013). */
+  enableActivityTimeline?: boolean;
+  /** Context Panel Activity tab — requires ActivityTimeline + CommandRegistry providers (AT-013). */
+  enableActivityTimelinePanel?: boolean;
+  contextPanelOpen?: boolean;
+  onContextPanelOpenChange?: (open: boolean) => void;
+  readonly onActivityActionExecuted?: (actionId: string) => void;
+  /** E2E-only — forces Timeline Experience remount after Activity Service mutations. */
+  readonly activityTimelineRenderKey?: number;
 }
 
 function GlobalShortcutsLayer({
@@ -97,6 +119,51 @@ function ContextMenuShell({
   );
 }
 
+function CommandPaletteCommandsSurface({
+  paletteState,
+}: {
+  readonly paletteState: ReturnType<typeof useCommandPaletteState>;
+}) {
+  return (
+    <WorkbenchCommandPalette
+      open={paletteState.open}
+      onOpenChange={paletteState.onOpenChange}
+      mode="commands"
+    />
+  );
+}
+
+function CommandPaletteKnowledgeSurface({
+  paletteState,
+}: {
+  readonly paletteState: ReturnType<typeof useCommandPaletteState>;
+}) {
+  const knowledgeSelectionHandlers = useWorkbenchKnowledgeSelectionHandlers();
+
+  return (
+    <WorkbenchCommandPalette
+      open={paletteState.open}
+      onOpenChange={paletteState.onOpenChange}
+      mode="knowledge"
+      knowledgeSelectionHandlers={knowledgeSelectionHandlers}
+    />
+  );
+}
+
+function CommandPaletteSurface({
+  paletteState,
+  mode,
+}: {
+  readonly paletteState: ReturnType<typeof useCommandPaletteState>;
+  readonly mode: CommandPaletteMode;
+}) {
+  if (mode === "knowledge") {
+    return <CommandPaletteKnowledgeSurface paletteState={paletteState} />;
+  }
+
+  return <CommandPaletteCommandsSurface paletteState={paletteState} />;
+}
+
 export function DesktopShell({
   userName,
   environment,
@@ -107,6 +174,7 @@ export function DesktopShell({
   onSignOut,
   children,
   enableCommandPalette = false,
+  commandPaletteMode = "commands",
   commandPaletteOpen,
   onCommandPaletteOpenChange,
   enableGlobalShortcuts = false,
@@ -119,6 +187,17 @@ export function DesktopShell({
   enableToolbar = false,
   toolbarRegion = "workspace",
   onToolbarExecuted,
+  enableNotificationBadge = false,
+  enableNotificationPanel = false,
+  notificationPanelOpen,
+  onNotificationPanelOpenChange,
+  onNotificationActionExecuted,
+  enableActivityTimeline = false,
+  enableActivityTimelinePanel = false,
+  contextPanelOpen,
+  onContextPanelOpenChange,
+  onActivityActionExecuted,
+  activityTimelineRenderKey,
 }: DesktopShellProps) {
   const paletteState = useCommandPaletteState({
     open: commandPaletteOpen,
@@ -140,6 +219,25 @@ export function DesktopShell({
     children
   );
 
+  const workspaceWithContextPanel =
+    enableActivityTimeline && enableActivityTimelinePanel ? (
+      <div
+        className="flex min-h-0 flex-1"
+        data-testid="workbench-layout-with-context-panel"
+      >
+        <div className="min-w-0 flex-1 overflow-auto">{workspaceContent}</div>
+        <WorkbenchContextPanel
+          enableActivityTab={enableActivityTimeline}
+          panelOpen={contextPanelOpen}
+          onPanelOpenChange={onContextPanelOpenChange}
+          onActivityActionExecuted={onActivityActionExecuted}
+          activityTimelineRenderKey={activityTimelineRenderKey}
+        />
+      </div>
+    ) : (
+      workspaceContent
+    );
+
   const shell = (
     <ShellLayout
       userName={userName}
@@ -149,8 +247,19 @@ export function DesktopShell({
       onSidebarSelect={onSidebarSelect}
       activityBarItems={activityBarItems}
       onActivityBarSelect={onActivityBarSelect}
+      headerTrailing={
+        enableNotificationBadge || enableNotificationPanel ? (
+          <WorkbenchNotifications
+            enableBadge={enableNotificationBadge}
+            enablePanel={enableNotificationPanel}
+            panelOpen={notificationPanelOpen}
+            onPanelOpenChange={onNotificationPanelOpenChange}
+            onNotificationActionExecuted={onNotificationActionExecuted}
+          />
+        ) : undefined
+      }
     >
-      {workspaceContent}
+      {workspaceWithContextPanel}
     </ShellLayout>
   );
 
@@ -172,10 +281,7 @@ export function DesktopShell({
     <>
       {shellWithContextMenu}
       {enableCommandPalette ? (
-        <WorkbenchCommandPalette
-          open={paletteState.open}
-          onOpenChange={paletteState.onOpenChange}
-        />
+        <CommandPaletteSurface paletteState={paletteState} mode={commandPaletteMode} />
       ) : null}
       {enableGlobalShortcuts ? (
         <GlobalShortcutsLayer modalOpen={modalOpen} onExecuted={onShortcutExecuted} />

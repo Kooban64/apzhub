@@ -137,6 +137,23 @@ export {
 } from "./executor";
 
 export type {
+  ActionExecutedEventEnvelope,
+  ActionExecutedEventPayload,
+  ActionExecutedEventPublishResult,
+  ActionExecutedEventPublisher,
+  BuildActionExecutedEventEnvelopeOptions,
+} from "./audit";
+
+export {
+  CAPABILITY_ACTION_EXECUTED_EVENT_ID,
+  CAPABILITY_ACTION_EXECUTED_EVENT_VERSION,
+  CAPABILITY_ACTION_EXECUTED_PUBLISHER,
+  CAPABILITY_ACTION_EXECUTED_CATEGORY,
+  buildActionExecutedEventEnvelope,
+  publishActionExecutedEvent,
+} from "./audit";
+
+export type {
   ActionFrameworkContext,
   ActionFrameworkServerDependencies,
   ActionPermissionAdapter,

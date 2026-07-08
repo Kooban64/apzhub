@@ -209,21 +209,9 @@ Follows the [Registry Pattern](../architecture/APZHUB-Registry-Pattern.md):
 | Execution consumer | **None** — orchestrator returns entities; shell routes to Action/Workbench |
 | Server filter      | Permission adapter (mirror AF-005 pattern)                                 |
 
-**Manifest extension (planned DF-004):**
+**Manifest extension (DF-004 — implemented):**
 
-```yaml
-knowledge:
-  sources:
-    - id: example.custom
-      label: Example Custom Source
-      kind: registry-projection # or connector-api in M9+
-      tier: T3
-      permission: example.read
-      priority: 100
-      provides: [custom]
-```
-
-Manifest block name **`knowledge.sources`** is canonical. Early backlog references to `discovery.providers` are superseded by this field ([ADR-0028](../adr/ADR-0028-knowledge-source-model.md)).
+See [SPR-005-KDF-knowledge-manifest.md](./SPR-005-KDF-knowledge-manifest.md) and [knowledge-registry-relationship.md](../architecture/knowledge-registry-relationship.md).
 
 ### 5.4 DTO hydration
 
@@ -504,7 +492,7 @@ Package: `@apzhub/knowledge-discovery-framework` ([ADR-0027](../adr/ADR-0027-kno
 | Knowledge Source spec & taxonomy | **DF-001** (this document) |
 | Package scaffold                 | DF-002                     |
 | KnowledgeSourceRegistry          | DF-003                     |
-| Manifest `knowledge.sources`     | DF-004                     |
+| Manifest `knowledge.sources`     | **DF-004** ✅              |
 | Server filter DTO                | DF-005                     |
 | Orchestrator (keyword + fuzzy)   | DF-006                     |
 | Action Registry source           | DF-007                     |

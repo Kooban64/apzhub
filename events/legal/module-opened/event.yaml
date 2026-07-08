@@ -1,0 +1,16 @@
+manifestSchemaVersion: "1.0"
+id: legal-platform-module-opened
+name: Law Platform Module Opened
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: Emitted when a Law Platform module view is opened.
+
+event:
+  category: business
+  publisher: legal-platform
+  payload:
+    moduleId: string
+    moduleLabel: string

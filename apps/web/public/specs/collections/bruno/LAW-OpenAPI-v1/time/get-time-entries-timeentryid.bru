@@ -1,0 +1,22 @@
+meta {
+  name: GET /time-entries/{timeEntryId}
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/time-entries/{timeEntryId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Get time by ID
+  Permission: legal.time.view
+  Implementation: implemented
+}

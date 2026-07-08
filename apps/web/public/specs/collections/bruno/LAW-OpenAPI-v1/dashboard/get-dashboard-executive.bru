@@ -1,0 +1,22 @@
+meta {
+  name: GET /dashboard/executive
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/dashboard/executive
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Executive firm overview dashboard
+  Permission: legal.nav.dashboard.view
+  Implementation: planned
+}

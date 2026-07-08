@@ -1,0 +1,22 @@
+meta {
+  name: DELETE /time-entries/{timeEntryId}
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/time-entries/{timeEntryId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Delete time entry (hard delete when unbilled).
+  Permission: legal.time.delete
+  Implementation: implemented
+}

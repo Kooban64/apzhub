@@ -1,17 +1,17 @@
 # APZHUB Platform Reference Architecture
 
-> **Platform Version:** 2.0  
+> **Platform Version:** 5.0  
 > **Status:** Master architectural reference — consolidation only, no redesign  
-> **Authority:** [Architecture Baseline v1.0](./APZHUB-Architecture-Baseline-v1.0.md) · [Document 000](../000-apzhub-engineering-constitution.md)  
-> **Change control:** Baseline modifications require ADR. This document consolidates; it does not supersede the frozen baseline.
+> **Authority:** [Architecture Baseline v1.0](./APZHUB-Architecture-Baseline-v1.0.md) · [Document 000](../000-apzhub-engineering-constitution.md) · [Platform v5.0](../releases/APZHUB-Platform-v5.0.md)  
+> **Change control:** Baseline modifications require ADR. This document consolidates Platform 5.0 (M1–M7); it does not supersede the frozen baseline.
 
 ---
 
 ## Purpose
 
-This document is the **master architectural reference** for APZHUB Platform Version 2.0. It consolidates Runtime, Workbench, Action Framework, capability model, Platform Assets, registry pattern, Workbench surfaces, execution pipeline, API layering, diagnostics, package boundaries, and dependency rules into a single navigable reference.
+This document is the **master architectural reference** for APZHUB Platform Version 5.0. It consolidates Runtime, Workbench, Action Framework, Knowledge & Discovery Framework, Event & Notification Framework, Activity & Timeline Framework, capability model, Platform Assets, registry pattern, Workbench surfaces, execution pipelines, API layering, diagnostics, package boundaries, and dependency rules into a single navigable reference.
 
-Future milestones extend this architecture. They do not redesign it.
+Future milestones **consume** this architecture. They do not redesign it.
 
 ---
 
@@ -27,20 +27,23 @@ Dependencies flow **downward only**. Higher layers consume lower layers. Lower l
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
-│                 Business Capabilities (M9+)                    │
-│    Manifests · Platform Services · Integration adapters        │
+│              Future Business Capabilities (M9+)                │
+│    Manifests · Platform Services · Product validation streams  │
 └───────────────────────────┬─────────────────────────────────┘
                             │
 ┌───────────────────────────▼─────────────────────────────────┐
-│              Platform Capabilities (M4–M7, extending)          │
-│    Action Framework ✅ · Discovery (M5) · Notification (M6)   │
-│    Activity (M7) · Theme · Auth scaffold                     │
+│     Platform Identity, Administration & UX (M8 — planned)      │
+│    PermissionService · RBAC admin · Preferences persistence    │
+└───────────────────────────┬─────────────────────────────────┘
+                            │
+┌───────────────────────────▼─────────────────────────────────┐
+│              Platform Capabilities (M4–M7) ✅                    │
+│    Action ✅ · Knowledge ✅ · Event/Notification ✅ · Activity ✅  │
 └───────────────────────────┬─────────────────────────────────┘
                             │
 ┌───────────────────────────▼─────────────────────────────────┐
 │                  Workbench Framework (M3) ✅                   │
 │    @apzhub/workbench-framework                                 │
-│    Manager · Engines · API · React providers                 │
 └───────────────────────────┬─────────────────────────────────┘
                             │
 ┌───────────────────────────▼─────────────────────────────────┐
@@ -53,6 +56,28 @@ Dependencies flow **downward only**. Higher layers consume lower layers. Lower l
 │    @apzhub/ui · @apzhub/workspace · @apzhub/auth · apps/web    │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+### Platform capability stack (M4–M7)
+
+Dependencies flow **downward** through Workbench and Runtime. Platform capabilities are **siblings** — they do not import each other's internal modules.
+
+```text
+Platform Runtime
+        ↓
+Workbench Framework
+        ↓
+Action Framework
+        ↓
+Knowledge & Discovery Framework
+        ↓
+Event & Notification Framework
+        ↓
+Activity & Timeline Framework
+        ↓
+Future Business Capabilities (M9+)
+```
+
+Action Framework is listed first among platform capabilities because it is the primary **execution** and **event publication** path. Knowledge, Event/Notification, and Activity/Timeline are **parallel consumers** of registries and Event Bus — not sequential dependencies between themselves.
 
 ---
 
@@ -183,6 +208,276 @@ ActionWorkbenchShellProvider
 
 ---
 
+## Knowledge & Discovery Framework
+
+**Package:** `@apzhub/knowledge-discovery-framework`  
+**Exports:** `@apzhub/knowledge-discovery-framework`, `/server`, `/react`  
+**Status:** `KNOWLEDGE_DISCOVERY_FRAMEWORK_STATUS = "service"`
+
+### Canonical layering
+
+```text
+Knowledge Sources
+        ↓
+Knowledge Registry
+        ↓
+Knowledge Query API (internal)
+        ↓
+Knowledge Service          ← useKnowledgeService() [public]
+        ↓
+Knowledge Presentation Layer   (@apzhub/workspace)
+        ↓
+Knowledge Experiences
+```
+
+### Subsystems
+
+| Subsystem                      | Role                                                    |
+| ------------------------------ | ------------------------------------------------------- |
+| KnowledgeRegistry              | Source + provider registration; validation; metadata    |
+| KnowledgeProvider              | Projects upstream DTOs → `KnowledgeDocument` references |
+| KnowledgeDiscoveryOrchestrator | Multi-provider query, merge, dedupe                     |
+| RankingEngine                  | Keyword + fuzzy strategies; scaffold registry           |
+| KnowledgeService               | Public client boundary wrapping internal query client   |
+| Client hydration               | `KnowledgeDiscoveryProvider`, `useKnowledgeRegistry()`  |
+
+### Providers (M5)
+
+| Provider                             | Source id             | Projects                                      |
+| ------------------------------------ | --------------------- | --------------------------------------------- |
+| ActionRegistryKnowledgeProvider      | `platform.actions`    | Action Registry DTO → command documents       |
+| WorkbenchNavigationKnowledgeProvider | `platform.navigation` | Workbench Registry DTO → navigation documents |
+
+Providers return **references** (`actionRef`, `navigation`) — not executable handlers.
+
+### Application integration (M5)
+
+```text
+(platform)/layout [RSC]
+  loadKnowledgeSourceRegistryDto() + parallel command/workbench DTOs
+
+ActionWorkbenchShellProvider
+  KnowledgeDiscoveryProvider(dto, service=useAppKnowledgeService(...))
+    DesktopShell (commandPaletteMode, enableCommandPalette)
+    KnowledgeDiscoveryDiagnostics [dev/test only]
+```
+
+Health: `/api/health` → `knowledge` field via `loadKnowledgeHealthSummary()`.
+
+### Interaction with Action Framework
+
+```text
+Knowledge Experience selects command document
+        ↓
+delegateKnowledgeOverlaySelection()
+        ↓
+useCommandRegistry().execute(actionId)
+        ↓
+DefaultActionExecutor → WorkbenchCommandBridge
+```
+
+No parallel execution pipeline ([ADR-0029](../adr/ADR-0029-knowledge-discovery-execution-routing.md)).
+
+### Interaction with Workbench Framework
+
+```text
+Knowledge Experience selects navigation document
+        ↓
+activateViewForRoute(target)
+        ↓
+Workbench Request Bus → Navigation / View engines
+```
+
+**Deep dive:** [knowledge-discovery-framework.md](./knowledge-discovery-framework.md)
+
+---
+
+## Event & Notification Framework
+
+**Package:** `@apzhub/event-notification-framework`  
+**Exports:** `@apzhub/event-notification-framework`, `/server`, `/react`  
+**Status:** `EVENT_NOTIFICATION_SERVER_STATUS = "integration"` · `EVENT_NOTIFICATION_REACT_STATUS = "integration"`
+
+### Canonical layering
+
+```text
+Platform Capability
+        ↓
+Domain Event
+        ↓
+Event Bus
+        ↓
+Notification Mapping
+        ↓
+Notification Service          ← useNotificationService() [public]
+        ↓
+Notification Presentation Layer
+        ↓
+Notification Experiences
+```
+
+### Subsystems
+
+| Subsystem                  | Role                                       |
+| -------------------------- | ------------------------------------------ |
+| EventRegistry              | Event metadata index; envelope validation  |
+| InProcessEventBus          | Synchronous publish/subscribe              |
+| NotificationRegistry       | Route metadata; templates; channels        |
+| DefaultNotificationMapper  | Event Bus subscriber → NotificationItem    |
+| DefaultNotificationService | Session store; list; mark read; subscribe  |
+| Presentation helpers       | View models, grouping, relative timestamps |
+
+### Application integration (M6)
+
+```text
+(platform)/layout [RSC]
+  loadEventNotificationHydration()
+
+ActionWorkbenchShellProvider
+  NotificationRegistryProvider + NotificationServiceProvider (shared context)
+  createActionAuditEventBusHook → Event Bus
+  wireAppEventNotifications() → mapper → service
+    DesktopShell (enableNotificationBadge, enableNotificationPanel)
+    EventNotificationDiagnostics [dev/test only]
+```
+
+Health: `/api/health` → `events` + `notifications` fields.
+
+### Interaction with Action Framework
+
+```text
+DefaultActionExecutor.execute() success
+        ↓
+createActionAuditEventBusHook → capability.action.executed
+        ↓
+DefaultNotificationMapper → NotificationService
+        ↓
+NotificationBadgeExperience + NotificationPanelExperience
+```
+
+Audit hook does **not** change executor dispatch path.
+
+### Independence from Activity & Timeline (M7)
+
+Activity Mapping subscribes to the **same Event Bus** as Notification Mapping. Neither mapper publishes events or writes to the other's service.
+
+**Deep dive:** [event-notification-framework.md](./event-notification-framework.md)
+
+---
+
+## Activity & Timeline Framework
+
+**Package:** `@apzhub/activity-timeline-framework`  
+**Exports:** `@apzhub/activity-timeline-framework`, `/server`, `/react`  
+**Status:** `ACTIVITY_TIMELINE_FRAMEWORK_STATUS = "experiences"`
+
+### Canonical layering
+
+```text
+Platform Capability
+        ↓
+Domain Event
+        ↓
+Event Bus
+        ↓
+Activity Mapping
+        ↓
+Activity Service          ← ActivityTimelineService [public]
+        ↓
+Activity Presentation Layer
+        ↓
+Timeline Experiences
+        ↓
+Context Panel
+```
+
+### Subsystems
+
+| Subsystem                    | Role                                            |
+| ---------------------------- | ----------------------------------------------- |
+| ActivityRegistry             | Activity type metadata; event pattern binding   |
+| TimelineRegistry             | Timeline scope descriptors                      |
+| DefaultEventToActivityMapper | Event Bus subscriber → ActivityDocument         |
+| DefaultActivityService       | Session store; listActivities; queryTimeline    |
+| Presentation helpers         | View models, date grouping, relative timestamps |
+
+### Application integration (M7)
+
+```text
+(platform)/layout [RSC]
+  loadActivityTimelineHydration()
+
+ActionWorkbenchShellProvider
+  ActivityTimelineProvider + ActivityTimelineServiceProvider
+  wireAppActivityTimeline() → mapper → service (shared Event Bus)
+    DesktopShell (enableActivityTimeline, enableActivityTimelinePanel)
+    ActivityTimelineDiagnostics [dev/test only]
+```
+
+Health: `/api/health` → `activities` + `timelines` fields.
+
+### Interaction with Action Framework and Event Bus
+
+```text
+DefaultActionExecutor.execute() success
+        ↓
+createActionAuditEventBusHook → capability.action.executed
+        ↓
+        ├─► DefaultNotificationMapper → NotificationService → Badge/Panel
+        └─► DefaultEventToActivityMapper → ActivityService → Context Panel Timeline
+```
+
+Same event. Parallel fan-out. No cross-service writes.
+
+**Deep dive:** [activity-timeline-framework.md](./activity-timeline-framework.md)
+
+---
+
+## Framework integration (Platform 5.0)
+
+```text
+                    Runtime.bootstrap()
+                            │
+        ┌───────────────────┼───────────────────┬───────────────────┬──────────────┐
+        ▼                   ▼                   ▼                   ▼              ▼
+ Workbench Registry   Action Registry    Knowledge Registry   Event + Notif.   Activity +
+        │                   │                   │              Registries + Bus  Timeline
+        ▼                   ▼                   ▼                   ▼              ▼
+ WorkbenchProvider   CommandRegistry    KnowledgeDiscovery   Notification     ActivityTimeline
+        │              Provider               Provider         Providers        Providers
+        │                   │                   │                   │              │
+        │                   │ publish           │                   │ subscribe    │ subscribe
+        │                   └───────────────────┴───────────────────┴──────────────┘
+        │                                   Event Bus
+        ▼                                   /         \
+ ActionExecutor                      Notification    Activity
+        │                              Service         Service
+        ▼                                   │              │
+ Workbench Request Bus              Notification     Timeline Experiences
+        │                              Experiences          │
+        └───────────────┬───────────────────┴──────────────┘
+                        ▼
+                 Desktop Shell
+   (Action surfaces · Knowledge · Notifications · Activity Timeline)
+```
+
+| From                   | To                  | Relationship                                        |
+| ---------------------- | ------------------- | --------------------------------------------------- |
+| Runtime                | All frameworks      | Manifest discovery + capability records             |
+| Action Registry        | Knowledge Provider  | Read-only DTO projection                            |
+| Workbench Registry     | Knowledge Provider  | Read-only DTO projection                            |
+| Action Executor        | Event Bus           | Audit hook publishes on success                     |
+| Event Bus              | Notification Mapper | Subscribe → Notification Service                    |
+| Event Bus              | Activity Mapper     | Subscribe → Activity Service                        |
+| Knowledge Service      | Action Executor     | Selection delegation for commands                   |
+| Knowledge Service      | Workbench API       | Selection delegation for navigation                 |
+| Workbench              | Action Framework    | `resolveActionExecutor` in shell provider           |
+| ENF                    | Workspace           | Notification Experiences consume Presentation hooks |
+| ATF                    | Workspace           | Timeline Experiences consume Presentation hooks     |
+| PermissionService (M8) | All filter DTOs     | Session adapter — planned                           |
+
+---
+
 ## Capability Model
 
 A **Capability** is any registerable platform extension declared by manifest and discovered at runtime.
@@ -260,16 +555,21 @@ Consolidated pattern for all platform indexes:
 | Conflict observability        | Diagnostics report duplicates and orphans                 |
 | Read-only client view         | No runtime UI registration                                |
 
-### Registries in Platform 2.0
+### Registries in Platform 4.0
 
-| Registry            | Package             | Key              | Consumer                 |
-| ------------------- | ------------------- | ---------------- | ------------------------ |
-| Capability Registry | platform-runtime    | capability id    | Runtime, extraction      |
-| Workbench Registry  | workbench-framework | nav/view ids     | Navigation, View engines |
-| ActionRegistry      | command-framework   | action id        | Executor, surfaces       |
-| ShortcutRegistry    | command-framework   | normalised chord | Shell listener           |
+| Registry               | Package                               | Key               | Consumer                     |
+| ---------------------- | ------------------------------------- | ----------------- | ---------------------------- |
+| Capability Registry    | platform-runtime                      | capability id     | Runtime, extraction          |
+| Workbench Registry     | workbench-framework                   | nav/view ids      | Navigation, View engines     |
+| ActionRegistry         | command-framework                     | action id         | Executor, surfaces           |
+| ShortcutRegistry       | command-framework                     | normalised chord  | Shell listener               |
+| Knowledge Registry     | knowledge-discovery-framework         | source id         | Orchestrator, providers      |
+| Event Registry         | event-notification-framework          | event id          | Event Bus, subscribers       |
+| Notification Registry  | event-notification-framework          | route id          | Mapper, Notification Service |
+| Activity Registry (M7) | activity-timeline-framework (planned) | activity type id  | Activity mapper              |
+| Timeline Registry (M7) | activity-timeline-framework (planned) | timeline scope id | Activity Service             |
 
-**Future (M5+):** Discovery providers consume registries — no new execution pipeline.
+Knowledge providers **project** Action and Workbench registry DTOs — no new execution pipeline ([ADR-0029](../adr/ADR-0029-knowledge-discovery-execution-routing.md)).
 
 **Deep dive:** [APZHUB-Registry-Pattern.md](./APZHUB-Registry-Pattern.md)
 
@@ -288,11 +588,20 @@ Presentation-only regions in `@apzhub/workspace` (and structural chrome in `@apz
 | Context menu     | `enableContextMenu`     | Context-filtered registry      |
 | Toolbar          | `enableToolbar`         | Toolbar DTO + registry resolve |
 
+### Notification Experiences (M6)
+
+| Surface            | Enable flag               | Consumes                                            |
+| ------------------ | ------------------------- | --------------------------------------------------- |
+| Notification Badge | `enableNotificationBadge` | `useNotificationPresentation()`                     |
+| Notification Panel | `enableNotificationPanel` | `useNotificationPresentation()` + Service mark read |
+
 ### Structural shell (M3)
 
 Activity Bar, Sidebar, Status Bar, Header — registry-driven navigation; not Action Registry consumers (except where actions appear in toolbar).
 
-### Surface rules
+### Timeline Experiences (M7 — planned)
+
+Context panel Activity tab, timeline feed — consume Activity Service; no Event Bus import.
 
 **Do:** consume read-only registry; call `execute()`; map to UI models  
 **Do not:** register actions; evaluate permissions client-side; call engines
@@ -317,12 +626,16 @@ Handler dispatch
   service/event    → NOT_IMPLEMENTED
   ai-agent/voice  → Gateway stub → NOT_IMPLEMENTED
         ↓
-ActionResult → audit reference
+ActionResult → audit hook → capability.action.executed (M6)
+        ↓
+Notification Mapper → Notification Service (parallel: Activity Mapper M7)
 ```
 
 Shared executor in `apps/web`: one instance for Workbench API and `CommandRegistryProvider`.
 
-**Constraint for M5+:** Knowledge & Discovery Framework routes selections to **existing** `execute()` — no parallel pipeline.
+**Constraint for M5+:** Knowledge & Discovery routes selections to **existing** `execute()` — no parallel pipeline.
+
+**Constraint for M6+:** Notifications and Activity records are created only by Event Bus subscribers — not by modules or Experiences directly.
 
 ---
 
@@ -346,13 +659,15 @@ Action Framework sits in **Platform Capabilities** layer:
 
 ## Diagnostics
 
-| Layer            | Mechanism                                      |
-| ---------------- | ---------------------------------------------- |
-| Runtime          | `Runtime.getDiagnostics()`, health providers   |
-| Workbench        | Per-engine diagnostics via API                 |
-| Action Framework | Registry diagnostics, hydration diagnostics    |
-| Health endpoint  | `/api/health` — DB, Redis, runtime, `commands` |
-| Dev UI           | `ActionFrameworkDiagnostics` (dev only)        |
+| Layer                 | Mechanism                                                                                                |
+| --------------------- | -------------------------------------------------------------------------------------------------------- |
+| Runtime               | `Runtime.getDiagnostics()`, health providers                                                             |
+| Workbench             | Per-engine diagnostics via API                                                                           |
+| Action Framework      | Registry diagnostics, hydration diagnostics                                                              |
+| Knowledge & Discovery | Registry diagnostics, hydration diagnostics, query lifecycle                                             |
+| Event & Notification  | Registry diagnostics, mapper/service diagnostics, hydration                                              |
+| Health endpoint       | `/api/health` — DB, Redis, runtime, `commands`, `knowledge`, `events`, `notifications`                   |
+| Dev UI                | `ActionFrameworkDiagnostics`, `KnowledgeDiscoveryDiagnostics`, `EventNotificationDiagnostics` (dev only) |
 
 Production operators: health endpoint. Not dev-only hidden spans.
 
@@ -360,13 +675,15 @@ Production operators: health endpoint. Not dev-only hidden spans.
 
 ## Package boundaries
 
-| Package               | May import                                             | Must not import                                              |
-| --------------------- | ------------------------------------------------------ | ------------------------------------------------------------ |
-| `platform-runtime`    | config, shared, types                                  | ui, workspace, workbench-framework, command-framework, react |
-| `workbench-framework` | platform-runtime (server types), types                 | business capabilities                                        |
-| `command-framework`   | workbench-framework (bridge types), types              | apps/web                                                     |
-| `workspace`           | ui, command-framework/react, workbench-framework/react | platform-runtime/server (client)                             |
-| `apps/web`            | all platform packages                                  | — (composition root)                                         |
+| Package                         | May import                                                                                                                      | Must not import                                              |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `platform-runtime`              | config, shared, types                                                                                                           | ui, workspace, workbench-framework, command-framework, react |
+| `workbench-framework`           | platform-runtime (server types), types                                                                                          | business capabilities                                        |
+| `command-framework`             | workbench-framework (bridge types), types                                                                                       | apps/web                                                     |
+| `knowledge-discovery-framework` | command-framework, workbench-framework (DTO types), types                                                                       | apps/web (direct import discouraged)                         |
+| `event-notification-framework`  | types; integration with command-framework audit types                                                                           | workbench engines, apps/web internals                        |
+| `workspace`                     | ui, command-framework/react, workbench-framework/react, knowledge-discovery-framework/react, event-notification-framework/react | platform-runtime/server (client)                             |
+| `apps/web`                      | all platform packages                                                                                                           | — (composition root)                                         |
 
 ### Composition root
 
@@ -375,7 +692,9 @@ Production operators: health endpoint. Not dev-only hidden spans.
 - `runtime-init.ts` — Runtime bootstrap
 - `workbench-hydration.ts` — Workbench DTO
 - `command-hydration.ts` — Action Registry DTO
-- `action-workbench-shell-provider.tsx` — Provider stack
+- `knowledge-hydration.ts` — Knowledge Source Registry DTO
+- `event-notification-hydration.ts` — Event + Notification DTOs + shared context
+- `action-workbench-shell-provider.tsx` — Provider stack (Action + Knowledge + Notification)
 
 ---
 
@@ -400,6 +719,8 @@ packages/
   platform-runtime/       M2
   workbench-framework/    M3
   command-framework/      M4
+  knowledge-discovery-framework/  M5
+  event-notification-framework/   M6
   workspace/              Shell + surfaces
   ui/                     Design system
   auth/ config/ theme/    Foundation
@@ -412,13 +733,17 @@ testing/                  Playwright, fixtures
 
 ## Related documents
 
-| Document                                                                     | Topic                         |
-| ---------------------------------------------------------------------------- | ----------------------------- |
-| [APZHUB-Platform-v2.0.md](../releases/APZHUB-Platform-v2.0.md)               | Official Platform 2.0 release |
-| [APZHUB-Platform-Governance.md](../governance/APZHUB-Platform-Governance.md) | Process and standards         |
-| [APZHUB-Platform-Roadmap-v2.md](../roadmap/APZHUB-Platform-Roadmap-v2.md)    | Milestones 5–10               |
-| [Architecture Baseline v1.0](./APZHUB-Architecture-Baseline-v1.0.md)         | Frozen baseline               |
+| Document                                                                         | Topic                                                |
+| -------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| [APZHUB-Platform-v4.0.md](../releases/APZHUB-Platform-v4.0.md)                   | Official Platform 4.0 release — **current baseline** |
+| [APZHUB-Platform-v3.0.md](../releases/APZHUB-Platform-v3.0.md)                   | Platform 3.0 release (M1–M5)                         |
+| [APZHUB-Platform-Reference-Patterns.md](./APZHUB-Platform-Reference-Patterns.md) | Authoritative platform patterns (v4.0)               |
+| [APZHUB-Platform-Design-Patterns.md](./APZHUB-Platform-Design-Patterns.md)       | Historical v3.0 patterns                             |
+| [event-notification-framework.md](./event-notification-framework.md)             | M6 subsystem architecture                            |
+| [APZHUB-Platform-Governance.md](../governance/APZHUB-Platform-Governance.md)     | Process and standards                                |
+| [APZHUB-Platform-Roadmap-v2.md](../roadmap/APZHUB-Platform-Roadmap-v2.md)        | Milestones 5–10                                      |
+| [Architecture Baseline v1.0](./APZHUB-Architecture-Baseline-v1.0.md)             | Frozen baseline                                      |
 
 ---
 
-_APZHUB Platform Reference Architecture — Version 2.0 consolidation._
+_APZHUB Platform Reference Architecture — Version 4.0 consolidation._

@@ -28,6 +28,9 @@ packages/
   platform-runtime/    Runtime engine
   workbench-framework/ Workbench layer
   command-framework/   Action Framework (M4)
+  knowledge-discovery-framework/  Knowledge & Discovery Framework (M5)
+  event-notification-framework/  Event & Notification Framework (M6)
+  activity-timeline-framework/  Activity & Timeline Framework (M7)
   ui/                  Design system
   workspace/           Desktop Shell
   auth/                Authentication
@@ -50,7 +53,17 @@ Workbench Framework (SPR-003)
         ↓
 Action Framework (SPR-004)
         ↓
-Platform Capabilities (Sprint 005+)
+Knowledge & Discovery Framework (SPR-005) ✅
+        ↓
+Event & Notification Framework (SPR-006) ✅
+        ↓
+Activity & Timeline Framework (SPR-007) ✅ — Milestone 7 complete
+        ↓
+Platform Version 5.0 ✅
+        ↓
+Platform Identity, Administration & UX (SPR-008) — planning complete; await IAUX-001
+        ↓
+Platform Capabilities (Milestone 8+)
         ↓
 Business Capabilities (Milestone 9+)
 ```
@@ -104,7 +117,7 @@ Manifests are the **source of truth** for capability registration.
 - **Normalisation:** Platform Manifest Envelope internally
 - **Workbench blocks:** `workbench.navigation`, `workbench.view`, `workbench.actions`, `workbench.toolbar`
 
-Runtime discovers manifests at bootstrap. Workbench hydrates from **permission-filtered registry DTO** on the server. Action Framework hydrates from **permission-filtered Action Registry DTO** in parallel (AF-020).
+Runtime discovers manifests at bootstrap. Workbench hydrates from **permission-filtered registry DTO** on the server. Action Framework hydrates from **permission-filtered Action Registry DTO** in parallel (AF-020). Knowledge & Discovery hydrates from **permission-filtered Knowledge Source Registry DTO** in parallel (DF-015).
 
 Extension rules: optional fields only for backward compatibility; breaking changes need ADR and schema version bump.
 
@@ -114,13 +127,16 @@ See [platform-manifest-specification.md](../architecture/platform-manifest-speci
 
 ## How testing works
 
-| Layer            | Test focus                                                      |
-| ---------------- | --------------------------------------------------------------- |
-| Runtime          | Subsystem unit tests, bootstrap integration                     |
-| Workbench        | Engine tests, API tests, session restore                        |
-| Action Framework | Registry, executor, bridge, surfaces, app wiring                |
-| App              | E2E — login, shell, navigation, palette, actions, accessibility |
-| Capability       | Service unit tests, manifest validation                         |
+| Layer                 | Test focus                                                                                                   |
+| --------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Runtime               | Subsystem unit tests, bootstrap integration                                                                  |
+| Workbench             | Engine tests, API tests, session restore                                                                     |
+| Action Framework      | Registry, executor, bridge, surfaces, app wiring                                                             |
+| Knowledge & Discovery | Registry, providers, orchestrator, service, experiences                                                      |
+| Event & Notification  | Event/notification registries, bus, mapper, service, experiences                                             |
+| Activity & Timeline   | Activity/timeline registries, mapper, service, presentation, experiences                                     |
+| App                   | E2E — login, shell, navigation, palette, actions, knowledge, notifications, activity timeline, accessibility |
+| Capability            | Service unit tests, manifest validation                                                                      |
 
 All PRs must pass quality gates. Coverage thresholds enforced on platform packages.
 
@@ -177,14 +193,17 @@ Do not tag without owner approval.
 
 ## Which guide to read
 
-| You are working on…           | Read                                                                                                                              |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Runtime subsystems            | [Runtime Development Guide](./APZHUB-Runtime-Development-Guide.md)                                                                |
-| Workbench / shell             | [Workbench Development Guide](./APZHUB-Workbench-Development-Guide.md)                                                            |
-| Actions / palette / shortcuts | [Action Framework architecture](../architecture/command-framework.md) · [Onboarding](../developer/action-framework-onboarding.md) |
-| New capability                | [Capability Development Guide](./APZHUB-Capability-Development-Guide.md)                                                          |
-| Architecture decisions        | [Architecture Baseline v1.0](../architecture/APZHUB-Architecture-Baseline-v1.0.md)                                                |
-| Sprint planning               | `docs/sprint/SPR-NNN-*.md`                                                                                                        |
+| You are working on…           | Read                                                                                                                                                  |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Runtime subsystems            | [Runtime Development Guide](./APZHUB-Runtime-Development-Guide.md)                                                                                    |
+| Workbench / shell             | [Workbench Development Guide](./APZHUB-Workbench-Development-Guide.md)                                                                                |
+| Actions / palette / shortcuts | [Action Framework architecture](../architecture/command-framework.md) · [Onboarding](../developer/action-framework-onboarding.md)                     |
+| Knowledge / discovery         | [Knowledge & Discovery architecture](../architecture/knowledge-discovery-framework.md) · [Onboarding](../developer/knowledge-discovery-onboarding.md) |
+| Events / notifications        | [Event & Notification architecture](../architecture/event-notification-framework.md) · [Onboarding](../developer/event-notification-onboarding.md)    |
+| Activity / timeline           | [Activity & Timeline architecture](../architecture/activity-timeline-framework.md) · [Onboarding](../developer/activity-timeline-onboarding.md)       |
+| New capability                | [Capability Development Guide](./APZHUB-Capability-Development-Guide.md)                                                                              |
+| Architecture decisions        | [Architecture Baseline v1.0](../architecture/APZHUB-Architecture-Baseline-v1.0.md)                                                                    |
+| Sprint planning               | `docs/sprint/SPR-NNN-*.md`                                                                                                                            |
 
 ---
 

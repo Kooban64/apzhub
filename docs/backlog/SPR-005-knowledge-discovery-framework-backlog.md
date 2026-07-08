@@ -2,7 +2,7 @@
 
 > **Sprint:** SPR-005 — Knowledge & Discovery Framework  
 > **Milestone:** 5 — Knowledge & Discovery Framework  
-> **Mode:** DF-001 complete — **await review before DF-002**  
+> **Mode:** Sprint 005 closed — Milestone 5 complete; Platform 3.0 baseline established  
 > **Authority:** [Platform Roadmap v2](../roadmap/APZHUB-Platform-Roadmap-v2.md) · [Document 020](../020-unified-search-knowledge-discovery-framework.md) · [Platform Reference Architecture](../architecture/APZHUB-Platform-Reference-Architecture.md) · [Knowledge Source Spec](../specs/SPR-005-KDF-knowledge-sources.md)
 
 ---
@@ -83,7 +83,7 @@ DF-007 Action Registry knowledge source ── DF-008 Workbench navigation knowl
     ↓
 DF-009 Ranking scaffold (recency + frequency hooks)
     ↓
-DF-010 Client hydration + useKnowledgeDiscovery
+DF-010 Client hydration + useKnowledgeRegistry
     ↓
 DF-011 Header search UI ── DF-012 Knowledge discovery overlay
     ↓
@@ -154,111 +154,105 @@ Define the Knowledge Source Architecture — identify and model knowledge source
 
 ---
 
-## DF-002 — Package scaffold
+## DF-002 — Package scaffold ✅
 
 ### Objective
 
-Create Knowledge & Discovery Framework package scaffold with exports, status constant, and CI integration.
+Create Knowledge & Discovery Framework package — domain model, registry scaffold, DI, and three-layer architecture documentation.
 
 ### Scope
 
 - Package: `@apzhub/knowledge-discovery-framework` ([ADR-0027](../adr/ADR-0027-knowledge-discovery-framework-package.md))
+- Domain types: KnowledgeSource, KnowledgeDocument, KnowledgeQuery, KnowledgeResult, KnowledgeProvider, KnowledgeRegistry, KnowledgeContext, KnowledgeDiagnostics
 - `src/index.ts`, `src/server.ts`, `src/react/index.ts`
-- `package.json`, `tsconfig.json`
-- Vitest config inclusion
-- Root `transpilePackages` entry in `apps/web/next.config.ts` (when app integration story lands)
+- DI: `createKnowledgeDiscoveryContext()`
+- Three-layer architecture documentation
 
 ### Acceptance criteria
 
-- [ ] Package builds and typechecks
-- [ ] Empty exports compile
-- [ ] Workspace dependency from `apps/web` possible
-- [ ] No implementation beyond scaffold
+- [x] Package builds and typechecks
+- [x] Domain model and exports compile
+- [x] Workspace dependency possible
+- [x] No search, indexing, persistence, or production sources
+- [x] Quality gates pass
+- [ ] Owner review before DF-003
 
 ### Dependencies
 
-- DF-001
+- DF-001 ✅
 
 ### Tests
 
-- Package import smoke test
+- Package, interface, DI, diagnostics tests — 14 new tests
 
 ### Estimated effort
 
 **S**
 
+### Completion report
+
+[DF-002-completion-report.md](../sprint/DF-002-completion-report.md)
+
 ---
 
-## DF-003 — KnowledgeSourceRegistry core
+## DF-003 — KnowledgeRegistry core ✅
 
 ### Objective
 
-Implement in-memory KnowledgeSourceRegistry following Registry Pattern.
+Complete the Knowledge Registry — validation, duplicate detection, atomic registration, diagnostics, and metadata.
 
 ### Scope
 
-- `KnowledgeSourceRegistry` — register, get, list, diagnostics
-- Provider descriptor types (id, label, kind, permission, priority)
-- Duplicate detection diagnostics
-- Deep-freeze descriptors
+- `DefaultKnowledgeRegistry` — full implementation
+- Validation, duplicate fail-fast, atomic batch registration
+- `KnowledgeSourceMetadata`, `KnowledgeRegistryMetadata`, `KnowledgeDiagnostics`
+- Registry specification and metadata specification
+- KnowledgeDocument → KnowledgeResource evolution note (docs only)
 
 ### Acceptance criteria
 
-- [ ] Register/list/get providers
-- [ ] Diagnostics report counts and duplicates
-- [ ] Registry Pattern principles followed (registration not execution)
-- [ ] Unit tests ≥ 85% on registry module
+- [x] Registry validation and duplicate detection
+- [x] Atomic registration APIs
+- [x] Metadata and diagnostics exposed
+- [x] Registry does not invoke providers
+- [x] No search, index, persist, orchestration
+- [x] Tests ≥85% on registry module
+- [x] Quality gates pass
+- [x] Owner review before DF-004
 
-### Dependencies
+### Completion report
 
-- DF-002
-
-### Tests
-
-- `knowledge-source-registry.test.ts` — register, duplicate, list, diagnostics
-
-### Estimated effort
-
-**M**
+[DF-003-completion-report.md](../sprint/DF-003-completion-report.md)
 
 ---
 
-## DF-004 — Provider registration from manifests
+## DF-004 — Manifest `knowledge.sources` ✅
 
 ### Objective
 
-Extend Manifest Engine (via ADR) to declare `knowledge.sources`; extract at bootstrap.
+Extend Manifest Engine to declare `knowledge.sources`; extract and register at bootstrap.
 
 ### Scope
 
 - Zod schema for `knowledge.sources` manifest block
-- Extraction helper: capability records → provider descriptors
-- Integration with `Runtime.bootstrap()` chain
+- Extraction helper: capability records → Knowledge Source descriptors
+- Bootstrap: platform catalogue + manifest extraction + atomic registration
 - Fixture manifests for tests
 
 ### Acceptance criteria
 
-- [ ] Valid manifests extract providers
-- [ ] Invalid manifests fail validation with actionable errors
-- [ ] Extraction unit tests with fixtures
-- [ ] No changes to Runtime orchestrator pipeline without ADR
+- [x] Valid manifests extract sources
+- [x] Invalid manifests fail validation with actionable errors
+- [x] Extraction unit tests with fixtures
+- [x] No changes to Runtime orchestrator pipeline
 
-### Dependencies
+### Completion report
 
-- DF-003, DF-001 ADR
-
-### Tests
-
-- Manifest validation tests
-- Extraction unit tests
-
-### Estimated effort
-
-**L**
+[DF-004-completion-report.md](../sprint/DF-004-completion-report.md)
 
 ---
 
-## DF-005 — Server filter DTO
+## DF-005 — Server filter DTO ✅
 
 ### Objective
 
@@ -273,26 +267,18 @@ Permission-filter knowledge source DTO server-side before client hydration.
 
 ### Acceptance criteria
 
-- [ ] Filtered DTO strips disallowed providers
-- [ ] Diagnostics report registered vs filtered counts
-- [ ] Unit tests for filter edge cases
-- [ ] Exported from `@apzhub/knowledge-discovery-framework/server`
+- [x] Filtered DTO strips disallowed sources
+- [x] Diagnostics report registered vs filtered counts
+- [x] Unit tests for filter edge cases
+- [x] Exported from `@apzhub/knowledge-discovery-framework/server`
 
-### Dependencies
+### Completion report
 
-- DF-003
-
-### Tests
-
-- `filter-knowledge-source-registry-dto.test.ts`
-
-### Estimated effort
-
-**M**
+[DF-005-completion-report.md](../sprint/DF-005-completion-report.md)
 
 ---
 
-## DF-006 — KnowledgeDiscoveryOrchestrator (keyword + fuzzy)
+## DF-006 — KnowledgeDiscoveryOrchestrator (keyword + fuzzy) ✅
 
 ### Objective
 
@@ -300,193 +286,150 @@ Implement query orchestration across registered knowledge sources with keyword a
 
 ### Scope
 
-- `KnowledgeDiscoveryOrchestrator.query({ text, context, permissions })`
+- `KnowledgeDiscoveryOrchestrator.query({ text, context, limit })`
 - Provider dispatch in priority order
-- Result merging and deduplication by entity id
-- Fuzzy scoring scaffold (reuse patterns from Action Registry search where appropriate)
+- Result merging and deduplication by document id
+- Fuzzy scoring (Action Registry search pattern)
 
 ### Acceptance criteria
 
-- [ ] Keyword search returns ranked results
-- [ ] Fuzzy matching works on label and keywords
-- [ ] Empty query handled gracefully
-- [ ] Diagnostics on query duration and provider counts
-- [ ] No execution — returns knowledge entities with action/navigation references only
+- [x] Keyword search returns ranked results
+- [x] Fuzzy matching works on title and keywords
+- [x] Empty query handled gracefully
+- [x] Diagnostics on query duration and provider counts
+- [x] No execution — returns knowledge documents with action/navigation references only
 
-### Dependencies
+### Completion report
 
-- DF-003
-
-### Tests
-
-- Orchestrator unit tests with mock providers
-- Fuzzy ranking tests
-
-### Estimated effort
-
-**L**
+[DF-006-completion-report.md](../sprint/DF-006-completion-report.md)
 
 ---
 
-## DF-007 — Action Registry knowledge source
+## DF-007 — Action Registry knowledge source ✅
 
 ### Objective
 
-Implement built-in T0 source that projects Action Registry entries as knowledge entities.
-
-### Scope
-
-- `ActionRegistryKnowledgeSource` — reads from ActionRegistry snapshot
-- Maps actions to knowledge entities (entityId, title, group, shortcut, actionRef)
-- Permission-aware via registry filter (already applied server-side)
-- Consumes `@apzhub/command-framework` — no duplicate action storage
+Implement built-in T0 source that projects Action Registry entries as knowledge documents.
 
 ### Acceptance criteria
 
-- [ ] Platform and manifest actions appear in knowledge results
-- [ ] Selecting result references `actionRef` for existing `execute()` path
-- [ ] No duplicate Action Registry
-- [ ] Integration test with `bootstrapActionRegistry`
+- [x] Platform and manifest actions appear in knowledge results
+- [x] Results reference `actionRef` for existing `execute()` path
+- [x] No duplicate Action Registry
+- [x] Provider tests with fixture `ActionRegistryDto`
 
-### Dependencies
+### Completion report
 
-- DF-006, Platform 2.0 Action Framework
-
-### Tests
-
-- Provider unit tests
-- Integration test with command-framework bootstrap
-
-### Estimated effort
-
-**M**
+[DF-007-completion-report.md](../sprint/DF-007-completion-report.md)
 
 ---
 
-## DF-008 — Workbench navigation knowledge source
+## DF-008 — Workbench navigation knowledge source ✅
 
 ### Objective
 
-Implement T0 source projecting Workbench navigation items as knowledge entities.
-
-### Scope
-
-- `WorkbenchNavigationKnowledgeSource`
-- Consumes Workbench registry DTO (navigation contributions)
-- Results route to Workbench navigation requests (not new path)
+Implement T0 source projecting Workbench navigation items as knowledge documents.
 
 ### Acceptance criteria
 
-- [ ] Activity bar workspaces discoverable by label
-- [ ] Sidebar items discoverable within active workspace context
-- [ ] Selection triggers existing Workbench navigation API
-- [ ] Integration test with workbench registry hydration
+- [x] Activity bar workspaces discoverable by label
+- [x] Sidebar items discoverable with parent/child metadata
+- [x] Results carry `navigation` references for existing Workbench API
+- [x] Provider tests with fixture `WorkbenchRegistryDto`
 
-### Dependencies
+### Completion report
 
-- DF-006, Platform 2.0 Workbench Framework
-
-### Tests
-
-- Provider unit tests
-- Integration with workbench registry DTO fixtures
-
-### Estimated effort
-
-**M**
+[DF-008-completion-report.md](../sprint/DF-008-completion-report.md)
 
 ---
 
-## DF-009 — Ranking scaffold (recency + frequency)
+## DF-009 — Ranking scaffold (recency + frequency) ✅
 
 ### Objective
 
 Scaffold ranking hooks for recently used and frequently used entities.
 
-### Scope
+### Scope (DF-009 delivered)
 
-- `KnowledgeRankingContext` interface
-- In-memory recency/frequency store (client session scope)
-- `recordKnowledgeSelection(entityId)` hook
-- Ranking boost applied in orchestrator merge
-- Extension points for Document 023 preferences (stub)
+- `RankingEngine` interface and `DefaultRankingEngine`
+- `RankingStrategy` abstraction
+- Keyword and fuzzy strategies
+- Orchestrator delegation (behaviour unchanged)
 
 ### Acceptance criteria
 
-- [ ] Recent selections boost ranking
-- [ ] Frequency counter increments on selection
-- [ ] Diagnostics expose store sizes
-- [ ] No PostgreSQL persistence (deferred M8)
+- [x] Ranking engine with deterministic strategies
+- [x] Orchestrator delegates ranking
+- [x] Ranking diagnostics exposed
+- [x] Dependency injection via composition root
+- [ ] Recency / frequency boost (deferred — extension point only)
+
+### Completion report
+
+[DF-009-completion-report.md](../sprint/DF-009-completion-report.md)
+
+---
+
+## DF-010 — Client hydration + useKnowledgeRegistry ✅
+
+### Objective
+
+Hydrate read-only client Knowledge Registry from server DTO; React provider and hook.
+
+### Scope
+
+- `createKnowledgeRegistryFromDto(dto)`
+- `KnowledgeRegistryProvider` React context
+- `useKnowledgeRegistry()` — sources, isReady, diagnostics, version metadata
+- Client DTO validation before hydration
+- Client diagnostics and synchronisation metadata
+
+### Acceptance criteria
+
+- [x] Server DTO hydrates client read-only view
+- [x] Provider exposes hydrated registry (no query — deferred to DF-011+)
+- [x] React hook tests with test provider
+- [x] One-way hydration documented (no client registration)
+- [ ] Owner review before DF-011
 
 ### Dependencies
 
-- DF-006
+- DF-005
 
 ### Tests
 
-- Ranking unit tests
-- Recency boost verification
+- `create-knowledge-registry-from-dto.test.ts`
+- `use-knowledge-registry.test.tsx`
 
 ### Estimated effort
 
 **M**
 
----
-
-## DF-010 — Client hydration + useKnowledgeDiscovery
-
-### Objective
-
-Hydrate read-only client knowledge discovery context from server DTO; React hooks.
-
-### Scope
-
-- `createKnowledgeDiscoveryFromDto(dto)`
-- `KnowledgeDiscoveryProvider` React context
-- `useKnowledgeDiscovery()` — query, results, isReady, diagnostics
-- `useKnowledgeDiscoveryQuery()` debounced hook
-
-### Acceptance criteria
-
-- [ ] Server DTO hydrates client read-only view
-- [ ] Provider exposes orchestrator query method
-- [ ] React hook tests with test provider
-- [ ] One-way hydration documented (no client registration)
-
-### Dependencies
-
-- DF-005, DF-006
-
-### Tests
-
-- `create-knowledge-discovery-from-dto.test.ts`
-- `use-knowledge-discovery.test.tsx`
-
-### Estimated effort
-
-**M**
+Completion report: [DF-010-completion-report.md](../sprint/DF-010-completion-report.md)
 
 ---
 
-## DF-011 — Header search UI
+## DF-011 — Client Knowledge Query API ✅
 
 ### Objective
 
-Implement header search input in Desktop Shell triggering knowledge discovery query.
+Implement client-side Knowledge Query API — presentation-agnostic query hook and orchestrator boundary integration.
 
 ### Scope
 
-- Search input component in `@apzhub/ui` or `@apzhub/workspace`
-- Wire to `useKnowledgeDiscovery().query()`
-- Keyboard activation (Document 020 default chord — ADR)
-- Accessible label and focus management
+- `useKnowledgeQuery()` with lifecycle state
+- `KnowledgeDiscoveryProvider` with query client DI
+- `KnowledgeQueryClient` + orchestrator adapter
+- Client query diagnostics
+- No search UI
 
 ### Acceptance criteria
 
-- [ ] Search input visible in authenticated shell header
-- [ ] Typing triggers debounced knowledge discovery query
-- [ ] WCAG AA keyboard accessible
-- [ ] Component tests pass
+- [x] Query lifecycle (idle, loading, success, error)
+- [x] Consumes hydrated registry without duplication
+- [x] Orchestrator boundary via injected client
+- [x] Hook and provider tests with mocked client
+- [ ] Owner review before DF-012
 
 ### Dependencies
 
@@ -494,16 +437,19 @@ Implement header search input in Desktop Shell triggering knowledge discovery qu
 
 ### Tests
 
-- Component tests (RTL)
-- a11y axe check
+- `execute-knowledge-query.test.ts`
+- `create-knowledge-query-client-from-orchestrator.test.ts`
+- `use-knowledge-query.test.tsx`
 
 ### Estimated effort
 
 **M**
 
+Completion report: [DF-011-completion-report.md](../sprint/DF-011-completion-report.md)
+
 ---
 
-## DF-012 — Knowledge discovery overlay
+## DF-012 — Knowledge Overlay ✅
 
 ### Objective
 
@@ -511,18 +457,19 @@ Implement knowledge discovery results overlay (grouped results presentation).
 
 ### Scope
 
-- `KnowledgeDiscoveryOverlay` component in `@apzhub/workspace`
-- Grouped results by provider kind (Actions, Navigation, future)
+- `KnowledgeOverlay` + `WorkbenchKnowledgeOverlay` in `@apzhub/workspace`
+- Grouped results by knowledge source
 - Selection handler routes to Action `execute()` or Workbench navigation
-- Empty state and loading state
+- Loading, empty, and error states
 
 ### Acceptance criteria
 
-- [ ] Overlay renders grouped results
-- [ ] Action selection calls existing `useCommandRegistry().execute()`
-- [ ] Navigation selection calls Workbench API
-- [ ] No new execution pipeline introduced
-- [ ] Component + integration tests
+- [x] Overlay renders grouped results
+- [x] Action selection delegates via injected handlers (Action Framework)
+- [x] Navigation selection delegates via injected handlers (Workbench)
+- [x] No new execution pipeline introduced
+- [x] Component + integration tests
+- [ ] Owner review before DF-013
 
 ### Dependencies
 
@@ -530,16 +477,19 @@ Implement knowledge discovery results overlay (grouped results presentation).
 
 ### Tests
 
-- Component tests
-- Integration test with mock providers
+- `knowledge-overlay.test.tsx`
+- `workbench-knowledge-overlay.test.tsx`
+- `group-knowledge-documents.test.ts`
 
 ### Estimated effort
 
 **L**
 
+Completion report: [DF-012-completion-report.md](../sprint/DF-012-completion-report.md)
+
 ---
 
-## DF-013 — Palette integration
+## DF-013 — Palette integration ✅
 
 ### Objective
 
@@ -547,105 +497,118 @@ Integrate knowledge results with Command Palette — commands as knowledge entit
 
 ### Scope
 
-- Palette may consume KnowledgeDiscoveryOrchestrator for unified search within palette
-- OR knowledge overlay coexists with palette (ADR decision in DF-001 — [ADR-0029](../adr/ADR-0029-knowledge-discovery-execution-routing.md))
-- Ensure no duplicate action lists maintained in UI
+- Command Palette `mode="knowledge"` consumes `useKnowledgeQuery()`
+- Reuses `groupKnowledgeDocuments()` and overlay selection delegation
+- No duplicate action lists maintained in UI
 - Document interaction model in spec
 
 ### Acceptance criteria
 
-- [ ] Single source of truth for action discoverability
-- [ ] Palette Ctrl+Shift+P behaviour preserved
-- [ ] Knowledge overlay and palette documented interaction
-- [ ] E2E: search finds platform action and executes via existing pipeline
+- [x] Single source of truth for action discoverability
+- [x] Palette Ctrl+Shift+P behaviour preserved (commands mode default)
+- [x] Knowledge palette and overlay share delegation model
+- [x] Component + integration tests
+- [ ] Owner review before DF-014
 
 ### Dependencies
 
-- DF-007, DF-012, Platform 2.0 Command Palette
+- DF-007, DF-011, DF-012, Platform 2.0 Command Palette
 
 ### Tests
 
-- Integration tests
-- E2E scenario in DF-016
+- `workbench-command-palette-knowledge.test.tsx`
+- `map-knowledge-groups-to-palette-items.test.ts`
 
 ### Estimated effort
 
 **M**
 
+Completion report: [DF-013-completion-report.md](../sprint/DF-013-completion-report.md)
+
 ---
 
-## DF-014 — Semantic / AI discovery stubs
+## DF-014 — Ranking strategy scaffolds ✅
 
 ### Objective
 
-Export extension interfaces for semantic and AI-assisted knowledge sources; stub implementations.
+Extend the Ranking Engine with future ranking strategy scaffolding — no semantic, AI, or behavioural changes.
 
 ### Scope
 
-- `SemanticKnowledgeSource` interface — `search(query, context)` stub returns NOT_IMPLEMENTED
-- `AiKnowledgeSource` interface — stub returns NOT_IMPLEMENTED
-- Registration in KnowledgeSourceRegistry with `status: planned`
-- Document 020 alignment notes
+- `SemanticRankingStrategy`, `RecencyRankingStrategy`, `FrequencyRankingStrategy`, `PersonalisationRankingStrategy`, `AIRerankingStrategy`
+- Strategy diagnostics and `RankingStrategyRegistry`
+- DI extension via `createKnowledgeDiscoveryContext().rankingStrategyRegistry`
+- `DefaultRankingEngine` behaviour unchanged
 
 ### Acceptance criteria
 
-- [ ] Interfaces exported and documented
-- [ ] Stubs return structured failure — no throw
-- [ ] Orchestrator skips or reports planned providers in diagnostics
-- [ ] No AI service integration
+- [x] Planned strategy classes exported
+- [x] Structured `not_implemented` diagnostics — no throw
+- [x] Registry lists active + planned strategies
+- [x] DI registration extension points
+- [x] DefaultRankingEngine / orchestrator behaviour unchanged
+- [x] No semantic, AI, persistence, or provider changes
+- [ ] Owner review before DF-015
 
 ### Dependencies
 
-- DF-003, DF-006
+- DF-009
 
 ### Tests
 
-- Stub unit tests
+- `planned-ranking-strategies.test.ts`
+- `knowledge-discovery-context-ranking.test.ts`
 
 ### Estimated effort
 
 **S**
 
+Completion report: [DF-014-completion-report.md](../sprint/DF-014-completion-report.md)
+
 ---
 
-## DF-015 — Application integration
+## DF-015 — Knowledge Service + application integration ✅
 
 ### Objective
 
-Wire Knowledge & Discovery Framework into `apps/web` authenticated shell.
+Introduce the public Knowledge Service API and perform the first application integration in `apps/web`.
 
 ### Scope
 
-- `loadKnowledgeSourceRegistryDto()` server hydration (parallel to command/workbench)
-- `KnowledgeDiscoveryShellProvider` or extend `ActionWorkbenchShellProvider`
-- Enable header search + overlay in `DesktopShell`
-- Health endpoint optional `knowledge` field (non-breaking)
-- `next.config.ts` transpilePackages
+- `KnowledgeService` interface + `DefaultKnowledgeService`
+- `createKnowledgeService()` + `useKnowledgeService()`
+- Adapt internal `KnowledgeQueryClient` behind the service
+- `loadKnowledgeSourceRegistryDto()` + `KnowledgeDiscoveryProvider` in authenticated shell
+- Health endpoint `knowledge` field
 
 ### Acceptance criteria
 
-- [ ] Authenticated users receive hydrated knowledge discovery context
-- [ ] Header search and overlay functional end-to-end
-- [ ] Action execution routes through existing Action Framework pipeline
-- [ ] Navigation routes through Workbench API
-- [ ] Integration tests for app wiring
+- [x] Knowledge Service is the public client boundary
+- [x] Experiences consume `useKnowledgeService()` (not orchestrator)
+- [x] `apps/web` hydrates knowledge DTO + service
+- [x] Health exposes framework, registry, service, query availability
+- [x] Ranking, providers, registries, query behaviour unchanged
+- [ ] Owner review before DF-016
 
 ### Dependencies
 
-- DF-010, DF-011, DF-012
+- DF-010, DF-011, DF-012, DF-013, DF-014
 
 ### Tests
 
-- App integration tests
-- Health endpoint test if field added
+- `knowledge-service.test.ts`
+- `use-knowledge-service.test.tsx`
+- `knowledge-hydration.test.ts`
 
 ### Estimated effort
 
 **L**
 
+Completion report: [DF-015-completion-report.md](../sprint/DF-015-completion-report.md)
+
 ---
 
-## DF-016 — E2E tests
+## DF-016 — E2E tests ✅
 
 ### Objective
 
@@ -654,14 +617,15 @@ Playwright E2E coverage for Knowledge & Discovery Framework integration.
 ### Scope
 
 - `testing/playwright/e2e/spr-005-knowledge-discovery-framework.spec.ts`
-- Scenarios: header search, result selection, action execution via knowledge discovery, navigation discovery
-- Health endpoint knowledge field (if implemented)
+- Health endpoint `knowledge` field
+- Authenticated shell Knowledge Service diagnostics
+- Palette knowledge mode query + selection delegation (via `?paletteMode=knowledge`)
 
 ### Acceptance criteria
 
-- [ ] E2E suite passes in CI
-- [ ] No regression in existing 19 E2E tests
-- [ ] Authenticated shell scenarios covered
+- [x] E2E suite passes in CI
+- [x] No regression in existing E2E tests
+- [x] Authenticated shell scenarios covered
 
 ### Dependencies
 
@@ -675,9 +639,11 @@ Playwright E2E coverage for Knowledge & Discovery Framework integration.
 
 **M**
 
+Completion report: [DF-016-completion-report.md](../sprint/DF-016-completion-report.md)
+
 ---
 
-## DF-017 — Documentation
+## DF-017 — Documentation ✅
 
 ### Objective
 
@@ -686,21 +652,24 @@ Document implemented Knowledge & Discovery Framework for Platform 2.0 extension.
 ### Scope
 
 - `docs/architecture/knowledge-discovery-framework.md`
-- Update Platform Reference Architecture (knowledge & discovery section — post-implementation)
-- Developer onboarding addendum
+- Update Platform Reference Architecture (knowledge & discovery section)
+- Developer onboarding guide
+- Governance guides (Engineering Handbook, Capability, Runtime, Workbench)
+- Architecture review + production readiness review
 - `packages/knowledge-discovery-framework/README.md`
-- CHANGELOG entry
+- Documentation index updates
 
 ### Acceptance criteria
 
-- [ ] Architecture doc complete
-- [ ] Onboarding covers adding a knowledge source
-- [ ] Registry Pattern and no-new-pipeline constraint documented
-- [ ] No production code in this story
+- [x] Architecture doc complete
+- [x] Onboarding covers adding a knowledge source, provider, service, experience
+- [x] Registry Pattern and no-new-pipeline constraint documented
+- [x] Terminology aligned to canonical layering
+- [x] No production code in this story
 
 ### Dependencies
 
-- DF-015
+- DF-016
 
 ### Tests
 
@@ -710,9 +679,11 @@ Document implemented Knowledge & Discovery Framework for Platform 2.0 extension.
 
 **M**
 
+Completion report: [DF-017-completion-report.md](../sprint/DF-017-completion-report.md)
+
 ---
 
-## DF-018 — Sprint closeout
+## DF-018 — Sprint closeout ✅
 
 ### Objective
 
@@ -721,22 +692,21 @@ Close Sprint 005; Milestone 5 review; release preparation.
 ### Scope
 
 - `docs/sprint/SPR-005-closeout.md`
-- `docs/reviews/SPR-005-architecture-review.md`
 - `docs/reviews/MILESTONE-005-knowledge-discovery-framework-review.md`
-- `docs/releases/v0.5.0-knowledge-discovery-framework.md` (proposed)
+- `docs/releases/v0.5.0-knowledge-discovery-framework.md`
 - Consolidated technical debt
 - Do not create Git tag
 
 ### Acceptance criteria
 
-- [ ] All DF-001–DF-017 complete
-- [ ] Quality gates pass
-- [ ] Milestone verdict documented
-- [ ] Owner approval gate for Sprint 006
+- [x] All DF-001–DF-017 complete
+- [x] Quality gates pass
+- [x] Milestone verdict documented
+- [ ] Owner approval gate for Milestone 6 planning
 
 ### Dependencies
 
-- DF-001 through DF-017
+- DF-017
 
 ### Tests
 
@@ -745,6 +715,8 @@ Close Sprint 005; Milestone 5 review; release preparation.
 ### Estimated effort
 
 **M**
+
+Closeout: [SPR-005-closeout.md](../sprint/SPR-005-closeout.md)
 
 ---
 
@@ -780,10 +752,10 @@ pnpm test:e2e    # when UI/integration affected
 
 ## Stop condition
 
-**Do not begin DF-002** until:
+**Do not begin DF-016** until:
 
-1. DF-001 completion report reviewed and approved
-2. Owner confirms ADRs 0027–0029
+1. DF-015 completion report reviewed and approved
+2. Owner confirms DF-015 acceptance criteria
 
 ---
 

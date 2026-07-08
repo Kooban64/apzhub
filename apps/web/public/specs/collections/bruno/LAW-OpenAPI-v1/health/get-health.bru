@@ -1,0 +1,21 @@
+meta {
+  name: GET /health
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/health
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  API liveness probe
+  Implementation: implemented
+}

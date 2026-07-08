@@ -1,0 +1,22 @@
+meta {
+  name: DELETE /documents/{documentId}
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/documents/{documentId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Archive document metadata.
+  Permission: legal.document.archive
+  Implementation: implemented
+}

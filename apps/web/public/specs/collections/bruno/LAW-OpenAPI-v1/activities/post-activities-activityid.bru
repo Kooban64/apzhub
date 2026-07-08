@@ -1,0 +1,21 @@
+meta {
+  name: POST /activities/{activityId}
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/activities/{activityId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  POST not supported — activities are system-generated
+  Implementation: unsupported
+}

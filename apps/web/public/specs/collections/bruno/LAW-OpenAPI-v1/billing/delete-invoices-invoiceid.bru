@@ -1,0 +1,22 @@
+meta {
+  name: DELETE /invoices/{invoiceId}
+  type: http
+  seq: 1
+}
+
+delete {
+  url: {{baseUrl}}/invoices/{invoiceId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Void invoice when in draft; cancel otherwise.
+  Permission: legal.invoice.cancel
+  Implementation: implemented
+}

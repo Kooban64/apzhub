@@ -1,0 +1,11 @@
+export const LAW_API_CALENDAR_EVENT_VIEW_PERMISSION = "legal.calendar.view";
+export const LAW_API_CALENDAR_EVENT_CREATE_PERMISSION = "legal.calendar.create";
+export const LAW_API_CALENDAR_EVENT_EDIT_PERMISSION = "legal.calendar.edit";
+export const LAW_API_CALENDAR_EVENT_CANCEL_PERMISSION = "legal.calendar.cancel";
+
+export const CALENDAR_EVENT_AUTH = {
+  view: LAW_API_CALENDAR_EVENT_VIEW_PERMISSION,
+  create: LAW_API_CALENDAR_EVENT_CREATE_PERMISSION,
+  edit: LAW_API_CALENDAR_EVENT_EDIT_PERMISSION,
+  delete: LAW_API_CALENDAR_EVENT_CANCEL_PERMISSION,
+} as const;

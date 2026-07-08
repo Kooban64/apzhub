@@ -1,0 +1,16 @@
+export {
+  LEGAL_ACTIVITY_PREFIX,
+  LEGAL_BUSINESS_CORE_VERSION,
+  LEGAL_EVENT_PREFIX,
+  LEGAL_KNOWLEDGE_PREFIX,
+  LEGAL_MODULE_PREFIX,
+  LEGAL_NOTIFICATION_PREFIX,
+  LEGAL_PERMISSION_PREFIX,
+  REFERENCE_PREFIXES,
+  buildActivityTypeId,
+  buildEventId,
+  buildKnowledgeSourceId,
+  buildNotificationRouteId,
+  buildPermissionKey,
+  type ReferencePrefixKey,
+} from "./platform-prefixes";

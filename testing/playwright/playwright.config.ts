@@ -22,5 +22,8 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
     cwd: path.resolve(__dirname, "../.."),
+    env: {
+      NEXT_PUBLIC_E2E_TEST_HOOKS: "true",
+    },
   },
 });

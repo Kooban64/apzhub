@@ -47,7 +47,11 @@
       ],
       "@apzhub/workbench-framework/react": [
         "../../packages/workbench-framework/src/react/index.ts"
-      ]
+      ],
+      "@apzhub/legal-business-core": [
+        "../../packages/legal-business-core/src/index.ts"
+      ],
+      "@apzhub/law-platform/api": ["../law-platform/lib/api/index.ts"]
     }
   },
   "include": [

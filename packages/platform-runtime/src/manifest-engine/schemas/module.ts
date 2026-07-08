@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { compatibilitySchema, envelopeFields } from "./envelope";
 import { optionalWorkbenchFields } from "./workbench";
+import { optionalKnowledgeFields } from "./knowledge";
 
 const navigationItemSchema = z
   .object({
@@ -66,6 +67,7 @@ export const moduleCapabilityManifestSchema = z
       )
       .optional(),
     ...optionalWorkbenchFields,
+    ...optionalKnowledgeFields,
   })
   .strict();
 

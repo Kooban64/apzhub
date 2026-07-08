@@ -1,0 +1,14 @@
+{
+  "name": "@apzhub/legal-business-core",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared Legal Business Core — canonical domain types and business infrastructure for the Law Platform",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/"
+  }
+}

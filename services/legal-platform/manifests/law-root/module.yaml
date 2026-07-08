@@ -1,0 +1,30 @@
+manifestSchemaVersion: "1.0"
+id: legal-platform-root
+name: Law Platform
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: Activity bar workspace for the APZHUB Law Platform.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: law
+    icon: scale
+    route: /workspace/law/dashboard
+    order: 25
+    permission: legal.nav.dashboard.view
+  view:
+    title: Dashboard
+    workspace: law
+    route: /workspace/law/dashboard
+    default: true
+    permission: legal.nav.dashboard.view

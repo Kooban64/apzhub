@@ -1,0 +1,36 @@
+manifestSchemaVersion: "1.0"
+id: legal-dashboard
+name: Dashboard
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: Executive dashboard and firm overview for the APZHUB Law Platform.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Dashboard
+    icon: layout-dashboard
+    route: /workspace/law/dashboard
+    order: 10
+    permission: legal.nav.dashboard.view
+  actions:
+    - id: legal.open.dashboard
+      label: Open Dashboard
+      handler: workbench-bridge:workbench.view.open
+      permission: legal.nav.dashboard.view
+      palette: true
+      group: Law Platform
+      icon: layout-dashboard
+      order: 10
+      description: Navigate to the Dashboard module.

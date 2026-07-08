@@ -4,7 +4,7 @@ import {
   createDefaultWorkbenchCommandBridge,
   createWorkbenchActionExecutorFromActionExecutor,
 } from "@apzhub/command-framework";
-import type { ActionExecutor } from "@apzhub/command-framework";
+import type { ActionAuditHook, ActionExecutor } from "@apzhub/command-framework";
 import type { ActionRegistryDto } from "@apzhub/command-framework/server";
 import type { WorkbenchPermissionAdapter } from "@apzhub/workbench-framework";
 import { actionToRequest } from "@apzhub/workbench-framework";
@@ -18,6 +18,7 @@ export interface CreateAppActionExecutorOptions {
   readonly dto: ActionRegistryDto;
   readonly permissionAdapter: WorkbenchPermissionAdapter;
   readonly publish: (request: WorkbenchRequest) => WorkbenchRequestResult;
+  readonly auditHook?: ActionAuditHook;
 }
 
 export interface AppActionExecutorBundle {
@@ -35,6 +36,7 @@ export function createAppActionExecutorBundle(
     permissionAdapter: options.permissionAdapter,
     bridge: createDefaultWorkbenchCommandBridge(),
     workbenchExecute: (action) => options.publish(actionToRequest(action)),
+    auditHook: options.auditHook,
   });
 
   return {

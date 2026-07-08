@@ -199,6 +199,138 @@ See [Action Framework onboarding](../developer/action-framework-onboarding.md).
 
 ---
 
+## Knowledge Sources (SPR-005)
+
+Capabilities may declare optional **Knowledge Sources** for the Knowledge & Discovery Framework:
+
+```yaml
+knowledge:
+  sources:
+    - id: my-capability.docs
+      label: Documentation
+      kind: registry-projection
+      tier: T2
+      provides: [content]
+      status: active
+      origin: manifest
+```
+
+| Field           | Purpose                                                                          |
+| --------------- | -------------------------------------------------------------------------------- |
+| `id`            | Stable source identifier                                                         |
+| `kind` / `tier` | Taxonomy per [knowledge-sources spec](../specs/SPR-005-KDF-knowledge-sources.md) |
+| `provides`      | Document kinds this source supplies                                              |
+| `status`        | `active` \| `inactive`                                                           |
+
+Registration path:
+
+```text
+Manifest knowledge.sources
+        ↓
+bootstrapKnowledgeRegistry({ capabilityRecords })
+        ↓
+Knowledge Provider (you implement) projects content → KnowledgeDocument[]
+```
+
+**Rule:** Knowledge Providers **reference** actions and navigation — they do not replace Action or Workbench manifest blocks. Selection from Knowledge Experiences routes through existing `execute()` and Workbench navigation ([ADR-0029](../adr/ADR-0029-knowledge-discovery-execution-routing.md)).
+
+See [Knowledge & Discovery onboarding](../developer/knowledge-discovery-onboarding.md).
+
+---
+
+## Events and Notifications (SPR-006)
+
+Capabilities may declare optional **events** and **notification routes** for the Event & Notification Framework:
+
+```yaml
+events:
+  - id: capability.example.record.created
+    category: capability
+    version: "1.0.0"
+    publisher: example-capability
+    description: Emitted when a record is created.
+
+notifications:
+  routes:
+    - routeId: capability.example.record.created.inbox
+      eventPattern: capability.example.record.created
+      notificationKind: inbox
+      channel: in-app
+      titleTemplate: "Record {{payload.recordId}} created"
+      bodyTemplate: "Created by {{payload.actor}}"
+```
+
+| Block                  | Purpose                                               |
+| ---------------------- | ----------------------------------------------------- |
+| `events`               | Register domain events for Event Registry bootstrap   |
+| `notifications.routes` | Map event patterns to notification kinds and channels |
+
+Execution path for action-driven notifications (no capability code required):
+
+```text
+workbench.actions → DefaultActionExecutor → audit hook
+→ capability.action.executed → Notification Mapping → shell badge/panel
+```
+
+**Rules:**
+
+- Capabilities **publish events** after successful operations — they do not write to Notification Service directly
+- Notification routes reference `eventPattern` — not action ids directly (unless encoded in payload templates)
+- Use `channel: in-app` for SPR-006 shell delivery; external channels are stubs until Delivery Service (M8+)
+- Selection from notification items with `actionRef` routes through existing `execute()` — same as Knowledge selection
+
+See [Event & Notification onboarding](../developer/event-notification-onboarding.md).
+
+---
+
+## Activity & Timeline manifest blocks (SPR-007)
+
+Capabilities may declare activity types and timeline definitions alongside events and notifications:
+
+```yaml
+activities:
+  types:
+    - id: capability.example.record.created
+      version: "1.0.0"
+      eventPattern: capability.example.record.created
+      category: capability
+      timelineScopes:
+        - timeline.personal
+      templateRef: activity.capability.example.record.created
+      label: Record created
+      status: active
+  timelines:
+    - id: timeline.personal
+      scope: personal
+      label: Personal activity
+      grouping: date
+      version: "1.0.0"
+      status: active
+```
+
+| Block                  | Purpose                                                                            |
+| ---------------------- | ---------------------------------------------------------------------------------- |
+| `activities.types`     | Register activity types for Activity Registry bootstrap (**not** `activity.types`) |
+| `activities.timelines` | Register timeline scope descriptors for Timeline Registry bootstrap                |
+
+Execution path for action-driven activity (no capability code required):
+
+```text
+workbench.actions → DefaultActionExecutor → audit hook
+→ capability.action.executed → Activity Mapping → Context Panel timeline
+```
+
+**Rules:**
+
+- Capabilities **publish events** — they do not write to Activity Service directly
+- Activity types reference `eventPattern` — parallel to notification routes on the same event
+- Activity ≠ Notification — separate mappers, services, and Experiences
+- Default timeline scope: `timeline.personal`
+
+See [Activity Timeline onboarding](../developer/activity-timeline-onboarding.md).
+
+---
+
 ## Permissions
 
 | Key                   | Scope                                 |

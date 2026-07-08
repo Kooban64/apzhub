@@ -1,0 +1,1882 @@
+{
+  "info": {
+    "name": "APZHUB Law Platform API v1",
+    "description": "Canonical OpenAPI specification for the tenant-scoped Law Platform REST API. Base path `/api/law/v1/`. Business resources (Clients through Invoices) are implemented. Interactive docs at `/api/docs`.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "law-openapi-v1-collection"
+  },
+  "auth": {
+    "type": "noauth"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3300/api/law/v1"
+    },
+    {
+      "key": "tenantId",
+      "value": "t0000001-0000-4000-8000-000000000001"
+    }
+  ],
+  "item": [
+    {
+      "name": "Clients",
+      "item": [
+        {
+          "name": "GET /clients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients"]
+            },
+            "description": "List clients\n\nPermission: `legal.client.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /clients",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients"]
+            },
+            "description": "Create clients\n\nPermission: `legal.client.create`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /clients (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients"]
+            },
+            "description": "PUT not supported on /clients\n\nStatus: unsupported"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /clients/{clientId}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{clientId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients", "{clientId}"]
+            },
+            "description": "Get clients by ID\n\nPermission: `legal.client.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /clients/{clientId}",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{clientId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients", "{clientId}"]
+            },
+            "description": "Update clients\n\nPermission: `legal.client.edit`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /clients/{clientId}",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{clientId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients", "{clientId}"]
+            },
+            "description": "Archive client (soft delete).\n\nPermission: `legal.client.delete`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /clients/{clientId} (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{clientId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients", "{clientId}"]
+            },
+            "description": "PUT not supported in v1 — use PATCH\n\nStatus: unsupported"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Matters",
+      "item": [
+        {
+          "name": "GET /matters",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/matters",
+              "host": ["{{baseUrl}}"],
+              "path": ["matters"]
+            },
+            "description": "List matters\n\nPermission: `legal.matter.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /matters",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/matters",
+              "host": ["{{baseUrl}}"],
+              "path": ["matters"]
+            },
+            "description": "Create matters\n\nPermission: `legal.matter.create`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /matters (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/matters",
+              "host": ["{{baseUrl}}"],
+              "path": ["matters"]
+            },
+            "description": "PUT not supported on /matters\n\nStatus: unsupported"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /matters/{matterId}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/matters/{matterId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["matters", "{matterId}"]
+            },
+            "description": "Get matters by ID\n\nPermission: `legal.matter.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /matters/{matterId}",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/matters/{matterId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["matters", "{matterId}"]
+            },
+            "description": "Update matters\n\nPermission: `legal.matter.edit`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /matters/{matterId}",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/matters/{matterId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["matters", "{matterId}"]
+            },
+            "description": "Archive matter.\n\nPermission: `legal.matter.archive`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /matters/{matterId} (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/matters/{matterId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["matters", "{matterId}"]
+            },
+            "description": "PUT not supported in v1 — use PATCH\n\nStatus: unsupported"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Documents",
+      "item": [
+        {
+          "name": "GET /documents",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/documents",
+              "host": ["{{baseUrl}}"],
+              "path": ["documents"]
+            },
+            "description": "List documents\n\nPermission: `legal.document.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /documents",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/documents",
+              "host": ["{{baseUrl}}"],
+              "path": ["documents"]
+            },
+            "description": "Create documents\n\nPermission: `legal.document.create`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /documents (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/documents",
+              "host": ["{{baseUrl}}"],
+              "path": ["documents"]
+            },
+            "description": "PUT not supported on /documents\n\nStatus: unsupported"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /documents/{documentId}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/documents/{documentId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["documents", "{documentId}"]
+            },
+            "description": "Get documents by ID\n\nPermission: `legal.document.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /documents/{documentId}",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/documents/{documentId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["documents", "{documentId}"]
+            },
+            "description": "Update documents\n\nPermission: `legal.document.edit`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /documents/{documentId}",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/documents/{documentId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["documents", "{documentId}"]
+            },
+            "description": "Archive document metadata.\n\nPermission: `legal.document.archive`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /documents/{documentId} (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/documents/{documentId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["documents", "{documentId}"]
+            },
+            "description": "PUT not supported in v1 — use PATCH\n\nStatus: unsupported"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "GET /tasks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks"]
+            },
+            "description": "List tasks\n\nPermission: `legal.task.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /tasks",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks"]
+            },
+            "description": "Create tasks\n\nPermission: `legal.task.create`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /tasks (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks"]
+            },
+            "description": "PUT not supported on /tasks\n\nStatus: unsupported"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /tasks/{taskId}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks/{taskId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks", "{taskId}"]
+            },
+            "description": "Get tasks by ID\n\nPermission: `legal.task.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /tasks/{taskId}",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks/{taskId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks", "{taskId}"]
+            },
+            "description": "Update tasks\n\nPermission: `legal.task.edit`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /tasks/{taskId}",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks/{taskId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks", "{taskId}"]
+            },
+            "description": "Archive task.\n\nPermission: `legal.task.archive`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /tasks/{taskId} (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks/{taskId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks", "{taskId}"]
+            },
+            "description": "PUT not supported in v1 — use PATCH\n\nStatus: unsupported"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Calendar",
+      "item": [
+        {
+          "name": "GET /calendar-events",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/calendar-events",
+              "host": ["{{baseUrl}}"],
+              "path": ["calendar-events"]
+            },
+            "description": "List calendar\n\nPermission: `legal.calendar.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /calendar-events",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/calendar-events",
+              "host": ["{{baseUrl}}"],
+              "path": ["calendar-events"]
+            },
+            "description": "Create calendar\n\nPermission: `legal.calendar.create`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /calendar-events (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/calendar-events",
+              "host": ["{{baseUrl}}"],
+              "path": ["calendar-events"]
+            },
+            "description": "PUT not supported on /calendar-events\n\nStatus: unsupported"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /calendar-events/{calendarEventId}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/calendar-events/{calendarEventId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["calendar-events", "{calendarEventId}"]
+            },
+            "description": "Get calendar by ID\n\nPermission: `legal.calendar.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /calendar-events/{calendarEventId}",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/calendar-events/{calendarEventId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["calendar-events", "{calendarEventId}"]
+            },
+            "description": "Update calendar\n\nPermission: `legal.calendar.edit`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /calendar-events/{calendarEventId}",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/calendar-events/{calendarEventId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["calendar-events", "{calendarEventId}"]
+            },
+            "description": "Cancel calendar event.\n\nPermission: `legal.calendar.cancel`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /calendar-events/{calendarEventId} (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/calendar-events/{calendarEventId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["calendar-events", "{calendarEventId}"]
+            },
+            "description": "PUT not supported in v1 — use PATCH\n\nStatus: unsupported"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Time",
+      "item": [
+        {
+          "name": "GET /time-entries",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/time-entries",
+              "host": ["{{baseUrl}}"],
+              "path": ["time-entries"]
+            },
+            "description": "List time\n\nPermission: `legal.time.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /time-entries",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/time-entries",
+              "host": ["{{baseUrl}}"],
+              "path": ["time-entries"]
+            },
+            "description": "Create time\n\nPermission: `legal.time.create`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /time-entries (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/time-entries",
+              "host": ["{{baseUrl}}"],
+              "path": ["time-entries"]
+            },
+            "description": "PUT not supported on /time-entries\n\nStatus: unsupported"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /time-entries/{timeEntryId}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/time-entries/{timeEntryId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["time-entries", "{timeEntryId}"]
+            },
+            "description": "Get time by ID\n\nPermission: `legal.time.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /time-entries/{timeEntryId}",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/time-entries/{timeEntryId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["time-entries", "{timeEntryId}"]
+            },
+            "description": "Update time\n\nPermission: `legal.time.edit`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /time-entries/{timeEntryId}",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/time-entries/{timeEntryId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["time-entries", "{timeEntryId}"]
+            },
+            "description": "Delete time entry (hard delete when unbilled).\n\nPermission: `legal.time.delete`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /time-entries/{timeEntryId} (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/time-entries/{timeEntryId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["time-entries", "{timeEntryId}"]
+            },
+            "description": "PUT not supported in v1 — use PATCH\n\nStatus: unsupported"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Billing",
+      "item": [
+        {
+          "name": "GET /invoices",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices"]
+            },
+            "description": "List billing\n\nPermission: `legal.invoice.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /invoices",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices"]
+            },
+            "description": "Create billing\n\nPermission: `legal.invoice.create`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /invoices (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices"]
+            },
+            "description": "PUT not supported on /invoices\n\nStatus: unsupported"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /invoices/{invoiceId}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices/{invoiceId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices", "{invoiceId}"]
+            },
+            "description": "Get billing by ID\n\nPermission: `legal.invoice.view`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /invoices/{invoiceId}",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices/{invoiceId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices", "{invoiceId}"]
+            },
+            "description": "Update billing\n\nPermission: `legal.invoice.edit`\n\nStatus: implemented",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /invoices/{invoiceId}",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices/{invoiceId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices", "{invoiceId}"]
+            },
+            "description": "Void invoice when in draft; cancel otherwise.\n\nPermission: `legal.invoice.cancel`\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /invoices/{invoiceId} (planned)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices/{invoiceId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices", "{invoiceId}"]
+            },
+            "description": "PUT not supported in v1 — use PATCH\n\nStatus: unsupported"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "GET /search (planned)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/search",
+              "host": ["{{baseUrl}}"],
+              "path": ["search"]
+            },
+            "description": "Quick search across legal entities\n\nPermission: `legal.search.execute`\n\nStatus: planned"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /search (planned)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/search",
+              "host": ["{{baseUrl}}"],
+              "path": ["search"]
+            },
+            "description": "Advanced search with structured query body\n\nPermission: `legal.search.execute`\n\nStatus: planned",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "GET /dashboard/executive (planned)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dashboard/executive",
+              "host": ["{{baseUrl}}"],
+              "path": ["dashboard", "executive"]
+            },
+            "description": "Executive firm overview dashboard\n\nPermission: `legal.nav.dashboard.view`\n\nStatus: planned"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Activities",
+      "item": [
+        {
+          "name": "GET /activities (planned)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/activities",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities"]
+            },
+            "description": "List activity timeline entries\n\nPermission: `legal.activity.view`\n\nStatus: planned"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /activities/{activityId} (planned)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/activities/{activityId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities", "{activityId}"]
+            },
+            "description": "Get activity by ID\n\nPermission: `legal.activity.view`\n\nStatus: planned"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /activities/{activityId} (planned)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/activities/{activityId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities", "{activityId}"]
+            },
+            "description": "POST not supported — activities are system-generated\n\nStatus: unsupported"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "GET /notifications (planned)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notifications",
+              "host": ["{{baseUrl}}"],
+              "path": ["notifications"]
+            },
+            "description": "List user notifications\n\nPermission: `legal.notification.view`\n\nStatus: planned"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /notifications/{notificationId} (planned)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notifications/{notificationId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["notifications", "{notificationId}"]
+            },
+            "description": "Get notification by ID\n\nPermission: `legal.notification.view`\n\nStatus: planned"
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /notifications/{notificationId} (planned)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notifications/{notificationId}",
+              "host": ["{{baseUrl}}"],
+              "path": ["notifications", "{notificationId}"]
+            },
+            "description": "Mark notification read/unread\n\nPermission: `legal.notification.edit`\n\nStatus: planned",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "GET /health",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            },
+            "description": "API liveness probe\n\nStatus: implemented"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /diagnostics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-tenant-id",
+                "value": "{{tenantId}}",
+                "type": "text"
+              },
+              {
+                "key": "x-correlation-id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/diagnostics",
+              "host": ["{{baseUrl}}"],
+              "path": ["diagnostics"]
+            },
+            "description": "Authenticated scaffold diagnostics\n\nPermission: `legal.nav.dashboard.view`\n\nStatus: implemented"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

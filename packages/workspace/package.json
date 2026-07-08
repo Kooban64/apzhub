@@ -11,8 +11,12 @@
     "lint": "eslint src/"
   },
   "dependencies": {
+    "@apzhub/activity-timeline-framework": "workspace:*",
     "@apzhub/command-framework": "workspace:*",
-    "@apzhub/ui": "workspace:*"
+    "@apzhub/event-notification-framework": "workspace:*",
+    "@apzhub/knowledge-discovery-framework": "workspace:*",
+    "@apzhub/ui": "workspace:*",
+    "@apzhub/workbench-framework": "workspace:*"
   },
   "peerDependencies": {
     "react": "^19.0.0"

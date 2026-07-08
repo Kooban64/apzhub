@@ -1,0 +1,22 @@
+meta {
+  name: GET /invoices/{invoiceId}
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/invoices/{invoiceId}
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-tenant-id: {{tenantId}}
+  x-correlation-id: {{correlationId}}
+}
+
+docs {
+  Get billing by ID
+  Permission: legal.invoice.view
+  Implementation: implemented
+}

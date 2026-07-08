@@ -1,8 +1,18 @@
 import type { CommandPaletteDiagnostics } from "@apzhub/ui";
 import type { ClientActionRegistryDiagnostics } from "@apzhub/command-framework/react";
+import type { ClientKnowledgeQueryDiagnostics } from "@apzhub/knowledge-discovery-framework/react";
+import type { KnowledgeQueryStatus } from "@apzhub/knowledge-discovery-framework/react";
+
+import type { CommandPaletteMode } from "./command-palette-mode";
 
 export interface CommandPaletteSurfaceDiagnostics extends CommandPaletteDiagnostics {
   readonly surface: "command-palette";
+  readonly mode: CommandPaletteMode;
+  readonly knowledgeQueryStatus?: KnowledgeQueryStatus;
+  readonly knowledgeDocumentCount?: number;
+  readonly knowledgeGroupCount?: number;
+  readonly lastSelectedDocumentId?: string;
+  readonly knowledgeQueryDiagnostics?: ClientKnowledgeQueryDiagnostics;
 }
 
 export function buildCommandPaletteDiagnostics(input: {
@@ -15,9 +25,16 @@ export function buildCommandPaletteDiagnostics(input: {
   readonly lastExecutionAt?: string;
   readonly lastExecutionOk?: boolean;
   readonly lastSelectedId?: string;
+  readonly mode?: CommandPaletteMode;
+  readonly knowledgeQueryStatus?: KnowledgeQueryStatus;
+  readonly knowledgeDocumentCount?: number;
+  readonly knowledgeGroupCount?: number;
+  readonly lastSelectedDocumentId?: string;
+  readonly knowledgeQueryDiagnostics?: ClientKnowledgeQueryDiagnostics;
 }): CommandPaletteSurfaceDiagnostics {
   return {
     surface: "command-palette",
+    mode: input.mode ?? "commands",
     open: input.open,
     query: input.query,
     selectedIndex: input.selectedIndex,
@@ -30,5 +47,10 @@ export function buildCommandPaletteDiagnostics(input: {
     lastExecutionAt: input.lastExecutionAt,
     lastExecutionOk: input.lastExecutionOk,
     lastSelectedId: input.lastSelectedId,
+    knowledgeQueryStatus: input.knowledgeQueryStatus,
+    knowledgeDocumentCount: input.knowledgeDocumentCount,
+    knowledgeGroupCount: input.knowledgeGroupCount,
+    lastSelectedDocumentId: input.lastSelectedDocumentId,
+    knowledgeQueryDiagnostics: input.knowledgeQueryDiagnostics,
   };
 }

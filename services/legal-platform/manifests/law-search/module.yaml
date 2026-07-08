@@ -1,0 +1,59 @@
+manifestSchemaVersion: "1.0"
+id: legal-search
+name: Search
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: Unified Legal Search UX validation module for the APZHUB Law Platform.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Search
+    icon: search
+    route: /workspace/law/search
+    order: 15
+    permission: legal.nav.search.view
+  view:
+    title: Search
+    workspace: law
+    route: /workspace/law/search
+    permission: legal.nav.search.view
+  actions:
+    - id: legal.open.search
+      label: Open Search
+      handler: workbench-bridge:workbench.view.open
+      permission: legal.nav.search.view
+      palette: true
+      group: Legal Search
+      icon: search
+      order: 15
+      description: Navigate to unified Legal Search.
+    - id: legal.search.open
+      label: Open Legal Search
+      handler: service:legal-search:open
+      permission: legal.search.view
+      palette: true
+      group: Legal Search
+      icon: search
+      order: 16
+      description: Open the unified Legal Search page.
+    - id: legal.search.execute
+      label: Execute Legal Search
+      handler: service:legal-search:execute
+      permission: legal.search.view
+      palette: true
+      group: Legal Search
+      icon: search
+      order: 17
+      description: Run unified search and navigate to results.

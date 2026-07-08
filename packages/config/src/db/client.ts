@@ -2,7 +2,13 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
 
 import { getDatabaseUrl } from "../env";
+import { legalSchema } from "./legal-schema";
 import * as schema from "./schema";
+
+const fullSchema = {
+  ...schema.schema,
+  ...legalSchema,
+};
 
 const globalForDb = globalThis as unknown as {
   pool: pg.Pool | undefined;
@@ -23,10 +29,15 @@ export function getPool(connectionString?: string): pg.Pool {
 }
 
 export function createDb(connectionString?: string) {
-  return drizzle(getPool(connectionString), { schema });
+  return drizzle(getPool(connectionString), { schema: fullSchema });
 }
 
 export type Database = ReturnType<typeof createDb>;
+
+/** Drizzle transaction handle — usable anywhere a database executor is required. */
+export type DatabaseTransaction = Parameters<Parameters<Database["transaction"]>[0]>[0];
+
+export type DatabaseExecutor = Database | DatabaseTransaction;
 
 let dbInstance: Database | null = null;
 

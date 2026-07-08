@@ -1,0 +1,41 @@
+@import "@apzhub/theme/styles.css";
+@import "tailwindcss";
+
+:root {
+  --law-primary: #0b1f3a;
+  --law-accent: #c9a227;
+  --law-accent-muted: rgba(201, 162, 39, 0.12);
+  --color-primary: var(--law-primary);
+  --color-primary-foreground: #f8fafc;
+  --color-accent: var(--law-accent-muted);
+  --color-accent-foreground: var(--law-primary);
+  --color-ring: var(--law-accent);
+}
+
+.dark {
+  --law-primary: #102847;
+  --law-accent: #d4af37;
+  --law-accent-muted: rgba(212, 175, 55, 0.16);
+  --color-primary: #dbeafe;
+  --color-primary-foreground: var(--law-primary);
+  --color-accent: rgba(212, 175, 55, 0.18);
+  --color-accent-foreground: #fef3c7;
+  --color-ring: var(--law-accent);
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+/* LAW-001-02 UX Foundation tokens */
+:root {
+  --law-ux-space-page: 1.5rem;
+  --law-ux-space-section: 1rem;
+  --law-ux-space-stack: 0.75rem;
+  --law-ux-font-display: 1.5rem;
+  --law-ux-font-section: 1.125rem;
+  --law-ux-font-body: 0.875rem;
+  --law-ux-font-label: 0.75rem;
+}
