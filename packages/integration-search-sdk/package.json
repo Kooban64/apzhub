@@ -1,0 +1,25 @@
+{
+  "name": "@apzhub/integration-search-sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Search Integration SDK — vendor-neutral adapter foundation for search engines (APZSEARCH-004)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./adapter": "./src/adapter/index.ts",
+    "./capabilities": "./src/capabilities/index.ts",
+    "./errors": "./src/errors/index.ts",
+    "./health": "./src/health/index.ts",
+    "./diagnostics": "./src/diagnostics/index.ts",
+    "./testing": "./src/testing/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/integration-search-sdk"
+  },
+  "dependencies": {
+    "@apzhub/integration-sdk": "workspace:*",
+    "@apzhub/search-contracts": "workspace:*"
+  }
+}

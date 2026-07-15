@@ -14,6 +14,7 @@ export {
   runWithLawPersistenceContextAsync,
   setSessionLawPersistenceContext,
   getSessionLawPersistenceContext,
+  getExplicitLawPersistenceContext,
   getActiveLawPersistenceContext,
   resetLawPersistenceScope,
 } from "./law-persistence-scope";

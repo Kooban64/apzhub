@@ -77,16 +77,16 @@ export function ShellLayout({
   children,
 }: ShellLayoutProps) {
   return (
-    <div className="flex h-full min-h-0 flex-col bg-[var(--color-background)] text-[var(--color-foreground)]">
+    <div className="flex h-full min-h-0 max-w-full flex-col overflow-x-hidden bg-[var(--color-background)] text-[var(--color-foreground)]">
       <Header
         userName={userName}
         onSignOut={onSignOut}
         headerTrailing={headerTrailing}
       />
-      <div className="flex min-h-0 flex-1">
+      <div className="flex min-h-0 min-w-0 flex-1 overflow-x-hidden">
         <ActivityBar items={activityBarItems} onItemSelect={onActivityBarSelect} />
         <Sidebar items={sidebarItems} onSelect={onSidebarSelect} />
-        <main className="min-w-0 flex-1 overflow-auto p-6">{children}</main>
+        <main className="min-w-0 flex-1 overflow-auto p-4 sm:p-6">{children}</main>
       </div>
       <StatusBar environment={environment} />
     </div>

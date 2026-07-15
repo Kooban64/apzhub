@@ -1,0 +1,23 @@
+{
+  "name": "@apzhub/testing-services",
+  "version": "0.11.0",
+  "private": true,
+  "type": "module",
+  "description": "APZ TCMS domain services — manual testing, automation, quality, certification, release governance, CI/CD, engineering intelligence, reporting (APZTCMS-004…024)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts packages/testing-services"
+  },
+  "dependencies": {
+    "@apzhub/platform-service-contracts": "workspace:*",
+    "@apzhub/reporting-contracts": "workspace:*",
+    "@apzhub/reporting-core": "workspace:*",
+    "@apzhub/testing-contracts": "workspace:*",
+    "@apzhub/testing-foundation": "workspace:*",
+    "@apzhub/testing-persistence": "workspace:*"
+  }
+}

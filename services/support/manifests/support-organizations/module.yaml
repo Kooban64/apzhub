@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: support-organizations
+name: Organizations
+version: 0.1.0
+kind: module
+
+metadata:
+  category: support
+  description: Support — Organizations list and management.
+
+dependencies:
+  platform: []
+  services:
+    - support-service
+
+module:
+  category: support
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: support
+    parent: support
+    label: Organizations
+    icon: building-2
+    route: /workspace/support/organizations
+    order: 20
+    permission: support.organizations.list
+  view:
+    title: Organizations
+    workspace: support
+    route: /workspace/support/organizations
+    permission: support.organizations.list

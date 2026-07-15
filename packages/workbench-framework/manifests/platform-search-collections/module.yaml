@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-search-collections
+name: Collections
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Search — Collections sidebar (APZSEARCH-007).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: search
+    parent: platform-search
+    label: Collections
+    icon: folder
+    route: /workspace/search/collections
+    order: 50
+    permission: search.collection.list
+  view:
+    title: Collections
+    workspace: search
+    route: /workspace/search/collections
+    permission: search.collection.list

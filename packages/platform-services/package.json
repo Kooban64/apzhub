@@ -1,0 +1,39 @@
+{
+  "name": "@apzhub/platform-services",
+  "version": "0.18.0",
+  "private": true,
+  "type": "module",
+  "description": "Platform service implementations — Projects + Support + Reporting + Documents + Search management + Search execution (APZSEARCH-006)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./testing": "./src/testing/index.ts",
+    "./reporting": "./src/reporting/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts packages/platform-services"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/integration-plane": "workspace:*",
+    "@apzhub/integration-zammad": "workspace:*",
+    "@apzhub/integration-github-actions": "workspace:*",
+    "@apzhub/integration-sdk": "workspace:*",
+    "@apzhub/platform-authorization": "workspace:*",
+    "@apzhub/platform-service-contracts": "workspace:*",
+    "@apzhub/reporting-contracts": "workspace:*",
+    "@apzhub/reporting-core": "workspace:*",
+    "@apzhub/document-contracts": "workspace:*",
+    "@apzhub/document-core": "workspace:*",
+    "@apzhub/document-persistence": "workspace:*",
+    "@apzhub/document-storage": "workspace:*",
+    "@apzhub/search-contracts": "workspace:*",
+    "@apzhub/search-persistence": "workspace:*",
+    "@apzhub/integration-meilisearch": "workspace:*",
+    "@apzhub/testing-contracts": "workspace:*",
+    "@apzhub/testing-persistence": "workspace:*",
+    "@apzhub/testing-services": "workspace:*",
+    "drizzle-orm": "^0.44.2"
+  }
+}

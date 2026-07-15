@@ -15,7 +15,7 @@ import {
 import { Runtime } from "@apzhub/platform-runtime/server";
 import type { ActionFrameworkHealthSummary } from "@apzhub/types";
 import { createWorkbenchPermissionAdapter } from "@apzhub/workbench-framework";
-import { createAuthPermissionContextFromUser } from "@apzhub/workbench-framework/server";
+import { createLawPlatformAuthPermissionContext } from "./session-permission-context";
 
 import { ensurePlatformRuntimeReady } from "./runtime-init";
 
@@ -101,8 +101,9 @@ export async function loadActionRegistryDto(): Promise<ActionRegistryHydrationRe
   }
 
   const session = await getValidatedSession(await headers());
+  const authContext = await createLawPlatformAuthPermissionContext(session);
   const permissionAdapter = createWorkbenchPermissionAdapter({
-    authContext: createAuthPermissionContextFromUser(session?.user),
+    authContext,
     nodeEnv: process.env.NODE_ENV,
     allowDevRegistration: isDevRegistrationAllowed(),
   });

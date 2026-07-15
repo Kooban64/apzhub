@@ -1,0 +1,20 @@
+{
+  "name": "@apzhub/search-persistence",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Search persistence, provider registry & management-plane services (APZSEARCH-003)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/search-persistence"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/search-contracts": "workspace:*",
+    "drizzle-orm": "^0.44.2"
+  }
+}

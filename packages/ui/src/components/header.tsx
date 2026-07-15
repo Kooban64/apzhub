@@ -25,12 +25,14 @@ export function Header({ userName, onSignOut, headerTrailing }: HeaderProps) {
     !mounted || theme === undefined ? "Theme" : theme === "dark" ? "Light" : "Dark";
 
   return (
-    <header className="flex h-12 shrink-0 items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-4">
-      <div className="flex items-center gap-3">
+    <header className="flex h-12 min-w-0 shrink-0 items-center justify-between gap-2 overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-surface)] px-4">
+      <div className="flex min-w-0 items-center gap-3">
         <span className="text-sm font-semibold tracking-wide">APZHUB</span>
-        <span className="text-xs text-[var(--color-muted-foreground)]">Home</span>
+        <span className="hidden text-xs text-[var(--color-muted-foreground)] sm:inline">
+          Home
+        </span>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex min-w-0 shrink items-center gap-2">
         {headerTrailing}
         <Button
           type="button"
@@ -43,7 +45,7 @@ export function Header({ userName, onSignOut, headerTrailing }: HeaderProps) {
           {themeLabel}
         </Button>
         {userName ? (
-          <span className="text-sm text-[var(--color-muted-foreground)]">
+          <span className="hidden max-w-[9rem] truncate text-sm text-[var(--color-muted-foreground)] sm:inline">
             {userName}
           </span>
         ) : null}

@@ -1,0 +1,265 @@
+import { describe, expect, it } from "vitest";
+
+import { isCataloguedPermission } from "./authorization/permission-catalogue";
+import { resolveOperationAuthorization } from "./authorization/operation-authorization-map";
+import {
+  TestingApprovalServiceImpl,
+  TestingAutomationServiceImpl,
+  TestingCaseServiceImpl,
+  TestingCertificationServiceImpl,
+  TestingCoverageServiceImpl,
+  TestingDashboardServiceImpl,
+  TestingDefectServiceImpl,
+  TestingEvidenceServiceImpl,
+  TestingExecutionServiceImpl,
+  TestingPlanServiceImpl,
+  TestingQualityServiceImpl,
+  TestingReleaseReadinessServiceImpl,
+  TestingReportingServiceImpl,
+  TestingRequirementServiceImpl,
+  TestingSuiteServiceImpl,
+  TestingTraceabilityServiceImpl,
+} from "./services/testing";
+import { TestingReleaseGovernanceServiceImpl } from "./services/testing/testing-release-governance-service-impl";
+import { TestingPipelinesServiceImpl } from "./services/testing/testing-pipelines-service-impl";
+
+const TESTING_GATEWAY_OPERATIONS = {
+  testingPlan: ["list", "get", "create", "update", "clone", "archive"],
+  testingSuite: ["list", "get", "create", "update", "clone", "archive"],
+  testingCase: [
+    "list",
+    "get",
+    "create",
+    "update",
+    "clone",
+    "archive",
+    "transitionStatus",
+  ],
+  testingRequirement: ["list", "get", "create", "update", "archive"],
+  testingExecution: [
+    "list",
+    "get",
+    "create",
+    "assign",
+    "start",
+    "pause",
+    "resume",
+    "block",
+    "unblock",
+    "complete",
+    "submitForReview",
+    "approve",
+    "reject",
+    "reopen",
+    "cancel",
+    "archive",
+    "restore",
+    "recordStepActual",
+    "setStepStatus",
+  ],
+  testingEvidence: [
+    "listEvidence",
+    "getEvidence",
+    "registerEvidence",
+    "submitEvidence",
+    "verifyEvidence",
+    "approveEvidence",
+    "rejectEvidence",
+    "archiveEvidence",
+  ],
+  testingAutomation: [
+    "validateImport",
+    "importResult",
+    "listImports",
+    "getImport",
+    "listImportHistory",
+    "getHistory",
+    "listRuns",
+    "getRun",
+    "listResultItems",
+    "listCoverageSnapshots",
+    "aggregateCoverage",
+  ],
+  testingCoverage: [
+    "recompute",
+    "recomputeAll",
+    "requestRecompute",
+    "listMetrics",
+    "getMetric",
+    "listMetricsByKind",
+    "listMetricsForPlan",
+    "listMetricsForSubject",
+  ],
+  testingDefect: ["list", "get", "create", "link", "update", "archive"],
+  testingQuality: [
+    "summarize",
+    "getSnapshot",
+    "listSnapshots",
+    "computeSnapshot",
+    "compareSnapshots",
+    "compareWindows",
+  ],
+  testingCertification: [
+    "create",
+    "get",
+    "list",
+    "prepareForPlan",
+    "prepareForCertification",
+    "startReview",
+    "requestChanges",
+    "submitForApproval",
+    "approve",
+    "conditionallyApprove",
+    "reject",
+    "expire",
+    "archive",
+    "evaluateGate",
+    "evaluateGates",
+    "getRecommendation",
+    "getAuditHistory",
+    "listAudit",
+  ],
+  testingReleaseReadiness: [
+    "calculateForPlan",
+    "calculateForCertification",
+    "assessForPlan",
+    "assessForCertification",
+  ],
+  testingReleaseGovernance: [
+    "createRelease",
+    "getRelease",
+    "listReleases",
+    "updateReleaseMetadata",
+    "addScope",
+    "removeScope",
+    "attachEvidence",
+    "removeEvidence",
+    "addPackage",
+    "addCandidate",
+    "addNote",
+    "addDependency",
+    "removeDependency",
+    "evaluateReadiness",
+    "evaluateRisk",
+    "evaluateCertification",
+    "evaluateApprovals",
+    "generateReleaseSummary",
+    "submitForReview",
+    "submitForApproval",
+    "approveRelease",
+    "conditionallyApproveRelease",
+    "rejectRelease",
+    "withdrawRelease",
+    "archiveRelease",
+    "restoreRelease",
+    "requestApproval",
+    "decideApproval",
+    "listAudit",
+    "getManifest",
+    "listPackages",
+    "listCandidates",
+    "listScope",
+    "listEvidence",
+    "listNotes",
+    "listDependencies",
+    "listApprovals",
+    "consumePipelineSummary",
+  ],
+  testingPipelines: [
+    "registerPipeline",
+    "updatePipeline",
+    "archivePipeline",
+    "getPipeline",
+    "listPipelines",
+    "importRun",
+    "importFromProvider",
+    "listImports",
+    "getImport",
+    "listImportHistory",
+    "getRun",
+    "listRuns",
+    "listStages",
+    "listJobs",
+    "linkArtifacts",
+    "linkEvidence",
+    "linkCertifications",
+    "linkReleases",
+    "getLinks",
+    "listProviders",
+  ],
+  testingTraceability: [
+    "listLinks",
+    "getLink",
+    "createLink",
+    "removeLink",
+    "createRelationship",
+    "removeRelationship",
+    "getMatrixForRequirement",
+    "listMatrix",
+  ],
+  testingApproval: ["list", "get", "request", "submitForReview", "decide", "listHistory"],
+  testingDashboard: ["getDashboardSummary"],
+  testingReporting: [
+    "listReportPlaceholders",
+    "listAvailableReports",
+    "listTemplates",
+    "getTemplate",
+    "registerTemplate",
+    "validateReport",
+    "previewReport",
+    "generateReport",
+    "renderReport",
+    "archiveReportMetadata",
+    "listReportMetadata",
+    "getReportMetadata",
+  ],
+} as const;
+
+const TESTING_IMPLS_BY_SERVICE = {
+  testingPlan: TestingPlanServiceImpl,
+  testingSuite: TestingSuiteServiceImpl,
+  testingCase: TestingCaseServiceImpl,
+  testingRequirement: TestingRequirementServiceImpl,
+  testingExecution: TestingExecutionServiceImpl,
+  testingEvidence: TestingEvidenceServiceImpl,
+  testingAutomation: TestingAutomationServiceImpl,
+  testingCoverage: TestingCoverageServiceImpl,
+  testingDefect: TestingDefectServiceImpl,
+  testingQuality: TestingQualityServiceImpl,
+  testingCertification: TestingCertificationServiceImpl,
+  testingReleaseReadiness: TestingReleaseReadinessServiceImpl,
+  testingReleaseGovernance: TestingReleaseGovernanceServiceImpl,
+  testingPipelines: TestingPipelinesServiceImpl,
+  testingTraceability: TestingTraceabilityServiceImpl,
+  testingApproval: TestingApprovalServiceImpl,
+  testingDashboard: TestingDashboardServiceImpl,
+  testingReporting: TestingReportingServiceImpl,
+} as const;
+
+function prototypeMethodNames(service: keyof typeof TESTING_IMPLS_BY_SERVICE): readonly string[] {
+  return Object.getOwnPropertyNames(TESTING_IMPLS_BY_SERVICE[service].prototype).filter(
+    (name) => name !== "constructor" && name !== "transition",
+  );
+}
+
+describe("Testing operation authorization mappings", () => {
+  it("maps every Testing gateway operation to a catalogued permission", () => {
+    for (const [service, operations] of Object.entries(TESTING_GATEWAY_OPERATIONS)) {
+      for (const operation of operations) {
+        const mapping = resolveOperationAuthorization(service, operation);
+        expect(mapping, `${service}.${operation}`).toBeDefined();
+        expect(isCataloguedPermission(mapping?.requiredPermission ?? "")).toBe(true);
+      }
+    }
+  });
+
+  it("covers every public Testing service implementation method", () => {
+    for (const service of Object.keys(TESTING_IMPLS_BY_SERVICE) as Array<
+      keyof typeof TESTING_IMPLS_BY_SERVICE
+    >) {
+      expect([...prototypeMethodNames(service)].sort(), service).toEqual(
+        [...TESTING_GATEWAY_OPERATIONS[service]].sort(),
+      );
+    }
+  });
+});

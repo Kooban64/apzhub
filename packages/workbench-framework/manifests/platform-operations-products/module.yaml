@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-operations-products
+name: Products
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Operations — Products (M8-03).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-administration
+    label: Products
+    icon: package
+    route: /workspace/administration/products
+    order: 50
+    permission: platform.nav.administration.view
+  view:
+    title: Products
+    workspace: administration
+    route: /workspace/administration/products
+    permission: platform.nav.administration.view

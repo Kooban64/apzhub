@@ -1,0 +1,20 @@
+{
+  "name": "@apzhub/search-support",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Support Search Publication Adapter — canonical Support → Search Integration Framework (APZSEARCH-011)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/search-support"
+  },
+  "dependencies": {
+    "@apzhub/platform-service-contracts": "workspace:*",
+    "@apzhub/search-contracts": "workspace:*",
+    "@apzhub/search-integration": "workspace:*"
+  }
+}

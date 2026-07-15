@@ -1,12 +1,12 @@
 manifestSchemaVersion: "1.0"
 id: platform-administration
-name: Administration
-version: 0.1.0
+name: Platform Operations
+version: 0.2.0
 kind: module
 
 metadata:
   category: platform
-  description: Administration workspace scaffold for the APZHUB workbench.
+  description: Platform Operations workspace — central operational interface (M8-03).
 
 dependencies:
   platform: []
@@ -23,7 +23,7 @@ workbench:
     order: 20
     permission: platform.nav.administration.view
   view:
-    title: Administration
+    title: Platform Operations
     workspace: administration
     route: /workspace/administration
     default: true

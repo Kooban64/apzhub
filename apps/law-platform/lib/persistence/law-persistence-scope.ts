@@ -42,6 +42,11 @@ export function getActiveLawPersistenceContext(): LawPersistenceContext {
   );
 }
 
+/** Returns context only when explicitly bound via session or ALS (PRH-007 search isolation). */
+export function getExplicitLawPersistenceContext(): LawPersistenceContext | undefined {
+  return sessionPersistenceContext ?? persistenceStorage.getStore();
+}
+
 export function resetLawPersistenceScope(): void {
   sessionPersistenceContext = undefined;
 }

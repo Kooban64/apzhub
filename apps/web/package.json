@@ -12,17 +12,30 @@
   "dependencies": {
     "@apzhub/activity-timeline-framework": "workspace:*",
     "@apzhub/auth": "workspace:*",
-    "@apzhub/config": "workspace:*",
     "@apzhub/command-framework": "workspace:*",
+    "@apzhub/config": "workspace:*",
     "@apzhub/event-notification-framework": "workspace:*",
-    "@apzhub/legal-business-core": "workspace:*",
+    "@apzhub/integration-plane": "workspace:*",
+    "@apzhub/integration-zammad": "workspace:*",
     "@apzhub/knowledge-discovery-framework": "workspace:*",
+    "@apzhub/legal-business-core": "workspace:*",
+    "@apzhub/platform-authorization": "workspace:*",
+    "@apzhub/platform-bootstrap": "workspace:*",
+    "@apzhub/platform-governance": "workspace:*",
+    "@apzhub/platform-identity": "workspace:*",
+    "@apzhub/platform-lifecycle": "workspace:*",
+    "@apzhub/platform-operations": "workspace:*",
+    "@apzhub/platform-personalisation": "workspace:*",
+    "@apzhub/platform-runtime": "workspace:*",
+    "@apzhub/platform-security": "workspace:*",
+    "@apzhub/platform-service-contracts": "workspace:*",
+    "@apzhub/platform-services": "workspace:*",
+    "@apzhub/reporting-contracts": "workspace:*",
     "@apzhub/shared": "workspace:*",
     "@apzhub/theme": "workspace:*",
     "@apzhub/types": "workspace:*",
-    "@apzhub/platform-runtime": "workspace:*",
-    "@apzhub/workbench-framework": "workspace:*",
     "@apzhub/ui": "workspace:*",
+    "@apzhub/workbench-framework": "workspace:*",
     "@apzhub/workspace": "workspace:*",
     "@tanstack/react-query": "^5.80.7",
     "better-auth": "^1.2.9",
@@ -30,7 +43,8 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "swagger-ui-react": "^5.21.0",
-    "yaml": "^2.8.0"
+    "yaml": "^2.8.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -38,10 +52,10 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/swagger-ui-react": "^5.18.0",
+    "dotenv": "^16.5.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "dotenv": "^16.5.0"
+    "typescript": "^5"
   }
 }

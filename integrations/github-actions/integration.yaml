@@ -1,0 +1,51 @@
+manifestSchemaVersion: "1.0"
+id: github-actions
+name: GitHub Actions Engine Integration
+version: 0.1.0
+kind: integration
+
+metadata:
+  category: integrations
+  description: Read-only GitHub Actions reference adapter for APZ TCMS CI/CD. Not user-facing.
+  owner: APZHUB
+  tags:
+    - github-actions
+    - cicd
+    - pipeline
+    - adapter
+
+dependencies:
+  platform: []
+
+integration:
+  type: oss-application
+  capabilities:
+    - health
+    - authentication-bridge
+    - error-translation
+    - diagnostics
+    - repositories
+    - workflows
+    - pipeline-runs
+    - jobs
+    - steps
+    - artifacts
+    - logs-metadata
+    - approvals
+    - summary
+
+health:
+  enabled: true
+
+documentation:
+  userVisible: false
+  engineBranding: hidden
+  supportedApiVersions:
+    - "2022-11-28"
+  supportedEngineVersionMin: "GitHub REST API 2022-11-28"
+  supportedEngineVersionMax: "GitHub REST API 2022-11-28"
+  adapterImplementation: APZTCMS-016
+
+tests:
+  contract: in-progress
+  integration: planned

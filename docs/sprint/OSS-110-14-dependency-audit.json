@@ -1,0 +1,120 @@
+{
+  "milestone": "OSS-110-14",
+  "scannedAt": "2026-07-11T17:15:11.205Z",
+  "scanRoots": [
+    "apps/web/components/support",
+    "apps/web/lib/support",
+    "services/support",
+    "apps/web/components/workbench-page.tsx"
+  ],
+  "filesScanned": 47,
+  "checkCount": 17,
+  "checks": [
+    {
+      "id": "ui-boundary-script",
+      "ok": true,
+      "detail": "scripts/support-ui-boundary-audit.mjs PASS"
+    },
+    {
+      "id": "support-service-yaml",
+      "ok": true,
+      "detail": "services/support/service.yaml present"
+    },
+    {
+      "id": "manifest-support",
+      "ok": true,
+      "detail": "services/support/manifests/support/module.yaml enabled (activity-bar)"
+    },
+    {
+      "id": "manifest-support-requests",
+      "ok": true,
+      "detail": "services/support/manifests/support-requests/module.yaml enabled (sidebar)"
+    },
+    {
+      "id": "manifest-support-organizations",
+      "ok": true,
+      "detail": "services/support/manifests/support-organizations/module.yaml enabled (sidebar)"
+    },
+    {
+      "id": "manifest-support-groups",
+      "ok": true,
+      "detail": "services/support/manifests/support-groups/module.yaml enabled (sidebar)"
+    },
+    {
+      "id": "manifest-support-users",
+      "ok": true,
+      "detail": "services/support/manifests/support-users/module.yaml enabled (sidebar)"
+    },
+    {
+      "id": "manifest-support-search",
+      "ok": true,
+      "detail": "services/support/manifests/support-search/module.yaml enabled (sidebar)"
+    },
+    {
+      "id": "manifest-support-analytics",
+      "ok": true,
+      "detail": "services/support/manifests/support-analytics/module.yaml enabled (sidebar)"
+    },
+    {
+      "id": "workbench-wiring",
+      "ok": true,
+      "detail": "workbench-page wires isSupportRoute → SupportWorkspaceRouter"
+    },
+    {
+      "id": "support-api-v1",
+      "ok": true,
+      "detail": "support-api.ts uses /api/v1 only"
+    },
+    {
+      "id": "ui-forbidden-imports",
+      "ok": true,
+      "detail": "No forbidden gateway/provider/adapter/mapping/DB imports in Support UI"
+    },
+    {
+      "id": "ui-out-of-scope-absent",
+      "ok": true,
+      "detail": "No Event Bus / webhook / binary attachment UI in Support presentation"
+    },
+    {
+      "id": "ui-no-provider-native-ids",
+      "ok": true,
+      "detail": "No provider-native ID patterns (_zammad_ / s*_zammad_*) in Support UI"
+    },
+    {
+      "id": "internal-note-safety",
+      "ok": true,
+      "detail": "InternalNoteComposer forces visibility=internal"
+    },
+    {
+      "id": "customer-reply-safety",
+      "ok": true,
+      "detail": "CustomerReplyComposer shows customer-visible warning"
+    },
+    {
+      "id": "attachment-metadata-only",
+      "ok": true,
+      "detail": "AttachmentMetadataList shows metadata + Binary access not available"
+    }
+  ],
+  "violationCount": 0,
+  "violations": [],
+  "importGraph": {
+    "support-ui": [
+      "@/lib/support/errors",
+      "@/lib/support/format",
+      "@/lib/support/permissions",
+      "@/lib/support/query-keys",
+      "@/lib/support/routes",
+      "@/lib/support/sanitize-article-body",
+      "@/lib/support/support-api",
+      "@/lib/support/types",
+      "@apzhub/platform-service-contracts",
+      "@apzhub/ui"
+    ]
+  },
+  "verticalDependencyAudit": {
+    "script": "scripts/support-vertical-dependency-audit.mjs",
+    "note": "Re-run separately; expected still PASS for HTTP/provider/service layers"
+  },
+  "verdict": "PASS"
+}

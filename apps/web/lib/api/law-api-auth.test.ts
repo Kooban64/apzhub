@@ -1,6 +1,11 @@
 import { NextRequest } from "next/server";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import {
+  getSharedTenantManagementService,
+  resetSharedTenantManagement,
+} from "@apzhub/platform-identity";
+
 import { GET as getDiagnostics } from "../../app/api/law/v1/diagnostics/route";
 import {
   LAW_API_CORRELATION_ID_HEADER,
@@ -143,10 +148,10 @@ describe("resolveLawApiPermissions", () => {
     vi.unstubAllEnvs();
   });
 
-  it("denies permissions without user context in production mode", () => {
+  it("denies permissions without user context in production mode", async () => {
     vi.stubEnv("NODE_ENV", "production");
 
-    const checker = resolveLawApiPermissions({
+    const checker = await resolveLawApiPermissions({
       user: { userId: "user-1", email: "a@b.com", name: "A", emailVerified: true },
       permissions: [],
     });
@@ -154,8 +159,8 @@ describe("resolveLawApiPermissions", () => {
     expect(checker.can("legal.nav.dashboard.view")).toBe(false);
   });
 
-  it("allows wildcard permissions when explicitly granted", () => {
-    const checker = resolveLawApiPermissions({
+  it("allows wildcard permissions when explicitly granted", async () => {
+    const checker = await resolveLawApiPermissions({
       user: { userId: "user-1", email: "a@b.com", name: "A", emailVerified: true },
       permissions: ["*"],
     });
@@ -166,6 +171,12 @@ describe("resolveLawApiPermissions", () => {
 
 describe("buildLawApiAuthenticatedContext", () => {
   beforeEach(() => {
+    resetSharedTenantManagement();
+    getSharedTenantManagementService().assignUserToTenant({
+      userId: "user-1",
+      tenantId: DEFAULT_LAW_TENANT_ID,
+      isPrimary: true,
+    });
     mockGetValidatedSession.mockReset();
     mockIsDevRegistrationAllowed.mockReturnValue(false);
     vi.stubEnv("NODE_ENV", "test");
@@ -239,6 +250,12 @@ describe("buildLawApiAuthenticatedContext", () => {
 
 describe("Law API auth diagnostics", () => {
   beforeEach(() => {
+    resetSharedTenantManagement();
+    getSharedTenantManagementService().assignUserToTenant({
+      userId: "user-1",
+      tenantId: DEFAULT_LAW_TENANT_ID,
+      isPrimary: true,
+    });
     mockGetValidatedSession.mockReset();
     mockIsDevRegistrationAllowed.mockReturnValue(false);
     vi.stubEnv("LAW_API_ALLOW_DEV_TENANT_FALLBACK", "false");
@@ -276,6 +293,12 @@ describe("Law API auth diagnostics", () => {
 
 describe("GET /api/law/v1/diagnostics route", () => {
   beforeEach(() => {
+    resetSharedTenantManagement();
+    getSharedTenantManagementService().assignUserToTenant({
+      userId: "user-1",
+      tenantId: DEFAULT_LAW_TENANT_ID,
+      isPrimary: true,
+    });
     mockGetValidatedSession.mockReset();
     mockIsDevRegistrationAllowed.mockReturnValue(false);
     vi.stubEnv("NODE_ENV", "test");

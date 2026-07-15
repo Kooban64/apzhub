@@ -1,0 +1,67 @@
+manifestSchemaVersion: "1.0"
+id: support-service
+name: Support Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: support
+  description: APZHUB Support capability service — vendor-neutral support request, article, organization, group, and user orchestration (APZService / Support product).
+  contractPackage: "@apzhub/platform-service-contracts"
+  contractVersion: "0.7.0"
+  implementationPackage: "@apzhub/platform-services"
+  implementationVersion: "0.7.0"
+  owner: APZHUB
+  tags:
+    - support
+    - requests
+    - articles
+    - organizations
+    - groups
+
+dependencies:
+  platform: []
+  integrations:
+    - zammad
+
+integrations:
+  - zammad
+
+service:
+  category: support
+
+permissions:
+  - support.requests.list
+  - support.requests.read
+  - support.requests.create
+  - support.requests.update
+  - support.requests.assign
+  - support.requests.transition
+  - support.requests.manage
+  - support.articles.list
+  - support.articles.read
+  - support.articles.create
+  - support.organizations.list
+  - support.organizations.read
+  - support.organizations.create
+  - support.organizations.update
+  - support.organizations.archive
+  - support.groups.list
+  - support.groups.read
+  - support.groups.create
+  - support.groups.update
+  - support.users.list
+  - support.users.read
+  - support.search.execute
+  - support.analytics.read
+
+health:
+  enabled: true
+
+documentation:
+  governanceCapabilityKey: support
+  engineBranding: hidden
+
+tests:
+  manifest: true
+  contract: true

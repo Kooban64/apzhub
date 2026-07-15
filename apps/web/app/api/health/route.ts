@@ -7,6 +7,7 @@ import type { PlatformHealthResponse } from "@apzhub/types";
 import { NextResponse } from "next/server";
 
 import { ensurePlatformRuntimeReady } from "@/lib/runtime-init";
+import { getSharedPlatformSecurityService } from "@apzhub/platform-security";
 import { loadActionRegistryHealthSummary } from "@/lib/command-hydration";
 import {
   loadEventFrameworkHealthSummary,
@@ -61,6 +62,9 @@ export async function GET() {
   const allHealthy = database.ok && redis.ok && runtimeHealthy;
   const anyDown = !database.ok || !redis.ok || !runtimeHealthy;
 
+  const securityService = getSharedPlatformSecurityService();
+  const securityDiagnostics = securityService.securityDiagnostics.getSecurityDiagnostics();
+
   const body: PlatformHealthResponse = {
     status: allHealthy ? "healthy" : anyDown ? "unhealthy" : "degraded",
     platformVersion: env.PLATFORM_VERSION,
@@ -90,6 +94,13 @@ export async function GET() {
     notifications,
     activities,
     timelines,
+    security: {
+      environmentValid: securityDiagnostics.environment.valid,
+      rateLimit: {
+        backend: securityDiagnostics.rateLimit.backend,
+        enabled: securityDiagnostics.rateLimit.enabled,
+      },
+    },
   };
 
   return NextResponse.json(body, {

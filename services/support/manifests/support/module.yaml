@@ -1,0 +1,51 @@
+manifestSchemaVersion: "1.0"
+id: support
+name: Support
+version: 0.1.0
+kind: module
+
+metadata:
+  category: support
+  description: APZHUB Support workbench — support requests, organizations, groups, users, search, and analytics.
+  owner: APZHUB
+  icon: life-buoy
+  tags:
+    - support
+    - requests
+    - helpdesk
+
+dependencies:
+  platform: []
+  services:
+    - support-service
+
+compatibility:
+  platformVersion: ">=0.1.0"
+
+module:
+  category: support
+  status: enabled
+  description: Support capability module (OSS-110-13).
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: support
+    label: Support
+    icon: life-buoy
+    route: /workspace/support
+    order: 30
+    permission: support.requests.list
+  view:
+    title: Support
+    workspace: support
+    route: /workspace/support
+    default: true
+    permission: support.requests.list
+
+documentation:
+  engineBranding: hidden
+
+tests:
+  manifest: true
+  e2e: planned

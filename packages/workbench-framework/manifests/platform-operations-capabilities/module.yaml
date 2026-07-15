@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-operations-capabilities
+name: Capabilities
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Operations — Capabilities registry (M8-05).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-administration
+    label: Capabilities
+    icon: boxes
+    route: /workspace/administration/capabilities
+    order: 39
+    permission: platform.nav.administration.view
+  view:
+    title: Capabilities
+    workspace: administration
+    route: /workspace/administration/capabilities
+    permission: platform.nav.administration.view

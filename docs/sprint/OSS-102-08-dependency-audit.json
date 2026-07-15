@@ -1,0 +1,22 @@
+{
+  "milestone": "OSS-102-08",
+  "scannedAt": "2026-07-11T09:59:44.253Z",
+  "scanRoot": "integrations/zammad/src",
+  "filesScanned": 63,
+  "violationCount": 0,
+  "violations": [],
+  "importGraph": {
+    "integration-zammad": [
+      "@apzhub/integration-sdk",
+      "@apzhub/integration-sdk/adapter",
+      "@apzhub/integration-sdk/auth",
+      "@apzhub/integration-sdk/client",
+      "@apzhub/integration-sdk/diagnostics",
+      "@apzhub/integration-sdk/errors",
+      "@apzhub/integration-sdk/observability",
+      "@apzhub/integration-sdk/resilience",
+      "@apzhub/platform-service-contracts"
+    ]
+  },
+  "verdict": "PASS"
+}

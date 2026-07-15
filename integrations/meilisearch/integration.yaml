@@ -1,0 +1,58 @@
+manifestSchemaVersion: "1.0"
+id: meilisearch
+name: Meilisearch Search Engine Integration
+version: 0.1.0
+kind: integration
+
+metadata:
+  category: integrations
+  description: Reference Meilisearch CE search adapter for APZHUB Platform Search. Not user-facing. Vendor-neutral platform remains unaltered.
+  owner: APZHUB
+  tags:
+    - meilisearch
+    - search
+    - adapter
+    - reference
+
+dependencies:
+  platform: []
+
+integration:
+  type: oss-application
+  capabilities:
+    - search
+    - health
+    - diagnostics
+    - error-translation
+    - keyword-search
+    - phrase-search
+    - filtering
+    - sorting
+    - facets
+    - highlighting
+    - pagination
+    - index-lifecycle
+    - document-crud
+    - configuration-validation
+
+health:
+  enabled: true
+
+documentation:
+  userVisible: false
+  engineBranding: hidden
+  supportedApiVersions:
+    - "v1"
+  supportedEngineVersionMin: "Meilisearch 1.0"
+  supportedEngineVersionMax: "Meilisearch 1.x"
+  adapterImplementation: APZSEARCH-005
+  unsupported:
+    - semantic-search
+    - vector-search
+    - fuzzy-search
+    - ai-ranking
+    - ocr
+
+tests:
+  contract: in-progress
+  integration: planned

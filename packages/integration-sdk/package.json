@@ -1,0 +1,29 @@
+{
+  "name": "@apzhub/integration-sdk",
+  "version": "0.9.0",
+  "private": true,
+  "type": "module",
+  "description": "Platform Integration SDK — shared foundation for OSS and vendor adapters (OSS-100)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client/index.ts",
+    "./adapter": "./src/adapter/index.ts",
+    "./diagnostics": "./src/diagnostics/index.ts",
+    "./lifecycle": "./src/lifecycle/index.ts",
+    "./errors": "./src/errors/index.ts",
+    "./auth": "./src/auth/index.ts",
+    "./connection": "./src/connection/index.ts",
+    "./health": "./src/health/index.ts",
+    "./version": "./src/version/index.ts",
+    "./resilience": "./src/resilience/index.ts",
+    "./observability": "./src/observability/index.ts",
+    "./transport": "./src/transport/index.ts",
+    "./mapping": "./src/mapping/index.ts",
+    "./events": "./src/events/index.ts",
+    "./harness": "./src/harness/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/"
+  }
+}

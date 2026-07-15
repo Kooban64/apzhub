@@ -4,7 +4,6 @@ import { getValidatedSession } from "@apzhub/auth/server";
 import { isDevRegistrationAllowed } from "@apzhub/config";
 import { Runtime } from "@apzhub/platform-runtime/server";
 import {
-  createAuthPermissionContextFromUser,
   createEmptyWorkbenchRegistryDto,
   filterWorkbenchRegistryDto,
   mapWorkbenchRegistryDto,
@@ -13,6 +12,7 @@ import {
 import { createWorkbenchPermissionAdapter } from "@apzhub/workbench-framework";
 
 import { ensurePlatformRuntimeReady } from "./runtime-init";
+import { createLawPlatformAuthPermissionContext } from "./session-permission-context";
 
 export async function loadWorkbenchRegistryDto(): Promise<WorkbenchRegistryDto> {
   const bootstrap = await ensurePlatformRuntimeReady();
@@ -27,8 +27,9 @@ export async function loadWorkbenchRegistryDto(): Promise<WorkbenchRegistryDto> 
   const dto = mapWorkbenchRegistryDto(contributions, descriptors);
 
   const session = await getValidatedSession(await headers());
+  const authContext = await createLawPlatformAuthPermissionContext(session);
   const permissionAdapter = createWorkbenchPermissionAdapter({
-    authContext: createAuthPermissionContextFromUser(session?.user),
+    authContext,
     nodeEnv: process.env.NODE_ENV,
     allowDevRegistration: isDevRegistrationAllowed(),
   });

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-operations-resilience
+name: Resilience
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Operations — Operational Resilience (M8-06).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-administration
+    label: Resilience
+    icon: life-buoy
+    route: /workspace/administration/resilience
+    order: 120
+    permission: platform.nav.administration.view
+  view:
+    title: Resilience
+    workspace: administration
+    route: /workspace/administration/resilience
+    permission: platform.nav.administration.view

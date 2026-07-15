@@ -112,6 +112,16 @@ Dedicated ports for `/home/ubuntu/apz-portal` — chosen to avoid `apz-stack` co
 
 Compose file: `infrastructure/docker/docker-compose.dev.yml`
 
+### Entity mapping persistence (OSS-110-05)
+
+| Variable | Default | Notes |
+|----------|---------|-------|
+| `ENTITY_MAPPING_STORE_MODE` | `memory` (non-prod) / `postgres` (prod) | `memory` \| `postgres` |
+| `ENTITY_MAPPING_ALLOW_MEMORY_IN_PRODUCTION` | `false` | Explicit escape hatch only |
+| `DATABASE_URL` | required for postgres mode | Never silently fall back to memory |
+
+Apply schema with `pnpm db:migrate` (includes `0015_platform_entity_mapping`).
+
 ## Listening ports summary
 
 | Port        | Listener                | Exposure                                  |

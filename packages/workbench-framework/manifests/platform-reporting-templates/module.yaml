@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-reporting-templates
+name: Templates
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Reporting — Templates sidebar.
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: reporting
+    parent: platform-reporting
+    label: Templates
+    icon: layout-template
+    route: /workspace/reporting/templates
+    order: 10
+    permission: report.view
+  view:
+    title: Templates
+    workspace: reporting
+    route: /workspace/reporting/templates
+    permission: report.view

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-search-query
+name: Query
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Search — Query sidebar (APZSEARCH-007).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: search
+    parent: platform-search
+    label: Query
+    icon: search
+    route: /workspace/search/query
+    order: 20
+    permission: search.query.execute
+  view:
+    title: Query
+    workspace: search
+    route: /workspace/search/query
+    permission: search.query.execute

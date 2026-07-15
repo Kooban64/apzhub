@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-search-providers
+name: Providers
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Search — Providers sidebar (APZSEARCH-007).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: search
+    parent: platform-search
+    label: Providers
+    icon: server
+    route: /workspace/search/providers
+    order: 30
+    permission: search.provider.list
+  view:
+    title: Providers
+    workspace: search
+    route: /workspace/search/providers
+    permission: search.provider.list

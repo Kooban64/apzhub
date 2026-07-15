@@ -1,0 +1,40 @@
+manifestSchemaVersion: "1.0"
+id: platform-documents
+name: Documents
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Documents workspace — metadata workbench (APZDOCS-005).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: documents
+    icon: file-text
+    route: /workspace/documents
+    order: 50
+    permission: document.read
+  view:
+    title: Documents
+    workspace: documents
+    route: /workspace/documents
+    default: true
+    permission: document.read
+  actions:
+    - id: platform.documents.navigate
+      label: Go to Documents
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: document.read
+      palette: true
+      group: Navigation
+      icon: file-text
+      order: 50
+      description: Reveal the Documents navigation item in the workbench shell.

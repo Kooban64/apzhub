@@ -17,6 +17,7 @@ import {
 } from "../knowledge/legal-search-source-ids";
 import { publishLegalSearchEvent } from "../publish-legal-search-event";
 import { runAsLegalSearchWorkflowQuery } from "./legal-search-knowledge-tracking";
+import { runWithLegalSearchPersistenceScope } from "./legal-search-persistence-scope";
 import { runWithLegalSearchFilters } from "./legal-search-query-context";
 import {
   EMPTY_LEGAL_SEARCH_FILTERS,
@@ -184,12 +185,14 @@ export class LegalSearchWorkflowService {
     const operation: LegalSearchWorkflowOperation = "execute";
 
     const knowledgeStart = performance.now();
-    const knowledgeResult = await runWithLegalSearchFilters(filters, () =>
-      runAsLegalSearchWorkflowQuery(() =>
-        this.options.knowledgeService.query({
-          text: query,
-          limit: 100,
-        }),
+    const knowledgeResult = await runWithLegalSearchPersistenceScope(() =>
+      runWithLegalSearchFilters(filters, () =>
+        runAsLegalSearchWorkflowQuery(() =>
+          this.options.knowledgeService.query({
+            text: query,
+            limit: 100,
+          }),
+        ),
       ),
     );
     recordStage(

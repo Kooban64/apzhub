@@ -71,6 +71,8 @@ describe("Law API response envelopes", () => {
     });
     expect(response.headers.get(LAW_API_REQUEST_ID_HEADER)).toBe(context.requestId);
     expect(response.headers.get(LAW_API_CORRELATION_ID_HEADER)).toBe("corr-success");
+    expect(response.headers.get("X-Content-Type-Options")).toBe("nosniff");
+    expect(response.headers.get("Cache-Control")).toContain("no-store");
   });
 
   it("returns the standard error envelope", async () => {
@@ -177,5 +179,7 @@ describe("Law API route handlers", () => {
     expect(body.data.status).toBe("healthy");
     expect(body.meta.correlationId).toBe("health-corr");
     expect(response.headers.get(LAW_API_REQUEST_ID_HEADER)).toBeTruthy();
+    expect(response.headers.get("X-Content-Type-Options")).toBe("nosniff");
+    expect(response.headers.get("Cache-Control")).toContain("no-store");
   });
 });

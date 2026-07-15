@@ -1,0 +1,19 @@
+{
+  "name": "@apzhub/testing-contracts",
+  "version": "0.11.0",
+  "private": true,
+  "type": "module",
+  "description": "APZ TCMS domain contracts — enums, models, service interfaces, events, permissions, and config types (APZTCMS-002…024)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts packages/testing-contracts"
+  },
+  "dependencies": {
+    "@apzhub/platform-service-contracts": "workspace:*",
+    "@apzhub/reporting-contracts": "workspace:*"
+  }
+}

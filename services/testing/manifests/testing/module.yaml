@@ -1,0 +1,346 @@
+manifestSchemaVersion: "1.0"
+id: testing
+name: Testing
+version: 0.5.0
+kind: module
+
+metadata:
+  category: quality
+  description: APZ TCMS Testing workbench — Manual Testing, Automation, Evidence, Quality, Certification, Release Readiness, Pipelines, Engineering Intelligence, and Executive Dashboards (presentation only).
+  owner: APZHUB
+  icon: flask-conical
+  tags:
+    - testing
+    - tcms
+    - certification
+    - quality
+    - pipelines
+    - engineering-intelligence
+    - executive-dashboards
+  product: APZ TCMS
+  milestone: APZTCMS-023
+
+dependencies:
+  platform: []
+  services:
+    - testing-service
+    - certification-service
+
+compatibility:
+  platformVersion: ">=0.1.0"
+
+module:
+  category: quality
+  status: enabled
+  description: Testing workbench module (APZTCMS-023) — presentation layer over domain services via typed client.
+
+permissions:
+  - id: testing.view
+    description: View Testing workspace and dashboard.
+  - id: testing.requirements.read
+    description: View requirements and risks.
+  - id: testing.plans.read
+    description: View test plans.
+  - id: testing.suites.read
+    description: View test suites.
+  - id: testing.cases.read
+    description: View test cases and steps.
+  - id: testing.executions.read
+    description: View executions and runs.
+  - id: automation.view
+    description: View automation results and imports.
+  - id: evidence.read
+    description: View evidence metadata.
+  - id: coverage.view
+    description: View coverage summaries.
+  - id: defects.view
+    description: View defect links.
+  - id: quality.view
+    description: View quality summaries.
+  - id: certification.view
+    description: View certification records and gates.
+  - id: release.view
+    description: View release readiness.
+  - id: reporting.view
+    description: View testing reports (placeholders).
+  - id: pipeline.read
+    description: View pipeline repositories, workflows, runs, jobs, steps, artifacts, and summaries.
+  - id: pipeline.import
+    description: Import live provider runs into platform SoR (refresh).
+  - id: pipeline.providers
+    description: List registered pipeline result adapters.
+  - id: engineering.view
+    description: View Engineering Intelligence workspace.
+  - id: analytics.view
+    description: View engineering analytics summaries.
+  - id: benchmark.view
+    description: View benchmarks and baselines.
+  - id: trend.view
+    description: View quality and delivery trends.
+  - id: testing.admin
+    description: Administer Testing module settings.
+
+navigation:
+  activityBar:
+    enabled: true
+    label: Testing
+    icon: flask-conical
+    order: 50
+    permission: testing.view
+  sidebar:
+    - id: testing.dashboard
+      label: Dashboard
+      route: /workspace/testing
+      icon: layout-dashboard
+      permission: testing.view
+    - id: testing.requirements
+      label: Requirements
+      route: /workspace/testing/requirements
+      icon: list-checks
+      permission: testing.requirements.read
+    - id: testing.plans
+      label: Plans
+      route: /workspace/testing/plans
+      icon: clipboard-list
+      permission: testing.plans.read
+    - id: testing.suites
+      label: Suites
+      route: /workspace/testing/suites
+      icon: folders
+      permission: testing.suites.read
+    - id: testing.cases
+      label: Cases
+      route: /workspace/testing/cases
+      icon: file-check
+      permission: testing.cases.read
+    - id: testing.executions
+      label: Manual Execution
+      route: /workspace/testing/executions
+      icon: play
+      permission: testing.executions.read
+    - id: testing.automation
+      label: Automation
+      route: /workspace/testing/automation
+      icon: bot
+      permission: automation.view
+    - id: testing.evidence
+      label: Evidence
+      route: /workspace/testing/evidence
+      icon: paperclip
+      permission: evidence.read
+    - id: testing.coverage
+      label: Coverage
+      route: /workspace/testing/coverage
+      icon: chart-pie
+      permission: coverage.view
+    - id: testing.defects
+      label: Defects
+      route: /workspace/testing/defects
+      icon: bug
+      permission: defects.view
+    - id: testing.quality
+      label: Quality
+      route: /workspace/testing/quality
+      icon: gauge
+      permission: quality.view
+    - id: testing.certification
+      label: Certification
+      route: /workspace/testing/certification
+      icon: badge-check
+      permission: certification.view
+    - id: testing.release-readiness
+      label: Release Readiness
+      route: /workspace/testing/release-readiness
+      icon: rocket
+      permission: release.view
+    - id: testing.pipelines
+      label: Pipelines
+      route: /workspace/testing/pipelines
+      icon: git-branch
+      permission: pipeline.read
+    - id: testing.engineering-intelligence
+      label: Engineering Intelligence
+      route: /workspace/testing/engineering-intelligence
+      icon: activity
+      permission: engineering.view
+    - id: testing.executive-dashboards
+      label: Executive Dashboards
+      route: /workspace/testing/executive-dashboards
+      icon: layout-dashboard
+      permission: analytics.view
+    - id: testing.reports
+      label: Reports
+      route: /workspace/testing/reports
+      icon: file-bar-chart
+      permission: reporting.view
+    - id: testing.administration
+      label: Administration
+      route: /workspace/testing/administration
+      icon: settings
+      permission: testing.admin
+
+commands:
+  - id: testing.open
+    label: Open Testing
+    category: Testing
+    permission: testing.view
+  - id: testing.plan.create
+    label: Create Plan
+    category: Testing
+    permission: testing.plans.create
+  - id: testing.suite.create
+    label: Create Suite
+    category: Testing
+    permission: testing.suites.create
+  - id: testing.case.create
+    label: Create Case
+    category: Testing
+    permission: testing.cases.create
+  - id: testing.execution.start
+    label: Start Execution
+    category: Testing
+    permission: testing.executions.execute
+  - id: testing.certification.review
+    label: Review Certification
+    category: Testing
+    permission: certification.review
+  - id: testing.pipelines.refresh
+    label: Refresh pipeline run
+    category: Testing Pipelines
+    permission: pipeline.import
+  - id: testing.pipelines.open-workflow
+    label: Open Workflow
+    category: Testing Pipelines
+    permission: pipeline.read
+  - id: testing.pipelines.open-run
+    label: Open Run
+    category: Testing Pipelines
+    permission: pipeline.read
+  - id: testing.pipelines.view-artifacts
+    label: View Artifacts
+    category: Testing Pipelines
+    permission: pipeline.read
+  - id: testing.pipelines.view-summary
+    label: View Summary
+    category: Testing Pipelines
+    permission: pipeline.read
+  - id: testing.pipelines.view-evidence
+    label: View Evidence
+    category: Testing Pipelines
+    permission: pipeline.read
+  - id: testing.pipelines.view-coverage
+    label: View Coverage
+    category: Testing Pipelines
+    permission: pipeline.read
+  - id: testing.pipelines.view-certification
+    label: View Certification
+    category: Testing Pipelines
+    permission: pipeline.read
+  - id: testing.pipelines.view-release
+    label: View Release
+    category: Testing Pipelines
+    permission: pipeline.read
+  - id: testing.ei.refresh
+    label: Refresh Engineering Intelligence
+    category: Engineering Intelligence
+    permission: engineering.view
+  - id: testing.ei.compare-baselines
+    label: Compare Baselines
+    category: Engineering Intelligence
+    permission: benchmark.view
+  - id: testing.ei.open-release
+    label: Open Release
+    category: Engineering Intelligence
+    permission: engineering.view
+  - id: testing.ei.open-certification
+    label: Open Certification
+    category: Engineering Intelligence
+    permission: engineering.view
+  - id: testing.ei.open-coverage
+    label: Open Coverage
+    category: Engineering Intelligence
+    permission: engineering.view
+  - id: testing.ei.open-evidence
+    label: Open Evidence
+    category: Engineering Intelligence
+    permission: engineering.view
+  - id: testing.ei.open-pipeline
+    label: Open Pipeline
+    category: Engineering Intelligence
+    permission: engineering.view
+  - id: testing.ei.export-summary
+    label: Export Summary
+    category: Engineering Intelligence
+    permission: engineering.view
+  - id: testing.dash.refresh
+    label: Refresh Dashboards
+    category: Executive Dashboards
+    permission: engineering.view
+  - id: testing.dash.compare
+    label: Compare Dashboard Period
+    category: Executive Dashboards
+    permission: benchmark.view
+  - id: testing.dash.open-release
+    label: Open Release
+    category: Executive Dashboards
+    permission: release.view
+  - id: testing.dash.open-certification
+    label: Open Certification
+    category: Executive Dashboards
+    permission: certification.view
+  - id: testing.dash.open-pipeline
+    label: Open Pipeline
+    category: Executive Dashboards
+    permission: pipeline.read
+  - id: testing.dash.open-coverage
+    label: Open Coverage
+    category: Executive Dashboards
+    permission: coverage.view
+  - id: testing.dash.open-evidence
+    label: Open Evidence
+    category: Executive Dashboards
+    permission: evidence.read
+  - id: testing.dash.open-testing
+    label: Open Testing
+    category: Executive Dashboards
+    permission: testing.view
+  - id: testing.dash.open-quality
+    label: Open Quality
+    category: Executive Dashboards
+    permission: quality.view
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: testing
+    label: Testing
+    icon: flask-conical
+    route: /workspace/testing
+    order: 50
+    permission: testing.view
+  view:
+    title: Testing
+    workspace: testing
+    route: /workspace/testing
+    default: true
+    permission: testing.view
+  actions:
+    - id: testing.open
+      label: Open Testing
+      handler: service:testing-service:placeholder.open
+      permission: testing.view
+      palette: true
+      group: Testing
+      icon: flask-conical
+      order: 10
+      description: Open the Testing workspace.
+
+documentation:
+  engineBranding: hidden
+  product: APZ TCMS
+  milestone: APZTCMS-023
+
+health:
+  selfReport: true
+  checks:
+    - module-registered

@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: support-users
+name: Users
+version: 0.1.0
+kind: module
+
+metadata:
+  category: support
+  description: Support — Support-domain users (read-only).
+
+dependencies:
+  platform: []
+  services:
+    - support-service
+
+module:
+  category: support
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: support
+    parent: support
+    label: Users
+    icon: user
+    route: /workspace/support/users
+    order: 40
+    permission: support.users.list
+  view:
+    title: Users
+    workspace: support
+    route: /workspace/support/users
+    permission: support.users.list

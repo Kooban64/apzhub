@@ -1,0 +1,97 @@
+manifestSchemaVersion: "1.0"
+id: project-service
+name: Project Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: productivity
+  description: APZHUB Projects capability service — vendor-neutral project and task orchestration.
+  contractPackage: "@apzhub/platform-service-contracts"
+  contractVersion: "0.1.0"
+  implementationPackage: "@apzhub/platform-services"
+  implementationVersion: "0.2.0"
+  owner: APZHUB
+  tags:
+    - projects
+    - tasks
+    - sprints
+    - productivity
+
+dependencies:
+  platform: []
+  integrations:
+    - plane
+
+integrations:
+  - plane
+
+service:
+  category: productivity
+
+permissions:
+  - projects.view
+  - projects.manage
+  - projects.task.view
+  - projects.task.manage
+  - projects.sprint.view
+  - projects.sprint.manage
+  - projects.admin
+
+events:
+  publishes:
+    - projects.project.created
+    - projects.project.updated
+    - projects.task.created
+    - projects.task.updated
+    - projects.task.status_changed
+    - projects.task.assigned
+    - projects.sprint.created
+    - projects.sprint.completed
+
+health:
+  enabled: true
+
+knowledge:
+  sources:
+    - id: projects.search
+      label: Projects Search
+      kind: metadata-index
+      tier: T2
+      priority: 10
+      status: planned
+      permission: projects.view
+      provides:
+        - project
+      version: "0.1.0"
+    - id: projects.knowledge
+      label: Projects Knowledge
+      kind: event-index
+      tier: T2
+      priority: 20
+      status: planned
+      permission: projects.view
+      provides:
+        - project
+        - document
+      version: "0.1.0"
+
+documentation:
+  governanceCapabilityKey: projects
+  governanceCapabilityType: productivity
+  featureFlagKey: capability.projects.enabled
+  provisioningKind: plane-workspace
+  lifecycleProductId: projects
+  lifecycleParticipation: enable,disable,provision,reconcile
+  operationsCapabilityId: projects
+  operationsConnectorId: plane
+  diagnosticsExtension: projectsDiagnostics
+  notificationRouteTaskAssigned: projects.task.assigned
+  notificationRouteTaskStatusChanged: projects.task.status_changed
+  notificationRouteSprintCompleted: projects.sprint.completed
+  activityProviderId: projects.activity
+  activityTypes: projects.project.created,projects.project.updated,projects.task.created,projects.task.updated,projects.task.status_changed,projects.task.assigned,projects.sprint.created,projects.sprint.completed
+
+tests:
+  contract: planned
+  integration: planned

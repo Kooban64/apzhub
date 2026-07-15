@@ -35,7 +35,16 @@ describe("resolveLawTenantBinding", () => {
     process.env.LAW_TENANT_ID = previous;
   });
 
-  it("uses session single-firm fallback for authenticated users", () => {
+  it("uses session claim when sessionTenantId is provided", () => {
+    const binding = resolveLawTenantBinding({
+      userId: "user-123",
+      sessionTenantId: "t0000002-0000-4000-8000-000000000002",
+    });
+    expect(binding.source).toBe("session-claim");
+    expect(binding.tenantId).toBe("t0000002-0000-4000-8000-000000000002");
+  });
+
+  it("uses session single-firm fallback for authenticated users without claim", () => {
     const previous = process.env.LAW_TENANT_ID;
     delete process.env.LAW_TENANT_ID;
 

@@ -1,0 +1,20 @@
+{
+  "name": "@apzhub/platform-governance",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Platform Governance & Provisioning Framework (M8-05)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts",
+    "./postgres": "./src/postgres.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "drizzle-orm": "^0.44.2"
+  }
+}

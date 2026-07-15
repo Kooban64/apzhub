@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-reporting-generations
+name: Generated Reports
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Reporting — Generated Reports sidebar.
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: reporting
+    parent: platform-reporting
+    label: Generated Reports
+    icon: files
+    route: /workspace/reporting/generations
+    order: 20
+    permission: report.view
+  view:
+    title: Generated Reports
+    workspace: reporting
+    route: /workspace/reporting/generations
+    permission: report.view

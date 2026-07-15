@@ -1,0 +1,35 @@
+manifestSchemaVersion: "1.0"
+id: testing-quality
+name: Quality
+version: 0.2.0
+kind: module
+
+metadata:
+  category: quality
+  description: APZ TCMS Testing — Quality summaries (APZTCMS-010).
+
+dependencies:
+  platform: []
+  services:
+    - testing-service
+    - certification-service
+
+module:
+  category: quality
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: testing
+    parent: testing
+    label: Quality
+    icon: gauge
+    route: /workspace/testing/quality
+    order: 110
+    permission: quality.view
+  view:
+    title: Quality
+    workspace: testing
+    route: /workspace/testing/quality
+    permission: quality.view

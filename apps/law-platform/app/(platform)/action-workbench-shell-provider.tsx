@@ -35,6 +35,9 @@ import { WorkbenchProvider } from "@apzhub/workbench-framework/react";
 import type { WorkbenchRegistryDto } from "@apzhub/workbench-framework/server";
 import { useCallback, useMemo, useState, type ReactNode } from "react";
 
+import { PersonalisationThemeBridge } from "@/components/platform-personalisation/personalisation-theme-bridge";
+import { createPlatformPersonalisationSessionStore } from "@/lib/platform-personalisation/session-store";
+
 import { ActionFrameworkDiagnostics } from "@/components/action-framework-diagnostics";
 import { ActivityTimelineDiagnostics } from "@/components/activity-timeline-diagnostics";
 import { EventNotificationDiagnostics } from "@/components/event-notification-diagnostics";
@@ -76,6 +79,7 @@ export interface ActionWorkbenchShellProviderProps {
   readonly activityTimelineBundle: ActivityTimelineHydrationBundle;
   readonly activityDiagnostics: ActivityRegistryHydrationDiagnostics;
   readonly timelineDiagnostics: TimelineRegistryHydrationDiagnostics;
+  readonly initialTheme?: "light" | "dark" | "system";
   readonly children: ReactNode;
 }
 
@@ -186,6 +190,8 @@ function EventNotificationShell({
   knowledgeDto,
   commandDiagnostics,
   userId,
+  sessionTenantId,
+  initialTheme,
   children,
 }: {
   readonly notificationDto: NotificationRegistryDto;
@@ -199,11 +205,17 @@ function EventNotificationShell({
   readonly knowledgeDto: KnowledgeSourceRegistryDto;
   readonly commandDiagnostics: ActionRegistryHydrationDiagnostics;
   readonly userId?: string;
+  readonly sessionTenantId?: string;
+  readonly initialTheme?: "light" | "dark" | "system";
   readonly children: ReactNode;
 }) {
   const eventNotificationContext = useAppEventNotificationContext();
   const activityTimelineContext = useAppActivityTimelineContext(
     eventNotificationContext,
+  );
+  const sessionStore = useMemo(
+    () => (userId ? createPlatformPersonalisationSessionStore() : undefined),
+    [userId],
   );
   const [executorState, setExecutorState] = useState<{
     readonly actionExecutor: ActionExecutor;
@@ -234,6 +246,7 @@ function EventNotificationShell({
     }) => {
       const { context: persistenceContext } = createLawPersistenceContextFromSession({
         userId,
+        sessionTenantId,
         actorId: userId,
       });
       setSessionLawPersistenceContext(persistenceContext);
@@ -259,7 +272,7 @@ function EventNotificationShell({
       });
       return bundle.workbenchActionExecutor;
     },
-    [auditHook, commandDto, eventNotificationContext.eventBus, userId],
+    [auditHook, commandDto, eventNotificationContext.eventBus, sessionTenantId, userId],
   );
 
   return (
@@ -270,8 +283,11 @@ function EventNotificationShell({
         <WorkbenchProvider
           initialRegistry={registry}
           userId={userId}
+          sessionStore={sessionStore}
+          sessionStorageBackend={sessionStore ? "memory" : "localStorage"}
           resolveActionExecutor={resolveActionExecutor}
         >
+          <PersonalisationThemeBridge userId={userId} initialTheme={initialTheme} />
           <ActivityTimelineProvider bundle={activityTimelineBundle}>
             {executorState ? (
               <ActivityTimelineServiceShell
@@ -353,6 +369,7 @@ export function ActionWorkbenchShellProvider({
   activityTimelineBundle,
   activityDiagnostics,
   timelineDiagnostics,
+  initialTheme,
   children,
 }: ActionWorkbenchShellProviderProps) {
   const { data: session } = useSession();
@@ -370,6 +387,12 @@ export function ActionWorkbenchShellProvider({
       knowledgeDto={knowledgeDto}
       commandDiagnostics={commandDiagnostics}
       userId={session?.user.id}
+      sessionTenantId={
+        (session?.user as { activeTenantId?: string; tenantId?: string } | undefined)
+          ?.activeTenantId ??
+        (session?.user as { tenantId?: string } | undefined)?.tenantId
+      }
+      initialTheme={initialTheme}
     >
       {children}
     </EventNotificationShell>

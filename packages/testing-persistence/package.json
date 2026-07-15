@@ -1,0 +1,21 @@
+{
+  "name": "@apzhub/testing-persistence",
+  "version": "0.11.0",
+  "private": true,
+  "type": "module",
+  "description": "APZ TCMS domain persistence & authorization foundation (APZTCMS-003/004/006/007/008/009/015/021/024)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts packages/testing-persistence"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/platform-authorization": "workspace:*",
+    "@apzhub/testing-contracts": "workspace:*",
+    "drizzle-orm": "^0.44.2"
+  }
+}

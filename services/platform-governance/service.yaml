@@ -1,0 +1,58 @@
+manifestSchemaVersion: "1.0"
+id: platform-governance-service
+name: Platform Governance Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: platform-governance
+  description: APZ TCMS Platform Governance gateway — release approval requests, approval decisions, and human release decisions (APZTCMS-014).
+  contractPackage: "@apzhub/platform-service-contracts"
+  contractVersion: "0.9.0"
+  implementationPackage: "@apzhub/platform-services"
+  implementationVersion: "0.9.0"
+  domainPackage: "@apzhub/testing-services"
+  domainVersion: "0.6.0"
+  owner: APZHUB
+  tags:
+    - platform-governance
+    - tcms
+    - approvals
+    - governance
+
+dependencies:
+  platform:
+    - platform-release-service
+  integrations: []
+
+integrations: []
+
+service:
+  category: platform-governance
+
+permissions:
+  - governance.view
+  - governance.approve
+  - governance.decide
+  - governance.admin
+  - release.approve
+  - release.decide
+
+events:
+  publishes: []
+
+health:
+  enabled: true
+
+documentation:
+  governanceCapabilityKey: platform-governance
+  engineBranding: hidden
+  product: APZ TCMS
+  milestone: APZTCMS-014
+  notes: |
+    Typed subset of PlatformReleaseGovernanceService (requestApproval, decideApproval, recordHumanDecision).
+    Does not auto-release; human decisions remain explicit.
+
+tests:
+  manifest: true
+  contract: true

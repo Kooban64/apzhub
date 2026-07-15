@@ -9,6 +9,7 @@ import {
   DEFAULT_LAW_TENANT_ID,
   ensureLawMigrations,
   isPostgresIntegrationAvailable,
+  SECONDARY_LAW_TENANT_ID,
   seedPostgresLawDataAsync,
   truncateLawTables,
 } from "../persistence";
@@ -76,7 +77,7 @@ describe.runIf(postgresAvailable)("PostgresClientRepository tenant isolation", (
       db,
     });
     const tenantB = createLawPersistenceContext({
-      tenantId: "t0000002-0000-4000-8000-000000000002",
+      tenantId: SECONDARY_LAW_TENANT_ID,
       db,
     });
 

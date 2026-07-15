@@ -1,0 +1,247 @@
+manifestSchemaVersion: "1.0"
+id: projects
+name: Projects
+version: 0.1.0
+kind: module
+
+metadata:
+  category: productivity
+  description: APZHUB Projects workbench — project, task, sprint, backlog, and roadmap management.
+  owner: APZHUB
+  icon: folder-kanban
+  tags:
+    - projects
+    - tasks
+    - sprints
+    - backlog
+    - roadmap
+
+dependencies:
+  platform: []
+  services:
+    - project-service
+
+compatibility:
+  platformVersion: ">=0.1.0"
+
+module:
+  category: productivity
+  status: disabled
+  description: Projects capability module (manifest-first — UI implementation OSS-101-05+).
+
+permissions:
+  - id: projects.view
+    description: View projects workspace and project list.
+  - id: projects.manage
+    description: Create and update projects.
+  - id: projects.task.view
+    description: View tasks, backlog, and board.
+  - id: projects.task.manage
+    description: Create, update, assign, and transition tasks.
+  - id: projects.sprint.view
+    description: View sprints and sprint board.
+  - id: projects.sprint.manage
+    description: Create, start, and complete sprints.
+  - id: projects.admin
+    description: Administer project settings, team, and archive projects.
+
+navigation:
+  activityBar:
+    enabled: true
+    label: Projects
+    icon: folder-kanban
+    order: 20
+    permission: projects.view
+  sidebar:
+    - id: projects.dashboard
+      label: Dashboard
+      route: /workspace/projects
+      icon: layout-dashboard
+      permission: projects.view
+    - id: projects.list
+      label: All Projects
+      route: /workspace/projects/list
+      icon: folder
+      permission: projects.view
+    - id: projects.my-work
+      label: My Work
+      route: /workspace/projects/my-work
+      icon: user
+      permission: projects.task.view
+    - id: projects.tasks
+      label: Tasks
+      route: /workspace/projects/tasks
+      icon: check-square
+      permission: projects.task.view
+    - id: projects.backlog
+      label: Backlog
+      route: /workspace/projects/backlog
+      icon: list
+      permission: projects.task.view
+    - id: projects.sprints
+      label: Sprints
+      route: /workspace/projects/sprints
+      icon: calendar
+      permission: projects.sprint.view
+    - id: projects.roadmap
+      label: Roadmap
+      route: /workspace/projects/roadmap
+      icon: map
+      permission: projects.view
+
+commands:
+  - id: project.open
+    label: Open Project
+    category: Projects
+    permission: projects.view
+  - id: project.create
+    label: Create Project
+    category: Projects
+    permission: projects.manage
+  - id: project.update
+    label: Update Project
+    category: Projects
+    permission: projects.manage
+  - id: task.open
+    label: Open Task
+    category: Projects
+    permission: projects.task.view
+  - id: task.create
+    label: Create Task
+    category: Projects
+    permission: projects.task.manage
+  - id: task.update
+    label: Update Task
+    category: Projects
+    permission: projects.task.manage
+  - id: task.assign
+    label: Assign Task
+    category: Projects
+    permission: projects.task.manage
+  - id: sprint.open
+    label: Open Sprint
+    category: Projects
+    permission: projects.sprint.view
+  - id: sprint.create
+    label: Create Sprint
+    category: Projects
+    permission: projects.sprint.manage
+  - id: sprint.complete
+    label: Complete Sprint
+    category: Projects
+    permission: projects.sprint.manage
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: projects
+    label: Projects
+    icon: folder-kanban
+    route: /workspace/projects
+    order: 20
+    permission: projects.view
+  view:
+    title: Projects
+    workspace: projects
+    route: /workspace/projects
+    default: true
+    permission: projects.view
+  actions:
+    - id: project.open
+      label: Open Project
+      handler: service:project-service:placeholder.open
+      permission: projects.view
+      palette: true
+      group: Projects
+      icon: folder
+      order: 10
+      description: Open a project in the Projects workspace (placeholder — OSS-101-05+).
+    - id: project.create
+      label: Create Project
+      handler: service:project-service:placeholder.create
+      permission: projects.manage
+      palette: true
+      group: Projects
+      icon: plus
+      order: 20
+      description: Create a new project (placeholder).
+    - id: project.update
+      label: Update Project
+      handler: service:project-service:placeholder.update
+      permission: projects.manage
+      palette: true
+      group: Projects
+      icon: pencil
+      order: 30
+      description: Update project settings (placeholder).
+    - id: task.open
+      label: Open Task
+      handler: service:project-service:placeholder.task.open
+      permission: projects.task.view
+      palette: true
+      group: Projects
+      icon: check-square
+      order: 40
+      description: Open a task (placeholder).
+    - id: task.create
+      label: Create Task
+      handler: service:project-service:placeholder.task.create
+      permission: projects.task.manage
+      palette: true
+      group: Projects
+      icon: plus-square
+      order: 50
+      description: Create a task (placeholder).
+    - id: task.update
+      label: Update Task
+      handler: service:project-service:placeholder.task.update
+      permission: projects.task.manage
+      palette: true
+      group: Projects
+      icon: pencil-line
+      order: 60
+      description: Update a task (placeholder).
+    - id: task.assign
+      label: Assign Task
+      handler: service:project-service:placeholder.task.assign
+      permission: projects.task.manage
+      palette: true
+      group: Projects
+      icon: user-plus
+      order: 70
+      description: Assign a task (placeholder).
+    - id: sprint.open
+      label: Open Sprint
+      handler: service:project-service:placeholder.sprint.open
+      permission: projects.sprint.view
+      palette: true
+      group: Projects
+      icon: calendar
+      order: 80
+      description: Open sprint view (placeholder).
+    - id: sprint.create
+      label: Create Sprint
+      handler: service:project-service:placeholder.sprint.create
+      permission: projects.sprint.manage
+      palette: true
+      group: Projects
+      icon: calendar-plus
+      order: 90
+      description: Create a sprint (placeholder).
+    - id: sprint.complete
+      label: Complete Sprint
+      handler: service:project-service:placeholder.sprint.complete
+      permission: projects.sprint.manage
+      palette: true
+      group: Projects
+      icon: calendar-check
+      order: 100
+      description: Complete active sprint (placeholder).
+
+documentation:
+  plannedRouteProjectDetail: "/workspace/projects/{projectId}"
+  engineBranding: hidden
+
+tests:
+  manifest: true
+  e2e: planned

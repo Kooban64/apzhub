@@ -122,9 +122,27 @@ importers:
       '@apzhub/legal-business-core':
         specifier: workspace:*
         version: link:../../packages/legal-business-core
+      '@apzhub/platform-authorization':
+        specifier: workspace:*
+        version: link:../../packages/platform-authorization
+      '@apzhub/platform-bootstrap':
+        specifier: workspace:*
+        version: link:../../packages/platform-bootstrap
+      '@apzhub/platform-governance':
+        specifier: workspace:*
+        version: link:../../packages/platform-governance
+      '@apzhub/platform-identity':
+        specifier: workspace:*
+        version: link:../../packages/platform-identity
+      '@apzhub/platform-personalisation':
+        specifier: workspace:*
+        version: link:../../packages/platform-personalisation
       '@apzhub/platform-runtime':
         specifier: workspace:*
         version: link:../../packages/platform-runtime
+      '@apzhub/platform-security':
+        specifier: workspace:*
+        version: link:../../packages/platform-security
       '@apzhub/shared':
         specifier: workspace:*
         version: link:../../packages/shared
@@ -204,15 +222,54 @@ importers:
       '@apzhub/event-notification-framework':
         specifier: workspace:*
         version: link:../../packages/event-notification-framework
+      '@apzhub/integration-plane':
+        specifier: workspace:*
+        version: link:../../integrations/plane
+      '@apzhub/integration-zammad':
+        specifier: workspace:*
+        version: link:../../integrations/zammad
       '@apzhub/knowledge-discovery-framework':
         specifier: workspace:*
         version: link:../../packages/knowledge-discovery-framework
       '@apzhub/legal-business-core':
         specifier: workspace:*
         version: link:../../packages/legal-business-core
+      '@apzhub/platform-authorization':
+        specifier: workspace:*
+        version: link:../../packages/platform-authorization
+      '@apzhub/platform-bootstrap':
+        specifier: workspace:*
+        version: link:../../packages/platform-bootstrap
+      '@apzhub/platform-governance':
+        specifier: workspace:*
+        version: link:../../packages/platform-governance
+      '@apzhub/platform-identity':
+        specifier: workspace:*
+        version: link:../../packages/platform-identity
+      '@apzhub/platform-lifecycle':
+        specifier: workspace:*
+        version: link:../../packages/platform-lifecycle
+      '@apzhub/platform-operations':
+        specifier: workspace:*
+        version: link:../../packages/platform-operations
+      '@apzhub/platform-personalisation':
+        specifier: workspace:*
+        version: link:../../packages/platform-personalisation
       '@apzhub/platform-runtime':
         specifier: workspace:*
         version: link:../../packages/platform-runtime
+      '@apzhub/platform-security':
+        specifier: workspace:*
+        version: link:../../packages/platform-security
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../../packages/platform-service-contracts
+      '@apzhub/platform-services':
+        specifier: workspace:*
+        version: link:../../packages/platform-services
+      '@apzhub/reporting-contracts':
+        specifier: workspace:*
+        version: link:../../packages/reporting-contracts
       '@apzhub/shared':
         specifier: workspace:*
         version: link:../../packages/shared
@@ -252,6 +309,9 @@ importers:
       yaml:
         specifier: ^2.8.0
         version: 2.9.0
+      zod:
+        specifier: ^3.25.76
+        version: 3.25.76
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4
@@ -284,6 +344,45 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  integrations/github-actions:
+    dependencies:
+      '@apzhub/integration-sdk':
+        specifier: workspace:*
+        version: link:../../packages/integration-sdk
+      '@apzhub/testing-contracts':
+        specifier: workspace:*
+        version: link:../../packages/testing-contracts
+
+  integrations/meilisearch:
+    dependencies:
+      '@apzhub/integration-sdk':
+        specifier: workspace:*
+        version: link:../../packages/integration-sdk
+      '@apzhub/integration-search-sdk':
+        specifier: workspace:*
+        version: link:../../packages/integration-search-sdk
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../../packages/search-contracts
+
+  integrations/plane:
+    dependencies:
+      '@apzhub/integration-sdk':
+        specifier: workspace:*
+        version: link:../../packages/integration-sdk
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../../packages/platform-service-contracts
+
+  integrations/zammad:
+    dependencies:
+      '@apzhub/integration-sdk':
+        specifier: workspace:*
+        version: link:../../packages/integration-sdk
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../../packages/platform-service-contracts
+
   packages/activity-timeline-framework:
     dependencies:
       '@apzhub/command-framework':
@@ -310,6 +409,9 @@ importers:
       '@apzhub/config':
         specifier: workspace:*
         version: link:../config
+      '@apzhub/platform-identity':
+        specifier: workspace:*
+        version: link:../platform-identity
       better-auth:
         specifier: ^1.2.9
         version: 1.6.22(drizzle-kit@0.31.10)(next@16.2.9(@babel/core@7.29.7)(@playwright/test@1.61.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(pg@8.22.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(vitest@3.2.6(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0)(lightningcss@1.32.0)(tsx@4.22.4)(yaml@2.9.0))
@@ -351,6 +453,41 @@ importers:
         specifier: ^0.31.1
         version: 0.31.10
 
+  packages/document-contracts: {}
+
+  packages/document-core:
+    dependencies:
+      '@apzhub/document-contracts':
+        specifier: workspace:*
+        version: link:../document-contracts
+
+  packages/document-persistence:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/document-contracts':
+        specifier: workspace:*
+        version: link:../document-contracts
+      '@apzhub/document-core':
+        specifier: workspace:*
+        version: link:../document-core
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/document-storage:
+    dependencies:
+      '@apzhub/document-contracts':
+        specifier: workspace:*
+        version: link:../document-contracts
+      '@apzhub/document-core':
+        specifier: workspace:*
+        version: link:../document-core
+      '@aws-sdk/client-s3':
+        specifier: ^3.787.0
+        version: 3.1085.0
+
   packages/event-notification-framework:
     dependencies:
       '@apzhub/command-framework':
@@ -362,6 +499,17 @@ importers:
       react:
         specifier: ^19.0.0
         version: 19.2.4
+
+  packages/integration-sdk: {}
+
+  packages/integration-search-sdk:
+    dependencies:
+      '@apzhub/integration-sdk':
+        specifier: workspace:*
+        version: link:../integration-sdk
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../search-contracts
 
   packages/knowledge-discovery-framework:
     dependencies:
@@ -383,6 +531,84 @@ importers:
 
   packages/legal-business-core: {}
 
+  packages/platform-authorization:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/platform-bootstrap:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/platform-authorization':
+        specifier: workspace:*
+        version: link:../platform-authorization
+      '@apzhub/platform-governance':
+        specifier: workspace:*
+        version: link:../platform-governance
+      '@apzhub/platform-identity':
+        specifier: workspace:*
+        version: link:../platform-identity
+      '@apzhub/platform-personalisation':
+        specifier: workspace:*
+        version: link:../platform-personalisation
+      '@apzhub/platform-runtime':
+        specifier: workspace:*
+        version: link:../platform-runtime
+      '@apzhub/platform-security':
+        specifier: workspace:*
+        version: link:../platform-security
+
+  packages/platform-governance:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/platform-identity:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/platform-lifecycle:
+    dependencies:
+      '@apzhub/platform-security':
+        specifier: workspace:*
+        version: link:../platform-security
+
+  packages/platform-operations:
+    dependencies:
+      '@apzhub/platform-lifecycle':
+        specifier: workspace:*
+        version: link:../platform-lifecycle
+      '@apzhub/platform-security':
+        specifier: workspace:*
+        version: link:../platform-security
+      '@apzhub/types':
+        specifier: workspace:*
+        version: link:../types
+
+  packages/platform-personalisation:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
   packages/platform-runtime:
     dependencies:
       yaml:
@@ -392,11 +618,177 @@ importers:
         specifier: ^3.25.67
         version: 3.25.76
 
+  packages/platform-security:
+    dependencies:
+      '@apzhub/auth':
+        specifier: workspace:*
+        version: link:../auth
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/platform-authorization':
+        specifier: workspace:*
+        version: link:../platform-authorization
+      '@apzhub/shared':
+        specifier: workspace:*
+        version: link:../shared
+
+  packages/platform-service-contracts:
+    dependencies:
+      '@apzhub/testing-contracts':
+        specifier: workspace:*
+        version: link:../testing-contracts
+
+  packages/platform-services:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/document-contracts':
+        specifier: workspace:*
+        version: link:../document-contracts
+      '@apzhub/document-core':
+        specifier: workspace:*
+        version: link:../document-core
+      '@apzhub/document-persistence':
+        specifier: workspace:*
+        version: link:../document-persistence
+      '@apzhub/document-storage':
+        specifier: workspace:*
+        version: link:../document-storage
+      '@apzhub/integration-github-actions':
+        specifier: workspace:*
+        version: link:../../integrations/github-actions
+      '@apzhub/integration-meilisearch':
+        specifier: workspace:*
+        version: link:../../integrations/meilisearch
+      '@apzhub/integration-plane':
+        specifier: workspace:*
+        version: link:../../integrations/plane
+      '@apzhub/integration-sdk':
+        specifier: workspace:*
+        version: link:../integration-sdk
+      '@apzhub/integration-zammad':
+        specifier: workspace:*
+        version: link:../../integrations/zammad
+      '@apzhub/platform-authorization':
+        specifier: workspace:*
+        version: link:../platform-authorization
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../platform-service-contracts
+      '@apzhub/reporting-contracts':
+        specifier: workspace:*
+        version: link:../reporting-contracts
+      '@apzhub/reporting-core':
+        specifier: workspace:*
+        version: link:../reporting-core
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../search-contracts
+      '@apzhub/search-persistence':
+        specifier: workspace:*
+        version: link:../search-persistence
+      '@apzhub/testing-contracts':
+        specifier: workspace:*
+        version: link:../testing-contracts
+      '@apzhub/testing-persistence':
+        specifier: workspace:*
+        version: link:../testing-persistence
+      '@apzhub/testing-services':
+        specifier: workspace:*
+        version: link:../testing-services
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/reporting-contracts: {}
+
+  packages/reporting-core:
+    dependencies:
+      '@apzhub/reporting-contracts':
+        specifier: workspace:*
+        version: link:../reporting-contracts
+
   packages/sdk:
     dependencies:
       '@apzhub/platform-runtime':
         specifier: workspace:*
         version: link:../platform-runtime
+
+  packages/search-contracts: {}
+
+  packages/search-documents:
+    dependencies:
+      '@apzhub/document-contracts':
+        specifier: workspace:*
+        version: link:../document-contracts
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../platform-service-contracts
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../search-contracts
+      '@apzhub/search-integration':
+        specifier: workspace:*
+        version: link:../search-integration
+
+  packages/search-integration:
+    dependencies:
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../search-contracts
+
+  packages/search-persistence:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../search-contracts
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/search-projects:
+    dependencies:
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../platform-service-contracts
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../search-contracts
+      '@apzhub/search-integration':
+        specifier: workspace:*
+        version: link:../search-integration
+
+  packages/search-support:
+    dependencies:
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../platform-service-contracts
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../search-contracts
+      '@apzhub/search-integration':
+        specifier: workspace:*
+        version: link:../search-integration
+
+  packages/search-testing:
+    dependencies:
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../platform-service-contracts
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../search-contracts
+      '@apzhub/search-integration':
+        specifier: workspace:*
+        version: link:../search-integration
+      '@apzhub/testing-contracts':
+        specifier: workspace:*
+        version: link:../testing-contracts
 
   packages/shared:
     dependencies:
@@ -406,6 +798,60 @@ importers:
       ioredis:
         specifier: ^5.6.1
         version: 5.11.1
+
+  packages/testing-contracts:
+    dependencies:
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../platform-service-contracts
+      '@apzhub/reporting-contracts':
+        specifier: workspace:*
+        version: link:../reporting-contracts
+
+  packages/testing-foundation:
+    dependencies:
+      '@apzhub/testing-contracts':
+        specifier: workspace:*
+        version: link:../testing-contracts
+      zod:
+        specifier: ^3.25.67
+        version: 3.25.76
+
+  packages/testing-persistence:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/platform-authorization':
+        specifier: workspace:*
+        version: link:../platform-authorization
+      '@apzhub/testing-contracts':
+        specifier: workspace:*
+        version: link:../testing-contracts
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/testing-services:
+    dependencies:
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../platform-service-contracts
+      '@apzhub/reporting-contracts':
+        specifier: workspace:*
+        version: link:../reporting-contracts
+      '@apzhub/reporting-core':
+        specifier: workspace:*
+        version: link:../reporting-core
+      '@apzhub/testing-contracts':
+        specifier: workspace:*
+        version: link:../testing-contracts
+      '@apzhub/testing-foundation':
+        specifier: workspace:*
+        version: link:../testing-foundation
+      '@apzhub/testing-persistence':
+        specifier: workspace:*
+        version: link:../testing-persistence
 
   packages/theme:
     dependencies:
@@ -485,6 +931,78 @@ packages:
 
   '@asamuzakjp/css-color@3.2.0':
     resolution: {integrity: sha512-K1A6z8tS3XsmCMM86xoWdn7Fkdn9m6RSVtocUrJYIwZnFVkng/PvkEoWtOWmP+Scc6saYWHWZYbndEEXxl24jw==}
+
+  '@aws-sdk/checksums@3.1000.16':
+    resolution: {integrity: sha512-EKnvkXSmz3IpA99tCNuI+dLFXyZyClSm8zns9sB/elvkU+MTuomAs6toJMPMBf98/fICG/urXDkzGz0/c3yyAQ==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/client-s3@3.1085.0':
+    resolution: {integrity: sha512-O0xe8sR50AYkwxlvRRsV0qytEO2dtXQTQ1CF3YBBdE5xtVkbu27H0vGa1mjQi1/+fbYM80AWEIPai5jZmXyubw==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/core@3.975.1':
+    resolution: {integrity: sha512-8qh/6EYb7hl/ZwVfQufhbMEZs1gQIc7GbdrIf4eprQJ7cv042+74nE6l3YDfyWNzb9iPXb8fRyYSHkNIk5eE6Q==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/credential-provider-env@3.972.57':
+    resolution: {integrity: sha512-1RfJaF7SW1TOnvNGU7kaYjwUf5H3sfm+synGH1bHhRlqcnxCt3szebH3dmKEyY4tuGcbQ6ffzUT89cRitBV8OQ==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/credential-provider-http@3.972.59':
+    resolution: {integrity: sha512-sRCkpTiFnCdQvuaRVjQ6SVoHu6i7RUpurVo1c4F81HWhPvUJ7Wdp5MNtSdX1O29CNXc8em3O5m52hCjVtAD9SA==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/credential-provider-ini@3.973.1':
+    resolution: {integrity: sha512-6d8H6ZAh3ZPKZ6fe1nG2OWeZEZPtt9ravoD1dezPdPtsSkJRoxGAnFSHwKT3E/Te6fHE30zRzjV6TD12rvF6yQ==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/credential-provider-login@3.972.63':
+    resolution: {integrity: sha512-GREWRrMj0XnNKMaVa/Mauoaui26qBEHu71WWqXbwZOu/jFQOnPZjTf7u0KtGKC8VGa6VUs9kDWGgocrKNLS9vw==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/credential-provider-node@3.972.66':
+    resolution: {integrity: sha512-f+qjRXZpz7sgzbc4QB+6nLKfyKFgRRXzWdXbsKPv/VhVRyHsDyq4yBWC/B75BAJpFIcUeI2XR/3gdWJ677zB4A==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/credential-provider-process@3.972.57':
+    resolution: {integrity: sha512-TiVQhuU0pbhIZAUZacbPHMyzrIdiH+lnx+PMY/Pu/b93dJrq3wdZwzUJ0TPpvNxaqbHsxJvQZW3/h/beLiKq7Q==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/credential-provider-sso@3.973.1':
+    resolution: {integrity: sha512-3foTZUJ4821Ij60X7K3NJroygiZLnbBmarN+T//O2cjkISan90zElN3NBmgSlDrTQ7Gs6z/yO8V7h60QNcDZHQ==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/credential-provider-web-identity@3.972.63':
+    resolution: {integrity: sha512-8qZLFhM69eKcS37m459ctPR05Qimycm/74OPVioe6wNZabMT54GYhwBju0+J656RkMasNSawWQu+c8CmBe3TUQ==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/middleware-sdk-s3@3.972.62':
+    resolution: {integrity: sha512-k8JJwYXVYlOOjWnPZDThQS1xDFJgi5Dokt73qFlDtrZAbdcint5aIdjB9XgJAAQVP5OoqcefQmh1FYXiPpvsvw==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/nested-clients@3.997.31':
+    resolution: {integrity: sha512-BDHTpwcsZHEBNEJzOg/B1BkFYJxAXY50dau/NyVWs3d51F0WgIUGSWZot/Os+N3KpDhXeaXnz37mWffAvduREw==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/signature-v4-multi-region@3.996.39':
+    resolution: {integrity: sha512-8+srXqYIF8KYMLC4FxMLEM5Ek7kUNibJu1R4m8/fUhhNYIZZz26oGtKkCr8I/HiG2fFQxBvaGgQZT4/mqRCSnA==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/token-providers@3.1083.0':
+    resolution: {integrity: sha512-s0woKnxuHrExLc5L2ArIH5BMkbonHPtt+5hSBM8oknp9M6QTuUmmAmJ2E0EdzCGONrO+8+ADPqvv6UX0nNcc7A==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/types@3.974.0':
+    resolution: {integrity: sha512-QIBrw90CDm4O0UaIIzkU6DrFdeJzEb2Va5EPEVpyldj6sHJxB6cshhStJuhZxk3wR3PmjJlYsjPmY1kNb+KGBg==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/xml-builder@3.972.34':
+    resolution: {integrity: sha512-wHhWL1y7sN3enBA8POrPpQM5jCcmu2ozyhbRei4c8OjVcEaEs6yLucLa/pla457ggS/ysuy7bosagz3HaJkZXA==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws/lambda-invoke-store@0.3.0':
+    resolution: {integrity: sha512-sl4Bm6yiMNYrZKkqqDFWN0UfnWhlS8ivKxrYl+6t0gCLrqr8y3B2IqZZbFRkfaVVp7C/baApyh71P+LeE1A2sQ==}
+    engines: {node: '>=18.0.0'}
 
   '@axe-core/playwright@4.12.1':
     resolution: {integrity: sha512-rMd7xriptqKpP+w5265i4Hdkv2X5kbu6uiBi/B2I7uf3hieRBM3qDCfaKPtxfiYb2mKXfF+yLODJwIx+Jv1GDw==}
@@ -1706,6 +2224,30 @@ packages:
   '@scarf/scarf@1.4.0':
     resolution: {integrity: sha512-xxeapPiUXdZAE3che6f3xogoJPeZgig6omHEy1rIY5WVsB3H2BHNnZH+gHG6x91SCWyQCzWGsuL2Hh3ClO5/qQ==}
 
+  '@smithy/core@3.29.3':
+    resolution: {integrity: sha512-L+Ys6ecjk5vwPMAKHBpPKlJ3DkqwNcnfEISXBZIsVvWG/XKXfsAP8mwIYlTeLcd2ElHdesPI8OuOmJSFAPhm6A==}
+    engines: {node: '>=18.0.0'}
+
+  '@smithy/credential-provider-imds@4.4.8':
+    resolution: {integrity: sha512-q9J7JTiXrAhB8sDp4px97uEPT7CwKH61Co78grdNQvU8QZAdiuaSRhP0tUVf2ogy36RZTrlMU1rBmDEH+cnkiA==}
+    engines: {node: '>=18.0.0'}
+
+  '@smithy/fetch-http-handler@5.6.5':
+    resolution: {integrity: sha512-SuqeisTyPoiIPtIYru/sGxGyXzmZ+8nnFOhC+qRPglt06Ebd1yH//CDltZB2J/3WBNVhwfUaZ0EtHB3cm2X32g==}
+    engines: {node: '>=18.0.0'}
+
+  '@smithy/node-http-handler@4.9.5':
+    resolution: {integrity: sha512-bNqdxTQTxmLbomSmlkZFz8L6B/feQ2HHzw4L2zY7Ecp2XffYAZq2uzdWDdxJHJFbEvqd+SRuluJso0P8+xPdbw==}
+    engines: {node: '>=18.0.0'}
+
+  '@smithy/signature-v4@5.6.4':
+    resolution: {integrity: sha512-B89bpf2t/y/wia6LZ+4JfHXYQT9PnVftsH05rgJKKIStS7r/4XSs9HOjtPoLtgcA6HCW9jVqX5DBbq7E0PAkiQ==}
+    engines: {node: '>=18.0.0'}
+
+  '@smithy/types@4.16.1':
+    resolution: {integrity: sha512-0JFs3V2y2M9tKW5na/qxe69Zv+uxLMO7QBbhxF/FHu/Gp2NFZAAL9tWl9PU02xxo07pb3G9FTyjNc6D5uZrJIg==}
+    engines: {node: '>=18.0.0'}
+
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
@@ -2569,6 +3111,9 @@ packages:
   better-opn@3.0.2:
     resolution: {integrity: sha512-aVNobHnJqLiUelTaHat9DZ1qM2w0C0Eym4LPI/3JxOnSokGVdsl1T1kN7TFvsEAD8G47A6VKQ0TVHqbBnYMJlQ==}
     engines: {node: '>=12.0.0'}
+
+  bowser@2.14.1:
+    resolution: {integrity: sha512-tzPjzCxygAKWFOJP011oxFHs57HzIhOEracIgAePE4pqB3LikALKnSzUyU4MGs9/iCEUuHlAJTjTc5M+u7YEGg==}
 
   brace-expansion@1.1.15:
     resolution: {integrity: sha512-EwOCDEex4quD37XhqM3omwtMoJjr//isUZz1JopUNWms+4Z2ViyM/k1YIRePpoVNnQhENnxtFjLaxNHrT7xIUg==}
@@ -5184,6 +5729,171 @@ snapshots:
       '@csstools/css-tokenizer': 3.0.4
       lru-cache: 10.4.3
 
+  '@aws-sdk/checksums@3.1000.16':
+    dependencies:
+      '@aws-sdk/core': 3.975.1
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/client-s3@3.1085.0':
+    dependencies:
+      '@aws-sdk/checksums': 3.1000.16
+      '@aws-sdk/core': 3.975.1
+      '@aws-sdk/credential-provider-node': 3.972.66
+      '@aws-sdk/middleware-sdk-s3': 3.972.62
+      '@aws-sdk/signature-v4-multi-region': 3.996.39
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/fetch-http-handler': 5.6.5
+      '@smithy/node-http-handler': 4.9.5
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/core@3.975.1':
+    dependencies:
+      '@aws-sdk/types': 3.974.0
+      '@aws-sdk/xml-builder': 3.972.34
+      '@aws/lambda-invoke-store': 0.3.0
+      '@smithy/core': 3.29.3
+      '@smithy/signature-v4': 5.6.4
+      '@smithy/types': 4.16.1
+      bowser: 2.14.1
+      tslib: 2.8.1
+
+  '@aws-sdk/credential-provider-env@3.972.57':
+    dependencies:
+      '@aws-sdk/core': 3.975.1
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/credential-provider-http@3.972.59':
+    dependencies:
+      '@aws-sdk/core': 3.975.1
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/fetch-http-handler': 5.6.5
+      '@smithy/node-http-handler': 4.9.5
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/credential-provider-ini@3.973.1':
+    dependencies:
+      '@aws-sdk/core': 3.975.1
+      '@aws-sdk/credential-provider-env': 3.972.57
+      '@aws-sdk/credential-provider-http': 3.972.59
+      '@aws-sdk/credential-provider-login': 3.972.63
+      '@aws-sdk/credential-provider-process': 3.972.57
+      '@aws-sdk/credential-provider-sso': 3.973.1
+      '@aws-sdk/credential-provider-web-identity': 3.972.63
+      '@aws-sdk/nested-clients': 3.997.31
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/credential-provider-imds': 4.4.8
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/credential-provider-login@3.972.63':
+    dependencies:
+      '@aws-sdk/core': 3.975.1
+      '@aws-sdk/nested-clients': 3.997.31
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/credential-provider-node@3.972.66':
+    dependencies:
+      '@aws-sdk/credential-provider-env': 3.972.57
+      '@aws-sdk/credential-provider-http': 3.972.59
+      '@aws-sdk/credential-provider-ini': 3.973.1
+      '@aws-sdk/credential-provider-process': 3.972.57
+      '@aws-sdk/credential-provider-sso': 3.973.1
+      '@aws-sdk/credential-provider-web-identity': 3.972.63
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/credential-provider-imds': 4.4.8
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/credential-provider-process@3.972.57':
+    dependencies:
+      '@aws-sdk/core': 3.975.1
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/credential-provider-sso@3.973.1':
+    dependencies:
+      '@aws-sdk/core': 3.975.1
+      '@aws-sdk/nested-clients': 3.997.31
+      '@aws-sdk/token-providers': 3.1083.0
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/credential-provider-web-identity@3.972.63':
+    dependencies:
+      '@aws-sdk/core': 3.975.1
+      '@aws-sdk/nested-clients': 3.997.31
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/middleware-sdk-s3@3.972.62':
+    dependencies:
+      '@aws-sdk/core': 3.975.1
+      '@aws-sdk/signature-v4-multi-region': 3.996.39
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/nested-clients@3.997.31':
+    dependencies:
+      '@aws-sdk/core': 3.975.1
+      '@aws-sdk/signature-v4-multi-region': 3.996.39
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/fetch-http-handler': 5.6.5
+      '@smithy/node-http-handler': 4.9.5
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/signature-v4-multi-region@3.996.39':
+    dependencies:
+      '@aws-sdk/types': 3.974.0
+      '@smithy/signature-v4': 5.6.4
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/token-providers@3.1083.0':
+    dependencies:
+      '@aws-sdk/core': 3.975.1
+      '@aws-sdk/nested-clients': 3.997.31
+      '@aws-sdk/types': 3.974.0
+      '@smithy/core': 3.29.3
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/types@3.974.0':
+    dependencies:
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws-sdk/xml-builder@3.972.34':
+    dependencies:
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@aws/lambda-invoke-store@0.3.0': {}
+
   '@axe-core/playwright@4.12.1(playwright-core@1.61.1)':
     dependencies:
       axe-core: 4.12.1
@@ -6103,6 +6813,39 @@ snapshots:
   '@rtsao/scc@1.1.0': {}
 
   '@scarf/scarf@1.4.0': {}
+
+  '@smithy/core@3.29.3':
+    dependencies:
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@smithy/credential-provider-imds@4.4.8':
+    dependencies:
+      '@smithy/core': 3.29.3
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@smithy/fetch-http-handler@5.6.5':
+    dependencies:
+      '@smithy/core': 3.29.3
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@smithy/node-http-handler@4.9.5':
+    dependencies:
+      '@smithy/core': 3.29.3
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@smithy/signature-v4@5.6.4':
+    dependencies:
+      '@smithy/core': 3.29.3
+      '@smithy/types': 4.16.1
+      tslib: 2.8.1
+
+  '@smithy/types@4.16.1':
+    dependencies:
+      tslib: 2.8.1
 
   '@standard-schema/spec@1.1.0': {}
 
@@ -7314,6 +8057,8 @@ snapshots:
     dependencies:
       open: 8.4.2
 
+  bowser@2.14.1: {}
+
   brace-expansion@1.1.15:
     dependencies:
       balanced-match: 1.0.2
@@ -7850,7 +8595,7 @@ snapshots:
       eslint: 9.39.4(jiti@2.7.0)
       eslint-import-resolver-node: 0.3.10
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0))
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.7.0))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.4(jiti@2.7.0))
       eslint-plugin-react: 7.37.5(eslint@9.39.4(jiti@2.7.0))
       eslint-plugin-react-hooks: 7.1.1(eslint@9.39.4(jiti@2.7.0))
@@ -7883,7 +8628,7 @@ snapshots:
       tinyglobby: 0.2.17
       unrs-resolver: 1.12.2
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.7.0))
     transitivePeerDependencies:
       - supports-color
 
@@ -7898,7 +8643,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0)):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.7.0)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9

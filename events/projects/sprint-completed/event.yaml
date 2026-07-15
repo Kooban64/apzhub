@@ -1,0 +1,24 @@
+manifestSchemaVersion: "1.0"
+id: projects-sprint-completed
+name: Projects Sprint Completed
+version: 0.1.0
+kind: event
+
+metadata:
+  category: productivity
+  description: Emitted when an APZHUB Sprint is completed.
+
+event:
+  category: business
+  publisher: project-service
+  subscribers:
+    - activity:projects.activity
+    - notification:projects.sprint.completed
+  payload:
+    sprintId: string
+    projectId: string
+
+documentation:
+  eventKey: projects.sprint.completed
+  activityAction: projects.sprint.completed
+  notificationTemplate: projects.sprint.completed

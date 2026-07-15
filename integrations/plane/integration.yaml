@@ -1,0 +1,41 @@
+manifestSchemaVersion: "1.0"
+id: plane
+name: Plane Engine Integration
+version: 0.6.0
+kind: integration
+
+metadata:
+  category: integrations
+  description: Internal Plane CE adapter boundary for APZHUB Projects. Not user-facing.
+  owner: APZHUB
+  tags:
+    - plane
+    - projects
+    - adapter
+
+dependencies:
+  platform: []
+
+integration:
+  type: oss-application
+  capabilities:
+    - health
+    - provisioning
+    - authentication-bridge
+    - entity-mapping
+    - error-translation
+
+health:
+  enabled: true
+
+documentation:
+  userVisible: false
+  engineBranding: hidden
+  supportedEngineVersionMin: "0.23.0"
+  supportedEngineVersionMax: "0.24.x"
+  adapterImplementation: OSS-101-10
+
+tests:
+  contract: certified
+  integration: certified
+  wave1E2E: certified

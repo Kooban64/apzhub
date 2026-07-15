@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-operations-audit
+name: Audit
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Operations — Audit (M8-03).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-administration
+    label: Audit
+    icon: file-text
+    route: /workspace/administration/audit
+    order: 100
+    permission: platform.nav.administration.view
+  view:
+    title: Audit
+    workspace: administration
+    route: /workspace/administration/audit
+    permission: platform.nav.administration.view

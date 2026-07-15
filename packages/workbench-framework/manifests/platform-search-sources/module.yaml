@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-search-sources
+name: Sources
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Search — Sources sidebar (APZSEARCH-007).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: search
+    parent: platform-search
+    label: Sources
+    icon: database
+    route: /workspace/search/sources
+    order: 60
+    permission: search.source.list
+  view:
+    title: Sources
+    workspace: search
+    route: /workspace/search/sources
+    permission: search.source.list

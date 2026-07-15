@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-search-profiles
+name: Profiles
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Search — Profiles sidebar (APZSEARCH-007).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: search
+    parent: platform-search
+    label: Profiles
+    icon: user
+    route: /workspace/search/profiles
+    order: 80
+    permission: search.profile.list
+  view:
+    title: Profiles
+    workspace: search
+    route: /workspace/search/profiles
+    permission: search.profile.list

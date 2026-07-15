@@ -1,0 +1,16 @@
+{
+  "name": "@apzhub/search-contracts",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Search contracts — models, permissions, management + execution interfaces (APZSEARCH-006)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/search-contracts"
+  },
+  "dependencies": {}
+}

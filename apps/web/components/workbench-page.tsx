@@ -13,7 +13,22 @@ import { DesktopShell } from "@apzhub/workspace";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
+import { OperationsWorkspaceRouter } from "@/components/platform-operations/operations-workspace-router";
+import { DocumentsWorkspaceRouter } from "@/components/documents/documents-workspace-router";
+import { ReportingWorkspaceRouter } from "@/components/reporting/reporting-workspace-router";
+import { SearchWorkspaceRouter } from "@/components/search/search-workspace-router";
+import { SupportWorkspaceRouter } from "@/components/support/support-workspace-router";
+import { TestingWorkspaceRouter } from "@/components/testing/testing-workspace-router";
 import { useE2eActivityTimelinePresentationRefresh } from "@/lib/e2e-activity-timeline-presentation-refresh";
+import {
+  isPlatformOperationsRoute,
+  resolvePlatformOperationsSection,
+} from "@/lib/platform-operations/routes";
+import { isDocumentsRoute } from "@/lib/documents/routes";
+import { isReportingRoute } from "@/lib/reporting/routes";
+import { isSearchRoute } from "@/lib/search/routes";
+import { isSupportRoute } from "@/lib/support/routes";
+import { isTestingRoute } from "@/lib/testing/routes";
 import { resolveCommandPaletteMode } from "@/lib/resolve-command-palette-mode";
 
 export function WorkbenchPage() {
@@ -94,6 +109,15 @@ export function WorkbenchPage() {
     router.refresh();
   }
 
+  const operationsSection = isPlatformOperationsRoute(pathname)
+    ? resolvePlatformOperationsSection(pathname)
+    : null;
+  const supportActive = isSupportRoute(pathname);
+  const testingActive = isTestingRoute(pathname);
+  const reportingActive = isReportingRoute(pathname);
+  const documentsActive = isDocumentsRoute(pathname);
+  const searchActive = isSearchRoute(pathname);
+
   return (
     <DesktopShell
       userName={session?.user.name ?? session?.user.email}
@@ -117,12 +141,26 @@ export function WorkbenchPage() {
       contextMenuSurface="workspace"
       contextMenuInput={contextMenuInput}
     >
-      <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-semibold">{activeView?.title ?? "Workspace"}</h1>
-        <p className="text-[var(--color-muted-foreground)]">
-          {activeView?.route ?? pathname} — manifest-driven view placeholder.
-        </p>
-      </div>
+      {operationsSection ? (
+        <OperationsWorkspaceRouter section={operationsSection} />
+      ) : supportActive ? (
+        <SupportWorkspaceRouter />
+      ) : testingActive ? (
+        <TestingWorkspaceRouter />
+      ) : reportingActive ? (
+        <ReportingWorkspaceRouter />
+      ) : documentsActive ? (
+        <DocumentsWorkspaceRouter />
+      ) : searchActive ? (
+        <SearchWorkspaceRouter />
+      ) : (
+        <div className="flex flex-col gap-2">
+          <h1 className="text-2xl font-semibold">{activeView?.title ?? "Workspace"}</h1>
+          <p className="text-[var(--color-muted-foreground)]">
+            {activeView?.route ?? pathname} — manifest-driven view placeholder.
+          </p>
+        </div>
+      )}
     </DesktopShell>
   );
 }

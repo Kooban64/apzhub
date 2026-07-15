@@ -1,0 +1,35 @@
+manifestSchemaVersion: "1.0"
+id: testing-certification
+name: Certification
+version: 0.2.0
+kind: module
+
+metadata:
+  category: quality
+  description: APZ TCMS Testing — Certification records and gates (APZTCMS-010).
+
+dependencies:
+  platform: []
+  services:
+    - testing-service
+    - certification-service
+
+module:
+  category: quality
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: testing
+    parent: testing
+    label: Certification
+    icon: badge-check
+    route: /workspace/testing/certification
+    order: 120
+    permission: certification.view
+  view:
+    title: Certification
+    workspace: testing
+    route: /workspace/testing/certification
+    permission: certification.view

@@ -10,6 +10,10 @@ Foundation documentation (**000**, **001–029**) is complete.
 
 **Platform Version 5.0** — [release document](./docs/releases/APZHUB-Platform-v5.0.md) · Milestone 8 planning gate next
 
+**Document Platform:** **APZDOCS-006 COMPLETE** — **PRODUCTION_READY_WITH_LIMITATIONS**.
+
+**Search Platform:** **APZSEARCH-013 COMPLETE** — `@apzhub/search-testing` **0.1.0** (APZ TCMS publication adapter, metadata-only). Stop — await owner approval before **APZSEARCH-014** (Reporting). See [docs/foundation/CURRENT-MILESTONE.md](./docs/foundation/CURRENT-MILESTONE.md).
+
 | Milestone                | Sprint  | Release                                | Status                                   |
 | ------------------------ | ------- | -------------------------------------- | ---------------------------------------- |
 | M1 Foundation            | SPR-001 | `v0.1.0-foundation`                    | Complete (tag pending owner instruction) |

@@ -1,0 +1,62 @@
+manifestSchemaVersion: "1.0"
+id: platform-quality-service
+name: Platform Quality Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: platform-quality
+  description: APZ TCMS Platform Quality Integration Layer — product registry, dependency graph, quality aggregation, multi-product certification, product health, dashboard snapshot, and cross-product traceability (APZTCMS-014).
+  contractPackage: "@apzhub/platform-service-contracts"
+  contractVersion: "0.9.0"
+  implementationPackage: "@apzhub/platform-services"
+  implementationVersion: "0.9.0"
+  domainPackage: "@apzhub/testing-services"
+  domainVersion: "0.6.0"
+  owner: APZHUB
+  tags:
+    - platform-quality
+    - tcms
+    - quality
+    - governance
+
+dependencies:
+  platform: []
+  integrations: []
+
+integrations: []
+
+service:
+  category: platform-quality
+
+permissions:
+  - platform-quality.view
+  - platform-quality.aggregate
+  - platform-quality.admin
+  - quality.registry.view
+  - quality.registry.manage
+  - quality.dashboard.view
+  - dependency.view
+  - dependency.manage
+  - dependency.validate
+  - dependency.admin
+
+events:
+  publishes: []
+
+health:
+  enabled: true
+
+documentation:
+  governanceCapabilityKey: platform-quality
+  engineBranding: hidden
+  product: APZ TCMS
+  milestone: APZTCMS-014
+  notes: |
+    Optional env flag PLATFORM_QUALITY_ENABLED=true for bootstrap.
+    HTTP / OpenAPI / UI / Event Bus are out of scope for this milestone.
+    Domain logic lives in @apzhub/testing-services; this service is a thin gateway façade.
+
+tests:
+  manifest: true
+  contract: true

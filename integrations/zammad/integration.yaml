@@ -1,0 +1,47 @@
+manifestSchemaVersion: "1.0"
+id: zammad
+name: Zammad Engine Integration
+version: 0.6.0
+kind: integration
+
+metadata:
+  category: integrations
+  description: Internal Zammad CE adapter boundary for APZHUB Support. Not user-facing.
+  owner: APZHUB
+  tags:
+    - zammad
+    - support
+    - adapter
+
+dependencies:
+  platform: []
+
+integration:
+  type: oss-application
+  capabilities:
+    - health
+    - authentication-bridge
+    - error-translation
+    - diagnostics
+    - support-core-services
+    - support-articles
+    - support-search
+    - support-history
+    - support-analytics
+    - support-webhooks
+    - support-events
+    - support-synchronisation
+
+health:
+  enabled: true
+
+documentation:
+  userVisible: false
+  engineBranding: hidden
+  supportedEngineVersionMin: "6.3.0"
+  supportedEngineVersionMax: "6.5.x"
+  adapterImplementation: OSS-102-06
+
+tests:
+  contract: in-progress
+  integration: planned

@@ -32,6 +32,10 @@ import {
   unregisterCalendarEventNavigationHandler,
 } from "./calendar";
 import { registerLegalSearchKnowledgeProviders } from "./knowledge/register-legal-search-knowledge";
+import {
+  createLawPersistenceContext,
+  runWithLawPersistenceContextAsync,
+} from "./persistence";
 import { resetLegalCalendarEventEnvelopeCounter } from "./publish-legal-calendar-event";
 
 const workspaceRoot = path.resolve(
@@ -170,7 +174,10 @@ describe("calendar event workflow integration", () => {
     expect(provider).toBeDefined();
 
     const sample = getSharedCalendarEventRepository().list()[0]!;
-    const result = await provider!.query({ text: sample.title.slice(0, 12) }, {});
+    const result = await runWithLawPersistenceContextAsync(
+      createLawPersistenceContext(),
+      () => provider!.query({ text: sample.title.slice(0, 12) }, {}),
+    );
     expect(result.status).toBe("ok");
     expect(result.documents.length).toBeGreaterThan(0);
     expect(result.documents[0]?.metadata?.entityType).toBe("calendar_event");

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-operations-health
+name: Health
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Operations — Health (M8-03).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-administration
+    label: Health
+    icon: heart-pulse
+    route: /workspace/administration/health
+    order: 110
+    permission: platform.nav.administration.view
+  view:
+    title: Health
+    workspace: administration
+    route: /workspace/administration/health
+    permission: platform.nav.administration.view

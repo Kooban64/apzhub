@@ -1,0 +1,19 @@
+{
+  "name": "@apzhub/integration-plane",
+  "version": "0.6.0",
+  "private": true,
+  "type": "module",
+  "description": "Plane CE integration adapter for APZHUB Projects (OSS-101-09 operations, diagnostics & certification)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts integrations/plane"
+  },
+  "dependencies": {
+    "@apzhub/integration-sdk": "workspace:*",
+    "@apzhub/platform-service-contracts": "workspace:*"
+  }
+}

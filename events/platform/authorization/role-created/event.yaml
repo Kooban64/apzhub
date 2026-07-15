@@ -1,0 +1,17 @@
+manifestSchemaVersion: "1.0"
+id: platform-authorization-role-created
+name: Platform Authorization Role Created
+version: 0.1.0
+kind: event
+
+metadata:
+  category: platform
+  description: Emitted when a platform authorization role is created.
+
+event:
+  category: platform
+  publisher: platform-authorization
+  permission: platform.authorization.manage
+  payload:
+    roleId: string
+    slug: string

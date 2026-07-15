@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-documents-collections
+name: Collections
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Documents — Collections sidebar (APZDOCS-005).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: documents
+    parent: platform-documents
+    label: Collections
+    icon: folder-kanban
+    route: /workspace/documents/collections
+    order: 40
+    permission: document.collection.read
+  view:
+    title: Collections
+    workspace: documents
+    route: /workspace/documents/collections
+    permission: document.collection.read

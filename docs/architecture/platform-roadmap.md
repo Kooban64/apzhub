@@ -1,8 +1,8 @@
 # APZHUB Platform Roadmap
 
-> **Status:** M1–M7 complete · Platform v5.0 frozen · **M16 engineering review complete** · M8 next implementation gate  
-> **Authority:** [003 — Overall System Architecture](./003-overall-system-architecture-design-principles.md) · [021 — Notification & Activity](./021-notification-activity-attention-management-framework.md) · [Platform v5.0](../releases/APZHUB-Platform-v5.0.md) · [M16 Review](../reviews/APZHUB-v6.0-Architecture-Review.md)  
-> **Note:** Milestone 8 (Platform Identity, Administration & User Experience) is the next **implementation** gate. M16 was analysis-only. Law Platform validation (LAW-001–015) advanced in parallel.
+> **Status:** M1–M7 complete · Platform v5.0 frozen · **Platform Core v1.0 CERTIFIED (PC-001)** · M8 complete  
+> **Authority:** [003 — Overall System Architecture](./003-overall-system-architecture-design-principles.md) · [Platform Core Reference Architecture](./APZHUB-Platform-Core-Reference-Architecture.md) · [Platform Core Certification](../reviews/APZHUB-Platform-Core-Certification.md)  
+> **Note:** Platform Core v2 is the next **implementation** gate (await owner approval). Law Platform validation (LAW-001–015) advanced in parallel.
 
 ---
 
@@ -40,7 +40,11 @@ Platform Version 5.0                  ✅ Permanent reference baseline
 Law Platform Validation (LAW-001–015) ✅ Substantial — Trust closed
 M16 Platform Engineering Review       ✅ Complete — VERY GOOD (analysis only)
         ↓
-M8 Platform Identity, Administration & UX  ← Next implementation gate (SPR-008)
+M8 Platform Identity, Administration & UX     ✅ Complete (M8-01–M8-06)
+Platform Core v1.0 Certification (PC-001)     ✅ CERTIFIED WITH OBSERVATIONS
+        ↓
+Platform Core v2 (PCv2-01+)                     ← PCv2-01 authorized (owner approved 2026-07-08)
+PCS-001 Platform Core Strategy                  ✅ Owner approved
 M17 CI/CD & App Bootstrap (recommended)
 M9 Business Capabilities
 M10 Enterprise Operations
@@ -245,11 +249,49 @@ See [activity-timeline-framework.md](./activity-timeline-framework.md) · [SPR-0
 
 ## Milestone 8 — Platform Identity, Administration & User Experience
 
-> **Status:** Planning complete — await owner approval before IAUX-001
+> **Status:** ✅ **Complete** (M8-01–M8-06) · **Platform Core v1.0 certified** (PC-001)
 
-### Objectives
+### Phases
 
-Complete IAM integration with the Workbench Framework and deliver administration scaffolding and persistent user experience state per Documents 007 and 023.
+| Phase | Scope | Status |
+| ----- | ----- | ------ |
+| M8-01 | Identity & Tenant Foundation | ✅ Complete |
+| M8-02 | Authorization Framework (RBAC Phase 1) | ✅ Complete |
+| M8-03 | Platform Operations Console | ✅ Complete |
+| M8-04 | Personalisation Framework | ✅ Complete |
+| M8-05 | Governance & Provisioning | ✅ Complete |
+| M8-06 | Security & Operational Resilience | ✅ Complete |
+| PC-001 | Platform Core Certification | ✅ CERTIFIED WITH OBSERVATIONS |
+
+### M8 delivered summary
+
+- `@apzhub/platform-identity`, `platform-authorization`, `platform-personalisation`, `platform-governance`, `platform-security`
+- Operations Console (19 sections), 28+ platform v1 APIs
+- PostgreSQL migrations 0011–0014
+- ADRs 0040–0045
+- [Platform Core Reference Architecture](./APZHUB-Platform-Core-Reference-Architecture.md)
+- [PC-001 Certification](../reviews/APZHUB-Platform-Core-Certification.md)
+
+### Next: Platform Core v2
+
+**Owner-approved sequencing:** PCv2-01 → PCv2-02 → M17 → OSS Waves. See [PCS-001 Owner Approval](../strategy/PCS-001-owner-approval.md) and [Platform Core Strategy](../strategy/APZHUB-Platform-Core-Strategy.md).
+
+| Milestone | Status |
+|-----------|--------|
+| PCv2-01 planning | ✅ Complete |
+| PRH-000 owner acceptance | ✅ **Approved 2026-07-08** |
+| PCv2-01 implementation | ✅ **Authorised** — PRH-001–PRH-018 |
+| PCv2-02 Workers | ⏳ After PCv2-01 closeout |
+
+See [PRH-000 Owner Acceptance](../reviews/PRH-000-Owner-Acceptance.md) · [PRH-000 Implementation Baseline](../reviews/PRH-000-Implementation-Baseline.md) · [PCv2-01 Sprint Guide](../sprint/PCv2-01-Production-Readiness-Sprint-Guide.md).
+
+---
+
+## Milestone 8 (archive) — original objectives
+
+> Superseded by completion above. Retained for historical reference.
+
+### Remaining M8 objectives (historical — all delivered)
 
 ### Platform capabilities
 

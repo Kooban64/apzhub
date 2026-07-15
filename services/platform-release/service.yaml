@@ -1,0 +1,63 @@
+manifestSchemaVersion: "1.0"
+id: platform-release-service
+name: Platform Release Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: platform-release
+  description: APZ TCMS Platform Release gateway — release create/update, packages, candidates, readiness evaluation, dependency evaluation, certification aggregation, summaries, manifests, and status transitions (APZTCMS-014).
+  contractPackage: "@apzhub/platform-service-contracts"
+  contractVersion: "0.9.0"
+  implementationPackage: "@apzhub/platform-services"
+  implementationVersion: "0.9.0"
+  domainPackage: "@apzhub/testing-services"
+  domainVersion: "0.6.0"
+  owner: APZHUB
+  tags:
+    - platform-release
+    - tcms
+    - release
+    - readiness
+
+dependencies:
+  platform:
+    - platform-quality-service
+  integrations: []
+
+integrations: []
+
+service:
+  category: platform-release
+
+permissions:
+  - platform-release.view
+  - platform-release.create
+  - platform-release.update
+  - platform-release.evaluate
+  - platform-release.admin
+  - release.create
+  - release.view
+  - release.compute
+  - release.approve
+  - release.decide
+  - release.admin
+
+events:
+  publishes: []
+
+health:
+  enabled: true
+
+documentation:
+  governanceCapabilityKey: platform-release
+  engineBranding: hidden
+  product: APZ TCMS
+  milestone: APZTCMS-014
+  notes: |
+    Thin façade over PlatformReleaseGovernanceService.
+    Aggregation and recommendations are advisory (isDecision=false); human decisions are separate.
+
+tests:
+  manifest: true
+  contract: true

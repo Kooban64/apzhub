@@ -1,0 +1,20 @@
+{
+  "name": "@apzhub/platform-operations",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Canonical Platform Operations Control Plane and production verification (PRH-008)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@apzhub/platform-lifecycle": "workspace:*",
+    "@apzhub/platform-security": "workspace:*",
+    "@apzhub/types": "workspace:*"
+  }
+}

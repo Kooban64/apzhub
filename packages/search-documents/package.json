@@ -1,0 +1,21 @@
+{
+  "name": "@apzhub/search-documents",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Documents Search Publication Adapter — canonical Documents → Search Integration Framework (APZSEARCH-012)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/search-documents"
+  },
+  "dependencies": {
+    "@apzhub/document-contracts": "workspace:*",
+    "@apzhub/platform-service-contracts": "workspace:*",
+    "@apzhub/search-contracts": "workspace:*",
+    "@apzhub/search-integration": "workspace:*"
+  }
+}

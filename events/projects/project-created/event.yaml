@@ -1,0 +1,23 @@
+manifestSchemaVersion: "1.0"
+id: projects-project-created
+name: Projects Project Created
+version: 0.1.0
+kind: event
+
+metadata:
+  category: productivity
+  description: Emitted when an APZHUB Project is created.
+
+event:
+  category: business
+  publisher: project-service
+  subscribers:
+    - search:projects.search
+    - activity:projects.activity
+  payload:
+    projectId: string
+    name: string
+    status: string
+
+documentation:
+  eventKey: projects.project.created

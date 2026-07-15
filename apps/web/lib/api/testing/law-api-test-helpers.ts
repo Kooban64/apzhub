@@ -2,6 +2,10 @@ import { vi } from "vitest";
 
 import { createPlaceholderEventBus } from "@apzhub/event-notification-framework";
 import {
+  getSharedTenantManagementService,
+  resetSharedTenantManagement,
+} from "@apzhub/platform-identity";
+import {
   ClientWorkflowService,
   MatterWorkflowService,
   TimeEntryWorkflowService,
@@ -52,6 +56,12 @@ export function authHeaders(
 }
 
 export function configureLawApiTestEnv(): void {
+  resetSharedTenantManagement();
+  getSharedTenantManagementService().assignUserToTenant({
+    userId: mockSession.user.id,
+    tenantId: DEFAULT_LAW_TENANT_ID,
+    isPrimary: true,
+  });
   mockGetValidatedSession.mockReset();
   mockIsDevRegistrationAllowed.mockReturnValue(false);
   vi.stubEnv("NODE_ENV", "test");

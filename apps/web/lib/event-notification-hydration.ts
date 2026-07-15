@@ -19,7 +19,7 @@ import {
   type NotificationRegistryHydrationDiagnostics,
 } from "@apzhub/event-notification-framework/server";
 import { createWorkbenchPermissionAdapter } from "@apzhub/workbench-framework";
-import { createAuthPermissionContextFromUser } from "@apzhub/workbench-framework/server";
+import { createPlatformAuthPermissionContext } from "./session-permission-context";
 
 import { loadSharedEventNotificationContext } from "./load-shared-event-notification-context";
 
@@ -48,8 +48,9 @@ export async function loadEventNotificationHydration(): Promise<EventNotificatio
     context.notificationRegistry,
   );
   const session = await getValidatedSession(await headers());
+  const authContext = await createPlatformAuthPermissionContext(session);
   const permissionAdapter = createWorkbenchPermissionAdapter({
-    authContext: createAuthPermissionContextFromUser(session?.user),
+    authContext,
     nodeEnv: process.env.NODE_ENV,
     allowDevRegistration: isDevRegistrationAllowed(),
   });

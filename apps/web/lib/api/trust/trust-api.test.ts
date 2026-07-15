@@ -39,6 +39,10 @@ vi.mock("@apzhub/config", async (importOriginal) => {
   };
 });
 
+vi.mock("@apzhub/platform-authorization/server", () => ({
+  resolveSessionAuthorization: vi.fn(async () => ({ roles: [], permissions: [] })),
+}));
+
 const mockSession = {
   session: { id: "sess-1", expiresAt: new Date(Date.now() + 60_000).toISOString() },
   user: {
@@ -423,6 +427,8 @@ describe("Law Trust API", () => {
       ),
       { params: Promise.resolve({ reportId }) },
     );
-    expect(response.status).toBe(404);
+    expect(response.status).toBe(403);
+    const body = await response.json();
+    expect(body.error.code).toBe("TENANT_MEMBERSHIP_DENIED");
   });
 });

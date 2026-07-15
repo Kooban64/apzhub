@@ -14,6 +14,7 @@ import {
 import { getLegalSearchRecentSearches } from "./legal-search-recent-searches";
 import { getLegalSearchWorkflowDiagnostics } from "./legal-search-workflow-diagnostics";
 import { getActiveLegalSearchQueryFilters } from "./legal-search-query-context";
+import { runWithLegalSearchPersistenceScope } from "./legal-search-persistence-scope";
 
 let workflowQueryDepth = 0;
 
@@ -60,7 +61,7 @@ export function wrapKnowledgeServiceForLegalSearchTracking(
   return {
     ...service,
     async query(input: KnowledgeQueryInput) {
-      const result = await service.query(input);
+      const result = await runWithLegalSearchPersistenceScope(() => service.query(input));
       const queryText = input.text?.trim() ?? "";
       const legalDocumentCount = countLegalEntityDocuments(result.documents);
       const filters = readFilters();

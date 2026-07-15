@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-reporting-formats
+name: Formats
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Reporting — Formats sidebar.
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: reporting
+    parent: platform-reporting
+    label: Formats
+    icon: file-type
+    route: /workspace/reporting/formats
+    order: 40
+    permission: report.view
+  view:
+    title: Formats
+    workspace: reporting
+    route: /workspace/reporting/formats
+    permission: report.view

@@ -1,0 +1,18 @@
+manifestSchemaVersion: "1.0"
+id: platform-authorization-assignment-created
+name: Platform Authorization Assignment Created
+version: 0.1.0
+kind: event
+
+metadata:
+  category: platform
+  description: Emitted when a role assignment is created.
+
+event:
+  category: platform
+  publisher: platform-authorization
+  permission: platform.authorization.manage
+  payload:
+    assignmentId: string
+    userId: string
+    roleId: string

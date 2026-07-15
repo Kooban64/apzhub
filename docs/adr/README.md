@@ -47,6 +47,31 @@ Canonical ADRs for APZHUB platform engineering decisions.
 | [ADR-0037](./ADR-0037-immutable-trust-journal.md)                  | Immutable Trust Journal and Append-Only Ledger | Accepted (planning)   | 2026-07-06 |
 | [ADR-0038](./ADR-0038-matter-trust-balance-segregation.md)         | Matter Trust Balance Segregation Model         | Accepted (planning)   | 2026-07-06 |
 | [ADR-0039](./ADR-0039-jurisdiction-adaptive-compliance-profile.md) | Jurisdiction-Adaptive Compliance Profile       | Accepted (planning)   | 2026-07-06 |
+| [ADR-0040](./ADR-0040-platform-tenant-foundation.md)               | Platform Tenant Foundation                   | Accepted (M8-01)      | 2026-07-07 |
+| [ADR-0041](./ADR-0041-platform-authorization-rbac-phase-1.md)        | Platform Authorization RBAC Phase 1          | Accepted (M8-02)      | 2026-07-07 |
+| [ADR-0042](./ADR-0042-platform-operations-console.md)                | Platform Operations Console                    | Accepted (M8-03)      | 2026-07-07 |
+| [ADR-0043](./ADR-0043-platform-personalisation-framework.md)         | Platform Personalisation Framework           | Accepted (M8-04)      | 2026-07-07 |
+| [ADR-0044](./ADR-0044-platform-governance-provisioning-framework.md) | Platform Governance & Provisioning Framework   | Accepted (M8-05)      | 2026-07-07 |
+| [ADR-0045](./ADR-0045-platform-security-operational-resilience.md) | Platform Security & Operational Resilience   | Accepted (M8-06)      | 2026-07-07 |
+| [ADR-0046](./ADR-0046-production-readiness-bootstrap-consolidation.md) | Production Readiness Bootstrap Consolidation | Accepted (PRH-001)  | 2026-07-08 |
+| [ADR-0047](./ADR-0047-projects-plane-integration-architecture.md)   | Projects / Plane Integration Architecture    | Accepted (OSS-101-01) | 2026-07-09 |
+| [ADR-0048](./ADR-0048-apzhub-global-entity-id-strategy.md)          | APZHUB Global Entity ID Strategy             | Accepted (OSS-110-03) | 2026-07-10 |
+| [ADR-0049](./ADR-0049-persistent-entity-mapping-store.md)          | Persistent Entity Mapping Store (PostgreSQL) | Accepted (OSS-110-05) | 2026-07-10 |
+| [ADR-0050](./ADR-0050-production-authorisation-policy-enforcement.md) | Production Authorisation & Policy Enforcement | Accepted (OSS-110-06) | 2026-07-10 |
+| [ADR-0051](./ADR-0051-platform-http-api-surface.md) | Platform HTTP API Surface (v1) | Accepted (OSS-110-07) | 2026-07-10 |
+| [ADR-0052](./ADR-0052-canonical-source-event-envelope.md) | Canonical Source Event Envelope | Accepted (OSS-100-08) | 2026-07-11 |
+| [ADR-0053](./ADR-0053-event-identity-and-deduplication.md) | Event Identity and Deduplication | Accepted (OSS-100-08) | 2026-07-11 |
+| [ADR-0054](./ADR-0054-polling-checkpoint-acknowledgement.md) | Polling Checkpoint Acknowledgement | Accepted (OSS-100-08) | 2026-07-11 |
+| [ADR-0055](./ADR-0055-webhook-verification-boundary.md) | Webhook Verification Boundary | Accepted (OSS-100-08) | 2026-07-11 |
+| [ADR-0056](./ADR-0056-adapter-polling-vs-platform-scheduling.md) | Adapter Polling vs Platform Scheduling | Accepted (OSS-100-08) | 2026-07-11 |
+| [ADR-0057](./ADR-0057-sdk-harness-vs-adapter-operations-certification.md) | SDK Harness vs Adapter Operations Certification | Accepted (OSS-100-09) | 2026-07-12 |
+| [ADR-0058](./ADR-0058-integration-sdk-v1-readiness-limitations.md) | Integration SDK v1.0 Readiness & Limitations | Accepted (OSS-100-10) | 2026-07-12 |
+| [ADR-0059](./ADR-0059-apz-tcms-native-product-architecture.md) | APZ TCMS Native Product Architecture | Accepted (APZTCMS-001) | 2026-07-12 |
+| [ADR-0060](./ADR-0060-meilisearch-reference-search-adapter.md) | Meilisearch Reference Search Adapter | Accepted (APZSEARCH-005) | 2026-07-14 |
+| [ADR-0061](./ADR-0061-search-tenant-isolation-strategy.md) | Search Tenant Isolation Strategy | Accepted (APZSEARCH-006) | 2026-07-14 |
+| [ADR-0062](./ADR-0062-search-canonical-id-mapping.md) | Search Canonical Document/Index ID Mapping | Accepted (APZSEARCH-006) | 2026-07-14 |
+| [ADR-0063](./ADR-0063-search-execution-provider-resolution.md) | Search Execution Provider Resolution Precedence | Accepted (APZSEARCH-006) | 2026-07-14 |
+| [ADR-0064](./ADR-0064-search-http-api-and-workbench-surface.md) | Search HTTP API and Workbench Surface | Accepted (APZSEARCH-007) | 2026-07-14 |
 
 ## Legacy decisions (`docs/decisions/`)
 

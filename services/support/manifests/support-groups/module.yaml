@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: support-groups
+name: Groups
+version: 0.1.0
+kind: module
+
+metadata:
+  category: support
+  description: Support — Groups (queues/teams) list and management.
+
+dependencies:
+  platform: []
+  services:
+    - support-service
+
+module:
+  category: support
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: support
+    parent: support
+    label: Groups
+    icon: users
+    route: /workspace/support/groups
+    order: 30
+    permission: support.groups.list
+  view:
+    title: Groups
+    workspace: support
+    route: /workspace/support/groups
+    permission: support.groups.list

@@ -22,7 +22,7 @@
 
 | ID         | Item                                                     | Origin            | Impact                              | Recommended milestone     | Effort |
 | ---------- | -------------------------------------------------------- | ----------------- | ----------------------------------- | ------------------------- | ------ |
-| TD-M16-C01 | App bootstrap duplicated across `web` and `law-platform` | M3–M7 integration | Bug fixes applied twice; drift risk | M17 app-bootstrap package | L      |
+| ~~TD-M16-C01~~ | ~~App bootstrap duplicated across `web` and `law-platform`~~ | M3–M7 integration | **Resolved PRH-001** — `@apzhub/platform-bootstrap` | — | — |
 | TD-P24     | ~~No REST API layer~~                                    | LAW-012           | **Resolved** LAW-014                | —                         | —      |
 
 ---
@@ -31,10 +31,10 @@
 
 | ID         | Item                                                             | Origin     | Impact                                | Recommended milestone  | Effort |
 | ---------- | ---------------------------------------------------------------- | ---------- | ------------------------------------- | ---------------------- | ------ |
-| TD-P02     | Auth has no real tenant claim — `DEFAULT_LAW_TENANT_ID` fallback | LAW-012    | Multi-tenant bypass                   | M8 / LAW-014-02        | M      |
+| TD-P02     | ~~Auth has no real tenant claim~~ — session tenant + membership (M8-01) | LAW-012    | **Partially resolved** — RBAC remains M8-02 | M8-02 RBAC             | S      |
 | TD-P18     | Outbox workers not implemented                                   | LAW-012    | Events unprocessed; projections stale | Post-M8 workers        | L      |
 | TD-P19     | Event replay not implemented                                     | LAW-012    | No recovery from consumer failure     | Post-M8 workers        | M      |
-| TD-M8-RBAC | Production RBAC not seeded — allow-all in dev                    | M3–M7      | All permissions granted in validation | M8 SPR-008             | L      |
+| TD-M8-RBAC | ~~Production RBAC not seeded~~ — AuthorizationService + session bridge (M8-02) | M3–M7      | **Partially resolved** — admin UI M8-03 | M8-03 admin console    | S      |
 | TD-L011-02 | Mark Paid status-only — no payment entity                        | LAW-011    | Billing incomplete                    | Payment records sprint | L      |
 | TD-T03     | Client bundle PostgreSQL import leak (partial fix)               | LAW-015-13 | Browser may load server modules       | LAW-015-15             | M      |
 | TD-T06     | No bank feeds / three-way reconciliation                         | LAW-015    | Commercial trust blocker              | Trust Phase 2          | XL     |
@@ -66,7 +66,7 @@
 | TD-P14     | Time billing not linked to invoices in workflow   | LAW-012    | Revenue leakage risk           | Billing saga              | M      |
 | TD-P01     | Managed* extra fields not in domain               | LAW-012    | Schema drift                   | Domain alignment          | M      |
 | TD-P07     | `legal-business-core` types in `@apzhub/config`   | LAW-012    | Package boundary blur          | Extract legal-persistence | M      |
-| TD-P09     | ALS session wiring not in all API routes          | LAW-012    | RLS context gap                | API middleware            | S      |
+| ~~TD-P09~~ | ~~ALS session wiring not in all API routes~~          | LAW-012    | **Resolved PRH-007** — entity routes audited | —                         | —      |
 | TD-T05     | OpenAPI trust paths incomplete                    | LAW-015-12 | Integrator onboarding gap      | LAW-015-15                | S      |
 | TD-M16-M01 | Law schema in `@apzhub/config` package            | M16 review | Platform/product coupling      | M17+                      | M      |
 | TD-M16-M02 | No GitHub Actions CI workflow                     | M16 review | Manual quality gates only      | M17                       | M      |
@@ -78,7 +78,7 @@
 
 | ID           | Item                                             | Origin     | Impact                        | Recommended milestone     | Effort |
 | ------------ | ------------------------------------------------ | ---------- | ----------------------------- | ------------------------- | ------ |
-| TD-P10       | RLS cross-tenant denial not integration-tested   | LAW-012    | Test gap                      | Security hardening        | S      |
+| ~~TD-P10~~ | ~~RLS cross-tenant denial not integration-tested~~   | LAW-012    | **Resolved PRH-007** — `testing/integration/` | —                         | —      |
 | TD-P15       | Calendar `timeEntryId` not validated at adapter  | LAW-012    | Data quality                  | Adapter validation        | S      |
 | TD-P17       | Invoice issued/sent same outbox event            | LAW-012    | Event granularity             | Optional                  | S      |
 | TD-P13       | Task complete outbox path consistency            | LAW-012    | Event completeness            | Adapter review            | S      |
@@ -134,7 +134,7 @@
 ```text
 1. M8 RBAC + tenant claim (TD-M8-RBAC, TD-P02)
 2. Outbox workers (TD-P18, TD-P19, TD-P20)
-3. App bootstrap consolidation (TD-M16-C01)
+3. ~~App bootstrap consolidation (TD-M16-C01)~~ — **done PRH-001**
 4. CI automation (TD-M16-M02, TD-T04)
 5. Client bundle hardening (TD-T03)
 6. Trust production readiness (TD-T01, TD-T05)

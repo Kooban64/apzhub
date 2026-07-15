@@ -1,0 +1,85 @@
+manifestSchemaVersion: "1.0"
+id: certification-service
+name: Certification Service
+version: 0.5.0
+kind: service
+
+metadata:
+  category: testing
+  description: APZ TCMS Certification Engine — lifecycle, configurable gates, deterministic advisory recommendations, human multi-stage approvals, immutable audit (APZTCMS-009). Domain services only; no UI.
+  contractPackage: "@apzhub/testing-contracts"
+  contractVersion: "0.6.0"
+  implementationPackage: "@apzhub/testing-services"
+  implementationVersion: "0.5.0"
+  owner: APZHUB
+  tags:
+    - certification
+    - tcms
+    - quality-gates
+    - approvals
+    - workflow
+
+dependencies:
+  platform: []
+  services:
+    - testing-service
+  integrations: []
+
+integrations: []
+
+service:
+  category: testing
+
+permissions:
+  - certification.view
+  - certification.records.list
+  - certification.records.read
+  - certification.records.create
+  - certification.records.transition
+  - certification.gates.evaluate
+  - certification.create
+  - certification.review
+  - certification.approve
+  - certification.reject
+  - certification.override
+  - certification.audit
+  - certification.admin
+  - approval.list
+  - approval.read
+  - approval.request
+  - approval.decide
+  - approval.sign
+  - approval.admin
+
+events:
+  publishes:
+    - certification.created
+    - certification.transitioned
+    - certification.gate_evaluated
+    - certification.recommended
+    - certification.approved
+    - certification.conditionally_approved
+    - certification.rejected
+    - certification.expired
+    - certification.archived
+    - certification.restored
+    - certification.state_changed
+    - quality_gate.evaluated
+    - approval.requested
+    - approval.decided
+    - approval.signed
+
+health:
+  enabled: true
+
+documentation:
+  governanceCapabilityKey: testing
+  engineBranding: hidden
+  product: APZ TCMS
+  milestone: APZTCMS-009
+  shippingUi: false
+
+tests:
+  manifest: true
+  contract: true
+  domain: true

@@ -34,6 +34,7 @@ import {
   readLegalSearchFiltersFromKnowledgeQuery,
   shouldIncludeEntityType,
 } from "./legal-search-provider-filters";
+import { resolveLegalSearchTenantScope } from "./legal-search-tenant-scope";
 import {
   LEGAL_CLIENT_SEARCH_SOURCE_ID,
   LEGAL_DOCUMENT_SEARCH_SOURCE_ID,
@@ -70,6 +71,17 @@ function buildResult(
   };
 }
 
+function emptySearchWithoutTenantScope(
+  source: KnowledgeSource,
+  startedAt: number,
+): KnowledgeResult | undefined {
+  if (!resolveLegalSearchTenantScope()) {
+    return buildResult(source, [], startedAt);
+  }
+
+  return undefined;
+}
+
 function createClientSearchProvider(source: KnowledgeSource): KnowledgeProvider {
   return {
     source,
@@ -78,6 +90,11 @@ function createClientSearchProvider(source: KnowledgeSource): KnowledgeProvider 
       _context: KnowledgeContext,
     ): Promise<KnowledgeResult> {
       const startedAt = performance.now();
+      const withoutTenant = emptySearchWithoutTenantScope(source, startedAt);
+      if (withoutTenant) {
+        return withoutTenant;
+      }
+
       const text = query.text?.trim() ?? "";
       const filters = readLegalSearchFiltersFromKnowledgeQuery(query);
       if (!text || !shouldIncludeEntityType(filters.entityType, "client")) {
@@ -141,6 +158,11 @@ function createMatterSearchProvider(source: KnowledgeSource): KnowledgeProvider 
       _context: KnowledgeContext,
     ): Promise<KnowledgeResult> {
       const startedAt = performance.now();
+      const withoutTenant = emptySearchWithoutTenantScope(source, startedAt);
+      if (withoutTenant) {
+        return withoutTenant;
+      }
+
       const text = query.text?.trim() ?? "";
       const filters = readLegalSearchFiltersFromKnowledgeQuery(query);
       if (!text || !shouldIncludeEntityType(filters.entityType, "matter")) {
@@ -216,6 +238,11 @@ function createDocumentSearchProvider(source: KnowledgeSource): KnowledgeProvide
       _context: KnowledgeContext,
     ): Promise<KnowledgeResult> {
       const startedAt = performance.now();
+      const withoutTenant = emptySearchWithoutTenantScope(source, startedAt);
+      if (withoutTenant) {
+        return withoutTenant;
+      }
+
       const text = query.text?.trim() ?? "";
       const filters = readLegalSearchFiltersFromKnowledgeQuery(query);
       if (!text || !shouldIncludeEntityType(filters.entityType, "document")) {
@@ -280,6 +307,11 @@ function createTaskSearchProvider(source: KnowledgeSource): KnowledgeProvider {
       _context: KnowledgeContext,
     ): Promise<KnowledgeResult> {
       const startedAt = performance.now();
+      const withoutTenant = emptySearchWithoutTenantScope(source, startedAt);
+      if (withoutTenant) {
+        return withoutTenant;
+      }
+
       const text = query.text?.trim() ?? "";
       const filters = readLegalSearchFiltersFromKnowledgeQuery(query);
       if (!text || !shouldIncludeEntityType(filters.entityType, "task")) {
@@ -349,6 +381,11 @@ function createTimeEntrySearchProvider(source: KnowledgeSource): KnowledgeProvid
       _context: KnowledgeContext,
     ): Promise<KnowledgeResult> {
       const startedAt = performance.now();
+      const withoutTenant = emptySearchWithoutTenantScope(source, startedAt);
+      if (withoutTenant) {
+        return withoutTenant;
+      }
+
       const text = query.text?.trim() ?? "";
       const filters = readLegalSearchFiltersFromKnowledgeQuery(query);
       if (!text || !shouldIncludeEntityType(filters.entityType, "time_entry")) {
@@ -412,6 +449,11 @@ function createCalendarEventSearchProvider(source: KnowledgeSource): KnowledgePr
       _context: KnowledgeContext,
     ): Promise<KnowledgeResult> {
       const startedAt = performance.now();
+      const withoutTenant = emptySearchWithoutTenantScope(source, startedAt);
+      if (withoutTenant) {
+        return withoutTenant;
+      }
+
       const text = query.text?.trim() ?? "";
       const filters = readLegalSearchFiltersFromKnowledgeQuery(query);
       if (!text || !shouldIncludeEntityType(filters.entityType, "calendar_event")) {
@@ -482,6 +524,11 @@ function createInvoiceSearchProvider(source: KnowledgeSource): KnowledgeProvider
       _context: KnowledgeContext,
     ): Promise<KnowledgeResult> {
       const startedAt = performance.now();
+      const withoutTenant = emptySearchWithoutTenantScope(source, startedAt);
+      if (withoutTenant) {
+        return withoutTenant;
+      }
+
       const text = query.text?.trim() ?? "";
       const filters = readLegalSearchFiltersFromKnowledgeQuery(query);
       if (!text || !shouldIncludeEntityType(filters.entityType, "invoice")) {
@@ -551,6 +598,11 @@ function createTrustSearchProvider(source: KnowledgeSource): KnowledgeProvider {
       _context: KnowledgeContext,
     ): Promise<KnowledgeResult> {
       const startedAt = performance.now();
+      const withoutTenant = emptySearchWithoutTenantScope(source, startedAt);
+      if (withoutTenant) {
+        return withoutTenant;
+      }
+
       const text = query.text?.trim().toLowerCase() ?? "";
       const filters = readLegalSearchFiltersFromKnowledgeQuery(query);
       if (!text) {

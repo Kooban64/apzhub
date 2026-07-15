@@ -1,7 +1,9 @@
 import { eq } from "drizzle-orm";
 
 import { getDb } from "./client";
-import { roles, user } from "./schema";
+import { platformTenant, roles, user } from "./schema";
+
+const DEFAULT_PLATFORM_TENANT_ID = "t0000001-0000-4000-8000-000000000001";
 
 const DEFAULT_ROLES = [
   { name: "platform_admin", description: "Platform administrator" },
@@ -29,6 +31,26 @@ export async function seedDatabase(): Promise<void> {
 
   if (!adminRole || !userRole) {
     throw new Error("Default roles missing after seed");
+  }
+
+  try {
+    const timestamp = new Date();
+    await getDb()
+      .insert(platformTenant)
+      .values({
+        tenantId: DEFAULT_PLATFORM_TENANT_ID,
+        slug: "default-firm",
+        name: "Default Firm",
+        status: "active",
+        metadata: { displayName: "Default Firm", productKeys: ["law-platform"] },
+        createdAt: timestamp,
+        updatedAt: timestamp,
+      })
+      .onConflictDoNothing({ target: platformTenant.tenantId });
+  } catch (error) {
+    console.info(
+      `[seed] Platform tenant seed skipped: ${error instanceof Error ? error.message : "unknown"}`,
+    );
   }
 
   const devEmail = "dev@apzhub.local";

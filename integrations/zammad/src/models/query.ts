@@ -1,0 +1,20 @@
+/** Re-exports Support list/query contracts from platform contracts. */
+export type {
+  PageRequest,
+  PageResult,
+  SortField,
+  SupportTicketListFilter,
+  SupportOrganizationListFilter,
+  SupportGroupListFilter,
+  SupportUserListFilter,
+  SupportArticleListFilter,
+  SupportSearchFilter,
+  SupportHistoryListFilter,
+  SupportTicketSortField,
+  SupportOrganizationSortField,
+  SupportGroupSortField,
+  SupportUserSortField,
+  SupportArticleSortField,
+  SupportSearchSortField,
+  SupportHistorySortField,
+} from "@apzhub/platform-service-contracts";

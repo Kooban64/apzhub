@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: support-requests
+name: Requests
+version: 0.1.0
+kind: module
+
+metadata:
+  category: support
+  description: Support — Requests inbox and request detail views.
+
+dependencies:
+  platform: []
+  services:
+    - support-service
+
+module:
+  category: support
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: support
+    parent: support
+    label: Requests
+    icon: inbox
+    route: /workspace/support/requests
+    order: 10
+    permission: support.requests.list
+  view:
+    title: Requests
+    workspace: support
+    route: /workspace/support/requests
+    permission: support.requests.list

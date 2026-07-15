@@ -1,0 +1,24 @@
+manifestSchemaVersion: "1.0"
+id: projects-task-created
+name: Projects Task Created
+version: 0.1.0
+kind: event
+
+metadata:
+  category: productivity
+  description: Emitted when an APZHUB Task is created.
+
+event:
+  category: business
+  publisher: project-service
+  subscribers:
+    - search:projects.search
+    - activity:projects.activity
+  payload:
+    taskId: string
+    projectId: string
+    title: string
+    status: string
+
+documentation:
+  eventKey: projects.task.created

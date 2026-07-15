@@ -1,5 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
 
+import { fetchMiddlewareSession } from "@apzhub/auth/middleware-session";
+
+import { enforceTrafficGovernance, shouldApplyLawTrafficGovernance, shouldApplyTrafficGovernance } from "./lib/traffic-governance-middleware";
+
 const publicPaths = ["/login", "/register", "/forgot-password", "/api/health"];
 
 /** Paths reachable without session (Law API public endpoints + developer docs). */
@@ -12,7 +16,25 @@ function isPublicPath(pathname: string): boolean {
     return true;
   }
 
+  // Platform HTTP API v1 — health/readiness/openapi are public; other /api/v1 routes
+  // pass through without HTML login redirect so handlers can return JSON 401.
+  if (
+    pathname === "/api/v1/health" ||
+    pathname === "/api/v1/readiness" ||
+    pathname.startsWith("/api/v1/openapi")
+  ) {
+    return true;
+  }
+
+  if (pathname.startsWith("/api/v1/")) {
+    return true;
+  }
+
   if (pathname === "/api/docs" || pathname.startsWith("/api/docs/")) {
+    return true;
+  }
+
+  if (pathname === "/api/platform/v1/security/csp-report") {
     return true;
   }
 
@@ -27,54 +49,47 @@ function isPublicPath(pathname: string): boolean {
   return false;
 }
 
-type SessionPayload = {
-  session?: { expiresAt: string };
-  user?: { id: string };
-};
-
-async function fetchValidatedSession(
+async function applySharedTrafficGovernance(
   request: NextRequest,
-): Promise<SessionPayload | null> {
-  const sessionUrl = new URL("/api/auth/get-session", request.nextUrl.origin);
-
-  const response = await fetch(sessionUrl, {
-    method: "GET",
-    headers: {
-      cookie: request.headers.get("cookie") ?? "",
-    },
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
+  input?: { readonly userId?: string; readonly tenantId?: string },
+): Promise<NextResponse | null> {
+  const { pathname } = request.nextUrl;
+  if (!shouldApplyTrafficGovernance(pathname) && !shouldApplyLawTrafficGovernance(pathname)) {
     return null;
   }
 
-  const data = (await response.json()) as SessionPayload | null;
-
-  if (!data?.session || !data?.user) {
+  if (pathname.startsWith("/api/law/") && !isPublicPath(pathname)) {
     return null;
   }
 
-  const expiresAt = new Date(data.session.expiresAt);
-  if (expiresAt.getTime() <= Date.now()) {
-    return null;
-  }
-
-  return data;
+  return enforceTrafficGovernance(request, input);
 }
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  const trafficResponse = await applySharedTrafficGovernance(request);
+  if (trafficResponse) {
+    return trafficResponse;
+  }
+
   if (isPublicPath(pathname)) {
     return NextResponse.next();
   }
 
-  const session = await fetchValidatedSession(request);
+  const session = await fetchMiddlewareSession(request);
   if (!session) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
+  }
+
+  const authenticatedTraffic = await applySharedTrafficGovernance(request, {
+    userId: session.user?.id,
+    tenantId: session.tenantId,
+  });
+  if (authenticatedTraffic) {
+    return authenticatedTraffic;
   }
 
   return NextResponse.next();

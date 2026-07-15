@@ -14,6 +14,7 @@ export const user = pgTable("user", {
   emailVerified: boolean("email_verified").notNull().default(false),
   image: text("image"),
   roleId: uuid("role_id").references(() => roles.id),
+  activeTenantId: text("active_tenant_id"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
@@ -83,3 +84,62 @@ export const schema = {
 };
 
 export { legalSchema, lawClient, lawMatter, lawOutboxEvent } from "./legal-schema";
+export {
+  platformIdentitySchema,
+  platformTenant,
+  platformUserTenant,
+} from "./platform-identity-schema";
+export {
+  platformAuthorizationSchema,
+  platformAuthorizationPermission,
+  platformAuthorizationRole,
+  platformAuthorizationRoleAssignment,
+  platformAuthorizationRolePermission,
+} from "./platform-authorization-schema";
+export {
+  platformPersonalisationSchema,
+  platformUserPreference,
+  platformUserFavorite,
+  platformUserRecentItem,
+  platformUserWorkbenchLayout,
+} from "./platform-personalisation-schema";
+export {
+  platformGovernanceSchema,
+  platformCapability,
+  platformCapabilityDependency,
+  platformGovernanceEnablement,
+  platformProvisioningRecord,
+  platformFeatureFlag,
+  platformFeatureFlagOverride,
+} from "./platform-governance-schema";
+export {
+  platformDocumentSchema,
+  platformDocument,
+  platformDocumentMetadata,
+  platformDocumentTag,
+  platformDocumentCategory,
+  platformDocumentRelationship,
+  platformDocumentRetention,
+  platformDocumentAudit,
+  platformDocumentVersion,
+  platformDocumentStorageObject,
+} from "./platform-document-schema";
+export {
+  platformSearchSchema,
+  platformSearchProvider,
+  platformSearchProviderRegistration,
+  platformSearchProviderStatus,
+  platformSearchConfiguration,
+  platformSearchConfigurationVersion,
+  platformSearchProfile,
+  platformSearchCollection,
+  platformSearchSource,
+  platformSearchScope,
+  platformSearchMetadata,
+  platformSearchSession,
+  platformSearchAudit,
+  platformSearchDiagnostics,
+  platformSearchHealth,
+  platformSearchStatistics,
+  platformSearchCapabilities,
+} from "./platform-search-schema";

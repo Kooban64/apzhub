@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: testing-reports
+name: Reports
+version: 0.2.0
+kind: module
+
+metadata:
+  category: quality
+  description: APZ TCMS Testing — Reports (APZTCMS-010).
+
+dependencies:
+  platform: []
+  services:
+    - testing-service
+
+module:
+  category: quality
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: testing
+    parent: testing
+    label: Reports
+    icon: file-bar-chart
+    route: /workspace/testing/reports
+    order: 140
+    permission: reporting.view
+  view:
+    title: Reports
+    workspace: testing
+    route: /workspace/testing/reports
+    permission: reporting.view

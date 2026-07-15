@@ -1,0 +1,212 @@
+export type {
+  ServiceRequestContext,
+  ImpersonationContext,
+  ServiceExecutionMetadata,
+} from "./common/context";
+
+export type {
+  PageRequest,
+  PageResult,
+  CursorPageRequest,
+  CursorPageResult,
+} from "./common/paging";
+
+export type {
+  SortDirection,
+  SortField,
+  SortSpec,
+} from "./common/sorting";
+
+export type { ListQuery } from "./common/list-query";
+
+export type {
+  ServiceResponseMeta,
+  ServiceResult,
+  ServiceListResult,
+  ServiceCursorListResult,
+  ServiceVoidResult,
+} from "./common/results";
+
+export type {
+  PlatformServiceErrorCategory,
+  PlatformServiceErrorCode,
+  PlatformServiceErrorContract,
+} from "./common/errors";
+
+export {
+  PlatformServiceError,
+  isPlatformServiceError,
+} from "./common/errors";
+
+export type * from "./domain";
+
+export type * from "./queries";
+
+export type * from "./inputs";
+
+export type {
+  WorkspaceService,
+  ProjectService,
+  TaskService,
+  TeamService,
+  UserService,
+  SearchService,
+  SupportService,
+  SupportOrganizationService,
+  SupportGroupService,
+  SupportUserService,
+  SupportArticleService,
+  SupportSearchService,
+  SupportHistoryService,
+  SupportAnalyticsService,
+  TestingPlanService,
+  TestingSuiteService,
+  TestingCaseService,
+  TestingRequirementService,
+  TestingExecutionService,
+  TestingEvidenceService,
+  TestingAutomationService,
+  TestingCoverageService,
+  TestingDefectService,
+  TestingQualityService,
+  TestingEngineeringIntelligenceService,
+  TestingCertificationService,
+  TestingReleaseReadinessService,
+  TestingReleaseGovernanceService,
+  TestingPipelinesService,
+  TestingPipelineRepositoryService,
+  TestingPipelineWorkflowService,
+  TestingPipelineRunLiveService,
+  TestingPipelineArtifactService,
+  TestingPipelineJobService,
+  TestingPipelineStepService,
+  TestingPipelineSummaryService,
+  PipelineRepository,
+  PipelineWorkflow,
+  PipelineRunView,
+  PipelineRunListQuery,
+  PipelineProviderImportInput,
+  TestingTraceabilityService,
+  TestingApprovalService,
+  TestingDashboardService,
+  TestingReportPlaceholder,
+  TestingReportingService,
+  TestingPlatformGateway,
+  PlatformQualityGateway,
+  PlatformReleaseGateway,
+  PlatformGovernanceGateway,
+  ProductRegistryService,
+  DependencyGraphService,
+  PlatformQualityAggregationService,
+  MultiProductCertificationService,
+  ProductHealthService,
+  PlatformDashboardService,
+  PlatformTraceabilityService,
+  PlatformReleaseGovernanceService,
+  PlatformQualityDomainServices,
+} from "./services";
+
+/** Canonical APZ TCMS domain models — re-exported for HTTP/fixture consumers (APZTCMS-011/012/013/014). */
+export type {
+  Approval,
+  ApprovalHistoryEntry,
+  ApprovalId,
+  AutomationCoverageSnapshot,
+  AutomationImport,
+  AutomationImportHistory,
+  AutomationImportId,
+  AutomationRun,
+  AutomationRunId,
+  CertificationAuditEntry,
+  CertificationGateEvaluation,
+  CertificationPreparationSummary,
+  CertificationRecommendation,
+  CertificationRecord,
+  CertificationRecordId,
+  CoverageMetric,
+  CoverageMetricId,
+  DefectLink,
+  DefectLinkId,
+  DependencyHealthSummary,
+  DependencyValidationResult,
+  Evidence,
+  EvidenceId,
+  GovernedProduct,
+  ManualExecution,
+  ManualExecutionId,
+  MultiProductCertificationAggregate,
+  PlatformCrossProductLink,
+  PlatformQualityAggregate,
+  PlatformQualityDashboardSnapshot,
+  PlatformRelease,
+  PlatformReleaseApproval,
+  PlatformReleaseCandidate,
+  PlatformReleaseDecision,
+  PlatformReleaseManifest,
+  PlatformReleasePackage,
+  PlatformReleaseReadinessAggregate,
+  PlatformReleaseSummary,
+  ProductDependency,
+  ProductHealthSummary,
+  ProductQualityContribution,
+  ProductRegistry,
+  QualitySnapshot,
+  QualitySummary,
+  QualityTrendComparison,
+  ReleaseReadinessInputs,
+  Requirement,
+  RequirementId,
+  TestCase,
+  TestCaseId,
+  TestPlan,
+  TestPlanId,
+  TestStepId,
+  TestSuite,
+  TestSuiteId,
+  TraceabilityLink,
+  TraceabilityLinkId,
+  TraceabilityMatrixRow,
+} from "@apzhub/testing-contracts";
+
+export type { TestingDashboardSummary } from "./domain/testing-dashboard";
+
+export const PLATFORM_SERVICE_CONTRACTS_VERSION = "0.15.0";
+
+export const PLATFORM_SERVICE_IDS = [
+  "workspace-service",
+  "project-service",
+  "task-service",
+  "team-service",
+  "user-service",
+  "search-service",
+  "support-service",
+  "support-organization-service",
+  "support-group-service",
+  "support-user-service",
+  "support-article-service",
+  "support-search-service",
+  "support-history-service",
+  "support-analytics-service",
+  "testing-plan-service",
+  "testing-suite-service",
+  "testing-case-service",
+  "testing-requirement-service",
+  "testing-execution-service",
+  "testing-evidence-service",
+  "testing-automation-service",
+  "testing-coverage-service",
+  "testing-defect-service",
+  "testing-quality-service",
+  "testing-engineering-intelligence-service",
+  "testing-certification-service",
+  "testing-release-readiness-service",
+  "testing-traceability-service",
+  "testing-approval-service",
+  "testing-dashboard-service",
+  "testing-reporting-service",
+  "platform-quality-service",
+  "platform-release-service",
+  "platform-governance-service",
+] as const;
+
+export type PlatformServiceId = (typeof PLATFORM_SERVICE_IDS)[number];

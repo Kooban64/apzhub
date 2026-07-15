@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-search-configurations
+name: Configurations
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Search — Configurations sidebar (APZSEARCH-007).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: search
+    parent: platform-search
+    label: Configurations
+    icon: settings
+    route: /workspace/search/configurations
+    order: 40
+    permission: search.configuration.list
+  view:
+    title: Configurations
+    workspace: search
+    route: /workspace/search/configurations
+    permission: search.configuration.list

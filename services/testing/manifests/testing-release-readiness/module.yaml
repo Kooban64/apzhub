@@ -1,0 +1,35 @@
+manifestSchemaVersion: "1.0"
+id: testing-release-readiness
+name: Release Readiness
+version: 0.2.0
+kind: module
+
+metadata:
+  category: quality
+  description: APZ TCMS Testing — Release readiness (APZTCMS-010).
+
+dependencies:
+  platform: []
+  services:
+    - testing-service
+    - certification-service
+
+module:
+  category: quality
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: testing
+    parent: testing
+    label: Release Readiness
+    icon: rocket
+    route: /workspace/testing/release-readiness
+    order: 130
+    permission: release.view
+  view:
+    title: Release Readiness
+    workspace: testing
+    route: /workspace/testing/release-readiness
+    permission: release.view

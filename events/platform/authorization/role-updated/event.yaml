@@ -1,0 +1,17 @@
+manifestSchemaVersion: "1.0"
+id: platform-authorization-role-updated
+name: Platform Authorization Role Updated
+version: 0.1.0
+kind: event
+
+metadata:
+  category: platform
+  description: Emitted when a platform authorization role is updated.
+
+event:
+  category: platform
+  publisher: platform-authorization
+  permission: platform.authorization.manage
+  payload:
+    roleId: string
+    slug: string

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-operations-feature-flags
+name: Feature Flags
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Operations — Feature Flags (M8-03).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-administration
+    label: Feature Flags
+    icon: flag
+    route: /workspace/administration/feature-flags
+    order: 130
+    permission: platform.nav.administration.view
+  view:
+    title: Feature Flags
+    workspace: administration
+    route: /workspace/administration/feature-flags
+    permission: platform.nav.administration.view

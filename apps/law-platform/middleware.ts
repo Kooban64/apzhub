@@ -1,55 +1,45 @@
 import { NextResponse, type NextRequest } from "next/server";
 
+import { fetchMiddlewareSession } from "@apzhub/auth/middleware-session";
+
+import { enforceTrafficGovernance } from "./lib/traffic-governance-middleware";
+import { shouldApplyTrafficGovernance } from "@apzhub/platform-security/traffic-edge";
+
 const publicPaths = ["/login", "/register", "/forgot-password", "/api/health"];
-
-type SessionPayload = {
-  session?: { expiresAt: string };
-  user?: { id: string };
-};
-
-async function fetchValidatedSession(
-  request: NextRequest,
-): Promise<SessionPayload | null> {
-  const sessionUrl = new URL("/api/auth/get-session", request.nextUrl.origin);
-
-  const response = await fetch(sessionUrl, {
-    method: "GET",
-    headers: {
-      cookie: request.headers.get("cookie") ?? "",
-    },
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    return null;
-  }
-
-  const data = (await response.json()) as SessionPayload | null;
-
-  if (!data?.session || !data?.user) {
-    return null;
-  }
-
-  const expiresAt = new Date(data.session.expiresAt);
-  if (expiresAt.getTime() <= Date.now()) {
-    return null;
-  }
-
-  return data;
-}
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  if (shouldApplyTrafficGovernance(pathname)) {
+    const trafficResponse = await enforceTrafficGovernance(request);
+    if (trafficResponse) {
+      return trafficResponse;
+    }
+  }
 
   if (publicPaths.some((p) => pathname === p || pathname.startsWith("/api/auth"))) {
     return NextResponse.next();
   }
 
-  const session = await fetchValidatedSession(request);
+  if (pathname === "/api/platform/v1/security/csp-report") {
+    return NextResponse.next();
+  }
+
+  const session = await fetchMiddlewareSession(request);
   if (!session) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
+  }
+
+  if (shouldApplyTrafficGovernance(pathname)) {
+    const trafficResponse = await enforceTrafficGovernance(request, {
+      userId: session.user?.id,
+      tenantId: session.tenantId,
+    });
+    if (trafficResponse) {
+      return trafficResponse;
+    }
   }
 
   return NextResponse.next();

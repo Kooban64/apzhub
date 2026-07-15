@@ -18,6 +18,16 @@
 
 Document 005 remains authoritative for UX principles. Workbench Framework is the **implementation architecture** for Milestone 3 onward.
 
+### Support workspace (OSS-110-13)
+
+The **Support** product mounts inside the workbench:
+
+- Activity Bar entry and sidebar children from `services/support/manifests/`
+- Routes under `/workspace/support/*` resolved by `SupportWorkspaceRouter`
+- Presentation-only — calls `/api/v1/support-*` via typed client; no engine branding
+
+See [APZHUB-Support-Module-UI.md](./APZHUB-Support-Module-UI.md) and [APZHUB-Support-User-Guide.md](../guides/APZHUB-Support-User-Guide.md).
+
 ---
 
 ## 2. Platform architecture layers

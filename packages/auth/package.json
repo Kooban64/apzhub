@@ -5,7 +5,10 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./server": "./src/server.ts"
+    "./server": "./src/server.ts",
+    "./session-policy": "./src/session-policy.ts",
+    "./session-diagnostics": "./src/session-diagnostics.ts",
+    "./middleware-session": "./src/middleware-session.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
@@ -13,6 +16,7 @@
   },
   "dependencies": {
     "@apzhub/config": "workspace:*",
+    "@apzhub/platform-identity": "workspace:*",
     "better-auth": "^1.2.9"
   },
   "peerDependencies": {

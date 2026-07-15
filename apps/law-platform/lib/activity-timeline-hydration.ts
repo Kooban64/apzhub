@@ -18,7 +18,7 @@ import {
   type TimelineRegistryHydrationDiagnostics,
 } from "@apzhub/activity-timeline-framework/server";
 import { createWorkbenchPermissionAdapter } from "@apzhub/workbench-framework";
-import { createAuthPermissionContextFromUser } from "@apzhub/workbench-framework/server";
+import { createLawPlatformAuthPermissionContext } from "./session-permission-context";
 
 import { loadSharedActivityTimelineContext } from "./load-shared-activity-timeline-context";
 
@@ -44,8 +44,9 @@ export async function loadActivityTimelineHydration(): Promise<ActivityTimelineH
   const unfilteredActivityDto = mapActivityRegistryDto(context.registry);
   const unfilteredTimelineDto = mapTimelineRegistryDto(context.timelineRegistry);
   const session = await getValidatedSession(await headers());
+  const authContext = await createLawPlatformAuthPermissionContext(session);
   const permissionAdapter = createWorkbenchPermissionAdapter({
-    authContext: createAuthPermissionContextFromUser(session?.user),
+    authContext,
     nodeEnv: process.env.NODE_ENV,
     allowDevRegistration: isDevRegistrationAllowed(),
   });

@@ -1,4 +1,5 @@
 import { isDevRegistrationAllowed } from "@apzhub/config";
+import { resolveSessionAuthorization } from "@apzhub/platform-authorization/server";
 import { createWorkbenchPermissionAdapter } from "@apzhub/workbench-framework";
 import { createAuthPermissionContextFromUser } from "@apzhub/workbench-framework/server";
 
@@ -14,23 +15,41 @@ export interface LawApiPermissionChecker {
 
 export interface ResolveLawApiPermissionsInput {
   readonly user?: LawApiUser;
+  readonly tenantId?: string;
   readonly roles?: readonly string[];
   readonly permissions?: readonly string[];
 }
 
-/** Permission resolver hook — delegates to Workbench permission adapter (LAW-014-02). */
-export function resolveLawApiPermissions(
+/** Permission resolver — delegates to Platform AuthorizationService (M8-02). */
+export async function resolveLawApiPermissions(
   input: ResolveLawApiPermissionsInput = {},
-): LawApiPermissionChecker {
-  const permissions =
-    input.permissions ??
-    (isDevRegistrationAllowed() && input.user ? (["*"] as const) : ([] as const));
+): Promise<LawApiPermissionChecker> {
+  let roles = input.roles ?? [];
+  let permissions = input.permissions;
+
+  if (input.user && permissions === undefined) {
+    const authz = await resolveSessionAuthorization({
+      userId: input.user.userId,
+      tenantId: input.tenantId,
+      productKey: "law-platform",
+    });
+    roles = authz.roles;
+    permissions = [...authz.permissions];
+  }
+
+  if (
+    (permissions?.length ?? 0) === 0 &&
+    isDevRegistrationAllowed() &&
+    input.user
+  ) {
+    permissions = ["*"];
+  }
 
   const authContext = createAuthPermissionContextFromUser(
     input.user ? { id: input.user.userId } : null,
     {
-      roles: input.roles ?? [],
-      permissions: [...permissions],
+      roles,
+      permissions: permissions ?? [],
     },
   );
 

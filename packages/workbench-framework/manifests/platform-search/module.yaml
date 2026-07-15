@@ -1,0 +1,40 @@
+manifestSchemaVersion: "1.0"
+id: platform-search
+name: Search
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Search workspace — query and management workbench (APZSEARCH-007).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: search
+    icon: search
+    route: /workspace/search
+    order: 55
+    permission: search.query.execute
+  view:
+    title: Search
+    workspace: search
+    route: /workspace/search
+    default: true
+    permission: search.query.execute
+  actions:
+    - id: platform.search.navigate
+      label: Go to Search
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: search.query.execute
+      palette: true
+      group: Navigation
+      icon: search
+      order: 55
+      description: Reveal the Search navigation item in the workbench shell.

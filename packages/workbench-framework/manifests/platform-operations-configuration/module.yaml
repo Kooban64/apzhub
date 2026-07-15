@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-operations-configuration
+name: Configuration
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Operations — Configuration (M8-03).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-administration
+    label: Configuration
+    icon: settings
+    route: /workspace/administration/configuration
+    order: 120
+    permission: platform.nav.administration.view
+  view:
+    title: Configuration
+    workspace: administration
+    route: /workspace/administration/configuration
+    permission: platform.nav.administration.view

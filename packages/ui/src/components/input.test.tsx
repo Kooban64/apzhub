@@ -9,6 +9,11 @@ describe("Input", () => {
     expect(screen.getByLabelText("Email")).toBeInTheDocument();
   });
 
+  it("associates label when neither id nor name is provided", () => {
+    render(<Input label="Search" />);
+    expect(screen.getByLabelText("Search")).toBeInTheDocument();
+  });
+
   it("shows validation error", () => {
     render(<Input label="Email" name="email" error="Required" />);
     expect(screen.getByRole("alert")).toHaveTextContent("Required");

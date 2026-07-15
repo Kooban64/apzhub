@@ -32,6 +32,10 @@ vi.mock("@apzhub/config", async (importOriginal) => {
   };
 });
 
+vi.mock("@apzhub/platform-authorization/server", () => ({
+  resolveSessionAuthorization: vi.fn(async () => ({ roles: [], permissions: [] })),
+}));
+
 const mockSession = {
   session: { id: "sess-1", expiresAt: new Date(Date.now() + 60_000).toISOString() },
   user: {

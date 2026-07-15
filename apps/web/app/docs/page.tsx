@@ -9,6 +9,9 @@ import {
   LAW_API_PLANNED_RESOURCES,
 } from "@/lib/api/docs/law-api-docs-content";
 
+/** Avoid static prerender of swagger-ui-react (client-only useContext). */
+export const dynamic = "force-dynamic";
+
 export default function LawApiDocsPage() {
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900">

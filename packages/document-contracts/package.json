@@ -1,0 +1,16 @@
+{
+  "name": "@apzhub/document-contracts",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Document contracts — canonical models, service interfaces, permissions (APZDOCS-001/003)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts packages/document-contracts"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-operations-roles
+name: Roles
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Operations — Roles (M8-03).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-administration
+    label: Roles
+    icon: shield
+    route: /workspace/administration/roles
+    order: 30
+    permission: platform.nav.administration.view
+  view:
+    title: Roles
+    workspace: administration
+    route: /workspace/administration/roles
+    permission: platform.nav.administration.view

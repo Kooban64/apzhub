@@ -1,0 +1,33 @@
+{
+  "milestone": "OSS-110-12",
+  "scannedAt": "2026-07-11T17:15:11.304Z",
+  "scanRoots": [
+    "apps/web/app/api/v1/support-requests",
+    "apps/web/app/api/v1/support-organizations",
+    "apps/web/app/api/v1/support-groups",
+    "apps/web/app/api/v1/support-users",
+    "apps/web/app/api/v1/support-search",
+    "apps/web/app/api/v1/support-analytics",
+    "apps/web/lib/api/v1/handlers/support.ts",
+    "apps/web/lib/api/v1/schemas/support.ts",
+    "packages/platform-services/src/providers/zammad",
+    "packages/platform-services/src/services/support-service-impls.ts",
+    "packages/platform-services/src/services/support-mapping-helpers.ts"
+  ],
+  "filesScanned": 36,
+  "violationCount": 0,
+  "violations": [],
+  "importGraph": {
+    "support-http-handler": [
+      "@apzhub/platform-service-contracts"
+    ],
+    "platform-services/providers/zammad": [
+      "@apzhub/integration-zammad",
+      "@apzhub/platform-service-contracts"
+    ],
+    "platform-services/services": [
+      "@apzhub/platform-service-contracts"
+    ]
+  },
+  "verdict": "PASS"
+}

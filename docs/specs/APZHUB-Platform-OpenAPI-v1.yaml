@@ -1,0 +1,5741 @@
+openapi: 3.1.0
+info:
+  title: APZHUB Platform HTTP API
+  version: 1.1.0
+  description: |
+    Production HTTP surface over PlatformServiceGateway (OSS-110-07, OSS-110-11).
+    Routes contain no business logic and never call integration adapters directly.
+    Support domain (OSS-110-11): vendor-neutral ticket management via Zammad or other
+    support engines. All IDs use APZHUB global ID format (sreq_, sorg_, sgrp_, suser_, sart_).
+  contact:
+    name: APZHUB Platform
+servers:
+  - url: /api/v1
+    description: Platform API v1
+tags:
+  - name: Health
+  - name: Workspaces
+  - name: Projects
+  - name: Teams
+  - name: Tasks
+  - name: Support Requests
+    description: >
+      Vendor-neutral support ticket operations. DELETE = soft-close (not hard delete).
+      Engine-specific fields are never exposed; use APZHUB global IDs only.
+  - name: Support Articles
+    description: >
+      Support conversation articles. POST /notes creates internal notes (visibility=internal,
+      channel=note). POST /replies creates customer replies (visibility=public, public channel only).
+      Visibility cannot be overridden by the caller.
+  - name: Support Organisations
+    description: Support organisation management (American spelling in URLs).
+  - name: Support Groups
+    description: Support group / queue management.
+  - name: Support Users
+    description: >
+      Support-domain user operations (agents / customers). GET /support-users supports
+      listing, email/login lookup, and text search via query parameters.
+  - name: Support Search
+    description: >
+      Unified support search across tickets, organisations, groups, users, and articles.
+      Requires q or query parameter.
+  - name: Support History
+    description: Read-only audit timeline for support requests.
+  - name: Support Analytics
+    description: >
+      Read-only support intelligence snapshot. Data availability depends on provider;
+      missing fields are omitted rather than defaulted.
+  - name: Testing Requirements
+    description: Testing requirement metadata and links to work items.
+  - name: Testing Plans
+    description: Testing plan lifecycle and clone operations.
+  - name: Testing Suites
+    description: Testing suite lifecycle and clone operations.
+  - name: Testing Cases
+    description: Test case metadata and human review transitions.
+  - name: Testing Executions
+    description: Manual execution lifecycle; these APIs do not execute runners.
+  - name: Testing Evidence
+    description: Evidence metadata only. Binary upload is not implemented by these JSON routes.
+  - name: Testing Automation
+    description: Automation import metadata and validation; no runner execution is performed.
+  - name: Testing Coverage
+    description: Coverage metrics and recompute requests.
+  - name: Testing Defects
+    description: Vendor-neutral testing defect links.
+  - name: Testing Quality
+    description: Quality summaries, trends, regression, and risk analysis.
+  - name: Testing Certification
+    description: Certification is human-authorised; recommendations are advisory only.
+  - name: Testing Traceability
+    description: Traceability links and resource matrices.
+  - name: Testing Dashboard
+    description: Testing dashboard summary for the Workbench.
+  - name: Testing Approvals
+    description: Read-only approval records and approval history.
+  - name: Testing Release Readiness
+    description: Release readiness calculations return isDecision=false and do not approve releases.
+  - name: Testing Pipelines
+    description: >
+      CI/CD pipeline reads (live provider + SoR metadata). Read-focused; optional importFromProvider
+      persists a live run into platform SoR. Does not dispatch, rerun, or cancel workflows.
+  - name: Testing Engineering Intelligence
+    description: >
+      Read-focused Engineering Intelligence presentation over existing domain services
+      (scores, health, trends, benchmarks, baselines, historical snapshots). No new analytics.
+  - name: Platform Reporting
+    description: >
+      Product-neutral platform reporting presentation — templates, validation, preview/generate,
+      generation metadata, and output formats. Handlers call PlatformServiceGateway.reporting only.
+  - name: Platform Documents
+    description: >
+      Canonical Document Platform metadata API (APZDOCS-004). Metadata and version
+      descriptors only — no binary upload/download. All traffic via PlatformServiceGateway.
+  - name: Platform Search
+    description: >
+      Canonical Platform Search API (APZSEARCH-007). Query plane via searchExecution*;
+      management under /search/management/*. Public index/document HTTP deliberately omitted
+      (gateway-only). No Meilisearch DTOs, semantic/vector fields, or legacy gateway.search.
+security:
+  - sessionCookie: []
+paths:
+  /health:
+    get:
+      operationId: getPlatformApiHealth
+      tags: [Health]
+      summary: Process health
+      security: []
+      responses:
+        "200":
+          description: Health status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthSuccess"
+        "503":
+          description: Gateway unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+  /readiness:
+    get:
+      operationId: getPlatformApiReadiness
+      tags: [Health]
+      summary: Readiness probe
+      security: []
+      responses:
+        "200":
+          description: Ready
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReadinessSuccess"
+        "503":
+          description: Not ready
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+  /openapi:
+    get:
+      operationId: getPlatformOpenApi
+      tags: [Health]
+      summary: OpenAPI document
+      security: []
+      parameters:
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [json, yaml]
+      responses:
+        "200":
+          description: OpenAPI document
+  /workspaces:
+    get:
+      operationId: listWorkspaces
+      tags: [Workspaces]
+      summary: List workspaces
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Sort"
+        - $ref: "#/components/parameters/Order"
+        - name: x-correlation-id
+          in: header
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Workspace collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceCollection"
+              examples:
+                sample:
+                  value:
+                    data:
+                      - id: ws_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        tenantId: tenant-1
+                        name: Acme
+                        slug: acme
+                        createdAt: "2026-07-10T00:00:00.000Z"
+                        updatedAt: "2026-07-10T00:00:00.000Z"
+                    page:
+                      cursor: null
+                      nextCursor: null
+                      limit: 20
+                      hasMore: false
+                    meta:
+                      requestId: 11111111-1111-4111-8111-111111111111
+                      correlationId: 11111111-1111-4111-8111-111111111111
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+  /workspaces/{workspaceId}:
+    get:
+      operationId: getWorkspace
+      tags: [Workspaces]
+      summary: Get workspace by APZHUB global ID
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceId"
+      responses:
+        "200":
+          description: Workspace
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /projects:
+    get:
+      operationId: listProjects
+      tags: [Projects]
+      summary: List projects
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Sort"
+        - $ref: "#/components/parameters/Order"
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [active, archived, all]
+        - name: workspaceId
+          in: query
+          schema:
+            type: string
+            pattern: "^ws_[0-9a-fA-F]{32}$"
+      responses:
+        "200":
+          description: Project collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectCollection"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+    post:
+      operationId: createProject
+      tags: [Projects]
+      summary: Create project
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+            maxLength: 128
+          description: Validated and propagated via execution metadata; durable idempotency store not implemented in OSS-110-07.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProjectRequest"
+            example:
+              workspaceId: ws_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+              name: Portal
+              identifier: PORT
+      responses:
+        "201":
+          description: Created project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+  /projects/{projectId}:
+    get:
+      operationId: getProject
+      tags: [Projects]
+      summary: Get project
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: Project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    patch:
+      operationId: updateProject
+      tags: [Projects]
+      summary: Update project
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProjectRequest"
+      responses:
+        "200":
+          description: Updated project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+    delete:
+      operationId: archiveProject
+      tags: [Projects]
+      summary: Archive project (soft-retire; not hard-delete)
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: Archived project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /teams:
+    get:
+      operationId: listTeams
+      tags: [Teams]
+      summary: List project team members
+      description: TeamService is project-scoped. Requires projectId query parameter.
+      parameters:
+        - name: projectId
+          in: query
+          required: true
+          schema:
+            type: string
+            pattern: "^proj_[0-9a-fA-F]{32}$"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: Team member collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMemberCollection"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  /teams/{teamId}:
+    get:
+      operationId: getTeamMember
+      tags: [Teams]
+      summary: Get team member by member global ID
+      parameters:
+        - name: teamId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^member_[0-9a-fA-F]{32}$"
+        - name: projectId
+          in: query
+          required: true
+          schema:
+            type: string
+            pattern: "^proj_[0-9a-fA-F]{32}$"
+      responses:
+        "200":
+          description: Team member
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMemberSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /tasks:
+    get:
+      operationId: listTasks
+      tags: [Tasks]
+      summary: List tasks in a project
+      description: |
+        TaskService is project-scoped. Requires projectId query parameter.
+        Unknown query parameters are rejected. workspaceId is accepted for
+        client convenience but is not applied as a TaskListFilter field.
+      x-required-permission: task.list
+      parameters:
+        - name: projectId
+          in: query
+          required: true
+          schema:
+            type: string
+            pattern: "^proj_[0-9a-fA-F]{32}$"
+        - name: workspaceId
+          in: query
+          schema:
+            type: string
+            pattern: "^ws_[0-9a-fA-F]{32}$"
+        - name: stateId
+          in: query
+          description: Canonical status global ID (maps to TaskListFilter.statusId)
+          schema:
+            type: string
+            pattern: "^status_[0-9a-fA-F]{32}$"
+        - name: assigneeId
+          in: query
+          schema:
+            type: string
+            pattern: "^user_[0-9a-fA-F]{32}$"
+        - name: labelId
+          in: query
+          schema:
+            type: string
+            pattern: "^label_[0-9a-fA-F]{32}$"
+        - name: priority
+          in: query
+          schema:
+            type: string
+            enum: [none, low, medium, high, urgent]
+        - name: moduleId
+          in: query
+          description: Maps to TaskListFilter.projectModuleId
+          schema:
+            type: string
+            pattern: "^module_[0-9a-fA-F]{32}$"
+        - name: sprintId
+          in: query
+          schema:
+            type: string
+            pattern: "^sprint_[0-9a-fA-F]{32}$"
+        - name: search
+          in: query
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 200
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [title, status, priority, rank, createdAt, updatedAt]
+        - $ref: "#/components/parameters/Order"
+      responses:
+        "200":
+          description: Task collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskCollection"
+              examples:
+                sample:
+                  value:
+                    data:
+                      - id: task_dddddddddddddddddddddddddddddddd
+                        projectId: proj_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+                        title: Implement API
+                        status: open
+                        statusId: status_eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+                        priority: medium
+                        labelIds: []
+                        createdAt: "2026-07-10T00:00:00.000Z"
+                        updatedAt: "2026-07-10T00:00:00.000Z"
+                    page:
+                      cursor: null
+                      nextCursor: null
+                      limit: 20
+                      hasMore: false
+                    meta:
+                      requestId: 11111111-1111-4111-8111-111111111111
+                      correlationId: 11111111-1111-4111-8111-111111111111
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+    post:
+      operationId: createTask
+      tags: [Tasks]
+      summary: Create task
+      x-required-permission: task.create
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTaskRequest"
+            examples:
+              minimal:
+                value:
+                  projectId: proj_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+                  title: Implement API
+      responses:
+        "201":
+          description: Created task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+  /tasks/{taskId}:
+    get:
+      operationId: getTask
+      tags: [Tasks]
+      summary: Get task by APZHUB global ID
+      x-required-permission: task.read
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      responses:
+        "200":
+          description: Task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+    patch:
+      operationId: updateTask
+      tags: [Tasks]
+      summary: Update task fields
+      x-required-permission: task.update
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTaskRequest"
+      responses:
+        "200":
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+    delete:
+      operationId: archiveTask
+      tags: [Tasks]
+      summary: Soft-archive task
+      description: Maps to TaskService.archiveTask. Hard-delete is not exposed.
+      x-required-permission: task.archive
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      responses:
+        "200":
+          description: Archived task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+  /tasks/{taskId}/transition:
+    post:
+      operationId: transitionTaskStatus
+      tags: [Tasks]
+      summary: Transition task status
+      x-required-permission: task.transition
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransitionTaskRequest"
+      responses:
+        "200":
+          description: Transitioned task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+  /tasks/{taskId}/assignees:
+    post:
+      operationId: assignTask
+      tags: [Tasks]
+      summary: Assign task to one or more users
+      x-required-permission: task.assign
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignTaskRequest"
+      responses:
+        "200":
+          description: Assigned task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+  /tasks/{taskId}/assignees/{assigneeId}:
+    delete:
+      operationId: unassignTaskAssignee
+      tags: [Tasks]
+      summary: Remove one assignee from a task
+      description: |
+        Composes getTask + assignTask. Authorisation uses existing task.read
+        then task.assign mappings via the gateway pipeline.
+      x-required-permission: task.assign
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+        - name: assigneeId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^user_[0-9a-fA-F]{32}$"
+      responses:
+        "200":
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+  /tasks/{taskId}/labels:
+    post:
+      operationId: addTaskLabels
+      tags: [Tasks]
+      summary: Add labels to a task
+      description: Composes getTask + updateTask({ labelIds }). Pipeline permission is task.update.
+      x-required-permission: task.update
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddTaskLabelsRequest"
+      responses:
+        "200":
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+  /tasks/{taskId}/labels/{labelId}:
+    delete:
+      operationId: removeTaskLabel
+      tags: [Tasks]
+      summary: Remove a label from a task
+      description: Composes getTask + updateTask({ labelIds }). Pipeline permission is task.update.
+      x-required-permission: task.update
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+        - name: labelId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^label_[0-9a-fA-F]{32}$"
+      responses:
+        "200":
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+  /tasks/{taskId}/sprint:
+    post:
+      operationId: setTaskSprint
+      tags: [Tasks]
+      summary: Assign task to a sprint
+      description: Maps to updateTask({ sprintId }). Pipeline permission is task.update.
+      x-required-permission: task.update
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetTaskSprintRequest"
+      responses:
+        "200":
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+    delete:
+      operationId: clearTaskSprint
+      tags: [Tasks]
+      summary: Clear task sprint assignment
+      description: "Maps to updateTask({ sprintId: null }). Pipeline permission is task.update."
+      x-required-permission: task.update
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      responses:
+        "200":
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+  /tasks/{taskId}/module:
+    post:
+      operationId: setTaskModule
+      tags: [Tasks]
+      summary: Assign task to a project module
+      description: Maps to updateTask({ projectModuleId }). Pipeline permission is task.update.
+      x-required-permission: task.update
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetTaskModuleRequest"
+      responses:
+        "200":
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+    delete:
+      operationId: clearTaskModule
+      tags: [Tasks]
+      summary: Clear task module assignment
+      description: "Maps to updateTask({ projectModuleId: null }). Pipeline permission is task.update."
+      x-required-permission: task.update
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      responses:
+        "200":
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+  /tasks/{taskId}/parent:
+    post:
+      operationId: setTaskParent
+      tags: [Tasks]
+      summary: Set parent task
+      description: Maps to updateTask({ parentTaskId }). Pipeline permission is task.update.
+      x-required-permission: task.update
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetTaskParentRequest"
+      responses:
+        "200":
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+    delete:
+      operationId: clearTaskParent
+      tags: [Tasks]
+      summary: Clear parent task
+      description: "Maps to updateTask({ parentTaskId: null }). Pipeline permission is task.update."
+      x-required-permission: task.update
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      responses:
+        "200":
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+  # ---------------------------------------------------------------------------
+  # Support Requests (OSS-110-11)
+  # ---------------------------------------------------------------------------
+  /support-requests:
+    get:
+      operationId: listSupportRequests
+      tags: [Support Requests]
+      summary: List support requests
+      x-required-permission: support.requests.list
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [title, displayId, status, priority, createdAt, updatedAt]
+        - $ref: "#/components/parameters/Order"
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [new, open, pending, closed, merged, unknown]
+        - name: priority
+          in: query
+          schema:
+            type: string
+            enum: [low, normal, high, urgent]
+        - name: ownerId
+          in: query
+          description: HTTP alias for assigneeId
+          schema:
+            type: string
+            pattern: "^suser_[0-9a-fA-F]{32}$"
+        - name: assigneeId
+          in: query
+          schema:
+            type: string
+            pattern: "^suser_[0-9a-fA-F]{32}$"
+        - name: customerId
+          in: query
+          description: HTTP alias for requesterId
+          schema:
+            type: string
+            pattern: "^suser_[0-9a-fA-F]{32}$"
+        - name: requesterId
+          in: query
+          schema:
+            type: string
+            pattern: "^suser_[0-9a-fA-F]{32}$"
+        - name: organizationId
+          in: query
+          schema:
+            type: string
+            pattern: "^sorg_[0-9a-fA-F]{32}$"
+        - name: groupId
+          in: query
+          schema:
+            type: string
+            pattern: "^sgrp_[0-9a-fA-F]{32}$"
+        - name: search
+          in: query
+          schema:
+            type: string
+            maxLength: 200
+      responses:
+        "200":
+          description: Support request collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportRequestCollection"
+              examples:
+                sample:
+                  value:
+                    data:
+                      - id: sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1
+                        title: Cannot login
+                        status: open
+                        priority: normal
+                        groupId: sgrp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3
+                        requesterId: suser_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+    post:
+      operationId: createSupportRequest
+      tags: [Support Requests]
+      summary: Create support request
+      x-required-permission: support.requests.create
+      parameters:
+        - name: idempotency-key
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSupportRequestBody"
+            examples:
+              sample:
+                value:
+                  title: Cannot login to portal
+                  groupId: sgrp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3
+                  requesterId: suser_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4
+                  priority: high
+      responses:
+        "201":
+          description: Support request created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportRequestSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+
+  /support-requests/{supportRequestId}:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+    get:
+      operationId: getSupportRequest
+      tags: [Support Requests]
+      summary: Get support request
+      x-required-permission: support.requests.get
+      responses:
+        "200":
+          description: Support request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportRequestSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+    patch:
+      operationId: updateSupportRequest
+      tags: [Support Requests]
+      summary: Update support request fields
+      x-required-permission: support.requests.update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSupportRequestBody"
+      responses:
+        "200":
+          description: Updated support request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportRequestSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+    delete:
+      operationId: closeSupportRequestDelete
+      tags: [Support Requests]
+      summary: Close support request (soft-close, not hard delete)
+      x-required-permission: support.requests.transition
+      responses:
+        "200":
+          description: Closed support request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportRequestSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+
+  /support-requests/{supportRequestId}/close:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+    post:
+      operationId: closeSupportRequest
+      tags: [Support Requests]
+      summary: Close support request
+      x-required-permission: support.requests.transition
+      responses:
+        "200":
+          description: Closed support request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportRequestSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+
+  /support-requests/{supportRequestId}/reopen:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+    post:
+      operationId: reopenSupportRequest
+      tags: [Support Requests]
+      summary: Reopen a closed support request
+      x-required-permission: support.requests.transition
+      responses:
+        "200":
+          description: Reopened support request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportRequestSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+
+  /support-requests/{supportRequestId}/state:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+    post:
+      operationId: changeSupportRequestState
+      tags: [Support Requests]
+      summary: Change support request state
+      x-required-permission: support.requests.transition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangeSupportStateBody"
+      responses:
+        "200":
+          description: Updated support request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportRequestSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /support-requests/{supportRequestId}/priority:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+    post:
+      operationId: changeSupportRequestPriority
+      tags: [Support Requests]
+      summary: Change support request priority
+      x-required-permission: support.requests.update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangeSupportPriorityBody"
+      responses:
+        "200":
+          description: Updated support request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportRequestSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /support-requests/{supportRequestId}/owner:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+    post:
+      operationId: assignSupportRequestOwner
+      tags: [Support Requests]
+      summary: Assign owner (agent) to support request
+      x-required-permission: support.requests.update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignSupportOwnerBody"
+            examples:
+              sample:
+                value:
+                  assigneeId: suser_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4
+      responses:
+        "200":
+          description: Updated support request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportRequestSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      operationId: removeSupportRequestOwner
+      tags: [Support Requests]
+      summary: Remove owner from support request
+      x-required-permission: support.requests.update
+      responses:
+        "200":
+          description: Updated support request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportRequestSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /support-requests/{supportRequestId}/customer:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+    post:
+      operationId: assignSupportRequestCustomer
+      tags: [Support Requests]
+      summary: >
+        Assign customer (requester) to support request.
+        Uses updateSupportRequest({ requesterId }) internally — no dedicated method.
+      x-required-permission: support.requests.update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignSupportCustomerBody"
+            examples:
+              byRequesterId:
+                value:
+                  requesterId: suser_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4
+              byCustomerId:
+                summary: customerId alias
+                value:
+                  customerId: suser_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4
+      responses:
+        "200":
+          description: Updated support request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportRequestSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  # ---------------------------------------------------------------------------
+  # Support Articles (OSS-110-11)
+  # ---------------------------------------------------------------------------
+  /support-requests/{supportRequestId}/articles:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+    get:
+      operationId: listSupportArticles
+      tags: [Support Articles]
+      summary: List articles for a support request
+      x-required-permission: support.articles.list
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Order"
+      responses:
+        "200":
+          description: Article collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportArticleCollection"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /support-requests/{supportRequestId}/articles/notes:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+    post:
+      operationId: createInternalNote
+      tags: [Support Articles]
+      summary: >
+        Create internal note (visibility=internal, channel=note).
+        Visibility cannot be overridden — schema rejects unknown keys.
+      x-required-permission: support.articles.note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateInternalNoteBody"
+            examples:
+              sample:
+                value:
+                  body: This is an internal agent note.
+                  subject: Follow-up required
+      responses:
+        "201":
+          description: Internal note created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportArticleSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /support-requests/{supportRequestId}/articles/replies:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+    post:
+      operationId: createCustomerReply
+      tags: [Support Articles]
+      summary: >
+        Create customer reply (visibility=public). Channel must be a public channel
+        (email, phone, web, chat, sms, fax) — note and unknown are rejected by schema.
+      x-required-permission: support.articles.reply
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCustomerReplyBody"
+            examples:
+              emailReply:
+                value:
+                  body: Thank you for your report. We have resolved the issue.
+                  channel: email
+                  to: ["customer@example.com"]
+      responses:
+        "201":
+          description: Customer reply created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportArticleSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /support-requests/{supportRequestId}/articles/{articleId}:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+      - $ref: "#/components/parameters/ArticleId"
+    get:
+      operationId: getSupportArticle
+      tags: [Support Articles]
+      summary: Get a specific support article
+      x-required-permission: support.articles.get
+      responses:
+        "200":
+          description: Support article
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportArticleSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  # ---------------------------------------------------------------------------
+  # History (OSS-110-11)
+  # ---------------------------------------------------------------------------
+  /support-requests/{supportRequestId}/history:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+    get:
+      operationId: getSupportRequestHistory
+      tags: [Support History]
+      summary: Get audit timeline for a support request
+      x-required-permission: support.history.list
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: occurredAfter
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: occurredBefore
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: History event collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportHistoryCollection"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  # ---------------------------------------------------------------------------
+  # Support Organisations (OSS-110-11)
+  # ---------------------------------------------------------------------------
+  /support-organizations:
+    get:
+      operationId: listSupportOrganizations
+      tags: [Support Organisations]
+      summary: List support organisations
+      x-required-permission: support.organizations.list
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: active
+          in: query
+          schema:
+            type: string
+            enum: ["true", "false"]
+      responses:
+        "200":
+          description: Organisation collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportOrganizationCollection"
+              examples:
+                sample:
+                  value:
+                    data:
+                      - id: sorg_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2
+                        name: Acme Corp
+                        active: true
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+    post:
+      operationId: createSupportOrganization
+      tags: [Support Organisations]
+      summary: Create support organisation
+      x-required-permission: support.organizations.create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSupportOrganizationBody"
+      responses:
+        "201":
+          description: Organisation created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportOrganizationSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /support-organizations/{organizationId}:
+    parameters:
+      - $ref: "#/components/parameters/OrganizationId"
+    get:
+      operationId: getSupportOrganization
+      tags: [Support Organisations]
+      summary: Get support organisation
+      x-required-permission: support.organizations.get
+      responses:
+        "200":
+          description: Support organisation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportOrganizationSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    patch:
+      operationId: updateSupportOrganization
+      tags: [Support Organisations]
+      summary: Update support organisation
+      x-required-permission: support.organizations.update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSupportOrganizationBody"
+      responses:
+        "200":
+          description: Updated organisation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportOrganizationSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      operationId: archiveSupportOrganization
+      tags: [Support Organisations]
+      summary: Archive support organisation (soft-archive, not hard delete)
+      x-required-permission: support.organizations.archive
+      responses:
+        "200":
+          description: Archived organisation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportOrganizationSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  # ---------------------------------------------------------------------------
+  # Support Groups (OSS-110-11)
+  # ---------------------------------------------------------------------------
+  /support-groups:
+    get:
+      operationId: listSupportGroups
+      tags: [Support Groups]
+      summary: List support groups
+      x-required-permission: support.groups.list
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: active
+          in: query
+          schema:
+            type: string
+            enum: ["true", "false"]
+      responses:
+        "200":
+          description: Group collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportGroupCollection"
+              examples:
+                sample:
+                  value:
+                    data:
+                      - id: sgrp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3
+                        name: Support Tier 1
+                        active: true
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+    post:
+      operationId: createSupportGroup
+      tags: [Support Groups]
+      summary: Create support group
+      x-required-permission: support.groups.create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSupportGroupBody"
+      responses:
+        "201":
+          description: Group created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportGroupSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /support-groups/{groupId}:
+    parameters:
+      - $ref: "#/components/parameters/GroupId"
+    get:
+      operationId: getSupportGroup
+      tags: [Support Groups]
+      summary: Get support group
+      x-required-permission: support.groups.get
+      responses:
+        "200":
+          description: Support group
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportGroupSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    patch:
+      operationId: updateSupportGroup
+      tags: [Support Groups]
+      summary: Update support group
+      x-required-permission: support.groups.update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSupportGroupBody"
+      responses:
+        "200":
+          description: Updated group
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportGroupSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  # ---------------------------------------------------------------------------
+  # Support Users (OSS-110-11)
+  # ---------------------------------------------------------------------------
+  /support-users:
+    get:
+      operationId: listSupportUsers
+      tags: [Support Users]
+      summary: >
+        List, lookup, or search support users. Provide email or login for lookup;
+        search for text search; no special params for default list.
+      x-required-permission: support.users.list
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: email
+          in: query
+          schema:
+            type: string
+            format: email
+        - name: login
+          in: query
+          schema:
+            type: string
+        - name: active
+          in: query
+          schema:
+            type: string
+            enum: ["true", "false"]
+        - name: role
+          in: query
+          schema:
+            type: string
+            enum: [agent, customer, admin, unknown]
+      responses:
+        "200":
+          description: User collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportUserCollection"
+              examples:
+                sample:
+                  value:
+                    data:
+                      - id: suser_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4
+                        displayName: Support Agent
+                        role: agent
+                        active: true
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /support-users/{userId}:
+    parameters:
+      - $ref: "#/components/parameters/SupportUserId"
+    get:
+      operationId: getSupportUser
+      tags: [Support Users]
+      summary: Get support user by ID
+      x-required-permission: support.users.get
+      responses:
+        "200":
+          description: Support user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportUserSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  # ---------------------------------------------------------------------------
+  # Support Search (OSS-110-11)
+  # ---------------------------------------------------------------------------
+  /support-search:
+    get:
+      operationId: supportSearch
+      tags: [Support Search]
+      summary: >
+        Search across support tickets, organisations, groups, users, and articles.
+        Requires q or query parameter.
+      x-required-permission: support.search
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: query
+          in: query
+          description: Alias for q
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: kinds
+          in: query
+          description: >
+            Comma-separated kinds to restrict search.
+            Allowed: support_request, organization, group, user, article
+          schema:
+            type: string
+        - name: organizationId
+          in: query
+          schema:
+            type: string
+            pattern: "^sorg_[0-9a-fA-F]{32}$"
+        - name: groupId
+          in: query
+          schema:
+            type: string
+            pattern: "^sgrp_[0-9a-fA-F]{32}$"
+        - name: supportRequestId
+          in: query
+          schema:
+            type: string
+            pattern: "^sreq_[0-9a-fA-F]{32}$"
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [score, updatedAt, title]
+        - $ref: "#/components/parameters/Order"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: Search result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportSearchSuccess"
+              examples:
+                sample:
+                  value:
+                    data:
+                      query: login
+                      hits:
+                        - id: sart_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa5
+                          kind: article
+                          title: Cannot login
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+
+  # ---------------------------------------------------------------------------
+  # Support Analytics (OSS-110-11)
+  # ---------------------------------------------------------------------------
+  /support-analytics:
+    get:
+      operationId: getSupportAnalytics
+      tags: [Support Analytics]
+      summary: >
+        Get support intelligence snapshot. Data availability depends on provider capability;
+        missing metrics are omitted rather than defaulted. Not real-time — reflects last snapshot.
+      x-required-permission: support.analytics
+      responses:
+        "200":
+          description: Support intelligence snapshot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportAnalyticsSuccess"
+              examples:
+                sample:
+                  value:
+                    data:
+                      capturedAt: "2026-07-10T00:00:00.000Z"
+                      totalTickets: 100
+                      openTickets: 42
+                      closedTickets: 55
+                      byPriority:
+                        - key: high
+                          count: 15
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+
+  # ---------------------------------------------------------------------------
+  # Testing Workbench API (APZTCMS-012)
+  # ---------------------------------------------------------------------------
+  /testing/dashboard:
+    get:
+      operationId: getTestingDashboard
+      tags: [Testing Dashboard]
+      summary: Get Testing dashboard summary
+      responses: &TestingResourceResponses
+        "200":
+          description: Testing resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestingResourceSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+  /testing/requirements:
+    get:
+      operationId: listTestingRequirements
+      tags: [Testing Requirements]
+      summary: List testing requirements
+      parameters: &TestingListParameters
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Sort"
+        - $ref: "#/components/parameters/Order"
+      responses: &TestingCollectionResponses
+        "200":
+          description: Testing resource collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestingResourceCollection"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+    post:
+      operationId: createTestingRequirement
+      tags: [Testing Requirements]
+      summary: Create testing requirement
+      requestBody: &TestingResourceRequestBody
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestingResourceInput"
+      responses: &TestingCreatedResponses
+        "201":
+          description: Testing resource created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestingResourceSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "500":
+          $ref: "#/components/responses/InternalError"
+  /testing/requirements/{requirementId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingRequirementId"
+    get:
+      operationId: getTestingRequirement
+      tags: [Testing Requirements]
+      summary: Get testing requirement
+      responses: *TestingResourceResponses
+    patch:
+      operationId: updateTestingRequirement
+      tags: [Testing Requirements]
+      summary: Update testing requirement
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+    delete:
+      operationId: archiveTestingRequirement
+      tags: [Testing Requirements]
+      summary: Archive testing requirement
+      responses: *TestingResourceResponses
+
+  /testing/plans:
+    get:
+      operationId: listTestingPlans
+      tags: [Testing Plans]
+      summary: List testing plans
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: createTestingPlan
+      tags: [Testing Plans]
+      summary: Create testing plan
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingCreatedResponses
+  /testing/plans/{planId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingPlanId"
+    get:
+      operationId: getTestingPlan
+      tags: [Testing Plans]
+      summary: Get testing plan
+      responses: *TestingResourceResponses
+    patch:
+      operationId: updateTestingPlan
+      tags: [Testing Plans]
+      summary: Update testing plan
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+    delete:
+      operationId: archiveTestingPlan
+      tags: [Testing Plans]
+      summary: Archive testing plan
+      responses: *TestingResourceResponses
+  /testing/plans/{planId}/clone:
+    parameters:
+      - $ref: "#/components/parameters/TestingPlanId"
+    post:
+      operationId: cloneTestingPlan
+      tags: [Testing Plans]
+      summary: Clone testing plan
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingCreatedResponses
+
+  /testing/suites:
+    get:
+      operationId: listTestingSuites
+      tags: [Testing Suites]
+      summary: List testing suites
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: createTestingSuite
+      tags: [Testing Suites]
+      summary: Create testing suite
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingCreatedResponses
+  /testing/suites/{suiteId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingSuiteId"
+    get:
+      operationId: getTestingSuite
+      tags: [Testing Suites]
+      summary: Get testing suite
+      responses: *TestingResourceResponses
+    patch:
+      operationId: updateTestingSuite
+      tags: [Testing Suites]
+      summary: Update testing suite
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+    delete:
+      operationId: archiveTestingSuite
+      tags: [Testing Suites]
+      summary: Archive testing suite
+      responses: *TestingResourceResponses
+  /testing/suites/{suiteId}/clone:
+    parameters:
+      - $ref: "#/components/parameters/TestingSuiteId"
+    post:
+      operationId: cloneTestingSuite
+      tags: [Testing Suites]
+      summary: Clone testing suite
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingCreatedResponses
+
+  /testing/cases:
+    get:
+      operationId: listTestingCases
+      tags: [Testing Cases]
+      summary: List testing cases
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: createTestingCase
+      tags: [Testing Cases]
+      summary: Create testing case
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingCreatedResponses
+  /testing/cases/{caseId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingCaseId"
+    get:
+      operationId: getTestingCase
+      tags: [Testing Cases]
+      summary: Get testing case
+      responses: *TestingResourceResponses
+    patch:
+      operationId: updateTestingCase
+      tags: [Testing Cases]
+      summary: Update testing case
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+    delete:
+      operationId: archiveTestingCase
+      tags: [Testing Cases]
+      summary: Archive testing case
+      responses: *TestingResourceResponses
+  /testing/cases/{caseId}/clone:
+    parameters:
+      - $ref: "#/components/parameters/TestingCaseId"
+    post:
+      operationId: cloneTestingCase
+      tags: [Testing Cases]
+      summary: Clone testing case
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingCreatedResponses
+  /testing/cases/{caseId}/submit-review:
+    parameters:
+      - $ref: "#/components/parameters/TestingCaseId"
+    post:
+      operationId: submitTestingCaseForReview
+      tags: [Testing Cases]
+      summary: Submit testing case for review
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/cases/{caseId}/approve:
+    parameters:
+      - $ref: "#/components/parameters/TestingCaseId"
+    post:
+      operationId: approveTestingCase
+      tags: [Testing Cases]
+      summary: Approve testing case
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/cases/{caseId}/reject:
+    parameters:
+      - $ref: "#/components/parameters/TestingCaseId"
+    post:
+      operationId: rejectTestingCase
+      tags: [Testing Cases]
+      summary: Reject testing case
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/cases/{caseId}/deprecate:
+    parameters:
+      - $ref: "#/components/parameters/TestingCaseId"
+    post:
+      operationId: deprecateTestingCase
+      tags: [Testing Cases]
+      summary: Deprecate testing case
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+
+  /testing/executions:
+    get:
+      operationId: listTestingExecutions
+      tags: [Testing Executions]
+      summary: List testing executions
+      description: Manual execution metadata only; this API does not run automation runners.
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: createTestingExecution
+      tags: [Testing Executions]
+      summary: Create testing execution
+      description: Creates a manual execution record; no runner execution is performed.
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingCreatedResponses
+  /testing/executions/{executionId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    get:
+      operationId: getTestingExecution
+      tags: [Testing Executions]
+      summary: Get testing execution
+      responses: *TestingResourceResponses
+    delete:
+      operationId: archiveTestingExecution
+      tags: [Testing Executions]
+      summary: Archive testing execution
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/assign:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: assignTestingExecution
+      tags: [Testing Executions]
+      summary: Assign testing execution
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/start:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: startTestingExecution
+      tags: [Testing Executions]
+      summary: Start manual testing execution
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/pause:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: pauseTestingExecution
+      tags: [Testing Executions]
+      summary: Pause testing execution
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/resume:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: resumeTestingExecution
+      tags: [Testing Executions]
+      summary: Resume testing execution
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/block:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: blockTestingExecution
+      tags: [Testing Executions]
+      summary: Block testing execution
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/unblock:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: unblockTestingExecution
+      tags: [Testing Executions]
+      summary: Unblock testing execution
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/complete:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: completeTestingExecution
+      tags: [Testing Executions]
+      summary: Complete testing execution
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/submit-review:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: submitTestingExecutionForReview
+      tags: [Testing Executions]
+      summary: Submit testing execution for review
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/approve:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: approveTestingExecution
+      tags: [Testing Executions]
+      summary: Approve testing execution
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/reject:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: rejectTestingExecution
+      tags: [Testing Executions]
+      summary: Reject testing execution
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/reopen:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: reopenTestingExecution
+      tags: [Testing Executions]
+      summary: Reopen testing execution
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/cancel:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: cancelTestingExecution
+      tags: [Testing Executions]
+      summary: Cancel testing execution
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/restore:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+    post:
+      operationId: restoreTestingExecution
+      tags: [Testing Executions]
+      summary: Restore testing execution
+      responses: *TestingResourceResponses
+  /testing/executions/{executionId}/steps/{stepId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingExecutionId"
+      - $ref: "#/components/parameters/TestingStepId"
+    patch:
+      operationId: patchTestingExecutionStep
+      tags: [Testing Executions]
+      summary: Record testing execution step actuals
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+
+  /testing/evidence:
+    get:
+      operationId: listTestingEvidence
+      tags: [Testing Evidence]
+      summary: List testing evidence metadata
+      description: Evidence metadata only; binary upload is not implemented.
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: registerTestingEvidence
+      tags: [Testing Evidence]
+      summary: Register testing evidence metadata
+      description: Registers metadata and storage references only; no binary upload is accepted.
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingCreatedResponses
+  /testing/evidence/{evidenceId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingEvidenceId"
+    get:
+      operationId: getTestingEvidence
+      tags: [Testing Evidence]
+      summary: Get testing evidence metadata
+      responses: *TestingResourceResponses
+    delete:
+      operationId: archiveTestingEvidence
+      tags: [Testing Evidence]
+      summary: Archive testing evidence metadata
+      responses: *TestingResourceResponses
+  /testing/evidence/{evidenceId}/submit:
+    parameters:
+      - $ref: "#/components/parameters/TestingEvidenceId"
+    post:
+      operationId: submitTestingEvidence
+      tags: [Testing Evidence]
+      summary: Submit testing evidence metadata
+      responses: *TestingResourceResponses
+  /testing/evidence/{evidenceId}/verify:
+    parameters:
+      - $ref: "#/components/parameters/TestingEvidenceId"
+    post:
+      operationId: verifyTestingEvidence
+      tags: [Testing Evidence]
+      summary: Verify testing evidence metadata
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/evidence/{evidenceId}/approve:
+    parameters:
+      - $ref: "#/components/parameters/TestingEvidenceId"
+    post:
+      operationId: approveTestingEvidence
+      tags: [Testing Evidence]
+      summary: Approve testing evidence metadata
+      responses: *TestingResourceResponses
+  /testing/evidence/{evidenceId}/reject:
+    parameters:
+      - $ref: "#/components/parameters/TestingEvidenceId"
+    post:
+      operationId: rejectTestingEvidence
+      tags: [Testing Evidence]
+      summary: Reject testing evidence metadata
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+
+  /testing/automation/imports:
+    get:
+      operationId: listTestingAutomationImports
+      tags: [Testing Automation]
+      summary: List automation imports
+      description: Import metadata only; no runner execution is performed.
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: importTestingAutomationResult
+      tags: [Testing Automation]
+      summary: Import normalized automation result
+      description: Imports canonical result JSON; does not execute a test runner.
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingCreatedResponses
+  /testing/automation/imports/validate:
+    post:
+      operationId: validateTestingAutomationImport
+      tags: [Testing Automation]
+      summary: Validate normalized automation import payload
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/automation/imports/{importId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingImportId"
+    get:
+      operationId: getTestingAutomationImport
+      tags: [Testing Automation]
+      summary: Get automation import
+      responses: *TestingResourceResponses
+  /testing/automation/imports/{importId}/history:
+    parameters:
+      - $ref: "#/components/parameters/TestingImportId"
+    get:
+      operationId: listTestingAutomationImportHistory
+      tags: [Testing Automation]
+      summary: List automation import history
+      responses: *TestingCollectionResponses
+
+  /testing/coverage:
+    get:
+      operationId: listTestingCoverage
+      tags: [Testing Coverage]
+      summary: List testing coverage metrics
+      parameters:
+        - name: kind
+          in: query
+          schema:
+            type: string
+        - name: planId
+          in: query
+          schema:
+            type: string
+        - name: subjectId
+          in: query
+          schema:
+            type: string
+      responses: *TestingCollectionResponses
+  /testing/coverage/{coverageId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingCoverageId"
+    get:
+      operationId: getTestingCoverage
+      tags: [Testing Coverage]
+      summary: Get testing coverage metric
+      responses: *TestingResourceResponses
+  /testing/coverage/recompute:
+    post:
+      operationId: recomputeTestingCoverage
+      tags: [Testing Coverage]
+      summary: Recompute testing coverage metrics
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+
+  /testing/defects:
+    get:
+      operationId: listTestingDefects
+      tags: [Testing Defects]
+      summary: List testing defects
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: createTestingDefect
+      tags: [Testing Defects]
+      summary: Create testing defect
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingCreatedResponses
+  /testing/defects/{defectId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingDefectId"
+    get:
+      operationId: getTestingDefect
+      tags: [Testing Defects]
+      summary: Get testing defect
+      responses: *TestingResourceResponses
+    patch:
+      operationId: updateTestingDefect
+      tags: [Testing Defects]
+      summary: Update testing defect
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+    delete:
+      operationId: archiveTestingDefect
+      tags: [Testing Defects]
+      summary: Archive testing defect
+      responses: *TestingResourceResponses
+  /testing/defects/{defectId}/links:
+    parameters:
+      - $ref: "#/components/parameters/TestingDefectId"
+    post:
+      operationId: linkTestingDefect
+      tags: [Testing Defects]
+      summary: Link testing defect to a testing resource
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+
+  /testing/quality/summary:
+    get:
+      operationId: getTestingQualitySummary
+      tags: [Testing Quality]
+      summary: Get testing quality summary
+      responses: *TestingResourceResponses
+  /testing/quality/trends:
+    get:
+      operationId: getTestingQualityTrends
+      tags: [Testing Quality]
+      summary: Get testing quality trends
+      responses: *TestingResourceResponses
+  /testing/quality/regression:
+    get:
+      operationId: getTestingQualityRegression
+      tags: [Testing Quality]
+      summary: Get testing quality regression comparison
+      parameters:
+        - name: baselineSnapshotId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: currentSnapshotId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses: *TestingResourceResponses
+  /testing/quality/risk:
+    get:
+      operationId: getTestingQualityRisk
+      tags: [Testing Quality]
+      summary: Get testing quality risk analysis
+      responses: *TestingResourceResponses
+
+  /testing/releases/{releaseId}/readiness:
+    parameters:
+      - $ref: "#/components/parameters/TestingReleaseId"
+    get:
+      operationId: getTestingReleaseReadiness
+      tags: [Testing Release Readiness]
+      summary: Calculate testing release readiness
+      description: Returns readiness evidence with isDecision=false; this is not a release approval.
+      parameters:
+        - name: scope
+          in: query
+          schema:
+            type: string
+            enum: [plan, certification]
+      responses: *TestingResourceResponses
+
+  /testing/certifications:
+    get:
+      operationId: listTestingCertifications
+      tags: [Testing Certification]
+      summary: List testing certifications
+      description: Certification records are human-authorised; recommendations are advisory only.
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: createTestingCertification
+      tags: [Testing Certification]
+      summary: Create testing certification
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingCreatedResponses
+  /testing/certifications/{certificationId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingCertificationId"
+    get:
+      operationId: getTestingCertification
+      tags: [Testing Certification]
+      summary: Get testing certification
+      responses: *TestingResourceResponses
+    delete:
+      operationId: archiveTestingCertification
+      tags: [Testing Certification]
+      summary: Archive testing certification
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/certifications/{certificationId}/prepare:
+    parameters:
+      - $ref: "#/components/parameters/TestingCertificationId"
+    post:
+      operationId: prepareTestingCertification
+      tags: [Testing Certification]
+      summary: Prepare testing certification
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/certifications/{certificationId}/evaluate-gates:
+    parameters:
+      - $ref: "#/components/parameters/TestingCertificationId"
+    post:
+      operationId: evaluateTestingCertificationGates
+      tags: [Testing Certification]
+      summary: Evaluate testing certification gates
+      responses: *TestingCollectionResponses
+  /testing/certifications/{certificationId}/recommendation:
+    parameters:
+      - $ref: "#/components/parameters/TestingCertificationId"
+    get:
+      operationId: getTestingCertificationRecommendation
+      tags: [Testing Certification]
+      summary: Get advisory testing certification recommendation
+      responses: *TestingResourceResponses
+  /testing/certifications/{certificationId}/submit-review:
+    parameters:
+      - $ref: "#/components/parameters/TestingCertificationId"
+    post:
+      operationId: submitTestingCertificationForReview
+      tags: [Testing Certification]
+      summary: Submit testing certification for review
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/certifications/{certificationId}/request-changes:
+    parameters:
+      - $ref: "#/components/parameters/TestingCertificationId"
+    post:
+      operationId: requestTestingCertificationChanges
+      tags: [Testing Certification]
+      summary: Request testing certification changes
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/certifications/{certificationId}/submit-approval:
+    parameters:
+      - $ref: "#/components/parameters/TestingCertificationId"
+    post:
+      operationId: submitTestingCertificationForApproval
+      tags: [Testing Certification]
+      summary: Submit testing certification for human approval
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/certifications/{certificationId}/approve:
+    parameters:
+      - $ref: "#/components/parameters/TestingCertificationId"
+    post:
+      operationId: approveTestingCertification
+      tags: [Testing Certification]
+      summary: Human-approve testing certification
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/certifications/{certificationId}/conditionally-approve:
+    parameters:
+      - $ref: "#/components/parameters/TestingCertificationId"
+    post:
+      operationId: conditionallyApproveTestingCertification
+      tags: [Testing Certification]
+      summary: Human-conditionally approve testing certification
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/certifications/{certificationId}/reject:
+    parameters:
+      - $ref: "#/components/parameters/TestingCertificationId"
+    post:
+      operationId: rejectTestingCertification
+      tags: [Testing Certification]
+      summary: Human-reject testing certification
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/certifications/{certificationId}/expire:
+    parameters:
+      - $ref: "#/components/parameters/TestingCertificationId"
+    post:
+      operationId: expireTestingCertification
+      tags: [Testing Certification]
+      summary: Expire testing certification
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingResourceResponses
+  /testing/certifications/{certificationId}/audit:
+    parameters:
+      - $ref: "#/components/parameters/TestingCertificationId"
+    get:
+      operationId: listTestingCertificationAudit
+      tags: [Testing Certification]
+      summary: List testing certification audit events
+      responses: *TestingCollectionResponses
+
+  /testing/approvals:
+    get:
+      operationId: listTestingApprovals
+      tags: [Testing Approvals]
+      summary: List testing approvals
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+  /testing/approvals/{approvalId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingApprovalId"
+    get:
+      operationId: getTestingApproval
+      tags: [Testing Approvals]
+      summary: Get testing approval
+      responses: *TestingResourceResponses
+  /testing/approvals/{approvalId}/history:
+    parameters:
+      - $ref: "#/components/parameters/TestingApprovalId"
+    get:
+      operationId: listTestingApprovalHistory
+      tags: [Testing Approvals]
+      summary: List testing approval history
+      responses: *TestingCollectionResponses
+
+  /testing/traceability:
+    get:
+      operationId: listTestingTraceability
+      tags: [Testing Traceability]
+      summary: List testing traceability links
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: createTestingTraceability
+      tags: [Testing Traceability]
+      summary: Create testing traceability link
+      requestBody: *TestingResourceRequestBody
+      responses: *TestingCreatedResponses
+  /testing/traceability/{relationshipId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingRelationshipId"
+    delete:
+      operationId: removeTestingTraceability
+      tags: [Testing Traceability]
+      summary: Remove testing traceability link
+      responses: *TestingResourceResponses
+  /testing/traceability/{resourceType}/{resourceId}:
+    parameters:
+      - name: resourceType
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: "#/components/parameters/TestingResourcePathId"
+    get:
+      operationId: getTestingTraceabilityForResource
+      tags: [Testing Traceability]
+      summary: Get testing traceability for resource
+      responses: *TestingResourceResponses
+
+  # ---------------------------------------------------------------------------
+  # Testing Pipelines API (APZTCMS-018)
+  # ---------------------------------------------------------------------------
+  /testing/pipelines:
+    get:
+      operationId: listSorPipelines
+      tags: [Testing Pipelines]
+      summary: List SoR pipelines
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: importPipelineFromProvider
+      tags: [Testing Pipelines]
+      summary: Import a live provider run into SoR (refresh)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PipelineImportFromProviderRequest"
+      responses: *TestingCreatedResponses
+  /testing/pipelines/providers:
+    get:
+      operationId: listPipelineProviders
+      tags: [Testing Pipelines]
+      summary: List pipeline result adapters
+      responses: *TestingCollectionResponses
+  /testing/pipelines/{pipelineId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingPipelineId"
+    get:
+      operationId: getSorPipeline
+      tags: [Testing Pipelines]
+      summary: Get SoR pipeline
+      responses: *TestingResourceResponses
+  /testing/pipelines/{pipelineId}/runs:
+    parameters:
+      - $ref: "#/components/parameters/TestingPipelineId"
+    get:
+      operationId: listSorPipelineRuns
+      tags: [Testing Pipelines]
+      summary: List SoR runs for a pipeline
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+  /testing/pipelines/runs/{runId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingPipelineRunId"
+    get:
+      operationId: getSorPipelineRun
+      tags: [Testing Pipelines]
+      summary: Get SoR pipeline run
+      responses: *TestingResourceResponses
+  /testing/pipelines/runs/{runId}/links:
+    parameters:
+      - $ref: "#/components/parameters/TestingPipelineRunId"
+    get:
+      operationId: getSorPipelineRunLinks
+      tags: [Testing Pipelines]
+      summary: Get pipeline run cross-domain links
+      responses: *TestingResourceResponses
+  /testing/pipelines/runs/{runId}/jobs:
+    parameters:
+      - $ref: "#/components/parameters/TestingPipelineRunId"
+    get:
+      operationId: listSorPipelineRunJobs
+      tags: [Testing Pipelines]
+      summary: List jobs from a persisted SoR run
+      responses: *TestingCollectionResponses
+  /testing/pipelines/runs/{runId}/stages:
+    parameters:
+      - $ref: "#/components/parameters/TestingPipelineRunId"
+    get:
+      operationId: listSorPipelineRunStages
+      tags: [Testing Pipelines]
+      summary: List stages from a persisted SoR run
+      responses: *TestingCollectionResponses
+  /testing/pipelines/repositories/{owner}/{repo}:
+    parameters:
+      - $ref: "#/components/parameters/PipelineOwner"
+      - $ref: "#/components/parameters/PipelineRepo"
+    get:
+      operationId: getPipelineRepository
+      tags: [Testing Pipelines]
+      summary: Get live CI repository metadata
+      responses: *TestingResourceResponses
+  /testing/pipelines/repositories/{owner}/{repo}/workflows:
+    parameters:
+      - $ref: "#/components/parameters/PipelineOwner"
+      - $ref: "#/components/parameters/PipelineRepo"
+    get:
+      operationId: listPipelineWorkflows
+      tags: [Testing Pipelines]
+      summary: List live workflows
+      responses: *TestingCollectionResponses
+  /testing/pipelines/repositories/{owner}/{repo}/workflows/{workflowId}:
+    parameters:
+      - $ref: "#/components/parameters/PipelineOwner"
+      - $ref: "#/components/parameters/PipelineRepo"
+      - $ref: "#/components/parameters/PipelineWorkflowId"
+    get:
+      operationId: getPipelineWorkflow
+      tags: [Testing Pipelines]
+      summary: Get live workflow
+      responses: *TestingResourceResponses
+  /testing/pipelines/repositories/{owner}/{repo}/runs:
+    parameters:
+      - $ref: "#/components/parameters/PipelineOwner"
+      - $ref: "#/components/parameters/PipelineRepo"
+    get:
+      operationId: listLivePipelineRuns
+      tags: [Testing Pipelines]
+      summary: List live workflow runs
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: perPage
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: branch
+          in: query
+          schema:
+            type: string
+      responses: *TestingCollectionResponses
+  /testing/pipelines/repositories/{owner}/{repo}/runs/{runId}:
+    parameters:
+      - $ref: "#/components/parameters/PipelineOwner"
+      - $ref: "#/components/parameters/PipelineRepo"
+      - $ref: "#/components/parameters/PipelineProviderRunId"
+    get:
+      operationId: getLivePipelineRun
+      tags: [Testing Pipelines]
+      summary: Get live workflow run
+      responses: *TestingResourceResponses
+  /testing/pipelines/repositories/{owner}/{repo}/runs/{runId}/jobs:
+    parameters:
+      - $ref: "#/components/parameters/PipelineOwner"
+      - $ref: "#/components/parameters/PipelineRepo"
+      - $ref: "#/components/parameters/PipelineProviderRunId"
+    get:
+      operationId: listLivePipelineJobs
+      tags: [Testing Pipelines]
+      summary: List live jobs for a run
+      responses: *TestingCollectionResponses
+  /testing/pipelines/repositories/{owner}/{repo}/runs/{runId}/jobs/{jobId}:
+    parameters:
+      - $ref: "#/components/parameters/PipelineOwner"
+      - $ref: "#/components/parameters/PipelineRepo"
+      - $ref: "#/components/parameters/PipelineProviderRunId"
+      - $ref: "#/components/parameters/PipelineJobId"
+    get:
+      operationId: getLivePipelineJob
+      tags: [Testing Pipelines]
+      summary: Get live job
+      responses: *TestingResourceResponses
+  /testing/pipelines/repositories/{owner}/{repo}/runs/{runId}/jobs/{jobId}/steps:
+    parameters:
+      - $ref: "#/components/parameters/PipelineOwner"
+      - $ref: "#/components/parameters/PipelineRepo"
+      - $ref: "#/components/parameters/PipelineProviderRunId"
+      - $ref: "#/components/parameters/PipelineJobId"
+    get:
+      operationId: listLivePipelineSteps
+      tags: [Testing Pipelines]
+      summary: List live steps for a job
+      responses: *TestingCollectionResponses
+  /testing/pipelines/repositories/{owner}/{repo}/runs/{runId}/artifacts:
+    parameters:
+      - $ref: "#/components/parameters/PipelineOwner"
+      - $ref: "#/components/parameters/PipelineRepo"
+      - $ref: "#/components/parameters/PipelineProviderRunId"
+    get:
+      operationId: listLivePipelineArtifacts
+      tags: [Testing Pipelines]
+      summary: List live artifact metadata for a run
+      responses: *TestingCollectionResponses
+  /testing/pipelines/repositories/{owner}/{repo}/runs/{runId}/summary:
+    parameters:
+      - $ref: "#/components/parameters/PipelineOwner"
+      - $ref: "#/components/parameters/PipelineRepo"
+      - $ref: "#/components/parameters/PipelineProviderRunId"
+    get:
+      operationId: getLivePipelineSummary
+      tags: [Testing Pipelines]
+      summary: Get live pipeline summary
+      responses: *TestingResourceResponses
+
+  # ---------------------------------------------------------------------------
+  # Testing Engineering Intelligence API (APZTCMS-022)
+  # ---------------------------------------------------------------------------
+  /testing/engineering-intelligence/score:
+    get:
+      operationId: getEngineeringQualityScore
+      tags: [Testing Engineering Intelligence]
+      summary: Get current quality score
+      parameters: *TestingListParameters
+      responses: *TestingResourceResponses
+    post:
+      operationId: postEngineeringQualityScore
+      tags: [Testing Engineering Intelligence]
+      summary: Compute quality score for an optional scope
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EngineeringIntelligenceScopeRequest"
+      responses: *TestingResourceResponses
+  /testing/engineering-intelligence/health:
+    get:
+      operationId: getEngineeringHealth
+      tags: [Testing Engineering Intelligence]
+      summary: Get engineering health assessment
+      parameters: *TestingListParameters
+      responses: *TestingResourceResponses
+    post:
+      operationId: postEngineeringHealth
+      tags: [Testing Engineering Intelligence]
+      summary: Assess engineering health for an optional scope
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EngineeringIntelligenceScopeRequest"
+      responses: *TestingResourceResponses
+  /testing/engineering-intelligence/risk:
+    get:
+      operationId: getEngineeringRiskSummary
+      tags: [Testing Engineering Intelligence]
+      summary: Get risk summary from engineering health
+      parameters: *TestingListParameters
+      responses: *TestingResourceResponses
+  /testing/engineering-intelligence/snapshots:
+    get:
+      operationId: listEngineeringSnapshots
+      tags: [Testing Engineering Intelligence]
+      summary: List engineering snapshots
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: computeEngineeringSnapshot
+      tags: [Testing Engineering Intelligence]
+      summary: Compute an engineering snapshot
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EngineeringIntelligenceScopeRequest"
+      responses: *TestingResourceResponses
+  /testing/engineering-intelligence/snapshots/{snapshotId}:
+    parameters:
+      - $ref: "#/components/parameters/TestingEngineeringSnapshotId"
+    get:
+      operationId: getEngineeringSnapshot
+      tags: [Testing Engineering Intelligence]
+      summary: Get engineering snapshot by id
+      responses: *TestingResourceResponses
+  /testing/engineering-intelligence/trends:
+    get:
+      operationId: listEngineeringTrends
+      tags: [Testing Engineering Intelligence]
+      summary: List trend series
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: buildEngineeringTrend
+      tags: [Testing Engineering Intelligence]
+      summary: Build a trend series for a kind
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EngineeringIntelligenceTrendBuildRequest"
+      responses: *TestingResourceResponses
+  /testing/engineering-intelligence/benchmarks:
+    get:
+      operationId: listEngineeringBenchmarks
+      tags: [Testing Engineering Intelligence]
+      summary: List benchmarks
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+    post:
+      operationId: compareEngineeringBenchmark
+      tags: [Testing Engineering Intelligence]
+      summary: Compare metric values against a baseline
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EngineeringIntelligenceBenchmarkCompareRequest"
+      responses: *TestingResourceResponses
+  /testing/engineering-intelligence/baselines:
+    get:
+      operationId: listEngineeringBaselines
+      tags: [Testing Engineering Intelligence]
+      summary: List baselines
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+  /testing/engineering-intelligence/historical:
+    get:
+      operationId: listEngineeringHistorical
+      tags: [Testing Engineering Intelligence]
+      summary: List immutable historical snapshots
+      parameters: *TestingListParameters
+      responses: *TestingCollectionResponses
+
+  # ---------------------------------------------------------------------------
+  # Platform Reporting API (APZREPORT-002)
+  # ---------------------------------------------------------------------------
+  /reporting/formats:
+    get:
+      operationId: listReportOutputFormats
+      tags: [Platform Reporting]
+      summary: List supported report output formats
+      responses: *TestingResourceResponses
+  /reporting/types:
+    get:
+      operationId: listAvailableReports
+      tags: [Platform Reporting]
+      summary: List available report type identifiers
+      responses: *TestingCollectionResponses
+  /reporting/templates:
+    get:
+      operationId: listReportTemplates
+      tags: [Platform Reporting]
+      summary: List report templates
+      parameters:
+        - name: reportType
+          in: query
+          schema:
+            type: string
+            maxLength: 128
+      responses: *TestingCollectionResponses
+  /reporting/templates/{templateId}:
+    parameters:
+      - name: templateId
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 128
+    get:
+      operationId: getReportTemplate
+      tags: [Platform Reporting]
+      summary: Get report template by id
+      responses: *TestingResourceResponses
+  /reporting/validate:
+    post:
+      operationId: validateReport
+      tags: [Platform Reporting]
+      summary: Validate a report request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateReportRequest"
+      responses: *TestingResourceResponses
+  /reporting/generate:
+    post:
+      operationId: generateReport
+      tags: [Platform Reporting]
+      summary: Generate a report
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateReportRequest"
+      responses: *TestingResourceResponses
+  /reporting/preview:
+    post:
+      operationId: previewReport
+      tags: [Platform Reporting]
+      summary: Preview a report
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateReportRequest"
+      responses: *TestingResourceResponses
+  /reporting/generations:
+    get:
+      operationId: listReportGenerations
+      tags: [Platform Reporting]
+      summary: List report generation metadata
+      responses: *TestingCollectionResponses
+  /reporting/generations/{metadataId}:
+    parameters:
+      - name: metadataId
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 128
+    get:
+      operationId: getReportGeneration
+      tags: [Platform Reporting]
+      summary: Get report generation metadata by id
+      responses: *TestingResourceResponses
+
+  # ---------------------------------------------------------------------------
+  # Platform Documents API (APZDOCS-004) — metadata only, no binary transfer
+  # ---------------------------------------------------------------------------
+  /documents:
+    get:
+      operationId: listDocuments
+      tags: [Platform Documents]
+      summary: List/search document metadata (not full-text search)
+      parameters:
+        - name: query
+          in: query
+          schema: { type: string, maxLength: 256 }
+        - name: status
+          in: query
+          schema: { type: string, maxLength: 64 }
+        - name: classification
+          in: query
+          schema: { type: string, maxLength: 64 }
+        - name: tagName
+          in: query
+          schema: { type: string, maxLength: 128 }
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+    post:
+      operationId: createDocumentMetadata
+      tags: [Platform Documents]
+      summary: Create document metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateDocumentRequest"
+      responses: *TestingResourceResponses
+  /documents/diagnostics:
+    get:
+      operationId: getDocumentDiagnostics
+      tags: [Platform Documents]
+      summary: Safe document platform diagnostics
+      responses: *TestingResourceResponses
+  /documents/reconciliation:
+    get:
+      operationId: inspectDocumentReconciliation
+      tags: [Platform Documents]
+      summary: Inspect reconciliation issues (no repair workers)
+      responses: *TestingResourceResponses
+  /documents/tags:
+    get:
+      operationId: listDocumentTags
+      tags: [Platform Documents]
+      summary: List document tags
+      responses: *TestingCollectionResponses
+  /documents/tags/{tagId}:
+    parameters:
+      - name: tagId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getDocumentTag
+      tags: [Platform Documents]
+      summary: Get document tag
+      responses: *TestingResourceResponses
+  /documents/{documentId}:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getDocument
+      tags: [Platform Documents]
+      summary: Get document by id
+      responses: *TestingResourceResponses
+    patch:
+      operationId: updateDocumentMetadata
+      tags: [Platform Documents]
+      summary: Update mutable document metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateDocumentMetadataRequest"
+      responses: *TestingResourceResponses
+  /documents/{documentId}/archive:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: archiveDocument
+      tags: [Platform Documents]
+      summary: Archive a document
+      responses: *TestingResourceResponses
+  /documents/{documentId}/restore:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: restoreDocument
+      tags: [Platform Documents]
+      summary: Restore a document
+      responses: *TestingResourceResponses
+  /documents/{documentId}/versions:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: listDocumentVersions
+      tags: [Platform Documents]
+      summary: List immutable content versions (metadata)
+      responses: *TestingCollectionResponses
+  /documents/{documentId}/versions/{versionId}:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+      - name: versionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getDocumentVersion
+      tags: [Platform Documents]
+      summary: Get version metadata
+      responses: *TestingResourceResponses
+  /documents/{documentId}/versions/{versionId}/storage:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+      - name: versionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getDocumentStorageMetadata
+      tags: [Platform Documents]
+      summary: Get storage metadata (keys redacted)
+      responses: *TestingResourceResponses
+  /documents/{documentId}/versions/{versionId}/verify:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+      - name: versionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: verifyDocumentIntegrity
+      tags: [Platform Documents]
+      summary: Verify content integrity (checksum result only)
+      responses: *TestingResourceResponses
+  /documents/{documentId}/audit:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: listDocumentAudit
+      tags: [Platform Documents]
+      summary: List document audit entries
+      responses: *TestingCollectionResponses
+  /documents/{documentId}/classify:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: classifyDocument
+      tags: [Platform Documents]
+      summary: Classify a document
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClassifyDocumentRequest"
+      responses: *TestingResourceResponses
+  /documents/{documentId}/tags:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: tagDocument
+      tags: [Platform Documents]
+      summary: Apply tags to a document
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TagDocumentRequest"
+      responses: *TestingResourceResponses
+  /documents/{documentId}/folder:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: assignDocumentFolder
+      tags: [Platform Documents]
+      summary: Assign document folder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignDocumentFolderRequest"
+      responses: *TestingResourceResponses
+  /documents/{documentId}/collection:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: assignDocumentCollection
+      tags: [Platform Documents]
+      summary: Assign document collection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignDocumentCollectionRequest"
+      responses: *TestingResourceResponses
+  /documents/{documentId}/retention:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: applyDocumentRetention
+      tags: [Platform Documents]
+      summary: Apply retention metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplyDocumentRetentionRequest"
+      responses: *TestingResourceResponses
+  /documents/{documentId}/relationships:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: relateDocument
+      tags: [Platform Documents]
+      summary: Create a document relationship
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RelateDocumentRequest"
+      responses: *TestingResourceResponses
+
+  # ---------------------------------------------------------------------------
+  # Platform Search API (APZSEARCH-007) — query + management; no public index HTTP
+  # ---------------------------------------------------------------------------
+  /search/query:
+    post:
+      operationId: executeSearchQuery
+      tags: [Platform Search]
+      summary: Execute canonical search query
+      description: >
+        Calls PlatformServiceGateway.searchExecution.execute. Trusted ServiceRequestContext
+        only — client cannot override tenant/org/roles. Rejects raw engine filters and
+        semantic/vector fields at the HTTP boundary.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchQueryRequest"
+      responses: *TestingResourceResponses
+  /search/query/validate:
+    post:
+      operationId: validateSearchQuery
+      tags: [Platform Search]
+      summary: Validate a search query without executing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchValidateRequest"
+      responses: *TestingResourceResponses
+  /search/suggestions:
+    post:
+      operationId: suggestSearch
+      tags: [Platform Search]
+      summary: Keyword suggestions via searchExecution.suggest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchSuggestionsRequest"
+      responses: *TestingResourceResponses
+  /search/capabilities:
+    get:
+      operationId: getSearchCapabilities
+      tags: [Platform Search]
+      summary: Execution-plane capabilities
+      responses: *TestingResourceResponses
+  /search/health:
+    get:
+      operationId: getSearchHealth
+      tags: [Platform Search]
+      summary: Execution-plane health
+      responses: *TestingResourceResponses
+  /search/readiness:
+    get:
+      operationId: getSearchReadiness
+      tags: [Platform Search]
+      summary: Execution-plane readiness
+      responses: *TestingResourceResponses
+  /search/diagnostics:
+    get:
+      operationId: getSearchDiagnostics
+      tags: [Platform Search]
+      summary: Safe execution-plane diagnostics (secrets redacted)
+      responses: *TestingResourceResponses
+  /search/statistics:
+    get:
+      operationId: getSearchStatistics
+      tags: [Platform Search]
+      summary: Execution-plane statistics
+      responses: *TestingResourceResponses
+  /search/management/providers:
+    get:
+      operationId: listSearchProviders
+      tags: [Platform Search]
+      summary: List search providers (management)
+      responses: *TestingCollectionResponses
+  /search/management/providers/{providerId}:
+    parameters:
+      - name: providerId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getSearchProvider
+      tags: [Platform Search]
+      summary: Get search provider
+      responses: *TestingResourceResponses
+    patch:
+      operationId: updateSearchProvider
+      tags: [Platform Search]
+      summary: Update search provider label/enablement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSearchProviderRequest"
+      responses: *TestingResourceResponses
+  /search/management/configurations:
+    get:
+      operationId: listSearchConfigurations
+      tags: [Platform Search]
+      summary: List search configurations
+      responses: *TestingCollectionResponses
+    post:
+      operationId: createSearchConfiguration
+      tags: [Platform Search]
+      summary: Create search configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSearchConfigurationRequest"
+      responses: *TestingResourceResponses
+  /search/management/configurations/{configurationId}:
+    parameters:
+      - name: configurationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getSearchConfiguration
+      tags: [Platform Search]
+      summary: Get search configuration
+      responses: *TestingResourceResponses
+    patch:
+      operationId: updateSearchConfiguration
+      tags: [Platform Search]
+      summary: Update search configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSearchConfigurationRequest"
+      responses: *TestingResourceResponses
+  /search/management/collections:
+    get:
+      operationId: listSearchCollections
+      tags: [Platform Search]
+      summary: List search collections
+      responses: *TestingCollectionResponses
+    post:
+      operationId: createSearchCollection
+      tags: [Platform Search]
+      summary: Create search collection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSearchCollectionRequest"
+      responses: *TestingResourceResponses
+  /search/management/collections/{collectionId}:
+    parameters:
+      - name: collectionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getSearchCollection
+      tags: [Platform Search]
+      summary: Get search collection
+      responses: *TestingResourceResponses
+    patch:
+      operationId: updateSearchCollection
+      tags: [Platform Search]
+      summary: Update search collection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSearchCollectionRequest"
+      responses: *TestingResourceResponses
+  /search/management/sources:
+    get:
+      operationId: listSearchSources
+      tags: [Platform Search]
+      summary: List search sources
+      responses: *TestingCollectionResponses
+  /search/management/sources/{sourceId}:
+    parameters:
+      - name: sourceId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getSearchSource
+      tags: [Platform Search]
+      summary: Get search source
+      responses: *TestingResourceResponses
+  /search/management/scopes:
+    get:
+      operationId: listSearchScopes
+      tags: [Platform Search]
+      summary: List search scopes
+      responses: *TestingCollectionResponses
+  /search/management/scopes/{scopeId}:
+    parameters:
+      - name: scopeId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getSearchScope
+      tags: [Platform Search]
+      summary: Get search scope
+      responses: *TestingResourceResponses
+  /search/management/profiles:
+    get:
+      operationId: listSearchProfiles
+      tags: [Platform Search]
+      summary: List search profiles
+      responses: *TestingCollectionResponses
+  /search/management/profiles/{profileId}:
+    parameters:
+      - name: profileId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getSearchProfile
+      tags: [Platform Search]
+      summary: Get search profile
+      responses: *TestingResourceResponses
+  /search/management/capabilities:
+    get:
+      operationId: getSearchManagementCapabilities
+      tags: [Platform Search]
+      summary: Management-plane capabilities
+      responses: *TestingResourceResponses
+  /search/management/health:
+    get:
+      operationId: getSearchManagementHealth
+      tags: [Platform Search]
+      summary: Management-plane health
+      responses: *TestingResourceResponses
+  /search/management/diagnostics:
+    get:
+      operationId: getSearchManagementDiagnostics
+      tags: [Platform Search]
+      summary: Management-plane diagnostics
+      responses: *TestingResourceResponses
+  /search/management/statistics:
+    get:
+      operationId: getSearchManagementStatistics
+      tags: [Platform Search]
+      summary: Management-plane statistics
+      responses: *TestingResourceResponses
+  /search/management/audit:
+    get:
+      operationId: listSearchAudit
+      tags: [Platform Search]
+      summary: List search audit events
+      responses: *TestingCollectionResponses
+  /search/management/validation/query:
+    post:
+      operationId: validateSearchManagementQuery
+      tags: [Platform Search]
+      summary: Management-plane query validation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchValidateRequest"
+      responses: *TestingResourceResponses
+  /search/management/validation/configuration:
+    post:
+      operationId: validateSearchManagementConfiguration
+      tags: [Platform Search]
+      summary: Management-plane configuration validation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateSearchConfigurationRequest"
+      responses: *TestingResourceResponses
+
+components:
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: better-auth.session_token
+      description: Better Auth session cookie resolved server-side.
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    Cursor:
+      name: cursor
+      in: query
+      schema:
+        type: string
+    Sort:
+      name: sort
+      in: query
+      schema:
+        type: string
+    Order:
+      name: order
+      in: query
+      schema:
+        type: string
+        enum: [asc, desc]
+    WorkspaceId:
+      name: workspaceId
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: "^ws_[0-9a-fA-F]{32}$"
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: "^proj_[0-9a-fA-F]{32}$"
+    TaskId:
+      name: taskId
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: "^task_[0-9a-fA-F]{32}$"
+    SupportRequestId:
+      name: supportRequestId
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: "^sreq_[0-9a-fA-F]{32}$"
+      example: sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1
+    ArticleId:
+      name: articleId
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: "^sart_[0-9a-fA-F]{32}$"
+      example: sart_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa5
+    OrganizationId:
+      name: organizationId
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: "^sorg_[0-9a-fA-F]{32}$"
+      example: sorg_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2
+    GroupId:
+      name: groupId
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: "^sgrp_[0-9a-fA-F]{32}$"
+      example: sgrp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3
+    SupportUserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: "^suser_[0-9a-fA-F]{32}$"
+      example: suser_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4
+    TestingRequirementId:
+      name: requirementId
+      in: path
+      required: true
+      schema: &TestingIdSchema
+        type: string
+        minLength: 1
+        maxLength: 128
+        pattern: "^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$"
+    TestingPlanId:
+      name: planId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingSuiteId:
+      name: suiteId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingCaseId:
+      name: caseId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingExecutionId:
+      name: executionId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingStepId:
+      name: stepId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingEvidenceId:
+      name: evidenceId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingImportId:
+      name: importId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingCoverageId:
+      name: coverageId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingDefectId:
+      name: defectId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingCertificationId:
+      name: certificationId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingApprovalId:
+      name: approvalId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingRelationshipId:
+      name: relationshipId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingReleaseId:
+      name: releaseId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingResourcePathId:
+      name: resourceId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingPipelineId:
+      name: pipelineId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingPipelineRunId:
+      name: runId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    TestingEngineeringSnapshotId:
+      name: snapshotId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    PipelineOwner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        pattern: "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$"
+    PipelineRepo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        pattern: "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$"
+    PipelineWorkflowId:
+      name: workflowId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    PipelineProviderRunId:
+      name: runId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+    PipelineJobId:
+      name: jobId
+      in: path
+      required: true
+      schema: *TestingIdSchema
+  responses:
+    BadRequest:
+      description: Validation failed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Forbidden:
+      description: Permission or policy denied
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Conflict:
+      description: Mapping or revision conflict
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    ServiceUnavailable:
+      description: Provider or dependency unavailable
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    NotImplemented:
+      description: Capability not supported by provider
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    InternalError:
+      description: Unexpected platform failure
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+  schemas:
+    Meta:
+      type: object
+      required: [requestId, correlationId]
+      properties:
+        requestId:
+          type: string
+          format: uuid
+        correlationId:
+          type: string
+    Page:
+      type: object
+      required: [cursor, nextCursor, limit, hasMore]
+      properties:
+        cursor:
+          type: ["string", "null"]
+        nextCursor:
+          type: ["string", "null"]
+        limit:
+          type: integer
+        hasMore:
+          type: boolean
+    ErrorBody:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+    ErrorEnvelope:
+      type: object
+      required: [error, meta]
+      properties:
+        error:
+          $ref: "#/components/schemas/ErrorBody"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    TestingResource:
+      type: object
+      description: >
+        Generic Testing Platform Service resource. Full domain contracts live in the
+        Testing service SDK; this schema preserves OpenAPI coverage while avoiding
+        backend-specific fields in the public workbench contract.
+      additionalProperties: true
+    TestingResourceInput:
+      type: object
+      description: Generic JSON request body for Testing route handlers.
+      additionalProperties: true
+    TestingResourceSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/TestingResource"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    TestingResourceCollection:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/TestingResource"
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    PipelineImportFromProviderRequest:
+      type: object
+      required: [owner, repo, runId]
+      additionalProperties: false
+      properties:
+        owner:
+          type: string
+          minLength: 1
+          maxLength: 128
+        repo:
+          type: string
+          minLength: 1
+          maxLength: 128
+        runId:
+          oneOf:
+            - type: string
+              minLength: 1
+              maxLength: 128
+            - type: integer
+              minimum: 1
+        pipelineKey:
+          type: string
+          maxLength: 128
+        pipelineId:
+          type: string
+          maxLength: 128
+    EngineeringIntelligenceScopeRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        scope:
+          type: object
+          additionalProperties: true
+          description: Optional engineering scope (product/release/tenant filters).
+        weights:
+          type: object
+          additionalProperties:
+            type: number
+          description: Optional quality score weight overrides.
+        label:
+          type: string
+          maxLength: 256
+    ReportOutputFormat:
+      type: string
+      enum: [html, markdown, pdf, docx, json, csv]
+    ValidateReportRequest:
+      type: object
+      required: [reportType, outputFormat]
+      additionalProperties: false
+      properties:
+        reportType:
+          type: string
+          maxLength: 128
+        templateId:
+          type: string
+          maxLength: 128
+        outputFormat:
+          $ref: "#/components/schemas/ReportOutputFormat"
+        parameters:
+          type: object
+          additionalProperties: true
+          description: Pre-computed report parameters (metrics, tables, lists, summaries, text, metadata).
+    GenerateReportRequest:
+      type: object
+      required: [reportType, outputFormat]
+      additionalProperties: false
+      properties:
+        reportType:
+          type: string
+          maxLength: 128
+        templateId:
+          type: string
+          maxLength: 128
+        outputFormat:
+          $ref: "#/components/schemas/ReportOutputFormat"
+        parameters:
+          type: object
+          additionalProperties: true
+          description: Pre-computed report parameters (metrics, tables, lists, summaries, text, metadata).
+        organisationId:
+          type: string
+          maxLength: 128
+    SearchQueryRequest:
+      type: object
+      additionalProperties: false
+      required: [query]
+      properties:
+        query:
+          $ref: "#/components/schemas/SearchQuery"
+        profileId: { type: string, maxLength: 128 }
+        sessionId: { type: string, maxLength: 128 }
+        correlationId: { type: string, maxLength: 128 }
+    SearchValidateRequest:
+      type: object
+      additionalProperties: false
+      required: [query]
+      properties:
+        query:
+          $ref: "#/components/schemas/SearchQuery"
+    SearchSuggestionsRequest:
+      type: object
+      additionalProperties: false
+      required: [keywords]
+      properties:
+        keywords: { type: string, minLength: 1, maxLength: 512 }
+        phrase: { type: string, minLength: 1, maxLength: 512 }
+        pageSize: { type: integer, minimum: 1, maximum: 20 }
+    SearchQuery:
+      type: object
+      additionalProperties: false
+      properties:
+        keywords: { type: string, minLength: 1, maxLength: 512 }
+        phrase: { type: string, minLength: 1, maxLength: 512 }
+        filters:
+          type: array
+          maxItems: 32
+          items:
+            $ref: "#/components/schemas/SearchFilter"
+        sorts:
+          type: array
+          maxItems: 8
+          items:
+            type: object
+            additionalProperties: false
+            required: [field, direction]
+            properties:
+              field: { type: string, maxLength: 64 }
+              direction: { type: string, enum: [asc, desc] }
+        scopes:
+          type: array
+          maxItems: 8
+          items:
+            type: string
+            enum: [platform, organisation, tenant, workspace, product, personal]
+        collections:
+          type: array
+          maxItems: 32
+          items: { type: string, maxLength: 128 }
+        products:
+          type: array
+          maxItems: 16
+          items:
+            type: string
+            enum: [projects, support, documents, testing, reporting, workflow, analytics, identity, administration]
+        page: { type: integer, minimum: 1, maximum: 10000 }
+        pageSize: { type: integer, minimum: 1, maximum: 100 }
+        includeFacets: { type: boolean }
+        includeHighlights: { type: boolean }
+        includeSuggestions: { type: boolean }
+    SearchFilter:
+      type: object
+      additionalProperties: false
+      required: [field, op]
+      properties:
+        field: { type: string, maxLength: 64 }
+        op: { type: string, enum: [eq, neq, in, nin, exists, range] }
+        value:
+          oneOf:
+            - type: string
+            - type: number
+            - type: boolean
+            - type: array
+              items: { type: string }
+        from:
+          oneOf: [{ type: string }, { type: number }]
+        to:
+          oneOf: [{ type: string }, { type: number }]
+    UpdateSearchProviderRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        label: { type: string, maxLength: 256 }
+        enabled: { type: boolean }
+        ownership: { type: string, enum: [platform, tenant, organisation] }
+        version: { type: string, maxLength: 64 }
+    CreateSearchConfigurationRequest:
+      type: object
+      additionalProperties: false
+      required: [configuration]
+      properties:
+        label: { type: string, maxLength: 256 }
+        configuration:
+          $ref: "#/components/schemas/SearchConfigurationBody"
+    UpdateSearchConfigurationRequest:
+      type: object
+      additionalProperties: false
+      required: [configuration]
+      properties:
+        label: { type: string, maxLength: 256 }
+        configuration:
+          $ref: "#/components/schemas/SearchConfigurationBody"
+    ValidateSearchConfigurationRequest:
+      type: object
+      additionalProperties: false
+      required: [configuration]
+      properties:
+        configuration:
+          $ref: "#/components/schemas/SearchConfigurationBody"
+    SearchConfigurationBody:
+      type: object
+      additionalProperties: false
+      required:
+        - defaultPageSize
+        - maxPageSize
+        - maxKeywordLength
+        - allowedProviderKinds
+        - enforceTenantIsolation
+        - enforceOrganisationIsolation
+        - enforcePermissionFilter
+      properties:
+        defaultPageSize: { type: integer, minimum: 1, maximum: 100 }
+        maxPageSize: { type: integer, minimum: 1, maximum: 100 }
+        maxKeywordLength: { type: integer, minimum: 1, maximum: 2048 }
+        allowedProviderKinds:
+          type: array
+          items:
+            type: string
+            enum: [opensearch, elasticsearch, postgresql_fts, meilisearch, typesense, azure_ai_search, vector_future, custom]
+        enforceTenantIsolation: { type: boolean, enum: [true] }
+        enforceOrganisationIsolation: { type: boolean, enum: [true] }
+        enforcePermissionFilter: { type: boolean, enum: [true] }
+    CreateSearchCollectionRequest:
+      type: object
+      additionalProperties: false
+      required: [name, scope]
+      properties:
+        name: { type: string, maxLength: 256 }
+        scope:
+          type: string
+          enum: [platform, organisation, tenant, workspace, product, personal]
+        productIds:
+          type: array
+          items:
+            type: string
+        enabled: { type: boolean }
+    UpdateSearchCollectionRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name: { type: string, maxLength: 256 }
+        enabled: { type: boolean }
+        productIds:
+          type: array
+          items: { type: string }
+
+    CreateDocumentRequest:
+      type: object
+      required: [title]
+      additionalProperties: false
+      properties:
+        title: { type: string, maxLength: 512 }
+        description: { type: string, maxLength: 4000 }
+        documentType: { type: string, maxLength: 64 }
+        classification: { type: string, maxLength: 64 }
+        customClassification: { type: string, maxLength: 128 }
+        tagNames:
+          type: array
+          maxItems: 50
+          items: { type: string, maxLength: 128 }
+        folderId: { type: string, maxLength: 128 }
+        categoryId: { type: string, maxLength: 128 }
+        organisationId: { type: string, maxLength: 128 }
+    UpdateDocumentMetadataRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        title: { type: string, maxLength: 512 }
+        description: { type: string, maxLength: 4000 }
+        mimeType: { type: string, maxLength: 255 }
+        byteLength: { type: integer, minimum: 0 }
+        custom:
+          type: object
+          additionalProperties: { type: string }
+    ClassifyDocumentRequest:
+      type: object
+      required: [classification]
+      additionalProperties: false
+      properties:
+        classification: { type: string, maxLength: 64 }
+        customCode: { type: string, maxLength: 128 }
+        label: { type: string, maxLength: 256 }
+    TagDocumentRequest:
+      type: object
+      required: [tagNames]
+      additionalProperties: false
+      properties:
+        tagNames:
+          type: array
+          minItems: 1
+          maxItems: 50
+          items: { type: string, maxLength: 128 }
+    AssignDocumentFolderRequest:
+      type: object
+      required: [folderId]
+      additionalProperties: false
+      properties:
+        folderId:
+          type: ["string", "null"]
+          maxLength: 128
+    AssignDocumentCollectionRequest:
+      type: object
+      required: [collectionId]
+      additionalProperties: false
+      properties:
+        collectionId:
+          type: ["string", "null"]
+          maxLength: 128
+    ApplyDocumentRetentionRequest:
+      type: object
+      required: [retentionId]
+      additionalProperties: false
+      properties:
+        retentionId:
+          type: ["string", "null"]
+          maxLength: 128
+    RelateDocumentRequest:
+      type: object
+      required: [kind]
+      additionalProperties: false
+      properties:
+        kind: { type: string, maxLength: 64 }
+        targetDocumentId: { type: string, maxLength: 128 }
+        reference:
+          type: object
+          additionalProperties: false
+          properties:
+            product: { type: string, maxLength: 64 }
+            externalId: { type: string, maxLength: 256 }
+            label: { type: string, maxLength: 256 }
+    EngineeringIntelligenceTrendBuildRequest:
+      type: object
+      required: [kind]
+      additionalProperties: false
+      properties:
+        kind:
+          type: string
+          enum:
+            - quality
+            - coverage
+            - automation
+            - execution
+            - release
+            - certification
+            - defect
+        periodKind:
+          type: string
+          enum: [daily, weekly, monthly, quarterly, release]
+        scope:
+          type: object
+          additionalProperties: true
+    EngineeringIntelligenceBenchmarkCompareRequest:
+      type: object
+      required: [metricKey, values]
+      additionalProperties: false
+      properties:
+        metricKey:
+          type: string
+          minLength: 1
+          maxLength: 128
+        values:
+          type: array
+          minItems: 1
+          items:
+            type: number
+        baselineValue:
+          type: number
+        label:
+          type: string
+          maxLength: 256
+        scope:
+          type: object
+          additionalProperties: true
+    Workspace:
+      type: object
+      required: [id, tenantId, name, slug, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+        tenantId:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        url:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Project:
+      type: object
+      required:
+        [id, tenantId, workspaceId, name, identifier, status, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+        tenantId:
+          type: string
+        workspaceId:
+          type: string
+        name:
+          type: string
+        identifier:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: [draft, active, on_hold, completed, archived]
+        leadId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    TeamMember:
+      type: object
+      additionalProperties: true
+    CreateProjectRequest:
+      type: object
+      additionalProperties: false
+      required: [workspaceId, name, identifier]
+      properties:
+        workspaceId:
+          type: string
+        name:
+          type: string
+        identifier:
+          type: string
+        description:
+          type: string
+        leadId:
+          type: string
+    UpdateProjectRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        identifier:
+          type: string
+        description:
+          type: string
+        leadId:
+          type: ["string", "null"]
+        status:
+          type: string
+          enum: [draft, active, on_hold, completed, archived]
+    WorkspaceSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/Workspace"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    ProjectSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/Project"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    TeamMemberSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamMember"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    WorkspaceCollection:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Workspace"
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    ProjectCollection:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Project"
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    TeamMemberCollection:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/TeamMember"
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    Task:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - projectId
+        - title
+        - status
+        - statusId
+        - priority
+        - labelIds
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: string
+          pattern: "^task_[0-9a-fA-F]{32}$"
+        projectId:
+          type: string
+          pattern: "^proj_[0-9a-fA-F]{32}$"
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: [open, in_progress, blocked, done, cancelled]
+        statusId:
+          type: string
+          pattern: "^status_[0-9a-fA-F]{32}$"
+        priority:
+          type: string
+          enum: [none, low, medium, high, urgent]
+        assigneeId:
+          type: string
+          pattern: "^user_[0-9a-fA-F]{32}$"
+        assigneeIds:
+          type: array
+          items:
+            type: string
+            pattern: "^user_[0-9a-fA-F]{32}$"
+        sprintId:
+          type: string
+          pattern: "^sprint_[0-9a-fA-F]{32}$"
+        milestoneId:
+          type: string
+        projectModuleId:
+          type: string
+          pattern: "^module_[0-9a-fA-F]{32}$"
+        parentTaskId:
+          type: string
+          pattern: "^task_[0-9a-fA-F]{32}$"
+        estimate:
+          type: object
+          additionalProperties: false
+          properties:
+            points:
+              type: number
+            minutes:
+              type: number
+        rank:
+          type: number
+        labelIds:
+          type: array
+          items:
+            type: string
+            pattern: "^label_[0-9a-fA-F]{32}$"
+        startDate:
+          type: string
+        dueDate:
+          type: string
+        archivedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CreateTaskRequest:
+      type: object
+      additionalProperties: false
+      required: [projectId, title]
+      properties:
+        projectId:
+          type: string
+          pattern: "^proj_[0-9a-fA-F]{32}$"
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        description:
+          type: string
+          maxLength: 20000
+        statusId:
+          type: string
+          pattern: "^status_[0-9a-fA-F]{32}$"
+        stateId:
+          type: string
+          pattern: "^status_[0-9a-fA-F]{32}$"
+          description: Alias for statusId
+        priority:
+          type: string
+          enum: [none, low, medium, high, urgent]
+        assigneeId:
+          type: string
+          pattern: "^user_[0-9a-fA-F]{32}$"
+        assigneeIds:
+          type: array
+          maxItems: 50
+          items:
+            type: string
+            pattern: "^user_[0-9a-fA-F]{32}$"
+        sprintId:
+          type: string
+          pattern: "^sprint_[0-9a-fA-F]{32}$"
+        projectModuleId:
+          type: string
+          pattern: "^module_[0-9a-fA-F]{32}$"
+        moduleId:
+          type: string
+          pattern: "^module_[0-9a-fA-F]{32}$"
+          description: Alias for projectModuleId
+        parentTaskId:
+          type: string
+          pattern: "^task_[0-9a-fA-F]{32}$"
+        labelIds:
+          type: array
+          maxItems: 50
+          items:
+            type: string
+            pattern: "^label_[0-9a-fA-F]{32}$"
+        startDate:
+          type: string
+        dueDate:
+          type: string
+        estimate:
+          type: object
+          additionalProperties: false
+          properties:
+            points:
+              type: number
+            minutes:
+              type: number
+    UpdateTaskRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        description:
+          type: string
+          maxLength: 20000
+        statusId:
+          type: string
+          pattern: "^status_[0-9a-fA-F]{32}$"
+        stateId:
+          type: string
+          pattern: "^status_[0-9a-fA-F]{32}$"
+        priority:
+          type: string
+          enum: [none, low, medium, high, urgent]
+        assigneeId:
+          type: ["string", "null"]
+        assigneeIds:
+          type: ["array", "null"]
+          items:
+            type: string
+        sprintId:
+          type: ["string", "null"]
+        projectModuleId:
+          type: ["string", "null"]
+        moduleId:
+          type: ["string", "null"]
+        parentTaskId:
+          type: ["string", "null"]
+        labelIds:
+          type: array
+          items:
+            type: string
+        startDate:
+          type: ["string", "null"]
+        dueDate:
+          type: ["string", "null"]
+        estimate:
+          type: ["object", "null"]
+          additionalProperties: false
+          properties:
+            points:
+              type: number
+            minutes:
+              type: number
+    TransitionTaskRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        statusId:
+          type: string
+          pattern: "^status_[0-9a-fA-F]{32}$"
+        stateId:
+          type: string
+          pattern: "^status_[0-9a-fA-F]{32}$"
+          description: Alias for statusId
+    AssignTaskRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        assigneeId:
+          type: string
+          pattern: "^user_[0-9a-fA-F]{32}$"
+        assigneeIds:
+          type: array
+          minItems: 1
+          maxItems: 50
+          items:
+            type: string
+            pattern: "^user_[0-9a-fA-F]{32}$"
+    AddTaskLabelsRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        labelId:
+          type: string
+          pattern: "^label_[0-9a-fA-F]{32}$"
+        labelIds:
+          type: array
+          minItems: 1
+          maxItems: 50
+          items:
+            type: string
+            pattern: "^label_[0-9a-fA-F]{32}$"
+    SetTaskSprintRequest:
+      type: object
+      additionalProperties: false
+      required: [sprintId]
+      properties:
+        sprintId:
+          type: string
+          pattern: "^sprint_[0-9a-fA-F]{32}$"
+    SetTaskModuleRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        moduleId:
+          type: string
+          pattern: "^module_[0-9a-fA-F]{32}$"
+        projectModuleId:
+          type: string
+          pattern: "^module_[0-9a-fA-F]{32}$"
+    SetTaskParentRequest:
+      type: object
+      additionalProperties: false
+      required: [parentTaskId]
+      properties:
+        parentTaskId:
+          type: string
+          pattern: "^task_[0-9a-fA-F]{32}$"
+    TaskSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/Task"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    TaskCollection:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Task"
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    HealthSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+        meta:
+          $ref: "#/components/schemas/Meta"
+    ReadinessSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    # ---------------------------------------------------------------------------
+    # Support domain schemas (OSS-110-11)
+    # ---------------------------------------------------------------------------
+    SupportTicketStatus:
+      type: string
+      enum: [new, open, pending, closed, merged, unknown]
+
+    SupportTicketPriority:
+      type: string
+      enum: [low, normal, high, urgent]
+
+    SupportRequest:
+      type: object
+      required:
+        [
+          id,
+          tenantId,
+          title,
+          groupId,
+          requesterId,
+          status,
+          priority,
+          createdAt,
+          updatedAt,
+        ]
+      properties:
+        id:
+          type: string
+          pattern: "^sreq_[0-9a-fA-F]{32}$"
+          example: sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1
+        tenantId:
+          type: string
+        displayId:
+          type: string
+        title:
+          type: string
+        groupId:
+          type: string
+          pattern: "^sgrp_[0-9a-fA-F]{32}$"
+          example: sgrp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3
+        requesterId:
+          type: string
+          pattern: "^suser_[0-9a-fA-F]{32}$"
+          example: suser_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4
+        assigneeId:
+          type: string
+          pattern: "^suser_[0-9a-fA-F]{32}$"
+          nullable: true
+        organizationId:
+          type: string
+          pattern: "^sorg_[0-9a-fA-F]{32}$"
+          nullable: true
+        status:
+          $ref: "#/components/schemas/SupportTicketStatus"
+        priority:
+          $ref: "#/components/schemas/SupportTicketPriority"
+        tags:
+          type: array
+          items:
+            type: string
+        closedAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreateSupportRequestBody:
+      type: object
+      required: [title, groupId, requesterId]
+      additionalProperties: false
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        groupId:
+          type: string
+          pattern: "^sgrp_[0-9a-fA-F]{32}$"
+        requesterId:
+          type: string
+          pattern: "^suser_[0-9a-fA-F]{32}$"
+        assigneeId:
+          type: string
+          pattern: "^suser_[0-9a-fA-F]{32}$"
+        organizationId:
+          type: string
+          pattern: "^sorg_[0-9a-fA-F]{32}$"
+        status:
+          $ref: "#/components/schemas/SupportTicketStatus"
+        priority:
+          $ref: "#/components/schemas/SupportTicketPriority"
+        tags:
+          type: array
+          items:
+            type: string
+
+    UpdateSupportRequestBody:
+      type: object
+      minProperties: 1
+      additionalProperties: false
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        groupId:
+          type: string
+          pattern: "^sgrp_[0-9a-fA-F]{32}$"
+        requesterId:
+          type: string
+          pattern: "^suser_[0-9a-fA-F]{32}$"
+        assigneeId:
+          type: string
+          pattern: "^suser_[0-9a-fA-F]{32}$"
+          nullable: true
+        organizationId:
+          type: string
+          pattern: "^sorg_[0-9a-fA-F]{32}$"
+          nullable: true
+        status:
+          $ref: "#/components/schemas/SupportTicketStatus"
+        priority:
+          $ref: "#/components/schemas/SupportTicketPriority"
+        tags:
+          type: array
+          items:
+            type: string
+
+    ChangeSupportStateBody:
+      type: object
+      required: [status]
+      additionalProperties: false
+      properties:
+        status:
+          $ref: "#/components/schemas/SupportTicketStatus"
+
+    ChangeSupportPriorityBody:
+      type: object
+      required: [priority]
+      additionalProperties: false
+      properties:
+        priority:
+          $ref: "#/components/schemas/SupportTicketPriority"
+
+    AssignSupportOwnerBody:
+      type: object
+      required: [assigneeId]
+      additionalProperties: false
+      properties:
+        assigneeId:
+          type: string
+          pattern: "^suser_[0-9a-fA-F]{32}$"
+
+    AssignSupportCustomerBody:
+      type: object
+      additionalProperties: false
+      properties:
+        requesterId:
+          type: string
+          pattern: "^suser_[0-9a-fA-F]{32}$"
+        customerId:
+          type: string
+          pattern: "^suser_[0-9a-fA-F]{32}$"
+          description: Alias for requesterId
+
+    SupportArticle:
+      type: object
+      required:
+        [
+          id,
+          supportTicketId,
+          body,
+          channel,
+          visibility,
+          senderType,
+          createdAt,
+          updatedAt,
+        ]
+      properties:
+        id:
+          type: string
+          pattern: "^sart_[0-9a-fA-F]{32}$"
+          example: sart_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa5
+        supportTicketId:
+          type: string
+          pattern: "^sreq_[0-9a-fA-F]{32}$"
+        subject:
+          type: string
+        body:
+          type: string
+        bodyFormat:
+          type: string
+          enum: [text/plain, text/html, unknown]
+        channel:
+          type: string
+          enum: [note, email, phone, web, chat, sms, fax, unknown]
+        visibility:
+          type: string
+          enum: [internal, public]
+          description: internal=note, public=reply
+        senderType:
+          type: string
+          enum: [agent, customer, system, unknown]
+        author:
+          type: object
+          properties:
+            userId:
+              type: string
+            displayName:
+              type: string
+            email:
+              type: string
+            senderType:
+              type: string
+        recipients:
+          type: object
+          properties:
+            to:
+              type: array
+              items:
+                type: string
+            cc:
+              type: array
+              items:
+                type: string
+            bcc:
+              type: array
+              items:
+                type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreateInternalNoteBody:
+      type: object
+      required: [body]
+      additionalProperties: false
+      description: >
+        Internal note — visibility is always internal, channel is always note.
+        Visibility field is not accepted (strict schema).
+      properties:
+        body:
+          type: string
+          minLength: 1
+        bodyFormat:
+          type: string
+          enum: [text/plain, text/html, unknown]
+        subject:
+          type: string
+          maxLength: 500
+
+    CreateCustomerReplyBody:
+      type: object
+      required: [body]
+      additionalProperties: false
+      description: >
+        Customer reply — visibility is always public.
+        Channel must be a public channel (email, phone, web, chat, sms, fax).
+        note and unknown channels are rejected.
+      properties:
+        body:
+          type: string
+          minLength: 1
+        bodyFormat:
+          type: string
+          enum: [text/plain, text/html, unknown]
+        subject:
+          type: string
+          maxLength: 500
+        channel:
+          type: string
+          enum: [email, phone, web, chat, sms, fax]
+        to:
+          type: array
+          items:
+            type: string
+        cc:
+          type: array
+          items:
+            type: string
+        bcc:
+          type: array
+          items:
+            type: string
+
+    SupportOrganization:
+      type: object
+      required: [id, tenantId, name, active, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+          pattern: "^sorg_[0-9a-fA-F]{32}$"
+          example: sorg_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2
+        tenantId:
+          type: string
+        name:
+          type: string
+        note:
+          type: string
+        domain:
+          type: string
+        shared:
+          type: boolean
+        active:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreateSupportOrganizationBody:
+      type: object
+      required: [name]
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        note:
+          type: string
+        domain:
+          type: string
+        shared:
+          type: boolean
+
+    UpdateSupportOrganizationBody:
+      type: object
+      minProperties: 1
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        note:
+          type: string
+        domain:
+          type: string
+        shared:
+          type: boolean
+        active:
+          type: boolean
+
+    SupportGroup:
+      type: object
+      required: [id, tenantId, name, active, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+          pattern: "^sgrp_[0-9a-fA-F]{32}$"
+          example: sgrp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3
+        tenantId:
+          type: string
+        name:
+          type: string
+        note:
+          type: string
+        active:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreateSupportGroupBody:
+      type: object
+      required: [name]
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        note:
+          type: string
+        active:
+          type: boolean
+
+    UpdateSupportGroupBody:
+      type: object
+      minProperties: 1
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        note:
+          type: string
+        active:
+          type: boolean
+
+    SupportUser:
+      type: object
+      required: [id, tenantId, displayName, active, role, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+          pattern: "^suser_[0-9a-fA-F]{32}$"
+          example: suser_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4
+        tenantId:
+          type: string
+        email:
+          type: string
+          format: email
+        login:
+          type: string
+        displayName:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        active:
+          type: boolean
+        role:
+          type: string
+          enum: [agent, customer, admin, unknown]
+        organizationIds:
+          type: array
+          items:
+            type: string
+            pattern: "^sorg_[0-9a-fA-F]{32}$"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    SupportHistoryEvent:
+      type: object
+      required: [id, supportTicketId, action, summary, actor, occurredAt]
+      properties:
+        id:
+          type: string
+        supportTicketId:
+          type: string
+          pattern: "^sreq_[0-9a-fA-F]{32}$"
+        action:
+          type: string
+        summary:
+          type: string
+        actor:
+          type: object
+          required: [kind]
+          properties:
+            userId:
+              type: string
+            displayName:
+              type: string
+            kind:
+              type: string
+              enum: [agent, customer, system, unknown]
+        fieldChanges:
+          type: array
+          items:
+            type: object
+        occurredAt:
+          type: string
+          format: date-time
+
+    SupportIntelligenceSnapshot:
+      type: object
+      required:
+        [
+          capturedAt,
+          totalTickets,
+          openTickets,
+          closedTickets,
+          pendingTickets,
+          newTickets,
+          overdueTickets,
+          unassignedTickets,
+          byPriority,
+          byState,
+          byOrganization,
+          byGroup,
+          byOwner,
+        ]
+      description: >
+        Intelligence snapshot. Not real-time. Fields may be omitted when the
+        provider does not expose the underlying metric.
+      properties:
+        capturedAt:
+          type: string
+          format: date-time
+        totalTickets:
+          type: integer
+        openTickets:
+          type: integer
+        closedTickets:
+          type: integer
+        pendingTickets:
+          type: integer
+        newTickets:
+          type: integer
+        overdueTickets:
+          type: integer
+        unassignedTickets:
+          type: integer
+        articleCount:
+          type: integer
+        byPriority:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupportDistributionBucket"
+        byState:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupportDistributionBucket"
+        byOrganization:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupportDistributionBucket"
+        byGroup:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupportDistributionBucket"
+        byOwner:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupportDistributionBucket"
+        averageFirstResponseMinutes:
+          type: number
+
+    SupportDistributionBucket:
+      type: object
+      required: [key, count]
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        count:
+          type: integer
+
+    SupportSearchHit:
+      type: object
+      required: [id, kind, title]
+      properties:
+        id:
+          type: string
+        kind:
+          type: string
+          enum: [support_request, organization, group, user, article]
+        title:
+          type: string
+        snippet:
+          type: string
+        score:
+          type: number
+        updatedAt:
+          type: string
+          format: date-time
+        supportTicketId:
+          type: string
+          pattern: "^sreq_[0-9a-fA-F]{32}$"
+        organizationId:
+          type: string
+          pattern: "^sorg_[0-9a-fA-F]{32}$"
+        groupId:
+          type: string
+          pattern: "^sgrp_[0-9a-fA-F]{32}$"
+        userId:
+          type: string
+          pattern: "^suser_[0-9a-fA-F]{32}$"
+        articleId:
+          type: string
+          pattern: "^sart_[0-9a-fA-F]{32}$"
+
+    SupportSearchResult:
+      type: object
+      required: [query, hits, totalCount, page, perPage, hasNextPage]
+      properties:
+        query:
+          type: string
+        hits:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupportSearchHit"
+        totalCount:
+          type: integer
+        page:
+          type: integer
+        perPage:
+          type: integer
+        hasNextPage:
+          type: boolean
+
+    # Envelope wrappers for support domain
+    SupportRequestSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/SupportRequest"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    SupportRequestCollection:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupportRequest"
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    SupportArticleSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/SupportArticle"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    SupportArticleCollection:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupportArticle"
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    SupportOrganizationSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/SupportOrganization"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    SupportOrganizationCollection:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupportOrganization"
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    SupportGroupSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/SupportGroup"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    SupportGroupCollection:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupportGroup"
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    SupportUserSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/SupportUser"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    SupportUserCollection:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupportUser"
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    SupportHistoryCollection:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupportHistoryEvent"
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    SupportSearchSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/SupportSearchResult"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    SupportAnalyticsSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/SupportIntelligenceSnapshot"
+        meta:
+          $ref: "#/components/schemas/Meta"

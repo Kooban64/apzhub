@@ -1,0 +1,20 @@
+{
+  "name": "@apzhub/document-storage",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Document storage providers — filesystem + S3-compatible (APZDOCS-002)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts packages/document-storage"
+  },
+  "dependencies": {
+    "@apzhub/document-contracts": "workspace:*",
+    "@apzhub/document-core": "workspace:*",
+    "@aws-sdk/client-s3": "^3.787.0"
+  }
+}

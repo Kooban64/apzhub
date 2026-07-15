@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-operations-security
+name: Security
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Operations — Security (M8-06).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-administration
+    label: Security
+    icon: shield
+    route: /workspace/administration/security
+    order: 115
+    permission: platform.nav.administration.view
+  view:
+    title: Security
+    workspace: administration
+    route: /workspace/administration/security
+    permission: platform.nav.administration.view

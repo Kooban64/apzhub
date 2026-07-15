@@ -108,7 +108,11 @@ export interface LawPersistenceDiagnosticsSummary {
   repositoryMode: "memory" | "postgres";
   tenantId: string;
   tenantSource:
-    "explicit" | "env-override" | "default-firm" | "session-single-firm-fallback";
+    | "explicit"
+    | "session-claim"
+    | "env-override"
+    | "default-firm"
+    | "session-single-firm-fallback";
   actorId?: string;
   postgresReady: boolean;
   postgresLatencyMs?: number;
@@ -150,6 +154,10 @@ export interface PlatformHealthResponse {
   activities?: ActivityFrameworkHealthSummary;
   timelines?: TimelineFrameworkHealthSummary;
   lawPlatform?: LawPlatformHealthSummary;
+  security?: {
+    environmentValid: boolean;
+    rateLimit: { backend: string; enabled: boolean };
+  };
 }
 
 export interface PlatformUser {

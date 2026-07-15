@@ -19,6 +19,7 @@ import {
   resolveLawApiTenant,
   type LawApiTenantSource,
 } from "../tenant/tenant-resolver";
+import { validateLawApiTenantMembership } from "../tenant/validate-law-api-tenant-membership";
 import type { LawApiPersistenceContext } from "../persistence/law-api-persistence-context";
 import type { LawApiRepositoryMode } from "../persistence/repository-mode";
 import type { LawApiRequestContext } from "../types";
@@ -59,14 +60,31 @@ export async function buildLawApiAuthenticatedContext(
 
   const user = resolveLawApiUser(auth.session);
   const tenant = resolveLawApiTenant({ session: auth.session, request });
-  const permissionChecker = resolveLawApiPermissions({
+  const permissionChecker = await resolveLawApiPermissions({
     user,
-    roles: [],
-    permissions: undefined,
+    tenantId: tenant.tenantId,
   });
 
   if (options.requireTenant && auth.authenticated && !tenant.tenantId) {
     return { ok: false, response: tenantRequiredResponse(tracing) };
+  }
+
+  if (options.requireTenant && auth.authenticated && tenant.tenantId && user?.userId) {
+    const membership = await validateLawApiTenantMembership({
+      userId: user.userId,
+      tenantId: tenant.tenantId,
+      tenantSource: tenant.source,
+    });
+
+    if (!membership.valid) {
+      return {
+        ok: false,
+        response: forbiddenResponse(tracing, {
+          code: "TENANT_MEMBERSHIP_DENIED",
+          message: membership.message ?? "Tenant membership is required for this request.",
+        }),
+      };
+    }
   }
 
   if (

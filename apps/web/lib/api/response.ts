@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+import { HttpSecurityHeaderService } from "@apzhub/platform-security/headers";
+
 import { LAW_API_CORRELATION_ID_HEADER, LAW_API_REQUEST_ID_HEADER } from "./constants";
 import type {
   LawApiErrorBody,
@@ -17,8 +19,11 @@ function buildMeta(context: LawApiRequestContext): LawApiMeta {
   };
 }
 
+const apiSecurityHeaders = new HttpSecurityHeaderService().getApiResponseHeaders("web");
+
 function responseHeaders(meta: LawApiMeta): HeadersInit {
   return {
+    ...apiSecurityHeaders,
     [LAW_API_REQUEST_ID_HEADER]: meta.requestId,
     [LAW_API_CORRELATION_ID_HEADER]: meta.correlationId,
   };

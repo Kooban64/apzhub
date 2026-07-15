@@ -1,0 +1,19 @@
+{
+  "name": "@apzhub/search-integration",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Cross-Product Search Integration Framework — canonical entity publication for products (APZSEARCH-009)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./products": "./src/products/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/search-integration"
+  },
+  "dependencies": {
+    "@apzhub/search-contracts": "workspace:*"
+  }
+}

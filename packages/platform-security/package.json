@@ -1,0 +1,24 @@
+{
+  "name": "@apzhub/platform-security",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Platform Security & Operational Resilience (M8-06)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts",
+    "./headers": "./src/security-headers-service.ts",
+    "./traffic": "./src/traffic-governance/index.ts",
+    "./traffic-edge": "./src/traffic-governance/edge.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@apzhub/auth": "workspace:*",
+    "@apzhub/config": "workspace:*",
+    "@apzhub/platform-authorization": "workspace:*",
+    "@apzhub/shared": "workspace:*"
+  }
+}

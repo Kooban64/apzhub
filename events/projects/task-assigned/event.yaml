@@ -1,0 +1,26 @@
+manifestSchemaVersion: "1.0"
+id: projects-task-assigned
+name: Projects Task Assigned
+version: 0.1.0
+kind: event
+
+metadata:
+  category: productivity
+  description: Emitted when an APZHUB Task assignee changes.
+
+event:
+  category: business
+  publisher: project-service
+  subscribers:
+    - activity:projects.activity
+    - notification:projects.task.assigned
+  payload:
+    taskId: string
+    projectId: string
+    assigneeId: string
+    previousAssigneeId: string
+
+documentation:
+  eventKey: projects.task.assigned
+  activityAction: projects.task.assigned
+  notificationTemplate: projects.task.assigned

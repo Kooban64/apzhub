@@ -19,7 +19,997 @@ See [Milestone 6 review](./docs/reviews/MILESTONE-006-event-notification-framewo
 - ADRs 0030–0032 · 1098 unit tests, 30 E2E tests, 90.75% coverage
 - [SPR-006 closeout](./docs/sprint/SPR-006-closeout.md)
 
-## [Unreleased] — M16 Platform Engineering Review + LAW-015 Trust Accounting (Closed)
+## [Unreleased] — PCS-001 Platform Core Strategy + Platform Core v1.0 Certified
+
+### Added (APZSEARCH-013 — APZ TCMS Search Publication Adapter)
+
+- `@apzhub/search-testing` **0.1.0** — APZ TCMS → Search Integration Framework (metadata-only; 34 Testing entity types)
+- Explicit safe-field allowlist; evidence/report-binary / storage / credential rejection; classification never-downgrade
+- Production factories require explicit publication sink; `*ForTest` uses in-memory sink
+- Audit `pnpm audit:search-testing`; coverage **98.76%** lines/statements
+- **Verdict:** APZSEARCH-013 COMPLETE — await owner approval before **APZSEARCH-014** (Reporting Search Publication Adapter)
+
+### Added (APZSEARCH-012 — Documents Search Publication Adapter)
+
+- `@apzhub/search-documents` **0.1.0** — Documents → Search Integration Framework (metadata-only; document/version/folder/collection/category/tag)
+- Explicit safe-field allowlist; storage key / binary / OCR rejection; classification mapping without downgrade
+- Production factories require explicit publication sink; `*ForTest` uses in-memory sink
+- Audit `pnpm audit:search-documents`; coverage **97.03%** lines/statements
+- Certification fix: Document foundation harness platform-services pin **0.18.0**
+- **Verdict:** APZSEARCH-012 COMPLETE — await owner approval before **APZSEARCH-013** (APZ TCMS Search Publication Adapter)
+
+### Added (APZSEARCH-011 — Support Search Publication Adapter)
+
+- `@apzhub/search-support` **0.1.0** — Support → Search Integration Framework (support_request/article/organisation/group/user)
+- Zammad identifier rejection; tenant isolation; explicit lifecycle hooks; Support Request ≠ Project Task
+- Audit `pnpm audit:search-support`; coverage **97.61%** lines/statements
+- **Verdict:** APZSEARCH-011 COMPLETE — await owner approval before **APZSEARCH-012** (Documents Search Publication Adapter)
+
+### Added (APZSEARCH-010 — Projects Search Publication Adapter)
+
+- `@apzhub/search-projects` **0.1.0** — Projects → Search Integration Framework publication (Workspace/Project/Task/Sprint/Milestone/Module/Team)
+- Plane identifier rejection; tenant isolation; explicit lifecycle hooks (no workers/Event Bus)
+- Audit `pnpm audit:search-projects`; coverage **97.58%** lines/statements
+- **Verdict:** APZSEARCH-010 COMPLETE — await owner approval before **APZSEARCH-011** (Support Search Publication Adapter)
+
+### Added (APZSEARCH-009 — Cross-Product Search Integration Framework)
+
+- `@apzhub/search-integration` **0.1.0** — canonical entity publication framework (publisher, mapper, validator, lifecycle, diagnostics/metrics/logger/errors)
+- Product contracts only: Projects, Support, Documents, Testing (APZ TCMS), Reporting — **no adapters**
+- In-memory / noop publication sinks — Search Platform unchanged / frozen
+- Audit `scripts/apzsearch-009-search-integration-audit.mjs` / `pnpm audit:search-integration`
+- Coverage **95.95%** lines/statements · **97.14%** functions · **87.74%** branches
+- **Verdict:** APZSEARCH-009 COMPLETE — await owner approval before **product search publication adapters**. No workers / Event Bus / OCR / AI / Search Platform changes.
+
+### Added (APZSEARCH-008 — Search Vertical Certification & Production Readiness)
+
+- Classification **PRODUCTION_READY_WITH_LIMITATIONS** (same class as Documents)
+- Vertical audit `scripts/apzsearch-008-search-vertical-audit.mjs` / `pnpm audit:search-vertical` — **0 violations**
+- Certification harness `testing/search-vertical/apzsearch-008-certification.test.ts`
+- Review pack under `docs/reviews/APZSEARCH-008-*.md` + completion report APZSEARCH-008-CR
+- Certified package floor unchanged: contracts **0.4.0**, persistence **0.2.0**, SDK **0.1.0**, meilisearch **0.1.0**, platform-services **0.18.0**
+- Certification-only pin updates so historical 001/003 foundation harnesses and APZSEARCH-003 audit accept the certified stack versions
+- Scoped vertical coverage re-measure: **97.04%** lines/statements · **97.57%** functions · **89.33%** branches
+- Documented Next.js Testing slug conflict as external LIMITATION for Playwright (predates Search; not a Search defect)
+- **Verdict:** APZSEARCH-008 COMPLETE — await owner approval before **APZSEARCH-009** (Cross-Product Search Integration Framework). No new Search functionality.
+
+### Added (APZSEARCH-006 — Meilisearch Platform Integration & Search Execution Gateway)
+
+- `@apzhub/search-contracts` **0.4.0** — execution service interfaces, granular permissions, `PlatformSearchExecutionProvider`, security/tenant isolation types
+- `@apzhub/platform-services` **0.18.0** — `services/search-execution/` (`MeilisearchSearchProvider`, resolver, mandatory tenant filters, factories, gateway facets)
+- Consumes `@apzhub/integration-meilisearch` **0.1.0** public API only (mock fetch; no live engine)
+- ADR-0061/0062/0063 — tenant isolation, canonical ID mapping, provider resolution precedence
+- Audit `scripts/apzsearch-006-search-execution-audit.mjs` / `pnpm audit:search-execution`
+- **Verdict:** APZSEARCH-006 COMPLETE — await owner approval before **APZSEARCH-007** (Search HTTP API, Typed Client & Workbench). No HTTP/OpenAPI/Workbench in this milestone.
+
+### Added (APZSEARCH-005 — Meilisearch Reference Adapter)
+
+- `@apzhub/integration-meilisearch` **0.1.0** — Meilisearch CE reference search adapter (`SearchIntegrationAdapterBase`, raw RestClient, mock REST, `NOT_SUPPORTED` for semantic/vector/fuzzy/AI/OCR)
+- Depends on `@apzhub/integration-sdk` + `@apzhub/integration-search-sdk` **0.1.0** + `@apzhub/search-contracts` **0.3.0** (unchanged at the time)
+- ADR-0060 — Meilisearch as first reference engine; OpenSearch remains future option
+- Audit `scripts/apzsearch-005-meilisearch-adapter-audit.mjs` / `pnpm audit:meilisearch-adapter`
+- Docs: architecture, capability/compatibility matrices, developer & configuration guides, completion report
+- **Verdict:** APZSEARCH-005 COMPLETE — next became APZSEARCH-006 (execution gateway; not HTTP).
+
+### Added (APZSEARCH-004 — Search Integration SDK)
+
+- `@apzhub/integration-search-sdk` **0.1.0** — vendor-neutral Search Integration SDK (`SearchIntegrationAdapterBase`, factory, capabilities, `NOT_IMPLEMENTED` operation runner, mock adapter)
+- Depends on `@apzhub/integration-sdk` **0.9.0** + `@apzhub/search-contracts` **0.3.0** (unchanged)
+- Audit `scripts/apzsearch-004-search-integration-sdk-audit.mjs` / `pnpm audit:search-integration-sdk`
+- Docs: Search Integration SDK architecture, capability/compatibility models, adapter guides, completion report
+- **Verdict:** APZSEARCH-004 COMPLETE — await owner approval before **APZSEARCH-005** (Meilisearch Reference Adapter Evaluation & Certification). No HTTP/Workbench/engines/indexing/execution.
+
+### Added (APZSEARCH-003 — Search Platform Services, Gateway & Authorization Integration)
+
+- `@apzhub/platform-services` **0.17.0** — Search platform factories, RequestPipeline-wrapped gateway facets, production authz operation map, `SEARCH_SERVICE_ENABLED` bootstrap
+- `@apzhub/search-contracts` **0.3.0** — 14-facet `SearchPlatformGateway`, granular permissions, management-plane readiness, `SearchDomainError`
+- `@apzhub/search-persistence` **0.2.0** — full management thin services; migration `0043_apz_platform_search_management`
+- Audit `scripts/apzsearch-003-platform-services-audit.mjs` / `pnpm audit:search-platform-services`
+- Docs: Search Platform Service Architecture, gateway/contracts/permission/operation-map guides, completion report
+- **Verdict:** APZSEARCH-003 COMPLETE — await owner approval before **APZSEARCH-004**. No HTTP/Workbench/engines/indexing/execution.
+
+### Added (APZSEARCH-002 — Search Persistence & Provider Framework)
+
+- `@apzhub/search-persistence` **0.1.0** — PostgreSQL + in-memory metadata repos; provider registry; stub managed provider; thin platform services; production/test factories (no silent memory fallback)
+- `@apzhub/search-contracts` **0.2.0** — managed provider lifecycle + configuration validation; health status `available`
+- Migrations `0041_apz_platform_search` / `0042_apz_platform_search_rls` — 16 metadata tables + RLS
+- Audit `scripts/apzsearch-002-search-persistence-audit.mjs` / `pnpm audit:search-persistence`
+- Docs: persistence architecture, registry/configuration/security guides, developer guide, completion report
+- **Verdict:** APZSEARCH-002 COMPLETE — await owner approval before **APZSEARCH-003**. No HTTP/Workbench/engines/indexing/execution.
+
+### Added (APZSEARCH-001 — Platform Search Foundation)
+
+- `@apzhub/search-contracts` **0.1.0** — canonical search models, provider/adapter/service interfaces, query validation, security helpers, diagnostics/configuration
+- Permissions: `search.*`, `search.query`, `search.provider`, `search.diagnostics`, `search.configuration`, `search.audit` (additive with legacy `search.execute|list|read`)
+- Audit `scripts/apzsearch-001-search-foundation-audit.mjs` / `pnpm audit:search-foundation`
+- Foundation harness `testing/search-foundation/apzsearch-001-foundation.test.ts`
+- Docs: architecture, query model, provider abstraction, product adapter guide, security, permissions, developer guide, completion report
+- **Verdict:** APZSEARCH-001 COMPLETE — await owner approval before **APZSEARCH-002**. No HTTP/Workbench/engines/indexing/OCR/AI/Event Bus.
+
+### Added (APZDOCS-006 — Document Vertical Certification & Production Readiness)
+
+- Classification **PRODUCTION_READY_WITH_LIMITATIONS** — architecture frozen at APZDOCS-005
+- Vertical audit `scripts/apzdocs-006-document-vertical-audit.mjs` / `pnpm audit:document-vertical` — **0 violations**
+- Certification harness `testing/document-vertical/apzdocs-006-certification.test.ts`
+- Certification pack: vertical certification, architecture/dependency/boundary, API, workbench, storage, security, coverage, performance, production readiness, consumer guide update, completion report
+- Playwright Document Workbench recorded **LIMITED** (unrelated Next.js slug conflict)
+- **Verdict:** APZDOCS-006 COMPLETE — await owner approval before **APZSEARCH-001**. No uploads/downloads/OCR/AI/search/new features.
+
+### Added (APZDOCS-005 — Document Workbench)
+
+- Product-neutral `/workspace/documents` workbench — Overview through Diagnostics/Metadata
+- Manifests `platform-documents*` (activity bar + sidebar) with `document.*` permissions
+- `PlatformDocumentsView` + `DocumentsWorkspaceRouter` over `document-api` / `createHttpDocumentClient()` only
+- Read-only commands: Refresh, View Metadata/Versions/Relationships/Retention/Audit, Open Folder/Collection, Inspect Diagnostics, Copy IDs
+- Audit script `scripts/apzdocs-005-document-workbench-audit.mjs` — **PASS**
+- Playwright `apzdocs-005-platform-documents-workbench.spec.ts` (mocked HTTP)
+- Docs: Workbench architecture, navigation/views/commands guides, developer guide, completion report
+- **Verdict:** APZDOCS-005 COMPLETE — await owner approval before **APZDOCS-006**. No uploads/downloads/OCR/AI/search engine/editing.
+
+### Added (APZDOCS-004 — Document HTTP API & Typed Client)
+
+- `/api/v1/documents` thin HTTP handlers via PlatformServiceGateway only (no document-core in handlers)
+- OpenAPI tag **Platform Documents** + canonical document DTOs in `APZHUB-Platform-OpenAPI-v1.yaml`
+- `createHttpDocumentClient()` + mock client (`apps/web/lib/documents/`)
+- Storage key / reconciliation hint redaction at HTTP boundary; diagnostics safe metadata only
+- Audit script `scripts/apzdocs-004-document-http-audit.mjs` — **PASS**
+- Docs: HTTP API, OpenAPI Guide, Typed Client Guide, Consumer Integration Guide, Security Guide, completion report
+- **Verdict:** APZDOCS-004 COMPLETE — await owner approval before **APZDOCS-005** (Document Workbench). No Workbench/uploads/downloads/OCR/AI/search engine.
+
+### Added (APZDOCS-003 — Document Platform Services, Gateway & Authorization Integration)
+
+- `@apzhub/document-contracts` **0.3.0** — `DocumentPlatformGateway` facets; additive `document.tag.*` / `folder.*` / `collection.*` / metadata permissions
+- `@apzhub/document-core` **0.3.0** — `assignFolder`, `assignCollection`, `applyRetention`
+- `@apzhub/platform-services` **0.16.0** — `createDocumentPlatformServices` / `ForProduction` / `ForTest`; gateway document facets; RequestPipeline + `documentPlatformOps`; `PLATFORM_DOCUMENT_PERMISSIONS` in catalogue
+- Thin wrappers only — no binary transfer via gateway; no storage provider access from platform services
+- Audit script `scripts/apzdocs-003-platform-services-audit.mjs` — **0 violations**
+- Docs: platform services architecture, gateway/authorization/developer/consumer guides, completion report
+- **Verdict:** APZDOCS-003 COMPLETE — await owner approval before **APZDOCS-004**. No REST/Workbench/OCR/AI/search engine/Event Bus/workers.
+
+### Added (APZDOCS-002 — Production Persistence & Storage Providers)
+
+- `@apzhub/document-contracts` **0.2.0** — content/version/integrity/reconciliation contracts; additive `document.storage.*` / `document.version.*` / `document.reconciliation.*` permissions
+- `@apzhub/document-core` **0.2.0** — storage coordinator, SHA-256 integrity, storage config, `createDocumentPlatformFoundation`
+- `@apzhub/document-persistence` **0.2.0** — PostgreSQL repositories + `createDocumentPersistenceForProduction` / `ForTest`
+- `@apzhub/document-storage` **0.1.0** — filesystem, S3-compatible, memory test providers + production/test factories
+- Drizzle migrations **0039/0040** (`platform_document_version`, `platform_document_storage_object`, RLS) — no binary columns
+- Audit script `scripts/apzdocs-002-persistence-storage-audit.mjs` — **0 violations**
+- Docs: persistence/storage architecture, operator guides, five ADRs, completion report
+- **Verdict:** APZDOCS-002 COMPLETE — await owner approval before **APZDOCS-003**. No REST/UI/OCR/AI/search/Event Bus/workers.
+
+### Added (APZDOCS-001 — Platform Document Foundation)
+
+- `@apzhub/document-contracts` **0.1.0** — canonical models, `document.*` permissions, `PlatformDocumentService`
+- `@apzhub/document-core` **0.1.0** — storage provider interfaces, lifecycle/classification rules, domain service
+- `@apzhub/document-persistence` **0.1.0** — in-memory metadata repositories
+- Drizzle schema + migrations **0037/0038** (`platform_document*`, RLS) — no binary columns
+- Audit script `scripts/apzdocs-001-document-foundation-audit.mjs` — **0 violations**
+- Docs: Architecture, Domain, Storage, Classification, Lifecycle, Permissions, Developer Guide, completion report
+- **Verdict:** APZDOCS-001 COMPLETE — await owner approval before **APZDOCS-002**. No REST/UI/binary/OCR/AI/search.
+
+### Added (APZREPORT-003 — Reporting Vertical Certification)
+
+- Certified Reporting Platform end-to-end — **PRODUCTION_READY_WITH_LIMITATIONS**
+- Architecture frozen at APZREPORT-002 surface (no new functionality)
+- Automated audit: `scripts/apzreport-003-reporting-vertical-audit.mjs` — **0 violations**
+- Certification harness: `testing/reporting-vertical/apzreport-003-certification.test.ts`
+- Docs: Vertical Certification, architecture/dependency/boundary audit, API/workbench/security audits, performance + coverage baselines, production readiness, completion report
+- Consumer onboarding guide updated for Projects / Support / Documents / Analytics / Workflow (document only)
+- **Verdict:** APZREPORT-003 COMPLETE — await owner approval before **APZDOCS-001**. No scheduling/email/AI/binary storage.
+
+### Added (APZREPORT-002 — Platform Reporting HTTP API & Workbench)
+
+- HTTP `/api/v1/reporting` (formats, types, templates, validate, generate, preview, generations) → `gateway.reporting` only
+- OpenAPI tag **Platform Reporting** — validated
+- `createHttpReportingClient()` + mock + workbench `/workspace/reporting`
+- TCMS consumes platform reporting client for template placeholders; `report.view` gating
+- Playwright `apzreport-002-platform-reporting-workbench.spec.ts`
+- Docs: HTTP API, Workbench, Typed Client, Consumer Integration, Security, completion report
+- **Verdict:** APZREPORT-002 COMPLETE — await owner approval before **APZREPORT-003**. No scheduling/email/AI/binary storage.
+
+### Added (APZREPORT-001 — Platform Reporting Foundation)
+
+- New packages `@apzhub/reporting-contracts` **0.1.0** and `@apzhub/reporting-core` **0.1.0**
+- Generic platform reporting engine extracted from APZ TCMS (APZTCMS-024)
+- TCMS remains first consumer via ports + compatibility re-exports — no functional changes
+- Platform permissions `PLATFORM_REPORT_PERMISSIONS`; `@apzhub/platform-services/reporting` re-export
+- Docs: Platform Reporting Architecture, Migration, Developer, Consumer Integration, Package guides + completion report
+- **Verdict:** APZREPORT-001 COMPLETE — await owner approval before **APZREPORT-002**. No REST/Workbench/scheduling/email.
+
+### Added (APZTCMS-024 — Reporting & Document Generation Framework)
+
+- Generic reporting framework in `@apzhub/testing-services` — template engine, 14 built-in templates, 6 output providers
+- Domain `ReportingService` + canonical models in `@apzhub/testing-contracts` **0.11.0**
+- Persistence `testing_report_template` + `testing_report_generation_metadata` — migrations 0035/0036
+- `PlatformServiceGateway.testing.reporting` — full facet (generate/preview/validate/templates/metadata)
+- Permissions `report.*` + `testingReportingOps` authorization map
+- Vitest focused green; scoped coverage **~97.5%** lines on reporting modules
+- Docs: Reporting Architecture, Template Engine, Renderers, Output Providers, Metadata, Developer Guide, completion report
+- **Verdict:** APZTCMS-024 COMPLETE — await owner approval before **APZTCMS-025**. No REST/Workbench/scheduling/email.
+
+### Added (APZTCMS-023 — Executive Dashboards)
+
+- Testing workbench **Executive Dashboards** (`/workspace/testing/executive-dashboards`) — 12 read-only categories
+- Presentation over existing EI typed client / HTTP / gateway only (shared React Query keys)
+- Saved filters, search, product/release, date range, comparison, sort; read-only commands
+- Manifest nav/commands; Vitest focused green; coverage **~96.5%+** lines on new modules
+- Playwright spec `apztcms-023-executive-dashboards.spec.ts` (mock EI HTTP)
+- Docs: Architecture + Executive/Engineering/QA/Release/Developer guides + completion report
+- **Verdict:** APZTCMS-023 COMPLETE — await owner approval before **APZTCMS-024**. No reporting/PDF/AI/new analytics.
+
+### Added (APZTCMS-022 — Engineering Intelligence HTTP API & Workbench)
+
+- HTTP `/api/v1/testing/engineering-intelligence` (score/health/risk/snapshots/trends/benchmarks/baselines/historical) → PlatformServiceGateway only
+- OpenAPI tag **Testing Engineering Intelligence** — `pnpm openapi:validate:platform` valid
+- `createHttpEngineeringIntelligenceClient()` + mock client + workbench Engineering Intelligence section (read-only commands)
+- Manifest nav/commands; `engineering.*` / `analytics.*` UI gating (server authoritative)
+- Vitest focused suites green; new-module coverage **~97.1%** lines
+- Playwright spec added (`apztcms-022-engineering-intelligence-workbench.spec.ts`) — requires app server baseURL
+- Docs: HTTP/Typed Client/Workbench/User/OpenAPI guides + completion report
+- **Verdict:** APZTCMS-022 COMPLETE — await owner approval before **APZTCMS-023**. No new analytics/AI/persistence/adapters.
+
+### Added (APZTCMS-021 — Engineering Intelligence & Executive Quality Analytics)
+
+- Engineering Intelligence domain models + services (quality scoring, health, trends, benchmarks, baselines, immutable historical snapshots)
+- Migrations `0033`/`0034`; permissions `analytics.*` / `engineering.*` / `benchmark.*` / `trend.*` / `quality.score`
+- Gateway facet `testing.engineeringIntelligence` via RequestPipeline
+- Packages: testing-contracts/persistence/services **0.10.0**; platform-service-contracts/services **0.13.0**
+- EI module coverage **96.15%** lines; docs under `docs/architecture/APZHUB-APZ-TCMS-Engineering-Intelligence-*`
+- Domain services only — no REST/UI/AI/adapters
+
+### Added (APZTCMS-020 — GitHub Actions Wave Certification & Reference Adapter Closeout)
+
+- Declared `@apzhub/integration-github-actions` the **official APZHUB CI/CD Reference Adapter**
+- Published mandatory [CI/CD Reference Adapter Standard](./docs/architecture/APZHUB-CICD-Reference-Adapter-Standard.md)
+- Re-audit: architecture/dependency/boundary **0** violations; vertical Vitest **103**; OpenAPI valid
+- Official coverage baselines recorded (adapter **95.62%**, providers **100%**, domain **98.35%**, presentation **97.13%** lines)
+- Final classification: **PRODUCTION_READY_WITH_LIMITATIONS**
+- Programme APZTCMS-015…020 closed
+- **Verdict:** APZTCMS-020 COMPLETE — await owner approval before **APZTCMS-021** (GitLab CI Reference Adapter). No new functionality.
+
+### Added (APZTCMS-019 — GitHub Actions Vertical Certification)
+
+- Certification-only milestone — no new functionality
+- Architecture / dependency / boundary audits: **0 violations**
+- Vertical Vitest **103** passed; OpenAPI valid; adapter/providers/domain/presentation coverage ≥95% lines
+- Classification: **PRODUCTION_READY_WITH_LIMITATIONS**
+- Docs: `docs/architecture/APZHUB-APZ-TCMS-GitHub-Vertical-Certification.md` + `docs/reviews/APZTCMS-019-*`
+- **Verdict:** APZTCMS-019 COMPLETE — await owner approval before **APZTCMS-020**. Playwright live limited (pre-existing Next.js slug conflict).
+
+### Added (APZTCMS-018 — GitHub Actions User Experience)
+
+- HTTP `/api/v1/testing/pipelines` (18 routes) → PlatformServiceGateway only
+- OpenAPI Testing Pipelines paths — `pnpm openapi:validate:platform` valid
+- `createHttpPipelineClient()` + mock client + workbench Pipelines section (views, read-only commands)
+- Manifest nav/commands; `pipeline.*` UI gating (server authoritative)
+- Vitest focused suites green; new-module coverage **~96.6%** lines
+- Playwright spec added (`apztcms-018-pipeline-workbench.spec.ts`) — requires app server baseURL
+- Docs: GitHub User Guide, Pipeline Workbench/HTTP/Client/Architecture guides
+- **Verdict:** APZTCMS-018 COMPLETE — await owner approval before **APZTCMS-019**. No adapter/service/domain changes; no execution.
+
+### Added (APZTCMS-017 — GitHub Actions Platform Service Integration)
+
+- ProviderRegistry / ProviderResolver GitHub Actions providers (`adapter.core` only)
+- Live gateway facets: `pipelineRepositories`, `pipelineWorkflows`, `pipelineRuns`, `pipelineArtifacts`, `pipelineJobs`, `pipelineSteps`, `pipelineSummaries`
+- SoR enhancements: injectable `github_actions` parse adapter; `importFromProvider`; release `consumePipelineSummary`
+- RequestPipeline + existing `pipeline.*` authorization (no new permission namespaces)
+- Packages: contracts **0.12.0**, platform-services **0.12.0**, testing-services **0.9.0**
+- Architecture docs: `docs/architecture/APZHUB-APZ-TCMS-GitHub-Platform-*` / Provider / Gateway / Traceability / Developer
+- New module coverage **100%** lines/functions
+- **Verdict:** APZTCMS-017 COMPLETE — await owner approval before **APZTCMS-018**. No REST, UI, execution, or Event Bus.
+
+### Added (APZTCMS-016 — GitHub Actions Reference Adapter)
+
+- `@apzhub/integration-github-actions` **0.1.0** — read-only GitHub Actions reference adapter (Integration SDK + APZTCMS-015 canonical mapping)
+- PAT authentication; GitHub App / OAuth configuration placeholders only
+- Core services: repositories, workflows, runs, jobs, steps, artifacts, logs metadata, approvals, summary, diagnostics, health, version
+- Parse-only `createGitHubActionsPipelineResultAdapter()` (`kind: github_actions`)
+- Mocked contract tests **32**; coverage **95.62%** lines / **99.31%** functions
+- Docs: `integrations/github-actions/docs/*` + `docs/architecture/APZHUB-APZ-TCMS-GitHub-Actions-Adapter.md`
+- **Verdict:** APZTCMS-016 COMPLETE — await owner approval before **APZTCMS-017**. No Platform Service, Gateway, HTTP, UI, execution, or binary downloads.
+
+### Added (APZTCMS-015 — External CI/CD Integration Framework)
+
+- Vendor-neutral CI/CD integration domain (canonical pipeline models; parse-only adapters; Generic CI)
+- Import/link services (register, synchronise metadata, import run/summary, link artifacts/evidence/certifications/releases) — no pollers/schedulers
+- Postgres persistence migrations **0031** / **0032** + repositories
+- `gateway.testing.pipelines` via RequestPipeline + production authorization
+- Permissions: `pipeline.read`, `pipeline.import`, `pipeline.archive`, `pipeline.audit`, `pipeline.providers` (+ `pipeline.link` / `pipeline.admin`)
+- Packages: contracts **0.9.0**, persistence **0.9.0**, services **0.8.0**, platform **0.11.0**
+- Architecture docs: `docs/architecture/APZHUB-APZ-TCMS-CICD-*` / Canonical Pipeline / Provider / Import / Artifact / Developer guides
+- Domain pipelines coverage **98.28%** lines; **24** focused tests
+- **Verdict:** APZTCMS-015 COMPLETE — await owner approval before **APZTCMS-016** (GitHub Actions Reference Adapter). No live providers, runners, execution, HTTP, UI, Event Bus, or binary artifacts.
+
+### Added (APZTCMS-014 — Release & Quality Governance Domain)
+
+- TCMS-only Release & Quality Governance domain (state machine, human approvals, advisory readiness/risk aggregation)
+- Postgres persistence migrations **0029** / **0030** + repositories
+- `gateway.testing.releaseGovernance` via RequestPipeline + production authorization
+- Permissions: `release.*`, `release.approvals.*`, `release.readiness.*`, `release.audit.*`, `release.risk.*`
+- Packages: contracts **0.8.0**, persistence **0.8.0**, services **0.7.0**, platform **0.10.0**
+- Architecture docs: `docs/architecture/APZHUB-APZ-TCMS-Release-*`
+- Domain coverage **99.38%** lines
+- **Owner note:** supersedes earlier Platform Quality Integration Layer / Product Registry interpretation of APZTCMS-014
+- **Verdict:** APZTCMS-014 COMPLETE — await owner approval before **APZTCMS-015**. No CI/CD, Event Bus, UI, or HTTP.
+
+### Added (APZTCMS-013 — Testing Vertical-Slice Certification & Production Readiness)
+
+- Certified APZ TCMS vertical slice Workbench → Typed Client → HTTP → Gateway → RequestPipeline → Platform Services → Domain → Persistence → PostgreSQL
+- Architecture / dependency / boundary audits: **0 violations**
+- Quality evidence: TCMS Vitest **478** passed; related regression **417** passed; OpenAPI validated; domain typecheck/lint passed
+- Classification: **PRODUCTION_READY_WITH_LIMITATIONS** (Playwright live not run this session; apps/web outside V8 coverage include; explicit product exclusions remain)
+- Certification docs: [Vertical-Slice Certification](./docs/architecture/APZHUB-APZ-TCMS-Vertical-Slice-Certification.md), [Production Readiness](./docs/reviews/APZTCMS-013-production-readiness.md), audits under `docs/reviews/APZTCMS-013-*`, [Completion Report](./docs/sprint/APZTCMS-013-completion-report.md)
+- **Verdict:** APZTCMS-013 COMPLETE — await owner approval before **APZTCMS-014**. No new APIs/UI/domain behaviour in this milestone.
+
+### Added (APZTCMS-012 — Testing HTTP API, OpenAPI & Production Typed Client)
+
+- `/api/v1/testing/**` route surface backed by `handlers/testing.ts` and 69 route files under `apps/web/app/api/v1/testing/`
+- OpenAPI paths for Testing plans, requirements, executions, evidence, automation, coverage, quality, certification, release readiness, traceability, approvals, and dashboard
+- `createHttpTestingClient()` as the default workbench transport outside `NODE_ENV=test`; mock client retained for tests
+- API, HTTP client, architecture boundary, and mock-routed Playwright coverage; focused Vitest **139** passed
+- Architecture docs: [Testing HTTP API](./docs/architecture/APZHUB-Testing-HTTP-API.md), [Testing Typed Client Architecture](./docs/architecture/APZHUB-Testing-Typed-Client-Architecture.md), [Production Client Migration](./docs/architecture/APZHUB-Testing-Workbench-Production-Client-Migration.md), [Security Privacy Guide](./docs/architecture/APZHUB-Testing-API-Security-Privacy-Guide.md), [Certification API Guide](./docs/architecture/APZHUB-Testing-Certification-API-Guide.md)
+- Domain packages unchanged: contracts **0.6.0**, persistence **0.7.0**, services **0.5.0**; platform packages remain **0.8.0**
+- No AI, binary evidence upload, live runners, Event Bus, webhook ingress, notifications, or automatic certification decisions
+- [APZTCMS-012 Completion Report](./docs/sprint/APZTCMS-012-completion-report.md)
+- **Verdict:** APZTCMS-012 COMPLETE — await owner approval before **APZTCMS-013** (Vertical-Slice Certification & Production Readiness). AI Assist deferred after 013 or later.
+
+### Added (APZTCMS-011 — Testing Platform Services & Gateway Integration)
+
+- `@apzhub/platform-service-contracts` **0.8.0** — seventeen testing platform service interfaces + `TestingPlatformGateway`
+- `@apzhub/platform-services` **0.8.0** — `Testing*ServiceImpl`, `gateway.testing.*`, error mapping, readiness indicators, operation authz map
+- Bootstrap: `createTestingPlatformServices`, `ForProduction`, `ForTest`; env **`TESTING_SERVICE_ENABLED`**
+- No silent in-memory production fallback; no silent allow-all authz in production
+- Architecture pack: [Testing Platform Service Architecture](./docs/architecture/APZHUB-Testing-Platform-Service-Architecture.md) · [Contracts](./docs/architecture/APZHUB-Testing-Platform-Service-Contracts.md) · [Gateway Reference](./docs/architecture/APZHUB-Testing-Gateway-Reference.md) · [Permission Catalogue](./docs/architecture/APZHUB-Testing-Permission-Catalogue.md) · [Operation Permission Map](./docs/architecture/APZHUB-Testing-Operation-Permission-Map.md) · [Bootstrap Guide](./docs/architecture/APZHUB-Testing-Bootstrap-Configuration-Guide.md) · [Health Readiness](./docs/architecture/APZHUB-Testing-Health-Readiness-Guide.md) · [Error Model](./docs/architecture/APZHUB-Testing-Error-Model.md) · [Security Tenancy](./docs/architecture/APZHUB-Testing-Security-Tenancy-Guide.md) · [Domain-Platform Boundary](./docs/architecture/APZHUB-Testing-Domain-Platform-Boundary-Guide.md)
+- Quality: **33** targeted platform Vitest tests; testing domain regression **204** green
+- Domain packages **unchanged**: contracts **0.6.0**; persistence **0.7.0**; services **0.5.0**
+- Workbench mock client **unchanged** — no HTTP, Event Bus, AI, binary evidence, or runners
+- [APZTCMS-011 Completion Report](./docs/sprint/APZTCMS-011-completion-report.md)
+- **Verdict:** APZTCMS-011 COMPLETE — await owner approval before **APZTCMS-012** (HTTP API & typed client). AI Assist deferred after 012.
+
+### Added (APZTCMS-010 — Workbench UI)
+
+- Testing workbench **presentation-only** UI — `apps/web/lib/testing` typed client + mock transport; `apps/web/components/testing` views
+- Module **enabled** — parent `testing` + 15 child manifests under `services/testing/manifests/`
+- Shell wiring — `workbench-page.tsx` → `TestingWorkspaceRouter` on `/workspace/testing` routes
+- Architecture pack: [Testing Workbench Architecture](./docs/architecture/APZHUB-APZ-TCMS-Testing-Workbench-Architecture.md) · [Navigation Guide](./docs/architecture/APZHUB-APZ-TCMS-Testing-Navigation-Guide.md) · [View Catalogue](./docs/architecture/APZHUB-APZ-TCMS-Testing-View-Catalogue.md) · [Command Catalogue](./docs/architecture/APZHUB-APZ-TCMS-Testing-Command-Catalogue.md) · [UX Guide](./docs/architecture/APZHUB-APZ-TCMS-Testing-UX-Guide.md)
+- Quality: **117** Vitest tests; Playwright `apztcms-010-testing-workbench.spec.ts`; coverage ~**98.89%** lines (scoped)
+- Domain packages **unchanged**: contracts **0.6.0**; persistence **0.7.0**; services **0.5.0**
+- **No** HTTP APIs, DB access from UI, Event Bus, AI, binary upload, or reporting engine
+- [APZTCMS-010 Completion Report](./docs/sprint/APZTCMS-010-completion-report.md)
+- **Verdict:** APZTCMS-010 COMPLETE — await owner approval before **APZTCMS-011** (AI Assist — advisory)
+
+### Added (APZTCMS-009 — Certification Engine)
+
+- `@apzhub/testing-contracts` **0.6.0** — certification workflow statuses, gate outcomes, certification service contracts; permissions `certification.create|review|approve|reject|override|audit`
+- `@apzhub/testing-persistence` **0.7.0** — migrations `0027`/`0028` (certification engine tables + RLS)
+- `@apzhub/testing-services` **0.5.0** — `createCertificationEngineServices` (lifecycle, gates, recommendations, human approvals, evidence, validation, audit/history)
+- Architecture pack: [Certification Engine Architecture](./docs/architecture/APZHUB-APZ-TCMS-Certification-Engine-Architecture.md) · [Workflow](./docs/architecture/APZHUB-APZ-TCMS-Certification-Workflow.md) · [Gate Evaluation](./docs/architecture/APZHUB-APZ-TCMS-Gate-Evaluation-Model.md) · [Recommendation Model](./docs/architecture/APZHUB-APZ-TCMS-Recommendation-Model.md) · [Approval Model](./docs/architecture/APZHUB-APZ-TCMS-Certification-Approval-Model.md) · [Audit Model](./docs/architecture/APZHUB-APZ-TCMS-Certification-Audit-Model.md)
+- Quality: typecheck/lint **PASS**; **213** tests; certification coverage ~**96.57%** lines
+- **No** HTTP, UI, dashboards, AI recommendations, automatic approval, Event Bus, email, or CI/CD
+- [APZTCMS-009 Completion Report](./docs/sprint/APZTCMS-009-completion-report.md)
+- **Verdict:** APZTCMS-009 COMPLETE — await owner approval before **APZTCMS-010** (Workbench UI)
+
+### Added (APZTCMS-008 — Quality Intelligence Domain)
+
+- `@apzhub/testing-contracts` **0.5.0** — defect/coverage/quality service contracts; permissions `quality.*` / `coverage.*` / `defects.*` / `release.*`
+- `@apzhub/testing-persistence` **0.6.0** — migrations `0025`/`0026` (defect links, quality snapshots, regression analysis; expanded coverage kinds + RLS)
+- `@apzhub/testing-services` **0.4.0** — `createQualityIntelligenceServices` (defects, coverage, intelligence, trends, regression analysis, release/cert readiness, risk aggregation, summaries)
+- Architecture pack: [Quality Intelligence Architecture](./docs/architecture/APZHUB-APZ-TCMS-Quality-Intelligence-Architecture.md) · [Coverage Model](./docs/architecture/APZHUB-APZ-TCMS-Coverage-Model.md) · [Defect Model](./docs/architecture/APZHUB-APZ-TCMS-Defect-Model.md) · [Release Readiness Guide](./docs/architecture/APZHUB-APZ-TCMS-Release-Readiness-Guide.md) · [Regression Analysis Guide](./docs/architecture/APZHUB-APZ-TCMS-Regression-Analysis-Guide.md)
+- Quality: typecheck/lint **PASS**; **195** tests; quality coverage ~**97.61%** lines
+- **No** HTTP, UI, dashboards, external defect sync, Event Bus, or AI
+- [APZTCMS-008 Completion Report](./docs/sprint/APZTCMS-008-completion-report.md)
+- **Verdict:** APZTCMS-008 COMPLETE — await owner approval before **APZTCMS-009** (Certification Engine)
+
+### Added (APZTCMS-007 — Automation Result Ingestion Domain)
+
+- `@apzhub/testing-contracts` **0.4.0** — canonical automation model, adapter interface, ingestion services, permissions (`automation.import|view|history|adapters|coverage`)
+- `@apzhub/testing-persistence` **0.5.0** — migrations `0023`/`0024` (imports, automated executions, runs, history, coverage snapshots + RLS)
+- `@apzhub/testing-services` **0.3.0** — `createAutomationIngestionServices` / `createTestingDomainServices`; adapters: Vitest, Playwright, JUnit XML, Generic JSON, TAP, Allure metadata
+- Architecture pack: [Ingestion Architecture](./docs/architecture/APZHUB-APZ-TCMS-Automation-Ingestion-Architecture.md) · [Adapter Guide](./docs/architecture/APZHUB-APZ-TCMS-Automation-Adapter-Guide.md) · [Canonical Model](./docs/architecture/APZHUB-APZ-TCMS-Canonical-Automation-Model.md) · [Normalization Rules](./docs/architecture/APZHUB-APZ-TCMS-Normalization-Rules.md) · [Coverage Ingestion](./docs/architecture/APZHUB-APZ-TCMS-Coverage-Ingestion-Guide.md)
+- Quality: typecheck/lint **PASS**; **181** tests; automation coverage ~**96.25%** lines
+- **No** HTTP, UI, workers, CI/CD, Event Bus, or framework runners
+- [APZTCMS-007 Completion Report](./docs/sprint/APZTCMS-007-completion-report.md)
+- **Verdict:** APZTCMS-007 COMPLETE — await owner approval before **APZTCMS-008** (Defects, Coverage & Dashboards)
+
+### Added (APZTCMS-006 — Manual Execution & Evidence Domain Engine)
+
+- `@apzhub/testing-contracts` **0.3.0** — expanded execution statuses, evidence lifecycle, `EvidenceStorageProvider` / `ObjectStorageProvider` contracts, multi-stage approval config
+- `@apzhub/testing-persistence` **0.4.0** — migration `0022_apz_tcms_execution_engine.sql` (status CHECKs, evidence lifecycle columns, approval stages, step nest/params)
+- `@apzhub/testing-services` **0.2.0** — formal execution/step/evidence/approval engines; in-memory storage provider; unimplemented object-storage stub; immutable execution history
+- Architecture pack: [Manual Execution Engine](./docs/architecture/APZHUB-APZ-TCMS-Manual-Execution-Engine.md) · [Execution State Machine](./docs/architecture/APZHUB-APZ-TCMS-Execution-State-Machine.md) · [Evidence Architecture](./docs/architecture/APZHUB-APZ-TCMS-Evidence-Architecture.md) · [Evidence Lifecycle](./docs/architecture/APZHUB-APZ-TCMS-Evidence-Lifecycle.md) · [Approval Engine](./docs/architecture/APZHUB-APZ-TCMS-Approval-Engine.md) · [Execution History](./docs/architecture/APZHUB-APZ-TCMS-Execution-History.md)
+- Quality: typecheck/lint **PASS**; **167** tests across testing packages; services coverage ~**95.63%** lines
+- **No** HTTP APIs, Workbench UI, S3/MinIO/Azure SDK, Event Bus, or automation runners
+- [APZTCMS-006 Completion Report](./docs/sprint/APZTCMS-006-completion-report.md)
+- **Verdict:** APZTCMS-006 COMPLETE — await owner approval before **APZTCMS-007** (Automation Result Ingestion)
+
+### Added (APZTCMS-005 — APZ TCMS Production Persistence Completion)
+
+- `@apzhub/testing-persistence` **0.3.0** — first-class PostgreSQL repositories for **all** Manual Testing aggregates; production factory has **no** in-memory fallback
+- Migrations `0020_apz_tcms_persistence_completion.sql` / `0021_apz_tcms_persistence_completion_rls.sql` — plan/suite version tables + approval history (+ RLS)
+- Shared Postgres `generic-crud` + junction sync + manual step-actual dual write; expanded row mappers
+- Architecture pack: [Persistence Completion Guide](./docs/architecture/APZHUB-APZ-TCMS-Persistence-Completion-Guide.md) · [Schema Update Guide](./docs/architecture/APZHUB-APZ-TCMS-Schema-Update-Guide.md) · updated Repository / Schema / Migration / Developer guides
+- Quality: typecheck/lint **PASS**; **108** tests across testing packages (persistence **62**); coverage ~**92.45%** lines overall; Postgres ~**97%**; validation/mappers **100%**
+- **No** HTTP APIs, Workbench UI, evidence blob upload, or Playwright product deps — owner brief: persistence only
+- [APZTCMS-005 Completion Report](./docs/sprint/APZTCMS-005-completion-report.md)
+- **Verdict:** APZTCMS-005 COMPLETE — await owner approval before **APZTCMS-006** (Manual Execution & Evidence delivery)
+
+### Added (APZTCMS-004 — APZ TCMS Manual Test Management / domain services)
+
+- `@apzhub/testing-contracts` **0.2.0** — expanded enums, domain models, named service interfaces
+- `@apzhub/testing-persistence` **0.2.0** — manual execution + case version tables (migrations `0018`/`0019`); in-memory repos; Postgres factory still falls back to in-memory for new aggregates (accepted technical debt)
+- `@apzhub/testing-services` **0.1.0** — twelve domain services via `createManualTestingServices` (incl. `ManualExecutionService`; evidence **metadata** only)
+- Architecture pack: [Manual Testing Domain](./docs/architecture/APZHUB-APZ-TCMS-Manual-Testing-Domain.md) · [Service Architecture](./docs/architecture/APZHUB-APZ-TCMS-Service-Architecture.md) · [Lifecycle Guide](./docs/architecture/APZHUB-APZ-TCMS-Lifecycle-Guide.md) · [State Machines](./docs/architecture/APZHUB-APZ-TCMS-State-Machines.md) · [Validation Rules](./docs/architecture/APZHUB-APZ-TCMS-Validation-Rules.md) · [Traceability Guide](./docs/architecture/APZHUB-APZ-TCMS-Traceability-Guide.md)
+- Quality: typecheck/lint **PASS** (contracts, persistence, services); **74** tests across testing packages; `testing-services` coverage ~**96.45%** lines (lifecycle/validation **100%**; services ~**96%**)
+- **No** HTTP APIs, Workbench UI, evidence blob upload, or Playwright product deps — owner override: APIs/UI deferred vs older backlog wording for 004
+- [APZTCMS-004 Completion Report](./docs/sprint/APZTCMS-004-completion-report.md)
+- **Verdict:** APZTCMS-004 COMPLETE — await owner approval before **APZTCMS-005** (Manual Execution & Evidence — binary pipeline + delivery layer + Postgres completion)
+
+### Added (APZTCMS-003 — APZ TCMS Domain Persistence & Permissions)
+
+- `@apzhub/testing-persistence` **0.1.0** — repositories (in-memory + Postgres), authz asserts, persistence validation, row mappers
+- SoR schema `packages/config/src/db/testing-schema.ts` + migrations `0016_apz_tcms.sql` / `0017_apz_tcms_rls.sql`
+- Platform Authorization namespaces + seed wildcards for `testing` / `certification` / `evidence` / `traceability` / `automation` / `reporting` / `approval` / `dashboard`
+- Architecture pack: [Persistence Architecture](./docs/architecture/APZHUB-APZ-TCMS-Persistence-Architecture.md) · [Schema Guide](./docs/architecture/APZHUB-APZ-TCMS-Schema-Guide.md) · [Repository Guide](./docs/architecture/APZHUB-APZ-TCMS-Repository-Guide.md) · [Authorization Guide](./docs/architecture/APZHUB-APZ-TCMS-Authorization-Guide.md) · [Migration Guide](./docs/architecture/APZHUB-APZ-TCMS-Migration-Guide.md)
+- Quality: typecheck/lint **PASS**; **61** tests (persistence + contracts + foundation + platform-authorization); persistence alone **28**; coverage ~**95.27%** lines/stmts
+- **No** UI, HTTP authoring APIs, full runners, execution-result tables, or Playwright/JUnit/Allure product deps
+- [APZTCMS-003 Completion Report](./docs/sprint/APZTCMS-003-completion-report.md)
+- **Verdict:** APZTCMS-003 COMPLETE — await owner approval before **APZTCMS-004** (Manual Test Management)
+
+### Added (APZTCMS-002 — APZ TCMS Core Platform Foundation)
+
+- `@apzhub/testing-contracts` **0.1.0** — domain models, enums, service interfaces, events, permissions, config
+- `@apzhub/testing-foundation` **0.1.0** — in-memory registries + validation helpers
+- Manifests: `services/testing/service.yaml`, `services/certification/service.yaml`, `services/testing/manifests/testing/module.yaml` (module **disabled**, nav declared)
+- Architecture pack: [Foundation Architecture](./docs/architecture/APZHUB-APZ-TCMS-Foundation-Architecture.md) · [Package Guide](./docs/architecture/APZHUB-APZ-TCMS-Package-Guide.md) · [Service Contracts](./docs/architecture/APZHUB-APZ-TCMS-Service-Contracts.md) · [Domain Contracts](./docs/architecture/APZHUB-APZ-TCMS-Domain-Contracts.md) · [Permission Catalogue](./docs/architecture/APZHUB-APZ-TCMS-Permission-Catalogue.md) · [Module Registration Guide](./docs/architecture/APZHUB-APZ-TCMS-Module-Registration-Guide.md) · [Developer Guide](./docs/architecture/APZHUB-APZ-TCMS-Developer-Guide.md)
+- Quality: typecheck/lint **PASS**; **24** tests (15 contracts + 9 foundation); runtime coverage **100%** lines/stmts/funcs; ~**96%** branches
+- **No** DB/migrations (deferred to APZTCMS-003), UI routes, service implementations, or Playwright/JUnit/Allure package deps
+- [APZTCMS-002 Completion Report](./docs/sprint/APZTCMS-002-completion-report.md)
+- **Verdict:** APZTCMS-002 COMPLETE — await owner approval before **APZTCMS-003** (Domain Persistence & Permissions)
+
+### Added (APZTCMS-001 — APZ TCMS Product Vision, Architecture & Foundation)
+
+- **APZ TCMS** (APZHUB Test & Certification Management System) established as a **native** APZHUB product — orchestrates testing; does **not** fork Kiwi TCMS; does **not** wrap Playwright/Vitest as the product
+- Documentation pack: [Product Vision](./docs/strategy/APZHUB-APZ-TCMS-Product-Vision.md) · [Reference Architecture](./docs/architecture/APZHUB-APZ-TCMS-Reference-Architecture.md) · [Domain Model](./docs/architecture/APZHUB-APZ-TCMS-Domain-Model.md) · [Module Catalogue](./docs/architecture/APZHUB-APZ-TCMS-Module-Catalogue.md) · [UI Architecture](./docs/architecture/APZHUB-APZ-TCMS-UI-Architecture.md) · [Integration Strategy](./docs/architecture/APZHUB-APZ-TCMS-Integration-Strategy.md) · [Technology Decisions](./docs/architecture/APZHUB-APZ-TCMS-Technology-Decisions.md) · [User Personas](./docs/product/APZHUB-APZ-TCMS-User-Personas.md)
+- [ADR-0059](./docs/adr/ADR-0059-apz-tcms-native-product-architecture.md) · [APZTCMS Backlog](./docs/backlog/APZTCMS-Backlog.md) · [Milestone Roadmap](./docs/backlog/APZTCMS-Milestone-Roadmap.md) · [APZTCMS-001 Completion Report](./docs/sprint/APZTCMS-001-completion-report.md)
+- QE strategy / architecture / backlog marked **superseded** for product identity and delivery IDs; Kiwi SoR path remains superseded
+- **Docs only** — no backend, frontend, DB, APIs, runners, or integrations
+- **Verdict:** APZTCMS-001 COMPLETE — await owner approval before **APZTCMS-002** (Core Platform Foundation)
+
+### Added (OSS-100-10 — Integration SDK v1.0 Certification & Release Readiness)
+
+- Formal certification pack under `packages/integration-sdk/docs/`: [SDK-V1-CERTIFICATION](./packages/integration-sdk/docs/SDK-V1-CERTIFICATION.md) · [SDK-API-AUDIT](./packages/integration-sdk/docs/SDK-API-AUDIT.md) · [SDK-SECURITY-AUDIT](./packages/integration-sdk/docs/SDK-SECURITY-AUDIT.md) · [SDK-RELEASE-READINESS](./packages/integration-sdk/docs/SDK-RELEASE-READINESS.md) · [SDK-PUBLIC-API](./packages/integration-sdk/docs/SDK-PUBLIC-API.md) · [SDK-COMPATIBILITY](./packages/integration-sdk/docs/SDK-COMPATIBILITY.md)
+- Architecture index [APZHUB-Integration-SDK-V1-Certification](./docs/architecture/APZHUB-Integration-SDK-V1-Certification.md) · ADR [0058](./docs/adr/ADR-0058-integration-sdk-v1-readiness-limitations.md) · [OSS-100-10 Completion Report](./docs/sprint/OSS-100-10-completion-report.md)
+- Owner numbering: **OSS-100-10 = v1.0 Certification** ✅; provisioning deferred to **100-11+**
+- Package remains `@apzhub/integration-sdk` **0.9.0** — **not** bumped to 1.0.0
+- Quality: typecheck/lint **PASS**; SDK **185** + sdk-v1 **7** = **192**; Plane+Zammad **223**; Wave1/2 + support-vertical + platform-service-contracts **105**; Plane **15** caps / **0** arch fails; Zammad **11** / **0**
+- Re-cert suite: `testing/sdk-v1/integration-sdk-v1-recertification.test.ts`
+- **Outcome:** `PRODUCTION_READY_WITH_LIMITATIONS` · Hard blockers: **none**
+- Limitations: no Event Bus, no webhook ingress, no provisioning, no durable checkpoint/dedup stores, PlaceholderVault only, large root barrel (prefer subpaths)
+- **Recommendation:** Promote to `@apzhub/integration-sdk` **v1.0.0** after owner accepts limitations and API freeze — **do not auto-promote**
+- **Verdict:** OSS-100-10 COMPLETE — await owner for 1.0.0 promotion / Event Bus / ingress / provisioning / next domain adapter
+
+### Added (OSS-100-09 — Adapter Development Harness & Certification Framework)
+
+- `@apzhub/integration-sdk` **v0.9.0** — Adapter Development Harness & Certification (`@apzhub/integration-sdk/harness`)
+- `AdapterHarness`, `AdapterCertification` (Architecture→QualityGates), `AdapterCompliance`, contract suite, boundary validator
+- `AdapterMockHarness`, `scaffoldAdapter` / `REFERENCE_ADAPTER_TEMPLATE`, quality reports, documentation generator, CI helpers
+- Compatibility + performance (measure-only) helpers; aggregating `AdapterValidator`
+- Plane/Zammad remain **0.6.0** — thin wrappers (`create*AdapterHarness`, `certify*WithSdkHarness`, `get*HarnessMetadata`); operations APIs unchanged (ADR-0057)
+- **No** provisioning, Event Bus, HTTP ingress, workers/schedulers, or new domain adapters
+- Backlog renumber: **OSS-100-09 = Harness & Certification** (complete); Provisioning deferred/relocated (was older 09 label)
+- ADR [0057](./docs/adr/ADR-0057-sdk-harness-vs-adapter-operations-certification.md)
+- Docs: [ADAPTER-HARNESS.md](./packages/integration-sdk/docs/ADAPTER-HARNESS.md) · companions · [Architecture index](./docs/architecture/APZHUB-Integration-SDK-Adapter-Harness.md) · [OSS-100-09 Completion Report](./docs/sprint/OSS-100-09-completion-report.md)
+- Tests: SDK **185** passed; Plane+Zammad **223**; Wave1/2/Support/platform regressions **262**; harness coverage ~98.73% stmts/lines · ~88.46% branches · ~99.22% funcs; certification ~99%; compliance/boundary/mock **100%**; typecheck/lint **PASS**
+- **SDK maturity:** Release Candidate (not Production Ready; not v1.0)
+- **Verdict:** OSS-100-09 COMPLETE — await owner approval before SDK v1.0, Platform Event Bus, webhook ingress, provisioning (if deferred), or next business-domain integration
+
+### Added (OSS-100-08 — Webhook & Polling Contracts)
+
+- `@apzhub/integration-sdk` **v0.8.0** — Webhook & polling contracts (`@apzhub/integration-sdk/events`)
+- `IntegrationSourceEvent` envelope, identity precedence, dedup/replay (in-memory test stores), schema versioning `1.0.0`
+- `WebhookManager` / `asWebhookManager`, verification, `WebhookProcessingPipeline`
+- `PollingSource` / `createPollingSourceFromSync`, cursors, checkpoints (propose/ack), `PollingExecutionPipeline`
+- Diagnostics, metrics, capability helpers, mocks, `IntegrationEventEnvelope` bridge
+- Plane/Zammad remain **0.6.0** — thin wrappers (`as*WebhookManager`, `translate*WebhookToSourceEvent`, `create*PollingSource`); public APIs unchanged
+- **No** HTTP ingress, Event Bus publish, workers, or schedulers
+- ADRs [0052](./docs/adr/ADR-0052-canonical-source-event-envelope.md)–[0056](./docs/adr/ADR-0056-adapter-polling-vs-platform-scheduling.md)
+- Docs: [EVENT-ENVELOPE.md](./packages/integration-sdk/docs/EVENT-ENVELOPE.md) · [WEBHOOK-POLLING-MIGRATION.md](./packages/integration-sdk/docs/WEBHOOK-POLLING-MIGRATION.md) · [Architecture index](./docs/architecture/APZHUB-Integration-SDK-Webhook-Polling.md) · [OSS-100-08 Completion Report](./docs/sprint/OSS-100-08-completion-report.md)
+- Tests: SDK **160** passed; Plane+Zammad **217**; Wave1/2/Support/platform regressions **262**; events coverage ~97.77% stmts/lines · ~86.25% branches · ~98.68% funcs; critical paths (webhook pipeline 100%, polling ~99%, cursor/checkpoint/dedup/diagnostics 100%, replay ~98%); architecture-boundary + secret-redaction checks PASS
+- **Verdict:** OSS-100-08 COMPLETE — await owner approval before OSS-100-09+ (provisioning/harness) or platform webhook-ingress / Event Bus
+
+### Added (OSS-100-07 — Mapping Provider Framework)
+
+- `@apzhub/integration-sdk` **v0.7.0** — Mapping Provider Framework (`@apzhub/integration-sdk/mapping`)
+- `MappingProvider`, `MappingRegistry`, `MappingPipeline`, profiles/definitions/context/result/error/diagnostics/capabilities
+- `FieldMapper`, `ValueTransformer`, `RelationshipMapper`, `CollectionMapper`, `EnumMapper`, `IdentityMapper`
+- Plane/Zammad remain **0.6.0** — IdentityMapper/EnumMapper wrappers; `createPlaneMappingRegistry` / `createZammadMappingRegistry` on adapter init; provisional ID format unchanged
+- Platform EntityMappingStore / MappingOrchestrator **UNTOUCHED** (ADR-0049) — SDK mapping ≠ durable ID store
+- Docs: [MAPPING-FRAMEWORK.md](./packages/integration-sdk/docs/MAPPING-FRAMEWORK.md) · [MAPPING-PROFILES.md](./packages/integration-sdk/docs/MAPPING-PROFILES.md) · [MAPPING-REGISTRY.md](./packages/integration-sdk/docs/MAPPING-REGISTRY.md) · [MAPPING-TRANSFORMERS.md](./packages/integration-sdk/docs/MAPPING-TRANSFORMERS.md) · [MAPPING-MIGRATION.md](./packages/integration-sdk/docs/MAPPING-MIGRATION.md) · [Architecture index](./docs/architecture/APZHUB-Integration-SDK-Mapping-Framework.md) · [OSS-100-07 Completion Report](./docs/sprint/OSS-100-07-completion-report.md)
+- Tests: mapping **25** (~98.7% lines); full SDK **123**; Plane+Zammad **211**; combined wave1/2/support + platform mapping **358**; lint + typecheck SDK PASS
+- **Verdict:** OSS-100-07 COMPLETE — await owner approval before OSS-100-08 (Webhook & polling contracts)
+
+### Added (OSS-100-06 — Shared HTTP Transport Layer)
+
+- `@apzhub/integration-sdk` **v0.6.0** — shared HTTP transport (`@apzhub/integration-sdk/transport`)
+- `TransportClient` / `createTransportClient`, policies (retry default disabled, timeout, TLS, compression, redirects, rate-limit stub), optional circuit-breaker interceptor
+- `createHttpIntegrationClient` bridge — Plane/Zammad migrated (`errorLabel` Plane/Zammad); public adapter APIs unchanged; adapter versions remain **0.6.0**
+- `MockTransportClient` / `createMockTransport` for future adapters
+- Docs: [HTTP-TRANSPORT.md](./packages/integration-sdk/docs/HTTP-TRANSPORT.md) · [TRANSPORT-POLICIES.md](./packages/integration-sdk/docs/TRANSPORT-POLICIES.md) · [TRANSPORT-PIPELINE.md](./packages/integration-sdk/docs/TRANSPORT-PIPELINE.md) · [TRANSPORT-DIAGNOSTICS.md](./packages/integration-sdk/docs/TRANSPORT-DIAGNOSTICS.md) · [TRANSPORT-MIGRATION.md](./packages/integration-sdk/docs/TRANSPORT-MIGRATION.md) · [Architecture index](./docs/architecture/APZHUB-Integration-SDK-HTTP-Transport.md) · [OSS-100-06 Completion Report](./docs/sprint/OSS-100-06-completion-report.md)
+- Tests: SDK **99**; Plane+Zammad **211**; transport coverage ~97%+ lines; policies ~95%+
+- Backlog: OSS-100-06 corrected to HTTP Transport (complete); webhook/polling relocated to planned **OSS-100-08**; next **OSS-100-07** Mapping providers
+- **Verdict:** OSS-100-06 COMPLETE — await owner approval before OSS-100-07
+
+### Added (OSS-110-14 — Support Module UI Certification)
+
+- Support Module UI certified **PRODUCTION_READY_WITH_LIMITATIONS** — full UI→`/api/v1`→gateway→services→mapping→provider→adapter chain (mocked; no live Zammad)
+- Audits: architecture PASS; `scripts/support-ui-certification-audit.mjs` PASS 17/17; boundary PASS; vertical dependency PASS 0/36
+- Playwright `oss-110-14-support*`: **23 passed** (functional, a11y axe critical/serious clean, responsive 4 viewports, visual baselines, perf measurement)
+- Vitest Support UI **72 passed**; coverage ~94.9% lines / 87.7% branches / 80.3% functions / 94.9% statements; `support-api` 100% lines
+- Docs: [SUPPORT-UI-CERTIFICATION.md](./docs/architecture/SUPPORT-UI-CERTIFICATION.md) · [OSS-110-14 Completion Report](./docs/sprint/OSS-110-14-completion-report.md) · a11y / responsive / performance / visual companion reports
+- Certification defect corrections (minimal): Input `useId` label association; shell overflow-x; VisibilityBadge contrast
+- **Verdict:** OSS-110-14 COMPLETE — stop; await next domain / platform milestone; **no Event Bus/ingress/binary/notifications/realtime**; no zammad/platform-services/contracts version bumps
+
+### Added (OSS-110-13 — Support Module UI)
+
+- Support workbench UI — Activity Bar **Support**, workspace routes under `/workspace/support`, inbox/detail/create, conversation, internal notes vs customer replies, commands, orgs/groups/users, search, analytics
+- Typed client `apps/web/lib/support/*` → `/api/v1/support-*` only; TanStack Query keys; permission-aware controls
+- Manifests: `services/support/service.yaml` + `services/support/manifests/*`
+- Boundary audit: `scripts/support-ui-boundary-audit.mjs`
+- Docs: [APZHUB-Support-Module-UI.md](./docs/architecture/APZHUB-Support-Module-UI.md) · [Support User Guide](./docs/guides/APZHUB-Support-User-Guide.md) · [OSS-110-13 Completion Report](./docs/sprint/OSS-110-13-completion-report.md)
+- **Verdict:** OSS-110-13 COMPLETE — await owner approval before OSS-110-14; **no Event Bus/ingress/binary/notifications/realtime**; no zammad/platform-services/contracts version bumps
+
+### Added (OSS-110-12 — Support Vertical Slice Certification & Closeout)
+
+- Support vertical **CERTIFIED_WITH_LIMITATIONS** — HTTP → Gateway → Services → Mapping → Zammad providers → adapter (mocked E2E)
+- Audits: architecture, dependency (`scripts/support-vertical-dependency-audit.mjs`)
+- [SUPPORT-VERTICAL-CERTIFICATION.md](./docs/architecture/SUPPORT-VERTICAL-CERTIFICATION.md)
+- [OSS-110-12 Completion Report](./docs/sprint/OSS-110-12-completion-report.md) · [Wave Index](./docs/sprint/OSS-110-12-Wave-Index.md)
+- **Verdict:** OSS-110-12 COMPLETE — await owner approval before OSS-110-13; **no UI/Event Bus/ingress/binary**
+
+### Added (OSS-110-11 — Support HTTP API Surface)
+
+- Platform HTTP `/api/v1/support-*` — Support Requests, articles (notes/replies), organisations, groups, users, search, history, analytics
+- Thin handlers → `PlatformServiceGateway` only; OpenAPI 3.1 Support paths validated
+- [OSS-110-11 Completion Report](./docs/sprint/OSS-110-11-completion-report.md)
+- [Support HTTP API](./docs/architecture/APZHUB-Support-HTTP-API.md)
+- **Verdict:** OSS-110-11 COMPLETE — await owner approval before OSS-110-12; **no UI/Event Bus/ingress/binary**
+
+### Added (OSS-110-10 — Support Platform Services, Providers & Mapping)
+
+- `@apzhub/platform-service-contracts` **0.7.0** — Support service contracts (8 interfaces) + `PLATFORM_SERVICE_IDS`
+- `@apzhub/platform-services` **0.7.0** — Zammad providers, mapping (`sreq`/`sorg`/`sgrp`/`suser`/`sart`), `Support*ServiceImpl`, gateway, `support.*` authz, `createPlatformServicesWithZammad`
+- [OSS-110-10 Completion Report](./docs/sprint/OSS-110-10-completion-report.md)
+- [Support Platform Service Architecture](./docs/architecture/APZHUB-Support-Platform-Service-Architecture.md)
+- **Verdict:** OSS-110-10 COMPLETE — await owner approval before OSS-110-11; **no HTTP/UI/Event Bus/ingress**
+
+### Added (OSS-102-08 — Zammad Wave 2 Certification & Closeout)
+
+- Wave 2 formally **CLOSED** — `@apzhub/integration-zammad` **v0.6.0** **CERTIFIED_WITH_LIMITATIONS**
+- [OSS-102-08 Wave 2 Certification](./docs/sprint/OSS-102-08-Wave2-Certification.md) · [Wave 2 Index](./docs/sprint/OSS-102-08-Wave2-Index.md)
+- Architecture / dependency / capability / mapping audits; mocked E2E + performance baseline
+- **Verdict:** Wave 2 COMPLETE — await owner approval before OSS-110-10; **no PlatformService/HTTP/UI**
+
+### Added (OSS-102-07 — Zammad Operations, Diagnostics & Certification)
+
+- `@apzhub/integration-zammad` **v0.6.0** — `adapter.operations` certification, compatibility, readiness, health, feature detection, operational reports
+- [ZAMMAD-OPERATIONS.md](./integrations/zammad/docs/ZAMMAD-OPERATIONS.md)
+- [OSS-102-07 Completion Report](./docs/sprint/OSS-102-07-completion-report.md)
+- **Verdict:** OSS-102-07 COMPLETE — await owner approval before OSS-102-08; **no PlatformService/HTTP/UI/Event Bus/ingress**
+
+### Added (OSS-102-06 — Zammad Synchronisation, Events & Webhooks)
+
+- `@apzhub/integration-zammad` **v0.5.0** — `adapter.core.synchronisation` / `events` / `webhooks`
+- `@apzhub/platform-service-contracts` **v0.6.0** — Support event resources/types (additive)
+- [ZAMMAD-SYNC.md](./integrations/zammad/docs/ZAMMAD-SYNC.md) · [ZAMMAD-EVENTS.md](./integrations/zammad/docs/ZAMMAD-EVENTS.md) · [ZAMMAD-WEBHOOKS.md](./integrations/zammad/docs/ZAMMAD-WEBHOOKS.md)
+- [OSS-102-06 Completion Report](./docs/sprint/OSS-102-06-completion-report.md)
+- **Verdict:** OSS-102-06 COMPLETE — await owner approval before OSS-102-07; **no PlatformService/HTTP/UI/Event Bus/ingress**
+
+### Added (OSS-102-05 — Zammad Search, History & Support Intelligence)
+
+- `@apzhub/integration-zammad` **v0.4.0** — `adapter.core.search` / `history` / `analytics`
+- `@apzhub/platform-service-contracts` **v0.5.0** — Support search/history/intelligence DTOs
+- [ZAMMAD-SEARCH.md](./integrations/zammad/docs/ZAMMAD-SEARCH.md) · [ZAMMAD-HISTORY.md](./integrations/zammad/docs/ZAMMAD-HISTORY.md) · [ZAMMAD-ANALYTICS.md](./integrations/zammad/docs/ZAMMAD-ANALYTICS.md)
+- [OSS-102-05 Completion Report](./docs/sprint/OSS-102-05-completion-report.md)
+- **Verdict:** OSS-102-05 COMPLETE — await owner approval before OSS-102-06; **no PlatformService/HTTP/UI/sync/webhooks**
+
+### Added (OSS-102-04 — Zammad Articles & Attachment Metadata)
+
+- `@apzhub/integration-zammad` **v0.3.0** — `adapter.core.articles` (notes, replies, metadata)
+- `@apzhub/platform-service-contracts` **v0.4.0** — `SupportArticle*` DTOs
+- [ZAMMAD-ARTICLES.md](./integrations/zammad/docs/ZAMMAD-ARTICLES.md)
+- [OSS-102-04 Completion Report](./docs/sprint/OSS-102-04-completion-report.md)
+- **Verdict:** OSS-102-04 COMPLETE — await owner approval before OSS-102-05; **no binary/PlatformService/HTTP/UI**
+
+### Added (OSS-102-03 — Zammad Core Support Services)
+
+- `@apzhub/integration-zammad` **v0.2.0** — `adapter.core` support / organizations / groups / users
+- `@apzhub/platform-service-contracts` **v0.3.0** — vendor-neutral Support DTOs
+- [ZAMMAD-ADAPTER.md](./integrations/zammad/docs/ZAMMAD-ADAPTER.md) updated
+- [OSS-102-03 Completion Report](./docs/sprint/OSS-102-03-completion-report.md)
+- **Verdict:** OSS-102-03 COMPLETE — await owner approval before OSS-102-04; **no PlatformService/HTTP/UI/articles/sync**
+
+### Added (OSS-102-02 — Zammad Integration Foundation)
+
+- `@apzhub/integration-zammad` v0.1.0 — adapter foundation (lifecycle, diagnostics, REST probe, error mapper, placeholder capabilities)
+- [ZAMMAD-ADAPTER.md](./integrations/zammad/docs/ZAMMAD-ADAPTER.md)
+- [OSS-102-02 Completion Report](./docs/sprint/OSS-102-02-completion-report.md)
+- **Verdict:** OSS-102-02 COMPLETE — await owner approval before OSS-102-03; **no ticket/Platform/HTTP/UI**
+
+### Added (OSS-102-01 — Zammad Discovery & Architecture)
+
+- Zammad/Support discovery pack: architecture, mapping, capability matrix, implementation plan, test plan
+- [OSS-102 Backlog](./docs/backlog/OSS-102-Zammad-Integration-Backlog.md)
+- [OSS-102-01 Completion Report](./docs/sprint/OSS-102-01-completion-report.md)
+- **Verdict:** OSS-102-01 COMPLETE (docs only) — await owner approval before OSS-102-02; **no adapter code**
+
+### Added (OSS-101-10 — Plane Wave 1 Certification & Closeout)
+
+- Wave 1 formally complete — Plane certified as APZHUB **Reference Adapter**
+- [REFERENCE-ADAPTER-STANDARD.md](./docs/architecture/REFERENCE-ADAPTER-STANDARD.md) — mandatory standard for future adapters
+- [OSS-101-10 Wave 1 Certification](./docs/sprint/OSS-101-10-Wave1-Certification.md)
+- Architecture / dependency / capability certification artefacts; mocked E2E + performance baseline suites
+- **Verdict:** OSS-101-10 COMPLETE — architecture frozen for integration work; await owner approval before OSS-102 (Zammad)
+
+### Added (OSS-101-09 — Plane Operations, Diagnostics & Certification)
+
+- `@apzhub/integration-plane` v0.6.0 — capability certification, compatibility matrix, readiness, health classification, feature detection, operational reports
+- Reference adapter patterns documented for future integrations (Zammad, Kimai, Paperless, etc.)
+- [Plane Operations](./integrations/plane/docs/PLANE-OPERATIONS.md) · updated [PLANE-ADAPTER.md](./integrations/plane/docs/PLANE-ADAPTER.md)
+- [OSS-101-09 Completion Report](./docs/sprint/OSS-101-09-completion-report.md)
+- **Verdict:** OSS-101-09 COMPLETE — proceeded to OSS-101-10 with owner approval
+
+### Added (OSS-101-08 — Plane Synchronisation, Events & Production Readiness)
+
+- `@apzhub/integration-plane` v0.5.0 — `PlaneWebhookService`, `PlaneEventService`, `PlaneSyncService`
+- Additive contracts: `IntegrationEventEnvelope`, webhook registration DTOs, `SyncStatus` / sync run types
+- Capability registration: `webhooks`, `events`, `synchronisation`
+- [Plane Sync & Events](./integrations/plane/docs/PLANE-SYNC-EVENTS.md) · updated [PLANE-ADAPTER.md](./integrations/plane/docs/PLANE-ADAPTER.md)
+- [OSS-101-08 Completion Report](./docs/sprint/OSS-101-08-completion-report.md)
+- **Verdict:** OSS-101-08 COMPLETE — await owner approval before OSS-101-09 (or UI / later milestones)
+
+### Added (OSS-101-07 — Plane Collaboration & Project Intelligence)
+
+- `@apzhub/integration-plane` v0.4.0 — `PlaneCommentService`, `PlaneActivityService`, `PlaneWatcherService`, `PlaneAnalyticsService`
+- Additive contracts: Watcher, ProjectStatistics, TaskStatistics, VelocitySnapshot, BurndownSnapshot, CycleProgressSnapshot, filters/inputs
+- Capability registration: `comments`, `activity`, `watchers`, `analytics`
+- [Plane Collaboration & Intelligence](./integrations/plane/docs/PLANE-COLLABORATION-INTELLIGENCE.md) · updated [PLANE-ADAPTER.md](./integrations/plane/docs/PLANE-ADAPTER.md)
+- [OSS-101-07 Completion Report](./docs/sprint/OSS-101-07-completion-report.md)
+- **Verdict:** OSS-101-07 COMPLETE — await owner approval before OSS-101-08 (or UI / later milestones)
+
+### Added (OSS-110-09 — Task HTTP API Surface)
+
+- `/api/v1/tasks` Next.js App Router surface over `PlatformServiceGateway.tasks` (list/create/get/update/archive/transition/assignees/labels/sprint/module/parent)
+- Zod validation, standard API v1 envelope, existing permission mappings via RequestPipeline
+- OpenAPI 3.1 Tasks tag + schemas; `RECONCILIATION_REQUIRED` → HTTP 409
+- [Task HTTP API](./docs/architecture/APZHUB-Task-HTTP-API.md) · updated [Platform HTTP API](./docs/architecture/APZHUB-Platform-HTTP-API.md) · [OpenAPI](./docs/specs/APZHUB-Platform-OpenAPI-v1.yaml)
+- [OSS-110-09 Completion Report](./docs/sprint/OSS-110-09-completion-report.md)
+- **Verdict:** OSS-110-09 COMPLETE — await owner approval before OSS-101-07 (or task UI / later milestones)
+
+### Added (OSS-110-08 — Platform Task Service, Mapping & Gateway Integration)
+
+- `@apzhub/platform-services` v0.6.0 — `TaskServiceImpl`, Plane task provider, `gateway.tasks`
+- `@apzhub/platform-service-contracts` v0.2.0 — additive `archiveTask`
+- Task permissions (`task.*`), operation map, pipeline + production authz
+- Stable APZHUB `task_{32-hex}` IDs via EntityMappingStore
+- [OSS-110-08 Completion Report](./docs/sprint/OSS-110-08-completion-report.md)
+- **Verdict:** OSS-110-08 COMPLETE — await owner approval before OSS-110-09 (task HTTP API)
+
+### Added (OSS-101-06 — Plane Task / Issue Capability)
+
+- `@apzhub/integration-plane` v0.3.0 — `PlaneTaskService` on `adapter.core.tasks`
+- Canonical Task mapping (Plane issues internal); soft-archive; state transition; assignees/labels/cycle/module
+- Additive Task contract fields on `@apzhub/platform-service-contracts`
+- [Plane Task Service](./integrations/plane/docs/PLANE-TASK-SERVICE.md) · updated [PLANE-ADAPTER.md](./integrations/plane/docs/PLANE-ADAPTER.md)
+- [OSS-101-06 Completion Report](./docs/sprint/OSS-101-06-completion-report.md)
+- **Verdict:** OSS-101-06 COMPLETE — await owner approval before OSS-110-08 (TaskServiceImpl / mapping / gateway)
+
+### Added (OSS-110-07 — Platform HTTP API Surface)
+
+- `/api/v1` Next.js App Router surface over `PlatformServiceGateway` (workspaces, projects, teams, health, readiness, openapi)
+- HTTP foundation in `apps/web/lib/api/v1` — envelopes, Zod validation, error mapping, session→`ServiceRequestContext`, gateway bootstrap
+- [ADR-0051](./docs/adr/ADR-0051-platform-http-api-surface.md) · [Platform HTTP API](./docs/architecture/APZHUB-Platform-HTTP-API.md) · [OpenAPI](./docs/specs/APZHUB-Platform-OpenAPI-v1.yaml)
+- [OSS-110-07 Completion Report](./docs/sprint/OSS-110-07-completion-report.md)
+- **Verdict:** OSS-110-07 COMPLETE — await owner approval before OSS-101-06 or TaskServiceImpl
+
+### Added (OSS-110-06 — Production Authorisation & Policy Enforcement)
+
+- `@apzhub/platform-services` v0.5.0 — `ProductionAuthorizationProvider`, production policies, permission catalogue, operation map, authz audit, bootstrap
+- Authz error codes on `@apzhub/platform-service-contracts`
+- [ADR-0050](./docs/adr/ADR-0050-production-authorisation-policy-enforcement.md) · [Platform Service Authorization](./docs/architecture/APZHUB-Platform-Service-Authorization.md) · [Permission Catalogue](./docs/specs/APZHUB-Platform-Permission-Catalogue.md)
+- [OSS-110-06 Completion Report](./docs/sprint/OSS-110-06-completion-report.md)
+- **Verdict:** OSS-110-06 COMPLETE — await owner approval before API routes or OSS-101-06
+
+### Added (OSS-110-05 — Persistent Entity Mapping Store)
+
+- `@apzhub/platform-services` v0.4.0 — `PostgresEntityMappingStore`, mapping bootstrap, shared contract tests
+- `@apzhub/config` migration `0015_platform_entity_mapping` + Drizzle schema
+- [ADR-0049](./docs/adr/ADR-0049-persistent-entity-mapping-store.md) · updated Entity Mapping Specification
+- [OSS-110-05 Completion Report](./docs/sprint/OSS-110-05-completion-report.md)
+- **Verdict:** OSS-110-05 COMPLETE — await owner approval before OSS-110-06 or OSS-101-06
+
+### Added (OSS-110-04 — Platform Execution Layer)
+
+- `@apzhub/platform-services` v0.3.0 — `RequestPipeline`, authorization abstraction, policy/middleware frameworks, gateway pipeline integration
+- Additive `ServiceRequestContext` fields (`organisationId`, `requestId`, `featureFlags`, `impersonation`, `execution`)
+- [Platform Execution Layer](./docs/architecture/APZHUB-Platform-Execution-Layer.md) · [Specification](./docs/specs/APZHUB-Platform-Execution-Layer.md)
+- [OSS-110-04 Completion Report](./docs/sprint/OSS-110-04-completion-report.md)
+- **Verdict:** OSS-110-04 COMPLETE — await owner approval before OSS-110-05 or OSS-101-06
+
+### Added (APZHUB-000 — Project Knowledge Foundation)
+
+- Knowledge Foundation — 22 documents in `docs/foundation/` across 6 layers
+- [AI Context](./docs/foundation/AI-CONTEXT.md) — primary AI session entry point
+- [Project Index](./docs/foundation/PROJECT-INDEX.md) — master navigation
+- [Project Bible](./docs/foundation/PROJECT-BIBLE.md) — programme historical record
+- [Decision Register](./docs/foundation/DECISION-REGISTER.md) · [ADR Catalogue](./docs/foundation/ADR-CATALOGUE.md)
+- [Current State](./docs/foundation/CURRENT-STATE.md) · [Current Milestone](./docs/foundation/CURRENT-MILESTONE.md)
+- [APZHUB-000 Completion Report](./docs/foundation/APZHUB-000-completion-report.md)
+- **Verdict:** APZHUB-000 COMPLETE — await owner approval before OSS-100-03
+
+### Added (OSS-100-05 — AdapterBase & Capability Registration)
+
+- `@apzhub/integration-sdk` v0.5.0 — `IntegrationAdapterBase`, `AdapterContext`, `AdapterFactory`, `CapabilityRegistration`, `MockAdapter`
+- [ADAPTER-FRAMEWORK.md](./packages/integration-sdk/docs/ADAPTER-FRAMEWORK.md)
+- [OSS-100-05 Completion Report](./docs/sprint/OSS-100-05-completion-report.md)
+- **Verdict:** OSS-100-05 COMPLETE — OSS-101-04 gate unlocked; await owner approval
+
+### Added (OSS-100-04 — Error Translation & Observability)
+
+- `@apzhub/integration-sdk` v0.4.0 — `ErrorTranslator`, circuit breaker, metrics contracts, `IntegrationLogger`
+- Subpath exports `/resilience` and `/observability`
+- Expanded runtime diagnostics API
+- [ERROR-TRANSLATION-OBSERVABILITY.md](./packages/integration-sdk/docs/ERROR-TRANSLATION-OBSERVABILITY.md)
+- [OSS-100-04 Completion Report](./docs/sprint/OSS-100-04-completion-report.md)
+- **Verdict:** OSS-100-04 COMPLETE — await owner approval before OSS-100-05
+
+### Added (OSS-100-03 — Health, Diagnostics, Version & Lifecycle)
+
+- `@apzhub/integration-sdk` v0.3.0 — `HealthProvider`, `DiagnosticsProvider`, `VersionProvider`, `IntegrationLifecycleParticipant`
+- Subpath exports `/health` and `/version`
+- `createIntegrationOperationsStack` factory
+- Platform lifecycle bridge types
+- [HEALTH-DIAGNOSTICS-LIFECYCLE.md](./packages/integration-sdk/docs/HEALTH-DIAGNOSTICS-LIFECYCLE.md)
+- [OSS-100-03 Completion Report](./docs/sprint/OSS-100-03-completion-report.md)
+- **Verdict:** OSS-100-03 COMPLETE — await owner approval before OSS-100-04
+
+### Added (OSS-100-02 — Integration Authentication & Connection Foundation)
+
+- `@apzhub/integration-sdk` v0.2.0 — `AuthenticationProvider`, `CredentialResolver`, `ConnectionManager`, `ConnectionRegistry`, `ConnectionLifecycleService`
+- Subpath exports `/auth` and `/connection`
+- Structured SDK error codes and `SdkResult` type
+- In-memory secret provider and connection registry
+- [Package AUTHENTICATION.md](./packages/integration-sdk/docs/AUTHENTICATION.md)
+- [Package CONNECTION-MANAGEMENT.md](./packages/integration-sdk/docs/CONNECTION-MANAGEMENT.md)
+- [Integration Authentication Architecture](./docs/architecture/APZHUB-Integration-Authentication-Architecture.md)
+- [Integration Connection Management Architecture](./docs/architecture/APZHUB-Integration-Connection-Management.md)
+- [OSS-100-02 Completion Report](./docs/sprint/OSS-100-02-completion-report.md)
+- **Verdict:** OSS-100-02 COMPLETE — await owner approval before OSS-100-03
+
+### Added (OSS-100-01 — Integration SDK Package Scaffold)
+
+- `@apzhub/integration-sdk` — core types, interfaces, placeholder client/adapter/diagnostics
+- Subpath exports: `/client`, `/adapter`, `/diagnostics`, `/lifecycle`, `/errors`
+- Smoke tests — `packages/integration-sdk/src/integration-sdk.test.ts`
+- [Package README](./packages/integration-sdk/README.md)
+- [OSS-100-01 Completion Report](./docs/sprint/OSS-100-01-completion-report.md)
+- **Verdict:** OSS-100-01 COMPLETE — await owner approval before OSS-100-02
+
+### Added (OSS-100 — Platform Integration SDK — documentation only)
+
+- [Platform Integration SDK Architecture](./docs/architecture/APZHUB-Platform-Integration-SDK-Architecture.md) — **canonical** SDK for all OSS adapters
+- [Adapter SDK Specification](./docs/specs/APZHUB-Adapter-SDK-Specification.md) — IntegrationClient, AdapterBase, and standard contracts
+- [Base Adapter Pattern](./docs/architecture/APZHUB-Base-Adapter-Pattern.md)
+- [Integration Connection Lifecycle](./docs/architecture/APZHUB-Integration-Connection-Lifecycle.md)
+- [Integration Health & Diagnostics Model](./docs/architecture/APZHUB-Integration-Health-Diagnostics-Model.md)
+- [Integration Error Translation Model](./docs/architecture/APZHUB-Integration-Error-Translation-Model.md)
+- [OSS-100 Backlog](./docs/backlog/OSS-100-Platform-Integration-SDK-Backlog.md) — OSS-100-01…100-10 phases
+- [OSS-100 Completion Report](./docs/sprint/OSS-100-completion-report.md)
+- **Verdict:** OSS-100 COMPLETE — await owner approval before OSS-100-01 or OSS-101-04
+
+### Added (OSS-101-03 — Projects Capability Manifest)
+
+- Projects capability manifests — `project-service`, `projects` module, `plane` integration
+- Eight canonical event manifests under `events/projects/`
+- Manifest validation tests — `projects-manifests.test.ts`
+- [Projects Manifest Notes](./docs/governance/APZHUB-Projects-Manifest-Notes.md)
+- [Projects Capability Registration Notes](./docs/governance/APZHUB-Projects-Capability-Registration-Notes.md)
+- [OSS-101-03 Completion Report](./docs/sprint/OSS-101-03-completion-report.md)
+- **Verdict:** OSS-101-03 COMPLETE — await owner approval before OSS-101-04
+
+### Added (OSS-101-02 — Plane Environment & Configuration)
+
+- Plane configuration keys in `@apzhub/config` governance registry (`PLANE_*`)
+- `getPlaneConfigurationDiagnostics()` — config-only scaffold (no HTTP probe)
+- [Plane Configuration Notes](./docs/governance/APZHUB-Plane-Configuration-Notes.md)
+- [Plane Environment Guide](./docs/governance/APZHUB-Plane-Environment-Guide.md)
+- [Plane Diagnostics Design](./docs/architecture/APZHUB-Plane-Diagnostics-Design.md)
+- [Plane Deployment Notes](./docs/governance/APZHUB-Plane-Deployment-Notes.md)
+- [OSS-101-02 Completion Report](./docs/sprint/OSS-101-02-completion-report.md)
+- **Verdict:** OSS-101-02 COMPLETE — await owner approval before OSS-101-03
+
+### Added (OSS-101-01 — Projects Architecture & ADR — documentation only)
+
+- [Projects Capability Architecture](./docs/architecture/APZHUB-Projects-Capability-Architecture.md) — **canonical** Projects contract
+- [ProjectService Specification](./docs/specs/APZHUB-ProjectService-Specification.md) — vendor-neutral interface
+- [PlaneAdapter Specification](./docs/specs/APZHUB-PlaneAdapter-Specification.md) — translation boundary
+- [Projects Domain Lifecycle Specification](./docs/specs/APZHUB-Projects-Domain-Lifecycle-Specification.md)
+- [Projects Event Mapping Specification](./docs/specs/APZHUB-Projects-Event-Mapping-Specification.md)
+- [ADR-0047 Projects / Plane Integration Architecture](./docs/adr/ADR-0047-projects-plane-integration-architecture.md) — **Accepted**
+- [OSS-101-01 Completion Report](./docs/sprint/OSS-101-01-completion-report.md)
+- **Verdict:** OSS-101-01 COMPLETE — await owner approval before OSS-101-02
+
+### Added (OSS-101 — Projects / Plane Integration Planning — documentation only)
+
+- [Projects Plane Reference Architecture](./docs/architecture/APZHUB-Projects-Plane-Reference-Architecture.md) — Wave 1 Projects capability architecture
+- [Projects Domain Mapping](./docs/architecture/APZHUB-Projects-Domain-Mapping.md) — Plane → APZHUB concept map
+- [Plane Adapter Design](./docs/architecture/APZHUB-Plane-Adapter-Design.md) — PlaneAdapter boundary design
+- [Projects Workbench UX](./docs/specs/APZHUB-Projects-Workbench-UX.md) — native UI specification
+- [OSS-101 Backlog](./docs/backlog/OSS-101-Plane-Integration-Backlog.md) — OSS-101-01…101-10 implementation phases
+- [OSS-101 Readiness Review](./docs/reviews/OSS-101-Readiness-Review.md) — **READY** — planning gate
+- [OSS-101 Completion Report](./docs/sprint/OSS-101-completion-report.md)
+- **Verdict:** OSS-101 COMPLETE — await owner approval before OSS-101-01
+
+### Added (OSS-002 — Capability Abstraction Standard — documentation only)
+
+- [Capability Abstraction Standard](./docs/architecture/APZHUB-Capability-Abstraction-Standard.md) — mandatory pattern for all APZHUB capabilities
+- [Adapter Boundary Pattern](./docs/architecture/APZHUB-Adapter-Boundary-Pattern.md) — OSS adapter contract
+- [OSS vs Native Decision Model](./docs/architecture/APZHUB-OSS-vs-Native-Capability-Decision-Model.md) — build / integrate / buy / defer framework
+- [Quality Engineering Platform Strategy](./docs/strategy/APZHUB-Quality-Engineering-Platform-Strategy.md) — Wave 5 native capability (replaces Kiwi TCMS)
+- [Quality Engineering Reference Architecture](./docs/architecture/APZHUB-Quality-Engineering-Reference-Architecture.md)
+- [Quality Engineering Backlog](./docs/backlog/APZHUB-Quality-Engineering-Backlog.md) — QE-001–QE-015 phased plan
+- [OSS-002 Completion Report](./docs/sprint/OSS-002-completion-report.md)
+- **Amended:** OSS-001 Wave 5 — Kiwi TCMS → native Quality Engineering Platform
+- **Verdict:** OSS-002 COMPLETE — await owner approval before OSS-101 or QE-001
+
+### Added (OSS-001 — OSS Integration Master Plan — documentation only)
+
+- [OSS Integration Master Plan](./docs/strategy/OSS-001-APZHUB-OSS-Integration-Master-Plan.md) — definitive OSS integration strategy
+- [OSS Integration Master Architecture](./docs/architecture/APZHUB-OSS-Integration-Master-Architecture.md)
+- [OSS Product Integration Catalog](./docs/architecture/APZHUB-OSS-Product-Integration-Catalog.md)
+- [OSS Wave Roadmap](./docs/strategy/APZHUB-OSS-Wave-Roadmap.md)
+- [OSS Integration Standards](./docs/governance/APZHUB-OSS-Integration-Standards.md)
+- [OSS Capability Mapping](./docs/architecture/APZHUB-OSS-Capability-Mapping.md)
+- [OSS Integration Risk Register](./docs/governance/APZHUB-OSS-Integration-Risk-Register.md)
+- [OSS-001 Engineering Estimates](./docs/strategy/OSS-001-Engineering-Estimates.md)
+- [OSS-001 Acceptance Criteria](./docs/strategy/OSS-001-Acceptance-Criteria.md)
+- [OSS-001 Completion Report](./docs/sprint/OSS-001-completion-report.md)
+- **Verdict:** OSS-001 COMPLETE — await owner approval before OSS-101
+
+- `CspPolicyService` and `CspViolationService` in `@apzhub/platform-security`
+- `POST /api/platform/v1/security/csp-report` on web and law-platform
+- Production enforced CSP; development Report-Only
+- [PCv2-01 CSP Audit](./docs/security/PCv2-01-CSP-Audit.md)
+- [CSP Violation Reporting](./docs/security/CSP-Violation-Reporting.md)
+- [PRH-002 Completion Report](./docs/sprint/PRH-002-completion-report.md)
+- **Verdict:** PRH-002 COMPLETE — OBS-PC01-03 closed in production; await owner approval before PRH-003
+
+### Added (PRH-001 — Architecture Consolidation & ADR-0046)
+
+- `@apzhub/platform-bootstrap` — canonical runtime bootstrap and operational diagnostics loader
+- [ADR-0046 Production Readiness Bootstrap Consolidation](./docs/adr/ADR-0046-production-readiness-bootstrap-consolidation.md)
+- [Platform Bootstrap Architecture](./docs/architecture/APZHUB-Platform-Bootstrap-Architecture.md)
+- [PRH-001 Completion Report](./docs/sprint/PRH-001-completion-report.md)
+- **Verdict:** PRH-001 COMPLETE — TD-M16-C01 closed; await owner approval before PRH-002
+- **Not in scope:** CSP enforcement, rate limiting (deferred PRH-002+)
+
+### Added (PRH-000 — Production Readiness Acceptance — governance only)
+
+- [PRH-000 Owner Acceptance](./docs/reviews/PRH-000-Owner-Acceptance.md) — **APPROVED** — PCv2-01 implementation authorised
+- [PRH-000 Implementation Baseline](./docs/reviews/PRH-000-Implementation-Baseline.md) — frozen architecture, backlog, acceptance criteria
+- [PRH-000 Sprint Baseline](./docs/releases/PRH-000-Sprint-Baseline.md) — DoD, production-ready definition, success metrics
+- [PRH-000 Completion Report](./docs/sprint/PRH-000-completion-report.md)
+- **Verdict:** PRH-000 COMPLETE — PCv2-01 implementation authorised; await owner instruction before PRH-001
+
+### Added (PCv2-01 — Production Readiness Planning — documentation only)
+
+- [PCv2-01 Sprint Guide](./docs/sprint/PCv2-01-Production-Readiness-Sprint-Guide.md) — execution blueprint for Production Readiness & Operational Hardening
+- [PCv2-01 Backlog](./docs/backlog/PCv2-01-Backlog.md) — PRH-001–PRH-018 engineering stories
+- [PCv2-01 Production Readiness Architecture](./docs/architecture/PCv2-01-Production-Readiness-Architecture.md) — target production architecture
+- [PCv2-01 Readiness Review](./docs/reviews/PCv2-01-Readiness-Review.md) — **READY WITH OBSERVATIONS**
+- [PCv2-01 Planning Completion Report](./docs/sprint/PCv2-01-planning-completion-report.md)
+- **Verdict:** PCv2-01 planning COMPLETE — **await owner approval** before PRH-001 implementation
+- **Explicitly out of scope:** workers, gateway service, Vault, SOC/SIEM, HA, OSS integrations (planning dependencies only)
+
+### Added (PCS-001 — Platform Core Strategy — documentation only)
+
+- [Platform Core Strategy](./docs/strategy/APZHUB-Platform-Core-Strategy.md) — **master strategy** for APZHUB long-term direction
+- [Platform Core v2 Strategy](./docs/strategy/APZHUB-Platform-Core-v2-Strategy.md)
+- [Product Portfolio Strategy](./docs/strategy/APZHUB-Product-Portfolio-Strategy.md)
+- [OSS Integration Strategy](./docs/strategy/APZHUB-OSS-Integration-Strategy.md)
+- [Build vs Buy Strategy](./docs/strategy/APZHUB-Build-vs-Buy-Strategy.md)
+- [Commercial Roadmap](./docs/strategy/APZHUB-Commercial-Roadmap.md)
+- [Engineering Roadmap](./docs/strategy/APZHUB-Engineering-Roadmap.md)
+- [AI Strategy](./docs/strategy/APZHUB-AI-Strategy.md)
+- [PCS-001 Strategy Review](./docs/reviews/PCS-001-Strategy-Review.md)
+- [PCS-001 completion report](./docs/sprint/PCS-001-completion-report.md)
+- **Verdict:** PCS-001 COMPLETE — **owner approved 2026-07-08**; PCv2-01 authorized; sequencing PCv2-01 → PCv2-02 → M17 → OSS
+
+### Owner approval (PCS-001 — 2026-07-08)
+
+- [PCS-001 Owner Approval](./docs/strategy/PCS-001-owner-approval.md) — strategy ratified; sequencing amended
+- **PCv2-01 Production SaaS Hardening** — authorized to proceed
+- OSS Wave order: Plane → Kimai → Paperless → Zammad → **Quality Engineering (native)** → Metabase → n8n → Observability → Security
+- **Not approved:** Financial Engine extraction, Banking, Exchange, new verticals
+
+### Added (PC-001 — Platform Core Certification — documentation only)
+
+- [Platform Core Certification](./docs/reviews/APZHUB-Platform-Core-Certification.md) — **CERTIFIED WITH OBSERVATIONS**
+- [Platform Core Reference Architecture](./docs/architecture/APZHUB-Platform-Core-Reference-Architecture.md) — canonical Platform Core architecture
+- [Platform Core Capability Reference](./docs/architecture/APZHUB-Platform-Core-Capability-Reference.md) — per-capability catalogue
+- [Platform Core Commercial Assessment](./docs/reviews/APZHUB-Platform-Core-Commercial-Assessment.md)
+- [Platform Core v1.0 Release Review](./docs/releases/APZHUB-Platform-Core-v1.0.md) — no tag
+- [Platform Core v2 Roadmap](./docs/roadmap/APZHUB-Platform-Core-v2-Roadmap.md)
+- [PC-001 completion report](./docs/sprint/PC-001-completion-report.md)
+- **Verdict:** Platform Core Phase 1 certified — await owner approval before Financial Engine, Banking, or new products
+
+### Added (M8-06 — Platform Security & Operational Resilience)
+
+- `@apzhub/platform-security` — environment validation, API guard, rate limiting, resilience probes, consolidated diagnostics
+- Platform APIs: `/security`, `/security/diagnostics`, `/system/health`, `/system/readiness`, `/system/liveness`
+- Operations Console: Security and Resilience sections; consolidated Diagnostics
+- [Platform Security Reference Architecture](./docs/architecture/APZHUB-Platform-Security-Reference-Architecture.md)
+- [Operational Resilience Architecture](./docs/architecture/APZHUB-Operational-Resilience-Architecture.md)
+- [ADR-0045 Platform Security & Operational Resilience](./docs/adr/ADR-0045-platform-security-operational-resilience.md)
+- [M8-06 completion report](./docs/sprint/M8-06-completion-report.md)
+- **Verdict:** M8-06 COMPLETE — Platform Core Phase 1 delivered
+
+### Added (M8-05 — Governance & Provisioning Framework)
+
+- `@apzhub/platform-governance` — governance, provisioning, capabilities, feature flags (foundation)
+- PostgreSQL migration `0014_platform_governance`
+- Platform APIs: `/governance`, `/provisioning`, `/feature-flags`, `/capabilities`
+- [ADR-0044 Platform Governance & Provisioning](./docs/adr/ADR-0044-platform-governance-provisioning-framework.md)
+- [M8-05 completion report](./docs/sprint/M8-05-completion-report.md)
+
+### Added (M8-04 — Personalisation Framework)
+
+- `@apzhub/platform-personalisation` — preferences, favorites, recent, workbench layout
+- PostgreSQL migration `0013_platform_personalisation`
+- [ADR-0043 Platform Personalisation Framework](./docs/adr/ADR-0043-platform-personalisation-framework.md)
+- [M8-04 completion report](./docs/sprint/M8-04-completion-report.md)
+
+## [Unreleased — prior] — M8-01 Identity & Tenant Foundation + M16 Platform Review + LAW-015 Trust Accounting (Closed)
+
+### Added (M8-03 — Platform Operations Console)
+
+- Platform Operations Workbench workspace — 14 sidebar sections (Dashboard through Feature Flags placeholder)
+- Manifest-driven navigation under `platform-administration` activity bar (renamed Platform Operations)
+- `OperationsWorkspaceRouter` — section pages using existing Card/table/diagnostics patterns
+- Platform APIs: operations summary, configuration, users, modules, services, products, provisioning, audit
+- [Platform Operations Reference Architecture](./docs/architecture/APZHUB-Platform-Operations-Reference-Architecture.md)
+- [Platform Operations Console Guide](./docs/developer/APZHUB-Platform-Operations-Console-Guide.md)
+- [Platform Operations UX Guide](./docs/governance/APZHUB-Platform-Operations-UX-Guide.md)
+- [ADR-0042 Platform Operations Console](./docs/adr/ADR-0042-platform-operations-console.md)
+- [M8-03 completion report](./docs/sprint/M8-03-completion-report.md)
+- **Verdict:** M8-03 COMPLETE — await owner approval before M8-04 (User Preferences)
+
+### Added (M8-02 — Authorization Framework / RBAC Phase 1)
+
+- `@apzhub/platform-authorization` — AuthorizationService, PermissionService, RoleService, RoleAssignmentService, EffectivePermissionService
+- PostgreSQL migration `0012_platform_authorization` — roles, permissions, assignments, role-permission grants
+- Session authorization bridge — `resolveSessionAuthorization()` for Workbench and Law API
+- Platform APIs: `/api/platform/v1/roles`, `/permissions`, `/assignments`, `/authorization/diagnostics`
+- Law Platform + apps/web hydration wired to Platform AuthorizationService
+- Platform events: `platform.authorization.role.*`, `platform.authorization.assignment.*`
+- [Authorization Reference Architecture](./docs/architecture/APZHUB-Platform-Authorization-Reference-Architecture.md)
+- [ADR-0041 Platform Authorization RBAC Phase 1](./docs/adr/ADR-0041-platform-authorization-rbac-phase-1.md)
+- [M8-02 completion report](./docs/sprint/M8-02-completion-report.md)
+- **Verdict:** M8-02 COMPLETE — await owner approval before M8-03 (Administration Console)
+
+### Added (M8-01 — Identity & Tenant Foundation)
+
+- `@apzhub/platform-identity` — tenant management service, membership repositories, session tenant resolver
+- PostgreSQL migration `0011_platform_identity` — `platform_tenant`, `platform_user_tenant`, `user.active_tenant_id`
+- Auth session tenant enrichment — `getValidatedSession()` returns `tenantId` and `tenantSource`
+- First-login tenant provisioning via `provisionPlatformTenantForUser()`
+- Platform API routes: `GET /api/platform/v1/tenants`, `GET /api/platform/v1/identity/diagnostics`
+- Law persistence session-claim tenant binding — closes TD-P02 primary path
+- [Platform Identity Reference Architecture](./docs/architecture/APZHUB-Platform-Identity-Reference-Architecture.md)
+- [Platform Tenant Architecture](./docs/architecture/APZHUB-Platform-Tenant-Architecture.md)
+- [ADR-0040 Platform Tenant Foundation](./docs/adr/ADR-0040-platform-tenant-foundation.md)
+- [M8-01 completion report](./docs/sprint/M8-01-completion-report.md)
+- **Verdict:** M8-01 COMPLETE — await owner approval before M8-02 (RBAC Framework)
+- **Quality gates:** lint, typecheck, build, 1851 tests, coverage ≥80%
 
 ### Added (M16 — Platform Stabilisation & Engineering Review — documentation only)
 

@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: support-search
+name: Search
+version: 0.1.0
+kind: module
+
+metadata:
+  category: support
+  description: Support — Cross-entity search within the Support domain.
+
+dependencies:
+  platform: []
+  services:
+    - support-service
+
+module:
+  category: support
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: support
+    parent: support
+    label: Search
+    icon: search
+    route: /workspace/support/search
+    order: 50
+    permission: support.search.execute
+  view:
+    title: Search
+    workspace: support
+    route: /workspace/support/search
+    permission: support.search.execute

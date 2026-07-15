@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-documents-audit
+name: Audit
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Documents — Audit sidebar (APZDOCS-005).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: documents
+    parent: platform-documents
+    label: Audit
+    icon: scroll-text
+    route: /workspace/documents/audit
+    order: 90
+    permission: document.audit
+  view:
+    title: Audit
+    workspace: documents
+    route: /workspace/documents/audit
+    permission: document.audit

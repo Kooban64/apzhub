@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-documents-diagnostics
+name: Diagnostics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Documents — Diagnostics sidebar (APZDOCS-005).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: documents
+    parent: platform-documents
+    label: Diagnostics
+    icon: activity
+    route: /workspace/documents/diagnostics
+    order: 100
+    permission: document.read
+  view:
+    title: Diagnostics
+    workspace: documents
+    route: /workspace/documents/diagnostics
+    permission: document.read

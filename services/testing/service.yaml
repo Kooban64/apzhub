@@ -1,0 +1,100 @@
+manifestSchemaVersion: "1.0"
+id: testing-service
+name: Testing Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: testing
+  description: APZ TCMS Testing capability service — requirements, plans, suites, cases, executions, evidence metadata, defects, coverage, and reporting orchestration (APZTCMS-002 contracts).
+  contractPackage: "@apzhub/testing-contracts"
+  contractVersion: "0.6.0"
+  implementationPackage: "@apzhub/platform-services"
+  implementationVersion: "0.8.0"
+  owner: APZHUB
+  tags:
+    - testing
+    - tcms
+    - quality
+    - certification
+
+dependencies:
+  platform: []
+  integrations: []
+
+integrations: []
+
+service:
+  category: testing
+
+permissions:
+  - testing.view
+  - testing.requirements.list
+  - testing.requirements.read
+  - testing.requirements.create
+  - testing.requirements.update
+  - testing.plans.list
+  - testing.plans.read
+  - testing.plans.create
+  - testing.plans.update
+  - testing.suites.list
+  - testing.suites.read
+  - testing.suites.create
+  - testing.suites.update
+  - testing.cases.list
+  - testing.cases.read
+  - testing.cases.create
+  - testing.cases.update
+  - testing.executions.list
+  - testing.executions.read
+  - testing.executions.create
+  - testing.executions.execute
+  - testing.admin
+  - evidence.list
+  - evidence.read
+  - evidence.register
+  - evidence.admin
+  - traceability.list
+  - traceability.read
+  - traceability.link
+  - traceability.admin
+  - automation.jobs.list
+  - automation.jobs.read
+  - automation.jobs.enqueue
+  - automation.jobs.cancel
+  - automation.admin
+  - reporting.view
+  - reporting.generate
+  - reporting.admin
+  - dashboard.view
+  - dashboard.refresh
+  - dashboard.admin
+
+events:
+  publishes:
+    - test_case.created
+    - test_case.updated
+    - test_plan.created
+    - test_plan.updated
+    - test_suite.created
+    - test_run.started
+    - test_run.completed
+    - test_result.recorded
+    - evidence.attached
+    - defect_link.created
+    - automation_job.queued
+    - automation_job.completed
+    - coverage.recomputed
+
+health:
+  enabled: true
+
+documentation:
+  governanceCapabilityKey: testing
+  engineBranding: hidden
+  product: APZ TCMS
+  milestone: APZTCMS-011
+
+tests:
+  manifest: true
+  contract: true

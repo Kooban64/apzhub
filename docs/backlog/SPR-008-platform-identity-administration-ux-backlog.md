@@ -2,8 +2,8 @@
 
 > **Sprint:** SPR-008 — Platform Identity, Administration & User Experience  
 > **Milestone:** 8  
-> **Mode:** Planning complete — **await owner approval before IAUX-001**  
-> **Authority:** [SPR-008 sprint guide](../sprint/SPR-008-platform-identity-administration-ux.md) · [Document 007](../007-identity-authentication-authorisation-rbac-architecture.md) · [Document 023](../023-user-preferences-personalisation-workspace-experience-framework.md) · [Platform v5.0](../releases/APZHUB-Platform-v5.0.md)
+> **Mode:** M8-03 complete — **await owner approval before M8-04 (User Preferences)**  
+> **Authority:** [SPR-008 sprint guide](../sprint/SPR-008-platform-identity-administration-ux.md) · [M8-01 completion report](../sprint/M8-01-completion-report.md) · [Document 007](../007-identity-authentication-authorisation-rbac-architecture.md)
 
 ---
 

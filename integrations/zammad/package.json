@@ -1,0 +1,19 @@
+{
+  "name": "@apzhub/integration-zammad",
+  "version": "0.6.0",
+  "private": true,
+  "type": "module",
+  "description": "Zammad CE integration adapter — operations, diagnostics & certification (OSS-102-07)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts integrations/zammad"
+  },
+  "dependencies": {
+    "@apzhub/integration-sdk": "workspace:*",
+    "@apzhub/platform-service-contracts": "workspace:*"
+  }
+}

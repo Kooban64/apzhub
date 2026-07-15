@@ -78,6 +78,237 @@
       "when": 1782725231004,
       "tag": "0010_law_trust_rls",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1782725231005,
+      "tag": "0011_platform_identity",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1782725231006,
+      "tag": "0012_platform_authorization",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1782725231007,
+      "tag": "0013_platform_personalisation",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1782725231008,
+      "tag": "0014_platform_governance",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1782725231009,
+      "tag": "0015_platform_entity_mapping",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1782725231010,
+      "tag": "0016_apz_tcms",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1782725231011,
+      "tag": "0017_apz_tcms_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1782725231012,
+      "tag": "0018_apz_tcms_manual_execution",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1782725231013,
+      "tag": "0019_apz_tcms_manual_execution_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1782725231014,
+      "tag": "0020_apz_tcms_persistence_completion",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1782725231015,
+      "tag": "0021_apz_tcms_persistence_completion_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1783844400000,
+      "tag": "0022_apz_tcms_execution_engine",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1783848000000,
+      "tag": "0023_apz_tcms_automation_ingestion",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1783848000001,
+      "tag": "0024_apz_tcms_automation_ingestion_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1783900000000,
+      "tag": "0025_apz_tcms_quality_intelligence",
+      "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1783900000001,
+      "tag": "0026_apz_tcms_quality_intelligence_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "7",
+      "when": 1783904000000,
+      "tag": "0027_apz_tcms_certification_engine",
+      "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1783904000001,
+      "tag": "0028_apz_tcms_certification_engine_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1783910000000,
+      "tag": "0029_apz_tcms_release_governance",
+      "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1783910000001,
+      "tag": "0030_apz_tcms_release_governance_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1783915000000,
+      "tag": "0031_apz_tcms_cicd_integration",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1783915000001,
+      "tag": "0032_apz_tcms_cicd_integration_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1783920000000,
+      "tag": "0033_apz_tcms_engineering_intelligence",
+      "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "7",
+      "when": 1783920000001,
+      "tag": "0034_apz_tcms_engineering_intelligence_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 35,
+      "version": "7",
+      "when": 1783925000000,
+      "tag": "0035_apz_tcms_reporting",
+      "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1783925000001,
+      "tag": "0036_apz_tcms_reporting_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1783960000000,
+      "tag": "0037_apz_platform_document",
+      "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1783960000001,
+      "tag": "0038_apz_platform_document_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 39,
+      "version": "7",
+      "when": 1783968000000,
+      "tag": "0039_apz_platform_document_storage",
+      "breakpoints": true
+    },
+    {
+      "idx": 40,
+      "version": "7",
+      "when": 1783968000001,
+      "tag": "0040_apz_platform_document_storage_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "7",
+      "when": 1783972000000,
+      "tag": "0041_apz_platform_search",
+      "breakpoints": true
+    },
+    {
+      "idx": 42,
+      "version": "7",
+      "when": 1783972000001,
+      "tag": "0042_apz_platform_search_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 43,
+      "version": "7",
+      "when": 1783979000000,
+      "tag": "0043_apz_platform_search_management",
+      "breakpoints": true
     }
   ]
 }

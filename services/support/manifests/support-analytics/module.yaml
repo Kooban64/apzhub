@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: support-analytics
+name: Analytics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: support
+  description: Support — Read-only intelligence metrics and distribution views.
+
+dependencies:
+  platform: []
+  services:
+    - support-service
+
+module:
+  category: support
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: support
+    parent: support
+    label: Analytics
+    icon: bar-chart-3
+    route: /workspace/support/analytics
+    order: 60
+    permission: support.analytics.read
+  view:
+    title: Analytics
+    workspace: support
+    route: /workspace/support/analytics
+    permission: support.analytics.read

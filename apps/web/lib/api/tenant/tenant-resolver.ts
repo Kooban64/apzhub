@@ -33,8 +33,13 @@ function resolveTenantFromSession(
     return undefined;
   }
 
-  const user = session.user as { tenantId?: string };
-  return sanitizeTenantId(user.tenantId);
+  const enriched = session as { tenantId?: string };
+  if (enriched.tenantId) {
+    return sanitizeTenantId(enriched.tenantId);
+  }
+
+  const user = session.user as { tenantId?: string; activeTenantId?: string };
+  return sanitizeTenantId(user.activeTenantId ?? user.tenantId);
 }
 
 function resolveTenantClaim(request: NextRequest | undefined): string | undefined {

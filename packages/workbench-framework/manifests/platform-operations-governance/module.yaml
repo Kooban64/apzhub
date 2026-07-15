@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-operations-governance
+name: Governance
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Operations — Governance (M8-05).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-administration
+    label: Governance
+    icon: shield-check
+    route: /workspace/administration/governance
+    order: 38
+    permission: platform.nav.administration.view
+  view:
+    title: Governance
+    workspace: administration
+    route: /workspace/administration/governance
+    permission: platform.nav.administration.view

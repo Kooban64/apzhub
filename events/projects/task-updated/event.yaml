@@ -1,0 +1,23 @@
+manifestSchemaVersion: "1.0"
+id: projects-task-updated
+name: Projects Task Updated
+version: 0.1.0
+kind: event
+
+metadata:
+  category: productivity
+  description: Emitted when an APZHUB Task is updated.
+
+event:
+  category: business
+  publisher: project-service
+  subscribers:
+    - search:projects.search
+    - activity:projects.activity
+  payload:
+    taskId: string
+    projectId: string
+    changedFields: string
+
+documentation:
+  eventKey: projects.task.updated

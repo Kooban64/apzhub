@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-search-overview
+name: Overview
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Search — Overview sidebar (APZSEARCH-007).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: search
+    parent: platform-search
+    label: Overview
+    icon: layout-dashboard
+    route: /workspace/search/overview
+    order: 10
+    permission: search.query.execute
+  view:
+    title: Overview
+    workspace: search
+    route: /workspace/search/overview
+    permission: search.query.execute

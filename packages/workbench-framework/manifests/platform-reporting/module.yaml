@@ -1,0 +1,40 @@
+manifestSchemaVersion: "1.0"
+id: platform-reporting
+name: Reporting
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Reporting workspace — templates, generations, and formats (APZREPORT-002).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: reporting
+    icon: file-bar-chart
+    route: /workspace/reporting
+    order: 55
+    permission: report.view
+  view:
+    title: Reporting
+    workspace: reporting
+    route: /workspace/reporting
+    default: true
+    permission: report.view
+  actions:
+    - id: platform.reporting.navigate
+      label: Go to Reporting
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: report.view
+      palette: true
+      group: Navigation
+      icon: file-bar-chart
+      order: 55
+      description: Reveal the Reporting navigation item in the workbench shell.

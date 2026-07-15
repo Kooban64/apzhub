@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-search-diagnostics
+name: Diagnostics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Search — Diagnostics sidebar (APZSEARCH-007).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: search
+    parent: platform-search
+    label: Diagnostics
+    icon: activity
+    route: /workspace/search/diagnostics
+    order: 100
+    permission: search.execution.diagnostics
+  view:
+    title: Diagnostics
+    workspace: search
+    route: /workspace/search/diagnostics
+    permission: search.execution.diagnostics

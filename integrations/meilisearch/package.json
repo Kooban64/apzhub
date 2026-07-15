@@ -1,0 +1,20 @@
+{
+  "name": "@apzhub/integration-meilisearch",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Meilisearch reference search adapter for APZHUB (APZSEARCH-005)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts integrations/meilisearch"
+  },
+  "dependencies": {
+    "@apzhub/integration-sdk": "workspace:*",
+    "@apzhub/integration-search-sdk": "workspace:*",
+    "@apzhub/search-contracts": "workspace:*"
+  }
+}

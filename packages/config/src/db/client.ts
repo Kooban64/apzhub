@@ -3,11 +3,27 @@ import pg from "pg";
 
 import { getDatabaseUrl } from "../env";
 import { legalSchema } from "./legal-schema";
+import { platformAuthorizationSchema } from "./platform-authorization-schema";
+import { platformIdentitySchema } from "./platform-identity-schema";
+import { platformPersonalisationSchema } from "./platform-personalisation-schema";
+import { platformGovernanceSchema } from "./platform-governance-schema";
+import { platformEntityMappingSchema } from "./platform-entity-mapping-schema";
+import { platformDocumentSchema } from "./platform-document-schema";
+import { platformSearchSchema } from "./platform-search-schema";
+import { testingSchema } from "./testing-schema";
 import * as schema from "./schema";
 
 const fullSchema = {
   ...schema.schema,
   ...legalSchema,
+  ...platformIdentitySchema,
+  ...platformAuthorizationSchema,
+  ...platformPersonalisationSchema,
+  ...platformGovernanceSchema,
+  ...platformEntityMappingSchema,
+  ...platformDocumentSchema,
+  ...platformSearchSchema,
+  ...testingSchema,
 };
 
 const globalForDb = globalThis as unknown as {

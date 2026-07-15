@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-operations-provisioning
+name: Provisioning
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Operations — Provisioning (M8-03).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-administration
+    label: Provisioning
+    icon: workflow
+    route: /workspace/administration/provisioning
+    order: 80
+    permission: platform.nav.administration.view
+  view:
+    title: Provisioning
+    workspace: administration
+    route: /workspace/administration/provisioning
+    permission: platform.nav.administration.view

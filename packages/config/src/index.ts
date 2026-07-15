@@ -1,3 +1,11 @@
-export { getDatabaseUrl, getEnv, isDevRegistrationAllowed } from "./env";
-export type { Env } from "./env";
+export {
+  getDatabaseUrl,
+  getEnv,
+  isDevRegistrationAllowed,
+  ensureEnvironmentValid,
+  getConfigurationDiagnostics,
+  validatePlatformEnvironment,
+  resetEnvCache,
+} from "./env";
+export type { Env, PlatformEnv } from "./env";
 export * from "./db/index";

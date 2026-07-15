@@ -1,0 +1,19 @@
+{
+  "name": "@apzhub/integration-github-actions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "GitHub Actions read-only reference adapter for APZ TCMS CI/CD (APZTCMS-016)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts integrations/github-actions"
+  },
+  "dependencies": {
+    "@apzhub/integration-sdk": "workspace:*",
+    "@apzhub/testing-contracts": "workspace:*"
+  }
+}

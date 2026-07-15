@@ -24,7 +24,7 @@ import {
 } from "@apzhub/knowledge-discovery-framework";
 import { Runtime } from "@apzhub/platform-runtime/server";
 import { createWorkbenchPermissionAdapter } from "@apzhub/workbench-framework";
-import { createAuthPermissionContextFromUser } from "@apzhub/workbench-framework/server";
+import { createLawPlatformAuthPermissionContext } from "./session-permission-context";
 
 import { loadActionRegistryDto } from "./command-hydration";
 import { registerLawClientKnowledge } from "./register-law-client-knowledge";
@@ -143,8 +143,9 @@ export async function loadKnowledgeSourceRegistryDto(): Promise<KnowledgeSourceR
 
   const unfilteredDto = mapKnowledgeSourceRegistryDto(hydrated.registry);
   const session = await getValidatedSession(await headers());
+  const authContext = await createLawPlatformAuthPermissionContext(session);
   const permissionAdapter = createWorkbenchPermissionAdapter({
-    authContext: createAuthPermissionContextFromUser(session?.user),
+    authContext,
     nodeEnv: process.env.NODE_ENV,
     allowDevRegistration: isDevRegistrationAllowed(),
   });
