@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-registrations
+name: Registrations
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Registrations sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Registrations
+    icon: clipboard-list
+    route: /workspace/administration/registrations
+    order: 50
+    permission: admin.registration
+  view:
+    title: Registrations
+    workspace: administration
+    route: /workspace/administration/registrations
+    permission: admin.registration

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-alert-definitions
+name: Alert Definitions
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Alert Definitions sidebar (Operations Metadata) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Alert Definitions
+    icon: bell
+    route: /workspace/observability/alert-definitions
+    order: 140
+    permission: observe.alerts
+  view:
+    title: Alert Definitions
+    workspace: observability
+    route: /workspace/observability/alert-definitions
+    permission: observe.alerts

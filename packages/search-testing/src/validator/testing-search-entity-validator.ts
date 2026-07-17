@@ -55,8 +55,14 @@ const MANDATORY_BY_TYPE: Readonly<
   benchmark: ["metricKey"],
   historical_snapshot: ["periodKind", "immutable"],
   risk_summary: ["overallLevel", "overallScore"],
+  quality_summary: ["computedAt", "openDefectCount"],
+  quality_coverage_summary: ["coveredCount", "totalCount", "kind"],
+  defect_summary: ["openCount"],
   report_metadata: ["reportType", "outputFormat", "templateId"],
   report_template: ["reportType", "name"],
+  pipeline: ["key", "status", "providerKind"],
+  pipeline_run: ["status", "pipelineId", "providerKind"],
+  pipeline_import: ["status", "providerKind", "externalRunRef"],
 };
 
 export class TestingSearchEntityValidator {

@@ -97,6 +97,12 @@ import { PlatformReportingServiceImpl } from "./reporting/platform-reporting-ser
 import type { DocumentPlatformServicesBundle } from "./documents";
 import type { SearchPlatformServicesBundle } from "./search";
 import type { SearchExecutionServicesBundle } from "./search-execution";
+import type { WorkflowPlatformServicesBundle } from "./workflow";
+import type { NotificationPlatformServicesBundle } from "./notification";
+import type { ConfigurationPlatformServicesBundle } from "./configuration";
+import type { AdministrationPlatformServicesBundle } from "./administration";
+import type { IdentityPlatformServicesBundle } from "./identity";
+import type { ObservePlatformServicesBundle } from "./observe";
 
 export interface PlatformServicesBundle {
   readonly registry: ProviderRegistry;
@@ -123,6 +129,12 @@ export interface PlatformServicesBundle {
   readonly documents?: DocumentPlatformServicesBundle;
   readonly searchPlatform?: SearchPlatformServicesBundle;
   readonly searchExecution?: SearchExecutionServicesBundle;
+  readonly workflow?: WorkflowPlatformServicesBundle;
+  readonly notification?: NotificationPlatformServicesBundle;
+  readonly configuration?: ConfigurationPlatformServicesBundle;
+  readonly administration?: AdministrationPlatformServicesBundle;
+  readonly identity?: IdentityPlatformServicesBundle;
+  readonly observe?: ObservePlatformServicesBundle;
   readonly gateway: PlatformServiceGateway;
 }
 
@@ -148,6 +160,12 @@ export interface CreatePlatformServicesInput {
   readonly documents?: DocumentPlatformServicesBundle;
   readonly searchPlatform?: SearchPlatformServicesBundle;
   readonly searchExecution?: SearchExecutionServicesBundle;
+  readonly workflow?: WorkflowPlatformServicesBundle;
+  readonly notification?: NotificationPlatformServicesBundle;
+  readonly configuration?: ConfigurationPlatformServicesBundle;
+  readonly administration?: AdministrationPlatformServicesBundle;
+  readonly identity?: IdentityPlatformServicesBundle;
+  readonly observe?: ObservePlatformServicesBundle;
 }
 
 export interface CreatePlatformServicesFromEnvInput
@@ -325,6 +343,12 @@ export function createPlatformServices(
   const documentsApi = input.documents?.wrapWithPipeline(pipeline);
   const searchPlatformApi = input.searchPlatform?.wrapWithPipeline(pipeline);
   const searchExecutionApi = input.searchExecution?.wrapWithPipeline(pipeline);
+  const workflowApi = input.workflow?.wrapWithPipeline(pipeline);
+  const notificationApi = input.notification?.wrapWithPipeline(pipeline);
+  const configurationApi = input.configuration?.wrapWithPipeline(pipeline);
+  const administrationApi = input.administration?.wrapWithPipeline(pipeline);
+  const identityApi = input.identity?.wrapWithPipeline(pipeline);
+  const observeApi = input.observe?.wrapWithPipeline(pipeline);
 
   const gateway = new PlatformServiceGateway({
     workspace,
@@ -360,6 +384,12 @@ export function createPlatformServices(
     documentsApi,
     searchPlatformApi,
     searchExecutionApi,
+    workflowApi,
+    notificationApi,
+    configurationApi,
+    administrationApi,
+    identityApi,
+    observeApi,
     platformQualityApi,
     platformReleaseApi,
     platformGovernanceApi,
@@ -394,6 +424,12 @@ export function createPlatformServices(
     documents: input.documents,
     searchPlatform: input.searchPlatform,
     searchExecution: input.searchExecution,
+    workflow: input.workflow,
+    notification: input.notification,
+    configuration: input.configuration,
+    administration: input.administration,
+    identity: input.identity,
+    observe: input.observe,
     gateway,
   };
 }
@@ -478,4 +514,4 @@ export type { RegisterZammadProvidersInput } from "../providers/zammad/register-
 export { registerGitHubActionsProviders } from "../providers/github-actions/register-github-actions-providers";
 export type { RegisterGitHubActionsProvidersInput } from "../providers/github-actions/register-github-actions-providers";
 
-export const PLATFORM_SERVICES_VERSION = "0.18.0";
+export const PLATFORM_SERVICES_VERSION = "0.24.0";

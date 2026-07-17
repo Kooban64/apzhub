@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-configuration-configurations
+name: Configurations
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Configuration — Configurations sidebar (APZCONFIG-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: configuration
+    parent: platform-configuration
+    label: Configurations
+    icon: list
+    route: /workspace/configuration/configurations
+    order: 20
+    permission: configuration.read
+  view:
+    title: Configurations
+    workspace: configuration
+    route: /workspace/configuration/configurations
+    permission: configuration.read

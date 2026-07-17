@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-overview
+name: Overview
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Overview sidebar (Health) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Overview
+    icon: layout-dashboard
+    route: /workspace/observability/overview
+    order: 10
+    permission: observe.read
+  view:
+    title: Overview
+    workspace: observability
+    route: /workspace/observability/overview
+    permission: observe.read

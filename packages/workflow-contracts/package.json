@@ -1,0 +1,16 @@
+{
+  "name": "@apzhub/workflow-contracts",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Workflow contracts — canonical models, gateway facets, engine surface, permissions (APZWORKFLOW-007)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/workflow-contracts"
+  },
+  "dependencies": {}
+}

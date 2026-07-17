@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflows-library
+name: Workflows
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Workflows — Workflow library sidebar (APZWORKFLOW-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflows
+    parent: platform-workflows
+    label: Workflows
+    icon: git-branch
+    route: /workspace/workflows/workflows
+    order: 20
+    permission: workflow.view
+  view:
+    title: Workflows
+    workspace: workflows
+    route: /workspace/workflows/workflows
+    permission: workflow.view

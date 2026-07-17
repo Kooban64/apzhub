@@ -1,7 +1,7 @@
 # APZHUB Testing (APZ TCMS) Search Publication Adapter Architecture
 
 **Milestone:** APZSEARCH-013  
-**Package:** `@apzhub/search-testing` **0.1.0**  
+**Package:** `@apzhub/search-testing` **0.1.1**  
 **Date:** 2026-07-15
 
 ---
@@ -10,7 +10,7 @@
 
 Enable APZ TCMS to publish **metadata-only** canonical searchable entities into `@apzhub/search-integration`.
 
-APZ TCMS remains System of Record for manual testing, automation ingestion, certification, release governance, engineering intelligence, report metadata, pipeline metadata, quality intelligence, execution history, approvals, and evidence **metadata**.
+APZ TCMS remains System of Record for manual testing, automation ingestion, certification, release governance, engineering intelligence, quality intelligence, report metadata, pipeline metadata, execution history, approvals, and evidence **metadata**.
 
 Search remains a derived discovery capability.
 
@@ -29,8 +29,8 @@ TCMS never:
 ```text
 APZ TCMS Platform Services / `@apzhub/testing-contracts`
         ↓
-TCMS Search Publication Adapter (@apzhub/search-testing)
-        ↓
+TestingSearchPublisher (orchestrator)
+        ↓ specialised domain publishers + domain mappers
 Search Integration Framework (@apzhub/search-integration)
         ↓
 (future) Search Platform → Provider Resolver → Meilisearch Adapter → Meilisearch
@@ -38,9 +38,11 @@ Search Integration Framework (@apzhub/search-integration)
 
 This milestone terminates at the Search Integration Framework.
 
+See [Testing Search Publisher Architecture](./APZHUB-Testing-Search-Publisher-Architecture.md) for specialised publisher details.
+
 ---
 
-## Entity types (34)
+## Entity types (40)
 
 | Area | Types |
 | ---- | ----- |
@@ -48,16 +50,20 @@ This milestone terminates at the Search Integration Framework.
 | Automation | `automation_run`, `automation_suite`, `imported_result`, `coverage_summary` |
 | Certification | `certification`, `certification_gate`, `certification_approval`, `certification_evidence`, `certification_decision` |
 | Release | `release`, `release_candidate`, `release_package`, `release_scope`, `release_approval`, `release_decision`, `release_manifest`, `release_summary` |
-| Engineering | `engineering_snapshot`, `engineering_trend`, `benchmark`, `historical_snapshot`, `risk_summary` |
+| Engineering | `engineering_snapshot` (Engineering Score), `engineering_trend`, `benchmark`, `historical_snapshot`, `risk_summary` |
+| Quality | `quality_summary`, `quality_coverage_summary`, `defect_summary` |
 | Reporting metadata | `report_metadata`, `report_template` |
+| Pipeline metadata | `pipeline`, `pipeline_run`, `pipeline_import` |
 
-Local catalogue may exceed the framework’s declarative product contract (`test_case` / `test_run` / `requirement` / `defect`) — same pattern as Documents.
+Quality types are **additional** to automation `coverage_summary` and manual `defect`. Pipeline types are metadata-only (never logs/artifacts/secrets).
+
+Local catalogue may exceed the framework’s declarative product contract — same pattern as Documents.
 
 ---
 
 ## Components
 
-`TestingSearchPublisher` · `TestingSearchEntityMapper` · `TestingSearchEntityValidator` · `TestingSearchPublicationContext` · `TestingSearchLifecycle` · `TestingSearchDiagnostics` · `TestingSearchMetrics` · `TestingSearchLogger` · `TestingSearchErrorTranslator` · `createTestingSearchPublisher()` / `*ForTest` · explicit lifecycle hooks.
+`TestingSearchPublisher` (orchestrator) · specialised publishers (`ManualTestingPublisher`, `AutomationPublisher`, `CertificationPublisher`, `ReleasePublisher`, `EngineeringIntelligencePublisher`, `QualityPublisher`, `ReportingMetadataPublisher`, `PipelinePublisher`) · domain mappers + facade `TestingSearchEntityMapper` · `TestingSearchEntityValidator` · `TestingSearchPublicationContext` · `TestingSearchLifecycle` · diagnostics / metrics / logger / error translator · `createTestingSearchPublisher()` / `*ForTest` · explicit lifecycle hooks.
 
 ---
 

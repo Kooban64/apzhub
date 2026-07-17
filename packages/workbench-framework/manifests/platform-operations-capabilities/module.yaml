@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Capabilities
     icon: boxes
-    route: /workspace/administration/capabilities
+    route: /workspace/operations/capabilities
     order: 39
     permission: platform.nav.administration.view
   view:
     title: Capabilities
-    workspace: administration
-    route: /workspace/administration/capabilities
+    workspace: operations
+    route: /workspace/operations/capabilities
     permission: platform.nav.administration.view

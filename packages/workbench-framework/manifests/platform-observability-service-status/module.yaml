@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-service-status
+name: Service Status
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Service Status sidebar (Health) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Service Status
+    icon: radio
+    route: /workspace/observability/service-status
+    order: 60
+    permission: observe.health
+  view:
+    title: Service Status
+    workspace: observability
+    route: /workspace/observability/service-status
+    permission: observe.health

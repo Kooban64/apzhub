@@ -9,7 +9,7 @@ import {
 
 describe("platform service contracts registry", () => {
   it("exports the expected contract version", () => {
-    expect(PLATFORM_SERVICE_CONTRACTS_VERSION).toBe("0.13.0");
+    expect(PLATFORM_SERVICE_CONTRACTS_VERSION).toBe("0.16.0");
   });
 
   it("registers all platform service ids", () => {

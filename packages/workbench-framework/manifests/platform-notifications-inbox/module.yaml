@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-notifications-inbox
+name: Notifications
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Notifications — Notifications sidebar (APZNOTIFY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: notifications
+    parent: platform-notifications
+    label: Notifications
+    icon: inbox
+    route: /workspace/notifications/notifications
+    order: 20
+    permission: notification.read
+  view:
+    title: Notifications
+    workspace: notifications
+    route: /workspace/notifications/notifications
+    permission: notification.read

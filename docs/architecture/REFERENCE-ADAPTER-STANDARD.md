@@ -6,7 +6,8 @@
 > **Status:** Mandatory — Wave 1 certified (OSS-101-10)  
 > **Last updated:** 2026-07-10  
 > **Reference implementation:** `@apzhub/integration-plane` (Plane) — vendor-specific; this document is vendor-neutral  
-> **CI/CD reference:** `@apzhub/integration-github-actions` — see [CI/CD Reference Adapter Standard](./APZHUB-CICD-Reference-Adapter-Standard.md) (APZTCMS-020)
+> **CI/CD reference:** `@apzhub/integration-github-actions` — see [CI/CD Reference Adapter Standard](./APZHUB-CICD-Reference-Adapter-Standard.md) (APZTCMS-020)  
+> **Workflow Engine reference:** `@apzhub/integration-n8n` — see [Workflow Engine Reference Adapter Standard](./APZHUB-Workflow-Engine-Reference-Adapter-Standard.md) (APZWORKFLOW-011)
 
 ---
 

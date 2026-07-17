@@ -5,8 +5,8 @@
 > **Authoritative references:** [004 — Technology Stack](../004-technology-stack-repository-standards-development-environment.md) · [Platform Package Review](../reviews/APZHUB-Platform-Package-Review.md)  
 > **Related documents:** [REPOSITORY-GUIDE](./REPOSITORY-GUIDE.md) · [PLATFORM-CAPABILITY-CATALOGUE](./PLATFORM-CAPABILITY-CATALOGUE.md)  
 > **Reading order:** With Repository Guide  
-> **Last updated:** 2026-07-14  
-> **Current status:** Active — APZSEARCH-013 complete — `@apzhub/search-testing` **0.1.0**; Projects/Support/Documents/Testing adapters; Search Platform **PRODUCTION_READY_WITH_LIMITATIONS**
+> **Last updated:** 2026-07-17  
+> **Current status:** Active — APZOBSERVE-006 Observability programme **closed/frozen** (**PRODUCTION_READY_WITH_LIMITATIONS** retained; stop before APZMETRICS-001); Identity/Administration/Configuration/Notification SoR waves **frozen**; APZSEARCH-015 publication ecosystem **PRODUCTION_READY_WITH_LIMITATIONS**; Projects/Support/Documents/Reporting **0.1.0**; Testing **0.1.1**
 
 ---
 
@@ -89,16 +89,36 @@
 | `@apzhub/document-core` | `packages/document-core/` | 0.3.0 | Domain + coordinator + assignFolder/collection/retention (APZDOCS-003) |
 | `@apzhub/document-persistence` | `packages/document-persistence/` | 0.2.0 | PostgreSQL + in-memory document repos (APZDOCS-002) |
 | `@apzhub/document-storage` | `packages/document-storage/` | 0.1.0 | Filesystem + S3-compatible + memory providers (APZDOCS-002) |
+| `@apzhub/workflow-contracts` | `packages/workflow-contracts/` | 0.3.0 | Platform Workflow + engine gateway contracts (APZWORKFLOW-007/011 frozen) |
+| `@apzhub/workflow-core` | `packages/workflow-core/` | 0.1.1 | Domain service + lifecycle + validation (APZWORKFLOW-002) |
+| `@apzhub/workflow-persistence` | `packages/workflow-persistence/` | 0.1.1 | In-memory + Postgres workflow repos; migrations 0044–0045 |
+| `@apzhub/observe-contracts` | `packages/observe-contracts/` | 0.2.0 | Platform Observability SoR + gateway facets — **frozen** (APZOBSERVE-006) |
+| `@apzhub/observe-core` | `packages/observe-core/` | 0.2.0 | Domain service + validation + lifecycle — **frozen** (APZOBSERVE-006) |
+| `@apzhub/observe-persistence` | `packages/observe-persistence/` | 0.1.0 | In-memory + Postgres observe repos; migrations 0054–0055 — **frozen** (APZOBSERVE-006) |
+| `@apzhub/identity-contracts` | `packages/identity-contracts/` | 0.2.0 | Platform Identity Administration SoR + gateway facets (APZIDENTITY-002) |
+| `@apzhub/identity-core` | `packages/identity-core/` | 0.2.0 | Domain service + ports + validation + lifecycle (APZIDENTITY-002) |
+| `@apzhub/identity-persistence` | `packages/identity-persistence/` | 0.1.0 | In-memory + Postgres IAM repos; migrations 0052–0053 (APZIDENTITY-001) |
+| `@apzhub/admin-contracts` | `packages/admin-contracts/` | 0.2.0 | Platform Administration SoR + gateway facets — **frozen** (APZADMIN-006) |
+| `@apzhub/admin-core` | `packages/admin-core/` | 0.2.0 | Domain service + lifecycle + validation — **frozen** (APZADMIN-006) |
+| `@apzhub/admin-persistence` | `packages/admin-persistence/` | 0.1.0 | In-memory + Postgres administration repos; migrations 0050–0051 — **frozen** (APZADMIN-006) |
+| `@apzhub/configuration-contracts` | `packages/configuration-contracts/` | 0.2.0 | Platform Configuration SoR + gateway facets — **frozen** (APZCONFIG-006) |
+| `@apzhub/configuration-core` | `packages/configuration-core/` | 0.2.0 | Domain service + lifecycle + validation metadata — **frozen** (APZCONFIG-006) |
+| `@apzhub/configuration-persistence` | `packages/configuration-persistence/` | 0.1.0 | In-memory + Postgres configuration repos; migrations 0048–0049 — **frozen** (APZCONFIG-006) |
+| `@apzhub/notification-contracts` | `packages/notification-contracts/` | 0.2.0 | Platform Notification SoR contracts — **frozen** (APZNOTIFY-006) |
+| `@apzhub/notification-core` | `packages/notification-core/` | 0.2.0 | Domain service + lifecycle + validation — **frozen** (APZNOTIFY-006) |
+| `@apzhub/notification-persistence` | `packages/notification-persistence/` | 0.1.0 | In-memory + Postgres notification repos; migrations 0046–0047 — **frozen** (APZNOTIFY-006) |
 | `@apzhub/search-contracts` | `packages/search-contracts/` | 0.4.0 | Platform Search contracts + management + execution (APZSEARCH-006/008) |
 | `@apzhub/search-persistence` | `packages/search-persistence/` | 0.2.0 | Search metadata persistence + full management thin services (APZSEARCH-003) |
 | `@apzhub/search-integration` | `packages/search-integration/` | 0.1.0 | Cross-Product Search Integration Framework (APZSEARCH-009) |
 | `@apzhub/search-projects` | `packages/search-projects/` | 0.1.0 | Projects Search Publication Adapter (APZSEARCH-010) |
 | `@apzhub/search-support` | `packages/search-support/` | 0.1.0 | Support Search Publication Adapter (APZSEARCH-011) |
 | `@apzhub/search-documents` | `packages/search-documents/` | 0.1.0 | Documents Search Publication Adapter (APZSEARCH-012) |
-| `@apzhub/search-testing` | `packages/search-testing/` | 0.1.0 | APZ TCMS Search Publication Adapter (APZSEARCH-013) |
+| `@apzhub/search-testing` | `packages/search-testing/` | 0.1.1 | APZ TCMS Search Publication Adapter (APZSEARCH-013) |
+| `@apzhub/search-reporting` | `packages/search-reporting/` | 0.1.0 | Reporting Search Publication Adapter (APZSEARCH-014) |
 | `@apzhub/integration-search-sdk` | `packages/integration-search-sdk/` | 0.1.0 | Search Integration SDK — vendor-neutral adapter foundation (APZSEARCH-004) |
 | `@apzhub/integration-meilisearch` | `integrations/meilisearch/` | 0.1.0 | Meilisearch Reference Search Adapter (APZSEARCH-005) |
-| `@apzhub/platform-services` | `packages/platform-services/` | 0.18.0 | Gateway + document + Search management/execution (APZSEARCH-006/008) |
+| `@apzhub/integration-n8n` | `integrations/n8n/` | 0.1.0 | Workflow Engine Reference Adapter — n8n (APZWORKFLOW-011; frozen; read-only) |
+| `@apzhub/platform-services` | `packages/platform-services/` | 0.24.0 | Gateway + Observability (`gateway.observe.*`) + Identity + Administration + Configuration + Notification + Workflow + Search + Documents |
 
 ## Product packages
 

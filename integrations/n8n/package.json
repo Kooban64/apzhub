@@ -1,0 +1,18 @@
+{
+  "name": "@apzhub/integration-n8n",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "n8n read-only Workflow Engine Reference Adapter for APZHUB (APZWORKFLOW-006)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts integrations/n8n"
+  },
+  "dependencies": {
+    "@apzhub/integration-sdk": "workspace:*"
+  }
+}

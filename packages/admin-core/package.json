@@ -1,0 +1,18 @@
+{
+  "name": "@apzhub/admin-core",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Administration core — lifecycle, validation, domain service (APZADMIN-002)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/admin-core"
+  },
+  "dependencies": {
+    "@apzhub/admin-contracts": "workspace:*"
+  }
+}

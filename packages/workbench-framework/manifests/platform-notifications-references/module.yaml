@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-notifications-references
+name: References
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Notifications — References sidebar (APZNOTIFY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: notifications
+    parent: platform-notifications
+    label: References
+    icon: link
+    route: /workspace/notifications/references
+    order: 80
+    permission: notification.read
+  view:
+    title: References
+    workspace: notifications
+    route: /workspace/notifications/references
+    permission: notification.read

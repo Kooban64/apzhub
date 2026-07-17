@@ -1,0 +1,21 @@
+{
+  "name": "@apzhub/observe-persistence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Observability persistence — repository adapters (APZOBSERVE-001)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/observe-persistence"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/observe-contracts": "workspace:*",
+    "@apzhub/observe-core": "workspace:*",
+    "drizzle-orm": "^0.44.2"
+  }
+}

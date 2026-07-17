@@ -490,7 +490,10 @@ describe("OSS-110-09 Task HTTP API", () => {
         path.resolve(process.cwd(), "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml"),
         "utf8",
       );
-      expect(yaml.includes("plane")).toBe(false);
+      // Forbid Plane vendor / issue-id leakage — not the substring "plane" in "execution-plane".
+      expect(yaml).not.toMatch(
+        /\bintegration-plane\b|plane\.so|plane-adapter|\/plane\/|\bPlane\b/,
+      );
       expect(yaml.includes("issue_id")).toBe(false);
     });
 

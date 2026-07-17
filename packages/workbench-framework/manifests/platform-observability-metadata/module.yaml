@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-metadata
+name: Metadata
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Metadata sidebar (Platform) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Metadata
+    icon: tags
+    route: /workspace/observability/metadata
+    order: 200
+    permission: observe.metadata
+  view:
+    title: Metadata
+    workspace: observability
+    route: /workspace/observability/metadata
+    permission: observe.metadata

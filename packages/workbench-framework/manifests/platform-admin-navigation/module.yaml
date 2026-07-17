@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-navigation
+name: Navigation
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Navigation sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Navigation
+    icon: panel-left
+    route: /workspace/administration/navigation
+    order: 100
+    permission: admin.navigation
+  view:
+    title: Navigation
+    workspace: administration
+    route: /workspace/administration/navigation
+    permission: admin.navigation

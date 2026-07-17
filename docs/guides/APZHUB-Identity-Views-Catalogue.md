@@ -1,0 +1,42 @@
+# Identity Views Catalogue
+
+**Milestone:** APZIDENTITY-004
+**Component:** `apps/web/components/identity/platform-identity-view.tsx`
+
+Every section renders inside the shared `PageShell` (`data-testid="identity-page"`) with an `<h1>` title and, where relevant, a toolbar of read-only commands (`role="toolbar"`, `aria-label="Identity commands"`).
+
+| Section | Purpose | Key test ids | Notes |
+| --- | --- | --- | --- |
+| Overview | Summary counters (users, groups, roles, organisations, tenants, pending invitations, service assignments, recent audit entries) and capability status cards | `card-users-count`, `card-auth-status`, `card-provisioning-status`, `card-directory-sync-status` | Always shows the three capability banners as status cards |
+| Users | Filterable list + detail with memberships and service assignments for the selected user; activate/deactivate actions call metadata-only activation/deactivation records | `identity-detail`, `user-status`, `user-memberships`, `user-service-assignments`, `banner-auth` | No password, login, or credential fields anywhere |
+| Groups | CRUD-style catalogue of group metadata | `identity-detail` | Key/name/description/status only |
+| Roles | CRUD-style catalogue of role metadata | `identity-detail` | Key/name/description/status only |
+| Organisations | CRUD-style catalogue of organisation metadata | `identity-detail` | — |
+| Tenants | CRUD-style catalogue of tenant metadata | `identity-detail` | — |
+| Departments | CRUD-style catalogue scoped to an organisation | `identity-detail` | — |
+| Positions | CRUD-style catalogue scoped to an organisation | `identity-detail` | — |
+| Memberships | Links a user to a group/role/other target (`kind` + `targetId`) | — | Create/update status only; see [Service Assignments Workbench Guide](./APZHUB-Identity-Service-Assignments-Workbench-Guide.md) for the sibling concept |
+| Service Assignments | Links a subject (user/group/etc.) to a downstream service capability | — | Metadata only — no runtime provisioning of the referenced service |
+| Invitations | Invitation lifecycle metadata | `banner-invitations`, `invitation-no-email` | `NO EMAIL DELIVERY — INVITATION METADATA ONLY` banner; no email is ever sent |
+| Policies | Policy catalogue (key/name/kind/description) | `identity-detail` | Read/lifecycle metadata only — no policy engine execution |
+| Audit | Read-only audit trail table | `identity-detail` | — |
+| History | Read-only history/timeline table | `identity-detail` | — |
+| References | Reference/document links attached to a user | `identity-detail` | — |
+| Diagnostics | Management-plane health/readiness/capabilities snapshot | `diag-identity`, `diag-http`, `diag-workbench`, `diag-authentication`, `diag-provisioning`, `diag-directory-sync`, `banner-auth`, `banner-provisioning`, `banner-directory-sync` | Authentication/provisioning/directory-sync always render `Unavailable` |
+
+## Shared primitives
+
+- `PageShell` — page chrome, title, description, actions
+- `StatusCard` — labelled metric/status tile
+- `NoticeBanner` — capability banner (`role="status"` semantics via text content)
+- `MetaTable` — list table with row selection (`onRowClick`)
+- `EmptyState` / `ErrorState` — empty and error/forbidden/not-found/unavailable presentation
+- `EntityCrudPanel` — shared list + detail + create/update panel used by Groups, Roles, Organisations, Tenants, Departments, Positions
+
+## Empty / loading / error states
+
+- Loading: `role="status"` text (`Loading users…`, etc.)
+- Empty: `EmptyState` (`data-testid="identity-empty"`)
+- Error: `ErrorState`, with `forbidden` / `notFound` / `unavailable` flavors driven by `IdentityClientError` status codes (`identity-errors.ts`)
+
+See also: [Forms & Validation Guide](./APZHUB-Identity-Forms-and-Validation-Guide.md), [Authorization-Aware UI Guide](./APZHUB-Identity-Authorization-Aware-UI-Guide.md).

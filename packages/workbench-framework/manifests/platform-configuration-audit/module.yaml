@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-configuration-audit
+name: Audit
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Configuration — Audit sidebar (APZCONFIG-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: configuration
+    parent: platform-configuration
+    label: Audit
+    icon: scroll-text
+    route: /workspace/configuration/audit
+    order: 100
+    permission: configuration.audit
+  view:
+    title: Audit
+    workspace: configuration
+    route: /workspace/configuration/audit
+    permission: configuration.audit

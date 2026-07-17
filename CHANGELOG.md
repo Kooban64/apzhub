@@ -21,12 +21,399 @@ See [Milestone 6 review](./docs/reviews/MILESTONE-006-event-notification-framewo
 
 ## [Unreleased] — PCS-001 Platform Core Strategy + Platform Core v1.0 Certified
 
+### Added (APZOBSERVE-006 — Observability Wave Certification & Architecture Freeze)
+
+- Programme **closed/frozen**; classification **PRODUCTION_READY_WITH_LIMITATIONS** retained
+- Architecture Freeze Notice + Platform Observability Reference Standard
+- Final Operational Readiness Guide + Future Observability Platform Guide (roadmap only)
+- Security Confirmation · Wave Certification · Quality Evidence · Programme Summary
+- Audit: `pnpm audit:observe-wave`
+- **Verdict:** APZOBSERVE-006 COMPLETE — await owner for **APZMETRICS-001 — Platform Metrics Foundation** only
+
+### Added (APZOBSERVE-005 — Observability Vertical Certification & Production Readiness)
+
+- Classification: **PRODUCTION_READY_WITH_LIMITATIONS**
+- `pnpm audit:observe-vertical` + `pnpm certify:observe-vertical`
+- Certification harness: `testing/observe-vertical/apzobserve-005-certification.test.ts` (10 journeys)
+- Scoped coverage: lines **98.22%** · functions **96.97%** · branches **76.52%**
+- Review pack under `docs/reviews/APZOBSERVE-005-*` + completion report
+- Playwright certification **LIMITED** (pre-existing Testing slug conflict)
+- **Verdict:** APZOBSERVE-005 COMPLETE — await owner for **APZOBSERVE-006 — Observability Wave Certification & Architecture Freeze** only
+
+### Added (APZOBSERVE-004 — Observability Administration Workbench)
+
+- Manifest-driven Workbench `platform-observability` at `/workspace/observability`
+- UI over typed client only (`apps/web/components/observe` → `apps/web/lib/observe`)
+- All canonical metadata facets + Overview + Diagnostics + capability limitation banners
+- Audit: `pnpm audit:observe-workbench`
+- Vitest Workbench coverage: lines **99.65%**, functions **100%**, branches **95.55%**
+- Playwright mock-routed journey: `testing/playwright/e2e/apzobserve-004-observe-workbench.spec.ts` (**LIMITED** live webServer — pre-existing testing/traceability slug conflict)
+- Docs: Workbench architecture, navigation, views catalogue, health/status, forms, authz UI, limitations, testing, developer guide, completion report
+- **Verdict:** APZOBSERVE-004 COMPLETE — await owner for **APZOBSERVE-005 — Observability Vertical Certification & Production Readiness** only
+
+### Added (APZOBSERVE-003 — Observability HTTP API & Production Typed Client)
+
+- `/api/v1/observe/*` thin handlers over `gateway.observe.*` (19 facets + diagnostics)
+- OpenAPI **1.8.0** — tag **Platform Observability Administration**
+- `apps/web/lib/observe` — `createHttpObserveClient()`, mock client, `observeQueryKeys`
+- Bootstrap 503: `OBSERVE_SERVICE_UNAVAILABLE` when `APZHUB_OBSERVE_ENABLED` is false
+- Audit: `pnpm audit:observe-http-client`
+- Playwright mock HTTP: `testing/playwright/e2e/apzobserve-003-observe-http.spec.ts`
+- Docs: HTTP API architecture, route catalogue, typed client / security / consumer guides, completion report
+- **Verdict:** APZOBSERVE-003 COMPLETE
+
+### Added (APZOBSERVE-002 — Platform Services, Gateway & Authorization)
+
+- Nested `gateway.observe.*` on canonical `PlatformServiceGateway` (19 metadata facets + diagnostics)
+- `@apzhub/observe-contracts` / `@apzhub/observe-core` **0.2.0** — gateway contracts + domain service
+- `@apzhub/platform-services` **0.24.0** — observe factories, RequestPipeline wrap, production Authz (`observePlatformOps`)
+- Bootstrap: `APZHUB_OBSERVE_ENABLED` + PostgreSQL required (no silent memory)
+- Audit: `pnpm audit:observe-platform-services`
+- Docs: Platform Services Architecture, Gateway / Authorization / Bootstrap / Metadata guides, developer guide, completion report
+- **Verdict:** APZOBSERVE-002 COMPLETE — superseded next by APZOBSERVE-003 (complete)
+
+### Added (APZOBSERVE-001 — Platform Observability Foundation)
+
+- `@apzhub/observe-contracts` **0.1.0** — domain models, permissions (`observe.*`), service ports
+- `@apzhub/observe-core` **0.1.0** — validation, lifecycle, repository ports, foundation factory
+- `@apzhub/observe-persistence` **0.1.0** — in-memory + PostgreSQL adapters; no silent memory fallback
+- Migrations **0054** / **0055** (`platform_observe_*` + RLS)
+- Architecture audit `pnpm audit:observe-foundation`
+- Docs: Platform Observability Architecture, domain/health/metrics/logs/traces/alerts models, diagnostics + developer guides, completion report
+- **Verdict:** APZOBSERVE-001 COMPLETE — await owner for **APZOBSERVE-002 — Platform Services, Gateway & Authorization** only
+
+### Added (APZIDENTITY-006 — Identity Administration Wave Certification & Architecture Freeze)
+
+- Wave audit `pnpm audit:identity-wave` (re-validates vertical 001–005 + closeout artefacts)
+- Architecture Freeze Notice · Identity Reference Standard · final Operational Readiness Guide · Future Identity Platform Guide
+- Wave closeout harness `testing/identity-vertical/apzidentity-006-wave-closeout.test.ts`
+- Review pack `docs/reviews/APZIDENTITY-006-*` · programme summary · wave closeout · completion report
+- **Classification retained:** **PRODUCTION_READY_WITH_LIMITATIONS** — Identity Administration programme **closed/frozen**
+- **Verdict:** APZIDENTITY-006 COMPLETE — await owner for **APZOBSERVE-001 — Platform Observability Foundation** only
+
+### Added (APZIDENTITY-005 — Identity Administration Vertical Certification)
+
+- Vertical audit `pnpm audit:identity-vertical` (re-executes 001–004 + full-path boundary scans)
+- Composite certification command `pnpm certify:identity-vertical` (audits + OpenAPI + harness + scoped coverage)
+- Certification harness `testing/identity-vertical/apzidentity-005-certification.test.ts` — Journeys 1–10
+- Review pack `docs/reviews/APZIDENTITY-005-*` (plan, vertical certification, architecture/permission/route/contract traceability, security, persistence, operational readiness, known limitations, coverage, production readiness, quality evidence)
+- Completion report `docs/sprint/APZIDENTITY-005-completion-report.md`
+- **Classification:** **PRODUCTION_READY_WITH_LIMITATIONS** (metadata administration plane; authentication / provisioning / directory sync excluded by design)
+- **Verdict:** APZIDENTITY-005 COMPLETE — await owner for **APZIDENTITY-006 — Identity Administration Wave Certification & Architecture Freeze** only
+
+### Added (APZIDENTITY-004 — Identity Administration Workbench)
+
+- Identity Administration Workbench at `/workspace/identity` — `IdentityWorkspaceRouter` + `PlatformIdentityView`, consuming only `apps/web/lib/identity` typed client
+- Manifest-driven Activity Bar `platform-identity` + sixteen sidebar sections (Overview, Users, Groups, Roles, Organisations, Tenants, Departments, Positions, Memberships, Service Assignments, Invitations, Policies, Audit, History, References, Diagnostics), all `identity.read`
+- Per-user Memberships and Service Assignments panels (metadata only)
+- Capability banners: `AUTHENTICATION NOT MANAGED HERE`, `PROVISIONING NOT AVAILABLE`, `DIRECTORY SYNC NOT AVAILABLE`, `NO EMAIL DELIVERY — INVITATION METADATA ONLY`
+- Audit `pnpm audit:identity-workbench`; harness `testing/identity-workbench`; Playwright mock spec `apzidentity-004-identity-workbench.spec.ts`
+- Docs: Identity Workbench architecture, Navigation Guide, Views Catalogue, Forms & Validation Guide, Authorization-Aware UI Guide, Service Assignments Workbench Guide, Testing Guide, Developer Guide, completion report, coverage baseline, quality evidence
+- **Verdict:** APZIDENTITY-004 COMPLETE — await owner for **APZIDENTITY-005 — Identity Vertical Certification & Production Readiness** only
+
+### Added (APZIDENTITY-003 — Identity HTTP API & Production Typed Client)
+
+- `/api/v1/identity/*` — thin handlers over `gateway.identity.*` (all management-plane facets)
+- Typed client `apps/web/lib/identity` — `createHttpIdentityClient`, mock, query keys, runtime accessor
+- OpenAPI **1.7.0** — Platform Identity Administration tag + facet paths
+- Bootstrap gate `APZHUB_IDENTITY_ENABLED` → controlled HTTP 503; no silent fallback
+- Audit `pnpm audit:identity-http-client`; Playwright mock HTTP (no Workbench)
+- Docs: Identity HTTP API Architecture, Route Catalogue, Typed Client / Security / Consumer guides, completion report
+- **Verdict:** APZIDENTITY-003 COMPLETE — await owner for **APZIDENTITY-004 — Identity Administration Workbench** only
+
+### Added (APZIDENTITY-002 — Platform Services, Gateway & Authorization)
+
+- `@apzhub/identity-contracts` / `identity-core` **0.2.0** — `IdentityPlatformGateway` facets + `createPlatformIdentityService`
+- `@apzhub/platform-services` **0.23.0** — `gateway.identity.*`, RequestPipeline, `identityPlatformOps`, `PLATFORM_IDENTITY_PERMISSIONS`
+- Bootstrap `APZHUB_IDENTITY_ENABLED`; production PostgreSQL required; no silent in-memory fallback
+- Service assignment metadata includes `workflow-engine`; diagnostics metadata-only (no IdP probes)
+- Audit `pnpm audit:identity-platform-services`; Vitest harness `testing/identity-platform-services`
+- Docs: Identity Platform Services Architecture, Gateway/Authorization/Bootstrap/Service Assignment guides, developer guide, completion report
+- **Verdict:** APZIDENTITY-002 COMPLETE — await owner for **APZIDENTITY-003 — Identity HTTP API & Production Typed Client** only
+
+### Added (APZIDENTITY-001 — Identity Administration Foundation)
+
+- Packages `@apzhub/identity-contracts` / `identity-core` / `identity-persistence` **0.1.0** — Identity Administration SoR (metadata only; not authentication)
+- PostgreSQL migrations **0052** / **0053** (`platform_iam_*`) + Drizzle `platform-iam-schema.ts`
+- Permission catalogue `identity.*`; domain models for users, groups, roles, orgs, tenants, memberships, service assignments, audit/history
+- Audit `pnpm audit:identity-foundation`; Vitest harness `testing/identity-foundation`
+- Docs: Platform Identity Architecture, domain/user/group/role/org/tenant models, membership/assignment/permission guides, developer guide, completion report
+- **Verdict:** APZIDENTITY-001 COMPLETE — await owner for **APZIDENTITY-002 — Platform Services, Gateway & Authorization** only
+
+### Added (APZADMIN-006 — Administration Wave Certification & Architecture Freeze)
+
+- `pnpm audit:administration-wave` — programme closeout audit (re-validates APZADMIN-001–005; 0 violations)
+- Architecture Freeze Notice · Administration Reference Standard · Operational Readiness Guide · Future Administration Platform Guide
+- Programme Summary · Wave Closeout Report · Wave Certification · Quality Evidence · Security Confirmation
+- Classification retained: **PRODUCTION_READY_WITH_LIMITATIONS**; Administration SoR wave **closed/frozen**
+- **Verdict:** APZADMIN-006 COMPLETE — await owner for **APZIDENTITY-001** only (roadmap — do not implement)
+
+### Added (APZADMIN-005 — Administration Vertical Certification & Production Readiness)
+
+- Vertical audit `pnpm audit:administration-vertical` (re-executes APZADMIN-001–004; 0 violations)
+- Vitest certification harness `testing/administration-vertical`
+- Review pack `docs/reviews/APZADMIN-005-*` + completion report
+- Classification **PRODUCTION_READY_WITH_LIMITATIONS** (metadata governance plane; coverage 99.37% lines / 99.43% functions)
+- Certification-only consistency: admin-contracts/core version test pins **0.2.0**
+- **Verdict:** APZADMIN-005 COMPLETE — await owner for **APZADMIN-006 — Administration Wave Certification & Architecture Freeze** only
+
+### Added (APZADMIN-004 — Administration Workbench)
+
+- Administration SoR Workbench at `/workspace/administration` — typed-client facades only (`platform-admin` manifests)
+- Platform Operations (M8-03) relocated to `/workspace/operations` (parent id `platform-administration` retained)
+- Views: overview, modules, categories, sections, registrations, capabilities, actions, permissions, policies, navigation, shortcuts, dashboards, widgets, references, audit, history, diagnostics
+- Audit `pnpm audit:administration-workbench`; Vitest harness + component tests; Playwright mock E2E
+- Docs: workbench architecture, navigation/views/governance/capability/navigation-metadata/dashboard-widget/security/accessibility/developer guides, completion report
+- **Verdict:** APZADMIN-004 COMPLETE — await owner for **APZADMIN-005 — Administration Vertical Certification** only
+
+### Added (APZADMIN-003 — Administration HTTP API & Production Typed Client)
+
+- HTTP surface `/api/v1/administration/*` — handlers call `gateway.administration.*` only
+- Typed client `apps/web/lib/administration` (HTTP-only; mock + query keys + facades)
+- Platform OpenAPI **1.6.0** — `Platform Administration` tags/paths; management-plane only
+- Audit `pnpm audit:administration-http-client`; Playwright mock HTTP smoke
+- Docs: HTTP API architecture, route catalogue, typed client / security / consumer guides, coverage baseline, completion report
+- **Verdict:** APZADMIN-003 COMPLETE — await owner for **APZADMIN-004 — Administration Workbench** only
+
+### Added (APZADMIN-002 — Platform Services, Gateway & Authorization)
+
+- `@apzhub/admin-contracts` / `admin-core` **0.2.0** — `AdministrationPlatformGateway` + `createPlatformAdministrationService`
+- `@apzhub/platform-services` **0.22.0** — `gateway.administration.*`, RequestPipeline, `administrationPlatformOps`, `PLATFORM_ADMIN_PERMISSIONS`
+- Bootstrap: `APZHUB_ADMINISTRATION_ENABLED` + production PostgreSQL factory
+- Audits: `pnpm audit:administration-platform-services` (foundation audit still passes)
+- Docs: platform-services architecture, gateway/authz/bootstrap guides, developer guide, coverage baseline, completion report
+- **Verdict:** APZADMIN-002 COMPLETE — await owner for **APZADMIN-003 — HTTP API & Production Typed Client** only
+
+### Added (APZADMIN-001 — Platform Administration Foundation)
+
+- Packages: `@apzhub/admin-contracts` / `admin-core` / `admin-persistence` **0.1.0**
+- Canonical module registrations (identity → configuration + future); capability / navigation / action / dashboard metadata
+- Permissions: `admin.*` · `admin.read` · `admin.manage` · `admin.audit` · `admin.policy` · `admin.diagnostics` · `admin.navigation` · `admin.registration`
+- Migrations **0050/0051**; schema `platform_admin_*`; audit `pnpm audit:admin-foundation`
+- Docs: architecture, domain model, registration/capability/permission guides, developer guide, completion report
+- **Verdict:** APZADMIN-001 COMPLETE — await owner for **APZADMIN-002** only (no HTTP / Gateway / Workbench)
+
+### Added (APZCONFIG-006 — Configuration Wave Certification & Architecture Freeze)
+
+- `pnpm audit:configuration-wave` — programme closeout audit (re-validates APZCONFIG-001–005; 0 violations)
+- Architecture Freeze Notice · Configuration Reference Standard · Operational Readiness Guide · Future Configuration Platform Guide
+- Programme Summary · Wave Closeout Report · Wave Certification · Quality Evidence · Security Confirmation
+- Classification retained: **PRODUCTION_READY_WITH_LIMITATIONS**; Configuration SoR wave **closed/frozen**
+- **Verdict:** APZCONFIG-006 COMPLETE — await owner for **APZCONFIG-007** only (roadmap — do not implement runtime)
+
+### Added (APZCONFIG-005 — Configuration Vertical Certification & Production Readiness)
+
+- `pnpm audit:configuration-vertical` — end-to-end boundary audit (0 violations); re-executes APZCONFIG-001–004
+- Certification reviews under `docs/reviews/APZCONFIG-005-*`
+- Classification: **PRODUCTION_READY_WITH_LIMITATIONS**
+- Architecture frozen — metadata plane only (no runtime/secrets/flags)
+- **Verdict:** APZCONFIG-005 COMPLETE — await owner for **APZCONFIG-006** only
+
+### Added (APZCONFIG-004 — Configuration Workbench)
+
+- `/workspace/configuration` — manifest-driven Configuration Workbench (typed-client only)
+- Views: Overview, Configurations, Namespaces, Groups, Versions, Overrides, Scopes, Validation, References, Audit, Diagnostics
+- `pnpm audit:configuration-workbench` — boundary audit (0 violations)
+- Playwright mocked HTTP spec for Workbench navigation
+- **Verdict:** APZCONFIG-004 COMPLETE — await owner for **APZCONFIG-005** only
+
+### Added (APZCONFIG-003 — Configuration HTTP API & Production Typed Client)
+
+- `/api/v1/configuration/*` — thin HTTP handlers over `gateway.configuration.*` only
+- `apps/web/lib/configuration` — production typed client, mock client, query keys
+- Platform OpenAPI **1.5.0** — Configuration tags and paths; runtime routes explicitly omitted
+- `pnpm audit:configuration-http-client` — boundary audit (0 violations)
+- **Verdict:** APZCONFIG-003 COMPLETE — await owner for **APZCONFIG-004** only
+
+### Added (APZCONFIG-002 — Configuration Platform Services, Gateway & Authorization)
+
+- `gateway.configuration.*` facets; `createConfigurationPlatformServices*`; `configurationPlatformOps`
+- `@apzhub/configuration-contracts` / `configuration-core` **0.2.0**; audit `pnpm audit:configuration-platform-services`
+- RequestPipeline + Production Authorization; bootstrap `APZHUB_CONFIGURATION_ENABLED`
+- **Verdict:** APZCONFIG-002 COMPLETE — await owner for **APZCONFIG-003** only
+
+### Added (APZCONFIG-001 — Platform Configuration Foundation)
+
+- Packages: `@apzhub/configuration-contracts` / `configuration-core` / `configuration-persistence` **0.1.0**
+- Migrations **0048/0049**; audit `pnpm audit:configuration-foundation`
+- Hierarchy, lifecycle, validation metadata, versioning, permissions — no HTTP/Gateway/Workbench/runtime/secrets
+- **Verdict:** APZCONFIG-001 COMPLETE — await owner for **APZCONFIG-002** only
+
+### Added (APZNOTIFY-006 — Notification Wave Certification & Architecture Freeze)
+
+- Wave closeout: `pnpm audit:notification-wave` + harness
+- Architecture Freeze Notice · Operational Readiness Guide · Future Delivery Framework Guide
+- Programme Summary · Wave Closeout Report · Wave Certification · Quality Evidence
+- Classification retained: **PRODUCTION_READY_WITH_LIMITATIONS**; Notification SoR wave **closed/frozen**
+- **Verdict:** APZNOTIFY-006 COMPLETE — await owner for **APZNOTIFY-007** only (roadmap — do not implement delivery)
+
+### Added (APZNOTIFY-005 — Notification Vertical Certification & Production Readiness)
+
+- Certification harness: `pnpm audit:notification-vertical` + `testing/notification-vertical/`
+- Review pack: architecture/dependency/boundary audits, HTTP/typed-client/workbench certifications, authorization/security reviews, performance + coverage baselines, production readiness
+- Classification: **PRODUCTION_READY_WITH_LIMITATIONS** (metadata plane; no delivery/Event Bus/workers/realtime)
+- Consolidated coverage: **98.42%** lines · **96.95%** functions
+- **Verdict:** APZNOTIFY-005 COMPLETE — Notification vertical frozen — await owner for **APZNOTIFY-006** only — no delivery
+
+### Added (APZNOTIFY-004 — Notification Workbench)
+
+- `/workspace/notifications` metadata Workbench (typed client only)
+- Manifests `platform-notifications*` (Activity Bar + Sidebar)
+- Audit: `pnpm audit:notification-workbench`
+- Docs: workbench architecture, navigation/views/commands/UX/developer guides, completion report
+- **Verdict:** APZNOTIFY-004 COMPLETE — await owner for **APZNOTIFY-005** only — no delivery
+
+### Added (APZNOTIFY-003 — Notification HTTP API & Production Typed Client)
+
+- `/api/v1/notifications/*` management-plane HTTP (gateway.notification.* only)
+- OpenAPI **1.4.0** — Platform Notifications tags + schemas
+- Typed client `apps/web/lib/notifications` (HTTP + mock + query keys)
+- Audit: `pnpm audit:notification-http-client`
+- Docs: HTTP API architecture, route catalogue, typed client, security/tenancy, lifecycle API, privacy, error model, consumer guide, completion report
+- **Verdict:** APZNOTIFY-003 COMPLETE — await owner for **APZNOTIFY-004** (Workbench) only — no delivery
+
+### Added (APZNOTIFY-002 — Notification Platform Services, Gateway & Authorization)
+
+- `gateway.notification.*` nested facets on PlatformServiceGateway (RequestPipeline + Production Authorization)
+- `@apzhub/notification-contracts` **0.2.0** — gateway facet contracts
+- `@apzhub/notification-core` **0.2.0** — `createPlatformNotificationService` domain service
+- `@apzhub/platform-services` **0.21.0** — thin wrappers, bootstrap, op-map, permission catalogue
+- Env gate `APZHUB_NOTIFICATION_ENABLED`; audit `pnpm audit:notification-platform-services`
+- Docs: Platform Services Architecture, Gateway / Authorization / Bootstrap / Developer guides, Completion Report
+- **Verdict:** APZNOTIFY-002 COMPLETE — await owner for **APZNOTIFY-003** only
+
+### Added (APZNOTIFY-001 — Platform Notification Foundation)
+
+- `@apzhub/notification-contracts` **0.1.0** — domain models, lifecycle enums, permission catalogue, service port
+- `@apzhub/notification-core` **0.1.0** — lifecycle transitions, validation, foundation factory
+- `@apzhub/notification-persistence` **0.1.0** — in-memory + PostgreSQL metadata repositories (no silent fallback)
+- Migrations **0046** / **0047** (RLS) for `platform_notification*` tables
+- Audit: `pnpm audit:notification-foundation`
+- Docs: Architecture, Domain Model, Lifecycle, Permissions, Developer Guide, Completion Report
+- **Verdict:** APZNOTIFY-001 COMPLETE — await owner for **APZNOTIFY-002** only (Workflow programme remains closed; **APZSEARCH-016** deferred)
+
+### Added (APZWORKFLOW-011 — Workflow Engine Wave Certification & Reference Adapter Closeout)
+
+- Declared **`@apzhub/integration-n8n` 0.1.0** the official APZHUB Workflow Engine Reference Adapter
+- Architecture freeze for Platform + Engine patterns (Gateway, HTTP, typed client, Workbench, Integration SDK, n8n adapter)
+- Docs: Reference Adapter Standard, Final Architecture, Freeze Notice, Operational Readiness, Future Adapter Guide, Programme Summary, Wave Closeout, Completion Report
+- Audit: `pnpm audit:workflow-engine-wave` (re-runs SoR + Engine verticals)
+- Certification defect fixes only: SoR audits 001/005 scoped/version pins for engine coexistence
+- **Verdict:** APZWORKFLOW-011 COMPLETE — wave **frozen** — await owner for **APZWORKFLOW-012** only (roadmap; **APZSEARCH-016** deferred)
+
+### Added (APZWORKFLOW-010 — Workflow Engine Vertical Certification)
+
+- Classification: **PRODUCTION_READY_WITH_LIMITATIONS** (read-only engine vertical; frozen)
+- Consolidated audit: `pnpm audit:workflow-engine-vertical` (re-runs 006–009)
+- Harness: `testing/workflow-engine-vertical/`
+- Review pack: Vertical / Architecture / Dependency / Boundary / HTTP / Typed Client / Workbench / Authorization / Security / Performance / Coverage / Production Readiness
+- Certification defect corrections: 006 `premature-wiring` post-007 skip; 007 `web-no-direct-n8n` allow gateway bootstrap only (008+)
+- **Verdict:** APZWORKFLOW-010 COMPLETE — await owner approval before **APZWORKFLOW-011** only (**APZSEARCH-016** deferred)
+
+### Added (APZWORKFLOW-009 — n8n Workbench Integration)
+
+- Workflow Engine Workbench at `/workspace/workflow-engine` (presentation only)
+- Manifest-driven Activity Bar + Sidebar (`platform-workflow-engine*`)
+- Views: Overview, Workflows (+ read-only definition viewer), Templates, Projects, Users, Tags, Capabilities, Health, Diagnostics, Compatibility
+- Commands: Refresh, View Details, Copy ID, Open API Metadata, Validate Connection
+- React Query via `workflowEngineQueryKeys`; consumes `engine-api` / `createHttpWorkflowEngineClient()` only
+- Audit: `pnpm audit:workflow-engine-workbench`
+- **Verdict:** APZWORKFLOW-009 COMPLETE — await owner approval before **APZWORKFLOW-010** only (**APZSEARCH-016** deferred)
+
+### Added (APZWORKFLOW-008 — n8n HTTP API & Production Typed Client)
+
+- `/api/v1/workflows/engine/*` read-only HTTP → `gateway.workflow.engine.*`
+- OpenAPI Platform API **1.3.0** · tag **Workflow Engine**
+- Typed client `createHttpWorkflowEngineClient()` + mock + `workflowEngineQueryKeys` + engine facades
+- Bootstrap optional engine wiring via `APZHUB_WORKFLOW_ENGINE_ENABLED` (explicit config; no silent mock)
+- Audit: `pnpm audit:workflow-engine-http`
+- **Verdict:** APZWORKFLOW-008 COMPLETE — await owner approval before **APZWORKFLOW-009** only (**APZSEARCH-016** deferred)
+
+### Added (APZWORKFLOW-007 — n8n Platform Services Integration)
+
+- `@apzhub/workflow-contracts` **0.3.0** — `WorkflowEngineGateway` + `workflow.engine.*` permissions
+- `@apzhub/platform-services` **0.20.0** — thin `gateway.workflow.engine.*` façade over certified `@apzhub/integration-n8n` **0.1.0**
+- Production Authorization: `workflowEngineOps`; RequestPipeline wrap; production/test engine factories
+- Audit: `pnpm audit:workflow-n8n-platform-services` · scoped engine coverage **100%**
+- Docs: Platform Services Architecture, Gateway/Authorization/Bootstrap/Error guides, Developer Guide, Completion Report
+- **Verdict:** APZWORKFLOW-007 COMPLETE — await owner approval before **APZWORKFLOW-008** only (**APZSEARCH-016** deferred)
+
+### Added (APZWORKFLOW-006 — n8n Reference Adapter Foundation)
+
+- `@apzhub/integration-n8n` **0.1.0** — read-only Workflow Engine Reference Adapter (`IntegrationAdapterBase`)
+- Auth: API key / PAT / Basic; OAuth placeholder; injected fetch REST client (no official n8n SDK)
+- Canonical metadata mapping; health / diagnostics / compatibility; capability registry
+- Audit: `pnpm audit:n8n-adapter` · Vitest coverage ≥95% (scoped)
+- **Verdict:** APZWORKFLOW-006 COMPLETE — await owner approval before **APZWORKFLOW-007** only (**APZSEARCH-016** deferred)
+
+### Added (APZWORKFLOW-005 — Workflow Vertical Certification)
+
+- Vertical audit `pnpm audit:workflow-vertical` (re-executes 001–004; 0 violations)
+- Certification harness `testing/workflow-vertical/`
+- Review pack under `docs/reviews/APZWORKFLOW-005-*` + completion report
+- **Classification:** **PRODUCTION_READY_WITH_LIMITATIONS** (management plane; no execution/n8n)
+- **Verdict:** APZWORKFLOW-005 COMPLETE — architecture frozen; await owner approval before **APZWORKFLOW-006** only (**APZSEARCH-016** deferred)
+
+### Added (APZWORKFLOW-004 — Workflow Workbench)
+
+- Metadata-only Workflow Workbench at `/workspace/workflows` (overview, library, versions, templates, categories, folders, validation, audit, diagnostics)
+- Manifests `platform-workflows*` · Definition Viewer / Graph · version compare · audit timeline · metadata export
+- Shell mount `WorkflowsWorkspaceRouter` · TanStack Query via `workflowQueryKeys`
+- Audit: `pnpm audit:workflow-workbench`
+- **Verdict:** APZWORKFLOW-004 COMPLETE — await owner approval before **APZWORKFLOW-005** only (**APZSEARCH-016** deferred)
+
+### Added (APZWORKFLOW-003 — Workflow HTTP API & Production Typed Client)
+
+- `/api/v1/workflows` HTTP routes mapped 1:1 to `gateway.workflow.*` (metadata/lifecycle only)
+- Typed client `createHttpWorkflowClient()` in `apps/web/lib/workflows/` (+ mock + facades)
+- OpenAPI tag **Platform Workflow**; info version **1.2.0**
+- Bootstrap wires `createWorkflowPlatformServicesForProduction` when `APZHUB_WORKFLOW_ENABLED` + `DATABASE_URL`
+- Audit: `pnpm audit:workflow-http-client`
+- Docs: HTTP API, OpenAPI, Typed Client, Consumer Integration, Security, completion report
+- **Verdict:** APZWORKFLOW-003 COMPLETE — await owner approval before **APZWORKFLOW-004** only (**APZSEARCH-016** deferred)
+
+### Added (APZWORKFLOW-002 — Workflow Platform Services, Gateway & Authorization)
+
+- Nested `gateway.workflow.{workflows,versions,templates,categories,folders,validation,audit}` on existing `PlatformServiceGateway`
+- `@apzhub/workflow-contracts` **0.2.0** — `WorkflowPlatformGateway` + `workflow.validation` permission
+- `@apzhub/workflow-core` **0.1.1** — `createPlatformWorkflowService` domain implementation
+- `@apzhub/workflow-persistence` **0.1.1** — `createWorkflowPersistenceForTest`
+- `@apzhub/platform-services` **0.19.0** — workflow factories, thin impls, `workflowPlatformOps`, catalogue spread
+- `@apzhub/platform-service-contracts` **0.16.0** — workflow stub
+- Audit: `pnpm audit:workflow-platform-services`
+- **Verdict:** APZWORKFLOW-002 COMPLETE — await owner approval before **APZWORKFLOW-003** only (**APZSEARCH-016** deferred)
+
+### Added (APZWORKFLOW-001 — Platform Workflow Foundation)
+
+- `@apzhub/workflow-contracts` **0.1.0** — domain models, permission catalogue, service ports (no execute)
+- `@apzhub/workflow-core` **0.1.0** — lifecycle transitions, structural/reference/parameter/version/lifecycle validation, foundation factory
+- `@apzhub/workflow-persistence` **0.1.0** — in-memory + Drizzle Postgres repositories
+- Migrations **0044** / **0045** (`platform_workflow*`) + RLS; schema `platform-workflow-schema.ts`
+- Audit `pnpm audit:workflow-foundation`; harness `testing/workflow-foundation`
+- **Verdict:** APZWORKFLOW-001 COMPLETE — await owner approval before **APZWORKFLOW-002** only (**APZSEARCH-016** deferred)
+
+### Added (APZSEARCH-015 — Cross-Product Search Publication Certification)
+
+- Certification-only milestone: audit `pnpm audit:search-publication`, harness `testing/search-publication` (**19** tests), review pack under `docs/reviews/APZSEARCH-015-*`
+- Re-certified Framework **0.1.0** + Projects/Support/Documents/Reporting **0.1.0** + Testing **0.1.1**; frozen platform stack unchanged
+- Classification: **PRODUCTION_READY_WITH_LIMITATIONS** (in-memory journals, hooks unwired, ADR-0064, Playwright LIMITED, indexing → 016)
+- **Verdict:** APZSEARCH-015 COMPLETE — await owner approval before **APZSEARCH-016** (Product Indexing Orchestration Framework) only
+
+### Added (APZSEARCH-014 — Reporting Search Publication Adapter)
+
+- `@apzhub/search-reporting` **0.1.0** — Reporting → Search Integration Framework (metadata-only; template/category/definition/generation/output/catalogue entities)
+- Explicit safe-field allowlist; rendered body / parametersJson / checksum hex rejection; classification never-downgrade (fail-closed confidential)
+- Production factories require explicit publication sink; `*ForTest` uses in-memory sink
+- Audit `pnpm audit:search-reporting`; coverage **96.72%** lines/statements
+- **Verdict:** APZSEARCH-014 COMPLETE — await owner approval before **APZSEARCH-015** (Cross-Product Search Publication Certification)
+
 ### Added (APZSEARCH-013 — APZ TCMS Search Publication Adapter)
 
-- `@apzhub/search-testing` **0.1.0** — APZ TCMS → Search Integration Framework (metadata-only; 34 Testing entity types)
-- Explicit safe-field allowlist; evidence/report-binary / storage / credential rejection; classification never-downgrade
+- `@apzhub/search-testing` **0.1.1** — APZ TCMS → Search Integration Framework (metadata-only; **40** entity types)
+- Orchestrator `TestingSearchPublisher` + specialised publishers: Manual, Automation, Certification, Release, Engineering Intelligence, Quality, Reporting Metadata, Pipeline
+- Explicit safe-field allowlist; evidence/report-binary / pipeline artifact / storage / credential rejection; classification never-downgrade
 - Production factories require explicit publication sink; `*ForTest` uses in-memory sink
-- Audit `pnpm audit:search-testing`; coverage **98.76%** lines/statements
+- Audit `pnpm audit:search-testing`; coverage **98.06%** lines/statements
 - **Verdict:** APZSEARCH-013 COMPLETE — await owner approval before **APZSEARCH-014** (Reporting Search Publication Adapter)
 
 ### Added (APZSEARCH-012 — Documents Search Publication Adapter)

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-configuration-scopes
+name: Scopes
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Configuration — Scopes sidebar (APZCONFIG-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: configuration
+    parent: platform-configuration
+    label: Scopes
+    icon: target
+    route: /workspace/configuration/scopes
+    order: 70
+    permission: configuration.read
+  view:
+    title: Scopes
+    workspace: configuration
+    route: /workspace/configuration/scopes
+    permission: configuration.read

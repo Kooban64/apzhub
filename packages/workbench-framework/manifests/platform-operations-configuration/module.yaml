@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Configuration
     icon: settings
-    route: /workspace/administration/configuration
+    route: /workspace/operations/configuration
     order: 120
     permission: platform.nav.administration.view
   view:
     title: Configuration
-    workspace: administration
-    route: /workspace/administration/configuration
+    workspace: operations
+    route: /workspace/operations/configuration
     permission: platform.nav.administration.view

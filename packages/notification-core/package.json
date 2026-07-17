@@ -1,0 +1,18 @@
+{
+  "name": "@apzhub/notification-core",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Notification core — lifecycle, validation, domain service (APZNOTIFY-002)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/notification-core"
+  },
+  "dependencies": {
+    "@apzhub/notification-contracts": "workspace:*"
+  }
+}

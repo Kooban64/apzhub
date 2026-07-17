@@ -17,14 +17,14 @@ module:
 workbench:
   navigation:
     level: activity-bar
-    workspace: administration
+    workspace: operations
     icon: shield
-    route: /workspace/administration
+    route: /workspace/operations
     order: 20
     permission: platform.nav.administration.view
   view:
     title: Platform Operations
-    workspace: administration
-    route: /workspace/administration
+    workspace: operations
+    route: /workspace/operations
     default: true
     permission: platform.nav.administration.view

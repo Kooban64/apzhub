@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Security
     icon: shield
-    route: /workspace/administration/security
+    route: /workspace/operations/security
     order: 115
     permission: platform.nav.administration.view
   view:
     title: Security
-    workspace: administration
-    route: /workspace/administration/security
+    workspace: operations
+    route: /workspace/operations/security
     permission: platform.nav.administration.view

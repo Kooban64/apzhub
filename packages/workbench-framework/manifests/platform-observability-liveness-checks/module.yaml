@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-liveness-checks
+name: Liveness Checks
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Liveness Checks sidebar (Health) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Liveness Checks
+    icon: activity
+    route: /workspace/observability/liveness-checks
+    order: 40
+    permission: observe.health
+  view:
+    title: Liveness Checks
+    workspace: observability
+    route: /workspace/observability/liveness-checks
+    permission: observe.health

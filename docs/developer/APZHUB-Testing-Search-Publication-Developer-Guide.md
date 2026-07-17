@@ -1,6 +1,6 @@
 # Testing Search Publication — Developer Guide
 
-**Package:** `@apzhub/search-testing` **0.1.0**
+**Package:** `@apzhub/search-testing` **0.1.1**
 
 ```ts
 import {

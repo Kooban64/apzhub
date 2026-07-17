@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-maintenance-windows
+name: Maintenance Windows
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Maintenance Windows sidebar (Operations Metadata) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Maintenance Windows
+    icon: calendar-clock
+    route: /workspace/observability/maintenance-windows
+    order: 180
+    permission: observe.manage
+  view:
+    title: Maintenance Windows
+    workspace: observability
+    route: /workspace/observability/maintenance-windows
+    permission: observe.manage

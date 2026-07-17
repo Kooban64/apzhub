@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: APZHUB Platform HTTP API
-  version: 1.1.0
+  version: 1.8.0
   description: |
     Production HTTP surface over PlatformServiceGateway (OSS-110-07, OSS-110-11).
     Routes contain no business logic and never call integration adapters directly.
@@ -96,6 +96,106 @@ tags:
       Canonical Platform Search API (APZSEARCH-007). Query plane via searchExecution*;
       management under /search/management/*. Public index/document HTTP deliberately omitted
       (gateway-only). No Meilisearch DTOs, semantic/vector fields, or legacy gateway.search.
+  - name: Platform Notifications
+    description: >
+      Canonical Notification Platform management API (APZNOTIFY-003).
+      Maps 1:1 to gateway.notification.* — metadata and lifecycle only.
+      No delivery, providers, workers, queues, Event Bus, or realtime.
+      Controlled 503 when APZHUB_NOTIFICATION_ENABLED is false.
+  - name: Notification Templates
+    description: Notification template metadata (no provider templates).
+  - name: Notification Preferences
+    description: Channel/category preference metadata only.
+  - name: Notification Categories
+    description: Canonical notification category catalogue (read).
+  - name: Notification Channels
+    description: >
+      Channel metadata (in_app, email, sms, push, webhook, teams, slack).
+      Existence does not imply delivery is implemented (deliveryAvailable=false).
+  - name: Notification Recipients
+    description: Recipient metadata with safe redaction — no credentials.
+  - name: Notification References
+    description: Canonical cross-product reference metadata only.
+  - name: Notification Audit
+    description: Read-only notification audit trail.
+  - name: Platform Administration
+    description: >
+      Management-plane administration metadata and lifecycle only.
+      No workbench, runtime admin, user/role/tenant management, provisioning, or live probes.
+  - name: Administration Modules
+  - name: Administration Categories
+  - name: Administration Sections
+  - name: Administration Actions
+  - name: Administration Permissions
+  - name: Administration Registrations
+  - name: Administration Policies
+  - name: Administration Capabilities
+  - name: Administration Navigations
+  - name: Administration Shortcuts
+  - name: Administration Dashboards
+  - name: Administration Widgets
+  - name: Administration Metadata
+  - name: Administration References
+  - name: Administration Audit
+  - name: Administration Diagnostics
+  - name: Platform Identity Administration
+    description: >
+      Management-plane identity metadata only — no authentication, login,
+      passwords, or provisioning. Returns 503 when APZHUB_IDENTITY_ENABLED is false.
+  - name: Identity Users
+  - name: Identity Groups
+  - name: Identity Roles
+  - name: Identity Organisations
+  - name: Identity Tenants
+  - name: Identity Departments
+  - name: Identity Positions
+  - name: Identity Memberships
+  - name: Identity Service Assignments
+  - name: Identity Invitations
+  - name: Identity Activation
+  - name: Identity Deactivation
+  - name: Identity Policies
+  - name: Identity Audit
+  - name: Identity References
+  - name: Identity Diagnostics
+  - name: Platform Configuration
+    description: >
+      Canonical Configuration Platform management API (APZCONFIG-003).
+      Maps 1:1 to gateway.configuration.* — metadata and lifecycle only.
+      No runtime resolution, apply, feature flags, secrets, hot reload, or Event Bus.
+      Controlled 503 when APZHUB_CONFIGURATION_ENABLED is false.
+  - name: Configuration Namespaces
+    description: Configuration namespace metadata (not OS/Kubernetes namespaces).
+  - name: Configuration Groups
+    description: Configuration group metadata within namespaces.
+  - name: Configuration Versions
+    description: Immutable published versions; no rollback execution.
+  - name: Configuration Overrides
+    description: Override metadata only — no effective-value resolution.
+  - name: Configuration Scopes
+    description: Canonical scope hierarchy metadata (global → user).
+  - name: Configuration Validation
+    description: Declarative metadata validation — no remote validator execution.
+  - name: Configuration References
+    description: Cross-product reference metadata only — no product queries.
+  - name: Configuration Audit
+    description: Read-only configuration audit trail.
+  - name: Platform Observability Administration
+    description: >
+      Canonical Observability Platform management API (APZOBSERVE-003).
+      Maps 1:1 to gateway.observe.* — metadata and lifecycle only.
+      No Grafana, Prometheus, Loki, OpenTelemetry, AlertManager, scrape, ingest, or Workbench.
+      Controlled 503 when APZHUB_OBSERVE_ENABLED is false.
+  - name: Observability Health
+  - name: Observability Metrics
+  - name: Observability Alerts
+  - name: Observability Dashboards
+  - name: Observability Logs
+  - name: Observability Traces
+  - name: Observability Incidents
+  - name: Observability Maintenance
+  - name: Observability Metadata
+  - name: Observability Diagnostics
 security:
   - sessionCookie: []
 paths:
@@ -3842,6 +3942,2469 @@ paths:
               $ref: "#/components/schemas/ValidateSearchConfigurationRequest"
       responses: *TestingResourceResponses
 
+  /notifications:
+    get:
+      operationId: listNotifications
+      tags: [Platform Notifications]
+      summary: List notification metadata
+      description: Management plane only — no delivery status from providers.
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, pending, queued, delivered, read, acknowledged, dismissed, expired, archived]
+        - name: priority
+          in: query
+          schema:
+            type: string
+            enum: [critical, high, normal, low, informational]
+        - name: categoryId
+          in: query
+          schema: { type: string, maxLength: 128 }
+        - name: channel
+          in: query
+          schema:
+            type: string
+            enum: [email, sms, push, in_app, webhook, microsoft_teams, slack, future]
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [notification.read]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createNotification
+      tags: [Platform Notifications]
+      summary: Create notification metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateNotificationRequest"
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.manage]
+  /notifications/capabilities:
+    get:
+      operationId: getNotificationCapabilities
+      tags: [Platform Notifications]
+      summary: Notification capabilities (delivery always false)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.read]
+  /notifications/health:
+    get:
+      operationId: getNotificationHealth
+      tags: [Platform Notifications]
+      summary: Notification management-plane health
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.read]
+  /notifications/readiness:
+    get:
+      operationId: getNotificationReadiness
+      tags: [Platform Notifications]
+      summary: Notification management-plane readiness
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.read]
+  /notifications/diagnostics:
+    get:
+      operationId: getNotificationDiagnostics
+      tags: [Platform Notifications]
+      summary: Safe notification diagnostics (no secrets)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.read]
+  /notifications/templates:
+    get:
+      operationId: listNotificationTemplates
+      tags: [Notification Templates]
+      summary: List notification templates
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [notification.template]
+    post:
+      operationId: createNotificationTemplate
+      tags: [Notification Templates]
+      summary: Create notification template metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateNotificationTemplateRequest"
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.template]
+  /notifications/templates/{templateId}:
+    parameters:
+      - name: templateId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getNotificationTemplate
+      tags: [Notification Templates]
+      summary: Get notification template
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.template]
+    patch:
+      operationId: updateNotificationTemplate
+      tags: [Notification Templates]
+      summary: Update notification template metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateNotificationTemplateRequest"
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.template]
+    delete:
+      operationId: deleteNotificationTemplate
+      tags: [Notification Templates]
+      summary: Soft-archive notification template
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.template]
+  /notifications/templates/{templateId}/archive:
+    parameters:
+      - name: templateId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: archiveNotificationTemplate
+      tags: [Notification Templates]
+      summary: Archive notification template
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.template]
+  /notifications/preferences:
+    get:
+      operationId: listNotificationPreferences
+      tags: [Notification Preferences]
+      summary: List notification preferences
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [notification.preference]
+  /notifications/preferences/{preferenceId}:
+    parameters:
+      - name: preferenceId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getNotificationPreference
+      tags: [Notification Preferences]
+      summary: Get notification preference
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.preference]
+    patch:
+      operationId: updateNotificationPreference
+      tags: [Notification Preferences]
+      summary: Update notification preference
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateNotificationPreferenceRequest"
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.preference]
+  /notifications/categories:
+    get:
+      operationId: listNotificationCategories
+      tags: [Notification Categories]
+      summary: List notification categories
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [notification.read]
+  /notifications/categories/{categoryId}:
+    parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getNotificationCategory
+      tags: [Notification Categories]
+      summary: Get notification category
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.read]
+  /notifications/channels:
+    get:
+      operationId: listNotificationChannels
+      tags: [Notification Channels]
+      summary: List channel metadata (delivery unavailable)
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [notification.read]
+  /notifications/channels/{channelId}:
+    parameters:
+      - name: channelId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getNotificationChannel
+      tags: [Notification Channels]
+      summary: Get channel metadata (deliveryAvailable false)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.read]
+  /notifications/audit:
+    get:
+      operationId: listNotificationAudit
+      tags: [Notification Audit]
+      summary: List notification audit entries
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [notification.audit]
+  /notifications/audit/{auditId}:
+    parameters:
+      - name: auditId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getNotificationAuditEntry
+      tags: [Notification Audit]
+      summary: Get notification audit entry
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.audit]
+  /notifications/references/{referenceId}:
+    parameters:
+      - name: referenceId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getNotificationReference
+      tags: [Notification References]
+      summary: Get notification reference metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.read]
+  /notifications/{notificationId}:
+    parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getNotification
+      tags: [Platform Notifications]
+      summary: Get notification metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.read]
+    patch:
+      operationId: updateNotification
+      tags: [Platform Notifications]
+      summary: Update notification metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateNotificationRequest"
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.manage]
+    delete:
+      operationId: deleteNotification
+      tags: [Platform Notifications]
+      summary: Soft-archive notification (never physical delete)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.manage]
+  /notifications/{notificationId}/transition:
+    parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: transitionNotification
+      tags: [Platform Notifications]
+      summary: Transition notification lifecycle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransitionNotificationRequest"
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.manage]
+  /notifications/{notificationId}/archive:
+    parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: archiveNotification
+      tags: [Platform Notifications]
+      summary: Archive notification
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.manage]
+  /notifications/{notificationId}/restore:
+    parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: restoreNotification
+      tags: [Platform Notifications]
+      summary: Restore archived notification
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.manage]
+  /notifications/{notificationId}/mark-read:
+    parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: markNotificationRead
+      tags: [Platform Notifications]
+      summary: Mark notification read (gateway.transition to read)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.manage]
+  /notifications/{notificationId}/acknowledge:
+    parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: acknowledgeNotification
+      tags: [Platform Notifications]
+      summary: Acknowledge notification (gateway.transition)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.manage]
+  /notifications/{notificationId}/dismiss:
+    parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: dismissNotification
+      tags: [Platform Notifications]
+      summary: Dismiss notification (gateway.transition)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.manage]
+  /notifications/{notificationId}/recipients:
+    parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: listNotificationRecipients
+      tags: [Notification Recipients]
+      summary: List recipients (safe fields only)
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [notification.read]
+  /notifications/{notificationId}/recipients/{recipientId}:
+    parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+      - name: recipientId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getNotificationRecipient
+      tags: [Notification Recipients]
+      summary: Get recipient metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notification.read]
+  /notifications/{notificationId}/references:
+    parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: listNotificationReferences
+      tags: [Notification References]
+      summary: List notification references
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [notification.read]
+  /notifications/{notificationId}/audit:
+    parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: listScopedNotificationAudit
+      tags: [Notification Audit]
+      summary: List audit for one notification
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [notification.audit]
+
+  /configuration/configurations:
+    get:
+      operationId: listConfigurations
+      tags: [Platform Configuration]
+      summary: List configuration metadata
+      description: Management plane only — no runtime resolution or application.
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, validated, approved, published, deprecated, archived]
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [configuration.read]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createConfiguration
+      tags: [Platform Configuration]
+      summary: Create configuration metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateConfigurationRequest"
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [configuration.manage]
+  /configuration/configurations/{configurationId}:
+    parameters:
+      - name: configurationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getConfiguration
+      tags: [Platform Configuration]
+      summary: Get configuration metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [configuration.read]
+    patch:
+      operationId: updateConfiguration
+      tags: [Platform Configuration]
+      summary: Update configuration metadata (not lifecycle state)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [configuration.manage]
+    delete:
+      operationId: archiveConfiguration
+      tags: [Platform Configuration]
+      summary: Archive configuration (soft delete)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [configuration.manage]
+  /configuration/configurations/{configurationId}/transition:
+    parameters:
+      - name: configurationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: transitionConfiguration
+      tags: [Platform Configuration]
+      summary: Governed lifecycle transition
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [configuration.manage]
+  /configuration/configurations/{configurationId}/validate:
+    parameters:
+      - name: configurationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: validateConfiguration
+      tags: [Configuration Validation]
+      summary: Validate configuration metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [configuration.validation]
+  /configuration/validation:
+    post:
+      operationId: validateConfigurationMetadata
+      tags: [Configuration Validation]
+      summary: Validate arbitrary configuration metadata payload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateConfigurationMetadataRequest"
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [configuration.validation]
+  /configuration/validation/rules:
+    get:
+      operationId: listConfigurationValidationRules
+      tags: [Configuration Validation]
+      summary: List declarative validation rule metadata
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [configuration.validation]
+  /configuration/namespaces:
+    get:
+      operationId: listConfigurationNamespaces
+      tags: [Configuration Namespaces]
+      summary: List configuration namespaces
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [configuration.read]
+    post:
+      operationId: createConfigurationNamespace
+      tags: [Configuration Namespaces]
+      summary: Create configuration namespace
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [configuration.manage]
+  /configuration/groups:
+    get:
+      operationId: listConfigurationGroups
+      tags: [Configuration Groups]
+      summary: List configuration groups
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [configuration.read]
+  /configuration/overrides:
+    get:
+      operationId: listConfigurationOverrides
+      tags: [Configuration Overrides]
+      summary: List override metadata (no effective resolution)
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [configuration.manage]
+  /configuration/scopes:
+    get:
+      operationId: listConfigurationScopes
+      tags: [Configuration Scopes]
+      summary: List scope descriptors
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [configuration.read]
+  /configuration/audit:
+    get:
+      operationId: listConfigurationAudit
+      tags: [Configuration Audit]
+      summary: List configuration audit entries
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [configuration.audit]
+  /configuration/capabilities:
+    get:
+      operationId: getConfigurationCapabilities
+      tags: [Platform Configuration]
+      summary: Management-plane capabilities (runtime features explicitly false)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [configuration.read]
+      x-apzhub-runtime-resolution: false
+      x-apzhub-feature-flags: false
+      x-apzhub-secrets: false
+  /configuration/health:
+    get:
+      operationId: getConfigurationHealth
+      tags: [Platform Configuration]
+      summary: Configuration diagnostics health
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [configuration.read]
+  /configuration/readiness:
+    get:
+      operationId: getConfigurationReadiness
+      tags: [Platform Configuration]
+      summary: Configuration management-plane readiness
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [configuration.read]
+  /configuration/diagnostics:
+    get:
+      operationId: getConfigurationDiagnostics
+      tags: [Platform Configuration]
+      summary: Safe configuration diagnostics metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [configuration.read]
+
+
+  /administration/modules:
+    get:
+      operationId: listAdministrationModules
+      tags: [Platform Administration, Administration Modules]
+      summary: List administration modules
+      description: Management plane only — no workbench or runtime admin.
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, registered, active, deprecated, archived]
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createAdministrationModule
+      tags: [Platform Administration, Administration Modules]
+      summary: Create administration module metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+      x-apzhub-scope: management-plane-only
+  /administration/modules/{moduleId}:
+    parameters:
+      - name: moduleId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationModule
+      tags: [Administration Modules]
+      summary: Get administration module
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.read]
+    patch:
+      operationId: updateAdministrationModuleMetadata
+      tags: [Administration Modules]
+      summary: Update module metadata (not lifecycle state)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+    delete:
+      operationId: archiveAdministrationModule
+      tags: [Administration Modules]
+      summary: Archive module (soft delete)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/modules/{moduleId}/transition:
+    parameters:
+      - name: moduleId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: transitionAdministrationModule
+      tags: [Administration Modules]
+      summary: Governed lifecycle transition
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/modules/{moduleId}/archive:
+    parameters:
+      - name: moduleId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: archiveAdministrationModulePost
+      tags: [Administration Modules]
+      summary: Archive module (explicit POST alias)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/modules/{moduleId}/restore:
+    parameters:
+      - name: moduleId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: restoreAdministrationModule
+      tags: [Administration Modules]
+      summary: Restore archived module
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/modules/{moduleId}/audit:
+    parameters:
+      - name: moduleId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: listAdministrationModuleAudit
+      tags: [Administration Audit]
+      summary: List audit for one module
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.audit]
+  /administration/modules/{moduleId}/history:
+    parameters:
+      - name: moduleId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: listAdministrationModuleHistory
+      tags: [Administration Modules]
+      summary: List history for one module
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+  /administration/modules/{moduleId}/metadata:
+    parameters:
+      - name: moduleId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: listAdministrationModuleMetadata
+      tags: [Administration Metadata]
+      summary: List metadata for one module
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+  /administration/modules/{moduleId}/references:
+    parameters:
+      - name: moduleId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: listAdministrationModuleReferences
+      tags: [Administration References]
+      summary: List references for one module
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+  /administration/categories:
+    get:
+      operationId: listAdministrationCategories
+      tags: [Administration Categories]
+      summary: List administration categories
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+    post:
+      operationId: createAdministrationCategory
+      tags: [Administration Categories]
+      summary: Create administration category
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/categories/{categoryId}:
+    parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationCategory
+      tags: [Administration Categories]
+      summary: Get administration category
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.read]
+    patch:
+      operationId: updateAdministrationCategory
+      tags: [Administration Categories]
+      summary: Update administration category
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/sections:
+    get:
+      operationId: listAdministrationSections
+      tags: [Administration Sections]
+      summary: List administration sections
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+    post:
+      operationId: createAdministrationSection
+      tags: [Administration Sections]
+      summary: Create administration section
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/sections/{sectionId}:
+    parameters:
+      - name: sectionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationSection
+      tags: [Administration Sections]
+      summary: Get administration section
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.read]
+    patch:
+      operationId: updateAdministrationSection
+      tags: [Administration Sections]
+      summary: Update administration section
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/actions:
+    get:
+      operationId: listAdministrationActions
+      tags: [Administration Actions]
+      summary: List administration actions
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+    post:
+      operationId: createAdministrationAction
+      tags: [Administration Actions]
+      summary: Create administration action
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/actions/{actionId}:
+    parameters:
+      - name: actionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationAction
+      tags: [Administration Actions]
+      summary: Get administration action
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.read]
+    patch:
+      operationId: updateAdministrationAction
+      tags: [Administration Actions]
+      summary: Update administration action
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/permissions:
+    get:
+      operationId: listAdministrationPermissions
+      tags: [Administration Permissions]
+      summary: List administration permission metadata
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+    post:
+      operationId: createAdministrationPermission
+      tags: [Administration Permissions]
+      summary: Create administration permission metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/permissions/{permissionId}:
+    parameters:
+      - name: permissionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationPermission
+      tags: [Administration Permissions]
+      summary: Get administration permission metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.read]
+    patch:
+      operationId: updateAdministrationPermission
+      tags: [Administration Permissions]
+      summary: Update administration permission metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/registrations:
+    get:
+      operationId: listAdministrationRegistrations
+      tags: [Administration Registrations]
+      summary: List module registrations
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.registration]
+    post:
+      operationId: createAdministrationRegistration
+      tags: [Administration Registrations]
+      summary: Create module registration
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.registration]
+  /administration/registrations/{registrationId}:
+    parameters:
+      - name: registrationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationRegistration
+      tags: [Administration Registrations]
+      summary: Get module registration
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.registration]
+    patch:
+      operationId: updateAdministrationRegistration
+      tags: [Administration Registrations]
+      summary: Update module registration
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.registration]
+  /administration/policies:
+    get:
+      operationId: listAdministrationPolicies
+      tags: [Administration Policies]
+      summary: List administration policies
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.policy]
+    post:
+      operationId: createAdministrationPolicy
+      tags: [Administration Policies]
+      summary: Create administration policy
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.policy]
+  /administration/policies/{policyId}:
+    parameters:
+      - name: policyId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationPolicy
+      tags: [Administration Policies]
+      summary: Get administration policy
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.policy]
+    patch:
+      operationId: updateAdministrationPolicy
+      tags: [Administration Policies]
+      summary: Update administration policy
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.policy]
+  /administration/capabilities:
+    get:
+      operationId: listAdministrationCapabilities
+      tags: [Administration Capabilities]
+      summary: List capability SoR metadata
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+    post:
+      operationId: createAdministrationCapability
+      tags: [Administration Capabilities]
+      summary: Create capability SoR metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/capabilities/{capabilityId}:
+    parameters:
+      - name: capabilityId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationCapability
+      tags: [Administration Capabilities]
+      summary: Get capability SoR metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.read]
+    patch:
+      operationId: updateAdministrationCapability
+      tags: [Administration Capabilities]
+      summary: Update capability SoR metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/navigations:
+    get:
+      operationId: listAdministrationNavigations
+      tags: [Administration Navigations]
+      summary: List navigation metadata
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.navigation]
+    post:
+      operationId: createAdministrationNavigation
+      tags: [Administration Navigations]
+      summary: Create navigation metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.navigation]
+  /administration/navigations/{navigationId}:
+    parameters:
+      - name: navigationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationNavigation
+      tags: [Administration Navigations]
+      summary: Get navigation metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.navigation]
+    patch:
+      operationId: updateAdministrationNavigation
+      tags: [Administration Navigations]
+      summary: Update navigation metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.navigation]
+  /administration/shortcuts:
+    get:
+      operationId: listAdministrationShortcuts
+      tags: [Administration Shortcuts]
+      summary: List shortcut metadata
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.navigation]
+    post:
+      operationId: createAdministrationShortcut
+      tags: [Administration Shortcuts]
+      summary: Create shortcut metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.navigation]
+  /administration/shortcuts/{shortcutId}:
+    parameters:
+      - name: shortcutId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationShortcut
+      tags: [Administration Shortcuts]
+      summary: Get shortcut metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.navigation]
+    patch:
+      operationId: updateAdministrationShortcut
+      tags: [Administration Shortcuts]
+      summary: Update shortcut metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.navigation]
+  /administration/dashboards:
+    get:
+      operationId: listAdministrationDashboards
+      tags: [Administration Dashboards]
+      summary: List dashboard metadata (SoR only — not runtime UI)
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+    post:
+      operationId: createAdministrationDashboard
+      tags: [Administration Dashboards]
+      summary: Create dashboard metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/dashboards/{dashboardId}:
+    parameters:
+      - name: dashboardId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationDashboard
+      tags: [Administration Dashboards]
+      summary: Get dashboard metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.read]
+    patch:
+      operationId: updateAdministrationDashboard
+      tags: [Administration Dashboards]
+      summary: Update dashboard metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/dashboards/{dashboardId}/widgets:
+    parameters:
+      - name: dashboardId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: listAdministrationWidgets
+      tags: [Administration Widgets]
+      summary: List widgets for a dashboard
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+    post:
+      operationId: createAdministrationWidget
+      tags: [Administration Widgets]
+      summary: Create widget metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/widgets/{widgetId}:
+    parameters:
+      - name: widgetId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationWidget
+      tags: [Administration Widgets]
+      summary: Get widget metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.read]
+    patch:
+      operationId: updateAdministrationWidget
+      tags: [Administration Widgets]
+      summary: Update widget metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/metadata:
+    get:
+      operationId: listAdministrationMetadata
+      tags: [Administration Metadata]
+      summary: List metadata (requires moduleId query)
+      parameters:
+        - name: moduleId
+          in: query
+          required: true
+          schema: { type: string, maxLength: 128 }
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+    post:
+      operationId: createAdministrationMetadata
+      tags: [Administration Metadata]
+      summary: Create metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/metadata/{metadataId}:
+    parameters:
+      - name: metadataId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationMetadata
+      tags: [Administration Metadata]
+      summary: Get metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.read]
+    patch:
+      operationId: updateAdministrationMetadata
+      tags: [Administration Metadata]
+      summary: Update metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/references:
+    get:
+      operationId: listAdministrationReferences
+      tags: [Administration References]
+      summary: List references (requires moduleId query)
+      parameters:
+        - name: moduleId
+          in: query
+          required: true
+          schema: { type: string, maxLength: 128 }
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.read]
+    post:
+      operationId: createAdministrationReference
+      tags: [Administration References]
+      summary: Create reference
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.manage]
+  /administration/references/{referenceId}:
+    parameters:
+      - name: referenceId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationReference
+      tags: [Administration References]
+      summary: Get reference
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.read]
+  /administration/audit:
+    get:
+      operationId: listAdministrationAudit
+      tags: [Administration Audit]
+      summary: List administration audit entries
+      parameters:
+        - name: moduleId
+          in: query
+          schema: { type: string, maxLength: 128 }
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [admin.audit]
+  /administration/audit/{auditId}:
+    parameters:
+      - name: auditId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationAudit
+      tags: [Administration Audit]
+      summary: Get administration audit entry
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.audit]
+  /administration/history/{historyId}:
+    parameters:
+      - name: historyId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationHistory
+      tags: [Platform Administration]
+      summary: Get administration history entry
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.read]
+  /administration/diagnostics:
+    get:
+      operationId: getAdministrationDiagnostics
+      tags: [Administration Diagnostics]
+      summary: Safe administration diagnostics metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.diagnostics]
+      x-apzhub-scope: management-plane-only
+  /administration/diagnostics/{diagnosticId}:
+    parameters:
+      - name: diagnosticId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getAdministrationDiagnostic
+      tags: [Administration Diagnostics]
+      summary: Get administration diagnostic entry
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.diagnostics]
+  /administration/health:
+    get:
+      operationId: getAdministrationHealth
+      tags: [Administration Diagnostics]
+      summary: Administration diagnostics health
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.diagnostics]
+  /administration/readiness:
+    get:
+      operationId: getAdministrationReadiness
+      tags: [Administration Diagnostics]
+      summary: Administration management-plane readiness
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.diagnostics]
+  /administration/management-capabilities:
+    get:
+      operationId: getAdministrationManagementCapabilities
+      tags: [Platform Administration]
+      summary: Management-plane capabilities (workbench/runtimeAdmin false; http true)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [admin.read]
+      x-apzhub-workbench: false
+      x-apzhub-runtime-admin: false
+      x-apzhub-http: true
+      x-apzhub-scope: management-plane-only
+
+  # ---------------------------------------------------------------------------
+  # Platform Identity Administration (APZIDENTITY-003)
+  # Management-plane identity metadata only — no auth/login/passwords/provisioning.
+  # ---------------------------------------------------------------------------
+  /identity/users:
+    get:
+      operationId: listIdentityUsers
+      tags: [Platform Identity Administration, Identity Users]
+      summary: List identity user metadata
+      description: Management plane only — no authentication or provisioning.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createIdentityUser
+      tags: [Platform Identity Administration, Identity Users]
+      summary: Create identity user metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.user]
+      x-apzhub-scope: management-plane-only
+  /identity/users/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityUser
+      tags: [Identity Users]
+      summary: Get identity user metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+    patch:
+      operationId: updateIdentityUser
+      tags: [Identity Users]
+      summary: Update identity user metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.user]
+  /identity/groups:
+    get:
+      operationId: listIdentityGroups
+      tags: [Identity Groups]
+      summary: List identity groups
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityGroup
+      tags: [Identity Groups]
+      summary: Create identity group
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.group]
+  /identity/groups/{groupId}:
+    parameters:
+      - name: groupId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityGroup
+      tags: [Identity Groups]
+      summary: Get identity group
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+    patch:
+      operationId: updateIdentityGroup
+      tags: [Identity Groups]
+      summary: Update identity group
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.group]
+  /identity/roles:
+    get:
+      operationId: listIdentityRoles
+      tags: [Identity Roles]
+      summary: List identity roles
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityRole
+      tags: [Identity Roles]
+      summary: Create identity role
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.role]
+  /identity/roles/{roleId}:
+    parameters:
+      - name: roleId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityRole
+      tags: [Identity Roles]
+      summary: Get identity role
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+    patch:
+      operationId: updateIdentityRole
+      tags: [Identity Roles]
+      summary: Update identity role
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.role]
+  /identity/organisations:
+    get:
+      operationId: listIdentityOrganisations
+      tags: [Identity Organisations]
+      summary: List identity organisations
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityOrganisation
+      tags: [Identity Organisations]
+      summary: Create identity organisation
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.organization]
+  /identity/organisations/{organisationId}:
+    parameters:
+      - name: organisationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityOrganisation
+      tags: [Identity Organisations]
+      summary: Get identity organisation
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+    patch:
+      operationId: updateIdentityOrganisation
+      tags: [Identity Organisations]
+      summary: Update identity organisation
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.organization]
+  /identity/tenants:
+    get:
+      operationId: listIdentityTenants
+      tags: [Identity Tenants]
+      summary: List identity tenants
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityTenant
+      tags: [Identity Tenants]
+      summary: Create identity tenant
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.tenant]
+  /identity/tenants/{tenantId}:
+    parameters:
+      - name: tenantId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityTenant
+      tags: [Identity Tenants]
+      summary: Get identity tenant
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+    patch:
+      operationId: updateIdentityTenant
+      tags: [Identity Tenants]
+      summary: Update identity tenant
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.tenant]
+  /identity/departments:
+    get:
+      operationId: listIdentityDepartments
+      tags: [Identity Departments]
+      summary: List identity departments
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityDepartment
+      tags: [Identity Departments]
+      summary: Create identity department
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.manage]
+  /identity/departments/{departmentId}:
+    parameters:
+      - name: departmentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityDepartment
+      tags: [Identity Departments]
+      summary: Get identity department
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+    patch:
+      operationId: updateIdentityDepartment
+      tags: [Identity Departments]
+      summary: Update identity department
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.manage]
+  /identity/positions:
+    get:
+      operationId: listIdentityPositions
+      tags: [Identity Positions]
+      summary: List identity positions
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityPosition
+      tags: [Identity Positions]
+      summary: Create identity position
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.manage]
+  /identity/positions/{positionId}:
+    parameters:
+      - name: positionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityPosition
+      tags: [Identity Positions]
+      summary: Get identity position
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+    patch:
+      operationId: updateIdentityPosition
+      tags: [Identity Positions]
+      summary: Update identity position
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.manage]
+  /identity/memberships:
+    get:
+      operationId: listIdentityMemberships
+      tags: [Identity Memberships]
+      summary: List identity memberships
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityMembership
+      tags: [Identity Memberships]
+      summary: Create identity membership
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.assignment]
+  /identity/memberships/{membershipId}:
+    parameters:
+      - name: membershipId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityMembership
+      tags: [Identity Memberships]
+      summary: Get identity membership
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+    patch:
+      operationId: updateIdentityMembership
+      tags: [Identity Memberships]
+      summary: Update identity membership
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.assignment]
+  /identity/service-assignments:
+    get:
+      operationId: listIdentityServiceAssignments
+      tags: [Identity Service Assignments]
+      summary: List identity service assignments
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityServiceAssignment
+      tags: [Identity Service Assignments]
+      summary: Create identity service assignment
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.assignment]
+  /identity/service-assignments/{assignmentId}:
+    parameters:
+      - name: assignmentId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityServiceAssignment
+      tags: [Identity Service Assignments]
+      summary: Get identity service assignment
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+    patch:
+      operationId: updateIdentityServiceAssignment
+      tags: [Identity Service Assignments]
+      summary: Update identity service assignment
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.assignment]
+  /identity/invitations:
+    get:
+      operationId: listIdentityInvitations
+      tags: [Identity Invitations]
+      summary: List identity invitations
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityInvitation
+      tags: [Identity Invitations]
+      summary: Create identity invitation
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.manage]
+  /identity/invitations/{invitationId}:
+    parameters:
+      - name: invitationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityInvitation
+      tags: [Identity Invitations]
+      summary: Get identity invitation
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+    patch:
+      operationId: updateIdentityInvitation
+      tags: [Identity Invitations]
+      summary: Update identity invitation
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.manage]
+  /identity/activation:
+    get:
+      operationId: listIdentityActivations
+      tags: [Identity Activation]
+      summary: List identity activation records
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityActivation
+      tags: [Identity Activation]
+      summary: Create identity activation record
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.manage]
+  /identity/activation/{activationId}:
+    parameters:
+      - name: activationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityActivation
+      tags: [Identity Activation]
+      summary: Get identity activation record
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+  /identity/deactivation:
+    get:
+      operationId: listIdentityDeactivations
+      tags: [Identity Deactivation]
+      summary: List identity deactivation records
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityDeactivation
+      tags: [Identity Deactivation]
+      summary: Create identity deactivation record
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.manage]
+  /identity/deactivation/{deactivationId}:
+    parameters:
+      - name: deactivationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityDeactivation
+      tags: [Identity Deactivation]
+      summary: Get identity deactivation record
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+  /identity/policies:
+    get:
+      operationId: listIdentityPolicies
+      tags: [Identity Policies]
+      summary: List identity policies
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityPolicy
+      tags: [Identity Policies]
+      summary: Create identity policy
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.manage]
+  /identity/policies/{policyId}:
+    parameters:
+      - name: policyId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityPolicy
+      tags: [Identity Policies]
+      summary: Get identity policy
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+    patch:
+      operationId: updateIdentityPolicy
+      tags: [Identity Policies]
+      summary: Update identity policy
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.manage]
+  /identity/audit:
+    get:
+      operationId: listIdentityAudit
+      tags: [Identity Audit]
+      summary: List identity audit entries
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.audit]
+  /identity/audit/{auditId}:
+    parameters:
+      - name: auditId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityAudit
+      tags: [Identity Audit]
+      summary: Get identity audit entry
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.audit]
+  /identity/history:
+    get:
+      operationId: listIdentityHistory
+      tags: [Identity Audit]
+      summary: List identity history entries
+      parameters:
+        - name: userId
+          in: query
+          schema: { type: string, maxLength: 128 }
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.audit]
+  /identity/history/{historyId}:
+    parameters:
+      - name: historyId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityHistory
+      tags: [Identity Audit]
+      summary: Get identity history entry
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.audit]
+  /identity/references:
+    get:
+      operationId: listIdentityReferences
+      tags: [Identity References]
+      summary: List identity references
+      parameters:
+        - name: userId
+          in: query
+          schema: { type: string, maxLength: 128 }
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [identity.read]
+    post:
+      operationId: createIdentityReference
+      tags: [Identity References]
+      summary: Create identity reference
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.manage]
+  /identity/references/{referenceId}:
+    parameters:
+      - name: referenceId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getIdentityReference
+      tags: [Identity References]
+      summary: Get identity reference
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+    patch:
+      operationId: updateIdentityReference
+      tags: [Identity References]
+      summary: Update identity reference
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.manage]
+  /identity/health:
+    get:
+      operationId: getIdentityHealth
+      tags: [Identity Diagnostics]
+      summary: Identity diagnostics health
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+      x-apzhub-scope: management-plane-only
+  /identity/readiness:
+    get:
+      operationId: getIdentityReadiness
+      tags: [Identity Diagnostics]
+      summary: Identity management-plane readiness
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+      x-apzhub-scope: management-plane-only
+  /identity/capabilities:
+    get:
+      operationId: getIdentityCapabilities
+      tags: [Identity Diagnostics]
+      summary: Identity gateway capability flags (workbench/authentication false)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+      x-apzhub-scope: management-plane-only
+  /identity/management-capabilities:
+    get:
+      operationId: getIdentityManagementCapabilities
+      tags: [Platform Identity Administration, Identity Diagnostics]
+      summary: Management-plane capabilities (workbench/authentication false; http true)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [identity.read]
+      x-apzhub-workbench: false
+      x-apzhub-authentication: false
+      x-apzhub-http: true
+      x-apzhub-scope: management-plane-only
+
+  # ---------------------------------------------------------------------------
+  # Platform Observability Administration (APZOBSERVE-003)
+  # ---------------------------------------------------------------------------
+
+  /observe/health-checks:
+    get:
+      operationId: listObserveHealthChecks
+      tags: [Platform Observability Administration, Observability Health]
+      summary: List HealthCheck metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.health]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveHealthCheck
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Create HealthCheck metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+  /observe/health-checks/{healthCheckId}:
+    parameters:
+      - name: healthCheckId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveHealthCheck
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Get HealthCheck metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+    patch:
+      operationId: updateObserveHealthCheck
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Update HealthCheck metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+
+  /observe/readiness-checks:
+    get:
+      operationId: listObserveReadinessChecks
+      tags: [Platform Observability Administration, Observability Health]
+      summary: List ReadinessCheck metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.health]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveReadinessCheck
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Create ReadinessCheck metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+  /observe/readiness-checks/{readinessCheckId}:
+    parameters:
+      - name: readinessCheckId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveReadinessCheck
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Get ReadinessCheck metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+    patch:
+      operationId: updateObserveReadinessCheck
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Update ReadinessCheck metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+
+  /observe/liveness-checks:
+    get:
+      operationId: listObserveLivenessChecks
+      tags: [Platform Observability Administration, Observability Health]
+      summary: List LivenessCheck metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.health]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveLivenessCheck
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Create LivenessCheck metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+  /observe/liveness-checks/{livenessCheckId}:
+    parameters:
+      - name: livenessCheckId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveLivenessCheck
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Get LivenessCheck metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+    patch:
+      operationId: updateObserveLivenessCheck
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Update LivenessCheck metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+
+  /observe/service-health:
+    get:
+      operationId: listObserveServiceHealth
+      tags: [Platform Observability Administration, Observability Health]
+      summary: List ServiceHealth metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.health]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveServiceHealth
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Create ServiceHealth metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+  /observe/service-health/{serviceHealthId}:
+    parameters:
+      - name: serviceHealthId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveServiceHealth
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Get ServiceHealth metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+    patch:
+      operationId: updateObserveServiceHealth
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Update ServiceHealth metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+
+  /observe/service-status:
+    get:
+      operationId: listObserveServiceStatus
+      tags: [Platform Observability Administration, Observability Health]
+      summary: List ServiceStatus metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.health]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveServiceStatus
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Create ServiceStatus metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+  /observe/service-status/{serviceStatusId}:
+    parameters:
+      - name: serviceStatusId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveServiceStatus
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Get ServiceStatus metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+    patch:
+      operationId: updateObserveServiceStatus
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Update ServiceStatus metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+
+  /observe/component-status:
+    get:
+      operationId: listObserveComponentStatus
+      tags: [Platform Observability Administration, Observability Health]
+      summary: List ComponentStatus metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.health]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveComponentStatus
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Create ComponentStatus metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+  /observe/component-status/{componentStatusId}:
+    parameters:
+      - name: componentStatusId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveComponentStatus
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Get ComponentStatus metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+    patch:
+      operationId: updateObserveComponentStatus
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Update ComponentStatus metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+
+  /observe/metric-definitions:
+    get:
+      operationId: listObserveMetricDefinitions
+      tags: [Platform Observability Administration, Observability Metrics]
+      summary: List MetricDefinition metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.metrics]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveMetricDefinition
+      tags: [Platform Observability Administration, Observability Metrics]
+      summary: Create MetricDefinition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.metrics]
+  /observe/metric-definitions/{metricDefinitionId}:
+    parameters:
+      - name: metricDefinitionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveMetricDefinition
+      tags: [Platform Observability Administration, Observability Metrics]
+      summary: Get MetricDefinition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.metrics]
+    patch:
+      operationId: updateObserveMetricDefinition
+      tags: [Platform Observability Administration, Observability Metrics]
+      summary: Update MetricDefinition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.metrics]
+
+  /observe/metric-samples:
+    get:
+      operationId: listObserveMetricSamples
+      tags: [Platform Observability Administration, Observability Metrics]
+      summary: List MetricSample metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.metrics]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveMetricSample
+      tags: [Platform Observability Administration, Observability Metrics]
+      summary: Create MetricSample metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.metrics]
+  /observe/metric-samples/{metricSampleId}:
+    parameters:
+      - name: metricSampleId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveMetricSample
+      tags: [Platform Observability Administration, Observability Metrics]
+      summary: Get MetricSample metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.metrics]
+    patch:
+      operationId: updateObserveMetricSample
+      tags: [Platform Observability Administration, Observability Metrics]
+      summary: Update MetricSample metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.metrics]
+
+  /observe/alert-definitions:
+    get:
+      operationId: listObserveAlertDefinitions
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: List AlertDefinition metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.alerts]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveAlertDefinition
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: Create AlertDefinition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.alerts]
+  /observe/alert-definitions/{alertDefinitionId}:
+    parameters:
+      - name: alertDefinitionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveAlertDefinition
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: Get AlertDefinition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.alerts]
+    patch:
+      operationId: updateObserveAlertDefinition
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: Update AlertDefinition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.alerts]
+
+  /observe/alert-states:
+    get:
+      operationId: listObserveAlertStates
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: List AlertState metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.alerts]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveAlertState
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: Create AlertState metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.alerts]
+  /observe/alert-states/{alertStateId}:
+    parameters:
+      - name: alertStateId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveAlertState
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: Get AlertState metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.alerts]
+    patch:
+      operationId: updateObserveAlertState
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: Update AlertState metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.alerts]
+
+  /observe/dashboard-definitions:
+    get:
+      operationId: listObserveDashboardDefinitions
+      tags: [Platform Observability Administration, Observability Dashboards]
+      summary: List DashboardDefinition metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.dashboards]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveDashboardDefinition
+      tags: [Platform Observability Administration, Observability Dashboards]
+      summary: Create DashboardDefinition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.dashboards]
+  /observe/dashboard-definitions/{dashboardDefinitionId}:
+    parameters:
+      - name: dashboardDefinitionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveDashboardDefinition
+      tags: [Platform Observability Administration, Observability Dashboards]
+      summary: Get DashboardDefinition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.dashboards]
+    patch:
+      operationId: updateObserveDashboardDefinition
+      tags: [Platform Observability Administration, Observability Dashboards]
+      summary: Update DashboardDefinition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.dashboards]
+
+  /observe/log-sources:
+    get:
+      operationId: listObserveLogSources
+      tags: [Platform Observability Administration, Observability Logs]
+      summary: List LogSource metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.logs]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveLogSource
+      tags: [Platform Observability Administration, Observability Logs]
+      summary: Create LogSource metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.logs]
+  /observe/log-sources/{logSourceId}:
+    parameters:
+      - name: logSourceId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveLogSource
+      tags: [Platform Observability Administration, Observability Logs]
+      summary: Get LogSource metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.logs]
+    patch:
+      operationId: updateObserveLogSource
+      tags: [Platform Observability Administration, Observability Logs]
+      summary: Update LogSource metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.logs]
+
+  /observe/trace-definitions:
+    get:
+      operationId: listObserveTraceDefinitions
+      tags: [Platform Observability Administration, Observability Traces]
+      summary: List TraceDefinition metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.traces]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveTraceDefinition
+      tags: [Platform Observability Administration, Observability Traces]
+      summary: Create TraceDefinition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.traces]
+  /observe/trace-definitions/{traceDefinitionId}:
+    parameters:
+      - name: traceDefinitionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveTraceDefinition
+      tags: [Platform Observability Administration, Observability Traces]
+      summary: Get TraceDefinition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.traces]
+    patch:
+      operationId: updateObserveTraceDefinition
+      tags: [Platform Observability Administration, Observability Traces]
+      summary: Update TraceDefinition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.traces]
+
+  /observe/trace-spans:
+    get:
+      operationId: listObserveTraceSpans
+      tags: [Platform Observability Administration, Observability Traces]
+      summary: List TraceSpan metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.traces]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveTraceSpan
+      tags: [Platform Observability Administration, Observability Traces]
+      summary: Create TraceSpan metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.traces]
+  /observe/trace-spans/{traceSpanId}:
+    parameters:
+      - name: traceSpanId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveTraceSpan
+      tags: [Platform Observability Administration, Observability Traces]
+      summary: Get TraceSpan metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.traces]
+    patch:
+      operationId: updateObserveTraceSpan
+      tags: [Platform Observability Administration, Observability Traces]
+      summary: Update TraceSpan metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.traces]
+
+  /observe/incident-references:
+    get:
+      operationId: listObserveIncidentReferences
+      tags: [Platform Observability Administration, Observability Incidents]
+      summary: List IncidentReference metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.incidents]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveIncidentReference
+      tags: [Platform Observability Administration, Observability Incidents]
+      summary: Create IncidentReference metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.incidents]
+  /observe/incident-references/{incidentReferenceId}:
+    parameters:
+      - name: incidentReferenceId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveIncidentReference
+      tags: [Platform Observability Administration, Observability Incidents]
+      summary: Get IncidentReference metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.incidents]
+    patch:
+      operationId: updateObserveIncidentReference
+      tags: [Platform Observability Administration, Observability Incidents]
+      summary: Update IncidentReference metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.incidents]
+
+  /observe/maintenance-windows:
+    get:
+      operationId: listObserveMaintenanceWindows
+      tags: [Platform Observability Administration, Observability Maintenance]
+      summary: List MaintenanceWindow metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.maintenance]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveMaintenanceWindow
+      tags: [Platform Observability Administration, Observability Maintenance]
+      summary: Create MaintenanceWindow metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.maintenance]
+  /observe/maintenance-windows/{maintenanceWindowId}:
+    parameters:
+      - name: maintenanceWindowId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveMaintenanceWindow
+      tags: [Platform Observability Administration, Observability Maintenance]
+      summary: Get MaintenanceWindow metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.maintenance]
+    patch:
+      operationId: updateObserveMaintenanceWindow
+      tags: [Platform Observability Administration, Observability Maintenance]
+      summary: Update MaintenanceWindow metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.maintenance]
+
+  /observe/health-summaries:
+    get:
+      operationId: listObserveHealthSummaries
+      tags: [Platform Observability Administration, Observability Health]
+      summary: List HealthSummary metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.health]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveHealthSummary
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Create HealthSummary metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+  /observe/health-summaries/{healthSummaryId}:
+    parameters:
+      - name: healthSummaryId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveHealthSummary
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Get HealthSummary metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+    patch:
+      operationId: updateObserveHealthSummary
+      tags: [Platform Observability Administration, Observability Health]
+      summary: Update HealthSummary metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
+
+  /observe/metadata:
+    get:
+      operationId: listObserveMetadata
+      tags: [Platform Observability Administration, Observability Metadata]
+      summary: List ObservabilityMetadata metadata
+      description: Metadata only — no provider execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.metadata]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createObserveObservabilityMetadata
+      tags: [Platform Observability Administration, Observability Metadata]
+      summary: Create ObservabilityMetadata metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.metadata]
+  /observe/metadata/{metadataId}:
+    parameters:
+      - name: metadataId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObserveObservabilityMetadata
+      tags: [Platform Observability Administration, Observability Metadata]
+      summary: Get ObservabilityMetadata metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.metadata]
+    patch:
+      operationId: updateObserveObservabilityMetadata
+      tags: [Platform Observability Administration, Observability Metadata]
+      summary: Update ObservabilityMetadata metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.metadata]
+
+  /observe/diagnostics:
+    get:
+      operationId: listObservePlatformDiagnostics
+      tags: [Platform Observability Administration, Observability Diagnostics]
+      summary: List platform diagnostic metadata
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [observe.diagnostics]
+    post:
+      operationId: createObservePlatformDiagnostic
+      tags: [Platform Observability Administration, Observability Diagnostics]
+      summary: Create platform diagnostic metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.diagnostics]
+  /observe/diagnostics/{diagnosticId}:
+    parameters:
+      - name: diagnosticId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getObservePlatformDiagnostic
+      tags: [Platform Observability Administration, Observability Diagnostics]
+      summary: Get platform diagnostic metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.diagnostics]
+    patch:
+      operationId: updateObservePlatformDiagnostic
+      tags: [Platform Observability Administration, Observability Diagnostics]
+      summary: Update platform diagnostic metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.diagnostics]
+  /observe/diagnostics/health:
+    get:
+      operationId: getObserveDiagnosticsHealth
+      tags: [Platform Observability Administration, Observability Diagnostics]
+      summary: Observability diagnostics health (metadata — no provider probes)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.diagnostics]
+  /observe/diagnostics/readiness:
+    get:
+      operationId: getObserveDiagnosticsReadiness
+      tags: [Platform Observability Administration, Observability Diagnostics]
+      summary: Observability diagnostics readiness (metadata — no provider probes)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.diagnostics]
+  /observe/diagnostics/capabilities:
+    get:
+      operationId: getObserveDiagnosticsCapabilities
+      tags: [Platform Observability Administration, Observability Diagnostics]
+      summary: Observability capabilities (provider execution explicitly false)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.diagnostics]
+      x-apzhub-provider-execution: false
+  /observe/health:
+    get:
+      operationId: getObserveHealth
+      tags: [Platform Observability Administration, Observability Diagnostics]
+      summary: Observability management-plane health
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.diagnostics]
+  /observe/readiness:
+    get:
+      operationId: getObserveReadiness
+      tags: [Platform Observability Administration, Observability Diagnostics]
+      summary: Observability management-plane readiness
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.diagnostics]
+  /observe/capabilities:
+    get:
+      operationId: getObserveCapabilities
+      tags: [Platform Observability Administration, Observability Diagnostics]
+      summary: Observability management-plane capabilities
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.diagnostics]
+      x-apzhub-provider-execution: false
+  /observe/management-diagnostics:
+    get:
+      operationId: getObserveManagementDiagnostics
+      tags: [Platform Observability Administration, Observability Diagnostics]
+      summary: Safe observability diagnostics metadata aggregate
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.diagnostics]
+
 components:
   securitySchemes:
     sessionCookie:
@@ -5739,3 +8302,187 @@ components:
           $ref: "#/components/schemas/SupportIntelligenceSnapshot"
         meta:
           $ref: "#/components/schemas/Meta"
+    CreateConfigurationRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - namespaceKey
+        - key
+        - displayName
+        - valueKind
+        - hierarchyLevel
+        - scope
+      properties:
+        namespaceKey: { type: string, minLength: 1, maxLength: 128 }
+        namespaceName: { type: string, maxLength: 256 }
+        groupKey: { type: string, maxLength: 128 }
+        groupName: { type: string, maxLength: 256 }
+        key: { type: string, minLength: 1, maxLength: 128 }
+        displayName: { type: string, minLength: 1, maxLength: 256 }
+        description: { type: string, maxLength: 2000 }
+        valueKind:
+          type: string
+          enum: [string, number, boolean, json, array, object, null]
+        hierarchyLevel:
+          type: string
+          enum: [platform, tenant, organisation, product, environment, user]
+        scope:
+          $ref: "#/components/schemas/ConfigurationScopeBody"
+        organisationId: { type: string, maxLength: 128 }
+        inheritsFromConfigurationId: { type: string, maxLength: 128 }
+    ValidateConfigurationMetadataRequest:
+      type: object
+      additionalProperties: false
+      required: [hierarchyLevel, scope]
+      properties:
+        hierarchyLevel:
+          type: string
+          enum: [platform, tenant, organisation, product, environment, user]
+        scope:
+          $ref: "#/components/schemas/ConfigurationScopeBody"
+        status:
+          type: string
+          enum: [draft, validated, approved, published, deprecated, archived]
+        namespaceId: { type: string, maxLength: 128 }
+        groupId: { type: string, maxLength: 128 }
+        organisationId: { type: string, maxLength: 128 }
+    ConfigurationScopeBody:
+      type: object
+      additionalProperties: false
+      required: [kind]
+      properties:
+        kind:
+          type: string
+          enum: [global, tenant, organisation, product, environment, user]
+        tenantId: { type: string, maxLength: 128 }
+        organisationId: { type: string, maxLength: 128 }
+        productId: { type: string, maxLength: 128 }
+        environmentId: { type: string, maxLength: 128 }
+        userId: { type: string, maxLength: 128 }
+    CreateNotificationRequest:
+      type: object
+      additionalProperties: false
+      required: [title]
+      properties:
+        title: { type: string, minLength: 1, maxLength: 512 }
+        summary: { type: string, maxLength: 2000 }
+        body: { type: string, maxLength: 10000 }
+        key: { type: string, maxLength: 128 }
+        priority:
+          type: string
+          enum: [critical, high, normal, low, informational]
+        categoryId: { type: string, maxLength: 128 }
+        templateId: { type: string, maxLength: 128 }
+        channelKinds:
+          type: array
+          maxItems: 16
+          items:
+            type: string
+            enum: [email, sms, push, in_app, webhook, microsoft_teams, slack, future]
+        organisationId: { type: string, maxLength: 128 }
+        expiresAt: { type: string, format: date-time }
+        recipients:
+          type: array
+          maxItems: 100
+          items:
+            type: object
+            additionalProperties: false
+            required: [channelKind]
+            properties:
+              userId: { type: string, maxLength: 128 }
+              addressHint: { type: string, maxLength: 256 }
+              channelKind:
+                type: string
+                enum: [email, sms, push, in_app, webhook, microsoft_teams, slack, future]
+        references:
+          type: array
+          maxItems: 50
+          items:
+            type: object
+            additionalProperties: false
+            required: [kind, resourceId]
+            properties:
+              kind:
+                type: string
+                enum: [projects, support, testing, reporting, documents, workflow, search, future]
+              resourceId: { type: string, maxLength: 256 }
+              label: { type: string, maxLength: 256 }
+    UpdateNotificationRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        title: { type: string, minLength: 1, maxLength: 512 }
+        summary: { type: string, nullable: true, maxLength: 2000 }
+        body: { type: string, nullable: true, maxLength: 10000 }
+        priority:
+          type: string
+          enum: [critical, high, normal, low, informational]
+        categoryId: { type: string, nullable: true, maxLength: 128 }
+        templateId: { type: string, nullable: true, maxLength: 128 }
+        channelKinds:
+          type: array
+          maxItems: 16
+          items:
+            type: string
+            enum: [email, sms, push, in_app, webhook, microsoft_teams, slack, future]
+        expiresAt: { type: string, format: date-time, nullable: true }
+    TransitionNotificationRequest:
+      type: object
+      additionalProperties: false
+      required: [to]
+      properties:
+        to:
+          type: string
+          enum: [draft, pending, queued, delivered, read, acknowledged, dismissed, expired, archived]
+        reason: { type: string, maxLength: 512 }
+    CreateNotificationTemplateRequest:
+      type: object
+      additionalProperties: false
+      required: [key, name]
+      properties:
+        key: { type: string, minLength: 1, maxLength: 128 }
+        name: { type: string, minLength: 1, maxLength: 256 }
+        description: { type: string, maxLength: 2000 }
+        categoryId: { type: string, maxLength: 128 }
+        defaultPriority:
+          type: string
+          enum: [critical, high, normal, low, informational]
+        defaultChannelKinds:
+          type: array
+          maxItems: 16
+          items:
+            type: string
+            enum: [email, sms, push, in_app, webhook, microsoft_teams, slack, future]
+        subjectTemplate: { type: string, maxLength: 512 }
+        bodyTemplate: { type: string, maxLength: 10000 }
+        locale: { type: string, maxLength: 32 }
+        organisationId: { type: string, maxLength: 128 }
+    UpdateNotificationTemplateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name: { type: string, minLength: 1, maxLength: 256 }
+        description: { type: string, nullable: true, maxLength: 2000 }
+        categoryId: { type: string, nullable: true, maxLength: 128 }
+        defaultPriority:
+          type: string
+          enum: [critical, high, normal, low, informational]
+        defaultChannelKinds:
+          type: array
+          maxItems: 16
+          items:
+            type: string
+            enum: [email, sms, push, in_app, webhook, microsoft_teams, slack, future]
+        subjectTemplate: { type: string, nullable: true, maxLength: 512 }
+        bodyTemplate: { type: string, nullable: true, maxLength: 10000 }
+        locale: { type: string, nullable: true, maxLength: 32 }
+    UpdateNotificationPreferenceRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        enabled: { type: boolean }
+        quietHours: { type: string, nullable: true, maxLength: 128 }
+        categoryId: { type: string, nullable: true, maxLength: 128 }
+        channelKind:
+          type: string
+          enum: [email, sms, push, in_app, webhook, microsoft_teams, slack, future]

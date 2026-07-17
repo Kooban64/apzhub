@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-diagnostics
+name: Diagnostics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Diagnostics sidebar (Platform) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Diagnostics
+    icon: stethoscope
+    route: /workspace/observability/diagnostics
+    order: 190
+    permission: observe.diagnostics
+  view:
+    title: Diagnostics
+    workspace: observability
+    route: /workspace/observability/diagnostics
+    permission: observe.diagnostics

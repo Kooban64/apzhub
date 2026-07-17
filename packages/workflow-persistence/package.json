@@ -1,0 +1,21 @@
+{
+  "name": "@apzhub/workflow-persistence",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Workflow persistence — PostgreSQL + in-memory metadata (APZWORKFLOW-002)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/workflow-persistence"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/workflow-contracts": "workspace:*",
+    "@apzhub/workflow-core": "workspace:*",
+    "drizzle-orm": "^0.44.2"
+  }
+}

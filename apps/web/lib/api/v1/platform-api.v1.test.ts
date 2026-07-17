@@ -6,7 +6,6 @@ import path from "node:path";
 
 import { NextRequest } from "next/server";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import YAML from "yaml";
 
 import { PlatformServiceError } from "@apzhub/platform-service-contracts";
 
@@ -425,13 +424,10 @@ describe("OSS-110-07 Platform HTTP API", () => {
       expect(spec.paths["/tasks"]).toBeTruthy();
       expect(spec.paths["/tasks/{taskId}"]).toBeTruthy();
       expect(spec.paths["/issues"]).toBeUndefined();
-
-      const yaml = readFileSync(
-        path.resolve(process.cwd(), "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml"),
-        "utf8",
-      );
-      const parsed = YAML.parse(yaml) as { openapi: string };
-      expect(parsed.openapi.startsWith("3.1")).toBe(true);
+      expect(spec.paths["/workflows"]).toBeTruthy();
+      // Prefer shared loader (raised maxAliasCount) — raw YAML.parse hits alias limits on 1.2.0+.
+      const full = loadPlatformOpenApiSpecObject() as { openapi: string };
+      expect(full.openapi.startsWith("3.1")).toBe(true);
     });
   });
 });

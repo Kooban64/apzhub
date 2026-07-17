@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Audit
     icon: file-text
-    route: /workspace/administration/audit
+    route: /workspace/operations/audit
     order: 100
     permission: platform.nav.administration.view
   view:
     title: Audit
-    workspace: administration
-    route: /workspace/administration/audit
+    workspace: operations
+    route: /workspace/operations/audit
     permission: platform.nav.administration.view

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-references
+name: References
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — References sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: References
+    icon: book-marked
+    route: /workspace/identity/references
+    order: 150
+    permission: identity.read
+  view:
+    title: References
+    workspace: identity
+    route: /workspace/identity/references
+    permission: identity.read

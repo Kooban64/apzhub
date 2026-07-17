@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-metric-samples
+name: Metric Samples
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Metric Samples sidebar (Telemetry Metadata) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Metric Samples
+    icon: chart-line
+    route: /workspace/observability/metric-samples
+    order: 100
+    permission: observe.metrics
+  view:
+    title: Metric Samples
+    workspace: observability
+    route: /workspace/observability/metric-samples
+    permission: observe.metrics

@@ -25,9 +25,19 @@ export {
   type AutomationSuiteSearchInput,
   type CertificationDecisionSearchInput,
   type CertificationEvidenceSearchInput,
+  type DefectSummarySearchInput,
   type TestingSearchMappableEntity,
   type TestingSearchMappingExtras,
 } from "./mapper/testing-search-entity-mapper";
+
+export { ManualTestingSearchMapper } from "./mapper/manual";
+export { AutomationSearchMapper } from "./mapper/automation";
+export { CertificationSearchMapper } from "./mapper/certification";
+export { ReleaseSearchMapper } from "./mapper/release";
+export { EngineeringIntelligenceSearchMapper } from "./mapper/engineering-intelligence";
+export { QualitySearchMapper } from "./mapper/quality";
+export { ReportingMetadataSearchMapper } from "./mapper/reporting-metadata";
+export { PipelineSearchMapper } from "./mapper/pipeline";
 
 export {
   TestingSearchEntityValidator,
@@ -50,9 +60,26 @@ export {
 } from "./diagnostics/testing-search-observability";
 
 export {
+  TESTING_SEARCH_DOMAIN_ENTITY_TYPES,
+  DomainSearchPublisherBase,
+  ManualTestingPublisher,
+  AutomationPublisher,
+  CertificationPublisher,
+  ReleasePublisher,
+  EngineeringIntelligencePublisher,
+  QualityPublisher,
+  ReportingMetadataPublisher,
+  PipelinePublisher,
   TestingSearchPublisher,
-  type TestingSearchPublisherOptions,
-} from "./publisher/testing-search-publisher";
+} from "./publisher";
+
+export type {
+  TestingDomainSearchPublisher,
+  TestingSearchDomainId,
+  TestingSearchPublisherOptions,
+  TestingSearchSpecialisedPublishers,
+  DomainSearchPublisherDeps,
+} from "./publisher";
 
 export {
   createTestingSearchLifecycleHooks,

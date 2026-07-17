@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-service-assignments
+name: Service Assignments
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — Service Assignments sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: Service Assignments
+    icon: plug
+    route: /workspace/identity/service-assignments
+    order: 100
+    permission: identity.read
+  view:
+    title: Service Assignments
+    workspace: identity
+    route: /workspace/identity/service-assignments
+    permission: identity.read

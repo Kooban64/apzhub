@@ -9,17 +9,17 @@ import {
 describe("platform operations routes", () => {
   it("detects operations workspace routes", () => {
     expect(isPlatformOperationsRoute(PLATFORM_OPERATIONS_BASE)).toBe(true);
-    expect(isPlatformOperationsRoute("/workspace/administration/tenants")).toBe(true);
+    expect(isPlatformOperationsRoute("/workspace/operations/tenants")).toBe(true);
     expect(isPlatformOperationsRoute("/workspace/home")).toBe(false);
   });
 
   it("resolves operations sections from pathname", () => {
     expect(resolvePlatformOperationsSection(PLATFORM_OPERATIONS_BASE)).toBe("dashboard");
-    expect(resolvePlatformOperationsSection("/workspace/administration/roles")).toBe("roles");
-    expect(resolvePlatformOperationsSection("/workspace/administration/governance")).toBe(
+    expect(resolvePlatformOperationsSection("/workspace/operations/roles")).toBe("roles");
+    expect(resolvePlatformOperationsSection("/workspace/operations/governance")).toBe(
       "governance",
     );
-    expect(resolvePlatformOperationsSection("/workspace/administration/capabilities")).toBe(
+    expect(resolvePlatformOperationsSection("/workspace/operations/capabilities")).toBe(
       "capabilities",
     );
   });

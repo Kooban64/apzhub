@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-incident-references
+name: Incident References
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Incident References sidebar (Operations Metadata) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Incident References
+    icon: life-buoy
+    route: /workspace/observability/incident-references
+    order: 170
+    permission: observe.read
+  view:
+    title: Incident References
+    workspace: observability
+    route: /workspace/observability/incident-references
+    permission: observe.read

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-references
+name: References
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — References sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: References
+    icon: link-2
+    route: /workspace/administration/references
+    order: 140
+    permission: admin.read
+  view:
+    title: References
+    workspace: administration
+    route: /workspace/administration/references
+    permission: admin.read

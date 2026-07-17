@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-diagnostics
+name: Diagnostics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Diagnostics sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Diagnostics
+    icon: stethoscope
+    route: /workspace/administration/diagnostics
+    order: 170
+    permission: admin.diagnostics
+  view:
+    title: Diagnostics
+    workspace: administration
+    route: /workspace/administration/diagnostics
+    permission: admin.diagnostics

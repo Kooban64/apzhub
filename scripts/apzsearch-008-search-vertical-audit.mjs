@@ -488,7 +488,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.18.0",
+  "0.19.0",
   "version-platform-services",
 );
 

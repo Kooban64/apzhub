@@ -23,7 +23,19 @@ import {
 } from "./hooks/testing-search-lifecycle-hooks";
 import { TestingSearchLifecycle } from "./lifecycle/testing-search-lifecycle";
 import { TestingSearchEntityMapper } from "./mapper/testing-search-entity-mapper";
-import { TestingSearchPublisher } from "./publisher/testing-search-publisher";
+import { AutomationPublisher } from "./publisher/automation-publisher";
+import { CertificationPublisher } from "./publisher/certification-publisher";
+import type { DomainSearchPublisherDeps } from "./publisher/domain-search-publisher-base";
+import { EngineeringIntelligencePublisher } from "./publisher/engineering-intelligence-publisher";
+import { ManualTestingPublisher } from "./publisher/manual-testing-publisher";
+import { PipelinePublisher } from "./publisher/pipeline-publisher";
+import { QualityPublisher } from "./publisher/quality-publisher";
+import { ReleasePublisher } from "./publisher/release-publisher";
+import { ReportingMetadataPublisher } from "./publisher/reporting-metadata-publisher";
+import {
+  TestingSearchPublisher,
+  type TestingSearchSpecialisedPublishers,
+} from "./publisher/testing-search-publisher";
 import { TestingSearchEntityValidator } from "./validator/testing-search-entity-validator";
 
 export type CreateTestingSearchAdapterOptions = {
@@ -45,6 +57,7 @@ export type TestingSearchAdapter = {
   readonly diagnostics: TestingSearchDiagnostics;
   readonly errors: TestingSearchErrorTranslator;
   readonly integration: SearchIntegrationFramework;
+  readonly specialisedPublishers: TestingSearchSpecialisedPublishers;
 };
 
 function resolveProductionIntegration(
@@ -99,6 +112,31 @@ function resolveProductionIntegration(
   );
 }
 
+function buildSpecialisedPublishers(
+  deps: DomainSearchPublisherDeps,
+  mapper: TestingSearchEntityMapper,
+): TestingSearchSpecialisedPublishers {
+  return {
+    manual: new ManualTestingPublisher(deps, mapper.getManualMapper()),
+    automation: new AutomationPublisher(deps, mapper.getAutomationMapper()),
+    certification: new CertificationPublisher(
+      deps,
+      mapper.getCertificationMapper(),
+    ),
+    release: new ReleasePublisher(deps, mapper.getReleaseMapper()),
+    engineeringIntelligence: new EngineeringIntelligencePublisher(
+      deps,
+      mapper.getEngineeringMapper(),
+    ),
+    quality: new QualityPublisher(deps, mapper.getQualityMapper()),
+    reportingMetadata: new ReportingMetadataPublisher(
+      deps,
+      mapper.getReportingMapper(),
+    ),
+    pipeline: new PipelinePublisher(deps, mapper.getPipelineMapper()),
+  };
+}
+
 function buildAdapter(
   integration: SearchIntegrationFramework,
   integrationPublisher: SearchIntegrationPublisher,
@@ -111,8 +149,20 @@ function buildAdapter(
   const diagnostics = new TestingSearchDiagnostics();
   const errors = new TestingSearchErrorTranslator();
 
+  const deps: DomainSearchPublisherDeps = {
+    integrationPublisher,
+    validator,
+    metrics,
+    logger,
+    diagnostics,
+    errors,
+  };
+
+  const specialisedPublishers = buildSpecialisedPublishers(deps, mapper);
+
   const publisher = new TestingSearchPublisher({
     integrationPublisher,
+    specialisedPublishers,
     mapper,
     validator,
     lifecycle,
@@ -133,6 +183,7 @@ function buildAdapter(
     diagnostics,
     errors,
     integration,
+    specialisedPublishers,
   };
 }
 

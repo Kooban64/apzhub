@@ -1,6 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
-import { getDatabaseUrl } from "@apzhub/config";
 import {
   checkDatabaseHealth,
   createDb,
@@ -36,7 +35,9 @@ async function isPostgresIntegrationAvailable(): Promise<boolean> {
 const postgresAvailable = await isPostgresIntegrationAvailable();
 
 describe.runIf(postgresAvailable)("PostgresEntityMappingStore integration", () => {
-  const connectionString = process.env.DATABASE_URL ?? getDatabaseUrl();
+  // Dummy URL only for suite collection when skipped — never call getDatabaseUrl() at load.
+  const connectionString =
+    process.env.DATABASE_URL ?? "postgres://localhost:5432/apzhub_skip";
   const db = createDb(connectionString);
   const logger = new InMemoryMappingStoreLogger();
   const metrics = new InMemoryMappingStoreMetrics();
@@ -143,7 +144,8 @@ describe.runIf(postgresAvailable)("PostgresEntityMappingStore integration", () =
 });
 
 describe.runIf(postgresAvailable)("MappingOrchestrator + Postgres store", () => {
-  const connectionString = process.env.DATABASE_URL ?? getDatabaseUrl();
+  const connectionString =
+    process.env.DATABASE_URL ?? "postgres://localhost:5432/apzhub_skip";
   const db = createDb(connectionString);
 
   beforeAll(async () => {

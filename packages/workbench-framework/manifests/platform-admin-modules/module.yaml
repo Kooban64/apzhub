@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-modules
+name: Modules
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Modules sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Modules
+    icon: boxes
+    route: /workspace/administration/modules
+    order: 20
+    permission: admin.read
+  view:
+    title: Modules
+    workspace: administration
+    route: /workspace/administration/modules
+    permission: admin.read

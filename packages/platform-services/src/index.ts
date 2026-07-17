@@ -101,6 +101,66 @@ export {
   resolveSearchMeilisearchProviderEnv,
   createSearchExecutionServiceImpls,
 } from "./services/search-execution";
+export {
+  createWorkflowPlatformServices,
+  createWorkflowPlatformServicesForProduction,
+  createWorkflowPlatformServicesForTest,
+  wrapWorkflowPlatformGatewayWithPipeline,
+  createWorkflowPlatformServiceImpls,
+  createWorkflowEngineServicesForProduction,
+  createWorkflowEngineServicesForTest,
+  wrapWorkflowEngineGatewayWithPipeline,
+  createWorkflowEngineServiceImpls,
+  createUnavailableWorkflowEngineServices,
+  isWorkflowServiceEnabled,
+  mapWorkflowDomainError,
+  mapEngineError,
+} from "./services/workflow";
+export {
+  createNotificationPlatformServices,
+  createNotificationPlatformServicesForProduction,
+  createNotificationPlatformServicesForTest,
+  wrapNotificationPlatformGatewayWithPipeline,
+  createNotificationPlatformServiceImpls,
+  isNotificationServiceEnabled,
+  mapNotificationDomainError,
+} from "./services/notification";
+export {
+  createConfigurationPlatformServices,
+  createConfigurationPlatformServicesForProduction,
+  createConfigurationPlatformServicesForTest,
+  wrapConfigurationPlatformGatewayWithPipeline,
+  createConfigurationPlatformServiceImpls,
+  isConfigurationServiceEnabled,
+  mapConfigurationDomainError,
+} from "./services/configuration";
+export {
+  createAdministrationPlatformServices,
+  createAdministrationPlatformServicesForProduction,
+  createAdministrationPlatformServicesForTest,
+  wrapAdministrationPlatformGatewayWithPipeline,
+  createAdministrationPlatformServiceImpls,
+  isAdministrationServiceEnabled,
+  mapAdministrationDomainError,
+} from "./services/administration";
+export {
+  createIdentityPlatformServices,
+  createIdentityPlatformServicesForProduction,
+  createIdentityPlatformServicesForTest,
+  wrapIdentityPlatformGatewayWithPipeline,
+  createIdentityPlatformServiceImpls,
+  isIdentityServiceEnabled,
+  mapIdentityDomainError,
+} from "./services/identity";
+export {
+  createObservePlatformServices,
+  createObservePlatformServicesForProduction,
+  createObservePlatformServicesForTest,
+  wrapObservePlatformGatewayWithPipeline,
+  createObservePlatformServiceImpls,
+  isObserveServiceEnabled,
+  mapObserveDomainError,
+} from "./services/observe";
 
 export type {
   CreatePlatformServicesInput,
@@ -135,6 +195,51 @@ export type {
   SearchMeilisearchProviderEnv,
   MeilisearchSearchProviderOptions,
 } from "./services/search-execution";
+export type {
+  CreateWorkflowPlatformServicesForProductionInput,
+  CreateWorkflowPlatformServicesForTestInput,
+  CreateWorkflowPlatformServicesInput,
+  WorkflowPlatformServicesBundle,
+  WorkflowPlatformServiceImpls,
+  CreateWorkflowEngineServicesForProductionInput,
+  CreateWorkflowEngineServicesForTestInput,
+  WorkflowEngineServicesBundle,
+} from "./services/workflow";
+export type {
+  CreateNotificationPlatformServicesForProductionInput,
+  CreateNotificationPlatformServicesForTestInput,
+  CreateNotificationPlatformServicesInput,
+  NotificationPlatformServicesBundle,
+  NotificationPlatformServiceImpls,
+} from "./services/notification";
+export type {
+  CreateConfigurationPlatformServicesForProductionInput,
+  CreateConfigurationPlatformServicesForTestInput,
+  CreateConfigurationPlatformServicesInput,
+  ConfigurationPlatformServicesBundle,
+  ConfigurationPlatformServiceImpls,
+} from "./services/configuration";
+export type {
+  CreateAdministrationPlatformServicesForProductionInput,
+  CreateAdministrationPlatformServicesForTestInput,
+  CreateAdministrationPlatformServicesInput,
+  AdministrationPlatformServicesBundle,
+  AdministrationPlatformServiceImpls,
+} from "./services/administration";
+export type {
+  CreateIdentityPlatformServicesForProductionInput,
+  CreateIdentityPlatformServicesForTestInput,
+  CreateIdentityPlatformServicesInput,
+  IdentityPlatformServicesBundle,
+  IdentityPlatformServiceImpls,
+} from "./services/identity";
+export type {
+  CreateObservePlatformServicesForProductionInput,
+  CreateObservePlatformServicesForTestInput,
+  CreateObservePlatformServicesInput,
+  ObservePlatformServicesBundle,
+  ObservePlatformServiceImpls,
+} from "./services/observe";
 export type {
   CreateTestingPlatformServicesForProductionInput,
   CreateTestingPlatformServicesForTestInput,

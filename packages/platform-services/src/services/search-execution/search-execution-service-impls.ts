@@ -15,7 +15,6 @@ import type {
   SearchIndexedDocument,
   SearchQuery,
   SearchQueryValidationResult,
-  SearchRequest,
   SearchRequestContext,
   SearchResponse,
   SearchResultPage,

@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Health
     icon: heart-pulse
-    route: /workspace/administration/health
+    route: /workspace/operations/health
     order: 110
     permission: platform.nav.administration.view
   view:
     title: Health
-    workspace: administration
-    route: /workspace/administration/health
+    workspace: operations
+    route: /workspace/operations/health
     permission: platform.nav.administration.view

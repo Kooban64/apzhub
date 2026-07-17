@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-history
+name: History
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — History sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: History
+    icon: history
+    route: /workspace/administration/history
+    order: 160
+    permission: admin.audit
+  view:
+    title: History
+    workspace: administration
+    route: /workspace/administration/history
+    permission: admin.audit

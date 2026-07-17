@@ -64,8 +64,8 @@ const baseConfig = {
 };
 
 describe("APZSEARCH-003 search platform services", () => {
-  it("exports platform services version 0.18.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.18.0");
+  it("exports platform services version 0.24.0", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
   });
 
   it("registers search permissions in the platform catalogue", () => {
@@ -417,7 +417,7 @@ describe("APZSEARCH-003 search platform services", () => {
     await expect(
       (async () => {
         throw already;
-      })().catch(async (error) => {
+      })().catch(async (_error) => {
         // Exercise wrapFacet rethrow by invoking through a fake by hijacking validateQuery
         const g = createSearchPlatformServiceImpls({
           foundation: {

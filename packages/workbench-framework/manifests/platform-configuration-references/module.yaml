@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-configuration-references
+name: References
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Configuration — References sidebar (APZCONFIG-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: configuration
+    parent: platform-configuration
+    label: References
+    icon: link
+    route: /workspace/configuration/references
+    order: 90
+    permission: configuration.read
+  view:
+    title: References
+    workspace: configuration
+    route: /workspace/configuration/references
+    permission: configuration.read

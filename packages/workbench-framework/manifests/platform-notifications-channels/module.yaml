@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-notifications-channels
+name: Channels
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Notifications — Channels sidebar (APZNOTIFY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: notifications
+    parent: platform-notifications
+    label: Channels
+    icon: radio
+    route: /workspace/notifications/channels
+    order: 60
+    permission: notification.read
+  view:
+    title: Channels
+    workspace: notifications
+    route: /workspace/notifications/channels
+    permission: notification.read

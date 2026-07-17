@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflow-engine-projects
+name: Projects
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Workflow Engine — Projects sidebar (APZWORKFLOW-009).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflow-engine
+    parent: platform-workflow-engine
+    label: Projects
+    icon: folder-kanban
+    route: /workspace/workflow-engine/projects
+    order: 40
+    permission: workflow.engine.read
+  view:
+    title: Projects
+    workspace: workflow-engine
+    route: /workspace/workflow-engine/projects
+    permission: workflow.engine.read

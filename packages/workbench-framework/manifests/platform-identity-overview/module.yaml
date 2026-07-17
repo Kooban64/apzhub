@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-overview
+name: Overview
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — Overview sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: Overview
+    icon: layout-dashboard
+    route: /workspace/identity/overview
+    order: 10
+    permission: identity.read
+  view:
+    title: Overview
+    workspace: identity
+    route: /workspace/identity/overview
+    permission: identity.read

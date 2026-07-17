@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Tenants
     icon: building
-    route: /workspace/administration/tenants
+    route: /workspace/operations/tenants
     order: 10
     permission: platform.nav.administration.view
   view:
     title: Tenants
-    workspace: administration
-    route: /workspace/administration/tenants
+    workspace: operations
+    route: /workspace/operations/tenants
     permission: platform.nav.administration.view

@@ -5,6 +5,7 @@
  */
 
 export const TESTING_SEARCH_ENTITY_TYPES = [
+  // Manual
   "test_plan",
   "test_suite",
   "test_case",
@@ -15,15 +16,18 @@ export const TESTING_SEARCH_ENTITY_TYPES = [
   "approval",
   "requirement",
   "defect",
+  // Automation
   "automation_run",
   "automation_suite",
   "imported_result",
   "coverage_summary",
+  // Certification
   "certification",
   "certification_gate",
   "certification_approval",
   "certification_evidence",
   "certification_decision",
+  // Release
   "release",
   "release_candidate",
   "release_package",
@@ -32,13 +36,23 @@ export const TESTING_SEARCH_ENTITY_TYPES = [
   "release_decision",
   "release_manifest",
   "release_summary",
+  // Engineering intelligence (Engineering Score → engineering_snapshot)
   "engineering_snapshot",
   "engineering_trend",
   "benchmark",
   "historical_snapshot",
   "risk_summary",
+  // Quality (additional to automation coverage_summary / manual defect)
+  "quality_summary",
+  "quality_coverage_summary",
+  "defect_summary",
+  // Reporting metadata
   "report_metadata",
   "report_template",
+  // Pipeline metadata
+  "pipeline",
+  "pipeline_run",
+  "pipeline_import",
 ] as const;
 
 export type TestingSearchEntityType =

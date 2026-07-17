@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-log-sources
+name: Log Sources
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Log Sources sidebar (Telemetry Metadata) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Log Sources
+    icon: scroll-text
+    route: /workspace/observability/log-sources
+    order: 110
+    permission: observe.logs
+  view:
+    title: Log Sources
+    workspace: observability
+    route: /workspace/observability/log-sources
+    permission: observe.logs

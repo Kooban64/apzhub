@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Feature Flags
     icon: flag
-    route: /workspace/administration/feature-flags
+    route: /workspace/operations/feature-flags
     order: 130
     permission: platform.nav.administration.view
   view:
     title: Feature Flags
-    workspace: administration
-    route: /workspace/administration/feature-flags
+    workspace: operations
+    route: /workspace/operations/feature-flags
     permission: platform.nav.administration.view

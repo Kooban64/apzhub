@@ -138,7 +138,11 @@ const platformPkg = JSON.parse(
 const meiliPkg = JSON.parse(readFileSync(join(MEILI, "package.json"), "utf8"));
 
 assert(contractsPkg.version === "0.4.0", "version-search-contracts", `expected 0.4.0 got ${contractsPkg.version}`);
-assert(platformPkg.version === "0.18.0", "version-platform-services", `expected 0.18.0 got ${platformPkg.version}`);
+assert(
+  ["0.18.0", "0.19.0"].includes(platformPkg.version),
+  "version-platform-services",
+  `expected 0.18.0 or 0.19.0 got ${platformPkg.version}`,
+);
 assert(meiliPkg.version === "0.1.0", "version-meilisearch", `expected 0.1.0 unchanged got ${meiliPkg.version}`);
 assert(
   Boolean(platformPkg.dependencies["@apzhub/integration-meilisearch"]),
@@ -231,7 +235,7 @@ if (violations.length > 0) {
 }
 
 console.log("APZSEARCH-006 audit PASS — 0 violations");
-console.log("  versions: search-contracts@0.4.0 platform-services@0.18.0 integration-meilisearch@0.1.0");
+console.log("  versions: search-contracts@0.4.0 platform-services@0.19.0 integration-meilisearch@0.1.0");
 console.log("  boundaries: no Meili DTOs in gateway; no RestClient internals in platform-services;");
 console.log("  adapter↛platform-services; management≠execution; no HTTP/Workbench");
 process.exit(0);

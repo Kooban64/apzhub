@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-notifications-diagnostics
+name: Diagnostics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Notifications — Diagnostics sidebar (APZNOTIFY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: notifications
+    parent: platform-notifications
+    label: Diagnostics
+    icon: activity
+    route: /workspace/notifications/diagnostics
+    order: 100
+    permission: notification.read
+  view:
+    title: Diagnostics
+    workspace: notifications
+    route: /workspace/notifications/diagnostics
+    permission: notification.read

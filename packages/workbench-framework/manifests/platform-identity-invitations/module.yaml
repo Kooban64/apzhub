@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-invitations
+name: Invitations
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — Invitations sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: Invitations
+    icon: mail
+    route: /workspace/identity/invitations
+    order: 110
+    permission: identity.read
+  view:
+    title: Invitations
+    workspace: identity
+    route: /workspace/identity/invitations
+    permission: identity.read

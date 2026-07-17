@@ -1,0 +1,40 @@
+manifestSchemaVersion: "1.0"
+id: platform-notifications
+name: Notifications
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Notifications workspace — metadata workbench (APZNOTIFY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: notifications
+    icon: bell
+    route: /workspace/notifications
+    order: 51
+    permission: notification.read
+  view:
+    title: Notifications
+    workspace: notifications
+    route: /workspace/notifications
+    default: true
+    permission: notification.read
+  actions:
+    - id: platform.notifications.navigate
+      label: Go to Notifications
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: notification.read
+      palette: true
+      group: Navigation
+      icon: bell
+      order: 51
+      description: Reveal the Notifications navigation item in the workbench shell.

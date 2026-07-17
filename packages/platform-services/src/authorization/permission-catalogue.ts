@@ -7,6 +7,30 @@ import {
   PLATFORM_SEARCH_PERMISSIONS,
   type PlatformSearchPermission,
 } from "@apzhub/search-contracts";
+import {
+  PLATFORM_WORKFLOW_PERMISSIONS,
+  type PlatformWorkflowPermission,
+} from "@apzhub/workflow-contracts";
+import {
+  PLATFORM_NOTIFICATION_PERMISSIONS,
+  type PlatformNotificationPermission,
+} from "@apzhub/notification-contracts";
+import {
+  PLATFORM_CONFIGURATION_PERMISSIONS,
+  type PlatformConfigurationPermission,
+} from "@apzhub/configuration-contracts";
+import {
+  PLATFORM_ADMIN_PERMISSIONS,
+  type PlatformAdminPermission,
+} from "@apzhub/admin-contracts";
+import {
+  PLATFORM_IDENTITY_PERMISSIONS,
+  type PlatformIdentityPermission,
+} from "@apzhub/identity-contracts";
+import {
+  PLATFORM_OBSERVE_PERMISSIONS,
+  type PlatformObservePermission,
+} from "@apzhub/observe-contracts";
 
 /**
  * Platform permission catalogue for gateway-exposed capabilities (OSS-110-06 / OSS-110-08).
@@ -68,6 +92,12 @@ export type PlatformPermissionKey =
   | ApzTcmsPermission
   | PlatformDocumentPermission
   | PlatformSearchPermission
+  | PlatformWorkflowPermission
+  | PlatformNotificationPermission
+  | PlatformConfigurationPermission
+  | PlatformAdminPermission
+  | PlatformIdentityPermission
+  | PlatformObservePermission
   | "platform.impersonation.use";
 
 export function permissionKey(
@@ -171,7 +201,19 @@ export const PLATFORM_SERVICE_PERMISSION_CATALOGUE = [
   ...APZ_TCMS_PERMISSIONS,
   // Document platform services (APZDOCS-003)
   ...PLATFORM_DOCUMENT_PERMISSIONS,
-  // Administration / provider / mapping
+  // Workflow platform services (APZWORKFLOW-002)
+  ...PLATFORM_WORKFLOW_PERMISSIONS,
+  // Notification platform services (APZNOTIFY-002)
+  ...PLATFORM_NOTIFICATION_PERMISSIONS,
+  // Configuration platform services (APZCONFIG-002)
+  ...PLATFORM_CONFIGURATION_PERMISSIONS,
+  // Administration platform services (APZADMIN-002) — admin.* keys (not legacy administration.*)
+  ...PLATFORM_ADMIN_PERMISSIONS,
+  // Identity Administration platform services (APZIDENTITY-002) — identity.* keys
+  ...PLATFORM_IDENTITY_PERMISSIONS,
+  // Observability platform services (APZOBSERVE-002) — observe.* keys
+  ...PLATFORM_OBSERVE_PERMISSIONS,
+  // Legacy Administration / provider / mapping capability keys
   "administration.manage",
   "administration.administer",
   "administration.read",

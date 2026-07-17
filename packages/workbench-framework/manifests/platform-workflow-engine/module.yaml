@@ -1,0 +1,58 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflow-engine
+name: Workflow Engine
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Workflow Engine Workbench — read-only engine metadata (APZWORKFLOW-009).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: workflow-engine
+    icon: circuit-board
+    route: /workspace/workflow-engine
+    order: 53
+    permission: workflow.engine.read
+  view:
+    title: Workflow Engine
+    workspace: workflow-engine
+    route: /workspace/workflow-engine
+    default: true
+    permission: workflow.engine.read
+  actions:
+    - id: platform.workflow-engine.navigate
+      label: Go to Workflow Engine
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: workflow.engine.read
+      palette: true
+      group: Navigation
+      icon: circuit-board
+      order: 53
+      description: Reveal the Workflow Engine navigation item in the workbench shell.
+    - id: platform.workflow-engine.refresh
+      label: Refresh Workflow Engine
+      handler: workbench-bridge:workbench.view.refresh
+      permission: workflow.engine.read
+      palette: true
+      group: Workflow Engine
+      icon: refresh-cw
+      order: 10
+      description: Refresh Workflow Engine workbench data.
+    - id: platform.workflow-engine.validate
+      label: Validate Engine Connection
+      handler: workbench-bridge:workbench.view.refresh
+      permission: workflow.engine.health
+      palette: true
+      group: Workflow Engine
+      icon: shield-check
+      order: 20
+      description: Validate the Workflow Engine connection (read-only).

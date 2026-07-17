@@ -1,0 +1,40 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin
+name: Administration
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Central governance and metadata control centre for APZHUB platform capabilities.
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: administration
+    icon: sliders-horizontal
+    route: /workspace/administration
+    order: 54
+    permission: admin.read
+  view:
+    title: Administration
+    workspace: administration
+    route: /workspace/administration
+    default: true
+    permission: admin.read
+  actions:
+    - id: platform.admin.navigate
+      label: Go to Administration
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: admin.read
+      palette: true
+      group: Navigation
+      icon: sliders-horizontal
+      order: 54
+      description: Reveal the Administration navigation item in the workbench shell.

@@ -1,6 +1,8 @@
-# `@apzhub/search-testing` **0.1.0**
+# `@apzhub/search-testing` **0.1.1**
 
 APZ TCMS Search Publication Adapter (APZSEARCH-013). Maps Testing domain metadata → Search Integration Framework drafts (`productId: "testing"`).
+
+**Architecture:** `TestingSearchPublisher` orchestrates specialised domain publishers (Manual, Automation, Certification, Release, Engineering Intelligence, Quality, Reporting Metadata, Pipeline). See [Publisher Architecture](../../docs/architecture/APZHUB-Testing-Search-Publisher-Architecture.md).
 
 ```ts
 import {
@@ -23,6 +25,9 @@ const context = createTestingSearchPublicationContext({
 
 const hooks = createTestingSearchLifecycleHooks(publisher);
 hooks.onTestCaseUpserted(context, testCase);
+
+// Optional: access specialised publishers
+publisher.getSpecialisedPublishers().quality;
 ```
 
 Production factories require an explicit `sink` or `integrationPublisher` (no silent in-memory fallback).
@@ -32,4 +37,4 @@ pnpm audit:search-testing
 pnpm --filter @apzhub/search-testing test
 ```
 
-Metadata-only — never evidence binaries, report bodies, CI secrets, storage refs, or checksum fingerprints.
+Metadata-only — never evidence binaries, report bodies, CI secrets, storage refs, pipeline logs/artifacts, or checksum fingerprints.

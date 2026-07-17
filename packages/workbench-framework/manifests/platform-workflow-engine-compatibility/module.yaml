@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflow-engine-compatibility
+name: Compatibility
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Workflow Engine — Compatibility sidebar (APZWORKFLOW-009).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflow-engine
+    parent: platform-workflow-engine
+    label: Compatibility
+    icon: shield-check
+    route: /workspace/workflow-engine/compatibility
+    order: 100
+    permission: workflow.engine.capabilities
+  view:
+    title: Compatibility
+    workspace: workflow-engine
+    route: /workspace/workflow-engine/compatibility
+    permission: workflow.engine.capabilities

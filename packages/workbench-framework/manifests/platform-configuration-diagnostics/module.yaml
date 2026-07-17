@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-configuration-diagnostics
+name: Diagnostics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Configuration — Diagnostics sidebar (APZCONFIG-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: configuration
+    parent: platform-configuration
+    label: Diagnostics
+    icon: activity
+    route: /workspace/configuration/diagnostics
+    order: 110
+    permission: configuration.read
+  view:
+    title: Diagnostics
+    workspace: configuration
+    route: /workspace/configuration/diagnostics
+    permission: configuration.read

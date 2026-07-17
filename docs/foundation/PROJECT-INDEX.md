@@ -5,8 +5,8 @@
 > **Authoritative references:** [docs/README.md](../README.md) — full documentation registry  
 > **Related documents:** [DOCUMENT-MAP](./DOCUMENT-MAP.md) · [AI-CONTEXT](./AI-CONTEXT.md)  
 > **Reading order:** Start here for navigation  
-> **Last updated:** 2026-07-10  
-> **Current status:** Active — Knowledge Foundation entry point
+> **Last updated:** 2026-07-17  
+> **Current status:** Active — Knowledge Foundation entry point; Observability programme **closed/frozen** (APZOBSERVE-006); next awaiting owner: **APZMETRICS-001**
 
 ---
 
@@ -105,11 +105,11 @@
 | Item | Status |
 |------|--------|
 | Platform Core v2 | CERTIFIED WITH OBSERVATIONS |
-| Integration SDK | v0.2.0 (OSS-100-02 complete) |
-| Development stop | APZHUB-000 complete → await owner approval |
-| Next milestone | OSS-100-04 (pending approval) |
+| Observability programme | **CLOSED/FROZEN** (APZOBSERVE-006) — **PRODUCTION_READY_WITH_LIMITATIONS** |
+| Development stop | See [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) |
+| Next milestone (awaiting owner) | **APZMETRICS-001 — Platform Metrics Foundation** |
 
-See [CURRENT-MILESTONE](./CURRENT-MILESTONE.md).
+See [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [Observability Freeze Notice](../architecture/APZHUB-Observability-Architecture-Freeze-Notice.md) · [Observability Reference Standard](../architecture/APZHUB-Observability-Reference-Standard.md).
 
 ---
 

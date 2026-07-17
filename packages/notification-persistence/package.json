@@ -1,0 +1,21 @@
+{
+  "name": "@apzhub/notification-persistence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Notification persistence — PostgreSQL + in-memory metadata (APZNOTIFY-001)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/notification-persistence"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/notification-contracts": "workspace:*",
+    "@apzhub/notification-core": "workspace:*",
+    "drizzle-orm": "^0.44.2"
+  }
+}

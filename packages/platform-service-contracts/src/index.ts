@@ -170,7 +170,7 @@ export type {
 
 export type { TestingDashboardSummary } from "./domain/testing-dashboard";
 
-export const PLATFORM_SERVICE_CONTRACTS_VERSION = "0.15.0";
+export const PLATFORM_SERVICE_CONTRACTS_VERSION = "0.16.0";
 
 export const PLATFORM_SERVICE_IDS = [
   "workspace-service",

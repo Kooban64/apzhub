@@ -1,0 +1,21 @@
+{
+  "name": "@apzhub/configuration-persistence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Configuration persistence — PostgreSQL + in-memory metadata (APZCONFIG-001)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/configuration-persistence"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/configuration-contracts": "workspace:*",
+    "@apzhub/configuration-core": "workspace:*",
+    "drizzle-orm": "^0.44.2"
+  }
+}

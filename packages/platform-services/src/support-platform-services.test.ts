@@ -497,7 +497,7 @@ async function seedSupportMappings(store: InMemoryEntityMappingStore) {
 
 describe("OSS-110-10 package version", () => {
   it("bumps platform-services to 0.10.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.18.0");
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
   });
 });
 

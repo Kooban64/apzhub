@@ -1,0 +1,40 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity
+name: Identity
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Identity Administration Workbench — user, group, role, and tenant metadata (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: identity
+    icon: users
+    route: /workspace/identity
+    order: 53
+    permission: identity.read
+  view:
+    title: Identity
+    workspace: identity
+    route: /workspace/identity
+    default: true
+    permission: identity.read
+  actions:
+    - id: platform.identity.navigate
+      label: Go to Identity
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: identity.read
+      palette: true
+      group: Navigation
+      icon: users
+      order: 53
+      description: Reveal the Identity navigation item in the workbench shell.

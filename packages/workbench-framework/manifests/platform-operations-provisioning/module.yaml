@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Provisioning
     icon: workflow
-    route: /workspace/administration/provisioning
+    route: /workspace/operations/provisioning
     order: 80
     permission: platform.nav.administration.view
   view:
     title: Provisioning
-    workspace: administration
-    route: /workspace/administration/provisioning
+    workspace: operations
+    route: /workspace/operations/provisioning
     permission: platform.nav.administration.view

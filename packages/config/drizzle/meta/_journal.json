@@ -309,6 +309,90 @@
       "when": 1783979000000,
       "tag": "0043_apz_platform_search_management",
       "breakpoints": true
+    },
+    {
+      "idx": 44,
+      "version": "7",
+      "when": 1784030000000,
+      "tag": "0044_apz_platform_workflow",
+      "breakpoints": true
+    },
+    {
+      "idx": 45,
+      "version": "7",
+      "when": 1784030000001,
+      "tag": "0045_apz_platform_workflow_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 46,
+      "version": "7",
+      "when": 1784100000000,
+      "tag": "0046_apz_platform_notification",
+      "breakpoints": true
+    },
+    {
+      "idx": 47,
+      "version": "7",
+      "when": 1784100000001,
+      "tag": "0047_apz_platform_notification_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 48,
+      "version": "7",
+      "when": 1784200000000,
+      "tag": "0048_apz_platform_configuration",
+      "breakpoints": true
+    },
+    {
+      "idx": 49,
+      "version": "7",
+      "when": 1784200000001,
+      "tag": "0049_apz_platform_configuration_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 50,
+      "version": "7",
+      "when": 1784300000000,
+      "tag": "0050_apz_platform_admin",
+      "breakpoints": true
+    },
+    {
+      "idx": 51,
+      "version": "7",
+      "when": 1784300000001,
+      "tag": "0051_apz_platform_admin_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 52,
+      "version": "7",
+      "when": 1784400000000,
+      "tag": "0052_apz_platform_iam",
+      "breakpoints": true
+    },
+    {
+      "idx": 53,
+      "version": "7",
+      "when": 1784400000001,
+      "tag": "0053_apz_platform_iam_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 54,
+      "version": "7",
+      "when": 1784500000000,
+      "tag": "0054_apz_platform_observe",
+      "breakpoints": true
+    },
+    {
+      "idx": 55,
+      "version": "7",
+      "when": 1784500000001,
+      "tag": "0055_apz_platform_observe_rls",
+      "breakpoints": true
     }
   ]
 }

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-notifications-audit
+name: Audit
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Notifications — Audit sidebar (APZNOTIFY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: notifications
+    parent: platform-notifications
+    label: Audit
+    icon: scroll-text
+    route: /workspace/notifications/audit
+    order: 90
+    permission: notification.audit
+  view:
+    title: Audit
+    workspace: notifications
+    route: /workspace/notifications/audit
+    permission: notification.audit

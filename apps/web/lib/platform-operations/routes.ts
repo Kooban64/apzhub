@@ -1,6 +1,6 @@
 /** Platform Operations route helpers (M8-03). */
 
-export const PLATFORM_OPERATIONS_BASE = "/workspace/administration";
+export const PLATFORM_OPERATIONS_BASE = "/workspace/operations";
 
 export const PLATFORM_OPERATIONS_SECTIONS = [
   "dashboard",

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-notifications-templates
+name: Templates
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Notifications — Templates sidebar (APZNOTIFY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: notifications
+    parent: platform-notifications
+    label: Templates
+    icon: layout-template
+    route: /workspace/notifications/templates
+    order: 30
+    permission: notification.template
+  view:
+    title: Templates
+    workspace: notifications
+    route: /workspace/notifications/templates
+    permission: notification.template

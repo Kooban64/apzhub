@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-health-checks
+name: Health Checks
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Health Checks sidebar (Health) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Health Checks
+    icon: heart-pulse
+    route: /workspace/observability/health-checks
+    order: 20
+    permission: observe.health
+  view:
+    title: Health Checks
+    workspace: observability
+    route: /workspace/observability/health-checks
+    permission: observe.health

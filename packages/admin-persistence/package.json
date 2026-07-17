@@ -1,0 +1,21 @@
+{
+  "name": "@apzhub/admin-persistence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Administration persistence — PostgreSQL + in-memory metadata (APZADMIN-001)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/admin-persistence"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/admin-contracts": "workspace:*",
+    "@apzhub/admin-core": "workspace:*",
+    "drizzle-orm": "^0.44.2"
+  }
+}

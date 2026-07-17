@@ -1,0 +1,53 @@
+manifestSchemaVersion: "1.0"
+id: n8n
+name: n8n Workflow Engine Integration
+version: 0.1.0
+kind: integration
+
+metadata:
+  category: integrations
+  description: Read-only n8n Workflow Engine Reference Adapter. Metadata discovery only. Not user-facing. Not a Platform Service.
+  owner: APZHUB
+  tags:
+    - n8n
+    - workflow
+    - workflow-engine
+    - adapter
+    - reference
+
+dependencies:
+  platform: []
+
+integration:
+  type: oss-application
+  capabilities:
+    - health
+    - authentication-bridge
+    - error-translation
+    - diagnostics
+    - workflows
+    - workflow-templates
+    - credentials-metadata
+    - variables-metadata
+    - executions-metadata
+    - tags
+    - users
+    - projects
+    - version
+    - compatibility
+
+health:
+  enabled: true
+
+documentation:
+  userVisible: false
+  engineBranding: hidden
+  supportedApiVersions:
+    - "v1"
+  supportedEngineVersionMin: "n8n 1.0.0"
+  supportedEngineVersionMax: "n8n 1.x"
+  adapterImplementation: APZWORKFLOW-006
+
+tests:
+  contract: in-progress
+  integration: planned

@@ -22,7 +22,7 @@ describe("APZSEARCH-003 Search Platform Services foundation", () => {
     expect(output).toContain("Violations: 0");
   });
 
-  it("ships contracts 0.4.0, persistence 0.2.0, platform-services 0.18.0", () => {
+  it("ships contracts 0.4.0, persistence 0.2.0, platform-services 0.19.0", () => {
     const contracts = JSON.parse(
       readFileSync(join(ROOT, "packages/search-contracts/package.json"), "utf8"),
     );
@@ -41,7 +41,7 @@ describe("APZSEARCH-003 Search Platform Services foundation", () => {
     // Certified stack after APZSEARCH-006 (execution plane); 003 introduced management services.
     expect(contracts.version).toBe("0.4.0");
     expect(persistence.version).toBe("0.2.0");
-    expect(platform.version).toBe("0.18.0");
+    expect(platform.version).toBe("0.19.0");
   });
 
   it("ships search platform factory and gateway facets", () => {

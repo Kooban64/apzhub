@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-groups
+name: Groups
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — Groups sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: Groups
+    icon: users-round
+    route: /workspace/identity/groups
+    order: 30
+    permission: identity.read
+  view:
+    title: Groups
+    workspace: identity
+    route: /workspace/identity/groups
+    permission: identity.read

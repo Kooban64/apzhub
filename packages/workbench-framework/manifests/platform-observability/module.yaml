@@ -1,0 +1,40 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability
+name: Platform Observability
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability Administration Workbench — metadata governance only (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: observability
+    icon: activity
+    route: /workspace/observability
+    order: 54
+    permission: observe.read
+  view:
+    title: Platform Observability
+    workspace: observability
+    route: /workspace/observability
+    default: true
+    permission: observe.read
+  actions:
+    - id: platform.observability.navigate
+      label: Go to Platform Observability
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: observe.read
+      palette: true
+      group: Navigation
+      icon: activity
+      order: 54
+      description: Reveal Platform Observability in the workbench shell.

@@ -122,7 +122,7 @@ function createTaskBundle(options?: {
 
 describe("OSS-110-08 package version", () => {
   it("bumps platform-services to 0.7.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.18.0");
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
   });
 });
 

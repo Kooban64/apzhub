@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflows-overview
+name: Overview
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Workflows — Overview sidebar (APZWORKFLOW-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflows
+    parent: platform-workflows
+    label: Overview
+    icon: layout-dashboard
+    route: /workspace/workflows/overview
+    order: 10
+    permission: workflow.view
+  view:
+    title: Overview
+    workspace: workflows
+    route: /workspace/workflows/overview
+    permission: workflow.view

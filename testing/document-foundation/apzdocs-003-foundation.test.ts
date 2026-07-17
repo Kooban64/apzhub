@@ -44,7 +44,7 @@ describe("APZDOCS-003 foundation", () => {
           "utf8",
         ),
       ).version,
-    ).toBe("0.18.0"); // certified floor after APZSEARCH-006 (APZDOCS-003 introduced 0.16.0)
+    ).toBe("0.19.0"); // certified floor after APZWORKFLOW-002 (APZDOCS-003 introduced 0.16.0)
   });
 
   it("gateway exposes document facets without REST handlers", () => {

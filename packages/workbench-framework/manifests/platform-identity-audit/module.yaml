@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-audit
+name: Audit
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — Audit sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: Audit
+    icon: clipboard-list
+    route: /workspace/identity/audit
+    order: 130
+    permission: identity.read
+  view:
+    title: Audit
+    workspace: identity
+    route: /workspace/identity/audit
+    permission: identity.read

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-diagnostics
+name: Diagnostics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — Diagnostics sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: Diagnostics
+    icon: activity
+    route: /workspace/identity/diagnostics
+    order: 160
+    permission: identity.read
+  view:
+    title: Diagnostics
+    workspace: identity
+    route: /workspace/identity/diagnostics
+    permission: identity.read

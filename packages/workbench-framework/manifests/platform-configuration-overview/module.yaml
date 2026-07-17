@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-configuration-overview
+name: Overview
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Configuration — Overview sidebar (APZCONFIG-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: configuration
+    parent: platform-configuration
+    label: Overview
+    icon: layout-dashboard
+    route: /workspace/configuration/overview
+    order: 10
+    permission: configuration.read
+  view:
+    title: Overview
+    workspace: configuration
+    route: /workspace/configuration/overview
+    permission: configuration.read

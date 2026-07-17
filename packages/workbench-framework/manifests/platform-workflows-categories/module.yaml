@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflows-categories
+name: Categories
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Workflows — Categories sidebar (APZWORKFLOW-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflows
+    parent: platform-workflows
+    label: Categories
+    icon: tags
+    route: /workspace/workflows/categories
+    order: 50
+    permission: workflow.view
+  view:
+    title: Categories
+    workspace: workflows
+    route: /workspace/workflows/categories
+    permission: workflow.view

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflow-engine-capabilities
+name: Capabilities
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Workflow Engine — Capabilities sidebar (APZWORKFLOW-009).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflow-engine
+    parent: platform-workflow-engine
+    label: Capabilities
+    icon: boxes
+    route: /workspace/workflow-engine/capabilities
+    order: 70
+    permission: workflow.engine.capabilities
+  view:
+    title: Capabilities
+    workspace: workflow-engine
+    route: /workspace/workflow-engine/capabilities
+    permission: workflow.engine.capabilities

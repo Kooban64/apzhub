@@ -5,8 +5,8 @@
 > **Authoritative references:** Individual backlog documents — **full content lives there**  
 > **Related documents:** [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [docs/backlog/](../backlog/)  
 > **Reading order:** When identifying approved work  
-> **Last updated:** 2026-07-15  
-> **Current status:** Active — **APZSEARCH-013 complete** (APZ TCMS Search Publication); OSS-100-10 complete; await owner for **APZSEARCH-014** / GitLab CI (future) / AI Assist (deferred) / **1.0.0** promotion / provisioning (100-11+) / Event Bus
+> **Last updated:** 2026-07-17  
+> **Current status:** Active — **APZOBSERVE-006 complete** (Observability programme **closed/frozen**); await owner for **APZMETRICS-001** only; Administration / Configuration / Notification / Workflow / Identity / Observability SoR waves **frozen**; Search programme concluded (**APZSEARCH-016** deferred); await owner for GitLab CI / AI Assist / **1.0.0** / provisioning / Event Bus
 
 ---
 
@@ -103,8 +103,14 @@ Phases:
 | ------- | ------- | ------ | ---- |
 | [APZTCMS Backlog](../backlog/APZTCMS-Backlog.md) | APZTCMS-001–025 | **001–024 complete** | Prefer **APZREPORT-002** for reporting HTTP/UI |
 | [APZDOCS programme](../sprint/APZDOCS-006-completion-report.md) | APZDOCS-001+ | **001–006 complete** — **PRODUCTION_READY_WITH_LIMITATIONS** | Complete |
-| [APZSEARCH programme](../sprint/APZSEARCH-013-completion-report.md) | APZSEARCH-001+ | **001–013 complete** | Owner approval for **APZSEARCH-014** |
+| [APZSEARCH programme](../sprint/APZSEARCH-015-completion-report.md) | APZSEARCH-001+ | **001–015 complete** | Owner approval for **APZSEARCH-016** |
 | [APZREPORT programme](../sprint/APZREPORT-003-completion-report.md) | APZREPORT-001–003 | **001–003 complete** | Reporting **PRODUCTION_READY_WITH_LIMITATIONS** |
+| [APZWORKFLOW programme](../sprint/APZWORKFLOW-011-completion-report.md) | APZWORKFLOW-001–011 | **001–011 complete** — SoR + Engine **frozen** | Owner for **APZWORKFLOW-012** (roadmap) |
+| [APZOBSERVE programme](../sprint/APZOBSERVE-006-completion-report.md) | APZOBSERVE-001–006 | **006 complete** — programme **closed/frozen** (`audit:observe-wave`); Reference Standard | Owner for **APZMETRICS-001** only |
+| [APZIDENTITY programme](../sprint/APZIDENTITY-006-completion-report.md) | APZIDENTITY-001–006 | **006 complete** — wave **closed/frozen** (`audit:identity-wave`); Reference Standard published | Closed — further Identity needs ADR + owner |
+| [APZADMIN programme](../sprint/APZADMIN-006-completion-report.md) | APZADMIN-001–006 | **001–006 complete** — SoR wave **closed/frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**) | Closed — Identity programme follows |
+| [APZCONFIG programme](../sprint/APZCONFIG-006-completion-report.md) | APZCONFIG-001–006 | **001–006 complete** — SoR wave **closed/frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**) | Owner for **APZCONFIG-007** (roadmap only — do not implement) |
+| [APZNOTIFY programme](../sprint/APZNOTIFY-006-completion-report.md) | APZNOTIFY-001–006 | **001–006 complete** — SoR wave **closed/frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**) | Owner for **APZNOTIFY-007** (roadmap only — do not implement) |
 | [APZTCMS Milestone Roadmap](../backlog/APZTCMS-Milestone-Roadmap.md) | Milestone map | Active | Stop before 021 |
 
 ---
@@ -144,7 +150,7 @@ Phases:
 11. APZTCMS-003 (Domain Persistence & Permissions) — **complete** (testing-persistence 0.1.0; schema + RLS)
 12. APZTCMS-004 (Manual Test Management / domain services) — **complete** (testing-services 0.1.0; contracts/persistence 0.2.0)
 13. APZTCMS-005–020 — **complete** (through GitHub Actions Wave Closeout / CI/CD Reference Adapter)
-14. APZSEARCH-014 / GitLab CI (future) / AI Assist (deferred) / 1.0.0 promotion / provisioning (100-11+) / platform ingress / Event Bus / PCv2-02 — **next** (awaiting approval)
+14. APZMETRICS-001 / APZSEARCH-016 / GitLab CI (future) / AI Assist (deferred) / 1.0.0 promotion / provisioning (100-11+) / platform ingress / Event Bus / PCv2-02 — **next** (awaiting approval; do not implement without owner)
 15. OSS waves 2–9 — Wave 2 closed; further waves per owner; Wave 7 Kiwi SoR path superseded by APZ TCMS
 ```
 

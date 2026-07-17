@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Dashboard
     icon: layout-dashboard
-    route: /workspace/administration
+    route: /workspace/operations
     order: 5
     permission: platform.nav.administration.view
   view:
     title: Dashboard
-    workspace: administration
-    route: /workspace/administration
+    workspace: operations
+    route: /workspace/operations
     permission: platform.nav.administration.view

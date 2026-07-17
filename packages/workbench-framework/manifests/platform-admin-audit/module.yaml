@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-audit
+name: Audit
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Audit sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Audit
+    icon: file-clock
+    route: /workspace/administration/audit
+    order: 150
+    permission: admin.audit
+  view:
+    title: Audit
+    workspace: administration
+    route: /workspace/administration/audit
+    permission: admin.audit

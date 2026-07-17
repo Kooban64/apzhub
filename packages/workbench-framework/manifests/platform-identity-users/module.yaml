@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-users
+name: Users
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — Users sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: Users
+    icon: users
+    route: /workspace/identity/users
+    order: 20
+    permission: identity.read
+  view:
+    title: Users
+    workspace: identity
+    route: /workspace/identity/users
+    permission: identity.read

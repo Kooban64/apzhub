@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflows-validation
+name: Validation
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Workflows — Validation sidebar (APZWORKFLOW-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflows
+    parent: platform-workflows
+    label: Validation
+    icon: shield-check
+    route: /workspace/workflows/validation
+    order: 70
+    permission: workflow.validation
+  view:
+    title: Validation
+    workspace: workflows
+    route: /workspace/workflows/validation
+    permission: workflow.validation

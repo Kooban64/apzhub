@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflows-versions
+name: Versions
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Workflows — Versions sidebar (APZWORKFLOW-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflows
+    parent: platform-workflows
+    label: Versions
+    icon: history
+    route: /workspace/workflows/versions
+    order: 30
+    permission: workflow.view
+  view:
+    title: Versions
+    workspace: workflows
+    route: /workspace/workflows/versions
+    permission: workflow.view

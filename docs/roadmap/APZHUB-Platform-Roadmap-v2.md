@@ -123,9 +123,11 @@ Platform Capability → Domain Event → Event Bus → Activity Mapping
 
 Complete identity, authorisation, and administration infrastructure — full RBAC population, server session sync, audit log persistence, SSO hooks.
 
+**Programme status (2026-07-16):** Platform Administration metadata SoR (**APZADMIN-001–006**) is **closed and frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**). Recommended next programme (not authorised): **APZIDENTITY-001 — Identity Administration Foundation**. Do not implement without owner approval.
+
 ### Dependencies
 
-Auth scaffold (M1), permission adapter structure (M3–M6), Platform data architecture (Document 011).
+Auth scaffold (M1), permission adapter structure (M3–M6), Platform data architecture (Document 011). Frozen Administration platform (APZADMIN-006) for identity governance built atop metadata SoR.
 
 ---
 

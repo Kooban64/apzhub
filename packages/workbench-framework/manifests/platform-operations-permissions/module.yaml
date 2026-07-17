@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Permissions
     icon: key
-    route: /workspace/administration/permissions
+    route: /workspace/operations/permissions
     order: 40
     permission: platform.nav.administration.view
   view:
     title: Permissions
-    workspace: administration
-    route: /workspace/administration/permissions
+    workspace: operations
+    route: /workspace/operations/permissions
     permission: platform.nav.administration.view

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-capabilities
+name: Capabilities
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Capabilities sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Capabilities
+    icon: puzzle
+    route: /workspace/administration/capabilities
+    order: 60
+    permission: admin.read
+  view:
+    title: Capabilities
+    workspace: administration
+    route: /workspace/administration/capabilities
+    permission: admin.read

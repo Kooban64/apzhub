@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-dashboard-definitions
+name: Dashboard Definitions
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Dashboard Definitions sidebar (Operations Metadata) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Dashboard Definitions
+    icon: layout-dashboard
+    route: /workspace/observability/dashboard-definitions
+    order: 160
+    permission: observe.read
+  view:
+    title: Dashboard Definitions
+    workspace: observability
+    route: /workspace/observability/dashboard-definitions
+    permission: observe.read

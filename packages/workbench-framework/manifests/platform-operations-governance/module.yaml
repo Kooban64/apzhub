@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Governance
     icon: shield-check
-    route: /workspace/administration/governance
+    route: /workspace/operations/governance
     order: 38
     permission: platform.nav.administration.view
   view:
     title: Governance
-    workspace: administration
-    route: /workspace/administration/governance
+    workspace: operations
+    route: /workspace/operations/governance
     permission: platform.nav.administration.view

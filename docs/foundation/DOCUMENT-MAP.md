@@ -5,8 +5,8 @@
 > **Authoritative references:** [docs/README.md](../README.md) — complete registry with tables  
 > **Related documents:** [PROJECT-INDEX](./PROJECT-INDEX.md)  
 > **Reading order:** For finding documents by category  
-> **Last updated:** 2026-07-10  
-> **Current status:** Active
+> **Last updated:** 2026-07-17  
+> **Current status:** Active — includes Observability wave freeze (APZOBSERVE-006)
 
 ---
 
@@ -52,6 +52,8 @@
 | Integration SDK | APZHUB-Platform-Integration-SDK-Architecture.md, Integration Authentication Architecture |
 | Projects | APZHUB-Projects-Capability-Architecture.md, Projects Plane Reference Architecture |
 | APZ TCMS / CI/CD | APZHUB-CICD-Reference-Adapter-Standard.md, APZHUB-APZ-TCMS-GitHub-Actions-*, APZHUB-APZ-TCMS-Engineering-Intelligence-* |
+| Observability (frozen) | APZHUB-Observability-Architecture-Freeze-Notice.md, APZHUB-Observability-Reference-Standard.md, Platform Observability Architecture |
+| Administration / Identity / Configuration (frozen) | *-Architecture-Freeze-Notice.md, *-Reference-Standard.md |
 | Security & ops | APZHUB-Session-Security-Architecture.md, Platform Operations Control Plane |
 | Patterns | APZHUB-Platform-Design-Patterns.md, Capability Abstraction Standard |
 | Baselines | APZHUB-Architecture-Baseline-v1.0.md (frozen) |

@@ -21,6 +21,12 @@ import type {
 } from "@apzhub/platform-service-contracts";
 import type { PlatformReportingService } from "@apzhub/reporting-contracts";
 import type { DocumentPlatformGateway } from "@apzhub/document-contracts";
+import type { NotificationPlatformGateway } from "@apzhub/notification-contracts";
+import type { ConfigurationPlatformGateway } from "@apzhub/configuration-contracts";
+import type { AdministrationPlatformGateway } from "@apzhub/admin-contracts";
+import type { IdentityPlatformGateway } from "@apzhub/identity-contracts";
+import type { ObservePlatformGateway } from "@apzhub/observe-contracts";
+import type { WorkflowPlatformGateway } from "@apzhub/workflow-contracts";
 import { PlatformServiceError } from "@apzhub/platform-service-contracts";
 
 import type { EntityMappingStore } from "../mapping/entity-mapping-store";
@@ -85,6 +91,12 @@ export interface PlatformServiceGatewayDeps {
   readonly documentsApi?: DocumentPlatformGateway;
   readonly searchPlatformApi?: SearchPlatformServiceImpls;
   readonly searchExecutionApi?: SearchExecutionServiceImpls;
+  readonly workflowApi?: WorkflowPlatformGateway;
+  readonly notificationApi?: NotificationPlatformGateway;
+  readonly configurationApi?: ConfigurationPlatformGateway;
+  readonly administrationApi?: AdministrationPlatformGateway;
+  readonly identityApi?: IdentityPlatformGateway;
+  readonly observeApi?: ObservePlatformGateway;
   readonly platformQualityApi?: PlatformQualityGateway;
   readonly platformReleaseApi?: PlatformReleaseGateway;
   readonly platformGovernanceApi?: PlatformGovernanceGateway;
@@ -318,6 +330,66 @@ export class PlatformServiceGateway {
   }
 
   /**
+   * Workflow Platform capability (APZWORKFLOW-002).
+   * Nested facets — metadata / lifecycle only; never execution / n8n.
+   *
+   * Shape: gateway.workflow.{workflows,versions,templates,categories,folders,validation,audit}
+   */
+  get workflow(): WorkflowPlatformGateway {
+    return this.workflowGateway;
+  }
+
+  /**
+   * Notification Platform capability (APZNOTIFY-002).
+   * Nested facets — metadata / lifecycle only; never delivery.
+   *
+   * Shape: gateway.notification.{notifications,templates,preferences,categories,channels,recipients,references,audit,diagnostics}
+   */
+  get notification(): NotificationPlatformGateway {
+    return this.notificationGateway;
+  }
+
+  /**
+   * Configuration Platform capability (APZCONFIG-002).
+   * Nested facets — metadata / lifecycle only; never runtime apply.
+   *
+   * Shape: gateway.configuration.{configurations,namespaces,groups,versions,overrides,scopes,validation,references,audit,diagnostics}
+   */
+  get configuration(): ConfigurationPlatformGateway {
+    return this.configurationGateway;
+  }
+
+  /**
+   * Administration Platform capability (APZADMIN-002).
+   * Nested facets — metadata / lifecycle only; never runtime admin, workbench, or HTTP.
+   *
+   * Shape: gateway.administration.{modules,categories,sections,actions,permissions,audit,history,diagnostics,registrations,metadata,policies,references,capabilities,navigations,shortcuts,dashboards,widgets}
+   */
+  get administration(): AdministrationPlatformGateway {
+    return this.administrationGateway;
+  }
+
+  /**
+   * Identity Administration Platform capability (APZIDENTITY-002).
+   * Nested facets — metadata / lifecycle only; never authentication, HTTP, or provisioning.
+   *
+   * Shape: gateway.identity.{users,groups,roles,organisations,tenants,departments,positions,memberships,serviceAssignments,invitations,activation,deactivation,policies,audit,history,references,diagnostics}
+   */
+  get identity(): IdentityPlatformGateway {
+    return this.identityGateway;
+  }
+
+  /**
+   * Observability Platform capability (APZOBSERVE-002).
+   * Nested facets — metadata / lifecycle only; never provider execution.
+   *
+   * Shape: gateway.observe.{healthChecks,readinessChecks,livenessChecks,serviceHealth,serviceStatus,componentStatus,metricDefinitions,metricSamples,alertDefinitions,alertStates,dashboardDefinitions,logSources,traceDefinitions,traceSpans,incidentReferences,maintenanceWindows,healthSummaries,metadata,diagnostics}
+   */
+  get observe(): ObservePlatformGateway {
+    return this.observeGateway;
+  }
+
+  /**
    * Search Platform capability (APZSEARCH-003).
    * Nested management-plane facets — never merges into legacy Plane search.
    */
@@ -449,6 +521,84 @@ export class PlatformServiceGateway {
       });
     }
     return this.deps.documentsApi;
+  }
+
+  private get workflowGateway(): WorkflowPlatformGateway {
+    if (!this.deps.workflowApi) {
+      throw new PlatformServiceError({
+        category: "configuration",
+        code: "PROVIDER_CAPABILITY_UNSUPPORTED",
+        message: "Workflow Platform services are not enabled",
+        correlationId: "platform-gateway",
+        retryable: false,
+      });
+    }
+    return this.deps.workflowApi;
+  }
+
+  private get notificationGateway(): NotificationPlatformGateway {
+    if (!this.deps.notificationApi) {
+      throw new PlatformServiceError({
+        category: "configuration",
+        code: "PROVIDER_CAPABILITY_UNSUPPORTED",
+        message: "Notification Platform services are not enabled",
+        correlationId: "platform-gateway",
+        retryable: false,
+      });
+    }
+    return this.deps.notificationApi;
+  }
+
+  private get configurationGateway(): ConfigurationPlatformGateway {
+    if (!this.deps.configurationApi) {
+      throw new PlatformServiceError({
+        category: "configuration",
+        code: "PROVIDER_CAPABILITY_UNSUPPORTED",
+        message: "Configuration Platform services are not enabled",
+        correlationId: "platform-gateway",
+        retryable: false,
+      });
+    }
+    return this.deps.configurationApi;
+  }
+
+  private get administrationGateway(): AdministrationPlatformGateway {
+    if (!this.deps.administrationApi) {
+      throw new PlatformServiceError({
+        category: "configuration",
+        code: "PROVIDER_CAPABILITY_UNSUPPORTED",
+        message: "Administration Platform services are not enabled",
+        correlationId: "platform-gateway",
+        retryable: false,
+      });
+    }
+    return this.deps.administrationApi;
+  }
+
+  private get identityGateway(): IdentityPlatformGateway {
+    if (!this.deps.identityApi) {
+      throw new PlatformServiceError({
+        category: "configuration",
+        code: "PROVIDER_CAPABILITY_UNSUPPORTED",
+        message: "Identity Platform services are not enabled",
+        correlationId: "platform-gateway",
+        retryable: false,
+      });
+    }
+    return this.deps.identityApi;
+  }
+
+  private get observeGateway(): ObservePlatformGateway {
+    if (!this.deps.observeApi) {
+      throw new PlatformServiceError({
+        category: "configuration",
+        code: "PROVIDER_CAPABILITY_UNSUPPORTED",
+        message: "Observability Platform services are not enabled",
+        correlationId: "platform-gateway",
+        retryable: false,
+      });
+    }
+    return this.deps.observeApi;
   }
 
   get platformQuality(): PlatformQualityGateway {

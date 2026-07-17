@@ -1,0 +1,40 @@
+manifestSchemaVersion: "1.0"
+id: platform-configuration
+name: Configuration
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Configuration workspace — metadata workbench (APZCONFIG-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: configuration
+    icon: settings-2
+    route: /workspace/configuration
+    order: 52
+    permission: configuration.read
+  view:
+    title: Configuration
+    workspace: configuration
+    route: /workspace/configuration
+    default: true
+    permission: configuration.read
+  actions:
+    - id: platform.configuration.navigate
+      label: Go to Configuration
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: configuration.read
+      palette: true
+      group: Navigation
+      icon: settings-2
+      order: 52
+      description: Reveal the Configuration navigation item in the workbench shell.

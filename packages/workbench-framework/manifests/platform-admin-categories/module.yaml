@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-categories
+name: Categories
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Categories sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Categories
+    icon: folder-tree
+    route: /workspace/administration/categories
+    order: 30
+    permission: admin.read
+  view:
+    title: Categories
+    workspace: administration
+    route: /workspace/administration/categories
+    permission: admin.read

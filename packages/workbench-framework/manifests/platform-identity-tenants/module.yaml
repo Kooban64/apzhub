@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-tenants
+name: Tenants
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — Tenants sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: Tenants
+    icon: building
+    route: /workspace/identity/tenants
+    order: 60
+    permission: identity.read
+  view:
+    title: Tenants
+    workspace: identity
+    route: /workspace/identity/tenants
+    permission: identity.read

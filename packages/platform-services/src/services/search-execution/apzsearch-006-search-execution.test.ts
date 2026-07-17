@@ -83,7 +83,7 @@ describe("APZSEARCH-006 search execution", () => {
 
   it("bumps package versions", () => {
     expect(SEARCH_CONTRACTS_VERSION).toBe("0.4.0");
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.18.0");
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
     expect(PLATFORM_SEARCH_EXECUTION_CAPABILITY_ID).toBe(
       "platform_search_execution",
     );

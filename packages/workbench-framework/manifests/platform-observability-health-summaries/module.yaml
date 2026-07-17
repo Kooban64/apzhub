@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-health-summaries
+name: Health Summaries
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Health Summaries sidebar (Health) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Health Summaries
+    icon: chart-pie
+    route: /workspace/observability/health-summaries
+    order: 80
+    permission: observe.health
+  view:
+    title: Health Summaries
+    workspace: observability
+    route: /workspace/observability/health-summaries
+    permission: observe.health

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-policies
+name: Policies
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — Policies sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: Policies
+    icon: scroll-text
+    route: /workspace/identity/policies
+    order: 120
+    permission: identity.read
+  view:
+    title: Policies
+    workspace: identity
+    route: /workspace/identity/policies
+    permission: identity.read

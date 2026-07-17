@@ -1,8 +1,8 @@
 # APZHUB Current State
 
 > **Purpose:** Implementation snapshot  
-> **Last updated:** 2026-07-15  
-> **Current status:** Active — **APZSEARCH-013 COMPLETE** (`@apzhub/search-testing` **0.1.0**); stop before **APZSEARCH-014** / GitLab CI (future) / AI Assist / SDK **1.0.0** / Event Bus / ingress / provisioning
+> **Last updated:** 2026-07-17  
+> **Current status:** Active — **APZOBSERVE-006 COMPLETE** (Observability Wave Certification & Architecture Freeze — programme **closed/frozen**); **PRODUCTION_READY_WITH_LIMITATIONS** retained; stop before **APZMETRICS-001**. Administration / Configuration / Notification / Workflow / Identity programmes closed/frozen. **APZSEARCH-016** remains deferred.
 
 ---
 
@@ -11,6 +11,28 @@
 | Field | Value |
 | --- | --- |
 | **Root version** | `0.1.0-foundation` |
+| **`@apzhub/notification-contracts`** | `0.2.0` — Platform Notification SoR + gateway facets (APZNOTIFY-002) |
+| **`@apzhub/notification-core`** | `0.2.0` — Domain service + lifecycle + validation (APZNOTIFY-002) |
+| **`@apzhub/notification-persistence`** | `0.1.0` — In-memory + Postgres; migrations 0046–0047 |
+| **`@apzhub/configuration-contracts`** | `0.2.0` — Platform Configuration SoR + gateway facets (**frozen** APZCONFIG-006) |
+| **`@apzhub/configuration-core`** | `0.2.0` — Domain service + lifecycle + validation (**frozen** APZCONFIG-006) |
+| **`@apzhub/configuration-persistence`** | `0.1.0` — In-memory + Postgres; migrations 0048–0049 (**frozen** APZCONFIG-006) |
+| **`@apzhub/identity-contracts`** | `0.2.0` — Platform Identity Administration SoR + gateway facets (APZIDENTITY-002) |
+| **`@apzhub/identity-core`** | `0.2.0` — Domain service + ports + validation + lifecycle (APZIDENTITY-002) |
+| **`@apzhub/identity-persistence`** | `0.1.0` — In-memory + Postgres; migrations 0052–0053 (APZIDENTITY-001) |
+| **`@apzhub/observe-contracts`** | `0.2.0` — Platform Observability SoR + gateway facets (APZOBSERVE-002/003) |
+| **`@apzhub/observe-core`** | `0.2.0` — Domain service + validation + lifecycle (APZOBSERVE-002) |
+| **`@apzhub/observe-persistence`** | `0.1.0` — In-memory + Postgres; migrations 0054–0055 (APZOBSERVE-001) |
+| **Observability HTTP** | `/api/v1/observe/*` + OpenAPI **1.8.0** + `apps/web/lib/observe` (APZOBSERVE-003) |
+| **Observability Workbench** | `/workspace/observability` + `platform-observability` manifests (APZOBSERVE-004) |
+| **`@apzhub/admin-contracts`** | `0.2.0` — Platform Administration SoR + gateway facets (**frozen** APZADMIN-006) |
+| **`@apzhub/admin-core`** | `0.2.0` — Domain service + lifecycle + validation (**frozen** APZADMIN-006) |
+| **`@apzhub/admin-persistence`** | `0.1.0` — In-memory + Postgres; migrations 0050–0051 (**frozen** APZADMIN-006) |
+| **`@apzhub/platform-services`** | `0.24.0` — Search + Documents + Workflow + Notification + Configuration + Administration + Identity + **Observability** `gateway.observe.*` (APZOBSERVE-002) |
+| **`@apzhub/workflow-contracts`** | `0.3.0` — Nested `WorkflowPlatformGateway` + `WorkflowEngineGateway` + `workflow.engine.*` (APZWORKFLOW-007) |
+| **`@apzhub/integration-n8n`** | `0.1.0` — n8n Reference Adapter (frozen); consumed by Platform Services only |
+| **`@apzhub/workflow-core`** | `0.1.1` — Domain service + lifecycle + validation (APZWORKFLOW-002) |
+| **`@apzhub/workflow-persistence`** | `0.1.1` — In-memory + Postgres; test factory helper |
 | **APZ TCMS** | **APZREPORT-003 complete** — Reporting **PRODUCTION_READY_WITH_LIMITATIONS** |
 | **`@apzhub/search-contracts`** | `0.4.0` — Platform Search contracts + management + execution (APZSEARCH-006) |
 | **`@apzhub/search-persistence`** | `0.2.0` — Search metadata persistence + management services (APZSEARCH-003) |
@@ -20,7 +42,8 @@
 | **`@apzhub/search-projects`** | `0.1.0` — Projects Search Publication Adapter (APZSEARCH-010) |
 | **`@apzhub/search-support`** | `0.1.0` — Support Search Publication Adapter (APZSEARCH-011) |
 | **`@apzhub/search-documents`** | `0.1.0` — Documents Search Publication Adapter (APZSEARCH-012) |
-| **`@apzhub/search-testing`** | `0.1.0` — APZ TCMS Search Publication Adapter (APZSEARCH-013) |
+| **`@apzhub/search-testing`** | `0.1.1` — APZ TCMS Search Publication Adapter (APZSEARCH-013) |
+| **`@apzhub/search-reporting`** | `0.1.0` — Reporting Search Publication Adapter (APZSEARCH-014) |
 | **`@apzhub/document-contracts`** | `0.3.0` — DocumentPlatformGateway + permissions (APZDOCS-003) |
 | **`@apzhub/document-core`** | `0.3.0` — Domain + assignFolder/assignCollection/applyRetention |
 | **`@apzhub/document-persistence`** | `0.2.0` — PostgreSQL + in-memory; migrations 0037–0040 |
@@ -30,14 +53,13 @@
 | **`@apzhub/testing-foundation`** | `0.1.0` |
 | **`@apzhub/testing-persistence`** | `0.10.0` — migrations through `0034` |
 | **`@apzhub/testing-services`** | `0.10.0` — engineering intelligence + pipelineAdapters |
-| **`@apzhub/platform-service-contracts`** | `0.13.0` — `testing.engineeringIntelligence` facet |
-| **`@apzhub/platform-services`** | `0.18.0` — Search management + execution gateway (APZSEARCH-006) |
+| **`@apzhub/platform-service-contracts`** | `0.16.0` — workflow stub (contracts live in workflow-contracts) |
 | **`@apzhub/reporting-contracts`** | `0.1.0` — Platform Reporting contracts |
 | **`@apzhub/reporting-core`** | `0.1.0` — Platform Reporting engine |
 | **`@apzhub/integration-sdk`** | `0.9.0` — certified `PRODUCTION_READY_WITH_LIMITATIONS` (await owner for **1.0.0**) |
 | **`@apzhub/integration-plane`** | `0.6.0` — certified Reference Adapter |
 | **`@apzhub/integration-zammad`** | `0.6.0` — Wave 2 CERTIFIED_WITH_LIMITATIONS |
-| **Platform HTTP API** | `/api/v1` — Projects + Tasks + Support + Testing + Reporting + Documents + **Search** (APZSEARCH-007/008) |
+| **Platform HTTP API** | `/api/v1` — Projects + Tasks + Support + Testing + Reporting + Documents + Search + Workflow SoR + Workflow Engine + **Notifications** (APZNOTIFY-003; OpenAPI **1.4.0**) + **Configuration** (APZCONFIG-003; OpenAPI **1.5.0+**; management plane only) + **Administration** (APZADMIN-003; OpenAPI **1.6.0**; management plane only) |
 | **Support vertical** | **CERTIFIED_WITH_LIMITATIONS** (OSS-110-12) |
 | **Support Module UI** | **PRODUCTION_READY_WITH_LIMITATIONS** (OSS-110-14) — `apps/web/components/support`, `apps/web/lib/support`, manifests under `services/support/` |
 | **Wave 1 (Plane / Projects)** | **COMPLETE** |
@@ -49,11 +71,54 @@
 
 | Milestone | Status |
 | --- | --- |
+| APZOBSERVE-006 | Complete — Wave certification & architecture freeze (`pnpm audit:observe-wave`); programme **closed/frozen**; await **APZMETRICS-001** only |
+| APZOBSERVE-005 | Complete — Vertical certification (`pnpm certify:observe-vertical`); **PRODUCTION_READY_WITH_LIMITATIONS** |
+| APZOBSERVE-004 | Complete — Observability Administration Workbench (`pnpm audit:observe-workbench`); `/workspace/observability` |
+| APZOBSERVE-003 | Complete — HTTP API & Typed Client (`pnpm audit:observe-http-client`); OpenAPI **1.8.0**; `/api/v1/observe/*`; `apps/web/lib/observe` |
+| APZOBSERVE-002 | Complete — Platform Services, Gateway & Authorization (`pnpm audit:observe-platform-services`); contracts/core **0.2.0**; platform-services **0.24.0** |
+| APZOBSERVE-001 | Complete — Platform Observability Foundation (`pnpm audit:observe-foundation`); persistence **0.1.0**; migrations **0054/0055** |
+| APZIDENTITY-006 | Complete — Wave certification & architecture freeze (`pnpm audit:identity-wave`); programme **closed/frozen** |
+| APZIDENTITY-005 | Complete — Vertical certification (`pnpm audit:identity-vertical` / `pnpm certify:identity-vertical`); **PRODUCTION_READY_WITH_LIMITATIONS** |
+| APZIDENTITY-004 | Complete — Identity Administration Workbench (`pnpm audit:identity-workbench`); `/workspace/identity` |
+| APZIDENTITY-003 | Complete — Identity HTTP API & Typed Client (`pnpm audit:identity-http-client`); `/api/v1/identity/*`; OpenAPI **1.7.0** |
+| APZIDENTITY-002 | Complete — Platform Services, Gateway & Authorization (`pnpm audit:identity-platform-services`); contracts/core **0.2.0**; platform-services **0.23.0** |
+| APZIDENTITY-001 | Complete — Identity Administration Foundation (`pnpm audit:identity-foundation`); persistence **0.1.0**; migrations **0052/0053** |
+| APZADMIN-006 | Complete — Wave Certification & Architecture Freeze (`pnpm audit:administration-wave`); programme **closed/frozen**; **PRODUCTION_READY_WITH_LIMITATIONS** retained |
+| APZADMIN-005 | Complete — Vertical certification (`pnpm audit:administration-vertical`); **PRODUCTION_READY_WITH_LIMITATIONS** |
+| APZADMIN-004 | Complete — Administration Workbench (`pnpm audit:administration-workbench`); `/workspace/administration`; ops coexistence `/workspace/operations` |
+| APZADMIN-003 | Complete — Administration HTTP API & Typed Client (`pnpm audit:administration-http-client`); OpenAPI **1.6.0** |
+| APZADMIN-002 | Complete — Platform Services, Gateway & Authorization (`pnpm audit:administration-platform-services`); contracts/core **0.2.0** |
+| APZADMIN-001 | Complete — Platform Administration Foundation (`pnpm audit:admin-foundation`); persistence **0.1.0** |
+| APZCONFIG-006 | Complete — Wave Certification & Architecture Freeze (`pnpm audit:configuration-wave`); programme **closed/frozen**; **APZCONFIG-007** roadmap only |
+| APZCONFIG-005 | Complete — Vertical certification (`pnpm audit:configuration-vertical`); **PRODUCTION_READY_WITH_LIMITATIONS** |
+| APZCONFIG-004 | Complete — Configuration Workbench (`pnpm audit:configuration-workbench`) |
+| APZCONFIG-003 | Complete — Configuration HTTP API + typed client (`pnpm audit:configuration-http-client`) |
+| APZCONFIG-002 | Complete — Configuration Platform Services (`pnpm audit:configuration-platform-services`) |
+| APZCONFIG-001 | Complete — Platform Configuration Foundation (`pnpm audit:configuration-foundation`) |
+| APZNOTIFY-006 | Complete — Wave Certification & Architecture Freeze (`pnpm audit:notification-wave`); programme **closed/frozen**; **APZNOTIFY-007** roadmap only |
+| APZNOTIFY-005 | Complete — Vertical Certification **PRODUCTION_READY_WITH_LIMITATIONS** (`pnpm audit:notification-vertical`) |
+| APZNOTIFY-004 | Complete — Notification Workbench (`pnpm audit:notification-workbench`) |
+| APZNOTIFY-003 | Complete — Notification HTTP API & Production Typed Client (`pnpm audit:notification-http-client`) |
+| APZNOTIFY-002 | Complete — Notification Platform Services, Gateway & Authorization (`pnpm audit:notification-platform-services`) |
+| APZNOTIFY-001 | Complete — Platform Notification Foundation (`pnpm audit:notification-foundation`) |
+| APZWORKFLOW-011 | Complete — Wave Certification & Reference Adapter Closeout — wave **frozen** (`pnpm audit:workflow-engine-wave`); `@apzhub/integration-n8n` official Reference Adapter |
+| APZWORKFLOW-010 | Complete — Workflow Engine Vertical Certification — **PRODUCTION_READY_WITH_LIMITATIONS** (`pnpm audit:workflow-engine-vertical`) |
+| APZWORKFLOW-009 | Complete — n8n Workbench Integration (`/workspace/workflow-engine`; `pnpm audit:workflow-engine-workbench`) |
+| APZWORKFLOW-008 | Complete — n8n HTTP API & Typed Client (`/api/v1/workflows/engine/*`; OpenAPI **1.3.0**; `pnpm audit:workflow-engine-http`) |
+| APZWORKFLOW-007 | Complete — n8n Platform Services (`gateway.workflow.engine.*`; `platform-services` **0.20.0**; `pnpm audit:workflow-n8n-platform-services`) |
+| APZWORKFLOW-006 | Complete — n8n Reference Adapter (`@apzhub/integration-n8n` **0.1.0**; `pnpm audit:n8n-adapter`) |
+| APZWORKFLOW-005 | Complete — Workflow Vertical Certification (**PRODUCTION_READY_WITH_LIMITATIONS**; `pnpm audit:workflow-vertical`) |
+| APZWORKFLOW-004 | Complete — Workflow Workbench (`/workspace/workflows` metadata UI) |
+| APZWORKFLOW-003 | Complete — Workflow SoR HTTP API & Typed Client (`/api/v1/workflows`; OpenAPI later **1.3.0** with engine) |
+| APZWORKFLOW-002 | Complete — Workflow Platform Services, Gateway & Authorization |
+| APZWORKFLOW-001 | Complete — Workflow Foundation (`workflow-contracts` / `workflow-core` / `workflow-persistence` **0.1.0**) |
 | APZSEARCH-008 | Complete — Search Vertical Certification (**PRODUCTION_READY_WITH_LIMITATIONS**) |
 | APZSEARCH-009 | Complete — Cross-Product Search Integration (`@apzhub/search-integration` **0.1.0**) |
 | APZSEARCH-010 | Complete — Projects Search Publication Adapter (`@apzhub/search-projects` **0.1.0**) |
 | APZSEARCH-011 | Complete — Support Search Publication Adapter (`@apzhub/search-support` **0.1.0**) |
-| APZSEARCH-013 | Complete — APZ TCMS Search Publication Adapter (`@apzhub/search-testing` **0.1.0**) |
+| APZSEARCH-013 | Complete — APZ TCMS Search Publication Adapter (`@apzhub/search-testing` **0.1.1**) |
+| APZSEARCH-014 | Complete — Reporting Search Publication Adapter (`@apzhub/search-reporting` **0.1.0**) |
+| APZSEARCH-015 | Complete — Search Publication Certification (**PRODUCTION_READY_WITH_LIMITATIONS**) |
 | APZSEARCH-012 | Complete — Documents Search Publication Adapter (`@apzhub/search-documents` **0.1.0**) |
 | APZSEARCH-007 | Complete — Search HTTP API, Typed Client & Workbench |
 | APZSEARCH-006 | Complete — Search Execution Gateway |
@@ -210,6 +275,42 @@ Prior OSS-100-09 harness coverage and OSS-110-14 Support UI metrics remain prior
 | Document HTTP API & Typed Client | ✅ Complete — APZDOCS-004 |
 | Document Workbench | ✅ Complete — APZDOCS-005 |
 | Document Vertical Certification | ✅ Complete — APZDOCS-006 — **PRODUCTION_READY_WITH_LIMITATIONS** |
+| Workflow Foundation | ✅ Complete — APZWORKFLOW-001 |
+| Workflow Platform Services | ✅ Complete — APZWORKFLOW-002 |
+| Workflow HTTP API & Typed Client | ✅ Complete — APZWORKFLOW-003 |
+| Workflow Workbench | ✅ Complete — APZWORKFLOW-004 |
+| Workflow Vertical Certification | ✅ Complete — APZWORKFLOW-005 — **PRODUCTION_READY_WITH_LIMITATIONS** |
+| n8n Reference Adapter | ✅ Complete — APZWORKFLOW-006 — `@apzhub/integration-n8n` **0.1.0** (frozen) |
+| n8n Platform Services | ✅ Complete — APZWORKFLOW-007 — `gateway.workflow.engine.*` (`platform-services` **0.20.0**) |
+| Workflow Engine Wave Closeout | ✅ Complete — APZWORKFLOW-011 — `@apzhub/integration-n8n` official Reference Adapter; architectures **frozen** |
+| Workflow Engine Vertical Certification | ✅ Complete — APZWORKFLOW-010 — **PRODUCTION_READY_WITH_LIMITATIONS** (read-only engine; frozen) |
+| n8n Workbench Integration | ✅ Complete — APZWORKFLOW-009 — `/workspace/workflow-engine` over typed engine client |
+| n8n HTTP API & Typed Client | ✅ Complete — APZWORKFLOW-008 — `/api/v1/workflows/engine/*` + `createHttpWorkflowEngineClient()` (OpenAPI **1.3.0**) |
+| Configuration Foundation → Workbench | ✅ Complete — APZCONFIG-001–004 |
+| Configuration Vertical Certification | ✅ Complete — APZCONFIG-005 — **PRODUCTION_READY_WITH_LIMITATIONS** |
+| Configuration Wave Closeout | ✅ Complete — APZCONFIG-006 — programme **closed/frozen**; Reference Standard declared |
+| Observability Wave Closeout | ✅ Complete — APZOBSERVE-006 — programme **closed/frozen**; Reference Standard; `audit:observe-wave` |
+| Observability Vertical Certification | ✅ Complete — APZOBSERVE-005 — **PRODUCTION_READY_WITH_LIMITATIONS** (`certify:observe-vertical`) |
+| Observability Administration Workbench | ✅ Complete — APZOBSERVE-004 — `/workspace/observability` (typed client only; metadata governance) |
+| Observability HTTP API & Typed Client | ✅ Complete — APZOBSERVE-003 — `/api/v1/observe/*` + `apps/web/lib/observe`; OpenAPI **1.8.0** |
+| Observability Platform Services | ✅ Complete — APZOBSERVE-002 — `gateway.observe.*` (`platform-services` **0.24.0**) |
+| Observability Foundation | ✅ Complete — APZOBSERVE-001 — observe-contracts/core/persistence |
+| APZMETRICS-001 | ⏸ Recommended next — Platform Metrics Foundation (await owner approval) |
+| Identity Administration Workbench | ✅ Complete — APZIDENTITY-004 — `/workspace/identity` (typed client only) |
+| Identity Administration Vertical | ✅ Complete — APZIDENTITY-005 — **PRODUCTION_READY_WITH_LIMITATIONS** |
+| Identity Administration Wave | ✅ Complete — APZIDENTITY-006 — programme **closed/frozen** |
+| Identity HTTP API & Typed Client | ✅ Complete — APZIDENTITY-003 — `/api/v1/identity/*` + `apps/web/lib/identity`; OpenAPI **1.7.0** |
+| Identity Platform Services | ✅ Complete — APZIDENTITY-002 — `gateway.identity.*` (`platform-services` **0.23.0**; identity-contracts/core **0.2.0**) |
+| Identity Administration Foundation | ✅ Complete — APZIDENTITY-001 — `@apzhub/identity-persistence` **0.1.0**; metadata SoR only |
+| Administration Wave Closeout | ✅ Complete — APZADMIN-006 — programme **closed/frozen**; Reference Standard declared |
+| Administration Vertical Certification | ✅ Complete — APZADMIN-005 — **PRODUCTION_READY_WITH_LIMITATIONS** |
+| Administration Workbench | ✅ Complete — APZADMIN-004 — `/workspace/administration` (typed client only); ops at `/workspace/operations` |
+| Administration HTTP API & Typed Client | ✅ Complete — APZADMIN-003 — OpenAPI **1.6.0** |
+| Administration Platform Services | ✅ Complete — APZADMIN-002 — `gateway.administration.*` (admin-contracts/core **0.2.0**) |
+| Administration Foundation | ✅ Complete — APZADMIN-001 — `@apzhub/admin-persistence` **0.1.0** |
+| Notification Foundation → Workbench | ✅ Complete — APZNOTIFY-001–004 |
+| Notification Vertical Certification | ✅ Complete — APZNOTIFY-005 — **PRODUCTION_READY_WITH_LIMITATIONS** |
+| Notification Wave Closeout | ✅ Complete — APZNOTIFY-006 — programme **closed/frozen** |
 | Platform Search Foundation | ✅ Complete — APZSEARCH-001 |
 | Search Persistence & Provider Framework | ✅ Complete — APZSEARCH-002 — `@apzhub/search-persistence` **0.2.0** |
 | APZSEARCH-003 | ✅ Complete — Search Platform Services, Gateway & Authorization Integration |
@@ -222,17 +323,29 @@ Prior OSS-100-09 harness coverage and OSS-110-14 Support UI metrics remain prior
 | APZSEARCH-010 | ✅ Complete — Projects Search Publication Adapter (`@apzhub/search-projects` **0.1.0**) |
 | APZSEARCH-011 | ✅ Complete — Support Search Publication Adapter (`@apzhub/search-support` **0.1.0**) |
 | APZSEARCH-012 | ✅ Complete — Documents Search Publication Adapter (`@apzhub/search-documents` **0.1.0**) |
-| APZSEARCH-013 | ✅ Complete — APZ TCMS Search Publication Adapter (`@apzhub/search-testing` **0.1.0**) |
-| APZSEARCH-014 | ⏸ Recommended next — Reporting Search Publication Adapter (awaiting approval) |
+| APZSEARCH-013 | ✅ Complete — APZ TCMS Search Publication Adapter (`@apzhub/search-testing` **0.1.1**) |
+| APZSEARCH-014 | ✅ Complete — Reporting Search Publication Adapter (`@apzhub/search-reporting` **0.1.0**) |
+| APZSEARCH-015 | ✅ Complete — Cross-Product Search Publication Certification (**PRODUCTION_READY_WITH_LIMITATIONS**) |
+| APZSEARCH-016 | ⏸ Recommended next — Product Indexing Orchestration Framework (await owner approval) |
+| APZCONFIG-007 | ⏸ Roadmap only — Runtime Configuration Platform (do not implement without owner approval) |
+| APZADMIN-006 | ✅ Complete — Administration Wave Certification & Architecture Freeze (programme **closed/frozen**) |
+| APZIDENTITY-001 | ✅ Complete — Identity Administration Foundation |
+| APZIDENTITY-002 | ✅ Complete — Platform Services, Gateway & Authorization |
+| APZIDENTITY-003 | ✅ Complete — Identity HTTP API & Production Typed Client |
+| APZIDENTITY-006 | ✅ Complete — Wave freeze — programme **closed/frozen** |
+| APZIDENTITY-005 | ✅ Complete — Vertical certification — **PRODUCTION_READY_WITH_LIMITATIONS** |
+| APZIDENTITY-004 | ✅ Complete — Identity Administration Workbench |
+| APZIDENTITY-005 | ⏸ Recommended next — Identity Vertical Certification & Production Readiness (await owner approval) |
+| APZNOTIFY-007 | ⏸ Roadmap only — delivery providers (do not implement without owner approval) |
 | GitLab CI Reference Adapter | ⏸ Future — renumbered after owner redefined 021 |
 | AI Assist | ⏸ Deferred; still needs owner approval |
 | QE backlog / naming | Superseded by APZTCMS-* |
 | Kiwi TCMS as SoR/UI | Superseded |
 
-See [APZSEARCH-013 Completion Report](../sprint/APZSEARCH-013-completion-report.md) · [Testing Search Adapter Architecture](../architecture/APZHUB-Testing-Search-Publication-Adapter.md) · [APZSEARCH-012](../sprint/APZSEARCH-012-completion-report.md).
+See [APZSEARCH-015 Completion Report](../sprint/APZSEARCH-015-completion-report.md) · [Search Ecosystem Certification](../reviews/APZSEARCH-015-search-ecosystem-certification.md) · [APZSEARCH-014](../sprint/APZSEARCH-014-completion-report.md).
 
 ---
 
 ## Next
 
-Await owner approval before **APZSEARCH-014** (Reporting Search Publication Adapter), **GitLab CI Reference Adapter**, **AI Assist**, **`@apzhub/integration-sdk` 1.0.0** promotion, **Platform Event Bus**, **webhook ingress**, **provisioning** (deferred 100-11+), or **next business-domain integration**. Stop — do not start any without approval.
+Await owner approval before **APZIDENTITY-005** (Identity Vertical Certification & Production Readiness — do not implement), **APZCONFIG-007** (roadmap only — do not implement), **APZNOTIFY-007**, **APZWORKFLOW-012**, **APZSEARCH-016**, **GitLab CI Reference Adapter**, **AI Assist**, **`@apzhub/integration-sdk` 1.0.0** promotion, **Platform Event Bus**, **webhook ingress**, **provisioning** (deferred 100-11+), or **next business-domain integration**. Stop — do not start any without approval.

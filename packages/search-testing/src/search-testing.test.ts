@@ -11,12 +11,16 @@ import {
   asBenchmarkId,
   asCertificationGateDefinitionId,
   asCertificationRecordId,
+  asCoverageMetricId,
   asDefectLinkId,
   asEngineeringHistoricalSnapshotId,
   asEngineeringSnapshotId,
   asEvidenceId,
   asExecutionSessionId,
   asManualExecutionId,
+  asPipelineId,
+  asPipelineImportId,
+  asPipelineRunId,
   asQualityGateId,
   asReleaseApprovalId,
   asReleaseCandidateId,
@@ -40,13 +44,18 @@ import {
   type Benchmark,
   type CertificationGateDefinition,
   type CertificationRecord,
+  type CoverageMetric,
   type DefectLink,
   type EngineeringRiskSummary,
   type EngineeringSnapshot,
   type Evidence,
   type HistoricalSnapshot,
   type ManualExecution,
+  type Pipeline,
+  type PipelineImport,
+  type PipelineRun,
   type QualityGate,
+  type QualitySummary,
   type Release,
   type ReleaseApproval,
   type ReleaseCandidate,
@@ -509,8 +518,10 @@ const reportTemplate: ReportTemplate = {
 
 describe("APZSEARCH-013 search-testing", () => {
   it("ships version and entity catalogue", () => {
-    expect(SEARCH_TESTING_VERSION).toBe("0.1.0");
-    expect(TESTING_SEARCH_ENTITY_TYPES.length).toBeGreaterThanOrEqual(30);
+    expect(SEARCH_TESTING_VERSION).toBe("0.1.1");
+    expect(TESTING_SEARCH_ENTITY_TYPES.length).toBeGreaterThanOrEqual(40);
+    expect(TESTING_SEARCH_ENTITY_TYPES).toContain("quality_summary");
+    expect(TESTING_SEARCH_ENTITY_TYPES).toContain("pipeline_run");
     expect(isTestingSearchEntityType("test_case")).toBe(true);
     expect(isTestingSearchEntityType("test_run")).toBe(true);
     expect(isTestingSearchEntityType("document")).toBe(false);
@@ -637,9 +648,90 @@ describe("APZSEARCH-013 search-testing", () => {
         entity: reportTemplate,
         extras: { tenantId: TENANT },
       },
+      {
+        entityType: "quality_summary" as const,
+        entity: {
+          scope: { tenantId: TENANT },
+          coverageMetrics: [],
+          openDefectsByStatus: { open: 1 },
+          openDefectsByPriority: {},
+          computedAt: TS,
+        } satisfies QualitySummary,
+        extras: { entityId: "qsm_99999999999999999999999999999999" },
+      },
+      {
+        entityType: "quality_coverage_summary" as const,
+        entity: {
+          ...audit,
+          id: asCoverageMetricId("cov_99999999999999999999999999999999"),
+          kind: "requirement",
+          subjectId: "subj",
+          coveredCount: 1,
+          totalCount: 2,
+          percentage: 50,
+          computedAt: TS,
+        } satisfies CoverageMetric,
+      },
+      {
+        entityType: "defect_summary" as const,
+        entity: {
+          id: "dfs_99999999999999999999999999999999",
+          tenantId: TENANT,
+          title: "Defect rollup",
+          openCount: 1,
+          totalCount: 1,
+          status: "open",
+        },
+      },
+      {
+        entityType: "pipeline" as const,
+        entity: {
+          ...audit,
+          id: asPipelineId("pl_99999999999999999999999999999999"),
+          key: "ci",
+          name: "CI",
+          providerKind: "github_actions",
+          status: "active",
+        } satisfies Pipeline,
+      },
+      {
+        entityType: "pipeline_run" as const,
+        entity: {
+          ...audit,
+          id: asPipelineRunId("pr_99999999999999999999999999999999"),
+          pipelineId: asPipelineId("pl_99999999999999999999999999999999"),
+          importId: asPipelineImportId("pi_99999999999999999999999999999999"),
+          providerKind: "github_actions",
+          externalRunRef: "run-1",
+          status: "passed",
+          stages: [],
+          jobs: [],
+          artifacts: [],
+          approvals: [],
+          events: [],
+          environment: {},
+          links: {},
+          summary: { overallStatus: "passed" },
+        } satisfies PipelineRun,
+      },
+      {
+        entityType: "pipeline_import" as const,
+        entity: {
+          ...audit,
+          id: asPipelineImportId("pi_99999999999999999999999999999999"),
+          providerKind: "github_actions",
+          adapterVersion: "1",
+          externalRunRef: "run-1",
+          status: "completed",
+        } satisfies PipelineImport,
+      },
     ];
 
     for (const input of inputs) {
+      // Facade map() coverage — specialised publishers use domain mappers directly.
+      const draft = adapter.mapper.map(context, input);
+      expect(draft.entityType).toBe(input.entityType);
+
       const preview = adapter.publisher.preview(context, input);
       expect(preview.ok, `${input.entityType}: ${preview.message}`).toBe(true);
       expect(preview.previewMetadata?.productId).toBe("testing");

@@ -1,5 +1,8 @@
 /**
- * TestingSearchPublisher — Testing → SearchIntegrationPublisher (APZSEARCH-013).
+ * TestingSearchPublisher — orchestrator only (APZSEARCH-013).
+ *
+ * Routes by entityType to specialised domain publishers.
+ * Contains no domain-specific mapping logic.
  */
 
 import type {
@@ -27,9 +30,32 @@ import {
 } from "../mapper/testing-search-entity-mapper";
 import { TESTING_SEARCH_ENTITY_TYPES } from "../types/entity-types";
 import { TestingSearchEntityValidator } from "../validator/testing-search-entity-validator";
+import { AutomationPublisher } from "./automation-publisher";
+import { CertificationPublisher } from "./certification-publisher";
+import { failedPublicationResult } from "./domain-search-publisher-base";
+import { EngineeringIntelligencePublisher } from "./engineering-intelligence-publisher";
+import { ManualTestingPublisher } from "./manual-testing-publisher";
+import { PipelinePublisher } from "./pipeline-publisher";
+import type { TestingDomainSearchPublisher } from "./publication-contract";
+import { QualityPublisher } from "./quality-publisher";
+import { ReleasePublisher } from "./release-publisher";
+import { ReportingMetadataPublisher } from "./reporting-metadata-publisher";
+
+export type TestingSearchSpecialisedPublishers = {
+  readonly manual: ManualTestingPublisher;
+  readonly automation: AutomationPublisher;
+  readonly certification: CertificationPublisher;
+  readonly release: ReleasePublisher;
+  readonly engineeringIntelligence: EngineeringIntelligencePublisher;
+  readonly quality: QualityPublisher;
+  readonly reportingMetadata: ReportingMetadataPublisher;
+  readonly pipeline: PipelinePublisher;
+};
 
 export type TestingSearchPublisherOptions = {
   readonly integrationPublisher: SearchIntegrationPublisher;
+  /** When omitted, specialised publishers are wired from shared deps + mapper. */
+  readonly specialisedPublishers?: TestingSearchSpecialisedPublishers;
   readonly mapper?: TestingSearchEntityMapper;
   readonly validator?: TestingSearchEntityValidator;
   readonly lifecycle?: TestingSearchLifecycle;
@@ -39,24 +65,50 @@ export type TestingSearchPublisherOptions = {
   readonly errors?: TestingSearchErrorTranslator;
 };
 
-function failedResult(
-  operation: SearchPublicationResult["operation"],
-  context: TestingSearchPublicationContext,
-  message: string,
-  started: number,
-): SearchPublicationResult {
+function buildDefaultSpecialisedPublishers(
+  integrationPublisher: SearchIntegrationPublisher,
+  mapper: TestingSearchEntityMapper,
+  validator: TestingSearchEntityValidator,
+  metrics: TestingSearchMetrics,
+  logger: TestingSearchLogger,
+  diagnostics: TestingSearchDiagnostics,
+  errors: TestingSearchErrorTranslator,
+): TestingSearchSpecialisedPublishers {
+  const deps = {
+    integrationPublisher,
+    validator,
+    metrics,
+    logger,
+    diagnostics,
+    errors,
+  };
   return {
-    operation,
-    ok: false,
-    correlationId: context.correlationId,
-    productId: "testing",
-    message,
-    durationMs: Math.max(0, Date.now() - started),
-    acceptedAt: new Date().toISOString(),
+    manual: new ManualTestingPublisher(deps, mapper.getManualMapper()),
+    automation: new AutomationPublisher(deps, mapper.getAutomationMapper()),
+    certification: new CertificationPublisher(
+      deps,
+      mapper.getCertificationMapper(),
+    ),
+    release: new ReleasePublisher(deps, mapper.getReleaseMapper()),
+    engineeringIntelligence: new EngineeringIntelligencePublisher(
+      deps,
+      mapper.getEngineeringMapper(),
+    ),
+    quality: new QualityPublisher(deps, mapper.getQualityMapper()),
+    reportingMetadata: new ReportingMetadataPublisher(
+      deps,
+      mapper.getReportingMapper(),
+    ),
+    pipeline: new PipelinePublisher(deps, mapper.getPipelineMapper()),
   };
 }
 
 export class TestingSearchPublisher {
+  private readonly specialised: TestingSearchSpecialisedPublishers;
+  private readonly byEntityType: ReadonlyMap<
+    string,
+    TestingDomainSearchPublisher
+  >;
   private readonly mapper: TestingSearchEntityMapper;
   private readonly validator: TestingSearchEntityValidator;
   private readonly lifecycleHelper: TestingSearchLifecycle;
@@ -64,8 +116,10 @@ export class TestingSearchPublisher {
   private readonly logger: TestingSearchLogger;
   private readonly diagnosticsStore: TestingSearchDiagnostics;
   private readonly errors: TestingSearchErrorTranslator;
+  private readonly integrationPublisher: SearchIntegrationPublisher;
 
   constructor(private readonly options: TestingSearchPublisherOptions) {
+    this.integrationPublisher = options.integrationPublisher;
     this.mapper = options.mapper ?? new TestingSearchEntityMapper();
     this.validator = options.validator ?? new TestingSearchEntityValidator();
     this.lifecycleHelper =
@@ -75,61 +129,57 @@ export class TestingSearchPublisher {
     this.diagnosticsStore =
       options.diagnostics ?? new TestingSearchDiagnostics();
     this.errors = options.errors ?? new TestingSearchErrorTranslator();
+    this.specialised =
+      options.specialisedPublishers ??
+      buildDefaultSpecialisedPublishers(
+        this.integrationPublisher,
+        this.mapper,
+        this.validator,
+        this.metrics,
+        this.logger,
+        this.diagnosticsStore,
+        this.errors,
+      );
+
+    const map = new Map<string, TestingDomainSearchPublisher>();
+    for (const pub of Object.values(this.specialised)) {
+      for (const entityType of pub.entityTypes) {
+        map.set(entityType, pub);
+      }
+    }
+    this.byEntityType = map;
+  }
+
+  getSpecialisedPublishers(): TestingSearchSpecialisedPublishers {
+    return this.specialised;
+  }
+
+  resolvePublisher(
+    entityType: TestingSearchMappableEntity["entityType"],
+  ): TestingDomainSearchPublisher {
+    const pub = this.byEntityType.get(entityType);
+    if (!pub) {
+      throw new Error(
+        `No specialised Testing search publisher for entity type: ${entityType}`,
+      );
+    }
+    return pub;
   }
 
   validate(
     context: TestingSearchPublicationContext,
     input: TestingSearchMappableEntity,
   ): SearchPublicationResult {
-    const started = Date.now();
     try {
-      const draft = this.mapper.map(context, input);
-      const local = this.validator.validateDraft(context, draft);
-      this.diagnosticsStore.touch(
-        "validate",
-        context.correlationId,
-        input.entityType,
-        local.issues,
-      );
-      if (!local.valid) {
-        this.metrics.record("validate", false, input.entityType);
-        this.logger.log("warn", "Testing search validation failed", {
-          correlationId: context.correlationId,
-          operation: "validate",
-          entityType: input.entityType,
-          entityId: draft.entityId,
-        });
-        return {
-          operation: "validate",
-          ok: false,
-          correlationId: context.correlationId,
-          productId: "testing",
-          entityId: draft.entityId,
-          issues: local.issues.map((i) => ({
-            field: i.field,
-            code: i.code,
-            message: i.message,
-          })),
-          durationMs: Math.max(0, Date.now() - started),
-          acceptedAt: new Date().toISOString(),
-        };
-      }
-      const result = this.options.integrationPublisher.validate(
-        toSearchIntegrationContext(context),
-        draft,
-      );
-      this.metrics.record("validate", result.ok, input.entityType);
-      return result;
+      return this.resolvePublisher(input.entityType).validate(context, input);
     } catch (error) {
       const domain = this.errors.translate(error);
-      this.metrics.record("validate", false, input.entityType);
-      this.diagnosticsStore.touch(
+      return failedPublicationResult(
         "validate",
-        context.correlationId,
-        input.entityType,
-        [{ field: "entity", code: domain.classification, message: domain.message }],
+        context,
+        domain.message,
+        Date.now(),
       );
-      return failedResult("validate", context, domain.message, started);
     }
   }
 
@@ -137,27 +187,51 @@ export class TestingSearchPublisher {
     context: TestingSearchPublicationContext,
     input: TestingSearchMappableEntity,
   ): SearchPublicationResult {
-    return this.runMapped("preview", context, input, (draft, ic) =>
-      this.options.integrationPublisher.preview(ic, draft),
-    );
+    try {
+      return this.resolvePublisher(input.entityType).preview(context, input);
+    } catch (error) {
+      const domain = this.errors.translate(error);
+      return failedPublicationResult(
+        "preview",
+        context,
+        domain.message,
+        Date.now(),
+      );
+    }
   }
 
   publish(
     context: TestingSearchPublicationContext,
     input: TestingSearchMappableEntity,
   ): SearchPublicationResult {
-    return this.runMapped("publish", context, input, (draft, ic) =>
-      this.options.integrationPublisher.publish(ic, draft),
-    );
+    try {
+      return this.resolvePublisher(input.entityType).publish(context, input);
+    } catch (error) {
+      const domain = this.errors.translate(error);
+      return failedPublicationResult(
+        "publish",
+        context,
+        domain.message,
+        Date.now(),
+      );
+    }
   }
 
   update(
     context: TestingSearchPublicationContext,
     input: TestingSearchMappableEntity,
   ): SearchPublicationResult {
-    return this.runMapped("update", context, input, (draft, ic) =>
-      this.options.integrationPublisher.update(ic, draft),
-    );
+    try {
+      return this.resolvePublisher(input.entityType).update(context, input);
+    } catch (error) {
+      const domain = this.errors.translate(error);
+      return failedPublicationResult(
+        "update",
+        context,
+        domain.message,
+        Date.now(),
+      );
+    }
   }
 
   remove(
@@ -165,29 +239,20 @@ export class TestingSearchPublisher {
     entityType: TestingSearchMappableEntity["entityType"],
     entityId: string,
   ): SearchPublicationResult {
-    const started = Date.now();
-    this.diagnosticsStore.touch(
-      "remove",
-      context.correlationId,
-      entityType,
-    );
     try {
-      const result = this.options.integrationPublisher.remove(
-        toSearchIntegrationContext(context),
-        entityId,
-      );
-      this.metrics.record("remove", result.ok, entityType);
-      this.logger.log(result.ok ? "info" : "error", "Testing search remove", {
-        correlationId: context.correlationId,
-        operation: "remove",
+      return this.resolvePublisher(entityType).remove(
+        context,
         entityType,
         entityId,
-      });
-      return result;
+      );
     } catch (error) {
       const domain = this.errors.translate(error);
-      this.metrics.record("remove", false, entityType);
-      return failedResult("remove", context, domain.message, started);
+      return failedPublicationResult(
+        "remove",
+        context,
+        domain.message,
+        Date.now(),
+      );
     }
   }
 
@@ -201,7 +266,7 @@ export class TestingSearchPublisher {
     this.diagnosticsStore.touch("lifecycle", context.correlationId);
     try {
       void this.lifecycleHelper.canTransition("published", state);
-      return this.options.integrationPublisher.lifecycle(
+      return this.integrationPublisher.lifecycle(
         toSearchIntegrationContext(context),
         entityId,
         state,
@@ -209,7 +274,7 @@ export class TestingSearchPublisher {
       );
     } catch (error) {
       const domain = this.errors.translate(error);
-      return failedResult("lifecycle", context, domain.message, started);
+      return failedPublicationResult("lifecycle", context, domain.message, started);
     }
   }
 
@@ -250,73 +315,6 @@ export class TestingSearchPublisher {
   }
 
   getIntegrationPublisher(): SearchIntegrationPublisher {
-    return this.options.integrationPublisher;
-  }
-
-  private runMapped(
-    operation: "publish" | "update" | "preview",
-    context: TestingSearchPublicationContext,
-    input: TestingSearchMappableEntity,
-    invoke: (
-      draft: ReturnType<TestingSearchEntityMapper["map"]>,
-      ic: ReturnType<typeof toSearchIntegrationContext>,
-    ) => SearchPublicationResult,
-  ): SearchPublicationResult {
-    const started = Date.now();
-    try {
-      const draft = this.mapper.map(context, input);
-      const local = this.validator.validateDraft(context, draft);
-      this.diagnosticsStore.touch(
-        operation,
-        context.correlationId,
-        input.entityType,
-        local.issues,
-      );
-      if (!local.valid) {
-        this.metrics.record(operation, false, input.entityType);
-        this.logger.log("warn", `Testing search ${operation} rejected`, {
-          correlationId: context.correlationId,
-          operation,
-          entityType: input.entityType,
-          entityId: draft.entityId,
-        });
-        return {
-          operation,
-          ok: false,
-          correlationId: context.correlationId,
-          productId: "testing",
-          entityId: draft.entityId,
-          issues: local.issues.map((i) => ({
-            field: i.field,
-            code: i.code,
-            message: i.message,
-          })),
-          durationMs: Math.max(0, Date.now() - started),
-          acceptedAt: new Date().toISOString(),
-        };
-      }
-      const result = invoke(draft, toSearchIntegrationContext(context));
-      this.metrics.record(operation, result.ok, input.entityType);
-      this.logger.log(
-        result.ok ? "info" : "error",
-        `Testing search ${operation}`,
-        {
-          correlationId: context.correlationId,
-          operation,
-          entityType: input.entityType,
-          entityId: draft.entityId,
-        },
-      );
-      return result;
-    } catch (error) {
-      const domain = this.errors.translate(error);
-      this.metrics.record(operation, false, input.entityType);
-      this.logger.log("error", domain.message, {
-        correlationId: context.correlationId,
-        operation,
-        entityType: input.entityType,
-      });
-      return failedResult(operation, context, domain.message, started);
-    }
+    return this.integrationPublisher;
   }
 }

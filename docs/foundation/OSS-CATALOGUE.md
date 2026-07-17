@@ -5,8 +5,8 @@
 > **Authoritative references:** [OSS-001 Master Plan](../strategy/OSS-001-APZHUB-OSS-Integration-Master-Plan.md) · [OSS Product Integration Catalog](../architecture/APZHUB-OSS-Product-Integration-Catalog.md) · [OSS Capability Mapping](../architecture/APZHUB-OSS-Capability-Mapping.md)  
 > **Related documents:** [INTEGRATION-CATALOGUE](./INTEGRATION-CATALOGUE.md) · [OSS Integration Strategy](../strategy/APZHUB-OSS-Integration-Strategy.md)  
 > **Reading order:** Before integration work  
-> **Last updated:** 2026-07-12  
-> **Current status:** Active — Wave 2 CLOSED (OSS-102-08 CERTIFIED_WITH_LIMITATIONS); Wave 7 Kiwi SoR path **superseded by APZ TCMS**
+> **Last updated:** 2026-07-16  
+> **Current status:** Active — Wave 2 CLOSED (OSS-102-08 CERTIFIED_WITH_LIMITATIONS); Wave 6 n8n delivered as Workflow Engine Reference Adapter (**APZWORKFLOW-011** frozen); Wave 7 Kiwi SoR path **superseded by APZ TCMS**
 
 ---
 
@@ -31,7 +31,7 @@ See [OSS Integration Standards](../governance/APZHUB-OSS-Integration-Standards.m
 | **3** | Kimai              | Time Tracking     | `TimeTrackingService` | Planned                                                 |
 | **4** | Paperless-ngx      | Documents         | `DocumentService`     | Planned                                                 |
 | **5** | Metabase           | Analytics         | `AnalyticsService`    | Planned                                                 |
-| **6** | n8n                | Automation        | `AutomationService`   | Planned                                                 |
+| **6** | n8n                | Automation / Workflow Engine | `Workflow` (engine facet) | **Complete** — Reference Adapter `@apzhub/integration-n8n` **0.1.0** (APZWORKFLOW-011; read-only; frozen) |
 | **7** | Kiwi TCMS          | Testing           | `TestingService`      | **SUPERSEDED** — native **APZ TCMS** (ADR-0059); Kiwi not product SoR/UI |
 | **8** | Greenbone, Faraday | Security Ops      | Security connectors   | Planned                                                 |
 | **9** | MobSF              | Mobile Security   | Security connector    | Planned                                                 |

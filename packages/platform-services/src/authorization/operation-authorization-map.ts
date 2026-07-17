@@ -73,6 +73,90 @@ export type AuthorizationResourceType =
   | "search_document"
   | "search_execution_health"
   | "search_execution_diagnostics"
+  | "workflow"
+  | "workflow_version"
+  | "workflow_template"
+  | "workflow_category"
+  | "workflow_folder"
+  | "workflow_validation"
+  | "workflow_audit"
+  | "workflow_engine"
+  | "workflow_engine_health"
+  | "workflow_engine_diagnostics"
+  | "workflow_engine_capabilities"
+  | "notification"
+  | "notification_template"
+  | "notification_preference"
+  | "notification_category"
+  | "notification_channel"
+  | "notification_recipient"
+  | "notification_reference"
+  | "notification_audit"
+  | "notification_diagnostics"
+  | "platform_configuration"
+  | "platform_configuration_namespace"
+  | "platform_configuration_group"
+  | "platform_configuration_version"
+  | "platform_configuration_override"
+  | "platform_configuration_scope"
+  | "platform_configuration_validation"
+  | "platform_configuration_reference"
+  | "platform_configuration_audit"
+  | "platform_configuration_diagnostics"
+  | "platform_administration"
+  | "platform_administration_category"
+  | "platform_administration_section"
+  | "platform_administration_action"
+  | "platform_administration_permission"
+  | "platform_administration_audit"
+  | "platform_administration_history"
+  | "platform_administration_diagnostics"
+  | "platform_administration_registration"
+  | "platform_administration_metadata"
+  | "platform_administration_policy"
+  | "platform_administration_reference"
+  | "platform_administration_capability"
+  | "platform_administration_navigation"
+  | "platform_administration_shortcut"
+  | "platform_administration_dashboard"
+  | "platform_administration_widget"
+  | "platform_identity_user"
+  | "platform_identity_group"
+  | "platform_identity_role"
+  | "platform_identity_organisation"
+  | "platform_identity_tenant"
+  | "platform_identity_department"
+  | "platform_identity_position"
+  | "platform_identity_membership"
+  | "platform_identity_service_assignment"
+  | "platform_identity_invitation"
+  | "platform_identity_activation"
+  | "platform_identity_deactivation"
+  | "platform_identity_policy"
+  | "platform_identity_audit"
+  | "platform_identity_history"
+  | "platform_identity_reference"
+  | "platform_identity_diagnostics"
+  | "platform_observe_health_check"
+  | "platform_observe_readiness_check"
+  | "platform_observe_liveness_check"
+  | "platform_observe_service_health"
+  | "platform_observe_service_status"
+  | "platform_observe_component_status"
+  | "platform_observe_metric_definition"
+  | "platform_observe_metric_sample"
+  | "platform_observe_alert_definition"
+  | "platform_observe_alert_state"
+  | "platform_observe_dashboard"
+  | "platform_observe_log_source"
+  | "platform_observe_trace_definition"
+  | "platform_observe_trace_span"
+  | "platform_observe_incident_reference"
+  | "platform_observe_maintenance_window"
+  | "platform_observe_health_summary"
+  | "platform_observe_metadata"
+  | "platform_observe_diagnostic"
+  | "platform_observe_diagnostics"
   | "administration"
   | "provider"
   | "mapping"
@@ -1190,6 +1274,391 @@ const documentPlatformOps: OperationAuthorizationMapping[] = [
   testingOp("documentDiagnostics", "getDiagnostics", "document_diagnostics", "read", "document.read"),
 ];
 
+/** APZWORKFLOW-002 — metadata / lifecycle only; no execution mapped. */
+const workflowPlatformOps: OperationAuthorizationMapping[] = [
+  testingOp("workflowWorkflows", "create", "workflow", "create", "workflow.create"),
+  testingOp("workflowWorkflows", "get", "workflow", "read", "workflow.view", 0),
+  testingOp("workflowWorkflows", "update", "workflow", "update", "workflow.update"),
+  testingOp("workflowWorkflows", "delete", "workflow", "delete", "workflow.delete", 0),
+  testingOp("workflowWorkflows", "find", "workflow", "list", "workflow.view"),
+  testingOp("workflowWorkflows", "publish", "workflow", "transition", "workflow.publish", 0),
+  testingOp("workflowWorkflows", "archive", "workflow", "archive", "workflow.archive", 0),
+  testingOp("workflowWorkflows", "restore", "workflow", "update", "workflow.restore", 0),
+  testingOp("workflowWorkflows", "transition", "workflow", "transition", "workflow.update"),
+  testingOp("workflowVersions", "create", "workflow_version", "create", "workflow.update"),
+  testingOp("workflowVersions", "get", "workflow_version", "read", "workflow.view", 0),
+  testingOp("workflowVersions", "list", "workflow_version", "list", "workflow.view", 0),
+  testingOp("workflowTemplates", "create", "workflow_template", "create", "workflow.template.create"),
+  testingOp("workflowTemplates", "get", "workflow_template", "read", "workflow.template.view", 0),
+  testingOp("workflowTemplates", "update", "workflow_template", "update", "workflow.template.update"),
+  testingOp("workflowTemplates", "delete", "workflow_template", "delete", "workflow.template.delete", 0),
+  testingOp("workflowTemplates", "list", "workflow_template", "list", "workflow.template.view"),
+  testingOp("workflowCategories", "create", "workflow_category", "create", "workflow.create"),
+  testingOp("workflowCategories", "get", "workflow_category", "read", "workflow.view", 0),
+  testingOp("workflowCategories", "list", "workflow_category", "list", "workflow.view"),
+  testingOp("workflowFolders", "create", "workflow_folder", "create", "workflow.create"),
+  testingOp("workflowFolders", "get", "workflow_folder", "read", "workflow.view", 0),
+  testingOp("workflowFolders", "list", "workflow_folder", "list", "workflow.view"),
+  testingOp(
+    "workflowValidation",
+    "validate",
+    "workflow_validation",
+    "execute",
+    "workflow.validation",
+  ),
+  testingOp("workflowAudit", "list", "workflow_audit", "list", "workflow.audit", 0),
+];
+
+/** APZNOTIFY-002 — metadata / lifecycle only; no delivery mapped. */
+const notificationPlatformOps: OperationAuthorizationMapping[] = [
+  testingOp("notificationNotifications", "list", "notification", "list", "notification.read"),
+  testingOp("notificationNotifications", "get", "notification", "read", "notification.read", 0),
+  testingOp("notificationNotifications", "create", "notification", "create", "notification.manage"),
+  testingOp("notificationNotifications", "updateMetadata", "notification", "update", "notification.manage"),
+  testingOp("notificationNotifications", "archive", "notification", "archive", "notification.manage", 0),
+  testingOp("notificationNotifications", "restore", "notification", "update", "notification.manage", 0),
+  testingOp("notificationNotifications", "transition", "notification", "transition", "notification.manage"),
+  testingOp("notificationNotifications", "validate", "notification", "execute", "notification.read"),
+  testingOp("notificationTemplates", "list", "notification_template", "list", "notification.template"),
+  testingOp("notificationTemplates", "get", "notification_template", "read", "notification.template", 0),
+  testingOp("notificationTemplates", "create", "notification_template", "create", "notification.template"),
+  testingOp("notificationTemplates", "update", "notification_template", "update", "notification.template"),
+  testingOp("notificationTemplates", "archive", "notification_template", "archive", "notification.template", 0),
+  testingOp("notificationPreferences", "list", "notification_preference", "list", "notification.preference"),
+  testingOp("notificationPreferences", "get", "notification_preference", "read", "notification.preference", 0),
+  testingOp("notificationPreferences", "update", "notification_preference", "update", "notification.preference"),
+  testingOp("notificationCategories", "list", "notification_category", "list", "notification.read"),
+  testingOp("notificationCategories", "get", "notification_category", "read", "notification.read", 0),
+  testingOp("notificationChannels", "list", "notification_channel", "list", "notification.read"),
+  testingOp("notificationChannels", "get", "notification_channel", "read", "notification.read", 0),
+  testingOp("notificationRecipients", "list", "notification_recipient", "list", "notification.read", 0),
+  testingOp("notificationRecipients", "get", "notification_recipient", "read", "notification.read", 0),
+  testingOp("notificationReferences", "list", "notification_reference", "list", "notification.read", 0),
+  testingOp("notificationReferences", "get", "notification_reference", "read", "notification.read", 0),
+  testingOp("notificationAudit", "list", "notification_audit", "list", "notification.audit"),
+  testingOp("notificationAudit", "get", "notification_audit", "read", "notification.audit", 0),
+  testingOp("notificationDiagnostics", "health", "notification_diagnostics", "read", "notification.read"),
+  testingOp("notificationDiagnostics", "readiness", "notification_diagnostics", "read", "notification.read"),
+  testingOp("notificationDiagnostics", "capabilities", "notification_diagnostics", "read", "notification.read"),
+];
+
+const configurationPlatformOps: OperationAuthorizationMapping[] = [
+  testingOp("configurationConfigurations", "list", "platform_configuration", "list", "configuration.read"),
+  testingOp("configurationConfigurations", "get", "platform_configuration", "read", "configuration.read", 0),
+  testingOp("configurationConfigurations", "create", "platform_configuration", "create", "configuration.manage"),
+  testingOp("configurationConfigurations", "updateMetadata", "platform_configuration", "update", "configuration.manage"),
+  testingOp("configurationConfigurations", "archive", "platform_configuration", "archive", "configuration.manage", 0),
+  testingOp("configurationConfigurations", "restore", "platform_configuration", "update", "configuration.manage", 0),
+  testingOp("configurationConfigurations", "transition", "platform_configuration", "transition", "configuration.manage"),
+  testingOp("configurationNamespaces", "list", "platform_configuration_namespace", "list", "configuration.read"),
+  testingOp("configurationNamespaces", "get", "platform_configuration_namespace", "read", "configuration.read", 0),
+  testingOp("configurationNamespaces", "create", "platform_configuration_namespace", "create", "configuration.manage"),
+  testingOp("configurationNamespaces", "update", "platform_configuration_namespace", "update", "configuration.manage"),
+  testingOp("configurationGroups", "list", "platform_configuration_group", "list", "configuration.read"),
+  testingOp("configurationGroups", "get", "platform_configuration_group", "read", "configuration.read", 0),
+  testingOp("configurationGroups", "create", "platform_configuration_group", "create", "configuration.manage"),
+  testingOp("configurationGroups", "update", "platform_configuration_group", "update", "configuration.manage"),
+  testingOp("configurationVersions", "list", "platform_configuration_version", "list", "configuration.version", 0),
+  testingOp("configurationVersions", "get", "platform_configuration_version", "read", "configuration.version", 0),
+  testingOp("configurationVersions", "create", "platform_configuration_version", "create", "configuration.version"),
+  testingOp("configurationVersions", "publish", "platform_configuration_version", "update", "configuration.version", 0),
+  testingOp("configurationVersions", "deprecate", "platform_configuration_version", "update", "configuration.version", 0),
+  testingOp("configurationOverrides", "list", "platform_configuration_override", "list", "configuration.manage", 0),
+  testingOp("configurationOverrides", "get", "platform_configuration_override", "read", "configuration.manage", 0),
+  testingOp("configurationOverrides", "create", "platform_configuration_override", "create", "configuration.manage"),
+  testingOp("configurationOverrides", "update", "platform_configuration_override", "update", "configuration.manage"),
+  testingOp("configurationScopes", "list", "platform_configuration_scope", "list", "configuration.read"),
+  testingOp("configurationScopes", "get", "platform_configuration_scope", "read", "configuration.read", 0),
+  testingOp("configurationValidation", "validateMetadata", "platform_configuration_validation", "execute", "configuration.validation"),
+  testingOp("configurationValidation", "listRules", "platform_configuration_validation", "list", "configuration.validation"),
+  testingOp("configurationReferences", "list", "platform_configuration_reference", "list", "configuration.read", 0),
+  testingOp("configurationReferences", "get", "platform_configuration_reference", "read", "configuration.read", 0),
+  testingOp("configurationAudit", "list", "platform_configuration_audit", "list", "configuration.audit"),
+  testingOp("configurationAudit", "get", "platform_configuration_audit", "read", "configuration.audit", 0),
+  testingOp("configurationDiagnostics", "health", "platform_configuration_diagnostics", "read", "configuration.read"),
+  testingOp("configurationDiagnostics", "readiness", "platform_configuration_diagnostics", "read", "configuration.read"),
+  testingOp("configurationDiagnostics", "capabilities", "platform_configuration_diagnostics", "read", "configuration.read"),
+];
+
+const administrationPlatformOps: OperationAuthorizationMapping[] = [
+  testingOp("administrationModules", "list", "platform_administration", "list", "admin.read"),
+  testingOp("administrationModules", "get", "platform_administration", "read", "admin.read", 0),
+  testingOp("administrationModules", "create", "platform_administration", "create", "admin.manage"),
+  testingOp("administrationModules", "updateMetadata", "platform_administration", "update", "admin.manage"),
+  testingOp("administrationModules", "archive", "platform_administration", "archive", "admin.manage", 0),
+  testingOp("administrationModules", "restore", "platform_administration", "update", "admin.manage", 0),
+  testingOp("administrationModules", "transition", "platform_administration", "transition", "admin.manage"),
+  testingOp("administrationCategories", "list", "platform_administration_category", "list", "admin.read"),
+  testingOp("administrationCategories", "get", "platform_administration_category", "read", "admin.read", 0),
+  testingOp("administrationCategories", "create", "platform_administration_category", "create", "admin.manage"),
+  testingOp("administrationCategories", "update", "platform_administration_category", "update", "admin.manage"),
+  testingOp("administrationSections", "list", "platform_administration_section", "list", "admin.read"),
+  testingOp("administrationSections", "get", "platform_administration_section", "read", "admin.read", 0),
+  testingOp("administrationSections", "create", "platform_administration_section", "create", "admin.manage"),
+  testingOp("administrationSections", "update", "platform_administration_section", "update", "admin.manage"),
+  testingOp("administrationActions", "list", "platform_administration_action", "list", "admin.read"),
+  testingOp("administrationActions", "get", "platform_administration_action", "read", "admin.read", 0),
+  testingOp("administrationActions", "create", "platform_administration_action", "create", "admin.manage"),
+  testingOp("administrationActions", "update", "platform_administration_action", "update", "admin.manage"),
+  testingOp("administrationPermissions", "list", "platform_administration_permission", "list", "admin.read"),
+  testingOp("administrationPermissions", "get", "platform_administration_permission", "read", "admin.read", 0),
+  testingOp("administrationPermissions", "create", "platform_administration_permission", "create", "admin.manage"),
+  testingOp("administrationPermissions", "update", "platform_administration_permission", "update", "admin.manage"),
+  testingOp("administrationAudit", "list", "platform_administration_audit", "list", "admin.audit"),
+  testingOp("administrationAudit", "get", "platform_administration_audit", "read", "admin.audit", 0),
+  testingOp("administrationHistory", "list", "platform_administration_history", "list", "admin.read", 0),
+  testingOp("administrationHistory", "get", "platform_administration_history", "read", "admin.read", 0),
+  testingOp("administrationDiagnostics", "health", "platform_administration_diagnostics", "read", "admin.diagnostics"),
+  testingOp("administrationDiagnostics", "readiness", "platform_administration_diagnostics", "read", "admin.diagnostics"),
+  testingOp("administrationDiagnostics", "capabilities", "platform_administration_diagnostics", "read", "admin.diagnostics"),
+  testingOp("administrationDiagnostics", "list", "platform_administration_diagnostics", "list", "admin.diagnostics"),
+  testingOp("administrationDiagnostics", "get", "platform_administration_diagnostics", "read", "admin.diagnostics", 0),
+  testingOp("administrationRegistrations", "list", "platform_administration_registration", "list", "admin.registration"),
+  testingOp("administrationRegistrations", "get", "platform_administration_registration", "read", "admin.registration", 0),
+  testingOp("administrationRegistrations", "create", "platform_administration_registration", "create", "admin.registration"),
+  testingOp("administrationRegistrations", "update", "platform_administration_registration", "update", "admin.registration"),
+  testingOp("administrationMetadata", "list", "platform_administration_metadata", "list", "admin.read", 0),
+  testingOp("administrationMetadata", "get", "platform_administration_metadata", "read", "admin.read", 0),
+  testingOp("administrationMetadata", "create", "platform_administration_metadata", "create", "admin.manage"),
+  testingOp("administrationMetadata", "update", "platform_administration_metadata", "update", "admin.manage"),
+  testingOp("administrationPolicies", "list", "platform_administration_policy", "list", "admin.policy"),
+  testingOp("administrationPolicies", "get", "platform_administration_policy", "read", "admin.policy", 0),
+  testingOp("administrationPolicies", "create", "platform_administration_policy", "create", "admin.policy"),
+  testingOp("administrationPolicies", "update", "platform_administration_policy", "update", "admin.policy"),
+  testingOp("administrationReferences", "list", "platform_administration_reference", "list", "admin.read", 0),
+  testingOp("administrationReferences", "get", "platform_administration_reference", "read", "admin.read", 0),
+  testingOp("administrationReferences", "create", "platform_administration_reference", "create", "admin.manage"),
+  testingOp("administrationCapabilities", "list", "platform_administration_capability", "list", "admin.read"),
+  testingOp("administrationCapabilities", "get", "platform_administration_capability", "read", "admin.read", 0),
+  testingOp("administrationCapabilities", "create", "platform_administration_capability", "create", "admin.manage"),
+  testingOp("administrationCapabilities", "update", "platform_administration_capability", "update", "admin.manage"),
+  testingOp("administrationNavigations", "list", "platform_administration_navigation", "list", "admin.navigation"),
+  testingOp("administrationNavigations", "get", "platform_administration_navigation", "read", "admin.navigation", 0),
+  testingOp("administrationNavigations", "create", "platform_administration_navigation", "create", "admin.navigation"),
+  testingOp("administrationNavigations", "update", "platform_administration_navigation", "update", "admin.navigation"),
+  testingOp("administrationShortcuts", "list", "platform_administration_shortcut", "list", "admin.navigation"),
+  testingOp("administrationShortcuts", "get", "platform_administration_shortcut", "read", "admin.navigation", 0),
+  testingOp("administrationShortcuts", "create", "platform_administration_shortcut", "create", "admin.navigation"),
+  testingOp("administrationShortcuts", "update", "platform_administration_shortcut", "update", "admin.navigation"),
+  testingOp("administrationDashboards", "list", "platform_administration_dashboard", "list", "admin.read"),
+  testingOp("administrationDashboards", "get", "platform_administration_dashboard", "read", "admin.read", 0),
+  testingOp("administrationDashboards", "create", "platform_administration_dashboard", "create", "admin.manage"),
+  testingOp("administrationDashboards", "update", "platform_administration_dashboard", "update", "admin.manage"),
+  testingOp("administrationWidgets", "list", "platform_administration_widget", "list", "admin.read", 0),
+  testingOp("administrationWidgets", "get", "platform_administration_widget", "read", "admin.read", 0),
+  testingOp("administrationWidgets", "create", "platform_administration_widget", "create", "admin.manage"),
+  testingOp("administrationWidgets", "update", "platform_administration_widget", "update", "admin.manage"),
+];
+
+const identityPlatformOps: OperationAuthorizationMapping[] = [
+  testingOp("identityUsers", "list", "platform_identity_user", "list", "identity.user"),
+  testingOp("identityUsers", "get", "platform_identity_user", "read", "identity.user", 0),
+  testingOp("identityUsers", "create", "platform_identity_user", "create", "identity.user"),
+  testingOp("identityUsers", "update", "platform_identity_user", "update", "identity.user"),
+  testingOp("identityGroups", "list", "platform_identity_group", "list", "identity.group"),
+  testingOp("identityGroups", "get", "platform_identity_group", "read", "identity.group", 0),
+  testingOp("identityGroups", "create", "platform_identity_group", "create", "identity.group"),
+  testingOp("identityGroups", "update", "platform_identity_group", "update", "identity.group"),
+  testingOp("identityRoles", "list", "platform_identity_role", "list", "identity.role"),
+  testingOp("identityRoles", "get", "platform_identity_role", "read", "identity.role", 0),
+  testingOp("identityRoles", "create", "platform_identity_role", "create", "identity.role"),
+  testingOp("identityRoles", "update", "platform_identity_role", "update", "identity.role"),
+  testingOp("identityOrganisations", "list", "platform_identity_organisation", "list", "identity.organization"),
+  testingOp("identityOrganisations", "get", "platform_identity_organisation", "read", "identity.organization", 0),
+  testingOp("identityOrganisations", "create", "platform_identity_organisation", "create", "identity.organization"),
+  testingOp("identityOrganisations", "update", "platform_identity_organisation", "update", "identity.organization"),
+  testingOp("identityTenants", "list", "platform_identity_tenant", "list", "identity.tenant"),
+  testingOp("identityTenants", "get", "platform_identity_tenant", "read", "identity.tenant", 0),
+  testingOp("identityTenants", "create", "platform_identity_tenant", "create", "identity.tenant"),
+  testingOp("identityTenants", "update", "platform_identity_tenant", "update", "identity.tenant"),
+  testingOp("identityDepartments", "list", "platform_identity_department", "list", "identity.organization"),
+  testingOp("identityDepartments", "get", "platform_identity_department", "read", "identity.organization", 0),
+  testingOp("identityDepartments", "create", "platform_identity_department", "create", "identity.organization"),
+  testingOp("identityDepartments", "update", "platform_identity_department", "update", "identity.organization"),
+  testingOp("identityPositions", "list", "platform_identity_position", "list", "identity.organization"),
+  testingOp("identityPositions", "get", "platform_identity_position", "read", "identity.organization", 0),
+  testingOp("identityPositions", "create", "platform_identity_position", "create", "identity.organization"),
+  testingOp("identityPositions", "update", "platform_identity_position", "update", "identity.organization"),
+  testingOp("identityMemberships", "list", "platform_identity_membership", "list", "identity.user"),
+  testingOp("identityMemberships", "get", "platform_identity_membership", "read", "identity.user", 0),
+  testingOp("identityMemberships", "create", "platform_identity_membership", "create", "identity.user"),
+  testingOp("identityMemberships", "update", "platform_identity_membership", "update", "identity.user"),
+  testingOp("identityServiceAssignments", "list", "platform_identity_service_assignment", "list", "identity.assignment"),
+  testingOp("identityServiceAssignments", "get", "platform_identity_service_assignment", "read", "identity.assignment", 0),
+  testingOp("identityServiceAssignments", "create", "platform_identity_service_assignment", "create", "identity.assignment"),
+  testingOp("identityServiceAssignments", "update", "platform_identity_service_assignment", "update", "identity.assignment"),
+  testingOp("identityInvitations", "list", "platform_identity_invitation", "list", "identity.manage"),
+  testingOp("identityInvitations", "get", "platform_identity_invitation", "read", "identity.manage", 0),
+  testingOp("identityInvitations", "create", "platform_identity_invitation", "create", "identity.manage"),
+  testingOp("identityInvitations", "update", "platform_identity_invitation", "update", "identity.manage"),
+  testingOp("identityActivation", "list", "platform_identity_activation", "list", "identity.user"),
+  testingOp("identityActivation", "get", "platform_identity_activation", "read", "identity.user", 0),
+  testingOp("identityActivation", "create", "platform_identity_activation", "create", "identity.user"),
+  testingOp("identityDeactivation", "list", "platform_identity_deactivation", "list", "identity.user"),
+  testingOp("identityDeactivation", "get", "platform_identity_deactivation", "read", "identity.user", 0),
+  testingOp("identityDeactivation", "create", "platform_identity_deactivation", "create", "identity.user"),
+  testingOp("identityPolicies", "list", "platform_identity_policy", "list", "identity.manage"),
+  testingOp("identityPolicies", "get", "platform_identity_policy", "read", "identity.manage", 0),
+  testingOp("identityPolicies", "create", "platform_identity_policy", "create", "identity.manage"),
+  testingOp("identityPolicies", "update", "platform_identity_policy", "update", "identity.manage"),
+  testingOp("identityAudit", "list", "platform_identity_audit", "list", "identity.audit"),
+  testingOp("identityAudit", "get", "platform_identity_audit", "read", "identity.audit", 0),
+  testingOp("identityHistory", "list", "platform_identity_history", "list", "identity.read", 0),
+  testingOp("identityHistory", "get", "platform_identity_history", "read", "identity.read", 0),
+  testingOp("identityReferences", "list", "platform_identity_reference", "list", "identity.read", 0),
+  testingOp("identityReferences", "get", "platform_identity_reference", "read", "identity.read", 0),
+  testingOp("identityReferences", "create", "platform_identity_reference", "create", "identity.manage"),
+  testingOp("identityReferences", "update", "platform_identity_reference", "update", "identity.manage"),
+  testingOp("identityDiagnostics", "health", "platform_identity_diagnostics", "read", "identity.read"),
+  testingOp("identityDiagnostics", "readiness", "platform_identity_diagnostics", "read", "identity.read"),
+  testingOp("identityDiagnostics", "capabilities", "platform_identity_diagnostics", "read", "identity.read"),
+];
+
+/** APZWORKFLOW-007 — n8n engine read-only surface; mutations mapped then NOT_SUPPORTED. */
+const workflowEngineOps: OperationAuthorizationMapping[] = [
+  testingOp(
+    "workflowEngineWorkflows",
+    "list",
+    "workflow_engine",
+    "list",
+    "workflow.engine.read",
+  ),
+  testingOp(
+    "workflowEngineWorkflows",
+    "get",
+    "workflow_engine",
+    "read",
+    "workflow.engine.read",
+    0,
+  ),
+  testingOp(
+    "workflowEngineWorkflows",
+    "create",
+    "workflow_engine",
+    "create",
+    "workflow.engine.read",
+  ),
+  testingOp(
+    "workflowEngineWorkflows",
+    "update",
+    "workflow_engine",
+    "update",
+    "workflow.engine.read",
+    0,
+  ),
+  testingOp(
+    "workflowEngineWorkflows",
+    "delete",
+    "workflow_engine",
+    "delete",
+    "workflow.engine.read",
+    0,
+  ),
+  testingOp(
+    "workflowEngineWorkflows",
+    "execute",
+    "workflow_engine",
+    "execute",
+    "workflow.engine.read",
+    0,
+  ),
+  testingOp(
+    "workflowEngineTemplates",
+    "list",
+    "workflow_engine",
+    "list",
+    "workflow.engine.read",
+  ),
+  testingOp(
+    "workflowEngineTemplates",
+    "get",
+    "workflow_engine",
+    "read",
+    "workflow.engine.read",
+    0,
+  ),
+  testingOp(
+    "workflowEngineTags",
+    "list",
+    "workflow_engine",
+    "list",
+    "workflow.engine.read",
+  ),
+  testingOp(
+    "workflowEngineTags",
+    "get",
+    "workflow_engine",
+    "read",
+    "workflow.engine.read",
+    0,
+  ),
+  testingOp(
+    "workflowEngineUsers",
+    "list",
+    "workflow_engine",
+    "list",
+    "workflow.engine.read",
+  ),
+  testingOp(
+    "workflowEngineUsers",
+    "get",
+    "workflow_engine",
+    "read",
+    "workflow.engine.read",
+    0,
+  ),
+  testingOp(
+    "workflowEngineProjects",
+    "list",
+    "workflow_engine",
+    "list",
+    "workflow.engine.read",
+  ),
+  testingOp(
+    "workflowEngineProjects",
+    "get",
+    "workflow_engine",
+    "read",
+    "workflow.engine.read",
+    0,
+  ),
+  testingOp(
+    "workflowEngineCapabilities",
+    "get",
+    "workflow_engine_capabilities",
+    "read",
+    "workflow.engine.capabilities",
+  ),
+  testingOp(
+    "workflowEngineHealth",
+    "get",
+    "workflow_engine_health",
+    "read",
+    "workflow.engine.health",
+  ),
+  testingOp(
+    "workflowEngineDiagnostics",
+    "get",
+    "workflow_engine_diagnostics",
+    "read",
+    "workflow.engine.diagnostics",
+  ),
+  testingOp(
+    "workflowEngineCompatibility",
+    "get",
+    "workflow_engine_capabilities",
+    "read",
+    "workflow.engine.capabilities",
+  ),
+  testingOp(
+    "workflowEngineConnection",
+    "validate",
+    "workflow_engine_health",
+    "execute",
+    "workflow.engine.health",
+  ),
+];
+
 /** APZSEARCH-003 — management plane only; no query execution mapped. */
 const searchPlatformOps: OperationAuthorizationMapping[] = [
   testingOp("searchQuery", "validateQuery", "search_query", "execute", "search.validation.execute"),
@@ -1588,6 +2057,88 @@ const platformGovernanceOps: OperationAuthorizationMapping[] = [
   ),
 ];
 
+const observePlatformOps: OperationAuthorizationMapping[] = [
+  testingOp("observeHealthChecks", "list", "platform_observe_health_check", "list", "observe.health"),
+  testingOp("observeHealthChecks", "get", "platform_observe_health_check", "read", "observe.health", 0),
+  testingOp("observeHealthChecks", "create", "platform_observe_health_check", "create", "observe.health"),
+  testingOp("observeHealthChecks", "update", "platform_observe_health_check", "update", "observe.health"),
+  testingOp("observeReadinessChecks", "list", "platform_observe_readiness_check", "list", "observe.health"),
+  testingOp("observeReadinessChecks", "get", "platform_observe_readiness_check", "read", "observe.health", 0),
+  testingOp("observeReadinessChecks", "create", "platform_observe_readiness_check", "create", "observe.health"),
+  testingOp("observeReadinessChecks", "update", "platform_observe_readiness_check", "update", "observe.health"),
+  testingOp("observeLivenessChecks", "list", "platform_observe_liveness_check", "list", "observe.health"),
+  testingOp("observeLivenessChecks", "get", "platform_observe_liveness_check", "read", "observe.health", 0),
+  testingOp("observeLivenessChecks", "create", "platform_observe_liveness_check", "create", "observe.health"),
+  testingOp("observeLivenessChecks", "update", "platform_observe_liveness_check", "update", "observe.health"),
+  testingOp("observeServiceHealth", "list", "platform_observe_service_health", "list", "observe.health"),
+  testingOp("observeServiceHealth", "get", "platform_observe_service_health", "read", "observe.health", 0),
+  testingOp("observeServiceHealth", "create", "platform_observe_service_health", "create", "observe.health"),
+  testingOp("observeServiceHealth", "update", "platform_observe_service_health", "update", "observe.health"),
+  testingOp("observeServiceStatus", "list", "platform_observe_service_status", "list", "observe.health"),
+  testingOp("observeServiceStatus", "get", "platform_observe_service_status", "read", "observe.health", 0),
+  testingOp("observeServiceStatus", "create", "platform_observe_service_status", "create", "observe.health"),
+  testingOp("observeServiceStatus", "update", "platform_observe_service_status", "update", "observe.health"),
+  testingOp("observeComponentStatus", "list", "platform_observe_component_status", "list", "observe.health"),
+  testingOp("observeComponentStatus", "get", "platform_observe_component_status", "read", "observe.health", 0),
+  testingOp("observeComponentStatus", "create", "platform_observe_component_status", "create", "observe.health"),
+  testingOp("observeComponentStatus", "update", "platform_observe_component_status", "update", "observe.health"),
+  testingOp("observeMetricDefinitions", "list", "platform_observe_metric_definition", "list", "observe.metrics"),
+  testingOp("observeMetricDefinitions", "get", "platform_observe_metric_definition", "read", "observe.metrics", 0),
+  testingOp("observeMetricDefinitions", "create", "platform_observe_metric_definition", "create", "observe.metrics"),
+  testingOp("observeMetricDefinitions", "update", "platform_observe_metric_definition", "update", "observe.metrics"),
+  testingOp("observeMetricSamples", "list", "platform_observe_metric_sample", "list", "observe.metrics"),
+  testingOp("observeMetricSamples", "get", "platform_observe_metric_sample", "read", "observe.metrics", 0),
+  testingOp("observeMetricSamples", "create", "platform_observe_metric_sample", "create", "observe.metrics"),
+  testingOp("observeMetricSamples", "update", "platform_observe_metric_sample", "update", "observe.metrics"),
+  testingOp("observeAlertDefinitions", "list", "platform_observe_alert_definition", "list", "observe.alerts"),
+  testingOp("observeAlertDefinitions", "get", "platform_observe_alert_definition", "read", "observe.alerts", 0),
+  testingOp("observeAlertDefinitions", "create", "platform_observe_alert_definition", "create", "observe.alerts"),
+  testingOp("observeAlertDefinitions", "update", "platform_observe_alert_definition", "update", "observe.alerts"),
+  testingOp("observeAlertStates", "list", "platform_observe_alert_state", "list", "observe.alerts"),
+  testingOp("observeAlertStates", "get", "platform_observe_alert_state", "read", "observe.alerts", 0),
+  testingOp("observeAlertStates", "create", "platform_observe_alert_state", "create", "observe.alerts"),
+  testingOp("observeAlertStates", "update", "platform_observe_alert_state", "update", "observe.alerts"),
+  testingOp("observeDashboardDefinitions", "list", "platform_observe_dashboard", "list", "observe.read"),
+  testingOp("observeDashboardDefinitions", "get", "platform_observe_dashboard", "read", "observe.read", 0),
+  testingOp("observeDashboardDefinitions", "create", "platform_observe_dashboard", "create", "observe.manage"),
+  testingOp("observeDashboardDefinitions", "update", "platform_observe_dashboard", "update", "observe.manage"),
+  testingOp("observeLogSources", "list", "platform_observe_log_source", "list", "observe.logs"),
+  testingOp("observeLogSources", "get", "platform_observe_log_source", "read", "observe.logs", 0),
+  testingOp("observeLogSources", "create", "platform_observe_log_source", "create", "observe.logs"),
+  testingOp("observeLogSources", "update", "platform_observe_log_source", "update", "observe.logs"),
+  testingOp("observeTraceDefinitions", "list", "platform_observe_trace_definition", "list", "observe.traces"),
+  testingOp("observeTraceDefinitions", "get", "platform_observe_trace_definition", "read", "observe.traces", 0),
+  testingOp("observeTraceDefinitions", "create", "platform_observe_trace_definition", "create", "observe.traces"),
+  testingOp("observeTraceDefinitions", "update", "platform_observe_trace_definition", "update", "observe.traces"),
+  testingOp("observeTraceSpans", "list", "platform_observe_trace_span", "list", "observe.traces"),
+  testingOp("observeTraceSpans", "get", "platform_observe_trace_span", "read", "observe.traces", 0),
+  testingOp("observeTraceSpans", "create", "platform_observe_trace_span", "create", "observe.traces"),
+  testingOp("observeTraceSpans", "update", "platform_observe_trace_span", "update", "observe.traces"),
+  testingOp("observeIncidentReferences", "list", "platform_observe_incident_reference", "list", "observe.read"),
+  testingOp("observeIncidentReferences", "get", "platform_observe_incident_reference", "read", "observe.read", 0),
+  testingOp("observeIncidentReferences", "create", "platform_observe_incident_reference", "create", "observe.manage"),
+  testingOp("observeIncidentReferences", "update", "platform_observe_incident_reference", "update", "observe.manage"),
+  testingOp("observeMaintenanceWindows", "list", "platform_observe_maintenance_window", "list", "observe.read"),
+  testingOp("observeMaintenanceWindows", "get", "platform_observe_maintenance_window", "read", "observe.read", 0),
+  testingOp("observeMaintenanceWindows", "create", "platform_observe_maintenance_window", "create", "observe.manage"),
+  testingOp("observeMaintenanceWindows", "update", "platform_observe_maintenance_window", "update", "observe.manage"),
+  testingOp("observeHealthSummaries", "list", "platform_observe_health_summary", "list", "observe.health"),
+  testingOp("observeHealthSummaries", "get", "platform_observe_health_summary", "read", "observe.health", 0),
+  testingOp("observeHealthSummaries", "create", "platform_observe_health_summary", "create", "observe.health"),
+  testingOp("observeHealthSummaries", "update", "platform_observe_health_summary", "update", "observe.health"),
+  testingOp("observeMetadata", "list", "platform_observe_metadata", "list", "observe.read"),
+  testingOp("observeMetadata", "get", "platform_observe_metadata", "read", "observe.read", 0),
+  testingOp("observeMetadata", "create", "platform_observe_metadata", "create", "observe.manage"),
+  testingOp("observeMetadata", "update", "platform_observe_metadata", "update", "observe.manage"),
+  testingOp("observeDiagnostics", "health", "platform_observe_diagnostics", "read", "observe.diagnostics"),
+  testingOp("observeDiagnostics", "readiness", "platform_observe_diagnostics", "read", "observe.diagnostics"),
+  testingOp("observeDiagnostics", "capabilities", "platform_observe_diagnostics", "read", "observe.diagnostics"),
+  testingOp("observeDiagnostics", "list", "platform_observe_diagnostic", "list", "observe.diagnostics"),
+  testingOp("observeDiagnostics", "get", "platform_observe_diagnostic", "read", "observe.diagnostics", 0),
+  testingOp("observeDiagnostics", "create", "platform_observe_diagnostic", "create", "observe.diagnostics"),
+  testingOp("observeDiagnostics", "update", "platform_observe_diagnostic", "update", "observe.diagnostics"),
+];
+
 export const OPERATION_AUTHORIZATION_MAPPINGS: readonly OperationAuthorizationMapping[] = [
   ...workspaceOps,
   ...projectOps,
@@ -1636,6 +2187,13 @@ export const OPERATION_AUTHORIZATION_MAPPINGS: readonly OperationAuthorizationMa
   ...documentPlatformOps,
   ...searchPlatformOps,
   ...searchExecutionOps,
+  ...workflowPlatformOps,
+  ...workflowEngineOps,
+  ...notificationPlatformOps,
+  ...configurationPlatformOps,
+  ...administrationPlatformOps,
+  ...identityPlatformOps,
+  ...observePlatformOps,
 ];
 
 const mappingIndex = new Map<string, OperationAuthorizationMapping>(

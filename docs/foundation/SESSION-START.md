@@ -5,8 +5,8 @@
 > **Authoritative references:** [AI-CONTEXT](./AI-CONTEXT.md) · [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [000 — Engineering Constitution](../000-apzhub-engineering-constitution.md)  
 > **Related documents:** [PROJECT-INDEX](./PROJECT-INDEX.md) · [AI-WORKFLOW](./AI-WORKFLOW.md)  
 > **Reading order:** **Read this document first** — then follow the sequence below  
-> **Last updated:** 2026-07-14  
-> **Current status:** Active — APZSEARCH-013 complete; stop before APZSEARCH-014
+> **Last updated:** 2026-07-17  
+> **Current status:** Active — **APZIDENTITY-004 COMPLETE** — Identity Administration Workbench (`/workspace/identity`); stop before **APZIDENTITY-005**
 
 ---
 
@@ -41,7 +41,7 @@
 | Status line at top of `docs/README.md`          | Programme-wide stop point                   |
 | "Next approved milestone (pending owner)"       | CURRENT-MILESTONE                           |
 
-**As of last update:** **APZSEARCH-013 COMPLETE** (APZ TCMS Search Publication Adapter — `@apzhub/search-testing` **0.1.0**) → stop; await owner approval for **APZSEARCH-014** (Reporting Search Publication Adapter). Also awaiting: GitLab CI (future), SDK **1.0.0** promotion, Event Bus / webhook ingress / provisioning, AI Assist, other domain work.
+**As of last update:** **APZIDENTITY-004 COMPLETE** — Identity Administration Workbench (`/workspace/identity`; metadata SoR; not authentication); stop before **APZIDENTITY-005** (do not implement without owner approval)
 
 ---
 

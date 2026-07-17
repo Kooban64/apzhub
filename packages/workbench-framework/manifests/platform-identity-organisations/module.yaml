@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-organisations
+name: Organisations
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — Organisations sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: Organisations
+    icon: building-2
+    route: /workspace/identity/organisations
+    order: 50
+    permission: identity.read
+  view:
+    title: Organisations
+    workspace: identity
+    route: /workspace/identity/organisations
+    permission: identity.read

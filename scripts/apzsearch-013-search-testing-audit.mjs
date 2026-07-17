@@ -3,7 +3,7 @@
  * APZSEARCH-013 — Testing Search Publication Adapter audit.
  * Exit 0 = pass; exit 1 = violations.
  */
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 
 const ROOT = process.cwd();
@@ -121,12 +121,12 @@ if (pkgJson.name !== "@apzhub/search-testing") {
     detail: String(pkgJson.name),
   });
 }
-if (pkgJson.version !== "0.1.0") {
+if (pkgJson.version !== "0.1.1") {
   violations.push({
     file: "packages/search-testing/package.json",
     line: 1,
     rule: "package-version",
-    detail: String(pkgJson.version),
+    detail: `expected 0.1.1, got ${pkgJson.version}`,
   });
 }
 for (const required of [
@@ -181,6 +181,15 @@ for (const symbol of [
   "createTestingSearchLifecycleHooks",
   "createTestingSearchAdapter",
   "SEARCH_TESTING_VERSION",
+  "ManualTestingPublisher",
+  "AutomationPublisher",
+  "CertificationPublisher",
+  "ReleasePublisher",
+  "EngineeringIntelligencePublisher",
+  "QualityPublisher",
+  "ReportingMetadataPublisher",
+  "PipelinePublisher",
+  "TestingDomainSearchPublisher",
 ]) {
   if (!index.includes(symbol)) {
     violations.push({
@@ -188,6 +197,78 @@ for (const symbol of [
       line: 1,
       rule: "missing-export",
       detail: symbol,
+    });
+  }
+}
+
+/** Specialised publisher class files must exist and declare the class name. */
+const specialisedPublishers = [
+  ["manual-testing-publisher.ts", "ManualTestingPublisher"],
+  ["automation-publisher.ts", "AutomationPublisher"],
+  ["certification-publisher.ts", "CertificationPublisher"],
+  ["release-publisher.ts", "ReleasePublisher"],
+  ["engineering-intelligence-publisher.ts", "EngineeringIntelligencePublisher"],
+  ["quality-publisher.ts", "QualityPublisher"],
+  ["reporting-metadata-publisher.ts", "ReportingMetadataPublisher"],
+  ["pipeline-publisher.ts", "PipelinePublisher"],
+];
+for (const [fileName, className] of specialisedPublishers) {
+  const filePath = join(PKG, "src/publisher", fileName);
+  if (!existsSync(filePath)) {
+    violations.push({
+      file: `packages/search-testing/src/publisher/${fileName}`,
+      line: 1,
+      rule: "missing-specialised-publisher",
+      detail: className,
+    });
+    continue;
+  }
+  const body = readFileSync(filePath, "utf8");
+  if (!body.includes(`class ${className}`)) {
+    violations.push({
+      file: `packages/search-testing/src/publisher/${fileName}`,
+      line: 1,
+      rule: "missing-specialised-publisher-class",
+      detail: className,
+    });
+  }
+}
+
+/**
+ * Orchestrator must not contain domain map methods (heuristic).
+ * Mapping belongs in specialised publishers / domain mappers.
+ */
+const orchestratorPath = join(PKG, "src/publisher/testing-search-publisher.ts");
+if (!existsSync(orchestratorPath)) {
+  violations.push({
+    file: "packages/search-testing/src/publisher/testing-search-publisher.ts",
+    line: 1,
+    rule: "missing-orchestrator",
+    detail: "testing-search-publisher.ts",
+  });
+} else {
+  const orch = readFileSync(orchestratorPath, "utf8");
+  const domainMapHeuristic =
+    /\bmap(TestCase|TestPlan|TestSuite|TestExecution|TestRun|Evidence|Approval|Requirement|Defect|AutomationRun|AutomationSuite|ImportedResult|CoverageSummary|Certification|CertificationGate|CertificationEvidence|CertificationDecision|Release|ReleaseCandidate|ReleasePackage|ReleaseScope|ReleaseApproval|ReleaseDecision|ReleaseManifest|ReleaseSummary|EngineeringSnapshot|EngineeringTrend|Benchmark|HistoricalSnapshot|RiskSummary|QualitySummary|QualityCoverageSummary|DefectSummary|ReportMetadata|ReportTemplate|Pipeline|PipelineRun|PipelineImport)\b/;
+  const lines = orch.split("\n");
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (/^\s*(\/\/|\*|\/\*)/.test(line)) continue;
+    if (domainMapHeuristic.test(line)) {
+      violations.push({
+        file: "packages/search-testing/src/publisher/testing-search-publisher.ts",
+        line: i + 1,
+        rule: "orchestrator-no-domain-map",
+        detail: line.trim().slice(0, 160),
+      });
+    }
+  }
+  if (!orch.includes("resolvePublisher") && !orch.includes("specialisedPublishers")) {
+    violations.push({
+      file: "packages/search-testing/src/publisher/testing-search-publisher.ts",
+      line: 1,
+      rule: "orchestrator-must-route",
+      detail: "expected resolvePublisher or specialisedPublishers routing",
     });
   }
 }
@@ -200,9 +281,10 @@ console.log(
 console.log(`RESULT: ${violations.length === 0 ? "PASS" : "FAIL"}`);
 console.log(`Violations: ${violations.length}`);
 if (violations.length === 0) {
-  console.log("  - @apzhub/search-testing 0.1.0 → search-integration + testing-contracts + platform-service-contracts");
+  console.log("  - @apzhub/search-testing 0.1.1 → specialised publishers + search-integration");
   console.log("  - No Meilisearch / platform-services / persistence / Event Bus / OCR");
-  console.log("  - Required TestingSearch* exports present");
+  console.log("  - Required TestingSearch* + specialised publisher exports present");
+  console.log("  - Orchestrator has no domain map methods");
 } else {
   for (const v of violations.slice(0, 40)) {
     console.log(`  - [${v.rule}] ${v.file}:${v.line} ${v.detail}`);

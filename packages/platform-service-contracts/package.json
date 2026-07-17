@@ -1,16 +1,16 @@
 {
   "name": "@apzhub/platform-service-contracts",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "private": true,
   "type": "module",
-  "description": "Vendor-neutral platform service interfaces, DTOs, and query contracts (APZREPORT-001)",
+  "description": "Vendor-neutral platform service interfaces, DTOs, and query contracts (APZWORKFLOW-002 stub)",
   "exports": {
     ".": "./src/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "lint": "eslint src/",
-    "test": "vitest run --config ../../vitest.config.ts packages/platform-service-contracts"
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/platform-service-contracts"
   },
   "dependencies": {
     "@apzhub/testing-contracts": "workspace:*"

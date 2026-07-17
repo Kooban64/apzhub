@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflow-engine-templates
+name: Templates
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Workflow Engine — Templates sidebar (APZWORKFLOW-009).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflow-engine
+    parent: platform-workflow-engine
+    label: Templates
+    icon: layout-template
+    route: /workspace/workflow-engine/templates
+    order: 30
+    permission: workflow.engine.read
+  view:
+    title: Templates
+    workspace: workflow-engine
+    route: /workspace/workflow-engine/templates
+    permission: workflow.engine.read

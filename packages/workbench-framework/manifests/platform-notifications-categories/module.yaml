@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-notifications-categories
+name: Categories
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Notifications — Categories sidebar (APZNOTIFY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: notifications
+    parent: platform-notifications
+    label: Categories
+    icon: tags
+    route: /workspace/notifications/categories
+    order: 50
+    permission: notification.read
+  view:
+    title: Categories
+    workspace: notifications
+    route: /workspace/notifications/categories
+    permission: notification.read

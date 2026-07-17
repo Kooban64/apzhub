@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-trace-definitions
+name: Trace Definitions
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Trace Definitions sidebar (Telemetry Metadata) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Trace Definitions
+    icon: git-branch
+    route: /workspace/observability/trace-definitions
+    order: 120
+    permission: observe.traces
+  view:
+    title: Trace Definitions
+    workspace: observability
+    route: /workspace/observability/trace-definitions
+    permission: observe.traces

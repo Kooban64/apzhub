@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-overview
+name: Overview
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Overview sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Overview
+    icon: layout-dashboard
+    route: /workspace/administration/overview
+    order: 10
+    permission: admin.read
+  view:
+    title: Overview
+    workspace: administration
+    route: /workspace/administration/overview
+    permission: admin.read

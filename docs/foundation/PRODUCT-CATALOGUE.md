@@ -5,8 +5,8 @@
 > **Authoritative references:** [Product Portfolio Strategy](../strategy/APZHUB-Product-Portfolio-Strategy.md) · [002 — Terminology](../002-product-naming-positioning-terminology-standard.md)  
 > **Related documents:** [OSS-CATALOGUE](./OSS-CATALOGUE.md) · [PLATFORM-CAPABILITY-CATALOGUE](./PLATFORM-CAPABILITY-CATALOGUE.md)  
 > **Reading order:** After Master Brief  
-> **Last updated:** 2026-07-15  
-> **Current status:** Active — Search **APZSEARCH-013 complete** (Projects + Support + Documents + Testing adapters **0.1.0**); next **APZSEARCH-014** pending; Documents vertical **PRODUCTION_READY_WITH_LIMITATIONS** (APZDOCS-006)
+> **Last updated:** 2026-07-16  
+> **Current status:** Active — **APZIDENTITY-001 complete** (Identity Administration Foundation); **APZADMIN-006 complete** (Administration SoR **frozen**); **APZCONFIG-006 complete** (Configuration SoR **frozen**); **APZNOTIFY-006 complete** (Notification SoR **frozen**); **APZWORKFLOW-011 complete** (Workflow Engine wave **frozen**); Search **APZSEARCH-015 complete**; **APZSEARCH-016** deferred; Documents vertical **PRODUCTION_READY_WITH_LIMITATIONS** (APZDOCS-006)
 
 ---
 
@@ -20,11 +20,16 @@
 | **Financial Engine**    | Shared engine       | —                                    | **DEFER EXTRACTION** (FIN-001)      | Future licensed component       |
 | **Projects**            | Productivity module | Wave 1 adapter certified; UI planned | `@apzhub/integration-plane` v0.6.0  | Bundled in suite                |
 | **Documents**           | Platform capability | **APZDOCS-006 complete** — **PRODUCTION_READY_WITH_LIMITATIONS** (metadata path; no binary HTTP) | Stable (architecture frozen) | Bundled                         |
-| **Search**              | Platform capability | **APZSEARCH-013 complete** — Projects + Support + Documents + Testing adapters **0.1.0**; platform still **PRODUCTION_READY_WITH_LIMITATIONS** | **APZSEARCH-014** awaiting approval | Bundled                         |
+| **Workflow**            | Platform capability | **APZWORKFLOW-011 complete** — SoR + Engine wave **frozen**; `@apzhub/integration-n8n` **0.1.0** official Reference Adapter (**PRODUCTION_READY_WITH_LIMITATIONS**) | **APZWORKFLOW-012** roadmap only | Bundled                         |
+| **Configuration**       | Platform capability | **APZCONFIG-006 complete** — SoR wave **frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**); metadata management plane only | **APZCONFIG-007** roadmap only | Bundled                         |
+| **Identity Administration** | Platform capability | **APZIDENTITY-001 complete** — SoR foundation (`@apzhub/identity-*` **0.1.0**); metadata only (not authentication) | **APZIDENTITY-002** next | Bundled                         |
+| **Administration**      | Platform capability | **APZADMIN-006 complete** — SoR wave **frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**); metadata governance plane only; Platform Operations separate | Closed | Bundled                         |
+| **Notifications**       | Platform capability | **APZNOTIFY-006 complete** — SoR wave **frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**); metadata plane only | **APZNOTIFY-007** roadmap only | Bundled                         |
+| **Search**              | Platform capability | **APZSEARCH-015 complete** — publication ecosystem **PRODUCTION_READY_WITH_LIMITATIONS**; platform query vertical still **PRODUCTION_READY_WITH_LIMITATIONS** (008) | **APZSEARCH-016** deferred | Bundled                         |
 | **Time Tracking**       | Productivity module | Planned                              | OSS Wave (Kimai)                    | Bundled                         |
 | **Support**             | Productivity module | Wave 2 CLOSED — CERTIFIED_WITH_LIMITATIONS; UI delivered (OSS-110-13); UI cert → OSS-110-14 | `@apzhub/integration-zammad` v0.6.0 | Bundled                         |
 | **Analytics**           | Productivity module | Planned                              | OSS Wave 5                          | Bundled                         |
-| **Automation**          | Productivity module | Planned                              | OSS Wave 6                          | Bundled                         |
+| **Automation**          | Productivity module | Engine metadata via Workflow Engine Reference Adapter (`@apzhub/integration-n8n`) — read-only wave closed | Future execution under new milestone | Bundled                         |
 | **APZ TCMS**            | Native product      | **APZREPORT-003 complete** — Reporting **PRODUCTION_READY_WITH_LIMITATIONS** | Document consumers later | Bundled / enterprise cert tier  |
 | **Testing**             | Workbench module    | Module of APZ TCMS (`testing`) — enabled workbench | Certification views within module   | Bundled                         |
 | **Security Ops**        | Ops module          | Planned                              | OSS Wave 8–9                        | Enterprise add-on               |

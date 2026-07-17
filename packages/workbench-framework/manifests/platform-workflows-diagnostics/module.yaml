@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflows-diagnostics
+name: Diagnostics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Workflows — Diagnostics sidebar (APZWORKFLOW-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflows
+    parent: platform-workflows
+    label: Diagnostics
+    icon: activity
+    route: /workspace/workflows/diagnostics
+    order: 90
+    permission: workflow.view
+  view:
+    title: Diagnostics
+    workspace: workflows
+    route: /workspace/workflows/diagnostics
+    permission: workflow.view

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-dashboards
+name: Dashboards
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Dashboards sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Dashboards
+    icon: layout-panel-top
+    route: /workspace/administration/dashboards
+    order: 120
+    permission: admin.read
+  view:
+    title: Dashboards
+    workspace: administration
+    route: /workspace/administration/dashboards
+    permission: admin.read

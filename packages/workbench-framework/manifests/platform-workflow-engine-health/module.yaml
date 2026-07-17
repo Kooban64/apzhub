@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflow-engine-health
+name: Health
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Workflow Engine — Health sidebar (APZWORKFLOW-009).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflow-engine
+    parent: platform-workflow-engine
+    label: Health
+    icon: heart-pulse
+    route: /workspace/workflow-engine/health
+    order: 80
+    permission: workflow.engine.health
+  view:
+    title: Health
+    workspace: workflow-engine
+    route: /workspace/workflow-engine/health
+    permission: workflow.engine.health

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-positions
+name: Positions
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — Positions sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: Positions
+    icon: briefcase
+    route: /workspace/identity/positions
+    order: 80
+    permission: identity.read
+  view:
+    title: Positions
+    workspace: identity
+    route: /workspace/identity/positions
+    permission: identity.read

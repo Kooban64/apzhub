@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-configuration-validation
+name: Validation
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Configuration — Validation sidebar (APZCONFIG-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: configuration
+    parent: platform-configuration
+    label: Validation
+    icon: check-circle
+    route: /workspace/configuration/validation
+    order: 80
+    permission: configuration.validation
+  view:
+    title: Validation
+    workspace: configuration
+    route: /workspace/configuration/validation
+    permission: configuration.validation

@@ -2,7 +2,10 @@
 
 > **Status:** M1–M7 complete · Platform v5.0 frozen · **Platform Core v1.0 CERTIFIED (PC-001)** · M8 complete  
 > **Authority:** [003 — Overall System Architecture](./003-overall-system-architecture-design-principles.md) · [Platform Core Reference Architecture](./APZHUB-Platform-Core-Reference-Architecture.md) · [Platform Core Certification](../reviews/APZHUB-Platform-Core-Certification.md)  
-> **Note:** Platform Core v2 is the next **implementation** gate (await owner approval). Law Platform validation (LAW-001–015) advanced in parallel.
+> **Note:** Platform Core v2 is the next **implementation** gate (await owner approval). Law Platform validation (LAW-001–015) advanced in parallel.  
+> **Notification SoR:** **APZNOTIFY-001…006 complete** — metadata wave **frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**). Next roadmap only: **APZNOTIFY-007** (delivery providers) — do not implement without owner approval.  
+> **Configuration SoR:** **APZCONFIG-001…006 complete** — metadata wave **frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**). Official Configuration Reference Standard. Next roadmap only: **APZCONFIG-007** (Runtime Configuration Platform) — do not implement without owner approval.  
+> **Identity Administration SoR:** **APZIDENTITY-001…006 complete** — metadata wave **frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**). Official Identity Reference Standard. Authentication / provisioning / directory sync remain separate future programmes. Recommended next platform programme: **APZOBSERVE-001** (Platform Observability Foundation) — do not implement without owner approval.
 
 ---
 

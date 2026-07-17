@@ -28,6 +28,10 @@ Phase 2 — Capability Waves
   OSS-101-04…10  Plane → Projects COMPLETE (Reference Adapter certified)
   OSS-102  Wave 2  Zammad → Support (discovery OSS-102-01 COMPLETE; implementation pending approval)
   OSS-201  Wave 3  Kimai → Time Tracking (historical numbering retained in estimates)
+  # Note (2026-07-16): Historical Wave 7 “n8n → Automation” was delivered as the
+  # Workflow Engine Reference Adapter programme APZWORKFLOW-006…011 (read-only;
+  # @apzhub/integration-n8n 0.1.0). See docs/sprint/APZWORKFLOW-011-completion-report.md.
+  # Do not start APZWORKFLOW-012 (future engines) without owner approval.
   OSS-301  Wave 4  Paperless-ngx → Documents
   OSS-401  (superseded numbering) — Zammad resequenced to OSS-102 Wave 2 by owner
   QE-001   Wave 5  APZHUB Quality Engineering Platform (native)
@@ -52,7 +56,7 @@ Phase 3 — Future
 | 4 Paperless           | Wave 1                                                                      | Document ↔ Project linking    |
 | 5 Quality Engineering | PCv2-02, M17, Wave 1                                                        | Release gates, CI integration |
 | 6 Metabase            | Waves 1–2, QE-009                                                           | Cross-product dashboards      |
-| 7 n8n                 | Waves 1–4, QE-008                                                           | Cross-module automation       |
+| 7 n8n                 | Waves 1–4, QE-008                                                           | **Delivered as APZWORKFLOW-006…011** (Workflow Engine Reference Adapter; frozen). Historical “Wave 7 Automation” label superseded for sequencing. |
 | 8 Observability       | Platform Core                                                               | Monitoring for all connectors |
 | 9 Security Ops        | Wave 8                                                                      | Security scan observability   |
 

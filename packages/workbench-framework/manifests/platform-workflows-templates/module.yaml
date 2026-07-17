@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-workflows-templates
+name: Templates
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Workflows — Templates sidebar (APZWORKFLOW-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflows
+    parent: platform-workflows
+    label: Templates
+    icon: layout-template
+    route: /workspace/workflows/templates
+    order: 40
+    permission: workflow.template.view
+  view:
+    title: Templates
+    workspace: workflows
+    route: /workspace/workflows/templates
+    permission: workflow.template.view

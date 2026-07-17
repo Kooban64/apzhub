@@ -19,16 +19,32 @@ import { ReportingWorkspaceRouter } from "@/components/reporting/reporting-works
 import { SearchWorkspaceRouter } from "@/components/search/search-workspace-router";
 import { SupportWorkspaceRouter } from "@/components/support/support-workspace-router";
 import { TestingWorkspaceRouter } from "@/components/testing/testing-workspace-router";
+import { WorkflowEngineWorkspaceRouter } from "@/components/workflow-engine/workflow-engine-workspace-router";
+import { WorkflowsWorkspaceRouter } from "@/components/workflows/workflows-workspace-router";
+import { NotificationsWorkspaceRouter } from "@/components/notifications/notifications-workspace-router";
+import { AdministrationWorkspaceRouter } from "@/components/administration/administration-workspace-router";
+import { ConfigurationWorkspaceRouter } from "@/components/configuration/configuration-workspace-router";
+import { IdentityWorkspaceRouter } from "@/components/identity/identity-workspace-router";
+import { ObserveWorkspaceRouter } from "@/components/observe/observe-workspace-router";
 import { useE2eActivityTimelinePresentationRefresh } from "@/lib/e2e-activity-timeline-presentation-refresh";
 import {
   isPlatformOperationsRoute,
   resolvePlatformOperationsSection,
 } from "@/lib/platform-operations/routes";
+import { isAdministrationRoute } from "@/lib/administration/routes";
 import { isDocumentsRoute } from "@/lib/documents/routes";
+import { isIdentityRoute } from "@/lib/identity/routes";
+import { isNotificationsRoute } from "@/lib/notifications/routes";
+import { isConfigurationRoute } from "@/lib/configuration/routes";
+import { isObserveRoute } from "@/lib/observe/routes";
 import { isReportingRoute } from "@/lib/reporting/routes";
 import { isSearchRoute } from "@/lib/search/routes";
 import { isSupportRoute } from "@/lib/support/routes";
 import { isTestingRoute } from "@/lib/testing/routes";
+import {
+  isWorkflowEngineRoute,
+  isWorkflowsRoute,
+} from "@/lib/workflows/routes";
 import { resolveCommandPaletteMode } from "@/lib/resolve-command-palette-mode";
 
 export function WorkbenchPage() {
@@ -116,6 +132,13 @@ export function WorkbenchPage() {
   const testingActive = isTestingRoute(pathname);
   const reportingActive = isReportingRoute(pathname);
   const documentsActive = isDocumentsRoute(pathname);
+  const workflowEngineActive = isWorkflowEngineRoute(pathname);
+  const workflowsActive = isWorkflowsRoute(pathname);
+  const notificationsActive = isNotificationsRoute(pathname);
+  const configurationActive = isConfigurationRoute(pathname);
+  const identityActive = isIdentityRoute(pathname);
+  const observeActive = isObserveRoute(pathname);
+  const administrationActive = isAdministrationRoute(pathname);
   const searchActive = isSearchRoute(pathname);
 
   return (
@@ -151,6 +174,20 @@ export function WorkbenchPage() {
         <ReportingWorkspaceRouter />
       ) : documentsActive ? (
         <DocumentsWorkspaceRouter />
+      ) : workflowEngineActive ? (
+        <WorkflowEngineWorkspaceRouter />
+      ) : workflowsActive ? (
+        <WorkflowsWorkspaceRouter />
+      ) : notificationsActive ? (
+        <NotificationsWorkspaceRouter />
+      ) : configurationActive ? (
+        <ConfigurationWorkspaceRouter />
+      ) : identityActive ? (
+        <IdentityWorkspaceRouter />
+      ) : observeActive ? (
+        <ObserveWorkspaceRouter />
+      ) : administrationActive ? (
+        <AdministrationWorkspaceRouter />
       ) : searchActive ? (
         <SearchWorkspaceRouter />
       ) : (

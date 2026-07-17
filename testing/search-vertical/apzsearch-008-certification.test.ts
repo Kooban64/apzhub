@@ -143,7 +143,7 @@ describe("APZSEARCH-008 Search Vertical Certification", () => {
       "packages/search-persistence/package.json": "0.2.0",
       "packages/integration-search-sdk/package.json": "0.1.0",
       "integrations/meilisearch/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.18.0",
+      "packages/platform-services/package.json": "0.19.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const actual = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;

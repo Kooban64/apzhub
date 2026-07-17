@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-configuration-namespaces
+name: Namespaces
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Configuration — Namespaces sidebar (APZCONFIG-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: configuration
+    parent: platform-configuration
+    label: Namespaces
+    icon: folder
+    route: /workspace/configuration/namespaces
+    order: 30
+    permission: configuration.read
+  view:
+    title: Namespaces
+    workspace: configuration
+    route: /workspace/configuration/namespaces
+    permission: configuration.read

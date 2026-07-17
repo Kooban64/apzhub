@@ -1,0 +1,16 @@
+{
+  "name": "@apzhub/admin-contracts",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Administration contracts — models, permissions, gateway (APZADMIN-002)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/admin-contracts"
+  },
+  "dependencies": {}
+}

@@ -119,6 +119,16 @@ See [026](../026-integration-sdk-adapter-framework-integration-manifest-specific
 
 ---
 
+## Workflow Engine integration
+
+| Component | Manifest / spec | Status |
+| --------- | --------------- | ------ |
+| Workflow Engine Gateway | `gateway.workflow.engine.*` | Certified (APZWORKFLOW-007…011) |
+| `n8n` integration | `integrations/n8n/` | **v0.1.0** — official Workflow Engine Reference Adapter (APZWORKFLOW-011; read-only; frozen) |
+| Standard | [Workflow Engine Reference Adapter Standard](../architecture/APZHUB-Workflow-Engine-Reference-Adapter-Standard.md) | Mandatory for future engines |
+
+---
+
 ## Integration standards (mandatory)
 
 - [OSS Integration Standards](../governance/APZHUB-OSS-Integration-Standards.md)

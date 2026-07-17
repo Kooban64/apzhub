@@ -1,0 +1,16 @@
+{
+  "name": "@apzhub/notification-contracts",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Notification contracts — models, gateway facets, permissions (APZNOTIFY-002)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/notification-contracts"
+  },
+  "dependencies": {}
+}

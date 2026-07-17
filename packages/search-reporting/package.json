@@ -1,0 +1,22 @@
+{
+  "name": "@apzhub/search-reporting",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Reporting Search Publication Adapter — canonical Reporting → Search Integration Framework (APZSEARCH-014)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/search-reporting"
+  },
+  "dependencies": {
+    "@apzhub/platform-service-contracts": "workspace:*",
+    "@apzhub/reporting-contracts": "workspace:*",
+    "@apzhub/reporting-core": "workspace:*",
+    "@apzhub/search-contracts": "workspace:*",
+    "@apzhub/search-integration": "workspace:*"
+  }
+}

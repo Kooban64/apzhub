@@ -1,0 +1,16 @@
+{
+  "name": "@apzhub/observe-contracts",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Observability contracts — models, permissions, service ports (APZOBSERVE-001)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/observe-contracts"
+  },
+  "dependencies": {}
+}

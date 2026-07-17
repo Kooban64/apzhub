@@ -1,0 +1,1 @@
+export const IDENTITY_PERSISTENCE_VERSION = "0.1.0";

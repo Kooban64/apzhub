@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-shortcuts
+name: Shortcuts
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Shortcuts sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Shortcuts
+    icon: keyboard
+    route: /workspace/administration/shortcuts
+    order: 110
+    permission: admin.navigation
+  view:
+    title: Shortcuts
+    workspace: administration
+    route: /workspace/administration/shortcuts
+    permission: admin.navigation

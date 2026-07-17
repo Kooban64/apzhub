@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Resilience
     icon: life-buoy
-    route: /workspace/administration/resilience
+    route: /workspace/operations/resilience
     order: 120
     permission: platform.nav.administration.view
   view:
     title: Resilience
-    workspace: administration
-    route: /workspace/administration/resilience
+    workspace: operations
+    route: /workspace/operations/resilience
     permission: platform.nav.administration.view

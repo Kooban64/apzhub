@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-roles
+name: Roles
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — Roles sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: Roles
+    icon: shield
+    route: /workspace/identity/roles
+    order: 40
+    permission: identity.read
+  view:
+    title: Roles
+    workspace: identity
+    route: /workspace/identity/roles
+    permission: identity.read

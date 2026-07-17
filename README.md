@@ -12,7 +12,19 @@ Foundation documentation (**000**, **001–029**) is complete.
 
 **Document Platform:** **APZDOCS-006 COMPLETE** — **PRODUCTION_READY_WITH_LIMITATIONS**.
 
-**Search Platform:** **APZSEARCH-013 COMPLETE** — `@apzhub/search-testing` **0.1.0** (APZ TCMS publication adapter, metadata-only). Stop — await owner approval before **APZSEARCH-014** (Reporting). See [docs/foundation/CURRENT-MILESTONE.md](./docs/foundation/CURRENT-MILESTONE.md).
+**Workflow Platform:** SoR **APZWORKFLOW-005** **PRODUCTION_READY_WITH_LIMITATIONS** (frozen). Engine wave **APZWORKFLOW-011 COMPLETE** — `@apzhub/integration-n8n` official Reference Adapter; architectures frozen.
+
+**Platform Observability:** **APZOBSERVE-003 COMPLETE** — `/api/v1/observe/*` + OpenAPI **1.8.0** + `apps/web/lib/observe` typed client (`pnpm audit:observe-http-client`). Metadata only — not Grafana/Prometheus/Loki. Stop — await owner approval before **APZOBSERVE-004 — Observability Administration Workbench** only.
+
+**Platform Identity Administration:** **APZIDENTITY-006 COMPLETE** — programme **closed/frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**). Workbench at `/workspace/identity`. Further Identity work requires ADR + owner approval.
+
+**Platform Administration:** **APZADMIN-006 COMPLETE** — Wave Certification & Architecture Freeze (**PRODUCTION_READY_WITH_LIMITATIONS**). Programme closed/frozen. Workbench at `/workspace/administration`; Platform Operations at `/workspace/operations`. OpenAPI **1.6.0**.
+
+**Platform Configuration:** **APZCONFIG-006 COMPLETE** — Wave Certification & Architecture Freeze (**PRODUCTION_READY_WITH_LIMITATIONS**). Programme closed/frozen. Runtime resolution / feature flags / secrets not available. **APZCONFIG-007** roadmap only.
+
+**Notification Platform:** **APZNOTIFY-006 COMPLETE** — Wave Certification & Architecture Freeze (**PRODUCTION_READY_WITH_LIMITATIONS**). Programme closed/frozen. Delivery providers not available. **APZNOTIFY-007** roadmap only.
+
+**Search Platform:** **APZSEARCH-015 COMPLETE** — Cross-Product Search Publication Certification (**PRODUCTION_READY_WITH_LIMITATIONS**). **APZSEARCH-016** deferred. See [docs/foundation/CURRENT-MILESTONE.md](./docs/foundation/CURRENT-MILESTONE.md).
 
 | Milestone                | Sprint  | Release                                | Status                                   |
 | ------------------------ | ------- | -------------------------------------- | ---------------------------------------- |

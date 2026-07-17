@@ -85,6 +85,21 @@ export const TESTING_SEARCH_SAFE_METADATA_KEYS = [
   "decidedByUserId",
   "title",
   "name",
+  "coverageMetricCount",
+  "openDefectCount",
+  "computedAt",
+  "subjectId",
+  "openCount",
+  "defaultBranch",
+  "secretsPresent",
+  "stageCount",
+  "jobCount",
+  "artifactCount",
+  "logsPresent",
+  "startedAt",
+  "completedAt",
+  "durationMs",
+  "pipelineId",
 ] as const;
 
 export type TestingSearchSafeMetadataKey =

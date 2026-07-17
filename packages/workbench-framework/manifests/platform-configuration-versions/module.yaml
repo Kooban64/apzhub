@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-configuration-versions
+name: Versions
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Configuration — Versions sidebar (APZCONFIG-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: configuration
+    parent: platform-configuration
+    label: Versions
+    icon: git-branch
+    route: /workspace/configuration/versions
+    order: 50
+    permission: configuration.version
+  view:
+    title: Versions
+    workspace: configuration
+    route: /workspace/configuration/versions
+    permission: configuration.version

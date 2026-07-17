@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-widgets
+name: Widgets
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Widgets sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Widgets
+    icon: panels-top-left
+    route: /workspace/administration/widgets
+    order: 130
+    permission: admin.read
+  view:
+    title: Widgets
+    workspace: administration
+    route: /workspace/administration/widgets
+    permission: admin.read

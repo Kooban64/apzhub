@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-readiness-checks
+name: Readiness Checks
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Readiness Checks sidebar (Health) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Readiness Checks
+    icon: circle-check
+    route: /workspace/observability/readiness-checks
+    order: 30
+    permission: observe.health
+  view:
+    title: Readiness Checks
+    workspace: observability
+    route: /workspace/observability/readiness-checks
+    permission: observe.health

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-permissions
+name: Permissions
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Permissions sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Permissions
+    icon: key-round
+    route: /workspace/administration/permissions
+    order: 80
+    permission: admin.read
+  view:
+    title: Permissions
+    workspace: administration
+    route: /workspace/administration/permissions
+    permission: admin.read

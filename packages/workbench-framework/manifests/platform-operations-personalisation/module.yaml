@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Personalisation
     icon: settings-2
-    route: /workspace/administration/personalisation
+    route: /workspace/operations/personalisation
     order: 45
     permission: platform.nav.administration.view
   view:
     title: Personalisation
-    workspace: administration
-    route: /workspace/administration/personalisation
+    workspace: operations
+    route: /workspace/operations/personalisation
     permission: platform.nav.administration.view

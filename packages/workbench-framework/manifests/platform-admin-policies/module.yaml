@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-policies
+name: Policies
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Policies sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Policies
+    icon: scroll-text
+    route: /workspace/administration/policies
+    order: 90
+    permission: admin.policy
+  view:
+    title: Policies
+    workspace: administration
+    route: /workspace/administration/policies
+    permission: admin.policy

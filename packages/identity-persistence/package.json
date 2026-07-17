@@ -1,0 +1,21 @@
+{
+  "name": "@apzhub/identity-persistence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Identity Administration persistence (APZIDENTITY-001)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/identity-persistence"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/identity-contracts": "workspace:*",
+    "@apzhub/identity-core": "workspace:*",
+    "drizzle-orm": "^0.44.2"
+  }
+}

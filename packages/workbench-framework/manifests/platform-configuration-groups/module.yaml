@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-configuration-groups
+name: Groups
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Configuration — Groups sidebar (APZCONFIG-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: configuration
+    parent: platform-configuration
+    label: Groups
+    icon: layers
+    route: /workspace/configuration/groups
+    order: 40
+    permission: configuration.read
+  view:
+    title: Groups
+    workspace: configuration
+    route: /workspace/configuration/groups
+    permission: configuration.read

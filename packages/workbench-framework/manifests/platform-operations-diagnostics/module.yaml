@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Diagnostics
     icon: activity
-    route: /workspace/administration/diagnostics
+    route: /workspace/operations/diagnostics
     order: 90
     permission: platform.nav.administration.view
   view:
     title: Diagnostics
-    workspace: administration
-    route: /workspace/administration/diagnostics
+    workspace: operations
+    route: /workspace/operations/diagnostics
     permission: platform.nav.administration.view

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-alert-states
+name: Alert States
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Alert States sidebar (Operations Metadata) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Alert States
+    icon: bell-ring
+    route: /workspace/observability/alert-states
+    order: 150
+    permission: observe.alerts
+  view:
+    title: Alert States
+    workspace: observability
+    route: /workspace/observability/alert-states
+    permission: observe.alerts

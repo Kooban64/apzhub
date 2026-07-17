@@ -210,6 +210,9 @@ importers:
       '@apzhub/activity-timeline-framework':
         specifier: workspace:*
         version: link:../../packages/activity-timeline-framework
+      '@apzhub/admin-contracts':
+        specifier: workspace:*
+        version: link:../../packages/admin-contracts
       '@apzhub/auth':
         specifier: workspace:*
         version: link:../../packages/auth
@@ -219,9 +222,18 @@ importers:
       '@apzhub/config':
         specifier: workspace:*
         version: link:../../packages/config
+      '@apzhub/configuration-contracts':
+        specifier: workspace:*
+        version: link:../../packages/configuration-contracts
       '@apzhub/event-notification-framework':
         specifier: workspace:*
         version: link:../../packages/event-notification-framework
+      '@apzhub/identity-contracts':
+        specifier: workspace:*
+        version: link:../../packages/identity-contracts
+      '@apzhub/integration-n8n':
+        specifier: workspace:*
+        version: link:../../integrations/n8n
       '@apzhub/integration-plane':
         specifier: workspace:*
         version: link:../../integrations/plane
@@ -234,6 +246,12 @@ importers:
       '@apzhub/legal-business-core':
         specifier: workspace:*
         version: link:../../packages/legal-business-core
+      '@apzhub/notification-contracts':
+        specifier: workspace:*
+        version: link:../../packages/notification-contracts
+      '@apzhub/observe-contracts':
+        specifier: workspace:*
+        version: link:../../packages/observe-contracts
       '@apzhub/platform-authorization':
         specifier: workspace:*
         version: link:../../packages/platform-authorization
@@ -285,6 +303,9 @@ importers:
       '@apzhub/workbench-framework':
         specifier: workspace:*
         version: link:../../packages/workbench-framework
+      '@apzhub/workflow-contracts':
+        specifier: workspace:*
+        version: link:../../packages/workflow-contracts
       '@apzhub/workspace':
         specifier: workspace:*
         version: link:../../packages/workspace
@@ -365,6 +386,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/search-contracts
 
+  integrations/n8n:
+    dependencies:
+      '@apzhub/integration-sdk':
+        specifier: workspace:*
+        version: link:../../packages/integration-sdk
+
   integrations/plane:
     dependencies:
       '@apzhub/integration-sdk':
@@ -403,6 +430,29 @@ importers:
       react:
         specifier: ^19.0.0
         version: 19.2.4
+
+  packages/admin-contracts: {}
+
+  packages/admin-core:
+    dependencies:
+      '@apzhub/admin-contracts':
+        specifier: workspace:*
+        version: link:../admin-contracts
+
+  packages/admin-persistence:
+    dependencies:
+      '@apzhub/admin-contracts':
+        specifier: workspace:*
+        version: link:../admin-contracts
+      '@apzhub/admin-core':
+        specifier: workspace:*
+        version: link:../admin-core
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
 
   packages/auth:
     dependencies:
@@ -453,6 +503,29 @@ importers:
         specifier: ^0.31.1
         version: 0.31.10
 
+  packages/configuration-contracts: {}
+
+  packages/configuration-core:
+    dependencies:
+      '@apzhub/configuration-contracts':
+        specifier: workspace:*
+        version: link:../configuration-contracts
+
+  packages/configuration-persistence:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/configuration-contracts':
+        specifier: workspace:*
+        version: link:../configuration-contracts
+      '@apzhub/configuration-core':
+        specifier: workspace:*
+        version: link:../configuration-core
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
   packages/document-contracts: {}
 
   packages/document-core:
@@ -500,6 +573,29 @@ importers:
         specifier: ^19.0.0
         version: 19.2.4
 
+  packages/identity-contracts: {}
+
+  packages/identity-core:
+    dependencies:
+      '@apzhub/identity-contracts':
+        specifier: workspace:*
+        version: link:../identity-contracts
+
+  packages/identity-persistence:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/identity-contracts':
+        specifier: workspace:*
+        version: link:../identity-contracts
+      '@apzhub/identity-core':
+        specifier: workspace:*
+        version: link:../identity-core
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
   packages/integration-sdk: {}
 
   packages/integration-search-sdk:
@@ -530,6 +626,52 @@ importers:
         version: 3.25.76
 
   packages/legal-business-core: {}
+
+  packages/notification-contracts: {}
+
+  packages/notification-core:
+    dependencies:
+      '@apzhub/notification-contracts':
+        specifier: workspace:*
+        version: link:../notification-contracts
+
+  packages/notification-persistence:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/notification-contracts':
+        specifier: workspace:*
+        version: link:../notification-contracts
+      '@apzhub/notification-core':
+        specifier: workspace:*
+        version: link:../notification-core
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/observe-contracts: {}
+
+  packages/observe-core:
+    dependencies:
+      '@apzhub/observe-contracts':
+        specifier: workspace:*
+        version: link:../observe-contracts
+
+  packages/observe-persistence:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/observe-contracts':
+        specifier: workspace:*
+        version: link:../observe-contracts
+      '@apzhub/observe-core':
+        specifier: workspace:*
+        version: link:../observe-core
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
 
   packages/platform-authorization:
     dependencies:
@@ -641,9 +783,27 @@ importers:
 
   packages/platform-services:
     dependencies:
+      '@apzhub/admin-contracts':
+        specifier: workspace:*
+        version: link:../admin-contracts
+      '@apzhub/admin-core':
+        specifier: workspace:*
+        version: link:../admin-core
+      '@apzhub/admin-persistence':
+        specifier: workspace:*
+        version: link:../admin-persistence
       '@apzhub/config':
         specifier: workspace:*
         version: link:../config
+      '@apzhub/configuration-contracts':
+        specifier: workspace:*
+        version: link:../configuration-contracts
+      '@apzhub/configuration-core':
+        specifier: workspace:*
+        version: link:../configuration-core
+      '@apzhub/configuration-persistence':
+        specifier: workspace:*
+        version: link:../configuration-persistence
       '@apzhub/document-contracts':
         specifier: workspace:*
         version: link:../document-contracts
@@ -656,12 +816,24 @@ importers:
       '@apzhub/document-storage':
         specifier: workspace:*
         version: link:../document-storage
+      '@apzhub/identity-contracts':
+        specifier: workspace:*
+        version: link:../identity-contracts
+      '@apzhub/identity-core':
+        specifier: workspace:*
+        version: link:../identity-core
+      '@apzhub/identity-persistence':
+        specifier: workspace:*
+        version: link:../identity-persistence
       '@apzhub/integration-github-actions':
         specifier: workspace:*
         version: link:../../integrations/github-actions
       '@apzhub/integration-meilisearch':
         specifier: workspace:*
         version: link:../../integrations/meilisearch
+      '@apzhub/integration-n8n':
+        specifier: workspace:*
+        version: link:../../integrations/n8n
       '@apzhub/integration-plane':
         specifier: workspace:*
         version: link:../../integrations/plane
@@ -671,6 +843,24 @@ importers:
       '@apzhub/integration-zammad':
         specifier: workspace:*
         version: link:../../integrations/zammad
+      '@apzhub/notification-contracts':
+        specifier: workspace:*
+        version: link:../notification-contracts
+      '@apzhub/notification-core':
+        specifier: workspace:*
+        version: link:../notification-core
+      '@apzhub/notification-persistence':
+        specifier: workspace:*
+        version: link:../notification-persistence
+      '@apzhub/observe-contracts':
+        specifier: workspace:*
+        version: link:../observe-contracts
+      '@apzhub/observe-core':
+        specifier: workspace:*
+        version: link:../observe-core
+      '@apzhub/observe-persistence':
+        specifier: workspace:*
+        version: link:../observe-persistence
       '@apzhub/platform-authorization':
         specifier: workspace:*
         version: link:../platform-authorization
@@ -698,6 +888,15 @@ importers:
       '@apzhub/testing-services':
         specifier: workspace:*
         version: link:../testing-services
+      '@apzhub/workflow-contracts':
+        specifier: workspace:*
+        version: link:../workflow-contracts
+      '@apzhub/workflow-core':
+        specifier: workspace:*
+        version: link:../workflow-core
+      '@apzhub/workflow-persistence':
+        specifier: workspace:*
+        version: link:../workflow-persistence
       drizzle-orm:
         specifier: ^0.44.2
         version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
@@ -756,6 +955,24 @@ importers:
       '@apzhub/platform-service-contracts':
         specifier: workspace:*
         version: link:../platform-service-contracts
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../search-contracts
+      '@apzhub/search-integration':
+        specifier: workspace:*
+        version: link:../search-integration
+
+  packages/search-reporting:
+    dependencies:
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../platform-service-contracts
+      '@apzhub/reporting-contracts':
+        specifier: workspace:*
+        version: link:../reporting-contracts
+      '@apzhub/reporting-core':
+        specifier: workspace:*
+        version: link:../reporting-core
       '@apzhub/search-contracts':
         specifier: workspace:*
         version: link:../search-contracts
@@ -891,6 +1108,29 @@ importers:
       react:
         specifier: ^19.0.0
         version: 19.2.4
+
+  packages/workflow-contracts: {}
+
+  packages/workflow-core:
+    dependencies:
+      '@apzhub/workflow-contracts':
+        specifier: workspace:*
+        version: link:../workflow-contracts
+
+  packages/workflow-persistence:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/workflow-contracts':
+        specifier: workspace:*
+        version: link:../workflow-contracts
+      '@apzhub/workflow-core':
+        specifier: workspace:*
+        version: link:../workflow-core
+      drizzle-orm:
+        specifier: ^0.44.2
+        version: 0.44.7(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
 
   packages/workspace:
     dependencies:
@@ -6019,7 +6259,7 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)':
+  '@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)':
     dependencies:
       '@better-auth/utils': 0.4.2
       '@better-fetch/fetch': 1.3.1
@@ -6031,36 +6271,36 @@ snapshots:
       nanostores: 1.4.0
       zod: 4.4.3
 
-  '@better-auth/drizzle-adapter@1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)':
+  '@better-auth/drizzle-adapter@1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)':
     dependencies:
-      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
+      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
       '@better-auth/utils': 0.4.2
 
-  '@better-auth/kysely-adapter@1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)(kysely@0.29.2)':
+  '@better-auth/kysely-adapter@1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)(kysely@0.29.2)':
     dependencies:
-      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
+      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
       '@better-auth/utils': 0.4.2
     optionalDependencies:
       kysely: 0.29.2
 
-  '@better-auth/memory-adapter@1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)':
+  '@better-auth/memory-adapter@1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)':
     dependencies:
-      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
+      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
       '@better-auth/utils': 0.4.2
 
-  '@better-auth/mongo-adapter@1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)':
+  '@better-auth/mongo-adapter@1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)':
     dependencies:
-      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
+      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
       '@better-auth/utils': 0.4.2
 
-  '@better-auth/prisma-adapter@1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)':
+  '@better-auth/prisma-adapter@1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)':
     dependencies:
-      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
+      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
       '@better-auth/utils': 0.4.2
 
-  '@better-auth/telemetry@1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)':
+  '@better-auth/telemetry@1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)':
     dependencies:
-      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
+      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
       '@better-auth/utils': 0.4.2
       '@better-fetch/fetch': 1.3.1
 
@@ -8016,13 +8256,13 @@ snapshots:
 
   better-auth@1.6.22(drizzle-kit@0.31.10)(next@16.2.9(@babel/core@7.29.7)(@playwright/test@1.61.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(pg@8.22.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(vitest@3.2.6(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0)(lightningcss@1.32.0)(tsx@4.22.4)(yaml@2.9.0)):
     dependencies:
-      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
-      '@better-auth/drizzle-adapter': 1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)
-      '@better-auth/kysely-adapter': 1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)(kysely@0.29.2)
-      '@better-auth/memory-adapter': 1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)
-      '@better-auth/mongo-adapter': 1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)
-      '@better-auth/prisma-adapter': 1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)
-      '@better-auth/telemetry': 1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)
+      '@better-auth/core': 1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0)
+      '@better-auth/drizzle-adapter': 1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)
+      '@better-auth/kysely-adapter': 1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)(kysely@0.29.2)
+      '@better-auth/memory-adapter': 1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)
+      '@better-auth/mongo-adapter': 1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)
+      '@better-auth/prisma-adapter': 1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)
+      '@better-auth/telemetry': 1.6.22(@better-auth/core@1.6.22(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@3.25.76))(jose@6.2.3)(kysely@0.29.2)(nanostores@1.4.0))(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)
       '@better-auth/utils': 0.4.2
       '@better-fetch/fetch': 1.3.1
       '@noble/ciphers': 2.2.0
@@ -8594,7 +8834,7 @@ snapshots:
       '@next/eslint-plugin-next': 16.2.9
       eslint: 9.39.4(jiti@2.7.0)
       eslint-import-resolver-node: 0.3.10
-      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0))
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.7.0))
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.7.0))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.4(jiti@2.7.0))
       eslint-plugin-react: 7.37.5(eslint@9.39.4(jiti@2.7.0))
@@ -8617,7 +8857,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0)):
+  eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.7.0)):
     dependencies:
       '@nolyfill/is-core-module': 1.0.39
       debug: 4.4.3
@@ -8632,14 +8872,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.13.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint-import-resolver-node@0.3.10)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0)):
+  eslint-module-utils@2.13.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint-import-resolver-node@0.3.10)(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.7.0)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
       '@typescript-eslint/parser': 8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3)
       eslint: 9.39.4(jiti@2.7.0)
       eslint-import-resolver-node: 0.3.10
-      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0))
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.7.0))
     transitivePeerDependencies:
       - supports-color
 
@@ -8654,7 +8894,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.39.4(jiti@2.7.0)
       eslint-import-resolver-node: 0.3.10
-      eslint-module-utils: 2.13.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint-import-resolver-node@0.3.10)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0))
+      eslint-module-utils: 2.13.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3))(eslint-import-resolver-node@0.3.10)(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.7.0))
       hasown: 2.0.4
       is-core-module: 2.16.2
       is-glob: 4.0.3

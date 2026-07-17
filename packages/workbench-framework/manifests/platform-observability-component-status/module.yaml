@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-component-status
+name: Component Status
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Component Status sidebar (Health) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Component Status
+    icon: boxes
+    route: /workspace/observability/component-status
+    order: 70
+    permission: observe.health
+  view:
+    title: Component Status
+    workspace: observability
+    route: /workspace/observability/component-status
+    permission: observe.health

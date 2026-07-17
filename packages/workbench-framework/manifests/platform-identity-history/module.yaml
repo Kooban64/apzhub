@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-identity-history
+name: History
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Identity — History sidebar (APZIDENTITY-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: identity
+    parent: platform-identity
+    label: History
+    icon: history
+    route: /workspace/identity/history
+    order: 140
+    permission: identity.read
+  view:
+    title: History
+    workspace: identity
+    route: /workspace/identity/history
+    permission: identity.read

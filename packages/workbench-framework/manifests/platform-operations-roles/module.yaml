@@ -17,15 +17,15 @@ module:
 workbench:
   navigation:
     level: sidebar
-    workspace: administration
+    workspace: operations
     parent: platform-administration
     label: Roles
     icon: shield
-    route: /workspace/administration/roles
+    route: /workspace/operations/roles
     order: 30
     permission: platform.nav.administration.view
   view:
     title: Roles
-    workspace: administration
-    route: /workspace/administration/roles
+    workspace: operations
+    route: /workspace/operations/roles
     permission: platform.nav.administration.view

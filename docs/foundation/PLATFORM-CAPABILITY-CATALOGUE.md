@@ -5,8 +5,8 @@
 > **Authoritative references:** [Platform Core Capability Reference](../architecture/APZHUB-Platform-Core-Capability-Reference.md) · [Platform Capability Matrix](../architecture/APZHUB-Platform-Capability-Matrix.md)  
 > **Related documents:** [PACKAGE-CATALOGUE](./PACKAGE-CATALOGUE.md) · [ARCHITECTURE-HANDBOOK](./ARCHITECTURE-HANDBOOK.md)  
 > **Reading order:** After Architecture Handbook  
-> **Last updated:** 2026-07-13  
-> **Current status:** Active — index only; Reporting **PRODUCTION_READY_WITH_LIMITATIONS** (APZREPORT-003); Documents **PRODUCTION_READY_WITH_LIMITATIONS** (APZDOCS-006)
+> **Last updated:** 2026-07-17  
+> **Current status:** Active — index only; Observability programme **closed/frozen** (APZOBSERVE-006; **PRODUCTION_READY_WITH_LIMITATIONS** retained; stop before APZMETRICS-001); Identity Administration programme **closed/frozen** (APZIDENTITY-006); Administration SoR **frozen** (APZADMIN-006); Configuration SoR **frozen** (APZCONFIG-006); Notification SoR **frozen** (APZNOTIFY-006); Reporting **PRODUCTION_READY_WITH_LIMITATIONS** (APZREPORT-003); Documents **PRODUCTION_READY_WITH_LIMITATIONS** (APZDOCS-006)
 
 ---
 
@@ -58,7 +58,22 @@ Full per-capability fields (purpose, APIs, diagnostics, dependencies): [Platform
 | `@apzhub/integration-plane`          | Plane CE **certified Reference Adapter** — Projects provider (OSS-101-04…10, v0.6.0) |
 | `@apzhub/integration-zammad`         | Zammad CE Support adapter — Wave 2 CERTIFIED_WITH_LIMITATIONS (v0.6.0) |
 | `@apzhub/platform-service-contracts` | Vendor-neutral service DTOs / interfaces                                             |
-| `@apzhub/platform-services`          | Platform service implementations + gateway — **0.16.0** (document facets, APZDOCS-003) |
+| `@apzhub/platform-services`          | Platform service implementations + gateway — **0.24.0** (Observability + Identity + Administration + Configuration + Notification + Workflow + Search + Documents); Observability **APZOBSERVE-002** |
+| `@apzhub/observe-contracts`          | Platform Observability SoR + gateway facets — **APZOBSERVE-006 frozen** (**0.2.0**) |
+| `@apzhub/observe-core`               | Platform Observability domain — **APZOBSERVE-006 frozen** (**0.2.0**) |
+| `@apzhub/observe-persistence`        | Platform Observability PostgreSQL + in-memory — **APZOBSERVE-006 frozen** (**0.1.0**) |
+| `@apzhub/configuration-contracts`    | Platform Configuration SoR contracts — **APZCONFIG-006 frozen** (**0.2.0**) |
+| `@apzhub/configuration-core`         | Platform Configuration domain — **APZCONFIG-006 frozen** (**0.2.0**) |
+| `@apzhub/configuration-persistence`  | Platform Configuration PostgreSQL + in-memory — **APZCONFIG-006 frozen** (**0.1.0**) |
+| `@apzhub/identity-contracts`         | Platform Identity Administration SoR contracts — **APZIDENTITY-001** (**0.1.0**) |
+| `@apzhub/identity-core`              | Platform Identity Administration domain — **APZIDENTITY-001** (**0.1.0**) |
+| `@apzhub/identity-persistence`       | Platform Identity Administration PostgreSQL + in-memory — **APZIDENTITY-001** (**0.1.0**) |
+| `@apzhub/admin-contracts`            | Platform Administration SoR + gateway — **APZADMIN-006 frozen** (**0.2.0**) |
+| `@apzhub/admin-core`                 | Platform Administration domain service — **APZADMIN-006 frozen** (**0.2.0**) |
+| `@apzhub/admin-persistence`          | Platform Administration PostgreSQL + in-memory — **APZADMIN-006 frozen** (**0.1.0**) |
+| `@apzhub/notification-contracts`     | Platform Notification SoR contracts — **APZNOTIFY-006 frozen** (**0.2.0**) |
+| `@apzhub/notification-core`          | Platform Notification domain — **APZNOTIFY-006 frozen** (**0.2.0**) |
+| `@apzhub/notification-persistence`   | Platform Notification PostgreSQL + in-memory — **APZNOTIFY-006 frozen** (**0.1.0**) |
 | `@apzhub/reporting-contracts`        | Platform Reporting contracts — models, permissions, service interface (APZREPORT-001) |
 | `@apzhub/reporting-core`             | Platform Reporting engine — templates, outputs, metadata (APZREPORT-001)              |
 | `@apzhub/document-contracts`         | Platform Document contracts — **APZDOCS-006 certified** (**0.3.0**) |

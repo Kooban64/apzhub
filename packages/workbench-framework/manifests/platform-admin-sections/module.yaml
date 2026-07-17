@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-sections
+name: Sections
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Administration — Sections sidebar (APZADMIN-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Sections
+    icon: rows-3
+    route: /workspace/administration/sections
+    order: 40
+    permission: admin.read
+  view:
+    title: Sections
+    workspace: administration
+    route: /workspace/administration/sections
+    permission: admin.read

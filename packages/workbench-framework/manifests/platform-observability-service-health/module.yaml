@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-observability-service-health
+name: Service Health
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Observability — Service Health sidebar (Health) (APZOBSERVE-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: observability
+    parent: platform-observability
+    label: Service Health
+    icon: server
+    route: /workspace/observability/service-health
+    order: 50
+    permission: observe.health
+  view:
+    title: Service Health
+    workspace: observability
+    route: /workspace/observability/service-health
+    permission: observe.health

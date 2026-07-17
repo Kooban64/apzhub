@@ -232,7 +232,7 @@ describe("APZSEARCH-013 residual coverage", () => {
 
     const diag = adapter.publisher.diagnostics(ctx());
     expect(diag.productId).toBe("testing");
-    expect(diag.adapterVersion).toBe("0.1.0");
+    expect(diag.adapterVersion).toBe("0.1.1");
     expect(adapter.publisher.statistics(ctx()).validated).toBeGreaterThan(0);
     expect(adapter.publisher.getLogger().recent().length).toBeGreaterThan(0);
     expect(adapter.publisher.getMapper()).toBeDefined();

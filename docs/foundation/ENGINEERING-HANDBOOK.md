@@ -5,8 +5,8 @@
 > **Authoritative references:** [000](../000-apzhub-engineering-constitution.md) · [004 — Technology Stack](../004-technology-stack-repository-standards-development-environment.md) · [015 — Quality](../015-software-quality-testing-qa-cicd-release-management-framework.md) · [Governance Engineering Handbook](../governance/APZHUB-Engineering-Handbook.md)  
 > **Related documents:** [ARCHITECTURE-HANDBOOK](./ARCHITECTURE-HANDBOOK.md) · [REPOSITORY-GUIDE](./REPOSITORY-GUIDE.md) · [AI-ENGINEERING-STANDARDS](./AI-ENGINEERING-STANDARDS.md)  
 > **Reading order:** After Constitution and Master Brief  
-> **Last updated:** 2026-07-14  
-> **Current status:** Active — APZSEARCH-013 APZ TCMS Search Publication Adapter complete; stop before APZSEARCH-014
+> **Last updated:** 2026-07-16  
+> **Current status:** Active — APZIDENTITY-001 Identity Administration Foundation complete; stop before APZIDENTITY-002 (Administration/Configuration/Notification/Workflow programmes frozen; **APZSEARCH-016** deferred)
 
 ---
 
@@ -38,7 +38,17 @@ See [REPOSITORY-GUIDE](./REPOSITORY-GUIDE.md) · [PACKAGE-CATALOGUE](./PACKAGE-C
 
 **Documents (APZDOCS-006):** certified **PRODUCTION_READY_WITH_LIMITATIONS** — Workbench `/workspace/documents` + HTTP `/api/v1/documents` + typed client over Document Core/persistence/storage. Architecture frozen. See [Vertical Certification](../architecture/APZHUB-Platform-Document-Vertical-Certification.md).
 
-**Search (APZSEARCH-013):** APZ TCMS Search Publication Adapter `@apzhub/search-testing` **0.1.0** (metadata-only). See [APZSEARCH-013 Completion Report](../sprint/APZSEARCH-013-completion-report.md). Stop before APZSEARCH-014.
+**Workflow (APZWORKFLOW-011):** Platform SoR + Engine waves **closed and frozen**. Official Reference Adapter: `@apzhub/integration-n8n` **0.1.0**. Audits `pnpm audit:workflow-vertical` · `pnpm audit:workflow-engine-vertical` · `pnpm audit:workflow-engine-wave`. Classification **PRODUCTION_READY_WITH_LIMITATIONS**. See [APZWORKFLOW-011 Completion Report](../sprint/APZWORKFLOW-011-completion-report.md) · [Reference Adapter Standard](../architecture/APZHUB-Workflow-Engine-Reference-Adapter-Standard.md) · [Architecture Freeze Notice](../architecture/APZHUB-Workflow-Engine-Architecture-Freeze-Notice.md). Stop before APZWORKFLOW-012.
+
+**Notification (APZNOTIFY-006):** Platform Notification SoR wave **closed and frozen**. Audit `pnpm audit:notification-wave`. Classification **PRODUCTION_READY_WITH_LIMITATIONS**. Delivery providers not available. See [APZNOTIFY-006 Completion Report](../sprint/APZNOTIFY-006-completion-report.md) · [Freeze Notice](../architecture/APZHUB-Notification-Architecture-Freeze-Notice.md). Stop before APZNOTIFY-007 (roadmap only).
+
+**Configuration (APZCONFIG-006):** Platform Configuration SoR wave **closed and frozen**. Audits `pnpm audit:configuration-vertical` · `pnpm audit:configuration-wave`. Classification **PRODUCTION_READY_WITH_LIMITATIONS**. Runtime resolution / feature flags / secrets not available. Official [Configuration Reference Standard](../architecture/APZHUB-Configuration-Reference-Standard.md). See [APZCONFIG-006 Completion Report](../sprint/APZCONFIG-006-completion-report.md) · [Freeze Notice](../architecture/APZHUB-Configuration-Architecture-Freeze-Notice.md). Stop before APZCONFIG-007 (roadmap only — do not implement).
+
+**Identity Administration (APZIDENTITY-001):** Foundation SoR complete — `@apzhub/identity-contracts` / `identity-core` / `identity-persistence` **0.1.0**; migrations **0052/0053**; audit `pnpm audit:identity-foundation`. Metadata only — not authentication; no HTTP/Gateway/Workbench. See [APZIDENTITY-001 Completion Report](../sprint/APZIDENTITY-001-completion-report.md) · [Platform Identity Architecture](../architecture/APZHUB-Platform-Identity-Architecture.md). Stop before APZIDENTITY-002.
+
+**Administration (APZADMIN-006):** Platform Administration SoR wave **closed and frozen**. Audits `pnpm audit:administration-vertical` · `pnpm audit:administration-wave`. Classification **PRODUCTION_READY_WITH_LIMITATIONS**. Official [Administration Reference Standard](../architecture/APZHUB-Administration-Reference-Standard.md). See [APZADMIN-006 Completion Report](../sprint/APZADMIN-006-completion-report.md) · [Freeze Notice](../architecture/APZHUB-Administration-Architecture-Freeze-Notice.md).
+
+**Search (APZSEARCH-015):** Cross-Product Search Publication Certification — **PRODUCTION_READY_WITH_LIMITATIONS**. Framework + five adapters frozen. See [APZSEARCH-015 Completion Report](../sprint/APZSEARCH-015-completion-report.md). **APZSEARCH-016** deferred.
 
 **Search (APZSEARCH-002):** persistence + provider registry — `@apzhub/search-persistence` **0.1.0**, contracts **0.2.0**, migrations 0041/0042. No HTTP/Workbench/engines/execution. See [Search Persistence Architecture](../architecture/APZHUB-Platform-Search-Persistence-Architecture.md).
 
