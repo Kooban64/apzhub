@@ -36,10 +36,14 @@ export class InMemoryGovernanceRepository implements GovernanceRepository {
   }
 
   async getCapability(capabilityKey: string): Promise<PlatformCapability | undefined> {
-    return [...this.capabilities.values()].find((item) => item.capabilityKey === capabilityKey);
+    return [...this.capabilities.values()].find(
+      (item) => item.capabilityKey === capabilityKey,
+    );
   }
 
-  async registerCapability(input: RegisterCapabilityInput): Promise<PlatformCapability> {
+  async registerCapability(
+    input: RegisterCapabilityInput,
+  ): Promise<PlatformCapability> {
     const existing = await this.getCapability(input.capabilityKey);
     const timestamp = nowIso();
     const capability: PlatformCapability = {
@@ -70,8 +74,12 @@ export class InMemoryGovernanceRepository implements GovernanceRepository {
     return capability;
   }
 
-  async listDependencies(capabilityId: string): Promise<readonly CapabilityDependency[]> {
-    return [...this.dependencies.values()].filter((item) => item.capabilityId === capabilityId);
+  async listDependencies(
+    capabilityId: string,
+  ): Promise<readonly CapabilityDependency[]> {
+    return [...this.dependencies.values()].filter(
+      (item) => item.capabilityId === capabilityId,
+    );
   }
 
   async listEnablements(filter?: {
@@ -81,7 +89,8 @@ export class InMemoryGovernanceRepository implements GovernanceRepository {
   }): Promise<readonly GovernanceEnablement[]> {
     return [...this.enablements.values()].filter((item) => {
       if (filter?.scopeType && item.scopeType !== filter.scopeType) return false;
-      if (filter?.scopeKey !== undefined && item.scopeKey !== filter.scopeKey) return false;
+      if (filter?.scopeKey !== undefined && item.scopeKey !== filter.scopeKey)
+        return false;
       if (filter?.targetType && item.targetType !== filter.targetType) return false;
       return true;
     });
@@ -167,7 +176,8 @@ export class InMemoryProvisioningRepository implements ProvisioningRepository {
       ...existing,
       status,
       message,
-      completedAt: status === "completed" || status === "failed" ? nowIso() : existing.completedAt,
+      completedAt:
+        status === "completed" || status === "failed" ? nowIso() : existing.completedAt,
     };
     this.records.set(provisioningId, updated);
     return updated;
@@ -207,7 +217,9 @@ export class InMemoryFeatureFlagRepository implements FeatureFlagRepository {
   }
 
   async listOverrides(flagKey?: string): Promise<readonly FeatureFlagOverride[]> {
-    return [...this.overrides.values()].filter((item) => !flagKey || item.flagKey === flagKey);
+    return [...this.overrides.values()].filter(
+      (item) => !flagKey || item.flagKey === flagKey,
+    );
   }
 
   async setOverride(input: SetFeatureFlagOverrideInput): Promise<FeatureFlagOverride> {

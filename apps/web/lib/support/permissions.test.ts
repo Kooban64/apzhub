@@ -48,9 +48,9 @@ describe("support permissions helpers", () => {
     expect(
       hasSupportPermission(["support.requests.create"], "support.requests.create"),
     ).toBe(true);
-    expect(hasSupportPermission(["support.requests.*"], "support.requests.update")).toBe(
-      true,
-    );
+    expect(
+      hasSupportPermission(["support.requests.*"], "support.requests.update"),
+    ).toBe(true);
     expect(canAssignSupportRequest(["support.requests.assign"])).toBe(true);
     expect(canCreateSupportArticle(["support.articles.create"])).toBe(true);
     expect(canReadSupportAnalytics(["support.analytics.read"])).toBe(true);

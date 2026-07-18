@@ -3,7 +3,7 @@
 **Milestone:** OSS-110-04 / OSS-110-06  
 **Status:** Canonical — vendor-neutral request execution between modules and platform services  
 **Package:** `@apzhub/platform-services` v0.5.0  
-**Authority:** [009 — Platform Service Layer](../009-platform-service-layer-integration-framework.md) · [010 — API Gateway & Communication](../010-api-gateway-integration-communication-standards.md) · [013 — Zero Trust](../013-security-architecture-zero-trust-framework.md) · [014 — Observability](../014-observability-monitoring-operations-framework.md) · [ADR-0050](../adr/ADR-0050-production-authorisation-policy-enforcement.md)
+**Authority:** [009 — Platform Service Layer](../009-platform-service-layer-integration-framework.md) · [010 — API Gateway & Communication](../010-api-gateway-integration-communication-standards.md) · [013 — Zero Trust](../013-security-architecture-zero-trust-framework.md) · [014 — Observability](../014-observability-monitoring-telemetry-health-framework.md) · [ADR-0050](../adr/ADR-0050-production-authorisation-policy-enforcement.md)
 
 ---
 
@@ -51,15 +51,15 @@ Authorization denials map to typed codes (`PERMISSION_DENIED`, `AUTHENTICATION_R
 
 ## Components
 
-| Component | Responsibility |
-|-----------|----------------|
-| `RequestPipeline` | Orchestrates the full execution path |
-| `wrapServiceWithPipeline` | Proxy that routes contract methods through the pipeline |
-| `AuthorizationProvider` | Pluggable authz; production / allow-all / deny-all |
-| `Policy` / `PolicyPipeline` | Preconditions and governance rules |
-| `ServiceMiddleware` / `MiddlewareRegistry` | Before/after hooks |
-| `PipelineLogger` / `PipelineMetrics` | Observability hooks |
-| `AuthorizationAuditSink` | Structured authz audit events |
+| Component                                  | Responsibility                                          |
+| ------------------------------------------ | ------------------------------------------------------- |
+| `RequestPipeline`                          | Orchestrates the full execution path                    |
+| `wrapServiceWithPipeline`                  | Proxy that routes contract methods through the pipeline |
+| `AuthorizationProvider`                    | Pluggable authz; production / allow-all / deny-all      |
+| `Policy` / `PolicyPipeline`                | Preconditions and governance rules                      |
+| `ServiceMiddleware` / `MiddlewareRegistry` | Before/after hooks                                      |
+| `PipelineLogger` / `PipelineMetrics`       | Observability hooks                                     |
+| `AuthorizationAuditSink`                   | Structured authz audit events                           |
 
 ---
 

@@ -5,10 +5,7 @@
 import type { SearchEntityDraft } from "@apzhub/search-integration";
 
 import type { TestingSearchPublicationContext } from "../context/testing-search-publication-context";
-import {
-  QualitySearchMapper,
-  type QualityMappableEntity,
-} from "../mapper/quality";
+import { QualitySearchMapper, type QualityMappableEntity } from "../mapper/quality";
 import type { TestingSearchMappableEntity } from "../mapper/shared";
 import {
   DomainSearchPublisherBase,

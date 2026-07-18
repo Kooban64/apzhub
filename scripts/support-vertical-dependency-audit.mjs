@@ -52,7 +52,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -115,7 +116,8 @@ function checkHttpBoundaryFile(file) {
         file: rel,
         line: i + 1,
         rule: "handler-no-mapping-store",
-        detail: "HTTP layer references EntityMappingStore / entity-mapping / mapping-store",
+        detail:
+          "HTTP layer references EntityMappingStore / entity-mapping / mapping-store",
       });
     }
 

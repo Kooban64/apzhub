@@ -7,10 +7,7 @@ import { toTestingUserMessage } from "@/lib/testing/errors";
 import { formatTestingDate } from "@/lib/testing/format";
 import type { TestingPermissionSource } from "@/lib/testing/permissions";
 import { testingQueryKeys } from "@/lib/testing/query-keys";
-import {
-  testingCertificationPath,
-  testingExecutionPath,
-} from "@/lib/testing/routes";
+import { testingCertificationPath, testingExecutionPath } from "@/lib/testing/routes";
 import { getDashboard } from "@/lib/testing/testing-api";
 
 import {

@@ -39,12 +39,12 @@ Timeline Experiences consume **`useActivityTimelineExperienceDiagnostics()`** (b
 
 ## Deliverables
 
-| Artifact                 | Path                                                                                            |
-| ------------------------ | ----------------------------------------------------------------------------------------------- |
-| Experiences              | `src/experiences/`                                                                              |
-| Timeline Experience spec | [TIMELINE-EXPERIENCES.md](../packages/activity-timeline-framework/docs/TIMELINE-EXPERIENCES.md) |
-| Timeline UX doc          | [TIMELINE-UX.md](../packages/activity-timeline-framework/docs/TIMELINE-UX.md)                   |
-| Updated specification    | [SPR-007-ATF-timeline-experiences.md](../specs/SPR-007-ATF-timeline-experiences.md)             |
+| Artifact                 | Path                                                                                               |
+| ------------------------ | -------------------------------------------------------------------------------------------------- |
+| Experiences              | `src/experiences/`                                                                                 |
+| Timeline Experience spec | [TIMELINE-EXPERIENCES.md](../../packages/activity-timeline-framework/docs/TIMELINE-EXPERIENCES.md) |
+| Timeline UX doc          | [TIMELINE-UX.md](../../packages/activity-timeline-framework/docs/TIMELINE-UX.md)                   |
+| Updated specification    | [SPR-007-ATF-timeline-experiences.md](../specs/SPR-007-ATF-timeline-experiences.md)                |
 
 ---
 

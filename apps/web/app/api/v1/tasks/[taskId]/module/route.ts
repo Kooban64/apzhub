@@ -3,7 +3,10 @@ export const runtime = "nodejs";
 import type { NextRequest } from "next/server";
 
 import { withPlatformApiAuth } from "@/lib/api/v1/auth/with-platform-api-auth";
-import { handleClearTaskModule, handleSetTaskModule } from "@/lib/api/v1/handlers/tasks";
+import {
+  handleClearTaskModule,
+  handleSetTaskModule,
+} from "@/lib/api/v1/handlers/tasks";
 import { methodNotAllowedResponse } from "@/lib/api/v1/response";
 import { createPlatformApiTracing } from "@/lib/api/v1/request-context";
 

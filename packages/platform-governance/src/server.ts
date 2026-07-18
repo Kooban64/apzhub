@@ -7,7 +7,10 @@ import { getSharedGovernanceService } from "./index";
 import type { PlatformGovernanceService } from "./platform-governance-service";
 
 export * from "./index";
-export { createPostgresGovernanceService, getGovernanceServiceForSession } from "./governance-runtime";
+export {
+  createPostgresGovernanceService,
+  getGovernanceServiceForSession,
+} from "./governance-runtime";
 
 export {
   handleGetCapabilities,

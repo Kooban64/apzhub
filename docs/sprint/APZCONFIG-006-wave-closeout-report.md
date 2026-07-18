@@ -7,14 +7,14 @@
 
 The Configuration metadata SoR programme wave is **closed** and **architecture-frozen**.
 
-| Milestone | Outcome |
-| --- | --- |
-| APZCONFIG-001 | Foundation |
-| APZCONFIG-002 | Platform Services, Gateway & Authorization |
-| APZCONFIG-003 | HTTP API & Typed Client |
-| APZCONFIG-004 | Workbench |
+| Milestone     | Outcome                                                        |
+| ------------- | -------------------------------------------------------------- |
+| APZCONFIG-001 | Foundation                                                     |
+| APZCONFIG-002 | Platform Services, Gateway & Authorization                     |
+| APZCONFIG-003 | HTTP API & Typed Client                                        |
+| APZCONFIG-004 | Workbench                                                      |
 | APZCONFIG-005 | Vertical Certification — **PRODUCTION_READY_WITH_LIMITATIONS** |
-| APZCONFIG-006 | Wave Certification & Architecture Freeze |
+| APZCONFIG-006 | Wave Certification & Architecture Freeze                       |
 
 ## Freeze artefacts
 

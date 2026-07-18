@@ -23,7 +23,9 @@ export const ZAMMAD_ARTICLE_PROVIDER_REGISTRATION = {
   priority: 100,
 };
 
-const ARTICLE_SORT_MAP: Partial<Record<SupportArticleSortField, SupportArticleSortField>> = {
+const ARTICLE_SORT_MAP: Partial<
+  Record<SupportArticleSortField, SupportArticleSortField>
+> = {
   createdAt: "createdAt",
   updatedAt: "updatedAt",
 };
@@ -37,7 +39,9 @@ function mapArticleSort(
   });
 }
 
-export function createZammadArticleProvider(core: ZammadCoreServices): SupportArticleProvider {
+export function createZammadArticleProvider(
+  core: ZammadCoreServices,
+): SupportArticleProvider {
   return {
     list(ctx, supportTicketId, query) {
       const { page, sort, filter } = unwrapListQuery<

@@ -59,9 +59,7 @@ export function exportWorkflowAsYaml(payload: WorkflowExportPayload): string {
   return `${lines.join("\n")}\n`;
 }
 
-export function exportWorkflowAsMarkdown(
-  payload: WorkflowExportPayload,
-): string {
+export function exportWorkflowAsMarkdown(payload: WorkflowExportPayload): string {
   const w = payload.workflow;
   const lines = [
     `# Workflow metadata: ${w.name}`,
@@ -84,11 +82,11 @@ export function exportWorkflowAsMarkdown(
       `- **Version ID:** ${payload.version.id}`,
       `- **Status:** ${payload.version.status}`,
       `- **Lifecycle:** ${payload.version.lifecycle}`,
-      payload.version.changeSummary
-        ? `- **Change summary:** ${payload.version.changeSummary}`
-        : null,
-      "",
     );
+    if (payload.version.changeSummary) {
+      lines.push(`- **Change summary:** ${payload.version.changeSummary}`);
+    }
+    lines.push("");
   }
 
   lines.push(

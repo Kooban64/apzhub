@@ -23,13 +23,13 @@ PlatformServiceGateway.documents / document*
 
 Packages:
 
-| Package | Version |
-|---------|---------|
-| `@apzhub/document-contracts` | **0.3.0** |
-| `@apzhub/document-core` | **0.3.0** |
-| `@apzhub/platform-services` | **0.16.0** |
+| Package                        | Version           |
+| ------------------------------ | ----------------- |
+| `@apzhub/document-contracts`   | **0.3.0**         |
+| `@apzhub/document-core`        | **0.3.0**         |
+| `@apzhub/platform-services`    | **0.16.0**        |
 | `@apzhub/document-persistence` | 0.2.0 (unchanged) |
-| `@apzhub/document-storage` | 0.1.0 (unchanged) |
+| `@apzhub/document-storage`     | 0.1.0 (unchanged) |
 
 ## Gateway facets
 
@@ -58,10 +58,10 @@ Factories: `createDocumentPlatformServices` / `ForProduction` / `ForTest`; `wrap
 
 ## Testing
 
-| Suite | Result |
-|-------|--------|
+| Suite                                                                      | Result                    |
+| -------------------------------------------------------------------------- | ------------------------- |
 | `apzdocs-003-platform-services.test.ts` + `apzdocs-003-foundation.test.ts` | **9** Vitest tests passed |
-| Architecture audit `scripts/apzdocs-003-platform-services-audit.mjs` | **PASS** (0 violations) |
+| Architecture audit `scripts/apzdocs-003-platform-services-audit.mjs`       | **PASS** (0 violations)   |
 
 ## Documentation delivered
 

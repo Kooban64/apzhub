@@ -51,7 +51,7 @@ Return **401** with:
 
 ## Swagger UI / API explorer
 
-1. Open [/api/docs](/api/docs).
+1. Open [/api/docs](../developer/legal-api-developer-guide.md).
 2. Sign in to the portal in another tab (same origin).
 3. Use **Try it out** on any endpoint — cookies are sent automatically.
 4. Set `x-tenant-id` in the request headers field.

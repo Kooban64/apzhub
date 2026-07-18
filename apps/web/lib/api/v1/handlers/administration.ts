@@ -438,9 +438,7 @@ export async function handleListAdministrationCategories(
     request.nextUrl.searchParams,
   );
   const gateway = await requireAdministrationGateway();
-  const items = await gateway.administration.categories.list(
-    context.serviceContext,
-  );
+  const items = await gateway.administration.categories.list(context.serviceContext);
   const limit = resolvePageLimit(query);
   return collection(pageSlice(items, limit), context, limit);
 }
@@ -459,9 +457,7 @@ export async function handleCreateAdministrationCategory(
     context.serviceContext,
     {
       ...body,
-      moduleId: body.moduleId
-        ? asAdministrationModuleId(body.moduleId)
-        : undefined,
+      moduleId: body.moduleId ? asAdministrationModuleId(body.moduleId) : undefined,
     },
   );
   return jsonDataResponse(result, context.tracing);
@@ -517,9 +513,7 @@ export async function handleListAdministrationSections(
     request.nextUrl.searchParams,
   );
   const gateway = await requireAdministrationGateway();
-  const items = await gateway.administration.sections.list(
-    context.serviceContext,
-  );
+  const items = await gateway.administration.sections.list(context.serviceContext);
   const limit = resolvePageLimit(query);
   return collection(pageSlice(items, limit), context, limit);
 }
@@ -534,13 +528,10 @@ export async function handleCreateAdministrationSection(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireAdministrationGateway();
-  const result = await gateway.administration.sections.create(
-    context.serviceContext,
-    {
-      ...body,
-      categoryId: asAdministrationCategoryId(body.categoryId),
-    },
-  );
+  const result = await gateway.administration.sections.create(context.serviceContext, {
+    ...body,
+    categoryId: asAdministrationCategoryId(body.categoryId),
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -574,10 +565,10 @@ export async function handleUpdateAdministrationSection(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireAdministrationGateway();
-  const result = await gateway.administration.sections.update(
-    context.serviceContext,
-    { sectionId, ...body },
-  );
+  const result = await gateway.administration.sections.update(context.serviceContext, {
+    sectionId,
+    ...body,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -594,9 +585,7 @@ export async function handleListAdministrationActions(
     request.nextUrl.searchParams,
   );
   const gateway = await requireAdministrationGateway();
-  const items = await gateway.administration.actions.list(
-    context.serviceContext,
-  );
+  const items = await gateway.administration.actions.list(context.serviceContext);
   const limit = resolvePageLimit(query);
   return collection(pageSlice(items, limit), context, limit);
 }
@@ -611,18 +600,11 @@ export async function handleCreateAdministrationAction(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireAdministrationGateway();
-  const result = await gateway.administration.actions.create(
-    context.serviceContext,
-    {
-      ...body,
-      moduleId: body.moduleId
-        ? asAdministrationModuleId(body.moduleId)
-        : undefined,
-      sectionId: body.sectionId
-        ? asAdministrationSectionId(body.sectionId)
-        : undefined,
-    },
-  );
+  const result = await gateway.administration.actions.create(context.serviceContext, {
+    ...body,
+    moduleId: body.moduleId ? asAdministrationModuleId(body.moduleId) : undefined,
+    sectionId: body.sectionId ? asAdministrationSectionId(body.sectionId) : undefined,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -656,10 +638,10 @@ export async function handleUpdateAdministrationAction(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireAdministrationGateway();
-  const result = await gateway.administration.actions.update(
-    context.serviceContext,
-    { actionId, ...body },
-  );
+  const result = await gateway.administration.actions.update(context.serviceContext, {
+    actionId,
+    ...body,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -676,9 +658,7 @@ export async function handleListAdministrationPermissions(
     request.nextUrl.searchParams,
   );
   const gateway = await requireAdministrationGateway();
-  const items = await gateway.administration.permissions.list(
-    context.serviceContext,
-  );
+  const items = await gateway.administration.permissions.list(context.serviceContext);
   const limit = resolvePageLimit(query);
   return collection(pageSlice(items, limit), context, limit);
 }
@@ -706,11 +686,7 @@ export async function handleGetAdministrationPermission(
   routeContext?: RouteContext,
 ) {
   const permissionId = asAdministrationPermissionId(
-    await param(
-      routeContext,
-      "permissionId",
-      administrationPermissionIdParamSchema,
-    ),
+    await param(routeContext, "permissionId", administrationPermissionIdParamSchema),
   );
   const gateway = await requireAdministrationGateway();
   const result = await gateway.administration.permissions.get(
@@ -726,11 +702,7 @@ export async function handleUpdateAdministrationPermission(
   routeContext?: RouteContext,
 ) {
   const permissionId = asAdministrationPermissionId(
-    await param(
-      routeContext,
-      "permissionId",
-      administrationPermissionIdParamSchema,
-    ),
+    await param(routeContext, "permissionId", administrationPermissionIdParamSchema),
   );
   const body = await parseJsonBody(
     request,
@@ -758,9 +730,7 @@ export async function handleListAdministrationRegistrations(
     request.nextUrl.searchParams,
   );
   const gateway = await requireAdministrationGateway();
-  const items = await gateway.administration.registrations.list(
-    context.serviceContext,
-  );
+  const items = await gateway.administration.registrations.list(context.serviceContext);
   const limit = resolvePageLimit(query);
   return collection(pageSlice(items, limit), context, limit);
 }
@@ -840,9 +810,7 @@ export async function handleListAdministrationPolicies(
     request.nextUrl.searchParams,
   );
   const gateway = await requireAdministrationGateway();
-  const items = await gateway.administration.policies.list(
-    context.serviceContext,
-  );
+  const items = await gateway.administration.policies.list(context.serviceContext);
   const limit = resolvePageLimit(query);
   return collection(pageSlice(items, limit), context, limit);
 }
@@ -857,15 +825,10 @@ export async function handleCreateAdministrationPolicy(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireAdministrationGateway();
-  const result = await gateway.administration.policies.create(
-    context.serviceContext,
-    {
-      ...body,
-      moduleId: body.moduleId
-        ? asAdministrationModuleId(body.moduleId)
-        : undefined,
-    },
-  );
+  const result = await gateway.administration.policies.create(context.serviceContext, {
+    ...body,
+    moduleId: body.moduleId ? asAdministrationModuleId(body.moduleId) : undefined,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -899,10 +862,10 @@ export async function handleUpdateAdministrationPolicy(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireAdministrationGateway();
-  const result = await gateway.administration.policies.update(
-    context.serviceContext,
-    { policyId, ...body },
-  );
+  const result = await gateway.administration.policies.update(context.serviceContext, {
+    policyId,
+    ...body,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -919,9 +882,7 @@ export async function handleListAdministrationCapabilities(
     request.nextUrl.searchParams,
   );
   const gateway = await requireAdministrationGateway();
-  const items = await gateway.administration.capabilities.list(
-    context.serviceContext,
-  );
+  const items = await gateway.administration.capabilities.list(context.serviceContext);
   const limit = resolvePageLimit(query);
   return collection(pageSlice(items, limit), context, limit);
 }
@@ -952,11 +913,7 @@ export async function handleGetAdministrationCapability(
   routeContext?: RouteContext,
 ) {
   const capabilityId = asAdministrationCapabilityId(
-    await param(
-      routeContext,
-      "capabilityId",
-      administrationCapabilityIdParamSchema,
-    ),
+    await param(routeContext, "capabilityId", administrationCapabilityIdParamSchema),
   );
   const gateway = await requireAdministrationGateway();
   const result = await gateway.administration.capabilities.get(
@@ -972,11 +929,7 @@ export async function handleUpdateAdministrationCapability(
   routeContext?: RouteContext,
 ) {
   const capabilityId = asAdministrationCapabilityId(
-    await param(
-      routeContext,
-      "capabilityId",
-      administrationCapabilityIdParamSchema,
-    ),
+    await param(routeContext, "capabilityId", administrationCapabilityIdParamSchema),
   );
   const body = await parseJsonBody(
     request,
@@ -1004,9 +957,7 @@ export async function handleListAdministrationNavigations(
     request.nextUrl.searchParams,
   );
   const gateway = await requireAdministrationGateway();
-  const items = await gateway.administration.navigations.list(
-    context.serviceContext,
-  );
+  const items = await gateway.administration.navigations.list(context.serviceContext);
   const limit = resolvePageLimit(query);
   return collection(pageSlice(items, limit), context, limit);
 }
@@ -1029,9 +980,7 @@ export async function handleCreateAdministrationNavigation(
       categoryId: body.categoryId
         ? asAdministrationCategoryId(body.categoryId)
         : undefined,
-      sectionId: body.sectionId
-        ? asAdministrationSectionId(body.sectionId)
-        : undefined,
+      sectionId: body.sectionId ? asAdministrationSectionId(body.sectionId) : undefined,
     },
   );
   return jsonDataResponse(result, context.tracing);
@@ -1043,11 +992,7 @@ export async function handleGetAdministrationNavigation(
   routeContext?: RouteContext,
 ) {
   const navigationId = asAdministrationNavigationId(
-    await param(
-      routeContext,
-      "navigationId",
-      administrationNavigationIdParamSchema,
-    ),
+    await param(routeContext, "navigationId", administrationNavigationIdParamSchema),
   );
   const gateway = await requireAdministrationGateway();
   const result = await gateway.administration.navigations.get(
@@ -1063,11 +1008,7 @@ export async function handleUpdateAdministrationNavigation(
   routeContext?: RouteContext,
 ) {
   const navigationId = asAdministrationNavigationId(
-    await param(
-      routeContext,
-      "navigationId",
-      administrationNavigationIdParamSchema,
-    ),
+    await param(routeContext, "navigationId", administrationNavigationIdParamSchema),
   );
   const body = await parseJsonBody(
     request,
@@ -1095,9 +1036,7 @@ export async function handleListAdministrationShortcuts(
     request.nextUrl.searchParams,
   );
   const gateway = await requireAdministrationGateway();
-  const items = await gateway.administration.shortcuts.list(
-    context.serviceContext,
-  );
+  const items = await gateway.administration.shortcuts.list(context.serviceContext);
   const limit = resolvePageLimit(query);
   return collection(pageSlice(items, limit), context, limit);
 }
@@ -1112,18 +1051,11 @@ export async function handleCreateAdministrationShortcut(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireAdministrationGateway();
-  const result = await gateway.administration.shortcuts.create(
-    context.serviceContext,
-    {
-      ...body,
-      moduleId: body.moduleId
-        ? asAdministrationModuleId(body.moduleId)
-        : undefined,
-      actionId: body.actionId
-        ? asAdministrationActionId(body.actionId)
-        : undefined,
-    },
-  );
+  const result = await gateway.administration.shortcuts.create(context.serviceContext, {
+    ...body,
+    moduleId: body.moduleId ? asAdministrationModuleId(body.moduleId) : undefined,
+    actionId: body.actionId ? asAdministrationActionId(body.actionId) : undefined,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1157,10 +1089,10 @@ export async function handleUpdateAdministrationShortcut(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireAdministrationGateway();
-  const result = await gateway.administration.shortcuts.update(
-    context.serviceContext,
-    { shortcutId, ...body },
-  );
+  const result = await gateway.administration.shortcuts.update(context.serviceContext, {
+    shortcutId,
+    ...body,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1177,9 +1109,7 @@ export async function handleListAdministrationDashboards(
     request.nextUrl.searchParams,
   );
   const gateway = await requireAdministrationGateway();
-  const items = await gateway.administration.dashboards.list(
-    context.serviceContext,
-  );
+  const items = await gateway.administration.dashboards.list(context.serviceContext);
   const limit = resolvePageLimit(query);
   return collection(pageSlice(items, limit), context, limit);
 }
@@ -1198,9 +1128,7 @@ export async function handleCreateAdministrationDashboard(
     context.serviceContext,
     {
       ...body,
-      moduleId: body.moduleId
-        ? asAdministrationModuleId(body.moduleId)
-        : undefined,
+      moduleId: body.moduleId ? asAdministrationModuleId(body.moduleId) : undefined,
     },
   );
   return jsonDataResponse(result, context.tracing);
@@ -1212,11 +1140,7 @@ export async function handleGetAdministrationDashboard(
   routeContext?: RouteContext,
 ) {
   const dashboardId = asAdministrationDashboardId(
-    await param(
-      routeContext,
-      "dashboardId",
-      administrationDashboardIdParamSchema,
-    ),
+    await param(routeContext, "dashboardId", administrationDashboardIdParamSchema),
   );
   const gateway = await requireAdministrationGateway();
   const result = await gateway.administration.dashboards.get(
@@ -1232,11 +1156,7 @@ export async function handleUpdateAdministrationDashboard(
   routeContext?: RouteContext,
 ) {
   const dashboardId = asAdministrationDashboardId(
-    await param(
-      routeContext,
-      "dashboardId",
-      administrationDashboardIdParamSchema,
-    ),
+    await param(routeContext, "dashboardId", administrationDashboardIdParamSchema),
   );
   const body = await parseJsonBody(
     request,
@@ -1261,11 +1181,7 @@ export async function handleListAdministrationWidgets(
   routeContext?: RouteContext,
 ) {
   const dashboardId = asAdministrationDashboardId(
-    await param(
-      routeContext,
-      "dashboardId",
-      administrationDashboardIdParamSchema,
-    ),
+    await param(routeContext, "dashboardId", administrationDashboardIdParamSchema),
   );
   const query = parseQuery(
     administrationOptionalModuleListQuerySchema,
@@ -1287,11 +1203,7 @@ export async function handleCreateAdministrationWidget(
 ) {
   const dashboardIdFromPath = routeContext
     ? asAdministrationDashboardId(
-        await param(
-          routeContext,
-          "dashboardId",
-          administrationDashboardIdParamSchema,
-        ),
+        await param(routeContext, "dashboardId", administrationDashboardIdParamSchema),
       )
     : undefined;
   const body = await parseJsonBody(
@@ -1299,10 +1211,9 @@ export async function handleCreateAdministrationWidget(
     createAdministrationWidgetBodySchema,
     PLATFORM_API_MAX_BODY_BYTES,
   );
-  const dashboardId = dashboardIdFromPath
-    ?? (body.dashboardId
-      ? asAdministrationDashboardId(body.dashboardId)
-      : undefined);
+  const dashboardId =
+    dashboardIdFromPath ??
+    (body.dashboardId ? asAdministrationDashboardId(body.dashboardId) : undefined);
   if (!dashboardId) {
     throw new PlatformApiHttpError(400, {
       code: "VALIDATION_ERROR",
@@ -1310,16 +1221,13 @@ export async function handleCreateAdministrationWidget(
     });
   }
   const gateway = await requireAdministrationGateway();
-  const result = await gateway.administration.widgets.create(
-    context.serviceContext,
-    {
-      dashboardId,
-      key: body.key,
-      name: body.name,
-      kind: body.kind,
-      ordering: body.ordering,
-    },
-  );
+  const result = await gateway.administration.widgets.create(context.serviceContext, {
+    dashboardId,
+    key: body.key,
+    name: body.name,
+    kind: body.kind,
+    ordering: body.ordering,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1353,10 +1261,10 @@ export async function handleUpdateAdministrationWidget(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireAdministrationGateway();
-  const result = await gateway.administration.widgets.update(
-    context.serviceContext,
-    { widgetId, ...body },
-  );
+  const result = await gateway.administration.widgets.update(context.serviceContext, {
+    widgetId,
+    ...body,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1391,13 +1299,10 @@ export async function handleCreateAdministrationMetadata(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireAdministrationGateway();
-  const result = await gateway.administration.metadata.create(
-    context.serviceContext,
-    {
-      ...body,
-      moduleId: asAdministrationModuleId(body.moduleId),
-    },
-  );
+  const result = await gateway.administration.metadata.create(context.serviceContext, {
+    ...body,
+    moduleId: asAdministrationModuleId(body.moduleId),
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1431,10 +1336,10 @@ export async function handleUpdateAdministrationMetadata(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireAdministrationGateway();
-  const result = await gateway.administration.metadata.update(
-    context.serviceContext,
-    { metadataId, ...body },
-  );
+  const result = await gateway.administration.metadata.update(context.serviceContext, {
+    metadataId,
+    ...body,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1485,11 +1390,7 @@ export async function handleGetAdministrationReference(
   routeContext?: RouteContext,
 ) {
   const referenceId = asAdministrationReferenceId(
-    await param(
-      routeContext,
-      "referenceId",
-      administrationReferenceIdParamSchema,
-    ),
+    await param(routeContext, "referenceId", administrationReferenceIdParamSchema),
   );
   const gateway = await requireAdministrationGateway();
   const result = await gateway.administration.references.get(
@@ -1579,7 +1480,12 @@ export async function handleListAdministrationDiagnostics(
         administrationEnabled: bootstrap.administrationEnabled,
         persistenceMode: bootstrap.administrationReadiness?.persistenceMode,
       }),
-      health: { ...health, httpEnabled: true, workbenchEnabled: false, runtimeAdminEnabled: false },
+      health: {
+        ...health,
+        httpEnabled: true,
+        workbenchEnabled: false,
+        runtimeAdminEnabled: false,
+      },
       readiness: {
         ...readiness,
         httpEnabled: true,
@@ -1604,11 +1510,7 @@ export async function handleGetAdministrationDiagnostic(
   routeContext?: RouteContext,
 ) {
   const diagnosticId = asAdministrationDiagnosticId(
-    await param(
-      routeContext,
-      "diagnosticId",
-      administrationDiagnosticIdParamSchema,
-    ),
+    await param(routeContext, "diagnosticId", administrationDiagnosticIdParamSchema),
   );
   const gateway = await requireAdministrationGateway();
   const result = await gateway.administration.diagnostics.get(

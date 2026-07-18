@@ -16,6 +16,6 @@
     "@apzhub/config": "workspace:*",
     "@apzhub/observe-contracts": "workspace:*",
     "@apzhub/observe-core": "workspace:*",
-    "drizzle-orm": "^0.44.2"
+    "drizzle-orm": "^0.45.2"
   }
 }

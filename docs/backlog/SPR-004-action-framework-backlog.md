@@ -4,7 +4,7 @@
 > **Milestone:** 4 — Command / Action Framework  
 > **Mode:** Implementation Mode (Architecture Baseline v1.0 frozen)  
 > **Status:** Backlog approved — **AF-001 complete; await review before AF-002**  
-> **Authority:** [SPR-004 sprint guide](./SPR-004-action-framework.md) · [Architecture Baseline v1.0](../architecture/APZHUB-Architecture-Baseline-v1.0.md) · [019 — Command Palette](../019-universal-command-palette-action-framework.md)
+> **Authority:** [SPR-004 sprint guide](../sprint/SPR-004-action-framework.md) · [Architecture Baseline v1.0](../architecture/APZHUB-Architecture-Baseline-v1.0.md) · [019 — Command Palette](../019-universal-command-palette-action-framework.md)
 
 ---
 

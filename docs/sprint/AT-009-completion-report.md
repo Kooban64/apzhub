@@ -46,8 +46,8 @@ Implement client hydration for the Activity & Timeline Framework — read-only m
 | -------------------------- | --------------------------------------------------------------------------------------------- |
 | Client hydration factories | `src/client/`                                                                                 |
 | React provider + hooks     | `src/react/`                                                                                  |
-| Client hydration spec      | [CLIENT-HYDRATION.md](../packages/activity-timeline-framework/docs/CLIENT-HYDRATION.md)       |
-| React API doc              | [REACT-API.md](../packages/activity-timeline-framework/docs/REACT-API.md)                     |
+| Client hydration spec      | [CLIENT-HYDRATION.md](../../packages/activity-timeline-framework/docs/CLIENT-HYDRATION.md)    |
+| React API doc              | [REACT-API.md](../../packages/activity-timeline-framework/docs/REACT-API.md)                  |
 | Updated specification      | [SPR-007-ATF-activity-client-hydration.md](../specs/SPR-007-ATF-activity-client-hydration.md) |
 
 ---

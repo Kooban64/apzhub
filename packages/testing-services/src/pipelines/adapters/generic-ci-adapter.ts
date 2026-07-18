@@ -14,14 +14,20 @@ function asObject(input: unknown): Record<string, unknown> {
   if (typeof input === "string") {
     const parsed: unknown = JSON.parse(input);
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
-      throw new DomainRuleError("INVALID_PAYLOAD", "Generic CI payload must be a JSON object");
+      throw new DomainRuleError(
+        "INVALID_PAYLOAD",
+        "Generic CI payload must be a JSON object",
+      );
     }
     return parsed as Record<string, unknown>;
   }
   if (input && typeof input === "object" && !Array.isArray(input)) {
     return input as Record<string, unknown>;
   }
-  throw new DomainRuleError("INVALID_PAYLOAD", "Generic CI payload must be a JSON object");
+  throw new DomainRuleError(
+    "INVALID_PAYLOAD",
+    "Generic CI payload must be a JSON object",
+  );
 }
 
 function readString(
@@ -178,10 +184,7 @@ export function createGenericCiAdapter(): PipelineResultAdapter {
       const obj = asObject(input);
       const jobs = parseJobs(obj.jobs);
       const stages = parseStages(obj.stages, jobs);
-      const flatJobs =
-        jobs.length > 0
-          ? jobs
-          : stages.flatMap((s) => s.jobs ?? []);
+      const flatJobs = jobs.length > 0 ? jobs : stages.flatMap((s) => s.jobs ?? []);
       const status = normalizeStatus(readString(obj, "status", "overallStatus"));
       const summaryRaw =
         typeof obj.summary === "object" && obj.summary
@@ -203,24 +206,15 @@ export function createGenericCiAdapter(): PipelineResultAdapter {
           ? {
               name: readString(obj.environment as Record<string, unknown>, "name"),
               url: readString(obj.environment as Record<string, unknown>, "url"),
-              branch: readString(
-                obj.environment as Record<string, unknown>,
-                "branch",
-              ),
-              commit: readString(
-                obj.environment as Record<string, unknown>,
-                "commit",
-              ),
+              branch: readString(obj.environment as Record<string, unknown>, "branch"),
+              commit: readString(obj.environment as Record<string, unknown>, "commit"),
               tag: readString(obj.environment as Record<string, unknown>, "tag"),
               buildNumber: readString(
                 obj.environment as Record<string, unknown>,
                 "buildNumber",
                 "build",
               ),
-              region: readString(
-                obj.environment as Record<string, unknown>,
-                "region",
-              ),
+              region: readString(obj.environment as Record<string, unknown>, "region"),
               os: readString(obj.environment as Record<string, unknown>, "os"),
               arch: readString(obj.environment as Record<string, unknown>, "arch"),
               nodeVersion: readString(
@@ -228,8 +222,7 @@ export function createGenericCiAdapter(): PipelineResultAdapter {
                 "nodeVersion",
               ),
               extra:
-                typeof (obj.environment as Record<string, unknown>).extra ===
-                "object"
+                typeof (obj.environment as Record<string, unknown>).extra === "object"
                   ? ((obj.environment as Record<string, unknown>).extra as Record<
                       string,
                       string
@@ -242,17 +235,12 @@ export function createGenericCiAdapter(): PipelineResultAdapter {
             };
 
       const externalRunRef =
-        readString(obj, "externalRunRef", "runId", "id") ??
-        `generic-ci-${Date.now()}`;
+        readString(obj, "externalRunRef", "runId", "id") ?? `generic-ci-${Date.now()}`;
 
       return {
         providerKind: "generic_ci",
         externalRunRef,
-        externalPipelineRef: readString(
-          obj,
-          "externalPipelineRef",
-          "pipelineRef",
-        ),
+        externalPipelineRef: readString(obj, "externalPipelineRef", "pipelineRef"),
         pipelineKey: readString(obj, "pipelineKey", "key"),
         pipelineName: readString(obj, "pipelineName", "name"),
         status,

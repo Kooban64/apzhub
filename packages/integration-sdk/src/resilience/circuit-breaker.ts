@@ -52,7 +52,9 @@ export class DefaultCircuitBreaker implements CircuitBreaker {
   private readonly openDurationMs: number;
   private readonly clock: CircuitBreakerClock;
 
-  constructor(options: CircuitBreakerOptions & { readonly clock?: CircuitBreakerClock } = {}) {
+  constructor(
+    options: CircuitBreakerOptions & { readonly clock?: CircuitBreakerClock } = {},
+  ) {
     this.failureThreshold = options.failureThreshold ?? DEFAULT_FAILURE_THRESHOLD;
     this.halfOpenSuccessThreshold =
       options.halfOpenSuccessThreshold ?? DEFAULT_HALF_OPEN_SUCCESS_THRESHOLD;
@@ -110,7 +112,10 @@ export class DefaultCircuitBreaker implements CircuitBreaker {
       return;
     }
 
-    if (this.currentState === "closed" && this.consecutiveFailures >= this.failureThreshold) {
+    if (
+      this.currentState === "closed" &&
+      this.consecutiveFailures >= this.failureThreshold
+    ) {
       this.transitionTo("open");
     }
   }

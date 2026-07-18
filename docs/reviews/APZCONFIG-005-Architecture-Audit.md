@@ -13,14 +13,14 @@ Workbench → Typed Client → HTTP → Gateway → RequestPipeline → Authz �
 
 ## Findings
 
-| Layer | Isolation |
-| --- | --- |
-| Workbench | Typed-client facades only; no gateway/core/persistence |
-| Typed client | `/api/v1/configuration` only |
-| HTTP handlers | `gateway.configuration.*` only |
-| Platform services | Thin wrappers; rules in Core |
-| Core | No persistence implementation deps |
-| Persistence | No platform-services / HTTP |
+| Layer             | Isolation                                              |
+| ----------------- | ------------------------------------------------------ |
+| Workbench         | Typed-client facades only; no gateway/core/persistence |
+| Typed client      | `/api/v1/configuration` only                           |
+| HTTP handlers     | `gateway.configuration.*` only                         |
+| Platform services | Thin wrappers; rules in Core                           |
+| Core              | No persistence implementation deps                     |
+| Persistence       | No platform-services / HTTP                            |
 
 ## Prohibited surfaces absent
 

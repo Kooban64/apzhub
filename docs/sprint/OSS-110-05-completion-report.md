@@ -17,24 +17,24 @@ OSS-110-05 delivers a production-ready PostgreSQL `EntityMappingStore` behind th
 
 ## Milestone scope delivered
 
-| Deliverable | Status |
-|-------------|--------|
-| PostgreSQL schema + migration `0015` | ✅ |
-| DB uniqueness / check / indexes | ✅ |
-| `PostgresEntityMappingStore` | ✅ |
-| Transaction behaviour (update/remove) | ✅ |
-| Error translation (no SQL/credential leak) | ✅ |
-| Tenant + organisation isolation | ✅ |
-| Bootstrap (`ENTITY_MAPPING_STORE_MODE`) | ✅ |
-| In-memory compatibility | ✅ |
-| Shared contract test suite | ✅ |
-| PostgreSQL integration tests | ✅ |
-| MappingOrchestrator compatibility tests | ✅ |
-| Persistence logging/metrics hooks | ✅ |
-| Documentation + ADR-0049 | ✅ |
-| Production AuthorizationProvider | ⏸ Excluded |
-| API routes / UI / Plane task CRUD | ⏸ Excluded |
-| Caching / background reconciliation | ⏸ Excluded |
+| Deliverable                                | Status     |
+| ------------------------------------------ | ---------- |
+| PostgreSQL schema + migration `0015`       | ✅         |
+| DB uniqueness / check / indexes            | ✅         |
+| `PostgresEntityMappingStore`               | ✅         |
+| Transaction behaviour (update/remove)      | ✅         |
+| Error translation (no SQL/credential leak) | ✅         |
+| Tenant + organisation isolation            | ✅         |
+| Bootstrap (`ENTITY_MAPPING_STORE_MODE`)    | ✅         |
+| In-memory compatibility                    | ✅         |
+| Shared contract test suite                 | ✅         |
+| PostgreSQL integration tests               | ✅         |
+| MappingOrchestrator compatibility tests    | ✅         |
+| Persistence logging/metrics hooks          | ✅         |
+| Documentation + ADR-0049                   | ✅         |
+| Production AuthorizationProvider           | ⏸ Excluded |
+| API routes / UI / Plane task CRUD          | ⏸ Excluded |
+| Caching / background reconciliation        | ⏸ Excluded |
 
 ---
 
@@ -58,28 +58,28 @@ EntityMappingStore (contract)
 
 Table `platform_entity_mapping`:
 
-| Column | Notes |
-|--------|-------|
-| `platform_id` | PK — APZHUB global ID |
-| `entity_type` | CHECK constrained canonical types |
-| `provider_id` / `integration_id` | Provider binding |
-| `provider_native_id` | Engine-native ID |
-| `parent_platform_id` / `parent_provider_native_id` | Optional hierarchy |
-| `tenant_id` | Required tenant scope |
-| `organisation_id` | Optional organisation scope |
-| `status` | CHECK: active/inactive/pending/orphaned |
-| `metadata` | jsonb string map |
-| `revision` | Optimistic concurrency (≥ 1) |
-| `created_at` / `updated_at` | timestamptz |
+| Column                                             | Notes                                   |
+| -------------------------------------------------- | --------------------------------------- |
+| `platform_id`                                      | PK — APZHUB global ID                   |
+| `entity_type`                                      | CHECK constrained canonical types       |
+| `provider_id` / `integration_id`                   | Provider binding                        |
+| `provider_native_id`                               | Engine-native ID                        |
+| `parent_platform_id` / `parent_provider_native_id` | Optional hierarchy                      |
+| `tenant_id`                                        | Required tenant scope                   |
+| `organisation_id`                                  | Optional organisation scope             |
+| `status`                                           | CHECK: active/inactive/pending/orphaned |
+| `metadata`                                         | jsonb string map                        |
+| `revision`                                         | Optimistic concurrency (≥ 1)            |
+| `created_at` / `updated_at`                        | timestamptz                             |
 
 ---
 
 ## Migration list
 
-| Tag | Purpose |
-|-----|---------|
-| `0015_platform_entity_mapping` | Create mapping table, checks, indexes |
-| Journal fix | Restored missing `0011_platform_identity` journal entry for clean installs |
+| Tag                            | Purpose                                                                    |
+| ------------------------------ | -------------------------------------------------------------------------- |
+| `0015_platform_entity_mapping` | Create mapping table, checks, indexes                                      |
+| Journal fix                    | Restored missing `0011_platform_identity` journal entry for clean installs |
 
 Procedure: `pnpm db:migrate` (uses `scripts/db-migrate.ts` → drizzle migrate).
 
@@ -108,12 +108,12 @@ Procedure: `pnpm db:migrate` (uses `scripts/db-migrate.ts` → drizzle migrate).
 
 ## Transaction behaviour
 
-| Operation | Behaviour |
-|-----------|-----------|
-| create | Single insert; unique violations → `MAPPING_CONFLICT` |
-| update / deactivate | Transaction + revision predicate |
-| remove | Transactional delete |
-| Provider + DB | Never combined; reconciliation-required on persist failure |
+| Operation           | Behaviour                                                  |
+| ------------------- | ---------------------------------------------------------- |
+| create              | Single insert; unique violations → `MAPPING_CONFLICT`      |
+| update / deactivate | Transaction + revision predicate                           |
+| remove              | Transactional delete                                       |
+| Provider + DB       | Never combined; reconciliation-required on persist failure |
 
 ---
 
@@ -133,9 +133,9 @@ Procedure: `pnpm db:migrate` (uses `scripts/db-migrate.ts` → drizzle migrate).
 
 ## Bootstrap and configuration
 
-| Mode | When |
-|------|------|
-| memory | Default non-production; tests; explicit `ENTITY_MAPPING_STORE_MODE=memory` |
+| Mode     | When                                                                                       |
+| -------- | ------------------------------------------------------------------------------------------ |
+| memory   | Default non-production; tests; explicit `ENTITY_MAPPING_STORE_MODE=memory`                 |
 | postgres | Default production; explicit `ENTITY_MAPPING_STORE_MODE=postgres` + healthy `DATABASE_URL` |
 
 Production memory requires `ENTITY_MAPPING_ALLOW_MEMORY_IN_PRODUCTION=true`.  
@@ -186,14 +186,14 @@ packages/platform-services/README.md
 
 ## Tests added / statistics
 
-| Suite | Result |
-|-------|--------|
-| Shared contract (in-memory) | 11 passed |
-| Shared contract + PG integration + bootstrap + orchestrator | 28 passed |
-| `@apzhub/platform-services` total | **96 passed** |
-| `@apzhub/platform-service-contracts` | 8 passed |
-| Plane adapter (`integrations/plane`) | 37 passed |
-| Related (services + contracts + sdk + governance + plane) | **185+** green in combined runs |
+| Suite                                                       | Result                          |
+| ----------------------------------------------------------- | ------------------------------- |
+| Shared contract (in-memory)                                 | 11 passed                       |
+| Shared contract + PG integration + bootstrap + orchestrator | 28 passed                       |
+| `@apzhub/platform-services` total                           | **96 passed**                   |
+| `@apzhub/platform-service-contracts`                        | 8 passed                        |
+| Plane adapter (`integrations/plane`)                        | 37 passed                       |
+| Related (services + contracts + sdk + governance + plane)   | **185+** green in combined runs |
 
 ---
 
@@ -205,15 +205,15 @@ Mapping package area (~87% lines scoped to `packages/platform-services/src/mappi
 
 ## Quality-gate results
 
-| Gate | Result |
-|------|--------|
-| Typecheck (platform-services, contracts, config) | Pass |
-| ESLint (platform-services) | Pass |
-| Unit + contract tests | Pass |
-| PostgreSQL integration tests | Pass |
-| `pnpm db:migrate` | Pass |
-| Plane adapter tests | Pass |
-| Plane source modified | **No** |
+| Gate                                             | Result |
+| ------------------------------------------------ | ------ |
+| Typecheck (platform-services, contracts, config) | Pass   |
+| ESLint (platform-services)                       | Pass   |
+| Unit + contract tests                            | Pass   |
+| PostgreSQL integration tests                     | Pass   |
+| `pnpm db:migrate`                                | Pass   |
+| Plane adapter tests                              | Pass   |
+| Plane source modified                            | **No** |
 
 ---
 
@@ -247,22 +247,22 @@ Mapping package area (~87% lines scoped to `packages/platform-services/src/mappi
 
 ## Technical debt
 
-| Item | Notes |
-|------|-------|
-| No RLS policies on mapping table yet | Application scope checks only |
-| organisationId not in uniqueness key | Intentional for this milestone |
+| Item                                                                 | Notes                                   |
+| -------------------------------------------------------------------- | --------------------------------------- |
+| No RLS policies on mapping table yet                                 | Application scope checks only           |
+| organisationId not in uniqueness key                                 | Intentional for this milestone          |
 | Global pg pool ignores alternate connection strings after first init | Pre-existing `@apzhub/config` behaviour |
-| Automated reconciliation / repair | Explicitly out of scope |
+| Automated reconciliation / repair                                    | Explicitly out of scope                 |
 
 ---
 
 ## Risks
 
-| Risk | Mitigation |
-|------|------------|
+| Risk                                      | Mitigation                                                      |
+| ----------------------------------------- | --------------------------------------------------------------- |
 | Operators leave memory mode in production | Default postgres in production + hard fail without escape hatch |
-| Unique index drift vs in-memory rules | Shared contract suite on both implementations |
-| Journal gap for 0011 on older DBs | IF NOT EXISTS migration; journal restored |
+| Unique index drift vs in-memory rules     | Shared contract suite on both implementations                   |
+| Journal gap for 0011 on older DBs         | IF NOT EXISTS migration; journal restored                       |
 
 ---
 

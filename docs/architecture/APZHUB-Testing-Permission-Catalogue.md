@@ -33,20 +33,20 @@ All APZ TCMS keys are valid `PlatformPermissionKey` values for production authz.
 
 ## Prefix groups
 
-| Prefix | Count (approx.) | Purpose |
-| ------ | --------------- | ------- |
-| `testing.*` | 22 | Workspace, requirements, plans, suites, cases, executions, admin |
-| `certification.*` | 13 | Records, gates, review, approve, reject, audit, admin |
-| `evidence.*` | 4 | List, read, register, admin |
-| `traceability.*` | 4 | List, read, link, admin |
-| `automation.*` | 10 | Jobs, import, view, history, adapters, coverage, admin |
-| `reporting.*` | 3 | View, generate, admin |
-| `approval.*` | 6 | List, read, request, decide, sign, admin |
-| `dashboard.*` | 3 | View, refresh, admin |
-| `quality.*` | 3 | View, compute, admin |
-| `coverage.*` | 3 | View, compute, admin |
-| `defects.*` | 4 | View, link, update, admin |
-| `release.*` | 3 | View, compute, admin |
+| Prefix            | Count (approx.) | Purpose                                                          |
+| ----------------- | --------------- | ---------------------------------------------------------------- |
+| `testing.*`       | 22              | Workspace, requirements, plans, suites, cases, executions, admin |
+| `certification.*` | 13              | Records, gates, review, approve, reject, audit, admin            |
+| `evidence.*`      | 4               | List, read, register, admin                                      |
+| `traceability.*`  | 4               | List, read, link, admin                                          |
+| `automation.*`    | 10              | Jobs, import, view, history, adapters, coverage, admin           |
+| `reporting.*`     | 3               | View, generate, admin                                            |
+| `approval.*`      | 6               | List, read, request, decide, sign, admin                         |
+| `dashboard.*`     | 3               | View, refresh, admin                                             |
+| `quality.*`       | 3               | View, compute, admin                                             |
+| `coverage.*`      | 3               | View, compute, admin                                             |
+| `defects.*`       | 4               | View, link, update, admin                                        |
+| `release.*`       | 3               | View, compute, admin                                             |
 
 Full enumerated list: `APZ_TCMS_PERMISSIONS` in `@apzhub/testing-contracts` (single array export).
 
@@ -54,11 +54,11 @@ Full enumerated list: `APZ_TCMS_PERMISSIONS` in `@apzhub/testing-contracts` (sin
 
 ## Manifest alignment
 
-| Manifest | Permissions declared |
-| -------- | -------------------- |
-| `services/testing/service.yaml` | Core testing + evidence + traceability + automation jobs + reporting + dashboard |
-| `services/certification/service.yaml` | Certification subset |
-| `services/testing/manifests/*.yaml` | View-level keys for workbench nav |
+| Manifest                              | Permissions declared                                                             |
+| ------------------------------------- | -------------------------------------------------------------------------------- |
+| `services/testing/service.yaml`       | Core testing + evidence + traceability + automation jobs + reporting + dashboard |
+| `services/certification/service.yaml` | Certification subset                                                             |
+| `services/testing/manifests/*.yaml`   | View-level keys for workbench nav                                                |
 
 Manifest keys must remain subsets of `APZ_TCMS_PERMISSIONS`.
 

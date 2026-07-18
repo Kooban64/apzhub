@@ -47,18 +47,21 @@ import {
 
 const ROOT = join(__dirname, "../..");
 
+/** Pins refreshed under APZSEARCH-018 certification (governance only). */
 const CERTIFIED_VERSIONS: Record<string, string> = {
-  "packages/search-integration/package.json": "0.1.0",
+  "packages/search-integration/package.json": "0.2.0",
   "packages/search-projects/package.json": "0.1.0",
   "packages/search-support/package.json": "0.1.0",
   "packages/search-documents/package.json": "0.1.0",
   "packages/search-testing/package.json": "0.1.1",
   "packages/search-reporting/package.json": "0.1.0",
+  "packages/search-orchestrator/package.json": "0.1.0",
+  "packages/search-publication-admin/package.json": "0.1.0",
   "packages/search-contracts/package.json": "0.4.0",
   "packages/search-persistence/package.json": "0.2.0",
   "packages/integration-search-sdk/package.json": "0.1.0",
   "integrations/meilisearch/package.json": "0.1.0",
-  "packages/platform-services/package.json": "0.19.0",
+  "packages/platform-services/package.json": "0.25.0",
 };
 
 const PUB_OPS = [
@@ -193,21 +196,21 @@ describe("APZSEARCH-015 Search Publication Certification", () => {
       }
     }
 
-    expect(projects.publisher.diagnostics(projectsCtx).supportedEntityTypes.length).toBeGreaterThan(
-      0,
-    );
+    expect(
+      projects.publisher.diagnostics(projectsCtx).supportedEntityTypes.length,
+    ).toBeGreaterThan(0);
     expect(projects.publisher.statistics(projectsCtx)).toBeDefined();
-    expect(support.publisher.diagnostics(supportCtx).supportedEntityTypes.length).toBeGreaterThan(
-      0,
-    );
+    expect(
+      support.publisher.diagnostics(supportCtx).supportedEntityTypes.length,
+    ).toBeGreaterThan(0);
     expect(support.publisher.statistics(supportCtx)).toBeDefined();
     expect(
       documents.publisher.diagnostics(documentsCtx).supportedEntityTypes.length,
     ).toBeGreaterThan(0);
     expect(documents.publisher.statistics(documentsCtx)).toBeDefined();
-    expect(testing.publisher.diagnostics(testingCtx).supportedEntityTypes.length).toBeGreaterThan(
-      0,
-    );
+    expect(
+      testing.publisher.diagnostics(testingCtx).supportedEntityTypes.length,
+    ).toBeGreaterThan(0);
     expect(testing.publisher.statistics(testingCtx)).toBeDefined();
     expect(
       reporting.publisher.diagnostics(reportingCtx).supportedEntityTypes.length,
@@ -283,13 +286,14 @@ describe("APZSEARCH-015 Search Publication Certification", () => {
   });
 
   it("asserts no new adapter functionality (frozen versions unchanged)", () => {
+    // search-integration pin refreshed under APZSEARCH-016/018 (0.2.0); product adapters remain 0.1.x
     for (const [path, expected] of Object.entries({
       "packages/search-projects/package.json": "0.1.0",
       "packages/search-support/package.json": "0.1.0",
       "packages/search-documents/package.json": "0.1.0",
       "packages/search-testing/package.json": "0.1.1",
       "packages/search-reporting/package.json": "0.1.0",
-      "packages/search-integration/package.json": "0.1.0",
+      "packages/search-integration/package.json": "0.2.0",
     })) {
       expect(JSON.parse(readFileSync(join(ROOT, path), "utf8")).version).toBe(expected);
     }

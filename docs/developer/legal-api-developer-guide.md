@@ -1,7 +1,7 @@
 # Law Platform API — Developer Guide
 
 > **Story:** LAW-014-07  
-> **Interactive docs:** [/api/docs](/api/docs)
+> **Interactive docs:** [/api/docs](../developer/legal-api-developer-guide.md)
 
 ---
 
@@ -13,13 +13,13 @@ The Law Platform REST API provides tenant-scoped access to legal business data a
 
 ## Quick links
 
-| Resource              | URL                                                  |
-| --------------------- | ---------------------------------------------------- |
-| Documentation landing | [/api/docs](/api/docs)                               |
-| OpenAPI YAML          | [/api/law/v1/openapi.yaml](/api/law/v1/openapi.yaml) |
-| OpenAPI JSON          | [/api/law/v1/openapi.json](/api/law/v1/openapi.json) |
-| Health                | `/api/law/v1/health`                                 |
-| Diagnostics           | `/api/law/v1/diagnostics` (authenticated)            |
+| Resource              | URL                                                      |
+| --------------------- | -------------------------------------------------------- |
+| Documentation landing | [/api/docs](../developer/legal-api-developer-guide.md)   |
+| OpenAPI YAML          | [/api/law/v1/openapi.yaml](../specs/LAW-OpenAPI-v1.yaml) |
+| OpenAPI JSON          | [/api/law/v1/openapi.json](../specs/LAW-OpenAPI-v1.yaml) |
+| Health                | `/api/law/v1/health`                                     |
+| Diagnostics           | `/api/law/v1/diagnostics` (authenticated)                |
 
 ---
 
@@ -45,11 +45,11 @@ The Law Platform REST API provides tenant-scoped access to legal business data a
 
 ## Collections
 
-| Format              | Path                                                                                                                     |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Postman Collection  | [/specs/collections/LAW-OpenAPI-v1.postman_collection.json](/specs/collections/LAW-OpenAPI-v1.postman_collection.json)   |
-| Postman Environment | [/specs/collections/LAW-OpenAPI-v1.postman_environment.json](/specs/collections/LAW-OpenAPI-v1.postman_environment.json) |
-| Bruno               | [/specs/collections/bruno/LAW-OpenAPI-v1](/specs/collections/bruno/LAW-OpenAPI-v1)                                       |
+| Format              | Path                                                                                                                       |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Postman Collection  | [/specs/collections/LAW-OpenAPI-v1.postman_collection.json](../specs/collections/LAW-OpenAPI-v1.postman_collection.json)   |
+| Postman Environment | [/specs/collections/LAW-OpenAPI-v1.postman_environment.json](../specs/collections/LAW-OpenAPI-v1.postman_environment.json) |
+| Bruno               | [/specs/collections/bruno/LAW-OpenAPI-v1](../specs/collections/bruno/LAW-OpenAPI-v1)                                       |
 
 Regenerate: `pnpm openapi:collections`
 
@@ -68,4 +68,4 @@ Regenerate: `pnpm openapi:collections`
 
 ## API explorer
 
-The [/api/docs](/api/docs) page includes Swagger UI for interactive testing of GET, POST, PATCH, and DELETE against live endpoints. Sign in first, then set `x-tenant-id` in request headers.
+The [/api/docs](../developer/legal-api-developer-guide.md) page includes Swagger UI for interactive testing of GET, POST, PATCH, and DELETE against live endpoints. Sign in first, then set `x-tenant-id` in request headers.

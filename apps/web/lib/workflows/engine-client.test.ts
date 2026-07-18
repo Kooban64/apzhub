@@ -5,9 +5,7 @@
 import { describe, expect, it, vi, afterEach } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
 
-import {
-  createHttpWorkflowEngineClient,
-} from "./engine-client";
+import { createHttpWorkflowEngineClient } from "./engine-client";
 import {
   WorkflowEngineClientError,
   toWorkflowEngineUserMessage,
@@ -39,13 +37,11 @@ afterEach(() => {
 describe("APZWORKFLOW-008 workflow engine client", () => {
   it("exposes engine API base under /api/v1/workflows/engine", () => {
     expect(WORKFLOW_ENGINE_API_BASE).toBe("/api/v1/workflows/engine");
-    expect(isWorkflowEngineApiPath("/api/v1/workflows/engine/workflows")).toBe(
-      true,
-    );
+    expect(isWorkflowEngineApiPath("/api/v1/workflows/engine/workflows")).toBe(true);
     expect(isWorkflowEngineApiPath("/api/v1/workflows/workflows")).toBe(false);
-    expect(() =>
-      assertWorkflowEngineApiPath("/api/v1/workflows/engine/n8n"),
-    ).toThrow(/Forbidden/);
+    expect(() => assertWorkflowEngineApiPath("/api/v1/workflows/engine/n8n")).toThrow(
+      /Forbidden/,
+    );
   });
 
   it("mock client returns metadata-only fixtures", async () => {
@@ -165,10 +161,9 @@ describe("APZWORKFLOW-008 workflow engine client", () => {
         );
       }
       if (path.endsWith("/engine/validate")) {
-        return new Response(
-          JSON.stringify({ data: { ok: true, message: "ok" } }),
-          { status: 200 },
-        );
+        return new Response(JSON.stringify({ data: { ok: true, message: "ok" } }), {
+          status: 200,
+        });
       }
       if (path.endsWith("/engine/templates")) {
         return new Response(
@@ -248,23 +243,17 @@ describe("APZWORKFLOW-008 workflow engine client", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     const client = createHttpWorkflowEngineClient();
-    expect((await client.listWorkflows({ limit: 10 })).items[0]?.name).toBe(
-      "Flow",
-    );
+    expect((await client.listWorkflows({ limit: 10 })).items[0]?.name).toBe("Flow");
     expect((await client.getWorkflow("1")).tagNames).toContain("ops");
     expect((await client.listTemplates()).items).toHaveLength(1);
     expect((await client.getTemplate("1")).id).toBe("1");
     expect((await client.listTags()).items[0]?.name).toBe("ops");
     expect((await client.listUsers()).items).toHaveLength(1);
     expect((await client.listProjects()).items[0]?.id).toBe("p1");
-    expect((await client.capabilities()).unsupportedOperations).toContain(
-      "execute",
-    );
+    expect((await client.capabilities()).unsupportedOperations).toContain("execute");
     expect((await client.health()).level).toBe("healthy");
     expect((await client.diagnostics()).adapterVersion).toBe("0.1.0");
-    expect((await client.compatibility()).compatibilityStatus).toBe(
-      "compatible",
-    );
+    expect((await client.compatibility()).compatibilityStatus).toBe("compatible");
     expect((await client.validate()).ok).toBe(true);
 
     await expect(client.getWorkflow("missing")).rejects.toBeInstanceOf(

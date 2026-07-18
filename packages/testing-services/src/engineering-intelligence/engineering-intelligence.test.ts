@@ -34,9 +34,7 @@ const ALL_PERMS = [
   "pipeline.*",
 ] as const;
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_1",
     userId: "user_1",
@@ -95,12 +93,8 @@ describe("engineering intelligence calculations (pure)", () => {
     });
     expect(score.score).toBeGreaterThan(0);
     expect(score.score).toBeLessThanOrEqual(100);
-    expect(score.components.find((c) => c.key === "failedTests")?.inverted).toBe(
-      true,
-    );
-    expect(score.components.find((c) => c.key === "coverage")?.inverted).toBe(
-      false,
-    );
+    expect(score.components.find((c) => c.key === "failedTests")?.inverted).toBe(true);
+    expect(score.components.find((c) => c.key === "coverage")?.inverted).toBe(false);
   });
 
   it("computes trend directions without forecasting", () => {
@@ -162,7 +156,12 @@ describe("engineering intelligence services", () => {
   it("builds trends, benchmarks, and baselines", async () => {
     const services = ei();
     const c = ctx();
-    const series = await services.trends.buildSeries(c, "coverage", undefined, "weekly");
+    const series = await services.trends.buildSeries(
+      c,
+      "coverage",
+      undefined,
+      "weekly",
+    );
     expect(series.kind).toBe("coverage");
     expect(series.direction).toBeTruthy();
     const listed = await services.trends.listSeries(c);
@@ -231,9 +230,7 @@ describe("engineering intelligence services", () => {
     expect(snap.health.isDecision).toBe(false);
     expect(snap.trends.length).toBe(8);
     expect(snap.indicators.length).toBeGreaterThan(0);
-    expect(await services.intelligence.getSnapshot(c, String(snap.id))).toEqual(
-      snap,
-    );
+    expect(await services.intelligence.getSnapshot(c, String(snap.id))).toEqual(snap);
     expect((await services.intelligence.listSnapshots(c)).length).toBe(1);
   });
 
@@ -315,9 +312,9 @@ describe("engineering intelligence services", () => {
       sourceRefs: {},
       reasons: ["defect pressure"],
     });
-    expect(summary.factors.find((f) => f.key === "defect")?.reasons.length).toBeGreaterThan(
-      0,
-    );
+    expect(
+      summary.factors.find((f) => f.key === "defect")?.reasons.length,
+    ).toBeGreaterThan(0);
   });
 
   it("normalizes zero-sum weights to defaults", () => {
@@ -378,9 +375,7 @@ describe("engineering intelligence services", () => {
     const inputs = await services.aggregation.gatherInputs(c);
     expect(inputs.coverage).toBe(80);
     expect(inputs.openDefects).toBe(100);
-    expect(inputs.reasons.some((r) => r.includes("no quality snapshots"))).toBe(
-      true,
-    );
+    expect(inputs.reasons.some((r) => r.includes("no quality snapshots"))).toBe(true);
   });
 
   it("aggregates certification and pipeline health from SoR", async () => {

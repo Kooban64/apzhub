@@ -31,10 +31,7 @@ export function createCertificationService(
     async getCertificationRecord(ctx, id) {
       assertHasPermission(ctx, "certification.records.read");
       const row = requireFound(
-        await rt.persistence.certificationRecords.get(
-          toRepositoryContext(ctx),
-          id,
-        ),
+        await rt.persistence.certificationRecords.get(toRepositoryContext(ctx), id),
         "certification_record",
         id,
       );

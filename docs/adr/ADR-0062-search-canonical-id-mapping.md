@@ -1,11 +1,11 @@
 # ADR-0062: Search Canonical Document / Index ID Mapping
 
-| Field | Value |
-| --- | --- |
-| **Status** | Accepted |
-| **Date** | 2026-07-14 |
-| **Milestone** | APZSEARCH-006 |
-| **Deciders** | Owner / Architecture |
+| Field         | Value                |
+| ------------- | -------------------- |
+| **Status**    | Accepted             |
+| **Date**      | 2026-07-14           |
+| **Milestone** | APZSEARCH-006        |
+| **Deciders**  | Owner / Architecture |
 
 ---
 
@@ -26,11 +26,13 @@ Platform collections and documents have canonical APZHUB identifiers. Meilisearc
 ## Consequences
 
 ### Positive
+
 - Stable remapping across providers if indexes are rebuilt
 - Clear boundary: Platform Services own naming; adapters receive ready UIDs
 - Public API stays engine-agnostic
 
 ### Negative / accepted
+
 - Renaming a public collection requires coordinated index migration (future ops runbook)
 - Collision risk under extreme sanitisation — mitigated by prefix + length caps
 

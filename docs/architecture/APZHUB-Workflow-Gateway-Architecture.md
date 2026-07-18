@@ -33,14 +33,14 @@ Gateway methods accept `ServiceRequestContext` (pipeline). Thin impls map to `Wo
 
 ## Pipeline service names
 
-| Facet | `serviceName` |
-| ----- | ------------- |
-| workflows | `workflowWorkflows` |
-| versions | `workflowVersions` |
-| templates | `workflowTemplates` |
+| Facet      | `serviceName`        |
+| ---------- | -------------------- |
+| workflows  | `workflowWorkflows`  |
+| versions   | `workflowVersions`   |
+| templates  | `workflowTemplates`  |
 | categories | `workflowCategories` |
-| folders | `workflowFolders` |
+| folders    | `workflowFolders`    |
 | validation | `workflowValidation` |
-| audit | `workflowAudit` |
+| audit      | `workflowAudit`      |
 
 These keys must match `workflowPlatformOps` in the operation authorisation map.

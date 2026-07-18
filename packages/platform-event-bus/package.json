@@ -1,0 +1,20 @@
+{
+  "name": "@apzhub/platform-event-bus",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Event Bus & Webhook Ingress (OSS-100-12)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/platform-event-bus"
+  },
+  "dependencies": {
+    "@apzhub/event-notification-framework": "workspace:*",
+    "@apzhub/integration-sdk": "workspace:*",
+    "@apzhub/platform-outbox": "workspace:*"
+  }
+}

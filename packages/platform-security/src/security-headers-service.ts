@@ -23,9 +23,7 @@ export type {
   HttpSecuritySurface,
 } from "./http-security-header-types";
 
-export {
-  HTTP_SECURITY_HEADER_NAMES,
-} from "./http-security-header-types";
+export { HTTP_SECURITY_HEADER_NAMES } from "./http-security-header-types";
 
 export class SecurityHeadersService {
   private readonly http = new HttpSecurityHeaderService();

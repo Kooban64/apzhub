@@ -17,10 +17,10 @@ Delivered the APZHUB Platform Configuration foundation: contracts, domain core (
 Products → Platform Configuration → (future consumers / runtime)
 ```
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/configuration-contracts` | **0.1.0** |
-| `@apzhub/configuration-core` | **0.1.0** |
+| Package                             | Version   |
+| ----------------------------------- | --------- |
+| `@apzhub/configuration-contracts`   | **0.1.0** |
+| `@apzhub/configuration-core`        | **0.1.0** |
 | `@apzhub/configuration-persistence` | **0.1.0** |
 
 Distinct from `@apzhub/config` and runtime configuration-manager.
@@ -58,25 +58,25 @@ Domain, lifecycle, hierarchy, validation, versioning, permissions, in-memory per
 
 See [APZCONFIG-001 coverage baseline](../reviews/APZCONFIG-001-coverage-baseline.md).
 
-| Metric | Combined |
-| --- | ---: |
-| Lines | **95.48%** |
+| Metric    |   Combined |
+| --------- | ---------: |
+| Lines     | **95.48%** |
 | Functions | **95.32%** |
-| Branches | **81.61%** |
+| Branches  | **81.61%** |
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| Architecture / dependency / boundary audit | PASS (`pnpm audit:configuration-foundation`) |
-| Vitest | PASS |
-| Coverage ≥95% lines/functions · ≥80% branches | PASS |
+| Gate                                          | Result                                       |
+| --------------------------------------------- | -------------------------------------------- |
+| Architecture / dependency / boundary audit    | PASS (`pnpm audit:configuration-foundation`) |
+| Vitest                                        | PASS                                         |
+| Coverage ≥95% lines/functions · ≥80% branches | PASS                                         |
 
 ## Technical Debt
 
-- Platform Services + Gateway facet deferred to APZCONFIG-002  
-- No HTTP / Workbench  
-- No runtime apply / feature flags / secrets  
+- Platform Services + Gateway facet deferred to APZCONFIG-002
+- No HTTP / Workbench
+- No runtime apply / feature flags / secrets
 - Live Postgres integration tests deferred (mocked drizzle paths covered)
 
 ## Recommendation

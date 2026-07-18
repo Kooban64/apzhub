@@ -166,12 +166,21 @@ describe("service interface contracts", () => {
     type SearchOps = keyof import("./services/search-service").SearchService;
 
     expect(["listWorkspaces", "getWorkspace"] satisfies WorkspaceOps[]).toHaveLength(2);
-    expect(
-      ["listTeam", "getTeamMember", "addTeamMember", "updateTeamMember", "removeTeamMember"] satisfies TeamOps[],
-    ).toHaveLength(5);
-    expect(
-      ["listUsers", "getUser", "getUserByEmail", "getUserProfile", "createUser", "updateUser"] satisfies UserOps[],
-    ).toHaveLength(6);
+    expect([
+      "listTeam",
+      "getTeamMember",
+      "addTeamMember",
+      "updateTeamMember",
+      "removeTeamMember",
+    ] satisfies TeamOps[]).toHaveLength(5);
+    expect([
+      "listUsers",
+      "getUser",
+      "getUserByEmail",
+      "getUserProfile",
+      "createUser",
+      "updateUser",
+    ] satisfies UserOps[]).toHaveLength(6);
     expect(["search", "suggest"] satisfies SearchOps[]).toHaveLength(2);
   });
 
@@ -194,7 +203,8 @@ describe("service interface contracts", () => {
 
   it("defines TestingPlanService and TestingPlatformGateway contracts", () => {
     type TestingPlanOps = keyof import("./services/testing").TestingPlanService;
-    type TestingGatewaySlots = keyof import("./services/testing").TestingPlatformGateway;
+    type TestingGatewaySlots =
+      keyof import("./services/testing").TestingPlatformGateway;
     type TestPlan = import("@apzhub/testing-contracts").TestPlan;
 
     const planOps: TestingPlanOps[] = [
@@ -231,8 +241,10 @@ describe("service interface contracts", () => {
   });
 
   it("defines PlatformQualityGateway, PlatformReleaseGateway, and PlatformGovernanceGateway", () => {
-    type QualitySlots = keyof import("./services/platform-quality").PlatformQualityGateway;
-    type ReleaseSlots = keyof import("./services/platform-quality").PlatformReleaseGateway;
+    type QualitySlots =
+      keyof import("./services/platform-quality").PlatformQualityGateway;
+    type ReleaseSlots =
+      keyof import("./services/platform-quality").PlatformReleaseGateway;
     type GovernanceSlots =
       keyof import("./services/platform-quality").PlatformGovernanceGateway;
     type GovernedProduct = import("@apzhub/testing-contracts").GovernedProduct;

@@ -12,9 +12,7 @@ const QUALITY_RANK: Readonly<Record<PlatformQualityStatus, number>> = {
   blocked: 4,
 };
 
-const READINESS_RANK: Readonly<
-  Record<PlatformReleaseReadinessVerdict, number>
-> = {
+const READINESS_RANK: Readonly<Record<PlatformReleaseReadinessVerdict, number>> = {
   READY: 0,
   READY_WITH_WARNINGS: 1,
   NOT_READY: 2,

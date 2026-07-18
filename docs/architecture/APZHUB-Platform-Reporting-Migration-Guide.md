@@ -4,11 +4,11 @@
 
 ## What moved
 
-| From (APZTCMS-024) | To (APZREPORT-001) |
-|--------------------|--------------------|
-| `testing-contracts` reporting models (generic) | `@apzhub/reporting-contracts` |
-| `testing-services` template-engine, checksum, output/* | `@apzhub/reporting-core` |
-| Inline `ReportingService` impl | `createPlatformReportingService` + TCMS ports |
+| From (APZTCMS-024)                                     | To (APZREPORT-001)                            |
+| ------------------------------------------------------ | --------------------------------------------- |
+| `testing-contracts` reporting models (generic)         | `@apzhub/reporting-contracts`                 |
+| `testing-services` template-engine, checksum, output/* | `@apzhub/reporting-core`                      |
+| Inline `ReportingService` impl                         | `createPlatformReportingService` + TCMS ports |
 
 ## What stayed in TCMS
 

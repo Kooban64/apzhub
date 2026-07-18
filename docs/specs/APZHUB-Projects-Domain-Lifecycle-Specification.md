@@ -18,13 +18,13 @@ All states use **APZHUB terminology**. Plane state names are translated in the a
 
 ### States
 
-| State | Description | User-visible |
-|-------|-------------|--------------|
-| `draft` | Created but not yet active | Yes |
-| `active` | Normal operating state | Yes |
-| `on_hold` | Paused; no sprint starts | Yes |
-| `completed` | Delivered; read-heavy | Yes |
-| `archived` | Hidden from default lists; read-only | Yes |
+| State       | Description                          | User-visible |
+| ----------- | ------------------------------------ | ------------ |
+| `draft`     | Created but not yet active           | Yes          |
+| `active`    | Normal operating state               | Yes          |
+| `on_hold`   | Paused; no sprint starts             | Yes          |
+| `completed` | Delivered; read-heavy                | Yes          |
+| `archived`  | Hidden from default lists; read-only | Yes          |
 
 ### Transitions
 
@@ -37,13 +37,13 @@ draft ──► active ──► on_hold ◄──► active
               └──► archived (direct)
 ```
 
-| From | To | Permission | Adapter action |
-|------|-----|------------|----------------|
-| `draft` | `active` | `projects.edit` | Activate Plane project |
-| `active` | `on_hold` | `projects.edit` | Update project metadata |
-| `on_hold` | `active` | `projects.edit` | Update project metadata |
-| `active` | `completed` | `projects.edit` | Mark complete |
-| `*` | `archived` | `projects.admin` | Archive Plane project |
+| From      | To          | Permission       | Adapter action          |
+| --------- | ----------- | ---------------- | ----------------------- |
+| `draft`   | `active`    | `projects.edit`  | Activate Plane project  |
+| `active`  | `on_hold`   | `projects.edit`  | Update project metadata |
+| `on_hold` | `active`    | `projects.edit`  | Update project metadata |
+| `active`  | `completed` | `projects.edit`  | Mark complete           |
+| `*`       | `archived`  | `projects.admin` | Archive Plane project   |
 
 ### Events
 
@@ -57,13 +57,13 @@ draft ──► active ──► on_hold ◄──► active
 
 ### States
 
-| State | Description | Maps from Plane |
-|-------|-------------|-----------------|
-| `open` | Not started | State group: backlog/todo |
-| `in_progress` | Active work | State group: in progress |
-| `blocked` | Cannot proceed | Custom blocked state or label |
-| `done` | Complete | State group: done |
-| `cancelled` | Will not do | Cancelled state |
+| State         | Description    | Maps from Plane               |
+| ------------- | -------------- | ----------------------------- |
+| `open`        | Not started    | State group: backlog/todo     |
+| `in_progress` | Active work    | State group: in progress      |
+| `blocked`     | Cannot proceed | Custom blocked state or label |
+| `done`        | Complete       | State group: done             |
+| `cancelled`   | Will not do    | Cancelled state               |
 
 ### Transitions
 
@@ -77,13 +77,13 @@ open ──► in_progress ──► done
   └──► done (fast-close where permitted)
 ```
 
-| From | To | Permission | Notes |
-|------|-----|------------|-------|
-| `open` | `in_progress` | `tasks.transition` | Board drag or menu |
-| `in_progress` | `done` | `tasks.transition` | |
-| `*` | `blocked` | `tasks.transition` | Optional comment |
-| `blocked` | `in_progress` | `tasks.transition` | |
-| `*` | `cancelled` | `tasks.edit` | Admin or owner |
+| From          | To            | Permission         | Notes              |
+| ------------- | ------------- | ------------------ | ------------------ |
+| `open`        | `in_progress` | `tasks.transition` | Board drag or menu |
+| `in_progress` | `done`        | `tasks.transition` |                    |
+| `*`           | `blocked`     | `tasks.transition` | Optional comment   |
+| `blocked`     | `in_progress` | `tasks.transition` |                    |
+| `*`           | `cancelled`   | `tasks.edit`       | Admin or owner     |
 
 **Mapping rule:** Adapter maps Plane **State** + **State group** → APZHUB `TaskStatus`. Multiple Plane states may map to one APZHUB status; reverse mapping uses `StatusId`.
 
@@ -100,12 +100,12 @@ open ──► in_progress ──► done
 
 ### States
 
-| State | Description | Plane Cycle equivalent |
-|-------|-------------|------------------------|
-| `planned` | Defined, not started | Upcoming cycle |
-| `active` | Current sprint | Active cycle |
-| `completed` | Closed | Completed cycle |
-| `cancelled` | Abandoned | Deleted/archived cycle |
+| State       | Description          | Plane Cycle equivalent |
+| ----------- | -------------------- | ---------------------- |
+| `planned`   | Defined, not started | Upcoming cycle         |
+| `active`    | Current sprint       | Active cycle           |
+| `completed` | Closed               | Completed cycle        |
+| `cancelled` | Abandoned            | Deleted/archived cycle |
 
 ### Transitions
 
@@ -115,11 +115,11 @@ planned ──► active ──► completed
     └──► cancelled
 ```
 
-| From | To | Permission | Business rule |
-|------|-----|------------|---------------|
-| `planned` | `active` | `sprints.manage` | Only one `active` sprint per project (service rule) |
-| `active` | `completed` | `sprints.manage` | Incomplete tasks remain or move to backlog (policy) |
-| `planned` | `cancelled` | `sprints.manage` | |
+| From      | To          | Permission       | Business rule                                       |
+| --------- | ----------- | ---------------- | --------------------------------------------------- |
+| `planned` | `active`    | `sprints.manage` | Only one `active` sprint per project (service rule) |
+| `active`  | `completed` | `sprints.manage` | Incomplete tasks remain or move to backlog (policy) |
+| `planned` | `cancelled` | `sprints.manage` |                                                     |
 
 ### Events
 
@@ -138,22 +138,22 @@ Projects registers as lifecycle **product** `projects`.
 
 ```typescript
 interface LifecycleProductRegistration {
-  readonly productId: 'projects';
-  readonly displayName: 'Projects';
-  readonly capabilityId: 'projects';
-  readonly connectorId: 'plane';
+  readonly productId: "projects";
+  readonly displayName: "Projects";
+  readonly capabilityId: "projects";
+  readonly connectorId: "plane";
 }
 ```
 
 ### Platform state → Projects behaviour
 
-| Platform lifecycle state | Projects behaviour |
-|--------------------------|-------------------|
-| `operational` | Full read/write |
-| `maintenance` | Read allowed; writes queued to outbox; user message: maintenance |
-| `degraded` | Read from cache if fresh; writes queued or rejected per policy |
-| `recovering` | Replay outbox; reconcile mappings |
-| `stopped` | All requests fail closed with `SERVICE_UNAVAILABLE` |
+| Platform lifecycle state | Projects behaviour                                               |
+| ------------------------ | ---------------------------------------------------------------- |
+| `operational`            | Full read/write                                                  |
+| `maintenance`            | Read allowed; writes queued to outbox; user message: maintenance |
+| `degraded`               | Read from cache if fresh; writes queued or rejected per policy   |
+| `recovering`             | Replay outbox; reconcile mappings                                |
+| `stopped`                | All requests fail closed with `SERVICE_UNAVAILABLE`              |
 
 ### Service obligations
 
@@ -170,10 +170,10 @@ Lifecycle manager reads connector health from operations control plane entry `pr
 
 ## Milestone lifecycle (reference)
 
-| State | Description |
-|-------|-------------|
-| `open` | Target not yet reached |
-| `completed` | Milestone achieved |
+| State       | Description            |
+| ----------- | ---------------------- |
+| `open`      | Target not yet reached |
+| `completed` | Milestone achieved     |
 
 Event: `milestone.completed`.
 
@@ -181,22 +181,22 @@ Event: `milestone.completed`.
 
 ## Lifecycle vs workflow
 
-| Concept | Scope |
-|---------|-------|
-| **Domain lifecycle** (this doc) | Project, task, sprint business states |
-| **Platform lifecycle** (PRH-009) | Platform operational mode |
-| **Task workflow** | Per-project status columns (Status entities) — configurable via Plane states, exposed as APZHUB Status |
+| Concept                          | Scope                                                                                                  |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **Domain lifecycle** (this doc)  | Project, task, sprint business states                                                                  |
+| **Platform lifecycle** (PRH-009) | Platform operational mode                                                                              |
+| **Task workflow**                | Per-project status columns (Status entities) — configurable via Plane states, exposed as APZHUB Status |
 
 ---
 
 ## Validation rules (ProjectService)
 
-| Rule | Enforcement |
-|------|-------------|
-| Cannot archive project with active sprint | Service rejects |
-| Cannot delete team lead without replacement | Service rejects |
+| Rule                                                   | Enforcement                      |
+| ------------------------------------------------------ | -------------------------------- |
+| Cannot archive project with active sprint              | Service rejects                  |
+| Cannot delete team lead without replacement            | Service rejects                  |
 | Task transition must target valid StatusId for project | Service validates before adapter |
-| Sprint start requires at least planned dates or name | Service validates |
+| Sprint start requires at least planned dates or name   | Service validates                |
 
 ---
 

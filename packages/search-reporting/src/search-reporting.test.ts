@@ -81,13 +81,9 @@ describe("APZSEARCH-014 search-reporting", () => {
   it("ships version and entity catalogue", () => {
     expect(SEARCH_REPORTING_VERSION).toBe("0.1.0");
     expect(isReportingSearchEntityType("report_template")).toBe(true);
-    expect(isReportingSearchEntityType("report_generation_metadata")).toBe(
-      true,
-    );
+    expect(isReportingSearchEntityType("report_generation_metadata")).toBe(true);
     expect(isReportingSearchEntityType("template")).toBe(true);
-    expect(resolveReportingSearchEntityType("template")).toBe(
-      "report_template",
-    );
+    expect(resolveReportingSearchEntityType("template")).toBe("report_template");
     expect(isReportingSearchEntityType("support_request")).toBe(false);
     expect(looksLikeReportingLeak("parametersJson")).toBe(true);
     expect(looksLikeReportingLeak("tpl_ok")).toBe(false);
@@ -239,9 +235,7 @@ describe("APZSEARCH-014 search-reporting", () => {
       },
     });
     expect(leakReject.valid).toBe(false);
-    expect(
-      leakReject.issues.some((i) => i.code === "content_leakage"),
-    ).toBe(true);
+    expect(leakReject.issues.some((i) => i.code === "content_leakage")).toBe(true);
 
     const published = adapter.publisher.publish(context, {
       entityType: "report_generation_metadata",

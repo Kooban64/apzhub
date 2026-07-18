@@ -4,11 +4,11 @@
 
 ## Modes
 
-| `authMode` | Status |
-| --- | --- |
-| `personal_access_token` | **Implemented** — live connect via SecretProvider |
-| `github_app` | Placeholder — config shape validated (`appIdRef`, `installationIdRef`, `privateKeyRef`); live connect returns not implemented |
-| `oauth` | Placeholder — `oauth.enabled` **must be false**; live auth rejected |
+| `authMode`              | Status                                                                                                                        |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `personal_access_token` | **Implemented** — live connect via SecretProvider                                                                             |
+| `github_app`            | Placeholder — config shape validated (`appIdRef`, `installationIdRef`, `privateKeyRef`); live connect returns not implemented |
+| `oauth`                 | Placeholder — `oauth.enabled` **must be false**; live auth rejected                                                           |
 
 ## PAT flow
 

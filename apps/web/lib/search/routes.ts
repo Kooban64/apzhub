@@ -13,6 +13,7 @@ export const SEARCH_SECTIONS = [
   "profiles",
   "audit",
   "diagnostics",
+  "publication",
 ] as const;
 
 export type SearchSection = (typeof SEARCH_SECTIONS)[number];
@@ -26,9 +27,7 @@ function normalizePath(pathname: string): string {
 
 export function isSearchRoute(pathname: string): boolean {
   const normalized = normalizePath(pathname);
-  return (
-    normalized === SEARCH_BASE || normalized.startsWith(`${SEARCH_BASE}/`)
-  );
+  return normalized === SEARCH_BASE || normalized.startsWith(`${SEARCH_BASE}/`);
 }
 
 export function resolveSearchSection(pathname: string): SearchSection {

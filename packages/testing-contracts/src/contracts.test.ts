@@ -111,8 +111,8 @@ function collectSourceFiles(dir: string): string[] {
 }
 
 describe("@apzhub/testing-contracts version and registries", () => {
-  it("exports package version 0.10.0", () => {
-    expect(TESTING_CONTRACTS_VERSION).toBe("0.10.0");
+  it("exports package version 0.11.0", () => {
+    expect(TESTING_CONTRACTS_VERSION).toBe("0.11.0");
   });
 
   it("registers ten service interface ids", () => {
@@ -136,8 +136,12 @@ describe("@apzhub/testing-contracts version and registries", () => {
 
   it("registers ten certification engine service ids", () => {
     expect(CERTIFICATION_ENGINE_SERVICE_IDS).toHaveLength(10);
-    expect(CERTIFICATION_ENGINE_SERVICE_IDS).toContain("certification-workflow-service");
-    expect(CERTIFICATION_ENGINE_SERVICE_IDS).toContain("certification-recommendation-service");
+    expect(CERTIFICATION_ENGINE_SERVICE_IDS).toContain(
+      "certification-workflow-service",
+    );
+    expect(CERTIFICATION_ENGINE_SERVICE_IDS).toContain(
+      "certification-recommendation-service",
+    );
   });
 });
 

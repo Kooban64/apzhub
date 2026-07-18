@@ -27,12 +27,12 @@ Integration health rolls up to capability health in `@apzhub/platform-operations
 
 ## Health statuses
 
-| Status | Meaning | User impact |
-|--------|---------|-------------|
-| `healthy` | All checks pass | Normal operation |
-| `degraded` | Partial failure — reads may work | Capability may show degraded banner |
-| `unavailable` | Engine unreachable or auth failed | Mutations fail; reads per fallback policy |
-| `disabled` | Integration flag off or lifecycle disabled | Capability hidden or stub |
+| Status        | Meaning                                    | User impact                               |
+| ------------- | ------------------------------------------ | ----------------------------------------- |
+| `healthy`     | All checks pass                            | Normal operation                          |
+| `degraded`    | Partial failure — reads may work           | Capability may show degraded banner       |
+| `unavailable` | Engine unreachable or auth failed          | Mutations fail; reads per fallback policy |
+| `disabled`    | Integration flag off or lifecycle disabled | Capability hidden or stub                 |
 
 ---
 
@@ -40,14 +40,14 @@ Integration health rolls up to capability health in `@apzhub/platform-operations
 
 Every `HealthProvider.check()` runs these checks unless integration manifest declares exemption:
 
-| Check | Pass criteria |
-|-------|---------------|
-| `configuration` | Required config keys present (`ConfigurationProvider`) |
-| `connectivity` | TCP/HTTP reachability to vendor base URL |
-| `authentication` | Service token or credential valid |
-| `authorization` | Required scopes/workspace accessible |
-| `version` | Engine version within declared range |
-| `circuit_breaker` | State not `open` |
+| Check             | Pass criteria                                          |
+| ----------------- | ------------------------------------------------------ |
+| `configuration`   | Required config keys present (`ConfigurationProvider`) |
+| `connectivity`    | TCP/HTTP reachability to vendor base URL               |
+| `authentication`  | Service token or credential valid                      |
+| `authorization`   | Required scopes/workspace accessible                   |
+| `version`         | Engine version within declared range                   |
+| `circuit_breaker` | State not `open`                                       |
 
 Vendor adapters add checks via `performHealthChecks()` override (see [Base Adapter Pattern](./APZHUB-Base-Adapter-Pattern.md)).
 
@@ -82,26 +82,26 @@ Diagnostics extend health with **operational telemetry** for the Administration 
 
 ### Diagnostics payload
 
-| Field | Source | Sensitive |
-|-------|--------|-----------|
-| `connectionConfigured` | Config validation | No |
-| `authenticationPresent` | Credential ref exists | No (never value) |
-| `engineVersion` | `VersionProvider.probe()` | No |
-| `versionCompatibility` | Range check vs manifest | No |
-| `healthStatus` | Latest health aggregate | No |
-| `circuitBreakerState` | SDK circuit breaker | No |
-| `lastSuccessfulRequestAt` | Metrics | No |
-| `errorRate5m` | Metrics | No |
-| `latencyP95Ms` | Metrics | No |
-| `syncLagSeconds` | Polling/outbox cursor | No |
+| Field                     | Source                    | Sensitive        |
+| ------------------------- | ------------------------- | ---------------- |
+| `connectionConfigured`    | Config validation         | No               |
+| `authenticationPresent`   | Credential ref exists     | No (never value) |
+| `engineVersion`           | `VersionProvider.probe()` | No               |
+| `versionCompatibility`    | Range check vs manifest   | No               |
+| `healthStatus`            | Latest health aggregate   | No               |
+| `circuitBreakerState`     | SDK circuit breaker       | No               |
+| `lastSuccessfulRequestAt` | Metrics                   | No               |
+| `errorRate5m`             | Metrics                   | No               |
+| `latencyP95Ms`            | Metrics                   | No               |
+| `syncLagSeconds`          | Polling/outbox cursor     | No               |
 
 ### Diagnostics vs health probe
 
-| Concern | OSS-101-02 pattern | OSS-100 SDK pattern |
-|---------|-------------------|---------------------|
+| Concern                 | OSS-101-02 pattern                   | OSS-100 SDK pattern                          |
+| ----------------------- | ------------------------------------ | -------------------------------------------- |
 | Config-only diagnostics | `getPlaneConfigurationDiagnostics()` | `DiagnosticsProvider` when engine not probed |
-| Live engine probe | Deferred to adapter | `HealthProvider` HTTP probe via SDK |
-| When disabled | Status `disabled` | Same — no probe |
+| Live engine probe       | Deferred to adapter                  | `HealthProvider` HTTP probe via SDK          |
+| When disabled           | Status `disabled`                    | Same — no probe                              |
 
 Plane config diagnostics (OSS-101-02) **migrate into** SDK `DiagnosticsProvider` when adapter lands (OSS-101-04).
 
@@ -109,23 +109,23 @@ Plane config diagnostics (OSS-101-02) **migrate into** SDK `DiagnosticsProvider`
 
 ## Registration
 
-| Surface | Registration path |
-|---------|-------------------|
+| Surface               | Registration path                                                 |
+| --------------------- | ----------------------------------------------------------------- |
 | Bootstrap diagnostics | Extension ID in `service.yaml` / `integration.yaml` documentation |
-| Control plane | `@apzhub/platform-operations` capability registry |
-| Health endpoint | Aggregated in `GET /api/platform/v1/system/health` |
-| Administration UI | Operator permission-gated |
+| Control plane         | `@apzhub/platform-operations` capability registry                 |
+| Health endpoint       | Aggregated in `GET /api/platform/v1/system/health`                |
+| Administration UI     | Operator permission-gated                                         |
 
 ---
 
 ## Probe scheduling
 
-| Probe type | Trigger | Blocking |
-|------------|---------|----------|
-| Startup | Platform bootstrap | Non-blocking — report status |
-| Periodic | Control plane interval (default 60 s) | Background |
-| On-demand | Operator refresh | API request |
-| Pre-mutation | Optional — Capability Service | Only for critical paths |
+| Probe type   | Trigger                               | Blocking                     |
+| ------------ | ------------------------------------- | ---------------------------- |
+| Startup      | Platform bootstrap                    | Non-blocking — report status |
+| Periodic     | Control plane interval (default 60 s) | Background                   |
+| On-demand    | Operator refresh                      | API request                  |
+| Pre-mutation | Optional — Capability Service         | Only for critical paths      |
 
 Startup must not block platform ready on single integration failure — report `degraded`/`unavailable` and continue (PRH-009).
 

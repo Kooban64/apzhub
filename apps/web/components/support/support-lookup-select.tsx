@@ -98,7 +98,9 @@ export function SupportLookupSelect({
         required={required}
       />
       {query.isError ? (
-        <p className="text-xs text-[var(--color-muted-foreground)]">Lookup unavailable.</p>
+        <p className="text-xs text-[var(--color-muted-foreground)]">
+          Lookup unavailable.
+        </p>
       ) : null}
     </div>
   );

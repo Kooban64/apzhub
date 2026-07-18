@@ -12,17 +12,17 @@ Define the standard pattern for turning external OSS tools and internal APZHUB-b
 
 **Key principle:** Users see APZHUB capabilities. They never see underlying engines.
 
-| User-facing capability | Engine (hidden) |
-|------------------------|-----------------|
-| Projects | Plane |
-| Documents | Paperless-ngx |
-| Time Tracking | Kimai |
-| Support | Zammad |
-| Analytics | Metabase |
-| Automation | n8n |
-| Quality Engineering | APZHUB native |
-| Observability | Grafana / Prometheus / Loki |
-| Security Operations | Greenbone / MobSF / Faraday |
+| User-facing capability | Engine (hidden)             |
+| ---------------------- | --------------------------- |
+| Projects               | Plane                       |
+| Documents              | Paperless-ngx               |
+| Time Tracking          | Kimai                       |
+| Support                | Zammad                      |
+| Analytics              | Metabase                    |
+| Automation             | n8n                         |
+| Quality Engineering    | APZHUB native               |
+| Observability          | Grafana / Prometheus / Loki |
+| Security Operations    | Greenbone / MobSF / Faraday |
 
 ---
 
@@ -46,12 +46,12 @@ Cross-cutting concerns are consumed from Platform Core — never reimplemented p
 
 ## Capability types
 
-| Type | Adapter boundary | Manifests | Example |
-|------|------------------|-----------|---------|
-| **OSS-backed** | Integration adapter (026) | `integration.yaml` + `service.yaml` + `module.yaml` | Projects (Plane) |
-| **Native** | Internal engine module behind service interface | `service.yaml` + `module.yaml` (no `integration.yaml`) | Quality Engineering |
-| **Operator-tier** | Admin connector; no end-user module | `integration.yaml` + service partial | Observability stack |
-| **Security-admin tier** | Restricted connector | `integration.yaml` + service partial | Security Operations |
+| Type                    | Adapter boundary                                | Manifests                                              | Example             |
+| ----------------------- | ----------------------------------------------- | ------------------------------------------------------ | ------------------- |
+| **OSS-backed**          | Integration adapter (026)                       | `integration.yaml` + `service.yaml` + `module.yaml`    | Projects (Plane)    |
+| **Native**              | Internal engine module behind service interface | `service.yaml` + `module.yaml` (no `integration.yaml`) | Quality Engineering |
+| **Operator-tier**       | Admin connector; no end-user module             | `integration.yaml` + service partial                   | Observability stack |
+| **Security-admin tier** | Restricted connector                            | `integration.yaml` + service partial                   | Security Operations |
 
 See [OSS vs Native Decision Model](./APZHUB-OSS-vs-Native-Capability-Decision-Model.md).
 
@@ -63,11 +63,11 @@ Every capability — OSS or native — must implement the following registration
 
 ### 1. Capability manifest
 
-| OSS-backed | Native |
-|------------|--------|
-| `module.yaml` (025) | `module.yaml` (025) |
-| `service.yaml` (027) | `service.yaml` (027) |
-| `integration.yaml` (026) | Not required |
+| OSS-backed                        | Native                            |
+| --------------------------------- | --------------------------------- |
+| `module.yaml` (025)               | `module.yaml` (025)               |
+| `service.yaml` (027)              | `service.yaml` (027)              |
+| `integration.yaml` (026)          | Not required                      |
 | Domain `event.yaml` entries (029) | Domain `event.yaml` entries (029) |
 
 Manifests are authored **before** implementation. Capability ID, permissions, and API contracts are declared in manifests.
@@ -170,15 +170,15 @@ Documented in capability catalog or product strategy — not ad hoc at swap time
 
 ## Prohibited patterns
 
-| Pattern | Why prohibited |
-|---------|----------------|
-| Module → engine API | Bypasses service, auth, audit |
-| Module → integration adapter | Violates layer model (008, 009) |
-| User-visible engine login | Breaks single SSO (007) |
-| Engine branding in UI | Violates Document 002 |
-| Per-module identity/auth | Duplicates Platform Core |
-| Per-module search/notify/audit | Duplicates platform frameworks |
-| Hardcoded capability in shell | Violates manifest-first (024) |
+| Pattern                        | Why prohibited                  |
+| ------------------------------ | ------------------------------- |
+| Module → engine API            | Bypasses service, auth, audit   |
+| Module → integration adapter   | Violates layer model (008, 009) |
+| User-visible engine login      | Breaks single SSO (007)         |
+| Engine branding in UI          | Violates Document 002           |
+| Per-module identity/auth       | Duplicates Platform Core        |
+| Per-module search/notify/audit | Duplicates platform frameworks  |
+| Hardcoded capability in shell  | Violates manifest-first (024)   |
 
 ---
 

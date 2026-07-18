@@ -32,19 +32,14 @@ export interface TestingReportingService {
     ctx: ServiceRequestContext,
   ): Promise<readonly TestingReportPlaceholder[]>;
 
-  listAvailableReports(
-    ctx: ServiceRequestContext,
-  ): Promise<readonly ReportType[]>;
+  listAvailableReports(ctx: ServiceRequestContext): Promise<readonly ReportType[]>;
 
   listTemplates(
     ctx: ServiceRequestContext,
     reportType?: ReportType,
   ): Promise<readonly ReportTemplate[]>;
 
-  getTemplate(
-    ctx: ServiceRequestContext,
-    templateId: string,
-  ): Promise<ReportTemplate>;
+  getTemplate(ctx: ServiceRequestContext, templateId: string): Promise<ReportTemplate>;
 
   registerTemplate(
     ctx: ServiceRequestContext,

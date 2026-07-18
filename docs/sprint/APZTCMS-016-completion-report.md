@@ -17,11 +17,11 @@ Delivered `@apzhub/integration-github-actions` **0.1.0** — the first productio
 
 ## Authentication
 
-| Mode | Status |
-| ---- | ------ |
-| Personal Access Token | **Implemented** (`Authorization: Bearer`) |
-| GitHub App | Configuration placeholder — live auth not implemented |
-| OAuth | Placeholder — `oauth.enabled` must be `false` |
+| Mode                  | Status                                                |
+| --------------------- | ----------------------------------------------------- |
+| Personal Access Token | **Implemented** (`Authorization: Bearer`)             |
+| GitHub App            | Configuration placeholder — live auth not implemented |
+| OAuth                 | Placeholder — `oauth.enabled` must be `false`         |
 
 Secrets never appear in diagnostics.
 
@@ -47,10 +47,10 @@ Documented GitHub REST API version **2022-11-28**. Unsupported features (e.g. ap
 
 ## Testing
 
-| Suite | Result |
-| ----- | ------ |
+| Suite                 | Result                  |
+| --------------------- | ----------------------- |
 | Mocked contract tests | **32** passed (5 files) |
-| Live GitHub | **None** (forbidden) |
+| Live GitHub           | **None** (forbidden)    |
 
 ## Coverage
 
@@ -58,19 +58,19 @@ Documented GitHub REST API version **2022-11-28**. Unsupported features (e.g. ap
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| typecheck | PASS |
-| lint | PASS |
-| tests | PASS |
-| coverage ≥95% lines/functions | PASS |
+| Gate                                 | Result                                                                                    |
+| ------------------------------------ | ----------------------------------------------------------------------------------------- |
+| typecheck                            | PASS                                                                                      |
+| lint                                 | PASS                                                                                      |
+| tests                                | PASS                                                                                      |
+| coverage ≥95% lines/functions        | PASS                                                                                      |
 | architecture / dependency / boundary | PASS — no `platform-services`, no public REST client, no direct `fetch` outside transport |
 
 ## Technical Debt
 
-- GitHub App / OAuth live auth deferred  
-- Platform Service + Gateway wiring deferred to **APZTCMS-017**  
-- Approvals/environments optional where GitHub returns 404  
+- GitHub App / OAuth live auth deferred
+- Platform Service + Gateway wiring deferred to **APZTCMS-017**
+- Approvals/environments optional where GitHub returns 404
 - Not registered into TCMS `PipelineAdapterRegistry` yet (017)
 
 ## Recommendation

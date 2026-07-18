@@ -1,11 +1,11 @@
 # APZSEARCH-005 Coverage Baseline
 
-| Field | Value |
-| --- | --- |
-| **Milestone** | APZSEARCH-005 |
-| **Package** | `@apzhub/integration-meilisearch` **0.1.0** |
-| **Date** | 2026-07-14 |
-| **Scope** | `integrations/meilisearch/src/**/*.{ts,tsx}` excluding `*.test.ts`, type-only files, and `testing/` mock harness |
+| Field         | Value                                                                                                            |
+| ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Milestone** | APZSEARCH-005                                                                                                    |
+| **Package**   | `@apzhub/integration-meilisearch` **0.1.0**                                                                      |
+| **Date**      | 2026-07-14                                                                                                       |
+| **Scope**     | `integrations/meilisearch/src/**/*.{ts,tsx}` excluding `*.test.ts`, type-only files, and `testing/` mock harness |
 
 ## Command
 
@@ -25,13 +25,13 @@ pnpm exec vitest run --coverage \
 
 ## Results
 
-| Metric | Value | Target |
-| --- | --- | --- |
-| Statements | **95.01%** | ≥95% |
-| Lines | **95.01%** | ≥95% |
-| Branches | **83.03%** | ≥70% (scoped) |
-| Functions | **95.12%** | ≥90% |
-| Tests | **27 PASS** (3 files) | — |
+| Metric     | Value                 | Target        |
+| ---------- | --------------------- | ------------- |
+| Statements | **95.01%**            | ≥95%          |
+| Lines      | **95.01%**            | ≥95%          |
+| Branches   | **83.03%**            | ≥70% (scoped) |
+| Functions  | **95.12%**            | ≥90%          |
+| Tests      | **27 PASS** (3 files) | —             |
 
 ## Notes
 

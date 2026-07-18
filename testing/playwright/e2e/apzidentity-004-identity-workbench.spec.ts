@@ -180,7 +180,11 @@ async function mockIdentityHttpApi(page: Page) {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
-        body: itemBody({ identityEnabled: true, managementPlaneReady: true, http: true }),
+        body: itemBody({
+          identityEnabled: true,
+          managementPlaneReady: true,
+          http: true,
+        }),
       });
       return;
     }
@@ -314,9 +318,7 @@ test.describe("APZIDENTITY-004 Identity Administration Workbench", () => {
     await signIn(page);
 
     await page.goto(`${IDENTITY_HOME}/users`);
-    await expect(
-      page.getByRole("heading", { level: 1, name: "Users" }),
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Users" })).toBeVisible();
     await expect(page.getByTestId("banner-auth")).toContainText(
       "AUTHENTICATION NOT MANAGED",
     );
@@ -363,14 +365,8 @@ test.describe("APZIDENTITY-004 Identity Administration Workbench", () => {
     await expect(page.getByTestId("banner-directory-sync")).toContainText(
       "DIRECTORY SYNC",
     );
-    await expect(page.getByTestId("diag-authentication")).toContainText(
-      "Unavailable",
-    );
-    await expect(page.getByTestId("diag-provisioning")).toContainText(
-      "Unavailable",
-    );
-    await expect(page.getByTestId("diag-directory-sync")).toContainText(
-      "Unavailable",
-    );
+    await expect(page.getByTestId("diag-authentication")).toContainText("Unavailable");
+    await expect(page.getByTestId("diag-provisioning")).toContainText("Unavailable");
+    await expect(page.getByTestId("diag-directory-sync")).toContainText("Unavailable");
   });
 });

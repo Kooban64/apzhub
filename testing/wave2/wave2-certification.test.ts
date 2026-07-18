@@ -169,7 +169,7 @@ describe("OSS-102-08 secret redaction and public export boundaries", () => {
       "PlatformServiceGateway",
       "EntityMappingStore",
       "@apzhub/integration-plane",
-      "from \"next/",
+      'from "next/',
       "from 'next/",
     ];
     const offenders: string[] = [];

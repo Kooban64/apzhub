@@ -3,10 +3,7 @@
  * No provider-specific fields. No Meilisearch documents.
  */
 
-import type {
-  SearchClassification,
-  SearchProductId,
-} from "@apzhub/search-contracts";
+import type { SearchClassification, SearchProductId } from "@apzhub/search-contracts";
 
 import type { SearchEntityLifecycleState } from "./lifecycle";
 
@@ -14,9 +11,7 @@ export type CanonicalSearchEntityId = string & {
   readonly __brand: "CanonicalSearchEntityId";
 };
 
-export function asCanonicalSearchEntityId(
-  value: string,
-): CanonicalSearchEntityId {
+export function asCanonicalSearchEntityId(value: string): CanonicalSearchEntityId {
   if (!value || value.trim().length === 0) {
     throw new Error("invalid CanonicalSearchEntityId");
   }

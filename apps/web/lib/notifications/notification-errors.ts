@@ -30,10 +30,7 @@ export function toNotificationUserMessage(error: unknown): string {
     if (error.status === 404) {
       return "Notification resource was not found.";
     }
-    if (
-      error.status === 503 ||
-      error.code === "NOTIFICATION_SERVICE_UNAVAILABLE"
-    ) {
+    if (error.status === 503 || error.code === "NOTIFICATION_SERVICE_UNAVAILABLE") {
       return "Notification Platform is temporarily unavailable.";
     }
     if (error.status === 501) {

@@ -14,13 +14,13 @@ Every `gateway.workflow.engine.*` public op is wrapped by RequestPipeline → Pr
 
 ## Test evidence (existing suite)
 
-| Scenario | Evidence |
-| --- | --- |
-| Anonymous denied | Production Authorization provider + policies (anonymous / invalid actor) |
-| Missing permission denied | `hasWorkflowEnginePermission` + operation map unit tests (APZWORKFLOW-007) |
-| Authorised allowed | Pipeline-wrapped gateway facet tests with `workflow.engine.*` context |
-| Tenant / org isolation | Platform ServiceContext tenant/org fields enforced by Production Authorization access resolver (shared platform path — not bypassed for engine) |
-| UI hide ≠ authz | Workbench `canValidateConnection` / `canView*` are presentation hints; server remains authoritative |
+| Scenario                  | Evidence                                                                                                                                        |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Anonymous denied          | Production Authorization provider + policies (anonymous / invalid actor)                                                                        |
+| Missing permission denied | `hasWorkflowEnginePermission` + operation map unit tests (APZWORKFLOW-007)                                                                      |
+| Authorised allowed        | Pipeline-wrapped gateway facet tests with `workflow.engine.*` context                                                                           |
+| Tenant / org isolation    | Platform ServiceContext tenant/org fields enforced by Production Authorization access resolver (shared platform path — not bypassed for engine) |
+| UI hide ≠ authz           | Workbench `canValidateConnection` / `canView*` are presentation hints; server remains authoritative                                             |
 
 ## Gaps (non-defects)
 

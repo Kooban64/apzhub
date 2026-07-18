@@ -122,9 +122,7 @@ export function mapAdministrationCategory(
   return {
     id: asAdministrationCategoryId(row.id),
     tenantId: row.tenantId,
-    moduleId: row.moduleId
-      ? asAdministrationModuleId(row.moduleId)
-      : undefined,
+    moduleId: row.moduleId ? asAdministrationModuleId(row.moduleId) : undefined,
     key: row.key,
     name: row.name,
     description: row.description ?? undefined,
@@ -156,19 +154,13 @@ export function mapAdministrationAction(
   return {
     id: asAdministrationActionId(row.id),
     tenantId: row.tenantId,
-    moduleId: row.moduleId
-      ? asAdministrationModuleId(row.moduleId)
-      : undefined,
-    sectionId: row.sectionId
-      ? asAdministrationSectionId(row.sectionId)
-      : undefined,
+    moduleId: row.moduleId ? asAdministrationModuleId(row.moduleId) : undefined,
+    sectionId: row.sectionId ? asAdministrationSectionId(row.sectionId) : undefined,
     key: row.key,
     name: row.name,
     description: row.description ?? undefined,
     kind: row.kind as AdministrationActionKind,
-    permissionKeys: (row.permissionKeysJson ?? undefined) as
-      | string[]
-      | undefined,
+    permissionKeys: (row.permissionKeysJson ?? undefined) as string[] | undefined,
     createdAt: row.createdAt.toISOString(),
     updatedAt: row.updatedAt.toISOString(),
   };
@@ -194,9 +186,7 @@ export function mapAdministrationAudit(
   return {
     id: asAdministrationAuditId(row.id),
     tenantId: row.tenantId,
-    moduleId: row.moduleId
-      ? asAdministrationModuleId(row.moduleId)
-      : undefined,
+    moduleId: row.moduleId ? asAdministrationModuleId(row.moduleId) : undefined,
     action: row.action as AdministrationAuditAction,
     actorUserId: row.actorUserId,
     detail: row.detail ?? undefined,
@@ -222,9 +212,7 @@ export function mapAdministrationDiagnostic(
   return {
     id: asAdministrationDiagnosticId(row.id),
     tenantId: row.tenantId,
-    moduleId: row.moduleId
-      ? asAdministrationModuleId(row.moduleId)
-      : undefined,
+    moduleId: row.moduleId ? asAdministrationModuleId(row.moduleId) : undefined,
     capabilityId: row.capabilityId
       ? asAdministrationCapabilityId(row.capabilityId)
       : undefined,
@@ -257,9 +245,7 @@ export function mapAdministrationMetadata(
   return {
     id: asAdministrationMetadataId(row.id),
     moduleId: asAdministrationModuleId(row.moduleId),
-    labels: (row.labelsJson ?? undefined) as
-      | Record<string, string>
-      | undefined,
+    labels: (row.labelsJson ?? undefined) as Record<string, string> | undefined,
     tags: (row.tagsJson ?? undefined) as string[] | undefined,
     notes: row.notes ?? undefined,
   };
@@ -271,9 +257,7 @@ export function mapAdministrationPolicy(
   return {
     id: asAdministrationPolicyId(row.id),
     tenantId: row.tenantId,
-    moduleId: row.moduleId
-      ? asAdministrationModuleId(row.moduleId)
-      : undefined,
+    moduleId: row.moduleId ? asAdministrationModuleId(row.moduleId) : undefined,
     kind: row.kind as AdministrationPolicyKind,
     key: row.key,
     name: row.name,
@@ -326,19 +310,13 @@ export function mapAdministrationNavigation(
     id: asAdministrationNavigationId(row.id),
     tenantId: row.tenantId,
     moduleId: asAdministrationModuleId(row.moduleId),
-    categoryId: row.categoryId
-      ? asAdministrationCategoryId(row.categoryId)
-      : undefined,
-    sectionId: row.sectionId
-      ? asAdministrationSectionId(row.sectionId)
-      : undefined,
+    categoryId: row.categoryId ? asAdministrationCategoryId(row.categoryId) : undefined,
+    sectionId: row.sectionId ? asAdministrationSectionId(row.sectionId) : undefined,
     key: row.key,
     label: row.label,
     ordering: row.ordering,
     visibility: row.visibility as AdministrationNavigationVisibility,
-    permissionKeys: (row.permissionKeysJson ?? undefined) as
-      | string[]
-      | undefined,
+    permissionKeys: (row.permissionKeysJson ?? undefined) as string[] | undefined,
     iconKey: row.iconKey ?? undefined,
     routePath: row.routePath ?? undefined,
     createdAt: row.createdAt.toISOString(),
@@ -352,18 +330,12 @@ export function mapAdministrationShortcut(
   return {
     id: asAdministrationShortcutId(row.id),
     tenantId: row.tenantId,
-    moduleId: row.moduleId
-      ? asAdministrationModuleId(row.moduleId)
-      : undefined,
-    actionId: row.actionId
-      ? asAdministrationActionId(row.actionId)
-      : undefined,
+    moduleId: row.moduleId ? asAdministrationModuleId(row.moduleId) : undefined,
+    actionId: row.actionId ? asAdministrationActionId(row.actionId) : undefined,
     key: row.key,
     label: row.label,
     ordering: row.ordering,
-    permissionKeys: (row.permissionKeysJson ?? undefined) as
-      | string[]
-      | undefined,
+    permissionKeys: (row.permissionKeysJson ?? undefined) as string[] | undefined,
     createdAt: row.createdAt.toISOString(),
     updatedAt: row.updatedAt.toISOString(),
   };
@@ -375,9 +347,7 @@ export function mapAdministrationDashboard(
   return {
     id: asAdministrationDashboardId(row.id),
     tenantId: row.tenantId,
-    moduleId: row.moduleId
-      ? asAdministrationModuleId(row.moduleId)
-      : undefined,
+    moduleId: row.moduleId ? asAdministrationModuleId(row.moduleId) : undefined,
     key: row.key,
     name: row.name,
     description: row.description ?? undefined,
@@ -428,10 +398,7 @@ function createTenantScopedCrud<TEntity extends { id: string; tenantId: string }
         .select()
         .from(table as never)
         .where(
-          and(
-            eq(table.id as never, id),
-            eq(table.tenantId as never, ctx.tenantId),
-          ),
+          and(eq(table.id as never, id), eq(table.tenantId as never, ctx.tenantId)),
         )
         .limit(1);
       const row = rows[0] as TRow | undefined;
@@ -633,9 +600,7 @@ export function createPostgresAdministrationRepositories(
       label: entity.label,
       ordering: entity.ordering,
       visibility: entity.visibility,
-      permissionKeysJson: entity.permissionKeys
-        ? [...entity.permissionKeys]
-        : null,
+      permissionKeysJson: entity.permissionKeys ? [...entity.permissionKeys] : null,
       iconKey: entity.iconKey ?? null,
       routePath: entity.routePath ?? null,
       createdAt: toDate(entity.createdAt),
@@ -655,9 +620,7 @@ export function createPostgresAdministrationRepositories(
       key: entity.key,
       label: entity.label,
       ordering: entity.ordering,
-      permissionKeysJson: entity.permissionKeys
-        ? [...entity.permissionKeys]
-        : null,
+      permissionKeysJson: entity.permissionKeys ? [...entity.permissionKeys] : null,
       createdAt: toDate(entity.createdAt),
       updatedAt: toDate(entity.updatedAt),
     }),

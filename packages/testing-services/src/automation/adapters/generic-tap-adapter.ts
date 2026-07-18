@@ -41,7 +41,9 @@ export function createGenericTapAdapter(): AutomationResultAdapter {
         const passed = okMatch[1]!.toLowerCase() === "ok";
         const rest = okMatch[3] ?? "";
         const skip = /#\s*skip/i.test(rest) || /\bTODO\b/i.test(rest);
-        const title = rest.replace(/#\s*(skip|todo).*$/i, "").trim() || `test-${okMatch[2] ?? cases.length + 1}`;
+        const title =
+          rest.replace(/#\s*(skip|todo).*$/i, "").trim() ||
+          `test-${okMatch[2] ?? cases.length + 1}`;
         cases.push({
           key: okMatch[2],
           title,

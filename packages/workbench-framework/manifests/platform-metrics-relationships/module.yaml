@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-relationships
+name: Relationships
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Relationships sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Relationships
+    icon: link
+    route: /workspace/metrics/relationships
+    order: 210
+    permission: metrics.definition
+  view:
+    title: Relationships
+    workspace: metrics
+    route: /workspace/metrics/relationships
+    permission: metrics.definition

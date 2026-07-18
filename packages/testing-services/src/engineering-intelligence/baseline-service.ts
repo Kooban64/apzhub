@@ -63,10 +63,7 @@ export function createBaselineService(rt: ServiceRuntime): BaselineService {
     async get(ctx, id) {
       return toDomain(
         requireFound(
-          await rt.persistence.engineeringBaselines.get(
-            toRepositoryContext(ctx),
-            id,
-          ),
+          await rt.persistence.engineeringBaselines.get(toRepositoryContext(ctx), id),
           "engineering_baseline",
           id,
         ),

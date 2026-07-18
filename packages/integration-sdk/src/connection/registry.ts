@@ -1,9 +1,6 @@
 import { connectionNotFoundError, duplicateConnectionError } from "../errors/codes";
 import { sdkErr, sdkOk, type SdkResult } from "../errors/result";
-import type {
-  ConnectionRecord,
-  ConnectionRegistrySnapshot,
-} from "./types";
+import type { ConnectionRecord, ConnectionRegistrySnapshot } from "./types";
 import type { Clock } from "../auth/authentication-provider";
 import { systemClock } from "../auth/authentication-provider";
 
@@ -40,20 +37,19 @@ export class InMemoryConnectionRegistry implements ConnectionRegistry {
     correlationId = "registry",
   ): SdkResult<ConnectionRecord> {
     if (this.connections.has(record.connectionId) && !options.allowReplace) {
-      return sdkErr(
-        duplicateConnectionError({ correlationId }, record.connectionId),
-      );
+      return sdkErr(duplicateConnectionError({ correlationId }, record.connectionId));
     }
 
     this.connections.set(record.connectionId, { ...record });
     return sdkOk({ ...record });
   }
 
-  replace(record: ConnectionRecord, correlationId: string): SdkResult<ConnectionRecord> {
+  replace(
+    record: ConnectionRecord,
+    correlationId: string,
+  ): SdkResult<ConnectionRecord> {
     if (!this.connections.has(record.connectionId)) {
-      return sdkErr(
-        connectionNotFoundError({ correlationId }, record.connectionId),
-      );
+      return sdkErr(connectionNotFoundError({ correlationId }, record.connectionId));
     }
 
     this.connections.set(record.connectionId, { ...record });

@@ -29,7 +29,10 @@ const PLANE_PROJECT_PROVIDER_ID = "plane-project";
  * Encodes project + sprint native IDs for Plane sprint-by-id operations.
  * Mapping-aware services supply both IDs; the public platform API never sees this form.
  */
-export function encodePlaneSprintRef(projectNativeId: string, sprintNativeId: string): string {
+export function encodePlaneSprintRef(
+  projectNativeId: string,
+  sprintNativeId: string,
+): string {
   return `${projectNativeId}::${sprintNativeId}`;
 }
 
@@ -75,7 +78,10 @@ function toAdapterCreateProjectInput(input: CreateProjectInput) {
 export function createPlaneProjectProvider(core: PlaneCoreServices): ProjectProvider {
   return {
     listProjects(ctx, query) {
-      const { page, sort, filter } = unwrapListQuery<ProjectListFilter, ProjectSortField>(query);
+      const { page, sort, filter } = unwrapListQuery<
+        ProjectListFilter,
+        ProjectSortField
+      >(query);
       return withProviderErrorMapping(ctx.correlationId, () =>
         core.projects.list(
           toIntegrationContext(ctx),
@@ -94,7 +100,10 @@ export function createPlaneProjectProvider(core: PlaneCoreServices): ProjectProv
 
     createProject(ctx, input) {
       return withProviderErrorMapping(ctx.correlationId, () =>
-        core.projects.create(toIntegrationContext(ctx), toAdapterCreateProjectInput(input)),
+        core.projects.create(
+          toIntegrationContext(ctx),
+          toAdapterCreateProjectInput(input),
+        ),
       );
     },
 
@@ -113,7 +122,13 @@ export function createPlaneProjectProvider(core: PlaneCoreServices): ProjectProv
     listStatuses(ctx, projectId, query) {
       const { page, sort, filter } = unwrapListQuery<ProjectStateListFilter>(query);
       return withProviderErrorMapping(ctx.correlationId, () =>
-        core.projectStates.list(toIntegrationContext(ctx), projectId, filter, page, sort as never),
+        core.projectStates.list(
+          toIntegrationContext(ctx),
+          projectId,
+          filter,
+          page,
+          sort as never,
+        ),
       );
     },
 
@@ -131,7 +146,12 @@ export function createPlaneProjectProvider(core: PlaneCoreServices): ProjectProv
 
     updateStatus(ctx, projectId, statusId, input) {
       return withProviderErrorMapping(ctx.correlationId, () =>
-        core.projectStates.update(toIntegrationContext(ctx), projectId, statusId, input),
+        core.projectStates.update(
+          toIntegrationContext(ctx),
+          projectId,
+          statusId,
+          input,
+        ),
       );
     },
 
@@ -144,7 +164,13 @@ export function createPlaneProjectProvider(core: PlaneCoreServices): ProjectProv
     listLabels(ctx, projectId, query) {
       const { page, sort, filter } = unwrapListQuery<LabelListFilter>(query);
       return withProviderErrorMapping(ctx.correlationId, () =>
-        core.labels.list(toIntegrationContext(ctx), projectId, filter, page, sort as never),
+        core.labels.list(
+          toIntegrationContext(ctx),
+          projectId,
+          filter,
+          page,
+          sort as never,
+        ),
       );
     },
 
@@ -169,7 +195,13 @@ export function createPlaneProjectProvider(core: PlaneCoreServices): ProjectProv
     listSprints(ctx, projectId, query) {
       const { page, sort, filter } = unwrapListQuery<CycleListFilter>(query);
       return withProviderErrorMapping(ctx.correlationId, () =>
-        core.cycles.list(toIntegrationContext(ctx), projectId, filter, page, sort as never),
+        core.cycles.list(
+          toIntegrationContext(ctx),
+          projectId,
+          filter,
+          page,
+          sort as never,
+        ),
       );
     },
 
@@ -275,7 +307,13 @@ export function createPlaneProjectProvider(core: PlaneCoreServices): ProjectProv
     listModules(ctx, projectId, query) {
       const { page, sort, filter } = unwrapListQuery<ModuleListFilter>(query);
       return withProviderErrorMapping(ctx.correlationId, () =>
-        core.modules.list(toIntegrationContext(ctx), projectId, filter, page, sort as never),
+        core.modules.list(
+          toIntegrationContext(ctx),
+          projectId,
+          filter,
+          page,
+          sort as never,
+        ),
       );
     },
 

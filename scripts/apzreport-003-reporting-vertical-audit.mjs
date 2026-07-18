@@ -32,7 +32,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -181,7 +182,8 @@ scan(walk(join(ROOT, "packages/reporting-core")), [
   },
   {
     rule: "core-no-plane-zammad",
-    pattern: /@apzhub\/integration-plane|@apzhub\/integration-zammad|from\s+["'][^"']*plane|from\s+["'][^"']*zammad/,
+    pattern:
+      /@apzhub\/integration-plane|@apzhub\/integration-zammad|from\s+["'][^"']*plane|from\s+["'][^"']*zammad/,
   },
 ]);
 

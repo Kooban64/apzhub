@@ -68,12 +68,10 @@ export class ProjectsSearchPublisher {
   constructor(private readonly options: ProjectsSearchPublisherOptions) {
     this.mapper = options.mapper ?? new ProjectsSearchEntityMapper();
     this.validator = options.validator ?? new ProjectsSearchEntityValidator();
-    this.lifecycleHelper =
-      options.lifecycle ?? new ProjectsSearchLifecycle();
+    this.lifecycleHelper = options.lifecycle ?? new ProjectsSearchLifecycle();
     this.metrics = options.metrics ?? new ProjectsSearchMetrics();
     this.logger = options.logger ?? new ProjectsSearchLogger();
-    this.diagnosticsStore =
-      options.diagnostics ?? new ProjectsSearchDiagnosticsStore();
+    this.diagnosticsStore = options.diagnostics ?? new ProjectsSearchDiagnosticsStore();
     this.errors = options.errors ?? new ProjectsSearchErrorTranslator();
   }
 
@@ -123,12 +121,9 @@ export class ProjectsSearchPublisher {
     } catch (error) {
       const domain = this.errors.translate(error);
       this.metrics.record("validate", false, input.entityType);
-      this.diagnosticsStore.touch(
-        "validate",
-        context.correlationId,
-        input.entityType,
-        [{ field: "entity", code: domain.classification, message: domain.message }],
-      );
+      this.diagnosticsStore.touch("validate", context.correlationId, input.entityType, [
+        { field: "entity", code: domain.classification, message: domain.message },
+      ]);
       return failedResult("validate", context, domain.message, started);
     }
   }
@@ -166,11 +161,7 @@ export class ProjectsSearchPublisher {
     entityId: string,
   ): SearchPublicationResult {
     const started = Date.now();
-    this.diagnosticsStore.touch(
-      "remove",
-      context.correlationId,
-      entityType,
-    );
+    this.diagnosticsStore.touch("remove", context.correlationId, entityType);
     try {
       const result = this.options.integrationPublisher.remove(
         toSearchIntegrationContext(context),
@@ -214,9 +205,7 @@ export class ProjectsSearchPublisher {
     }
   }
 
-  diagnostics(
-    context: ProjectsSearchPublicationContext,
-  ): ProjectsSearchDiagnostics {
+  diagnostics(context: ProjectsSearchPublicationContext): ProjectsSearchDiagnostics {
     this.diagnosticsStore.touch("diagnostics", context.correlationId);
     return this.diagnosticsStore.build(
       this.metrics.snapshot(),
@@ -224,9 +213,7 @@ export class ProjectsSearchPublisher {
     );
   }
 
-  statistics(
-    _context: ProjectsSearchPublicationContext,
-  ): ProjectsSearchStatistics {
+  statistics(_context: ProjectsSearchPublicationContext): ProjectsSearchStatistics {
     return this.metrics.snapshot();
   }
 
@@ -298,16 +285,12 @@ export class ProjectsSearchPublisher {
       }
       const result = invoke(draft, toSearchIntegrationContext(context));
       this.metrics.record(operation, result.ok, input.entityType);
-      this.logger.log(
-        result.ok ? "info" : "error",
-        `Projects search ${operation}`,
-        {
-          correlationId: context.correlationId,
-          operation,
-          entityType: input.entityType,
-          entityId: draft.entityId,
-        },
-      );
+      this.logger.log(result.ok ? "info" : "error", `Projects search ${operation}`, {
+        correlationId: context.correlationId,
+        operation,
+        entityType: input.entityType,
+        entityId: draft.entityId,
+      });
       return result;
     } catch (error) {
       const domain = this.errors.translate(error);

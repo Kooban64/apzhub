@@ -97,10 +97,7 @@ export function assertMandatoryTenantFilterPresent(
     throw searchTenantFilterRequired();
   }
   const ok = (query.filters ?? []).some(
-    (f) =>
-      f.field === "tenantId" &&
-      f.op === "eq" &&
-      String(f.value) === tenantId,
+    (f) => f.field === "tenantId" && f.op === "eq" && String(f.value) === tenantId,
   );
   if (!ok) {
     throw searchTenantFilterRequired(

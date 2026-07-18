@@ -34,17 +34,26 @@ describe("Plane OSS-100-08 SDK adoption", () => {
       },
       delete: async () => undefined,
       validateConfiguration: () => ({ ok: true, issues: [] as string[] }),
-      supportedOperations: () => ["list", "get", "create", "update", "delete", "validate"],
+      supportedOperations: () => [
+        "list",
+        "get",
+        "create",
+        "update",
+        "delete",
+        "validate",
+      ],
     } as unknown as PlaneWebhookService;
 
     const manager = asPlaneWebhookManager(service);
     expect(manager.supportedOperations()).toContain("list");
     expect(PLANE_PROVIDER_ID).toBe("plane");
     // Same wrapping path as SDK asWebhookManager
-    expect(asWebhookManager(service as never, {
-      integrationId: "plane",
-      providerId: "plane",
-    }).supportedOperations()).toContain("enable");
+    expect(
+      asWebhookManager(service as never, {
+        integrationId: "plane",
+        providerId: "plane",
+      }).supportedOperations(),
+    ).toContain("enable");
   });
 
   it("translates webhook payloads to IntegrationSourceEvent", () => {

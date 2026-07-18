@@ -35,7 +35,12 @@ const STATUSES: readonly SupportRequestStatus[] = [
   "closed",
   "merged",
 ];
-const PRIORITIES: readonly SupportRequestPriority[] = ["low", "normal", "high", "urgent"];
+const PRIORITIES: readonly SupportRequestPriority[] = [
+  "low",
+  "normal",
+  "high",
+  "urgent",
+];
 
 export function SupportRequestCommands({
   request,
@@ -92,9 +97,7 @@ export function SupportRequestCommands({
             variant="outline"
             size="sm"
             disabled={busy}
-            onClick={() =>
-              run.mutate(() => reopenSupportRequest(request.id))
-            }
+            onClick={() => run.mutate(() => reopenSupportRequest(request.id))}
             data-testid="support-command-reopen"
           >
             Reopen
@@ -109,7 +112,9 @@ export function SupportRequestCommands({
             <select
               className="h-9 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2 text-sm"
               value={status}
-              onChange={(event) => setStatus(event.target.value as SupportRequestStatus)}
+              onChange={(event) =>
+                setStatus(event.target.value as SupportRequestStatus)
+              }
               disabled={busy}
               data-testid="support-command-state"
             >

@@ -18,20 +18,20 @@ No shortcuts. No new analytics, calculations, persistence, reporting engine, PDF
 
 ## Categories
 
-| Category | Route suffix |
-|---|---|
-| Executive | `/executive-dashboards` |
-| Engineering Management | `/executive-dashboards/engineering` |
-| QA Management | `/executive-dashboards/qa` |
-| Release Management | `/executive-dashboards/release` |
-| Certification | `/executive-dashboards/certification` |
-| Quality | `/executive-dashboards/quality` |
-| Coverage | `/executive-dashboards/coverage` |
-| Automation | `/executive-dashboards/automation` |
-| Manual Testing | `/executive-dashboards/manual-testing` |
-| Risk | `/executive-dashboards/risk` |
-| Historical Trends | `/executive-dashboards/historical-trends` |
-| Release Readiness | `/executive-dashboards/release-readiness` |
+| Category               | Route suffix                              |
+| ---------------------- | ----------------------------------------- |
+| Executive              | `/executive-dashboards`                   |
+| Engineering Management | `/executive-dashboards/engineering`       |
+| QA Management          | `/executive-dashboards/qa`                |
+| Release Management     | `/executive-dashboards/release`           |
+| Certification          | `/executive-dashboards/certification`     |
+| Quality                | `/executive-dashboards/quality`           |
+| Coverage               | `/executive-dashboards/coverage`          |
+| Automation             | `/executive-dashboards/automation`        |
+| Manual Testing         | `/executive-dashboards/manual-testing`    |
+| Risk                   | `/executive-dashboards/risk`              |
+| Historical Trends      | `/executive-dashboards/historical-trends` |
+| Release Readiness      | `/executive-dashboards/release-readiness` |
 
 ## Presentation modules
 

@@ -4,7 +4,10 @@ import type {
   CreatePlatformPermissionInput,
   PlatformPermission,
 } from "./authorization-types";
-import { CANONICAL_PERMISSION_NAMESPACES, parsePermissionNamespace } from "./permission-model";
+import {
+  CANONICAL_PERMISSION_NAMESPACES,
+  parsePermissionNamespace,
+} from "./permission-model";
 import type { PermissionRepository } from "./repositories/repository-interfaces";
 
 export class PermissionService {
@@ -44,7 +47,10 @@ export class PermissionService {
 
   ensurePermissions(keys: readonly string[]): readonly PlatformPermission[] {
     return keys.map((permissionKey) =>
-      this.registerPermission({ permissionKey, description: `Manifest permission ${permissionKey}` }),
+      this.registerPermission({
+        permissionKey,
+        description: `Manifest permission ${permissionKey}`,
+      }),
     );
   }
 }
@@ -69,7 +75,11 @@ export class AuthorizationDiagnosticsTracker {
 
   recordOutcome(outcome: AuthorizationOutcome): void {
     this.outcomeCounts[outcome] += 1;
-    if (outcome === "deny" || outcome === "unknown_permission" || outcome === "tenant_mismatch") {
+    if (
+      outcome === "deny" ||
+      outcome === "unknown_permission" ||
+      outcome === "tenant_mismatch"
+    ) {
       this.evaluationFailureCount += 1;
     }
   }
@@ -92,7 +102,10 @@ export class AuthorizationDiagnosticsTracker {
     assignmentCount: number;
   }): AuthorizationDiagnostics {
     return {
-      evaluationCount: Object.values(this.outcomeCounts).reduce((sum, value) => sum + value, 0),
+      evaluationCount: Object.values(this.outcomeCounts).reduce(
+        (sum, value) => sum + value,
+        0,
+      ),
       allowCount: this.outcomeCounts.allow,
       denyCount: this.outcomeCounts.deny,
       notApplicableCount: this.outcomeCounts.not_applicable,

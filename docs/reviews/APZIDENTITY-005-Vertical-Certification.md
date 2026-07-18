@@ -21,17 +21,17 @@ Identity Administration Workbench
 
 ## Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:identity-foundation` | PASS |
-| `pnpm audit:identity-platform-services` | PASS |
-| `pnpm audit:identity-http-client` | PASS |
-| `pnpm audit:identity-workbench` | PASS |
-| `pnpm audit:identity-vertical` | PASS (required) |
-| `pnpm certify:identity-vertical` | PASS (composes audits + harness + coverage) |
-| `pnpm openapi:validate:platform` | PASS |
-| Vitest `testing/identity-vertical` | PASS (10 journeys) |
-| Playwright live webServer | LIMITED (Testing slug conflict — external) |
+| Gate                                    | Result                                      |
+| --------------------------------------- | ------------------------------------------- |
+| `pnpm audit:identity-foundation`        | PASS                                        |
+| `pnpm audit:identity-platform-services` | PASS                                        |
+| `pnpm audit:identity-http-client`       | PASS                                        |
+| `pnpm audit:identity-workbench`         | PASS                                        |
+| `pnpm audit:identity-vertical`          | PASS (required)                             |
+| `pnpm certify:identity-vertical`        | PASS (composes audits + harness + coverage) |
+| `pnpm openapi:validate:platform`        | PASS                                        |
+| Vitest `testing/identity-vertical`      | PASS (10 journeys)                          |
+| Playwright live webServer               | LIMITED (Testing slug conflict — external)  |
 
 ## Intentional non-defects
 

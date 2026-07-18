@@ -31,12 +31,12 @@ Configuration SoR (`@apzhub/configuration-*`) ≠ runtime `@apzhub/config` confi
 
 ## Package versions at freeze
 
-| Package | Version |
-| --- | --- |
-| configuration-contracts | 0.2.0 |
-| configuration-core | 0.2.0 |
-| configuration-persistence | 0.1.0 |
-| platform-services | 0.21.0 |
+| Package                   | Version |
+| ------------------------- | ------- |
+| configuration-contracts   | 0.2.0   |
+| configuration-core        | 0.2.0   |
+| configuration-persistence | 0.1.0   |
+| platform-services         | 0.21.0  |
 
 ## Future
 

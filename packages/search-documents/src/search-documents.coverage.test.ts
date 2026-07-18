@@ -54,9 +54,7 @@ const baseDoc: Document = {
   },
   tagIds: [],
   creatorUserId: "user-1",
-  permissions: [
-    { principalType: "role", principalId: "reader", action: "read" },
-  ],
+  permissions: [{ principalType: "role", principalId: "reader", action: "read" }],
   createdAt: "2026-01-01T00:00:00.000Z",
   updatedAt: "2026-01-01T00:00:00.000Z",
 };
@@ -82,23 +80,21 @@ describe("APZSEARCH-012 residual coverage", () => {
     expect(life.suggestFromDomainStatus("document_version", "active")).toBe(
       "validated",
     );
-    expect(life.suggestFromDomainStatus("document_version", "deleted")).toBe(
-      "removed",
-    );
+    expect(life.suggestFromDomainStatus("document_version", "deleted")).toBe("removed");
     expect(life.suggestFromDomainStatus("document", "draft")).toBe("draft");
     expect(life.canTransition("published", "removed")).toBe(true);
     expect(() => life.assertTransition("archived", "published")).toThrow();
 
     const errors = new DocumentsSearchErrorTranslator();
-    expect(
-      errors.translate(new Error("storageKey forbidden")).classification,
-    ).toBe("validation_failed");
-    expect(
-      errors.translate(new Error("classification required")).classification,
-    ).toBe("validation_failed");
-    expect(
-      errors.translate(new Error("tenant mismatch")).classification,
-    ).toBe("tenant_mismatch");
+    expect(errors.translate(new Error("storageKey forbidden")).classification).toBe(
+      "validation_failed",
+    );
+    expect(errors.translate(new Error("classification required")).classification).toBe(
+      "validation_failed",
+    );
+    expect(errors.translate(new Error("tenant mismatch")).classification).toBe(
+      "tenant_mismatch",
+    );
     expect(errors.translate(new Error("boom")).message).toContain("boom");
 
     const store = new DiagnosticsStore();
@@ -163,9 +159,7 @@ describe("APZSEARCH-012 residual coverage", () => {
     expect(isForbiddenMetadataKey("signedUrl")).toBe(true);
     expect(isForbiddenMetadataKey("byteLength")).toBe(false);
     expect(isForbiddenMetadataValue("s3://bucket/obj")).toBe(true);
-    expect(isForbiddenMetadataValue("deadbeefdeadbeefdeadbeefdeadbeef")).toBe(
-      true,
-    );
+    expect(isForbiddenMetadataValue("deadbeefdeadbeefdeadbeefdeadbeef")).toBe(true);
     expect(isForbiddenMetadataValue("application/pdf")).toBe(false);
 
     const leaks = scanMetadataForStorageLeakage({

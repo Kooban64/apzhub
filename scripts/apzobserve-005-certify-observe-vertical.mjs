@@ -66,7 +66,10 @@ let failed = false;
 
 const audits = [
   ["scripts/apzobserve-001-observe-foundation-audit.mjs", "audit:observe-foundation"],
-  ["scripts/apzobserve-002-platform-services-audit.mjs", "audit:observe-platform-services"],
+  [
+    "scripts/apzobserve-002-platform-services-audit.mjs",
+    "audit:observe-platform-services",
+  ],
   ["scripts/apzobserve-003-observe-http-audit.mjs", "audit:observe-http-client"],
   ["scripts/apzobserve-004-observe-workbench-audit.mjs", "audit:observe-workbench"],
   ["scripts/apzobserve-005-observe-vertical-audit.mjs", "audit:observe-vertical"],

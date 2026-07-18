@@ -61,9 +61,7 @@ export function assertCertificationTransition(
   }
 }
 
-export function isTerminalCertificationStatus(
-  status: CertificationStatus,
-): boolean {
+export function isTerminalCertificationStatus(status: CertificationStatus): boolean {
   const canon = canonicalizeCertificationStatus(status);
   return canon === "archived";
 }

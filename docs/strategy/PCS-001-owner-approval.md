@@ -8,14 +8,14 @@
 
 ## Approvals granted
 
-| Decision | Status |
-|----------|--------|
-| **PCS-001 Platform Core Strategy** | ✅ **Approved** — master strategy ratified (Very Good 8.5/10) |
-| **PCv2-01 Production SaaS Hardening** | ✅ **Approved to proceed** — first implementation milestone |
-| **Financial Engine extraction** | ❌ **Not approved** — remain deferred per FIN-001 |
-| **Banking** | ❌ **Not approved** |
-| **Exchange expansion** | ❌ **Not approved** |
-| **Additional vertical products** | ❌ **Not approved** |
+| Decision                              | Status                                                        |
+| ------------------------------------- | ------------------------------------------------------------- |
+| **PCS-001 Platform Core Strategy**    | ✅ **Approved** — master strategy ratified (Very Good 8.5/10) |
+| **PCv2-01 Production SaaS Hardening** | ✅ **Approved to proceed** — first implementation milestone   |
+| **Financial Engine extraction**       | ❌ **Not approved** — remain deferred per FIN-001             |
+| **Banking**                           | ❌ **Not approved**                                           |
+| **Exchange expansion**                | ❌ **Not approved**                                           |
+| **Additional vertical products**      | ❌ **Not approved**                                           |
 
 ---
 
@@ -60,17 +60,17 @@ This amendment **supersedes** conflicting sequencing in PCS-001 draft documents.
 
 After PCv2-02, pivot to the original productivity platform vision. Integration order:
 
-| Wave | Integration | APZHUB name | Reason |
-|------|-------------|-------------|--------|
-| **1** | Plane | Projects | Central project and work management |
-| **2** | Kimai | Time Tracking | Time recording tied to projects and billing |
-| **3** | Paperless-ngx | Documents | Document management and workflows |
-| **4** | Zammad | Support | Service desk integrated with users, projects, documents |
-| **5** | Kiwi TCMS | Testing | QA and testing linked to projects |
-| **6** | Metabase | Analytics | Analytics across platform data |
-| **7** | n8n | Automation | Automation connecting platform capabilities |
-| **8** | Grafana / Prometheus / Loki | Observability | Operations visibility |
-| **9** | Greenbone / MobSF / Faraday | Security Ops | Enterprise security operations |
+| Wave  | Integration                 | APZHUB name   | Reason                                                  |
+| ----- | --------------------------- | ------------- | ------------------------------------------------------- |
+| **1** | Plane                       | Projects      | Central project and work management                     |
+| **2** | Kimai                       | Time Tracking | Time recording tied to projects and billing             |
+| **3** | Paperless-ngx               | Documents     | Document management and workflows                       |
+| **4** | Zammad                      | Support       | Service desk integrated with users, projects, documents |
+| **5** | Kiwi TCMS                   | Testing       | QA and testing linked to projects                       |
+| **6** | Metabase                    | Analytics     | Analytics across platform data                          |
+| **7** | n8n                         | Automation    | Automation connecting platform capabilities             |
+| **8** | Grafana / Prometheus / Loki | Observability | Operations visibility                                   |
+| **9** | Greenbone / MobSF / Faraday | Security Ops  | Enterprise security operations                          |
 
 **Gate:** OSS Wave 1 begins only after **M17** (or minimum CI worker deployment coverage) is complete.
 

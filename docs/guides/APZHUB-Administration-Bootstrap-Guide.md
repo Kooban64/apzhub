@@ -4,10 +4,10 @@
 
 ## Env gate
 
-| Variable | Effect |
-| --- | --- |
+| Variable                        | Effect                                                  |
+| ------------------------------- | ------------------------------------------------------- |
 | `APZHUB_ADMINISTRATION_ENABLED` | Must be `1` / `true` / `on` to enable (deny-by-default) |
-| `DATABASE_URL` | Required when enabled — production uses PostgreSQL only |
+| `DATABASE_URL`                  | Required when enabled — production uses PostgreSQL only |
 
 ## Bootstrap wiring
 
@@ -20,8 +20,8 @@
 
 ## Factories
 
-| Factory | Use |
-| --- | --- |
-| `createAdministrationPlatformServicesForProduction` | Real PostgreSQL — no silent memory |
-| `createAdministrationPlatformServicesForTest` | Requires `postgresDb` or `allowInMemoryPersistence: true` |
-| `createAdministrationPlatformServices` | Explicit persistence bundle |
+| Factory                                             | Use                                                       |
+| --------------------------------------------------- | --------------------------------------------------------- |
+| `createAdministrationPlatformServicesForProduction` | Real PostgreSQL — no silent memory                        |
+| `createAdministrationPlatformServicesForTest`       | Requires `postgresDb` or `allowInMemoryPersistence: true` |
+| `createAdministrationPlatformServices`              | Explicit persistence bundle                               |

@@ -46,9 +46,7 @@ function assertTenant(ctx: DocumentRequestContext, tenantId: string): void {
   }
 }
 
-export function createInMemoryDocumentRepositories(
-  stores: DocumentInMemoryStores,
-): {
+export function createInMemoryDocumentRepositories(stores: DocumentInMemoryStores): {
   documents: DocumentRepositoryPort;
   metadata: DocumentMetadataRepositoryPort;
   tags: DocumentTagRepositoryPort;
@@ -92,9 +90,7 @@ export function createInMemoryDocumentRepositories(
     },
     tags: {
       async list(ctx) {
-        return [...stores.tags.values()].filter(
-          (row) => row.tenantId === ctx.tenantId,
-        );
+        return [...stores.tags.values()].filter((row) => row.tenantId === ctx.tenantId);
       },
       async get(ctx, tagId) {
         const row = stores.tags.get(tagId) ?? null;
@@ -148,8 +144,7 @@ export function createInMemoryDocumentRepositories(
       async listByDocument(ctx, documentId) {
         return [...stores.audits.values()]
           .filter(
-            (row) =>
-              row.tenantId === ctx.tenantId && row.documentId === documentId,
+            (row) => row.tenantId === ctx.tenantId && row.documentId === documentId,
           )
           .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
       },

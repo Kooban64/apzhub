@@ -141,10 +141,7 @@ export class DocumentsSearchEntityValidator {
     // Draft documents are allowed to publish — do not block on status=draft.
     if (isDocumentsSearchEntityType(draft.entityType)) {
       for (const key of MANDATORY_BY_TYPE[draft.entityType]) {
-        if (
-          metadata[key] === undefined ||
-          String(metadata[key]).trim().length === 0
-        ) {
+        if (metadata[key] === undefined || String(metadata[key]).trim().length === 0) {
           issues.push({
             field: `metadata.${key}`,
             code: "required",

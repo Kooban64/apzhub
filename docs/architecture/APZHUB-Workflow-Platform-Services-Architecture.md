@@ -22,35 +22,35 @@ Product / future HTTP (`/api/v1/workflows` — APZWORKFLOW-003)
                   → Persistence (@apzhub/workflow-persistence)
 ```
 
-| Layer | Responsibility | Must not |
-| ----- | -------------- | -------- |
-| Gateway facets | Typed accessors, pipeline wrapping | Execution, n8n, HTTP |
-| Platform service impls | Map `ServiceRequestContext` → domain; error translation | Business rules |
-| Workflow Core | Domain CRUD, validation, lifecycle | HTTP, gateway, platform-services |
-| Persistence | SoR metadata | Called from products |
+| Layer                  | Responsibility                                          | Must not                         |
+| ---------------------- | ------------------------------------------------------- | -------------------------------- |
+| Gateway facets         | Typed accessors, pipeline wrapping                      | Execution, n8n, HTTP             |
+| Platform service impls | Map `ServiceRequestContext` → domain; error translation | Business rules                   |
+| Workflow Core          | Domain CRUD, validation, lifecycle                      | HTTP, gateway, platform-services |
+| Persistence            | SoR metadata                                            | Called from products             |
 
 ## Gateway surface (`WorkflowPlatformGateway`)
 
-| Facet | Pipeline service key | Role |
-| ----- | -------------------- | ---- |
-| `workflows` | `workflowWorkflows` | CRUD, find, publish, archive, restore, transition |
-| `versions` | `workflowVersions` | Create / get / list immutable versions |
-| `templates` | `workflowTemplates` | Template CRUD |
-| `categories` | `workflowCategories` | Category create / get / list |
-| `folders` | `workflowFolders` | Folder create / get / list |
-| `validation` | `workflowValidation` | Structural / reference validation |
-| `audit` | `workflowAudit` | List workflow audit entries |
+| Facet        | Pipeline service key | Role                                              |
+| ------------ | -------------------- | ------------------------------------------------- |
+| `workflows`  | `workflowWorkflows`  | CRUD, find, publish, archive, restore, transition |
+| `versions`   | `workflowVersions`   | Create / get / list immutable versions            |
+| `templates`  | `workflowTemplates`  | Template CRUD                                     |
+| `categories` | `workflowCategories` | Category create / get / list                      |
+| `folders`    | `workflowFolders`    | Folder create / get / list                        |
+| `validation` | `workflowValidation` | Structural / reference validation                 |
+| `audit`      | `workflowAudit`      | List workflow audit entries                       |
 
 Access via `gateway.workflow` (single nested getter — no second gateway).
 
 ## Factories
 
-| Factory | Use |
-| ------- | --- |
-| `createWorkflowPlatformServices` | Compose from persistence bundle |
-| `createWorkflowPlatformServicesForProduction` | Requires `postgresDb` — **no silent memory** |
-| `createWorkflowPlatformServicesForTest` | Requires `allowInMemoryPersistence` or postgres |
-| `wrapWorkflowPlatformGatewayWithPipeline` | Applied via `bundle.wrapWithPipeline(pipeline)` |
+| Factory                                       | Use                                             |
+| --------------------------------------------- | ----------------------------------------------- |
+| `createWorkflowPlatformServices`              | Compose from persistence bundle                 |
+| `createWorkflowPlatformServicesForProduction` | Requires `postgresDb` — **no silent memory**    |
+| `createWorkflowPlatformServicesForTest`       | Requires `allowInMemoryPersistence` or postgres |
+| `wrapWorkflowPlatformGatewayWithPipeline`     | Applied via `bundle.wrapWithPipeline(pipeline)` |
 
 ## Hard boundaries
 

@@ -28,9 +28,7 @@ export function assertNoSecretMetadataNotes(notes?: string): void {
   }
 }
 
-export function validateAdministrationModuleKey(
-  module: AdministrationModule,
-): void {
+export function validateAdministrationModuleKey(module: AdministrationModule): void {
   if (!isAdministrationModuleKey(module.key)) {
     throw new AdministrationDomainError(
       "invalid_module_key",
@@ -105,9 +103,7 @@ export function validateAdministrationMetadataNotes(
   assertNoSecretMetadataNotes(metadata.notes);
 }
 
-export function validateAdministrationAggregate(
-  module: AdministrationModule,
-): void {
+export function validateAdministrationAggregate(module: AdministrationModule): void {
   if (!module.tenantId.trim()) {
     throw new AdministrationDomainError(
       "invalid_tenant",

@@ -8,21 +8,21 @@
 
 ## Checklist
 
-| Area | Status |
-| ---- | ------ |
-| Canonical contracts **0.2.0** · core **0.2.0** · persistence **0.1.0** | ✅ |
-| Platform services **0.22.0** · `gateway.administration.*` | ✅ |
-| RequestPipeline + production authorisation (`administrationPlatformOps`) | ✅ |
-| HTTP API + OpenAPI Platform Administration (info **≥1.6.0**) | ✅ |
-| Typed client + mock | ✅ |
-| Workbench `/workspace/administration` + `platform-admin` manifests | ✅ |
-| Platform Operations coexistence at `/workspace/operations` | ✅ |
-| Vertical audit `pnpm audit:administration-vertical` | ✅ 0 violations |
-| Prior audits 001–004 | ✅ |
-| Consolidated coverage | ✅ **99.37%** lines / **99.43%** functions; ⚠️ branches **82.75%** |
-| Runtime admin / users / roles / tenants / provisioning / Event Bus / AI | ❌ Excluded by design |
-| Live PostgreSQL in unit CI | ⚠️ Factory + migration + in-memory parity; live DB optional |
-| Playwright / Next live webServer | ⚠️ LIMITED (Testing slug conflict — external) |
+| Area                                                                     | Status                                                             |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| Canonical contracts **0.2.0** · core **0.2.0** · persistence **0.1.0**   | ✅                                                                 |
+| Platform services **0.22.0** · `gateway.administration.*`                | ✅                                                                 |
+| RequestPipeline + production authorisation (`administrationPlatformOps`) | ✅                                                                 |
+| HTTP API + OpenAPI Platform Administration (info **≥1.6.0**)             | ✅                                                                 |
+| Typed client + mock                                                      | ✅                                                                 |
+| Workbench `/workspace/administration` + `platform-admin` manifests       | ✅                                                                 |
+| Platform Operations coexistence at `/workspace/operations`               | ✅                                                                 |
+| Vertical audit `pnpm audit:administration-vertical`                      | ✅ 0 violations                                                    |
+| Prior audits 001–004                                                     | ✅                                                                 |
+| Consolidated coverage                                                    | ✅ **99.37%** lines / **99.43%** functions; ⚠️ branches **82.75%** |
+| Runtime admin / users / roles / tenants / provisioning / Event Bus / AI  | ❌ Excluded by design                                              |
+| Live PostgreSQL in unit CI                                               | ⚠️ Factory + migration + in-memory parity; live DB optional        |
+| Playwright / Next live webServer                                         | ⚠️ LIMITED (Testing slug conflict — external)                      |
 
 ## Why PRODUCTION_READY_WITH_LIMITATIONS
 

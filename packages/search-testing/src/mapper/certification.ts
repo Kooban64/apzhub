@@ -27,7 +27,14 @@ import {
 
 export type CertificationMappableEntity = Extract<
   TestingSearchMappableEntity,
-  { readonly entityType: "certification" | "certification_gate" | "certification_approval" | "certification_evidence" | "certification_decision" }
+  {
+    readonly entityType:
+      | "certification"
+      | "certification_gate"
+      | "certification_approval"
+      | "certification_evidence"
+      | "certification_decision";
+  }
 >;
 
 export class CertificationSearchMapper {
@@ -41,7 +48,12 @@ export class CertificationSearchMapper {
       case "certification_gate":
         return this.mapCertificationGate(context, input.entity, input.extras);
       case "certification_approval":
-        return this.mapApproval(context, input.entity, "certification_approval", input.extras);
+        return this.mapApproval(
+          context,
+          input.entity,
+          "certification_approval",
+          input.extras,
+        );
       case "certification_evidence":
         return this.mapCertificationEvidence(context, input.entity, input.extras);
       case "certification_decision":
@@ -67,12 +79,7 @@ export class CertificationSearchMapper {
       summary: record.conditions?.slice(0, 280),
       organisationId: extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        record.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, record.status, classification),
       metadata: {
         key: record.key,
         status: record.status,
@@ -111,12 +118,7 @@ export class CertificationSearchMapper {
         summary: gate.description,
         organisationId: extras?.organisationId ?? context.organisationId,
         classification,
-        permissions: permissionTokens(
-          context,
-          extras,
-          gate.status,
-          classification,
-        ),
+        permissions: permissionTokens(context, extras, gate.status, classification),
         metadata: {
           key: gate.key,
           status: gate.status,
@@ -172,8 +174,7 @@ export class CertificationSearchMapper {
       status: approval.status,
     });
     const title =
-      extras?.title ??
-      `Approval ${approval.status} (${approval.id.slice(0, 12)})`;
+      extras?.title ?? `Approval ${approval.status} (${approval.id.slice(0, 12)})`;
     return {
       entityId: approval.id,
       entityType,
@@ -181,12 +182,7 @@ export class CertificationSearchMapper {
       summary: approval.comments?.slice(0, 280),
       organisationId: extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        approval.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, approval.status, classification),
       metadata: {
         status: approval.status,
         certificationRecordId: approval.certificationRecordId,
@@ -204,9 +200,7 @@ export class CertificationSearchMapper {
       navigationTarget: navigationTarget(entityType, approval.id),
       sourceId: `testing:${entityType}`,
       ownerUserId:
-        approval.approverUserId ??
-        approval.authorUserId ??
-        context.actorUserId,
+        approval.approverUserId ?? approval.authorUserId ?? context.actorUserId,
     };
   }
 
@@ -218,9 +212,7 @@ export class CertificationSearchMapper {
     assertPlatformEntityId(input.id, "certification_evidence.id");
     const tenantId = input.tenantId ?? extras?.tenantId;
     if (!tenantId) {
-      throw new Error(
-        "tenantId is required when mapping certification_evidence",
-      );
+      throw new Error("tenantId is required when mapping certification_evidence");
     }
     assertTenant(tenantId, context);
     const classification = resolveTestingClassification(context, {
@@ -252,9 +244,7 @@ export class CertificationSearchMapper {
           ? { certificationRecordId: input.certificationRecordId }
           : {}),
         ...(links ? { evidenceCount: String(links.evidenceIds.length) } : {}),
-        ...(links
-          ? { requirementCount: String(links.requirementIds.length) }
-          : {}),
+        ...(links ? { requirementCount: String(links.requirementIds.length) } : {}),
       },
       keywords: [input.title, ...(input.labels ?? [])],
       createdAt: new Date(0).toISOString(),
@@ -283,12 +273,7 @@ export class CertificationSearchMapper {
         title: extras?.title ?? `${entity.name} decision`,
         organisationId: extras?.organisationId ?? context.organisationId,
         classification,
-        permissions: permissionTokens(
-          context,
-          extras,
-          entity.status,
-          classification,
-        ),
+        permissions: permissionTokens(context, extras, entity.status, classification),
         metadata: {
           decisionStatus: entity.status,
           certificationRecordId: entity.id,
@@ -309,17 +294,14 @@ export class CertificationSearchMapper {
     assertPlatformEntityId(entity.id, "certification_decision.id");
     const tenantId = entity.tenantId ?? extras?.tenantId;
     if (!tenantId) {
-      throw new Error(
-        "tenantId is required when mapping certification_decision",
-      );
+      throw new Error("tenantId is required when mapping certification_decision");
     }
     assertTenant(tenantId, context);
     const classification = resolveTestingClassification(context, {
       explicit: extras?.classification,
       status: entity.status,
     });
-    const title =
-      entity.title ?? extras?.title ?? `Decision ${entity.status}`;
+    const title = entity.title ?? extras?.title ?? `Decision ${entity.status}`;
     return {
       entityId: entity.id,
       entityType: "certification_decision",
@@ -327,20 +309,13 @@ export class CertificationSearchMapper {
       summary: entity.summary,
       organisationId: extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        entity.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, entity.status, classification),
       metadata: {
         decisionStatus: entity.status,
         status: entity.status,
         certificationRecordId: entity.certificationRecordId,
         ...(entity.decidedAt ? { decidedAt: entity.decidedAt } : {}),
-        ...(entity.decidedByUserId
-          ? { decidedByUserId: entity.decidedByUserId }
-          : {}),
+        ...(entity.decidedByUserId ? { decidedByUserId: entity.decidedByUserId } : {}),
       },
       keywords: [title, entity.status],
       createdAt: entity.decidedAt ?? new Date(0).toISOString(),

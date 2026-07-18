@@ -4,13 +4,13 @@
 
 ## Layout
 
-| Path | Role |
-| --- | --- |
-| `apps/web/lib/administration/routes.ts` | Workspace + HTTP helpers |
-| `apps/web/lib/administration/administration-api.ts` | Typed-client facades |
-| `apps/web/components/administration/administration-workspace-router.tsx` | Path → section |
-| `apps/web/components/administration/platform-administration-view.tsx` | Section UI |
-| `packages/workbench-framework/manifests/platform-admin*/` | Activity Bar + Sidebar |
+| Path                                                                     | Role                     |
+| ------------------------------------------------------------------------ | ------------------------ |
+| `apps/web/lib/administration/routes.ts`                                  | Workspace + HTTP helpers |
+| `apps/web/lib/administration/administration-api.ts`                      | Typed-client facades     |
+| `apps/web/components/administration/administration-workspace-router.tsx` | Path → section           |
+| `apps/web/components/administration/platform-administration-view.tsx`    | Section UI               |
+| `packages/workbench-framework/manifests/platform-admin*/`                | Activity Bar + Sidebar   |
 
 ## Consumption rule
 

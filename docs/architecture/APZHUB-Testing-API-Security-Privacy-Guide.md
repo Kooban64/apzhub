@@ -2,7 +2,7 @@
 
 **Purpose:** Brief security and privacy guide for the APZTCMS-012 Testing HTTP API.  
 **Audience:** Platform engineers, security reviewers, AI agents.  
-**Authority:** [013 Security & Zero Trust](../013-security-zero-trust-architecture.md) · [Testing Security Tenancy Guide](./APZHUB-Testing-Security-Tenancy-Guide.md)  
+**Authority:** [013 Security & Zero Trust](../013-security-architecture-zero-trust-framework.md) · [Testing Security Tenancy Guide](./APZHUB-Testing-Security-Tenancy-Guide.md)  
 **Status:** Implemented guidance — APZTCMS-012 complete.  
 **Last updated:** 2026-07-12
 

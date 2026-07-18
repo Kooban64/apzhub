@@ -11,11 +11,7 @@ export type {
   CursorPageResult,
 } from "./common/paging";
 
-export type {
-  SortDirection,
-  SortField,
-  SortSpec,
-} from "./common/sorting";
+export type { SortDirection, SortField, SortSpec } from "./common/sorting";
 
 export type { ListQuery } from "./common/list-query";
 
@@ -33,10 +29,7 @@ export type {
   PlatformServiceErrorContract,
 } from "./common/errors";
 
-export {
-  PlatformServiceError,
-  isPlatformServiceError,
-} from "./common/errors";
+export { PlatformServiceError, isPlatformServiceError } from "./common/errors";
 
 export type * from "./domain";
 

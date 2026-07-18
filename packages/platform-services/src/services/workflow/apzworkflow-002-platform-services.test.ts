@@ -27,9 +27,7 @@ import {
   resolveOperationAuthorization,
 } from "../../index";
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_wf",
     userId: "user_wf",
@@ -68,8 +66,8 @@ function validGraph(): WorkflowGraphSnapshot {
 }
 
 describe("APZWORKFLOW-002 workflow platform services", () => {
-  it("exports platform services version 0.24.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
+  it("exports platform services version 0.25.0", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
   });
 
   it("registers workflow permissions in the platform catalogue", () => {
@@ -80,40 +78,33 @@ describe("APZWORKFLOW-002 workflow platform services", () => {
 
   it("maps gateway operations to workflow permissions (no allow-all)", () => {
     expect(
-      resolveOperationAuthorization("workflowWorkflows", "create")
-        ?.requiredPermission,
+      resolveOperationAuthorization("workflowWorkflows", "create")?.requiredPermission,
     ).toBe("workflow.create");
     expect(
-      resolveOperationAuthorization("workflowWorkflows", "get")
-        ?.requiredPermission,
+      resolveOperationAuthorization("workflowWorkflows", "get")?.requiredPermission,
     ).toBe("workflow.view");
     expect(
-      resolveOperationAuthorization("workflowWorkflows", "publish")
-        ?.requiredPermission,
+      resolveOperationAuthorization("workflowWorkflows", "publish")?.requiredPermission,
     ).toBe("workflow.publish");
     expect(
-      resolveOperationAuthorization("workflowWorkflows", "archive")
-        ?.requiredPermission,
+      resolveOperationAuthorization("workflowWorkflows", "archive")?.requiredPermission,
     ).toBe("workflow.archive");
     expect(
-      resolveOperationAuthorization("workflowWorkflows", "restore")
-        ?.requiredPermission,
+      resolveOperationAuthorization("workflowWorkflows", "restore")?.requiredPermission,
     ).toBe("workflow.restore");
     expect(
       resolveOperationAuthorization("workflowWorkflows", "transition")
         ?.requiredPermission,
     ).toBe("workflow.update");
     expect(
-      resolveOperationAuthorization("workflowTemplates", "create")
-        ?.requiredPermission,
+      resolveOperationAuthorization("workflowTemplates", "create")?.requiredPermission,
     ).toBe("workflow.template.create");
     expect(
       resolveOperationAuthorization("workflowValidation", "validate")
         ?.requiredPermission,
     ).toBe("workflow.validation");
     expect(
-      resolveOperationAuthorization("workflowAudit", "list")
-        ?.requiredPermission,
+      resolveOperationAuthorization("workflowAudit", "list")?.requiredPermission,
     ).toBe("workflow.audit");
   });
 
@@ -176,16 +167,12 @@ describe("APZWORKFLOW-002 workflow platform services", () => {
     });
     expect(version.versionNumber).toBe(1);
 
-    const listed = await bundle.gateway.workflow.versions.list(
-      request,
-      created.id,
-    );
+    const listed = await bundle.gateway.workflow.versions.list(request, created.id);
     expect(listed).toHaveLength(1);
 
-    const validation = await bundle.gateway.workflow.validation.validate(
-      request,
-      { workflowId: created.id },
-    );
+    const validation = await bundle.gateway.workflow.validation.validate(request, {
+      workflowId: created.id,
+    });
     expect(validation.valid).toBe(true);
 
     const published = await bundle.gateway.workflow.workflows.publish(

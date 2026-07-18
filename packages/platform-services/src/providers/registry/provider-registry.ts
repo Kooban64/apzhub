@@ -10,7 +10,10 @@ export class ProviderRegistry {
 
   /** Registers a provider. Replaces an existing registration with the same providerId. */
   register<TProvider>(registration: ProviderRegistration<TProvider>): void {
-    this.registrations.set(registration.providerId, registration as ProviderRegistration);
+    this.registrations.set(
+      registration.providerId,
+      registration as ProviderRegistration,
+    );
   }
 
   /** Removes a provider by id. Clears active selection when it matches. */
@@ -46,7 +49,9 @@ export class ProviderRegistry {
   setActiveProvider(capability: PlatformProviderCapability, providerId: string): void {
     const registration = this.registrations.get(providerId);
     if (!registration || registration.capability !== capability) {
-      throw new Error(`Provider "${providerId}" is not registered for capability "${capability}"`);
+      throw new Error(
+        `Provider "${providerId}" is not registered for capability "${capability}"`,
+      );
     }
 
     this.activeByCapability.set(capability, providerId);
@@ -63,7 +68,9 @@ export class ProviderRegistry {
   }
 
   /** Returns enabled registrations for a capability sorted by priority ascending. */
-  listCandidates(capability: PlatformProviderCapability): readonly ProviderRegistration[] {
+  listCandidates(
+    capability: PlatformProviderCapability,
+  ): readonly ProviderRegistration[] {
     return this.list(capability)
       .filter((entry) => entry.enabled !== false)
       .sort((left, right) => left.priority - right.priority);

@@ -264,9 +264,7 @@ export function mapIdentityEmployment(
     departmentId: row.departmentId
       ? asIdentityDepartmentId(row.departmentId)
       : undefined,
-    positionId: row.positionId
-      ? asIdentityPositionId(row.positionId)
-      : undefined,
+    positionId: row.positionId ? asIdentityPositionId(row.positionId) : undefined,
     status: row.status as IdentityLifecycleStatus,
     startedAt: row.startedAt ?? undefined,
     endedAt: row.endedAt ?? undefined,
@@ -317,9 +315,7 @@ export function mapIdentityInvitation(
     tenantId: row.tenantId,
     organisationId: row.organisationId ?? undefined,
     email: row.email,
-    invitedUserId: row.invitedUserId
-      ? asIdentityUserId(row.invitedUserId)
-      : undefined,
+    invitedUserId: row.invitedUserId ? asIdentityUserId(row.invitedUserId) : undefined,
     status: row.status as IdentityInvitationStatus,
     expiresAt: row.expiresAt ?? undefined,
     createdAt: row.createdAt.toISOString(),
@@ -451,10 +447,7 @@ type TenantScopedTable = {
   readonly tenantId: unknown;
 };
 
-function createTenantScopedCrud<
-  TEntity extends { id: string; tenantId: string },
-  TRow,
->(
+function createTenantScopedCrud<TEntity extends { id: string; tenantId: string }, TRow>(
   db: DatabaseExecutor,
   table: TenantScopedTable,
   toRow: (entity: TEntity) => Record<string, unknown>,
@@ -475,10 +468,7 @@ function createTenantScopedCrud<
         .select()
         .from(table as never)
         .where(
-          and(
-            eq(table.id as never, id),
-            eq(table.tenantId as never, ctx.tenantId),
-          ),
+          and(eq(table.id as never, id), eq(table.tenantId as never, ctx.tenantId)),
         )
         .limit(1);
       const row = rows[0] as TRow | undefined;
@@ -879,10 +869,7 @@ export function createPostgresIdentityRepositories(
         .select()
         .from(platformIamAudit)
         .where(
-          and(
-            eq(platformIamAudit.id, id),
-            eq(platformIamAudit.tenantId, ctx.tenantId),
-          ),
+          and(eq(platformIamAudit.id, id), eq(platformIamAudit.tenantId, ctx.tenantId)),
         )
         .limit(1);
       const row = rows[0];
@@ -929,9 +916,7 @@ export function createPostgresIdentityRepositories(
         .from(platformIamHistory)
         .where(eq(platformIamHistory.tenantId, ctx.tenantId));
       const mapped = rows.map(mapIdentityHistory);
-      return userId == null
-        ? mapped
-        : mapped.filter((row) => row.userId === userId);
+      return userId == null ? mapped : mapped.filter((row) => row.userId === userId);
     },
   };
 
@@ -982,9 +967,7 @@ export function createPostgresIdentityRepositories(
         .from(platformIamReference)
         .where(eq(platformIamReference.tenantId, ctx.tenantId));
       const mapped = rows.map(mapIdentityReference);
-      return userId == null
-        ? mapped
-        : mapped.filter((row) => row.userId === userId);
+      return userId == null ? mapped : mapped.filter((row) => row.userId === userId);
     },
   };
 
@@ -1035,9 +1018,7 @@ export function createPostgresIdentityRepositories(
         .from(platformIamMetadata)
         .where(eq(platformIamMetadata.tenantId, ctx.tenantId));
       const mapped = rows.map(mapIdentityMetadata);
-      return userId == null
-        ? mapped
-        : mapped.filter((row) => row.userId === userId);
+      return userId == null ? mapped : mapped.filter((row) => row.userId === userId);
     },
   };
 

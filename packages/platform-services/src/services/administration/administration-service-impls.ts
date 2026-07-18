@@ -80,18 +80,13 @@ export function mapAdministrationDomainError(
   });
 }
 
-function mapUnknownError(
-  error: unknown,
-  correlationId: string,
-): PlatformServiceError {
+function mapUnknownError(error: unknown, correlationId: string): PlatformServiceError {
   if (isPlatformServiceError(error)) return error;
   if (error instanceof AdministrationDomainError) {
     return mapAdministrationDomainError(error, correlationId);
   }
   const message =
-    error instanceof Error
-      ? error.message
-      : "Unexpected administration service error";
+    error instanceof Error ? error.message : "Unexpected administration service error";
   if (
     /drizzle|postgres|pg_|relation |"platform_administration|ECONNREFUSED|tenant_mismatch/i.test(
       message,
@@ -135,9 +130,7 @@ export function createAdministrationPlatformServiceImpls(input: {
   return {
     modules: {
       list: (ctx) =>
-        withAdministrationErrorMapping(ctx, () =>
-          domain.listModules(toAdminCtx(ctx)),
-        ),
+        withAdministrationErrorMapping(ctx, () => domain.listModules(toAdminCtx(ctx))),
       get: (ctx, moduleId) =>
         withAdministrationErrorMapping(ctx, () =>
           domain.getModule(toAdminCtx(ctx), moduleId),
@@ -183,9 +176,7 @@ export function createAdministrationPlatformServiceImpls(input: {
     },
     sections: {
       list: (ctx) =>
-        withAdministrationErrorMapping(ctx, () =>
-          domain.listSections(toAdminCtx(ctx)),
-        ),
+        withAdministrationErrorMapping(ctx, () => domain.listSections(toAdminCtx(ctx))),
       get: (ctx, sectionId) =>
         withAdministrationErrorMapping(ctx, () =>
           domain.getSection(toAdminCtx(ctx), sectionId),
@@ -201,9 +192,7 @@ export function createAdministrationPlatformServiceImpls(input: {
     },
     actions: {
       list: (ctx) =>
-        withAdministrationErrorMapping(ctx, () =>
-          domain.listActions(toAdminCtx(ctx)),
-        ),
+        withAdministrationErrorMapping(ctx, () => domain.listActions(toAdminCtx(ctx))),
       get: (ctx, actionId) =>
         withAdministrationErrorMapping(ctx, () =>
           domain.getAction(toAdminCtx(ctx), actionId),
@@ -315,9 +304,7 @@ export function createAdministrationPlatformServiceImpls(input: {
     },
     policies: {
       list: (ctx) =>
-        withAdministrationErrorMapping(ctx, () =>
-          domain.listPolicies(toAdminCtx(ctx)),
-        ),
+        withAdministrationErrorMapping(ctx, () => domain.listPolicies(toAdminCtx(ctx))),
       get: (ctx, policyId) =>
         withAdministrationErrorMapping(ctx, () =>
           domain.getPolicy(toAdminCtx(ctx), policyId),

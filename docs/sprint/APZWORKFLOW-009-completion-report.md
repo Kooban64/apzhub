@@ -51,13 +51,13 @@ Scoped `components/workflow-engine/**`: **98.9%** lines · **100%** functions ·
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:workflow-engine-workbench` | PASS |
-| Vitest workflow-engine suite (28) | PASS |
-| Boundary audit (components) | PASS |
-| Coverage ≥95% lines/functions | PASS |
-| No execute / designer / n8n UI branding | PASS |
+| Gate                                    | Result |
+| --------------------------------------- | ------ |
+| `pnpm audit:workflow-engine-workbench`  | PASS   |
+| Vitest workflow-engine suite (28)       | PASS   |
+| Boundary audit (components)             | PASS   |
+| Coverage ≥95% lines/functions           | PASS   |
+| No execute / designer / n8n UI branding | PASS   |
 
 ## Technical Debt
 

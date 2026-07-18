@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-dimensions
+name: Metric Dimensions
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metric Dimensions sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metric Dimensions
+    icon: box
+    route: /workspace/metrics/dimensions
+    order: 70
+    permission: metrics.metadata
+  view:
+    title: Metric Dimensions
+    workspace: metrics
+    route: /workspace/metrics/dimensions
+    permission: metrics.metadata

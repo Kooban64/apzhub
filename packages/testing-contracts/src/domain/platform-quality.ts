@@ -175,7 +175,8 @@ export interface PlatformReleaseSummary {
   readonly certificationAggregate?: MultiProductCertificationAggregate;
   readonly approvalStatuses: Readonly<Record<PlatformGovernanceApprovalKind, string>>;
   readonly dependencyValidation: DependencyValidationResult;
-  readonly recommendationCode: "recommend_release" | "recommend_hold" | "recommend_reject";
+  readonly recommendationCode:
+    "recommend_release" | "recommend_hold" | "recommend_reject";
   readonly recommendationReasons: readonly string[];
   readonly computedAt: string;
   readonly isDecision: false;
@@ -286,11 +287,7 @@ export interface PlatformCrossProductLink extends AuditFields {
   readonly sourceProductKey: PlatformProductKey;
   readonly targetProductKey: PlatformProductKey;
   readonly linkKind:
-    | "requirement_mapping"
-    | "evidence"
-    | "certification"
-    | "release"
-    | "defect";
+    "requirement_mapping" | "evidence" | "certification" | "release" | "defect";
   readonly sourceRef: string;
   readonly targetRef: string;
   readonly summary?: string;

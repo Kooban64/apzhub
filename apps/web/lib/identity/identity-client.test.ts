@@ -222,9 +222,9 @@ describe("HTTP identity client", () => {
     await client.getManagementCapabilities();
 
     expect(calls.some((c) => c.includes("/api/v1/identity/users"))).toBe(true);
-    expect(
-      calls.some((c) => c.includes("/api/v1/identity/service-assignments")),
-    ).toBe(true);
+    expect(calls.some((c) => c.includes("/api/v1/identity/service-assignments"))).toBe(
+      true,
+    );
     expect(calls.some((c) => c.includes("/management-capabilities"))).toBe(true);
     expect(calls.every((c) => c.includes("/api/v1/identity"))).toBe(true);
   });
@@ -232,17 +232,18 @@ describe("HTTP identity client", () => {
   it("maps error envelopes including a 503 service-unavailable path", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(async () =>
-        new Response(
-          JSON.stringify({
-            error: {
-              message: "Identity Administration Platform HTTP API is not enabled.",
-              code: "IDENTITY_SERVICE_UNAVAILABLE",
-            },
-            meta: { correlationId: "c1", requestId: "r1" },
-          }),
-          { status: 503, headers: { "content-type": "application/json" } },
-        ),
+      vi.fn(
+        async () =>
+          new Response(
+            JSON.stringify({
+              error: {
+                message: "Identity Administration Platform HTTP API is not enabled.",
+                code: "IDENTITY_SERVICE_UNAVAILABLE",
+              },
+              meta: { correlationId: "c1", requestId: "r1" },
+            }),
+            { status: 503, headers: { "content-type": "application/json" } },
+          ),
       ),
     );
     const client = createHttpIdentityClient();
@@ -257,14 +258,15 @@ describe("HTTP identity client", () => {
   it("maps 403 error envelopes", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(async () =>
-        new Response(
-          JSON.stringify({
-            error: { message: "Nope", code: "FORBIDDEN" },
-            meta: { correlationId: "c1", requestId: "r1" },
-          }),
-          { status: 403, headers: { "content-type": "application/json" } },
-        ),
+      vi.fn(
+        async () =>
+          new Response(
+            JSON.stringify({
+              error: { message: "Nope", code: "FORBIDDEN" },
+              meta: { correlationId: "c1", requestId: "r1" },
+            }),
+            { status: 403, headers: { "content-type": "application/json" } },
+          ),
       ),
     );
     const client = createHttpIdentityClient();

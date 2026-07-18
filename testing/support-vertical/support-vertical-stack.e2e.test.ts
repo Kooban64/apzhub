@@ -130,7 +130,10 @@ function makeContext(
       correlationId: CORR,
       timestamp: "2026-07-11T00:00:00.000Z",
     },
-    session: buildMockSession({ userId, tenantId }) as PlatformApiRequestContext["session"],
+    session: buildMockSession({
+      userId,
+      tenantId,
+    }) as PlatformApiRequestContext["session"],
     serviceContext: {
       tenantId,
       userId,
@@ -190,7 +193,7 @@ describe("OSS-110-12 Support Vertical mocked E2E stack", () => {
 
   it("verifies platform versions", () => {
     expect(ZAMMAD_ADAPTER_VERSION).toBe("0.6.0");
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.7.0");
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
   });
 
   // -------------------------------------------------------------------------
@@ -274,7 +277,6 @@ describe("OSS-110-12 Support Vertical mocked E2E stack", () => {
       ctx,
     );
     const listBody = await listResp.json();
-    const supportRequestId = listBody.data[0].id as string;
     const groupId = listBody.data[0].groupId as string;
     const requesterId = listBody.data[0].requesterId as string;
 
@@ -868,9 +870,8 @@ describe("OSS-110-12 Support Gateway → Provider → Adapter (no HTTP)", () => 
     expect(Array.isArray(searchResult.hits)).toBe(true);
 
     // Analytics via gateway
-    const analytics = await bundle.gateway.supportAnalytics.getSupportIntelligence(
-      serviceCtx,
-    );
+    const analytics =
+      await bundle.gateway.supportAnalytics.getSupportIntelligence(serviceCtx);
     expect(typeof analytics.totalTickets).toBe("number");
 
     // Mapping store populated
@@ -894,12 +895,16 @@ describe("OSS-110-12 Support Gateway → Provider → Adapter (no HTTP)", () => 
     const bundle = createPlatformServicesWithZammad(adapter.core, mappingStore);
     // Gateway exposes support services — no PROVIDER_CAPABILITY_UNSUPPORTED
     expect(typeof bundle.gateway.support.listSupportRequests).toBe("function");
-    expect(typeof bundle.gateway.supportOrganizations.listOrganizations).toBe("function");
+    expect(typeof bundle.gateway.supportOrganizations.listOrganizations).toBe(
+      "function",
+    );
     expect(typeof bundle.gateway.supportGroups.listGroups).toBe("function");
     expect(typeof bundle.gateway.supportUsers.listUsers).toBe("function");
     expect(typeof bundle.gateway.supportArticles.list).toBe("function");
     expect(typeof bundle.gateway.supportSearch.search).toBe("function");
     expect(typeof bundle.gateway.supportHistory.getTimeline).toBe("function");
-    expect(typeof bundle.gateway.supportAnalytics.getSupportIntelligence).toBe("function");
+    expect(typeof bundle.gateway.supportAnalytics.getSupportIntelligence).toBe(
+      "function",
+    );
   });
 });

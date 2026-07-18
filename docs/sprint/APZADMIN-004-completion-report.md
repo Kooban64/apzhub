@@ -13,22 +13,22 @@ Delivered a product-neutral Administration Workbench at `/workspace/administrati
 
 ## Coexistence with M8-03 Platform Operations
 
-| Before | After |
-| --- | --- |
-| Platform Operations at `/workspace/administration` | Platform Operations at **`/workspace/operations`** |
-| Parent id `platform-administration`, workspace `administration` | Parent id **`platform-administration`** retained; workspace **`operations`** |
-| — | Administration SoR Workbench owns **`/workspace/administration`** via new parent id **`platform-admin`** |
+| Before                                                          | After                                                                                                    |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Platform Operations at `/workspace/administration`              | Platform Operations at **`/workspace/operations`**                                                       |
+| Parent id `platform-administration`, workspace `administration` | Parent id **`platform-administration`** retained; workspace **`operations`**                             |
+| —                                                               | Administration SoR Workbench owns **`/workspace/administration`** via new parent id **`platform-admin`** |
 
 Ops activity-bar title remains **Platform Operations**. Sidebar parent references remain `platform-administration`.
 
 ## Package versions
 
-| Artefact | Version / note |
-| --- | --- |
-| Platform OpenAPI | **1.6.0** (unchanged) |
-| `@apzhub/admin-contracts` | **0.2.0** (unchanged) |
-| `@apzhub/admin-core` | **0.2.0** (unchanged) |
-| `@apzhub/admin-persistence` | **0.1.0** (unchanged) |
+| Artefact                    | Version / note         |
+| --------------------------- | ---------------------- |
+| Platform OpenAPI            | **1.6.0** (unchanged)  |
+| `@apzhub/admin-contracts`   | **0.2.0** (unchanged)  |
+| `@apzhub/admin-core`        | **0.2.0** (unchanged)  |
+| `@apzhub/admin-persistence` | **0.1.0** (unchanged)  |
 | `@apzhub/platform-services` | **0.22.0** (unchanged) |
 
 ## Architecture
@@ -49,14 +49,14 @@ All required metadata views implemented. Module lifecycle commands call typed-cl
 
 ## Quality gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:administration-workbench` | PASS (0 violations) |
-| Component + route + harness tests | PASS |
-| Typed-client / HTTP regressions (scoped) | PASS |
-| Ops route tests after relocation | PASS |
-| Playwright mock spec | Added (`apzadmin-004-platform-administration-workbench.spec.ts`) |
-| Workbench coverage | **~99%** lines / **~95%** functions on workbench components ([baseline](../reviews/APZADMIN-004-coverage-baseline.md)) |
+| Gate                                     | Result                                                                                                                 |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `pnpm audit:administration-workbench`    | PASS (0 violations)                                                                                                    |
+| Component + route + harness tests        | PASS                                                                                                                   |
+| Typed-client / HTTP regressions (scoped) | PASS                                                                                                                   |
+| Ops route tests after relocation         | PASS                                                                                                                   |
+| Playwright mock spec                     | Added (`apzadmin-004-platform-administration-workbench.spec.ts`)                                                       |
+| Workbench coverage                       | **~99%** lines / **~95%** functions on workbench components ([baseline](../reviews/APZADMIN-004-coverage-baseline.md)) |
 
 ## Known limitations
 

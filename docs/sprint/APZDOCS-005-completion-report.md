@@ -37,32 +37,32 @@ ARIA toolbar/status/alerts, labelled filters, keyboard-reachable rows, responsiv
 
 ## Testing
 
-| Suite | Result |
-| --- | --- |
-| Vitest (routes, client, api, boundary, view, foundation) | **27+** focused tests passed |
-| Architecture audit `scripts/apzdocs-005-document-workbench-audit.mjs` | **PASS** |
-| Playwright `apzdocs-005-platform-documents-workbench.spec.ts` | Mock `/api/v1/documents` |
+| Suite                                                                 | Result                       |
+| --------------------------------------------------------------------- | ---------------------------- |
+| Vitest (routes, client, api, boundary, view, foundation)              | **27+** focused tests passed |
+| Architecture audit `scripts/apzdocs-005-document-workbench-audit.mjs` | **PASS**                     |
+| Playwright `apzdocs-005-platform-documents-workbench.spec.ts`         | Mock `/api/v1/documents`     |
 
 ## Coverage
 
 Scoped APZDOCS-005 presentation + document client modules (excluding type-only):
 
-| Area | Lines | Functions |
-| --- | --- | --- |
-| `lib/documents` | **~95%** | **100%** |
-| `components/documents` | **~92%** | **~80%** |
-| Combined | **~93%** | **~91%** |
+| Area                   | Lines    | Functions |
+| ---------------------- | -------- | --------- |
+| `lib/documents`        | **~95%** | **100%**  |
+| `components/documents` | **~92%** | **~80%**  |
+| Combined               | **~93%** | **~91%**  |
 
 Meaningful branch coverage on filters, commands, errors, pagination; residual defensive empty/loading branches in the large view.
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| Boundary / architecture audit | PASS |
-| Vitest focused suites | PASS |
+| Gate                               | Result         |
+| ---------------------------------- | -------------- |
+| Boundary / architecture audit      | PASS           |
+| Vitest focused suites              | PASS           |
 | OpenAPI / HTTP (prior APZDOCS-004) | Unchanged PASS |
-| Playwright (mocked) | Spec delivered |
+| Playwright (mocked)                | Spec delivered |
 
 ## Technical Debt
 

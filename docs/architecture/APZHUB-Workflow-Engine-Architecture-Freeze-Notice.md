@@ -10,18 +10,18 @@
 
 The following are **frozen** after APZWORKFLOW-011 wave closeout:
 
-| Surface | Status |
-| ------- | ------ |
-| Workflow Platform contracts (`workflow-contracts`) | Frozen |
-| Workflow Platform services / Core / Persistence | Frozen |
-| Gateway integration (`gateway.workflow.*` + `gateway.workflow.engine.*`) | Frozen |
-| RequestPipeline integration | Frozen |
-| Production Authorization pattern (`workflow.*` / `workflow.engine.*`) | Frozen |
-| Workflow HTTP API (`/api/v1/workflows` + `/engine`) | Frozen |
+| Surface                                                                                | Status |
+| -------------------------------------------------------------------------------------- | ------ |
+| Workflow Platform contracts (`workflow-contracts`)                                     | Frozen |
+| Workflow Platform services / Core / Persistence                                        | Frozen |
+| Gateway integration (`gateway.workflow.*` + `gateway.workflow.engine.*`)               | Frozen |
+| RequestPipeline integration                                                            | Frozen |
+| Production Authorization pattern (`workflow.*` / `workflow.engine.*`)                  | Frozen |
+| Workflow HTTP API (`/api/v1/workflows` + `/engine`)                                    | Frozen |
 | Workflow typed clients (`createHttpWorkflowClient` / `createHttpWorkflowEngineClient`) | Frozen |
-| Workflow Workbenches (`/workspace/workflows` · `/workspace/workflow-engine`) | Frozen |
-| Integration SDK extension pattern for workflow engines | Frozen |
-| n8n adapter pattern (`@apzhub/integration-n8n` **0.1.0**) | Frozen |
+| Workflow Workbenches (`/workspace/workflows` · `/workspace/workflow-engine`)           | Frozen |
+| Integration SDK extension pattern for workflow engines                                 | Frozen |
+| n8n adapter pattern (`@apzhub/integration-n8n` **0.1.0**)                              | Frozen |
 
 ## Change policy
 

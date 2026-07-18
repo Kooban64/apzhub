@@ -47,9 +47,7 @@ describe("createPlatformAdministrationService", () => {
     await expect(service.listModules({ ...ctx, tenantId: "" })).rejects.toThrow(
       /tenantId/,
     );
-    await expect(service.listModules({ ...ctx, userId: "" })).rejects.toThrow(
-      /userId/,
-    );
+    await expect(service.listModules({ ...ctx, userId: "" })).rejects.toThrow(/userId/);
   });
 
   it("creates module with lifecycle, audit, and history", async () => {
@@ -174,9 +172,7 @@ describe("createPlatformAdministrationService", () => {
       ).name,
     ).toBe("Read Admin");
     expect((await service.listPermissions(ctx)).length).toBeGreaterThan(0);
-    expect((await service.getPermission(ctx, permission.id)).id).toBe(
-      permission.id,
-    );
+    expect((await service.getPermission(ctx, permission.id)).id).toBe(permission.id);
 
     const registration = await service.createRegistration(ctx, {
       moduleKey: "projects",
@@ -215,9 +211,7 @@ describe("createPlatformAdministrationService", () => {
         })
       ).notes,
     ).toBe("updated");
-    expect((await service.listMetadata(ctx, module.id)).length).toBeGreaterThan(
-      0,
-    );
+    expect((await service.listMetadata(ctx, module.id)).length).toBeGreaterThan(0);
     expect((await service.getMetadata(ctx, metadata.id)).id).toBe(metadata.id);
 
     const policy = await service.createPolicy(ctx, {
@@ -247,9 +241,7 @@ describe("createPlatformAdministrationService", () => {
       label: "Doc",
     });
     expect(reference.kind).toBe("documentation");
-    expect((await service.listReferences(ctx, module.id)).length).toBeGreaterThan(
-      0,
-    );
+    expect((await service.listReferences(ctx, module.id)).length).toBeGreaterThan(0);
     expect((await service.getReference(ctx, reference.id)).id).toBe(reference.id);
 
     const capability = await service.createCapability(ctx, {
@@ -287,9 +279,7 @@ describe("createPlatformAdministrationService", () => {
       ).name,
     ).toBe("PA");
     expect((await service.listCapabilities(ctx)).length).toBeGreaterThan(0);
-    expect((await service.getCapability(ctx, capability.id)).id).toBe(
-      capability.id,
-    );
+    expect((await service.getCapability(ctx, capability.id)).id).toBe(capability.id);
 
     const navigation = await service.createNavigation(ctx, {
       moduleId: module.id,
@@ -315,9 +305,7 @@ describe("createPlatformAdministrationService", () => {
       ).label,
     ).toBe("Home2");
     expect((await service.listNavigations(ctx)).length).toBeGreaterThan(0);
-    expect((await service.getNavigation(ctx, navigation.id)).id).toBe(
-      navigation.id,
-    );
+    expect((await service.getNavigation(ctx, navigation.id)).id).toBe(navigation.id);
 
     const shortcut = await service.createShortcut(ctx, {
       key: "go",
@@ -383,26 +371,18 @@ describe("createPlatformAdministrationService", () => {
     const audits = await service.listAudit(ctx, module.id);
     expect((await service.getAudit(ctx, audits[0]!.id)).id).toBe(audits[0]!.id);
     const history = await service.listHistory(ctx, module.id);
-    expect((await service.getHistory(ctx, history[0]!.id)).id).toBe(
-      history[0]!.id,
-    );
+    expect((await service.getHistory(ctx, history[0]!.id)).id).toBe(history[0]!.id);
     expect(await service.listDiagnostics(ctx)).toEqual([]);
-    await expect(
-      service.getDiagnostic(ctx, "missing_diag" as never),
-    ).rejects.toThrow(/not found/);
-
-    expect((await service.diagnosticsHealth(ctx)).runtimeAdminEnabled).toBe(
-      false,
+    await expect(service.getDiagnostic(ctx, "missing_diag" as never)).rejects.toThrow(
+      /not found/,
     );
+
+    expect((await service.diagnosticsHealth(ctx)).runtimeAdminEnabled).toBe(false);
     expect((await service.diagnosticsHealth(ctx)).workbenchEnabled).toBe(false);
     expect((await service.diagnosticsHealth(ctx)).httpEnabled).toBe(false);
     expect((await service.diagnosticsReadiness(ctx)).ready).toBe(true);
-    expect((await service.diagnosticsCapabilities(ctx)).runtimeAdmin).toBe(
-      false,
-    );
-    expect((await service.diagnosticsCapabilities(ctx)).facets).toContain(
-      "modules",
-    );
+    expect((await service.diagnosticsCapabilities(ctx)).runtimeAdmin).toBe(false);
+    expect((await service.diagnosticsCapabilities(ctx)).facets).toContain("modules");
 
     await service.updateModuleMetadata(ctx, {
       moduleId: module.id,

@@ -1,8 +1,16 @@
-import { createBidirectionalEnumMapper, createEnumMapper } from "@apzhub/integration-sdk/mapping";
+import {
+  createBidirectionalEnumMapper,
+  createEnumMapper,
+} from "@apzhub/integration-sdk/mapping";
 
 import type { TeamMember, TeamRole } from "../models/canonical";
 import type { PlaneMemberRecord } from "../internal/plane-api-types";
-import { toMemberId, toProjectId, toUserId, extractProjectPlaneId } from "./mapper-context";
+import {
+  toMemberId,
+  toProjectId,
+  toUserId,
+  extractProjectPlaneId,
+} from "./mapper-context";
 
 const roleMapper = createEnumMapper<TeamRole>({
   map: {
@@ -38,7 +46,10 @@ function mapRole(role: number | string): TeamRole {
   return roleMapper.map(String(role));
 }
 
-export function mapPlaneMember(record: PlaneMemberRecord, projectId: string): TeamMember {
+export function mapPlaneMember(
+  record: PlaneMemberRecord,
+  projectId: string,
+): TeamMember {
   return {
     id: toMemberId(record.id),
     projectId: projectId.startsWith("proj_") ? projectId : toProjectId(projectId),

@@ -62,10 +62,10 @@ export const PLATFORM_CAPABILITY_DEFINITIONS: readonly CapabilityDefinition[] = 
   {
     capabilityId: "platform.provisioning",
     name: "Platform Provisioning",
-    owner: "@apzhub/platform-identity",
+    owner: "@apzhub/platform-provisioning",
     version: "0.1.0",
-    maturityLevel: "foundation",
-    dependencies: ["platform.identity"],
+    maturityLevel: "operational",
+    dependencies: ["platform.governance", "platform.identity"],
   },
   {
     capabilityId: "platform.security",

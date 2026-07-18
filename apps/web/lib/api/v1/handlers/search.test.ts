@@ -46,10 +46,7 @@ import {
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { resetPlatformApiGatewayBootstrap } from "../gateway/bootstrap";
 import { loadPlatformOpenApiSpecObject } from "../openapi";
-import {
-  searchQueryBodySchema,
-  searchValidateBodySchema,
-} from "../schemas/search";
+import { searchQueryBodySchema, searchValidateBodySchema } from "../schemas/search";
 import {
   buildMockSession,
   buildTestServiceContext,
@@ -87,8 +84,7 @@ describe("APZSEARCH-007 search handlers", () => {
   });
 
   it("executes query via searchExecution only and preserves trusted context", async () => {
-    const calls: Array<{ service: string; operation: string; tenantId: string }> =
-      [];
+    const calls: Array<{ service: string; operation: string; tenantId: string }> = [];
     installMockGateway({
       onCall: (service, operation, ctx) => {
         calls.push({ service, operation, tenantId: ctx.tenantId });
@@ -155,20 +151,17 @@ describe("APZSEARCH-007 search handlers", () => {
     installMockGateway();
     const ctx = makeContext();
     expect(
-      (await (await handleGetSearchCapabilities(makeRequest("/"), ctx)).json())
-        .data.keywords,
+      (await (await handleGetSearchCapabilities(makeRequest("/"), ctx)).json()).data
+        .keywords,
     ).toBe(true);
     expect(
-      (await (await handleGetSearchHealth(makeRequest("/"), ctx)).json()).data
-        .status,
+      (await (await handleGetSearchHealth(makeRequest("/"), ctx)).json()).data.status,
     ).toBe("available");
     expect(
       (await (await handleGetSearchReadiness(makeRequest("/"), ctx)).json()).data
         .healthy,
     ).toBe(true);
-    const diag = await (
-      await handleGetSearchDiagnostics(makeRequest("/"), ctx)
-    ).json();
+    const diag = await (await handleGetSearchDiagnostics(makeRequest("/"), ctx)).json();
     expect(diag.data.apiKey).toBeUndefined();
     expect(diag.data.apiKeyPresent).toBe(true);
     expect(
@@ -185,11 +178,9 @@ describe("APZSEARCH-007 search handlers", () => {
     expect(listBody.data[0].apiKey).toBeUndefined();
     expect(listBody.data[0].apiKeyPresent).toBe(true);
 
-    const got = await handleGetSearchProvider(
-      makeRequest("/"),
-      makeContext(),
-      { params: Promise.resolve({ providerId: "prov_1" }) },
-    );
+    const got = await handleGetSearchProvider(makeRequest("/"), makeContext(), {
+      params: Promise.resolve({ providerId: "prov_1" }),
+    });
     const gotBody = await got.json();
     expect(gotBody.data.secret).toBeUndefined();
     expect(gotBody.data.secretPresent).toBe(true);
@@ -223,11 +214,8 @@ describe("APZSEARCH-007 search handlers", () => {
     };
 
     expect(
-      (
-        await (
-          await handleListSearchConfigurations(makeRequest("/"), ctx)
-        ).json()
-      ).data[0].id,
+      (await (await handleListSearchConfigurations(makeRequest("/"), ctx)).json())
+        .data[0].id,
     ).toBe("cfg_1");
     expect(
       (
@@ -267,8 +255,8 @@ describe("APZSEARCH-007 search handlers", () => {
     ).toBe(2);
 
     expect(
-      (await (await handleListSearchCollections(makeRequest("/"), ctx)).json())
-        .data[0].id,
+      (await (await handleListSearchCollections(makeRequest("/"), ctx)).json()).data[0]
+        .id,
     ).toBe("col_1");
     expect(
       (
@@ -308,8 +296,7 @@ describe("APZSEARCH-007 search handlers", () => {
     ).toBe("Renamed");
 
     expect(
-      (await (await handleListSearchSources(makeRequest("/"), ctx)).json())
-        .data[0].id,
+      (await (await handleListSearchSources(makeRequest("/"), ctx)).json()).data[0].id,
     ).toBe("src_1");
     expect(
       (
@@ -321,8 +308,7 @@ describe("APZSEARCH-007 search handlers", () => {
       ).data.id,
     ).toBe("src_1");
     expect(
-      (await (await handleListSearchScopes(makeRequest("/"), ctx)).json())
-        .data[0].id,
+      (await (await handleListSearchScopes(makeRequest("/"), ctx)).json()).data[0].id,
     ).toBe("scope_1");
     expect(
       (
@@ -334,8 +320,7 @@ describe("APZSEARCH-007 search handlers", () => {
       ).data.id,
     ).toBe("scope_1");
     expect(
-      (await (await handleListSearchProfiles(makeRequest("/"), ctx)).json())
-        .data[0].id,
+      (await (await handleListSearchProfiles(makeRequest("/"), ctx)).json()).data[0].id,
     ).toBe("profile_1");
     expect(
       (
@@ -355,23 +340,16 @@ describe("APZSEARCH-007 search handlers", () => {
       ).data.keywords,
     ).toBe(true);
     expect(
-      (
-        await (await handleGetSearchManagementHealth(makeRequest("/"), ctx)).json()
-      ).data.status,
+      (await (await handleGetSearchManagementHealth(makeRequest("/"), ctx)).json()).data
+        .status,
     ).toBe("available");
     expect(
-      (
-        await (
-          await handleGetSearchManagementDiagnostics(makeRequest("/"), ctx)
-        ).json()
-      ).data.health.status,
+      (await (await handleGetSearchManagementDiagnostics(makeRequest("/"), ctx)).json())
+        .data.health.status,
     ).toBe("available");
     expect(
-      (
-        await (
-          await handleGetSearchManagementStatistics(makeRequest("/"), ctx)
-        ).json()
-      ).data.declaredProviderCount,
+      (await (await handleGetSearchManagementStatistics(makeRequest("/"), ctx)).json())
+        .data.declaredProviderCount,
     ).toBe(1);
     expect(
       (
@@ -471,7 +449,9 @@ describe("APZSEARCH-007 search handlers", () => {
     expect(existsSync(join(root, "indexes"))).toBe(false);
     expect(existsSync(join(root, "documents"))).toBe(false);
     for (const route of OMITTED_SEARCH_HTTP_ROUTES) {
-      expect(route).toMatch(/internal\/indexes|internal\/documents|\/indexes|\/documents/);
+      expect(route).toMatch(
+        /internal\/indexes|internal\/documents|\/indexes|\/documents/,
+      );
     }
 
     const spec = loadPlatformOpenApiSpecObject() as {

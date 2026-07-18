@@ -110,10 +110,7 @@ describe("TestingExecutionView", () => {
   it("hides execution commands when permissions are empty", async () => {
     render(
       wrap(
-        <TestingExecutionView
-          executionId={FIXTURE_IDS.execution}
-          permissions={[]}
-        />,
+        <TestingExecutionView executionId={FIXTURE_IDS.execution} permissions={[]} />,
       ),
     );
 
@@ -146,7 +143,9 @@ describe("TestingExecutionView", () => {
     vi.spyOn(testingApi, "listExecutions").mockRejectedValueOnce(
       new TestingClientError("Execution list failed", "ERROR", 500),
     );
-    rerender(wrap(<TestingExecutionView permissions={["testing.executions.execute"]} />));
+    rerender(
+      wrap(<TestingExecutionView permissions={["testing.executions.execute"]} />),
+    );
 
     await waitFor(() => {
       expect(screen.getByText("Execution list failed")).toBeTruthy();

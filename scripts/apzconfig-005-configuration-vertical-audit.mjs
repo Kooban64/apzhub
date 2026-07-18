@@ -35,7 +35,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -134,7 +135,10 @@ const RUNTIME_PKG = /@apzhub\/config(?:["'/]|$)/;
 // ---------------------------------------------------------------------------
 scan(walk(join(ROOT, "apps/web/components/configuration")), [
   { rule: "workbench-no-platform-services", pattern: /@apzhub\/platform-services/ },
-  { rule: "workbench-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+  {
+    rule: "workbench-no-gateway",
+    pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+  },
   { rule: "workbench-no-configuration-core", pattern: /@apzhub\/configuration-core/ },
   { rule: "workbench-no-persistence", pattern: /@apzhub\/configuration-persistence/ },
   { rule: "workbench-no-event-bus", pattern: /\bEventBus\b|@apzhub\/event-bus/ },
@@ -145,12 +149,13 @@ scan(walk(join(ROOT, "apps/web/components/configuration")), [
 ]);
 
 scan(
-  walk(join(ROOT, "apps/web/lib/configuration")).filter(
-    (f) => !f.includes(".test."),
-  ),
+  walk(join(ROOT, "apps/web/lib/configuration")).filter((f) => !f.includes(".test.")),
   [
     { rule: "client-no-platform-services", pattern: /@apzhub\/platform-services/ },
-    { rule: "client-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+    {
+      rule: "client-no-gateway",
+      pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+    },
     { rule: "client-no-configuration-core", pattern: /@apzhub\/configuration-core/ },
     { rule: "client-no-persistence", pattern: /@apzhub\/configuration-persistence/ },
     { rule: "client-no-event-bus", pattern: /\bEventBus\b|@apzhub\/event-bus/ },
@@ -281,7 +286,8 @@ scan(httpFiles, [
       file: "apps/web/lib/api/v1/handlers",
       line: 1,
       rule: "http-missing-gateway",
-      detail: "Configuration handlers must call getPlatformServiceGateway().configuration.*",
+      detail:
+        "Configuration handlers must call getPlatformServiceGateway().configuration.*",
     });
   }
 }
@@ -322,10 +328,7 @@ forbidDeps(
 );
 forbidDeps(
   "packages/configuration-core/package.json",
-  [
-    "@apzhub/configuration-persistence",
-    "@apzhub/platform-services",
-  ],
+  ["@apzhub/configuration-persistence", "@apzhub/platform-services"],
   "core-deps",
 );
 forbidDeps(
@@ -479,7 +482,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.23.0",
+  "0.25.0",
   "version-platform-services",
 );
 requirePackageVersion(
@@ -491,7 +494,10 @@ requirePackageVersion(
 // Authorization map presence
 {
   const authz = readFileSync(
-    join(ROOT, "packages/platform-services/src/authorization/operation-authorization-map.ts"),
+    join(
+      ROOT,
+      "packages/platform-services/src/authorization/operation-authorization-map.ts",
+    ),
     "utf8",
   );
   if (!authz.includes("configurationPlatformOps")) {
@@ -502,7 +508,10 @@ requirePackageVersion(
       detail: "configurationPlatformOps must be registered",
     });
   }
-  if (!authz.includes("configuration.read") || !authz.includes("configuration.manage")) {
+  if (
+    !authz.includes("configuration.read") ||
+    !authz.includes("configuration.manage")
+  ) {
     violations.push({
       file: "packages/platform-services/src/authorization/operation-authorization-map.ts",
       line: 1,
@@ -622,7 +631,9 @@ console.log("Violations: 0");
 console.log(
   "  - Workbench → typed client → HTTP → gateway.configuration → RequestPipeline → Authz → Platform Services → Core → Persistence",
 );
-console.log("  - No runtime resolution / apply / feature flags / secrets / hot reload / Event Bus");
+console.log(
+  "  - No runtime resolution / apply / feature flags / secrets / hot reload / Event Bus",
+);
 console.log("  - OpenAPI Platform Configuration >= 1.5.0 + manifests present");
 console.log("  - Prior audits APZCONFIG-001–004: PASS");
 if (observations.length > 0) {

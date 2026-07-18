@@ -27,6 +27,7 @@ Tenant / organisation context flows through `ServiceRequestContext` into Documen
 ## Diagnostics redaction
 
 HTTP redacts:
+
 - filesystem paths
 - bucket names
 - object keys (`storageKeyPresent` boolean only)

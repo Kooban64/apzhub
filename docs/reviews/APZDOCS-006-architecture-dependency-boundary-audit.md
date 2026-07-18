@@ -19,6 +19,7 @@ Consumers / Workbench → Typed Client → HTTP → Gateway → Platform Service
 ```
 
 No reverse dependencies found:
+
 - Contracts do not import core/persistence/storage/platform-services/apps
 - Storage does not import apps/web, platform-services, or product modules
 - Persistence does not import storage SDKs or platform-services
@@ -27,14 +28,14 @@ No reverse dependencies found:
 
 ## Boundary
 
-| Layer | Must not | Result |
-| ----- | -------- | ------ |
-| Workbench | core / persistence / storage / gateway / handlers / binary | **PASS** |
-| Typed client | core / persistence / storage / platform-services / binary | **PASS** |
-| HTTP handlers | core / persistence / storage SDKs | **PASS** (gateway only) |
-| Thin service impls | storage SDK / binary transfer / apps/web | **PASS** |
-| Composition root | May wire persistence/storage factories into Core | **Observed** (allowed) |
-| Storage providers | apps/web / platform-services / Azure / GCS | **PASS** |
+| Layer              | Must not                                                   | Result                  |
+| ------------------ | ---------------------------------------------------------- | ----------------------- |
+| Workbench          | core / persistence / storage / gateway / handlers / binary | **PASS**                |
+| Typed client       | core / persistence / storage / platform-services / binary  | **PASS**                |
+| HTTP handlers      | core / persistence / storage SDKs                          | **PASS** (gateway only) |
+| Thin service impls | storage SDK / binary transfer / apps/web                   | **PASS**                |
+| Composition root   | May wire persistence/storage factories into Core           | **Observed** (allowed)  |
+| Storage providers  | apps/web / platform-services / Azure / GCS                 | **PASS**                |
 
 ## Platform isolation
 

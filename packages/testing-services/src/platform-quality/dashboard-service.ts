@@ -25,9 +25,7 @@ export function createPlatformDashboardService(
       const overallHealth: PlatformQualityStatus =
         input.quality?.overallQualityStatus ?? "unknown";
       const releaseReadiness: PlatformReleaseReadinessVerdict =
-        input.readiness?.verdict ??
-        input.quality?.readinessVerdict ??
-        "NOT_READY";
+        input.readiness?.verdict ?? input.quality?.readinessVerdict ?? "NOT_READY";
 
       return {
         tenantId: ctx.tenantId,
@@ -36,12 +34,10 @@ export function createPlatformDashboardService(
         certificationSummary:
           input.certifications?.overallLabel ?? "no_certification_data",
         releaseReadiness,
-        riskOverview:
-          input.quality?.riskLabels ?? input.readiness?.riskLabels ?? [],
+        riskOverview: input.quality?.riskLabels ?? input.readiness?.riskLabels ?? [],
         dependencyHealth: input.dependencyHealth ?? [],
         recentRegressions: input.recentRegressions ?? [],
-        manualTestingLabel:
-          input.quality?.manualExecutionLabels[0] ?? "manual:n/a",
+        manualTestingLabel: input.quality?.manualExecutionLabels[0] ?? "manual:n/a",
         automationLabel: input.quality?.automationLabels[0] ?? "automation:n/a",
         defectsLabel: input.quality?.defectLabels[0] ?? "defects:n/a",
         coverageLabel: input.quality?.coverageLabels[0] ?? "coverage:n/a",

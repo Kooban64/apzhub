@@ -20,7 +20,9 @@ export interface PlatformApiGuardResult {
 export interface PlatformApiGuardFailure {
   readonly ok: false;
   readonly status: 401 | 403;
-  readonly body: { readonly error: { readonly code: string; readonly message: string } };
+  readonly body: {
+    readonly error: { readonly code: string; readonly message: string };
+  };
 }
 
 export type PlatformApiGuardOutcome = PlatformApiGuardResult | PlatformApiGuardFailure;
@@ -78,7 +80,8 @@ export async function requirePlatformPermission(
     return sessionResult;
   }
 
-  const { resolveSessionAuthorization } = await import("@apzhub/platform-authorization/server");
+  const { resolveSessionAuthorization } =
+    await import("@apzhub/platform-authorization/server");
   const authz = await resolveSessionAuthorization({
     userId: sessionResult.session.user.id,
     tenantId: sessionResult.session.tenantId,
@@ -90,8 +93,7 @@ export async function requirePlatformPermission(
     authz.permissions.includes(permissionKey) ||
     authz.permissions.some(
       (permission) =>
-        permission.endsWith(".*") &&
-        permissionKey.startsWith(permission.slice(0, -2)),
+        permission.endsWith(".*") && permissionKey.startsWith(permission.slice(0, -2)),
     );
 
   if (!allowed) {
@@ -111,5 +113,8 @@ export async function requirePlatformPermission(
 }
 
 export function guardFailureResponse(failure: PlatformApiGuardFailure): Response {
-  return securePlatformResponse(Response.json(failure.body, { status: failure.status }), "api");
+  return securePlatformResponse(
+    Response.json(failure.body, { status: failure.status }),
+    "api",
+  );
 }

@@ -87,7 +87,9 @@ export class PlaneCoreServices {
   }
 }
 
-export function createPlaneCoreServices(input: CreatePlaneCoreServicesInput): PlaneCoreServices {
+export function createPlaneCoreServices(
+  input: CreatePlaneCoreServicesInput,
+): PlaneCoreServices {
   const { configuration, context } = input;
   const tenantId = configuration.connection?.tenantId ?? "unknown";
 

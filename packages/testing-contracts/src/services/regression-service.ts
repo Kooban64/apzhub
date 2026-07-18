@@ -16,10 +16,7 @@ export interface RegressionService {
     id: RegressionSuiteId,
     input: Partial<Omit<RegressionSuite, "id" | "tenantId" | "createdAt">>,
   ): Promise<RegressionSuite>;
-  archive(
-    ctx: ServiceRequestContext,
-    id: RegressionSuiteId,
-  ): Promise<RegressionSuite>;
+  archive(ctx: ServiceRequestContext, id: RegressionSuiteId): Promise<RegressionSuite>;
   addSuite(
     ctx: ServiceRequestContext,
     id: RegressionSuiteId,

@@ -34,7 +34,8 @@ function toDomain(row: EngineeringSnapshotRecord): EngineeringSnapshot {
     id: asEngineeringSnapshotId(row.id),
     tenantId: row.tenantId,
     scope: row.scope as EngineeringSnapshot["scope"],
-    qualityScore: row.qualityScoreJson as unknown as EngineeringSnapshot["qualityScore"],
+    qualityScore:
+      row.qualityScoreJson as unknown as EngineeringSnapshot["qualityScore"],
     health: row.healthJson as unknown as EngineeringSnapshot["health"],
     risk: row.riskJson as unknown as EngineeringSnapshot["risk"],
     indicators: row.indicatorsJson as readonly QualityIndicator[],
@@ -94,9 +95,7 @@ export function createEngineeringIntelligenceService(
           key: "quality_score",
           label: "Quality score",
           value: quality.score,
-          reasons: quality.components.map(
-            (c) => `${c.key}:${c.contribution}`,
-          ),
+          reasons: quality.components.map((c) => `${c.key}:${c.contribution}`),
         },
         {
           kind: "coverage",
@@ -181,10 +180,7 @@ export function createEngineeringIntelligenceService(
     async getSnapshot(ctx, id) {
       return toDomain(
         requireFound(
-          await rt.persistence.engineeringSnapshots.get(
-            toRepositoryContext(ctx),
-            id,
-          ),
+          await rt.persistence.engineeringSnapshots.get(toRepositoryContext(ctx), id),
           "engineering_snapshot",
           id,
         ),

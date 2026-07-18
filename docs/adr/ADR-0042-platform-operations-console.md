@@ -23,11 +23,11 @@ Products expose diagnostics; the Platform presents them.
 
 ## Alternatives
 
-| Alternative | Why rejected |
-| ----------- | ------------ |
-| New layout framework | Violates M8 constraint — use existing Workbench UX |
-| Product-local admin UIs | Duplicates platform operations; violates architecture |
-| Full CRUD admin in M8-03 | Out of scope — read-first operations console |
+| Alternative              | Why rejected                                          |
+| ------------------------ | ----------------------------------------------------- |
+| New layout framework     | Violates M8 constraint — use existing Workbench UX    |
+| Product-local admin UIs  | Duplicates platform operations; violates architecture |
+| Full CRUD admin in M8-03 | Out of scope — read-first operations console          |
 
 ## Consequences
 

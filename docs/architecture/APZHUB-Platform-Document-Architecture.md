@@ -22,12 +22,12 @@ Document
 
 ## Packages
 
-| Package | Version | Role |
-|---------|---------|------|
-| `@apzhub/document-contracts` | 0.2.0 | Canonical models, permissions, `PlatformDocumentService`, `DocumentContentService` |
-| `@apzhub/document-core` | 0.2.0 | Lifecycle/classification rules, storage ports, coordinator, integrity |
-| `@apzhub/document-persistence` | 0.2.0 | PostgreSQL + in-memory repositories |
-| `@apzhub/document-storage` | 0.1.0 | Filesystem + S3-compatible + memory providers |
+| Package                        | Version | Role                                                                               |
+| ------------------------------ | ------- | ---------------------------------------------------------------------------------- |
+| `@apzhub/document-contracts`   | 0.2.0   | Canonical models, permissions, `PlatformDocumentService`, `DocumentContentService` |
+| `@apzhub/document-core`        | 0.2.0   | Lifecycle/classification rules, storage ports, coordinator, integrity              |
+| `@apzhub/document-persistence` | 0.2.0   | PostgreSQL + in-memory repositories                                                |
+| `@apzhub/document-storage`     | 0.1.0   | Filesystem + S3-compatible + memory providers                                      |
 
 ## Persistence
 

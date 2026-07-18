@@ -6,13 +6,13 @@
 
 Document codes → SearchClassification:
 
-| Document | Search |
-| -------- | ------ |
-| public | public |
-| internal, template, attachment | internal |
-| confidential, legal, financial, compliance, generated_report | confidential |
-| restricted, evidence | restricted |
-| custom / absent | confidential (fail-closed) / reject if absent on Document |
+| Document                                                     | Search                                                    |
+| ------------------------------------------------------------ | --------------------------------------------------------- |
+| public                                                       | public                                                    |
+| internal, template, attachment                               | internal                                                  |
+| confidential, legal, financial, compliance, generated_report | confidential                                              |
+| restricted, evidence                                         | restricted                                                |
+| custom / absent                                              | confidential (fail-closed) / reject if absent on Document |
 
 ## Allowlist design
 

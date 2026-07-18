@@ -21,13 +21,13 @@ Master report: [SUPPORT-VERTICAL-CERTIFICATION.md](../architecture/SUPPORT-VERTI
 
 ## Architecture certification
 
-| Check | Verdict |
-|-------|---------|
-| HTTP → Gateway only | PASS |
-| No route → provider/adapter/mapping/DB | PASS |
-| Services → MappingOrchestrator → ProviderResolver | PASS |
-| Providers → Zammad adapter only | PASS |
-| No layer bypass | PASS |
+| Check                                             | Verdict |
+| ------------------------------------------------- | ------- |
+| HTTP → Gateway only                               | PASS    |
+| No route → provider/adapter/mapping/DB            | PASS    |
+| Services → MappingOrchestrator → ProviderResolver | PASS    |
+| Providers → Zammad adapter only                   | PASS    |
+| No layer bypass                                   | PASS    |
 
 Report: [OSS-110-12-architecture-audit.md](./OSS-110-12-architecture-audit.md)
 
@@ -43,14 +43,14 @@ Report: [OSS-110-12-dependency-audit.md](./OSS-110-12-dependency-audit.md)
 
 ## HTTP / Gateway / Authz / Mapping / Provider / Adapter
 
-| Domain | Verdict | Evidence |
-|--------|---------|----------|
-| HTTP | PASS | 48 Support API tests + E2E + OpenAPI |
-| Gateway | PASS | E2E + gateway-only stack tests |
-| Authorization | PASS | Pipeline permissions + cert suite |
-| Mapping | PASS | Global IDs; no `*_zammad_*` leakage |
-| Provider | PASS | Registry/resolver/priority/capability |
-| Adapter | PASS | Wave 2 evidence reused + light health/readiness in E2E |
+| Domain        | Verdict | Evidence                                               |
+| ------------- | ------- | ------------------------------------------------------ |
+| HTTP          | PASS    | 48 Support API tests + E2E + OpenAPI                   |
+| Gateway       | PASS    | E2E + gateway-only stack tests                         |
+| Authorization | PASS    | Pipeline permissions + cert suite                      |
+| Mapping       | PASS    | Global IDs; no `*_zammad_*` leakage                    |
+| Provider      | PASS    | Registry/resolver/priority/capability                  |
+| Adapter       | PASS    | Wave 2 evidence reused + light health/readiness in E2E |
 
 Detail: [OSS-110-12-Support-API-Certification.md](./OSS-110-12-Support-API-Certification.md)
 
@@ -76,11 +76,11 @@ Report: [OSS-110-12-performance-baseline.md](./OSS-110-12-performance-baseline.m
 
 ## Coverage / tests
 
-| Suite | Tests |
-|-------|-------|
-| Support vertical (E2E + cert + perf) | 78 |
-| Support HTTP API | 48 |
-| Support platform services | 20 |
+| Suite                                        | Tests          |
+| -------------------------------------------- | -------------- |
+| Support vertical (E2E + cert + perf)         | 78             |
+| Support HTTP API                             | 48             |
+| Support platform services                    | 20             |
 | Combined API + platform + wave1/2 + vertical | **347 passed** |
 
 Test summary: [OSS-110-12-test-summary.md](./OSS-110-12-test-summary.md)
@@ -89,14 +89,14 @@ Test summary: [OSS-110-12-test-summary.md](./OSS-110-12-test-summary.md)
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| Dependency audit | PASS |
-| Architecture audit | PASS |
-| OpenAPI validate | PASS |
-| lint / typecheck (platform-services, web) | PASS |
-| Support vertical + regression | **347 passed** |
-| `pnpm build` (apps/web) | FAIL — pre-existing `/_global-error` prerender; unrelated |
+| Gate                                      | Result                                                    |
+| ----------------------------------------- | --------------------------------------------------------- |
+| Dependency audit                          | PASS                                                      |
+| Architecture audit                        | PASS                                                      |
+| OpenAPI validate                          | PASS                                                      |
+| lint / typecheck (platform-services, web) | PASS                                                      |
+| Support vertical + regression             | **347 passed**                                            |
+| `pnpm build` (apps/web)                   | FAIL — pre-existing `/_global-error` prerender; unrelated |
 
 ---
 
@@ -108,12 +108,12 @@ Test summary: [OSS-110-12-test-summary.md](./OSS-110-12-test-summary.md)
 
 ## Technical debt / known limitations
 
-1. No Support UI  
-2. No Event Bus / notifications  
-3. No webhook ingress  
-4. No binary attachments  
-5. Durable idempotency deferred  
-6. Next.js `/_global-error` build caveat  
+1. No Support UI
+2. No Event Bus / notifications
+3. No webhook ingress
+4. No binary attachments
+5. Durable idempotency deferred
+6. Next.js `/_global-error` build caveat
 
 ---
 
@@ -121,10 +121,10 @@ Test summary: [OSS-110-12-test-summary.md](./OSS-110-12-test-summary.md)
 
 **OSS-110-13 — Support Module UI (Frontend Slice)**
 
-- `modules/support/` + `module.yaml`  
-- Permission-driven list/detail/forms/articles via `/api/v1/support-*` only  
-- Module SDK (025) · UI Component SDK (028) · Navigation (017)  
-- No direct Zammad calls  
+- `modules/support/` + `module.yaml`
+- Permission-driven list/detail/forms/articles via `/api/v1/support-*` only
+- Module SDK (025) · UI Component SDK (028) · Navigation (017)
+- No direct Zammad calls
 
 **Do not start without explicit owner approval.**
 
@@ -132,6 +132,6 @@ Test summary: [OSS-110-12-test-summary.md](./OSS-110-12-test-summary.md)
 
 ## Files created / modified
 
-**Created:** audit script, `testing/support-vertical/*`, sprint audits, [SUPPORT-VERTICAL-CERTIFICATION.md](../architecture/SUPPORT-VERTICAL-CERTIFICATION.md), this report  
+**Created:** audit script, `testing/support-vertical/*`, sprint audits, [SUPPORT-VERTICAL-CERTIFICATION.md](../architecture/SUPPORT-VERTICAL-CERTIFICATION.md), this report
 
 **Modified:** `vitest.config.ts` (include path), `mapping-orchestrator.ts` (race fix), foundation docs / CHANGELOG / README

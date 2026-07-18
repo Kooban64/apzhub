@@ -156,18 +156,22 @@ export type ApprovalUpdate = Partial<Omit<ApprovalCreate, "id">>;
 export type CertificationCreate = CreateBase<CertificationRecordRecord>;
 export type CertificationUpdate = Partial<Omit<CertificationCreate, "id" | "key">>;
 
-export type CertificationGateDefinitionCreate = CreateBase<CertificationGateDefinitionRecord>;
+export type CertificationGateDefinitionCreate =
+  CreateBase<CertificationGateDefinitionRecord>;
 export type CertificationGateDefinitionUpdate = Partial<
   Omit<CertificationGateDefinitionCreate, "id">
 >;
 
-export type CertificationGateEvaluationCreate = CreateBase<CertificationGateEvaluationRecord>;
+export type CertificationGateEvaluationCreate =
+  CreateBase<CertificationGateEvaluationRecord>;
 export type CertificationGateEvaluationUpdate = Partial<
   Omit<CertificationGateEvaluationCreate, "id" | "certificationRecordId" | "gateKey">
 >;
 
 export type CertificationRuleCreate = CreateBase<CertificationRuleRecord>;
-export type CertificationRuleUpdate = Partial<Omit<CertificationRuleCreate, "id" | "key">>;
+export type CertificationRuleUpdate = Partial<
+  Omit<CertificationRuleCreate, "id" | "key">
+>;
 
 export type ReleaseReadinessCreate = CreateBase<ReleaseReadinessRecord>;
 export type ReleaseReadinessUpdate = Partial<Omit<ReleaseReadinessCreate, "id">>;
@@ -176,9 +180,7 @@ export type ReleaseCreate = CreateBase<ReleaseRecord>;
 export type ReleaseUpdate = Partial<Omit<ReleaseCreate, "id" | "key">>;
 
 export type ReleaseScopeCreate = CreateBase<ReleaseScopeRecord>;
-export type ReleaseScopeUpdate = Partial<
-  Omit<ReleaseScopeCreate, "id" | "releaseId">
->;
+export type ReleaseScopeUpdate = Partial<Omit<ReleaseScopeCreate, "id" | "releaseId">>;
 
 export type ReleasePackageCreate = CreateBase<ReleasePackageRecord>;
 export type ReleasePackageUpdate = Partial<
@@ -211,23 +213,19 @@ export type ReleaseDependencyUpdate = Partial<
 >;
 
 export type ReleaseNoteCreate = CreateBase<ReleaseNoteRecord>;
-export type ReleaseNoteUpdate = Partial<
-  Omit<ReleaseNoteCreate, "id" | "releaseId">
->;
+export type ReleaseNoteUpdate = Partial<Omit<ReleaseNoteCreate, "id" | "releaseId">>;
 
 export type ReleaseRiskAssessmentCreate = CreateBase<ReleaseRiskAssessmentRecord>;
 export type ReleaseRiskAssessmentUpdate = Partial<
   Omit<ReleaseRiskAssessmentCreate, "id" | "releaseId">
 >;
 
-export type ReleaseReadinessSnapshotCreate =
-  CreateBase<ReleaseReadinessSnapshotRecord>;
+export type ReleaseReadinessSnapshotCreate = CreateBase<ReleaseReadinessSnapshotRecord>;
 export type ReleaseReadinessSnapshotUpdate = Partial<
   Omit<ReleaseReadinessSnapshotCreate, "id" | "releaseId">
 >;
 
-export type ReleaseSummarySnapshotCreate =
-  CreateBase<ReleaseSummarySnapshotRecord>;
+export type ReleaseSummarySnapshotCreate = CreateBase<ReleaseSummarySnapshotRecord>;
 export type ReleaseSummarySnapshotUpdate = Partial<
   Omit<ReleaseSummarySnapshotCreate, "id" | "releaseId">
 >;
@@ -242,9 +240,7 @@ export type QualitySnapshotCreate = CreateBase<QualitySnapshotRecord>;
 export type QualitySnapshotUpdate = Partial<Omit<QualitySnapshotCreate, "id">>;
 
 export type RegressionAnalysisCreate = CreateBase<RegressionAnalysisRecord>;
-export type RegressionAnalysisUpdate = Partial<
-  Omit<RegressionAnalysisCreate, "id">
->;
+export type RegressionAnalysisUpdate = Partial<Omit<RegressionAnalysisCreate, "id">>;
 
 export type AutomationDefinitionCreate = CreateBase<AutomationDefinitionRecord>;
 export type AutomationDefinitionUpdate = Partial<
@@ -294,9 +290,7 @@ export type PipelineRunCreate = CreateBase<PipelineRunRecord>;
 export type PipelineRunUpdate = Partial<Omit<PipelineRunCreate, "id">>;
 
 export type EngineeringSnapshotCreate = CreateBase<EngineeringSnapshotRecord>;
-export type EngineeringSnapshotUpdate = Partial<
-  Omit<EngineeringSnapshotCreate, "id">
->;
+export type EngineeringSnapshotUpdate = Partial<Omit<EngineeringSnapshotCreate, "id">>;
 
 export type EngineeringHistoricalSnapshotCreate =
   CreateBase<EngineeringHistoricalSnapshotRecord>;
@@ -304,8 +298,7 @@ export type EngineeringHistoricalSnapshotUpdate = Partial<
   Omit<EngineeringHistoricalSnapshotCreate, "id" | "immutable">
 >;
 
-export type EngineeringTrendSeriesCreate =
-  CreateBase<EngineeringTrendSeriesRecord>;
+export type EngineeringTrendSeriesCreate = CreateBase<EngineeringTrendSeriesRecord>;
 export type EngineeringTrendSeriesUpdate = Partial<
   Omit<EngineeringTrendSeriesCreate, "id">
 >;
@@ -316,9 +309,7 @@ export type EngineeringBenchmarkUpdate = Partial<
 >;
 
 export type EngineeringBaselineCreate = CreateBase<EngineeringBaselineRecord>;
-export type EngineeringBaselineUpdate = Partial<
-  Omit<EngineeringBaselineCreate, "id">
->;
+export type EngineeringBaselineUpdate = Partial<Omit<EngineeringBaselineCreate, "id">>;
 
 export type EngineeringQualitySummaryCreate =
   CreateBase<EngineeringQualitySummaryRecord>;
@@ -329,8 +320,7 @@ export type EngineeringQualitySummaryUpdate = Partial<
 export type ReportTemplateCreate = CreateBase<ReportTemplateRecord>;
 export type ReportTemplateUpdate = Partial<Omit<ReportTemplateCreate, "id">>;
 
-export type ReportGenerationMetadataCreate =
-  CreateBase<ReportGenerationMetadataRecord>;
+export type ReportGenerationMetadataCreate = CreateBase<ReportGenerationMetadataRecord>;
 export type ReportGenerationMetadataUpdate = Partial<
   Omit<ReportGenerationMetadataCreate, "id">
 >;
@@ -367,7 +357,10 @@ export interface CertificationAuditRepository {
     certificationRecordId: string,
     query?: ListQuery,
   ): Promise<PageResult<CertificationAuditRecord>>;
-  get(ctx: RepositoryContext, id: string): Promise<CertificationAuditRecord | undefined>;
+  get(
+    ctx: RepositoryContext,
+    id: string,
+  ): Promise<CertificationAuditRecord | undefined>;
 }
 
 export interface CertificationHistoryRepository {
@@ -380,7 +373,10 @@ export interface CertificationHistoryRepository {
     certificationRecordId: string,
     query?: ListQuery,
   ): Promise<PageResult<CertificationHistoryRecord>>;
-  get(ctx: RepositoryContext, id: string): Promise<CertificationHistoryRecord | undefined>;
+  get(
+    ctx: RepositoryContext,
+    id: string,
+  ): Promise<CertificationHistoryRecord | undefined>;
 }
 
 export interface ReleaseAuditRepository {

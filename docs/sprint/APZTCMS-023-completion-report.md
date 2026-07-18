@@ -29,11 +29,11 @@ Reuses EI query keys (shared cache with Engineering Intelligence workspace). No 
 
 ## Testing
 
-| Suite | Result |
-| ----- | ------ |
-| Vitest categories / panels / view / routes / boundary | green |
+| Suite                                                 | Result                                              |
+| ----------------------------------------------------- | --------------------------------------------------- |
+| Vitest categories / panels / view / routes / boundary | green                                               |
 | Playwright `apztcms-023-executive-dashboards.spec.ts` | Spec added (mock EI HTTP); needs app server baseURL |
-| Boundary audit | PASS |
+| Boundary audit                                        | PASS                                                |
 
 ## Coverage
 
@@ -41,19 +41,19 @@ New dashboard modules aggregate **~96.5%+** lines.
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| Vitest (023 focused) | PASS |
-| coverage ≥95% lines (new modules) | PASS |
-| boundary audit | PASS |
-| Playwright live | LIMITED (spec present) |
+| Gate                              | Result                 |
+| --------------------------------- | ---------------------- |
+| Vitest (023 focused)              | PASS                   |
+| coverage ≥95% lines (new modules) | PASS                   |
+| boundary audit                    | PASS                   |
+| Playwright live                   | LIMITED (spec present) |
 
 ## Technical Debt
 
-- Playwright requires app server baseURL in CI  
-- Date-range filter fields are presentation context (historical series lack per-point date filtering in UI)  
-- Heat map tones derived from existing scores for display only  
-- Branch coverage on empty panel paths lower than line coverage  
+- Playwright requires app server baseURL in CI
+- Date-range filter fields are presentation context (historical series lack per-point date filtering in UI)
+- Heat map tones derived from existing scores for display only
+- Branch coverage on empty panel paths lower than line coverage
 
 ## Recommendation
 

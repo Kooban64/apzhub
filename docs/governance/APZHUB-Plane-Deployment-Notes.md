@@ -17,10 +17,10 @@ Users → APZHUB Gateway → ProjectService → PlaneAdapter → Plane CE (inter
 
 ## Local development
 
-| Approach | Status |
-|----------|--------|
-| Reference legacy `apz-stack` Plane (port 18085) | Available on host — see ENVIRONMENT.md |
-| APZHUB-dedicated Plane Compose | Planned when OSS-101-04 begins — not in OSS-101-02 |
+| Approach                                        | Status                                             |
+| ----------------------------------------------- | -------------------------------------------------- |
+| Reference legacy `apz-stack` Plane (port 18085) | Available on host — see ENVIRONMENT.md             |
+| APZHUB-dedicated Plane Compose                  | Planned when OSS-101-04 begins — not in OSS-101-02 |
 
 ### Docker Compose expectations (future)
 
@@ -37,25 +37,25 @@ Pin image tags — no `latest`.
 
 ## Production assumptions
 
-| Topic | Assumption |
-|-------|------------|
-| Edition | Plane Community Edition (CE) only unless owner approves EE |
-| Network | Internal VPC / Docker network; adapter-only access |
-| TLS | Edge TLS at Caddy; internal HTTP or service mesh mTLS |
-| Scaling | Single Plane instance per deployment phase; HA deferred |
-| Tenancy | One Plane workspace per APZHUB platform tenant |
-| Identity | Service account tokens — not user Plane logins |
+| Topic    | Assumption                                                 |
+| -------- | ---------------------------------------------------------- |
+| Edition  | Plane Community Edition (CE) only unless owner approves EE |
+| Network  | Internal VPC / Docker network; adapter-only access         |
+| TLS      | Edge TLS at Caddy; internal HTTP or service mesh mTLS      |
+| Scaling  | Single Plane instance per deployment phase; HA deferred    |
+| Tenancy  | One Plane workspace per APZHUB platform tenant             |
+| Identity | Service account tokens — not user Plane logins             |
 
 ---
 
 ## Backup and restore
 
-| Component | Owner | Strategy |
-|-----------|-------|----------|
-| Plane PostgreSQL | Engine ops | Plane DR runbook — pg_dump per Plane docs |
-| Plane object storage (MinIO) | Engine ops | Bucket backup if attachments used |
-| Platform entity mappings | Platform | Platform PostgreSQL backup (OSS-101-04+) |
-| API tokens | Platform | Vault backup (PCv2-04) |
+| Component                    | Owner      | Strategy                                  |
+| ---------------------------- | ---------- | ----------------------------------------- |
+| Plane PostgreSQL             | Engine ops | Plane DR runbook — pg_dump per Plane docs |
+| Plane object storage (MinIO) | Engine ops | Bucket backup if attachments used         |
+| Platform entity mappings     | Platform   | Platform PostgreSQL backup (OSS-101-04+)  |
+| API tokens                   | Platform   | Vault backup (PCv2-04)                    |
 
 **RPO/RTO:** Document per environment in ops runbook (OSS-101-09).
 
@@ -77,11 +77,11 @@ Version compatibility range: `0.23.0` – `0.24.x` (initial — confirm at pin t
 
 ## Secret handling
 
-| Secret | Storage (current) | Storage (target) |
-|--------|-------------------|------------------|
-| `PLANE_API_TOKEN` | Environment variable | Vault ref (PCv2-04) |
-| `PLANE_WEBHOOK_SECRET` | Environment variable | Vault ref |
-| Connection URLs | Environment (non-secret) | Config provider |
+| Secret                 | Storage (current)        | Storage (target)    |
+| ---------------------- | ------------------------ | ------------------- |
+| `PLANE_API_TOKEN`      | Environment variable     | Vault ref (PCv2-04) |
+| `PLANE_WEBHOOK_SECRET` | Environment variable     | Vault ref           |
+| Connection URLs        | Environment (non-secret) | Config provider     |
 
 - Never commit tokens to repo
 - Mask in diagnostics and logs (`credential` / `secret` classification)

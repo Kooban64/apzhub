@@ -50,8 +50,12 @@ describe("testing routes", () => {
     expect(resolveTestingRoute(`${TESTING_BASE}/automation`)).toEqual({
       kind: "automation",
     });
-    expect(resolveTestingRoute(`${TESTING_BASE}/evidence`)).toEqual({ kind: "evidence" });
-    expect(resolveTestingRoute(`${TESTING_BASE}/coverage`)).toEqual({ kind: "coverage" });
+    expect(resolveTestingRoute(`${TESTING_BASE}/evidence`)).toEqual({
+      kind: "evidence",
+    });
+    expect(resolveTestingRoute(`${TESTING_BASE}/coverage`)).toEqual({
+      kind: "coverage",
+    });
     expect(resolveTestingRoute(`${TESTING_BASE}/defects`)).toEqual({ kind: "defects" });
     expect(resolveTestingRoute(`${TESTING_BASE}/quality`)).toEqual({ kind: "quality" });
     expect(resolveTestingRoute(`${TESTING_BASE}/certification`)).toEqual({
@@ -81,9 +85,7 @@ describe("testing routes", () => {
   });
 
   it("resolves pipeline repository and run detail routes", () => {
-    expect(
-      resolveTestingRoute(`${TESTING_BASE}/pipelines/repos/acme/portal`),
-    ).toEqual({
+    expect(resolveTestingRoute(`${TESTING_BASE}/pipelines/repos/acme/portal`)).toEqual({
       kind: "pipeline-repository",
       owner: "acme",
       repo: "portal",
@@ -122,7 +124,9 @@ describe("testing routes", () => {
       planId,
     });
     expect(resolveTestingRoute(`${TESTING_BASE}/plans/new`)).toEqual({ kind: "plans" });
-    expect(resolveTestingRoute(`${TESTING_BASE}/plans/create`)).toEqual({ kind: "plans" });
+    expect(resolveTestingRoute(`${TESTING_BASE}/plans/create`)).toEqual({
+      kind: "plans",
+    });
 
     expect(resolveTestingRoute(testingExecutionPath(executionId))).toEqual({
       kind: "execution-detail",

@@ -48,9 +48,8 @@ async function performTransition(
       status: nextStatus,
       certifiedAt,
       conditions:
-        nextStatus === "conditionally_approved" ||
-        nextStatus === "conditional_approval"
-          ? reason ?? existing.conditions
+        nextStatus === "conditionally_approved" || nextStatus === "conditional_approval"
+          ? (reason ?? existing.conditions)
           : existing.conditions,
     },
   );
@@ -178,14 +177,7 @@ export function createCertificationWorkflowService(
     },
     async reject(ctx, id, reason) {
       assertNonEmptyString(reason, "reason");
-      return performTransition(
-        rt,
-        ctx,
-        id,
-        "rejected",
-        reason,
-        "certification.reject",
-      );
+      return performTransition(rt, ctx, id, "rejected", reason, "certification.reject");
     },
     async expire(ctx, id, reason) {
       return performTransition(

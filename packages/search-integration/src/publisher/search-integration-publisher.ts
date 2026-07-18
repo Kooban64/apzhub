@@ -35,10 +35,7 @@ export class SearchIntegrationPublisher {
     return this.deps.entityPublisher.update(context, input);
   }
 
-  remove(
-    context: SearchIntegrationContext,
-    entityId: string,
-  ): SearchPublicationResult {
+  remove(context: SearchIntegrationContext, entityId: string): SearchPublicationResult {
     return this.deps.entityPublisher.remove(context, entityId);
   }
 
@@ -79,12 +76,7 @@ export class SearchIntegrationPublisher {
     state: SearchEntityLifecycleState,
     reason?: string,
   ): SearchPublicationResult {
-    return this.deps.entityPublisher.lifecycle(
-      context,
-      entityId,
-      state,
-      reason,
-    );
+    return this.deps.entityPublisher.lifecycle(context, entityId, state, reason);
   }
 
   statistics(context: SearchIntegrationContext): SearchPublicationStatistics {

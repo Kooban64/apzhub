@@ -1,4 +1,7 @@
-import type { ZammadCapabilityCertification, ZammadCapabilityAvailability } from "./types";
+import type {
+  ZammadCapabilityCertification,
+  ZammadCapabilityAvailability,
+} from "./types";
 
 const VERSION_MIN = "6.3.0";
 const VERSION_MAX = "6.5.x";
@@ -112,7 +115,11 @@ const CAPABILITY_SPECS: readonly CapabilitySpec[] = [
     capabilityId: "search",
     serviceId: "search",
     optional: true,
-    supportedOperations: ["searchSupportRequests", "searchOrganizations", "searchUsers"],
+    supportedOperations: [
+      "searchSupportRequests",
+      "searchOrganizations",
+      "searchUsers",
+    ],
     unsupportedOperations: ["semanticSearch", "crossEngineSearch"],
     dependencyRequirements: ["rest_client", "operation_runner", "auth"],
     configurationRequirements: ["baseUrl", "apiToken"],
@@ -178,10 +185,7 @@ const CAPABILITY_SPECS: readonly CapabilitySpec[] = [
     serviceId: "events",
     optional: false,
     supportedOperations: ["translateProviderEvent", "listSupportedEventTypes"],
-    unsupportedOperations: [
-      "platformEventPublication",
-      "platformEventSubscription",
-    ],
+    unsupportedOperations: ["platformEventPublication", "platformEventSubscription"],
     dependencyRequirements: ["canonical_event_contracts"],
     configurationRequirements: [],
     knownLimitations: [

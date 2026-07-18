@@ -18,4 +18,7 @@ export {
   buildTrafficDeniedInit,
 } from "./traffic-governance";
 
-export { getSharedPlatformSecurityService, resetSharedPlatformSecurityService } from "./index";
+export {
+  getSharedPlatformSecurityService,
+  resetSharedPlatformSecurityService,
+} from "./index";

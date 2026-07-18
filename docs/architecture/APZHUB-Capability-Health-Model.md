@@ -49,26 +49,26 @@ interface CapabilityHealthReport {
 
 ## Registered capabilities (PRH-008)
 
-| ID | Name | Owner | Maturity |
-|----|------|-------|----------|
-| `platform.runtime` | Platform Runtime | `@apzhub/platform-runtime` | production |
-| `platform.bootstrap` | Platform Bootstrap | `@apzhub/platform-bootstrap` | production |
-| `platform.identity` | Platform Identity | `@apzhub/platform-identity` | operational |
-| `platform.authorization` | Platform Authorization | `@apzhub/platform-authorization` | operational |
-| `platform.personalisation` | Platform Personalisation | `@apzhub/platform-personalisation` | operational |
-| `platform.governance` | Platform Governance | `@apzhub/platform-governance` | operational |
-| `platform.provisioning` | Platform Provisioning | `@apzhub/platform-identity` | foundation |
-| `platform.security` | Platform Security | `@apzhub/platform-security` | production |
-| `platform.configuration` | Platform Configuration | `@apzhub/config` | production |
-| `platform.traffic-governance` | Traffic Governance | `@apzhub/platform-security` | production |
-| `platform.session-security` | Session Security | `@apzhub/auth` | production |
-| `platform.tenant-isolation` | Tenant Isolation | `@apzhub/platform-identity` | production |
-| `platform.persistence` | Platform Persistence | `@apzhub/config` | operational |
-| `product.law-platform` | Law Platform | `apps/law-platform` | operational |
-| `product.trust-accounting` | Trust Accounting | Law trust module | operational |
-| `platform.workbench` | Workbench Framework | `@apzhub/workbench-framework` | operational |
-| `platform.api-framework` | API Framework | `apps/web/lib/api` | operational |
-| `platform.operations` | Operations Control Plane | `@apzhub/platform-operations` | production |
+| ID                            | Name                     | Owner                              | Maturity    |
+| ----------------------------- | ------------------------ | ---------------------------------- | ----------- |
+| `platform.runtime`            | Platform Runtime         | `@apzhub/platform-runtime`         | production  |
+| `platform.bootstrap`          | Platform Bootstrap       | `@apzhub/platform-bootstrap`       | production  |
+| `platform.identity`           | Platform Identity        | `@apzhub/platform-identity`        | operational |
+| `platform.authorization`      | Platform Authorization   | `@apzhub/platform-authorization`   | operational |
+| `platform.personalisation`    | Platform Personalisation | `@apzhub/platform-personalisation` | operational |
+| `platform.governance`         | Platform Governance      | `@apzhub/platform-governance`      | operational |
+| `platform.provisioning`       | Platform Provisioning    | `@apzhub/platform-identity`        | foundation  |
+| `platform.security`           | Platform Security        | `@apzhub/platform-security`        | production  |
+| `platform.configuration`      | Platform Configuration   | `@apzhub/config`                   | production  |
+| `platform.traffic-governance` | Traffic Governance       | `@apzhub/platform-security`        | production  |
+| `platform.session-security`   | Session Security         | `@apzhub/auth`                     | production  |
+| `platform.tenant-isolation`   | Tenant Isolation         | `@apzhub/platform-identity`        | production  |
+| `platform.persistence`        | Platform Persistence     | `@apzhub/config`                   | operational |
+| `product.law-platform`        | Law Platform             | `apps/law-platform`                | operational |
+| `product.trust-accounting`    | Trust Accounting         | Law trust module                   | operational |
+| `platform.workbench`          | Workbench Framework      | `@apzhub/workbench-framework`      | operational |
+| `platform.api-framework`      | API Framework            | `apps/web/lib/api`                 | operational |
+| `platform.operations`         | Operations Control Plane | `@apzhub/platform-operations`      | production  |
 
 ---
 

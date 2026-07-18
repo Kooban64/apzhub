@@ -10,12 +10,12 @@ Provisioning records lifecycle of tenant, product, module, service, and user ava
 
 ## Operations
 
-| Operation | Service method |
-| --- | --- |
-| Tenant provisioning | `provisionTenant({ tenantId, productKeys })` |
-| Product provisioning | `productProvisioning.provisionProduct(input)` |
-| Module provisioning | `moduleProvisioning.provisionModule(input)` |
-| Generic start/complete | `startProvisioning` / `completeProvisioning` |
+| Operation              | Service method                                |
+| ---------------------- | --------------------------------------------- |
+| Tenant provisioning    | `provisionTenant({ tenantId, productKeys })`  |
+| Product provisioning   | `productProvisioning.provisionProduct(input)` |
+| Module provisioning    | `moduleProvisioning.provisionModule(input)`   |
+| Generic start/complete | `startProvisioning` / `completeProvisioning`  |
 
 ## Storage
 

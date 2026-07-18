@@ -496,8 +496,8 @@ async function seedSupportMappings(store: InMemoryEntityMappingStore) {
 }
 
 describe("OSS-110-10 package version", () => {
-  it("bumps platform-services to 0.10.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
+  it("bumps platform-services to 0.25.0", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
   });
 });
 
@@ -510,8 +510,12 @@ describe("Support mapping global IDs", () => {
   });
 
   it("strips sreq_zammad_ provisional IDs", () => {
-    expect(extractProvisionalProviderNativeId("sreq_zammad_42", "support_request")).toBe("42");
-    expect(extractProvisionalProviderNativeId("sgrp_zammad_7", "support_group")).toBe("7");
+    expect(
+      extractProvisionalProviderNativeId("sreq_zammad_42", "support_request"),
+    ).toBe("42");
+    expect(extractProvisionalProviderNativeId("sgrp_zammad_7", "support_group")).toBe(
+      "7",
+    );
     expect(isProvisionalProviderId("sreq_zammad_42")).toBe(true);
   });
 });
@@ -637,7 +641,9 @@ describe("Support gateway exposure", () => {
     try {
       void bundle.gateway.support;
     } catch (error) {
-      expect((error as PlatformServiceError).code).toBe("PROVIDER_CAPABILITY_UNSUPPORTED");
+      expect((error as PlatformServiceError).code).toBe(
+        "PROVIDER_CAPABILITY_UNSUPPORTED",
+      );
     }
   });
 
@@ -679,7 +685,10 @@ describe("SupportServiceImpl mapping", () => {
     const ids = await seedSupportMappings(mappingStore);
     const bundle = createPlatformServices({ registry, mappingStore });
 
-    const ticket = await bundle.support.getSupportRequest(TEST_SERVICE_CONTEXT, ids.ticketId);
+    const ticket = await bundle.support.getSupportRequest(
+      TEST_SERVICE_CONTEXT,
+      ids.ticketId,
+    );
     expect(ticket.id).toBe(ids.ticketId);
     expect(ticket.groupId).toBe(ids.groupId);
     expect(ticket.requesterId).toBe(ids.requesterId);
@@ -702,7 +711,10 @@ describe("SupportServiceImpl mapping", () => {
 
     expect(created.id.startsWith("sreq_")).toBe(true);
     expect(isProvisionalProviderId(created.id)).toBe(false);
-    const stored = await mappingStore.getByPlatformId(created.id, TEST_SERVICE_CONTEXT.tenantId);
+    const stored = await mappingStore.getByPlatformId(
+      created.id,
+      TEST_SERVICE_CONTEXT.tenantId,
+    );
     expect(stored?.providerNativeId).toBe("99");
   });
 
@@ -714,9 +726,13 @@ describe("SupportServiceImpl mapping", () => {
     const ids = await seedSupportMappings(mappingStore);
     const bundle = createPlatformServices({ registry, mappingStore });
 
-    const updated = await bundle.support.updateSupportRequest(TEST_SERVICE_CONTEXT, ids.ticketId, {
-      title: "Updated",
-    });
+    const updated = await bundle.support.updateSupportRequest(
+      TEST_SERVICE_CONTEXT,
+      ids.ticketId,
+      {
+        title: "Updated",
+      },
+    );
     expect(updated.title).toBe("Updated");
     expect(core.support.update).toHaveBeenCalledWith(
       expect.anything(),
@@ -724,11 +740,17 @@ describe("SupportServiceImpl mapping", () => {
       expect.objectContaining({ title: "Updated" }),
     );
 
-    const closed = await bundle.support.closeSupportRequest(TEST_SERVICE_CONTEXT, ids.ticketId);
+    const closed = await bundle.support.closeSupportRequest(
+      TEST_SERVICE_CONTEXT,
+      ids.ticketId,
+    );
     expect(closed.status).toBe("closed");
     expect(core.support.close).toHaveBeenCalledWith(expect.anything(), "42");
 
-    const reopened = await bundle.support.reopenSupportRequest(TEST_SERVICE_CONTEXT, ids.ticketId);
+    const reopened = await bundle.support.reopenSupportRequest(
+      TEST_SERVICE_CONTEXT,
+      ids.ticketId,
+    );
     expect(reopened.status).toBe("open");
 
     await bundle.support.assignSupportRequest(TEST_SERVICE_CONTEXT, ids.ticketId, {
@@ -740,9 +762,13 @@ describe("SupportServiceImpl mapping", () => {
       expect.objectContaining({ assigneeId: "9" }),
     );
 
-    await bundle.support.changeSupportRequestPriority(TEST_SERVICE_CONTEXT, ids.ticketId, {
-      priority: "high",
-    });
+    await bundle.support.changeSupportRequestPriority(
+      TEST_SERVICE_CONTEXT,
+      ids.ticketId,
+      {
+        priority: "high",
+      },
+    );
     expect(core.support.changePriority).toHaveBeenCalled();
 
     await bundle.support.changeSupportRequestState(TEST_SERVICE_CONTEXT, ids.ticketId, {
@@ -766,7 +792,8 @@ describe("Support related domain services", () => {
     const ids = await seedSupportMappings(mappingStore);
     const bundle = createPlatformServices({ registry, mappingStore });
 
-    const orgs = await bundle.supportOrganization.listOrganizations(TEST_SERVICE_CONTEXT);
+    const orgs =
+      await bundle.supportOrganization.listOrganizations(TEST_SERVICE_CONTEXT);
     expect(orgs.items[0]!.id.startsWith("sorg_")).toBe(true);
     expect(isProvisionalProviderId(orgs.items[0]!.id)).toBe(false);
 
@@ -776,9 +803,12 @@ describe("Support related domain services", () => {
     );
     expect(org.id).toBe(ids.organizationId);
 
-    const createdOrg = await bundle.supportOrganization.createOrganization(TEST_SERVICE_CONTEXT, {
-      name: "New Org",
-    });
+    const createdOrg = await bundle.supportOrganization.createOrganization(
+      TEST_SERVICE_CONTEXT,
+      {
+        name: "New Org",
+      },
+    );
     expect(createdOrg.id.startsWith("sorg_")).toBe(true);
 
     const groups = await bundle.supportGroup.listGroups(TEST_SERVICE_CONTEXT);
@@ -792,7 +822,10 @@ describe("Support related domain services", () => {
     });
     expect(lookedUp?.id.startsWith("suser_")).toBe(true);
 
-    const articles = await bundle.supportArticle.list(TEST_SERVICE_CONTEXT, ids.ticketId);
+    const articles = await bundle.supportArticle.list(
+      TEST_SERVICE_CONTEXT,
+      ids.ticketId,
+    );
     expect(articles.items[0]!.id.startsWith("sart_")).toBe(true);
     expect(articles.items[0]!.supportTicketId).toBe(ids.ticketId);
 
@@ -811,7 +844,8 @@ describe("Support related domain services", () => {
     );
     expect(timeline.supportTicketId).toBe(ids.ticketId);
 
-    const analytics = await bundle.supportAnalytics.getSupportIntelligence(TEST_SERVICE_CONTEXT);
+    const analytics =
+      await bundle.supportAnalytics.getSupportIntelligence(TEST_SERVICE_CONTEXT);
     expect(analytics.totalTickets).toBe(1);
   });
 });
@@ -834,9 +868,9 @@ describe("Support request pipeline", () => {
     });
 
     await bundle.gateway.support.listSupportRequests(TEST_SERVICE_CONTEXT);
-    expect(metricsEvents.some((entry) => entry.includes("support.listSupportRequests"))).toBe(
-      true,
-    );
+    expect(
+      metricsEvents.some((entry) => entry.includes("support.listSupportRequests")),
+    ).toBe(true);
   });
 });
 
@@ -853,7 +887,10 @@ describe("Support authorization", () => {
   });
 
   it("maps changeSupportRequestPriority to update permission", () => {
-    const mapping = resolveOperationAuthorization("support", "changeSupportRequestPriority");
+    const mapping = resolveOperationAuthorization(
+      "support",
+      "changeSupportRequestPriority",
+    );
     expect(mapping?.requiredPermission).toBe("support.requests.update");
   });
 
@@ -887,7 +924,9 @@ describe("Support authorization", () => {
       tenantId: AUTH_TEST_TENANT_A,
     });
 
-    await expect(bundle.gateway.support.listSupportRequests(deniedCtx)).rejects.toMatchObject({
+    await expect(
+      bundle.gateway.support.listSupportRequests(deniedCtx),
+    ).rejects.toMatchObject({
       code: "PERMISSION_DENIED",
     });
 
@@ -917,8 +956,8 @@ describe("Support provider failure translation", () => {
     registerZammadProviders({ registry, zammadCore: failingCore as never });
     const bundle = createPlatformServices({ registry });
 
-    await expect(bundle.support.listSupportRequests(TEST_SERVICE_CONTEXT)).rejects.toBeInstanceOf(
-      PlatformServiceError,
-    );
+    await expect(
+      bundle.support.listSupportRequests(TEST_SERVICE_CONTEXT),
+    ).rejects.toBeInstanceOf(PlatformServiceError);
   });
 });

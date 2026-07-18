@@ -76,10 +76,7 @@ export class ZammadSupportService {
             searchQuery,
             buildZammadListQuery(page, sort),
           )
-        : await this.deps.client.listTickets(
-            context,
-            buildZammadListQuery(page, sort),
-          );
+        : await this.deps.client.listTickets(context, buildZammadListQuery(page, sort));
 
       assertValid(validateZammadArrayResponse(list.items), "support.list.response");
 
@@ -204,10 +201,7 @@ export class ZammadSupportService {
     supportTicketId: string,
     input: ChangeSupportTicketStateInput,
   ): Promise<SupportTicket> {
-    assertValid(
-      validateRequiredString(input.status, "status"),
-      "support.changeState",
-    );
+    assertValid(validateRequiredString(input.status, "status"), "support.changeState");
 
     return this.deps.runner.run(context, "support.changeState", async () => {
       const record = await this.deps.client.updateTicket(

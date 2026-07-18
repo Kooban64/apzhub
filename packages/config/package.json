@@ -14,7 +14,7 @@
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
-    "drizzle-orm": "^0.44.2",
+    "drizzle-orm": "^0.45.2",
     "@apzhub/legal-business-core": "workspace:*",
     "pg": "^8.16.0",
     "zod": "^3.25.67"

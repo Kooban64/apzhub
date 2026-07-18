@@ -23,7 +23,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -95,9 +96,7 @@ if (!existsSync(observeHandler)) {
 }
 
 scan(
-  walk(join(ROOT, "apps/web/lib/api/v1/handlers")).filter((f) =>
-    f.includes("observe"),
-  ),
+  walk(join(ROOT, "apps/web/lib/api/v1/handlers")).filter((f) => f.includes("observe")),
   [
     {
       rule: "handlers-no-core",
@@ -305,7 +304,9 @@ console.log("APZOBSERVE-003 architecture audit PASSED");
 console.log("  handlers → gateway.observe.* only");
 console.log("  typed client → /api/v1/observe only");
 console.log("  bootstrap wires observe platform services");
-console.log("  OpenAPI Platform Observability Administration + version >= 1.8.0 present");
+console.log(
+  "  OpenAPI Platform Observability Administration + version >= 1.8.0 present",
+);
 console.log("  no grafana/prometheus/loki/scrape/ingest/secrets routes");
 console.log("  no Observability Workbench");
 process.exit(0);

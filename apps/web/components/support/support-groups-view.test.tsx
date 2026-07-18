@@ -110,9 +110,9 @@ describe("SupportGroupsView", () => {
     expect(screen.queryByRole("button", { name: "Create" })).toBeNull();
     await waitFor(() => expect(screen.getByTestId("support-error")).toBeTruthy());
     expect(screen.getByTestId("support-error").textContent).toMatch(/unavailable/i);
-    expect(screen.getByTestId("support-error").textContent?.toLowerCase()).not.toContain(
-      "provider",
-    );
+    expect(
+      screen.getByTestId("support-error").textContent?.toLowerCase(),
+    ).not.toContain("provider");
   });
 
   it("updates group detail when permitted", async () => {
@@ -126,10 +126,10 @@ describe("SupportGroupsView", () => {
       meta: { requestId: "r2", correlationId: "c2" },
     });
 
-    render(
-      wrap(<SupportGroupsView groupId={group.id} permissions={["support.*"]} />),
+    render(wrap(<SupportGroupsView groupId={group.id} permissions={["support.*"]} />));
+    await waitFor(() =>
+      expect(screen.getByTestId("support-group-detail")).toBeTruthy(),
     );
-    await waitFor(() => expect(screen.getByTestId("support-group-detail")).toBeTruthy());
     expect(screen.getByText("Primary queue")).toBeTruthy();
 
     const nameInput = screen.getByDisplayValue("Tier 1");
@@ -147,7 +147,9 @@ describe("SupportGroupsView", () => {
     });
 
     render(wrap(<SupportGroupsView groupId={group.id} permissions={[]} />));
-    await waitFor(() => expect(screen.getByTestId("support-group-detail")).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByTestId("support-group-detail")).toBeTruthy(),
+    );
     expect(screen.queryByRole("button", { name: "Update" })).toBeNull();
   });
 });

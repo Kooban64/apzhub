@@ -31,13 +31,13 @@ HTTP /api/v1/support-*
 
 ## Canonical naming
 
-| Public resource | Meaning | Global ID prefix |
-| --- | --- | --- |
-| `support-requests` | Support Request (not ticket/issue/task) | `sreq_` |
-| `support-organizations` | Support organisation | `sorg_` |
-| `support-groups` | Support group / queue | `sgrp_` |
-| `support-users` | Provider-domain Support user | `suser_` |
-| nested `articles` | Conversation article | `sart_` |
+| Public resource         | Meaning                                 | Global ID prefix |
+| ----------------------- | --------------------------------------- | ---------------- |
+| `support-requests`      | Support Request (not ticket/issue/task) | `sreq_`          |
+| `support-organizations` | Support organisation                    | `sorg_`          |
+| `support-groups`        | Support group / queue                   | `sgrp_`          |
+| `support-users`         | Provider-domain Support user            | `suser_`         |
+| nested `articles`       | Conversation article                    | `sart_`          |
 
 Never expose `tickets`, `issues`, or Zammad provisional IDs (`*_zammad_*`).
 
@@ -47,45 +47,45 @@ Never expose `tickets`, `issues`, or Zammad provisional IDs (`*_zammad_*`).
 
 ### Support requests
 
-| Method | Path | Gateway |
-|--------|------|---------|
-| GET | `/api/v1/support-requests` | `listSupportRequests` |
-| POST | `/api/v1/support-requests` | `createSupportRequest` |
-| GET | `/api/v1/support-requests/{supportRequestId}` | `getSupportRequest` |
-| PATCH | `/api/v1/support-requests/{supportRequestId}` | `updateSupportRequest` |
-| DELETE | `/api/v1/support-requests/{supportRequestId}` | `closeSupportRequest` (soft close) |
-| POST | `.../close` | `closeSupportRequest` |
-| POST | `.../reopen` | `reopenSupportRequest` |
-| POST | `.../state` | `changeSupportRequestState` |
-| POST | `.../priority` | `changeSupportRequestPriority` |
-| POST | `.../owner` | `assignSupportRequest` |
-| DELETE | `.../owner` | `assignSupportRequest({ assigneeId: null })` |
-| POST | `.../customer` | `updateSupportRequest({ requesterId })` |
+| Method | Path                                          | Gateway                                      |
+| ------ | --------------------------------------------- | -------------------------------------------- |
+| GET    | `/api/v1/support-requests`                    | `listSupportRequests`                        |
+| POST   | `/api/v1/support-requests`                    | `createSupportRequest`                       |
+| GET    | `/api/v1/support-requests/{supportRequestId}` | `getSupportRequest`                          |
+| PATCH  | `/api/v1/support-requests/{supportRequestId}` | `updateSupportRequest`                       |
+| DELETE | `/api/v1/support-requests/{supportRequestId}` | `closeSupportRequest` (soft close)           |
+| POST   | `.../close`                                   | `closeSupportRequest`                        |
+| POST   | `.../reopen`                                  | `reopenSupportRequest`                       |
+| POST   | `.../state`                                   | `changeSupportRequestState`                  |
+| POST   | `.../priority`                                | `changeSupportRequestPriority`               |
+| POST   | `.../owner`                                   | `assignSupportRequest`                       |
+| DELETE | `.../owner`                                   | `assignSupportRequest({ assigneeId: null })` |
+| POST   | `.../customer`                                | `updateSupportRequest({ requesterId })`      |
 
 ### Articles
 
-| Method | Path | Gateway |
-|--------|------|---------|
-| GET | `.../articles` | `supportArticles.list` |
-| GET | `.../articles/{articleId}` | `supportArticles.get` |
-| POST | `.../articles/notes` | `createNote` (always internal) |
-| POST | `.../articles/replies` | `createReply` (always public channel) |
+| Method | Path                       | Gateway                               |
+| ------ | -------------------------- | ------------------------------------- |
+| GET    | `.../articles`             | `supportArticles.list`                |
+| GET    | `.../articles/{articleId}` | `supportArticles.get`                 |
+| POST   | `.../articles/notes`       | `createNote` (always internal)        |
+| POST   | `.../articles/replies`     | `createReply` (always public channel) |
 
 No article update/delete. No binary attachment upload/download.
 
 ### Organisations / groups / users / search / history / analytics
 
-| Method | Path | Gateway |
-|--------|------|---------|
-| GET/POST | `/api/v1/support-organizations` | list / create |
-| GET/PATCH/DELETE | `/api/v1/support-organizations/{organizationId}` | get / update / archive |
-| GET/POST | `/api/v1/support-groups` | list / create |
-| GET/PATCH | `/api/v1/support-groups/{groupId}` | get / update |
-| GET | `/api/v1/support-users` | list / lookup / search (query) |
-| GET | `/api/v1/support-users/{userId}` | get |
-| GET | `/api/v1/support-search` | `supportSearch.search` |
-| GET | `.../history` | `supportHistory.getTimeline` |
-| GET | `/api/v1/support-analytics` | `getSupportIntelligence` |
+| Method           | Path                                             | Gateway                        |
+| ---------------- | ------------------------------------------------ | ------------------------------ |
+| GET/POST         | `/api/v1/support-organizations`                  | list / create                  |
+| GET/PATCH/DELETE | `/api/v1/support-organizations/{organizationId}` | get / update / archive         |
+| GET/POST         | `/api/v1/support-groups`                         | list / create                  |
+| GET/PATCH        | `/api/v1/support-groups/{groupId}`               | get / update                   |
+| GET              | `/api/v1/support-users`                          | list / lookup / search (query) |
+| GET              | `/api/v1/support-users/{userId}`                 | get                            |
+| GET              | `/api/v1/support-search`                         | `supportSearch.search`         |
+| GET              | `.../history`                                    | `supportHistory.getTimeline`   |
+| GET              | `/api/v1/support-analytics`                      | `getSupportIntelligence`       |
 
 ---
 

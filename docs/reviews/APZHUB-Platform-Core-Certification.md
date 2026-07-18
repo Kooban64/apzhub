@@ -19,28 +19,28 @@ The Platform Core is sufficiently complete, consistent, and mature to become the
 
 ## Certification scope
 
-| Capability | Package / surface | M8 / M1–M7 |
-|------------|-------------------|------------|
-| Runtime | `@apzhub/platform-runtime` | M2 |
-| Workbench | `@apzhub/workbench-framework` | M3 |
-| Identity | `@apzhub/platform-identity` | M8-01 |
-| Authorization | `@apzhub/platform-authorization` | M8-02 |
-| Operations | Operations Console + APIs | M8-03 |
-| Personalisation | `@apzhub/platform-personalisation` | M8-04 |
-| Governance | `@apzhub/platform-governance` | M8-05 |
-| Provisioning | Governance package | M8-05 |
-| Security | `@apzhub/platform-security` | M8-06 |
-| Persistence | `@apzhub/config` + Drizzle migrations | LAW-012 + M8 |
-| API Framework | `/api/platform/v1/*`, `/api/health` | M8 + LAW-014 |
-| Actions | `@apzhub/command-framework` | M4 |
-| Knowledge | `@apzhub/knowledge-discovery-framework` | M5 |
-| Events | `@apzhub/event-notification-framework` | M6 |
-| Notifications | `@apzhub/event-notification-framework` | M6 |
-| Activity Timeline | `@apzhub/activity-timeline-framework` | M7 |
-| Search | Knowledge & Discovery (Document 020) | M5 |
-| Developer Experience | Docs, onboarding, monorepo tooling | BUILD-001+ |
-| Testing | Vitest, Playwright, coverage gates | M1–M8 |
-| Documentation | Foundation 000–029, architecture, ADRs | Continuous |
+| Capability           | Package / surface                       | M8 / M1–M7   |
+| -------------------- | --------------------------------------- | ------------ |
+| Runtime              | `@apzhub/platform-runtime`              | M2           |
+| Workbench            | `@apzhub/workbench-framework`           | M3           |
+| Identity             | `@apzhub/platform-identity`             | M8-01        |
+| Authorization        | `@apzhub/platform-authorization`        | M8-02        |
+| Operations           | Operations Console + APIs               | M8-03        |
+| Personalisation      | `@apzhub/platform-personalisation`      | M8-04        |
+| Governance           | `@apzhub/platform-governance`           | M8-05        |
+| Provisioning         | Governance package                      | M8-05        |
+| Security             | `@apzhub/platform-security`             | M8-06        |
+| Persistence          | `@apzhub/config` + Drizzle migrations   | LAW-012 + M8 |
+| API Framework        | `/api/platform/v1/*`, `/api/health`     | M8 + LAW-014 |
+| Actions              | `@apzhub/command-framework`             | M4           |
+| Knowledge            | `@apzhub/knowledge-discovery-framework` | M5           |
+| Events               | `@apzhub/event-notification-framework`  | M6           |
+| Notifications        | `@apzhub/event-notification-framework`  | M6           |
+| Activity Timeline    | `@apzhub/activity-timeline-framework`   | M7           |
+| Search               | Knowledge & Discovery (Document 020)    | M5           |
+| Developer Experience | Docs, onboarding, monorepo tooling      | BUILD-001+   |
+| Testing              | Vitest, Playwright, coverage gates      | M1–M8        |
+| Documentation        | Foundation 000–029, architecture, ADRs  | Continuous   |
 
 ---
 
@@ -48,16 +48,16 @@ The Platform Core is sufficiently complete, consistent, and mature to become the
 
 Each capability is rated on eight dimensions:
 
-| Dimension | Scale |
-|-----------|-------|
-| Architecture | Excellent · Very Good · Good · Fair · Needs Work |
-| Maintainability | Excellent · Very Good · Good · Fair · Needs Work |
-| Scalability | Excellent · Very Good · Good · Fair · Needs Work |
-| Security | Excellent · Very Good · Good · Fair · Needs Work |
-| Documentation | Excellent · Very Good · Good · Fair · Needs Work |
-| Developer Experience | Excellent · Very Good · Good · Fair · Needs Work |
+| Dimension             | Scale                                            |
+| --------------------- | ------------------------------------------------ |
+| Architecture          | Excellent · Very Good · Good · Fair · Needs Work |
+| Maintainability       | Excellent · Very Good · Good · Fair · Needs Work |
+| Scalability           | Excellent · Very Good · Good · Fair · Needs Work |
+| Security              | Excellent · Very Good · Good · Fair · Needs Work |
+| Documentation         | Excellent · Very Good · Good · Fair · Needs Work |
+| Developer Experience  | Excellent · Very Good · Good · Fair · Needs Work |
 | Operational Readiness | Excellent · Very Good · Good · Fair · Needs Work |
-| Commercial Readiness | Excellent · Very Good · Good · Fair · Needs Work |
+| Commercial Readiness  | Excellent · Very Good · Good · Fair · Needs Work |
 
 **Overall capability score** is the median qualitative assessment across dimensions, weighted toward architecture and security for platform-critical capabilities.
 
@@ -67,40 +67,40 @@ Each capability is rated on eight dimensions:
 
 ### Platform Core services (M8)
 
-| Capability | Arch | Maint | Scale | Sec | Docs | DX | Ops | Comm | Overall |
-|------------|------|-------|-------|-----|------|-----|-----|------|---------|
-| **Identity** | VG | VG | G | VG | VG | G | G | F | **Very Good** |
-| **Authorization** | VG | VG | G | VG | VG | G | G | F | **Very Good** |
-| **Operations** | VG | VG | G | G | VG | VG | VG | F | **Very Good** |
-| **Personalisation** | VG | VG | G | G | VG | G | G | F | **Very Good** |
-| **Governance** | VG | VG | G | G | VG | G | G | F | **Very Good** |
-| **Provisioning** | G | VG | G | G | VG | G | G | F | **Good** |
-| **Security** | VG | VG | G | G | VG | G | VG | F | **Very Good** |
+| Capability          | Arch | Maint | Scale | Sec | Docs | DX  | Ops | Comm | Overall       |
+| ------------------- | ---- | ----- | ----- | --- | ---- | --- | --- | ---- | ------------- |
+| **Identity**        | VG   | VG    | G     | VG  | VG   | G   | G   | F    | **Very Good** |
+| **Authorization**   | VG   | VG    | G     | VG  | VG   | G   | G   | F    | **Very Good** |
+| **Operations**      | VG   | VG    | G     | G   | VG   | VG  | VG  | F    | **Very Good** |
+| **Personalisation** | VG   | VG    | G     | G   | VG   | G   | G   | F    | **Very Good** |
+| **Governance**      | VG   | VG    | G     | G   | VG   | G   | G   | F    | **Very Good** |
+| **Provisioning**    | G    | VG    | G     | G   | VG   | G   | G   | F    | **Good**      |
+| **Security**        | VG   | VG    | G     | G   | VG   | G   | VG  | F    | **Very Good** |
 
 ### Infrastructure and frameworks (M1–M7)
 
-| Capability | Arch | Maint | Scale | Sec | Docs | DX | Ops | Comm | Overall |
-|------------|------|-------|-------|-----|------|-----|-----|------|---------|
-| **Runtime** | E | VG | G | G | VG | VG | VG | F | **Excellent** |
-| **Workbench** | E | VG | G | G | VG | G | G | F | **Very Good** |
-| **Persistence** | VG | G | G | G | VG | G | G | F | **Good** |
-| **API Framework** | VG | G | G | G | VG | G | G | F | **Good** |
-| **Actions** | E | VG | G | G | VG | VG | G | F | **Very Good** |
-| **Knowledge** | E | VG | G | G | VG | VG | G | F | **Very Good** |
-| **Events** | VG | VG | G | G | VG | VG | G | F | **Very Good** |
-| **Notifications** | VG | VG | G | G | VG | VG | G | F | **Very Good** |
-| **Activity Timeline** | VG | VG | G | G | VG | VG | G | F | **Very Good** |
-| **Search** | VG | VG | G | G | VG | VG | G | F | **Very Good** |
+| Capability            | Arch | Maint | Scale | Sec | Docs | DX  | Ops | Comm | Overall       |
+| --------------------- | ---- | ----- | ----- | --- | ---- | --- | --- | ---- | ------------- |
+| **Runtime**           | E    | VG    | G     | G   | VG   | VG  | VG  | F    | **Excellent** |
+| **Workbench**         | E    | VG    | G     | G   | VG   | G   | G   | F    | **Very Good** |
+| **Persistence**       | VG   | G     | G     | G   | VG   | G   | G   | F    | **Good**      |
+| **API Framework**     | VG   | G     | G     | G   | VG   | G   | G   | F    | **Good**      |
+| **Actions**           | E    | VG    | G     | G   | VG   | VG  | G   | F    | **Very Good** |
+| **Knowledge**         | E    | VG    | G     | G   | VG   | VG  | G   | F    | **Very Good** |
+| **Events**            | VG   | VG    | G     | G   | VG   | VG  | G   | F    | **Very Good** |
+| **Notifications**     | VG   | VG    | G     | G   | VG   | VG  | G   | F    | **Very Good** |
+| **Activity Timeline** | VG   | VG    | G     | G   | VG   | VG  | G   | F    | **Very Good** |
+| **Search**            | VG   | VG    | G     | G   | VG   | VG  | G   | F    | **Very Good** |
 
 ### Cross-cutting
 
-| Capability | Arch | Maint | Scale | Sec | Docs | DX | Ops | Comm | Overall |
-|------------|------|-------|-------|-----|------|-----|-----|------|---------|
-| **Developer Experience** | VG | VG | — | G | VG | VG | G | F | **Very Good** |
-| **Testing** | VG | VG | G | G | VG | VG | G | F | **Very Good** |
-| **Documentation** | VG | VG | — | — | E | VG | VG | G | **Very Good** |
+| Capability               | Arch | Maint | Scale | Sec | Docs | DX  | Ops | Comm | Overall       |
+| ------------------------ | ---- | ----- | ----- | --- | ---- | --- | --- | ---- | ------------- |
+| **Developer Experience** | VG   | VG    | —     | G   | VG   | VG  | G   | F    | **Very Good** |
+| **Testing**              | VG   | VG    | G     | G   | VG   | VG  | G   | F    | **Very Good** |
+| **Documentation**        | VG   | VG    | —     | —   | E    | VG  | VG  | G    | **Very Good** |
 
-*Abbreviations: E = Excellent, VG = Very Good, G = Good, F = Fair*
+_Abbreviations: E = Excellent, VG = Very Good, G = Good, F = Fair_
 
 ---
 
@@ -239,16 +239,16 @@ The manifest-first registry pattern, Platform Service boundary, and Workbench-as
 
 ### Which Platform capabilities are reusable outside APZHUB?
 
-| Capability | Reusability | Notes |
-|------------|-------------|-------|
-| Platform Runtime | **High** | UI-agnostic orchestrator |
-| Workbench Framework | **High** | Generic shell pattern |
-| Action Framework | **High** | Command palette / action execution |
-| Knowledge & Discovery | **High** | Unified search pattern |
-| Event & Notification | **Medium–High** | In-process; needs external bus for scale |
-| Activity Timeline | **Medium–High** | Audit-driven presentation |
-| Identity / Authorization / Governance | **Medium** | APZHUB-specific permission model |
-| Law persistence | **Low** | Product-specific |
+| Capability                            | Reusability     | Notes                                    |
+| ------------------------------------- | --------------- | ---------------------------------------- |
+| Platform Runtime                      | **High**        | UI-agnostic orchestrator                 |
+| Workbench Framework                   | **High**        | Generic shell pattern                    |
+| Action Framework                      | **High**        | Command palette / action execution       |
+| Knowledge & Discovery                 | **High**        | Unified search pattern                   |
+| Event & Notification                  | **Medium–High** | In-process; needs external bus for scale |
+| Activity Timeline                     | **Medium–High** | Audit-driven presentation                |
+| Identity / Authorization / Governance | **Medium**      | APZHUB-specific permission model         |
+| Law persistence                       | **Low**         | Product-specific                         |
 
 ### Could the Platform Core become an independent commercial platform?
 
@@ -274,28 +274,28 @@ See [Platform Core v2 Roadmap](../roadmap/APZHUB-Platform-Core-v2-Roadmap.md). P
 
 ## Observations (non-blocking)
 
-| ID | Observation | Severity | Target |
-|----|-------------|----------|--------|
-| OBS-PC01-01 | App bootstrap duplicated across `web` and `law-platform` | Medium | PCv2 / M17 |
-| OBS-PC01-02 | Outbox workers not implemented | High | PCv2 workers |
-| OBS-PC01-03 | CSP remains Report-Only | Medium | PCv2-01 |
-| OBS-PC01-04 | No GitHub Actions CI workflow | Medium | M17 |
-| OBS-PC01-05 | Commercial readiness Fair across core | Expected | PCv2 |
-| OBS-PC01-06 | Persistent notification/activity stores session-only | Low | PCv2+ |
-| OBS-PC01-07 | Law schema coupled to `@apzhub/config` | Medium | Product extraction |
-| OBS-PC01-08 | Feature flags foundation only (no rollouts) | Low | PCv2 governance |
+| ID          | Observation                                              | Severity | Target             |
+| ----------- | -------------------------------------------------------- | -------- | ------------------ |
+| OBS-PC01-01 | App bootstrap duplicated across `web` and `law-platform` | Medium   | PCv2 / M17         |
+| OBS-PC01-02 | Outbox workers not implemented                           | High     | PCv2 workers       |
+| OBS-PC01-03 | CSP remains Report-Only                                  | Medium   | PCv2-01            |
+| OBS-PC01-04 | No GitHub Actions CI workflow                            | Medium   | M17                |
+| OBS-PC01-05 | Commercial readiness Fair across core                    | Expected | PCv2               |
+| OBS-PC01-06 | Persistent notification/activity stores session-only     | Low      | PCv2+              |
+| OBS-PC01-07 | Law schema coupled to `@apzhub/config`                   | Medium   | Product extraction |
+| OBS-PC01-08 | Feature flags foundation only (no rollouts)              | Low      | PCv2 governance    |
 
 ---
 
 ## Quality gates (certification run)
 
-| Gate | Result | Notes |
-|------|--------|-------|
-| `pnpm lint` | ✅ Pass | No code changes in PC-001 |
-| `pnpm typecheck` | ✅ Pass | |
-| `pnpm build` | ✅ Pass | |
-| `pnpm test` | ✅ Pass | 1873 tests |
-| `pnpm test:coverage` | ✅ Pass | ≥80% |
+| Gate                 | Result  | Notes                     |
+| -------------------- | ------- | ------------------------- |
+| `pnpm lint`          | ✅ Pass | No code changes in PC-001 |
+| `pnpm typecheck`     | ✅ Pass |                           |
+| `pnpm build`         | ✅ Pass |                           |
+| `pnpm test`          | ✅ Pass | 1873 tests                |
+| `pnpm test:coverage` | ✅ Pass | ≥80%                      |
 
 ---
 

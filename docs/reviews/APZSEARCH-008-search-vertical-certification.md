@@ -17,18 +17,18 @@ Workbench → Typed Client → /api/v1/search → Gateway → RequestPipeline �
 
 ## Review pack
 
-| Document | Path |
-| -------- | ---- |
+| Document                             | Path                                                                                                                 |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
 | Architecture / Dependency / Boundary | [APZSEARCH-008-architecture-dependency-boundary-audit.md](./APZSEARCH-008-architecture-dependency-boundary-audit.md) |
-| Security | [APZSEARCH-008-security-review.md](./APZSEARCH-008-security-review.md) |
-| HTTP | [APZSEARCH-008-http-certification.md](./APZSEARCH-008-http-certification.md) |
-| Typed client | [APZSEARCH-008-typed-client-certification.md](./APZSEARCH-008-typed-client-certification.md) |
-| Workbench | [APZSEARCH-008-workbench-certification.md](./APZSEARCH-008-workbench-certification.md) |
-| Provider | [APZSEARCH-008-provider-certification.md](./APZSEARCH-008-provider-certification.md) |
-| Gateway / Platform | [APZSEARCH-008-gateway-platform-certification.md](./APZSEARCH-008-gateway-platform-certification.md) |
-| Production readiness | [APZSEARCH-008-production-readiness.md](./APZSEARCH-008-production-readiness.md) |
-| Performance | [APZSEARCH-008-performance-notes.md](./APZSEARCH-008-performance-notes.md) |
-| Coverage | [APZSEARCH-008-coverage-baseline.md](./APZSEARCH-008-coverage-baseline.md) |
+| Security                             | [APZSEARCH-008-security-review.md](./APZSEARCH-008-security-review.md)                                               |
+| HTTP                                 | [APZSEARCH-008-http-certification.md](./APZSEARCH-008-http-certification.md)                                         |
+| Typed client                         | [APZSEARCH-008-typed-client-certification.md](./APZSEARCH-008-typed-client-certification.md)                         |
+| Workbench                            | [APZSEARCH-008-workbench-certification.md](./APZSEARCH-008-workbench-certification.md)                               |
+| Provider                             | [APZSEARCH-008-provider-certification.md](./APZSEARCH-008-provider-certification.md)                                 |
+| Gateway / Platform                   | [APZSEARCH-008-gateway-platform-certification.md](./APZSEARCH-008-gateway-platform-certification.md)                 |
+| Production readiness                 | [APZSEARCH-008-production-readiness.md](./APZSEARCH-008-production-readiness.md)                                     |
+| Performance                          | [APZSEARCH-008-performance-notes.md](./APZSEARCH-008-performance-notes.md)                                           |
+| Coverage                             | [APZSEARCH-008-coverage-baseline.md](./APZSEARCH-008-coverage-baseline.md)                                           |
 
 ## Quality gate
 

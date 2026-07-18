@@ -5,8 +5,7 @@ const persistenceFactoryMock = vi.hoisted(() => ({
 }));
 
 vi.mock("@apzhub/testing-persistence", async (importActual) => {
-  const actual =
-    await importActual<typeof import("@apzhub/testing-persistence")>();
+  const actual = await importActual<typeof import("@apzhub/testing-persistence")>();
   persistenceFactoryMock.createPostgresTestingPersistence.mockImplementation(() =>
     actual.createInMemoryTestingPersistence(),
   );
@@ -82,9 +81,9 @@ describe("createTestingPlatformServicesForProduction", () => {
 
     const bundle = createTestingPlatformServicesForProduction({ postgresDb });
 
-    expect(persistenceFactoryMock.createPostgresTestingPersistence).toHaveBeenCalledWith(
-      postgresDb,
-    );
+    expect(
+      persistenceFactoryMock.createPostgresTestingPersistence,
+    ).toHaveBeenCalledWith(postgresDb);
     expect(bundle.readiness).toMatchObject({
       enabled: true,
       persistence: "postgres",

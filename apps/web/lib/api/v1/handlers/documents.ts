@@ -3,7 +3,11 @@
  * Call PlatformServiceGateway document facets exclusively — never document-core.
  */
 
-import { asDocumentId, asDocumentTagId, asDocumentVersionId } from "@apzhub/document-contracts";
+import {
+  asDocumentId,
+  asDocumentTagId,
+  asDocumentVersionId,
+} from "@apzhub/document-contracts";
 import type { NextRequest } from "next/server";
 import type { z } from "zod";
 
@@ -150,10 +154,7 @@ export async function handleListDocumentVersions(
     await param(routeContext, "documentId", documentIdParamSchema),
   );
   const gateway = await getPlatformServiceGateway();
-  const items = await gateway.documentVersions.list(
-    context.serviceContext,
-    documentId,
-  );
+  const items = await gateway.documentVersions.list(context.serviceContext, documentId);
   return collection(items, context);
 }
 
@@ -241,10 +242,7 @@ export async function handleListDocumentAudit(
     await param(routeContext, "documentId", documentIdParamSchema),
   );
   const gateway = await getPlatformServiceGateway();
-  const items = await gateway.documentAudit.list(
-    context.serviceContext,
-    documentId,
-  );
+  const items = await gateway.documentAudit.list(context.serviceContext, documentId);
   return collection(items, context);
 }
 
@@ -262,15 +260,12 @@ export async function handleClassifyDocument(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await getPlatformServiceGateway();
-  const result = await gateway.documentClassification.classify(
-    context.serviceContext,
-    {
-      documentId,
-      classification: body.classification as never,
-      customCode: body.customCode,
-      label: body.label,
-    },
-  );
+  const result = await gateway.documentClassification.classify(context.serviceContext, {
+    documentId,
+    classification: body.classification as never,
+    customCode: body.customCode,
+    label: body.label,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -330,13 +325,10 @@ export async function handleAssignDocumentCollection(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await getPlatformServiceGateway();
-  const result = await gateway.documentCollections.assign(
-    context.serviceContext,
-    {
-      documentId,
-      collectionId: body.collectionId,
-    },
-  );
+  const result = await gateway.documentCollections.assign(context.serviceContext, {
+    documentId,
+    collectionId: body.collectionId,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -375,17 +367,14 @@ export async function handleRelateDocument(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await getPlatformServiceGateway();
-  const result = await gateway.documentRelationships.relate(
-    context.serviceContext,
-    {
-      sourceDocumentId,
-      kind: body.kind as never,
-      targetDocumentId: body.targetDocumentId
-        ? asDocumentId(body.targetDocumentId)
-        : undefined,
-      reference: body.reference as never,
-    },
-  );
+  const result = await gateway.documentRelationships.relate(context.serviceContext, {
+    sourceDocumentId,
+    kind: body.kind as never,
+    targetDocumentId: body.targetDocumentId
+      ? asDocumentId(body.targetDocumentId)
+      : undefined,
+    reference: body.reference as never,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 

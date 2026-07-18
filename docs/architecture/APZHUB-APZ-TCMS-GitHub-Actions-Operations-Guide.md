@@ -21,20 +21,20 @@ Postgres migrations through **0032** required for SoR pipeline tables.
 
 ## Permissions
 
-| Permission | Typical use |
-| ---------- | ----------- |
-| `pipeline.read` | Browse live + SoR metadata |
-| `pipeline.import` | importRun / importFromProvider / refresh |
-| `pipeline.link` | evidence/coverage/certification/release links |
-| `pipeline.providers` | list adapters |
-| `pipeline.archive` / `pipeline.audit` | SoR admin/audit |
+| Permission                            | Typical use                                   |
+| ------------------------------------- | --------------------------------------------- |
+| `pipeline.read`                       | Browse live + SoR metadata                    |
+| `pipeline.import`                     | importRun / importFromProvider / refresh      |
+| `pipeline.link`                       | evidence/coverage/certification/release links |
+| `pipeline.providers`                  | list adapters                                 |
+| `pipeline.archive` / `pipeline.audit` | SoR admin/audit                               |
 
 ## Limitations operators must accept
 
-- Read-only — no dispatch/rerun/cancel  
-- No artifact/log binary retrieval  
-- GitHub App / OAuth not live  
-- Live browse requires provider registration; otherwise live facets return provider-unsupported errors  
+- Read-only — no dispatch/rerun/cancel
+- No artifact/log binary retrieval
+- GitHub App / OAuth not live
+- Live browse requires provider registration; otherwise live facets return provider-unsupported errors
 
 ## Runbooks
 

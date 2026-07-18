@@ -43,17 +43,28 @@ export interface PlatformControlPlaneSnapshot {
   }[];
   readonly dependencyHealth: {
     readonly status: string;
-    readonly dependencies: readonly { readonly name: string; readonly status: string }[];
+    readonly dependencies: readonly {
+      readonly name: string;
+      readonly status: string;
+    }[];
   };
   readonly productionVerification: {
     readonly verdict: "READY" | "READY_WITH_OBSERVATIONS" | "NOT_READY";
     readonly score: number;
-    readonly summary: { readonly passCount: number; readonly warnCount: number; readonly failCount: number };
+    readonly summary: {
+      readonly passCount: number;
+      readonly warnCount: number;
+      readonly failCount: number;
+    };
   };
   readonly technicalDebt: {
     readonly registerReference: string;
     readonly openCount: number;
-    readonly openItems: readonly { readonly id: string; readonly priority: string; readonly summary: string }[];
+    readonly openItems: readonly {
+      readonly id: string;
+      readonly priority: string;
+      readonly summary: string;
+    }[];
   };
   readonly documentation: {
     readonly status: string;
@@ -65,7 +76,11 @@ export interface PlatformControlPlaneSnapshot {
     readonly shutdownStatus: string;
     readonly recoveryStatus: string;
     readonly allowedTransitions: readonly string[];
-    readonly readinessGates: readonly { readonly gate: string; readonly satisfied: boolean; readonly message: string }[];
+    readonly readinessGates: readonly {
+      readonly gate: string;
+      readonly satisfied: boolean;
+      readonly message: string;
+    }[];
     readonly capabilities: readonly {
       readonly capabilityId: string;
       readonly name: string;

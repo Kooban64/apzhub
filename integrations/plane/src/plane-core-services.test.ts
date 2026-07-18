@@ -51,12 +51,12 @@ describe("Plane core service capabilities", () => {
           entry.serviceId === "synchronisation",
       ),
     ).toBe(true);
-    expect(capabilities.find((entry) => entry.serviceId === "projects")?.operations).toContain(
-      "create",
-    );
-    expect(capabilities.find((entry) => entry.serviceId === "tasks")?.operations).toContain(
-      "transition",
-    );
+    expect(
+      capabilities.find((entry) => entry.serviceId === "projects")?.operations,
+    ).toContain("create");
+    expect(
+      capabilities.find((entry) => entry.serviceId === "tasks")?.operations,
+    ).toContain("transition");
   });
 
   it("exposes capabilities via PlaneAdapter.core", async () => {
@@ -91,7 +91,10 @@ describe("Plane project service", () => {
     const list = await adapter.core.projects.list(ctx, { status: "active" });
     expect(list.items[0]?.identifier).toBe("CORE");
 
-    const project = await adapter.core.projects.get(ctx, `proj_plane_${MOCK_PROJECT.id}`);
+    const project = await adapter.core.projects.get(
+      ctx,
+      `proj_plane_${MOCK_PROJECT.id}`,
+    );
     expect(project.name).toBe("Platform Core");
 
     const created = await adapter.core.projects.create(ctx, {
@@ -113,9 +116,9 @@ describe("Plane project service", () => {
     const { adapter } = await createAdapter();
     await adapter.initialise();
 
-    await expect(adapter.core.projects.create(ctx, { name: "", identifier: "X" })).rejects.toThrow(
-      /name is required/i,
-    );
+    await expect(
+      adapter.core.projects.create(ctx, { name: "", identifier: "X" }),
+    ).rejects.toThrow(/name is required/i);
   });
 });
 
@@ -135,9 +138,14 @@ describe("Plane project state service", () => {
     });
     expect(created.name).toBe("Review");
 
-    const updated = await adapter.core.projectStates.update(ctx, projectId, created.id, {
-      name: "In Review",
-    });
+    const updated = await adapter.core.projectStates.update(
+      ctx,
+      projectId,
+      created.id,
+      {
+        name: "In Review",
+      },
+    );
     expect(updated.name).toBe("In Review");
 
     await adapter.core.projectStates.delete(ctx, projectId, created.id);
@@ -153,13 +161,18 @@ describe("Plane label service", () => {
     const { adapter } = await createAdapter();
     await adapter.initialise();
 
-    const created = await adapter.core.labels.create(ctx, projectId, { name: "Feature", color: "#00ff00" });
+    const created = await adapter.core.labels.create(ctx, projectId, {
+      name: "Feature",
+      color: "#00ff00",
+    });
     expect(created.name).toBe("Feature");
 
     const fetched = await adapter.core.labels.get(ctx, projectId, created.id);
     expect(fetched.color).toBe("#00ff00");
 
-    const updated = await adapter.core.labels.update(ctx, projectId, created.id, { name: "Enhancement" });
+    const updated = await adapter.core.labels.update(ctx, projectId, created.id, {
+      name: "Enhancement",
+    });
     expect(updated.name).toBe("Enhancement");
 
     await adapter.core.labels.delete(ctx, projectId, created.id);
@@ -220,7 +233,9 @@ describe("Plane member service", () => {
     });
     expect(added.role).toBe("member");
 
-    const updated = await adapter.core.members.update(ctx, projectId, added.id, { role: "admin" });
+    const updated = await adapter.core.members.update(ctx, projectId, added.id, {
+      role: "admin",
+    });
     expect(updated.role).toBe("admin");
 
     await adapter.core.members.remove(ctx, projectId, added.id);
@@ -231,7 +246,10 @@ describe("Plane core service error handling", () => {
   it("translates Plane API failures through operation runner", async () => {
     const base = createMockPlaneCoreFetch();
     const failingFetch: FetchFn = async (input, init) => {
-      if (pathnameOf(input).endsWith("/projects/") && (init?.method ?? "GET") === "GET") {
+      if (
+        pathnameOf(input).endsWith("/projects/") &&
+        (init?.method ?? "GET") === "GET"
+      ) {
         return new Response(
           JSON.stringify({ error_code: "VENDOR_UNAVAILABLE", message: "Unavailable" }),
           { status: 503, headers: { "Content-Type": "application/json" } },
@@ -259,12 +277,9 @@ describe("Plane core service paging and sorting", () => {
     const { adapter } = await createAdapter();
     await adapter.initialise();
 
-    const page = await adapter.core.projects.list(
-      ctx,
-      {},
-      { page: 1, perPage: 10 },
-      [{ field: "name", direction: "asc" }],
-    );
+    const page = await adapter.core.projects.list(ctx, {}, { page: 1, perPage: 10 }, [
+      { field: "name", direction: "asc" },
+    ]);
 
     expect(page.perPage).toBe(10);
     expect(page.page).toBe(1);
@@ -275,6 +290,8 @@ describe("Plane core service paging and sorting", () => {
     const { adapter } = await createAdapter();
     await adapter.initialise();
 
-    await expect(adapter.core.projects.list(ctx, {}, { page: 0 })).rejects.toThrow(/page must be at least 1/i);
+    await expect(adapter.core.projects.list(ctx, {}, { page: 0 })).rejects.toThrow(
+      /page must be at least 1/i,
+    );
   });
 });

@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-search-publication
+name: Publication Operations
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Search — Publication Operations sidebar (APZSEARCH-017).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: search
+    parent: platform-search
+    label: Publication Ops
+    icon: list-checks
+    route: /workspace/search/publication
+    order: 95
+    permission: search.publication.read
+  view:
+    title: Publication Operations
+    workspace: search
+    route: /workspace/search/publication
+    permission: search.publication.read

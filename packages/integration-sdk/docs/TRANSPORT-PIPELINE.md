@@ -34,13 +34,13 @@ request()
 
 ## Request builder
 
-| Helper | Role |
-|--------|------|
-| `buildUrl` / `resolveRequestUrl` | Join `baseUrl` + `path` or absolute `url` + query |
-| `normalizePath` / `stripTrailingSlash` | Path normalisation |
-| `serializeBody` | JSON / text / empty; placeholders for multipart/binary/stream |
-| `createJsonBody` / `createTextBody` / `createEmptyBody` | Body factories |
-| `estimateHeaderBytes` | Approximate outbound size for metrics |
+| Helper                                                  | Role                                                          |
+| ------------------------------------------------------- | ------------------------------------------------------------- |
+| `buildUrl` / `resolveRequestUrl`                        | Join `baseUrl` + `path` or absolute `url` + query             |
+| `normalizePath` / `stripTrailingSlash`                  | Path normalisation                                            |
+| `serializeBody`                                         | JSON / text / empty; placeholders for multipart/binary/stream |
+| `createJsonBody` / `createTextBody` / `createEmptyBody` | Body factories                                                |
+| `estimateHeaderBytes`                                   | Approximate outbound size for metrics                         |
 
 Query values are stringified. Trailing slashes on base URL are stripped.
 
@@ -48,14 +48,14 @@ Query values are stringified. Trailing slashes on base URL are stripped.
 
 ## Response pipeline
 
-| Helper | Role |
-|--------|------|
-| `headersToRecord` | Flatten Headers → `TransportHeaders` |
-| `detectContentType` | Read content-type |
-| `classifyResponseKind` | json / text / empty / error (+ placeholder binary/stream) |
-| `decodeResponse` | Read body text; parse JSON when appropriate |
-| `typedDecodeJson` | Typed JSON helper |
-| `buildTransportResponse` | Assemble `TransportResponse` with `durationMs` |
+| Helper                   | Role                                                      |
+| ------------------------ | --------------------------------------------------------- |
+| `headersToRecord`        | Flatten Headers → `TransportHeaders`                      |
+| `detectContentType`      | Read content-type                                         |
+| `classifyResponseKind`   | json / text / empty / error (+ placeholder binary/stream) |
+| `decodeResponse`         | Read body text; parse JSON when appropriate               |
+| `typedDecodeJson`        | Typed JSON helper                                         |
+| `buildTransportResponse` | Assemble `TransportResponse` with `durationMs`            |
 
 HEAD and empty bodies yield `kind: "empty"`. Non-OK responses still decode bodies when present so adapters can inspect error payloads.
 
@@ -103,12 +103,12 @@ Adapters that already wrap operations with a breaker **must not** enable this un
 
 ## Extensibility
 
-| Extension point | How |
-|-----------------|-----|
-| Custom fetch | `fetchFn` option |
-| Extra policies | `policies: TransportPolicy[]` |
-| Interceptors | `interceptors: TransportInterceptor[]` |
-| Auth headers | `authHeadersProvider` |
+| Extension point  | How                                           |
+| ---------------- | --------------------------------------------- |
+| Custom fetch     | `fetchFn` option                              |
+| Extra policies   | `policies: TransportPolicy[]`                 |
+| Interceptors     | `interceptors: TransportInterceptor[]`        |
+| Auth headers     | `authHeadersProvider`                         |
 | Metrics / logger | Inject `TransportMetrics` / `TransportLogger` |
 
 Do **not** put vendor business logic in transport policies. Keep mapping and domain rules in Platform Services / adapters.

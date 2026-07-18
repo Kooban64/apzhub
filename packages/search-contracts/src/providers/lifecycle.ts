@@ -4,11 +4,7 @@
  */
 
 import type { SearchRequestContext } from "../common/context";
-import type {
-  SearchCapabilities,
-  SearchHealth,
-  SearchQuery,
-} from "../domain/search";
+import type { SearchCapabilities, SearchHealth, SearchQuery } from "../domain/search";
 import type { SearchQueryValidationResult } from "../domain/query-validation";
 import type { SearchProviderId } from "../identifiers";
 import type { SearchProviderKind } from "../enums/catalogue";
@@ -21,8 +17,7 @@ export const SEARCH_PROVIDER_STATUS_STATES = [
   "UNAVAILABLE",
   "UNKNOWN",
 ] as const;
-export type SearchProviderStatusState =
-  (typeof SEARCH_PROVIDER_STATUS_STATES)[number];
+export type SearchProviderStatusState = (typeof SEARCH_PROVIDER_STATUS_STATES)[number];
 
 export function isSearchProviderStatusState(
   value: string,
@@ -193,7 +188,5 @@ export interface SearchProviderRegistryOps {
     context: SearchRequestContext,
     providerId: SearchProviderId | null,
   ): Promise<void>;
-  getActiveProviderId(
-    context: SearchRequestContext,
-  ): Promise<SearchProviderId | null>;
+  getActiveProviderId(context: SearchRequestContext): Promise<SearchProviderId | null>;
 }

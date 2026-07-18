@@ -5,15 +5,15 @@
 
 ## Who should consume
 
-| Product | Suggested first reports | Notes |
-|---------|-------------------------|-------|
-| **Projects** | Portfolio / delivery summary | Templates owned by Projects |
-| **Support** | SLA / ticket quality summary | No Support UI in this milestone |
-| **Documents** | Document control / revision pack | Parameters from Document services |
-| **Analytics** | Metric export packs | Do not duplicate analytics engines |
-| **Workflow** | Run / approval summary | Event-driven generation later |
-| **Compliance** | Evidence / control packs | Align with audit metadata |
-| Future products | Domain-specific kinds | Register own `ReportTypeId` strings |
+| Product         | Suggested first reports          | Notes                               |
+| --------------- | -------------------------------- | ----------------------------------- |
+| **Projects**    | Portfolio / delivery summary     | Templates owned by Projects         |
+| **Support**     | SLA / ticket quality summary     | No Support UI in this milestone     |
+| **Documents**   | Document control / revision pack | Parameters from Document services   |
+| **Analytics**   | Metric export packs              | Do not duplicate analytics engines  |
+| **Workflow**    | Run / approval summary           | Event-driven generation later       |
+| **Compliance**  | Evidence / control packs         | Align with audit metadata           |
+| Future products | Domain-specific kinds            | Register own `ReportTypeId` strings |
 
 ## Integration steps
 

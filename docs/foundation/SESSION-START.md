@@ -2,25 +2,30 @@
 
 > **Purpose:** One-page launchpad for every new AI conversation and engineering session  
 > **Audience:** AI agents, developers, reviewers  
+> **Primary AI entry:** [AI-MANIFEST](./AI-MANIFEST.md) · detail [AI-BOOTSTRAP](./AI-BOOTSTRAP.md)  
 > **Authoritative references:** [AI-CONTEXT](./AI-CONTEXT.md) · [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [000 — Engineering Constitution](../000-apzhub-engineering-constitution.md)  
 > **Related documents:** [PROJECT-INDEX](./PROJECT-INDEX.md) · [AI-WORKFLOW](./AI-WORKFLOW.md)  
-> **Reading order:** **Read this document first** — then follow the sequence below  
-> **Last updated:** 2026-07-17  
-> **Current status:** Active — **APZIDENTITY-004 COMPLETE** — Identity Administration Workbench (`/workspace/identity`); stop before **APZIDENTITY-005**
+> **Reading order:** **AI-MANIFEST first** — then this map / CURRENT-MILESTONE  
+> **Last updated:** 2026-07-18  
+> **Current status:** Active — **Phase 3 Product Engineering**; Platform Foundation **CLOSED** (FOUNDATION-001 **ACCEPTED**); SDK **OSS-100-11** frozen; no product programme authorised
 
 ---
 
 ## 1. Read these documents first (in order)
 
-| Step  | Document                                        | Why                                                  |
-| ----- | ----------------------------------------------- | ---------------------------------------------------- |
-| **1** | [SESSION-START](./SESSION-START.md)             | This page — orientation                              |
-| **2** | [CURRENT-MILESTONE](./CURRENT-MILESTONE.md)     | Where development stops; what is approved            |
-| **3** | [AI-CONTEXT](./AI-CONTEXT.md)                   | Platform rules, naming, things never to do           |
-| **4** | [APZHUB-CONSTITUTION](./APZHUB-CONSTITUTION.md) | Immutable programme principles                       |
-| **5** | Task-specific sprint guide or backlog           | Scope, constraints, stop condition for approved work |
-| **6** | Relevant foundation docs (001–029)              | Area-specific standards                              |
-| **7** | [AI-WORKFLOW](./AI-WORKFLOW.md)                 | How to plan, implement, validate, and stop           |
+| Step   | Document                                                                                  | Why                                                  |
+| ------ | ----------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| **1**  | [AI-MANIFEST](./AI-MANIFEST.md)                                                           | **Primary AI entry** — operational bootstrap         |
+| **2**  | [CURRENT-MILESTONE](./CURRENT-MILESTONE.md)                                               | Where development stops; what is approved            |
+| **3**  | [APZHUB-FOUNDATION-001](./APZHUB-FOUNDATION-001-Platform-Foundation-Completion-Report.md) | Platform Foundation COMPLETE — executive summary     |
+| **4**  | [Product Engineering Framework](../products/README.md)                                    | Phase 3 product standards (APZHUB-PRODUCTS-000)      |
+| **5**  | [AI-BOOTSTRAP](./AI-BOOTSTRAP.md)                                                         | Full operating manual (checklists, verification)     |
+| **6**  | [SESSION-START](./SESSION-START.md)                                                       | This page — short navigation map                     |
+| **7**  | [AI-CONTEXT](./AI-CONTEXT.md)                                                             | Platform rules, naming, things never to do           |
+| **8**  | [APZHUB-CONSTITUTION](./APZHUB-CONSTITUTION.md)                                           | Immutable programme principles                       |
+| **9**  | Task-specific sprint guide or backlog                                                     | Scope, constraints, stop condition for approved work |
+| **10** | Relevant foundation docs (001–029) / product docs                                         | Area-specific standards                              |
+| **11** | [AI-WORKFLOW](./AI-WORKFLOW.md)                                                           | How to plan, implement, validate, and stop           |
 
 **Do not rely on historical chat threads.** If a prior conversation conflicts with these documents, the Knowledge Foundation wins.
 
@@ -41,7 +46,7 @@
 | Status line at top of `docs/README.md`          | Programme-wide stop point                   |
 | "Next approved milestone (pending owner)"       | CURRENT-MILESTONE                           |
 
-**As of last update:** **APZIDENTITY-004 COMPLETE** — Identity Administration Workbench (`/workspace/identity`; metadata SoR; not authentication); stop before **APZIDENTITY-005** (do not implement without owner approval)
+**As of last update:** **Phase 3 Product Engineering** in force ([directive](./APZHUB-PHASE-3-Product-Engineering-Commencement.md)). Platform Foundation **CLOSED**. No product programme authorised — await Owner Approval (see [CURRENT-MILESTONE](./CURRENT-MILESTONE.md)).
 
 ---
 
@@ -89,16 +94,16 @@ SDK foundation specs: documents **024–029** in `docs/`.
 
 ## 5. Where to find the active backlog
 
-| Need                    | Document                                                                  |
-| ----------------------- | ------------------------------------------------------------------------- |
-| **Summary index**       | [ACTIVE-BACKLOG](./ACTIVE-BACKLOG.md)                                     |
-| **Integration SDK**     | [OSS-100 Backlog](../backlog/OSS-100-Platform-Integration-SDK-Backlog.md) |
-| **Projects / Plane**    | [OSS-101 Backlog](../backlog/OSS-101-Plane-Integration-Backlog.md)        |
-| **Platform Core v2**    | [PCv2-01 Backlog](../backlog/PCv2-01-Backlog.md)                          |
-| **APZ TCMS** | [APZTCMS Backlog](../backlog/APZTCMS-Backlog.md) · [Milestone Roadmap](../backlog/APZTCMS-Milestone-Roadmap.md) |
-| **Quality Engineering** | *(superseded)* — use APZ TCMS; predecessor [QE Backlog](../backlog/APZHUB-Quality-Engineering-Backlog.md) |
-| **Law Platform**        | [LAW Platform Backlog](../backlog/LAW-Platform-Backlog.md) — closed       |
-| **Full registry**       | [docs/README.md](../README.md) — Backlog section                          |
+| Need                    | Document                                                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Summary index**       | [ACTIVE-BACKLOG](./ACTIVE-BACKLOG.md)                                                                           |
+| **Integration SDK**     | [OSS-100 Backlog](../backlog/OSS-100-Platform-Integration-SDK-Backlog.md)                                       |
+| **Projects / Plane**    | [OSS-101 Backlog](../backlog/OSS-101-Plane-Integration-Backlog.md)                                              |
+| **Platform Core v2**    | [PCv2-01 Backlog](../backlog/PCv2-01-Backlog.md)                                                                |
+| **APZ TCMS**            | [APZTCMS Backlog](../backlog/APZTCMS-Backlog.md) · [Milestone Roadmap](../backlog/APZTCMS-Milestone-Roadmap.md) |
+| **Quality Engineering** | _(superseded)_ — use APZ TCMS; predecessor [QE Backlog](../backlog/APZHUB-Quality-Engineering-Backlog.md)       |
+| **Law Platform**        | [LAW Platform Backlog](../backlog/LAW-Platform-Backlog.md) — closed                                             |
+| **Full registry**       | [docs/README.md](../README.md) — Backlog section                                                                |
 
 Always read the **full backlog document** before starting a story — the index is navigation only.
 

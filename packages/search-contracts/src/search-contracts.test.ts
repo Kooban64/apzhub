@@ -53,9 +53,7 @@ import {
   type SearchRequestContext,
 } from "./index";
 
-const ctx = (
-  overrides: Partial<SearchRequestContext> = {},
-): SearchRequestContext => ({
+const ctx = (overrides: Partial<SearchRequestContext> = {}): SearchRequestContext => ({
   correlationId: "corr-1",
   actorUserId: "user_1",
   tenantId: "tenant_a",
@@ -104,24 +102,19 @@ describe("@apzhub/search-contracts (APZSEARCH-001)", () => {
   });
 
   it("supports coarse OR granular permission helpers", () => {
-    expect(hasSearchProviderPermission(["search.provider"], "register")).toBe(
+    expect(hasSearchProviderPermission(["search.provider"], "register")).toBe(true);
+    expect(hasSearchProviderPermission(["search.provider.register"], "register")).toBe(
       true,
     );
+    expect(hasSearchProviderPermission(["search.provider.list"], "register")).toBe(
+      false,
+    );
     expect(
-      hasSearchProviderPermission(["search.provider.register"], "register"),
+      hasSearchConfigurationPermission(["search.configuration.create"], "create"),
     ).toBe(true);
-    expect(
-      hasSearchProviderPermission(["search.provider.list"], "register"),
-    ).toBe(false);
-    expect(
-      hasSearchConfigurationPermission(
-        ["search.configuration.create"],
-        "create",
-      ),
-    ).toBe(true);
-    expect(
-      hasSearchConfigurationPermission(["search.configuration"], "archive"),
-    ).toBe(true);
+    expect(hasSearchConfigurationPermission(["search.configuration"], "archive")).toBe(
+      true,
+    );
   });
 
   it("validates branded identifiers", () => {
@@ -206,9 +199,9 @@ describe("@apzhub/search-contracts (APZSEARCH-001)", () => {
     expect(validateSearchQuery({ pageSize: 0 }).issues.map((i) => i.code)).toContain(
       "INVALID_PAGE_SIZE",
     );
-    expect(
-      validateSearchQuery({ pageSize: 500 }).issues.map((i) => i.code),
-    ).toContain("PAGE_SIZE_TOO_LARGE");
+    expect(validateSearchQuery({ pageSize: 500 }).issues.map((i) => i.code)).toContain(
+      "PAGE_SIZE_TOO_LARGE",
+    );
     expect(
       validateSearchQuery({ scopes: ["galaxy" as never] }).issues.map((i) => i.code),
     ).toContain("INVALID_SCOPE");
@@ -284,7 +277,10 @@ describe("@apzhub/search-contracts (APZSEARCH-001)", () => {
 
     expect(assertSearchCapabilityAccess(ctx(), "query")).toBe(true);
     expect(
-      assertSearchCapabilityAccess(ctx({ permissions: ["search.provider"] }), "provider"),
+      assertSearchCapabilityAccess(
+        ctx({ permissions: ["search.provider"] }),
+        "provider",
+      ),
     ).toBe(true);
     expect(
       assertSearchCapabilityAccess(
@@ -301,9 +297,7 @@ describe("@apzhub/search-contracts (APZSEARCH-001)", () => {
     expect(
       assertSearchCapabilityAccess(ctx({ permissions: ["search.audit"] }), "audit"),
     ).toBe(true);
-    expect(assertSearchCapabilityAccess(ctx({ permissions: [] }), "query")).toBe(
-      false,
-    );
+    expect(assertSearchCapabilityAccess(ctx({ permissions: [] }), "query")).toBe(false);
 
     expect(isSafeSearchDiagnosticsPayload({ status: "ok", tookMs: 1 })).toBe(true);
     expect(isSafeSearchDiagnosticsPayload({ apiKey: "x" })).toBe(false);
@@ -340,9 +334,7 @@ describe("@apzhub/search-contracts (APZSEARCH-001)", () => {
     expect(health.status).toBe("unknown");
     expect(health.checkedAt).toBe("2026-07-13T00:00:00.000Z");
     expect(createUnknownSearchHealth().status).toBe("unknown");
-    const diag = createFoundationSearchDiagnostics(
-      () => "2026-07-13T00:00:00.000Z",
-    );
+    const diag = createFoundationSearchDiagnostics(() => "2026-07-13T00:00:00.000Z");
     expect(diag.notes?.[0]).toMatch(/APZSEARCH-001/);
     expect(diag.configurationSummary.enforceTenantIsolation).toBe(true);
     expect(createFoundationSearchDiagnostics().health.status).toBe("unknown");

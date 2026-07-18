@@ -285,9 +285,7 @@ export type IdentityRolesService = {
 };
 
 export type IdentityOrganisationsService = {
-  list(
-    ctx: IdentityPlatformServiceContext,
-  ): Promise<readonly IdentityOrganization[]>;
+  list(ctx: IdentityPlatformServiceContext): Promise<readonly IdentityOrganization[]>;
   get(
     ctx: IdentityPlatformServiceContext,
     organisationId: IdentityOrganizationId,
@@ -319,9 +317,7 @@ export type IdentityTenantsService = {
 };
 
 export type IdentityDepartmentsService = {
-  list(
-    ctx: IdentityPlatformServiceContext,
-  ): Promise<readonly IdentityDepartment[]>;
+  list(ctx: IdentityPlatformServiceContext): Promise<readonly IdentityDepartment[]>;
   get(
     ctx: IdentityPlatformServiceContext,
     departmentId: IdentityDepartmentId,
@@ -337,9 +333,7 @@ export type IdentityDepartmentsService = {
 };
 
 export type IdentityPositionsService = {
-  list(
-    ctx: IdentityPlatformServiceContext,
-  ): Promise<readonly IdentityPosition[]>;
+  list(ctx: IdentityPlatformServiceContext): Promise<readonly IdentityPosition[]>;
   get(
     ctx: IdentityPlatformServiceContext,
     positionId: IdentityPositionId,
@@ -355,9 +349,7 @@ export type IdentityPositionsService = {
 };
 
 export type IdentityMembershipsService = {
-  list(
-    ctx: IdentityPlatformServiceContext,
-  ): Promise<readonly IdentityMembership[]>;
+  list(ctx: IdentityPlatformServiceContext): Promise<readonly IdentityMembership[]>;
   get(
     ctx: IdentityPlatformServiceContext,
     membershipId: IdentityMembershipId,
@@ -391,9 +383,7 @@ export type IdentityServiceAssignmentsService = {
 };
 
 export type IdentityInvitationsService = {
-  list(
-    ctx: IdentityPlatformServiceContext,
-  ): Promise<readonly IdentityInvitation[]>;
+  list(ctx: IdentityPlatformServiceContext): Promise<readonly IdentityInvitation[]>;
   get(
     ctx: IdentityPlatformServiceContext,
     invitationId: IdentityInvitationId,
@@ -409,9 +399,7 @@ export type IdentityInvitationsService = {
 };
 
 export type IdentityActivationService = {
-  list(
-    ctx: IdentityPlatformServiceContext,
-  ): Promise<readonly IdentityActivation[]>;
+  list(ctx: IdentityPlatformServiceContext): Promise<readonly IdentityActivation[]>;
   get(
     ctx: IdentityPlatformServiceContext,
     activationId: IdentityActivationId,
@@ -423,9 +411,7 @@ export type IdentityActivationService = {
 };
 
 export type IdentityDeactivationService = {
-  list(
-    ctx: IdentityPlatformServiceContext,
-  ): Promise<readonly IdentityDeactivation[]>;
+  list(ctx: IdentityPlatformServiceContext): Promise<readonly IdentityDeactivation[]>;
   get(
     ctx: IdentityPlatformServiceContext,
     deactivationId: IdentityDeactivationId,
@@ -453,9 +439,7 @@ export type IdentityPoliciesService = {
 };
 
 export type IdentityAuditService = {
-  list(
-    ctx: IdentityPlatformServiceContext,
-  ): Promise<readonly IdentityAuditEntry[]>;
+  list(ctx: IdentityPlatformServiceContext): Promise<readonly IdentityAuditEntry[]>;
   get(
     ctx: IdentityPlatformServiceContext,
     auditId: IdentityAuditId,
@@ -508,9 +492,7 @@ export type IdentityDiagnosticsService = {
   health(
     ctx: IdentityPlatformServiceContext,
   ): Promise<{ readonly ok: true; readonly checkedAt: string }>;
-  readiness(
-    ctx: IdentityPlatformServiceContext,
-  ): Promise<IdentityDiagnosticsSnapshot>;
+  readiness(ctx: IdentityPlatformServiceContext): Promise<IdentityDiagnosticsSnapshot>;
   capabilities(
     ctx: IdentityPlatformServiceContext,
   ): Promise<{ readonly facets: readonly string[] }>;

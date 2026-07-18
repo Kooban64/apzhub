@@ -45,7 +45,10 @@ export interface ErrorTranslator {
   registerMapper(mapper: VendorErrorMapper): void;
   unregisterMapper(integrationId: string): void;
   translate(input: VendorErrorInput): TranslatedIntegrationError;
-  translateUnknown(error: unknown, context: ErrorTranslationContext): TranslatedIntegrationError;
+  translateUnknown(
+    error: unknown,
+    context: ErrorTranslationContext,
+  ): TranslatedIntegrationError;
 }
 
 export type DefaultCategoryMapping = Readonly<

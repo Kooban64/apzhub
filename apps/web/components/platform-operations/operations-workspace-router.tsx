@@ -39,7 +39,10 @@ import { ProvisioningSection } from "./provisioning-section";
 import { ResilienceSection } from "./resilience-section";
 import { SecuritySection } from "./security-section";
 
-function useAsyncData<T>(key: string, loader: () => Promise<T>): {
+function useAsyncData<T>(
+  key: string,
+  loader: () => Promise<T>,
+): {
   readonly data: T | null;
   readonly error: string | null;
   readonly loading: boolean;
@@ -79,7 +82,10 @@ function useAsyncData<T>(key: string, loader: () => Promise<T>): {
 
 function DashboardSection() {
   const summary = useAsyncData("operations-summary", fetchOperationsSummary);
-  const controlPlane = useAsyncData("operations-control-plane", fetchOperationsControlPlane);
+  const controlPlane = useAsyncData(
+    "operations-control-plane",
+    fetchOperationsControlPlane,
+  );
 
   if (summary.loading || controlPlane.loading) return <OpsLoadingState />;
   if (summary.error || !summary.data) {
@@ -117,7 +123,10 @@ function TenantsSection() {
   }>;
 
   return (
-    <OpsPageShell title="Tenants" description="Platform tenant registry and lifecycle status.">
+    <OpsPageShell
+      title="Tenants"
+      description="Platform tenant registry and lifecycle status."
+    >
       <OpsTable
         columns={["Tenant ID", "Slug", "Name", "Status"]}
         rows={tenants.map((tenant) => [
@@ -171,7 +180,10 @@ function RolesSection() {
   }>;
 
   return (
-    <OpsPageShell title="Roles" description="Canonical RBAC roles from AuthorizationService.">
+    <OpsPageShell
+      title="Roles"
+      description="Canonical RBAC roles from AuthorizationService."
+    >
       <OpsTable
         columns={["Slug", "Name", "Scope", "Status"]}
         rows={roles.map((role) => [role.slug, role.name, role.scope, role.status])}
@@ -181,7 +193,10 @@ function RolesSection() {
 }
 
 function PermissionsSection() {
-  const { data, error, loading } = useAsyncData("permissions", fetchPlatformPermissions);
+  const { data, error, loading } = useAsyncData(
+    "permissions",
+    fetchPlatformPermissions,
+  );
 
   if (loading) return <OpsLoadingState />;
   if (error) return <OpsErrorState message={error} />;
@@ -213,7 +228,10 @@ function ProductsSection() {
   if (error) return <OpsErrorState message={error} />;
 
   return (
-    <OpsPageShell title="Products" description="Registered products from platform runtime discovery.">
+    <OpsPageShell
+      title="Products"
+      description="Registered products from platform runtime discovery."
+    >
       <OpsTable
         columns={["ID", "Name", "Version", "Lifecycle", "Health"]}
         rows={(data ?? []).map((product) => [
@@ -235,7 +253,10 @@ function ServicesSection() {
   if (error) return <OpsErrorState message={error} />;
 
   return (
-    <OpsPageShell title="Services" description="Registered platform services and health.">
+    <OpsPageShell
+      title="Services"
+      description="Registered platform services and health."
+    >
       <OpsTable
         columns={["ID", "Name", "Version", "Category", "Health"]}
         rows={(data ?? []).map((service) => [
@@ -281,8 +302,11 @@ function ProvisioningSectionRouter() {
 }
 
 function DiagnosticsSection() {
-  const { data: identity, error: identityError, loading: identityLoading } =
-    useAsyncData("identity-diagnostics", fetchIdentityDiagnostics);
+  const {
+    data: identity,
+    error: identityError,
+    loading: identityLoading,
+  } = useAsyncData("identity-diagnostics", fetchIdentityDiagnostics);
   const {
     data: authorization,
     error: authorizationError,
@@ -360,7 +384,10 @@ function AuditSection() {
   if (error) return <OpsErrorState message={error} />;
 
   return (
-    <OpsPageShell title="Audit" description="Recent authorization and tenant audit signals.">
+    <OpsPageShell
+      title="Audit"
+      description="Recent authorization and tenant audit signals."
+    >
       <OpsTable
         columns={["Event", "Category", "Occurred", "Payload"]}
         rows={(data ?? []).map((entry) => [
@@ -375,7 +402,10 @@ function AuditSection() {
 }
 
 function HealthSection() {
-  const { data, error, loading } = useAsyncData("health-summary", fetchOperationsSummary);
+  const { data, error, loading } = useAsyncData(
+    "health-summary",
+    fetchOperationsSummary,
+  );
 
   if (loading) return <OpsLoadingState />;
   if (error || !data) return <OpsErrorState message={error ?? "Health unavailable."} />;
@@ -394,18 +424,15 @@ function HealthSection() {
       "Security (env)",
       data.health.security?.environmentValid ? "healthy" : "unhealthy",
     ],
-    [
-      "Identity",
-      data.identityDiagnostics ? "healthy" : "unknown",
-    ],
-    [
-      "Authorization",
-      data.authorizationDiagnostics ? "healthy" : "unknown",
-    ],
+    ["Identity", data.identityDiagnostics ? "healthy" : "unknown"],
+    ["Authorization", data.authorizationDiagnostics ? "healthy" : "unknown"],
   ] as const;
 
   return (
-    <OpsPageShell title="Health" description="Aggregated platform and framework health.">
+    <OpsPageShell
+      title="Health"
+      description="Aggregated platform and framework health."
+    >
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {frameworks.map(([label, status]) => (
           <Card key={label}>
@@ -422,13 +449,20 @@ function HealthSection() {
 }
 
 function ConfigurationSection() {
-  const { data, error, loading } = useAsyncData("configuration", fetchPlatformConfiguration);
+  const { data, error, loading } = useAsyncData(
+    "configuration",
+    fetchPlatformConfiguration,
+  );
 
   if (loading) return <OpsLoadingState />;
-  if (error || !data) return <OpsErrorState message={error ?? "Configuration unavailable."} />;
+  if (error || !data)
+    return <OpsErrorState message={error ?? "Configuration unavailable."} />;
 
   return (
-    <OpsPageShell title="Configuration" description="Environment and platform configuration (read-only).">
+    <OpsPageShell
+      title="Configuration"
+      description="Environment and platform configuration (read-only)."
+    >
       <OpsTable
         columns={["Setting", "Value"]}
         rows={Object.entries(data).map(([key, value]) => [key, String(value)])}

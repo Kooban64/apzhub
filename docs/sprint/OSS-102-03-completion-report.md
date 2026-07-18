@@ -18,12 +18,12 @@ Additive vendor-neutral Support DTOs were added to `@apzhub/platform-service-con
 
 ## Services implemented
 
-| `adapter.core`     | Class                         | Scope                                                                 |
-| ------------------ | ----------------------------- | --------------------------------------------------------------------- |
-| `.support`         | `ZammadSupportService`        | Support Request lifecycle (Zammad Ticket)                             |
-| `.organizations`   | `ZammadOrganizationService`   | list/get/create/update/archive                                        |
-| `.groups`          | `ZammadGroupService`          | list/get/create/update (no permissions admin)                         |
-| `.users`           | `ZammadUserService`           | list/get/lookup/search (support-domain only)                          |
+| `adapter.core`   | Class                       | Scope                                         |
+| ---------------- | --------------------------- | --------------------------------------------- |
+| `.support`       | `ZammadSupportService`      | Support Request lifecycle (Zammad Ticket)     |
+| `.organizations` | `ZammadOrganizationService` | list/get/create/update/archive                |
+| `.groups`        | `ZammadGroupService`        | list/get/create/update (no permissions admin) |
+| `.users`         | `ZammadUserService`         | list/get/lookup/search (support-domain only)  |
 
 ### Support Request operations
 
@@ -52,16 +52,16 @@ No duplicated SDK functionality. No other services on `adapter.core`.
 
 ## Canonical mappings
 
-| Zammad            | APZHUB canonical                         | Provisional ID prefix |
-| ----------------- | ---------------------------------------- | --------------------- |
-| Ticket            | `SupportTicket` (Support Request)        | `sreq_zammad_`        |
-| Organization      | `SupportOrganization`                    | `sorg_zammad_`        |
-| Group             | `SupportGroup`                           | `sgrp_zammad_`        |
-| User (agent/cust) | `SupportUser`                            | `suser_zammad_`       |
-| State             | `SupportTicketStatus`                    | —                     |
-| Priority          | `SupportTicketPriority`                  | —                     |
-| Owner             | `assigneeId` (`SupportUserId`)           | —                     |
-| Customer          | `requesterId` (`SupportUserId`)          | —                     |
+| Zammad            | APZHUB canonical                  | Provisional ID prefix |
+| ----------------- | --------------------------------- | --------------------- |
+| Ticket            | `SupportTicket` (Support Request) | `sreq_zammad_`        |
+| Organization      | `SupportOrganization`             | `sorg_zammad_`        |
+| Group             | `SupportGroup`                    | `sgrp_zammad_`        |
+| User (agent/cust) | `SupportUser`                     | `suser_zammad_`       |
+| State             | `SupportTicketStatus`             | —                     |
+| Priority          | `SupportTicketPriority`           | —                     |
+| Owner             | `assigneeId` (`SupportUserId`)    | —                     |
+| Customer          | `requesterId` (`SupportUserId`)   | —                     |
 
 Provider-native numeric IDs remain internal. Ticket is **never** mapped to Projects Task.
 
@@ -91,35 +91,35 @@ Provider-native numeric IDs remain internal. Ticket is **never** mapped to Proje
 
 ## Tests
 
-| Suite                                      | Result        |
-| ------------------------------------------ | ------------- |
-| `@apzhub/integration-zammad`               | **34 passed** |
-| Plane + Zammad + contracts regression      | **141 passed**|
-| Support / org / group / user lifecycles    | Covered       |
-| Pagination / filter / sort / validation    | Covered       |
-| Provider + auth failures / error translation | Covered     |
-| Operation runner + capability registration | Covered       |
+| Suite                                        | Result         |
+| -------------------------------------------- | -------------- |
+| `@apzhub/integration-zammad`                 | **34 passed**  |
+| Plane + Zammad + contracts regression        | **141 passed** |
+| Support / org / group / user lifecycles      | Covered        |
+| Pagination / filter / sort / validation      | Covered        |
+| Provider + auth failures / error translation | Covered        |
+| Operation runner + capability registration   | Covered        |
 
 ---
 
 ## Coverage
 
-| Scope                                      | Lines (approx.) | Notes                          |
-| ------------------------------------------ | --------------- | ------------------------------ |
-| `integrations/zammad/src` package          | **~88.7%**      | Above 80% line gate            |
-| Branches (package)                         | **~67%**        | Similar to OSS-102-02 TD note  |
+| Scope                             | Lines (approx.) | Notes                         |
+| --------------------------------- | --------------- | ----------------------------- |
+| `integrations/zammad/src` package | **~88.7%**      | Above 80% line gate           |
+| Branches (package)                | **~67%**        | Similar to OSS-102-02 TD note |
 
 ---
 
 ## Quality gates
 
-| Gate        | Result                                      |
-| ----------- | ------------------------------------------- |
-| Lint        | Pass (`@apzhub/integration-zammad`)         |
-| Typecheck   | Pass (zammad + contracts)                   |
-| Tests       | Pass (34 zammad; 141 regression subset)     |
-| Coverage    | Package lines ~88.7%                        |
-| Regressions | Plane suites green                          |
+| Gate        | Result                                  |
+| ----------- | --------------------------------------- |
+| Lint        | Pass (`@apzhub/integration-zammad`)     |
+| Typecheck   | Pass (zammad + contracts)               |
+| Tests       | Pass (34 zammad; 141 regression subset) |
+| Coverage    | Package lines ~88.7%                    |
+| Regressions | Plane suites green                      |
 
 ---
 
@@ -136,15 +136,15 @@ Provider-native numeric IDs remain internal. Ticket is **never** mapped to Proje
 
 ## Comparison against Plane Reference Adapter
 
-| Concern              | Plane                                      | Zammad (OSS-102-03)                          |
-| -------------------- | ------------------------------------------ | -------------------------------------------- |
-| Core facade          | `PlaneCoreServices` / `adapter.core`       | `ZammadCoreServices` / `adapter.core`        |
-| Operation runner     | `PlaneOperationRunner`                     | `ZammadOperationRunner`                      |
-| REST client          | `PlaneRestClient` (internal)               | `ZammadRestClient` (internal)                |
-| Canonical DTOs       | Contracts (Project/Task/…)                 | Contracts (SupportTicket/Org/Group/User)     |
-| Provisional IDs      | `proj_plane_*`, `task_plane_*`             | `sreq_zammad_*`, …                           |
-| Domain               | Projects                                   | Support (Ticket ≠ Task)                      |
-| Scope this milestone | Full Wave 1 surface                        | Four core services only                      |
+| Concern              | Plane                                | Zammad (OSS-102-03)                      |
+| -------------------- | ------------------------------------ | ---------------------------------------- |
+| Core facade          | `PlaneCoreServices` / `adapter.core` | `ZammadCoreServices` / `adapter.core`    |
+| Operation runner     | `PlaneOperationRunner`               | `ZammadOperationRunner`                  |
+| REST client          | `PlaneRestClient` (internal)         | `ZammadRestClient` (internal)            |
+| Canonical DTOs       | Contracts (Project/Task/…)           | Contracts (SupportTicket/Org/Group/User) |
+| Provisional IDs      | `proj_plane_*`, `task_plane_*`       | `sreq_zammad_*`, …                       |
+| Domain               | Projects                             | Support (Ticket ≠ Task)                  |
+| Scope this milestone | Full Wave 1 surface                  | Four core services only                  |
 
 Structural parity maintained; domain types intentionally distinct.
 

@@ -11,11 +11,7 @@ export type DocumentIntegrityResult = {
   readonly actualByteLength: number;
   readonly providerEtagIgnored: true;
   readonly classification:
-    | "valid"
-    | "checksum_mismatch"
-    | "size_mismatch"
-    | "corrupt"
-    | "incomplete";
+    "valid" | "checksum_mismatch" | "size_mismatch" | "corrupt" | "incomplete";
 };
 
 export type DocumentIntegrityVerifyInput = {

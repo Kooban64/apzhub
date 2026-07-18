@@ -27,18 +27,18 @@ Every platform impl wraps operations with `withTestingErrorMapping(fn, ctx.corre
 
 Pattern match on `DomainRuleError.code`:
 
-| Pattern (regex) | Category | Code | Retryable |
-| --------------- | -------- | ---- | --------- |
-| validation / invalid format | `validation` | `VALIDATION_FAILED` | no |
-| invalid transition / state_transition | `business_rule` | `INVALID_STATE_TRANSITION` | no |
-| approval order | `business_rule` | `APPROVAL_ORDER_VIOLATION` | no |
-| evidence incomplete | `business_rule` | `EVIDENCE_INCOMPLETE` | no |
-| certification gate | `business_rule` | `CERTIFICATION_GATE_FAILURE` | no |
-| not ready | `business_rule` | `CERTIFICATION_NOT_READY` | no |
-| duplicate automation | `conflict` | `DUPLICATE_AUTOMATION_IMPORT` | no |
-| invalid automation result | `validation` | `INVALID_AUTOMATION_RESULT` | no |
-| not_implemented / unsupported | `configuration` | `CAPABILITY_UNSUPPORTED` | no |
-| (default) | `business_rule` | `BUSINESS_RULE_VIOLATION` | no |
+| Pattern (regex)                       | Category        | Code                          | Retryable |
+| ------------------------------------- | --------------- | ----------------------------- | --------- |
+| validation / invalid format           | `validation`    | `VALIDATION_FAILED`           | no        |
+| invalid transition / state_transition | `business_rule` | `INVALID_STATE_TRANSITION`    | no        |
+| approval order                        | `business_rule` | `APPROVAL_ORDER_VIOLATION`    | no        |
+| evidence incomplete                   | `business_rule` | `EVIDENCE_INCOMPLETE`         | no        |
+| certification gate                    | `business_rule` | `CERTIFICATION_GATE_FAILURE`  | no        |
+| not ready                             | `business_rule` | `CERTIFICATION_NOT_READY`     | no        |
+| duplicate automation                  | `conflict`      | `DUPLICATE_AUTOMATION_IMPORT` | no        |
+| invalid automation result             | `validation`    | `INVALID_AUTOMATION_RESULT`   | no        |
+| not_implemented / unsupported         | `configuration` | `CAPABILITY_UNSUPPORTED`      | no        |
+| (default)                             | `business_rule` | `BUSINESS_RULE_VIOLATION`     | no        |
 
 `details.classification` preserves original domain code for diagnostics (not user-facing copy).
 
@@ -46,13 +46,13 @@ Pattern match on `DomainRuleError.code`:
 
 ## Persistence mappings
 
-| `PersistenceError.code` | Category | Code |
-| ----------------------- | -------- | ---- |
-| `NOT_FOUND` | `not_found` | `NOT_FOUND` |
-| `REVISION_CONFLICT` | `conflict` | `CONFLICT` |
-| `TENANT_MISMATCH` | `authorization` | `TENANT_MISMATCH` |
-| `UNAUTHORIZED` | `authorization` | `PERMISSION_DENIED` |
-| `VALIDATION` | `validation` | `VALIDATION_FAILED` |
+| `PersistenceError.code` | Category        | Code                |
+| ----------------------- | --------------- | ------------------- |
+| `NOT_FOUND`             | `not_found`     | `NOT_FOUND`         |
+| `REVISION_CONFLICT`     | `conflict`      | `CONFLICT`          |
+| `TENANT_MISMATCH`       | `authorization` | `TENANT_MISMATCH`   |
+| `UNAUTHORIZED`          | `authorization` | `PERMISSION_DENIED` |
+| `VALIDATION`            | `validation`    | `VALIDATION_FAILED` |
 
 ---
 

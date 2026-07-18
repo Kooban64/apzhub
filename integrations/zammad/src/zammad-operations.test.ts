@@ -529,7 +529,9 @@ describe("Readiness checks", () => {
     expect(blocked.blockingIssues.some((i) => i.includes("core_support"))).toBe(true);
     expect(blocked.blockingIssues.some((i) => i.includes("logger"))).toBe(true);
     expect(blocked.blockingIssues.some((i) => i.includes("sync"))).toBe(true);
-    expect(blocked.checks.every((c) => c.remediationHint !== undefined || c.ok)).toBe(true);
+    expect(blocked.checks.every((c) => c.remediationHint !== undefined || c.ok)).toBe(
+      true,
+    );
   });
 });
 
@@ -614,29 +616,39 @@ describe("Feature detection and mock operational scenarios", () => {
     expect(detection.unavailableCapabilities).toEqual(
       expect.arrayContaining(["webhooks", "search", "history"]),
     );
-    expect(detection.versionSpecificNotes.some((n) => n.includes("403") || n.includes("404"))).toBe(
+    expect(
+      detection.versionSpecificNotes.some(
+        (n) => n.includes("403") || n.includes("404"),
+      ),
+    ).toBe(true);
+    expect(detection.detections.some((d) => d.note === "probe_failed_safely")).toBe(
       true,
     );
-    expect(detection.detections.some((d) => d.note === "probe_failed_safely")).toBe(true);
     await disposeZammadAdapter(adapter, factory);
   });
 
   it("simulates unsupported version, auth failure, rate limit, slow provider, sync interrupt", async () => {
-    const unsupported = await createAdapter(createMockZammadFetch({ engineVersion: "5.9.0" }));
-    await unsupported.adapter.testConnection(ctx);
-    expect(unsupported.adapter.operations.getCompatibilityMatrix().compatibilityStatus).toBe(
-      "incompatible",
+    const unsupported = await createAdapter(
+      createMockZammadFetch({ engineVersion: "5.9.0" }),
     );
+    await unsupported.adapter.testConnection(ctx);
+    expect(
+      unsupported.adapter.operations.getCompatibilityMatrix().compatibilityStatus,
+    ).toBe("incompatible");
     await disposeZammadAdapter(unsupported.adapter, unsupported.factory);
 
-    const unverified = await createAdapter(createMockZammadFetch({ engineVersion: "6.6.1" }));
-    await unverified.adapter.testConnection(ctx);
-    expect(unverified.adapter.operations.getCompatibilityMatrix().compatibilityStatus).toBe(
-      "unverified",
+    const unverified = await createAdapter(
+      createMockZammadFetch({ engineVersion: "6.6.1" }),
     );
+    await unverified.adapter.testConnection(ctx);
+    expect(
+      unverified.adapter.operations.getCompatibilityMatrix().compatibilityStatus,
+    ).toBe("unverified");
     await disposeZammadAdapter(unverified.adapter, unverified.factory);
 
-    const authFail = await createAdapter(createMockZammadFetch({ failMe: true, meStatus: 401 }));
+    const authFail = await createAdapter(
+      createMockZammadFetch({ failMe: true, meStatus: 401 }),
+    );
     await authFail.adapter.initialise();
     const authResult = await authFail.adapter.testConnection(ctx);
     expect(authResult.ok).toBe(false);
@@ -651,7 +663,9 @@ describe("Feature detection and mock operational scenarios", () => {
 
     const slow = await createAdapter(createMockZammadFetch({ delayMs: 25 }));
     await slow.adapter.testConnection(ctx);
-    expect(slow.adapter.getRuntimeDiagnosticsSnapshot().apiLatencySummary).toBeDefined();
+    expect(
+      slow.adapter.getRuntimeDiagnosticsSnapshot().apiLatencySummary,
+    ).toBeDefined();
     await disposeZammadAdapter(slow.adapter, slow.factory);
 
     const syncInterrupt = await createAdapter(
@@ -682,9 +696,13 @@ describe("Diagnostics, reports, and certification summary", () => {
 
     const report = await adapter.buildOperationalReport(ctx);
     expect(report.integrationId).toBe("zammad");
-    expect(["CERTIFIED", "CERTIFIED_WITH_LIMITATIONS"]).toContain(report.certificationOutcome);
+    expect(["CERTIFIED", "CERTIFIED_WITH_LIMITATIONS"]).toContain(
+      report.certificationOutcome,
+    );
     expect(report.capabilities.length).toBeGreaterThan(0);
-    expect(report.knownLimitations).toEqual(expect.arrayContaining([...ZAMMAD_KNOWN_LIMITATIONS]));
+    expect(report.knownLimitations).toEqual(
+      expect.arrayContaining([...ZAMMAD_KNOWN_LIMITATIONS]),
+    );
     expect(report.referencePatterns).toEqual(
       expect.arrayContaining([...ZAMMAD_REFERENCE_ADAPTER_PATTERNS]),
     );
@@ -714,14 +732,15 @@ describe("Diagnostics, reports, and certification summary", () => {
     });
     expect(note.visibility).toBe("internal");
 
-    const { adapter: corruptAdapter, factory: corruptFactory } = await createZammadAdapter({
-      zammad: DEFAULT_TEST_ZAMMAD_CONFIG,
-      tenantId: TEST_TENANT_ID,
-      apiToken: "zammad-test-token",
-      adapterOptions: {
-        fetchFn: createMockZammadFetch({ forceCreatedArticleInternal: false }),
-      },
-    });
+    const { adapter: corruptAdapter, factory: corruptFactory } =
+      await createZammadAdapter({
+        zammad: DEFAULT_TEST_ZAMMAD_CONFIG,
+        tenantId: TEST_TENANT_ID,
+        apiToken: "zammad-test-token",
+        adapterOptions: {
+          fetchFn: createMockZammadFetch({ forceCreatedArticleInternal: false }),
+        },
+      });
     await expect(
       corruptAdapter.core.articles.createNote(ctx, {
         supportTicketId: ticketId,
@@ -739,7 +758,7 @@ describe("Reference Adapter compliance and architecture boundaries", () => {
     const result = defaultZammadReferenceCompliance();
     expect(result.compliant).toBe(true);
     expect(["pass", "pass_with_limitations"]).toContain(result.outcome);
-    expect(result.checks.every((c) => c.required ? c.ok : true)).toBe(true);
+    expect(result.checks.every((c) => (c.required ? c.ok : true))).toBe(true);
 
     const failed = assessZammadReferenceAdapterCompliance({
       packageStructureOk: true,
@@ -795,7 +814,7 @@ describe("Reference Adapter compliance and architecture boundaries", () => {
       "EntityMappingStore",
       "createPlatformServices",
       "@apzhub/integration-plane",
-      "from \"next/",
+      'from "next/',
       "from 'next/",
       "postgres",
       "drizzle-orm",
@@ -806,7 +825,11 @@ describe("Reference Adapter compliance and architecture boundaries", () => {
 
     function walk(dir: string): void {
       for (const entry of readdirSync(dir)) {
-        if (entry === "node_modules" || entry.endsWith(".test.ts") || entry === "testing") {
+        if (
+          entry === "node_modules" ||
+          entry.endsWith(".test.ts") ||
+          entry === "testing"
+        ) {
           continue;
         }
         const full = join(dir, entry);

@@ -43,17 +43,17 @@ APZSEARCH-009 delivers the **product → canonical entity** framework and an in-
 
 ## Components
 
-| Component | Role |
-| --------- | ---- |
-| `SearchIntegrationPublisher` | Product-facing facade |
-| `SearchEntityPublisher` | publish / update / remove / validate / preview / lifecycle / diagnostics / statistics |
-| `SearchIntegrationContext` | Tenant / org / product / actor context |
-| `SearchEntityMapper` | Draft → `CanonicalSearchEntity` (+ preview `SearchMetadata`) |
-| `SearchEntityValidator` | Fail-closed validation; rejects provider metadata leakage |
-| `SearchEntityLifecycle` | Explicit lifecycle transitions (no scheduling) |
-| `SearchPublication*` | Result, diagnostics, metrics, logger, error translator |
-| `SearchPublicationSink` | Journal port (`memory` default, `noop` for dry-run) |
-| Product contracts | Projects / Support / Documents / Testing / Reporting — **declarations only** |
+| Component                    | Role                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------- |
+| `SearchIntegrationPublisher` | Product-facing facade                                                                 |
+| `SearchEntityPublisher`      | publish / update / remove / validate / preview / lifecycle / diagnostics / statistics |
+| `SearchIntegrationContext`   | Tenant / org / product / actor context                                                |
+| `SearchEntityMapper`         | Draft → `CanonicalSearchEntity` (+ preview `SearchMetadata`)                          |
+| `SearchEntityValidator`      | Fail-closed validation; rejects provider metadata leakage                             |
+| `SearchEntityLifecycle`      | Explicit lifecycle transitions (no scheduling)                                        |
+| `SearchPublication*`         | Result, diagnostics, metrics, logger, error translator                                |
+| `SearchPublicationSink`      | Journal port (`memory` default, `noop` for dry-run)                                   |
+| Product contracts            | Projects / Support / Documents / Testing / Reporting — **declarations only**          |
 
 ---
 
@@ -75,13 +75,13 @@ Excluded: query execution, scheduling, retries, background workers, Event Bus, O
 
 ## Boundaries
 
-| May depend on | Must not depend on |
-| ------------- | ------------------ |
-| `@apzhub/search-contracts` | `@apzhub/platform-services` |
-| | `@apzhub/integration-meilisearch` |
-| | `@apzhub/integration-search-sdk` |
-| | Product domain packages |
-| | HTTP / Workbench |
+| May depend on              | Must not depend on                |
+| -------------------------- | --------------------------------- |
+| `@apzhub/search-contracts` | `@apzhub/platform-services`       |
+|                            | `@apzhub/integration-meilisearch` |
+|                            | `@apzhub/integration-search-sdk`  |
+|                            | Product domain packages           |
+|                            | HTTP / Workbench                  |
 
 ---
 

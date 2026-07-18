@@ -51,7 +51,8 @@ export function createAllureMetadataAdapter(): AutomationResultAdapter {
         cases.push({
           key: readString(r, "uuid", "id", "key"),
           title: readString(r, "name", "title") ?? "allure-result",
-          status: (readString(r, "status") ?? "unknown") as CanonicalAutomationCase["status"],
+          status: (readString(r, "status") ??
+            "unknown") as CanonicalAutomationCase["status"],
           durationMs: readNumber(r, "duration", "durationMs", "stop"),
           message:
             typeof r.statusDetails === "object" && r.statusDetails

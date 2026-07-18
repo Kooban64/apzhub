@@ -20,10 +20,10 @@ Platform Consumers → Observability Platform → Provider Contracts (future)
 → Observability Core → Persistence → PostgreSQL (metadata)
 ```
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/observe-contracts` | **0.1.0** |
-| `@apzhub/observe-core` | **0.1.0** |
+| Package                       | Version   |
+| ----------------------------- | --------- |
+| `@apzhub/observe-contracts`   | **0.1.0** |
+| `@apzhub/observe-core`        | **0.1.0** |
 | `@apzhub/observe-persistence` | **0.1.0** |
 
 ## Domain Model
@@ -46,21 +46,21 @@ Domain, lifecycle, validation, permission, in-memory persistence, mocked postgre
 
 See [APZOBSERVE-001 coverage baseline](../reviews/APZOBSERVE-001-coverage-baseline.md).
 
-| Metric | Target | Combined (observe packages) |
-| --- | ---: | ---: |
-| Lines | ≥95% | **99.89%** |
-| Functions | ≥95% | **100%** |
-| Branches | meaningful | **75.00%** |
+| Metric    |     Target | Combined (observe packages) |
+| --------- | ---------: | --------------------------: |
+| Lines     |       ≥95% |                  **99.89%** |
+| Functions |       ≥95% |                    **100%** |
+| Branches  | meaningful |                  **75.00%** |
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
+| Gate                                       | Result                                 |
+| ------------------------------------------ | -------------------------------------- |
 | Architecture / dependency / boundary audit | PASS (`pnpm audit:observe-foundation`) |
-| Typecheck (observe packages) | PASS |
-| Lint (observe packages) | PASS |
-| Vitest | PASS |
-| Coverage ≥95% lines/functions | PASS |
+| Typecheck (observe packages)               | PASS                                   |
+| Lint (observe packages)                    | PASS                                   |
+| Vitest                                     | PASS                                   |
+| Coverage ≥95% lines/functions              | PASS                                   |
 
 ## Technical Debt
 

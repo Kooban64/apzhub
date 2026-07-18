@@ -31,7 +31,8 @@ describe("testing engineering intelligence gateway facet", () => {
     const score = await bundle.gatewaySurface.engineeringIntelligence.score(ctx);
     expect(score.score).toBeGreaterThanOrEqual(0);
 
-    const health = await bundle.gatewaySurface.engineeringIntelligence.assessHealth(ctx);
+    const health =
+      await bundle.gatewaySurface.engineeringIntelligence.assessHealth(ctx);
     expect(health.isDecision).toBe(false);
 
     const snap = await bundle.gatewaySurface.engineeringIntelligence.computeSnapshot(

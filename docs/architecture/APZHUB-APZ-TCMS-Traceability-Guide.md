@@ -25,8 +25,8 @@ Entity kinds are listed in `TRACEABILITY_ENTITY_KINDS` (`@apzhub/testing-contrac
 
 ## Rules
 
-- Bidirectional queries are derived from directed links (no duplicate reverse rows required).  
-- Self-links are forbidden.  
+- Bidirectional queries are derived from directed links (no duplicate reverse rows required).
+- Self-links are forbidden.
 - Coverage matrix merges explicit links and case→requirement foreign keys.
 
 ## Related

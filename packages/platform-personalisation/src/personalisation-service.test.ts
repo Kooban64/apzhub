@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { createInMemoryPersonalisationService, resetSharedPersonalisationService } from "./index";
+import {
+  createInMemoryPersonalisationService,
+  resetSharedPersonalisationService,
+} from "./index";
 
 describe("PersonalisationService", () => {
   it("provisions default preferences on first access", async () => {

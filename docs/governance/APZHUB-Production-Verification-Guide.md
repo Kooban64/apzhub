@@ -13,36 +13,36 @@ The Production Verification service evaluates whether APZHUB is safe to expose t
 
 ## Verdicts
 
-| Verdict | When |
-|---------|------|
-| `READY` | All mandatory checks pass; no failures |
-| `READY_WITH_OBSERVATIONS` | No failures; one or more warnings |
-| `NOT_READY` | One or more mandatory checks failed |
+| Verdict                   | When                                   |
+| ------------------------- | -------------------------------------- |
+| `READY`                   | All mandatory checks pass; no failures |
+| `READY_WITH_OBSERVATIONS` | No failures; one or more warnings      |
+| `NOT_READY`               | One or more mandatory checks failed    |
 
 ---
 
 ## Mandatory checks
 
-| Check ID | Domain | Failure condition |
-|----------|--------|-------------------|
-| `bootstrap.ready` | Bootstrap | Platform runtime bootstrap not ready |
-| `configuration.valid` | Configuration | Environment validation failed |
-| `readiness.probe` | Health | Readiness probe unhealthy |
-| `dependency.database` | Persistence | Database unhealthy |
-| `dependency.redis` | Persistence | Redis unhealthy |
-| `capability.*.health` | Capabilities | Capability health or readiness unhealthy |
+| Check ID              | Domain        | Failure condition                        |
+| --------------------- | ------------- | ---------------------------------------- |
+| `bootstrap.ready`     | Bootstrap     | Platform runtime bootstrap not ready     |
+| `configuration.valid` | Configuration | Environment validation failed            |
+| `readiness.probe`     | Health        | Readiness probe unhealthy                |
+| `dependency.database` | Persistence   | Database unhealthy                       |
+| `dependency.redis`    | Persistence   | Redis unhealthy                          |
+| `capability.*.health` | Capabilities  | Capability health or readiness unhealthy |
 
 ---
 
 ## Warning checks
 
-| Check ID | Domain | Warning condition |
-|----------|--------|-------------------|
-| `configuration.warn.*` | Configuration | Environment validation warnings |
-| `session.posture` | Session | Session security recommendations present |
-| `traffic.enabled` | Traffic | Traffic governance disabled |
-| `tenant.api-guard` | Tenant isolation | API guard audit incomplete |
-| `capability.*.health` | Capabilities | Capability degraded but not unhealthy (operational/production maturity only) |
+| Check ID               | Domain           | Warning condition                                                            |
+| ---------------------- | ---------------- | ---------------------------------------------------------------------------- |
+| `configuration.warn.*` | Configuration    | Environment validation warnings                                              |
+| `session.posture`      | Session          | Session security recommendations present                                     |
+| `traffic.enabled`      | Traffic          | Traffic governance disabled                                                  |
+| `tenant.api-guard`     | Tenant isolation | API guard audit incomplete                                                   |
+| `capability.*.health`  | Capabilities     | Capability degraded but not unhealthy (operational/production maturity only) |
 
 Foundation- and experimental-maturity capabilities may report degraded health in the capability table without affecting the production verdict.
 

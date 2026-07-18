@@ -38,27 +38,19 @@ function brandId<T extends string>(value: string): T {
 export function asNotificationId(value: string): NotificationId {
   return brandId(value);
 }
-export function asNotificationRecipientId(
-  value: string,
-): NotificationRecipientId {
+export function asNotificationRecipientId(value: string): NotificationRecipientId {
   return brandId(value);
 }
-export function asNotificationTemplateId(
-  value: string,
-): NotificationTemplateId {
+export function asNotificationTemplateId(value: string): NotificationTemplateId {
   return brandId(value);
 }
 export function asNotificationChannelId(value: string): NotificationChannelId {
   return brandId(value);
 }
-export function asNotificationPreferenceId(
-  value: string,
-): NotificationPreferenceId {
+export function asNotificationPreferenceId(value: string): NotificationPreferenceId {
   return brandId(value);
 }
-export function asNotificationCategoryId(
-  value: string,
-): NotificationCategoryId {
+export function asNotificationCategoryId(value: string): NotificationCategoryId {
   return brandId(value);
 }
 export function asNotificationAuditId(value: string): NotificationAuditId {
@@ -72,9 +64,7 @@ export function asNotificationAttachmentMetadataId(
 ): NotificationAttachmentMetadataId {
   return brandId(value);
 }
-export function asNotificationReferenceId(
-  value: string,
-): NotificationReferenceId {
+export function asNotificationReferenceId(value: string): NotificationReferenceId {
   return brandId(value);
 }
 export function asNotificationDeliveryAttemptId(

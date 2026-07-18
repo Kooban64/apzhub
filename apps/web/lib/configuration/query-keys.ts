@@ -24,8 +24,7 @@ export const configurationQueryKeys = {
       stableParams(params as Record<string, unknown> | undefined),
     ] as const,
   details: () => [...ROOT, "detail"] as const,
-  detail: (configurationId: string) =>
-    [...ROOT, "detail", configurationId] as const,
+  detail: (configurationId: string) => [...ROOT, "detail", configurationId] as const,
   namespaces: {
     all: [...ROOT, "namespaces"] as const,
     list: () => [...ROOT, "namespaces", "list"] as const,
@@ -35,8 +34,7 @@ export const configurationQueryKeys = {
   groups: {
     all: [...ROOT, "groups"] as const,
     list: () => [...ROOT, "groups", "list"] as const,
-    detail: (groupId: string) =>
-      [...ROOT, "groups", "detail", groupId] as const,
+    detail: (groupId: string) => [...ROOT, "groups", "detail", groupId] as const,
   },
   versions: (configurationId: string) =>
     [...ROOT, "versions", configurationId] as const,
@@ -45,8 +43,7 @@ export const configurationQueryKeys = {
   scopes: {
     all: [...ROOT, "scopes"] as const,
     list: () => [...ROOT, "scopes", "list"] as const,
-    detail: (scopeId: string) =>
-      [...ROOT, "scopes", "detail", scopeId] as const,
+    detail: (scopeId: string) => [...ROOT, "scopes", "detail", scopeId] as const,
   },
   validationRules: () => [...ROOT, "validation-rules"] as const,
   references: (configurationId: string) =>

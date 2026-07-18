@@ -37,15 +37,15 @@ APZSEARCH-010 wires only to `SearchIntegrationPublisher` / sink. Search Platform
 
 ## Components
 
-| Component | Role |
-| --------- | ---- |
-| `ProjectsSearchPublisher` | publish / update / remove / validate / preview / lifecycle / diagnostics / statistics |
-| `ProjectsSearchEntityMapper` | Canonical Platform models → `SearchEntityDraft` |
-| `ProjectsSearchEntityValidator` | Projects-specific checks + Plane ID rejection |
-| `ProjectsSearchPublicationContext` | Tenant / org / actor / permissions |
-| `ProjectsSearchLifecycle` | Lifecycle helpers + domain-status suggestions |
-| `ProjectsSearchDiagnostics` / Metrics / Logger / ErrorTranslator | Safe observability |
-| `createProjectsSearchLifecycleHooks` | Synchronous explicit hooks (no listeners) |
+| Component                                                        | Role                                                                                  |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `ProjectsSearchPublisher`                                        | publish / update / remove / validate / preview / lifecycle / diagnostics / statistics |
+| `ProjectsSearchEntityMapper`                                     | Canonical Platform models → `SearchEntityDraft`                                       |
+| `ProjectsSearchEntityValidator`                                  | Projects-specific checks + Plane ID rejection                                         |
+| `ProjectsSearchPublicationContext`                               | Tenant / org / actor / permissions                                                    |
+| `ProjectsSearchLifecycle`                                        | Lifecycle helpers + domain-status suggestions                                         |
+| `ProjectsSearchDiagnostics` / Metrics / Logger / ErrorTranslator | Safe observability                                                                    |
+| `createProjectsSearchLifecycleHooks`                             | Synchronous explicit hooks (no listeners)                                             |
 
 ---
 

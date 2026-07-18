@@ -111,7 +111,10 @@ export interface ReleaseManifest {
   readonly releaseId: ReleaseId;
   readonly packageIds: readonly ReleasePackageId[];
   readonly candidateIds: readonly ReleaseCandidateId[];
-  readonly scopeRefs: readonly { readonly kind: ReleaseScopeKind; readonly refId: string }[];
+  readonly scopeRefs: readonly {
+    readonly kind: ReleaseScopeKind;
+    readonly refId: string;
+  }[];
   readonly evidenceRefs: readonly { readonly kind: string; readonly refId: string }[];
   readonly dependencyIds: readonly ReleaseDependencyId[];
   readonly generatedAt: string;
@@ -160,8 +163,11 @@ export interface ReleaseSummary {
   readonly releaseId: ReleaseId;
   readonly readiness?: ReleaseReadinessSnapshot;
   readonly risk?: ReleaseRiskAssessment;
-  readonly approvalStatuses: Readonly<Partial<Record<ReleaseApprovalStageKind, string>>>;
-  readonly recommendationCode: "recommend_release" | "recommend_hold" | "recommend_reject";
+  readonly approvalStatuses: Readonly<
+    Partial<Record<ReleaseApprovalStageKind, string>>
+  >;
+  readonly recommendationCode:
+    "recommend_release" | "recommend_hold" | "recommend_reject";
   readonly recommendationReasons: readonly string[];
   readonly computedAt: string;
   readonly isDecision: false;

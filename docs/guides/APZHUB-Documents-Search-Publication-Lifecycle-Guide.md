@@ -10,11 +10,11 @@ No HTTP, Event Bus, workers, storage callbacks, or Workbench wiring.
 
 ## Domain status → Search lifecycle (suggest)
 
-| Document status | Suggested Search lifecycle |
-| --------------- | -------------------------- |
-| draft | draft |
-| active / restored | validated |
-| archived / retained | archived |
-| deleted / expired | removed |
+| Document status     | Suggested Search lifecycle |
+| ------------------- | -------------------------- |
+| draft               | draft                      |
+| active / restored   | validated                  |
+| archived / retained | archived                   |
+| deleted / expired   | removed                    |
 
 Actual transitions go through `SearchIntegrationPublisher`. Archived documents update metadata via upsert; forced `lifecycle(archived)` is available when the journal state permits.

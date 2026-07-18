@@ -58,7 +58,8 @@ export class CspViolationService {
       this.reports.length = MAX_STORED_REPORTS;
     }
 
-    const directiveKey = report.effectiveDirective ?? report.violatedDirective ?? "unknown";
+    const directiveKey =
+      report.effectiveDirective ?? report.violatedDirective ?? "unknown";
     this.byDirective.set(directiveKey, (this.byDirective.get(directiveKey) ?? 0) + 1);
 
     return { accepted: true };
@@ -90,8 +91,7 @@ export class CspViolationService {
     body: CspViolationReportBody,
   ): CspViolationRecord | null {
     const raw =
-      body["csp-report"] ??
-      (typeof body.body === "object" ? body.body : undefined);
+      body["csp-report"] ?? (typeof body.body === "object" ? body.body : undefined);
 
     if (!raw || typeof raw !== "object") {
       return null;

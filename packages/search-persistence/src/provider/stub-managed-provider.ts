@@ -70,9 +70,7 @@ export function createStubManagedSearchProvider(
         kind: input.descriptor.kind,
         initialised,
         hasConfiguration: configuration !== null,
-        authRefsPresent: Boolean(
-          configuration?.authenticationRefs?.credentialRef,
-        ),
+        authRefsPresent: Boolean(configuration?.authenticationRefs?.credentialRef),
       };
       if (!isSafeSearchDiagnosticsPayload(payload)) {
         throw new Error("unsafe diagnostics");

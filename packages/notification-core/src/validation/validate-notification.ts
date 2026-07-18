@@ -50,11 +50,7 @@ export function validateNotificationStructural(
   }
   if (!isNotificationStatus(notification.status)) {
     issues.push(
-      issue(
-        "invalid_status",
-        `status must be a known NotificationStatus`,
-        "status",
-      ),
+      issue("invalid_status", `status must be a known NotificationStatus`, "status"),
     );
   }
   if (!isNotificationPriority(notification.priority)) {
@@ -68,11 +64,7 @@ export function validateNotificationStructural(
   }
   if (!Array.isArray(notification.channelKinds)) {
     issues.push(
-      issue(
-        "invalid_channels",
-        "channelKinds must be an array",
-        "channelKinds",
-      ),
+      issue("invalid_channels", "channelKinds must be an array", "channelKinds"),
     );
   } else {
     for (let i = 0; i < notification.channelKinds.length; i++) {
@@ -103,8 +95,7 @@ export function validateNotificationReferences(
   input: ValidateNotificationInput,
 ): readonly NotificationValidationIssue[] {
   const issues: NotificationValidationIssue[] = [];
-  const { notification, references = [], knownCategoryIds, knownTemplateIds } =
-    input;
+  const { notification, references = [], knownCategoryIds, knownTemplateIds } = input;
 
   if (notification.categoryId && knownCategoryIds) {
     if (!knownCategoryIds.has(notification.categoryId)) {
@@ -242,8 +233,4 @@ export function validateNotification(
   };
 }
 
-export type {
-  NotificationChannelKind,
-  NotificationPriority,
-  NotificationStatus,
-};
+export type { NotificationChannelKind, NotificationPriority, NotificationStatus };

@@ -13,15 +13,15 @@ Every public Search platform gateway method has an **explicit** entry in `packag
 
 ## Examples
 
-| Service key | Operation | Permission |
-|-------------|-----------|------------|
-| `searchProviders` | `listProviders` | `search.provider.list` |
-| `searchProviders` | `registerProvider` | `search.provider.register` |
-| `searchProviders` | `setActiveProvider` | `search.provider.activate` |
-| `searchConfigurations` | `activate` | `search.configuration.activate` |
-| `searchCollections` | `create` | `search.collection.create` |
-| `searchDiagnostics` | `getDiagnostics` | `search.diagnostics.read` |
-| `searchValidation` | `validateConfiguration` | `search.validation.execute` |
-| `searchQuery` | `validateQuery` | `search.validation.execute` (or catalogue equivalent) |
+| Service key            | Operation               | Permission                                            |
+| ---------------------- | ----------------------- | ----------------------------------------------------- |
+| `searchProviders`      | `listProviders`         | `search.provider.list`                                |
+| `searchProviders`      | `registerProvider`      | `search.provider.register`                            |
+| `searchProviders`      | `setActiveProvider`     | `search.provider.activate`                            |
+| `searchConfigurations` | `activate`              | `search.configuration.activate`                       |
+| `searchCollections`    | `create`                | `search.collection.create`                            |
+| `searchDiagnostics`    | `getDiagnostics`        | `search.diagnostics.read`                             |
+| `searchValidation`     | `validateConfiguration` | `search.validation.execute`                           |
+| `searchQuery`          | `validateQuery`         | `search.validation.execute` (or catalogue equivalent) |
 
 Authoritative source: the TypeScript operation map + `apzsearch-003-platform-services.test.ts`.

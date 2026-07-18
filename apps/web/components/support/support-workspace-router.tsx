@@ -50,9 +50,7 @@ export function SupportWorkspaceRouter({
     case "groups":
       return <SupportGroupsView permissions={permissions} />;
     case "group-detail":
-      return (
-        <SupportGroupsView groupId={route.groupId} permissions={permissions} />
-      );
+      return <SupportGroupsView groupId={route.groupId} permissions={permissions} />;
     case "users":
       return <SupportUsersView />;
     case "user-detail":

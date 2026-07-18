@@ -112,44 +112,88 @@
       ],
       "@apzhub/legal-business-core": ["./packages/legal-business-core/src/index.ts"],
       "@apzhub/platform-identity": ["./packages/platform-identity/src/index.ts"],
-      "@apzhub/platform-identity/server": ["./packages/platform-identity/src/server.ts"],
-      "@apzhub/platform-identity/postgres": ["./packages/platform-identity/src/postgres.ts"],
+      "@apzhub/platform-identity/server": [
+        "./packages/platform-identity/src/server.ts"
+      ],
+      "@apzhub/platform-identity/postgres": [
+        "./packages/platform-identity/src/postgres.ts"
+      ],
       "@apzhub/platform-authorization/server": [
         "./packages/platform-authorization/src/server.ts"
       ],
       "@apzhub/platform-authorization/postgres": [
         "./packages/platform-authorization/src/postgres.ts"
       ],
-      "@apzhub/platform-authorization": ["./packages/platform-authorization/src/index.ts"],
-      "@apzhub/platform-security/headers": ["./packages/platform-security/src/security-headers-service.ts"],
+      "@apzhub/platform-authorization": [
+        "./packages/platform-authorization/src/index.ts"
+      ],
+      "@apzhub/platform-security/headers": [
+        "./packages/platform-security/src/security-headers-service.ts"
+      ],
       "@apzhub/platform-bootstrap": ["./packages/platform-bootstrap/src/index.ts"],
-      "@apzhub/platform-bootstrap/server": ["./packages/platform-bootstrap/src/server.ts"],
-      "@apzhub/platform-bootstrap/diagnostics": ["./packages/platform-bootstrap/src/diagnostics.ts"],
+      "@apzhub/platform-bootstrap/server": [
+        "./packages/platform-bootstrap/src/server.ts"
+      ],
+      "@apzhub/platform-bootstrap/diagnostics": [
+        "./packages/platform-bootstrap/src/diagnostics.ts"
+      ],
       "@apzhub/integration-sdk": ["./packages/integration-sdk/src/index.ts"],
-      "@apzhub/integration-sdk/client": ["./packages/integration-sdk/src/client/index.ts"],
-      "@apzhub/integration-sdk/adapter": ["./packages/integration-sdk/src/adapter/index.ts"],
-      "@apzhub/integration-sdk/diagnostics": ["./packages/integration-sdk/src/diagnostics/index.ts"],
-      "@apzhub/integration-sdk/lifecycle": ["./packages/integration-sdk/src/lifecycle/index.ts"],
-      "@apzhub/integration-sdk/errors": ["./packages/integration-sdk/src/errors/index.ts"],
+      "@apzhub/integration-sdk/client": [
+        "./packages/integration-sdk/src/client/index.ts"
+      ],
+      "@apzhub/integration-sdk/adapter": [
+        "./packages/integration-sdk/src/adapter/index.ts"
+      ],
+      "@apzhub/integration-sdk/diagnostics": [
+        "./packages/integration-sdk/src/diagnostics/index.ts"
+      ],
+      "@apzhub/integration-sdk/lifecycle": [
+        "./packages/integration-sdk/src/lifecycle/index.ts"
+      ],
+      "@apzhub/integration-sdk/errors": [
+        "./packages/integration-sdk/src/errors/index.ts"
+      ],
       "@apzhub/integration-sdk/auth": ["./packages/integration-sdk/src/auth/index.ts"],
-      "@apzhub/integration-sdk/connection": ["./packages/integration-sdk/src/connection/index.ts"],
-      "@apzhub/integration-sdk/health": ["./packages/integration-sdk/src/health/index.ts"],
-      "@apzhub/integration-sdk/version": ["./packages/integration-sdk/src/version/index.ts"],
-      "@apzhub/integration-sdk/resilience": ["./packages/integration-sdk/src/resilience/index.ts"],
-      "@apzhub/integration-sdk/observability": ["./packages/integration-sdk/src/observability/index.ts"],
-      "@apzhub/integration-sdk/transport": ["./packages/integration-sdk/src/transport/index.ts"],
-      "@apzhub/integration-sdk/mapping": ["./packages/integration-sdk/src/mapping/index.ts"],
-      "@apzhub/integration-sdk/events": ["./packages/integration-sdk/src/events/index.ts"],
+      "@apzhub/integration-sdk/connection": [
+        "./packages/integration-sdk/src/connection/index.ts"
+      ],
+      "@apzhub/integration-sdk/health": [
+        "./packages/integration-sdk/src/health/index.ts"
+      ],
+      "@apzhub/integration-sdk/version": [
+        "./packages/integration-sdk/src/version/index.ts"
+      ],
+      "@apzhub/integration-sdk/resilience": [
+        "./packages/integration-sdk/src/resilience/index.ts"
+      ],
+      "@apzhub/integration-sdk/observability": [
+        "./packages/integration-sdk/src/observability/index.ts"
+      ],
+      "@apzhub/integration-sdk/transport": [
+        "./packages/integration-sdk/src/transport/index.ts"
+      ],
+      "@apzhub/integration-sdk/mapping": [
+        "./packages/integration-sdk/src/mapping/index.ts"
+      ],
+      "@apzhub/integration-sdk/events": [
+        "./packages/integration-sdk/src/events/index.ts"
+      ],
       "@apzhub/integration-plane": ["./integrations/plane/src/index.ts"],
       "@apzhub/integration-zammad": ["./integrations/zammad/src/index.ts"],
-      "@apzhub/integration-github-actions": ["./integrations/github-actions/src/index.ts"],
+      "@apzhub/integration-github-actions": [
+        "./integrations/github-actions/src/index.ts"
+      ],
       "@apzhub/integration-meilisearch": ["./integrations/meilisearch/src/index.ts"],
       "@apzhub/platform-service-contracts": [
         "./packages/platform-service-contracts/src/index.ts"
       ],
       "@apzhub/platform-services": ["./packages/platform-services/src/index.ts"],
-      "@apzhub/platform-services/testing": ["./packages/platform-services/src/testing/index.ts"],
-      "@apzhub/platform-services/reporting": ["./packages/platform-services/src/reporting/index.ts"],
+      "@apzhub/platform-services/testing": [
+        "./packages/platform-services/src/testing/index.ts"
+      ],
+      "@apzhub/platform-services/reporting": [
+        "./packages/platform-services/src/reporting/index.ts"
+      ],
       "@apzhub/testing-contracts": ["./packages/testing-contracts/src/index.ts"],
       "@apzhub/testing-foundation": ["./packages/testing-foundation/src/index.ts"],
       "@apzhub/testing-persistence": ["./packages/testing-persistence/src/index.ts"],
@@ -163,34 +207,65 @@
       "@apzhub/workflow-contracts": ["./packages/workflow-contracts/src/index.ts"],
       "@apzhub/workflow-core": ["./packages/workflow-core/src/index.ts"],
       "@apzhub/workflow-persistence": ["./packages/workflow-persistence/src/index.ts"],
-      "@apzhub/notification-contracts": ["./packages/notification-contracts/src/index.ts"],
+      "@apzhub/notification-contracts": [
+        "./packages/notification-contracts/src/index.ts"
+      ],
       "@apzhub/notification-core": ["./packages/notification-core/src/index.ts"],
-      "@apzhub/notification-persistence": ["./packages/notification-persistence/src/index.ts"],
-      "@apzhub/configuration-contracts": ["./packages/configuration-contracts/src/index.ts"],
+      "@apzhub/notification-persistence": [
+        "./packages/notification-persistence/src/index.ts"
+      ],
+      "@apzhub/configuration-contracts": [
+        "./packages/configuration-contracts/src/index.ts"
+      ],
       "@apzhub/configuration-core": ["./packages/configuration-core/src/index.ts"],
-      "@apzhub/configuration-persistence": ["./packages/configuration-persistence/src/index.ts"],
+      "@apzhub/configuration-persistence": [
+        "./packages/configuration-persistence/src/index.ts"
+      ],
       "@apzhub/admin-contracts": ["./packages/admin-contracts/src/index.ts"],
       "@apzhub/admin-core": ["./packages/admin-core/src/index.ts"],
       "@apzhub/admin-persistence": ["./packages/admin-persistence/src/index.ts"],
       "@apzhub/identity-contracts": ["./packages/identity-contracts/src/index.ts"],
       "@apzhub/identity-core": ["./packages/identity-core/src/index.ts"],
       "@apzhub/identity-persistence": ["./packages/identity-persistence/src/index.ts"],
+      "@apzhub/metrics-contracts": ["./packages/metrics-contracts/src/index.ts"],
+      "@apzhub/metrics-core": ["./packages/metrics-core/src/index.ts"],
+      "@apzhub/metrics-persistence": ["./packages/metrics-persistence/src/index.ts"],
       "@apzhub/search-contracts": ["./packages/search-contracts/src/index.ts"],
       "@apzhub/search-persistence": ["./packages/search-persistence/src/index.ts"],
       "@apzhub/search-integration": ["./packages/search-integration/src/index.ts"],
-      "@apzhub/search-integration/products": ["./packages/search-integration/src/products/index.ts"],
+      "@apzhub/search-integration/products": [
+        "./packages/search-integration/src/products/index.ts"
+      ],
+      "@apzhub/search-orchestrator": ["./packages/search-orchestrator/src/index.ts"],
+      "@apzhub/search-publication-admin": [
+        "./packages/search-publication-admin/src/index.ts"
+      ],
       "@apzhub/search-projects": ["./packages/search-projects/src/index.ts"],
       "@apzhub/search-support": ["./packages/search-support/src/index.ts"],
       "@apzhub/search-documents": ["./packages/search-documents/src/index.ts"],
       "@apzhub/search-testing": ["./packages/search-testing/src/index.ts"],
       "@apzhub/search-reporting": ["./packages/search-reporting/src/index.ts"],
-      "@apzhub/integration-search-sdk": ["./packages/integration-search-sdk/src/index.ts"],
-      "@apzhub/integration-search-sdk/adapter": ["./packages/integration-search-sdk/src/adapter/index.ts"],
-      "@apzhub/integration-search-sdk/capabilities": ["./packages/integration-search-sdk/src/capabilities/index.ts"],
-      "@apzhub/integration-search-sdk/errors": ["./packages/integration-search-sdk/src/errors/index.ts"],
-      "@apzhub/integration-search-sdk/health": ["./packages/integration-search-sdk/src/health/index.ts"],
-      "@apzhub/integration-search-sdk/diagnostics": ["./packages/integration-search-sdk/src/diagnostics/index.ts"],
-      "@apzhub/integration-search-sdk/testing": ["./packages/integration-search-sdk/src/testing/index.ts"],
+      "@apzhub/integration-search-sdk": [
+        "./packages/integration-search-sdk/src/index.ts"
+      ],
+      "@apzhub/integration-search-sdk/adapter": [
+        "./packages/integration-search-sdk/src/adapter/index.ts"
+      ],
+      "@apzhub/integration-search-sdk/capabilities": [
+        "./packages/integration-search-sdk/src/capabilities/index.ts"
+      ],
+      "@apzhub/integration-search-sdk/errors": [
+        "./packages/integration-search-sdk/src/errors/index.ts"
+      ],
+      "@apzhub/integration-search-sdk/health": [
+        "./packages/integration-search-sdk/src/health/index.ts"
+      ],
+      "@apzhub/integration-search-sdk/diagnostics": [
+        "./packages/integration-search-sdk/src/diagnostics/index.ts"
+      ],
+      "@apzhub/integration-search-sdk/testing": [
+        "./packages/integration-search-sdk/src/testing/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "**/node_modules", "**/dist", "**/.next"]

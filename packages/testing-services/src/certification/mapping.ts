@@ -40,8 +40,7 @@ export function toCertificationDomain(
       asCertificationGateEvaluationId(id),
     ) as CertificationGateEvaluationId[],
     currentRecommendation: row.currentRecommendation as
-      | CertificationRecommendationCode
-      | undefined,
+      CertificationRecommendationCode | undefined,
     recommendationJson: row.recommendationJson,
     evidenceLinks: evidenceLinksFromJson(row.evidenceLinksJson),
     ruleId: row.ruleId ? asCertificationRuleId(row.ruleId) : undefined,
@@ -71,9 +70,7 @@ export type TransitionEventType =
   | "certification.submitted_for_approval"
   | "certification.state_changed";
 
-export function eventTypeForStatus(
-  status: CertificationStatus,
-): TransitionEventType {
+export function eventTypeForStatus(status: CertificationStatus): TransitionEventType {
   switch (status) {
     case "approved":
     case "certified":

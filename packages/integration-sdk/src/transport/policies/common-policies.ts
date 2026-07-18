@@ -55,9 +55,7 @@ export function resolveRedirectConfiguration(
   };
 }
 
-export function buildAcceptEncodingHeader(
-  config: CompressionConfiguration,
-): string {
+export function buildAcceptEncodingHeader(config: CompressionConfiguration): string {
   return config.acceptEncoding.join(", ");
 }
 

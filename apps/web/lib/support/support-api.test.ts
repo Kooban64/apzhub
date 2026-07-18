@@ -129,15 +129,15 @@ function sampleUser(overrides: Record<string, unknown> = {}) {
 }
 
 function mockOk(data: unknown, page?: unknown) {
-  globalThis.fetch = vi.fn().mockImplementation(() =>
-    Promise.resolve(
-      jsonResponse(
-        page
-          ? { data, page, meta: emptyMeta() }
-          : { data, meta: emptyMeta() },
+  globalThis.fetch = vi
+    .fn()
+    .mockImplementation(() =>
+      Promise.resolve(
+        jsonResponse(
+          page ? { data, page, meta: emptyMeta() } : { data, meta: emptyMeta() },
+        ),
       ),
-    ),
-  ) as typeof fetch;
+    ) as typeof fetch;
   return globalThis.fetch as unknown as ReturnType<typeof vi.fn>;
 }
 
@@ -232,7 +232,10 @@ describe("support-api", () => {
     await closeSupportRequest("sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     await reopenSupportRequest("sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     await changeSupportRequestState("sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "pending");
-    await changeSupportRequestPriority("sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "urgent");
+    await changeSupportRequestPriority(
+      "sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "urgent",
+    );
     await assignSupportRequestOwner(
       "sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "suser_11111111111111111111111111111111",
@@ -328,8 +331,12 @@ describe("support-api", () => {
       )
       .mockResolvedValueOnce(jsonResponse({ data: sampleOrg(), meta: emptyMeta() }))
       .mockResolvedValueOnce(jsonResponse({ data: sampleOrg(), meta: emptyMeta() }))
-      .mockResolvedValueOnce(jsonResponse({ data: sampleOrg({ name: "Renamed" }), meta: emptyMeta() }))
-      .mockResolvedValueOnce(jsonResponse({ data: sampleOrg({ active: false }), meta: emptyMeta() }))
+      .mockResolvedValueOnce(
+        jsonResponse({ data: sampleOrg({ name: "Renamed" }), meta: emptyMeta() }),
+      )
+      .mockResolvedValueOnce(
+        jsonResponse({ data: sampleOrg({ active: false }), meta: emptyMeta() }),
+      )
       .mockResolvedValueOnce(
         jsonResponse({
           data: [sampleGroup()],
@@ -339,7 +346,9 @@ describe("support-api", () => {
       )
       .mockResolvedValueOnce(jsonResponse({ data: sampleGroup(), meta: emptyMeta() }))
       .mockResolvedValueOnce(jsonResponse({ data: sampleGroup(), meta: emptyMeta() }))
-      .mockResolvedValueOnce(jsonResponse({ data: sampleGroup({ name: "Tier 2" }), meta: emptyMeta() }))
+      .mockResolvedValueOnce(
+        jsonResponse({ data: sampleGroup({ name: "Tier 2" }), meta: emptyMeta() }),
+      )
       .mockResolvedValueOnce(
         jsonResponse({
           data: [sampleUser()],
@@ -380,7 +389,9 @@ describe("support-api", () => {
     await listSupportGroups({ search: "tier", active: true });
     await getSupportGroup("sgrp_ffffffffffffffffffffffffffffffff");
     await createSupportGroup({ name: "Tier 1", note: "queue" });
-    await updateSupportGroup("sgrp_ffffffffffffffffffffffffffffffff", { name: "Tier 2" });
+    await updateSupportGroup("sgrp_ffffffffffffffffffffffffffffffff", {
+      name: "Tier 2",
+    });
     await listSupportUsers({
       search: "pat",
       email: "pat@example.com",
@@ -441,18 +452,23 @@ describe("support-api", () => {
 
   it("handles non-JSON error bodies and abort signals", async () => {
     globalThis.fetch = vi.fn().mockResolvedValue(
-      new Response("not-json", { status: 500, headers: { "content-type": "text/plain" } }),
+      new Response("not-json", {
+        status: 500,
+        headers: { "content-type": "text/plain" },
+      }),
     ) as typeof fetch;
 
-    await expect(getSupportRequest("sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")).rejects.toMatchObject({
+    await expect(
+      getSupportRequest("sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
+    ).rejects.toMatchObject({
       name: "SupportApiError",
       status: 500,
       code: "UNKNOWN",
     });
 
-    const fetchMock = vi.fn().mockResolvedValue(
-      jsonResponse({ data: sampleArticle(), meta: emptyMeta() }),
-    );
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(jsonResponse({ data: sampleArticle(), meta: emptyMeta() }));
     globalThis.fetch = fetchMock as typeof fetch;
     const controller = new AbortController();
 

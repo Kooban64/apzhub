@@ -8,12 +8,11 @@ import type {
   SearchTenantIsolationPolicy,
 } from "../services/search-execution-services";
 
-export const DEFAULT_SEARCH_TENANT_ISOLATION_POLICY: SearchTenantIsolationPolicy =
-  {
-    strategy: "shared_index_mandatory_tenant_filters",
-    failClosed: true,
-    enforceOrganisationWhenPresent: true,
-  };
+export const DEFAULT_SEARCH_TENANT_ISOLATION_POLICY: SearchTenantIsolationPolicy = {
+  strategy: "shared_index_mandatory_tenant_filters",
+  failClosed: true,
+  enforceOrganisationWhenPresent: true,
+};
 
 export const SEARCH_TENANT_FILTER_FIELD = "tenantId" as const;
 export const SEARCH_ORGANISATION_FILTER_FIELD = "organisationId" as const;

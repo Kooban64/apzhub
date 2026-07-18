@@ -32,11 +32,7 @@ import type {
   EngineeringSnapshotRecord,
   EngineeringTrendSeriesRecord,
 } from "../records";
-import {
-  dateFromIso,
-  isoFromDate,
-  metaFromRow,
-} from "../mappers/row-mappers";
+import { dateFromIso, isoFromDate, metaFromRow } from "../mappers/row-mappers";
 import { baseMeta } from "../in-memory/generic-crud";
 import {
   createPostgresCrudRepository,
@@ -96,16 +92,13 @@ function rowToEngineeringSnapshot(
   return {
     ...meta,
     scope: (row.scope as Record<string, unknown> | null) ?? {},
-    qualityScoreJson:
-      (row.qualityScoreJson as Record<string, unknown> | null) ?? {},
+    qualityScoreJson: (row.qualityScoreJson as Record<string, unknown> | null) ?? {},
     healthJson: (row.healthJson as Record<string, unknown> | null) ?? {},
     riskJson: (row.riskJson as Record<string, unknown> | null) ?? {},
     indicatorsJson: Array.isArray(row.indicatorsJson)
       ? (row.indicatorsJson as unknown[])
       : [],
-    trendsJson: Array.isArray(row.trendsJson)
-      ? (row.trendsJson as unknown[])
-      : [],
+    trendsJson: Array.isArray(row.trendsJson) ? (row.trendsJson as unknown[]) : [],
     computedAt: isoFromDate(row.computedAt as Date)!,
     label: (row.label as string | null) ?? undefined,
   };
@@ -170,9 +163,7 @@ function rowToEngineeringTrendSeries(
     kind: String(row.kind ?? ""),
     scope: (row.scope as Record<string, unknown> | null) ?? {},
     periodKind: String(row.periodKind ?? ""),
-    pointsJson: Array.isArray(row.pointsJson)
-      ? (row.pointsJson as unknown[])
-      : [],
+    pointsJson: Array.isArray(row.pointsJson) ? (row.pointsJson as unknown[]) : [],
     direction: String(row.direction ?? ""),
     delta: Number(row.delta ?? 0),
     computedAt: isoFromDate(row.computedAt as Date)!,
@@ -235,9 +226,7 @@ function rowToEngineeringBaseline(
   };
 }
 
-function engineeringQualitySummaryToRow(
-  record: EngineeringQualitySummaryRecord,
-) {
+function engineeringQualitySummaryToRow(record: EngineeringQualitySummaryRecord) {
   return {
     ...metaFields(record),
     scope: { ...record.scope },
@@ -254,8 +243,7 @@ function rowToEngineeringQualitySummary(
   return {
     ...meta,
     scope: (row.scope as Record<string, unknown> | null) ?? {},
-    qualityScoreJson:
-      (row.qualityScoreJson as Record<string, unknown> | null) ?? {},
+    qualityScoreJson: (row.qualityScoreJson as Record<string, unknown> | null) ?? {},
     indicatorsJson: Array.isArray(row.indicatorsJson)
       ? (row.indicatorsJson as unknown[])
       : [],
@@ -318,8 +306,7 @@ export function createPostgresEngineeringRepos(db: DatabaseExecutor): {
         return {
           ...meta,
           scope: data.scope ?? existing?.scope ?? {},
-          qualityScoreJson:
-            data.qualityScoreJson ?? existing?.qualityScoreJson ?? {},
+          qualityScoreJson: data.qualityScoreJson ?? existing?.qualityScoreJson ?? {},
           healthJson: data.healthJson ?? existing?.healthJson ?? {},
           riskJson: data.riskJson ?? existing?.riskJson ?? {},
           indicatorsJson: data.indicatorsJson ?? existing?.indicatorsJson ?? [],
@@ -362,9 +349,7 @@ export function createPostgresEngineeringRepos(db: DatabaseExecutor): {
           periodJson: data.periodJson ?? existing?.periodJson ?? {},
           qualityScore: Number(data.qualityScore ?? existing?.qualityScore ?? 0),
           engineeringHealthScore: Number(
-            data.engineeringHealthScore ??
-              existing?.engineeringHealthScore ??
-              0,
+            data.engineeringHealthScore ?? existing?.engineeringHealthScore ?? 0,
           ),
           indicatorsJson: data.indicatorsJson ?? existing?.indicatorsJson ?? [],
           metricsJson: data.metricsJson ?? existing?.metricsJson ?? {},
@@ -480,8 +465,7 @@ export function createPostgresEngineeringRepos(db: DatabaseExecutor): {
           kind: String(data.kind ?? existing?.kind ?? ""),
           metricKey: String(data.metricKey ?? existing?.metricKey ?? ""),
           value: Number(data.value ?? existing?.value ?? 0),
-          sourceSnapshotId:
-            data.sourceSnapshotId ?? existing?.sourceSnapshotId,
+          sourceSnapshotId: data.sourceSnapshotId ?? existing?.sourceSnapshotId,
           periodJson: data.periodJson ?? existing?.periodJson,
           computedAt: String(
             data.computedAt ?? existing?.computedAt ?? new Date().toISOString(),
@@ -515,8 +499,7 @@ export function createPostgresEngineeringRepos(db: DatabaseExecutor): {
         return {
           ...meta,
           scope: data.scope ?? existing?.scope ?? {},
-          qualityScoreJson:
-            data.qualityScoreJson ?? existing?.qualityScoreJson ?? {},
+          qualityScoreJson: data.qualityScoreJson ?? existing?.qualityScoreJson ?? {},
           indicatorsJson: data.indicatorsJson ?? existing?.indicatorsJson ?? [],
           computedAt: String(
             data.computedAt ?? existing?.computedAt ?? new Date().toISOString(),

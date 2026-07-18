@@ -1,9 +1,9 @@
 # Search Integration Compatibility Model
 
-| Field | Value |
-| --- | --- |
-| **Document** | APZHUB-Search-Integration-Compatibility-Model |
-| **Milestone** | APZSEARCH-004 |
+| Field         | Value                                         |
+| ------------- | --------------------------------------------- |
+| **Document**  | APZHUB-Search-Integration-Compatibility-Model |
+| **Milestone** | APZSEARCH-004                                 |
 
 ## 1. Purpose
 
@@ -11,12 +11,12 @@ Classify whether a declared search adapter surface is compatible with platform e
 
 ## 2. Classification
 
-| Class | Meaning |
-| --- | --- |
-| `supported` | Required capabilities present; no forbidden flags; provider kind known |
-| `degraded` | Keyword present but some non-critical required capabilities missing |
+| Class         | Meaning                                                                         |
+| ------------- | ------------------------------------------------------------------------------- |
+| `supported`   | Required capabilities present; no forbidden flags; provider kind known          |
+| `degraded`    | Keyword present but some non-critical required capabilities missing             |
 | `unsupported` | Missing keyword (or equivalent critical) **or** forbidden semantic/vector/fuzzy |
-| `unknown` | Declarations OK but `providerKind` not supplied |
+| `unknown`     | Declarations OK but `providerKind` not supplied                                 |
 
 ## 3. Report fields
 
@@ -34,7 +34,7 @@ Classify whether a declared search adapter surface is compatible with platform e
 evaluateSearchCompatibility({
   declaredCapabilities,
   requiredCapabilities, // optional
-  providerKind,          // optional
+  providerKind, // optional
 });
 ```
 

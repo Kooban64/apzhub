@@ -15,15 +15,21 @@ Always use `getValidatedSession` — not raw Better Auth responses — for tenan
 ```typescript
 import { withLawApiAuth } from "@/lib/api";
 
-export const GET = withLawApiAuth(async (request, context) => {
-  // context.user, context.tenantId, context.permissions
-}, { requireAuth: true, requireTenant: true });
+export const GET = withLawApiAuth(
+  async (request, context) => {
+    // context.user, context.tenantId, context.permissions
+  },
+  { requireAuth: true, requireTenant: true },
+);
 ```
 
 ## Platform API guards
 
 ```typescript
-import { requirePlatformSession, requirePlatformSessionWithTenant } from "@apzhub/platform-security";
+import {
+  requirePlatformSession,
+  requirePlatformSessionWithTenant,
+} from "@apzhub/platform-security";
 ```
 
 ## Middleware
@@ -37,7 +43,10 @@ import { fetchMiddlewareSession } from "@apzhub/auth/middleware-session";
 ## Validation helpers
 
 ```typescript
-import { validateEnrichedSession, validateTenantSessionConsistency } from "@apzhub/auth/server";
+import {
+  validateEnrichedSession,
+  validateTenantSessionConsistency,
+} from "@apzhub/auth/server";
 ```
 
 ## Do not

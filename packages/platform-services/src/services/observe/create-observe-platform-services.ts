@@ -146,11 +146,7 @@ export function wrapObservePlatformGatewayWithPipeline(
       pipeline,
       "observeHealthSummaries",
     ),
-    metadata: wrapServiceWithPipeline(
-      gateway.metadata,
-      pipeline,
-      "observeMetadata",
-    ),
+    metadata: wrapServiceWithPipeline(gateway.metadata, pipeline, "observeMetadata"),
     diagnostics: wrapServiceWithPipeline(
       gateway.diagnostics,
       pipeline,
@@ -168,8 +164,7 @@ function buildBundle(input: {
   createObserveFoundation({ repos: input.persistence });
   let seq = 0;
   const now = input.now ?? (() => new Date().toISOString());
-  const id =
-    input.id ?? (() => `obs_${Date.now().toString(36)}_${++seq}`);
+  const id = input.id ?? (() => `obs_${Date.now().toString(36)}_${++seq}`);
   const domain = createPlatformObserveService({
     repos: input.persistence,
     now,

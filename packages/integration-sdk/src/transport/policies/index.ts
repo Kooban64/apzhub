@@ -4,10 +4,7 @@ export {
   parseRetryAfterMs,
   isAbortError,
 } from "./retry-policy";
-export {
-  DefaultTimeoutPolicy,
-  createDefaultTimeoutPolicy,
-} from "./timeout-policy";
+export { DefaultTimeoutPolicy, createDefaultTimeoutPolicy } from "./timeout-policy";
 export {
   CompressionPolicy,
   RedirectPolicy,

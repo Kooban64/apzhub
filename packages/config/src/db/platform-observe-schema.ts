@@ -2,14 +2,7 @@
  * Platform Observability metadata schema (APZOBSERVE-001).
  * Metadata SoR only — not Prometheus / Loki / Grafana storage.
  */
-import {
-  integer,
-  jsonb,
-  pgTable,
-  text,
-  timestamp,
-  varchar,
-} from "drizzle-orm/pg-core";
+import { integer, jsonb, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 export const platformObserveHealthCheck = pgTable("platform_observe_health_check", {
   id: text("id").primaryKey(),
@@ -30,23 +23,26 @@ export const platformObserveHealthCheck = pgTable("platform_observe_health_check
   revision: integer("revision").notNull().default(1),
 });
 
-export const platformObserveReadinessCheck = pgTable("platform_observe_readiness_check", {
-  id: text("id").primaryKey(),
-  tenantId: text("tenant_id").notNull(),
-  organisationId: text("organisation_id"),
-  serviceKey: text("service_key").notNull(),
-  name: text("name").notNull(),
-  status: varchar("status", { length: 32 }).notNull(),
-  checkedAt: timestamp("checked_at", { withTimezone: true }),
-  providerKind: varchar("provider_kind", { length: 32 }).notNull(),
-  providerRef: text("provider_ref"),
-  metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
-  createdBy: text("created_by").notNull(),
-  updatedBy: text("updated_by").notNull(),
-  revision: integer("revision").notNull().default(1),
-});
+export const platformObserveReadinessCheck = pgTable(
+  "platform_observe_readiness_check",
+  {
+    id: text("id").primaryKey(),
+    tenantId: text("tenant_id").notNull(),
+    organisationId: text("organisation_id"),
+    serviceKey: text("service_key").notNull(),
+    name: text("name").notNull(),
+    status: varchar("status", { length: 32 }).notNull(),
+    checkedAt: timestamp("checked_at", { withTimezone: true }),
+    providerKind: varchar("provider_kind", { length: 32 }).notNull(),
+    providerRef: text("provider_ref"),
+    metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    createdBy: text("created_by").notNull(),
+    updatedBy: text("updated_by").notNull(),
+    revision: integer("revision").notNull().default(1),
+  },
+);
 
 export const platformObserveLivenessCheck = pgTable("platform_observe_liveness_check", {
   id: text("id").primaryKey(),
@@ -100,44 +96,50 @@ export const platformObserveServiceStatus = pgTable("platform_observe_service_st
   revision: integer("revision").notNull().default(1),
 });
 
-export const platformObserveComponentStatus = pgTable("platform_observe_component_status", {
-  id: text("id").primaryKey(),
-  tenantId: text("tenant_id").notNull(),
-  organisationId: text("organisation_id"),
-  serviceKey: text("service_key").notNull(),
-  componentKey: text("component_key").notNull(),
-  name: text("name").notNull(),
-  status: varchar("status", { length: 32 }).notNull(),
-  message: text("message"),
-  observedAt: timestamp("observed_at", { withTimezone: true }),
-  metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
-  createdBy: text("created_by").notNull(),
-  updatedBy: text("updated_by").notNull(),
-  revision: integer("revision").notNull().default(1),
-});
+export const platformObserveComponentStatus = pgTable(
+  "platform_observe_component_status",
+  {
+    id: text("id").primaryKey(),
+    tenantId: text("tenant_id").notNull(),
+    organisationId: text("organisation_id"),
+    serviceKey: text("service_key").notNull(),
+    componentKey: text("component_key").notNull(),
+    name: text("name").notNull(),
+    status: varchar("status", { length: 32 }).notNull(),
+    message: text("message"),
+    observedAt: timestamp("observed_at", { withTimezone: true }),
+    metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    createdBy: text("created_by").notNull(),
+    updatedBy: text("updated_by").notNull(),
+    revision: integer("revision").notNull().default(1),
+  },
+);
 
-export const platformObserveMetricDefinition = pgTable("platform_observe_metric_definition", {
-  id: text("id").primaryKey(),
-  tenantId: text("tenant_id").notNull(),
-  organisationId: text("organisation_id"),
-  key: text("key").notNull(),
-  name: text("name").notNull(),
-  description: text("description"),
-  kind: varchar("kind", { length: 32 }).notNull(),
-  unit: text("unit"),
-  providerKind: varchar("provider_kind", { length: 32 }).notNull(),
-  providerRef: text("provider_ref"),
-  status: varchar("status", { length: 32 }).notNull(),
-  labels: jsonb("labels_json").$type<Record<string, string>>().default({}),
-  metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
-  createdBy: text("created_by").notNull(),
-  updatedBy: text("updated_by").notNull(),
-  revision: integer("revision").notNull().default(1),
-});
+export const platformObserveMetricDefinition = pgTable(
+  "platform_observe_metric_definition",
+  {
+    id: text("id").primaryKey(),
+    tenantId: text("tenant_id").notNull(),
+    organisationId: text("organisation_id"),
+    key: text("key").notNull(),
+    name: text("name").notNull(),
+    description: text("description"),
+    kind: varchar("kind", { length: 32 }).notNull(),
+    unit: text("unit"),
+    providerKind: varchar("provider_kind", { length: 32 }).notNull(),
+    providerRef: text("provider_ref"),
+    status: varchar("status", { length: 32 }).notNull(),
+    labels: jsonb("labels_json").$type<Record<string, string>>().default({}),
+    metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    createdBy: text("created_by").notNull(),
+    updatedBy: text("updated_by").notNull(),
+    revision: integer("revision").notNull().default(1),
+  },
+);
 
 export const platformObserveMetricSample = pgTable("platform_observe_metric_sample", {
   id: text("id").primaryKey(),
@@ -156,24 +158,27 @@ export const platformObserveMetricSample = pgTable("platform_observe_metric_samp
   revision: integer("revision").notNull().default(1),
 });
 
-export const platformObserveAlertDefinition = pgTable("platform_observe_alert_definition", {
-  id: text("id").primaryKey(),
-  tenantId: text("tenant_id").notNull(),
-  organisationId: text("organisation_id"),
-  key: text("key").notNull(),
-  name: text("name").notNull(),
-  description: text("description"),
-  severity: varchar("severity", { length: 32 }).notNull(),
-  providerKind: varchar("provider_kind", { length: 32 }).notNull(),
-  providerRef: text("provider_ref"),
-  status: varchar("status", { length: 32 }).notNull(),
-  metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
-  createdBy: text("created_by").notNull(),
-  updatedBy: text("updated_by").notNull(),
-  revision: integer("revision").notNull().default(1),
-});
+export const platformObserveAlertDefinition = pgTable(
+  "platform_observe_alert_definition",
+  {
+    id: text("id").primaryKey(),
+    tenantId: text("tenant_id").notNull(),
+    organisationId: text("organisation_id"),
+    key: text("key").notNull(),
+    name: text("name").notNull(),
+    description: text("description"),
+    severity: varchar("severity", { length: 32 }).notNull(),
+    providerKind: varchar("provider_kind", { length: 32 }).notNull(),
+    providerRef: text("provider_ref"),
+    status: varchar("status", { length: 32 }).notNull(),
+    metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    createdBy: text("created_by").notNull(),
+    updatedBy: text("updated_by").notNull(),
+    revision: integer("revision").notNull().default(1),
+  },
+);
 
 export const platformObserveAlertState = pgTable("platform_observe_alert_state", {
   id: text("id").primaryKey(),
@@ -230,23 +235,26 @@ export const platformObserveLogSource = pgTable("platform_observe_log_source", {
   revision: integer("revision").notNull().default(1),
 });
 
-export const platformObserveTraceDefinition = pgTable("platform_observe_trace_definition", {
-  id: text("id").primaryKey(),
-  tenantId: text("tenant_id").notNull(),
-  organisationId: text("organisation_id"),
-  key: text("key").notNull(),
-  name: text("name").notNull(),
-  description: text("description"),
-  providerKind: varchar("provider_kind", { length: 32 }).notNull(),
-  providerRef: text("provider_ref"),
-  status: varchar("status", { length: 32 }).notNull(),
-  metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
-  createdBy: text("created_by").notNull(),
-  updatedBy: text("updated_by").notNull(),
-  revision: integer("revision").notNull().default(1),
-});
+export const platformObserveTraceDefinition = pgTable(
+  "platform_observe_trace_definition",
+  {
+    id: text("id").primaryKey(),
+    tenantId: text("tenant_id").notNull(),
+    organisationId: text("organisation_id"),
+    key: text("key").notNull(),
+    name: text("name").notNull(),
+    description: text("description"),
+    providerKind: varchar("provider_kind", { length: 32 }).notNull(),
+    providerRef: text("provider_ref"),
+    status: varchar("status", { length: 32 }).notNull(),
+    metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    createdBy: text("created_by").notNull(),
+    updatedBy: text("updated_by").notNull(),
+    revision: integer("revision").notNull().default(1),
+  },
+);
 
 export const platformObserveTraceSpan = pgTable("platform_observe_trace_span", {
   id: text("id").primaryKey(),
@@ -267,41 +275,47 @@ export const platformObserveTraceSpan = pgTable("platform_observe_trace_span", {
   revision: integer("revision").notNull().default(1),
 });
 
-export const platformObserveIncidentReference = pgTable("platform_observe_incident_reference", {
-  id: text("id").primaryKey(),
-  tenantId: text("tenant_id").notNull(),
-  organisationId: text("organisation_id"),
-  key: text("key").notNull(),
-  title: text("title").notNull(),
-  serviceKey: text("service_key"),
-  alertDefinitionId: text("alert_definition_id"),
-  status: varchar("status", { length: 32 }).notNull(),
-  externalRef: text("external_ref"),
-  metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
-  createdBy: text("created_by").notNull(),
-  updatedBy: text("updated_by").notNull(),
-  revision: integer("revision").notNull().default(1),
-});
+export const platformObserveIncidentReference = pgTable(
+  "platform_observe_incident_reference",
+  {
+    id: text("id").primaryKey(),
+    tenantId: text("tenant_id").notNull(),
+    organisationId: text("organisation_id"),
+    key: text("key").notNull(),
+    title: text("title").notNull(),
+    serviceKey: text("service_key"),
+    alertDefinitionId: text("alert_definition_id"),
+    status: varchar("status", { length: 32 }).notNull(),
+    externalRef: text("external_ref"),
+    metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    createdBy: text("created_by").notNull(),
+    updatedBy: text("updated_by").notNull(),
+    revision: integer("revision").notNull().default(1),
+  },
+);
 
-export const platformObserveMaintenanceWindow = pgTable("platform_observe_maintenance_window", {
-  id: text("id").primaryKey(),
-  tenantId: text("tenant_id").notNull(),
-  organisationId: text("organisation_id"),
-  key: text("key").notNull(),
-  name: text("name").notNull(),
-  serviceKey: text("service_key"),
-  startsAt: timestamp("starts_at", { withTimezone: true }).notNull(),
-  endsAt: timestamp("ends_at", { withTimezone: true }).notNull(),
-  status: varchar("status", { length: 32 }).notNull(),
-  metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
-  createdBy: text("created_by").notNull(),
-  updatedBy: text("updated_by").notNull(),
-  revision: integer("revision").notNull().default(1),
-});
+export const platformObserveMaintenanceWindow = pgTable(
+  "platform_observe_maintenance_window",
+  {
+    id: text("id").primaryKey(),
+    tenantId: text("tenant_id").notNull(),
+    organisationId: text("organisation_id"),
+    key: text("key").notNull(),
+    name: text("name").notNull(),
+    serviceKey: text("service_key"),
+    startsAt: timestamp("starts_at", { withTimezone: true }).notNull(),
+    endsAt: timestamp("ends_at", { withTimezone: true }).notNull(),
+    status: varchar("status", { length: 32 }).notNull(),
+    metadata: jsonb("metadata_json").$type<Record<string, unknown>>().default({}),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    createdBy: text("created_by").notNull(),
+    updatedBy: text("updated_by").notNull(),
+    revision: integer("revision").notNull().default(1),
+  },
+);
 
 export const platformObserveHealthSummary = pgTable("platform_observe_health_summary", {
   id: text("id").primaryKey(),

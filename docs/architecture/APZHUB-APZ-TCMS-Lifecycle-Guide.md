@@ -23,7 +23,7 @@ Rework returns work to authors; history is append-only.
 
 ## Versioning
 
-- Plans / suites: increment `versionNumber` via `version()`.  
+- Plans / suites: increment `versionNumber` via `version()`.
 - Cases: persist immutable snapshots in `testing_test_case_version` with a `CaseVersionReason`.
 
 ## Related

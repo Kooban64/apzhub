@@ -1,4 +1,7 @@
-import type { ConsolidatedOperationalDiagnostics, HealthSignalStatus } from "@apzhub/platform-security";
+import type {
+  ConsolidatedOperationalDiagnostics,
+  HealthSignalStatus,
+} from "@apzhub/platform-security";
 
 /** Canonical platform lifecycle states (PRH-009). */
 export type PlatformLifecycleState =

@@ -7,16 +7,10 @@ import type {
 } from "@apzhub/testing-contracts";
 
 import { DomainRuleError } from "../../services/errors";
-import {
-  aggregateOverall,
-  asText,
-  deriveExternalRunRef,
-} from "./types";
+import { aggregateOverall, asText, deriveExternalRunRef } from "./types";
 
 function attr(tag: string, name: string): string | undefined {
-  const match = tag.match(
-    new RegExp(`(?:^|[\\s])${name}\\s*=\\s*"([^"]*)"`, "i"),
-  );
+  const match = tag.match(new RegExp(`(?:^|[\\s])${name}\\s*=\\s*"([^"]*)"`, "i"));
   return match?.[1];
 }
 
@@ -28,8 +22,7 @@ function mapJunitStatus(body: string): CanonicalAutomationCase["status"] {
 
 function extractTestCases(xml: string): CanonicalAutomationCase[] {
   const cases: CanonicalAutomationCase[] = [];
-  const re =
-    /<testcase\b([^>]*)\/>|<testcase\b([^>]*)>([\s\S]*?)<\/testcase>/gi;
+  const re = /<testcase\b([^>]*)\/>|<testcase\b([^>]*)>([\s\S]*?)<\/testcase>/gi;
   let match: RegExpExecArray | null;
   while ((match = re.exec(xml)) !== null) {
     const attrs = match[1] ?? match[2] ?? "";
@@ -73,8 +66,7 @@ export function createJunitXmlAdapter(): AutomationResultAdapter {
       }
       const xml = asText(input.payload);
       const suites: CanonicalAutomationSuite[] = [];
-      const suiteBlocks =
-        xml.match(/<testsuite\b[^>]*>[\s\S]*?<\/testsuite>/gi) ?? [];
+      const suiteBlocks = xml.match(/<testsuite\b[^>]*>[\s\S]*?<\/testsuite>/gi) ?? [];
       const blocks = suiteBlocks.length > 0 ? suiteBlocks : [xml];
 
       for (const block of blocks) {

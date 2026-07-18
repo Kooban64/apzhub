@@ -17,11 +17,11 @@ Wired the Platform Administration SoR into APZHUB Platform Services: nested `gat
 Products → gateway.administration.* → RequestPipeline → Authz → Thin Services → Core → Persistence → PostgreSQL
 ```
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/admin-contracts` | **0.2.0** |
-| `@apzhub/admin-core` | **0.2.0** |
-| `@apzhub/admin-persistence` | **0.1.0** |
+| Package                     | Version    |
+| --------------------------- | ---------- |
+| `@apzhub/admin-contracts`   | **0.2.0**  |
+| `@apzhub/admin-core`        | **0.2.0**  |
+| `@apzhub/admin-persistence` | **0.1.0**  |
 | `@apzhub/platform-services` | **0.22.0** |
 
 ## Gateway
@@ -54,12 +54,12 @@ Administration programme packages: **≥95%** lines and functions on new APZADMI
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:admin-foundation` | PASS |
-| `pnpm audit:administration-platform-services` | PASS |
-| Typecheck (admin-contracts, admin-core, platform-services) | PASS |
-| Vitest (administration scope + coverage) | PASS |
+| Gate                                                       | Result |
+| ---------------------------------------------------------- | ------ |
+| `pnpm audit:admin-foundation`                              | PASS   |
+| `pnpm audit:administration-platform-services`              | PASS   |
+| Typecheck (admin-contracts, admin-core, platform-services) | PASS   |
+| Vitest (administration scope + coverage)                   | PASS   |
 
 ## Technical Debt
 

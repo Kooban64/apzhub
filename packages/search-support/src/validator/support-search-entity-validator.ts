@@ -22,15 +22,14 @@ export type SupportSearchValidationResult = {
   readonly issues: readonly SupportSearchValidationIssue[];
 };
 
-const MANDATORY_BY_TYPE: Readonly<
-  Record<SupportSearchEntityType, readonly string[]>
-> = {
-  support_request: ["status", "priority", "groupId", "requesterId"],
-  support_article: ["supportTicketId", "channel", "visibility", "senderType"],
-  support_organisation: ["active"],
-  support_group: ["active"],
-  support_user: ["role", "active"],
-};
+const MANDATORY_BY_TYPE: Readonly<Record<SupportSearchEntityType, readonly string[]>> =
+  {
+    support_request: ["status", "priority", "groupId", "requesterId"],
+    support_article: ["supportTicketId", "channel", "visibility", "senderType"],
+    support_organisation: ["active"],
+    support_group: ["active"],
+    support_user: ["role", "active"],
+  };
 
 export class SupportSearchEntityValidator {
   validateDraft(
@@ -124,10 +123,7 @@ export class SupportSearchEntityValidator {
 
     if (isSupportSearchEntityType(draft.entityType)) {
       for (const key of MANDATORY_BY_TYPE[draft.entityType]) {
-        if (
-          metadata[key] === undefined ||
-          String(metadata[key]).trim().length === 0
-        ) {
+        if (metadata[key] === undefined || String(metadata[key]).trim().length === 0) {
           issues.push({
             field: `metadata.${key}`,
             code: "required",

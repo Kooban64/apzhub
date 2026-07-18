@@ -1,9 +1,6 @@
 /** @apzhub/search-reporting — APZSEARCH-014 Reporting Search Publication Adapter */
 
-export {
-  SEARCH_REPORTING_VERSION,
-  REPORTING_CORE_DEPENDENCY_VERSION,
-} from "./version";
+export { SEARCH_REPORTING_VERSION, REPORTING_CORE_DEPENDENCY_VERSION } from "./version";
 
 export {
   REPORTING_SEARCH_ENTITY_TYPES,

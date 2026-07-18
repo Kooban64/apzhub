@@ -41,22 +41,22 @@ OSS Engine (Plane CE | Zammad CE)
 
 ## Components
 
-| Component | Responsibility |
-|-----------|----------------|
-| `PlatformServiceGateway` | Single application entry point; contracts only |
-| `RequestPipeline` | Validation, enrichment, middleware, policies, authz hooks, observability |
-| `AuthorizationProvider` | Pluggable authorization; allow-all default (OSS-110-04) |
-| `Policy` / `ServiceMiddleware` | Extensibility frameworks (no production policies yet) |
-| `*ServiceImpl` | Mapping-aware delegation; context enforcement |
-| `MappingOrchestrator` | ID resolution, post-create mapping, compensation errors |
-| `EntityMappingStore` | Platform↔provider ID persistence boundary |
-| `InMemoryEntityMappingStore` | Dev/test implementation |
-| `PostgresEntityMappingStore` | Production-capable PostgreSQL implementation (OSS-110-05) |
-| `createEntityMappingStore` | Bootstrap selection (memory/postgres; no silent prod fallback) |
-| `ProviderRegistry` / `ProviderResolver` | Multi-provider registration and selection |
-| Plane providers | Accept native IDs; return canonical DTOs (provisional IDs stripped by mapping layer) |
-| Zammad providers | Support domain (OSS-110-10); provisional `*_zammad_*` stripped by mapping layer |
-| `reconcileEntityMappings` | Lightweight inconsistency detection |
+| Component                               | Responsibility                                                                       |
+| --------------------------------------- | ------------------------------------------------------------------------------------ |
+| `PlatformServiceGateway`                | Single application entry point; contracts only                                       |
+| `RequestPipeline`                       | Validation, enrichment, middleware, policies, authz hooks, observability             |
+| `AuthorizationProvider`                 | Pluggable authorization; allow-all default (OSS-110-04)                              |
+| `Policy` / `ServiceMiddleware`          | Extensibility frameworks (no production policies yet)                                |
+| `*ServiceImpl`                          | Mapping-aware delegation; context enforcement                                        |
+| `MappingOrchestrator`                   | ID resolution, post-create mapping, compensation errors                              |
+| `EntityMappingStore`                    | Platform↔provider ID persistence boundary                                            |
+| `InMemoryEntityMappingStore`            | Dev/test implementation                                                              |
+| `PostgresEntityMappingStore`            | Production-capable PostgreSQL implementation (OSS-110-05)                            |
+| `createEntityMappingStore`              | Bootstrap selection (memory/postgres; no silent prod fallback)                       |
+| `ProviderRegistry` / `ProviderResolver` | Multi-provider registration and selection                                            |
+| Plane providers                         | Accept native IDs; return canonical DTOs (provisional IDs stripped by mapping layer) |
+| Zammad providers                        | Support domain (OSS-110-10); provisional `*_zammad_*` stripped by mapping layer      |
+| `reconcileEntityMappings`               | Lightweight inconsistency detection                                                  |
 
 ---
 

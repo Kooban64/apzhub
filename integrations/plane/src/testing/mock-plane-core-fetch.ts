@@ -16,16 +16,16 @@ import {
 import { createMockPlaneFetch, type MockPlaneApiOptions } from "./mock-plane-api";
 
 interface MutableStore {
-  projects: typeof MOCK_PROJECT[];
-  states: typeof MOCK_STATE[];
-  labels: typeof MOCK_LABEL[];
-  cycles: typeof MOCK_CYCLE[];
-  modules: typeof MOCK_MODULE[];
-  members: typeof MOCK_MEMBER[];
-  issues: typeof MOCK_ISSUE[];
-  comments: typeof MOCK_COMMENT[];
-  activities: typeof MOCK_ACTIVITY[];
-  subscribers: typeof MOCK_SUBSCRIBER[];
+  projects: (typeof MOCK_PROJECT)[];
+  states: (typeof MOCK_STATE)[];
+  labels: (typeof MOCK_LABEL)[];
+  cycles: (typeof MOCK_CYCLE)[];
+  modules: (typeof MOCK_MODULE)[];
+  members: (typeof MOCK_MEMBER)[];
+  issues: (typeof MOCK_ISSUE)[];
+  comments: (typeof MOCK_COMMENT)[];
+  activities: (typeof MOCK_ACTIVITY)[];
+  subscribers: (typeof MOCK_SUBSCRIBER)[];
   webhooks: Array<{
     id: string;
     url: string;
@@ -49,15 +49,18 @@ function filterByUpdatedAt<T extends { updated_at?: string; created_at?: string 
   let result = [...items];
   const updatedGte = parsed.searchParams.get("updated_at__gte");
   if (updatedGte) {
-    result = result.filter((item) => (item.updated_at ?? item.created_at ?? "") >= updatedGte);
+    result = result.filter(
+      (item) => (item.updated_at ?? item.created_at ?? "") >= updatedGte,
+    );
   }
   const updatedLte = parsed.searchParams.get("updated_at__lte");
   if (updatedLte) {
-    result = result.filter((item) => (item.updated_at ?? item.created_at ?? "") <= updatedLte);
+    result = result.filter(
+      (item) => (item.updated_at ?? item.created_at ?? "") <= updatedLte,
+    );
   }
   return result;
 }
-
 
 function jsonResponse(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
@@ -82,9 +85,9 @@ export function pathnameOf(input: string): string {
 }
 
 function filterIssues(
-  issues: typeof MOCK_ISSUE[],
+  issues: (typeof MOCK_ISSUE)[],
   url: string,
-): typeof MOCK_ISSUE[] {
+): (typeof MOCK_ISSUE)[] {
   const parsed = new URL(url);
   let result = [...issues];
 
@@ -168,9 +171,7 @@ function filterIssues(
 }
 
 /** Full Plane core API mock for contract tests (includes issues/tasks). */
-export function createMockPlaneCoreFetch(
-  options: MockPlaneApiOptions = {},
-): FetchFn {
+export function createMockPlaneCoreFetch(options: MockPlaneApiOptions = {}): FetchFn {
   const baseFetch = createMockPlaneFetch(options);
   const store: MutableStore = {
     projects: [{ ...MOCK_PROJECT }],
@@ -208,12 +209,13 @@ export function createMockPlaneCoreFetch(
     const pathname = pathnameOf(input);
 
     if (!headers?.["X-Api-Key"] && options.requireApiKey !== false) {
-      return jsonResponse({ error_code: "INVALID_TOKEN", message: "Missing API key" }, 401);
+      return jsonResponse(
+        { error_code: "INVALID_TOKEN", message: "Missing API key" },
+        401,
+      );
     }
 
-    if (
-      options.unsupportedEndpoints?.some((endpoint) => pathname.includes(endpoint))
-    ) {
+    if (options.unsupportedEndpoints?.some((endpoint) => pathname.includes(endpoint))) {
       return jsonResponse(
         { error_code: "NOT_FOUND", message: "Unsupported endpoint" },
         404,
@@ -235,12 +237,16 @@ export function createMockPlaneCoreFetch(
     // Webhooks
     if (pathname.includes("/webhooks/")) {
       if (options.rateLimitWebhooks) {
-        return jsonResponse({ error_code: "RATE_LIMITED", message: "Too many requests" }, 429);
+        return jsonResponse(
+          { error_code: "RATE_LIMITED", message: "Too many requests" },
+          429,
+        );
       }
       if (options.webhookStatus && options.webhookStatus >= 400) {
         return jsonResponse(
           {
-            error_code: options.webhookStatus === 404 ? "WEBHOOK_NOT_FOUND" : "WEBHOOK_FAILED",
+            error_code:
+              options.webhookStatus === 404 ? "WEBHOOK_NOT_FOUND" : "WEBHOOK_FAILED",
             message: "Webhook operation failed",
           },
           options.webhookStatus,
@@ -293,9 +299,13 @@ export function createMockPlaneCoreFetch(
                 ? Boolean(body.project)
                 : store.webhooks[index]!.project,
             issue:
-              body.issue !== undefined ? Boolean(body.issue) : store.webhooks[index]!.issue,
+              body.issue !== undefined
+                ? Boolean(body.issue)
+                : store.webhooks[index]!.issue,
             cycle:
-              body.cycle !== undefined ? Boolean(body.cycle) : store.webhooks[index]!.cycle,
+              body.cycle !== undefined
+                ? Boolean(body.cycle)
+                : store.webhooks[index]!.cycle,
             module:
               body.module !== undefined
                 ? Boolean(body.module)
@@ -342,7 +352,9 @@ export function createMockPlaneCoreFetch(
     if (pathname.match(/\/projects\/[^/]+\/$/) && method === "GET") {
       const id = pathname.match(/\/projects\/([^/]+)\/$/)?.[1];
       const project = store.projects.find((item) => item.id === id);
-      return project ? jsonResponse(project) : jsonResponse({ error_code: "PROJECT_NOT_FOUND" }, 404);
+      return project
+        ? jsonResponse(project)
+        : jsonResponse({ error_code: "PROJECT_NOT_FOUND" }, 404);
     }
 
     if (pathname.endsWith("/projects/") && method === "POST") {
@@ -455,7 +467,9 @@ export function createMockPlaneCoreFetch(
         }
       }
 
-      const commentItemMatch = pathname.match(/\/issues\/([^/]+)\/comments\/([^/]+)\/$/);
+      const commentItemMatch = pathname.match(
+        /\/issues\/([^/]+)\/comments\/([^/]+)\/$/,
+      );
       if (commentItemMatch) {
         const commentId = commentItemMatch[2]!;
         const index = store.comments.findIndex((item) => item.id === commentId);
@@ -495,7 +509,9 @@ export function createMockPlaneCoreFetch(
         return jsonResponse(store.activities.filter((item) => item.issue === issueId));
       }
 
-      const subscribersListMatch = pathname.match(/\/issues\/([^/]+)\/issue-subscribers\/$/);
+      const subscribersListMatch = pathname.match(
+        /\/issues\/([^/]+)\/issue-subscribers\/$/,
+      );
       if (subscribersListMatch) {
         const issueId = subscribersListMatch[1]!;
         if (method === "GET") {
@@ -540,15 +556,15 @@ export function createMockPlaneCoreFetch(
           ...MOCK_ISSUE,
           id: nextId("issue", store.issues),
           name: String(body.name ?? "New issue"),
-          description_html: body.description_html ? String(body.description_html) : undefined,
+          description_html: body.description_html
+            ? String(body.description_html)
+            : undefined,
           description_stripped: body.description_html
             ? String(body.description_html).replace(/<[^>]+>/g, "")
             : undefined,
           state: body.state ? String(body.state) : MOCK_ISSUE.state,
           priority: body.priority ? String(body.priority) : "none",
-          assignees: Array.isArray(body.assignees)
-            ? (body.assignees as string[])
-            : [],
+          assignees: Array.isArray(body.assignees) ? (body.assignees as string[]) : [],
           labels: Array.isArray(body.labels) ? (body.labels as string[]) : [],
           cycle: body.cycle === undefined ? null : (body.cycle as string | null),
           module: body.module === undefined ? null : (body.module as string | null),
@@ -557,7 +573,8 @@ export function createMockPlaneCoreFetch(
             body.estimate_point === undefined || body.estimate_point === null
               ? null
               : Number(body.estimate_point),
-          start_date: body.start_date === undefined ? null : (body.start_date as string | null),
+          start_date:
+            body.start_date === undefined ? null : (body.start_date as string | null),
           target_date:
             body.target_date === undefined ? null : (body.target_date as string | null),
           archived_at: null,
@@ -576,7 +593,10 @@ export function createMockPlaneCoreFetch(
         if (method === "GET") {
           return index >= 0
             ? jsonResponse(store.issues[index])
-            : jsonResponse({ error_code: "ISSUE_NOT_FOUND", message: "Issue not found" }, 404);
+            : jsonResponse(
+                { error_code: "ISSUE_NOT_FOUND", message: "Issue not found" },
+                404,
+              );
         }
 
         if (method === "PATCH" && index >= 0) {
@@ -598,11 +618,16 @@ export function createMockPlaneCoreFetch(
                 : current.assignees,
             labels:
               body.labels !== undefined ? (body.labels as string[]) : current.labels,
-            cycle: body.cycle !== undefined ? (body.cycle as string | null) : current.cycle,
+            cycle:
+              body.cycle !== undefined ? (body.cycle as string | null) : current.cycle,
             module:
-              body.module !== undefined ? (body.module as string | null) : current.module,
+              body.module !== undefined
+                ? (body.module as string | null)
+                : current.module,
             parent:
-              body.parent !== undefined ? (body.parent as string | null) : current.parent,
+              body.parent !== undefined
+                ? (body.parent as string | null)
+                : current.parent,
             estimate_point:
               body.estimate_point !== undefined
                 ? (body.estimate_point as number | null)
@@ -694,7 +719,10 @@ export function createMockPlaneCoreFetch(
 
       if (pathname.endsWith(`/${handler.segment}/`) && method === "POST") {
         const body = parseBody(init);
-        const id = nextId(handler.segment.slice(0, 4), store[handler.collection] as { id: string }[]);
+        const id = nextId(
+          handler.segment.slice(0, 4),
+          store[handler.collection] as { id: string }[],
+        );
         const created = handler.factory(body, id);
         (store[handler.collection] as unknown[]).push(created);
         return jsonResponse(created, 201);

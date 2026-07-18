@@ -25,8 +25,7 @@ import type { PlaneServiceDeps } from "./plane-operation-runner";
 
 function asSubscriberArray(
   response:
-    | PlanePaginatedResponse<PlaneSubscriberRecord>
-    | readonly PlaneSubscriberRecord[],
+    PlanePaginatedResponse<PlaneSubscriberRecord> | readonly PlaneSubscriberRecord[],
 ): PlanePaginatedResponse<PlaneSubscriberRecord> {
   if (Array.isArray(response)) {
     return {

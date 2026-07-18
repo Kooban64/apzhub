@@ -68,7 +68,11 @@ export function createPostgresCertificationRepos(db: DatabaseExecutor) {
       assertRequiredString(input.name, "name");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<CertificationGateDefinitionRecord>;
       return {
         ...meta,
@@ -108,7 +112,11 @@ export function createPostgresCertificationRepos(db: DatabaseExecutor) {
       }
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<CertificationGateEvaluationRecord>;
       return {
         ...meta,
@@ -147,7 +155,11 @@ export function createPostgresCertificationRepos(db: DatabaseExecutor) {
       assertRequiredString(input.name, "name");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<CertificationRuleRecord>;
       return {
         ...meta,
@@ -175,9 +187,7 @@ export function createPostgresCertificationRepos(db: DatabaseExecutor) {
       assertRequiredString(input.action, "action");
       assertRequiredString(input.summary, "summary");
       const id =
-        typeof input.id === "string" && input.id.length > 0
-          ? input.id
-          : randomUUID();
+        typeof input.id === "string" && input.id.length > 0 ? input.id : randomUUID();
       const row = {
         id,
         tenantId: ctx.tenantId,
@@ -202,10 +212,7 @@ export function createPostgresCertificationRepos(db: DatabaseExecutor) {
         .where(
           and(
             eq(testingCertificationAudit.tenantId, ctx.tenantId),
-            eq(
-              testingCertificationAudit.certificationRecordId,
-              certificationRecordId,
-            ),
+            eq(testingCertificationAudit.certificationRecordId, certificationRecordId),
           ),
         );
       const items = rows
@@ -236,9 +243,7 @@ export function createPostgresCertificationRepos(db: DatabaseExecutor) {
       assertRequiredString(input.certificationRecordId, "certificationRecordId");
       assertRequiredString(input.toStatus, "toStatus");
       const id =
-        typeof input.id === "string" && input.id.length > 0
-          ? input.id
-          : randomUUID();
+        typeof input.id === "string" && input.id.length > 0 ? input.id : randomUUID();
       const row = {
         id,
         tenantId: ctx.tenantId,
@@ -252,7 +257,9 @@ export function createPostgresCertificationRepos(db: DatabaseExecutor) {
         correlationId: input.correlationId ?? ctx.correlationId,
         detailsJson: input.detailsJson,
       };
-      await db.insert(testingCertificationHistory).values(certificationHistoryToRow(row));
+      await db
+        .insert(testingCertificationHistory)
+        .values(certificationHistoryToRow(row));
       return row;
     },
     async listByCertification(ctx, certificationRecordId, query) {

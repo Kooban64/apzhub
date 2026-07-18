@@ -8,12 +8,10 @@ export const PLANE_SUPPORTED_VERSION_RANGE = {
 } as const;
 
 export type PlaneHealthStatus =
-  | "disabled"
-  | "misconfigured"
-  | "configured"
-  | "not_probed";
+  "disabled" | "misconfigured" | "configured" | "not_probed";
 
-export type PlaneVersionCompatibilityStatus = "not_checked" | "compatible" | "incompatible";
+export type PlaneVersionCompatibilityStatus =
+  "not_checked" | "compatible" | "incompatible";
 
 export interface PlaneConfigurationDiagnostics {
   readonly integrationEnabled: boolean;
@@ -51,7 +49,9 @@ export function getPlaneConfigurationDiagnostics(
   const validationIssues = validatePlaneIntegrationConfig(planeEnv);
   const failures = validationIssues.filter((issue) => issue.severity === "fail");
 
-  const connectionConfigured = Boolean(planeEnv.PLANE_BASE_URL && planeEnv.PLANE_API_BASE_URL);
+  const connectionConfigured = Boolean(
+    planeEnv.PLANE_BASE_URL && planeEnv.PLANE_API_BASE_URL,
+  );
   const apiTokenPresent = Boolean(planeEnv.PLANE_API_TOKEN);
   const workspaceConfigured = Boolean(planeEnv.PLANE_WORKSPACE_ID);
 

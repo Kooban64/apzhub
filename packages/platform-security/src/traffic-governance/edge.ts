@@ -1,5 +1,8 @@
 import { resolveTrafficPolicy } from "./policies";
-import { applyEnvironmentProfileToLimits, resolveActiveEnvironmentProfile } from "./profiles";
+import {
+  applyEnvironmentProfileToLimits,
+  resolveActiveEnvironmentProfile,
+} from "./profiles";
 import type {
   TrafficGovernanceDecision,
   TrafficPolicyDimension,
@@ -22,14 +25,22 @@ export async function evaluateEdgeTraffic(
 ): Promise<TrafficGovernanceDecision> {
   const policy = resolveTrafficPolicy(context.pathname);
   const profile = resolveActiveEnvironmentProfile();
-  const { limits: effectiveLimits } = applyEnvironmentProfileToLimits(policy.limits, profile);
+  const { limits: effectiveLimits } = applyEnvironmentProfileToLimits(
+    policy.limits,
+    profile,
+  );
   const policyMatch = { policy, source: "registry" as const, effectiveLimits };
   const results = [];
 
   for (const dimension of policy.dimensions) {
     const limitKey = buildLimitKey(dimension, context);
     const limit = effectiveLimits.requestsPerMinute;
-    const sustained = checkMemoryBucket(sustainedBuckets, `${limitKey}:sustained`, limit, 60_000);
+    const sustained = checkMemoryBucket(
+      sustainedBuckets,
+      `${limitKey}:sustained`,
+      limit,
+      60_000,
+    );
     const burstLimit = resolveBurstLimit(effectiveLimits);
     const burst = checkMemoryBucket(
       burstBuckets,
@@ -60,7 +71,10 @@ export async function evaluateEdgeTraffic(
   return buildDecision(true, results, results[results.length - 1]!);
 }
 
-function buildLimitKey(dimension: TrafficPolicyDimension, context: TrafficRequestContext): string {
+function buildLimitKey(
+  dimension: TrafficPolicyDimension,
+  context: TrafficRequestContext,
+): string {
   switch (dimension) {
     case "ip":
       return `ip:${context.ip}`;
@@ -77,10 +91,17 @@ function buildLimitKey(dimension: TrafficPolicyDimension, context: TrafficReques
   }
 }
 
-function resolveBurstLimit(limits: { requestsPerMinute: number; burstMultiplier?: number; burstWindowSeconds?: number }) {
+function resolveBurstLimit(limits: {
+  requestsPerMinute: number;
+  burstMultiplier?: number;
+  burstWindowSeconds?: number;
+}) {
   const multiplier = limits.burstMultiplier ?? 1.5;
   const windowSeconds = limits.burstWindowSeconds ?? 10;
-  return Math.max(1, Math.ceil((limits.requestsPerMinute * multiplier * windowSeconds) / 60));
+  return Math.max(
+    1,
+    Math.ceil((limits.requestsPerMinute * multiplier * windowSeconds) / 60),
+  );
 }
 
 function checkMemoryBucket(
@@ -98,7 +119,12 @@ function checkMemoryBucket(
   }
 
   if (existing.count >= limit) {
-    return { allowed: false, remaining: 0, resetAt: existing.resetAt, count: existing.count };
+    return {
+      allowed: false,
+      remaining: 0,
+      resetAt: existing.resetAt,
+      count: existing.count,
+    };
   }
 
   existing.count += 1;
@@ -164,7 +190,9 @@ export function buildEdgeTrafficDeniedInit(decision: TrafficGovernanceDecision) 
       "Retry-After": String(
         Math.max(
           1,
-          Math.ceil(((decision.blockingResult?.resetAt ?? Date.now()) - Date.now()) / 1000),
+          Math.ceil(
+            ((decision.blockingResult?.resetAt ?? Date.now()) - Date.now()) / 1000,
+          ),
         ),
       ),
     },

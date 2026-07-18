@@ -27,11 +27,12 @@ export interface PlatformQualityPlatformServicesBundle {
   readonly readiness: PlatformQualityReadinessIndicators;
   wrapPlatformQualityWithPipeline(pipeline: RequestPipeline): PlatformQualityGateway;
   wrapPlatformReleaseWithPipeline(pipeline: RequestPipeline): PlatformReleaseGateway;
-  wrapPlatformGovernanceWithPipeline(pipeline: RequestPipeline): PlatformGovernanceGateway;
+  wrapPlatformGovernanceWithPipeline(
+    pipeline: RequestPipeline,
+  ): PlatformGovernanceGateway;
 }
 
-export interface CreatePlatformQualityPlatformServicesInput
-  extends PlatformQualityServiceDeps {
+export interface CreatePlatformQualityPlatformServicesInput extends PlatformQualityServiceDeps {
   readonly domain?: PlatformQualityDomainServices;
 }
 
@@ -106,11 +107,7 @@ export function wrapPlatformQualityWithPipeline(
       pipeline,
       "platformMultiCert",
     ),
-    health: wrapServiceWithPipeline(
-      gateway.health,
-      pipeline,
-      "platformProductHealth",
-    ),
+    health: wrapServiceWithPipeline(gateway.health, pipeline, "platformProductHealth"),
     dashboard: wrapServiceWithPipeline(
       gateway.dashboard,
       pipeline,

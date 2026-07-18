@@ -24,9 +24,7 @@ export {
   mapLifecycleStateToRecoveryStatus,
   mapLifecycleStateToShutdownStatus,
 } from "./integration-transitions";
-export {
-  IntegrationAdapterLifecycleService,
-} from "./integration-lifecycle-service";
+export { IntegrationAdapterLifecycleService } from "./integration-lifecycle-service";
 export type { IntegrationLifecycleTransitionInput } from "./integration-lifecycle-service";
 export {
   DefaultLifecycleParticipant,

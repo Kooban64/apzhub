@@ -203,12 +203,7 @@ describe("APZSEARCH-010 search-projects", () => {
     expect(second.operation).toBe("update");
     expect(second.entity?.title).toBe("Portal v2");
 
-    const life = adapter.publisher.lifecycle(
-      context,
-      project.id,
-      "archived",
-      "done",
-    );
+    const life = adapter.publisher.lifecycle(context, project.id, "archived", "done");
     expect(life.ok).toBe(true);
 
     // Re-publish a fresh entity to exercise remove from published/updated
@@ -234,12 +229,10 @@ describe("APZSEARCH-010 search-projects", () => {
     expect(diag.supportedEntityTypes).toContain("sprint");
     expect(diag.mapperNotes.length).toBeGreaterThan(0);
     expect(adapter.publisher.getLogger().recent().length).toBeGreaterThan(0);
-    expect(
-      adapter.lifecycle.suggestFromDomainStatus("project", "archived"),
-    ).toBe("archived");
-    expect(adapter.lifecycle.suggestFromDomainStatus("project", "draft")).toBe(
-      "draft",
+    expect(adapter.lifecycle.suggestFromDomainStatus("project", "archived")).toBe(
+      "archived",
     );
+    expect(adapter.lifecycle.suggestFromDomainStatus("project", "draft")).toBe("draft");
   });
 
   it("validates mandatory metadata and provider leakage", () => {

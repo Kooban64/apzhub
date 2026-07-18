@@ -1,8 +1,4 @@
-import type {
-  TransportLogEntry,
-  TransportLogFields,
-  TransportLogger,
-} from "./types";
+import type { TransportLogEntry, TransportLogFields, TransportLogger } from "./types";
 
 const SENSITIVE_HEADER_KEYS = [
   "authorization",

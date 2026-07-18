@@ -16,6 +16,6 @@
     "@apzhub/config": "workspace:*",
     "@apzhub/platform-authorization": "workspace:*",
     "@apzhub/testing-contracts": "workspace:*",
-    "drizzle-orm": "^0.44.2"
+    "drizzle-orm": "^0.45.2"
   }
 }

@@ -32,13 +32,9 @@ function Section({
       className="rounded-lg border border-[var(--color-border)] p-3"
       aria-label={title}
     >
-      <h3 className="text-sm font-semibold text-[var(--color-foreground)]">
-        {title}
-      </h3>
+      <h3 className="text-sm font-semibold text-[var(--color-foreground)]">{title}</h3>
       {empty ? (
-        <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
-          None
-        </p>
+        <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">None</p>
       ) : (
         <div className="mt-2">{children}</div>
       )}
@@ -60,27 +56,19 @@ function ItemList({
         const kind = item.kind !== undefined ? String(item.kind) : undefined;
         const key = item.key !== undefined ? String(item.key) : undefined;
         const label =
-          item[labelKey] !== undefined
-            ? String(item[labelKey])
-            : key ?? kind ?? id;
+          item[labelKey] !== undefined ? String(item[labelKey]) : (key ?? kind ?? id);
         return (
           <li
             key={id}
             className="rounded border border-[var(--color-border)] bg-[var(--color-muted)]/10 px-2 py-1"
             data-testid={`definition-item-${id}`}
           >
-            <span className="font-medium text-[var(--color-foreground)]">
-              {label}
-            </span>
+            <span className="font-medium text-[var(--color-foreground)]">{label}</span>
             {kind ? (
-              <span className="ml-2 text-[var(--color-muted-foreground)]">
-                {kind}
-              </span>
+              <span className="ml-2 text-[var(--color-muted-foreground)]">{kind}</span>
             ) : null}
             {key && key !== label ? (
-              <span className="ml-2 text-[var(--color-muted-foreground)]">
-                {key}
-              </span>
+              <span className="ml-2 text-[var(--color-muted-foreground)]">{key}</span>
             ) : null}
           </li>
         );
@@ -114,8 +102,7 @@ export function DefinitionViewer({
   const conditions = definition.conditions ?? [];
   const variables = definition.variables ?? [];
   const parameters = definition.parameters ?? [];
-  const connections =
-    definition.connections ?? definition.graph?.connections ?? [];
+  const connections = definition.connections ?? definition.graph?.connections ?? [];
   const graphNodes = definition.graph?.nodes ?? [];
 
   return (

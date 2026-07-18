@@ -25,19 +25,24 @@ export function isSessionExpired(expiresAt: string | Date): boolean {
 }
 
 export function validateSessionActive(
-  session: { readonly session: { readonly expiresAt: string | Date } } | null | undefined,
+  session:
+    { readonly session: { readonly expiresAt: string | Date } } | null | undefined,
 ): SessionValidationResult {
   if (!session?.session) {
     return {
       valid: false,
-      issues: [{ code: "session_missing", message: "Session is required.", severity: "fail" }],
+      issues: [
+        { code: "session_missing", message: "Session is required.", severity: "fail" },
+      ],
     };
   }
 
   if (isSessionExpired(session.session.expiresAt)) {
     return {
       valid: false,
-      issues: [{ code: "session_expired", message: "Session has expired.", severity: "fail" }],
+      issues: [
+        { code: "session_expired", message: "Session has expired.", severity: "fail" },
+      ],
     };
   }
 
@@ -53,7 +58,13 @@ export function validateTenantSessionConsistency(
   if (!input.userId) {
     return {
       valid: false,
-      issues: [{ code: "user_missing", message: "User binding is required.", severity: "fail" }],
+      issues: [
+        {
+          code: "user_missing",
+          message: "User binding is required.",
+          severity: "fail",
+        },
+      ],
     };
   }
 

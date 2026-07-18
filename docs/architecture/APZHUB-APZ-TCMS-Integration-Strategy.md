@@ -3,7 +3,7 @@
 **Product:** APZ TCMS  
 **Milestone:** APZTCMS-001  
 **Status:** Integration strategy — **planning only**; no adapters or webhooks in 001  
-**Authority:** [008](../008-module-platform-service-connector-architecture.md) · [010](../010-api-gateway-integration-communication-standards.md) · [026](../026-integration-sdk-adapter-framework-integration-manifest-specification.md) · [Reference Adapter Standard](./REFERENCE-ADAPTER-STANDARD.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)
+**Authority:** [008](../008-module-plugin-connector-architecture.md) · [010](../010-api-gateway-integration-communication-standards.md) · [026](../026-integration-sdk-adapter-framework-integration-manifest-specification.md) · [Reference Adapter Standard](./REFERENCE-ADAPTER-STANDARD.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)
 
 ---
 

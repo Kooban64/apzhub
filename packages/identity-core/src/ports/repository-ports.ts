@@ -80,10 +80,7 @@ type CrudPort<TEntity, TId> = {
 };
 
 export type IdentityUserRepositoryPort = CrudPort<IdentityUser, IdentityUserId>;
-export type IdentityGroupRepositoryPort = CrudPort<
-  IdentityGroup,
-  IdentityGroupId
->;
+export type IdentityGroupRepositoryPort = CrudPort<IdentityGroup, IdentityGroupId>;
 export type IdentityRoleRepositoryPort = CrudPort<IdentityRole, IdentityRoleId>;
 export type IdentityPermissionAssignmentRepositoryPort = CrudPort<
   IdentityPermissionAssignment,
@@ -95,7 +92,10 @@ export type IdentityOrganizationRepositoryPort = CrudPort<
 >;
 export type IdentityTenantRepositoryPort = {
   create(ctx: IdentityRequestContext, entity: IdentityTenant): Promise<IdentityTenant>;
-  get(ctx: IdentityRequestContext, id: IdentityTenantId): Promise<IdentityTenant | null>;
+  get(
+    ctx: IdentityRequestContext,
+    id: IdentityTenantId,
+  ): Promise<IdentityTenant | null>;
   update(ctx: IdentityRequestContext, entity: IdentityTenant): Promise<IdentityTenant>;
   list(ctx: IdentityRequestContext): Promise<readonly IdentityTenant[]>;
 };
@@ -145,14 +145,8 @@ export type IdentityDeactivationRepositoryPort = {
   ): Promise<IdentityDeactivation | null>;
   list(ctx: IdentityRequestContext): Promise<readonly IdentityDeactivation[]>;
 };
-export type IdentityStatusRepositoryPort = CrudPort<
-  IdentityStatus,
-  IdentityStatusId
->;
-export type IdentityPolicyRepositoryPort = CrudPort<
-  IdentityPolicy,
-  IdentityPolicyId
->;
+export type IdentityStatusRepositoryPort = CrudPort<IdentityStatus, IdentityStatusId>;
+export type IdentityPolicyRepositoryPort = CrudPort<IdentityPolicy, IdentityPolicyId>;
 export type IdentityAuditRepositoryPort = {
   append(
     ctx: IdentityRequestContext,

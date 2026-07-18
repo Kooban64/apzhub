@@ -47,7 +47,9 @@ export class PlatformGovernanceService {
     const capabilities = await this.repositories.governance.listCapabilities();
     const dependencies = (
       await Promise.all(
-        capabilities.map((cap) => this.repositories.governance.listDependencies(cap.capabilityId)),
+        capabilities.map((cap) =>
+          this.repositories.governance.listDependencies(cap.capabilityId),
+        ),
       )
     ).flat();
     const enablements = await this.repositories.governance.listEnablements();

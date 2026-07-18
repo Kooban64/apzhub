@@ -46,7 +46,9 @@ import {
 const testing = createTestingPlatformServicesForProduction({ postgresDb });
 
 // Tests — explicit opt-in
-const testingTest = createTestingPlatformServicesForTest({ allowInMemoryPersistence: true });
+const testingTest = createTestingPlatformServicesForTest({
+  allowInMemoryPersistence: true,
+});
 
 const { gateway } = createPlatformServices({
   testing: isTestingServiceEnabled() ? testing : undefined,
@@ -57,10 +59,10 @@ const { gateway } = createPlatformServices({
 await gateway.testing.plans.list(ctx);
 ```
 
-| Env | Effect |
-|-----|--------|
+| Env                            | Effect                                                       |
+| ------------------------------ | ------------------------------------------------------------ |
 | `TESTING_SERVICE_ENABLED=true` | App should wire testing bundle into `createPlatformServices` |
-| unset / other | `gateway.testing` throws controlled configuration error |
+| unset / other                  | `gateway.testing` throws controlled configuration error      |
 
 Factories: `createTestingPlatformServices`, `createTestingPlatformServicesForProduction`, `createTestingPlatformServicesForTest`.
 
@@ -78,11 +80,11 @@ const { gateway } = createPlatformServices({
 });
 ```
 
-| Mode | Env |
-|------|-----|
-| allow-all | default outside production; explicit tests/dev |
+| Mode       | Env                                                                         |
+| ---------- | --------------------------------------------------------------------------- |
+| allow-all  | default outside production; explicit tests/dev                              |
 | production | default when `NODE_ENV=production` and mode unset; requires access resolver |
-| deny-all | explicit tests |
+| deny-all   | explicit tests                                                              |
 
 Production never silently uses allow-all (`AUTHORIZATION_ALLOW_ALL_IN_PRODUCTION=true` required for break-glass).
 
@@ -94,9 +96,9 @@ import { createPlatformServicesFromEnv } from "@apzhub/platform-services";
 const { gateway, mappingStore } = await createPlatformServicesFromEnv();
 ```
 
-| Mode | Env |
-|------|-----|
-| memory | default outside production; tests |
+| Mode     | Env                                                    |
+| -------- | ------------------------------------------------------ |
+| memory   | default outside production; tests                      |
 | postgres | default in production; requires healthy `DATABASE_URL` |
 
 ## Testing

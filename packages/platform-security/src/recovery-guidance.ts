@@ -56,7 +56,8 @@ export function buildRecoveryGuidance(input: {
     guidance.push({
       id: "platform-healthy",
       title: "No recovery action required",
-      description: "Core dependencies are healthy. Continue monitoring via Operations Console diagnostics.",
+      description:
+        "Core dependencies are healthy. Continue monitoring via Operations Console diagnostics.",
       severity: "info",
     });
   }

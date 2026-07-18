@@ -164,9 +164,10 @@ describe("FieldMapper / Relationship / Collection / Nested", () => {
       ],
       transformers,
     });
-    expect(
-      mapper.map({ name: " Task ", meta: { count: "3" } }, context),
-    ).toEqual({ title: "Task", count: 3 });
+    expect(mapper.map({ name: " Task ", meta: { count: "3" } }, context)).toEqual({
+      title: "Task",
+      count: 3,
+    });
     expect(() => mapper.map({}, context)).toThrow(/Required field/);
   });
 
@@ -419,7 +420,9 @@ describe("createMappingProvider / createDefinition / mocks", () => {
       integrationSlug: "mock",
       definitions: [def],
     });
-    expect(provider.getDefinition("label", "default", "provider_to_canonical")).toBe(def);
+    expect(provider.getDefinition("label", "default", "provider_to_canonical")).toBe(
+      def,
+    );
     expect(MOCK_MAPPING_FIXTURES.success.entityType).toBe("task");
 
     const failProvider = createMockMappingProvider({
@@ -505,7 +508,9 @@ describe("Coverage edges — transformers / mappers / registry / pipeline", () =
 
     const registry = createDefaultValueTransformerRegistry();
     expect(registry.list().length).toBeGreaterThan(0);
-    expect(() => registry.register(createDateTransformer())).toThrow(/already registered/);
+    expect(() => registry.register(createDateTransformer())).toThrow(
+      /already registered/,
+    );
   });
 
   it("covers field mapper nested paths, defaults, and omitUndefined", () => {
@@ -519,7 +524,9 @@ describe("Coverage edges — transformers / mappers / registry / pipeline", () =
       transformers,
       omitUndefined: false,
     });
-    expect(mapper.map({ x: undefined }, context)).toMatchObject({ nested: { value: "fallback" } });
+    expect(mapper.map({ x: undefined }, context)).toMatchObject({
+      nested: { value: "fallback" },
+    });
 
     const omit = createFieldMapper({
       fieldMaps: [{ source: "gone", target: "out", transformer: "string" }],
@@ -544,11 +551,15 @@ describe("Coverage edges — transformers / mappers / registry / pipeline", () =
       ),
     ).toBe("user_plane_u1");
     expect(
-      rel.mapIds({ owner: null }, {
-        relationName: "owner",
-        sourceField: "owner",
-        targetEntityType: "user",
-      }, context),
+      rel.mapIds(
+        { owner: null },
+        {
+          relationName: "owner",
+          sourceField: "owner",
+          targetEntityType: "user",
+        },
+        context,
+      ),
     ).toBeUndefined();
     expect(() =>
       rel.mapIds(
@@ -601,12 +612,18 @@ describe("Coverage edges — transformers / mappers / registry / pipeline", () =
     ).toBe("raw");
 
     const collection = createCollectionMapper();
-    expect(() => collection.map("nope" as unknown as unknown[], { mapItem: (i) => i }, context)).toThrow();
+    expect(() =>
+      collection.map("nope" as unknown as unknown[], { mapItem: (i) => i }, context),
+    ).toThrow();
     expect(
-      collection.map([1, 2, 3], {
-        mapItem: (item) => item,
-        filter: (item) => (item as number) > 1,
-      }, context),
+      collection.map(
+        [1, 2, 3],
+        {
+          mapItem: (item) => item,
+          filter: (item) => (item as number) > 1,
+        },
+        context,
+      ),
     ).toEqual([2, 3]);
     expect(collection.map(null, { mapItem: (i) => i }, context)).toEqual([]);
 
@@ -614,7 +631,11 @@ describe("Coverage edges — transformers / mappers / registry / pipeline", () =
     expect(nested.readNestedValue({ a: { b: 1 } }, "a.b")).toBe(1);
     expect(nested.readNestedValue(null, "a")).toBeUndefined();
     expect(
-      await nested.mapNested({}, { path: "missing", definition: MOCK_MAPPING_FIXTURES.success }, context),
+      await nested.mapNested(
+        {},
+        { path: "missing", definition: MOCK_MAPPING_FIXTURES.success },
+        context,
+      ),
     ).toBeUndefined();
     try {
       await nested.mapNested(
@@ -652,7 +673,11 @@ describe("Coverage edges — transformers / mappers / registry / pipeline", () =
       expect(error).toBeTruthy();
     }
     expect(
-      await executeNestedDefinition(MOCK_MAPPING_FIXTURES.success, { id: "1", title: "T" }, context),
+      await executeNestedDefinition(
+        MOCK_MAPPING_FIXTURES.success,
+        { id: "1", title: "T" },
+        context,
+      ),
     ).toMatchObject({ title: "T" });
   });
 
@@ -854,7 +879,10 @@ describe("Coverage edges — transformers / mappers / registry / pipeline", () =
   });
 
   it("covers remaining transformer and enum/relationship branches", () => {
-    const enumTx = createEnumValueTransformer("prio", (value) => String(value) as "low");
+    const enumTx = createEnumValueTransformer(
+      "prio",
+      (value) => String(value) as "low",
+    );
     expect(enumTx.transform("low")).toBe("low");
 
     const registry = createDefaultValueTransformerRegistry();
@@ -876,7 +904,13 @@ describe("Coverage edges — transformers / mappers / registry / pipeline", () =
     expect(field.map({ a: null }, context)).toEqual({});
 
     const rel = createRelationshipMapper();
-    expect(rel.mapIds(null, { relationName: "r", sourceField: "x", targetEntityType: "t" }, context)).toBeUndefined();
+    expect(
+      rel.mapIds(
+        null,
+        { relationName: "r", sourceField: "x", targetEntityType: "t" },
+        context,
+      ),
+    ).toBeUndefined();
     expect(
       rel.mapIds(
         { ids: ["1"] },
@@ -902,7 +936,9 @@ describe("Coverage edges — transformers / mappers / registry / pipeline", () =
     expect(mapUnknownToMappingError("string-error", "c").message).toBe(
       "Mapping execution failed",
     );
-    expect(mapUnknownToMappingError(new Error("safe plain"), "c").message).toContain("safe");
+    expect(mapUnknownToMappingError(new Error("safe plain"), "c").message).toContain(
+      "safe",
+    );
     expect(isMappingError(null)).toBe(false);
     expect(isMappingError({ category: "mapping" })).toBe(false);
   });

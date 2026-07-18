@@ -8,23 +8,23 @@
 
 ## Checklist
 
-| Area | Status |
-| ---- | ------ |
-| Canonical contracts **0.2.0** · core **0.2.0** · persistence **0.1.0** | ✅ |
-| Platform services **0.23.0** · `gateway.identity.*` | ✅ |
-| RequestPipeline + production authorisation (`identityPlatformOps`) | ✅ |
-| HTTP API + OpenAPI Platform Identity Administration (**1.7.0**) · 36 routes | ✅ |
-| Typed client + mock + query keys | ✅ |
-| Workbench `/workspace/identity` + `platform-identity` manifests (16 sections) | ✅ |
-| Vertical audit `pnpm audit:identity-vertical` | ✅ 0 violations |
-| Composite `pnpm certify:identity-vertical` | ✅ |
-| Prior audits 001–004 | ✅ |
-| Migrations 0052/0053 · no credential columns | ✅ |
-| Certification harness (10 journeys) | ✅ |
-| Scoped coverage lines/functions ≥95% | ✅ **99.00%** / **99.19%** (branches **81.35%**) |
-| Authentication / provisioning / directory sync | ❌ Excluded by design |
-| Event Bus / AI | ❌ Excluded by design |
-| Live Playwright webServer | ⚠️ LIMITED (Testing slug conflict — external) |
+| Area                                                                          | Status                                           |
+| ----------------------------------------------------------------------------- | ------------------------------------------------ |
+| Canonical contracts **0.2.0** · core **0.2.0** · persistence **0.1.0**        | ✅                                               |
+| Platform services **0.23.0** · `gateway.identity.*`                           | ✅                                               |
+| RequestPipeline + production authorisation (`identityPlatformOps`)            | ✅                                               |
+| HTTP API + OpenAPI Platform Identity Administration (**1.7.0**) · 36 routes   | ✅                                               |
+| Typed client + mock + query keys                                              | ✅                                               |
+| Workbench `/workspace/identity` + `platform-identity` manifests (16 sections) | ✅                                               |
+| Vertical audit `pnpm audit:identity-vertical`                                 | ✅ 0 violations                                  |
+| Composite `pnpm certify:identity-vertical`                                    | ✅                                               |
+| Prior audits 001–004                                                          | ✅                                               |
+| Migrations 0052/0053 · no credential columns                                  | ✅                                               |
+| Certification harness (10 journeys)                                           | ✅                                               |
+| Scoped coverage lines/functions ≥95%                                          | ✅ **99.00%** / **99.19%** (branches **81.35%**) |
+| Authentication / provisioning / directory sync                                | ❌ Excluded by design                            |
+| Event Bus / AI                                                                | ❌ Excluded by design                            |
+| Live Playwright webServer                                                     | ⚠️ LIMITED (Testing slug conflict — external)    |
 
 ## Why PRODUCTION_READY_WITH_LIMITATIONS
 

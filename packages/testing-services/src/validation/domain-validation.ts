@@ -56,10 +56,7 @@ export function assertValidExecutionApprovalState(value: string): void {
   }
 }
 
-export function assertTraceabilityKinds(
-  sourceKind: string,
-  targetKind: string,
-): void {
+export function assertTraceabilityKinds(sourceKind: string, targetKind: string): void {
   if (sourceKind.length === 0) {
     throw new DomainRuleError("validation", "sourceKind is required");
   }
@@ -130,8 +127,6 @@ export function assertVersionBump(
   }
 }
 
-export function isKnownTraceabilityKind(
-  kind: string,
-): kind is TraceabilityEntityKind {
+export function isKnownTraceabilityKind(kind: string): kind is TraceabilityEntityKind {
   return isTraceabilityEntityKind(kind);
 }

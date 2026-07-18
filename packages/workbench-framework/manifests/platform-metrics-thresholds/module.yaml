@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-thresholds
+name: Metric Thresholds
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metric Thresholds sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metric Thresholds
+    icon: sliders-horizontal
+    route: /workspace/metrics/thresholds
+    order: 120
+    permission: metrics.definition
+  view:
+    title: Metric Thresholds
+    workspace: metrics
+    route: /workspace/metrics/thresholds
+    permission: metrics.definition

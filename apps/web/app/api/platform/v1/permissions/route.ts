@@ -16,7 +16,10 @@ export async function GET(): Promise<NextResponse> {
 
 export async function POST(request: Request): Promise<NextResponse> {
   await getValidatedSession(await headers());
-  const body = (await request.json()) as { permissionKey?: string; description?: string };
+  const body = (await request.json()) as {
+    permissionKey?: string;
+    description?: string;
+  };
 
   if (!body.permissionKey) {
     return NextResponse.json(

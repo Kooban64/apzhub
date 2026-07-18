@@ -73,7 +73,10 @@ describe("SupportLookupSelect", () => {
       );
     });
 
-    await user.type(screen.getByLabelText("Customer ID"), "suser_11111111111111111111111111111111");
+    await user.type(
+      screen.getByLabelText("Customer ID"),
+      "suser_11111111111111111111111111111111",
+    );
     expect(onChange).toHaveBeenCalled();
   });
 
@@ -121,12 +124,7 @@ describe("SupportLookupSelect", () => {
 
     rerender(
       wrap(
-        <SupportLookupSelect
-          kind="groups"
-          label="Group"
-          value=""
-          onChange={vi.fn()}
-        />,
+        <SupportLookupSelect kind="groups" label="Group" value="" onChange={vi.fn()} />,
       ),
     );
     await waitFor(() => expect(listSupportGroups).toHaveBeenCalled());
@@ -137,12 +135,7 @@ describe("SupportLookupSelect", () => {
 
     render(
       wrap(
-        <SupportLookupSelect
-          kind="users"
-          label="Owner"
-          value=""
-          onChange={vi.fn()}
-        />,
+        <SupportLookupSelect kind="users" label="Owner" value="" onChange={vi.fn()} />,
       ),
     );
 

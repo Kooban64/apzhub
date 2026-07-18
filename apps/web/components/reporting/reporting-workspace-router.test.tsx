@@ -37,9 +37,7 @@ describe("ReportingWorkspaceRouter", () => {
   it("renders templates from pathname", async () => {
     render(wrap(<ReportingWorkspaceRouter />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Templates" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Templates" })).toBeTruthy();
       expect(screen.getByText(MOCK_REPORT_TEMPLATE.name)).toBeTruthy();
     });
   });

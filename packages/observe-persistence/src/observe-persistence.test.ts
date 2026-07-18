@@ -55,15 +55,13 @@ describe("observe-persistence", () => {
   });
 
   it("requires explicit postgres for production helper", () => {
-    expect(() =>
-      createProductionObservePersistence({} as never),
-    ).toThrow(/explicit postgres/);
-    expect(() => createObservePersistence({ mode: "postgres" })).toThrow(
-      /requires db/,
+    expect(() => createProductionObservePersistence({} as never)).toThrow(
+      /explicit postgres/,
     );
-    expect(() =>
-      createObservePersistence({ mode: "nope" as never }),
-    ).toThrow(/Unsupported/);
+    expect(() => createObservePersistence({ mode: "postgres" })).toThrow(/requires db/);
+    expect(() => createObservePersistence({ mode: "nope" as never })).toThrow(
+      /Unsupported/,
+    );
     expect(() => createObservePersistenceForTest({})).toThrow(
       /allowInMemoryPersistence/,
     );
@@ -85,9 +83,7 @@ describe("observe-persistence", () => {
       updatedAt: "2026-07-17T11:00:00.000Z",
     };
     await repos.healthChecks.update(ctx, updated);
-    expect((await repos.healthChecks.get(ctx, health.id))?.status).toBe(
-      "degraded",
-    );
+    expect((await repos.healthChecks.get(ctx, health.id))?.status).toBe("degraded");
     expect(foundation.canTransitionHealth("healthy", "degraded")).toBe(true);
     expect(await repos.healthChecks.list(ctx)).toHaveLength(1);
   });

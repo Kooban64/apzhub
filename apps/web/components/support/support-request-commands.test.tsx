@@ -205,6 +205,8 @@ describe("SupportRequestCommands", () => {
 
     await user.click(screen.getByTestId("support-command-reopen"));
     await waitFor(() => expect(screen.getByRole("alert")).toBeTruthy());
-    expect(screen.getByRole("alert").textContent?.toLowerCase()).not.toContain("zammad");
+    expect(screen.getByRole("alert").textContent?.toLowerCase()).not.toContain(
+      "zammad",
+    );
   });
 });

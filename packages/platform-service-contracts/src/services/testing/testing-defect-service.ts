@@ -11,10 +11,7 @@ import type {
 export interface TestingDefectService {
   list(ctx: ServiceRequestContext): Promise<readonly DefectLink[]>;
   get(ctx: ServiceRequestContext, id: DefectLinkId): Promise<DefectLink>;
-  create(
-    ctx: ServiceRequestContext,
-    input: DefectLinkCreateInput,
-  ): Promise<DefectLink>;
+  create(ctx: ServiceRequestContext, input: DefectLinkCreateInput): Promise<DefectLink>;
   link(
     ctx: ServiceRequestContext,
     id: DefectLinkId,

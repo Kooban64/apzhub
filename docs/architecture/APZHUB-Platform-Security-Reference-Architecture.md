@@ -10,16 +10,16 @@ Strengthen platform-level security without redesigning Identity, Authorization, 
 
 ## Security domains
 
-| Domain | Owner | M8-06 posture |
-|--------|-------|---------------|
-| Authentication | `@apzhub/auth` + Identity | Session policy (PRH-006), secure cookies, tenant enrichment via `getValidatedSession()` |
-| Authorization | `@apzhub/platform-authorization` + `@apzhub/platform-services` + `/api/v1` | `requirePlatformPermission()` on privileged APIs; gateway pipeline authz (OSS-110-06); HTTP surface (OSS-110-07, ADR-0051) |
-| Tenant isolation | Identity + Authorization | Tenant context on session; RLS via persistence layer |
-| Secrets | `@apzhub/config/governance` | Registry, masking, tiered validation, `ensureEnvironmentValid()`; Vault interface only (PCv2-04) |
-| Headers | `HttpSecurityHeaderService` (PRH-003) | Centralised XFO, XCTO, Referrer-Policy, HSTS (prod), COOP/CORP/COEP, OAC, Cache-Control (API), CSP (enforced prod / report-only dev), Permissions-Policy; `poweredByHeader: false` |
-| Rate limiting | `TrafficGovernanceService` (PRH-005) | Canonical policies; IP/user/tenant/endpoint/service dimensions; burst handling; Redis + memory backends |
-| Audit | Authorization + Governance | Existing audit streams; no duplicate audit in security package |
-| Input validation | Platform API + config | Zod at boundaries; guard returns standard 401/403 envelope |
+| Domain           | Owner                                                                      | M8-06 posture                                                                                                                                                                      |
+| ---------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authentication   | `@apzhub/auth` + Identity                                                  | Session policy (PRH-006), secure cookies, tenant enrichment via `getValidatedSession()`                                                                                            |
+| Authorization    | `@apzhub/platform-authorization` + `@apzhub/platform-services` + `/api/v1` | `requirePlatformPermission()` on privileged APIs; gateway pipeline authz (OSS-110-06); HTTP surface (OSS-110-07, ADR-0051)                                                         |
+| Tenant isolation | Identity + Authorization                                                   | Tenant context on session; RLS via persistence layer                                                                                                                               |
+| Secrets          | `@apzhub/config/governance`                                                | Registry, masking, tiered validation, `ensureEnvironmentValid()`; Vault interface only (PCv2-04)                                                                                   |
+| Headers          | `HttpSecurityHeaderService` (PRH-003)                                      | Centralised XFO, XCTO, Referrer-Policy, HSTS (prod), COOP/CORP/COEP, OAC, Cache-Control (API), CSP (enforced prod / report-only dev), Permissions-Policy; `poweredByHeader: false` |
+| Rate limiting    | `TrafficGovernanceService` (PRH-005)                                       | Canonical policies; IP/user/tenant/endpoint/service dimensions; burst handling; Redis + memory backends                                                                            |
+| Audit            | Authorization + Governance                                                 | Existing audit streams; no duplicate audit in security package                                                                                                                     |
+| Input validation | Platform API + config                                                      | Zod at boundaries; guard returns standard 401/403 envelope                                                                                                                         |
 
 ## APIs
 

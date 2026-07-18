@@ -1,5 +1,8 @@
 import type { AuthorizationContext } from "./authorization-types";
-import { getSharedAuthorizationService, provisionDefaultAuthorizationForUser } from "./index";
+import {
+  getSharedAuthorizationService,
+  provisionDefaultAuthorizationForUser,
+} from "./index";
 import { AuthorizationService } from "./authorization-service";
 
 export * from "./index";
@@ -26,9 +29,16 @@ export async function resolveSessionAuthorization(
 
   if (process.env.DATABASE_URL) {
     try {
-      const { resolvePostgresSessionAuthorization } = await import("./postgres-authorization-store");
-      const postgresSnapshot = await resolvePostgresSessionAuthorization(input, service);
-      if (postgresSnapshot.permissions.length > 0 || postgresSnapshot.roles.length > 0) {
+      const { resolvePostgresSessionAuthorization } =
+        await import("./postgres-authorization-store");
+      const postgresSnapshot = await resolvePostgresSessionAuthorization(
+        input,
+        service,
+      );
+      if (
+        postgresSnapshot.permissions.length > 0 ||
+        postgresSnapshot.roles.length > 0
+      ) {
         return postgresSnapshot;
       }
     } catch {

@@ -117,9 +117,7 @@ function toImportDomain(row: {
     startedAt: row.startedAt,
     completedAt: row.completedAt,
     canonicalSnapshot: row.canonicalSnapshot,
-    pipelineRunId: row.pipelineRunId
-      ? asPipelineRunId(row.pipelineRunId)
-      : undefined,
+    pipelineRunId: row.pipelineRunId ? asPipelineRunId(row.pipelineRunId) : undefined,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
     createdBy: row.createdBy,
@@ -181,9 +179,7 @@ function toRunDomain(row: {
       automationImportId: links.automationImportId,
       coverageMetricIds: links.coverageMetricIds,
       executionIds: links.executionIds,
-      releaseId: links.releaseId
-        ? asReleaseId(String(links.releaseId))
-        : undefined,
+      releaseId: links.releaseId ? asReleaseId(String(links.releaseId)) : undefined,
       certificationRecordId: links.certificationRecordId
         ? asCertificationRecordId(String(links.certificationRecordId))
         : undefined,
@@ -527,10 +523,7 @@ export function createPipelineImportService(
         "pipeline_run",
         runId,
       );
-      const merged = [
-        ...(run.artifactsJson as ArtifactReference[]),
-        ...artifacts,
-      ];
+      const merged = [...(run.artifactsJson as ArtifactReference[]), ...artifacts];
       const updated = await rt.persistence.pipelineRuns.update(
         rctx,
         run.id,
@@ -677,22 +670,20 @@ export function createPipelineImportService(
         rctx,
         importId,
       );
-      return history.items.map(
-        (row): PipelineImportHistory => ({
-          id: asPipelineImportHistoryId(row.id),
-          tenantId: row.tenantId,
-          organisationId: row.organisationId,
-          importId: asPipelineImportId(row.importId),
-          eventType: row.eventType,
-          occurredAt: row.occurredAt,
-          actorUserId: row.actorUserId,
-          summary: row.summary,
-          details: row.details,
-          adapterVersion: row.adapterVersion,
-          normalizationNotes: row.normalizationNotes,
-          correlationId: row.correlationId,
-        }),
-      );
+      return history.items.map((row): PipelineImportHistory => ({
+        id: asPipelineImportHistoryId(row.id),
+        tenantId: row.tenantId,
+        organisationId: row.organisationId,
+        importId: asPipelineImportId(row.importId),
+        eventType: row.eventType,
+        occurredAt: row.occurredAt,
+        actorUserId: row.actorUserId,
+        summary: row.summary,
+        details: row.details,
+        adapterVersion: row.adapterVersion,
+        normalizationNotes: row.normalizationNotes,
+        correlationId: row.correlationId,
+      }));
     },
 
     async getImport(ctx, id) {

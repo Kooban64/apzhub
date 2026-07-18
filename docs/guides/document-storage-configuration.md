@@ -5,11 +5,11 @@
 
 ## Modes
 
-| `mode` | Production | Notes |
-|--------|------------|-------|
-| `filesystem` | Allowed only if `allowFilesystemInProduction: true` | Requires `filesystemRoot` |
-| `s3` | Preferred | Requires bucket, region, access/secret key refs |
-| `memory_test` | **Forbidden** | Tests only |
+| `mode`        | Production                                          | Notes                                           |
+| ------------- | --------------------------------------------------- | ----------------------------------------------- |
+| `filesystem`  | Allowed only if `allowFilesystemInProduction: true` | Requires `filesystemRoot`                       |
+| `s3`          | Preferred                                           | Requires bucket, region, access/secret key refs |
+| `memory_test` | **Forbidden**                                       | Tests only                                      |
 
 ## Required fields (all modes)
 

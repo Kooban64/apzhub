@@ -17,18 +17,14 @@ describe("APZNOTIFY-004 notification workspace routes", () => {
     expect(isNotificationsRoute("/workspace/notifications/")).toBe(true);
     expect(isNotificationsRoute("/workspace/notifications/audit")).toBe(true);
     expect(isNotificationsRoute("/workspace/workflows")).toBe(false);
-    expect(resolveNotificationsSection("/workspace/notifications")).toBe(
+    expect(resolveNotificationsSection("/workspace/notifications")).toBe("overview");
+    expect(resolveNotificationsSection("/workspace/notifications/templates")).toBe(
+      "templates",
+    );
+    expect(resolveNotificationsSection("/workspace/notifications/unknown")).toBe(
       "overview",
     );
-    expect(
-      resolveNotificationsSection("/workspace/notifications/templates"),
-    ).toBe("templates");
-    expect(
-      resolveNotificationsSection("/workspace/notifications/unknown"),
-    ).toBe("overview");
-    expect(notificationsSectionPath()).toBe(
-      "/workspace/notifications/overview",
-    );
+    expect(notificationsSectionPath()).toBe("/workspace/notifications/overview");
     expect(notificationsSectionPath("overview")).toBe(
       "/workspace/notifications/overview",
     );
@@ -40,16 +36,12 @@ describe("APZNOTIFY-004 notification workspace routes", () => {
 
   it("guards HTTP API path helpers", () => {
     expect(isNotificationApiPath("/api/v1/notifications")).toBe(true);
-    expect(isNotificationApiPath("/api/v1/notifications/templates")).toBe(
-      true,
-    );
+    expect(isNotificationApiPath("/api/v1/notifications/templates")).toBe(true);
     expect(isNotificationApiPath("/api/v1/workflows")).toBe(false);
     expect(() => assertNotificationApiPath("/api/v1/notifications")).not.toThrow();
-    expect(() => assertNotificationApiPath("/api/v1/workflows")).toThrow(
-      /only call/,
+    expect(() => assertNotificationApiPath("/api/v1/workflows")).toThrow(/only call/);
+    expect(() => assertNotificationApiPath("/api/v1/notifications/send")).toThrow(
+      /Forbidden/,
     );
-    expect(() =>
-      assertNotificationApiPath("/api/v1/notifications/send"),
-    ).toThrow(/Forbidden/);
   });
 });

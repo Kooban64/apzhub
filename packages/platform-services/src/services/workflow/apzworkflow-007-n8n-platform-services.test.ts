@@ -39,9 +39,7 @@ import {
   buildServiceContext,
 } from "../../testing/authorization-fixtures";
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_wf_engine",
     userId: "user_wf_engine",
@@ -68,8 +66,8 @@ async function withMockAdapter() {
 }
 
 describe("APZWORKFLOW-007 n8n platform services", () => {
-  it("exports platform services version 0.24.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
+  it("exports platform services version 0.25.0", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
   });
 
   it("registers workflow.engine permissions in the platform catalogue", () => {
@@ -147,8 +145,7 @@ describe("APZWORKFLOW-007 n8n platform services", () => {
         ?.requiredPermission,
     ).toBe("workflow.engine.capabilities");
     expect(
-      resolveOperationAuthorization("workflowEngineHealth", "get")
-        ?.requiredPermission,
+      resolveOperationAuthorization("workflowEngineHealth", "get")?.requiredPermission,
     ).toBe("workflow.engine.health");
     expect(
       resolveOperationAuthorization("workflowEngineDiagnostics", "get")
@@ -165,16 +162,12 @@ describe("APZWORKFLOW-007 n8n platform services", () => {
   });
 
   it("hasWorkflowEnginePermission respects wildcards", () => {
-    expect(hasWorkflowEnginePermission(["workflow.engine.*"], "read")).toBe(
-      true,
-    );
+    expect(hasWorkflowEnginePermission(["workflow.engine.*"], "read")).toBe(true);
     expect(hasWorkflowEnginePermission(["workflow.*"], "health")).toBe(true);
-    expect(hasWorkflowEnginePermission(["workflow.engine.read"], "read")).toBe(
-      true,
+    expect(hasWorkflowEnginePermission(["workflow.engine.read"], "read")).toBe(true);
+    expect(hasWorkflowEnginePermission(["workflow.engine.read"], "diagnostics")).toBe(
+      false,
     );
-    expect(
-      hasWorkflowEnginePermission(["workflow.engine.read"], "diagnostics"),
-    ).toBe(false);
   });
 
   it("production engine factory requires adapter", () => {
@@ -232,9 +225,7 @@ describe("APZWORKFLOW-007 n8n platform services", () => {
       );
       expect(got.name).toBeTruthy();
 
-      const templates = await bundle.gateway.workflow.engine.templates.list(
-        request,
-      );
+      const templates = await bundle.gateway.workflow.engine.templates.list(request);
       expect(templates.length).toBeGreaterThan(0);
 
       const tags = await bundle.gateway.workflow.engine.tags.list(request);
@@ -243,9 +234,7 @@ describe("APZWORKFLOW-007 n8n platform services", () => {
       const users = await bundle.gateway.workflow.engine.users.list(request);
       expect(users.length).toBeGreaterThan(0);
 
-      const projects = await bundle.gateway.workflow.engine.projects.list(
-        request,
-      );
+      const projects = await bundle.gateway.workflow.engine.projects.list(request);
       expect(projects.length).toBeGreaterThan(0);
 
       const capabilities =
@@ -255,8 +244,7 @@ describe("APZWORKFLOW-007 n8n platform services", () => {
       const health = await bundle.gateway.workflow.engine.health.get(request);
       expect(["healthy", "degraded", "unhealthy"]).toContain(health.level);
 
-      const diagnostics =
-        await bundle.gateway.workflow.engine.diagnostics.get(request);
+      const diagnostics = await bundle.gateway.workflow.engine.diagnostics.get(request);
       expect(diagnostics.adapterVersion).toBeTruthy();
       expect(JSON.stringify(diagnostics)).not.toMatch(/test-key|apiKey|secret/i);
 

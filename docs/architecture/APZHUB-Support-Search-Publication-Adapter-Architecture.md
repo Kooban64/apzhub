@@ -14,8 +14,8 @@ Support never calls Meilisearch, never builds provider documents, never calls Se
 
 Canonical separation preserved:
 
-- **Support Request** (`SupportTicket`) ≠ Project Task  
-- **Support Article** ≠ Project Comment  
+- **Support Request** (`SupportTicket`) ≠ Project Task
+- **Support Article** ≠ Project Comment
 
 ---
 
@@ -37,13 +37,13 @@ Search Platform, Search Integration Framework, Search SDK, Meilisearch adapter, 
 
 ## Entity types
 
-| Search entity type | Canonical model |
-| ------------------ | --------------- |
-| `support_request` | `SupportTicket` |
-| `support_article` | `SupportArticle` |
+| Search entity type     | Canonical model       |
+| ---------------------- | --------------------- |
+| `support_request`      | `SupportTicket`       |
+| `support_article`      | `SupportArticle`      |
 | `support_organisation` | `SupportOrganization` |
-| `support_group` | `SupportGroup` |
-| `support_user` | `SupportUser` |
+| `support_group`        | `SupportGroup`        |
+| `support_user`         | `SupportUser`         |
 
 Source product: **`support`**.
 

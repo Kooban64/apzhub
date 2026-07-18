@@ -6,11 +6,11 @@ Establish `@apzhub/config` as the canonical Platform configuration provider. Pro
 
 ## Package
 
-| Export | Role |
-|--------|------|
-| `@apzhub/config` | `getEnv()`, helpers, governance re-exports |
+| Export                      | Role                                                     |
+| --------------------------- | -------------------------------------------------------- |
+| `@apzhub/config`            | `getEnv()`, helpers, governance re-exports               |
 | `@apzhub/config/governance` | Registry, validation, diagnostics, secrets (lightweight) |
-| `@apzhub/config/db` | Persistence only — not configuration |
+| `@apzhub/config/db`         | Persistence only — not configuration                     |
 
 ## Components
 
@@ -35,11 +35,11 @@ PlatformConfigurationProvider
 
 ## Per-environment profiles
 
-| Profile | Validation tier | Startup abort on failure |
-|---------|-----------------|--------------------------|
-| development | permissive | No |
-| test | strict | Yes (when `abortProcess: true`) |
-| production | strict | Yes |
+| Profile     | Validation tier | Startup abort on failure        |
+| ----------- | --------------- | ------------------------------- |
+| development | permissive      | No                              |
+| test        | strict          | Yes (when `abortProcess: true`) |
+| production  | strict          | Yes                             |
 
 ## Integration
 

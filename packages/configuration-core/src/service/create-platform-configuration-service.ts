@@ -53,10 +53,7 @@ import {
   validateConfigurationKeyMetadata,
   validateConfigurationValueMetadata,
 } from "../validation/validate-configuration";
-import {
-  assertVersionImmutable,
-  nextVersionNumber,
-} from "../versioning/versions";
+import { assertVersionImmutable, nextVersionNumber } from "../versioning/versions";
 
 export type PlatformConfigurationServiceDeps = {
   readonly repos: ConfigurationFoundationRepos;
@@ -108,9 +105,7 @@ export type PlatformConfigurationDomainService = {
     ctx: ConfigurationRequestContext,
     input: UpdateConfigurationNamespaceInput,
   ): Promise<ConfigurationNamespace>;
-  listGroups(
-    ctx: ConfigurationRequestContext,
-  ): Promise<readonly ConfigurationGroup[]>;
+  listGroups(ctx: ConfigurationRequestContext): Promise<readonly ConfigurationGroup[]>;
   getGroup(
     ctx: ConfigurationRequestContext,
     groupId: ConfigurationGroup["id"],
@@ -159,9 +154,7 @@ export type PlatformConfigurationDomainService = {
     ctx: ConfigurationRequestContext,
     input: UpdateConfigurationOverrideInput,
   ): Promise<ConfigurationOverride>;
-  listScopes(
-    ctx: ConfigurationRequestContext,
-  ): Promise<
+  listScopes(ctx: ConfigurationRequestContext): Promise<
     readonly {
       readonly configurationId: Configuration["id"];
       readonly scope: ConfigurationScope;
@@ -321,8 +314,7 @@ export function createPlatformConfigurationService(
   ): Promise<ConfigurationGroup | undefined> {
     if (!input.groupKey) return undefined;
     const existing = (await deps.repos.groups.list(ctx)).find(
-      (group) =>
-        group.namespaceId === namespaceId && group.key === input.groupKey,
+      (group) => group.namespaceId === namespaceId && group.key === input.groupKey,
     );
     if (existing) return existing;
     const now = deps.now();
@@ -501,7 +493,9 @@ export function createPlatformConfigurationService(
         ...existing,
         name: input.name ?? existing.name,
         description:
-          input.description === null ? undefined : (input.description ?? existing.description),
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
         updatedAt: deps.now(),
       };
       return deps.repos.namespaces.update(ctx, updated);
@@ -514,11 +508,7 @@ export function createPlatformConfigurationService(
 
     async getGroup(ctx, groupId) {
       assertCtx(ctx);
-      return requireFound(
-        await deps.repos.groups.get(ctx, groupId),
-        "group",
-        groupId,
-      );
+      return requireFound(await deps.repos.groups.get(ctx, groupId), "group", groupId);
     },
 
     async createGroup(ctx, input) {
@@ -554,7 +544,9 @@ export function createPlatformConfigurationService(
         ...existing,
         name: input.name ?? existing.name,
         description:
-          input.description === null ? undefined : (input.description ?? existing.description),
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
         updatedAt: deps.now(),
       };
       return deps.repos.groups.update(ctx, updated);
@@ -865,11 +857,7 @@ export function createPlatformConfigurationService(
 
     async getAudit(ctx, auditId) {
       assertCtx(ctx);
-      return requireFound(
-        await deps.repos.audits.get(ctx, auditId),
-        "audit",
-        auditId,
-      );
+      return requireFound(await deps.repos.audits.get(ctx, auditId), "audit", auditId);
     },
 
     async diagnosticsHealth(ctx) {
@@ -904,7 +892,8 @@ export function createPlatformConfigurationService(
       };
     },
 
-    async diagnosticsCapabilities() {
+    async diagnosticsCapabilities(ctx) {
+      assertCtx(ctx);
       return {
         runtimeApply: false as const,
         lifecycle: CONFIGURATION_LIFECYCLE_STATUSES,

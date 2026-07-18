@@ -18,13 +18,13 @@ Certification-only. Defect corrections limited to certification defects (none re
 
 ## Final package versions
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/notification-contracts` | 0.2.0 |
-| `@apzhub/notification-core` | 0.2.0 |
-| `@apzhub/notification-persistence` | 0.1.0 |
-| `@apzhub/platform-service-contracts` | 0.16.0 |
-| `@apzhub/platform-services` | 0.21.0 |
+| Package                              | Version |
+| ------------------------------------ | ------- |
+| `@apzhub/notification-contracts`     | 0.2.0   |
+| `@apzhub/notification-core`          | 0.2.0   |
+| `@apzhub/notification-persistence`   | 0.1.0   |
+| `@apzhub/platform-service-contracts` | 0.16.0  |
+| `@apzhub/platform-services`          | 0.21.0  |
 
 ## Certification path
 
@@ -32,33 +32,33 @@ Workbench → typed client → HTTP → `PlatformServiceGateway.notification.*` 
 
 ## Audit summaries
 
-| Audit | Result |
-| --- | --- |
-| Architecture | PASS — [Architecture Audit](../reviews/APZNOTIFY-005-Architecture-Audit.md) |
-| Dependency | PASS — [Dependency Audit](../reviews/APZNOTIFY-005-Dependency-Audit.md) |
-| Boundary | PASS — [Boundary Audit](../reviews/APZNOTIFY-005-Boundary-Audit.md) |
-| Vertical | PASS — `pnpm audit:notification-vertical` |
-| Authorization | PASS — [Authorization Review](../reviews/APZNOTIFY-005-Authorization-Review.md) |
-| Security | PASS — [Security Review](../reviews/APZNOTIFY-005-Security-Review.md) |
-| HTTP / OpenAPI | PASS — [HTTP Certification](../reviews/APZNOTIFY-005-HTTP-Certification.md) |
-| Typed client | PASS — [Typed Client Certification](../reviews/APZNOTIFY-005-Typed-Client-Certification.md) |
-| Workbench | PASS — [Workbench Certification](../reviews/APZNOTIFY-005-Workbench-Certification.md) |
-| Performance | Measured only — [Performance Baseline](../reviews/APZNOTIFY-005-Performance-Baseline.md) |
-| Coverage | Consolidated **98.42%** lines — [Coverage Baseline](../reviews/APZNOTIFY-005-Coverage-Baseline.md) |
+| Audit                | Result                                                                                                           |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Architecture         | PASS — [Architecture Audit](../reviews/APZNOTIFY-005-Architecture-Audit.md)                                      |
+| Dependency           | PASS — [Dependency Audit](../reviews/APZNOTIFY-005-Dependency-Audit.md)                                          |
+| Boundary             | PASS — [Boundary Audit](../reviews/APZNOTIFY-005-Boundary-Audit.md)                                              |
+| Vertical             | PASS — `pnpm audit:notification-vertical`                                                                        |
+| Authorization        | PASS — [Authorization Review](../reviews/APZNOTIFY-005-Authorization-Review.md)                                  |
+| Security             | PASS — [Security Review](../reviews/APZNOTIFY-005-Security-Review.md)                                            |
+| HTTP / OpenAPI       | PASS — [HTTP Certification](../reviews/APZNOTIFY-005-HTTP-Certification.md)                                      |
+| Typed client         | PASS — [Typed Client Certification](../reviews/APZNOTIFY-005-Typed-Client-Certification.md)                      |
+| Workbench            | PASS — [Workbench Certification](../reviews/APZNOTIFY-005-Workbench-Certification.md)                            |
+| Performance          | Measured only — [Performance Baseline](../reviews/APZNOTIFY-005-Performance-Baseline.md)                         |
+| Coverage             | Consolidated **98.42%** lines — [Coverage Baseline](../reviews/APZNOTIFY-005-Coverage-Baseline.md)               |
 | Production readiness | **PRODUCTION_READY_WITH_LIMITATIONS** — [Production Readiness](../reviews/APZNOTIFY-005-Production-Readiness.md) |
 
 ## Layer certifications (as delivered)
 
-| Area | Outcome |
-| --- | --- |
-| Notification Core | Lifecycle / validation rules; no delivery |
-| Persistence | Postgres + in-memory ports; no silent prod in-memory fallback |
-| Platform Services | Thin; gateway facets present |
-| RequestPipeline | Public ops wrapped; authz denial precedes service call |
-| Authorisation | `PLATFORM_NOTIFICATION_PERMISSIONS` + `notificationPlatformOps` |
-| Route absence | Delivery/provider/worker/queue/schedule/realtime routes absent |
-| Workbench | Metadata views + lifecycle commands; **DELIVERY PROVIDERS NOT AVAILABLE** |
-| Diagnostics | Delivery / providers / workers / Event Bus unavailable |
+| Area              | Outcome                                                                   |
+| ----------------- | ------------------------------------------------------------------------- |
+| Notification Core | Lifecycle / validation rules; no delivery                                 |
+| Persistence       | Postgres + in-memory ports; no silent prod in-memory fallback             |
+| Platform Services | Thin; gateway facets present                                              |
+| RequestPipeline   | Public ops wrapped; authz denial precedes service call                    |
+| Authorisation     | `PLATFORM_NOTIFICATION_PERMISSIONS` + `notificationPlatformOps`           |
+| Route absence     | Delivery/provider/worker/queue/schedule/realtime routes absent            |
+| Workbench         | Metadata views + lifecycle commands; **DELIVERY PROVIDERS NOT AVAILABLE** |
+| Diagnostics       | Delivery / providers / workers / Event Bus unavailable                    |
 
 ## Tests & Playwright
 

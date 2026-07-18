@@ -21,17 +21,17 @@
 
 `identityPlatformOps` maps gateway pipeline keys to granular permissions, for example:
 
-| Pipeline key | Example ops | Permission |
-| --- | --- | --- |
-| `identityUsers` | list/get/create/update | `identity.user` |
-| `identityGroups` | … | `identity.group` |
-| `identityRoles` | … | `identity.role` |
-| `identityOrganisations` / `identityDepartments` / `identityPositions` | … | `identity.organization` |
-| `identityTenants` | … | `identity.tenant` |
-| `identityServiceAssignments` | … | `identity.assignment` |
-| `identityAudit` | list/get | `identity.audit` |
-| `identityDiagnostics` | health/readiness/capabilities | `identity.read` |
-| `identityInvitations` / `identityPolicies` | … | `identity.manage` |
+| Pipeline key                                                          | Example ops                   | Permission              |
+| --------------------------------------------------------------------- | ----------------------------- | ----------------------- |
+| `identityUsers`                                                       | list/get/create/update        | `identity.user`         |
+| `identityGroups`                                                      | …                             | `identity.group`        |
+| `identityRoles`                                                       | …                             | `identity.role`         |
+| `identityOrganisations` / `identityDepartments` / `identityPositions` | …                             | `identity.organization` |
+| `identityTenants`                                                     | …                             | `identity.tenant`       |
+| `identityServiceAssignments`                                          | …                             | `identity.assignment`   |
+| `identityAudit`                                                       | list/get                      | `identity.audit`        |
+| `identityDiagnostics`                                                 | health/readiness/capabilities | `identity.read`         |
+| `identityInvitations` / `identityPolicies`                            | …                             | `identity.manage`       |
 
 ## Rules
 

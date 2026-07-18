@@ -18,11 +18,11 @@ pnpm exec vitest run --coverage \
 
 ## Result
 
-| Metric | Coverage |
-|--------|----------|
-| Statements | 100% |
-| Branches | 100% |
-| Functions | 100% |
-| Lines | 100% |
+| Metric     | Coverage |
+| ---------- | -------- |
+| Statements | 100%     |
+| Branches   | 100%     |
+| Functions  | 100%     |
+| Lines      | 100%     |
 
 Thresholds (≥95% lines/functions/statements; ≥90% branches): **PASS**

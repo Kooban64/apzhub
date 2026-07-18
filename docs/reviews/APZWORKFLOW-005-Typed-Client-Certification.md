@@ -8,14 +8,14 @@
 
 ## Verified
 
-| Property | Result |
-| --- | --- |
-| Calls only `/api/v1/workflows/*` | PASS |
-| Envelope parsing + error translation | PASS (client + Vitest) |
-| AbortSignal / cancellation | Supported on request options |
-| No server-only / gateway / core / persistence imports | PASS (audits) |
-| No execute / runs / n8n methods | PASS |
-| Stable query keys (workflows, versions, templates, …) | PASS |
-| Mock parity for Workbench tests | PASS |
+| Property                                              | Result                       |
+| ----------------------------------------------------- | ---------------------------- |
+| Calls only `/api/v1/workflows/*`                      | PASS                         |
+| Envelope parsing + error translation                  | PASS (client + Vitest)       |
+| AbortSignal / cancellation                            | Supported on request options |
+| No server-only / gateway / core / persistence imports | PASS (audits)                |
+| No execute / runs / n8n methods                       | PASS                         |
+| Stable query keys (workflows, versions, templates, …) | PASS                         |
+| Mock parity for Workbench tests                       | PASS                         |
 
 No new client capability introduced during APZWORKFLOW-005.

@@ -7,13 +7,13 @@
 
 ## What changed
 
-| Before | After |
-|--------|-------|
-| Ad-hoc provisional ID string concat in adapter helpers | Shared `IdentityMapper` / `toProvisionalId` |
-| Inline enum tables without shared policy | `EnumMapper` / `createBidirectionalEnumMapper` |
-| No registry of mapping capabilities | `MappingProvider` + `MappingRegistry` |
-| No shared execution / diagnostics | `MappingPipeline` + metrics / diagnostics |
-| — | Export `@apzhub/integration-sdk/mapping` |
+| Before                                                 | After                                          |
+| ------------------------------------------------------ | ---------------------------------------------- |
+| Ad-hoc provisional ID string concat in adapter helpers | Shared `IdentityMapper` / `toProvisionalId`    |
+| Inline enum tables without shared policy               | `EnumMapper` / `createBidirectionalEnumMapper` |
+| No registry of mapping capabilities                    | `MappingProvider` + `MappingRegistry`          |
+| No shared execution / diagnostics                      | `MappingPipeline` + metrics / diagnostics      |
+| —                                                      | Export `@apzhub/integration-sdk/mapping`       |
 
 **Unchanged:**
 
@@ -76,15 +76,15 @@ When migrating or adding an adapter:
 
 ## Choosing the API
 
-| Need | Use |
-|------|-----|
-| Call-site mapping (existing) | Keep public mapper functions |
-| Discovery / diagnostics / pipeline | `MappingRegistry` + `MappingPipeline` |
-| Provisional IDs | `IdentityMapper` / `PlaneIdentityMapper` / `ZammadIdentityMapper` |
-| Enum translation | `createEnumMapper` / `createBidirectionalEnumMapper` |
-| Declarative field maps | `FieldMapper` + `ValueTransformer` |
-| Durable global IDs | Platform `EntityMappingStore` only (not SDK) |
-| Unit tests without vendor | `createMockMappingProvider` |
+| Need                               | Use                                                               |
+| ---------------------------------- | ----------------------------------------------------------------- |
+| Call-site mapping (existing)       | Keep public mapper functions                                      |
+| Discovery / diagnostics / pipeline | `MappingRegistry` + `MappingPipeline`                             |
+| Provisional IDs                    | `IdentityMapper` / `PlaneIdentityMapper` / `ZammadIdentityMapper` |
+| Enum translation                   | `createEnumMapper` / `createBidirectionalEnumMapper`              |
+| Declarative field maps             | `FieldMapper` + `ValueTransformer`                                |
+| Durable global IDs                 | Platform `EntityMappingStore` only (not SDK)                      |
+| Unit tests without vendor          | `createMockMappingProvider`                                       |
 
 ---
 

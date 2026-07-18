@@ -43,7 +43,8 @@ export function SecuritySection() {
   }, []);
 
   if (loading) return <OpsLoadingState />;
-  if (error || !security) return <OpsErrorState message={error ?? "Security unavailable."} />;
+  if (error || !security)
+    return <OpsErrorState message={error ?? "Security unavailable."} />;
 
   const securityDiag = (security.security ?? {}) as Record<string, unknown>;
   const environment = (securityDiag.environment ?? {}) as {

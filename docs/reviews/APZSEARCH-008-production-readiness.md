@@ -8,24 +8,24 @@
 
 ## Checklist
 
-| Area | Status |
-| ---- | ------ |
-| Canonical Search contracts **0.4.0** | ✅ |
-| Search persistence + management services **0.2.0** | ✅ |
-| Search Integration SDK **0.1.0** | ✅ |
-| Meilisearch Reference Adapter **0.1.0** | ✅ |
-| Platform Services management + execution gateway **0.18.0** | ✅ |
-| RequestPipeline + production `search.*` authorisation | ✅ |
-| HTTP API + OpenAPI **Platform Search** (1.1.0) | ✅ |
-| Typed client + mock | ✅ |
-| Product-neutral Search Workbench | ✅ |
-| Architecture / dependency / boundary audits | ✅ 0 violations |
-| Security (authn/authz/tenant isolation/redaction) | ✅ |
-| Public index/document HTTP | ❌ Excluded by design (ADR-0064) |
-| Product indexing adapters | ❌ Deferred to APZSEARCH-009 |
-| OCR / AI / semantic / vector / Event Bus / workers | ❌ Excluded |
-| Live Playwright / Next production build | ⚠️ LIMITED (external Testing slug conflict) |
-| Live Meilisearch in unit CI | ⚠️ LIMITED (mock REST; ops deploy separately) |
+| Area                                                        | Status                                        |
+| ----------------------------------------------------------- | --------------------------------------------- |
+| Canonical Search contracts **0.4.0**                        | ✅                                            |
+| Search persistence + management services **0.2.0**          | ✅                                            |
+| Search Integration SDK **0.1.0**                            | ✅                                            |
+| Meilisearch Reference Adapter **0.1.0**                     | ✅                                            |
+| Platform Services management + execution gateway **0.18.0** | ✅                                            |
+| RequestPipeline + production `search.*` authorisation       | ✅                                            |
+| HTTP API + OpenAPI **Platform Search** (1.1.0)              | ✅                                            |
+| Typed client + mock                                         | ✅                                            |
+| Product-neutral Search Workbench                            | ✅                                            |
+| Architecture / dependency / boundary audits                 | ✅ 0 violations                               |
+| Security (authn/authz/tenant isolation/redaction)           | ✅                                            |
+| Public index/document HTTP                                  | ❌ Excluded by design (ADR-0064)              |
+| Product indexing adapters                                   | ❌ Deferred to APZSEARCH-009                  |
+| OCR / AI / semantic / vector / Event Bus / workers          | ❌ Excluded                                   |
+| Live Playwright / Next production build                     | ⚠️ LIMITED (external Testing slug conflict)   |
+| Live Meilisearch in unit CI                                 | ⚠️ LIMITED (mock REST; ops deploy separately) |
 
 ## Why not unqualified PRODUCTION_READY
 

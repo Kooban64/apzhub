@@ -22,14 +22,14 @@ curl -sS -b cookies.txt https://<host>/api/platform/v1/security/diagnostics
 
 ## Environment validation failures
 
-| Check | Action |
-|-------|--------|
-| `ENV_SCHEMA` fail | Review `getConfigurationDiagnostics()` — fix missing/invalid variables |
-| `BETTER_AUTH_SECRET` fail | Rotate secret in secure store; minimum 32 characters; restart app |
-| `DATABASE_URL` fail | Restore PostgreSQL connectivity; verify credentials |
-| `REDIS_URL` fail | Restore Redis; rate limit falls back to memory |
-| `ALLOW_DEV_REGISTRATION` warn (prod) | Set `ALLOW_DEV_REGISTRATION=false` |
-| Deprecated alias warn | Migrate `AUTH_SECRET` → `BETTER_AUTH_SECRET`, `AUTH_URL` → `BETTER_AUTH_URL` |
+| Check                                | Action                                                                       |
+| ------------------------------------ | ---------------------------------------------------------------------------- |
+| `ENV_SCHEMA` fail                    | Review `getConfigurationDiagnostics()` — fix missing/invalid variables       |
+| `BETTER_AUTH_SECRET` fail            | Rotate secret in secure store; minimum 32 characters; restart app            |
+| `DATABASE_URL` fail                  | Restore PostgreSQL connectivity; verify credentials                          |
+| `REDIS_URL` fail                     | Restore Redis; rate limit falls back to memory                               |
+| `ALLOW_DEV_REGISTRATION` warn (prod) | Set `ALLOW_DEV_REGISTRATION=false`                                           |
+| Deprecated alias warn                | Migrate `AUTH_SECRET` → `BETTER_AUTH_SECRET`, `AUTH_URL` → `BETTER_AUTH_URL` |
 
 Configuration governance is centralised in `@apzhub/config/governance` (PRH-004). See [Environment Governance](./APZHUB-Environment-Governance.md).
 
@@ -66,16 +66,16 @@ See [HTTP Security Headers Architecture](../architecture/APZHUB-HTTP-Security-He
 
 ### Standard headers
 
-| Header | Value |
-|--------|-------|
-| X-Frame-Options | DENY |
-| X-Content-Type-Options | nosniff |
-| Referrer-Policy | strict-origin-when-cross-origin |
-| Permissions-Policy | camera/mic/geo/payment/usb disabled |
-| Cross-Origin-Opener-Policy | same-origin-allow-popups |
-| Cross-Origin-Resource-Policy | same-site |
-| Cross-Origin-Embedder-Policy | unsafe-none |
-| Origin-Agent-Cluster | ?1 |
+| Header                                 | Value                                        |
+| -------------------------------------- | -------------------------------------------- |
+| X-Frame-Options                        | DENY                                         |
+| X-Content-Type-Options                 | nosniff                                      |
+| Referrer-Policy                        | strict-origin-when-cross-origin              |
+| Permissions-Policy                     | camera/mic/geo/payment/usb disabled          |
+| Cross-Origin-Opener-Policy             | same-origin-allow-popups                     |
+| Cross-Origin-Resource-Policy           | same-site                                    |
+| Cross-Origin-Embedder-Policy           | unsafe-none                                  |
+| Origin-Agent-Cluster                   | ?1                                           |
 | Cache-Control (API/health/diagnostics) | no-store, no-cache, must-revalidate, private |
 
 `X-Powered-By` is suppressed (`poweredByHeader: false`).
@@ -84,10 +84,10 @@ See [HTTP Security Headers Architecture](../architecture/APZHUB-HTTP-Security-He
 
 CSP uses **progressive enforcement** (PRH-002):
 
-| Environment | Mode | Header |
-|-------------|------|--------|
-| Development | Report-Only | `Content-Security-Policy-Report-Only` |
-| Production | Enforced stable policy | `Content-Security-Policy` |
+| Environment | Mode                   | Header                                |
+| ----------- | ---------------------- | ------------------------------------- |
+| Development | Report-Only            | `Content-Security-Policy-Report-Only` |
+| Production  | Enforced stable policy | `Content-Security-Policy`             |
 
 Policy is built by `CspPolicyService` (`@apzhub/platform-security/csp`). Violations report to `POST /api/platform/v1/security/csp-report`. See [CSP Violation Reporting](../security/CSP-Violation-Reporting.md) and [PCv2-01 CSP Audit](../security/PCv2-01-CSP-Audit.md).
 

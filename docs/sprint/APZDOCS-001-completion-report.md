@@ -42,13 +42,13 @@ Scoped document packages: **~96.04%** lines · **~98.46%** functions · **~84.6%
 
 ## Quality Gates
 
-| Gate | Result |
-|------|--------|
+| Gate                                       | Result              |
+| ------------------------------------------ | ------------------- |
 | Architecture / dependency / boundary audit | PASS (0 violations) |
-| Typecheck (document packages) | PASS |
-| Lint (document packages) | PASS |
-| Vitest | PASS |
-| Coverage ≥95% | PASS |
+| Typecheck (document packages)              | PASS                |
+| Lint (document packages)                   | PASS                |
+| Vitest                                     | PASS                |
+| Coverage ≥95%                              | PASS                |
 
 ## Technical Debt
 

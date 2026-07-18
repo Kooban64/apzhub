@@ -1,10 +1,6 @@
 /** Strongly typed n8n adapter configuration — adapter-internal. */
 
-export type N8nAuthMode =
-  | "api_key"
-  | "personal_access_token"
-  | "basic"
-  | "oauth";
+export type N8nAuthMode = "api_key" | "personal_access_token" | "basic" | "oauth";
 
 export interface N8nRetryConfiguration {
   readonly maxAttempts: number;
@@ -84,7 +80,11 @@ export function validateN8nConfiguration(
   const issues: string[] = [];
   const authMode = config.authMode ?? "api_key";
 
-  if (config.baseUrl !== undefined && config.baseUrl.trim() && !isValidHttpUrl(config.baseUrl)) {
+  if (
+    config.baseUrl !== undefined &&
+    config.baseUrl.trim() &&
+    !isValidHttpUrl(config.baseUrl)
+  ) {
     issues.push("baseUrl must be a valid HTTP(S) URL");
   }
   if (
@@ -98,17 +98,23 @@ export function validateN8nConfiguration(
     issues.push("timeoutMs must be greater than zero");
   }
   if (config.retry) {
-    if (config.retry.maxAttempts < 1) issues.push("retry.maxAttempts must be at least 1");
-    if (config.retry.baseDelayMs < 0) issues.push("retry.baseDelayMs must be non-negative");
+    if (config.retry.maxAttempts < 1)
+      issues.push("retry.maxAttempts must be at least 1");
+    if (config.retry.baseDelayMs < 0)
+      issues.push("retry.baseDelayMs must be non-negative");
     if (config.retry.maxDelayMs < config.retry.baseDelayMs) {
       issues.push("retry.maxDelayMs must be greater than or equal to baseDelayMs");
     }
   }
   if (config.oauth?.enabled) {
-    issues.push("OAuth is a placeholder only in APZWORKFLOW-006 — set oauth.enabled=false");
+    issues.push(
+      "OAuth is a placeholder only in APZWORKFLOW-006 — set oauth.enabled=false",
+    );
   }
   if (authMode === "oauth") {
-    issues.push("authMode oauth is not implemented — use api_key, personal_access_token, or basic");
+    issues.push(
+      "authMode oauth is not implemented — use api_key, personal_access_token, or basic",
+    );
   }
   if (
     (authMode === "api_key" || authMode === "personal_access_token") &&
@@ -128,9 +134,7 @@ export function normalizeN8nConfiguration(
   input: N8nConfigurationInput,
 ): N8nConfiguration {
   const baseUrl = trimTrailingSlash(input.baseUrl?.trim() || "http://localhost:5678");
-  const apiBaseUrl = trimTrailingSlash(
-    input.apiBaseUrl?.trim() || `${baseUrl}/api/v1`,
-  );
+  const apiBaseUrl = trimTrailingSlash(input.apiBaseUrl?.trim() || `${baseUrl}/api/v1`);
   const authMode = input.authMode ?? "api_key";
 
   return {

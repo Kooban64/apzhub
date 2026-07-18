@@ -9,18 +9,18 @@
 
 ## Certified surfaces
 
-| Item | Result |
-| ---- | ------ |
-| Parent manifest `platform-search` | **PASS** (`/workspace/search`, `search.query.execute`) |
-| Child manifests (overview, query, providers, configurations, collections, sources, scopes, profiles, audit, diagnostics) | **PASS** |
-| `SearchWorkspaceRouter` mounted from `workbench-page` | **PASS** |
-| `platform-search-view` consumes `@/lib/search/search-api` only | **PASS** |
-| No direct `fetch` / platform-services / Meilisearch | **PASS** |
-| Permission-gated sidebar entries | **PASS** |
-| Query flow (filters, sort, facets, pagination mapping) | **PASS** (component tests) |
-| Management / diagnostics / health views | **PASS** (component tests) |
-| Loading / empty / error / unauthorized / degraded | **PASS** |
-| Accessibility (labels, alerts, keyboard controls) | **PASS** (component-level) |
+| Item                                                                                                                     | Result                                                 |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| Parent manifest `platform-search`                                                                                        | **PASS** (`/workspace/search`, `search.query.execute`) |
+| Child manifests (overview, query, providers, configurations, collections, sources, scopes, profiles, audit, diagnostics) | **PASS**                                               |
+| `SearchWorkspaceRouter` mounted from `workbench-page`                                                                    | **PASS**                                               |
+| `platform-search-view` consumes `@/lib/search/search-api` only                                                           | **PASS**                                               |
+| No direct `fetch` / platform-services / Meilisearch                                                                      | **PASS**                                               |
+| Permission-gated sidebar entries                                                                                         | **PASS**                                               |
+| Query flow (filters, sort, facets, pagination mapping)                                                                   | **PASS** (component tests)                             |
+| Management / diagnostics / health views                                                                                  | **PASS** (component tests)                             |
+| Loading / empty / error / unauthorized / degraded                                                                        | **PASS**                                               |
+| Accessibility (labels, alerts, keyboard controls)                                                                        | **PASS** (component-level)                             |
 
 ## Playwright
 
@@ -35,8 +35,8 @@ This conflict **predates Search**, is **not** introduced by APZSEARCH-007/008, a
 
 ## Evidence
 
-- `pnpm audit:search-workbench` — 0 violations  
-- APZSEARCH-007 Workbench coverage **100%** view/router (scoped)  
-- Vertical harness manifests + component presence  
+- `pnpm audit:search-workbench` — 0 violations
+- APZSEARCH-007 Workbench coverage **100%** view/router (scoped)
+- Vertical harness manifests + component presence
 
 No UI redesign in APZSEARCH-008.

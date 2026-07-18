@@ -34,7 +34,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -129,11 +130,14 @@ function forbidDeps(pkgJsonPath, forbidden, rule) {
 // ---------------------------------------------------------------------------
 /** Real n8n integration / package import — capability flags like `n8n: false` are allowed. */
 const N8N_INTEGRATION =
-  /@n8n\b|from\s+[\"'][^\"']*n8n|require\([\"'][^\"']*n8n|integration-n8n|n8n-workflow|n8nClient|connectN8n|n8nAdapter/i;
+  /@n8n\b|from\s+["'][^"']*n8n|require\(["'][^"']*n8n|integration-n8n|n8n-workflow|n8nClient|connectN8n|n8nAdapter/i;
 
 scan(walk(join(ROOT, "apps/web/components/workflows")), [
   { rule: "workbench-no-platform-services", pattern: /@apzhub\/platform-services/ },
-  { rule: "workbench-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+  {
+    rule: "workbench-no-gateway",
+    pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+  },
   { rule: "workbench-no-workflow-core", pattern: /@apzhub\/workflow-core/ },
   { rule: "workbench-no-persistence", pattern: /@apzhub\/workflow-persistence/ },
   { rule: "workbench-no-n8n", pattern: N8N_INTEGRATION },
@@ -141,30 +145,37 @@ scan(walk(join(ROOT, "apps/web/components/workflows")), [
   { rule: "workbench-no-meili", pattern: /\bmeilisearch\b/i },
   { rule: "workbench-no-designer", pattern: /\bdesigner\b/i },
   { rule: "workbench-no-drag-drop", pattern: /\bdrag[- ]?drop\b/i },
-  { rule: "workbench-no-execute", pattern: /\b(executeWorkflow|runWorkflow|workflowRuns?)\b/ },
-]);
-
-scan(walk(join(ROOT, "apps/web/lib/workflows")).filter(
-  (f) =>
-    !f.includes("workflow-boundary") &&
-    !/engine-|mock-engine-/.test(rel(f)),
-), [
-  { rule: "client-no-platform-services", pattern: /@apzhub\/platform-services/ },
-  { rule: "client-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
-  { rule: "client-no-workflow-core", pattern: /@apzhub\/workflow-core/ },
-  { rule: "client-no-persistence", pattern: /@apzhub\/workflow-persistence/ },
-  { rule: "client-no-n8n", pattern: N8N_INTEGRATION },
   {
-    rule: "client-api-only",
-    pattern: /fetch\(|\/api\/v1\//,
-    allow: (path, line) =>
-      path.includes("workflow-client.ts") ||
-      path.includes("mock-") ||
-      /\/api\/v1\/workflows/.test(line) ||
-      line.includes("AbortSignal") ||
-      line.includes("//"),
+    rule: "workbench-no-execute",
+    pattern: /\b(executeWorkflow|runWorkflow|workflowRuns?)\b/,
   },
 ]);
+
+scan(
+  walk(join(ROOT, "apps/web/lib/workflows")).filter(
+    (f) => !f.includes("workflow-boundary") && !/engine-|mock-engine-/.test(rel(f)),
+  ),
+  [
+    { rule: "client-no-platform-services", pattern: /@apzhub\/platform-services/ },
+    {
+      rule: "client-no-gateway",
+      pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+    },
+    { rule: "client-no-workflow-core", pattern: /@apzhub\/workflow-core/ },
+    { rule: "client-no-persistence", pattern: /@apzhub\/workflow-persistence/ },
+    { rule: "client-no-n8n", pattern: N8N_INTEGRATION },
+    {
+      rule: "client-api-only",
+      pattern: /fetch\(|\/api\/v1\//,
+      allow: (path, line) =>
+        path.includes("workflow-client.ts") ||
+        path.includes("mock-") ||
+        /\/api\/v1\/workflows/.test(line) ||
+        line.includes("AbortSignal") ||
+        line.includes("//"),
+    },
+  ],
+);
 
 // Typed client must only target workflows API
 {
@@ -226,14 +237,12 @@ scan(httpFiles, [
   { rule: "http-no-event-bus", pattern: /\bEventBus\b/ },
   {
     rule: "http-no-direct-platform-services-pkg",
-    pattern: /from\s+[\"']@apzhub\/platform-services/,
+    pattern: /from\s+["']@apzhub\/platform-services/,
   },
 ]);
 
 {
-  const gatewaySurface = handlerFiles
-    .map((f) => readFileSync(f, "utf8"))
-    .join("\n");
+  const gatewaySurface = handlerFiles.map((f) => readFileSync(f, "utf8")).join("\n");
   if (
     !gatewaySurface.includes("getPlatformServiceGateway") &&
     !gatewaySurface.includes("gateway.workflow")
@@ -294,24 +303,27 @@ for (const omitted of [
 // ---------------------------------------------------------------------------
 // Layer 3 — Platform services / packages
 // ---------------------------------------------------------------------------
-forbidDeps("packages/workflow-contracts/package.json", [
-  "@apzhub/workflow-core",
-  "@apzhub/workflow-persistence",
-  "@apzhub/platform-services",
-  "n8n",
-  "meilisearch",
-], "contracts-deps");
-forbidDeps("packages/workflow-core/package.json", [
-  "@apzhub/workflow-persistence",
-  "@apzhub/platform-services",
-  "n8n",
-  "meilisearch",
-], "core-deps");
-forbidDeps("packages/workflow-persistence/package.json", [
-  "@apzhub/platform-services",
-  "n8n",
-  "meilisearch",
-], "persistence-deps");
+forbidDeps(
+  "packages/workflow-contracts/package.json",
+  [
+    "@apzhub/workflow-core",
+    "@apzhub/workflow-persistence",
+    "@apzhub/platform-services",
+    "n8n",
+    "meilisearch",
+  ],
+  "contracts-deps",
+);
+forbidDeps(
+  "packages/workflow-core/package.json",
+  ["@apzhub/workflow-persistence", "@apzhub/platform-services", "n8n", "meilisearch"],
+  "core-deps",
+);
+forbidDeps(
+  "packages/workflow-persistence/package.json",
+  ["@apzhub/platform-services", "n8n", "meilisearch"],
+  "persistence-deps",
+);
 
 // SoR Platform Services only — engine-track files (APZWORKFLOW-007+) are certified
 // separately under audit:workflow-engine-vertical / APZWORKFLOW-010.
@@ -368,7 +380,10 @@ for (const child of [
     join(ROOT, "apps/web/components/workbench-page.tsx"),
     "utf8",
   );
-  if (!shell.includes("WorkflowsWorkspaceRouter") || !shell.includes("isWorkflowsRoute")) {
+  if (
+    !shell.includes("WorkflowsWorkspaceRouter") ||
+    !shell.includes("isWorkflowsRoute")
+  ) {
     violations.push({
       file: "apps/web/components/workbench-page.tsx",
       line: 1,
@@ -443,7 +458,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.21.0",
+  "0.25.0",
   "version-platform-services",
 );
 requirePackageVersion(

@@ -63,6 +63,8 @@ describe("getPlaneConfigurationDiagnostics", () => {
     expect(diagnostics.connectionConfigured).toBe(true);
     expect(diagnostics.workspaceConfigured).toBe(true);
     expect(diagnostics.versionCompatibility.status).toBe("not_checked");
-    expect(diagnostics.versionCompatibility.supportedRange).toEqual(PLANE_SUPPORTED_VERSION_RANGE);
+    expect(diagnostics.versionCompatibility.supportedRange).toEqual(
+      PLANE_SUPPORTED_VERSION_RANGE,
+    );
   });
 });

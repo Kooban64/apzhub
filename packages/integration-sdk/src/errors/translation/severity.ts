@@ -1,7 +1,9 @@
 import type { IntegrationErrorCategory } from "../types";
 import type { IntegrationErrorSeverity } from "./types";
 
-const CATEGORY_SEVERITY: Readonly<Record<IntegrationErrorCategory, IntegrationErrorSeverity>> = {
+const CATEGORY_SEVERITY: Readonly<
+  Record<IntegrationErrorCategory, IntegrationErrorSeverity>
+> = {
   authentication: "error",
   authorization: "error",
   validation: "warning",
@@ -23,9 +25,7 @@ export function resolveErrorSeverity(
   return CATEGORY_SEVERITY[category];
 }
 
-export function shouldTripCircuitBreaker(
-  category: IntegrationErrorCategory,
-): boolean {
+export function shouldTripCircuitBreaker(category: IntegrationErrorCategory): boolean {
   return (
     category === "vendor_unavailable" ||
     category === "timeout" ||

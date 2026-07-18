@@ -275,12 +275,7 @@ export class TestingSearchEntityMapper {
     extras?: TestingSearchMappingExtras,
   ): SearchEntityDraft {
     if (entityType === "certification_approval") {
-      return this.certification.mapApproval(
-        context,
-        approval,
-        entityType,
-        extras,
-      );
+      return this.certification.mapApproval(context, approval, entityType, extras);
     }
     return this.manual.mapApproval(context, approval, entityType, extras);
   }

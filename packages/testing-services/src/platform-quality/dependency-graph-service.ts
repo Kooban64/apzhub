@@ -22,9 +22,10 @@ export interface DependencyGraphServiceDeps {
   readonly id: IdGenerator;
 }
 
-function dependencyEdge(
-  dep: ProductDependency,
-): { from: GovernedProductId; to: GovernedProductId } {
+function dependencyEdge(dep: ProductDependency): {
+  from: GovernedProductId;
+  to: GovernedProductId;
+} {
   if (dep.relation === "upstream") {
     return { from: dep.fromProductId, to: dep.toProductId };
   }
@@ -70,9 +71,7 @@ function detectCycles(
   const nodes =
     scope ??
     new Set<GovernedProductId>(
-      [...adjacency.keys()].concat(
-        [...adjacency.values()].flatMap((v) => v),
-      ),
+      [...adjacency.keys()].concat([...adjacency.values()].flatMap((v) => v)),
     );
 
   for (const node of nodes) {
@@ -89,9 +88,7 @@ export function createDependencyGraphService(
   const { store, now, id } = deps;
 
   function listTenantDeps(ctx: ServiceRequestContext): ProductDependency[] {
-    return [...store.dependencies.values()].filter(
-      (d) => d.tenantId === ctx.tenantId,
-    );
+    return [...store.dependencies.values()].filter((d) => d.tenantId === ctx.tenantId);
   }
 
   function productExists(
@@ -207,8 +204,7 @@ export function createDependencyGraphService(
       productId: GovernedProductId,
     ): Promise<readonly ProductDependency[]> {
       return listTenantDeps(ctx).filter(
-        (d) =>
-          d.fromProductId === productId || d.toProductId === productId,
+        (d) => d.fromProductId === productId || d.toProductId === productId,
       );
     },
 
@@ -217,13 +213,9 @@ export function createDependencyGraphService(
       productIds?: readonly GovernedProductId[],
     ): Promise<DependencyValidationResult> {
       const all = listTenantDeps(ctx);
-      const scope =
-        productIds !== undefined ? new Set(productIds) : undefined;
+      const scope = productIds !== undefined ? new Set(productIds) : undefined;
       const relevant = scope
-        ? all.filter(
-            (d) =>
-              scope.has(d.fromProductId) || scope.has(d.toProductId),
-          )
+        ? all.filter((d) => scope.has(d.fromProductId) || scope.has(d.toProductId))
         : all;
 
       const missingRequired: ProductDependencyId[] = [];

@@ -9,14 +9,14 @@ Binary storage is pluggable via `DocumentStorageProvider`. Domain and products c
 
 ## Provider kinds
 
-| Kind | Status |
-|------|--------|
-| `filesystem` | Implemented (`@apzhub/document-storage`) |
-| `s3` / MinIO (S3 API) | Implemented |
-| `memory` | Test-only (`memory_test` config mode) |
-| `azure_blob` | Unimplemented placeholder (`implemented: false`) |
-| `gcs` | Unimplemented placeholder |
-| `custom` | Extension reserved |
+| Kind                  | Status                                           |
+| --------------------- | ------------------------------------------------ |
+| `filesystem`          | Implemented (`@apzhub/document-storage`)         |
+| `s3` / MinIO (S3 API) | Implemented                                      |
+| `memory`              | Test-only (`memory_test` config mode)            |
+| `azure_blob`          | Unimplemented placeholder (`implemented: false`) |
+| `gcs`                 | Unimplemented placeholder                        |
+| `custom`              | Extension reserved                               |
 
 Unimplemented providers **cannot** be registered as active (`capabilities.implemented` required).
 

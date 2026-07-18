@@ -59,9 +59,9 @@ describe("testing-api client accessor", () => {
 
     resetTestingClient();
     const defaultPlans = await listPlans();
-    expect(
-      defaultPlans.items.some((item) => item.name === "Custom client plan"),
-    ).toBe(false);
+    expect(defaultPlans.items.some((item) => item.name === "Custom client plan")).toBe(
+      false,
+    );
     expect(
       defaultPlans.items.some((item) => item.name === "Release 2.4 Regression"),
     ).toBe(true);
@@ -69,7 +69,9 @@ describe("testing-api client accessor", () => {
 
   it("propagates not-found errors from the client", async () => {
     await expect(getPlan("missing-plan")).rejects.toBeInstanceOf(TestingClientError);
-    await expect(getExecution("missing-exec")).rejects.toBeInstanceOf(TestingClientError);
+    await expect(getExecution("missing-exec")).rejects.toBeInstanceOf(
+      TestingClientError,
+    );
     await expect(getCertification("missing-cert")).rejects.toBeInstanceOf(
       TestingClientError,
     );
@@ -94,13 +96,17 @@ describe("testing-api client accessor", () => {
     expect(cases.items.some((item) => item.id === FIXTURE_IDS.case)).toBe(true);
 
     const executions = await listExecutions();
-    expect(executions.items.some((item) => item.id === FIXTURE_IDS.execution)).toBe(true);
+    expect(executions.items.some((item) => item.id === FIXTURE_IDS.execution)).toBe(
+      true,
+    );
 
     const evidence = await listEvidence();
     expect(evidence.items.some((item) => item.id === FIXTURE_IDS.evidence)).toBe(true);
 
     const automation = await listAutomationRuns();
-    expect(automation.items.some((item) => item.id === FIXTURE_IDS.automation)).toBe(true);
+    expect(automation.items.some((item) => item.id === FIXTURE_IDS.automation)).toBe(
+      true,
+    );
 
     const coverage = await listCoverage();
     expect(coverage.items.length).toBeGreaterThan(0);

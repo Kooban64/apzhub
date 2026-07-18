@@ -49,10 +49,7 @@ export interface TestingPipelinesService {
     input: PipelineProviderImportInput,
   ): Promise<PipelineImportOutcome>;
   listImports(ctx: ServiceRequestContext): Promise<readonly PipelineImport[]>;
-  getImport(
-    ctx: ServiceRequestContext,
-    id: PipelineImportId,
-  ): Promise<PipelineImport>;
+  getImport(ctx: ServiceRequestContext, id: PipelineImportId): Promise<PipelineImport>;
   listImportHistory(
     ctx: ServiceRequestContext,
     importId: PipelineImportId,

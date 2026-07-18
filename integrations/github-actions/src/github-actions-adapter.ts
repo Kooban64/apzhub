@@ -382,11 +382,7 @@ export class GitHubActionsAdapter extends IntegrationAdapterBase {
       {
         name: "github_actions_operational_health",
         status:
-          sdkStatus === "healthy"
-            ? "pass"
-            : sdkStatus === "degraded"
-              ? "warn"
-              : "fail",
+          sdkStatus === "healthy" ? "pass" : sdkStatus === "degraded" ? "warn" : "fail",
         message: `Operational health: ${health.level}`,
       },
       {
@@ -427,9 +423,7 @@ export class GitHubActionsAdapter extends IntegrationAdapterBase {
       warnings.push(`operational:${reason}`);
     }
     if (extension.rateLimitRemaining !== undefined) {
-      warnings.push(
-        `rate_limit_remaining:${extension.rateLimitRemaining}`,
-      );
+      warnings.push(`rate_limit_remaining:${extension.rateLimitRemaining}`);
     }
 
     // Never include secrets in diagnostics

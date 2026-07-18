@@ -11,10 +11,10 @@
 
 ## Result (as certified at APZCONFIG-003 closeout)
 
-| Surface | Lines | Notes |
-| --- | --- | --- |
-| HTTP handlers | ~99.5% | Gateway-only presentation |
-| Typed client | ~98% | HTTP envelope + error paths |
+| Surface       | Lines  | Notes                       |
+| ------------- | ------ | --------------------------- |
+| HTTP handlers | ~99.5% | Gateway-only presentation   |
+| Typed client  | ~98%   | HTTP envelope + error paths |
 
 ## Notes
 

@@ -31,9 +31,9 @@ import {
 } from "../schemas/task";
 import { toListQuery, toPlatformApiPage } from "./paging";
 
-async function resolveTaskId(
-  routeContext?: { params: Promise<Record<string, string>> },
-): Promise<string> {
+async function resolveTaskId(routeContext?: {
+  params: Promise<Record<string, string>>;
+}): Promise<string> {
   const params = await routeContext?.params;
   return parsePathParam(taskIdParamSchema, params?.taskId ?? "", "taskId");
 }
@@ -99,21 +99,24 @@ export async function handleListTasks(
   const query = parseQuery(taskListQuerySchema, request.nextUrl.searchParams);
   const gateway = await getPlatformServiceGateway();
   const listQuery = toListQuery(query);
-  const result = await gateway.tasks.listTasks(context.serviceContext, query.projectId, {
-    page: listQuery.page,
-    sort: listQuery.sort as
-      | readonly { field: TaskSortField; direction: "asc" | "desc" }[]
-      | undefined,
-    filter: {
-      statusId: query.stateId,
-      assigneeId: query.assigneeId,
-      labelId: query.labelId,
-      priority: query.priority,
-      projectModuleId: query.moduleId,
-      sprintId: query.sprintId,
-      search: query.search,
+  const result = await gateway.tasks.listTasks(
+    context.serviceContext,
+    query.projectId,
+    {
+      page: listQuery.page,
+      sort: listQuery.sort as
+        readonly { field: TaskSortField; direction: "asc" | "desc" }[] | undefined,
+      filter: {
+        statusId: query.stateId,
+        assigneeId: query.assigneeId,
+        labelId: query.labelId,
+        priority: query.priority,
+        projectModuleId: query.moduleId,
+        sprintId: query.sprintId,
+        search: query.search,
+      },
     },
-  });
+  );
 
   return jsonCollectionResponse(
     result.items,
@@ -137,7 +140,11 @@ export async function handleCreateTask(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const body = await parseJsonBody(request, createTaskBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const body = await parseJsonBody(
+    request,
+    createTaskBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
   const gateway = await getPlatformServiceGateway();
   const task = await gateway.tasks.createTask(
     context.serviceContext,
@@ -153,7 +160,11 @@ export async function handleUpdateTask(
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
   const taskId = await resolveTaskId(routeContext);
-  const body = await parseJsonBody(request, updateTaskBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const body = await parseJsonBody(
+    request,
+    updateTaskBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
   const gateway = await getPlatformServiceGateway();
   const task = await gateway.tasks.updateTask(
     context.serviceContext,
@@ -191,9 +202,13 @@ export async function handleTransitionTask(
   );
   const statusId = body.statusId ?? body.stateId!;
   const gateway = await getPlatformServiceGateway();
-  const task = await gateway.tasks.transitionTaskStatus(context.serviceContext, taskId, {
-    statusId,
-  });
+  const task = await gateway.tasks.transitionTaskStatus(
+    context.serviceContext,
+    taskId,
+    {
+      statusId,
+    },
+  );
   return jsonDataResponse(task, context.tracing);
 }
 
@@ -203,7 +218,11 @@ export async function handleAssignTask(
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
   const taskId = await resolveTaskId(routeContext);
-  const body = await parseJsonBody(request, assignTaskBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const body = await parseJsonBody(
+    request,
+    assignTaskBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
   const gateway = await getPlatformServiceGateway();
 
   if (body.assigneeIds && body.assigneeIds.length > 0) {
@@ -266,12 +285,18 @@ export async function handleAddTaskLabels(
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
   const taskId = await resolveTaskId(routeContext);
-  const body = await parseJsonBody(request, addLabelsBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const body = await parseJsonBody(
+    request,
+    addLabelsBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
   const gateway = await getPlatformServiceGateway();
   const current = await gateway.tasks.getTask(context.serviceContext, taskId);
   const toAdd = body.labelIds?.length ? body.labelIds : [body.labelId!];
   const labelIds = uniqueIds([...current.labelIds, ...toAdd]);
-  const task = await gateway.tasks.updateTask(context.serviceContext, taskId, { labelIds });
+  const task = await gateway.tasks.updateTask(context.serviceContext, taskId, {
+    labelIds,
+  });
   return jsonDataResponse(task, context.tracing);
 }
 
@@ -286,7 +311,9 @@ export async function handleRemoveTaskLabel(
   const gateway = await getPlatformServiceGateway();
   const current = await gateway.tasks.getTask(context.serviceContext, taskId);
   const labelIds = current.labelIds.filter((id) => id !== labelId);
-  const task = await gateway.tasks.updateTask(context.serviceContext, taskId, { labelIds });
+  const task = await gateway.tasks.updateTask(context.serviceContext, taskId, {
+    labelIds,
+  });
   return jsonDataResponse(task, context.tracing);
 }
 
@@ -296,7 +323,11 @@ export async function handleSetTaskSprint(
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
   const taskId = await resolveTaskId(routeContext);
-  const body = await parseJsonBody(request, setSprintBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const body = await parseJsonBody(
+    request,
+    setSprintBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
   const gateway = await getPlatformServiceGateway();
   const task = await gateway.tasks.updateTask(context.serviceContext, taskId, {
     sprintId: body.sprintId,
@@ -323,7 +354,11 @@ export async function handleSetTaskModule(
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
   const taskId = await resolveTaskId(routeContext);
-  const body = await parseJsonBody(request, setModuleBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const body = await parseJsonBody(
+    request,
+    setModuleBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
   const gateway = await getPlatformServiceGateway();
   const task = await gateway.tasks.updateTask(context.serviceContext, taskId, {
     projectModuleId: body.projectModuleId ?? body.moduleId!,
@@ -350,7 +385,11 @@ export async function handleSetTaskParent(
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
   const taskId = await resolveTaskId(routeContext);
-  const body = await parseJsonBody(request, setParentBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const body = await parseJsonBody(
+    request,
+    setParentBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
   const gateway = await getPlatformServiceGateway();
   const task = await gateway.tasks.updateTask(context.serviceContext, taskId, {
     parentTaskId: body.parentTaskId,

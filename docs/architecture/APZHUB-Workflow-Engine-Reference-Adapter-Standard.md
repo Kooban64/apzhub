@@ -5,7 +5,7 @@
 > **Status:** Mandatory — Wave closeout APZWORKFLOW-011  
 > **Last updated:** 2026-07-16  
 > **Reference implementation:** `@apzhub/integration-n8n` (n8n) **0.1.0**  
-> **Parent standard:** [REFERENCE-ADAPTER-STANDARD](./REFERENCE-ADAPTER-STANDARD.md) · [026](../026-integration-sdk-adapter-framework-integration-manifest-specification.md) · [008](../008-module-platform-service-connector-architecture.md)
+> **Parent standard:** [REFERENCE-ADAPTER-STANDARD](./REFERENCE-ADAPTER-STANDARD.md) · [026](../026-integration-sdk-adapter-framework-integration-manifest-specification.md) · [008](../008-module-plugin-connector-architecture.md)
 
 ---
 
@@ -29,11 +29,11 @@ Deviations require an ADR and owner approval.
 
 ## 2. System of Record rules
 
-| Concern | Owner |
-| ------- | ----- |
-| Workflow **management plane** (definitions, versions, lifecycle, templates, audit) | **APZHUB Workflow Platform** (SoR) |
-| Engine **runtime metadata** (provider workflows, tags, users, projects, health) | External engine via adapter (read-only in this wave) |
-| Execution / scheduling / mutations | **Not in scope** for Reference Adapter wave — future milestones only |
+| Concern                                                                            | Owner                                                                |
+| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Workflow **management plane** (definitions, versions, lifecycle, templates, audit) | **APZHUB Workflow Platform** (SoR)                                   |
+| Engine **runtime metadata** (provider workflows, tags, users, projects, health)    | External engine via adapter (read-only in this wave)                 |
+| Execution / scheduling / mutations                                                 | **Not in scope** for Reference Adapter wave — future milestones only |
 
 Adapters are **information providers** for engine metadata. They must not execute workflows, own schedules, or expose credentials unless a future milestone explicitly authorises it.
 
@@ -63,13 +63,13 @@ Internal REST client (package-private)
 Vendor engine API
 ```
 
-| Layer | May depend on | Must not depend on |
-| ----- | ------------- | ------------------ |
-| Workbench / typed client | HTTP `/api/v1/workflows/engine/*` only | Gateway, platform-services, adapters, workflow-core |
-| HTTP handlers | Gateway bootstrap, contracts, auth | Adapter packages, workflow-core, persistence |
-| Platform Services | Adapter **public** API via Integration SDK | Adapter `internal/`, vendor DTOs, apps/web |
-| Adapter | Integration SDK, workflow-contracts (types) | `platform-services`, HTTP routes, Workbench |
-| Workflow Platform SoR | Core + persistence | Engine adapter internals |
+| Layer                    | May depend on                               | Must not depend on                                  |
+| ------------------------ | ------------------------------------------- | --------------------------------------------------- |
+| Workbench / typed client | HTTP `/api/v1/workflows/engine/*` only      | Gateway, platform-services, adapters, workflow-core |
+| HTTP handlers            | Gateway bootstrap, contracts, auth          | Adapter packages, workflow-core, persistence        |
+| Platform Services        | Adapter **public** API via Integration SDK  | Adapter `internal/`, vendor DTOs, apps/web          |
+| Adapter                  | Integration SDK, workflow-contracts (types) | `platform-services`, HTTP routes, Workbench         |
+| Workflow Platform SoR    | Core + persistence                          | Engine adapter internals                            |
 
 ---
 
@@ -98,14 +98,14 @@ integrations/{provider}/
 
 ## 5. Mandatory capabilities (Reference Adapter wave)
 
-| Capability | Requirement |
-| ---------- | ----------- |
-| Connection / auth config | Explicit; no silent mock in production |
-| Health / diagnostics / compatibility | Required |
-| Capability discovery | Supported vs unsupported operations |
-| Workflow list/get (metadata) | Read-only |
-| Templates / tags / users / projects | As provider allows (partial OK) |
-| Validate connection | Required |
+| Capability                           | Requirement                            |
+| ------------------------------------ | -------------------------------------- |
+| Connection / auth config             | Explicit; no silent mock in production |
+| Health / diagnostics / compatibility | Required                               |
+| Capability discovery                 | Supported vs unsupported operations    |
+| Workflow list/get (metadata)         | Read-only                              |
+| Templates / tags / users / projects  | As provider allows (partial OK)        |
+| Validate connection                  | Required                               |
 
 ---
 

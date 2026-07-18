@@ -10,24 +10,24 @@
 
 ## Sidebar sections
 
-| Order | Section | Route suffix | Permission |
-| --- | --- | --- | --- |
-| 10 | Overview | `/overview` | `identity.read` |
-| 20 | Users | `/users` | `identity.read` |
-| 30 | Groups | `/groups` | `identity.read` |
-| 40 | Roles | `/roles` | `identity.read` |
-| 50 | Organisations | `/organisations` | `identity.read` |
-| 60 | Tenants | `/tenants` | `identity.read` |
-| 70 | Departments | `/departments` | `identity.read` |
-| 80 | Positions | `/positions` | `identity.read` |
-| 90 | Memberships | `/memberships` | `identity.read` |
-| 100 | Service Assignments | `/service-assignments` | `identity.read` |
-| 110 | Invitations | `/invitations` | `identity.read` |
-| 120 | Policies | `/policies` | `identity.read` |
-| 130 | Audit | `/audit` | `identity.read` |
-| 140 | History | `/history` | `identity.read` |
-| 150 | References | `/references` | `identity.read` |
-| 160 | Diagnostics | `/diagnostics` | `identity.read` |
+| Order | Section             | Route suffix           | Permission      |
+| ----- | ------------------- | ---------------------- | --------------- |
+| 10    | Overview            | `/overview`            | `identity.read` |
+| 20    | Users               | `/users`               | `identity.read` |
+| 30    | Groups              | `/groups`              | `identity.read` |
+| 40    | Roles               | `/roles`               | `identity.read` |
+| 50    | Organisations       | `/organisations`       | `identity.read` |
+| 60    | Tenants             | `/tenants`             | `identity.read` |
+| 70    | Departments         | `/departments`         | `identity.read` |
+| 80    | Positions           | `/positions`           | `identity.read` |
+| 90    | Memberships         | `/memberships`         | `identity.read` |
+| 100   | Service Assignments | `/service-assignments` | `identity.read` |
+| 110   | Invitations         | `/invitations`         | `identity.read` |
+| 120   | Policies            | `/policies`            | `identity.read` |
+| 130   | Audit               | `/audit`               | `identity.read` |
+| 140   | History             | `/history`             | `identity.read` |
+| 150   | References          | `/references`          | `identity.read` |
+| 160   | Diagnostics         | `/diagnostics`         | `identity.read` |
 
 ## Routing
 

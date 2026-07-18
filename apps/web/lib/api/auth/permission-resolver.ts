@@ -37,11 +37,7 @@ export async function resolveLawApiPermissions(
     permissions = [...authz.permissions];
   }
 
-  if (
-    (permissions?.length ?? 0) === 0 &&
-    isDevRegistrationAllowed() &&
-    input.user
-  ) {
+  if ((permissions?.length ?? 0) === 0 && isDevRegistrationAllowed() && input.user) {
     permissions = ["*"];
   }
 

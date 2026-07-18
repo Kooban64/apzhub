@@ -44,13 +44,9 @@ describe("notification-contracts", () => {
     expect(isNotificationReferenceKind("projects")).toBe(true);
     expect(isNotificationReferenceKind("plane")).toBe(false);
     expect(hasNotificationPermission(["notification.*"], "manage")).toBe(true);
-    expect(hasNotificationPermission(["notification.read"], "manage")).toBe(
-      false,
-    );
+    expect(hasNotificationPermission(["notification.read"], "manage")).toBe(false);
     expect(hasNotificationPermission(["notification.read"], "read")).toBe(true);
-    expect(hasNotificationPermission(["notification.template"], "template")).toBe(
-      true,
-    );
+    expect(hasNotificationPermission(["notification.template"], "template")).toBe(true);
   });
 
   it("brands identifiers and rejects invalid shapes", () => {

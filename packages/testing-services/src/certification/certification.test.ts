@@ -42,9 +42,7 @@ const ALL_PERMS = [
   "traceability.*",
 ] as const;
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_1",
     userId: "user_1",
@@ -67,8 +65,8 @@ function engine() {
 }
 
 describe("certification engine version & wiring", () => {
-  it("exports services version 0.7.0 and wires certification on domain factory", () => {
-    expect(TESTING_SERVICES_VERSION).toBe("0.7.0");
+  it("exports services version 0.11.0 and wires certification on domain factory", () => {
+    expect(TESTING_SERVICES_VERSION).toBe("0.11.0");
     const all = createTestingDomainServices({
       persistence: createInMemoryTestingPersistence(),
     });
@@ -93,23 +91,21 @@ describe("certification state machine", () => {
     expect(
       canTransitionCertificationStatus("archived", "draft", { allowOverride: true }),
     ).toBe(true);
-    expect(() =>
-      assertCertificationTransition("draft", "approved"),
-    ).toThrow(DomainRuleError);
-    expect(isApprovedLikeCertificationStatus("certified")).toBe(true);
-    expect(isApprovedLikeCertificationStatus("conditionally_approved")).toBe(
-      true,
+    expect(() => assertCertificationTransition("draft", "approved")).toThrow(
+      DomainRuleError,
     );
+    expect(isApprovedLikeCertificationStatus("certified")).toBe(true);
+    expect(isApprovedLikeCertificationStatus("conditionally_approved")).toBe(true);
   });
 
   it("canonicalizes legacy statuses for transitions", () => {
     expect(canTransitionCertificationStatus("certified", "archived")).toBe(true);
-    expect(
-      canTransitionCertificationStatus("failed_certification", "preparing"),
-    ).toBe(true);
-    expect(
-      canTransitionCertificationStatus("conditional_approval", "approved"),
-    ).toBe(true);
+    expect(canTransitionCertificationStatus("failed_certification", "preparing")).toBe(
+      true,
+    );
+    expect(canTransitionCertificationStatus("conditional_approval", "approved")).toBe(
+      true,
+    );
   });
 });
 
@@ -129,9 +125,9 @@ describe("gate evaluation & recommendations", () => {
         coverageThreshold: 80,
       }).status,
     ).toBe("fail");
-    expect(
-      evaluateCertificationGate({ gateKey: "coverage_threshold" }).status,
-    ).toBe("unknown");
+    expect(evaluateCertificationGate({ gateKey: "coverage_threshold" }).status).toBe(
+      "unknown",
+    );
     expect(
       evaluateCertificationGate({
         gateKey: "no_critical_defects",
@@ -224,9 +220,9 @@ describe("certification workflow integration", () => {
 
     // Seed coverage so gate can pass
     await svc.events; // touch
-    const persistence = (
-      svc as unknown as { records: { listCertificationRecords: unknown } }
-    );
+    const persistence = svc as unknown as {
+      records: { listCertificationRecords: unknown };
+    };
     void persistence;
     // Use underlying persistence via evaluate with unknown coverage → unknown/fail path covered
     const evals = await svc.gates.evaluateAll(c, record.id);
@@ -261,9 +257,7 @@ describe("certification workflow integration", () => {
     const events = svc.events.list();
     expect(events.some((e) => e.eventType === "certification.created")).toBe(true);
     expect(events.some((e) => e.eventType === "certification.approved")).toBe(true);
-    expect(events.some((e) => e.eventType === "certification.recommended")).toBe(
-      true,
-    );
+    expect(events.some((e) => e.eventType === "certification.recommended")).toBe(true);
   });
 
   it("rejects illegal transitions and permission denials", async () => {
@@ -277,9 +271,7 @@ describe("certification workflow integration", () => {
       gateIds: [],
       approvalIds: [],
     });
-    await expect(
-      svc.workflow.approve(c, record.id),
-    ).rejects.toThrow(DomainRuleError);
+    await expect(svc.workflow.approve(c, record.id)).rejects.toThrow(DomainRuleError);
 
     const denied = ctx({ permissions: ["certification.view"] });
     await expect(
@@ -363,9 +355,7 @@ describe("certification workflow integration", () => {
     ).rejects.toThrow(DomainRuleError);
 
     svc.validation.assertTransitionAllowed("draft", "preparing");
-    expect(() =>
-      svc.validation.assertTransitionAllowed("draft", "approved"),
-    ).toThrow();
+    expect(() => svc.validation.assertTransitionAllowed("draft", "approved")).toThrow();
 
     const trace = await svc.validation.validateTraceability(c, record.id);
     expect(trace.ok).toBe(false);
@@ -389,9 +379,9 @@ describe("certification coverage expansion", () => {
         dataAvailable: false,
       }).status,
     ).toBe("unknown");
-    expect(
-      evaluateCertificationGate({ gateKey: "evidence_complete" }).status,
-    ).toBe("fail");
+    expect(evaluateCertificationGate({ gateKey: "evidence_complete" }).status).toBe(
+      "fail",
+    );
     expect(
       evaluateCertificationGate({
         gateKey: "manual_testing_complete",
@@ -419,9 +409,9 @@ describe("certification coverage expansion", () => {
         automationCompletePercent: 50,
       }).status,
     ).toBe("warning");
-    expect(
-      evaluateCertificationGate({ gateKey: "automation_complete" }).status,
-    ).toBe("unknown");
+    expect(evaluateCertificationGate({ gateKey: "automation_complete" }).status).toBe(
+      "unknown",
+    );
     expect(
       evaluateCertificationGate({
         gateKey: "approvals_complete",
@@ -434,18 +424,18 @@ describe("certification coverage expansion", () => {
         pendingApprovalCount: 2,
       }).status,
     ).toBe("fail");
-    expect(
-      evaluateCertificationGate({ gateKey: "approvals_complete" }).status,
-    ).toBe("unknown");
+    expect(evaluateCertificationGate({ gateKey: "approvals_complete" }).status).toBe(
+      "unknown",
+    );
     expect(
       evaluateCertificationGate({
         gateKey: "no_critical_defects",
         openCriticalDefectCount: 1,
       }).status,
     ).toBe("fail");
-    expect(
-      evaluateCertificationGate({ gateKey: "no_critical_defects" }).status,
-    ).toBe("unknown");
+    expect(evaluateCertificationGate({ gateKey: "no_critical_defects" }).status).toBe(
+      "unknown",
+    );
     expect(
       evaluateCertificationGate({
         gateKey: "risk_accepted",
@@ -473,9 +463,9 @@ describe("certification coverage expansion", () => {
         complianceComplete: false,
       }).status,
     ).toBe("fail");
-    expect(
-      evaluateCertificationGate({ gateKey: "compliance_complete" }).status,
-    ).toBe("unknown");
+    expect(evaluateCertificationGate({ gateKey: "compliance_complete" }).status).toBe(
+      "unknown",
+    );
     expect(
       evaluateCertificationGate({
         gateKey: "documentation_complete",
@@ -534,9 +524,7 @@ describe("certification coverage expansion", () => {
     );
     expect(eventTypeForStatus("preparing")).toBe("certification.transitioned");
     expect(eventTypeForStatus("certified")).toBe("certification.approved");
-    expect(eventTypeForStatus("failed_certification")).toBe(
-      "certification.rejected",
-    );
+    expect(eventTypeForStatus("failed_certification")).toBe("certification.rejected");
     expect(eventTypeForStatus("conditional_approval")).toBe(
       "certification.conditionally_approved",
     );
@@ -558,9 +546,9 @@ describe("certification coverage expansion", () => {
     expect(() =>
       assertHasPermission(ctx({ permissions: [] }), "certification.view"),
     ).toThrow(DomainRuleError);
-    expect(() =>
-      assertTenantOrganisationMatch(c, { tenantId: "other" }),
-    ).toThrow(DomainRuleError);
+    expect(() => assertTenantOrganisationMatch(c, { tenantId: "other" })).toThrow(
+      DomainRuleError,
+    );
     expect(() =>
       assertTenantOrganisationMatch(c, {
         tenantId: c.tenantId,
@@ -661,11 +649,7 @@ describe("certification coverage expansion", () => {
     expect((await svc.gates.listGateDefinitions(c)).length).toBeGreaterThan(0);
 
     await svc.evidence.linkEvidence(c, record.id, { evidenceIds: ["e1"] });
-    const evaluation = await svc.gates.evaluateGate(
-      c,
-      record.id,
-      "evidence_complete",
-    );
+    const evaluation = await svc.gates.evaluateGate(c, record.id, "evidence_complete");
     expect(evaluation.status).toBe("pass");
     const listed = await svc.gates.listEvaluations(c, record.id);
     expect(listed.length).toBeGreaterThan(0);

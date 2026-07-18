@@ -1,9 +1,9 @@
 # Search Integration Adapter Lifecycle Guide
 
-| Field | Value |
-| --- | --- |
-| **Document** | search-integration-adapter-lifecycle |
-| **Milestone** | APZSEARCH-004 |
+| Field         | Value                                |
+| ------------- | ------------------------------------ |
+| **Document**  | search-integration-adapter-lifecycle |
+| **Milestone** | APZSEARCH-004                        |
 
 ## 1. States
 
@@ -15,13 +15,13 @@ These are **SDK metadata states**. They do not open sockets to a search engine.
 
 ## 2. Integration-sdk composition
 
-| Phase | Integration SDK | Search SDK |
-| --- | --- | --- |
-| Validate | `validateConfiguration` | + declared search capabilities |
-| Initialise | `initialise` / `onInitialise` | `onSearchInitialise` + lifecycle `ready` |
-| Health | `performHealthCheck` | Appends `search_sdk` / `search_execution` checks |
-| Diagnostics | `collectDiagnostics` | Safe search diagnostics wrap |
-| Dispose | `dispose` / `onDispose` | Lifecycle `disposed` |
+| Phase       | Integration SDK               | Search SDK                                       |
+| ----------- | ----------------------------- | ------------------------------------------------ |
+| Validate    | `validateConfiguration`       | + declared search capabilities                   |
+| Initialise  | `initialise` / `onInitialise` | `onSearchInitialise` + lifecycle `ready`         |
+| Health      | `performHealthCheck`          | Appends `search_sdk` / `search_execution` checks |
+| Diagnostics | `collectDiagnostics`          | Safe search diagnostics wrap                     |
+| Dispose     | `dispose` / `onDispose`       | Lifecycle `disposed`                             |
 
 ## 3. Configuration validation
 

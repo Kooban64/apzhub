@@ -28,16 +28,16 @@ The Reporting Platform is certified as a **production-ready shared APZHUB capabi
 
 ## Supporting audits
 
-| Document | Verdict |
-| -------- | ------- |
-| [Architecture / Dependency / Boundary Audit](../reviews/APZREPORT-003-architecture-dependency-boundary-audit.md) | **PASS** — 0 violations |
-| [API Audit](../reviews/APZREPORT-003-api-audit.md) | **PASS** |
-| [Workbench Audit](../reviews/APZREPORT-003-workbench-audit.md) | **PASS** (unit/component) |
-| [Security Audit](../reviews/APZREPORT-003-security-audit.md) | **PASS** |
-| [Performance Baseline](../reviews/APZREPORT-003-performance-baseline.md) | **COLLECTED** |
-| [Coverage Baseline](../reviews/APZREPORT-003-coverage-baseline.md) | **PASS** ≥95% lines (scoped) |
-| [Production Readiness](../reviews/APZREPORT-003-production-readiness.md) | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| [Consumer Guide](../developer/APZHUB-Platform-Reporting-HTTP-Consumer-Integration-Guide.md) | Updated |
+| Document                                                                                                         | Verdict                               |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| [Architecture / Dependency / Boundary Audit](../reviews/APZREPORT-003-architecture-dependency-boundary-audit.md) | **PASS** — 0 violations               |
+| [API Audit](../reviews/APZREPORT-003-api-audit.md)                                                               | **PASS**                              |
+| [Workbench Audit](../reviews/APZREPORT-003-workbench-audit.md)                                                   | **PASS** (unit/component)             |
+| [Security Audit](../reviews/APZREPORT-003-security-audit.md)                                                     | **PASS**                              |
+| [Performance Baseline](../reviews/APZREPORT-003-performance-baseline.md)                                         | **COLLECTED**                         |
+| [Coverage Baseline](../reviews/APZREPORT-003-coverage-baseline.md)                                               | **PASS** ≥95% lines (scoped)          |
+| [Production Readiness](../reviews/APZREPORT-003-production-readiness.md)                                         | **PRODUCTION_READY_WITH_LIMITATIONS** |
+| [Consumer Guide](../developer/APZHUB-Platform-Reporting-HTTP-Consumer-Integration-Guide.md)                      | Updated                               |
 
 ## Explicit non-goals (certified as excluded)
 

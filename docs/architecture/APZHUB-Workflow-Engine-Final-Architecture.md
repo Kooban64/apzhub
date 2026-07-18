@@ -45,13 +45,13 @@ Workflow Engine Workbench (/workspace/workflow-engine)
 
 ## Frozen package versions
 
-| Package | Version |
-| ------- | ------- |
-| `@apzhub/integration-n8n` | 0.1.0 |
-| `@apzhub/workflow-contracts` | 0.3.0 |
-| `@apzhub/workflow-core` | 0.1.1 |
-| `@apzhub/workflow-persistence` | 0.1.1 |
-| `@apzhub/platform-services` | 0.20.0 |
+| Package                        | Version |
+| ------------------------------ | ------- |
+| `@apzhub/integration-n8n`      | 0.1.0   |
+| `@apzhub/workflow-contracts`   | 0.3.0   |
+| `@apzhub/workflow-core`        | 0.1.1   |
+| `@apzhub/workflow-persistence` | 0.1.1   |
+| `@apzhub/platform-services`    | 0.20.0  |
 
 ## Related
 

@@ -101,7 +101,9 @@ function isHttpsUrl(url: string): boolean {
 export class PlaneWebhookService {
   constructor(private readonly deps: PlaneServiceDeps) {}
 
-  validateConfiguration(input: CreateWebhookInput | UpdateWebhookInput): WebhookValidationResult {
+  validateConfiguration(
+    input: CreateWebhookInput | UpdateWebhookInput,
+  ): WebhookValidationResult {
     const issues: string[] = [];
 
     if ("url" in input && input.url !== undefined) {
@@ -117,7 +119,11 @@ export class PlaneWebhookService {
         issues.push("event_types_required");
       }
       for (const eventType of input.eventTypes) {
-        if (!(PLANE_SUPPORTED_WEBHOOK_EVENT_TYPES as readonly string[]).includes(eventType)) {
+        if (
+          !(PLANE_SUPPORTED_WEBHOOK_EVENT_TYPES as readonly string[]).includes(
+            eventType,
+          )
+        ) {
           issues.push(`unsupported_event_type:${eventType}`);
         }
       }
@@ -126,7 +132,9 @@ export class PlaneWebhookService {
     return { ok: issues.length === 0, issues };
   }
 
-  async list(context: IntegrationRequestContext): Promise<readonly WebhookRegistration[]> {
+  async list(
+    context: IntegrationRequestContext,
+  ): Promise<readonly WebhookRegistration[]> {
     return this.deps.runner.run(context, "plane.webhooks.list", async () => {
       const response = await this.deps.client.listWebhooks(context, { per_page: 100 });
       return asWebhookArray(response).map(mapWebhook);
@@ -162,9 +170,15 @@ export class PlaneWebhookService {
     );
 
     return this.deps.runner.run(context, "plane.webhooks.create", async () => {
-      const record = await this.deps.client.createWebhook(context, buildWebhookBody(input));
+      const record = await this.deps.client.createWebhook(
+        context,
+        buildWebhookBody(input),
+      );
       this.deps.metricsProvider
-        ?.counter("plane.webhook.registration", { operation: "create", result: "success" })
+        ?.counter("plane.webhook.registration", {
+          operation: "create",
+          result: "success",
+        })
         .inc();
       return mapWebhook(record);
     });
@@ -177,10 +191,7 @@ export class PlaneWebhookService {
   ): Promise<WebhookRegistration> {
     assertValid(validateRequiredString(webhookId, "webhookId"), "webhooks.update");
     const validation = this.validateConfiguration(input);
-    assertValid(
-      { ok: validation.ok, issues: validation.issues },
-      "webhooks.update",
-    );
+    assertValid({ ok: validation.ok, issues: validation.issues }, "webhooks.update");
 
     return this.deps.runner.run(context, "plane.webhooks.update", async () => {
       const record = await this.deps.client.updateWebhook(
@@ -189,7 +200,10 @@ export class PlaneWebhookService {
         buildWebhookBody(input),
       );
       this.deps.metricsProvider
-        ?.counter("plane.webhook.registration", { operation: "update", result: "success" })
+        ?.counter("plane.webhook.registration", {
+          operation: "update",
+          result: "success",
+        })
         .inc();
       return mapWebhook(record);
     });
@@ -201,7 +215,10 @@ export class PlaneWebhookService {
     await this.deps.runner.run(context, "plane.webhooks.delete", async () => {
       await this.deps.client.deleteWebhook(context, extractWebhookPlaneId(webhookId));
       this.deps.metricsProvider
-        ?.counter("plane.webhook.registration", { operation: "delete", result: "success" })
+        ?.counter("plane.webhook.registration", {
+          operation: "delete",
+          result: "success",
+        })
         .inc();
     });
   }

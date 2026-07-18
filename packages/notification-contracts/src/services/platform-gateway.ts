@@ -24,7 +24,11 @@ import type {
   NotificationReferenceId,
   NotificationTemplateId,
 } from "../identifiers";
-import type { NotificationChannelKind, NotificationPriority, NotificationStatus } from "../enums/catalogue";
+import type {
+  NotificationChannelKind,
+  NotificationPriority,
+  NotificationStatus,
+} from "../enums/catalogue";
 import type { NotificationValidationResult } from "./notification-service";
 
 /**
@@ -138,9 +142,7 @@ export type NotificationDiagnosticsCapabilities = {
 };
 
 export type NotificationNotificationsService = {
-  list(
-    ctx: NotificationPlatformServiceContext,
-  ): Promise<readonly Notification[]>;
+  list(ctx: NotificationPlatformServiceContext): Promise<readonly Notification[]>;
   get(
     ctx: NotificationPlatformServiceContext,
     notificationId: NotificationId,

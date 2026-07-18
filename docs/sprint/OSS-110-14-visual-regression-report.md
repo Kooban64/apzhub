@@ -20,11 +20,11 @@ Chromium full-page screenshot baselines for three Support surfaces against **moc
 
 ## Baselines
 
-| Baseline | Route | Snapshot name |
-|----------|-------|---------------|
-| Inbox | `/workspace/support/requests` | `support-inbox.png` |
-| Detail | `/workspace/support/requests/{sreq_…}` | `support-detail.png` |
-| Analytics | `/workspace/support/analytics` | `support-analytics.png` |
+| Baseline  | Route                                  | Snapshot name           |
+| --------- | -------------------------------------- | ----------------------- |
+| Inbox     | `/workspace/support/requests`          | `support-inbox.png`     |
+| Detail    | `/workspace/support/requests/{sreq_…}` | `support-detail.png`    |
+| Analytics | `/workspace/support/analytics`         | `support-analytics.png` |
 
 Storage: Playwright snapshot directory for the visual spec (Chromium project).
 
@@ -41,11 +41,11 @@ Storage: Playwright snapshot directory for the visual spec (Chromium project).
 
 ## Results
 
-| Baseline | Result |
-|----------|--------|
-| Inbox | ✅ PASS |
-| Detail | ✅ PASS |
-| Analytics | ✅ PASS |
+| Baseline               | Result                                               |
+| ---------------------- | ---------------------------------------------------- |
+| Inbox                  | ✅ PASS                                              |
+| Detail                 | ✅ PASS                                              |
+| Analytics              | ✅ PASS                                              |
 | **Suite contribution** | **3 tests** (part of Playwright **23 passed** total) |
 
 ---

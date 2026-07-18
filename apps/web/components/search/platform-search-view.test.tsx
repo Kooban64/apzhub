@@ -10,6 +10,11 @@ import {
   createMockSearchClient,
   MOCK_SEARCH_HIT,
 } from "@/lib/search/mock-search-client";
+import { createMockSearchPublicationAdminClient } from "@/lib/search/publication-admin-client";
+import {
+  resetSearchPublicationAdminClient,
+  setSearchPublicationAdminClient,
+} from "@/lib/search/publication-admin-api";
 import { SearchClientError } from "@/lib/search/search-errors";
 import { resetSearchClient, setSearchClient } from "@/lib/search/search-api";
 import type { SearchClient } from "@/lib/search/search-client";
@@ -28,9 +33,7 @@ function wrap(children: ReactNode) {
   return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
 }
 
-function failingClient(
-  overrides: Partial<SearchClient> = {},
-): SearchClient {
+function failingClient(overrides: Partial<SearchClient> = {}): SearchClient {
   const err = new SearchClientError({
     status: 403,
     code: "FORBIDDEN",
@@ -61,6 +64,8 @@ describe("PlatformSearchView", () => {
   beforeEach(() => {
     resetSearchClient();
     setSearchClient(createMockSearchClient());
+    resetSearchPublicationAdminClient();
+    setSearchPublicationAdminClient(createMockSearchPublicationAdminClient());
   });
 
   it("renders overview health", async () => {
@@ -187,6 +192,19 @@ describe("PlatformSearchView", () => {
       expect(screen.getByText(/permission/i)).toBeTruthy();
     });
     await user.click(screen.getByRole("button", { name: /Retry/i }));
+  });
+
+  it("renders publication operations section", async () => {
+    render(wrap(<PlatformSearchView section="publication" />));
+    await waitFor(() => {
+      expect(screen.getByTestId("search-publication-ops")).toBeTruthy();
+      expect(
+        screen.getByRole("heading", {
+          level: 1,
+          name: "Publication Operations",
+        }),
+      ).toBeTruthy();
+    });
   });
 
   it("renders providers diagnostics and audit sections", async () => {

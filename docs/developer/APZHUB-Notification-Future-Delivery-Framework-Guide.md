@@ -23,7 +23,7 @@ The frozen metadata SoR (APZNOTIFY-001…006) remains authoritative for notifica
 
 1. Provider contracts + `integration.yaml` per channel (SMTP, SES, SMS, Push, Teams, Slack, Webhooks)
 2. Secrets in integration boundary only — never in Workbench or typed client
-3. Platform Services orchestration for *dispatch* — still via `gateway.notification.*` (or explicitly approved successor facet)
+3. Platform Services orchestration for _dispatch_ — still via `gateway.notification.*` (or explicitly approved successor facet)
 4. Async workers / queues / Event Bus only if milestone authorises (never in request handlers)
 5. HTTP + OpenAPI + typed client extensions only if milestone authorises
 6. Workbench delivery diagnostics only if milestone authorises — retain metadata SoR boundaries
@@ -41,13 +41,13 @@ The frozen metadata SoR (APZNOTIFY-001…006) remains authoritative for notifica
 
 ## Provider examples (documentation only)
 
-| Provider class | Examples |
-| -------------- | -------- |
-| Email | SMTP, SES |
-| SMS | Carrier / OSS SMS gateways |
-| Push | Web Push / mobile push adapters |
-| Collaboration | Teams, Slack |
-| Generic | Webhooks |
+| Provider class | Examples                        |
+| -------------- | ------------------------------- |
+| Email          | SMTP, SES                       |
+| SMS            | Carrier / OSS SMS gateways      |
+| Push           | Web Push / mobile push adapters |
+| Collaboration  | Teams, Slack                    |
+| Generic        | Webhooks                        |
 
 ## Copy the pattern, not the vendor
 

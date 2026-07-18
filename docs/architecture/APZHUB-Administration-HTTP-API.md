@@ -27,18 +27,18 @@ Consumer / future Workbench
 
 ## Management plane only
 
-| Capability | Available |
-| --- | --- |
-| Module metadata + lifecycle | Yes |
-| Categories, sections, actions, permissions | Yes |
-| Registrations, policies, capability SoR | Yes |
-| Navigations, shortcuts, dashboards, widgets (metadata) | Yes |
-| Metadata, references, audit, history | Yes |
-| Diagnostics (health, readiness, management-capabilities) | Yes |
-| Workbench UI | **No** |
-| Runtime admin / live probes | **No** |
-| User / role / tenant / org management | **No** |
-| Provisioning / Event Bus / AI | **No** |
+| Capability                                               | Available |
+| -------------------------------------------------------- | --------- |
+| Module metadata + lifecycle                              | Yes       |
+| Categories, sections, actions, permissions               | Yes       |
+| Registrations, policies, capability SoR                  | Yes       |
+| Navigations, shortcuts, dashboards, widgets (metadata)   | Yes       |
+| Metadata, references, audit, history                     | Yes       |
+| Diagnostics (health, readiness, management-capabilities) | Yes       |
+| Workbench UI                                             | **No**    |
+| Runtime admin / live probes                              | **No**    |
+| User / role / tenant / org management                    | **No**    |
+| Provisioning / Event Bus / AI                            | **No**    |
 
 ## Bootstrap
 

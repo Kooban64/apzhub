@@ -75,7 +75,8 @@ export function createIntegrationOperationsStack(
       clock,
     });
   const errorSummary = input.errorSummary ?? createInMemoryErrorSummaryTracker(clock);
-  const errorTranslator = input.errorTranslator ?? createDefaultErrorTranslator({ clock });
+  const errorTranslator =
+    input.errorTranslator ?? createDefaultErrorTranslator({ clock });
   const logger =
     input.logger ??
     createDefaultIntegrationLogger({

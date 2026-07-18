@@ -3,7 +3,7 @@
 Derived lookup for [BUILD-001](./build/BUILD-001-repository-bootstrap-guide.md).
 
 > **Build Guide 001 · Approved for Execution**  
-> **Before:** nothing · **After:** SPR-001 · **Constitution:** [000](../000-apzhub-engineering-constitution.md)
+> **Before:** nothing · **After:** SPR-001 · **Constitution:** [000](./000-apzhub-engineering-constitution.md)
 
 ## Objective
 

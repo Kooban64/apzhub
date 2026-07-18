@@ -2,15 +2,15 @@
 
 ## Canonical policies
 
-| Policy ID | Service | Pattern | Limit (prod) | Dimensions |
-|-----------|---------|---------|--------------|--------------|
-| `auth-sensitive` | auth | `/api/auth/sign-in`, `sign-up`, password reset | 30/min | ip, endpoint |
-| `auth-general` | auth | `/api/auth/*` | 60/min | ip, service |
-| `platform-privileged` | platform | `/api/platform/v1/*` | 120/min | ip, user, tenant, endpoint, service |
-| `law-api` | law | `/api/law/v1/*` | 120/min | ip, user, tenant, endpoint, service |
-| `public-health` | public | health/liveness/readiness probes | 300/min | ip, endpoint |
-| `csp-report` | public | CSP violation reporting | 60/min | ip, endpoint |
-| `law-openapi` | public | Law OpenAPI specs | 120/min | ip, endpoint |
+| Policy ID             | Service  | Pattern                                        | Limit (prod) | Dimensions                          |
+| --------------------- | -------- | ---------------------------------------------- | ------------ | ----------------------------------- |
+| `auth-sensitive`      | auth     | `/api/auth/sign-in`, `sign-up`, password reset | 30/min       | ip, endpoint                        |
+| `auth-general`        | auth     | `/api/auth/*`                                  | 60/min       | ip, service                         |
+| `platform-privileged` | platform | `/api/platform/v1/*`                           | 120/min      | ip, user, tenant, endpoint, service |
+| `law-api`             | law      | `/api/law/v1/*`                                | 120/min      | ip, user, tenant, endpoint, service |
+| `public-health`       | public   | health/liveness/readiness probes               | 300/min      | ip, endpoint                        |
+| `csp-report`          | public   | CSP violation reporting                        | 60/min       | ip, endpoint                        |
+| `law-openapi`         | public   | Law OpenAPI specs                              | 120/min      | ip, endpoint                        |
 
 ## Burst handling
 
@@ -18,11 +18,11 @@ Each policy supports burst windows (default 10 seconds) with a burst multiplier 
 
 ## Environment profiles
 
-| Profile | Multiplier |
-|---------|------------|
-| development | 10x |
-| test | 100x |
-| production | 1x |
+| Profile     | Multiplier |
+| ----------- | ---------- |
+| development | 10x        |
+| test        | 100x       |
+| production  | 1x         |
 
 ## Response contract
 

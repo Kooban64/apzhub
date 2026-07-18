@@ -16,12 +16,12 @@ No Event Bus, HTTP handlers, Workbench wiring, or Platform Service auto-hooks in
 
 ## Domain status → Search lifecycle (suggest)
 
-| Domain status (examples) | Suggested Search lifecycle |
-| ------------------------ | -------------------------- |
-| draft / pending / queued / planned | draft |
-| active / passed / approved / certified / ready / completed / released / published | validated |
-| archived / retired / expired | archived |
-| deleted / removed / cancelled / withdrawn / rejected | removed |
+| Domain status (examples)                                                          | Suggested Search lifecycle |
+| --------------------------------------------------------------------------------- | -------------------------- |
+| draft / pending / queued / planned                                                | draft                      |
+| active / passed / approved / certified / ready / completed / released / published | validated                  |
+| archived / retired / expired                                                      | archived                   |
+| deleted / removed / cancelled / withdrawn / rejected                              | removed                    |
 
 Immutable snapshot types (`historical_snapshot`, `release_manifest`, `report_metadata`) prefer **validated** when active.
 

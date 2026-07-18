@@ -14,10 +14,7 @@ import {
 } from "@apzhub/integration-sdk/mapping";
 
 import type { MapperContext } from "./mapper-context";
-import {
-  mapSupportTicketToZammadBody,
-  mapZammadTicket,
-} from "./support-ticket-mapper";
+import { mapSupportTicketToZammadBody, mapZammadTicket } from "./support-ticket-mapper";
 import {
   mapPriorityToZammad,
   mapStatusToZammadState,
@@ -72,7 +69,10 @@ export function createZammadMappingProvider(): MappingProvider {
         direction: "provider_to_canonical",
         profile: "default",
         map: (input) => {
-          const payload = input as { readonly state?: string; readonly stateId?: number };
+          const payload = input as {
+            readonly state?: string;
+            readonly stateId?: number;
+          };
           return mapZammadStateToStatus(payload.state, payload.stateId);
         },
       }),

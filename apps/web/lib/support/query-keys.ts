@@ -25,7 +25,12 @@ export const supportQueryKeys = {
     all: [...ROOT, "requests"] as const,
     lists: () => [...ROOT, "requests", "list"] as const,
     list: (params?: SupportRequestListParams) =>
-      [...ROOT, "requests", "list", stableParams(params as Record<string, unknown> | undefined)] as const,
+      [
+        ...ROOT,
+        "requests",
+        "list",
+        stableParams(params as Record<string, unknown> | undefined),
+      ] as const,
     details: () => [...ROOT, "requests", "detail"] as const,
     detail: (id: string) => [...ROOT, "requests", "detail", id] as const,
     articles: (id: string) => [...ROOT, "requests", "articles", id] as const,
@@ -54,17 +59,31 @@ export const supportQueryKeys = {
   groups: {
     all: [...ROOT, "groups"] as const,
     list: (params?: GroupListParams) =>
-      [...ROOT, "groups", "list", stableParams(params as Record<string, unknown> | undefined)] as const,
+      [
+        ...ROOT,
+        "groups",
+        "list",
+        stableParams(params as Record<string, unknown> | undefined),
+      ] as const,
     detail: (id: string) => [...ROOT, "groups", "detail", id] as const,
   },
   users: {
     all: [...ROOT, "users"] as const,
     list: (params?: SupportUserListParams) =>
-      [...ROOT, "users", "list", stableParams(params as Record<string, unknown> | undefined)] as const,
+      [
+        ...ROOT,
+        "users",
+        "list",
+        stableParams(params as Record<string, unknown> | undefined),
+      ] as const,
     detail: (id: string) => [...ROOT, "users", "detail", id] as const,
   },
   search: (params?: SupportSearchParams) =>
-    [...ROOT, "search", stableParams(params as Record<string, unknown> | undefined)] as const,
+    [
+      ...ROOT,
+      "search",
+      stableParams(params as Record<string, unknown> | undefined),
+    ] as const,
   analytics: () => [...ROOT, "analytics"] as const,
 } as const;
 

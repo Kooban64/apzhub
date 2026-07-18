@@ -1,5 +1,8 @@
 import type { ConsolidatedOperationalDiagnostics } from "@apzhub/platform-security";
-import { buildPlatformLifecycleSnapshot, createInitialRuntimeState } from "@apzhub/platform-lifecycle";
+import {
+  buildPlatformLifecycleSnapshot,
+  createInitialRuntimeState,
+} from "@apzhub/platform-lifecycle";
 
 import {
   buildCapabilityHealthReports,
@@ -10,7 +13,10 @@ import {
   OPEN_TECHNICAL_DEBT_OPS_ITEMS,
   TECHNICAL_DEBT_REGISTER_REFERENCE,
 } from "./technical-debt-ops";
-import type { OperationsControlPlaneInput, OperationsControlPlaneSnapshot } from "./types";
+import type {
+  OperationsControlPlaneInput,
+  OperationsControlPlaneSnapshot,
+} from "./types";
 
 const OPERATIONS_GUIDES = [
   "docs/governance/APZHUB-Platform-Operations-UX-Guide.md",
@@ -24,7 +30,9 @@ const OPERATIONS_GUIDES = [
 function documentationStatus(
   capabilities: ReturnType<typeof buildCapabilityHealthReports>,
 ): import("@apzhub/platform-security").HealthSignalStatus {
-  const opsCapability = capabilities.find((item) => item.capabilityId === "platform.operations");
+  const opsCapability = capabilities.find(
+    (item) => item.capabilityId === "platform.operations",
+  );
   return opsCapability?.health ?? "healthy";
 }
 
@@ -55,8 +63,12 @@ export function buildOperationsControlPlaneSnapshot(
     input.lifecycleRuntime ?? createInitialRuntimeState(),
   );
 
-  const degradedCapabilityCount = capabilities.filter((item) => item.status === "degraded").length;
-  const unhealthyCapabilityCount = capabilities.filter((item) => item.status === "unhealthy").length;
+  const degradedCapabilityCount = capabilities.filter(
+    (item) => item.status === "degraded",
+  ).length;
+  const unhealthyCapabilityCount = capabilities.filter(
+    (item) => item.status === "unhealthy",
+  ).length;
 
   return {
     generatedAt: input.consolidated.generatedAt,

@@ -22,7 +22,9 @@ export const ZAMMAD_ORGANIZATION_PROVIDER_REGISTRATION = {
   priority: 100,
 };
 
-const ORG_SORT_MAP: Partial<Record<SupportOrganizationSortField, SupportOrganizationSortField>> = {
+const ORG_SORT_MAP: Partial<
+  Record<SupportOrganizationSortField, SupportOrganizationSortField>
+> = {
   name: "name",
   createdAt: "createdAt",
   updatedAt: "updatedAt",

@@ -3,7 +3,7 @@
 > **Date:** 2026-06-28  
 > **Sprint:** SPR-003 — Workbench Framework  
 > **Phase:** 1 — Workbench Framework Foundation  
-> **Prerequisite:** [Phase 0 ADR Report](./SPR-003-phase-0-adr-report.md) — approved  
+> **Prerequisite:** [Phase 0 ADR Report](../reviews/SPR-003-phase-0-adr-report.md) — approved  
 > **Recommendation:** **READY FOR PHASE 2** (awaiting architecture review)
 
 ---

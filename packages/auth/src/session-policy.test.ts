@@ -35,7 +35,12 @@ describe("session-policy", () => {
 
     const policy = getSessionSecurityPolicy();
     expect(policy.cookies.secure).toBe(false);
-    expect(isDevRegistrationAllowedFromEnv({ NODE_ENV: "development", ALLOW_DEV_REGISTRATION: "true" })).toBe(true);
+    expect(
+      isDevRegistrationAllowedFromEnv({
+        NODE_ENV: "development",
+        ALLOW_DEV_REGISTRATION: "true",
+      }),
+    ).toBe(true);
   });
 
   it("maps policy to Better Auth session and advanced config", () => {

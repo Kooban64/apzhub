@@ -11,7 +11,6 @@ import type {
   ConfigurationOverride,
   ConfigurationReference,
   ConfigurationScope,
-  ConfigurationValidation,
   ConfigurationVersion,
 } from "../domain/configuration";
 import type {
@@ -159,9 +158,7 @@ export type ConfigurationDiagnosticsCapabilities = {
 };
 
 export type ConfigurationConfigurationsService = {
-  list(
-    ctx: ConfigurationPlatformServiceContext,
-  ): Promise<readonly Configuration[]>;
+  list(ctx: ConfigurationPlatformServiceContext): Promise<readonly Configuration[]>;
   get(
     ctx: ConfigurationPlatformServiceContext,
     configurationId: ConfigurationId,

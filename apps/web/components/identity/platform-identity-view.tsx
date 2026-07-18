@@ -70,7 +70,10 @@ import {
   updateTenant,
   updateUser,
 } from "@/lib/identity/identity-api";
-import { IdentityClientError, toIdentityUserMessage } from "@/lib/identity/identity-errors";
+import {
+  IdentityClientError,
+  toIdentityUserMessage,
+} from "@/lib/identity/identity-errors";
 import type {
   CreateIdentityActivationClientInput,
   CreateIdentityDeactivationClientInput,
@@ -264,9 +267,7 @@ function StatusCard({
       <p className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">
         {label}
       </p>
-      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">
-        {value}
-      </p>
+      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">{value}</p>
     </div>
   );
 }
@@ -333,9 +334,7 @@ function MetaTable({
               key={row.id}
               className={[
                 "border-b border-[var(--color-border)]",
-                onRowClick
-                  ? "cursor-pointer hover:bg-[var(--color-muted)]/30"
-                  : "",
+                onRowClick ? "cursor-pointer hover:bg-[var(--color-muted)]/30" : "",
                 selectedId === row.id ? "bg-[var(--color-muted)]/40" : "",
               ].join(" ")}
               onClick={onRowClick ? () => onRowClick(row.id) : undefined}
@@ -409,7 +408,11 @@ function filterByText<T extends Record<string, unknown>>(
   const q = query.trim().toLowerCase();
   if (!q) return [...items];
   return items.filter((item) =>
-    fields.some((field) => String(item[field] ?? "").toLowerCase().includes(q)),
+    fields.some((field) =>
+      String(item[field] ?? "")
+        .toLowerCase()
+        .includes(q),
+    ),
   );
 }
 
@@ -473,7 +476,8 @@ const SECTION_META: Record<
   },
   memberships: {
     title: "Memberships",
-    description: "Membership metadata linking users to groups, roles, or other targets.",
+    description:
+      "Membership metadata linking users to groups, roles, or other targets.",
   },
   "service-assignments": {
     title: "Service Assignments",
@@ -841,28 +845,19 @@ export function PlatformIdentityView({
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
   const [selectedRoleId, setSelectedRoleId] = useState<string | null>(null);
-  const [selectedOrganisationId, setSelectedOrganisationId] = useState<
-    string | null
-  >(null);
+  const [selectedOrganisationId, setSelectedOrganisationId] = useState<string | null>(
+    null,
+  );
   const [selectedTenantId, setSelectedTenantId] = useState<string | null>(null);
-  const [selectedDepartmentId, setSelectedDepartmentId] = useState<
+  const [selectedDepartmentId, setSelectedDepartmentId] = useState<string | null>(null);
+  const [selectedPositionId, setSelectedPositionId] = useState<string | null>(null);
+  const [selectedMembershipId, setSelectedMembershipId] = useState<string | null>(null);
+  const [selectedServiceAssignmentId, setSelectedServiceAssignmentId] = useState<
     string | null
   >(null);
-  const [selectedPositionId, setSelectedPositionId] = useState<string | null>(
-    null,
-  );
-  const [selectedMembershipId, setSelectedMembershipId] = useState<
-    string | null
-  >(null);
-  const [selectedServiceAssignmentId, setSelectedServiceAssignmentId] =
-    useState<string | null>(null);
-  const [selectedInvitationId, setSelectedInvitationId] = useState<
-    string | null
-  >(null);
+  const [selectedInvitationId, setSelectedInvitationId] = useState<string | null>(null);
   const [selectedPolicyId, setSelectedPolicyId] = useState<string | null>(null);
-  const [selectedReferenceId, setSelectedReferenceId] = useState<string | null>(
-    null,
-  );
+  const [selectedReferenceId, setSelectedReferenceId] = useState<string | null>(null);
 
   const [userDraft, setUserDraft] = useState({
     displayName: "",
@@ -904,8 +899,7 @@ export function PlatformIdentityView({
     userId: "",
   });
   const [membershipStatusDraft, setMembershipStatusDraft] = useState("");
-  const [serviceAssignmentStatusDraft, setServiceAssignmentStatusDraft] =
-    useState("");
+  const [serviceAssignmentStatusDraft, setServiceAssignmentStatusDraft] = useState("");
   const [invitationStatusDraft, setInvitationStatusDraft] = useState("");
   const [policyEditDraft, setPolicyEditDraft] = useState({
     name: "",
@@ -999,8 +993,7 @@ export function PlatformIdentityView({
     queryFn: ({ signal }) => listPositions(undefined, { signal }),
     enabled: section === "positions" || section === "overview",
   });
-  const positionId =
-    selectedPositionId ?? positionsQuery.data?.items[0]?.id ?? null;
+  const positionId = selectedPositionId ?? positionsQuery.data?.items[0]?.id ?? null;
   const positionDetailQuery = useQuery({
     queryKey: identityQueryKeys.positions.detail(positionId ?? ""),
     queryFn: ({ signal }) => getPosition(positionId!, { signal }),
@@ -1010,8 +1003,7 @@ export function PlatformIdentityView({
   const membershipsQuery = useQuery({
     queryKey: identityQueryKeys.memberships.list(),
     queryFn: ({ signal }) => listMemberships(undefined, { signal }),
-    enabled:
-      section === "memberships" || section === "overview" || section === "users",
+    enabled: section === "memberships" || section === "overview" || section === "users",
   });
   const membershipId =
     selectedMembershipId ?? membershipsQuery.data?.items[0]?.id ?? null;
@@ -1030,15 +1022,10 @@ export function PlatformIdentityView({
       section === "users",
   });
   const serviceAssignmentId =
-    selectedServiceAssignmentId ??
-    serviceAssignmentsQuery.data?.items[0]?.id ??
-    null;
+    selectedServiceAssignmentId ?? serviceAssignmentsQuery.data?.items[0]?.id ?? null;
   const serviceAssignmentDetailQuery = useQuery({
-    queryKey: identityQueryKeys.serviceAssignments.detail(
-      serviceAssignmentId ?? "",
-    ),
-    queryFn: ({ signal }) =>
-      getServiceAssignment(serviceAssignmentId!, { signal }),
+    queryKey: identityQueryKeys.serviceAssignments.detail(serviceAssignmentId ?? ""),
+    queryFn: ({ signal }) => getServiceAssignment(serviceAssignmentId!, { signal }),
     enabled: Boolean(serviceAssignmentId) && section === "service-assignments",
   });
 
@@ -1087,8 +1074,7 @@ export function PlatformIdentityView({
     queryFn: ({ signal }) => listReferences(undefined, { signal }),
     enabled: section === "references" || section === "overview",
   });
-  const referenceId =
-    selectedReferenceId ?? referencesQuery.data?.items[0]?.id ?? null;
+  const referenceId = selectedReferenceId ?? referencesQuery.data?.items[0]?.id ?? null;
   const referenceDetailQuery = useQuery({
     queryKey: identityQueryKeys.references.detail(referenceId ?? ""),
     queryFn: ({ signal }) => getReference(referenceId!, { signal }),
@@ -1113,8 +1099,7 @@ export function PlatformIdentityView({
   const managementCapsQuery = useQuery({
     queryKey: identityQueryKeys.diagnostics.managementCapabilities(),
     queryFn: ({ signal }) => getManagementCapabilities({ signal }),
-    enabled:
-      section === "overview" || section === "diagnostics" || apiMetadataOpen,
+    enabled: section === "overview" || section === "diagnostics" || apiMetadataOpen,
   });
 
   // ---------------------------------------------------------------------
@@ -1138,13 +1123,7 @@ export function PlatformIdentityView({
   const activateMutation = useIdentityAction<
     CreateIdentityActivationClientInput,
     IdentityActivationViewModel
-  >(
-    queryClient,
-    createActivation,
-    "activate user",
-    setStatusMessage,
-    setActionError,
-  );
+  >(queryClient, createActivation, "activate user", setStatusMessage, setActionError);
   const deactivateMutation = useIdentityAction<
     CreateIdentityDeactivationClientInput,
     IdentityDeactivationViewModel
@@ -1248,20 +1227,13 @@ export function PlatformIdentityView({
   const createPositionMutation = useIdentityAction<
     CreateIdentityPositionClientInput,
     IdentityPositionViewModel
-  >(
-    queryClient,
-    createPosition,
-    "create position",
-    setStatusMessage,
-    setActionError,
-  );
+  >(queryClient, createPosition, "create position", setStatusMessage, setActionError);
   const updatePositionMutation = useIdentityAction<
     UpdateIdentityPositionClientInput,
     IdentityPositionViewModel
   >(
     queryClient,
-    (input: UpdateIdentityPositionClientInput) =>
-      updatePosition(positionId!, input),
+    (input: UpdateIdentityPositionClientInput) => updatePosition(positionId!, input),
     "update position",
     setStatusMessage,
     setActionError,
@@ -1351,20 +1323,13 @@ export function PlatformIdentityView({
   const createReferenceMutation = useIdentityAction<
     CreateIdentityReferenceClientInput,
     IdentityReferenceViewModel
-  >(
-    queryClient,
-    createReference,
-    "create reference",
-    setStatusMessage,
-    setActionError,
-  );
+  >(queryClient, createReference, "create reference", setStatusMessage, setActionError);
   const updateReferenceMutation = useIdentityAction<
     UpdateIdentityReferenceClientInput,
     IdentityReferenceViewModel
   >(
     queryClient,
-    (input: UpdateIdentityReferenceClientInput) =>
-      updateReference(referenceId!, input),
+    (input: UpdateIdentityReferenceClientInput) => updateReference(referenceId!, input),
     "update reference",
     setStatusMessage,
     setActionError,
@@ -1384,8 +1349,7 @@ export function PlatformIdentityView({
   );
 
   const membershipsForUser = useMemo(
-    () =>
-      (membershipsQuery.data?.items ?? []).filter((item) => item.userId === userId),
+    () => (membershipsQuery.data?.items ?? []).filter((item) => item.userId === userId),
     [membershipsQuery.data, userId],
   );
   const serviceAssignmentsForUser = useMemo(
@@ -1480,10 +1444,7 @@ export function PlatformIdentityView({
   if (usersQuery.isError && isUnavailable(usersQuery.error)) {
     return (
       <PageShell title={meta.title} description={meta.description}>
-        <ErrorState
-          unavailable
-          message={toIdentityUserMessage(usersQuery.error)}
-        />
+        <ErrorState unavailable message={toIdentityUserMessage(usersQuery.error)} />
       </PageShell>
     );
   }
@@ -1612,9 +1573,7 @@ export function PlatformIdentityView({
             <StatusCard
               label="Management plane"
               value={
-                managementCapsQuery.data?.managementPlaneReady
-                  ? "Ready"
-                  : "Unavailable"
+                managementCapsQuery.data?.managementPlaneReady ? "Ready" : "Unavailable"
               }
               testId="card-management-plane-status"
             />
@@ -2301,9 +2260,7 @@ export function PlatformIdentityView({
                     <dd>{serviceAssignmentDetailQuery.data.subjectId}</dd>
                   </div>
                   <div>
-                    <dt className="text-[var(--color-muted-foreground)]">
-                      Capability
-                    </dt>
+                    <dt className="text-[var(--color-muted-foreground)]">Capability</dt>
                     <dd>{serviceAssignmentDetailQuery.data.serviceCapability}</dd>
                   </div>
                   <div>
@@ -2575,7 +2532,10 @@ export function PlatformIdentityView({
                     aria-label="Policy name"
                     value={policyDraft.name}
                     onChange={(event) =>
-                      setPolicyDraft((draft) => ({ ...draft, name: event.target.value }))
+                      setPolicyDraft((draft) => ({
+                        ...draft,
+                        name: event.target.value,
+                      }))
                     }
                     required
                   />
@@ -2586,7 +2546,10 @@ export function PlatformIdentityView({
                     aria-label="Policy kind"
                     value={policyDraft.kind}
                     onChange={(event) =>
-                      setPolicyDraft((draft) => ({ ...draft, kind: event.target.value }))
+                      setPolicyDraft((draft) => ({
+                        ...draft,
+                        kind: event.target.value,
+                      }))
                     }
                     required
                   />
@@ -2945,7 +2908,10 @@ export function PlatformIdentityView({
           <NoticeBanner text={PROVISIONING_BANNER} testId="banner-provisioning" />
           <NoticeBanner text={DIRECTORY_SYNC_BANNER} testId="banner-directory-sync" />
           {healthQuery.isError && isUnavailable(healthQuery.error) ? (
-            <ErrorState unavailable message={toIdentityUserMessage(healthQuery.error)} />
+            <ErrorState
+              unavailable
+              message={toIdentityUserMessage(healthQuery.error)}
+            />
           ) : (
             <>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -2966,9 +2932,7 @@ export function PlatformIdentityView({
                 <StatusCard
                   label="Workbench enabled"
                   value={
-                    managementCapsQuery.data?.workbenchEnabled
-                      ? "Ready"
-                      : "Unavailable"
+                    managementCapsQuery.data?.workbenchEnabled ? "Ready" : "Unavailable"
                   }
                   testId="diag-workbench"
                 />

@@ -176,9 +176,7 @@ export function createInMemoryAdministrationRepositories(
       return row;
     },
     async list(ctx) {
-      return [...stores.audits.values()].filter(
-        (row) => row.tenantId === ctx.tenantId,
-      );
+      return [...stores.audits.values()].filter((row) => row.tenantId === ctx.tenantId);
     },
   };
 
@@ -199,9 +197,7 @@ export function createInMemoryAdministrationRepositories(
     async listByModule(ctx, moduleId) {
       const parent = stores.modules.get(moduleId);
       if (parent && parent.tenantId !== ctx.tenantId) return [];
-      return [...stores.history.values()].filter(
-        (row) => row.moduleId === moduleId,
-      );
+      return [...stores.history.values()].filter((row) => row.moduleId === moduleId);
     },
   };
 
@@ -228,9 +224,7 @@ export function createInMemoryAdministrationRepositories(
     async listByModule(ctx, moduleId) {
       const parent = stores.modules.get(moduleId);
       if (parent && parent.tenantId !== ctx.tenantId) return [];
-      return [...stores.metadata.values()].filter(
-        (row) => row.moduleId === moduleId,
-      );
+      return [...stores.metadata.values()].filter((row) => row.moduleId === moduleId);
     },
   };
 
@@ -251,9 +245,7 @@ export function createInMemoryAdministrationRepositories(
     async listByModule(ctx, moduleId) {
       const parent = stores.modules.get(moduleId);
       if (parent && parent.tenantId !== ctx.tenantId) return [];
-      return [...stores.references.values()].filter(
-        (row) => row.moduleId === moduleId,
-      );
+      return [...stores.references.values()].filter((row) => row.moduleId === moduleId);
     },
   };
 

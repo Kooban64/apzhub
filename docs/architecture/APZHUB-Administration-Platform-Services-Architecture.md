@@ -11,14 +11,14 @@ Products → gateway.administration.* → RequestPipeline → Authz → Thin Ser
 
 ## Layers
 
-| Layer | Package / location | Responsibility |
-| --- | --- | --- |
-| Gateway | `PlatformServiceGateway.administration` | Nested facet access |
-| Authz | `administrationPlatformOps` + `PLATFORM_ADMIN_PERMISSIONS` | Deny-by-default production |
-| Thin services | `@apzhub/platform-services` `services/administration` | Error mapping only |
-| Domain | `@apzhub/admin-core` `createPlatformAdministrationService` | Lifecycle, validation, orchestration |
-| Persistence | `@apzhub/admin-persistence` | In-memory (test) / PostgreSQL (production) |
-| Contracts | `@apzhub/admin-contracts` `AdministrationPlatformGateway` | Facet types + inputs |
+| Layer         | Package / location                                         | Responsibility                             |
+| ------------- | ---------------------------------------------------------- | ------------------------------------------ |
+| Gateway       | `PlatformServiceGateway.administration`                    | Nested facet access                        |
+| Authz         | `administrationPlatformOps` + `PLATFORM_ADMIN_PERMISSIONS` | Deny-by-default production                 |
+| Thin services | `@apzhub/platform-services` `services/administration`      | Error mapping only                         |
+| Domain        | `@apzhub/admin-core` `createPlatformAdministrationService` | Lifecycle, validation, orchestration       |
+| Persistence   | `@apzhub/admin-persistence`                                | In-memory (test) / PostgreSQL (production) |
+| Contracts     | `@apzhub/admin-contracts` `AdministrationPlatformGateway`  | Facet types + inputs                       |
 
 ## Facets
 

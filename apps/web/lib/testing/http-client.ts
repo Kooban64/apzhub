@@ -875,20 +875,17 @@ export function createHttpTestingClient(): TestingClient {
     },
 
     async listReportPlaceholders(options) {
-      const { createHttpReportingClient } = await import(
-        "@/lib/reporting/reporting-client"
-      );
+      const { createHttpReportingClient } =
+        await import("@/lib/reporting/reporting-client");
       const reporting = createHttpReportingClient();
       try {
         const templates = await reporting.listTemplates(undefined, options);
-        const items: ReportPlaceholderViewModel[] = templates.items.map(
-          (template) => ({
-            id: template.id,
-            title: template.name,
-            description: template.description ?? template.title,
-            status: "placeholder" as const,
-          }),
-        );
+        const items: ReportPlaceholderViewModel[] = templates.items.map((template) => ({
+          id: template.id,
+          title: template.name,
+          description: template.description ?? template.title,
+          status: "placeholder" as const,
+        }));
         return { items, total: items.length };
       } catch {
         return emptyCollection<ReportPlaceholderViewModel>();

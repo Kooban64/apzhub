@@ -1,17 +1,17 @@
 # APZHUB Programme — Milestone Completion Report
 
-| Field | Value |
-| --- | --- |
-| **Document ID** | APZSEARCH-005-CR |
-| **Milestone** | APZSEARCH-005 — Meilisearch Reference Adapter |
-| **Programme** | APZHUB Platform Search |
-| **Status** | **COMPLETE** |
-| **Classification** | Reference Search Engine Adapter (Meilisearch CE) |
-| **Date** | 2026-07-14 |
-| **Authority** | Knowledge Foundation · owner-approved milestone scope |
-| **Predecessor** | APZSEARCH-004 — Search Integration SDK (Complete) |
-| **Successor** | APZSEARCH-007 — Search HTTP API, Typed Client & Workbench (**recommended; not started; requires owner approval**) |
-| **ADR** | [ADR-0060 — Meilisearch Reference Search Adapter](../adr/ADR-0060-meilisearch-reference-search-adapter.md) |
+| Field              | Value                                                                                                             |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| **Document ID**    | APZSEARCH-005-CR                                                                                                  |
+| **Milestone**      | APZSEARCH-005 — Meilisearch Reference Adapter                                                                     |
+| **Programme**      | APZHUB Platform Search                                                                                            |
+| **Status**         | **COMPLETE**                                                                                                      |
+| **Classification** | Reference Search Engine Adapter (Meilisearch CE)                                                                  |
+| **Date**           | 2026-07-14                                                                                                        |
+| **Authority**      | Knowledge Foundation · owner-approved milestone scope                                                             |
+| **Predecessor**    | APZSEARCH-004 — Search Integration SDK (Complete)                                                                 |
+| **Successor**      | APZSEARCH-007 — Search HTTP API, Typed Client & Workbench (**recommended; not started; requires owner approval**) |
+| **ADR**            | [ADR-0060 — Meilisearch Reference Search Adapter](../adr/ADR-0060-meilisearch-reference-search-adapter.md)        |
 
 ---
 
@@ -31,14 +31,14 @@ The adapter extends `SearchIntegrationAdapterBase`, speaks Meilisearch via a raw
 
 ## 2. Programme context
 
-| Milestone | Status |
-| --- | --- |
-| APZSEARCH-001 — Platform Search Foundation | Complete |
-| APZSEARCH-002 — Search Persistence & Provider Framework | Complete |
-| APZSEARCH-003 — Search Platform Services, Gateway & Authorization | Complete |
-| APZSEARCH-004 — Search Integration SDK | Complete |
-| **APZSEARCH-005 — Meilisearch Reference Adapter** | **Complete** |
-| APZSEARCH-007 — Search HTTP API, Typed Client & Workbench | Recommended next (not authorised) |
+| Milestone                                                         | Status                            |
+| ----------------------------------------------------------------- | --------------------------------- |
+| APZSEARCH-001 — Platform Search Foundation                        | Complete                          |
+| APZSEARCH-002 — Search Persistence & Provider Framework           | Complete                          |
+| APZSEARCH-003 — Search Platform Services, Gateway & Authorization | Complete                          |
+| APZSEARCH-004 — Search Integration SDK                            | Complete                          |
+| **APZSEARCH-005 — Meilisearch Reference Adapter**                 | **Complete**                      |
+| APZSEARCH-007 — Search HTTP API, Typed Client & Workbench         | Recommended next (not authorised) |
 
 ---
 
@@ -62,31 +62,31 @@ Meilisearch Server                     ← CE engine (not bundled; mock REST in 
 
 ### 4.1 Package
 
-| Item | Value |
-| --- | --- |
-| Package | `@apzhub/integration-meilisearch` **0.1.0** |
-| Location | `integrations/meilisearch/` |
-| Dependencies | `@apzhub/integration-sdk` · `@apzhub/integration-search-sdk` · `@apzhub/search-contracts` |
-| Transport | Raw REST + injectable `FetchFn` |
-| npm Meilisearch client | **Not used** |
+| Item                   | Value                                                                                     |
+| ---------------------- | ----------------------------------------------------------------------------------------- |
+| Package                | `@apzhub/integration-meilisearch` **0.1.0**                                               |
+| Location               | `integrations/meilisearch/`                                                               |
+| Dependencies           | `@apzhub/integration-sdk` · `@apzhub/integration-search-sdk` · `@apzhub/search-contracts` |
+| Transport              | Raw REST + injectable `FetchFn`                                                           |
+| npm Meilisearch client | **Not used**                                                                              |
 
 ### 4.2 Components delivered
 
-| Component | Role |
-| --- | --- |
-| `MeilisearchAdapter` | Extends `SearchIntegrationAdapterBase` |
-| `createMeilisearchAdapter()` / `MeilisearchAdapterFactory` | Composition root |
-| `MeilisearchAdapterContext` (+ builder) | Typed runtime context |
-| `MeilisearchOperationRunner` | Query / index / document / health / diagnostics orchestration |
-| `MeilisearchRestClient` | HTTP to Meilisearch API |
-| `MeilisearchErrorMapper` | Vendor → canonical Search/Integration errors |
-| `MeilisearchCapabilityProvider` | Declarative + runtime capability surface |
-| `MeilisearchCompatibilityProvider` | Compatibility matrix / reporting |
-| `MeilisearchHealthProvider` | Connection / version / health probes |
-| `MeilisearchDiagnosticsProvider` | Safe diagnostics (no secrets) |
-| `MeilisearchConfigurationValidator` | Endpoint + secret-ref validation |
-| `MeilisearchMetrics` / `MeilisearchLogger` | Observability wrappers |
-| Bootstrap · config · mock API · `integration.yaml` | Package completeness |
+| Component                                                  | Role                                                          |
+| ---------------------------------------------------------- | ------------------------------------------------------------- |
+| `MeilisearchAdapter`                                       | Extends `SearchIntegrationAdapterBase`                        |
+| `createMeilisearchAdapter()` / `MeilisearchAdapterFactory` | Composition root                                              |
+| `MeilisearchAdapterContext` (+ builder)                    | Typed runtime context                                         |
+| `MeilisearchOperationRunner`                               | Query / index / document / health / diagnostics orchestration |
+| `MeilisearchRestClient`                                    | HTTP to Meilisearch API                                       |
+| `MeilisearchErrorMapper`                                   | Vendor → canonical Search/Integration errors                  |
+| `MeilisearchCapabilityProvider`                            | Declarative + runtime capability surface                      |
+| `MeilisearchCompatibilityProvider`                         | Compatibility matrix / reporting                              |
+| `MeilisearchHealthProvider`                                | Connection / version / health probes                          |
+| `MeilisearchDiagnosticsProvider`                           | Safe diagnostics (no secrets)                                 |
+| `MeilisearchConfigurationValidator`                        | Endpoint + secret-ref validation                              |
+| `MeilisearchMetrics` / `MeilisearchLogger`                 | Observability wrappers                                        |
+| Bootstrap · config · mock API · `integration.yaml`         | Package completeness                                          |
 
 ### 4.3 Configuration (secret refs only)
 
@@ -98,23 +98,23 @@ API keys never appear in logs, diagnostics, or errors.
 
 ## 5. Capability matrix
 
-| Capability | Status |
-| --- | --- |
-| Keyword query | Supported |
-| Phrase query | Supported |
-| Pagination (limit/offset) | Supported |
-| Sorting | Supported |
-| Filters | Supported |
-| Facets | Supported |
-| Highlighting | Supported where Meilisearch provides formatting |
-| Index metadata / lifecycle | Supported |
-| Document list/get/add/update/delete | Supported |
-| Health / diagnostics / statistics | Supported |
-| Configuration validation | Supported |
-| Capabilities reporting | Supported |
-| Semantic search | **NOT_SUPPORTED** |
-| Vector search | **NOT_SUPPORTED** |
-| Fuzzy / AI ranking / OCR | **NOT_SUPPORTED** |
+| Capability                          | Status                                          |
+| ----------------------------------- | ----------------------------------------------- |
+| Keyword query                       | Supported                                       |
+| Phrase query                        | Supported                                       |
+| Pagination (limit/offset)           | Supported                                       |
+| Sorting                             | Supported                                       |
+| Filters                             | Supported                                       |
+| Facets                              | Supported                                       |
+| Highlighting                        | Supported where Meilisearch provides formatting |
+| Index metadata / lifecycle          | Supported                                       |
+| Document list/get/add/update/delete | Supported                                       |
+| Health / diagnostics / statistics   | Supported                                       |
+| Configuration validation            | Supported                                       |
+| Capabilities reporting              | Supported                                       |
+| Semantic search                     | **NOT_SUPPORTED**                               |
+| Vector search                       | **NOT_SUPPORTED**                               |
+| Fuzzy / AI ranking / OCR            | **NOT_SUPPORTED**                               |
 
 Authoritative doc: [Meilisearch Capability Matrix](../architecture/APZHUB-Meilisearch-Capability-Matrix.md).
 
@@ -122,13 +122,13 @@ Authoritative doc: [Meilisearch Capability Matrix](../architecture/APZHUB-Meilis
 
 ## 6. Compatibility matrix
 
-| Topic | Recorded |
-| --- | --- |
-| Target engine | Meilisearch CE (self-hosted) |
-| API style | HTTP REST (`/health`, `/version`, `/indexes`, `/documents`, `/search`) |
-| Supported plane | Keyword search + index/document admin |
-| Known limitations | No semantic/vector/fuzzy/AI in this adapter |
-| Future engines | OpenSearch remains an explicit future reference option |
+| Topic             | Recorded                                                               |
+| ----------------- | ---------------------------------------------------------------------- |
+| Target engine     | Meilisearch CE (self-hosted)                                           |
+| API style         | HTTP REST (`/health`, `/version`, `/indexes`, `/documents`, `/search`) |
+| Supported plane   | Keyword search + index/document admin                                  |
+| Known limitations | No semantic/vector/fuzzy/AI in this adapter                            |
+| Future engines    | OpenSearch remains an explicit future reference option                 |
 
 Authoritative docs: [Compatibility Matrix](../architecture/APZHUB-Meilisearch-Compatibility-Matrix.md) · [ADR-0060](../adr/ADR-0060-meilisearch-reference-search-adapter.md).
 
@@ -150,11 +150,11 @@ Diagnostics remain safe: endpoint metadata may be summarised; API keys and resol
 
 ## 9. Testing
 
-| Suite | Result |
-| --- | --- |
-| Unit + mock REST + certification | **27 PASS** (3 files) |
-| Capability / compatibility / error translation | Covered |
-| Live Meilisearch server | **Not required / not used** |
+| Suite                                          | Result                      |
+| ---------------------------------------------- | --------------------------- |
+| Unit + mock REST + certification               | **27 PASS** (3 files)       |
+| Capability / compatibility / error translation | Covered                     |
+| Live Meilisearch server                        | **Not required / not used** |
 
 ---
 
@@ -162,40 +162,40 @@ Diagnostics remain safe: endpoint metadata may be summarised; API keys and resol
 
 Scoped Vitest coverage (see [baseline](../reviews/APZSEARCH-005-coverage-baseline.md)):
 
-| Metric | Coverage | Target |
-| --- | --- | --- |
-| Statements | **95.01%** | ≥95% |
-| Lines | **95.01%** | ≥95% |
-| Functions | **95.12%** | ≥90% |
-| Branches | **83.03%** | ≥70% (scoped) |
+| Metric     | Coverage   | Target        |
+| ---------- | ---------- | ------------- |
+| Statements | **95.01%** | ≥95%          |
+| Lines      | **95.01%** | ≥95%          |
+| Functions  | **95.12%** | ≥90%          |
+| Branches   | **83.03%** | ≥70% (scoped) |
 
 ---
 
 ## 11. Quality gates
 
-| Gate | Result |
-| --- | --- |
-| Typecheck | **PASS** |
-| Tests | **PASS** (27) |
-| Coverage ≥95% lines/statements | **PASS** |
+| Gate                                                             | Result                  |
+| ---------------------------------------------------------------- | ----------------------- |
+| Typecheck                                                        | **PASS**                |
+| Tests                                                            | **PASS** (27)           |
+| Coverage ≥95% lines/statements                                   | **PASS**                |
 | Architecture / boundary audit (`pnpm audit:meilisearch-adapter`) | **PASS** (0 violations) |
-| Platform Services / Gateway unchanged | Confirmed |
+| Platform Services / Gateway unchanged                            | Confirmed               |
 
 ---
 
 ## 12. Documentation delivered
 
-| Document | Path |
-| --- | --- |
+| Document                         | Path                                                           |
+| -------------------------------- | -------------------------------------------------------------- |
 | Meilisearch Adapter Architecture | `docs/architecture/APZHUB-Meilisearch-Adapter-Architecture.md` |
-| Capability Matrix | `docs/architecture/APZHUB-Meilisearch-Capability-Matrix.md` |
-| Compatibility Matrix | `docs/architecture/APZHUB-Meilisearch-Compatibility-Matrix.md` |
-| Developer Guide | `docs/developer/APZHUB-Meilisearch-Adapter-Developer-Guide.md` |
-| Configuration Guide | `docs/guides/meilisearch-adapter-configuration.md` |
-| Reference Adapter Guide | `docs/guides/meilisearch-reference-adapter-guide.md` |
-| Coverage baseline | `docs/reviews/APZSEARCH-005-coverage-baseline.md` |
-| ADR-0060 | `docs/adr/ADR-0060-meilisearch-reference-search-adapter.md` |
-| This completion report | `docs/sprint/APZSEARCH-005-completion-report.md` |
+| Capability Matrix                | `docs/architecture/APZHUB-Meilisearch-Capability-Matrix.md`    |
+| Compatibility Matrix             | `docs/architecture/APZHUB-Meilisearch-Compatibility-Matrix.md` |
+| Developer Guide                  | `docs/developer/APZHUB-Meilisearch-Adapter-Developer-Guide.md` |
+| Configuration Guide              | `docs/guides/meilisearch-adapter-configuration.md`             |
+| Reference Adapter Guide          | `docs/guides/meilisearch-reference-adapter-guide.md`           |
+| Coverage baseline                | `docs/reviews/APZSEARCH-005-coverage-baseline.md`              |
+| ADR-0060                         | `docs/adr/ADR-0060-meilisearch-reference-search-adapter.md`    |
+| This completion report           | `docs/sprint/APZSEARCH-005-completion-report.md`               |
 
 Foundation/stop-point updates applied to AI-CONTEXT, CURRENT-MILESTONE, CURRENT-STATE, ACTIVE-BACKLOG, SESSION-START, handbooks, catalogues, README, CHANGELOG.
 
@@ -211,22 +211,22 @@ Platform Search remains vendor-neutral; future adapters may be added without mod
 
 ## 14. Technical debt
 
-| Item | Notes |
-| --- | --- |
-| Live Meilisearch integration tests | Deferred; mock REST certifies adapter contracts |
+| Item                                             | Notes                                               |
+| ------------------------------------------------ | --------------------------------------------------- |
+| Live Meilisearch integration tests               | Deferred; mock REST certifies adapter contracts     |
 | Platform Services binding to Meilisearch adapter | Deferred to HTTP/gateway milestone (APZSEARCH-006+) |
-| OpenSearch reference adapter | Future programme item |
-| Advanced Meilisearch settings surface | Expand as needed in later certifications |
+| OpenSearch reference adapter                     | Future programme item                               |
+| Advanced Meilisearch settings surface            | Expand as needed in later certifications            |
 
 ---
 
 ## 15. Risks
 
-| Risk | Mitigation |
-| --- | --- |
+| Risk                     | Mitigation                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------ |
 | Perceived engine lock-in | ADR + vendor-neutral platform; OpenSearch explicitly retained as future option |
-| Secret leakage | API key secret refs only; diagnostics/logging redaction |
-| Premature HTTP surface | Stop before APZSEARCH-006 |
+| Secret leakage           | API key secret refs only; diagnostics/logging redaction                        |
+| Premature HTTP surface   | Stop before APZSEARCH-006                                                      |
 
 ---
 
@@ -236,9 +236,9 @@ Platform Search remains vendor-neutral; future adapters may be added without mod
 
 Recommended (no implementation in this report):
 
-1. Expose versioned Platform Search HTTP endpoints through the API Gateway.  
-2. Bind configured Search providers (including Meilisearch) **only** through Platform Services — never bypass the service layer.  
-3. Keep Workbench / Search UI for a later milestone unless separately scoped.  
+1. Expose versioned Platform Search HTTP endpoints through the API Gateway.
+2. Bind configured Search providers (including Meilisearch) **only** through Platform Services — never bypass the service layer.
+3. Keep Workbench / Search UI for a later milestone unless separately scoped.
 4. Do not embed Meilisearch clients in platform packages.
 
 **Do not begin APZSEARCH-006 without explicit owner approval.**
@@ -255,11 +255,11 @@ Await explicit owner approval before APZSEARCH-007 or any Platform HTTP, Workben
 
 ## Document control
 
-| Item | Value |
-| --- | --- |
-| Report location | `docs/sprint/APZSEARCH-005-completion-report.md` |
-| Package | `@apzhub/integration-meilisearch` **0.1.0** |
-| Programme stop point | `docs/foundation/CURRENT-MILESTONE.md` |
-| Prepared for | Owner filing / programme archive |
+| Item                 | Value                                            |
+| -------------------- | ------------------------------------------------ |
+| Report location      | `docs/sprint/APZSEARCH-005-completion-report.md` |
+| Package              | `@apzhub/integration-meilisearch` **0.1.0**      |
+| Programme stop point | `docs/foundation/CURRENT-MILESTONE.md`           |
+| Prepared for         | Owner filing / programme archive                 |
 
 **End of report.**

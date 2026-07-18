@@ -60,21 +60,24 @@ const libFiles = walk(join(ROOT, "apps/web/lib/observe")).filter(
   (f) => !f.includes(".test."),
 );
 
-scan([...componentFiles, ...libFiles], [
-  {
-    rule: "ui-no-observe-core",
-    pattern: /@apzhub\/observe-core|@apzhub\/observe-persistence/,
-  },
-  {
-    rule: "ui-no-platform-services",
-    pattern: /@apzhub\/platform-services|getPlatformServiceGateway/,
-  },
-  {
-    rule: "ui-no-provider-sdks",
-    pattern:
-      /from\s+["'](@grafana\/|prom-client|@opentelemetry\/|@prometheus\/|loki-js|winston-loki)/,
-  },
-]);
+scan(
+  [...componentFiles, ...libFiles],
+  [
+    {
+      rule: "ui-no-observe-core",
+      pattern: /@apzhub\/observe-core|@apzhub\/observe-persistence/,
+    },
+    {
+      rule: "ui-no-platform-services",
+      pattern: /@apzhub\/platform-services|getPlatformServiceGateway/,
+    },
+    {
+      rule: "ui-no-provider-sdks",
+      pattern:
+        /from\s+["'](@grafana\/|prom-client|@opentelemetry\/|@prometheus\/|loki-js|winston-loki)/,
+    },
+  ],
+);
 
 scan(componentFiles, [
   {
@@ -223,16 +226,20 @@ if (existsSync(dedicatedTree)) {
     file: rel(dedicatedTree),
     line: 1,
     rule: "dedicated-app-tree-forbidden",
-    detail: "Use catch-all workspace route — do not create apps/web/app/workspace/observability",
+    detail:
+      "Use catch-all workspace route — do not create apps/web/app/workspace/observability",
   });
 }
 
-const opsManifests = walk(
-  join(ROOT, "packages/workbench-framework/manifests"),
-).filter((f) => rel(f).includes("platform-operations"));
+const opsManifests = walk(join(ROOT, "packages/workbench-framework/manifests")).filter(
+  (f) => rel(f).includes("platform-operations"),
+);
 for (const file of opsManifests) {
   const content = readFileSync(file, "utf8");
-  if (content.includes("platform-observability") || content.includes("/workspace/observability")) {
+  if (
+    content.includes("platform-observability") ||
+    content.includes("/workspace/observability")
+  ) {
     violations.push({
       file: rel(file),
       line: 1,

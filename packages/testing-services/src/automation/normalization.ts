@@ -6,7 +6,10 @@ import type {
   CanonicalAutomationSuite,
   NormalizedResultStatus,
 } from "@apzhub/testing-contracts";
-import { NORMALIZED_RESULT_STATUSES, isNormalizedResultStatus } from "@apzhub/testing-contracts";
+import {
+  NORMALIZED_RESULT_STATUSES,
+  isNormalizedResultStatus,
+} from "@apzhub/testing-contracts";
 
 const STATUS_ALIASES: Readonly<Record<string, NormalizedResultStatus>> = {
   pass: "pass",
@@ -41,7 +44,10 @@ const STATUS_ALIASES: Readonly<Record<string, NormalizedResultStatus>> = {
 export function createAutomationNormalizationService(): AutomationNormalizationService {
   function normalizeStatus(raw: string | undefined | null): NormalizedResultStatus {
     if (raw == null || String(raw).trim() === "") return "unknown";
-    const key = String(raw).trim().toLowerCase().replace(/[\s-]+/g, "_");
+    const key = String(raw)
+      .trim()
+      .toLowerCase()
+      .replace(/[\s-]+/g, "_");
     if (isNormalizedResultStatus(key)) return key;
     return STATUS_ALIASES[key] ?? "unknown";
   }

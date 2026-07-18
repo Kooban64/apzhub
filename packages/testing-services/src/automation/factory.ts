@@ -74,8 +74,7 @@ export function createAutomationIngestionServices(
   const coverage = createAutomationCoverageService(rt);
   const history = createAutomationHistoryService(rt);
   const results = createAutomationResultService(rt);
-  const certificationPreparation =
-    createAutomationCertificationPreparationService(rt);
+  const certificationPreparation = createAutomationCertificationPreparationService(rt);
   const imports = createAutomationImportService({
     runtime: rt,
     registry,

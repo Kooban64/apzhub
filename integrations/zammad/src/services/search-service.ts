@@ -82,10 +82,7 @@ export class ZammadSearchService {
         );
         for (const item of list.items) {
           const ticket = mapZammadTicket(item, mapperCtx);
-          if (
-            filter.supportTicketId &&
-            ticket.id !== filter.supportTicketId
-          ) {
+          if (filter.supportTicketId && ticket.id !== filter.supportTicketId) {
             continue;
           }
           if (
@@ -109,10 +106,7 @@ export class ZammadSearchService {
         );
         for (const item of list.items) {
           const organization = mapZammadOrganization(item, mapperCtx);
-          if (
-            filter.organizationId &&
-            organization.id !== filter.organizationId
-          ) {
+          if (filter.organizationId && organization.id !== filter.organizationId) {
             continue;
           }
           hits.push(mapOrganizationToSearchHit(organization));
@@ -127,7 +121,10 @@ export class ZammadSearchService {
         );
         for (const item of list.items) {
           const group = mapZammadGroup(item, mapperCtx);
-          if (!group.name.toLowerCase().includes(needle) && !group.note?.toLowerCase().includes(needle)) {
+          if (
+            !group.name.toLowerCase().includes(needle) &&
+            !group.note?.toLowerCase().includes(needle)
+          ) {
             continue;
           }
           if (filter.groupId && group.id !== filter.groupId) continue;

@@ -224,7 +224,10 @@ describe("createHttpReportingClient", () => {
     });
 
     fetchMock.mockResolvedValueOnce(
-      new Response("not-json", { status: 502, headers: { "content-type": "text/plain" } }),
+      new Response("not-json", {
+        status: 502,
+        headers: { "content-type": "text/plain" },
+      }),
     );
     await expect(client.listTemplates()).rejects.toMatchObject({
       status: 502,
@@ -278,7 +281,11 @@ describe("reporting errors", () => {
     ).toMatch(/permission/i);
     expect(
       toReportingUserMessage(
-        new ReportingClientError({ message: "missing", code: "NOT_FOUND", status: 404 }),
+        new ReportingClientError({
+          message: "missing",
+          code: "NOT_FOUND",
+          status: 404,
+        }),
       ),
     ).toMatch(/not found/i);
     expect(

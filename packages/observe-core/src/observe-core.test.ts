@@ -96,12 +96,12 @@ describe("observe-core", () => {
 
   it("validates health, service health, metrics, and alerts", () => {
     expect(validateHealthCheck(healthCheck()).status).toBe("healthy");
-    expect(() =>
-      validateHealthCheck(healthCheck({ name: "  " })),
-    ).toThrow(/name is required/);
-    expect(() =>
-      validateHealthCheck(healthCheck({ id: "" as never })),
-    ).toThrow(/id is invalid/);
+    expect(() => validateHealthCheck(healthCheck({ name: "  " }))).toThrow(
+      /name is required/,
+    );
+    expect(() => validateHealthCheck(healthCheck({ id: "" as never }))).toThrow(
+      /id is invalid/,
+    );
     expect(() =>
       validateHealthCheck(healthCheck({ status: "firing" as never })),
     ).toThrow(/status is invalid/);
@@ -143,9 +143,9 @@ describe("observe-core", () => {
       revision: 1,
     };
     expect(validateMetricDefinition(metric).kind).toBe("counter");
-    expect(() =>
-      validateMetricDefinition({ ...metric, kind: "bad" as never }),
-    ).toThrow(/kind is invalid/);
+    expect(() => validateMetricDefinition({ ...metric, kind: "bad" as never })).toThrow(
+      /kind is invalid/,
+    );
     expect(() =>
       validateMetricDefinition({ ...metric, status: "bad" as never }),
     ).toThrow(/status is invalid/);
@@ -206,15 +206,11 @@ describe("observe-core", () => {
     expect(canTransitionObserveHealth("degraded", "healthy")).toBe(true);
     expect(canTransitionObserveHealth("unhealthy", "maintenance")).toBe(true);
     expect(canTransitionObserveHealth("maintenance", "unknown")).toBe(true);
-    expect(() =>
-      assertObserveHealthTransition("healthy", "healthy"),
-    ).not.toThrow();
-    expect(() =>
-      assertObserveHealthTransition("unknown", "firing" as never),
-    ).toThrow(/Invalid health/);
-    expect(listAllowedObserveHealthTransitions("healthy")).toContain(
-      "degraded",
+    expect(() => assertObserveHealthTransition("healthy", "healthy")).not.toThrow();
+    expect(() => assertObserveHealthTransition("unknown", "firing" as never)).toThrow(
+      /Invalid health/,
     );
+    expect(listAllowedObserveHealthTransitions("healthy")).toContain("degraded");
     expect(listAllowedObserveHealthTransitions("unknown" as never)).toEqual(
       expect.any(Array),
     );
@@ -222,44 +218,38 @@ describe("observe-core", () => {
     expect(canTransitionObserveAlertState("firing", "resolved")).toBe(true);
     expect(canTransitionObserveAlertState("pending", "silenced")).toBe(true);
     expect(canTransitionObserveAlertState("silenced", "firing")).toBe(true);
-    expect(() =>
-      assertObserveAlertStateTransition("resolved", "silenced"),
-    ).toThrow(/Invalid alert state/);
+    expect(() => assertObserveAlertStateTransition("resolved", "silenced")).toThrow(
+      /Invalid alert state/,
+    );
     expect(canTransitionObserveAlertState("inactive", "inactive")).toBe(true);
-    expect(
-      canTransitionObserveAlertState("unknown" as never, "firing"),
-    ).toBe(false);
+    expect(canTransitionObserveAlertState("unknown" as never, "firing")).toBe(false);
 
     expect(canTransitionObserveMetadata("draft", "active")).toBe(true);
     expect(canTransitionObserveMetadata("active", "inactive")).toBe(true);
     expect(canTransitionObserveMetadata("inactive", "archived")).toBe(true);
     expect(canTransitionObserveMetadata("archived", "active")).toBe(false);
     expect(canTransitionObserveMetadata("draft", "draft")).toBe(true);
-    expect(() =>
-      assertObserveMetadataTransition("archived", "active"),
-    ).toThrow(/Invalid metadata/);
-    expect(
-      canTransitionObserveMetadata("unknown" as never, "active"),
-    ).toBe(false);
+    expect(() => assertObserveMetadataTransition("archived", "active")).toThrow(
+      /Invalid metadata/,
+    );
+    expect(canTransitionObserveMetadata("unknown" as never, "active")).toBe(false);
     expect(() => assertAlertStateKind("firing")).not.toThrow();
     expect(() => assertAlertStateKind("nope")).toThrow(/alert state is invalid/);
   });
 
   it("forbids credential metadata payloads", () => {
-    expect(() =>
-      assertNoCredentialPayload({ apiKey: "secret" }),
-    ).toThrow(/must not include credential field/);
-    expect(() =>
-      assertNoCredentialPayload({ passwordHash: "x" }),
-    ).toThrow(/must not include credential field/);
+    expect(() => assertNoCredentialPayload({ apiKey: "secret" })).toThrow(
+      /must not include credential field/,
+    );
+    expect(() => assertNoCredentialPayload({ passwordHash: "x" })).toThrow(
+      /must not include credential field/,
+    );
     expect(() => assertNoCredentialPayload({ region: "eu" })).not.toThrow();
     expect(() => assertNoCredentialPayload(undefined)).not.toThrow();
   });
 
   it("requires explicit repos for foundation (no silent memory)", () => {
-    expect(() => createObserveFoundation({} as never)).toThrow(
-      /explicit repos/,
-    );
+    expect(() => createObserveFoundation({} as never)).toThrow(/explicit repos/);
     expect(() =>
       createObserveFoundation({
         repos: { healthChecks: stubRepos().healthChecks } as never,

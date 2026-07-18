@@ -51,7 +51,8 @@ describe.runIf(postgresAvailable)("PostgresMatterRepository integration", () => 
   );
 });
 
-describe.runIf(!postgresAvailable)("PostgresMatterRepository integration availability",
+describe.runIf(!postgresAvailable)(
+  "PostgresMatterRepository integration availability",
   () => {
     it("skips postgres contract tests when PostgreSQL is unavailable", () => {
       expect(postgresAvailable).toBe(false);

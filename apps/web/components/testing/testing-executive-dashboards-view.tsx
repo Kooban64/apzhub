@@ -138,18 +138,10 @@ export function TestingExecutiveDashboardsView({
     trendsQuery.isLoading;
 
   const firstError =
-    scoreQuery.error ??
-    healthQuery.error ??
-    riskQuery.error ??
-    trendsQuery.error;
+    scoreQuery.error ?? healthQuery.error ?? riskQuery.error ?? trendsQuery.error;
 
   const data: ExecutiveDashboardData | null = useMemo(() => {
-    if (
-      !scoreQuery.data ||
-      !healthQuery.data ||
-      !riskQuery.data ||
-      !trendsQuery.data
-    ) {
+    if (!scoreQuery.data || !healthQuery.data || !riskQuery.data || !trendsQuery.data) {
       return null;
     }
     return {
@@ -384,7 +376,8 @@ export function TestingExecutiveDashboardsView({
             onChange={(e) =>
               setFilters((prev) => ({
                 ...prev,
-                comparison: e.target.value as ExecutiveDashboardFilterState["comparison"],
+                comparison: e.target
+                  .value as ExecutiveDashboardFilterState["comparison"],
               }))
             }
           >
@@ -431,7 +424,10 @@ export function TestingExecutiveDashboardsView({
         </label>
       </FilterBar>
 
-      <p className="mt-2 text-xs text-[var(--color-muted-foreground)]" aria-live="polite">
+      <p
+        className="mt-2 text-xs text-[var(--color-muted-foreground)]"
+        aria-live="polite"
+      >
         Comparison mode: {filters.comparison}
         {filters.dateFrom || filters.dateTo
           ? ` · Range ${filters.dateFrom || "…"} → ${filters.dateTo || "…"}`
@@ -439,11 +435,7 @@ export function TestingExecutiveDashboardsView({
       </p>
 
       <div className="mt-4">
-        <ExecutiveDashboardPanel
-          category={category}
-          data={data}
-          filters={filters}
-        />
+        <ExecutiveDashboardPanel category={category} data={data} filters={filters} />
       </div>
     </PageShell>
   );

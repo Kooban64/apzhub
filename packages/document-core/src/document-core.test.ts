@@ -19,9 +19,7 @@ import {
 import type { DocumentRequestContext } from "@apzhub/document-contracts";
 import { asDocumentTagId } from "@apzhub/document-contracts";
 
-function ctx(
-  overrides?: Partial<DocumentRequestContext>,
-): DocumentRequestContext {
+function ctx(overrides?: Partial<DocumentRequestContext>): DocumentRequestContext {
   return {
     tenantId: "tenant_1",
     userId: "user_1",
@@ -56,18 +54,18 @@ describe("document-core", () => {
   it("validates classification and lifecycle rules", () => {
     expect(isDocumentClassificationCode("confidential")).toBe(true);
     expect(isDocumentClassificationCode("unknown")).toBe(false);
-    expect(
-      buildDocumentClassification({ code: "legal", label: "Legal" }).code,
-    ).toBe("legal");
-    expect(() =>
-      buildDocumentClassification({ code: "custom" }),
-    ).toThrowError(DocumentDomainError);
+    expect(buildDocumentClassification({ code: "legal", label: "Legal" }).code).toBe(
+      "legal",
+    );
+    expect(() => buildDocumentClassification({ code: "custom" })).toThrowError(
+      DocumentDomainError,
+    );
     expect(isDocumentLifecycleState("draft")).toBe(true);
     expect(canTransitionDocumentLifecycle("draft", "active")).toBe(true);
     expect(canTransitionDocumentLifecycle("deleted", "active")).toBe(false);
-    expect(() =>
-      assertDocumentLifecycleTransition("deleted", "active"),
-    ).toThrowError(DocumentDomainError);
+    expect(() => assertDocumentLifecycleTransition("deleted", "active")).toThrowError(
+      DocumentDomainError,
+    );
   });
 
   it("creates, updates, classifies, tags, relates, finds, and archives documents", async () => {

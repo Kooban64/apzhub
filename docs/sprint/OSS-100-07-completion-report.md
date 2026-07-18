@@ -24,15 +24,15 @@ Provide reusable mapping infrastructure in the Integration SDK so adapters share
 
 ## Architecture overview
 
-| Layer | Component |
-|-------|-----------|
-| Types | MappingProvider, MappingDefinition, MappingProfile, MappingContext, MappingResult, MappingError, MappingCapabilities |
-| Registry | `InMemoryMappingRegistry` / `createMappingRegistry` |
-| Pipeline | `DefaultMappingPipeline` / `createMappingPipeline` |
-| Helpers | FieldMapper, ValueTransformer, EnumMapper, IdentityMapper, RelationshipMapper, CollectionMapper |
-| Observability | MappingDiagnostics, MappingMetrics |
-| Testing | `createMockMappingProvider`, fixtures |
-| Adapters | `createPlaneMappingRegistry`, `createZammadMappingRegistry` |
+| Layer         | Component                                                                                                            |
+| ------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Types         | MappingProvider, MappingDefinition, MappingProfile, MappingContext, MappingResult, MappingError, MappingCapabilities |
+| Registry      | `InMemoryMappingRegistry` / `createMappingRegistry`                                                                  |
+| Pipeline      | `DefaultMappingPipeline` / `createMappingPipeline`                                                                   |
+| Helpers       | FieldMapper, ValueTransformer, EnumMapper, IdentityMapper, RelationshipMapper, CollectionMapper                      |
+| Observability | MappingDiagnostics, MappingMetrics                                                                                   |
+| Testing       | `createMockMappingProvider`, fixtures                                                                                |
+| Adapters      | `createPlaneMappingRegistry`, `createZammadMappingRegistry`                                                          |
 
 ```text
 Adapter → MappingRegistry → MappingProvider → MappingDefinition
@@ -48,118 +48,118 @@ Adapter → MappingRegistry → MappingProvider → MappingDefinition
 
 ### Package (`@apzhub/integration-sdk` v0.7.0)
 
-| Component | Location |
-|-----------|----------|
-| Core types | `src/mapping/types.ts` |
-| Errors | `src/mapping/errors.ts` |
-| IdentityMapper | `src/mapping/identity-mapper.ts` |
-| Value transformers | `src/mapping/value-transformers.ts` |
-| EnumMapper | `src/mapping/enum-mapper.ts` |
+| Component                         | Location                                                                        |
+| --------------------------------- | ------------------------------------------------------------------------------- |
+| Core types                        | `src/mapping/types.ts`                                                          |
+| Errors                            | `src/mapping/errors.ts`                                                         |
+| IdentityMapper                    | `src/mapping/identity-mapper.ts`                                                |
+| Value transformers                | `src/mapping/value-transformers.ts`                                             |
+| EnumMapper                        | `src/mapping/enum-mapper.ts`                                                    |
 | Field / Relationship / Collection | `src/mapping/field-mapper.ts`, `relationship-mapper.ts`, `collection-mapper.ts` |
-| Validation / metrics | `src/mapping/validation.ts`, `metrics.ts` |
-| Registry / pipeline / provider | `src/mapping/registry.ts`, `pipeline.ts`, `provider.ts` |
-| Mock | `src/mapping/mock.ts` |
-| Subpath export | `@apzhub/integration-sdk/mapping` |
-| Version constant | `INTEGRATION_SDK_VERSION = "0.7.0"` |
+| Validation / metrics              | `src/mapping/validation.ts`, `metrics.ts`                                       |
+| Registry / pipeline / provider    | `src/mapping/registry.ts`, `pipeline.ts`, `provider.ts`                         |
+| Mock                              | `src/mapping/mock.ts`                                                           |
+| Subpath export                    | `@apzhub/integration-sdk/mapping`                                               |
+| Version constant                  | `INTEGRATION_SDK_VERSION = "0.7.0"`                                             |
 
 ### Adapter migration
 
-| Adapter | Change | Version |
-|---------|--------|---------|
-| `@apzhub/integration-plane` | IdentityMapper/EnumMapper wrappers; `createPlaneMappingRegistry` on init | **0.6.0** (unchanged) |
+| Adapter                      | Change                                                                    | Version               |
+| ---------------------------- | ------------------------------------------------------------------------- | --------------------- |
+| `@apzhub/integration-plane`  | IdentityMapper/EnumMapper wrappers; `createPlaneMappingRegistry` on init  | **0.6.0** (unchanged) |
 | `@apzhub/integration-zammad` | IdentityMapper/EnumMapper wrappers; `createZammadMappingRegistry` on init | **0.6.0** (unchanged) |
 
 Public mapper APIs and provisional ID wire format unchanged.
 
 ### Platform
 
-| Component | Status |
-|-----------|--------|
-| EntityMappingStore | **UNTOUCHED** (ADR-0049) |
-| MappingOrchestrator | **UNTOUCHED** |
+| Component           | Status                   |
+| ------------------- | ------------------------ |
+| EntityMappingStore  | **UNTOUCHED** (ADR-0049) |
+| MappingOrchestrator | **UNTOUCHED**            |
 
 ### Documentation
 
-| Document | Path |
-|----------|------|
-| Framework | `packages/integration-sdk/docs/MAPPING-FRAMEWORK.md` |
-| Profiles | `packages/integration-sdk/docs/MAPPING-PROFILES.md` |
-| Registry | `packages/integration-sdk/docs/MAPPING-REGISTRY.md` |
-| Transformers | `packages/integration-sdk/docs/MAPPING-TRANSFORMERS.md` |
-| Migration | `packages/integration-sdk/docs/MAPPING-MIGRATION.md` |
+| Document           | Path                                                            |
+| ------------------ | --------------------------------------------------------------- |
+| Framework          | `packages/integration-sdk/docs/MAPPING-FRAMEWORK.md`            |
+| Profiles           | `packages/integration-sdk/docs/MAPPING-PROFILES.md`             |
+| Registry           | `packages/integration-sdk/docs/MAPPING-REGISTRY.md`             |
+| Transformers       | `packages/integration-sdk/docs/MAPPING-TRANSFORMERS.md`         |
+| Migration          | `packages/integration-sdk/docs/MAPPING-MIGRATION.md`            |
 | Architecture index | `docs/architecture/APZHUB-Integration-SDK-Mapping-Framework.md` |
-| Package README | `packages/integration-sdk/README.md` |
+| Package README     | `packages/integration-sdk/README.md`                            |
 
 ---
 
 ## Tests
 
-| Suite | Result |
-|-------|--------|
-| Mapping suite | **25** tests · **~98.7%** lines |
-| `@apzhub/integration-sdk` full | **123** tests |
-| Plane + Zammad | **211** passed |
+| Suite                                                           | Result                               |
+| --------------------------------------------------------------- | ------------------------------------ |
+| Mapping suite                                                   | **25** tests · **~98.7%** lines      |
+| `@apzhub/integration-sdk` full                                  | **123** tests                        |
+| Plane + Zammad                                                  | **211** passed                       |
 | Wave1 / Wave2 / Support vertical + platform mapping regressions | **358** combined in one run — passed |
-| Lint (SDK) | **PASS** |
-| Typecheck (SDK) | **PASS** |
+| Lint (SDK)                                                      | **PASS**                             |
+| Typecheck (SDK)                                                 | **PASS**                             |
 
 ---
 
 ## Completion review
 
-| Criterion | Result |
-|-----------|--------|
-| MappingProvider + Registry + Pipeline | ✅ |
-| Export `@apzhub/integration-sdk/mapping` | ✅ |
-| Profiles, directions, definitions, context, result, error | ✅ |
-| FieldMapper, ValueTransformer, RelationshipMapper, CollectionMapper | ✅ |
-| EnumMapper + IdentityMapper | ✅ |
-| Diagnostics + metrics | ✅ |
-| Mock mapping provider | ✅ |
-| Plane/Zammad wrappers; register on adapter init | ✅ |
-| Provisional ID format unchanged | ✅ |
-| EntityMappingStore / MappingOrchestrator untouched | ✅ |
-| Adapter versions stay 0.6.0 | ✅ |
-| SDK version 0.7.0 | ✅ |
-| Lint / typecheck pass | ✅ |
-| No webhook/polling in this milestone | ✅ |
-| OSS-100-08 not started | ✅ |
+| Criterion                                                           | Result |
+| ------------------------------------------------------------------- | ------ |
+| MappingProvider + Registry + Pipeline                               | ✅     |
+| Export `@apzhub/integration-sdk/mapping`                            | ✅     |
+| Profiles, directions, definitions, context, result, error           | ✅     |
+| FieldMapper, ValueTransformer, RelationshipMapper, CollectionMapper | ✅     |
+| EnumMapper + IdentityMapper                                         | ✅     |
+| Diagnostics + metrics                                               | ✅     |
+| Mock mapping provider                                               | ✅     |
+| Plane/Zammad wrappers; register on adapter init                     | ✅     |
+| Provisional ID format unchanged                                     | ✅     |
+| EntityMappingStore / MappingOrchestrator untouched                  | ✅     |
+| Adapter versions stay 0.6.0                                         | ✅     |
+| SDK version 0.7.0                                                   | ✅     |
+| Lint / typecheck pass                                               | ✅     |
+| No webhook/polling in this milestone                                | ✅     |
+| OSS-100-08 not started                                              | ✅     |
 
 ---
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| Lint (SDK) | Pass |
-| Typecheck (SDK) | Pass |
-| Mapping tests | Pass — 25 (~98.7% lines) |
-| Full SDK tests | Pass — 123 |
-| Plane + Zammad | Pass — 211 |
-| Combined regression (wave1/2/support + platform mapping) | Pass — 358 |
+| Gate                                                     | Result                   |
+| -------------------------------------------------------- | ------------------------ |
+| Lint (SDK)                                               | Pass                     |
+| Typecheck (SDK)                                          | Pass                     |
+| Mapping tests                                            | Pass — 25 (~98.7% lines) |
+| Full SDK tests                                           | Pass — 123               |
+| Plane + Zammad                                           | Pass — 211               |
+| Combined regression (wave1/2/support + platform mapping) | Pass — 358               |
 
 ---
 
 ## Technical debt
 
-| Item | Notes |
-|------|-------|
-| Not all Plane/Zammad entities registered as definitions | Task/project/member (Plane) and ticket/status/priority (Zammad) registered; other mappers remain function-only until needed |
-| Pipeline optional at call sites | Existing mapper functions remain SoT; pipeline available for discovery/tests |
-| Nested mapping support | Infrastructure present; Plane/Zammad advertise `supportsNested: false` |
-| Earlier backlog “PostgreSQL mapping tables” | Remains platform EntityMappingStore (OSS-110-05) — intentionally not in SDK |
-| Former backlog “User/Permission/Entity MappingProvider” naming | Delivered as generic MappingProvider + profiles; platform store separate |
+| Item                                                           | Notes                                                                                                                       |
+| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Not all Plane/Zammad entities registered as definitions        | Task/project/member (Plane) and ticket/status/priority (Zammad) registered; other mappers remain function-only until needed |
+| Pipeline optional at call sites                                | Existing mapper functions remain SoT; pipeline available for discovery/tests                                                |
+| Nested mapping support                                         | Infrastructure present; Plane/Zammad advertise `supportsNested: false`                                                      |
+| Earlier backlog “PostgreSQL mapping tables”                    | Remains platform EntityMappingStore (OSS-110-05) — intentionally not in SDK                                                 |
+| Former backlog “User/Permission/Entity MappingProvider” naming | Delivered as generic MappingProvider + profiles; platform store separate                                                    |
 
 ---
 
 ## Risks
 
-| Risk | Mitigation |
-|------|------------|
+| Risk                                          | Mitigation                                         |
+| --------------------------------------------- | -------------------------------------------------- |
 | Confusing SDK mapping with EntityMappingStore | Docs + ADR-0049 boundary explicit; store untouched |
-| Provisional ID format drift | Shared IdentityMapper; regression tests |
-| Silent enum invention | Explicit unknownPolicy required |
-| Accidental webhook work under old numbering | Next milestone is OSS-100-08 only after approval |
+| Provisional ID format drift                   | Shared IdentityMapper; regression tests            |
+| Silent enum invention                         | Explicit unknownPolicy required                    |
+| Accidental webhook work under old numbering   | Next milestone is OSS-100-08 only after approval   |
 
 ---
 
@@ -167,11 +167,11 @@ Public mapper APIs and provisional ID wire format unchanged.
 
 **Next milestone:** **OSS-100-08 — Webhook & polling contracts** (per renumbered backlog after OSS-100-06).
 
-| Item | Scope |
-|------|-------|
-| `WebhookReceiver` | Signature verification, normalization |
-| `PollingScheduler` | Worker integration stub |
-| `NormalizedVendorEvent` | Envelope + idempotency keys |
+| Item                    | Scope                                 |
+| ----------------------- | ------------------------------------- |
+| `WebhookReceiver`       | Signature verification, normalization |
+| `PollingScheduler`      | Worker integration stub               |
+| `NormalizedVendorEvent` | Envelope + idempotency keys           |
 
 **Do not** start provisioning (09), test harness (10), or docs closeout (11) in OSS-100-08. Do not move EntityMappingStore into the SDK.
 

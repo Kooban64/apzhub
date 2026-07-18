@@ -51,8 +51,7 @@ function mapConfiguration(raw: unknown): ConfigurationViewModel {
   return {
     id: String(r.id ?? ""),
     tenantId: String(r.tenantId ?? ""),
-    organisationId:
-      r.organisationId != null ? String(r.organisationId) : undefined,
+    organisationId: r.organisationId != null ? String(r.organisationId) : undefined,
     namespaceId: String(r.namespaceId ?? ""),
     groupId: r.groupId != null ? String(r.groupId) : undefined,
     keyId: String(r.keyId ?? ""),
@@ -109,8 +108,7 @@ async function requestJson<T>(
     },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiSuccessEnvelope<T>
-    | ApiErrorEnvelope;
+    ApiSuccessEnvelope<T> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new ConfigurationClientError({
@@ -137,8 +135,7 @@ async function requestCollection<T>(
     headers: { accept: "application/json", ...(options?.headers ?? {}) },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiCollectionEnvelope<unknown>
-    | ApiErrorEnvelope;
+    ApiCollectionEnvelope<unknown> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new ConfigurationClientError({
@@ -160,21 +157,30 @@ export type ConfigurationClient = ReturnType<typeof createHttpConfigurationClien
 
 export function createHttpConfigurationClient() {
   return {
-    listConfigurations(query?: ListConfigurationsClientQuery, options?: ConfigurationClientRequestOptions) {
+    listConfigurations(
+      query?: ListConfigurationsClientQuery,
+      options?: ConfigurationClientRequestOptions,
+    ) {
       return requestCollection(
         `${API_BASE}/configurations${buildQuery(query as Record<string, string | number | undefined>)}`,
         mapConfiguration,
         options,
       );
     },
-    getConfiguration(configurationId: string, options?: ConfigurationClientRequestOptions) {
+    getConfiguration(
+      configurationId: string,
+      options?: ConfigurationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/configurations/${encodeURIComponent(configurationId)}`,
         { method: "GET" },
         options,
       ).then(mapConfiguration);
     },
-    createConfiguration(input: CreateConfigurationClientInput, options?: ConfigurationClientRequestOptions) {
+    createConfiguration(
+      input: CreateConfigurationClientInput,
+      options?: ConfigurationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/configurations`,
         { method: "POST", body: JSON.stringify(input) },
@@ -192,14 +198,20 @@ export function createHttpConfigurationClient() {
         options,
       ).then(mapConfiguration);
     },
-    archiveConfiguration(configurationId: string, options?: ConfigurationClientRequestOptions) {
+    archiveConfiguration(
+      configurationId: string,
+      options?: ConfigurationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/configurations/${encodeURIComponent(configurationId)}/archive`,
         { method: "POST" },
         options,
       ).then((raw) => mapConfiguration(asRecord(raw).configuration ?? raw));
     },
-    restoreConfiguration(configurationId: string, options?: ConfigurationClientRequestOptions) {
+    restoreConfiguration(
+      configurationId: string,
+      options?: ConfigurationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/configurations/${encodeURIComponent(configurationId)}/restore`,
         { method: "POST" },
@@ -217,28 +229,40 @@ export function createHttpConfigurationClient() {
         options,
       ).then(mapConfiguration);
     },
-    validateConfiguration(configurationId: string, options?: ConfigurationClientRequestOptions) {
+    validateConfiguration(
+      configurationId: string,
+      options?: ConfigurationClientRequestOptions,
+    ) {
       return requestJson<ConfigurationValidationResultViewModel>(
         `${API_BASE}/configurations/${encodeURIComponent(configurationId)}/validate`,
         { method: "POST" },
         options,
       );
     },
-    approveConfiguration(configurationId: string, options?: ConfigurationClientRequestOptions) {
+    approveConfiguration(
+      configurationId: string,
+      options?: ConfigurationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/configurations/${encodeURIComponent(configurationId)}/approve`,
         { method: "POST" },
         options,
       ).then(mapConfiguration);
     },
-    publishConfiguration(configurationId: string, options?: ConfigurationClientRequestOptions) {
+    publishConfiguration(
+      configurationId: string,
+      options?: ConfigurationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/configurations/${encodeURIComponent(configurationId)}/publish`,
         { method: "POST" },
         options,
       ).then(mapConfiguration);
     },
-    deprecateConfiguration(configurationId: string, options?: ConfigurationClientRequestOptions) {
+    deprecateConfiguration(
+      configurationId: string,
+      options?: ConfigurationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/configurations/${encodeURIComponent(configurationId)}/deprecate`,
         { method: "POST" },
@@ -257,8 +281,7 @@ export function createHttpConfigurationClient() {
               r.organisationId != null ? String(r.organisationId) : undefined,
             key: String(r.key ?? ""),
             name: String(r.name ?? ""),
-            description:
-              r.description != null ? String(r.description) : undefined,
+            description: r.description != null ? String(r.description) : undefined,
             createdAt: String(r.createdAt ?? ""),
             updatedAt: String(r.updatedAt ?? ""),
           } satisfies ConfigurationNamespaceViewModel;
@@ -351,9 +374,24 @@ export function createHttpConfigurationClient() {
         `${API_BASE}/configurations/${encodeURIComponent(configurationId)}/versions/${encodeURIComponent(versionId)}/publish`,
         { method: "POST" },
         options,
-      );
+      ).then((raw) => {
+        const r = asRecord(raw);
+        return {
+          id: String(r.id ?? versionId),
+          configurationId: String(r.configurationId ?? configurationId),
+          versionNumber: Number(r.versionNumber ?? 0),
+          immutable: Boolean(r.immutable),
+          isCurrent: Boolean(r.isCurrent),
+          label: r.label != null ? String(r.label) : undefined,
+          createdAt: String(r.createdAt ?? ""),
+          createdBy: String(r.createdBy ?? ""),
+        } satisfies ConfigurationVersionViewModel;
+      });
     },
-    listOverrides(configurationId: string, options?: ConfigurationClientRequestOptions) {
+    listOverrides(
+      configurationId: string,
+      options?: ConfigurationClientRequestOptions,
+    ) {
       return requestCollection(
         `${API_BASE}/overrides${buildQuery({ configurationId })}`,
         (raw) => {
@@ -380,7 +418,19 @@ export function createHttpConfigurationClient() {
         `${API_BASE}/overrides`,
         { method: "POST", body: JSON.stringify(input) },
         options,
-      );
+      ).then((raw) => {
+        const r = asRecord(raw);
+        return {
+          id: String(r.id ?? ""),
+          configurationId: String(r.configurationId ?? input.configurationId),
+          hierarchyLevel: String(r.hierarchyLevel ?? input.hierarchyLevel),
+          scope: asRecord(r.scope) as ConfigurationOverrideViewModel["scope"],
+          valueId: String(r.valueId ?? ""),
+          precedenceRank: Number(r.precedenceRank ?? 0),
+          createdAt: String(r.createdAt ?? ""),
+          updatedAt: String(r.updatedAt ?? ""),
+        } satisfies ConfigurationOverrideViewModel;
+      });
     },
     updateOverride(
       overrideId: string,
@@ -391,7 +441,19 @@ export function createHttpConfigurationClient() {
         `${API_BASE}/overrides/${encodeURIComponent(overrideId)}`,
         { method: "PATCH", body: JSON.stringify(input) },
         options,
-      );
+      ).then((raw) => {
+        const r = asRecord(raw);
+        return {
+          id: String(r.id ?? overrideId),
+          configurationId: String(r.configurationId ?? ""),
+          hierarchyLevel: String(r.hierarchyLevel ?? ""),
+          scope: asRecord(r.scope) as ConfigurationOverrideViewModel["scope"],
+          valueId: String(r.valueId ?? ""),
+          precedenceRank: Number(r.precedenceRank ?? 0),
+          createdAt: String(r.createdAt ?? ""),
+          updatedAt: String(r.updatedAt ?? ""),
+        } satisfies ConfigurationOverrideViewModel;
+      });
     },
     listScopes(options?: ConfigurationClientRequestOptions) {
       return requestCollection(
@@ -424,7 +486,10 @@ export function createHttpConfigurationClient() {
         options,
       );
     },
-    listReferences(configurationId: string, options?: ConfigurationClientRequestOptions) {
+    listReferences(
+      configurationId: string,
+      options?: ConfigurationClientRequestOptions,
+    ) {
       return requestCollection(
         `${API_BASE}/configurations/${encodeURIComponent(configurationId)}/references`,
         (raw) => raw as ConfigurationReferenceViewModel,
@@ -442,7 +507,11 @@ export function createHttpConfigurationClient() {
       const path = configurationId
         ? `${API_BASE}/configurations/${encodeURIComponent(configurationId)}/audit`
         : `${API_BASE}/audit`;
-      return requestCollection(path, (raw) => raw as ConfigurationAuditViewModel, options);
+      return requestCollection(
+        path,
+        (raw) => raw as ConfigurationAuditViewModel,
+        options,
+      );
     },
     getCapabilities(options?: ConfigurationClientRequestOptions) {
       return requestJson<ConfigurationManagementPlaneViewModel>(

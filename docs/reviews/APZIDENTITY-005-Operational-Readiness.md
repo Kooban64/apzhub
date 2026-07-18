@@ -4,11 +4,11 @@
 
 ## Environment
 
-| Variable | Requirement |
-| --- | --- |
+| Variable                  | Requirement                                        |
+| ------------------------- | -------------------------------------------------- |
 | `APZHUB_IDENTITY_ENABLED` | Must be `true`/`1`/`on` to enable; deny-by-default |
-| PostgreSQL | Required in production for Identity SoR |
-| Platform DB migrations | Apply `0052` then `0053` before enabling |
+| PostgreSQL                | Required in production for Identity SoR            |
+| Platform DB migrations    | Apply `0052` then `0053` before enabling           |
 
 ## Deployment order
 

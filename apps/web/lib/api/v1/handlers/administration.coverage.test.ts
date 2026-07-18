@@ -56,38 +56,81 @@ describe("APZADMIN-003 administration handler full surface", () => {
       makeRequest(path, { method: "PATCH", body: JSON.stringify(body) });
 
     expect(
-      (await (await handlers.handleListAdministrationModules(get("/api/v1/administration/modules?status=draft&key=projects"), ctx)).json()).data.length,
+      (
+        await (
+          await handlers.handleListAdministrationModules(
+            get("/api/v1/administration/modules?status=draft&key=projects"),
+            ctx,
+          )
+        ).json()
+      ).data.length,
     ).toBeGreaterThan(0);
 
     await handlers.handleCreateAdministrationModule(
       post("/api/v1/administration/modules", { key: "testing", name: "Testing" }),
       ctx,
     );
-    await handlers.handleGetAdministrationModule(get("/m"), ctx, p({ moduleId: "mod_1" }));
+    await handlers.handleGetAdministrationModule(
+      get("/m"),
+      ctx,
+      p({ moduleId: "mod_1" }),
+    );
     await handlers.handleUpdateAdministrationModule(
       patch("/m", { name: "X", description: null, organisationId: null }),
       ctx,
       p({ moduleId: "mod_1" }),
     );
-    await handlers.handleDeleteAdministrationModule(get("/m"), ctx, p({ moduleId: "mod_1" }));
-    await handlers.handleArchiveAdministrationModule(get("/m"), ctx, p({ moduleId: "mod_1" }));
-    await handlers.handleRestoreAdministrationModule(get("/m"), ctx, p({ moduleId: "mod_1" }));
+    await handlers.handleDeleteAdministrationModule(
+      get("/m"),
+      ctx,
+      p({ moduleId: "mod_1" }),
+    );
+    await handlers.handleArchiveAdministrationModule(
+      get("/m"),
+      ctx,
+      p({ moduleId: "mod_1" }),
+    );
+    await handlers.handleRestoreAdministrationModule(
+      get("/m"),
+      ctx,
+      p({ moduleId: "mod_1" }),
+    );
     await handlers.handleTransitionAdministrationModule(
       post("/m", { to: "active", reason: "go" }),
       ctx,
       p({ moduleId: "mod_1" }),
     );
-    await handlers.handleListAdministrationModuleAudit(get("/m"), ctx, p({ moduleId: "mod_1" }));
-    await handlers.handleListAdministrationModuleHistory(get("/m"), ctx, p({ moduleId: "mod_1" }));
-    await handlers.handleListAdministrationModuleMetadata(get("/m"), ctx, p({ moduleId: "mod_1" }));
-    await handlers.handleListAdministrationModuleReferences(get("/m"), ctx, p({ moduleId: "mod_1" }));
+    await handlers.handleListAdministrationModuleAudit(
+      get("/m"),
+      ctx,
+      p({ moduleId: "mod_1" }),
+    );
+    await handlers.handleListAdministrationModuleHistory(
+      get("/m"),
+      ctx,
+      p({ moduleId: "mod_1" }),
+    );
+    await handlers.handleListAdministrationModuleMetadata(
+      get("/m"),
+      ctx,
+      p({ moduleId: "mod_1" }),
+    );
+    await handlers.handleListAdministrationModuleReferences(
+      get("/m"),
+      ctx,
+      p({ moduleId: "mod_1" }),
+    );
 
     await handlers.handleListAdministrationCategories(get("/c"), ctx);
     await handlers.handleCreateAdministrationCategory(
       post("/c", { key: "k", name: "n", moduleId: "mod_1", ordering: 1 }),
       ctx,
     );
-    await handlers.handleGetAdministrationCategory(get("/c"), ctx, p({ categoryId: "cat_1" }));
+    await handlers.handleGetAdministrationCategory(
+      get("/c"),
+      ctx,
+      p({ categoryId: "cat_1" }),
+    );
     await handlers.handleUpdateAdministrationCategory(
       patch("/c", { name: "n2", description: null, ordering: 2 }),
       ctx,
@@ -99,7 +142,11 @@ describe("APZADMIN-003 administration handler full surface", () => {
       post("/s", { categoryId: "cat_1", key: "k", name: "n" }),
       ctx,
     );
-    await handlers.handleGetAdministrationSection(get("/s"), ctx, p({ sectionId: "sec_1" }));
+    await handlers.handleGetAdministrationSection(
+      get("/s"),
+      ctx,
+      p({ sectionId: "sec_1" }),
+    );
     await handlers.handleUpdateAdministrationSection(
       patch("/s", { name: "n2", description: null }),
       ctx,
@@ -118,9 +165,18 @@ describe("APZADMIN-003 administration handler full surface", () => {
       }),
       ctx,
     );
-    await handlers.handleGetAdministrationAction(get("/a"), ctx, p({ actionId: "act_1" }));
+    await handlers.handleGetAdministrationAction(
+      get("/a"),
+      ctx,
+      p({ actionId: "act_1" }),
+    );
     await handlers.handleUpdateAdministrationAction(
-      patch("/a", { name: "n2", description: null, kind: "manage", permissionKeys: null }),
+      patch("/a", {
+        name: "n2",
+        description: null,
+        kind: "manage",
+        permissionKeys: null,
+      }),
       ctx,
       p({ actionId: "act_1" }),
     );
@@ -162,7 +218,11 @@ describe("APZADMIN-003 administration handler full surface", () => {
       post("/pol", { kind: "access", key: "k", name: "n", moduleId: "mod_1" }),
       ctx,
     );
-    await handlers.handleGetAdministrationPolicy(get("/pol"), ctx, p({ policyId: "pol_1" }));
+    await handlers.handleGetAdministrationPolicy(
+      get("/pol"),
+      ctx,
+      p({ policyId: "pol_1" }),
+    );
     await handlers.handleUpdateAdministrationPolicy(
       patch("/pol", { name: "n2", description: null, kind: "audit" }),
       ctx,
@@ -247,7 +307,11 @@ describe("APZADMIN-003 administration handler full surface", () => {
       }),
       ctx,
     );
-    await handlers.handleGetAdministrationShortcut(get("/sc"), ctx, p({ shortcutId: "sc_1" }));
+    await handlers.handleGetAdministrationShortcut(
+      get("/sc"),
+      ctx,
+      p({ shortcutId: "sc_1" }),
+    );
     await handlers.handleUpdateAdministrationShortcut(
       patch("/sc", { label: "L2", permissionKeys: null }),
       ctx,
@@ -270,7 +334,11 @@ describe("APZADMIN-003 administration handler full surface", () => {
       p({ dashboardId: "dash_1" }),
     );
 
-    await handlers.handleListAdministrationWidgets(get("/w"), ctx, p({ dashboardId: "dash_1" }));
+    await handlers.handleListAdministrationWidgets(
+      get("/w"),
+      ctx,
+      p({ dashboardId: "dash_1" }),
+    );
     await handlers.handleCreateAdministrationWidget(
       post("/w", { key: "k", name: "n", kind: "card" }),
       ctx,
@@ -286,7 +354,11 @@ describe("APZADMIN-003 administration handler full surface", () => {
         ctx,
       ),
     ).rejects.toBeInstanceOf(PlatformApiHttpError);
-    await handlers.handleGetAdministrationWidget(get("/w"), ctx, p({ widgetId: "wid_1" }));
+    await handlers.handleGetAdministrationWidget(
+      get("/w"),
+      ctx,
+      p({ widgetId: "wid_1" }),
+    );
     await handlers.handleUpdateAdministrationWidget(
       patch("/w", { name: "n2", kind: "chart", ordering: 1 }),
       ctx,
@@ -301,7 +373,11 @@ describe("APZADMIN-003 administration handler full surface", () => {
       post("/meta", { moduleId: "mod_1", labels: { a: "b" }, tags: ["t"], notes: "n" }),
       ctx,
     );
-    await handlers.handleGetAdministrationMetadata(get("/meta"), ctx, p({ metadataId: "meta_1" }));
+    await handlers.handleGetAdministrationMetadata(
+      get("/meta"),
+      ctx,
+      p({ metadataId: "meta_1" }),
+    );
     await handlers.handleUpdateAdministrationMetadata(
       patch("/meta", { labels: null, tags: null, notes: null }),
       ctx,
@@ -331,9 +407,20 @@ describe("APZADMIN-003 administration handler full surface", () => {
       get("/api/v1/administration/audit?moduleId=mod_1"),
       ctx,
     );
-    await handlers.handleListAdministrationAudit(get("/api/v1/administration/audit"), ctx);
-    await handlers.handleGetAdministrationAuditEntry(get("/aud"), ctx, p({ auditId: "aud_1" }));
-    await handlers.handleGetAdministrationHistory(get("/h"), ctx, p({ historyId: "hist_1" }));
+    await handlers.handleListAdministrationAudit(
+      get("/api/v1/administration/audit"),
+      ctx,
+    );
+    await handlers.handleGetAdministrationAuditEntry(
+      get("/aud"),
+      ctx,
+      p({ auditId: "aud_1" }),
+    );
+    await handlers.handleGetAdministrationHistory(
+      get("/h"),
+      ctx,
+      p({ historyId: "hist_1" }),
+    );
 
     await handlers.handleListAdministrationDiagnostics(get("/diag"), ctx);
     await handlers.handleGetAdministrationDiagnostic(

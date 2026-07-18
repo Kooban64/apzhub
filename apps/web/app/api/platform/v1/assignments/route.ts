@@ -33,7 +33,9 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   if (!body.userId || !body.roleId) {
     return NextResponse.json(
-      { error: { code: "VALIDATION_ERROR", message: "userId and roleId are required." } },
+      {
+        error: { code: "VALIDATION_ERROR", message: "userId and roleId are required." },
+      },
       { status: 400 },
     );
   }
@@ -55,7 +57,12 @@ export async function DELETE(request: Request): Promise<NextResponse> {
 
   if (!assignmentId) {
     return NextResponse.json(
-      { error: { code: "VALIDATION_ERROR", message: "assignmentId query parameter is required." } },
+      {
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "assignmentId query parameter is required.",
+        },
+      },
       { status: 400 },
     );
   }

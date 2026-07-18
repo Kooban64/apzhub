@@ -121,31 +121,91 @@ export type TestingSearchMappingExtras = {
 };
 
 export type TestingSearchMappableEntity =
-  | { readonly entityType: "test_plan"; readonly entity: TestPlan; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "test_suite"; readonly entity: TestSuite; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "test_case"; readonly entity: TestCase; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "test_execution"; readonly entity: ManualExecution; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "test_run"; readonly entity: TestRun; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "execution_step"; readonly entity: TestStep; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "evidence"; readonly entity: Evidence; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "approval"; readonly entity: Approval; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "requirement"; readonly entity: Requirement; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "defect"; readonly entity: DefectLink; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "automation_run"; readonly entity: AutomationRun; readonly extras?: TestingSearchMappingExtras }
+  | {
+      readonly entityType: "test_plan";
+      readonly entity: TestPlan;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "test_suite";
+      readonly entity: TestSuite;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "test_case";
+      readonly entity: TestCase;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "test_execution";
+      readonly entity: ManualExecution;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "test_run";
+      readonly entity: TestRun;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "execution_step";
+      readonly entity: TestStep;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "evidence";
+      readonly entity: Evidence;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "approval";
+      readonly entity: Approval;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "requirement";
+      readonly entity: Requirement;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "defect";
+      readonly entity: DefectLink;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "automation_run";
+      readonly entity: AutomationRun;
+      readonly extras?: TestingSearchMappingExtras;
+    }
   | {
       readonly entityType: "automation_suite";
       readonly entity: CanonicalAutomationSuite | AutomationSuiteSearchInput;
       readonly extras?: TestingSearchMappingExtras;
     }
-  | { readonly entityType: "imported_result"; readonly entity: AutomationImport; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "coverage_summary"; readonly entity: AutomationCoverageSnapshot; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "certification"; readonly entity: CertificationRecord; readonly extras?: TestingSearchMappingExtras }
+  | {
+      readonly entityType: "imported_result";
+      readonly entity: AutomationImport;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "coverage_summary";
+      readonly entity: AutomationCoverageSnapshot;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "certification";
+      readonly entity: CertificationRecord;
+      readonly extras?: TestingSearchMappingExtras;
+    }
   | {
       readonly entityType: "certification_gate";
       readonly entity: QualityGate | CertificationGateDefinition;
       readonly extras?: TestingSearchMappingExtras;
     }
-  | { readonly entityType: "certification_approval"; readonly entity: Approval; readonly extras?: TestingSearchMappingExtras }
+  | {
+      readonly entityType: "certification_approval";
+      readonly entity: Approval;
+      readonly extras?: TestingSearchMappingExtras;
+    }
   | {
       readonly entityType: "certification_evidence";
       readonly entity: CertificationEvidenceSearchInput;
@@ -156,32 +216,112 @@ export type TestingSearchMappableEntity =
       readonly entity: CertificationDecisionSearchInput | CertificationRecord;
       readonly extras?: TestingSearchMappingExtras;
     }
-  | { readonly entityType: "release"; readonly entity: Release; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "release_candidate"; readonly entity: ReleaseCandidate; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "release_package"; readonly entity: ReleasePackage; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "release_scope"; readonly entity: ReleaseScope; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "release_approval"; readonly entity: ReleaseApproval; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "release_decision"; readonly entity: ReleaseDecision; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "release_manifest"; readonly entity: ReleaseManifest; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "release_summary"; readonly entity: ReleaseSummary; readonly extras?: TestingSearchMappingExtras }
+  | {
+      readonly entityType: "release";
+      readonly entity: Release;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "release_candidate";
+      readonly entity: ReleaseCandidate;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "release_package";
+      readonly entity: ReleasePackage;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "release_scope";
+      readonly entity: ReleaseScope;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "release_approval";
+      readonly entity: ReleaseApproval;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "release_decision";
+      readonly entity: ReleaseDecision;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "release_manifest";
+      readonly entity: ReleaseManifest;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "release_summary";
+      readonly entity: ReleaseSummary;
+      readonly extras?: TestingSearchMappingExtras;
+    }
   /** Engineering Score / EI snapshot — same canonical type as EngineeringSnapshot. */
-  | { readonly entityType: "engineering_snapshot"; readonly entity: EngineeringSnapshot; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "engineering_trend"; readonly entity: TrendSeries; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "benchmark"; readonly entity: Benchmark; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "historical_snapshot"; readonly entity: HistoricalSnapshot; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "risk_summary"; readonly entity: EngineeringRiskSummary; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "quality_summary"; readonly entity: QualitySummary; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "quality_coverage_summary"; readonly entity: CoverageMetric; readonly extras?: TestingSearchMappingExtras }
+  | {
+      readonly entityType: "engineering_snapshot";
+      readonly entity: EngineeringSnapshot;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "engineering_trend";
+      readonly entity: TrendSeries;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "benchmark";
+      readonly entity: Benchmark;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "historical_snapshot";
+      readonly entity: HistoricalSnapshot;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "risk_summary";
+      readonly entity: EngineeringRiskSummary;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "quality_summary";
+      readonly entity: QualitySummary;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "quality_coverage_summary";
+      readonly entity: CoverageMetric;
+      readonly extras?: TestingSearchMappingExtras;
+    }
   | {
       readonly entityType: "defect_summary";
       readonly entity: DefectSummarySearchInput | DefectLink;
       readonly extras?: TestingSearchMappingExtras;
     }
-  | { readonly entityType: "report_metadata"; readonly entity: ReportGenerationMetadata; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "report_template"; readonly entity: ReportTemplate; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "pipeline"; readonly entity: Pipeline; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "pipeline_run"; readonly entity: PipelineRun; readonly extras?: TestingSearchMappingExtras }
-  | { readonly entityType: "pipeline_import"; readonly entity: PipelineImport; readonly extras?: TestingSearchMappingExtras };
+  | {
+      readonly entityType: "report_metadata";
+      readonly entity: ReportGenerationMetadata;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "report_template";
+      readonly entity: ReportTemplate;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "pipeline";
+      readonly entity: Pipeline;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "pipeline_run";
+      readonly entity: PipelineRun;
+      readonly extras?: TestingSearchMappingExtras;
+    }
+  | {
+      readonly entityType: "pipeline_import";
+      readonly entity: PipelineImport;
+      readonly extras?: TestingSearchMappingExtras;
+    };
 
 export function mapTestingSeverityToClassification(
   severity: string | undefined,
@@ -361,10 +501,7 @@ export function permissionTokens(
   status?: string,
   classification?: string,
 ): string[] {
-  const tokens = [
-    ...context.permissions,
-    ...(extras?.permissions ?? []),
-  ];
+  const tokens = [...context.permissions, ...(extras?.permissions ?? [])];
   if (status) tokens.push(`status:${status}`);
   if (classification) tokens.push(`classification:${classification}`);
   return tokens;
@@ -373,7 +510,9 @@ export function permissionTokens(
 export function isAutomationSuiteSearchInput(
   entity: CanonicalAutomationSuite | AutomationSuiteSearchInput,
 ): entity is AutomationSuiteSearchInput {
-  return "id" in entity && typeof (entity as AutomationSuiteSearchInput).id === "string";
+  return (
+    "id" in entity && typeof (entity as AutomationSuiteSearchInput).id === "string"
+  );
 }
 
 export function isCertificationRecord(
@@ -399,9 +538,7 @@ export function assertTenant(
   context: TestingSearchPublicationContext,
 ): void {
   if (entityTenantId !== context.tenantId) {
-    throw new Error(
-      "tenant mismatch between Testing entity and publication context",
-    );
+    throw new Error("tenant mismatch between Testing entity and publication context");
   }
 }
 

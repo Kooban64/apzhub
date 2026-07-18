@@ -19,14 +19,14 @@ Out of scope: Workbench, delivery, email/SMS/push/Teams/Slack/webhooks, workers,
 
 ## Package versions
 
-| Package / artefact | Version |
-| --- | --- |
-| `@apzhub/notification-contracts` | **0.2.0** (unchanged) |
-| `@apzhub/notification-core` | **0.2.0** (unchanged) |
-| `@apzhub/notification-persistence` | **0.1.0** (unchanged) |
-| `@apzhub/platform-services` | **0.21.0** (unchanged) |
-| Platform OpenAPI | **1.4.0** |
-| Web Notification HTTP + typed client | APZNOTIFY-003 surface |
+| Package / artefact                   | Version                |
+| ------------------------------------ | ---------------------- |
+| `@apzhub/notification-contracts`     | **0.2.0** (unchanged)  |
+| `@apzhub/notification-core`          | **0.2.0** (unchanged)  |
+| `@apzhub/notification-persistence`   | **0.1.0** (unchanged)  |
+| `@apzhub/platform-services`          | **0.21.0** (unchanged) |
+| Platform OpenAPI                     | **1.4.0**              |
+| Web Notification HTTP + typed client | APZNOTIFY-003 surface  |
 
 ## Architecture
 
@@ -113,22 +113,22 @@ Existing production notification wiring + feature flag; no silent memory/allow-a
 
 Scoped Vitest coverage (handlers + typed client):
 
-| Surface | Statements | Branches | Functions | Lines |
-| --- | --- | --- | --- | --- |
-| Handlers `notifications.ts` | 97.43% | 72.97% | 100% | **97.43%** |
-| Typed client package (excl. types-only) | ~98% | ~71% | ~95% | **≥96%** (`notification-client.ts` **96.09%**) |
-| Zod schemas | 100% | 100% | 100% | **100%** |
+| Surface                                 | Statements | Branches | Functions | Lines                                          |
+| --------------------------------------- | ---------- | -------- | --------- | ---------------------------------------------- |
+| Handlers `notifications.ts`             | 97.43%     | 72.97%   | 100%      | **97.43%**                                     |
+| Typed client package (excl. types-only) | ~98%       | ~71%     | ~95%      | **≥96%** (`notification-client.ts` **96.09%**) |
+| Zod schemas                             | 100%       | 100%     | 100%      | **100%**                                       |
 
 Global branch threshold noise when running isolated suites does not reduce line targets below 95%.
 
 ## Quality gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:notification-http-client` | PASS |
-| `pnpm openapi:validate:platform` | PASS |
-| Notification HTTP + client Vitest | PASS |
-| `pnpm audit:notification-foundation` | PASS (regression) |
+| Gate                                        | Result            |
+| ------------------------------------------- | ----------------- |
+| `pnpm audit:notification-http-client`       | PASS              |
+| `pnpm openapi:validate:platform`            | PASS              |
+| Notification HTTP + client Vitest           | PASS              |
+| `pnpm audit:notification-foundation`        | PASS (regression) |
 | `pnpm audit:notification-platform-services` | PASS (regression) |
 
 ## Known limitations

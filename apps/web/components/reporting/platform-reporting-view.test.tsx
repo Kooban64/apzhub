@@ -48,9 +48,7 @@ describe("PlatformReportingView", () => {
     render(wrap(<PlatformReportingView section="templates" />));
 
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Templates" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Templates" })).toBeTruthy();
       expect(screen.getByText(MOCK_REPORT_TEMPLATE.name)).toBeTruthy();
     });
 
@@ -85,7 +83,9 @@ describe("PlatformReportingView", () => {
 
   it("filters templates by search and runs commands", async () => {
     const user = userEvent.setup();
-    const clickSpy = vi.spyOn(HTMLAnchorElement.prototype, "click").mockImplementation(() => {});
+    const clickSpy = vi
+      .spyOn(HTMLAnchorElement.prototype, "click")
+      .mockImplementation(() => {});
     render(wrap(<PlatformReportingView section="templates" />));
 
     await waitFor(() => {
@@ -140,8 +140,9 @@ describe("PlatformReportingView", () => {
       ...MOCK_REPORT_METADATA,
       id: `rmeta_${index}`,
       reportType: index % 2 === 0 ? "executive" : "coverage",
-      outputFormat: (index % 2 === 0 ? "html" : "json") as
-        typeof MOCK_REPORT_METADATA.outputFormat,
+      outputFormat: (index % 2 === 0
+        ? "html"
+        : "json") as typeof MOCK_REPORT_METADATA.outputFormat,
       generatedAt: `2026-07-${String(index + 1).padStart(2, "0")}T12:00:00.000Z`,
     }));
     setReportingClient(

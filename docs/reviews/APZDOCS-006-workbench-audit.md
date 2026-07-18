@@ -18,14 +18,14 @@ Constraints verified: `/api/v1/documents` only · no core/gateway imports · moc
 
 Route: `/workspace/documents` · Manifests: `platform-documents*` · View: `PlatformDocumentsView`
 
-| Concern | Result |
-| ------- | ------ |
-| Navigation (11 sections) | **PASS** |
-| Commands (Refresh, View*, Open*, Inspect, Copy IDs) | **PASS** |
-| Filtering / sorting / pagination | **PASS** |
-| Accessibility (ARIA toolbar/status/alert, labelled filters, keyboard rows) | **PASS** |
-| Metadata / diagnostics inspection | **PASS** (safe fields only) |
-| No editing / binary ops | **PASS** |
+| Concern                                                                    | Result                      |
+| -------------------------------------------------------------------------- | --------------------------- |
+| Navigation (11 sections)                                                   | **PASS**                    |
+| Commands (Refresh, View*, Open*, Inspect, Copy IDs)                        | **PASS**                    |
+| Filtering / sorting / pagination                                           | **PASS**                    |
+| Accessibility (ARIA toolbar/status/alert, labelled filters, keyboard rows) | **PASS**                    |
+| Metadata / diagnostics inspection                                          | **PASS** (safe fields only) |
+| No editing / binary ops                                                    | **PASS**                    |
 
 ## Playwright
 

@@ -24,7 +24,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -71,9 +72,7 @@ function requireContains(path, pattern, rule, detail) {
 const engineFiles = walk(
   join(ROOT, "packages/platform-services/src/services/workflow"),
 ).filter((file) =>
-  /workflow-engine|unavailable-workflow-engine|create-workflow-engine/.test(
-    rel(file),
-  ),
+  /workflow-engine|unavailable-workflow-engine|create-workflow-engine/.test(rel(file)),
 );
 
 scan(engineFiles, [
@@ -95,9 +94,7 @@ scan(walk(join(ROOT, "apps/web")), [
     pattern: /@apzhub\/integration-n8n|from\s+["'][^"']*integrations\/n8n/,
     allow: (path) =>
       path === "apps/web/lib/api/v1/gateway/bootstrap.ts" &&
-      existsSync(
-        join(ROOT, "docs/sprint/APZWORKFLOW-008-completion-report.md"),
-      ),
+      existsSync(join(ROOT, "docs/sprint/APZWORKFLOW-008-completion-report.md")),
   },
 ]);
 
@@ -153,12 +150,12 @@ requireContains(
 const pkg = JSON.parse(
   readFileSync(join(ROOT, "packages/platform-services/package.json"), "utf8"),
 );
-if (pkg.version !== "0.21.0") {
+if (pkg.version !== "0.25.0") {
   violations.push({
     file: "packages/platform-services/package.json",
     line: 1,
     rule: "platform-services-version",
-    detail: `Expected 0.21.0, found ${pkg.version}`,
+    detail: `Expected 0.25.0, found ${pkg.version}`,
   });
 }
 
@@ -188,5 +185,5 @@ console.log(
   "  - apps/web must not import @apzhub/integration-n8n (gateway bootstrap allowed after 008)",
 );
 console.log("  - gateway.workflow.engine + workflowEngineOps + permissions present");
-console.log("  - versions: platform-services 0.21.0, workflow-contracts 0.3.0");
+console.log("  - versions: platform-services 0.25.0, workflow-contracts 0.3.0");
 process.exit(0);

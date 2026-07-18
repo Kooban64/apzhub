@@ -22,8 +22,7 @@ export const notificationQueryKeys = {
       stableParams(params as Record<string, unknown> | undefined),
     ] as const,
   details: () => [...ROOT, "detail"] as const,
-  detail: (notificationId: string) =>
-    [...ROOT, "detail", notificationId] as const,
+  detail: (notificationId: string) => [...ROOT, "detail", notificationId] as const,
   templates: {
     all: [...ROOT, "templates"] as const,
     list: () => [...ROOT, "templates", "list"] as const,
@@ -45,8 +44,7 @@ export const notificationQueryKeys = {
   channels: {
     all: [...ROOT, "channels"] as const,
     list: () => [...ROOT, "channels", "list"] as const,
-    detail: (channelId: string) =>
-      [...ROOT, "channels", "detail", channelId] as const,
+    detail: (channelId: string) => [...ROOT, "channels", "detail", channelId] as const,
   },
   recipients: (notificationId: string) =>
     [...ROOT, "recipients", notificationId] as const,

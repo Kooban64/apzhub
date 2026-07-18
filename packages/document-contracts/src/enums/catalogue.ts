@@ -34,8 +34,7 @@ export const DOCUMENT_CLASSIFICATIONS = [
   "custom",
 ] as const;
 
-export type DocumentClassificationCode =
-  (typeof DOCUMENT_CLASSIFICATIONS)[number];
+export type DocumentClassificationCode = (typeof DOCUMENT_CLASSIFICATIONS)[number];
 
 export const DOCUMENT_TYPES = [
   "file",
@@ -67,8 +66,7 @@ export const DOCUMENT_RELATIONSHIP_KINDS = [
   "custom",
 ] as const;
 
-export type DocumentRelationshipKind =
-  (typeof DOCUMENT_RELATIONSHIP_KINDS)[number];
+export type DocumentRelationshipKind = (typeof DOCUMENT_RELATIONSHIP_KINDS)[number];
 
 export const DOCUMENT_CONSUMER_PRODUCTS = [
   "projects",
@@ -83,8 +81,7 @@ export const DOCUMENT_CONSUMER_PRODUCTS = [
   "other",
 ] as const;
 
-export type DocumentConsumerProduct =
-  (typeof DOCUMENT_CONSUMER_PRODUCTS)[number];
+export type DocumentConsumerProduct = (typeof DOCUMENT_CONSUMER_PRODUCTS)[number];
 
 export const DOCUMENT_PERMISSION_ACTIONS = [
   "read",
@@ -95,5 +92,4 @@ export const DOCUMENT_PERMISSION_ACTIONS = [
   "audit",
 ] as const;
 
-export type DocumentPermissionAction =
-  (typeof DOCUMENT_PERMISSION_ACTIONS)[number];
+export type DocumentPermissionAction = (typeof DOCUMENT_PERMISSION_ACTIONS)[number];

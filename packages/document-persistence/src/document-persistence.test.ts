@@ -64,10 +64,7 @@ describe("document-persistence", () => {
       targetDocumentId: b.id,
       kind: "related_to",
     });
-    const relationships = await repos.relationships.listByDocument(
-      request,
-      a.id,
-    );
+    const relationships = await repos.relationships.listByDocument(request, a.id);
     expect(relationships).toHaveLength(1);
     expect(JSON.stringify(relationships[0])).not.toMatch(/Uint8Array|Buffer|base64/);
     const audits = await repos.audits.listByDocument(request, a.id);

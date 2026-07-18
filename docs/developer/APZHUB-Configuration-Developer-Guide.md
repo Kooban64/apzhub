@@ -41,8 +41,8 @@ const repos = createConfigurationPersistenceForTest({
 
 ## Boundaries
 
-- Products use `gateway.configuration.*` — never persistence repos directly  
-- Do not store secrets or runtime-apply configuration  
+- Products use `gateway.configuration.*` — never persistence repos directly
+- Do not store secrets or runtime-apply configuration
 - Do not confuse with `@apzhub/config` or runtime configuration-manager
 
 ## Next

@@ -3,14 +3,17 @@ import { jsonb, pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-cor
 import { platformTenant } from "./platform-identity-schema";
 import { user } from "./schema";
 
-export const platformAuthorizationPermission = pgTable("platform_authorization_permission", {
-  permissionKey: text("permission_key").primaryKey(),
-  namespace: text("namespace").notNull(),
-  description: text("description"),
-  metadata: jsonb("metadata").$type<Record<string, unknown>>().notNull().default({}),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
-});
+export const platformAuthorizationPermission = pgTable(
+  "platform_authorization_permission",
+  {
+    permissionKey: text("permission_key").primaryKey(),
+    namespace: text("namespace").notNull(),
+    description: text("description"),
+    metadata: jsonb("metadata").$type<Record<string, unknown>>().notNull().default({}),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+);
 
 export const platformAuthorizationRole = pgTable(
   "platform_authorization_role",

@@ -26,9 +26,7 @@ function createService() {
 
 describe("createPlatformIdentityService", () => {
   it("requires explicit repos", () => {
-    expect(() =>
-      createPlatformIdentityService({} as never),
-    ).toThrow(/explicit repos/);
+    expect(() => createPlatformIdentityService({} as never)).toThrow(/explicit repos/);
   });
 
   it("rejects invalid request context", async () => {

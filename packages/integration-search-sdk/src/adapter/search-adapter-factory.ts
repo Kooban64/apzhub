@@ -32,7 +32,9 @@ export interface CreateSearchAdapterOptions extends BuildSearchAdapterContextInp
   readonly declaredSearchCapabilities?: readonly SearchIntegrationCapabilityId[];
 }
 
-export interface SearchAdapterFactoryCreateResult<T extends SearchIntegrationAdapterBase> {
+export interface SearchAdapterFactoryCreateResult<
+  T extends SearchIntegrationAdapterBase,
+> {
   readonly adapter: T;
   readonly context: SearchAdapterContext;
   readonly registration: SearchCapabilityRegistrationResult;
@@ -65,9 +67,10 @@ export class SearchAdapterFactory {
       declaredSearchCapabilities,
     );
     if (!registration.ok) {
-      throw new Error(registration.message + (registration.issues?.length
-        ? `: ${registration.issues.join("; ")}`
-        : ""));
+      throw new Error(
+        registration.message +
+          (registration.issues?.length ? `: ${registration.issues.join("; ")}` : ""),
+      );
     }
 
     const context = buildSearchAdapterContext({

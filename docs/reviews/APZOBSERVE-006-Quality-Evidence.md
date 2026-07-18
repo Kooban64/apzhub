@@ -21,24 +21,24 @@ pnpm certify:observe-vertical
 
 ## Results
 
-| Check | Result |
-| --- | --- |
-| Vertical audit (001–005 guarantees) | PASS |
-| Wave closeout audit | PASS |
-| OpenAPI platform validate | PASS (1.8.0) |
-| Freeze Notice + Reference Standard present | PASS |
-| Operational Readiness + Future Guide present | PASS |
-| Security Confirmation present | PASS |
-| Foundation indexes updated | PASS |
+| Check                                        | Result       |
+| -------------------------------------------- | ------------ |
+| Vertical audit (001–005 guarantees)          | PASS         |
+| Wave closeout audit                          | PASS         |
+| OpenAPI platform validate                    | PASS (1.8.0) |
+| Freeze Notice + Reference Standard present   | PASS         |
+| Operational Readiness + Future Guide present | PASS         |
+| Security Confirmation present                | PASS         |
+| Foundation indexes updated                   | PASS         |
 
 ## Retained vertical evidence (APZOBSERVE-005)
 
-| Metric | Value |
-| --- | --- |
-| Scoped lines | 98.22% |
-| Scoped functions | 96.97% |
-| Scoped branches | 76.52% |
-| Playwright | LIMITED (external Testing slug conflict) |
+| Metric           | Value                                    |
+| ---------------- | ---------------------------------------- |
+| Scoped lines     | 98.22%                                   |
+| Scoped functions | 96.97%                                   |
+| Scoped branches  | 76.52%                                   |
+| Playwright       | LIMITED (external Testing slug conflict) |
 
 ## Classification
 

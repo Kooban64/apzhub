@@ -31,12 +31,12 @@ Administration SoR (`@apzhub/admin-*`) ≠ Platform Operations (`/workspace/oper
 
 ## Package versions at freeze
 
-| Package | Version |
-| --- | --- |
-| admin-contracts | 0.2.0 |
-| admin-core | 0.2.0 |
-| admin-persistence | 0.1.0 |
-| platform-services | 0.22.0 |
+| Package           | Version |
+| ----------------- | ------- |
+| admin-contracts   | 0.2.0   |
+| admin-core        | 0.2.0   |
+| admin-persistence | 0.1.0   |
+| platform-services | 0.22.0  |
 
 ## Future
 

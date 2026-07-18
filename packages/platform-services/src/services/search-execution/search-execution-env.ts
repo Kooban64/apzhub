@@ -14,8 +14,7 @@ export type SearchMeilisearchProviderEnv = {
 };
 
 export function isSearchServiceEnabled(
-  env: NodeJS.ProcessEnv | Record<string, string | undefined> | undefined =
-    process.env,
+  env: NodeJS.ProcessEnv | Record<string, string | undefined> | undefined = process.env,
 ): boolean {
   return env?.SEARCH_SERVICE_ENABLED === "true";
 }
@@ -25,8 +24,7 @@ export function isSearchServiceEnabled(
  * Requires SEARCH_SERVICE_ENABLED=true and a configured endpoint.
  */
 export function isSearchExecutionMeilisearchConfigured(
-  env: NodeJS.ProcessEnv | Record<string, string | undefined> | undefined =
-    process.env,
+  env: NodeJS.ProcessEnv | Record<string, string | undefined> | undefined = process.env,
 ): boolean {
   if (!isSearchServiceEnabled(env)) return false;
   if (env?.SEARCH_EXECUTION_PROVIDER !== "meilisearch") {
@@ -37,26 +35,21 @@ export function isSearchExecutionMeilisearchConfigured(
     return false;
   }
   return (
-    env.SEARCH_EXECUTION_ENABLED !== "false" &&
-    Boolean(env.SEARCH_MEILISEARCH_ENDPOINT)
+    env.SEARCH_EXECUTION_ENABLED !== "false" && Boolean(env.SEARCH_MEILISEARCH_ENDPOINT)
   );
 }
 
 export function resolveSearchMeilisearchProviderEnv(
-  env: NodeJS.ProcessEnv | Record<string, string | undefined> | undefined =
-    process.env,
+  env: NodeJS.ProcessEnv | Record<string, string | undefined> | undefined = process.env,
 ): SearchMeilisearchProviderEnv {
   const endpoint = env?.SEARCH_MEILISEARCH_ENDPOINT?.trim() || undefined;
   const apiKeyRef =
     env?.SEARCH_MEILISEARCH_API_KEY_REF?.trim() || "meilisearch/api-key";
   const apiKey = env?.SEARCH_MEILISEARCH_API_KEY?.trim() || undefined;
-  const indexPrefix =
-    env?.SEARCH_MEILISEARCH_INDEX_PREFIX?.trim() || "apzhub_";
-  const defaultIndexUid =
-    env?.SEARCH_MEILISEARCH_DEFAULT_INDEX?.trim() || undefined;
+  const indexPrefix = env?.SEARCH_MEILISEARCH_INDEX_PREFIX?.trim() || "apzhub_";
+  const defaultIndexUid = env?.SEARCH_MEILISEARCH_DEFAULT_INDEX?.trim() || undefined;
   const timeoutRaw = Number(env?.SEARCH_MEILISEARCH_TIMEOUT_MS ?? 10_000);
-  const timeoutMs =
-    Number.isFinite(timeoutRaw) && timeoutRaw > 0 ? timeoutRaw : 10_000;
+  const timeoutMs = Number.isFinite(timeoutRaw) && timeoutRaw > 0 ? timeoutRaw : 10_000;
 
   return {
     enabled: isSearchExecutionMeilisearchConfigured(env),

@@ -1,8 +1,13 @@
-import type { ConsolidatedOperationalDiagnostics, HealthSignalStatus } from "@apzhub/platform-security";
+import type {
+  ConsolidatedOperationalDiagnostics,
+  HealthSignalStatus,
+} from "@apzhub/platform-security";
 
-export type CapabilityMaturityLevel = "foundation" | "operational" | "production" | "experimental";
+export type CapabilityMaturityLevel =
+  "foundation" | "operational" | "production" | "experimental";
 
-export type ProductionReadinessVerdict = "READY" | "READY_WITH_OBSERVATIONS" | "NOT_READY";
+export type ProductionReadinessVerdict =
+  "READY" | "READY_WITH_OBSERVATIONS" | "NOT_READY";
 
 export interface CapabilityHealthReport {
   readonly capabilityId: string;

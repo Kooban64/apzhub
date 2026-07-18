@@ -52,7 +52,13 @@ export function validatePlaneEntity(
 }
 
 export function validatePlaneProjectResponse(body: unknown): ValidationResult {
-  return validatePlaneEntity(body, ["id", "name", "identifier", "created_at", "updated_at"]);
+  return validatePlaneEntity(body, [
+    "id",
+    "name",
+    "identifier",
+    "created_at",
+    "updated_at",
+  ]);
 }
 
 export function validatePlaneWorkspaceResponse(body: unknown): ValidationResult {

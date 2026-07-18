@@ -2,7 +2,10 @@ import type {
   CertificationAuditEntry,
   CertificationAuditService,
 } from "@apzhub/testing-contracts";
-import { asCertificationAuditEntryId, asCertificationRecordId } from "@apzhub/testing-contracts";
+import {
+  asCertificationAuditEntryId,
+  asCertificationRecordId,
+} from "@apzhub/testing-contracts";
 import type { CertificationAuditRecord } from "@apzhub/testing-persistence";
 
 import { toRepositoryContext } from "../mapping/context";
@@ -62,10 +65,7 @@ export function createCertificationAuditService(
     async get(ctx, id) {
       assertHasPermission(ctx, "certification.audit");
       const row = requireFound(
-        await rt.persistence.certificationAudits.get(
-          toRepositoryContext(ctx),
-          id,
-        ),
+        await rt.persistence.certificationAudits.get(toRepositoryContext(ctx), id),
         "certification_audit",
         id,
       );

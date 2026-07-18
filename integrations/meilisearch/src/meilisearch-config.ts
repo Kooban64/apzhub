@@ -61,7 +61,11 @@ export function validateMeilisearchConfiguration(
   const issues: string[] = [];
   const warnings: string[] = [];
 
-  if (config.baseUrl !== undefined && config.baseUrl.trim() && !isValidHttpUrl(config.baseUrl)) {
+  if (
+    config.baseUrl !== undefined &&
+    config.baseUrl.trim() &&
+    !isValidHttpUrl(config.baseUrl)
+  ) {
     issues.push("baseUrl must be a valid HTTP(S) URL");
   }
 

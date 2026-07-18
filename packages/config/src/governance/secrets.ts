@@ -79,12 +79,17 @@ export function buildSecretDiagnostics(
   });
 }
 
-export function redactSecretsInMessage(message: string, env: NodeJS.ProcessEnv = process.env): string {
+export function redactSecretsInMessage(
+  message: string,
+  env: NodeJS.ProcessEnv = process.env,
+): string {
   let redacted = message;
   for (const [key, value] of Object.entries(env)) {
     if (!value || !isSecretKey(key)) continue;
     if (redacted.includes(value)) {
-      redacted = redacted.split(value).join(maskSecretValue(value, getConfigDefinition(key)?.secret));
+      redacted = redacted
+        .split(value)
+        .join(maskSecretValue(value, getConfigDefinition(key)?.secret));
     }
   }
   return redacted;

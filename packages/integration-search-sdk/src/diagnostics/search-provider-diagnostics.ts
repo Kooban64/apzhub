@@ -69,7 +69,8 @@ export class SearchProviderDiagnostics {
     }
 
     const search: SearchDiagnostics = {
-      health: input.health ?? createUnknownSearchHealth(this.clock.now.bind(this.clock)),
+      health:
+        input.health ?? createUnknownSearchHealth(this.clock.now.bind(this.clock)),
       capabilities: input.capabilities ?? FOUNDATION_SEARCH_CAPABILITIES,
       statistics: input.statistics ?? createEmptySearchStatistics(),
       configurationSummary: {
@@ -122,8 +123,8 @@ export class SearchProviderDiagnostics {
   }
 }
 
-export function createSearchProviderDiagnostics(
-  clock?: { now(): string },
-): SearchProviderDiagnostics {
+export function createSearchProviderDiagnostics(clock?: {
+  now(): string;
+}): SearchProviderDiagnostics {
   return new SearchProviderDiagnostics(clock);
 }

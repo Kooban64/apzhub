@@ -13,8 +13,7 @@ export const DOCUMENTS_SEARCH_ENTITY_TYPES = [
   "document_tag",
 ] as const;
 
-export type DocumentsSearchEntityType =
-  (typeof DOCUMENTS_SEARCH_ENTITY_TYPES)[number];
+export type DocumentsSearchEntityType = (typeof DOCUMENTS_SEARCH_ENTITY_TYPES)[number];
 
 export function isDocumentsSearchEntityType(
   value: string,

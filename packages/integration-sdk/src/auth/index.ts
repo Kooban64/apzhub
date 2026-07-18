@@ -48,10 +48,7 @@ export type {
   Clock,
   DefaultAuthenticationProviderOptions,
 } from "./authentication-provider";
-export {
-  DefaultAuthenticationProvider,
-  systemClock,
-} from "./authentication-provider";
+export { DefaultAuthenticationProvider, systemClock } from "./authentication-provider";
 
 export type {
   AuthenticationDiagnostics,

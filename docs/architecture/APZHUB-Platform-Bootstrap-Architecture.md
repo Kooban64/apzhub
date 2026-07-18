@@ -14,16 +14,16 @@ Define the canonical application bootstrap and operational diagnostics loading a
 
 ## Package boundaries
 
-| Package | Responsibility | PRH-001 role |
-|---------|----------------|--------------|
-| `@apzhub/platform-runtime` | Manifest discovery, registry, lifecycle, health | Bootstrapped by platform-bootstrap |
-| `@apzhub/platform-identity` | Tenants, sessions | Diagnostics source |
-| `@apzhub/platform-authorization` | RBAC | Diagnostics source |
-| `@apzhub/platform-personalisation` | Preferences | Diagnostics source |
-| `@apzhub/platform-governance` | Governance, provisioning | Diagnostics source |
-| `@apzhub/platform-security` | Security, resilience, consolidated diagnostics aggregation | Diagnostics sink |
-| `@apzhub/platform-bootstrap` | **App-layer orchestration** — runtime init + diagnostics loader | **New — canonical host entry** |
-| Framework packages (command, knowledge, event, activity) | Registry hydration | Per-app (unchanged PRH-001) |
+| Package                                                  | Responsibility                                                  | PRH-001 role                       |
+| -------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------- |
+| `@apzhub/platform-runtime`                               | Manifest discovery, registry, lifecycle, health                 | Bootstrapped by platform-bootstrap |
+| `@apzhub/platform-identity`                              | Tenants, sessions                                               | Diagnostics source                 |
+| `@apzhub/platform-authorization`                         | RBAC                                                            | Diagnostics source                 |
+| `@apzhub/platform-personalisation`                       | Preferences                                                     | Diagnostics source                 |
+| `@apzhub/platform-governance`                            | Governance, provisioning                                        | Diagnostics source                 |
+| `@apzhub/platform-security`                              | Security, resilience, consolidated diagnostics aggregation      | Diagnostics sink                   |
+| `@apzhub/platform-bootstrap`                             | **App-layer orchestration** — runtime init + diagnostics loader | **New — canonical host entry**     |
+| Framework packages (command, knowledge, event, activity) | Registry hydration                                              | Per-app (unchanged PRH-001)        |
 
 **Rule:** platform-bootstrap orchestrates Platform Core capabilities; it does not replace them.
 
@@ -104,11 +104,11 @@ Both `apps/web/instrumentation.ts` and `apps/law-platform/instrumentation.ts` ca
 
 ## Export surfaces
 
-| Export | Use when |
-|--------|----------|
-| `@apzhub/platform-bootstrap/server` | Runtime bootstrap only (instrumentation, hydration, health probes) |
-| `@apzhub/platform-bootstrap/diagnostics` | Operations Console, security diagnostics aggregation |
-| `@apzhub/platform-bootstrap` | Full API (documentation, tooling) |
+| Export                                   | Use when                                                           |
+| ---------------------------------------- | ------------------------------------------------------------------ |
+| `@apzhub/platform-bootstrap/server`      | Runtime bootstrap only (instrumentation, hydration, health probes) |
+| `@apzhub/platform-bootstrap/diagnostics` | Operations Console, security diagnostics aggregation               |
+| `@apzhub/platform-bootstrap`             | Full API (documentation, tooling)                                  |
 
 ---
 
@@ -127,27 +127,27 @@ loadConsolidatedOperationalDiagnostics(workspaceRoot, {
 
 ## Validation matrix (PRH-001)
 
-| Capability | Bootstrap path | Verified |
-|------------|----------------|----------|
-| Platform Runtime | `ensurePlatformRuntimeReady` | ✅ |
-| Identity | consolidated `identity` block | ✅ |
-| Authorization | consolidated `authorization` block | ✅ |
-| Operations | `operations` + ops console routes | ✅ |
-| Personalisation | consolidated `personalisation` block | ✅ |
-| Governance | consolidated `governance` block | ✅ |
-| Security | consolidated `security` block | ✅ |
-| Law Platform | `lawPlatform` extension | ✅ |
-| Trust Accounting | `trustAccounting` extension | ✅ |
+| Capability       | Bootstrap path                       | Verified |
+| ---------------- | ------------------------------------ | -------- |
+| Platform Runtime | `ensurePlatformRuntimeReady`         | ✅       |
+| Identity         | consolidated `identity` block        | ✅       |
+| Authorization    | consolidated `authorization` block   | ✅       |
+| Operations       | `operations` + ops console routes    | ✅       |
+| Personalisation  | consolidated `personalisation` block | ✅       |
+| Governance       | consolidated `governance` block      | ✅       |
+| Security         | consolidated `security` block        | ✅       |
+| Law Platform     | `lawPlatform` extension              | ✅       |
+| Trust Accounting | `trustAccounting` extension          | ✅       |
 
 ---
 
 ## Remaining bootstrap debt
 
-| Item | Target |
-|------|--------|
-| Framework hydration duplication (command, knowledge, event, activity) | Future consolidation story |
-| Worker process bootstrap entry | PCv2-02 |
-| Postgres diagnostics lazy import | Acceptable; optional hardening |
+| Item                                                                  | Target                         |
+| --------------------------------------------------------------------- | ------------------------------ |
+| Framework hydration duplication (command, knowledge, event, activity) | Future consolidation story     |
+| Worker process bootstrap entry                                        | PCv2-02                        |
+| Postgres diagnostics lazy import                                      | Acceptable; optional hardening |
 
 ---
 

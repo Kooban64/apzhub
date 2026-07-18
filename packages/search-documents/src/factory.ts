@@ -47,9 +47,7 @@ export type DocumentsSearchAdapter = {
   readonly integration: SearchIntegrationFramework;
 };
 
-function resolveProductionIntegration(
-  options: CreateDocumentsSearchAdapterOptions,
-): {
+function resolveProductionIntegration(options: CreateDocumentsSearchAdapterOptions): {
   integration: SearchIntegrationFramework;
   integrationPublisher: SearchIntegrationPublisher;
 } {
@@ -81,8 +79,7 @@ function resolveProductionIntegration(
     options.searchIntegrationOptions?.sinkKind
   ) {
     const integration =
-      options.integration ??
-      createSearchIntegration(options.searchIntegrationOptions);
+      options.integration ?? createSearchIntegration(options.searchIntegrationOptions);
     return { integration, integrationPublisher: integration.publisher };
   }
 
@@ -162,8 +159,7 @@ export function createDocumentsSearchAdapterForTest(
         ? { sink: options.sink, ...options.searchIntegrationOptions }
         : options.searchIntegrationOptions,
     );
-  const integrationPublisher =
-    options.integrationPublisher ?? integration.publisher;
+  const integrationPublisher = options.integrationPublisher ?? integration.publisher;
   return buildAdapter(integration, integrationPublisher);
 }
 

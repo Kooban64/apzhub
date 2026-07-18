@@ -1,6 +1,4 @@
-import {
-  loadConsolidatedOperationalDiagnostics as loadCanonicalOperationalDiagnostics,
-} from "@apzhub/platform-bootstrap/diagnostics";
+import { loadConsolidatedOperationalDiagnostics as loadCanonicalOperationalDiagnostics } from "@apzhub/platform-bootstrap/diagnostics";
 
 import { WORKSPACE_ROOT } from "./runtime-init";
 

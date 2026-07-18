@@ -21,7 +21,12 @@ import {
 
 type Preferences = {
   appearance: { theme: string; density: string };
-  regional: { language: string; timezone: string; dateFormat: string; timeFormat: string };
+  regional: {
+    language: string;
+    timezone: string;
+    dateFormat: string;
+    timeFormat: string;
+  };
   workbench: {
     landingPage: string;
     defaultWorkspace: string;
@@ -30,7 +35,11 @@ type Preferences = {
     recentWorkspaces: string[];
   };
   notifications: { email: boolean; inApp: boolean; digest: string };
-  accessibility: { reducedMotion: boolean; highContrast: boolean; focusIndicators: string };
+  accessibility: {
+    reducedMotion: boolean;
+    highContrast: boolean;
+    focusIndicators: string;
+  };
 };
 
 function PreferenceSelect({
@@ -110,7 +119,9 @@ export function PersonalisationSection() {
       })
       .catch((cause: unknown) => {
         if (!active) return;
-        setError(cause instanceof Error ? cause.message : "Failed to load personalisation.");
+        setError(
+          cause instanceof Error ? cause.message : "Failed to load personalisation.",
+        );
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -135,7 +146,8 @@ export function PersonalisationSection() {
   }
 
   if (loading) return <OpsLoadingState />;
-  if (error || !preferences) return <OpsErrorState message={error ?? "No preferences loaded."} />;
+  if (error || !preferences)
+    return <OpsErrorState message={error ?? "No preferences loaded."} />;
 
   return (
     <OpsPageShell
@@ -186,7 +198,9 @@ export function PersonalisationSection() {
               <input
                 className="rounded-md border border-[var(--color-border)] bg-[var(--color-background)] px-3 py-2"
                 value={preferences.regional.timezone}
-                onChange={(event) => void savePatch({ regional: { timezone: event.target.value } })}
+                onChange={(event) =>
+                  void savePatch({ regional: { timezone: event.target.value } })
+                }
               />
             </label>
             <PreferenceSelect
@@ -230,14 +244,18 @@ export function PersonalisationSection() {
                 className="rounded-md border border-[var(--color-border)] bg-[var(--color-background)] px-3 py-2"
                 value={preferences.workbench.defaultWorkspace}
                 onChange={(event) =>
-                  void savePatch({ workbench: { defaultWorkspace: event.target.value } })
+                  void savePatch({
+                    workbench: { defaultWorkspace: event.target.value },
+                  })
                 }
               />
             </label>
             <PreferenceToggle
               label="Sidebar collapsed"
               checked={preferences.workbench.sidebarCollapsed}
-              onChange={(sidebarCollapsed) => void savePatch({ workbench: { sidebarCollapsed } })}
+              onChange={(sidebarCollapsed) =>
+                void savePatch({ workbench: { sidebarCollapsed } })
+              }
             />
           </CardContent>
         </Card>
@@ -274,12 +292,16 @@ export function PersonalisationSection() {
             <PreferenceToggle
               label="Reduced motion"
               checked={preferences.accessibility.reducedMotion}
-              onChange={(reducedMotion) => void savePatch({ accessibility: { reducedMotion } })}
+              onChange={(reducedMotion) =>
+                void savePatch({ accessibility: { reducedMotion } })
+              }
             />
             <PreferenceToggle
               label="High contrast"
               checked={preferences.accessibility.highContrast}
-              onChange={(highContrast) => void savePatch({ accessibility: { highContrast } })}
+              onChange={(highContrast) =>
+                void savePatch({ accessibility: { highContrast } })
+              }
             />
             <PreferenceSelect
               label="Focus indicators"
@@ -288,7 +310,9 @@ export function PersonalisationSection() {
                 { value: "default", label: "Default" },
                 { value: "enhanced", label: "Enhanced" },
               ]}
-              onChange={(focusIndicators) => void savePatch({ accessibility: { focusIndicators } })}
+              onChange={(focusIndicators) =>
+                void savePatch({ accessibility: { focusIndicators } })
+              }
             />
           </CardContent>
         </Card>
@@ -298,9 +322,9 @@ export function PersonalisationSection() {
             <h2 className="text-sm font-semibold">Favorites</h2>
             <OpsTable
               columns={["Type", "Key", "Label"]}
-              rows={(favorites as Array<{ itemType: string; itemKey: string; label: string }>).map(
-                (item) => [item.itemType, item.itemKey, item.label],
-              )}
+              rows={(
+                favorites as Array<{ itemType: string; itemKey: string; label: string }>
+              ).map((item) => [item.itemType, item.itemKey, item.label])}
             />
           </CardContent>
         </Card>
@@ -310,12 +334,19 @@ export function PersonalisationSection() {
             <h2 className="text-sm font-semibold">Recent Activity</h2>
             <OpsTable
               columns={["Type", "Key", "Label", "Accessed"]}
-              rows={(recent as Array<{
-                itemType: string;
-                itemKey: string;
-                label: string;
-                accessedAt: string;
-              }>).map((item) => [item.itemType, item.itemKey, item.label, item.accessedAt])}
+              rows={(
+                recent as Array<{
+                  itemType: string;
+                  itemKey: string;
+                  label: string;
+                  accessedAt: string;
+                }>
+              ).map((item) => [
+                item.itemType,
+                item.itemKey,
+                item.label,
+                item.accessedAt,
+              ])}
             />
           </CardContent>
         </Card>
@@ -329,7 +360,9 @@ export function PersonalisationSection() {
       </div>
 
       {saving ? (
-        <p className="text-xs text-[var(--color-muted-foreground)]">Saving preferences…</p>
+        <p className="text-xs text-[var(--color-muted-foreground)]">
+          Saving preferences…
+        </p>
       ) : null}
       <Button type="button" variant="outline" onClick={() => window.location.reload()}>
         Reload

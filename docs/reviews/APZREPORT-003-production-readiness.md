@@ -16,24 +16,24 @@ APZ TCMS remains the first production consumer (compatible; no behavioural regre
 
 ## Readiness checklist
 
-| Area | Status | Notes |
-| ---- | ------ | ----- |
-| Architecture boundaries | Ready | 0 forbidden-import violations |
-| Dependency direction | Ready | No reverse deps |
-| API + OpenAPI | Ready | 9 routes; OpenAPI valid |
-| Typed client + mock | Ready | AbortSignal supported; Query retry at workbench |
-| Workbench presentation | Ready | Read-only; a11y structure covered |
-| Gateway + RequestPipeline + `report.*` | Ready | Production authz map |
-| Reporting core + 6 providers | Ready | Frozen from APZREPORT-001 |
-| Contracts / permissions | Ready | `report.*` + legacy aliases |
-| Security (authn/authz/tenant fields) | Ready | See security audit |
-| Coverage ≥95% lines (scoped) | Ready | ~98.16% lines |
-| Live Playwright on app server | Limitation | Spec present; needs `baseURL` |
-| Platform gateway without Testing ports | Limitation | First-consumer composition |
-| Shared platform metadata SoR | Limitation | Product-scoped persistence today |
-| Binary storage / scheduling / email / AI | Excluded | By design |
-| Multi-product consumers beyond TCMS | Limitation | Documented onboarding only |
-| Orphan `handleRenderReport` (no public route) | Limitation / debt | Not in OpenAPI |
+| Area                                          | Status            | Notes                                           |
+| --------------------------------------------- | ----------------- | ----------------------------------------------- |
+| Architecture boundaries                       | Ready             | 0 forbidden-import violations                   |
+| Dependency direction                          | Ready             | No reverse deps                                 |
+| API + OpenAPI                                 | Ready             | 9 routes; OpenAPI valid                         |
+| Typed client + mock                           | Ready             | AbortSignal supported; Query retry at workbench |
+| Workbench presentation                        | Ready             | Read-only; a11y structure covered               |
+| Gateway + RequestPipeline + `report.*`        | Ready             | Production authz map                            |
+| Reporting core + 6 providers                  | Ready             | Frozen from APZREPORT-001                       |
+| Contracts / permissions                       | Ready             | `report.*` + legacy aliases                     |
+| Security (authn/authz/tenant fields)          | Ready             | See security audit                              |
+| Coverage ≥95% lines (scoped)                  | Ready             | ~98.16% lines                                   |
+| Live Playwright on app server                 | Limitation        | Spec present; needs `baseURL`                   |
+| Platform gateway without Testing ports        | Limitation        | First-consumer composition                      |
+| Shared platform metadata SoR                  | Limitation        | Product-scoped persistence today                |
+| Binary storage / scheduling / email / AI      | Excluded          | By design                                       |
+| Multi-product consumers beyond TCMS           | Limitation        | Documented onboarding only                      |
+| Orphan `handleRenderReport` (no public route) | Limitation / debt | Not in OpenAPI                                  |
 
 ## Why not unqualified PRODUCTION_READY
 

@@ -4,11 +4,11 @@
 
 ## Levels (inheritance order, coarsest → finest)
 
-1. Platform  
-2. Tenant  
-3. Organisation  
-4. Product  
-5. Environment  
+1. Platform
+2. Tenant
+3. Organisation
+4. Product
+5. Environment
 6. User (metadata only)
 
 ## Override precedence (highest wins)

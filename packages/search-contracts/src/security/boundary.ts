@@ -58,12 +58,7 @@ export function evaluateSearchHitVisibility(
 
 export function assertSearchCapabilityAccess(
   context: SearchRequestContext,
-  capability:
-    | "query"
-    | "provider"
-    | "diagnostics"
-    | "configuration"
-    | "audit",
+  capability: "query" | "provider" | "diagnostics" | "configuration" | "audit",
 ): boolean {
   const checkers: Record<
     typeof capability,

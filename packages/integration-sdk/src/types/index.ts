@@ -5,10 +5,7 @@ export type {
   ConnectionState,
   TransportKind,
 } from "./connection";
-export type {
-  IntegrationCredentialKind,
-  IntegrationCredentials,
-} from "./credentials";
+export type { IntegrationCredentialKind, IntegrationCredentials } from "./credentials";
 export type { IntegrationCapabilityMetadata } from "./metadata";
 export type {
   VendorVersionInfo,

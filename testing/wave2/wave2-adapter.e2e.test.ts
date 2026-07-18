@@ -53,7 +53,9 @@ describe("OSS-102-08 Wave 2 mocked adapter E2E", () => {
 
     const health = await adapter.performHealthCheck(ctx);
     expect(health.checks.some((c) => c.name === "zammad_api")).toBe(true);
-    expect(health.checks.some((c) => c.name === "zammad_operational_health")).toBe(true);
+    expect(health.checks.some((c) => c.name === "zammad_operational_health")).toBe(
+      true,
+    );
 
     const diagnostics = await adapter.collectDiagnostics(ctx);
     const serialized = JSON.stringify(diagnostics);
@@ -118,7 +120,10 @@ describe("OSS-102-08 Wave 2 mocked adapter E2E", () => {
     const search = await adapter.core.search.searchSupportRequests(ctx, "password");
     expect(search.hits.length).toBeGreaterThanOrEqual(0);
 
-    const timeline = await adapter.core.history.getSupportTimeline(ctx, "sreq_zammad_100");
+    const timeline = await adapter.core.history.getSupportTimeline(
+      ctx,
+      "sreq_zammad_100",
+    );
     expect(timeline.events.length).toBeGreaterThanOrEqual(0);
 
     const analytics = await adapter.core.analytics.getSupportIntelligence(ctx);
@@ -165,13 +170,17 @@ describe("OSS-102-08 Wave 2 mocked adapter E2E", () => {
     expect(["HEALTHY", "DEGRADED"]).toContain(health.level);
 
     const report = await adapter.buildOperationalReport(ctx);
-    expect(["CERTIFIED", "CERTIFIED_WITH_LIMITATIONS"]).toContain(report.certificationOutcome);
+    expect(["CERTIFIED", "CERTIFIED_WITH_LIMITATIONS"]).toContain(
+      report.certificationOutcome,
+    );
     expect(report.diagnostics.persistentSyncStateSupport).toBe(false);
     expect(report.diagnostics.webhookIngressSupport).toBe(false);
     expect(report.diagnostics.binaryAttachmentSupport).toBe(false);
 
     const caps = adapter.operations.certifyCapabilities();
-    expect(caps.some((c) => c.capabilityId === "attachments" && !c.implemented)).toBe(true);
+    expect(caps.some((c) => c.capabilityId === "attachments" && !c.implemented)).toBe(
+      true,
+    );
     expect(
       caps
         .find((c) => c.capabilityId === "webhooks")

@@ -6,7 +6,10 @@ import {
   platformEntityMapping,
   runMigrations,
 } from "@apzhub/config/db";
-import { isPlatformServiceError, PlatformServiceError } from "@apzhub/platform-service-contracts";
+import {
+  isPlatformServiceError,
+  PlatformServiceError,
+} from "@apzhub/platform-service-contracts";
 
 import { TEST_SERVICE_CONTEXT, TEST_TENANT_ID } from "../testing";
 import { MappingOrchestrator } from "../orchestration/mapping-orchestrator";
@@ -112,7 +115,11 @@ describe.runIf(postgresAvailable)("PostgresEntityMappingStore integration", () =
     });
 
     await expect(
-      store.update(platformId, { metadata: { v: "2" }, expectedRevision: 5 }, TEST_TENANT_ID),
+      store.update(
+        platformId,
+        { metadata: { v: "2" }, expectedRevision: 5 },
+        TEST_TENANT_ID,
+      ),
     ).rejects.toMatchObject({ code: "MAPPING_REVISION_CONFLICT" });
 
     const current = await store.getByPlatformId(platformId, TEST_TENANT_ID);
@@ -269,11 +276,15 @@ describe.runIf(postgresAvailable)("MappingOrchestrator + Postgres store", () => 
 describe("Entity mapping store bootstrap", () => {
   it("defaults to memory outside production", () => {
     expect(resolveEntityMappingStoreMode({ NODE_ENV: "test" }).mode).toBe("memory");
-    expect(resolveEntityMappingStoreMode({ NODE_ENV: "development" }).mode).toBe("memory");
+    expect(resolveEntityMappingStoreMode({ NODE_ENV: "development" }).mode).toBe(
+      "memory",
+    );
   });
 
   it("defaults to postgres in production", () => {
-    expect(resolveEntityMappingStoreMode({ NODE_ENV: "production" }).mode).toBe("postgres");
+    expect(resolveEntityMappingStoreMode({ NODE_ENV: "production" }).mode).toBe(
+      "postgres",
+    );
   });
 
   it("rejects invalid mode values", () => {

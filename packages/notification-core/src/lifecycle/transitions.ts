@@ -12,9 +12,7 @@ import {
 
 import { NotificationDomainError } from "../ports/repository-ports";
 
-const ALLOWED: Readonly<
-  Record<NotificationStatus, readonly NotificationStatus[]>
-> = {
+const ALLOWED: Readonly<Record<NotificationStatus, readonly NotificationStatus[]>> = {
   draft: ["pending", "expired", "archived"],
   pending: ["queued", "draft", "dismissed", "expired", "archived"],
   queued: ["delivered", "dismissed", "expired", "archived"],

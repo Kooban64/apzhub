@@ -53,10 +53,7 @@ export function validateWorkflowReferences(
         path: "folderId",
         severity: "error",
       });
-    } else if (
-      input.knownFolderIds &&
-      !input.knownFolderIds.has(input.folderId)
-    ) {
+    } else if (input.knownFolderIds && !input.knownFolderIds.has(input.folderId)) {
       issues.push({
         code: "reference",
         message: `Unknown folderId: ${input.folderId}`,

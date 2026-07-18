@@ -67,7 +67,10 @@ export class ZammadOrganizationService {
           ...(filter.search ? { query: filter.search } : {}),
         }),
       );
-      assertValid(validateZammadArrayResponse(list.items), "organizations.list.response");
+      assertValid(
+        validateZammadArrayResponse(list.items),
+        "organizations.list.response",
+      );
 
       const mapperCtx = { tenantId: this.deps.serviceContext.tenantId };
       let result = mapArrayPageResult(

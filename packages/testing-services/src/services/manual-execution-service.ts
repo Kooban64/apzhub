@@ -99,9 +99,7 @@ function toDomain(row: ManualExecutionRecord): ManualExecution {
     comments: row.comments,
     stepActuals: row.stepActuals.map(toStepDomain),
     overallResult: row.overallResult,
-    restartOfId: row.restartOfId
-      ? asManualExecutionId(row.restartOfId)
-      : undefined,
+    restartOfId: row.restartOfId ? asManualExecutionId(row.restartOfId) : undefined,
     parameterOverrides: row.parameterOverrides,
     blockReason: row.blockReason,
     createdAt: row.createdAt,
@@ -117,7 +115,10 @@ function substituteTemplate(
   params: Readonly<Record<string, string>>,
 ): string | undefined {
   if (!text) return text;
-  return text.replace(/\$\{([^}]+)\}/g, (_, key: string) => params[key] ?? `\${${key}}`);
+  return text.replace(
+    /\$\{([^}]+)\}/g,
+    (_, key: string) => params[key] ?? `\${${key}}`,
+  );
 }
 
 export function computeOverallResultFromSteps(
@@ -132,7 +133,8 @@ export function computeOverallResultFromSteps(
     if (statuses.some((s) => s === "pass")) return "pass";
     return "skipped";
   }
-  if (statuses.some((s) => s === "not_executed" || s === "retest")) return "not_executed";
+  if (statuses.some((s) => s === "not_executed" || s === "retest"))
+    return "not_executed";
   return "not_executed";
 }
 
@@ -183,13 +185,10 @@ export function createManualExecutionService(
       { ...patch, status: nextStatus },
     );
     const evt = eventType ?? `manual_execution.${nextStatus}`;
-    await appendHistory(
-      ctx,
-      row,
-      evt,
-      summary ?? `Execution ${id} → ${nextStatus}`,
-      { from: existing.status, to: nextStatus },
-    );
+    await appendHistory(ctx, row, evt, summary ?? `Execution ${id} → ${nextStatus}`, {
+      from: existing.status,
+      to: nextStatus,
+    });
     rt.events.record({
       eventType: evt as never,
       tenantId: ctx.tenantId,
@@ -206,18 +205,13 @@ export function createManualExecutionService(
 
   const service: ManualExecutionService = {
     async list(ctx) {
-      const page = await rt.persistence.manualExecutions.list(
-        toRepositoryContext(ctx),
-      );
+      const page = await rt.persistence.manualExecutions.list(toRepositoryContext(ctx));
       return page.items.map(toDomain);
     },
     async get(ctx, id) {
       return toDomain(
         requireFound(
-          await rt.persistence.manualExecutions.get(
-            toRepositoryContext(ctx),
-            id,
-          ),
+          await rt.persistence.manualExecutions.get(toRepositoryContext(ctx), id),
           "manual_execution",
           id,
         ),
@@ -362,7 +356,12 @@ export function createManualExecutionService(
               assigneeId: ctx.userId,
             },
           );
-          await appendHistory(ctx, current, "manual_execution.assigned", "Auto-assigned on start");
+          await appendHistory(
+            ctx,
+            current,
+            "manual_execution.assigned",
+            "Auto-assigned on start",
+          );
         } else {
           current = await rt.persistence.manualExecutions.update(
             rctx,
@@ -410,7 +409,13 @@ export function createManualExecutionService(
       return toDomain(row);
     },
     async pause(ctx, id) {
-      return transition(ctx, id, "paused", { pausedAt: rt.now() }, "manual_execution.paused");
+      return transition(
+        ctx,
+        id,
+        "paused",
+        { pausedAt: rt.now() },
+        "manual_execution.paused",
+      );
     },
     async resume(ctx, id) {
       return transition(
@@ -523,7 +528,11 @@ export function createManualExecutionService(
       let target: ExecutionStatus;
       if (canon === "cancelled") target = "draft";
       else if (canon === "approved") target = "under_review";
-      else if (canon === "rejected" || canon === "completed" || canon === "under_review") {
+      else if (
+        canon === "rejected" ||
+        canon === "completed" ||
+        canon === "under_review"
+      ) {
         target = "in_progress";
       } else {
         throw new DomainRuleError(
@@ -566,7 +575,12 @@ export function createManualExecutionService(
         id,
         refreshed.revision,
       );
-      await appendHistory(ctx, archived, "manual_execution.archived", "Execution archived");
+      await appendHistory(
+        ctx,
+        archived,
+        "manual_execution.archived",
+        "Execution archived",
+      );
       rt.events.record({
         eventType: "manual_execution.archived",
         tenantId: ctx.tenantId,
@@ -685,9 +699,9 @@ export function createManualExecutionService(
         ),
         recordedAt: actual.recordedAt ?? now,
         recordedByUserId: actual.recordedByUserId ?? ctx.userId,
-        parentStepId: actual.parentStepId ?? (prev?.parentStepId
-          ? asTestStepId(prev.parentStepId)
-          : undefined),
+        parentStepId:
+          actual.parentStepId ??
+          (prev?.parentStepId ? asTestStepId(prev.parentStepId) : undefined),
         nestLevel: actual.nestLevel ?? prev?.nestLevel,
         repeatIndex: actual.repeatIndex ?? prev?.repeatIndex,
         parameters: Object.keys(params).length > 0 ? params : actual.parameters,
@@ -774,9 +788,7 @@ export function createManualExecutionService(
     async attachStepEvidence(ctx, id, stepId, evidenceId: EvidenceId) {
       const current = await this.get(ctx, id);
       const existing = current.stepActuals.find((s) => s.stepId === stepId);
-      const evidenceIds = [
-        ...new Set([...(existing?.evidenceIds ?? []), evidenceId]),
-      ];
+      const evidenceIds = [...new Set([...(existing?.evidenceIds ?? []), evidenceId])];
       return this.recordStepActual(ctx, id, stepId, {
         ...existing,
         evidenceIds,

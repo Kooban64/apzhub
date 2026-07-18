@@ -147,13 +147,13 @@ describe("Testing plans, suites, and cases", () => {
     const { suite, testCase } = await createSuiteAndCase(services, plan.id);
 
     expect((await services.gateway.testing.suites.list(ctx))[0]?.id).toBe(suite.id);
-    expect((await services.gateway.testing.suites.get(ctx, suite.id)).planIds).toContain(
-      plan.id,
-    );
+    expect(
+      (await services.gateway.testing.suites.get(ctx, suite.id)).planIds,
+    ).toContain(plan.id);
     expect((await services.gateway.testing.cases.list(ctx))[0]?.id).toBe(testCase.id);
-    expect((await services.gateway.testing.cases.get(ctx, testCase.id)).suiteIds).toContain(
-      suite.id,
-    );
+    expect(
+      (await services.gateway.testing.cases.get(ctx, testCase.id)).suiteIds,
+    ).toContain(suite.id);
   });
 
   it("updates, clones, and archives suites and cases through the gateway", async () => {
@@ -192,7 +192,9 @@ describe("Testing plans, suites, and cases", () => {
       title: "Valid login clone",
     });
     expect(clonedCase.parentCaseId).toBe(testCase.id);
-    expect(await services.gateway.testing.cases.archive(ctx, testCase.id)).toMatchObject({
+    expect(
+      await services.gateway.testing.cases.archive(ctx, testCase.id),
+    ).toMatchObject({
       status: "archived",
     });
   });
@@ -209,16 +211,18 @@ describe("Testing plans, suites, and cases", () => {
       riskIds: [],
     });
     expect(await services.gateway.testing.requirements.list(ctx)).toHaveLength(1);
-    expect((await services.gateway.testing.requirements.get(ctx, req.id)).key).toBe("REQ-1");
+    expect((await services.gateway.testing.requirements.get(ctx, req.id)).key).toBe(
+      "REQ-1",
+    );
     expect(
       await services.gateway.testing.requirements.update(ctx, req.id, {
         title: "Updated requirement",
         priority: "medium",
       }),
     ).toMatchObject({ title: "Updated requirement" });
-    await expect(services.gateway.testing.requirements.archive(ctx, req.id)).resolves.toMatchObject(
-      { id: req.id },
-    );
+    await expect(
+      services.gateway.testing.requirements.archive(ctx, req.id),
+    ).resolves.toMatchObject({ id: req.id });
   });
 });
 
@@ -235,12 +239,12 @@ describe("Testing executions and evidence", () => {
     });
     const started = await services.gateway.testing.executions.start(ctx, created.id);
     expect(started.status).toBe("in_progress");
-    expect((await services.gateway.testing.executions.pause(ctx, created.id)).status).toBe(
-      "paused",
-    );
-    expect((await services.gateway.testing.executions.resume(ctx, created.id)).status).toBe(
-      "in_progress",
-    );
+    expect(
+      (await services.gateway.testing.executions.pause(ctx, created.id)).status,
+    ).toBe("paused");
+    expect(
+      (await services.gateway.testing.executions.resume(ctx, created.id)).status,
+    ).toBe("in_progress");
     await services.gateway.testing.executions.complete(ctx, created.id, "pass");
 
     await expect(
@@ -261,15 +265,18 @@ describe("Testing executions and evidence", () => {
       sessionId: asExecutionSessionId("session_full"),
       caseId: testCase.id,
     });
-    expect((await services.gateway.testing.executions.list(ctx))[0]?.id).toBe(execution.id);
-    expect((await services.gateway.testing.executions.get(ctx, execution.id)).caseId).toBe(
-      testCase.id,
+    expect((await services.gateway.testing.executions.list(ctx))[0]?.id).toBe(
+      execution.id,
     );
-    expect(await services.gateway.testing.executions.assign(ctx, execution.id, "tester_2"))
-      .toMatchObject({
-        assigneeId: "tester_2",
-        status: "assigned",
-      });
+    expect(
+      (await services.gateway.testing.executions.get(ctx, execution.id)).caseId,
+    ).toBe(testCase.id);
+    expect(
+      await services.gateway.testing.executions.assign(ctx, execution.id, "tester_2"),
+    ).toMatchObject({
+      assigneeId: "tester_2",
+      status: "assigned",
+    });
     await services.gateway.testing.executions.start(ctx, execution.id);
     await expect(
       services.gateway.testing.executions.recordStepActual(ctx, execution.id, stepId, {
@@ -280,12 +287,23 @@ describe("Testing executions and evidence", () => {
       }),
     ).resolves.toMatchObject({ overallResult: "pass" });
     await expect(
-      services.gateway.testing.executions.setStepStatus(ctx, execution.id, stepId, "pass"),
+      services.gateway.testing.executions.setStepStatus(
+        ctx,
+        execution.id,
+        stepId,
+        "pass",
+      ),
     ).resolves.toMatchObject({ overallResult: "pass" });
     await expect(
-      services.gateway.testing.executions.block(ctx, execution.id, "environment outage"),
+      services.gateway.testing.executions.block(
+        ctx,
+        execution.id,
+        "environment outage",
+      ),
     ).resolves.toMatchObject({ status: "blocked", blockReason: "environment outage" });
-    await expect(services.gateway.testing.executions.unblock(ctx, execution.id)).resolves.toMatchObject({
+    await expect(
+      services.gateway.testing.executions.unblock(ctx, execution.id),
+    ).resolves.toMatchObject({
       status: "in_progress",
     });
     await services.gateway.testing.executions.complete(ctx, execution.id, "pass");
@@ -295,13 +313,17 @@ describe("Testing executions and evidence", () => {
     await expect(
       services.gateway.testing.executions.approve(ctx, execution.id, "approved"),
     ).resolves.toMatchObject({ status: "approved", approvalState: "approved" });
-    await expect(services.gateway.testing.executions.reopen(ctx, execution.id)).resolves.toMatchObject({
+    await expect(
+      services.gateway.testing.executions.reopen(ctx, execution.id),
+    ).resolves.toMatchObject({
       status: "under_review",
     });
     await expect(
       services.gateway.testing.executions.reject(ctx, execution.id, "needs evidence"),
     ).resolves.toMatchObject({ status: "rejected", approvalState: "rejected" });
-    await expect(services.gateway.testing.executions.reopen(ctx, execution.id)).resolves.toMatchObject({
+    await expect(
+      services.gateway.testing.executions.reopen(ctx, execution.id),
+    ).resolves.toMatchObject({
       status: "in_progress",
     });
 
@@ -319,10 +341,14 @@ describe("Testing executions and evidence", () => {
       sessionId: asExecutionSessionId("session_archive"),
       caseId: testCase.id,
     });
-    await expect(services.gateway.testing.executions.archive(ctx, archived.id)).resolves.toMatchObject({
+    await expect(
+      services.gateway.testing.executions.archive(ctx, archived.id),
+    ).resolves.toMatchObject({
       status: "archived",
     });
-    await expect(services.gateway.testing.executions.restore(ctx, archived.id)).resolves.toMatchObject({
+    await expect(
+      services.gateway.testing.executions.restore(ctx, archived.id),
+    ).resolves.toMatchObject({
       status: "draft",
     });
   });
@@ -341,7 +367,10 @@ describe("Testing executions and evidence", () => {
       lifecycleStatus: "captured",
     });
 
-    const captured = await services.gateway.testing.evidence.getEvidence(ctx, evidence.id);
+    const captured = await services.gateway.testing.evidence.getEvidence(
+      ctx,
+      evidence.id,
+    );
     expect(captured.storageRef).toBe("s3://evidence/login.png");
     await services.gateway.testing.evidence.submitEvidence(ctx, evidence.id);
     expect(await services.gateway.testing.evidence.listEvidence(ctx)).toHaveLength(1);
@@ -360,11 +389,21 @@ describe("Testing executions and evidence", () => {
     });
     await services.gateway.testing.evidence.submitEvidence(ctx, approvable.id);
     await expect(
-      services.gateway.testing.evidence.verifyEvidence(ctx, approvable.id, "checksum_ok"),
-    ).resolves.toMatchObject({ lifecycleStatus: "verified", verificationState: "checksum_ok" });
+      services.gateway.testing.evidence.verifyEvidence(
+        ctx,
+        approvable.id,
+        "checksum_ok",
+      ),
+    ).resolves.toMatchObject({
+      lifecycleStatus: "verified",
+      verificationState: "checksum_ok",
+    });
     await expect(
       services.gateway.testing.evidence.approveEvidence(ctx, approvable.id),
-    ).resolves.toMatchObject({ lifecycleStatus: "approved", approvalState: "approved" });
+    ).resolves.toMatchObject({
+      lifecycleStatus: "approved",
+      approvalState: "approved",
+    });
 
     const rejectable = await services.gateway.testing.evidence.registerEvidence(ctx, {
       tenantId: ctx.tenantId,
@@ -376,7 +415,10 @@ describe("Testing executions and evidence", () => {
     await services.gateway.testing.evidence.submitEvidence(ctx, rejectable.id);
     await expect(
       services.gateway.testing.evidence.rejectEvidence(ctx, rejectable.id, "blurry"),
-    ).resolves.toMatchObject({ lifecycleStatus: "rejected", approvalState: "rejected" });
+    ).resolves.toMatchObject({
+      lifecycleStatus: "rejected",
+      approvalState: "rejected",
+    });
     await expect(
       services.gateway.testing.evidence.archiveEvidence(ctx, rejectable.id),
     ).resolves.toMatchObject({ lifecycleStatus: "archived" });
@@ -425,9 +467,14 @@ describe("Testing automation, coverage, defects, quality, traceability, and appr
       await services.gateway.testing.automation.getImport(ctx, outcome.importRecord.id),
     ).toMatchObject({ externalRunRef: "gw-auto-1" });
     expect(
-      await services.gateway.testing.automation.listImportHistory(ctx, outcome.importRecord.id),
+      await services.gateway.testing.automation.listImportHistory(
+        ctx,
+        outcome.importRecord.id,
+      ),
     ).not.toHaveLength(0);
-    expect(await services.gateway.testing.automation.getHistory(ctx)).not.toHaveLength(0);
+    expect(await services.gateway.testing.automation.getHistory(ctx)).not.toHaveLength(
+      0,
+    );
 
     const executionId = outcome.execution!.id;
     const runs = await services.gateway.testing.automation.listRuns(ctx, executionId);
@@ -465,14 +512,18 @@ describe("Testing automation, coverage, defects, quality, traceability, and appr
       subjectId: testCase.id,
     });
     expect(metrics.length).toBeGreaterThan(0);
-    expect(await services.gateway.testing.coverage.listMetrics(ctx)).not.toHaveLength(0);
+    expect(await services.gateway.testing.coverage.listMetrics(ctx)).not.toHaveLength(
+      0,
+    );
     await expect(
       services.gateway.testing.coverage.getMetric(ctx, metrics[0]!.id),
     ).resolves.toMatchObject({ id: metrics[0]!.id });
     expect(
       await services.gateway.testing.coverage.listMetricsByKind(ctx, metrics[0]!.kind),
     ).not.toHaveLength(0);
-    expect(await services.gateway.testing.coverage.listMetricsForPlan(ctx, plan.id)).not.toHaveLength(0);
+    expect(
+      await services.gateway.testing.coverage.listMetricsForPlan(ctx, plan.id),
+    ).not.toHaveLength(0);
     expect(
       await services.gateway.testing.coverage.listMetricsForSubject(ctx, plan.id),
     ).not.toHaveLength(0);
@@ -497,7 +548,9 @@ describe("Testing automation, coverage, defects, quality, traceability, and appr
       { planId: plan.id },
       "current",
     );
-    expect((await services.gateway.testing.quality.listSnapshots(ctx)).length).toBeGreaterThanOrEqual(2);
+    expect(
+      (await services.gateway.testing.quality.listSnapshots(ctx)).length,
+    ).toBeGreaterThanOrEqual(2);
     await expect(
       services.gateway.testing.quality.getSnapshot(ctx, baseline.id),
     ).resolves.toMatchObject({ label: "baseline" });
@@ -531,7 +584,9 @@ describe("Testing automation, coverage, defects, quality, traceability, and appr
       services.gateway.testing.defects.link(ctx, defect.id, "test_plan", plan.id),
     ).resolves.toMatchObject({ id: defect.id });
     expect(await services.gateway.testing.defects.list(ctx)).toHaveLength(1);
-    await expect(services.gateway.testing.defects.get(ctx, defect.id)).resolves.toMatchObject({
+    await expect(
+      services.gateway.testing.defects.get(ctx, defect.id),
+    ).resolves.toMatchObject({
       providerKind: "projects",
       summary: "Login defect",
     });
@@ -541,7 +596,9 @@ describe("Testing automation, coverage, defects, quality, traceability, and appr
         summary: "Triaged defect",
       }),
     ).resolves.toMatchObject({ status: "in_progress", summary: "Triaged defect" });
-    await expect(services.gateway.testing.defects.archive(ctx, defect.id)).resolves.toMatchObject({
+    await expect(
+      services.gateway.testing.defects.archive(ctx, defect.id),
+    ).resolves.toMatchObject({
       id: defect.id,
     });
   });
@@ -568,7 +625,9 @@ describe("Testing automation, coverage, defects, quality, traceability, and appr
       targetId: req.id,
       notes: "gateway",
     });
-    await expect(services.gateway.testing.traceability.getLink(ctx, link.id)).resolves.toMatchObject({
+    await expect(
+      services.gateway.testing.traceability.getLink(ctx, link.id),
+    ).resolves.toMatchObject({
       id: link.id,
     });
     expect(await services.gateway.testing.traceability.listLinks(ctx)).toHaveLength(1);
@@ -577,15 +636,21 @@ describe("Testing automation, coverage, defects, quality, traceability, and appr
     ).resolves.toMatchObject({ covered: true });
     expect(await services.gateway.testing.traceability.listMatrix(ctx)).toHaveLength(1);
 
-    const relationship = await services.gateway.testing.traceability.createRelationship(ctx, {
-      tenantId: ctx.tenantId,
-      type: "related",
-      sourceKind: "test_case",
-      sourceId: testCase.id,
-      targetKind: "release",
-      targetId: "release_1",
-    });
-    await services.gateway.testing.traceability.removeRelationship(ctx, relationship.id);
+    const relationship = await services.gateway.testing.traceability.createRelationship(
+      ctx,
+      {
+        tenantId: ctx.tenantId,
+        type: "related",
+        sourceKind: "test_case",
+        sourceId: testCase.id,
+        targetKind: "release",
+        targetId: "release_1",
+      },
+    );
+    await services.gateway.testing.traceability.removeRelationship(
+      ctx,
+      relationship.id,
+    );
     await services.gateway.testing.traceability.removeLink(ctx, link.id);
 
     const cert = await services.gateway.testing.certification.create(ctx, {
@@ -606,7 +671,9 @@ describe("Testing automation, coverage, defects, quality, traceability, and appr
       subjectId: cert.id,
     });
     expect(await services.gateway.testing.approvals.list(ctx)).toHaveLength(1);
-    await expect(services.gateway.testing.approvals.get(ctx, approval.id)).resolves.toMatchObject({
+    await expect(
+      services.gateway.testing.approvals.get(ctx, approval.id),
+    ).resolves.toMatchObject({
       id: approval.id,
     });
     await expect(
@@ -616,7 +683,9 @@ describe("Testing automation, coverage, defects, quality, traceability, and appr
         decidedByUserId: ctx.userId,
       }),
     ).resolves.toMatchObject({ status: "approved" });
-    expect(await services.gateway.testing.approvals.listHistory(ctx, approval.id)).not.toHaveLength(0);
+    expect(
+      await services.gateway.testing.approvals.listHistory(ctx, approval.id),
+    ).not.toHaveLength(0);
 
     const submitted = await services.gateway.testing.approvals.submitForReview(ctx, {
       subjectKind: "manual_execution",
@@ -641,19 +710,24 @@ describe("Testing certification, dashboard, reporting, and readiness", () => {
       approvalIds: [],
     });
 
-    expect((await services.gateway.testing.certification.list(ctx))[0]?.id).toBe(cert.id);
-    expect((await services.gateway.testing.certification.get(ctx, cert.id)).planId).toBe(
-      plan.id,
+    expect((await services.gateway.testing.certification.list(ctx))[0]?.id).toBe(
+      cert.id,
     );
-    const gates = await services.gateway.testing.certification.evaluateGates(ctx, cert.id);
+    expect(
+      (await services.gateway.testing.certification.get(ctx, cert.id)).planId,
+    ).toBe(plan.id);
+    const gates = await services.gateway.testing.certification.evaluateGates(
+      ctx,
+      cert.id,
+    );
     expect(Array.isArray(gates)).toBe(true);
     await testing.domain.certification.recommendations.recommend(ctx, cert.id);
     await expect(
       services.gateway.testing.certification.getRecommendation(ctx, cert.id),
     ).resolves.toMatchObject({ advisoryOnly: true });
-    expect(await services.gateway.testing.certification.listAudit(ctx, cert.id)).toEqual(
-      expect.any(Array),
-    );
+    expect(
+      await services.gateway.testing.certification.listAudit(ctx, cert.id),
+    ).toEqual(expect.any(Array));
     expect("autoApprove" in services.gateway.testing.certification).toBe(false);
     await expect(
       services.gateway.testing.certification.approve(ctx, cert.id, "human approval"),
@@ -694,7 +768,11 @@ describe("Testing certification, dashboard, reporting, and readiness", () => {
       services.gateway.testing.certification.startReview(ctx, review.id, "ready"),
     ).resolves.toMatchObject({ status: "in_review" });
     await expect(
-      services.gateway.testing.certification.requestChanges(ctx, review.id, "missing evidence"),
+      services.gateway.testing.certification.requestChanges(
+        ctx,
+        review.id,
+        "missing evidence",
+      ),
     ).resolves.toMatchObject({ status: "changes_required" });
 
     const conditional = await services.gateway.testing.certification.create(ctx, {
@@ -710,10 +788,18 @@ describe("Testing certification, dashboard, reporting, and readiness", () => {
       services.gateway.testing.certification.startReview(ctx, conditional.id, "fixed"),
     ).resolves.toMatchObject({ status: "in_review" });
     await expect(
-      services.gateway.testing.certification.submitForApproval(ctx, conditional.id, "submit"),
+      services.gateway.testing.certification.submitForApproval(
+        ctx,
+        conditional.id,
+        "submit",
+      ),
     ).resolves.toMatchObject({ status: "awaiting_approval" });
     await expect(
-      services.gateway.testing.certification.conditionallyApprove(ctx, conditional.id, "monitor"),
+      services.gateway.testing.certification.conditionallyApprove(
+        ctx,
+        conditional.id,
+        "monitor",
+      ),
     ).resolves.toMatchObject({ status: "conditionally_approved" });
     expect(
       await services.gateway.testing.certification.getAuditHistory(ctx, conditional.id),
@@ -748,7 +834,11 @@ describe("Testing certification, dashboard, reporting, and readiness", () => {
       services.gateway.testing.certification.expire(ctx, expiring.id, "stale"),
     ).resolves.toMatchObject({ status: "expired" });
     await expect(
-      services.gateway.testing.certification.evaluateGate(ctx, expiring.id, "traceability"),
+      services.gateway.testing.certification.evaluateGate(
+        ctx,
+        expiring.id,
+        "traceability",
+      ),
     ).resolves.toMatchObject({ gateKey: "traceability" });
   });
 
@@ -760,7 +850,8 @@ describe("Testing certification, dashboard, reporting, and readiness", () => {
     expect(dashboard.totals.plans).toBe(1);
     expect(dashboard.capturedAt).toEqual(expect.any(String));
 
-    const placeholders = await services.gateway.testing.reporting.listReportPlaceholders(ctx);
+    const placeholders =
+      await services.gateway.testing.reporting.listReportPlaceholders(ctx);
     expect(placeholders.length).toBeGreaterThan(0);
     expect(placeholders[0]).toMatchObject({
       reason: "available",
@@ -768,8 +859,10 @@ describe("Testing certification, dashboard, reporting, and readiness", () => {
       id: expect.any(String),
     });
 
-    const readiness =
-      await services.gateway.testing.releaseReadiness.calculateForPlan(ctx, plan.id);
+    const readiness = await services.gateway.testing.releaseReadiness.calculateForPlan(
+      ctx,
+      plan.id,
+    );
     expect(readiness.planId).toBe(plan.id);
     expect(readiness.isDecision).toBe(false);
     const cert = await services.gateway.testing.certification.create(ctx, {
@@ -788,10 +881,7 @@ describe("Testing certification, dashboard, reporting, and readiness", () => {
       services.gateway.testing.releaseReadiness.assessForPlan!(ctx, plan.id),
     ).resolves.toMatchObject({ planId: plan.id, isDecision: false });
     await expect(
-      services.gateway.testing.releaseReadiness.assessForCertification!(
-        ctx,
-        cert.id,
-      ),
+      services.gateway.testing.releaseReadiness.assessForCertification!(ctx, cert.id),
     ).resolves.toMatchObject({ certificationRecordId: cert.id, isDecision: false });
   });
 });
@@ -817,7 +907,9 @@ describe("Testing platform authorization, pipeline, tenancy, and errors", () => 
     const { services } = createHarness();
     const plan = await createPlan(services);
 
-    await expect(services.gateway.testing.plans.get(ctxTenantB, plan.id)).rejects.toMatchObject({
+    await expect(
+      services.gateway.testing.plans.get(ctxTenantB, plan.id),
+    ).rejects.toMatchObject({
       code: "NOT_FOUND",
     });
     await expect(

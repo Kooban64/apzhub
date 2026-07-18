@@ -7,20 +7,20 @@
 
 ## Canonical states
 
-| State | Role |
-| --- | --- |
-| `draft` | Created |
-| `preparing` | Assembling inputs |
-| `awaiting_evidence` | Evidence incomplete |
-| `awaiting_review` | Ready for reviewers |
-| `in_review` | Under review |
-| `changes_required` | Rework requested |
-| `awaiting_approval` | Pending final approvers |
-| `approved` | Human-approved |
+| State                    | Role                     |
+| ------------------------ | ------------------------ |
+| `draft`                  | Created                  |
+| `preparing`              | Assembling inputs        |
+| `awaiting_evidence`      | Evidence incomplete      |
+| `awaiting_review`        | Ready for reviewers      |
+| `in_review`              | Under review             |
+| `changes_required`       | Rework requested         |
+| `awaiting_approval`      | Pending final approvers  |
+| `approved`               | Human-approved           |
 | `conditionally_approved` | Approved with conditions |
-| `rejected` | Rejected |
-| `expired` | Past validity |
-| `archived` | Soft-closed |
+| `rejected`               | Rejected                 |
+| `expired`                | Past validity            |
+| `archived`               | Soft-closed              |
 
 Legacy readiness codes (`development_ready`, `certified`, …) canonicalize into this workflow where applicable.
 
@@ -45,4 +45,4 @@ expired → preparing | archived
 archived → (restore with certification.override → draft/preparing)
 ```
 
-`approve` / `conditionallyApprove` require `certification.approve` and an authorised human actor.  
+`approve` / `conditionallyApprove` require `certification.approve` and an authorised human actor.

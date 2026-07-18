@@ -66,5 +66,5 @@ Breaking changes require a new major API version (`/api/law/v2/`). See [Versioni
 
 ## Downloads
 
-- OpenAPI: [/api/law/v1/openapi.yaml](/api/law/v1/openapi.yaml)
-- Docs: [/api/docs](/api/docs)
+- OpenAPI: [/api/law/v1/openapi.yaml](../specs/LAW-OpenAPI-v1.yaml)
+- Docs: [/api/docs](../developer/legal-api-developer-guide.md)

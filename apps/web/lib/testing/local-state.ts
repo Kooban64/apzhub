@@ -56,7 +56,8 @@ export function toggleSelection(
     ? state.selectedIds.filter((item) => item !== id)
     : [...state.selectedIds, id];
   return {
-    mode: selectedIds.length > 1 ? "bulk" : selectedIds.length === 1 ? "single" : "none",
+    mode:
+      selectedIds.length > 1 ? "bulk" : selectedIds.length === 1 ? "single" : "none",
     selectedIds,
   };
 }
@@ -70,10 +71,14 @@ export function toggleExpanded(
     : [...expandedIds, id];
 }
 
-export function applyListFilters<T extends { readonly status?: string; readonly title?: string; readonly name?: string; readonly key?: string }>(
-  items: readonly T[],
-  filters: TestingFilterState,
-): readonly T[] {
+export function applyListFilters<
+  T extends {
+    readonly status?: string;
+    readonly title?: string;
+    readonly name?: string;
+    readonly key?: string;
+  },
+>(items: readonly T[], filters: TestingFilterState): readonly T[] {
   const search = filters.search.trim().toLowerCase();
   let next = items;
   if (filters.status) {

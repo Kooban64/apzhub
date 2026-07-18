@@ -211,7 +211,9 @@ describe("Readiness, health, diagnostics, and reports", () => {
     expect(report.referencePatterns).toEqual(
       expect.arrayContaining([PLANE_REFERENCE_ADAPTER_PATTERNS[0]]),
     );
-    expect(JSON.stringify(report)).not.toMatch(/plane-test-token|secret-present|Bearer\s+/i);
+    expect(JSON.stringify(report)).not.toMatch(
+      /plane-test-token|secret-present|Bearer\s+/i,
+    );
     expect(JSON.stringify(report)).not.toContain("X-Api-Key");
 
     const extension = adapter.planeDiagnosticsExtension;
@@ -255,7 +257,11 @@ describe("Readiness, health, diagnostics, and reports", () => {
   it("marks readiness not ready when configuration fails", () => {
     const readiness = evaluatePlaneReadiness({
       checkedAt: new Date().toISOString(),
-      configurationValidation: { ok: false, message: "bad config", issues: ["missing url"] },
+      configurationValidation: {
+        ok: false,
+        message: "bad config",
+        issues: ["missing url"],
+      },
       authenticationValid: true,
       providerReachable: true,
       capabilitiesRegistered: true,
@@ -274,8 +280,8 @@ describe("Readiness, health, diagnostics, and reports", () => {
     });
 
     expect(readiness.ready).toBe(false);
-    expect(readiness.blockingIssues.some((issue) => issue.startsWith("configuration:"))).toBe(
-      true,
-    );
+    expect(
+      readiness.blockingIssues.some((issue) => issue.startsWith("configuration:")),
+    ).toBe(true);
   });
 });

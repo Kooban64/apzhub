@@ -5,9 +5,7 @@ import { NextResponse } from "next/server";
 
 import { getValidatedSession } from "@apzhub/auth/server";
 import { getSharedAuthorizationEvents } from "@apzhub/platform-authorization";
-import {
-  getSharedTenantManagementService,
-} from "@apzhub/platform-identity/server";
+import { getSharedTenantManagementService } from "@apzhub/platform-identity/server";
 
 export async function GET(): Promise<NextResponse> {
   await getValidatedSession(await headers());

@@ -14,11 +14,11 @@ Operational expectations for the **metadata administration** plane.
 
 ## Environment configuration
 
-| Variable | Requirement |
-| --- | --- |
-| `APZHUB_IDENTITY_ENABLED` | Deny-by-default; set `true` / `1` / `on` to enable |
-| PostgreSQL | Required in production for Identity SoR |
-| Platform migrations | Apply `0052_apz_platform_iam.sql` then `0053_apz_platform_iam_rls.sql` before enable |
+| Variable                  | Requirement                                                                          |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| `APZHUB_IDENTITY_ENABLED` | Deny-by-default; set `true` / `1` / `on` to enable                                   |
+| PostgreSQL                | Required in production for Identity SoR                                              |
+| Platform migrations       | Apply `0052_apz_platform_iam.sql` then `0053_apz_platform_iam_rls.sql` before enable |
 
 ## Deployment order
 
@@ -50,12 +50,12 @@ Operational expectations for the **metadata administration** plane.
 
 ## Operational ownership
 
-| Area | Owner |
-| --- | --- |
-| Identity metadata SoR | Platform Identity Administration |
-| Authentication plane | Separate future programme |
-| Provisioning / directory sync | Separate future programmes |
-| Platform Operations console | Separate product (`/workspace/operations`) |
+| Area                          | Owner                                      |
+| ----------------------------- | ------------------------------------------ |
+| Identity metadata SoR         | Platform Identity Administration           |
+| Authentication plane          | Separate future programme                  |
+| Provisioning / directory sync | Separate future programmes                 |
+| Platform Operations console   | Separate product (`/workspace/operations`) |
 
 ## Incident handling
 

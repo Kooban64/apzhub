@@ -104,6 +104,12 @@ import type {
   PipelineStep,
   PipelineSummary,
 } from "@apzhub/testing-contracts";
+import {
+  asBenchmarkId,
+  asBaselineId,
+  asEngineeringHistoricalSnapshotId,
+  asEngineeringSnapshotId,
+} from "@apzhub/testing-contracts";
 import type { PlatformServiceGateway } from "@apzhub/platform-services";
 import { vi } from "vitest";
 
@@ -224,7 +230,9 @@ export function buildTestTask(overrides: Partial<Task> = {}): Task {
   };
 }
 
-export function buildTestSupportRequest(overrides: Partial<SupportTicket> = {}): SupportTicket {
+export function buildTestSupportRequest(
+  overrides: Partial<SupportTicket> = {},
+): SupportTicket {
   return {
     id: API_TEST_SREQ_ID,
     tenantId: API_TEST_TENANT_A,
@@ -239,7 +247,9 @@ export function buildTestSupportRequest(overrides: Partial<SupportTicket> = {}):
   };
 }
 
-export function buildTestSupportArticle(overrides: Partial<SupportArticle> = {}): SupportArticle {
+export function buildTestSupportArticle(
+  overrides: Partial<SupportArticle> = {},
+): SupportArticle {
   return {
     id: API_TEST_SART_ID,
     tenantId: API_TEST_TENANT_A,
@@ -272,7 +282,9 @@ export function buildTestSupportOrganization(
   };
 }
 
-export function buildTestSupportGroup(overrides: Partial<SupportGroup> = {}): SupportGroup {
+export function buildTestSupportGroup(
+  overrides: Partial<SupportGroup> = {},
+): SupportGroup {
   return {
     id: API_TEST_SGRP_ID,
     tenantId: API_TEST_TENANT_A,
@@ -284,7 +296,9 @@ export function buildTestSupportGroup(overrides: Partial<SupportGroup> = {}): Su
   };
 }
 
-export function buildTestSupportUser(overrides: Partial<SupportUser> = {}): SupportUser {
+export function buildTestSupportUser(
+  overrides: Partial<SupportUser> = {},
+): SupportUser {
   return {
     id: API_TEST_SUSER_ID,
     tenantId: API_TEST_TENANT_A,
@@ -329,7 +343,9 @@ function auditFields() {
   };
 }
 
-export function buildTestRequirement(overrides: Partial<Requirement> = {}): Requirement {
+export function buildTestRequirement(
+  overrides: Partial<Requirement> = {},
+): Requirement {
   return {
     ...auditFields(),
     id: API_TEST_REQ_ID as RequirementId,
@@ -397,7 +413,9 @@ export function buildTestCase(overrides: Partial<TestCase> = {}): TestCase {
   };
 }
 
-export function buildTestExecution(overrides: Partial<ManualExecution> = {}): ManualExecution {
+export function buildTestExecution(
+  overrides: Partial<ManualExecution> = {},
+): ManualExecution {
   return {
     ...auditFields(),
     id: API_TEST_EXEC_ID as ManualExecutionId,
@@ -439,7 +457,9 @@ export function buildTestAutomationImport(
   };
 }
 
-export function buildTestCoverage(overrides: Partial<CoverageMetric> = {}): CoverageMetric {
+export function buildTestCoverage(
+  overrides: Partial<CoverageMetric> = {},
+): CoverageMetric {
   return {
     ...auditFields(),
     id: API_TEST_COVERAGE_ID as CoverageMetricId,
@@ -599,7 +619,9 @@ export function buildSorPipeline(overrides: Partial<Pipeline> = {}): Pipeline {
   };
 }
 
-export function buildPipelineLinks(overrides: Partial<PipelineLinks> = {}): PipelineLinks {
+export function buildPipelineLinks(
+  overrides: Partial<PipelineLinks> = {},
+): PipelineLinks {
   return {
     evidenceIds: [],
     coverageMetricIds: [],
@@ -794,11 +816,13 @@ export interface MockGatewayOptions {
     readonly pipelineSummaries?: Partial<TestingPipelineSummaryService>;
     readonly engineeringIntelligence?: Partial<TestingEngineeringIntelligenceService>;
   };
-  readonly onCall?: (service: string, operation: string, ctx: ServiceRequestContext) => void;
+  readonly onCall?: (
+    service: string,
+    operation: string,
+    ctx: ServiceRequestContext,
+  ) => void;
   readonly reporting?: Partial<{
-    listAvailableReports: (
-      ctx: ServiceRequestContext,
-    ) => Promise<readonly string[]>;
+    listAvailableReports: (ctx: ServiceRequestContext) => Promise<readonly string[]>;
     listTemplates: (
       ctx: ServiceRequestContext,
       reportType?: string,
@@ -833,7 +857,10 @@ export interface MockGatewayOptions {
     update: (ctx: ServiceRequestContext, input: unknown) => Promise<unknown>;
   }>;
   readonly documentVersions?: Partial<{
-    list: (ctx: ServiceRequestContext, documentId: string) => Promise<readonly unknown[]>;
+    list: (
+      ctx: ServiceRequestContext,
+      documentId: string,
+    ) => Promise<readonly unknown[]>;
     get: (
       ctx: ServiceRequestContext,
       documentId: string,
@@ -874,7 +901,10 @@ export interface MockGatewayOptions {
     relate: (ctx: ServiceRequestContext, input: unknown) => Promise<unknown>;
   }>;
   readonly documentAudit?: Partial<{
-    list: (ctx: ServiceRequestContext, documentId: string) => Promise<readonly unknown[]>;
+    list: (
+      ctx: ServiceRequestContext,
+      documentId: string,
+    ) => Promise<readonly unknown[]>;
   }>;
   readonly documentDiagnostics?: Partial<{
     getDiagnostics: (ctx: ServiceRequestContext) => Promise<unknown>;
@@ -950,6 +980,7 @@ export interface MockGatewayOptions {
     diagnostics: Record<string, unknown>;
   }>;
   readonly observe?: Partial<Record<string, Record<string, unknown>>>;
+  readonly metricsPlatform?: Partial<Record<string, Record<string, unknown>>>;
   readonly searchExecution?: Record<string, unknown>;
   readonly searchExecutionHealth?: Record<string, unknown>;
   readonly searchExecutionDiagnostics?: Record<string, unknown>;
@@ -1035,7 +1066,11 @@ export function createMockPlatformGateway(
       track("project", "createProject", ctx);
       return buildTestProject({ name: input.name });
     },
-    updateProject: async (ctx: ServiceRequestContext, id: string, input: { name?: string }) => {
+    updateProject: async (
+      ctx: ServiceRequestContext,
+      id: string,
+      input: { name?: string },
+    ) => {
       track("project", "updateProject", ctx);
       return buildTestProject({ id, name: input.name ?? "Portal" });
     },
@@ -1121,7 +1156,9 @@ export function createMockPlatformGateway(
         title: input.title ?? "Implement API",
         sprintId: input.sprintId === null ? undefined : (input.sprintId ?? undefined),
         projectModuleId:
-          input.projectModuleId === null ? undefined : (input.projectModuleId ?? undefined),
+          input.projectModuleId === null
+            ? undefined
+            : (input.projectModuleId ?? undefined),
         parentTaskId:
           input.parentTaskId === null ? undefined : (input.parentTaskId ?? undefined),
         labelIds: input.labelIds ? [...input.labelIds] : [],
@@ -1195,7 +1232,11 @@ export function createMockPlatformGateway(
     },
     closeSupportRequest: async (ctx, id) => {
       track("support", "closeSupportRequest", ctx);
-      return buildTestSupportRequest({ id, status: "closed", closedAt: "2026-07-10T12:00:00.000Z" });
+      return buildTestSupportRequest({
+        id,
+        status: "closed",
+        closedAt: "2026-07-10T12:00:00.000Z",
+      });
     },
     reopenSupportRequest: async (ctx, id) => {
       track("support", "reopenSupportRequest", ctx);
@@ -1294,7 +1335,10 @@ export function createMockPlatformGateway(
     },
     updateOrganization: async (ctx, id, input) => {
       track("supportOrganizations", "updateOrganization", ctx);
-      return buildTestSupportOrganization({ id, ...(input as Partial<SupportOrganization>) });
+      return buildTestSupportOrganization({
+        id,
+        ...(input as Partial<SupportOrganization>),
+      });
     },
     archiveOrganization: async (ctx, id) => {
       track("supportOrganizations", "archiveOrganization", ctx);
@@ -1468,8 +1512,10 @@ export function createMockPlatformGateway(
     archive: tracked("testing.cases", "archive", async (_ctx, id) =>
       buildTestCase({ id, status: "archived" }),
     ),
-    transitionStatus: tracked("testing.cases", "transitionStatus", async (_ctx, id, status) =>
-      buildTestCase({ id, status }),
+    transitionStatus: tracked(
+      "testing.cases",
+      "transitionStatus",
+      async (_ctx, id, status) => buildTestCase({ id, status }),
     ),
     ...options.testing?.cases,
   };
@@ -1493,7 +1539,9 @@ export function createMockPlatformGateway(
 
   const testingExecutions: TestingExecutionService = {
     list: tracked("testing.executions", "list", async () => [buildTestExecution()]),
-    get: tracked("testing.executions", "get", async (_ctx, id) => buildTestExecution({ id })),
+    get: tracked("testing.executions", "get", async (_ctx, id) =>
+      buildTestExecution({ id }),
+    ),
     create: tracked("testing.executions", "create", async (_ctx, input) =>
       buildTestExecution({ ...input, id: API_TEST_EXEC_ID as ManualExecutionId }),
     ),
@@ -1515,17 +1563,51 @@ export function createMockPlatformGateway(
     unblock: tracked("testing.executions", "unblock", async (_ctx, id) =>
       buildTestExecution({ id, status: "in_progress" }),
     ),
-    complete: tracked("testing.executions", "complete", async (_ctx, id, overallResult) =>
-      buildTestExecution({ id, status: "completed", overallResult, completedAt: TESTING_NOW }),
+    complete: tracked(
+      "testing.executions",
+      "complete",
+      async (_ctx, id, overallResult) =>
+        buildTestExecution({
+          id,
+          status: "completed",
+          overallResult,
+          completedAt: TESTING_NOW,
+        }),
     ),
-    submitForReview: tracked("testing.executions", "submitForReview", async (_ctx, id) =>
-      buildTestExecution({ id, status: "under_review" }),
+    submitForReview: tracked(
+      "testing.executions",
+      "submitForReview",
+      async (_ctx, id) => buildTestExecution({ id, status: "under_review" }),
     ),
     approve: tracked("testing.executions", "approve", async (_ctx, id, comments) =>
-      buildTestExecution({ id, status: "approved", comments: comments ? [{ id: "comment-1", authorUserId: API_TEST_USER_ID, body: comments, createdAt: TESTING_NOW }] : [] }),
+      buildTestExecution({
+        id,
+        status: "approved",
+        comments: comments
+          ? [
+              {
+                id: "comment-1",
+                authorUserId: API_TEST_USER_ID,
+                body: comments,
+                createdAt: TESTING_NOW,
+              },
+            ]
+          : [],
+      }),
     ),
     reject: tracked("testing.executions", "reject", async (_ctx, id, comments) =>
-      buildTestExecution({ id, status: "rejected", comments: [{ id: "comment-1", authorUserId: API_TEST_USER_ID, body: comments, createdAt: TESTING_NOW }] }),
+      buildTestExecution({
+        id,
+        status: "rejected",
+        comments: [
+          {
+            id: "comment-1",
+            authorUserId: API_TEST_USER_ID,
+            body: comments,
+            createdAt: TESTING_NOW,
+          },
+        ],
+      }),
     ),
     reopen: tracked("testing.executions", "reopen", async (_ctx, id) =>
       buildTestExecution({ id, status: "ready" }),
@@ -1539,34 +1621,55 @@ export function createMockPlatformGateway(
     restore: tracked("testing.executions", "restore", async (_ctx, id) =>
       buildTestExecution({ id, status: "ready" }),
     ),
-    recordStepActual: tracked("testing.executions", "recordStepActual", async (_ctx, id, stepId, actual) =>
-      buildTestExecution({ id, stepActuals: [{ stepId, ...actual }] }),
+    recordStepActual: tracked(
+      "testing.executions",
+      "recordStepActual",
+      async (_ctx, id, stepId, actual) =>
+        buildTestExecution({ id, stepActuals: [{ stepId, ...actual }] }),
     ),
-    setStepStatus: tracked("testing.executions", "setStepStatus", async (_ctx, id, stepId, status) =>
-      buildTestExecution({ id, stepActuals: [{ stepId, status }] }),
+    setStepStatus: tracked(
+      "testing.executions",
+      "setStepStatus",
+      async (_ctx, id, stepId, status) =>
+        buildTestExecution({ id, stepActuals: [{ stepId, status }] }),
     ),
     ...options.testing?.executions,
   };
 
   const testingEvidence: TestingEvidenceService = {
-    listEvidence: tracked("testing.evidence", "listEvidence", async () => [buildTestEvidence()]),
+    listEvidence: tracked("testing.evidence", "listEvidence", async () => [
+      buildTestEvidence(),
+    ]),
     getEvidence: tracked("testing.evidence", "getEvidence", async (_ctx, id) =>
       buildTestEvidence({ id }),
     ),
-    registerEvidence: tracked("testing.evidence", "registerEvidence", async (_ctx, input) =>
-      buildTestEvidence({ ...input, id: API_TEST_EVIDENCE_ID as EvidenceId }),
+    registerEvidence: tracked(
+      "testing.evidence",
+      "registerEvidence",
+      async (_ctx, input) =>
+        buildTestEvidence({ ...input, id: API_TEST_EVIDENCE_ID as EvidenceId }),
     ),
     submitEvidence: tracked("testing.evidence", "submitEvidence", async (_ctx, id) =>
       buildTestEvidence({ id, lifecycleStatus: "submitted" }),
     ),
-    verifyEvidence: tracked("testing.evidence", "verifyEvidence", async (_ctx, id, verificationState) =>
-      buildTestEvidence({ id, lifecycleStatus: "verified", verificationState }),
+    verifyEvidence: tracked(
+      "testing.evidence",
+      "verifyEvidence",
+      async (_ctx, id, verificationState) =>
+        buildTestEvidence({ id, lifecycleStatus: "verified", verificationState }),
     ),
     approveEvidence: tracked("testing.evidence", "approveEvidence", async (_ctx, id) =>
       buildTestEvidence({ id, lifecycleStatus: "approved", approvalState: "approved" }),
     ),
-    rejectEvidence: tracked("testing.evidence", "rejectEvidence", async (_ctx, id, reason) =>
-      buildTestEvidence({ id, lifecycleStatus: "rejected", verificationState: reason }),
+    rejectEvidence: tracked(
+      "testing.evidence",
+      "rejectEvidence",
+      async (_ctx, id, reason) =>
+        buildTestEvidence({
+          id,
+          lifecycleStatus: "rejected",
+          verificationState: reason,
+        }),
     ),
     archiveEvidence: tracked("testing.evidence", "archiveEvidence", async (_ctx, id) =>
       buildTestEvidence({ id, lifecycleStatus: "archived" }),
@@ -1575,7 +1678,11 @@ export function createMockPlatformGateway(
   };
 
   const testingAutomation: TestingAutomationService = {
-    validateImport: tracked("testing.automation", "validateImport", async () => undefined),
+    validateImport: tracked(
+      "testing.automation",
+      "validateImport",
+      async () => undefined,
+    ),
     importResult: tracked("testing.automation", "importResult", async () => ({
       importRecord: buildTestAutomationImport(),
       automatedExecutionId: "auto_exec_apztcms_012",
@@ -1584,43 +1691,56 @@ export function createMockPlatformGateway(
       registeredEvidenceIds: [API_TEST_EVIDENCE_ID],
       coverageSnapshotIds: [API_TEST_COVERAGE_ID],
     })),
-    listImports: tracked("testing.automation", "listImports", async () => [buildTestAutomationImport()]),
+    listImports: tracked("testing.automation", "listImports", async () => [
+      buildTestAutomationImport(),
+    ]),
     getImport: tracked("testing.automation", "getImport", async (_ctx, id) =>
       buildTestAutomationImport({ id }),
     ),
-    listImportHistory: tracked("testing.automation", "listImportHistory", async (_ctx, importId) => [
-      {
-        id: "import_history_apztcms_012",
-        tenantId: API_TEST_TENANT_A,
-        importId,
-        eventType: "testing.automation.imported",
-        occurredAt: TESTING_NOW,
-        summary: "Import completed",
-      } as AutomationImportHistory,
-    ]),
+    listImportHistory: tracked(
+      "testing.automation",
+      "listImportHistory",
+      async (_ctx, importId) => [
+        {
+          id: "import_history_apztcms_012",
+          tenantId: API_TEST_TENANT_A,
+          importId,
+          eventType: "testing.automation.imported",
+          occurredAt: TESTING_NOW,
+          summary: "Import completed",
+        } as AutomationImportHistory,
+      ],
+    ),
     getHistory: tracked("testing.automation", "getHistory", async () => []),
     listRuns: tracked("testing.automation", "listRuns", async () => []),
-    getRun: tracked("testing.automation", "getRun", async (_ctx, id) =>
-      ({
-        ...auditFields(),
-        id,
-        executionId: "auto_exec_apztcms_012",
-        title: "HTTP API automation run",
-        status: "pass",
-      }) as AutomationRun,
+    getRun: tracked(
+      "testing.automation",
+      "getRun",
+      async (_ctx, id) =>
+        ({
+          ...auditFields(),
+          id,
+          executionId: "auto_exec_apztcms_012",
+          title: "HTTP API automation run",
+          status: "pass",
+        }) as AutomationRun,
     ),
     listResultItems: tracked("testing.automation", "listResultItems", async () => []),
-    listCoverageSnapshots: tracked("testing.automation", "listCoverageSnapshots", async (_ctx, importId) => [
-      {
-        ...auditFields(),
-        id: "coverage_snapshot_apztcms_012",
-        importId,
-        summary: { covered: 1, total: 1, percentage: 100, kind: "requirement" },
-        coveredCount: 1,
-        totalCount: 1,
-        percentage: 100,
-      } as AutomationCoverageSnapshot,
-    ]),
+    listCoverageSnapshots: tracked(
+      "testing.automation",
+      "listCoverageSnapshots",
+      async (_ctx, importId) => [
+        {
+          ...auditFields(),
+          id: "coverage_snapshot_apztcms_012",
+          importId,
+          summary: { covered: 1, total: 1, percentage: 100, kind: "requirement" },
+          coveredCount: 1,
+          totalCount: 1,
+          percentage: 100,
+        } as AutomationCoverageSnapshot,
+      ],
+    ),
     aggregateCoverage: tracked("testing.automation", "aggregateCoverage", async () => ({
       covered: 1,
       total: 1,
@@ -1631,25 +1751,37 @@ export function createMockPlatformGateway(
   };
 
   const testingCoverage: TestingCoverageService = {
-    recompute: tracked("testing.coverage", "recompute", async () => [buildTestCoverage()]),
-    recomputeAll: tracked("testing.coverage", "recomputeAll", async () => [buildTestCoverage()]),
+    recompute: tracked("testing.coverage", "recompute", async () => [
+      buildTestCoverage(),
+    ]),
+    recomputeAll: tracked("testing.coverage", "recomputeAll", async () => [
+      buildTestCoverage(),
+    ]),
     requestRecompute: tracked("testing.coverage", "requestRecompute", async (ctx) => ({
       accepted: true,
       correlationId: ctx.correlationId,
     })),
-    listMetrics: tracked("testing.coverage", "listMetrics", async () => [buildTestCoverage()]),
+    listMetrics: tracked("testing.coverage", "listMetrics", async () => [
+      buildTestCoverage(),
+    ]),
     getMetric: tracked("testing.coverage", "getMetric", async (_ctx, id) =>
       buildTestCoverage({ id }),
     ),
-    listMetricsByKind: tracked("testing.coverage", "listMetricsByKind", async (_ctx, kind) => [
-      buildTestCoverage({ kind }),
-    ]),
-    listMetricsForPlan: tracked("testing.coverage", "listMetricsForPlan", async (_ctx, planId) => [
-      buildTestCoverage({ planId }),
-    ]),
-    listMetricsForSubject: tracked("testing.coverage", "listMetricsForSubject", async (_ctx, subjectId) => [
-      buildTestCoverage({ subjectId }),
-    ]),
+    listMetricsByKind: tracked(
+      "testing.coverage",
+      "listMetricsByKind",
+      async (_ctx, kind) => [buildTestCoverage({ kind })],
+    ),
+    listMetricsForPlan: tracked(
+      "testing.coverage",
+      "listMetricsForPlan",
+      async (_ctx, planId) => [buildTestCoverage({ planId })],
+    ),
+    listMetricsForSubject: tracked(
+      "testing.coverage",
+      "listMetricsForSubject",
+      async (_ctx, subjectId) => [buildTestCoverage({ subjectId })],
+    ),
     ...options.testing?.coverage,
   };
 
@@ -1660,7 +1792,11 @@ export function createMockPlatformGateway(
       buildTestDefect({ ...input, id: API_TEST_DEFECT_ID as DefectLinkId }),
     ),
     link: tracked("testing.defects", "link", async (_ctx, id, entityKind, entityId) =>
-      buildTestDefect({ id, target: entityKind as DefectLink["target"], externalId: entityId }),
+      buildTestDefect({
+        id,
+        target: entityKind as DefectLink["target"],
+        externalId: entityId,
+      }),
     ),
     update: tracked("testing.defects", "update", async (_ctx, id, input) =>
       buildTestDefect({ id, ...input }),
@@ -1672,83 +1808,120 @@ export function createMockPlatformGateway(
   };
 
   const testingQuality: TestingQualityService = {
-    summarize: tracked("testing.quality", "summarize", async (_ctx, scope) => ({
-      scope: scope ?? {},
-      coverageMetrics: [buildTestCoverage()],
-      openDefectsByStatus: { open: 1 },
-      openDefectsByPriority: { high: 1 },
-      computedAt: TESTING_NOW,
-    } as QualitySummary)),
-    getSnapshot: tracked("testing.quality", "getSnapshot", async (_ctx, id) => ({
-      ...auditFields(),
-      id,
-      scope: {},
-      metrics: {
-        passRate: 1,
-        failRate: 0,
-        blockedRate: 0,
-        skippedRate: 0,
-        automationRatio: 1,
-        manualRatio: 0,
-        evidenceCompleteness: 1,
-        approvalCompleteness: 1,
-        executionCompleteness: 1,
-        coverageCompleteness: 1,
-        riskScore: 0,
-        defectDensity: 0,
-        severityDistribution: {},
-        totalExecutions: 1,
-        openDefectCount: 0,
-      },
-      computedAt: TESTING_NOW,
-    } as QualitySnapshot)),
+    summarize: tracked(
+      "testing.quality",
+      "summarize",
+      async (_ctx, scope) =>
+        ({
+          scope: scope ?? {},
+          coverageMetrics: [buildTestCoverage()],
+          openDefectsByStatus: { open: 1 },
+          openDefectsByPriority: { high: 1 },
+          computedAt: TESTING_NOW,
+        }) as QualitySummary,
+    ),
+    getSnapshot: tracked(
+      "testing.quality",
+      "getSnapshot",
+      async (_ctx, id) =>
+        ({
+          ...auditFields(),
+          id,
+          scope: {},
+          metrics: {
+            passRate: 1,
+            failRate: 0,
+            blockedRate: 0,
+            skippedRate: 0,
+            automationRatio: 1,
+            manualRatio: 0,
+            evidenceCompleteness: 1,
+            approvalCompleteness: 1,
+            executionCompleteness: 1,
+            coverageCompleteness: 1,
+            riskScore: 0,
+            defectDensity: 0,
+            severityDistribution: {},
+            totalExecutions: 1,
+            openDefectCount: 0,
+          },
+          computedAt: TESTING_NOW,
+        }) as QualitySnapshot,
+    ),
     listSnapshots: tracked("testing.quality", "listSnapshots", async () => []),
     computeSnapshot: tracked("testing.quality", "computeSnapshot", async (ctx) =>
       testingQuality.getSnapshot(ctx, "quality_snapshot_apztcms_012"),
     ),
-    compareSnapshots: tracked("testing.quality", "compareSnapshots", async (ctx, baselineSnapshotId, currentSnapshotId) => ({
-      baselineSnapshotId,
-      currentSnapshotId,
-      deltas: [],
-      computedAt: ctx.correlationId,
-    } as QualityTrendComparison)),
-    compareWindows: tracked("testing.quality", "compareWindows", async (_ctx, baseline, current) => ({
-      baselineWindowLabel: baseline.label,
-      currentWindowLabel: current.label,
-      deltas: [],
-      computedAt: TESTING_NOW,
-    } as QualityTrendComparison)),
+    compareSnapshots: tracked(
+      "testing.quality",
+      "compareSnapshots",
+      async (ctx, baselineSnapshotId, currentSnapshotId) =>
+        ({
+          baselineSnapshotId,
+          currentSnapshotId,
+          deltas: [],
+          computedAt: ctx.correlationId,
+        }) as QualityTrendComparison,
+    ),
+    compareWindows: tracked(
+      "testing.quality",
+      "compareWindows",
+      async (_ctx, baseline, current) =>
+        ({
+          baselineWindowLabel: baseline.label,
+          currentWindowLabel: current.label,
+          deltas: [],
+          computedAt: TESTING_NOW,
+        }) as QualityTrendComparison,
+    ),
     ...options.testing?.quality,
   };
 
   const testingCertification: TestingCertificationService = {
     create: tracked("testing.certification", "create", async (_ctx, input) =>
-      buildTestCertification({ ...input, id: API_TEST_CERT_ID as CertificationRecordId }),
+      buildTestCertification({
+        ...input,
+        id: API_TEST_CERT_ID as CertificationRecordId,
+      }),
     ),
     get: tracked("testing.certification", "get", async (_ctx, id) =>
       buildTestCertification({ id }),
     ),
-    list: tracked("testing.certification", "list", async () => [buildTestCertification()]),
-    prepareForPlan: tracked("testing.certification", "prepareForPlan", async (_ctx, planId) =>
-      buildTestCertificationPreparation({ planId }),
+    list: tracked("testing.certification", "list", async () => [
+      buildTestCertification(),
+    ]),
+    prepareForPlan: tracked(
+      "testing.certification",
+      "prepareForPlan",
+      async (_ctx, planId) => buildTestCertificationPreparation({ planId }),
     ),
-    prepareForCertification: tracked("testing.certification", "prepareForCertification", async (_ctx, certificationRecordId) =>
-      buildTestCertificationPreparation({ certificationRecordId }),
+    prepareForCertification: tracked(
+      "testing.certification",
+      "prepareForCertification",
+      async (_ctx, certificationRecordId) =>
+        buildTestCertificationPreparation({ certificationRecordId }),
     ),
     startReview: tracked("testing.certification", "startReview", async (_ctx, id) =>
       buildTestCertification({ id, status: "in_review" }),
     ),
-    requestChanges: tracked("testing.certification", "requestChanges", async (_ctx, id) =>
-      buildTestCertification({ id, status: "changes_required" }),
+    requestChanges: tracked(
+      "testing.certification",
+      "requestChanges",
+      async (_ctx, id) => buildTestCertification({ id, status: "changes_required" }),
     ),
-    submitForApproval: tracked("testing.certification", "submitForApproval", async (_ctx, id) =>
-      buildTestCertification({ id, status: "awaiting_approval" }),
+    submitForApproval: tracked(
+      "testing.certification",
+      "submitForApproval",
+      async (_ctx, id) => buildTestCertification({ id, status: "awaiting_approval" }),
     ),
     approve: tracked("testing.certification", "approve", async (_ctx, id) =>
       buildTestCertification({ id, status: "approved", certifiedAt: TESTING_NOW }),
     ),
-    conditionallyApprove: tracked("testing.certification", "conditionallyApprove", async (_ctx, id, conditions) =>
-      buildTestCertification({ id, status: "conditionally_approved", conditions }),
+    conditionallyApprove: tracked(
+      "testing.certification",
+      "conditionallyApprove",
+      async (_ctx, id, conditions) =>
+        buildTestCertification({ id, status: "conditionally_approved", conditions }),
     ),
     reject: tracked("testing.certification", "reject", async (_ctx, id) =>
       buildTestCertification({ id, status: "rejected" }),
@@ -1759,22 +1932,33 @@ export function createMockPlatformGateway(
     archive: tracked("testing.certification", "archive", async (_ctx, id) =>
       buildTestCertification({ id, status: "archived" }),
     ),
-    evaluateGate: tracked("testing.certification", "evaluateGate", async (_ctx, certificationRecordId, gateKey) =>
-      ({
-        ...auditFields(),
-        id: "gate_eval_apztcms_012",
-        certificationRecordId,
-        gateKey,
-        status: "pass",
-        reason: "All gates pass",
-        supportingEvidence: [],
-        evaluatedAt: TESTING_NOW,
-        traceabilityRefs: [],
-      }) as unknown as CertificationGateEvaluation,
+    evaluateGate: tracked(
+      "testing.certification",
+      "evaluateGate",
+      async (_ctx, certificationRecordId, gateKey) =>
+        ({
+          ...auditFields(),
+          id: "gate_eval_apztcms_012",
+          certificationRecordId,
+          gateKey,
+          status: "pass",
+          reason: "All gates pass",
+          supportingEvidence: [],
+          evaluatedAt: TESTING_NOW,
+          traceabilityRefs: [],
+        }) as unknown as CertificationGateEvaluation,
     ),
-    evaluateGates: tracked("testing.certification", "evaluateGates", async (ctx, certificationRecordId) => [
-      await testingCertification.evaluateGate(ctx, certificationRecordId, "requirement_coverage"),
-    ]),
+    evaluateGates: tracked(
+      "testing.certification",
+      "evaluateGates",
+      async (ctx, certificationRecordId) => [
+        await testingCertification.evaluateGate(
+          ctx,
+          certificationRecordId,
+          "requirement_coverage",
+        ),
+      ],
+    ),
     getRecommendation: tracked(
       "testing.certification",
       "getRecommendation",
@@ -1789,26 +1973,39 @@ export function createMockPlatformGateway(
           advisoryOnly: true,
         }) as unknown as CertificationRecommendation,
     ),
-    getAuditHistory: tracked("testing.certification", "getAuditHistory", async () => []),
-    listAudit: tracked("testing.certification", "listAudit", async (_ctx, certificationRecordId) => [
-      {
-        id: "cert_audit_apztcms_012",
-        tenantId: API_TEST_TENANT_A,
-        certificationRecordId,
-        occurredAt: TESTING_NOW,
-        action: "testing.certification.approved",
-        summary: "Certification approved",
-      } as CertificationAuditEntry,
-    ]),
+    getAuditHistory: tracked(
+      "testing.certification",
+      "getAuditHistory",
+      async () => [],
+    ),
+    listAudit: tracked(
+      "testing.certification",
+      "listAudit",
+      async (_ctx, certificationRecordId) => [
+        {
+          id: "cert_audit_apztcms_012",
+          tenantId: API_TEST_TENANT_A,
+          certificationRecordId,
+          occurredAt: TESTING_NOW,
+          action: "testing.certification.approved",
+          summary: "Certification approved",
+        } as CertificationAuditEntry,
+      ],
+    ),
     ...options.testing?.certification,
   };
 
   const testingReleaseReadiness: TestingReleaseReadinessService = {
-    calculateForPlan: tracked("testing.releaseReadiness", "calculateForPlan", async (_ctx, planId) =>
-      buildTestReleaseReadiness({ planId }),
+    calculateForPlan: tracked(
+      "testing.releaseReadiness",
+      "calculateForPlan",
+      async (_ctx, planId) => buildTestReleaseReadiness({ planId }),
     ),
-    calculateForCertification: tracked("testing.releaseReadiness", "calculateForCertification", async (_ctx, certificationRecordId) =>
-      buildTestReleaseReadiness({ certificationRecordId }),
+    calculateForCertification: tracked(
+      "testing.releaseReadiness",
+      "calculateForCertification",
+      async (_ctx, certificationRecordId) =>
+        buildTestReleaseReadiness({ certificationRecordId }),
     ),
     ...options.testing?.releaseReadiness,
   };
@@ -1825,35 +2022,62 @@ export function createMockPlatformGateway(
         targetId: API_TEST_CASE_ID,
       } as TraceabilityLink,
     ]),
-    getLink: tracked("testing.traceability", "getLink", async (_ctx, id) => ({
-      ...auditFields(),
-      id,
-      type: "covers",
-      sourceKind: "requirement",
-      sourceId: API_TEST_REQ_ID,
-      targetKind: "test_case",
-      targetId: API_TEST_CASE_ID,
-    } as TraceabilityLink)),
-    createLink: tracked("testing.traceability", "createLink", async (_ctx, input) => ({
-      ...auditFields(),
-      id: API_TEST_TRACE_ID as TraceabilityLinkId,
-      ...input,
-    } as TraceabilityLink)),
+    getLink: tracked(
+      "testing.traceability",
+      "getLink",
+      async (_ctx, id) =>
+        ({
+          ...auditFields(),
+          id,
+          type: "covers",
+          sourceKind: "requirement",
+          sourceId: API_TEST_REQ_ID,
+          targetKind: "test_case",
+          targetId: API_TEST_CASE_ID,
+        }) as TraceabilityLink,
+    ),
+    createLink: tracked(
+      "testing.traceability",
+      "createLink",
+      async (_ctx, input) =>
+        ({
+          ...auditFields(),
+          id: API_TEST_TRACE_ID as TraceabilityLinkId,
+          ...input,
+        }) as TraceabilityLink,
+    ),
     removeLink: tracked("testing.traceability", "removeLink", async () => undefined),
-    createRelationship: tracked("testing.traceability", "createRelationship", async (_ctx, input) => ({
-      ...auditFields(),
-      id: API_TEST_TRACE_ID as TraceabilityLinkId,
-      ...input,
-    } as TraceabilityLink)),
-    removeRelationship: tracked("testing.traceability", "removeRelationship", async () => undefined),
-    getMatrixForRequirement: tracked("testing.traceability", "getMatrixForRequirement", async (_ctx, requirementId) => ({
-      requirementId,
-      requirementKey: "REQ-012",
-      caseIds: [API_TEST_CASE_ID as TestCaseId],
-      covered: true,
-    } as TraceabilityMatrixRow)),
+    createRelationship: tracked(
+      "testing.traceability",
+      "createRelationship",
+      async (_ctx, input) =>
+        ({
+          ...auditFields(),
+          id: API_TEST_TRACE_ID as TraceabilityLinkId,
+          ...input,
+        }) as TraceabilityLink,
+    ),
+    removeRelationship: tracked(
+      "testing.traceability",
+      "removeRelationship",
+      async () => undefined,
+    ),
+    getMatrixForRequirement: tracked(
+      "testing.traceability",
+      "getMatrixForRequirement",
+      async (_ctx, requirementId) =>
+        ({
+          requirementId,
+          requirementKey: "REQ-012",
+          caseIds: [API_TEST_CASE_ID as TestCaseId],
+          covered: true,
+        }) as TraceabilityMatrixRow,
+    ),
     listMatrix: tracked("testing.traceability", "listMatrix", async (ctx) => [
-      await testingTraceability.getMatrixForRequirement(ctx, API_TEST_REQ_ID as RequirementId),
+      await testingTraceability.getMatrixForRequirement(
+        ctx,
+        API_TEST_REQ_ID as RequirementId,
+      ),
     ]),
     ...options.testing?.traceability,
   };
@@ -1867,33 +2091,52 @@ export function createMockPlatformGateway(
         status: "pending",
       } as Approval,
     ]),
-    get: tracked("testing.approvals", "get", async (_ctx, id) => ({
-      ...auditFields(),
-      id,
-      certificationRecordId: API_TEST_CERT_ID as CertificationRecordId,
-      status: "pending",
-    } as Approval)),
-    request: tracked("testing.approvals", "request", async (_ctx, input) => ({
-      ...auditFields(),
-      id: API_TEST_APPROVAL_ID as ApprovalId,
-      ...input,
-    } as Approval)),
-    submitForReview: tracked("testing.approvals", "submitForReview", async (_ctx, input) =>
-      ({
-        ...auditFields(),
-        id: API_TEST_APPROVAL_ID as ApprovalId,
-        certificationRecordId: input.certificationRecordId ?? (API_TEST_CERT_ID as CertificationRecordId),
-        status: "pending",
-        subjectKind: input.subjectKind,
-        subjectId: input.subjectId,
-      }) as Approval,
+    get: tracked(
+      "testing.approvals",
+      "get",
+      async (_ctx, id) =>
+        ({
+          ...auditFields(),
+          id,
+          certificationRecordId: API_TEST_CERT_ID as CertificationRecordId,
+          status: "pending",
+        }) as Approval,
     ),
-    decide: tracked("testing.approvals", "decide", async (_ctx, id, decision) => ({
-      ...auditFields(),
-      id,
-      certificationRecordId: API_TEST_CERT_ID as CertificationRecordId,
-      ...decision,
-    } as Approval)),
+    request: tracked(
+      "testing.approvals",
+      "request",
+      async (_ctx, input) =>
+        ({
+          ...auditFields(),
+          id: API_TEST_APPROVAL_ID as ApprovalId,
+          ...input,
+        }) as Approval,
+    ),
+    submitForReview: tracked(
+      "testing.approvals",
+      "submitForReview",
+      async (_ctx, input) =>
+        ({
+          ...auditFields(),
+          id: API_TEST_APPROVAL_ID as ApprovalId,
+          certificationRecordId:
+            input.certificationRecordId ?? (API_TEST_CERT_ID as CertificationRecordId),
+          status: "pending",
+          subjectKind: input.subjectKind,
+          subjectId: input.subjectId,
+        }) as Approval,
+    ),
+    decide: tracked(
+      "testing.approvals",
+      "decide",
+      async (_ctx, id, decision) =>
+        ({
+          ...auditFields(),
+          id,
+          certificationRecordId: API_TEST_CERT_ID as CertificationRecordId,
+          ...decision,
+        }) as Approval,
+    ),
     listHistory: tracked("testing.approvals", "listHistory", async () => [
       { at: TESTING_NOW, toStatus: "pending" } as ApprovalHistoryEntry,
     ]),
@@ -1901,30 +2144,36 @@ export function createMockPlatformGateway(
   };
 
   const testingDashboard: TestingDashboardService = {
-    getDashboardSummary: tracked("testing.dashboard", "getDashboardSummary", async () => ({
-      capturedAt: TESTING_NOW,
-      totals: {
-        plans: 1,
-        suites: 1,
-        cases: 1,
-        requirements: 1,
-        executions: 1,
-        evidence: 1,
-        certifications: 1,
-        defects: 1,
-      },
-      executionCounts: [{ label: "in_progress", count: 1 }],
-      evidenceCounts: [{ label: "submitted", count: 1 }],
-      certificationCounts: [{ label: "awaiting_approval", count: 1 }],
-      defectCounts: [{ label: "open", count: 1 }],
-      coveragePercentages: [{ label: "requirements", percentage: 100 }],
-      qualityCounts: [{ label: "risk", count: 0 }],
-    })),
+    getDashboardSummary: tracked(
+      "testing.dashboard",
+      "getDashboardSummary",
+      async () => ({
+        capturedAt: TESTING_NOW,
+        totals: {
+          plans: 1,
+          suites: 1,
+          cases: 1,
+          requirements: 1,
+          executions: 1,
+          evidence: 1,
+          certifications: 1,
+          defects: 1,
+        },
+        executionCounts: [{ label: "in_progress", count: 1 }],
+        evidenceCounts: [{ label: "submitted", count: 1 }],
+        certificationCounts: [{ label: "awaiting_approval", count: 1 }],
+        defectCounts: [{ label: "open", count: 1 }],
+        coveragePercentages: [{ label: "requirements", percentage: 100 }],
+        qualityCounts: [{ label: "risk", count: 0 }],
+      }),
+    ),
     ...options.testing?.dashboard,
   };
 
   const testingPipelines = {
-    listPipelines: tracked("testing.pipelines", "listPipelines", async () => [buildSorPipeline()]),
+    listPipelines: tracked("testing.pipelines", "listPipelines", async () => [
+      buildSorPipeline(),
+    ]),
     getPipeline: tracked("testing.pipelines", "getPipeline", async (_ctx, id) =>
       buildSorPipeline({ id }),
     ),
@@ -1936,8 +2185,12 @@ export function createMockPlatformGateway(
     getRun: tracked("testing.pipelines", "getRun", async (_ctx, id) =>
       buildSorPipelineRun({ id }),
     ),
-    getLinks: tracked("testing.pipelines", "getLinks", async () => buildPipelineLinks()),
-    listJobs: tracked("testing.pipelines", "listJobs", async () => [buildPipelineJob()]),
+    getLinks: tracked("testing.pipelines", "getLinks", async () =>
+      buildPipelineLinks(),
+    ),
+    listJobs: tracked("testing.pipelines", "listJobs", async () => [
+      buildPipelineJob(),
+    ]),
     listStages: tracked("testing.pipelines", "listStages", async () => [
       { name: "build", status: "passed" } satisfies PipelineStage,
     ]),
@@ -1954,16 +2207,23 @@ export function createMockPlatformGateway(
     importFromProvider: tracked("testing.pipelines", "importFromProvider", async () =>
       buildPipelineImportOutcome(),
     ),
-    registerPipeline: tracked("testing.pipelines", "registerPipeline", async (_ctx, input) =>
-      buildSorPipeline({ ...input, id: API_TEST_PIPELINE_ID as PipelineId }),
+    registerPipeline: tracked(
+      "testing.pipelines",
+      "registerPipeline",
+      async (_ctx, input) =>
+        buildSorPipeline({ ...input, id: API_TEST_PIPELINE_ID as PipelineId }),
     ),
-    updatePipeline: tracked("testing.pipelines", "updatePipeline", async (_ctx, id, input) =>
-      buildSorPipeline({ id, ...input }),
+    updatePipeline: tracked(
+      "testing.pipelines",
+      "updatePipeline",
+      async (_ctx, id, input) => buildSorPipeline({ id, ...input }),
     ),
     archivePipeline: tracked("testing.pipelines", "archivePipeline", async (_ctx, id) =>
       buildSorPipeline({ id, status: "archived" }),
     ),
-    importRun: tracked("testing.pipelines", "importRun", async () => buildPipelineImportOutcome()),
+    importRun: tracked("testing.pipelines", "importRun", async () =>
+      buildPipelineImportOutcome(),
+    ),
     listImports: tracked("testing.pipelines", "listImports", async () => []),
     getImport: tracked("testing.pipelines", "getImport", async () => {
       throw new PlatformServiceError({
@@ -1974,15 +2234,21 @@ export function createMockPlatformGateway(
         retryable: false,
       });
     }),
-    listImportHistory: tracked("testing.pipelines", "listImportHistory", async () => []),
+    listImportHistory: tracked(
+      "testing.pipelines",
+      "listImportHistory",
+      async () => [],
+    ),
     linkArtifacts: tracked("testing.pipelines", "linkArtifacts", async (_ctx, runId) =>
       buildSorPipelineRun({ id: runId }),
     ),
     linkEvidence: tracked("testing.pipelines", "linkEvidence", async (_ctx, runId) =>
       buildSorPipelineRun({ id: runId }),
     ),
-    linkCertifications: tracked("testing.pipelines", "linkCertifications", async (_ctx, runId) =>
-      buildSorPipelineRun({ id: runId }),
+    linkCertifications: tracked(
+      "testing.pipelines",
+      "linkCertifications",
+      async (_ctx, runId) => buildSorPipelineRun({ id: runId }),
     ),
     linkReleases: tracked("testing.pipelines", "linkReleases", async (_ctx, runId) =>
       buildSorPipelineRun({ id: runId }),
@@ -1991,10 +2257,8 @@ export function createMockPlatformGateway(
   } as TestingPipelinesService;
 
   const testingPipelineRepositories: TestingPipelineRepositoryService = {
-    getRepository: tracked(
-      "testing.pipelineRepositories",
-      "getRepository",
-      async () => buildPipelineRepository(),
+    getRepository: tracked("testing.pipelineRepositories", "getRepository", async () =>
+      buildPipelineRepository(),
     ),
     ...options.testing?.pipelineRepositories,
   };
@@ -2003,14 +2267,18 @@ export function createMockPlatformGateway(
     listWorkflows: tracked("testing.pipelineWorkflows", "listWorkflows", async () => [
       buildPipelineWorkflow(),
     ]),
-    getWorkflow: tracked("testing.pipelineWorkflows", "getWorkflow", async (_ctx, _o, _r, id) =>
-      buildPipelineWorkflow({ id: String(id) }),
+    getWorkflow: tracked(
+      "testing.pipelineWorkflows",
+      "getWorkflow",
+      async (_ctx, _o, _r, id) => buildPipelineWorkflow({ id: String(id) }),
     ),
     ...options.testing?.pipelineWorkflows,
   };
 
   const testingPipelineRuns: TestingPipelineRunLiveService = {
-    listRuns: tracked("testing.pipelineRuns", "listRuns", async () => [buildPipelineRunView()]),
+    listRuns: tracked("testing.pipelineRuns", "listRuns", async () => [
+      buildPipelineRunView(),
+    ]),
     getRun: tracked("testing.pipelineRuns", "getRun", async (_ctx, _o, _r, runId) =>
       buildPipelineRunView({ id: String(runId) }),
     ),
@@ -2018,13 +2286,17 @@ export function createMockPlatformGateway(
   };
 
   const testingPipelineJobs: TestingPipelineJobService = {
-    listJobs: tracked("testing.pipelineJobs", "listJobs", async () => [buildPipelineJob()]),
+    listJobs: tracked("testing.pipelineJobs", "listJobs", async () => [
+      buildPipelineJob(),
+    ]),
     getJob: tracked("testing.pipelineJobs", "getJob", async () => buildPipelineJob()),
     ...options.testing?.pipelineJobs,
   };
 
   const testingPipelineSteps: TestingPipelineStepService = {
-    listSteps: tracked("testing.pipelineSteps", "listSteps", async () => [buildPipelineStep()]),
+    listSteps: tracked("testing.pipelineSteps", "listSteps", async () => [
+      buildPipelineStep(),
+    ]),
     ...options.testing?.pipelineSteps,
   };
 
@@ -2036,10 +2308,8 @@ export function createMockPlatformGateway(
   };
 
   const testingPipelineSummaries: TestingPipelineSummaryService = {
-    retrieveSummary: tracked(
-      "testing.pipelineSummaries",
-      "retrieveSummary",
-      async () => buildPipelineSummary(),
+    retrieveSummary: tracked("testing.pipelineSummaries", "retrieveSummary", async () =>
+      buildPipelineSummary(),
     ),
     ...options.testing?.pipelineSummaries,
   };
@@ -2106,7 +2376,7 @@ export function createMockPlatformGateway(
   };
 
   const mockSnapshot = {
-    id: API_TEST_EI_SNAPSHOT_ID,
+    id: asEngineeringSnapshotId(API_TEST_EI_SNAPSHOT_ID),
     tenantId: API_TEST_TENANT_A,
     scope: { tenantId: API_TEST_TENANT_A },
     qualityScore: mockQualityScore,
@@ -2132,7 +2402,7 @@ export function createMockPlatformGateway(
   };
 
   const mockBenchmark = {
-    id: "bench_fixture",
+    id: asBenchmarkId("bench_fixture"),
     tenantId: API_TEST_TENANT_A,
     scope: { tenantId: API_TEST_TENANT_A },
     metricKey: "coverage",
@@ -2151,7 +2421,7 @@ export function createMockPlatformGateway(
   };
 
   const mockBaseline = {
-    id: "base_fixture",
+    id: asBaselineId("base_fixture"),
     tenantId: API_TEST_TENANT_A,
     scope: { tenantId: API_TEST_TENANT_A },
     kind: "last_month" as const,
@@ -2163,7 +2433,7 @@ export function createMockPlatformGateway(
   };
 
   const mockHistorical = {
-    id: "hist_fixture",
+    id: asEngineeringHistoricalSnapshotId("hist_fixture"),
     tenantId: API_TEST_TENANT_A,
     scope: { tenantId: API_TEST_TENANT_A },
     period: {
@@ -2183,7 +2453,11 @@ export function createMockPlatformGateway(
   };
 
   const testingEngineeringIntelligence: TestingEngineeringIntelligenceService = {
-    score: tracked("testing.engineeringIntelligence", "score", async () => mockQualityScore),
+    score: tracked(
+      "testing.engineeringIntelligence",
+      "score",
+      async () => mockQualityScore,
+    ),
     assessHealth: tracked(
       "testing.engineeringIntelligence",
       "assessHealth",
@@ -2197,7 +2471,10 @@ export function createMockPlatformGateway(
     getSnapshot: tracked(
       "testing.engineeringIntelligence",
       "getSnapshot",
-      async (_ctx, id) => ({ ...mockSnapshot, id: String(id) }),
+      async (_ctx, id) => ({
+        ...mockSnapshot,
+        id: asEngineeringSnapshotId(String(id)),
+      }),
     ),
     listSnapshots: tracked(
       "testing.engineeringIntelligence",
@@ -2209,11 +2486,9 @@ export function createMockPlatformGateway(
       "buildTrend",
       async (_ctx, kind) => ({ ...mockTrend, kind }),
     ),
-    listTrends: tracked(
-      "testing.engineeringIntelligence",
-      "listTrends",
-      async () => [mockTrend],
-    ),
+    listTrends: tracked("testing.engineeringIntelligence", "listTrends", async () => [
+      mockTrend,
+    ]),
     compareBenchmark: tracked(
       "testing.engineeringIntelligence",
       "compareBenchmark",
@@ -2286,7 +2561,11 @@ export function createMockPlatformGateway(
       pipelineSummaries: testingPipelineSummaries,
       engineeringIntelligence: testingEngineeringIntelligence,
       reporting: {
-        listReportPlaceholders: tracked("testing.reporting", "listReportPlaceholders", async () => []),
+        listReportPlaceholders: tracked(
+          "testing.reporting",
+          "listReportPlaceholders",
+          async () => [],
+        ),
       },
     },
     reporting: {
@@ -2336,33 +2615,25 @@ export function createMockPlatformGateway(
           updatedAt: "2026-07-12T12:00:00.000Z",
         }),
       ),
-      validateReport: tracked(
-        "platformReporting",
-        "validateReport",
-        async () => ({ valid: true, errors: [], warnings: [] }),
+      validateReport: tracked("platformReporting", "validateReport", async () => ({
+        valid: true,
+        errors: [],
+        warnings: [],
+      })),
+      previewReport: tracked("platformReporting", "previewReport", async () =>
+        buildMockReportGenerationResult(true),
       ),
-      previewReport: tracked(
-        "platformReporting",
-        "previewReport",
-        async () => buildMockReportGenerationResult(true),
+      generateReport: tracked("platformReporting", "generateReport", async () =>
+        buildMockReportGenerationResult(false),
       ),
-      generateReport: tracked(
-        "platformReporting",
-        "generateReport",
-        async () => buildMockReportGenerationResult(false),
-      ),
-      renderReport: tracked(
-        "platformReporting",
-        "renderReport",
-        async () => ({
-          format: "html",
-          contentType: "text/html",
-          encoding: "utf-8",
-          body: "<p>Rendered</p>",
-          byteLength: 18,
-          checksumSha256: "renderhash",
-        }),
-      ),
+      renderReport: tracked("platformReporting", "renderReport", async () => ({
+        format: "html",
+        contentType: "text/html",
+        encoding: "utf-8",
+        body: "<p>Rendered</p>",
+        byteLength: 18,
+        checksumSha256: "renderhash",
+      })),
       listReportMetadata: tracked(
         "platformReporting",
         "listReportMetadata",
@@ -2404,24 +2675,28 @@ export function createMockPlatformGateway(
       ...options.reporting,
     },
     documents: {
-      create: tracked("documentService", "create", async (_ctx, input: { title?: string }) => ({
-        id: "doc_1",
-        title: input.title ?? "Doc",
-        status: "draft",
-        documentType: "file",
-        classification: { code: "internal" },
-        tagIds: [],
-        permissions: [],
-        creatorUserId: "user_1",
-        tenantId: "tenant_a",
-        lifecycle: {
-          state: "draft",
-          changedAt: "2026-07-13T16:00:00.000Z",
-          changedBy: "user_1",
-        },
-        createdAt: "2026-07-13T16:00:00.000Z",
-        updatedAt: "2026-07-13T16:00:00.000Z",
-      })),
+      create: tracked(
+        "documentService",
+        "create",
+        async (_ctx, input: { title?: string }) => ({
+          id: "doc_1",
+          title: input.title ?? "Doc",
+          status: "draft",
+          documentType: "file",
+          classification: { code: "internal" },
+          tagIds: [],
+          permissions: [],
+          creatorUserId: "user_1",
+          tenantId: "tenant_a",
+          lifecycle: {
+            state: "draft",
+            changedAt: "2026-07-13T16:00:00.000Z",
+            changedBy: "user_1",
+          },
+          createdAt: "2026-07-13T16:00:00.000Z",
+          updatedAt: "2026-07-13T16:00:00.000Z",
+        }),
+      ),
       get: tracked("documentService", "get", async () => ({
         id: "doc_1",
         title: "Doc",
@@ -2502,15 +2777,19 @@ export function createMockPlatformGateway(
       ...options.documentSearchMetadata,
     },
     documentMetadata: {
-      update: tracked("documentMetadata", "update", async (_ctx, input: { documentId: string; title?: string }) => ({
-        id: "meta_1",
-        documentId: input.documentId,
-        title: input.title ?? "Doc",
-        tenantId: "tenant_a",
-        custom: {},
-        createdAt: "2026-07-13T16:00:00.000Z",
-        updatedAt: "2026-07-13T16:00:00.000Z",
-      })),
+      update: tracked(
+        "documentMetadata",
+        "update",
+        async (_ctx, input: { documentId: string; title?: string }) => ({
+          id: "meta_1",
+          documentId: input.documentId,
+          title: input.title ?? "Doc",
+          tenantId: "tenant_a",
+          custom: {},
+          createdAt: "2026-07-13T16:00:00.000Z",
+          updatedAt: "2026-07-13T16:00:00.000Z",
+        }),
+      ),
       ...options.documentMetadata,
     },
     documentVersions: {
@@ -2579,16 +2858,25 @@ export function createMockPlatformGateway(
     },
     documentTags: {
       tag: tracked("documentTag", "tag", async () => [
-        { id: "tag_1", tenantId: "tenant_a", name: "alpha", createdAt: "2026-07-13T16:00:00.000Z" },
+        {
+          id: "tag_1",
+          tenantId: "tenant_a",
+          name: "alpha",
+          createdAt: "2026-07-13T16:00:00.000Z",
+        },
       ]),
       list: tracked("documentTag", "list", async () => []),
       get: tracked("documentTag", "get", async () => null),
       ...options.documentTags,
     },
     documentClassification: {
-      classify: tracked("documentClassification", "classify", async (_ctx, input: { classification: string }) => ({
-        code: input.classification,
-      })),
+      classify: tracked(
+        "documentClassification",
+        "classify",
+        async (_ctx, input: { classification: string }) => ({
+          code: input.classification,
+        }),
+      ),
       ...options.documentClassification,
     },
     documentFolders: {
@@ -2709,9 +2997,7 @@ export function createMockPlatformGateway(
                   organisationId: _ctx.organisationId,
                   classification: "internal",
                 },
-                highlights: [
-                  { field: "title", snippets: ["<em>Fixture</em> Hit"] },
-                ],
+                highlights: [{ field: "title", snippets: ["<em>Fixture</em> Hit"] }],
               },
             ],
             page: 1,
@@ -2735,9 +3021,7 @@ export function createMockPlatformGateway(
           page: 1,
           pageSize: 10,
           hasMore: false,
-          suggestions: [
-            { text: query?.keywords ?? "doc", kind: "query" as const },
-          ],
+          suggestions: [{ text: query?.keywords ?? "doc", kind: "query" as const }],
         }),
       ),
       ...options.searchExecution,
@@ -2748,17 +3032,13 @@ export function createMockPlatformGateway(
         checkedAt: "2026-07-14T12:00:00.000Z",
         message: "ok",
       })),
-      getReadiness: tracked(
-        "searchExecutionHealth",
-        "getReadiness",
-        async () => ({
-          executionEnabled: true,
-          providerBound: true,
-          providerId: "prov_1",
-          providerKind: "meilisearch",
-          healthy: true,
-        }),
-      ),
+      getReadiness: tracked("searchExecutionHealth", "getReadiness", async () => ({
+        executionEnabled: true,
+        providerBound: true,
+        providerId: "prov_1",
+        providerKind: "meilisearch",
+        healthy: true,
+      })),
       ...options.searchExecutionHealth,
     },
     searchExecutionDiagnostics: {
@@ -2900,7 +3180,11 @@ export function createMockPlatformGateway(
           },
         }),
       ),
-      enableProvider: tracked("searchProviders", "enableProvider", async () => undefined),
+      enableProvider: tracked(
+        "searchProviders",
+        "enableProvider",
+        async () => undefined,
+      ),
       disableProvider: tracked(
         "searchProviders",
         "disableProvider",
@@ -2987,16 +3271,12 @@ export function createMockPlatformGateway(
           enabled: true,
         },
       ]),
-      get: tracked(
-        "searchCollections",
-        "get",
-        async (_ctx, collectionId: string) => ({
-          id: collectionId,
-          name: "Documents",
-          scope: "tenant",
-          enabled: true,
-        }),
-      ),
+      get: tracked("searchCollections", "get", async (_ctx, collectionId: string) => ({
+        id: collectionId,
+        name: "Documents",
+        scope: "tenant",
+        enabled: true,
+      })),
       create: tracked(
         "searchCollections",
         "create",
@@ -3072,10 +3352,35 @@ export function createMockPlatformGateway(
       ...options.searchProfiles,
     },
     searchCapabilities: {
-      getCapabilities: tracked(
-        "searchCapabilities",
-        "getCapabilities",
-        async () => ({
+      getCapabilities: tracked("searchCapabilities", "getCapabilities", async () => ({
+        keywords: true,
+        phrases: true,
+        filters: true,
+        sorting: true,
+        pagination: true,
+        facets: true,
+        highlighting: true,
+        suggestions: true,
+        semantic: false,
+        vector: false,
+        fuzzy: false,
+      })),
+      ...options.searchCapabilities,
+    },
+    searchHealth: {
+      getHealth: tracked("searchHealth", "getHealth", async () => ({
+        status: "available",
+        checkedAt: "2026-07-14T12:00:00.000Z",
+      })),
+      ...options.searchHealth,
+    },
+    searchDiagnostics: {
+      getDiagnostics: tracked("searchDiagnostics", "getDiagnostics", async () => ({
+        health: {
+          status: "available",
+          checkedAt: "2026-07-14T12:00:00.000Z",
+        },
+        capabilities: {
           keywords: true,
           phrases: true,
           filters: true,
@@ -3087,53 +3392,20 @@ export function createMockPlatformGateway(
           semantic: false,
           vector: false,
           fuzzy: false,
-        }),
-      ),
-      ...options.searchCapabilities,
-    },
-    searchHealth: {
-      getHealth: tracked("searchHealth", "getHealth", async () => ({
-        status: "available",
-        checkedAt: "2026-07-14T12:00:00.000Z",
+        },
+        statistics: {
+          declaredIndexCount: 1,
+          declaredProviderCount: 1,
+          declaredCollectionCount: 1,
+          declaredSourceCount: 1,
+        },
+        configurationSummary: {
+          defaultPageSize: 20,
+          maxPageSize: 100,
+          enforceTenantIsolation: true,
+          enforcePermissionFilter: true,
+        },
       })),
-      ...options.searchHealth,
-    },
-    searchDiagnostics: {
-      getDiagnostics: tracked(
-        "searchDiagnostics",
-        "getDiagnostics",
-        async () => ({
-          health: {
-            status: "available",
-            checkedAt: "2026-07-14T12:00:00.000Z",
-          },
-          capabilities: {
-            keywords: true,
-            phrases: true,
-            filters: true,
-            sorting: true,
-            pagination: true,
-            facets: true,
-            highlighting: true,
-            suggestions: true,
-            semantic: false,
-            vector: false,
-            fuzzy: false,
-          },
-          statistics: {
-            declaredIndexCount: 1,
-            declaredProviderCount: 1,
-            declaredCollectionCount: 1,
-            declaredSourceCount: 1,
-          },
-          configurationSummary: {
-            defaultPageSize: 20,
-            maxPageSize: 100,
-            enforceTenantIsolation: true,
-            enforcePermissionFilter: true,
-          },
-        }),
-      ),
       ...options.searchDiagnostics,
     },
     searchStatistics: {
@@ -3843,47 +4115,39 @@ export function createMockPlatformGateway(
           deliveryEnabled: false,
           checkedAt: "2026-07-16T12:00:00.000Z",
         })),
-        readiness: tracked(
-          "notification.diagnostics",
-          "readiness",
-          async () => ({
-            ready: true,
-            notificationEnabled: true,
-            persistenceMode: "memory",
-            deliveryEnabled: false,
-            capabilities: ["metadata", "lifecycle", "templates", "preferences"],
-          }),
-        ),
-        capabilities: tracked(
-          "notification.diagnostics",
-          "capabilities",
-          async () => ({
-            delivery: false,
-            channelsModelled: ["in_app", "email", "sms", "push"],
-            lifecycle: [
-              "draft",
-              "pending",
-              "queued",
-              "delivered",
-              "read",
-              "acknowledged",
-              "dismissed",
-              "expired",
-              "archived",
-            ],
-            facets: [
-              "notifications",
-              "templates",
-              "preferences",
-              "categories",
-              "channels",
-              "recipients",
-              "references",
-              "audit",
-              "diagnostics",
-            ],
-          }),
-        ),
+        readiness: tracked("notification.diagnostics", "readiness", async () => ({
+          ready: true,
+          notificationEnabled: true,
+          persistenceMode: "memory",
+          deliveryEnabled: false,
+          capabilities: ["metadata", "lifecycle", "templates", "preferences"],
+        })),
+        capabilities: tracked("notification.diagnostics", "capabilities", async () => ({
+          delivery: false,
+          channelsModelled: ["in_app", "email", "sms", "push"],
+          lifecycle: [
+            "draft",
+            "pending",
+            "queued",
+            "delivered",
+            "read",
+            "acknowledged",
+            "dismissed",
+            "expired",
+            "archived",
+          ],
+          facets: [
+            "notifications",
+            "templates",
+            "preferences",
+            "categories",
+            "channels",
+            "recipients",
+            "references",
+            "audit",
+            "diagnostics",
+          ],
+        })),
         ...(options.notification?.diagnostics ?? {}),
       },
     },
@@ -3942,7 +4206,10 @@ export function createMockPlatformGateway(
         updateMetadata: tracked(
           "configuration.configurations",
           "updateMetadata",
-          async (_ctx, input: { configurationId: string; hierarchyLevel?: string }) => ({
+          async (
+            _ctx,
+            input: { configurationId: string; hierarchyLevel?: string },
+          ) => ({
             id: input.configurationId,
             tenantId: API_TEST_TENANT_A,
             namespaceId: "ns_1",
@@ -4298,7 +4565,14 @@ export function createMockPlatformGateway(
           "capabilities",
           async () => ({
             runtimeApply: false,
-            lifecycle: ["draft", "validated", "approved", "published", "deprecated", "archived"],
+            lifecycle: [
+              "draft",
+              "validated",
+              "approved",
+              "published",
+              "deprecated",
+              "archived",
+            ],
             facets: ["configurations", "namespaces", "groups", "versions"],
           }),
         ),
@@ -4321,18 +4595,22 @@ export function createMockPlatformGateway(
             revision: 1,
           },
         ]),
-        get: tracked("administration.modules", "get", async (_ctx, moduleId: string) => ({
-          id: moduleId,
-          tenantId: API_TEST_TENANT_A,
-          key: "projects",
-          name: "Projects",
-          status: "draft",
-          createdAt: "2026-07-16T00:00:00.000Z",
-          updatedAt: "2026-07-16T00:00:00.000Z",
-          createdBy: API_TEST_USER_ID,
-          updatedBy: API_TEST_USER_ID,
-          revision: 1,
-        })),
+        get: tracked(
+          "administration.modules",
+          "get",
+          async (_ctx, moduleId: string) => ({
+            id: moduleId,
+            tenantId: API_TEST_TENANT_A,
+            key: "projects",
+            name: "Projects",
+            status: "draft",
+            createdAt: "2026-07-16T00:00:00.000Z",
+            updatedAt: "2026-07-16T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
         create: tracked(
           "administration.modules",
           "create",
@@ -4365,30 +4643,38 @@ export function createMockPlatformGateway(
             revision: 2,
           }),
         ),
-        archive: tracked("administration.modules", "archive", async (_ctx, moduleId: string) => ({
-          id: moduleId,
-          tenantId: API_TEST_TENANT_A,
-          key: "projects",
-          name: "Projects",
-          status: "archived",
-          createdAt: "2026-07-16T00:00:00.000Z",
-          updatedAt: "2026-07-16T00:00:00.000Z",
-          createdBy: API_TEST_USER_ID,
-          updatedBy: API_TEST_USER_ID,
-          revision: 2,
-        })),
-        restore: tracked("administration.modules", "restore", async (_ctx, moduleId: string) => ({
-          id: moduleId,
-          tenantId: API_TEST_TENANT_A,
-          key: "projects",
-          name: "Projects",
-          status: "draft",
-          createdAt: "2026-07-16T00:00:00.000Z",
-          updatedAt: "2026-07-16T00:00:00.000Z",
-          createdBy: API_TEST_USER_ID,
-          updatedBy: API_TEST_USER_ID,
-          revision: 3,
-        })),
+        archive: tracked(
+          "administration.modules",
+          "archive",
+          async (_ctx, moduleId: string) => ({
+            id: moduleId,
+            tenantId: API_TEST_TENANT_A,
+            key: "projects",
+            name: "Projects",
+            status: "archived",
+            createdAt: "2026-07-16T00:00:00.000Z",
+            updatedAt: "2026-07-16T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        restore: tracked(
+          "administration.modules",
+          "restore",
+          async (_ctx, moduleId: string) => ({
+            id: moduleId,
+            tenantId: API_TEST_TENANT_A,
+            key: "projects",
+            name: "Projects",
+            status: "draft",
+            createdAt: "2026-07-16T00:00:00.000Z",
+            updatedAt: "2026-07-16T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 3,
+          }),
+        ),
         transition: tracked(
           "administration.modules",
           "transition",
@@ -4575,15 +4861,19 @@ export function createMockPlatformGateway(
       },
       registrations: {
         list: tracked("administration.registrations", "list", async () => []),
-        get: tracked("administration.registrations", "get", async (_ctx, id: string) => ({
-          id,
-          tenantId: API_TEST_TENANT_A,
-          moduleKey: "projects",
-          version: "1.0.0",
-          status: "draft",
-          registeredAt: "2026-07-16T00:00:00.000Z",
-          registeredBy: API_TEST_USER_ID,
-        })),
+        get: tracked(
+          "administration.registrations",
+          "get",
+          async (_ctx, id: string) => ({
+            id,
+            tenantId: API_TEST_TENANT_A,
+            moduleKey: "projects",
+            version: "1.0.0",
+            status: "draft",
+            registeredAt: "2026-07-16T00:00:00.000Z",
+            registeredBy: API_TEST_USER_ID,
+          }),
+        ),
         create: tracked(
           "administration.registrations",
           "create",
@@ -4653,22 +4943,26 @@ export function createMockPlatformGateway(
       },
       capabilities: {
         list: tracked("administration.capabilities", "list", async () => []),
-        get: tracked("administration.capabilities", "get", async (_ctx, id: string) => ({
-          id,
-          tenantId: API_TEST_TENANT_A,
-          moduleId: "mod_1",
-          key: "manage",
-          name: "Manage",
-          enabled: true,
-          available: true,
-          healthy: true,
-          certified: false,
-          productionReady: false,
-          owner: "platform",
-          version: "1.0.0",
-          createdAt: "2026-07-16T00:00:00.000Z",
-          updatedAt: "2026-07-16T00:00:00.000Z",
-        })),
+        get: tracked(
+          "administration.capabilities",
+          "get",
+          async (_ctx, id: string) => ({
+            id,
+            tenantId: API_TEST_TENANT_A,
+            moduleId: "mod_1",
+            key: "manage",
+            name: "Manage",
+            enabled: true,
+            available: true,
+            healthy: true,
+            certified: false,
+            productionReady: false,
+            owner: "platform",
+            version: "1.0.0",
+            createdAt: "2026-07-16T00:00:00.000Z",
+            updatedAt: "2026-07-16T00:00:00.000Z",
+          }),
+        ),
         create: tracked(
           "administration.capabilities",
           "create",
@@ -5405,7 +5699,10 @@ export function createMockPlatformGateway(
         create: tracked(
           "identity.departments",
           "create",
-          async (_ctx, input: { key: string; name: string; organisationId: string }) => ({
+          async (
+            _ctx,
+            input: { key: string; name: string; organisationId: string },
+          ) => ({
             id: "dept_new",
             tenantId: API_TEST_TENANT_A,
             organisationId: input.organisationId,
@@ -5445,20 +5742,16 @@ export function createMockPlatformGateway(
             updatedAt: "2026-07-16T00:00:00.000Z",
           },
         ]),
-        get: tracked(
-          "identity.positions",
-          "get",
-          async (_ctx, positionId: string) => ({
-            id: positionId,
-            tenantId: API_TEST_TENANT_A,
-            organisationId: "org_1",
-            key: "engineer",
-            name: "Engineer",
-            status: "active",
-            createdAt: "2026-07-16T00:00:00.000Z",
-            updatedAt: "2026-07-16T00:00:00.000Z",
-          }),
-        ),
+        get: tracked("identity.positions", "get", async (_ctx, positionId: string) => ({
+          id: positionId,
+          tenantId: API_TEST_TENANT_A,
+          organisationId: "org_1",
+          key: "engineer",
+          name: "Engineer",
+          status: "active",
+          createdAt: "2026-07-16T00:00:00.000Z",
+          updatedAt: "2026-07-16T00:00:00.000Z",
+        })),
         create: tracked(
           "identity.positions",
           "create",
@@ -5588,7 +5881,11 @@ export function createMockPlatformGateway(
           "create",
           async (
             _ctx,
-            input: { subjectKind: string; subjectId: string; serviceCapability: string },
+            input: {
+              subjectKind: string;
+              subjectId: string;
+              serviceCapability: string;
+            },
           ) => ({
             id: "assignment_new",
             tenantId: API_TEST_TENANT_A,
@@ -5905,30 +6202,26 @@ export function createMockPlatformGateway(
           facets: ["users", "groups", "roles"],
           serviceCapabilities: ["projects", "support"],
         })),
-        capabilities: tracked(
-          "identity.diagnostics",
-          "capabilities",
-          async () => ({
-            facets: [
-              "users",
-              "groups",
-              "roles",
-              "organisations",
-              "tenants",
-              "departments",
-              "positions",
-              "memberships",
-              "serviceAssignments",
-              "invitations",
-              "activation",
-              "deactivation",
-              "policies",
-              "audit",
-              "history",
-              "references",
-            ],
-          }),
-        ),
+        capabilities: tracked("identity.diagnostics", "capabilities", async () => ({
+          facets: [
+            "users",
+            "groups",
+            "roles",
+            "organisations",
+            "tenants",
+            "departments",
+            "positions",
+            "memberships",
+            "serviceAssignments",
+            "invitations",
+            "activation",
+            "deactivation",
+            "policies",
+            "audit",
+            "history",
+            "references",
+          ],
+        })),
         ...(options.identity?.diagnostics ?? {}),
       },
     },
@@ -5980,7 +6273,6 @@ export function createMockPlatformGateway(
           "observe.healthChecks",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock healthChecks",
@@ -6043,7 +6335,6 @@ export function createMockPlatformGateway(
           "observe.readinessChecks",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock readinessChecks",
@@ -6106,7 +6397,6 @@ export function createMockPlatformGateway(
           "observe.livenessChecks",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock livenessChecks",
@@ -6169,7 +6459,6 @@ export function createMockPlatformGateway(
           "observe.serviceHealth",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock serviceHealth",
@@ -6232,7 +6521,6 @@ export function createMockPlatformGateway(
           "observe.serviceStatus",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock serviceStatus",
@@ -6295,7 +6583,6 @@ export function createMockPlatformGateway(
           "observe.componentStatus",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock componentStatus",
@@ -6358,7 +6645,6 @@ export function createMockPlatformGateway(
           "observe.metricDefinitions",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock metricDefinitions",
@@ -6421,7 +6707,6 @@ export function createMockPlatformGateway(
           "observe.metricSamples",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock metricSamples",
@@ -6484,7 +6769,6 @@ export function createMockPlatformGateway(
           "observe.alertDefinitions",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock alertDefinitions",
@@ -6547,7 +6831,6 @@ export function createMockPlatformGateway(
           "observe.alertStates",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock alertStates",
@@ -6579,19 +6862,23 @@ export function createMockPlatformGateway(
             revision: 1,
           },
         ]),
-        get: tracked("observe.dashboardDefinitions", "get", async (_ctx, id: string) => ({
-          id,
-          tenantId: API_TEST_TENANT_A,
-          serviceKey: "platform-api",
-          name: "Mock dashboardDefinitions",
-          status: "healthy",
-          providerKind: "internal",
-          createdAt: "2026-07-17T00:00:00.000Z",
-          updatedAt: "2026-07-17T00:00:00.000Z",
-          createdBy: API_TEST_USER_ID,
-          updatedBy: API_TEST_USER_ID,
-          revision: 1,
-        })),
+        get: tracked(
+          "observe.dashboardDefinitions",
+          "get",
+          async (_ctx, id: string) => ({
+            id,
+            tenantId: API_TEST_TENANT_A,
+            serviceKey: "platform-api",
+            name: "Mock dashboardDefinitions",
+            status: "healthy",
+            providerKind: "internal",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
         create: tracked(
           "observe.dashboardDefinitions",
           "create",
@@ -6610,7 +6897,6 @@ export function createMockPlatformGateway(
           "observe.dashboardDefinitions",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock dashboardDefinitions",
@@ -6673,7 +6959,6 @@ export function createMockPlatformGateway(
           "observe.logSources",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock logSources",
@@ -6736,7 +7021,6 @@ export function createMockPlatformGateway(
           "observe.traceDefinitions",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock traceDefinitions",
@@ -6799,7 +7083,6 @@ export function createMockPlatformGateway(
           "observe.traceSpans",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock traceSpans",
@@ -6862,7 +7145,6 @@ export function createMockPlatformGateway(
           "observe.incidentReferences",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock incidentReferences",
@@ -6925,7 +7207,6 @@ export function createMockPlatformGateway(
           "observe.maintenanceWindows",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock maintenanceWindows",
@@ -6988,7 +7269,6 @@ export function createMockPlatformGateway(
           "observe.healthSummaries",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock healthSummaries",
@@ -7051,7 +7331,6 @@ export function createMockPlatformGateway(
           "observe.metadata",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             serviceKey: "platform-api",
             name: "Mock metadata",
@@ -7079,11 +7358,7 @@ export function createMockPlatformGateway(
           observeEnabled: true,
           persistenceMode: "memory",
           providerExecutionEnabled: false,
-          capabilities: [
-            "healthChecks",
-            "metadata",
-            "diagnostics",
-          ],
+          capabilities: ["healthChecks", "metadata", "diagnostics"],
         })),
         capabilities: tracked("observe.diagnostics", "capabilities", async () => ({
           providerExecution: false,
@@ -7156,7 +7431,6 @@ export function createMockPlatformGateway(
           "observe.diagnostics",
           "update",
           async (_ctx, input: { id: string } & Record<string, unknown>) => ({
-            id: input.id,
             tenantId: API_TEST_TENANT_A,
             key: "platform",
             name: "Platform diagnostic",
@@ -7173,13 +7447,1348 @@ export function createMockPlatformGateway(
         ...(options.observe?.diagnostics ?? {}),
       },
     },
+    metrics: {
+      metrics: {
+        list: tracked("metrics.metrics", "list", async () => [
+          {
+            id: "metrics_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_metrics",
+            name: "Mock Metric",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.metrics", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_metrics",
+          name: "Mock Metric",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.metrics",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "metrics_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.metrics",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_metrics",
+            name: "Mock Metric",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.metrics ?? {}),
+      },
+      definitions: {
+        list: tracked("metrics.definitions", "list", async () => [
+          {
+            id: "definitions_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_definitions",
+            name: "Mock Definition",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.definitions", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_definitions",
+          name: "Mock Definition",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.definitions",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "definitions_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.definitions",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_definitions",
+            name: "Mock Definition",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.definitions ?? {}),
+      },
+      versions: {
+        list: tracked("metrics.versions", "list", async () => [
+          {
+            id: "versions_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_versions",
+            name: "Mock Version",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.versions", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_versions",
+          name: "Mock Version",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.versions",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "versions_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.versions",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_versions",
+            name: "Mock Version",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.versions ?? {}),
+      },
+      categories: {
+        list: tracked("metrics.categories", "list", async () => [
+          {
+            id: "categories_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_categories",
+            name: "Mock Category",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.categories", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_categories",
+          name: "Mock Category",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.categories",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "categories_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.categories",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_categories",
+            name: "Mock Category",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.categories ?? {}),
+      },
+      groups: {
+        list: tracked("metrics.groups", "list", async () => [
+          {
+            id: "groups_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_groups",
+            name: "Mock Group",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.groups", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_groups",
+          name: "Mock Group",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.groups",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "groups_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.groups",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_groups",
+            name: "Mock Group",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.groups ?? {}),
+      },
+      dimensions: {
+        list: tracked("metrics.dimensions", "list", async () => [
+          {
+            id: "dimensions_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_dimensions",
+            name: "Mock Dimension",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.dimensions", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_dimensions",
+          name: "Mock Dimension",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.dimensions",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "dimensions_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.dimensions",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_dimensions",
+            name: "Mock Dimension",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.dimensions ?? {}),
+      },
+      labels: {
+        list: tracked("metrics.labels", "list", async () => [
+          {
+            id: "labels_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_labels",
+            name: "Mock Label",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.labels", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_labels",
+          name: "Mock Label",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.labels",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "labels_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.labels",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_labels",
+            name: "Mock Label",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.labels ?? {}),
+      },
+      units: {
+        list: tracked("metrics.units", "list", async () => [
+          {
+            id: "units_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_units",
+            name: "Mock Unit",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.units", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_units",
+          name: "Mock Unit",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.units",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "units_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.units",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_units",
+            name: "Mock Unit",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.units ?? {}),
+      },
+      formulas: {
+        list: tracked("metrics.formulas", "list", async () => [
+          {
+            id: "formulas_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_formulas",
+            name: "Mock Formula",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.formulas", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_formulas",
+          name: "Mock Formula",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.formulas",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "formulas_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.formulas",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_formulas",
+            name: "Mock Formula",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.formulas ?? {}),
+      },
+      aggregations: {
+        list: tracked("metrics.aggregations", "list", async () => [
+          {
+            id: "aggregations_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_aggregations",
+            name: "Mock Aggregation",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.aggregations", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_aggregations",
+          name: "Mock Aggregation",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.aggregations",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "aggregations_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.aggregations",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_aggregations",
+            name: "Mock Aggregation",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.aggregations ?? {}),
+      },
+      thresholds: {
+        list: tracked("metrics.thresholds", "list", async () => [
+          {
+            id: "thresholds_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_thresholds",
+            name: "Mock Threshold",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.thresholds", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_thresholds",
+          name: "Mock Threshold",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.thresholds",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "thresholds_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.thresholds",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_thresholds",
+            name: "Mock Threshold",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.thresholds ?? {}),
+      },
+      owners: {
+        list: tracked("metrics.owners", "list", async () => [
+          {
+            id: "owners_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_owners",
+            name: "Mock Owner",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.owners", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_owners",
+          name: "Mock Owner",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.owners",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "owners_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.owners",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_owners",
+            name: "Mock Owner",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.owners ?? {}),
+      },
+      consumers: {
+        list: tracked("metrics.consumers", "list", async () => [
+          {
+            id: "consumers_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_consumers",
+            name: "Mock Consumer",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.consumers", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_consumers",
+          name: "Mock Consumer",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.consumers",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "consumers_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.consumers",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_consumers",
+            name: "Mock Consumer",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.consumers ?? {}),
+      },
+      retentionPolicies: {
+        list: tracked("metrics.retentionPolicies", "list", async () => [
+          {
+            id: "retention_policies_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_retentionPolicies",
+            name: "Mock RetentionPolicy",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.retentionPolicies", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_retentionPolicies",
+          name: "Mock RetentionPolicy",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.retentionPolicies",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "retention_policies_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.retentionPolicies",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_retentionPolicies",
+            name: "Mock RetentionPolicy",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.retentionPolicies ?? {}),
+      },
+      classifications: {
+        list: tracked("metrics.classifications", "list", async () => [
+          {
+            id: "classifications_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_classifications",
+            name: "Mock Classification",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.classifications", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_classifications",
+          name: "Mock Classification",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.classifications",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "classifications_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.classifications",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_classifications",
+            name: "Mock Classification",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.classifications ?? {}),
+      },
+      dependencies: {
+        list: tracked("metrics.dependencies", "list", async () => [
+          {
+            id: "dependencies_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_dependencies",
+            name: "Mock Dependency",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.dependencies", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_dependencies",
+          name: "Mock Dependency",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.dependencies",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "dependencies_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.dependencies",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_dependencies",
+            name: "Mock Dependency",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.dependencies ?? {}),
+      },
+      kpis: {
+        list: tracked("metrics.kpis", "list", async () => [
+          {
+            id: "kpis_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_kpis",
+            name: "Mock KPI",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.kpis", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_kpis",
+          name: "Mock KPI",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.kpis",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "kpis_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.kpis",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_kpis",
+            name: "Mock KPI",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.kpis ?? {}),
+      },
+      kpiGroups: {
+        list: tracked("metrics.kpiGroups", "list", async () => [
+          {
+            id: "kpi_groups_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_kpiGroups",
+            name: "Mock KPIGroup",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.kpiGroups", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_kpiGroups",
+          name: "Mock KPIGroup",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.kpiGroups",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "kpi_groups_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.kpiGroups",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_kpiGroups",
+            name: "Mock KPIGroup",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.kpiGroups ?? {}),
+      },
+      kpiTargets: {
+        list: tracked("metrics.kpiTargets", "list", async () => [
+          {
+            id: "kpi_targets_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_kpiTargets",
+            name: "Mock KPITarget",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.kpiTargets", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_kpiTargets",
+          name: "Mock KPITarget",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.kpiTargets",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "kpi_targets_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.kpiTargets",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_kpiTargets",
+            name: "Mock KPITarget",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.kpiTargets ?? {}),
+      },
+      relationships: {
+        list: tracked("metrics.relationships", "list", async () => [
+          {
+            id: "relationships_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_relationships",
+            name: "Mock Relationship",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.relationships", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_relationships",
+          name: "Mock Relationship",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.relationships",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "relationships_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.relationships",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_relationships",
+            name: "Mock Relationship",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.relationships ?? {}),
+      },
+      metadata: {
+        list: tracked("metrics.metadata", "list", async () => [
+          {
+            id: "metadata_1",
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_metadata",
+            name: "Mock Metadata",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          },
+        ]),
+        get: tracked("metrics.metadata", "get", async (_ctx, id: string) => ({
+          id,
+          tenantId: API_TEST_TENANT_A,
+          key: "mock_metadata",
+          name: "Mock Metadata",
+          status: "active",
+          createdAt: "2026-07-17T00:00:00.000Z",
+          updatedAt: "2026-07-17T00:00:00.000Z",
+          createdBy: API_TEST_USER_ID,
+          updatedBy: API_TEST_USER_ID,
+          revision: 1,
+        })),
+        create: tracked(
+          "metrics.metadata",
+          "create",
+          async (_ctx, input: Record<string, unknown>) => ({
+            id: "metadata_new",
+            tenantId: API_TEST_TENANT_A,
+            ...input,
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 1,
+          }),
+        ),
+        update: tracked(
+          "metrics.metadata",
+          "update",
+          async (_ctx, input: { id: string } & Record<string, unknown>) => ({
+            ...input,
+            id: input.id,
+            tenantId: API_TEST_TENANT_A,
+            key: "mock_metadata",
+            name: "Mock Metadata",
+            status: "active",
+            createdAt: "2026-07-17T00:00:00.000Z",
+            updatedAt: "2026-07-17T00:00:00.000Z",
+            createdBy: API_TEST_USER_ID,
+            updatedBy: API_TEST_USER_ID,
+            revision: 2,
+          }),
+        ),
+        ...(options.metricsPlatform?.metadata ?? {}),
+      },
+      diagnostics: {
+        health: tracked("metrics.diagnostics", "health", async () => ({
+          status: "healthy",
+          persistenceMode: "memory",
+          formulaExecutionEnabled: false,
+          kpiExecutionEnabled: false,
+          providerIntegrationEnabled: false,
+          checkedAt: "2026-07-17T00:00:00.000Z",
+        })),
+        readiness: tracked("metrics.diagnostics", "readiness", async () => ({
+          ready: true,
+          metricsEnabled: true,
+          persistenceMode: "memory",
+          formulaExecutionEnabled: false,
+          kpiExecutionEnabled: false,
+          providerIntegrationEnabled: false,
+          capabilities: [
+            "metrics",
+            "definitions",
+            "versions",
+            "categories",
+            "groups",
+            "dimensions",
+            "labels",
+            "units",
+            "formulas",
+            "aggregations",
+            "thresholds",
+            "owners",
+            "consumers",
+            "retentionPolicies",
+            "classifications",
+            "dependencies",
+            "kpis",
+            "kpiGroups",
+            "kpiTargets",
+            "relationships",
+            "metadata",
+          ],
+        })),
+        capabilities: tracked("metrics.diagnostics", "capabilities", async () => ({
+          formulaExecution: false,
+          kpiExecution: false,
+          providerIntegration: false,
+          facets: [
+            "metrics",
+            "definitions",
+            "versions",
+            "categories",
+            "groups",
+            "dimensions",
+            "labels",
+            "units",
+            "formulas",
+            "aggregations",
+            "thresholds",
+            "owners",
+            "consumers",
+            "retentionPolicies",
+            "classifications",
+            "dependencies",
+            "kpis",
+            "kpiGroups",
+            "kpiTargets",
+            "relationships",
+            "metadata",
+          ],
+          metadataCompleteness: "platform-services",
+        })),
+        ...(options.metricsPlatform?.diagnostics ?? {}),
+      },
+    },
     users: {} as PlatformServiceGateway["users"],
     search: {} as PlatformServiceGateway["search"],
     assertContext: () => undefined,
   } as unknown as PlatformServiceGateway;
 }
 
-export function installMockGateway(options: MockGatewayOptions = {}): PlatformServiceGateway {
+export function installMockGateway(
+  options: MockGatewayOptions = {},
+): PlatformServiceGateway {
   const gateway = createMockPlatformGateway(options);
   setPlatformApiGatewayBootstrapForTests(
     createTestPlatformApiGatewayBootstrap(gateway, {
@@ -7229,15 +8838,25 @@ export function installMockGateway(options: MockGatewayOptions = {}): PlatformSe
         persistenceMode: "memory",
         providerExecutionEnabled: false,
       },
+      metricsEnabled: true,
+      metricsReadiness: {
+        metricsEnabled: true,
+        persistenceMode: "memory",
+        formulaExecutionEnabled: false,
+        kpiExecutionEnabled: false,
+        providerIntegrationEnabled: false,
+      },
     }),
   );
   return gateway;
 }
 
-export function buildMockSession(overrides: {
-  readonly userId?: string;
-  readonly tenantId?: string | null;
-} = {}) {
+export function buildMockSession(
+  overrides: {
+    readonly userId?: string;
+    readonly tenantId?: string | null;
+  } = {},
+) {
   const userId = overrides.userId ?? API_TEST_USER_ID;
   const tenantId =
     overrides.tenantId === null ? undefined : (overrides.tenantId ?? API_TEST_TENANT_A);

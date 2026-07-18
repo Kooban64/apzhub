@@ -2,7 +2,7 @@
 
 **Milestone:** OSS-100  
 **Status:** Canonical interface specification — **planning only**  
-**Authority:** [Platform Integration SDK Architecture](./APZHUB-Platform-Integration-SDK-Architecture.md) · [Integration SDK 026](../026-integration-sdk-adapter-framework-integration-manifest-specification.md) · [API Gateway Standards 010](../010-api-gateway-integration-communication-standards.md)
+**Authority:** [Platform Integration SDK Architecture](../architecture/APZHUB-Platform-Integration-SDK-Architecture.md) · [Integration SDK 026](../026-integration-sdk-adapter-framework-integration-manifest-specification.md) · [API Gateway Standards 010](../010-api-gateway-integration-communication-standards.md)
 
 ---
 
@@ -24,7 +24,7 @@ interface IntegrationRequestContext {
   readonly causationId?: string;
   readonly tenantId: string;
   readonly workspaceId?: string;
-  readonly userId?: string;           // absent for service-account calls
+  readonly userId?: string; // absent for service-account calls
   readonly locale?: string;
   readonly timezone?: string;
   readonly permissionSnapshot?: readonly string[];
@@ -57,15 +57,10 @@ interface ManagedConnection {
 }
 
 type ConnectionState =
-  | "idle"
-  | "connecting"
-  | "ready"
-  | "degraded"
-  | "closed"
-  | "failed";
+  "idle" | "connecting" | "ready" | "degraded" | "closed" | "failed";
 ```
 
-See [Connection Lifecycle](./APZHUB-Integration-Connection-Lifecycle.md).
+See [Connection Lifecycle](../architecture/APZHUB-Integration-Connection-Lifecycle.md).
 
 ### `Connection` (handle)
 
@@ -109,7 +104,7 @@ interface AuthenticationResult {
 
 interface AuthenticationSession {
   readonly kind: "bearer" | "api-key" | "basic" | "oauth" | "forward-auth";
-  readonly credentialRef: string;    // Vault ref — never raw secret in logs
+  readonly credentialRef: string; // Vault ref — never raw secret in logs
   readonly expiresAt?: string;
   readonly headers: Readonly<Record<string, string>>;
 }
@@ -165,13 +160,9 @@ interface IntegrationResponse<T> {
 
 ```typescript
 interface GraphQLIntegrationClient {
-  query<TData>(
-    options: GraphQLRequestOptions,
-  ): Promise<IntegrationResponse<TData>>;
+  query<TData>(options: GraphQLRequestOptions): Promise<IntegrationResponse<TData>>;
 
-  mutate<TData>(
-    options: GraphQLRequestOptions,
-  ): Promise<IntegrationResponse<TData>>;
+  mutate<TData>(options: GraphQLRequestOptions): Promise<IntegrationResponse<TData>>;
 }
 ```
 
@@ -198,7 +189,7 @@ interface NormalizedVendorEvent {
   readonly vendorEventType: string;
   readonly vendorEntityId: string;
   readonly occurredAt: string;
-  readonly payload: unknown;       // adapter-internal only
+  readonly payload: unknown; // adapter-internal only
   readonly correlationId: string;
 }
 ```
@@ -349,15 +340,9 @@ Provisioning is **idempotent**. Duplicate calls return existing vendor scope ID.
 
 ```typescript
 interface UserMappingProvider {
-  resolvePlatformUser(
-    vendorUserId: string,
-    tenantId: string,
-  ): Promise<string | null>;
+  resolvePlatformUser(vendorUserId: string, tenantId: string): Promise<string | null>;
 
-  resolveVendorUser(
-    platformUserId: string,
-    tenantId: string,
-  ): Promise<string | null>;
+  resolveVendorUser(platformUserId: string, tenantId: string): Promise<string | null>;
 
   ensureVendorUser(
     platformUserId: string,
@@ -415,9 +400,7 @@ interface EntityMappingProvider {
     tenantId: string,
   ): Promise<string | null>;
 
-  bind(
-    binding: EntityMappingBinding,
-  ): Promise<EntityMappingRecord>;
+  bind(binding: EntityMappingBinding): Promise<EntityMappingRecord>;
 }
 
 interface EntityMappingBinding {
@@ -437,16 +420,13 @@ interface EntityMappingBinding {
 
 ```typescript
 interface ErrorTranslator {
-  translate(
-    error: unknown,
-    context: ErrorTranslationContext,
-  ): IntegrationError;
+  translate(error: unknown, context: ErrorTranslationContext): IntegrationError;
 }
 
 interface IntegrationError {
   readonly category: IntegrationErrorCategory;
   readonly code: string;
-  readonly message: string;          // safe for operator logs — not raw vendor body
+  readonly message: string; // safe for operator logs — not raw vendor body
   readonly retryable: boolean;
   readonly correlationId: string;
   readonly vendorStatusCode?: number;
@@ -467,7 +447,7 @@ type IntegrationErrorCategory =
   | "internal";
 ```
 
-See [Error Translation Model](./APZHUB-Integration-Error-Translation-Model.md).
+See [Error Translation Model](../architecture/APZHUB-Integration-Error-Translation-Model.md).
 
 ---
 
@@ -477,7 +457,10 @@ See [Error Translation Model](./APZHUB-Integration-Error-Translation-Model.md).
 
 ```typescript
 interface VersionProvider {
-  probe(connection: Connection, context: IntegrationRequestContext): Promise<VendorVersionInfo>;
+  probe(
+    connection: Connection,
+    context: IntegrationRequestContext,
+  ): Promise<VendorVersionInfo>;
 
   checkCompatibility(
     detected: VendorVersionInfo,
@@ -504,10 +487,7 @@ interface VersionCompatibilityResult {
 }
 
 type VersionCompatibilityStatus =
-  | "compatible"
-  | "warning"
-  | "incompatible"
-  | "not_checked";
+  "compatible" | "warning" | "incompatible" | "not_checked";
 ```
 
 Declared ranges live in `integration.yaml` `documentation` block (026).
@@ -668,7 +648,9 @@ abstract class AdapterBase implements LifecycleParticipant {
   protected constructor(deps: AdapterBaseDependencies) {}
 
   abstract health(context: IntegrationRequestContext): Promise<IntegrationHealthResult>;
-  abstract diagnostics(context: IntegrationRequestContext): Promise<IntegrationDiagnosticsPayload>;
+  abstract diagnostics(
+    context: IntegrationRequestContext,
+  ): Promise<IntegrationDiagnosticsPayload>;
 
   // LifecycleParticipant — default SDK implementations with vendor hooks
   onEnable(context: LifecycleContext): Promise<LifecycleResult>;
@@ -683,7 +665,7 @@ abstract class AdapterBase implements LifecycleParticipant {
 }
 ```
 
-See [Base Adapter Pattern](./APZHUB-Base-Adapter-Pattern.md).
+See [Base Adapter Pattern](../architecture/APZHUB-Base-Adapter-Pattern.md).
 
 ---
 
@@ -694,7 +676,10 @@ Domain adapters (e.g. `PlaneAdapter`) extend `AdapterBase` and add **domain meth
 ```typescript
 interface PlaneAdapter extends AdapterBase {
   listProjects(context: IntegrationRequestContext): Promise<ProjectListResult>;
-  createTask(context: IntegrationRequestContext, input: CreateTaskInput): Promise<TaskResult>;
+  createTask(
+    context: IntegrationRequestContext,
+    input: CreateTaskInput,
+  ): Promise<TaskResult>;
   // … domain methods — APZHUB DTOs only
 }
 ```
@@ -705,6 +690,6 @@ interface PlaneAdapter extends AdapterBase {
 
 ## Related
 
-- [Platform Integration SDK Architecture](./APZHUB-Platform-Integration-SDK-Architecture.md)
-- [Base Adapter Pattern](./APZHUB-Base-Adapter-Pattern.md)
+- [Platform Integration SDK Architecture](../architecture/APZHUB-Platform-Integration-SDK-Architecture.md)
+- [Base Adapter Pattern](../architecture/APZHUB-Base-Adapter-Pattern.md)
 - [OSS-100 Backlog](../backlog/OSS-100-Platform-Integration-SDK-Backlog.md)

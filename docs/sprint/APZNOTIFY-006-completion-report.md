@@ -14,11 +14,11 @@ Formally closed the Platform Notification SoR programme wave. Froze contracts, C
 
 ## Wave Summary
 
-| Milestone | Outcome |
-| --------- | ------- |
-| APZNOTIFY-001…004 | Foundation → Services → HTTP/Client → Workbench |
-| APZNOTIFY-005 | Vertical Certification **PRODUCTION_READY_WITH_LIMITATIONS** |
-| APZNOTIFY-006 | Wave closeout + architecture freeze |
+| Milestone         | Outcome                                                      |
+| ----------------- | ------------------------------------------------------------ |
+| APZNOTIFY-001…004 | Foundation → Services → HTTP/Client → Workbench              |
+| APZNOTIFY-005     | Vertical Certification **PRODUCTION_READY_WITH_LIMITATIONS** |
+| APZNOTIFY-006     | Wave closeout + architecture freeze                          |
 
 See [Programme Summary](./APZNOTIFY-006-programme-summary.md) · [Wave Closeout Report](./APZNOTIFY-006-wave-closeout-report.md).
 
@@ -45,12 +45,12 @@ Metadata SoR only. **DELIVERY PROVIDERS NOT AVAILABLE.**
 
 ## Quality Evidence
 
-| Gate | Result |
-| ---- | ------ |
-| `pnpm audit:notification-vertical` | PASS |
-| `pnpm audit:notification-wave` | PASS |
-| OpenAPI validate | PASS |
-| Package versions | Frozen (contracts/core 0.2.0 · persistence 0.1.0 · services 0.21.0) |
+| Gate                               | Result                                                              |
+| ---------------------------------- | ------------------------------------------------------------------- |
+| `pnpm audit:notification-vertical` | PASS                                                                |
+| `pnpm audit:notification-wave`     | PASS                                                                |
+| OpenAPI validate                   | PASS                                                                |
+| Package versions                   | Frozen (contracts/core 0.2.0 · persistence 0.1.0 · services 0.21.0) |
 
 Details: [Quality Evidence](../reviews/APZNOTIFY-006-Quality-Evidence.md) · [Wave Certification](../reviews/APZNOTIFY-006-Wave-Certification.md)
 
@@ -60,10 +60,10 @@ Details: [Quality Evidence](../reviews/APZNOTIFY-006-Quality-Evidence.md) · [Wa
 
 ## Known Limitations
 
-- Metadata plane only  
-- Delivery providers unavailable by design  
-- Playwright live LIMITED (external Testing slug conflict)  
-- Live Postgres optional in unit CI  
+- Metadata plane only
+- Delivery providers unavailable by design
+- Playwright live LIMITED (external Testing slug conflict)
+- Live Postgres optional in unit CI
 
 ## Operational Readiness
 
@@ -71,15 +71,15 @@ Details: [Quality Evidence](../reviews/APZNOTIFY-006-Quality-Evidence.md) · [Wa
 
 ## Documentation Produced
 
-- Wave Closeout Report · Programme Summary · Completion Report  
-- Architecture Freeze Notice · Operational Readiness Guide · Future Delivery Framework Guide  
-- Wave Certification · Quality Evidence  
+- Wave Closeout Report · Programme Summary · Completion Report
+- Architecture Freeze Notice · Operational Readiness Guide · Future Delivery Framework Guide
+- Wave Certification · Quality Evidence
 
 ## Technical Debt
 
-- Playwright slug conflict remains platform Testing debt  
-- Delivery plane deferred to APZNOTIFY-007 (roadmap)  
-- Deeper live authz E2E with real sessions optional  
+- Playwright slug conflict remains platform Testing debt
+- Delivery plane deferred to APZNOTIFY-007 (roadmap)
+- Deeper live authz E2E with real sessions optional
 
 ## Future Extension Strategy
 

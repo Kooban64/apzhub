@@ -11,7 +11,10 @@ import type {
 
 const NOW = "2026-07-17T00:00:00.000Z";
 
-function entity(id: string, extra: Record<string, unknown> = {}): ObserveEntityViewModel {
+function entity(
+  id: string,
+  extra: Record<string, unknown> = {},
+): ObserveEntityViewModel {
   return {
     id,
     tenantId: "tenant_mock",
@@ -29,7 +32,11 @@ function collection<T>(items: readonly T[]): ObserveCollectionResult<T> {
 }
 
 function mockFacet(sampleId: string, createId: string) {
-  let current = entity(sampleId, { name: "mock", status: "healthy", providerKind: "internal" });
+  let current = entity(sampleId, {
+    name: "mock",
+    status: "healthy",
+    providerKind: "internal",
+  });
   return {
     async list() {
       return collection([current]);

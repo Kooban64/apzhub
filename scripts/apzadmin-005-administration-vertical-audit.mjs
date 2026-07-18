@@ -39,7 +39,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -137,7 +138,10 @@ const RUNTIME_METHOD =
 // ---------------------------------------------------------------------------
 scan(walk(join(ROOT, "apps/web/components/administration")), [
   { rule: "workbench-no-platform-services", pattern: /@apzhub\/platform-services/ },
-  { rule: "workbench-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+  {
+    rule: "workbench-no-gateway",
+    pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+  },
   { rule: "workbench-no-admin-core", pattern: /@apzhub\/admin-core/ },
   { rule: "workbench-no-persistence", pattern: /@apzhub\/admin-persistence/ },
   { rule: "workbench-no-event-bus", pattern: /\bEventBus\b|@apzhub\/event-bus/ },
@@ -147,12 +151,13 @@ scan(walk(join(ROOT, "apps/web/components/administration")), [
 ]);
 
 scan(
-  walk(join(ROOT, "apps/web/lib/administration")).filter(
-    (f) => !f.includes(".test."),
-  ),
+  walk(join(ROOT, "apps/web/lib/administration")).filter((f) => !f.includes(".test.")),
   [
     { rule: "client-no-platform-services", pattern: /@apzhub\/platform-services/ },
-    { rule: "client-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+    {
+      rule: "client-no-gateway",
+      pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+    },
     { rule: "client-no-admin-core", pattern: /@apzhub\/admin-core/ },
     { rule: "client-no-persistence", pattern: /@apzhub\/admin-persistence/ },
     { rule: "client-no-event-bus", pattern: /\bEventBus\b|@apzhub\/event-bus/ },
@@ -296,7 +301,8 @@ scan(httpFiles, [
       file: "apps/web/lib/api/v1/handlers",
       line: 1,
       rule: "http-missing-gateway",
-      detail: "Administration handlers must call getPlatformServiceGateway().administration.*",
+      detail:
+        "Administration handlers must call getPlatformServiceGateway().administration.*",
     });
   }
 }
@@ -330,19 +336,12 @@ for (const omitted of [
 // ---------------------------------------------------------------------------
 forbidDeps(
   "packages/admin-contracts/package.json",
-  [
-    "@apzhub/admin-core",
-    "@apzhub/admin-persistence",
-    "@apzhub/platform-services",
-  ],
+  ["@apzhub/admin-core", "@apzhub/admin-persistence", "@apzhub/platform-services"],
   "contracts-deps",
 );
 forbidDeps(
   "packages/admin-core/package.json",
-  [
-    "@apzhub/admin-persistence",
-    "@apzhub/platform-services",
-  ],
+  ["@apzhub/admin-persistence", "@apzhub/platform-services"],
   "core-deps",
 );
 forbidDeps(
@@ -517,14 +516,17 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.23.0",
+  "0.25.0",
   "version-platform-services",
 );
 
 // Authorization map presence
 {
   const authz = readFileSync(
-    join(ROOT, "packages/platform-services/src/authorization/operation-authorization-map.ts"),
+    join(
+      ROOT,
+      "packages/platform-services/src/authorization/operation-authorization-map.ts",
+    ),
     "utf8",
   );
   if (!authz.includes("administrationPlatformOps")) {
@@ -658,8 +660,12 @@ console.log("Violations: 0");
 console.log(
   "  - Workbench → typed client → HTTP → gateway.administration → RequestPipeline → Authz → Platform Services → Core → Persistence",
 );
-console.log("  - No runtime admin / users / roles / tenants / provisioning / Event Bus / AI");
-console.log("  - Platform Operations at /workspace/operations (distinct from Administration SoR)");
+console.log(
+  "  - No runtime admin / users / roles / tenants / provisioning / Event Bus / AI",
+);
+console.log(
+  "  - Platform Operations at /workspace/operations (distinct from Administration SoR)",
+);
 console.log("  - OpenAPI Platform Administration >= 1.6.0 + manifests present");
 console.log("  - Prior audits APZADMIN-001–004: PASS");
 if (observations.length > 0) {

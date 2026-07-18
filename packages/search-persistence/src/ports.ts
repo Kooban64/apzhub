@@ -69,18 +69,17 @@ export interface SearchConfigurationRepository {
     ctx: SearchRepositoryContext,
     configurationId?: string,
   ): Promise<SearchConfigurationRecord | null>;
-  getActive(
-    ctx: SearchRepositoryContext,
-  ): Promise<SearchConfigurationRecord | null>;
-  list(
-    ctx: SearchRepositoryContext,
-  ): Promise<readonly SearchConfigurationRecord[]>;
+  getActive(ctx: SearchRepositoryContext): Promise<SearchConfigurationRecord | null>;
+  list(ctx: SearchRepositoryContext): Promise<readonly SearchConfigurationRecord[]>;
   upsert(
     ctx: SearchRepositoryContext,
     record: SearchConfigurationRecord,
   ): Promise<SearchConfigurationRecord>;
   softDelete(ctx: SearchRepositoryContext, id: string): Promise<void>;
-  restore(ctx: SearchRepositoryContext, id: string): Promise<SearchConfigurationRecord | null>;
+  restore(
+    ctx: SearchRepositoryContext,
+    id: string,
+  ): Promise<SearchConfigurationRecord | null>;
 }
 
 export interface SearchConfigurationVersionRepository {
@@ -99,10 +98,7 @@ export interface SearchProfileRepository {
     ctx: SearchRepositoryContext,
     record: SearchProfileRecord,
   ): Promise<SearchProfileRecord>;
-  get(
-    ctx: SearchRepositoryContext,
-    id: string,
-  ): Promise<SearchProfileRecord | null>;
+  get(ctx: SearchRepositoryContext, id: string): Promise<SearchProfileRecord | null>;
   list(ctx: SearchRepositoryContext): Promise<readonly SearchProfileRecord[]>;
   softDelete(ctx: SearchRepositoryContext, id: string): Promise<void>;
   restore(
@@ -116,10 +112,7 @@ export interface SearchCollectionRepository {
     ctx: SearchRepositoryContext,
     record: SearchCollectionRecord,
   ): Promise<SearchCollectionRecord>;
-  get(
-    ctx: SearchRepositoryContext,
-    id: string,
-  ): Promise<SearchCollectionRecord | null>;
+  get(ctx: SearchRepositoryContext, id: string): Promise<SearchCollectionRecord | null>;
   list(ctx: SearchRepositoryContext): Promise<readonly SearchCollectionRecord[]>;
   softDelete(ctx: SearchRepositoryContext, id: string): Promise<void>;
   restore(
@@ -133,16 +126,10 @@ export interface SearchSourceRepository {
     ctx: SearchRepositoryContext,
     record: SearchSourceRecord,
   ): Promise<SearchSourceRecord>;
-  get(
-    ctx: SearchRepositoryContext,
-    id: string,
-  ): Promise<SearchSourceRecord | null>;
+  get(ctx: SearchRepositoryContext, id: string): Promise<SearchSourceRecord | null>;
   list(ctx: SearchRepositoryContext): Promise<readonly SearchSourceRecord[]>;
   softDelete(ctx: SearchRepositoryContext, id: string): Promise<void>;
-  restore(
-    ctx: SearchRepositoryContext,
-    id: string,
-  ): Promise<SearchSourceRecord | null>;
+  restore(ctx: SearchRepositoryContext, id: string): Promise<SearchSourceRecord | null>;
 }
 
 export interface SearchScopeRepository {
@@ -150,16 +137,10 @@ export interface SearchScopeRepository {
     ctx: SearchRepositoryContext,
     record: SearchScopeRecord,
   ): Promise<SearchScopeRecord>;
-  get(
-    ctx: SearchRepositoryContext,
-    id: string,
-  ): Promise<SearchScopeRecord | null>;
+  get(ctx: SearchRepositoryContext, id: string): Promise<SearchScopeRecord | null>;
   list(ctx: SearchRepositoryContext): Promise<readonly SearchScopeRecord[]>;
   softDelete(ctx: SearchRepositoryContext, id: string): Promise<void>;
-  restore(
-    ctx: SearchRepositoryContext,
-    id: string,
-  ): Promise<SearchScopeRecord | null>;
+  restore(ctx: SearchRepositoryContext, id: string): Promise<SearchScopeRecord | null>;
 }
 
 export interface SearchMetadataRepository {
@@ -167,10 +148,7 @@ export interface SearchMetadataRepository {
     ctx: SearchRepositoryContext,
     record: SearchMetadataRecord,
   ): Promise<SearchMetadataRecord>;
-  get(
-    ctx: SearchRepositoryContext,
-    id: string,
-  ): Promise<SearchMetadataRecord | null>;
+  get(ctx: SearchRepositoryContext, id: string): Promise<SearchMetadataRecord | null>;
   list(ctx: SearchRepositoryContext): Promise<readonly SearchMetadataRecord[]>;
   softDelete(ctx: SearchRepositoryContext, id: string): Promise<void>;
   restore(
@@ -184,10 +162,7 @@ export interface SearchSessionRepository {
     ctx: SearchRepositoryContext,
     record: SearchSessionRecord,
   ): Promise<SearchSessionRecord>;
-  get(
-    ctx: SearchRepositoryContext,
-    id: string,
-  ): Promise<SearchSessionRecord | null>;
+  get(ctx: SearchRepositoryContext, id: string): Promise<SearchSessionRecord | null>;
   softDelete(ctx: SearchRepositoryContext, id: string): Promise<void>;
 }
 
@@ -204,9 +179,7 @@ export interface SearchDiagnosticsRepository {
     ctx: SearchRepositoryContext,
     record: SearchDiagnosticsRecord,
   ): Promise<SearchDiagnosticsRecord>;
-  latest(
-    ctx: SearchRepositoryContext,
-  ): Promise<SearchDiagnosticsRecord | null>;
+  latest(ctx: SearchRepositoryContext): Promise<SearchDiagnosticsRecord | null>;
 }
 
 export interface SearchHealthRepository {

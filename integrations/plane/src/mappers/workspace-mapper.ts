@@ -2,7 +2,10 @@ import type { Workspace } from "../models/canonical";
 import type { PlaneWorkspaceResponse } from "../internal/plane-api-types";
 import { type MapperContext, toWorkspaceId } from "./mapper-context";
 
-export function mapPlaneWorkspace(record: PlaneWorkspaceResponse, ctx: MapperContext): Workspace {
+export function mapPlaneWorkspace(
+  record: PlaneWorkspaceResponse,
+  ctx: MapperContext,
+): Workspace {
   const now = new Date().toISOString();
   return {
     id: toWorkspaceId(record.id),

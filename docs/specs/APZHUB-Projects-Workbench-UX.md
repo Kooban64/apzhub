@@ -18,22 +18,22 @@
 
 ## Integration strategy: UI vs engine
 
-| Surface | Strategy | Rationale |
-|---------|----------|-----------|
-| Projects dashboard | **Native APZHUB** | Unified shell; personalisation |
-| Project list | **Native APZHUB** | Permission-filtered; search integration |
-| Project detail | **Native APZHUB** | Tabs: overview, board, backlog, sprints, roadmap, team, activity |
-| Task board | **Native APZHUB** | Kanban via Plane API; drag-drop in APZHUB components |
-| Sprint view | **Native APZHUB** | Cycle data from Plane; APZHUB sprint UX |
-| Backlog | **Native APZHUB** | Ordered list; sprint assignment |
-| Roadmap | **Native APZHUB** | Timeline component; Plane roadmap data |
-| My work | **Native APZHUB** | Cross-project assignee filter |
-| Task detail | **Native APZHUB** | Drawer or workspace panel |
-| Project activity | **Native APZHUB** | Activity Timeline Framework (007) |
-| Project search | **Native APZHUB** | Unified Search (020) — not Plane search |
-| Project knowledge | **Native APZHUB** | Knowledge Discovery links |
-| Plane web UI | **Hidden** | Not linked for standard users |
-| Plane admin | **Operator-only** | Administration workspace if ever required |
+| Surface            | Strategy          | Rationale                                                        |
+| ------------------ | ----------------- | ---------------------------------------------------------------- |
+| Projects dashboard | **Native APZHUB** | Unified shell; personalisation                                   |
+| Project list       | **Native APZHUB** | Permission-filtered; search integration                          |
+| Project detail     | **Native APZHUB** | Tabs: overview, board, backlog, sprints, roadmap, team, activity |
+| Task board         | **Native APZHUB** | Kanban via Plane API; drag-drop in APZHUB components             |
+| Sprint view        | **Native APZHUB** | Cycle data from Plane; APZHUB sprint UX                          |
+| Backlog            | **Native APZHUB** | Ordered list; sprint assignment                                  |
+| Roadmap            | **Native APZHUB** | Timeline component; Plane roadmap data                           |
+| My work            | **Native APZHUB** | Cross-project assignee filter                                    |
+| Task detail        | **Native APZHUB** | Drawer or workspace panel                                        |
+| Project activity   | **Native APZHUB** | Activity Timeline Framework (007)                                |
+| Project search     | **Native APZHUB** | Unified Search (020) — not Plane search                          |
+| Project knowledge  | **Native APZHUB** | Knowledge Discovery links                                        |
+| Plane web UI       | **Hidden**        | Not linked for standard users                                    |
+| Plane admin        | **Operator-only** | Administration workspace if ever required                        |
 
 **Prohibited:** Deep links to `plane.example.com`, embedded Plane login, Plane favicon/logo in module chrome.
 
@@ -41,13 +41,13 @@
 
 ## Module registration
 
-| Field | Value |
-|-------|-------|
-| Module ID | `projects` |
-| Activity Bar label | Projects |
-| Activity Bar icon | Lucide `FolderKanban` or `LayoutGrid` |
-| Permission | `projects.view` minimum for Activity Bar visibility |
-| Default route | `/workspace/projects` |
+| Field              | Value                                               |
+| ------------------ | --------------------------------------------------- |
+| Module ID          | `projects`                                          |
+| Activity Bar label | Projects                                            |
+| Activity Bar icon  | Lucide `FolderKanban` or `LayoutGrid`               |
+| Permission         | `projects.view` minimum for Activity Bar visibility |
+| Default route      | `/workspace/projects`                               |
 
 ---
 
@@ -82,13 +82,13 @@ Sidebar collapses to project context when inside a project. Breadcrumb: Projects
 
 **Purpose:** Landing view — summary across accessible projects.
 
-| Region | Content |
-|--------|---------|
-| Header | "Projects" + create project (if permitted) |
-| Summary cards | Active projects count, my open tasks, overdue (if data available) |
-| Recent projects | Personalisation recent list |
-| My work preview | Top assigned tasks |
-| Activity feed | Cross-project activity stream (permission-filtered) |
+| Region          | Content                                                           |
+| --------------- | ----------------------------------------------------------------- |
+| Header          | "Projects" + create project (if permitted)                        |
+| Summary cards   | Active projects count, my open tasks, overdue (if data available) |
+| Recent projects | Personalisation recent list                                       |
+| My work preview | Top assigned tasks                                                |
+| Activity feed   | Cross-project activity stream (permission-filtered)               |
 
 **Permissions:** `projects.view`; create requires `projects.create`.
 
@@ -98,13 +98,13 @@ Sidebar collapses to project context when inside a project. Breadcrumb: Projects
 
 **Purpose:** Searchable, filterable directory of projects.
 
-| Feature | Detail |
-|---------|--------|
-| DataTable | TanStack Table — name, status, lead, updated |
-| Filters | Status, team member, label |
-| Search | Unified search provider scoped to projects |
-| Actions | Open, create, archive (permission-gated) |
-| Empty state | Design System empty state + create CTA |
+| Feature     | Detail                                       |
+| ----------- | -------------------------------------------- |
+| DataTable   | TanStack Table — name, status, lead, updated |
+| Filters     | Status, team member, label                   |
+| Search      | Unified search provider scoped to projects   |
+| Actions     | Open, create, archive (permission-gated)     |
+| Empty state | Design System empty state + create CTA       |
 
 ---
 
@@ -112,13 +112,13 @@ Sidebar collapses to project context when inside a project. Breadcrumb: Projects
 
 **Purpose:** Project home — metadata and quick links.
 
-| Section | Content |
-|---------|---------|
-| Header | Project name, identifier, status badge |
-| Meta | Lead, dates, description |
-| Quick links | Board, backlog, sprints, roadmap |
-| Recent activity | Project-scoped activity timeline |
-| Team preview | Avatar row + manage link |
+| Section         | Content                                |
+| --------------- | -------------------------------------- |
+| Header          | Project name, identifier, status badge |
+| Meta            | Lead, dates, description               |
+| Quick links     | Board, backlog, sprints, roadmap       |
+| Recent activity | Project-scoped activity timeline       |
+| Team preview    | Avatar row + manage link               |
 
 ---
 
@@ -126,13 +126,13 @@ Sidebar collapses to project context when inside a project. Breadcrumb: Projects
 
 **Purpose:** Kanban view by status.
 
-| Feature | Detail |
-|---------|--------|
-| Columns | Status groups (Todo / In progress / Done) |
-| Cards | Task title, assignee, labels, priority |
+| Feature   | Detail                                              |
+| --------- | --------------------------------------------------- |
+| Columns   | Status groups (Todo / In progress / Done)           |
+| Cards     | Task title, assignee, labels, priority              |
 | Drag-drop | Status transition via `tasks.transition` permission |
-| Filters | Assignee, label, sprint, module |
-| Create | Inline add task in column |
+| Filters   | Assignee, label, sprint, module                     |
+| Create    | Inline add task in column                           |
 
 **API:** `GET/PATCH` platform task APIs — Plane state IDs resolved server-side.
 
@@ -142,13 +142,13 @@ Sidebar collapses to project context when inside a project. Breadcrumb: Projects
 
 **Purpose:** Manage and view current sprint.
 
-| Feature | Detail |
-|---------|--------|
-| Sprint selector | Active / planned / completed |
-| Sprint goal | Editable text |
-| Task list | Tasks in sprint |
-| Burndown | Phase 2 — optional chart |
-| Actions | Start sprint, complete sprint (`sprints.manage`) |
+| Feature         | Detail                                           |
+| --------------- | ------------------------------------------------ |
+| Sprint selector | Active / planned / completed                     |
+| Sprint goal     | Editable text                                    |
+| Task list       | Tasks in sprint                                  |
+| Burndown        | Phase 2 — optional chart                         |
+| Actions         | Start sprint, complete sprint (`sprints.manage`) |
 
 **Terminology:** User sees "Sprint"; Plane cycle mapped internally.
 
@@ -158,12 +158,12 @@ Sidebar collapses to project context when inside a project. Breadcrumb: Projects
 
 **Purpose:** Prioritised unscheduled work.
 
-| Feature | Detail |
-|---------|--------|
-| Ordered list | Drag reorder (updates rank via API) |
-| Assign to sprint | Bulk or single |
-| Filters | Label, module, assignee |
-| Create task | Top of backlog |
+| Feature          | Detail                              |
+| ---------------- | ----------------------------------- |
+| Ordered list     | Drag reorder (updates rank via API) |
+| Assign to sprint | Bulk or single                      |
+| Filters          | Label, module, assignee             |
+| Create task      | Top of backlog                      |
 
 ---
 
@@ -171,12 +171,12 @@ Sidebar collapses to project context when inside a project. Breadcrumb: Projects
 
 **Purpose:** Timeline planning view.
 
-| Feature | Detail |
-|---------|--------|
-| Timeline | Milestones and sprints on horizontal axis |
-| Zoom | Month / quarter |
-| Milestones | Create/edit milestone (`projects.edit`) |
-| Tasks | Optional overlay on timeline — Phase 2 |
+| Feature    | Detail                                    |
+| ---------- | ----------------------------------------- |
+| Timeline   | Milestones and sprints on horizontal axis |
+| Zoom       | Month / quarter                           |
+| Milestones | Create/edit milestone (`projects.edit`)   |
+| Tasks      | Optional overlay on timeline — Phase 2    |
 
 ---
 
@@ -184,12 +184,12 @@ Sidebar collapses to project context when inside a project. Breadcrumb: Projects
 
 **Purpose:** Cross-project personal task list.
 
-| Feature | Detail |
-|---------|--------|
-| Grouping | By project or by due date |
-| Filters | Status, priority |
-| Quick actions | Open task, change status |
-| Personalisation | Saved filter prefs (023) |
+| Feature         | Detail                    |
+| --------------- | ------------------------- |
+| Grouping        | By project or by due date |
+| Filters         | Status, priority          |
+| Quick actions   | Open task, change status  |
+| Personalisation | Saved filter prefs (023)  |
 
 ---
 
@@ -197,11 +197,11 @@ Sidebar collapses to project context when inside a project. Breadcrumb: Projects
 
 **Purpose:** Audit and collaboration timeline.
 
-| Feature | Detail |
-|---------|--------|
-| Source | Activity Timeline Framework — not Plane activity API directly |
-| Events | Task created, assigned, status changed, commented |
-| Filters | Actor, event type, date |
+| Feature | Detail                                                        |
+| ------- | ------------------------------------------------------------- |
+| Source  | Activity Timeline Framework — not Plane activity API directly |
+| Events  | Task created, assigned, status changed, commented             |
+| Filters | Actor, event type, date                                       |
 
 ---
 
@@ -209,11 +209,11 @@ Sidebar collapses to project context when inside a project. Breadcrumb: Projects
 
 **Purpose:** Linked documents and discovery.
 
-| Feature | Detail |
-|---------|--------|
-| Source | Knowledge Discovery Framework (020) |
+| Feature | Detail                                                  |
+| ------- | ------------------------------------------------------- |
+| Source  | Knowledge Discovery Framework (020)                     |
 | Content | Linked documents, related matters (Law Platform future) |
-| Actions | Link/unlink knowledge items |
+| Actions | Link/unlink knowledge items                             |
 
 ---
 
@@ -221,11 +221,11 @@ Sidebar collapses to project context when inside a project. Breadcrumb: Projects
 
 **Purpose:** Scoped search within Projects module.
 
-| Feature | Detail |
-|---------|--------|
-| Implementation | Unified Search provider — `projects` scope |
-| Index | Project name, task title, description, labels |
-| Results | Navigate to project or task detail |
+| Feature        | Detail                                        |
+| -------------- | --------------------------------------------- |
+| Implementation | Unified Search provider — `projects` scope    |
+| Index          | Project name, task title, description, labels |
+| Results        | Navigate to project or task detail            |
 
 No standalone Plane search box.
 
@@ -235,12 +235,12 @@ No standalone Plane search box.
 
 When task selected:
 
-| Context Panel tab | Content |
-|-------------------|---------|
-| Details | Status, assignee, labels, dates |
-| Comments | Thread — native UI |
-| Activity | Task-scoped events |
-| Links | Documents, time entries (future waves) |
+| Context Panel tab | Content                                |
+| ----------------- | -------------------------------------- |
+| Details           | Status, assignee, labels, dates        |
+| Comments          | Thread — native UI                     |
+| Activity          | Task-scoped events                     |
+| Links             | Documents, time entries (future waves) |
 
 ---
 
@@ -267,12 +267,12 @@ Permission-filtered at registration.
 
 ## Personalisation hooks
 
-| Preference | Scope |
-|------------|-------|
-| Default project view | User |
+| Preference            | Scope   |
+| --------------------- | ------- |
+| Default project view  | User    |
 | Board column collapse | Session |
-| My work grouping | User |
-| Recent projects | User |
+| My work grouping      | User    |
+| Recent projects       | User    |
 
 Via `@apzhub/platform-personalisation` — module does not store prefs locally.
 
@@ -281,14 +281,14 @@ Via `@apzhub/platform-personalisation` — module does not store prefs locally.
 ## Operations via Plane API (server-side only)
 
 | User action | Plane API (via adapter) |
-|-------------|-------------------------|
-| View board | List issues + states |
-| Move card | Patch issue state |
-| Create task | Post issue |
-| Assign | Patch assignee |
-| Comment | Post comment |
-| Sprint CRUD | Cycle endpoints |
-| Team change | Member endpoints |
+| ----------- | ----------------------- |
+| View board  | List issues + states    |
+| Move card   | Patch issue state       |
+| Create task | Post issue              |
+| Assign      | Patch assignee          |
+| Comment     | Post comment            |
+| Sprint CRUD | Cycle endpoints         |
+| Team change | Member endpoints        |
 
 Module never calls these — `ProjectService` orchestrates.
 

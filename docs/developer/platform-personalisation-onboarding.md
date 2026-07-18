@@ -24,7 +24,7 @@ const personalisation = await createPlatformPersonalisationContext(session);
 ```tsx
 import { PersonalisationThemeBridge } from "@/components/platform-personalisation/personalisation-theme-bridge";
 
-<PersonalisationThemeBridge userId={userId} initialTheme={initialTheme} />
+<PersonalisationThemeBridge userId={userId} initialTheme={initialTheme} />;
 ```
 
 ## Workbench session store
@@ -42,7 +42,10 @@ All routes require authenticated session. Use shared handlers from `@apzhub/plat
 ## Testing
 
 ```typescript
-import { createInMemoryPersonalisationService, resetSharedPersonalisationService } from "@apzhub/platform-personalisation";
+import {
+  createInMemoryPersonalisationService,
+  resetSharedPersonalisationService,
+} from "@apzhub/platform-personalisation";
 
 resetSharedPersonalisationService();
 const { service } = createInMemoryPersonalisationService();

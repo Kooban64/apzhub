@@ -4,10 +4,7 @@ import type {
   ReleaseId,
   ReleaseReadinessSnapshot,
 } from "@apzhub/testing-contracts";
-import {
-  asReleaseId,
-  asReleaseReadinessSnapshotId,
-} from "@apzhub/testing-contracts";
+import { asReleaseId, asReleaseReadinessSnapshotId } from "@apzhub/testing-contracts";
 import type { ReleaseReadinessSnapshotRecord } from "@apzhub/testing-persistence";
 
 import { toRepositoryContext } from "../mapping/context";
@@ -155,14 +152,10 @@ export async function evaluateReleaseReadiness(
     evidenceLabels.push(label);
     warningFactors.push(label);
   } else {
-    evidenceLabels.push(
-      `evidence_count:${evidence.length + releaseEvidence.length}`,
-    );
+    evidenceLabels.push(`evidence_count:${evidence.length + releaseEvidence.length}`);
   }
 
-  const executions = (
-    await rt.persistence.manualExecutions.list(rctx, listAll)
-  ).items;
+  const executions = (await rt.persistence.manualExecutions.list(rctx, listAll)).items;
   for (const ex of executions) {
     if (
       ex.overallResult === "fail" ||
@@ -183,9 +176,7 @@ export async function evaluateReleaseReadiness(
     }
   }
 
-  const platformApprovals = (
-    await rt.persistence.approvals.list(rctx, listAll)
-  ).items;
+  const platformApprovals = (await rt.persistence.approvals.list(rctx, listAll)).items;
   for (const a of platformApprovals) {
     const label = `platform_approval:${a.id}:${a.status}`;
     approvalLabels.push(label);
@@ -224,8 +215,8 @@ export async function evaluateReleaseReadiness(
   let finalBlockers = [...blockingFactors];
   let finalWarnings = [...warningFactors];
   if (focus === "certification") {
-    finalBlockers = blockingFactors.filter((f) =>
-      f.includes("certification") || f.includes("expired_certification"),
+    finalBlockers = blockingFactors.filter(
+      (f) => f.includes("certification") || f.includes("expired_certification"),
     );
     finalWarnings = warningFactors.filter(
       (f) =>

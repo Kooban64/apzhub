@@ -131,6 +131,30 @@ export {
   platformObserveMetadata,
 } from "./platform-observe-schema";
 export {
+  platformMetricsSchema,
+  platformMetricsMetric,
+  platformMetricsDefinition,
+  platformMetricsVersion,
+  platformMetricsCategory,
+  platformMetricsGroup,
+  platformMetricsDimension,
+  platformMetricsLabel,
+  platformMetricsUnit,
+  platformMetricsFormula,
+  platformMetricsAggregation,
+  platformMetricsThreshold,
+  platformMetricsOwner,
+  platformMetricsConsumer,
+  platformMetricsRetentionPolicy,
+  platformMetricsClassification,
+  platformMetricsDependency,
+  platformMetricsKpi,
+  platformMetricsKpiGroup,
+  platformMetricsKpiTarget,
+  platformMetricsRelationship,
+  platformMetricsMetadata,
+} from "./platform-metrics-schema";
+export {
   platformAdminSchema,
   platformAdminModule,
   platformAdminCategory,
@@ -173,7 +197,6 @@ export {
   platformIamReference,
   platformIamMetadata,
 } from "./platform-iam-schema";
-
 
 export {
   testingSchema,

@@ -17,16 +17,16 @@ Certified the Plane adapter as production-ready at the adapter boundary: capabil
 
 ## Certification summary
 
-| Area | Status |
-|------|--------|
-| Capability self-assessment | ✅ 15 core services certified |
-| Compatibility matrix | ✅ CE range 0.23.0–0.24.x |
-| Runtime diagnostics | ✅ adapter/SDK/provider versions, latency, CB, failures |
-| Readiness checks | ✅ 9 structured checks |
-| Feature detection | ✅ optional webhooks/analytics probes |
-| Health classification | ✅ 4-level model with reasons |
-| Operational reports | ✅ JSON-serialisable, secret-free |
-| Reference patterns | ✅ 10 patterns for future adapters |
+| Area                       | Status                                                  |
+| -------------------------- | ------------------------------------------------------- |
+| Capability self-assessment | ✅ 15 core services certified                           |
+| Compatibility matrix       | ✅ CE range 0.23.0–0.24.x                               |
+| Runtime diagnostics        | ✅ adapter/SDK/provider versions, latency, CB, failures |
+| Readiness checks           | ✅ 9 structured checks                                  |
+| Feature detection          | ✅ optional webhooks/analytics probes                   |
+| Health classification      | ✅ 4-level model with reasons                           |
+| Operational reports        | ✅ JSON-serialisable, secret-free                       |
+| Reference patterns         | ✅ 10 patterns for future adapters                      |
 
 ---
 
@@ -38,11 +38,11 @@ Certified (implemented / operations / min version 0.23.0): Workspaces, Projects,
 
 ## Compatibility matrix
 
-| Field | Value |
-|-------|-------|
-| Supported range | 0.23.0 – 0.24.x |
-| Edition target | Community Edition |
-| Optional capabilities | analytics, webhooks |
+| Field                   | Value                                |
+| ----------------------- | ------------------------------------ |
+| Supported range         | 0.23.0 – 0.24.x                      |
+| Edition target          | Community Edition                    |
+| Optional capabilities   | analytics, webhooks                  |
 | Startup on optional gap | Continues (degraded / metadata only) |
 
 ---
@@ -68,39 +68,39 @@ Optional: webhook configuration.
 
 ## Files created
 
-| Path | Role |
-|------|------|
-| `integrations/plane/src/operations/types.ts` | Operational DTOs |
-| `integrations/plane/src/operations/capability-certification.ts` | Self-assessment |
-| `integrations/plane/src/operations/compatibility-matrix.ts` | Compatibility report |
-| `integrations/plane/src/operations/health-classification.ts` | Health levels |
-| `integrations/plane/src/operations/readiness.ts` | Readiness validation |
-| `integrations/plane/src/operations/feature-detection.ts` | Optional probes |
-| `integrations/plane/src/operations/plane-operations.ts` | Operations facade |
-| `integrations/plane/src/operations/index.ts` | Exports |
-| `integrations/plane/src/plane-operations.test.ts` | Contract tests |
-| `integrations/plane/docs/PLANE-OPERATIONS.md` | Operations guide |
-| `docs/sprint/OSS-101-09-completion-report.md` | This report |
+| Path                                                            | Role                 |
+| --------------------------------------------------------------- | -------------------- |
+| `integrations/plane/src/operations/types.ts`                    | Operational DTOs     |
+| `integrations/plane/src/operations/capability-certification.ts` | Self-assessment      |
+| `integrations/plane/src/operations/compatibility-matrix.ts`     | Compatibility report |
+| `integrations/plane/src/operations/health-classification.ts`    | Health levels        |
+| `integrations/plane/src/operations/readiness.ts`                | Readiness validation |
+| `integrations/plane/src/operations/feature-detection.ts`        | Optional probes      |
+| `integrations/plane/src/operations/plane-operations.ts`         | Operations facade    |
+| `integrations/plane/src/operations/index.ts`                    | Exports              |
+| `integrations/plane/src/plane-operations.test.ts`               | Contract tests       |
+| `integrations/plane/docs/PLANE-OPERATIONS.md`                   | Operations guide     |
+| `docs/sprint/OSS-101-09-completion-report.md`                   | This report          |
 
 ---
 
 ## Files modified
 
-| Path | Change |
-|------|--------|
-| `integrations/plane` adapter, core services, mocks, bootstrap, package v0.6.0, exports | Operations wiring |
-| Foundation docs / CHANGELOG / docs/README / architecture / backlog / catalogues | Milestone closeout |
+| Path                                                                                   | Change             |
+| -------------------------------------------------------------------------------------- | ------------------ |
+| `integrations/plane` adapter, core services, mocks, bootstrap, package v0.6.0, exports | Operations wiring  |
+| Foundation docs / CHANGELOG / docs/README / architecture / backlog / catalogues        | Milestone closeout |
 
 ---
 
 ## Coverage / tests
 
-| Suite | Result |
-|-------|--------|
-| Plane package tests | 99 passed (incl. 10 operations) |
-| Combined Plane + platform-services + contracts | 244 passed |
-| Typecheck (`integration-plane`) | ✅ |
-| ESLint (`integrations/plane/src`) | ✅ |
+| Suite                                          | Result                          |
+| ---------------------------------------------- | ------------------------------- |
+| Plane package tests                            | 99 passed (incl. 10 operations) |
+| Combined Plane + platform-services + contracts | 244 passed                      |
+| Typecheck (`integration-plane`)                | ✅                              |
+| ESLint (`integrations/plane/src`)              | ✅                              |
 
 ---
 

@@ -250,7 +250,14 @@ describe("row mappers", () => {
         sessionId: "s1",
         caseId: "c1",
         status: "planned",
-        comments: [{ id: "c", authorUserId: "u", body: "hi", createdAt: "2026-01-01T00:00:00.000Z" }],
+        comments: [
+          {
+            id: "c",
+            authorUserId: "u",
+            body: "hi",
+            createdAt: "2026-01-01T00:00:00.000Z",
+          },
+        ],
         stepActuals: [{ stepId: "st1", status: "pass" }],
         revision: 1,
         createdAt: "2026-01-01T00:00:00.000Z",

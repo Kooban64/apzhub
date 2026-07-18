@@ -24,9 +24,17 @@ export const DELETE = withPlatformApiAuth(handleDeleteAdministrationModule, {
 });
 
 export async function POST(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","PATCH","DELETE"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "PATCH", "DELETE"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }
 
 export async function PUT(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","PATCH","DELETE"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "PATCH", "DELETE"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }

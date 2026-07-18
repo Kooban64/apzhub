@@ -54,9 +54,7 @@ function normalizeHeaders(headers?: HeadersInit): Record<string, string> {
     return out;
   }
   if (Array.isArray(headers)) {
-    return Object.fromEntries(
-      headers.map(([k, v]) => [k.toLowerCase(), v]),
-    );
+    return Object.fromEntries(headers.map(([k, v]) => [k.toLowerCase(), v]));
   }
   return Object.fromEntries(
     Object.entries(headers).map(([k, v]) => [k.toLowerCase(), String(v)]),
@@ -101,10 +99,7 @@ export function createMockMeilisearchFetch(
       Record<string, readonly MeilisearchSearchHit[]>
     >);
   for (const [uid, docs] of Object.entries(seeded)) {
-    documents.set(
-      uid,
-      new Map(docs.map((d) => [String(d.id ?? ""), { ...d }])),
-    );
+    documents.set(uid, new Map(docs.map((d) => [String(d.id ?? ""), { ...d }])));
   }
 
   let taskUid = 1;
@@ -148,8 +143,10 @@ export function createMockMeilisearchFetch(
     }
 
     if (path === "/stats") {
-      const indexStats: Record<string, { numberOfDocuments: number; isIndexing: boolean }> =
-        {};
+      const indexStats: Record<
+        string,
+        { numberOfDocuments: number; isIndexing: boolean }
+      > = {};
       for (const [uid, docs] of documents.entries()) {
         indexStats[uid] = { numberOfDocuments: docs.size, isIndexing: false };
       }
@@ -162,7 +159,10 @@ export function createMockMeilisearchFetch(
 
     if (path === "/indexes" && method === "GET") {
       if (failIndexes) {
-        return jsonResponse({ message: "indexes failed", code: "invalid_request" }, 400);
+        return jsonResponse(
+          { message: "indexes failed", code: "invalid_request" },
+          400,
+        );
       }
       return jsonResponse({
         results: [...indexes.values()],
@@ -173,12 +173,17 @@ export function createMockMeilisearchFetch(
     }
 
     if (path === "/indexes" && method === "POST") {
-      const body = init?.body ? (JSON.parse(String(init.body)) as {
-        uid?: string;
-        primaryKey?: string;
-      }) : {};
+      const body = init?.body
+        ? (JSON.parse(String(init.body)) as {
+            uid?: string;
+            primaryKey?: string;
+          })
+        : {};
       if (!body.uid) {
-        return jsonResponse({ message: "uid required", code: "invalid_index_uid" }, 400);
+        return jsonResponse(
+          { message: "uid required", code: "invalid_index_uid" },
+          400,
+        );
       }
       if (indexes.has(body.uid)) {
         return jsonResponse(
@@ -193,12 +198,15 @@ export function createMockMeilisearchFetch(
         updatedAt: "2026-07-14T00:00:00Z",
       });
       documents.set(body.uid, new Map());
-      return jsonResponse({
-        taskUid: taskUid++,
-        indexUid: body.uid,
-        status: "enqueued",
-        type: "indexCreation",
-      }, 202);
+      return jsonResponse(
+        {
+          taskUid: taskUid++,
+          indexUid: body.uid,
+          status: "enqueued",
+          type: "indexCreation",
+        },
+        202,
+      );
     }
 
     const indexMatch = path.match(/^\/indexes\/([^/]+)$/);
@@ -207,19 +215,25 @@ export function createMockMeilisearchFetch(
       if (method === "GET") {
         const index = indexes.get(uid);
         if (!index) {
-          return jsonResponse({ message: "index not found", code: "index_not_found" }, 404);
+          return jsonResponse(
+            { message: "index not found", code: "index_not_found" },
+            404,
+          );
         }
         return jsonResponse(index);
       }
       if (method === "DELETE") {
         indexes.delete(uid);
         documents.delete(uid);
-        return jsonResponse({
-          taskUid: taskUid++,
-          indexUid: uid,
-          status: "enqueued",
-          type: "indexDeletion",
-        }, 202);
+        return jsonResponse(
+          {
+            taskUid: taskUid++,
+            indexUid: uid,
+            status: "enqueued",
+            type: "indexDeletion",
+          },
+          202,
+        );
       }
       if (method === "PATCH") {
         const body = init?.body
@@ -227,15 +241,24 @@ export function createMockMeilisearchFetch(
           : {};
         const existing = indexes.get(uid);
         if (!existing) {
-          return jsonResponse({ message: "index not found", code: "index_not_found" }, 404);
+          return jsonResponse(
+            { message: "index not found", code: "index_not_found" },
+            404,
+          );
         }
-        indexes.set(uid, { ...existing, primaryKey: body.primaryKey ?? existing.primaryKey });
-        return jsonResponse({
-          taskUid: taskUid++,
-          indexUid: uid,
-          status: "enqueued",
-          type: "indexUpdate",
-        }, 202);
+        indexes.set(uid, {
+          ...existing,
+          primaryKey: body.primaryKey ?? existing.primaryKey,
+        });
+        return jsonResponse(
+          {
+            taskUid: taskUid++,
+            indexUid: uid,
+            status: "enqueued",
+            type: "indexUpdate",
+          },
+          202,
+        );
       }
     }
 
@@ -246,19 +269,25 @@ export function createMockMeilisearchFetch(
         ? (JSON.parse(String(init.body)) as MeilisearchSearchHit[])
         : [];
       if (!indexes.has(uid)) {
-        return jsonResponse({ message: "index not found", code: "index_not_found" }, 404);
+        return jsonResponse(
+          { message: "index not found", code: "index_not_found" },
+          404,
+        );
       }
       const bag = documents.get(uid) ?? new Map();
       for (const doc of body) {
         bag.set(String(doc.id), doc);
       }
       documents.set(uid, bag);
-      return jsonResponse({
-        taskUid: taskUid++,
-        indexUid: uid,
-        status: "enqueued",
-        type: "documentAdditionOrUpdate",
-      }, 202);
+      return jsonResponse(
+        {
+          taskUid: taskUid++,
+          indexUid: uid,
+          status: "enqueued",
+          type: "documentAdditionOrUpdate",
+        },
+        202,
+      );
     }
 
     const docMatch = path.match(/^\/indexes\/([^/]+)\/documents\/([^/]+)$/);
@@ -278,19 +307,25 @@ export function createMockMeilisearchFetch(
       }
       if (method === "DELETE") {
         bag?.delete(docId);
-        return jsonResponse({
-          taskUid: taskUid++,
-          indexUid: uid,
-          status: "enqueued",
-          type: "documentDeletion",
-        }, 202);
+        return jsonResponse(
+          {
+            taskUid: taskUid++,
+            indexUid: uid,
+            status: "enqueued",
+            type: "documentDeletion",
+          },
+          202,
+        );
       }
     }
 
     const searchMatch = path.match(/^\/indexes\/([^/]+)\/search$/);
     if (searchMatch && method === "POST") {
       if (failSearch) {
-        return jsonResponse({ message: "search failed", code: "invalid_search_q" }, 400);
+        return jsonResponse(
+          { message: "search failed", code: "invalid_search_q" },
+          400,
+        );
       }
       const uid = decodeURIComponent(searchMatch[1]!);
       const body = init?.body

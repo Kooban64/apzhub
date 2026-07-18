@@ -14,9 +14,7 @@ import { createQualityReleaseReadinessService } from "./release-readiness-servic
 import { createRiskAggregationService } from "./risk-aggregation-service";
 import { asTestPlanId } from "@apzhub/testing-contracts";
 
-export function createQualitySummaryService(
-  rt: ServiceRuntime,
-): QualitySummaryService {
+export function createQualitySummaryService(rt: ServiceRuntime): QualitySummaryService {
   const intelligence = createQualityIntelligenceService(rt);
   const coverage = createCoverageService(rt);
   const readiness = createQualityReleaseReadinessService(rt);
@@ -42,9 +40,8 @@ export function createQualitySummaryService(
         );
       }
 
-      const defects = (
-        await rt.persistence.defectLinks.list(toRepositoryContext(ctx))
-      ).items;
+      const defects = (await rt.persistence.defectLinks.list(toRepositoryContext(ctx)))
+        .items;
       const openDefectsByStatus: Partial<Record<DefectStatus, number>> = {};
       const openDefectsByPriority: Partial<Record<Priority, number>> = {};
       for (const d of defects) {

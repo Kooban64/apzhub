@@ -77,7 +77,8 @@ export class ZammadGroupService {
       result = {
         ...result,
         items: applyClientFilters(result.items, (group) => {
-          if (filter.active !== undefined && group.active !== filter.active) return false;
+          if (filter.active !== undefined && group.active !== filter.active)
+            return false;
           if (
             filter.search &&
             !group.name.toLowerCase().includes(filter.search.toLowerCase())

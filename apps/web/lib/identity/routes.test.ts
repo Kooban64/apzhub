@@ -55,9 +55,7 @@ describe("identity routes", () => {
 
   it("resolves workspace sections", () => {
     expect(resolveIdentitySection(IDENTITY_WORKSPACE_BASE)).toBe("overview");
-    expect(resolveIdentitySection(`${IDENTITY_WORKSPACE_BASE}/users`)).toBe(
-      "users",
-    );
+    expect(resolveIdentitySection(`${IDENTITY_WORKSPACE_BASE}/users`)).toBe("users");
     expect(
       resolveIdentitySection(`${IDENTITY_WORKSPACE_BASE}/service-assignments`),
     ).toBe("service-assignments");
@@ -68,9 +66,7 @@ describe("identity routes", () => {
 
   it("builds workspace section paths", () => {
     expect(identitySectionPath()).toBe(`${IDENTITY_WORKSPACE_BASE}/overview`);
-    expect(identitySectionPath("overview")).toBe(
-      `${IDENTITY_WORKSPACE_BASE}/overview`,
-    );
+    expect(identitySectionPath("overview")).toBe(`${IDENTITY_WORKSPACE_BASE}/overview`);
     expect(identitySectionPath("diagnostics")).toBe(
       `${IDENTITY_WORKSPACE_BASE}/diagnostics`,
     );

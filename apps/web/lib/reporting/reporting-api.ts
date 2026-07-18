@@ -2,10 +2,7 @@
  * Module-level Platform Reporting client accessor (APZREPORT-002).
  */
 
-import {
-  createHttpReportingClient,
-  type ReportingClient,
-} from "./reporting-client";
+import { createHttpReportingClient, type ReportingClient } from "./reporting-client";
 import { createMockReportingClient } from "./mock-reporting-client";
 import type {
   GenerateReportClientInput,

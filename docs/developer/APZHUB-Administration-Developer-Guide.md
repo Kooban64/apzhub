@@ -4,11 +4,11 @@
 
 ## Packages
 
-| Package | Role |
-| --- | --- |
-| `@apzhub/admin-contracts` | Types, enums, permissions, canonical registrations, service interface |
-| `@apzhub/admin-core` | Ports, lifecycle, validation, registration/capability helpers, foundation factory |
-| `@apzhub/admin-persistence` | In-memory + PostgreSQL repositories and factories |
+| Package                     | Role                                                                              |
+| --------------------------- | --------------------------------------------------------------------------------- |
+| `@apzhub/admin-contracts`   | Types, enums, permissions, canonical registrations, service interface             |
+| `@apzhub/admin-core`        | Ports, lifecycle, validation, registration/capability helpers, foundation factory |
+| `@apzhub/admin-persistence` | In-memory + PostgreSQL repositories and factories                                 |
 
 ## Dependency rules
 

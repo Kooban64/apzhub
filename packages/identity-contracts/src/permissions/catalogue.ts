@@ -16,8 +16,7 @@ export const PLATFORM_IDENTITY_PERMISSIONS = [
   "identity.audit",
 ] as const;
 
-export type PlatformIdentityPermission =
-  (typeof PLATFORM_IDENTITY_PERMISSIONS)[number];
+export type PlatformIdentityPermission = (typeof PLATFORM_IDENTITY_PERMISSIONS)[number];
 
 export const PLATFORM_IDENTITY_PERMISSION_WILDCARD = "identity.*" as const;
 

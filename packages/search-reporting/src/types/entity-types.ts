@@ -19,8 +19,7 @@ export const REPORTING_SEARCH_ENTITY_TYPES = [
   "report_usage_summary",
 ] as const;
 
-export type ReportingSearchEntityType =
-  (typeof REPORTING_SEARCH_ENTITY_TYPES)[number];
+export type ReportingSearchEntityType = (typeof REPORTING_SEARCH_ENTITY_TYPES)[number];
 
 /** Framework-friendly aliases accepted by type guards (map to local expanded types). */
 const FRAMEWORK_ALIASES: Readonly<Record<string, ReportingSearchEntityType>> = {

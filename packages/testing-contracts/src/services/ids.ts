@@ -93,13 +93,10 @@ export const PLATFORM_QUALITY_SERVICE_IDS = [
   "platform-release-governance-service",
 ] as const;
 
-export type PlatformQualityServiceId =
-  (typeof PLATFORM_QUALITY_SERVICE_IDS)[number];
+export type PlatformQualityServiceId = (typeof PLATFORM_QUALITY_SERVICE_IDS)[number];
 
 /** TCMS-only Release & Quality Governance services (APZTCMS-014). */
-export const RELEASE_GOVERNANCE_SERVICE_IDS = [
-  "release-governance-service",
-] as const;
+export const RELEASE_GOVERNANCE_SERVICE_IDS = ["release-governance-service"] as const;
 
 export type ReleaseGovernanceServiceId =
   (typeof RELEASE_GOVERNANCE_SERVICE_IDS)[number];

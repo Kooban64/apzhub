@@ -15,9 +15,7 @@ import {
   createSearchProviderRegistry,
   type SearchProviderRegistryBundle,
 } from "./registry/provider-registry";
-import {
-  createSearchPlatformServices,
-} from "./services/platform-services";
+import { createSearchPlatformServices } from "./services/platform-services";
 import type { SearchPlatformGateway } from "@apzhub/search-contracts";
 
 export type CreateSearchPersistenceForProductionInput = {

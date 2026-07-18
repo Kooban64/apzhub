@@ -16,21 +16,21 @@ Responsive certification for Support inbox (all viewports) and request detail (t
 
 ## Viewports
 
-| Name | Width × Height |
-|------|----------------|
-| Desktop | 1440 × 900 |
-| Laptop | 1280 × 800 |
-| Tablet | 768 × 1024 |
-| Mobile | 390 × 844 |
+| Name    | Width × Height |
+| ------- | -------------- |
+| Desktop | 1440 × 900     |
+| Laptop  | 1280 × 800     |
+| Tablet  | 768 × 1024     |
+| Mobile  | 390 × 844      |
 
 ---
 
 ## Checks
 
-| Check | Viewports | Assertion |
-|-------|-----------|-----------|
+| Check                                 | Viewports                       | Assertion                                               |
+| ------------------------------------- | ------------------------------- | ------------------------------------------------------- |
 | Inbox visible, no horizontal overflow | Desktop, Laptop, Tablet, Mobile | `support-page` visible; `scrollWidth ≤ clientWidth + 1` |
-| Detail visible | Tablet, Mobile | `support-page` + `support-request-detail` visible |
+| Detail visible                        | Tablet, Mobile                  | `support-page` + `support-request-detail` visible       |
 
 ---
 
@@ -45,22 +45,22 @@ Responsive certification for Support inbox (all viewports) and request detail (t
 
 ## Results
 
-| Check | Result |
-|-------|--------|
-| Inbox Desktop | ✅ PASS |
-| Inbox Laptop | ✅ PASS |
-| Inbox Tablet | ✅ PASS |
-| Inbox Mobile | ✅ PASS |
-| Detail Tablet | ✅ PASS |
-| Detail Mobile | ✅ PASS |
+| Check                  | Result                                               |
+| ---------------------- | ---------------------------------------------------- |
+| Inbox Desktop          | ✅ PASS                                              |
+| Inbox Laptop           | ✅ PASS                                              |
+| Inbox Tablet           | ✅ PASS                                              |
+| Inbox Mobile           | ✅ PASS                                              |
+| Detail Tablet          | ✅ PASS                                              |
+| Detail Mobile          | ✅ PASS                                              |
 | **Suite contribution** | **6 tests** (part of Playwright **23 passed** total) |
 
 ---
 
 ## Certification defect corrections (responsive-related)
 
-| Defect | Correction |
-|--------|------------|
+| Defect                                              | Correction                                                                                                                                            |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Shell / header horizontal overflow at narrow widths | `shell-layout` uses `overflow-x-hidden`, `min-w-0`, `max-w-full` so workbench content (including Support) does not force page-level horizontal scroll |
 
 ---

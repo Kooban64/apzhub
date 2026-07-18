@@ -22,7 +22,10 @@ export function createInMemoryTenantManagementBundle(): {
 } {
   const tenantRepository = new InMemoryPlatformTenantRepository();
   const membershipRepository = new InMemoryPlatformTenantMembershipRepository();
-  const service = new TenantManagementService({ tenantRepository, membershipRepository });
+  const service = new TenantManagementService({
+    tenantRepository,
+    membershipRepository,
+  });
   const sessionResolver = new TenantSessionResolver(membershipRepository);
   return { service, sessionResolver, tenantRepository, membershipRepository };
 }

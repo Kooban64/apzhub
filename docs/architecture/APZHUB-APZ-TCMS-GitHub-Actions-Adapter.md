@@ -36,13 +36,13 @@ No Platform Service, Gateway, HTTP routes, Workbench UI, Event Bus, or persisten
 
 ## Package guides (source)
 
-| Guide | Path |
-| ----- | ---- |
-| Adapter | [`integrations/github-actions/docs/GITHUB-ACTIONS-ADAPTER.md`](../../integrations/github-actions/docs/GITHUB-ACTIONS-ADAPTER.md) |
-| Mapping | [`…/GITHUB-ACTIONS-MAPPING.md`](../../integrations/github-actions/docs/GITHUB-ACTIONS-MAPPING.md) |
-| Compatibility | [`…/GITHUB-ACTIONS-COMPATIBILITY.md`](../../integrations/github-actions/docs/GITHUB-ACTIONS-COMPATIBILITY.md) |
-| Authentication | [`…/GITHUB-ACTIONS-AUTHENTICATION.md`](../../integrations/github-actions/docs/GITHUB-ACTIONS-AUTHENTICATION.md) |
-| Developer | [`…/GITHUB-ACTIONS-DEVELOPER.md`](../../integrations/github-actions/docs/GITHUB-ACTIONS-DEVELOPER.md) |
+| Guide          | Path                                                                                                                             |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Adapter        | [`integrations/github-actions/docs/GITHUB-ACTIONS-ADAPTER.md`](../../integrations/github-actions/docs/GITHUB-ACTIONS-ADAPTER.md) |
+| Mapping        | [`…/GITHUB-ACTIONS-MAPPING.md`](../../integrations/github-actions/docs/GITHUB-ACTIONS-MAPPING.md)                                |
+| Compatibility  | [`…/GITHUB-ACTIONS-COMPATIBILITY.md`](../../integrations/github-actions/docs/GITHUB-ACTIONS-COMPATIBILITY.md)                    |
+| Authentication | [`…/GITHUB-ACTIONS-AUTHENTICATION.md`](../../integrations/github-actions/docs/GITHUB-ACTIONS-AUTHENTICATION.md)                  |
+| Developer      | [`…/GITHUB-ACTIONS-DEVELOPER.md`](../../integrations/github-actions/docs/GITHUB-ACTIONS-DEVELOPER.md)                            |
 
 ---
 

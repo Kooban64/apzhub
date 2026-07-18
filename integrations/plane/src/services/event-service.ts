@@ -32,7 +32,9 @@ export class PlaneEventService {
     if (!result.ok || (result.ignored && result.reason === "payload_not_object")) {
       this.translationFailures += 1;
       this.deps.metricsProvider
-        ?.counter("plane.event.translation_failures", { reason: result.reason ?? "unknown" })
+        ?.counter("plane.event.translation_failures", {
+          reason: result.reason ?? "unknown",
+        })
         .inc();
       this.deps.logger.warn("Plane event translation failed or ignored", {
         correlationId: context.correlationId,

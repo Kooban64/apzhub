@@ -16,14 +16,14 @@ When `PLANE_INTEGRATION_ENABLED=false` (default), Plane variables are optional a
 
 ## Configuration catalogue
 
-| Key | Type | Default | Owner | Scope | Secret class | Required when enabled |
-|-----|------|---------|-------|-------|--------------|----------------------|
-| `PLANE_INTEGRATION_ENABLED` | boolean | `false` | integrations | all | none | — |
-| `PLANE_BASE_URL` | url | — | integrations | all | none | Yes |
-| `PLANE_API_BASE_URL` | url | — | integrations | all | none | Yes |
-| `PLANE_API_TOKEN` | string | — | integrations | all | credential | Yes |
-| `PLANE_WORKSPACE_ID` | string | — | integrations | dev, test | none | Dev convenience |
-| `PLANE_WEBHOOK_SECRET` | string | — | integrations | all | secret | OSS-101-08+ |
+| Key                         | Type    | Default | Owner        | Scope     | Secret class | Required when enabled |
+| --------------------------- | ------- | ------- | ------------ | --------- | ------------ | --------------------- |
+| `PLANE_INTEGRATION_ENABLED` | boolean | `false` | integrations | all       | none         | —                     |
+| `PLANE_BASE_URL`            | url     | —       | integrations | all       | none         | Yes                   |
+| `PLANE_API_BASE_URL`        | url     | —       | integrations | all       | none         | Yes                   |
+| `PLANE_API_TOKEN`           | string  | —       | integrations | all       | credential   | Yes                   |
+| `PLANE_WORKSPACE_ID`        | string  | —       | integrations | dev, test | none         | Dev convenience       |
+| `PLANE_WEBHOOK_SECRET`      | string  | —       | integrations | all       | secret       | OSS-101-08+           |
 
 ---
 
@@ -72,7 +72,10 @@ When `PLANE_INTEGRATION_ENABLED=false` (default), Plane variables are optional a
 ## Typed access
 
 ```typescript
-import { planeEnvSchema, getPlaneConfigurationDiagnostics } from "@apzhub/config/governance";
+import {
+  planeEnvSchema,
+  getPlaneConfigurationDiagnostics,
+} from "@apzhub/config/governance";
 
 const plane = planeEnvSchema.parse(process.env);
 const diagnostics = getPlaneConfigurationDiagnostics();

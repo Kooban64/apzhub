@@ -27,19 +27,19 @@ Future Observability Workbench
 
 ## Metadata plane only
 
-| Capability | Available |
-| --- | --- |
-| Health / readiness / liveness metadata CRUD | Yes |
-| Service / component status metadata | Yes |
-| Metric definitions & sample metadata | Yes |
-| Alert definitions & state metadata | Yes |
-| Dashboard / log / trace metadata | Yes |
-| Incident references & maintenance windows | Yes |
-| Diagnostics metadata (platform readiness, persistence, completeness) | Yes |
-| Grafana / Prometheus / Loki / OTel / AlertManager execution | **No** |
-| Metrics collection / log ingest / trace ingest | **No** |
-| Provider credentials / secrets / API keys | **No** |
-| Observability Workbench | **No** (APZOBSERVE-004) |
+| Capability                                                           | Available               |
+| -------------------------------------------------------------------- | ----------------------- |
+| Health / readiness / liveness metadata CRUD                          | Yes                     |
+| Service / component status metadata                                  | Yes                     |
+| Metric definitions & sample metadata                                 | Yes                     |
+| Alert definitions & state metadata                                   | Yes                     |
+| Dashboard / log / trace metadata                                     | Yes                     |
+| Incident references & maintenance windows                            | Yes                     |
+| Diagnostics metadata (platform readiness, persistence, completeness) | Yes                     |
+| Grafana / Prometheus / Loki / OTel / AlertManager execution          | **No**                  |
+| Metrics collection / log ingest / trace ingest                       | **No**                  |
+| Provider credentials / secrets / API keys                            | **No**                  |
+| Observability Workbench                                              | **No** (APZOBSERVE-004) |
 
 ## Bootstrap
 

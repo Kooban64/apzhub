@@ -26,6 +26,7 @@ import { AdministrationWorkspaceRouter } from "@/components/administration/admin
 import { ConfigurationWorkspaceRouter } from "@/components/configuration/configuration-workspace-router";
 import { IdentityWorkspaceRouter } from "@/components/identity/identity-workspace-router";
 import { ObserveWorkspaceRouter } from "@/components/observe/observe-workspace-router";
+import { MetricsWorkspaceRouter } from "@/components/metrics/metrics-workspace-router";
 import { useE2eActivityTimelinePresentationRefresh } from "@/lib/e2e-activity-timeline-presentation-refresh";
 import {
   isPlatformOperationsRoute,
@@ -37,14 +38,12 @@ import { isIdentityRoute } from "@/lib/identity/routes";
 import { isNotificationsRoute } from "@/lib/notifications/routes";
 import { isConfigurationRoute } from "@/lib/configuration/routes";
 import { isObserveRoute } from "@/lib/observe/routes";
+import { isMetricsRoute } from "@/lib/metrics/routes";
 import { isReportingRoute } from "@/lib/reporting/routes";
 import { isSearchRoute } from "@/lib/search/routes";
 import { isSupportRoute } from "@/lib/support/routes";
 import { isTestingRoute } from "@/lib/testing/routes";
-import {
-  isWorkflowEngineRoute,
-  isWorkflowsRoute,
-} from "@/lib/workflows/routes";
+import { isWorkflowEngineRoute, isWorkflowsRoute } from "@/lib/workflows/routes";
 import { resolveCommandPaletteMode } from "@/lib/resolve-command-palette-mode";
 
 export function WorkbenchPage() {
@@ -138,6 +137,7 @@ export function WorkbenchPage() {
   const configurationActive = isConfigurationRoute(pathname);
   const identityActive = isIdentityRoute(pathname);
   const observeActive = isObserveRoute(pathname);
+  const metricsActive = isMetricsRoute(pathname);
   const administrationActive = isAdministrationRoute(pathname);
   const searchActive = isSearchRoute(pathname);
 
@@ -186,6 +186,8 @@ export function WorkbenchPage() {
         <IdentityWorkspaceRouter />
       ) : observeActive ? (
         <ObserveWorkspaceRouter />
+      ) : metricsActive ? (
+        <MetricsWorkspaceRouter />
       ) : administrationActive ? (
         <AdministrationWorkspaceRouter />
       ) : searchActive ? (

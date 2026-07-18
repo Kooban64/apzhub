@@ -15,17 +15,17 @@ Describe controlled failure scenarios used to validate Platform Core reliability
 
 Import from `@apzhub/platform-lifecycle`:
 
-| Helper | Simulates |
-|--------|-----------|
-| `createHealthyConsolidatedFixture()` | Baseline healthy platform |
-| `withDatabaseUnavailable()` | PostgreSQL dependency failure |
-| `withRedisUnavailable()` | Redis dependency failure |
-| `withMissingConfiguration()` | Invalid environment configuration |
-| `withAuthorizationFailure()` | Authorization diagnostics absent |
-| `withTenantGuardFailure()` | API permission enforcement disabled |
-| `withTrafficGovernanceDisabled()` | Traffic governance off |
-| `withProductFailure()` | Law Platform / Trust Accounting absent |
-| `withReadinessDegraded()` | Readiness probe degraded |
+| Helper                               | Simulates                              |
+| ------------------------------------ | -------------------------------------- |
+| `createHealthyConsolidatedFixture()` | Baseline healthy platform              |
+| `withDatabaseUnavailable()`          | PostgreSQL dependency failure          |
+| `withRedisUnavailable()`             | Redis dependency failure               |
+| `withMissingConfiguration()`         | Invalid environment configuration      |
+| `withAuthorizationFailure()`         | Authorization diagnostics absent       |
+| `withTenantGuardFailure()`           | API permission enforcement disabled    |
+| `withTrafficGovernanceDisabled()`    | Traffic governance off                 |
+| `withProductFailure()`               | Law Platform / Trust Accounting absent |
+| `withReadinessDegraded()`            | Readiness probe degraded               |
 
 Location: `packages/platform-lifecycle/src/failure-fixtures.ts`
 
@@ -42,7 +42,9 @@ import {
 import { buildPlatformLifecycleSnapshot } from "@apzhub/platform-lifecycle";
 
 const snapshot = buildPlatformLifecycleSnapshot(
-  createLifecycleValidationInput(withDatabaseUnavailable(createHealthyConsolidatedFixture())),
+  createLifecycleValidationInput(
+    withDatabaseUnavailable(createHealthyConsolidatedFixture()),
+  ),
 );
 
 expect(snapshot.currentState).toBe("configuration-ready");

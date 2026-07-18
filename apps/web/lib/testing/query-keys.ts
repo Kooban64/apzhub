@@ -28,7 +28,8 @@ export const testingQueryKeys = {
     all: () => [...testingQueryKeys.all, "executions"] as const,
     list: (params?: TestingListParams) =>
       [...testingQueryKeys.executions.all(), "list", params ?? {}] as const,
-    detail: (id: string) => [...testingQueryKeys.executions.all(), "detail", id] as const,
+    detail: (id: string) =>
+      [...testingQueryKeys.executions.all(), "detail", id] as const,
   },
   evidence: {
     all: () => [...testingQueryKeys.all, "evidence"] as const,
@@ -87,7 +88,14 @@ export const testingQueryKeys = {
     jobs: (owner: string, repo: string, runId: string) =>
       [...testingQueryKeys.pipelines.all(), "jobs", owner, repo, runId] as const,
     steps: (owner: string, repo: string, runId: string, jobId: string) =>
-      [...testingQueryKeys.pipelines.all(), "steps", owner, repo, runId, jobId] as const,
+      [
+        ...testingQueryKeys.pipelines.all(),
+        "steps",
+        owner,
+        repo,
+        runId,
+        jobId,
+      ] as const,
     artifacts: (owner: string, repo: string, runId: string) =>
       [...testingQueryKeys.pipelines.all(), "artifacts", owner, repo, runId] as const,
     summary: (owner: string, repo: string, runId: string) =>
@@ -98,11 +106,13 @@ export const testingQueryKeys = {
   engineeringIntelligence: {
     all: () => [...testingQueryKeys.all, "engineering-intelligence"] as const,
     score: () => [...testingQueryKeys.engineeringIntelligence.all(), "score"] as const,
-    health: () => [...testingQueryKeys.engineeringIntelligence.all(), "health"] as const,
+    health: () =>
+      [...testingQueryKeys.engineeringIntelligence.all(), "health"] as const,
     risk: () => [...testingQueryKeys.engineeringIntelligence.all(), "risk"] as const,
     snapshots: () =>
       [...testingQueryKeys.engineeringIntelligence.all(), "snapshots"] as const,
-    trends: () => [...testingQueryKeys.engineeringIntelligence.all(), "trends"] as const,
+    trends: () =>
+      [...testingQueryKeys.engineeringIntelligence.all(), "trends"] as const,
     benchmarks: () =>
       [...testingQueryKeys.engineeringIntelligence.all(), "benchmarks"] as const,
     baselines: () =>

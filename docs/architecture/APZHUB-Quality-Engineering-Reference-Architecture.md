@@ -37,19 +37,19 @@ Users and modules never call execution workers or storage directly.
 
 ## Domain model
 
-| Entity | Purpose | SoR |
-|--------|---------|-----|
-| **Requirement** | Traceability anchor; links to Projects/issues | Platform PostgreSQL |
-| **Test case** | Steps, expected results, automation flag | Platform PostgreSQL |
-| **Test suite** | Grouped cases for reuse | Platform PostgreSQL |
-| **Test plan** | Scope for a release or milestone | Platform PostgreSQL |
-| **Test cycle** | Time-bounded execution window within a plan | Platform PostgreSQL |
-| **Test run** | Single execution instance (manual or automated) | Platform PostgreSQL |
-| **Test result** | Pass/fail/blocked/skipped per step | Platform PostgreSQL |
-| **Evidence** | Screenshots, traces, videos, attachments | Object storage + metadata in PG |
-| **Defect link** | Reference to Projects issue or Support ticket | Platform PostgreSQL (ref only) |
-| **Release gate** | Rule set for certification | Platform PostgreSQL |
-| **Gate evaluation** | Point-in-time gate result | Platform PostgreSQL |
+| Entity              | Purpose                                         | SoR                             |
+| ------------------- | ----------------------------------------------- | ------------------------------- |
+| **Requirement**     | Traceability anchor; links to Projects/issues   | Platform PostgreSQL             |
+| **Test case**       | Steps, expected results, automation flag        | Platform PostgreSQL             |
+| **Test suite**      | Grouped cases for reuse                         | Platform PostgreSQL             |
+| **Test plan**       | Scope for a release or milestone                | Platform PostgreSQL             |
+| **Test cycle**      | Time-bounded execution window within a plan     | Platform PostgreSQL             |
+| **Test run**        | Single execution instance (manual or automated) | Platform PostgreSQL             |
+| **Test result**     | Pass/fail/blocked/skipped per step              | Platform PostgreSQL             |
+| **Evidence**        | Screenshots, traces, videos, attachments        | Object storage + metadata in PG |
+| **Defect link**     | Reference to Projects issue or Support ticket   | Platform PostgreSQL (ref only)  |
+| **Release gate**    | Rule set for certification                      | Platform PostgreSQL             |
+| **Gate evaluation** | Point-in-time gate result                       | Platform PostgreSQL             |
 
 Backend engine IDs are never exposed to UI — platform global IDs only.
 
@@ -212,12 +212,12 @@ Standard envelope, correlation IDs, typed errors (010).
 
 ## Events (illustrative)
 
-| Event | Subscribers |
-|-------|-------------|
-| `test_run.completed` | Notifications, activity, search index |
-| `release_gate.failed` | Notifications, Automation, Projects |
-| `defect.linked` | Activity, Projects |
-| `evidence.uploaded` | Search (metadata) |
+| Event                 | Subscribers                           |
+| --------------------- | ------------------------------------- |
+| `test_run.completed`  | Notifications, activity, search index |
+| `release_gate.failed` | Notifications, Automation, Projects   |
+| `defect.linked`       | Activity, Projects                    |
+| `evidence.uploaded`   | Search (metadata)                     |
 
 ---
 

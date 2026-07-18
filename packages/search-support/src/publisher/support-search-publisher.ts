@@ -68,12 +68,10 @@ export class SupportSearchPublisher {
   constructor(private readonly options: SupportSearchPublisherOptions) {
     this.mapper = options.mapper ?? new SupportSearchEntityMapper();
     this.validator = options.validator ?? new SupportSearchEntityValidator();
-    this.lifecycleHelper =
-      options.lifecycle ?? new SupportSearchLifecycle();
+    this.lifecycleHelper = options.lifecycle ?? new SupportSearchLifecycle();
     this.metrics = options.metrics ?? new SupportSearchMetrics();
     this.logger = options.logger ?? new SupportSearchLogger();
-    this.diagnosticsStore =
-      options.diagnostics ?? new SupportSearchDiagnosticsStore();
+    this.diagnosticsStore = options.diagnostics ?? new SupportSearchDiagnosticsStore();
     this.errors = options.errors ?? new SupportSearchErrorTranslator();
   }
 
@@ -123,12 +121,9 @@ export class SupportSearchPublisher {
     } catch (error) {
       const domain = this.errors.translate(error);
       this.metrics.record("validate", false, input.entityType);
-      this.diagnosticsStore.touch(
-        "validate",
-        context.correlationId,
-        input.entityType,
-        [{ field: "entity", code: domain.classification, message: domain.message }],
-      );
+      this.diagnosticsStore.touch("validate", context.correlationId, input.entityType, [
+        { field: "entity", code: domain.classification, message: domain.message },
+      ]);
       return failedResult("validate", context, domain.message, started);
     }
   }
@@ -166,11 +161,7 @@ export class SupportSearchPublisher {
     entityId: string,
   ): SearchPublicationResult {
     const started = Date.now();
-    this.diagnosticsStore.touch(
-      "remove",
-      context.correlationId,
-      entityType,
-    );
+    this.diagnosticsStore.touch("remove", context.correlationId, entityType);
     try {
       const result = this.options.integrationPublisher.remove(
         toSearchIntegrationContext(context),
@@ -213,9 +204,7 @@ export class SupportSearchPublisher {
     }
   }
 
-  diagnostics(
-    context: SupportSearchPublicationContext,
-  ): SupportSearchDiagnostics {
+  diagnostics(context: SupportSearchPublicationContext): SupportSearchDiagnostics {
     this.diagnosticsStore.touch("diagnostics", context.correlationId);
     return this.diagnosticsStore.build(
       this.metrics.snapshot(),
@@ -223,9 +212,7 @@ export class SupportSearchPublisher {
     );
   }
 
-  statistics(
-    _context: SupportSearchPublicationContext,
-  ): SupportSearchStatistics {
+  statistics(_context: SupportSearchPublicationContext): SupportSearchStatistics {
     return this.metrics.snapshot();
   }
 
@@ -297,16 +284,12 @@ export class SupportSearchPublisher {
       }
       const result = invoke(draft, toSearchIntegrationContext(context));
       this.metrics.record(operation, result.ok, input.entityType);
-      this.logger.log(
-        result.ok ? "info" : "error",
-        `Support search ${operation}`,
-        {
-          correlationId: context.correlationId,
-          operation,
-          entityType: input.entityType,
-          entityId: draft.entityId,
-        },
-      );
+      this.logger.log(result.ok ? "info" : "error", `Support search ${operation}`, {
+        correlationId: context.correlationId,
+        operation,
+        entityType: input.entityType,
+        entityId: draft.entityId,
+      });
       return result;
     } catch (error) {
       const domain = this.errors.translate(error);

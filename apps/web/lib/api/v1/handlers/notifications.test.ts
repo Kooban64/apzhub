@@ -188,11 +188,8 @@ describe("APZNOTIFY-003 notification handlers", () => {
         .data.status,
     ).toBe("read");
     expect(
-      (
-        await (
-          await handleAcknowledgeNotification(makeRequest("/"), ctx, route)
-        ).json()
-      ).data.status,
+      (await (await handleAcknowledgeNotification(makeRequest("/"), ctx, route)).json())
+        .data.status,
     ).toBe("acknowledged");
     expect(
       (await (await handleDismissNotification(makeRequest("/"), ctx, route)).json())
@@ -361,8 +358,8 @@ describe("APZNOTIFY-003 notification handlers", () => {
     ).toBe("proj_1");
 
     expect(
-      (await (await handleListNotificationAudit(makeRequest("/"), ctx)).json())
-        .data[0].action,
+      (await (await handleListNotificationAudit(makeRequest("/"), ctx)).json()).data[0]
+        .action,
     ).toBe("notification.created");
     expect(
       (
@@ -461,10 +458,7 @@ describe("APZNOTIFY-003 notification handlers", () => {
   });
 
   it("proves forbidden delivery route segments are absent", () => {
-    const routesRoot = join(
-      process.cwd(),
-      "apps/web/app/api/v1/notifications",
-    );
+    const routesRoot = join(process.cwd(), "apps/web/app/api/v1/notifications");
     const files = walkRoutes(routesRoot);
     const joined = files.join("\n");
     const forbidden = [
@@ -505,9 +499,7 @@ describe("APZNOTIFY-003 notification handlers", () => {
     expect(spec.paths["/notifications/{notificationId}/transition"]).toBeDefined();
     expect(spec.paths["/notifications/templates"]).toBeDefined();
     expect(spec.paths["/notifications/capabilities"]).toBeDefined();
-    expect(spec.tags?.some((t) => t.name === "Platform Notifications")).toBe(
-      true,
-    );
+    expect(spec.tags?.some((t) => t.name === "Platform Notifications")).toBe(true);
     for (const bad of [
       "/notifications/send",
       "/notifications/deliver",

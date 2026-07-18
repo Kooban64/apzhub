@@ -2,7 +2,8 @@
 export type PlatformTenantStatus = "provisioning" | "active" | "suspended" | "archived";
 
 /** Membership status for user ↔ tenant binding. */
-export type PlatformTenantMembershipStatus = "active" | "invited" | "suspended" | "removed";
+export type PlatformTenantMembershipStatus =
+  "active" | "invited" | "suspended" | "removed";
 
 export interface PlatformTenantMetadata {
   readonly displayName?: string;

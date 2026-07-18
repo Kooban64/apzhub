@@ -10,12 +10,12 @@
 
 ## Enablement
 
-| Env | Purpose |
-| --- | --- |
-| `APZHUB_WORKFLOW_ENABLED=true` | Enables Workflow HTTP (SoR + engine routes gate) |
-| `APZHUB_WORKFLOW_ENGINE_ENABLED=true` | Wires certified adapter in gateway bootstrap |
-| `APZHUB_WORKFLOW_ENGINE_BASE_URL` | Required when engine enabled |
-| `APZHUB_WORKFLOW_ENGINE_API_KEY` | Optional secret material for bootstrap SecretProvider |
+| Env                                   | Purpose                                               |
+| ------------------------------------- | ----------------------------------------------------- |
+| `APZHUB_WORKFLOW_ENABLED=true`        | Enables Workflow HTTP (SoR + engine routes gate)      |
+| `APZHUB_WORKFLOW_ENGINE_ENABLED=true` | Wires certified adapter in gateway bootstrap          |
+| `APZHUB_WORKFLOW_ENGINE_BASE_URL`     | Required when engine enabled                          |
+| `APZHUB_WORKFLOW_ENGINE_API_KEY`      | Optional secret material for bootstrap SecretProvider |
 
 ## Out of scope
 

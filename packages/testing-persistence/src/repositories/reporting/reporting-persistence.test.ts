@@ -1,9 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  createInMemoryTestingPersistence,
-  type RepositoryContext,
-} from "../../index";
+import { createInMemoryTestingPersistence, type RepositoryContext } from "../../index";
 
 function ctx(overrides?: Partial<RepositoryContext>): RepositoryContext {
   return {

@@ -15,7 +15,10 @@ import {
   TEST_SERVICE_CONTEXT,
   TEST_WORKSPACE,
 } from "./testing/mock-providers";
-import type { SearchQueryInput, ServiceRequestContext } from "@apzhub/platform-service-contracts";
+import type {
+  SearchQueryInput,
+  ServiceRequestContext,
+} from "@apzhub/platform-service-contracts";
 
 function createTestBundle() {
   const registry = new ProviderRegistry();
@@ -118,7 +121,9 @@ describe("Platform service implementations", () => {
 
   it("delegates search operations and preserves canonical documents", async () => {
     const services = createTestBundle();
-    const result = await services.search.search(TEST_SERVICE_CONTEXT, { text: "Alpha" });
+    const result = await services.search.search(TEST_SERVICE_CONTEXT, {
+      text: "Alpha",
+    });
 
     expect(result.status).toBe("ok");
     expect(result.documents[0]?.title).toBe("Alpha");
@@ -148,7 +153,9 @@ describe("Platform service implementations", () => {
 
     const services = createPlatformServices({ registry });
 
-    await expect(services.user.getUser(TEST_SERVICE_CONTEXT, "user_missing")).rejects.toMatchObject({
+    await expect(
+      services.user.getUser(TEST_SERVICE_CONTEXT, "user_missing"),
+    ).rejects.toMatchObject({
       code: "NOT_FOUND",
     });
   });
@@ -194,16 +201,18 @@ describe("Platform service implementations", () => {
     registry.setActiveProvider("search", "search-b");
 
     const services = createPlatformServices({ registry });
-    const result = await services.search.search(TEST_SERVICE_CONTEXT, { text: "query" });
+    const result = await services.search.search(TEST_SERVICE_CONTEXT, {
+      text: "query",
+    });
 
     expect(result.documents[0]?.title).toBe("From B");
   });
 
   it("throws when resolving unsupported capability providers", async () => {
     const services = createPlatformServices();
-    await expect(services.workspace.listWorkspaces(TEST_SERVICE_CONTEXT)).rejects.toBeInstanceOf(
-      PlatformServiceError,
-    );
+    await expect(
+      services.workspace.listWorkspaces(TEST_SERVICE_CONTEXT),
+    ).rejects.toBeInstanceOf(PlatformServiceError);
   });
 });
 

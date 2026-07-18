@@ -6,13 +6,13 @@
 
 ## Programme consistency
 
-| Gate | Result |
-| ---- | ------ |
-| Vertical `audit:notification-vertical` (001–005) | PASS |
-| Wave closeout `audit:notification-wave` | PASS |
-| OpenAPI platform validate | PASS |
-| Package versions frozen | PASS |
-| Documentation pack complete | PASS |
+| Gate                                             | Result |
+| ------------------------------------------------ | ------ |
+| Vertical `audit:notification-vertical` (001–005) | PASS   |
+| Wave closeout `audit:notification-wave`          | PASS   |
+| OpenAPI platform validate                        | PASS   |
+| Package versions frozen                          | PASS   |
+| Documentation pack complete                      | PASS   |
 
 ## Patterns frozen
 

@@ -19,18 +19,18 @@ Product code
 
 ## Gateway facets
 
-| Facet | Operations |
-| --- | --- |
+| Facet            | Operations                                                      |
+| ---------------- | --------------------------------------------------------------- |
 | `configurations` | list, get, create, updateMetadata, archive, restore, transition |
-| `namespaces` | list, get, create, update |
-| `groups` | list, get, create, update |
-| `versions` | list, get, create, publish, deprecate |
-| `overrides` | list, get, create, update |
-| `scopes` | list, get |
-| `validation` | validateMetadata, listRules |
-| `references` | list, get |
-| `audit` | list, get |
-| `diagnostics` | health, readiness, capabilities |
+| `namespaces`     | list, get, create, update                                       |
+| `groups`         | list, get, create, update                                       |
+| `versions`       | list, get, create, publish, deprecate                           |
+| `overrides`      | list, get, create, update                                       |
+| `scopes`         | list, get                                                       |
+| `validation`     | validateMetadata, listRules                                     |
+| `references`     | list, get                                                       |
+| `audit`          | list, get                                                       |
+| `diagnostics`    | health, readiness, capabilities                                 |
 
 ## Bootstrap
 

@@ -13,7 +13,4 @@ export type {
   CreateHttpIntegrationClientOptions,
   RetryPolicyOptions,
 } from "../transport";
-export {
-  HttpIntegrationClient,
-  createHttpIntegrationClient,
-} from "../transport";
+export { HttpIntegrationClient, createHttpIntegrationClient } from "../transport";

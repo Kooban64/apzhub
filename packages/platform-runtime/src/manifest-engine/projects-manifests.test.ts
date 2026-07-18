@@ -39,7 +39,8 @@ describe("Manifest Engine — OSS-101-03 Projects manifests", () => {
     expect(result.success).toBe(true);
     if (!result.success) return;
 
-    const permissions = (result.data as { permissions?: { id: string }[] }).permissions ?? [];
+    const permissions =
+      (result.data as { permissions?: { id: string }[] }).permissions ?? [];
     const permissionIds = permissions.map((entry) => entry.id);
     expect(permissionIds).toContain("projects.view");
     expect(permissionIds).toContain("projects.admin");

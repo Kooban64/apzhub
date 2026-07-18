@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-owners
+name: Metric Owners
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metric Owners sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metric Owners
+    icon: user
+    route: /workspace/metrics/owners
+    order: 130
+    permission: metrics.read
+  view:
+    title: Metric Owners
+    workspace: metrics
+    route: /workspace/metrics/owners
+    permission: metrics.read

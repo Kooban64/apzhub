@@ -1,9 +1,9 @@
 # APZHUB Search Integration SDK — Developer Guide
 
-| Field | Value |
-| --- | --- |
-| **Package** | `@apzhub/integration-search-sdk` **0.1.0** |
-| **Milestone** | APZSEARCH-004 |
+| Field         | Value                                      |
+| ------------- | ------------------------------------------ |
+| **Package**   | `@apzhub/integration-search-sdk` **0.1.0** |
+| **Milestone** | APZSEARCH-004                              |
 
 ## Install / workspace
 

@@ -43,9 +43,9 @@ Aggregated advisory summary (`isDecision: false`) with explainable risk factors.
 
 ## Testing
 
-- Domain: 16 vitest tests  
-- Gateway/authz: 2 vitest tests  
-- Contracts version/catalogue updated  
+- Domain: 16 vitest tests
+- Gateway/authz: 2 vitest tests
+- Contracts version/catalogue updated
 
 ## Coverage
 
@@ -53,25 +53,25 @@ Engineering intelligence module: **96.15% lines**, **75.9% branches**, **92.85% 
 
 ## Quality Gates
 
-| Gate | Result |
-|------|--------|
-| typecheck (contracts/persistence/services/platform) | PASS |
-| tests (EI domain + gateway) | PASS |
-| coverage ≥95% lines | PASS (96.15%) |
-| architecture / dependency / boundary | PASS (domain-only; no HTTP/UI; adapter isolation preserved) |
-| authorization mappings | PASS |
+| Gate                                                | Result                                                      |
+| --------------------------------------------------- | ----------------------------------------------------------- |
+| typecheck (contracts/persistence/services/platform) | PASS                                                        |
+| tests (EI domain + gateway)                         | PASS                                                        |
+| coverage ≥95% lines                                 | PASS (96.15%)                                               |
+| architecture / dependency / boundary                | PASS (domain-only; no HTTP/UI; adapter isolation preserved) |
+| authorization mappings                              | PASS                                                        |
 
 ## Technical Debt
 
-- Branch coverage mid-70s on aggregation fallbacks — acceptable for milestone; expand with richer SoR fixtures in 022  
-- No HTTP/OpenAPI yet (deferred to 022)  
+- Branch coverage mid-70s on aggregation fallbacks — acceptable for milestone; expand with richer SoR fixtures in 022
+- No HTTP/OpenAPI yet (deferred to 022)
 - Live Playwright N/A (no UI)
 
 ## Known Limitations
 
-- Domain services only — no presentation  
-- Consumes existing sources only — no new integrations  
-- Advisory outputs only — no auto-decisions  
+- Domain services only — no presentation
+- Consumes existing sources only — no new integrations
+- Advisory outputs only — no auto-decisions
 
 ## Recommendation
 

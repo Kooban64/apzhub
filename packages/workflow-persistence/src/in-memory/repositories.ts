@@ -99,8 +99,7 @@ export function createInMemoryWorkflowRepositories(
     },
     async listByWorkflow(ctx, workflowId) {
       return [...stores.versions.values()].filter(
-        (row) =>
-          row.tenantId === ctx.tenantId && row.workflowId === workflowId,
+        (row) => row.tenantId === ctx.tenantId && row.workflowId === workflowId,
       );
     },
   };
@@ -177,10 +176,7 @@ export function createInMemoryWorkflowRepositories(
     },
     async listByWorkflow(ctx, workflowId) {
       return [...stores.audits.values()]
-        .filter(
-          (row) =>
-            row.tenantId === ctx.tenantId && row.workflowId === workflowId,
-        )
+        .filter((row) => row.tenantId === ctx.tenantId && row.workflowId === workflowId)
         .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
     },
   };

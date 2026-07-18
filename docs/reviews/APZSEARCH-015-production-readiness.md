@@ -8,22 +8,22 @@
 
 ## Checklist
 
-| Area | Status |
-| ---- | ------ |
-| Search Integration Framework **0.1.0** | ✅ |
-| Projects / Support / Documents / Reporting adapters **0.1.0** | ✅ |
-| Testing adapter **0.1.1** | ✅ |
-| Eight publication operations per product | ✅ |
-| Canonical entity catalogues + product isolation | ✅ |
-| Safe-fields / leak scanners | ✅ |
-| Dependency / boundary audits 009–014 + 015 | ✅ 0 violations |
-| Frozen platform stack (contracts 0.4.0 · persistence 0.2.0 · SDK 0.1.0 · Meilisearch 0.1.0 · platform-services 0.18.0) | ✅ |
-| Durable Search Platform indexing bridge | ❌ Deferred to **APZSEARCH-016** |
-| Platform Service lifecycle hook wiring | ❌ Not wired (hooks exist as explicit callables) |
-| Public index/document HTTP | ❌ Excluded (ADR-0064) |
-| OCR / AI / semantic / vector / Event Bus / workers | ❌ Excluded |
-| Playwright / Next live webServer | ⚠️ LIMITED (008 external Testing slug conflict) |
-| In-memory publication journals | ⚠️ Default test / local sinks until 016 |
+| Area                                                                                                                   | Status                                           |
+| ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Search Integration Framework **0.1.0**                                                                                 | ✅                                               |
+| Projects / Support / Documents / Reporting adapters **0.1.0**                                                          | ✅                                               |
+| Testing adapter **0.1.1**                                                                                              | ✅                                               |
+| Eight publication operations per product                                                                               | ✅                                               |
+| Canonical entity catalogues + product isolation                                                                        | ✅                                               |
+| Safe-fields / leak scanners                                                                                            | ✅                                               |
+| Dependency / boundary audits 009–014 + 015                                                                             | ✅ 0 violations                                  |
+| Frozen platform stack (contracts 0.4.0 · persistence 0.2.0 · SDK 0.1.0 · Meilisearch 0.1.0 · platform-services 0.18.0) | ✅                                               |
+| Durable Search Platform indexing bridge                                                                                | ❌ Deferred to **APZSEARCH-016**                 |
+| Platform Service lifecycle hook wiring                                                                                 | ❌ Not wired (hooks exist as explicit callables) |
+| Public index/document HTTP                                                                                             | ❌ Excluded (ADR-0064)                           |
+| OCR / AI / semantic / vector / Event Bus / workers                                                                     | ❌ Excluded                                      |
+| Playwright / Next live webServer                                                                                       | ⚠️ LIMITED (008 external Testing slug conflict)  |
+| In-memory publication journals                                                                                         | ⚠️ Default test / local sinks until 016          |
 
 ## Why PRODUCTION_READY_WITH_LIMITATIONS
 

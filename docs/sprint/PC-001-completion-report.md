@@ -18,15 +18,15 @@ PC-001 performed the final certification review of the APZHUB Platform Core. All
 
 ## Deliverables
 
-| # | Deliverable | Location | Status |
-|---|-------------|----------|--------|
-| 1 | Platform Core Certification | [APZHUB-Platform-Core-Certification.md](../reviews/APZHUB-Platform-Core-Certification.md) | ✅ |
-| 2 | Platform Core Reference Architecture | [APZHUB-Platform-Core-Reference-Architecture.md](../architecture/APZHUB-Platform-Core-Reference-Architecture.md) | ✅ |
-| 3 | Platform Core Capability Reference | [APZHUB-Platform-Core-Capability-Reference.md](../architecture/APZHUB-Platform-Core-Capability-Reference.md) | ✅ |
-| 4 | Commercial Assessment | [APZHUB-Platform-Core-Commercial-Assessment.md](../reviews/APZHUB-Platform-Core-Commercial-Assessment.md) | ✅ |
-| 5 | Platform Core v1.0 Release Review | [APZHUB-Platform-Core-v1.0.md](../releases/APZHUB-Platform-Core-v1.0.md) | ✅ |
-| 6 | Platform Core v2 Roadmap | [APZHUB-Platform-Core-v2-Roadmap.md](../roadmap/APZHUB-Platform-Core-v2-Roadmap.md) | ✅ |
-| 7 | This completion report | `docs/sprint/PC-001-completion-report.md` | ✅ |
+| #   | Deliverable                          | Location                                                                                                         | Status |
+| --- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------- | ------ |
+| 1   | Platform Core Certification          | [APZHUB-Platform-Core-Certification.md](../reviews/APZHUB-Platform-Core-Certification.md)                        | ✅     |
+| 2   | Platform Core Reference Architecture | [APZHUB-Platform-Core-Reference-Architecture.md](../architecture/APZHUB-Platform-Core-Reference-Architecture.md) | ✅     |
+| 3   | Platform Core Capability Reference   | [APZHUB-Platform-Core-Capability-Reference.md](../architecture/APZHUB-Platform-Core-Capability-Reference.md)     | ✅     |
+| 4   | Commercial Assessment                | [APZHUB-Platform-Core-Commercial-Assessment.md](../reviews/APZHUB-Platform-Core-Commercial-Assessment.md)        | ✅     |
+| 5   | Platform Core v1.0 Release Review    | [APZHUB-Platform-Core-v1.0.md](../releases/APZHUB-Platform-Core-v1.0.md)                                         | ✅     |
+| 6   | Platform Core v2 Roadmap             | [APZHUB-Platform-Core-v2-Roadmap.md](../roadmap/APZHUB-Platform-Core-v2-Roadmap.md)                              | ✅     |
+| 7   | This completion report               | `docs/sprint/PC-001-completion-report.md`                                                                        | ✅     |
 
 ---
 
@@ -42,16 +42,16 @@ PC-001 performed the final certification review of the APZHUB Platform Core. All
 
 ### Observations (non-blocking)
 
-| ID | Finding | Target |
-|----|---------|--------|
-| OBS-PC01-01 | App bootstrap duplicated (`web` / `law-platform`) | PCv2-01 |
-| OBS-PC01-02 | Outbox workers not implemented | PCv2-02 |
-| OBS-PC01-03 | CSP Report-Only | PCv2-01 |
-| OBS-PC01-04 | No GitHub Actions CI | M17 / PCv2-01 |
-| OBS-PC01-05 | Commercial readiness Fair | PCv2 |
-| OBS-PC01-06 | Session-only notification/activity stores | PCv2+ |
-| OBS-PC01-07 | Law schema in `@apzhub/config` | Product extraction |
-| OBS-PC01-08 | Feature flags foundation only | PCv2-10 |
+| ID          | Finding                                           | Target             |
+| ----------- | ------------------------------------------------- | ------------------ |
+| OBS-PC01-01 | App bootstrap duplicated (`web` / `law-platform`) | PCv2-01            |
+| OBS-PC01-02 | Outbox workers not implemented                    | PCv2-02            |
+| OBS-PC01-03 | CSP Report-Only                                   | PCv2-01            |
+| OBS-PC01-04 | No GitHub Actions CI                              | M17 / PCv2-01      |
+| OBS-PC01-05 | Commercial readiness Fair                         | PCv2               |
+| OBS-PC01-06 | Session-only notification/activity stores         | PCv2+              |
+| OBS-PC01-07 | Law schema in `@apzhub/config`                    | Product extraction |
+| OBS-PC01-08 | Feature flags foundation only                     | PCv2-10            |
 
 ### Technical debt (unchanged — reference only)
 
@@ -67,28 +67,28 @@ See [Technical Debt Register](../architecture/APZHUB-Platform-Technical-Debt-Reg
 
 The Platform Core is sufficiently complete, consistent, and mature to become the **permanent foundation** for all future APZHUB products.
 
-| Question | Answer |
-|----------|--------|
-| Platform Core complete? | **Yes** — Phase 1 |
-| Change architectural decisions? | **No** fundamental changes |
-| Most valuable decisions? | Manifest-first, Workbench shell, Platform-owned IAM |
-| Reusable outside APZHUB? | Runtime, Workbench, Action, Knowledge frameworks — high |
-| Independent commercial platform? | **Yes, with PCv2** |
-| PCv2 work? | See v2 roadmap (10 phases) |
-| Financial Engine extraction now? | **No** — FIN-001 defer |
-| Banking now? | **No** |
-| Products depend exclusively on Platform Core? | **Yes** — mandatory |
+| Question                                      | Answer                                                  |
+| --------------------------------------------- | ------------------------------------------------------- |
+| Platform Core complete?                       | **Yes** — Phase 1                                       |
+| Change architectural decisions?               | **No** fundamental changes                              |
+| Most valuable decisions?                      | Manifest-first, Workbench shell, Platform-owned IAM     |
+| Reusable outside APZHUB?                      | Runtime, Workbench, Action, Knowledge frameworks — high |
+| Independent commercial platform?              | **Yes, with PCv2**                                      |
+| PCv2 work?                                    | See v2 roadmap (10 phases)                              |
+| Financial Engine extraction now?              | **No** — FIN-001 defer                                  |
+| Banking now?                                  | **No**                                                  |
+| Products depend exclusively on Platform Core? | **Yes** — mandatory                                     |
 
 ---
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| `pnpm lint` | ✅ Pass |
-| `pnpm typecheck` | ✅ Pass |
-| `pnpm build` | ✅ Pass |
-| `pnpm test` | ✅ 1873 passed |
+| Gate                 | Result         |
+| -------------------- | -------------- |
+| `pnpm lint`          | ✅ Pass        |
+| `pnpm typecheck`     | ✅ Pass        |
+| `pnpm build`         | ✅ Pass        |
+| `pnpm test`          | ✅ 1873 passed |
 | `pnpm test:coverage` | ✅ Pass (≥80%) |
 
 No code changes in PC-001. No regressions.

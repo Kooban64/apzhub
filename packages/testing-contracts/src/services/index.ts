@@ -50,7 +50,10 @@ export type { RequirementService } from "./requirement-service";
 export type { TestPlanService } from "./test-plan-service";
 export type { TestSuiteService } from "./test-suite-service";
 export type { TestCaseService } from "./test-case-service";
-export type { ManualExecutionService, ManualExecutionCreateInput } from "./manual-execution-service";
+export type {
+  ManualExecutionService,
+  ManualExecutionCreateInput,
+} from "./manual-execution-service";
 export type { RegressionService } from "./regression-service";
 export type { RiskService } from "./risk-service";
 export type { CertificationPreparationService } from "./certification-preparation-service";

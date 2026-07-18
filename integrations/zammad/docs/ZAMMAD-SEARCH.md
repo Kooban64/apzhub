@@ -24,14 +24,14 @@ adapter.core.search
 
 ## Supported operations
 
-| Method | Operation | Notes |
-| --- | --- | --- |
-| `search` | `zammad.search.search` | Unified search; optional `kinds` filter |
-| `searchSupportRequests` | scoped | `kinds: ["support_request"]` |
-| `searchOrganizations` | scoped | |
-| `searchGroups` | scoped | List + client-side text filter (CE may lack group search) |
-| `searchUsers` | scoped | |
-| `searchArticles` | scoped | Scans articles for tickets matching the query |
+| Method                  | Operation              | Notes                                                     |
+| ----------------------- | ---------------------- | --------------------------------------------------------- |
+| `search`                | `zammad.search.search` | Unified search; optional `kinds` filter                   |
+| `searchSupportRequests` | scoped                 | `kinds: ["support_request"]`                              |
+| `searchOrganizations`   | scoped                 |                                                           |
+| `searchGroups`          | scoped                 | List + client-side text filter (CE may lack group search) |
+| `searchUsers`           | scoped                 |                                                           |
+| `searchArticles`        | scoped                 | Scans articles for tickets matching the query             |
 
 ---
 

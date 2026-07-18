@@ -8,13 +8,13 @@
 
 ## Providers
 
-| Provider | Status |
-| -------- | ------ |
-| Filesystem | Certified (unit) |
-| S3-compatible | Certified (unit; live MinIO optional ops) |
-| Memory | Test-only |
-| Azure Blob | **Excluded** — not implemented |
-| Google Cloud Storage | **Excluded** — not implemented |
+| Provider             | Status                                    |
+| -------------------- | ----------------------------------------- |
+| Filesystem           | Certified (unit)                          |
+| S3-compatible        | Certified (unit; live MinIO optional ops) |
+| Memory               | Test-only                                 |
+| Azure Blob           | **Excluded** — not implemented            |
+| Google Cloud Storage | **Excluded** — not implemented            |
 
 ## Verified
 

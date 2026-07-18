@@ -1,6 +1,6 @@
 # APZHUB Platform Quality Aggregation
 
-**Milestone:** APZTCMS-014  
+**Milestone:** APZTCMS-014
 
 ## Rule
 

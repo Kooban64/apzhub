@@ -49,9 +49,7 @@ export function createMockSearchClient(
     async executeQuery(input) {
       const q = input.query.keywords?.toLowerCase() ?? "";
       const hits =
-        !q || MOCK_SEARCH_HIT.title.toLowerCase().includes(q)
-          ? [MOCK_SEARCH_HIT]
-          : [];
+        !q || MOCK_SEARCH_HIT.title.toLowerCase().includes(q) ? [MOCK_SEARCH_HIT] : [];
       return mockPage(hits);
     },
     async validateQuery() {

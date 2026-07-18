@@ -112,7 +112,8 @@ export class TestingPipelinesServiceImpl implements TestingPipelinesService {
         providerKind: "github_actions",
         id: run.id,
         name: run.name,
-        status: run.status === "passed" || run.status === "failed" ? "completed" : run.status,
+        status:
+          run.status === "passed" || run.status === "failed" ? "completed" : run.status,
         conclusion:
           run.status === "passed"
             ? "success"
@@ -135,7 +136,10 @@ export class TestingPipelinesServiceImpl implements TestingPipelinesService {
         jobs: jobs.map((job) => ({
           id: job.key,
           name: job.name,
-          status: job.status === "passed" || job.status === "failed" ? "completed" : job.status,
+          status:
+            job.status === "passed" || job.status === "failed"
+              ? "completed"
+              : job.status,
           conclusion:
             job.status === "passed"
               ? "success"

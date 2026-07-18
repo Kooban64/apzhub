@@ -4,10 +4,7 @@ import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { getPlatformServiceGateway } from "../gateway/bootstrap";
 import { jsonCollectionResponse, jsonDataResponse } from "../response";
 import { parsePathParam, parseQuery } from "../schemas/common";
-import {
-  workspaceIdParamSchema,
-  workspaceListQuerySchema,
-} from "../schemas/workspace";
+import { workspaceIdParamSchema, workspaceListQuerySchema } from "../schemas/workspace";
 import { toListQuery, toPlatformApiPage } from "./paging";
 
 export async function handleListWorkspaces(
@@ -20,7 +17,10 @@ export async function handleListWorkspaces(
   const result = await gateway.workspaces.listWorkspaces(context.serviceContext, {
     page: listQuery.page,
     sort: listQuery.sort as
-      | readonly { field: "name" | "slug" | "createdAt" | "updatedAt"; direction: "asc" | "desc" }[]
+      | readonly {
+          field: "name" | "slug" | "createdAt" | "updatedAt";
+          direction: "asc" | "desc";
+        }[]
       | undefined,
   });
 

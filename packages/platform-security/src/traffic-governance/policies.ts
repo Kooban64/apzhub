@@ -36,7 +36,8 @@ export const CANONICAL_TRAFFIC_POLICIES: readonly TrafficPolicyDefinition[] = [
   {
     id: "public-health",
     service: "public",
-    endpointPattern: /^\/api\/(health|platform\/v1\/system\/(health|liveness|readiness)|law\/v1\/health)/,
+    endpointPattern:
+      /^\/api\/(health|platform\/v1\/system\/(health|liveness|readiness)|law\/v1\/health)/,
     description: "Public health and probe endpoints",
     limits: { requestsPerMinute: 300, burstMultiplier: 2, burstWindowSeconds: 10 },
     dimensions: ["ip", "endpoint"],

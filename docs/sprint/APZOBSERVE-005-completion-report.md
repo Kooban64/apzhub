@@ -81,11 +81,11 @@ Operational Readiness Guide published (env, migrations, disable procedure, triag
 
 ## Coverage
 
-| Metric | Result |
-| --- | --- |
-| Lines | **98.22%** |
-| Functions | **96.97%** |
-| Branches | **76.52%** (LIMITED residual; critical branches covered) |
+| Metric    | Result                                                   |
+| --------- | -------------------------------------------------------- |
+| Lines     | **98.22%**                                               |
+| Functions | **96.97%**                                               |
+| Branches  | **76.52%** (LIMITED residual; critical branches covered) |
 
 ## Regression Results
 

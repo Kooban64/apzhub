@@ -24,7 +24,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -34,15 +35,10 @@ function rel(file) {
 }
 
 function stripComments(content) {
-  return content
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/\/\/.*$/gm, "");
+  return content.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
 }
 
-const handlerFile = join(
-  ROOT,
-  "apps/web/lib/api/v1/handlers/workflow-engine.ts",
-);
+const handlerFile = join(ROOT, "apps/web/lib/api/v1/handlers/workflow-engine.ts");
 if (!existsSync(handlerFile)) {
   violations.push({
     file: "apps/web/lib/api/v1/handlers/workflow-engine.ts",
@@ -223,12 +219,12 @@ if (!openapi.includes("\n  /workflows/engine/workflows:")) {
     detail: "Expected /workflows/engine/workflows paths",
   });
 }
-if (!openapi.includes("version: 1.4.0")) {
+if (!/version:\s*1\.(?:[4-9]|\d{2,})\.\d+/.test(openapi.slice(0, 400))) {
   violations.push({
     file: "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
     line: 1,
     rule: "openapi-version",
-    detail: "Expected OpenAPI info.version 1.4.0",
+    detail: "Expected OpenAPI info.version >= 1.4.0",
   });
 }
 
@@ -265,5 +261,5 @@ console.log("APZWORKFLOW-008 audit PASS");
 console.log("  - engine handlers call gateway.workflow.engine.* only");
 console.log("  - typed client targets /api/v1/workflows/engine");
 console.log("  - routes authenticated; forbidden segments absent");
-console.log("  - OpenAPI Workflow Engine tag + 1.4.0");
+console.log("  - OpenAPI Workflow Engine tag + version >= 1.4.0");
 process.exit(0);

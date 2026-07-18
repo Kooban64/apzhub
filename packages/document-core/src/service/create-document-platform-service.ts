@@ -51,10 +51,7 @@ export type PlatformDocumentEngineDeps = {
   readonly id: () => string;
 };
 
-function assertPermission(
-  ctx: DocumentRequestContext,
-  required: string,
-): void {
+function assertPermission(ctx: DocumentRequestContext, required: string): void {
   const granted = ctx.permissions;
   if (!granted || granted.length === 0) return;
   if (
@@ -64,11 +61,9 @@ function assertPermission(
   ) {
     return;
   }
-  throw new DocumentDomainError(
-    "forbidden",
-    `Missing permission: ${required}`,
-    { required },
-  );
+  throw new DocumentDomainError("forbidden", `Missing permission: ${required}`, {
+    required,
+  });
 }
 
 function toSummary(document: Document, tagNames: readonly string[]): DocumentSummary {
@@ -178,9 +173,7 @@ export function createDocumentPlatformService(
         categoryId: input.categoryId
           ? (input.categoryId as Document["categoryId"])
           : undefined,
-        folderId: input.folderId
-          ? (input.folderId as Document["folderId"])
-          : undefined,
+        folderId: input.folderId ? (input.folderId as Document["folderId"]) : undefined,
         tagIds,
         permissions: [
           {
@@ -230,15 +223,10 @@ export function createDocumentPlatformService(
         ...document,
         title: input.title?.trim() || document.title,
         description:
-          input.description !== undefined
-            ? input.description
-            : document.description,
-        mimeType:
-          input.mimeType !== undefined ? input.mimeType : document.mimeType,
+          input.description !== undefined ? input.description : document.description,
+        mimeType: input.mimeType !== undefined ? input.mimeType : document.mimeType,
         byteLength:
-          input.byteLength !== undefined
-            ? input.byteLength
-            : document.byteLength,
+          input.byteLength !== undefined ? input.byteLength : document.byteLength,
         updatedAt: now,
       };
       await deps.documents.update(ctx, updatedDoc);
@@ -438,9 +426,7 @@ export function createDocumentPlatformService(
         const tagNames = await resolveTagNames(deps, ctx, document.tagIds);
         if (
           input.tagName &&
-          !tagNames.some(
-            (name) => name.toLowerCase() === input.tagName!.toLowerCase(),
-          )
+          !tagNames.some((name) => name.toLowerCase() === input.tagName!.toLowerCase())
         ) {
           continue;
         }
@@ -480,11 +466,7 @@ export function createDocumentPlatformService(
 
     async listAudit(ctx, documentId) {
       assertPermission(ctx, "document.audit");
-      requireFound(
-        await deps.documents.get(ctx, documentId),
-        "document",
-        documentId,
-      );
+      requireFound(await deps.documents.get(ctx, documentId), "document", documentId);
       return deps.audits.listByDocument(ctx, documentId);
     },
 
@@ -508,9 +490,7 @@ export function createDocumentPlatformService(
       const now = deps.now();
       const updated: Document = {
         ...document,
-        folderId: input.folderId
-          ? (input.folderId as Document["folderId"])
-          : undefined,
+        folderId: input.folderId ? (input.folderId as Document["folderId"]) : undefined,
         updatedAt: now,
       };
       const saved = await deps.documents.update(ctx, updated);
@@ -537,13 +517,9 @@ export function createDocumentPlatformService(
         updatedAt: now,
       };
       const saved = await deps.documents.update(ctx, updated);
-      await appendAudit(
-        deps,
-        ctx,
-        input.documentId,
-        "document.collection_assigned",
-        { collectionId: input.collectionId ?? "" },
-      );
+      await appendAudit(deps, ctx, input.documentId, "document.collection_assigned", {
+        collectionId: input.collectionId ?? "",
+      });
       return saved;
     },
 

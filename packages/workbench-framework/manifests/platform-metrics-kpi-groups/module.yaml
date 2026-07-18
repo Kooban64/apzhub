@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-kpi-groups
+name: KPI Groups
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — KPI Groups sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: KPI Groups
+    icon: folder
+    route: /workspace/metrics/kpi-groups
+    order: 190
+    permission: metrics.kpi
+  view:
+    title: KPI Groups
+    workspace: metrics
+    route: /workspace/metrics/kpi-groups
+    permission: metrics.kpi

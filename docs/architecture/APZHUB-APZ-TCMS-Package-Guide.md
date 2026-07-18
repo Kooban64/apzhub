@@ -7,12 +7,12 @@
 
 ## Justified packages
 
-| Package | Path | Version | Role |
-|---------|------|---------|------|
-| `@apzhub/testing-contracts` | `packages/testing-contracts/` | `0.2.0` | Enums, domain models, service interfaces, events, permissions, config types |
-| `@apzhub/testing-foundation` | `packages/testing-foundation/` | `0.1.0` | In-memory registries + validation helpers |
+| Package                       | Path                            | Version | Role                                                                                    |
+| ----------------------------- | ------------------------------- | ------- | --------------------------------------------------------------------------------------- |
+| `@apzhub/testing-contracts`   | `packages/testing-contracts/`   | `0.2.0` | Enums, domain models, service interfaces, events, permissions, config types             |
+| `@apzhub/testing-foundation`  | `packages/testing-foundation/`  | `0.1.0` | In-memory registries + validation helpers                                               |
 | `@apzhub/testing-persistence` | `packages/testing-persistence/` | `0.2.0` | Repositories (in-memory + Postgres), authz asserts, persistence validation, row mappers |
-| `@apzhub/testing-services` | `packages/testing-services/` | `0.1.0` | Manual testing domain services (business logic only) |
+| `@apzhub/testing-services`    | `packages/testing-services/`    | `0.1.0` | Manual testing domain services (business logic only)                                    |
 
 **Schema:** `packages/config/src/db/testing-schema.ts` (not a separate package) — SoR tables + migrations `0016`–`0019`.
 

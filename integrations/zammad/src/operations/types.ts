@@ -4,25 +4,15 @@
  */
 
 export type ZammadOperationalHealthLevel =
-  | "HEALTHY"
-  | "DEGRADED"
-  | "LIMITED"
-  | "UNAVAILABLE";
+  "HEALTHY" | "DEGRADED" | "LIMITED" | "UNAVAILABLE";
 
 export type ZammadCapabilityAvailability =
-  | "available"
-  | "degraded"
-  | "unavailable"
-  | "optional_unavailable"
-  | "unknown";
+  "available" | "degraded" | "unavailable" | "optional_unavailable" | "unknown";
 
 export type ZammadEdition = "community" | "enterprise" | "unknown";
 
 export type ZammadAdapterCertificationOutcome =
-  | "CERTIFIED"
-  | "CERTIFIED_WITH_LIMITATIONS"
-  | "NOT_CERTIFIED"
-  | "INCOMPATIBLE";
+  "CERTIFIED" | "CERTIFIED_WITH_LIMITATIONS" | "NOT_CERTIFIED" | "INCOMPATIBLE";
 
 export interface ZammadCapabilityCertification {
   readonly capabilityId: string;
@@ -59,11 +49,7 @@ export interface ZammadCompatibilityMatrix {
     readonly max: string;
   };
   readonly compatibilityStatus:
-    | "compatible"
-    | "incompatible"
-    | "warning"
-    | "unverified"
-    | "not_checked";
+    "compatible" | "incompatible" | "warning" | "unverified" | "not_checked";
   readonly edition: ZammadEdition;
   readonly selfHostedCeCompatible: boolean;
   readonly enterpriseIndicators: readonly string[];

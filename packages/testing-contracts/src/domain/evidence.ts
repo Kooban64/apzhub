@@ -58,12 +58,7 @@ export interface Attachment extends AuditFields {
   readonly contentHash?: string;
   readonly sizeBytes?: number;
   readonly parentKind:
-    | "test_case"
-    | "test_run"
-    | "certification"
-    | "evidence"
-    | "comment"
-    | "other";
+    "test_case" | "test_run" | "certification" | "evidence" | "comment" | "other";
   readonly parentId: string;
 }
 

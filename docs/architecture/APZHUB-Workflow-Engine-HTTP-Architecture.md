@@ -27,20 +27,20 @@ No shortcuts. Handlers never import Platform Services factories or adapters.
 
 ## Routes (read-only)
 
-| Path | Gateway |
-| --- | --- |
-| `GET .../workflows` | `engine.workflows.list` |
-| `GET .../workflows/{id}` | `engine.workflows.get` |
-| `GET .../templates` | `engine.templates.list` |
-| `GET .../templates/{id}` | `engine.templates.get` |
-| `GET .../tags` | `engine.tags.list` |
-| `GET .../users` | `engine.users.list` |
-| `GET .../projects` | `engine.projects.list` |
-| `GET .../capabilities` | `engine.capabilities.get` |
-| `GET .../health` | `engine.health.get` |
-| `GET .../diagnostics` | `engine.diagnostics.get` |
-| `GET .../compatibility` | `engine.compatibility.get` |
-| `GET .../validate` | `engine.connection.validate` |
+| Path                     | Gateway                      |
+| ------------------------ | ---------------------------- |
+| `GET .../workflows`      | `engine.workflows.list`      |
+| `GET .../workflows/{id}` | `engine.workflows.get`       |
+| `GET .../templates`      | `engine.templates.list`      |
+| `GET .../templates/{id}` | `engine.templates.get`       |
+| `GET .../tags`           | `engine.tags.list`           |
+| `GET .../users`          | `engine.users.list`          |
+| `GET .../projects`       | `engine.projects.list`       |
+| `GET .../capabilities`   | `engine.capabilities.get`    |
+| `GET .../health`         | `engine.health.get`          |
+| `GET .../diagnostics`    | `engine.diagnostics.get`     |
+| `GET .../compatibility`  | `engine.compatibility.get`   |
+| `GET .../validate`       | `engine.connection.validate` |
 
 SoR routes under `/api/v1/workflows/*` (without `/engine`) remain unchanged.
 

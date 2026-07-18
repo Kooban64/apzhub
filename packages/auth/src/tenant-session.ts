@@ -12,7 +12,9 @@ export interface SessionTenantResolution {
 function readActiveTenantId(user: ValidatedSession["user"]): string | undefined {
   const extended = user as { activeTenantId?: string; tenantId?: string };
   const candidate = extended.activeTenantId ?? extended.tenantId;
-  return typeof candidate === "string" && candidate.trim() ? candidate.trim() : undefined;
+  return typeof candidate === "string" && candidate.trim()
+    ? candidate.trim()
+    : undefined;
 }
 
 export function resolveSessionTenantSync(
@@ -51,9 +53,8 @@ export async function resolveSessionTenant(
 
   if (process.env.DATABASE_URL) {
     try {
-      const { getPrimaryTenantIdForUser } = await import(
-        "@apzhub/platform-identity/postgres"
-      );
+      const { getPrimaryTenantIdForUser } =
+        await import("@apzhub/platform-identity/postgres");
       const fromDb = await getPrimaryTenantIdForUser(session.user.id);
       if (fromDb) {
         return { tenantId: fromDb, source: "primary_membership" };

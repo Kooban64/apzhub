@@ -115,9 +115,7 @@ export function createInMemoryNotificationRepositories(
     },
     async listByNotification(ctx, notificationId) {
       return [...stores.recipients.values()].filter(
-        (row) =>
-          row.tenantId === ctx.tenantId &&
-          row.notificationId === notificationId,
+        (row) => row.tenantId === ctx.tenantId && row.notificationId === notificationId,
       );
     },
   };
@@ -221,9 +219,7 @@ export function createInMemoryNotificationRepositories(
       return rule;
     },
     async list(ctx) {
-      return [...stores.rules.values()].filter(
-        (row) => row.tenantId === ctx.tenantId,
-      );
+      return [...stores.rules.values()].filter((row) => row.tenantId === ctx.tenantId);
     },
   };
 

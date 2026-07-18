@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-kpis
+name: KPIs
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — KPIs sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: KPIs
+    icon: target
+    route: /workspace/metrics/kpis
+    order: 180
+    permission: metrics.kpi
+  view:
+    title: KPIs
+    workspace: metrics
+    route: /workspace/metrics/kpis
+    permission: metrics.kpi

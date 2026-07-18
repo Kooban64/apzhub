@@ -17,15 +17,9 @@ export { ConnectionLifecycleService } from "./lifecycle-service";
 export type { LifecycleTransitionInput } from "./lifecycle-service";
 
 export type { ValidationIssue, ValidationResult } from "./validation";
-export {
-  assertTenantScope,
-  validateConnectionDefinition,
-} from "./validation";
+export { assertTenantScope, validateConnectionDefinition } from "./validation";
 
-export type {
-  ConnectionRegistry,
-  RegisterConnectionOptions,
-} from "./registry";
+export type { ConnectionRegistry, RegisterConnectionOptions } from "./registry";
 export { InMemoryConnectionRegistry } from "./registry";
 
 export type {

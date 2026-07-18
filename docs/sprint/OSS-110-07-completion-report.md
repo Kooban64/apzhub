@@ -17,17 +17,17 @@ OSS-110-07 delivers the first production-capable HTTP API over `PlatformServiceG
 
 ## Milestone scope delivered
 
-| Deliverable | Status |
-|-------------|--------|
-| `/api/v1` foundation (envelope, validation, errors, logging) | ✅ |
-| Request-context builder from trusted session | ✅ |
-| Gateway process bootstrap + test override | ✅ |
-| Workspaces / Projects / Teams routes | ✅ |
-| Health + readiness | ✅ |
-| OpenAPI 3.1 + validation command | ✅ |
-| Architecture boundary tests | ✅ |
-| Documentation + ADR-0051 | ✅ |
-| Task / User / Search / UI / GraphQL | ⏸ Excluded |
+| Deliverable                                                  | Status     |
+| ------------------------------------------------------------ | ---------- |
+| `/api/v1` foundation (envelope, validation, errors, logging) | ✅         |
+| Request-context builder from trusted session                 | ✅         |
+| Gateway process bootstrap + test override                    | ✅         |
+| Workspaces / Projects / Teams routes                         | ✅         |
+| Health + readiness                                           | ✅         |
+| OpenAPI 3.1 + validation command                             | ✅         |
+| Architecture boundary tests                                  | ✅         |
+| Documentation + ADR-0051                                     | ✅         |
+| Task / User / Search / UI / GraphQL                          | ⏸ Excluded |
 
 ---
 
@@ -93,25 +93,25 @@ Valid OpenAPI 3.1; paths match delivered routes; tasks absent. `pnpm openapi:val
 
 ## Files created (primary)
 
-| Path | Role |
-|------|------|
-| `apps/web/lib/api/v1/**` | HTTP foundation, handlers, gateway bootstrap, tests |
-| `apps/web/app/api/v1/**` | Route handlers |
-| `docs/specs/APZHUB-Platform-OpenAPI-v1.yaml` | OpenAPI |
-| `docs/architecture/APZHUB-Platform-HTTP-API.md` | Architecture |
-| `docs/adr/ADR-0051-*.md` | Decision |
-| `docs/sprint/OSS-110-07-completion-report.md` | This report |
+| Path                                            | Role                                                |
+| ----------------------------------------------- | --------------------------------------------------- |
+| `apps/web/lib/api/v1/**`                        | HTTP foundation, handlers, gateway bootstrap, tests |
+| `apps/web/app/api/v1/**`                        | Route handlers                                      |
+| `docs/specs/APZHUB-Platform-OpenAPI-v1.yaml`    | OpenAPI                                             |
+| `docs/architecture/APZHUB-Platform-HTTP-API.md` | Architecture                                        |
+| `docs/adr/ADR-0051-*.md`                        | Decision                                            |
+| `docs/sprint/OSS-110-07-completion-report.md`   | This report                                         |
 
 ---
 
 ## Files modified (primary)
 
-| Path | Change |
-|------|--------|
-| `apps/web/middleware.ts` | `/api/v1` JSON auth path (no HTML redirect) |
-| `apps/web/package.json` | platform-services, contracts, plane, authz, zod |
-| `packages/platform-security/.../paths.ts` | Traffic governance for `/api/v1` |
-| Foundation indexes, CHANGELOG, `.env.example` | Closeout |
+| Path                                          | Change                                          |
+| --------------------------------------------- | ----------------------------------------------- |
+| `apps/web/middleware.ts`                      | `/api/v1` JSON auth path (no HTML redirect)     |
+| `apps/web/package.json`                       | platform-services, contracts, plane, authz, zod |
+| `packages/platform-security/.../paths.ts`     | Traffic governance for `/api/v1`                |
+| Foundation indexes, CHANGELOG, `.env.example` | Closeout                                        |
 
 ---
 
@@ -123,12 +123,12 @@ Valid OpenAPI 3.1; paths match delivered routes; tasks absent. `pnpm openapi:val
 
 ## Total test statistics (closeout)
 
-| Suite | Result |
-|-------|--------|
-| Platform API v1 | 19 passed |
+| Suite                               | Result         |
+| ----------------------------------- | -------------- |
+| Platform API v1                     | 19 passed      |
 | platform-services + contracts + API | **149** passed |
-| Typecheck `@apzhub/web` | Pass |
-| OpenAPI validate | Pass |
+| Typecheck `@apzhub/web`             | Pass           |
+| OpenAPI validate                    | Pass           |
 
 ---
 
@@ -152,28 +152,28 @@ Existing `/api/platform/v1` and `/api/law/v1` unchanged. New `/api/v1` additive.
 
 ## Deployment considerations
 
-1. Set production authz + postgres mapping env (OSS-110-05/06).  
-2. Enable Plane only when configured (`PLANE_INTEGRATION_ENABLED`).  
-3. Ensure session cookies work for API clients (same-origin).  
+1. Set production authz + postgres mapping env (OSS-110-05/06).
+2. Enable Plane only when configured (`PLANE_INTEGRATION_ENABLED`).
+3. Ensure session cookies work for API clients (same-origin).
 4. Do not expose interactive Swagger UI in production without policy approval.
 
 ---
 
 ## Technical debt
 
-- Durable idempotency store not implemented (header validated only).  
-- Project domain has no revision field — optimistic concurrency deferred.  
-- In-memory authorization service used in HTTP bootstrap access resolver until composition root wires postgres authorization.  
+- Durable idempotency store not implemented (header validated only).
+- Project domain has no revision field — optimistic concurrency deferred.
+- In-memory authorization service used in HTTP bootstrap access resolver until composition root wires postgres authorization.
 - User/Search routes deferred until providers are real.
 
 ---
 
 ## Risks
 
-| Risk | Mitigation |
-|------|------------|
+| Risk                                        | Mitigation                                  |
+| ------------------------------------------- | ------------------------------------------- |
 | Empty provider registry when Plane disabled | Readiness reports `providers: unregistered` |
-| Authz seed incomplete for live users | Fail closed via production provider |
+| Authz seed incomplete for live users        | Fail closed via production provider         |
 
 ---
 

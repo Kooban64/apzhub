@@ -207,8 +207,7 @@ function sortMetadata(
   const dir = order === "asc" ? 1 : -1;
   return items.slice().sort((a, b) => {
     if (sort === "type") return a.reportType.localeCompare(b.reportType) * dir;
-    if (sort === "format")
-      return a.outputFormat.localeCompare(b.outputFormat) * dir;
+    if (sort === "format") return a.outputFormat.localeCompare(b.outputFormat) * dir;
     return a.generatedAt.localeCompare(b.generatedAt) * dir;
   });
 }
@@ -239,15 +238,9 @@ export function PlatformReportingView({
   );
   const [order, setOrder] = useState<"asc" | "desc">("asc");
   const [page, setPage] = useState(1);
-  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(
-    null,
-  );
-  const [selectedMetadataId, setSelectedMetadataId] = useState<string | null>(
-    null,
-  );
-  const [preview, setPreview] = useState<ReportGenerationResultViewModel | null>(
-    null,
-  );
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
+  const [selectedMetadataId, setSelectedMetadataId] = useState<string | null>(null);
+  const [preview, setPreview] = useState<ReportGenerationResultViewModel | null>(null);
   const [validationMessage, setValidationMessage] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const pageSize = 10;
@@ -367,10 +360,7 @@ export function PlatformReportingView({
 
   async function viewMetadata() {
     const id =
-      selectedMetadataId ??
-      filteredGenerations[0]?.id ??
-      preview?.metadata.id ??
-      null;
+      selectedMetadataId ?? filteredGenerations[0]?.id ?? preview?.metadata.id ?? null;
     if (!id) {
       setActionError("No generation metadata selected.");
       return;
@@ -403,16 +393,36 @@ export function PlatformReportingView({
       role="toolbar"
       aria-label="Reporting commands"
     >
-      <Button type="button" variant="outline" size="sm" onClick={() => void refreshAll()}>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        onClick={() => void refreshAll()}
+      >
         Refresh
       </Button>
-      <Button type="button" variant="outline" size="sm" onClick={() => void runGenerate()}>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        onClick={() => void runGenerate()}
+      >
         Generate
       </Button>
-      <Button type="button" variant="outline" size="sm" onClick={() => void runPreview()}>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        onClick={() => void runPreview()}
+      >
         Preview
       </Button>
-      <Button type="button" variant="outline" size="sm" onClick={() => void viewMetadata()}>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        onClick={() => void viewMetadata()}
+      >
         View Metadata
       </Button>
       <Button
@@ -423,7 +433,12 @@ export function PlatformReportingView({
       >
         Download Metadata
       </Button>
-      <Button type="button" variant="outline" size="sm" onClick={() => void runValidate()}>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        onClick={() => void runValidate()}
+      >
         Validate Template
       </Button>
       <Link
@@ -625,14 +640,7 @@ export function PlatformReportingView({
                     ? "Report generation history"
                     : "Generated reports"
                 }
-                columns={[
-                  "ID",
-                  "Type",
-                  "Template",
-                  "Format",
-                  "Generated",
-                  "Preview",
-                ]}
+                columns={["ID", "Type", "Template", "Format", "Generated", "Preview"]}
                 onRowClick={(id) => setSelectedMetadataId(id)}
                 rows={pagedGenerations.map((item) => ({
                   id: item.id,

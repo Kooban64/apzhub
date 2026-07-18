@@ -1,12 +1,12 @@
 # APZHUB Search Integration SDK Architecture
 
-| Field | Value |
-| --- | --- |
-| **Document** | APZHUB-Search-Integration-SDK-Architecture |
-| **Milestone** | APZSEARCH-004 |
-| **Package** | `@apzhub/integration-search-sdk` **0.1.0** |
-| **Status** | Authoritative for APZSEARCH-004 |
-| **Date** | 2026-07-14 |
+| Field         | Value                                      |
+| ------------- | ------------------------------------------ |
+| **Document**  | APZHUB-Search-Integration-SDK-Architecture |
+| **Milestone** | APZSEARCH-004                              |
+| **Package**   | `@apzhub/integration-search-sdk` **0.1.0** |
+| **Status**    | Authoritative for APZSEARCH-004            |
+| **Date**      | 2026-07-14                                 |
 
 ## 1. Purpose
 
@@ -28,19 +28,19 @@ This package lives under `packages/` (shared SDK), **not** under `integrations/`
 
 ## 3. Core abstractions
 
-| Symbol | Role |
-| --- | --- |
-| `SearchIntegrationAdapterBase` | Abstract adapter extending `IntegrationAdapterBase` |
+| Symbol                                                | Role                                                   |
+| ----------------------------------------------------- | ------------------------------------------------------ |
+| `SearchIntegrationAdapterBase`                        | Abstract adapter extending `IntegrationAdapterBase`    |
 | `SearchAdapterFactory` / `createSearchAdapterFactory` | Create/dispose adapters + register search capabilities |
-| `SearchAdapterContext` | `AdapterContext` + search helpers |
-| `SearchCapabilityRegistration` | Platform `"search"` + fine-grained declarations |
-| `SearchOperationRunner` | Operation ports returning `NOT_IMPLEMENTED` |
-| `SearchProviderHealth` / `Diagnostics` / `Lifecycle` | Safe metadata helpers |
-| `SearchConfigurationValidator` | Secret-ref configuration validation |
-| `SearchErrorTranslator` | Domain + vendor error mapping |
-| `SearchMetrics` / `SearchLogger` | Observability wrappers |
-| `SearchCompatibilityReport` | Declarative compatibility evaluation |
-| `MockSearchIntegrationAdapter` | Test-only adapter |
+| `SearchAdapterContext`                                | `AdapterContext` + search helpers                      |
+| `SearchCapabilityRegistration`                        | Platform `"search"` + fine-grained declarations        |
+| `SearchOperationRunner`                               | Operation ports returning `NOT_IMPLEMENTED`            |
+| `SearchProviderHealth` / `Diagnostics` / `Lifecycle`  | Safe metadata helpers                                  |
+| `SearchConfigurationValidator`                        | Secret-ref configuration validation                    |
+| `SearchErrorTranslator`                               | Domain + vendor error mapping                          |
+| `SearchMetrics` / `SearchLogger`                      | Observability wrappers                                 |
+| `SearchCompatibilityReport`                           | Declarative compatibility evaluation                   |
+| `MockSearchIntegrationAdapter`                        | Test-only adapter                                      |
 
 ## 4. Dependency rules
 
@@ -51,13 +51,13 @@ Reuse — never reimplement — circuit breaker, secret provider, connection man
 
 ## 5. Execution boundary
 
-| Concern | APZSEARCH-004 |
-| --- | --- |
-| Capability declaration | Yes |
-| Lifecycle / validation / diagnostics | Yes (safe only) |
-| Query / index / document execution | `NOT_IMPLEMENTED` |
-| Engine transport | No |
-| HTTP / Workbench | No |
+| Concern                              | APZSEARCH-004     |
+| ------------------------------------ | ----------------- |
+| Capability declaration               | Yes               |
+| Lifecycle / validation / diagnostics | Yes (safe only)   |
+| Query / index / document execution   | `NOT_IMPLEMENTED` |
+| Engine transport                     | No                |
+| HTTP / Workbench                     | No                |
 
 ## 6. Bootstrap
 

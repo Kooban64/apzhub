@@ -65,8 +65,14 @@ console.log("=========================================\n");
 let failed = false;
 
 const audits = [
-  ["scripts/apzidentity-001-identity-foundation-audit.mjs", "audit:identity-foundation"],
-  ["scripts/apzidentity-002-platform-services-audit.mjs", "audit:identity-platform-services"],
+  [
+    "scripts/apzidentity-001-identity-foundation-audit.mjs",
+    "audit:identity-foundation",
+  ],
+  [
+    "scripts/apzidentity-002-platform-services-audit.mjs",
+    "audit:identity-platform-services",
+  ],
   ["scripts/apzidentity-003-identity-http-audit.mjs", "audit:identity-http-client"],
   ["scripts/apzidentity-004-identity-workbench-audit.mjs", "audit:identity-workbench"],
   ["scripts/apzidentity-005-identity-vertical-audit.mjs", "audit:identity-vertical"],

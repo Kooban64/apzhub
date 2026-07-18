@@ -60,20 +60,23 @@ const libFiles = walk(join(ROOT, "apps/web/lib/configuration")).filter(
   (f) => !f.includes(".test."),
 );
 
-scan([...componentFiles, ...libFiles], [
-  {
-    rule: "ui-no-configuration-core",
-    pattern: /@apzhub\/configuration-core|@apzhub\/configuration-persistence/,
-  },
-  {
-    rule: "ui-no-platform-services",
-    pattern: /@apzhub\/platform-services|getPlatformServiceGateway/,
-  },
-  {
-    rule: "ui-no-runtime-config-manager",
-    pattern: /@apzhub\/config(?:["'/]|$)|\bruntime-configuration-manager\b/,
-  },
-]);
+scan(
+  [...componentFiles, ...libFiles],
+  [
+    {
+      rule: "ui-no-configuration-core",
+      pattern: /@apzhub\/configuration-core|@apzhub\/configuration-persistence/,
+    },
+    {
+      rule: "ui-no-platform-services",
+      pattern: /@apzhub\/platform-services|getPlatformServiceGateway/,
+    },
+    {
+      rule: "ui-no-runtime-config-manager",
+      pattern: /@apzhub\/config(?:["'/]|$)|\bruntime-configuration-manager\b/,
+    },
+  ],
+);
 
 scan(componentFiles, [
   {
@@ -146,10 +149,7 @@ if (!shell.includes("ConfigurationWorkspaceRouter")) {
   });
 }
 
-const routes = readFileSync(
-  join(ROOT, "apps/web/lib/configuration/routes.ts"),
-  "utf8",
-);
+const routes = readFileSync(join(ROOT, "apps/web/lib/configuration/routes.ts"), "utf8");
 if (!routes.includes("CONFIGURATION_WORKSPACE_BASE")) {
   violations.push({
     file: "apps/web/lib/configuration/routes.ts",
@@ -180,7 +180,10 @@ if (!existsSync(parentManifest)) {
   });
 } else {
   const yaml = readFileSync(parentManifest, "utf8");
-  if (!yaml.includes("configuration.read") || !yaml.includes("/workspace/configuration")) {
+  if (
+    !yaml.includes("configuration.read") ||
+    !yaml.includes("/workspace/configuration")
+  ) {
     violations.push({
       file: rel(parentManifest),
       line: 1,

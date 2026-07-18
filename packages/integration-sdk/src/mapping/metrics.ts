@@ -29,7 +29,8 @@ export class DefaultMappingMetrics implements MappingMetrics {
     }
     this.byProfile[input.profile] = (this.byProfile[input.profile] ?? 0) + 1;
     this.byDirection[input.direction] = (this.byDirection[input.direction] ?? 0) + 1;
-    this.byEntityType[input.entityType] = (this.byEntityType[input.entityType] ?? 0) + 1;
+    this.byEntityType[input.entityType] =
+      (this.byEntityType[input.entityType] ?? 0) + 1;
     this.byProvider[input.providerId] = (this.byProvider[input.providerId] ?? 0) + 1;
   }
 

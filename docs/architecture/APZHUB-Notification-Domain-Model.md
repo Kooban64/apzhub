@@ -7,19 +7,19 @@
 
 ## Entities
 
-| Entity | Purpose |
-| --- | --- |
-| `Notification` | Canonical notification record (title, status, priority, channels, expiry) |
-| `NotificationRecipient` | Per-recipient lifecycle / read / acknowledge / dismiss |
-| `NotificationTemplate` | Reusable template metadata (not rendered provider content) |
-| `NotificationChannel` | Channel catalogue entry (model only) |
-| `NotificationPreference` | User channel/category preference metadata |
-| `NotificationCategory` | Classification taxonomy |
-| `NotificationRule` | Rule metadata (opaque condition refs — not executable here) |
-| `NotificationReference` | Soft reference to Projects / Support / Testing / Reporting / Documents / Workflow / Search / Future |
-| `NotificationAttachmentMetadata` | File metadata + storage refs only (no binaries) |
-| `NotificationDeliveryAttempt` | Attempt metadata only (no provider payloads) |
-| `NotificationAuditEntry` | Immutable audit trail |
+| Entity                           | Purpose                                                                                             |
+| -------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `Notification`                   | Canonical notification record (title, status, priority, channels, expiry)                           |
+| `NotificationRecipient`          | Per-recipient lifecycle / read / acknowledge / dismiss                                              |
+| `NotificationTemplate`           | Reusable template metadata (not rendered provider content)                                          |
+| `NotificationChannel`            | Channel catalogue entry (model only)                                                                |
+| `NotificationPreference`         | User channel/category preference metadata                                                           |
+| `NotificationCategory`           | Classification taxonomy                                                                             |
+| `NotificationRule`               | Rule metadata (opaque condition refs — not executable here)                                         |
+| `NotificationReference`          | Soft reference to Projects / Support / Testing / Reporting / Documents / Workflow / Search / Future |
+| `NotificationAttachmentMetadata` | File metadata + storage refs only (no binaries)                                                     |
+| `NotificationDeliveryAttempt`    | Attempt metadata only (no provider payloads)                                                        |
+| `NotificationAuditEntry`         | Immutable audit trail                                                                               |
 
 ## Enumerations
 

@@ -18,13 +18,13 @@ Certification-only. Defect corrections limited to certification defects (none re
 
 ## Final package versions
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/workflow-contracts` | 0.2.0 |
-| `@apzhub/workflow-core` | 0.1.1 |
-| `@apzhub/workflow-persistence` | 0.1.1 |
-| `@apzhub/platform-service-contracts` | 0.16.0 |
-| `@apzhub/platform-services` | 0.19.0 |
+| Package                              | Version |
+| ------------------------------------ | ------- |
+| `@apzhub/workflow-contracts`         | 0.2.0   |
+| `@apzhub/workflow-core`              | 0.1.1   |
+| `@apzhub/workflow-persistence`       | 0.1.1   |
+| `@apzhub/platform-service-contracts` | 0.16.0  |
+| `@apzhub/platform-services`          | 0.19.0  |
 
 ## Certification path
 
@@ -32,35 +32,35 @@ Workbench → typed client → HTTP → `PlatformServiceGateway.workflow.*` → 
 
 ## Audit summaries
 
-| Audit | Result |
-| --- | --- |
-| Architecture | PASS — [Architecture Audit](../reviews/APZWORKFLOW-005-Architecture-Audit.md) |
-| Dependency | PASS — [Dependency Audit](../reviews/APZWORKFLOW-005-Dependency-Audit.md) |
-| Boundary | PASS — [Boundary Audit](../reviews/APZWORKFLOW-005-Boundary-Audit.md) |
-| Vertical | PASS — `pnpm audit:workflow-vertical` |
-| Security | PASS — [Security Review](../reviews/APZWORKFLOW-005-Security-Review.md) |
-| HTTP / OpenAPI | PASS — [API Certification](../reviews/APZWORKFLOW-005-API-Certification.md) |
-| Typed client | PASS — [Typed Client Certification](../reviews/APZWORKFLOW-005-Typed-Client-Certification.md) |
-| Workbench | PASS — [Workbench Certification](../reviews/APZWORKFLOW-005-Workbench-Certification.md) |
-| Accessibility | PASS (non-blocking residual) — [A11y Review](../reviews/APZWORKFLOW-005-Accessibility-Review.md) |
-| Performance | Measured only — [Performance Baseline](../reviews/APZWORKFLOW-005-Performance-Baseline.md) |
-| Coverage | Consolidated — [Coverage Baseline](../reviews/APZWORKFLOW-005-Coverage-Baseline.md) |
+| Audit                | Result                                                                                                             |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Architecture         | PASS — [Architecture Audit](../reviews/APZWORKFLOW-005-Architecture-Audit.md)                                      |
+| Dependency           | PASS — [Dependency Audit](../reviews/APZWORKFLOW-005-Dependency-Audit.md)                                          |
+| Boundary             | PASS — [Boundary Audit](../reviews/APZWORKFLOW-005-Boundary-Audit.md)                                              |
+| Vertical             | PASS — `pnpm audit:workflow-vertical`                                                                              |
+| Security             | PASS — [Security Review](../reviews/APZWORKFLOW-005-Security-Review.md)                                            |
+| HTTP / OpenAPI       | PASS — [API Certification](../reviews/APZWORKFLOW-005-API-Certification.md)                                        |
+| Typed client         | PASS — [Typed Client Certification](../reviews/APZWORKFLOW-005-Typed-Client-Certification.md)                      |
+| Workbench            | PASS — [Workbench Certification](../reviews/APZWORKFLOW-005-Workbench-Certification.md)                            |
+| Accessibility        | PASS (non-blocking residual) — [A11y Review](../reviews/APZWORKFLOW-005-Accessibility-Review.md)                   |
+| Performance          | Measured only — [Performance Baseline](../reviews/APZWORKFLOW-005-Performance-Baseline.md)                         |
+| Coverage             | Consolidated — [Coverage Baseline](../reviews/APZWORKFLOW-005-Coverage-Baseline.md)                                |
 | Production readiness | **PRODUCTION_READY_WITH_LIMITATIONS** — [Production Readiness](../reviews/APZWORKFLOW-005-Production-Readiness.md) |
 
 ## Layer certifications (as delivered)
 
-| Area | Outcome |
-| --- | --- |
-| Workflow Core | Structural/lifecycle/version validation; no expression/script/engine transforms |
-| Lifecycle | Governed transitions via Core; invalid → controlled conflict; UI does not own rules |
-| Versions | Immutable published semantics; Workbench compare is presentation-only |
-| Persistence | Postgres + in-memory ports; migrations 0044/0045; no silent prod in-memory fallback |
-| Platform Services | Thin; all seven gateway facets present |
-| RequestPipeline | Public ops wrapped; authz denial precedes service call |
-| Authorisation | `PLATFORM_WORKFLOW_PERMISSIONS` + `workflowPlatformOps` |
-| Route absence | Execution/engine routes absent (tested) |
-| Definition Viewer / Graph / Compare / Validation / Audit / Export | As APZWORKFLOW-004; no mutation |
-| Diagnostics | Execution Not Available |
+| Area                                                              | Outcome                                                                             |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Workflow Core                                                     | Structural/lifecycle/version validation; no expression/script/engine transforms     |
+| Lifecycle                                                         | Governed transitions via Core; invalid → controlled conflict; UI does not own rules |
+| Versions                                                          | Immutable published semantics; Workbench compare is presentation-only               |
+| Persistence                                                       | Postgres + in-memory ports; migrations 0044/0045; no silent prod in-memory fallback |
+| Platform Services                                                 | Thin; all seven gateway facets present                                              |
+| RequestPipeline                                                   | Public ops wrapped; authz denial precedes service call                              |
+| Authorisation                                                     | `PLATFORM_WORKFLOW_PERMISSIONS` + `workflowPlatformOps`                             |
+| Route absence                                                     | Execution/engine routes absent (tested)                                             |
+| Definition Viewer / Graph / Compare / Validation / Audit / Export | As APZWORKFLOW-004; no mutation                                                     |
+| Diagnostics                                                       | Execution Not Available                                                             |
 
 ## Tests & Playwright
 

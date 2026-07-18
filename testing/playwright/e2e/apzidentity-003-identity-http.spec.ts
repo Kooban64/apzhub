@@ -6,9 +6,7 @@ import { expect, test } from "@playwright/test";
  */
 
 test.describe("APZIDENTITY-003 Identity HTTP typed client (mocked)", () => {
-  test("mock fetch to /api/v1/identity serves user list envelope", async ({
-    page,
-  }) => {
+  test("mock fetch to /api/v1/identity serves user list envelope", async ({ page }) => {
     await page.route("**/api/v1/identity/**", async (route) => {
       const url = new URL(route.request().url());
       const path = url.pathname;

@@ -8,24 +8,24 @@
 
 ## Checklist
 
-| Area | Status |
-| ---- | ------ |
-| Canonical contracts | ✅ |
-| Document Core + immutable versions | ✅ |
-| PostgreSQL persistence schema + repos | ✅ |
-| Filesystem + S3-compatible providers | ✅ |
-| Platform Services + Gateway + RequestPipeline | ✅ |
-| Production `document.*` authorization | ✅ |
-| HTTP API + OpenAPI | ✅ |
-| Typed client + mock | ✅ |
-| Product-neutral Workbench | ✅ |
-| Architecture / dependency / boundary audits | ✅ 0 violations |
-| Security (authn/authz/redaction/isolation) | ✅ |
-| Binary upload/download HTTP | ❌ Excluded (by design) |
-| OCR / AI / search | ❌ Excluded |
-| Live Playwright in this environment | ⚠️ LIMITED (unrelated Next slug conflict) |
-| Live postgres/S3 unit coverage matrix | ⚠️ LIMITED (stubs; ops deploy separately) |
-| Product consumer wiring | ❌ Documented only |
+| Area                                          | Status                                    |
+| --------------------------------------------- | ----------------------------------------- |
+| Canonical contracts                           | ✅                                        |
+| Document Core + immutable versions            | ✅                                        |
+| PostgreSQL persistence schema + repos         | ✅                                        |
+| Filesystem + S3-compatible providers          | ✅                                        |
+| Platform Services + Gateway + RequestPipeline | ✅                                        |
+| Production `document.*` authorization         | ✅                                        |
+| HTTP API + OpenAPI                            | ✅                                        |
+| Typed client + mock                           | ✅                                        |
+| Product-neutral Workbench                     | ✅                                        |
+| Architecture / dependency / boundary audits   | ✅ 0 violations                           |
+| Security (authn/authz/redaction/isolation)    | ✅                                        |
+| Binary upload/download HTTP                   | ❌ Excluded (by design)                   |
+| OCR / AI / search                             | ❌ Excluded                               |
+| Live Playwright in this environment           | ⚠️ LIMITED (unrelated Next slug conflict) |
+| Live postgres/S3 unit coverage matrix         | ⚠️ LIMITED (stubs; ops deploy separately) |
+| Product consumer wiring                       | ❌ Documented only                        |
 
 ## Why not unqualified PRODUCTION_READY
 

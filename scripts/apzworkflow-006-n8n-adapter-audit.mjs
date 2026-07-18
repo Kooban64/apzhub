@@ -131,7 +131,8 @@ scan(files, [
   },
   {
     rule: "no-platform-services",
-    pattern: /@apzhub\/platform-services|getPlatformServiceGateway|PlatformServiceGateway/,
+    pattern:
+      /@apzhub\/platform-services|getPlatformServiceGateway|PlatformServiceGateway/,
   },
   {
     rule: "no-http-routes",
@@ -193,8 +194,7 @@ if (!post006WiringApproved) {
         file: consumer,
         line: 1,
         rule: "premature-wiring",
-        detail:
-          "APZWORKFLOW-006 must not wire n8n into Platform Services or apps/web",
+        detail: "APZWORKFLOW-006 must not wire n8n into Platform Services or apps/web",
       });
     }
   }

@@ -21,16 +21,16 @@ Notification Workbench
 
 ## Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:notification-foundation` | PASS |
-| `pnpm audit:notification-platform-services` | PASS |
-| `pnpm audit:notification-http-client` | PASS |
-| `pnpm audit:notification-workbench` | PASS |
-| `pnpm audit:notification-vertical` | PASS (required) |
-| `pnpm openapi:validate:platform` | PASS |
-| Vitest `testing/notification-vertical` | Required harness |
-| Playwright live webServer | LIMITED (Testing slug conflict — external) |
+| Gate                                        | Result                                     |
+| ------------------------------------------- | ------------------------------------------ |
+| `pnpm audit:notification-foundation`        | PASS                                       |
+| `pnpm audit:notification-platform-services` | PASS                                       |
+| `pnpm audit:notification-http-client`       | PASS                                       |
+| `pnpm audit:notification-workbench`         | PASS                                       |
+| `pnpm audit:notification-vertical`          | PASS (required)                            |
+| `pnpm openapi:validate:platform`            | PASS                                       |
+| Vitest `testing/notification-vertical`      | Required harness                           |
+| Playwright live webServer                   | LIMITED (Testing slug conflict — external) |
 
 ## Intentional non-defects
 

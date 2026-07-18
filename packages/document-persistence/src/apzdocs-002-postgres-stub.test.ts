@@ -30,8 +30,7 @@ function createStubDb() {
     platform_document_audit: [],
   };
 
-  const chain: Record<string, unknown> = {};
-  const makeChain = (): typeof chain => {
+  const makeChain = (): Record<string, unknown> => {
     const c: Record<string, unknown> = {};
     const self = () => c;
     c.select = vi.fn(self);
@@ -43,8 +42,7 @@ function createStubDb() {
     c.set = vi.fn(self);
     c.onConflictDoUpdate = vi.fn(self);
     c.returning = vi.fn(async () => []);
-    c.then = (resolve: (v: unknown) => unknown) =>
-      Promise.resolve([]).then(resolve);
+    c.then = (resolve: (v: unknown) => unknown) => Promise.resolve([]).then(resolve);
     return c;
   };
 
@@ -79,12 +77,8 @@ describe("APZDOCS-002 postgres repositories (stubbed)", () => {
     const db = createStubDb();
     const repos = createPostgresDocumentRepositories(db);
     expect(await repos.documents.list(ctx())).toEqual([]);
-    expect(
-      await repos.versions.listByDocument(ctx(), asDocumentId("doc")),
-    ).toEqual([]);
+    expect(await repos.versions.listByDocument(ctx(), asDocumentId("doc"))).toEqual([]);
     expect(await repos.tags.list(ctx())).toEqual([]);
-    expect(
-      await repos.storageObjects.listReconciliationCandidates(ctx()),
-    ).toEqual([]);
+    expect(await repos.storageObjects.listReconciliationCandidates(ctx())).toEqual([]);
   });
 });

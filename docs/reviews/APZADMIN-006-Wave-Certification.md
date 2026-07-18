@@ -6,14 +6,14 @@
 
 ## Programme consistency
 
-| Gate | Result |
-| ---- | ------ |
-| Vertical `audit:administration-vertical` (001–005) | PASS |
-| Wave closeout `audit:administration-wave` | PASS |
-| OpenAPI platform validate | PASS |
-| Package versions frozen | PASS |
-| Documentation pack complete | PASS |
-| Platform Operations coexistence (`/workspace/operations`) | PASS |
+| Gate                                                      | Result |
+| --------------------------------------------------------- | ------ |
+| Vertical `audit:administration-vertical` (001–005)        | PASS   |
+| Wave closeout `audit:administration-wave`                 | PASS   |
+| OpenAPI platform validate                                 | PASS   |
+| Package versions frozen                                   | PASS   |
+| Documentation pack complete                               | PASS   |
+| Platform Operations coexistence (`/workspace/operations`) | PASS   |
 
 ## Patterns frozen
 

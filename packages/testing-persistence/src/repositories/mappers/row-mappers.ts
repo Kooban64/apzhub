@@ -166,19 +166,21 @@ export function requirementToRow(
   };
 }
 
-export function rowToRequirement(row: MetaRow & {
-  key: string;
-  title: string;
-  description: string | null;
-  priority: string;
-  tags: string[] | null;
-  workItemRefs: Array<{
-    kind: string;
-    projectRefId: string;
-    workItemId: string;
-    label?: string;
-  }> | null;
-}): RequirementRecord {
+export function rowToRequirement(
+  row: MetaRow & {
+    key: string;
+    title: string;
+    description: string | null;
+    priority: string;
+    tags: string[] | null;
+    workItemRefs: Array<{
+      kind: string;
+      projectRefId: string;
+      workItemId: string;
+      label?: string;
+    }> | null;
+  },
+): RequirementRecord {
   return {
     ...metaFromRow(row),
     key: row.key,
@@ -204,15 +206,17 @@ export function workItemToRow(record: WorkItemRecord) {
   };
 }
 
-export function rowToWorkItem(row: MetaRow & {
-  kind: string;
-  key: string;
-  title: string;
-  description: string | null;
-  projectRefId: string | null;
-  externalWorkItemId: string | null;
-  status: string;
-}): WorkItemRecord {
+export function rowToWorkItem(
+  row: MetaRow & {
+    kind: string;
+    key: string;
+    title: string;
+    description: string | null;
+    projectRefId: string | null;
+    externalWorkItemId: string | null;
+    status: string;
+  },
+): WorkItemRecord {
   return {
     ...metaFromRow(row),
     kind: row.kind as WorkItemRefKind,
@@ -242,19 +246,21 @@ export function riskToRow(record: RiskRecord) {
   };
 }
 
-export function rowToRisk(row: MetaRow & {
-  key: string;
-  title: string;
-  description: string | null;
-  level: string;
-  mitigationSummary: string | null;
-  severity: string | null;
-  likelihood: string | null;
-  impact: string | null;
-  businessCriticality: string | null;
-  regressionImportance: string | null;
-  ownerId: string | null;
-}): RiskRecord {
+export function rowToRisk(
+  row: MetaRow & {
+    key: string;
+    title: string;
+    description: string | null;
+    level: string;
+    mitigationSummary: string | null;
+    severity: string | null;
+    likelihood: string | null;
+    impact: string | null;
+    businessCriticality: string | null;
+    regressionImportance: string | null;
+    ownerId: string | null;
+  },
+): RiskRecord {
   return {
     ...metaFromRow(row),
     key: row.key,
@@ -290,18 +296,20 @@ export function testPlanToRow(record: TestPlanRecord) {
   };
 }
 
-export function rowToTestPlan(row: MetaRow & {
-  key: string;
-  name: string;
-  description: string | null;
-  status: string;
-  releaseLabel: string | null;
-  milestoneLabel: string | null;
-  ownerId: string | null;
-  assigneeId: string | null;
-  versionNumber: number;
-  parentPlanId: string | null;
-}): TestPlanRecord {
+export function rowToTestPlan(
+  row: MetaRow & {
+    key: string;
+    name: string;
+    description: string | null;
+    status: string;
+    releaseLabel: string | null;
+    milestoneLabel: string | null;
+    ownerId: string | null;
+    assigneeId: string | null;
+    versionNumber: number;
+    parentPlanId: string | null;
+  },
+): TestPlanRecord {
   return {
     ...metaFromRow(row),
     key: row.key,
@@ -336,18 +344,20 @@ export function testSuiteToRow(record: TestSuiteRecord) {
   };
 }
 
-export function rowToTestSuite(row: MetaRow & {
-  key: string;
-  name: string;
-  description: string | null;
-  status: string;
-  isRegression: boolean;
-  ownerId: string | null;
-  parentSuiteId: string | null;
-  sortOrder: number;
-  versionNumber: number;
-  groupKey: string | null;
-}): TestSuiteRecord {
+export function rowToTestSuite(
+  row: MetaRow & {
+    key: string;
+    name: string;
+    description: string | null;
+    status: string;
+    isRegression: boolean;
+    ownerId: string | null;
+    parentSuiteId: string | null;
+    sortOrder: number;
+    versionNumber: number;
+    groupKey: string | null;
+  },
+): TestSuiteRecord {
   return {
     ...metaFromRow(row),
     key: row.key,
@@ -389,31 +399,33 @@ export function testCaseToRow(record: TestCaseRecord) {
   };
 }
 
-export function rowToTestCase(row: MetaRow & {
-  key: string;
-  title: string;
-  description: string | null;
-  status: string;
-  priority: string;
-  tags: string[] | null;
-  estimatedMinutes: number | null;
-  preconditions: string | null;
-  postconditions: string | null;
-  expectedResultsSummary: string | null;
-  templateKey: string | null;
-  parameters: Array<{
+export function rowToTestCase(
+  row: MetaRow & {
     key: string;
-    label?: string;
-    defaultValue?: string;
-    required?: boolean;
-  }> | null;
-  components: string[] | null;
-  ownerId: string | null;
-  reviewerId: string | null;
-  versionNumber: number;
-  parentCaseId: string | null;
-  riskLevel: string | null;
-}): TestCaseRecord {
+    title: string;
+    description: string | null;
+    status: string;
+    priority: string;
+    tags: string[] | null;
+    estimatedMinutes: number | null;
+    preconditions: string | null;
+    postconditions: string | null;
+    expectedResultsSummary: string | null;
+    templateKey: string | null;
+    parameters: Array<{
+      key: string;
+      label?: string;
+      defaultValue?: string;
+      required?: boolean;
+    }> | null;
+    components: string[] | null;
+    ownerId: string | null;
+    reviewerId: string | null;
+    versionNumber: number;
+    parentCaseId: string | null;
+    riskLevel: string | null;
+  },
+): TestCaseRecord {
   return {
     ...metaFromRow(row),
     key: row.key,
@@ -499,14 +511,16 @@ export function testCaseVersionToRow(record: TestCaseVersionRecord) {
   };
 }
 
-export function rowToTestCaseVersion(row: MetaRow & {
-  caseId: string;
-  versionNumber: number;
-  reason: string;
-  snapshot: Record<string, unknown> | null;
-  changedByUserId: string | null;
-  changeSummary: string | null;
-}): TestCaseVersionRecord {
+export function rowToTestCaseVersion(
+  row: MetaRow & {
+    caseId: string;
+    versionNumber: number;
+    reason: string;
+    snapshot: Record<string, unknown> | null;
+    changedByUserId: string | null;
+    changeSummary: string | null;
+  },
+): TestCaseVersionRecord {
   return {
     ...metaFromRow(row),
     caseId: row.caseId,
@@ -530,14 +544,16 @@ export function testPlanVersionToRow(record: TestPlanVersionRecord) {
   };
 }
 
-export function rowToTestPlanVersion(row: MetaRow & {
-  planId: string;
-  versionNumber: number;
-  reason: string;
-  snapshot: Record<string, unknown> | null;
-  changedByUserId: string | null;
-  changeSummary: string | null;
-}): TestPlanVersionRecord {
+export function rowToTestPlanVersion(
+  row: MetaRow & {
+    planId: string;
+    versionNumber: number;
+    reason: string;
+    snapshot: Record<string, unknown> | null;
+    changedByUserId: string | null;
+    changeSummary: string | null;
+  },
+): TestPlanVersionRecord {
   return {
     ...metaFromRow(row),
     planId: row.planId,
@@ -561,14 +577,16 @@ export function testSuiteVersionToRow(record: TestSuiteVersionRecord) {
   };
 }
 
-export function rowToTestSuiteVersion(row: MetaRow & {
-  suiteId: string;
-  versionNumber: number;
-  reason: string;
-  snapshot: Record<string, unknown> | null;
-  changedByUserId: string | null;
-  changeSummary: string | null;
-}): TestSuiteVersionRecord {
+export function rowToTestSuiteVersion(
+  row: MetaRow & {
+    suiteId: string;
+    versionNumber: number;
+    reason: string;
+    snapshot: Record<string, unknown> | null;
+    changedByUserId: string | null;
+    changeSummary: string | null;
+  },
+): TestSuiteVersionRecord {
   return {
     ...metaFromRow(row),
     suiteId: row.suiteId,
@@ -592,14 +610,16 @@ export function regressionSetToRow(record: RegressionSetRecord) {
   };
 }
 
-export function rowToRegressionSet(row: MetaRow & {
-  key: string;
-  name: string;
-  description: string | null;
-  planId: string | null;
-  suiteIds: string[] | null;
-  ownerId: string | null;
-}): RegressionSetRecord {
+export function rowToRegressionSet(
+  row: MetaRow & {
+    key: string;
+    name: string;
+    description: string | null;
+    planId: string | null;
+    suiteIds: string[] | null;
+    ownerId: string | null;
+  },
+): RegressionSetRecord {
   return {
     ...metaFromRow(row),
     key: row.key,
@@ -625,16 +645,18 @@ export function executionSessionToRow(record: ExecutionSessionRecord) {
   };
 }
 
-export function rowToExecutionSession(row: MetaRow & {
-  planId: string | null;
-  suiteId: string | null;
-  executionType: string;
-  status: string;
-  startedAt: Date | null;
-  completedAt: Date | null;
-  assigneeId: string | null;
-  notes: string | null;
-}): ExecutionSessionRecord {
+export function rowToExecutionSession(
+  row: MetaRow & {
+    planId: string | null;
+    suiteId: string | null;
+    executionType: string;
+    status: string;
+    startedAt: Date | null;
+    completedAt: Date | null;
+    assigneeId: string | null;
+    notes: string | null;
+  },
+): ExecutionSessionRecord {
   return {
     ...metaFromRow(row),
     planId: row.planId ?? undefined,
@@ -673,25 +695,27 @@ export function manualExecutionToRow(record: ManualExecutionRecord) {
   };
 }
 
-export function rowToManualExecution(row: MetaRow & {
-  sessionId: string;
-  caseId: string;
-  status: string;
-  assigneeId: string | null;
-  testerId: string | null;
-  reviewerId: string | null;
-  startedAt: Date | null;
-  pausedAt: Date | null;
-  resumedAt: Date | null;
-  completedAt: Date | null;
-  approvalState: string;
-  comments: ExecutionCommentRecord[] | null;
-  stepActuals: Array<Record<string, unknown>> | null;
-  overallResult: string | null;
-  restartOfId: string | null;
-  parameterOverrides?: Record<string, string> | null;
-  blockReason?: string | null;
-}): ManualExecutionRecord {
+export function rowToManualExecution(
+  row: MetaRow & {
+    sessionId: string;
+    caseId: string;
+    status: string;
+    assigneeId: string | null;
+    testerId: string | null;
+    reviewerId: string | null;
+    startedAt: Date | null;
+    pausedAt: Date | null;
+    resumedAt: Date | null;
+    completedAt: Date | null;
+    approvalState: string;
+    comments: ExecutionCommentRecord[] | null;
+    stepActuals: Array<Record<string, unknown>> | null;
+    overallResult: string | null;
+    restartOfId: string | null;
+    parameterOverrides?: Record<string, string> | null;
+    blockReason?: string | null;
+  },
+): ManualExecutionRecord {
   return {
     ...metaFromRow(row),
     sessionId: row.sessionId,
@@ -706,7 +730,7 @@ export function rowToManualExecution(row: MetaRow & {
     completedAt: isoFromDate(row.completedAt),
     approvalState: row.approvalState as ExecutionApprovalState,
     comments: row.comments ?? [],
-    stepActuals: ((row.stepActuals ?? []) as unknown as ManualStepActualRecord[]),
+    stepActuals: (row.stepActuals ?? []) as unknown as ManualStepActualRecord[],
     overallResult: (row.overallResult as TestResultStatus | null) ?? undefined,
     restartOfId: row.restartOfId ?? undefined,
     parameterOverrides: row.parameterOverrides ?? undefined,
@@ -740,28 +764,30 @@ export function evidenceToRow(record: EvidenceRecord) {
   };
 }
 
-export function rowToEvidence(row: MetaRow & {
-  type: string;
-  title: string;
-  description: string | null;
-  storageRef: string;
-  contentType: string | null;
-  contentHash: string | null;
-  sizeBytes: number | null;
-  sessionId: string | null;
-  caseId: string | null;
-  stepId: string | null;
-  url: string | null;
-  checksum: string | null;
-  mimeType: string | null;
-  relationships: Array<{ kind: string; targetId: string; label?: string }> | null;
-  executionId: string | null;
-  lifecycleStatus?: string | null;
-  verificationState?: string | null;
-  evidenceApprovalState?: string | null;
-  captureTime?: Date | null;
-  authorUserId?: string | null;
-}): EvidenceRecord {
+export function rowToEvidence(
+  row: MetaRow & {
+    type: string;
+    title: string;
+    description: string | null;
+    storageRef: string;
+    contentType: string | null;
+    contentHash: string | null;
+    sizeBytes: number | null;
+    sessionId: string | null;
+    caseId: string | null;
+    stepId: string | null;
+    url: string | null;
+    checksum: string | null;
+    mimeType: string | null;
+    relationships: Array<{ kind: string; targetId: string; label?: string }> | null;
+    executionId: string | null;
+    lifecycleStatus?: string | null;
+    verificationState?: string | null;
+    evidenceApprovalState?: string | null;
+    captureTime?: Date | null;
+    authorUserId?: string | null;
+  },
+): EvidenceRecord {
   return {
     ...metaFromRow(row),
     type: row.type as EvidenceType,
@@ -779,7 +805,8 @@ export function rowToEvidence(row: MetaRow & {
     mimeType: row.mimeType ?? undefined,
     relationships: row.relationships ?? [],
     executionId: row.executionId ?? undefined,
-    lifecycleStatus: (row.lifecycleStatus as EvidenceRecord["lifecycleStatus"]) ?? "pending",
+    lifecycleStatus:
+      (row.lifecycleStatus as EvidenceRecord["lifecycleStatus"]) ?? "pending",
     verificationState: row.verificationState ?? undefined,
     evidenceApprovalState: row.evidenceApprovalState ?? undefined,
     captureTime: isoFromDate(row.captureTime ?? null),
@@ -805,14 +832,10 @@ export function approvalToRow(record: ApprovalRecord) {
     authorUserId: record.authorUserId ?? null,
     reviewerUserId: record.reviewerUserId ?? null,
     approverUserId: record.approverUserId ?? null,
-    historyJson: record.historyJson
-      ? record.historyJson.map((h) => ({ ...h }))
-      : null,
+    historyJson: record.historyJson ? record.historyJson.map((h) => ({ ...h })) : null,
     subjectKind: record.subjectKind ?? null,
     subjectId: record.subjectId ?? null,
-    stagesJson: record.stagesJson
-      ? record.stagesJson.map((s) => ({ ...s }))
-      : null,
+    stagesJson: record.stagesJson ? record.stagesJson.map((s) => ({ ...s })) : null,
     currentStageOrdinal: record.currentStageOrdinal ?? null,
     stageDecisionsJson: record.stageDecisionsJson
       ? record.stageDecisionsJson.map((s) => ({ ...s }))
@@ -820,27 +843,29 @@ export function approvalToRow(record: ApprovalRecord) {
   };
 }
 
-export function rowToApproval(row: MetaRow & {
-  certificationRecordId: string;
-  gateId: string | null;
-  status: string;
-  requestedFromUserId: string | null;
-  decidedByUserId: string | null;
-  decidedAt: Date | null;
-  comments: string | null;
-  conditions: string | null;
-  signatureJson: Record<string, unknown> | null;
-  witnessesJson: Array<Record<string, unknown>> | null;
-  authorUserId: string | null;
-  reviewerUserId: string | null;
-  approverUserId: string | null;
-  historyJson: Array<Record<string, unknown>> | null;
-  subjectKind: string | null;
-  subjectId: string | null;
-  stagesJson?: Array<Record<string, unknown>> | null;
-  currentStageOrdinal?: number | null;
-  stageDecisionsJson?: Array<Record<string, unknown>> | null;
-}): ApprovalRecord {
+export function rowToApproval(
+  row: MetaRow & {
+    certificationRecordId: string;
+    gateId: string | null;
+    status: string;
+    requestedFromUserId: string | null;
+    decidedByUserId: string | null;
+    decidedAt: Date | null;
+    comments: string | null;
+    conditions: string | null;
+    signatureJson: Record<string, unknown> | null;
+    witnessesJson: Array<Record<string, unknown>> | null;
+    authorUserId: string | null;
+    reviewerUserId: string | null;
+    approverUserId: string | null;
+    historyJson: Array<Record<string, unknown>> | null;
+    subjectKind: string | null;
+    subjectId: string | null;
+    stagesJson?: Array<Record<string, unknown>> | null;
+    currentStageOrdinal?: number | null;
+    stageDecisionsJson?: Array<Record<string, unknown>> | null;
+  },
+): ApprovalRecord {
   return {
     ...metaFromRow(row),
     certificationRecordId: row.certificationRecordId,
@@ -891,24 +916,26 @@ export function certificationToRow(record: CertificationRecordRecord) {
   };
 }
 
-export function rowToCertification(row: MetaRow & {
-  key: string;
-  name: string;
-  status: string;
-  planId: string | null;
-  productLabel: string | null;
-  releaseLabel: string | null;
-  gateIds: string[] | null;
-  approvalIds: string[] | null;
-  conditions: string | null;
-  certifiedAt: Date | null;
-  expiresAt?: Date | null;
-  gateEvaluationIds?: string[] | null;
-  currentRecommendation?: string | null;
-  recommendationJson?: Record<string, unknown> | null;
-  evidenceLinksJson?: Record<string, unknown> | null;
-  ruleId?: string | null;
-}): CertificationRecordRecord {
+export function rowToCertification(
+  row: MetaRow & {
+    key: string;
+    name: string;
+    status: string;
+    planId: string | null;
+    productLabel: string | null;
+    releaseLabel: string | null;
+    gateIds: string[] | null;
+    approvalIds: string[] | null;
+    conditions: string | null;
+    certifiedAt: Date | null;
+    expiresAt?: Date | null;
+    gateEvaluationIds?: string[] | null;
+    currentRecommendation?: string | null;
+    recommendationJson?: Record<string, unknown> | null;
+    evidenceLinksJson?: Record<string, unknown> | null;
+    ruleId?: string | null;
+  },
+): CertificationRecordRecord {
   return {
     ...metaFromRow(row),
     key: row.key,
@@ -947,17 +974,19 @@ export function certificationGateDefinitionToRow(
   };
 }
 
-export function rowToCertificationGateDefinition(row: MetaRow & {
-  gateKey: string;
-  name: string;
-  description: string | null;
-  kind: string;
-  required: boolean;
-  configJson: Record<string, unknown> | null;
-  templateKey: string | null;
-  ordinal: number | null;
-  enabled: boolean;
-}): CertificationGateDefinitionRecord {
+export function rowToCertificationGateDefinition(
+  row: MetaRow & {
+    gateKey: string;
+    name: string;
+    description: string | null;
+    kind: string;
+    required: boolean;
+    configJson: Record<string, unknown> | null;
+    templateKey: string | null;
+    ordinal: number | null;
+    enabled: boolean;
+  },
+): CertificationGateDefinitionRecord {
   return {
     ...metaFromRow(row),
     gateKey: row.gateKey,
@@ -990,18 +1019,20 @@ export function certificationGateEvaluationToRow(
   };
 }
 
-export function rowToCertificationGateEvaluation(row: MetaRow & {
-  certificationRecordId: string;
-  gateDefinitionId: string | null;
-  gateKey: string;
-  status: string;
-  reason: string;
-  supportingEvidence: string[] | null;
-  evaluatedAt: Date;
-  evaluatorUserId: string | null;
-  traceabilityRefs: string[] | null;
-  detailsJson: Record<string, unknown> | null;
-}): CertificationGateEvaluationRecord {
+export function rowToCertificationGateEvaluation(
+  row: MetaRow & {
+    certificationRecordId: string;
+    gateDefinitionId: string | null;
+    gateKey: string;
+    status: string;
+    reason: string;
+    supportingEvidence: string[] | null;
+    evaluatedAt: Date;
+    evaluatorUserId: string | null;
+    traceabilityRefs: string[] | null;
+    detailsJson: Record<string, unknown> | null;
+  },
+): CertificationGateEvaluationRecord {
   return {
     ...metaFromRow(row),
     certificationRecordId: row.certificationRecordId,
@@ -1035,18 +1066,20 @@ export function certificationRuleToRow(record: CertificationRuleRecord) {
   };
 }
 
-export function rowToCertificationRule(row: MetaRow & {
-  key: string;
-  name: string;
-  certificationRecordId: string | null;
-  planId: string | null;
-  productLabel: string | null;
-  requiredGateKeys: string[] | null;
-  optionalGateKeys: string[] | null;
-  approvalStagesJson: Array<Record<string, unknown>> | null;
-  enabled: boolean;
-  configJson: Record<string, unknown> | null;
-}): CertificationRuleRecord {
+export function rowToCertificationRule(
+  row: MetaRow & {
+    key: string;
+    name: string;
+    certificationRecordId: string | null;
+    planId: string | null;
+    productLabel: string | null;
+    requiredGateKeys: string[] | null;
+    optionalGateKeys: string[] | null;
+    approvalStagesJson: Array<Record<string, unknown>> | null;
+    enabled: boolean;
+    configJson: Record<string, unknown> | null;
+  },
+): CertificationRuleRecord {
   return {
     ...metaFromRow(row),
     key: row.key,
@@ -1158,13 +1191,15 @@ export function releaseReadinessToRow(record: ReleaseReadinessRecord) {
   };
 }
 
-export function rowToReleaseReadiness(row: MetaRow & {
-  certificationRecordId: string;
-  status: string;
-  summary: string;
-  blockingGateIds: string[] | null;
-  assessedAt: Date;
-}): ReleaseReadinessRecord {
+export function rowToReleaseReadiness(
+  row: MetaRow & {
+    certificationRecordId: string;
+    status: string;
+    summary: string;
+    blockingGateIds: string[] | null;
+    assessedAt: Date;
+  },
+): ReleaseReadinessRecord {
   return {
     ...metaFromRow(row),
     certificationRecordId: row.certificationRecordId,
@@ -1187,14 +1222,16 @@ export function releaseToRow(record: ReleaseRecord) {
   };
 }
 
-export function rowToRelease(row: MetaRow & {
-  key: string;
-  name: string;
-  status: string;
-  description: string | null;
-  windowJson: Record<string, unknown> | null;
-  metadataJson: Record<string, unknown> | null;
-}): ReleaseRecord {
+export function rowToRelease(
+  row: MetaRow & {
+    key: string;
+    name: string;
+    status: string;
+    description: string | null;
+    windowJson: Record<string, unknown> | null;
+    metadataJson: Record<string, unknown> | null;
+  },
+): ReleaseRecord {
   return {
     ...metaFromRow(row),
     key: row.key,
@@ -1216,12 +1253,14 @@ export function releaseScopeToRow(record: ReleaseScopeRecord) {
   };
 }
 
-export function rowToReleaseScope(row: MetaRow & {
-  releaseId: string;
-  kind: string;
-  refId: string;
-  label: string | null;
-}): ReleaseScopeRecord {
+export function rowToReleaseScope(
+  row: MetaRow & {
+    releaseId: string;
+    kind: string;
+    refId: string;
+    label: string | null;
+  },
+): ReleaseScopeRecord {
   return {
     ...metaFromRow(row),
     releaseId: row.releaseId,
@@ -1241,12 +1280,14 @@ export function releasePackageToRow(record: ReleasePackageRecord) {
   };
 }
 
-export function rowToReleasePackage(row: MetaRow & {
-  releaseId: string;
-  name: string;
-  versionLabel: string;
-  description: string | null;
-}): ReleasePackageRecord {
+export function rowToReleasePackage(
+  row: MetaRow & {
+    releaseId: string;
+    name: string;
+    versionLabel: string;
+    description: string | null;
+  },
+): ReleasePackageRecord {
   return {
     ...metaFromRow(row),
     releaseId: row.releaseId,
@@ -1266,12 +1307,14 @@ export function releaseCandidateToRow(record: ReleaseCandidateRecord) {
   };
 }
 
-export function rowToReleaseCandidate(row: MetaRow & {
-  releaseId: string;
-  label: string;
-  status: string;
-  notes: string | null;
-}): ReleaseCandidateRecord {
+export function rowToReleaseCandidate(
+  row: MetaRow & {
+    releaseId: string;
+    label: string;
+    status: string;
+    notes: string | null;
+  },
+): ReleaseCandidateRecord {
   return {
     ...metaFromRow(row),
     releaseId: row.releaseId,
@@ -1295,16 +1338,18 @@ export function releaseApprovalToRow(record: ReleaseApprovalRecord) {
   };
 }
 
-export function rowToReleaseApproval(row: MetaRow & {
-  releaseId: string;
-  stageKind: string;
-  status: string;
-  requestedFromUserId: string | null;
-  decidedByUserId: string | null;
-  decidedAt: Date | null;
-  comments: string | null;
-  conditions: string | null;
-}): ReleaseApprovalRecord {
+export function rowToReleaseApproval(
+  row: MetaRow & {
+    releaseId: string;
+    stageKind: string;
+    status: string;
+    requestedFromUserId: string | null;
+    decidedByUserId: string | null;
+    decidedAt: Date | null;
+    comments: string | null;
+    conditions: string | null;
+  },
+): ReleaseApprovalRecord {
   return {
     ...metaFromRow(row),
     releaseId: row.releaseId,
@@ -1330,14 +1375,16 @@ export function releaseDecisionToRow(record: ReleaseDecisionRecord) {
   };
 }
 
-export function rowToReleaseDecision(row: MetaRow & {
-  releaseId: string;
-  verdict: string;
-  decidedByUserId: string;
-  decidedAt: Date;
-  rationale: string;
-  isAutomatic: boolean;
-}): ReleaseDecisionRecord {
+export function rowToReleaseDecision(
+  row: MetaRow & {
+    releaseId: string;
+    verdict: string;
+    decidedByUserId: string;
+    decidedAt: Date;
+    rationale: string;
+    isAutomatic: boolean;
+  },
+): ReleaseDecisionRecord {
   return {
     ...metaFromRow(row),
     releaseId: row.releaseId,
@@ -1359,12 +1406,14 @@ export function releaseEvidenceToRow(record: ReleaseEvidenceRecord) {
   };
 }
 
-export function rowToReleaseEvidence(row: MetaRow & {
-  releaseId: string;
-  kind: string;
-  refId: string;
-  summary: string | null;
-}): ReleaseEvidenceRecord {
+export function rowToReleaseEvidence(
+  row: MetaRow & {
+    releaseId: string;
+    kind: string;
+    refId: string;
+    summary: string | null;
+  },
+): ReleaseEvidenceRecord {
   return {
     ...metaFromRow(row),
     releaseId: row.releaseId,
@@ -1386,14 +1435,16 @@ export function releaseDependencyToRow(record: ReleaseDependencyRecord) {
   };
 }
 
-export function rowToReleaseDependency(row: MetaRow & {
-  releaseId: string;
-  dependsOnReleaseId: string | null;
-  kind: string;
-  required: boolean;
-  notes: string | null;
-  blocked: boolean;
-}): ReleaseDependencyRecord {
+export function rowToReleaseDependency(
+  row: MetaRow & {
+    releaseId: string;
+    dependsOnReleaseId: string | null;
+    kind: string;
+    required: boolean;
+    notes: string | null;
+    blocked: boolean;
+  },
+): ReleaseDependencyRecord {
   return {
     ...metaFromRow(row),
     releaseId: row.releaseId,
@@ -1416,13 +1467,15 @@ export function releaseNoteToRow(record: ReleaseNoteRecord) {
   };
 }
 
-export function rowToReleaseNote(row: MetaRow & {
-  releaseId: string;
-  title: string;
-  body: string;
-  authoredAt: Date;
-  authorUserId: string | null;
-}): ReleaseNoteRecord {
+export function rowToReleaseNote(
+  row: MetaRow & {
+    releaseId: string;
+    title: string;
+    body: string;
+    authoredAt: Date;
+    authorUserId: string | null;
+  },
+): ReleaseNoteRecord {
   return {
     ...metaFromRow(row),
     releaseId: row.releaseId,
@@ -1443,12 +1496,14 @@ export function releaseRiskAssessmentToRow(record: ReleaseRiskAssessmentRecord) 
   };
 }
 
-export function rowToReleaseRiskAssessment(row: MetaRow & {
-  releaseId: string;
-  snapshotJson: Record<string, unknown>;
-  computedAt: Date;
-  isDecision: boolean;
-}): ReleaseRiskAssessmentRecord {
+export function rowToReleaseRiskAssessment(
+  row: MetaRow & {
+    releaseId: string;
+    snapshotJson: Record<string, unknown>;
+    computedAt: Date;
+    isDecision: boolean;
+  },
+): ReleaseRiskAssessmentRecord {
   return {
     ...metaFromRow(row),
     releaseId: row.releaseId,
@@ -1458,9 +1513,7 @@ export function rowToReleaseRiskAssessment(row: MetaRow & {
   };
 }
 
-export function releaseReadinessSnapshotToRow(
-  record: ReleaseReadinessSnapshotRecord,
-) {
+export function releaseReadinessSnapshotToRow(record: ReleaseReadinessSnapshotRecord) {
   return {
     ...metaToRow(record),
     releaseId: record.releaseId,
@@ -1470,12 +1523,14 @@ export function releaseReadinessSnapshotToRow(
   };
 }
 
-export function rowToReleaseReadinessSnapshot(row: MetaRow & {
-  releaseId: string;
-  snapshotJson: Record<string, unknown>;
-  computedAt: Date;
-  isDecision: boolean;
-}): ReleaseReadinessSnapshotRecord {
+export function rowToReleaseReadinessSnapshot(
+  row: MetaRow & {
+    releaseId: string;
+    snapshotJson: Record<string, unknown>;
+    computedAt: Date;
+    isDecision: boolean;
+  },
+): ReleaseReadinessSnapshotRecord {
   return {
     ...metaFromRow(row),
     releaseId: row.releaseId,
@@ -1485,9 +1540,7 @@ export function rowToReleaseReadinessSnapshot(row: MetaRow & {
   };
 }
 
-export function releaseSummarySnapshotToRow(
-  record: ReleaseSummarySnapshotRecord,
-) {
+export function releaseSummarySnapshotToRow(record: ReleaseSummarySnapshotRecord) {
   return {
     ...metaToRow(record),
     releaseId: record.releaseId,
@@ -1497,12 +1550,14 @@ export function releaseSummarySnapshotToRow(
   };
 }
 
-export function rowToReleaseSummarySnapshot(row: MetaRow & {
-  releaseId: string;
-  snapshotJson: Record<string, unknown>;
-  computedAt: Date;
-  isDecision: boolean;
-}): ReleaseSummarySnapshotRecord {
+export function rowToReleaseSummarySnapshot(
+  row: MetaRow & {
+    releaseId: string;
+    snapshotJson: Record<string, unknown>;
+    computedAt: Date;
+    isDecision: boolean;
+  },
+): ReleaseSummarySnapshotRecord {
   return {
     ...metaFromRow(row),
     releaseId: row.releaseId,
@@ -1569,18 +1624,20 @@ export function coverageToRow(record: CoverageRecord) {
   };
 }
 
-export function rowToCoverage(row: MetaRow & {
-  kind: string;
-  subjectId: string;
-  coveredCount: number;
-  totalCount: number;
-  percentage: number;
-  computedAt: Date;
-  planId: string | null;
-  suiteId: string | null;
-  requirementId: string | null;
-  riskId: string | null;
-}): CoverageRecord {
+export function rowToCoverage(
+  row: MetaRow & {
+    kind: string;
+    subjectId: string;
+    coveredCount: number;
+    totalCount: number;
+    percentage: number;
+    computedAt: Date;
+    planId: string | null;
+    suiteId: string | null;
+    requirementId: string | null;
+    riskId: string | null;
+  },
+): CoverageRecord {
   return {
     ...metaFromRow(row),
     kind: row.kind as CoverageMetricKind,
@@ -1628,34 +1685,36 @@ export function defectLinkToRow(record: DefectLinkRecord) {
   };
 }
 
-export function rowToDefectLink(row: MetaRow & {
-  providerKind: string;
-  providerKey: string | null;
-  status: string;
-  internalRef: string | null;
-  externalRef: string | null;
-  severity: string | null;
-  priority: string | null;
-  ownerUserId: string | null;
-  resolution: string | null;
-  verificationState: string | null;
-  summary: string | null;
-  url: string | null;
-  requirementIds: string[] | null;
-  planIds: string[] | null;
-  suiteIds: string[] | null;
-  caseIds: string[] | null;
-  manualExecutionIds: string[] | null;
-  automationExecutionIds: string[] | null;
-  evidenceIds: string[] | null;
-  releaseLabel: string | null;
-  riskIds: string[] | null;
-  workItemRefs: Record<string, unknown>[] | null;
-  target: string | null;
-  externalId: string | null;
-  resultId: string | null;
-  runId: string | null;
-}): DefectLinkRecord {
+export function rowToDefectLink(
+  row: MetaRow & {
+    providerKind: string;
+    providerKey: string | null;
+    status: string;
+    internalRef: string | null;
+    externalRef: string | null;
+    severity: string | null;
+    priority: string | null;
+    ownerUserId: string | null;
+    resolution: string | null;
+    verificationState: string | null;
+    summary: string | null;
+    url: string | null;
+    requirementIds: string[] | null;
+    planIds: string[] | null;
+    suiteIds: string[] | null;
+    caseIds: string[] | null;
+    manualExecutionIds: string[] | null;
+    automationExecutionIds: string[] | null;
+    evidenceIds: string[] | null;
+    releaseLabel: string | null;
+    riskIds: string[] | null;
+    workItemRefs: Record<string, unknown>[] | null;
+    target: string | null;
+    externalId: string | null;
+    resultId: string | null;
+    runId: string | null;
+  },
+): DefectLinkRecord {
   return {
     ...metaFromRow(row),
     providerKind: row.providerKind,
@@ -1697,12 +1756,14 @@ export function qualitySnapshotToRow(record: QualitySnapshotRecord) {
   };
 }
 
-export function rowToQualitySnapshot(row: MetaRow & {
-  scope: Record<string, unknown> | null;
-  metrics: Record<string, unknown> | null;
-  computedAt: Date;
-  label: string | null;
-}): QualitySnapshotRecord {
+export function rowToQualitySnapshot(
+  row: MetaRow & {
+    scope: Record<string, unknown> | null;
+    metrics: Record<string, unknown> | null;
+    computedAt: Date;
+    label: string | null;
+  },
+): QualitySnapshotRecord {
   return {
     ...metaFromRow(row),
     scope: row.scope ?? {},
@@ -1727,17 +1788,19 @@ export function regressionAnalysisToRow(record: RegressionAnalysisRecord) {
   };
 }
 
-export function rowToRegressionAnalysis(row: MetaRow & {
-  baselineLabel: string;
-  currentLabel: string;
-  newFailures: string[] | null;
-  resolvedFailures: string[] | null;
-  reopenedFailures: string[] | null;
-  coverageDelta: number;
-  executionDelta: number;
-  computedAt: Date;
-  details: Record<string, unknown> | null;
-}): RegressionAnalysisRecord {
+export function rowToRegressionAnalysis(
+  row: MetaRow & {
+    baselineLabel: string;
+    currentLabel: string;
+    newFailures: string[] | null;
+    resolvedFailures: string[] | null;
+    reopenedFailures: string[] | null;
+    coverageDelta: number;
+    executionDelta: number;
+    computedAt: Date;
+    details: Record<string, unknown> | null;
+  },
+): RegressionAnalysisRecord {
   return {
     ...metaFromRow(row),
     baselineLabel: row.baselineLabel,
@@ -1767,17 +1830,19 @@ export function automationDefinitionToRow(record: AutomationDefinitionRecord) {
   };
 }
 
-export function rowToAutomationDefinition(row: MetaRow & {
-  key: string;
-  name: string;
-  description: string | null;
-  automationType: string;
-  adapterSourceId: string | null;
-  caseId: string | null;
-  suiteId: string | null;
-  configJson: Record<string, unknown> | null;
-  status: string;
-}): AutomationDefinitionRecord {
+export function rowToAutomationDefinition(
+  row: MetaRow & {
+    key: string;
+    name: string;
+    description: string | null;
+    automationType: string;
+    adapterSourceId: string | null;
+    caseId: string | null;
+    suiteId: string | null;
+    configJson: Record<string, unknown> | null;
+    status: string;
+  },
+): AutomationDefinitionRecord {
   return {
     ...metaFromRow(row),
     key: row.key,
@@ -1804,14 +1869,16 @@ export function traceabilityLinkToRow(record: TraceabilityLinkRecord) {
   };
 }
 
-export function rowToTraceabilityLink(row: MetaRow & {
-  type: string;
-  sourceKind: string;
-  sourceId: string;
-  targetKind: string;
-  targetId: string;
-  notes: string | null;
-}): TraceabilityLinkRecord {
+export function rowToTraceabilityLink(
+  row: MetaRow & {
+    type: string;
+    sourceKind: string;
+    sourceId: string;
+    targetKind: string;
+    targetId: string;
+    notes: string | null;
+  },
+): TraceabilityLinkRecord {
   return {
     ...metaFromRow(row),
     type: row.type as TraceabilityLinkType,
@@ -1836,10 +1903,12 @@ export function configurationToRow(
   };
 }
 
-export function rowToConfiguration(row: MetaRow & {
-  configKey: string;
-  configJson: Record<string, unknown> | null;
-}): ConfigurationRecord {
+export function rowToConfiguration(
+  row: MetaRow & {
+    configKey: string;
+    configJson: Record<string, unknown> | null;
+  },
+): ConfigurationRecord {
   return {
     ...metaFromRow(row),
     configKey: row.configKey,
@@ -1861,16 +1930,18 @@ export function registryEntryToRow(record: RegistryEntryRecord) {
   };
 }
 
-export function rowToRegistryEntry(row: MetaRow & {
-  registryKind: string;
-  entryKey: string;
-  name: string;
-  description: string | null;
-  status: string;
-  version: string | null;
-  tags: string[] | null;
-  metadata: Record<string, string> | null;
-}): RegistryEntryRecord {
+export function rowToRegistryEntry(
+  row: MetaRow & {
+    registryKind: string;
+    entryKey: string;
+    name: string;
+    description: string | null;
+    status: string;
+    version: string | null;
+    tags: string[] | null;
+    metadata: Record<string, string> | null;
+  },
+): RegistryEntryRecord {
   return {
     ...metaFromRow(row),
     registryKind: row.registryKind,

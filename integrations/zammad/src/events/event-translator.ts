@@ -27,7 +27,8 @@ export const ZAMMAD_SUPPORTED_WEBHOOK_EVENT_TYPES = [
   "attachment",
 ] as const;
 
-export type ZammadWebhookEventType = (typeof ZAMMAD_SUPPORTED_WEBHOOK_EVENT_TYPES)[number];
+export type ZammadWebhookEventType =
+  (typeof ZAMMAD_SUPPORTED_WEBHOOK_EVENT_TYPES)[number];
 
 function asRecord(value: unknown): Record<string, unknown> | undefined {
   if (typeof value !== "object" || value === null || Array.isArray(value)) {
@@ -44,7 +45,10 @@ function readNumericId(data: Record<string, unknown> | undefined): string | unde
   return undefined;
 }
 
-function readString(data: Record<string, unknown> | undefined, key: string): string | undefined {
+function readString(
+  data: Record<string, unknown> | undefined,
+  key: string,
+): string | undefined {
   const value = data?.[key];
   return typeof value === "string" && value.length > 0 ? value : undefined;
 }
@@ -53,7 +57,8 @@ function normalizeVendorEvent(payload: ZammadWebhookPayload): string {
   const explicit = (payload.event ?? payload.type ?? "").trim().toLowerCase();
   if (explicit) {
     if (explicit === "ticket" || explicit === "support_request") return "ticket";
-    if (explicit === "ticket_article" || explicit === "ticket::article") return "article";
+    if (explicit === "ticket_article" || explicit === "ticket::article")
+      return "article";
     return explicit;
   }
   if (payload.article) return "article";
@@ -64,7 +69,10 @@ function normalizeVendorEvent(payload: ZammadWebhookPayload): string {
   return "unknown";
 }
 
-function normalizeVendorAction(payload: ZammadWebhookPayload, vendorEvent: string): string {
+function normalizeVendorAction(
+  payload: ZammadWebhookPayload,
+  vendorEvent: string,
+): string {
   const explicit = (payload.action ?? "").trim().toLowerCase();
   if (explicit) return explicit;
 
@@ -72,7 +80,9 @@ function normalizeVendorAction(payload: ZammadWebhookPayload, vendorEvent: strin
   if (vendorEvent === "ticket") {
     if ("state" in changes || "state_id" in changes) {
       const stateChange = changes.state ?? changes.state_id;
-      const toValue = Array.isArray(stateChange) ? String(stateChange[1] ?? "").toLowerCase() : "";
+      const toValue = Array.isArray(stateChange)
+        ? String(stateChange[1] ?? "").toLowerCase()
+        : "";
       if (toValue.includes("close")) return "close";
       if (toValue.includes("open") || toValue.includes("new")) return "reopen";
       return "state";
@@ -128,7 +138,9 @@ function mapCanonicalResourceId(
 function inferAction(
   vendorEvent: string,
   vendorAction: string,
-): { readonly action: IntegrationEventAction; readonly type: IntegrationEventType } | undefined {
+):
+  | { readonly action: IntegrationEventAction; readonly type: IntegrationEventType }
+  | undefined {
   const normalized = vendorAction.toLowerCase();
 
   if (vendorEvent === "ticket") {
@@ -141,7 +153,11 @@ function inferAction(
     if (normalized === "reopen" || normalized === "reopened") {
       return { action: "reopened", type: "support_request.reopened" };
     }
-    if (normalized === "assignment" || normalized === "assign" || normalized === "assigned") {
+    if (
+      normalized === "assignment" ||
+      normalized === "assign" ||
+      normalized === "assigned"
+    ) {
       return { action: "assigned", type: "support_request.assigned" };
     }
     if (normalized === "unassign" || normalized === "unassigned") {
@@ -237,7 +253,10 @@ function resolveVendorResourceId(
       return readNumericId(asRecord(payload.ticket));
     case "article":
     case "attachment":
-      return readNumericId(asRecord(payload.article)) ?? readNumericId(asRecord(payload.ticket));
+      return (
+        readNumericId(asRecord(payload.article)) ??
+        readNumericId(asRecord(payload.ticket))
+      );
     case "organization":
       return readNumericId(asRecord(payload.organization));
     case "group":
@@ -280,9 +299,9 @@ export function translateZammadWebhookPayload(
     };
   }
 
-  const supported = (ZAMMAD_SUPPORTED_WEBHOOK_EVENT_TYPES as readonly string[]).includes(
-    vendorEvent,
-  );
+  const supported = (
+    ZAMMAD_SUPPORTED_WEBHOOK_EVENT_TYPES as readonly string[]
+  ).includes(vendorEvent);
   if (!supported) {
     return {
       ok: true,
@@ -331,7 +350,10 @@ export function translateZammadWebhookPayload(
   const supportTicketId =
     resource === "support_request"
       ? resourceId
-      : mapCanonicalResourceId("support_request", readNumericId(asRecord(typed.ticket)));
+      : mapCanonicalResourceId(
+          "support_request",
+          readNumericId(asRecord(typed.ticket)),
+        );
 
   const event: IntegrationEventEnvelope = {
     id: `ievt_zammad_${options.deliveryId ?? `${vendorEvent}_${vendorId ?? "na"}`}`,

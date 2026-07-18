@@ -398,14 +398,22 @@ export async function getSupportOrganization(
   organizationId: string,
   options?: SupportApiRequestOptions,
 ): Promise<SupportDataResult<SupportOrganization>> {
-  return getData<SupportOrganization>(`/support-organizations/${organizationId}`, options);
+  return getData<SupportOrganization>(
+    `/support-organizations/${organizationId}`,
+    options,
+  );
 }
 
 export async function createSupportOrganization(
   input: CreateOrganizationInput,
   options?: SupportApiRequestOptions,
 ): Promise<SupportDataResult<SupportOrganization>> {
-  return mutateData<SupportOrganization>("/support-organizations", "POST", input, options);
+  return mutateData<SupportOrganization>(
+    "/support-organizations",
+    "POST",
+    input,
+    options,
+  );
 }
 
 export async function updateSupportOrganization(
@@ -468,7 +476,12 @@ export async function updateSupportGroup(
   input: UpdateGroupInput,
   options?: SupportApiRequestOptions,
 ): Promise<SupportDataResult<SupportGroup>> {
-  return mutateData<SupportGroup>(`/support-groups/${groupId}`, "PATCH", input, options);
+  return mutateData<SupportGroup>(
+    `/support-groups/${groupId}`,
+    "PATCH",
+    input,
+    options,
+  );
 }
 
 // ---------------------------------------------------------------------------

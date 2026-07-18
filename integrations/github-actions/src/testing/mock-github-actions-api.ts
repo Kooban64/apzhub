@@ -59,7 +59,11 @@ export const MOCK_RUN: GitHubWorkflowRunRecord = {
   run_started_at: "2026-07-12T10:00:30Z",
   actor: { login: "octocat", id: 7 },
   repository: { full_name: "acme/portal", name: "portal", owner: { login: "acme" } },
-  head_commit: { id: "abc123def456", message: "feat: add adapter", timestamp: "2026-07-12T09:59:00Z" },
+  head_commit: {
+    id: "abc123def456",
+    message: "feat: add adapter",
+    timestamp: "2026-07-12T09:59:00Z",
+  },
 };
 
 export const MOCK_JOB: GitHubJobRecord = {
@@ -133,9 +137,7 @@ export interface MockGitHubActionsApiOptions {
   }[];
 }
 
-function normalizeHeaders(
-  headers?: HeadersInit,
-): Record<string, string> {
+function normalizeHeaders(headers?: HeadersInit): Record<string, string> {
   if (!headers) return {};
   if (headers instanceof Headers) {
     const out: Record<string, string> = {};
@@ -204,11 +206,7 @@ export function createMockGitHubActionsFetch(
     const bearer = authorization?.match(/^Bearer\s+(.+)$/i);
 
     if (requireToken && !bearer?.[1]) {
-      return jsonResponse(
-        { message: "Requires authentication" },
-        401,
-        rateHeaders,
-      );
+      return jsonResponse({ message: "Requires authentication" }, 401, rateHeaders);
     }
 
     const url = new URL(input);
@@ -227,11 +225,7 @@ export function createMockGitHubActionsFetch(
           rateHeaders,
         );
       }
-      return jsonResponse(
-        { login, id: userId, type: "User" },
-        200,
-        rateHeaders,
-      );
+      return jsonResponse({ login, id: userId, type: "User" }, 200, rateHeaders);
     }
 
     if (path === "/rate_limit" || path.endsWith("/rate_limit")) {
@@ -307,7 +301,9 @@ export function createMockGitHubActionsFetch(
       const status = url.searchParams.get("status");
       const branch = url.searchParams.get("branch");
       if (status) {
-        filtered = filtered.filter((r) => r.status === status || r.conclusion === status);
+        filtered = filtered.filter(
+          (r) => r.status === status || r.conclusion === status,
+        );
       }
       if (branch) {
         filtered = filtered.filter((r) => r.head_branch === branch);
@@ -361,9 +357,7 @@ export function createMockGitHubActionsFetch(
       );
     }
 
-    const runMatch = path.match(
-      /^\/repos\/([^/]+)\/([^/]+)\/actions\/runs\/([^/]+)$/,
-    );
+    const runMatch = path.match(/^\/repos\/([^/]+)\/([^/]+)\/actions\/runs\/([^/]+)$/);
     if (runMatch) {
       const run = runs.find((r) => String(r.id) === runMatch[3]);
       if (!run) {
@@ -372,19 +366,13 @@ export function createMockGitHubActionsFetch(
       return jsonResponse(run, 200, rateHeaders);
     }
 
-    const environmentsMatch = path.match(
-      /^\/repos\/([^/]+)\/([^/]+)\/environments$/,
-    );
+    const environmentsMatch = path.match(/^\/repos\/([^/]+)\/([^/]+)\/environments$/);
     if (environmentsMatch) {
       if (environmentsStatus === 404) {
         return jsonResponse({ message: "Not Found" }, 404, rateHeaders);
       }
       if (environmentsStatus >= 400) {
-        return jsonResponse(
-          { message: "Error" },
-          environmentsStatus,
-          rateHeaders,
-        );
+        return jsonResponse({ message: "Error" }, environmentsStatus, rateHeaders);
       }
       return jsonResponse(
         {
@@ -393,7 +381,8 @@ export function createMockGitHubActionsFetch(
             {
               id: 1,
               name: "production",
-              html_url: "https://github.com/acme/portal/deployments/activity_log?environment=production",
+              html_url:
+                "https://github.com/acme/portal/deployments/activity_log?environment=production",
               created_at: "2026-01-01T00:00:00Z",
               updated_at: "2026-07-01T00:00:00Z",
             },

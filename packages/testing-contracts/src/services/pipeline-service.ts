@@ -168,10 +168,7 @@ export interface PipelineImportService {
     ctx: ServiceRequestContext,
     importId: PipelineImportId,
   ): Promise<readonly PipelineImportHistory[]>;
-  getImport(
-    ctx: ServiceRequestContext,
-    id: PipelineImportId,
-  ): Promise<PipelineImport>;
+  getImport(ctx: ServiceRequestContext, id: PipelineImportId): Promise<PipelineImport>;
   listImports(ctx: ServiceRequestContext): Promise<readonly PipelineImport[]>;
   /** Retrieve nested stage metadata from stored JSON — not live CI. */
   listStages(

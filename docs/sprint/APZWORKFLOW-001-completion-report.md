@@ -19,10 +19,10 @@ Delivered the APZHUB Workflow Platform foundation: contracts, domain core (lifec
 Consumers → (future services) → Workflow Core → Persistence → (future engines)
 ```
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/workflow-contracts` | **0.1.0** |
-| `@apzhub/workflow-core` | **0.1.0** |
+| Package                        | Version   |
+| ------------------------------ | --------- |
+| `@apzhub/workflow-contracts`   | **0.1.0** |
+| `@apzhub/workflow-core`        | **0.1.0** |
 | `@apzhub/workflow-persistence` | **0.1.0** |
 
 ## Domain entities
@@ -41,21 +41,21 @@ Domain, lifecycle, validation, in-memory repositories, permission helpers, bound
 
 See [APZWORKFLOW-001 coverage baseline](../reviews/APZWORKFLOW-001-coverage-baseline.md).
 
-| Package | Lines | Functions | Branches |
-| --- | ---: | ---: | ---: |
-| `@apzhub/workflow-contracts` | 100% | 100% | 100% |
-| `@apzhub/workflow-core` | 99.60% | 100% | 96.40% |
-| `@apzhub/workflow-persistence` | 99.06% | 98.15% | 80.74% |
+| Package                        |  Lines | Functions | Branches |
+| ------------------------------ | -----: | --------: | -------: |
+| `@apzhub/workflow-contracts`   |   100% |      100% |     100% |
+| `@apzhub/workflow-core`        | 99.60% |      100% |   96.40% |
+| `@apzhub/workflow-persistence` | 99.06% |    98.15% |   80.74% |
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
+| Gate                                       | Result              |
+| ------------------------------------------ | ------------------- |
 | Architecture / dependency / boundary audit | PASS (0 violations) |
-| Typecheck (workflow packages) | PASS |
-| Lint (workflow packages) | PASS |
-| Vitest | PASS |
-| Coverage ≥95% lines/functions | PASS |
+| Typecheck (workflow packages)              | PASS                |
+| Lint (workflow packages)                   | PASS                |
+| Vitest                                     | PASS                |
+| Coverage ≥95% lines/functions              | PASS                |
 
 ## Technical Debt
 

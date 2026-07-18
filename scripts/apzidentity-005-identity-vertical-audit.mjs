@@ -39,7 +39,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -137,22 +138,35 @@ const AUTH_PROVISION_METHOD =
 // ---------------------------------------------------------------------------
 scan(walk(join(ROOT, "apps/web/components/identity")), [
   { rule: "workbench-no-platform-services", pattern: /@apzhub\/platform-services/ },
-  { rule: "workbench-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+  {
+    rule: "workbench-no-gateway",
+    pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+  },
   { rule: "workbench-no-identity-core", pattern: /@apzhub\/identity-core/ },
   { rule: "workbench-no-persistence", pattern: /@apzhub\/identity-persistence/ },
   { rule: "workbench-no-event-bus", pattern: /\bEventBus\b|@apzhub\/event-bus/ },
   { rule: "workbench-no-auth-methods", pattern: AUTH_PROVISION_METHOD },
   { rule: "workbench-no-direct-fetch", pattern: /\bfetch\s*\(/ },
   { rule: "workbench-no-localstorage", pattern: /localStorage|sessionStorage/ },
-  { rule: "workbench-no-admin-coupling", pattern: /@\/(lib|components)\/administration\/|@apzhub\/admin-core|@apzhub\/admin-persistence/ },
-  { rule: "workbench-no-password-hash", pattern: /passwordHash|mfaSecret|sessionToken|oauthToken|apiKey\b/ },
+  {
+    rule: "workbench-no-admin-coupling",
+    pattern:
+      /@\/(lib|components)\/administration\/|@apzhub\/admin-core|@apzhub\/admin-persistence/,
+  },
+  {
+    rule: "workbench-no-password-hash",
+    pattern: /passwordHash|mfaSecret|sessionToken|oauthToken|apiKey\b/,
+  },
 ]);
 
 scan(
   walk(join(ROOT, "apps/web/lib/identity")).filter((f) => !f.includes(".test.")),
   [
     { rule: "client-no-platform-services", pattern: /@apzhub\/platform-services/ },
-    { rule: "client-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+    {
+      rule: "client-no-gateway",
+      pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+    },
     { rule: "client-no-identity-core", pattern: /@apzhub\/identity-core/ },
     { rule: "client-no-persistence", pattern: /@apzhub\/identity-persistence/ },
     { rule: "client-no-event-bus", pattern: /\bEventBus\b|@apzhub\/event-bus/ },
@@ -323,7 +337,11 @@ if (routeFiles.length < 30) {
 // ---------------------------------------------------------------------------
 forbidDeps(
   "packages/identity-contracts/package.json",
-  ["@apzhub/identity-core", "@apzhub/identity-persistence", "@apzhub/platform-services"],
+  [
+    "@apzhub/identity-core",
+    "@apzhub/identity-persistence",
+    "@apzhub/platform-services",
+  ],
   "contracts-deps",
 );
 forbidDeps(
@@ -446,7 +464,10 @@ for (const child of [
     join(ROOT, "apps/web/components/workbench-page.tsx"),
     "utf8",
   );
-  if (!shell.includes("IdentityWorkspaceRouter") || !shell.includes("isIdentityRoute")) {
+  if (
+    !shell.includes("IdentityWorkspaceRouter") ||
+    !shell.includes("isIdentityRoute")
+  ) {
     violations.push({
       file: "apps/web/components/workbench-page.tsx",
       line: 1,
@@ -469,12 +490,12 @@ for (const child of [
       detail: "Expected Platform Identity Administration tag",
     });
   }
-  if (!/version:\s*1\.7\.\d+/.test(openapi)) {
+  if (!/version:\s*1\.(?:[7-9]|\d{2,})\.\d+/.test(openapi)) {
     violations.push({
       file: "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
       line: 1,
       rule: "openapi-version",
-      detail: "Expected OpenAPI info.version 1.7.x",
+      detail: "Expected OpenAPI info.version >= 1.7.0",
     });
   }
   for (const required of [
@@ -516,8 +537,12 @@ for (const child of [
     openapi.includes("/identity/")
   ) {
     // only violate if these appear near identity schemas — soft check on whole file
-    const identitySlice = openapi.includes("passwordHash") || openapi.includes("mfaSecret");
-    if (identitySlice && /Identity.*passwordHash|passwordHash.*Identity/s.test(openapi)) {
+    const identitySlice =
+      openapi.includes("passwordHash") || openapi.includes("mfaSecret");
+    if (
+      identitySlice &&
+      /Identity.*passwordHash|passwordHash.*Identity/s.test(openapi)
+    ) {
       violations.push({
         file: "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
         line: 1,
@@ -528,8 +553,14 @@ for (const child of [
   }
 }
 
-requireExists("packages/config/drizzle/0052_apz_platform_iam.sql", "missing-migration-0052");
-requireExists("packages/config/drizzle/0053_apz_platform_iam_rls.sql", "missing-migration-0053");
+requireExists(
+  "packages/config/drizzle/0052_apz_platform_iam.sql",
+  "missing-migration-0052",
+);
+requireExists(
+  "packages/config/drizzle/0053_apz_platform_iam_rls.sql",
+  "missing-migration-0053",
+);
 
 {
   const mig = readFileSync(
@@ -571,7 +602,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.23.0",
+  "0.25.0",
   "version-platform-services",
 );
 

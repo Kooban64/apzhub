@@ -68,11 +68,7 @@ export function createGenericJsonAdapter(): AutomationResultAdapter {
           });
         }
         suites.push(
-          suiteFromCases(
-            readString(s, "name") ?? "suite",
-            cases,
-            readString(s, "key"),
-          ),
+          suiteFromCases(readString(s, "name") ?? "suite", cases, readString(s, "key")),
         );
       }
       const allCases = suites.flatMap((s) => s.cases);
@@ -111,9 +107,10 @@ export function createGenericJsonAdapter(): AutomationResultAdapter {
         startedAt: readString(obj, "startedAt"),
         completedAt: readString(obj, "completedAt"),
         durationMs: readNumber(obj, "durationMs"),
-        overallStatus: (readString(obj, "overallStatus") as
-          | CanonicalAutomationResult["overallStatus"]
-          | undefined) ?? aggregateOverall(allCases),
+        overallStatus:
+          (readString(obj, "overallStatus") as
+            CanonicalAutomationResult["overallStatus"] | undefined) ??
+          aggregateOverall(allCases),
         metadata:
           typeof obj.metadata === "object" && obj.metadata
             ? (obj.metadata as Record<string, unknown>)

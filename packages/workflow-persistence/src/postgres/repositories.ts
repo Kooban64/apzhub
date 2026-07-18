@@ -60,13 +60,9 @@ function mapWorkflow(row: typeof platformWorkflow.$inferSelect): Workflow {
     currentVersionId: row.currentVersionId
       ? asWorkflowVersionId(row.currentVersionId)
       : undefined,
-    categoryId: row.categoryId
-      ? asWorkflowCategoryId(row.categoryId)
-      : undefined,
+    categoryId: row.categoryId ? asWorkflowCategoryId(row.categoryId) : undefined,
     folderId: row.folderId ? asWorkflowFolderId(row.folderId) : undefined,
-    templateId: row.templateId
-      ? asWorkflowTemplateId(row.templateId)
-      : undefined,
+    templateId: row.templateId ? asWorkflowTemplateId(row.templateId) : undefined,
     createdAt: row.createdAt.toISOString(),
     updatedAt: row.updatedAt.toISOString(),
     createdBy: row.createdBy,
@@ -75,9 +71,7 @@ function mapWorkflow(row: typeof platformWorkflow.$inferSelect): Workflow {
   };
 }
 
-function mapVersion(
-  row: typeof platformWorkflowVersion.$inferSelect,
-): WorkflowVersion {
+function mapVersion(row: typeof platformWorkflowVersion.$inferSelect): WorkflowVersion {
   return {
     id: asWorkflowVersionId(row.id),
     workflowId: asWorkflowId(row.workflowId),
@@ -110,9 +104,7 @@ function mapTemplate(
     name: row.name,
     description: row.description ?? undefined,
     lifecycle: row.lifecycle as WorkflowTemplate["lifecycle"],
-    categoryId: row.categoryId
-      ? asWorkflowCategoryId(row.categoryId)
-      : undefined,
+    categoryId: row.categoryId ? asWorkflowCategoryId(row.categoryId) : undefined,
     graph: row.graphJson as unknown as WorkflowGraphSnapshot,
     parameters: (row.parametersJson ?? []) as WorkflowParameter[],
     variables: (row.variablesJson ?? []) as WorkflowVariable[],
@@ -140,9 +132,7 @@ function mapCategory(
   };
 }
 
-function mapFolder(
-  row: typeof platformWorkflowFolder.$inferSelect,
-): WorkflowFolder {
+function mapFolder(row: typeof platformWorkflowFolder.$inferSelect): WorkflowFolder {
   return {
     id: asWorkflowFolderId(row.id),
     tenantId: row.tenantId,
@@ -157,9 +147,7 @@ function mapFolder(
   };
 }
 
-function mapAudit(
-  row: typeof platformWorkflowAudit.$inferSelect,
-): WorkflowAuditEntry {
+function mapAudit(row: typeof platformWorkflowAudit.$inferSelect): WorkflowAuditEntry {
   return {
     id: asWorkflowAuditId(row.id),
     tenantId: row.tenantId,
@@ -198,9 +186,7 @@ export function createPostgresWorkflowRepositories(
         updatedAt: new Date(workflow.updatedAt),
         createdBy: workflow.createdBy,
         updatedBy: workflow.updatedBy,
-        archivedAt: workflow.archivedAt
-          ? new Date(workflow.archivedAt)
-          : undefined,
+        archivedAt: workflow.archivedAt ? new Date(workflow.archivedAt) : undefined,
       });
       return workflow;
     },
@@ -233,9 +219,7 @@ export function createPostgresWorkflowRepositories(
           templateId: workflow.templateId,
           updatedAt: new Date(workflow.updatedAt),
           updatedBy: workflow.updatedBy,
-          archivedAt: workflow.archivedAt
-            ? new Date(workflow.archivedAt)
-            : null,
+          archivedAt: workflow.archivedAt ? new Date(workflow.archivedAt) : null,
         })
         .where(
           and(

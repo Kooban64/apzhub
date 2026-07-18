@@ -42,32 +42,25 @@ describe("APZSEARCH-011 residual coverage", () => {
     expect(() => assertPlatformEntityId("zammad_1")).toThrow(/Zammad/);
 
     const life = new SupportSearchLifecycle();
-    expect(life.suggestFromDomainStatus("support_request", "merged")).toBe(
+    expect(life.suggestFromDomainStatus("support_request", "merged")).toBe("archived");
+    expect(life.suggestFromDomainStatus("support_request", "new")).toBe("draft");
+    expect(life.suggestFromDomainStatus("support_organisation", "active", true)).toBe(
       "archived",
     );
-    expect(life.suggestFromDomainStatus("support_request", "new")).toBe(
-      "draft",
+    expect(life.suggestFromDomainStatus("support_group", undefined)).toBe("validated");
+    expect(life.suggestFromDomainStatus("support_request", "pending")).toBe(
+      "validated",
     );
-    expect(
-      life.suggestFromDomainStatus("support_organisation", "active", true),
-    ).toBe("archived");
-    expect(
-      life.suggestFromDomainStatus("support_group", undefined),
-    ).toBe("validated");
-    expect(
-      life.suggestFromDomainStatus("support_request", "pending"),
-    ).toBe("validated");
     expect(life.canTransition("published", "removed")).toBe(true);
     expect(() => life.assertTransition("archived", "published")).toThrow();
 
     const errors = new SupportSearchErrorTranslator();
     expect(
-      errors.translate(new Error("Zammad identifiers forbidden"))
-        .classification,
+      errors.translate(new Error("Zammad identifiers forbidden")).classification,
     ).toBe("validation_failed");
-    expect(
-      errors.translate(new Error("tenant mismatch")).classification,
-    ).toBe("tenant_mismatch");
+    expect(errors.translate(new Error("tenant mismatch")).classification).toBe(
+      "tenant_mismatch",
+    );
     expect(errors.translate(new Error("boom")).message).toContain("boom");
 
     const store = new DiagnosticsStore();
@@ -108,10 +101,7 @@ describe("APZSEARCH-011 residual coverage", () => {
       createdAt: "2026-01-01T00:00:00.000Z",
       updatedAt: "2026-01-01T00:00:00.000Z",
     };
-    const articleDraft = adapter.mapper.mapSupportArticle(
-      context,
-      internalArticle,
-    );
+    const articleDraft = adapter.mapper.mapSupportArticle(context, internalArticle);
     expect(articleDraft.classification).toBe("restricted");
     expect(articleDraft.title).toBe("Article");
     expect(articleDraft.summary!.length).toBeLessThanOrEqual(280);
@@ -125,8 +115,7 @@ describe("APZSEARCH-011 residual coverage", () => {
       updatedAt: "2026-01-01T00:00:00.000Z",
     };
     expect(
-      adapter.mapper.mapSupportOrganisation(context, inactiveOrg)
-        .classification,
+      adapter.mapper.mapSupportOrganisation(context, inactiveOrg).classification,
     ).toBe("restricted");
 
     const inactiveUser: SupportUser = {

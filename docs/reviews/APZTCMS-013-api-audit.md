@@ -8,29 +8,29 @@
 
 ## Inventory
 
-| Item | Evidence |
-| ---- | -------- |
-| Routes | **73** `route.ts` under `apps/web/app/api/v1/testing` |
-| Handlers | `apps/web/lib/api/v1/handlers/testing.ts` |
-| Schemas | `apps/web/lib/api/v1/schemas/testing.ts` |
-| OpenAPI | `docs/specs/APZHUB-Platform-OpenAPI-v1.yaml` — `pnpm openapi:validate:platform` **PASS** |
-| HTTP tests | `apps/web/lib/api/v1/platform-api.testing.v1.test.ts` **14** tests |
+| Item       | Evidence                                                                                 |
+| ---------- | ---------------------------------------------------------------------------------------- |
+| Routes     | **73** `route.ts` under `apps/web/app/api/v1/testing`                                    |
+| Handlers   | `apps/web/lib/api/v1/handlers/testing.ts`                                                |
+| Schemas    | `apps/web/lib/api/v1/schemas/testing.ts`                                                 |
+| OpenAPI    | `docs/specs/APZHUB-Platform-OpenAPI-v1.yaml` — `pnpm openapi:validate:platform` **PASS** |
+| HTTP tests | `apps/web/lib/api/v1/platform-api.testing.v1.test.ts` **14** tests                       |
 
 ---
 
 ## Validated behaviours
 
-| Concern | Status | Notes |
-| ------- | ------ | ----- |
-| Request validation | **PASS** | Zod schemas on path/query/body |
-| Response envelopes | **PASS** | Standard APZHUB envelope + meta |
-| Error mapping | **PASS** | Platform error categories; no raw domain leakage |
-| Pagination / sorting / filtering | **PASS** | Query schemas + list handlers |
-| Authorization | **PASS** | RequestPipeline + operation→permission map |
-| Tenant isolation | **PASS** | ServiceRequestContext tenant; fixtures cover multi-tenant IDs |
-| Revision handling | **PASS** | Domain/persistence revision fields retained through platform |
-| Idempotency | **PARTIAL** | Automation import duplicate protection in domain; durable HTTP idempotency keys not a universal API feature |
-| OpenAPI parity (key paths) | **PASS** | Asserted in HTTP Vitest |
+| Concern                          | Status      | Notes                                                                                                       |
+| -------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
+| Request validation               | **PASS**    | Zod schemas on path/query/body                                                                              |
+| Response envelopes               | **PASS**    | Standard APZHUB envelope + meta                                                                             |
+| Error mapping                    | **PASS**    | Platform error categories; no raw domain leakage                                                            |
+| Pagination / sorting / filtering | **PASS**    | Query schemas + list handlers                                                                               |
+| Authorization                    | **PASS**    | RequestPipeline + operation→permission map                                                                  |
+| Tenant isolation                 | **PASS**    | ServiceRequestContext tenant; fixtures cover multi-tenant IDs                                               |
+| Revision handling                | **PASS**    | Domain/persistence revision fields retained through platform                                                |
+| Idempotency                      | **PARTIAL** | Automation import duplicate protection in domain; durable HTTP idempotency keys not a universal API feature |
+| OpenAPI parity (key paths)       | **PASS**    | Asserted in HTTP Vitest                                                                                     |
 
 ---
 

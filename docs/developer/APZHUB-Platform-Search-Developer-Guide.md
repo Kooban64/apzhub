@@ -30,12 +30,12 @@ pnpm audit:search-foundation
 
 ## Platform services (contracts only)
 
-| Facet | Interface |
-|-------|-----------|
-| Query | `PlatformSearchQueryService` (`validateQuery`; `query?` reserved) |
-| Providers | `PlatformSearchProviderService` |
-| Diagnostics | `PlatformSearchDiagnosticsService` |
-| Configuration | `PlatformSearchConfigurationService` |
+| Facet         | Interface                                                         |
+| ------------- | ----------------------------------------------------------------- |
+| Query         | `PlatformSearchQueryService` (`validateQuery`; `query?` reserved) |
+| Providers     | `PlatformSearchProviderService`                                   |
+| Diagnostics   | `PlatformSearchDiagnosticsService`                                |
+| Configuration | `PlatformSearchConfigurationService`                              |
 
 Aggregate type: `SearchPlatformGateway`.
 

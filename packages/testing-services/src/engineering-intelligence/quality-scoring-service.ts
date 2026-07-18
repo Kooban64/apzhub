@@ -7,9 +7,7 @@ import type { ServiceRuntime } from "../services/types";
 import { createEngineeringAggregationService } from "./aggregation-service";
 import { computeQualityScore } from "./calculations";
 
-export function createQualityScoringService(
-  rt: ServiceRuntime,
-): QualityScoringService {
+export function createQualityScoringService(rt: ServiceRuntime): QualityScoringService {
   const aggregation = createEngineeringAggregationService(rt);
   return {
     async score(ctx, inputs, scope, weights?: QualityScoreWeights) {

@@ -1,4 +1,7 @@
-import type { BuildIntegrationLifecycleParticipationInput, IntegrationLifecycleParticipationSnapshot } from "./participant-types";
+import type {
+  BuildIntegrationLifecycleParticipationInput,
+  IntegrationLifecycleParticipationSnapshot,
+} from "./participant-types";
 import {
   mapHealthStatusToParticipationReadiness,
   mapLifecycleStateToRecoveryStatus,

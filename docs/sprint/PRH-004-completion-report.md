@@ -12,19 +12,19 @@ Create the canonical Platform configuration system. Configuration ownership is a
 
 ### Implementation
 
-| Component | Location |
-|-----------|----------|
-| Configuration registry | `packages/config/src/governance/registry.ts` |
-| Zod schema | `packages/config/src/governance/schema.ts` |
-| Tiered validation | `packages/config/src/governance/validation.ts` |
-| Secret masking & diagnostics | `packages/config/src/governance/secrets.ts` |
-| Deprecation tracking | `packages/config/src/governance/deprecation.ts` |
-| Environment profiles | `packages/config/src/governance/profiles.ts` |
-| Precedence resolution | `packages/config/src/governance/precedence.ts` |
-| Vault abstraction (interface only) | `packages/config/src/governance/vault.ts` |
-| Configuration provider | `packages/config/src/governance/provider.ts` |
-| App startup guard | `apps/*/lib/runtime-init.ts` |
-| Security integration | `EnvironmentValidationService` refactored |
+| Component                          | Location                                        |
+| ---------------------------------- | ----------------------------------------------- |
+| Configuration registry             | `packages/config/src/governance/registry.ts`    |
+| Zod schema                         | `packages/config/src/governance/schema.ts`      |
+| Tiered validation                  | `packages/config/src/governance/validation.ts`  |
+| Secret masking & diagnostics       | `packages/config/src/governance/secrets.ts`     |
+| Deprecation tracking               | `packages/config/src/governance/deprecation.ts` |
+| Environment profiles               | `packages/config/src/governance/profiles.ts`    |
+| Precedence resolution              | `packages/config/src/governance/precedence.ts`  |
+| Vault abstraction (interface only) | `packages/config/src/governance/vault.ts`       |
+| Configuration provider             | `packages/config/src/governance/provider.ts`    |
+| App startup guard                  | `apps/*/lib/runtime-init.ts`                    |
+| Security integration               | `EnvironmentValidationService` refactored       |
 
 ### Export paths
 

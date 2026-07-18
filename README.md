@@ -14,7 +14,9 @@ Foundation documentation (**000**, **001–029**) is complete.
 
 **Workflow Platform:** SoR **APZWORKFLOW-005** **PRODUCTION_READY_WITH_LIMITATIONS** (frozen). Engine wave **APZWORKFLOW-011 COMPLETE** — `@apzhub/integration-n8n` official Reference Adapter; architectures frozen.
 
-**Platform Observability:** **APZOBSERVE-003 COMPLETE** — `/api/v1/observe/*` + OpenAPI **1.8.0** + `apps/web/lib/observe` typed client (`pnpm audit:observe-http-client`). Metadata only — not Grafana/Prometheus/Loki. Stop — await owner approval before **APZOBSERVE-004 — Observability Administration Workbench** only.
+**Platform Observability:** **APZOBSERVE-006 COMPLETE** — programme **closed/frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**). Workbench at `/workspace/observability`. Further Observability work requires ADR + owner approval.
+
+**Platform Metrics:** **APZMETRICS-006 COMPLETE** — programme **closed/frozen** (**Architecture Frozen**; **PRODUCTION_READY_WITH_LIMITATIONS** retained). Workbench at `/workspace/metrics`. Further Metrics work requires ADR + owner approval.
 
 **Platform Identity Administration:** **APZIDENTITY-006 COMPLETE** — programme **closed/frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**). Workbench at `/workspace/identity`. Further Identity work requires ADR + owner approval.
 
@@ -24,7 +26,9 @@ Foundation documentation (**000**, **001–029**) is complete.
 
 **Notification Platform:** **APZNOTIFY-006 COMPLETE** — Wave Certification & Architecture Freeze (**PRODUCTION_READY_WITH_LIMITATIONS**). Programme closed/frozen. Delivery providers not available. **APZNOTIFY-007** roadmap only.
 
-**Search Platform:** **APZSEARCH-015 COMPLETE** — Cross-Product Search Publication Certification (**PRODUCTION_READY_WITH_LIMITATIONS**). **APZSEARCH-016** deferred. See [docs/foundation/CURRENT-MILESTONE.md](./docs/foundation/CURRENT-MILESTONE.md).
+**Integration SDK:** **OSS-100-11 COMPLETE** — `@apzhub/integration-sdk` **1.0.0** · **Architecture Frozen** (`pnpm certify:integration-sdk`; **PRODUCTION_READY_WITH_LIMITATIONS**). See [Freeze Notice](./docs/architecture/APZHUB-Integration-SDK-Architecture-Freeze-Notice.md) · [Reference Standard](./docs/architecture/APZHUB-Integration-SDK-Reference-Standard.md).
+
+**Search Platform:** **APZSEARCH-019 COMPLETE** — Search Publication programme **Architecture Frozen**. Platform frozen (**008**); publication wave closed (**009–019**). See [docs/foundation/CURRENT-MILESTONE.md](./docs/foundation/CURRENT-MILESTONE.md).
 
 | Milestone                | Sprint  | Release                                | Status                                   |
 | ------------------------ | ------- | -------------------------------------- | ---------------------------------------- |

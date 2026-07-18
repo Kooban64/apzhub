@@ -6,13 +6,13 @@
 
 ## Gate outcomes
 
-| Status | Meaning |
-| --- | --- |
-| `pass` | Gate satisfied |
-| `fail` | Gate not satisfied |
-| `warning` | Soft failure / attention needed |
-| `not_applicable` | Gate does not apply |
-| `unknown` | Insufficient data to evaluate |
+| Status           | Meaning                         |
+| ---------------- | ------------------------------- |
+| `pass`           | Gate satisfied                  |
+| `fail`           | Gate not satisfied              |
+| `warning`        | Soft failure / attention needed |
+| `not_applicable` | Gate does not apply             |
+| `unknown`        | Insufficient data to evaluate   |
 
 ---
 
@@ -26,13 +26,13 @@ execution_complete, coverage_threshold, evidence_complete, manual_testing_comple
 
 Every evaluation returns:
 
-- `status`  
-- `reason` (human-readable)  
-- `supportingEvidence` (refs / metrics)  
-- `evaluatedAt`  
-- `evaluatorUserId`  
-- `traceability` refs  
+- `status`
+- `reason` (human-readable)
+- `supportingEvidence` (refs / metrics)
+- `evaluatedAt`
+- `evaluatorUserId`
+- `traceability` refs
 
 No hidden calculations — deterministic and explainable.
 
-Persisted on `testing_certification_gate_evaluation`. Rules on `testing_certification_rule` / definitions on `testing_certification_gate_definition`.  
+Persisted on `testing_certification_gate_evaluation`. Rules on `testing_certification_rule` / definitions on `testing_certification_gate_definition`.

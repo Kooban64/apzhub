@@ -2,7 +2,10 @@ import type { IntegrationHealthCheck } from "../diagnostics/types";
 import type { IntegrationRequestContext } from "../types";
 import { IntegrationAdapterBase } from "./adapter-base";
 import type { AdapterContext } from "./adapter-context";
-import type { AdapterConfigurationValidationResult, AdapterLifecycleResult } from "./lifecycle-types";
+import type {
+  AdapterConfigurationValidationResult,
+  AdapterLifecycleResult,
+} from "./lifecycle-types";
 import type { AdapterBootstrapConfiguration } from "./manifest-types";
 
 /**
@@ -23,7 +26,11 @@ export class MockAdapter extends IntegrationAdapterBase {
   /** Simulates a vendor operation — records metrics and validates breaker allowance. */
   async simulateOperation(
     context: IntegrationRequestContext,
-    options: { readonly operation: string; readonly succeed?: boolean; readonly durationMs?: number },
+    options: {
+      readonly operation: string;
+      readonly succeed?: boolean;
+      readonly durationMs?: number;
+    },
   ): Promise<AdapterLifecycleResult> {
     this.assertNotDisposed();
     this.assertInitialised();

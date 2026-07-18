@@ -1,6 +1,11 @@
 import type { Project, ProjectStatus } from "../models/canonical";
 import type { PlaneProjectRecord } from "../internal/plane-api-types";
-import { type MapperContext, toProjectId, toUserId, toWorkspaceId } from "./mapper-context";
+import {
+  type MapperContext,
+  toProjectId,
+  toUserId,
+  toWorkspaceId,
+} from "./mapper-context";
 
 function mapProjectStatus(record: PlaneProjectRecord): ProjectStatus {
   if (record.archived_at) {
@@ -9,11 +14,16 @@ function mapProjectStatus(record: PlaneProjectRecord): ProjectStatus {
   return "active";
 }
 
-export function mapPlaneProject(record: PlaneProjectRecord, ctx: MapperContext): Project {
+export function mapPlaneProject(
+  record: PlaneProjectRecord,
+  ctx: MapperContext,
+): Project {
   return {
     id: toProjectId(record.id),
     tenantId: ctx.tenantId,
-    workspaceId: ctx.workspaceId ? toWorkspaceId(ctx.workspaceId) : toWorkspaceId(record.workspace ?? "unknown"),
+    workspaceId: ctx.workspaceId
+      ? toWorkspaceId(ctx.workspaceId)
+      : toWorkspaceId(record.workspace ?? "unknown"),
     name: record.name,
     identifier: record.identifier,
     description: record.description,
@@ -24,15 +34,13 @@ export function mapPlaneProject(record: PlaneProjectRecord, ctx: MapperContext):
   };
 }
 
-export function mapProjectToPlaneBody(
-  input: {
-    readonly name?: string;
-    readonly identifier?: string;
-    readonly description?: string;
-    readonly leadId?: string | null;
-    readonly archived?: boolean;
-  },
-): Record<string, unknown> {
+export function mapProjectToPlaneBody(input: {
+  readonly name?: string;
+  readonly identifier?: string;
+  readonly description?: string;
+  readonly leadId?: string | null;
+  readonly archived?: boolean;
+}): Record<string, unknown> {
   const body: Record<string, unknown> = {};
 
   if (input.name !== undefined) body.name = input.name;

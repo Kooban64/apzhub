@@ -57,9 +57,9 @@ Build with `createMappingProvider({ id, integrationSlug, definitions, capabiliti
 
 ### Well-known adapter providers
 
-| Function | Provider id | Slug |
-|----------|-------------|------|
-| `createPlaneMappingRegistry()` | `plane.entity-mapping` | `plane` |
+| Function                        | Provider id             | Slug     |
+| ------------------------------- | ----------------------- | -------- |
+| `createPlaneMappingRegistry()`  | `plane.entity-mapping`  | `plane`  |
 | `createZammadMappingRegistry()` | `zammad.entity-mapping` | `zammad` |
 
 Both register a single provider wrapping existing mapper functions. Adapters call these on construction:
@@ -111,15 +111,15 @@ Derived from definitions unless overridden.
 
 `registry.getDiagnostics()` returns:
 
-| Field | Meaning |
-|-------|---------|
-| `providerCount` | Registered providers |
-| `providers[]` | Per-provider id, slug, entities, profiles, directions, definition count, capabilities |
-| `totalDefinitions` | Sum across providers |
-| `supportedEntityTypes` | Sorted unique entity types |
-| `executionCount` / `failureCount` | From metrics |
-| `averageLatencyMs` | From metrics |
-| `capturedAt` | ISO timestamp |
+| Field                             | Meaning                                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------------- |
+| `providerCount`                   | Registered providers                                                                  |
+| `providers[]`                     | Per-provider id, slug, entities, profiles, directions, definition count, capabilities |
+| `totalDefinitions`                | Sum across providers                                                                  |
+| `supportedEntityTypes`            | Sorted unique entity types                                                            |
+| `executionCount` / `failureCount` | From metrics                                                                          |
+| `averageLatencyMs`                | From metrics                                                                          |
+| `capturedAt`                      | ISO timestamp                                                                         |
 
 ### MappingMetrics
 
@@ -129,11 +129,11 @@ Derived from definitions unless overridden.
 
 ## Testing helpers
 
-| Helper | Purpose |
-|--------|---------|
-| `createMockMappingProvider` | Scripted success / failure definitions |
-| `MOCK_MAPPING_FIXTURES` | Sample payloads |
-| `createPlaneMappingPipeline` / `createZammadMappingPipeline` | Adapter-scoped pipelines |
+| Helper                                                       | Purpose                                |
+| ------------------------------------------------------------ | -------------------------------------- |
+| `createMockMappingProvider`                                  | Scripted success / failure definitions |
+| `MOCK_MAPPING_FIXTURES`                                      | Sample payloads                        |
+| `createPlaneMappingPipeline` / `createZammadMappingPipeline` | Adapter-scoped pipelines               |
 
 ---
 

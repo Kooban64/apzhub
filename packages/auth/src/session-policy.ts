@@ -79,7 +79,9 @@ export function getSessionSecurityPolicy(
   };
 }
 
-export function getBetterAuthSessionConfig(nodeEnv: string | undefined = process.env.NODE_ENV) {
+export function getBetterAuthSessionConfig(
+  nodeEnv: string | undefined = process.env.NODE_ENV,
+) {
   const policy = getSessionSecurityPolicy(nodeEnv);
 
   return {
@@ -92,7 +94,9 @@ export function getBetterAuthSessionConfig(nodeEnv: string | undefined = process
   };
 }
 
-export function getBetterAuthAdvancedConfig(nodeEnv: string | undefined = process.env.NODE_ENV) {
+export function getBetterAuthAdvancedConfig(
+  nodeEnv: string | undefined = process.env.NODE_ENV,
+) {
   const policy = getSessionSecurityPolicy(nodeEnv);
 
   return {

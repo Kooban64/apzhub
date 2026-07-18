@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-dependencies
+name: Metric Dependencies
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metric Dependencies sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metric Dependencies
+    icon: git-fork
+    route: /workspace/metrics/dependencies
+    order: 170
+    permission: metrics.definition
+  view:
+    title: Metric Dependencies
+    workspace: metrics
+    route: /workspace/metrics/dependencies
+    permission: metrics.definition

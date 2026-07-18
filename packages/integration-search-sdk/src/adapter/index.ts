@@ -18,7 +18,5 @@ export type {
   SearchAdapterContext,
   BuildSearchAdapterContextInput,
 } from "./search-adapter-context";
-export {
-  createSearchIntegrationBootstrapConfiguration,
-} from "./bootstrap";
+export { createSearchIntegrationBootstrapConfiguration } from "./bootstrap";
 export type { CreateSearchIntegrationBootstrapConfigurationInput } from "./bootstrap";

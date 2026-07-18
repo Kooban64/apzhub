@@ -15,14 +15,16 @@ export async function GET(): Promise<NextResponse> {
 
   const service = getSharedAuthorizationService();
   const inMemoryDiagnostics = service.getDiagnostics();
-  let postgresDiagnostics: { roleCount: number; permissionCount: number; assignmentCount: number } | null =
-    null;
+  let postgresDiagnostics: {
+    roleCount: number;
+    permissionCount: number;
+    assignmentCount: number;
+  } | null = null;
 
   if (process.env.DATABASE_URL) {
     try {
-      const { getPostgresAuthorizationDiagnostics } = await import(
-        "@apzhub/platform-authorization/postgres"
-      );
+      const { getPostgresAuthorizationDiagnostics } =
+        await import("@apzhub/platform-authorization/postgres");
       postgresDiagnostics = await getPostgresAuthorizationDiagnostics();
     } catch {
       postgresDiagnostics = null;

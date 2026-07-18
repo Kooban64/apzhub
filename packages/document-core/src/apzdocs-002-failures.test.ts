@@ -15,9 +15,7 @@ import {
   DocumentDomainError,
 } from "./index";
 
-function ctx(
-  overrides?: Partial<DocumentRequestContext>,
-): DocumentRequestContext {
+function ctx(overrides?: Partial<DocumentRequestContext>): DocumentRequestContext {
   return {
     tenantId: "tenant_x",
     userId: "user_x",
@@ -173,8 +171,8 @@ describe("APZDOCS-002 coordinator failure paths", () => {
     registry.register(a);
     expect(() => registry.register(b)).toThrow(/Duplicate/);
     expect(() => registry.setActive("missing")).toThrow(/Unknown/);
-    expect(() =>
-      createDocumentStorageProviderRegistry().getActive(),
-    ).toThrow(/No active/);
+    expect(() => createDocumentStorageProviderRegistry().getActive()).toThrow(
+      /No active/,
+    );
   });
 });

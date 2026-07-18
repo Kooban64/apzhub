@@ -75,9 +75,10 @@ export function createTrafficDeniedBody() {
   };
 }
 
-export function buildTrafficDeniedInit(
-  decision: TrafficGovernanceDecision,
-): { readonly status: number; readonly headers: Record<string, string> } {
+export function buildTrafficDeniedInit(decision: TrafficGovernanceDecision): {
+  readonly status: number;
+  readonly headers: Record<string, string>;
+} {
   return {
     status: 429,
     headers: {
@@ -85,7 +86,9 @@ export function buildTrafficDeniedInit(
       "Retry-After": String(
         Math.max(
           1,
-          Math.ceil(((decision.blockingResult?.resetAt ?? Date.now()) - Date.now()) / 1000),
+          Math.ceil(
+            ((decision.blockingResult?.resetAt ?? Date.now()) - Date.now()) / 1000,
+          ),
         ),
       ),
     },
@@ -100,7 +103,10 @@ export async function enforceTrafficGovernanceForHandler(
   },
 ): Promise<
   | { readonly allowed: true; readonly decision: TrafficGovernanceDecision }
-  | { readonly allowed: false; readonly init: ReturnType<typeof buildTrafficDeniedInit> }
+  | {
+      readonly allowed: false;
+      readonly init: ReturnType<typeof buildTrafficDeniedInit>;
+    }
 > {
   const decision = await evaluateRequestTraffic(request, input);
   if (!decision.allowed) {

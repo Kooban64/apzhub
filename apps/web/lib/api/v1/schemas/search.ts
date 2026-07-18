@@ -73,7 +73,10 @@ export const searchFilterSchema = z
     const encoded = JSON.stringify(filter);
     if (meiliRawFilterPattern.test(encoded) && /[=<>]|AND|OR|NOT|_geo/.test(encoded)) {
       // Structured ops are fine; reject only when value embeds raw Meili expressions.
-      if (typeof filter.value === "string" && meiliRawFilterPattern.test(filter.value)) {
+      if (
+        typeof filter.value === "string" &&
+        meiliRawFilterPattern.test(filter.value)
+      ) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Raw engine filter expressions are not allowed in filter values",

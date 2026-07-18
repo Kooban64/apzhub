@@ -7,10 +7,7 @@ import {
 import { createInMemoryTestingPersistence } from "@apzhub/testing-persistence";
 import { describe, expect, it } from "vitest";
 
-import {
-  computeOverallResultFromSteps,
-  createManualTestingServices,
-} from "./index";
+import { computeOverallResultFromSteps, createManualTestingServices } from "./index";
 
 function ctx(): ServiceRequestContext {
   return {

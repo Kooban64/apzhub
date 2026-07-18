@@ -54,15 +54,15 @@ describe("identity-persistence", () => {
     expect(() => createIdentityPersistence({ mode: "postgres" })).toThrow(
       /requires db/,
     );
-    expect(() =>
-      createProductionIdentityPersistence({} as never),
-    ).toThrow(/explicit postgres/);
+    expect(() => createProductionIdentityPersistence({} as never)).toThrow(
+      /explicit postgres/,
+    );
     expect(() => createIdentityPersistenceForTest({})).toThrow(
       /allowInMemoryPersistence/,
     );
-    expect(() =>
-      createIdentityPersistence({ mode: "redis" as never }),
-    ).toThrow(/Unsupported/);
+    expect(() => createIdentityPersistence({ mode: "redis" as never })).toThrow(
+      /Unsupported/,
+    );
   });
 
   it("persists identity metadata with tenant isolation", async () => {
@@ -338,9 +338,7 @@ describe("identity-persistence", () => {
       update: () => ({ set: () => ({ where: async () => undefined }) }),
     } as never;
     expect(createIdentityPersistence({ mode: "postgres", db }).users).toBeDefined();
-    expect(
-      createIdentityPersistenceForTest({ postgresDb: db }).users,
-    ).toBeDefined();
+    expect(createIdentityPersistenceForTest({ postgresDb: db }).users).toBeDefined();
   });
 
   it("isolates append-only and scoped stores by tenant", async () => {
@@ -355,7 +353,9 @@ describe("identity-persistence", () => {
       actorUserId: "user_1",
       createdAt: now,
     });
-    expect(await repos.activations.get(otherCtx, asIdentityActivationId("act_x"))).toBeNull();
+    expect(
+      await repos.activations.get(otherCtx, asIdentityActivationId("act_x")),
+    ).toBeNull();
     await repos.audits.append(ctx, {
       id: asIdentityAuditId("aud_x"),
       tenantId: "tenant_a",
@@ -380,7 +380,9 @@ describe("identity-persistence", () => {
       createdAt: now,
       updatedAt: now,
     });
-    expect(await repos.references.get(otherCtx, asIdentityReferenceId("ref_x"))).toBeNull();
+    expect(
+      await repos.references.get(otherCtx, asIdentityReferenceId("ref_x")),
+    ).toBeNull();
     await repos.references.update(ctx, {
       id: asIdentityReferenceId("ref_x"),
       tenantId: "tenant_a",

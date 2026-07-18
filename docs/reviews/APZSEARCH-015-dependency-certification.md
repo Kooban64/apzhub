@@ -43,12 +43,12 @@ search-reporting ─┘         └── (future) platform indexing / Meilisear
 
 ## Allowed product contract deps
 
-| Adapter | Extra domain deps (allowed) |
-| ------- | --------------------------- |
-| Projects / Support | `platform-service-contracts` |
-| Documents | `document-contracts` |
-| Testing | `testing-contracts` only (not testing-services/persistence) |
-| Reporting | `reporting-contracts` · `reporting-core` (version/diagnostics only) |
+| Adapter            | Extra domain deps (allowed)                                         |
+| ------------------ | ------------------------------------------------------------------- |
+| Projects / Support | `platform-service-contracts`                                        |
+| Documents          | `document-contracts`                                                |
+| Testing            | `testing-contracts` only (not testing-services/persistence)         |
+| Reporting          | `reporting-contracts` · `reporting-core` (version/diagnostics only) |
 
 ## Forbidden (all adapters + framework)
 
@@ -60,12 +60,12 @@ search-reporting ─┘         └── (future) platform indexing / Meilisear
 
 ## Isolation assertions
 
-| Rule | Result |
-| ---- | ------ |
-| `search-reporting` must NOT depend on `testing-contracts` | **PASS** |
-| `search-testing` must NOT depend on `reporting-contracts` / `reporting-core` | **PASS** |
-| `search-testing` may depend on `testing-contracts` | **PASS** (does) |
-| Adapters never depend on each other | **PASS** |
+| Rule                                                                         | Result          |
+| ---------------------------------------------------------------------------- | --------------- |
+| `search-reporting` must NOT depend on `testing-contracts`                    | **PASS**        |
+| `search-testing` must NOT depend on `reporting-contracts` / `reporting-core` | **PASS**        |
+| `search-testing` may depend on `testing-contracts`                           | **PASS** (does) |
+| Adapters never depend on each other                                          | **PASS**        |
 
 ## Evidence
 

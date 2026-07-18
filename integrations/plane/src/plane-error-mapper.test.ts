@@ -74,7 +74,10 @@ describe("PlaneVendorErrorMapper", () => {
     const timeout = mapPlaneUnknownError(timeoutError, context);
     expect(timeout.error.category).toBe("timeout");
 
-    const network = mapPlaneUnknownError({ code: "ECONNREFUSED", message: "refused" }, context);
+    const network = mapPlaneUnknownError(
+      { code: "ECONNREFUSED", message: "refused" },
+      context,
+    );
     expect(network.error.category).toBe("vendor_unavailable");
   });
 

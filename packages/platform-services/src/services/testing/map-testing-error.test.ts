@@ -7,7 +7,8 @@ import { DomainRuleError } from "@apzhub/testing-services";
 import { mapTestingDomainError } from "./map-testing-error";
 
 const CORRELATION_ID = "corr_testing_error";
-const LEAK_PATTERN = /testing_(test_plan|manual_execution|evidence)|select\s+|insert\s+|update\s+|delete\s+|from\s+|where\s+|public\./i;
+const LEAK_PATTERN =
+  /testing_(test_plan|manual_execution|evidence)|select\s+|insert\s+|update\s+|delete\s+|from\s+|where\s+|public\./i;
 
 function expectMapped(
   error: unknown,

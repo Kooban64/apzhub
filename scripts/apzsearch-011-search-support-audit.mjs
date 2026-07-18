@@ -25,7 +25,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -80,7 +81,8 @@ scan(files, [
   },
   {
     rule: "no-http-workbench",
-    pattern: /NextRequest|NextResponse|\/api\/v1\/search|workbench-framework|PlatformSearchView/,
+    pattern:
+      /NextRequest|NextResponse|\/api\/v1\/search|workbench-framework|PlatformSearchView/,
   },
   {
     rule: "no-event-bus-workers",
@@ -171,7 +173,9 @@ console.log(
 console.log(`RESULT: ${violations.length === 0 ? "PASS" : "FAIL"}`);
 console.log(`Violations: ${violations.length}`);
 if (violations.length === 0) {
-  console.log("  - @apzhub/search-support 0.1.0 → search-integration + platform-service-contracts only");
+  console.log(
+    "  - @apzhub/search-support 0.1.0 → search-integration + platform-service-contracts only",
+  );
   console.log("  - No Meilisearch / platform-services / Zammad / HTTP / workers");
   console.log("  - Required SupportSearch* exports present");
 } else {

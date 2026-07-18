@@ -131,9 +131,7 @@ export function createInMemoryConfigurationRepositories(
       return row;
     },
     async list(ctx) {
-      return [...stores.groups.values()].filter(
-        (row) => row.tenantId === ctx.tenantId,
-      );
+      return [...stores.groups.values()].filter((row) => row.tenantId === ctx.tenantId);
     },
     async update(ctx, group) {
       assertTenant(ctx, group.tenantId);
@@ -154,9 +152,7 @@ export function createInMemoryConfigurationRepositories(
       return row;
     },
     async list(ctx) {
-      return [...stores.keys.values()].filter(
-        (row) => row.tenantId === ctx.tenantId,
-      );
+      return [...stores.keys.values()].filter((row) => row.tenantId === ctx.tenantId);
     },
   };
 
@@ -296,9 +292,7 @@ export function createInMemoryConfigurationRepositories(
       return entry;
     },
     async list(ctx) {
-      return [...stores.audits.values()].filter(
-        (row) => row.tenantId === ctx.tenantId,
-      );
+      return [...stores.audits.values()].filter((row) => row.tenantId === ctx.tenantId);
     },
     async get(ctx, auditId) {
       const row = stores.audits.get(auditId) ?? null;

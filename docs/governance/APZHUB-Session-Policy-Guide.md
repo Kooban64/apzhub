@@ -2,15 +2,15 @@
 
 ## Production requirements
 
-| Control | Required |
-|---------|----------|
-| Secure cookies | Yes |
-| HttpOnly cookies | Yes |
-| SameSite | lax |
-| Dev registration | Disabled (`ALLOW_DEV_REGISTRATION=false`) |
-| Dev tenant fallback | Blocked |
-| Absolute session lifetime | 7 days |
-| Idle refresh window | 1 day |
+| Control                   | Required                                  |
+| ------------------------- | ----------------------------------------- |
+| Secure cookies            | Yes                                       |
+| HttpOnly cookies          | Yes                                       |
+| SameSite                  | lax                                       |
+| Dev registration          | Disabled (`ALLOW_DEV_REGISTRATION=false`) |
+| Dev tenant fallback       | Blocked                                   |
+| Absolute session lifetime | 7 days                                    |
+| Idle refresh window       | 1 day                                     |
 
 ## Development behaviour
 

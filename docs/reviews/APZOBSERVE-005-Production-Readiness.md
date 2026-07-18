@@ -8,22 +8,22 @@
 
 ## Checklist
 
-| Area | Status |
-| ---- | ------ |
-| Contracts **0.2.0** · core **0.2.0** · persistence **0.1.0** | ✅ |
-| Platform services **0.24.0** · `gateway.observe.*` | ✅ |
-| RequestPipeline + production authorisation (`observePlatformOps`) | ✅ |
-| HTTP API + OpenAPI **1.8.0** | ✅ |
-| Typed client + Workbench `/workspace/observability` | ✅ |
-| Vertical audit `pnpm audit:observe-vertical` | ✅ |
-| Composite `pnpm certify:observe-vertical` | ✅ |
-| Prior audits 001–004 | ✅ |
-| Migrations 0054/0055 · no secret columns | ✅ |
-| Certification harness (10 journeys) | ✅ |
-| Scoped coverage lines/functions ≥95% | ✅ **98.22%** / **96.97%** (branches **76.52%**) |
-| Provider integrations / collection / delivery | ❌ Excluded by design |
-| Event Bus / AI | ❌ Excluded by design |
-| Live Playwright webServer | ⚠️ LIMITED (Testing slug conflict — external) |
+| Area                                                              | Status                                           |
+| ----------------------------------------------------------------- | ------------------------------------------------ |
+| Contracts **0.2.0** · core **0.2.0** · persistence **0.1.0**      | ✅                                               |
+| Platform services **0.24.0** · `gateway.observe.*`                | ✅                                               |
+| RequestPipeline + production authorisation (`observePlatformOps`) | ✅                                               |
+| HTTP API + OpenAPI **1.8.0**                                      | ✅                                               |
+| Typed client + Workbench `/workspace/observability`               | ✅                                               |
+| Vertical audit `pnpm audit:observe-vertical`                      | ✅                                               |
+| Composite `pnpm certify:observe-vertical`                         | ✅                                               |
+| Prior audits 001–004                                              | ✅                                               |
+| Migrations 0054/0055 · no secret columns                          | ✅                                               |
+| Certification harness (10 journeys)                               | ✅                                               |
+| Scoped coverage lines/functions ≥95%                              | ✅ **98.22%** / **96.97%** (branches **76.52%**) |
+| Provider integrations / collection / delivery                     | ❌ Excluded by design                            |
+| Event Bus / AI                                                    | ❌ Excluded by design                            |
+| Live Playwright webServer                                         | ⚠️ LIMITED (Testing slug conflict — external)    |
 
 ## Why PRODUCTION_READY_WITH_LIMITATIONS
 

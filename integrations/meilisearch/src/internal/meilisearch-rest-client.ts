@@ -41,11 +41,15 @@ export class MeilisearchRestClient {
     this.getAuth = options.getAuth;
   }
 
-  async getHealth(context: IntegrationRequestContext): Promise<MeilisearchHealthRecord> {
+  async getHealth(
+    context: IntegrationRequestContext,
+  ): Promise<MeilisearchHealthRecord> {
     return this.request(context, "GET", "/health");
   }
 
-  async getVersion(context: IntegrationRequestContext): Promise<MeilisearchVersionRecord> {
+  async getVersion(
+    context: IntegrationRequestContext,
+  ): Promise<MeilisearchVersionRecord> {
     return this.request(context, "GET", "/version");
   }
 

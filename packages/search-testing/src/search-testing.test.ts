@@ -527,9 +527,7 @@ describe("APZSEARCH-013 search-testing", () => {
     expect(isTestingSearchEntityType("document")).toBe(false);
     expect(looksLikeStorageLeak("storageRef_abc")).toBe(true);
     expect(looksLikeStorageLeak("payloadFingerprint")).toBe(true);
-    expect(looksLikeStorageLeak("tca_cccccccccccccccccccccccccccccccc")).toBe(
-      false,
-    );
+    expect(looksLikeStorageLeak("tca_cccccccccccccccccccccccccccccccc")).toBe(false);
   });
 
   it("maps and publishes core Testing entity types without leakage", () => {
@@ -794,9 +792,7 @@ describe("APZSEARCH-013 search-testing", () => {
       },
     });
     expect(storageReject.valid).toBe(false);
-    expect(
-      storageReject.issues.some((i) => i.code === "storage_leakage"),
-    ).toBe(true);
+    expect(storageReject.issues.some((i) => i.code === "storage_leakage")).toBe(true);
 
     const published = adapter.publisher.publish(context, {
       entityType: "test_case",
@@ -838,10 +834,10 @@ describe("APZSEARCH-013 search-testing", () => {
     const adapter = createTestingSearchAdapterForTest();
     const context = ctx();
 
-    const gateDraft = adapter.mapper.map(
-      context,
-      { entityType: "certification_gate", entity: gateDef },
-    );
+    const gateDraft = adapter.mapper.map(context, {
+      entityType: "certification_gate",
+      entity: gateDef,
+    });
     expect(gateDraft.metadata?.gateKey).toBe("approvals");
     expect(gateDraft.metadata?.required).toBe("true");
 

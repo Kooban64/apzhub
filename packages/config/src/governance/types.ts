@@ -3,11 +3,7 @@ export type EnvironmentProfile = "development" | "test" | "production";
 export type ValidationTier = "permissive" | "strict";
 
 export type SecretClassification =
-  | "none"
-  | "public"
-  | "credential"
-  | "connection-string"
-  | "secret";
+  "none" | "public" | "credential" | "connection-string" | "secret";
 
 export type ConfigOwner =
   | "platform"
@@ -17,7 +13,8 @@ export type ConfigOwner =
   | "presentation"
   | "integrations";
 
-export type ConfigValueType = "string" | "number" | "boolean" | "url" | "email" | "enum";
+export type ConfigValueType =
+  "string" | "number" | "boolean" | "url" | "email" | "enum";
 
 export type ConfigSource = "default" | "environment" | "override" | "deprecated-alias";
 

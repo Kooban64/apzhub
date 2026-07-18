@@ -54,11 +54,15 @@ describe("testing permissions helpers", () => {
 
   it("honours global and namespace wildcards", () => {
     expect(hasTestingPermission(["*"], "testing.plans.create")).toBe(true);
-    expect(hasTestingPermission(["testing.*"], "testing.executions.execute")).toBe(true);
+    expect(hasTestingPermission(["testing.*"], "testing.executions.execute")).toBe(
+      true,
+    );
     expect(hasTestingPermission(["certification.*"], "certification.approve")).toBe(
       true,
     );
-    expect(hasTestingPermission(["testing.plans.*"], "testing.plans.create")).toBe(true);
+    expect(hasTestingPermission(["testing.plans.*"], "testing.plans.create")).toBe(
+      true,
+    );
     expect(hasTestingPermission(["evidence.*"], "evidence.register")).toBe(true);
   });
 

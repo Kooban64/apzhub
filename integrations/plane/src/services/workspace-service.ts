@@ -1,16 +1,27 @@
 import type { IntegrationRequestContext } from "@apzhub/integration-sdk";
 
-import type { PlanePaginatedResponse, PlaneWorkspaceResponse } from "../internal/plane-api-types";
+import type {
+  PlanePaginatedResponse,
+  PlaneWorkspaceResponse,
+} from "../internal/plane-api-types";
 import { mapPlaneWorkspace } from "../mappers/workspace-mapper";
 import type { Workspace } from "../models/canonical";
-import type { PageRequest, PageResult, SortField, WorkspaceListFilter } from "../models/query";
+import type {
+  PageRequest,
+  PageResult,
+  SortField,
+  WorkspaceListFilter,
+} from "../models/query";
 import {
   assertValid,
   mergeValidation,
   validatePageRequest,
   validateSortFields,
 } from "../validation/request-validation";
-import { validatePlanePaginatedResponse, validatePlaneWorkspaceResponse } from "../validation/response-validation";
+import {
+  validatePlanePaginatedResponse,
+  validatePlaneWorkspaceResponse,
+} from "../validation/response-validation";
 import { buildPlaneListQuery, mapPaginatedResult } from "./list-helpers";
 import type { PlaneServiceDeps } from "./plane-operation-runner";
 
@@ -26,14 +37,21 @@ export class PlaneWorkspaceService {
     sort: readonly SortField<(typeof WORKSPACE_SORT_FIELDS)[number]>[] = [],
   ): Promise<PageResult<Workspace>> {
     assertValid(
-      mergeValidation(validatePageRequest(page), validateSortFields(sort, WORKSPACE_SORT_FIELDS)),
+      mergeValidation(
+        validatePageRequest(page),
+        validateSortFields(sort, WORKSPACE_SORT_FIELDS),
+      ),
       "workspace.list",
     );
 
     return this.deps.runner.run(context, "workspaces.list", async () => {
       const response = (await this.deps.client.listWorkspaces(
         context,
-        buildPlaneListQuery(page, sort, filter.search ? { search: filter.search } : undefined),
+        buildPlaneListQuery(
+          page,
+          sort,
+          filter.search ? { search: filter.search } : undefined,
+        ),
       )) as PlanePaginatedResponse<PlaneWorkspaceResponse>;
 
       assertValid(validatePlanePaginatedResponse(response), "workspace.list.response");
@@ -43,10 +61,14 @@ export class PlaneWorkspaceService {
         workspaceId: this.deps.serviceContext.workspaceId,
       };
 
-      return mapPaginatedResult(response, (item) => {
-        assertValid(validatePlaneWorkspaceResponse(item), "workspace.entity");
-        return mapPlaneWorkspace(item, mapperCtx);
-      }, page);
+      return mapPaginatedResult(
+        response,
+        (item) => {
+          assertValid(validatePlaneWorkspaceResponse(item), "workspace.entity");
+          return mapPlaneWorkspace(item, mapperCtx);
+        },
+        page,
+      );
     });
   }
 

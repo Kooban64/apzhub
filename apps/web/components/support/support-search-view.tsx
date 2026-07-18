@@ -8,19 +8,11 @@ import { useMemo, useState } from "react";
 import { isSupportApiError } from "@/lib/support/errors";
 import { formatSearchHitKind, formatSupportDate } from "@/lib/support/format";
 import { supportQueryKeys } from "@/lib/support/query-keys";
-import {
-  SUPPORT_BASE,
-  supportRequestDetailPath,
-} from "@/lib/support/routes";
+import { SUPPORT_BASE, supportRequestDetailPath } from "@/lib/support/routes";
 import { searchSupport } from "@/lib/support/support-api";
 import type { SupportSearchHitKind } from "@/lib/support/types";
 
-import {
-  EmptyState,
-  ErrorState,
-  LoadingState,
-  PageShell,
-} from "./support-ui";
+import { EmptyState, ErrorState, LoadingState, PageShell } from "./support-ui";
 
 const KIND_OPTIONS: readonly SupportSearchHitKind[] = [
   "support_request",
@@ -55,11 +47,17 @@ export function SupportSearchView() {
 
   function toggleKind(kind: SupportSearchHitKind) {
     setKinds((current) =>
-      current.includes(kind) ? current.filter((item) => item !== kind) : [...current, kind],
+      current.includes(kind)
+        ? current.filter((item) => item !== kind)
+        : [...current, kind],
     );
   }
 
-  function navigateHit(kind: SupportSearchHitKind, id: string, supportRequestId?: string) {
+  function navigateHit(
+    kind: SupportSearchHitKind,
+    id: string,
+    supportRequestId?: string,
+  ) {
     if (kind === "support_request") {
       router.push(supportRequestDetailPath(id));
       return;
@@ -82,7 +80,10 @@ export function SupportSearchView() {
   }
 
   return (
-    <PageShell title="Search" description="Search across Support requests, orgs, groups, users, and articles.">
+    <PageShell
+      title="Search"
+      description="Search across Support requests, orgs, groups, users, and articles."
+    >
       <form
         className="flex flex-col gap-3"
         data-testid="support-search-form"
@@ -120,7 +121,10 @@ export function SupportSearchView() {
       </form>
 
       {!submitted ? (
-        <EmptyState title="Enter a query" description="Search Support resources by keyword." />
+        <EmptyState
+          title="Enter a query"
+          description="Search Support resources by keyword."
+        />
       ) : null}
       {query.isLoading ? <LoadingState /> : null}
       {query.isError ? (
@@ -132,7 +136,10 @@ export function SupportSearchView() {
         />
       ) : null}
       {query.isSuccess && query.data.data.hits.length === 0 ? (
-        <EmptyState title="No results" description="Try a different query or kind filter." />
+        <EmptyState
+          title="No results"
+          description="Try a different query or kind filter."
+        />
       ) : null}
       {query.isSuccess && query.data.data.hits.length > 0 ? (
         <ul className="space-y-2" data-testid="support-search-results">
@@ -141,19 +148,21 @@ export function SupportSearchView() {
               <button
                 type="button"
                 className="w-full rounded-lg border border-[var(--color-border)] px-3 py-2 text-left hover:bg-[var(--color-muted)]/30"
-                onClick={() =>
-                  navigateHit(hit.kind, hit.id, hit.supportTicketId)
-                }
+                onClick={() => navigateHit(hit.kind, hit.id, hit.supportTicketId)}
               >
                 <div className="flex flex-wrap items-center gap-2 text-xs text-[var(--color-muted-foreground)]">
                   <span className="rounded-md border border-[var(--color-border)] px-2 py-0.5 font-medium text-[var(--color-foreground)]">
                     {formatSearchHitKind(hit.kind)}
                   </span>
-                  {hit.updatedAt ? <span>{formatSupportDate(hit.updatedAt)}</span> : null}
+                  {hit.updatedAt ? (
+                    <span>{formatSupportDate(hit.updatedAt)}</span>
+                  ) : null}
                 </div>
                 <p className="mt-1 text-sm font-medium">{hit.title}</p>
                 {hit.snippet ? (
-                  <p className="text-xs text-[var(--color-muted-foreground)]">{hit.snippet}</p>
+                  <p className="text-xs text-[var(--color-muted-foreground)]">
+                    {hit.snippet}
+                  </p>
                 ) : null}
               </button>
             </li>

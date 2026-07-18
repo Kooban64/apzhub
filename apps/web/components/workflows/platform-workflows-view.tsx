@@ -25,7 +25,10 @@ import {
   validateWorkflow,
   workflowQueryKeys,
 } from "@/lib/workflows/workflow-api";
-import { WorkflowClientError, toWorkflowUserMessage } from "@/lib/workflows/workflow-errors";
+import {
+  WorkflowClientError,
+  toWorkflowUserMessage,
+} from "@/lib/workflows/workflow-errors";
 import type {
   WorkflowSummaryViewModel,
   WorkflowVersionViewModel,
@@ -149,9 +152,7 @@ function StatusCard({
       <p className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">
         {label}
       </p>
-      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">
-        {value}
-      </p>
+      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">{value}</p>
     </div>
   );
 }
@@ -306,21 +307,15 @@ export function PlatformWorkflowsView({
   const queryClient = useQueryClient();
   const [search, setSearch] = useState("");
   const [lifecycleFilter, setLifecycleFilter] = useState("");
-  const [selectedWorkflowId, setSelectedWorkflowId] = useState<string | null>(
-    null,
-  );
-  const [selectedVersionId, setSelectedVersionId] = useState<string | null>(
-    null,
-  );
+  const [selectedWorkflowId, setSelectedWorkflowId] = useState<string | null>(null);
+  const [selectedVersionId, setSelectedVersionId] = useState<string | null>(null);
   const [compareLeftId, setCompareLeftId] = useState<string | null>(null);
   const [compareRightId, setCompareRightId] = useState<string | null>(null);
-  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(
-    null,
-  );
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const [transitionTarget, setTransitionTarget] = useState("review");
-  const [apiMetadataOpen, setApiMetadataOpen] = useState(false);
+  const [, setApiMetadataOpen] = useState(false);
 
   const listQuery = useQuery({
     queryKey: workflowQueryKeys.list({
@@ -338,8 +333,7 @@ export function PlatformWorkflowsView({
       ),
   });
 
-  const selectedId =
-    selectedWorkflowId ?? listQuery.data?.items[0]?.id ?? null;
+  const selectedId = selectedWorkflowId ?? listQuery.data?.items[0]?.id ?? null;
 
   const detailQuery = useQuery({
     queryKey: workflowQueryKeys.detail(selectedId ?? ""),
@@ -368,20 +362,14 @@ export function PlatformWorkflowsView({
   });
 
   const compareLeftQuery = useQuery({
-    queryKey: workflowQueryKeys.version(
-      selectedId ?? "",
-      compareLeftId ?? "",
-    ),
+    queryKey: workflowQueryKeys.version(selectedId ?? "", compareLeftId ?? ""),
     queryFn: ({ signal }) =>
       getWorkflowVersion(selectedId!, compareLeftId!, { signal }),
     enabled: Boolean(selectedId && compareLeftId),
   });
 
   const compareRightQuery = useQuery({
-    queryKey: workflowQueryKeys.version(
-      selectedId ?? "",
-      compareRightId ?? "",
-    ),
+    queryKey: workflowQueryKeys.version(selectedId ?? "", compareRightId ?? ""),
     queryFn: ({ signal }) =>
       getWorkflowVersion(selectedId!, compareRightId!, { signal }),
     enabled: Boolean(selectedId && compareRightId),
@@ -399,8 +387,7 @@ export function PlatformWorkflowsView({
     enabled: section === "templates" || section === "overview",
   });
 
-  const selectedTplId =
-    selectedTemplateId ?? templatesQuery.data?.items[0]?.id ?? null;
+  const selectedTplId = selectedTemplateId ?? templatesQuery.data?.items[0]?.id ?? null;
 
   const templateDetailQuery = useQuery({
     queryKey: workflowQueryKeys.templates.detail(selectedTplId ?? ""),
@@ -417,10 +404,7 @@ export function PlatformWorkflowsView({
   const foldersQuery = useQuery({
     queryKey: workflowQueryKeys.folders.list(),
     queryFn: ({ signal }) => listWorkflowFolders({ signal }),
-    enabled:
-      section === "folders" ||
-      section === "overview" ||
-      section === "workflows",
+    enabled: section === "folders" || section === "overview" || section === "workflows",
   });
 
   const capabilitiesQuery = useQuery({
@@ -458,8 +442,7 @@ export function PlatformWorkflowsView({
         { signal },
       ),
     enabled:
-      Boolean(selectedId) &&
-      (section === "validation" || section === "overview"),
+      Boolean(selectedId) && (section === "validation" || section === "overview"),
   });
 
   const invalidateWorkflowCaches = async () => {
@@ -467,9 +450,7 @@ export function PlatformWorkflowsView({
   };
 
   const lifecycleMutation = useMutation({
-    mutationFn: async (
-      action: "publish" | "archive" | "restore" | "transition",
-    ) => {
+    mutationFn: async (action: "publish" | "archive" | "restore" | "transition") => {
       if (!selectedId) throw new Error("Select a workflow first.");
       if (action === "publish") return publishWorkflow(selectedId);
       if (action === "archive") return archiveWorkflow(selectedId);
@@ -487,8 +468,7 @@ export function PlatformWorkflowsView({
     },
   });
 
-  const items: readonly WorkflowSummaryViewModel[] =
-    listQuery.data?.items ?? [];
+  const items: readonly WorkflowSummaryViewModel[] = listQuery.data?.items ?? [];
 
   const lifecycleCounts = useMemo(() => {
     const map = new Map<string, number>();
@@ -553,7 +533,9 @@ export function PlatformWorkflowsView({
         groups.set("Warnings", [...(groups.get("Warnings") ?? []), issue]);
       }
     }
-    return categories.map((category) => [category, groups.get(category) ?? []] as const);
+    return categories.map(
+      (category) => [category, groups.get(category) ?? []] as const,
+    );
   }, [validationQuery.data?.issues]);
 
   async function refreshAll() {
@@ -594,11 +576,7 @@ export function PlatformWorkflowsView({
         "application/json",
       );
     } else if (format === "yaml") {
-      downloadTextFile(
-        `${base}.yaml`,
-        exportWorkflowAsYaml(payload),
-        "text/yaml",
-      );
+      downloadTextFile(`${base}.yaml`, exportWorkflowAsYaml(payload), "text/yaml");
     } else {
       downloadTextFile(
         `${base}.md`,
@@ -610,8 +588,7 @@ export function PlatformWorkflowsView({
     setActionError(null);
   }
 
-  const versions: readonly WorkflowVersionViewModel[] =
-    versionsQuery.data?.items ?? [];
+  const versions: readonly WorkflowVersionViewModel[] = versionsQuery.data?.items ?? [];
 
   const commands = (
     <div
@@ -619,7 +596,12 @@ export function PlatformWorkflowsView({
       role="toolbar"
       aria-label="Workflows commands"
     >
-      <Button type="button" variant="outline" size="sm" onClick={() => void refreshAll()}>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        onClick={() => void refreshAll()}
+      >
         Refresh
       </Button>
       <Button
@@ -685,30 +667,32 @@ export function PlatformWorkflowsView({
         size="sm"
         disabled={!selectedId}
         onClick={() => {
-          void queryClient.fetchQuery({
-            queryKey: [
-              ...workflowQueryKeys.detail(selectedId!),
-              "validation",
-              "command",
-            ],
-            queryFn: () =>
-              validateWorkflow({
-                workflowId: selectedId!,
-                versionId: activeVersionId ?? undefined,
-              }),
-          }).then(
-            (result) => {
-              setStatusMessage(
-                result.valid
-                  ? "Validation passed."
-                  : `Validation reported ${result.issues.length} issue(s).`,
-              );
-              setActionError(null);
-            },
-            (error: unknown) => {
-              setActionError(toWorkflowUserMessage(error));
-            },
-          );
+          void queryClient
+            .fetchQuery({
+              queryKey: [
+                ...workflowQueryKeys.detail(selectedId!),
+                "validation",
+                "command",
+              ],
+              queryFn: () =>
+                validateWorkflow({
+                  workflowId: selectedId!,
+                  versionId: activeVersionId ?? undefined,
+                }),
+            })
+            .then(
+              (result) => {
+                setStatusMessage(
+                  result.valid
+                    ? "Validation passed."
+                    : `Validation reported ${result.issues.length} issue(s).`,
+                );
+                setActionError(null);
+              },
+              (error: unknown) => {
+                setActionError(toWorkflowUserMessage(error));
+              },
+            );
         }}
       >
         Validate
@@ -801,7 +785,10 @@ export function PlatformWorkflowsView({
   if (listQuery.isLoading && !listQuery.data) {
     return (
       <PageShell title={SECTION_META[section].title}>
-        <p data-testid="workflows-loading" className="text-sm text-[var(--color-muted-foreground)]">
+        <p
+          data-testid="workflows-loading"
+          className="text-sm text-[var(--color-muted-foreground)]"
+        >
           Loading workflows…
         </p>
       </PageShell>
@@ -964,7 +951,10 @@ export function PlatformWorkflowsView({
       <div className="flex flex-col gap-4">
         {workflowListPanel}
         {versions.length === 0 ? (
-          <EmptyState title="No versions" description="Selected workflow has no versions." />
+          <EmptyState
+            title="No versions"
+            description="Selected workflow has no versions."
+          />
         ) : (
           <WorkflowsTable
             caption="Workflow versions"
@@ -1021,10 +1011,7 @@ export function PlatformWorkflowsView({
             </select>
           </label>
         </div>
-        <VersionCompare
-          left={compareLeftQuery.data}
-          right={compareRightQuery.data}
-        />
+        <VersionCompare left={compareLeftQuery.data} right={compareRightQuery.data} />
         <DefinitionViewer definition={versionDetailQuery.data ?? null} />
         <DefinitionGraph graph={versionDetailQuery.data?.graph} />
       </div>
@@ -1109,12 +1096,7 @@ export function PlatformWorkflowsView({
           columns={["Name", "Path", "Parent", "Updated"]}
           rows={folders.map((f) => ({
             id: f.id,
-            cells: [
-              f.name,
-              f.path,
-              f.parentFolderId ?? "—",
-              f.updatedAt,
-            ],
+            cells: [f.name, f.path, f.parentFolderId ?? "—", f.updatedAt],
           }))}
         />
       );
@@ -1123,9 +1105,7 @@ export function PlatformWorkflowsView({
       <div className="flex flex-col gap-4">
         {workflowListPanel}
         {validationQuery.isLoading ? (
-          <p className="text-sm text-[var(--color-muted-foreground)]">
-            Validating…
-          </p>
+          <p className="text-sm text-[var(--color-muted-foreground)]">Validating…</p>
         ) : validationQuery.isError ? (
           <ErrorState
             message={toWorkflowUserMessage(validationQuery.error)}
@@ -1192,10 +1172,7 @@ export function PlatformWorkflowsView({
   } else if (section === "diagnostics") {
     const caps = capabilitiesQuery.data ?? diagnosticsQuery.data;
     body = (
-      <div
-        className="flex flex-col gap-4"
-        data-testid="workflows-diagnostics-panel"
-      >
+      <div className="flex flex-col gap-4" data-testid="workflows-diagnostics-panel">
         <StatusCard
           label="Execution Status"
           value="Workflow Execution Not Available"
@@ -1214,16 +1191,11 @@ export function PlatformWorkflowsView({
             label="Engine configured"
             value={String(caps?.engineConfigured ?? false)}
           />
-          <StatusCard
-            label="Persistence"
-            value={caps?.persistenceMode ?? "—"}
-          />
+          <StatusCard label="Persistence" value={caps?.persistenceMode ?? "—"} />
           <StatusCard
             label="Health"
             value={
-              healthQuery.data?.healthy
-                ? "Healthy"
-                : healthQuery.data?.status ?? "—"
+              healthQuery.data?.healthy ? "Healthy" : (healthQuery.data?.status ?? "—")
             }
           />
           <StatusCard
@@ -1231,7 +1203,7 @@ export function PlatformWorkflowsView({
             value={
               readinessQuery.data?.ready
                 ? "Ready"
-                : readinessQuery.data?.status ?? "—"
+                : (readinessQuery.data?.status ?? "—")
             }
           />
         </div>

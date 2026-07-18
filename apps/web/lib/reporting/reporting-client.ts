@@ -130,8 +130,7 @@ function mapGenerationResult(raw: unknown): ReportGenerationResultViewModel {
       reportType: String(document.reportType ?? ""),
       templateId: String(document.templateId ?? ""),
       title: String(document.title ?? ""),
-      subtitle:
-        document.subtitle !== undefined ? String(document.subtitle) : undefined,
+      subtitle: document.subtitle !== undefined ? String(document.subtitle) : undefined,
       generatedAt: String(document.generatedAt ?? ""),
       generatedBy: String(document.generatedBy ?? ""),
       tenantId: String(document.tenantId ?? ""),

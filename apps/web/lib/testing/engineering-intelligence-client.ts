@@ -35,10 +35,15 @@ type ApiCollectionEnvelope<T> = {
 export interface EngineeringIntelligenceClient {
   getScore(options?: EngineeringClientRequestOptions): Promise<QualityScoreViewModel>;
   scoreWithScope(
-    input?: { readonly scope?: EngineeringScopeInput; readonly weights?: Readonly<Record<string, number>> },
+    input?: {
+      readonly scope?: EngineeringScopeInput;
+      readonly weights?: Readonly<Record<string, number>>;
+    },
     options?: EngineeringClientRequestOptions,
   ): Promise<QualityScoreViewModel>;
-  getHealth(options?: EngineeringClientRequestOptions): Promise<EngineeringHealthViewModel>;
+  getHealth(
+    options?: EngineeringClientRequestOptions,
+  ): Promise<EngineeringHealthViewModel>;
   assessHealth(
     input?: { readonly scope?: EngineeringScopeInput },
     options?: EngineeringClientRequestOptions,
@@ -59,7 +64,11 @@ export interface EngineeringIntelligenceClient {
     options?: EngineeringClientRequestOptions,
   ): Promise<EngineeringCollectionResult<TrendSeriesViewModel>>;
   buildTrend(
-    input: { readonly kind: string; readonly periodKind?: string; readonly scope?: EngineeringScopeInput },
+    input: {
+      readonly kind: string;
+      readonly periodKind?: string;
+      readonly scope?: EngineeringScopeInput;
+    },
     options?: EngineeringClientRequestOptions,
   ): Promise<TrendSeriesViewModel>;
   listBenchmarks(

@@ -28,9 +28,7 @@ import {
 } from "../../index";
 import { createObservePersistence } from "@apzhub/observe-persistence";
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_obs",
     userId: "user_obs",
@@ -42,8 +40,8 @@ function ctx(
 }
 
 describe("APZOBSERVE-002 observe platform services", () => {
-  it("exports platform services version 0.24.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
+  it("exports platform services version 0.25.0", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
   });
 
   it("registers observe permissions in the platform catalogue", () => {
@@ -66,8 +64,7 @@ describe("APZOBSERVE-002 observe platform services", () => {
         ?.requiredPermission,
     ).toBe("observe.alerts");
     expect(
-      resolveOperationAuthorization("observeLogSources", "get")
-        ?.requiredPermission,
+      resolveOperationAuthorization("observeLogSources", "get")?.requiredPermission,
     ).toBe("observe.logs");
     expect(
       resolveOperationAuthorization("observeTraceDefinitions", "create")
@@ -78,8 +75,7 @@ describe("APZOBSERVE-002 observe platform services", () => {
         ?.requiredPermission,
     ).toBe("observe.manage");
     expect(
-      resolveOperationAuthorization("observeDiagnostics", "health")
-        ?.requiredPermission,
+      resolveOperationAuthorization("observeDiagnostics", "health")?.requiredPermission,
     ).toBe("observe.diagnostics");
   });
 
@@ -87,9 +83,9 @@ describe("APZOBSERVE-002 observe platform services", () => {
     expect(() => createObservePlatformServicesForTest({})).toThrow(
       /allowInMemoryPersistence/,
     );
-    expect(() =>
-      createObservePlatformServicesForProduction({} as never),
-    ).toThrow(/postgresDb/);
+    expect(() => createObservePlatformServicesForProduction({} as never)).toThrow(
+      /postgresDb/,
+    );
   });
 
   it("createObservePlatformServices accepts explicit persistence bundle", async () => {
@@ -110,12 +106,8 @@ describe("APZOBSERVE-002 observe platform services", () => {
 
   it("env gate is deny-by-default", () => {
     expect(isObserveServiceEnabled({})).toBe(false);
-    expect(isObserveServiceEnabled({ APZHUB_OBSERVE_ENABLED: "true" })).toBe(
-      true,
-    );
-    expect(isObserveServiceEnabled({ APZHUB_OBSERVE_ENABLED: "false" })).toBe(
-      false,
-    );
+    expect(isObserveServiceEnabled({ APZHUB_OBSERVE_ENABLED: "true" })).toBe(true);
+    expect(isObserveServiceEnabled({ APZHUB_OBSERVE_ENABLED: "false" })).toBe(false);
   });
 
   it("maps ObserveDomainError to PlatformServiceError", () => {
@@ -126,10 +118,8 @@ describe("APZOBSERVE-002 observe platform services", () => {
     expect(isPlatformServiceError(mapped)).toBe(true);
     expect(mapped.code).toBe("NOT_FOUND");
     expect(
-      mapObserveDomainError(
-        new ObserveDomainError("validation_error", "bad"),
-        "c",
-      ).code,
+      mapObserveDomainError(new ObserveDomainError("validation_error", "bad"), "c")
+        .code,
     ).toBe("VALIDATION_FAILED");
     expect(
       mapObserveDomainError(
@@ -144,16 +134,10 @@ describe("APZOBSERVE-002 observe platform services", () => {
       ).code,
     ).toBe("VALIDATION_FAILED");
     expect(
-      mapObserveDomainError(
-        new ObserveDomainError("duplicate", "dup"),
-        "c",
-      ).code,
+      mapObserveDomainError(new ObserveDomainError("duplicate", "dup"), "c").code,
     ).toBe("CONFLICT");
     expect(
-      mapObserveDomainError(
-        new ObserveDomainError("forbidden", "no"),
-        "c",
-      ).code,
+      mapObserveDomainError(new ObserveDomainError("forbidden", "no"), "c").code,
     ).toBe("FORBIDDEN");
   });
 
@@ -168,7 +152,6 @@ describe("APZOBSERVE-002 observe platform services", () => {
       authorizationMode: "allow-all",
     });
     const g = bundle.gateway.observe;
-
 
     const metric = await g.metricDefinitions.create(ctx(), {
       key: "http_requests_total",
@@ -193,11 +176,11 @@ describe("APZOBSERVE-002 observe platform services", () => {
 
     {
       const created = await g.healthChecks.create(ctx(), {
-      serviceKey: "web",
-      name: "healthChecks-name",
-      status: "healthy",
-      providerKind: "internal"
-} as never);
+        serviceKey: "web",
+        name: "healthChecks-name",
+        status: "healthy",
+        providerKind: "internal",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.healthChecks.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
@@ -210,28 +193,30 @@ describe("APZOBSERVE-002 observe platform services", () => {
 
     {
       const created = await g.readinessChecks.create(ctx(), {
-      serviceKey: "web",
-      name: "readinessChecks-name",
-      status: "ready",
-      providerKind: "internal"
-} as never);
+        serviceKey: "web",
+        name: "readinessChecks-name",
+        status: "ready",
+        providerKind: "internal",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.readinessChecks.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
       expect(await g.readinessChecks.list(ctx())).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
-      const updated = await g.readinessChecks.update(ctx(), { id: created.id } as never);
+      const updated = await g.readinessChecks.update(ctx(), {
+        id: created.id,
+      } as never);
       expect(updated.revision).toBeGreaterThanOrEqual(created.revision);
     }
 
     {
       const created = await g.livenessChecks.create(ctx(), {
-      serviceKey: "web",
-      name: "livenessChecks-name",
-      status: "alive",
-      providerKind: "internal"
-} as never);
+        serviceKey: "web",
+        name: "livenessChecks-name",
+        status: "alive",
+        providerKind: "internal",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.livenessChecks.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
@@ -244,12 +229,12 @@ describe("APZOBSERVE-002 observe platform services", () => {
 
     {
       const created = await g.serviceHealth.create(ctx(), {
-      serviceKey: "web",
-      displayName: "serviceHealth-name",
-      overallStatus: "healthy",
-      readinessStatus: "ready",
-      livenessStatus: "alive"
-} as never);
+        serviceKey: "web",
+        displayName: "serviceHealth-name",
+        overallStatus: "healthy",
+        readinessStatus: "ready",
+        livenessStatus: "alive",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.serviceHealth.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
@@ -262,9 +247,9 @@ describe("APZOBSERVE-002 observe platform services", () => {
 
     {
       const created = await g.serviceStatus.create(ctx(), {
-      serviceKey: "web",
-      status: "healthy"
-} as never);
+        serviceKey: "web",
+        status: "healthy",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.serviceStatus.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
@@ -277,27 +262,29 @@ describe("APZOBSERVE-002 observe platform services", () => {
 
     {
       const created = await g.componentStatus.create(ctx(), {
-      serviceKey: "web",
-      componentKey: "db",
-      name: "componentStatus-name",
-      status: "healthy"
-} as never);
+        serviceKey: "web",
+        componentKey: "db",
+        name: "componentStatus-name",
+        status: "healthy",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.componentStatus.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
       expect(await g.componentStatus.list(ctx())).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
-      const updated = await g.componentStatus.update(ctx(), { id: created.id } as never);
+      const updated = await g.componentStatus.update(ctx(), {
+        id: created.id,
+      } as never);
       expect(updated.revision).toBeGreaterThanOrEqual(created.revision);
     }
 
     {
       const created = await g.metricSamples.create(ctx(), {
-      metricDefinitionId: metric.id,
-      sampledAt: "2026-07-17T15:00:00.000Z",
-      providerKind: "internal"
-} as never);
+        metricDefinitionId: metric.id,
+        sampledAt: "2026-07-17T15:00:00.000Z",
+        providerKind: "internal",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.metricSamples.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
@@ -310,10 +297,10 @@ describe("APZOBSERVE-002 observe platform services", () => {
 
     {
       const created = await g.alertStates.create(ctx(), {
-      alertDefinitionId: alert.id,
-      state: "inactive",
-      providerKind: "internal"
-} as never);
+        alertDefinitionId: alert.id,
+        state: "inactive",
+        providerKind: "internal",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.alertStates.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
@@ -326,29 +313,31 @@ describe("APZOBSERVE-002 observe platform services", () => {
 
     {
       const created = await g.dashboardDefinitions.create(ctx(), {
-      key: "dashboardDefinitions-key",
-      name: "dashboardDefinitions-name",
-      providerKind: "internal",
-      status: "active"
-} as never);
+        key: "dashboardDefinitions-key",
+        name: "dashboardDefinitions-name",
+        providerKind: "internal",
+        status: "active",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.dashboardDefinitions.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
       expect(await g.dashboardDefinitions.list(ctx())).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
-      const updated = await g.dashboardDefinitions.update(ctx(), { id: created.id } as never);
+      const updated = await g.dashboardDefinitions.update(ctx(), {
+        id: created.id,
+      } as never);
       expect(updated.revision).toBeGreaterThanOrEqual(created.revision);
     }
 
     {
       const created = await g.logSources.create(ctx(), {
-      key: "logSources-key",
-      name: "logSources-name",
-      kind: "application",
-      providerKind: "internal",
-      status: "active"
-} as never);
+        key: "logSources-key",
+        name: "logSources-name",
+        kind: "application",
+        providerKind: "internal",
+        status: "active",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.logSources.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
@@ -361,10 +350,10 @@ describe("APZOBSERVE-002 observe platform services", () => {
 
     {
       const created = await g.traceSpans.create(ctx(), {
-      traceDefinitionId: trace.id,
-      spanName: "traceSpans-name",
-      providerKind: "internal"
-} as never);
+        traceDefinitionId: trace.id,
+        spanName: "traceSpans-name",
+        providerKind: "internal",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.traceSpans.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
@@ -377,64 +366,70 @@ describe("APZOBSERVE-002 observe platform services", () => {
 
     {
       const created = await g.incidentReferences.create(ctx(), {
-      key: "incidentReferences-key",
-      title: "incidentReferences-name",
-      status: "active"
-} as never);
+        key: "incidentReferences-key",
+        title: "incidentReferences-name",
+        status: "active",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.incidentReferences.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
       expect(await g.incidentReferences.list(ctx())).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
-      const updated = await g.incidentReferences.update(ctx(), { id: created.id } as never);
+      const updated = await g.incidentReferences.update(ctx(), {
+        id: created.id,
+      } as never);
       expect(updated.revision).toBeGreaterThanOrEqual(created.revision);
     }
 
     {
       const created = await g.maintenanceWindows.create(ctx(), {
-      key: "maintenanceWindows-key",
-      name: "maintenanceWindows-name",
-      startsAt: "2026-07-17T15:00:00.000Z",
-      endsAt: "2026-07-17T15:00:00.000Z",
-      status: "active"
-} as never);
+        key: "maintenanceWindows-key",
+        name: "maintenanceWindows-name",
+        startsAt: "2026-07-17T15:00:00.000Z",
+        endsAt: "2026-07-17T15:00:00.000Z",
+        status: "active",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.maintenanceWindows.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
       expect(await g.maintenanceWindows.list(ctx())).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
-      const updated = await g.maintenanceWindows.update(ctx(), { id: created.id } as never);
+      const updated = await g.maintenanceWindows.update(ctx(), {
+        id: created.id,
+      } as never);
       expect(updated.revision).toBeGreaterThanOrEqual(created.revision);
     }
 
     {
       const created = await g.healthSummaries.create(ctx(), {
-      scopeKey: "healthSummaries-key",
-      overallStatus: "healthy",
-      healthyCount: 1,
-      degradedCount: 1,
-      unhealthyCount: 1,
-      evaluatedAt: "2026-07-17T15:00:00.000Z"
-} as never);
+        scopeKey: "healthSummaries-key",
+        overallStatus: "healthy",
+        healthyCount: 1,
+        degradedCount: 1,
+        unhealthyCount: 1,
+        evaluatedAt: "2026-07-17T15:00:00.000Z",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.healthSummaries.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
       expect(await g.healthSummaries.list(ctx())).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
-      const updated = await g.healthSummaries.update(ctx(), { id: created.id } as never);
+      const updated = await g.healthSummaries.update(ctx(), {
+        id: created.id,
+      } as never);
       expect(updated.revision).toBeGreaterThanOrEqual(created.revision);
     }
 
     {
       const created = await g.metadata.create(ctx(), {
-      key: "metadata-key",
-      name: "metadata-name",
-      category: "metadata-key",
-      status: "active"
-} as never);
+        key: "metadata-key",
+        name: "metadata-name",
+        category: "metadata-key",
+        status: "active",
+      } as never);
       expect(created.id).toBeTruthy();
       const got = await g.metadata.get(ctx(), created.id);
       expect(got.id).toBe(created.id);
@@ -445,7 +440,9 @@ describe("APZOBSERVE-002 observe platform services", () => {
       expect(updated.revision).toBeGreaterThanOrEqual(created.revision);
     }
 
-    expect((await g.metricDefinitions.get(ctx(), metric.id)).key).toBe("http_requests_total");
+    expect((await g.metricDefinitions.get(ctx(), metric.id)).key).toBe(
+      "http_requests_total",
+    );
     expect(await g.metricDefinitions.list(ctx())).toHaveLength(1);
     await g.metricDefinitions.update(ctx(), { id: metric.id, status: "inactive" });
     expect((await g.alertDefinitions.get(ctx(), alert.id)).severity).toBe("critical");
@@ -481,10 +478,7 @@ describe("APZOBSERVE-002 observe platform services", () => {
   });
 
   it("does not import HTTP, workbench, or provider SDKs in observe platform services", () => {
-    const root = join(
-      process.cwd(),
-      "packages/platform-services/src/services/observe",
-    );
+    const root = join(process.cwd(), "packages/platform-services/src/services/observe");
     for (const file of [
       "create-observe-platform-services.ts",
       "observe-service-impls.ts",

@@ -20,7 +20,10 @@ import {
 export class MockSearchIntegrationAdapter extends SearchIntegrationAdapterBase {
   private hookCount = 0;
 
-  constructor(context: SearchAdapterContext, configuration: AdapterBootstrapConfiguration) {
+  constructor(
+    context: SearchAdapterContext,
+    configuration: AdapterBootstrapConfiguration,
+  ) {
     super(context, configuration);
   }
 

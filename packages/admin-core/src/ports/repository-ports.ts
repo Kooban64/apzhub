@@ -58,28 +58,18 @@ export function requireFound<T>(
   id: string,
 ): T {
   if (value == null) {
-    throw new AdministrationDomainError(
-      "not_found",
-      `${kind} not found: ${id}`,
-      { kind, id },
-    );
+    throw new AdministrationDomainError("not_found", `${kind} not found: ${id}`, {
+      kind,
+      id,
+    });
   }
   return value;
 }
 
 type CrudPort<TEntity, TId> = {
-  create(
-    ctx: AdministrationRequestContext,
-    entity: TEntity,
-  ): Promise<TEntity>;
-  get(
-    ctx: AdministrationRequestContext,
-    id: TId,
-  ): Promise<TEntity | null>;
-  update(
-    ctx: AdministrationRequestContext,
-    entity: TEntity,
-  ): Promise<TEntity>;
+  create(ctx: AdministrationRequestContext, entity: TEntity): Promise<TEntity>;
+  get(ctx: AdministrationRequestContext, id: TId): Promise<TEntity | null>;
+  update(ctx: AdministrationRequestContext, entity: TEntity): Promise<TEntity>;
   list(ctx: AdministrationRequestContext): Promise<readonly TEntity[]>;
 };
 
@@ -117,9 +107,7 @@ export interface AdministrationAuditRepositoryPort {
     ctx: AdministrationRequestContext,
     auditId: AdministrationAuditId,
   ): Promise<AdministrationAuditEntry | null>;
-  list(
-    ctx: AdministrationRequestContext,
-  ): Promise<readonly AdministrationAuditEntry[]>;
+  list(ctx: AdministrationRequestContext): Promise<readonly AdministrationAuditEntry[]>;
 }
 
 export interface AdministrationHistoryRepositoryPort {

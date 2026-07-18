@@ -13,13 +13,13 @@ Exposed the Platform Configuration management plane through `/api/v1/configurati
 
 ## Package versions
 
-| Package / artefact | Version / note |
-| --- | --- |
-| Platform OpenAPI | **1.5.0** |
-| `@apzhub/configuration-contracts` | **0.2.0** (unchanged) |
-| `@apzhub/configuration-core` | **0.2.0** (unchanged) |
-| `@apzhub/configuration-persistence` | **0.1.0** (unchanged) |
-| `@apzhub/platform-services` | **0.21.0** (unchanged) |
+| Package / artefact                  | Version / note         |
+| ----------------------------------- | ---------------------- |
+| Platform OpenAPI                    | **1.5.0**              |
+| `@apzhub/configuration-contracts`   | **0.2.0** (unchanged)  |
+| `@apzhub/configuration-core`        | **0.2.0** (unchanged)  |
+| `@apzhub/configuration-persistence` | **0.1.0** (unchanged)  |
+| `@apzhub/platform-services`         | **0.21.0** (unchanged) |
 
 ## Architecture
 
@@ -49,15 +49,15 @@ Consumer → typed client → /api/v1/configuration → gateway.configuration.* 
 
 ## Quality gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:configuration-http-client` | PASS (0 violations) |
-| `pnpm audit:configuration-foundation` | PASS |
-| `pnpm audit:configuration-platform-services` | PASS |
-| `pnpm openapi:validate:platform` | PASS |
-| Handler tests (12) + client tests (10) + boundary harness (2) | PASS (24) |
-| Handler line coverage (`configuration.ts`) | **~99.5%** |
-| Typed client line coverage (`configuration-client.ts`) | **~98%** |
+| Gate                                                          | Result              |
+| ------------------------------------------------------------- | ------------------- |
+| `pnpm audit:configuration-http-client`                        | PASS (0 violations) |
+| `pnpm audit:configuration-foundation`                         | PASS                |
+| `pnpm audit:configuration-platform-services`                  | PASS                |
+| `pnpm openapi:validate:platform`                              | PASS                |
+| Handler tests (12) + client tests (10) + boundary harness (2) | PASS (24)           |
+| Handler line coverage (`configuration.ts`)                    | **~99.5%**          |
+| Typed client line coverage (`configuration-client.ts`)        | **~98%**            |
 
 ## Files created (key)
 

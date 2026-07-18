@@ -17,58 +17,58 @@ Expanded the Plane integration beyond CRUD with **comments**, **activity**, **wa
 
 ## Capabilities added
 
-| Capability | Service | Status |
-|------------|---------|--------|
-| Comments CRUD | `PlaneCommentService` | ✅ |
-| Task / project activity | `PlaneActivityService` | ✅ |
-| Watchers | `PlaneWatcherService` | ✅ |
-| Project / task statistics | `PlaneAnalyticsService` | ✅ |
-| Cycle progress / velocity / burndown | `PlaneAnalyticsService` | ✅ |
-| Capability registration | `comments`, `activity`, `watchers`, `analytics` | ✅ |
-| Mock API coverage | comments, history, subscribers, stats, cycle analytics | ✅ |
+| Capability                           | Service                                                | Status |
+| ------------------------------------ | ------------------------------------------------------ | ------ |
+| Comments CRUD                        | `PlaneCommentService`                                  | ✅     |
+| Task / project activity              | `PlaneActivityService`                                 | ✅     |
+| Watchers                             | `PlaneWatcherService`                                  | ✅     |
+| Project / task statistics            | `PlaneAnalyticsService`                                | ✅     |
+| Cycle progress / velocity / burndown | `PlaneAnalyticsService`                                | ✅     |
+| Capability registration              | `comments`, `activity`, `watchers`, `analytics`        | ✅     |
+| Mock API coverage                    | comments, history, subscribers, stats, cycle analytics | ✅     |
 
 ---
 
 ## Files created
 
-| Path | Role |
-|------|------|
-| `integrations/plane/src/services/comment-service.ts` | Comments |
-| `integrations/plane/src/services/activity-service.ts` | Activity |
-| `integrations/plane/src/services/watcher-service.ts` | Watchers |
-| `integrations/plane/src/services/analytics-service.ts` | Intelligence |
-| `integrations/plane/src/mappers/collaboration-mapper.ts` | Comment/activity/watcher mapping |
-| `integrations/plane/src/mappers/analytics-mapper.ts` | Stats/velocity/burndown mapping |
-| `integrations/plane/src/plane-collaboration.test.ts` | Contract tests |
-| `integrations/plane/docs/PLANE-COLLABORATION-INTELLIGENCE.md` | Capability docs |
-| `docs/sprint/OSS-101-07-completion-report.md` | This report |
+| Path                                                          | Role                             |
+| ------------------------------------------------------------- | -------------------------------- |
+| `integrations/plane/src/services/comment-service.ts`          | Comments                         |
+| `integrations/plane/src/services/activity-service.ts`         | Activity                         |
+| `integrations/plane/src/services/watcher-service.ts`          | Watchers                         |
+| `integrations/plane/src/services/analytics-service.ts`        | Intelligence                     |
+| `integrations/plane/src/mappers/collaboration-mapper.ts`      | Comment/activity/watcher mapping |
+| `integrations/plane/src/mappers/analytics-mapper.ts`          | Stats/velocity/burndown mapping  |
+| `integrations/plane/src/plane-collaboration.test.ts`          | Contract tests                   |
+| `integrations/plane/docs/PLANE-COLLABORATION-INTELLIGENCE.md` | Capability docs                  |
+| `docs/sprint/OSS-101-07-completion-report.md`                 | This report                      |
 
 ---
 
 ## Files modified
 
-| Path | Change |
-|------|--------|
-| `packages/platform-service-contracts/src/domain/activity.ts` | Additive Watcher + analytics models |
-| `packages/platform-service-contracts/src/domain/identifiers.ts` | `WatcherId`, `ActivityId` |
-| `packages/platform-service-contracts/src/inputs/index.ts` | `UpdateCommentInput`, `AddWatcherInput` |
-| `packages/platform-service-contracts/src/queries/index.ts` | `ActivityListFilter`, `CommentListFilter` |
-| `integrations/plane` REST client, mocks, capabilities, bootstrap, adapter diagnostics, exports | Collaboration wiring |
-| Foundation docs / CHANGELOG / docs/README | Milestone closeout |
+| Path                                                                                           | Change                                    |
+| ---------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| `packages/platform-service-contracts/src/domain/activity.ts`                                   | Additive Watcher + analytics models       |
+| `packages/platform-service-contracts/src/domain/identifiers.ts`                                | `WatcherId`, `ActivityId`                 |
+| `packages/platform-service-contracts/src/inputs/index.ts`                                      | `UpdateCommentInput`, `AddWatcherInput`   |
+| `packages/platform-service-contracts/src/queries/index.ts`                                     | `ActivityListFilter`, `CommentListFilter` |
+| `integrations/plane` REST client, mocks, capabilities, bootstrap, adapter diagnostics, exports | Collaboration wiring                      |
+| Foundation docs / CHANGELOG / docs/README                                                      | Milestone closeout                        |
 
 ---
 
 ## Coverage / tests
 
-| Suite | Result |
-|-------|--------|
-| Plane package tests | 76 passed (incl. 15 collaboration) |
-| Contracts | 8 passed |
-| Combined Plane + platform-services + API v1 | 256 passed |
-| Comment / activity / watcher / analytics service line coverage | ~92–96% |
-| Typecheck (`integration-plane`) | ✅ |
-| ESLint (`integrations/plane/src`) | ✅ |
-| Live Plane | Not used |
+| Suite                                                          | Result                             |
+| -------------------------------------------------------------- | ---------------------------------- |
+| Plane package tests                                            | 76 passed (incl. 15 collaboration) |
+| Contracts                                                      | 8 passed                           |
+| Combined Plane + platform-services + API v1                    | 256 passed                         |
+| Comment / activity / watcher / analytics service line coverage | ~92–96%                            |
+| Typecheck (`integration-plane`)                                | ✅                                 |
+| ESLint (`integrations/plane/src`)                              | ✅                                 |
+| Live Plane                                                     | Not used                           |
 
 ---
 

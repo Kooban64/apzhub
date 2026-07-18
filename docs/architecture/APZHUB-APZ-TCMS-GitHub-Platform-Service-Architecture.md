@@ -46,16 +46,16 @@ PipelineAdapterRegistry (generic_ci + github_actions when injected)
 
 ## Capabilities
 
-| Capability | Gateway facet | Permission |
-| ---------- | ------------- | ---------- |
-| `pipeline_repository` | `pipelineRepositories` | `pipeline.read` |
-| `pipeline_workflow` | `pipelineWorkflows` | `pipeline.read` |
-| `pipeline_run` | `pipelineRuns` | `pipeline.read` |
-| `pipeline_artifact` | `pipelineArtifacts` | `pipeline.read` |
-| `pipeline_job` | `pipelineJobs` | `pipeline.read` |
-| `pipeline_step` | `pipelineSteps` | `pipeline.read` |
-| `pipeline_summary` | `pipelineSummaries` | `pipeline.read` |
-| SoR pipelines | `pipelines` | `pipeline.*` (existing) |
+| Capability            | Gateway facet          | Permission              |
+| --------------------- | ---------------------- | ----------------------- |
+| `pipeline_repository` | `pipelineRepositories` | `pipeline.read`         |
+| `pipeline_workflow`   | `pipelineWorkflows`    | `pipeline.read`         |
+| `pipeline_run`        | `pipelineRuns`         | `pipeline.read`         |
+| `pipeline_artifact`   | `pipelineArtifacts`    | `pipeline.read`         |
+| `pipeline_job`        | `pipelineJobs`         | `pipeline.read`         |
+| `pipeline_step`       | `pipelineSteps`        | `pipeline.read`         |
+| `pipeline_summary`    | `pipelineSummaries`    | `pipeline.read`         |
+| SoR pipelines         | `pipelines`            | `pipeline.*` (existing) |
 
 ---
 

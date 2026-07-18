@@ -55,8 +55,7 @@ export const TESTING_SEARCH_ENTITY_TYPES = [
   "pipeline_import",
 ] as const;
 
-export type TestingSearchEntityType =
-  (typeof TESTING_SEARCH_ENTITY_TYPES)[number];
+export type TestingSearchEntityType = (typeof TESTING_SEARCH_ENTITY_TYPES)[number];
 
 export function isTestingSearchEntityType(
   value: string,

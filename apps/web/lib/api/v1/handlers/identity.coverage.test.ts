@@ -64,7 +64,12 @@ describe("APZIDENTITY-003 identity handler full surface", () => {
     );
     await handlers.handleGetIdentityUser(get("/u"), ctx, p({ userId: "user_1" }));
     await handlers.handleUpdateIdentityUser(
-      patch("/u", { displayName: "Jane D.", email: null, authSubjectRef: null, organisationId: null }),
+      patch("/u", {
+        displayName: "Jane D.",
+        email: null,
+        authSubjectRef: null,
+        organisationId: null,
+      }),
       ctx,
       p({ userId: "user_1" }),
     );
@@ -152,7 +157,11 @@ describe("APZIDENTITY-003 identity handler full surface", () => {
       p({ positionId: "position_1" }),
     );
     await handlers.handleUpdateIdentityPosition(
-      patch("/pos", { name: "Senior Software Engineer", description: null, status: "active" }),
+      patch("/pos", {
+        name: "Senior Software Engineer",
+        description: null,
+        status: "active",
+      }),
       ctx,
       p({ positionId: "position_1" }),
     );
@@ -240,7 +249,11 @@ describe("APZIDENTITY-003 identity handler full surface", () => {
       post("/pol", { key: "retention", name: "Retention", kind: "retention" }),
       ctx,
     );
-    await handlers.handleGetIdentityPolicy(get("/pol"), ctx, p({ policyId: "policy_1" }));
+    await handlers.handleGetIdentityPolicy(
+      get("/pol"),
+      ctx,
+      p({ policyId: "policy_1" }),
+    );
     await handlers.handleUpdateIdentityPolicy(
       patch("/pol", { name: "Retention Policy", description: null }),
       ctx,
@@ -265,7 +278,11 @@ describe("APZIDENTITY-003 identity handler full surface", () => {
     await handlers.handleListIdentityReferences(get("/ref?userId=user_1"), ctx);
     await handlers.handleListIdentityReferences(get("/ref"), ctx);
     await handlers.handleCreateIdentityReference(
-      post("/ref", { kind: "external", target: "https://example.com", userId: "user_1" }),
+      post("/ref", {
+        kind: "external",
+        target: "https://example.com",
+        userId: "user_1",
+      }),
       ctx,
     );
     await handlers.handleGetIdentityReference(

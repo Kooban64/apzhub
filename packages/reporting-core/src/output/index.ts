@@ -21,10 +21,7 @@ const CONTENT_TYPES: Readonly<Record<ReportOutputFormat, string>> = {
   docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 };
 
-function textOutput(
-  format: ReportOutputFormat,
-  text: string,
-): RenderedReportOutput {
+function textOutput(format: ReportOutputFormat, text: string): RenderedReportOutput {
   const bytes = Buffer.from(text, "utf8");
   return {
     format,

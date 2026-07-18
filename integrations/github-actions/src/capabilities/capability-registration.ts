@@ -26,10 +26,7 @@ export function createGitHubActionsCapabilityRegistration(): GitHubActionsCapabi
 }
 
 export function listGitHubActionsRegisteredCapabilityIds(): readonly string[] {
-  return [
-    ...GITHUB_ACTIONS_SDK_CAPABILITIES,
-    ...GITHUB_ACTIONS_EXTENDED_CAPABILITIES,
-  ];
+  return [...GITHUB_ACTIONS_SDK_CAPABILITIES, ...GITHUB_ACTIONS_EXTENDED_CAPABILITIES];
 }
 
 export function isGitHubActionsServiceImplemented(

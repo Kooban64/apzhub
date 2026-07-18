@@ -15,8 +15,7 @@ export const PLATFORM_OBSERVE_PERMISSIONS = [
   "observe.diagnostics",
 ] as const;
 
-export type PlatformObservePermission =
-  (typeof PLATFORM_OBSERVE_PERMISSIONS)[number];
+export type PlatformObservePermission = (typeof PLATFORM_OBSERVE_PERMISSIONS)[number];
 
 export const PLATFORM_OBSERVE_PERMISSION_WILDCARD = "observe.*" as const;
 

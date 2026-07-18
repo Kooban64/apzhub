@@ -58,7 +58,11 @@ export class InMemoryPreferenceRepository implements PreferenceRepository {
     return record;
   }
 
-  async delete(userId: string, category: string, preferenceKey: string): Promise<boolean> {
+  async delete(
+    userId: string,
+    category: string,
+    preferenceKey: string,
+  ): Promise<boolean> {
     return this.items.delete(this.key(userId, category, preferenceKey));
   }
 
@@ -176,7 +180,10 @@ export class InMemoryWorkbenchLayoutRepository implements WorkbenchLayoutReposit
     return this.items.get(userId);
   }
 
-  async save(userId: string, layout: Record<string, unknown>): Promise<WorkbenchLayoutRecord> {
+  async save(
+    userId: string,
+    layout: Record<string, unknown>,
+  ): Promise<WorkbenchLayoutRecord> {
     const record: WorkbenchLayoutRecord = {
       userId,
       layout,

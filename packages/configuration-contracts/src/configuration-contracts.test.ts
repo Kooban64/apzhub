@@ -29,21 +29,13 @@ describe("configuration-contracts", () => {
       "configuration.audit",
     ]);
     expect(isPlatformConfigurationPermission("configuration.read")).toBe(true);
-    expect(isPlatformConfigurationPermission("configuration.secret")).toBe(
-      false,
-    );
+    expect(isPlatformConfigurationPermission("configuration.secret")).toBe(false);
   });
 
   it("evaluates permission wildcards", () => {
-    expect(hasConfigurationPermission(["configuration.*"], "audit")).toBe(
-      true,
-    );
-    expect(hasConfigurationPermission(["configuration.read"], "manage")).toBe(
-      false,
-    );
-    expect(hasConfigurationPermission(["configuration.manage"], "manage")).toBe(
-      true,
-    );
+    expect(hasConfigurationPermission(["configuration.*"], "audit")).toBe(true);
+    expect(hasConfigurationPermission(["configuration.read"], "manage")).toBe(false);
+    expect(hasConfigurationPermission(["configuration.manage"], "manage")).toBe(true);
   });
 
   it("validates lifecycle and hierarchy catalogues", () => {

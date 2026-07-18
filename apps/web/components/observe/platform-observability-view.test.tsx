@@ -41,9 +41,7 @@ describe("PlatformObservabilityView", () => {
     render(wrap(<PlatformObservabilityView section="overview" />));
 
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
       expect(screen.getByTestId("card-health-checks-count")).toBeTruthy();
     });
 
@@ -176,9 +174,7 @@ describe("PlatformObservabilityView", () => {
 
   it("hides manage actions when canManage is false", async () => {
     render(
-      wrap(
-        <PlatformObservabilityView section="health-checks" canManage={false} />,
-      ),
+      wrap(<PlatformObservabilityView section="health-checks" canManage={false} />),
     );
 
     await waitFor(() => {
@@ -190,9 +186,7 @@ describe("PlatformObservabilityView", () => {
   it("router resolves overview from pathname", async () => {
     render(wrap(<ObserveWorkspaceRouter />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
     });
   });
 

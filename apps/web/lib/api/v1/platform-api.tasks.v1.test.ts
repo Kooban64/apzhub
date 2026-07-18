@@ -260,7 +260,10 @@ describe("OSS-110-09 Task HTTP API", () => {
         }),
         makeContext(),
         {
-          params: Promise.resolve({ taskId: API_TEST_TASK_ID, labelId: API_TEST_LABEL_ID }),
+          params: Promise.resolve({
+            taskId: API_TEST_TASK_ID,
+            labelId: API_TEST_LABEL_ID,
+          }),
         },
       );
       expect(removed.status).toBe(200);

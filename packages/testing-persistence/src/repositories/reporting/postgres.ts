@@ -12,15 +12,8 @@ import type {
   ReportTemplateCreate,
   ReportTemplateUpdate,
 } from "../interfaces";
-import type {
-  ReportGenerationMetadataRecord,
-  ReportTemplateRecord,
-} from "../records";
-import {
-  dateFromIso,
-  isoFromDate,
-  metaFromRow,
-} from "../mappers/row-mappers";
+import type { ReportGenerationMetadataRecord, ReportTemplateRecord } from "../records";
+import { dateFromIso, isoFromDate, metaFromRow } from "../mappers/row-mappers";
 import { baseMeta } from "../in-memory/generic-crud";
 import {
   createPostgresCrudRepository,
@@ -235,15 +228,11 @@ export function createPostgresReportingRepos(db: DatabaseExecutor): {
             data.parametersJson ?? existing?.parametersJson ?? "{}",
           ),
           generatedAt: String(
-            data.generatedAt ??
-              existing?.generatedAt ??
-              new Date().toISOString(),
+            data.generatedAt ?? existing?.generatedAt ?? new Date().toISOString(),
           ),
           generatedBy: String(data.generatedBy ?? existing?.generatedBy ?? ""),
           version: String(data.version ?? existing?.version ?? "1"),
-          checksumSha256: String(
-            data.checksumSha256 ?? existing?.checksumSha256 ?? "",
-          ),
+          checksumSha256: String(data.checksumSha256 ?? existing?.checksumSha256 ?? ""),
           byteLength: Number(data.byteLength ?? existing?.byteLength ?? 0),
           preview: Boolean(data.preview ?? existing?.preview ?? false),
         };

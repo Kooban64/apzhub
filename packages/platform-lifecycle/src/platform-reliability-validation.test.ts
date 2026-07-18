@@ -31,56 +31,71 @@ describe("platform reliability validation (PRH-010)", () => {
       );
 
       expect(snapshot.currentState).toBe("initializing");
-      expect(snapshot.readinessGates.find((gate) => gate.gate === "bootstrapping")?.satisfied).toBe(
-        false,
-      );
+      expect(
+        snapshot.readinessGates.find((gate) => gate.gate === "bootstrapping")
+          ?.satisfied,
+      ).toBe(false);
     });
 
     it("predictably stops at configuration-ready when configuration is invalid", () => {
       const consolidated = withMissingConfiguration(createHealthyConsolidatedFixture());
-      const snapshot = buildPlatformLifecycleSnapshot(createLifecycleValidationInput(consolidated));
+      const snapshot = buildPlatformLifecycleSnapshot(
+        createLifecycleValidationInput(consolidated),
+      );
 
       expect(snapshot.currentState).toBe("bootstrapping");
       expect(
-        snapshot.readinessGates.find((gate) => gate.gate === "configuration-ready")?.satisfied,
+        snapshot.readinessGates.find((gate) => gate.gate === "configuration-ready")
+          ?.satisfied,
       ).toBe(false);
     });
 
     it("predictably stops at identity-ready when database is unavailable", () => {
       const consolidated = withDatabaseUnavailable(createHealthyConsolidatedFixture());
-      const snapshot = buildPlatformLifecycleSnapshot(createLifecycleValidationInput(consolidated));
+      const snapshot = buildPlatformLifecycleSnapshot(
+        createLifecycleValidationInput(consolidated),
+      );
 
       expect(snapshot.currentState).toBe("configuration-ready");
-      expect(snapshot.readinessGates.find((gate) => gate.gate === "identity-ready")?.satisfied).toBe(
-        false,
-      );
+      expect(
+        snapshot.readinessGates.find((gate) => gate.gate === "identity-ready")
+          ?.satisfied,
+      ).toBe(false);
     });
 
     it("predictably stops at authorization-ready when authorization fails", () => {
       const consolidated = withAuthorizationFailure(createHealthyConsolidatedFixture());
-      const snapshot = buildPlatformLifecycleSnapshot(createLifecycleValidationInput(consolidated));
+      const snapshot = buildPlatformLifecycleSnapshot(
+        createLifecycleValidationInput(consolidated),
+      );
 
       expect(snapshot.currentState).toBe("identity-ready");
       expect(
-        snapshot.readinessGates.find((gate) => gate.gate === "authorization-ready")?.satisfied,
+        snapshot.readinessGates.find((gate) => gate.gate === "authorization-ready")
+          ?.satisfied,
       ).toBe(false);
     });
 
     it("predictably stops before products-ready when products are unavailable", () => {
       const consolidated = withProductFailure(createHealthyConsolidatedFixture());
-      const snapshot = buildPlatformLifecycleSnapshot(createLifecycleValidationInput(consolidated));
+      const snapshot = buildPlatformLifecycleSnapshot(
+        createLifecycleValidationInput(consolidated),
+      );
 
       expect(snapshot.currentState).not.toBe("operational");
-      expect(snapshot.readinessGates.find((gate) => gate.gate === "products-ready")?.satisfied).toBe(
-        false,
-      );
+      expect(
+        snapshot.readinessGates.find((gate) => gate.gate === "products-ready")
+          ?.satisfied,
+      ).toBe(false);
     });
   });
 
   describe("dependency failures", () => {
     it("marks persistence unhealthy when database fails", () => {
       const consolidated = withDatabaseUnavailable(createHealthyConsolidatedFixture());
-      const snapshot = buildPlatformLifecycleSnapshot(createLifecycleValidationInput(consolidated));
+      const snapshot = buildPlatformLifecycleSnapshot(
+        createLifecycleValidationInput(consolidated),
+      );
       const persistence = snapshot.capabilities.find(
         (entry) => entry.capabilityId === "platform.persistence",
       );
@@ -90,11 +105,14 @@ describe("platform reliability validation (PRH-010)", () => {
 
     it("degrades platform core when redis fails", () => {
       const consolidated = withRedisUnavailable(createHealthyConsolidatedFixture());
-      const snapshot = buildPlatformLifecycleSnapshot(createLifecycleValidationInput(consolidated));
-
-      expect(snapshot.readinessGates.find((gate) => gate.gate === "platform-ready")?.satisfied).toBe(
-        false,
+      const snapshot = buildPlatformLifecycleSnapshot(
+        createLifecycleValidationInput(consolidated),
       );
+
+      expect(
+        snapshot.readinessGates.find((gate) => gate.gate === "platform-ready")
+          ?.satisfied,
+      ).toBe(false);
     });
 
     it("provides recovery guidance for database failure without secrets", () => {
@@ -113,28 +131,39 @@ describe("platform reliability validation (PRH-010)", () => {
   describe("health and readiness degradation", () => {
     it("transitions lifecycle to degraded when health degrades after products ready", () => {
       const consolidated = withReadinessDegraded(createHealthyConsolidatedFixture());
-      const snapshot = buildPlatformLifecycleSnapshot(createLifecycleValidationInput(consolidated));
+      const snapshot = buildPlatformLifecycleSnapshot(
+        createLifecycleValidationInput(consolidated),
+      );
 
       expect(snapshot.currentState).toBe("degraded");
-      expect(snapshot.warnings.some((warning) => warning.includes("degraded"))).toBe(true);
+      expect(snapshot.warnings.some((warning) => warning.includes("degraded"))).toBe(
+        true,
+      );
     });
 
     it("reports tenant isolation degradation when api guard fails", () => {
       const consolidated = withTenantGuardFailure(createHealthyConsolidatedFixture());
-      const snapshot = buildPlatformLifecycleSnapshot(createLifecycleValidationInput(consolidated));
+      const snapshot = buildPlatformLifecycleSnapshot(
+        createLifecycleValidationInput(consolidated),
+      );
       const tenant = snapshot.capabilities.find(
         (entry) => entry.capabilityId === "platform.tenant-isolation",
       );
 
       expect(tenant?.readiness).toBe("degraded");
-      expect(snapshot.readinessGates.find((gate) => gate.gate === "platform-ready")?.satisfied).toBe(
-        false,
-      );
+      expect(
+        snapshot.readinessGates.find((gate) => gate.gate === "platform-ready")
+          ?.satisfied,
+      ).toBe(false);
     });
 
     it("reports traffic governance degradation when disabled", () => {
-      const consolidated = withTrafficGovernanceDisabled(createHealthyConsolidatedFixture());
-      const snapshot = buildPlatformLifecycleSnapshot(createLifecycleValidationInput(consolidated));
+      const consolidated = withTrafficGovernanceDisabled(
+        createHealthyConsolidatedFixture(),
+      );
+      const snapshot = buildPlatformLifecycleSnapshot(
+        createLifecycleValidationInput(consolidated),
+      );
       const traffic = snapshot.capabilities.find(
         (entry) => entry.capabilityId === "platform.traffic-governance",
       );
@@ -145,7 +174,9 @@ describe("platform reliability validation (PRH-010)", () => {
 
   describe("recovery", () => {
     it("enters recovering state during recovery action", () => {
-      const manager = new PlatformLifecycleManager({ now: () => "2026-07-09T08:00:00.000Z" });
+      const manager = new PlatformLifecycleManager({
+        now: () => "2026-07-09T08:00:00.000Z",
+      });
       const degraded = withReadinessDegraded(createHealthyConsolidatedFixture());
       const input = createLifecycleValidationInput(degraded);
 
@@ -155,7 +186,9 @@ describe("platform reliability validation (PRH-010)", () => {
     });
 
     it("deterministically completes recovery when health is restored", () => {
-      const manager = new PlatformLifecycleManager({ now: () => "2026-07-09T08:00:00.000Z" });
+      const manager = new PlatformLifecycleManager({
+        now: () => "2026-07-09T08:00:00.000Z",
+      });
       const degraded = withReadinessDegraded(createHealthyConsolidatedFixture());
       const healthy = createHealthyConsolidatedFixture();
 
@@ -167,7 +200,9 @@ describe("platform reliability validation (PRH-010)", () => {
     });
 
     it("surfaces degraded instead of recovering when health worsens during recovery", () => {
-      const manager = new PlatformLifecycleManager({ now: () => "2026-07-09T08:00:00.000Z" });
+      const manager = new PlatformLifecycleManager({
+        now: () => "2026-07-09T08:00:00.000Z",
+      });
       const degraded = withReadinessDegraded(createHealthyConsolidatedFixture());
       const worse = withDatabaseUnavailable(createHealthyConsolidatedFixture());
 
@@ -180,7 +215,9 @@ describe("platform reliability validation (PRH-010)", () => {
 
   describe("maintenance and graceful shutdown", () => {
     it("enters and exits maintenance mode deterministically", () => {
-      const manager = new PlatformLifecycleManager({ now: () => "2026-07-09T08:00:00.000Z" });
+      const manager = new PlatformLifecycleManager({
+        now: () => "2026-07-09T08:00:00.000Z",
+      });
       const input = createLifecycleValidationInput(createHealthyConsolidatedFixture());
 
       manager.applyAction("enter-maintenance", input);
@@ -191,7 +228,9 @@ describe("platform reliability validation (PRH-010)", () => {
     });
 
     it("supports graceful shutdown to stopped", () => {
-      const manager = new PlatformLifecycleManager({ now: () => "2026-07-09T08:00:00.000Z" });
+      const manager = new PlatformLifecycleManager({
+        now: () => "2026-07-09T08:00:00.000Z",
+      });
       const input = createLifecycleValidationInput(createHealthyConsolidatedFixture());
 
       manager.applyAction("begin-shutdown", input);
@@ -203,7 +242,9 @@ describe("platform reliability validation (PRH-010)", () => {
     });
 
     it("provides operator guidance during shutdown without secrets", () => {
-      const manager = new PlatformLifecycleManager({ now: () => "2026-07-09T08:00:00.000Z" });
+      const manager = new PlatformLifecycleManager({
+        now: () => "2026-07-09T08:00:00.000Z",
+      });
       const input = createLifecycleValidationInput(createHealthyConsolidatedFixture());
 
       manager.applyAction("begin-shutdown", input);
@@ -219,9 +260,9 @@ describe("platform reliability validation (PRH-010)", () => {
       const report = evaluateVersionCompatibility("0.0.1");
 
       expect(report.compatible).toBe(false);
-      expect(report.checks.some((check) => check.id === "law-platform" && !check.compatible)).toBe(
-        true,
-      );
+      expect(
+        report.checks.some((check) => check.id === "law-platform" && !check.compatible),
+      ).toBe(true);
     });
   });
 
@@ -240,8 +281,12 @@ describe("platform reliability validation (PRH-010)", () => {
 
     it("keeps lifecycle state consistent with readiness gates under partial startup", () => {
       const consolidated = withAuthorizationFailure(createHealthyConsolidatedFixture());
-      const snapshot = buildPlatformLifecycleSnapshot(createLifecycleValidationInput(consolidated));
-      const highestUnsatisfied = snapshot.readinessGates.find((gate) => !gate.satisfied)?.gate;
+      const snapshot = buildPlatformLifecycleSnapshot(
+        createLifecycleValidationInput(consolidated),
+      );
+      const highestUnsatisfied = snapshot.readinessGates.find(
+        (gate) => !gate.satisfied,
+      )?.gate;
 
       expect(snapshot.currentState).toBe("identity-ready");
       expect(highestUnsatisfied).toBe("authorization-ready");

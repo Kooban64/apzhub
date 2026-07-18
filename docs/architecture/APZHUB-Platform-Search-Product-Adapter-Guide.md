@@ -23,17 +23,17 @@ interface ProductSearchAdapter {
 
 ## Declared products (no implementations)
 
-| Product id | Notes |
-|------------|-------|
-| `projects` | Projects / tasks capability |
-| `support` | Support requests / KB |
-| `documents` | Document Platform |
-| `testing` | APZ TCMS |
-| `reporting` | Reporting Platform |
-| `workflow` | Future workflow |
-| `analytics` | Future analytics |
-| `identity` | Identity metadata eligible for search |
-| `administration` | Admin catalogue surfaces |
+| Product id       | Notes                                 |
+| ---------------- | ------------------------------------- |
+| `projects`       | Projects / tasks capability           |
+| `support`        | Support requests / KB                 |
+| `documents`      | Document Platform                     |
+| `testing`        | APZ TCMS                              |
+| `reporting`      | Reporting Platform                    |
+| `workflow`       | Future workflow                       |
+| `analytics`      | Future analytics                      |
+| `identity`       | Identity metadata eligible for search |
+| `administration` | Admin catalogue surfaces              |
 
 Use `DECLARED_PRODUCT_SEARCH_ADAPTERS` / `isDeclaredProductSearchAdapter`.
 

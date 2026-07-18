@@ -203,9 +203,9 @@ describe("Meilisearch deep coverage", () => {
       apiKey: "key",
       fetchFn: createMockMeilisearchFetch(),
     });
-    expect(adapter.diagnosticsProvider.redact("Authorization: Bearer abc.def")).toContain(
-      "[redacted]",
-    );
+    expect(
+      adapter.diagnosticsProvider.redact("Authorization: Bearer abc.def"),
+    ).toContain("[redacted]");
     expect(adapter.diagnosticsProvider.assertSafe({ apiKey: "x" })).toBe(false);
     expect(adapter.diagnosticsProvider.assertSafe({ ok: true })).toBe(true);
   });

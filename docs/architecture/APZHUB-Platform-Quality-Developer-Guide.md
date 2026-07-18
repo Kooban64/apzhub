@@ -1,6 +1,6 @@
 # APZHUB Platform Quality Developer Guide
 
-**Milestone:** APZTCMS-014  
+**Milestone:** APZTCMS-014
 
 ## Compose (tests / platform wiring)
 

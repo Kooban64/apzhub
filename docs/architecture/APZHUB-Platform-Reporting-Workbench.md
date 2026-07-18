@@ -9,12 +9,12 @@ Product-neutral, read-only administration surface for the shared Reporting Platf
 
 ## Sections
 
-| Section | Path | Content |
-|---------|------|---------|
-| Templates | `/workspace/reporting/templates` | Built-in / registered templates |
-| Generated Reports | `/workspace/reporting/generations` | Generation metadata list |
-| History | `/workspace/reporting/history` | Same metadata stream (history focus) |
-| Formats | `/workspace/reporting/formats` | Supported output formats |
+| Section           | Path                               | Content                              |
+| ----------------- | ---------------------------------- | ------------------------------------ |
+| Templates         | `/workspace/reporting/templates`   | Built-in / registered templates      |
+| Generated Reports | `/workspace/reporting/generations` | Generation metadata list             |
+| History           | `/workspace/reporting/history`     | Same metadata stream (history focus) |
+| Formats           | `/workspace/reporting/formats`     | Supported output formats             |
 
 ## Commands
 

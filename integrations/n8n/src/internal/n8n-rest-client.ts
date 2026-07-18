@@ -137,9 +137,7 @@ export class N8nRestClient {
     );
   }
 
-  async listUsers(
-    context: IntegrationRequestContext,
-  ): Promise<N8nUsersListResponse> {
+  async listUsers(context: IntegrationRequestContext): Promise<N8nUsersListResponse> {
     return this.request(context, "GET", "/users");
   }
 
@@ -173,11 +171,7 @@ export class N8nRestClient {
     context: IntegrationRequestContext,
     variableId: string,
   ): Promise<N8nVariableMetadataRecord> {
-    return this.request(
-      context,
-      "GET",
-      `/variables/${encodeURIComponent(variableId)}`,
-    );
+    return this.request(context, "GET", `/variables/${encodeURIComponent(variableId)}`);
   }
 
   private async request<T>(
@@ -195,9 +189,7 @@ export class N8nRestClient {
     if (auth.kind === "api_key") {
       headers["X-N8N-API-KEY"] = auth.token;
     } else {
-      const token = Buffer.from(`${auth.username}:${auth.password}`).toString(
-        "base64",
-      );
+      const token = Buffer.from(`${auth.username}:${auth.password}`).toString("base64");
       headers.Authorization = `Basic ${token}`;
     }
 

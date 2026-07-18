@@ -30,22 +30,22 @@ Platform packages (identity, authorization, runtime) + existing health loaders
 
 ## Navigation
 
-| Section | Route | Data source |
-| ------- | ----- | ----------- |
-| Dashboard | `/workspace/administration` | `GET /api/platform/v1/operations/summary` |
-| Tenants | `.../tenants` | `GET /api/platform/v1/tenants` |
-| Users | `.../users` | `GET /api/platform/v1/users` |
-| Roles | `.../roles` | `GET /api/platform/v1/roles` |
-| Permissions | `.../permissions` | `GET /api/platform/v1/permissions` |
-| Products | `.../products` | `GET /api/platform/v1/products` |
-| Services | `.../services` | `GET /api/platform/v1/services` |
-| Modules | `.../modules` | `GET /api/platform/v1/modules` |
-| Provisioning | `.../provisioning` | `GET /api/platform/v1/provisioning` |
-| Diagnostics | `.../diagnostics` | Identity + authorization diagnostics APIs |
-| Audit | `.../audit` | `GET /api/platform/v1/audit` |
-| Health | `.../health` | Operations summary health aggregate |
-| Configuration | `.../configuration` | `GET /api/platform/v1/operations/configuration` |
-| Feature Flags | `.../feature-flags` | Placeholder (M8-05) |
+| Section       | Route                       | Data source                                     |
+| ------------- | --------------------------- | ----------------------------------------------- |
+| Dashboard     | `/workspace/administration` | `GET /api/platform/v1/operations/summary`       |
+| Tenants       | `.../tenants`               | `GET /api/platform/v1/tenants`                  |
+| Users         | `.../users`                 | `GET /api/platform/v1/users`                    |
+| Roles         | `.../roles`                 | `GET /api/platform/v1/roles`                    |
+| Permissions   | `.../permissions`           | `GET /api/platform/v1/permissions`              |
+| Products      | `.../products`              | `GET /api/platform/v1/products`                 |
+| Services      | `.../services`              | `GET /api/platform/v1/services`                 |
+| Modules       | `.../modules`               | `GET /api/platform/v1/modules`                  |
+| Provisioning  | `.../provisioning`          | `GET /api/platform/v1/provisioning`             |
+| Diagnostics   | `.../diagnostics`           | Identity + authorization diagnostics APIs       |
+| Audit         | `.../audit`                 | `GET /api/platform/v1/audit`                    |
+| Health        | `.../health`                | Operations summary health aggregate             |
+| Configuration | `.../configuration`         | `GET /api/platform/v1/operations/configuration` |
+| Feature Flags | `.../feature-flags`         | Placeholder (M8-05)                             |
 
 Manifests: `packages/workbench-framework/manifests/platform-operations-*/module.yaml`
 
@@ -59,16 +59,16 @@ All operations sections require `platform.nav.administration.view`. Platform-adm
 
 ## API surface (M8-03 additions)
 
-| Route | Purpose |
-| ----- | ------- |
-| `GET /api/platform/v1/operations/summary` | Dashboard aggregate |
-| `GET /api/platform/v1/operations/configuration` | Read-only environment summary |
-| `GET /api/platform/v1/users` | User directory + effective permissions |
-| `GET /api/platform/v1/modules` | Runtime module registry |
-| `GET /api/platform/v1/services` | Runtime service registry |
-| `GET /api/platform/v1/products` | Product registry |
-| `GET /api/platform/v1/provisioning` | Tenant provisioning status |
-| `GET /api/platform/v1/audit` | Authorization + tenant audit signals |
+| Route                                           | Purpose                                |
+| ----------------------------------------------- | -------------------------------------- |
+| `GET /api/platform/v1/operations/summary`       | Dashboard aggregate                    |
+| `GET /api/platform/v1/operations/configuration` | Read-only environment summary          |
+| `GET /api/platform/v1/users`                    | User directory + effective permissions |
+| `GET /api/platform/v1/modules`                  | Runtime module registry                |
+| `GET /api/platform/v1/services`                 | Runtime service registry               |
+| `GET /api/platform/v1/products`                 | Product registry                       |
+| `GET /api/platform/v1/provisioning`             | Tenant provisioning status             |
+| `GET /api/platform/v1/audit`                    | Authorization + tenant audit signals   |
 
 ---
 

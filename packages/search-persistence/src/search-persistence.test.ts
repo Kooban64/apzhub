@@ -20,25 +20,19 @@ import {
   listSearchAudits,
 } from "./index";
 
-const ctx = (
-  overrides: Partial<SearchRequestContext> = {},
-): SearchRequestContext => ({
+const ctx = (overrides: Partial<SearchRequestContext> = {}): SearchRequestContext => ({
   correlationId: "corr-1",
   actorUserId: "user_1",
   tenantId: "tenant_a",
   organisationId: "org_a",
-  permissions: [
-    "search.*",
-  ],
+  permissions: ["search.*"],
   ...overrides,
 });
 
 function registration(
   overrides: Partial<SearchProviderRegistrationInput> = {},
 ): SearchProviderRegistrationInput {
-  const providerId = asSearchProviderId(
-    overrides.providerId ?? "prov_opensearch_1",
-  );
+  const providerId = asSearchProviderId(overrides.providerId ?? "prov_opensearch_1");
   const kind = overrides.kind ?? "opensearch";
   const version = overrides.version ?? "1.0.0";
   const baseConfig = {
@@ -95,10 +89,7 @@ describe("@apzhub/search-persistence (APZSEARCH-003)", () => {
     const { gateway, registry, persistence } = foundation;
     const context = ctx();
 
-    await gateway.searchProviders.registerProvider(
-      context,
-      registration(),
-    );
+    await gateway.searchProviders.registerProvider(context, registration());
     const listed = await gateway.searchProviders.listProviders(context);
     expect(listed).toHaveLength(1);
     expect(listed[0]?.kind).toBe("opensearch");
@@ -139,12 +130,8 @@ describe("@apzhub/search-persistence (APZSEARCH-003)", () => {
     expect(await gateway.searchProviders.listProviders(context)).toHaveLength(0);
 
     const audits = await listSearchAudits(persistence, context);
-    expect(audits.some((a) => a.action === "search.provider.registered")).toBe(
-      true,
-    );
-    expect(
-      audits.some((a) => a.action === "search.provider.unregistered"),
-    ).toBe(true);
+    expect(audits.some((a) => a.action === "search.provider.registered")).toBe(true);
+    expect(audits.some((a) => a.action === "search.provider.unregistered")).toBe(true);
   });
 
   it("enforces authorization on provider/config/diagnostics/audit", async () => {
@@ -173,7 +160,9 @@ describe("@apzhub/search-persistence (APZSEARCH-003)", () => {
     const foundation = createSearchPlatformFoundationForTest({
       allowInMemoryPersistence: true,
     });
-    const context = ctx({ permissions: ["search.configuration", "search.diagnostics"] });
+    const context = ctx({
+      permissions: ["search.configuration", "search.diagnostics"],
+    });
     const updated = await foundation.gateway.searchConfigurations.putConfiguration!(
       context,
       {
@@ -187,23 +176,20 @@ describe("@apzhub/search-persistence (APZSEARCH-003)", () => {
       await foundation.gateway.searchConfigurations.getConfiguration!(context);
     expect(loaded!.defaultPageSize).toBe(10);
 
-    const versions =
-      await foundation.persistence.configurationVersions.list(
-        {
-          tenantId: context.tenantId,
-          organisationId: context.organisationId,
-          actorUserId: context.actorUserId,
-          permissions: context.permissions,
-        },
-        (
-          await foundation.persistence.configurations.get({
-            tenantId: context.tenantId,
-            organisationId: context.organisationId,
-            actorUserId: context.actorUserId,
-            permissions: context.permissions,
-          })
-        )!.id,
-      );
+    const versions = await foundation.persistence.configurationVersions.list(
+      {
+        tenantId: context.tenantId,
+        organisationId: context.organisationId,
+        actorUserId: context.actorUserId,
+        permissions: context.permissions,
+      },
+      (await foundation.persistence.configurations.get({
+        tenantId: context.tenantId,
+        organisationId: context.organisationId,
+        actorUserId: context.actorUserId,
+        permissions: context.permissions,
+      }))!.id,
+    );
     expect(versions.length).toBeGreaterThanOrEqual(1);
 
     expect(
@@ -242,8 +228,7 @@ describe("@apzhub/search-persistence (APZSEARCH-003)", () => {
     expect(["available", "degraded", "unavailable", "unknown"]).toContain(
       health.status,
     );
-    const stats =
-      await foundation.gateway.searchStatistics.getStatistics(context);
+    const stats = await foundation.gateway.searchStatistics.getStatistics(context);
     expect(stats.declaredIndexCount).toBe(0);
   });
 
@@ -336,9 +321,7 @@ describe("@apzhub/search-persistence (APZSEARCH-003)", () => {
     expect(await persistence.collections.list(repoCtx)).toHaveLength(1);
     expect(await persistence.sources.list(repoCtx)).toHaveLength(1);
     expect(await persistence.scopes.list(repoCtx)).toHaveLength(1);
-    expect((await persistence.metadata.get(repoCtx, "meta_1"))?.title).toBe(
-      "Alpha",
-    );
+    expect((await persistence.metadata.get(repoCtx, "meta_1"))?.title).toBe("Alpha");
     expect((await persistence.sessions.get(repoCtx, "sess_1"))?.actorUserId).toBe(
       "user_1",
     );
@@ -426,13 +409,9 @@ describe("@apzhub/search-persistence (APZSEARCH-003)", () => {
     const health = await Promise.resolve(provider.getHealth(context));
     expect(health.status).toBe("unavailable");
     expect(health.message).toMatch(/execution unavailable/);
-    const capabilities = await Promise.resolve(
-      provider.getCapabilities(context),
-    );
+    const capabilities = await Promise.resolve(provider.getCapabilities(context));
     expect(capabilities.semantic).toBe(false);
-    const diagnostics = await Promise.resolve(
-      provider.getDiagnostics(context),
-    );
+    const diagnostics = await Promise.resolve(provider.getDiagnostics(context));
     expect(diagnostics.initialised).toBe(true);
     const queryValidation = await Promise.resolve(
       provider.validateQuery(context, { keywords: "ok" }),
@@ -448,7 +427,10 @@ describe("@apzhub/search-persistence (APZSEARCH-003)", () => {
       allowInMemoryPersistence: true,
     });
     const registry = createSearchProviderRegistry(persistence);
-    await registry.register(ctx(), registration({ providerId: asSearchProviderId("prov_2"), active: false }));
+    await registry.register(
+      ctx(),
+      registration({ providerId: asSearchProviderId("prov_2"), active: false }),
+    );
     expect(await registry.getActiveProviderId(ctx())).toBeNull();
     await registry.setActiveProvider(ctx(), asSearchProviderId("prov_2"));
     expect(await registry.getActiveProviderId(ctx())).toBe("prov_2");

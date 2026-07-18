@@ -34,7 +34,14 @@ describe("Zammad OSS-100-08 SDK adoption", () => {
       },
       delete: async () => undefined,
       validateConfiguration: () => ({ ok: true, issues: [] as string[] }),
-      supportedOperations: () => ["list", "get", "create", "update", "delete", "validate"],
+      supportedOperations: () => [
+        "list",
+        "get",
+        "create",
+        "update",
+        "delete",
+        "validate",
+      ],
     } as unknown as ZammadWebhookService;
 
     const manager = asZammadWebhookManager(service);

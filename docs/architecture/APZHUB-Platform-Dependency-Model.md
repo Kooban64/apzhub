@@ -1,6 +1,6 @@
 # APZHUB Platform Dependency Model
 
-**Milestone:** APZTCMS-014  
+**Milestone:** APZTCMS-014
 
 ## Edges
 

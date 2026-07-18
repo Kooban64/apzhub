@@ -24,13 +24,13 @@ PCv2-01 requires a permanent architectural baseline for production readiness wit
 
 ### Open decisions resolved (PRH-001)
 
-| ID | Decision | Resolution |
-|----|----------|------------|
-| Q-PRH-01 | Bootstrap package name | `@apzhub/platform-bootstrap` (new package) |
-| Q-PRH-02 | Per-app CSP policies | Deferred to PRH-002 |
-| Q-PRH-03 | Rate limit defaults | Deferred to PRH-005 (unchanged in PRH-001) |
-| Q-PRH-04 | RLS test database | Deferred to PRH-007 |
-| Q-PRH-05 | CSP report endpoint auth | Deferred to PRH-002 |
+| ID       | Decision                 | Resolution                                 |
+| -------- | ------------------------ | ------------------------------------------ |
+| Q-PRH-01 | Bootstrap package name   | `@apzhub/platform-bootstrap` (new package) |
+| Q-PRH-02 | Per-app CSP policies     | Deferred to PRH-002                        |
+| Q-PRH-03 | Rate limit defaults      | Deferred to PRH-005 (unchanged in PRH-001) |
+| Q-PRH-04 | RLS test database        | Deferred to PRH-007                        |
+| Q-PRH-05 | CSP report endpoint auth | Deferred to PRH-002                        |
 
 ## Architecture
 

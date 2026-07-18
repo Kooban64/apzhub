@@ -79,7 +79,8 @@ export class HttpIntegrationClient implements IntegrationClient {
         status: response.status,
         data,
         headers: response.headers,
-        durationMs: response.durationMs > 0 ? response.durationMs : Date.now() - startedAt,
+        durationMs:
+          response.durationMs > 0 ? response.durationMs : Date.now() - startedAt,
         correlationId: options.context.correlationId,
       };
     } catch (error) {
@@ -98,9 +99,7 @@ function decodeIntegrationData<TResponse>(
 ): TResponse {
   // Parity with PlaneFetchClient / ZammadFetchClient: text() then JSON.parse or {}
   if (response.text !== undefined) {
-    return response.text
-      ? (JSON.parse(response.text) as TResponse)
-      : ({} as TResponse);
+    return response.text ? (JSON.parse(response.text) as TResponse) : ({} as TResponse);
   }
 
   if (response.kind === "empty") {

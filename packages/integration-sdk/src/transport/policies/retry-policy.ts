@@ -16,7 +16,9 @@ const DEFAULT_RETRYABLE_METHODS: readonly TransportHttpMethod[] = [
 
 const DEFAULT_RETRYABLE_STATUS = [408, 425, 429, 500, 502, 503, 504] as const;
 
-function resolveOptions(options: RetryPolicyOptions = {}): Required<RetryPolicyOptions> {
+function resolveOptions(
+  options: RetryPolicyOptions = {},
+): Required<RetryPolicyOptions> {
   return {
     maxAttempts: options.maxAttempts ?? 1,
     backoff: options.backoff ?? "exponential",

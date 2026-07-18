@@ -5,14 +5,14 @@
 ## Gateway surface
 
 ```ts
-gateway.testing.pipelines              // SoR register/import/link
-gateway.testing.pipelineRepositories   // live getRepository
-gateway.testing.pipelineWorkflows      // live list/get workflows
-gateway.testing.pipelineRuns           // live list/get runs
-gateway.testing.pipelineArtifacts      // live listArtifacts
-gateway.testing.pipelineJobs           // live list/get jobs
-gateway.testing.pipelineSteps          // live listSteps
-gateway.testing.pipelineSummaries      // live retrieveSummary
+gateway.testing.pipelines; // SoR register/import/link
+gateway.testing.pipelineRepositories; // live getRepository
+gateway.testing.pipelineWorkflows; // live list/get workflows
+gateway.testing.pipelineRuns; // live list/get runs
+gateway.testing.pipelineArtifacts; // live listArtifacts
+gateway.testing.pipelineJobs; // live list/get jobs
+gateway.testing.pipelineSteps; // live listSteps
+gateway.testing.pipelineSummaries; // live retrieveSummary
 ```
 
 All facets are wrapped by `wrapTestingPlatformGatewayWithPipeline` with service keys:

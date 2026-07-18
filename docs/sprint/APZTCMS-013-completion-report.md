@@ -60,25 +60,25 @@ Domain/platform Testing packages strong (contracts ~97%, services ~97%, platform
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| typecheck (TCMS domain) | PASS |
-| lint (TCMS domain) | PASS |
-| tests (TCMS stack) | PASS 478 |
-| coverage (packages) | PASS (persistence weakest ~80%) |
-| OpenAPI | PASS |
-| Playwright live | SKIPPED |
-| Architecture / Dependency / Boundary | PASS |
-| Security | PASS |
-| Performance baseline | COLLECTED |
-| Regressions | PASS 417 |
+| Gate                                 | Result                          |
+| ------------------------------------ | ------------------------------- |
+| typecheck (TCMS domain)              | PASS                            |
+| lint (TCMS domain)                   | PASS                            |
+| tests (TCMS stack)                   | PASS 478                        |
+| coverage (packages)                  | PASS (persistence weakest ~80%) |
+| OpenAPI                              | PASS                            |
+| Playwright live                      | SKIPPED                         |
+| Architecture / Dependency / Boundary | PASS                            |
+| Security                             | PASS                            |
+| Performance baseline                 | COLLECTED                       |
+| Regressions                          | PASS 417                        |
 
 ## Technical Debt
 
-- Live Playwright certification re-run  
-- apps/web coverage instrumentation optional expansion  
-- Plane/Zammad / harness typecheck debt  
-- APZTCMS-012 typed-client collection gaps  
+- Live Playwright certification re-run
+- apps/web coverage instrumentation optional expansion
+- Plane/Zammad / harness typecheck debt
+- APZTCMS-012 typed-client collection gaps
 - platform-services Testing test brand typing
 
 ## Known Limitations

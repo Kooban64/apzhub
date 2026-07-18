@@ -41,7 +41,11 @@ describe("ExecutiveDashboardPanel", () => {
           filters={DEFAULT_EXECUTIVE_DASHBOARD_FILTERS}
         />,
       );
-      expect(screen.getByTestId(`dashboard-${category === "manual-testing" ? "manual" : category === "historical-trends" ? "historical" : category === "release-readiness" ? "release" : category}`)).toBeTruthy();
+      expect(
+        screen.getByTestId(
+          `dashboard-${category === "manual-testing" ? "manual" : category === "historical-trends" ? "historical" : category === "release-readiness" ? "release" : category}`,
+        ),
+      ).toBeTruthy();
     },
   );
 

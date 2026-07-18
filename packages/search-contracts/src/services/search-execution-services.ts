@@ -33,8 +33,7 @@ export type PlatformSearchExecutionCapabilityId =
   typeof PLATFORM_SEARCH_EXECUTION_CAPABILITY_ID;
 
 /** Alias kept for clarity in resolver / registry docs. */
-export type SearchEngineExecutionCapabilityId =
-  PlatformSearchExecutionCapabilityId;
+export type SearchEngineExecutionCapabilityId = PlatformSearchExecutionCapabilityId;
 
 export type SearchExecutionPlaneReadiness = {
   readonly executionEnabled: boolean;
@@ -130,9 +129,7 @@ export interface SearchExecutionService {
 }
 
 export interface SearchIndexService {
-  list(
-    context: SearchRequestContext,
-  ): Promise<readonly SearchIndex[]>;
+  list(context: SearchRequestContext): Promise<readonly SearchIndex[]>;
   get(
     context: SearchRequestContext,
     indexId: SearchIndexId | string,
@@ -146,10 +143,7 @@ export interface SearchIndexService {
     indexId: SearchIndexId | string,
     input: SearchIndexUpdateInput,
   ): Promise<SearchIndex>;
-  delete(
-    context: SearchRequestContext,
-    indexId: SearchIndexId | string,
-  ): Promise<void>;
+  delete(context: SearchRequestContext, indexId: SearchIndexId | string): Promise<void>;
 }
 
 export interface SearchDocumentIndexingService {
@@ -168,24 +162,14 @@ export interface SearchDocumentIndexingService {
 }
 
 export interface SearchExecutionHealthService {
-  getHealth(
-    context: SearchRequestContext,
-  ): Promise<SearchHealth>;
-  getReadiness(
-    context: SearchRequestContext,
-  ): Promise<SearchExecutionPlaneReadiness>;
+  getHealth(context: SearchRequestContext): Promise<SearchHealth>;
+  getReadiness(context: SearchRequestContext): Promise<SearchExecutionPlaneReadiness>;
 }
 
 export interface SearchExecutionDiagnosticsService {
-  getDiagnostics(
-    context: SearchRequestContext,
-  ): Promise<SearchDiagnostics>;
-  getStatistics(
-    context: SearchRequestContext,
-  ): Promise<SearchStatistics>;
-  getCapabilities(
-    context: SearchRequestContext,
-  ): Promise<SearchCapabilities>;
+  getDiagnostics(context: SearchRequestContext): Promise<SearchDiagnostics>;
+  getStatistics(context: SearchRequestContext): Promise<SearchStatistics>;
+  getCapabilities(context: SearchRequestContext): Promise<SearchCapabilities>;
 }
 
 /**
@@ -202,10 +186,7 @@ export type SearchExecutionGateway = {
 
 /** Security filter applied server-side; clients cannot strip these. */
 export type SearchSecurityFilterKind =
-  | "tenant"
-  | "organisation"
-  | "classification"
-  | "permission";
+  "tenant" | "organisation" | "classification" | "permission";
 
 export type SearchSecurityFilter = {
   readonly kind: SearchSecurityFilterKind;
@@ -214,8 +195,7 @@ export type SearchSecurityFilter = {
 };
 
 export type SearchTenantIsolationStrategy =
-  | "shared_index_mandatory_tenant_filters"
-  | "tenant_scoped_indexes";
+  "shared_index_mandatory_tenant_filters" | "tenant_scoped_indexes";
 
 export type SearchTenantIsolationPolicy = {
   readonly strategy: SearchTenantIsolationStrategy;

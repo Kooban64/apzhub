@@ -59,7 +59,8 @@ function buildOperatorMessage(
 ): string {
   const op = (operation ?? "").toLowerCase();
   if (op.includes("approval")) {
-    if (category === "not_found") return "GitHub Actions approvals endpoint unavailable";
+    if (category === "not_found")
+      return "GitHub Actions approvals endpoint unavailable";
     return "GitHub Actions approvals request failed";
   }
   if (op.includes("rate")) {

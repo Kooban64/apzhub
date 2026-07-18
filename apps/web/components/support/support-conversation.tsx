@@ -18,7 +18,8 @@ function articleBorderClass(article: SupportArticle): string {
 
 function articleKindLabel(article: SupportArticle): string {
   if (article.senderType === "system") return "System";
-  if (article.visibility === "internal" || article.channel === "note") return "Internal";
+  if (article.visibility === "internal" || article.channel === "note")
+    return "Internal";
   return "Public";
 }
 
@@ -29,7 +30,10 @@ export function SupportConversation({
 }) {
   if (articles.length === 0) {
     return (
-      <p className="text-sm text-[var(--color-muted-foreground)]" data-testid="support-conversation-empty">
+      <p
+        className="text-sm text-[var(--color-muted-foreground)]"
+        data-testid="support-conversation-empty"
+      >
         No conversation articles yet.
       </p>
     );
@@ -58,7 +62,9 @@ export function SupportConversation({
               </span>
               <span>Channel: {article.channel}</span>
               <span>
-                {article.author.displayName ?? article.author.email ?? article.senderType}
+                {article.author.displayName ??
+                  article.author.email ??
+                  article.senderType}
               </span>
               <span>{formatSupportDate(article.createdAt)}</span>
             </div>

@@ -45,14 +45,14 @@ Define the **connection lifecycle** managed by `ConnectionManager` in the Platfo
                     └─────────────┘
 ```
 
-| State | Meaning | Requests allowed |
-|-------|---------|------------------|
-| `idle` | Pooled connection available | Yes — after transition to ready |
-| `connecting` | Auth or handshake in progress | No — wait or timeout |
-| `ready` | Authenticated, probe passed | Yes |
-| `degraded` | Partial failure — cached auth or elevated latency | Read-only if policy allows |
-| `failed` | Unrecoverable for tenant | No — fail fast |
-| `closed` | Drained on disable/shutdown | No |
+| State        | Meaning                                           | Requests allowed                |
+| ------------ | ------------------------------------------------- | ------------------------------- |
+| `idle`       | Pooled connection available                       | Yes — after transition to ready |
+| `connecting` | Auth or handshake in progress                     | No — wait or timeout            |
+| `ready`      | Authenticated, probe passed                       | Yes                             |
+| `degraded`   | Partial failure — cached auth or elevated latency | Read-only if policy allows      |
+| `failed`     | Unrecoverable for tenant                          | No — fail fast                  |
+| `closed`     | Drained on disable/shutdown                       | No                              |
 
 ---
 
@@ -91,10 +91,10 @@ All in-flight requests on invalidated connection fail with `authentication` or `
 
 Each connection is scoped to:
 
-| Dimension | Required |
-|-----------|----------|
-| `tenantId` | Yes |
-| `integrationId` | Yes |
+| Dimension       | Required                                |
+| --------------- | --------------------------------------- |
+| `tenantId`      | Yes                                     |
+| `integrationId` | Yes                                     |
 | `vendorScopeId` | When provisioned (workspace, org, etc.) |
 
 Cross-tenant connection reuse is **prohibited**.
@@ -103,13 +103,13 @@ Cross-tenant connection reuse is **prohibited**.
 
 ## Pooling strategy
 
-| Setting | Default | Notes |
-|---------|---------|-------|
-| Max connections per tenant | 4 | Configurable per integration |
-| Idle timeout | 5 min | Vendor-dependent tuning |
-| Auth refresh buffer | 60 s before expiry | Proactive refresh |
-| Connect timeout | 10 s | Per 010 |
-| Request timeout | 30 s | Override per call |
+| Setting                    | Default            | Notes                        |
+| -------------------------- | ------------------ | ---------------------------- |
+| Max connections per tenant | 4                  | Configurable per integration |
+| Idle timeout               | 5 min              | Vendor-dependent tuning      |
+| Auth refresh buffer        | 60 s before expiry | Proactive refresh            |
+| Connect timeout            | 10 s               | Per 010                      |
+| Request timeout            | 30 s               | Override per call            |
 
 Long-running operations use async jobs (012) — not held connections.
 
@@ -117,12 +117,12 @@ Long-running operations use async jobs (012) — not held connections.
 
 ## Transport-specific behaviour
 
-| Transport | Connection semantics |
-|-----------|---------------------|
-| REST | Pooled HTTP keep-alive via SDK client |
-| Webhook | No outbound connection — inbound only; signature verification per request |
-| Polling | Scheduled worker acquires connection per poll cycle |
-| GraphQL (future) | Same pool as REST; single endpoint |
+| Transport        | Connection semantics                                                      |
+| ---------------- | ------------------------------------------------------------------------- |
+| REST             | Pooled HTTP keep-alive via SDK client                                     |
+| Webhook          | No outbound connection — inbound only; signature verification per request |
+| Polling          | Scheduled worker acquires connection per poll cycle                       |
+| GraphQL (future) | Same pool as REST; single endpoint                                        |
 
 ---
 

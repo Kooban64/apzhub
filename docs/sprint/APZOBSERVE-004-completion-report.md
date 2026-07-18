@@ -75,19 +75,19 @@ Semantic headings, toolbar labels, table captions, keyboard row activation (Ente
 
 ## Playwright result
 
-| Check | Result |
-| --- | --- |
-| Spec present | `apzobserve-004-observe-workbench.spec.ts` |
-| `--list` | PASS |
+| Check                  | Result                                                                                                                                              |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Spec present           | `apzobserve-004-observe-workbench.spec.ts`                                                                                                          |
+| `--list`               | PASS                                                                                                                                                |
 | Live webServer journey | **LIMITED** — pre-existing Next.js `testing/traceability/[relationshipId]` vs `[resourceType]` slug conflict (same limitation as APZSEARCH-007/008) |
 
 ## Coverage
 
-| Metric | Workbench components |
-| --- | --- |
-| Lines | **99.65%** |
-| Functions | **100%** |
-| Branches | **95.55%** |
+| Metric    | Workbench components |
+| --------- | -------------------- |
+| Lines     | **99.65%**           |
+| Functions | **100%**             |
+| Branches  | **95.55%**           |
 
 See [APZOBSERVE-004 Coverage Baseline](../reviews/APZOBSERVE-004-coverage-baseline.md).
 
@@ -97,16 +97,16 @@ See [APZOBSERVE-004 Coverage Baseline](../reviews/APZOBSERVE-004-coverage-baseli
 
 ## Quality gates
 
-| Gate | Result |
-| --- | --- |
-| Vitest Workbench suite | PASS |
-| Scoped coverage ≥95% lines/functions | PASS |
-| `audit:observe-workbench` | PASS |
-| `audit:observe-foundation` | PASS |
-| `audit:observe-platform-services` | PASS |
-| `audit:observe-http-client` | PASS |
-| `openapi:validate:platform` | PASS |
-| Playwright journey | LIMITED (documented; not introduced by this milestone) |
+| Gate                                 | Result                                                 |
+| ------------------------------------ | ------------------------------------------------------ |
+| Vitest Workbench suite               | PASS                                                   |
+| Scoped coverage ≥95% lines/functions | PASS                                                   |
+| `audit:observe-workbench`            | PASS                                                   |
+| `audit:observe-foundation`           | PASS                                                   |
+| `audit:observe-platform-services`    | PASS                                                   |
+| `audit:observe-http-client`          | PASS                                                   |
+| `openapi:validate:platform`          | PASS                                                   |
+| Playwright journey                   | LIMITED (documented; not introduced by this milestone) |
 
 ## Known limitations
 

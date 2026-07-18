@@ -129,7 +129,9 @@ describe("SupportRequestCreateView", () => {
     await user.click(screen.getByTestId("support-create-submit"));
 
     await waitFor(() => expect(screen.getByRole("alert")).toBeTruthy());
-    expect(screen.getByRole("alert").textContent?.toLowerCase()).not.toContain("zammad");
+    expect(screen.getByRole("alert").textContent?.toLowerCase()).not.toContain(
+      "zammad",
+    );
 
     await user.click(screen.getByRole("button", { name: "Cancel" }));
     expect(push).toHaveBeenCalledWith("/workspace/support/requests");

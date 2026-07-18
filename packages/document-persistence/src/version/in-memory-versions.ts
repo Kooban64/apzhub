@@ -6,7 +6,6 @@
 import type {
   DocumentContentVersionRecord,
   DocumentId,
-  DocumentRequestContext,
   DocumentStorageObjectRecord,
   DocumentVersionId,
 } from "@apzhub/document-contracts";
@@ -66,8 +65,7 @@ export function createInMemoryDocumentVersionRepositories(
       async listByDocument(ctx, documentId: DocumentId) {
         return [...stores.versions.values()]
           .filter(
-            (row) =>
-              row.tenantId === ctx.tenantId && row.documentId === documentId,
+            (row) => row.tenantId === ctx.tenantId && row.documentId === documentId,
           )
           .sort((a, b) => a.versionNumber - b.versionNumber);
       },
@@ -116,8 +114,7 @@ export function createInMemoryDocumentVersionRepositories(
       async getByVersion(ctx, versionId: DocumentVersionId) {
         return (
           [...stores.storageObjects.values()].find(
-            (row) =>
-              row.tenantId === ctx.tenantId && row.versionId === versionId,
+            (row) => row.tenantId === ctx.tenantId && row.versionId === versionId,
           ) ?? null
         );
       },

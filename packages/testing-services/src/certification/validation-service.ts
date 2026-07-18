@@ -18,7 +18,10 @@ export function createCertificationValidationService(
 ): CertificationValidationService {
   return {
     assertTransitionAllowed(from, to) {
-      assertCertificationTransition(from as CertificationStatus, to as CertificationStatus);
+      assertCertificationTransition(
+        from as CertificationStatus,
+        to as CertificationStatus,
+      );
     },
     async assertRequiredGatesSatisfied(ctx, certificationRecordId) {
       assertHasPermission(ctx, "certification.view");
@@ -32,9 +35,8 @@ export function createCertificationValidationService(
       const rule =
         rules.items.find((r) => r.certificationRecordId === certificationRecordId) ??
         rules.items.find((r) => r.enabled);
-      const required = rule?.requiredGateKeys ??
-        rt.configuration?.certification.defaultGateKeys ??
-        [];
+      const required =
+        rule?.requiredGateKeys ?? rt.configuration?.certification.defaultGateKeys ?? [];
       if (required.length === 0) return;
 
       const evals = await rt.persistence.certificationGateEvaluations.list(rctx);
@@ -84,11 +86,13 @@ export function createCertificationValidationService(
           const decision = decisions.find((d) => d.stageKey === stage.stageKey);
           if (!decision) break;
           if (decision.status !== "approved" && i < sorted.length - 1) {
-            const laterApproved = sorted.slice(i + 1).some((s) =>
-              decisions.some(
-                (d) => d.stageKey === s.stageKey && d.status === "approved",
-              ),
-            );
+            const laterApproved = sorted
+              .slice(i + 1)
+              .some((s) =>
+                decisions.some(
+                  (d) => d.stageKey === s.stageKey && d.status === "approved",
+                ),
+              );
             if (laterApproved) {
               throw new DomainRuleError(
                 "approval_order_violation",

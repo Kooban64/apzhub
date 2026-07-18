@@ -14,8 +14,7 @@ export const PLATFORM_ADMIN_PERMISSIONS = [
   "admin.registration",
 ] as const;
 
-export type PlatformAdminPermission =
-  (typeof PLATFORM_ADMIN_PERMISSIONS)[number];
+export type PlatformAdminPermission = (typeof PLATFORM_ADMIN_PERMISSIONS)[number];
 
 export const PLATFORM_ADMIN_PERMISSION_WILDCARD = "admin.*" as const;
 

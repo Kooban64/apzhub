@@ -237,7 +237,8 @@ export interface Baseline extends AuditFields {
   readonly id: BaselineId;
   readonly tenantId: string;
   readonly scope: EngineeringScope;
-  readonly kind: "last_release" | "last_month" | "last_quarter" | "rolling_average" | "custom";
+  readonly kind:
+    "last_release" | "last_month" | "last_quarter" | "rolling_average" | "custom";
   readonly metricKey: string;
   readonly value: number;
   readonly sourceSnapshotId?: string;

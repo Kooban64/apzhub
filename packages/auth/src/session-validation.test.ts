@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { getSessionPolicyPostureSummary, getSessionSecurityDiagnostics } from "./session-diagnostics";
+import {
+  getSessionPolicyPostureSummary,
+  getSessionSecurityDiagnostics,
+} from "./session-diagnostics";
 import {
   validateSessionActive,
   validateTenantSessionConsistency,
@@ -12,7 +15,9 @@ describe("session-diagnostics", () => {
     expect(posture.sessionValidation).toBe("active");
     expect(posture.cookieHttpOnly).toBe(true);
     expect(posture.sessionDiagnostics.recommendations.length).toBeGreaterThan(0);
-    expect(JSON.stringify(posture)).not.toMatch(/BETTER_AUTH_SECRET|session_token|"password":/i);
+    expect(JSON.stringify(posture)).not.toMatch(
+      /BETTER_AUTH_SECRET|session_token|"password":/i,
+    );
   });
 
   it("reports tenant binding when session is enriched", () => {

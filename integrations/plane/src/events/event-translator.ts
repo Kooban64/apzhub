@@ -41,7 +41,10 @@ function readId(data: Record<string, unknown> | undefined): string | undefined {
   return typeof id === "string" && id.length > 0 ? id : undefined;
 }
 
-function readString(data: Record<string, unknown> | undefined, key: string): string | undefined {
+function readString(
+  data: Record<string, unknown> | undefined,
+  key: string,
+): string | undefined {
   const value = data?.[key];
   return typeof value === "string" && value.length > 0 ? value : undefined;
 }
@@ -110,7 +113,10 @@ function inferAction(
   if (vendorEvent === "issue" && activityField === "state") {
     return { action: "state_changed", type: "task.state_changed" };
   }
-  if (vendorEvent === "issue" && (activityField === "assignees" || activityField === "assignee")) {
+  if (
+    vendorEvent === "issue" &&
+    (activityField === "assignees" || activityField === "assignee")
+  ) {
     return { action: "assigned", type: "task.assigned" };
   }
   if (vendorEvent === "issue" && activityField === "labels") {
@@ -124,46 +130,60 @@ function inferAction(
   }
 
   if (normalized === "create" || normalized === "created") {
-    if (vendorEvent === "issue_comment") return { action: "commented", type: "comment.created" };
-    if (vendorEvent === "member") return { action: "membership_changed", type: "member.added" };
-    if (vendorEvent === "project") return { action: "created", type: "project.created" };
+    if (vendorEvent === "issue_comment")
+      return { action: "commented", type: "comment.created" };
+    if (vendorEvent === "member")
+      return { action: "membership_changed", type: "member.added" };
+    if (vendorEvent === "project")
+      return { action: "created", type: "project.created" };
     if (vendorEvent === "issue") return { action: "created", type: "task.created" };
     if (vendorEvent === "cycle") return { action: "created", type: "cycle.created" };
     if (vendorEvent === "module") return { action: "created", type: "module.created" };
     if (vendorEvent === "label") return { action: "created", type: "label.created" };
     if (vendorEvent === "state") return { action: "created", type: "state.created" };
-    if (vendorEvent === "webhook") return { action: "created", type: "webhook.created" };
+    if (vendorEvent === "webhook")
+      return { action: "created", type: "webhook.created" };
   }
 
   if (normalized === "update" || normalized === "updated") {
-    if (vendorEvent === "issue_comment") return { action: "updated", type: "comment.updated" };
-    if (vendorEvent === "member") return { action: "membership_changed", type: "member.updated" };
-    if (vendorEvent === "project") return { action: "updated", type: "project.updated" };
+    if (vendorEvent === "issue_comment")
+      return { action: "updated", type: "comment.updated" };
+    if (vendorEvent === "member")
+      return { action: "membership_changed", type: "member.updated" };
+    if (vendorEvent === "project")
+      return { action: "updated", type: "project.updated" };
     if (vendorEvent === "issue") return { action: "updated", type: "task.updated" };
     if (vendorEvent === "cycle") return { action: "updated", type: "cycle.updated" };
     if (vendorEvent === "module") return { action: "updated", type: "module.updated" };
     if (vendorEvent === "label") return { action: "updated", type: "label.updated" };
     if (vendorEvent === "state") return { action: "updated", type: "state.updated" };
-    if (vendorEvent === "webhook") return { action: "updated", type: "webhook.updated" };
+    if (vendorEvent === "webhook")
+      return { action: "updated", type: "webhook.updated" };
   }
 
   if (normalized === "delete" || normalized === "deleted") {
-    if (vendorEvent === "issue_comment") return { action: "deleted", type: "comment.deleted" };
-    if (vendorEvent === "member") return { action: "membership_changed", type: "member.removed" };
-    if (vendorEvent === "project") return { action: "deleted", type: "project.deleted" };
+    if (vendorEvent === "issue_comment")
+      return { action: "deleted", type: "comment.deleted" };
+    if (vendorEvent === "member")
+      return { action: "membership_changed", type: "member.removed" };
+    if (vendorEvent === "project")
+      return { action: "deleted", type: "project.deleted" };
     if (vendorEvent === "issue") return { action: "deleted", type: "task.deleted" };
     if (vendorEvent === "cycle") return { action: "deleted", type: "cycle.deleted" };
     if (vendorEvent === "module") return { action: "deleted", type: "module.deleted" };
     if (vendorEvent === "label") return { action: "deleted", type: "label.deleted" };
     if (vendorEvent === "state") return { action: "deleted", type: "state.deleted" };
-    if (vendorEvent === "webhook") return { action: "deleted", type: "webhook.deleted" };
+    if (vendorEvent === "webhook")
+      return { action: "deleted", type: "webhook.deleted" };
   }
 
   if (normalized === "archive" || normalized === "archived") {
-    if (vendorEvent === "project") return { action: "archived", type: "project.archived" };
+    if (vendorEvent === "project")
+      return { action: "archived", type: "project.archived" };
     if (vendorEvent === "issue") return { action: "archived", type: "task.archived" };
     if (vendorEvent === "cycle") return { action: "archived", type: "cycle.archived" };
-    if (vendorEvent === "module") return { action: "archived", type: "module.archived" };
+    if (vendorEvent === "module")
+      return { action: "archived", type: "module.archived" };
   }
 
   return { action: "unknown", type: "integration.unknown" };
@@ -271,7 +291,9 @@ export function translatePlaneWebhookPayload(
 
 export function isPlaneWebhookPayload(value: unknown): value is PlaneWebhookPayload {
   const body = asRecord(value);
-  return Boolean(body && typeof body.event === "string" && typeof body.action === "string");
+  return Boolean(
+    body && typeof body.event === "string" && typeof body.action === "string",
+  );
 }
 
 export const PLANE_SUPPORTED_WEBHOOK_EVENT_TYPES = [

@@ -27,15 +27,15 @@ No reverse dependencies observed.
 
 ## Forbidden import matrix
 
-| Rule | Result |
-| ---- | ------ |
+| Rule                                                                                        | Result   |
+| ------------------------------------------------------------------------------------------- | -------- |
 | UI never imports platform-services, providers, adapters, SDK, testing-services, persistence | **PASS** |
-| HTTP handlers never import adapters, providers, SDK, testing-services, persistence | **PASS** |
-| Gateway never imports adapter internals | **PASS** |
-| Platform `services/testing` never imports GitHub REST DTOs / RestClient | **PASS** |
-| Providers call `adapter.core` only — no `internal/` | **PASS** |
-| Adapter never imports `@apzhub/platform-services` | **PASS** |
-| No GitHub DTO leakage outside adapter package | **PASS** |
+| HTTP handlers never import adapters, providers, SDK, testing-services, persistence          | **PASS** |
+| Gateway never imports adapter internals                                                     | **PASS** |
+| Platform `services/testing` never imports GitHub REST DTOs / RestClient                     | **PASS** |
+| Providers call `adapter.core` only — no `internal/`                                         | **PASS** |
+| Adapter never imports `@apzhub/platform-services`                                           | **PASS** |
+| No GitHub DTO leakage outside adapter package                                               | **PASS** |
 
 Automated scan: **VIOLATIONS=0**.
 
@@ -43,14 +43,14 @@ Automated scan: **VIOLATIONS=0**.
 
 ## Layering checks
 
-| Check | Result |
-| ----- | ------ |
-| No adapter bypass from HTTP/UI | **PASS** |
-| Live reads via ProviderResolver | **PASS** |
-| SoR import/link via domain pipelines | **PASS** |
-| RequestPipeline wraps all gateway facets | **PASS** |
+| Check                                                       | Result   |
+| ----------------------------------------------------------- | -------- |
+| No adapter bypass from HTTP/UI                              | **PASS** |
+| Live reads via ProviderResolver                             | **PASS** |
+| SoR import/link via domain pipelines                        | **PASS** |
+| RequestPipeline wraps all gateway facets                    | **PASS** |
 | Shared HTTP transport (no direct fetch in adapter services) | **PASS** |
-| Mapping Provider Framework used in adapter | **PASS** |
+| Mapping Provider Framework used in adapter                  | **PASS** |
 
 ---
 

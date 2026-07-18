@@ -202,9 +202,7 @@ export function createAutomationResultService(
     async listRuns(ctx, executionId) {
       const rctx = toRepositoryContext(ctx);
       const page = await rt.persistence.automationRuns.list(rctx, { pageSize: 500 });
-      return page.items
-        .filter((row) => row.executionId === executionId)
-        .map(toRun);
+      return page.items.filter((row) => row.executionId === executionId).map(toRun);
     },
     async getRun(ctx, id) {
       const rctx = toRepositoryContext(ctx);
@@ -223,24 +221,22 @@ export function createAutomationResultService(
       });
       return page.items
         .filter((row) => row.runId === runId)
-        .map(
-          (row): AutomationResultItem => ({
-            id: asAutomationResultItemId(row.id),
-            tenantId: row.tenantId,
-            organisationId: row.organisationId,
-            runId: asAutomationRunId(row.runId),
-            status: row.status as NormalizedResultStatus,
-            stepPayload: row.stepPayload,
-            name: row.name,
-            durationMs: row.durationMs,
-            message: row.message,
-            createdAt: row.createdAt,
-            updatedAt: row.updatedAt,
-            createdBy: row.createdBy,
-            updatedBy: row.updatedBy,
-            revision: row.revision,
-          }),
-        );
+        .map((row): AutomationResultItem => ({
+          id: asAutomationResultItemId(row.id),
+          tenantId: row.tenantId,
+          organisationId: row.organisationId,
+          runId: asAutomationRunId(row.runId),
+          status: row.status as NormalizedResultStatus,
+          stepPayload: row.stepPayload,
+          name: row.name,
+          durationMs: row.durationMs,
+          message: row.message,
+          createdAt: row.createdAt,
+          updatedAt: row.updatedAt,
+          createdBy: row.createdBy,
+          updatedBy: row.updatedBy,
+          revision: row.revision,
+        }));
     },
   };
 }

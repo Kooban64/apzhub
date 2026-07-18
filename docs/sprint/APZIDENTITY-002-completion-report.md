@@ -18,12 +18,12 @@ Consumers → gateway.identity.* → RequestPipeline → Production Authorizatio
 → Identity Platform Services → Identity Core → Identity Persistence → PostgreSQL
 ```
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/identity-contracts` | **0.2.0** |
-| `@apzhub/identity-core` | **0.2.0** |
-| `@apzhub/identity-persistence` | **0.1.0** |
-| `@apzhub/platform-services` | **0.23.0** |
+| Package                        | Version    |
+| ------------------------------ | ---------- |
+| `@apzhub/identity-contracts`   | **0.2.0**  |
+| `@apzhub/identity-core`        | **0.2.0**  |
+| `@apzhub/identity-persistence` | **0.1.0**  |
+| `@apzhub/platform-services`    | **0.23.0** |
 
 ## Gateway
 
@@ -57,12 +57,12 @@ Scoped Identity-002 surfaces (`platform-services/services/identity/**` + `identi
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:identity-foundation` | PASS |
-| `pnpm audit:identity-platform-services` | PASS |
-| Typecheck (identity-contracts, identity-core, platform-services) | PASS |
-| Vitest (identity scope + version-pin regressions) | PASS |
+| Gate                                                             | Result |
+| ---------------------------------------------------------------- | ------ |
+| `pnpm audit:identity-foundation`                                 | PASS   |
+| `pnpm audit:identity-platform-services`                          | PASS   |
+| Typecheck (identity-contracts, identity-core, platform-services) | PASS   |
+| Vitest (identity scope + version-pin regressions)                | PASS   |
 
 ## Technical Debt
 

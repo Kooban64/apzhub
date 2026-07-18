@@ -8,20 +8,20 @@
 
 ## Checklist
 
-| Area | Status |
-| ---- | ------ |
-| `@apzhub/integration-n8n` **0.1.0** (frozen, read-only) | ✅ |
-| `@apzhub/workflow-contracts` **0.3.0** · `@apzhub/platform-services` **0.20.0** | ✅ |
-| `gateway.workflow.engine.*` + RequestPipeline + Production Authorization | ✅ |
-| HTTP `/api/v1/workflows/engine/*` + OpenAPI **Workflow Engine** (1.3.0) | ✅ |
-| Typed client + mock + React Query keys | ✅ |
-| Workbench `/workspace/workflow-engine` + manifests | ✅ |
-| Vertical audit `pnpm audit:workflow-engine-vertical` | ✅ 0 violations |
-| Prior audits 006–009 | ✅ |
-| Execution / scheduling / mutations / Event Bus / workers | ❌ Excluded by design |
-| Designer / drag-and-drop | ❌ Excluded by design |
-| Live n8n in CI | ⚠️ Optional via `APZHUB_WORKFLOW_ENGINE_ENABLED` |
-| Playwright / Next live webServer | ⚠️ LIMITED (Testing slug conflict — external) |
+| Area                                                                            | Status                                           |
+| ------------------------------------------------------------------------------- | ------------------------------------------------ |
+| `@apzhub/integration-n8n` **0.1.0** (frozen, read-only)                         | ✅                                               |
+| `@apzhub/workflow-contracts` **0.3.0** · `@apzhub/platform-services` **0.20.0** | ✅                                               |
+| `gateway.workflow.engine.*` + RequestPipeline + Production Authorization        | ✅                                               |
+| HTTP `/api/v1/workflows/engine/*` + OpenAPI **Workflow Engine** (1.3.0)         | ✅                                               |
+| Typed client + mock + React Query keys                                          | ✅                                               |
+| Workbench `/workspace/workflow-engine` + manifests                              | ✅                                               |
+| Vertical audit `pnpm audit:workflow-engine-vertical`                            | ✅ 0 violations                                  |
+| Prior audits 006–009                                                            | ✅                                               |
+| Execution / scheduling / mutations / Event Bus / workers                        | ❌ Excluded by design                            |
+| Designer / drag-and-drop                                                        | ❌ Excluded by design                            |
+| Live n8n in CI                                                                  | ⚠️ Optional via `APZHUB_WORKFLOW_ENGINE_ENABLED` |
+| Playwright / Next live webServer                                                | ⚠️ LIMITED (Testing slug conflict — external)    |
 
 ## Why PRODUCTION_READY_WITH_LIMITATIONS
 

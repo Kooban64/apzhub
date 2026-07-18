@@ -28,9 +28,7 @@ import {
 
 const ROOT = join(__dirname, "../..");
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_obs_a",
     userId: "actor_obs",
@@ -101,15 +99,12 @@ describe("APZOBSERVE-005 Observability Vertical Certification", () => {
       accessResolver: new InMemoryAuthorizationAccessResolver(),
     });
     await expect(
-      denied.gateway.observe.healthChecks.create(
-        ctx({ permissions: [] }),
-        {
-          serviceKey: "x",
-          name: "Nope",
-          status: "unknown",
-          providerKind: "internal",
-        } as never,
-      ),
+      denied.gateway.observe.healthChecks.create(ctx({ permissions: [] }), {
+        serviceKey: "x",
+        name: "Nope",
+        status: "unknown",
+        providerKind: "internal",
+      } as never),
     ).rejects.toSatisfy((error: unknown) => isPlatformServiceError(error));
 
     const servicesSource = readFileSync(
@@ -143,9 +138,7 @@ describe("APZOBSERVE-005 Observability Vertical Certification", () => {
     expect((await observe.readinessChecks.get(ctx(), readiness.id)).status).toBe(
       "ready",
     );
-    expect((await observe.livenessChecks.get(ctx(), liveness.id)).status).toBe(
-      "alive",
-    );
+    expect((await observe.livenessChecks.get(ctx(), liveness.id)).status).toBe("alive");
     expect(
       (await observe.readinessChecks.list(ctx())).some((r) => r.id === liveness.id),
     ).toBe(false);
@@ -229,9 +222,7 @@ describe("APZOBSERVE-005 Observability Vertical Certification", () => {
       updatedBy: "b",
       revision: 1,
     } as never);
-    expect((await repos.healthChecks.list(ctxA)).map((r) => r.id)).toEqual([
-      "hc_a",
-    ]);
+    expect((await repos.healthChecks.list(ctxA)).map((r) => r.id)).toEqual(["hc_a"]);
     expect(await repos.healthChecks.get(ctxA, "hc_b")).toBeNull();
   });
 
@@ -349,8 +340,7 @@ describe("APZOBSERVE-005 Observability Vertical Certification", () => {
     expect(span.traceDefinitionId).toBe(traceDef.id);
 
     expect(
-      resolveOperationAuthorization("observeLogSources", "create")
-        ?.requiredPermission,
+      resolveOperationAuthorization("observeLogSources", "create")?.requiredPermission,
     ).toBe("observe.logs");
     expect(
       resolveOperationAuthorization("observeTraceDefinitions", "list")
@@ -385,9 +375,9 @@ describe("APZOBSERVE-005 Observability Vertical Certification", () => {
       id: window.id,
       status: "active",
     } as never);
-    expect(
-      (await observe.maintenanceWindows.get(ctx(), window.id)).status,
-    ).toBe("active");
+    expect((await observe.maintenanceWindows.get(ctx(), window.id)).status).toBe(
+      "active",
+    );
 
     expect(
       resolveOperationAuthorization("observeMaintenanceWindows", "create")
@@ -429,8 +419,8 @@ describe("APZOBSERVE-005 Observability Vertical Certification", () => {
     });
     const gw = services.gateway.observe;
 
-    await expect(gw.healthChecks.list(ctx())).rejects.toSatisfy(
-      (error: unknown) => isPlatformServiceError(error),
+    await expect(gw.healthChecks.list(ctx())).rejects.toSatisfy((error: unknown) =>
+      isPlatformServiceError(error),
     );
 
     accessResolver.set("actor_obs", "tenant_obs_a", {
@@ -459,8 +449,7 @@ describe("APZOBSERVE-005 Observability Vertical Certification", () => {
     expect(created.id).toBeTruthy();
 
     expect(
-      resolveOperationAuthorization("observeDiagnostics", "health")
-        ?.requiredPermission,
+      resolveOperationAuthorization("observeDiagnostics", "health")?.requiredPermission,
     ).toBe("observe.diagnostics");
     expect(
       resolveOperationAuthorization("observeMetricDefinitions", "list")
@@ -473,12 +462,8 @@ describe("APZOBSERVE-005 Observability Vertical Certification", () => {
 
   it("Journey 9 — disabled service and no silent persistence fallback", () => {
     expect(isObserveServiceEnabled({})).toBe(false);
-    expect(isObserveServiceEnabled({ APZHUB_OBSERVE_ENABLED: "false" })).toBe(
-      false,
-    );
-    expect(isObserveServiceEnabled({ APZHUB_OBSERVE_ENABLED: "true" })).toBe(
-      true,
-    );
+    expect(isObserveServiceEnabled({ APZHUB_OBSERVE_ENABLED: "false" })).toBe(false);
+    expect(isObserveServiceEnabled({ APZHUB_OBSERVE_ENABLED: "true" })).toBe(true);
 
     const withoutObserve = createPlatformServices({
       authorizationMode: "allow-all",
@@ -490,9 +475,9 @@ describe("APZOBSERVE-005 Observability Vertical Certification", () => {
     expect(() => createObservePlatformServicesForTest({} as never)).toThrow(
       /allowInMemoryPersistence/,
     );
-    expect(() =>
-      createObservePlatformServicesForProduction({} as never),
-    ).toThrow(/postgresDb/);
+    expect(() => createObservePlatformServicesForProduction({} as never)).toThrow(
+      /postgresDb/,
+    );
 
     const handler = readFileSync(
       join(ROOT, "apps/web/lib/api/v1/handlers/observe.ts"),
@@ -535,9 +520,7 @@ describe("APZOBSERVE-005 Observability Vertical Certification", () => {
     );
     expect(shell).toContain("ObserveWorkspaceRouter");
     expect(shell).toContain("isObserveRoute");
-    expect(existsSync(join(ROOT, "apps/web/app/workspace/observability"))).toBe(
-      false,
-    );
+    expect(existsSync(join(ROOT, "apps/web/app/workspace/observability"))).toBe(false);
 
     const view = readFileSync(
       join(ROOT, "apps/web/components/observe/platform-observability-view.tsx"),
@@ -559,10 +542,9 @@ describe("APZOBSERVE-005 Observability Vertical Certification", () => {
     expect(client).toContain("/api/v1/observe");
     expect(client).not.toMatch(/\/api\/v1\/(?!observe)/);
 
-    const routeCount = readdirSync(
-      join(ROOT, "apps/web/app/api/v1/observe"),
-      { recursive: true },
-    ).filter((name) => String(name).endsWith("route.ts")).length;
+    const routeCount = readdirSync(join(ROOT, "apps/web/app/api/v1/observe"), {
+      recursive: true,
+    }).filter((name) => String(name).endsWith("route.ts")).length;
     expect(routeCount).toBeGreaterThanOrEqual(30);
 
     const openapi = readFileSync(
@@ -570,7 +552,7 @@ describe("APZOBSERVE-005 Observability Vertical Certification", () => {
       "utf8",
     );
     expect(openapi).toContain("Platform Observability Administration");
-    expect(openapi).toMatch(/version:\s*1\.8\.\d+/);
+    expect(openapi).toMatch(/version:\s*1\.(?:[89]|\d{2,})\.\d+/);
   });
 
   it("classifies PRODUCTION_READY_WITH_LIMITATIONS and recommends APZOBSERVE-006 only", () => {

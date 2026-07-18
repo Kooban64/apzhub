@@ -4,7 +4,9 @@ export interface MiddlewareSessionPayload {
   readonly tenantId?: string;
 }
 
-export function isMiddlewareSessionActive(payload: MiddlewareSessionPayload | null): boolean {
+export function isMiddlewareSessionActive(
+  payload: MiddlewareSessionPayload | null,
+): boolean {
   if (!payload?.session || !payload.user?.id) {
     return false;
   }
@@ -17,9 +19,10 @@ export function isMiddlewareSessionActive(payload: MiddlewareSessionPayload | nu
  * Edge-safe session resolution for Next.js middleware.
  * Uses Better Auth get-session endpoint; full tenant enrichment occurs in route handlers.
  */
-export async function fetchMiddlewareSession(
-  request: { readonly headers: { get(name: string): string | null }; readonly nextUrl: { readonly origin: string } },
-): Promise<MiddlewareSessionPayload | null> {
+export async function fetchMiddlewareSession(request: {
+  readonly headers: { get(name: string): string | null };
+  readonly nextUrl: { readonly origin: string };
+}): Promise<MiddlewareSessionPayload | null> {
   const sessionUrl = new URL("/api/auth/get-session", request.nextUrl.origin);
 
   const response = await fetch(sessionUrl, {

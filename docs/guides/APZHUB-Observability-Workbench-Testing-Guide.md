@@ -4,13 +4,13 @@
 
 ## Surfaces
 
-| Layer | Location |
-| --- | --- |
-| Component | `apps/web/components/observe/*.test.tsx` |
-| Routes | `apps/web/lib/observe/routes.test.ts` |
-| Harness | `testing/observe-workbench/apzobserve-004-workbench.test.ts` |
+| Layer                    | Location                                                          |
+| ------------------------ | ----------------------------------------------------------------- |
+| Component                | `apps/web/components/observe/*.test.tsx`                          |
+| Routes                   | `apps/web/lib/observe/routes.test.ts`                             |
+| Harness                  | `testing/observe-workbench/apzobserve-004-workbench.test.ts`      |
 | Playwright (mocked HTTP) | `testing/playwright/e2e/apzobserve-004-observe-workbench.spec.ts` |
-| Architecture audit | `pnpm audit:observe-workbench` |
+| Architecture audit       | `pnpm audit:observe-workbench`                                    |
 
 ## Coverage command
 

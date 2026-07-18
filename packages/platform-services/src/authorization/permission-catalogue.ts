@@ -1,4 +1,7 @@
-import { APZ_TCMS_PERMISSIONS, type ApzTcmsPermission } from "@apzhub/testing-contracts";
+import {
+  APZ_TCMS_PERMISSIONS,
+  type ApzTcmsPermission,
+} from "@apzhub/testing-contracts";
 import {
   PLATFORM_DOCUMENT_PERMISSIONS,
   type PlatformDocumentPermission,
@@ -31,6 +34,10 @@ import {
   PLATFORM_OBSERVE_PERMISSIONS,
   type PlatformObservePermission,
 } from "@apzhub/observe-contracts";
+import {
+  PLATFORM_METRICS_PERMISSIONS,
+  type PlatformMetricsPermission,
+} from "@apzhub/metrics-contracts";
 
 /**
  * Platform permission catalogue for gateway-exposed capabilities (OSS-110-06 / OSS-110-08).
@@ -98,6 +105,7 @@ export type PlatformPermissionKey =
   | PlatformAdminPermission
   | PlatformIdentityPermission
   | PlatformObservePermission
+  | PlatformMetricsPermission
   | "platform.impersonation.use";
 
 export function permissionKey(
@@ -213,6 +221,8 @@ export const PLATFORM_SERVICE_PERMISSION_CATALOGUE = [
   ...PLATFORM_IDENTITY_PERMISSIONS,
   // Observability platform services (APZOBSERVE-002) — observe.* keys
   ...PLATFORM_OBSERVE_PERMISSIONS,
+  // Metrics platform services (APZMETRICS-002) — metrics.* keys
+  ...PLATFORM_METRICS_PERMISSIONS,
   // Legacy Administration / provider / mapping capability keys
   "administration.manage",
   "administration.administer",
@@ -230,6 +240,8 @@ export const PLATFORM_SERVICE_PERMISSION_CATALOGUE = [
 export type CataloguedPlatformPermission =
   (typeof PLATFORM_SERVICE_PERMISSION_CATALOGUE)[number];
 
-export function isCataloguedPermission(key: string): key is CataloguedPlatformPermission {
+export function isCataloguedPermission(
+  key: string,
+): key is CataloguedPlatformPermission {
   return (PLATFORM_SERVICE_PERMISSION_CATALOGUE as readonly string[]).includes(key);
 }

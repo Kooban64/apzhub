@@ -220,9 +220,7 @@ export const QUALITY_PLATFORM_PERMISSIONS = [
 ] as const;
 
 /** Extended release.* keys kept for platform release objects (deduped vs RELEASE_PERMISSIONS). */
-export const RELEASE_PLATFORM_PERMISSIONS = [
-  "release.decide",
-] as const;
+export const RELEASE_PLATFORM_PERMISSIONS = ["release.decide"] as const;
 
 export const APZ_TCMS_PERMISSIONS = [
   ...TESTING_PERMISSIONS,

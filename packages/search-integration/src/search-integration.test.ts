@@ -32,8 +32,8 @@ function ctx(productId: "projects" | "support" | "documents" = "projects") {
 }
 
 describe("APZSEARCH-009 search-integration", () => {
-  it("ships version 0.1.0", () => {
-    expect(SEARCH_INTEGRATION_VERSION).toBe("0.1.0");
+  it("ships version 0.2.0", () => {
+    expect(SEARCH_INTEGRATION_VERSION).toBe("0.2.0");
   });
 
   it("declares product contracts without adapters", () => {
@@ -52,9 +52,7 @@ describe("APZSEARCH-009 search-integration", () => {
       "document",
     );
     expect(DECLARED_PRODUCT_SEARCH_PUBLICATION_CONTRACTS).toHaveLength(5);
-    expect(getProductSearchPublicationContract("testing")?.label).toBe(
-      "APZ TCMS",
-    );
+    expect(getProductSearchPublicationContract("testing")?.label).toBe("APZ TCMS");
   });
 
   it("validates, previews, publishes, updates, and removes canonical entities", () => {
@@ -149,9 +147,7 @@ describe("APZSEARCH-009 search-integration", () => {
       },
     );
     expect(wrongTenant.ok).toBe(false);
-    expect(wrongTenant.issues?.some((i) => i.code === "tenant_mismatch")).toBe(
-      true,
-    );
+    expect(wrongTenant.issues?.some((i) => i.code === "tenant_mismatch")).toBe(true);
 
     publisher.publish(context, {
       entityId: "tkt_1",
@@ -176,7 +172,7 @@ describe("APZSEARCH-009 search-integration", () => {
     expect(life.lifecycleState).toBe("archived");
 
     const diag = fw.publisher.diagnostics(context);
-    expect(diag.frameworkVersion).toBe("0.1.0");
+    expect(diag.frameworkVersion).toBe("0.2.0");
     expect(diag.sinkKind).toBe("memory");
     expect(diag.entityCount).toBe(1);
 
@@ -192,9 +188,7 @@ describe("APZSEARCH-009 search-integration", () => {
 
   it("redacts secrets in error translation", () => {
     const translator = new SearchPublicationErrorTranslator();
-    const err = translator.translate(
-      new Error("failed with api_key=super-secret"),
-    );
+    const err = translator.translate(new Error("failed with api_key=super-secret"));
     expect(err.message).toContain("[redacted]");
     expect(err.message).not.toContain("super-secret");
   });

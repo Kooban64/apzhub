@@ -9,17 +9,17 @@ Identity Administration Workbench (`platform-identity-view`, router, tables, for
 
 ## Certified against APZHUB standards
 
-| Criterion | Evidence |
-| --- | --- |
+| Criterion           | Evidence                                                           |
+| ------------------- | ------------------------------------------------------------------ |
 | Keyboard navigation | MetaTable rows `tabIndex` + Enter/Space; toolbar buttons focusable |
-| Visible focus | Shared Button/Input focus-visible rings from design system |
-| Accessible labels | `aria-label` on create/update fields; toolbar `role="toolbar"` |
-| Tables | `<table>` + `<caption class="sr-only">`; column headers |
-| Forms | Labelled inputs; required attributes; pending disabled buttons |
-| Status banners | `role="status"` capability banners |
-| Error states | `role="alert"` ErrorState; non-colour-only text messages |
-| Loading / empty | `role="status"` loading text; EmptyState titles |
-| Semantic headings | Page `h1` per section; detail `h2`/`h3` |
+| Visible focus       | Shared Button/Input focus-visible rings from design system         |
+| Accessible labels   | `aria-label` on create/update fields; toolbar `role="toolbar"`     |
+| Tables              | `<table>` + `<caption class="sr-only">`; column headers            |
+| Forms               | Labelled inputs; required attributes; pending disabled buttons     |
+| Status banners      | `role="status"` capability banners                                 |
+| Error states        | `role="alert"` ErrorState; non-colour-only text messages           |
+| Loading / empty     | `role="status"` loading text; EmptyState titles                    |
+| Semantic headings   | Page `h1` per section; detail `h2`/`h3`                            |
 
 ## Fixes in this milestone
 

@@ -32,6 +32,9 @@ const coverageExclude = [
   "packages/identity-contracts/src/common/**",
   "packages/identity-contracts/src/domain/**",
   "packages/identity-contracts/src/services/**",
+  "packages/metrics-contracts/src/common/**",
+  "packages/metrics-contracts/src/domain/**",
+  "packages/metrics-contracts/src/services/**",
   "packages/observe-contracts/src/common/**",
   "packages/observe-contracts/src/domain/**",
   "packages/observe-contracts/src/services/**",
@@ -45,6 +48,10 @@ const coverageExclude = [
   "packages/knowledge-discovery-framework/src/**/index.ts",
   "packages/event-notification-framework/src/**/index.ts",
   "packages/platform-runtime/src/bootstrap-engine/**",
+  "packages/search-orchestrator/src/journal/port.ts",
+  "packages/search-publication-admin/src/types.ts",
+  "packages/search-publication-admin/src/audit/port.ts",
+  "packages/search-publication-admin/src/markers/port.ts",
 ];
 
 const packageAliases = {
@@ -239,6 +246,22 @@ const packageAliases = {
     __dirname,
     "packages/platform-governance/src/index.ts",
   ),
+  "@apzhub/platform-provisioning/server": path.resolve(
+    __dirname,
+    "packages/platform-provisioning/src/server.ts",
+  ),
+  "@apzhub/platform-provisioning": path.resolve(
+    __dirname,
+    "packages/platform-provisioning/src/index.ts",
+  ),
+  "@apzhub/platform-event-bus": path.resolve(
+    __dirname,
+    "packages/platform-event-bus/src/index.ts",
+  ),
+  "@apzhub/platform-outbox": path.resolve(
+    __dirname,
+    "packages/platform-outbox/src/index.ts",
+  ),
   "@apzhub/platform-security/server": path.resolve(
     __dirname,
     "packages/platform-security/src/server.ts",
@@ -375,10 +398,7 @@ const packageAliases = {
     __dirname,
     "integrations/meilisearch/src/index.ts",
   ),
-  "@apzhub/integration-n8n": path.resolve(
-    __dirname,
-    "integrations/n8n/src/index.ts",
-  ),
+  "@apzhub/integration-n8n": path.resolve(__dirname, "integrations/n8n/src/index.ts"),
   "@apzhub/platform-service-contracts": path.resolve(
     __dirname,
     "packages/platform-service-contracts/src/index.ts",
@@ -471,10 +491,7 @@ const packageAliases = {
     __dirname,
     "packages/admin-contracts/src/index.ts",
   ),
-  "@apzhub/admin-core": path.resolve(
-    __dirname,
-    "packages/admin-core/src/index.ts",
-  ),
+  "@apzhub/admin-core": path.resolve(__dirname, "packages/admin-core/src/index.ts"),
   "@apzhub/admin-persistence": path.resolve(
     __dirname,
     "packages/admin-persistence/src/index.ts",
@@ -491,14 +508,20 @@ const packageAliases = {
     __dirname,
     "packages/identity-persistence/src/index.ts",
   ),
+  "@apzhub/metrics-contracts": path.resolve(
+    __dirname,
+    "packages/metrics-contracts/src/index.ts",
+  ),
+  "@apzhub/metrics-core": path.resolve(__dirname, "packages/metrics-core/src/index.ts"),
+  "@apzhub/metrics-persistence": path.resolve(
+    __dirname,
+    "packages/metrics-persistence/src/index.ts",
+  ),
   "@apzhub/observe-contracts": path.resolve(
     __dirname,
     "packages/observe-contracts/src/index.ts",
   ),
-  "@apzhub/observe-core": path.resolve(
-    __dirname,
-    "packages/observe-core/src/index.ts",
-  ),
+  "@apzhub/observe-core": path.resolve(__dirname, "packages/observe-core/src/index.ts"),
   "@apzhub/observe-persistence": path.resolve(
     __dirname,
     "packages/observe-persistence/src/index.ts",
@@ -514,6 +537,14 @@ const packageAliases = {
   "@apzhub/search-integration": path.resolve(
     __dirname,
     "packages/search-integration/src/index.ts",
+  ),
+  "@apzhub/search-orchestrator": path.resolve(
+    __dirname,
+    "packages/search-orchestrator/src/index.ts",
+  ),
+  "@apzhub/search-publication-admin": path.resolve(
+    __dirname,
+    "packages/search-publication-admin/src/index.ts",
   ),
   "@apzhub/search-projects": path.resolve(
     __dirname,
@@ -599,6 +630,11 @@ export default defineConfig({
       "testing/configuration-foundation/**/*.test.{ts,tsx}",
       "testing/admin-foundation/**/*.test.{ts,tsx}",
       "testing/identity-foundation/**/*.test.{ts,tsx}",
+      "testing/metrics-foundation/**/*.test.{ts,tsx}",
+      "testing/metrics-platform-services/**/*.test.{ts,tsx}",
+      "testing/metrics-http-client/**/*.test.{ts,tsx}",
+      "testing/metrics-workbench/**/*.test.{ts,tsx}",
+      "testing/metrics-vertical/**/*.test.{ts,tsx}",
       "testing/observe-foundation/**/*.test.{ts,tsx}",
       "testing/observe-platform-services/**/*.test.{ts,tsx}",
       "testing/observe-http-client/**/*.test.{ts,tsx}",
@@ -621,6 +657,9 @@ export default defineConfig({
       "testing/workflow-engine-vertical/**/*.test.{ts,tsx}",
       "testing/search-vertical/**/*.test.{ts,tsx}",
       "testing/search-publication/**/*.test.{ts,tsx}",
+      "testing/search-publication-reliability/**/*.test.{ts,tsx}",
+      "testing/search-orchestrator/**/*.test.{ts,tsx}",
+      "testing/search-publication-admin/**/*.test.{ts,tsx}",
       "packages/platform-runtime/src/**/*.test.ts",
     ],
     coverage: {
@@ -680,6 +719,18 @@ export default defineConfig({
           functions: 100,
           branches: 95,
           statements: 100,
+        },
+        "packages/search-orchestrator/src/**": {
+          lines: 95,
+          functions: 95,
+          branches: 80,
+          statements: 95,
+        },
+        "packages/search-publication-admin/src/**": {
+          lines: 95,
+          functions: 95,
+          branches: 80,
+          statements: 95,
         },
         "packages/workbench-framework/src/**": {
           lines: 80,

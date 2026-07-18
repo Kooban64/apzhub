@@ -84,10 +84,7 @@ export function mapIdentityDomainError(
   });
 }
 
-function mapUnknownError(
-  error: unknown,
-  correlationId: string,
-): PlatformServiceError {
+function mapUnknownError(error: unknown, correlationId: string): PlatformServiceError {
   if (isPlatformServiceError(error)) return error;
   if (error instanceof IdentityDomainError) {
     return mapIdentityDomainError(error, correlationId);
@@ -139,9 +136,7 @@ export function createIdentityPlatformServiceImpls(input: {
       list: (ctx) =>
         withIdentityErrorMapping(ctx, () => domain.listUsers(toIdentityCtx(ctx))),
       get: (ctx, userId) =>
-        withIdentityErrorMapping(ctx, () =>
-          domain.getUser(toIdentityCtx(ctx), userId),
-        ),
+        withIdentityErrorMapping(ctx, () => domain.getUser(toIdentityCtx(ctx), userId)),
       create: (ctx, createInput) =>
         withIdentityErrorMapping(ctx, () =>
           domain.createUser(toIdentityCtx(ctx), createInput),
@@ -171,9 +166,7 @@ export function createIdentityPlatformServiceImpls(input: {
       list: (ctx) =>
         withIdentityErrorMapping(ctx, () => domain.listRoles(toIdentityCtx(ctx))),
       get: (ctx, roleId) =>
-        withIdentityErrorMapping(ctx, () =>
-          domain.getRole(toIdentityCtx(ctx), roleId),
-        ),
+        withIdentityErrorMapping(ctx, () => domain.getRole(toIdentityCtx(ctx), roleId)),
       create: (ctx, createInput) =>
         withIdentityErrorMapping(ctx, () =>
           domain.createRole(toIdentityCtx(ctx), createInput),
@@ -203,9 +196,7 @@ export function createIdentityPlatformServiceImpls(input: {
     },
     tenants: {
       list: (ctx) =>
-        withIdentityErrorMapping(ctx, () =>
-          domain.listTenants(toIdentityCtx(ctx)),
-        ),
+        withIdentityErrorMapping(ctx, () => domain.listTenants(toIdentityCtx(ctx))),
       get: (ctx, tenantRecordId) =>
         withIdentityErrorMapping(ctx, () =>
           domain.getTenant(toIdentityCtx(ctx), tenantRecordId),
@@ -221,9 +212,7 @@ export function createIdentityPlatformServiceImpls(input: {
     },
     departments: {
       list: (ctx) =>
-        withIdentityErrorMapping(ctx, () =>
-          domain.listDepartments(toIdentityCtx(ctx)),
-        ),
+        withIdentityErrorMapping(ctx, () => domain.listDepartments(toIdentityCtx(ctx))),
       get: (ctx, departmentId) =>
         withIdentityErrorMapping(ctx, () =>
           domain.getDepartment(toIdentityCtx(ctx), departmentId),
@@ -239,9 +228,7 @@ export function createIdentityPlatformServiceImpls(input: {
     },
     positions: {
       list: (ctx) =>
-        withIdentityErrorMapping(ctx, () =>
-          domain.listPositions(toIdentityCtx(ctx)),
-        ),
+        withIdentityErrorMapping(ctx, () => domain.listPositions(toIdentityCtx(ctx))),
       get: (ctx, positionId) =>
         withIdentityErrorMapping(ctx, () =>
           domain.getPosition(toIdentityCtx(ctx), positionId),
@@ -257,9 +244,7 @@ export function createIdentityPlatformServiceImpls(input: {
     },
     memberships: {
       list: (ctx) =>
-        withIdentityErrorMapping(ctx, () =>
-          domain.listMemberships(toIdentityCtx(ctx)),
-        ),
+        withIdentityErrorMapping(ctx, () => domain.listMemberships(toIdentityCtx(ctx))),
       get: (ctx, membershipId) =>
         withIdentityErrorMapping(ctx, () =>
           domain.getMembership(toIdentityCtx(ctx), membershipId),
@@ -293,9 +278,7 @@ export function createIdentityPlatformServiceImpls(input: {
     },
     invitations: {
       list: (ctx) =>
-        withIdentityErrorMapping(ctx, () =>
-          domain.listInvitations(toIdentityCtx(ctx)),
-        ),
+        withIdentityErrorMapping(ctx, () => domain.listInvitations(toIdentityCtx(ctx))),
       get: (ctx, invitationId) =>
         withIdentityErrorMapping(ctx, () =>
           domain.getInvitation(toIdentityCtx(ctx), invitationId),
@@ -311,9 +294,7 @@ export function createIdentityPlatformServiceImpls(input: {
     },
     activation: {
       list: (ctx) =>
-        withIdentityErrorMapping(ctx, () =>
-          domain.listActivations(toIdentityCtx(ctx)),
-        ),
+        withIdentityErrorMapping(ctx, () => domain.listActivations(toIdentityCtx(ctx))),
       get: (ctx, activationId) =>
         withIdentityErrorMapping(ctx, () =>
           domain.getActivation(toIdentityCtx(ctx), activationId),
@@ -339,9 +320,7 @@ export function createIdentityPlatformServiceImpls(input: {
     },
     policies: {
       list: (ctx) =>
-        withIdentityErrorMapping(ctx, () =>
-          domain.listPolicies(toIdentityCtx(ctx)),
-        ),
+        withIdentityErrorMapping(ctx, () => domain.listPolicies(toIdentityCtx(ctx))),
       get: (ctx, policyId) =>
         withIdentityErrorMapping(ctx, () =>
           domain.getPolicy(toIdentityCtx(ctx), policyId),
@@ -357,9 +336,7 @@ export function createIdentityPlatformServiceImpls(input: {
     },
     audit: {
       list: (ctx) =>
-        withIdentityErrorMapping(ctx, () =>
-          domain.listAudits(toIdentityCtx(ctx)),
-        ),
+        withIdentityErrorMapping(ctx, () => domain.listAudits(toIdentityCtx(ctx))),
       get: (ctx, auditId) =>
         withIdentityErrorMapping(ctx, () =>
           domain.getAudit(toIdentityCtx(ctx), auditId),

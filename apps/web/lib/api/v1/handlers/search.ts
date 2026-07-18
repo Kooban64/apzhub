@@ -178,9 +178,7 @@ export async function handleGetSearchHealth(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await getPlatformServiceGateway();
-  const result = await gateway.searchExecutionHealth.getHealth(
-    context.serviceContext,
-  );
+  const result = await gateway.searchExecutionHealth.getHealth(context.serviceContext);
   return jsonDataResponse(redactSearchManagementValue(result), context.tracing);
 }
 
@@ -324,13 +322,10 @@ export async function handleCreateSearchConfiguration(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await getPlatformServiceGateway();
-  const result = await gateway.searchConfigurations.create(
-    context.serviceContext,
-    {
-      label: body.label,
-      configuration: body.configuration as never,
-    } as never,
-  );
+  const result = await gateway.searchConfigurations.create(context.serviceContext, {
+    label: body.label,
+    configuration: body.configuration as never,
+  } as never);
   return jsonDataResponse(redactSearchManagementValue(result), context.tracing);
 }
 
@@ -486,11 +481,7 @@ export async function handleGetSearchProfile(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const profileId = await param(
-    routeContext,
-    "profileId",
-    searchProfileIdParamSchema,
-  );
+  const profileId = await param(routeContext, "profileId", searchProfileIdParamSchema);
   const gateway = await getPlatformServiceGateway();
   const result = await gateway.searchProfiles.get(
     context.serviceContext,
@@ -524,9 +515,7 @@ export async function handleGetSearchManagementDiagnostics(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await getPlatformServiceGateway();
-  const result = await gateway.searchDiagnostics.getDiagnostics(
-    context.serviceContext,
-  );
+  const result = await gateway.searchDiagnostics.getDiagnostics(context.serviceContext);
   return jsonDataResponse(redactSearchManagementValue(result), context.tracing);
 }
 
@@ -535,9 +524,7 @@ export async function handleGetSearchManagementStatistics(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await getPlatformServiceGateway();
-  const result = await gateway.searchStatistics.getStatistics(
-    context.serviceContext,
-  );
+  const result = await gateway.searchStatistics.getStatistics(context.serviceContext);
   return jsonDataResponse(redactSearchManagementValue(result), context.tracing);
 }
 

@@ -24,10 +24,7 @@ export type ReportTemplateCreateInput = Omit<
 /** Persistence port for custom templates (product-owned store). */
 export interface ReportTemplateRepositoryPort {
   list(ctx: ReportingRequestContext): Promise<readonly ReportTemplate[]>;
-  get(
-    ctx: ReportingRequestContext,
-    templateId: string,
-  ): Promise<ReportTemplate | null>;
+  get(ctx: ReportingRequestContext, templateId: string): Promise<ReportTemplate | null>;
   create(
     ctx: ReportingRequestContext,
     input: ReportTemplateCreateInput,
@@ -60,9 +57,7 @@ export interface ReportMetadataRepositoryPort {
     ctx: ReportingRequestContext,
     metadataId: string,
   ): Promise<ReportGenerationMetadata | null>;
-  list(
-    ctx: ReportingRequestContext,
-  ): Promise<readonly ReportGenerationMetadata[]>;
+  list(ctx: ReportingRequestContext): Promise<readonly ReportGenerationMetadata[]>;
   archive(
     ctx: ReportingRequestContext,
     metadataId: string,
@@ -86,11 +81,10 @@ export function requireFound<T>(
   id: string,
 ): T {
   if (value == null) {
-    throw new ReportingDomainError(
-      "not_found",
-      `${kind} not found: ${id}`,
-      { kind, id },
-    );
+    throw new ReportingDomainError("not_found", `${kind} not found: ${id}`, {
+      kind,
+      id,
+    });
   }
   return value;
 }

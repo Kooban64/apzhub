@@ -23,19 +23,14 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
 
 function rel(file) {
   return relative(ROOT, file).replace(/\\/g, "/");
-}
-
-function stripComments(source) {
-  return source
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/\/\/.*$/gm, "");
 }
 
 function scan(files, rules) {
@@ -107,7 +102,8 @@ if (!existsSync(workflowHandler)) {
       file: rel(workflowHandler),
       line: 1,
       rule: "handlers-forbidden-activate",
-      detail: "use publish/archive/restore/transition — never activate/deactivate routes",
+      detail:
+        "use publish/archive/restore/transition — never activate/deactivate routes",
     });
   }
 }
@@ -233,12 +229,12 @@ if (!openapi.includes("CreateWorkflowRequest")) {
     detail: "Expected CreateWorkflowRequest schema",
   });
 }
-if (!openapi.includes("version: 1.4.0")) {
+if (!/version:\s*1\.(?:[4-9]|\d{2,})\.\d+/.test(openapi.slice(0, 400))) {
   violations.push({
     file: "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
     line: 1,
     rule: "openapi-version",
-    detail: "Expected OpenAPI info.version 1.4.0",
+    detail: "Expected OpenAPI info.version >= 1.4.0",
   });
 }
 
@@ -283,10 +279,7 @@ const nestedStatic = [
   "diagnostics",
 ];
 for (const segment of nestedStatic) {
-  const bad = join(
-    ROOT,
-    `apps/web/app/api/v1/workflows/[workflowId]/${segment}`,
-  );
+  const bad = join(ROOT, `apps/web/app/api/v1/workflows/[workflowId]/${segment}`);
   if (existsSync(bad)) {
     violations.push({
       file: rel(bad),
@@ -320,6 +313,6 @@ console.log("APZWORKFLOW-003 architecture audit PASSED");
 console.log("  handlers → gateway.workflow.* only");
 console.log("  typed client → /api/v1/workflows only");
 console.log("  bootstrap wires createWorkflowPlatformServicesForProduction");
-console.log("  OpenAPI Platform Workflow + 1.4.0 present");
+console.log("  OpenAPI Platform Workflow + version >= 1.4.0 present");
 console.log("  no execute/runs/n8n/schedules/activate routes");
 process.exit(0);

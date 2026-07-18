@@ -102,7 +102,9 @@ export function createMockProjectProvider(
   };
 }
 
-export function createMockTeamProvider(overrides: Partial<TeamProvider> = {}): TeamProvider {
+export function createMockTeamProvider(
+  overrides: Partial<TeamProvider> = {},
+): TeamProvider {
   return {
     listTeam: async () => ({
       items: [],
@@ -125,7 +127,9 @@ export function createMockTeamProvider(overrides: Partial<TeamProvider> = {}): T
   };
 }
 
-export function createMockUserProvider(overrides: Partial<UserProvider> = {}): UserProvider {
+export function createMockUserProvider(
+  overrides: Partial<UserProvider> = {},
+): UserProvider {
   return {
     listUsers: async () => ({
       items: [],
@@ -151,7 +155,9 @@ export function createMockUserProvider(overrides: Partial<UserProvider> = {}): U
   };
 }
 
-export function createMockSearchProvider(overrides: Partial<SearchProvider> = {}): SearchProvider {
+export function createMockSearchProvider(
+  overrides: Partial<SearchProvider> = {},
+): SearchProvider {
   return {
     search: async () => ({
       status: "ok",
@@ -174,7 +180,9 @@ export const TEST_PROVIDER_TASK: Task = {
   updatedAt: "2026-07-01T00:00:00.000Z",
 };
 
-export function createMockTaskProvider(overrides: Partial<TaskProvider> = {}): TaskProvider {
+export function createMockTaskProvider(
+  overrides: Partial<TaskProvider> = {},
+): TaskProvider {
   return {
     listTasks: async () => ({
       items: [TEST_PROVIDER_TASK],
@@ -183,7 +191,10 @@ export function createMockTaskProvider(overrides: Partial<TaskProvider> = {}): T
       perPage: 20,
       hasNextPage: false,
     }),
-    getTask: async (_ctx, _projectId, taskId) => ({ ...TEST_PROVIDER_TASK, id: taskId }),
+    getTask: async (_ctx, _projectId, taskId) => ({
+      ...TEST_PROVIDER_TASK,
+      id: taskId,
+    }),
     createTask: async (_ctx, projectId, input) => ({
       ...TEST_PROVIDER_TASK,
       id: `task_plane_${Date.now()}`,

@@ -7,14 +7,14 @@
 
 ## Policy inventory
 
-| Policy | Class / factory | Role |
-|--------|-----------------|------|
-| Retry | `DefaultRetryPolicy` / `createDefaultRetryPolicy` | Classify retryable failures; backoff |
-| Timeout | `DefaultTimeoutPolicy` / `createDefaultTimeoutPolicy` | AbortController overall timeout |
-| TLS | `TlsPolicy` | Store TLS prefs for diagnostics |
-| Compression | `CompressionPolicy` | Set `Accept-Encoding` when empty |
-| Redirects | `RedirectPolicy` | Document follow / max / loop flags |
-| Rate limit | `NoopRateLimitPolicy` | Stub — `acquire` always succeeds |
+| Policy      | Class / factory                                       | Role                                 |
+| ----------- | ----------------------------------------------------- | ------------------------------------ |
+| Retry       | `DefaultRetryPolicy` / `createDefaultRetryPolicy`     | Classify retryable failures; backoff |
+| Timeout     | `DefaultTimeoutPolicy` / `createDefaultTimeoutPolicy` | AbortController overall timeout      |
+| TLS         | `TlsPolicy`                                           | Store TLS prefs for diagnostics      |
+| Compression | `CompressionPolicy`                                   | Set `Accept-Encoding` when empty     |
+| Redirects   | `RedirectPolicy`                                      | Document follow / max / loop flags   |
+| Rate limit  | `NoopRateLimitPolicy`                                 | Stub — `acquire` always succeeds     |
 
 Built-in policies are attached by `DefaultTransportClient` in order: **TLS → Compression → Redirects**, then any caller-supplied policies.
 
@@ -24,17 +24,17 @@ Built-in policies are attached by `DefaultTransportClient` in order: **TLS → C
 
 ### Defaults
 
-| Option | Default |
-|--------|---------|
-| `maxAttempts` | **1** (retries **disabled**) |
-| `backoff` | `exponential` |
-| `initialDelayMs` | 100 |
-| `maxDelayMs` | 30_000 |
-| `jitter` | true |
-| `retryableMethods` | GET, HEAD, OPTIONS, PUT, DELETE |
-| `retryableStatusCodes` | 408, 425, 429, 500, 502, 503, 504 |
-| `retryTransportFailures` | true |
-| `respectRetryAfter` | true |
+| Option                   | Default                           |
+| ------------------------ | --------------------------------- |
+| `maxAttempts`            | **1** (retries **disabled**)      |
+| `backoff`                | `exponential`                     |
+| `initialDelayMs`         | 100                               |
+| `maxDelayMs`             | 30_000                            |
+| `jitter`                 | true                              |
+| `retryableMethods`       | GET, HEAD, OPTIONS, PUT, DELETE   |
+| `retryableStatusCodes`   | 408, 425, 429, 500, 502, 503, 504 |
+| `retryTransportFailures` | true                              |
+| `respectRetryAfter`      | true                              |
 
 **Migration rule:** Plane/Zammad and `createHttpIntegrationClient` keep `maxAttempts: 1` unless an adapter explicitly opts in.
 
@@ -47,9 +47,9 @@ Built-in policies are attached by `DefaultTransportClient` in order: **TLS → C
 
 ### Backoff
 
-- `none` — 0 delay  
-- `fixed` — `initialDelayMs`  
-- `exponential` — `initialDelayMs * 2^(attempt-1)`, capped by `maxDelayMs`  
+- `none` — 0 delay
+- `fixed` — `initialDelayMs`
+- `exponential` — `initialDelayMs * 2^(attempt-1)`, capped by `maxDelayMs`
 - Optional jitter: multiply by `[0.5, 1.0)`
 
 `parseRetryAfterMs` accepts delay-seconds or HTTP-date.
@@ -58,12 +58,12 @@ Built-in policies are attached by `DefaultTransportClient` in order: **TLS → C
 
 ## Timeout policy
 
-| Field | Enforcement |
-|-------|-------------|
-| `overallMs` | **Enforced** via `AbortController` + `setTimeout` |
-| `connectMs` | Stored / documented — Node fetch has no discrete connect timeout |
-| `requestMs` | Stored — overall abort is the enforceable bound |
-| `responseMs` | Stored — overall abort is the enforceable bound |
+| Field        | Enforcement                                                      |
+| ------------ | ---------------------------------------------------------------- |
+| `overallMs`  | **Enforced** via `AbortController` + `setTimeout`                |
+| `connectMs`  | Stored / documented — Node fetch has no discrete connect timeout |
+| `requestMs`  | Stored — overall abort is the enforceable bound                  |
+| `responseMs` | Stored — overall abort is the enforceable bound                  |
 
 Per-request `timeoutMs` overrides `overallMs`. Parent `AbortSignal` from `TransportContext` aborts the child controller.
 
@@ -76,7 +76,7 @@ Abort errors surface as timeouts in metrics/logs; the IntegrationClient bridge m
 ```typescript
 interface TlsConfiguration {
   validateCertificates: boolean; // default true
-  customCA?: string;             // placeholder — not applied via RequestInit
+  customCA?: string; // placeholder — not applied via RequestInit
   developmentOverrides?: { allowInsecure?: boolean };
 }
 ```
@@ -95,11 +95,11 @@ The **IntegrationClient bridge** sets `acceptEncoding: []` so it does not inject
 
 ## Redirect policy
 
-| Option | Default |
-|--------|---------|
-| `follow` | true → fetch `redirect: "follow"` |
+| Option         | Default                                     |
+| -------------- | ------------------------------------------- |
+| `follow`       | true → fetch `redirect: "follow"`           |
 | `maxRedirects` | 20 (documented; fetch manages actual limit) |
-| `detectLoops` | true (metadata / diagnostics) |
+| `detectLoops`  | true (metadata / diagnostics)               |
 
 Redirected responses increment transport redirect metrics.
 

@@ -1,10 +1,10 @@
 # APZHUB Meilisearch Adapter Architecture
 
-| Field | Value |
-| --- | --- |
-| **Milestone** | APZSEARCH-005 |
-| **Package** | `@apzhub/integration-meilisearch` **0.1.0** |
-| **ADR** | [ADR-0060](../adr/ADR-0060-meilisearch-reference-search-adapter.md) |
+| Field         | Value                                                               |
+| ------------- | ------------------------------------------------------------------- |
+| **Milestone** | APZSEARCH-005                                                       |
+| **Package**   | `@apzhub/integration-meilisearch` **0.1.0**                         |
+| **ADR**       | [ADR-0060](../adr/ADR-0060-meilisearch-reference-search-adapter.md) |
 
 ## Layering
 
@@ -22,17 +22,17 @@ Meilisearch CE (engine — not bundled)
 
 ## Components
 
-| Component | Role |
-| --- | --- |
-| `MeilisearchAdapter` | Extends `SearchIntegrationAdapterBase` |
-| `createMeilisearchAdapter` / `MeilisearchAdapterFactory` | Bootstrap + SecretProvider wiring |
-| `MeilisearchAdapterContext` | Search context + Meilisearch providers |
-| `MeilisearchOperationRunner` | Query / index / document / health ops |
-| `MeilisearchRestClient` | Injectable `fetchFn` HTTP client |
-| `MeilisearchErrorMapper` | Vendor → Integration error translation |
-| Capability / Compatibility / Health / Diagnostics providers | Certification surfaces |
-| `MeilisearchConfigurationValidator` | Secret-ref-only validation |
-| `MeilisearchMetrics` / `MeilisearchLogger` | Observability wrappers |
+| Component                                                   | Role                                   |
+| ----------------------------------------------------------- | -------------------------------------- |
+| `MeilisearchAdapter`                                        | Extends `SearchIntegrationAdapterBase` |
+| `createMeilisearchAdapter` / `MeilisearchAdapterFactory`    | Bootstrap + SecretProvider wiring      |
+| `MeilisearchAdapterContext`                                 | Search context + Meilisearch providers |
+| `MeilisearchOperationRunner`                                | Query / index / document / health ops  |
+| `MeilisearchRestClient`                                     | Injectable `fetchFn` HTTP client       |
+| `MeilisearchErrorMapper`                                    | Vendor → Integration error translation |
+| Capability / Compatibility / Health / Diagnostics providers | Certification surfaces                 |
+| `MeilisearchConfigurationValidator`                         | Secret-ref-only validation             |
+| `MeilisearchMetrics` / `MeilisearchLogger`                  | Observability wrappers                 |
 
 ## Boundaries
 

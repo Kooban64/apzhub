@@ -43,9 +43,7 @@ export function validateConfigurationKeyMetadata(key: ConfigurationKey): void {
   }
 }
 
-export function validateValidationRuleMetadata(
-  rule: ConfigurationValidation,
-): void {
+export function validateValidationRuleMetadata(rule: ConfigurationValidation): void {
   if (!isConfigurationValidationKind(rule.kind)) {
     throw new ConfigurationDomainError(
       "invalid_validation_kind",

@@ -31,13 +31,8 @@ export interface TestingEngineeringIntelligenceService {
     label?: string,
     weights?: QualityScoreWeights,
   ): Promise<EngineeringSnapshot>;
-  getSnapshot(
-    ctx: ServiceRequestContext,
-    id: string,
-  ): Promise<EngineeringSnapshot>;
-  listSnapshots(
-    ctx: ServiceRequestContext,
-  ): Promise<readonly EngineeringSnapshot[]>;
+  getSnapshot(ctx: ServiceRequestContext, id: string): Promise<EngineeringSnapshot>;
+  listSnapshots(ctx: ServiceRequestContext): Promise<readonly EngineeringSnapshot[]>;
   buildTrend(
     ctx: ServiceRequestContext,
     kind: TrendSeriesKind,
@@ -72,7 +67,5 @@ export interface TestingEngineeringIntelligenceService {
     period: HistoricalPeriod,
     scope?: EngineeringScope,
   ): Promise<HistoricalSnapshot>;
-  listHistorical(
-    ctx: ServiceRequestContext,
-  ): Promise<readonly HistoricalSnapshot[]>;
+  listHistorical(ctx: ServiceRequestContext): Promise<readonly HistoricalSnapshot[]>;
 }

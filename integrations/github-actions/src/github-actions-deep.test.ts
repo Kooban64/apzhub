@@ -42,26 +42,18 @@ describe("deep coverage gaps", () => {
       expect(def.map).toBeTypeOf("function");
     }
 
-    await provider.getDefinition("repository", "default", "provider_to_canonical")!.map!(
-      MOCK_REPOSITORY,
-      mappingCtx,
-    );
+    await provider.getDefinition("repository", "default", "provider_to_canonical")!
+      .map!(MOCK_REPOSITORY, mappingCtx);
     await provider.getDefinition("pipeline", "default", "provider_to_canonical")!.map!(
       MOCK_WORKFLOW,
       mappingCtx,
     );
-    await provider.getDefinition("pipeline_run", "default", "provider_to_canonical")!.map!(
-      MOCK_RUN,
-      mappingCtx,
-    );
-    await provider.getDefinition("pipeline_job", "default", "provider_to_canonical")!.map!(
-      MOCK_JOB,
-      mappingCtx,
-    );
-    await provider.getDefinition("pipeline_step", "default", "provider_to_canonical")!.map!(
-      MOCK_JOB.steps![0],
-      mappingCtx,
-    );
+    await provider.getDefinition("pipeline_run", "default", "provider_to_canonical")!
+      .map!(MOCK_RUN, mappingCtx);
+    await provider.getDefinition("pipeline_job", "default", "provider_to_canonical")!
+      .map!(MOCK_JOB, mappingCtx);
+    await provider.getDefinition("pipeline_step", "default", "provider_to_canonical")!
+      .map!(MOCK_JOB.steps![0], mappingCtx);
     await provider.getDefinition(
       "artifact_reference",
       "default",
@@ -96,11 +88,8 @@ describe("deep coverage gaps", () => {
       "from_run",
       "provider_to_canonical",
     )!.map!(MOCK_RUN, mappingCtx);
-    await provider.getDefinition(
-      "pipeline_source",
-      "default",
-      "provider_to_canonical",
-    )!.map!(MOCK_RUN, mappingCtx);
+    await provider.getDefinition("pipeline_source", "default", "provider_to_canonical")!
+      .map!(MOCK_RUN, mappingCtx);
     await provider.getDefinition(
       "pipeline_log_reference",
       "default",
@@ -127,12 +116,11 @@ describe("deep coverage gaps", () => {
     });
     await adapter.testConnection(ctx);
     const health = await adapter.health(ctx);
+    expect(health.checks.find((c) => c.name === "github_actions_api")?.status).toBe(
+      "fail",
+    );
     expect(
-      health.checks.find((c) => c.name === "github_actions_api")?.status,
-    ).toBe("fail");
-    expect(
-      health.checks.find((c) => c.name === "github_actions_authentication")
-        ?.status,
+      health.checks.find((c) => c.name === "github_actions_authentication")?.status,
     ).toBe("fail");
 
     const diagnostics = await adapter.collectDiagnostics(ctx);

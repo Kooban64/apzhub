@@ -5,7 +5,9 @@ import { getDb, platformTenant, platformUserTenant, user } from "@apzhub/config/
 import { DEFAULT_PLATFORM_TENANT_ID } from "./index";
 import type { PlatformTenant, PlatformUserTenantMembership } from "./tenant-types";
 
-export async function getPrimaryTenantIdForUser(userId: string): Promise<string | undefined> {
+export async function getPrimaryTenantIdForUser(
+  userId: string,
+): Promise<string | undefined> {
   const db = getDb();
 
   const [userRow] = await db
@@ -37,7 +39,12 @@ export async function getPrimaryTenantIdForUser(userId: string): Promise<string 
   const [fallback] = await db
     .select()
     .from(platformUserTenant)
-    .where(and(eq(platformUserTenant.userId, userId), eq(platformUserTenant.status, "active")))
+    .where(
+      and(
+        eq(platformUserTenant.userId, userId),
+        eq(platformUserTenant.status, "active"),
+      ),
+    )
     .limit(1);
 
   return fallback?.tenantId;
@@ -65,7 +72,10 @@ export async function ensureUserTenantMembership(input: {
     .select()
     .from(platformUserTenant)
     .where(
-      and(eq(platformUserTenant.userId, input.userId), eq(platformUserTenant.tenantId, tenantId)),
+      and(
+        eq(platformUserTenant.userId, input.userId),
+        eq(platformUserTenant.tenantId, tenantId),
+      ),
     )
     .limit(1);
 
@@ -95,7 +105,10 @@ export async function ensureUserTenantMembership(input: {
     .update(platformUserTenant)
     .set({ isPrimary: true, updatedAt: timestamp })
     .where(
-      and(eq(platformUserTenant.userId, input.userId), eq(platformUserTenant.tenantId, tenantId)),
+      and(
+        eq(platformUserTenant.userId, input.userId),
+        eq(platformUserTenant.tenantId, tenantId),
+      ),
     );
 
   await db
@@ -158,7 +171,12 @@ export async function listMembershipsForUser(
   const rows = await db
     .select()
     .from(platformUserTenant)
-    .where(and(eq(platformUserTenant.userId, userId), eq(platformUserTenant.status, "active")));
+    .where(
+      and(
+        eq(platformUserTenant.userId, userId),
+        eq(platformUserTenant.status, "active"),
+      ),
+    );
 
   return rows.map((row) => ({
     membershipId: row.membershipId,

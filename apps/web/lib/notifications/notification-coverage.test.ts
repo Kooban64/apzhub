@@ -49,9 +49,12 @@ import {
 } from "./index";
 
 function okData(data: unknown) {
-  return new Response(JSON.stringify({ data, meta: { requestId: "r", correlationId: "c" } }), {
-    status: 200,
-  });
+  return new Response(
+    JSON.stringify({ data, meta: { requestId: "r", correlationId: "c" } }),
+    {
+      status: 200,
+    },
+  );
 }
 
 function okCollection(data: unknown[]) {
@@ -325,7 +328,7 @@ describe("APZNOTIFY-003 notification client coverage", () => {
           status: "ok",
           healthy: true,
           ready: true,
-          platformServicesVersion: "0.21.0",
+          platformServicesVersion: "0.25.0",
         });
       }
       if (
@@ -345,20 +348,27 @@ describe("APZNOTIFY-003 notification client coverage", () => {
       if (url.match(/\/api\/v1\/notifications\/[^/?]+$/)) {
         return okData(baseNotification);
       }
-      return new Response(JSON.stringify({ error: { message: "missing", code: "NOT_FOUND" } }), {
-        status: 404,
-      });
+      return new Response(
+        JSON.stringify({ error: { message: "missing", code: "NOT_FOUND" } }),
+        {
+          status: 404,
+        },
+      );
     });
     vi.stubGlobal("fetch", fetchMock);
 
     const client = createHttpNotificationClient();
-    expect((await client.listNotifications({ status: "pending" })).items[0]?.title).toBe("T");
+    expect(
+      (await client.listNotifications({ status: "pending" })).items[0]?.title,
+    ).toBe("T");
     expect((await client.getNotification("ntf_1")).revision).toBe(1);
     expect((await client.createNotification({ title: "X" })).id).toBe("ntf_1");
     expect((await client.updateNotification("ntf_1", { title: "Y" })).id).toBe("ntf_1");
     expect((await client.archiveNotification("ntf_1")).status).toBe("read");
     expect((await client.restoreNotification("ntf_1")).status).toBe("read");
-    expect((await client.transitionNotification("ntf_1", { to: "read" })).status).toBe("read");
+    expect((await client.transitionNotification("ntf_1", { to: "read" })).status).toBe(
+      "read",
+    );
     expect((await client.markNotificationRead("ntf_1")).status).toBe("read");
     expect((await client.acknowledgeNotification("ntf_1")).status).toBe("read");
     expect((await client.dismissNotification("ntf_1")).status).toBe("read");
@@ -369,7 +379,9 @@ describe("APZNOTIFY-003 notification client coverage", () => {
     expect((await client.archiveTemplate("ntt_1")).id).toBe("ntt_1");
     expect((await client.listPreferences()).items[0]?.id).toBe("ntp_1");
     expect((await client.getPreference("ntp_1")).enabled).toBe(true);
-    expect((await client.updatePreference("ntp_1", { enabled: false })).id).toBe("ntp_1");
+    expect((await client.updatePreference("ntp_1", { enabled: false })).id).toBe(
+      "ntp_1",
+    );
     expect((await client.listCategories()).items[0]?.key).toBe("system");
     expect((await client.getCategory("ntc_1")).id).toBe("ntc_1");
     expect((await client.listChannels()).items[0]?.deliveryAvailable).toBe(false);
@@ -383,7 +395,7 @@ describe("APZNOTIFY-003 notification client coverage", () => {
     expect((await client.getCapabilities()).deliveryEnabled).toBe(false);
     expect((await client.getHealth()).healthy).toBe(true);
     expect((await client.getReadiness()).ready).toBe(true);
-    expect((await client.getDiagnostics()).platformServicesVersion).toBe("0.21.0");
+    expect((await client.getDiagnostics()).platformServicesVersion).toBe("0.25.0");
   });
 
   it("covers mock parity and facade accessors", async () => {
@@ -396,7 +408,9 @@ describe("APZNOTIFY-003 notification client coverage", () => {
     expect((await updateNotification("x", { title: "B" })).revision).toBe(2);
     expect((await archiveNotification("x")).status).toBe("archived");
     expect((await restoreNotification("x")).status).toBe("draft");
-    expect((await transitionNotification("x", { to: "pending" })).status).toBe("pending");
+    expect((await transitionNotification("x", { to: "pending" })).status).toBe(
+      "pending",
+    );
     expect((await markNotificationRead("x")).status).toBe("read");
     expect((await acknowledgeNotification("x")).status).toBe("acknowledged");
     expect((await dismissNotification("x")).status).toBe("dismissed");
@@ -407,7 +421,9 @@ describe("APZNOTIFY-003 notification client coverage", () => {
     expect((await archiveNotificationTemplate("t")).id).toBe("t");
     expect((await listNotificationPreferences()).items[0]?.enabled).toBe(true);
     expect((await getNotificationPreference("p")).id).toBe("p");
-    expect((await updateNotificationPreference("p", { enabled: false })).enabled).toBe(false);
+    expect((await updateNotificationPreference("p", { enabled: false })).enabled).toBe(
+      false,
+    );
     expect((await listNotificationCategories()).items[0]?.key).toBe("system");
     expect((await getNotificationCategory("c")).id).toBe("c");
     expect((await listNotificationChannels()).items[0]?.deliveryAvailable).toBe(false);
@@ -421,7 +437,7 @@ describe("APZNOTIFY-003 notification client coverage", () => {
     expect((await getNotificationCapabilities()).deliveryPlaneReady).toBe(false);
     expect((await getNotificationHealth()).healthy).toBe(true);
     expect((await getNotificationReadiness()).ready).toBe(true);
-    expect((await getNotificationDiagnostics()).platformServicesVersion).toBe("0.21.0");
+    expect((await getNotificationDiagnostics()).platformServicesVersion).toBe("0.25.0");
 
     expect(notificationQueryKeys.list({ status: "pending" })[0]).toBe("notifications");
     expect(notificationQueryKeys.templates.detail("t")[3]).toBe("t");
@@ -440,12 +456,16 @@ describe("APZNOTIFY-003 notification client coverage", () => {
     clearNotificationQueries({ removeQueries } as never);
     expect(removeQueries).toHaveBeenCalled();
 
-    expect(toNotificationUserMessage(new NotificationClientError({ message: "x", status: 401 }))).toContain(
-      "authorized",
-    );
-    expect(toNotificationUserMessage(new NotificationClientError({ message: "x", status: 404 }))).toContain(
-      "not found",
-    );
+    expect(
+      toNotificationUserMessage(
+        new NotificationClientError({ message: "x", status: 401 }),
+      ),
+    ).toContain("authorized");
+    expect(
+      toNotificationUserMessage(
+        new NotificationClientError({ message: "x", status: 404 }),
+      ),
+    ).toContain("not found");
     expect(
       toNotificationUserMessage(
         new NotificationClientError({
@@ -455,13 +475,19 @@ describe("APZNOTIFY-003 notification client coverage", () => {
         }),
       ),
     ).toContain("unavailable");
-    expect(toNotificationUserMessage(new NotificationClientError({ message: "x", status: 501 }))).toContain(
-      "delivery",
-    );
-    expect(toNotificationUserMessage(new NotificationClientError({ message: "custom" }))).toBe("custom");
+    expect(
+      toNotificationUserMessage(
+        new NotificationClientError({ message: "x", status: 501 }),
+      ),
+    ).toContain("delivery");
+    expect(
+      toNotificationUserMessage(new NotificationClientError({ message: "custom" })),
+    ).toBe("custom");
     expect(toNotificationUserMessage(new Error("boom"))).toBe("boom");
     expect(toNotificationUserMessage("nope")).toContain("Unable");
 
-    expect(() => assertNotificationApiPath("/api/v1/notifications/smtp")).toThrow(/Forbidden/);
+    expect(() => assertNotificationApiPath("/api/v1/notifications/smtp")).toThrow(
+      /Forbidden/,
+    );
   });
 });

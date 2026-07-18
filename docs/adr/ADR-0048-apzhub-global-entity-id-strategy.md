@@ -25,19 +25,19 @@ OSS-110-03 introduces an `EntityMappingStore` that maps APZHUB global IDs to pro
 
 2. **Prefix catalogue** (constrained):
 
-   | Entity type | Prefix |
-   |-------------|--------|
-   | workspace | `ws` |
-   | project | `proj` |
-   | task | `task` |
-   | sprint | `sprint` |
-   | milestone | `milestone` |
-   | label | `label` |
-   | status | `status` |
-   | module | `module` |
-   | member | `member` |
-   | team | `team` |
-   | user | `user` |
+   | Entity type | Prefix      |
+   | ----------- | ----------- |
+   | workspace   | `ws`        |
+   | project     | `proj`      |
+   | task        | `task`      |
+   | sprint      | `sprint`    |
+   | milestone   | `milestone` |
+   | label       | `label`     |
+   | status      | `status`    |
+   | module      | `module`    |
+   | member      | `member`    |
+   | team        | `team`      |
+   | user        | `user`      |
 
 3. **Properties:**
    - Opaque to consumers (no vendor semantics)

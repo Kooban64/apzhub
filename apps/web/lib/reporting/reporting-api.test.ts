@@ -61,8 +61,8 @@ describe("reporting-api accessor", () => {
     });
     expect(generated.metadata.preview).toBe(false);
     expect((await listGeneratedReports()).items.length).toBeGreaterThan(0);
-    expect(
-      (await getGenerationMetadata(generated.metadata.id)).id,
-    ).toBe(generated.metadata.id);
+    expect((await getGenerationMetadata(generated.metadata.id)).id).toBe(
+      generated.metadata.id,
+    );
   });
 });

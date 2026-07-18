@@ -9,13 +9,13 @@
 
 OSS-100-03 delivers platform participation providers for operations:
 
-| Provider | Purpose |
-|----------|---------|
-| `HealthProvider` | Standard health check suite (logical — no HTTP) |
-| `DiagnosticsProvider` | Unified auth + connection + health diagnostics |
-| `VersionProvider` | Metadata-based version probe and compatibility |
-| `IntegrationLifecycleParticipant` | Enable / disable / shutdown hooks |
-| Platform bridge | Maps to `@apzhub/platform-lifecycle` shape without package import |
+| Provider                          | Purpose                                                           |
+| --------------------------------- | ----------------------------------------------------------------- |
+| `HealthProvider`                  | Standard health check suite (logical — no HTTP)                   |
+| `DiagnosticsProvider`             | Unified auth + connection + health diagnostics                    |
+| `VersionProvider`                 | Metadata-based version probe and compatibility                    |
+| `IntegrationLifecycleParticipant` | Enable / disable / shutdown hooks                                 |
+| Platform bridge                   | Maps to `@apzhub/platform-lifecycle` shape without package import |
 
 ---
 
@@ -23,7 +23,11 @@ OSS-100-03 delivers platform participation providers for operations:
 
 ```typescript
 import { createIntegrationOperationsStack } from "@apzhub/integration-sdk";
-import { InMemoryConnectionRegistry, InMemorySecretProvider, DefaultCredentialResolver } from "@apzhub/integration-sdk";
+import {
+  InMemoryConnectionRegistry,
+  InMemorySecretProvider,
+  DefaultCredentialResolver,
+} from "@apzhub/integration-sdk";
 
 const registry = new InMemoryConnectionRegistry();
 const stack = createIntegrationOperationsStack({
@@ -50,24 +54,24 @@ const diagnostics = await stack.diagnosticsProvider.collect({
 
 ## Subpath exports
 
-| Export | Module |
-|--------|--------|
-| `@apzhub/integration-sdk/health` | HealthProvider, aggregation |
-| `@apzhub/integration-sdk/version` | VersionProvider, compatibility |
-| `@apzhub/integration-sdk/diagnostics` | DiagnosticsProvider (unified) |
-| `@apzhub/integration-sdk/lifecycle` | LifecycleParticipant, platform bridge |
+| Export                                | Module                                |
+| ------------------------------------- | ------------------------------------- |
+| `@apzhub/integration-sdk/health`      | HealthProvider, aggregation           |
+| `@apzhub/integration-sdk/version`     | VersionProvider, compatibility        |
+| `@apzhub/integration-sdk/diagnostics` | DiagnosticsProvider (unified)         |
+| `@apzhub/integration-sdk/lifecycle`   | LifecycleParticipant, platform bridge |
 
 ---
 
 ## Health checks (logical)
 
-| Check | Source |
-|-------|--------|
-| `configuration` | Connection lifecycle + configuredAt |
-| `connectivity` | Base URL format validation |
-| `authentication` | Credential ref + connection state |
-| `authorization` | Connected state |
-| `version` | Connection metadata + VersionProvider |
+| Check             | Source                                               |
+| ----------------- | ---------------------------------------------------- |
+| `configuration`   | Connection lifecycle + configuredAt                  |
+| `connectivity`    | Base URL format validation                           |
+| `authentication`  | Credential ref + connection state                    |
+| `authorization`   | Connected state                                      |
+| `version`         | Connection metadata + VersionProvider                |
 | `circuit_breaker` | Pass/warn/fail — reflects breaker state (OSS-100-04) |
 
 Aggregation: critical fail → `unavailable`; warn → `degraded`; all pass → `healthy`.

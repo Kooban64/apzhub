@@ -55,7 +55,9 @@ describe("APZCONFIG-005 configuration-api facade coverage", () => {
     setConfigurationClient(createMockConfigurationClient());
     expect(getConfigurationClient()).toBeTruthy();
 
-    expect((await listConfigurations({ status: "draft", limit: 10 })).items.length).toBeGreaterThan(0);
+    expect(
+      (await listConfigurations({ status: "draft", limit: 10 })).items.length,
+    ).toBeGreaterThan(0);
     expect((await getConfiguration("cfg_mock_1")).id).toBe("cfg_mock_1");
     expect(
       (
@@ -69,12 +71,14 @@ describe("APZCONFIG-005 configuration-api facade coverage", () => {
         })
       ).id,
     ).toBe("cfg_new");
-    expect((await updateConfiguration("cfg_mock_1", { revision: 1 })).revision).toBeGreaterThan(0);
+    expect(
+      (await updateConfiguration("cfg_mock_1", { revision: 1 })).revision,
+    ).toBeGreaterThan(0);
     expect((await archiveConfiguration("cfg_mock_1")).status).toBe("archived");
     expect((await restoreConfiguration("cfg_mock_1")).status).toBe("draft");
-    expect((await transitionConfiguration("cfg_mock_1", { to: "validated" })).status).toBe(
-      "validated",
-    );
+    expect(
+      (await transitionConfiguration("cfg_mock_1", { to: "validated" })).status,
+    ).toBe("validated");
     expect((await validateConfiguration("cfg_mock_1")).valid).toBe(true);
     expect((await approveConfiguration("cfg_mock_1")).status).toBe("approved");
     expect((await publishConfiguration("cfg_mock_1")).status).toBe("published");
@@ -83,7 +87,9 @@ describe("APZCONFIG-005 configuration-api facade coverage", () => {
     expect((await listConfigurationNamespaces()).items[0]?.id).toBe("ns_mock");
     expect((await getConfigurationNamespace("ns_mock")).key).toBe("platform");
     expect((await listConfigurationGroups()).items[0]?.id).toBe("grp_mock");
-    expect((await listConfigurationVersions("cfg_mock_1")).items[0]?.immutable).toBe(true);
+    expect((await listConfigurationVersions("cfg_mock_1")).items[0]?.immutable).toBe(
+      true,
+    );
     expect(
       (
         await createConfigurationVersion("cfg_mock_1", {
@@ -92,9 +98,13 @@ describe("APZCONFIG-005 configuration-api facade coverage", () => {
         })
       ).id,
     ).toBe("ver_new");
-    expect((await publishConfigurationVersion("cfg_mock_1", "ver_mock")).isCurrent).toBe(true);
+    expect(
+      (await publishConfigurationVersion("cfg_mock_1", "ver_mock")).isCurrent,
+    ).toBe(true);
 
-    expect((await listConfigurationOverrides("cfg_mock_1")).items[0]?.id).toBe("ovr_mock");
+    expect((await listConfigurationOverrides("cfg_mock_1")).items[0]?.id).toBe(
+      "ovr_mock",
+    );
     expect(
       (
         await createConfigurationOverride({
@@ -121,10 +131,14 @@ describe("APZCONFIG-005 configuration-api facade coverage", () => {
         })
       ).valid,
     ).toBe(true);
-    expect((await listConfigurationReferences("cfg_mock_1")).items[0]?.id).toBe("ref_mock");
+    expect((await listConfigurationReferences("cfg_mock_1")).items[0]?.id).toBe(
+      "ref_mock",
+    );
     expect((await getConfigurationReference("ref_mock")).kind).toBe("projects");
     expect((await listConfigurationAudit()).items.length).toBeGreaterThan(0);
-    expect((await listConfigurationAudit("cfg_mock_1")).items.length).toBeGreaterThan(0);
+    expect((await listConfigurationAudit("cfg_mock_1")).items.length).toBeGreaterThan(
+      0,
+    );
     expect((await getConfigurationCapabilities()).runtimeResolutionReady).toBe(false);
     expect(await getConfigurationHealth()).toBeTruthy();
     expect(await getConfigurationReadiness()).toBeTruthy();

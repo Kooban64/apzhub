@@ -149,19 +149,22 @@ export function TestingCommandsPanel({
           {
             id: "review",
             label: "Send to review",
-            enabled: canReviewCertification(permissions) && Boolean(context.certificationId),
+            enabled:
+              canReviewCertification(permissions) && Boolean(context.certificationId),
             testId: "testing-command-review",
           },
           {
             id: "approve",
             label: "Approve",
-            enabled: canApproveCertification(permissions) && Boolean(context.certificationId),
+            enabled:
+              canApproveCertification(permissions) && Boolean(context.certificationId),
             testId: "testing-command-approve",
           },
           {
             id: "reject",
             label: "Reject",
-            enabled: canRejectCertification(permissions) && Boolean(context.certificationId),
+            enabled:
+              canRejectCertification(permissions) && Boolean(context.certificationId),
             testId: "testing-command-reject",
           },
           {
@@ -192,7 +195,9 @@ export function TestingCommandsPanel({
         </div>
       ) : null}
 
-      {variant === "execution" && canRegisterEvidence(permissions) && context.executionId ? (
+      {variant === "execution" &&
+      canRegisterEvidence(permissions) &&
+      context.executionId ? (
         <div className="max-w-md">
           <Input
             label="Evidence title"

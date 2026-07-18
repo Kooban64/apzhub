@@ -37,10 +37,7 @@ export type CertificationRecommendationId = Brand<
   "CertificationRecommendationId"
 >;
 export type CertificationAuditEntryId = Brand<string, "CertificationAuditEntryId">;
-export type CertificationHistoryEntryId = Brand<
-  string,
-  "CertificationHistoryEntryId"
->;
+export type CertificationHistoryEntryId = Brand<string, "CertificationHistoryEntryId">;
 export type QualityGateId = Brand<string, "QualityGateId">;
 export type ApprovalId = Brand<string, "ApprovalId">;
 export type SignatureId = Brand<string, "SignatureId">;
@@ -187,9 +184,7 @@ export function asCertificationRecommendationId(
   return brandId(value);
 }
 
-export function asCertificationAuditEntryId(
-  value: string,
-): CertificationAuditEntryId {
+export function asCertificationAuditEntryId(value: string): CertificationAuditEntryId {
   return brandId(value);
 }
 
@@ -231,9 +226,7 @@ export function asAutomationResultItemId(value: string): AutomationResultItemId 
   return brandId(value);
 }
 
-export function asAutomationImportHistoryId(
-  value: string,
-): AutomationImportHistoryId {
+export function asAutomationImportHistoryId(value: string): AutomationImportHistoryId {
   return brandId(value);
 }
 
@@ -314,7 +307,9 @@ export function asPlatformReleaseId(value: string): PlatformReleaseId {
 export function asPlatformReleasePackageId(value: string): PlatformReleasePackageId {
   return brandId(value);
 }
-export function asPlatformReleaseCandidateId(value: string): PlatformReleaseCandidateId {
+export function asPlatformReleaseCandidateId(
+  value: string,
+): PlatformReleaseCandidateId {
   return brandId(value);
 }
 export function asPlatformReleaseApprovalId(value: string): PlatformReleaseApprovalId {
@@ -323,7 +318,9 @@ export function asPlatformReleaseApprovalId(value: string): PlatformReleaseAppro
 export function asPlatformReleaseDecisionId(value: string): PlatformReleaseDecisionId {
   return brandId(value);
 }
-export function asPlatformCrossProductLinkId(value: string): PlatformCrossProductLinkId {
+export function asPlatformCrossProductLinkId(
+  value: string,
+): PlatformCrossProductLinkId {
   return brandId(value);
 }
 
@@ -365,9 +362,7 @@ export function asReleaseReadinessSnapshotId(
 export function asReleaseAuditEntryId(value: string): ReleaseAuditEntryId {
   return brandId(value);
 }
-export function asReleaseSummarySnapshotId(
-  value: string,
-): ReleaseSummarySnapshotId {
+export function asReleaseSummarySnapshotId(value: string): ReleaseSummarySnapshotId {
   return brandId(value);
 }
 
@@ -407,4 +402,3 @@ export function asBenchmarkId(value: string): BenchmarkId {
 export function asBaselineId(value: string): BaselineId {
   return brandId(value);
 }
-

@@ -27,7 +27,9 @@ import {
   evidenceLinksFromJson,
 } from "./validation";
 
-function defToDomain(row: CertificationGateDefinitionRecord): CertificationGateDefinition {
+function defToDomain(
+  row: CertificationGateDefinitionRecord,
+): CertificationGateDefinition {
   return {
     id: asCertificationGateDefinitionId(row.id),
     tenantId: row.tenantId,
@@ -89,8 +91,7 @@ async function resolveGateInputs(
   const coveragePage = await rt.persistence.coverageRecords.list(rctx);
   const coverage = coveragePage.items.find(
     (c) =>
-      links.coverageIds.includes(c.id) ||
-      (record.planId && c.planId === record.planId),
+      links.coverageIds.includes(c.id) || (record.planId && c.planId === record.planId),
   );
 
   const defects = await rt.persistence.defectLinks.list(rctx);
@@ -103,8 +104,7 @@ async function resolveGateInputs(
 
   const approvals = await rt.persistence.approvals.list(rctx);
   const pendingApprovals = approvals.items.filter(
-    (a) =>
-      a.certificationRecordId === certificationRecordId && a.status === "pending",
+    (a) => a.certificationRecordId === certificationRecordId && a.status === "pending",
   ).length;
 
   const executions = await rt.persistence.manualExecutions.list(rctx);
@@ -125,9 +125,8 @@ async function resolveGateInputs(
     record,
     links,
     coveragePercent: coverage?.percentage,
-    openCriticalDefectCount: links.defectIds.length || defects.items.length
-      ? openCritical
-      : undefined,
+    openCriticalDefectCount:
+      links.defectIds.length || defects.items.length ? openCritical : undefined,
     pendingApprovalCount: pendingApprovals,
     executionCompletePercent,
     manualCompletePercent: executionCompletePercent,
@@ -195,9 +194,7 @@ export function createCertificationGateService(
       );
       const def = defs.items.find((d) => d.gateKey === gateKey && d.enabled);
       const threshold =
-        typeof def?.configJson?.threshold === "number"
-          ? def.configJson.threshold
-          : 80;
+        typeof def?.configJson?.threshold === "number" ? def.configJson.threshold : 80;
 
       const result = evaluateCertificationGate({
         gateKey,

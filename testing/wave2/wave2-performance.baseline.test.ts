@@ -9,7 +9,6 @@ import {
   disposeZammadAdapter,
   createMockZammadFetch,
   DEFAULT_TEST_ZAMMAD_CONFIG,
-  TEST_CORRELATION_ID,
   TEST_TENANT_ID,
 } from "@apzhub/integration-zammad";
 
@@ -159,7 +158,6 @@ describe("OSS-102-08 Wave 2 performance baseline (mocked)", () => {
     }
 
     // Surface for certification report capture (not an assertion target).
-    // eslint-disable-next-line no-console
     console.log(
       "WAVE2_PERF_BASELINE",
       JSON.stringify({
@@ -170,9 +168,7 @@ describe("OSS-102-08 Wave 2 performance baseline (mocked)", () => {
         min: Math.min(...baselines.map((b) => b.ms)),
         max: Math.max(...baselines.map((b) => b.ms)),
         average: Number(
-          (
-            baselines.reduce((sum, b) => sum + b.ms, 0) / baselines.length
-          ).toFixed(3),
+          (baselines.reduce((sum, b) => sum + b.ms, 0) / baselines.length).toFixed(3),
         ),
       }),
     );

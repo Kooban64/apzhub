@@ -46,17 +46,17 @@ Deliver a manifest-driven, permission-gated, self-hosted enterprise platform tha
 
 These are non-negotiable (Documents 003, 008, 024):
 
-| Principle | Implication |
-|-----------|-------------|
-| **Not a portal** | No links to backend UIs; APZHUB APIs only |
-| **Layered architecture** | Presentation → Service → Connector → Engine — no bypass |
-| **Manifest first** | Contract before code for modules, services, integrations, events |
-| **Platform owns IAM** | BetterAuth authenticates; APZHUB owns permissions, tenants, audit |
-| **One Workbench** | Products register modules; no isolated page layouts |
-| **Events, not coupling** | Modules publish events; platform delivers notify/search/audit |
-| **Self-hosted OSS first** | CE/community editions; no mandatory commercial dependencies |
-| **Zero Trust** | Verify identity, permission, context on every request |
-| **System of Record clarity** | One authoritative store per datum (Document 011) |
+| Principle                    | Implication                                                       |
+| ---------------------------- | ----------------------------------------------------------------- |
+| **Not a portal**             | No links to backend UIs; APZHUB APIs only                         |
+| **Layered architecture**     | Presentation → Service → Connector → Engine — no bypass           |
+| **Manifest first**           | Contract before code for modules, services, integrations, events  |
+| **Platform owns IAM**        | BetterAuth authenticates; APZHUB owns permissions, tenants, audit |
+| **One Workbench**            | Products register modules; no isolated page layouts               |
+| **Events, not coupling**     | Modules publish events; platform delivers notify/search/audit     |
+| **Self-hosted OSS first**    | CE/community editions; no mandatory commercial dependencies       |
+| **Zero Trust**               | Verify identity, permission, context on every request             |
+| **System of Record clarity** | One authoritative store per datum (Document 011)                  |
 
 ---
 
@@ -64,23 +64,23 @@ These are non-negotiable (Documents 003, 008, 024):
 
 ### Platform goals
 
-| Horizon | Goal |
-|---------|------|
-| **Year 1** | Platform Core v2 — production hardening, workers, gateway, observability |
+| Horizon    | Goal                                                                                |
+| ---------- | ----------------------------------------------------------------------------------- |
+| **Year 1** | Platform Core v2 — production hardening, workers, gateway, observability            |
 | **Year 2** | First OSS productivity integrations (Projects, Documents, Time) via Integration SDK |
-| **Year 3** | Commercial SaaS pilot; Law Platform GA; Exchange or Banking validation |
-| **Year 4** | Partner ecosystem; marketplace for modules; Financial Engine extracted |
-| **Year 5** | Multi-region SaaS; Platform Core v3; AI platform maturity |
+| **Year 3** | Commercial SaaS pilot; Law Platform GA; Exchange or Banking validation              |
+| **Year 4** | Partner ecosystem; marketplace for modules; Financial Engine extracted              |
+| **Year 5** | Multi-region SaaS; Platform Core v3; AI platform maturity                           |
 
 ### Product goals
 
-| Product | Goal |
-|---------|------|
-| **Law Platform** | Regulated firm operations — matters, trust, billing, documents |
-| **Exchange** | Trading/compliance vertical (when chartered) |
-| **Banking** | Ledger-centric financial product (when chartered) |
+| Product                | Goal                                                               |
+| ---------------------- | ------------------------------------------------------------------ |
+| **Law Platform**       | Regulated firm operations — matters, trust, billing, documents     |
+| **Exchange**           | Trading/compliance vertical (when chartered)                       |
+| **Banking**            | Ledger-centric financial product (when chartered)                  |
 | **Productivity suite** | Projects, Documents, Support, Time, Analytics, Automation, Testing |
-| **Financial Engine** | Shared ledger primitives across verticals (post-extraction) |
+| **Financial Engine**   | Shared ledger primitives across verticals (post-extraction)        |
 
 ---
 
@@ -103,13 +103,13 @@ Products are capabilities.
 
 ## Commercial direction
 
-| Phase | Description | Timeline |
-|-------|-------------|----------|
-| **Internal platform** | Engineering demos, validation | **Now** (PC-001 certified) |
-| **Pilot platform** | Supervised single-firm / single-org | Post PCv2-01 |
-| **Enterprise platform** | Self-hosted multi-tenant, SLA | Post PCv2-06/07 |
-| **Commercial SaaS** | Managed multi-tenant, billing | Year 3+ |
-| **Marketplace** | Partner modules and integrations | Year 4+ |
+| Phase                   | Description                         | Timeline                   |
+| ----------------------- | ----------------------------------- | -------------------------- |
+| **Internal platform**   | Engineering demos, validation       | **Now** (PC-001 certified) |
+| **Pilot platform**      | Supervised single-firm / single-org | Post PCv2-01               |
+| **Enterprise platform** | Self-hosted multi-tenant, SLA       | Post PCv2-06/07            |
+| **Commercial SaaS**     | Managed multi-tenant, billing       | Year 3+                    |
+| **Marketplace**         | Partner modules and integrations    | Year 4+                    |
 
 **Revenue philosophy:** Platform licensing and vertical product subscriptions. OSS engines remain free; APZHUB value is integration, UX, governance, and operations.
 
@@ -119,13 +119,13 @@ See [Commercial Roadmap](./APZHUB-Commercial-Roadmap.md).
 
 ## Open-source strategy
 
-| Layer | Strategy |
-|-------|----------|
-| **APZHUB Platform Core** | Source-available or proprietary (owner decision); architecture is the moat |
-| **OSS engines** | Integrate CE/self-hosted; never fork unless upstream blocks critical path |
-| **Observability** | Prometheus, Grafana, Loki — behind connectors, not user-facing |
-| **Auth** | BetterAuth primary; Authentik legacy coexistence during migration |
-| **AI** | Local models (Ollama, etc.) + optional cloud APIs; no single-vendor lock-in |
+| Layer                    | Strategy                                                                    |
+| ------------------------ | --------------------------------------------------------------------------- |
+| **APZHUB Platform Core** | Source-available or proprietary (owner decision); architecture is the moat  |
+| **OSS engines**          | Integrate CE/self-hosted; never fork unless upstream blocks critical path   |
+| **Observability**        | Prometheus, Grafana, Loki — behind connectors, not user-facing              |
+| **Auth**                 | BetterAuth primary; Authentik legacy coexistence during migration           |
+| **AI**                   | Local models (Ollama, etc.) + optional cloud APIs; no single-vendor lock-in |
 
 **Rule:** Every OSS integration gets `integration.yaml`, health checks, upgrade runbook, and replacement strategy before production.
 
@@ -137,15 +137,15 @@ See [OSS Integration Strategy](./APZHUB-OSS-Integration-Strategy.md).
 
 Target: regulated and security-conscious organisations (law, finance, government contractors).
 
-| Capability | Enterprise requirement | Platform owner |
-|------------|------------------------|----------------|
-| Self-hosted deployment | Docker Compose / K8s | Platform + docs |
-| RBAC | Manifest-driven permissions | Platform Authorization |
-| Audit | Immutable audit trail | Platform + product services |
-| SSO/SAML | Per-engine + platform SSO | Identity + connectors |
-| Air-gap | No mandatory cloud | Architecture constraint |
-| HA/DR | Multi-instance, backup | PCv2-06 |
-| SOC 2 readiness | SIEM export, policies | PCv2-05 |
+| Capability             | Enterprise requirement      | Platform owner              |
+| ---------------------- | --------------------------- | --------------------------- |
+| Self-hosted deployment | Docker Compose / K8s        | Platform + docs             |
+| RBAC                   | Manifest-driven permissions | Platform Authorization      |
+| Audit                  | Immutable audit trail       | Platform + product services |
+| SSO/SAML               | Per-engine + platform SSO   | Identity + connectors       |
+| Air-gap                | No mandatory cloud          | Architecture constraint     |
+| HA/DR                  | Multi-instance, backup      | PCv2-06                     |
+| SOC 2 readiness        | SIEM export, policies       | PCv2-05                     |
 
 **Enterprise is not a separate product** — it is a deployment tier on the same Platform Core.
 
@@ -153,12 +153,12 @@ Target: regulated and security-conscious organisations (law, finance, government
 
 ## Cloud strategy
 
-| Model | Position |
-|-------|----------|
-| **Self-hosted (primary)** | Customer VPC or on-prem; full control |
-| **Managed APZHUB Cloud (future)** | Same codebase; tenant isolation via platform RLS + governance |
+| Model                             | Position                                                              |
+| --------------------------------- | --------------------------------------------------------------------- |
+| **Self-hosted (primary)**         | Customer VPC or on-prem; full control                                 |
+| **Managed APZHUB Cloud (future)** | Same codebase; tenant isolation via platform RLS + governance         |
 | **Hyperscaler-specific services** | **Avoid as mandatory** — S3-compatible, Vault-compatible abstractions |
-| **Multi-region** | Platform Core v3 — active-active deferred |
+| **Multi-region**                  | Platform Core v3 — active-active deferred                             |
 
 Cloud is an **operational packaging** of self-hosted architecture, not a redesign.
 

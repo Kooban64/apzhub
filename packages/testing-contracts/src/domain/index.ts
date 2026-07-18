@@ -160,9 +160,7 @@ export type {
   PipelineImportHistory,
   PipelineResultAdapter,
 } from "./cicd-pipeline";
-export {
-  DEFAULT_QUALITY_SCORE_WEIGHTS,
-} from "./engineering-intelligence";
+export { DEFAULT_QUALITY_SCORE_WEIGHTS } from "./engineering-intelligence";
 export type {
   EngineeringScope,
   QualityScoreWeights,

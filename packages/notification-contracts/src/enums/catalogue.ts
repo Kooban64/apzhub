@@ -31,9 +31,7 @@ export const NOTIFICATION_PRIORITIES = [
 
 export type NotificationPriority = (typeof NOTIFICATION_PRIORITIES)[number];
 
-export function isNotificationPriority(
-  value: string,
-): value is NotificationPriority {
+export function isNotificationPriority(value: string): value is NotificationPriority {
   return (NOTIFICATION_PRIORITIES as readonly string[]).includes(value);
 }
 
@@ -68,8 +66,7 @@ export const NOTIFICATION_REFERENCE_KINDS = [
   "future",
 ] as const;
 
-export type NotificationReferenceKind =
-  (typeof NOTIFICATION_REFERENCE_KINDS)[number];
+export type NotificationReferenceKind = (typeof NOTIFICATION_REFERENCE_KINDS)[number];
 
 export function isNotificationReferenceKind(
   value: string,
@@ -103,5 +100,4 @@ export const NOTIFICATION_AUDIT_ACTIONS = [
   "rule_updated",
 ] as const;
 
-export type NotificationAuditAction =
-  (typeof NOTIFICATION_AUDIT_ACTIONS)[number];
+export type NotificationAuditAction = (typeof NOTIFICATION_AUDIT_ACTIONS)[number];

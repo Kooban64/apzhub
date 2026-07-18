@@ -33,12 +33,8 @@ describe("workflow workspace routes", () => {
 
   it("resolves sections with fallback", () => {
     expect(resolveWorkflowsSection("/workspace/workflows")).toBe("overview");
-    expect(resolveWorkflowsSection("/workspace/workflows/templates")).toBe(
-      "templates",
-    );
-    expect(resolveWorkflowsSection("/workspace/workflows/unknown")).toBe(
-      "overview",
-    );
+    expect(resolveWorkflowsSection("/workspace/workflows/templates")).toBe("templates");
+    expect(resolveWorkflowsSection("/workspace/workflows/unknown")).toBe("overview");
   });
 
   it("builds section paths", () => {
@@ -49,9 +45,7 @@ describe("workflow workspace routes", () => {
   it("keeps API path helper", () => {
     expect(isWorkflowApiPath("/api/v1/workflows/health")).toBe(true);
     expect(WORKFLOW_ENGINE_API_BASE).toBe("/api/v1/workflows/engine");
-    expect(isWorkflowEngineApiPath("/api/v1/workflows/engine/health")).toBe(
-      true,
-    );
+    expect(isWorkflowEngineApiPath("/api/v1/workflows/engine/health")).toBe(true);
     expect(isWorkflowEngineApiPath("/api/v1/workflows/health")).toBe(false);
   });
 });
@@ -65,32 +59,23 @@ describe("workflow engine workspace routes (APZWORKFLOW-009)", () => {
 
   it("detects engine routes without colliding with SoR workflows", () => {
     expect(isWorkflowEngineRoute("/workspace/workflow-engine")).toBe(true);
-    expect(isWorkflowEngineRoute("/workspace/workflow-engine/workflows")).toBe(
-      true,
-    );
+    expect(isWorkflowEngineRoute("/workspace/workflow-engine/workflows")).toBe(true);
     expect(isWorkflowEngineRoute("/workspace/workflows")).toBe(false);
     expect(isWorkflowsRoute("/workspace/workflow-engine")).toBe(false);
   });
 
   it("resolves engine sections with fallback", () => {
-    expect(resolveWorkflowEngineSection("/workspace/workflow-engine")).toBe(
+    expect(resolveWorkflowEngineSection("/workspace/workflow-engine")).toBe("overview");
+    expect(resolveWorkflowEngineSection("/workspace/workflow-engine/diagnostics")).toBe(
+      "diagnostics",
+    );
+    expect(resolveWorkflowEngineSection("/workspace/workflow-engine/unknown")).toBe(
       "overview",
     );
-    expect(
-      resolveWorkflowEngineSection("/workspace/workflow-engine/diagnostics"),
-    ).toBe("diagnostics");
-    expect(
-      resolveWorkflowEngineSection("/workspace/workflow-engine/unknown"),
-    ).toBe("overview");
   });
 
   it("builds engine section paths", () => {
-    expect(workflowEngineSectionPath()).toBe(
-      "/workspace/workflow-engine/overview",
-    );
-    expect(workflowEngineSectionPath("tags")).toBe(
-      "/workspace/workflow-engine/tags",
-    );
+    expect(workflowEngineSectionPath()).toBe("/workspace/workflow-engine/overview");
+    expect(workflowEngineSectionPath("tags")).toBe("/workspace/workflow-engine/tags");
   });
 });
-

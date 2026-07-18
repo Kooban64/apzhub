@@ -303,7 +303,8 @@ function createInitialState(): MockState {
         id: "quality-release-24",
         title: "Release 2.4 quality posture",
         status: "attention",
-        summary: "Coverage strong; automation stability and one open P2 require review.",
+        summary:
+          "Coverage strong; automation stability and one open P2 require review.",
         updatedAt: BASE_TIMESTAMP,
       },
     ],
@@ -398,8 +399,13 @@ function findExecution(state: MockState, executionId: string): ExecutionViewMode
   return execution;
 }
 
-function findCertification(state: MockState, certificationId: string): MutableCertification {
-  const certification = state.certifications.find((item) => item.id === certificationId);
+function findCertification(
+  state: MockState,
+  certificationId: string,
+): MutableCertification {
+  const certification = state.certifications.find(
+    (item) => item.id === certificationId,
+  );
   if (!certification) notFound("Certification", certificationId);
   return certification;
 }
@@ -433,7 +439,9 @@ export function createMockTestingClient(): TestingClient {
         .map((item) => `${item.caseKey} (${item.status})`)
         .join(", ");
 
-      const runningCount = state.executions.filter((item) => item.status === "in_progress").length;
+      const runningCount = state.executions.filter(
+        (item) => item.status === "in_progress",
+      ).length;
       const pendingCount = state.certifications.filter(
         (item) => item.state === "pending_approval" || item.state === "in_review",
       ).length;
@@ -688,7 +696,9 @@ export function createMockTestingClient(): TestingClient {
     async decideCertification(input, options) {
       checkAborted(options);
       const certification = findCertification(state, input.certificationId);
-      const index = state.certifications.findIndex((item) => item.id === input.certificationId);
+      const index = state.certifications.findIndex(
+        (item) => item.id === input.certificationId,
+      );
       const decidedAt = nowIso();
       const stateByDecision: Record<ApprovalDecisionInput["decision"], string> = {
         approve: "approved",
@@ -731,7 +741,9 @@ export function createMockTestingClient(): TestingClient {
     async archiveCertification(certificationId, options) {
       checkAborted(options);
       const certification = findCertification(state, certificationId);
-      const index = state.certifications.findIndex((item) => item.id === certificationId);
+      const index = state.certifications.findIndex(
+        (item) => item.id === certificationId,
+      );
       const archivedAt = nowIso();
       const audit: CertificationAuditViewModel = {
         id: nextGeneratedId("audit", ++state.nextId),

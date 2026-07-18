@@ -10,12 +10,12 @@ Reporting is a shared APZHUB Platform capability. Products supply templates and 
 
 ## Packages
 
-| Package | Version | Role |
-|---------|---------|------|
-| `@apzhub/reporting-contracts` | 0.1.0 | Canonical models, `PlatformReportingService`, permissions |
-| `@apzhub/reporting-core` | 0.1.0 | Template engine, output providers, `createPlatformReportingService` |
-| `@apzhub/testing-services` | 0.11.0 | TCMS consumer — product templates + persistence ports |
-| `@apzhub/testing-contracts` | 0.11.0 | TCMS `ReportType` + re-exports |
+| Package                       | Version | Role                                                                |
+| ----------------------------- | ------- | ------------------------------------------------------------------- |
+| `@apzhub/reporting-contracts` | 0.1.0   | Canonical models, `PlatformReportingService`, permissions           |
+| `@apzhub/reporting-core`      | 0.1.0   | Template engine, output providers, `createPlatformReportingService` |
+| `@apzhub/testing-services`    | 0.11.0  | TCMS consumer — product templates + persistence ports               |
+| `@apzhub/testing-contracts`   | 0.11.0  | TCMS `ReportType` + re-exports                                      |
 
 ## Request path
 
@@ -35,13 +35,13 @@ PlatformServiceGateway.testing.reporting → TestingReportingServiceImpl → TCM
 
 ## Separation of concerns
 
-| Layer | Owner | Notes |
-|-------|-------|-------|
-| Canonical contracts | Platform | `reportType` is a string id |
-| Template engine / renderers | Platform | No business calculations |
-| Product templates | Product | e.g. TCMS builtin catalogue |
-| Persistence | Product | Ports; TCMS keeps `testing_report_*` tables |
-| Gateway facet | Product | e.g. `testing.reporting` |
+| Layer                       | Owner    | Notes                                       |
+| --------------------------- | -------- | ------------------------------------------- |
+| Canonical contracts         | Platform | `reportType` is a string id                 |
+| Template engine / renderers | Platform | No business calculations                    |
+| Product templates           | Product  | e.g. TCMS builtin catalogue                 |
+| Persistence                 | Product  | Ports; TCMS keeps `testing_report_*` tables |
+| Gateway facet               | Product  | e.g. `testing.reporting`                    |
 
 ## Future (documented only — not implemented)
 

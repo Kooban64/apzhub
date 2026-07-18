@@ -7,12 +7,7 @@ import { formatSupportDate } from "@/lib/support/format";
 import { supportQueryKeys } from "@/lib/support/query-keys";
 import { getSupportAnalytics } from "@/lib/support/support-api";
 
-import {
-  ErrorState,
-  LoadingState,
-  PageShell,
-  SupportStatCard,
-} from "./support-ui";
+import { ErrorState, LoadingState, PageShell, SupportStatCard } from "./support-ui";
 
 export function SupportAnalyticsView() {
   const query = useQuery({
@@ -89,7 +84,11 @@ function DistributionSection({
   buckets,
 }: {
   readonly title: string;
-  readonly buckets: readonly { readonly key: string; readonly label?: string; readonly count: number }[];
+  readonly buckets: readonly {
+    readonly key: string;
+    readonly label?: string;
+    readonly count: number;
+  }[];
 }) {
   if (buckets.length === 0) return null;
   return (
@@ -102,7 +101,9 @@ function DistributionSection({
             className="rounded-lg border border-[var(--color-border)] px-3 py-2 text-sm"
           >
             <span className="font-medium">{bucket.label ?? bucket.key}</span>
-            <span className="ml-2 text-[var(--color-muted-foreground)]">{bucket.count}</span>
+            <span className="ml-2 text-[var(--color-muted-foreground)]">
+              {bucket.count}
+            </span>
           </li>
         ))}
       </ul>

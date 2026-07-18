@@ -1,6 +1,4 @@
-import {
-  assertRequiredString,
-} from "../../validation/persistence-validation";
+import { assertRequiredString } from "../../validation/persistence-validation";
 import type {
   CrudRepository,
   EngineeringBaselineCreate,
@@ -24,10 +22,7 @@ import type {
   EngineeringSnapshotRecord,
   EngineeringTrendSeriesRecord,
 } from "../records";
-import {
-  baseMeta,
-  createInMemoryCrudRepository,
-} from "../in-memory/generic-crud";
+import { baseMeta, createInMemoryCrudRepository } from "../in-memory/generic-crud";
 
 export interface EngineeringInMemoryStores {
   engineeringSnapshots: Map<string, EngineeringSnapshotRecord>;
@@ -53,9 +48,7 @@ function assertHistoricalImmutable(): never {
   throw new Error("Historical snapshots are immutable");
 }
 
-export function createInMemoryEngineeringRepos(
-  stores: EngineeringInMemoryStores,
-): {
+export function createInMemoryEngineeringRepos(stores: EngineeringInMemoryStores): {
   engineeringSnapshots: CrudRepository<
     EngineeringSnapshotCreate,
     EngineeringSnapshotUpdate,
@@ -104,9 +97,7 @@ export function createInMemoryEngineeringRepos(
         return {
           ...meta,
           scope:
-            (input.scope as Readonly<Record<string, unknown>>) ??
-            existing?.scope ??
-            {},
+            (input.scope as Readonly<Record<string, unknown>>) ?? existing?.scope ?? {},
           qualityScoreJson:
             (input.qualityScoreJson as Readonly<Record<string, unknown>>) ??
             existing?.qualityScoreJson ??
@@ -124,9 +115,7 @@ export function createInMemoryEngineeringRepos(
             existing?.indicatorsJson ??
             [],
           trendsJson:
-            (input.trendsJson as readonly unknown[]) ??
-            existing?.trendsJson ??
-            [],
+            (input.trendsJson as readonly unknown[]) ?? existing?.trendsJson ?? [],
           computedAt: String(
             input.computedAt ?? existing?.computedAt ?? new Date().toISOString(),
           ),
@@ -154,20 +143,14 @@ export function createInMemoryEngineeringRepos(
         return {
           ...meta,
           scope:
-            (input.scope as Readonly<Record<string, unknown>>) ??
-            existing?.scope ??
-            {},
+            (input.scope as Readonly<Record<string, unknown>>) ?? existing?.scope ?? {},
           periodJson:
             (input.periodJson as Readonly<Record<string, unknown>>) ??
             existing?.periodJson ??
             {},
-          qualityScore: Number(
-            input.qualityScore ?? existing?.qualityScore ?? 0,
-          ),
+          qualityScore: Number(input.qualityScore ?? existing?.qualityScore ?? 0),
           engineeringHealthScore: Number(
-            input.engineeringHealthScore ??
-              existing?.engineeringHealthScore ??
-              0,
+            input.engineeringHealthScore ?? existing?.engineeringHealthScore ?? 0,
           ),
           indicatorsJson:
             (input.indicatorsJson as readonly unknown[]) ??
@@ -209,14 +192,10 @@ export function createInMemoryEngineeringRepos(
           ...meta,
           kind: String(input.kind ?? existing?.kind ?? ""),
           scope:
-            (input.scope as Readonly<Record<string, unknown>>) ??
-            existing?.scope ??
-            {},
+            (input.scope as Readonly<Record<string, unknown>>) ?? existing?.scope ?? {},
           periodKind: String(input.periodKind ?? existing?.periodKind ?? ""),
           pointsJson:
-            (input.pointsJson as readonly unknown[]) ??
-            existing?.pointsJson ??
-            [],
+            (input.pointsJson as readonly unknown[]) ?? existing?.pointsJson ?? [],
           direction: String(input.direction ?? existing?.direction ?? ""),
           delta: Number(input.delta ?? existing?.delta ?? 0),
           computedAt: String(
@@ -243,9 +222,7 @@ export function createInMemoryEngineeringRepos(
         return {
           ...meta,
           scope:
-            (input.scope as Readonly<Record<string, unknown>>) ??
-            existing?.scope ??
-            {},
+            (input.scope as Readonly<Record<string, unknown>>) ?? existing?.scope ?? {},
           metricKey: String(input.metricKey ?? existing?.metricKey ?? ""),
           comparisonJson:
             (input.comparisonJson as Readonly<Record<string, unknown>>) ??
@@ -277,9 +254,7 @@ export function createInMemoryEngineeringRepos(
         return {
           ...meta,
           scope:
-            (input.scope as Readonly<Record<string, unknown>>) ??
-            existing?.scope ??
-            {},
+            (input.scope as Readonly<Record<string, unknown>>) ?? existing?.scope ?? {},
           kind: String(input.kind ?? existing?.kind ?? ""),
           metricKey: String(input.metricKey ?? existing?.metricKey ?? ""),
           value: Number(input.value ?? existing?.value ?? 0),
@@ -313,9 +288,7 @@ export function createInMemoryEngineeringRepos(
         return {
           ...meta,
           scope:
-            (input.scope as Readonly<Record<string, unknown>>) ??
-            existing?.scope ??
-            {},
+            (input.scope as Readonly<Record<string, unknown>>) ?? existing?.scope ?? {},
           qualityScoreJson:
             (input.qualityScoreJson as Readonly<Record<string, unknown>>) ??
             existing?.qualityScoreJson ??

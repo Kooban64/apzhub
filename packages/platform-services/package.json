@@ -1,9 +1,9 @@
 {
   "name": "@apzhub/platform-services",
-  "version": "0.24.0",
+  "version": "0.25.0",
   "private": true,
   "type": "module",
-  "description": "Platform service implementations — Projects + Support + Reporting + Documents + Search + Workflow + Notification + Configuration + Administration + Identity + Observability (APZOBSERVE-002)",
+  "description": "Platform service implementations — Projects + Support + Reporting + Documents + Search + Workflow + Notification + Configuration + Administration + Identity + Observability + Metrics (APZMETRICS-002)",
   "exports": {
     ".": "./src/index.ts",
     "./testing": "./src/testing/index.ts",
@@ -53,6 +53,9 @@
     "@apzhub/testing-contracts": "workspace:*",
     "@apzhub/testing-persistence": "workspace:*",
     "@apzhub/testing-services": "workspace:*",
-    "drizzle-orm": "^0.44.2"
+    "drizzle-orm": "^0.45.2",
+    "@apzhub/metrics-contracts": "workspace:*",
+    "@apzhub/metrics-core": "workspace:*",
+    "@apzhub/metrics-persistence": "workspace:*"
   }
 }

@@ -33,12 +33,12 @@ Product persistence & APIs (consume session.tenantId — never own tenant SoR)
 
 ## Package boundaries
 
-| Package | Responsibility | Must not |
-| ------- | -------------- | -------- |
-| `@apzhub/auth` | Better Auth config, `getValidatedSession()`, session tenant enrichment | Own tenant tables; implement RBAC |
-| `@apzhub/platform-identity` | Tenant entity, membership, lifecycle, diagnostics, session resolver | Business logic; product-specific rules |
-| `@apzhub/config` | Drizzle schema, migrations, seed for platform identity tables | Tenant resolution logic |
-| Products (`apps/*`) | Pass `sessionTenantId` into persistence/API scopes | Duplicate tenant stores or auth enrichment |
+| Package                     | Responsibility                                                         | Must not                                   |
+| --------------------------- | ---------------------------------------------------------------------- | ------------------------------------------ |
+| `@apzhub/auth`              | Better Auth config, `getValidatedSession()`, session tenant enrichment | Own tenant tables; implement RBAC          |
+| `@apzhub/platform-identity` | Tenant entity, membership, lifecycle, diagnostics, session resolver    | Business logic; product-specific rules     |
+| `@apzhub/config`            | Drizzle schema, migrations, seed for platform identity tables          | Tenant resolution logic                    |
+| Products (`apps/*`)         | Pass `sessionTenantId` into persistence/API scopes                     | Duplicate tenant stores or auth enrichment |
 
 ---
 
@@ -46,12 +46,12 @@ Product persistence & APIs (consume session.tenantId — never own tenant SoR)
 
 `getValidatedSession(headers)` returns an **enriched session**:
 
-| Field | Description |
-| ----- | ----------- |
-| `user.id` | Better Auth user ID |
-| `user.activeTenantId` | Persisted active tenant (when set) |
-| `tenantId` | Resolved tenant for the current request |
-| `tenantSource` | `user_active_tenant` \| `primary_membership` \| `none` |
+| Field                 | Description                                            |
+| --------------------- | ------------------------------------------------------ |
+| `user.id`             | Better Auth user ID                                    |
+| `user.activeTenantId` | Persisted active tenant (when set)                     |
+| `tenantId`            | Resolved tenant for the current request                |
+| `tenantSource`        | `user_active_tenant` \| `primary_membership` \| `none` |
 
 **Resolution order:**
 
@@ -63,10 +63,10 @@ Product persistence & APIs (consume session.tenantId — never own tenant SoR)
 
 ## API surface (platform)
 
-| Route | Purpose |
-| ----- | ------- |
-| `GET /api/platform/v1/tenants` | List tenants + diagnostics (authenticated) |
-| `GET /api/platform/v1/identity/diagnostics` | Identity/tenant diagnostics for operators |
+| Route                                       | Purpose                                    |
+| ------------------------------------------- | ------------------------------------------ |
+| `GET /api/platform/v1/tenants`              | List tenants + diagnostics (authenticated) |
+| `GET /api/platform/v1/identity/diagnostics` | Identity/tenant diagnostics for operators  |
 
 ---
 
@@ -87,13 +87,13 @@ Product persistence & APIs (consume session.tenantId — never own tenant SoR)
 
 ## Deferred (M8-02+)
 
-| Capability | Milestone |
-| ---------- | --------- |
-| PermissionService / RBAC evaluation | M8-02 |
-| Administration Console | M8-03 |
-| User preferences service | M8-04 |
-| Feature flags & governance | M8-05 |
-| Security hardening pass | M8-06 |
+| Capability                          | Milestone |
+| ----------------------------------- | --------- |
+| PermissionService / RBAC evaluation | M8-02     |
+| Administration Console              | M8-03     |
+| User preferences service            | M8-04     |
+| Feature flags & governance          | M8-05     |
+| Security hardening pass             | M8-06     |
 
 ---
 

@@ -28,10 +28,7 @@ export const OBSERVE_FORBIDDEN_HTTP_SEGMENTS = [
 ] as const;
 
 export function isObserveApiPath(pathname: string): boolean {
-  return (
-    pathname === OBSERVE_API_BASE ||
-    pathname.startsWith(`${OBSERVE_API_BASE}/`)
-  );
+  return pathname === OBSERVE_API_BASE || pathname.startsWith(`${OBSERVE_API_BASE}/`);
 }
 
 export function assertObserveApiPath(pathname: string): void {
@@ -44,7 +41,6 @@ export function assertObserveApiPath(pathname: string): void {
     }
   }
 }
-
 
 /** Workspace base path for the Observability Workbench (metadata UI only). */
 export const OBSERVE_WORKSPACE_BASE = "/workspace/observability";

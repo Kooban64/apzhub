@@ -4,13 +4,13 @@
 
 ## Packages
 
-| Package | Version |
-|---------|---------|
-| `@apzhub/document-contracts` | 0.3.0 |
-| `@apzhub/document-core` | 0.3.0 |
-| `@apzhub/document-persistence` | 0.2.0 |
-| `@apzhub/document-storage` | 0.1.0 |
-| `@apzhub/platform-services` | 0.16.0 (gateway — see [document-platform-services-developer](./document-platform-services-developer.md)) |
+| Package                        | Version                                                                                                  |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| `@apzhub/document-contracts`   | 0.3.0                                                                                                    |
+| `@apzhub/document-core`        | 0.3.0                                                                                                    |
+| `@apzhub/document-persistence` | 0.2.0                                                                                                    |
+| `@apzhub/document-storage`     | 0.1.0                                                                                                    |
+| `@apzhub/platform-services`    | 0.16.0 (gateway — see [document-platform-services-developer](./document-platform-services-developer.md)) |
 
 ```bash
 pnpm --filter @apzhub/document-contracts typecheck

@@ -81,9 +81,8 @@ describe("Platform Quality gateway", () => {
 describe("Platform Quality registry and dependencies", () => {
   it("seeds eight default products via the gateway", async () => {
     const { services } = createHarness();
-    const registry = await services.gateway.platformQuality.products.ensureDefaultRegistry(
-      ctx,
-    );
+    const registry =
+      await services.gateway.platformQuality.products.ensureDefaultRegistry(ctx);
     expect(registry.productIds).toHaveLength(8);
     expect(PLATFORM_PRODUCT_KEYS).toHaveLength(8);
 
@@ -111,10 +110,10 @@ describe("Platform Quality registry and dependencies", () => {
     });
     expect(dep.requirement).toBe("required");
 
-    const validation = await services.gateway.platformQuality.dependencies.validate(ctx, [
-      testing.id,
-      projects.id,
-    ]);
+    const validation = await services.gateway.platformQuality.dependencies.validate(
+      ctx,
+      [testing.id, projects.id],
+    );
     expect(validation.valid).toBe(true);
     expect(validation.cycleDetected).toBe(false);
   });
@@ -133,20 +132,23 @@ describe("Platform Quality aggregation and release readiness", () => {
       "projects",
     );
 
-    const aggregate = await services.gateway.platformQuality.aggregation.aggregate(ctx, {
-      contributions: [
-        stubContribution({
-          productId: testing.id,
-          productKey: "testing",
-          qualityStatus: "healthy",
-        }),
-        stubContribution({
-          productId: projects.id,
-          productKey: "projects",
-          qualityStatus: "degraded",
-        }),
-      ],
-    });
+    const aggregate = await services.gateway.platformQuality.aggregation.aggregate(
+      ctx,
+      {
+        contributions: [
+          stubContribution({
+            productId: testing.id,
+            productKey: "testing",
+            qualityStatus: "healthy",
+          }),
+          stubContribution({
+            productId: projects.id,
+            productKey: "projects",
+            qualityStatus: "degraded",
+          }),
+        ],
+      },
+    );
 
     expect(aggregate.overallQualityStatus).toBe("degraded");
     expect(aggregate.isDecision).toBe(false);
@@ -199,11 +201,12 @@ describe("Platform Governance approvals", () => {
       productIds: [testing.id],
     });
 
-    const approval = await services.gateway.platformGovernance.approvals.requestApproval(
-      ctx,
-      release.id,
-      "technical",
-    );
+    const approval =
+      await services.gateway.platformGovernance.approvals.requestApproval(
+        ctx,
+        release.id,
+        "technical",
+      );
     expect(approval.status).toBe("pending");
 
     const decided = await services.gateway.platformGovernance.approvals.decideApproval(

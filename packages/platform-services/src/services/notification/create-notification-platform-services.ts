@@ -96,11 +96,7 @@ export function wrapNotificationPlatformGatewayWithPipeline(
       pipeline,
       "notificationReferences",
     ),
-    audit: wrapServiceWithPipeline(
-      gateway.audit,
-      pipeline,
-      "notificationAudit",
-    ),
+    audit: wrapServiceWithPipeline(gateway.audit, pipeline, "notificationAudit"),
     diagnostics: wrapServiceWithPipeline(
       gateway.diagnostics,
       pipeline,
@@ -118,8 +114,7 @@ function buildBundle(input: {
   const foundation = createNotificationFoundation({ repos: input.persistence });
   let seq = 0;
   const now = input.now ?? (() => new Date().toISOString());
-  const id =
-    input.id ?? (() => `ntf_${Date.now().toString(36)}_${++seq}`);
+  const id = input.id ?? (() => `ntf_${Date.now().toString(36)}_${++seq}`);
   const domain = createPlatformNotificationService({
     repos: input.persistence,
     now,

@@ -32,13 +32,13 @@ Tag **Platform Workflow** in `docs/specs/APZHUB-Platform-OpenAPI-v1.yaml` (versi
 
 ## Testing
 
-| Suite | Result |
-| --- | --- |
-| Vitest (handlers, client, boundary) | Required gate |
-| OpenAPI validation | Required gate |
-| Architecture audit `pnpm audit:workflow-http-client` | Required gate |
-| Playwright | Not in scope (slug conflict LIMITED if encountered) |
-| OpenAPI regression fix | Brittleness fixed: Task “plane” substring → vendor tokens; Platform API OpenAPI parse → `loadPlatformOpenApiSpecObject` (alias limit) |
+| Suite                                                | Result                                                                                                                                |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Vitest (handlers, client, boundary)                  | Required gate                                                                                                                         |
+| OpenAPI validation                                   | Required gate                                                                                                                         |
+| Architecture audit `pnpm audit:workflow-http-client` | Required gate                                                                                                                         |
+| Playwright                                           | Not in scope (slug conflict LIMITED if encountered)                                                                                   |
+| OpenAPI regression fix                               | Brittleness fixed: Task “plane” substring → vendor tokens; Platform API OpenAPI parse → `loadPlatformOpenApiSpecObject` (alias limit) |
 
 ## Explicit exclusions
 

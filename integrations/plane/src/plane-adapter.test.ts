@@ -1,6 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { buildAdapterContext, createInMemoryCapabilityRegistration } from "@apzhub/integration-sdk/adapter";
+import {
+  buildAdapterContext,
+  createInMemoryCapabilityRegistration,
+} from "@apzhub/integration-sdk/adapter";
 import { InMemorySecretProvider } from "@apzhub/integration-sdk/auth";
 
 import { PlaneAdapter } from "./plane-adapter";
@@ -65,14 +68,20 @@ describe("PlaneAdapter lifecycle", () => {
       correlationId: TEST_CORRELATION_ID,
       tenantId: TEST_TENANT_ID,
     });
-    expect(health.checks.some((check) => check.name === "plane_api" && check.status === "pass")).toBe(
-      true,
-    );
     expect(
-      health.checks.some((check) => check.name === "plane_authentication" && check.status === "pass"),
+      health.checks.some(
+        (check) => check.name === "plane_api" && check.status === "pass",
+      ),
     ).toBe(true);
     expect(
-      health.checks.some((check) => check.name === "plane_workspace" && check.status === "pass"),
+      health.checks.some(
+        (check) => check.name === "plane_authentication" && check.status === "pass",
+      ),
+    ).toBe(true);
+    expect(
+      health.checks.some(
+        (check) => check.name === "plane_workspace" && check.status === "pass",
+      ),
     ).toBe(true);
     expect(health.checks.some((check) => check.name === "plane_version")).toBe(true);
 

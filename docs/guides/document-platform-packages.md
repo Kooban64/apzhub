@@ -2,12 +2,12 @@
 
 **Milestone:** APZDOCS-002
 
-| Package | Path | Version | Depends on | Role |
-|---------|------|---------|------------|------|
-| `@apzhub/document-contracts` | `packages/document-contracts/` | 0.2.0 | — | Models, permissions, `PlatformDocumentService`, `DocumentContentService`, integrity/reconciliation types |
-| `@apzhub/document-core` | `packages/document-core/` | 0.2.0 | contracts | Domain service, storage ports, integrity, coordinator, config, foundation factory |
-| `@apzhub/document-persistence` | `packages/document-persistence/` | 0.2.0 | contracts, core, config | Postgres + in-memory repos; production/test factories |
-| `@apzhub/document-storage` | `packages/document-storage/` | 0.1.0 | contracts, core, `@aws-sdk/client-s3` | filesystem / S3 / memory providers + factories |
+| Package                        | Path                             | Version | Depends on                            | Role                                                                                                     |
+| ------------------------------ | -------------------------------- | ------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `@apzhub/document-contracts`   | `packages/document-contracts/`   | 0.2.0   | —                                     | Models, permissions, `PlatformDocumentService`, `DocumentContentService`, integrity/reconciliation types |
+| `@apzhub/document-core`        | `packages/document-core/`        | 0.2.0   | contracts                             | Domain service, storage ports, integrity, coordinator, config, foundation factory                        |
+| `@apzhub/document-persistence` | `packages/document-persistence/` | 0.2.0   | contracts, core, config               | Postgres + in-memory repos; production/test factories                                                    |
+| `@apzhub/document-storage`     | `packages/document-storage/`     | 0.1.0   | contracts, core, `@aws-sdk/client-s3` | filesystem / S3 / memory providers + factories                                                           |
 
 ## Dependency rules
 

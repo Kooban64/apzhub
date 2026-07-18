@@ -167,12 +167,8 @@ export function createInMemoryIdentityRepositories(
   const invitations = createTenantCrud(
     stores.invitations,
   ) as IdentityInvitationRepositoryPort;
-  const statuses = createTenantCrud(
-    stores.statuses,
-  ) as IdentityStatusRepositoryPort;
-  const policies = createTenantCrud(
-    stores.policies,
-  ) as IdentityPolicyRepositoryPort;
+  const statuses = createTenantCrud(stores.statuses) as IdentityStatusRepositoryPort;
+  const policies = createTenantCrud(stores.policies) as IdentityPolicyRepositoryPort;
 
   const tenants: IdentityTenantRepositoryPort = {
     async create(_ctx, entity) {
@@ -239,9 +235,7 @@ export function createInMemoryIdentityRepositories(
       return row;
     },
     async list(ctx) {
-      return [...stores.audits.values()].filter(
-        (row) => row.tenantId === ctx.tenantId,
-      );
+      return [...stores.audits.values()].filter((row) => row.tenantId === ctx.tenantId);
     },
   };
 
@@ -259,8 +253,7 @@ export function createInMemoryIdentityRepositories(
     async list(ctx, userId?: IdentityUserId) {
       return [...stores.history.values()].filter(
         (row) =>
-          row.tenantId === ctx.tenantId &&
-          (userId == null || row.userId === userId),
+          row.tenantId === ctx.tenantId && (userId == null || row.userId === userId),
       );
     },
   };
@@ -284,8 +277,7 @@ export function createInMemoryIdentityRepositories(
     async list(ctx, userId?: IdentityUserId) {
       return [...stores.references.values()].filter(
         (row) =>
-          row.tenantId === ctx.tenantId &&
-          (userId == null || row.userId === userId),
+          row.tenantId === ctx.tenantId && (userId == null || row.userId === userId),
       );
     },
   };
@@ -309,8 +301,7 @@ export function createInMemoryIdentityRepositories(
     async list(ctx, userId?: IdentityUserId) {
       return [...stores.metadata.values()].filter(
         (row) =>
-          row.tenantId === ctx.tenantId &&
-          (userId == null || row.userId === userId),
+          row.tenantId === ctx.tenantId && (userId == null || row.userId === userId),
       );
     },
   };

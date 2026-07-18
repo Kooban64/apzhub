@@ -7,10 +7,7 @@ import type { CoverageMetricKind } from "../enums";
 /** Derived coverage metrics — recomputation is deterministic and synchronous in-domain. */
 export interface CoverageService {
   listMetrics(ctx: ServiceRequestContext): Promise<readonly CoverageMetric[]>;
-  getMetric(
-    ctx: ServiceRequestContext,
-    id: CoverageMetricId,
-  ): Promise<CoverageMetric>;
+  getMetric(ctx: ServiceRequestContext, id: CoverageMetricId): Promise<CoverageMetric>;
   listMetricsByKind(
     ctx: ServiceRequestContext,
     kind: CoverageMetricKind,

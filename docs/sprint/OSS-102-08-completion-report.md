@@ -31,13 +31,13 @@ Full certification narrative: [OSS-102-08-Wave2-Certification.md](./OSS-102-08-W
 
 ## Audit results
 
-| Audit | Verdict |
-| --- | --- |
-| Architecture | PASS |
-| Dependency / boundary | PASS (0 violations) |
-| Capability matrix | PASS — accurate; placeholders uncertified |
-| Canonical mapping | PASS — Ticket≠Task; Article≠Comment |
-| Security / privacy | PASS |
+| Audit                        | Verdict                                    |
+| ---------------------------- | ------------------------------------------ |
+| Architecture                 | PASS                                       |
+| Dependency / boundary        | PASS (0 violations)                        |
+| Capability matrix            | PASS — accurate; placeholders uncertified  |
+| Canonical mapping            | PASS — Ticket≠Task; Article≠Comment        |
+| Security / privacy           | PASS                                       |
 | Reference Adapter comparison | Compliant with domain-specific differences |
 
 ---
@@ -54,29 +54,29 @@ Full certification narrative: [OSS-102-08-Wave2-Certification.md](./OSS-102-08-W
 
 ## Regression / coverage / performance
 
-| Metric | Value |
-| --- | --- |
-| Wave 2 suites | 14 passed |
-| Zammad package | 112 passed |
-| Combined zammad+wave2+plane+sdk+contracts | **300 passed / 32 files** |
-| Platform services | **137 passed** |
-| Zammad lines / stmts | **92.43%** |
-| Zammad branches | **74.67%** (below 80% aspirational — accepted) |
-| Zammad functions | **97.89%** |
-| Perf baseline | 15 ops; avg ~4–6 ms mocked |
+| Metric                                    | Value                                          |
+| ----------------------------------------- | ---------------------------------------------- |
+| Wave 2 suites                             | 14 passed                                      |
+| Zammad package                            | 112 passed                                     |
+| Combined zammad+wave2+plane+sdk+contracts | **300 passed / 32 files**                      |
+| Platform services                         | **137 passed**                                 |
+| Zammad lines / stmts                      | **92.43%**                                     |
+| Zammad branches                           | **74.67%** (below 80% aspirational — accepted) |
+| Zammad functions                          | **97.89%**                                     |
+| Perf baseline                             | 15 ops; avg ~4–6 ms mocked                     |
 
 ---
 
 ## Quality gates
 
-| Gate | Result |
-| --- | --- |
-| Lint / typecheck (zammad) | PASS |
-| Wave 2 E2E + cert + perf | PASS |
-| Plane / SDK / contracts | PASS |
-| Platform services | PASS |
-| Dependency audit | PASS |
-| `pnpm build` (apps/web) | FAIL — pre-existing Next.js `/_global-error` `useContext` (unrelated) |
+| Gate                      | Result                                                                |
+| ------------------------- | --------------------------------------------------------------------- |
+| Lint / typecheck (zammad) | PASS                                                                  |
+| Wave 2 E2E + cert + perf  | PASS                                                                  |
+| Plane / SDK / contracts   | PASS                                                                  |
+| Platform services         | PASS                                                                  |
+| Dependency audit          | PASS                                                                  |
+| `pnpm build` (apps/web)   | FAIL — pre-existing Next.js `/_global-error` `useContext` (unrelated) |
 
 ---
 

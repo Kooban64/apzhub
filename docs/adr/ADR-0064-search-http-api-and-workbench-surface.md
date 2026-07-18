@@ -1,11 +1,11 @@
 # ADR-0064: Search HTTP API and Workbench Surface
 
-| Field | Value |
-| --- | --- |
-| **Status** | Accepted |
-| **Date** | 2026-07-14 |
-| **Milestone** | APZSEARCH-007 |
-| **Deciders** | Owner / Architecture |
+| Field         | Value                |
+| ------------- | -------------------- |
+| **Status**    | Accepted             |
+| **Date**      | 2026-07-14           |
+| **Milestone** | APZSEARCH-007        |
+| **Deciders**  | Owner / Architecture |
 
 ---
 

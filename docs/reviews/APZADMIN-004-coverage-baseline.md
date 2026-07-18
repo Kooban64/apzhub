@@ -5,12 +5,12 @@
 
 ## Result
 
-| Metric | Workbench components |
-| --- | --- |
-| Lines | **~99%** |
-| Statements | **~99%** |
-| Functions | **~95%** |
-| Branches | **~87%** |
+| Metric     | Workbench components |
+| ---------- | -------------------- |
+| Lines      | **~99%**             |
+| Statements | **~99%**             |
+| Functions  | **~95%**             |
+| Branches   | **~87%**             |
 
 Measured via:
 

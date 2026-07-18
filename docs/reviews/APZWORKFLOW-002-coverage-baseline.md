@@ -14,19 +14,19 @@ pnpm exec vitest run --coverage --config vitest.config.ts \
   packages/platform-services/src/services/workflow
 ```
 
-| File | Lines | Functions | Branches |
-| --- | ---: | ---: | ---: |
-| `create-workflow-platform-services.ts` | 100% | 100% | — |
-| `workflow-service-impls.ts` | 100% | 100% | — |
-| `workflow-env.ts` | 100% | 100% | — |
-| **Directory total** | **100%** (357/357) | **100%** (42/42) | — |
+| File                                   |              Lines |        Functions | Branches |
+| -------------------------------------- | -----------------: | ---------------: | -------: |
+| `create-workflow-platform-services.ts` |               100% |             100% |        — |
+| `workflow-service-impls.ts`            |               100% |             100% |        — |
+| `workflow-env.ts`                      |               100% |             100% |        — |
+| **Directory total**                    | **100%** (357/357) | **100%** (42/42) |        — |
 
 Overall `@apzhub/platform-services` package coverage remains lower than this scoped directory when measured with repo-wide thresholds — that is expected. Gate for APZWORKFLOW-002 is the scoped workflow services directory.
 
 ## Supporting packages
 
-| Package | Notes |
-| --- | --- |
-| `@apzhub/workflow-contracts` | Gateway types + `workflow.validation` permission |
-| `@apzhub/workflow-core` | `createPlatformWorkflowService` domain coverage |
-| `@apzhub/workflow-persistence` | `createWorkflowPersistenceForTest` helper |
+| Package                        | Notes                                            |
+| ------------------------------ | ------------------------------------------------ |
+| `@apzhub/workflow-contracts`   | Gateway types + `workflow.validation` permission |
+| `@apzhub/workflow-core`        | `createPlatformWorkflowService` domain coverage  |
+| `@apzhub/workflow-persistence` | `createWorkflowPersistenceForTest` helper        |

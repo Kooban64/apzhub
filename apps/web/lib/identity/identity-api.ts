@@ -76,7 +76,9 @@ export function listOrganisations(
   return getIdentityClient().listOrganisations(...args);
 }
 
-export function getOrganisation(...args: Parameters<IdentityClient["getOrganisation"]>) {
+export function getOrganisation(
+  ...args: Parameters<IdentityClient["getOrganisation"]>
+) {
   return getIdentityClient().getOrganisation(...args);
 }
 
@@ -108,7 +110,9 @@ export function updateTenant(...args: Parameters<IdentityClient["updateTenant"]>
   return getIdentityClient().updateTenant(...args);
 }
 
-export function listDepartments(...args: Parameters<IdentityClient["listDepartments"]>) {
+export function listDepartments(
+  ...args: Parameters<IdentityClient["listDepartments"]>
+) {
   return getIdentityClient().listDepartments(...args);
 }
 
@@ -116,11 +120,15 @@ export function getDepartment(...args: Parameters<IdentityClient["getDepartment"
   return getIdentityClient().getDepartment(...args);
 }
 
-export function createDepartment(...args: Parameters<IdentityClient["createDepartment"]>) {
+export function createDepartment(
+  ...args: Parameters<IdentityClient["createDepartment"]>
+) {
   return getIdentityClient().createDepartment(...args);
 }
 
-export function updateDepartment(...args: Parameters<IdentityClient["updateDepartment"]>) {
+export function updateDepartment(
+  ...args: Parameters<IdentityClient["updateDepartment"]>
+) {
   return getIdentityClient().updateDepartment(...args);
 }
 
@@ -140,7 +148,9 @@ export function updatePosition(...args: Parameters<IdentityClient["updatePositio
   return getIdentityClient().updatePosition(...args);
 }
 
-export function listMemberships(...args: Parameters<IdentityClient["listMemberships"]>) {
+export function listMemberships(
+  ...args: Parameters<IdentityClient["listMemberships"]>
+) {
   return getIdentityClient().listMemberships(...args);
 }
 
@@ -148,11 +158,15 @@ export function getMembership(...args: Parameters<IdentityClient["getMembership"
   return getIdentityClient().getMembership(...args);
 }
 
-export function createMembership(...args: Parameters<IdentityClient["createMembership"]>) {
+export function createMembership(
+  ...args: Parameters<IdentityClient["createMembership"]>
+) {
   return getIdentityClient().createMembership(...args);
 }
 
-export function updateMembership(...args: Parameters<IdentityClient["updateMembership"]>) {
+export function updateMembership(
+  ...args: Parameters<IdentityClient["updateMembership"]>
+) {
   return getIdentityClient().updateMembership(...args);
 }
 
@@ -180,7 +194,9 @@ export function updateServiceAssignment(
   return getIdentityClient().updateServiceAssignment(...args);
 }
 
-export function listInvitations(...args: Parameters<IdentityClient["listInvitations"]>) {
+export function listInvitations(
+  ...args: Parameters<IdentityClient["listInvitations"]>
+) {
   return getIdentityClient().listInvitations(...args);
 }
 
@@ -188,15 +204,21 @@ export function getInvitation(...args: Parameters<IdentityClient["getInvitation"
   return getIdentityClient().getInvitation(...args);
 }
 
-export function createInvitation(...args: Parameters<IdentityClient["createInvitation"]>) {
+export function createInvitation(
+  ...args: Parameters<IdentityClient["createInvitation"]>
+) {
   return getIdentityClient().createInvitation(...args);
 }
 
-export function updateInvitation(...args: Parameters<IdentityClient["updateInvitation"]>) {
+export function updateInvitation(
+  ...args: Parameters<IdentityClient["updateInvitation"]>
+) {
   return getIdentityClient().updateInvitation(...args);
 }
 
-export function listActivations(...args: Parameters<IdentityClient["listActivations"]>) {
+export function listActivations(
+  ...args: Parameters<IdentityClient["listActivations"]>
+) {
   return getIdentityClient().listActivations(...args);
 }
 
@@ -204,19 +226,27 @@ export function getActivation(...args: Parameters<IdentityClient["getActivation"
   return getIdentityClient().getActivation(...args);
 }
 
-export function createActivation(...args: Parameters<IdentityClient["createActivation"]>) {
+export function createActivation(
+  ...args: Parameters<IdentityClient["createActivation"]>
+) {
   return getIdentityClient().createActivation(...args);
 }
 
-export function listDeactivations(...args: Parameters<IdentityClient["listDeactivations"]>) {
+export function listDeactivations(
+  ...args: Parameters<IdentityClient["listDeactivations"]>
+) {
   return getIdentityClient().listDeactivations(...args);
 }
 
-export function getDeactivation(...args: Parameters<IdentityClient["getDeactivation"]>) {
+export function getDeactivation(
+  ...args: Parameters<IdentityClient["getDeactivation"]>
+) {
   return getIdentityClient().getDeactivation(...args);
 }
 
-export function createDeactivation(...args: Parameters<IdentityClient["createDeactivation"]>) {
+export function createDeactivation(
+  ...args: Parameters<IdentityClient["createDeactivation"]>
+) {
   return getIdentityClient().createDeactivation(...args);
 }
 
@@ -260,11 +290,15 @@ export function getReference(...args: Parameters<IdentityClient["getReference"]>
   return getIdentityClient().getReference(...args);
 }
 
-export function createReference(...args: Parameters<IdentityClient["createReference"]>) {
+export function createReference(
+  ...args: Parameters<IdentityClient["createReference"]>
+) {
   return getIdentityClient().createReference(...args);
 }
 
-export function updateReference(...args: Parameters<IdentityClient["updateReference"]>) {
+export function updateReference(
+  ...args: Parameters<IdentityClient["updateReference"]>
+) {
   return getIdentityClient().updateReference(...args);
 }
 
@@ -276,7 +310,9 @@ export function getReadiness(...args: Parameters<IdentityClient["getReadiness"]>
   return getIdentityClient().getReadiness(...args);
 }
 
-export function getCapabilities(...args: Parameters<IdentityClient["getCapabilities"]>) {
+export function getCapabilities(
+  ...args: Parameters<IdentityClient["getCapabilities"]>
+) {
   return getIdentityClient().getCapabilities(...args);
 }
 

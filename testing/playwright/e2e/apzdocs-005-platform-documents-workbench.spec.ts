@@ -53,7 +53,10 @@ async function mockDocumentsHttpApi(page: Page, seen: string[]) {
       return;
     }
 
-    if (/\/documents\/[^/]+$/.test(url.pathname) && route.request().method() === "GET") {
+    if (
+      /\/documents\/[^/]+$/.test(url.pathname) &&
+      route.request().method() === "GET"
+    ) {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -149,9 +152,7 @@ test.describe("APZDOCS-005 Platform Documents workbench", () => {
     await expect(
       page.getByRole("toolbar", { name: /Documents commands/i }),
     ).toBeVisible();
-    await expect(
-      page.getByLabel(/Filter documents by metadata/i),
-    ).toBeVisible();
+    await expect(page.getByLabel(/Filter documents by metadata/i)).toBeVisible();
 
     await page.setViewportSize({ width: 390, height: 844 });
     await expect(page.getByTestId("documents-page")).toBeVisible();

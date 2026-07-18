@@ -23,8 +23,7 @@ export const workflowQueryKeys = {
     ] as const,
   details: () => [...ROOT, "detail"] as const,
   detail: (workflowId: string) => [...ROOT, "detail", workflowId] as const,
-  versions: (workflowId: string) =>
-    [...ROOT, "versions", workflowId] as const,
+  versions: (workflowId: string) => [...ROOT, "versions", workflowId] as const,
   version: (workflowId: string, versionId: string) =>
     [...ROOT, "versions", workflowId, versionId] as const,
   audit: (workflowId: string) => [...ROOT, "audit", workflowId] as const,
@@ -43,8 +42,7 @@ export const workflowQueryKeys = {
   folders: {
     all: [...ROOT, "folders"] as const,
     list: () => [...ROOT, "folders", "list"] as const,
-    detail: (folderId: string) =>
-      [...ROOT, "folders", "detail", folderId] as const,
+    detail: (folderId: string) => [...ROOT, "folders", "detail", folderId] as const,
   },
   capabilities: () => [...ROOT, "capabilities"] as const,
   health: () => [...ROOT, "health"] as const,

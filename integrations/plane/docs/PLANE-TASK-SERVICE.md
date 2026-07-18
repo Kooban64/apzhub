@@ -22,18 +22,18 @@ Future TaskServiceImpl
 
 ## Supported operations
 
-| Method | Operation name | Notes |
-|--------|----------------|-------|
-| `list` | `plane.tasks.list` | Paging, filters, sorting |
-| `get` | `plane.tasks.get` | By provider-native / provisional ID |
-| `create` | `plane.tasks.create` | Canonical `CreateTaskInput` |
-| `update` | `plane.tasks.update` | Partial update only |
-| `archive` | `plane.tasks.archive` | Soft-archive via `archived_at` |
-| `transition` | `plane.tasks.transition` | Validates state belongs to project |
-| `assign` / `unassign` / `setAssignees` | `plane.tasks.assign` / `unassign` | Multi-assignee |
-| `addLabels` / `removeLabels` / `setLabels` | `plane.tasks.labels` | Label set mutations |
-| `addToCycle` / `removeFromCycle` | `plane.tasks.add_cycle` / `remove_cycle` | Canonical sprint IDs |
-| `addToModule` / `removeFromModule` | `plane.tasks.add_module` / `remove_module` | Module association |
+| Method                                     | Operation name                             | Notes                               |
+| ------------------------------------------ | ------------------------------------------ | ----------------------------------- |
+| `list`                                     | `plane.tasks.list`                         | Paging, filters, sorting            |
+| `get`                                      | `plane.tasks.get`                          | By provider-native / provisional ID |
+| `create`                                   | `plane.tasks.create`                       | Canonical `CreateTaskInput`         |
+| `update`                                   | `plane.tasks.update`                       | Partial update only                 |
+| `archive`                                  | `plane.tasks.archive`                      | Soft-archive via `archived_at`      |
+| `transition`                               | `plane.tasks.transition`                   | Validates state belongs to project  |
+| `assign` / `unassign` / `setAssignees`     | `plane.tasks.assign` / `unassign`          | Multi-assignee                      |
+| `addLabels` / `removeLabels` / `setLabels` | `plane.tasks.labels`                       | Label set mutations                 |
+| `addToCycle` / `removeFromCycle`           | `plane.tasks.add_cycle` / `remove_cycle`   | Canonical sprint IDs                |
+| `addToModule` / `removeFromModule`         | `plane.tasks.add_module` / `remove_module` | Module association                  |
 
 ---
 
@@ -50,11 +50,11 @@ Future TaskServiceImpl
 
 ## Identity treatment
 
-| Boundary | ID form |
-|----------|---------|
-| Adapter public Task | Provisional `task_plane_{planeIssueId}` |
-| Related entities | `proj_plane_*`, `status_plane_*`, `label_plane_*`, `sprint_plane_*`, `module_plane_*`, `user_plane_*` |
-| Future platform provider | Resolves/persists APZHUB global IDs via `EntityMappingStore` |
+| Boundary                 | ID form                                                                                               |
+| ------------------------ | ----------------------------------------------------------------------------------------------------- |
+| Adapter public Task      | Provisional `task_plane_{planeIssueId}`                                                               |
+| Related entities         | `proj_plane_*`, `status_plane_*`, `label_plane_*`, `sprint_plane_*`, `module_plane_*`, `user_plane_*` |
+| Future platform provider | Resolves/persists APZHUB global IDs via `EntityMappingStore`                                          |
 
 The adapter never imports mapping-store or platform-service implementations.
 

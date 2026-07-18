@@ -44,10 +44,7 @@ export interface IntegrationDiagnostics {
 }
 
 export type IntegrationHealthStatus =
-  | "healthy"
-  | "degraded"
-  | "unavailable"
-  | "disabled";
+  "healthy" | "degraded" | "unavailable" | "disabled";
 
 export type IntegrationHealthCheckStatus = "pass" | "warn" | "fail";
 

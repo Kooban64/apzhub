@@ -2,7 +2,13 @@ import { z } from "zod";
 
 import { globalIdWithPrefix, paginationQuerySchema } from "./common";
 
-const projectSortFields = ["name", "createdAt", "updatedAt", "identifier", "status"] as const;
+const projectSortFields = [
+  "name",
+  "createdAt",
+  "updatedAt",
+  "identifier",
+  "status",
+] as const;
 
 export const projectListQuerySchema = paginationQuerySchema
   .extend({

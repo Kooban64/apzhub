@@ -72,7 +72,9 @@ describe("TestingCertificationView", () => {
     render(wrap(<TestingCertificationView permissions={["certification.view"]} />));
 
     await waitFor(() => {
-      expect(screen.getByRole("heading", { level: 1, name: "Certification" })).toBeTruthy();
+      expect(
+        screen.getByRole("heading", { level: 1, name: "Certification" }),
+      ).toBeTruthy();
       expect(screen.getByText("Release 2.4 Certification")).toBeTruthy();
     });
   });

@@ -2,9 +2,8 @@ import { PlatformGovernanceService } from "./platform-governance-service";
 import { getSharedGovernanceService } from "./index";
 
 export async function createPostgresGovernanceService(): Promise<PlatformGovernanceService> {
-  const { createPostgresGovernanceRepositories, seedPostgresGovernanceRows } = await import(
-    "./postgres-governance-store"
-  );
+  const { createPostgresGovernanceRepositories, seedPostgresGovernanceRows } =
+    await import("./postgres-governance-store");
   const repositories = await createPostgresGovernanceRepositories();
   await seedPostgresGovernanceRows();
   return new PlatformGovernanceService({ repositories, storageBackend: "postgres" });

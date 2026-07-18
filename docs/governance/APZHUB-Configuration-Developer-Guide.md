@@ -66,11 +66,11 @@ provider.getDiagnostics();
 
 ## Law platform variables
 
-| Variable | Default | Purpose |
-|----------|---------|---------|
-| `LAW_REPOSITORY_MODE` | `memory` | Persistence backend |
-| `LAW_TENANT_ID` | — | Dev/test tenant override |
-| `LAW_OUTBOX_ENABLED` | — | Outbox toggle in postgres mode |
+| Variable              | Default  | Purpose                        |
+| --------------------- | -------- | ------------------------------ |
+| `LAW_REPOSITORY_MODE` | `memory` | Persistence backend            |
+| `LAW_TENANT_ID`       | —        | Dev/test tenant override       |
+| `LAW_OUTBOX_ENABLED`  | —        | Outbox toggle in postgres mode |
 
 Access via `getEnv()`:
 

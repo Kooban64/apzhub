@@ -20,12 +20,12 @@ pnpm exec vitest run --coverage \
 
 ### Result
 
-| Metric | Coverage |
-|--------|----------|
-| Statements | 98.23% |
-| Branches | 89.16% |
-| Functions | 98.96% |
-| Lines | 98.23% |
+| Metric     | Coverage |
+| ---------- | -------- |
+| Statements | 98.23%   |
+| Branches   | 89.16%   |
+| Functions  | 98.96%   |
+| Lines      | 98.23%   |
 
 Thresholds (≥95% lines/statements, ≥90% functions, ≥80% branches): **PASS**
 
@@ -50,12 +50,12 @@ pnpm exec vitest run --coverage \
 
 ### Result
 
-| Metric | Coverage |
-|--------|----------|
-| Statements | 100% |
-| Branches | 98.03% |
-| Functions | 100% |
-| Lines | 100% |
+| Metric     | Coverage |
+| ---------- | -------- |
+| Statements | 100%     |
+| Branches   | 98.03%   |
+| Functions  | 100%     |
+| Lines      | 100%     |
 
 Thresholds (≥95% lines/statements, ≥90% functions, ≥80% branches): **PASS**
 

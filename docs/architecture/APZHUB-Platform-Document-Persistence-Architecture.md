@@ -21,19 +21,19 @@ DocumentContentService / PlatformDocumentService
 
 ## Packages
 
-| Package | Version | Role |
-|---------|---------|------|
-| `@apzhub/document-contracts` | 0.2.0 | Content/version/integrity/reconciliation contracts |
-| `@apzhub/document-core` | 0.2.0 | Coordinator, integrity, config, foundation factory |
-| `@apzhub/document-persistence` | 0.2.0 | PostgreSQL + in-memory repositories + factories |
-| `@apzhub/document-storage` | 0.1.0 | Provider implementations (separate package) |
+| Package                        | Version | Role                                               |
+| ------------------------------ | ------- | -------------------------------------------------- |
+| `@apzhub/document-contracts`   | 0.2.0   | Content/version/integrity/reconciliation contracts |
+| `@apzhub/document-core`        | 0.2.0   | Coordinator, integrity, config, foundation factory |
+| `@apzhub/document-persistence` | 0.2.0   | PostgreSQL + in-memory repositories + factories    |
+| `@apzhub/document-storage`     | 0.1.0   | Provider implementations (separate package)        |
 
 ## Schema (APZDOCS-002)
 
-| Table | Purpose |
-|-------|---------|
-| `platform_document_version` | Immutable content version metadata (`immutable = true` enforced) |
-| `platform_document_storage_object` | Storage object tracking row (status, checksum, key) |
+| Table                              | Purpose                                                          |
+| ---------------------------------- | ---------------------------------------------------------------- |
+| `platform_document_version`        | Immutable content version metadata (`immutable = true` enforced) |
+| `platform_document_storage_object` | Storage object tracking row (status, checksum, key)              |
 
 Migrations: `0039_apz_platform_document_storage`, `0040_apz_platform_document_storage_rls`.  
 Also: `platform_document.revision` added for optimistic concurrency.

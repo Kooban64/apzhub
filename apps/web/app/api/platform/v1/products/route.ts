@@ -10,7 +10,9 @@ import { ensurePlatformRuntimeReady } from "@/lib/runtime-init";
 
 const PRODUCT_IDS = new Set(["legal-platform", "law-platform"]);
 
-function mapProduct(record: ReturnType<ReturnType<typeof Runtime.registry>["getServices"]>[number]) {
+function mapProduct(
+  record: ReturnType<ReturnType<typeof Runtime.registry>["getServices"]>[number],
+) {
   return {
     id: record.id,
     name: record.name,
@@ -19,7 +21,8 @@ function mapProduct(record: ReturnType<ReturnType<typeof Runtime.registry>["getS
     lifecycleState: record.lifecycleState,
     healthState: record.healthState,
     category: record.metadata.category,
-    enabled: record.lifecycleState === "active" || record.lifecycleState === "discovered",
+    enabled:
+      record.lifecycleState === "active" || record.lifecycleState === "discovered",
   };
 }
 
@@ -30,8 +33,7 @@ export async function GET(): Promise<NextResponse> {
   const products = registry
     .getServices()
     .filter(
-      (record) =>
-        PRODUCT_IDS.has(record.id) || record.metadata.category === "product",
+      (record) => PRODUCT_IDS.has(record.id) || record.metadata.category === "product",
     )
     .map(mapProduct);
 

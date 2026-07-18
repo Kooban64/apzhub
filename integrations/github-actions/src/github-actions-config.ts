@@ -1,9 +1,6 @@
 /** Strongly typed GitHub Actions adapter configuration — adapter-internal. */
 
-export type GitHubActionsAuthMode =
-  | "personal_access_token"
-  | "github_app"
-  | "oauth";
+export type GitHubActionsAuthMode = "personal_access_token" | "github_app" | "oauth";
 
 export interface GitHubActionsRetryConfiguration {
   readonly maxAttempts: number;
@@ -89,7 +86,11 @@ export function validateGitHubActionsConfiguration(
   const issues: string[] = [];
   const authMode = config.authMode ?? "personal_access_token";
 
-  if (config.baseUrl !== undefined && config.baseUrl.trim() && !isValidHttpUrl(config.baseUrl)) {
+  if (
+    config.baseUrl !== undefined &&
+    config.baseUrl.trim() &&
+    !isValidHttpUrl(config.baseUrl)
+  ) {
     issues.push("baseUrl must be a valid HTTP(S) URL");
   }
 
@@ -118,9 +119,7 @@ export function validateGitHubActionsConfiguration(
   }
 
   if (config.oauth?.enabled) {
-    issues.push(
-      "OAuth is not implemented in APZTCMS-016 — set oauth.enabled to false",
-    );
+    issues.push("OAuth is not implemented in APZTCMS-016 — set oauth.enabled to false");
   }
 
   if (authMode === "oauth") {
@@ -131,7 +130,9 @@ export function validateGitHubActionsConfiguration(
 
   if (authMode === "personal_access_token") {
     if (!config.personalAccessTokenRef?.trim()) {
-      issues.push("personalAccessTokenRef is required for personal_access_token authMode");
+      issues.push(
+        "personalAccessTokenRef is required for personal_access_token authMode",
+      );
     }
   }
 
@@ -140,7 +141,9 @@ export function validateGitHubActionsConfiguration(
       issues.push("githubApp.appIdRef is required when authMode is github_app");
     }
     if (!config.githubApp?.installationIdRef?.trim()) {
-      issues.push("githubApp.installationIdRef is required when authMode is github_app");
+      issues.push(
+        "githubApp.installationIdRef is required when authMode is github_app",
+      );
     }
     if (!config.githubApp?.privateKeyRef?.trim()) {
       issues.push("githubApp.privateKeyRef is required when authMode is github_app");

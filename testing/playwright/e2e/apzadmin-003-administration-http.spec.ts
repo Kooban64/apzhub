@@ -69,13 +69,10 @@ test.describe("APZADMIN-003 Administration HTTP typed client (mocked)", () => {
         headers: { accept: "application/json" },
       });
       const modules = await modulesRes.json();
-      const capsRes = await fetch(
-        "/api/v1/administration/management-capabilities",
-        {
-          credentials: "include",
-          headers: { accept: "application/json" },
-        },
-      );
+      const capsRes = await fetch("/api/v1/administration/management-capabilities", {
+        credentials: "include",
+        headers: { accept: "application/json" },
+      });
       const caps = await capsRes.json();
       return { modules, caps };
     });

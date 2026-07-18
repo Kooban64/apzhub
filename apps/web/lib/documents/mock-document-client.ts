@@ -67,20 +67,18 @@ export function createMockDocumentClient(
             d.classification.toLowerCase().includes(q)
           );
         })
-        .map(
-          (d): DocumentSummaryViewModel => ({
-            documentId: d.id,
-            title: d.title,
-            status: d.status,
-            classification: d.classification,
-            documentType: d.documentType,
-            updatedAt: d.updatedAt,
-            tagNames: d.tagNames ?? [],
-            folderId: d.folderId,
-            collectionId: d.collectionId,
-            ownerUserId: d.ownerUserId,
-          }),
-        );
+        .map((d): DocumentSummaryViewModel => ({
+          documentId: d.id,
+          title: d.title,
+          status: d.status,
+          classification: d.classification,
+          documentType: d.documentType,
+          updatedAt: d.updatedAt,
+          tagNames: d.tagNames ?? [],
+          folderId: d.folderId,
+          collectionId: d.collectionId,
+          ownerUserId: d.ownerUserId,
+        }));
       return { items, page: { limit: items.length, hasMore: false } };
     },
     async getDocument(documentId) {

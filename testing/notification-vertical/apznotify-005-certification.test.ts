@@ -10,10 +10,7 @@ const ROOT = join(__dirname, "../..");
 
 describe("APZNOTIFY-005 Notification Vertical Certification", () => {
   it("passes architecture / dependency / boundary audit (0 violations)", () => {
-    const script = join(
-      ROOT,
-      "scripts/apznotify-005-notification-vertical-audit.mjs",
-    );
+    const script = join(ROOT, "scripts/apznotify-005-notification-vertical-audit.mjs");
     const output = execFileSync(process.execPath, [script], {
       cwd: ROOT,
       encoding: "utf8",
@@ -126,13 +123,11 @@ describe("APZNOTIFY-005 Notification Vertical Certification", () => {
     expect(client).not.toContain("sendNotification");
     expect(client).not.toContain("deliverNotification");
     expect(
-      existsSync(
-        join(ROOT, "apps/web/lib/notifications/mock-notification-client.ts"),
-      ),
+      existsSync(join(ROOT, "apps/web/lib/notifications/mock-notification-client.ts")),
     ).toBe(true);
-    expect(
-      existsSync(join(ROOT, "apps/web/lib/notifications/query-keys.ts")),
-    ).toBe(true);
+    expect(existsSync(join(ROOT, "apps/web/lib/notifications/query-keys.ts"))).toBe(
+      true,
+    );
   });
 
   it("keeps workbench manifests and Notification UI components", () => {
@@ -150,10 +145,7 @@ describe("APZNOTIFY-005 Notification Vertical Certification", () => {
     }
     expect(
       existsSync(
-        join(
-          ROOT,
-          "apps/web/components/notifications/platform-notifications-view.tsx",
-        ),
+        join(ROOT, "apps/web/components/notifications/platform-notifications-view.tsx"),
       ),
     ).toBe(true);
     expect(
@@ -171,7 +163,7 @@ describe("APZNOTIFY-005 Notification Vertical Certification", () => {
       "packages/notification-contracts/package.json": "0.2.0",
       "packages/notification-core/package.json": "0.2.0",
       "packages/notification-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.21.0",
+      "packages/platform-services/package.json": "0.25.0",
       "packages/platform-service-contracts/package.json": "0.16.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
@@ -185,7 +177,7 @@ describe("APZNOTIFY-005 Notification Vertical Certification", () => {
       existsSync(
         join(
           ROOT,
-          "apps/web/app/api/v1/testing/traceability/[relationshipId]",
+          "apps/web/app/api/v1/testing/traceability/relationships/[relationshipId]",
         ),
       ),
     ).toBe(true);
@@ -209,10 +201,7 @@ describe("APZNOTIFY-005 Notification Vertical Certification", () => {
 
   it("keeps delivery unavailable banner in workbench diagnostics surface", () => {
     const view = readFileSync(
-      join(
-        ROOT,
-        "apps/web/components/notifications/platform-notifications-view.tsx",
-      ),
+      join(ROOT, "apps/web/components/notifications/platform-notifications-view.tsx"),
       "utf8",
     );
     expect(view).toContain("DELIVERY PROVIDERS NOT AVAILABLE");

@@ -40,18 +40,18 @@ const result = await adapter.executeQuery(ctx, { keywords: "hello" });
 
 ## Package layout
 
-| Path | Purpose |
-| --- | --- |
-| `src/adapter/` | Base, factory, context, bootstrap |
-| `src/capabilities/` | Declarative capability constants + registration |
-| `src/contracts/` | Operation ports + `NOT_IMPLEMENTED` runner |
-| `src/errors/` | `SearchErrorTranslator` |
-| `src/health/` | `SearchProviderHealth` |
-| `src/diagnostics/` | `SearchProviderDiagnostics` |
-| `src/lifecycle/` | Lifecycle + configuration validator |
-| `src/observability/` | Metrics / logger wrappers |
-| `src/compatibility/` | Compatibility report |
-| `src/testing/` | `MockSearchIntegrationAdapter` |
+| Path                 | Purpose                                         |
+| -------------------- | ----------------------------------------------- |
+| `src/adapter/`       | Base, factory, context, bootstrap               |
+| `src/capabilities/`  | Declarative capability constants + registration |
+| `src/contracts/`     | Operation ports + `NOT_IMPLEMENTED` runner      |
+| `src/errors/`        | `SearchErrorTranslator`                         |
+| `src/health/`        | `SearchProviderHealth`                          |
+| `src/diagnostics/`   | `SearchProviderDiagnostics`                     |
+| `src/lifecycle/`     | Lifecycle + configuration validator             |
+| `src/observability/` | Metrics / logger wrappers                       |
+| `src/compatibility/` | Compatibility report                            |
+| `src/testing/`       | `MockSearchIntegrationAdapter`                  |
 
 ## Subpath exports
 

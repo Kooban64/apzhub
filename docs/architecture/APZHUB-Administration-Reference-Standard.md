@@ -44,13 +44,13 @@ Rules:
 
 ## Administration-specific reference properties
 
-| Property | Standard |
-| --- | --- |
-| Domain | Metadata SoR for modules, registrations, capabilities, navigation, policies, dashboards, widgets, audit, diagnostics |
-| Distinct from | Platform Operations (`/workspace/operations`) |
-| Product ownership | None — coordinates via registration metadata only |
-| Runtime admin | Out of scope for this standard |
-| Identity / provisioning | Separate future programmes (e.g. APZIDENTITY) |
+| Property                | Standard                                                                                                             |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Domain                  | Metadata SoR for modules, registrations, capabilities, navigation, policies, dashboards, widgets, audit, diagnostics |
+| Distinct from           | Platform Operations (`/workspace/operations`)                                                                        |
+| Product ownership       | None — coordinates via registration metadata only                                                                    |
+| Runtime admin           | Out of scope for this standard                                                                                       |
+| Identity / provisioning | Separate future programmes (e.g. APZIDENTITY)                                                                        |
 
 ## Permissions catalogue (frozen)
 

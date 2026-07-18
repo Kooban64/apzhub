@@ -48,7 +48,9 @@ export function validatePlaneIntegrationConfig(
   requireField(
     "PLANE_BASE_URL",
     Boolean(env.PLANE_BASE_URL),
-    env.PLANE_BASE_URL ? "Plane base URL configured" : "PLANE_BASE_URL required when integration enabled",
+    env.PLANE_BASE_URL
+      ? "Plane base URL configured"
+      : "PLANE_BASE_URL required when integration enabled",
   );
   requireField(
     "PLANE_API_BASE_URL",
@@ -60,7 +62,9 @@ export function validatePlaneIntegrationConfig(
   requireField(
     "PLANE_API_TOKEN",
     Boolean(env.PLANE_API_TOKEN),
-    env.PLANE_API_TOKEN ? "Plane API token present" : "PLANE_API_TOKEN required when integration enabled",
+    env.PLANE_API_TOKEN
+      ? "Plane API token present"
+      : "PLANE_API_TOKEN required when integration enabled",
   );
 
   if (env.PLANE_API_TOKEN && env.PLANE_API_TOKEN.length < 16) {

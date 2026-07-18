@@ -60,16 +60,19 @@ const libFiles = walk(join(ROOT, "apps/web/lib/workflows")).filter(
   (f) => !f.includes("workflow-boundary"),
 );
 
-scan([...componentFiles, ...libFiles], [
-  {
-    rule: "ui-no-workflow-core",
-    pattern: /@apzhub\/workflow-core|@apzhub\/workflow-persistence/,
-  },
-  {
-    rule: "ui-no-platform-services",
-    pattern: /@apzhub\/platform-services|getPlatformServiceGateway/,
-  },
-]);
+scan(
+  [...componentFiles, ...libFiles],
+  [
+    {
+      rule: "ui-no-workflow-core",
+      pattern: /@apzhub\/workflow-core|@apzhub\/workflow-persistence/,
+    },
+    {
+      rule: "ui-no-platform-services",
+      pattern: /@apzhub\/platform-services|getPlatformServiceGateway/,
+    },
+  ],
+);
 
 scan(componentFiles, [
   {
@@ -207,10 +210,7 @@ for (const child of requiredChildren) {
   }
 }
 
-const routes = readFileSync(
-  join(ROOT, "apps/web/lib/workflows/routes.ts"),
-  "utf8",
-);
+const routes = readFileSync(join(ROOT, "apps/web/lib/workflows/routes.ts"), "utf8");
 if (
   !routes.includes("WORKFLOWS_WORKSPACE_BASE") ||
   !routes.includes("resolveWorkflowsSection")
@@ -235,7 +235,9 @@ if (violations.length > 0) {
 
 console.log("APZWORKFLOW-004 architecture audit PASSED");
 console.log("  - workbench uses workflow-api only");
-console.log("  - no workflow-core / persistence / platform-services / n8n / EventBus / meilisearch / designer / drag-drop");
+console.log(
+  "  - no workflow-core / persistence / platform-services / n8n / EventBus / meilisearch / designer / drag-drop",
+);
 console.log("  - manifests present for Workflows navigation");
 console.log("  - WorkbenchPage mounts WorkflowsWorkspaceRouter");
 process.exit(0);

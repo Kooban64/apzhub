@@ -12,8 +12,7 @@ export const WORKFLOW_LIFECYCLE_STATES = [
   "restored",
 ] as const;
 
-export type WorkflowLifecycleState =
-  (typeof WORKFLOW_LIFECYCLE_STATES)[number];
+export type WorkflowLifecycleState = (typeof WORKFLOW_LIFECYCLE_STATES)[number];
 
 export function isWorkflowLifecycleState(
   value: string,
@@ -29,30 +28,18 @@ export const WORKFLOW_VERSION_STATUSES = [
   "archived",
 ] as const;
 
-export type WorkflowVersionStatus =
-  (typeof WORKFLOW_VERSION_STATUSES)[number];
+export type WorkflowVersionStatus = (typeof WORKFLOW_VERSION_STATUSES)[number];
 
-export function isWorkflowVersionStatus(
-  value: string,
-): value is WorkflowVersionStatus {
+export function isWorkflowVersionStatus(value: string): value is WorkflowVersionStatus {
   return (WORKFLOW_VERSION_STATUSES as readonly string[]).includes(value);
 }
 
 /** Engine-neutral graph node kinds — never n8n / vendor node types. */
-export const WORKFLOW_NODE_KINDS = [
-  "trigger",
-  "action",
-  "condition",
-] as const;
+export const WORKFLOW_NODE_KINDS = ["trigger", "action", "condition"] as const;
 
 export type WorkflowNodeKind = (typeof WORKFLOW_NODE_KINDS)[number];
 
-export const WORKFLOW_VALUE_TYPES = [
-  "string",
-  "number",
-  "boolean",
-  "json",
-] as const;
+export const WORKFLOW_VALUE_TYPES = ["string", "number", "boolean", "json"] as const;
 
 export type WorkflowValueType = (typeof WORKFLOW_VALUE_TYPES)[number];
 

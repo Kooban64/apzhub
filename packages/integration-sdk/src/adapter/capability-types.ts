@@ -19,7 +19,9 @@ export type IntegrationCapabilityId = (typeof INTEGRATION_CAPABILITIES)[number];
 
 const CAPABILITY_SET = new Set<string>(INTEGRATION_CAPABILITIES);
 
-export function isIntegrationCapabilityId(value: string): value is IntegrationCapabilityId {
+export function isIntegrationCapabilityId(
+  value: string,
+): value is IntegrationCapabilityId {
   return CAPABILITY_SET.has(value);
 }
 

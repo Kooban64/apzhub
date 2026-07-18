@@ -12,21 +12,21 @@ Focused Vitest suite for the reporting vertical (contracts, core, gateway, HTTP 
 
 ## Suite timings
 
-| Layer | Focused suite | Approx duration |
-| ----- | ------------- | --------------- |
-| Vertical Vitest (45 tests, 13 files) | contracts + core + TCMS reporting + gateway + HTTP + client + workbench | **~7–12 s** |
-| Coverage-enabled same suite | as above | **~12.7 s** |
-| Static architecture audit script | `apzreport-003-reporting-vertical-audit.mjs` | **<1 s** |
-| OpenAPI validate | `pnpm openapi:validate:platform` | **~3–4 s** |
+| Layer                                | Focused suite                                                           | Approx duration |
+| ------------------------------------ | ----------------------------------------------------------------------- | --------------- |
+| Vertical Vitest (45 tests, 13 files) | contracts + core + TCMS reporting + gateway + HTTP + client + workbench | **~7–12 s**     |
+| Coverage-enabled same suite          | as above                                                                | **~12.7 s**     |
+| Static architecture audit script     | `apzreport-003-reporting-vertical-audit.mjs`                            | **<1 s**        |
+| OpenAPI validate                     | `pnpm openapi:validate:platform`                                        | **~3–4 s**      |
 
 ## Surface sizes (LOC order-of-magnitude)
 
-| Surface | Notes |
-| ------- | ----- |
-| HTTP handlers + schemas + routes | Thin gateway adapters |
-| Typed client | Single-file requestJson + mappers |
-| Workbench view | One primary view + router |
-| Reporting core + 6 output providers | Shared engine (APZREPORT-001) |
+| Surface                             | Notes                             |
+| ----------------------------------- | --------------------------------- |
+| HTTP handlers + schemas + routes    | Thin gateway adapters             |
+| Typed client                        | Single-file requestJson + mappers |
+| Workbench view                      | One primary view + router         |
+| Reporting core + 6 output providers | Shared engine (APZREPORT-001)     |
 
 ## Observations
 

@@ -4,17 +4,17 @@
 
 ## Path integrity
 
-| Layer | Evidence |
-| --- | --- |
-| Workbench | `apps/web/components/workflow-engine/*` → `@/lib/workflows/engine-api` + `workflowEngineQueryKeys` only |
-| Typed client | `createHttpWorkflowEngineClient()` → `/api/v1/workflows/engine/*` only |
-| HTTP | Route handlers → `lib/api/v1/handlers/workflow-engine.ts` → `getPlatformServiceGateway().workflow.engine.*` |
-| Gateway | Nested `gateway.workflow.engine.{workflows,templates,tags,users,projects,capabilities,health,diagnostics,compatibility,connection}` |
-| Pipeline | Engine factory `wrapWithPipeline` / RequestPipeline on public ops |
-| Authz | `workflowEngineOps` → `workflow.engine.{read,health,diagnostics,capabilities}` |
-| Services | Thin orchestration over Integration SDK adapter ports |
-| Adapter | `@apzhub/integration-n8n` **0.1.0** — read-only metadata CE API |
-| Provider | n8n — optional live; no silent production mock |
+| Layer        | Evidence                                                                                                                            |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Workbench    | `apps/web/components/workflow-engine/*` → `@/lib/workflows/engine-api` + `workflowEngineQueryKeys` only                             |
+| Typed client | `createHttpWorkflowEngineClient()` → `/api/v1/workflows/engine/*` only                                                              |
+| HTTP         | Route handlers → `lib/api/v1/handlers/workflow-engine.ts` → `getPlatformServiceGateway().workflow.engine.*`                         |
+| Gateway      | Nested `gateway.workflow.engine.{workflows,templates,tags,users,projects,capabilities,health,diagnostics,compatibility,connection}` |
+| Pipeline     | Engine factory `wrapWithPipeline` / RequestPipeline on public ops                                                                   |
+| Authz        | `workflowEngineOps` → `workflow.engine.{read,health,diagnostics,capabilities}`                                                      |
+| Services     | Thin orchestration over Integration SDK adapter ports                                                                               |
+| Adapter      | `@apzhub/integration-n8n` **0.1.0** — read-only metadata CE API                                                                     |
+| Provider     | n8n — optional live; no silent production mock                                                                                      |
 
 ## Confirmed absences
 

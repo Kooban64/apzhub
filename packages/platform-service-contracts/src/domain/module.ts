@@ -1,11 +1,7 @@
 import type { ProjectId, ProjectModuleId } from "./identifiers";
 
 export type ProjectModuleStatus =
-  | "planned"
-  | "in_progress"
-  | "paused"
-  | "completed"
-  | "cancelled";
+  "planned" | "in_progress" | "paused" | "completed" | "cancelled";
 
 export interface ProjectModule {
   readonly id: ProjectModuleId;

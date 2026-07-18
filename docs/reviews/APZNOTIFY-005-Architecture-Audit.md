@@ -4,17 +4,17 @@
 
 ## Path integrity
 
-| Layer | Evidence |
-| --- | --- |
-| Workbench | `apps/web/components/notifications/*` → `@/lib/notifications/notification-api` only |
-| Typed client | `createHttpNotificationClient()` → `/api/v1/notifications/*` only |
-| HTTP | Route handlers → `lib/api/v1/handlers/notifications*` → `getPlatformServiceGateway().notification.*` |
-| Gateway | Nested `gateway.notification.{notifications,templates,preferences,categories,channels,recipients,references,audit,diagnostics}` |
-| Pipeline | Public gateway ops wrapped by RequestPipeline (platform-services) |
-| Authz | `PLATFORM_NOTIFICATION_PERMISSIONS` + `notificationPlatformOps` |
-| Services | Thin delegation into Notification Core / persistence ports |
-| Core | Lifecycle / validation / business rules — no external delivery calls |
-| Persistence | PostgreSQL repositories + in-memory test implementations; platform migrations |
+| Layer        | Evidence                                                                                                                        |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| Workbench    | `apps/web/components/notifications/*` → `@/lib/notifications/notification-api` only                                             |
+| Typed client | `createHttpNotificationClient()` → `/api/v1/notifications/*` only                                                               |
+| HTTP         | Route handlers → `lib/api/v1/handlers/notifications*` → `getPlatformServiceGateway().notification.*`                            |
+| Gateway      | Nested `gateway.notification.{notifications,templates,preferences,categories,channels,recipients,references,audit,diagnostics}` |
+| Pipeline     | Public gateway ops wrapped by RequestPipeline (platform-services)                                                               |
+| Authz        | `PLATFORM_NOTIFICATION_PERMISSIONS` + `notificationPlatformOps`                                                                 |
+| Services     | Thin delegation into Notification Core / persistence ports                                                                      |
+| Core         | Lifecycle / validation / business rules — no external delivery calls                                                            |
+| Persistence  | PostgreSQL repositories + in-memory test implementations; platform migrations                                                   |
 
 ## Confirmed absences
 

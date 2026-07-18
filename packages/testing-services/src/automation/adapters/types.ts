@@ -22,7 +22,10 @@ export function asObject(
       if (Array.isArray(parsed)) {
         return { items: parsed };
       }
-      throw new DomainRuleError("INVALID_PAYLOAD", "JSON payload must be an object or array");
+      throw new DomainRuleError(
+        "INVALID_PAYLOAD",
+        "JSON payload must be an object or array",
+      );
     } catch (error) {
       if (error instanceof DomainRuleError) throw error;
       throw new DomainRuleError("INVALID_PAYLOAD", "Payload is not valid JSON");
@@ -67,7 +70,11 @@ export function readNumber(
   for (const key of keys) {
     const value = obj[key];
     if (typeof value === "number" && Number.isFinite(value)) return value;
-    if (typeof value === "string" && value.trim() !== "" && !Number.isNaN(Number(value))) {
+    if (
+      typeof value === "string" &&
+      value.trim() !== "" &&
+      !Number.isNaN(Number(value))
+    ) {
       return Number(value);
     }
   }
@@ -153,4 +160,8 @@ export function assertAdapterCanParse(
   }
 }
 
-export type { AutomationAdapterInput, AutomationResultAdapter, CanonicalAutomationResult };
+export type {
+  AutomationAdapterInput,
+  AutomationResultAdapter,
+  CanonicalAutomationResult,
+};

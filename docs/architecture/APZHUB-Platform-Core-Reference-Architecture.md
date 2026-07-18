@@ -392,10 +392,10 @@ Operations Console is manifest-driven (19 sections). Permission: `platform.nav.a
 
 ## 15. Data ownership (Document 011)
 
-| Owner | Data |
-|-------|------|
+| Owner             | Data                                                                                                                                                                       |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Platform Core** | Identity, sessions, permissions, nav, workspaces, prefs, notifications (metadata), audit, module registration, search index (derived), events, jobs, connector config refs |
-| **Products** | Matters, clients, invoices, trust journals, documents, tickets — authoritative in product/adapter stores |
+| **Products**      | Matters, clients, invoices, trust journals, documents, tickets — authoritative in product/adapter stores                                                                   |
 
 ---
 
@@ -411,11 +411,11 @@ Operations Console is manifest-driven (19 sections). Permission: `platform.nav.a
 
 ## 17. Phase boundaries
 
-| Phase | Status |
-|-------|--------|
-| Platform Core v1 (M1–M8) | **Certified** (PC-001) |
-| Platform Core v2 | Planned — SaaS hardening, workers, gateway |
-| Product milestones | Law Platform validation; FIN/Banking deferred |
+| Phase                    | Status                                        |
+| ------------------------ | --------------------------------------------- |
+| Platform Core v1 (M1–M8) | **Certified** (PC-001)                        |
+| Platform Core v2         | Planned — SaaS hardening, workers, gateway    |
+| Product milestones       | Law Platform validation; FIN/Banking deferred |
 
 ---
 

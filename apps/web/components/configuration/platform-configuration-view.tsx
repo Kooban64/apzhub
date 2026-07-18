@@ -49,8 +49,7 @@ const RUNTIME_BANNER = "RUNTIME RESOLUTION NOT AVAILABLE";
 const FLAGS_BANNER = "FEATURE FLAGS NOT AVAILABLE";
 const SECRETS_BANNER = "SECRET MANAGEMENT NOT AVAILABLE";
 const HOT_RELOAD_BANNER = "HOT RELOAD NOT AVAILABLE";
-const OVERRIDE_NOTICE =
-  "OVERRIDE METADATA ONLY — EFFECTIVE VALUE IS NOT RESOLVED";
+const OVERRIDE_NOTICE = "OVERRIDE METADATA ONLY — EFFECTIVE VALUE IS NOT RESOLVED";
 const IMMUTABLE_NOTICE = "IMMUTABLE PUBLISHED VERSION";
 const VALUE_HIDDEN =
   "VALUE HIDDEN — SECRET MANAGEMENT IS OUTSIDE PLATFORM CONFIGURATION";
@@ -179,9 +178,7 @@ function StatusCard({
       <p className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">
         {label}
       </p>
-      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">
-        {value}
-      </p>
+      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">{value}</p>
     </div>
   );
 }
@@ -230,9 +227,7 @@ function MetaTable({
               key={row.id}
               className={[
                 "border-b border-[var(--color-border)]",
-                onRowClick
-                  ? "cursor-pointer hover:bg-[var(--color-muted)]/30"
-                  : "",
+                onRowClick ? "cursor-pointer hover:bg-[var(--color-muted)]/30" : "",
                 selectedId === row.id ? "bg-[var(--color-muted)]/40" : "",
               ].join(" ")}
               onClick={onRowClick ? () => onRowClick(row.id) : undefined}
@@ -306,8 +301,7 @@ const SECTION_META: Record<
   },
   namespaces: {
     title: "Namespaces",
-    description:
-      "Namespace metadata — not OS or Kubernetes namespaces.",
+    description: "Namespace metadata — not OS or Kubernetes namespaces.",
   },
   groups: {
     title: "Groups",
@@ -339,8 +333,7 @@ const SECTION_META: Record<
   },
   diagnostics: {
     title: "Diagnostics",
-    description:
-      "Health, readiness, and capabilities — runtime features unavailable.",
+    description: "Health, readiness, and capabilities — runtime features unavailable.",
   },
 };
 
@@ -354,23 +347,15 @@ export function PlatformConfigurationView({
 }) {
   const queryClient = useQueryClient();
   const [statusFilter, setStatusFilter] = useState("");
-  const [selectedConfigurationId, setSelectedConfigurationId] = useState<
-    string | null
-  >(null);
-  const [selectedNamespaceId, setSelectedNamespaceId] = useState<string | null>(
+  const [selectedConfigurationId, setSelectedConfigurationId] = useState<string | null>(
     null,
   );
+  const [selectedNamespaceId, setSelectedNamespaceId] = useState<string | null>(null);
   const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
-  const [selectedVersionId, setSelectedVersionId] = useState<string | null>(
-    null,
-  );
-  const [selectedOverrideId, setSelectedOverrideId] = useState<string | null>(
-    null,
-  );
+  const [selectedVersionId, setSelectedVersionId] = useState<string | null>(null);
+  const [selectedOverrideId, setSelectedOverrideId] = useState<string | null>(null);
   const [selectedScopeId, setSelectedScopeId] = useState<string | null>(null);
-  const [selectedReferenceId, setSelectedReferenceId] = useState<string | null>(
-    null,
-  );
+  const [selectedReferenceId, setSelectedReferenceId] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const [transitionTarget, setTransitionTarget] = useState("validated");
@@ -382,14 +367,10 @@ export function PlatformConfigurationView({
       status: statusFilter || undefined,
     }),
     queryFn: ({ signal }) =>
-      listConfigurations(
-        { status: statusFilter || undefined, limit: 100 },
-        { signal },
-      ),
+      listConfigurations({ status: statusFilter || undefined, limit: 100 }, { signal }),
   });
 
-  const selectedId =
-    selectedConfigurationId ?? listQuery.data?.items[0]?.id ?? null;
+  const selectedId = selectedConfigurationId ?? listQuery.data?.items[0]?.id ?? null;
 
   const detailQuery = useQuery({
     queryKey: configurationQueryKeys.detail(selectedId ?? ""),
@@ -401,13 +382,10 @@ export function PlatformConfigurationView({
     queryKey: configurationQueryKeys.namespaces.list(),
     queryFn: ({ signal }) => listConfigurationNamespaces({ signal }),
     enabled:
-      section === "namespaces" ||
-      section === "overview" ||
-      section === "diagnostics",
+      section === "namespaces" || section === "overview" || section === "diagnostics",
   });
 
-  const namespaceId =
-    selectedNamespaceId ?? namespacesQuery.data?.items[0]?.id ?? null;
+  const namespaceId = selectedNamespaceId ?? namespacesQuery.data?.items[0]?.id ?? null;
   const namespaceDetailQuery = useQuery({
     queryKey: configurationQueryKeys.namespaces.detail(namespaceId ?? ""),
     queryFn: ({ signal }) => getConfigurationNamespace(namespaceId!, { signal }),
@@ -426,23 +404,19 @@ export function PlatformConfigurationView({
     queryKey: configurationQueryKeys.versions(selectedId ?? ""),
     queryFn: ({ signal }) => listConfigurationVersions(selectedId!, { signal }),
     enabled:
-      Boolean(selectedId) &&
-      (section === "versions" || section === "configurations"),
+      Boolean(selectedId) && (section === "versions" || section === "configurations"),
   });
 
-  const versionId =
-    selectedVersionId ?? versionsQuery.data?.items[0]?.id ?? null;
+  const versionId = selectedVersionId ?? versionsQuery.data?.items[0]?.id ?? null;
 
   const overridesQuery = useQuery({
     queryKey: configurationQueryKeys.overrides(selectedId ?? ""),
     queryFn: ({ signal }) => listConfigurationOverrides(selectedId!, { signal }),
     enabled:
-      Boolean(selectedId) &&
-      (section === "overrides" || section === "configurations"),
+      Boolean(selectedId) && (section === "overrides" || section === "configurations"),
   });
 
-  const overrideId =
-    selectedOverrideId ?? overridesQuery.data?.items[0]?.id ?? null;
+  const overrideId = selectedOverrideId ?? overridesQuery.data?.items[0]?.id ?? null;
 
   const scopesQuery = useQuery({
     queryKey: configurationQueryKeys.scopes.list(),
@@ -451,9 +425,7 @@ export function PlatformConfigurationView({
   });
 
   const scopeId =
-    selectedScopeId ??
-    scopesQuery.data?.items[0]?.configurationId ??
-    null;
+    selectedScopeId ?? scopesQuery.data?.items[0]?.configurationId ?? null;
   const scopeDetailQuery = useQuery({
     queryKey: configurationQueryKeys.scopes.detail(scopeId ?? ""),
     queryFn: ({ signal }) => getConfigurationScope(scopeId!, { signal }),
@@ -468,17 +440,18 @@ export function PlatformConfigurationView({
 
   const referencesQuery = useQuery({
     queryKey: configurationQueryKeys.references(selectedId ?? ""),
-    queryFn: ({ signal }) =>
-      listConfigurationReferences(selectedId!, { signal }),
+    queryFn: ({ signal }) => listConfigurationReferences(selectedId!, { signal }),
     enabled:
-      Boolean(selectedId) &&
-      (section === "references" || section === "configurations"),
+      Boolean(selectedId) && (section === "references" || section === "configurations"),
   });
 
-  const referenceId =
-    selectedReferenceId ?? referencesQuery.data?.items[0]?.id ?? null;
+  const referenceId = selectedReferenceId ?? referencesQuery.data?.items[0]?.id ?? null;
   const referenceDetailQuery = useQuery({
-    queryKey: [...configurationQueryKeys.references(selectedId ?? ""), "detail", referenceId ?? ""],
+    queryKey: [
+      ...configurationQueryKeys.references(selectedId ?? ""),
+      "detail",
+      referenceId ?? "",
+    ],
     queryFn: ({ signal }) => getConfigurationReference(referenceId!, { signal }),
     enabled: Boolean(referenceId) && section === "references",
   });
@@ -498,10 +471,7 @@ export function PlatformConfigurationView({
   const capabilitiesQuery = useQuery({
     queryKey: configurationQueryKeys.capabilities(),
     queryFn: ({ signal }) => getConfigurationCapabilities({ signal }),
-    enabled:
-      section === "overview" ||
-      section === "diagnostics" ||
-      apiMetadataOpen,
+    enabled: section === "overview" || section === "diagnostics" || apiMetadataOpen,
   });
 
   const healthQuery = useQuery({
@@ -574,9 +544,7 @@ export function PlatformConfigurationView({
         groupId: detailQuery.data?.groupId,
       }),
     onSuccess: (result) => {
-      setValidationResult(
-        result.valid ? "Validation passed" : "Validation failed",
-      );
+      setValidationResult(result.valid ? "Validation passed" : "Validation failed");
       setActionError(null);
     },
     onError: (error) => {
@@ -619,9 +587,7 @@ export function PlatformConfigurationView({
           onClick={() => {
             void copyText(selectedId)
               .then(() => setStatusMessage("Copied configuration ID"))
-              .catch((error) =>
-                setActionError(toConfigurationUserMessage(error)),
-              );
+              .catch((error) => setActionError(toConfigurationUserMessage(error)));
           }}
         >
           Copy ID
@@ -711,20 +677,13 @@ export function PlatformConfigurationView({
   if (listQuery.isError && isForbidden(listQuery.error)) {
     return (
       <PageShell title={meta.title} description={meta.description}>
-        <ErrorState
-          forbidden
-          message={toConfigurationUserMessage(listQuery.error)}
-        />
+        <ErrorState forbidden message={toConfigurationUserMessage(listQuery.error)} />
       </PageShell>
     );
   }
 
   return (
-    <PageShell
-      title={meta.title}
-      description={meta.description}
-      actions={toolbar}
-    >
+    <PageShell title={meta.title} description={meta.description} actions={toolbar}>
       {statusMessage ? (
         <p
           className="text-sm text-[var(--color-foreground)]"
@@ -822,24 +781,18 @@ export function PlatformConfigurationView({
             <StatusCard
               label="Service enabled"
               value={
-                capabilitiesQuery.data?.configurationEnabled
-                  ? "Ready"
-                  : "Unavailable"
+                capabilitiesQuery.data?.configurationEnabled ? "Ready" : "Unavailable"
               }
               testId="card-service-status"
             />
             <StatusCard
               label="Management plane"
               value={
-                capabilitiesQuery.data?.managementPlaneReady
-                  ? "Ready"
-                  : "Unavailable"
+                capabilitiesQuery.data?.managementPlaneReady ? "Ready" : "Unavailable"
               }
             />
           </div>
-          {listQuery.isLoading ? (
-            <p role="status">Loading configurations…</p>
-          ) : null}
+          {listQuery.isLoading ? <p role="status">Loading configurations…</p> : null}
           {listQuery.isError ? (
             <ErrorState
               message={toConfigurationUserMessage(listQuery.error)}
@@ -873,12 +826,7 @@ export function PlatformConfigurationView({
                 onRowClick={setSelectedConfigurationId}
                 rows={items.map((item) => ({
                   id: item.id,
-                  cells: [
-                    item.id,
-                    item.keyId,
-                    item.status,
-                    item.scope.kind,
-                  ],
+                  cells: [item.id, item.keyId, item.status, item.scope.kind],
                 }))}
               />
             )}
@@ -904,15 +852,11 @@ export function PlatformConfigurationView({
                   <dd>{selected.keyId}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Lifecycle
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Lifecycle</dt>
                   <dd>{selected.status}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Namespace
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Namespace</dt>
                   <dd>{selected.namespaceId}</dd>
                 </div>
                 <div>
@@ -920,15 +864,11 @@ export function PlatformConfigurationView({
                   <dd>{selected.scope.kind}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Hierarchy
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Hierarchy</dt>
                   <dd>{selected.hierarchyLevel}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Revision
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Revision</dt>
                   <dd>{selected.revision}</dd>
                 </div>
                 <div>
@@ -1056,8 +996,7 @@ export function PlatformConfigurationView({
                   ],
                 }))}
               />
-              {versionsQuery.data?.items.find((v) => v.id === versionId)
-                ?.immutable ? (
+              {versionsQuery.data?.items.find((v) => v.id === versionId)?.immutable ? (
                 <p
                   className="text-sm font-medium"
                   data-testid="immutable-version-banner"
@@ -1077,8 +1016,8 @@ export function PlatformConfigurationView({
                 </Button>
               ) : null}
               <p className="text-sm text-[var(--color-muted-foreground)]">
-                Version comparison is deferred — APIs do not expose a safe
-                diff payload in this milestone.
+                Version comparison is deferred — APIs do not expose a safe diff payload
+                in this milestone.
               </p>
             </>
           )}
@@ -1153,9 +1092,7 @@ export function PlatformConfigurationView({
               ].map((level) => (
                 <li key={level}>
                   {level}
-                  {scopeDetailQuery.data?.scopeKind === level
-                    ? " — selected"
-                    : ""}
+                  {scopeDetailQuery.data?.scopeKind === level ? " — selected" : ""}
                 </li>
               ))}
             </ol>
@@ -1197,8 +1134,8 @@ export function PlatformConfigurationView({
             />
           )}
           <p className="text-sm text-[var(--color-muted-foreground)]">
-            Validation is declarative metadata only — custom validators are not
-            executed in the Workbench.
+            Validation is declarative metadata only — custom validators are not executed
+            in the Workbench.
           </p>
         </div>
       ) : null}
@@ -1228,15 +1165,11 @@ export function PlatformConfigurationView({
             {referenceDetailQuery.data ? (
               <dl className="grid gap-2 text-sm">
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Product
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Product</dt>
                   <dd>{referenceDetailQuery.data.kind}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Resource ID
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Resource ID</dt>
                   <dd>{referenceDetailQuery.data.resourceId}</dd>
                 </div>
               </dl>
@@ -1281,11 +1214,7 @@ export function PlatformConfigurationView({
               testId="diag-runtime"
               emphasize
             />
-            <StatusCard
-              label="Runtime Application"
-              value="Unavailable"
-              emphasize
-            />
+            <StatusCard label="Runtime Application" value="Unavailable" emphasize />
             <StatusCard
               label="Feature Flags"
               value="Unavailable"
@@ -1309,9 +1238,7 @@ export function PlatformConfigurationView({
             <StatusCard label="Event Bus" value="Unavailable" testId="diag-event-bus" />
             <StatusCard
               label="Configuration enabled"
-              value={
-                capabilitiesQuery.data?.configurationEnabled ? "Yes" : "No"
-              }
+              value={capabilitiesQuery.data?.configurationEnabled ? "Yes" : "No"}
             />
           </div>
           {healthQuery.data ? (

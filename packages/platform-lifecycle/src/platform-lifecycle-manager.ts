@@ -1,4 +1,7 @@
-import { getAllowedLifecycleTransitions, pickHighestStartupState } from "./state-machine";
+import {
+  getAllowedLifecycleTransitions,
+  pickHighestStartupState,
+} from "./state-machine";
 import type {
   LifecycleActionResult,
   LifecycleOperatorAction,
@@ -94,7 +97,11 @@ export function buildPlatformLifecycleSnapshot(
   const evaluated = deriveEvaluatedState(context);
   const currentState = resolvePlatformState(runtime, evaluated, context.healthStatus);
   const shutdownStatus =
-    currentState === "stopped" ? "complete" : currentState === "stopping" ? "draining" : "none";
+    currentState === "stopped"
+      ? "complete"
+      : currentState === "stopping"
+        ? "draining"
+        : "none";
   const recoveryStatus =
     currentState === "recovering"
       ? "in-progress"
@@ -126,15 +133,27 @@ export function buildPlatformLifecycleSnapshot(
   const recommendations: string[] = [];
 
   if (!versionCompatibility.compatible) {
-    warnings.push("One or more registered capabilities/products fail version compatibility checks.");
-    recommendations.push("Review version compatibility report before production deployment.");
+    warnings.push(
+      "One or more registered capabilities/products fail version compatibility checks.",
+    );
+    recommendations.push(
+      "Review version compatibility report before production deployment.",
+    );
   }
   if (currentState === "degraded") {
     warnings.push("Platform lifecycle is degraded.");
-    recommendations.push("Review dependency health and capability readiness in the control plane.");
+    recommendations.push(
+      "Review dependency health and capability readiness in the control plane.",
+    );
   }
-  if (!context.operationalReady && !context.platformCoreReady && !context.databaseHealthy) {
-    recommendations.push("Restore database connectivity before advancing lifecycle gates.");
+  if (
+    !context.operationalReady &&
+    !context.platformCoreReady &&
+    !context.databaseHealthy
+  ) {
+    recommendations.push(
+      "Restore database connectivity before advancing lifecycle gates.",
+    );
   }
   if (currentState === "maintenance") {
     recommendations.push("Exit maintenance mode when work is complete.");

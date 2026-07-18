@@ -67,7 +67,8 @@ export function CustomerReplyComposer({
           role="note"
           data-testid="support-customer-reply-warning"
         >
-          Warning: this reply is customer-visible. It will not be saved as an internal note.
+          Warning: this reply is customer-visible. It will not be saved as an internal
+          note.
         </p>
       </div>
       <label className="flex flex-col gap-1 text-sm">

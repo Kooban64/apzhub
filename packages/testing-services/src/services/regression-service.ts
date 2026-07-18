@@ -74,13 +74,18 @@ export function createRegressionService(rt: ServiceRuntime): RegressionService {
         "regression_set",
         id,
       );
-      const row = await rt.persistence.regressionSets.update(rctx, id, existing.revision, {
-        name: input.name,
-        description: input.description,
-        planId: input.planId,
-        suiteIds: input.suiteIds as readonly string[] | undefined,
-        ownerId: input.ownerId,
-      });
+      const row = await rt.persistence.regressionSets.update(
+        rctx,
+        id,
+        existing.revision,
+        {
+          name: input.name,
+          description: input.description,
+          planId: input.planId,
+          suiteIds: input.suiteIds as readonly string[] | undefined,
+          ownerId: input.ownerId,
+        },
+      );
       rt.events.record({
         eventType: "regression_set.updated",
         tenantId: ctx.tenantId,

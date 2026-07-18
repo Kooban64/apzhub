@@ -60,12 +60,12 @@ flowchart TD
 
 ## Canonical package
 
-| Package | Responsibility |
-|---------|----------------|
-| `@apzhub/platform-operations` | Capability registry, health normalization, production verification, control plane snapshot |
-| `@apzhub/platform-bootstrap/diagnostics` | Loads consolidated diagnostics from all platform capabilities |
-| `@apzhub/platform-security` | Security, resilience, configuration diagnostics aggregation |
-| `apps/web/lib/platform-operations/` | Operations console client helpers and UI |
+| Package                                  | Responsibility                                                                             |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `@apzhub/platform-operations`            | Capability registry, health normalization, production verification, control plane snapshot |
+| `@apzhub/platform-bootstrap/diagnostics` | Loads consolidated diagnostics from all platform capabilities                              |
+| `@apzhub/platform-security`              | Security, resilience, configuration diagnostics aggregation                                |
+| `apps/web/lib/platform-operations/`      | Operations console client helpers and UI                                                   |
 
 ---
 
@@ -73,20 +73,20 @@ flowchart TD
 
 Every registered capability publishes:
 
-| Field | Description |
-|-------|-------------|
-| `status` | Overall signal (`healthy` \| `degraded` \| `unhealthy` \| `unknown`) |
-| `health` | Current operational health |
-| `readiness` | Ready to serve traffic |
-| `configurationState` | `valid` \| `degraded` \| `invalid` \| `unknown` |
-| `warnings` | Non-blocking observations |
-| `recommendations` | Operator next steps |
-| `dependencies` | Upstream capability IDs |
-| `version` | Capability version |
-| `maturityLevel` | `foundation` \| `operational` \| `production` \| `experimental` |
-| `lastValidation` | ISO timestamp from consolidated diagnostics |
-| `owner` | Owning package or app |
-| `diagnostics` | Sanitized capability-specific payload (no secrets) |
+| Field                | Description                                                          |
+| -------------------- | -------------------------------------------------------------------- |
+| `status`             | Overall signal (`healthy` \| `degraded` \| `unhealthy` \| `unknown`) |
+| `health`             | Current operational health                                           |
+| `readiness`          | Ready to serve traffic                                               |
+| `configurationState` | `valid` \| `degraded` \| `invalid` \| `unknown`                      |
+| `warnings`           | Non-blocking observations                                            |
+| `recommendations`    | Operator next steps                                                  |
+| `dependencies`       | Upstream capability IDs                                              |
+| `version`            | Capability version                                                   |
+| `maturityLevel`      | `foundation` \| `operational` \| `production` \| `experimental`      |
+| `lastValidation`     | ISO timestamp from consolidated diagnostics                          |
+| `owner`              | Owning package or app                                                |
+| `diagnostics`        | Sanitized capability-specific payload (no secrets)                   |
 
 Registry: `packages/platform-operations/src/capability-definitions.ts`
 
@@ -96,11 +96,11 @@ Registry: `packages/platform-operations/src/capability-definitions.ts`
 
 Deterministic verdicts:
 
-| Verdict | Meaning |
-|---------|---------|
-| `READY` | All mandatory checks pass |
-| `READY_WITH_OBSERVATIONS` | No failures; warnings present |
-| `NOT_READY` | One or more mandatory checks failed |
+| Verdict                   | Meaning                             |
+| ------------------------- | ----------------------------------- |
+| `READY`                   | All mandatory checks pass           |
+| `READY_WITH_OBSERVATIONS` | No failures; warnings present       |
+| `NOT_READY`               | One or more mandatory checks failed |
 
 Evaluated domains: bootstrap, configuration, health/readiness, dependencies, session security, traffic governance, tenant isolation posture, per-capability health.
 

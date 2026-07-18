@@ -156,9 +156,7 @@ export function createQualityIntelligenceService(
       );
     },
     async listSnapshots(ctx) {
-      const page = await rt.persistence.qualitySnapshots.list(
-        toRepositoryContext(ctx),
-      );
+      const page = await rt.persistence.qualitySnapshots.list(toRepositoryContext(ctx));
       return page.items.map(toDomain);
     },
   };

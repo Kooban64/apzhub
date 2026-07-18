@@ -4,18 +4,18 @@
 
 ## Layout
 
-| Path | Role |
-| --- | --- |
-| `apps/web/lib/identity/routes.ts` | Workspace + HTTP path helpers (`IDENTITY_WORKSPACE_BASE`, `isIdentityRoute`, `resolveIdentitySection`, `identitySectionPath`) |
-| `apps/web/lib/identity/identity-api.ts` | Typed-client facades consumed by the Workbench |
-| `apps/web/lib/identity/identity-client.ts` | Production HTTP client — calls only `/api/v1/identity/*` |
-| `apps/web/lib/identity/mock-identity-client.ts` | In-memory client for tests / `NODE_ENV=test` |
-| `apps/web/lib/identity/identity-errors.ts` | `IdentityClientError` + `toIdentityUserMessage` |
-| `apps/web/lib/identity/identity-types.ts` | View models + create/update input types |
-| `apps/web/lib/identity/query-keys.ts` | Canonical TanStack Query keys |
-| `apps/web/components/identity/identity-workspace-router.tsx` | Path → section |
-| `apps/web/components/identity/platform-identity-view.tsx` | Section UI |
-| `packages/workbench-framework/manifests/platform-identity*/` | Activity Bar + Sidebar registration |
+| Path                                                         | Role                                                                                                                          |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `apps/web/lib/identity/routes.ts`                            | Workspace + HTTP path helpers (`IDENTITY_WORKSPACE_BASE`, `isIdentityRoute`, `resolveIdentitySection`, `identitySectionPath`) |
+| `apps/web/lib/identity/identity-api.ts`                      | Typed-client facades consumed by the Workbench                                                                                |
+| `apps/web/lib/identity/identity-client.ts`                   | Production HTTP client — calls only `/api/v1/identity/*`                                                                      |
+| `apps/web/lib/identity/mock-identity-client.ts`              | In-memory client for tests / `NODE_ENV=test`                                                                                  |
+| `apps/web/lib/identity/identity-errors.ts`                   | `IdentityClientError` + `toIdentityUserMessage`                                                                               |
+| `apps/web/lib/identity/identity-types.ts`                    | View models + create/update input types                                                                                       |
+| `apps/web/lib/identity/query-keys.ts`                        | Canonical TanStack Query keys                                                                                                 |
+| `apps/web/components/identity/identity-workspace-router.tsx` | Path → section                                                                                                                |
+| `apps/web/components/identity/platform-identity-view.tsx`    | Section UI                                                                                                                    |
+| `packages/workbench-framework/manifests/platform-identity*/` | Activity Bar + Sidebar registration                                                                                           |
 
 ## Consumption rule
 

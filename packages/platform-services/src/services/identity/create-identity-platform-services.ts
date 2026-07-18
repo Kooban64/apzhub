@@ -73,11 +73,7 @@ export function wrapIdentityPlatformGatewayWithPipeline(
       pipeline,
       "identityOrganisations",
     ),
-    tenants: wrapServiceWithPipeline(
-      gateway.tenants,
-      pipeline,
-      "identityTenants",
-    ),
+    tenants: wrapServiceWithPipeline(gateway.tenants, pipeline, "identityTenants"),
     departments: wrapServiceWithPipeline(
       gateway.departments,
       pipeline,
@@ -113,17 +109,9 @@ export function wrapIdentityPlatformGatewayWithPipeline(
       pipeline,
       "identityDeactivation",
     ),
-    policies: wrapServiceWithPipeline(
-      gateway.policies,
-      pipeline,
-      "identityPolicies",
-    ),
+    policies: wrapServiceWithPipeline(gateway.policies, pipeline, "identityPolicies"),
     audit: wrapServiceWithPipeline(gateway.audit, pipeline, "identityAudit"),
-    history: wrapServiceWithPipeline(
-      gateway.history,
-      pipeline,
-      "identityHistory",
-    ),
+    history: wrapServiceWithPipeline(gateway.history, pipeline, "identityHistory"),
     references: wrapServiceWithPipeline(
       gateway.references,
       pipeline,
@@ -148,8 +136,7 @@ function buildBundle(input: {
   });
   let seq = 0;
   const now = input.now ?? (() => new Date().toISOString());
-  const id =
-    input.id ?? (() => `iam_${Date.now().toString(36)}_${++seq}`);
+  const id = input.id ?? (() => `iam_${Date.now().toString(36)}_${++seq}`);
   const domain = createPlatformIdentityService({
     repos: input.persistence,
     now,

@@ -17,11 +17,7 @@ import {
   validateRequiredString,
   validateSortFields,
 } from "../validation/request-validation";
-import {
-  applyClientFilters,
-  applyClientSort,
-  paginateInMemory,
-} from "./list-helpers";
+import { applyClientFilters, applyClientSort, paginateInMemory } from "./list-helpers";
 import type { ZammadServiceDeps } from "./zammad-operation-runner";
 
 const HISTORY_SORT_FIELDS = [

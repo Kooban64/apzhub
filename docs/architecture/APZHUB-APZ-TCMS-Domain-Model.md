@@ -3,7 +3,7 @@
 **Product:** APZ TCMS  
 **Milestone:** APZTCMS-001  
 **Status:** Conceptual domain model — **no DDL**, no migrations, no code  
-**Authority:** [Reference Architecture](./APZHUB-APZ-TCMS-Reference-Architecture.md) · [011](../011-data-architecture-system-of-record-principles.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)
+**Authority:** [Reference Architecture](./APZHUB-APZ-TCMS-Reference-Architecture.md) · [011](../011-platform-data-architecture-database-design-principles.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)
 
 ---
 

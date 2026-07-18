@@ -11,9 +11,8 @@ export const REPORTING_SEARCH_ENTITY_TYPES = [
   "dashboard",
 ] as const;
 
-export const ReportingSearchPublicationContract: ProductSearchPublicationContract =
-  {
-    productId: "reporting",
-    label: "Reporting",
-    supportedEntityTypes: REPORTING_SEARCH_ENTITY_TYPES,
-  };
+export const ReportingSearchPublicationContract: ProductSearchPublicationContract = {
+  productId: "reporting",
+  label: "Reporting",
+  supportedEntityTypes: REPORTING_SEARCH_ENTITY_TYPES,
+};

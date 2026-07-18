@@ -7,17 +7,17 @@
 
 ## Verified (Vitest / component)
 
-| Area | Result |
-| ---- | ------ |
-| Navigation / routes (`/workspace/testing/pipelines…`) | PASS |
+| Area                                                                | Result                |
+| ------------------------------------------------------------------- | --------------------- |
+| Navigation / routes (`/workspace/testing/pipelines…`)               | PASS                  |
 | Commands (refresh, open workflow/run, view artifacts/summary/links) | PASS — read-only only |
-| Search / filter / sort on runs (client) | PASS |
-| Status badges, duration, branch, commit, actor | PASS |
-| Evidence / coverage / certification / release link panels | PASS |
-| Permission gating (`pipeline.read` / `pipeline.import`) | PASS |
-| Loading / empty / error / forbidden states | PASS |
-| Accessibility (headings, labels, ARIA sections) | PASS (component) |
-| Responsive layout (existing shell) | PASS (structure) |
+| Search / filter / sort on runs (client)                             | PASS                  |
+| Status badges, duration, branch, commit, actor                      | PASS                  |
+| Evidence / coverage / certification / release link panels           | PASS                  |
+| Permission gating (`pipeline.read` / `pipeline.import`)             | PASS                  |
+| Loading / empty / error / forbidden states                          | PASS                  |
+| Accessibility (headings, labels, ARIA sections)                     | PASS (component)      |
+| Responsive layout (existing shell)                                  | PASS (structure)      |
 
 ## Playwright
 

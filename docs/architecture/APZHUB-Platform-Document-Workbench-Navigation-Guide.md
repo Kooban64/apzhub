@@ -8,18 +8,18 @@
 
 ## Sidebar
 
-| Label | Route | Permission |
-|-------|-------|------------|
-| Overview | `/workspace/documents/overview` | `document.read` |
-| Documents | `/workspace/documents/documents` | `document.read` |
-| Versions | `/workspace/documents/versions` | `document.version.read` |
-| Collections | `/workspace/documents/collections` | `document.collection.read` |
-| Folders | `/workspace/documents/folders` | `document.folder.read` |
-| Tags | `/workspace/documents/tags` | `document.tag.read` |
+| Label         | Route                                | Permission                   |
+| ------------- | ------------------------------------ | ---------------------------- |
+| Overview      | `/workspace/documents/overview`      | `document.read`              |
+| Documents     | `/workspace/documents/documents`     | `document.read`              |
+| Versions      | `/workspace/documents/versions`      | `document.version.read`      |
+| Collections   | `/workspace/documents/collections`   | `document.collection.read`   |
+| Folders       | `/workspace/documents/folders`       | `document.folder.read`       |
+| Tags          | `/workspace/documents/tags`          | `document.tag.read`          |
 | Relationships | `/workspace/documents/relationships` | `document.relationship.read` |
-| Retention | `/workspace/documents/retention` | `document.retention` |
-| Audit | `/workspace/documents/audit` | `document.audit` |
-| Diagnostics | `/workspace/documents/diagnostics` | `document.read` |
-| Metadata | `/workspace/documents/metadata` | `document.metadata.read` |
+| Retention     | `/workspace/documents/retention`     | `document.retention`         |
+| Audit         | `/workspace/documents/audit`         | `document.audit`             |
+| Diagnostics   | `/workspace/documents/diagnostics`   | `document.read`              |
+| Metadata      | `/workspace/documents/metadata`      | `document.metadata.read`     |
 
 Navigation is manifest-driven and filtered by the shell permission adapter. Server remains authoritative for API calls.

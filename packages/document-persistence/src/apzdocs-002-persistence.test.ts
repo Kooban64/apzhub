@@ -20,9 +20,7 @@ import {
   DOCUMENT_PERSISTENCE_VERSION,
 } from "./index";
 
-function ctx(
-  overrides?: Partial<DocumentRequestContext>,
-): DocumentRequestContext {
+function ctx(overrides?: Partial<DocumentRequestContext>): DocumentRequestContext {
   return {
     tenantId: "tenant_p",
     userId: "user_p",
@@ -131,9 +129,7 @@ describe("APZDOCS-002 document-persistence", () => {
       updatedAt: "2026-07-13T12:00:00.000Z",
       revision: 1,
     });
-    const candidates = await repos.storageObjects.listReconciliationCandidates(
-      ctx(),
-    );
+    const candidates = await repos.storageObjects.listReconciliationCandidates(ctx());
     expect(candidates).toHaveLength(1);
     expect(
       await repos.storageObjects.listReconciliationCandidates(

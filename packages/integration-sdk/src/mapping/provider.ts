@@ -27,8 +27,7 @@ function deriveCapabilities(
     profiles: overrides?.profiles ?? profiles,
     directions: overrides?.directions ?? directions,
     supportsRelationships:
-      overrides?.supportsRelationships ??
-      directions.includes("relationship"),
+      overrides?.supportsRelationships ?? directions.includes("relationship"),
     supportsCollections:
       overrides?.supportsCollections ?? directions.includes("collection"),
     supportsNested: overrides?.supportsNested ?? directions.includes("nested"),
@@ -70,7 +69,10 @@ export function createDefinition<TInput = unknown, TOutput = unknown>(input: {
   readonly entityType: string;
   readonly direction: MappingDirection;
   readonly profile?: MappingProfile;
-  readonly map: (input: TInput, context: import("./types").MappingContext) => TOutput | Promise<TOutput>;
+  readonly map: (
+    input: TInput,
+    context: import("./types").MappingContext,
+  ) => TOutput | Promise<TOutput>;
   readonly description?: string;
 }): MappingDefinition<TInput, TOutput> {
   return {

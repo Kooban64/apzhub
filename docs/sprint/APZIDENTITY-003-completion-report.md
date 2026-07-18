@@ -18,13 +18,13 @@ Typed Client → /api/v1/identity/* → gateway.identity.* → RequestPipeline
 → Authz → Platform Services → Core → Persistence → PostgreSQL
 ```
 
-| Component | Status |
-| --- | --- |
-| HTTP handlers | `apps/web/lib/api/v1/handlers/identity.ts` |
-| Routes | 36 App Router routes under `apps/web/app/api/v1/identity/**` |
-| Typed client | `apps/web/lib/identity` (`createHttpIdentityClient`) |
-| OpenAPI | Platform Identity Administration — spec **1.7.0** |
-| Audit | `pnpm audit:identity-http-client` |
+| Component     | Status                                                       |
+| ------------- | ------------------------------------------------------------ |
+| HTTP handlers | `apps/web/lib/api/v1/handlers/identity.ts`                   |
+| Routes        | 36 App Router routes under `apps/web/app/api/v1/identity/**` |
+| Typed client  | `apps/web/lib/identity` (`createHttpIdentityClient`)         |
+| OpenAPI       | Platform Identity Administration — spec **1.7.0**            |
+| Audit         | `pnpm audit:identity-http-client`                            |
 
 ## HTTP API
 
@@ -60,12 +60,12 @@ Identity HTTP handlers + typed client surfaces target **≥95%** lines/functions
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm openapi:validate:platform` | PASS |
-| `pnpm audit:identity-http-client` | PASS |
-| Vitest (identity HTTP + client + harness) | PASS |
-| Typecheck (identity HTTP surface) | PASS |
+| Gate                                      | Result |
+| ----------------------------------------- | ------ |
+| `pnpm openapi:validate:platform`          | PASS   |
+| `pnpm audit:identity-http-client`         | PASS   |
+| Vitest (identity HTTP + client + harness) | PASS   |
+| Typecheck (identity HTTP surface)         | PASS   |
 
 ## Technical Debt
 

@@ -13,7 +13,16 @@ const VALID_TRANSITIONS: Readonly<
   operational: ["maintenance", "degraded", "stopping", "recovering"],
   maintenance: ["operational", "stopping"],
   degraded: ["recovering", "operational", "stopping", "stopped"],
-  recovering: ["operational", "degraded", "bootstrapping", "configuration-ready", "identity-ready", "authorization-ready", "platform-ready", "products-ready"],
+  recovering: [
+    "operational",
+    "degraded",
+    "bootstrapping",
+    "configuration-ready",
+    "identity-ready",
+    "authorization-ready",
+    "platform-ready",
+    "products-ready",
+  ],
   stopping: ["stopped"],
   stopped: ["initializing", "recovering"],
 };

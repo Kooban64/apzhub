@@ -1,6 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { GET as getLifecycle, POST as postLifecycle } from "../../../app/api/platform/v1/operations/lifecycle/route";
+import {
+  GET as getLifecycle,
+  POST as postLifecycle,
+} from "../../../app/api/platform/v1/operations/lifecycle/route";
 
 const mockRequirePlatformAdminRoute = vi.fn();
 const mockLoadConsolidatedOperationalDiagnostics = vi.fn();
@@ -16,7 +19,8 @@ vi.mock("@apzhub/config", () => ({
 }));
 
 vi.mock("@/lib/api/platform/platform-route-guard", () => ({
-  requirePlatformAdminRoute: (...args: unknown[]) => mockRequirePlatformAdminRoute(...args),
+  requirePlatformAdminRoute: (...args: unknown[]) =>
+    mockRequirePlatformAdminRoute(...args),
 }));
 
 vi.mock("@/lib/operational-diagnostics", () => ({
@@ -25,7 +29,8 @@ vi.mock("@/lib/operational-diagnostics", () => ({
 }));
 
 vi.mock("@/lib/runtime-init", () => ({
-  ensurePlatformRuntimeReady: (...args: unknown[]) => mockEnsurePlatformRuntimeReady(...args),
+  ensurePlatformRuntimeReady: (...args: unknown[]) =>
+    mockEnsurePlatformRuntimeReady(...args),
 }));
 
 vi.mock("@apzhub/platform-lifecycle/server", () => ({
@@ -50,7 +55,9 @@ describe("Platform lifecycle API", () => {
   it("returns 401 when admin guard fails", async () => {
     mockRequirePlatformAdminRoute.mockResolvedValue({
       ok: false,
-      response: new Response(JSON.stringify({ error: { code: "UNAUTHORIZED" } }), { status: 401 }),
+      response: new Response(JSON.stringify({ error: { code: "UNAUTHORIZED" } }), {
+        status: 401,
+      }),
     });
 
     const response = await getLifecycle();
@@ -58,13 +65,19 @@ describe("Platform lifecycle API", () => {
   });
 
   it("returns lifecycle snapshot without secrets", async () => {
-    mockRequirePlatformAdminRoute.mockResolvedValue({ ok: true, session: { user: { id: "admin-1" } } });
+    mockRequirePlatformAdminRoute.mockResolvedValue({
+      ok: true,
+      session: { user: { id: "admin-1" } },
+    });
     mockEnsurePlatformRuntimeReady.mockResolvedValue({ success: true });
     mockLoadConsolidatedOperationalDiagnostics.mockResolvedValue({
       generatedAt: "2026-07-09T08:00:00.000Z",
       lawPlatform: { product: "law-platform" },
       trustAccounting: { capability: "trust" },
-      resilience: { health: { status: "healthy", dependencies: [] }, readiness: { status: "healthy" } },
+      resilience: {
+        health: { status: "healthy", dependencies: [] },
+        readiness: { status: "healthy" },
+      },
       security: {
         environment: { valid: true, checks: [] },
         session: { sessionDiagnostics: { healthy: true } },
@@ -88,11 +101,17 @@ describe("Platform lifecycle API", () => {
   });
 
   it("applies maintenance action", async () => {
-    mockRequirePlatformAdminRoute.mockResolvedValue({ ok: true, session: { user: { id: "admin-1" } } });
+    mockRequirePlatformAdminRoute.mockResolvedValue({
+      ok: true,
+      session: { user: { id: "admin-1" } },
+    });
     mockEnsurePlatformRuntimeReady.mockResolvedValue({ success: true });
     mockLoadConsolidatedOperationalDiagnostics.mockResolvedValue({
       generatedAt: "2026-07-09T08:00:00.000Z",
-      resilience: { health: { status: "healthy", dependencies: [] }, readiness: { status: "healthy" } },
+      resilience: {
+        health: { status: "healthy", dependencies: [] },
+        readiness: { status: "healthy" },
+      },
       security: {
         environment: { valid: true, checks: [] },
         session: { sessionDiagnostics: { healthy: true } },
@@ -108,7 +127,10 @@ describe("Platform lifecycle API", () => {
       message: "Maintenance mode enabled.",
       timestamp: "2026-07-09T08:00:00.000Z",
     });
-    manager.snapshot.mockReturnValue({ currentState: "maintenance", maintenanceMode: true });
+    manager.snapshot.mockReturnValue({
+      currentState: "maintenance",
+      maintenanceMode: true,
+    });
 
     const response = await postLifecycle(
       new Request("http://localhost/api/platform/v1/operations/lifecycle", {

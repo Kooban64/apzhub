@@ -1,8 +1,5 @@
 export type VersionCompatibilityStatus =
-  | "compatible"
-  | "warning"
-  | "incompatible"
-  | "not_checked";
+  "compatible" | "warning" | "incompatible" | "not_checked";
 
 export interface VersionRange {
   readonly min: string;

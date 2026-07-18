@@ -99,7 +99,11 @@ export function wrapDocumentPlatformGatewayWithPipeline(
       pipeline,
       "documentFolder",
     ),
-    documentTags: wrapServiceWithPipeline(gateway.documentTags, pipeline, "documentTag"),
+    documentTags: wrapServiceWithPipeline(
+      gateway.documentTags,
+      pipeline,
+      "documentTag",
+    ),
     documentRelationships: wrapServiceWithPipeline(
       gateway.documentRelationships,
       pipeline,
@@ -151,8 +155,7 @@ function buildBundle(input: {
     ...input.persistence,
     provider: input.storage.provider,
     registry: input.storage.registry,
-    maxObjectBytes:
-      input.maxObjectBytes ?? input.storage.config.maxObjectBytes,
+    maxObjectBytes: input.maxObjectBytes ?? input.storage.config.maxObjectBytes,
     allowBinaryDeletion:
       input.allowBinaryDeletion ?? input.storage.config.allowBinaryDeletion,
     now: input.now,
@@ -229,9 +232,7 @@ export async function createDocumentPlatformServicesForProduction(
   input: CreateDocumentPlatformServicesForProductionInput,
 ): Promise<DocumentPlatformServicesBundle> {
   if (!input.postgresDb) {
-    throw new Error(
-      "createDocumentPlatformServicesForProduction requires postgresDb",
-    );
+    throw new Error("createDocumentPlatformServicesForProduction requires postgresDb");
   }
   const persistence = createDocumentPersistenceForProduction({
     postgresDb: input.postgresDb,
@@ -256,8 +257,7 @@ export async function createDocumentPlatformServicesForTest(
 ): Promise<DocumentPlatformServicesBundle> {
   const persistence = createDocumentPersistenceForTest({
     postgresDb: input.postgresDb,
-    allowInMemoryPersistence:
-      input.allowInMemoryPersistence ?? !input.postgresDb,
+    allowInMemoryPersistence: input.allowInMemoryPersistence ?? !input.postgresDb,
   });
   const storage =
     input.storage ??

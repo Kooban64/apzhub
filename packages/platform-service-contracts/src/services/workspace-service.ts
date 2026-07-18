@@ -12,5 +12,8 @@ export interface WorkspaceService {
     query?: ListQuery<WorkspaceListFilter, WorkspaceSortField>,
   ): Promise<PageResult<Workspace>>;
 
-  getWorkspace(ctx: ServiceRequestContext, workspaceId: WorkspaceId): Promise<Workspace>;
+  getWorkspace(
+    ctx: ServiceRequestContext,
+    workspaceId: WorkspaceId,
+  ): Promise<Workspace>;
 }

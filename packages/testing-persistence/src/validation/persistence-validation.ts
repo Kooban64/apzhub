@@ -143,14 +143,7 @@ export function validateCertificationStatus(value: string): void {
 
 export function validateCertificationGateOutcome(value: string): void {
   assertEnumValue(
-    [
-      "pass",
-      "fail",
-      "warning",
-      "not_applicable",
-      "unknown",
-      "pending",
-    ] as const,
+    ["pass", "fail", "warning", "not_applicable", "unknown", "pending"] as const,
     value,
     "status",
   );

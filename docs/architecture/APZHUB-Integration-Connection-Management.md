@@ -26,17 +26,17 @@ ConnectionManager
 
 ## Lifecycle model
 
-| State | Meaning |
-|-------|---------|
-| `unconfigured` | Placeholder — not used after register |
-| `configured` | Valid definition registered |
-| `authenticating` | Credential validation in progress |
-| `connected` | Credentials validated — logical connection open |
-| `disconnected` | Closed — may reopen |
-| `authentication_failed` | Credential validation failed |
-| `misconfigured` | Validation failed at configure |
-| `degraded` | Reserved for future health degradation |
-| `disabled` | Administratively disabled |
+| State                   | Meaning                                         |
+| ----------------------- | ----------------------------------------------- |
+| `unconfigured`          | Placeholder — not used after register           |
+| `configured`            | Valid definition registered                     |
+| `authenticating`        | Credential validation in progress               |
+| `connected`             | Credentials validated — logical connection open |
+| `disconnected`          | Closed — may reopen                             |
+| `authentication_failed` | Credential validation failed                    |
+| `misconfigured`         | Validation failed at configure                  |
+| `degraded`              | Reserved for future health degradation          |
+| `disabled`              | Administratively disabled                       |
 
 Transitions are deterministic and enforced by `ConnectionLifecycleService`. Invalid transitions return structured SDK errors.
 

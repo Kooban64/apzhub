@@ -15,12 +15,12 @@ The PCv2-01 planning package is complete. Four deliverables were produced per ow
 
 ## Deliverables
 
-| ID | Deliverable | Path | Status |
-|----|-------------|------|--------|
-| D-01 | Sprint guide | [PCv2-01-Production-Readiness-Sprint-Guide.md](./PCv2-01-Production-Readiness-Sprint-Guide.md) | ✅ Complete |
-| D-02 | Engineering backlog | [PCv2-01-Backlog.md](../backlog/PCv2-01-Backlog.md) | ✅ Complete (PRH-001–PRH-018) |
-| D-03 | Target architecture | [PCv2-01-Production-Readiness-Architecture.md](../architecture/PCv2-01-Production-Readiness-Architecture.md) | ✅ Complete |
-| D-04 | Readiness review | [PCv2-01-Readiness-Review.md](../reviews/PCv2-01-Readiness-Review.md) | ✅ **READY WITH OBSERVATIONS** |
+| ID   | Deliverable         | Path                                                                                                         | Status                         |
+| ---- | ------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------ |
+| D-01 | Sprint guide        | [PCv2-01-Production-Readiness-Sprint-Guide.md](./PCv2-01-Production-Readiness-Sprint-Guide.md)               | ✅ Complete                    |
+| D-02 | Engineering backlog | [PCv2-01-Backlog.md](../backlog/PCv2-01-Backlog.md)                                                          | ✅ Complete (PRH-001–PRH-018)  |
+| D-03 | Target architecture | [PCv2-01-Production-Readiness-Architecture.md](../architecture/PCv2-01-Production-Readiness-Architecture.md) | ✅ Complete                    |
+| D-04 | Readiness review    | [PCv2-01-Readiness-Review.md](../reviews/PCv2-01-Readiness-Review.md)                                        | ✅ **READY WITH OBSERVATIONS** |
 
 ---
 
@@ -69,11 +69,11 @@ Key observations:
 
 ## Owner gates
 
-| Gate | Status |
-|------|--------|
-| PCv2-01 sprint guide approval | ⏳ **Awaiting owner** |
-| PRH-001 implementation start | ⏳ After sprint guide approval |
-| PCv2-02 (Workers) | ⏳ After PCv2-01 closeout |
+| Gate                          | Status                         |
+| ----------------------------- | ------------------------------ |
+| PCv2-01 sprint guide approval | ⏳ **Awaiting owner**          |
+| PRH-001 implementation start  | ⏳ After sprint guide approval |
+| PCv2-02 (Workers)             | ⏳ After PCv2-01 closeout      |
 
 ---
 

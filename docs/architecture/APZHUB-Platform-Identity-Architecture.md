@@ -32,23 +32,23 @@ Platform Services (APZIDENTITY-002 — not started)
 
 No shortcuts. Packages in this milestone:
 
-| Package | Role |
-| --- | --- |
-| `@apzhub/identity-contracts` | Models, permissions, read-only service interface |
-| `@apzhub/identity-core` | Repository ports, validation, lifecycle, membership/assignment helpers |
-| `@apzhub/identity-persistence` | PostgreSQL + in-memory implementations |
+| Package                        | Role                                                                   |
+| ------------------------------ | ---------------------------------------------------------------------- |
+| `@apzhub/identity-contracts`   | Models, permissions, read-only service interface                       |
+| `@apzhub/identity-core`        | Repository ports, validation, lifecycle, membership/assignment helpers |
+| `@apzhub/identity-persistence` | PostgreSQL + in-memory implementations                                 |
 
 ---
 
 ## Ownership boundary
 
-| Owns | Does not own |
-| --- | --- |
-| User / group / role metadata | Passwords, hashes, sessions, tokens |
+| Owns                                     | Does not own                                 |
+| ---------------------------------------- | -------------------------------------------- |
+| User / group / role metadata             | Passwords, hashes, sessions, tokens          |
 | Organisation / tenant metadata (IAM SoR) | Authentication `platform_tenant` scaffolding |
-| Memberships & service assignments | Runtime authorization evaluation |
-| Administrative identity policies | Provisioning / directory sync |
-| Audit & history metadata | Event Bus / AI |
+| Memberships & service assignments        | Runtime authorization evaluation             |
+| Administrative identity policies         | Provisioning / directory sync                |
+| Audit & history metadata                 | Event Bus / AI                               |
 
 Service assignments describe which platform capabilities a subject may access (Projects, Support, Testing, Reporting, Documents, Search, Workflow, Notifications, Configuration, Administration) — **metadata only**, no provisioning.
 

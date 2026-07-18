@@ -17,13 +17,13 @@ String fields may contain `{{path}}` placeholders resolved from `parameters.text
 
 ## Binding rules
 
-| Block kind | Source |
-|------------|--------|
-| metric | `parameters.metrics[valueKey]` — passed through as string |
-| table | `parameters.tables[tableKey]` — empty table if missing (warning) |
-| list | `parameters.lists[listKey]` — empty list if missing (warning) |
-| summary | `parameters.summaries[summaryKey]` — empty if missing (warning) |
-| heading/paragraph | placeholder resolution only |
+| Block kind        | Source                                                           |
+| ----------------- | ---------------------------------------------------------------- |
+| metric            | `parameters.metrics[valueKey]` — passed through as string        |
+| table             | `parameters.tables[tableKey]` — empty table if missing (warning) |
+| list              | `parameters.lists[listKey]` — empty list if missing (warning)    |
+| summary           | `parameters.summaries[summaryKey]` — empty if missing (warning)  |
+| heading/paragraph | placeholder resolution only                                      |
 
 ## Validation
 

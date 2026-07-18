@@ -60,16 +60,19 @@ const libFiles = walk(join(ROOT, "apps/web/lib/notifications")).filter(
   (f) => !f.includes("notification-boundary") && !f.includes(".test."),
 );
 
-scan([...componentFiles, ...libFiles], [
-  {
-    rule: "ui-no-notification-core",
-    pattern: /@apzhub\/notification-core|@apzhub\/notification-persistence/,
-  },
-  {
-    rule: "ui-no-platform-services",
-    pattern: /@apzhub\/platform-services|getPlatformServiceGateway/,
-  },
-]);
+scan(
+  [...componentFiles, ...libFiles],
+  [
+    {
+      rule: "ui-no-notification-core",
+      pattern: /@apzhub\/notification-core|@apzhub\/notification-persistence/,
+    },
+    {
+      rule: "ui-no-platform-services",
+      pattern: /@apzhub\/platform-services|getPlatformServiceGateway/,
+    },
+  ],
+);
 
 scan(componentFiles, [
   {
@@ -142,10 +145,7 @@ if (!workbenchPage.includes("NotificationsWorkspaceRouter")) {
   });
 }
 
-const routes = readFileSync(
-  join(ROOT, "apps/web/lib/notifications/routes.ts"),
-  "utf8",
-);
+const routes = readFileSync(join(ROOT, "apps/web/lib/notifications/routes.ts"), "utf8");
 if (
   !routes.includes("NOTIFICATIONS_WORKSPACE_BASE") ||
   !routes.includes("/workspace/notifications")
@@ -179,7 +179,8 @@ if (!existsSync(parentManifest)) {
       file: rel(parentManifest),
       line: 1,
       rule: "manifest-incomplete",
-      detail: "Expected notification.read permission and /workspace/notifications route",
+      detail:
+        "Expected notification.read permission and /workspace/notifications route",
     });
   }
 }
@@ -217,7 +218,8 @@ if (existsSync(forbiddenAppPath)) {
     file: rel(forbiddenAppPath),
     line: 1,
     rule: "no-duplicate-app-route",
-    detail: "Use catch-all workspace route — do not add apps/web/app/workspace/notifications",
+    detail:
+      "Use catch-all workspace route — do not add apps/web/app/workspace/notifications",
   });
 }
 

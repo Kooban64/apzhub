@@ -24,15 +24,15 @@ pnpm exec playwright test --config testing/playwright/playwright.config.ts \
 
 ## Results
 
-| Check | Result |
-| --- | --- |
-| `audit:observe-workbench` | PASS (0 violations) |
-| Prior observe audits (001–003) | PASS |
-| OpenAPI platform validate | PASS (v1.8.0) |
-| Vitest Workbench suite | PASS (26 tests) |
-| Scoped coverage lines / functions / branches | **99.65% / 100% / 95.55%** |
-| Playwright `--list` | PASS (spec registered) |
-| Playwright live webServer journey | **LIMITED** — pre-existing Next.js `testing/traceability` slug conflict |
+| Check                                        | Result                                                                  |
+| -------------------------------------------- | ----------------------------------------------------------------------- |
+| `audit:observe-workbench`                    | PASS (0 violations)                                                     |
+| Prior observe audits (001–003)               | PASS                                                                    |
+| OpenAPI platform validate                    | PASS (v1.8.0)                                                           |
+| Vitest Workbench suite                       | PASS (26 tests)                                                         |
+| Scoped coverage lines / functions / branches | **99.65% / 100% / 95.55%**                                              |
+| Playwright `--list`                          | PASS (spec registered)                                                  |
+| Playwright live webServer journey            | **LIMITED** — pre-existing Next.js `testing/traceability` slug conflict |
 
 ## Explicit exclusions verified
 

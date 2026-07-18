@@ -41,4 +41,4 @@ See [API Changelog](./legal-api-changelog.md).
 
 ## OpenAPI
 
-Canonical spec: [/api/law/v1/openapi.yaml](/api/law/v1/openapi.yaml)
+Canonical spec: [/api/law/v1/openapi.yaml](../specs/LAW-OpenAPI-v1.yaml)

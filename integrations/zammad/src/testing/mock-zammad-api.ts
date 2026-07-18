@@ -120,7 +120,9 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
 
   const store: MutableStore = {
     tickets: [
-      ...(options.seedTickets ?? [MOCK_TICKET, MOCK_TICKET_CLOSED]).map((t) => ({ ...t })),
+      ...(options.seedTickets ?? [MOCK_TICKET, MOCK_TICKET_CLOSED]).map((t) => ({
+        ...t,
+      })),
     ],
     organizations: [
       ...(options.seedOrganizations ?? [MOCK_ORGANIZATION]).map((o) => ({ ...o })),
@@ -247,11 +249,20 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
 
     if (path.endsWith("/api/v1/tickets") && method === "POST") {
       if (ticketsStatus >= 400) {
-        return jsonError(ticketsStatus, "VENDOR_UNAVAILABLE", "Tickets unavailable", commonHeaders);
+        return jsonError(
+          ticketsStatus,
+          "VENDOR_UNAVAILABLE",
+          "Tickets unavailable",
+          commonHeaders,
+        );
       }
       const body = parseBody(init?.body);
       if (!body.title || !body.group_id || !body.customer_id) {
-        return jsonError(422, "VALIDATION_ERROR", "title, group_id, and customer_id are required");
+        return jsonError(
+          422,
+          "VALIDATION_ERROR",
+          "title, group_id, and customer_id are required",
+        );
       }
       const created: ZammadTicketRecord = {
         id: store.nextTicketId++,
@@ -273,13 +284,21 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
         updated_at: "2026-07-10T12:00:00.000Z",
       };
       store.tickets.push(created);
-      return new Response(JSON.stringify(created), { status: 201, headers: commonHeaders });
+      return new Response(JSON.stringify(created), {
+        status: 201,
+        headers: commonHeaders,
+      });
     }
 
     const ticketMatch = path.match(/\/api\/v1\/tickets\/(\d+)$/);
     if (ticketMatch) {
       if (ticketsStatus >= 400) {
-        return jsonError(ticketsStatus, "VENDOR_UNAVAILABLE", "Tickets unavailable", commonHeaders);
+        return jsonError(
+          ticketsStatus,
+          "VENDOR_UNAVAILABLE",
+          "Tickets unavailable",
+          commonHeaders,
+        );
       }
       const id = Number(ticketMatch[1]);
       const index = store.tickets.findIndex((ticket) => ticket.id === id);
@@ -298,9 +317,12 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
         const updated: ZammadTicketRecord = {
           ...current,
           title: body.title !== undefined ? String(body.title) : current.title,
-          group_id: body.group_id !== undefined ? Number(body.group_id) : current.group_id,
+          group_id:
+            body.group_id !== undefined ? Number(body.group_id) : current.group_id,
           customer_id:
-            body.customer_id !== undefined ? Number(body.customer_id) : current.customer_id,
+            body.customer_id !== undefined
+              ? Number(body.customer_id)
+              : current.customer_id,
           owner_id:
             body.owner_id !== undefined
               ? body.owner_id === null
@@ -314,7 +336,8 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
                 : Number(body.organization_id)
               : current.organization_id,
           state: typeof body.state === "string" ? body.state : current.state,
-          priority: typeof body.priority === "string" ? body.priority : current.priority,
+          priority:
+            typeof body.priority === "string" ? body.priority : current.priority,
           state_id:
             typeof body.state === "string"
               ? stateIdFromName(body.state)
@@ -327,7 +350,10 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
           updated_at: "2026-07-10T13:00:00.000Z",
         };
         store.tickets[index] = updated;
-        return new Response(JSON.stringify(updated), { status: 200, headers: commonHeaders });
+        return new Response(JSON.stringify(updated), {
+          status: 200,
+          headers: commonHeaders,
+        });
       }
     }
 
@@ -368,20 +394,31 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
       }
       const query = (url.searchParams.get("query") ?? "").toLowerCase();
       const matched = store.organizations.filter((org) => {
-        const haystack = `${org.name} ${org.domain ?? ""} ${org.note ?? ""}`.toLowerCase();
+        const haystack =
+          `${org.name} ${org.domain ?? ""} ${org.note ?? ""}`.toLowerCase();
         return haystack.includes(query);
       });
       return paginatedJson(matched, url, commonHeaders);
     }
     if (path.endsWith("/api/v1/organizations") && method === "GET") {
       if (failOrganizations) {
-        return jsonError(503, "VENDOR_UNAVAILABLE", "Organizations unavailable", commonHeaders);
+        return jsonError(
+          503,
+          "VENDOR_UNAVAILABLE",
+          "Organizations unavailable",
+          commonHeaders,
+        );
       }
       return paginatedJson(store.organizations, url, commonHeaders);
     }
     if (path.endsWith("/api/v1/organizations") && method === "POST") {
       if (failOrganizations) {
-        return jsonError(503, "VENDOR_UNAVAILABLE", "Organizations unavailable", commonHeaders);
+        return jsonError(
+          503,
+          "VENDOR_UNAVAILABLE",
+          "Organizations unavailable",
+          commonHeaders,
+        );
       }
       const body = parseBody(init?.body);
       if (!body.name) {
@@ -398,12 +435,20 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
         updated_at: "2026-07-10T12:00:00.000Z",
       };
       store.organizations.push(created);
-      return new Response(JSON.stringify(created), { status: 201, headers: commonHeaders });
+      return new Response(JSON.stringify(created), {
+        status: 201,
+        headers: commonHeaders,
+      });
     }
     const orgMatch = path.match(/\/api\/v1\/organizations\/(\d+)$/);
     if (orgMatch) {
       if (failOrganizations) {
-        return jsonError(503, "VENDOR_UNAVAILABLE", "Organizations unavailable", commonHeaders);
+        return jsonError(
+          503,
+          "VENDOR_UNAVAILABLE",
+          "Organizations unavailable",
+          commonHeaders,
+        );
       }
       const id = Number(orgMatch[1]);
       const index = store.organizations.findIndex((org) => org.id === id);
@@ -427,7 +472,10 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
           updated_at: "2026-07-10T13:00:00.000Z",
         };
         store.organizations[index] = updated;
-        return new Response(JSON.stringify(updated), { status: 200, headers: commonHeaders });
+        return new Response(JSON.stringify(updated), {
+          status: 200,
+          headers: commonHeaders,
+        });
       }
     }
 
@@ -445,7 +493,12 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
     }
     if (path.endsWith("/api/v1/groups") && method === "POST") {
       if (failGroups) {
-        return jsonError(503, "VENDOR_UNAVAILABLE", "Groups unavailable", commonHeaders);
+        return jsonError(
+          503,
+          "VENDOR_UNAVAILABLE",
+          "Groups unavailable",
+          commonHeaders,
+        );
       }
       const body = parseBody(init?.body);
       if (!body.name) {
@@ -460,12 +513,20 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
         updated_at: "2026-07-10T12:00:00.000Z",
       };
       store.groups.push(created);
-      return new Response(JSON.stringify(created), { status: 201, headers: commonHeaders });
+      return new Response(JSON.stringify(created), {
+        status: 201,
+        headers: commonHeaders,
+      });
     }
     const groupMatch = path.match(/\/api\/v1\/groups\/(\d+)$/);
     if (groupMatch) {
       if (failGroups) {
-        return jsonError(503, "VENDOR_UNAVAILABLE", "Groups unavailable", commonHeaders);
+        return jsonError(
+          503,
+          "VENDOR_UNAVAILABLE",
+          "Groups unavailable",
+          commonHeaders,
+        );
       }
       const id = Number(groupMatch[1]);
       const index = store.groups.findIndex((group) => group.id === id);
@@ -487,7 +548,10 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
           updated_at: "2026-07-10T13:00:00.000Z",
         };
         store.groups[index] = updated;
-        return new Response(JSON.stringify(updated), { status: 200, headers: commonHeaders });
+        return new Response(JSON.stringify(updated), {
+          status: 200,
+          headers: commonHeaders,
+        });
       }
     }
 
@@ -503,7 +567,8 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
       }
       const query = (url.searchParams.get("query") ?? "").toLowerCase();
       const matched = store.users.filter((user) => {
-        const haystack = `${user.email ?? ""} ${user.login ?? ""} ${user.firstname ?? ""} ${user.lastname ?? ""}`.toLowerCase();
+        const haystack =
+          `${user.email ?? ""} ${user.login ?? ""} ${user.firstname ?? ""} ${user.lastname ?? ""}`.toLowerCase();
         return haystack.includes(query);
       });
       return paginatedJson(matched, url, commonHeaders);
@@ -522,7 +587,10 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
       const id = Number(userMatch[1]);
       const user = store.users.find((entry) => entry.id === id);
       if (!user) return jsonError(404, "NOT_FOUND", "User not found");
-      return new Response(JSON.stringify(user), { status: 200, headers: commonHeaders });
+      return new Response(JSON.stringify(user), {
+        status: 200,
+        headers: commonHeaders,
+      });
     }
 
     // --- Articles ---
@@ -544,7 +612,9 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
       if (!store.tickets.some((ticket) => ticket.id === ticketId)) {
         return jsonError(404, "TICKET_NOT_FOUND", "Ticket not found");
       }
-      const matched = store.articles.filter((article) => article.ticket_id === ticketId);
+      const matched = store.articles.filter(
+        (article) => article.ticket_id === ticketId,
+      );
       return paginatedJson(matched, url, commonHeaders);
     }
 
@@ -578,7 +648,9 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
                 ? Math.ceil((attachment.data as string).length * 0.75)
                 : 0,
             preferences: {
-              "Mime-Type": String(attachment["mime-type"] ?? "application/octet-stream"),
+              "Mime-Type": String(
+                attachment["mime-type"] ?? "application/octet-stream",
+              ),
             },
             created_at: "2026-07-11T12:00:00.000Z",
           }))
@@ -608,7 +680,10 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
           body.internal === false ? { delivery_status: "pending" } : undefined,
       };
       store.articles.push(created);
-      return new Response(JSON.stringify(created), { status: 201, headers: commonHeaders });
+      return new Response(JSON.stringify(created), {
+        status: 201,
+        headers: commonHeaders,
+      });
     }
 
     const articleMatch = path.match(/\/api\/v1\/ticket_articles\/(\d+)$/);
@@ -637,7 +712,11 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
         });
       }
       if (method === "PUT" || method === "DELETE") {
-        return jsonError(501, "UNSUPPORTED_ARTICLE_MUTATION", "Article mutation unsupported");
+        return jsonError(
+          501,
+          "UNSUPPORTED_ARTICLE_MUTATION",
+          "Article mutation unsupported",
+        );
       }
     }
 
@@ -661,7 +740,12 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
         return jsonError(429, "RATE_LIMITED", "Webhook rate limited", commonHeaders);
       }
       if (webhooksStatus >= 400) {
-        return jsonError(webhooksStatus, "WEBHOOK_FAILED", "Webhooks unavailable", commonHeaders);
+        return jsonError(
+          webhooksStatus,
+          "WEBHOOK_FAILED",
+          "Webhooks unavailable",
+          commonHeaders,
+        );
       }
       const body = parseBody(init?.body);
       if (!body.endpoint) {
@@ -680,7 +764,10 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
         updated_at: "2026-07-11T14:00:00.000Z",
       };
       store.webhooks.push(created);
-      return new Response(JSON.stringify(created), { status: 201, headers: commonHeaders });
+      return new Response(JSON.stringify(created), {
+        status: 201,
+        headers: commonHeaders,
+      });
     }
     const webhookMatch = path.match(/\/api\/v1\/webhooks\/(\d+)$/);
     if (webhookMatch) {
@@ -688,7 +775,12 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
         return jsonError(429, "RATE_LIMITED", "Webhook rate limited", commonHeaders);
       }
       if (webhooksStatus >= 400) {
-        return jsonError(webhooksStatus, "WEBHOOK_FAILED", "Webhooks unavailable", commonHeaders);
+        return jsonError(
+          webhooksStatus,
+          "WEBHOOK_FAILED",
+          "Webhooks unavailable",
+          commonHeaders,
+        );
       }
       const id = Number(webhookMatch[1]);
       const index = store.webhooks.findIndex((entry) => entry.id === id);
@@ -713,7 +805,10 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
           updated_at: "2026-07-11T15:00:00.000Z",
         };
         store.webhooks[index] = updated;
-        return new Response(JSON.stringify(updated), { status: 200, headers: commonHeaders });
+        return new Response(JSON.stringify(updated), {
+          status: 200,
+          headers: commonHeaders,
+        });
       }
       if (method === "DELETE") {
         store.webhooks.splice(index, 1);

@@ -30,10 +30,7 @@ import {
   normalizeListQuery,
   paginateItems,
 } from "../types";
-import {
-  baseMeta,
-  createInMemoryCrudRepository,
-} from "../in-memory/generic-crud";
+import { baseMeta, createInMemoryCrudRepository } from "../in-memory/generic-crud";
 
 export interface PipelineInMemoryStores {
   pipelines: Map<string, PipelineRecord>;
@@ -101,9 +98,7 @@ export function createInMemoryPipelineRepos(stores: PipelineInMemoryStores): {
           description:
             (input.description as string | undefined) ?? existing?.description,
           status:
-            (input.status as PipelineRecord["status"]) ??
-            existing?.status ??
-            "active",
+            (input.status as PipelineRecord["status"]) ?? existing?.status ?? "active",
           defaultBranch:
             (input.defaultBranch as string | undefined) ?? existing?.defaultBranch,
           repositoryRef:
@@ -159,8 +154,7 @@ export function createInMemoryPipelineRepos(stores: PipelineInMemoryStores): {
           externalRunRef: String(
             input.externalRunRef ?? existing?.externalRunRef ?? "",
           ),
-          pipelineId:
-            (input.pipelineId as string | undefined) ?? existing?.pipelineId,
+          pipelineId: (input.pipelineId as string | undefined) ?? existing?.pipelineId,
           status: String(input.status ?? existing?.status ?? "pending"),
           correlationId:
             (input.correlationId as string | undefined) ?? existing?.correlationId,
@@ -178,8 +172,8 @@ export function createInMemoryPipelineRepos(stores: PipelineInMemoryStores): {
             (input.completedAt as string | undefined) ?? existing?.completedAt,
           canonicalSnapshot:
             (input.canonicalSnapshot as
-              | Readonly<Record<string, unknown>>
-              | undefined) ?? existing?.canonicalSnapshot,
+              Readonly<Record<string, unknown>> | undefined) ??
+            existing?.canonicalSnapshot,
           pipelineRunId:
             (input.pipelineRunId as string | undefined) ?? existing?.pipelineRunId,
         };
@@ -224,8 +218,7 @@ export function createInMemoryPipelineRepos(stores: PipelineInMemoryStores): {
           status: String(input.status ?? existing?.status ?? "unknown"),
           stagesJson:
             (input.stagesJson as readonly unknown[]) ?? existing?.stagesJson ?? [],
-          jobsJson:
-            (input.jobsJson as readonly unknown[]) ?? existing?.jobsJson ?? [],
+          jobsJson: (input.jobsJson as readonly unknown[]) ?? existing?.jobsJson ?? [],
           artifactsJson:
             (input.artifactsJson as readonly unknown[]) ??
             existing?.artifactsJson ??
@@ -251,8 +244,7 @@ export function createInMemoryPipelineRepos(stores: PipelineInMemoryStores): {
           metricsJson:
             (input.metricsJson as Readonly<Record<string, unknown>> | undefined) ??
             existing?.metricsJson,
-          logsJson:
-            (input.logsJson as readonly unknown[]) ?? existing?.logsJson ?? [],
+          logsJson: (input.logsJson as readonly unknown[]) ?? existing?.logsJson ?? [],
           variablesJson:
             (input.variablesJson as readonly unknown[]) ??
             existing?.variablesJson ??
@@ -270,8 +262,7 @@ export function createInMemoryPipelineRepos(stores: PipelineInMemoryStores): {
           startedAt: (input.startedAt as string | undefined) ?? existing?.startedAt,
           completedAt:
             (input.completedAt as string | undefined) ?? existing?.completedAt,
-          durationMs:
-            (input.durationMs as number | undefined) ?? existing?.durationMs,
+          durationMs: (input.durationMs as number | undefined) ?? existing?.durationMs,
           correlationId:
             (input.correlationId as string | undefined) ?? existing?.correlationId,
         };

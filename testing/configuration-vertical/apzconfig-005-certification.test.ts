@@ -10,10 +10,7 @@ const ROOT = join(__dirname, "../..");
 
 describe("APZCONFIG-005 Configuration Vertical Certification", () => {
   it("passes architecture / dependency / boundary audit (0 violations)", () => {
-    const script = join(
-      ROOT,
-      "scripts/apzconfig-005-configuration-vertical-audit.mjs",
-    );
+    const script = join(ROOT, "scripts/apzconfig-005-configuration-vertical-audit.mjs");
     const output = execFileSync(process.execPath, [script], {
       cwd: ROOT,
       encoding: "utf8",
@@ -102,7 +99,7 @@ describe("APZCONFIG-005 Configuration Vertical Certification", () => {
       "packages/configuration-contracts/package.json": "0.2.0",
       "packages/configuration-core/package.json": "0.2.0",
       "packages/configuration-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.24.0",
+      "packages/platform-services/package.json": "0.25.0",
       "packages/platform-service-contracts/package.json": "0.16.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
@@ -113,10 +110,7 @@ describe("APZCONFIG-005 Configuration Vertical Certification", () => {
 
   it("asserts configuration SoR is distinct from @apzhub/config runtime manager", () => {
     const view = readFileSync(
-      join(
-        ROOT,
-        "apps/web/components/configuration/platform-configuration-view.tsx",
-      ),
+      join(ROOT, "apps/web/components/configuration/platform-configuration-view.tsx"),
       "utf8",
     );
     expect(view).not.toMatch(/@apzhub\/config["'/]/);

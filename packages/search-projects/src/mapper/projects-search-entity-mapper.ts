@@ -31,7 +31,12 @@ export type ProjectsSearchMappableEntity =
 
 function stripHtml(text: string | undefined): string | undefined {
   if (!text) return undefined;
-  return text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() || undefined;
+  return (
+    text
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim() || undefined
+  );
 }
 
 function navigationTarget(
@@ -140,10 +145,7 @@ export class ProjectsSearchEntityMapper {
     };
   }
 
-  mapTask(
-    context: ProjectsSearchPublicationContext,
-    task: Task,
-  ): SearchEntityDraft {
+  mapTask(context: ProjectsSearchPublicationContext, task: Task): SearchEntityDraft {
     assertPlatformEntityId(task.id, "task.id");
     assertPlatformEntityId(task.projectId, "task.projectId");
     return {
@@ -265,10 +267,7 @@ export class ProjectsSearchEntityMapper {
     };
   }
 
-  mapTeam(
-    context: ProjectsSearchPublicationContext,
-    team: Team,
-  ): SearchEntityDraft {
+  mapTeam(context: ProjectsSearchPublicationContext, team: Team): SearchEntityDraft {
     assertPlatformEntityId(team.id, "team.id");
     this.assertTenant(team.tenantId, context);
     return {
@@ -294,7 +293,9 @@ export class ProjectsSearchEntityMapper {
     context: ProjectsSearchPublicationContext,
   ): void {
     if (entityTenantId !== context.tenantId) {
-      throw new Error("tenant mismatch between Projects entity and publication context");
+      throw new Error(
+        "tenant mismatch between Projects entity and publication context",
+      );
     }
   }
 }

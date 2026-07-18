@@ -14,12 +14,12 @@
 
 ## Operational health
 
-| Level | Meaning |
-| --- | --- |
-| HEALTHY | Auth + connectivity OK; required capabilities available |
-| DEGRADED | Optional gaps (e.g. approvals) or warnings |
-| LIMITED | Required capability gaps or rate limit exhausted |
-| UNAVAILABLE | Auth/config/connectivity/circuit/version block |
+| Level       | Meaning                                                 |
+| ----------- | ------------------------------------------------------- |
+| HEALTHY     | Auth + connectivity OK; required capabilities available |
+| DEGRADED    | Optional gaps (e.g. approvals) or warnings              |
+| LIMITED     | Required capability gaps or rate limit exhausted        |
+| UNAVAILABLE | Auth/config/connectivity/circuit/version block          |
 
 `mapOperationalHealthToSdkStatus()` maps HEALTHY→healthy, DEGRADED/LIMITED→degraded, UNAVAILABLE→unavailable.
 

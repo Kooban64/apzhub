@@ -97,22 +97,22 @@ Extended vendor codes: `TICKET_NOT_FOUND`, `ARTICLE_NOT_FOUND`, `INVALID_ARTICLE
 
 ## Package versions
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/integration-zammad` | **0.3.0** |
+| Package                              | Version   |
+| ------------------------------------ | --------- |
+| `@apzhub/integration-zammad`         | **0.3.0** |
 | `@apzhub/platform-service-contracts` | **0.4.0** |
 
 ---
 
 ## Tests & coverage
 
-| Suite | Result |
-| --- | --- |
-| Zammad package | **57+ passed** (articles + core + foundation) |
-| Plane + Zammad + contracts regression | **157+ passed** |
-| `ZammadArticleService` lines | **~94.5%** (functions 100%) |
-| Article mapper functions | **100%** (lines ~94%) |
-| Package lines | **~90%** |
+| Suite                                 | Result                                        |
+| ------------------------------------- | --------------------------------------------- |
+| Zammad package                        | **57+ passed** (articles + core + foundation) |
+| Plane + Zammad + contracts regression | **157+ passed**                               |
+| `ZammadArticleService` lines          | **~94.5%** (functions 100%)                   |
+| Article mapper functions              | **100%** (lines ~94%)                         |
+| Package lines                         | **~90%**                                      |
 
 ---
 
@@ -142,12 +142,12 @@ CE **6.3.0–6.5.x**; `/api/v1/ticket_articles` and `by_ticket`; Token auth.
 
 ## Technical debt
 
-| ID | Note |
-| --- | --- |
-| TD-10204-01 | Article update/delete remain unsupported until CE API confirms |
-| TD-10204-02 | Binary attachment transfer deferred |
+| ID          | Note                                                                |
+| ----------- | ------------------------------------------------------------------- |
+| TD-10204-01 | Article update/delete remain unsupported until CE API confirms      |
+| TD-10204-02 | Binary attachment transfer deferred                                 |
 | TD-10204-03 | List fetches up to 100 articles then client-filters (large tickets) |
-| TD-10204-04 | Provisional IDs until MappingStore |
+| TD-10204-04 | Provisional IDs until MappingStore                                  |
 
 ---
 

@@ -16,17 +16,17 @@ Read-only GitHub Actions reference adapter for APZ TCMS CI/CD. Extends `Integrat
 
 ## Core services (`adapter.core`)
 
-| Service | Access | Notes |
-| --- | --- | --- |
-| Repositories | `adapter.core.repositories` | getRepository |
-| Workflows | `adapter.core.workflows` | list / get |
-| Pipeline runs | `adapter.core.pipelineRuns` / `runs` | list / get |
-| Jobs / steps | `adapter.core.jobs` / `steps` | read-only |
-| Artifacts | `adapter.core.artifacts` | metadata only |
-| Logs | `adapter.core.logs` | URL metadata only |
-| Approvals | `adapter.core.approvals` | empty on 404 |
-| Summary | `adapter.core.summary` | PipelineSummary |
-| Version | `adapter.core.version` | API `2022-11-28` |
+| Service       | Access                               | Notes             |
+| ------------- | ------------------------------------ | ----------------- |
+| Repositories  | `adapter.core.repositories`          | getRepository     |
+| Workflows     | `adapter.core.workflows`             | list / get        |
+| Pipeline runs | `adapter.core.pipelineRuns` / `runs` | list / get        |
+| Jobs / steps  | `adapter.core.jobs` / `steps`        | read-only         |
+| Artifacts     | `adapter.core.artifacts`             | metadata only     |
+| Logs          | `adapter.core.logs`                  | URL metadata only |
+| Approvals     | `adapter.core.approvals`             | empty on 404      |
+| Summary       | `adapter.core.summary`               | PipelineSummary   |
+| Version       | `adapter.core.version`               | API `2022-11-28`  |
 
 ---
 

@@ -8,10 +8,10 @@
 
 ## Wave closed
 
-| Track | Milestones | Classification |
-| ----- | ---------- | -------------- |
+| Track                   | Milestones          | Classification                                 |
+| ----------------------- | ------------------- | ---------------------------------------------- |
 | Workflow Platform (SoR) | APZWORKFLOW-001…005 | **PRODUCTION_READY_WITH_LIMITATIONS** (frozen) |
-| Workflow Engine (n8n) | APZWORKFLOW-006…011 | **PRODUCTION_READY_WITH_LIMITATIONS** (frozen) |
+| Workflow Engine (n8n)   | APZWORKFLOW-006…011 | **PRODUCTION_READY_WITH_LIMITATIONS** (frozen) |
 
 ## Reference Adapter
 
@@ -23,12 +23,12 @@ See [Architecture Freeze Notice](../architecture/APZHUB-Workflow-Engine-Architec
 
 ## Audit evidence
 
-| Audit | Result |
-| ----- | ------ |
-| `pnpm audit:workflow-vertical` (001–005) | PASS |
-| `pnpm audit:workflow-engine-vertical` (006–010) | PASS |
-| `pnpm audit:workflow-engine-wave` (011) | PASS |
-| `pnpm openapi:validate:platform` | PASS |
+| Audit                                           | Result |
+| ----------------------------------------------- | ------ |
+| `pnpm audit:workflow-vertical` (001–005)        | PASS   |
+| `pnpm audit:workflow-engine-vertical` (006–010) | PASS   |
+| `pnpm audit:workflow-engine-wave` (011)         | PASS   |
+| `pnpm openapi:validate:platform`                | PASS   |
 
 ## Stop
 

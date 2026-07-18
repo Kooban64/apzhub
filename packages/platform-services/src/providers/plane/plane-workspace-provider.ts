@@ -35,11 +35,15 @@ function mapWorkspaceSort(
 }
 
 function extractPlaneWorkspaceKey(workspaceId: WorkspaceId): string {
-  return workspaceId.startsWith("ws_plane_") ? workspaceId.slice("ws_plane_".length) : workspaceId;
+  return workspaceId.startsWith("ws_plane_")
+    ? workspaceId.slice("ws_plane_".length)
+    : workspaceId;
 }
 
 /** Delegates workspace operations to Plane adapter core services. */
-export function createPlaneWorkspaceProvider(core: PlaneCoreServices): WorkspaceProvider {
+export function createPlaneWorkspaceProvider(
+  core: PlaneCoreServices,
+): WorkspaceProvider {
   return {
     async listWorkspaces(
       ctx: ServiceRequestContext,
@@ -56,9 +60,15 @@ export function createPlaneWorkspaceProvider(core: PlaneCoreServices): Workspace
       );
     },
 
-    async getWorkspace(ctx: ServiceRequestContext, workspaceId: WorkspaceId): Promise<Workspace> {
+    async getWorkspace(
+      ctx: ServiceRequestContext,
+      workspaceId: WorkspaceId,
+    ): Promise<Workspace> {
       return withProviderErrorMapping(ctx.correlationId, () =>
-        core.workspaces.get(toIntegrationContext(ctx), extractPlaneWorkspaceKey(workspaceId)),
+        core.workspaces.get(
+          toIntegrationContext(ctx),
+          extractPlaneWorkspaceKey(workspaceId),
+        ),
       );
     },
   };

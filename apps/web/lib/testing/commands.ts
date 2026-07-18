@@ -3,10 +3,7 @@
  */
 
 import { TestingClientError } from "./errors";
-import {
-  hasTestingPermission,
-  type TestingPermissionSource,
-} from "./permissions";
+import { hasTestingPermission, type TestingPermissionSource } from "./permissions";
 import * as testingApi from "./testing-api";
 import {
   testingExecutiveDashboardsPath,
@@ -289,7 +286,11 @@ export async function executeTestingCommand<T extends TestingCommandId>(
 ): Promise<unknown> {
   const command = COMMAND_BY_ID.get(commandId);
   if (!command) {
-    throw new TestingClientError(`Unknown command: ${commandId}`, "UNKNOWN_COMMAND", 400);
+    throw new TestingClientError(
+      `Unknown command: ${commandId}`,
+      "UNKNOWN_COMMAND",
+      400,
+    );
   }
 
   requirePermission(command, permissions);
@@ -302,7 +303,9 @@ export async function executeTestingCommand<T extends TestingCommandId>(
     case "create_case":
       return testingApi.createCase(args as TestingCommandArgsMap["create_case"]);
     case "start_execution":
-      return testingApi.startExecution(args as TestingCommandArgsMap["start_execution"]);
+      return testingApi.startExecution(
+        args as TestingCommandArgsMap["start_execution"],
+      );
     case "pause_execution": {
       const { executionId } = args as TestingCommandArgsMap["pause_execution"];
       return testingApi.pauseExecution(executionId);
@@ -312,7 +315,9 @@ export async function executeTestingCommand<T extends TestingCommandId>(
       return testingApi.resumeExecution(executionId);
     }
     case "submit_evidence":
-      return testingApi.submitEvidence(args as TestingCommandArgsMap["submit_evidence"]);
+      return testingApi.submitEvidence(
+        args as TestingCommandArgsMap["submit_evidence"],
+      );
     case "approve":
       return testingApi.decideCertification({
         ...(args as TestingCommandArgsMap["approve"]),
@@ -346,8 +351,11 @@ export async function executeTestingCommand<T extends TestingCommandId>(
     }
     case "pipeline_view_artifacts":
     case "pipeline_view_summary": {
-      const { owner, repo, runId } = args as TestingCommandArgsMap["pipeline_view_artifacts"];
-      return { href: `${testingPipelineRunPath(owner, repo, runId)}#${commandId === "pipeline_view_artifacts" ? "artifacts" : "summary"}` };
+      const { owner, repo, runId } =
+        args as TestingCommandArgsMap["pipeline_view_artifacts"];
+      return {
+        href: `${testingPipelineRunPath(owner, repo, runId)}#${commandId === "pipeline_view_artifacts" ? "artifacts" : "summary"}`,
+      };
     }
     case "pipeline_view_evidence":
       return { href: `${TESTING_BASE}/evidence` };

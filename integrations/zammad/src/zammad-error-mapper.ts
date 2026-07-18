@@ -82,7 +82,8 @@ function buildZammadOperatorMessage(
   }
   if (op.includes("sync")) {
     if (category === "timeout") return "Zammad synchronisation timed out";
-    if (category === "rate_limited") return "Zammad synchronisation rate limit exceeded";
+    if (category === "rate_limited")
+      return "Zammad synchronisation rate limit exceeded";
     if (category === "mapping") return "Zammad synchronisation mapping failed";
     return "Zammad synchronisation failed";
   }
@@ -157,10 +158,7 @@ export class ZammadVendorErrorMapper implements VendorErrorMapper {
       {
         category: resolvedCategory,
         code,
-        message: buildZammadOperatorMessage(
-          resolvedCategory,
-          input.context?.operation,
-        ),
+        message: buildZammadOperatorMessage(resolvedCategory, input.context?.operation),
       },
     );
 

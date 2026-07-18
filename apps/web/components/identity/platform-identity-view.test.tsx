@@ -10,10 +10,7 @@ import {
   createMockIdentityClient,
   MOCK_IDENTITY_USER,
 } from "@/lib/identity/mock-identity-client";
-import {
-  resetIdentityClient,
-  setIdentityClient,
-} from "@/lib/identity/identity-api";
+import { resetIdentityClient, setIdentityClient } from "@/lib/identity/identity-api";
 
 import { IdentityWorkspaceRouter } from "./identity-workspace-router";
 import { PlatformIdentityView } from "./platform-identity-view";
@@ -47,9 +44,7 @@ describe("PlatformIdentityView", () => {
     render(wrap(<PlatformIdentityView section="overview" />));
 
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
       expect(screen.getByTestId("card-users-count")).toBeTruthy();
     });
 
@@ -59,20 +54,16 @@ describe("PlatformIdentityView", () => {
     expect(screen.getByTestId("card-provisioning-status").textContent).toContain(
       "PROVISIONING NOT AVAILABLE",
     );
-    expect(
-      screen.getByTestId("card-directory-sync-status").textContent,
-    ).toContain("DIRECTORY SYNC NOT AVAILABLE");
-    expect(
-      screen.getByRole("toolbar", { name: /Identity commands/i }),
-    ).toBeTruthy();
+    expect(screen.getByTestId("card-directory-sync-status").textContent).toContain(
+      "DIRECTORY SYNC NOT AVAILABLE",
+    );
+    expect(screen.getByRole("toolbar", { name: /Identity commands/i })).toBeTruthy();
   });
 
   it("router mounts overview from pathname", async () => {
     render(wrap(<IdentityWorkspaceRouter />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
     });
   });
 
@@ -125,10 +116,7 @@ describe("PlatformIdentityView", () => {
     });
 
     await user.clear(screen.getByLabelText(/^Edit display name$/i));
-    await user.type(
-      screen.getByLabelText(/^Edit display name$/i),
-      "Updated Name",
-    );
+    await user.type(screen.getByLabelText(/^Edit display name$/i), "Updated Name");
     await user.click(screen.getByRole("button", { name: /Save changes/i }));
     await waitFor(() => {
       expect(screen.getByTestId("identity-status").textContent).toMatch(
@@ -205,9 +193,7 @@ describe("PlatformIdentityView", () => {
     setIdentityClient({
       ...createMockIdentityClient(),
       async listUsers() {
-        const { IdentityClientError } = await import(
-          "@/lib/identity/identity-errors"
-        );
+        const { IdentityClientError } = await import("@/lib/identity/identity-errors");
         throw new IdentityClientError({
           message: "Denied",
           status: 403,
@@ -226,9 +212,7 @@ describe("PlatformIdentityView", () => {
     setIdentityClient({
       ...createMockIdentityClient(),
       async listUsers() {
-        const { IdentityClientError } = await import(
-          "@/lib/identity/identity-errors"
-        );
+        const { IdentityClientError } = await import("@/lib/identity/identity-errors");
         throw new IdentityClientError({
           message: "Identity service is unavailable",
           status: 503,
@@ -247,9 +231,7 @@ describe("PlatformIdentityView", () => {
     setIdentityClient({
       ...createMockIdentityClient(),
       async getHealth() {
-        const { IdentityClientError } = await import(
-          "@/lib/identity/identity-errors"
-        );
+        const { IdentityClientError } = await import("@/lib/identity/identity-errors");
         throw new IdentityClientError({
           message: "Identity service is unavailable",
           status: 503,
@@ -314,12 +296,7 @@ describe("PlatformIdentityView", () => {
 
   async function exerciseEntityCrud(
     section:
-      | "groups"
-      | "roles"
-      | "organisations"
-      | "tenants"
-      | "departments"
-      | "positions",
+      "groups" | "roles" | "organisations" | "tenants" | "departments" | "positions",
     singular: string,
     options?: { organisationId?: boolean },
   ) {
@@ -361,9 +338,7 @@ describe("PlatformIdentityView", () => {
       "Updated",
     );
     await user.type(
-      screen.getByLabelText(
-        new RegExp(`^${singular} update description$`, "i"),
-      ),
+      screen.getByLabelText(new RegExp(`^${singular} update description$`, "i")),
       "Updated desc",
     );
     await user.type(
@@ -382,41 +357,35 @@ describe("PlatformIdentityView", () => {
     });
     await user.click(screen.getByRole("button", { name: /^Copy ID$/i }));
     await waitFor(() => {
-      expect(screen.getByTestId("identity-status").textContent).toMatch(
-        /Copied ID/i,
-      );
+      expect(screen.getByTestId("identity-status").textContent).toMatch(/Copied ID/i);
     });
   }
 
-  it(
-    "exercises EntityCrudPanel create/update for catalogue sections",
-    async () => {
-      await exerciseEntityCrud("groups", "Group", { organisationId: true });
-      cleanup();
-      resetIdentityClient();
-      setIdentityClient(createMockIdentityClient());
-      await exerciseEntityCrud("roles", "Role", { organisationId: true });
-      cleanup();
-      resetIdentityClient();
-      setIdentityClient(createMockIdentityClient());
-      await exerciseEntityCrud("organisations", "Organisation");
-      cleanup();
-      resetIdentityClient();
-      setIdentityClient(createMockIdentityClient());
-      await exerciseEntityCrud("tenants", "Tenant");
-      cleanup();
-      resetIdentityClient();
-      setIdentityClient(createMockIdentityClient());
-      await exerciseEntityCrud("departments", "Department", {
-        organisationId: true,
-      });
-      cleanup();
-      resetIdentityClient();
-      setIdentityClient(createMockIdentityClient());
-      await exerciseEntityCrud("positions", "Position", { organisationId: true });
-    },
-    30_000,
-  );
+  it("exercises EntityCrudPanel create/update for catalogue sections", async () => {
+    await exerciseEntityCrud("groups", "Group", { organisationId: true });
+    cleanup();
+    resetIdentityClient();
+    setIdentityClient(createMockIdentityClient());
+    await exerciseEntityCrud("roles", "Role", { organisationId: true });
+    cleanup();
+    resetIdentityClient();
+    setIdentityClient(createMockIdentityClient());
+    await exerciseEntityCrud("organisations", "Organisation");
+    cleanup();
+    resetIdentityClient();
+    setIdentityClient(createMockIdentityClient());
+    await exerciseEntityCrud("tenants", "Tenant");
+    cleanup();
+    resetIdentityClient();
+    setIdentityClient(createMockIdentityClient());
+    await exerciseEntityCrud("departments", "Department", {
+      organisationId: true,
+    });
+    cleanup();
+    resetIdentityClient();
+    setIdentityClient(createMockIdentityClient());
+    await exerciseEntityCrud("positions", "Position", { organisationId: true });
+  }, 30_000);
 
   it("creates and updates memberships", async () => {
     const user = userEvent.setup();
@@ -433,10 +402,7 @@ describe("PlatformIdentityView", () => {
         /Completed: create membership/i,
       );
     });
-    await user.type(
-      screen.getByLabelText(/Membership new status/i),
-      "suspended",
-    );
+    await user.type(screen.getByLabelText(/Membership new status/i), "suspended");
     await user.click(screen.getByRole("button", { name: /^Update status$/i }));
     await waitFor(() => {
       expect(screen.getByTestId("identity-status").textContent).toMatch(
@@ -451,14 +417,8 @@ describe("PlatformIdentityView", () => {
     await waitFor(() => {
       expect(screen.getByTestId("identity-detail")).toBeTruthy();
     });
-    await user.type(
-      screen.getByLabelText(/Invitation email/i),
-      "invitee@example.com",
-    );
-    await user.type(
-      screen.getByLabelText(/Invitation organisation id/i),
-      "org_mock_1",
-    );
+    await user.type(screen.getByLabelText(/Invitation email/i), "invitee@example.com");
+    await user.type(screen.getByLabelText(/Invitation organisation id/i), "org_mock_1");
     await user.click(screen.getByRole("button", { name: /Create invitation/i }));
     await waitFor(() => {
       expect(screen.getByTestId("identity-status").textContent).toMatch(
@@ -519,14 +479,8 @@ describe("PlatformIdentityView", () => {
         /Completed: create reference/i,
       );
     });
-    await user.type(
-      screen.getByLabelText(/Reference update target/i),
-      "doc:2",
-    );
-    await user.type(
-      screen.getByLabelText(/Reference update label/i),
-      "Doc 2",
-    );
+    await user.type(screen.getByLabelText(/Reference update target/i), "doc:2");
+    await user.type(screen.getByLabelText(/Reference update label/i), "Doc 2");
     await user.click(screen.getByRole("button", { name: /Update reference/i }));
     await waitFor(() => {
       expect(screen.getByTestId("identity-status").textContent).toMatch(
@@ -557,9 +511,7 @@ describe("PlatformIdentityView", () => {
     setIdentityClient({
       ...createMockIdentityClient(),
       async getGroup() {
-        const { IdentityClientError } = await import(
-          "@/lib/identity/identity-errors"
-        );
+        const { IdentityClientError } = await import("@/lib/identity/identity-errors");
         throw new IdentityClientError({
           message: "Missing",
           status: 404,
@@ -577,14 +529,10 @@ describe("PlatformIdentityView", () => {
     const user = userEvent.setup();
     render(wrap(<PlatformIdentityView section="overview" />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("toolbar", { name: /Identity commands/i }),
-      ).toBeTruthy();
+      expect(screen.getByRole("toolbar", { name: /Identity commands/i })).toBeTruthy();
     });
     await user.click(screen.getByRole("button", { name: /^Refresh$/i }));
-    await user.click(
-      screen.getByRole("button", { name: /Open API Metadata/i }),
-    );
+    await user.click(screen.getByRole("button", { name: /Open API Metadata/i }));
     await waitFor(() => {
       expect(screen.getByTestId("api-metadata-panel")).toBeTruthy();
     });
@@ -596,9 +544,9 @@ describe("PlatformIdentityView", () => {
     await waitFor(() => {
       expect(screen.getByTestId("identity-table")).toBeTruthy();
     });
-    const dataRows = screen.getAllByRole("row").filter((row) =>
-      row.hasAttribute("tabindex"),
-    );
+    const dataRows = screen
+      .getAllByRole("row")
+      .filter((row) => row.hasAttribute("tabindex"));
     expect(dataRows.length).toBeGreaterThan(0);
     dataRows[0]!.focus();
     await user.keyboard("{Enter}");
@@ -622,9 +570,7 @@ describe("PlatformIdentityView", () => {
     setIdentityClient({
       ...createMockIdentityClient(),
       async createGroup() {
-        const { IdentityClientError } = await import(
-          "@/lib/identity/identity-errors"
-        );
+        const { IdentityClientError } = await import("@/lib/identity/identity-errors");
         throw new IdentityClientError({
           message: "Conflict",
           status: 409,
@@ -652,9 +598,8 @@ describe("PlatformIdentityView", () => {
       async listUsers() {
         calls += 1;
         if (calls === 1) {
-          const { IdentityClientError } = await import(
-            "@/lib/identity/identity-errors"
-          );
+          const { IdentityClientError } =
+            await import("@/lib/identity/identity-errors");
           throw new IdentityClientError({
             message: "Temporary failure",
             status: 500,
@@ -689,10 +634,7 @@ describe("PlatformIdentityView", () => {
       screen.getByLabelText(/Invitation expiry/i),
       "2026-12-31T00:00:00.000Z",
     );
-    await user.type(
-      screen.getByLabelText(/Invitation email/i),
-      "full@example.com",
-    );
+    await user.type(screen.getByLabelText(/Invitation email/i), "full@example.com");
     await user.click(screen.getByRole("button", { name: /Create invitation/i }));
     await waitFor(() => {
       expect(screen.getByTestId("identity-status").textContent).toMatch(
@@ -707,18 +649,9 @@ describe("PlatformIdentityView", () => {
       expect(screen.getByTestId("identity-detail")).toBeTruthy();
     });
     await user.type(screen.getByLabelText(/^Edit email$/i), "edited@example.com");
-    await user.type(
-      screen.getByLabelText(/Edit auth subject reference/i),
-      "subj_1",
-    );
-    await user.type(
-      screen.getByLabelText(/Edit user organisation id/i),
-      "org_mock_1",
-    );
-    await user.type(
-      screen.getByLabelText(/Activation reason/i),
-      "lifecycle test",
-    );
+    await user.type(screen.getByLabelText(/Edit auth subject reference/i), "subj_1");
+    await user.type(screen.getByLabelText(/Edit user organisation id/i), "org_mock_1");
+    await user.type(screen.getByLabelText(/Activation reason/i), "lifecycle test");
     await user.click(screen.getByRole("button", { name: /Save changes/i }));
     await waitFor(() => {
       expect(screen.getByTestId("identity-status").textContent).toMatch(

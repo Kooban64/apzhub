@@ -4,10 +4,10 @@
 
 ## Explicit hooks (no background processing)
 
-| Hook | Behaviour |
-| ---- | --------- |
+| Hook          | Behaviour                                  |
+| ------------- | ------------------------------------------ |
 | `on*Upserted` | `publish` if absent/removed; else `update` |
-| `on*Removed` | `remove` via Search Integration Framework |
+| `on*Removed`  | `remove` via Search Integration Framework  |
 
 Call from Platform Service mutation paths after persistence succeeds. Do not register listeners.
 

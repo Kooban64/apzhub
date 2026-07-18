@@ -10,10 +10,7 @@ import type {
   PlanePaginatedResponse,
 } from "../internal/plane-api-types";
 import { mapPlaneActivity } from "../mappers/collaboration-mapper";
-import {
-  extractProjectPlaneId,
-  extractTaskPlaneId,
-} from "../mappers/mapper-context";
+import { extractProjectPlaneId, extractTaskPlaneId } from "../mappers/mapper-context";
 import type { PageRequest } from "../models/query";
 import {
   assertValid,
@@ -25,7 +22,8 @@ import { validatePlaneActivityResponse } from "../validation/response-validation
 import type { PlaneServiceDeps } from "./plane-operation-runner";
 
 function asActivityArray(
-  response: readonly PlaneActivityRecord[] | PlanePaginatedResponse<PlaneActivityRecord>,
+  response:
+    readonly PlaneActivityRecord[] | PlanePaginatedResponse<PlaneActivityRecord>,
 ): readonly PlaneActivityRecord[] {
   if (Array.isArray(response)) {
     return response;
@@ -152,7 +150,9 @@ export class PlaneActivityService {
         }),
       );
 
-      const flattened = histories.flat().sort((a, b) => a.occurredAt.localeCompare(b.occurredAt));
+      const flattened = histories
+        .flat()
+        .sort((a, b) => a.occurredAt.localeCompare(b.occurredAt));
       const filtered = applyActivityFilters(flattened, filter);
       return toActivityPage(filtered, page);
     });

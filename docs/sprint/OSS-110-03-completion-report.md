@@ -15,21 +15,21 @@ OSS-110-03 delivers the provider-neutral mapping, orchestration, and gateway lay
 
 ## Milestone scope delivered
 
-| Deliverable | Status |
-|-------------|--------|
-| EntityMappingStore contract | ✅ |
-| InMemoryEntityMappingStore | ✅ |
-| Global ID strategy (ADR-0048) | ✅ |
-| MappingOrchestrator | ✅ |
-| Mapping-aware Workspace/Project/Team/User/Search services | ✅ |
-| PlatformServiceGateway | ✅ |
-| Provider resolution with mapping precedence | ✅ |
-| Reconciliation contracts (in-memory report) | ✅ |
-| Plane provider sprint ref compatibility (services package only) | ✅ |
-| Extended PlatformServiceError codes | ✅ |
-| Comprehensive unit tests | ✅ |
-| Documentation + ADR | ✅ |
-| TaskServiceImpl / Plane task CRUD | ⏸ Excluded |
+| Deliverable                                                     | Status     |
+| --------------------------------------------------------------- | ---------- |
+| EntityMappingStore contract                                     | ✅         |
+| InMemoryEntityMappingStore                                      | ✅         |
+| Global ID strategy (ADR-0048)                                   | ✅         |
+| MappingOrchestrator                                             | ✅         |
+| Mapping-aware Workspace/Project/Team/User/Search services       | ✅         |
+| PlatformServiceGateway                                          | ✅         |
+| Provider resolution with mapping precedence                     | ✅         |
+| Reconciliation contracts (in-memory report)                     | ✅         |
+| Plane provider sprint ref compatibility (services package only) | ✅         |
+| Extended PlatformServiceError codes                             | ✅         |
+| Comprehensive unit tests                                        | ✅         |
+| Documentation + ADR                                             | ✅         |
+| TaskServiceImpl / Plane task CRUD                               | ⏸ Excluded |
 
 ---
 
@@ -137,17 +137,17 @@ integrations/plane/docs/PLANE-ADAPTER.md
 
 ## Tests added / statistics
 
-| Suite | Focus |
-|-------|-------|
-| `mapping-orchestration.test.ts` | Global IDs, store, orchestrator, gateway, reconciliation, mapping-aware ops |
-| Updated service / Plane provider tests | Mapping-aware behaviour, sprint refs |
+| Suite                                  | Focus                                                                       |
+| -------------------------------------- | --------------------------------------------------------------------------- |
+| `mapping-orchestration.test.ts`        | Global IDs, store, orchestrator, gateway, reconciliation, mapping-aware ops |
+| Updated service / Plane provider tests | Mapping-aware behaviour, sprint refs                                        |
 
-| Scope | Result |
-|-------|--------|
-| `@apzhub/platform-services` | 44 passed |
-| `@apzhub/integration-plane` | 37 passed |
+| Scope                                      | Result               |
+| ------------------------------------------ | -------------------- |
+| `@apzhub/platform-services`                | 44 passed            |
+| `@apzhub/integration-plane`                | 37 passed            |
 | `@apzhub/integration-sdk` (sampled suites) | green with above run |
-| Combined related run | **146 passed** |
+| Combined related run                       | **146 passed**       |
 
 ---
 
@@ -159,13 +159,13 @@ Mapping/orchestration/gateway logic covered by dedicated unit tests. Full monore
 
 ## Quality-gate results
 
-| Gate | Result |
-|------|--------|
-| `pnpm --filter @apzhub/platform-services typecheck` | Pass |
-| `pnpm --filter @apzhub/platform-service-contracts typecheck` | Pass |
-| ESLint (platform-services) | Pass |
-| Platform services + Plane + Integration SDK tests | Pass |
-| Plane adapter source modified | **No** |
+| Gate                                                         | Result |
+| ------------------------------------------------------------ | ------ |
+| `pnpm --filter @apzhub/platform-services typecheck`          | Pass   |
+| `pnpm --filter @apzhub/platform-service-contracts typecheck` | Pass   |
+| ESLint (platform-services)                                   | Pass   |
+| Platform services + Plane + Integration SDK tests            | Pass   |
+| Plane adapter source modified                                | **No** |
 
 ---
 
@@ -187,24 +187,24 @@ Compatibility for sprint-by-id lives in `@apzhub/platform-services` Plane provid
 
 ## Technical debt
 
-| Item | Notes |
-|------|-------|
-| In-memory mapping store only | PostgreSQL implementation deferred |
-| User/search still scaffolded | Identity directory / search framework not in scope |
-| Milestones unsupported at Plane provider | Throws configuration error |
-| Sprint ref encoding | Internal Plane-provider convention until first-class project-scoped sprint API |
-| TaskServiceImpl | Deferred to later milestone |
-| Permission enforcement | Still deferred (gateway-ready) |
+| Item                                     | Notes                                                                          |
+| ---------------------------------------- | ------------------------------------------------------------------------------ |
+| In-memory mapping store only             | PostgreSQL implementation deferred                                             |
+| User/search still scaffolded             | Identity directory / search framework not in scope                             |
+| Milestones unsupported at Plane provider | Throws configuration error                                                     |
+| Sprint ref encoding                      | Internal Plane-provider convention until first-class project-scoped sprint API |
+| TaskServiceImpl                          | Deferred to later milestone                                                    |
+| Permission enforcement                   | Still deferred (gateway-ready)                                                 |
 
 ---
 
 ## Risks
 
-| Risk | Mitigation |
-|------|------------|
-| Mapping persistence failure after provider create | `RECONCILIATION_REQUIRED` + diagnostics |
-| Provisional ID leakage | Mapping normalisation + tests assert no `_plane_` in consumer IDs |
-| Multi-provider drift | Mapping-driven provider selection for existing entities |
+| Risk                                              | Mitigation                                                        |
+| ------------------------------------------------- | ----------------------------------------------------------------- |
+| Mapping persistence failure after provider create | `RECONCILIATION_REQUIRED` + diagnostics                           |
+| Provisional ID leakage                            | Mapping normalisation + tests assert no `_plane_` in consumer IDs |
+| Multi-provider drift                              | Mapping-driven provider selection for existing entities           |
 
 ---
 

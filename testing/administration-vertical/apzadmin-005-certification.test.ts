@@ -10,10 +10,7 @@ const ROOT = join(__dirname, "../..");
 
 describe("APZADMIN-005 Administration Vertical Certification", () => {
   it("passes architecture / dependency / boundary audit (0 violations)", () => {
-    const script = join(
-      ROOT,
-      "scripts/apzadmin-005-administration-vertical-audit.mjs",
-    );
+    const script = join(ROOT, "scripts/apzadmin-005-administration-vertical-audit.mjs");
     const output = execFileSync(process.execPath, [script], {
       cwd: ROOT,
       encoding: "utf8",
@@ -103,7 +100,7 @@ describe("APZADMIN-005 Administration Vertical Certification", () => {
       "packages/admin-contracts/package.json": "0.2.0",
       "packages/admin-core/package.json": "0.2.0",
       "packages/admin-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.24.0",
+      "packages/platform-services/package.json": "0.25.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const version = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;
@@ -139,16 +136,15 @@ describe("APZADMIN-005 Administration Vertical Certification", () => {
     );
 
     const view = readFileSync(
-      join(
-        ROOT,
-        "apps/web/components/administration/platform-administration-view.tsx",
-      ),
+      join(ROOT, "apps/web/components/administration/platform-administration-view.tsx"),
       "utf8",
     );
     expect(view).toContain(
       "ADMINISTRATION METADATA ONLY — RUNTIME ADMINISTRATION IS NOT AVAILABLE",
     );
     expect(view).toContain("REGISTRATION METADATA ONLY — NO SERVICE PROVISIONING");
-    expect(view).toContain("ACTION CATALOGUE ONLY — RUNTIME EXECUTION IS NOT AVAILABLE");
+    expect(view).toContain(
+      "ACTION CATALOGUE ONLY — RUNTIME EXECUTION IS NOT AVAILABLE",
+    );
   });
 });

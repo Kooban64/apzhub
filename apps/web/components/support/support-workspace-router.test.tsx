@@ -18,19 +18,15 @@ vi.mock("./support-request-create-view", () => ({
   SupportRequestCreateView: () => <div data-testid="route-create" />,
 }));
 vi.mock("./support-request-detail-view", () => ({
-  SupportRequestDetailView: ({
-    supportRequestId,
-  }: {
-    supportRequestId: string;
-  }) => <div data-testid="route-detail">{supportRequestId}</div>,
+  SupportRequestDetailView: ({ supportRequestId }: { supportRequestId: string }) => (
+    <div data-testid="route-detail">{supportRequestId}</div>
+  ),
 }));
 vi.mock("./support-organizations-view", () => ({
-  SupportOrganizationsView: ({
-    organizationId,
-  }: {
-    organizationId?: string;
-  }) => (
-    <div data-testid={organizationId ? "route-organization-detail" : "route-organizations"}>
+  SupportOrganizationsView: ({ organizationId }: { organizationId?: string }) => (
+    <div
+      data-testid={organizationId ? "route-organization-detail" : "route-organizations"}
+    >
       {organizationId ?? "list"}
     </div>
   ),

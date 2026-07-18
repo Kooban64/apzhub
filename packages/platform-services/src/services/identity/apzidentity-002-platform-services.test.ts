@@ -23,9 +23,7 @@ import {
   resolveOperationAuthorization,
 } from "../../index";
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_iam",
     userId: "user_iam",
@@ -37,8 +35,8 @@ function ctx(
 }
 
 describe("APZIDENTITY-002 identity platform services", () => {
-  it("exports platform services version 0.24.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
+  it("exports platform services version 0.25.0", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
   });
 
   it("registers identity permissions in the platform catalogue", () => {
@@ -49,32 +47,27 @@ describe("APZIDENTITY-002 identity platform services", () => {
 
   it("maps gateway operations to identity permissions (no allow-all)", () => {
     expect(
-      resolveOperationAuthorization("identityUsers", "create")
-        ?.requiredPermission,
+      resolveOperationAuthorization("identityUsers", "create")?.requiredPermission,
     ).toBe("identity.user");
     expect(
-      resolveOperationAuthorization("identityGroups", "list")
-        ?.requiredPermission,
+      resolveOperationAuthorization("identityGroups", "list")?.requiredPermission,
     ).toBe("identity.group");
     expect(
-      resolveOperationAuthorization("identityRoles", "get")
-        ?.requiredPermission,
+      resolveOperationAuthorization("identityRoles", "get")?.requiredPermission,
     ).toBe("identity.role");
     expect(
       resolveOperationAuthorization("identityOrganisations", "create")
         ?.requiredPermission,
     ).toBe("identity.organization");
     expect(
-      resolveOperationAuthorization("identityTenants", "list")
-        ?.requiredPermission,
+      resolveOperationAuthorization("identityTenants", "list")?.requiredPermission,
     ).toBe("identity.tenant");
     expect(
       resolveOperationAuthorization("identityServiceAssignments", "create")
         ?.requiredPermission,
     ).toBe("identity.assignment");
     expect(
-      resolveOperationAuthorization("identityAudit", "list")
-        ?.requiredPermission,
+      resolveOperationAuthorization("identityAudit", "list")?.requiredPermission,
     ).toBe("identity.audit");
     expect(
       resolveOperationAuthorization("identityDiagnostics", "health")
@@ -94,31 +87,19 @@ describe("APZIDENTITY-002 identity platform services", () => {
     expect(() => createIdentityPlatformServicesForTest({})).toThrow(
       /allowInMemoryPersistence/,
     );
-    expect(() =>
-      createIdentityPlatformServicesForProduction({} as never),
-    ).toThrow(/postgresDb/);
+    expect(() => createIdentityPlatformServicesForProduction({} as never)).toThrow(
+      /postgresDb/,
+    );
   });
 
   it("env gate is deny-by-default", () => {
     expect(isIdentityServiceEnabled({})).toBe(false);
-    expect(
-      isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "true" }),
-    ).toBe(true);
-    expect(isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "1" })).toBe(
-      true,
-    );
-    expect(isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "on" })).toBe(
-      true,
-    );
-    expect(
-      isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "false" }),
-    ).toBe(false);
-    expect(isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "0" })).toBe(
-      false,
-    );
-    expect(isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "off" })).toBe(
-      false,
-    );
+    expect(isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "true" })).toBe(true);
+    expect(isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "1" })).toBe(true);
+    expect(isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "on" })).toBe(true);
+    expect(isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "false" })).toBe(false);
+    expect(isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "0" })).toBe(false);
+    expect(isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "off" })).toBe(false);
   });
 
   it("maps IdentityDomainError to PlatformServiceError", () => {
@@ -129,10 +110,8 @@ describe("APZIDENTITY-002 identity platform services", () => {
     expect(isPlatformServiceError(mapped)).toBe(true);
     expect(mapped.code).toBe("NOT_FOUND");
     expect(
-      mapIdentityDomainError(
-        new IdentityDomainError("validation_error", "bad"),
-        "c",
-      ).code,
+      mapIdentityDomainError(new IdentityDomainError("validation_error", "bad"), "c")
+        .code,
     ).toBe("VALIDATION_FAILED");
     expect(
       mapIdentityDomainError(
@@ -141,10 +120,7 @@ describe("APZIDENTITY-002 identity platform services", () => {
       ).code,
     ).toBe("BUSINESS_RULE_VIOLATION");
     expect(
-      mapIdentityDomainError(
-        new IdentityDomainError("duplicate", "dup"),
-        "c",
-      ).code,
+      mapIdentityDomainError(new IdentityDomainError("duplicate", "dup"), "c").code,
     ).toBe("CONFLICT");
     expect(
       mapIdentityDomainError(
@@ -153,10 +129,7 @@ describe("APZIDENTITY-002 identity platform services", () => {
       ).code,
     ).toBe("VALIDATION_FAILED");
     expect(
-      mapIdentityDomainError(
-        new IdentityDomainError("forbidden", "no"),
-        "c",
-      ).code,
+      mapIdentityDomainError(new IdentityDomainError("forbidden", "no"), "c").code,
     ).toBe("FORBIDDEN");
   });
 
@@ -177,9 +150,9 @@ describe("APZIDENTITY-002 identity platform services", () => {
       authSubjectRef: "auth:ada",
     });
     expect(user.status).toBe("draft");
-    expect(
-      await bundle.gateway.identity.users.get(ctx(), user.id),
-    ).toMatchObject({ displayName: "Ada Lovelace" });
+    expect(await bundle.gateway.identity.users.get(ctx(), user.id)).toMatchObject({
+      displayName: "Ada Lovelace",
+    });
     expect(await bundle.gateway.identity.users.list(ctx())).toHaveLength(1);
 
     const updated = await bundle.gateway.identity.users.update(ctx(), {
@@ -197,9 +170,9 @@ describe("APZIDENTITY-002 identity platform services", () => {
       name: "Engineering",
     });
     expect(await bundle.gateway.identity.groups.list(ctx())).toHaveLength(1);
-    expect(
-      await bundle.gateway.identity.groups.get(ctx(), group.id),
-    ).toMatchObject({ name: "Engineering" });
+    expect(await bundle.gateway.identity.groups.get(ctx(), group.id)).toMatchObject({
+      name: "Engineering",
+    });
 
     const role = await bundle.gateway.identity.roles.create(ctx(), {
       key: "member",
@@ -223,9 +196,7 @@ describe("APZIDENTITY-002 identity platform services", () => {
     expect(
       await bundle.gateway.identity.organisations.get(ctx(), org.id),
     ).toMatchObject({ name: "APZHUB" });
-    expect(
-      await bundle.gateway.identity.organisations.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.identity.organisations.list(ctx())).toHaveLength(1);
 
     const tenant = await bundle.gateway.identity.tenants.create(ctx(), {
       key: "t1",
@@ -235,9 +206,9 @@ describe("APZIDENTITY-002 identity platform services", () => {
       tenantRecordId: tenant.id,
       name: "Tenant One",
     });
-    expect(
-      await bundle.gateway.identity.tenants.get(ctx(), tenant.id),
-    ).toMatchObject({ name: "Tenant One" });
+    expect(await bundle.gateway.identity.tenants.get(ctx(), tenant.id)).toMatchObject({
+      name: "Tenant One",
+    });
     expect(await bundle.gateway.identity.tenants.list(ctx())).toHaveLength(1);
 
     const dept = await bundle.gateway.identity.departments.create(ctx(), {
@@ -249,12 +220,8 @@ describe("APZIDENTITY-002 identity platform services", () => {
       departmentId: dept.id,
       name: "Eng",
     });
-    expect(
-      await bundle.gateway.identity.departments.get(ctx(), dept.id),
-    ).toBeDefined();
-    expect(
-      await bundle.gateway.identity.departments.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.identity.departments.get(ctx(), dept.id)).toBeDefined();
+    expect(await bundle.gateway.identity.departments.list(ctx())).toHaveLength(1);
 
     const position = await bundle.gateway.identity.positions.create(ctx(), {
       key: "dev",
@@ -282,23 +249,19 @@ describe("APZIDENTITY-002 identity platform services", () => {
     expect(
       await bundle.gateway.identity.memberships.get(ctx(), membership.id),
     ).toMatchObject({ status: "suspended" });
-    expect(
-      await bundle.gateway.identity.memberships.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.identity.memberships.list(ctx())).toHaveLength(1);
 
-    const assignment =
-      await bundle.gateway.identity.serviceAssignments.create(ctx(), {
-        subjectKind: "user",
-        subjectId: user.id,
-        serviceCapability: "projects",
-      });
+    const assignment = await bundle.gateway.identity.serviceAssignments.create(ctx(), {
+      subjectKind: "user",
+      subjectId: user.id,
+      serviceCapability: "projects",
+    });
     expect(assignment.serviceCapability).toBe("projects");
-    const wfEngine =
-      await bundle.gateway.identity.serviceAssignments.create(ctx(), {
-        subjectKind: "user",
-        subjectId: user.id,
-        serviceCapability: "workflow-engine",
-      });
+    const wfEngine = await bundle.gateway.identity.serviceAssignments.create(ctx(), {
+      subjectKind: "user",
+      subjectId: user.id,
+      serviceCapability: "workflow-engine",
+    });
     expect(wfEngine.serviceCapability).toBe("workflow-engine");
     await bundle.gateway.identity.serviceAssignments.update(ctx(), {
       assignmentId: assignment.id,
@@ -307,9 +270,9 @@ describe("APZIDENTITY-002 identity platform services", () => {
     expect(
       await bundle.gateway.identity.serviceAssignments.get(ctx(), assignment.id),
     ).toBeDefined();
-    expect(
-      await bundle.gateway.identity.serviceAssignments.list(ctx()),
-    ).toHaveLength(2);
+    expect(await bundle.gateway.identity.serviceAssignments.list(ctx())).toHaveLength(
+      2,
+    );
 
     const invitation = await bundle.gateway.identity.invitations.create(ctx(), {
       email: "invitee@example.com",
@@ -321,38 +284,32 @@ describe("APZIDENTITY-002 identity platform services", () => {
     expect(
       await bundle.gateway.identity.invitations.get(ctx(), invitation.id),
     ).toBeDefined();
-    expect(
-      await bundle.gateway.identity.invitations.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.identity.invitations.list(ctx())).toHaveLength(1);
 
     const activation = await bundle.gateway.identity.activation.create(ctx(), {
       userId: user.id,
       reason: "onboard",
     });
     expect(activation.userId).toBe(user.id);
-    expect(
-      (await bundle.gateway.identity.users.get(ctx(), user.id)).status,
-    ).toBe("active");
+    expect((await bundle.gateway.identity.users.get(ctx(), user.id)).status).toBe(
+      "active",
+    );
     expect(
       await bundle.gateway.identity.activation.get(ctx(), activation.id),
     ).toBeDefined();
-    expect(
-      await bundle.gateway.identity.activation.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.identity.activation.list(ctx())).toHaveLength(1);
 
-    const deactivation = await bundle.gateway.identity.deactivation.create(
-      ctx(),
-      { userId: user.id, reason: "offboard" },
+    const deactivation = await bundle.gateway.identity.deactivation.create(ctx(), {
+      userId: user.id,
+      reason: "offboard",
+    });
+    expect((await bundle.gateway.identity.users.get(ctx(), user.id)).status).toBe(
+      "deactivated",
     );
-    expect(
-      (await bundle.gateway.identity.users.get(ctx(), user.id)).status,
-    ).toBe("deactivated");
     expect(
       await bundle.gateway.identity.deactivation.get(ctx(), deactivation.id),
     ).toBeDefined();
-    expect(
-      await bundle.gateway.identity.deactivation.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.identity.deactivation.list(ctx())).toHaveLength(1);
 
     const policy = await bundle.gateway.identity.policies.create(ctx(), {
       key: "default",
@@ -363,9 +320,7 @@ describe("APZIDENTITY-002 identity platform services", () => {
       policyId: policy.id,
       name: "Default 2",
     });
-    expect(
-      await bundle.gateway.identity.policies.get(ctx(), policy.id),
-    ).toBeDefined();
+    expect(await bundle.gateway.identity.policies.get(ctx(), policy.id)).toBeDefined();
     expect(await bundle.gateway.identity.policies.list(ctx())).toHaveLength(1);
 
     const reference = await bundle.gateway.identity.references.create(ctx(), {
@@ -380,15 +335,13 @@ describe("APZIDENTITY-002 identity platform services", () => {
     expect(
       await bundle.gateway.identity.references.get(ctx(), reference.id),
     ).toMatchObject({ label: "Doc" });
-    expect(
-      await bundle.gateway.identity.references.list(ctx(), user.id),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.identity.references.list(ctx(), user.id)).toHaveLength(
+      1,
+    );
 
     const audits = await bundle.gateway.identity.audit.list(ctx());
     expect(audits.length).toBeGreaterThan(0);
-    expect(
-      await bundle.gateway.identity.audit.get(ctx(), audits[0]!.id),
-    ).toBeDefined();
+    expect(await bundle.gateway.identity.audit.get(ctx(), audits[0]!.id)).toBeDefined();
 
     const history = await bundle.gateway.identity.history.list(ctx(), user.id);
     expect(history.length).toBeGreaterThan(0);
@@ -444,22 +397,15 @@ describe("APZIDENTITY-002 identity platform services", () => {
     });
     expect(composed.readiness.identityEnabled).toBe(true);
 
-    const { wrapIdentityPlatformGatewayWithPipeline } = await import(
-      "./create-identity-platform-services"
-    );
-    const wrapped = wrapIdentityPlatformGatewayWithPipeline(
-      composed.gatewaySurface,
-      {
-        execute: async (request: {
-          invoke: (
-            ctx: ServiceRequestContext,
-            args: unknown[],
-          ) => Promise<unknown>;
-          context: ServiceRequestContext;
-          args: unknown[];
-        }) => request.invoke(request.context, request.args),
-      } as never,
-    );
+    const { wrapIdentityPlatformGatewayWithPipeline } =
+      await import("./create-identity-platform-services");
+    const wrapped = wrapIdentityPlatformGatewayWithPipeline(composed.gatewaySurface, {
+      execute: async (request: {
+        invoke: (ctx: ServiceRequestContext, args: unknown[]) => Promise<unknown>;
+        context: ServiceRequestContext;
+        args: unknown[];
+      }) => request.invoke(request.context, request.args),
+    } as never);
     expect(await wrapped.users.list(ctx())).toEqual([]);
 
     const production = (
@@ -476,27 +422,19 @@ describe("APZIDENTITY-002 identity platform services", () => {
       ).code,
     ).toBe("VALIDATION_FAILED");
     expect(
-      mapIdentityDomainError(
-        new IdentityDomainError("invalid_display_name", "x"),
-        "c",
-      ).code,
+      mapIdentityDomainError(new IdentityDomainError("invalid_display_name", "x"), "c")
+        .code,
     ).toBe("VALIDATION_FAILED");
     expect(
-      mapIdentityDomainError(
-        new IdentityDomainError("conflict", "x"),
-        "c",
-      ).code,
+      mapIdentityDomainError(new IdentityDomainError("conflict", "x"), "c").code,
     ).toBe("CONFLICT");
     expect(
-      mapIdentityDomainError(
-        new IdentityDomainError("assignment_not_active", "x"),
-        "c",
-      ).code,
+      mapIdentityDomainError(new IdentityDomainError("assignment_not_active", "x"), "c")
+        .code,
     ).toBe("BUSINESS_RULE_VIOLATION");
 
-    const { createIdentityPlatformServiceImpls } = await import(
-      "./identity-service-impls"
-    );
+    const { createIdentityPlatformServiceImpls } =
+      await import("./identity-service-impls");
     const domain = (
       await import("@apzhub/identity-core")
     ).createPlatformIdentityService({
@@ -506,11 +444,14 @@ describe("APZIDENTITY-002 identity platform services", () => {
       persistenceMode: "memory",
     });
     const impls = createIdentityPlatformServiceImpls({ domain });
-    await expect(
-      impls.users.get(ctx(), "missing" as never),
-    ).rejects.toSatisfy((error: unknown) => {
-      return isPlatformServiceError(error) && (error as { code: string }).code === "NOT_FOUND";
-    });
+    await expect(impls.users.get(ctx(), "missing" as never)).rejects.toSatisfy(
+      (error: unknown) => {
+        return (
+          isPlatformServiceError(error) &&
+          (error as { code: string }).code === "NOT_FOUND"
+        );
+      },
+    );
 
     const failingDomain = {
       ...domain,

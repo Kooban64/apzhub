@@ -11,10 +11,7 @@
 ## Recommended usage
 
 ```ts
-import {
-  createHttpObserveClient,
-  observeQueryKeys,
-} from "@/lib/observe";
+import { createHttpObserveClient, observeQueryKeys } from "@/lib/observe";
 
 const client = createHttpObserveClient();
 const checks = await client.healthChecks.list({ limit: 50 });

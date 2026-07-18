@@ -96,22 +96,17 @@ export function createProjectsSearchLifecycleHooks(
   };
 
   return {
-    onWorkspaceUpserted: (c, e) =>
-      upsert(c, { entityType: "workspace", entity: e }),
+    onWorkspaceUpserted: (c, e) => upsert(c, { entityType: "workspace", entity: e }),
     onWorkspaceRemoved: (c, id) => publisher.remove(c, "workspace", id),
-    onProjectUpserted: (c, e) =>
-      upsert(c, { entityType: "project", entity: e }),
+    onProjectUpserted: (c, e) => upsert(c, { entityType: "project", entity: e }),
     onProjectRemoved: (c, id) => publisher.remove(c, "project", id),
     onTaskUpserted: (c, e) => upsert(c, { entityType: "task", entity: e }),
     onTaskRemoved: (c, id) => publisher.remove(c, "task", id),
-    onSprintUpserted: (c, e) =>
-      upsert(c, { entityType: "sprint", entity: e }),
+    onSprintUpserted: (c, e) => upsert(c, { entityType: "sprint", entity: e }),
     onSprintRemoved: (c, id) => publisher.remove(c, "sprint", id),
-    onMilestoneUpserted: (c, e) =>
-      upsert(c, { entityType: "milestone", entity: e }),
+    onMilestoneUpserted: (c, e) => upsert(c, { entityType: "milestone", entity: e }),
     onMilestoneRemoved: (c, id) => publisher.remove(c, "milestone", id),
-    onModuleUpserted: (c, e) =>
-      upsert(c, { entityType: "module", entity: e }),
+    onModuleUpserted: (c, e) => upsert(c, { entityType: "module", entity: e }),
     onModuleRemoved: (c, id) => publisher.remove(c, "module", id),
     onTeamUpserted: (c, e) => upsert(c, { entityType: "team", entity: e }),
     onTeamRemoved: (c, id) => publisher.remove(c, "team", id),

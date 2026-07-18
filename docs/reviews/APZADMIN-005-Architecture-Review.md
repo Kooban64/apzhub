@@ -13,21 +13,21 @@ Workbench → Typed Client → HTTP → Gateway → RequestPipeline → Authz �
 
 ## Findings
 
-| Layer | Isolation |
-| --- | --- |
-| Workbench | Typed-client facades only; no gateway/core/persistence |
-| Typed client | `/api/v1/administration` only |
-| HTTP handlers | `gateway.administration.*` only |
-| Platform services | Thin wrappers; rules in Core |
-| Core | No persistence implementation deps |
-| Persistence | No platform-services / HTTP |
+| Layer             | Isolation                                              |
+| ----------------- | ------------------------------------------------------ |
+| Workbench         | Typed-client facades only; no gateway/core/persistence |
+| Typed client      | `/api/v1/administration` only                          |
+| HTTP handlers     | `gateway.administration.*` only                        |
+| Platform services | Thin wrappers; rules in Core                           |
+| Core              | No persistence implementation deps                     |
+| Persistence       | No platform-services / HTTP                            |
 
 ## Coexistence
 
-| Surface | Route | Manifest parent |
-| --- | --- | --- |
-| Administration SoR Workbench | `/workspace/administration` | `platform-admin` |
-| Platform Operations (M8-03) | `/workspace/operations` | `platform-administration` |
+| Surface                      | Route                       | Manifest parent           |
+| ---------------------------- | --------------------------- | ------------------------- |
+| Administration SoR Workbench | `/workspace/administration` | `platform-admin`          |
+| Platform Operations (M8-03)  | `/workspace/operations`     | `platform-administration` |
 
 ## Prohibited surfaces absent
 

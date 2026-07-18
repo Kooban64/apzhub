@@ -5,10 +5,7 @@ export {
   createNotImplementedIntegrationError,
 } from "./factory";
 export type { CreateIntegrationErrorInput } from "./factory";
-export {
-  isIntegrationError,
-  isIntegrationErrorCategory,
-} from "./guards";
+export { isIntegrationError, isIntegrationErrorCategory } from "./guards";
 export type { SdkResult } from "./result";
 export { sdkErr, sdkOk } from "./result";
 export type {

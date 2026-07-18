@@ -6,9 +6,7 @@ export {
   MEILISEARCH_PROVIDER_KIND,
 } from "./version";
 
-export {
-  MeilisearchAdapter,
-} from "./meilisearch-adapter";
+export { MeilisearchAdapter } from "./meilisearch-adapter";
 export type {
   MeilisearchAdapterOptions,
   MeilisearchDiagnosticsExtension,
@@ -123,7 +121,10 @@ export {
   MEILISEARCH_UNSUPPORTED_FEATURES,
   isMeilisearchUnsupportedOperation,
 } from "./results/unsupported";
-export type { MeilisearchUnsupportedOperation, MeilisearchUnsupportedFeature } from "./results/unsupported";
+export type {
+  MeilisearchUnsupportedOperation,
+  MeilisearchUnsupportedFeature,
+} from "./results/unsupported";
 
 export {
   SEARCH_OPERATION_STATUS_OK,

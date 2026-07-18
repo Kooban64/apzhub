@@ -23,16 +23,16 @@ Workflow Platform SoR (`/workspace/workflows`, `/api/v1/workflows` excluding `/e
 
 ## Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:workflow-n8n-adapter` | PASS |
-| `pnpm audit:workflow-n8n-platform-services` | PASS |
-| `pnpm audit:workflow-engine-http` | PASS |
-| `pnpm audit:workflow-engine-workbench` | PASS |
-| `pnpm audit:workflow-engine-vertical` | PASS (required) |
-| `pnpm openapi:validate:platform` | PASS |
-| Vitest `testing/workflow-engine-vertical` | Required harness |
-| Vitest engine/client/workbench suites | PASS (regression evidence) |
+| Gate                                        | Result                                     |
+| ------------------------------------------- | ------------------------------------------ |
+| `pnpm audit:workflow-n8n-adapter`           | PASS                                       |
+| `pnpm audit:workflow-n8n-platform-services` | PASS                                       |
+| `pnpm audit:workflow-engine-http`           | PASS                                       |
+| `pnpm audit:workflow-engine-workbench`      | PASS                                       |
+| `pnpm audit:workflow-engine-vertical`       | PASS (required)                            |
+| `pnpm openapi:validate:platform`            | PASS                                       |
+| Vitest `testing/workflow-engine-vertical`   | Required harness                           |
+| Vitest engine/client/workbench suites       | PASS (regression evidence)                 |
 | Playwright mock suite (`apzworkflow-009-*`) | Shipped; live webServer LIMITED (external) |
 
 ## Intentional non-defects

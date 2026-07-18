@@ -5,10 +5,10 @@
 
 ## Schema
 
-| Migration | Purpose |
-| --- | --- |
-| `0052_apz_platform_iam.sql` | `platform_iam_*` Identity Administration SoR |
-| `0053_apz_platform_iam_rls.sql` | Row-level security / tenant scoping |
+| Migration                       | Purpose                                      |
+| ------------------------------- | -------------------------------------------- |
+| `0052_apz_platform_iam.sql`     | `platform_iam_*` Identity Administration SoR |
+| `0053_apz_platform_iam_rls.sql` | Row-level security / tenant scoping          |
 
 ## Guarantees
 

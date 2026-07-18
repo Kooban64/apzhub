@@ -95,11 +95,7 @@ function invertRisk(riskScore: number): number {
   return clamp01to100(100 - riskScore);
 }
 
-function indicator(
-  key: string,
-  label: string,
-  value: number,
-): EngineeringIndicator {
+function indicator(key: string, label: string, value: number): EngineeringIndicator {
   return {
     key,
     label,

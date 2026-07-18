@@ -52,7 +52,10 @@ export function classifyN8nOperationalHealth(input: {
   readonly authenticationStatus: string;
 }): { readonly level: N8nOperationalHealthLevel; readonly reasons: readonly string[] } {
   const reasons: string[] = [];
-  if (input.authenticationStatus === "missing" || input.authenticationStatus === "invalid") {
+  if (
+    input.authenticationStatus === "missing" ||
+    input.authenticationStatus === "invalid"
+  ) {
     reasons.push(`authentication:${input.authenticationStatus}`);
   }
   if (input.apiStatus === "unavailable") {

@@ -38,10 +38,7 @@ export function createProductHealthService(
       },
     ): Promise<ProductHealthSummary> {
       const product = await productRegistry.getProduct(ctx, productId);
-      const dependencyHealth = await dependencies.healthForProduct(
-        ctx,
-        productId,
-      );
+      const dependencyHealth = await dependencies.healthForProduct(ctx, productId);
 
       return {
         productId,
@@ -49,8 +46,7 @@ export function createProductHealthService(
         coverageLabel: input?.coverageLabel,
         testsLabel: input?.testsLabel,
         approvalsLabel: input?.approvalsLabel,
-        certificationStatus:
-          input?.certificationStatus ?? product.certificationStatus,
+        certificationStatus: input?.certificationStatus ?? product.certificationStatus,
         knownRisks: input?.knownRisks ?? [],
         knownBlockers: input?.knownBlockers ?? [],
         dependencyReadiness: dependencyHealth.readiness,

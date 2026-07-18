@@ -14,10 +14,15 @@ const correlationId = "corr-auth-001";
 const tenantId = "tenant-a";
 const rawSecret = "super-secret-token-value";
 
-function createAuthStack(secrets: Record<string, string>, usernames?: Record<string, string>) {
+function createAuthStack(
+  secrets: Record<string, string>,
+  usernames?: Record<string, string>,
+) {
   const secretProvider = new InMemorySecretProvider({ secrets, usernames });
   const credentialResolver = new DefaultCredentialResolver({ secretProvider });
-  const authenticationProvider = new DefaultAuthenticationProvider({ credentialResolver });
+  const authenticationProvider = new DefaultAuthenticationProvider({
+    credentialResolver,
+  });
   return { secretProvider, credentialResolver, authenticationProvider };
 }
 
@@ -87,7 +92,9 @@ describe("authentication credential resolver", () => {
 
     expect(result.ok).toBe(false);
     if (!result.ok) {
-      expect(result.error.code).toMatch(/missing_credentials|secret_provider_unavailable/);
+      expect(result.error.code).toMatch(
+        /missing_credentials|secret_provider_unavailable/,
+      );
       expect(result.error.message).not.toContain(rawSecret);
     }
   });

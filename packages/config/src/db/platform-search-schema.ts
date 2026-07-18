@@ -34,20 +34,13 @@ export const platformSearchProvider = pgTable(
       .$type<Record<string, unknown>>()
       .notNull()
       .default({}),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     deletedAt: timestamp("deleted_at", { withTimezone: true }),
     revision: integer("revision").notNull().default(1),
   },
   (table) => [
-    uniqueIndex("platform_search_provider_tenant_id_uidx").on(
-      table.tenantId,
-      table.id,
-    ),
+    uniqueIndex("platform_search_provider_tenant_id_uidx").on(table.tenantId, table.id),
   ],
 );
 
@@ -66,12 +59,8 @@ export const platformSearchProviderRegistration = pgTable(
       .defaultNow(),
     unregisteredAt: timestamp("unregistered_at", { withTimezone: true }),
     registeredBy: text("registered_by").notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     deletedAt: timestamp("deleted_at", { withTimezone: true }),
     revision: integer("revision").notNull().default(1),
   },
@@ -87,12 +76,8 @@ export const platformSearchProviderStatus = pgTable(
     status: varchar("status", { length: 32 }).notNull(),
     message: text("message"),
     checkedAt: timestamp("checked_at", { withTimezone: true }).notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     deletedAt: timestamp("deleted_at", { withTimezone: true }),
     revision: integer("revision").notNull().default(1),
   },
@@ -104,41 +89,30 @@ export const platformSearchProviderStatus = pgTable(
   ],
 );
 
-export const platformSearchConfiguration = pgTable(
-  "platform_search_configuration",
-  {
-    id: text("id").primaryKey(),
-    tenantId: text("tenant_id").notNull(),
-    organisationId: text("organisation_id"),
-    label: text("label"),
-    status: varchar("status", { length: 32 }).notNull().default("active"),
-    defaultPageSize: integer("default_page_size").notNull(),
-    maxPageSize: integer("max_page_size").notNull(),
-    maxKeywordLength: integer("max_keyword_length").notNull(),
-    allowedProviderKindsJson: jsonb("allowed_provider_kinds_json")
-      .$type<string[]>()
-      .notNull()
-      .default([]),
-    enforceTenantIsolation: boolean("enforce_tenant_isolation")
-      .notNull()
-      .default(true),
-    enforceOrganisationIsolation: boolean("enforce_organisation_isolation")
-      .notNull()
-      .default(true),
-    enforcePermissionFilter: boolean("enforce_permission_filter")
-      .notNull()
-      .default(true),
-    currentVersion: integer("current_version").notNull().default(1),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    deletedAt: timestamp("deleted_at", { withTimezone: true }),
-    revision: integer("revision").notNull().default(1),
-  },
-);
+export const platformSearchConfiguration = pgTable("platform_search_configuration", {
+  id: text("id").primaryKey(),
+  tenantId: text("tenant_id").notNull(),
+  organisationId: text("organisation_id"),
+  label: text("label"),
+  status: varchar("status", { length: 32 }).notNull().default("active"),
+  defaultPageSize: integer("default_page_size").notNull(),
+  maxPageSize: integer("max_page_size").notNull(),
+  maxKeywordLength: integer("max_keyword_length").notNull(),
+  allowedProviderKindsJson: jsonb("allowed_provider_kinds_json")
+    .$type<string[]>()
+    .notNull()
+    .default([]),
+  enforceTenantIsolation: boolean("enforce_tenant_isolation").notNull().default(true),
+  enforceOrganisationIsolation: boolean("enforce_organisation_isolation")
+    .notNull()
+    .default(true),
+  enforcePermissionFilter: boolean("enforce_permission_filter").notNull().default(true),
+  currentVersion: integer("current_version").notNull().default(1),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  deletedAt: timestamp("deleted_at", { withTimezone: true }),
+  revision: integer("revision").notNull().default(1),
+});
 
 export const platformSearchConfigurationVersion = pgTable(
   "platform_search_configuration_version",
@@ -148,17 +122,11 @@ export const platformSearchConfigurationVersion = pgTable(
     organisationId: text("organisation_id"),
     configurationId: text("configuration_id").notNull(),
     version: integer("version").notNull(),
-    snapshotJson: jsonb("snapshot_json")
-      .$type<Record<string, unknown>>()
-      .notNull(),
+    snapshotJson: jsonb("snapshot_json").$type<Record<string, unknown>>().notNull(),
     changedBy: text("changed_by").notNull(),
     changeReason: text("change_reason"),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     deletedAt: timestamp("deleted_at", { withTimezone: true }),
     revision: integer("revision").notNull().default(1),
   },
@@ -181,12 +149,8 @@ export const platformSearchProfile = pgTable("platform_search_profile", {
     .$type<Record<string, unknown>[]>()
     .notNull()
     .default([]),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp("deleted_at", { withTimezone: true }),
   revision: integer("revision").notNull().default(1),
 });
@@ -197,17 +161,10 @@ export const platformSearchCollection = pgTable("platform_search_collection", {
   organisationId: text("organisation_id"),
   name: text("name").notNull(),
   scope: varchar("scope", { length: 32 }).notNull(),
-  productIdsJson: jsonb("product_ids_json")
-    .$type<string[]>()
-    .notNull()
-    .default([]),
+  productIdsJson: jsonb("product_ids_json").$type<string[]>().notNull().default([]),
   enabled: boolean("enabled").notNull().default(true),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp("deleted_at", { withTimezone: true }),
   revision: integer("revision").notNull().default(1),
 });
@@ -218,19 +175,12 @@ export const platformSearchSource = pgTable("platform_search_source", {
   organisationId: text("organisation_id"),
   productId: varchar("product_id", { length: 64 }).notNull(),
   label: text("label").notNull(),
-  entityTypesJson: jsonb("entity_types_json")
-    .$type<string[]>()
-    .notNull()
-    .default([]),
+  entityTypesJson: jsonb("entity_types_json").$type<string[]>().notNull().default([]),
   enabled: boolean("enabled").notNull().default(true),
   providerId: text("provider_id"),
   collectionId: text("collection_id"),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp("deleted_at", { withTimezone: true }),
   revision: integer("revision").notNull().default(1),
 });
@@ -247,12 +197,8 @@ export const platformSearchScope = pgTable("platform_search_scope", {
     .$type<Record<string, string>>()
     .notNull()
     .default({}),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp("deleted_at", { withTimezone: true }),
   revision: integer("revision").notNull().default(1),
 });
@@ -269,10 +215,7 @@ export const platformSearchMetadata = pgTable("platform_search_metadata", {
   productId: varchar("product_id", { length: 64 }).notNull(),
   sourceId: text("source_id").notNull(),
   classification: varchar("classification", { length: 32 }),
-  permissionsJson: jsonb("permissions_json")
-    .$type<string[]>()
-    .notNull()
-    .default([]),
+  permissionsJson: jsonb("permissions_json").$type<string[]>().notNull().default([]),
   ownerUserId: text("owner_user_id"),
   status: varchar("status", { length: 32 }),
   entityVersion: varchar("entity_version", { length: 64 }),
@@ -281,12 +224,8 @@ export const platformSearchMetadata = pgTable("platform_search_metadata", {
     .$type<Record<string, string>>()
     .notNull()
     .default({}),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp("deleted_at", { withTimezone: true }),
   revision: integer("revision").notNull().default(1),
 });
@@ -297,12 +236,8 @@ export const platformSearchSession = pgTable("platform_search_session", {
   organisationId: text("organisation_id"),
   actorUserId: text("actor_user_id").notNull(),
   lastQueryAt: timestamp("last_query_at", { withTimezone: true }),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp("deleted_at", { withTimezone: true }),
   revision: integer("revision").notNull().default(1),
 });
@@ -318,12 +253,8 @@ export const platformSearchAudit = pgTable("platform_search_audit", {
     .$type<Record<string, string>>()
     .notNull()
     .default({}),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp("deleted_at", { withTimezone: true }),
   revision: integer("revision").notNull().default(1),
 });
@@ -333,15 +264,9 @@ export const platformSearchDiagnostics = pgTable("platform_search_diagnostics", 
   tenantId: text("tenant_id").notNull(),
   organisationId: text("organisation_id"),
   providerId: text("provider_id"),
-  snapshotJson: jsonb("snapshot_json")
-    .$type<Record<string, unknown>>()
-    .notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  snapshotJson: jsonb("snapshot_json").$type<Record<string, unknown>>().notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp("deleted_at", { withTimezone: true }),
   revision: integer("revision").notNull().default(1),
 });
@@ -354,12 +279,8 @@ export const platformSearchHealth = pgTable("platform_search_health", {
   status: varchar("status", { length: 32 }).notNull(),
   message: text("message"),
   checkedAt: timestamp("checked_at", { withTimezone: true }).notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp("deleted_at", { withTimezone: true }),
   revision: integer("revision").notNull().default(1),
 });
@@ -370,17 +291,11 @@ export const platformSearchStatistics = pgTable("platform_search_statistics", {
   organisationId: text("organisation_id"),
   declaredIndexCount: integer("declared_index_count").notNull().default(0),
   declaredProviderCount: integer("declared_provider_count").notNull().default(0),
-  declaredCollectionCount: integer("declared_collection_count")
-    .notNull()
-    .default(0),
+  declaredCollectionCount: integer("declared_collection_count").notNull().default(0),
   declaredSourceCount: integer("declared_source_count").notNull().default(0),
   capturedAt: timestamp("captured_at", { withTimezone: true }).notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp("deleted_at", { withTimezone: true }),
   revision: integer("revision").notNull().default(1),
 });
@@ -396,12 +311,8 @@ export const platformSearchCapabilities = pgTable(
     capabilitiesJson: jsonb("capabilities_json")
       .$type<Record<string, unknown>>()
       .notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     deletedAt: timestamp("deleted_at", { withTimezone: true }),
     revision: integer("revision").notNull().default(1),
   },

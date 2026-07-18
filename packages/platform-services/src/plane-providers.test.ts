@@ -40,7 +40,13 @@ function createMockPlaneCore() {
       })),
     },
     projects: {
-      list: vi.fn(async () => ({ items: [], totalCount: 0, page: 1, perPage: 20, hasNextPage: false })),
+      list: vi.fn(async () => ({
+        items: [],
+        totalCount: 0,
+        page: 1,
+        perPage: 20,
+        hasNextPage: false,
+      })),
       get: vi.fn(),
       create: vi.fn(),
       update: vi.fn(),
@@ -120,16 +126,19 @@ describe("Plane project provider", () => {
     expect(roadmap.projectId).toBe("proj_plane_1");
     expect(roadmap.items).toEqual([]);
 
-    const activity = await provider.listProjectActivity(TEST_SERVICE_CONTEXT, "proj_plane_1");
+    const activity = await provider.listProjectActivity(
+      TEST_SERVICE_CONTEXT,
+      "proj_plane_1",
+    );
     expect(activity.items).toEqual([]);
   });
 
   it("throws for sprint-by-id without project::sprint native ref", async () => {
     const provider = createPlaneProjectProvider(createMockPlaneCore() as never);
 
-    await expect(provider.getSprint(TEST_SERVICE_CONTEXT, "sprint_plane_1")).rejects.toBeInstanceOf(
-      PlatformServiceError,
-    );
+    await expect(
+      provider.getSprint(TEST_SERVICE_CONTEXT, "sprint_plane_1"),
+    ).rejects.toBeInstanceOf(PlatformServiceError);
   });
 
   it("delegates sprint get when given project::sprint native ref", async () => {
@@ -156,9 +165,9 @@ describe("Plane project provider", () => {
   it("throws for unsupported milestone operations", async () => {
     const provider = createPlaneProjectProvider(createMockPlaneCore() as never);
 
-    await expect(provider.listMilestones(TEST_SERVICE_CONTEXT, "proj_plane_1")).rejects.toBeInstanceOf(
-      PlatformServiceError,
-    );
+    await expect(
+      provider.listMilestones(TEST_SERVICE_CONTEXT, "proj_plane_1"),
+    ).rejects.toBeInstanceOf(PlatformServiceError);
   });
 });
 
@@ -170,7 +179,11 @@ describe("Plane team provider", () => {
     const members = await provider.listTeam(TEST_SERVICE_CONTEXT, "proj_plane_1");
     expect(members.items[0]?.userId).toBe("user_plane_u1");
 
-    await provider.removeTeamMember(TEST_SERVICE_CONTEXT, "proj_plane_1", "user_plane_u1");
+    await provider.removeTeamMember(
+      TEST_SERVICE_CONTEXT,
+      "proj_plane_1",
+      "user_plane_u1",
+    );
     expect(core.members.remove).toHaveBeenCalledWith(
       expect.objectContaining({ correlationId: TEST_SERVICE_CONTEXT.correlationId }),
       "proj_plane_1",
@@ -183,7 +196,9 @@ describe("Plane user and search providers", () => {
   it("throws unsupported for Plane user directory operations", async () => {
     const provider = createPlaneUserProvider();
 
-    await expect(provider.listUsers(TEST_SERVICE_CONTEXT)).rejects.toBeInstanceOf(PlatformServiceError);
+    await expect(provider.listUsers(TEST_SERVICE_CONTEXT)).rejects.toBeInstanceOf(
+      PlatformServiceError,
+    );
   });
 
   it("returns empty canonical search results without Plane types", async () => {

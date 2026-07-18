@@ -18,21 +18,21 @@ Define the `PlaneAdapter` integration boundary — the only component permitted 
 
 ## Adapter responsibilities checklist
 
-| Responsibility | Plane-specific design |
-|----------------|-------------------------|
-| **Connection configuration** | `PLANE_BASE_URL`, timeout, API version pin; per-tenant workspace slug ref in config |
-| **Authentication bridge** | Service token per tenant workspace; optional user-scoped token for attributed actions |
-| **Provisioning bridge** | Create Plane workspace on tenant enable; default project templates optional |
-| **User mapping** | Platform user ID ↔ Plane user ID; JIT create Plane user on first project access |
-| **Permission mapping** | APZHUB permission set → Plane project role assignment API |
-| **Entity mapping** | Persistent map: project, task, sprint, module, label IDs |
-| **Health check** | `GET /api/health/` or workspace list probe; version header capture |
-| **Diagnostics** | Last sync, error counts, latency, engine version — no tokens in output |
-| **Lifecycle participation** | Pause sync on maintenance; resume on recovery |
-| **Error translation** | Plane 4xx/5xx → platform typed errors (NOT_FOUND, FORBIDDEN, CONFLICT, UNAVAILABLE) |
-| **Version compatibility** | Declare supported Plane CE range in manifest; block on mismatch |
-| **Upgrade strategy** | Adapter release independent; contract tests per Plane minor version |
-| **Fallback behaviour** | Degraded: read cache if fresh; writes queued to outbox; fail closed if tenant invalid |
+| Responsibility               | Plane-specific design                                                                 |
+| ---------------------------- | ------------------------------------------------------------------------------------- |
+| **Connection configuration** | `PLANE_BASE_URL`, timeout, API version pin; per-tenant workspace slug ref in config   |
+| **Authentication bridge**    | Service token per tenant workspace; optional user-scoped token for attributed actions |
+| **Provisioning bridge**      | Create Plane workspace on tenant enable; default project templates optional           |
+| **User mapping**             | Platform user ID ↔ Plane user ID; JIT create Plane user on first project access       |
+| **Permission mapping**       | APZHUB permission set → Plane project role assignment API                             |
+| **Entity mapping**           | Persistent map: project, task, sprint, module, label IDs                              |
+| **Health check**             | `GET /api/health/` or workspace list probe; version header capture                    |
+| **Diagnostics**              | Last sync, error counts, latency, engine version — no tokens in output                |
+| **Lifecycle participation**  | Pause sync on maintenance; resume on recovery                                         |
+| **Error translation**        | Plane 4xx/5xx → platform typed errors (NOT_FOUND, FORBIDDEN, CONFLICT, UNAVAILABLE)   |
+| **Version compatibility**    | Declare supported Plane CE range in manifest; block on mismatch                       |
+| **Upgrade strategy**         | Adapter release independent; contract tests per Plane minor version                   |
+| **Fallback behaviour**       | Degraded: read cache if fresh; writes queued to outbox; fail closed if tenant invalid |
 
 ---
 
@@ -77,9 +77,9 @@ Request → ProjectService (user context)
        → PlaneClient.request(..., { userToken | serviceToken + userAttribution })
 ```
 
-| Mode | Use case |
-|------|----------|
-| Service token | Bulk sync, provisioning, health |
+| Mode            | Use case                                 |
+| --------------- | ---------------------------------------- |
+| Service token   | Bulk sync, provisioning, health          |
 | User-attributed | Comments, assignments — audit shows user |
 
 No Plane login screen. Tokens never sent to browser.
@@ -110,14 +110,14 @@ No Plane login screen. Tokens never sent to browser.
 
 ## Entity mapping store (platform PostgreSQL)
 
-| Column | Purpose |
-|--------|---------|
-| `platform_id` | APZHUB global ID |
-| `plane_id` | Plane UUID |
-| `entity_type` | project \| task \| sprint \| module \| label |
-| `tenant_id` | Tenant scope |
-| `sync_version` | Optimistic concurrency |
-| `updated_at` | Audit |
+| Column         | Purpose                                      |
+| -------------- | -------------------------------------------- |
+| `platform_id`  | APZHUB global ID                             |
+| `plane_id`     | Plane UUID                                   |
+| `entity_type`  | project \| task \| sprint \| module \| label |
+| `tenant_id`    | Tenant scope                                 |
+| `sync_version` | Optimistic concurrency                       |
+| `updated_at`   | Audit                                        |
 
 Not exposed via API. Queried only by adapter/service layer.
 
@@ -150,14 +150,14 @@ All methods accept tenant context; adapter resolves workspace internally.
 
 ## Error translation matrix
 
-| Plane response | Platform error category | User message |
-|----------------|-------------------------|--------------|
-| 401 / 403 | `FORBIDDEN` | You don't have permission for this action |
-| 404 | `NOT_FOUND` | Project or task not found |
-| 409 | `CONFLICT` | This item was updated elsewhere |
-| 422 | `VALIDATION_ERROR` | Invalid input (sanitized) |
-| 429 | `RATE_LIMITED` | Too many requests — try again |
-| 5xx / timeout | `SERVICE_UNAVAILABLE` | Projects is temporarily unavailable |
+| Plane response | Platform error category | User message                              |
+| -------------- | ----------------------- | ----------------------------------------- |
+| 401 / 403      | `FORBIDDEN`             | You don't have permission for this action |
+| 404            | `NOT_FOUND`             | Project or task not found                 |
+| 409            | `CONFLICT`              | This item was updated elsewhere           |
+| 422            | `VALIDATION_ERROR`      | Invalid input (sanitized)                 |
+| 429            | `RATE_LIMITED`          | Too many requests — try again             |
+| 5xx / timeout  | `SERVICE_UNAVAILABLE`   | Projects is temporarily unavailable       |
 
 Never forward Plane error body or stack trace.
 
@@ -165,22 +165,22 @@ Never forward Plane error body or stack trace.
 
 ## Sync and outbox (PCv2-02)
 
-| Pattern | Usage |
-|---------|-------|
-| Write-through | User mutation → adapter call → success → event publish |
-| Outbox retry | Adapter failure → queue → exponential backoff |
+| Pattern            | Usage                                                     |
+| ------------------ | --------------------------------------------------------- |
+| Write-through      | User mutation → adapter call → success → event publish    |
+| Outbox retry       | Adapter failure → queue → exponential backoff             |
 | Reconciliation job | Periodic compare mapping sync_version vs Plane updated_at |
-| Idempotency | Idempotency key on create operations |
+| Idempotency        | Idempotency key on create operations                      |
 
 ---
 
 ## Version compatibility
 
-| Plane CE version | Adapter support |
-|------------------|-----------------|
-| Pin TBD at OSS-101-02 | Document in environment guide |
-| Contract tests | Mock Plane OpenAPI fixtures |
-| Upgrade | Staged: dev → staging → tenant batch |
+| Plane CE version      | Adapter support                      |
+| --------------------- | ------------------------------------ |
+| Pin TBD at OSS-101-02 | Document in environment guide        |
+| Contract tests        | Mock Plane OpenAPI fixtures          |
+| Upgrade               | Staged: dev → staging → tenant batch |
 
 ---
 
@@ -198,11 +198,11 @@ Never forward Plane error body or stack trace.
 
 ## Testing strategy (implementation phases)
 
-| Phase | Tests |
-|-------|-------|
-| OSS-101-04 | Contract tests with mocked PlaneClient |
-| OSS-101-05+ | Integration tests against Plane docker compose |
-| OSS-101-10 | E2E via APZHUB UI only — no direct Plane assertions in E2E |
+| Phase       | Tests                                                      |
+| ----------- | ---------------------------------------------------------- |
+| OSS-101-04  | Contract tests with mocked PlaneClient                     |
+| OSS-101-05+ | Integration tests against Plane docker compose             |
+| OSS-101-10  | E2E via APZHUB UI only — no direct Plane assertions in E2E |
 
 ---
 

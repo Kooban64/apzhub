@@ -49,8 +49,7 @@ export async function assertWorkflowEngineHttpEnabled(): Promise<void> {
   if (!bootstrap.workflowEnabled) {
     throw new PlatformApiHttpError(503, {
       code: "WORKFLOW_SERVICE_UNAVAILABLE",
-      message:
-        "Workflow Platform HTTP API is not enabled (APZHUB_WORKFLOW_ENABLED).",
+      message: "Workflow Platform HTTP API is not enabled (APZHUB_WORKFLOW_ENABLED).",
     });
   }
 }
@@ -64,15 +63,12 @@ export async function handleListEngineWorkflows(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const query = parseQuery(
-    workflowEngineListQuerySchema,
-    request.nextUrl.searchParams,
-  );
+  const query = parseQuery(workflowEngineListQuerySchema, request.nextUrl.searchParams);
   const gateway = await requireEngineGateway();
-  const items = await gateway.workflow.engine.workflows.list(
-    context.serviceContext,
-    { limit: query.limit, cursor: query.cursor },
-  );
+  const items = await gateway.workflow.engine.workflows.list(context.serviceContext, {
+    limit: query.limit,
+    cursor: query.cursor,
+  });
   return collection(items, context);
 }
 
@@ -99,9 +95,7 @@ export async function handleListEngineTemplates(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await requireEngineGateway();
-  const items = await gateway.workflow.engine.templates.list(
-    context.serviceContext,
-  );
+  const items = await gateway.workflow.engine.templates.list(context.serviceContext);
   return collection(items, context);
 }
 
@@ -146,9 +140,7 @@ export async function handleListEngineProjects(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await requireEngineGateway();
-  const items = await gateway.workflow.engine.projects.list(
-    context.serviceContext,
-  );
+  const items = await gateway.workflow.engine.projects.list(context.serviceContext);
   return collection(items, context);
 }
 
@@ -157,9 +149,7 @@ export async function handleGetEngineCapabilities(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await requireEngineGateway();
-  const result = await gateway.workflow.engine.capabilities.get(
-    context.serviceContext,
-  );
+  const result = await gateway.workflow.engine.capabilities.get(context.serviceContext);
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -168,9 +158,7 @@ export async function handleGetEngineHealth(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await requireEngineGateway();
-  const result = await gateway.workflow.engine.health.get(
-    context.serviceContext,
-  );
+  const result = await gateway.workflow.engine.health.get(context.serviceContext);
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -179,9 +167,7 @@ export async function handleGetEngineDiagnostics(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await requireEngineGateway();
-  const result = await gateway.workflow.engine.diagnostics.get(
-    context.serviceContext,
-  );
+  const result = await gateway.workflow.engine.diagnostics.get(context.serviceContext);
   return jsonDataResponse(result, context.tracing);
 }
 

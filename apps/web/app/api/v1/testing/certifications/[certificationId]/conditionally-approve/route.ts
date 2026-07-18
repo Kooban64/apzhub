@@ -4,9 +4,7 @@ import type { NextRequest } from "next/server";
 
 import { withPlatformApiAuth } from "@/lib/api/v1/auth/with-platform-api-auth";
 
-import {
-  handleConditionallyApproveTestingCertification,
-} from "@/lib/api/v1/handlers/testing";
+import { handleConditionallyApproveTestingCertification } from "@/lib/api/v1/handlers/testing";
 
 import { methodNotAllowedResponse } from "@/lib/api/v1/response";
 
@@ -14,9 +12,12 @@ import { createPlatformApiTracing } from "@/lib/api/v1/request-context";
 
 const ALLOWED = ["POST"] as const;
 
-export const POST = withPlatformApiAuth(handleConditionallyApproveTestingCertification, {
-  operation: "certification.conditionallyApprove",
-});
+export const POST = withPlatformApiAuth(
+  handleConditionallyApproveTestingCertification,
+  {
+    operation: "certification.conditionallyApprove",
+  },
+);
 
 export async function GET(request: NextRequest) {
   return methodNotAllowedResponse(ALLOWED, createPlatformApiTracing(), request.method);

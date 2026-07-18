@@ -137,7 +137,9 @@ export class PlaneSyncService {
 
     const startedAt = this.deps.clock?.nowMs() ?? Date.now();
     const startedIso = new Date(startedAt).toISOString();
-    const resume = decodeResumeToken(options.resumeToken ?? this.status.cursor.resumeToken);
+    const resume = decodeResumeToken(
+      options.resumeToken ?? this.status.cursor.resumeToken,
+    );
     const since =
       mode === "incremental"
         ? (options.since ?? resume?.since ?? this.getLastSyncTimestamp())
@@ -165,7 +167,9 @@ export class PlaneSyncService {
       );
 
       const durationMs = (this.deps.clock?.nowMs() ?? Date.now()) - startedAt;
-      const completedAt = new Date(this.deps.clock?.nowMs() ?? Date.now()).toISOString();
+      const completedAt = new Date(
+        this.deps.clock?.nowMs() ?? Date.now(),
+      ).toISOString();
 
       this.status = {
         mode,
@@ -224,12 +228,8 @@ export class PlaneSyncService {
         },
       };
 
-      this.deps.metricsProvider
-        ?.counter("plane.sync.failures", { mode })
-        .inc();
-      this.deps.metricsProvider
-        ?.counter("plane.sync.retries", { mode })
-        .inc();
+      this.deps.metricsProvider?.counter("plane.sync.failures", { mode }).inc();
+      this.deps.metricsProvider?.counter("plane.sync.retries", { mode }).inc();
       this.deps.metricsProvider
         ?.histogram("plane.sync.duration_ms", { mode, result: "failure" })
         .observe(durationMs);
@@ -282,7 +282,9 @@ export class PlaneSyncService {
       recordsProcessed += 1;
 
       let issueCursor: string | undefined =
-        resume?.projectIndex === projects.indexOf(project) ? resume.issueCursor : undefined;
+        resume?.projectIndex === projects.indexOf(project)
+          ? resume.issueCursor
+          : undefined;
 
       do {
         if (recordsProcessed >= maxRecords) break;

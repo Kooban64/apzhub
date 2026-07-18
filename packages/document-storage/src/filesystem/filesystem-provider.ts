@@ -3,15 +3,7 @@
  * Local/dev/on-prem — production requires allowFilesystemInProduction.
  */
 
-import {
-  access,
-  mkdir,
-  readFile,
-  rename,
-  rm,
-  stat,
-  writeFile,
-} from "node:fs/promises";
+import { access, mkdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
 
@@ -53,9 +45,7 @@ export function createFilesystemDocumentStorageProvider(
 ): DocumentStorageProvider {
   const id = options.id ?? "filesystem";
   const root = path.resolve(options.rootDirectory);
-  const staging = path.resolve(
-    options.stagingDirectory ?? path.join(root, ".staging"),
-  );
+  const staging = path.resolve(options.stagingDirectory ?? path.join(root, ".staging"));
   const maxObjectBytes = options.maxObjectBytes ?? 64 * 1024 * 1024;
 
   function resolveObjectPath(ref: DocumentStorageReference): string {
@@ -102,10 +92,7 @@ export function createFilesystemDocumentStorageProvider(
         await access(target);
         throw new Error("Object already exists (immutable overwrite denied)");
       } catch (error) {
-        if (
-          error instanceof Error &&
-          error.message.includes("immutable overwrite")
-        ) {
+        if (error instanceof Error && error.message.includes("immutable overwrite")) {
           throw error;
         }
       }
@@ -127,17 +114,12 @@ export function createFilesystemDocumentStorageProvider(
         checksum: { algorithm: "sha256", hex: checksumHex },
       };
     },
-    async getObject(
-      input: DocumentStorageGetInput,
-    ): Promise<DocumentBinaryResult> {
+    async getObject(input: DocumentStorageGetInput): Promise<DocumentBinaryResult> {
       const target = resolveObjectPath(input.ref);
       const bytes = await readFile(target);
       return { kind: "bytes", bytes: new Uint8Array(bytes) };
     },
-    async headObject(
-      _ctx: DocumentRequestContext,
-      ref: DocumentStorageReference,
-    ) {
+    async headObject(_ctx: DocumentRequestContext, ref: DocumentStorageReference) {
       try {
         const target = resolveObjectPath(ref);
         const info = await stat(target);

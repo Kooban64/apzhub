@@ -95,9 +95,7 @@ export function validateWorkflowParameters(
     }
     seenVarKeys.add(variable.key);
 
-    if (
-      !(WORKFLOW_VALUE_TYPES as readonly string[]).includes(variable.valueType)
-    ) {
+    if (!(WORKFLOW_VALUE_TYPES as readonly string[]).includes(variable.valueType)) {
       issues.push({
         code: "parameter",
         message: `Invalid variable valueType: ${String(variable.valueType)}`,

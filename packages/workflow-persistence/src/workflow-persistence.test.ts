@@ -60,15 +60,15 @@ describe("workflow-persistence", () => {
   });
 
   it("requires explicit postgres for production helper", () => {
-    expect(() =>
-      createProductionWorkflowPersistence({} as never),
-    ).toThrow(/explicit postgres/);
-    expect(() =>
-      createWorkflowPersistence({ mode: "postgres" }),
-    ).toThrow(/requires db/);
-    expect(() =>
-      createWorkflowPersistence({ mode: "nope" as never }),
-    ).toThrow(/Unsupported/);
+    expect(() => createProductionWorkflowPersistence({} as never)).toThrow(
+      /explicit postgres/,
+    );
+    expect(() => createWorkflowPersistence({ mode: "postgres" })).toThrow(
+      /requires db/,
+    );
+    expect(() => createWorkflowPersistence({ mode: "nope" as never })).toThrow(
+      /Unsupported/,
+    );
   });
 
   it("persists workflow metadata in memory with tenant isolation", async () => {
@@ -126,9 +126,7 @@ describe("workflow-persistence", () => {
     };
     await repos.versions.create(ctx, version);
     expect(await repos.versions.get(ctx, version.id)).toEqual(version);
-    expect(await repos.versions.listByWorkflow(ctx, workflow.id)).toHaveLength(
-      1,
-    );
+    expect(await repos.versions.listByWorkflow(ctx, workflow.id)).toHaveLength(1);
 
     const category: WorkflowCategory = {
       id: asWorkflowCategoryId("cat_1"),
@@ -170,9 +168,7 @@ describe("workflow-persistence", () => {
     expect(await repos.templates.get(ctx, template.id)).toEqual(template);
     const tplUpdated = { ...template, name: "Template 2" };
     await repos.templates.update(ctx, tplUpdated);
-    expect((await repos.templates.get(ctx, template.id))?.name).toBe(
-      "Template 2",
-    );
+    expect((await repos.templates.get(ctx, template.id))?.name).toBe("Template 2");
     expect(await repos.templates.list(ctx)).toHaveLength(1);
 
     const audit: WorkflowAuditEntry = {

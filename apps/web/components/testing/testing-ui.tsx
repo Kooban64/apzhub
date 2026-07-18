@@ -26,10 +26,16 @@ export function PageShell({
             Testing
           </p>
           {breadcrumbs && breadcrumbs.length > 0 ? (
-            <nav aria-label="Breadcrumb" className="mt-1 text-xs text-[var(--color-muted-foreground)]">
+            <nav
+              aria-label="Breadcrumb"
+              className="mt-1 text-xs text-[var(--color-muted-foreground)]"
+            >
               <ol className="flex flex-wrap gap-1">
                 {breadcrumbs.map((crumb, index) => (
-                  <li key={`${crumb}-${index}`} className="inline-flex items-center gap-1">
+                  <li
+                    key={`${crumb}-${index}`}
+                    className="inline-flex items-center gap-1"
+                  >
                     {index > 0 ? <span aria-hidden="true">/</span> : null}
                     <span>{crumb}</span>
                   </li>
@@ -37,19 +43,29 @@ export function PageShell({
               </ol>
             </nav>
           ) : null}
-          <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">{title}</h1>
+          <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">
+            {title}
+          </h1>
           {description ? (
-            <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">{description}</p>
+            <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+              {description}
+            </p>
           ) : null}
         </div>
-        {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
+        {actions ? (
+          <div className="flex flex-wrap items-center gap-2">{actions}</div>
+        ) : null}
       </header>
       {children}
     </div>
   );
 }
 
-export function LoadingState({ label = "Loading Testing…" }: { readonly label?: string }) {
+export function LoadingState({
+  label = "Loading Testing…",
+}: {
+  readonly label?: string;
+}) {
   return (
     <div
       className="rounded-lg border border-[var(--color-border)] px-4 py-8 text-center text-sm text-[var(--color-muted-foreground)]"
@@ -77,7 +93,9 @@ export function EmptyState({
     >
       <p className="font-medium text-[var(--color-foreground)]">{title}</p>
       {description ? (
-        <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">{description}</p>
+        <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+          {description}
+        </p>
       ) : null}
       {action ? <div className="mt-4 flex justify-center">{action}</div> : null}
     </div>
@@ -97,7 +115,9 @@ export function ErrorState({
       data-testid="testing-error"
       role="alert"
     >
-      <p className="font-medium text-[var(--color-foreground)]">Unable to load Testing</p>
+      <p className="font-medium text-[var(--color-foreground)]">
+        Unable to load Testing
+      </p>
       <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">{message}</p>
       {onRetry ? (
         <div className="mt-3">
@@ -136,8 +156,12 @@ export function TestingStatCard({
       data-testid="testing-stat-card"
       data-tone={tone}
     >
-      <p className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">{label}</p>
-      <p className="mt-2 text-xl font-semibold text-[var(--color-foreground)]">{value}</p>
+      <p className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">
+        {label}
+      </p>
+      <p className="mt-2 text-xl font-semibold text-[var(--color-foreground)]">
+        {value}
+      </p>
     </div>
   );
 }
@@ -157,13 +181,20 @@ export function TestingTable({
   readonly caption?: string;
 }) {
   return (
-    <div className="overflow-x-auto rounded-lg border border-[var(--color-border)]" data-testid="testing-table">
+    <div
+      className="overflow-x-auto rounded-lg border border-[var(--color-border)]"
+      data-testid="testing-table"
+    >
       <table className="min-w-full text-left text-sm">
         {caption ? <caption className="sr-only">{caption}</caption> : null}
         <thead className="border-b border-[var(--color-border)] bg-[var(--color-muted)]/20">
           <tr>
             {columns.map((column) => (
-              <th key={column} scope="col" className="px-3 py-2 font-medium text-[var(--color-foreground)]">
+              <th
+                key={column}
+                scope="col"
+                className="px-3 py-2 font-medium text-[var(--color-foreground)]"
+              >
                 {column}
               </th>
             ))}
@@ -193,7 +224,10 @@ export function TestingTable({
               data-testid={`testing-row-${row.id}`}
             >
               {row.cells.map((cell, index) => (
-                <td key={`${row.id}-${index}`} className="px-3 py-2 text-[var(--color-foreground)]">
+                <td
+                  key={`${row.id}-${index}`}
+                  className="px-3 py-2 text-[var(--color-foreground)]"
+                >
                   {cell}
                 </td>
               ))}

@@ -22,19 +22,16 @@ import type {
   ConfigurationAuditEntry,
   ConfigurationGroup,
   ConfigurationHierarchyLevel,
-  ConfigurationHistory,
   ConfigurationKey,
   ConfigurationLifecycleStatus,
   ConfigurationNamespace,
   ConfigurationOverride,
   ConfigurationReference,
   ConfigurationReferenceKind,
-  ConfigurationRequestContext,
   ConfigurationScope,
   ConfigurationScopeKind,
   ConfigurationValidation,
   ConfigurationValidationKind,
-  ConfigurationValue,
   ConfigurationValueKind,
   ConfigurationVersion,
 } from "@apzhub/configuration-contracts";
@@ -259,8 +256,7 @@ export function createPostgresConfigurationRepositories(
         scopeJson: scopeToJson(configuration.scope),
         status: configuration.status,
         currentVersionId: configuration.currentVersionId ?? null,
-        inheritsFromConfigurationId:
-          configuration.inheritsFromConfigurationId ?? null,
+        inheritsFromConfigurationId: configuration.inheritsFromConfigurationId ?? null,
         createdAt: new Date(configuration.createdAt),
         updatedAt: new Date(configuration.updatedAt),
         createdBy: configuration.createdBy,
@@ -488,9 +484,7 @@ export function createPostgresConfigurationRepositories(
       return rows.map((row) => ({
         id: asConfigurationValueId(row.id),
         configurationId: asConfigurationId(row.configurationId),
-        versionId: row.versionId
-          ? asConfigurationVersionId(row.versionId)
-          : undefined,
+        versionId: row.versionId ? asConfigurationVersionId(row.versionId) : undefined,
         valueKind: row.valueKind as ConfigurationValueKind,
         payload: row.payload,
         createdAt: row.createdAt.toISOString(),
@@ -607,9 +601,7 @@ export function createPostgresConfigurationRepositories(
         pattern: validation.pattern ?? null,
         min: validation.min ?? null,
         max: validation.max ?? null,
-        enumValuesJson: validation.enumValues
-          ? [...validation.enumValues]
-          : null,
+        enumValuesJson: validation.enumValues ? [...validation.enumValues] : null,
         required: validation.required ?? null,
         customValidatorKey: validation.customValidatorKey ?? null,
         createdAt: new Date(validation.createdAt),
@@ -683,9 +675,7 @@ export function createPostgresConfigurationRepositories(
       return rows.map((row) => ({
         id: asConfigurationHistoryId(row.id),
         configurationId: asConfigurationId(row.configurationId),
-        versionId: row.versionId
-          ? asConfigurationVersionId(row.versionId)
-          : undefined,
+        versionId: row.versionId ? asConfigurationVersionId(row.versionId) : undefined,
         summary: row.summary,
         actorUserId: row.actorUserId,
         createdAt: row.createdAt.toISOString(),

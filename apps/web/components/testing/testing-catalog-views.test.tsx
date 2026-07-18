@@ -48,7 +48,9 @@ describe("Testing catalog views", () => {
   });
 
   it("renders requirements list with fixture content", async () => {
-    render(wrap(<TestingRequirementsView permissions={["testing.requirements.read"]} />));
+    render(
+      wrap(<TestingRequirementsView permissions={["testing.requirements.read"]} />),
+    );
 
     await waitFor(() => {
       expectPageTitle("Requirements");
@@ -186,7 +188,9 @@ describe("Testing catalog views", () => {
 
     await waitFor(() => {
       expectPageTitle("Defects");
-      expect(screen.getByText("Intermittent SSO timeout on mobile Safari")).toBeTruthy();
+      expect(
+        screen.getByText("Intermittent SSO timeout on mobile Safari"),
+      ).toBeTruthy();
     });
   });
 
@@ -222,7 +226,9 @@ describe("Testing catalog views", () => {
 
   it("filters list views via search inputs", async () => {
     const user = userEvent.setup();
-    render(wrap(<TestingRequirementsView permissions={["testing.requirements.read"]} />));
+    render(
+      wrap(<TestingRequirementsView permissions={["testing.requirements.read"]} />),
+    );
 
     await waitFor(() => {
       expect(screen.getByText("REQ-AUTH-12")).toBeTruthy();
@@ -258,7 +264,11 @@ describe("Testing catalog views", () => {
     });
     await user.click(screen.getByTestId("testing-cases-create"));
     await waitFor(() => {
-      expect(screen.getAllByRole("alert").some((node) => node.textContent?.includes("Create failed"))).toBe(true);
+      expect(
+        screen
+          .getAllByRole("alert")
+          .some((node) => node.textContent?.includes("Create failed")),
+      ).toBe(true);
     });
   });
 
@@ -269,7 +279,10 @@ describe("Testing catalog views", () => {
 
     render(
       wrap(
-        <TestingPlansView planId="missing-plan" permissions={["testing.plans.create"]} />,
+        <TestingPlansView
+          planId="missing-plan"
+          permissions={["testing.plans.create"]}
+        />,
       ),
     );
 
@@ -283,7 +296,9 @@ describe("Testing catalog views", () => {
       new TestingClientError("Requirements unavailable", "ERROR", 500),
     );
 
-    render(wrap(<TestingRequirementsView permissions={["testing.requirements.read"]} />));
+    render(
+      wrap(<TestingRequirementsView permissions={["testing.requirements.read"]} />),
+    );
 
     await waitFor(() => {
       expect(screen.getByText("Requirements unavailable")).toBeTruthy();

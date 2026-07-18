@@ -8,12 +8,12 @@ Metadata management plane only — no runtime resolution hot path.
 
 ## Observations
 
-| Area | Baseline |
-| --- | --- |
-| HTTP handlers | Thin gateway orchestration; no business rules in presentation |
-| Typed client | Single HTTP round-trip per operation; AbortSignal supported |
-| Workbench | TanStack Query caching with controlled invalidation after mutations |
-| Persistence | PostgreSQL SoR; in-memory factory for unit tests only |
+| Area          | Baseline                                                            |
+| ------------- | ------------------------------------------------------------------- |
+| HTTP handlers | Thin gateway orchestration; no business rules in presentation       |
+| Typed client  | Single HTTP round-trip per operation; AbortSignal supported         |
+| Workbench     | TanStack Query caching with controlled invalidation after mutations |
+| Persistence   | PostgreSQL SoR; in-memory factory for unit tests only               |
 
 ## Limitations
 

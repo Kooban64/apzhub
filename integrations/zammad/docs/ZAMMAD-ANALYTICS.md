@@ -22,10 +22,10 @@ adapter.core.analytics
 
 ## Supported operations
 
-| Method | Operation | Notes |
-| --- | --- | --- |
-| `getSupportIntelligence` | primary | Returns `SupportIntelligenceSnapshot` |
-| `getSnapshot` | alias | Naming symmetry with Plane analytics |
+| Method                   | Operation | Notes                                 |
+| ------------------------ | --------- | ------------------------------------- |
+| `getSupportIntelligence` | primary   | Returns `SupportIntelligenceSnapshot` |
+| `getSnapshot`            | alias     | Naming symmetry with Plane analytics  |
 
 ---
 

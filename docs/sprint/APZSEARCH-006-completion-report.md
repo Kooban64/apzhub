@@ -1,16 +1,16 @@
 # APZHUB Programme — Milestone Completion Report
 
-| Field | Value |
-| --- | --- |
-| **Document ID** | APZSEARCH-006-CR |
-| **Milestone** | APZSEARCH-006 — Meilisearch Platform Integration & Search Execution Gateway |
-| **Programme** | APZHUB Platform Search |
-| **Status** | **COMPLETE** |
-| **Classification** | Execution-plane integration (internal gateway; no HTTP) |
-| **Date** | 2026-07-14 |
-| **Authority** | Knowledge Foundation · owner-approved milestone scope |
-| **Predecessor** | APZSEARCH-005 — Meilisearch Reference Adapter (Complete) |
-| **Successor** | APZSEARCH-007 — Search HTTP API, Typed Client & Workbench (**recommended; not started; requires owner approval**) |
+| Field              | Value                                                                                                             |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| **Document ID**    | APZSEARCH-006-CR                                                                                                  |
+| **Milestone**      | APZSEARCH-006 — Meilisearch Platform Integration & Search Execution Gateway                                       |
+| **Programme**      | APZHUB Platform Search                                                                                            |
+| **Status**         | **COMPLETE**                                                                                                      |
+| **Classification** | Execution-plane integration (internal gateway; no HTTP)                                                           |
+| **Date**           | 2026-07-14                                                                                                        |
+| **Authority**      | Knowledge Foundation · owner-approved milestone scope                                                             |
+| **Predecessor**    | APZSEARCH-005 — Meilisearch Reference Adapter (Complete)                                                          |
+| **Successor**      | APZSEARCH-007 — Search HTTP API, Typed Client & Workbench (**recommended; not started; requires owner approval**) |
 
 ---
 
@@ -30,27 +30,27 @@ The Search Platform remains vendor-neutral: no caller imports Meilisearch-specif
 
 ## 2. Programme context
 
-| Milestone | Status |
-| --- | --- |
-| APZSEARCH-001 — Platform Search Foundation | Complete |
-| APZSEARCH-002 — Search Persistence & Provider Framework | Complete |
-| APZSEARCH-003 — Search Platform Services, Gateway & Authorization | Complete (management plane) |
-| APZSEARCH-004 — Search Integration SDK | Complete |
-| APZSEARCH-005 — Meilisearch Reference Adapter | Complete |
-| **APZSEARCH-006 — Meilisearch Platform Integration & Search Execution Gateway** | **Complete** |
-| APZSEARCH-007 — Search HTTP API, Typed Client & Workbench | Recommended next (not authorised) |
+| Milestone                                                                       | Status                            |
+| ------------------------------------------------------------------------------- | --------------------------------- |
+| APZSEARCH-001 — Platform Search Foundation                                      | Complete                          |
+| APZSEARCH-002 — Search Persistence & Provider Framework                         | Complete                          |
+| APZSEARCH-003 — Search Platform Services, Gateway & Authorization               | Complete (management plane)       |
+| APZSEARCH-004 — Search Integration SDK                                          | Complete                          |
+| APZSEARCH-005 — Meilisearch Reference Adapter                                   | Complete                          |
+| **APZSEARCH-006 — Meilisearch Platform Integration & Search Execution Gateway** | **Complete**                      |
+| APZSEARCH-007 — Search HTTP API, Typed Client & Workbench                       | Recommended next (not authorised) |
 
 ---
 
 ## 3. Package versions
 
-| Package | Prior | Delivered | Change |
-| --- | --- | --- | --- |
-| `@apzhub/search-contracts` | 0.3.0 | **0.4.0** | Execution contracts + granular permissions |
-| `@apzhub/platform-services` | 0.17.0 | **0.18.0** | Execution services, gateway facets, resolver, authz |
-| `@apzhub/integration-meilisearch` | 0.1.0 | **0.1.0** | Unchanged (consumed via public API) |
-| `@apzhub/integration-search-sdk` | 0.1.0 | **0.1.0** | Unchanged |
-| `@apzhub/search-persistence` | 0.2.0 | **0.2.0** | Unchanged |
+| Package                           | Prior  | Delivered  | Change                                              |
+| --------------------------------- | ------ | ---------- | --------------------------------------------------- |
+| `@apzhub/search-contracts`        | 0.3.0  | **0.4.0**  | Execution contracts + granular permissions          |
+| `@apzhub/platform-services`       | 0.17.0 | **0.18.0** | Execution services, gateway facets, resolver, authz |
+| `@apzhub/integration-meilisearch` | 0.1.0  | **0.1.0**  | Unchanged (consumed via public API)                 |
+| `@apzhub/integration-search-sdk`  | 0.1.0  | **0.1.0**  | Unchanged                                           |
+| `@apzhub/search-persistence`      | 0.2.0  | **0.2.0**  | Unchanged                                           |
 
 ---
 
@@ -71,21 +71,21 @@ Internal platform consumer
 
 ### Management versus execution plane
 
-| Plane | Milestone | Surface |
-| --- | --- | --- |
-| Management | APZSEARCH-003 | `gateway.searchProviders`, configurations, collections, sources, scopes, profiles, capabilities, health, diagnostics, statistics, audit, validation |
-| Execution | APZSEARCH-006 | `gateway.searchExecution`, `searchIndexes`, `searchDocuments`, `searchExecutionHealth`, `searchExecutionDiagnostics` |
-| Legacy Plane | Pre-APZSEARCH | `gateway.search` scaffold — **not** APZSEARCH execution |
+| Plane        | Milestone     | Surface                                                                                                                                             |
+| ------------ | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Management   | APZSEARCH-003 | `gateway.searchProviders`, configurations, collections, sources, scopes, profiles, capabilities, health, diagnostics, statistics, audit, validation |
+| Execution    | APZSEARCH-006 | `gateway.searchExecution`, `searchIndexes`, `searchDocuments`, `searchExecutionHealth`, `searchExecutionDiagnostics`                                |
+| Legacy Plane | Pre-APZSEARCH | `gateway.search` scaffold — **not** APZSEARCH execution                                                                                             |
 
 These concerns are deliberately not collapsed into one implementation class.
 
 ### Naming (collision avoidance)
 
-| Legacy | Execution (this milestone) |
-| --- | --- |
-| Capability `"search"` / `SearchProvider` = Plane `SearchService` | Capability `platform_search_execution` |
-| — | Interface `PlatformSearchExecutionProvider` |
-| — | Class `MeilisearchSearchProvider` |
+| Legacy                                                           | Execution (this milestone)                  |
+| ---------------------------------------------------------------- | ------------------------------------------- |
+| Capability `"search"` / `SearchProvider` = Plane `SearchService` | Capability `platform_search_execution`      |
+| —                                                                | Interface `PlatformSearchExecutionProvider` |
+| —                                                                | Class `MeilisearchSearchProvider`           |
 
 ---
 
@@ -116,13 +116,13 @@ It does **not** import RestClient internals, instantiate its own HTTP client, du
 
 Trusted bootstrap registers the Meilisearch execution provider. Resolution precedence ([ADR-0063](../adr/ADR-0063-search-execution-provider-resolution.md)):
 
-1. Explicit authorised provider  
-2. Profile provider  
-3. Collection provider  
-4. Source provider  
-5. Tenant-active provider  
-6. Platform-active provider  
-7. Configured priority  
+1. Explicit authorised provider
+2. Profile provider
+3. Collection provider
+4. Source provider
+5. Tenant-active provider
+6. Platform-active provider
+7. Configured priority
 
 Resolution verifies enabled state, sufficient health, active configuration, capability support, tenant/organisation visibility, and caller authorisation. No silent fallback to an unrelated provider.
 
@@ -238,21 +238,21 @@ Maintained with APZSEARCH-001–005, management gateway facets, legacy permissio
 
 ## 22. Testing and coverage
 
-| Suite | Result |
-| --- | --- |
-| Search execution unit tests (`apzsearch-006-*.test.ts`) | **26 PASS** |
-| Management plane regression (`apzsearch-003` suite co-run) | **13 PASS** |
-| Typecheck (contracts / platform-services / meilisearch) | **PASS** |
-| Architecture audit `pnpm audit:search-execution` | **PASS (0 violations)** |
+| Suite                                                      | Result                  |
+| ---------------------------------------------------------- | ----------------------- |
+| Search execution unit tests (`apzsearch-006-*.test.ts`)    | **26 PASS**             |
+| Management plane regression (`apzsearch-003` suite co-run) | **13 PASS**             |
+| Typecheck (contracts / platform-services / meilisearch)    | **PASS**                |
+| Architecture audit `pnpm audit:search-execution`           | **PASS (0 violations)** |
 
 Coverage (execution folder; see [baseline](../reviews/APZSEARCH-006-coverage-baseline.md)):
 
-| Metric | Coverage |
-| --- | --- |
+| Metric     | Coverage   |
+| ---------- | ---------- |
 | Statements | **97.75%** |
-| Lines | **97.75%** |
-| Branches | **88.42%** |
-| Functions | **100%** |
+| Lines      | **97.75%** |
+| Branches   | **88.42%** |
+| Functions  | **100%**   |
 
 Module highlights: Meilisearch provider **95.41%** · resolver **95.09%** · service impls **99.07%** · factories **99.26%** · security filters **100%**.
 
@@ -262,36 +262,36 @@ No live Meilisearch server required.
 
 ## 23. Architecture-boundary / security results
 
-| Check | Result |
-| --- | --- |
-| Gateway does not import Meilisearch | PASS |
-| platform-services does not import RestClient internals | PASS |
-| Provider uses public adapter surface only | PASS |
-| Adapter does not import platform-services | PASS |
-| Management ≠ execution | PASS |
-| No HTTP / Workbench / product workers / OCR / AI | PASS |
-| Mandatory tenant filters cannot be removed by caller | PASS (tests) |
-| No raw API-key / Meilisearch payload leakage | PASS |
+| Check                                                  | Result       |
+| ------------------------------------------------------ | ------------ |
+| Gateway does not import Meilisearch                    | PASS         |
+| platform-services does not import RestClient internals | PASS         |
+| Provider uses public adapter surface only              | PASS         |
+| Adapter does not import platform-services              | PASS         |
+| Management ≠ execution                                 | PASS         |
+| No HTTP / Workbench / product workers / OCR / AI       | PASS         |
+| Mandatory tenant filters cannot be removed by caller   | PASS (tests) |
+| No raw API-key / Meilisearch payload leakage           | PASS         |
 
 ---
 
 ## 24. Known limitations / technical debt
 
-1. Execution is internal-only (no HTTP/Workbench yet — APZSEARCH-007).  
-2. Product data indexing adapters not implemented (fixtures only).  
-3. Live Meilisearch integration tests deferred (mock REST).  
+1. Execution is internal-only (no HTTP/Workbench yet — APZSEARCH-007).
+2. Product data indexing adapters not implemented (fixtures only).
+3. Live Meilisearch integration tests deferred (mock REST).
 4. Shared-index + filter isolation is the certified strategy; dedicated per-tenant index mode remains a future option if governance changes.
 
 ---
 
 ## 25. Risks
 
-| Risk | Mitigation |
-| --- | --- |
-| Engine lock-in perception | Vendor-neutral contracts; only public adapter consumed |
-| Tenant isolation bypass | Mandatory platform filters + fail-closed + tests |
-| Premature public HTTP | Stop before APZSEARCH-007 |
-| Confusion with legacy `gateway.search` | Distinct facet names and documentation |
+| Risk                                   | Mitigation                                             |
+| -------------------------------------- | ------------------------------------------------------ |
+| Engine lock-in perception              | Vendor-neutral contracts; only public adapter consumed |
+| Tenant isolation bypass                | Mandatory platform filters + fail-closed + tests       |
+| Premature public HTTP                  | Stop before APZSEARCH-007                              |
+| Confusion with legacy `gateway.search` | Distinct facet names and documentation                 |
 
 ---
 
@@ -299,11 +299,11 @@ No live Meilisearch server required.
 
 **APZSEARCH-007 — Search HTTP API, Typed Client & Workbench**
 
-1. Expose canonical query execution through `/api/v1/search` (or governed equivalent) via API Gateway.  
-2. Expose only safe internal index-administration routes where separately authorised.  
-3. Add OpenAPI and a production typed client.  
-4. Add a permission-driven platform Search Workbench.  
-5. Retain all provider/engine details behind Platform Services.  
+1. Expose canonical query execution through `/api/v1/search` (or governed equivalent) via API Gateway.
+2. Expose only safe internal index-administration routes where separately authorised.
+3. Add OpenAPI and a production typed client.
+4. Add a permission-driven platform Search Workbench.
+5. Retain all provider/engine details behind Platform Services.
 6. Add **no** product indexing workers or AI in that milestone unless separately scoped.
 
 **Do not begin APZSEARCH-007 without explicit owner approval.**
@@ -320,12 +320,12 @@ Await explicit owner approval before APZSEARCH-007 or any HTTP routes, Workbench
 
 ## Document control
 
-| Item | Value |
-| --- | --- |
-| Report location | `docs/sprint/APZSEARCH-006-completion-report.md` |
-| Coverage baseline | `docs/reviews/APZSEARCH-006-coverage-baseline.md` |
-| ADRs | ADR-0061 · ADR-0062 · ADR-0063 |
-| Programme stop point | `docs/foundation/CURRENT-MILESTONE.md` |
-| Prepared for | Owner filing / programme archive |
+| Item                 | Value                                             |
+| -------------------- | ------------------------------------------------- |
+| Report location      | `docs/sprint/APZSEARCH-006-completion-report.md`  |
+| Coverage baseline    | `docs/reviews/APZSEARCH-006-coverage-baseline.md` |
+| ADRs                 | ADR-0061 · ADR-0062 · ADR-0063                    |
+| Programme stop point | `docs/foundation/CURRENT-MILESTONE.md`            |
+| Prepared for         | Owner filing / programme archive                  |
 
 **End of report.**

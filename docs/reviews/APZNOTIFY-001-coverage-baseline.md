@@ -8,12 +8,12 @@
 
 ## Measured (Vitest v8, scoped to `packages/notification-*`)
 
-| Package | Lines | Functions | Branches | Statements |
-| --- | ---: | ---: | ---: | ---: |
-| `@apzhub/notification-contracts` | **100.00%** | **100.00%** | **100.00%** | **100.00%** |
-| `@apzhub/notification-core` | **100.00%** | **100.00%** | **≥94%** | **100.00%** |
-| `@apzhub/notification-persistence` | **≥97%** | **≥97%** | **≥80% overall** | **≥97%** |
-| **Combined** | **99.11%** | **99.16%** | **80.80%** | **99.11%** |
+| Package                            |       Lines |   Functions |         Branches |  Statements |
+| ---------------------------------- | ----------: | ----------: | ---------------: | ----------: |
+| `@apzhub/notification-contracts`   | **100.00%** | **100.00%** |      **100.00%** | **100.00%** |
+| `@apzhub/notification-core`        | **100.00%** | **100.00%** |         **≥94%** | **100.00%** |
+| `@apzhub/notification-persistence` |    **≥97%** |    **≥97%** | **≥80% overall** |    **≥97%** |
+| **Combined**                       |  **99.11%** |  **99.16%** |       **80.80%** |  **99.11%** |
 
 Type-only contract modules (`common/`, `domain/`, `services/`) are excluded from coverage (no executable statements).
 

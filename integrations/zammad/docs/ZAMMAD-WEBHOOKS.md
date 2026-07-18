@@ -24,12 +24,12 @@ adapter.core.webhooks
 
 ## Supported operations
 
-| Method | Notes |
-| --- | --- |
-| `list` / `get` | Canonical `WebhookRegistration` |
-| `create` / `update` / `delete` | Registration CRUD |
-| `validateConfiguration` | URL + supported event types |
-| `supportedEventTypes` | ticket, article, organization, group, user, assignment, priority, state, attachment |
+| Method                         | Notes                                                                               |
+| ------------------------------ | ----------------------------------------------------------------------------------- |
+| `list` / `get`                 | Canonical `WebhookRegistration`                                                     |
+| `create` / `update` / `delete` | Registration CRUD                                                                   |
+| `validateConfiguration`        | URL + supported event types                                                         |
+| `supportedEventTypes`          | ticket, article, organization, group, user, assignment, priority, state, attachment |
 
 ---
 

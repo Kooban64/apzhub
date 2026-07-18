@@ -45,14 +45,15 @@ describe("createHttpDocumentClient", () => {
   it("maps HTTP errors to DocumentClientError", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(async () =>
-        new Response(
-          JSON.stringify({
-            error: { message: "forbidden", code: "FORBIDDEN" },
-            meta: { correlationId: "c1" },
-          }),
-          { status: 403, headers: { "content-type": "application/json" } },
-        ),
+      vi.fn(
+        async () =>
+          new Response(
+            JSON.stringify({
+              error: { message: "forbidden", code: "FORBIDDEN" },
+              meta: { correlationId: "c1" },
+            }),
+            { status: 403, headers: { "content-type": "application/json" } },
+          ),
       ),
     );
     const client = createHttpDocumentClient();
@@ -76,7 +77,11 @@ describe("createHttpDocumentClient", () => {
         const url = String(input);
         calls.push(`${init?.method ?? "GET"} ${url}`);
         const path = url.split("?")[0] ?? url;
-        if (path.endsWith("/versions") || path.endsWith("/audit") || path.endsWith("/documents")) {
+        if (
+          path.endsWith("/versions") ||
+          path.endsWith("/audit") ||
+          path.endsWith("/documents")
+        ) {
           if ((init?.method ?? "GET") === "GET") {
             return new Response(
               JSON.stringify({ data: [], page: { limit: 0, hasMore: false } }),

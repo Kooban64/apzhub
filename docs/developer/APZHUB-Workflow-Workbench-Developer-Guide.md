@@ -5,18 +5,22 @@
 ## Consume only
 
 ```ts
-import { listWorkflows, getWorkflow, workflowQueryKeys } from "@/lib/workflows/workflow-api";
+import {
+  listWorkflows,
+  getWorkflow,
+  workflowQueryKeys,
+} from "@/lib/workflows/workflow-api";
 ```
 
 Never import `@apzhub/platform-services`, `@apzhub/workflow-core`, `@apzhub/workflow-persistence`, or call `/api/v1` with raw `fetch` from workbench components.
 
 ## Layout
 
-| Path | Role |
-|------|------|
-| `apps/web/components/workflows/` | Presentation |
-| `apps/web/lib/workflows/` | Typed client + routes + query keys |
-| `packages/workbench-framework/manifests/platform-workflows*/` | Navigation manifests |
+| Path                                                          | Role                               |
+| ------------------------------------------------------------- | ---------------------------------- |
+| `apps/web/components/workflows/`                              | Presentation                       |
+| `apps/web/lib/workflows/`                                     | Typed client + routes + query keys |
+| `packages/workbench-framework/manifests/platform-workflows*/` | Navigation manifests               |
 
 ## Shell mount
 

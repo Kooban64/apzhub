@@ -4,17 +4,17 @@
 
 ## Controls implemented
 
-| Control | Mechanism |
-|---------|-----------|
-| No binaries in Postgres | Metadata-only tables; no `bytea` |
-| Secret refs | `s3AccessKeyRef` / `s3SecretKeyRef` / `encryptionKeyRef` — values via resolver |
-| Config redaction | `redactDocumentStorageConfig` — no secrets, absolute paths, or object keys |
-| Path safety | Reject `..`, absolute keys, traversal outside filesystem root |
-| Immutability | Overwrite denied; schema `immutable = true` |
-| Size limits | `maxObjectBytes` on collect + providers |
-| Permissions | `document.storage.*`, `document.version.*`, `document.reconciliation.*` |
-| TLS | `tlsRequired` flag on config (default true in redaction view) |
-| Tenant RLS | Migrations 0040 on version + storage_object tables |
+| Control                 | Mechanism                                                                      |
+| ----------------------- | ------------------------------------------------------------------------------ |
+| No binaries in Postgres | Metadata-only tables; no `bytea`                                               |
+| Secret refs             | `s3AccessKeyRef` / `s3SecretKeyRef` / `encryptionKeyRef` — values via resolver |
+| Config redaction        | `redactDocumentStorageConfig` — no secrets, absolute paths, or object keys     |
+| Path safety             | Reject `..`, absolute keys, traversal outside filesystem root                  |
+| Immutability            | Overwrite denied; schema `immutable = true`                                    |
+| Size limits             | `maxObjectBytes` on collect + providers                                        |
+| Permissions             | `document.storage.*`, `document.version.*`, `document.reconciliation.*`        |
+| TLS                     | `tlsRequired` flag on config (default true in redaction view)                  |
+| Tenant RLS              | Migrations 0040 on version + storage_object tables                             |
 
 ## Never
 

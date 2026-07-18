@@ -21,24 +21,24 @@ gateway.testing.reporting.listReportPlaceholders(ctx);
 
 ### Full accessor tree
 
-| Path | Pipeline service key | Resource type (authz) |
-| ---- | -------------------- | --------------------- |
-| `testing.plans` | `testingPlan` | `testing_plan` |
-| `testing.suites` | `testingSuite` | `testing_suite` |
-| `testing.cases` | `testingCase` | `testing_case` |
-| `testing.requirements` | `testingRequirement` | `testing_requirement` |
-| `testing.executions` | `testingExecution` | `testing_execution` |
-| `testing.evidence` | `testingEvidence` | `testing_evidence` |
-| `testing.automation` | `testingAutomation` | `testing_automation` |
-| `testing.coverage` | `testingCoverage` | `testing_coverage` |
-| `testing.defects` | `testingDefect` | `testing_defect` |
-| `testing.quality` | `testingQuality` | `testing_quality` |
-| `testing.certification` | `testingCertification` | `testing_certification` |
+| Path                       | Pipeline service key      | Resource type (authz)       |
+| -------------------------- | ------------------------- | --------------------------- |
+| `testing.plans`            | `testingPlan`             | `testing_plan`              |
+| `testing.suites`           | `testingSuite`            | `testing_suite`             |
+| `testing.cases`            | `testingCase`             | `testing_case`              |
+| `testing.requirements`     | `testingRequirement`      | `testing_requirement`       |
+| `testing.executions`       | `testingExecution`        | `testing_execution`         |
+| `testing.evidence`         | `testingEvidence`         | `testing_evidence`          |
+| `testing.automation`       | `testingAutomation`       | `testing_automation`        |
+| `testing.coverage`         | `testingCoverage`         | `testing_coverage`          |
+| `testing.defects`          | `testingDefect`           | `testing_defect`            |
+| `testing.quality`          | `testingQuality`          | `testing_quality`           |
+| `testing.certification`    | `testingCertification`    | `testing_certification`     |
 | `testing.releaseReadiness` | `testingReleaseReadiness` | `testing_release_readiness` |
-| `testing.traceability` | `testingTraceability` | `testing_traceability` |
-| `testing.approvals` | `testingApproval` | `testing_approval` |
-| `testing.dashboard` | `testingDashboard` | `testing_dashboard` |
-| `testing.reporting` | `testingReporting` | `testing_reporting` |
+| `testing.traceability`     | `testingTraceability`     | `testing_traceability`      |
+| `testing.approvals`        | `testingApproval`         | `testing_approval`          |
+| `testing.dashboard`        | `testingDashboard`        | `testing_dashboard`         |
+| `testing.reporting`        | `testingReporting`        | `testing_reporting`         |
 
 Pipeline wrapping is applied in `wrapTestingPlatformGatewayWithPipeline` when the testing bundle is registered on `createPlatformServices({ testing })`.
 

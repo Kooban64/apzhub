@@ -22,7 +22,9 @@ export function ResilienceSection() {
   const [health, setHealth] = useState<Record<string, unknown> | null>(null);
   const [readiness, setReadiness] = useState<Record<string, unknown> | null>(null);
   const [liveness, setLiveness] = useState<Record<string, unknown> | null>(null);
-  const [consolidated, setConsolidated] = useState<Record<string, unknown> | null>(null);
+  const [consolidated, setConsolidated] = useState<Record<string, unknown> | null>(
+    null,
+  );
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -37,13 +39,20 @@ export function ResilienceSection() {
       .then(([healthResult, readinessResult, livenessResult, summary]) => {
         if (!active) return;
         setHealth(healthResult);
-        setReadiness((readinessResult as { data?: Record<string, unknown> }).data ?? readinessResult);
-        setLiveness((livenessResult as { data?: Record<string, unknown> }).data ?? livenessResult);
+        setReadiness(
+          (readinessResult as { data?: Record<string, unknown> }).data ??
+            readinessResult,
+        );
+        setLiveness(
+          (livenessResult as { data?: Record<string, unknown> }).data ?? livenessResult,
+        );
         setConsolidated(summary.consolidatedDiagnostics ?? null);
       })
       .catch((cause: unknown) => {
         if (!active) return;
-        setError(cause instanceof Error ? cause.message : "Failed to load resilience data.");
+        setError(
+          cause instanceof Error ? cause.message : "Failed to load resilience data.",
+        );
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -54,7 +63,8 @@ export function ResilienceSection() {
   }, []);
 
   if (loading) return <OpsLoadingState />;
-  if (error || !health) return <OpsErrorState message={error ?? "Resilience data unavailable."} />;
+  if (error || !health)
+    return <OpsErrorState message={error ?? "Resilience data unavailable."} />;
 
   const dependencies = (health.dependencies ?? []) as Array<{
     name: string;
@@ -63,7 +73,8 @@ export function ResilienceSection() {
     message?: string;
   }>;
   const securitySummary = consolidated
-    ? ((consolidated as Record<string, unknown>).resilience as Record<string, unknown> | undefined)
+    ? ((consolidated as Record<string, unknown>).resilience as
+        Record<string, unknown> | undefined)
     : undefined;
   const recoveryGuidance = (securitySummary?.recoveryGuidance ?? []) as Array<{
     id: string;
@@ -102,7 +113,11 @@ export function ResilienceSection() {
       />
       <OpsTable
         columns={["Guidance", "Severity", "Description"]}
-        rows={recoveryGuidance.map((item) => [item.title, item.severity, item.description])}
+        rows={recoveryGuidance.map((item) => [
+          item.title,
+          item.severity,
+          item.description,
+        ])}
       />
       <OpsJsonPanel value={{ health, readiness, liveness, consolidated }} />
     </OpsPageShell>

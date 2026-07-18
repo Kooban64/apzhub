@@ -32,10 +32,7 @@ export interface TestingTraceabilityService {
       readonly tenantId: string;
     },
   ): Promise<TraceabilityLink>;
-  removeRelationship(
-    ctx: ServiceRequestContext,
-    id: TraceabilityLinkId,
-  ): Promise<void>;
+  removeRelationship(ctx: ServiceRequestContext, id: TraceabilityLinkId): Promise<void>;
   getMatrixForRequirement(
     ctx: ServiceRequestContext,
     requirementId: RequirementId,

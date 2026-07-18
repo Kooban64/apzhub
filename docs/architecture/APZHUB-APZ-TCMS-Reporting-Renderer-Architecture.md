@@ -4,12 +4,12 @@
 
 ## Separation of concerns
 
-| Layer | Location | Role |
-|-------|----------|------|
+| Layer    | Location                           | Role                            |
+| -------- | ---------------------------------- | ------------------------------- |
 | Template | `ReportTemplate` + template engine | Structure + placeholder binding |
-| Layout | Canonical document sections/blocks | Normalised content tree |
-| Renderer | `output/*.ts` | Format-specific serialisation |
-| Output | `output/index.ts` | `RenderedReportOutput` envelope |
+| Layout   | Canonical document sections/blocks | Normalised content tree         |
+| Renderer | `output/*.ts`                      | Format-specific serialisation   |
+| Output   | `output/index.ts`                  | `RenderedReportOutput` envelope |
 
 Renderers consume `CanonicalReportDocument` only. They must not calculate business values, query persistence, or call domain services.
 
@@ -19,12 +19,12 @@ Renderers consume `CanonicalReportDocument` only. They must not calculate busine
 
 ## Service operations
 
-| Operation | Persists metadata | Notes |
-|-----------|-------------------|-------|
-| `previewReport` | Yes (`preview: true`) | Same bind/render path |
-| `generateReport` | Yes (`preview: false`) | Production generation |
-| `renderReport` | No | Re-render existing document |
-| `validateReport` | No | Binding validation only |
+| Operation        | Persists metadata      | Notes                       |
+| ---------------- | ---------------------- | --------------------------- |
+| `previewReport`  | Yes (`preview: true`)  | Same bind/render path       |
+| `generateReport` | Yes (`preview: false`) | Production generation       |
+| `renderReport`   | No                     | Re-render existing document |
+| `validateReport` | No                     | Binding validation only     |
 
 ## Checksum
 

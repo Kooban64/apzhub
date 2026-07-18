@@ -1,12 +1,7 @@
 import type { ServiceRequestContext } from "../common/context";
 import type { ListQuery } from "../common/list-query";
 import type { PageResult } from "../common/paging";
-import type {
-  Attachment,
-  Backlog,
-  Comment,
-  Task,
-} from "../domain";
+import type { Attachment, Backlog, Comment, Task } from "../domain";
 import type {
   AddCommentInput,
   AssignTaskInput,
@@ -83,5 +78,8 @@ export interface TaskService {
     input: AddCommentInput,
   ): Promise<Comment>;
 
-  listAttachments(ctx: ServiceRequestContext, taskId: TaskId): Promise<readonly Attachment[]>;
+  listAttachments(
+    ctx: ServiceRequestContext,
+    taskId: TaskId,
+  ): Promise<readonly Attachment[]>;
 }

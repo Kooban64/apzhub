@@ -1,15 +1,8 @@
 export type GitHubActionsOperationalHealthLevel =
-  | "HEALTHY"
-  | "DEGRADED"
-  | "LIMITED"
-  | "UNAVAILABLE";
+  "HEALTHY" | "DEGRADED" | "LIMITED" | "UNAVAILABLE";
 
 export type GitHubActionsCapabilityAvailability =
-  | "available"
-  | "degraded"
-  | "unavailable"
-  | "optional_unavailable"
-  | "unknown";
+  "available" | "degraded" | "unavailable" | "optional_unavailable" | "unknown";
 
 export interface GitHubActionsCapabilityCertification {
   readonly capabilityId: string;
@@ -27,11 +20,7 @@ export interface GitHubActionsCompatibilityMatrix {
   readonly configuredApiVersion: string;
   readonly supportedApiVersion: string;
   readonly compatibilityStatus:
-    | "compatible"
-    | "incompatible"
-    | "warning"
-    | "unverified"
-    | "not_checked";
+    "compatible" | "incompatible" | "warning" | "unverified" | "not_checked";
   readonly warnings: readonly string[];
   readonly blockingIncompatibilities: readonly string[];
   readonly unsupportedFeatures: readonly string[];

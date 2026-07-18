@@ -35,9 +35,11 @@ function makeRequest(url: string, init?: RequestInit) {
   if (!headers.has("content-type") && init?.body) {
     headers.set("content-type", "application/json");
   }
+  const { signal, ...rest } = init ?? {};
   return new NextRequest(new URL(url, "http://localhost"), {
-    ...init,
+    ...rest,
     headers,
+    ...(signal != null ? { signal } : {}),
   });
 }
 
@@ -121,7 +123,9 @@ describe("testing engineering intelligence handlers", () => {
     expect(computed.status).toBe(200);
 
     const one = await handleGetEngineeringSnapshot(
-      makeRequest(`/api/v1/testing/engineering-intelligence/snapshots/${API_TEST_EI_SNAPSHOT_ID}`),
+      makeRequest(
+        `/api/v1/testing/engineering-intelligence/snapshots/${API_TEST_EI_SNAPSHOT_ID}`,
+      ),
       makeContext(),
       { params: Promise.resolve({ snapshotId: API_TEST_EI_SNAPSHOT_ID }) },
     );

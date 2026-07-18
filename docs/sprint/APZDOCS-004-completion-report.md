@@ -36,32 +36,32 @@ Safe readiness / provider kind metadata only. Storage keys and reconciliation ke
 
 ## Testing
 
-| Suite | Result |
-| --- | --- |
-| Vitest (handlers, client, api, authz, boundary, foundation) | **20** passed |
-| OpenAPI validation | **PASS** |
-| Architecture audit `scripts/apzdocs-004-document-http-audit.mjs` | **PASS** |
-| Playwright | Not in scope |
+| Suite                                                            | Result        |
+| ---------------------------------------------------------------- | ------------- |
+| Vitest (handlers, client, api, authz, boundary, foundation)      | **20** passed |
+| OpenAPI validation                                               | **PASS**      |
+| Architecture audit `scripts/apzdocs-004-document-http-audit.mjs` | **PASS**      |
+| Playwright                                                       | Not in scope  |
 
 ## Coverage
 
 Scoped APZDOCS-004 modules (handlers + schemas + documents client package):
 
-| Metric | Result |
-| --- | --- |
-| Lines | **~97%** |
-| Functions | **100%** |
-| Branches | Meaningful (client mapping branches lower; handlers ~89%) |
+| Metric    | Result                                                    |
+| --------- | --------------------------------------------------------- |
+| Lines     | **~97%**                                                  |
+| Functions | **100%**                                                  |
+| Branches  | Meaningful (client mapping branches lower; handlers ~89%) |
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| OpenAPI validate | PASS |
-| Vitest focused suites | PASS |
-| Coverage ≥95% lines/functions (scoped) | PASS |
-| Boundary / architecture audit | PASS |
-| Authorization surface audit | PASS |
+| Gate                                   | Result |
+| -------------------------------------- | ------ |
+| OpenAPI validate                       | PASS   |
+| Vitest focused suites                  | PASS   |
+| Coverage ≥95% lines/functions (scoped) | PASS   |
+| Boundary / architecture audit          | PASS   |
+| Authorization surface audit            | PASS   |
 
 ## Technical Debt
 

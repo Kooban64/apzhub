@@ -71,11 +71,7 @@ export function wrapConfigurationPlatformGatewayWithPipeline(
       pipeline,
       "configurationNamespaces",
     ),
-    groups: wrapServiceWithPipeline(
-      gateway.groups,
-      pipeline,
-      "configurationGroups",
-    ),
+    groups: wrapServiceWithPipeline(gateway.groups, pipeline, "configurationGroups"),
     versions: wrapServiceWithPipeline(
       gateway.versions,
       pipeline,
@@ -86,11 +82,7 @@ export function wrapConfigurationPlatformGatewayWithPipeline(
       pipeline,
       "configurationOverrides",
     ),
-    scopes: wrapServiceWithPipeline(
-      gateway.scopes,
-      pipeline,
-      "configurationScopes",
-    ),
+    scopes: wrapServiceWithPipeline(gateway.scopes, pipeline, "configurationScopes"),
     validation: wrapServiceWithPipeline(
       gateway.validation,
       pipeline,
@@ -101,11 +93,7 @@ export function wrapConfigurationPlatformGatewayWithPipeline(
       pipeline,
       "configurationReferences",
     ),
-    audit: wrapServiceWithPipeline(
-      gateway.audit,
-      pipeline,
-      "configurationAudit",
-    ),
+    audit: wrapServiceWithPipeline(gateway.audit, pipeline, "configurationAudit"),
     diagnostics: wrapServiceWithPipeline(
       gateway.diagnostics,
       pipeline,
@@ -123,8 +111,7 @@ function buildBundle(input: {
   const foundation = createConfigurationFoundation({ repos: input.persistence });
   let seq = 0;
   const now = input.now ?? (() => new Date().toISOString());
-  const id =
-    input.id ?? (() => `cfg_${Date.now().toString(36)}_${++seq}`);
+  const id = input.id ?? (() => `cfg_${Date.now().toString(36)}_${++seq}`);
   const domain = createPlatformConfigurationService({
     repos: input.persistence,
     now,

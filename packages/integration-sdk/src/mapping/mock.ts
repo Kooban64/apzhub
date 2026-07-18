@@ -1,10 +1,6 @@
 import { createEnumMapper } from "./enum-mapper";
 import { createMappingProvider } from "./provider";
-import type {
-  MappingContext,
-  MappingDefinition,
-  MappingProvider,
-} from "./types";
+import type { MappingContext, MappingDefinition, MappingProvider } from "./types";
 
 export interface MockMappingProviderOptions {
   readonly id?: string;

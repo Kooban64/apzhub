@@ -46,20 +46,22 @@ describe("APZSEARCH-011 deep coverage", () => {
     const context = ctx();
 
     expect(
-      adapter.validator.validateDraft(context, {
-        entityId: "",
-        entityType: "support_request",
-        title: "",
-        classification: undefined,
-        metadata: {
-          status: "open",
-          priority: "high",
-          groupId: "sgrp_zammad_bad",
-          requesterId: "susr_ok",
-          meiliUid: "x",
-          originMetadata: "nope",
-        },
-      }).issues.map((i) => i.code),
+      adapter.validator
+        .validateDraft(context, {
+          entityId: "",
+          entityType: "support_request",
+          title: "",
+          classification: undefined,
+          metadata: {
+            status: "open",
+            priority: "high",
+            groupId: "sgrp_zammad_bad",
+            requesterId: "susr_ok",
+            meiliUid: "x",
+            originMetadata: "nope",
+          },
+        })
+        .issues.map((i) => i.code),
     ).toEqual(
       expect.arrayContaining([
         "required",
@@ -70,13 +72,15 @@ describe("APZSEARCH-011 deep coverage", () => {
     );
 
     expect(
-      adapter.validator.validateDraft(context, {
-        entityId: "sreq_zammad_x",
-        entityType: "unknown",
-        title: "T",
-        classification: "internal",
-        metadata: {},
-      }).issues.some((i) => i.code === "unsupported"),
+      adapter.validator
+        .validateDraft(context, {
+          entityId: "sreq_zammad_x",
+          entityType: "unknown",
+          title: "T",
+          classification: "internal",
+          metadata: {},
+        })
+        .issues.some((i) => i.code === "unsupported"),
     ).toBe(true);
 
     expect(
@@ -95,19 +99,21 @@ describe("APZSEARCH-011 deep coverage", () => {
     ).toBe(false);
 
     expect(
-      adapter.validator.validateDraft(context, {
-        entityId: "ok",
-        entityType: "support_article",
-        title: "T",
-        classification: "internal",
-        metadata: {
-          supportTicketId: "Ticket::99",
-          channel: "email",
-          visibility: "public",
-          senderType: "agent",
-          zammadArticleId: "1",
-        },
-      }).issues.some((i) => i.code === "zammad_id_forbidden"),
+      adapter.validator
+        .validateDraft(context, {
+          entityId: "ok",
+          entityType: "support_article",
+          title: "T",
+          classification: "internal",
+          metadata: {
+            supportTicketId: "Ticket::99",
+            channel: "email",
+            visibility: "public",
+            senderType: "agent",
+            zammadArticleId: "1",
+          },
+        })
+        .issues.some((i) => i.code === "zammad_id_forbidden"),
     ).toBe(true);
   });
 
@@ -116,20 +122,22 @@ describe("APZSEARCH-011 deep coverage", () => {
     const context = ctx();
 
     expect(
-      adapter.validator.validateDraft(
-        {
-          ...context,
-          tenantId: "",
-          permissions: null as unknown as readonly string[],
-        },
-        {
-          entityId: "x",
-          entityType: "support_group",
-          title: "T",
-          classification: "internal",
-          metadata: { active: "true" },
-        },
-      ).issues.map((i) => i.field),
+      adapter.validator
+        .validateDraft(
+          {
+            ...context,
+            tenantId: "",
+            permissions: null as unknown as readonly string[],
+          },
+          {
+            entityId: "x",
+            entityType: "support_group",
+            title: "T",
+            classification: "internal",
+            metadata: { active: "true" },
+          },
+        )
+        .issues.map((i) => i.field),
     ).toEqual(expect.arrayContaining(["tenantId", "permissions"]));
 
     const article: SupportArticle = {
@@ -176,29 +184,21 @@ describe("APZSEARCH-011 deep coverage", () => {
       updatedAt: "2026-01-01T00:00:00.000Z",
     };
 
-    expect(adapter.hooks.onSupportRequestUpserted(context, ticket).ok).toBe(
+    expect(adapter.hooks.onSupportRequestUpserted(context, ticket).ok).toBe(true);
+    expect(adapter.hooks.onSupportArticleUpserted(context, article).ok).toBe(true);
+    expect(adapter.hooks.onSupportOrganisationUpserted(context, organisation).ok).toBe(
       true,
     );
-    expect(adapter.hooks.onSupportArticleUpserted(context, article).ok).toBe(
-      true,
-    );
-    expect(
-      adapter.hooks.onSupportOrganisationUpserted(context, organisation).ok,
-    ).toBe(true);
     expect(adapter.hooks.onSupportGroupUpserted(context, group).ok).toBe(true);
     expect(adapter.hooks.onSupportUserUpserted(context, user).ok).toBe(true);
 
     expect(adapter.hooks.onArticleRemoved(context, article.id).ok).toBe(true);
-    expect(
-      adapter.hooks.onOrganisationRemoved(context, organisation.id).ok,
-    ).toBe(true);
+    expect(adapter.hooks.onOrganisationRemoved(context, organisation.id).ok).toBe(true);
     expect(adapter.hooks.onGroupRemoved(context, group.id).ok).toBe(true);
     expect(adapter.hooks.onUserRemoved(context, user.id).ok).toBe(true);
     expect(adapter.hooks.onRequestRemoved(context, ticket.id).ok).toBe(true);
 
-    expect(adapter.hooks.onSupportRequestUpserted(context, ticket).ok).toBe(
-      true,
-    );
+    expect(adapter.hooks.onSupportRequestUpserted(context, ticket).ok).toBe(true);
 
     const missingUpdate = adapter.publisher.update(context, {
       entityType: "support_request",
@@ -273,9 +273,7 @@ describe("APZSEARCH-011 deep coverage", () => {
       validator: {
         validateDraft: () => ({
           valid: false,
-          issues: [
-            { field: "title", code: "required", message: "forced" },
-          ],
+          issues: [{ field: "title", code: "required", message: "forced" }],
         }),
       } as never,
     });
@@ -295,12 +293,8 @@ describe("APZSEARCH-011 deep coverage", () => {
         entity: ticket,
       }).ok,
     ).toBe(false);
-    expect(
-      publisherOkMap.remove(context, "support_request", ticket.id).ok,
-    ).toBe(false);
-    expect(
-      publisherOkMap.lifecycle(context, ticket.id, "archived").ok,
-    ).toBe(false);
+    expect(publisherOkMap.remove(context, "support_request", ticket.id).ok).toBe(false);
+    expect(publisherOkMap.lifecycle(context, ticket.id, "archived").ok).toBe(false);
     expect(
       publisherOkMap.validate(context, {
         entityType: "support_request",
@@ -321,20 +315,18 @@ describe("APZSEARCH-011 deep coverage", () => {
     ).toBe(false);
 
     void broken;
-    expect(
-      adapter.lifecycle.suggestFromDomainStatus("support_request", "open"),
-    ).toBe("validated");
+    expect(adapter.lifecycle.suggestFromDomainStatus("support_request", "open")).toBe(
+      "validated",
+    );
 
     // Inactive group mapping + alias upserts
     const inactiveGroup: SupportGroup = { ...group, active: false };
-    expect(
-      adapter.mapper.mapSupportGroup(context, inactiveGroup).classification,
-    ).toBe("restricted");
+    expect(adapter.mapper.mapSupportGroup(context, inactiveGroup).classification).toBe(
+      "restricted",
+    );
     expect(adapter.hooks.onGroupUpserted(context, group).ok).toBe(true);
     expect(adapter.hooks.onUserUpserted(context, user).ok).toBe(true);
     expect(adapter.hooks.onArticleUpserted(context, article).ok).toBe(true);
-    expect(
-      adapter.hooks.onOrganisationUpserted(context, organisation).ok,
-    ).toBe(true);
+    expect(adapter.hooks.onOrganisationUpserted(context, organisation).ok).toBe(true);
   });
 });

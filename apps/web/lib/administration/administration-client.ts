@@ -79,8 +79,7 @@ async function requestJson<T>(
     },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiSuccessEnvelope<T>
-    | ApiErrorEnvelope;
+    ApiSuccessEnvelope<T> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new AdministrationClientError({
@@ -107,8 +106,7 @@ async function requestCollection<T>(
     headers: { accept: "application/json", ...(options?.headers ?? {}) },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiCollectionEnvelope<unknown>
-    | ApiErrorEnvelope;
+    ApiCollectionEnvelope<unknown> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new AdministrationClientError({
@@ -249,9 +247,7 @@ function mapCapability(raw: unknown): AdministrationCapabilityViewModel {
     healthy: Boolean(r.healthy),
     certified: Boolean(r.certified),
     productionReady: Boolean(r.productionReady),
-    limitations: Array.isArray(r.limitations)
-      ? r.limitations.map(String)
-      : undefined,
+    limitations: Array.isArray(r.limitations) ? r.limitations.map(String) : undefined,
     owner: String(r.owner ?? ""),
     version: String(r.version ?? ""),
     documentation: optString(r.documentation),
@@ -481,7 +477,10 @@ export function createHttpAdministrationClient() {
         options,
       );
     },
-    listModuleReferences(moduleId: string, options?: AdministrationClientRequestOptions) {
+    listModuleReferences(
+      moduleId: string,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestCollection(
         `${API_BASE}/modules/${encodeURIComponent(moduleId)}/references`,
         mapReference,
@@ -499,7 +498,10 @@ export function createHttpAdministrationClient() {
         options,
       ).then(mapCategory);
     },
-    createCategory(input: Record<string, unknown>, options?: AdministrationClientRequestOptions) {
+    createCategory(
+      input: Record<string, unknown>,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/categories`,
         { method: "POST", body: JSON.stringify(input) },
@@ -528,7 +530,10 @@ export function createHttpAdministrationClient() {
         options,
       ).then(mapSection);
     },
-    createSection(input: Record<string, unknown>, options?: AdministrationClientRequestOptions) {
+    createSection(
+      input: Record<string, unknown>,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/sections`,
         { method: "POST", body: JSON.stringify(input) },
@@ -557,7 +562,10 @@ export function createHttpAdministrationClient() {
         options,
       ).then(mapAction);
     },
-    createAction(input: Record<string, unknown>, options?: AdministrationClientRequestOptions) {
+    createAction(
+      input: Record<string, unknown>,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/actions`,
         { method: "POST", body: JSON.stringify(input) },
@@ -586,7 +594,10 @@ export function createHttpAdministrationClient() {
         options,
       ).then(mapPermission);
     },
-    createPermission(input: Record<string, unknown>, options?: AdministrationClientRequestOptions) {
+    createPermission(
+      input: Record<string, unknown>,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/permissions`,
         { method: "POST", body: JSON.stringify(input) },
@@ -608,14 +619,20 @@ export function createHttpAdministrationClient() {
     listRegistrations(options?: AdministrationClientRequestOptions) {
       return requestCollection(`${API_BASE}/registrations`, mapRegistration, options);
     },
-    getRegistration(registrationId: string, options?: AdministrationClientRequestOptions) {
+    getRegistration(
+      registrationId: string,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/registrations/${encodeURIComponent(registrationId)}`,
         { method: "GET" },
         options,
       ).then(mapRegistration);
     },
-    createRegistration(input: Record<string, unknown>, options?: AdministrationClientRequestOptions) {
+    createRegistration(
+      input: Record<string, unknown>,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/registrations`,
         { method: "POST", body: JSON.stringify(input) },
@@ -644,7 +661,10 @@ export function createHttpAdministrationClient() {
         options,
       ).then(mapPolicy);
     },
-    createPolicy(input: Record<string, unknown>, options?: AdministrationClientRequestOptions) {
+    createPolicy(
+      input: Record<string, unknown>,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/policies`,
         { method: "POST", body: JSON.stringify(input) },
@@ -673,7 +693,10 @@ export function createHttpAdministrationClient() {
         options,
       ).then(mapCapability);
     },
-    createCapability(input: Record<string, unknown>, options?: AdministrationClientRequestOptions) {
+    createCapability(
+      input: Record<string, unknown>,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/capabilities`,
         { method: "POST", body: JSON.stringify(input) },
@@ -702,7 +725,10 @@ export function createHttpAdministrationClient() {
         options,
       ).then(mapNavigation);
     },
-    createNavigation(input: Record<string, unknown>, options?: AdministrationClientRequestOptions) {
+    createNavigation(
+      input: Record<string, unknown>,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/navigations`,
         { method: "POST", body: JSON.stringify(input) },
@@ -731,7 +757,10 @@ export function createHttpAdministrationClient() {
         options,
       ).then(mapShortcut);
     },
-    createShortcut(input: Record<string, unknown>, options?: AdministrationClientRequestOptions) {
+    createShortcut(
+      input: Record<string, unknown>,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/shortcuts`,
         { method: "POST", body: JSON.stringify(input) },
@@ -760,7 +789,10 @@ export function createHttpAdministrationClient() {
         options,
       ).then(mapDashboard);
     },
-    createDashboard(input: Record<string, unknown>, options?: AdministrationClientRequestOptions) {
+    createDashboard(
+      input: Record<string, unknown>,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/dashboards`,
         { method: "POST", body: JSON.stringify(input) },
@@ -830,7 +862,10 @@ export function createHttpAdministrationClient() {
         options,
       ).then(mapMetadata);
     },
-    createMetadata(input: Record<string, unknown>, options?: AdministrationClientRequestOptions) {
+    createMetadata(
+      input: Record<string, unknown>,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/metadata`,
         { method: "POST", body: JSON.stringify(input) },
@@ -863,7 +898,10 @@ export function createHttpAdministrationClient() {
         options,
       ).then(mapReference);
     },
-    createReference(input: Record<string, unknown>, options?: AdministrationClientRequestOptions) {
+    createReference(
+      input: Record<string, unknown>,
+      options?: AdministrationClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/references`,
         { method: "POST", body: JSON.stringify(input) },

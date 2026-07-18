@@ -39,12 +39,12 @@ Entities: Release, ReleaseCandidate, ReleasePackage, ReleaseScope, ReleaseApprov
 
 ## Testing
 
-| Suite | Result |
-| ----- | ------ |
-| Domain release-governance | green (coverage **99.38%** lines) |
-| Persistence release-governance | green |
-| Platform release-governance | green |
-| Combined focused | **24+** tests |
+| Suite                          | Result                            |
+| ------------------------------ | --------------------------------- |
+| Domain release-governance      | green (coverage **99.38%** lines) |
+| Persistence release-governance | green                             |
+| Platform release-governance    | green                             |
+| Combined focused               | **24+** tests                     |
 
 ## Coverage
 
@@ -52,13 +52,13 @@ Domain folder: **99.38%** statements/lines, **100%** functions, **91.56%** branc
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| typecheck (contracts/persistence/services) | PASS |
-| tests (014 suites) | PASS |
-| coverage | PASS ≥95% |
-| architecture / boundary | PASS (no HTTP/UI) |
-| authorization mappings | PASS |
+| Gate                                       | Result            |
+| ------------------------------------------ | ----------------- |
+| typecheck (contracts/persistence/services) | PASS              |
+| tests (014 suites)                         | PASS              |
+| coverage                                   | PASS ≥95%         |
+| architecture / boundary                    | PASS (no HTTP/UI) |
+| authorization mappings                     | PASS              |
 
 ## Technical Debt
 

@@ -178,14 +178,9 @@ export async function handleListNotifications(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const query = parseQuery(
-    notificationsListQuerySchema,
-    request.nextUrl.searchParams,
-  );
+  const query = parseQuery(notificationsListQuerySchema, request.nextUrl.searchParams);
   const gateway = await requireNotificationGateway();
-  const items = await gateway.notification.notifications.list(
-    context.serviceContext,
-  );
+  const items = await gateway.notification.notifications.list(context.serviceContext);
   const filtered = filterNotifications(items, query);
   const limit = resolvePageLimit(query);
   return collection(pageSlice(filtered, limit), context, limit);
@@ -400,9 +395,7 @@ export async function handleListNotificationTemplates(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await requireNotificationGateway();
-  const items = await gateway.notification.templates.list(
-    context.serviceContext,
-  );
+  const items = await gateway.notification.templates.list(context.serviceContext);
   return collection(items, context);
 }
 
@@ -416,15 +409,10 @@ export async function handleCreateNotificationTemplate(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireNotificationGateway();
-  const result = await gateway.notification.templates.create(
-    context.serviceContext,
-    {
-      ...body,
-      categoryId: body.categoryId
-        ? asNotificationCategoryId(body.categoryId)
-        : undefined,
-    },
-  );
+  const result = await gateway.notification.templates.create(context.serviceContext, {
+    ...body,
+    categoryId: body.categoryId ? asNotificationCategoryId(body.categoryId) : undefined,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -458,25 +446,22 @@ export async function handleUpdateNotificationTemplate(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireNotificationGateway();
-  const result = await gateway.notification.templates.update(
-    context.serviceContext,
-    {
-      templateId,
-      name: body.name,
-      description: body.description,
-      categoryId:
-        body.categoryId === undefined
-          ? undefined
-          : body.categoryId === null
-            ? null
-            : asNotificationCategoryId(body.categoryId),
-      defaultPriority: body.defaultPriority,
-      defaultChannelKinds: body.defaultChannelKinds,
-      subjectTemplate: body.subjectTemplate,
-      bodyTemplate: body.bodyTemplate,
-      locale: body.locale,
-    },
-  );
+  const result = await gateway.notification.templates.update(context.serviceContext, {
+    templateId,
+    name: body.name,
+    description: body.description,
+    categoryId:
+      body.categoryId === undefined
+        ? undefined
+        : body.categoryId === null
+          ? null
+          : asNotificationCategoryId(body.categoryId),
+    defaultPriority: body.defaultPriority,
+    defaultChannelKinds: body.defaultChannelKinds,
+    subjectTemplate: body.subjectTemplate,
+    bodyTemplate: body.bodyTemplate,
+    locale: body.locale,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -525,9 +510,7 @@ export async function handleListNotificationPreferences(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await requireNotificationGateway();
-  const items = await gateway.notification.preferences.list(
-    context.serviceContext,
-  );
+  const items = await gateway.notification.preferences.list(context.serviceContext);
   return collection(items, context);
 }
 
@@ -537,11 +520,7 @@ export async function handleGetNotificationPreference(
   routeContext?: RouteContext,
 ) {
   const preferenceId = asNotificationPreferenceId(
-    await param(
-      routeContext,
-      "preferenceId",
-      notificationPreferenceIdParamSchema,
-    ),
+    await param(routeContext, "preferenceId", notificationPreferenceIdParamSchema),
   );
   const gateway = await requireNotificationGateway();
   const result = await gateway.notification.preferences.get(
@@ -557,11 +536,7 @@ export async function handleUpdateNotificationPreference(
   routeContext?: RouteContext,
 ) {
   const preferenceId = asNotificationPreferenceId(
-    await param(
-      routeContext,
-      "preferenceId",
-      notificationPreferenceIdParamSchema,
-    ),
+    await param(routeContext, "preferenceId", notificationPreferenceIdParamSchema),
   );
   const body = await parseJsonBody(
     request,
@@ -569,21 +544,18 @@ export async function handleUpdateNotificationPreference(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireNotificationGateway();
-  const result = await gateway.notification.preferences.update(
-    context.serviceContext,
-    {
-      preferenceId,
-      enabled: body.enabled,
-      quietHours: body.quietHours,
-      categoryId:
-        body.categoryId === undefined
-          ? undefined
-          : body.categoryId === null
-            ? null
-            : asNotificationCategoryId(body.categoryId),
-      channelKind: body.channelKind,
-    },
-  );
+  const result = await gateway.notification.preferences.update(context.serviceContext, {
+    preferenceId,
+    enabled: body.enabled,
+    quietHours: body.quietHours,
+    categoryId:
+      body.categoryId === undefined
+        ? undefined
+        : body.categoryId === null
+          ? null
+          : asNotificationCategoryId(body.categoryId),
+    channelKind: body.channelKind,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -596,9 +568,7 @@ export async function handleListNotificationCategories(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await requireNotificationGateway();
-  const items = await gateway.notification.categories.list(
-    context.serviceContext,
-  );
+  const items = await gateway.notification.categories.list(context.serviceContext);
   return collection(items, context);
 }
 
@@ -629,9 +599,7 @@ export async function handleListNotificationChannels(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await requireNotificationGateway();
-  const items = await gateway.notification.channels.list(
-    context.serviceContext,
-  );
+  const items = await gateway.notification.channels.list(context.serviceContext);
   return collection(
     items.map((channel) => ({
       ...channel,
@@ -777,10 +745,7 @@ export async function handleGetNotificationAuditEntry(
     await param(routeContext, "auditId", notificationAuditIdParamSchema),
   );
   const gateway = await requireNotificationGateway();
-  const result = await gateway.notification.audit.get(
-    context.serviceContext,
-    auditId,
-  );
+  const result = await gateway.notification.audit.get(context.serviceContext, auditId);
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -822,14 +787,11 @@ export async function handleGetNotificationHealth(
 ) {
   const gateway = await requireNotificationGateway();
   const bootstrap = await getPlatformApiGatewayBootstrap();
-  const health = await gateway.notification.diagnostics.health(
-    context.serviceContext,
-  );
+  const health = await gateway.notification.diagnostics.health(context.serviceContext);
   const plane = buildNotificationManagementPlaneDto({
     notificationEnabled: true,
     persistenceMode:
-      health.persistenceMode ??
-      bootstrap.notificationReadiness?.persistenceMode,
+      health.persistenceMode ?? bootstrap.notificationReadiness?.persistenceMode,
   });
   return jsonDataResponse(
     {
@@ -859,8 +821,7 @@ export async function handleGetNotificationReadiness(
   const plane = buildNotificationManagementPlaneDto({
     notificationEnabled: true,
     persistenceMode:
-      readiness.persistenceMode ??
-      bootstrap.notificationReadiness?.persistenceMode,
+      readiness.persistenceMode ?? bootstrap.notificationReadiness?.persistenceMode,
   });
   return jsonDataResponse(
     {
@@ -892,8 +853,7 @@ export async function handleGetNotificationDiagnostics(
   const plane = buildNotificationManagementPlaneDto({
     notificationEnabled: true,
     persistenceMode:
-      health.persistenceMode ??
-      bootstrap.notificationReadiness?.persistenceMode,
+      health.persistenceMode ?? bootstrap.notificationReadiness?.persistenceMode,
   });
   return jsonDataResponse(
     {

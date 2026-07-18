@@ -21,36 +21,36 @@ support.{resource}.{action}
 
 Special key: `platform.impersonation.use`
 
-| Capability | Meaning |
-|------------|---------|
-| `workspace` | Workspace service operations |
-| `project` | Project (and nested status/label) operations |
-| `task` | Task operations (OSS-110-08) |
-| `team` | Team operations |
-| `user` | User directory operations |
-| `search` | Unified search execution |
-| `administration` | Platform administration surfaces |
-| `provider` | Provider management |
-| `mapping` | Entity-mapping administration |
-| `support.*` | Support domain (requests, articles, organizations, groups, users, search, analytics) |
+| Capability       | Meaning                                                                              |
+| ---------------- | ------------------------------------------------------------------------------------ |
+| `workspace`      | Workspace service operations                                                         |
+| `project`        | Project (and nested status/label) operations                                         |
+| `task`           | Task operations (OSS-110-08)                                                         |
+| `team`           | Team operations                                                                      |
+| `user`           | User directory operations                                                            |
+| `search`         | Unified search execution                                                             |
+| `administration` | Platform administration surfaces                                                     |
+| `provider`       | Provider management                                                                  |
+| `mapping`        | Entity-mapping administration                                                        |
+| `support.*`      | Support domain (requests, articles, organizations, groups, users, search, analytics) |
 
-| Action | Meaning |
-|--------|---------|
-| `list` | Enumerate collections |
-| `read` | Read a single resource |
-| `create` | Create |
-| `update` | Update |
-| `archive` | Soft-retire / archive |
-| `delete` | Hard delete where exposed |
-| `manage` | Broad operational manage |
-| `administer` | Administrative control |
-| `execute` | Run a capability (search) |
-| `transition` | Task state transition |
-| `assign` | Task assignee mutation |
-| `label` | Task label mutation |
-| `schedule` | Sprint/schedule association |
-| `organise` | Module organisation |
-| `parent` | Parent-task relationship |
+| Action       | Meaning                     |
+| ------------ | --------------------------- |
+| `list`       | Enumerate collections       |
+| `read`       | Read a single resource      |
+| `create`     | Create                      |
+| `update`     | Update                      |
+| `archive`    | Soft-retire / archive       |
+| `delete`     | Hard delete where exposed   |
+| `manage`     | Broad operational manage    |
+| `administer` | Administrative control      |
+| `execute`    | Run a capability (search)   |
+| `transition` | Task state transition       |
+| `assign`     | Task assignee mutation      |
+| `label`      | Task label mutation         |
+| `schedule`   | Sprint/schedule association |
+| `organise`   | Module organisation         |
+| `parent`     | Parent-task relationship    |
 
 Keys are deterministic, documented, and extensible. Do not invent free-form strings for gateway operations when a catalogue entry exists.
 
@@ -104,12 +104,12 @@ Keys are deterministic, documented, and extensible. Do not invent free-form stri
 
 Uses established APZHUB roles from `@apzhub/platform-authorization` seed (not Plane roles):
 
-| Role (typical) | Intent |
-|----------------|--------|
+| Role (typical)         | Intent                                        |
+| ---------------------- | --------------------------------------------- |
 | Platform administrator | Governed override for catalogued platform ops |
-| Administrator | Broad tenant administration grants |
-| Manager | Elevated operational grants |
-| Standard user | Least-privilege operational grants |
+| Administrator          | Broad tenant administration grants            |
+| Manager                | Elevated operational grants                   |
+| Standard user          | Least-privilege operational grants            |
 
 Exact grants live in authorization seed / persistence. Resolution precedence is defined in ADR-0050.
 

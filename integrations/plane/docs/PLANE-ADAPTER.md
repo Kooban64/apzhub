@@ -16,33 +16,33 @@ Production Plane CE integration adapter and **APZHUB Projects provider**. Extend
 
 ### Adapter lifecycle
 
-| Export | Description |
-|--------|-------------|
-| `PlaneAdapter` | Production adapter class |
-| `createPlaneAdapter` | Factory — builds context, registers capabilities, initialises |
-| `disposePlaneAdapter` | Graceful disposal via `AdapterFactory` |
-| `createPlaneBootstrapConfiguration` | Manifest + connection bootstrap |
+| Export                              | Description                                                   |
+| ----------------------------------- | ------------------------------------------------------------- |
+| `PlaneAdapter`                      | Production adapter class                                      |
+| `createPlaneAdapter`                | Factory — builds context, registers capabilities, initialises |
+| `disposePlaneAdapter`               | Graceful disposal via `AdapterFactory`                        |
+| `createPlaneBootstrapConfiguration` | Manifest + connection bootstrap                               |
 
 ### Core services (`adapter.core`)
 
-| Service | Access | Operations |
-|---------|--------|------------|
-| Workspaces | `adapter.core.workspaces` | list, get |
-| Projects | `adapter.core.projects` | list, get, create, update, archive |
-| Project States | `adapter.core.projectStates` | list, get, create, update, delete |
-| Labels | `adapter.core.labels` | list, get, create, update, delete |
-| Cycles (Sprints) | `adapter.core.cycles` | list, get, create, update, archive |
-| Modules | `adapter.core.modules` | list, get, create, update, archive |
-| Members | `adapter.core.members` | list, get, add, update, remove |
-| **Tasks** | `adapter.core.tasks` | list, get, create, update, archive, transition, assign/labels/cycle/module |
-| **Comments** | `adapter.core.comments` | list, get, create, update, delete |
-| **Activity** | `adapter.core.activity` | list, listTaskActivity, listProjectActivity |
-| **Watchers** | `adapter.core.watchers` | list, add, remove |
-| **Analytics** | `adapter.core.analytics` | project/task stats, cycle progress, velocity, burndown |
-| **Webhooks** | `adapter.core.webhooks` | list, get, create, update, delete, validate |
-| **Events** | `adapter.core.events` | translate Plane payloads → canonical events |
-| **Synchronisation** | `adapter.core.synchronisation` | full / incremental sync, status, resume, safe restart |
-| **Operations** | `adapter.operations` | certification, compatibility, readiness, health, reports |
+| Service             | Access                         | Operations                                                                 |
+| ------------------- | ------------------------------ | -------------------------------------------------------------------------- |
+| Workspaces          | `adapter.core.workspaces`      | list, get                                                                  |
+| Projects            | `adapter.core.projects`        | list, get, create, update, archive                                         |
+| Project States      | `adapter.core.projectStates`   | list, get, create, update, delete                                          |
+| Labels              | `adapter.core.labels`          | list, get, create, update, delete                                          |
+| Cycles (Sprints)    | `adapter.core.cycles`          | list, get, create, update, archive                                         |
+| Modules             | `adapter.core.modules`         | list, get, create, update, archive                                         |
+| Members             | `adapter.core.members`         | list, get, add, update, remove                                             |
+| **Tasks**           | `adapter.core.tasks`           | list, get, create, update, archive, transition, assign/labels/cycle/module |
+| **Comments**        | `adapter.core.comments`        | list, get, create, update, delete                                          |
+| **Activity**        | `adapter.core.activity`        | list, listTaskActivity, listProjectActivity                                |
+| **Watchers**        | `adapter.core.watchers`        | list, add, remove                                                          |
+| **Analytics**       | `adapter.core.analytics`       | project/task stats, cycle progress, velocity, burndown                     |
+| **Webhooks**        | `adapter.core.webhooks`        | list, get, create, update, delete, validate                                |
+| **Events**          | `adapter.core.events`          | translate Plane payloads → canonical events                                |
+| **Synchronisation** | `adapter.core.synchronisation` | full / incremental sync, status, resume, safe restart                      |
+| **Operations**      | `adapter.operations`           | certification, compatibility, readiness, health, reports                   |
 
 See [PLANE-TASK-SERVICE.md](./PLANE-TASK-SERVICE.md), [PLANE-COLLABORATION-INTELLIGENCE.md](./PLANE-COLLABORATION-INTELLIGENCE.md), [PLANE-SYNC-EVENTS.md](./PLANE-SYNC-EVENTS.md), and [PLANE-OPERATIONS.md](./PLANE-OPERATIONS.md).
 
@@ -53,7 +53,11 @@ Canonical APZHUB DTOs live in `@apzhub/platform-service-contracts`. This package
 **Preferred import for new code:**
 
 ```typescript
-import type { Task, Comment, ProjectStatistics } from "@apzhub/platform-service-contracts";
+import type {
+  Task,
+  Comment,
+  ProjectStatistics,
+} from "@apzhub/platform-service-contracts";
 ```
 
 ### Capability discovery
@@ -119,14 +123,14 @@ const report = await adapter.buildOperationalReport(ctx);
 
 ## Cross-cutting behaviour
 
-| Concern | Implementation |
-|---------|----------------|
-| Logging | `IntegrationLogger` via `PlaneOperationRunner` |
-| Metrics | SDK `IntegrationMetrics` + `MetricsProvider` |
-| Errors | `PlaneVendorErrorMapper` → platform categories (incl. webhook/sync/event) |
-| Resilience | SDK circuit breaker |
-| Validation | Request + response validators per operation |
-| Mapping | Plane records → APZHUB canonical models |
+| Concern     | Implementation                                                                                 |
+| ----------- | ---------------------------------------------------------------------------------------------- |
+| Logging     | `IntegrationLogger` via `PlaneOperationRunner`                                                 |
+| Metrics     | SDK `IntegrationMetrics` + `MetricsProvider`                                                   |
+| Errors      | `PlaneVendorErrorMapper` → platform categories (incl. webhook/sync/event)                      |
+| Resilience  | SDK circuit breaker                                                                            |
+| Validation  | Request + response validators per operation                                                    |
+| Mapping     | Plane records → APZHUB canonical models                                                        |
 | Diagnostics | `taskCapability` + `collaborationCapability` + `syncEventsCapability` + `operationsCapability` |
 
 Provisional IDs use `*_plane_{engineId}` until platform mapping store resolves them.

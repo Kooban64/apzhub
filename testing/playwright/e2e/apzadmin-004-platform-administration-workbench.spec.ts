@@ -213,10 +213,7 @@ async function mockAdministrationHttpApi(page: Page) {
       return;
     }
 
-    if (
-      path.includes("/modules/mod_pw") ||
-      path.match(/\/modules\/[^/]+$/)
-    ) {
+    if (path.includes("/modules/mod_pw") || path.match(/\/modules\/[^/]+$/)) {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -241,9 +238,7 @@ async function mockAdministrationHttpApi(page: Page) {
 }
 
 test.describe("APZADMIN-004 Administration Workbench", () => {
-  test("opens overview with unavailable capability banners", async ({
-    page,
-  }) => {
+  test("opens overview with unavailable capability banners", async ({ page }) => {
     await mockAdministrationHttpApi(page);
     await signIn(page);
     await page.goto(`${ADMINISTRATION_HOME}/overview`);
@@ -256,14 +251,12 @@ test.describe("APZADMIN-004 Administration Workbench", () => {
     await expect(
       page.getByTestId("card-unavailable-runtime-administration"),
     ).toContainText("Unavailable");
-    await expect(
-      page.getByTestId("card-unavailable-user-management"),
-    ).toContainText("Unavailable");
+    await expect(page.getByTestId("card-unavailable-user-management")).toContainText(
+      "Unavailable",
+    );
   });
 
-  test("browses modules capabilities permissions registrations", async ({
-    page,
-  }) => {
+  test("browses modules capabilities permissions registrations", async ({ page }) => {
     await mockAdministrationHttpApi(page);
     await signIn(page);
 
@@ -284,9 +277,7 @@ test.describe("APZADMIN-004 Administration Workbench", () => {
     );
   });
 
-  test("navigates navigation dashboards audit diagnostics", async ({
-    page,
-  }) => {
+  test("navigates navigation dashboards audit diagnostics", async ({ page }) => {
     await mockAdministrationHttpApi(page);
     await signIn(page);
 
@@ -303,11 +294,7 @@ test.describe("APZADMIN-004 Administration Workbench", () => {
 
     await page.goto(`${ADMINISTRATION_HOME}/diagnostics`);
     await expect(page.getByTestId("diag-runtime")).toContainText("Unavailable");
-    await expect(page.getByTestId("diag-event-bus")).toContainText(
-      "Unavailable",
-    );
-    await expect(page.getByTestId("banner-health")).toContainText(
-      "NO LIVE PROBE",
-    );
+    await expect(page.getByTestId("diag-event-bus")).toContainText("Unavailable");
+    await expect(page.getByTestId("banner-health")).toContainText("NO LIVE PROBE");
   });
 });

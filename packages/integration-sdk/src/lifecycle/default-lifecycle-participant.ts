@@ -24,11 +24,14 @@ export class DefaultLifecycleParticipant implements IntegrationLifecycleParticip
   constructor(options: DefaultLifecycleParticipantOptions) {
     this.integrationId = options.integrationId;
     this.lifecycleState = options.initialState ?? "registered";
-    this.lifecycleService = options.lifecycleService ?? new IntegrationAdapterLifecycleService();
+    this.lifecycleService =
+      options.lifecycleService ?? new IntegrationAdapterLifecycleService();
     this.healthProvider = options.healthProvider;
   }
 
-  async onEnable(context: IntegrationLifecycleContext): Promise<IntegrationLifecycleResult> {
+  async onEnable(
+    context: IntegrationLifecycleContext,
+  ): Promise<IntegrationLifecycleResult> {
     const previousState = this.lifecycleState;
     const enableTarget = this.lifecycleService.resolveEnableTarget(previousState);
     const enableTransition = this.lifecycleService.transition({
@@ -63,7 +66,10 @@ export class DefaultLifecycleParticipant implements IntegrationLifecycleParticip
       degraded = health.status === "degraded" || health.status === "unavailable";
     }
 
-    const readyTarget = this.lifecycleService.resolveReadyTarget(this.lifecycleState, degraded);
+    const readyTarget = this.lifecycleService.resolveReadyTarget(
+      this.lifecycleState,
+      degraded,
+    );
     const readyTransition = this.lifecycleService.transition({
       integrationId: this.integrationId,
       from: this.lifecycleState,
@@ -95,7 +101,9 @@ export class DefaultLifecycleParticipant implements IntegrationLifecycleParticip
     };
   }
 
-  async onDisable(context: IntegrationLifecycleContext): Promise<IntegrationLifecycleResult> {
+  async onDisable(
+    context: IntegrationLifecycleContext,
+  ): Promise<IntegrationLifecycleResult> {
     const previousState = this.lifecycleState;
     const disableTarget = this.lifecycleService.resolveDisableTarget();
     const transition = this.lifecycleService.transition({
@@ -125,7 +133,9 @@ export class DefaultLifecycleParticipant implements IntegrationLifecycleParticip
     };
   }
 
-  async onShutdown(context: IntegrationLifecycleContext): Promise<IntegrationLifecycleResult> {
+  async onShutdown(
+    context: IntegrationLifecycleContext,
+  ): Promise<IntegrationLifecycleResult> {
     const previousState = this.lifecycleState;
     const shutdownTarget = this.lifecycleService.resolveShutdownTarget(previousState);
     const firstTransition = this.lifecycleService.transition({

@@ -44,10 +44,7 @@ export const platformEntityMapping = pgTable(
       "platform_entity_mapping_status_chk",
       sql`${table.status} in ('active','inactive','pending','orphaned')`,
     ),
-    check(
-      "platform_entity_mapping_revision_chk",
-      sql`${table.revision} >= 1`,
-    ),
+    check("platform_entity_mapping_revision_chk", sql`${table.revision} >= 1`),
     /**
      * Uniqueness boundary (active/pending only):
      * (tenant_id, entity_type, provider_id, provider_native_id)
@@ -57,7 +54,10 @@ export const platformEntityMapping = pgTable(
       .on(table.tenantId, table.entityType, table.providerId, table.providerNativeId)
       .where(sql`${table.status} in ('active', 'pending')`),
     index("platform_entity_mapping_tenant_idx").on(table.tenantId),
-    index("platform_entity_mapping_tenant_org_idx").on(table.tenantId, table.organisationId),
+    index("platform_entity_mapping_tenant_org_idx").on(
+      table.tenantId,
+      table.organisationId,
+    ),
     index("platform_entity_mapping_provider_idx").on(table.providerId),
     index("platform_entity_mapping_integration_idx").on(table.integrationId),
     index("platform_entity_mapping_entity_type_idx").on(table.entityType),

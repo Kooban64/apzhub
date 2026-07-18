@@ -58,10 +58,8 @@ import type { AdministrationSection } from "@/lib/administration/routes";
 
 const METADATA_BANNER =
   "ADMINISTRATION METADATA ONLY — RUNTIME ADMINISTRATION IS NOT AVAILABLE";
-const REGISTRATION_BANNER =
-  "REGISTRATION METADATA ONLY — NO SERVICE PROVISIONING";
-const ACTION_BANNER =
-  "ACTION CATALOGUE ONLY — RUNTIME EXECUTION IS NOT AVAILABLE";
+const REGISTRATION_BANNER = "REGISTRATION METADATA ONLY — NO SERVICE PROVISIONING";
+const ACTION_BANNER = "ACTION CATALOGUE ONLY — RUNTIME EXECUTION IS NOT AVAILABLE";
 const PERMISSION_BANNER =
   "PERMISSION CATALOGUE — ACCESS ASSIGNMENT IS OUTSIDE THIS MILESTONE";
 const DASHBOARD_BANNER =
@@ -217,9 +215,7 @@ function StatusCard({
       <p className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">
         {label}
       </p>
-      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">
-        {value}
-      </p>
+      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">{value}</p>
     </div>
   );
 }
@@ -268,9 +264,7 @@ function MetaTable({
               key={row.id}
               className={[
                 "border-b border-[var(--color-border)]",
-                onRowClick
-                  ? "cursor-pointer hover:bg-[var(--color-muted)]/30"
-                  : "",
+                onRowClick ? "cursor-pointer hover:bg-[var(--color-muted)]/30" : "",
                 selectedId === row.id ? "bg-[var(--color-muted)]/40" : "",
               ].join(" ")}
               onClick={onRowClick ? () => onRowClick(row.id) : undefined}
@@ -355,7 +349,11 @@ function filterByText<T extends Record<string, unknown>>(
   const q = query.trim().toLowerCase();
   if (!q) return [...items];
   return items.filter((item) =>
-    fields.some((field) => String(item[field] ?? "").toLowerCase().includes(q)),
+    fields.some((field) =>
+      String(item[field] ?? "")
+        .toLowerCase()
+        .includes(q),
+    ),
   );
 }
 
@@ -430,8 +428,7 @@ const SECTION_META: Record<
   },
   diagnostics: {
     title: "Diagnostics",
-    description:
-      "Management-plane health and capabilities — live probes unavailable.",
+    description: "Management-plane health and capabilities — live probes unavailable.",
   },
 };
 
@@ -448,36 +445,20 @@ export function PlatformAdministrationView({
   const [statusFilter, setStatusFilter] = useState("");
   const [textFilter, setTextFilter] = useState("");
   const [selectedModuleId, setSelectedModuleId] = useState<string | null>(null);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
+  const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
+  const [selectedRegistrationId, setSelectedRegistrationId] = useState<string | null>(
     null,
   );
-  const [selectedSectionId, setSelectedSectionId] = useState<string | null>(
-    null,
-  );
-  const [selectedRegistrationId, setSelectedRegistrationId] = useState<
-    string | null
-  >(null);
-  const [selectedCapabilityId, setSelectedCapabilityId] = useState<
-    string | null
-  >(null);
+  const [selectedCapabilityId, setSelectedCapabilityId] = useState<string | null>(null);
   const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
-  const [selectedPermissionId, setSelectedPermissionId] = useState<
-    string | null
-  >(null);
+  const [selectedPermissionId, setSelectedPermissionId] = useState<string | null>(null);
   const [selectedPolicyId, setSelectedPolicyId] = useState<string | null>(null);
-  const [selectedNavigationId, setSelectedNavigationId] = useState<
-    string | null
-  >(null);
-  const [selectedShortcutId, setSelectedShortcutId] = useState<string | null>(
-    null,
-  );
-  const [selectedDashboardId, setSelectedDashboardId] = useState<string | null>(
-    null,
-  );
+  const [selectedNavigationId, setSelectedNavigationId] = useState<string | null>(null);
+  const [selectedShortcutId, setSelectedShortcutId] = useState<string | null>(null);
+  const [selectedDashboardId, setSelectedDashboardId] = useState<string | null>(null);
   const [selectedWidgetId, setSelectedWidgetId] = useState<string | null>(null);
-  const [selectedReferenceId, setSelectedReferenceId] = useState<string | null>(
-    null,
-  );
+  const [selectedReferenceId, setSelectedReferenceId] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const [transitionTarget, setTransitionTarget] = useState("enabled");
@@ -488,14 +469,10 @@ export function PlatformAdministrationView({
       status: statusFilter || undefined,
     }),
     queryFn: ({ signal }) =>
-      listModules(
-        { status: statusFilter || undefined, limit: 100 },
-        { signal },
-      ),
+      listModules({ status: statusFilter || undefined, limit: 100 }, { signal }),
   });
 
-  const moduleId =
-    selectedModuleId ?? modulesQuery.data?.items[0]?.id ?? null;
+  const moduleId = selectedModuleId ?? modulesQuery.data?.items[0]?.id ?? null;
 
   const moduleDetailQuery = useQuery({
     queryKey: administrationQueryKeys.modules.detail(moduleId ?? ""),
@@ -507,13 +484,10 @@ export function PlatformAdministrationView({
     queryKey: administrationQueryKeys.categories.list(),
     queryFn: ({ signal }) => listCategories({ signal }),
     enabled:
-      section === "categories" ||
-      section === "overview" ||
-      section === "sections",
+      section === "categories" || section === "overview" || section === "sections",
   });
 
-  const categoryId =
-    selectedCategoryId ?? categoriesQuery.data?.items[0]?.id ?? null;
+  const categoryId = selectedCategoryId ?? categoriesQuery.data?.items[0]?.id ?? null;
   const categoryDetailQuery = useQuery({
     queryKey: administrationQueryKeys.categories.detail(categoryId ?? ""),
     queryFn: ({ signal }) => getCategory(categoryId!, { signal }),
@@ -526,8 +500,7 @@ export function PlatformAdministrationView({
     enabled: section === "sections" || section === "overview",
   });
 
-  const sectionId =
-    selectedSectionId ?? sectionsQuery.data?.items[0]?.id ?? null;
+  const sectionId = selectedSectionId ?? sectionsQuery.data?.items[0]?.id ?? null;
   const sectionDetailQuery = useQuery({
     queryKey: administrationQueryKeys.sections.detail(sectionId ?? ""),
     queryFn: ({ signal }) => getSection(sectionId!, { signal }),
@@ -543,9 +516,7 @@ export function PlatformAdministrationView({
   const registrationId =
     selectedRegistrationId ?? registrationsQuery.data?.items[0]?.id ?? null;
   const registrationDetailQuery = useQuery({
-    queryKey: administrationQueryKeys.registrations.detail(
-      registrationId ?? "",
-    ),
+    queryKey: administrationQueryKeys.registrations.detail(registrationId ?? ""),
     queryFn: ({ signal }) => getRegistration(registrationId!, { signal }),
     enabled: Boolean(registrationId) && section === "registrations",
   });
@@ -628,8 +599,7 @@ export function PlatformAdministrationView({
     enabled: section === "shortcuts",
   });
 
-  const shortcutId =
-    selectedShortcutId ?? shortcutsQuery.data?.items[0]?.id ?? null;
+  const shortcutId = selectedShortcutId ?? shortcutsQuery.data?.items[0]?.id ?? null;
   const shortcutDetailQuery = useQuery({
     queryKey: administrationQueryKeys.shortcuts.detail(shortcutId ?? ""),
     queryFn: ({ signal }) => getShortcut(shortcutId!, { signal }),
@@ -640,13 +610,10 @@ export function PlatformAdministrationView({
     queryKey: administrationQueryKeys.dashboards.list(),
     queryFn: ({ signal }) => listDashboards({ signal }),
     enabled:
-      section === "dashboards" ||
-      section === "widgets" ||
-      section === "overview",
+      section === "dashboards" || section === "widgets" || section === "overview",
   });
 
-  const dashboardId =
-    selectedDashboardId ?? dashboardsQuery.data?.items[0]?.id ?? null;
+  const dashboardId = selectedDashboardId ?? dashboardsQuery.data?.items[0]?.id ?? null;
   const dashboardDetailQuery = useQuery({
     queryKey: administrationQueryKeys.dashboards.detail(dashboardId ?? ""),
     queryFn: ({ signal }) => getDashboard(dashboardId!, { signal }),
@@ -656,7 +623,8 @@ export function PlatformAdministrationView({
   const widgetsQuery = useQuery({
     queryKey: administrationQueryKeys.widgets.list(dashboardId ?? ""),
     queryFn: ({ signal }) => listWidgets(dashboardId!, { signal }),
-    enabled: Boolean(dashboardId) && (section === "widgets" || section === "dashboards"),
+    enabled:
+      Boolean(dashboardId) && (section === "widgets" || section === "dashboards"),
   });
 
   const widgetId = selectedWidgetId ?? widgetsQuery.data?.items[0]?.id ?? null;
@@ -672,8 +640,7 @@ export function PlatformAdministrationView({
     enabled: Boolean(moduleId) && (section === "references" || section === "modules"),
   });
 
-  const referenceId =
-    selectedReferenceId ?? referencesQuery.data?.items[0]?.id ?? null;
+  const referenceId = selectedReferenceId ?? referencesQuery.data?.items[0]?.id ?? null;
   const referenceDetailQuery = useQuery({
     queryKey: administrationQueryKeys.references.detail(referenceId ?? ""),
     queryFn: ({ signal }) => getReference(referenceId!, { signal }),
@@ -695,10 +662,7 @@ export function PlatformAdministrationView({
   const managementCapsQuery = useQuery({
     queryKey: administrationQueryKeys.managementCapabilities(),
     queryFn: ({ signal }) => getManagementCapabilities({ signal }),
-    enabled:
-      section === "overview" ||
-      section === "diagnostics" ||
-      apiMetadataOpen,
+    enabled: section === "overview" || section === "diagnostics" || apiMetadataOpen,
   });
 
   const healthQuery = useQuery({
@@ -762,8 +726,8 @@ export function PlatformAdministrationView({
 
   const filteredModules = useMemo(
     () =>
-      filterByText(modules, textFilter, ["id", "key", "name", "status"]).sort(
-        (a, b) => a.name.localeCompare(b.name),
+      filterByText(modules, textFilter, ["id", "key", "name", "status"]).sort((a, b) =>
+        a.name.localeCompare(b.name),
       ),
     [modules, textFilter],
   );
@@ -771,9 +735,7 @@ export function PlatformAdministrationView({
   const openProduct = (key: string) => {
     const route = CANONICAL_PRODUCT_ROUTES[key];
     if (!route) {
-      setActionError(
-        "No canonical product route is registered for this module key.",
-      );
+      setActionError("No canonical product route is registered for this module key.");
       return;
     }
     router.push(route);
@@ -821,9 +783,7 @@ export function PlatformAdministrationView({
           onClick={() => {
             void copyText(moduleId)
               .then(() => setStatusMessage("Copied module ID"))
-              .catch((error) =>
-                setActionError(toAdministrationUserMessage(error)),
-              );
+              .catch((error) => setActionError(toAdministrationUserMessage(error)));
           }}
         >
           Copy ID
@@ -911,11 +871,7 @@ export function PlatformAdministrationView({
   }
 
   return (
-    <PageShell
-      title={meta.title}
-      description={meta.description}
-      actions={toolbar}
-    >
+    <PageShell title={meta.title} description={meta.description} actions={toolbar}>
       {statusMessage ? (
         <p
           className="text-sm text-[var(--color-foreground)]"
@@ -1019,9 +975,7 @@ export function PlatformAdministrationView({
             <StatusCard
               label="Management plane"
               value={
-                managementCapsQuery.data?.managementPlaneReady
-                  ? "Ready"
-                  : "Unavailable"
+                managementCapsQuery.data?.managementPlaneReady ? "Ready" : "Unavailable"
               }
             />
             <StatusCard
@@ -1038,9 +992,7 @@ export function PlatformAdministrationView({
               )}
             />
           </div>
-          {modulesQuery.isLoading ? (
-            <p role="status">Loading modules…</p>
-          ) : null}
+          {modulesQuery.isLoading ? <p role="status">Loading modules…</p> : null}
           {modulesQuery.isError ? (
             <ErrorState
               message={toAdministrationUserMessage(modulesQuery.error)}
@@ -1117,30 +1069,22 @@ export function PlatformAdministrationView({
                   <dd>{selectedModule.name}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Status
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Status</dt>
                   <dd data-testid="module-status">{selectedModule.status}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Revision
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Revision</dt>
                   <dd>{selectedModule.revision}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Description
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Description</dt>
                   <dd>{selectedModule.description ?? "—"}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Status model
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Status model</dt>
                   <dd data-testid="module-status-model">
-                    Registered · Enabled · Available · Healthy Metadata ·
-                    Certified · Production Ready
+                    Registered · Enabled · Available · Healthy Metadata · Certified ·
+                    Production Ready
                   </dd>
                 </div>
               </dl>
@@ -1172,10 +1116,7 @@ export function PlatformAdministrationView({
           <div>
             <h2 className="mb-2 text-lg font-medium">Category detail</h2>
             {categoryDetailQuery.data ? (
-              <dl
-                className="grid gap-2 text-sm"
-                data-testid="category-detail"
-              >
+              <dl className="grid gap-2 text-sm" data-testid="category-detail">
                 <div>
                   <dt className="text-[var(--color-muted-foreground)]">Name</dt>
                   <dd>{categoryDetailQuery.data.name}</dd>
@@ -1185,9 +1126,7 @@ export function PlatformAdministrationView({
                   <dd>{categoryDetailQuery.data.key}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Module
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Module</dt>
                   <dd>{categoryDetailQuery.data.moduleId ?? "—"}</dd>
                 </div>
               </dl>
@@ -1238,10 +1177,7 @@ export function PlatformAdministrationView({
 
       {section === "registrations" ? (
         <div className="flex flex-col gap-3">
-          <NoticeBanner
-            text={REGISTRATION_BANNER}
-            testId="banner-registration"
-          />
+          <NoticeBanner text={REGISTRATION_BANNER} testId="banner-registration" />
           {registrationsQuery.isLoading ? (
             <p role="status">Loading registrations…</p>
           ) : (registrationsQuery.data?.items.length ?? 0) === 0 ? (
@@ -1255,21 +1191,13 @@ export function PlatformAdministrationView({
                 onRowClick={setSelectedRegistrationId}
                 rows={(registrationsQuery.data?.items ?? []).map((item) => ({
                   id: item.id,
-                  cells: [
-                    item.id,
-                    item.moduleKey,
-                    item.version,
-                    item.status,
-                  ],
+                  cells: [item.id, item.moduleKey, item.version, item.status],
                 }))}
               />
               <div>
                 <h2 className="mb-2 text-lg font-medium">Registration detail</h2>
                 {registrationDetailQuery.data ? (
-                  <dl
-                    className="grid gap-2 text-sm"
-                    data-testid="registration-detail"
-                  >
+                  <dl className="grid gap-2 text-sm" data-testid="registration-detail">
                     <div>
                       <dt className="text-[var(--color-muted-foreground)]">
                         Module key
@@ -1277,15 +1205,11 @@ export function PlatformAdministrationView({
                       <dd>{registrationDetailQuery.data.moduleKey}</dd>
                     </div>
                     <div>
-                      <dt className="text-[var(--color-muted-foreground)]">
-                        Version
-                      </dt>
+                      <dt className="text-[var(--color-muted-foreground)]">Version</dt>
                       <dd>{registrationDetailQuery.data.version}</dd>
                     </div>
                     <div>
-                      <dt className="text-[var(--color-muted-foreground)]">
-                        Notes
-                      </dt>
+                      <dt className="text-[var(--color-muted-foreground)]">Notes</dt>
                       <dd>{registrationDetailQuery.data.notes ?? "—"}</dd>
                     </div>
                   </dl>
@@ -1312,12 +1236,7 @@ export function PlatformAdministrationView({
               onRowClick={setSelectedCapabilityId}
               rows={(capabilitiesQuery.data?.items ?? []).map((item) => ({
                 id: item.id,
-                cells: [
-                  item.id,
-                  item.key,
-                  item.name,
-                  item.enabled ? "yes" : "no",
-                ],
+                cells: [item.id, item.key, item.name, item.enabled ? "yes" : "no"],
               }))}
             />
           )}
@@ -1330,15 +1249,11 @@ export function PlatformAdministrationView({
                   <dd>{capabilityDetailQuery.data.name}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Enabled
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Enabled</dt>
                   <dd>{capabilityDetailQuery.data.enabled ? "yes" : "no"}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Available
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Available</dt>
                   <dd>{capabilityDetailQuery.data.available ? "yes" : "no"}</dd>
                 </div>
                 <div>
@@ -1348,26 +1263,19 @@ export function PlatformAdministrationView({
                   <dd>{capabilityDetailQuery.data.healthy ? "yes" : "no"}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Certified
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Certified</dt>
                   <dd>{capabilityDetailQuery.data.certified ? "yes" : "no"}</dd>
                 </div>
                 <div>
                   <dt className="text-[var(--color-muted-foreground)]">
                     Production ready
                   </dt>
-                  <dd>
-                    {capabilityDetailQuery.data.productionReady ? "yes" : "no"}
-                  </dd>
+                  <dd>{capabilityDetailQuery.data.productionReady ? "yes" : "no"}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Limitations
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Limitations</dt>
                   <dd>
-                    {(capabilityDetailQuery.data.limitations ?? []).join(", ") ||
-                      "—"}
+                    {(capabilityDetailQuery.data.limitations ?? []).join(", ") || "—"}
                   </dd>
                 </div>
               </dl>
@@ -1402,15 +1310,11 @@ export function PlatformAdministrationView({
                 {actionDetailQuery.data ? (
                   <dl className="grid gap-2 text-sm">
                     <div>
-                      <dt className="text-[var(--color-muted-foreground)]">
-                        Name
-                      </dt>
+                      <dt className="text-[var(--color-muted-foreground)]">Name</dt>
                       <dd>{actionDetailQuery.data.name}</dd>
                     </div>
                     <div>
-                      <dt className="text-[var(--color-muted-foreground)]">
-                        Kind
-                      </dt>
+                      <dt className="text-[var(--color-muted-foreground)]">Kind</dt>
                       <dd>{actionDetailQuery.data.kind}</dd>
                     </div>
                     <div>
@@ -1455,15 +1359,11 @@ export function PlatformAdministrationView({
                 {permissionDetailQuery.data ? (
                   <dl className="grid gap-2 text-sm">
                     <div>
-                      <dt className="text-[var(--color-muted-foreground)]">
-                        Key
-                      </dt>
+                      <dt className="text-[var(--color-muted-foreground)]">Key</dt>
                       <dd>{permissionDetailQuery.data.key}</dd>
                     </div>
                     <div>
-                      <dt className="text-[var(--color-muted-foreground)]">
-                        Name
-                      </dt>
+                      <dt className="text-[var(--color-muted-foreground)]">Name</dt>
                       <dd>{permissionDetailQuery.data.name}</dd>
                     </div>
                     <div>
@@ -1536,12 +1436,7 @@ export function PlatformAdministrationView({
               onRowClick={setSelectedNavigationId}
               rows={(navigationsQuery.data?.items ?? []).map((item) => ({
                 id: item.id,
-                cells: [
-                  item.id,
-                  item.key,
-                  item.label,
-                  item.routePath ?? "—",
-                ],
+                cells: [item.id, item.key, item.label, item.routePath ?? "—"],
               }))}
             />
           )}
@@ -1554,9 +1449,7 @@ export function PlatformAdministrationView({
                   <dd>{navigationDetailQuery.data.label}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Visibility
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Visibility</dt>
                   <dd>{navigationDetailQuery.data.visibility}</dd>
                 </div>
                 <div>
@@ -1612,9 +1505,7 @@ export function PlatformAdministrationView({
                   <dd>{shortcutDetailQuery.data.label}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--color-muted-foreground)]">
-                    Action
-                  </dt>
+                  <dt className="text-[var(--color-muted-foreground)]">Action</dt>
                   <dd>{shortcutDetailQuery.data.actionId ?? "—"}</dd>
                 </div>
               </dl>
@@ -1647,14 +1538,9 @@ export function PlatformAdministrationView({
               <div>
                 <h2 className="mb-2 text-lg font-medium">Dashboard detail</h2>
                 {dashboardDetailQuery.data ? (
-                  <dl
-                    className="grid gap-2 text-sm"
-                    data-testid="dashboard-detail"
-                  >
+                  <dl className="grid gap-2 text-sm" data-testid="dashboard-detail">
                     <div>
-                      <dt className="text-[var(--color-muted-foreground)]">
-                        Name
-                      </dt>
+                      <dt className="text-[var(--color-muted-foreground)]">Name</dt>
                       <dd>{dashboardDetailQuery.data.name}</dd>
                     </div>
                     <div>
@@ -1702,15 +1588,11 @@ export function PlatformAdministrationView({
                 {widgetDetailQuery.data ? (
                   <dl className="grid gap-2 text-sm" data-testid="widget-detail">
                     <div>
-                      <dt className="text-[var(--color-muted-foreground)]">
-                        Name
-                      </dt>
+                      <dt className="text-[var(--color-muted-foreground)]">Name</dt>
                       <dd>{widgetDetailQuery.data.name}</dd>
                     </div>
                     <div>
-                      <dt className="text-[var(--color-muted-foreground)]">
-                        Kind
-                      </dt>
+                      <dt className="text-[var(--color-muted-foreground)]">Kind</dt>
                       <dd>{widgetDetailQuery.data.kind}</dd>
                     </div>
                   </dl>
@@ -1740,31 +1622,19 @@ export function PlatformAdministrationView({
                 onRowClick={setSelectedReferenceId}
                 rows={(referencesQuery.data?.items ?? []).map((item) => ({
                   id: item.id,
-                  cells: [
-                    item.id,
-                    item.kind,
-                    item.resourceId,
-                    item.label ?? "—",
-                  ],
+                  cells: [item.id, item.kind, item.resourceId, item.label ?? "—"],
                 }))}
               />
               <div>
                 <h2 className="mb-2 text-lg font-medium">Reference detail</h2>
                 {referenceDetailQuery.data ? (
-                  <dl
-                    className="grid gap-2 text-sm"
-                    data-testid="reference-detail"
-                  >
+                  <dl className="grid gap-2 text-sm" data-testid="reference-detail">
                     <div>
-                      <dt className="text-[var(--color-muted-foreground)]">
-                        Kind
-                      </dt>
+                      <dt className="text-[var(--color-muted-foreground)]">Kind</dt>
                       <dd>{referenceDetailQuery.data.kind}</dd>
                     </div>
                     <div>
-                      <dt className="text-[var(--color-muted-foreground)]">
-                        Resource
-                      </dt>
+                      <dt className="text-[var(--color-muted-foreground)]">Resource</dt>
                       <dd>{referenceDetailQuery.data.resourceId}</dd>
                     </div>
                   </dl>
@@ -1790,12 +1660,7 @@ export function PlatformAdministrationView({
               columns={["ID", "Action", "Actor", "Created"]}
               rows={(auditQuery.data?.items ?? []).map((item) => ({
                 id: item.id,
-                cells: [
-                  item.id,
-                  item.action,
-                  item.actorUserId,
-                  item.createdAt,
-                ],
+                cells: [item.id, item.action, item.actorUserId, item.createdAt],
               }))}
             />
           )}
@@ -1817,12 +1682,7 @@ export function PlatformAdministrationView({
               columns={["ID", "Summary", "Actor", "Created"]}
               rows={(historyQuery.data?.items ?? []).map((item) => ({
                 id: item.id,
-                cells: [
-                  item.id,
-                  item.summary,
-                  item.actorUserId,
-                  item.createdAt,
-                ],
+                cells: [item.id, item.summary, item.actorUserId, item.createdAt],
               }))}
             />
           )}
@@ -1839,8 +1699,7 @@ export function PlatformAdministrationView({
               value={
                 (
                   diagnosticsQuery.data as
-                    | { administrationEnabled?: boolean }
-                    | undefined
+                    { administrationEnabled?: boolean } | undefined
                 )?.administrationEnabled
                   ? "Ready"
                   : "Unavailable"
@@ -1850,9 +1709,8 @@ export function PlatformAdministrationView({
             <StatusCard
               label="HTTP enabled"
               value={
-                (
-                  diagnosticsQuery.data as { httpEnabled?: boolean } | undefined
-                )?.httpEnabled
+                (diagnosticsQuery.data as { httpEnabled?: boolean } | undefined)
+                  ?.httpEnabled
                   ? "Ready"
                   : "Unavailable"
               }
@@ -1861,11 +1719,8 @@ export function PlatformAdministrationView({
             <StatusCard
               label="Workbench enabled"
               value={
-                (
-                  diagnosticsQuery.data as
-                    | { workbenchEnabled?: boolean }
-                    | undefined
-                )?.workbenchEnabled
+                (diagnosticsQuery.data as { workbenchEnabled?: boolean } | undefined)
+                  ?.workbenchEnabled
                   ? "Ready"
                   : "Unavailable"
               }

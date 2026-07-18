@@ -29,15 +29,15 @@ Single SoR for administration **metadata**. No distributed runtime admin control
 
 ## Operational boundaries (by design)
 
-| Capability | Status |
-| --- | --- |
-| Runtime administration | **RUNTIME ADMINISTRATION IS NOT AVAILABLE** |
-| User / role management | Not available |
-| Tenant / organisation management | Not available |
-| Provisioning | Not available |
-| Live infrastructure diagnostics | Not available |
-| Event Bus / AI administration | Not available |
-| Product ownership | Not available — metadata coordination only |
+| Capability                       | Status                                      |
+| -------------------------------- | ------------------------------------------- |
+| Runtime administration           | **RUNTIME ADMINISTRATION IS NOT AVAILABLE** |
+| User / role management           | Not available                               |
+| Tenant / organisation management | Not available                               |
+| Provisioning                     | Not available                               |
+| Live infrastructure diagnostics  | Not available                               |
+| Event Bus / AI administration    | Not available                               |
+| Product ownership                | Not available — metadata coordination only  |
 
 ## Monitoring expectations
 

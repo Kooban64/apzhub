@@ -20,11 +20,11 @@ This milestone does **not** send messages. It is not email, SMS, push, Teams, Sl
 Products → Notification Platform → (future Delivery Providers) → Email / SMS / Push / Teams / Slack / Webhook / Future
 ```
 
-| Layer | Package | Responsibility |
-| --- | --- | --- |
-| Contracts | `@apzhub/notification-contracts` **0.1.0** | Domain types, permission catalogue, service ports |
-| Core | `@apzhub/notification-core` **0.1.0** | Lifecycle transitions, validation, foundation factory |
-| Persistence | `@apzhub/notification-persistence` **0.1.0** | In-memory + PostgreSQL metadata repositories |
+| Layer       | Package                                      | Responsibility                                        |
+| ----------- | -------------------------------------------- | ----------------------------------------------------- |
+| Contracts   | `@apzhub/notification-contracts` **0.1.0**   | Domain types, permission catalogue, service ports     |
+| Core        | `@apzhub/notification-core` **0.1.0**        | Lifecycle transitions, validation, foundation factory |
+| Persistence | `@apzhub/notification-persistence` **0.1.0** | In-memory + PostgreSQL metadata repositories          |
 
 Contracts must not import core or persistence. Core must not import persistence.
 

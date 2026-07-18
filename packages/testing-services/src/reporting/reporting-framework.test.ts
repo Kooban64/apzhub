@@ -34,9 +34,7 @@ const ALL_PERMS = [
   "reporting.admin",
 ] as const;
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_1",
     userId: "user_1",
@@ -230,19 +228,15 @@ describe("ReportingService", () => {
 
     const listed = await reporting.listReportMetadata(ctx());
     expect(listed.length).toBeGreaterThanOrEqual(2);
-    const fetched = await reporting.getReportMetadata(
-      ctx(),
-      generated.metadata.id,
-    );
+    const fetched = await reporting.getReportMetadata(ctx(), generated.metadata.id);
     expect(fetched.id).toBe(generated.metadata.id);
   });
 
   it("registers custom templates and archives metadata", async () => {
     const { reporting } = services();
-    const custom: Omit<
-      ReportTemplate,
-      "builtin" | "createdAt" | "updatedAt" | "id"
-    > & { id?: string } = {
+    const custom: Omit<ReportTemplate, "builtin" | "createdAt" | "updatedAt" | "id"> & {
+      id?: string;
+    } = {
       id: "tmpl-custom-exec",
       reportType: "executive",
       name: "Custom Executive",
@@ -342,9 +336,7 @@ describe("ReportingService", () => {
       }),
     ).rejects.toThrow(/not qa/);
 
-    await expect(
-      reporting.getTemplate(ctx(), "tmpl-missing-xyz"),
-    ).rejects.toThrow();
+    await expect(reporting.getTemplate(ctx(), "tmpl-missing-xyz")).rejects.toThrow();
 
     await expect(
       reporting.generateReport(ctx(), {

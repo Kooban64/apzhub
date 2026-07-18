@@ -64,9 +64,7 @@ describe("observe-contracts", () => {
     expect(hasObservePermission(["observe.alerts"], "alerts")).toBe(true);
     expect(hasObservePermission(["observe.logs"], "logs")).toBe(true);
     expect(hasObservePermission(["observe.traces"], "traces")).toBe(true);
-    expect(hasObservePermission(["observe.diagnostics"], "diagnostics")).toBe(
-      true,
-    );
+    expect(hasObservePermission(["observe.diagnostics"], "diagnostics")).toBe(true);
     expect(hasObservePermission(["observe.health"], "health")).toBe(true);
   });
 
@@ -79,9 +77,7 @@ describe("observe-contracts", () => {
     expect(asServiceHealthId("sh_1")).toBe("sh_1");
     expect(asServiceStatusId("ss_1")).toBe("ss_1");
     expect(asComponentStatusId("cs_1")).toBe("cs_1");
-    expect(asMetricDefinitionId("metric.http_requests")).toBe(
-      "metric.http_requests",
-    );
+    expect(asMetricDefinitionId("metric.http_requests")).toBe("metric.http_requests");
     expect(asMetricSampleId("ms_1")).toBe("ms_1");
     expect(asAlertDefinitionId("ad_1")).toBe("ad_1");
     expect(asAlertStateId("as_1")).toBe("as_1");

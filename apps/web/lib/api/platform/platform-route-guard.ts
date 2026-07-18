@@ -33,7 +33,10 @@ export async function requirePlatformAdminRoute(
   const result = await requirePlatformPermission(session, permissionKey);
 
   if (!result.ok) {
-    return { ok: false, response: guardFailureResponse(result as PlatformApiGuardFailure) };
+    return {
+      ok: false,
+      response: guardFailureResponse(result as PlatformApiGuardFailure),
+    };
   }
 
   return { ok: true, session: result.session };

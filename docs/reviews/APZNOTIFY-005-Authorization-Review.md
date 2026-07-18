@@ -4,14 +4,14 @@
 
 ## Permissions catalogue
 
-| Permission | Use |
-| --- | --- |
-| `notification.read` | List/read notifications, categories, channels, recipients, references, diagnostics |
-| `notification.manage` | Create/update/archive/restore/transition lifecycle |
-| `notification.template` | Template catalogue mutations |
-| `notification.preference` | Preference read/update |
-| `notification.audit` | Audit timeline |
-| `notification.delivery` | Reserved / unwired (no delivery plane) |
+| Permission                | Use                                                                                |
+| ------------------------- | ---------------------------------------------------------------------------------- |
+| `notification.read`       | List/read notifications, categories, channels, recipients, references, diagnostics |
+| `notification.manage`     | Create/update/archive/restore/transition lifecycle                                 |
+| `notification.template`   | Template catalogue mutations                                                       |
+| `notification.preference` | Preference read/update                                                             |
+| `notification.audit`      | Audit timeline                                                                     |
+| `notification.delivery`   | Reserved / unwired (no delivery plane)                                             |
 
 ## Mapping
 
@@ -19,11 +19,11 @@
 
 ## Expected outcomes (certified by APZNOTIFY-002 suites + map review)
 
-| Scenario | Outcome |
-| --- | --- |
-| Anonymous | Denied |
-| Missing permission | Denied |
-| Authorised principal | Succeeds |
+| Scenario                    | Outcome                                                 |
+| --------------------------- | ------------------------------------------------------- |
+| Anonymous                   | Denied                                                  |
+| Missing permission          | Denied                                                  |
+| Authorised principal        | Succeeds                                                |
 | Tenant / organisation scope | Enforced via RequestPipeline context (platform pattern) |
 
 ## Non-bypass

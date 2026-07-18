@@ -51,9 +51,7 @@ describe("PlatformAdministrationView", () => {
     render(wrap(<PlatformAdministrationView section="overview" />));
 
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
       expect(screen.getByTestId("card-modules-count")).toBeTruthy();
     });
 
@@ -66,9 +64,9 @@ describe("PlatformAdministrationView", () => {
     expect(
       screen.getByTestId("card-unavailable-user-management").textContent,
     ).toContain("Unavailable");
-    expect(
-      screen.getByTestId("card-unavailable-event-bus").textContent,
-    ).toContain("Unavailable");
+    expect(screen.getByTestId("card-unavailable-event-bus").textContent).toContain(
+      "Unavailable",
+    );
     expect(
       screen.getByTestId("card-unavailable-ai-administration").textContent,
     ).toContain("Unavailable");
@@ -101,9 +99,7 @@ describe("PlatformAdministrationView", () => {
     render(wrap(<PlatformAdministrationView section="modules" />));
 
     await waitFor(() => {
-      expect(
-        screen.getByRole("button", { name: /Open Product/i }),
-      ).toBeTruthy();
+      expect(screen.getByRole("button", { name: /Open Product/i })).toBeTruthy();
     });
     await user.click(screen.getByRole("button", { name: /Open Product/i }));
     expect(pushMock).toHaveBeenCalledWith("/workspace/configuration");
@@ -111,9 +107,7 @@ describe("PlatformAdministrationView", () => {
 
   it("archives module when canManage", async () => {
     const user = userEvent.setup();
-    render(
-      wrap(<PlatformAdministrationView section="modules" canManage />),
-    );
+    render(wrap(<PlatformAdministrationView section="modules" canManage />));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: /^Archive$/i })).toBeTruthy();
@@ -127,11 +121,7 @@ describe("PlatformAdministrationView", () => {
   });
 
   it("hides manage commands when canManage is false", async () => {
-    render(
-      wrap(
-        <PlatformAdministrationView section="modules" canManage={false} />,
-      ),
-    );
+    render(wrap(<PlatformAdministrationView section="modules" canManage={false} />));
 
     await waitFor(() => {
       expect(screen.getByText(MOCK_ADMINISTRATION_MODULE.id)).toBeTruthy();
@@ -253,24 +243,14 @@ describe("PlatformAdministrationView", () => {
     render(wrap(<PlatformAdministrationView section="diagnostics" />));
 
     await waitFor(() => {
-      expect(screen.getByTestId("diag-runtime").textContent).toContain(
-        "Unavailable",
-      );
-      expect(screen.getByTestId("diag-event-bus").textContent).toContain(
-        "Unavailable",
-      );
-      expect(screen.getByTestId("diag-ai").textContent).toContain(
-        "Unavailable",
-      );
+      expect(screen.getByTestId("diag-runtime").textContent).toContain("Unavailable");
+      expect(screen.getByTestId("diag-event-bus").textContent).toContain("Unavailable");
+      expect(screen.getByTestId("diag-ai").textContent).toContain("Unavailable");
       expect(screen.getByTestId("banner-health").textContent).toContain(
         "NO LIVE PROBE",
       );
-      expect(screen.getByTestId("diag-administration").textContent).toContain(
-        "Ready",
-      );
-      expect(screen.getByTestId("diag-readiness").textContent).toContain(
-        "Ready",
-      );
+      expect(screen.getByTestId("diag-administration").textContent).toContain("Ready");
+      expect(screen.getByTestId("diag-readiness").textContent).toContain("Ready");
       expect(screen.getByTestId("diagnostic-detail").textContent).toContain(
         "ADMIN_METADATA_OK",
       );
@@ -281,9 +261,8 @@ describe("PlatformAdministrationView", () => {
     setAdministrationClient({
       ...createMockAdministrationClient(),
       async listModules() {
-        const { AdministrationClientError } = await import(
-          "@/lib/administration/administration-errors"
-        );
+        const { AdministrationClientError } =
+          await import("@/lib/administration/administration-errors");
         throw new AdministrationClientError({
           message: "Denied",
           status: 403,
@@ -302,9 +281,7 @@ describe("PlatformAdministrationView", () => {
   it("router mounts overview from pathname", async () => {
     render(wrap(<AdministrationWorkspaceRouter />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
     });
   });
 
@@ -312,13 +289,9 @@ describe("PlatformAdministrationView", () => {
     const user = userEvent.setup();
     render(wrap(<PlatformAdministrationView section="overview" />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("button", { name: /Open API Metadata/i }),
-      ).toBeTruthy();
+      expect(screen.getByRole("button", { name: /Open API Metadata/i })).toBeTruthy();
     });
-    await user.click(
-      screen.getByRole("button", { name: /Open API Metadata/i }),
-    );
+    await user.click(screen.getByRole("button", { name: /Open API Metadata/i }));
     await waitFor(() => {
       expect(screen.getByTestId("api-metadata-panel")).toBeTruthy();
     });
@@ -381,13 +354,9 @@ describe("PlatformAdministrationView", () => {
     const user = userEvent.setup();
     render(wrap(<PlatformAdministrationView section="modules" />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("button", { name: /Open Documentation/i }),
-      ).toBeTruthy();
+      expect(screen.getByRole("button", { name: /Open Documentation/i })).toBeTruthy();
     });
-    await user.click(
-      screen.getByRole("button", { name: /Open Documentation/i }),
-    );
+    await user.click(screen.getByRole("button", { name: /Open Documentation/i }));
     expect(pushMock).toHaveBeenCalledWith(
       "/docs/architecture/APZHUB-Configuration-Workbench.md",
     );
@@ -412,15 +381,13 @@ describe("PlatformAdministrationView", () => {
     });
     render(wrap(<PlatformAdministrationView section="modules" />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("button", { name: /Open Product/i }),
-      ).toBeTruthy();
+      expect(screen.getByRole("button", { name: /Open Product/i })).toBeTruthy();
     });
     await user.click(screen.getByRole("button", { name: /Open Product/i }));
     await waitFor(() => {
-      expect(
-        screen.getByTestId("administration-action-error").textContent,
-      ).toMatch(/No canonical product route/i);
+      expect(screen.getByTestId("administration-action-error").textContent).toMatch(
+        /No canonical product route/i,
+      );
     });
   });
 
@@ -512,9 +479,8 @@ describe("PlatformAdministrationView", () => {
   it("shows non-forbidden list error with retry", async () => {
     const user = userEvent.setup();
     const listModules = vi.fn(async () => {
-      const { AdministrationClientError } = await import(
-        "@/lib/administration/administration-errors"
-      );
+      const { AdministrationClientError } =
+        await import("@/lib/administration/administration-errors");
       throw new AdministrationClientError({
         message: "Boom",
         status: 500,
@@ -537,9 +503,8 @@ describe("PlatformAdministrationView", () => {
     setAdministrationClient({
       ...createMockAdministrationClient(),
       async getModule() {
-        const { AdministrationClientError } = await import(
-          "@/lib/administration/administration-errors"
-        );
+        const { AdministrationClientError } =
+          await import("@/lib/administration/administration-errors");
         throw new AdministrationClientError({
           message: "Missing",
           status: 404,
@@ -565,9 +530,9 @@ describe("PlatformAdministrationView", () => {
     });
     await user.click(screen.getByRole("button", { name: /Copy ID/i }));
     await waitFor(() => {
-      expect(
-        screen.getByTestId("administration-action-error").textContent,
-      ).toMatch(/Clipboard is unavailable/i);
+      expect(screen.getByTestId("administration-action-error").textContent).toMatch(
+        /Clipboard is unavailable/i,
+      );
     });
   });
 
@@ -596,17 +561,13 @@ describe("PlatformAdministrationView", () => {
     });
     render(wrap(<PlatformAdministrationView section="modules" />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("button", { name: /Open Documentation/i }),
-      ).toBeTruthy();
+      expect(screen.getByRole("button", { name: /Open Documentation/i })).toBeTruthy();
     });
-    await user.click(
-      screen.getByRole("button", { name: /Open Documentation/i }),
-    );
+    await user.click(screen.getByRole("button", { name: /Open Documentation/i }));
     await waitFor(() => {
-      expect(
-        screen.getByTestId("administration-action-error").textContent,
-      ).toMatch(/No documentation reference/i);
+      expect(screen.getByTestId("administration-action-error").textContent).toMatch(
+        /No documentation reference/i,
+      );
     });
   });
 
@@ -615,9 +576,8 @@ describe("PlatformAdministrationView", () => {
     setAdministrationClient({
       ...createMockAdministrationClient(),
       async archiveModule() {
-        const { AdministrationClientError } = await import(
-          "@/lib/administration/administration-errors"
-        );
+        const { AdministrationClientError } =
+          await import("@/lib/administration/administration-errors");
         throw new AdministrationClientError({
           message: "Archive denied",
           status: 403,
@@ -631,9 +591,9 @@ describe("PlatformAdministrationView", () => {
     });
     await user.click(screen.getByRole("button", { name: /^Archive$/i }));
     await waitFor(() => {
-      expect(
-        screen.getByTestId("administration-action-error").textContent,
-      ).toMatch(/Archive denied|Access denied|Forbidden/i);
+      expect(screen.getByTestId("administration-action-error").textContent).toMatch(
+        /Archive denied|Access denied|Forbidden/i,
+      );
     });
   });
 
@@ -693,13 +653,9 @@ describe("PlatformAdministrationView", () => {
     });
     render(wrap(<PlatformAdministrationView section="modules" />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("button", { name: /Open Documentation/i }),
-      ).toBeTruthy();
+      expect(screen.getByRole("button", { name: /Open Documentation/i })).toBeTruthy();
     });
-    await user.click(
-      screen.getByRole("button", { name: /Open Documentation/i }),
-    );
+    await user.click(screen.getByRole("button", { name: /Open Documentation/i }));
     await waitFor(() => {
       expect(screen.getByTestId("administration-status").textContent).toMatch(
         /Documentation reference: https:\/\/example.test\/docs/i,

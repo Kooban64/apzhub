@@ -11,9 +11,7 @@ export type {
   PlatformQualityPlatformServicesBundle,
 } from "./create-platform-quality-platform-services";
 
-export {
-  createPlatformQualityReadinessIndicators,
-} from "./platform-quality-readiness";
+export { createPlatformQualityReadinessIndicators } from "./platform-quality-readiness";
 export type { PlatformQualityReadinessIndicators } from "./platform-quality-readiness";
 
 export { isPlatformQualityEnabled } from "./platform-quality-env";

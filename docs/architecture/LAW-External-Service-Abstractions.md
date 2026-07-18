@@ -327,9 +327,7 @@ export interface AccountingIntegrationService {
     request: SyncInvoiceRequest,
   ): Promise<IntegrationResult<SyncInvoiceResult>>;
 
-  getConnectionStatus(
-    context: IntegrationContext,
-  ): Promise<
+  getConnectionStatus(context: IntegrationContext): Promise<
     IntegrationResult<{
       readonly connected: boolean;
       readonly provider?: AccountingProvider;

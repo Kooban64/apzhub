@@ -4,7 +4,10 @@ import {
   LIFECYCLE_CAPABILITY_REGISTRATIONS,
   LIFECYCLE_PRODUCT_REGISTRATIONS,
 } from "./registrations";
-import { canTransitionLifecycle, getAllowedLifecycleTransitions } from "./state-machine";
+import {
+  canTransitionLifecycle,
+  getAllowedLifecycleTransitions,
+} from "./state-machine";
 import {
   PlatformLifecycleManager,
   buildPlatformLifecycleSnapshot,
@@ -17,7 +20,10 @@ function createConsolidatedFixture(
 ): ConsolidatedOperationalDiagnostics {
   return {
     generatedAt: "2026-07-09T08:00:00.000Z",
-    runtime: { platformReady: true, bootstrap: { package: "@apzhub/platform-bootstrap" } },
+    runtime: {
+      platformReady: true,
+      bootstrap: { package: "@apzhub/platform-bootstrap" },
+    },
     identity: { inMemory: { tenantCount: 1 } },
     authorization: { inMemory: { roleCount: 3 } },
     operations: { consoleSections: 19 },
@@ -95,12 +101,21 @@ function createConsolidatedFixture(
           overrideUsage: [],
           secretStatus: [],
           validationErrors: [],
-          vault: { provider: "none", status: "not-configured", note: "Vault not configured." },
+          vault: {
+            provider: "none",
+            status: "not-configured",
+            note: "Vault not configured.",
+          },
         },
       },
       rateLimit: { backend: "memory", enabled: true, defaultLimitPerMinute: 120 },
       trafficGovernance: {
-        status: { enabled: true, backend: "memory", environment: "test", profileMultiplier: 1 },
+        status: {
+          enabled: true,
+          backend: "memory",
+          environment: "test",
+          profileMultiplier: 1,
+        },
         activePolicy: { id: "default", service: "platform", source: "canonical" },
         rateLimit: { backend: "memory", enabled: true, defaultLimitPerMinute: 120 },
         throttle: { active: false, burstWindowSeconds: 10 },
@@ -146,7 +161,9 @@ function createInput(overrides: Partial<ConsolidatedOperationalDiagnostics> = {}
 
 describe("platform lifecycle manager", () => {
   it("registers capabilities and products without duplicate ids", () => {
-    const capabilityIds = LIFECYCLE_CAPABILITY_REGISTRATIONS.map((entry) => entry.capabilityId);
+    const capabilityIds = LIFECYCLE_CAPABILITY_REGISTRATIONS.map(
+      (entry) => entry.capabilityId,
+    );
     const productIds = LIFECYCLE_PRODUCT_REGISTRATIONS.map((entry) => entry.productId);
 
     expect(new Set(capabilityIds).size).toBe(capabilityIds.length);
@@ -188,7 +205,9 @@ describe("platform lifecycle manager", () => {
   });
 
   it("supports maintenance mode transitions", () => {
-    const manager = new PlatformLifecycleManager({ now: () => "2026-07-09T08:00:00.000Z" });
+    const manager = new PlatformLifecycleManager({
+      now: () => "2026-07-09T08:00:00.000Z",
+    });
     const input = createInput();
 
     const enter = manager.applyAction("enter-maintenance", input);
@@ -200,7 +219,9 @@ describe("platform lifecycle manager", () => {
   });
 
   it("supports graceful shutdown and recovery", () => {
-    const manager = new PlatformLifecycleManager({ now: () => "2026-07-09T08:00:00.000Z" });
+    const manager = new PlatformLifecycleManager({
+      now: () => "2026-07-09T08:00:00.000Z",
+    });
     const input = createInput();
 
     const shutdown = manager.applyAction("begin-shutdown", input);
@@ -237,7 +258,9 @@ describe("platform lifecycle manager", () => {
     const snapshot = buildPlatformLifecycleSnapshot(createInput());
 
     expect(snapshot.products).toHaveLength(LIFECYCLE_PRODUCT_REGISTRATIONS.length);
-    expect(snapshot.products.every((product) => product.lifecycleState !== undefined)).toBe(true);
+    expect(
+      snapshot.products.every((product) => product.lifecycleState !== undefined),
+    ).toBe(true);
     expect(snapshot.currentState).toBe("operational");
   });
 
@@ -248,7 +271,9 @@ describe("platform lifecycle manager", () => {
     const second = buildPlatformLifecycleSnapshot(input, runtime);
 
     expect(first.currentState).toBe(second.currentState);
-    expect(first.versionCompatibility.compatible).toBe(second.versionCompatibility.compatible);
+    expect(first.versionCompatibility.compatible).toBe(
+      second.versionCompatibility.compatible,
+    );
     expect(first.capabilities.length).toBe(second.capabilities.length);
   });
 });

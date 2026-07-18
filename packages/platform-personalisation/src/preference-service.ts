@@ -8,7 +8,10 @@ import type { PreferenceRepository } from "./repositories/repository-interfaces"
 export class PreferenceService {
   constructor(private readonly repository: PreferenceRepository) {}
 
-  async getPreferences(userId: string, provisionIfEmpty = true): Promise<UserPreferences> {
+  async getPreferences(
+    userId: string,
+    provisionIfEmpty = true,
+  ): Promise<UserPreferences> {
     const records = await this.repository.listByUser(userId);
     if (records.length === 0 && provisionIfEmpty) {
       return seedDefaultPreferencesForUser(this.repository, userId);

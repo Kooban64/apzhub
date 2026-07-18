@@ -56,16 +56,16 @@ translated.vendorDiagnostics;
 
 ### Default status mapping
 
-| Status | Category |
-|--------|----------|
-| 401 | `authentication` |
-| 403 | `authorization` |
-| 404 | `not_found` |
-| 409 | `conflict` |
-| 422, 400 | `validation` |
-| 429 | `rate_limited` |
+| Status   | Category             |
+| -------- | -------------------- |
+| 401      | `authentication`     |
+| 403      | `authorization`      |
+| 404      | `not_found`          |
+| 409      | `conflict`           |
+| 422, 400 | `validation`         |
+| 429      | `rate_limited`       |
 | 502, 503 | `vendor_unavailable` |
-| 504 | `timeout` |
+| 504      | `timeout`            |
 
 ---
 
@@ -145,11 +145,14 @@ logger.info("Integration request completed", {
   result: "success",
 });
 
-logger.error("Integration request failed", buildErrorLogFields(translated.error, {
-  correlationId: "corr-001",
-  operation: "listResources",
-  durationMs: 95,
-}));
+logger.error(
+  "Integration request failed",
+  buildErrorLogFields(translated.error, {
+    correlationId: "corr-001",
+    operation: "listResources",
+    durationMs: 95,
+  }),
+);
 ```
 
 Secrets and bearer tokens are redacted automatically.
@@ -160,14 +163,14 @@ Secrets and bearer tokens are redacted automatically.
 
 `DiagnosticsProvider.collect()` now exposes:
 
-| Field | Description |
-|-------|-------------|
-| `health` | Full health probe result |
-| `circuitBreaker` | Breaker state and counters |
-| `metrics` | Request/error summary |
-| `errors` | Error category summary |
-| `registration` | Connection and lifecycle registration |
-| `version` | Engine version compatibility block |
+| Field            | Description                           |
+| ---------------- | ------------------------------------- |
+| `health`         | Full health probe result              |
+| `circuitBreaker` | Breaker state and counters            |
+| `metrics`        | Request/error summary                 |
+| `errors`         | Error category summary                |
+| `registration`   | Connection and lifecycle registration |
+| `version`        | Engine version compatibility block    |
 
 All new fields are **optional** — backward compatible with OSS-100-03 consumers.
 

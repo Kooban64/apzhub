@@ -35,7 +35,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -126,9 +127,7 @@ function forbidDeps(pkgJsonPath, forbidden, rule) {
 }
 
 function stripComments(content) {
-  return content
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/\/\/.*$/gm, "");
+  return content.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
 }
 
 // ---------------------------------------------------------------------------
@@ -136,17 +135,24 @@ function stripComments(content) {
 // ---------------------------------------------------------------------------
 scan(walk(join(ROOT, "apps/web/components/workflow-engine")), [
   { rule: "workbench-no-platform-services", pattern: /@apzhub\/platform-services/ },
-  { rule: "workbench-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+  {
+    rule: "workbench-no-gateway",
+    pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+  },
   { rule: "workbench-no-workflow-core", pattern: /@apzhub\/workflow-core/ },
   { rule: "workbench-no-persistence", pattern: /@apzhub\/workflow-persistence/ },
-  { rule: "workbench-no-n8n-adapter", pattern: /@apzhub\/integration-n8n|createN8nAdapter/ },
+  {
+    rule: "workbench-no-n8n-adapter",
+    pattern: /@apzhub\/integration-n8n|createN8nAdapter/,
+  },
   { rule: "workbench-no-n8n-brand", pattern: /\bn8n\b/i },
   { rule: "workbench-no-event-bus", pattern: /\bEventBus\b/ },
   { rule: "workbench-no-designer", pattern: /\bdesigner\b/i },
   { rule: "workbench-no-drag-drop", pattern: /\bdrag[- ]?drop\b/i },
   {
     rule: "workbench-no-execute",
-    pattern: /\b(executeWorkflow|runWorkflow|activateWorkflow|deactivateWorkflow|scheduleWorkflow)\b/,
+    pattern:
+      /\b(executeWorkflow|runWorkflow|activateWorkflow|deactivateWorkflow|scheduleWorkflow)\b/,
   },
 ]);
 
@@ -229,19 +235,22 @@ const engineClientFiles = walk(join(ROOT, "apps/web/lib/workflows")).filter(
 
 scan(engineClientFiles, [
   { rule: "client-no-platform-services", pattern: /@apzhub\/platform-services/ },
-  { rule: "client-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+  {
+    rule: "client-no-gateway",
+    pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+  },
   { rule: "client-no-workflow-core", pattern: /@apzhub\/workflow-core/ },
   { rule: "client-no-persistence", pattern: /@apzhub\/workflow-persistence/ },
-  { rule: "client-no-n8n-adapter", pattern: /@apzhub\/integration-n8n|createN8nAdapter/ },
+  {
+    rule: "client-no-n8n-adapter",
+    pattern: /@apzhub\/integration-n8n|createN8nAdapter/,
+  },
 ]);
 
 {
   const clientPath = join(ROOT, "apps/web/lib/workflows/engine-client.ts");
   if (!existsSync(clientPath)) {
-    requireExists(
-      "apps/web/lib/workflows/engine-client.ts",
-      "missing-engine-client",
-    );
+    requireExists("apps/web/lib/workflows/engine-client.ts", "missing-engine-client");
   } else {
     const body = readFileSync(clientPath, "utf8");
     if (!body.includes("createHttpWorkflowEngineClient")) {
@@ -287,10 +296,7 @@ scan(engineClientFiles, [
 // Layer 3 — HTTP routes + handlers (engine only)
 // ---------------------------------------------------------------------------
 const routeFiles = walk(join(ROOT, "apps/web/app/api/v1/workflows/engine"));
-const handlerFile = join(
-  ROOT,
-  "apps/web/lib/api/v1/handlers/workflow-engine.ts",
-);
+const handlerFile = join(ROOT, "apps/web/lib/api/v1/handlers/workflow-engine.ts");
 const httpFiles = [...routeFiles];
 if (existsSync(handlerFile)) httpFiles.push(handlerFile);
 
@@ -458,18 +464,22 @@ scan(engineServiceFiles, [
   }
 }
 
-forbidDeps("integrations/n8n/package.json", [
-  "@apzhub/platform-services",
-  "@apzhub/workflow-core",
-  "@apzhub/workflow-persistence",
-  "next",
-], "adapter-deps");
+forbidDeps(
+  "integrations/n8n/package.json",
+  [
+    "@apzhub/platform-services",
+    "@apzhub/workflow-core",
+    "@apzhub/workflow-persistence",
+    "next",
+  ],
+  "adapter-deps",
+);
 
-forbidDeps("packages/workflow-contracts/package.json", [
-  "@apzhub/integration-n8n",
-  "@apzhub/platform-services",
-  "next",
-], "contracts-deps");
+forbidDeps(
+  "packages/workflow-contracts/package.json",
+  ["@apzhub/integration-n8n", "@apzhub/platform-services", "next"],
+  "contracts-deps",
+);
 
 requirePackageVersion(
   "integrations/n8n/package.json",
@@ -483,7 +493,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.21.0",
+  "0.25.0",
   "version-platform-services",
 );
 
@@ -654,7 +664,9 @@ console.log("Violations: 0");
 console.log(
   "  - Workbench → typed client → HTTP → gateway.workflow.engine → RequestPipeline → Authz → Platform Services → Integration SDK → n8n Adapter → n8n",
 );
-console.log("  - No execution / scheduling / mutations / Event Bus / designer / drag-drop");
+console.log(
+  "  - No execution / scheduling / mutations / Event Bus / designer / drag-drop",
+);
 console.log("  - OpenAPI Workflow Engine + manifests present");
 console.log("  - Prior audits APZWORKFLOW-006–009: PASS");
 if (observations.length > 0) {

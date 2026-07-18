@@ -7,12 +7,12 @@
 
 ## Boundary model
 
-| Boundary | Owns | Must not own |
-|----------|------|--------------|
-| **Platform Core** | Identity, authz, security, config, ops, lifecycle, bootstrap | Product business rules |
-| **Products** | Domain workflows (Law, Trust) | Platform lifecycle, IAM, ops control plane |
-| **Frameworks** | Presentation patterns (workbench, commands, search) | Business logic |
-| **Adapters** | Persistence mapping in `@apzhub/config` | UI or API orchestration |
+| Boundary          | Owns                                                         | Must not own                               |
+| ----------------- | ------------------------------------------------------------ | ------------------------------------------ |
+| **Platform Core** | Identity, authz, security, config, ops, lifecycle, bootstrap | Product business rules                     |
+| **Products**      | Domain workflows (Law, Trust)                                | Platform lifecycle, IAM, ops control plane |
+| **Frameworks**    | Presentation patterns (workbench, commands, search)          | Business logic                             |
+| **Adapters**      | Persistence mapping in `@apzhub/config`                      | UI or API orchestration                    |
 
 ---
 
@@ -37,35 +37,35 @@
 
 ## API boundaries
 
-| Surface | Boundary | Guard |
-|---------|----------|-------|
-| `/api/platform/v1/operations/*` | Platform ops | `requirePlatformAdminRoute` |
-| `/api/platform/v1/tenants` | Platform admin | `requirePlatformAdminRoute` |
-| `/api/platform/v1/system/*` | Health probes | Public by design |
-| `/api/law/v1/*` | Product API | `withLawApiAuth` + tenant membership |
-| `/api/platform/v1/preferences` | User personalisation | Session auth |
+| Surface                         | Boundary             | Guard                                |
+| ------------------------------- | -------------------- | ------------------------------------ |
+| `/api/platform/v1/operations/*` | Platform ops         | `requirePlatformAdminRoute`          |
+| `/api/platform/v1/tenants`      | Platform admin       | `requirePlatformAdminRoute`          |
+| `/api/platform/v1/system/*`     | Health probes        | Public by design                     |
+| `/api/law/v1/*`                 | Product API          | `withLawApiAuth` + tenant membership |
+| `/api/platform/v1/preferences`  | User personalisation | Session auth                         |
 
 ---
 
 ## Data boundaries
 
-| Datum | System of record |
-|-------|------------------|
-| Platform metadata | Platform PostgreSQL via `@apzhub/config` |
-| Law business data | Law schema via persistence adapters |
-| Trust accounting | Law trust module — product-owned |
+| Datum                   | System of record                            |
+| ----------------------- | ------------------------------------------- |
+| Platform metadata       | Platform PostgreSQL via `@apzhub/config`    |
+| Law business data       | Law schema via persistence adapters         |
+| Trust accounting        | Law trust module — product-owned            |
 | Operational diagnostics | Derived — never authoritative business data |
 
 ---
 
 ## Violations found
 
-| Violation | Status |
-|-----------|--------|
-| Platform package importing apps | None |
-| Product bypassing platform identity for Law API | None |
-| Circular lifecycle/operations dependency | **Fixed PRH-011** |
-| Config package law domain coupling | Documented (TD-M16-M01) — not a bypass |
+| Violation                                       | Status                                 |
+| ----------------------------------------------- | -------------------------------------- |
+| Platform package importing apps                 | None                                   |
+| Product bypassing platform identity for Law API | None                                   |
+| Circular lifecycle/operations dependency        | **Fixed PRH-011**                      |
+| Config package law domain coupling              | Documented (TD-M16-M01) — not a bypass |
 
 ---
 

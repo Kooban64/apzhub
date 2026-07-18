@@ -19,10 +19,7 @@ import type {
   WorkflowEngineUserViewModel,
   WorkflowEngineWorkflowViewModel,
 } from "./engine-types";
-import {
-  assertWorkflowEngineApiPath,
-  WORKFLOW_ENGINE_API_BASE,
-} from "./routes";
+import { assertWorkflowEngineApiPath, WORKFLOW_ENGINE_API_BASE } from "./routes";
 
 const API_BASE = WORKFLOW_ENGINE_API_BASE;
 
@@ -143,8 +140,7 @@ function mapDiagnostics(raw: unknown): WorkflowEngineDiagnosticsViewModel {
     apiStatus: String(r.apiStatus ?? "not_tested"),
     authenticationStatus: String(r.authenticationStatus ?? "unknown"),
     authMode: String(r.authMode ?? "unknown"),
-    lastLatencyMs:
-      r.lastLatencyMs !== undefined ? Number(r.lastLatencyMs) : undefined,
+    lastLatencyMs: r.lastLatencyMs !== undefined ? Number(r.lastLatencyMs) : undefined,
     coreServiceCount: Number(r.coreServiceCount ?? 0),
     compatibilityStatus: String(r.compatibilityStatus ?? "unknown"),
   };
@@ -161,9 +157,7 @@ function mapCompatibility(raw: unknown): WorkflowEngineCompatibilityViewModel {
   };
 }
 
-function mapValidation(
-  raw: unknown,
-): WorkflowEngineConnectionValidationViewModel {
+function mapValidation(raw: unknown): WorkflowEngineConnectionValidationViewModel {
   const r = asRecord(raw);
   return {
     ok: Boolean(r.ok),
@@ -189,15 +183,12 @@ async function requestJson<T>(
     },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiSuccessEnvelope<T>
-    | ApiCollectionEnvelope<unknown>
-    | ApiErrorEnvelope;
+    ApiSuccessEnvelope<T> | ApiCollectionEnvelope<unknown> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new WorkflowEngineClientError({
       message:
-        err.error?.message ??
-        `Workflow engine request failed (${response.status})`,
+        err.error?.message ?? `Workflow engine request failed (${response.status})`,
       code: err.error?.code ?? "WORKFLOW_ENGINE_HTTP_ERROR",
       correlationId: err.meta?.correlationId,
       status: response.status,

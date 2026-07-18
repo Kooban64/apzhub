@@ -24,7 +24,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -64,20 +65,33 @@ const documentPackages = [
 for (const root of documentPackages) {
   scan(walk(join(ROOT, root)), [
     { rule: "docs-no-platform-services", pattern: /@apzhub\/platform-services/ },
-    { rule: "docs-no-http", pattern: /NextRequest|withPlatformApiAuth|\/api\/v1\/documents/ },
+    {
+      rule: "docs-no-http",
+      pattern: /NextRequest|withPlatformApiAuth|\/api\/v1\/documents/,
+    },
     { rule: "docs-no-workbench", pattern: /workbench-framework|PlatformReportingView/ },
   ]);
 }
 
 scan(walk(join(ROOT, "packages/platform-services/src/services/documents")), [
-  { rule: "services-no-direct-storage-sdks", pattern: /@aws-sdk\/client-s3|createFilesystemDocumentStorageProvider|createS3DocumentStorageProvider/ },
+  {
+    rule: "services-no-direct-storage-sdks",
+    pattern:
+      /@aws-sdk\/client-s3|createFilesystemDocumentStorageProvider|createS3DocumentStorageProvider/,
+  },
   { rule: "services-no-http", pattern: /NextRequest|OpenAPIHono|\/api\/v1/ },
   { rule: "services-no-workbench", pattern: /workbench-framework/ },
-  { rule: "services-no-binary-transfer", pattern: /storeContent\(|readContent\(|putObject\(|getObject\(/ },
+  {
+    rule: "services-no-binary-transfer",
+    pattern: /storeContent\(|readContent\(|putObject\(|getObject\(/,
+  },
 ]);
 
 // Gateway must not expose raw storage providers
-const gatewayFile = join(ROOT, "packages/platform-services/src/gateway/platform-service-gateway.ts");
+const gatewayFile = join(
+  ROOT,
+  "packages/platform-services/src/gateway/platform-service-gateway.ts",
+);
 const gateway = readFileSync(gatewayFile, "utf8");
 if (/DocumentStorageProvider|createFilesystem|createS3/.test(gateway)) {
   violations.push({
@@ -111,7 +125,10 @@ if (!/PLATFORM_DOCUMENT_PERMISSIONS/.test(catalogue)) {
 }
 
 const opMap = readFileSync(
-  join(ROOT, "packages/platform-services/src/authorization/operation-authorization-map.ts"),
+  join(
+    ROOT,
+    "packages/platform-services/src/authorization/operation-authorization-map.ts",
+  ),
   "utf8",
 );
 if (!/documentPlatformOps/.test(opMap)) {

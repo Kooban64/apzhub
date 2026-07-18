@@ -9,32 +9,34 @@
 
 ## Overview
 
-| Phase | ID              | Theme                                         | Status                                      |
-| ----- | --------------- | --------------------------------------------- | ------------------------------------------- |
-| 1     | **APZTCMS-001** | Product Vision, Architecture & Foundation     | **COMPLETE** (docs only)                    |
-| 2     | **APZTCMS-002** | Core Platform Foundation                      | **COMPLETE** (contracts/foundation 0.1.0)   |
-| 3     | **APZTCMS-003** | Domain Persistence & Permissions              | **COMPLETE** (testing-persistence 0.1.0)    |
-| 4     | **APZTCMS-004** | Manual Test Management                        | **COMPLETE** (testing-services 0.1.0; contracts/persistence 0.2.0) |
-| 5     | **APZTCMS-005** | Production Persistence Completion             | **COMPLETE** (testing-persistence 0.3.0; migrations 0020/0021) |
-| 6     | **APZTCMS-006** | Manual Execution & Evidence Domain Engine     | **COMPLETE** (services 0.2.0; contracts 0.3.0; persistence 0.4.0) |
-| 7     | **APZTCMS-007** | Automation Result Ingestion Domain            | **COMPLETE** (services 0.3.0; contracts 0.4.0; persistence 0.5.0) |
-| 8     | **APZTCMS-008** | Quality Intelligence Domain                   | **COMPLETE** (services 0.4.0; contracts 0.5.0; persistence 0.6.0) |
-| 9     | **APZTCMS-009** | Certification Engine                          | **COMPLETE** (services 0.5.0; contracts 0.6.0; persistence 0.7.0) |
-| 10    | **APZTCMS-010** | Workbench UI (core views)                     | **COMPLETE** (presentation-only UI; module enabled) |
-| 11    | **APZTCMS-011** | Testing Platform Services & Gateway Integration | **COMPLETE** (platform **0.8.0**; `gateway.testing.*`) |
-| 12    | **APZTCMS-012** | Testing HTTP API, OpenAPI & Production Typed Client | **COMPLETE** (`/api/v1/testing/**`; HTTP client; OpenAPI validated) |
-| 13    | **APZTCMS-013** | Vertical-Slice Certification & Production Readiness | **COMPLETE** (**PRODUCTION_READY_WITH_LIMITATIONS**) |
-| 14    | **APZTCMS-014** | Release & Quality Governance Domain | **COMPLETE** (contracts **0.8.0**; persistence **0.8.0**; services **0.7.0**; platform **0.10.0**) |
-| 15    | **APZTCMS-015** | External CI/CD Integration Framework | **COMPLETE** (contracts **0.9.0**; persistence **0.9.0**; services **0.8.0**; platform **0.11.0**) |
-| 16    | **APZTCMS-016** | GitHub Actions Reference Adapter | **COMPLETE** (`@apzhub/integration-github-actions` **0.1.0**) |
-| 17    | **APZTCMS-017** | GitHub Actions Platform Service Integration | **COMPLETE** (contracts **0.12.0**; platform-services **0.12.0**; testing-services **0.9.0**) |
-| 18    | **APZTCMS-018** | GitHub Actions User Experience | **COMPLETE** (HTTP + typed client + workbench) |
-| 19    | **APZTCMS-019** | GitHub Actions Vertical Certification | **COMPLETE** — **PRODUCTION_READY_WITH_LIMITATIONS** |
-| 20    | **APZTCMS-020** | GitHub Actions Wave Certification & Reference Adapter Closeout | **COMPLETE** — CI/CD Reference Adapter frozen |
-| 21    | **APZTCMS-021** | Engineering Intelligence & Executive Quality Analytics | **COMPLETE** — domain services (owner redefined vs prior GitLab CI numbering) |
-| 22    | **APZTCMS-022** | Engineering Intelligence HTTP API & Workbench | Recommended next — **await owner approval** |
-| Later | **GitLab CI Reference Adapter** | Future CI/CD adapter (was formerly backlog 021) | Awaiting owner + milestone assignment |
-| Later | **AI Assist** | Advisory AI suggestions only                   | Deferred; needs owner approval |
+| Phase | ID                              | Theme                                                          | Status                                                                                             |
+| ----- | ------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| 1     | **APZTCMS-001**                 | Product Vision, Architecture & Foundation                      | **COMPLETE** (docs only)                                                                           |
+| 2     | **APZTCMS-002**                 | Core Platform Foundation                                       | **COMPLETE** (contracts/foundation 0.1.0)                                                          |
+| 3     | **APZTCMS-003**                 | Domain Persistence & Permissions                               | **COMPLETE** (testing-persistence 0.1.0)                                                           |
+| 4     | **APZTCMS-004**                 | Manual Test Management                                         | **COMPLETE** (testing-services 0.1.0; contracts/persistence 0.2.0)                                 |
+| 5     | **APZTCMS-005**                 | Production Persistence Completion                              | **COMPLETE** (testing-persistence 0.3.0; migrations 0020/0021)                                     |
+| 6     | **APZTCMS-006**                 | Manual Execution & Evidence Domain Engine                      | **COMPLETE** (services 0.2.0; contracts 0.3.0; persistence 0.4.0)                                  |
+| 7     | **APZTCMS-007**                 | Automation Result Ingestion Domain                             | **COMPLETE** (services 0.3.0; contracts 0.4.0; persistence 0.5.0)                                  |
+| 8     | **APZTCMS-008**                 | Quality Intelligence Domain                                    | **COMPLETE** (services 0.4.0; contracts 0.5.0; persistence 0.6.0)                                  |
+| 9     | **APZTCMS-009**                 | Certification Engine                                           | **COMPLETE** (services 0.5.0; contracts 0.6.0; persistence 0.7.0)                                  |
+| 10    | **APZTCMS-010**                 | Workbench UI (core views)                                      | **COMPLETE** (presentation-only UI; module enabled)                                                |
+| 11    | **APZTCMS-011**                 | Testing Platform Services & Gateway Integration                | **COMPLETE** (platform **0.8.0**; `gateway.testing.*`)                                             |
+| 12    | **APZTCMS-012**                 | Testing HTTP API, OpenAPI & Production Typed Client            | **COMPLETE** (`/api/v1/testing/**`; HTTP client; OpenAPI validated)                                |
+| 13    | **APZTCMS-013**                 | Vertical-Slice Certification & Production Readiness            | **COMPLETE** (**PRODUCTION_READY_WITH_LIMITATIONS**)                                               |
+| 14    | **APZTCMS-014**                 | Release & Quality Governance Domain                            | **COMPLETE** (contracts **0.8.0**; persistence **0.8.0**; services **0.7.0**; platform **0.10.0**) |
+| 15    | **APZTCMS-015**                 | External CI/CD Integration Framework                           | **COMPLETE** (contracts **0.9.0**; persistence **0.9.0**; services **0.8.0**; platform **0.11.0**) |
+| 16    | **APZTCMS-016**                 | GitHub Actions Reference Adapter                               | **COMPLETE** (`@apzhub/integration-github-actions` **0.1.0**)                                      |
+| 17    | **APZTCMS-017**                 | GitHub Actions Platform Service Integration                    | **COMPLETE** (contracts **0.12.0**; platform-services **0.12.0**; testing-services **0.9.0**)      |
+| 18    | **APZTCMS-018**                 | GitHub Actions User Experience                                 | **COMPLETE** (HTTP + typed client + workbench)                                                     |
+| 19    | **APZTCMS-019**                 | GitHub Actions Vertical Certification                          | **COMPLETE** — **PRODUCTION_READY_WITH_LIMITATIONS**                                               |
+| 20    | **APZTCMS-020**                 | GitHub Actions Wave Certification & Reference Adapter Closeout | **COMPLETE** — CI/CD Reference Adapter frozen                                                      |
+| 21    | **APZTCMS-021**                 | Engineering Intelligence & Executive Quality Analytics         | **COMPLETE** — domain services (owner redefined vs prior GitLab CI numbering)                      |
+| 22    | **APZTCMS-022**                 | Engineering Intelligence HTTP API & Workbench                  | **COMPLETE** — HTTP + typed client + workbench                                                     |
+| 23    | **APZTCMS-023**                 | Executive Dashboards                                           | **COMPLETE** — 12 dashboard categories (presentation)                                              |
+| 24    | **APZTCMS-024**                 | Reporting Framework                                            | **COMPLETE** — TCMS reporting; testing-* **0.11.0**; platform reporting follows APZREPORT          |
+| Later | **GitLab CI Reference Adapter** | Future CI/CD adapter (was formerly backlog 021)                | Awaiting owner + milestone assignment                                                              |
+| Later | **AI Assist**                   | Advisory AI suggestions only                                   | Deferred; needs owner approval                                                                     |
 
 Each phase requires an approved sprint/milestone guide before implementation. **No coding under a phase until CURRENT-MILESTONE authorises it.**
 
@@ -374,7 +376,7 @@ See [APZTCMS-019 Completion Report](../sprint/APZTCMS-019-completion-report.md).
 
 **Objective:** Certify GitHub Actions as the official CI/CD Reference Adapter; freeze standards for future providers.
 
-**Stop condition:** **COMPLETE** — APZTCMS-021 subsequently completed; programme stop is APZTCMS-022.
+**Stop condition:** **COMPLETE** — CI/CD Reference Adapter frozen; subsequent milestones 021–024 also complete.
 
 See [APZTCMS-020 Completion Report](../sprint/APZTCMS-020-completion-report.md).
 
@@ -386,7 +388,7 @@ See [APZTCMS-020 Completion Report](../sprint/APZTCMS-020-completion-report.md).
 
 **Owner note:** Owner brief redefined APZTCMS-021 from “GitLab CI Reference Adapter” to Engineering Intelligence. GitLab CI remains a future milestone.
 
-**Stop condition:** **COMPLETE** — await owner approval before APZTCMS-022.
+**Stop condition:** **COMPLETE**.
 
 See [APZTCMS-021 Completion Report](../sprint/APZTCMS-021-completion-report.md).
 
@@ -396,7 +398,31 @@ See [APZTCMS-021 Completion Report](../sprint/APZTCMS-021-completion-report.md).
 
 **Objective:** Expose Engineering Intelligence via HTTP API, OpenAPI, typed client, and Workbench presentation.
 
-**Stop condition:** Not started — await owner approval.
+**Stop condition:** **COMPLETE**.
+
+See [APZTCMS-022 Completion Report](../sprint/APZTCMS-022-completion-report.md).
+
+---
+
+## APZTCMS-023 — Executive Dashboards
+
+**Objective:** Executive quality dashboards (presentation over EI client).
+
+**Stop condition:** **COMPLETE**.
+
+See [APZTCMS-023 Completion Report](../sprint/APZTCMS-023-completion-report.md).
+
+---
+
+## APZTCMS-024 — Reporting Framework
+
+**Objective:** TCMS reporting framework (templates product-owned; first consumer of platform reporting patterns).
+
+**Packages (disk):** `@apzhub/testing-contracts` / `testing-persistence` / `testing-services` **0.11.0**.
+
+**Stop condition:** **COMPLETE** — platform reporting vertical continues under APZREPORT-001…003 (also complete).
+
+See [APZTCMS-024 Completion Report](../sprint/APZTCMS-024-completion-report.md) · [APZREPORT-003 Completion Report](../sprint/APZREPORT-003-completion-report.md).
 
 ---
 

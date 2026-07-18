@@ -29,7 +29,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -88,18 +89,21 @@ scan(platformServicesSrc, [
   {
     rule: "no-http-routes-in-platform-search-execution",
     pattern: /NextRequest|NextResponse|OpenAPIHono|withPlatformApiAuth|createRoute\(/,
-    skip: (path) => !path.includes("search-execution") && !path.includes("services/search/"),
+    skip: (path) =>
+      !path.includes("search-execution") && !path.includes("services/search/"),
   },
 ]);
 
 scan(execFiles, [
   {
     rule: "no-http-workbench",
-    pattern: /NextRequest|NextResponse|OpenAPIHono|workbench-framework|SearchWorkbench|\/api\/v1\/search/,
+    pattern:
+      /NextRequest|NextResponse|OpenAPIHono|workbench-framework|SearchWorkbench|\/api\/v1\/search/,
   },
   {
     rule: "no-event-bus-workers-ocr-ai",
-    pattern: /@apzhub\/event-bus|BullMQ|createWorker\(|openai|anthropic|ocr-engine|vector.?store/i,
+    pattern:
+      /@apzhub\/event-bus|BullMQ|createWorker\(|openai|anthropic|ocr-engine|vector.?store/i,
   },
   {
     rule: "no-meili-dto-leak-exports",
@@ -117,33 +121,41 @@ scan(meiliFiles, [
 scan(gatewayFiles, [
   {
     rule: "gateway-no-meili-dtos",
-    pattern: /MeilisearchIndexRecord|MeilisearchSearchHit|MeilisearchRestClient|meilisearch-api-types/,
+    pattern:
+      /MeilisearchIndexRecord|MeilisearchSearchHit|MeilisearchRestClient|meilisearch-api-types/,
   },
 ]);
 
 scan(contractFiles, [
   {
     rule: "contracts-no-meili-adapter",
-    pattern: /@apzhub\/integration-meilisearch|MeilisearchAdapter|MeilisearchRestClient/,
+    pattern:
+      /@apzhub\/integration-meilisearch|MeilisearchAdapter|MeilisearchRestClient/,
   },
 ]);
 
 // Version pins
-const contractsPkg = JSON.parse(
-  readFileSync(join(CONTRACTS, "package.json"), "utf8"),
-);
+const contractsPkg = JSON.parse(readFileSync(join(CONTRACTS, "package.json"), "utf8"));
 const platformPkg = JSON.parse(
   readFileSync(join(ROOT, "packages/platform-services/package.json"), "utf8"),
 );
 const meiliPkg = JSON.parse(readFileSync(join(MEILI, "package.json"), "utf8"));
 
-assert(contractsPkg.version === "0.4.0", "version-search-contracts", `expected 0.4.0 got ${contractsPkg.version}`);
 assert(
-  ["0.18.0", "0.19.0"].includes(platformPkg.version),
-  "version-platform-services",
-  `expected 0.18.0 or 0.19.0 got ${platformPkg.version}`,
+  contractsPkg.version === "0.4.0",
+  "version-search-contracts",
+  `expected 0.4.0 got ${contractsPkg.version}`,
 );
-assert(meiliPkg.version === "0.1.0", "version-meilisearch", `expected 0.1.0 unchanged got ${meiliPkg.version}`);
+assert(
+  ["0.18.0", "0.19.0", "0.25.0"].includes(platformPkg.version),
+  "version-platform-services",
+  `expected 0.18.0, 0.19.0 or 0.25.0 got ${platformPkg.version}`,
+);
+assert(
+  meiliPkg.version === "0.1.0",
+  "version-meilisearch",
+  `expected 0.1.0 unchanged got ${meiliPkg.version}`,
+);
 assert(
   Boolean(platformPkg.dependencies["@apzhub/integration-meilisearch"]),
   "dep-integration-meilisearch",
@@ -151,10 +163,7 @@ assert(
 );
 
 // Facet separation: management ≠ execution
-const gatewaySrc = readFileSync(
-  join(GATEWAY, "platform-service-gateway.ts"),
-  "utf8",
-);
+const gatewaySrc = readFileSync(join(GATEWAY, "platform-service-gateway.ts"), "utf8");
 assert(
   gatewaySrc.includes("get searchExecution()") &&
     gatewaySrc.includes("get searchIndexes()") &&
@@ -165,24 +174,35 @@ assert(
   "Missing search execution gateway getters",
 );
 assert(
-  gatewaySrc.includes("get searchPlatform()") && gatewaySrc.includes("get searchQuery()"),
+  gatewaySrc.includes("get searchPlatform()") &&
+    gatewaySrc.includes("get searchQuery()"),
   "gateway-management-facets-preserved",
   "Management search facets must remain",
 );
 assert(
   gatewaySrc.includes("get search()") &&
     !/get search\(\)[\s\S]*searchExecution/.test(
-      gatewaySrc.slice(gatewaySrc.indexOf("get search()"), gatewaySrc.indexOf("get search()") + 200),
+      gatewaySrc.slice(
+        gatewaySrc.indexOf("get search()"),
+        gatewaySrc.indexOf("get search()") + 200,
+      ),
     ),
   "legacy-search-unchanged",
   "Legacy gateway.search must remain distinct",
 );
 
 const authz = readFileSync(
-  join(ROOT, "packages/platform-services/src/authorization/operation-authorization-map.ts"),
+  join(
+    ROOT,
+    "packages/platform-services/src/authorization/operation-authorization-map.ts",
+  ),
   "utf8",
 );
-assert(authz.includes("searchExecutionOps"), "authz-search-execution-ops", "searchExecutionOps map missing");
+assert(
+  authz.includes("searchExecutionOps"),
+  "authz-search-execution-ops",
+  "searchExecutionOps map missing",
+);
 assert(
   authz.includes('"searchExecution", "execute"') ||
     authz.includes('"searchExecution",\n    "execute"') ||
@@ -196,10 +216,7 @@ assert(
   "searchQuery.query must not be mapped (management ≠ execution)",
 );
 
-const security = readFileSync(
-  join(EXEC, "search-security-filters.ts"),
-  "utf8",
-);
+const security = readFileSync(join(EXEC, "search-security-filters.ts"), "utf8");
 assert(
   security.includes("applyMandatorySearchSecurityFilters") &&
     security.includes("tenantId") &&
@@ -221,9 +238,15 @@ assert(
   "No HTTP search routes in this milestone",
 );
 
-const adr61 = existsSync(join(ROOT, "docs/adr/ADR-0061-search-tenant-isolation-strategy.md"));
-const adr62 = existsSync(join(ROOT, "docs/adr/ADR-0062-search-canonical-id-mapping.md"));
-const adr63 = existsSync(join(ROOT, "docs/adr/ADR-0063-search-execution-provider-resolution.md"));
+const adr61 = existsSync(
+  join(ROOT, "docs/adr/ADR-0061-search-tenant-isolation-strategy.md"),
+);
+const adr62 = existsSync(
+  join(ROOT, "docs/adr/ADR-0062-search-canonical-id-mapping.md"),
+);
+const adr63 = existsSync(
+  join(ROOT, "docs/adr/ADR-0063-search-execution-provider-resolution.md"),
+);
 assert(adr61 && adr62 && adr63, "adrs-present", "ADR-0061/0062/0063 must exist");
 
 if (violations.length > 0) {
@@ -235,7 +258,11 @@ if (violations.length > 0) {
 }
 
 console.log("APZSEARCH-006 audit PASS — 0 violations");
-console.log("  versions: search-contracts@0.4.0 platform-services@0.19.0 integration-meilisearch@0.1.0");
-console.log("  boundaries: no Meili DTOs in gateway; no RestClient internals in platform-services;");
+console.log(
+  "  versions: search-contracts@0.4.0 platform-services@0.25.0 integration-meilisearch@0.1.0",
+);
+console.log(
+  "  boundaries: no Meili DTOs in gateway; no RestClient internals in platform-services;",
+);
 console.log("  adapter↛platform-services; management≠execution; no HTTP/Workbench");
 process.exit(0);

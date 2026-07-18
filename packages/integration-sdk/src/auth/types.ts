@@ -10,11 +10,7 @@ export type AuthenticationMode =
   | "custom";
 
 export type CredentialSourceType =
-  | "static"
-  | "environment"
-  | "platform_config"
-  | "vault"
-  | "tenant_scoped";
+  "static" | "environment" | "platform_config" | "vault" | "tenant_scoped";
 
 /** Static credential reference — secret values resolved via SecretProvider only. */
 export interface AuthCredentialReference {
@@ -55,7 +51,9 @@ export interface AuthenticateInput {
 }
 
 export interface AuthenticationProvider {
-  authenticate(input: AuthenticateInput): Promise<import("../errors/result").SdkResult<AuthenticationResult>>;
+  authenticate(
+    input: AuthenticateInput,
+  ): Promise<import("../errors/result").SdkResult<AuthenticationResult>>;
   validateCredentialReference(
     credential: AuthCredentialReference,
     correlationId: string,

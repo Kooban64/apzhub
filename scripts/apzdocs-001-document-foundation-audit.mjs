@@ -24,7 +24,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -67,29 +68,34 @@ for (const root of packageRoots) {
     { rule: "no-workbench", pattern: /workbench-framework|PlatformReportingView/ },
     {
       rule: "no-product-integrations",
-      pattern: /@apzhub\/integration-plane|@apzhub\/integration-zammad|@apzhub\/testing-services/,
+      pattern:
+        /@apzhub\/integration-plane|@apzhub\/integration-zammad|@apzhub\/testing-services/,
     },
     {
       rule: "no-binary-sdks",
-      pattern: /from\s+["']minio["']|@aws-sdk\/client-s3|@azure\/storage-blob|@google-cloud\/storage/,
+      pattern:
+        /from\s+["']minio["']|@aws-sdk\/client-s3|@azure\/storage-blob|@google-cloud\/storage/,
     },
   ]);
 }
 
 scan(walk(join(ROOT, "packages/document-contracts")), [
-  { rule: "contracts-no-core", pattern: /@apzhub\/document-core|@apzhub\/document-persistence/ },
+  {
+    rule: "contracts-no-core",
+    pattern: /@apzhub\/document-core|@apzhub\/document-persistence/,
+  },
 ]);
 
 scan(walk(join(ROOT, "packages/document-core")), [
-  { rule: "core-no-persistence-package-cycle-impl", pattern: /@apzhub\/document-persistence/ },
+  {
+    rule: "core-no-persistence-package-cycle-impl",
+    pattern: /@apzhub\/document-persistence/,
+  },
 ]);
 
 // Ensure storage module has no concrete provider classes
 {
-  const storage = join(
-    ROOT,
-    "packages/document-core/src/storage/storage-provider.ts",
-  );
+  const storage = join(ROOT, "packages/document-core/src/storage/storage-provider.ts");
   const content = readFileSync(storage, "utf8");
   if (/class\s+\w+StorageProvider/.test(content)) {
     violations.push({

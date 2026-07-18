@@ -1,5 +1,6 @@
 /** Metric kinds emitted by the platform execution pipeline. */
-export type PipelineMetricKind = "operation_started" | "operation_succeeded" | "operation_failed";
+export type PipelineMetricKind =
+  "operation_started" | "operation_succeeded" | "operation_failed";
 
 export interface PipelineMetricEvent {
   readonly kind: PipelineMetricKind;

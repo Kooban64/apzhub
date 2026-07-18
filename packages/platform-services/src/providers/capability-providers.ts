@@ -74,7 +74,11 @@ export interface TaskProvider {
     input: UpdateTaskInput,
   ): Promise<Task>;
 
-  archiveTask(ctx: ServiceRequestContext, projectId: string, taskId: string): Promise<Task>;
+  archiveTask(
+    ctx: ServiceRequestContext,
+    projectId: string,
+    taskId: string,
+  ): Promise<Task>;
 
   transitionTaskStatus(
     ctx: ServiceRequestContext,

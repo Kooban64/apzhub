@@ -44,16 +44,16 @@ See [Testing Search Publisher Architecture](./APZHUB-Testing-Search-Publisher-Ar
 
 ## Entity types (40)
 
-| Area | Types |
-| ---- | ----- |
-| Manual | `test_plan`, `test_suite`, `test_case`, `test_execution`, `test_run`, `execution_step`, `evidence`, `approval`, `requirement`, `defect` |
-| Automation | `automation_run`, `automation_suite`, `imported_result`, `coverage_summary` |
-| Certification | `certification`, `certification_gate`, `certification_approval`, `certification_evidence`, `certification_decision` |
-| Release | `release`, `release_candidate`, `release_package`, `release_scope`, `release_approval`, `release_decision`, `release_manifest`, `release_summary` |
-| Engineering | `engineering_snapshot` (Engineering Score), `engineering_trend`, `benchmark`, `historical_snapshot`, `risk_summary` |
-| Quality | `quality_summary`, `quality_coverage_summary`, `defect_summary` |
-| Reporting metadata | `report_metadata`, `report_template` |
-| Pipeline metadata | `pipeline`, `pipeline_run`, `pipeline_import` |
+| Area               | Types                                                                                                                                             |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Manual             | `test_plan`, `test_suite`, `test_case`, `test_execution`, `test_run`, `execution_step`, `evidence`, `approval`, `requirement`, `defect`           |
+| Automation         | `automation_run`, `automation_suite`, `imported_result`, `coverage_summary`                                                                       |
+| Certification      | `certification`, `certification_gate`, `certification_approval`, `certification_evidence`, `certification_decision`                               |
+| Release            | `release`, `release_candidate`, `release_package`, `release_scope`, `release_approval`, `release_decision`, `release_manifest`, `release_summary` |
+| Engineering        | `engineering_snapshot` (Engineering Score), `engineering_trend`, `benchmark`, `historical_snapshot`, `risk_summary`                               |
+| Quality            | `quality_summary`, `quality_coverage_summary`, `defect_summary`                                                                                   |
+| Reporting metadata | `report_metadata`, `report_template`                                                                                                              |
+| Pipeline metadata  | `pipeline`, `pipeline_run`, `pipeline_import`                                                                                                     |
 
 Quality types are **additional** to automation `coverage_summary` and manual `defect`. Pipeline types are metadata-only (never logs/artifacts/secrets).
 

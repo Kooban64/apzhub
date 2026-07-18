@@ -9,7 +9,9 @@ import {
 
 type SessionResolver = () => Promise<PlatformApiGuardSession | null>;
 
-export async function handleGetSecurity(resolveSession: SessionResolver): Promise<Response> {
+export async function handleGetSecurity(
+  resolveSession: SessionResolver,
+): Promise<Response> {
   const guard = await requirePlatformSession(await resolveSession());
   if (!guard.ok) return guardFailureResponse(guard);
 
@@ -27,7 +29,8 @@ export async function handleGetSecurityDiagnostics(
 
   const service = getSharedPlatformSecurityService();
   const security = service.securityDiagnostics.getSecurityDiagnostics();
-  const consolidated = await service.operationalDiagnostics.getConsolidatedDiagnostics();
+  const consolidated =
+    await service.operationalDiagnostics.getConsolidatedDiagnostics();
 
   return jsonPlatformResponse(
     {

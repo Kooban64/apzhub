@@ -53,14 +53,11 @@ function mapGraph(raw: unknown): WorkflowDefinitionGraphViewModel | undefined {
       nodeKind: n.nodeKind !== undefined ? String(n.nodeKind) : undefined,
       kind: n.kind !== undefined ? String(n.kind) : undefined,
       label: n.label !== undefined ? String(n.label) : undefined,
-      config:
-        n.config && typeof n.config === "object"
-          ? asRecord(n.config)
-          : undefined,
+      config: n.config && typeof n.config === "object" ? asRecord(n.config) : undefined,
     };
   });
-  const connections: WorkflowDefinitionConnectionViewModel[] =
-    connectionsRaw.map((c) => {
+  const connections: WorkflowDefinitionConnectionViewModel[] = connectionsRaw.map(
+    (c) => {
       const row = asRecord(c);
       return {
         id: row.id !== undefined ? String(row.id) : undefined,
@@ -68,7 +65,8 @@ function mapGraph(raw: unknown): WorkflowDefinitionGraphViewModel | undefined {
         targetNodeId: String(row.targetNodeId ?? ""),
         label: row.label !== undefined ? String(row.label) : undefined,
       };
-    });
+    },
+  );
   return { nodes, connections };
 }
 
@@ -220,9 +218,7 @@ function mapSummary(raw: unknown): WorkflowSummaryViewModel {
         ? String(r.categoryId)
         : undefined,
     folderId:
-      r.folderId !== undefined && r.folderId !== null
-        ? String(r.folderId)
-        : undefined,
+      r.folderId !== undefined && r.folderId !== null ? String(r.folderId) : undefined,
     updatedAt: String(r.updatedAt ?? ""),
   };
 }
@@ -244,9 +240,7 @@ function mapWorkflow(raw: unknown): WorkflowViewModel {
         ? String(r.categoryId)
         : undefined,
     folderId:
-      r.folderId !== undefined && r.folderId !== null
-        ? String(r.folderId)
-        : undefined,
+      r.folderId !== undefined && r.folderId !== null ? String(r.folderId) : undefined,
     templateId:
       r.templateId !== undefined && r.templateId !== null
         ? String(r.templateId)
@@ -277,8 +271,7 @@ function mapVersion(raw: unknown): WorkflowVersionViewModel {
     lifecycle: String(r.lifecycle ?? ""),
     createdAt: String(r.createdAt ?? ""),
     createdBy: String(r.createdBy ?? ""),
-    changeSummary:
-      r.changeSummary !== undefined ? String(r.changeSummary) : undefined,
+    changeSummary: r.changeSummary !== undefined ? String(r.changeSummary) : undefined,
     graph,
     variables: mapRecordList(r.variables),
     parameters: mapRecordList(r.parameters),
@@ -387,9 +380,7 @@ async function requestJson<T>(
     },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiSuccessEnvelope<T>
-    | ApiCollectionEnvelope<unknown>
-    | ApiErrorEnvelope;
+    ApiSuccessEnvelope<T> | ApiCollectionEnvelope<unknown> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new WorkflowClientError({
@@ -449,11 +440,7 @@ export function createHttpWorkflowClient(): WorkflowClient {
     async deleteWorkflow(workflowId, options) {
       const envelope = await requestJson<
         ApiSuccessEnvelope<{ deleted: boolean; workflowId: string }>
-      >(
-        `${API_BASE}/${encodeURIComponent(workflowId)}`,
-        { method: "DELETE" },
-        options,
-      );
+      >(`${API_BASE}/${encodeURIComponent(workflowId)}`, { method: "DELETE" }, options);
       return {
         deleted: Boolean(envelope.data?.deleted),
         workflowId: String(envelope.data?.workflowId ?? workflowId),

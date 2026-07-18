@@ -13,7 +13,10 @@ export interface PlatformTenantRepository {
   getById(tenantId: string): PlatformTenant | undefined;
   getBySlug(slug: string): PlatformTenant | undefined;
   list(): readonly PlatformTenant[];
-  updateStatus(tenantId: string, status: PlatformTenantStatus): PlatformTenant | undefined;
+  updateStatus(
+    tenantId: string,
+    status: PlatformTenantStatus,
+  ): PlatformTenant | undefined;
   count(): number;
 }
 
@@ -26,7 +29,10 @@ export interface PlatformTenantMembershipRepository {
   listByUser(userId: string): readonly PlatformUserTenantMembership[];
   listByTenant(tenantId: string): readonly PlatformUserTenantMembership[];
   getPrimaryForUser(userId: string): PlatformUserTenantMembership | undefined;
-  setPrimary(userId: string, tenantId: string): PlatformUserTenantMembership | undefined;
+  setPrimary(
+    userId: string,
+    tenantId: string,
+  ): PlatformUserTenantMembership | undefined;
   updateStatus(
     userId: string,
     tenantId: string,
@@ -62,7 +68,10 @@ export class InMemoryPlatformTenantRepository implements PlatformTenantRepositor
     return [...this.tenants.values()];
   }
 
-  updateStatus(tenantId: string, status: PlatformTenantStatus): PlatformTenant | undefined {
+  updateStatus(
+    tenantId: string,
+    status: PlatformTenantStatus,
+  ): PlatformTenant | undefined {
     const existing = this.tenants.get(tenantId);
     if (!existing) {
       return undefined;
@@ -77,9 +86,7 @@ export class InMemoryPlatformTenantRepository implements PlatformTenantRepositor
   }
 }
 
-export class InMemoryPlatformTenantMembershipRepository
-  implements PlatformTenantMembershipRepository
-{
+export class InMemoryPlatformTenantMembershipRepository implements PlatformTenantMembershipRepository {
   private readonly memberships = new Map<string, PlatformUserTenantMembership>();
 
   private key(userId: string, tenantId: string): string {
@@ -105,7 +112,8 @@ export class InMemoryPlatformTenantMembershipRepository
 
   listByTenant(tenantId: string): readonly PlatformUserTenantMembership[] {
     return [...this.memberships.values()].filter(
-      (membership) => membership.tenantId === tenantId && membership.status === "active",
+      (membership) =>
+        membership.tenantId === tenantId && membership.status === "active",
     );
   }
 
@@ -118,7 +126,10 @@ export class InMemoryPlatformTenantMembershipRepository
     );
   }
 
-  setPrimary(userId: string, tenantId: string): PlatformUserTenantMembership | undefined {
+  setPrimary(
+    userId: string,
+    tenantId: string,
+  ): PlatformUserTenantMembership | undefined {
     const target = this.getByUserAndTenant(userId, tenantId);
     if (!target) {
       return undefined;
@@ -249,8 +260,10 @@ export class TenantManagementService {
     }
 
     return (
-      this.options.membershipRepository.getByUserAndTenant(input.userId, input.tenantId) ??
-      membership
+      this.options.membershipRepository.getByUserAndTenant(
+        input.userId,
+        input.tenantId,
+      ) ?? membership
     );
   }
 
@@ -274,14 +287,17 @@ export class TenantManagementService {
       tenantCount: tenants.length,
       activeTenantCount: tenants.filter((tenant) => tenant.status === "active").length,
       membershipCount: allMemberships.length,
-      primaryMembershipCount: allMemberships.filter((membership) => membership.isPrimary)
-        .length,
+      primaryMembershipCount: allMemberships.filter(
+        (membership) => membership.isPrimary,
+      ).length,
     };
   }
 }
 
 export class TenantSessionResolver {
-  constructor(private readonly membershipRepository: PlatformTenantMembershipRepository) {}
+  constructor(
+    private readonly membershipRepository: PlatformTenantMembershipRepository,
+  ) {}
 
   resolvePrimaryTenantId(userId: string | undefined): string | undefined {
     if (!userId) {

@@ -28,7 +28,9 @@ export class PlaneClient {
     this.getAuth = options.getAuth;
   }
 
-  async getInstance(context: IntegrationRequestContext): Promise<PlaneInstanceResponse> {
+  async getInstance(
+    context: IntegrationRequestContext,
+  ): Promise<PlaneInstanceResponse> {
     const auth = await this.getAuth();
     const response = await this.client.request<PlaneInstanceResponse>({
       context,
@@ -39,7 +41,9 @@ export class PlaneClient {
     return response.data;
   }
 
-  async getWorkspace(context: IntegrationRequestContext): Promise<PlaneWorkspaceResponse> {
+  async getWorkspace(
+    context: IntegrationRequestContext,
+  ): Promise<PlaneWorkspaceResponse> {
     const auth = await this.getAuth();
     const response = await this.client.request<PlaneWorkspaceResponse>({
       context,
@@ -50,7 +54,9 @@ export class PlaneClient {
     return response.data;
   }
 
-  async testConnection(context: IntegrationRequestContext): Promise<PlaneConnectionTestResult> {
+  async testConnection(
+    context: IntegrationRequestContext,
+  ): Promise<PlaneConnectionTestResult> {
     const startedAt = Date.now();
     const instance = await this.getInstance(context);
     const workspace = await this.getWorkspace(context);

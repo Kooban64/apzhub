@@ -6,14 +6,8 @@ import type {
   ReportTemplateCreate,
   ReportTemplateUpdate,
 } from "../interfaces";
-import type {
-  ReportGenerationMetadataRecord,
-  ReportTemplateRecord,
-} from "../records";
-import {
-  baseMeta,
-  createInMemoryCrudRepository,
-} from "../in-memory/generic-crud";
+import type { ReportGenerationMetadataRecord, ReportTemplateRecord } from "../records";
+import { baseMeta, createInMemoryCrudRepository } from "../in-memory/generic-crud";
 
 export interface ReportingInMemoryStores {
   reportTemplates: Map<string, ReportTemplateRecord>;
@@ -31,9 +25,7 @@ function assertReportGenerationMetadataImmutable(): never {
   throw new Error("Report generation metadata is immutable");
 }
 
-export function createInMemoryReportingRepos(
-  stores: ReportingInMemoryStores,
-): {
+export function createInMemoryReportingRepos(stores: ReportingInMemoryStores): {
   reportTemplates: CrudRepository<
     ReportTemplateCreate,
     ReportTemplateUpdate,
@@ -86,9 +78,7 @@ export function createInMemoryReportingRepos(
             existing?.metricKeysJson ??
             [],
           sectionsJson:
-            (input.sectionsJson as readonly unknown[]) ??
-            existing?.sectionsJson ??
-            [],
+            (input.sectionsJson as readonly unknown[]) ?? existing?.sectionsJson ?? [],
           builtin: Boolean(input.builtin ?? existing?.builtin ?? false),
         };
       },
@@ -128,9 +118,7 @@ export function createInMemoryReportingRepos(
             input.parametersJson ?? existing?.parametersJson ?? "{}",
           ),
           generatedAt: String(
-            input.generatedAt ??
-              existing?.generatedAt ??
-              new Date().toISOString(),
+            input.generatedAt ?? existing?.generatedAt ?? new Date().toISOString(),
           ),
           generatedBy: String(input.generatedBy ?? existing?.generatedBy ?? ""),
           version: String(input.version ?? existing?.version ?? "1"),

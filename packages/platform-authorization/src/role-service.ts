@@ -18,7 +18,10 @@ export class RoleService {
     private readonly events: AuthorizationEventPublisher,
   ) {}
 
-  createRole(input: CreatePlatformRoleInput, permissionKeys: readonly string[] = []): PlatformRole {
+  createRole(
+    input: CreatePlatformRoleInput,
+    permissionKeys: readonly string[] = [],
+  ): PlatformRole {
     if (input.parentRoleId && !this.roles.get(input.parentRoleId)) {
       throw new Error(`Parent role not found: ${input.parentRoleId}`);
     }

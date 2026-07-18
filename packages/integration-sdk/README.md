@@ -2,8 +2,8 @@
 
 Platform Integration SDK — shared foundation for all APZHUB OSS and vendor adapters.
 
-**Version:** 0.9.0  
-**Authority:** [Platform Integration SDK Architecture](../../docs/architecture/APZHUB-Platform-Integration-SDK-Architecture.md)
+**Version:** 1.0.0 · **Architecture Frozen** (OSS-100-11)  
+**Authority:** [Integration SDK Reference Standard](../../docs/architecture/APZHUB-Integration-SDK-Reference-Standard.md) · [Freeze Notice](../../docs/architecture/APZHUB-Integration-SDK-Architecture-Freeze-Notice.md)
 
 ---
 
@@ -23,39 +23,47 @@ Capability Service → Vendor Adapter → Integration SDK → SecretProvider
                                     Harness & Certification (OSS-100-09)
                                               ↓
                                     v1.0 Certification (OSS-100-10)
+                                              ↓
+                                    v1.0.0 Architecture Freeze (OSS-100-11)
 ```
 
 ---
 
 ## Exports
 
-| Import path | Contents |
-|-------------|----------|
-| `@apzhub/integration-sdk` | Root barrel — all public SDK surface |
-| `@apzhub/integration-sdk/auth` | Authentication provider, credential resolver, secret providers |
-| `@apzhub/integration-sdk/connection` | Connection manager, registry, lifecycle |
-| `@apzhub/integration-sdk/health` | HealthProvider, check aggregation |
-| `@apzhub/integration-sdk/version` | VersionProvider, compatibility |
-| `@apzhub/integration-sdk/diagnostics` | Unified DiagnosticsProvider |
-| `@apzhub/integration-sdk/lifecycle` | LifecycleParticipant, platform bridge |
-| `@apzhub/integration-sdk/client` | `IntegrationClient` + `createHttpIntegrationClient` |
-| `@apzhub/integration-sdk/transport` | Shared HTTP transport, policies, mock transport |
-| `@apzhub/integration-sdk/mapping` | Mapping Provider Framework (registry, pipeline, transformers) |
-| `@apzhub/integration-sdk/events` | Webhook & polling contracts, source envelope, pipelines |
-| `@apzhub/integration-sdk/harness` | Adapter development harness, certification, compliance, mocks, scaffold, CI helpers |
-| `@apzhub/integration-sdk/adapter` | `AdapterBase` interface + placeholder |
-| `@apzhub/integration-sdk/errors` | Error model, codes, `SdkResult`, `ErrorTranslator` |
-| `@apzhub/integration-sdk/resilience` | Circuit breaker + `DefaultRetryPolicy` |
-| `@apzhub/integration-sdk/observability` | Metrics contracts, integration logger |
+| Import path                             | Contents                                                                            |
+| --------------------------------------- | ----------------------------------------------------------------------------------- |
+| `@apzhub/integration-sdk`               | Root barrel — all public SDK surface                                                |
+| `@apzhub/integration-sdk/auth`          | Authentication provider, credential resolver, secret providers                      |
+| `@apzhub/integration-sdk/connection`    | Connection manager, registry, lifecycle                                             |
+| `@apzhub/integration-sdk/health`        | HealthProvider, check aggregation                                                   |
+| `@apzhub/integration-sdk/version`       | VersionProvider, compatibility                                                      |
+| `@apzhub/integration-sdk/diagnostics`   | Unified DiagnosticsProvider                                                         |
+| `@apzhub/integration-sdk/lifecycle`     | LifecycleParticipant, platform bridge                                               |
+| `@apzhub/integration-sdk/client`        | `IntegrationClient` + `createHttpIntegrationClient`                                 |
+| `@apzhub/integration-sdk/transport`     | Shared HTTP transport, policies, mock transport                                     |
+| `@apzhub/integration-sdk/mapping`       | Mapping Provider Framework (registry, pipeline, transformers)                       |
+| `@apzhub/integration-sdk/events`        | Webhook & polling contracts, source envelope, pipelines                             |
+| `@apzhub/integration-sdk/harness`       | Adapter development harness, certification, compliance, mocks, scaffold, CI helpers |
+| `@apzhub/integration-sdk/adapter`       | `AdapterBase` interface + placeholder                                               |
+| `@apzhub/integration-sdk/errors`        | Error model, codes, `SdkResult`, `ErrorTranslator`                                  |
+| `@apzhub/integration-sdk/resilience`    | Circuit breaker + `DefaultRetryPolicy`                                              |
+| `@apzhub/integration-sdk/observability` | Metrics contracts, integration logger                                               |
 
 ---
 
+## OSS-100-11
+
+- **`@apzhub/integration-sdk` v1.0.0** promoted · **Architecture Frozen**
+- Outcome: **`PRODUCTION_READY_WITH_LIMITATIONS`** retained
+- Command: `pnpm certify:integration-sdk` · ADR-0065
+- No breaking changes vs 0.9.0 · no new providers · no Event Bus / ingress / provisioning
+- Limitations unchanged: no Event Bus, no webhook ingress, no provisioning, no durable checkpoint/dedup stores, PlaceholderVault only, prefer subpath imports
+
 ## OSS-100-10
 
-- Formal **v1.0 Certification & Release Readiness** pack (governance only — package remains **0.9.0**)
-- Outcome: **`PRODUCTION_READY_WITH_LIMITATIONS`** (exit criteria PRODUCTION READY with documented limitations)
-- Hard blockers: **none** · Recommendation: promote to **1.0.0** after owner accepts limitations and API freeze — **do not auto-promote**
-- Limitations: no Event Bus, no webhook ingress, no provisioning, no durable checkpoint/dedup stores, PlaceholderVault only, prefer subpath imports
+- Formal **v1.0 Certification & Release Readiness** pack (governance; package remained **0.9.0** until OSS-100-11)
+- Hard blockers: **none** · recommended promotion executed under OSS-100-11
 - Plane/Zammad re-cert via `testing/sdk-v1` (15 / 11 caps; 0 architecture fails)
 
 See [SDK-V1-CERTIFICATION.md](./docs/SDK-V1-CERTIFICATION.md) · [SDK-API-AUDIT.md](./docs/SDK-API-AUDIT.md) · [SDK-SECURITY-AUDIT.md](./docs/SDK-SECURITY-AUDIT.md) · [SDK-RELEASE-READINESS.md](./docs/SDK-RELEASE-READINESS.md) · [SDK-PUBLIC-API.md](./docs/SDK-PUBLIC-API.md) · [SDK-COMPATIBILITY.md](./docs/SDK-COMPATIBILITY.md) · [OSS-100-10 Completion Report](../../docs/sprint/OSS-100-10-completion-report.md).
@@ -215,21 +223,22 @@ await manager.open("conn-example", "corr-001");
 
 ## Roadmap
 
-| Phase | Feature | Status |
-|-------|---------|--------|
-| OSS-100-03 | Health probe, version provider, platform lifecycle hooks | Complete |
-| OSS-100-05 | AdapterBase, factory, capability registration | Complete |
-| OSS-100-06 | Shared HTTP transport | Complete (v0.6.0) |
-| OSS-100-07 | Mapping Provider Framework | Complete (v0.7.0) |
-| OSS-100-08 | Webhook & polling contracts | Complete (v0.8.0) |
-| OSS-100-09 | Adapter Development Harness & Certification | **Complete** (v0.9.0) |
-| OSS-100-10 | Integration SDK v1.0 Certification & Release Readiness | **Complete** — `PRODUCTION_READY_WITH_LIMITATIONS`; remain **0.9.0** |
-| OSS-100-11+ | Provisioning (deferred) / further closeout | Planned — await owner approval |
-| OSS-101-04 | Plane adapter | Complete (uses SDK transport + mapping + events + harness wrappers) |
+| Phase       | Feature                                                         | Status                                                              |
+| ----------- | --------------------------------------------------------------- | ------------------------------------------------------------------- |
+| OSS-100-03  | Health probe, version provider, platform lifecycle hooks        | Complete                                                            |
+| OSS-100-05  | AdapterBase, factory, capability registration                   | Complete                                                            |
+| OSS-100-06  | Shared HTTP transport                                           | Complete (v0.6.0)                                                   |
+| OSS-100-07  | Mapping Provider Framework                                      | Complete (v0.7.0)                                                   |
+| OSS-100-08  | Webhook & polling contracts                                     | Complete (v0.8.0)                                                   |
+| OSS-100-09  | Adapter Development Harness & Certification                     | **Complete** (v0.9.0)                                               |
+| OSS-100-10  | Integration SDK v1.0 Certification & Release Readiness          | **Complete** — `PRODUCTION_READY_WITH_LIMITATIONS` (remained 0.9.0) |
+| OSS-100-11  | Integration SDK v1.0.0 Wave Certification & Architecture Freeze | **Complete** — **1.0.0** · **Architecture Frozen**                  |
+| OSS-100-12+ | Provisioning (deferred) / Event Bus / ingress                   | Planned — await owner approval                                      |
+| OSS-101-04  | Plane adapter                                                   | Complete (uses SDK transport + mapping + events + harness wrappers) |
 
-See [SDK-V1-CERTIFICATION.md](./docs/SDK-V1-CERTIFICATION.md) · [OSS-100-10 Completion Report](../../docs/sprint/OSS-100-10-completion-report.md).
+See [Freeze Notice](../../docs/architecture/APZHUB-Integration-SDK-Architecture-Freeze-Notice.md) · [OSS-100-11 Completion Report](../../docs/sprint/OSS-100-11-completion-report.md) · [v1.0.0 Release Notes](../../docs/releases/APZHUB-Integration-SDK-v1.0.0-Release-Notes.md).
 
-**Readiness:** certified `PRODUCTION_READY_WITH_LIMITATIONS`. Package version remains **0.9.0** until owner promotes to **1.0.0**.
+**Readiness:** certified `PRODUCTION_READY_WITH_LIMITATIONS`. Package version **1.0.0** · **Architecture Frozen**.
 
 ---
 

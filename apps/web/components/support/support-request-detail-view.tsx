@@ -21,12 +21,7 @@ import { CustomerReplyComposer } from "./customer-reply-composer";
 import { InternalNoteComposer } from "./internal-note-composer";
 import { SupportConversation } from "./support-conversation";
 import { SupportRequestCommands } from "./support-request-commands";
-import {
-  ErrorState,
-  LoadingState,
-  PageShell,
-  StatusBadge,
-} from "./support-ui";
+import { ErrorState, LoadingState, PageShell, StatusBadge } from "./support-ui";
 
 export function SupportRequestDetailView({
   supportRequestId,
@@ -45,13 +40,15 @@ export function SupportRequestDetailView({
 
   const articlesQuery = useQuery({
     queryKey: supportQueryKeys.requests.articles(supportRequestId),
-    queryFn: ({ signal }) => listSupportArticles(supportRequestId, undefined, { signal }),
+    queryFn: ({ signal }) =>
+      listSupportArticles(supportRequestId, undefined, { signal }),
     enabled: canListSupportArticles(permissions) || permissions === undefined,
   });
 
   const historyQuery = useQuery({
     queryKey: supportQueryKeys.requests.history(supportRequestId),
-    queryFn: ({ signal }) => listSupportHistory(supportRequestId, undefined, { signal }),
+    queryFn: ({ signal }) =>
+      listSupportHistory(supportRequestId, undefined, { signal }),
     enabled: tab === "history",
   });
 
@@ -163,7 +160,9 @@ export function SupportRequestDetailView({
 
       {tab === "conversation" ? (
         <div className="flex flex-col gap-4" data-testid="support-conversation-panel">
-          {articlesQuery.isLoading ? <LoadingState label="Loading conversation…" /> : null}
+          {articlesQuery.isLoading ? (
+            <LoadingState label="Loading conversation…" />
+          ) : null}
           {articlesQuery.isError ? (
             <ErrorState
               message={
@@ -218,7 +217,9 @@ export function SupportRequestDetailView({
                 </li>
               ))}
               {historyQuery.data.data.length === 0 ? (
-                <p className="text-sm text-[var(--color-muted-foreground)]">No history events.</p>
+                <p className="text-sm text-[var(--color-muted-foreground)]">
+                  No history events.
+                </p>
               ) : null}
             </ol>
           ) : null}

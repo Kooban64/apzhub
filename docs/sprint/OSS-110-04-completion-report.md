@@ -16,19 +16,19 @@ OSS-110-04 delivers a vendor-neutral platform execution layer between applicatio
 
 ## Milestone scope delivered
 
-| Deliverable | Status |
-|-------------|--------|
-| Request pipeline (validate, context, IDs, timing, logging, metrics, errors) | ✅ |
-| Authorization abstraction + `AllowAllAuthorizationProvider` | ✅ |
-| Policy pipeline framework (no production policies) | ✅ |
-| Service middleware registry (before/after) | ✅ |
-| `ServiceRequestContext` enhancements (backwards compatible) | ✅ |
-| Gateway integration via pipeline-wrapped contract surfaces | ✅ |
-| Comprehensive unit tests | ✅ |
-| Architecture + specification + foundation docs | ✅ |
-| Plane-specific functionality | ⏸ Excluded |
-| Production authz / IdP | ⏸ Excluded |
-| HTTP routes / persistence / caching | ⏸ Excluded |
+| Deliverable                                                                 | Status     |
+| --------------------------------------------------------------------------- | ---------- |
+| Request pipeline (validate, context, IDs, timing, logging, metrics, errors) | ✅         |
+| Authorization abstraction + `AllowAllAuthorizationProvider`                 | ✅         |
+| Policy pipeline framework (no production policies)                          | ✅         |
+| Service middleware registry (before/after)                                  | ✅         |
+| `ServiceRequestContext` enhancements (backwards compatible)                 | ✅         |
+| Gateway integration via pipeline-wrapped contract surfaces                  | ✅         |
+| Comprehensive unit tests                                                    | ✅         |
+| Architecture + specification + foundation docs                              | ✅         |
+| Plane-specific functionality                                                | ⏸ Excluded |
+| Production authz / IdP                                                      | ⏸ Excluded |
+| HTTP routes / persistence / caching                                         | ⏸ Excluded |
 
 ---
 
@@ -98,17 +98,17 @@ docs/README.md
 
 ## Tests added / statistics
 
-| Suite | Focus |
-|-------|-------|
-| `execution-layer.test.ts` (13) | Pipeline, middleware order, authz, policies, context enrichment, errors, logging/metrics hooks, gateway integration, wrapService |
-| Existing platform-services suites | Unchanged behaviour preserved |
+| Suite                             | Focus                                                                                                                            |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `execution-layer.test.ts` (13)    | Pipeline, middleware order, authz, policies, context enrichment, errors, logging/metrics hooks, gateway integration, wrapService |
+| Existing platform-services suites | Unchanged behaviour preserved                                                                                                    |
 
-| Scope | Result |
-|-------|--------|
-| `@apzhub/platform-services` | **57 passed** (6 files) |
-| `@apzhub/platform-service-contracts` | **8 passed** |
-| Typecheck (platform-services, contracts) | Pass |
-| ESLint (`packages/platform-services`) | Pass |
+| Scope                                    | Result                  |
+| ---------------------------------------- | ----------------------- |
+| `@apzhub/platform-services`              | **57 passed** (6 files) |
+| `@apzhub/platform-service-contracts`     | **8 passed**            |
+| Typecheck (platform-services, contracts) | Pass                    |
+| ESLint (`packages/platform-services`)    | Pass                    |
 
 ---
 
@@ -116,14 +116,14 @@ docs/README.md
 
 Package-scoped Vitest/v8 coverage for `@apzhub/platform-services`:
 
-| Area | Lines (approx.) |
-|------|-----------------|
-| `authorization/` | 100% |
-| `execution/` | ~96% |
-| `middleware/` | ~88% |
-| `policy/` | ~89% |
-| `gateway/` | ~95% |
-| Package overall | ~63% (lower areas remain Plane providers / full service impl surface from prior milestones) |
+| Area             | Lines (approx.)                                                                             |
+| ---------------- | ------------------------------------------------------------------------------------------- |
+| `authorization/` | 100%                                                                                        |
+| `execution/`     | ~96%                                                                                        |
+| `middleware/`    | ~88%                                                                                        |
+| `policy/`        | ~89%                                                                                        |
+| `gateway/`       | ~95%                                                                                        |
+| Package overall  | ~63% (lower areas remain Plane providers / full service impl surface from prior milestones) |
 
 Execution-layer paths exercise success, deny (authz + policy), unknown error mapping, middleware ordering, context enrichment, and gateway-wrapped calls.
 
@@ -131,14 +131,14 @@ Execution-layer paths exercise success, deny (authz + policy), unknown error map
 
 ## Quality-gate results
 
-| Gate | Result |
-|------|--------|
-| `pnpm --filter @apzhub/platform-services typecheck` | Pass |
-| `pnpm --filter @apzhub/platform-service-contracts typecheck` | Pass |
-| ESLint (platform-services) | Pass |
-| Platform services unit tests | Pass (57) |
-| Contracts unit tests | Pass (8) |
-| Plane adapter source modified | **No** |
+| Gate                                                         | Result    |
+| ------------------------------------------------------------ | --------- |
+| `pnpm --filter @apzhub/platform-services typecheck`          | Pass      |
+| `pnpm --filter @apzhub/platform-service-contracts typecheck` | Pass      |
+| ESLint (platform-services)                                   | Pass      |
+| Platform services unit tests                                 | Pass (57) |
+| Contracts unit tests                                         | Pass (8)  |
+| Plane adapter source modified                                | **No**    |
 
 ---
 
@@ -153,25 +153,25 @@ Execution-layer paths exercise success, deny (authz + policy), unknown error map
 
 ## Outstanding technical debt
 
-| Item | Notes |
-|------|-------|
-| Allow-all authorization | Production `AuthorizationProvider` not implemented |
-| Empty policy set | Rate limit, feature flags, maintenance, licensing policies deferred |
-| In-memory logger/metrics | Production observability backends not wired |
-| In-memory mapping store | PostgreSQL store still deferred |
-| TaskServiceImpl | Still unavailable via gateway |
-| HTTP route handlers | Not in scope |
+| Item                                     | Notes                                                                                                       |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Allow-all authorization                  | Production `AuthorizationProvider` not implemented                                                          |
+| Empty policy set                         | Rate limit, feature flags, maintenance, licensing policies deferred                                         |
+| In-memory logger/metrics                 | Production observability backends not wired                                                                 |
+| In-memory mapping store                  | PostgreSQL store still deferred                                                                             |
+| TaskServiceImpl                          | Still unavailable via gateway                                                                               |
+| HTTP route handlers                      | Not in scope                                                                                                |
 | Fine-grained per-operation authz mapping | Pipeline calls provider with service/operation metadata; resource/action taxonomy for domain ops still thin |
 
 ---
 
 ## Risks
 
-| Risk | Mitigation |
-|------|------------|
-| Teams may assume allow-all is production-safe | Documented as development default; enforceAuthorization + provider swap required before production |
-| Middleware/policy misuse could add latency | Priority ordering + keep hooks lightweight; no I/O in framework itself |
-| Direct bundle `*ServiceImpl` bypasses pipeline | Document gateway as the application entry point; keep raw impls for tests only |
+| Risk                                           | Mitigation                                                                                         |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Teams may assume allow-all is production-safe  | Documented as development default; enforceAuthorization + provider swap required before production |
+| Middleware/policy misuse could add latency     | Priority ordering + keep hooks lightweight; no I/O in framework itself                             |
+| Direct bundle `*ServiceImpl` bypasses pipeline | Document gateway as the application entry point; keep raw impls for tests only                     |
 
 ---
 

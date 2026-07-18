@@ -31,7 +31,9 @@ describe("TenantManagementService", () => {
       isPrimary: true,
     });
 
-    expect(sessionResolver.resolvePrimaryTenantId("user-1")).toBe(DEFAULT_PLATFORM_TENANT_ID);
+    expect(sessionResolver.resolvePrimaryTenantId("user-1")).toBe(
+      DEFAULT_PLATFORM_TENANT_ID,
+    );
   });
 
   it("reports diagnostics", () => {

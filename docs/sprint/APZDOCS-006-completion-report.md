@@ -50,14 +50,14 @@ Certified the Document Platform end-to-end as a production-ready APZHUB capabili
 
 ## Coverage Baseline
 
-| Layer | Lines | Notes |
-| ----- | ----- | ----- |
-| HTTP handler | **97.95%** | PASS |
-| Typed client | **95.02%** | PASS |
-| Workbench | **92.08%** | PASS (meaningful) |
-| Contracts executable | **100%** | PASS |
-| Postgres / live S3 unit paths | LIMITED | stubs; no live providers in unit suite |
-| Raw aggregate (all includes) | ~79% | limited by stubs/type-only |
+| Layer                         | Lines      | Notes                                  |
+| ----------------------------- | ---------- | -------------------------------------- |
+| HTTP handler                  | **97.95%** | PASS                                   |
+| Typed client                  | **95.02%** | PASS                                   |
+| Workbench                     | **92.08%** | PASS (meaningful)                      |
+| Contracts executable          | **100%**   | PASS                                   |
+| Postgres / live S3 unit paths | LIMITED    | stubs; no live providers in unit suite |
+| Raw aggregate (all includes)  | ~79%       | limited by stubs/type-only             |
 
 See [Coverage Baseline](../reviews/APZDOCS-006-coverage-baseline.md).
 
@@ -67,14 +67,14 @@ Documented only — Projects, Support, Reporting, APZ TCMS, Documents, Workflow,
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| `pnpm audit:document-vertical` | **PASS** (0 violations) |
-| APZDOCS-003/004/005 audits | **PASS** |
-| OpenAPI validate | **PASS** |
-| Focused Vitest | **88** passed |
-| Certification harness | Delivered |
-| Playwright | **LIMITED** (external Next slug conflict) |
+| Gate                           | Result                                    |
+| ------------------------------ | ----------------------------------------- |
+| `pnpm audit:document-vertical` | **PASS** (0 violations)                   |
+| APZDOCS-003/004/005 audits     | **PASS**                                  |
+| OpenAPI validate               | **PASS**                                  |
+| Focused Vitest                 | **88** passed                             |
+| Certification harness          | Delivered                                 |
+| Playwright                     | **LIMITED** (external Next slug conflict) |
 
 ## Known Limitations
 

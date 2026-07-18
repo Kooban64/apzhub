@@ -20,29 +20,29 @@ Products (`apps/law-platform`) may depend on platform packages. Platform package
 
 ## Platform package dependency graph (summary)
 
-| Package | Direct platform dependencies |
-|---------|------------------------------|
-| `@apzhub/platform-runtime` | *(none — foundation)* |
-| `@apzhub/platform-bootstrap` | runtime, identity, authorization, governance, personalisation, security, config |
-| `@apzhub/platform-identity` | config |
-| `@apzhub/platform-authorization` | config |
-| `@apzhub/platform-personalisation` | config |
-| `@apzhub/platform-governance` | config |
-| `@apzhub/platform-security` | auth, config, authorization, shared |
-| `@apzhub/platform-operations` | lifecycle, security, types |
-| `@apzhub/platform-lifecycle` | security |
-| `@apzhub/auth` | config, platform-identity |
+| Package                            | Direct platform dependencies                                                    |
+| ---------------------------------- | ------------------------------------------------------------------------------- |
+| `@apzhub/platform-runtime`         | _(none — foundation)_                                                           |
+| `@apzhub/platform-bootstrap`       | runtime, identity, authorization, governance, personalisation, security, config |
+| `@apzhub/platform-identity`        | config                                                                          |
+| `@apzhub/platform-authorization`   | config                                                                          |
+| `@apzhub/platform-personalisation` | config                                                                          |
+| `@apzhub/platform-governance`      | config                                                                          |
+| `@apzhub/platform-security`        | auth, config, authorization, shared                                             |
+| `@apzhub/platform-operations`      | lifecycle, security, types                                                      |
+| `@apzhub/platform-lifecycle`       | security                                                                        |
+| `@apzhub/auth`                     | config, platform-identity                                                       |
 
 ---
 
 ## Findings
 
-| ID | Finding | Severity | Status |
-|----|---------|----------|--------|
-| DEP-001 | Circular lifecycle ↔ operations dependency | High | **Resolved PRH-011** — removed unused dep from lifecycle |
-| DEP-002 | `@apzhub/config` → `@apzhub/legal-business-core` | Medium | Open (TD-M16-M01) |
-| DEP-003 | Framework cross-dependencies (workspace, command, workbench) | Low | Accepted — presentation layer |
-| DEP-004 | No platform package imports from `apps/*` | — | ✅ Verified |
+| ID      | Finding                                                      | Severity | Status                                                   |
+| ------- | ------------------------------------------------------------ | -------- | -------------------------------------------------------- |
+| DEP-001 | Circular lifecycle ↔ operations dependency                   | High     | **Resolved PRH-011** — removed unused dep from lifecycle |
+| DEP-002 | `@apzhub/config` → `@apzhub/legal-business-core`             | Medium   | Open (TD-M16-M01)                                        |
+| DEP-003 | Framework cross-dependencies (workspace, command, workbench) | Low      | Accepted — presentation layer                            |
+| DEP-004 | No platform package imports from `apps/*`                    | —        | ✅ Verified                                              |
 
 ---
 

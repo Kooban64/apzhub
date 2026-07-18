@@ -47,13 +47,17 @@ export class SearchProviderLifecycle {
     return this.snapshot();
   }
 
-  markReady(integrationState?: IntegrationLifecycleState): SearchProviderLifecycleSnapshot {
+  markReady(
+    integrationState?: IntegrationLifecycleState,
+  ): SearchProviderLifecycleSnapshot {
     this.assertNotDisposed();
     this.state = "ready";
     return this.snapshot(integrationState);
   }
 
-  markDegraded(integrationState?: IntegrationLifecycleState): SearchProviderLifecycleSnapshot {
+  markDegraded(
+    integrationState?: IntegrationLifecycleState,
+  ): SearchProviderLifecycleSnapshot {
     this.assertNotDisposed();
     this.state = "degraded";
     return this.snapshot(integrationState);

@@ -2,7 +2,7 @@
  * APZDOCS-002 foundation harness — migrations, packages, exclusions.
  */
 
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
@@ -25,10 +25,7 @@ describe("APZDOCS-002 foundation", () => {
     expect(sql).toContain("platform_document_storage_object");
     expect(sql).not.toMatch(/bytea/i);
     const journal = JSON.parse(
-      readFileSync(
-        join(ROOT, "packages/config/drizzle/meta/_journal.json"),
-        "utf8",
-      ),
+      readFileSync(join(ROOT, "packages/config/drizzle/meta/_journal.json"), "utf8"),
     );
     const tags = journal.entries.map((e: { tag: string }) => e.tag);
     expect(tags).toContain("0039_apz_platform_document_storage");
@@ -51,7 +48,6 @@ describe("APZDOCS-002 foundation", () => {
   it("does not add document REST routes or Workbench UI", () => {
     const webApi = join(ROOT, "apps/web/src/app/api");
     if (!existsSync(webApi)) return;
-    const { readdirSync, statSync } = require("node:fs") as typeof import("node:fs");
     function walk(dir: string, out: string[] = []): string[] {
       for (const entry of readdirSync(dir)) {
         const full = join(dir, entry);
@@ -61,12 +57,12 @@ describe("APZDOCS-002 foundation", () => {
       return out;
     }
     const files = walk(webApi).map((f) => f.replace(/\\/g, "/"));
-    const documentRoutes = files.filter((f) =>
-      /\/api\/.*document/i.test(f),
-    );
+    const documentRoutes = files.filter((f) => /\/api\/.*document/i.test(f));
     // APZDOCS-002 must not introduce new platform document HTTP routes.
     expect(
-      documentRoutes.filter((f) => f.includes("platform-document") || f.includes("documents/v1")),
+      documentRoutes.filter(
+        (f) => f.includes("platform-document") || f.includes("documents/v1"),
+      ),
     ).toEqual([]);
   });
 });

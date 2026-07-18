@@ -28,9 +28,7 @@ export class ReportingSearchLifecycle {
    * Suggests a publication lifecycle from Reporting domain status markers.
    * Preview generations → draft; archived → archived; deleted → removed.
    */
-  suggestFromReportingStatus(
-    status: string | undefined,
-  ): SearchEntityLifecycleState {
+  suggestFromReportingStatus(status: string | undefined): SearchEntityLifecycleState {
     if (!status) return "validated";
     const s = status.toLowerCase();
     if (s === "preview" || s === "draft") return "draft";

@@ -21,13 +21,13 @@ Define the **ProjectService** interface — the permanent, vendor-neutral contra
 
 ## Service identity
 
-| Field | Value |
-|-------|-------|
-| Service ID | `project-service` |
-| Interface name | `ProjectService` |
-| Contract package | `@apzhub/platform-service-contracts` (OSS-110-01) |
-| Planned implementation | `services/projects/` |
-| Manifest | `service.yaml` |
+| Field                  | Value                                             |
+| ---------------------- | ------------------------------------------------- |
+| Service ID             | `project-service`                                 |
+| Interface name         | `ProjectService`                                  |
+| Contract package       | `@apzhub/platform-service-contracts` (OSS-110-01) |
+| Planned implementation | `services/projects/`                              |
+| Manifest               | `service.yaml`                                    |
 
 ---
 
@@ -36,16 +36,16 @@ Define the **ProjectService** interface — the permanent, vendor-neutral contra
 ### Identifiers
 
 ```typescript
-type ProjectId = string;   // platform global ID, e.g. proj_*
-type TaskId = string;      // task_*
-type SprintId = string;    // sprint_*
+type ProjectId = string; // platform global ID, e.g. proj_*
+type TaskId = string; // task_*
+type SprintId = string; // sprint_*
 type MilestoneId = string; // milestone_*
 type TeamMemberId = string;
 type CommentId = string;
 type AttachmentId = string;
 type LabelId = string;
 type StatusId = string;
-type UserId = string;      // platform user ID
+type UserId = string; // platform user ID
 ```
 
 ### Project
@@ -55,15 +55,15 @@ interface Project {
   readonly id: ProjectId;
   readonly tenantId: string;
   readonly name: string;
-  readonly identifier: string;       // short code, e.g. APZ
+  readonly identifier: string; // short code, e.g. APZ
   readonly description?: string;
   readonly status: ProjectStatus;
   readonly leadId?: UserId;
-  readonly createdAt: string;        // ISO-8601
+  readonly createdAt: string; // ISO-8601
   readonly updatedAt: string;
 }
 
-type ProjectStatus = 'draft' | 'active' | 'on_hold' | 'completed' | 'archived';
+type ProjectStatus = "draft" | "active" | "on_hold" | "completed" | "archived";
 ```
 
 ### Task
@@ -83,14 +83,14 @@ interface Task {
   readonly projectModuleId?: string;
   readonly parentTaskId?: TaskId;
   readonly estimate?: Estimate;
-  readonly rank?: number;            // backlog order
+  readonly rank?: number; // backlog order
   readonly labelIds: readonly LabelId[];
   readonly createdAt: string;
   readonly updatedAt: string;
 }
 
-type TaskStatus = 'open' | 'in_progress' | 'blocked' | 'done' | 'cancelled';
-type TaskPriority = 'none' | 'low' | 'medium' | 'high' | 'urgent';
+type TaskStatus = "open" | "in_progress" | "blocked" | "done" | "cancelled";
+type TaskPriority = "none" | "low" | "medium" | "high" | "urgent";
 
 interface Estimate {
   readonly points?: number;
@@ -113,7 +113,7 @@ interface Sprint {
   readonly updatedAt: string;
 }
 
-type SprintStatus = 'planned' | 'active' | 'completed' | 'cancelled';
+type SprintStatus = "planned" | "active" | "completed" | "cancelled";
 ```
 
 ### Milestone
@@ -125,7 +125,7 @@ interface Milestone {
   readonly name: string;
   readonly description?: string;
   readonly targetDate?: string;
-  readonly status: 'open' | 'completed';
+  readonly status: "open" | "completed";
   readonly createdAt: string;
   readonly updatedAt: string;
 }
@@ -142,7 +142,7 @@ interface TeamMember {
   readonly joinedAt: string;
 }
 
-type TeamRole = 'viewer' | 'member' | 'admin';
+type TeamRole = "viewer" | "member" | "admin";
 ```
 
 ### Status, Label, Comment, Attachment, Activity
@@ -156,7 +156,7 @@ interface Status {
   readonly order: number;
 }
 
-type StatusGroup = 'todo' | 'in_progress' | 'done' | 'cancelled';
+type StatusGroup = "todo" | "in_progress" | "done" | "cancelled";
 
 interface Label {
   readonly id: LabelId;
@@ -180,7 +180,7 @@ interface Attachment {
   readonly fileName: string;
   readonly mimeType: string;
   readonly sizeBytes: number;
-  readonly url?: string;             // platform-mediated download URL
+  readonly url?: string; // platform-mediated download URL
   readonly createdAt: string;
 }
 
@@ -189,7 +189,7 @@ interface ActivityEntry {
   readonly projectId: ProjectId;
   readonly taskId?: TaskId;
   readonly actorId: UserId;
-  readonly action: string;           // APZHUB action key, not engine event
+  readonly action: string; // APZHUB action key, not engine event
   readonly summary: string;
   readonly occurredAt: string;
 }
@@ -200,13 +200,13 @@ interface ActivityEntry {
 ```typescript
 interface Backlog {
   readonly projectId: ProjectId;
-  readonly tasks: readonly Task[];   // ordered by rank
+  readonly tasks: readonly Task[]; // ordered by rank
 }
 
 interface RoadmapItem {
   readonly id: string;
   readonly projectId: ProjectId;
-  readonly type: 'milestone' | 'sprint' | 'task';
+  readonly type: "milestone" | "sprint" | "task";
   readonly referenceId: string;
   readonly title: string;
   readonly startDate?: string;
@@ -243,41 +243,95 @@ interface ProjectService {
   // ── Projects ──────────────────────────────────────────
   listProjects(ctx: ProjectServiceContext, filter?: ProjectFilter): Promise<Project[]>;
   getProject(ctx: ProjectServiceContext, projectId: ProjectId): Promise<Project>;
-  createProject(ctx: ProjectServiceContext, input: CreateProjectInput): Promise<Project>;
-  updateProject(ctx: ProjectServiceContext, projectId: ProjectId, input: UpdateProjectInput): Promise<Project>;
+  createProject(
+    ctx: ProjectServiceContext,
+    input: CreateProjectInput,
+  ): Promise<Project>;
+  updateProject(
+    ctx: ProjectServiceContext,
+    projectId: ProjectId,
+    input: UpdateProjectInput,
+  ): Promise<Project>;
   archiveProject(ctx: ProjectServiceContext, projectId: ProjectId): Promise<Project>;
 
   // ── Tasks ─────────────────────────────────────────────
-  listTasks(ctx: ProjectServiceContext, projectId: ProjectId, filter?: TaskFilter): Promise<Task[]>;
+  listTasks(
+    ctx: ProjectServiceContext,
+    projectId: ProjectId,
+    filter?: TaskFilter,
+  ): Promise<Task[]>;
   getTask(ctx: ProjectServiceContext, taskId: TaskId): Promise<Task>;
-  createTask(ctx: ProjectServiceContext, projectId: ProjectId, input: CreateTaskInput): Promise<Task>;
-  updateTask(ctx: ProjectServiceContext, taskId: TaskId, input: UpdateTaskInput): Promise<Task>;
-  transitionTaskStatus(ctx: ProjectServiceContext, taskId: TaskId, statusId: StatusId): Promise<Task>;
-  assignTask(ctx: ProjectServiceContext, taskId: TaskId, assigneeId: UserId | null): Promise<Task>;
+  createTask(
+    ctx: ProjectServiceContext,
+    projectId: ProjectId,
+    input: CreateTaskInput,
+  ): Promise<Task>;
+  updateTask(
+    ctx: ProjectServiceContext,
+    taskId: TaskId,
+    input: UpdateTaskInput,
+  ): Promise<Task>;
+  transitionTaskStatus(
+    ctx: ProjectServiceContext,
+    taskId: TaskId,
+    statusId: StatusId,
+  ): Promise<Task>;
+  assignTask(
+    ctx: ProjectServiceContext,
+    taskId: TaskId,
+    assigneeId: UserId | null,
+  ): Promise<Task>;
 
   // ── Backlog ───────────────────────────────────────────
   getBacklog(ctx: ProjectServiceContext, projectId: ProjectId): Promise<Backlog>;
-  reorderBacklog(ctx: ProjectServiceContext, projectId: ProjectId, taskIds: TaskId[]): Promise<Backlog>;
+  reorderBacklog(
+    ctx: ProjectServiceContext,
+    projectId: ProjectId,
+    taskIds: TaskId[],
+  ): Promise<Backlog>;
 
   // ── Sprints ───────────────────────────────────────────
   listSprints(ctx: ProjectServiceContext, projectId: ProjectId): Promise<Sprint[]>;
   getSprint(ctx: ProjectServiceContext, sprintId: SprintId): Promise<Sprint>;
-  createSprint(ctx: ProjectServiceContext, projectId: ProjectId, input: CreateSprintInput): Promise<Sprint>;
+  createSprint(
+    ctx: ProjectServiceContext,
+    projectId: ProjectId,
+    input: CreateSprintInput,
+  ): Promise<Sprint>;
   startSprint(ctx: ProjectServiceContext, sprintId: SprintId): Promise<Sprint>;
   completeSprint(ctx: ProjectServiceContext, sprintId: SprintId): Promise<Sprint>;
-  assignTasksToSprint(ctx: ProjectServiceContext, sprintId: SprintId, taskIds: TaskId[]): Promise<void>;
+  assignTasksToSprint(
+    ctx: ProjectServiceContext,
+    sprintId: SprintId,
+    taskIds: TaskId[],
+  ): Promise<void>;
 
   // ── Milestones ────────────────────────────────────────
-  listMilestones(ctx: ProjectServiceContext, projectId: ProjectId): Promise<Milestone[]>;
-  createMilestone(ctx: ProjectServiceContext, projectId: ProjectId, input: CreateMilestoneInput): Promise<Milestone>;
+  listMilestones(
+    ctx: ProjectServiceContext,
+    projectId: ProjectId,
+  ): Promise<Milestone[]>;
+  createMilestone(
+    ctx: ProjectServiceContext,
+    projectId: ProjectId,
+    input: CreateMilestoneInput,
+  ): Promise<Milestone>;
 
   // ── Roadmap ───────────────────────────────────────────
   getRoadmap(ctx: ProjectServiceContext, projectId: ProjectId): Promise<Roadmap>;
 
   // ── Team ──────────────────────────────────────────────
   listTeam(ctx: ProjectServiceContext, projectId: ProjectId): Promise<TeamMember[]>;
-  addTeamMember(ctx: ProjectServiceContext, projectId: ProjectId, input: AddTeamMemberInput): Promise<TeamMember>;
-  removeTeamMember(ctx: ProjectServiceContext, projectId: ProjectId, userId: UserId): Promise<void>;
+  addTeamMember(
+    ctx: ProjectServiceContext,
+    projectId: ProjectId,
+    input: AddTeamMemberInput,
+  ): Promise<TeamMember>;
+  removeTeamMember(
+    ctx: ProjectServiceContext,
+    projectId: ProjectId,
+    userId: UserId,
+  ): Promise<void>;
 
   // ── Statuses & Labels ─────────────────────────────────
   listStatuses(ctx: ProjectServiceContext, projectId: ProjectId): Promise<Status[]>;
@@ -285,14 +339,22 @@ interface ProjectService {
 
   // ── Comments & Attachments ────────────────────────────
   listComments(ctx: ProjectServiceContext, taskId: TaskId): Promise<Comment[]>;
-  addComment(ctx: ProjectServiceContext, taskId: TaskId, input: AddCommentInput): Promise<Comment>;
+  addComment(
+    ctx: ProjectServiceContext,
+    taskId: TaskId,
+    input: AddCommentInput,
+  ): Promise<Comment>;
   listAttachments(ctx: ProjectServiceContext, taskId: TaskId): Promise<Attachment[]>;
 
   // ── My work ───────────────────────────────────────────
   listMyTasks(ctx: ProjectServiceContext, filter?: TaskFilter): Promise<Task[]>;
 
   // ── Activity ──────────────────────────────────────────
-  listProjectActivity(ctx: ProjectServiceContext, projectId: ProjectId, cursor?: string): Promise<ActivityPage>;
+  listProjectActivity(
+    ctx: ProjectServiceContext,
+    projectId: ProjectId,
+    cursor?: string,
+  ): Promise<ActivityPage>;
 }
 ```
 
@@ -302,16 +364,16 @@ Input types (`CreateProjectInput`, `TaskFilter`, etc.) are defined in implementa
 
 ## Permission requirements (illustrative)
 
-| Method | Minimum permission |
-|--------|-------------------|
-| `listProjects`, `getProject` | `projects.view` |
-| `createProject` | `projects.create` |
-| `updateProject`, `archiveProject` | `projects.edit` |
-| `createTask`, `updateTask` | `tasks.create` / `tasks.edit` |
-| `transitionTaskStatus` | `tasks.transition` |
-| `assignTask` | `tasks.assign` |
-| `startSprint`, `completeSprint` | `sprints.manage` |
-| `addTeamMember` | `projects.admin` |
+| Method                            | Minimum permission            |
+| --------------------------------- | ----------------------------- |
+| `listProjects`, `getProject`      | `projects.view`               |
+| `createProject`                   | `projects.create`             |
+| `updateProject`, `archiveProject` | `projects.edit`               |
+| `createTask`, `updateTask`        | `tasks.create` / `tasks.edit` |
+| `transitionTaskStatus`            | `tasks.transition`            |
+| `assignTask`                      | `tasks.assign`                |
+| `startSprint`, `completeSprint`   | `sprints.manage`              |
+| `addTeamMember`                   | `projects.admin`              |
 
 Denied calls return `FORBIDDEN` — never adapter errors.
 
@@ -327,7 +389,7 @@ Service publishes canonical platform events after successful mutations. See [Eve
 
 ```typescript
 interface ProjectServiceDependencies {
-  readonly planeAdapter: PlaneAdapter;  // interface from PlaneAdapter spec
+  readonly planeAdapter: PlaneAdapter; // interface from PlaneAdapter spec
   readonly authorization: AuthorizationService;
   readonly audit: AuditService;
   readonly eventBus: EventBus;
@@ -341,13 +403,13 @@ interface ProjectServiceDependencies {
 
 ## API gateway mapping (planned)
 
-| Service method | HTTP (illustrative) |
-|----------------|---------------------|
-| `listProjects` | `GET /api/platform/v1/projects` |
-| `getProject` | `GET /api/platform/v1/projects/{id}` |
-| `listTasks` | `GET /api/platform/v1/projects/{id}/tasks` |
-| `transitionTaskStatus` | `PATCH /api/platform/v1/tasks/{id}/status` |
-| `getBacklog` | `GET /api/platform/v1/projects/{id}/backlog` |
+| Service method         | HTTP (illustrative)                          |
+| ---------------------- | -------------------------------------------- |
+| `listProjects`         | `GET /api/platform/v1/projects`              |
+| `getProject`           | `GET /api/platform/v1/projects/{id}`         |
+| `listTasks`            | `GET /api/platform/v1/projects/{id}/tasks`   |
+| `transitionTaskStatus` | `PATCH /api/platform/v1/tasks/{id}/status`   |
+| `getBacklog`           | `GET /api/platform/v1/projects/{id}/backlog` |
 
 Route handlers delegate to `ProjectService` only.
 

@@ -37,12 +37,12 @@ SUPPORT_UI_PERF_BASELINE {"inboxMs":…,"detailMs":…,"searchMs":…,"analytics
 
 **Sample values used for OSS-110-14 closeout documentation:**
 
-| Metric | Sample (ms) |
-|--------|-------------|
-| `inboxMs` | ~653 |
-| `detailMs` | ~599 |
-| `searchMs` | ~520 |
-| `analyticsMs` | ~1130 |
+| Metric        | Sample (ms) |
+| ------------- | ----------- |
+| `inboxMs`     | ~653        |
+| `detailMs`    | ~599        |
+| `searchMs`    | ~520        |
+| `analyticsMs` | ~1130       |
 
 Environment: CI / local Playwright Chromium against mocked API. Absolute numbers vary by machine load; the gate is catastrophic-slowness protection, not a fixed budget.
 
@@ -50,10 +50,10 @@ Environment: CI / local Playwright Chromium against mocked API. Absolute numbers
 
 ## Results
 
-| Check | Result |
-|-------|--------|
-| Soft timings recorded | ✅ PASS |
-| All views &lt; 30s | ✅ PASS |
+| Check                  | Result                                              |
+| ---------------------- | --------------------------------------------------- |
+| Soft timings recorded  | ✅ PASS                                             |
+| All views &lt; 30s     | ✅ PASS                                             |
 | **Suite contribution** | **1 test** (part of Playwright **23 passed** total) |
 
 ---

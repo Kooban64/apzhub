@@ -8,11 +8,11 @@
 
 ## Wave milestones
 
-1. **001** — Platform Notification Foundation (contracts, core, persistence)  
-2. **002** — Platform Services, Gateway & Authorization (`gateway.notification.*`)  
-3. **003** — HTTP API & Production Typed Client (`/api/v1/notifications`, OpenAPI 1.4.0)  
-4. **004** — Notification Workbench (`/workspace/notifications`)  
-5. **005** — Vertical Certification → **PRODUCTION_READY_WITH_LIMITATIONS**  
+1. **001** — Platform Notification Foundation (contracts, core, persistence)
+2. **002** — Platform Services, Gateway & Authorization (`gateway.notification.*`)
+3. **003** — HTTP API & Production Typed Client (`/api/v1/notifications`, OpenAPI 1.4.0)
+4. **004** — Notification Workbench (`/workspace/notifications`)
+5. **005** — Vertical Certification → **PRODUCTION_READY_WITH_LIMITATIONS**
 6. **006** — Wave Certification & Architecture Freeze → **frozen**
 
 ## Certified stack

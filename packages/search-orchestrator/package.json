@@ -1,0 +1,20 @@
+{
+  "name": "@apzhub/search-orchestrator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Product Indexing Orchestration Framework — durable publication journal, retry, batching (APZSEARCH-016)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/search-orchestrator"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/search-integration": "workspace:*",
+    "drizzle-orm": "^0.45.2"
+  }
+}

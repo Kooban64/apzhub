@@ -178,7 +178,11 @@ export class DefaultMappingPipeline implements MappingPipeline {
 
       if (definition.map) {
         const mapped = definition.map(input.input, input.context);
-        if (mapped !== null && typeof mapped === "object" && "then" in (mapped as object)) {
+        if (
+          mapped !== null &&
+          typeof mapped === "object" &&
+          "then" in (mapped as object)
+        ) {
           throw mappingValidationError(
             { correlationId },
             "Async mapping definitions must use execute()",

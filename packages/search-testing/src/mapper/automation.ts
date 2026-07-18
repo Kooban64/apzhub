@@ -25,7 +25,10 @@ import {
 
 export type AutomationMappableEntity = Extract<
   TestingSearchMappableEntity,
-  { readonly entityType: "automation_run" | "automation_suite" | "imported_result" | "coverage_summary" }
+  {
+    readonly entityType:
+      "automation_run" | "automation_suite" | "imported_result" | "coverage_summary";
+  }
 >;
 
 export class AutomationSearchMapper {
@@ -87,12 +90,9 @@ export class AutomationSearchMapper {
     extras?: TestingSearchMappingExtras,
   ): SearchEntityDraft {
     const id =
-      (isAutomationSuiteSearchInput(suite) ? suite.id : undefined) ??
-      extras?.entityId;
+      (isAutomationSuiteSearchInput(suite) ? suite.id : undefined) ?? extras?.entityId;
     if (!id) {
-      throw new Error(
-        "automation_suite requires id on entity or extras.entityId",
-      );
+      throw new Error("automation_suite requires id on entity or extras.entityId");
     }
     assertPlatformEntityId(id, "automation_suite.id");
     const tenantId =
@@ -104,12 +104,8 @@ export class AutomationSearchMapper {
       );
     }
     assertTenant(tenantId, context);
-    const title = isAutomationSuiteSearchInput(suite)
-      ? suite.title
-      : suite.name;
-    const status = isAutomationSuiteSearchInput(suite)
-      ? suite.status
-      : suite.status;
+    const title = isAutomationSuiteSearchInput(suite) ? suite.title : suite.name;
+    const status = isAutomationSuiteSearchInput(suite) ? suite.status : suite.status;
     const classification = resolveTestingClassification(context, {
       explicit: extras?.classification,
       status,
@@ -163,16 +159,9 @@ export class AutomationSearchMapper {
       title,
       summary: imported.errorSummary?.slice(0, 280),
       organisationId:
-        imported.organisationId ??
-        extras?.organisationId ??
-        context.organisationId,
+        imported.organisationId ?? extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        imported.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, imported.status, classification),
       metadata: {
         status: imported.status,
         adapterKind: imported.adapterKind,
@@ -188,8 +177,7 @@ export class AutomationSearchMapper {
       navigationTarget: navigationTarget("imported_result", imported.id),
       sourceId: "testing:imported_result",
       ownerUserId: imported.createdBy ?? context.actorUserId,
-      version:
-        imported.revision !== undefined ? String(imported.revision) : undefined,
+      version: imported.revision !== undefined ? String(imported.revision) : undefined,
     };
   }
 
@@ -203,10 +191,7 @@ export class AutomationSearchMapper {
     const classification = resolveTestingClassification(context, {
       explicit: extras?.classification,
     });
-    const pct =
-      snapshot.percentage ??
-      snapshot.summary.percentage ??
-      undefined;
+    const pct = snapshot.percentage ?? snapshot.summary.percentage ?? undefined;
     const title =
       extras?.title ??
       `Coverage ${pct !== undefined ? `${pct}%` : snapshot.id.slice(0, 12)}`;
@@ -215,17 +200,13 @@ export class AutomationSearchMapper {
       entityType: "coverage_summary",
       title,
       organisationId:
-        snapshot.organisationId ??
-        extras?.organisationId ??
-        context.organisationId,
+        snapshot.organisationId ?? extras?.organisationId ?? context.organisationId,
       classification,
       permissions: permissionTokens(context, extras, undefined, classification),
       metadata: {
         ...(snapshot.importId ? { importId: snapshot.importId } : {}),
         ...(snapshot.executionId ? { executionId: snapshot.executionId } : {}),
-        coveredCount: String(
-          snapshot.coveredCount ?? snapshot.summary.covered ?? 0,
-        ),
+        coveredCount: String(snapshot.coveredCount ?? snapshot.summary.covered ?? 0),
         totalCount: String(snapshot.totalCount ?? snapshot.summary.total ?? 0),
         ...(pct !== undefined ? { percentage: String(pct) } : {}),
         ...(snapshot.summary.kind ? { kind: snapshot.summary.kind } : {}),

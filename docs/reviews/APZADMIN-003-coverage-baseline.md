@@ -5,11 +5,11 @@
 
 ## Measured (vitest + v8)
 
-| Scope | Lines | Functions |
-| --- | --- | --- |
-| All included files | **99.17%** | **100%** |
-| `handlers/administration.ts` | **99.44%** | **100%** |
-| `lib/administration/*` | **98.86%** | **100%** |
+| Scope                        | Lines      | Functions |
+| ---------------------------- | ---------- | --------- |
+| All included files           | **99.17%** | **100%**  |
+| `handlers/administration.ts` | **99.44%** | **100%**  |
+| `lib/administration/*`       | **98.86%** | **100%**  |
 
 ## Suites
 

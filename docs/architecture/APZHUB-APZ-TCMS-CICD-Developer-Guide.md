@@ -6,13 +6,13 @@
 
 ## Packages to touch
 
-| Layer | Package | Path |
-| ----- | ------- | ---- |
-| Contracts | `@apzhub/testing-contracts` | `src/domain/cicd-pipeline.ts`, `src/services/pipeline-service.ts`, permissions |
-| Persistence | `@apzhub/testing-persistence` | `src/repositories/pipelines/`, migrations `0031`/`0032` |
-| Domain | `@apzhub/testing-services` | `src/pipelines/` |
-| Platform | `@apzhub/platform-services` | `src/services/testing/testing-pipelines-service-impl.ts` |
-| Gateway contracts | `@apzhub/platform-service-contracts` | `testing-pipelines-service.ts` |
+| Layer             | Package                              | Path                                                                           |
+| ----------------- | ------------------------------------ | ------------------------------------------------------------------------------ |
+| Contracts         | `@apzhub/testing-contracts`          | `src/domain/cicd-pipeline.ts`, `src/services/pipeline-service.ts`, permissions |
+| Persistence       | `@apzhub/testing-persistence`        | `src/repositories/pipelines/`, migrations `0031`/`0032`                        |
+| Domain            | `@apzhub/testing-services`           | `src/pipelines/`                                                               |
+| Platform          | `@apzhub/platform-services`          | `src/services/testing/testing-pipelines-service-impl.ts`                       |
+| Gateway contracts | `@apzhub/platform-service-contracts` | `testing-pipelines-service.ts`                                                 |
 
 ---
 

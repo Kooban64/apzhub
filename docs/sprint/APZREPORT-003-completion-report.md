@@ -46,13 +46,13 @@ Certified the shared Reporting Platform end-to-end as a production-ready APZHUB 
 
 ## Coverage Baseline
 
-| Layer | Lines |
-| ----- | ----- |
-| Scoped vertical (all) | **98.16%** |
-| HTTP handler | **100%** |
-| Gateway reporting | **100%** |
-| Typed client | **97.97%** |
-| Workbench | **98.82%** |
+| Layer                      | Lines               |
+| -------------------------- | ------------------- |
+| Scoped vertical (all)      | **98.16%**          |
+| HTTP handler               | **100%**            |
+| Gateway reporting          | **100%**            |
+| Typed client               | **97.97%**          |
+| Workbench                  | **98.82%**          |
 | reporting-core + providers | **~96.8% / 97.54%** |
 
 See [Coverage Baseline](../reviews/APZREPORT-003-coverage-baseline.md).
@@ -63,17 +63,17 @@ APZ TCMS remains compatible via platform reporting client (`listReportPlaceholde
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
+| Gate                                       | Result                  |
+| ------------------------------------------ | ----------------------- |
 | Architecture / Dependency / Boundary audit | **PASS** (0 violations) |
-| OpenAPI validate | **PASS** |
-| Vitest vertical | **PASS** **50** |
-| Certification harness | **PASS** |
-| Coverage ≥95% lines (scoped) | **PASS** |
-| Lint (audit script + reporting surfaces) | **PASS** |
-| Playwright live | **LIMITED** |
-| Security audit | **PASS** |
-| Performance baseline | **COLLECTED** |
+| OpenAPI validate                           | **PASS**                |
+| Vitest vertical                            | **PASS** **50**         |
+| Certification harness                      | **PASS**                |
+| Coverage ≥95% lines (scoped)               | **PASS**                |
+| Lint (audit script + reporting surfaces)   | **PASS**                |
+| Playwright live                            | **LIMITED**             |
+| Security audit                             | **PASS**                |
+| Performance baseline                       | **COLLECTED**           |
 
 ## Technical Debt
 

@@ -17,24 +17,24 @@ Vendor-neutral platform service interfaces for APZ TCMS. All methods accept `Ser
 
 `TestingPlatformGateway` (`testing-gateway.ts`) exposes:
 
-| Accessor | Interface | Domain theme |
-| -------- | --------- | ------------ |
-| `plans` | `TestingPlanService` | Test plan CRUD, clone, archive |
-| `suites` | `TestingSuiteService` | Suite CRUD, plan linkage |
-| `cases` | `TestingCaseService` | Case CRUD, status transition |
-| `requirements` | `TestingRequirementService` | Requirement CRUD |
-| `executions` | `TestingExecutionService` | Manual execution lifecycle |
-| `evidence` | `TestingEvidenceService` | Evidence metadata register/submit/verify |
-| `automation` | `TestingAutomationService` | Import validation, runs, coverage snapshots |
-| `coverage` | `TestingCoverageService` | Coverage metrics recompute/list |
-| `defects` | `TestingDefectService` | Defect link CRUD |
-| `quality` | `TestingQualityService` | Quality snapshots, compare, summarize |
-| `certification` | `TestingCertificationService` | Certification workflow, gates, audit |
-| `releaseReadiness` | `TestingReleaseReadinessService` | Plan/cert readiness calculation |
-| `traceability` | `TestingTraceabilityService` | Links, relationships, matrices |
-| `approvals` | `TestingApprovalService` | Approval requests and decisions |
-| `dashboard` | `TestingDashboardService` | Aggregated dashboard summary |
-| `reporting` | `TestingReportingService` | Report placeholder listing (no engine) |
+| Accessor           | Interface                        | Domain theme                                |
+| ------------------ | -------------------------------- | ------------------------------------------- |
+| `plans`            | `TestingPlanService`             | Test plan CRUD, clone, archive              |
+| `suites`           | `TestingSuiteService`            | Suite CRUD, plan linkage                    |
+| `cases`            | `TestingCaseService`             | Case CRUD, status transition                |
+| `requirements`     | `TestingRequirementService`      | Requirement CRUD                            |
+| `executions`       | `TestingExecutionService`        | Manual execution lifecycle                  |
+| `evidence`         | `TestingEvidenceService`         | Evidence metadata register/submit/verify    |
+| `automation`       | `TestingAutomationService`       | Import validation, runs, coverage snapshots |
+| `coverage`         | `TestingCoverageService`         | Coverage metrics recompute/list             |
+| `defects`          | `TestingDefectService`           | Defect link CRUD                            |
+| `quality`          | `TestingQualityService`          | Quality snapshots, compare, summarize       |
+| `certification`    | `TestingCertificationService`    | Certification workflow, gates, audit        |
+| `releaseReadiness` | `TestingReleaseReadinessService` | Plan/cert readiness calculation             |
+| `traceability`     | `TestingTraceabilityService`     | Links, relationships, matrices              |
+| `approvals`        | `TestingApprovalService`         | Approval requests and decisions             |
+| `dashboard`        | `TestingDashboardService`        | Aggregated dashboard summary                |
+| `reporting`        | `TestingReportingService`        | Report placeholder listing (no engine)      |
 
 Implementation bundle also exposes `reporting` on `TestingPlatformGatewayWithReporting` — same contract, included in nested gateway when testing is enabled.
 
@@ -62,11 +62,11 @@ Implementations throw `PlatformServiceError` only at the platform boundary. Call
 
 ## Relationship to domain contracts
 
-| Domain (`@apzhub/testing-contracts`) | Platform (`@apzhub/platform-service-contracts`) |
-| ------------------------------------ | ------------------------------------------------- |
+| Domain (`@apzhub/testing-contracts`)           | Platform (`@apzhub/platform-service-contracts`)               |
+| ---------------------------------------------- | ------------------------------------------------------------- |
 | `ManualTestingService` / per-domain interfaces | Split into focused platform services with pipeline authz keys |
-| Domain-specific context types where present | Unified `ServiceRequestContext` |
-| Raw `DomainRuleError` | Never crosses platform boundary |
+| Domain-specific context types where present    | Unified `ServiceRequestContext`                               |
+| Raw `DomainRuleError`                          | Never crosses platform boundary                               |
 
 Domain package versions **unchanged** at APZTCMS-011.
 

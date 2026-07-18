@@ -17,7 +17,9 @@ const DEFAULT_PRODUCTS = [
     name: "Law Platform",
     description: "Legal practice management product",
     version: "1.0.0",
-    dependencies: [{ dependsOnCapabilityKey: "platform", dependencyType: "required" as const }],
+    dependencies: [
+      { dependsOnCapabilityKey: "platform", dependencyType: "required" as const },
+    ],
   },
 ];
 
@@ -28,7 +30,9 @@ const DEFAULT_MODULES = [
     name: "Platform Operations",
     description: "Administration workspace",
     version: "0.1.0",
-    dependencies: [{ dependsOnCapabilityKey: "platform", dependencyType: "required" as const }],
+    dependencies: [
+      { dependsOnCapabilityKey: "platform", dependencyType: "required" as const },
+    ],
   },
   {
     capabilityKey: "platform-operations-personalisation",
@@ -36,7 +40,12 @@ const DEFAULT_MODULES = [
     name: "Personalisation",
     description: "Platform personalisation operations",
     version: "0.1.0",
-    dependencies: [{ dependsOnCapabilityKey: "platform-administration", dependencyType: "required" as const }],
+    dependencies: [
+      {
+        dependsOnCapabilityKey: "platform-administration",
+        dependencyType: "required" as const,
+      },
+    ],
   },
 ];
 
@@ -61,7 +70,9 @@ const DEFAULT_FEATURE_FLAGS = [
   },
 ];
 
-export async function seedDefaultGovernanceCatalog(service: PlatformGovernanceService): Promise<void> {
+export async function seedDefaultGovernanceCatalog(
+  service: PlatformGovernanceService,
+): Promise<void> {
   for (const product of DEFAULT_PRODUCTS) {
     await service.capabilities.registerCapability(product);
     await service.governance.setEnablement({

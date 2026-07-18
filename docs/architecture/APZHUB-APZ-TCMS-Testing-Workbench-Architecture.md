@@ -4,7 +4,7 @@
 **Module:** Testing (`testing`)  
 **Milestone:** APZTCMS-010 (UI) · APZTCMS-011 (platform layer) · APZTCMS-012 (HTTP client)  
 **Status:** **Implemented** — workbench UI with production HTTP client outside tests  
-**Authority:** [005](../005-desktop-environment-framework-shell-architecture.md) · [016](../016-desktop-shell-architecture-user-experience-framework.md) · [017](../017-navigation-framework-workspace-navigation-architecture.md) · [UI Architecture](./APZHUB-APZ-TCMS-UI-Architecture.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)
+**Authority:** [005](../005-desktop-experience-workspace-framework.md) · [016](../016-desktop-shell-architecture-user-experience-framework.md) · [017](../017-navigation-framework-workspace-navigation-architecture.md) · [UI Architecture](./APZHUB-APZ-TCMS-UI-Architecture.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)
 
 ---
 
@@ -34,41 +34,41 @@ MockTestingClient (NODE_ENV=test only)
 [APZTCMS-011] PlatformServiceGateway.testing.* → RequestPipeline → Platform Impls → Domain Services → Persistence
 ```
 
-| Layer | Responsibility | APZTCMS-010 |
-| ----- | -------------- | ------------- |
-| **Presentation** | Render view models; permission-gated controls | ✅ Implemented |
-| **Typed client** | Stable UI contract; transport swappable | ✅ `TestingClient` + HTTP default; mock in tests |
-| **Platform gateway** | Pipeline, authz, error translation | ✅ Wired through `/api/v1/testing/**` |
-| **Domain services** | Business rules, state machines, audit | ✅ Via platform layer only |
-| **Persistence** | PostgreSQL SoR | ✅ Via platform layer — ❌ not accessed from UI |
+| Layer                | Responsibility                                | APZTCMS-010                                      |
+| -------------------- | --------------------------------------------- | ------------------------------------------------ |
+| **Presentation**     | Render view models; permission-gated controls | ✅ Implemented                                   |
+| **Typed client**     | Stable UI contract; transport swappable       | ✅ `TestingClient` + HTTP default; mock in tests |
+| **Platform gateway** | Pipeline, authz, error translation            | ✅ Wired through `/api/v1/testing/**`            |
+| **Domain services**  | Business rules, state machines, audit         | ✅ Via platform layer only                       |
+| **Persistence**      | PostgreSQL SoR                                | ✅ Via platform layer — ❌ not accessed from UI  |
 
 ---
 
 ## Code layout
 
-| Path | Role |
-| ---- | ---- |
-| `apps/web/lib/testing/` | Typed client, mock transport, routes, permissions, commands, query keys, view-model types |
-| `apps/web/components/testing/` | View components, shared UI primitives, workspace router, commands panel |
-| `services/testing/manifests/` | Parent `testing` module + 15 child sidebar manifests (all **enabled**) |
-| `apps/web/components/workbench-page.tsx` | Shell wiring — `TestingWorkspaceRouter` when pathname matches `/workspace/testing` |
+| Path                                     | Role                                                                                      |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `apps/web/lib/testing/`                  | Typed client, mock transport, routes, permissions, commands, query keys, view-model types |
+| `apps/web/components/testing/`           | View components, shared UI primitives, workspace router, commands panel                   |
+| `services/testing/manifests/`            | Parent `testing` module + 15 child sidebar manifests (all **enabled**)                    |
+| `apps/web/components/workbench-page.tsx` | Shell wiring — `TestingWorkspaceRouter` when pathname matches `/workspace/testing`        |
 
 ### `apps/web/lib/testing/` modules
 
-| File | Purpose |
-| ---- | ------- |
-| `client.ts` | `TestingClient` interface — sole data boundary for views |
-| `http-client.ts` | Production HTTP transport scoped to `/api/v1/testing/**` |
-| `mock-client.ts` | In-memory implementation with fixture seed data |
+| File             | Purpose                                                        |
+| ---------------- | -------------------------------------------------------------- |
+| `client.ts`      | `TestingClient` interface — sole data boundary for views       |
+| `http-client.ts` | Production HTTP transport scoped to `/api/v1/testing/**`       |
+| `mock-client.ts` | In-memory implementation with fixture seed data                |
 | `testing-api.ts` | Module-level accessor (`getTestingClient`, `setTestingClient`) |
-| `commands.ts` | Permission-gated command executor delegating to `testing-api` |
-| `routes.ts` | Route helpers and section resolution |
-| `permissions.ts` | UI-only permission helpers (server remains authoritative) |
-| `types.ts` | Presentation view models (not domain entities) |
-| `query-keys.ts` | TanStack Query key factory |
-| `errors.ts` | `TestingClientError` + user-safe messages |
-| `format.ts` | Status labels, dates, byte formatting |
-| `local-state.ts` | Ephemeral UI state helpers |
+| `commands.ts`    | Permission-gated command executor delegating to `testing-api`  |
+| `routes.ts`      | Route helpers and section resolution                           |
+| `permissions.ts` | UI-only permission helpers (server remains authoritative)      |
+| `types.ts`       | Presentation view models (not domain entities)                 |
+| `query-keys.ts`  | TanStack Query key factory                                     |
+| `errors.ts`      | `TestingClientError` + user-safe messages                      |
+| `format.ts`      | Status labels, dates, byte formatting                          |
+| `local-state.ts` | Ephemeral UI state helpers                                     |
 
 ---
 
@@ -76,24 +76,24 @@ MockTestingClient (NODE_ENV=test only)
 
 The Testing module is **enabled** under `services/testing/manifests/`:
 
-| Manifest | ID | Route |
-| -------- | -- | ----- |
-| Parent | `testing` | `/workspace/testing` |
-| Child | `testing-dashboard` | `/workspace/testing` |
-| Child | `testing-requirements` | `/workspace/testing/requirements` |
-| Child | `testing-plans` | `/workspace/testing/plans` |
-| Child | `testing-suites` | `/workspace/testing/suites` |
-| Child | `testing-cases` | `/workspace/testing/cases` |
-| Child | `testing-executions` | `/workspace/testing/executions` |
-| Child | `testing-automation` | `/workspace/testing/automation` |
-| Child | `testing-evidence` | `/workspace/testing/evidence` |
-| Child | `testing-coverage` | `/workspace/testing/coverage` |
-| Child | `testing-defects` | `/workspace/testing/defects` |
-| Child | `testing-quality` | `/workspace/testing/quality` |
-| Child | `testing-certification` | `/workspace/testing/certification` |
-| Child | `testing-release-readiness` | `/workspace/testing/release-readiness` |
-| Child | `testing-reports` | `/workspace/testing/reports` |
-| Child | `testing-administration` | `/workspace/testing/administration` |
+| Manifest | ID                          | Route                                  |
+| -------- | --------------------------- | -------------------------------------- |
+| Parent   | `testing`                   | `/workspace/testing`                   |
+| Child    | `testing-dashboard`         | `/workspace/testing`                   |
+| Child    | `testing-requirements`      | `/workspace/testing/requirements`      |
+| Child    | `testing-plans`             | `/workspace/testing/plans`             |
+| Child    | `testing-suites`            | `/workspace/testing/suites`            |
+| Child    | `testing-cases`             | `/workspace/testing/cases`             |
+| Child    | `testing-executions`        | `/workspace/testing/executions`        |
+| Child    | `testing-automation`        | `/workspace/testing/automation`        |
+| Child    | `testing-evidence`          | `/workspace/testing/evidence`          |
+| Child    | `testing-coverage`          | `/workspace/testing/coverage`          |
+| Child    | `testing-defects`           | `/workspace/testing/defects`           |
+| Child    | `testing-quality`           | `/workspace/testing/quality`           |
+| Child    | `testing-certification`     | `/workspace/testing/certification`     |
+| Child    | `testing-release-readiness` | `/workspace/testing/release-readiness` |
+| Child    | `testing-reports`           | `/workspace/testing/reports`           |
+| Child    | `testing-administration`    | `/workspace/testing/administration`    |
 
 Parent manifest declares Activity Bar entry, sidebar navigation, palette commands, and workbench wiring. Child manifests declare sidebar-level workbench navigation entries.
 
@@ -117,28 +117,28 @@ Status Bar                       ← standard platform status
 
 Enforced by `testing-architecture-boundary.test.ts`:
 
-| Rule | Detail |
-| ---- | ------ |
-| No domain imports | Components and `lib/testing` must not import `@apzhub/testing-services`, `testing-persistence`, repositories, or Drizzle |
-| No REST in UI components | Components do not call `fetch`; only `http-client.ts` may call `/api/v1/testing/**` |
-| No business logic in views | State transitions and validation belong in domain services (future HTTP layer) |
-| Typed client only | Views call `testing-api` / `executeTestingCommand` — never domain services directly |
-| Presentation view models | `types.ts` defines UI shapes; domain DTOs never reach components |
-| Certification advisory | Recommendations displayed with explicit advisory-only labelling; no auto-approve |
-| Evidence metadata only | Evidence view shows title, kind, content type, size, status — no binary upload or preview |
-| No AI | No suggestion engine, no LLM integration |
-| No Event Bus | No publish/subscribe from UI layer |
-| No reporting engine | Reports view is placeholder metadata only |
+| Rule                       | Detail                                                                                                                   |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| No domain imports          | Components and `lib/testing` must not import `@apzhub/testing-services`, `testing-persistence`, repositories, or Drizzle |
+| No REST in UI components   | Components do not call `fetch`; only `http-client.ts` may call `/api/v1/testing/**`                                      |
+| No business logic in views | State transitions and validation belong in domain services (future HTTP layer)                                           |
+| Typed client only          | Views call `testing-api` / `executeTestingCommand` — never domain services directly                                      |
+| Presentation view models   | `types.ts` defines UI shapes; domain DTOs never reach components                                                         |
+| Certification advisory     | Recommendations displayed with explicit advisory-only labelling; no auto-approve                                         |
+| Evidence metadata only     | Evidence view shows title, kind, content type, size, status — no binary upload or preview                                |
+| No AI                      | No suggestion engine, no LLM integration                                                                                 |
+| No Event Bus               | No publish/subscribe from UI layer                                                                                       |
+| No reporting engine        | Reports view is placeholder metadata only                                                                                |
 
 ---
 
 ## Domain package versions (unchanged)
 
-| Package | Version |
-| ------- | ------- |
-| `@apzhub/testing-contracts` | **0.6.0** |
+| Package                       | Version   |
+| ----------------------------- | --------- |
+| `@apzhub/testing-contracts`   | **0.6.0** |
 | `@apzhub/testing-persistence` | **0.7.0** |
-| `@apzhub/testing-services` | **0.5.0** |
+| `@apzhub/testing-services`    | **0.5.0** |
 
 APZTCMS-010 does not bump domain packages.
 

@@ -1,6 +1,6 @@
 # APZHUB Platform Dashboard Model
 
-**Milestone:** APZTCMS-014  
+**Milestone:** APZTCMS-014
 
 Domain-only snapshot (`PlatformQualityDashboardSnapshot`):
 

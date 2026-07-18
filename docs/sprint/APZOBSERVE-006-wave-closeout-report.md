@@ -12,23 +12,23 @@ Close the Platform Observability programme wave. Publish the Reference Standard.
 
 ## Closeout actions
 
-1. Declared Architecture Freeze Notice  
-2. Published Platform Observability Reference Standard  
-3. Published final Operational Readiness Guide  
-4. Published Future Observability Platform Guide (roadmap only)  
-5. Published Security Confirmation  
-6. Published Wave Certification + Quality Evidence summaries  
-7. Published Programme Summary + Completion Report  
-8. Added `pnpm audit:observe-wave`  
+1. Declared Architecture Freeze Notice
+2. Published Platform Observability Reference Standard
+3. Published final Operational Readiness Guide
+4. Published Future Observability Platform Guide (roadmap only)
+5. Published Security Confirmation
+6. Published Wave Certification + Quality Evidence summaries
+7. Published Programme Summary + Completion Report
+8. Added `pnpm audit:observe-wave`
 9. Updated foundation indexes (AI-CONTEXT, CURRENT-*, ACTIVE-BACKLOG, CHANGELOG, catalogues, PROJECT-INDEX, DOCUMENT-MAP, README)
 
 ## Revalidation
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:observe-vertical` | PASS |
-| `pnpm audit:observe-wave` | PASS |
-| OpenAPI **1.8.0** retained | PASS |
+| Gate                          | Result |
+| ----------------------------- | ------ |
+| `pnpm audit:observe-vertical` | PASS   |
+| `pnpm audit:observe-wave`     | PASS   |
+| OpenAPI **1.8.0** retained    | PASS   |
 
 ## Explicit non-changes
 

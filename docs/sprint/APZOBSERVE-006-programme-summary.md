@@ -9,14 +9,14 @@
 
 ## What was delivered
 
-| Milestone | Deliverable |
-| --- | --- |
-| APZOBSERVE-001 | Foundation — contracts/core/persistence; migrations 0054/0055 |
+| Milestone      | Deliverable                                                                |
+| -------------- | -------------------------------------------------------------------------- |
+| APZOBSERVE-001 | Foundation — contracts/core/persistence; migrations 0054/0055              |
 | APZOBSERVE-002 | Platform Services — `gateway.observe.*`; RequestPipeline; production Authz |
-| APZOBSERVE-003 | HTTP `/api/v1/observe/*` + OpenAPI **1.8.0** + typed client |
-| APZOBSERVE-004 | Administration Workbench `/workspace/observability` |
-| APZOBSERVE-005 | Vertical certification — **PRODUCTION_READY_WITH_LIMITATIONS** |
-| APZOBSERVE-006 | Wave certification + architecture freeze + Reference Standard |
+| APZOBSERVE-003 | HTTP `/api/v1/observe/*` + OpenAPI **1.8.0** + typed client                |
+| APZOBSERVE-004 | Administration Workbench `/workspace/observability`                        |
+| APZOBSERVE-005 | Vertical certification — **PRODUCTION_READY_WITH_LIMITATIONS**             |
+| APZOBSERVE-006 | Wave certification + architecture freeze + Reference Standard              |
 
 ## What Observability is
 
@@ -36,13 +36,13 @@ Workbench → Typed Client → /api/v1/observe/* → gateway.observe.*
 
 ## Package versions (frozen)
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/observe-contracts` | 0.2.0 |
-| `@apzhub/observe-core` | 0.2.0 |
-| `@apzhub/observe-persistence` | 0.1.0 |
-| `@apzhub/platform-services` (observe wiring) | 0.24.0 |
-| Platform OpenAPI | 1.8.0 |
+| Package                                      | Version |
+| -------------------------------------------- | ------- |
+| `@apzhub/observe-contracts`                  | 0.2.0   |
+| `@apzhub/observe-core`                       | 0.2.0   |
+| `@apzhub/observe-persistence`                | 0.1.0   |
+| `@apzhub/platform-services` (observe wiring) | 0.24.0  |
+| Platform OpenAPI                             | 1.8.0   |
 
 ## Recommended next (outside Observability programme)
 

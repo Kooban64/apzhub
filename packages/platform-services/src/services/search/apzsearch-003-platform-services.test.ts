@@ -40,9 +40,7 @@ import {
   mapSearchDomainError,
 } from "./search-service-impls";
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_search",
     userId: "user_search",
@@ -64,8 +62,8 @@ const baseConfig = {
 };
 
 describe("APZSEARCH-003 search platform services", () => {
-  it("exports platform services version 0.24.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
+  it("exports platform services version 0.25.0", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
   });
 
   it("registers search permissions in the platform catalogue", () => {
@@ -84,16 +82,14 @@ describe("APZSEARCH-003 search platform services", () => {
         ?.requiredPermission,
     ).toBe("search.configuration.activate");
     expect(
-      resolveOperationAuthorization("searchCollections", "create")
-        ?.requiredPermission,
+      resolveOperationAuthorization("searchCollections", "create")?.requiredPermission,
     ).toBe("search.collection.create");
     expect(
       resolveOperationAuthorization("searchValidation", "validateQuery")
         ?.requiredPermission,
     ).toBe("search.validation.execute");
     expect(
-      resolveOperationAuthorization("searchQuery", "validateQuery")
-        ?.requiredPermission,
+      resolveOperationAuthorization("searchQuery", "validateQuery")?.requiredPermission,
     ).toBe("search.validation.execute");
     expect(resolveOperationAuthorization("searchQuery", "query")).toBeUndefined();
   });
@@ -102,7 +98,9 @@ describe("APZSEARCH-003 search platform services", () => {
     const search = createSearchPlatformServicesForTest({
       allowInMemoryPersistence: true,
     });
-    const facets = Object.keys(search.gatewaySurface) as (keyof typeof search.gatewaySurface)[];
+    const facets = Object.keys(
+      search.gatewaySurface,
+    ) as (keyof typeof search.gatewaySurface)[];
     expect(facets).toEqual(
       expect.arrayContaining([
         "searchQuery",
@@ -147,24 +145,21 @@ describe("APZSEARCH-003 search platform services", () => {
     });
 
     const request = ctx();
-    const provider = await bundle.gateway.searchProviders.registerProvider(
-      request,
-      {
+    const provider = await bundle.gateway.searchProviders.registerProvider(request, {
+      providerId: asSearchProviderId("prov_meili_1"),
+      kind: "meilisearch",
+      label: "Meilisearch (declared)",
+      version: "1.0.0",
+      active: true,
+      ownership: "tenant",
+      capabilities: FOUNDATION_SEARCH_CAPABILITIES,
+      configuration: {
         providerId: asSearchProviderId("prov_meili_1"),
-        kind: "meilisearch",
-        label: "Meilisearch (declared)",
+        providerKind: "meilisearch",
         version: "1.0.0",
-        active: true,
-        ownership: "tenant",
-        capabilities: FOUNDATION_SEARCH_CAPABILITIES,
-        configuration: {
-          providerId: asSearchProviderId("prov_meili_1"),
-          providerKind: "meilisearch",
-          version: "1.0.0",
-          authenticationRefs: { credentialRef: "vault://search/meili" },
-        },
+        authenticationRefs: { credentialRef: "vault://search/meili" },
       },
-    );
+    });
     expect(provider.enabled).toBe(true);
 
     const listed = await bundle.gateway.searchProviders.listProviders(request);
@@ -209,10 +204,9 @@ describe("APZSEARCH-003 search platform services", () => {
       sourceId: source.id,
     });
 
-    const validation = await bundle.gateway.searchValidation.validateQuery(
-      request,
-      { keywords: "alpha" },
-    );
+    const validation = await bundle.gateway.searchValidation.validateQuery(request, {
+      keywords: "alpha",
+    });
     expect(validation.valid).toBe(true);
 
     await expect(
@@ -226,9 +220,7 @@ describe("APZSEARCH-003 search platform services", () => {
     expect(readiness.executionEnabled).toBe(false);
     expect(readiness.managementPlaneReady).toBe(true);
 
-    const diagnostics = await bundle.gateway.searchDiagnostics.getDiagnostics(
-      request,
-    );
+    const diagnostics = await bundle.gateway.searchDiagnostics.getDiagnostics(request);
     expect(diagnostics.notes?.join(" ")).toMatch(/executionEnabled=false/);
     expect(JSON.stringify(diagnostics)).not.toMatch(/vault:\/\/search\/meili/);
 
@@ -240,9 +232,8 @@ describe("APZSEARCH-003 search platform services", () => {
   });
 
   it("production factory requires postgres", async () => {
-    const { createSearchPlatformServicesForProduction } = await import(
-      "./create-search-platform-services"
-    );
+    const { createSearchPlatformServicesForProduction } =
+      await import("./create-search-platform-services");
     expect(() =>
       createSearchPlatformServicesForProduction({
         postgresDb: undefined as never,
@@ -259,12 +250,8 @@ describe("APZSEARCH-003 search platform services", () => {
   });
 
   it("isSearchServiceEnabled reads SEARCH_SERVICE_ENABLED", () => {
-    expect(isSearchServiceEnabled({ SEARCH_SERVICE_ENABLED: "true" })).toBe(
-      true,
-    );
-    expect(isSearchServiceEnabled({ SEARCH_SERVICE_ENABLED: "false" })).toBe(
-      false,
-    );
+    expect(isSearchServiceEnabled({ SEARCH_SERVICE_ENABLED: "true" })).toBe(true);
+    expect(isSearchServiceEnabled({ SEARCH_SERVICE_ENABLED: "false" })).toBe(false);
     expect(isSearchServiceEnabled({})).toBe(false);
   });
 
@@ -293,9 +280,7 @@ describe("APZSEARCH-003 search platform services", () => {
     });
     expect(fromPersistence.impls.searchProviders).toBeTruthy();
 
-    expect(() => createSearchPlatformServices({})).toThrow(
-      /foundation or persistence/,
-    );
+    expect(() => createSearchPlatformServices({})).toThrow(/foundation or persistence/);
   });
 
   it("maps SearchDomainError classifications to PlatformServiceError", () => {
@@ -313,9 +298,10 @@ describe("APZSEARCH-003 search platform services", () => {
     expect(
       mapSearchDomainError(new SearchDomainError("validation_failed", "bad"), corr),
     ).toMatchObject({ category: "validation", code: "VALIDATION_FAILED" });
-    expect(
-      mapSearchDomainError(searchProviderDuplicate("p1"), corr),
-    ).toMatchObject({ category: "conflict", code: "CONFLICT" });
+    expect(mapSearchDomainError(searchProviderDuplicate("p1"), corr)).toMatchObject({
+      category: "conflict",
+      code: "CONFLICT",
+    });
     expect(
       mapSearchDomainError(new SearchDomainError("duplicate", "dup"), corr),
     ).toMatchObject({ category: "conflict", code: "CONFLICT" });
@@ -323,32 +309,22 @@ describe("APZSEARCH-003 search platform services", () => {
       mapSearchDomainError(new SearchDomainError("conflict", "c"), corr),
     ).toMatchObject({ category: "conflict", code: "CONFLICT" });
     expect(
-      mapSearchDomainError(
-        new SearchDomainError("configuration_conflict", "c"),
-        corr,
-      ),
+      mapSearchDomainError(new SearchDomainError("configuration_conflict", "c"), corr),
     ).toMatchObject({ category: "conflict", code: "CONFLICT" });
     expect(
-      mapSearchDomainError(
-        new SearchDomainError("authorization_denied", "nope"),
-        corr,
-      ),
+      mapSearchDomainError(new SearchDomainError("authorization_denied", "nope"), corr),
     ).toMatchObject({ category: "authorization", code: "FORBIDDEN" });
+    expect(mapSearchDomainError(searchTenantMismatch("a", "b"), corr)).toMatchObject({
+      category: "authorization",
+      code: "TENANT_MISMATCH",
+    });
     expect(
-      mapSearchDomainError(searchTenantMismatch("a", "b"), corr),
-    ).toMatchObject({ category: "authorization", code: "TENANT_MISMATCH" });
-    expect(
-      mapSearchDomainError(
-        new SearchDomainError("organisation_mismatch", "org"),
-        corr,
-      ),
+      mapSearchDomainError(new SearchDomainError("organisation_mismatch", "org"), corr),
     ).toMatchObject({
       category: "authorization",
       code: "ORGANISATION_MISMATCH",
     });
-    expect(
-      mapSearchDomainError(searchExecutionUnavailable("x"), corr),
-    ).toMatchObject({
+    expect(mapSearchDomainError(searchExecutionUnavailable("x"), corr)).toMatchObject({
       category: "configuration",
       code: "PROVIDER_CAPABILITY_UNSUPPORTED",
     });
@@ -361,7 +337,9 @@ describe("APZSEARCH-003 search platform services", () => {
       category: "configuration",
       code: "PROVIDER_CAPABILITY_UNSUPPORTED",
     });
-    expect(mapSearchDomainError(searchNotFound("collection", "c1"), corr)).toMatchObject({
+    expect(
+      mapSearchDomainError(searchNotFound("collection", "c1"), corr),
+    ).toMatchObject({
       category: "not_found",
       code: "NOT_FOUND",
     });
@@ -391,11 +369,9 @@ describe("APZSEARCH-003 search platform services", () => {
     ).resolves.toBeNull();
 
     await expect(
-      impls.searchProviders.updateProvider(
-        request,
-        asSearchProviderId("missing"),
-        { label: "x" },
-      ),
+      impls.searchProviders.updateProvider(request, asSearchProviderId("missing"), {
+        label: "x",
+      }),
     ).rejects.toMatchObject({ code: "NOT_FOUND" });
 
     await expect(
@@ -493,9 +469,7 @@ describe("APZSEARCH-003 search platform services", () => {
       g3.searchValidation.validateQuery(request, { keywords: "x" }),
     ).rejects.toMatchObject({ code: "FORBIDDEN" });
 
-    expect(new SearchAuthorizationError("x").name).toBe(
-      "SearchAuthorizationError",
-    );
+    expect(new SearchAuthorizationError("x").name).toBe("SearchAuthorizationError");
 
     // symbol property pass-through on wrapFacet
     const sym = Symbol("meta");
@@ -516,9 +490,9 @@ describe("APZSEARCH-003 search platform services", () => {
         },
       },
     });
-    expect(
-      (wrapped.searchProviders as unknown as Record<symbol, unknown>)[sym],
-    ).toBe("symbol-value");
+    expect((wrapped.searchProviders as unknown as Record<symbol, unknown>)[sym]).toBe(
+      "symbol-value",
+    );
   });
 
   it("exercises full management plane through platform gateway wrappers", async () => {
@@ -558,10 +532,7 @@ describe("APZSEARCH-003 search platform services", () => {
     await g.searchProviders.disableProvider(request, asSearchProviderId("prov_full"));
     await g.searchProviders.enableProvider(request, asSearchProviderId("prov_full"));
     await g.searchProviders.clearActiveProvider(request);
-    await g.searchProviders.setActiveProvider(
-      request,
-      asSearchProviderId("prov_full"),
-    );
+    await g.searchProviders.setActiveProvider(request, asSearchProviderId("prov_full"));
     expect(await g.searchProviders.getCapabilities(request)).toBeTruthy();
     expect(
       (
@@ -673,9 +644,7 @@ describe("APZSEARCH-003 search platform services", () => {
       defaultScopes: ["tenant"],
     });
     await g.searchProfiles.update(request, profile.id, { name: "Prof2" });
-    expect(
-      (await g.searchProfiles.validate(request, profile.id)).valid,
-    ).toBe(true);
+    expect((await g.searchProfiles.validate(request, profile.id)).valid).toBe(true);
     await g.searchProfiles.archive(request, profile.id);
     await g.searchProfiles.restore(request, profile.id);
 
@@ -697,18 +666,14 @@ describe("APZSEARCH-003 search platform services", () => {
     expect(
       (await g.searchStatistics.getStatistics(request)).declaredProviderCount,
     ).toBe(1);
-    expect(
-      (await g.searchHealth.getHealth(request)).status,
-    ).toBeTruthy();
+    expect((await g.searchHealth.getHealth(request)).status).toBeTruthy();
     expect(
       (await g.searchDiagnostics.getDiagnostics(request)).notes?.join(" "),
     ).toMatch(/executionEnabled=false/);
-    expect(
-      (await g.searchAudit.list(request)).length,
-    ).toBeGreaterThan(0);
-    expect(
-      (await g.searchQuery.validateQuery(request, { keywords: "ok" })).valid,
-    ).toBe(true);
+    expect((await g.searchAudit.list(request)).length).toBeGreaterThan(0);
+    expect((await g.searchQuery.validateQuery(request, { keywords: "ok" })).valid).toBe(
+      true,
+    );
     expect(
       (
         await g.searchValidation.validateConfiguration(request, {
@@ -726,10 +691,7 @@ describe("APZSEARCH-003 search platform services", () => {
       ).valid,
     ).toBe(true);
 
-    await g.searchProviders.disposeProvider(
-      request,
-      asSearchProviderId("prov_full"),
-    );
+    await g.searchProviders.disposeProvider(request, asSearchProviderId("prov_full"));
     await g.searchProviders.unregisterProvider(
       request,
       asSearchProviderId("prov_full"),

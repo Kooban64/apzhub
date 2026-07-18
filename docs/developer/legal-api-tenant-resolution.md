@@ -57,4 +57,4 @@ Set collection variables:
 | `tenantId` | `t0000001-0000-4000-8000-000000000001` |
 | `baseUrl`  | `http://localhost:3300/api/law/v1`     |
 
-Download collections from [/api/docs](/api/docs).
+Download collections from [/api/docs](../developer/legal-api-developer-guide.md).

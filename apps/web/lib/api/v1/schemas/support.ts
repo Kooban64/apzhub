@@ -16,7 +16,14 @@ export const supportUserIdParamSchema = globalIdWithPrefix("suser");
 // Enums
 // ---------------------------------------------------------------------------
 
-const supportTicketStatusValues = ["new", "open", "pending", "closed", "merged", "unknown"] as const;
+const supportTicketStatusValues = [
+  "new",
+  "open",
+  "pending",
+  "closed",
+  "merged",
+  "unknown",
+] as const;
 const supportTicketPriorityValues = ["low", "normal", "high", "urgent"] as const;
 const supportUserRoleValues = ["agent", "customer", "admin", "unknown"] as const;
 const supportSearchKindValues = [
@@ -34,7 +41,9 @@ const supportSearchSortValues = ["score", "updatedAt", "title"] as const;
 
 export const supportRequestListQuerySchema = paginationQuerySchema
   .extend({
-    sort: z.enum(["title", "displayId", "status", "priority", "createdAt", "updatedAt"]).optional(),
+    sort: z
+      .enum(["title", "displayId", "status", "priority", "createdAt", "updatedAt"])
+      .optional(),
     order: z.enum(["asc", "desc"]).optional(),
     status: z.enum(supportTicketStatusValues).optional(),
     priority: z.enum(supportTicketPriorityValues).optional(),

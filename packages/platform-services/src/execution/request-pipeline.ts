@@ -7,22 +7,19 @@ import {
 
 import type { AuthorizationProvider } from "../authorization/authorization-provider";
 import { AllowAllAuthorizationProvider } from "../authorization/authorization-provider";
-import type {
-  AuthorizationAuditSink,
-} from "../authorization/authorization-audit";
+import type { AuthorizationAuditSink } from "../authorization/authorization-audit";
 import { noopAuthorizationAuditSink } from "../authorization/authorization-audit";
 import type { ProductionAuthorizationDecision } from "../authorization/production-authorization-provider";
 import {
   extractResourceId,
   resolveOperationAuthorization,
 } from "../authorization/operation-authorization-map";
-import { MiddlewareRegistry, type ServiceMiddleware } from "../middleware/service-middleware";
-import { PolicyPipeline, type Policy } from "../policy/policy-pipeline";
 import {
-  createRequestId,
-  noopPipelineLogger,
-  type PipelineLogger,
-} from "./logging";
+  MiddlewareRegistry,
+  type ServiceMiddleware,
+} from "../middleware/service-middleware";
+import { PolicyPipeline, type Policy } from "../policy/policy-pipeline";
+import { createRequestId, noopPipelineLogger, type PipelineLogger } from "./logging";
 import { noopPipelineMetrics, type PipelineMetrics } from "./metrics";
 
 export interface PipelineOperationInput<TResult> {
@@ -30,7 +27,10 @@ export interface PipelineOperationInput<TResult> {
   readonly operation: string;
   readonly context: ServiceRequestContext;
   readonly args: readonly unknown[];
-  readonly invoke: (context: ServiceRequestContext, args: readonly unknown[]) => Promise<TResult>;
+  readonly invoke: (
+    context: ServiceRequestContext,
+    args: readonly unknown[],
+  ) => Promise<TResult>;
 }
 
 export interface RequestPipelineOptions {
@@ -346,7 +346,8 @@ export class RequestPipeline {
       resourceId: input.resourceId,
       action: input.action,
       decision: input.decision.effect,
-      denialReason: input.decision.effect === "deny" ? input.decision.reason : undefined,
+      denialReason:
+        input.decision.effect === "deny" ? input.decision.reason : undefined,
       denialCode: input.decision.denialCode,
       policyOutcomes: input.policyOutcomes,
       impersonation: Boolean(input.context.impersonation?.actorUserId),

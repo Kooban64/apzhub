@@ -136,24 +136,56 @@ export function createInMemoryObserveRepositories(
   stores: ObserveInMemoryStores,
 ): InMemoryObserveRepositories {
   return {
-    healthChecks: createCrud(stores.healthChecks) as unknown as HealthCheckRepositoryPort,
-    readinessChecks: createCrud(stores.readinessChecks) as unknown as ReadinessCheckRepositoryPort,
-    livenessChecks: createCrud(stores.livenessChecks) as unknown as LivenessCheckRepositoryPort,
-    serviceHealth: createCrud(stores.serviceHealth) as unknown as ServiceHealthRepositoryPort,
-    serviceStatuses: createCrud(stores.serviceStatuses) as unknown as ServiceStatusRepositoryPort,
-    componentStatuses: createCrud(stores.componentStatuses) as unknown as ComponentStatusRepositoryPort,
-    metricDefinitions: createCrud(stores.metricDefinitions) as unknown as MetricDefinitionRepositoryPort,
-    metricSamples: createCrud(stores.metricSamples) as unknown as MetricSampleRepositoryPort,
-    alertDefinitions: createCrud(stores.alertDefinitions) as unknown as AlertDefinitionRepositoryPort,
+    healthChecks: createCrud(
+      stores.healthChecks,
+    ) as unknown as HealthCheckRepositoryPort,
+    readinessChecks: createCrud(
+      stores.readinessChecks,
+    ) as unknown as ReadinessCheckRepositoryPort,
+    livenessChecks: createCrud(
+      stores.livenessChecks,
+    ) as unknown as LivenessCheckRepositoryPort,
+    serviceHealth: createCrud(
+      stores.serviceHealth,
+    ) as unknown as ServiceHealthRepositoryPort,
+    serviceStatuses: createCrud(
+      stores.serviceStatuses,
+    ) as unknown as ServiceStatusRepositoryPort,
+    componentStatuses: createCrud(
+      stores.componentStatuses,
+    ) as unknown as ComponentStatusRepositoryPort,
+    metricDefinitions: createCrud(
+      stores.metricDefinitions,
+    ) as unknown as MetricDefinitionRepositoryPort,
+    metricSamples: createCrud(
+      stores.metricSamples,
+    ) as unknown as MetricSampleRepositoryPort,
+    alertDefinitions: createCrud(
+      stores.alertDefinitions,
+    ) as unknown as AlertDefinitionRepositoryPort,
     alertStates: createCrud(stores.alertStates) as unknown as AlertStateRepositoryPort,
-    dashboards: createCrud(stores.dashboards) as unknown as DashboardDefinitionRepositoryPort,
+    dashboards: createCrud(
+      stores.dashboards,
+    ) as unknown as DashboardDefinitionRepositoryPort,
     logSources: createCrud(stores.logSources) as unknown as LogSourceRepositoryPort,
-    traceDefinitions: createCrud(stores.traceDefinitions) as unknown as TraceDefinitionRepositoryPort,
+    traceDefinitions: createCrud(
+      stores.traceDefinitions,
+    ) as unknown as TraceDefinitionRepositoryPort,
     traceSpans: createCrud(stores.traceSpans) as unknown as TraceSpanRepositoryPort,
-    incidentReferences: createCrud(stores.incidentReferences) as unknown as IncidentReferenceRepositoryPort,
-    maintenanceWindows: createCrud(stores.maintenanceWindows) as unknown as MaintenanceWindowRepositoryPort,
-    healthSummaries: createCrud(stores.healthSummaries) as unknown as HealthSummaryRepositoryPort,
-    diagnostics: createCrud(stores.diagnostics) as unknown as PlatformDiagnosticRepositoryPort,
-    metadata: createCrud(stores.metadata) as unknown as ObservabilityMetadataRepositoryPort,
+    incidentReferences: createCrud(
+      stores.incidentReferences,
+    ) as unknown as IncidentReferenceRepositoryPort,
+    maintenanceWindows: createCrud(
+      stores.maintenanceWindows,
+    ) as unknown as MaintenanceWindowRepositoryPort,
+    healthSummaries: createCrud(
+      stores.healthSummaries,
+    ) as unknown as HealthSummaryRepositoryPort,
+    diagnostics: createCrud(
+      stores.diagnostics,
+    ) as unknown as PlatformDiagnosticRepositoryPort,
+    metadata: createCrud(
+      stores.metadata,
+    ) as unknown as ObservabilityMetadataRepositoryPort,
   };
 }

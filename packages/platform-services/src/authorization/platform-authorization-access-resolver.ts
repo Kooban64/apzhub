@@ -44,9 +44,7 @@ export class PlatformAuthorizationAccessResolver implements AuthorizationAccessR
     this.resolveTenantMembership = options.resolveTenantMembership;
     this.resolveOrganisationMembership = options.resolveOrganisationMembership;
     this.resolveActorStatus = options.resolveActorStatus;
-    this.platformAdminRoleSlugs = options.platformAdminRoleSlugs ?? [
-      "platform-admin",
-    ];
+    this.platformAdminRoleSlugs = options.platformAdminRoleSlugs ?? ["platform-admin"];
 
     // Ensure catalogue permissions are registered (idempotent).
     for (const permissionKey of PLATFORM_SERVICE_PERMISSION_CATALOGUE) {
@@ -73,7 +71,10 @@ export class PlatformAuthorizationAccessResolver implements AuthorizationAccessR
     let tenantStatus: "active" | "inactive" | "missing" | "suspended" = "missing";
     if (this.resolveTenantMembership) {
       tenantStatus = await this.resolveTenantMembership(input.userId, input.tenantId);
-    } else if (effective.roleIds.length > 0 || effective.effectivePermissions.length > 0) {
+    } else if (
+      effective.roleIds.length > 0 ||
+      effective.effectivePermissions.length > 0
+    ) {
       tenantStatus = "active";
     }
 

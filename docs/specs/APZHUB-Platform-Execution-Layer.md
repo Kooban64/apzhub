@@ -20,18 +20,18 @@ Specify the reusable execution infrastructure between `PlatformServiceGateway` a
 
 ### Guarantees
 
-| Concern | Behaviour |
-|---------|-----------|
-| Validation | Requires `tenantId`, `userId`, `correlationId` |
-| Context propagation | Enriched context passed as first invoke argument |
-| Correlation ID | Preserved from caller; never rewritten |
-| Request ID | Generated when absent; mirrored into `execution.requestId` |
-| Timing | Duration recorded on success and failure metrics |
-| Logging | Structured start/success/failure events via `PipelineLogger` |
-| Metrics | `PipelineMetrics` hooks for duration and outcome |
-| Authorization | Operation map → provider decision; deny before service invoke |
-| Audit | `authorization.evaluated` via `AuthorizationAuditSink` |
-| Errors | Typed authz/policy codes; `PlatformServiceError` passthrough; unknown → `INTERNAL_ERROR` |
+| Concern             | Behaviour                                                                                |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| Validation          | Requires `tenantId`, `userId`, `correlationId`                                           |
+| Context propagation | Enriched context passed as first invoke argument                                         |
+| Correlation ID      | Preserved from caller; never rewritten                                                   |
+| Request ID          | Generated when absent; mirrored into `execution.requestId`                               |
+| Timing              | Duration recorded on success and failure metrics                                         |
+| Logging             | Structured start/success/failure events via `PipelineLogger`                             |
+| Metrics             | `PipelineMetrics` hooks for duration and outcome                                         |
+| Authorization       | Operation map → provider decision; deny before service invoke                            |
+| Audit               | `authorization.evaluated` via `AuthorizationAuditSink`                                   |
+| Errors              | Typed authz/policy codes; `PlatformServiceError` passthrough; unknown → `INTERNAL_ERROR` |
 
 ### Construction options
 
@@ -39,7 +39,7 @@ Specify the reusable execution infrastructure between `PlatformServiceGateway` a
 new RequestPipeline({
   logger,
   metrics,
-  authorization,      // production | allow-all | deny-all
+  authorization, // production | allow-all | deny-all
   policies,
   middlewares,
   auditSink,
@@ -51,25 +51,25 @@ new RequestPipeline({
 
 ## Authorization
 
-| Type | Role |
-|------|------|
-| `AuthorizationProvider` | `authorize(request) → AuthorizationDecision` |
-| `AuthorizationDecision` | `effect: "allow" \| "deny"` plus optional reason/code |
-| `PermissionKey` | Catalogue key `{capability}.{action}` |
-| `AuthorizationResource` | Typed resource reference |
-| `ProductionAuthorizationProvider` | Production deny-by-default evaluator |
-| `AllowAllAuthorizationProvider` | Explicit development/test mode only |
-| `DenyAllAuthorizationProvider` | Explicit test mode |
-| `OPERATION_AUTHORIZATION_MAPPINGS` | Explicit service/operation → permission |
+| Type                               | Role                                                  |
+| ---------------------------------- | ----------------------------------------------------- |
+| `AuthorizationProvider`            | `authorize(request) → AuthorizationDecision`          |
+| `AuthorizationDecision`            | `effect: "allow" \| "deny"` plus optional reason/code |
+| `PermissionKey`                    | Catalogue key `{capability}.{action}`                 |
+| `AuthorizationResource`            | Typed resource reference                              |
+| `ProductionAuthorizationProvider`  | Production deny-by-default evaluator                  |
+| `AllowAllAuthorizationProvider`    | Explicit development/test mode only                   |
+| `DenyAllAuthorizationProvider`     | Explicit test mode                                    |
+| `OPERATION_AUTHORIZATION_MAPPINGS` | Explicit service/operation → permission               |
 
 See [ADR-0050](../adr/ADR-0050-production-authorisation-policy-enforcement.md) and [Permission Catalogue](./APZHUB-Platform-Permission-Catalogue.md).
 
 ### Bootstrap
 
-| Env | Values |
-|-----|--------|
-| `AUTHORIZATION_PROVIDER_MODE` | `production` \| `allow-all` \| `deny-all` |
-| `AUTHORIZATION_ALLOW_ALL_IN_PRODUCTION` | Explicit escape hatch only |
+| Env                                     | Values                                    |
+| --------------------------------------- | ----------------------------------------- |
+| `AUTHORIZATION_PROVIDER_MODE`           | `production` \| `allow-all` \| `deny-all` |
+| `AUTHORIZATION_ALLOW_ALL_IN_PRODUCTION` | Explicit escape hatch only                |
 
 ---
 
@@ -98,7 +98,11 @@ interface ServiceMiddleware {
   readonly name: string;
   readonly priority?: number;
   before?(ctx: ServiceMiddlewareContext): Promise<ServiceMiddlewareResult | void>;
-  after?(ctx: ServiceMiddlewareContext, result: unknown, error?: unknown): Promise<void>;
+  after?(
+    ctx: ServiceMiddlewareContext,
+    result: unknown,
+    error?: unknown,
+  ): Promise<void>;
 }
 ```
 

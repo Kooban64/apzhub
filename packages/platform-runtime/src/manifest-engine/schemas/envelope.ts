@@ -13,6 +13,13 @@ export const metadataSchema = z
     owner: z.string().optional(),
     tags: z.array(z.string()).optional(),
     icon: z.string().optional(),
+    /** Package identity refs used by platform service manifests (027). */
+    contractPackage: z.string().optional(),
+    contractVersion: z.string().optional(),
+    implementationPackage: z.string().optional(),
+    implementationVersion: z.string().optional(),
+    domainPackage: z.string().optional(),
+    domainVersion: z.string().optional(),
   })
   .strict();
 

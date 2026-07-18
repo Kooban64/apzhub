@@ -24,7 +24,9 @@ function unauthorized(): Response {
   );
 }
 
-export async function handleGetGovernance(resolveSession: SessionResolver): Promise<Response> {
+export async function handleGetGovernance(
+  resolveSession: SessionResolver,
+): Promise<Response> {
   const session = await resolveSession();
   if (!session?.user?.id) {
     return unauthorized();
@@ -56,7 +58,12 @@ export async function handlePatchGovernance(
   }
 
   const body = (await request.json()) as UpsertEnablementInput;
-  if (!body.scopeType || !body.targetType || !body.targetKey || body.enabled === undefined) {
+  if (
+    !body.scopeType ||
+    !body.targetType ||
+    !body.targetKey ||
+    body.enabled === undefined
+  ) {
     return Response.json(
       {
         error: {
@@ -73,7 +80,9 @@ export async function handlePatchGovernance(
   return Response.json({ data: enablement });
 }
 
-export async function handleGetProvisioning(resolveSession: SessionResolver): Promise<Response> {
+export async function handleGetProvisioning(
+  resolveSession: SessionResolver,
+): Promise<Response> {
   const session = await resolveSession();
   if (!session?.user?.id) {
     return unauthorized();
@@ -147,7 +156,9 @@ export async function handlePostProvisioning(
   return Response.json({ data: record }, { status: 201 });
 }
 
-export async function handleGetFeatureFlags(resolveSession: SessionResolver): Promise<Response> {
+export async function handleGetFeatureFlags(
+  resolveSession: SessionResolver,
+): Promise<Response> {
   const session = await resolveSession();
   if (!session?.user?.id) {
     return unauthorized();
@@ -195,7 +206,9 @@ export async function handlePatchFeatureFlag(
   return Response.json({ data: override });
 }
 
-export async function handleGetCapabilities(resolveSession: SessionResolver): Promise<Response> {
+export async function handleGetCapabilities(
+  resolveSession: SessionResolver,
+): Promise<Response> {
   const session = await resolveSession();
   if (!session?.user?.id) {
     return unauthorized();
@@ -203,7 +216,10 @@ export async function handleGetCapabilities(resolveSession: SessionResolver): Pr
 
   const service = await getGovernanceServiceForSession();
   const diagnostics = await service.getCapabilityDiagnostics();
-  return Response.json({ data: diagnostics, meta: { count: diagnostics.capabilities.length } });
+  return Response.json({
+    data: diagnostics,
+    meta: { count: diagnostics.capabilities.length },
+  });
 }
 
 export async function handleGetGovernanceDiagnostics(
@@ -214,19 +230,24 @@ export async function handleGetGovernanceDiagnostics(
   const inMemory = await getSharedGovernanceService().getDiagnostics();
 
   let postgres: Awaited<
-    ReturnType<typeof import("./postgres-governance-store").getPostgresGovernanceDiagnostics>
+    ReturnType<
+      typeof import("./postgres-governance-store").getPostgresGovernanceDiagnostics
+    >
   > | null = null;
 
   if (process.env.DATABASE_URL) {
     try {
-      const { getPostgresGovernanceDiagnostics } = await import("./postgres-governance-store");
+      const { getPostgresGovernanceDiagnostics } =
+        await import("./postgres-governance-store");
       postgres = await getPostgresGovernanceDiagnostics();
     } catch {
       postgres = null;
     }
   }
 
-  const sessionService = session?.user?.id ? await getGovernanceServiceForSession() : null;
+  const sessionService = session?.user?.id
+    ? await getGovernanceServiceForSession()
+    : null;
   const sessionGovernance = session?.user?.id
     ? await sessionService!.governance.resolveSessionSnapshot({
         userId: session.user.id,

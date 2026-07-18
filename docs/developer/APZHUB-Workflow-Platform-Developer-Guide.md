@@ -6,11 +6,11 @@
 
 ## Packages
 
-| Package | Version | Import |
-| --- | --- | --- |
-| `@apzhub/workflow-contracts` | 0.1.0 | Types, permissions, service ports |
-| `@apzhub/workflow-core` | 0.1.0 | Validation, lifecycle, foundation factory |
-| `@apzhub/workflow-persistence` | 0.1.0 | Memory / Postgres repositories |
+| Package                        | Version | Import                                    |
+| ------------------------------ | ------- | ----------------------------------------- |
+| `@apzhub/workflow-contracts`   | 0.1.0   | Types, permissions, service ports         |
+| `@apzhub/workflow-core`        | 0.1.0   | Validation, lifecycle, foundation factory |
+| `@apzhub/workflow-persistence` | 0.1.0   | Memory / Postgres repositories            |
 
 ---
 

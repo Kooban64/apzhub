@@ -22,10 +22,7 @@ import {
   type ReportMetadataRepositoryPort,
   type ReportTemplateRepositoryPort,
 } from "./ports/types";
-import {
-  bindTemplateToDocument,
-  validateTemplateBinding,
-} from "./template-engine";
+import { bindTemplateToDocument, validateTemplateBinding } from "./template-engine";
 
 export type PlatformReportingEngineDeps = {
   readonly catalogue: BuiltinTemplateCatalogue;
@@ -86,8 +83,7 @@ async function generate(
   assertKnownReportType(input.reportType, deps.catalogue.listReportTypes());
   assertOutputFormat(input.outputFormat);
 
-  const templateId =
-    input.templateId ?? deps.catalogue.defaultIdFor(input.reportType);
+  const templateId = input.templateId ?? deps.catalogue.defaultIdFor(input.reportType);
   const template = await resolveTemplate(deps, ctx, templateId);
   if (template.reportType !== input.reportType) {
     throw new ReportingDomainError(
@@ -98,11 +94,7 @@ async function generate(
   }
 
   const parameters = input.parameters ?? {};
-  const validation = validateTemplateBinding(
-    template,
-    parameters,
-    input.outputFormat,
-  );
+  const validation = validateTemplateBinding(template, parameters, input.outputFormat);
   if (!validation.valid) {
     throw new ReportingDomainError(
       "report_validation_failed",

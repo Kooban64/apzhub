@@ -37,9 +37,7 @@ import {
   SearchAuthorizationError,
 } from "./index";
 
-const ctx = (
-  overrides: Partial<SearchRequestContext> = {},
-): SearchRequestContext => ({
+const ctx = (overrides: Partial<SearchRequestContext> = {}): SearchRequestContext => ({
   correlationId: "corr",
   actorUserId: "u1",
   tenantId: "tenant_a",
@@ -62,10 +60,7 @@ const validConfig = (
   ...overrides,
 });
 
-function providerReg(
-  providerId: string,
-  overrides: Record<string, unknown> = {},
-) {
+function providerReg(providerId: string, overrides: Record<string, unknown> = {}) {
   const id = asSearchProviderId(providerId);
   const kind =
     (overrides.kind as "meilisearch" | "opensearch" | "custom") ?? "meilisearch";
@@ -83,8 +78,7 @@ function providerReg(
     version,
     active: (overrides.active as boolean) ?? false,
     ownership:
-      (overrides.ownership as "platform" | "tenant" | "organisation") ??
-      "tenant",
+      (overrides.ownership as "platform" | "tenant" | "organisation") ?? "tenant",
     capabilities: FOUNDATION_SEARCH_CAPABILITIES,
     configuration: {
       authenticationRefs: { credentialRef: "vault://search/creds" },
@@ -134,7 +128,10 @@ describe("APZSEARCH-003 coverage branches", () => {
     ).toThrow(SearchAuthorizationError);
 
     expect(
-      matchesOrganisation({ tenantId: "t", actorUserId: "u", permissions: [] }, undefined),
+      matchesOrganisation(
+        { tenantId: "t", actorUserId: "u", permissions: [] },
+        undefined,
+      ),
     ).toBe(true);
     expect(
       matchesOrganisation(
@@ -219,14 +216,10 @@ describe("APZSEARCH-003 coverage branches", () => {
     expect(() => assertConfigurationPermission(denied, "create")).toThrow(
       /search\.configuration\.create/,
     );
-    expect(() => assertDiagnosticsPermission(denied)).toThrow(
-      SearchAuthorizationError,
-    );
+    expect(() => assertDiagnosticsPermission(denied)).toThrow(SearchAuthorizationError);
     expect(() => assertAuditPermission(denied)).toThrow(SearchAuthorizationError);
     expect(() => assertQueryPermission(denied)).toThrow(SearchAuthorizationError);
-    expect(() => assertCollectionPermission(denied)).toThrow(
-      SearchAuthorizationError,
-    );
+    expect(() => assertCollectionPermission(denied)).toThrow(SearchAuthorizationError);
     expect(() => assertCollectionPermission(denied, "create")).toThrow(
       /search\.collection\.create/,
     );
@@ -250,12 +243,8 @@ describe("APZSEARCH-003 coverage branches", () => {
       SearchAuthorizationError,
     );
     expect(() => assertHealthPermission(denied)).toThrow(SearchAuthorizationError);
-    expect(() => assertStatisticsPermission(denied)).toThrow(
-      SearchAuthorizationError,
-    );
-    expect(() => assertValidationPermission(denied)).toThrow(
-      SearchAuthorizationError,
-    );
+    expect(() => assertStatisticsPermission(denied)).toThrow(SearchAuthorizationError);
+    expect(() => assertValidationPermission(denied)).toThrow(SearchAuthorizationError);
   });
 
   it("covers stub initialise failure and registry validation errors", async () => {
@@ -327,10 +316,7 @@ describe("APZSEARCH-003 coverage branches", () => {
     ).toEqual({ exists: false });
 
     expect(
-      await foundation.registry.getProviderHealth(
-        ctx(),
-        asSearchProviderId("missing"),
-      ),
+      await foundation.registry.getProviderHealth(ctx(), asSearchProviderId("missing")),
     ).toBeNull();
     expect(
       await foundation.registry.getProviderConfiguration(
@@ -381,8 +367,7 @@ describe("APZSEARCH-003 coverage branches", () => {
         version: "1",
       },
     });
-    const activeHealth =
-      await foundation.gateway.searchHealth.getHealth(ctx());
+    const activeHealth = await foundation.gateway.searchHealth.getHealth(ctx());
     expect(["unavailable", "unknown", "degraded"]).toContain(activeHealth.status);
 
     expect(createEmptyStatisticsFallback().declaredIndexCount).toBe(0);
@@ -410,9 +395,7 @@ describe("APZSEARCH-003 coverage branches", () => {
       g.searchProviders.registerProvider(a, providerReg("prov_life_1")),
     ).rejects.toThrow(/[Dd]uplicate/);
 
-    expect(
-      (await g.searchProviders.listProviders(b)).length,
-    ).toBe(0);
+    expect((await g.searchProviders.listProviders(b)).length).toBe(0);
     expect(
       await g.searchProviders.getProvider(b, asSearchProviderId("prov_life_1")),
     ).toBeNull();
@@ -480,32 +463,21 @@ describe("APZSEARCH-003 coverage branches", () => {
     await g.searchProviders.clearActiveProvider(a);
     expect(await g.searchProviders.getActiveProvider(a)).toBeNull();
 
-    await g.searchProviders.setActiveProvider(
-      a,
-      asSearchProviderId("prov_life_1"),
-    );
-    expect((await g.searchProviders.getActiveProvider(a))?.id).toBe(
-      "prov_life_1",
-    );
+    await g.searchProviders.setActiveProvider(a, asSearchProviderId("prov_life_1"));
+    expect((await g.searchProviders.getActiveProvider(a))?.id).toBe("prov_life_1");
 
     expect(await g.searchProviders.getCapabilities(a)).toEqual(
       FOUNDATION_SEARCH_CAPABILITIES,
     );
     expect(
-      await g.searchProviders.getCapabilities(
-        a,
-        asSearchProviderId("prov_life_1"),
-      ),
+      await g.searchProviders.getCapabilities(a, asSearchProviderId("prov_life_1")),
     ).toMatchObject({ keywords: true, semantic: false });
     expect(
       await g.searchProviders.getCapabilities(a, asSearchProviderId("ghost")),
     ).toEqual(FOUNDATION_SEARCH_CAPABILITIES);
 
     expect(
-      await g.searchProviders.getProviderStatus(
-        a,
-        asSearchProviderId("prov_life_1"),
-      ),
+      await g.searchProviders.getProviderStatus(a, asSearchProviderId("prov_life_1")),
     ).toMatchObject({ status: "UNKNOWN" });
 
     expect(
@@ -550,11 +522,10 @@ describe("APZSEARCH-003 coverage branches", () => {
     );
     expect(stubHealth.status).toBe("unavailable");
 
-    const lifecycleCaps =
-      await g.searchProviders.getProviderLifecycleCapabilities(
-        a,
-        asSearchProviderId("prov_life_1"),
-      );
+    const lifecycleCaps = await g.searchProviders.getProviderLifecycleCapabilities(
+      a,
+      asSearchProviderId("prov_life_1"),
+    );
     expect(lifecycleCaps.semantic).toBe(false);
 
     const providerDiag = await g.searchProviders.getProviderDiagnostics(
@@ -564,11 +535,7 @@ describe("APZSEARCH-003 coverage branches", () => {
     expect(JSON.stringify(providerDiag)).not.toMatch(/vault:\/\/search/);
 
     await expect(
-      g.searchProviders.initialiseProvider(
-        a,
-        asSearchProviderId("missing"),
-        config,
-      ),
+      g.searchProviders.initialiseProvider(a, asSearchProviderId("missing"), config),
     ).rejects.toThrow(/not found/);
     await expect(
       g.searchProviders.validateProviderLifecycleConfiguration(
@@ -590,14 +557,8 @@ describe("APZSEARCH-003 coverage branches", () => {
       g.searchProviders.disposeProvider(a, asSearchProviderId("missing")),
     ).rejects.toThrow(/not found/);
 
-    await g.searchProviders.disposeProvider(
-      a,
-      asSearchProviderId("prov_life_1"),
-    );
-    await g.searchProviders.unregisterProvider(
-      a,
-      asSearchProviderId("prov_life_1"),
-    );
+    await g.searchProviders.disposeProvider(a, asSearchProviderId("prov_life_1"));
+    await g.searchProviders.unregisterProvider(a, asSearchProviderId("prov_life_1"));
     expect(await g.searchProviders.listProviders(a)).toHaveLength(0);
   });
 
@@ -663,26 +624,20 @@ describe("APZSEARCH-003 coverage branches", () => {
       }),
     ).rejects.toThrow(/Invalid search configuration/);
 
-    const versioned = await g.searchConfigurations.version(
-      a,
-      second.id,
-      "manual bump",
-    );
+    const versioned = await g.searchConfigurations.version(a, second.id, "manual bump");
     expect(versioned.currentVersion).toBe(3);
-    await expect(
-      g.searchConfigurations.version(a, "missing", "x"),
-    ).rejects.toThrow(/not found/);
+    await expect(g.searchConfigurations.version(a, "missing", "x")).rejects.toThrow(
+      /not found/,
+    );
 
     await g.searchConfigurations.activate(a, first.id);
     expect((await g.searchConfigurations.get(a, first.id))?.active).toBe(true);
     expect((await g.searchConfigurations.get(a, second.id))?.active).toBe(false);
-    await expect(
-      g.searchConfigurations.activate(a, "missing"),
-    ).rejects.toThrow(/not found/);
-
-    expect((await g.searchConfigurations.validate(a, validConfig())).valid).toBe(
-      true,
+    await expect(g.searchConfigurations.activate(a, "missing")).rejects.toThrow(
+      /not found/,
     );
+
+    expect((await g.searchConfigurations.validate(a, validConfig())).valid).toBe(true);
 
     await g.searchConfigurations.archive(a, second.id);
     expect(await g.searchConfigurations.get(a, second.id)).toBeNull();
@@ -700,9 +655,7 @@ describe("APZSEARCH-003 coverage branches", () => {
     expect(createdViaPut.defaultPageSize).toBe(8);
 
     const audits = await listSearchAudits(foundation.persistence, a);
-    expect(audits.some((x) => x.action === "search.configuration.created")).toBe(
-      true,
-    );
+    expect(audits.some((x) => x.action === "search.configuration.created")).toBe(true);
     expect(JSON.stringify(audits)).not.toMatch(/password|apiKey|supersecret/i);
   });
 
@@ -743,20 +696,14 @@ describe("APZSEARCH-003 coverage branches", () => {
       g.searchCollections.update(a, "missing", { name: "x" }),
     ).rejects.toThrow(/not found/);
 
-    expect(
-      (await g.searchCollections.disable(a, "col_fixed")).enabled,
-    ).toBe(false);
-    expect(
-      (await g.searchCollections.enable(a, "col_fixed")).enabled,
-    ).toBe(true);
+    expect((await g.searchCollections.disable(a, "col_fixed")).enabled).toBe(false);
+    expect((await g.searchCollections.enable(a, "col_fixed")).enabled).toBe(true);
 
     await g.searchCollections.archive(a, "col_fixed");
     expect(await g.searchCollections.get(a, "col_fixed")).toBeNull();
     const restoredCol = await g.searchCollections.restore(a, "col_fixed");
     expect(restoredCol.id).toBe("col_fixed");
-    await expect(
-      g.searchCollections.restore(a, "never"),
-    ).rejects.toThrow(/not found/);
+    await expect(g.searchCollections.restore(a, "never")).rejects.toThrow(/not found/);
 
     const source = await g.searchSources.create(a, {
       productId: "documents",
@@ -782,9 +729,9 @@ describe("APZSEARCH-003 coverage branches", () => {
       providerId: asSearchProviderId("prov_src"),
       collectionId: "col_fixed" as never,
     });
-    await expect(
-      g.searchSources.update(a, "missing", { label: "x" }),
-    ).rejects.toThrow(/not found/);
+    await expect(g.searchSources.update(a, "missing", { label: "x" })).rejects.toThrow(
+      /not found/,
+    );
 
     expect((await g.searchSources.disable(a, source.id)).enabled).toBe(false);
     expect((await g.searchSources.enable(a, source.id)).enabled).toBe(true);
@@ -808,9 +755,9 @@ describe("APZSEARCH-003 coverage branches", () => {
       metadata: { k: "2" },
     });
     expect(updatedScope.description).toBeUndefined();
-    await expect(
-      g.searchScopes.update(a, "missing", { label: "x" }),
-    ).rejects.toThrow(/not found/);
+    await expect(g.searchScopes.update(a, "missing", { label: "x" })).rejects.toThrow(
+      /not found/,
+    );
     await g.searchScopes.archive(a, scope.id);
     expect((await g.searchScopes.restore(a, scope.id)).id).toBe(scope.id);
     await expect(g.searchScopes.restore(a, "never")).rejects.toThrow(/not found/);
@@ -833,15 +780,11 @@ describe("APZSEARCH-003 coverage branches", () => {
       defaultSorts: [],
     });
     expect(updatedProfile.name).toBe("Default 2");
-    await expect(
-      g.searchProfiles.update(a, "missing", { name: "x" }),
-    ).rejects.toThrow(/not found/);
-    expect(
-      (await g.searchProfiles.validate(a, profile.id)).valid,
-    ).toBe(true);
-    expect(
-      (await g.searchProfiles.validate(a, "missing")).valid,
-    ).toBe(false);
+    await expect(g.searchProfiles.update(a, "missing", { name: "x" })).rejects.toThrow(
+      /not found/,
+    );
+    expect((await g.searchProfiles.validate(a, profile.id)).valid).toBe(true);
+    expect((await g.searchProfiles.validate(a, "missing")).valid).toBe(false);
     await g.searchProfiles.archive(a, profile.id);
     expect((await g.searchProfiles.restore(a, profile.id)).id).toBe(profile.id);
     await expect(g.searchProfiles.restore(a, "never")).rejects.toThrow(/not found/);
@@ -880,9 +823,9 @@ describe("APZSEARCH-003 coverage branches", () => {
     });
     expect(updatedMeta.title).toBe("Beta");
     expect(updatedMeta.description).toBeUndefined();
-    await expect(
-      g.searchMetadata.update(a, "missing", { title: "x" }),
-    ).rejects.toThrow(/not found/);
+    await expect(g.searchMetadata.update(a, "missing", { title: "x" })).rejects.toThrow(
+      /not found/,
+    );
     await g.searchMetadata.archive(a, meta.id);
     expect((await g.searchMetadata.restore(a, meta.id)).title).toBe("Beta");
     await expect(g.searchMetadata.restore(a, "never")).rejects.toThrow(/not found/);
@@ -926,10 +869,7 @@ describe("APZSEARCH-003 coverage branches", () => {
       FOUNDATION_SEARCH_CAPABILITIES,
     );
     expect(
-      await g.searchCapabilities.getCapabilities(
-        a,
-        asSearchProviderId("prov_ops"),
-      ),
+      await g.searchCapabilities.getCapabilities(a, asSearchProviderId("prov_ops")),
     ).toMatchObject({ keywords: true });
     expect(
       await g.searchCapabilities.getCapabilities(a, asSearchProviderId("ghost")),
@@ -940,15 +880,11 @@ describe("APZSEARCH-003 coverage branches", () => {
     expect(readiness.providerCount).toBe(1);
     expect(readiness.activeProviderId).toBe("prov_ops");
 
-    await g.searchProviders.initialiseProvider(
-      a,
-      asSearchProviderId("prov_ops"),
-      {
-        providerId: asSearchProviderId("prov_ops"),
-        providerKind: "meilisearch",
-        version: "1.0.0",
-      },
-    );
+    await g.searchProviders.initialiseProvider(a, asSearchProviderId("prov_ops"), {
+      providerId: asSearchProviderId("prov_ops"),
+      providerKind: "meilisearch",
+      version: "1.0.0",
+    });
     const health = await g.searchHealth.getHealth(a);
     expect(health.status).toBe("unavailable");
     expect(health.message).toMatch(/execution unavailable|Stub/);
@@ -1013,9 +949,9 @@ describe("APZSEARCH-003 coverage branches", () => {
     const audits = await g.searchAudit.list(a);
     expect(audits.length).toBeGreaterThan(0);
 
-    expect(
-      (await g.searchQuery.validateQuery(a, { keywords: "alpha" })).valid,
-    ).toBe(true);
+    expect((await g.searchQuery.validateQuery(a, { keywords: "alpha" })).valid).toBe(
+      true,
+    );
     expect(
       (await g.searchValidation.validateQuery(a, { keywords: "alpha" })).valid,
     ).toBe(true);
@@ -1046,10 +982,7 @@ describe("APZSEARCH-003 coverage branches", () => {
     const profile = await foundation.gateway.searchProfiles.create(ctx(), {
       name: "   ",
     });
-    const result = await foundation.gateway.searchProfiles.validate(
-      ctx(),
-      profile.id,
-    );
+    const result = await foundation.gateway.searchProfiles.validate(ctx(), profile.id);
     expect(result.valid).toBe(false);
     expect(result.issues.some((i) => i.includes("name"))).toBe(true);
   });

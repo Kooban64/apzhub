@@ -79,7 +79,9 @@ export class PolicyPipeline {
     return decisions;
   }
 
-  async assertAllowed(input: PolicyExecutionContext): Promise<readonly PolicyDecision[]> {
+  async assertAllowed(
+    input: PolicyExecutionContext,
+  ): Promise<readonly PolicyDecision[]> {
     const decisions = await this.evaluate(input);
     const denied = decisions.find((entry) => entry.effect === "deny");
     if (denied) {

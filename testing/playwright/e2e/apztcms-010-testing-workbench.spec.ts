@@ -49,7 +49,9 @@ test.describe("APZTCMS-010 Testing workbench", () => {
     await expectTestingHeading(page, /Reports/i);
   });
 
-  test("certification detail shows gates and advisory recommendation", async ({ page }) => {
+  test("certification detail shows gates and advisory recommendation", async ({
+    page,
+  }) => {
     await gotoTestingSection(
       page,
       `${TESTING_ROUTES.certification}/${CERTIFICATION_ID}`,

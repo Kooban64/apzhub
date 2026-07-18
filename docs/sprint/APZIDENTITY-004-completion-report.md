@@ -25,13 +25,13 @@ Delivered a product-neutral Identity Administration Workbench at `/workspace/ide
 
 ## Package versions
 
-| Artefact | Version / note |
-| --- | --- |
-| Platform OpenAPI | **1.7.0** (unchanged — no new HTTP surface) |
-| `@apzhub/identity-contracts` | **0.2.0** (unchanged) |
-| `@apzhub/identity-core` | **0.2.0** (unchanged) |
-| `@apzhub/identity-persistence` | **0.1.0** (unchanged) |
-| `@apzhub/platform-services` | **0.23.0** (unchanged) |
+| Artefact                       | Version / note                              |
+| ------------------------------ | ------------------------------------------- |
+| Platform OpenAPI               | **1.7.0** (unchanged — no new HTTP surface) |
+| `@apzhub/identity-contracts`   | **0.2.0** (unchanged)                       |
+| `@apzhub/identity-core`        | **0.2.0** (unchanged)                       |
+| `@apzhub/identity-persistence` | **0.1.0** (unchanged)                       |
+| `@apzhub/platform-services`    | **0.23.0** (unchanged)                      |
 
 ## Architecture
 
@@ -51,16 +51,16 @@ All sixteen sections implemented via shared shell primitives (`PageShell`, `Meta
 
 ## Quality gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:identity-workbench` | PASS (0 violations) |
-| `pnpm audit:identity-http-client` | PASS |
-| `pnpm audit:identity-platform-services` | PASS |
-| `pnpm audit:identity-foundation` | PASS |
-| `pnpm openapi:validate:platform` | PASS |
-| Component + lib + harness tests (`apps/web/components/identity`, `apps/web/lib/identity`, `testing/identity-workbench`) | PASS |
-| Playwright mock spec | Added (`apzidentity-004-identity-workbench.spec.ts`); syntax-validated via `--list` |
-| Workbench coverage | See [APZIDENTITY-004 Coverage Baseline](../reviews/APZIDENTITY-004-coverage-baseline.md) |
+| Gate                                                                                                                    | Result                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `pnpm audit:identity-workbench`                                                                                         | PASS (0 violations)                                                                      |
+| `pnpm audit:identity-http-client`                                                                                       | PASS                                                                                     |
+| `pnpm audit:identity-platform-services`                                                                                 | PASS                                                                                     |
+| `pnpm audit:identity-foundation`                                                                                        | PASS                                                                                     |
+| `pnpm openapi:validate:platform`                                                                                        | PASS                                                                                     |
+| Component + lib + harness tests (`apps/web/components/identity`, `apps/web/lib/identity`, `testing/identity-workbench`) | PASS                                                                                     |
+| Playwright mock spec                                                                                                    | Added (`apzidentity-004-identity-workbench.spec.ts`); syntax-validated via `--list`      |
+| Workbench coverage                                                                                                      | See [APZIDENTITY-004 Coverage Baseline](../reviews/APZIDENTITY-004-coverage-baseline.md) |
 
 ## Known limitations
 
@@ -74,11 +74,11 @@ All sixteen sections implemented via shared shell primitives (`PageShell`, `Meta
 
 ## Coverage
 
-| Metric | Value |
-| --- | --- |
+| Metric             | Value     |
+| ------------------ | --------- |
 | Lines / statements | **98.5%** |
-| Functions | **98.5%** |
-| Branches | **76.8%** |
+| Functions          | **98.5%** |
+| Branches           | **76.8%** |
 
 ## Recommendation
 

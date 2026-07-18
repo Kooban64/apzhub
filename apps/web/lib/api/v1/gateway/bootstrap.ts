@@ -32,6 +32,8 @@ import {
   isIdentityServiceEnabled,
   createObservePlatformServicesForProduction,
   isObserveServiceEnabled,
+  createMetricsPlatformServicesForProduction,
+  isMetricsServiceEnabled,
 } from "@apzhub/platform-services";
 import type {
   TestingPlatformServicesBundle,
@@ -46,6 +48,7 @@ import type {
   AdministrationPlatformServicesBundle,
   IdentityPlatformServicesBundle,
   ObservePlatformServicesBundle,
+  MetricsPlatformServicesBundle,
 } from "@apzhub/platform-services";
 import type { DocumentStorageConfig } from "@apzhub/document-core";
 
@@ -66,6 +69,7 @@ export interface PlatformApiGatewayBootstrap {
   readonly administrationEnabled: boolean;
   readonly identityEnabled: boolean;
   readonly observeEnabled: boolean;
+  readonly metricsEnabled: boolean;
   readonly testingReadiness?: TestingReadinessIndicators;
   readonly documentsReadiness?: DocumentPlatformServicesBundle["readiness"];
   readonly searchReadiness?: SearchPlatformServicesBundle["readiness"];
@@ -76,6 +80,7 @@ export interface PlatformApiGatewayBootstrap {
   readonly administrationReadiness?: AdministrationPlatformServicesBundle["readiness"];
   readonly identityReadiness?: IdentityPlatformServicesBundle["readiness"];
   readonly observeReadiness?: ObservePlatformServicesBundle["readiness"];
+  readonly metricsReadiness?: MetricsPlatformServicesBundle["readiness"];
   readonly platformServicesVersion: string;
 }
 
@@ -158,12 +163,8 @@ function createTestingServicesBundle(): TestingPlatformServicesBundle {
   return createTestingPlatformServicesForProduction({ postgresDb: getDb() });
 }
 
-function resolveDocumentStorageConfig(
-  env: NodeJS.ProcessEnv,
-): DocumentStorageConfig {
-  const mode = (env.DOCUMENT_STORAGE_MODE ?? "filesystem") as
-    | "filesystem"
-    | "s3";
+function resolveDocumentStorageConfig(env: NodeJS.ProcessEnv): DocumentStorageConfig {
+  const mode = (env.DOCUMENT_STORAGE_MODE ?? "filesystem") as "filesystem" | "s3";
   const maxObjectBytes = Number(
     env.DOCUMENT_STORAGE_MAX_OBJECT_BYTES ?? 64 * 1024 * 1024,
   );
@@ -186,8 +187,7 @@ function resolveDocumentStorageConfig(
   return {
     mode: "filesystem",
     providerId: env.DOCUMENT_STORAGE_PROVIDER_ID ?? "filesystem",
-    filesystemRoot:
-      env.DOCUMENT_STORAGE_FILESYSTEM_ROOT ?? "/var/lib/apzhub/documents",
+    filesystemRoot: env.DOCUMENT_STORAGE_FILESYSTEM_ROOT ?? "/var/lib/apzhub/documents",
     allowFilesystemInProduction:
       env.DOCUMENT_STORAGE_ALLOW_FILESYSTEM_IN_PRODUCTION === "true",
     maxObjectBytes,
@@ -297,6 +297,17 @@ function createIdentityServicesBundle(): IdentityPlatformServicesBundle {
   });
 }
 
+function createMetricsServicesBundle(): MetricsPlatformServicesBundle {
+  if (!process.env.DATABASE_URL) {
+    throw new Error(
+      "APZHUB_METRICS_ENABLED=true requires DATABASE_URL for Metrics PostgreSQL persistence",
+    );
+  }
+  return createMetricsPlatformServicesForProduction({
+    postgresDb: getDb(),
+  });
+}
+
 function createObserveServicesBundle(): ObservePlatformServicesBundle {
   if (!process.env.DATABASE_URL) {
     throw new Error(
@@ -383,6 +394,7 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
   const administrationEnabled = isAdministrationServiceEnabled(process.env);
   const identityEnabled = isIdentityServiceEnabled(process.env);
   const observeEnabled = isObserveServiceEnabled(process.env);
+  const metricsEnabled = isMetricsServiceEnabled(process.env);
   let providersRegistered = false;
 
   // Mapping store from env (postgres in production by default).
@@ -399,7 +411,8 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
       const { registerPlaneProviders } = await import("@apzhub/platform-services");
       const tenantId = process.env.PLANE_BOOTSTRAP_TENANT_ID ?? "platform";
       const baseUrl = process.env.PLANE_BASE_URL ?? "http://localhost:18085";
-      const apiBaseUrl = process.env.PLANE_API_BASE_URL ?? `${baseUrl.replace(/\/$/, "")}/api`;
+      const apiBaseUrl =
+        process.env.PLANE_API_BASE_URL ?? `${baseUrl.replace(/\/$/, "")}/api`;
       const result = await createPlaneAdapter({
         tenantId,
         plane: {
@@ -452,16 +465,10 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
   }
 
   const testing = testingEnabled ? createTestingServicesBundle() : undefined;
-  const documents = documentsEnabled
-    ? await createDocumentServicesBundle()
-    : undefined;
-  const searchPlatform = searchEnabled
-    ? createSearchServicesBundle()
-    : undefined;
+  const documents = documentsEnabled ? await createDocumentServicesBundle() : undefined;
+  const searchPlatform = searchEnabled ? createSearchServicesBundle() : undefined;
   const searchExecution = await createSearchExecutionServicesBundle();
-  const workflow = workflowEnabled
-    ? await createWorkflowServicesBundle()
-    : undefined;
+  const workflow = workflowEnabled ? await createWorkflowServicesBundle() : undefined;
   const notification = notificationEnabled
     ? createNotificationServicesBundle()
     : undefined;
@@ -471,10 +478,9 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
   const administration = administrationEnabled
     ? createAdministrationServicesBundle()
     : undefined;
-  const identity = identityEnabled
-    ? createIdentityServicesBundle()
-    : undefined;
+  const identity = identityEnabled ? createIdentityServicesBundle() : undefined;
   const observe = observeEnabled ? createObserveServicesBundle() : undefined;
+  const metrics = metricsEnabled ? createMetricsServicesBundle() : undefined;
 
   const bundle = createPlatformServices({
     registry,
@@ -492,6 +498,7 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
     administration,
     identity,
     observe,
+    metricsPlatform: metrics,
   });
 
   return {
@@ -511,6 +518,7 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
     administrationEnabled,
     identityEnabled,
     observeEnabled,
+    metricsEnabled,
     testingReadiness: testing?.readiness,
     documentsReadiness: documents?.readiness,
     searchReadiness: searchPlatform?.readiness,
@@ -521,6 +529,7 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
     administrationReadiness: administration?.readiness,
     identityReadiness: identity?.readiness,
     observeReadiness: observe?.readiness,
+    metricsReadiness: metrics?.readiness,
     platformServicesVersion: PLATFORM_SERVICES_VERSION,
   };
 }
@@ -547,6 +556,7 @@ export function createTestPlatformApiGatewayBootstrap(
     administrationEnabled: overrides.administrationEnabled ?? false,
     identityEnabled: overrides.identityEnabled ?? false,
     observeEnabled: overrides.observeEnabled ?? false,
+    metricsEnabled: overrides.metricsEnabled ?? false,
     testingReadiness: overrides.testingReadiness,
     documentsReadiness: overrides.documentsReadiness,
     searchReadiness: overrides.searchReadiness,
@@ -557,7 +567,9 @@ export function createTestPlatformApiGatewayBootstrap(
     administrationReadiness: overrides.administrationReadiness,
     identityReadiness: overrides.identityReadiness,
     observeReadiness: overrides.observeReadiness,
-    platformServicesVersion: overrides.platformServicesVersion ?? PLATFORM_SERVICES_VERSION,
+    metricsReadiness: overrides.metricsReadiness,
+    platformServicesVersion:
+      overrides.platformServicesVersion ?? PLATFORM_SERVICES_VERSION,
   };
 }
 

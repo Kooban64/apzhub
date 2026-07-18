@@ -52,8 +52,7 @@ export function resolveEntityMappingStoreMode(
     throw new PlatformServiceError({
       category: "configuration",
       code: "CONFIGURATION_ERROR",
-      message:
-        "ENTITY_MAPPING_STORE_MODE must be 'memory' or 'postgres'",
+      message: "ENTITY_MAPPING_STORE_MODE must be 'memory' or 'postgres'",
       correlationId: "mapping-store-bootstrap",
       retryable: false,
       details: { value: raw },
@@ -110,8 +109,7 @@ export async function createEntityMappingStore(
     throw new PlatformServiceError({
       category: "configuration",
       code: "CONFIGURATION_ERROR",
-      message:
-        "ENTITY_MAPPING_STORE_MODE=postgres requires DATABASE_URL",
+      message: "ENTITY_MAPPING_STORE_MODE=postgres requires DATABASE_URL",
       correlationId: "mapping-store-bootstrap",
       retryable: false,
       details: { mode },

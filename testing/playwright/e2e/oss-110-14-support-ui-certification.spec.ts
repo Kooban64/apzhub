@@ -135,7 +135,9 @@ test.describe("OSS-110-14 Support UI certification", () => {
     await expect(page.getByText(/not an SLA/i)).toBeVisible();
   });
 
-  test("permission denied maps to support-error without zammad text", async ({ page }) => {
+  test("permission denied maps to support-error without zammad text", async ({
+    page,
+  }) => {
     await signIn(page);
 
     await page.route(/\/api\/v1\/support-requests(\?|$)/, async (route) => {

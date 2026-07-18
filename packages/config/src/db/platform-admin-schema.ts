@@ -23,21 +23,14 @@ export const platformAdminModule = pgTable(
     name: text("name").notNull(),
     description: text("description"),
     status: varchar("status", { length: 32 }).notNull().default("draft"),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     createdBy: text("created_by").notNull(),
     updatedBy: text("updated_by").notNull(),
     revision: integer("revision").notNull().default(1),
   },
   (table) => [
-    uniqueIndex("platform_admin_module_tenant_key_uidx").on(
-      table.tenantId,
-      table.key,
-    ),
+    uniqueIndex("platform_admin_module_tenant_key_uidx").on(table.tenantId, table.key),
   ],
 );
 
@@ -49,12 +42,8 @@ export const platformAdminCategory = pgTable("platform_admin_category", {
   name: text("name").notNull(),
   description: text("description"),
   ordering: integer("ordering").notNull().default(0),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformAdminSection = pgTable("platform_admin_section", {
@@ -65,12 +54,8 @@ export const platformAdminSection = pgTable("platform_admin_section", {
   name: text("name").notNull(),
   description: text("description"),
   ordering: integer("ordering").notNull().default(0),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformAdminAction = pgTable("platform_admin_action", {
@@ -83,12 +68,8 @@ export const platformAdminAction = pgTable("platform_admin_action", {
   description: text("description"),
   kind: varchar("kind", { length: 32 }).notNull(),
   permissionKeysJson: jsonb("permission_keys_json").$type<string[]>(),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformAdminPermission = pgTable("platform_admin_permission", {
@@ -97,12 +78,8 @@ export const platformAdminPermission = pgTable("platform_admin_permission", {
   key: text("key").notNull(),
   name: text("name").notNull(),
   description: text("description"),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformAdminAudit = pgTable("platform_admin_audit", {
@@ -112,9 +89,7 @@ export const platformAdminAudit = pgTable("platform_admin_audit", {
   action: varchar("action", { length: 64 }).notNull(),
   actorUserId: text("actor_user_id").notNull(),
   detail: text("detail"),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformAdminHistory = pgTable("platform_admin_history", {
@@ -122,9 +97,7 @@ export const platformAdminHistory = pgTable("platform_admin_history", {
   moduleId: text("module_id").notNull(),
   summary: text("summary").notNull(),
   actorUserId: text("actor_user_id").notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformAdminDiagnostic = pgTable("platform_admin_diagnostic", {
@@ -136,26 +109,21 @@ export const platformAdminDiagnostic = pgTable("platform_admin_diagnostic", {
   code: text("code").notNull(),
   message: text("message").notNull(),
   detail: text("detail"),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const platformAdminRegistration = pgTable(
-  "platform_admin_registration",
-  {
-    id: text("id").primaryKey(),
-    tenantId: text("tenant_id").notNull(),
-    moduleKey: varchar("module_key", { length: 64 }).notNull(),
-    version: text("version").notNull(),
-    status: varchar("status", { length: 32 }).notNull(),
-    registeredAt: timestamp("registered_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    registeredBy: text("registered_by").notNull(),
-    notes: text("notes"),
-  },
-);
+export const platformAdminRegistration = pgTable("platform_admin_registration", {
+  id: text("id").primaryKey(),
+  tenantId: text("tenant_id").notNull(),
+  moduleKey: varchar("module_key", { length: 64 }).notNull(),
+  version: text("version").notNull(),
+  status: varchar("status", { length: 32 }).notNull(),
+  registeredAt: timestamp("registered_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+  registeredBy: text("registered_by").notNull(),
+  notes: text("notes"),
+});
 
 export const platformAdminMetadata = pgTable("platform_admin_metadata", {
   id: text("id").primaryKey(),
@@ -173,12 +141,8 @@ export const platformAdminPolicy = pgTable("platform_admin_policy", {
   key: text("key").notNull(),
   name: text("name").notNull(),
   description: text("description"),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformAdminReference = pgTable("platform_admin_reference", {
@@ -205,12 +169,8 @@ export const platformAdminCapability = pgTable("platform_admin_capability", {
   owner: text("owner").notNull(),
   version: text("version").notNull(),
   documentation: text("documentation"),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformAdminNavigation = pgTable("platform_admin_navigation", {
@@ -226,12 +186,8 @@ export const platformAdminNavigation = pgTable("platform_admin_navigation", {
   permissionKeysJson: jsonb("permission_keys_json").$type<string[]>(),
   iconKey: text("icon_key"),
   routePath: text("route_path"),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformAdminShortcut = pgTable("platform_admin_shortcut", {
@@ -243,12 +199,8 @@ export const platformAdminShortcut = pgTable("platform_admin_shortcut", {
   label: text("label").notNull(),
   ordering: integer("ordering").notNull().default(0),
   permissionKeysJson: jsonb("permission_keys_json").$type<string[]>(),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformAdminDashboard = pgTable("platform_admin_dashboard", {
@@ -259,12 +211,8 @@ export const platformAdminDashboard = pgTable("platform_admin_dashboard", {
   name: text("name").notNull(),
   description: text("description"),
   ordering: integer("ordering").notNull().default(0),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformAdminWidget = pgTable("platform_admin_widget", {
@@ -274,12 +222,8 @@ export const platformAdminWidget = pgTable("platform_admin_widget", {
   name: text("name").notNull(),
   kind: varchar("kind", { length: 32 }).notNull(),
   ordering: integer("ordering").notNull().default(0),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformAdminSchema = {

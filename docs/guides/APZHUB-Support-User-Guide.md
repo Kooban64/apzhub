@@ -54,10 +54,10 @@ Article bodies are shown as **plain text**. HTML from email/web is stripped for 
 
 ## Internal notes vs customer replies
 
-| Composer | Who can see it | Use when |
-| --- | --- | --- |
-| **Internal note** | Agents only — not customers | Private agent discussion |
-| **Customer reply** | Customer-visible | Official response to the customer |
+| Composer           | Who can see it              | Use when                          |
+| ------------------ | --------------------------- | --------------------------------- |
+| **Internal note**  | Agents only — not customers | Private agent discussion          |
+| **Customer reply** | Customer-visible            | Official response to the customer |
 
 **Rules:**
 
@@ -77,11 +77,11 @@ APZHUB currently shows **attachment metadata only** (filename, type, size). Bina
 
 ## Organizations, groups, and users
 
-| Sidebar | Typical tasks |
-| --- | --- |
+| Sidebar       | Typical tasks                 |
+| ------------- | ----------------------------- |
 | Organizations | List, create, update, archive |
-| Groups | List, create, update |
-| Users | Browse Support user directory |
+| Groups        | List, create, update          |
+| Users         | Browse Support user directory |
 
 Exact create/update/archive controls depend on your permissions.
 

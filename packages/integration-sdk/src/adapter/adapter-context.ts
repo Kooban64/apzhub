@@ -15,7 +15,10 @@ import type { HealthProvider } from "../health/types";
 import type { IntegrationLifecycleParticipant } from "../lifecycle/participant-types";
 import type { IntegrationLogger } from "../observability/logging/integration-logger";
 import type { ErrorSummaryTracker } from "../observability/metrics/integration-metrics";
-import type { IntegrationMetrics, MetricsProvider } from "../observability/metrics/types";
+import type {
+  IntegrationMetrics,
+  MetricsProvider,
+} from "../observability/metrics/types";
 import { createIntegrationOperationsStack } from "../operations-stack";
 import type { IntegrationOperationsStack } from "../operations-stack";
 import type { CircuitBreaker } from "../resilience/types";

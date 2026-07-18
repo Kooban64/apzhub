@@ -13,12 +13,12 @@ Define diagnostics for Plane integration at the capability boundary. OSS-101-02 
 
 ## Diagnostic layers
 
-| Layer | OSS phase | Responsibility |
-|-------|-----------|----------------|
+| Layer                         | OSS phase     | Responsibility                                |
+| ----------------------------- | ------------- | --------------------------------------------- |
 | **Configuration diagnostics** | OSS-101-02 ✅ | URL/token/workspace present; integration flag |
-| **Adapter health probe** | OSS-101-04 | HTTP round-trip, engine version |
-| **Operations control plane** | OSS-101-09 | Aggregated connector health |
-| **Consolidated diagnostics** | OSS-101-09 | Bootstrap extension `projectsDiagnostics` |
+| **Adapter health probe**      | OSS-101-04    | HTTP round-trip, engine version               |
+| **Operations control plane**  | OSS-101-09    | Aggregated connector health                   |
+| **Consolidated diagnostics**  | OSS-101-09    | Bootstrap extension `projectsDiagnostics`     |
 
 ---
 
@@ -32,13 +32,13 @@ Define diagnostics for Plane integration at the capability boundary. OSS-101-02 
 ```typescript
 interface PlaneConfigurationDiagnostics {
   integrationEnabled: boolean;
-  connectionConfigured: boolean;    // BASE_URL + API_BASE_URL
-  apiTokenPresent: boolean;         // token set (not validated against Plane)
-  workspaceConfigured: boolean;     // PLANE_WORKSPACE_ID set
-  healthStatus: 'disabled' | 'misconfigured' | 'configured' | 'not_probed';
+  connectionConfigured: boolean; // BASE_URL + API_BASE_URL
+  apiTokenPresent: boolean; // token set (not validated against Plane)
+  workspaceConfigured: boolean; // PLANE_WORKSPACE_ID set
+  healthStatus: "disabled" | "misconfigured" | "configured" | "not_probed";
   versionCompatibility: {
-    status: 'not_checked' | 'compatible' | 'incompatible';
-    supportedRange: { min: '0.23.0'; max: '0.24.x' };
+    status: "not_checked" | "compatible" | "incompatible";
+    supportedRange: { min: "0.23.0"; max: "0.24.x" };
     note: string;
   };
   issues: string[];
@@ -47,12 +47,12 @@ interface PlaneConfigurationDiagnostics {
 
 ### Health status rules
 
-| Condition | `healthStatus` |
-|-----------|----------------|
-| `PLANE_INTEGRATION_ENABLED=false` | `disabled` |
-| Enabled + validation failures | `misconfigured` |
-| Enabled + URLs + token present | `configured` |
-| Live probe not run | Never `healthy`/`unavailable` at this layer |
+| Condition                         | `healthStatus`                              |
+| --------------------------------- | ------------------------------------------- |
+| `PLANE_INTEGRATION_ENABLED=false` | `disabled`                                  |
+| Enabled + validation failures     | `misconfigured`                             |
+| Enabled + URLs + token present    | `configured`                                |
+| Live probe not run                | Never `healthy`/`unavailable` at this layer |
 
 **OSS-101-02 does not call Plane HTTP APIs.**
 
@@ -60,10 +60,10 @@ interface PlaneConfigurationDiagnostics {
 
 ## Version compatibility design
 
-| Phase | Behaviour |
-|-------|-----------|
-| OSS-101-02 | Declare supported range constant; status `not_checked` |
-| OSS-101-04 | Adapter health probe reads Plane version header/API |
+| Phase      | Behaviour                                                               |
+| ---------- | ----------------------------------------------------------------------- |
+| OSS-101-02 | Declare supported range constant; status `not_checked`                  |
+| OSS-101-04 | Adapter health probe reads Plane version header/API                     |
 | OSS-101-09 | Report incompatible version to control plane; governance block optional |
 
 **Pinned range (initial):** `0.23.0` – `0.24.x` — finalized at OSS-101-02 environment pin.
@@ -102,11 +102,11 @@ Extends `OperationalDiagnosticsExtensions` per bootstrap architecture.
 
 ## Operator visibility
 
-| Surface | Content |
-|---------|---------|
-| Configuration API | Registry metadata + masked values |
-| Security diagnostics | Secret presence for `PLANE_API_TOKEN`, `PLANE_WEBHOOK_SECRET` |
-| Control plane (future) | Connector latency, sync lag, error rate |
+| Surface                | Content                                                       |
+| ---------------------- | ------------------------------------------------------------- |
+| Configuration API      | Registry metadata + masked values                             |
+| Security diagnostics   | Secret presence for `PLANE_API_TOKEN`, `PLANE_WEBHOOK_SECRET` |
+| Control plane (future) | Connector latency, sync lag, error rate                       |
 
 Secrets never appear unmasked in diagnostics output.
 

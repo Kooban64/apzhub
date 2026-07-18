@@ -50,41 +50,41 @@ Baseline collected (suite ~6.5–10.8 s; LOC sizes). No optimisations. See [Perf
 
 ## Coverage
 
-| Package/layer | Lines |
-| ------------- | ----- |
-| integration-github-actions | **95.62%** |
-| platform providers + live services | **100%** |
-| testing-services pipelines | **98.35%** |
-| apps/web pipeline presentation | **97.13%** |
+| Package/layer                      | Lines      |
+| ---------------------------------- | ---------- |
+| integration-github-actions         | **95.62%** |
+| platform providers + live services | **100%**   |
+| testing-services pipelines         | **98.35%** |
+| apps/web pipeline presentation     | **97.13%** |
 
 See [Quality Report](../reviews/APZTCMS-019-quality-report.md).
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| typecheck (vertical packages) | PASS |
-| lint (adapter) | PASS |
-| tests (vertical) | PASS **103** |
-| coverage | PASS ≥95% lines (key layers) |
-| OpenAPI | PASS |
-| Playwright live | LIMITED |
-| Architecture / Dependency / Boundary | PASS 0 violations |
-| Security | PASS |
-| Performance baseline | COLLECTED |
+| Gate                                 | Result                       |
+| ------------------------------------ | ---------------------------- |
+| typecheck (vertical packages)        | PASS                         |
+| lint (adapter)                       | PASS                         |
+| tests (vertical)                     | PASS **103**                 |
+| coverage                             | PASS ≥95% lines (key layers) |
+| OpenAPI                              | PASS                         |
+| Playwright live                      | LIMITED                      |
+| Architecture / Dependency / Boundary | PASS 0 violations            |
+| Security                             | PASS                         |
+| Performance baseline                 | COLLECTED                    |
 
 ## Technical Debt
 
-- Live Playwright blocked by pre-existing Next.js dynamic slug conflict under testing API  
-- GitHub App / OAuth live auth deferred  
-- Full platform-services typecheck noise (Plane/Zammad) unchanged  
+- Live Playwright blocked by pre-existing Next.js dynamic slug conflict under testing API
+- GitHub App / OAuth live auth deferred
+- Full platform-services typecheck noise (Plane/Zammad) unchanged
 - App env bootstrap for live GHA should be validated per deployment
 
 ## Known Limitations
 
-- Read-only metadata only (no execution/download)  
-- Live E2E not re-proven this session  
-- Provider unavailable stubs when resolver not registered  
+- Read-only metadata only (no execution/download)
+- Live E2E not re-proven this session
+- Provider unavailable stubs when resolver not registered
 - No realtime / webhooks / Event Bus
 
 ## Production Classification

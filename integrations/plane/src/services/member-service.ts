@@ -1,6 +1,9 @@
 import type { IntegrationRequestContext } from "@apzhub/integration-sdk";
 
-import type { PlaneMemberRecord, PlanePaginatedResponse } from "../internal/plane-api-types";
+import type {
+  PlaneMemberRecord,
+  PlanePaginatedResponse,
+} from "../internal/plane-api-types";
 import {
   extractPlaneUserId,
   mapMemberToPlaneBody,
@@ -9,7 +12,12 @@ import {
 } from "../mappers/member-mapper";
 import type { TeamMember } from "../models/canonical";
 import type { AddMemberInput, UpdateMemberInput } from "../models/inputs";
-import type { MemberListFilter, PageRequest, PageResult, SortField } from "../models/query";
+import type {
+  MemberListFilter,
+  PageRequest,
+  PageResult,
+  SortField,
+} from "../models/query";
 import {
   assertValid,
   mergeValidation,
@@ -17,8 +25,16 @@ import {
   validateRequiredString,
   validateSortFields,
 } from "../validation/request-validation";
-import { validatePlaneMemberResponse, validatePlanePaginatedResponse } from "../validation/response-validation";
-import { applyClientFilters, applyClientSort, buildPlaneListQuery, mapPaginatedResult } from "./list-helpers";
+import {
+  validatePlaneMemberResponse,
+  validatePlanePaginatedResponse,
+} from "../validation/response-validation";
+import {
+  applyClientFilters,
+  applyClientSort,
+  buildPlaneListQuery,
+  mapPaginatedResult,
+} from "./list-helpers";
 import type { PlaneServiceDeps } from "./plane-operation-runner";
 
 const MEMBER_SORT_FIELDS = ["role", "joinedAt"] as const;
@@ -34,7 +50,10 @@ export class PlaneMemberService {
     sort: readonly SortField<(typeof MEMBER_SORT_FIELDS)[number]>[] = [],
   ): Promise<PageResult<TeamMember>> {
     assertValid(
-      mergeValidation(validatePageRequest(page), validateSortFields(sort, MEMBER_SORT_FIELDS)),
+      mergeValidation(
+        validatePageRequest(page),
+        validateSortFields(sort, MEMBER_SORT_FIELDS),
+      ),
       "members.list",
     );
 
@@ -77,7 +96,11 @@ export class PlaneMemberService {
     });
   }
 
-  async get(context: IntegrationRequestContext, projectId: string, memberId: string): Promise<TeamMember> {
+  async get(
+    context: IntegrationRequestContext,
+    projectId: string,
+    memberId: string,
+  ): Promise<TeamMember> {
     return this.deps.runner.run(context, "members.get", async () => {
       const record = await this.deps.client.getMember(
         context,
@@ -100,7 +123,10 @@ export class PlaneMemberService {
       const record = await this.deps.client.addMember(
         context,
         resolveProjectPlaneId(projectId),
-        mapMemberToPlaneBody({ userId: extractPlaneUserId(input.userId), role: input.role }),
+        mapMemberToPlaneBody({
+          userId: extractPlaneUserId(input.userId),
+          role: input.role,
+        }),
       );
       assertValid(validatePlaneMemberResponse(record), "member.entity");
       return mapPlaneMember(record, projectId);
@@ -125,7 +151,11 @@ export class PlaneMemberService {
     });
   }
 
-  async remove(context: IntegrationRequestContext, projectId: string, memberId: string): Promise<void> {
+  async remove(
+    context: IntegrationRequestContext,
+    projectId: string,
+    memberId: string,
+  ): Promise<void> {
     await this.deps.runner.run(context, "members.remove", async () => {
       await this.deps.client.removeMember(
         context,

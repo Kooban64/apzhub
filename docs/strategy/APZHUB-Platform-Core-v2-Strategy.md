@@ -23,32 +23,32 @@ Platform Core v1.0 (M1–M8) is **architecturally complete** and **certified** (
 
 ## Strategic intent
 
-| Dimension | v1 (certified) | v2 (target) |
-|-----------|----------------|-------------|
-| Deployment | Internal / validation | Pilot + enterprise production |
-| Events | In-process | Worker-processed, replayable |
-| Secrets | Environment variables | Vault-compatible store |
-| Security ops | Console diagnostics | SOC/SIEM export |
-| Observability | Health endpoints | Metrics, logs, traces |
-| Commercial | Manual provisioning | Automated tenant + license |
-| API | Next.js route handlers | Gateway layer |
+| Dimension     | v1 (certified)         | v2 (target)                   |
+| ------------- | ---------------------- | ----------------------------- |
+| Deployment    | Internal / validation  | Pilot + enterprise production |
+| Events        | In-process             | Worker-processed, replayable  |
+| Secrets       | Environment variables  | Vault-compatible store        |
+| Security ops  | Console diagnostics    | SOC/SIEM export               |
+| Observability | Health endpoints       | Metrics, logs, traces         |
+| Commercial    | Manual provisioning    | Automated tenant + license    |
+| API           | Next.js route handlers | Gateway layer                 |
 
 ---
 
 ## Major capabilities (v2 phases)
 
-| Phase | Capability | Business value |
-|-------|------------|----------------|
-| **PCv2-01** | Production SaaS Hardening | Unblock pilot deployments |
+| Phase       | Capability                    | Business value                       |
+| ----------- | ----------------------------- | ------------------------------------ |
+| **PCv2-01** | Production SaaS Hardening     | Unblock pilot deployments            |
 | **PCv2-02** | Outbox Workers & Event Replay | Reliable async; trust/product events |
-| **PCv2-03** | Commercial Provisioning | SaaS onboarding without manual DB |
-| **PCv2-04** | Vault Integration | Enterprise secret management |
-| **PCv2-05** | SOC/SIEM Integration | Security operations compliance |
-| **PCv2-06** | High Availability & DR | Production SLA |
-| **PCv2-07** | Observability Stack | Operator visibility |
-| **PCv2-08** | Background Workers Platform | Centralised job infrastructure |
-| **PCv2-09** | API Gateway | Versioning, rate limits, API keys |
-| **PCv2-10** | Commercial Licensing | Entitlements drive governance flags |
+| **PCv2-03** | Commercial Provisioning       | SaaS onboarding without manual DB    |
+| **PCv2-04** | Vault Integration             | Enterprise secret management         |
+| **PCv2-05** | SOC/SIEM Integration          | Security operations compliance       |
+| **PCv2-06** | High Availability & DR        | Production SLA                       |
+| **PCv2-07** | Observability Stack           | Operator visibility                  |
+| **PCv2-08** | Background Workers Platform   | Centralised job infrastructure       |
+| **PCv2-09** | API Gateway                   | Versioning, rate limits, API keys    |
+| **PCv2-10** | Commercial Licensing          | Entitlements drive governance flags  |
 
 ---
 
@@ -95,15 +95,15 @@ Priority 4 (enterprise compliance):
 
 Platform Core v2 is **strategically complete** when:
 
-| Criterion | Measure |
-|-----------|---------|
-| Pilot ready | Single supervised customer on self-hosted stack |
-| Workers operational | Outbox processed; DLQ tested; trust events delivered |
-| Security production-grade | CSP enforced; Vault refs; gateway rate limits |
-| Observability live | Prometheus + Grafana + Loki + correlation IDs |
-| Commercial path clear | Tenant onboard → product enabled → license checked |
-| Commercial Assessment | Production tier ≥ **Pilot Ready** |
-| No v1 regression | PC-001 certification criteria still pass |
+| Criterion                 | Measure                                              |
+| ------------------------- | ---------------------------------------------------- |
+| Pilot ready               | Single supervised customer on self-hosted stack      |
+| Workers operational       | Outbox processed; DLQ tested; trust events delivered |
+| Security production-grade | CSP enforced; Vault refs; gateway rate limits        |
+| Observability live        | Prometheus + Grafana + Loki + correlation IDs        |
+| Commercial path clear     | Tenant onboard → product enabled → license checked   |
+| Commercial Assessment     | Production tier ≥ **Pilot Ready**                    |
+| No v1 regression          | PC-001 certification criteria still pass             |
 
 ---
 
@@ -124,11 +124,11 @@ v2 must **not** block v3 — design for replaceable adapters (gateway, bus, secr
 
 ## Dependencies and risks
 
-| Risk | Mitigation |
-|------|------------|
-| Scope creep into product features | Phase gates; sprint guides per PCv2 phase |
-| v2 delayed by product pressure | PC-001 stop condition; owner approval per phase |
-| Worker complexity | Start with outbox only; generalise in PCv2-08 |
+| Risk                                | Mitigation                                                   |
+| ----------------------------------- | ------------------------------------------------------------ |
+| Scope creep into product features   | Phase gates; sprint guides per PCv2 phase                    |
+| v2 delayed by product pressure      | PC-001 stop condition; owner approval per phase              |
+| Worker complexity                   | Start with outbox only; generalise in PCv2-08                |
 | OSS integration before v2 hardening | PCS-001 sequencing: PCv2-01 before productivity integrations |
 
 ---

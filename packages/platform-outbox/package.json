@@ -1,0 +1,19 @@
+{
+  "name": "@apzhub/platform-outbox",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Outbox Workers — batch drain, retry, DLQ, replay (PCv2-02)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/platform-outbox"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "drizzle-orm": "^0.45.2"
+  }
+}

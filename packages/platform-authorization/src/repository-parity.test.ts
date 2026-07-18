@@ -23,11 +23,18 @@ describe("Authorization repository parity (in-memory contract)", () => {
       productKey: "law-platform",
     });
 
-    expect(repositories.permissions.get("legal.test.view")?.permissionKey).toBe("legal.test.view");
+    expect(repositories.permissions.get("legal.test.view")?.permissionKey).toBe(
+      "legal.test.view",
+    );
     expect(repositories.roles.get(role.roleId)?.slug).toBe("test-role");
-    expect(repositories.assignments.get(assignment.assignmentId)?.userId).toBe("user-parity");
+    expect(repositories.assignments.get(assignment.assignmentId)?.userId).toBe(
+      "user-parity",
+    );
     expect(
-      service.can({ userId: "user-parity", productKey: "law-platform" }, "legal.test.view"),
+      service.can(
+        { userId: "user-parity", productKey: "law-platform" },
+        "legal.test.view",
+      ),
     ).toBe(true);
   });
 });

@@ -32,7 +32,9 @@ export interface HealthProvider {
 export interface HealthCheckDefinition {
   readonly name: StandardHealthCheckName | string;
   readonly critical?: boolean;
-  readonly run: (input: HealthCheckContext) => Promise<IntegrationHealthCheck> | IntegrationHealthCheck;
+  readonly run: (
+    input: HealthCheckContext,
+  ) => Promise<IntegrationHealthCheck> | IntegrationHealthCheck;
 }
 
 export interface AggregateHealthChecksInput {

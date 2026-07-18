@@ -79,9 +79,7 @@ export function isConfigurationRoute(pathname: string): boolean {
   );
 }
 
-export function resolveConfigurationSection(
-  pathname: string,
-): ConfigurationSection {
+export function resolveConfigurationSection(pathname: string): ConfigurationSection {
   const normalized = normalizePath(pathname);
   if (normalized === CONFIGURATION_WORKSPACE_BASE) return "overview";
   const suffix = normalized.slice(CONFIGURATION_WORKSPACE_BASE.length + 1);
@@ -92,9 +90,7 @@ export function resolveConfigurationSection(
   return "overview";
 }
 
-export function configurationSectionPath(
-  section?: ConfigurationSection,
-): string {
+export function configurationSectionPath(section?: ConfigurationSection): string {
   if (!section || section === "overview") {
     return `${CONFIGURATION_WORKSPACE_BASE}/overview`;
   }

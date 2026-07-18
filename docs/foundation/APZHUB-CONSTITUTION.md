@@ -27,47 +27,47 @@ No sprint guide, backlog item, or AI-generated code may override these principle
 
 ### Platform ownership
 
-| Principle | Rule |
-|-----------|------|
-| **Platform Core owns cross-cutting capabilities** | Identity, authorization, governance, operations, security, lifecycle, runtime, workbench, events, notifications, search, activity |
-| **Products consume Platform capabilities** | Law Platform and future products use Platform packages — never reimplement |
-| **Products never duplicate Platform functionality** | No product-local IAM, ops console, or event bus |
-| **Workbench is always APZHUB** | One desktop shell; permission-driven UI; no engine-branded layouts |
+| Principle                                           | Rule                                                                                                                              |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Platform Core owns cross-cutting capabilities**   | Identity, authorization, governance, operations, security, lifecycle, runtime, workbench, events, notifications, search, activity |
+| **Products consume Platform capabilities**          | Law Platform and future products use Platform packages — never reimplement                                                        |
+| **Products never duplicate Platform functionality** | No product-local IAM, ops console, or event bus                                                                                   |
+| **Workbench is always APZHUB**                      | One desktop shell; permission-driven UI; no engine-branded layouts                                                                |
 
 ### Integration boundary
 
-| Principle | Rule |
-|-----------|------|
-| **Vendor systems are hidden behind adapters** | Clients never call Plane, Kimai, Paperless, etc. |
+| Principle                                               | Rule                                                                           |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Vendor systems are hidden behind adapters**           | Clients never call Plane, Kimai, Paperless, etc.                               |
 | **Capability services never handle vendor credentials** | Flow: Service → Adapter → Integration SDK → Auth Provider → Connection Manager |
-| **Credentials stay inside the integration boundary** | Never in diagnostics, errors, logs, events, or user responses |
-| **User-facing names are APZHUB names** | Projects, Documents, Time Tracking — not engine names |
+| **Credentials stay inside the integration boundary**    | Never in diagnostics, errors, logs, events, or user responses                  |
+| **User-facing names are APZHUB names**                  | Projects, Documents, Time Tracking — not engine names                          |
 
 ### Platform-owned domains
 
-| Domain | Owner |
-|--------|-------|
-| **Identity** | Platform Core (`@apzhub/platform-identity`, `@apzhub/auth`) |
-| **Authorization** | Platform Core (`@apzhub/platform-authorization`) |
-| **Governance & provisioning** | Platform Core (`@apzhub/platform-governance`) |
-| **Security & resilience** | Platform Core (`@apzhub/platform-security`) |
-| **Operations & lifecycle** | Platform Core (`@apzhub/platform-operations`, `@apzhub/platform-lifecycle`) |
+| Domain                        | Owner                                                                       |
+| ----------------------------- | --------------------------------------------------------------------------- |
+| **Identity**                  | Platform Core (`@apzhub/platform-identity`, `@apzhub/auth`)                 |
+| **Authorization**             | Platform Core (`@apzhub/platform-authorization`)                            |
+| **Governance & provisioning** | Platform Core (`@apzhub/platform-governance`)                               |
+| **Security & resilience**     | Platform Core (`@apzhub/platform-security`)                                 |
+| **Operations & lifecycle**    | Platform Core (`@apzhub/platform-operations`, `@apzhub/platform-lifecycle`) |
 
 BetterAuth handles authentication only. APZHUB owns permissions, roles, provisioning, and audit.
 
 ### Engineering discipline
 
-| Principle | Rule |
-|-----------|------|
-| **Planning precedes implementation** | Requirements → architecture → design → implementation |
-| **Architecture before coding** | Read foundation docs and ADRs before writing code |
-| **ADR before significant change** | New technology, boundary change, or constitution conflict |
-| **Documentation is mandatory** | Specs, architecture, completion reports for every milestone |
-| **Testing is mandatory** | Unit, integration, API, E2E; CI must pass before merge |
-| **Security by design** | Zero Trust on every request; least privilege |
-| **Tenant isolation by design** | All connections, data, and operations are tenant-scoped |
-| **Backward compatibility where practical** | SDK semver; no breaking exports without approval |
-| **No shortcuts that compromise architecture** | No Module→Connector bypass; no frontend-only authz |
+| Principle                                     | Rule                                                        |
+| --------------------------------------------- | ----------------------------------------------------------- |
+| **Planning precedes implementation**          | Requirements → architecture → design → implementation       |
+| **Architecture before coding**                | Read foundation docs and ADRs before writing code           |
+| **ADR before significant change**             | New technology, boundary change, or constitution conflict   |
+| **Documentation is mandatory**                | Specs, architecture, completion reports for every milestone |
+| **Testing is mandatory**                      | Unit, integration, API, E2E; CI must pass before merge      |
+| **Security by design**                        | Zero Trust on every request; least privilege                |
+| **Tenant isolation by design**                | All connections, data, and operations are tenant-scoped     |
+| **Backward compatibility where practical**    | SDK semver; no breaking exports without approval            |
+| **No shortcuts that compromise architecture** | No Module→Connector bypass; no frontend-only authz          |
 
 ### Layered architecture (non-negotiable)
 
@@ -84,12 +84,12 @@ See [003 — Overall System Architecture](../003-overall-system-architecture-des
 
 ### Quality and release
 
-| Principle | Rule |
-|-----------|------|
-| **Definition of Done** | Tests pass, docs complete, reviewed, architecture compliant |
-| **CI every commit** | Lint, types, build, tests, security checks |
-| **Phase gates** | Stop at sprint boundaries; await owner approval for next milestone |
-| **Manifest first** | `module.yaml`, `service.yaml`, `integration.yaml`, `event.yaml` before code |
+| Principle              | Rule                                                                        |
+| ---------------------- | --------------------------------------------------------------------------- |
+| **Definition of Done** | Tests pass, docs complete, reviewed, architecture compliant                 |
+| **CI every commit**    | Lint, types, build, tests, security checks                                  |
+| **Phase gates**        | Stop at sprint boundaries; await owner approval for next milestone          |
+| **Manifest first**     | `module.yaml`, `service.yaml`, `integration.yaml`, `event.yaml` before code |
 
 See [015 — Quality Framework](../015-software-quality-testing-qa-cicd-release-management-framework.md).
 

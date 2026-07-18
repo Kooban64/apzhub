@@ -4,15 +4,15 @@
 
 ## Catalogue
 
-| Permission | Intent |
-|------------|--------|
-| `document.read` | Read / find / summarize |
-| `document.write` | Create / update metadata / tag / relate |
-| `document.manage` | Archive / restore |
-| `document.classify` | Change classification |
-| `document.retention` | Retention operations (future-ready) |
-| `document.audit` | Read audit trail |
-| `document.*` | Wildcard grant (not a security bypass of other layers) |
+| Permission           | Intent                                                 |
+| -------------------- | ------------------------------------------------------ |
+| `document.read`      | Read / find / summarize                                |
+| `document.write`     | Create / update metadata / tag / relate                |
+| `document.manage`    | Archive / restore                                      |
+| `document.classify`  | Change classification                                  |
+| `document.retention` | Retention operations (future-ready)                    |
+| `document.audit`     | Read audit trail                                       |
+| `document.*`         | Wildcard grant (not a security bypass of other layers) |
 
 ## Enforcement (domain)
 

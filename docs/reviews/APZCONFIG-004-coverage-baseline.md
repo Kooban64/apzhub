@@ -10,10 +10,10 @@
 
 ## Result (as measured at APZCONFIG-004 closeout)
 
-| Surface | Statements / Lines | Functions | Branches |
-| --- | --- | --- | --- |
-| Workbench modules | ~88% | ~79% | ~81% |
-| Workspace router | 100% | 100% | 100% |
+| Surface           | Statements / Lines | Functions | Branches |
+| ----------------- | ------------------ | --------- | -------- |
+| Workbench modules | ~88%               | ~79%      | ~81%     |
+| Workspace router  | 100%               | 100%      | 100%     |
 
 ## Notes
 

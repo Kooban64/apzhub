@@ -40,12 +40,12 @@ Plane engine details never cross the integration boundary into user-visible regi
 
 ## Governance registration
 
-| Field | Value | Notes |
-|-------|-------|-------|
-| Capability key | `projects` | Enables/disables Projects product |
-| Capability type | `productivity` | Portfolio classification |
-| Feature flag | `capability.projects.enabled` | Evaluated before module activation |
-| Module status | `disabled` | Remains off until OSS-101-05 UI gate |
+| Field           | Value                         | Notes                                |
+| --------------- | ----------------------------- | ------------------------------------ |
+| Capability key  | `projects`                    | Enables/disables Projects product    |
+| Capability type | `productivity`                | Portfolio classification             |
+| Feature flag    | `capability.projects.enabled` | Evaluated before module activation   |
+| Module status   | `disabled`                    | Remains off until OSS-101-05 UI gate |
 
 Governance consumes `project-service` and `projects` manifests at bootstrap. No runtime toggle implementation in OSS-101-03.
 
@@ -71,12 +71,12 @@ Role templates and backend role translation (Plane) are **OSS-101-04+** — mani
 
 ## Workbench registration
 
-| Surface | Registration source | Status |
-|---------|---------------------|--------|
-| Activity Bar | `module.navigation.activityBar` | Planned |
-| Sidebar routes | `module.navigation.sidebar` | Planned |
-| Default workspace view | `module.workbench.view` | Planned |
-| Command palette actions | `module.workbench.actions` | Placeholder handlers |
+| Surface                      | Registration source                       | Status                            |
+| ---------------------------- | ----------------------------------------- | --------------------------------- |
+| Activity Bar                 | `module.navigation.activityBar`           | Planned                           |
+| Sidebar routes               | `module.navigation.sidebar`               | Planned                           |
+| Default workspace view       | `module.workbench.view`                   | Planned                           |
+| Command palette actions      | `module.workbench.actions`                | Placeholder handlers              |
 | Planned project detail route | `documentation.plannedRouteProjectDetail` | `/workspace/projects/{projectId}` |
 
 Module remains `disabled` — shell will not render Projects until governance enables capability and OSS-101-05 delivers views.
@@ -93,16 +93,16 @@ Execution path (future): Command → `ProjectService` → `PlaneAdapter` → Pla
 
 ## Event registration
 
-| Canonical key | Manifest ID | Publisher |
-|---------------|-------------|-----------|
-| `projects.project.created` | `projects-project-created` | `project-service` |
-| `projects.project.updated` | `projects-project-updated` | `project-service` |
-| `projects.task.created` | `projects-task-created` | `project-service` |
-| `projects.task.updated` | `projects-task-updated` | `project-service` |
+| Canonical key                  | Manifest ID                    | Publisher         |
+| ------------------------------ | ------------------------------ | ----------------- |
+| `projects.project.created`     | `projects-project-created`     | `project-service` |
+| `projects.project.updated`     | `projects-project-updated`     | `project-service` |
+| `projects.task.created`        | `projects-task-created`        | `project-service` |
+| `projects.task.updated`        | `projects-task-updated`        | `project-service` |
 | `projects.task.status_changed` | `projects-task-status-changed` | `project-service` |
-| `projects.task.assigned` | `projects-task-assigned` | `project-service` |
-| `projects.sprint.created` | `projects-sprint-created` | `project-service` |
-| `projects.sprint.completed` | `projects-sprint-completed` | `project-service` |
+| `projects.task.assigned`       | `projects-task-assigned`       | `project-service` |
+| `projects.sprint.created`      | `projects-sprint-created`      | `project-service` |
+| `projects.sprint.completed`    | `projects-sprint-completed`    | `project-service` |
 
 Service manifest `events.publishes` lists the same keys for discovery aggregation.
 
@@ -110,9 +110,9 @@ Service manifest `events.publishes` lists the same keys for discovery aggregatio
 
 ## Knowledge registration
 
-| Source ID | Provides | Phase |
-|-----------|----------|-------|
-| `projects.search` | project metadata search | OSS-101-08 |
+| Source ID            | Provides                     | Phase      |
+| -------------------- | ---------------------------- | ---------- |
+| `projects.search`    | project metadata search      | OSS-101-08 |
 | `projects.knowledge` | project + document knowledge | OSS-101-08 |
 
 Tier T2, permission-gated at `projects.view`.
@@ -121,11 +121,11 @@ Tier T2, permission-gated at `projects.view`.
 
 ## Notification route registration
 
-| Route ID | Subscribing event | Planned delivery |
-|----------|-------------------|------------------|
-| `projects.task.assigned` | `projects.task.assigned` | In-app + optional email to assignee |
-| `projects.task.status_changed` | `projects.task.status_changed` | In-app to watchers |
-| `projects.sprint.completed` | `projects.sprint.completed` | In-app to project team |
+| Route ID                       | Subscribing event              | Planned delivery                    |
+| ------------------------------ | ------------------------------ | ----------------------------------- |
+| `projects.task.assigned`       | `projects.task.assigned`       | In-app + optional email to assignee |
+| `projects.task.status_changed` | `projects.task.status_changed` | In-app to watchers                  |
+| `projects.sprint.completed`    | `projects.sprint.completed`    | In-app to project team              |
 
 Declared via event `subscribers` (`notification:*`) and service `documentation.notificationRoute*`.
 
@@ -141,12 +141,12 @@ Activity types mirror business events (see [Manifest Notes](./APZHUB-Projects-Ma
 
 ## Lifecycle registration
 
-| Field | Value |
-|-------|-------|
-| Product ID | `projects` |
-| Participation | enable, disable, provision, reconcile |
-| Provisioning kind | `plane-workspace` |
-| Integration | `plane` |
+| Field             | Value                                 |
+| ----------------- | ------------------------------------- |
+| Product ID        | `projects`                            |
+| Participation     | enable, disable, provision, reconcile |
+| Provisioning kind | `plane-workspace`                     |
+| Integration       | `plane`                               |
 
 Lifecycle orchestration connects to Plane workspace provisioning in OSS-101-04. OSS-101-03 declares IDs only.
 
@@ -154,12 +154,12 @@ Lifecycle orchestration connects to Plane workspace provisioning in OSS-101-04. 
 
 ## Operations registration
 
-| Field | Value |
-|-------|-------|
-| Capability ID | `projects` |
-| Connector ID | `plane` |
-| Diagnostics extension | `projectsDiagnostics` |
-| Health | `health.enabled: true` on service and integration |
+| Field                 | Value                                             |
+| --------------------- | ------------------------------------------------- |
+| Capability ID         | `projects`                                        |
+| Connector ID          | `plane`                                           |
+| Diagnostics extension | `projectsDiagnostics`                             |
+| Health                | `health.enabled: true` on service and integration |
 
 Configuration diagnostics from OSS-101-02 (`getPlaneConfigurationDiagnostics`) complement connector health when adapter lands in OSS-101-04. Full diagnostics extension in OSS-101-09.
 
@@ -167,13 +167,13 @@ Configuration diagnostics from OSS-101-02 (`getPlaneConfigurationDiagnostics`) c
 
 ## Integration registration (`plane`)
 
-| Attribute | Value |
-|-----------|-------|
-| Type | `oss-application` |
-| User visible | `false` |
-| Engine branding | hidden |
+| Attribute         | Value               |
+| ----------------- | ------------------- |
+| Type              | `oss-application`   |
+| User visible      | `false`             |
+| Engine branding   | hidden              |
 | Supported version | `0.23.0` – `0.24.x` |
-| Implementation | OSS-101-04 |
+| Implementation    | OSS-101-04          |
 
 Registered as internal connector — not exposed in Activity Bar or user navigation.
 
@@ -181,14 +181,14 @@ Registered as internal connector — not exposed in Activity Bar or user navigat
 
 ## Constraints confirmed
 
-| Constraint | OSS-101-03 |
-|------------|------------|
-| No Plane adapter code | ✅ |
-| No REST client | ✅ |
-| No UI implementation | ✅ |
-| No database schema | ✅ |
-| No Platform Core package changes | ✅ |
-| APZHUB terminology only in manifests | ✅ |
+| Constraint                           | OSS-101-03 |
+| ------------------------------------ | ---------- |
+| No Plane adapter code                | ✅         |
+| No REST client                       | ✅         |
+| No UI implementation                 | ✅         |
+| No database schema                   | ✅         |
+| No Platform Core package changes     | ✅         |
+| APZHUB terminology only in manifests | ✅         |
 
 ---
 

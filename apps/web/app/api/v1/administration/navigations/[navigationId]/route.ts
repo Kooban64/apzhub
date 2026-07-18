@@ -19,13 +19,25 @@ export const PATCH = withPlatformApiAuth(handleUpdateAdministrationNavigation, {
 });
 
 export async function POST(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","PATCH"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "PATCH"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }
 
 export async function PUT(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","PATCH"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "PATCH"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }
 
 export async function DELETE(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","PATCH"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "PATCH"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }

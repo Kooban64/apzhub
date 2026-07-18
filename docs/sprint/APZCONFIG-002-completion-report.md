@@ -17,12 +17,12 @@ Wired the Platform Configuration SoR into APZHUB Platform Services: nested `gate
 Products → gateway.configuration.* → RequestPipeline → Authz → Thin Services → Core → Persistence → PostgreSQL
 ```
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/configuration-contracts` | **0.2.0** |
-| `@apzhub/configuration-core` | **0.2.0** |
-| `@apzhub/configuration-persistence` | **0.1.0** |
-| `@apzhub/platform-services` | **0.21.0** |
+| Package                             | Version    |
+| ----------------------------------- | ---------- |
+| `@apzhub/configuration-contracts`   | **0.2.0**  |
+| `@apzhub/configuration-core`        | **0.2.0**  |
+| `@apzhub/configuration-persistence` | **0.1.0**  |
+| `@apzhub/platform-services`         | **0.21.0** |
 
 ## Gateway
 
@@ -54,13 +54,13 @@ Configuration programme packages: **≥95%** lines and functions on new APZCONFI
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:configuration-foundation` | PASS |
-| `pnpm audit:configuration-platform-services` | PASS |
-| Typecheck | PASS |
-| Lint | PASS |
-| Vitest (configuration scope) | PASS |
+| Gate                                         | Result |
+| -------------------------------------------- | ------ |
+| `pnpm audit:configuration-foundation`        | PASS   |
+| `pnpm audit:configuration-platform-services` | PASS   |
+| Typecheck                                    | PASS   |
+| Lint                                         | PASS   |
+| Vitest (configuration scope)                 | PASS   |
 
 ## Technical Debt
 

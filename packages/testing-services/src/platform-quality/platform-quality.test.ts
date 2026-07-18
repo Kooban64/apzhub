@@ -27,9 +27,7 @@ import {
 
 const FIXED_NOW = "2026-07-12T14:00:00.000Z";
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_pq_1",
     userId: "user_pq_1",
@@ -87,17 +85,15 @@ function stubCert(
 
 describe("status helpers", () => {
   it("ranks quality and readiness", () => {
-    expect(worstQualityStatus(["healthy", "degraded", "blocked"])).toBe(
-      "blocked",
-    );
+    expect(worstQualityStatus(["healthy", "degraded", "blocked"])).toBe("blocked");
     expect(worstQualityStatus([])).toBe("unknown");
     expect(qualityStatusToReadiness("healthy")).toBe("READY");
     expect(qualityStatusToReadiness("degraded")).toBe("READY_WITH_WARNINGS");
     expect(qualityStatusToReadiness("blocked")).toBe("NOT_READY");
     expect(combineReadinessVerdicts(["READY", "READY"])).toBe("READY");
-    expect(
-      combineReadinessVerdicts(["READY", "READY_WITH_WARNINGS"]),
-    ).toBe("READY_WITH_WARNINGS");
+    expect(combineReadinessVerdicts(["READY", "READY_WITH_WARNINGS"])).toBe(
+      "READY_WITH_WARNINGS",
+    );
     expect(combineReadinessVerdicts(["READY", "NOT_READY"])).toBe("NOT_READY");
   });
 });
@@ -265,9 +261,7 @@ describe("PlatformQualityAggregationService", () => {
     expect(aggregate.readinessVerdict).toBe("READY_WITH_WARNINGS");
     expect(aggregate.isDecision).toBe(false);
     expect(aggregate.riskLabels).toContain("latency");
-    expect(aggregate.defectLabels.some((l) => l.includes("projects"))).toBe(
-      true,
-    );
+    expect(aggregate.defectLabels.some((l) => l.includes("projects"))).toBe(true);
 
     const blocked = await svc.qualityAggregation.aggregate(c, {
       contributions: [
@@ -350,9 +344,7 @@ describe("PlatformDashboardService", () => {
       productIds: [testing.id],
       records: [stubCert("dashcert01", "approved")],
     });
-    const dependencyHealth = [
-      await svc.dependencies.healthForProduct(c, testing.id),
-    ];
+    const dependencyHealth = [await svc.dependencies.healthForProduct(c, testing.id)];
 
     const snapshot = await svc.dashboard.snapshot(c, {
       quality,
@@ -427,11 +419,7 @@ describe("PlatformReleaseGovernanceService", () => {
     });
     expect(pkg.versionLabel).toBe("2026.07.1");
 
-    const candidate = await svc.releaseGovernance.addCandidate(
-      c,
-      release.id,
-      "RC1",
-    );
+    const candidate = await svc.releaseGovernance.addCandidate(c, release.id, "RC1");
     expect(candidate.status).toBe("candidate");
 
     const depValidation = await svc.releaseGovernance.evaluateDependencies(
@@ -440,29 +428,21 @@ describe("PlatformReleaseGovernanceService", () => {
     );
     expect(depValidation.valid).toBe(true);
 
-    const readiness = await svc.releaseGovernance.evaluateReadiness(
-      c,
-      release.id,
-      {
-        productReadiness: {
-          [testing.id]: "READY",
-          [projects.id]: "READY",
-        },
-        qualityStatus: "healthy",
-        openIssueCount: 0,
-        dependencyValidation: depValidation,
+    const readiness = await svc.releaseGovernance.evaluateReadiness(c, release.id, {
+      productReadiness: {
+        [testing.id]: "READY",
+        [projects.id]: "READY",
       },
-    );
+      qualityStatus: "healthy",
+      openIssueCount: 0,
+      dependencyValidation: depValidation,
+    });
     expect(readiness.isDecision).toBe(false);
     expect(readiness.verdict).toBe("READY");
 
     const approvals = [];
     for (const kind of PLATFORM_GOVERNANCE_APPROVAL_KINDS) {
-      const approval = await svc.releaseGovernance.requestApproval(
-        c,
-        release.id,
-        kind,
-      );
+      const approval = await svc.releaseGovernance.requestApproval(c, release.id, kind);
       expect(approval.kind).toBe(kind);
       expect(approval.status).toBe("pending");
       approvals.push(approval);
@@ -507,15 +487,11 @@ describe("PlatformReleaseGovernanceService", () => {
       svc.releaseGovernance.transitionStatus(c, release.id, "released"),
     ).rejects.toBeInstanceOf(DomainRuleError);
 
-    const decision = await svc.releaseGovernance.recordHumanDecision(
-      c,
-      release.id,
-      {
-        verdict: "READY",
-        decidedByUserId: c.userId!,
-        rationale: "All gates green",
-      },
-    );
+    const decision = await svc.releaseGovernance.recordHumanDecision(c, release.id, {
+      verdict: "READY",
+      decidedByUserId: c.userId!,
+      rationale: "All gates green",
+    });
     expect(decision.isAutomatic).toBe(false);
 
     const released = await svc.releaseGovernance.transitionStatus(
@@ -551,25 +527,17 @@ describe("PlatformReleaseGovernanceService", () => {
       name: "Hold Release",
       productIds: [testing.id],
     });
-    const deps = await svc.releaseGovernance.evaluateDependencies(
-      c,
-      release.id,
-    );
-    const warnReadiness = await svc.releaseGovernance.evaluateReadiness(
-      c,
-      release.id,
-      {
-        qualityStatus: "degraded",
-        productReadiness: { [testing.id]: "READY_WITH_WARNINGS" },
-        dependencyValidation: deps,
-      },
-    );
+    const deps = await svc.releaseGovernance.evaluateDependencies(c, release.id);
+    const warnReadiness = await svc.releaseGovernance.evaluateReadiness(c, release.id, {
+      qualityStatus: "degraded",
+      productReadiness: { [testing.id]: "READY_WITH_WARNINGS" },
+      dependencyValidation: deps,
+    });
     expect(warnReadiness.verdict).toBe("READY_WITH_WARNINGS");
-    const warnSummary = await svc.releaseGovernance.produceSummary(
-      c,
-      release.id,
-      { readiness: warnReadiness, dependencyValidation: deps },
-    );
+    const warnSummary = await svc.releaseGovernance.produceSummary(c, release.id, {
+      readiness: warnReadiness,
+      dependencyValidation: deps,
+    });
     expect(warnSummary.recommendationCode).toBe("recommend_hold");
 
     const blockedReadiness = await svc.releaseGovernance.evaluateReadiness(
@@ -582,11 +550,10 @@ describe("PlatformReleaseGovernanceService", () => {
       },
     );
     expect(blockedReadiness.verdict).toBe("NOT_READY");
-    const rejectSummary = await svc.releaseGovernance.produceSummary(
-      c,
-      release.id,
-      { readiness: blockedReadiness, dependencyValidation: deps },
-    );
+    const rejectSummary = await svc.releaseGovernance.produceSummary(c, release.id, {
+      readiness: blockedReadiness,
+      dependencyValidation: deps,
+    });
     expect(rejectSummary.recommendationCode).toBe("recommend_reject");
   });
 });
@@ -711,11 +678,21 @@ describe("coverage expansion", () => {
           qualityStatus: "healthy",
           readiness: {
             dimensions: {
-              execution: { key: "execution", score: 0.5, status: "partial", reasons: [] },
+              execution: {
+                key: "execution",
+                score: 0.5,
+                status: "partial",
+                reasons: [],
+              },
               coverage: { key: "coverage", score: 0.5, status: "partial", reasons: [] },
               evidence: { key: "evidence", score: 0.5, status: "partial", reasons: [] },
               approval: { key: "approval", score: 0.5, status: "partial", reasons: [] },
-              automation: { key: "automation", score: 0.5, status: "partial", reasons: [] },
+              automation: {
+                key: "automation",
+                score: 0.5,
+                status: "partial",
+                reasons: [],
+              },
               defect: { key: "defect", score: 0.5, status: "partial", reasons: [] },
               risk: { key: "risk", score: 0.5, status: "partial", reasons: [] },
             },
@@ -742,7 +719,12 @@ describe("coverage expansion", () => {
               coverage: { key: "coverage", score: 0, status: "blocked", reasons: [] },
               evidence: { key: "evidence", score: 0, status: "blocked", reasons: [] },
               approval: { key: "approval", score: 0, status: "blocked", reasons: [] },
-              automation: { key: "automation", score: 0, status: "blocked", reasons: [] },
+              automation: {
+                key: "automation",
+                score: 0,
+                status: "blocked",
+                reasons: [],
+              },
               defect: { key: "defect", score: 0, status: "blocked", reasons: [] },
               risk: { key: "risk", score: 0, status: "blocked", reasons: [] },
             },
@@ -786,10 +768,7 @@ describe("coverage expansion", () => {
     const pending = await svc.multiProductCertification.aggregate(c, {
       scope: "entire_platform",
       productIds: [],
-      records: [
-        stubCert("p1aaaaaaaa", "draft"),
-        stubCert("p2aaaaaaaa", "in_review"),
-      ],
+      records: [stubCert("p1aaaaaaaa", "draft"), stubCert("p2aaaaaaaa", "in_review")],
     });
     expect(pending.overallLabel).toBe("has_pending");
 
@@ -872,7 +851,12 @@ describe("coverage expansion", () => {
               coverage: { key: "coverage", score: 0, status: "blocked", reasons: [] },
               evidence: { key: "evidence", score: 0, status: "blocked", reasons: [] },
               approval: { key: "approval", score: 0, status: "blocked", reasons: [] },
-              automation: { key: "automation", score: 0, status: "blocked", reasons: [] },
+              automation: {
+                key: "automation",
+                score: 0,
+                status: "blocked",
+                reasons: [],
+              },
               defect: { key: "defect", score: 0, status: "blocked", reasons: [] },
               risk: { key: "risk", score: 0, status: "blocked", reasons: [] },
             },
@@ -902,11 +886,7 @@ describe("coverage expansion", () => {
       name: "Error paths",
       productIds: [testing.id],
     });
-    const approval = await svc.releaseGovernance.requestApproval(
-      c,
-      release.id,
-      "qa",
-    );
+    const approval = await svc.releaseGovernance.requestApproval(c, release.id, "qa");
     await svc.releaseGovernance.decideApproval(c, approval.id, {
       status: "approved",
       decidedByUserId: c.userId!,
@@ -918,10 +898,14 @@ describe("coverage expansion", () => {
       }),
     ).rejects.toBeInstanceOf(DomainRuleError);
     await expect(
-      svc.releaseGovernance.decideApproval(c, asPlatformReleaseApprovalId("no_appr_1"), {
-        status: "approved",
-        decidedByUserId: c.userId!,
-      }),
+      svc.releaseGovernance.decideApproval(
+        c,
+        asPlatformReleaseApprovalId("no_appr_1"),
+        {
+          status: "approved",
+          decidedByUserId: c.userId!,
+        },
+      ),
     ).rejects.toBeInstanceOf(DomainRuleError);
   });
 
@@ -956,9 +940,8 @@ describe("coverage expansion", () => {
 describe("createTestingDomainServices wiring", () => {
   it("exposes platformQuality on the combined factory", async () => {
     const { createTestingDomainServices } = await import("../factory");
-    const { createInMemoryTestingPersistence } = await import(
-      "@apzhub/testing-persistence"
-    );
+    const { createInMemoryTestingPersistence } =
+      await import("@apzhub/testing-persistence");
     const domain = createTestingDomainServices({
       persistence: createInMemoryTestingPersistence(),
       now: () => FIXED_NOW,
@@ -967,9 +950,8 @@ describe("createTestingDomainServices wiring", () => {
         return () => `wire_${++n}`;
       })(),
     });
-    const registry = await domain.platformQuality.productRegistry.ensureDefaultRegistry(
-      ctx(),
-    );
+    const registry =
+      await domain.platformQuality.productRegistry.ensureDefaultRegistry(ctx());
     expect(registry.productIds).toHaveLength(8);
   });
 });

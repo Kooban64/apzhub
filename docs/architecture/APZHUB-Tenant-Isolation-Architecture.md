@@ -28,17 +28,17 @@ flowchart TD
   end
 ```
 
-| Layer | Mechanism | Owner |
-|-------|-----------|-------|
-| Session binding | `getValidatedSession()` enriches tenant from platform identity | `@apzhub/auth` |
-| Membership validation | `validateUserTenantMembership()` rejects unassigned tenants | `@apzhub/platform-identity` |
-| Law API binding | `withLawApiAuth` → `buildLawApiAuthenticatedContext` | `apps/web/lib/api` |
-| Authorization | `tenant_mismatch` outcome when role tenant ≠ request tenant | `@apzhub/platform-authorization` |
-| Persistence ALS | `LawApiPersistenceContext` + `LawPersistenceContext` | Law platform persistence |
-| Adapter filters | All Postgres repositories scope queries by `tenantId` | `@apzhub/config/db/adapters` |
-| RLS | `app.tenant_id` session + `FORCE ROW LEVEL SECURITY` | PostgreSQL migrations |
-| Search | `resolveLegalSearchTenantScope()` — empty results without ALS tenant | Law knowledge providers |
-| Platform admin APIs | `requirePlatformAdminRoute()` permission gate | `@apzhub/platform-security` |
+| Layer                 | Mechanism                                                            | Owner                            |
+| --------------------- | -------------------------------------------------------------------- | -------------------------------- |
+| Session binding       | `getValidatedSession()` enriches tenant from platform identity       | `@apzhub/auth`                   |
+| Membership validation | `validateUserTenantMembership()` rejects unassigned tenants          | `@apzhub/platform-identity`      |
+| Law API binding       | `withLawApiAuth` → `buildLawApiAuthenticatedContext`                 | `apps/web/lib/api`               |
+| Authorization         | `tenant_mismatch` outcome when role tenant ≠ request tenant          | `@apzhub/platform-authorization` |
+| Persistence ALS       | `LawApiPersistenceContext` + `LawPersistenceContext`                 | Law platform persistence         |
+| Adapter filters       | All Postgres repositories scope queries by `tenantId`                | `@apzhub/config/db/adapters`     |
+| RLS                   | `app.tenant_id` session + `FORCE ROW LEVEL SECURITY`                 | PostgreSQL migrations            |
+| Search                | `resolveLegalSearchTenantScope()` — empty results without ALS tenant | Law knowledge providers          |
+| Platform admin APIs   | `requirePlatformAdminRoute()` permission gate                        | `@apzhub/platform-security`      |
 
 ---
 
@@ -75,15 +75,15 @@ All entity, trust, and diagnostics routes require `withLawApiAuth`.
 
 ## Validation suite
 
-| Suite | Location |
-|-------|----------|
-| RLS cross-tenant denial | `packages/config/src/db/rls-cross-tenant-denial.integration.test.ts` |
-| Repository tenant isolation | `apps/law-platform/lib/**/postgres-*-repository.integration.test.ts` |
-| Law API membership | `apps/web/lib/api/tenant/tenant-membership-validation.test.ts` |
-| Law API ALS coverage | `apps/web/lib/api/law-api-route-tenant-coverage.test.ts` |
-| Search tenant scope | `apps/law-platform/lib/knowledge/legal-search-tenant-isolation.test.ts` |
+| Suite                         | Location                                                                     |
+| ----------------------------- | ---------------------------------------------------------------------------- |
+| RLS cross-tenant denial       | `packages/config/src/db/rls-cross-tenant-denial.integration.test.ts`         |
+| Repository tenant isolation   | `apps/law-platform/lib/**/postgres-*-repository.integration.test.ts`         |
+| Law API membership            | `apps/web/lib/api/tenant/tenant-membership-validation.test.ts`               |
+| Law API ALS coverage          | `apps/web/lib/api/law-api-route-tenant-coverage.test.ts`                     |
+| Search tenant scope           | `apps/law-platform/lib/knowledge/legal-search-tenant-isolation.test.ts`      |
 | Authorization tenant mismatch | `packages/platform-authorization/src/authorization-tenant-isolation.test.ts` |
-| Platform admin guard | `apps/web/lib/api/platform/platform-api-tenant-guard.test.ts` |
+| Platform admin guard          | `apps/web/lib/api/platform/platform-api-tenant-guard.test.ts`                |
 
 ---
 

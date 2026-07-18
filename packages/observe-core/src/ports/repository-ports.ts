@@ -78,22 +78,10 @@ type CrudPort<TEntity, TId> = {
 };
 
 export type HealthCheckRepositoryPort = CrudPort<HealthCheck, HealthCheckId>;
-export type ReadinessCheckRepositoryPort = CrudPort<
-  ReadinessCheck,
-  ReadinessCheckId
->;
-export type LivenessCheckRepositoryPort = CrudPort<
-  LivenessCheck,
-  LivenessCheckId
->;
-export type ServiceHealthRepositoryPort = CrudPort<
-  ServiceHealth,
-  ServiceHealthId
->;
-export type ServiceStatusRepositoryPort = CrudPort<
-  ServiceStatus,
-  ServiceStatusId
->;
+export type ReadinessCheckRepositoryPort = CrudPort<ReadinessCheck, ReadinessCheckId>;
+export type LivenessCheckRepositoryPort = CrudPort<LivenessCheck, LivenessCheckId>;
+export type ServiceHealthRepositoryPort = CrudPort<ServiceHealth, ServiceHealthId>;
+export type ServiceStatusRepositoryPort = CrudPort<ServiceStatus, ServiceStatusId>;
 export type ComponentStatusRepositoryPort = CrudPort<
   ComponentStatus,
   ComponentStatusId
@@ -126,10 +114,7 @@ export type MaintenanceWindowRepositoryPort = CrudPort<
   MaintenanceWindow,
   MaintenanceWindowId
 >;
-export type HealthSummaryRepositoryPort = CrudPort<
-  HealthSummary,
-  HealthSummaryId
->;
+export type HealthSummaryRepositoryPort = CrudPort<HealthSummary, HealthSummaryId>;
 export type PlatformDiagnosticRepositoryPort = CrudPort<
   PlatformDiagnostic,
   PlatformDiagnosticId

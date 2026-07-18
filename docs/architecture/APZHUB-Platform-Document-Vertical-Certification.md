@@ -28,17 +28,17 @@ The Document Platform is certified as a **production-ready shared APZHUB capabil
 
 ## Supporting audits
 
-| Document | Verdict |
-| -------- | ------- |
-| [Architecture / Dependency / Boundary Audit](../reviews/APZDOCS-006-architecture-dependency-boundary-audit.md) | **PASS** — 0 violations |
-| [API Audit](../reviews/APZDOCS-006-api-audit.md) | **PASS** |
-| [Typed Client / Workbench Audit](../reviews/APZDOCS-006-workbench-audit.md) | **PASS** (unit/component); Playwright **LIMITED** |
-| [Storage Certification](../reviews/APZDOCS-006-storage-certification.md) | **PASS** (CE/self-hosted; no Azure/GCS) |
-| [Security Audit](../reviews/APZDOCS-006-security-audit.md) | **PASS** |
-| [Performance Baseline](../reviews/APZDOCS-006-performance-baseline.md) | **COLLECTED** |
-| [Coverage Baseline](../reviews/APZDOCS-006-coverage-baseline.md) | **PASS WITH LIMITATIONS** |
-| [Production Readiness](../reviews/APZDOCS-006-production-readiness.md) | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| [Consumer Guide](../developer/APZHUB-Platform-Document-HTTP-Consumer-Integration-Guide.md) | Updated |
+| Document                                                                                                       | Verdict                                           |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [Architecture / Dependency / Boundary Audit](../reviews/APZDOCS-006-architecture-dependency-boundary-audit.md) | **PASS** — 0 violations                           |
+| [API Audit](../reviews/APZDOCS-006-api-audit.md)                                                               | **PASS**                                          |
+| [Typed Client / Workbench Audit](../reviews/APZDOCS-006-workbench-audit.md)                                    | **PASS** (unit/component); Playwright **LIMITED** |
+| [Storage Certification](../reviews/APZDOCS-006-storage-certification.md)                                       | **PASS** (CE/self-hosted; no Azure/GCS)           |
+| [Security Audit](../reviews/APZDOCS-006-security-audit.md)                                                     | **PASS**                                          |
+| [Performance Baseline](../reviews/APZDOCS-006-performance-baseline.md)                                         | **COLLECTED**                                     |
+| [Coverage Baseline](../reviews/APZDOCS-006-coverage-baseline.md)                                               | **PASS WITH LIMITATIONS**                         |
+| [Production Readiness](../reviews/APZDOCS-006-production-readiness.md)                                         | **PRODUCTION_READY_WITH_LIMITATIONS**             |
+| [Consumer Guide](../developer/APZHUB-Platform-Document-HTTP-Consumer-Integration-Guide.md)                     | Updated                                           |
 
 ## Explicit non-goals (certified as excluded)
 

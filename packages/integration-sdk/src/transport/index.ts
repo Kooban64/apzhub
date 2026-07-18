@@ -63,10 +63,7 @@ export {
 
 export { createCircuitBreakerInterceptor } from "./interceptors";
 
-export {
-  DefaultTransportMetrics,
-  createTransportMetrics,
-} from "./metrics";
+export { DefaultTransportMetrics, createTransportMetrics } from "./metrics";
 
 export {
   DefaultTransportLogger,
@@ -101,15 +98,9 @@ export {
   buildTransportResponse,
 } from "./response-pipeline";
 
-export {
-  DefaultTransportClient,
-  createTransportClient,
-} from "./http-transport";
+export { DefaultTransportClient, createTransportClient } from "./http-transport";
 
-export {
-  MockTransportClient,
-  createMockTransport,
-} from "./mock-transport";
+export { MockTransportClient, createMockTransport } from "./mock-transport";
 
 export {
   HttpIntegrationClient,

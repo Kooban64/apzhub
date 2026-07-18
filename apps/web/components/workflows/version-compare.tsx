@@ -58,9 +58,7 @@ export function compareWorkflowVersions(
 
   const validationDifferences: string[] = [];
   if (left && right && left.status !== right.status) {
-    validationDifferences.push(
-      `publication status: ${left.status} → ${right.status}`,
-    );
+    validationDifferences.push(`publication status: ${left.status} → ${right.status}`);
   }
 
   const metadataDifferences: string[] = [];
@@ -108,9 +106,7 @@ function DiffList({
       className="rounded-lg border border-[var(--color-border)] p-3"
       aria-label={title}
     >
-      <h3 className="text-sm font-semibold text-[var(--color-foreground)]">
-        {title}
-      </h3>
+      <h3 className="text-sm font-semibold text-[var(--color-foreground)]">{title}</h3>
       <div className="mt-2 grid gap-2 sm:grid-cols-2">
         {added !== undefined ? (
           <div>
@@ -185,9 +181,7 @@ function SimpleDiffList({
       className="rounded-lg border border-[var(--color-border)] p-3"
       aria-label={title}
     >
-      <h3 className="text-sm font-semibold text-[var(--color-foreground)]">
-        {title}
-      </h3>
+      <h3 className="text-sm font-semibold text-[var(--color-foreground)]">{title}</h3>
       {items.length === 0 ? (
         <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">None</p>
       ) : (
@@ -237,11 +231,7 @@ export function VersionCompare({
       <p className="text-xs text-[var(--color-muted-foreground)]">
         Read-only node and parameter diff — no merge, rollback, or edit.
       </p>
-      <DiffList
-        title="Nodes"
-        added={diff.addedNodes}
-        removed={diff.removedNodes}
-      />
+      <DiffList title="Nodes" added={diff.addedNodes} removed={diff.removedNodes} />
       <DiffList
         title="Parameters"
         added={diff.addedParameters}

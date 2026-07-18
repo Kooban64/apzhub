@@ -16,17 +16,17 @@ Deliver platform participation providers in `@apzhub/integration-sdk`: health, u
 
 ### Package (`@apzhub/integration-sdk` v0.3.0)
 
-| Component | Location |
-|-----------|----------|
-| `HealthProvider` / `DefaultHealthProvider` | `src/health/` |
-| Health check aggregation | `src/health/aggregation.ts` |
-| `DiagnosticsProvider` / `DefaultDiagnosticsProvider` | `src/diagnostics/unified-diagnostics.ts` |
-| `VersionProvider` / `DefaultVersionProvider` | `src/version/` |
-| `IntegrationLifecycleParticipant` | `src/lifecycle/default-lifecycle-participant.ts` |
-| `IntegrationAdapterLifecycleService` | `src/lifecycle/integration-lifecycle-service.ts` |
-| Platform lifecycle bridge | `src/lifecycle/platform-bridge.ts` |
-| Operations stack factory | `src/operations-stack.ts` |
-| Integration lifecycle error code | `integration.lifecycle.invalid_transition` |
+| Component                                            | Location                                         |
+| ---------------------------------------------------- | ------------------------------------------------ |
+| `HealthProvider` / `DefaultHealthProvider`           | `src/health/`                                    |
+| Health check aggregation                             | `src/health/aggregation.ts`                      |
+| `DiagnosticsProvider` / `DefaultDiagnosticsProvider` | `src/diagnostics/unified-diagnostics.ts`         |
+| `VersionProvider` / `DefaultVersionProvider`         | `src/version/`                                   |
+| `IntegrationLifecycleParticipant`                    | `src/lifecycle/default-lifecycle-participant.ts` |
+| `IntegrationAdapterLifecycleService`                 | `src/lifecycle/integration-lifecycle-service.ts` |
+| Platform lifecycle bridge                            | `src/lifecycle/platform-bridge.ts`               |
+| Operations stack factory                             | `src/operations-stack.ts`                        |
+| Integration lifecycle error code                     | `integration.lifecycle.invalid_transition`       |
 
 ### New exports
 
@@ -39,37 +39,37 @@ All OSS-100-01 and OSS-100-02 exports retained.
 
 ### Tests (41 total in package)
 
-| Suite | Tests |
-|-------|-------|
-| `auth.test.ts` | 8 |
-| `connection.test.ts` | 12 |
-| `operations.test.ts` | 11 — health, version, diagnostics, lifecycle, bridge |
-| `integration-sdk.test.ts` | 10 — regression |
+| Suite                     | Tests                                                |
+| ------------------------- | ---------------------------------------------------- |
+| `auth.test.ts`            | 8                                                    |
+| `connection.test.ts`      | 12                                                   |
+| `operations.test.ts`      | 11 — health, version, diagnostics, lifecycle, bridge |
+| `integration-sdk.test.ts` | 10 — regression                                      |
 
 ### Documentation
 
-| Document | Path |
-|----------|------|
-| Package guide | `packages/integration-sdk/docs/HEALTH-DIAGNOSTICS-LIFECYCLE.md` |
+| Document                    | Path                                                                                  |
+| --------------------------- | ------------------------------------------------------------------------------------- |
+| Package guide               | `packages/integration-sdk/docs/HEALTH-DIAGNOSTICS-LIFECYCLE.md`                       |
 | Implementation architecture | `docs/architecture/APZHUB-Integration-Health-Diagnostics-Lifecycle-Implementation.md` |
-| Package README | `packages/integration-sdk/README.md` |
-| Backlog update | `docs/backlog/OSS-100-Platform-Integration-SDK-Backlog.md` |
+| Package README              | `packages/integration-sdk/README.md`                                                  |
+| Backlog update              | `docs/backlog/OSS-100-Platform-Integration-SDK-Backlog.md`                            |
 
 ---
 
 ## Completion review
 
-| Criterion | Result |
-|-----------|--------|
-| HealthProvider vendor neutral | ✅ Logical checks from connection state |
-| Unified diagnostics | ✅ Auth + connection + health combined |
-| Version compatibility | ✅ Metadata-based; no HTTP |
-| Lifecycle participation | ✅ Enable/disable/shutdown |
-| Platform bridge without SDK→platform import | ✅ Duck-typed bridge |
-| No HTTP transport | ✅ |
-| No Plane/vendor code | ✅ |
-| Backwards compatible | ✅ Placeholder diagnostics retained |
-| Credentials never in diagnostics | ✅ Test guards |
+| Criterion                                   | Result                                  |
+| ------------------------------------------- | --------------------------------------- |
+| HealthProvider vendor neutral               | ✅ Logical checks from connection state |
+| Unified diagnostics                         | ✅ Auth + connection + health combined  |
+| Version compatibility                       | ✅ Metadata-based; no HTTP              |
+| Lifecycle participation                     | ✅ Enable/disable/shutdown              |
+| Platform bridge without SDK→platform import | ✅ Duck-typed bridge                    |
+| No HTTP transport                           | ✅                                      |
+| No Plane/vendor code                        | ✅                                      |
+| Backwards compatible                        | ✅ Placeholder diagnostics retained     |
+| Credentials never in diagnostics            | ✅ Test guards                          |
 
 ---
 
@@ -77,12 +77,12 @@ All OSS-100-01 and OSS-100-02 exports retained.
 
 **Theme:** Error translation & observability (per backlog).
 
-| Item | Scope |
-|------|------|
-| `ErrorTranslator` | Vendor mapper registration |
-| Circuit breaker check | Replace warn placeholder in health |
-| Structured metrics hooks | Counter/histogram contracts |
-| IntegrationLogger | Structured logging |
+| Item                     | Scope                              |
+| ------------------------ | ---------------------------------- |
+| `ErrorTranslator`        | Vendor mapper registration         |
+| Circuit breaker check    | Replace warn placeholder in health |
+| Structured metrics hooks | Counter/histogram contracts        |
+| IntegrationLogger        | Structured logging                 |
 
 **Still excluded:** OpenTelemetry exporter wiring, vendor mappers, Plane adapter.
 
@@ -90,26 +90,26 @@ All OSS-100-01 and OSS-100-02 exports retained.
 
 ## Constraints confirmed
 
-| Constraint | Result |
-|------------|--------|
-| No HTTP transport | ✅ |
+| Constraint                                  | Result                     |
+| ------------------------------------------- | -------------------------- |
+| No HTTP transport                           | ✅                         |
 | No retries / circuit breaker implementation | ✅ (warn placeholder only) |
-| No Plane adapter | ✅ |
-| No platform-lifecycle package dependency | ✅ |
-| OSS-100-04 not started | ✅ |
-| OSS-101-04 not started | ✅ |
+| No Plane adapter                            | ✅                         |
+| No platform-lifecycle package dependency    | ✅                         |
+| OSS-100-04 not started                      | ✅                         |
+| OSS-101-04 not started                      | ✅                         |
 
 ---
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| `pnpm lint` | Pass |
-| `pnpm typecheck` | Pass |
-| `pnpm build` | Pass |
-| `pnpm test` | Pass — 2053 passed, 47 skipped (414 files) |
-| `pnpm test:coverage` | Pass |
+| Gate                 | Result                                     |
+| -------------------- | ------------------------------------------ |
+| `pnpm lint`          | Pass                                       |
+| `pnpm typecheck`     | Pass                                       |
+| `pnpm build`         | Pass                                       |
+| `pnpm test`          | Pass — 2053 passed, 47 skipped (414 files) |
+| `pnpm test:coverage` | Pass                                       |
 
 ---
 

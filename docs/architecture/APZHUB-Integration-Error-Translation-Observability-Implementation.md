@@ -36,12 +36,12 @@ ErrorSummaryTracker ◄───────────────────
 
 ## Modules
 
-| Module | Path | Responsibility |
-|--------|------|----------------|
-| Error translation | `src/errors/translation/` | Mapper registry, defaults, severity |
-| Resilience | `src/resilience/` | Circuit breaker state machine + diagnostics |
-| Observability | `src/observability/` | Metrics contracts, integration logger |
-| Runtime diagnostics | `src/diagnostics/runtime-types.ts` | Extended diagnostics payload |
+| Module              | Path                               | Responsibility                              |
+| ------------------- | ---------------------------------- | ------------------------------------------- |
+| Error translation   | `src/errors/translation/`          | Mapper registry, defaults, severity         |
+| Resilience          | `src/resilience/`                  | Circuit breaker state machine + diagnostics |
+| Observability       | `src/observability/`               | Metrics contracts, integration logger       |
+| Runtime diagnostics | `src/diagnostics/runtime-types.ts` | Extended diagnostics payload                |
 
 ---
 

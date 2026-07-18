@@ -41,9 +41,7 @@ describe("workflow-contracts", () => {
 
   it("exports required permission catalogue keys", () => {
     expect(PLATFORM_WORKFLOW_PERMISSION_WILDCARD).toBe("workflow.*");
-    expect(PLATFORM_WORKFLOW_TEMPLATE_PERMISSION_WILDCARD).toBe(
-      "workflow.template.*",
-    );
+    expect(PLATFORM_WORKFLOW_TEMPLATE_PERMISSION_WILDCARD).toBe("workflow.template.*");
     for (const key of [
       "workflow.*",
       "workflow.view",
@@ -76,30 +74,22 @@ describe("workflow-contracts", () => {
     expect(hasWorkflowPermission(["workflow.*"], "view")).toBe(true);
     expect(hasWorkflowPermission(["workflow.view"], "view")).toBe(true);
     expect(hasWorkflowPermission(["workflow.view"], "delete")).toBe(false);
-    expect(hasWorkflowPermission(["workflow.validation"], "validation")).toBe(
-      true,
-    );
+    expect(hasWorkflowPermission(["workflow.validation"], "validation")).toBe(true);
     expect(hasWorkflowValidationPermission(["workflow.*"])).toBe(true);
     expect(hasWorkflowValidationPermission(["workflow.view"])).toBe(false);
     expect(hasWorkflowTemplatePermission(["workflow.*"], "create")).toBe(true);
-    expect(
-      hasWorkflowTemplatePermission(["workflow.template.*"], "delete"),
-    ).toBe(true);
-    expect(
-      hasWorkflowTemplatePermission(["workflow.template.view"], "view"),
-    ).toBe(true);
-    expect(
-      hasWorkflowTemplatePermission(["workflow.template.view"], "delete"),
-    ).toBe(false);
-    expect(hasWorkflowEnginePermission(["workflow.engine.*"], "read")).toBe(
+    expect(hasWorkflowTemplatePermission(["workflow.template.*"], "delete")).toBe(true);
+    expect(hasWorkflowTemplatePermission(["workflow.template.view"], "view")).toBe(
       true,
     );
-    expect(hasWorkflowEnginePermission(["workflow.*"], "capabilities")).toBe(
-      true,
+    expect(hasWorkflowTemplatePermission(["workflow.template.view"], "delete")).toBe(
+      false,
     );
-    expect(
-      hasWorkflowEnginePermission(["workflow.engine.read"], "diagnostics"),
-    ).toBe(false);
+    expect(hasWorkflowEnginePermission(["workflow.engine.*"], "read")).toBe(true);
+    expect(hasWorkflowEnginePermission(["workflow.*"], "capabilities")).toBe(true);
+    expect(hasWorkflowEnginePermission(["workflow.engine.read"], "diagnostics")).toBe(
+      false,
+    );
   });
 
   it("exports nested WorkflowPlatformGateway facet keys", () => {

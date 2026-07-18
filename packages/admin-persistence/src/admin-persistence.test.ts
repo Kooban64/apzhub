@@ -48,18 +48,18 @@ describe("admin-persistence", () => {
   });
 
   it("forbids silent production in-memory fallback", () => {
-    expect(() =>
-      createAdministrationPersistence({ mode: "postgres" }),
-    ).toThrow(/requires db/);
-    expect(() =>
-      createProductionAdministrationPersistence({} as never),
-    ).toThrow(/explicit postgres/);
+    expect(() => createAdministrationPersistence({ mode: "postgres" })).toThrow(
+      /requires db/,
+    );
+    expect(() => createProductionAdministrationPersistence({} as never)).toThrow(
+      /explicit postgres/,
+    );
     expect(() => createAdministrationPersistenceForTest({})).toThrow(
       /allowInMemoryPersistence/,
     );
-    expect(() =>
-      createAdministrationPersistence({ mode: "redis" as never }),
-    ).toThrow(/Unsupported/);
+    expect(() => createAdministrationPersistence({ mode: "redis" as never })).toThrow(
+      /Unsupported/,
+    );
   });
 
   it("persists administration metadata in memory with tenant isolation", async () => {
@@ -89,9 +89,7 @@ describe("admin-persistence", () => {
       updatedAt: "2026-07-16T01:00:00.000Z",
     };
     await foundation.modules.update(ctx, updated);
-    expect((await foundation.modules.get(ctx, module.id))?.name).toBe(
-      "Identity Admin",
-    );
+    expect((await foundation.modules.get(ctx, module.id))?.name).toBe("Identity Admin");
 
     const category = await foundation.categories.create(ctx, {
       id: asAdministrationCategoryId("cat_1"),
@@ -153,7 +151,9 @@ describe("admin-persistence", () => {
       actorUserId: "user_1",
       createdAt: now,
     });
-    expect(await foundation.audits.get(otherCtx, asAdministrationAuditId("aud_1"))).toBeNull();
+    expect(
+      await foundation.audits.get(otherCtx, asAdministrationAuditId("aud_1")),
+    ).toBeNull();
     expect((await foundation.audits.list(ctx)).length).toBe(1);
 
     await foundation.history.create(ctx, {
@@ -163,15 +163,11 @@ describe("admin-persistence", () => {
       actorUserId: "user_1",
       createdAt: now,
     });
-    expect(
-      (await foundation.history.listByModule(ctx, module.id)).length,
-    ).toBe(1);
+    expect((await foundation.history.listByModule(ctx, module.id)).length).toBe(1);
     expect(
       await foundation.history.get(ctx, asAdministrationHistoryId("hst_1")),
     ).toBeTruthy();
-    expect(
-      (await foundation.history.listByModule(otherCtx, module.id)).length,
-    ).toBe(0);
+    expect((await foundation.history.listByModule(otherCtx, module.id)).length).toBe(0);
 
     const diagnostic = await foundation.diagnostics.create(ctx, {
       id: asAdministrationDiagnosticId("diag_1"),
@@ -213,12 +209,10 @@ describe("admin-persistence", () => {
       moduleId: module.id,
       notes: "updated",
     });
-    expect((await foundation.metadata.listByModule(ctx, module.id)).length).toBe(
-      1,
+    expect((await foundation.metadata.listByModule(ctx, module.id)).length).toBe(1);
+    expect((await foundation.metadata.listByModule(otherCtx, module.id)).length).toBe(
+      0,
     );
-    expect(
-      (await foundation.metadata.listByModule(otherCtx, module.id)).length,
-    ).toBe(0);
 
     const policy = await foundation.policies.create(ctx, {
       id: asAdministrationPolicyId("pol_1"),
@@ -239,9 +233,7 @@ describe("admin-persistence", () => {
       resourceId: "doc_1",
       label: "Docs",
     });
-    expect(
-      (await foundation.references.listByModule(ctx, module.id)).length,
-    ).toBe(1);
+    expect((await foundation.references.listByModule(ctx, module.id)).length).toBe(1);
 
     const capability = await foundation.capabilities.create(ctx, {
       id: asAdministrationCapabilityId("cap_1"),
@@ -333,9 +325,9 @@ describe("admin-persistence", () => {
       createdAt: now,
       updatedAt: now,
     });
-    expect(
-      (await foundation.widgets.listByDashboard(ctx, dashboard.id)).length,
-    ).toBe(1);
+    expect((await foundation.widgets.listByDashboard(ctx, dashboard.id)).length).toBe(
+      1,
+    );
     expect(
       (await foundation.widgets.listByDashboard(otherCtx, dashboard.id)).length,
     ).toBe(0);
@@ -344,21 +336,14 @@ describe("admin-persistence", () => {
     expect(await foundation.sections.get(ctx, section.id)).toBeTruthy();
     expect(await foundation.actions.get(ctx, action.id)).toBeTruthy();
     expect(await foundation.permissions.get(ctx, permission.id)).toBeTruthy();
-    expect(
-      await foundation.diagnostics.get(ctx, diagnostic.id),
-    ).toBeTruthy();
-    expect(
-      await foundation.registrations.get(ctx, registration.id),
-    ).toBeTruthy();
+    expect(await foundation.diagnostics.get(ctx, diagnostic.id)).toBeTruthy();
+    expect(await foundation.registrations.get(ctx, registration.id)).toBeTruthy();
     expect(
       await foundation.metadata.get(ctx, asAdministrationMetadataId("md_1")),
     ).toBeTruthy();
     expect(await foundation.policies.get(ctx, policy.id)).toBeTruthy();
     expect(
-      await foundation.references.get(
-        ctx,
-        asAdministrationReferenceId("ref_1"),
-      ),
+      await foundation.references.get(ctx, asAdministrationReferenceId("ref_1")),
     ).toBeTruthy();
     expect(await foundation.capabilities.get(ctx, capability.id)).toBeTruthy();
     expect(await foundation.navigations.get(ctx, navigation.id)).toBeTruthy();

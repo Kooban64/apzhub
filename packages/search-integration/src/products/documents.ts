@@ -5,15 +5,10 @@
 
 import type { ProductSearchPublicationContract } from "./contracts";
 
-export const DOCUMENTS_SEARCH_ENTITY_TYPES = [
-  "document",
-  "folder",
-  "tag",
-] as const;
+export const DOCUMENTS_SEARCH_ENTITY_TYPES = ["document", "folder", "tag"] as const;
 
-export const DocumentsSearchPublicationContract: ProductSearchPublicationContract =
-  {
-    productId: "documents",
-    label: "Documents",
-    supportedEntityTypes: DOCUMENTS_SEARCH_ENTITY_TYPES,
-  };
+export const DocumentsSearchPublicationContract: ProductSearchPublicationContract = {
+  productId: "documents",
+  label: "Documents",
+  supportedEntityTypes: DOCUMENTS_SEARCH_ENTITY_TYPES,
+};

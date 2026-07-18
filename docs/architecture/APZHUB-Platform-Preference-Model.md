@@ -2,13 +2,13 @@
 
 ## Categories
 
-| Category | Keys | Defaults |
-| --- | --- | --- |
-| `appearance` | `theme`, `density` | `system`, `comfortable` |
-| `regional` | `language`, `timezone`, `dateFormat`, `timeFormat` | `en`, `UTC`, `YYYY-MM-DD`, `24h` |
-| `workbench` | `landingPage`, `defaultWorkspace`, `sidebarCollapsed`, `pinnedWorkspaces`, `recentWorkspaces` | `/workspace/home`, `home`, `false`, `[]`, `[]` |
-| `notifications` | `email`, `inApp`, `digest` | `true`, `true`, `off` |
-| `accessibility` | `reducedMotion`, `highContrast`, `focusIndicators` | `false`, `false`, `default` |
+| Category        | Keys                                                                                          | Defaults                                       |
+| --------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| `appearance`    | `theme`, `density`                                                                            | `system`, `comfortable`                        |
+| `regional`      | `language`, `timezone`, `dateFormat`, `timeFormat`                                            | `en`, `UTC`, `YYYY-MM-DD`, `24h`               |
+| `workbench`     | `landingPage`, `defaultWorkspace`, `sidebarCollapsed`, `pinnedWorkspaces`, `recentWorkspaces` | `/workspace/home`, `home`, `false`, `[]`, `[]` |
+| `notifications` | `email`, `inApp`, `digest`                                                                    | `true`, `true`, `off`                          |
+| `accessibility` | `reducedMotion`, `highContrast`, `focusIndicators`                                            | `false`, `false`, `default`                    |
 
 ## Storage shape
 

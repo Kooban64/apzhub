@@ -4,9 +4,9 @@
 
 Explicit hooks only (no webhooks, polling, sync, workers, Event Bus):
 
-| Hook | Behaviour |
-| ---- | --------- |
+| Hook                                                               | Behaviour         |
+| ------------------------------------------------------------------ | ----------------- |
 | `onSupportRequestUpserted` / Article / Organisation / Group / User | publish or update |
-| `on*Removed` | remove |
+| `on*Removed`                                                       | remove            |
 
 `SupportSearchLifecycle.suggestFromDomainStatus` suggests states from ticket status; it does not schedule transitions.

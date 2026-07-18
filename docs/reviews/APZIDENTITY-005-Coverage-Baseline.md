@@ -5,27 +5,27 @@
 
 ## Result (measured via `pnpm certify:identity-vertical`)
 
-| Metric | Target | Result |
-| --- | --- | --- |
-| Lines | ≥95% | **99.00%** |
-| Functions | ≥95% | **99.19%** |
-| Branches | Meaningful | **81.35%** |
+| Metric    | Target     | Result     |
+| --------- | ---------- | ---------- |
+| Lines     | ≥95%       | **99.00%** |
+| Functions | ≥95%       | **99.19%** |
+| Branches  | Meaningful | **81.35%** |
 
 ## Assessment
 
-| Target (APZIDENTITY-005 brief) | Result |
-| --- | --- |
-| 95%+ lines | **Met** |
-| 95%+ functions | **Met** |
-| Meaningful branch coverage | **Met** — authz denial, lifecycle, disabled service, persistence bootstrap, tenant isolation, and Workbench CRUD paths covered; residual optional UI ternaries accepted (L-08) |
+| Target (APZIDENTITY-005 brief) | Result                                                                                                                                                                         |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 95%+ lines                     | **Met**                                                                                                                                                                        |
+| 95%+ functions                 | **Met**                                                                                                                                                                        |
+| Meaningful branch coverage     | **Met** — authz denial, lifecycle, disabled service, persistence bootstrap, tenant isolation, and Workbench CRUD paths covered; residual optional UI ternaries accepted (L-08) |
 
 ## Prior Workbench-only baseline (APZIDENTITY-004)
 
-| Metric | Value |
-| --- | --- |
-| Lines | 98.5% |
+| Metric    | Value |
+| --------- | ----- |
+| Lines     | 98.5% |
 | Functions | 98.5% |
-| Branches | 76.8% |
+| Branches  | 76.8% |
 
 ## Notes
 

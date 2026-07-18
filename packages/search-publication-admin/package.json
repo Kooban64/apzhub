@@ -1,0 +1,18 @@
+{
+  "name": "@apzhub/search-publication-admin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Search Publication Operations & Administration (APZSEARCH-017)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/search-publication-admin"
+  },
+  "dependencies": {
+    "@apzhub/search-orchestrator": "workspace:*"
+  }
+}

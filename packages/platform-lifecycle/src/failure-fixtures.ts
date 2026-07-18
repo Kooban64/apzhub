@@ -6,7 +6,10 @@ export function createHealthyConsolidatedFixture(
 ): ConsolidatedOperationalDiagnostics {
   return {
     generatedAt: "2026-07-09T08:00:00.000Z",
-    runtime: { platformReady: true, bootstrap: { package: "@apzhub/platform-bootstrap" } },
+    runtime: {
+      platformReady: true,
+      bootstrap: { package: "@apzhub/platform-bootstrap" },
+    },
     identity: { inMemory: { tenantCount: 1 } },
     authorization: { inMemory: { roleCount: 3 } },
     operations: { consoleSections: 19 },
@@ -84,12 +87,21 @@ export function createHealthyConsolidatedFixture(
           overrideUsage: [],
           secretStatus: [],
           validationErrors: [],
-          vault: { provider: "none", status: "not-configured", note: "Vault not configured." },
+          vault: {
+            provider: "none",
+            status: "not-configured",
+            note: "Vault not configured.",
+          },
         },
       },
       rateLimit: { backend: "memory", enabled: true, defaultLimitPerMinute: 120 },
       trafficGovernance: {
-        status: { enabled: true, backend: "memory", environment: "test", profileMultiplier: 1 },
+        status: {
+          enabled: true,
+          backend: "memory",
+          environment: "test",
+          profileMultiplier: 1,
+        },
         activePolicy: { id: "default", service: "platform", source: "canonical" },
         rateLimit: { backend: "memory", enabled: true, defaultLimitPerMinute: 120 },
         throttle: { active: false, burstWindowSeconds: 10 },
@@ -228,7 +240,12 @@ export function withTrafficGovernanceDisabled(
       ...fixture.security,
       trafficGovernance: {
         ...fixture.security.trafficGovernance,
-        status: { enabled: false, backend: "memory", environment: "test", profileMultiplier: 1 },
+        status: {
+          enabled: false,
+          backend: "memory",
+          environment: "test",
+          profileMultiplier: 1,
+        },
         recommendations: ["Enable traffic governance before production exposure."],
       },
     },
@@ -273,8 +290,12 @@ export function createLifecycleValidationInput(
     buildNumber: "local",
     environment: "test",
     productStatuses: {
-      "law-platform": consolidated.lawPlatform ? ("healthy" as const) : ("degraded" as const),
-      "trust-accounting": consolidated.trustAccounting ? ("healthy" as const) : ("degraded" as const),
+      "law-platform": consolidated.lawPlatform
+        ? ("healthy" as const)
+        : ("degraded" as const),
+      "trust-accounting": consolidated.trustAccounting
+        ? ("healthy" as const)
+        : ("degraded" as const),
     },
   };
 }
@@ -290,8 +311,12 @@ export function createControlPlaneValidationInput(
     buildNumber: "local",
     environment: "test",
     productStatuses: {
-      "law-platform": consolidated.lawPlatform ? ("healthy" as const) : ("degraded" as const),
-      "trust-accounting": consolidated.trustAccounting ? ("healthy" as const) : ("degraded" as const),
+      "law-platform": consolidated.lawPlatform
+        ? ("healthy" as const)
+        : ("degraded" as const),
+      "trust-accounting": consolidated.trustAccounting
+        ? ("healthy" as const)
+        : ("degraded" as const),
     },
   };
 }

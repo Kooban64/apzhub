@@ -33,11 +33,11 @@ ARIA tablist/tabs, labelled inputs, status badges, loading/empty/error/forbidden
 
 ## Testing
 
-| Suite | Result |
-| ----- | ------ |
-| Vitest handlers / OpenAPI / client / view / boundary | green |
-| OpenAPI validate | PASS |
-| Boundary (no domain/adapter imports in UI/handlers) | PASS |
+| Suite                                                               | Result                                              |
+| ------------------------------------------------------------------- | --------------------------------------------------- |
+| Vitest handlers / OpenAPI / client / view / boundary                | green                                               |
+| OpenAPI validate                                                    | PASS                                                |
+| Boundary (no domain/adapter imports in UI/handlers)                 | PASS                                                |
 | Playwright `apztcms-022-engineering-intelligence-workbench.spec.ts` | Spec added (mock data); requires app server baseURL |
 
 ## Coverage
@@ -46,19 +46,19 @@ New presentation modules aggregate **~97.1%** lines (handlers **100%**; client/a
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| OpenAPI validate | PASS |
-| Vitest (022 focused) | PASS |
-| coverage ≥95% lines (new modules aggregate) | PASS |
-| boundary audit | PASS |
-| Playwright live | LIMITED (spec present; runner needs app server) |
+| Gate                                        | Result                                          |
+| ------------------------------------------- | ----------------------------------------------- |
+| OpenAPI validate                            | PASS                                            |
+| Vitest (022 focused)                        | PASS                                            |
+| coverage ≥95% lines (new modules aggregate) | PASS                                            |
+| boundary audit                              | PASS                                            |
+| Playwright live                             | LIMITED (spec present; runner needs app server) |
 
 ## Technical Debt
 
-- Playwright E2E needs CI/app server with baseURL to run green  
-- View branch coverage lower than handlers (panel empty-state branches)  
-- Trend kind filter is client-side only over listed series  
+- Playwright E2E needs CI/app server with baseURL to run green
+- View branch coverage lower than handlers (panel empty-state branches)
+- Trend kind filter is client-side only over listed series
 - No dedicated product picker beyond release filter text
 
 ## Recommendation

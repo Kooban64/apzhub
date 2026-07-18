@@ -26,25 +26,25 @@ This release review documents what Platform Core v1.0 **is**, what it **delivers
 
 ### Capability frameworks (M2–M7)
 
-| Framework | Package | Milestone |
-|-----------|---------|-----------|
-| Platform Runtime | `@apzhub/platform-runtime` | M2 |
-| Workbench | `@apzhub/workbench-framework` | M3 |
-| Actions | `@apzhub/command-framework` | M4 |
-| Knowledge & Discovery | `@apzhub/knowledge-discovery-framework` | M5 |
-| Events & Notifications | `@apzhub/event-notification-framework` | M6 |
-| Activity & Timeline | `@apzhub/activity-timeline-framework` | M7 |
+| Framework              | Package                                 | Milestone |
+| ---------------------- | --------------------------------------- | --------- |
+| Platform Runtime       | `@apzhub/platform-runtime`              | M2        |
+| Workbench              | `@apzhub/workbench-framework`           | M3        |
+| Actions                | `@apzhub/command-framework`             | M4        |
+| Knowledge & Discovery  | `@apzhub/knowledge-discovery-framework` | M5        |
+| Events & Notifications | `@apzhub/event-notification-framework`  | M6        |
+| Activity & Timeline    | `@apzhub/activity-timeline-framework`   | M7        |
 
 ### Platform Core services (M8)
 
-| Service | Package | Phase |
-|---------|---------|-------|
-| Identity | `@apzhub/platform-identity` | M8-01 |
-| Authorization | `@apzhub/platform-authorization` | M8-02 |
-| Operations Console | apps/web + manifests | M8-03 |
-| Personalisation | `@apzhub/platform-personalisation` | M8-04 |
-| Governance & Provisioning | `@apzhub/platform-governance` | M8-05 |
-| Security & Resilience | `@apzhub/platform-security` | M8-06 |
+| Service                   | Package                            | Phase |
+| ------------------------- | ---------------------------------- | ----- |
+| Identity                  | `@apzhub/platform-identity`        | M8-01 |
+| Authorization             | `@apzhub/platform-authorization`   | M8-02 |
+| Operations Console        | apps/web + manifests               | M8-03 |
+| Personalisation           | `@apzhub/platform-personalisation` | M8-04 |
+| Governance & Provisioning | `@apzhub/platform-governance`      | M8-05 |
+| Security & Resilience     | `@apzhub/platform-security`        | M8-06 |
 
 ### Persistence
 
@@ -109,12 +109,12 @@ Products built on Platform Core v1.0 should:
 
 ## Documentation
 
-| Document | Purpose |
-|----------|---------|
-| [Platform Core Reference Architecture](../architecture/APZHUB-Platform-Core-Reference-Architecture.md) | Canonical architecture |
-| [Platform Core Capability Reference](../architecture/APZHUB-Platform-Core-Capability-Reference.md) | Per-capability catalogue |
-| [Commercial Assessment](../reviews/APZHUB-Platform-Core-Commercial-Assessment.md) | Deployment tiers |
-| [PC-001 Completion Report](../sprint/PC-001-completion-report.md) | Certification closeout |
+| Document                                                                                               | Purpose                  |
+| ------------------------------------------------------------------------------------------------------ | ------------------------ |
+| [Platform Core Reference Architecture](../architecture/APZHUB-Platform-Core-Reference-Architecture.md) | Canonical architecture   |
+| [Platform Core Capability Reference](../architecture/APZHUB-Platform-Core-Capability-Reference.md)     | Per-capability catalogue |
+| [Commercial Assessment](../reviews/APZHUB-Platform-Core-Commercial-Assessment.md)                      | Deployment tiers         |
+| [PC-001 Completion Report](../sprint/PC-001-completion-report.md)                                      | Certification closeout   |
 
 ---
 
@@ -129,8 +129,8 @@ Products built on Platform Core v1.0 should:
 
 ## Version relationship
 
-| Release | Scope |
-|---------|-------|
-| Platform v5.0 | M1–M7 frameworks (frozen baseline) |
+| Release                | Scope                                            |
+| ---------------------- | ------------------------------------------------ |
+| Platform v5.0          | M1–M7 frameworks (frozen baseline)               |
 | **Platform Core v1.0** | M1–M8 complete platform foundation (this review) |
-| Platform Core v2 | SaaS hardening, workers, gateway (planned) |
+| Platform Core v2       | SaaS hardening, workers, gateway (planned)       |

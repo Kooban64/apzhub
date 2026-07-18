@@ -176,7 +176,9 @@ describe("OSS-110-11 Support HTTP API", () => {
     it("closes (soft) a support request via DELETE/close handler", async () => {
       installMockGateway();
       const response = await handleCloseSupportRequest(
-        makeRequest(`/api/v1/support-requests/${API_TEST_SREQ_ID}`, { method: "DELETE" }),
+        makeRequest(`/api/v1/support-requests/${API_TEST_SREQ_ID}`, {
+          method: "DELETE",
+        }),
         makeContext(),
         { params: Promise.resolve({ supportRequestId: API_TEST_SREQ_ID }) },
       );
@@ -189,7 +191,9 @@ describe("OSS-110-11 Support HTTP API", () => {
     it("reopens a support request", async () => {
       installMockGateway();
       const response = await handleReopenSupportRequest(
-        makeRequest(`/api/v1/support-requests/${API_TEST_SREQ_ID}/reopen`, { method: "POST" }),
+        makeRequest(`/api/v1/support-requests/${API_TEST_SREQ_ID}/reopen`, {
+          method: "POST",
+        }),
         makeContext(),
         { params: Promise.resolve({ supportRequestId: API_TEST_SREQ_ID }) },
       );
@@ -247,7 +251,9 @@ describe("OSS-110-11 Support HTTP API", () => {
       expect((await assigned.json()).data.assigneeId).toBe(API_TEST_SUSER_ID);
 
       const removed = await handleRemoveSupportOwner(
-        makeRequest(`/api/v1/support-requests/${API_TEST_SREQ_ID}/owner`, { method: "DELETE" }),
+        makeRequest(`/api/v1/support-requests/${API_TEST_SREQ_ID}/owner`, {
+          method: "DELETE",
+        }),
         makeContext(),
         { params: Promise.resolve({ supportRequestId: API_TEST_SREQ_ID }) },
       );
@@ -369,7 +375,9 @@ describe("OSS-110-11 Support HTTP API", () => {
     it("gets a specific article", async () => {
       installMockGateway();
       const response = await handleGetSupportArticle(
-        makeRequest(`/api/v1/support-requests/${API_TEST_SREQ_ID}/articles/${API_TEST_SART_ID}`),
+        makeRequest(
+          `/api/v1/support-requests/${API_TEST_SREQ_ID}/articles/${API_TEST_SART_ID}`,
+        ),
         makeContext(),
         {
           params: Promise.resolve({
@@ -429,7 +437,9 @@ describe("OSS-110-11 Support HTTP API", () => {
       expect(updated.status).toBe(200);
 
       const archived = await handleArchiveOrganization(
-        makeRequest(`/api/v1/support-organizations/${API_TEST_SORG_ID}`, { method: "DELETE" }),
+        makeRequest(`/api/v1/support-organizations/${API_TEST_SORG_ID}`, {
+          method: "DELETE",
+        }),
         makeContext(),
         { params: Promise.resolve({ organizationId: API_TEST_SORG_ID }) },
       );
@@ -599,7 +609,10 @@ describe("OSS-110-11 Support HTTP API", () => {
     it("search rejects unknown query keys", async () => {
       const { supportSearchQuerySchema } = await import("./schemas/support");
       expect(() =>
-        parseQuery(supportSearchQuerySchema, new URLSearchParams("q=test&unknownKey=x")),
+        parseQuery(
+          supportSearchQuerySchema,
+          new URLSearchParams("q=test&unknownKey=x"),
+        ),
       ).toThrow();
     });
   });
@@ -796,7 +809,10 @@ describe("OSS-110-11 Support HTTP API", () => {
         },
       });
       await expect(
-        handleListSupportRequests(makeRequest("/api/v1/support-requests"), makeContext()),
+        handleListSupportRequests(
+          makeRequest("/api/v1/support-requests"),
+          makeContext(),
+        ),
       ).rejects.toMatchObject({ code: "PROVIDER_UNAVAILABLE" });
       expect(
         mapPlatformErrorToHttpStatus(
@@ -844,9 +860,15 @@ describe("OSS-110-11 Support HTTP API", () => {
       expect(spec.paths["/support-requests/{supportRequestId}/owner"]).toBeTruthy();
       expect(spec.paths["/support-requests/{supportRequestId}/customer"]).toBeTruthy();
       expect(spec.paths["/support-requests/{supportRequestId}/articles"]).toBeTruthy();
-      expect(spec.paths["/support-requests/{supportRequestId}/articles/notes"]).toBeTruthy();
-      expect(spec.paths["/support-requests/{supportRequestId}/articles/replies"]).toBeTruthy();
-      expect(spec.paths["/support-requests/{supportRequestId}/articles/{articleId}"]).toBeTruthy();
+      expect(
+        spec.paths["/support-requests/{supportRequestId}/articles/notes"],
+      ).toBeTruthy();
+      expect(
+        spec.paths["/support-requests/{supportRequestId}/articles/replies"],
+      ).toBeTruthy();
+      expect(
+        spec.paths["/support-requests/{supportRequestId}/articles/{articleId}"],
+      ).toBeTruthy();
       expect(spec.paths["/support-requests/{supportRequestId}/history"]).toBeTruthy();
       expect(spec.paths["/support-organizations"]).toBeTruthy();
       expect(spec.paths["/support-organizations/{organizationId}"]).toBeTruthy();

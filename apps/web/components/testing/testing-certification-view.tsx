@@ -53,7 +53,9 @@ export function TestingCertificationView({
   });
 
   function invalidateCertifications() {
-    void queryClient.invalidateQueries({ queryKey: testingQueryKeys.certification.all() });
+    void queryClient.invalidateQueries({
+      queryKey: testingQueryKeys.certification.all(),
+    });
     void queryClient.invalidateQueries({ queryKey: testingQueryKeys.dashboard() });
     if (certificationId) {
       void queryClient.invalidateQueries({
@@ -96,13 +98,17 @@ export function TestingCertificationView({
           <Panel title="State">
             <dl className="grid gap-2 text-sm">
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">State</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  State
+                </dt>
                 <dd>
                   <StatusBadge status={certification.state} />
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Updated</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Updated
+                </dt>
                 <dd>{formatTestingDate(certification.updatedAt)}</dd>
               </div>
             </dl>

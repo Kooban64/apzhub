@@ -1,7 +1,7 @@
 # APZHUB Platform Roadmap
 
 > **Status:** M1–M7 complete · Platform v5.0 frozen · **Platform Core v1.0 CERTIFIED (PC-001)** · M8 complete  
-> **Authority:** [003 — Overall System Architecture](./003-overall-system-architecture-design-principles.md) · [Platform Core Reference Architecture](./APZHUB-Platform-Core-Reference-Architecture.md) · [Platform Core Certification](../reviews/APZHUB-Platform-Core-Certification.md)  
+> **Authority:** [003 — Overall System Architecture](../003-overall-system-architecture-design-principles.md) · [Platform Core Reference Architecture](./APZHUB-Platform-Core-Reference-Architecture.md) · [Platform Core Certification](../reviews/APZHUB-Platform-Core-Certification.md)  
 > **Note:** Platform Core v2 is the next **implementation** gate (await owner approval). Law Platform validation (LAW-001–015) advanced in parallel.  
 > **Notification SoR:** **APZNOTIFY-001…006 complete** — metadata wave **frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**). Next roadmap only: **APZNOTIFY-007** (delivery providers) — do not implement without owner approval.  
 > **Configuration SoR:** **APZCONFIG-001…006 complete** — metadata wave **frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**). Official Configuration Reference Standard. Next roadmap only: **APZCONFIG-007** (Runtime Configuration Platform) — do not implement without owner approval.  
@@ -256,15 +256,15 @@ See [activity-timeline-framework.md](./activity-timeline-framework.md) · [SPR-0
 
 ### Phases
 
-| Phase | Scope | Status |
-| ----- | ----- | ------ |
-| M8-01 | Identity & Tenant Foundation | ✅ Complete |
-| M8-02 | Authorization Framework (RBAC Phase 1) | ✅ Complete |
-| M8-03 | Platform Operations Console | ✅ Complete |
-| M8-04 | Personalisation Framework | ✅ Complete |
-| M8-05 | Governance & Provisioning | ✅ Complete |
-| M8-06 | Security & Operational Resilience | ✅ Complete |
-| PC-001 | Platform Core Certification | ✅ CERTIFIED WITH OBSERVATIONS |
+| Phase  | Scope                                  | Status                         |
+| ------ | -------------------------------------- | ------------------------------ |
+| M8-01  | Identity & Tenant Foundation           | ✅ Complete                    |
+| M8-02  | Authorization Framework (RBAC Phase 1) | ✅ Complete                    |
+| M8-03  | Platform Operations Console            | ✅ Complete                    |
+| M8-04  | Personalisation Framework              | ✅ Complete                    |
+| M8-05  | Governance & Provisioning              | ✅ Complete                    |
+| M8-06  | Security & Operational Resilience      | ✅ Complete                    |
+| PC-001 | Platform Core Certification            | ✅ CERTIFIED WITH OBSERVATIONS |
 
 ### M8 delivered summary
 
@@ -279,12 +279,12 @@ See [activity-timeline-framework.md](./activity-timeline-framework.md) · [SPR-0
 
 **Owner-approved sequencing:** PCv2-01 → PCv2-02 → M17 → OSS Waves. See [PCS-001 Owner Approval](../strategy/PCS-001-owner-approval.md) and [Platform Core Strategy](../strategy/APZHUB-Platform-Core-Strategy.md).
 
-| Milestone | Status |
-|-----------|--------|
-| PCv2-01 planning | ✅ Complete |
-| PRH-000 owner acceptance | ✅ **Approved 2026-07-08** |
-| PCv2-01 implementation | ✅ **Authorised** — PRH-001–PRH-018 |
-| PCv2-02 Workers | ⏳ After PCv2-01 closeout |
+| Milestone                | Status                              |
+| ------------------------ | ----------------------------------- |
+| PCv2-01 planning         | ✅ Complete                         |
+| PRH-000 owner acceptance | ✅ **Approved 2026-07-08**          |
+| PCv2-01 implementation   | ✅ **Authorised** — PRH-001–PRH-018 |
+| PCv2-02 Workers          | ⏳ After PCv2-01 closeout           |
 
 See [PRH-000 Owner Acceptance](../reviews/PRH-000-Owner-Acceptance.md) · [PRH-000 Implementation Baseline](../reviews/PRH-000-Implementation-Baseline.md) · [PCv2-01 Sprint Guide](../sprint/PCv2-01-Production-Readiness-Sprint-Guide.md).
 

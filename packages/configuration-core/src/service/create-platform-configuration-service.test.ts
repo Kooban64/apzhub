@@ -153,7 +153,7 @@ describe("createPlatformConfigurationService", () => {
 
     expect((await service.diagnosticsHealth(ctx)).runtimeApplyEnabled).toBe(false);
     expect((await service.diagnosticsReadiness(ctx)).ready).toBe(true);
-    expect((await service.diagnosticsCapabilities()).runtimeApply).toBe(false);
+    expect((await service.diagnosticsCapabilities(ctx)).runtimeApply).toBe(false);
   });
 
   it("throws not_found for missing entities", async () => {

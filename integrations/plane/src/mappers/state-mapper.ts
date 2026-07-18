@@ -10,7 +10,10 @@ const PLANE_GROUP_MAP: Readonly<Record<string, StatusGroup>> = {
   cancelled: "cancelled",
 };
 
-export function mapPlaneState(record: PlaneStateRecord, projectId: string): ProjectStatusEntity {
+export function mapPlaneState(
+  record: PlaneStateRecord,
+  projectId: string,
+): ProjectStatusEntity {
   return {
     id: toStatusId(record.id),
     projectId: projectId.startsWith("proj_") ? projectId : toProjectId(projectId),

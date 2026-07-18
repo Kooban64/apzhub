@@ -262,4 +262,3 @@ export const MOCK_WEBHOOK: ZammadWebhookRecord = {
   created_at: "2026-06-01T08:00:00.000Z",
   updated_at: "2026-06-01T08:00:00.000Z",
 };
-

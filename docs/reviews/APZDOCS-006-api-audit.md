@@ -15,16 +15,16 @@ Gateway facets: `documents`, `documentVersions`, `documentStorage`, collections/
 
 ## Verified
 
-| Concern | Evidence |
-| ------- | -------- |
-| Routes | List/create/get/patch, archive/restore, versions, storage metadata, verify, audit, classify/tags/folder/collection/retention/relationships, tags, diagnostics, reconciliation |
-| OpenAPI | Tag **Platform Documents**; canonical DTOs (`CreateDocumentRequest`, …) |
-| Validation | Zod schemas in `schemas/documents.ts` |
-| Pagination / filtering | Query params (`query`, `status`, `classification`, `tagName`, `limit`) + collection envelopes |
-| Authorization | `documentPlatformOps` → `document.*` via RequestPipeline |
-| Structured errors | Platform API error envelopes + correlation IDs |
-| Diagnostics redaction | Storage keys / reconciliation key hints stripped at HTTP boundary |
-| No binary | No multipart / upload / download routes |
+| Concern                | Evidence                                                                                                                                                                      |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Routes                 | List/create/get/patch, archive/restore, versions, storage metadata, verify, audit, classify/tags/folder/collection/retention/relationships, tags, diagnostics, reconciliation |
+| OpenAPI                | Tag **Platform Documents**; canonical DTOs (`CreateDocumentRequest`, …)                                                                                                       |
+| Validation             | Zod schemas in `schemas/documents.ts`                                                                                                                                         |
+| Pagination / filtering | Query params (`query`, `status`, `classification`, `tagName`, `limit`) + collection envelopes                                                                                 |
+| Authorization          | `documentPlatformOps` → `document.*` via RequestPipeline                                                                                                                      |
+| Structured errors      | Platform API error envelopes + correlation IDs                                                                                                                                |
+| Diagnostics redaction  | Storage keys / reconciliation key hints stripped at HTTP boundary                                                                                                             |
+| No binary              | No multipart / upload / download routes                                                                                                                                       |
 
 ## Authz keys (sample)
 

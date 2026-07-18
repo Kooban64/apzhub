@@ -31,9 +31,7 @@ describe("APZNOTIFY-003 notification typed client", () => {
     expect((await client.createNotification({ title: "X" })).title).toBe("X");
     expect((await client.markNotificationRead("ntf_1")).status).toBe("read");
     expect((await client.getCapabilities()).deliveryEnabled).toBe(false);
-    expect((await client.listChannels()).items[0]?.deliveryAvailable).toBe(
-      false,
-    );
+    expect((await client.listChannels()).items[0]?.deliveryAvailable).toBe(false);
     expect(client).not.toHaveProperty("send");
     expect(client).not.toHaveProperty("deliver");
     expect(client).not.toHaveProperty("schedule");
@@ -124,14 +122,15 @@ describe("APZNOTIFY-003 notification typed client", () => {
   it("translates HTTP errors and user messages", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(async () =>
-        new Response(
-          JSON.stringify({
-            error: { code: "FORBIDDEN", message: "Denied" },
-            meta: { correlationId: "c1" },
-          }),
-          { status: 403 },
-        ),
+      vi.fn(
+        async () =>
+          new Response(
+            JSON.stringify({
+              error: { code: "FORBIDDEN", message: "Denied" },
+              meta: { correlationId: "c1" },
+            }),
+            { status: 403 },
+          ),
       ),
     );
     const client = createHttpNotificationClient();
@@ -155,22 +154,21 @@ describe("APZNOTIFY-003 notification typed client", () => {
 
     vi.stubGlobal(
       "fetch",
-      vi.fn(async () =>
-        new Response(JSON.stringify({ data: null, page: undefined }), {
-          status: 200,
-        }),
+      vi.fn(
+        async () =>
+          new Response(JSON.stringify({ data: null, page: undefined }), {
+            status: 200,
+          }),
       ),
     );
     expect((await client.listNotifications()).items).toEqual([]);
   });
 
   it("rejects forbidden API paths and enforces accessor injection", async () => {
-    expect(() => assertNotificationApiPath("/api/v1/workflows")).toThrow(
-      /only call/,
+    expect(() => assertNotificationApiPath("/api/v1/workflows")).toThrow(/only call/);
+    expect(() => assertNotificationApiPath("/api/v1/notifications/send")).toThrow(
+      /Forbidden/,
     );
-    expect(() =>
-      assertNotificationApiPath("/api/v1/notifications/send"),
-    ).toThrow(/Forbidden/);
     expect(NOTIFICATION_FORBIDDEN_HTTP_SEGMENTS).toContain("deliver");
 
     setNotificationClient(createMockNotificationClient());

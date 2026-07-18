@@ -5,9 +5,9 @@
 ## Access
 
 ```ts
-bundle.gateway.observe.healthChecks.list(ctx)
-bundle.gateway.observe.metricDefinitions.create(ctx, input)
-bundle.gateway.observe.diagnostics.readiness(ctx)
+bundle.gateway.observe.healthChecks.list(ctx);
+bundle.gateway.observe.metricDefinitions.create(ctx, input);
+bundle.gateway.observe.diagnostics.readiness(ctx);
 ```
 
 ## Facets

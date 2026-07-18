@@ -27,15 +27,10 @@ function normalizePath(pathname: string): string {
 
 export function isDocumentsRoute(pathname: string): boolean {
   const normalized = normalizePath(pathname);
-  return (
-    normalized === DOCUMENTS_BASE ||
-    normalized.startsWith(`${DOCUMENTS_BASE}/`)
-  );
+  return normalized === DOCUMENTS_BASE || normalized.startsWith(`${DOCUMENTS_BASE}/`);
 }
 
-export function resolveDocumentsSection(
-  pathname: string,
-): DocumentsSection {
+export function resolveDocumentsSection(pathname: string): DocumentsSection {
   const normalized = normalizePath(pathname);
   if (normalized === DOCUMENTS_BASE) return "overview";
   const suffix = normalized.slice(DOCUMENTS_BASE.length + 1);

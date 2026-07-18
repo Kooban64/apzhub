@@ -181,14 +181,9 @@ export async function handleListConfigurations(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const query = parseQuery(
-    configurationsListQuerySchema,
-    request.nextUrl.searchParams,
-  );
+  const query = parseQuery(configurationsListQuerySchema, request.nextUrl.searchParams);
   const gateway = await requireConfigurationGateway();
-  const items = await gateway.configuration.configurations.list(
-    context.serviceContext,
-  );
+  const items = await gateway.configuration.configurations.list(context.serviceContext);
   const filtered = filterConfigurations(items, query);
   const limit = resolvePageLimit(query);
   return collection(pageSlice(filtered, limit), context, limit);
@@ -262,7 +257,9 @@ export async function handleUpdateConfiguration(
       configurationId,
       hierarchyLevel: body.hierarchyLevel,
       scope: body.scope,
-      inheritsFromConfigurationId: body.inheritsFromConfigurationId,
+      inheritsFromConfigurationId: body.inheritsFromConfigurationId
+        ? asConfigurationId(body.inheritsFromConfigurationId)
+        : undefined,
       organisationId: body.organisationId,
     },
   );
@@ -408,9 +405,7 @@ export async function handleListConfigurationNamespaces(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await requireConfigurationGateway();
-  const items = await gateway.configuration.namespaces.list(
-    context.serviceContext,
-  );
+  const items = await gateway.configuration.namespaces.list(context.serviceContext);
   return collection(items, context);
 }
 
@@ -461,10 +456,10 @@ export async function handleUpdateConfigurationNamespace(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireConfigurationGateway();
-  const result = await gateway.configuration.namespaces.update(
-    context.serviceContext,
-    { namespaceId, ...body },
-  );
+  const result = await gateway.configuration.namespaces.update(context.serviceContext, {
+    namespaceId,
+    ...body,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -491,13 +486,10 @@ export async function handleCreateConfigurationGroup(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireConfigurationGateway();
-  const result = await gateway.configuration.groups.create(
-    context.serviceContext,
-    {
-      ...body,
-      namespaceId: asConfigurationNamespaceId(body.namespaceId),
-    },
-  );
+  const result = await gateway.configuration.groups.create(context.serviceContext, {
+    ...body,
+    namespaceId: asConfigurationNamespaceId(body.namespaceId),
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -531,10 +523,10 @@ export async function handleUpdateConfigurationGroup(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireConfigurationGateway();
-  const result = await gateway.configuration.groups.update(
-    context.serviceContext,
-    { groupId, ...body },
-  );
+  const result = await gateway.configuration.groups.update(context.serviceContext, {
+    groupId,
+    ...body,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -572,10 +564,10 @@ export async function handleCreateConfigurationVersion(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireConfigurationGateway();
-  const result = await gateway.configuration.versions.create(
-    context.serviceContext,
-    { configurationId, ...body },
-  );
+  const result = await gateway.configuration.versions.create(context.serviceContext, {
+    configurationId,
+    ...body,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -648,10 +640,7 @@ export async function handleListConfigurationOverrides(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const query = parseQuery(
-    overridesListQuerySchema,
-    request.nextUrl.searchParams,
-  );
+  const query = parseQuery(overridesListQuerySchema, request.nextUrl.searchParams);
   const gateway = await requireConfigurationGateway();
   const items = await gateway.configuration.overrides.list(
     context.serviceContext,
@@ -671,13 +660,10 @@ export async function handleCreateConfigurationOverride(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireConfigurationGateway();
-  const result = await gateway.configuration.overrides.create(
-    context.serviceContext,
-    {
-      ...body,
-      configurationId: asConfigurationId(body.configurationId),
-    },
-  );
+  const result = await gateway.configuration.overrides.create(context.serviceContext, {
+    ...body,
+    configurationId: asConfigurationId(body.configurationId),
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -711,10 +697,10 @@ export async function handleUpdateConfigurationOverride(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireConfigurationGateway();
-  const result = await gateway.configuration.overrides.update(
-    context.serviceContext,
-    { overrideId, ...body },
-  );
+  const result = await gateway.configuration.overrides.update(context.serviceContext, {
+    overrideId,
+    ...body,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -765,8 +751,7 @@ export async function handleValidateConfigurationMetadata(
   const configuration = {
     id: asConfigurationId("cfg_preview_validate"),
     tenantId: context.serviceContext.tenantId,
-    organisationId:
-      body.organisationId ?? context.serviceContext.organisationId,
+    organisationId: body.organisationId ?? context.serviceContext.organisationId,
     namespaceId: asConfigurationNamespaceId(body.namespaceId ?? "ns_preview"),
     groupId: body.groupId ? asConfigurationGroupId(body.groupId) : undefined,
     keyId: asConfigurationKeyId("key_preview"),
@@ -848,9 +833,7 @@ export async function handleListConfigurationAudit(
   const gateway = await requireConfigurationGateway();
   const items = await gateway.configuration.audit.list(
     context.serviceContext,
-    query.configurationId
-      ? asConfigurationId(query.configurationId)
-      : undefined,
+    query.configurationId ? asConfigurationId(query.configurationId) : undefined,
   );
   const limit = resolvePageLimit(query);
   return collection(pageSlice(items, limit), context, limit);
@@ -865,10 +848,7 @@ export async function handleGetConfigurationAuditEntry(
     await param(routeContext, "auditId", configurationAuditIdParamSchema),
   );
   const gateway = await requireConfigurationGateway();
-  const result = await gateway.configuration.audit.get(
-    context.serviceContext,
-    auditId,
-  );
+  const result = await gateway.configuration.audit.get(context.serviceContext, auditId);
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -918,9 +898,7 @@ export async function handleGetConfigurationHealth(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await requireConfigurationGateway();
-  const health = await gateway.configuration.diagnostics.health(
-    context.serviceContext,
-  );
+  const health = await gateway.configuration.diagnostics.health(context.serviceContext);
   return jsonDataResponse(health, context.tracing);
 }
 

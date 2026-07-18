@@ -7,22 +7,22 @@
 
 ## Entities
 
-| Entity | Description |
-| --- | --- |
-| **Workflow** | Named tenant workflow definition; lifecycle; optional current version, category, folder, template |
-| **WorkflowVersion** | Immutable numbered snapshot of graph + variables/parameters/triggers/actions/conditions/connections |
-| **WorkflowTemplate** | Reusable graph blueprint with parameters/variables |
-| **WorkflowCategory** | Taxonomy node |
-| **WorkflowFolder** | Folder path taxonomy |
-| **WorkflowVariable** | Typed variable metadata |
-| **WorkflowParameter** | Typed parameter metadata (non-json scalars) |
-| **WorkflowTrigger** | Engine-neutral trigger metadata (`kind` + allowlisted config) |
-| **WorkflowAction** | Engine-neutral action metadata |
-| **WorkflowCondition** | Engine-neutral condition metadata |
-| **WorkflowConnection** | Edge between graph nodes |
-| **WorkflowMetadata** | Labels/tags/custom string map |
-| **WorkflowAuditEntry** | Append-only audit record |
-| **WorkflowValidationResult / Issue** | Structural/reference/parameter/version/lifecycle issues (not runtime) |
+| Entity                               | Description                                                                                         |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| **Workflow**                         | Named tenant workflow definition; lifecycle; optional current version, category, folder, template   |
+| **WorkflowVersion**                  | Immutable numbered snapshot of graph + variables/parameters/triggers/actions/conditions/connections |
+| **WorkflowTemplate**                 | Reusable graph blueprint with parameters/variables                                                  |
+| **WorkflowCategory**                 | Taxonomy node                                                                                       |
+| **WorkflowFolder**                   | Folder path taxonomy                                                                                |
+| **WorkflowVariable**                 | Typed variable metadata                                                                             |
+| **WorkflowParameter**                | Typed parameter metadata (non-json scalars)                                                         |
+| **WorkflowTrigger**                  | Engine-neutral trigger metadata (`kind` + allowlisted config)                                       |
+| **WorkflowAction**                   | Engine-neutral action metadata                                                                      |
+| **WorkflowCondition**                | Engine-neutral condition metadata                                                                   |
+| **WorkflowConnection**               | Edge between graph nodes                                                                            |
+| **WorkflowMetadata**                 | Labels/tags/custom string map                                                                       |
+| **WorkflowAuditEntry**               | Append-only audit record                                                                            |
+| **WorkflowValidationResult / Issue** | Structural/reference/parameter/version/lifecycle issues (not runtime)                               |
 
 ---
 

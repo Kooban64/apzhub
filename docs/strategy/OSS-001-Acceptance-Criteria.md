@@ -61,4 +61,4 @@ OSS-001 complete. Await owner approval before **OSS-101 (Plane Integration)**.
 ## Related
 
 - [OSS-001 Master Plan](./OSS-001-APZHUB-OSS-Integration-Master-Plan.md)
-- [OSS-001 Completion Report](./OSS-001-completion-report.md)
+- [OSS-001 Completion Report](../sprint/OSS-001-completion-report.md)

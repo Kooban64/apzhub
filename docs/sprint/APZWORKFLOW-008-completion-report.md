@@ -58,13 +58,13 @@ Scoped engine HTTP/client façade: **~98%** lines/statements · **100%** functio
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| OpenAPI validate | PASS |
-| `pnpm audit:workflow-engine-http` | PASS |
-| `pnpm audit:workflow-http-client` (003) | PASS |
-| Vitest engine suites | PASS |
-| Scoped coverage ≥95% lines/functions | PASS |
+| Gate                                    | Result |
+| --------------------------------------- | ------ |
+| OpenAPI validate                        | PASS   |
+| `pnpm audit:workflow-engine-http`       | PASS   |
+| `pnpm audit:workflow-http-client` (003) | PASS   |
+| Vitest engine suites                    | PASS   |
+| Scoped coverage ≥95% lines/functions    | PASS   |
 
 ## Technical Debt
 

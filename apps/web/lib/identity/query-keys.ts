@@ -23,20 +23,35 @@ export const identityQueryKeys = {
   users: {
     all: [...ROOT, "users"] as const,
     list: (params?: IdentityListClientQuery) =>
-      [...ROOT, "users", "list", stableParams(params as Record<string, unknown>)] as const,
+      [
+        ...ROOT,
+        "users",
+        "list",
+        stableParams(params as Record<string, unknown>),
+      ] as const,
     detail: (userId: string) => [...ROOT, "users", "detail", userId] as const,
   },
   user: (userId: string) => [...ROOT, "users", "detail", userId] as const,
   groups: {
     all: [...ROOT, "groups"] as const,
     list: (params?: IdentityListClientQuery) =>
-      [...ROOT, "groups", "list", stableParams(params as Record<string, unknown>)] as const,
+      [
+        ...ROOT,
+        "groups",
+        "list",
+        stableParams(params as Record<string, unknown>),
+      ] as const,
     detail: (groupId: string) => [...ROOT, "groups", "detail", groupId] as const,
   },
   roles: {
     all: [...ROOT, "roles"] as const,
     list: (params?: IdentityListClientQuery) =>
-      [...ROOT, "roles", "list", stableParams(params as Record<string, unknown>)] as const,
+      [
+        ...ROOT,
+        "roles",
+        "list",
+        stableParams(params as Record<string, unknown>),
+      ] as const,
     detail: (roleId: string) => [...ROOT, "roles", "detail", roleId] as const,
   },
   organisations: {
@@ -54,7 +69,12 @@ export const identityQueryKeys = {
   tenants: {
     all: [...ROOT, "tenants"] as const,
     list: (params?: IdentityListClientQuery) =>
-      [...ROOT, "tenants", "list", stableParams(params as Record<string, unknown>)] as const,
+      [
+        ...ROOT,
+        "tenants",
+        "list",
+        stableParams(params as Record<string, unknown>),
+      ] as const,
     detail: (tenantId: string) => [...ROOT, "tenants", "detail", tenantId] as const,
   },
   departments: {
@@ -72,8 +92,14 @@ export const identityQueryKeys = {
   positions: {
     all: [...ROOT, "positions"] as const,
     list: (params?: IdentityListClientQuery) =>
-      [...ROOT, "positions", "list", stableParams(params as Record<string, unknown>)] as const,
-    detail: (positionId: string) => [...ROOT, "positions", "detail", positionId] as const,
+      [
+        ...ROOT,
+        "positions",
+        "list",
+        stableParams(params as Record<string, unknown>),
+      ] as const,
+    detail: (positionId: string) =>
+      [...ROOT, "positions", "detail", positionId] as const,
   },
   memberships: {
     all: [...ROOT, "memberships"] as const,
@@ -138,19 +164,34 @@ export const identityQueryKeys = {
   policies: {
     all: [...ROOT, "policies"] as const,
     list: (params?: IdentityListClientQuery) =>
-      [...ROOT, "policies", "list", stableParams(params as Record<string, unknown>)] as const,
+      [
+        ...ROOT,
+        "policies",
+        "list",
+        stableParams(params as Record<string, unknown>),
+      ] as const,
     detail: (policyId: string) => [...ROOT, "policies", "detail", policyId] as const,
   },
   audit: {
     all: [...ROOT, "audit"] as const,
     list: (params?: IdentityListClientQuery) =>
-      [...ROOT, "audit", "list", stableParams(params as Record<string, unknown>)] as const,
+      [
+        ...ROOT,
+        "audit",
+        "list",
+        stableParams(params as Record<string, unknown>),
+      ] as const,
     detail: (auditId: string) => [...ROOT, "audit", "detail", auditId] as const,
   },
   history: {
     all: [...ROOT, "history"] as const,
     list: (params?: IdentityHistoryListClientQuery) =>
-      [...ROOT, "history", "list", stableParams(params as Record<string, unknown>)] as const,
+      [
+        ...ROOT,
+        "history",
+        "list",
+        stableParams(params as Record<string, unknown>),
+      ] as const,
     detail: (historyId: string) => [...ROOT, "history", "detail", historyId] as const,
   },
   references: {

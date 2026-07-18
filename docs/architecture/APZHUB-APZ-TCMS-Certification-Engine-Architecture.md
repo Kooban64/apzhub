@@ -14,22 +14,22 @@ The Certification Engine is the authoritative **business workflow** for release 
 ## Factory
 
 ```ts
-createCertificationEngineServices(deps)
-createTestingDomainServices(deps) // → certification key
+createCertificationEngineServices(deps);
+createTestingDomainServices(deps); // → certification key
 ```
 
-| Service | Role |
-| --- | --- |
-| `CertificationService` | Create/get/list certification records |
-| `CertificationWorkflowService` | Validated lifecycle transitions |
-| `CertificationRuleService` | Which gates apply |
-| `CertificationGateService` | Define + evaluate gates |
-| `CertificationEvidenceService` | Link cert to domain artefacts |
-| `CertificationApprovalService` | Multi-stage human approvals |
-| `CertificationAuditService` | Immutable audit append/list |
-| `CertificationHistoryService` | Transition history |
-| `CertificationValidationService` | Gates, order, transitions, permissions |
-| `CertificationRecommendationService` | Advisory recommendations only |
+| Service                              | Role                                   |
+| ------------------------------------ | -------------------------------------- |
+| `CertificationService`               | Create/get/list certification records  |
+| `CertificationWorkflowService`       | Validated lifecycle transitions        |
+| `CertificationRuleService`           | Which gates apply                      |
+| `CertificationGateService`           | Define + evaluate gates                |
+| `CertificationEvidenceService`       | Link cert to domain artefacts          |
+| `CertificationApprovalService`       | Multi-stage human approvals            |
+| `CertificationAuditService`          | Immutable audit append/list            |
+| `CertificationHistoryService`        | Transition history                     |
+| `CertificationValidationService`     | Gates, order, transitions, permissions |
+| `CertificationRecommendationService` | Advisory recommendations only          |
 
 ---
 
@@ -58,4 +58,4 @@ HTTP, Workbench UI, dashboards, AI recommendations, automatic approval, email/no
 
 ## Related
 
-[Certification Workflow](./APZHUB-APZ-TCMS-Certification-Workflow.md) · [Gate Evaluation Model](./APZHUB-APZ-TCMS-Gate-Evaluation-Model.md) · [Recommendation Model](./APZHUB-APZ-TCMS-Recommendation-Model.md) · [Approval Model](./APZHUB-APZ-TCMS-Certification-Approval-Model.md) · [Audit Model](./APZHUB-APZ-TCMS-Certification-Audit-Model.md)  
+[Certification Workflow](./APZHUB-APZ-TCMS-Certification-Workflow.md) · [Gate Evaluation Model](./APZHUB-APZ-TCMS-Gate-Evaluation-Model.md) · [Recommendation Model](./APZHUB-APZ-TCMS-Recommendation-Model.md) · [Approval Model](./APZHUB-APZ-TCMS-Certification-Approval-Model.md) · [Audit Model](./APZHUB-APZ-TCMS-Certification-Audit-Model.md)

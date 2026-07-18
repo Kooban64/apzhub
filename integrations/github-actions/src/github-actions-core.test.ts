@@ -243,7 +243,10 @@ describe("diagnostics, health, rate limits, capabilities", () => {
     expect(mapped?.error.category).toBe("rate_limited");
 
     const unknown = mapGitHubActionsUnknownError(
-      Object.assign(new Error("boom"), { statusCode: 404, body: { message: "Not Found" } }),
+      Object.assign(new Error("boom"), {
+        statusCode: 404,
+        body: { message: "Not Found" },
+      }),
       { correlationId: "c", integrationId: "github-actions", operation: "runs.get" },
     );
     expect(unknown.error.category).toBe("not_found");

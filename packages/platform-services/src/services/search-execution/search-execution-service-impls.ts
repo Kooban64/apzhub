@@ -132,11 +132,7 @@ export function createSearchExecutionServiceImpls(
       );
     },
 
-    async suggest(
-      context,
-      query,
-      options,
-    ): Promise<SearchResultPage> {
+    async suggest(context, query, options): Promise<SearchResultPage> {
       const provider = await resolveProvider(context, options);
       const secured = applyMandatorySearchSecurityFilters(context, {
         ...query,
@@ -213,48 +209,45 @@ export function createSearchExecutionServiceImpls(
     },
   };
 
-  const searchExecutionHealth: SearchExecutionGateway["searchExecutionHealth"] =
-    {
-      async getHealth(context) {
-        assertExecutionEnabled(executionEnabled);
+  const searchExecutionHealth: SearchExecutionGateway["searchExecutionHealth"] = {
+    async getHealth(context) {
+      assertExecutionEnabled(executionEnabled);
+      const provider = resolver.resolve(context);
+      return provider.getHealth(context);
+    },
+    async getReadiness(context): Promise<SearchExecutionPlaneReadiness> {
+      if (!executionEnabled) {
+        return {
+          executionEnabled: false,
+          providerBound: false,
+          healthy: false,
+          message: "Search execution provider not configured",
+        };
+      }
+      try {
         const provider = resolver.resolve(context);
-        return provider.getHealth(context);
-      },
-      async getReadiness(
-        context,
-      ): Promise<SearchExecutionPlaneReadiness> {
-        if (!executionEnabled) {
-          return {
-            executionEnabled: false,
-            providerBound: false,
-            healthy: false,
-            message: "Search execution provider not configured",
-          };
-        }
-        try {
-          const provider = resolver.resolve(context);
-          const health = await provider.getHealth(context);
-          return {
-            executionEnabled: true,
-            providerBound: true,
-            providerId: provider.descriptor.id,
-            providerKind: provider.descriptor.kind,
-            healthy: health.status === "available",
-            message: health.message,
-          };
-        } catch (error) {
-          return {
-            executionEnabled: true,
-            providerBound: false,
-            healthy: false,
-            message:
-              error instanceof Error
-                ? error.message
-                : "Search execution readiness check failed",
-          };
-        }
-      },
-    };
+        const health = await provider.getHealth(context);
+        return {
+          executionEnabled: true,
+          providerBound: true,
+          providerId: provider.descriptor.id,
+          providerKind: provider.descriptor.kind,
+          healthy: health.status === "available",
+          message: health.message,
+        };
+      } catch (error) {
+        return {
+          executionEnabled: true,
+          providerBound: false,
+          healthy: false,
+          message:
+            error instanceof Error
+              ? error.message
+              : "Search execution readiness check failed",
+        };
+      }
+    },
+  };
 
   const searchExecutionDiagnostics: SearchExecutionGateway["searchExecutionDiagnostics"] =
     {

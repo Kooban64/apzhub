@@ -23,7 +23,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -33,9 +34,7 @@ function rel(file) {
 }
 
 function stripComments(source) {
-  return source
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/\/\/.*$/gm, "");
+  return source.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
 }
 
 function usesLegacyGatewaySearch(source) {
@@ -105,17 +104,22 @@ if (!existsSync(searchHandler)) {
   }
 }
 
-scan(walk(join(ROOT, "apps/web/lib/api/v1/handlers")).filter((f) => f.includes("search")), [
-  {
-    rule: "handlers-no-meili",
-    pattern: /@apzhub\/integration-meilisearch|@apzhub\/search-persistence|from\s+[\"']meilisearch[\"']/,
-  },
-]);
+scan(
+  walk(join(ROOT, "apps/web/lib/api/v1/handlers")).filter((f) => f.includes("search")),
+  [
+    {
+      rule: "handlers-no-meili",
+      pattern:
+        /@apzhub\/integration-meilisearch|@apzhub\/search-persistence|from\s+["']meilisearch["']/,
+    },
+  ],
+);
 
 scan(walk(join(ROOT, "apps/web/lib/search")), [
   {
     rule: "client-no-platform-services",
-    pattern: /@apzhub\/platform-services|@apzhub\/integration-meilisearch|getPlatformServiceGateway/,
+    pattern:
+      /@apzhub\/platform-services|@apzhub\/integration-meilisearch|getPlatformServiceGateway/,
   },
   {
     rule: "client-path-constraint",

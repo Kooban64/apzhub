@@ -79,10 +79,7 @@ export function resolveSupportRoute(pathname: string): SupportRouteResolution {
     return { kind: "unknown" };
   }
 
-  if (
-    normalized === SUPPORT_BASE ||
-    normalized === `${SUPPORT_BASE}/requests`
-  ) {
+  if (normalized === SUPPORT_BASE || normalized === `${SUPPORT_BASE}/requests`) {
     return { kind: "inbox" };
   }
 

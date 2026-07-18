@@ -60,13 +60,9 @@ export function assertConfigurationPermission(
   }
 }
 
-export function assertDiagnosticsPermission(
-  ctx: SearchRepositoryContext,
-): void {
+export function assertDiagnosticsPermission(ctx: SearchRepositoryContext): void {
   if (!hasSearchDiagnosticsPermission(ctx.permissions)) {
-    throw new SearchAuthorizationError(
-      "search.diagnostics permission required",
-    );
+    throw new SearchAuthorizationError("search.diagnostics permission required");
   }
 }
 
@@ -147,44 +143,31 @@ export function assertMetadataPermission(
   }
 }
 
-export function assertCapabilitiesPermission(
-  ctx: SearchRepositoryContext,
-): void {
+export function assertCapabilitiesPermission(ctx: SearchRepositoryContext): void {
   if (!hasSearchCapabilitiesPermission(ctx.permissions)) {
-    throw new SearchAuthorizationError(
-      "search.capabilities.read permission required",
-    );
+    throw new SearchAuthorizationError("search.capabilities.read permission required");
   }
 }
 
 export function assertHealthPermission(ctx: SearchRepositoryContext): void {
   if (!hasSearchHealthPermission(ctx.permissions)) {
-    throw new SearchAuthorizationError(
-      "search.health.read permission required",
-    );
+    throw new SearchAuthorizationError("search.health.read permission required");
   }
 }
 
 export function assertStatisticsPermission(ctx: SearchRepositoryContext): void {
   if (!hasSearchStatisticsPermission(ctx.permissions)) {
-    throw new SearchAuthorizationError(
-      "search.statistics.read permission required",
-    );
+    throw new SearchAuthorizationError("search.statistics.read permission required");
   }
 }
 
 export function assertValidationPermission(ctx: SearchRepositoryContext): void {
   if (!hasSearchValidationPermission(ctx.permissions)) {
-    throw new SearchAuthorizationError(
-      "search.validation.execute permission required",
-    );
+    throw new SearchAuthorizationError("search.validation.execute permission required");
   }
 }
 
-export function assertSameTenant(
-  ctx: SearchRepositoryContext,
-  tenantId: string,
-): void {
+export function assertSameTenant(ctx: SearchRepositoryContext, tenantId: string): void {
   if (ctx.tenantId !== tenantId) {
     throw new SearchAuthorizationError("tenant isolation violation");
   }

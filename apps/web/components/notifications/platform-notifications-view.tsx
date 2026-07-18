@@ -162,16 +162,16 @@ function StatusCard({
     <div
       className={[
         "rounded-lg border border-[var(--color-border)] px-4 py-3",
-        emphasize ? "border-[var(--color-destructive)]/40 bg-[var(--color-muted)]/40" : "",
+        emphasize
+          ? "border-[var(--color-destructive)]/40 bg-[var(--color-muted)]/40"
+          : "",
       ].join(" ")}
       data-testid={testId}
     >
       <p className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">
         {label}
       </p>
-      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">
-        {value}
-      </p>
+      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">{value}</p>
     </div>
   );
 }
@@ -329,27 +329,15 @@ export function PlatformNotificationsView({
 }) {
   const queryClient = useQueryClient();
   const [statusFilter, setStatusFilter] = useState("");
-  const [selectedNotificationId, setSelectedNotificationId] = useState<
-    string | null
-  >(null);
-  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(
+  const [selectedNotificationId, setSelectedNotificationId] = useState<string | null>(
     null,
   );
-  const [selectedPreferenceId, setSelectedPreferenceId] = useState<
-    string | null
-  >(null);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
-    null,
-  );
-  const [selectedChannelId, setSelectedChannelId] = useState<string | null>(
-    null,
-  );
-  const [selectedRecipientId, setSelectedRecipientId] = useState<string | null>(
-    null,
-  );
-  const [selectedReferenceId, setSelectedReferenceId] = useState<string | null>(
-    null,
-  );
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
+  const [selectedPreferenceId, setSelectedPreferenceId] = useState<string | null>(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
+  const [selectedChannelId, setSelectedChannelId] = useState<string | null>(null);
+  const [selectedRecipientId, setSelectedRecipientId] = useState<string | null>(null);
+  const [selectedReferenceId, setSelectedReferenceId] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const [transitionTarget, setTransitionTarget] = useState("read");
@@ -369,8 +357,7 @@ export function PlatformNotificationsView({
       ),
   });
 
-  const selectedId =
-    selectedNotificationId ?? listQuery.data?.items[0]?.id ?? null;
+  const selectedId = selectedNotificationId ?? listQuery.data?.items[0]?.id ?? null;
 
   const detailQuery = useQuery({
     queryKey: notificationQueryKeys.detail(selectedId ?? ""),
@@ -382,13 +369,10 @@ export function PlatformNotificationsView({
     queryKey: notificationQueryKeys.templates.list(),
     queryFn: ({ signal }) => listNotificationTemplates({ signal }),
     enabled:
-      section === "templates" ||
-      section === "overview" ||
-      section === "diagnostics",
+      section === "templates" || section === "overview" || section === "diagnostics",
   });
 
-  const templateId =
-    selectedTemplateId ?? templatesQuery.data?.items[0]?.id ?? null;
+  const templateId = selectedTemplateId ?? templatesQuery.data?.items[0]?.id ?? null;
   const templateDetailQuery = useQuery({
     queryKey: notificationQueryKeys.templates.detail(templateId ?? ""),
     queryFn: ({ signal }) => getNotificationTemplate(templateId!, { signal }),
@@ -405,8 +389,7 @@ export function PlatformNotificationsView({
     selectedPreferenceId ?? preferencesQuery.data?.items[0]?.id ?? null;
   const preferenceDetailQuery = useQuery({
     queryKey: notificationQueryKeys.preferences.detail(preferenceId ?? ""),
-    queryFn: ({ signal }) =>
-      getNotificationPreference(preferenceId!, { signal }),
+    queryFn: ({ signal }) => getNotificationPreference(preferenceId!, { signal }),
     enabled: Boolean(preferenceId) && section === "preferences",
   });
 
@@ -416,8 +399,7 @@ export function PlatformNotificationsView({
     enabled: section === "categories" || section === "overview",
   });
 
-  const categoryId =
-    selectedCategoryId ?? categoriesQuery.data?.items[0]?.id ?? null;
+  const categoryId = selectedCategoryId ?? categoriesQuery.data?.items[0]?.id ?? null;
   const categoryDetailQuery = useQuery({
     queryKey: notificationQueryKeys.categories.detail(categoryId ?? ""),
     queryFn: ({ signal }) => getNotificationCategory(categoryId!, { signal }),
@@ -430,8 +412,7 @@ export function PlatformNotificationsView({
     enabled: section === "channels" || section === "overview",
   });
 
-  const channelId =
-    selectedChannelId ?? channelsQuery.data?.items[0]?.id ?? null;
+  const channelId = selectedChannelId ?? channelsQuery.data?.items[0]?.id ?? null;
   const channelDetailQuery = useQuery({
     queryKey: notificationQueryKeys.channels.detail(channelId ?? ""),
     queryFn: ({ signal }) => getNotificationChannel(channelId!, { signal }),
@@ -440,15 +421,12 @@ export function PlatformNotificationsView({
 
   const recipientsQuery = useQuery({
     queryKey: notificationQueryKeys.recipients(selectedId ?? ""),
-    queryFn: ({ signal }) =>
-      listNotificationRecipients(selectedId!, { signal }),
+    queryFn: ({ signal }) => listNotificationRecipients(selectedId!, { signal }),
     enabled:
-      Boolean(selectedId) &&
-      (section === "recipients" || section === "notifications"),
+      Boolean(selectedId) && (section === "recipients" || section === "notifications"),
   });
 
-  const recipientId =
-    selectedRecipientId ?? recipientsQuery.data?.items[0]?.id ?? null;
+  const recipientId = selectedRecipientId ?? recipientsQuery.data?.items[0]?.id ?? null;
   const recipientDetailQuery = useQuery({
     queryKey: [
       ...notificationQueryKeys.recipients(selectedId ?? ""),
@@ -456,25 +434,20 @@ export function PlatformNotificationsView({
     ],
     queryFn: ({ signal }) =>
       getNotificationRecipient(selectedId!, recipientId!, { signal }),
-    enabled:
-      Boolean(selectedId && recipientId) && section === "recipients",
+    enabled: Boolean(selectedId && recipientId) && section === "recipients",
   });
 
   const referencesQuery = useQuery({
     queryKey: notificationQueryKeys.references(selectedId ?? ""),
-    queryFn: ({ signal }) =>
-      listNotificationReferences(selectedId!, { signal }),
+    queryFn: ({ signal }) => listNotificationReferences(selectedId!, { signal }),
     enabled:
-      Boolean(selectedId) &&
-      (section === "references" || section === "notifications"),
+      Boolean(selectedId) && (section === "references" || section === "notifications"),
   });
 
-  const referenceId =
-    selectedReferenceId ?? referencesQuery.data?.items[0]?.id ?? null;
+  const referenceId = selectedReferenceId ?? referencesQuery.data?.items[0]?.id ?? null;
   const referenceDetailQuery = useQuery({
     queryKey: ["notifications", "reference", referenceId ?? ""],
-    queryFn: ({ signal }) =>
-      getNotificationReference(referenceId!, { signal }),
+    queryFn: ({ signal }) => getNotificationReference(referenceId!, { signal }),
     enabled: Boolean(referenceId) && section === "references",
   });
 
@@ -513,12 +486,7 @@ export function PlatformNotificationsView({
   const lifecycleMutation = useMutation({
     mutationFn: async (
       action:
-        | "mark-read"
-        | "acknowledge"
-        | "dismiss"
-        | "archive"
-        | "restore"
-        | "transition",
+        "mark-read" | "acknowledge" | "dismiss" | "archive" | "restore" | "transition",
     ) => {
       if (!selectedId) throw new Error("No notification selected.");
       if (action === "mark-read") return markNotificationRead(selectedId);
@@ -576,9 +544,7 @@ export function PlatformNotificationsView({
       setStatusMessage("Copied notification ID.");
       setActionError(null);
     } catch (error) {
-      setActionError(
-        error instanceof Error ? error.message : "Unable to copy ID.",
-      );
+      setActionError(error instanceof Error ? error.message : "Unable to copy ID.");
     }
   }
 
@@ -589,7 +555,12 @@ export function PlatformNotificationsView({
       aria-label="Notifications commands"
       data-testid="notifications-toolbar"
     >
-      <Button type="button" variant="outline" size="sm" onClick={() => void refreshAll()}>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        onClick={() => void refreshAll()}
+      >
         Refresh
       </Button>
       <Button
@@ -601,7 +572,12 @@ export function PlatformNotificationsView({
         {apiMetadataOpen ? "Hide API Metadata" : "Open API Metadata"}
       </Button>
       {selectedId ? (
-        <Button type="button" variant="outline" size="sm" onClick={() => void onCopyId()}>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={() => void onCopyId()}
+        >
           Copy ID
         </Button>
       ) : null}
@@ -728,10 +704,7 @@ export function PlatformNotificationsView({
             testId="card-notifications-count"
           />
           <StatusCard label="Unread / pending" value={String(unreadCount)} />
-          <StatusCard
-            label="Acknowledged"
-            value={String(acknowledgedCount)}
-          />
+          <StatusCard label="Acknowledged" value={String(acknowledgedCount)} />
           <StatusCard label="Archived" value={String(archivedCount)} />
           <StatusCard
             label="Templates"
@@ -756,16 +729,14 @@ export function PlatformNotificationsView({
             value={
               healthQuery.data?.healthy === true
                 ? "Healthy"
-                : healthQuery.data?.status ?? "—"
+                : (healthQuery.data?.status ?? "—")
             }
             testId="card-platform-health"
           />
           <StatusCard
             label="Notification service"
             value={
-              capabilitiesQuery.data?.notificationEnabled
-                ? "Enabled"
-                : "Unavailable"
+              capabilitiesQuery.data?.notificationEnabled ? "Enabled" : "Unavailable"
             }
           />
           <StatusCard
@@ -773,7 +744,7 @@ export function PlatformNotificationsView({
             value={
               readinessQuery.data?.ready === true
                 ? "Ready"
-                : readinessQuery.data?.status ?? "—"
+                : (readinessQuery.data?.status ?? "—")
             }
           />
         </div>
@@ -836,45 +807,31 @@ export function PlatformNotificationsView({
                     <dd className="font-mono">{detailQuery.data.id}</dd>
                   </div>
                   <div>
-                    <dt className="text-[var(--color-muted-foreground)]">
-                      Title
-                    </dt>
+                    <dt className="text-[var(--color-muted-foreground)]">Title</dt>
                     <dd>{detailQuery.data.title}</dd>
                   </div>
                   <div>
-                    <dt className="text-[var(--color-muted-foreground)]">
-                      Summary
-                    </dt>
+                    <dt className="text-[var(--color-muted-foreground)]">Summary</dt>
                     <dd>{detailQuery.data.summary ?? "—"}</dd>
                   </div>
                   <div>
-                    <dt className="text-[var(--color-muted-foreground)]">
-                      Lifecycle
-                    </dt>
+                    <dt className="text-[var(--color-muted-foreground)]">Lifecycle</dt>
                     <dd>{detailQuery.data.status}</dd>
                   </div>
                   <div>
-                    <dt className="text-[var(--color-muted-foreground)]">
-                      Priority
-                    </dt>
+                    <dt className="text-[var(--color-muted-foreground)]">Priority</dt>
                     <dd>{detailQuery.data.priority}</dd>
                   </div>
                   <div>
-                    <dt className="text-[var(--color-muted-foreground)]">
-                      Category
-                    </dt>
+                    <dt className="text-[var(--color-muted-foreground)]">Category</dt>
                     <dd>{detailQuery.data.categoryId ?? "—"}</dd>
                   </div>
                   <div>
-                    <dt className="text-[var(--color-muted-foreground)]">
-                      Channels
-                    </dt>
+                    <dt className="text-[var(--color-muted-foreground)]">Channels</dt>
                     <dd>{detailQuery.data.channelKinds.join(", ") || "—"}</dd>
                   </div>
                   <div>
-                    <dt className="text-[var(--color-muted-foreground)]">
-                      Revision
-                    </dt>
+                    <dt className="text-[var(--color-muted-foreground)]">Revision</dt>
                     <dd>{detailQuery.data.revision}</dd>
                   </div>
                 </dl>
@@ -944,12 +901,8 @@ export function PlatformNotificationsView({
                 <dd>{templateDetailQuery.data.name}</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-muted-foreground)]">
-                  Channels
-                </dt>
-                <dd>
-                  {templateDetailQuery.data.defaultChannelKinds.join(", ")}
-                </dd>
+                <dt className="text-[var(--color-muted-foreground)]">Channels</dt>
+                <dd>{templateDetailQuery.data.defaultChannelKinds.join(", ")}</dd>
               </div>
               <div>
                 <dt className="text-[var(--color-muted-foreground)]">
@@ -1000,9 +953,7 @@ export function PlatformNotificationsView({
                 <dd className="font-mono">{preferenceDetailQuery.data.id}</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-muted-foreground)]">
-                  Quiet hours
-                </dt>
+                <dt className="text-[var(--color-muted-foreground)]">Quiet hours</dt>
                 <dd>{preferenceDetailQuery.data.quietHours ?? "—"}</dd>
               </div>
             </dl>
@@ -1041,9 +992,7 @@ export function PlatformNotificationsView({
                 <dd className="font-mono">{categoryDetailQuery.data.id}</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-muted-foreground)]">
-                  Description
-                </dt>
+                <dt className="text-[var(--color-muted-foreground)]">Description</dt>
                 <dd>{categoryDetailQuery.data.description ?? "—"}</dd>
               </div>
             </dl>
@@ -1077,12 +1026,7 @@ export function PlatformNotificationsView({
             onRowClick={setSelectedChannelId}
             rows={channels.map((item) => ({
               id: item.id,
-              cells: [
-                item.name,
-                item.kind,
-                String(item.enabled),
-                "unavailable",
-              ],
+              cells: [item.name, item.kind, String(item.enabled), "unavailable"],
             }))}
           />
           <div className="rounded-lg border border-[var(--color-border)] p-4">
@@ -1101,17 +1045,13 @@ export function PlatformNotificationsView({
                   <dt className="text-[var(--color-muted-foreground)]">
                     Delivery available
                   </dt>
-                  <dd>
-                    {String(channelDetailQuery.data.deliveryAvailable)}
-                  </dd>
+                  <dd>{String(channelDetailQuery.data.deliveryAvailable)}</dd>
                 </div>
                 <div>
                   <dt className="text-[var(--color-muted-foreground)]">
                     Providers configured
                   </dt>
-                  <dd>
-                    {String(channelDetailQuery.data.providersConfigured)}
-                  </dd>
+                  <dd>{String(channelDetailQuery.data.providersConfigured)}</dd>
                 </div>
               </dl>
             ) : null}
@@ -1158,9 +1098,7 @@ export function PlatformNotificationsView({
                 <dd className="font-mono">{recipientDetailQuery.data.id}</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-muted-foreground)]">
-                  Address hint
-                </dt>
+                <dt className="text-[var(--color-muted-foreground)]">Address hint</dt>
                 <dd>{recipientDetailQuery.data.addressHint ?? "—"}</dd>
               </div>
             </dl>
@@ -1208,9 +1146,7 @@ export function PlatformNotificationsView({
                 <dd>{referenceDetailQuery.data.kind}</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-muted-foreground)]">
-                  Resource
-                </dt>
+                <dt className="text-[var(--color-muted-foreground)]">Resource</dt>
                 <dd>{referenceDetailQuery.data.resourceId}</dd>
               </div>
             </dl>
@@ -1275,16 +1211,13 @@ export function PlatformNotificationsView({
           <StatusCard label="Workers" value="unavailable" />
           <StatusCard label="Event Bus" value="unavailable" />
           <StatusCard label="Realtime" value="unavailable" />
-          <StatusCard
-            label="Persistence"
-            value={diag?.persistenceMode ?? "—"}
-          />
+          <StatusCard label="Persistence" value={diag?.persistenceMode ?? "—"} />
           <StatusCard
             label="Health"
             value={
               healthQuery.data?.healthy === true
                 ? "ok"
-                : healthQuery.data?.status ?? "—"
+                : (healthQuery.data?.status ?? "—")
             }
           />
           <StatusCard
@@ -1292,7 +1225,7 @@ export function PlatformNotificationsView({
             value={
               readinessQuery.data?.ready === true
                 ? "ready"
-                : readinessQuery.data?.status ?? "—"
+                : (readinessQuery.data?.status ?? "—")
             }
           />
           <StatusCard

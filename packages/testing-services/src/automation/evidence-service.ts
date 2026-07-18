@@ -22,7 +22,10 @@ export function createAutomationEvidenceService(
       const registered: AutomationEvidenceRegistration[] = [];
 
       for (const meta of input.evidence) {
-        let storageRef = meta.storageRef ?? meta.pathHint ?? `automation://${input.importId}/${rt.id()}`;
+        let storageRef =
+          meta.storageRef ??
+          meta.pathHint ??
+          `automation://${input.importId}/${rt.id()}`;
         if (meta.bytesBase64) {
           const bytes = Uint8Array.from(Buffer.from(meta.bytesBase64, "base64"));
           const put = await rt.storage.put({

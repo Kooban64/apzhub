@@ -14,18 +14,12 @@ import { missingCredentialsError } from "@apzhub/integration-sdk/errors";
 import type { ErrorTranslationContext } from "@apzhub/integration-sdk/errors";
 import { createHttpIntegrationClient } from "@apzhub/integration-sdk/client";
 
-import {
-  type N8nConfiguration,
-  validateN8nConfiguration,
-} from "./n8n-config";
+import { type N8nConfiguration, validateN8nConfiguration } from "./n8n-config";
 import {
   getN8nExtendedCapabilities,
   type N8nBootstrapConfiguration,
 } from "./n8n-bootstrap";
-import {
-  createN8nVendorErrorMapper,
-  mapN8nUnknownError,
-} from "./n8n-error-mapper";
+import { createN8nVendorErrorMapper, mapN8nUnknownError } from "./n8n-error-mapper";
 import type { FetchFn } from "./internal/n8n-fetch-client";
 import {
   N8nRestClient,
@@ -138,9 +132,7 @@ export class N8nAdapter extends IntegrationAdapterBase {
       authenticationStatus: this.authenticationStatus,
       authMode: this.n8nConfig.authMode,
       extendedCapabilities: [
-        ...getN8nExtendedCapabilities(
-          this.configuration as N8nBootstrapConfiguration,
-        ),
+        ...getN8nExtendedCapabilities(this.configuration as N8nBootstrapConfiguration),
       ],
       coreServices: N8N_CORE_SERVICE_CAPABILITIES.map((capability) => ({
         serviceId: capability.serviceId,
@@ -327,11 +319,7 @@ export class N8nAdapter extends IntegrationAdapterBase {
       {
         name: "n8n_operational_health",
         status:
-          sdkStatus === "healthy"
-            ? "pass"
-            : sdkStatus === "degraded"
-              ? "warn"
-              : "fail",
+          sdkStatus === "healthy" ? "pass" : sdkStatus === "degraded" ? "warn" : "fail",
         message: `Operational health: ${health.level} (${sdkStatus})`,
       },
       {
@@ -422,9 +410,7 @@ export class N8nAdapter extends IntegrationAdapterBase {
     }
 
     const tenantId =
-      context?.tenantId ??
-      this.configuration.connection?.tenantId ??
-      "unknown";
+      context?.tenantId ?? this.configuration.connection?.tenantId ?? "unknown";
     const correlationId = context?.correlationId ?? "n8n-client-auth";
 
     if (this.n8nConfig.authMode === "basic") {
@@ -455,8 +441,7 @@ export class N8nAdapter extends IntegrationAdapterBase {
       };
     }
 
-    const ref =
-      this.n8nConfig.apiKeyRef ?? this.n8nConfig.personalAccessTokenRef;
+    const ref = this.n8nConfig.apiKeyRef ?? this.n8nConfig.personalAccessTokenRef;
     if (!ref) {
       this.authenticationStatus = "missing";
       throw new Error("apiKeyRef / personalAccessTokenRef is required");

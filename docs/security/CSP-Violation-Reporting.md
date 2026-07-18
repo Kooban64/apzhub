@@ -14,21 +14,21 @@ Browsers send CSP violation reports to the platform endpoint configured via `rep
 
 ## Endpoint
 
-| Field | Value |
-|-------|-------|
-| **Method** | `POST` |
-| **Path** | `/api/platform/v1/security/csp-report` |
-| **Auth** | Unauthenticated (public middleware path) |
-| **Max body** | 4096 bytes |
-| **Success** | `204 No Content` |
-| **Invalid JSON** | `400` |
-| **Oversized** | `413` |
+| Field            | Value                                    |
+| ---------------- | ---------------------------------------- |
+| **Method**       | `POST`                                   |
+| **Path**         | `/api/platform/v1/security/csp-report`   |
+| **Auth**         | Unauthenticated (public middleware path) |
+| **Max body**     | 4096 bytes                               |
+| **Success**      | `204 No Content`                         |
+| **Invalid JSON** | `400`                                    |
+| **Oversized**    | `413`                                    |
 
 ### Hosts
 
-| App | Route file |
-|-----|------------|
-| `apps/web` | `app/api/platform/v1/security/csp-report/route.ts` |
+| App                 | Route file                                         |
+| ------------------- | -------------------------------------------------- |
+| `apps/web`          | `app/api/platform/v1/security/csp-report/route.ts` |
 | `apps/law-platform` | `app/api/platform/v1/security/csp-report/route.ts` |
 
 Each host reports to its **same-origin** endpoint.

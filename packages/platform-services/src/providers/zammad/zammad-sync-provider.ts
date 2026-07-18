@@ -15,7 +15,9 @@ export const ZAMMAD_SYNC_PROVIDER_REGISTRATION = {
   priority: 100,
 };
 
-export function createZammadSyncProvider(core: ZammadCoreServices): SupportSyncProvider {
+export function createZammadSyncProvider(
+  core: ZammadCoreServices,
+): SupportSyncProvider {
   return {
     getSyncState(ctx) {
       return withProviderErrorMapping(ctx.correlationId, async () =>

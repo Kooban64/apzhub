@@ -45,18 +45,24 @@ const jsonResponse = (
 
 describe("request builder", () => {
   it("strips trailing slashes and builds query strings", () => {
-    expect(stripTrailingSlash("https://api.example.com/")).toBe("https://api.example.com");
-    expect(normalizePath("health")).toBe("/health");
-    expect(buildUrl("https://api.example.com/", "items", { page: 2, active: true })).toBe(
-      "https://api.example.com/items?page=2&active=true",
+    expect(stripTrailingSlash("https://api.example.com/")).toBe(
+      "https://api.example.com",
     );
+    expect(normalizePath("health")).toBe("/health");
+    expect(
+      buildUrl("https://api.example.com/", "items", { page: 2, active: true }),
+    ).toBe("https://api.example.com/items?page=2&active=true");
   });
 
   it("serializes json and text bodies and rejects placeholders", () => {
-    expect(serializeBody(createJsonBody({ a: 1 })).contentType).toBe("application/json");
+    expect(serializeBody(createJsonBody({ a: 1 })).contentType).toBe(
+      "application/json",
+    );
     expect(serializeBody(createTextBody("hi")).initBody).toBe("hi");
     expect(serializeBody(undefined).bytes).toBe(0);
-    expect(() => serializeBody(createMultipartPlaceholderBody())).toThrow(/placeholder/);
+    expect(() => serializeBody(createMultipartPlaceholderBody())).toThrow(
+      /placeholder/,
+    );
     expect(() => serializeBody(createBinaryPlaceholderBody())).toThrow(/placeholder/);
     expect(() => serializeBody(createStreamPlaceholderBody())).toThrow(/placeholder/);
   });
@@ -64,7 +70,9 @@ describe("request builder", () => {
 
 describe("response pipeline helpers", () => {
   it("detects content types and classifies kinds", () => {
-    expect(detectContentType({ "Content-Type": "application/json" })).toBe("application/json");
+    expect(detectContentType({ "Content-Type": "application/json" })).toBe(
+      "application/json",
+    );
     expect(classifyResponseKind("application/json", "{}", 200)).toBe("json");
     expect(classifyResponseKind("text/plain", "ok", 200)).toBe("text");
     expect(classifyResponseKind("application/octet-stream", "x", 200)).toBe("binary");
@@ -80,9 +88,7 @@ describe("DefaultRetryPolicy", () => {
   it("disables retries by default (maxAttempts=1)", () => {
     const policy = new DefaultRetryPolicy();
     expect(policy.maxAttempts).toBe(1);
-    expect(
-      policy.classify(503, undefined, "GET", 1).retry,
-    ).toBe(false);
+    expect(policy.classify(503, undefined, "GET", 1).retry).toBe(false);
   });
 
   it("retries retryable status codes and respects Retry-After", () => {
@@ -93,13 +99,7 @@ describe("DefaultRetryPolicy", () => {
       jitter: false,
     });
 
-    const decision = policy.classify(
-      429,
-      undefined,
-      "GET",
-      1,
-      { "Retry-After": "2" },
-    );
+    const decision = policy.classify(429, undefined, "GET", 1, { "Retry-After": "2" });
     expect(decision.retry).toBe(true);
     expect(decision.delayMs).toBe(2000);
     expect(parseRetryAfterMs({ "retry-after": "1" })).toBe(1000);
@@ -217,10 +217,13 @@ describe("createTransportClient", () => {
     const fetchFn: FetchFn = vi.fn(async () => {
       calls += 1;
       if (calls === 1) {
-        return jsonResponse({ error: "rate" }, {
-          status: 429,
-          headers: { "Retry-After": "0" },
-        });
+        return jsonResponse(
+          { error: "rate" },
+          {
+            status: 429,
+            headers: { "Retry-After": "0" },
+          },
+        );
       }
       return jsonResponse({ ok: true });
     });
@@ -259,7 +262,9 @@ describe("createTransportClient", () => {
     expect(diagnostics.capabilities.tlsCustomCaSupported).toBe(false);
     expect(diagnostics.features.compression).toBe(true);
     expect(diagnostics.configuration.redirects.maxRedirects).toBe(5);
-    expect(buildAcceptEncodingHeader(diagnostics.configuration.compression)).toContain("gzip");
+    expect(buildAcceptEncodingHeader(diagnostics.configuration.compression)).toContain(
+      "gzip",
+    );
   });
 
   it("injects auth headers from authHeadersProvider", async () => {
@@ -394,7 +399,9 @@ describe("logging redaction", () => {
     expect(entry?.fields.cookie).toBe("[REDACTED]");
     expect(entry?.fields.token).toBe("[REDACTED]");
     expect(isSensitiveHeaderName("Authorization")).toBe(true);
-    expect(redactHeaders({ Authorization: "Bearer x", Accept: "application/json" })).toEqual({
+    expect(
+      redactHeaders({ Authorization: "Bearer x", Accept: "application/json" }),
+    ).toEqual({
       Authorization: "[REDACTED]",
       Accept: "application/json",
     });
@@ -616,10 +623,9 @@ describe("additional transport coverage", () => {
     expect(text.kind).toBe("text");
     expect(text.data).toBe("plain");
 
-    const head = await decodeResponse(
-      new Response("ignored", { status: 200 }),
-      { method: "HEAD" },
-    );
+    const head = await decodeResponse(new Response("ignored", { status: 200 }), {
+      method: "HEAD",
+    });
     expect(head.kind).toBe("empty");
 
     const emptyJson = await decodeResponse(withType("", "application/json"));

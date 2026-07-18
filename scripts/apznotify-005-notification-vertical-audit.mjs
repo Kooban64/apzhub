@@ -35,7 +35,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -135,7 +136,10 @@ const DELIVERY_METHOD =
 // ---------------------------------------------------------------------------
 scan(walk(join(ROOT, "apps/web/components/notifications")), [
   { rule: "workbench-no-platform-services", pattern: /@apzhub\/platform-services/ },
-  { rule: "workbench-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+  {
+    rule: "workbench-no-gateway",
+    pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+  },
   { rule: "workbench-no-notification-core", pattern: /@apzhub\/notification-core/ },
   { rule: "workbench-no-persistence", pattern: /@apzhub\/notification-persistence/ },
   { rule: "workbench-no-event-bus", pattern: /\bEventBus\b|@apzhub\/event-bus/ },
@@ -150,7 +154,10 @@ scan(
   ),
   [
     { rule: "client-no-platform-services", pattern: /@apzhub\/platform-services/ },
-    { rule: "client-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+    {
+      rule: "client-no-gateway",
+      pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+    },
     { rule: "client-no-notification-core", pattern: /@apzhub\/notification-core/ },
     { rule: "client-no-persistence", pattern: /@apzhub\/notification-persistence/ },
     { rule: "client-no-event-bus", pattern: /\bEventBus\b|@apzhub\/event-bus/ },
@@ -286,7 +293,8 @@ scan(httpFiles, [
       file: "apps/web/lib/api/v1/handlers",
       line: 1,
       rule: "http-missing-gateway",
-      detail: "Notification handlers must call getPlatformServiceGateway().notification.*",
+      detail:
+        "Notification handlers must call getPlatformServiceGateway().notification.*",
     });
   }
 }
@@ -470,7 +478,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.21.0",
+  "0.25.0",
   "version-platform-services",
 );
 requirePackageVersion(

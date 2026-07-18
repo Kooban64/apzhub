@@ -7,12 +7,12 @@
 
 ## Packages
 
-| Package | Version | Role |
-| ------- | ------- | ---- |
-| `@apzhub/workflow-contracts` | 0.2.0 | Models, permissions, nested gateway types |
-| `@apzhub/workflow-core` | 0.1.1 | Domain service + validation + lifecycle |
-| `@apzhub/workflow-persistence` | 0.1.1 | In-memory + PostgreSQL repos |
-| `@apzhub/platform-services` | 0.19.0 | Thin wrappers + gateway + authz |
+| Package                        | Version | Role                                      |
+| ------------------------------ | ------- | ----------------------------------------- |
+| `@apzhub/workflow-contracts`   | 0.2.0   | Models, permissions, nested gateway types |
+| `@apzhub/workflow-core`        | 0.1.1   | Domain service + validation + lifecycle   |
+| `@apzhub/workflow-persistence` | 0.1.1   | In-memory + PostgreSQL repos              |
+| `@apzhub/platform-services`    | 0.19.0  | Thin wrappers + gateway + authz           |
 
 ## Consume via gateway
 

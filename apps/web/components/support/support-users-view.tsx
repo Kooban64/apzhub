@@ -19,11 +19,7 @@ import {
   SupportTable,
 } from "./support-ui";
 
-export function SupportUsersView({
-  userId,
-}: {
-  readonly userId?: string;
-}) {
+export function SupportUsersView({ userId }: { readonly userId?: string }) {
   const router = useRouter();
   const [search, setSearch] = useState("");
 
@@ -62,7 +58,8 @@ export function SupportUsersView({
           role="note"
           data-testid="support-users-identity-banner"
         >
-          These are Support-domain users (agents/customers), not platform identity accounts.
+          These are Support-domain users (agents/customers), not platform identity
+          accounts.
         </div>
         <div className="space-y-2 text-sm" data-testid="support-user-detail">
           <p>
@@ -81,7 +78,8 @@ export function SupportUsersView({
             <span className="font-medium">Active:</span> {user.active ? "Yes" : "No"}
           </p>
           <p>
-            <span className="font-medium">Updated:</span> {formatSupportDate(user.updatedAt)}
+            <span className="font-medium">Updated:</span>{" "}
+            {formatSupportDate(user.updatedAt)}
           </p>
         </div>
       </PageShell>
@@ -98,7 +96,8 @@ export function SupportUsersView({
         role="note"
         data-testid="support-users-identity-banner"
       >
-        These are Support-domain users (agents/customers), not platform identity accounts.
+        These are Support-domain users (agents/customers), not platform identity
+        accounts.
       </div>
       <Input
         label="Search"

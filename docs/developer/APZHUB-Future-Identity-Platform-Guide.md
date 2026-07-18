@@ -13,17 +13,17 @@ The frozen Identity Administration programme remains the canonical metadata Syst
 
 ## Possible future programmes
 
-| Programme | Intent |
-| --- | --- |
-| Authentication Administration | Login, logout, session administration, password/MFA policy surfaces |
-| Provisioning Framework | Controlled account creation in backend engines from service assignments |
-| SCIM Integration | SCIM inbound/outbound identity exchange |
-| LDAP Integration | LDAP directory connectivity |
-| Microsoft Entra ID Connector | Entra ID integration |
-| Google Workspace Connector | Google Workspace directory integration |
-| External Directory Synchronisation | Scheduled/directory sync pipelines |
-| Identity Federation | Federation / trust relationships |
-| Identity Analytics | Analytics over identity metadata (derived indexes only) |
+| Programme                          | Intent                                                                  |
+| ---------------------------------- | ----------------------------------------------------------------------- |
+| Authentication Administration      | Login, logout, session administration, password/MFA policy surfaces     |
+| Provisioning Framework             | Controlled account creation in backend engines from service assignments |
+| SCIM Integration                   | SCIM inbound/outbound identity exchange                                 |
+| LDAP Integration                   | LDAP directory connectivity                                             |
+| Microsoft Entra ID Connector       | Entra ID integration                                                    |
+| Google Workspace Connector         | Google Workspace directory integration                                  |
+| External Directory Synchronisation | Scheduled/directory sync pipelines                                      |
+| Identity Federation                | Federation / trust relationships                                        |
+| Identity Analytics                 | Analytics over identity metadata (derived indexes only)                 |
 
 ## Rules for future work
 

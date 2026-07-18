@@ -48,14 +48,14 @@ Existing SoR `linkEvidence` / `linkCertifications` / `linkReleases` / `linkArtif
 
 ## Testing
 
-| Suite | Result |
-| ----- | ------ |
-| GitHub providers | green |
-| Live gateway facets + importFromProvider | green |
-| github_actions SoR import | green |
-| Release consumePipelineSummary | green |
-| Architecture boundary | green |
-| Combined focused | **11+** tests |
+| Suite                                    | Result        |
+| ---------------------------------------- | ------------- |
+| GitHub providers                         | green         |
+| Live gateway facets + importFromProvider | green         |
+| github_actions SoR import                | green         |
+| Release consumePipelineSummary           | green         |
+| Architecture boundary                    | green         |
+| Combined focused                         | **11+** tests |
 
 No live GitHub / network.
 
@@ -65,22 +65,22 @@ New provider + live service modules: **100%** statements/lines/functions (branch
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| typecheck (contracts / testing-services) | PASS |
-| lint (017 modules) | PASS |
-| tests (017 suites) | PASS |
-| coverage ≥95% (new modules) | PASS |
-| architecture / boundary | PASS |
-| authorization mappings | PASS |
+| Gate                                     | Result |
+| ---------------------------------------- | ------ |
+| typecheck (contracts / testing-services) | PASS   |
+| lint (017 modules)                       | PASS   |
+| tests (017 suites)                       | PASS   |
+| coverage ≥95% (new modules)              | PASS   |
+| architecture / boundary                  | PASS   |
+| authorization mappings                   | PASS   |
 
 Pre-existing `@apzhub/platform-services` full-package typecheck noise (Plane/Zammad harness + older tests) unchanged; no errors in new 017 files.
 
 ## Technical Debt
 
-- Live facets without resolver return `PROVIDER_CAPABILITY_UNSUPPORTED` stubs  
-- Declared capability `"pipeline"` unused (specific `pipeline_*` keys used)  
-- HTTP/Workbench deferred to **APZTCMS-018**  
+- Live facets without resolver return `PROVIDER_CAPABILITY_UNSUPPORTED` stubs
+- Declared capability `"pipeline"` unused (specific `pipeline_*` keys used)
+- HTTP/Workbench deferred to **APZTCMS-018**
 - App bootstrap feature-flag wiring for GitHub Actions optional follow-up
 
 ## Recommendation

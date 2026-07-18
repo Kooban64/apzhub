@@ -29,68 +29,68 @@ createPlaneAdapter()
        → PlaneVendorErrorMapper
 ```
 
-| Layer | Component |
-|-------|-----------|
-| SDK foundation | `IntegrationAdapterBase`, `AdapterContext`, `AdapterFactory` |
-| Bootstrap | `createPlaneBootstrapConfiguration`, capability manifest |
-| Adapter | `PlaneAdapter` — lifecycle hooks only |
-| Transport | `PlaneFetchClient` — temporary until OSS-100-06 HTTP transport |
-| Internal client | `PlaneClient` — instance/workspace probes |
-| Errors | `PlaneVendorErrorMapper` |
-| Factory | `createPlaneAdapter` / `disposePlaneAdapter` |
+| Layer           | Component                                                      |
+| --------------- | -------------------------------------------------------------- |
+| SDK foundation  | `IntegrationAdapterBase`, `AdapterContext`, `AdapterFactory`   |
+| Bootstrap       | `createPlaneBootstrapConfiguration`, capability manifest       |
+| Adapter         | `PlaneAdapter` — lifecycle hooks only                          |
+| Transport       | `PlaneFetchClient` — temporary until OSS-100-06 HTTP transport |
+| Internal client | `PlaneClient` — instance/workspace probes                      |
+| Errors          | `PlaneVendorErrorMapper`                                       |
+| Factory         | `createPlaneAdapter` / `disposePlaneAdapter`                   |
 
 ---
 
 ## Files created
 
-| Path | Purpose |
-|------|---------|
-| `integrations/plane/package.json` | `@apzhub/integration-plane` v0.1.0 |
-| `integrations/plane/tsconfig.json` | Package TS config |
-| `integrations/plane/docs/PLANE-ADAPTER.md` | Adapter documentation |
-| `integrations/plane/src/plane-config.ts` | Typed configuration + validation |
-| `integrations/plane/src/plane-bootstrap.ts` | Manifest and connection bootstrap |
-| `integrations/plane/src/plane-error-mapper.ts` | `PlaneVendorErrorMapper` |
-| `integrations/plane/src/plane-adapter.ts` | `PlaneAdapter` |
-| `integrations/plane/src/plane-factory.ts` | Factory helpers |
-| `integrations/plane/src/index.ts` | Public exports |
-| `integrations/plane/src/internal/plane-api-types.ts` | Internal API shapes |
-| `integrations/plane/src/internal/plane-fetch-client.ts` | Fetch transport |
-| `integrations/plane/src/internal/plane-client.ts` | Internal REST client |
-| `integrations/plane/src/testing/mock-plane-api.ts` | Test fixtures |
-| `integrations/plane/src/*.test.ts` | 24 unit tests (5 files) |
-| `docs/sprint/OSS-101-04-completion-report.md` | This report |
+| Path                                                    | Purpose                            |
+| ------------------------------------------------------- | ---------------------------------- |
+| `integrations/plane/package.json`                       | `@apzhub/integration-plane` v0.1.0 |
+| `integrations/plane/tsconfig.json`                      | Package TS config                  |
+| `integrations/plane/docs/PLANE-ADAPTER.md`              | Adapter documentation              |
+| `integrations/plane/src/plane-config.ts`                | Typed configuration + validation   |
+| `integrations/plane/src/plane-bootstrap.ts`             | Manifest and connection bootstrap  |
+| `integrations/plane/src/plane-error-mapper.ts`          | `PlaneVendorErrorMapper`           |
+| `integrations/plane/src/plane-adapter.ts`               | `PlaneAdapter`                     |
+| `integrations/plane/src/plane-factory.ts`               | Factory helpers                    |
+| `integrations/plane/src/index.ts`                       | Public exports                     |
+| `integrations/plane/src/internal/plane-api-types.ts`    | Internal API shapes                |
+| `integrations/plane/src/internal/plane-fetch-client.ts` | Fetch transport                    |
+| `integrations/plane/src/internal/plane-client.ts`       | Internal REST client               |
+| `integrations/plane/src/testing/mock-plane-api.ts`      | Test fixtures                      |
+| `integrations/plane/src/*.test.ts`                      | 24 unit tests (5 files)            |
+| `docs/sprint/OSS-101-04-completion-report.md`           | This report                        |
 
 ---
 
 ## Files modified
 
-| Path | Change |
-|------|--------|
-| `tsconfig.base.json` | `@apzhub/integration-plane` path alias |
-| `vitest.config.ts` | Integration test include + aliases |
+| Path                                                     | Change                                                   |
+| -------------------------------------------------------- | -------------------------------------------------------- |
+| `tsconfig.base.json`                                     | `@apzhub/integration-plane` path alias                   |
+| `vitest.config.ts`                                       | Integration test include + aliases                       |
 | `packages/integration-sdk/src/adapter/manifest-types.ts` | `headerName` on `AdapterConnectionDefaults` (defect fix) |
-| `packages/integration-sdk/src/adapter/adapter-base.ts` | Pass auth fields to connection register |
-| `docs/foundation/CURRENT-STATE.md` | OSS-101-04 complete |
-| `docs/foundation/CURRENT-MILESTONE.md` | Stop at OSS-101-04 |
-| `docs/foundation/ACTIVE-BACKLOG.md` | OSS-101-04 status |
-| `docs/foundation/AI-CONTEXT.md` | Milestone roadmap |
-| `docs/README.md` | Registry entry |
-| `docs/backlog/OSS-101-Plane-Integration-Backlog.md` | OSS-101-04 complete |
-| `docs/architecture/APZHUB-Plane-Adapter-Design.md` | Foundation delivered status |
+| `packages/integration-sdk/src/adapter/adapter-base.ts`   | Pass auth fields to connection register                  |
+| `docs/foundation/CURRENT-STATE.md`                       | OSS-101-04 complete                                      |
+| `docs/foundation/CURRENT-MILESTONE.md`                   | Stop at OSS-101-04                                       |
+| `docs/foundation/ACTIVE-BACKLOG.md`                      | OSS-101-04 status                                        |
+| `docs/foundation/AI-CONTEXT.md`                          | Milestone roadmap                                        |
+| `docs/README.md`                                         | Registry entry                                           |
+| `docs/backlog/OSS-101-Plane-Integration-Backlog.md`      | OSS-101-04 complete                                      |
+| `docs/architecture/APZHUB-Plane-Adapter-Design.md`       | Foundation delivered status                              |
 
 ---
 
 ## Test statistics
 
-| Suite | Tests |
-|-------|-------|
-| `plane-config.test.ts` | 3 |
-| `plane-error-mapper.test.ts` | 6 |
-| `plane-bootstrap.test.ts` | 2 |
-| `plane-factory.test.ts` | 3 |
-| `plane-adapter.test.ts` | 10 |
-| **Total** | **24** |
+| Suite                        | Tests  |
+| ---------------------------- | ------ |
+| `plane-config.test.ts`       | 3      |
+| `plane-error-mapper.test.ts` | 6      |
+| `plane-bootstrap.test.ts`    | 2      |
+| `plane-factory.test.ts`      | 3      |
+| `plane-adapter.test.ts`      | 10     |
+| **Total**                    | **24** |
 
 All Plane API responses mocked — no live Plane instance required.
 
@@ -100,11 +100,11 @@ Integration SDK adapter tests: 13 (unchanged, pass with SDK defect fix).
 
 ## Coverage (plane package)
 
-| Metric | `integrations/plane/src` |
-|--------|---------------------------|
-| Lines | 91.72% |
-| Branches | 73.64% |
-| Functions | 100% |
+| Metric    | `integrations/plane/src` |
+| --------- | ------------------------ |
+| Lines     | 91.72%                   |
+| Branches  | 73.64%                   |
+| Functions | 100%                     |
 
 ---
 
@@ -118,24 +118,24 @@ Integration SDK adapter tests: 13 (unchanged, pass with SDK defect fix).
 
 ## Outstanding technical debt
 
-| Item | Notes |
-|------|-------|
-| HTTP transport | `PlaneFetchClient` interim — replace with SDK transport (OSS-100-06) |
-| Provisioning / entity mapping | OSS-101-04 scope excluded; OSS-101-05+ |
-| Control plane registration | Health-only ops console wiring deferred to OSS-101-09 |
-| Retry policy execution | Config typed; retry not applied in fetch layer yet |
-| Extended capabilities in SDK enum | `users`, `workspaces`, `version` in metadata until SDK absorbs |
+| Item                              | Notes                                                                |
+| --------------------------------- | -------------------------------------------------------------------- |
+| HTTP transport                    | `PlaneFetchClient` interim — replace with SDK transport (OSS-100-06) |
+| Provisioning / entity mapping     | OSS-101-04 scope excluded; OSS-101-05+                               |
+| Control plane registration        | Health-only ops console wiring deferred to OSS-101-09                |
+| Retry policy execution            | Config typed; retry not applied in fetch layer yet                   |
+| Extended capabilities in SDK enum | `users`, `workspaces`, `version` in metadata until SDK absorbs       |
 
 ---
 
 ## Risks
 
-| Risk | Mitigation |
-|------|------------|
-| Adapters duplicate SDK cross-cutting logic | PlaneAdapter reviewed — hooks only |
-| Secret materialisation pattern inconsistent | Documented: AuthProvider validate + SecretProvider resolve |
-| Plane API version drift | Version range in manifest metadata; `discoverVersion()` at connect |
-| Per-adapter fetch clients until OSS-100-06 | Documented debt; swap to SDK transport |
+| Risk                                        | Mitigation                                                         |
+| ------------------------------------------- | ------------------------------------------------------------------ |
+| Adapters duplicate SDK cross-cutting logic  | PlaneAdapter reviewed — hooks only                                 |
+| Secret materialisation pattern inconsistent | Documented: AuthProvider validate + SecretProvider resolve         |
+| Plane API version drift                     | Version range in manifest metadata; `discoverVersion()` at connect |
+| Per-adapter fetch clients until OSS-100-06  | Documented debt; swap to SDK transport                             |
 
 ---
 
@@ -161,14 +161,14 @@ Integration SDK adapter tests: 13 (unchanged, pass with SDK defect fix).
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| `pnpm --filter @apzhub/integration-plane typecheck` | Pass |
-| `pnpm typecheck` (monorepo) | Pass |
-| `pnpm vitest run integrations/plane` | Pass — 24 tests |
-| `pnpm vitest run packages/integration-sdk integrations/plane` | Pass — 89 tests |
-| `pnpm eslint integrations/plane` | Pass |
-| Full `pnpm test` | Not run in this session (scoped verification) |
+| Gate                                                          | Result                                        |
+| ------------------------------------------------------------- | --------------------------------------------- |
+| `pnpm --filter @apzhub/integration-plane typecheck`           | Pass                                          |
+| `pnpm typecheck` (monorepo)                                   | Pass                                          |
+| `pnpm vitest run integrations/plane`                          | Pass — 24 tests                               |
+| `pnpm vitest run packages/integration-sdk integrations/plane` | Pass — 89 tests                               |
+| `pnpm eslint integrations/plane`                              | Pass                                          |
+| Full `pnpm test`                                              | Not run in this session (scoped verification) |
 
 ---
 

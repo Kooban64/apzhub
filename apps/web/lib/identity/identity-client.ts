@@ -104,8 +104,7 @@ async function requestJson<T>(
     },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiSuccessEnvelope<T>
-    | ApiErrorEnvelope;
+    ApiSuccessEnvelope<T> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new IdentityClientError({
@@ -132,8 +131,7 @@ async function requestCollection<T>(
     headers: { accept: "application/json", ...(options?.headers ?? {}) },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiCollectionEnvelope<unknown>
-    | ApiErrorEnvelope;
+    ApiCollectionEnvelope<unknown> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new IdentityClientError({
@@ -432,7 +430,10 @@ export function createHttpIdentityClient() {
         options,
       ).then(mapUser);
     },
-    createUser(input: CreateIdentityUserClientInput, options?: IdentityClientRequestOptions) {
+    createUser(
+      input: CreateIdentityUserClientInput,
+      options?: IdentityClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/users`,
         { method: "POST", body: JSON.stringify(input) },
@@ -454,7 +455,10 @@ export function createHttpIdentityClient() {
     // -----------------------------------------------------------------
     // Groups
     // -----------------------------------------------------------------
-    listGroups(query?: IdentityListClientQuery, options?: IdentityClientRequestOptions) {
+    listGroups(
+      query?: IdentityListClientQuery,
+      options?: IdentityClientRequestOptions,
+    ) {
       return requestCollection(
         `${API_BASE}/groups${buildQuery(queryRecord(query))}`,
         mapGroup,
@@ -468,7 +472,10 @@ export function createHttpIdentityClient() {
         options,
       ).then(mapGroup);
     },
-    createGroup(input: CreateIdentityGroupClientInput, options?: IdentityClientRequestOptions) {
+    createGroup(
+      input: CreateIdentityGroupClientInput,
+      options?: IdentityClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/groups`,
         { method: "POST", body: JSON.stringify(input) },
@@ -504,7 +511,10 @@ export function createHttpIdentityClient() {
         options,
       ).then(mapRole);
     },
-    createRole(input: CreateIdentityRoleClientInput, options?: IdentityClientRequestOptions) {
+    createRole(
+      input: CreateIdentityRoleClientInput,
+      options?: IdentityClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/roles`,
         { method: "POST", body: JSON.stringify(input) },
@@ -568,7 +578,10 @@ export function createHttpIdentityClient() {
     // -----------------------------------------------------------------
     // Tenants
     // -----------------------------------------------------------------
-    listTenants(query?: IdentityListClientQuery, options?: IdentityClientRequestOptions) {
+    listTenants(
+      query?: IdentityListClientQuery,
+      options?: IdentityClientRequestOptions,
+    ) {
       return requestCollection(
         `${API_BASE}/tenants${buildQuery(queryRecord(query))}`,
         mapTenant,
@@ -582,7 +595,10 @@ export function createHttpIdentityClient() {
         options,
       ).then(mapTenant);
     },
-    createTenant(input: CreateIdentityTenantClientInput, options?: IdentityClientRequestOptions) {
+    createTenant(
+      input: CreateIdentityTenantClientInput,
+      options?: IdentityClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/tenants`,
         { method: "POST", body: JSON.stringify(input) },
@@ -646,7 +662,10 @@ export function createHttpIdentityClient() {
     // -----------------------------------------------------------------
     // Positions
     // -----------------------------------------------------------------
-    listPositions(query?: IdentityListClientQuery, options?: IdentityClientRequestOptions) {
+    listPositions(
+      query?: IdentityListClientQuery,
+      options?: IdentityClientRequestOptions,
+    ) {
       return requestCollection(
         `${API_BASE}/positions${buildQuery(queryRecord(query))}`,
         mapPosition,
@@ -873,7 +892,10 @@ export function createHttpIdentityClient() {
     // -----------------------------------------------------------------
     // Policies
     // -----------------------------------------------------------------
-    listPolicies(query?: IdentityListClientQuery, options?: IdentityClientRequestOptions) {
+    listPolicies(
+      query?: IdentityListClientQuery,
+      options?: IdentityClientRequestOptions,
+    ) {
       return requestCollection(
         `${API_BASE}/policies${buildQuery(queryRecord(query))}`,
         mapPolicy,
@@ -887,7 +909,10 @@ export function createHttpIdentityClient() {
         options,
       ).then(mapPolicy);
     },
-    createPolicy(input: CreateIdentityPolicyClientInput, options?: IdentityClientRequestOptions) {
+    createPolicy(
+      input: CreateIdentityPolicyClientInput,
+      options?: IdentityClientRequestOptions,
+    ) {
       return requestJson(
         `${API_BASE}/policies`,
         { method: "POST", body: JSON.stringify(input) },

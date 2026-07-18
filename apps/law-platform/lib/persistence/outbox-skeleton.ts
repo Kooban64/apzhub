@@ -15,8 +15,8 @@ export interface OutboxEventDraft {
 }
 
 /**
- * Outbox skeleton — records events for future worker delivery.
- * No replay, retries, or workers in LAW-012-02.
+ * Records durable outbox events for PCv2-02 worker delivery
+ * (`@apzhub/platform-outbox`). Write path only — do not drain here.
  */
 export async function recordOutboxEvent(
   context: LawPersistenceContext,

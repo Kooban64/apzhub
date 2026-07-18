@@ -9,7 +9,10 @@ import {
 } from "@apzhub/testing-contracts";
 import type { TestSuiteRecord } from "@apzhub/testing-persistence";
 
-import { DomainRuleError, assertTestStatusTransition } from "../lifecycle/state-machines";
+import {
+  DomainRuleError,
+  assertTestStatusTransition,
+} from "../lifecycle/state-machines";
 import { toRepositoryContext } from "../mapping/context";
 import { assertNonEmpty, assertValidTestStatus } from "../validation/domain-validation";
 import { requireFound } from "./errors";
@@ -93,7 +96,10 @@ export function createTestSuiteService(rt: ServiceRuntime): TestSuiteService {
         assertTestStatusTransition(existing.status, input.status);
       }
       if (input.parentSuiteId === id) {
-        throw new DomainRuleError("invalid_relationship", "Suite cannot be its own parent");
+        throw new DomainRuleError(
+          "invalid_relationship",
+          "Suite cannot be its own parent",
+        );
       }
       const row = await rt.persistence.testSuites.update(rctx, id, existing.revision, {
         name: input.name,
@@ -124,7 +130,9 @@ export function createTestSuiteService(rt: ServiceRuntime): TestSuiteService {
         "test_suite",
         id,
       );
-      return toDomain(await rt.persistence.testSuites.archive(rctx, id, existing.revision));
+      return toDomain(
+        await rt.persistence.testSuites.archive(rctx, id, existing.revision),
+      );
     },
     async clone(ctx, id, options) {
       const rctx = toRepositoryContext(ctx);
@@ -178,7 +186,9 @@ export function createTestSuiteService(rt: ServiceRuntime): TestSuiteService {
       return toDomain(row);
     },
     async setParent(ctx, id, parentSuiteId) {
-      return this.update(ctx, id, { parentSuiteId: parentSuiteId ?? undefined } as never);
+      return this.update(ctx, id, {
+        parentSuiteId: parentSuiteId ?? undefined,
+      } as never);
     },
     async reorder(ctx, id, sortOrder: number) {
       return this.update(ctx, id, { sortOrder });

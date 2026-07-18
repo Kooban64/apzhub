@@ -17,10 +17,10 @@ Workbench → Typed Client → HTTP → Gateway → RequestPipeline → Authz
 
 ## Change policy
 
-| Change type | Requirement |
-| --- | --- |
-| Behaviour / architecture | ADR + owner approval + new milestone |
-| Documentation-only governance | Allowed under wave/closeout milestones |
+| Change type                        | Requirement                                     |
+| ---------------------------------- | ----------------------------------------------- |
+| Behaviour / architecture           | ADR + owner approval + new milestone            |
+| Documentation-only governance      | Allowed under wave/closeout milestones          |
 | Runtime/secrets/flags capabilities | New programme — not Configuration SoR extension |
 
 ## Verdict

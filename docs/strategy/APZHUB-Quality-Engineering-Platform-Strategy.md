@@ -3,7 +3,7 @@
 > **Status:** **SUPERSEDED for product identity** — use **[APZ TCMS Product Vision](./APZHUB-APZ-TCMS-Product-Vision.md)** and **APZTCMS-*** milestones (APZTCMS-001 complete). Retained as planning predecessor only. Kiwi TCMS wave remains superseded.
 
 **Milestone:** OSS-002  
-**Status:** Approved strategy — planning only; implementation via QE-001+ *(delivery IDs superseded by APZTCMS)*  
+**Status:** Approved strategy — planning only; implementation via QE-001+ _(delivery IDs superseded by APZTCMS)_  
 **Type:** Native APZHUB capability (Wave 5)  
 **Supersedes:** Kiwi TCMS integration plan (OSS-001 Wave 5)
 
@@ -19,14 +19,14 @@ Users see **Quality Engineering**. They do not see Kiwi TCMS or any external tes
 
 ## Strategic rationale
 
-| Driver | Detail |
-|--------|--------|
-| **Platform coherence** | One APZHUB UX for requirements → tests → execution → gates → release |
-| **Playwright-first** | APZHUB already mandates Playwright (015); quality platform owns execution lifecycle |
-| **AI-native** | Test generation, failure analysis, and coverage insights as governed platform features |
+| Driver                        | Detail                                                                                  |
+| ----------------------------- | --------------------------------------------------------------------------------------- |
+| **Platform coherence**        | One APZHUB UX for requirements → tests → execution → gates → release                    |
+| **Playwright-first**          | APZHUB already mandates Playwright (015); quality platform owns execution lifecycle     |
+| **AI-native**                 | Test generation, failure analysis, and coverage insights as governed platform features  |
 | **Platform Core integration** | Events, search, notifications, activity, governance, provisioning — no adapter sync lag |
-| **Release certification** | Quality gates block releases across Projects, Automation, and CI (M17) |
-| **Commercial potential** | Standalone quality tier for APZHUB SaaS and enterprise offerings |
+| **Release certification**     | Quality gates block releases across Projects, Automation, and CI (M17)                  |
+| **Commercial potential**      | Standalone quality tier for APZHUB SaaS and enterprise offerings                        |
 
 ---
 
@@ -56,35 +56,35 @@ Users see **Quality Engineering**. They do not see Kiwi TCMS or any external tes
 
 ## Capability classification
 
-| Attribute | Value |
-|-----------|-------|
-| User-facing name | Quality Engineering |
-| Module ID | `quality-engineering` |
-| Platform Service | `QualityEngineeringService` |
-| Engine | APZHUB native (platform PostgreSQL) |
-| Wave | 5 (replaces OSS Wave 5 Kiwi) |
-| Type | Native product module |
-| Adapter | None — internal engine boundary only |
+| Attribute        | Value                                |
+| ---------------- | ------------------------------------ |
+| User-facing name | Quality Engineering                  |
+| Module ID        | `quality-engineering`                |
+| Platform Service | `QualityEngineeringService`          |
+| Engine           | APZHUB native (platform PostgreSQL)  |
+| Wave             | 5 (replaces OSS Wave 5 Kiwi)         |
+| Type             | Native product module                |
+| Adapter          | None — internal engine boundary only |
 
 ---
 
 ## Platform Core consumption
 
-| Capability | Usage |
-|------------|-------|
-| Identity & tenant | Tenant-scoped test assets |
-| Authorization | QE permissions; role-based test execution |
-| Governance | Feature enablement; commercial tier gating |
-| Provisioning | Tenant QE workspace seed |
-| Lifecycle | Product registration; maintenance behaviour |
-| Operations | Health, queue depth, runner status |
-| Events (029) | Test run completed, gate failed, defect linked |
-| Notifications (021) | Run failures, gate blocks, assignment |
-| Activity (007) | Execution and certification timeline |
-| Search (020) | Test cases, plans, results index |
-| Knowledge (020) | Link tests to docs and requirements |
-| Personalisation | Workbench layout, filters, dashboards |
-| Security | API guards, audit, evidence access control |
+| Capability          | Usage                                          |
+| ------------------- | ---------------------------------------------- |
+| Identity & tenant   | Tenant-scoped test assets                      |
+| Authorization       | QE permissions; role-based test execution      |
+| Governance          | Feature enablement; commercial tier gating     |
+| Provisioning        | Tenant QE workspace seed                       |
+| Lifecycle           | Product registration; maintenance behaviour    |
+| Operations          | Health, queue depth, runner status             |
+| Events (029)        | Test run completed, gate failed, defect linked |
+| Notifications (021) | Run failures, gate blocks, assignment          |
+| Activity (007)      | Execution and certification timeline           |
+| Search (020)        | Test cases, plans, results index               |
+| Knowledge (020)     | Link tests to docs and requirements            |
+| Personalisation     | Workbench layout, filters, dashboards          |
+| Security            | API guards, audit, evidence access control     |
 
 ---
 
@@ -100,11 +100,11 @@ Users see **Quality Engineering**. They do not see Kiwi TCMS or any external tes
 
 ## AI-native roadmap (governed)
 
-| Phase | AI capability | Governance |
-|-------|---------------|------------|
-| QE-010 | Test generation from requirements | Human review required; audit trail |
-| QE-011 | Failure analysis and grouping | No auto-close defects; suggestions only |
-| Future | Coverage gap analysis | Permission-gated; tenant data isolation |
+| Phase  | AI capability                     | Governance                              |
+| ------ | --------------------------------- | --------------------------------------- |
+| QE-010 | Test generation from requirements | Human review required; audit trail      |
+| QE-011 | Failure analysis and grouping     | No auto-close defects; suggestions only |
+| Future | Coverage gap analysis             | Permission-gated; tenant data isolation |
 
 All AI features follow [AI Strategy](./APZHUB-AI-Strategy.md) — no silent automation of certification decisions.
 
@@ -123,11 +123,11 @@ Quality Engineering owns **release gate evaluation**:
 
 ## Commercial product potential
 
-| Tier | Capability |
-|------|------------|
-| **Bundled** | Basic test management + manual execution |
-| **Professional** | Playwright automation + release gates |
-| **Enterprise** | AI generation/analysis + advanced analytics + multi-project certification |
+| Tier             | Capability                                                                |
+| ---------------- | ------------------------------------------------------------------------- |
+| **Bundled**      | Basic test management + manual execution                                  |
+| **Professional** | Playwright automation + release gates                                     |
+| **Enterprise**   | AI generation/analysis + advanced analytics + multi-project certification |
 
 Entitlements via Platform Governance — not separate product login.
 
@@ -135,13 +135,13 @@ Entitlements via Platform Governance — not separate product login.
 
 ## Dependencies
 
-| Dependency | Required for |
-|------------|--------------|
-| Platform Core v2 certified | Foundation |
-| PCv2-02 Workers | Async execution, outbox |
-| M17 CI/CD | Pipeline integration, gate enforcement |
-| Wave 1 Projects (OSS-101) | Defect and milestone linking |
-| OSS-002 Capability Abstraction Standard | Pattern compliance |
+| Dependency                              | Required for                           |
+| --------------------------------------- | -------------------------------------- |
+| Platform Core v2 certified              | Foundation                             |
+| PCv2-02 Workers                         | Async execution, outbox                |
+| M17 CI/CD                               | Pipeline integration, gate enforcement |
+| Wave 1 Projects (OSS-101)               | Defect and milestone linking           |
+| OSS-002 Capability Abstraction Standard | Pattern compliance                     |
 
 ---
 

@@ -11,16 +11,14 @@ import type {
 
 import { ObserveDomainError } from "../ports/repository-ports";
 
-const HEALTH_TRANSITIONS: Record<
-  ObserveHealthStatus,
-  readonly ObserveHealthStatus[]
-> = {
-  unknown: ["healthy", "degraded", "unhealthy", "maintenance"],
-  healthy: ["degraded", "unhealthy", "maintenance", "unknown"],
-  degraded: ["healthy", "unhealthy", "maintenance", "unknown"],
-  unhealthy: ["healthy", "degraded", "maintenance", "unknown"],
-  maintenance: ["healthy", "degraded", "unhealthy", "unknown"],
-};
+const HEALTH_TRANSITIONS: Record<ObserveHealthStatus, readonly ObserveHealthStatus[]> =
+  {
+    unknown: ["healthy", "degraded", "unhealthy", "maintenance"],
+    healthy: ["degraded", "unhealthy", "maintenance", "unknown"],
+    degraded: ["healthy", "unhealthy", "maintenance", "unknown"],
+    unhealthy: ["healthy", "degraded", "maintenance", "unknown"],
+    maintenance: ["healthy", "degraded", "unhealthy", "unknown"],
+  };
 
 const ALERT_TRANSITIONS: Record<
   ObserveAlertStateKind,

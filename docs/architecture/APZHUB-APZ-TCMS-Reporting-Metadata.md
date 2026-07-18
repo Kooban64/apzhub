@@ -8,9 +8,9 @@ Persist **metadata only** — no document binary storage in this milestone.
 
 ## Tables
 
-| Table | Aggregate kind | Purpose |
-|-------|----------------|---------|
-| `testing_report_template` | `report_template` | Registered custom templates |
+| Table                                | Aggregate kind               | Purpose                      |
+| ------------------------------------ | ---------------------------- | ---------------------------- |
+| `testing_report_template`            | `report_template`            | Registered custom templates  |
 | `testing_report_generation_metadata` | `report_generation_metadata` | Immutable generation records |
 
 Migrations: `0035_apz_tcms_reporting.sql`, `0036_apz_tcms_reporting_rls.sql`.

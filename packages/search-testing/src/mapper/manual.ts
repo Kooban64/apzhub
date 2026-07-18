@@ -29,7 +29,19 @@ import {
 
 export type ManualTestingMappableEntity = Extract<
   TestingSearchMappableEntity,
-  { readonly entityType: "test_plan" | "test_suite" | "test_case" | "test_execution" | "test_run" | "execution_step" | "evidence" | "approval" | "requirement" | "defect" }
+  {
+    readonly entityType:
+      | "test_plan"
+      | "test_suite"
+      | "test_case"
+      | "test_execution"
+      | "test_run"
+      | "execution_step"
+      | "evidence"
+      | "approval"
+      | "requirement"
+      | "defect";
+  }
 >;
 
 export class ManualTestingSearchMapper {
@@ -98,9 +110,7 @@ export class ManualTestingSearchMapper {
       sourceId: "testing:test_plan",
       ownerUserId: plan.ownerId ?? plan.createdBy ?? context.actorUserId,
       version:
-        plan.versionNumber !== undefined
-          ? String(plan.versionNumber)
-          : undefined,
+        plan.versionNumber !== undefined ? String(plan.versionNumber) : undefined,
     };
   }
 
@@ -139,9 +149,7 @@ export class ManualTestingSearchMapper {
       sourceId: "testing:test_suite",
       ownerUserId: suite.ownerId ?? suite.createdBy ?? context.actorUserId,
       version:
-        suite.versionNumber !== undefined
-          ? String(suite.versionNumber)
-          : undefined,
+        suite.versionNumber !== undefined ? String(suite.versionNumber) : undefined,
     };
   }
 
@@ -164,12 +172,7 @@ export class ManualTestingSearchMapper {
       summary: testCase.description ?? testCase.expectedResultsSummary,
       organisationId: extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        testCase.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, testCase.status, classification),
       metadata: {
         key: testCase.key,
         status: testCase.status,
@@ -210,9 +213,7 @@ export class ManualTestingSearchMapper {
       explicit: extras?.classification,
       status: execution.status,
     });
-    const title =
-      extras?.title ??
-      `Execution ${execution.id.slice(0, 12)}`;
+    const title = extras?.title ?? `Execution ${execution.id.slice(0, 12)}`;
     return {
       entityId: execution.id,
       entityType: "test_execution",
@@ -220,22 +221,13 @@ export class ManualTestingSearchMapper {
       summary: execution.blockReason,
       organisationId: extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        execution.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, execution.status, classification),
       metadata: {
         status: execution.status,
         caseId: execution.caseId,
         sessionId: execution.sessionId,
-        ...(execution.overallResult
-          ? { overallResult: execution.overallResult }
-          : {}),
-        ...(execution.approvalState
-          ? { approvalState: execution.approvalState }
-          : {}),
+        ...(execution.overallResult ? { overallResult: execution.overallResult } : {}),
+        ...(execution.approvalState ? { approvalState: execution.approvalState } : {}),
         ...(execution.assigneeId ? { assigneeId: execution.assigneeId } : {}),
       },
       keywords: [title, execution.status, execution.caseId],
@@ -243,8 +235,7 @@ export class ManualTestingSearchMapper {
       updatedAt: execution.updatedAt,
       navigationTarget: navigationTarget("test_execution", execution.id),
       sourceId: "testing:test_execution",
-      ownerUserId:
-        execution.assigneeId ?? execution.testerId ?? context.actorUserId,
+      ownerUserId: execution.assigneeId ?? execution.testerId ?? context.actorUserId,
     };
   }
 
@@ -292,9 +283,7 @@ export class ManualTestingSearchMapper {
     assertPlatformEntityId(step.id, "execution_step.id");
     const tenantId = extras?.tenantId ?? extras?.parentCase?.tenantId;
     if (!tenantId) {
-      throw new Error(
-        "tenantId is required via extras when mapping execution_step",
-      );
+      throw new Error("tenantId is required via extras when mapping execution_step");
     }
     assertTenant(tenantId, context);
     if (!extras?.classification && !context.classification) {
@@ -305,9 +294,7 @@ export class ManualTestingSearchMapper {
     const classification = resolveTestingClassification(context, {
       explicit: extras?.classification,
     });
-    const title =
-      extras?.title ??
-      `Step ${step.ordinal}: ${step.action.slice(0, 80)}`;
+    const title = extras?.title ?? `Step ${step.ordinal}: ${step.action.slice(0, 80)}`;
     return {
       entityId: step.id,
       entityType: "execution_step",
@@ -319,9 +306,7 @@ export class ManualTestingSearchMapper {
       metadata: {
         caseId: step.caseId,
         ordinal: String(step.ordinal),
-        ...(extras?.parentExecution
-          ? { executionId: extras.parentExecution.id }
-          : {}),
+        ...(extras?.parentExecution ? { executionId: extras.parentExecution.id } : {}),
       },
       keywords: [title, step.caseId],
       createdAt: extras?.parentCase?.createdAt ?? new Date(0).toISOString(),
@@ -362,10 +347,8 @@ export class ManualTestingSearchMapper {
         ...(evidence.mimeType || evidence.contentType
           ? { mimeType: evidence.mimeType ?? evidence.contentType ?? "" }
           : {}),
-        checksumPresent:
-          evidence.checksum || evidence.contentHash ? "true" : "false",
-        sizePresent:
-          evidence.sizeBytes !== undefined ? "true" : "false",
+        checksumPresent: evidence.checksum || evidence.contentHash ? "true" : "false",
+        sizePresent: evidence.sizeBytes !== undefined ? "true" : "false",
         ...(evidence.lifecycleStatus
           ? { lifecycleStatus: evidence.lifecycleStatus }
           : {}),
@@ -398,8 +381,7 @@ export class ManualTestingSearchMapper {
       status: approval.status,
     });
     const title =
-      extras?.title ??
-      `Approval ${approval.status} (${approval.id.slice(0, 12)})`;
+      extras?.title ?? `Approval ${approval.status} (${approval.id.slice(0, 12)})`;
     return {
       entityId: approval.id,
       entityType,
@@ -407,12 +389,7 @@ export class ManualTestingSearchMapper {
       summary: approval.comments?.slice(0, 280),
       organisationId: extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        approval.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, approval.status, classification),
       metadata: {
         status: approval.status,
         certificationRecordId: approval.certificationRecordId,
@@ -430,9 +407,7 @@ export class ManualTestingSearchMapper {
       navigationTarget: navigationTarget(entityType, approval.id),
       sourceId: `testing:${entityType}`,
       ownerUserId:
-        approval.approverUserId ??
-        approval.authorUserId ??
-        context.actorUserId,
+        approval.approverUserId ?? approval.authorUserId ?? context.actorUserId,
     };
   }
 

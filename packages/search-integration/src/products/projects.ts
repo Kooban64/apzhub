@@ -12,9 +12,8 @@ export const PROJECTS_SEARCH_ENTITY_TYPES = [
   "module",
 ] as const;
 
-export const ProjectsSearchPublicationContract: ProductSearchPublicationContract =
-  {
-    productId: "projects",
-    label: "Projects",
-    supportedEntityTypes: PROJECTS_SEARCH_ENTITY_TYPES,
-  };
+export const ProjectsSearchPublicationContract: ProductSearchPublicationContract = {
+  productId: "projects",
+  label: "Projects",
+  supportedEntityTypes: PROJECTS_SEARCH_ENTITY_TYPES,
+};

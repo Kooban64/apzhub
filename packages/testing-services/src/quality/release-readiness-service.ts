@@ -18,11 +18,7 @@ import {
 } from "./calculations";
 import { assertReleaseCalculationInputs } from "./validation";
 
-function dim(
-  key: string,
-  score: number,
-  reasons: string[],
-): ReadinessDimension {
+function dim(key: string, score: number, reasons: string[]): ReadinessDimension {
   const status = dimensionStatusFromScore(score, reasons);
   return { key, score, status, reasons };
 }
@@ -54,18 +50,11 @@ async function buildAssessment(
   const coverageScore =
     coverage.length === 0
       ? Math.max(0, 100 - prep.coverageGaps.length * 10)
-      : Math.round(
-          coverage.reduce((s, c) => s + c.percentage, 0) / coverage.length,
-        );
+      : Math.round(coverage.reduce((s, c) => s + c.percentage, 0) / coverage.length);
   const coverageReasons =
-    prep.coverageGaps.length > 0
-      ? [`coverage_gaps:${prep.coverageGaps.length}`]
-      : [];
+    prep.coverageGaps.length > 0 ? [`coverage_gaps:${prep.coverageGaps.length}`] : [];
 
-  const evidenceScore = Math.max(
-    0,
-    100 - prep.missingEvidenceCount * 10,
-  );
+  const evidenceScore = Math.max(0, 100 - prep.missingEvidenceCount * 10);
   const evidenceReasons =
     prep.missingEvidenceCount > 0
       ? [`missing_evidence:${prep.missingEvidenceCount}`]
@@ -73,23 +62,20 @@ async function buildAssessment(
 
   const approvalScore = prep.approvalCompletenessPercent;
   const approvalReasons =
-    approvalScore < 100
-      ? [`pending_approvals:${prep.pendingApprovalIds.length}`]
-      : [];
+    approvalScore < 100 ? [`pending_approvals:${prep.pendingApprovalIds.length}`] : [];
 
   const automationScore =
     autoExecs.length === 0 ? 50 : Math.min(100, autoExecs.length * 10);
-  const automationReasons =
-    autoExecs.length === 0 ? ["no_automation_executions"] : [];
+  const automationReasons = autoExecs.length === 0 ? ["no_automation_executions"] : [];
 
-  const defectScore = Math.max(0, 100 - openDefects.length * 15 - criticalOpen.length * 25);
+  const defectScore = Math.max(
+    0,
+    100 - openDefects.length * 15 - criticalOpen.length * 25,
+  );
   const defectReasons =
     openDefects.length > 0 ? [`open_defects:${openDefects.length}`] : [];
 
-  const riskScore = Math.max(
-    0,
-    100 - prep.riskSummary.highOrCriticalCount * 20,
-  );
+  const riskScore = Math.max(0, 100 - prep.riskSummary.highOrCriticalCount * 20);
   const riskReasons =
     prep.riskSummary.highOrCriticalCount > 0
       ? [`high_risks:${prep.riskSummary.highOrCriticalCount}`]
@@ -139,8 +125,7 @@ export function createQualityReleaseReadinessService(
 
   return {
     calculateForPlan: (ctx, planId) => legacy.calculateForPlan(ctx, planId),
-    calculateForCertification: (ctx, id) =>
-      legacy.calculateForCertification(ctx, id),
+    calculateForCertification: (ctx, id) => legacy.calculateForCertification(ctx, id),
 
     async assessForPlan(ctx, planId: TestPlanId) {
       assertReleaseCalculationInputs({ hasPlanOrRelease: Boolean(planId) });
@@ -206,14 +191,8 @@ export function createQualityReleaseReadinessService(
       return assessment;
     },
 
-    async assessForCertification(
-      ctx,
-      certificationRecordId: CertificationRecordId,
-    ) {
-      const inputs = await legacy.calculateForCertification(
-        ctx,
-        certificationRecordId,
-      );
+    async assessForCertification(ctx, certificationRecordId: CertificationRecordId) {
+      const inputs = await legacy.calculateForCertification(ctx, certificationRecordId);
       const assessment = await buildAssessment(rt, ctx, inputs);
       rt.events.record({
         eventType: "release_readiness.computed",

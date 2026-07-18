@@ -29,15 +29,15 @@ Never:
 
 ## What you can call today (HTTP / typed client)
 
-| Need | Client method / HTTP |
-| ---- | -------------------- |
-| List / search metadata | `listDocuments` / `GET /api/v1/documents` |
-| Create / get / archive / restore | `createDocumentMetadata` / `getDocument` / `archiveDocument` / `restoreDocument` |
-| Update title/description | `updateDocumentMetadata` |
-| Classify / tag / relate | `classify` / `tag` / `relate` |
-| Folder / collection / retention | `assignFolder` / `assignCollection` / `applyRetention` |
-| Versions / storage metadata / verify | `listVersions` / `getVersion` / `getStorageMetadata` |
-| Audit / diagnostics | `listAudit` / `getDiagnostics` |
+| Need                                 | Client method / HTTP                                                             |
+| ------------------------------------ | -------------------------------------------------------------------------------- |
+| List / search metadata               | `listDocuments` / `GET /api/v1/documents`                                        |
+| Create / get / archive / restore     | `createDocumentMetadata` / `getDocument` / `archiveDocument` / `restoreDocument` |
+| Update title/description             | `updateDocumentMetadata`                                                         |
+| Classify / tag / relate              | `classify` / `tag` / `relate`                                                    |
+| Folder / collection / retention      | `assignFolder` / `assignCollection` / `applyRetention`                           |
+| Versions / storage metadata / verify | `listVersions` / `getVersion` / `getStorageMetadata`                             |
+| Audit / diagnostics                  | `listAudit` / `getDiagnostics`                                                   |
 
 Gateway facets remain available for in-process server callers (APZDOCS-003).
 

@@ -1,12 +1,7 @@
 export type TransportKind = "rest" | "webhook" | "polling" | "graphql";
 
 export type ConnectionState =
-  | "idle"
-  | "connecting"
-  | "ready"
-  | "degraded"
-  | "closed"
-  | "failed";
+  "idle" | "connecting" | "ready" | "degraded" | "closed" | "failed";
 
 /** Static connection configuration for an integration instance. */
 export interface ConnectionConfig {

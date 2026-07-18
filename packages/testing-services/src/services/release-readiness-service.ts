@@ -36,9 +36,7 @@ function suggestStatus(
     blockers.push(`missing_approvals:${extras.missingApprovalCount}`);
   }
   if (preparation.executionCompletenessPercent < 100) {
-    blockers.push(
-      `executions_incomplete:${preparation.executionCompletenessPercent}`,
-    );
+    blockers.push(`executions_incomplete:${preparation.executionCompletenessPercent}`);
   }
   if (extras.failCount > 0) {
     blockers.push(`fail_count:${extras.failCount}`);

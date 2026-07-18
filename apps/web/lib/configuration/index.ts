@@ -81,7 +81,4 @@ export {
   validateConfiguration,
   validateConfigurationMetadata,
 } from "./configuration-api";
-export {
-  clearConfigurationQueries,
-  configurationQueryKeys,
-} from "./query-keys";
+export { clearConfigurationQueries, configurationQueryKeys } from "./query-keys";

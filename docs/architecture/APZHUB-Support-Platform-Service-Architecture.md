@@ -39,18 +39,18 @@ Zammad CE
 
 ## Capabilities
 
-| Capability key | Provider interface | Service |
-| --- | --- | --- |
-| `support_request` | `SupportProvider` | `SupportService` |
+| Capability key         | Provider interface            | Service                      |
+| ---------------------- | ----------------------------- | ---------------------------- |
+| `support_request`      | `SupportProvider`             | `SupportService`             |
 | `support_organization` | `SupportOrganizationProvider` | `SupportOrganizationService` |
-| `support_group` | `SupportGroupProvider` | `SupportGroupService` |
-| `support_user` | `SupportUserProvider` | `SupportUserService` |
-| `support_article` | `SupportArticleProvider` | `SupportArticleService` |
-| `support_search` | `SupportSearchProvider` | `SupportSearchService` |
-| `support_history` | `SupportHistoryProvider` | `SupportHistoryService` |
-| `support_analytics` | `SupportAnalyticsProvider` | `SupportAnalyticsService` |
-| `support_sync` | `SupportSyncProvider` | _(provider only)_ |
-| `support_webhook` | `SupportWebhookProvider` | _(provider only)_ |
+| `support_group`        | `SupportGroupProvider`        | `SupportGroupService`        |
+| `support_user`         | `SupportUserProvider`         | `SupportUserService`         |
+| `support_article`      | `SupportArticleProvider`      | `SupportArticleService`      |
+| `support_search`       | `SupportSearchProvider`       | `SupportSearchService`       |
+| `support_history`      | `SupportHistoryProvider`      | `SupportHistoryService`      |
+| `support_analytics`    | `SupportAnalyticsProvider`    | `SupportAnalyticsService`    |
+| `support_sync`         | `SupportSyncProvider`         | _(provider only)_            |
+| `support_webhook`      | `SupportWebhookProvider`      | _(provider only)_            |
 
 ---
 
@@ -71,4 +71,4 @@ const page = await gateway.support.listSupportRequests(ctx);
 
 HTTP / OpenAPI · UI · Event Bus · webhook ingress · notifications · realtime · binary attachments · OAuth · schedulers / workers · caching · Support dashboard
 
-*(HTTP surface delivered separately in OSS-110-11 — see [Support HTTP API](./APZHUB-Support-HTTP-API.md).)*
+_(HTTP surface delivered separately in OSS-110-11 — see [Support HTTP API](./APZHUB-Support-HTTP-API.md).)_

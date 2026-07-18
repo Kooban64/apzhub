@@ -7,11 +7,11 @@
 
 ## What changed
 
-| Before | After |
-|--------|-------|
-| Per-adapter `PlaneFetchClient` / `ZammadFetchClient` | `createHttpIntegrationClient` from SDK |
-| Duplicated timeout / JSON decode / error strings | Shared bridge with `errorLabel` |
-| No shared mock transport | `createMockTransport` / `MockTransportClient` |
+| Before                                               | After                                         |
+| ---------------------------------------------------- | --------------------------------------------- |
+| Per-adapter `PlaneFetchClient` / `ZammadFetchClient` | `createHttpIntegrationClient` from SDK        |
+| Duplicated timeout / JSON decode / error strings     | Shared bridge with `errorLabel`               |
+| No shared mock transport                             | `createMockTransport` / `MockTransportClient` |
 
 **Unchanged:** public adapter APIs, operation runners, circuit breakers in runners, package versions for Plane/Zammad (**0.6.0**), default retry behaviour (disabled).
 
@@ -67,11 +67,11 @@ When migrating or adding an adapter:
 
 ## Choosing the API
 
-| Need | Use |
-|------|-----|
-| Drop-in `IntegrationClient` | `createHttpIntegrationClient` |
-| Custom policies / interceptors / auth header hooks | `createTransportClient` |
-| Scripted unit tests | `createMockTransport` |
+| Need                                               | Use                           |
+| -------------------------------------------------- | ----------------------------- |
+| Drop-in `IntegrationClient`                        | `createHttpIntegrationClient` |
+| Custom policies / interceptors / auth header hooks | `createTransportClient`       |
+| Scripted unit tests                                | `createMockTransport`         |
 
 ---
 
@@ -96,9 +96,9 @@ Document the behaviour change in the adapter changelog before enabling in produc
 
 ## Future adapters
 
-1. Prefer SDK transport from day one — do not copy Plane/Zammad interim clients.  
-2. Register vendor error mappers via `ErrorTranslator` (OSS-100-04).  
-3. Use `MockTransportClient` in certification suites (OSS-100-09 will formalise harnesses).  
+1. Prefer SDK transport from day one — do not copy Plane/Zammad interim clients.
+2. Register vendor error mappers via `ErrorTranslator` (OSS-100-04).
+3. Use `MockTransportClient` in certification suites (OSS-100-09 will formalise harnesses).
 4. Webhook/polling contracts are **not** part of OSS-100-06 — planned as a later OSS-100 milestone (see backlog: former webhook scope → **OSS-100-08**).
 
 ---

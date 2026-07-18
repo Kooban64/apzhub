@@ -6,7 +6,6 @@ import type { ConfigurationClient } from "./configuration-client";
 import type {
   ConfigurationAuditViewModel,
   ConfigurationCollectionResult,
-  ConfigurationClientRequestOptions,
   ConfigurationGroupViewModel,
   ConfigurationManagementPlaneViewModel,
   ConfigurationNamespaceViewModel,
@@ -58,7 +57,7 @@ export function createMockConfigurationClient(): ConfigurationClient {
     async getConfiguration() {
       return configuration;
     },
-    async createConfiguration(input: CreateConfigurationClientInput) {
+    async createConfiguration(_input: CreateConfigurationClientInput) {
       configuration = {
         ...configuration,
         id: "cfg_new",
@@ -82,12 +81,18 @@ export function createMockConfigurationClient(): ConfigurationClient {
       configuration = { ...configuration, status: "draft" };
       return configuration;
     },
-    async transitionConfiguration(_id: string, input: TransitionConfigurationClientInput) {
+    async transitionConfiguration(
+      _id: string,
+      input: TransitionConfigurationClientInput,
+    ) {
       configuration = { ...configuration, status: input.to };
       return configuration;
     },
     async validateConfiguration() {
-      return { valid: true, errors: [] } satisfies ConfigurationValidationResultViewModel;
+      return {
+        valid: true,
+        errors: [],
+      } satisfies ConfigurationValidationResultViewModel;
     },
     async approveConfiguration() {
       configuration = { ...configuration, status: "approved" };
@@ -106,8 +111,10 @@ export function createMockConfigurationClient(): ConfigurationClient {
         {
           id: "ns_mock",
           tenantId: "tenant_mock",
+          organisationId: undefined,
           key: "platform",
           name: "Platform",
+          description: undefined,
           createdAt: "2026-07-16T00:00:00.000Z",
           updatedAt: "2026-07-16T00:00:00.000Z",
         } satisfies ConfigurationNamespaceViewModel,
@@ -138,12 +145,16 @@ export function createMockConfigurationClient(): ConfigurationClient {
           versionNumber: 1,
           immutable: true,
           isCurrent: false,
+          label: undefined,
           createdAt: "2026-07-16T00:00:00.000Z",
           createdBy: "user_mock",
         } satisfies ConfigurationVersionViewModel,
       ]);
     },
-    async createVersion(configurationId: string, input: CreateConfigurationVersionClientInput) {
+    async createVersion(
+      configurationId: string,
+      input: CreateConfigurationVersionClientInput,
+    ) {
       return {
         id: "ver_new",
         configurationId,
@@ -155,8 +166,17 @@ export function createMockConfigurationClient(): ConfigurationClient {
         createdBy: "user_mock",
       } satisfies ConfigurationVersionViewModel;
     },
-    async publishVersion() {
-      return { id: "ver_mock", isCurrent: true };
+    async publishVersion(configurationId: string, versionId: string) {
+      return {
+        id: versionId,
+        configurationId,
+        versionNumber: 1,
+        immutable: true,
+        isCurrent: true,
+        label: undefined,
+        createdAt: "2026-07-16T00:00:00.000Z",
+        createdBy: "user_mock",
+      } satisfies ConfigurationVersionViewModel;
     },
     async listOverrides(configurationId: string) {
       return collection([
@@ -184,7 +204,10 @@ export function createMockConfigurationClient(): ConfigurationClient {
         updatedAt: "2026-07-16T00:00:00.000Z",
       } satisfies ConfigurationOverrideViewModel;
     },
-    async updateOverride(overrideId: string, _input: UpdateConfigurationOverrideClientInput) {
+    async updateOverride(
+      overrideId: string,
+      _input: UpdateConfigurationOverrideClientInput,
+    ) {
       const items = await this.listOverrides("cfg_mock_1");
       return items.items.find((o) => o.id === overrideId) ?? items.items[0]!;
     },
@@ -206,11 +229,17 @@ export function createMockConfigurationClient(): ConfigurationClient {
     },
     async listValidationRules() {
       return collection([
-        { kind: "string", description: "string rule" } satisfies ConfigurationValidationRuleViewModel,
+        {
+          kind: "string",
+          description: "string rule",
+        } satisfies ConfigurationValidationRuleViewModel,
       ]);
     },
     async validateMetadata() {
-      return { valid: true, errors: [] } satisfies ConfigurationValidationResultViewModel;
+      return {
+        valid: true,
+        errors: [],
+      } satisfies ConfigurationValidationResultViewModel;
     },
     async listReferences(configurationId: string) {
       return collection([

@@ -41,34 +41,34 @@ Introduced `search.*`, `search.query`, `search.provider`, `search.diagnostics`, 
 
 ## Testing
 
-| Suite | Result |
-|-------|--------|
-| `packages/search-contracts` unit tests | PASS |
-| `testing/search-foundation/apzsearch-001-foundation.test.ts` | PASS |
-| `pnpm audit:search-foundation` | PASS (0 violations) |
+| Suite                                                        | Result              |
+| ------------------------------------------------------------ | ------------------- |
+| `packages/search-contracts` unit tests                       | PASS                |
+| `testing/search-foundation/apzsearch-001-foundation.test.ts` | PASS                |
+| `pnpm audit:search-foundation`                               | PASS (0 violations) |
 
 ## Coverage
 
 Focused Vitest coverage for `@apzhub/search-contracts` (executable sources):
 
-| Metric | Result |
-|--------|--------|
+| Metric     | Result   |
+| ---------- | -------- |
 | Statements | **100%** |
-| Branches | **100%** |
-| Functions | **100%** |
-| Lines | **100%** |
+| Branches   | **100%** |
+| Functions  | **100%** |
+| Lines      | **100%** |
 
 Type-only modules (`context.ts`, `search.ts`, provider/service interface files) contribute no executable statements. Target ≥95% met.
 
 ## Quality Gates
 
-| Gate | Result |
-|------|--------|
-| Typecheck (`@apzhub/search-contracts`) | PASS |
-| Lint (package sources) | PASS |
-| Tests | PASS |
-| Coverage (≥95% package) | PASS (recorded at closeout) |
-| Architecture / dependency / boundary / authorization audit | PASS |
+| Gate                                                       | Result                      |
+| ---------------------------------------------------------- | --------------------------- |
+| Typecheck (`@apzhub/search-contracts`)                     | PASS                        |
+| Lint (package sources)                                     | PASS                        |
+| Tests                                                      | PASS                        |
+| Coverage (≥95% package)                                    | PASS (recorded at closeout) |
+| Architecture / dependency / boundary / authorization audit | PASS                        |
 
 ## Technical Debt
 

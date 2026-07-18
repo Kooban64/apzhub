@@ -93,13 +93,17 @@ export class PlaneOperationsService {
     return buildPlaneCompatibilityMatrix({
       detectedPlaneVersion: this.deps.getProviderVersion(),
       versionMin: range.min,
-      versionMax: range.max.endsWith(".x") ? range.max.replace(/\.x$/, ".99") : range.max,
+      versionMax: range.max.endsWith(".x")
+        ? range.max.replace(/\.x$/, ".99")
+        : range.max,
       edition: this.deps.edition ?? "community",
       featureDetection: this.featureDetection,
     });
   }
 
-  async detectFeatures(context: IntegrationRequestContext): Promise<PlaneFeatureDetectionResult> {
+  async detectFeatures(
+    context: IntegrationRequestContext,
+  ): Promise<PlaneFeatureDetectionResult> {
     this.featureDetection = await detectPlaneFeatures(context, {
       client: this.deps.getRestClient(),
       clock: this.deps.clock,
@@ -107,7 +111,9 @@ export class PlaneOperationsService {
     return this.featureDetection;
   }
 
-  async evaluateReadiness(context: IntegrationRequestContext): Promise<PlaneReadinessResult> {
+  async evaluateReadiness(
+    context: IntegrationRequestContext,
+  ): Promise<PlaneReadinessResult> {
     void context;
     const configurationValidation = await this.deps.validateConfiguration();
     const capabilities = this.certifyCapabilities();
@@ -129,7 +135,8 @@ export class PlaneOperationsService {
       capabilities,
       circuitBreakerOpen: this.deps.getCircuitBreakerState() === "open",
       syncUnhealthy: syncHealth === "unhealthy",
-      webhookUnhealthy: this.featureDetection?.unavailableCapabilities.includes("webhooks"),
+      webhookUnhealthy:
+        this.featureDetection?.unavailableCapabilities.includes("webhooks"),
     });
   }
 
@@ -146,7 +153,8 @@ export class PlaneOperationsService {
       capabilities,
       featureDetection: this.featureDetection,
       syncUnhealthy: syncHealth === "unhealthy",
-      webhookUnhealthy: this.featureDetection?.unavailableCapabilities.includes("webhooks"),
+      webhookUnhealthy:
+        this.featureDetection?.unavailableCapabilities.includes("webhooks"),
     });
   }
 
@@ -236,4 +244,7 @@ export function createPlaneOperationsService(
   return new PlaneOperationsService(deps);
 }
 
-export { mapOperationalHealthToSdkStatus, ADAPTER_VERSION as PLANE_OPERATIONS_ADAPTER_VERSION };
+export {
+  mapOperationalHealthToSdkStatus,
+  ADAPTER_VERSION as PLANE_OPERATIONS_ADAPTER_VERSION,
+};

@@ -45,10 +45,7 @@ export function requireFound<T>(
 
 export interface WorkflowRepositoryPort {
   create(ctx: WorkflowRequestContext, workflow: Workflow): Promise<Workflow>;
-  get(
-    ctx: WorkflowRequestContext,
-    workflowId: WorkflowId,
-  ): Promise<Workflow | null>;
+  get(ctx: WorkflowRequestContext, workflowId: WorkflowId): Promise<Workflow | null>;
   update(ctx: WorkflowRequestContext, workflow: Workflow): Promise<Workflow>;
   delete(ctx: WorkflowRequestContext, workflowId: WorkflowId): Promise<void>;
   list(ctx: WorkflowRequestContext): Promise<readonly Workflow[]>;
@@ -82,10 +79,7 @@ export interface WorkflowTemplateRepositoryPort {
     ctx: WorkflowRequestContext,
     template: WorkflowTemplate,
   ): Promise<WorkflowTemplate>;
-  delete(
-    ctx: WorkflowRequestContext,
-    templateId: WorkflowTemplateId,
-  ): Promise<void>;
+  delete(ctx: WorkflowRequestContext, templateId: WorkflowTemplateId): Promise<void>;
   list(ctx: WorkflowRequestContext): Promise<readonly WorkflowTemplate[]>;
 }
 
@@ -102,10 +96,7 @@ export interface WorkflowCategoryRepositoryPort {
 }
 
 export interface WorkflowFolderRepositoryPort {
-  create(
-    ctx: WorkflowRequestContext,
-    folder: WorkflowFolder,
-  ): Promise<WorkflowFolder>;
+  create(ctx: WorkflowRequestContext, folder: WorkflowFolder): Promise<WorkflowFolder>;
   get(
     ctx: WorkflowRequestContext,
     folderId: WorkflowFolderId,

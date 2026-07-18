@@ -5,11 +5,11 @@
 
 ## Combined
 
-| Metric | Value |
-| --- | ---: |
-| Lines | **97.47%** |
+| Metric    |      Value |
+| --------- | ---------: |
+| Lines     | **97.47%** |
 | Functions | **98.02%** |
-| Branches | **64.99%** |
+| Branches  | **64.99%** |
 
 ## Notes
 

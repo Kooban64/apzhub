@@ -16,83 +16,83 @@ Design the canonical Platform Integration SDK that every future OSS adapter must
 
 ### Architecture documents
 
-| Document | Path |
-|----------|------|
+| Document                              | Path                                                                |
+| ------------------------------------- | ------------------------------------------------------------------- |
 | Platform Integration SDK Architecture | `docs/architecture/APZHUB-Platform-Integration-SDK-Architecture.md` |
-| Base Adapter Pattern | `docs/architecture/APZHUB-Base-Adapter-Pattern.md` |
-| Connection Lifecycle | `docs/architecture/APZHUB-Integration-Connection-Lifecycle.md` |
-| Health & Diagnostics Model | `docs/architecture/APZHUB-Integration-Health-Diagnostics-Model.md` |
-| Error Translation Model | `docs/architecture/APZHUB-Integration-Error-Translation-Model.md` |
+| Base Adapter Pattern                  | `docs/architecture/APZHUB-Base-Adapter-Pattern.md`                  |
+| Connection Lifecycle                  | `docs/architecture/APZHUB-Integration-Connection-Lifecycle.md`      |
+| Health & Diagnostics Model            | `docs/architecture/APZHUB-Integration-Health-Diagnostics-Model.md`  |
+| Error Translation Model               | `docs/architecture/APZHUB-Integration-Error-Translation-Model.md`   |
 
 ### Specification
 
-| Document | Path |
-|----------|------|
+| Document                  | Path                                             |
+| ------------------------- | ------------------------------------------------ |
 | Adapter SDK Specification | `docs/specs/APZHUB-Adapter-SDK-Specification.md` |
 
 ### Planning
 
-| Document | Path |
-|----------|------|
+| Document        | Path                                                       |
+| --------------- | ---------------------------------------------------------- |
 | OSS-100 Backlog | `docs/backlog/OSS-100-Platform-Integration-SDK-Backlog.md` |
 
 ### Updated indexes
 
-| Document | Change |
-|----------|--------|
-| `docs/README.md` | OSS-100 registry |
-| `docs/strategy/README.md` | OSS-100 section |
-| `CHANGELOG.md` | OSS-100 entry |
+| Document                  | Change                      |
+| ------------------------- | --------------------------- |
+| `docs/README.md`          | OSS-100 registry            |
+| `docs/strategy/README.md` | OSS-100 section             |
+| `CHANGELOG.md`            | OSS-100 entry               |
 | OSS Integration Standards | SDK consumption requirement |
-| OSS Wave Roadmap | OSS-100 sequencing |
+| OSS Wave Roadmap          | OSS-100 sequencing          |
 
 ---
 
 ## SDK components defined
 
-| Component | Document |
-|-----------|----------|
-| `IntegrationClient` | Adapter SDK Specification §4–5 |
-| `AuthenticationProvider` | Adapter SDK Specification §3 |
-| `ConnectionManager` | Connection Lifecycle + Specification §2 |
-| `HealthProvider` | Health & Diagnostics Model |
-| `DiagnosticsProvider` | Health & Diagnostics Model |
-| `VersionProvider` | Adapter SDK Specification §16 |
-| `LifecycleParticipant` | Adapter SDK Specification §10 |
-| `RetryPolicy` | Adapter SDK Specification §18 |
-| `CircuitBreaker` | Adapter SDK Specification §18 |
-| `RateLimitPolicy` | Adapter SDK Specification §18 |
-| `Telemetry` | Adapter SDK Specification §19 |
-| `Metrics` | Adapter SDK Specification §19 |
-| `Logging` | Adapter SDK Specification §19 |
-| `ConfigurationProvider` | Adapter SDK Specification §20 |
-| `FeatureFlagProvider` | Adapter SDK Specification §20 |
-| `CapabilityRegistration` | Adapter SDK Specification §21 |
-| `ErrorTranslator` | Error Translation Model |
-| `AdapterBase` | Base Adapter Pattern |
+| Component                | Document                                |
+| ------------------------ | --------------------------------------- |
+| `IntegrationClient`      | Adapter SDK Specification §4–5          |
+| `AuthenticationProvider` | Adapter SDK Specification §3            |
+| `ConnectionManager`      | Connection Lifecycle + Specification §2 |
+| `HealthProvider`         | Health & Diagnostics Model              |
+| `DiagnosticsProvider`    | Health & Diagnostics Model              |
+| `VersionProvider`        | Adapter SDK Specification §16           |
+| `LifecycleParticipant`   | Adapter SDK Specification §10           |
+| `RetryPolicy`            | Adapter SDK Specification §18           |
+| `CircuitBreaker`         | Adapter SDK Specification §18           |
+| `RateLimitPolicy`        | Adapter SDK Specification §18           |
+| `Telemetry`              | Adapter SDK Specification §19           |
+| `Metrics`                | Adapter SDK Specification §19           |
+| `Logging`                | Adapter SDK Specification §19           |
+| `ConfigurationProvider`  | Adapter SDK Specification §20           |
+| `FeatureFlagProvider`    | Adapter SDK Specification §20           |
+| `CapabilityRegistration` | Adapter SDK Specification §21           |
+| `ErrorTranslator`        | Error Translation Model                 |
+| `AdapterBase`            | Base Adapter Pattern                    |
 
 ---
 
 ## Standard contracts defined
 
-| Contract | Status |
-|----------|--------|
-| Connection | ✅ |
-| Authentication | ✅ |
-| REST | ✅ |
-| GraphQL | Future (interface reserved) |
-| Webhook | ✅ |
-| Polling | ✅ |
-| Health | ✅ |
-| Diagnostics | ✅ |
-| Lifecycle | ✅ |
-| Provisioning | ✅ |
-| User mapping | ✅ |
-| Permission mapping | ✅ |
-| Entity mapping | ✅ |
-| Error translation | ✅ |
-| Version compatibility | ✅ |
-| Upgrade compatibility | ✅ |
+| Contract              | Status                      |
+| --------------------- | --------------------------- |
+| Connection            | ✅                          |
+| Authentication        | ✅                          |
+| REST                  | ✅                          |
+| GraphQL               | Future (interface reserved) |
+| Webhook               | ✅                          |
+| Polling               | ✅                          |
+| Health                | ✅                          |
+| Diagnostics           | ✅                          |
+| Lifecycle             | ✅                          |
+| Provisioning          | ✅                          |
+| User mapping          | ✅                          |
+| Permission mapping    | ✅                          |
+| Entity mapping        | ✅                          |
+| Error translation     | ✅                          |
+| Version compatibility | ✅                          |
+| Upgrade compatibility | ✅                          |
 
 ---
 
@@ -108,34 +108,34 @@ Products must never call vendor APIs directly.
 
 ## Constraints confirmed
 
-| Constraint | Result |
-|------------|--------|
-| No SDK implementation | ✅ |
-| No Plane adapter | ✅ |
-| No REST client code | ✅ |
-| No Platform Core modifications | ✅ |
-| OSS-101-04 not started | ✅ |
+| Constraint                     | Result |
+| ------------------------------ | ------ |
+| No SDK implementation          | ✅     |
+| No Plane adapter               | ✅     |
+| No REST client code            | ✅     |
+| No Platform Core modifications | ✅     |
+| OSS-101-04 not started         | ✅     |
 
 ---
 
 ## Sequencing decision
 
-| Milestone | Gate |
-|-----------|------|
-| OSS-100-01 | First SDK code — requires owner approval |
+| Milestone  | Gate                                          |
+| ---------- | --------------------------------------------- |
+| OSS-100-01 | First SDK code — requires owner approval      |
 | OSS-101-04 | Requires **OSS-100-05 minimum** (AdapterBase) |
 
 ---
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| `pnpm lint` | Pass |
-| `pnpm typecheck` | Pass |
-| `pnpm build` | Pass |
-| `pnpm test` | Pass (2012 passed, 47 skipped) |
-| `pnpm test:coverage` | Pass |
+| Gate                 | Result                         |
+| -------------------- | ------------------------------ |
+| `pnpm lint`          | Pass                           |
+| `pnpm typecheck`     | Pass                           |
+| `pnpm build`         | Pass                           |
+| `pnpm test`          | Pass (2012 passed, 47 skipped) |
+| `pnpm test:coverage` | Pass                           |
 
 ---
 

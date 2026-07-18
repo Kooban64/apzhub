@@ -165,9 +165,9 @@ describe("createMockTestingClient", () => {
 
     const archived = await client.archiveCertification(FIXTURE_IDS.certification);
     expect(archived.state).toBe("archived");
-    expect(archived.audit.some((entry) => entry.action === "certification.archived")).toBe(
-      true,
-    );
+    expect(
+      archived.audit.some((entry) => entry.action === "certification.archived"),
+    ).toBe(true);
   });
 
   it("starts a new execution when no existing record matches the case", async () => {
@@ -187,12 +187,16 @@ describe("createMockTestingClient", () => {
     const controller = new AbortController();
     controller.abort();
 
-    await expect(client.getDashboard({ signal: controller.signal })).rejects.toMatchObject({
+    await expect(
+      client.getDashboard({ signal: controller.signal }),
+    ).rejects.toMatchObject({
       code: "ABORTED",
       status: 499,
     });
 
-    await expect(client.listPlans(undefined, { signal: controller.signal })).rejects.toMatchObject({
+    await expect(
+      client.listPlans(undefined, { signal: controller.signal }),
+    ).rejects.toMatchObject({
       code: "ABORTED",
     });
 

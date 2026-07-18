@@ -40,7 +40,9 @@ export function createWorkflowPersistence(
     }
     return createPostgresWorkflowRepositories(input.db);
   }
-  throw new Error(`Unsupported workflow persistence mode: ${String((input as { mode?: string }).mode)}`);
+  throw new Error(
+    `Unsupported workflow persistence mode: ${String((input as { mode?: string }).mode)}`,
+  );
 }
 
 export type CreateProductionWorkflowPersistenceInput = {

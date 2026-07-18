@@ -33,10 +33,7 @@ export interface PlatformQualityStore {
   readonly candidates: Map<PlatformReleaseCandidateId, PlatformReleaseCandidate>;
   readonly approvals: Map<PlatformReleaseApprovalId, PlatformReleaseApproval>;
   readonly decisions: Map<PlatformReleaseDecisionId, PlatformReleaseDecision>;
-  readonly crossProductLinks: Map<
-    PlatformCrossProductLinkId,
-    PlatformCrossProductLink
-  >;
+  readonly crossProductLinks: Map<PlatformCrossProductLinkId, PlatformCrossProductLink>;
 }
 
 export function createPlatformQualityStore(): PlatformQualityStore {

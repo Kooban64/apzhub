@@ -1,10 +1,6 @@
 import type { ServiceRequestContext } from "@apzhub/platform-service-contracts";
 
-import type {
-  ExecutionComment,
-  ManualExecution,
-  ManualStepActual,
-} from "../domain";
+import type { ExecutionComment, ManualExecution, ManualStepActual } from "../domain";
 import type {
   ExecutionApprovalState,
   ExecutionStatus,
@@ -67,10 +63,7 @@ export interface ManualExecutionService {
   start(ctx: ServiceRequestContext, id: ManualExecutionId): Promise<ManualExecution>;
   pause(ctx: ServiceRequestContext, id: ManualExecutionId): Promise<ManualExecution>;
   resume(ctx: ServiceRequestContext, id: ManualExecutionId): Promise<ManualExecution>;
-  restart(
-    ctx: ServiceRequestContext,
-    id: ManualExecutionId,
-  ): Promise<ManualExecution>;
+  restart(ctx: ServiceRequestContext, id: ManualExecutionId): Promise<ManualExecution>;
   cancel(
     ctx: ServiceRequestContext,
     id: ManualExecutionId,
@@ -95,27 +88,15 @@ export interface ManualExecutionService {
     id: ManualExecutionId,
     comments: string,
   ): Promise<ManualExecution>;
-  reopen(
-    ctx: ServiceRequestContext,
-    id: ManualExecutionId,
-  ): Promise<ManualExecution>;
-  archive(
-    ctx: ServiceRequestContext,
-    id: ManualExecutionId,
-  ): Promise<ManualExecution>;
-  restore(
-    ctx: ServiceRequestContext,
-    id: ManualExecutionId,
-  ): Promise<ManualExecution>;
+  reopen(ctx: ServiceRequestContext, id: ManualExecutionId): Promise<ManualExecution>;
+  archive(ctx: ServiceRequestContext, id: ManualExecutionId): Promise<ManualExecution>;
+  restore(ctx: ServiceRequestContext, id: ManualExecutionId): Promise<ManualExecution>;
   block(
     ctx: ServiceRequestContext,
     id: ManualExecutionId,
     reason?: string,
   ): Promise<ManualExecution>;
-  unblock(
-    ctx: ServiceRequestContext,
-    id: ManualExecutionId,
-  ): Promise<ManualExecution>;
+  unblock(ctx: ServiceRequestContext, id: ManualExecutionId): Promise<ManualExecution>;
   setApprovalState(
     ctx: ServiceRequestContext,
     id: ManualExecutionId,

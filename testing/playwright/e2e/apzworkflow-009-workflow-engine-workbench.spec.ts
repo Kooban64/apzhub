@@ -27,7 +27,10 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       meta: { correlationId: "pw-apzworkflow-009" },
     });
 
-    if (url.pathname.endsWith("/engine/workflows") && !url.pathname.includes("/workflows/")) {
+    if (
+      url.pathname.endsWith("/engine/workflows") &&
+      !url.pathname.includes("/workflows/")
+    ) {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -221,9 +224,7 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
-        body: JSON.stringify(
-          envelope({ ok: true, message: "Connection validated" }),
-        ),
+        body: JSON.stringify(envelope({ ok: true, message: "Connection validated" })),
       });
       return;
     }
@@ -261,9 +262,7 @@ test.describe("APZWORKFLOW-009 Workflow Engine Workbench", () => {
     expect(seen.some((path) => path.includes("/workflows/engine"))).toBeTruthy();
   });
 
-  test("workflows section shows list and definition viewer", async ({
-    page,
-  }) => {
+  test("workflows section shows list and definition viewer", async ({ page }) => {
     const seen: string[] = [];
     await mockEngineHttpApi(page, seen);
     await signIn(page);

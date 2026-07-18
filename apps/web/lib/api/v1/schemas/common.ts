@@ -43,10 +43,7 @@ export function resolvePageLimit(query: PaginationQuery): number {
   return query.limit ?? query.perPage ?? PLATFORM_API_DEFAULT_PAGE_LIMIT;
 }
 
-export function parseQuery<T>(
-  schema: z.ZodType<T>,
-  searchParams: URLSearchParams,
-): T {
+export function parseQuery<T>(schema: z.ZodType<T>, searchParams: URLSearchParams): T {
   const raw: Record<string, string> = {};
   for (const [key, value] of searchParams.entries()) {
     raw[key] = value;
@@ -62,7 +59,11 @@ export function parseQuery<T>(
   return result.data;
 }
 
-export function parsePathParam<T>(schema: z.ZodType<T>, value: string, name: string): T {
+export function parsePathParam<T>(
+  schema: z.ZodType<T>,
+  value: string,
+  name: string,
+): T {
   const result = schema.safeParse(value);
   if (!result.success) {
     throw validationError(`Invalid path parameter '${name}'.`, {

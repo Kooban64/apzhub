@@ -9,12 +9,7 @@ import type {
   TestStepId,
   TestSuiteId,
 } from "../identifiers";
-import type {
-  CaseVersionReason,
-  Priority,
-  Severity,
-  TestStatus,
-} from "../enums";
+import type { CaseVersionReason, Priority, Severity, TestStatus } from "../enums";
 
 export interface TestPlan extends AuditFields {
   readonly id: TestPlanId;

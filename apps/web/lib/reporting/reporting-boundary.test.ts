@@ -27,9 +27,7 @@ function walk(dir: string, out: string[] = []): string[] {
 }
 
 function stripComments(content: string): string {
-  return content
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/\/\/.*$/gm, "");
+  return content.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
 }
 
 describe("platform reporting architecture boundary", () => {

@@ -49,7 +49,9 @@ function mapTaskSort(
 export function createPlaneTaskProvider(core: PlaneCoreServices): TaskProvider {
   return {
     listTasks(ctx, projectId, query) {
-      const { page, sort, filter } = unwrapListQuery<TaskListFilter, TaskSortField>(query);
+      const { page, sort, filter } = unwrapListQuery<TaskListFilter, TaskSortField>(
+        query,
+      );
       return withProviderErrorMapping(ctx.correlationId, () =>
         core.tasks.list(
           toIntegrationContext(ctx),
@@ -87,7 +89,12 @@ export function createPlaneTaskProvider(core: PlaneCoreServices): TaskProvider {
 
     transitionTaskStatus(ctx, projectId, taskId, input: TransitionTaskStatusInput) {
       return withProviderErrorMapping(ctx.correlationId, () =>
-        core.tasks.transition(toIntegrationContext(ctx), projectId, taskId, input.statusId),
+        core.tasks.transition(
+          toIntegrationContext(ctx),
+          projectId,
+          taskId,
+          input.statusId,
+        ),
       );
     },
 

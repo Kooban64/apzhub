@@ -16,6 +16,6 @@
     "@apzhub/config": "workspace:*",
     "@apzhub/notification-contracts": "workspace:*",
     "@apzhub/notification-core": "workspace:*",
-    "drizzle-orm": "^0.44.2"
+    "drizzle-orm": "^0.45.2"
   }
 }

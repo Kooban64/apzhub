@@ -76,9 +76,7 @@ export function isSearchProductId(value: string): value is SearchProductId {
   return (SEARCH_PRODUCTS as readonly string[]).includes(value);
 }
 
-export function isSearchSortDirection(
-  value: string,
-): value is SearchSortDirection {
+export function isSearchSortDirection(value: string): value is SearchSortDirection {
   return (SEARCH_SORT_DIRECTIONS as readonly string[]).includes(value);
 }
 
@@ -90,8 +88,6 @@ export function isSearchIndexState(value: string): value is SearchIndexState {
   return (SEARCH_INDEX_STATES as readonly string[]).includes(value);
 }
 
-export function isSearchClassification(
-  value: string,
-): value is SearchClassification {
+export function isSearchClassification(value: string): value is SearchClassification {
   return (SEARCH_CLASSIFICATIONS as readonly string[]).includes(value);
 }

@@ -28,12 +28,12 @@ Do not call `@apzhub/platform-identity` or `@apzhub/platform-authorization` dire
 
 ## Key files
 
-| File | Purpose |
-| ---- | ------- |
-| `apps/web/components/workbench-page.tsx` | Routes operations workspace |
-| `apps/web/components/platform-operations/operations-workspace-router.tsx` | Section pages |
-| `apps/web/lib/platform-operations/routes.ts` | Route resolution |
-| `apps/web/lib/platform-operations/ops-api.ts` | Client fetch helpers |
+| File                                                                      | Purpose                     |
+| ------------------------------------------------------------------------- | --------------------------- |
+| `apps/web/components/workbench-page.tsx`                                  | Routes operations workspace |
+| `apps/web/components/platform-operations/operations-workspace-router.tsx` | Section pages               |
+| `apps/web/lib/platform-operations/routes.ts`                              | Route resolution            |
+| `apps/web/lib/platform-operations/ops-api.ts`                             | Client fetch helpers        |
 
 ---
 

@@ -140,18 +140,12 @@ export interface PlatformWorkflowService {
     ctx: WorkflowRequestContext,
     input: CreateWorkflowInput,
   ): Promise<Workflow>;
-  getWorkflow(
-    ctx: WorkflowRequestContext,
-    workflowId: WorkflowId,
-  ): Promise<Workflow>;
+  getWorkflow(ctx: WorkflowRequestContext, workflowId: WorkflowId): Promise<Workflow>;
   updateWorkflow(
     ctx: WorkflowRequestContext,
     input: UpdateWorkflowInput,
   ): Promise<Workflow>;
-  deleteWorkflow(
-    ctx: WorkflowRequestContext,
-    workflowId: WorkflowId,
-  ): Promise<void>;
+  deleteWorkflow(ctx: WorkflowRequestContext, workflowId: WorkflowId): Promise<void>;
   findWorkflows(
     ctx: WorkflowRequestContext,
     input?: FindWorkflowsInput,
@@ -208,9 +202,7 @@ export interface PlatformWorkflowService {
     ctx: WorkflowRequestContext,
     templateId: WorkflowTemplateId,
   ): Promise<void>;
-  listTemplates(
-    ctx: WorkflowRequestContext,
-  ): Promise<readonly WorkflowTemplate[]>;
+  listTemplates(ctx: WorkflowRequestContext): Promise<readonly WorkflowTemplate[]>;
 
   createCategory(
     ctx: WorkflowRequestContext,
@@ -220,9 +212,7 @@ export interface PlatformWorkflowService {
     ctx: WorkflowRequestContext,
     categoryId: WorkflowCategoryId,
   ): Promise<WorkflowCategory | null>;
-  listCategories(
-    ctx: WorkflowRequestContext,
-  ): Promise<readonly WorkflowCategory[]>;
+  listCategories(ctx: WorkflowRequestContext): Promise<readonly WorkflowCategory[]>;
 
   createFolder(
     ctx: WorkflowRequestContext,
@@ -232,9 +222,7 @@ export interface PlatformWorkflowService {
     ctx: WorkflowRequestContext,
     folderId: WorkflowFolderId,
   ): Promise<WorkflowFolder | null>;
-  listFolders(
-    ctx: WorkflowRequestContext,
-  ): Promise<readonly WorkflowFolder[]>;
+  listFolders(ctx: WorkflowRequestContext): Promise<readonly WorkflowFolder[]>;
 
   listAudit(
     ctx: WorkflowRequestContext,

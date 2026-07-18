@@ -15,7 +15,10 @@ import { permissionPatternMatches } from "./permission-model";
 import type { AuthorizationEventPublisher } from "./authorization-events";
 import { createNoopAuthorizationEventPublisher } from "./authorization-events";
 import { EffectivePermissionService } from "./effective-permission-service";
-import { AuthorizationDiagnosticsTracker, PermissionService } from "./permission-service";
+import {
+  AuthorizationDiagnosticsTracker,
+  PermissionService,
+} from "./permission-service";
 import type { AuthorizationRepositoryBundle } from "./repositories/repository-interfaces";
 import { RoleAssignmentService } from "./role-assignment-service";
 import { RoleService } from "./role-service";
@@ -43,10 +46,11 @@ export class AuthorizationService {
   constructor(options: AuthorizationServiceOptions) {
     this.repositories = options.repositories;
     this.diagnosticsTracker = new AuthorizationDiagnosticsTracker();
-    this.events =
-      options.events ??
-      createNoopAuthorizationEventPublisher();
-    this.permissionService = new PermissionService(options.repositories.permissions, this.diagnosticsTracker);
+    this.events = options.events ?? createNoopAuthorizationEventPublisher();
+    this.permissionService = new PermissionService(
+      options.repositories.permissions,
+      this.diagnosticsTracker,
+    );
     this.roleService = new RoleService(
       options.repositories.roles,
       options.repositories.permissions,
@@ -73,9 +77,12 @@ export class AuthorizationService {
       ? this.effectivePermissionService.computeEffectivePermissions(context)
       : null;
 
-    const assignments = this.roleAssignmentService.listAssignmentsForUser(context.userId, {
-      status: "active",
-    });
+    const assignments = this.roleAssignmentService.listAssignmentsForUser(
+      context.userId,
+      {
+        status: "active",
+      },
+    );
     const roles = this.roleService.listRoles({ status: "active" });
 
     const result = evaluatePermissionAgainstEffective(permissionKey, effective, {
@@ -102,8 +109,14 @@ export class AuthorizationService {
     return this.permissionService.registerPermission(input);
   }
 
-  createRole(input: CreatePlatformRoleInput, permissionKeys?: readonly string[]): PlatformRole {
-    return this.roleService.createRole(input, permissionKeys ? [...permissionKeys] : []);
+  createRole(
+    input: CreatePlatformRoleInput,
+    permissionKeys?: readonly string[],
+  ): PlatformRole {
+    return this.roleService.createRole(
+      input,
+      permissionKeys ? [...permissionKeys] : [],
+    );
   }
 
   assignRole(input: AssignRoleInput): RoleAssignment {
@@ -129,7 +142,9 @@ export class AuthorizationService {
   }
 
   listAssignmentsForUser(userId: string): readonly RoleAssignment[] {
-    return this.roleAssignmentService.listAssignmentsForUser(userId, { status: "active" });
+    return this.roleAssignmentService.listAssignmentsForUser(userId, {
+      status: "active",
+    });
   }
 
   getDiagnostics(): AuthorizationDiagnostics {

@@ -27,7 +27,7 @@ describe("APZADMIN-006 Administration Wave Closeout", () => {
       "packages/admin-contracts/package.json": "0.2.0",
       "packages/admin-core/package.json": "0.2.0",
       "packages/admin-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.24.0",
+      "packages/platform-services/package.json": "0.25.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const actual = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;
@@ -45,10 +45,7 @@ describe("APZADMIN-006 Administration Wave Closeout", () => {
     );
     expect(freeze).toMatch(/frozen/i);
     const standard = readFileSync(
-      join(
-        ROOT,
-        "docs/architecture/APZHUB-Administration-Reference-Standard.md",
-      ),
+      join(ROOT, "docs/architecture/APZHUB-Administration-Reference-Standard.md"),
       "utf8",
     );
     expect(standard).toMatch(/Reference Standard/i);
@@ -77,18 +74,12 @@ describe("APZADMIN-006 Administration Wave Closeout", () => {
   it("ships operational readiness and future guide; ops remains separate", () => {
     expect(
       existsSync(
-        join(
-          ROOT,
-          "docs/guides/APZHUB-Administration-Operational-Readiness-Guide.md",
-        ),
+        join(ROOT, "docs/guides/APZHUB-Administration-Operational-Readiness-Guide.md"),
       ),
     ).toBe(true);
     expect(
       existsSync(
-        join(
-          ROOT,
-          "docs/developer/APZHUB-Future-Administration-Platform-Guide.md",
-        ),
+        join(ROOT, "docs/developer/APZHUB-Future-Administration-Platform-Guide.md"),
       ),
     ).toBe(true);
     const opsRoutes = readFileSync(

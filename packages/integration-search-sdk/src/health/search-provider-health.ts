@@ -2,7 +2,10 @@
  * Search provider health helpers — safe, declarative, no engine probes.
  */
 
-import type { IntegrationHealth, IntegrationHealthCheck } from "@apzhub/integration-sdk";
+import type {
+  IntegrationHealth,
+  IntegrationHealthCheck,
+} from "@apzhub/integration-sdk";
 import type { SearchHealth } from "@apzhub/search-contracts";
 import { createUnknownSearchHealth } from "@apzhub/search-contracts";
 
@@ -19,7 +22,9 @@ export class SearchProviderHealth {
   ) {}
 
   /** SDK-only health — never implies engine availability. */
-  unknown(message = "No search engine bound (APZSEARCH-004 Search Integration SDK)"): SearchHealth {
+  unknown(
+    message = "No search engine bound (APZSEARCH-004 Search Integration SDK)",
+  ): SearchHealth {
     return {
       status: "unknown",
       message,
@@ -61,8 +66,8 @@ export class SearchProviderHealth {
   }
 }
 
-export function createSearchProviderHealth(
-  clock?: { now(): string },
-): SearchProviderHealth {
+export function createSearchProviderHealth(clock?: {
+  now(): string;
+}): SearchProviderHealth {
   return new SearchProviderHealth(clock);
 }

@@ -64,7 +64,10 @@ function TrendTable({
   return (
     <Panel title={title}>
       {rows.length === 0 ? (
-        <EmptyState title="No trends" description="No series match the current filters." />
+        <EmptyState
+          title="No trends"
+          description="No series match the current filters."
+        />
       ) : (
         <TestingTable
           caption={title}
@@ -207,10 +210,7 @@ export function ExecutiveDashboardPanel({
             value={String(score.inputs.openDefects ?? "—")}
             tone={(score.inputs.openDefects ?? 0) > 15 ? "danger" : "neutral"}
           />
-          <TestingStatCard
-            label="Coverage"
-            value={health.coverageScore.toFixed(1)}
-          />
+          <TestingStatCard label="Coverage" value={health.coverageScore.toFixed(1)} />
           <TestingStatCard
             label="Automation"
             value={health.automationScore.toFixed(1)}
@@ -293,7 +293,10 @@ export function ExecutiveDashboardPanel({
             <ProgressBar label="Coverage" value={health.coverageScore} />
             <ProgressBar label="Automation" value={health.automationScore} />
             <ProgressBar label="Certification" value={health.certificationScore} />
-            <ProgressBar label="Release readiness" value={health.releaseReadinessScore} />
+            <ProgressBar
+              label="Release readiness"
+              value={health.releaseReadinessScore}
+            />
           </div>
         </Panel>
       </div>
@@ -312,10 +315,7 @@ export function ExecutiveDashboardPanel({
             label="Automation"
             value={health.automationScore.toFixed(1)}
           />
-          <TestingStatCard
-            label="Coverage"
-            value={health.coverageScore.toFixed(1)}
-          />
+          <TestingStatCard label="Coverage" value={health.coverageScore.toFixed(1)} />
           <TestingStatCard
             label="Failed Tests"
             value={String(score.inputs.failedTests ?? "—")}
@@ -374,10 +374,7 @@ export function ExecutiveDashboardPanel({
             label="Certification"
             value={health.certificationScore.toFixed(1)}
           />
-          <TestingStatCard
-            label="Coverage"
-            value={health.coverageScore.toFixed(1)}
-          />
+          <TestingStatCard label="Coverage" value={health.coverageScore.toFixed(1)} />
           <TestingStatCard
             label="Open Risks"
             value={`${risk.overallScore.toFixed(1)} (${risk.overallLevel})`}
@@ -456,7 +453,10 @@ export function ExecutiveDashboardPanel({
       <div className="space-y-4" data-testid="dashboard-quality">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <TestingStatCard label="Quality Score" value={score.score.toFixed(1)} />
-          <TestingStatCard label="Quality Health" value={health.qualityScore.toFixed(1)} />
+          <TestingStatCard
+            label="Quality Health"
+            value={health.qualityScore.toFixed(1)}
+          />
           <TestingStatCard
             label="Status"
             value={health.status}
@@ -469,12 +469,7 @@ export function ExecutiveDashboardPanel({
             columns={["Component", "Input", "Weight", "Contribution"]}
             rows={score.components.map((c) => ({
               id: c.key,
-              cells: [
-                c.key,
-                String(c.input),
-                String(c.weight),
-                String(c.contribution),
-              ],
+              cells: [c.key, String(c.input), String(c.weight), String(c.contribution)],
             }))}
           />
         </Panel>
@@ -519,10 +514,7 @@ export function ExecutiveDashboardPanel({
   if (category === "automation") {
     return (
       <div className="space-y-4" data-testid="dashboard-automation">
-        <TestingStatCard
-          label="Automation"
-          value={health.automationScore.toFixed(1)}
-        />
+        <TestingStatCard label="Automation" value={health.automationScore.toFixed(1)} />
         <ProgressBar label="Automation" value={health.automationScore} />
         <TrendTable
           title="Automation Trends"

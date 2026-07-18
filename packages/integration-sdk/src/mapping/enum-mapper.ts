@@ -4,7 +4,10 @@ import type { EnumMapperOptions, EnumUnknownPolicy } from "./types";
 export interface EnumMapper<TCanonical extends string = string> {
   readonly unknownPolicy: EnumUnknownPolicy;
   map(value: string | number | null | undefined): TCanonical;
-  mapOrThrow(value: string | number | null | undefined, correlationId?: string): TCanonical;
+  mapOrThrow(
+    value: string | number | null | undefined,
+    correlationId?: string,
+  ): TCanonical;
   reverse(canonical: TCanonical): string | undefined;
   has(value: string | number | null | undefined): boolean;
   keys(): readonly string[];

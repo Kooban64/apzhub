@@ -36,8 +36,13 @@ export function buildAuthenticationDiagnostics(
     recommendations.push("Verify credentialRef resolves via SecretProvider");
   }
 
-  if (input.authenticationMode === "oauth2" || input.authenticationMode === "session_cookie") {
-    warnings.push(`${input.authenticationMode} flows are not implemented in OSS-100-02`);
+  if (
+    input.authenticationMode === "oauth2" ||
+    input.authenticationMode === "session_cookie"
+  ) {
+    warnings.push(
+      `${input.authenticationMode} flows are not implemented in OSS-100-02`,
+    );
     recommendations.push("Use static credential modes until OAuth support lands");
   }
 

@@ -17,7 +17,9 @@ function unauthorized(): Response {
   );
 }
 
-export async function handleGetPreferences(resolveSession: SessionResolver): Promise<Response> {
+export async function handleGetPreferences(
+  resolveSession: SessionResolver,
+): Promise<Response> {
   const session = await resolveSession();
   if (!session?.user?.id) {
     return unauthorized();
@@ -43,7 +45,9 @@ export async function handlePatchPreferences(
   return Response.json({ data: preferences });
 }
 
-export async function handleGetFavorites(resolveSession: SessionResolver): Promise<Response> {
+export async function handleGetFavorites(
+  resolveSession: SessionResolver,
+): Promise<Response> {
   const session = await resolveSession();
   if (!session?.user?.id) {
     return unauthorized();
@@ -107,7 +111,12 @@ export async function handleDeleteFavorite(
   const favoriteId = searchParams.get("favoriteId");
   if (!favoriteId) {
     return Response.json(
-      { error: { code: "VALIDATION_ERROR", message: "favoriteId query parameter is required." } },
+      {
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "favoriteId query parameter is required.",
+        },
+      },
       { status: 400 },
     );
   }
@@ -117,7 +126,9 @@ export async function handleDeleteFavorite(
   return Response.json({ data: { removed } });
 }
 
-export async function handleGetRecent(resolveSession: SessionResolver): Promise<Response> {
+export async function handleGetRecent(
+  resolveSession: SessionResolver,
+): Promise<Response> {
   const session = await resolveSession();
   if (!session?.user?.id) {
     return unauthorized();
@@ -181,9 +192,8 @@ export async function handleGetPersonalisationDiagnostics(
   > | null = null;
   if (process.env.DATABASE_URL) {
     try {
-      const { getPostgresPersonalisationDiagnostics } = await import(
-        "./postgres-personalisation-store"
-      );
+      const { getPostgresPersonalisationDiagnostics } =
+        await import("./postgres-personalisation-store");
       postgresDiagnostics = await getPostgresPersonalisationDiagnostics();
     } catch {
       postgresDiagnostics = null;
@@ -263,7 +273,10 @@ function validateWorkbenchLayoutPayload(
   if (typeof body.activeWorkspace !== "string" || body.activeWorkspace.length === 0) {
     return { ok: false, errors: ["activeWorkspace must be a non-empty string"] };
   }
-  if (typeof body.capturedAt !== "string" || Number.isNaN(Date.parse(body.capturedAt))) {
+  if (
+    typeof body.capturedAt !== "string" ||
+    Number.isNaN(Date.parse(body.capturedAt))
+  ) {
     return { ok: false, errors: ["capturedAt must be a valid ISO timestamp"] };
   }
   return { ok: true };

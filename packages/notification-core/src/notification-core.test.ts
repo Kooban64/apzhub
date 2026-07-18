@@ -110,17 +110,15 @@ describe("notification-core", () => {
 
   it("enforces lifecycle transitions", () => {
     expect(canTransitionNotificationLifecycle("draft", "pending")).toBe(true);
-    expect(canTransitionNotificationLifecycle("draft", "delivered")).toBe(
-      false,
-    );
+    expect(canTransitionNotificationLifecycle("draft", "delivered")).toBe(false);
     expect(canTransitionNotificationLifecycle("archived", "draft")).toBe(true);
     expect(canTransitionNotificationLifecycle("read", "read")).toBe(true);
     expect(listAllowedNotificationLifecycleTransitions("queued")).toContain(
       "delivered",
     );
-    expect(() =>
-      assertNotificationLifecycleTransition("draft", "read"),
-    ).toThrow(NotificationDomainError);
+    expect(() => assertNotificationLifecycleTransition("draft", "read")).toThrow(
+      NotificationDomainError,
+    );
   });
 
   it("validates notifications structurally", () => {
@@ -163,18 +161,12 @@ describe("notification-core", () => {
     });
     expect(result.valid).toBe(false);
     expect(result.issues.some((i) => i.code === "unknown_category")).toBe(true);
-    expect(result.issues.some((i) => i.code === "missing_archived_at")).toBe(
-      true,
-    );
+    expect(result.issues.some((i) => i.code === "missing_archived_at")).toBe(true);
     expect(
       result.issues.some((i) => i.code === "reference_notification_mismatch"),
     ).toBe(true);
-    expect(result.issues.some((i) => i.code === "missing_resource_id")).toBe(
-      true,
-    );
-    expect(result.issues.some((i) => i.code === "missing_file_name")).toBe(
-      true,
-    );
+    expect(result.issues.some((i) => i.code === "missing_resource_id")).toBe(true);
+    expect(result.issues.some((i) => i.code === "missing_file_name")).toBe(true);
     expect(result.issues.some((i) => i.code === "invalid_size")).toBe(true);
   });
 
@@ -182,9 +174,7 @@ describe("notification-core", () => {
     const result = validateNotification({
       notification: sampleNotification({ status: "expired" }),
     });
-    expect(result.issues.some((i) => i.code === "missing_expires_at")).toBe(
-      true,
-    );
+    expect(result.issues.some((i) => i.code === "missing_expires_at")).toBe(true);
   });
 
   it("rejects invalid channel kinds and revision", () => {
@@ -194,9 +184,7 @@ describe("notification-core", () => {
         revision: 0,
       }),
     });
-    expect(result.issues.some((i) => i.code === "invalid_channel_kind")).toBe(
-      true,
-    );
+    expect(result.issues.some((i) => i.code === "invalid_channel_kind")).toBe(true);
     expect(result.issues.some((i) => i.code === "invalid_revision")).toBe(true);
   });
 
@@ -237,12 +225,10 @@ describe("notification-core", () => {
       ],
     });
     expect(refs.issues.some((i) => i.code === "unknown_template")).toBe(true);
-    expect(refs.issues.some((i) => i.code === "invalid_reference_kind")).toBe(
+    expect(refs.issues.some((i) => i.code === "invalid_reference_kind")).toBe(true);
+    expect(refs.issues.some((i) => i.code === "attachment_notification_mismatch")).toBe(
       true,
     );
-    expect(
-      refs.issues.some((i) => i.code === "attachment_notification_mismatch"),
-    ).toBe(true);
 
     const archivedOk = validateNotification({
       notification: sampleNotification({
@@ -261,9 +247,7 @@ describe("notification-core", () => {
   });
 
   it("composes foundation with explicit repos only", () => {
-    expect(() => createNotificationFoundation({} as never)).toThrow(
-      /explicit repos/,
-    );
+    expect(() => createNotificationFoundation({} as never)).toThrow(/explicit repos/);
     const foundation = createNotificationFoundation({ repos: stubRepos() });
     expect(foundation.canTransition("pending", "queued")).toBe(true);
     expect(foundation.validate({ notification: sampleNotification() }).valid).toBe(

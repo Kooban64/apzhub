@@ -3,10 +3,10 @@
 > **Purpose:** Index of open-source engines and OSS integration waves  
 > **Audience:** Architects, integration engineers, AI agents  
 > **Authoritative references:** [OSS-001 Master Plan](../strategy/OSS-001-APZHUB-OSS-Integration-Master-Plan.md) · [OSS Product Integration Catalog](../architecture/APZHUB-OSS-Product-Integration-Catalog.md) · [OSS Capability Mapping](../architecture/APZHUB-OSS-Capability-Mapping.md)  
-> **Related documents:** [INTEGRATION-CATALOGUE](./INTEGRATION-CATALOGUE.md) · [OSS Integration Strategy](../strategy/APZHUB-OSS-Integration-Strategy.md)  
+> **Related documents:** [INTEGRATION-CATALOGUE](./INTEGRATION-CATALOGUE.md) · [INTEGRATION-PRODUCT-CAPABILITY-INVENTORY](./INTEGRATION-PRODUCT-CAPABILITY-INVENTORY.md) · [OSS Integration Strategy](../strategy/APZHUB-OSS-Integration-Strategy.md)  
 > **Reading order:** Before integration work  
-> **Last updated:** 2026-07-16  
-> **Current status:** Active — Wave 2 CLOSED (OSS-102-08 CERTIFIED_WITH_LIMITATIONS); Wave 6 n8n delivered as Workflow Engine Reference Adapter (**APZWORKFLOW-011** frozen); Wave 7 Kiwi SoR path **superseded by APZ TCMS**
+> **Last updated:** 2026-07-18  
+> **Current status:** Active — reconciled under **APZHUB-KF-001**. Wave 1 COMPLETE; Wave 2 CLOSED (+ OSS-110 Support spine/UI); Wave 6 n8n via **APZWORKFLOW-011**; Wave 7 Kiwi SoR **superseded by APZ TCMS**.
 
 ---
 
@@ -24,17 +24,17 @@ See [OSS Integration Standards](../governance/APZHUB-OSS-Integration-Standards.m
 
 ## Nine-wave roadmap
 
-| Wave  | OSS Engine         | APZHUB Capability | Service               | Status                                                  |
-| ----- | ------------------ | ----------------- | --------------------- | ------------------------------------------------------- |
-| **1** | Plane              | Projects          | `ProjectService`      | **Complete** — Reference Adapter certified (OSS-101-10) |
-| **2** | Zammad             | Support           | `SupportService`      | Wave 2 **CLOSED** — CERTIFIED_WITH_LIMITATIONS (OSS-102-08); PlatformService pending |
-| **3** | Kimai              | Time Tracking     | `TimeTrackingService` | Planned                                                 |
-| **4** | Paperless-ngx      | Documents         | `DocumentService`     | Planned                                                 |
-| **5** | Metabase           | Analytics         | `AnalyticsService`    | Planned                                                 |
-| **6** | n8n                | Automation / Workflow Engine | `Workflow` (engine facet) | **Complete** — Reference Adapter `@apzhub/integration-n8n` **0.1.0** (APZWORKFLOW-011; read-only; frozen) |
-| **7** | Kiwi TCMS          | Testing           | `TestingService`      | **SUPERSEDED** — native **APZ TCMS** (ADR-0059); Kiwi not product SoR/UI |
-| **8** | Greenbone, Faraday | Security Ops      | Security connectors   | Planned                                                 |
-| **9** | MobSF              | Mobile Security   | Security connector    | Planned                                                 |
+| Wave  | OSS Engine                                                          | APZHUB Capability                    | Service                       | Status                                                                                                                                               |
+| ----- | ------------------------------------------------------------------- | ------------------------------------ | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1** | Plane                                                               | Projects                             | `ProjectService`              | **Complete** — Reference Adapter certified (OSS-101-10); `@apzhub/integration-plane` **0.6.0**                                                       |
+| **2** | Zammad                                                              | Support                              | `SupportService`              | **CLOSED** — adapter CERTIFIED_WITH_LIMITATIONS (OSS-102-08); platform/HTTP/UI **OSS-110-10…14** complete (UI **PRODUCTION_READY_WITH_LIMITATIONS**) |
+| **3** | Kimai                                                               | Time Tracking                        | `TimeTrackingService`         | Planned — **no package on disk**                                                                                                                     |
+| **4** | Paperless-ngx                                                       | Documents                            | `DocumentService`             | Planned as OSS adapter — **no Paperless package**; native Documents (**APZDOCS-006**) exists separately and is frozen                                |
+| **5** | Metabase                                                            | Analytics                            | `AnalyticsService`            | Planned — **no package on disk**                                                                                                                     |
+| **6** | n8n                                                                 | Automation / Workflow Engine         | `Workflow` (engine facet)     | **Complete** — `@apzhub/integration-n8n` **0.1.0** (APZWORKFLOW-011; read-only; frozen)                                                              |
+| **7** | Kiwi TCMS                                                           | Testing                              | `TestingService`              | **SUPERSEDED** — native **APZ TCMS** (ADR-0059); Kiwi not product SoR/UI                                                                             |
+| **8** | Greenbone, Faraday (+ Grafana/Prometheus/Loki in some roadmap docs) | Security Ops / Observability engines | Security / observe connectors | Planned — **no OSS adapters on disk**; native Observability SoR (**APZOBSERVE-006**) is metadata-only                                                |
+| **9** | MobSF                                                               | Mobile Security                      | Security connector            | Planned — **no package on disk**                                                                                                                     |
 
 **Owner amendment:** Zammad resequenced to Wave 2 (OSS-102). Historical “Wave 4 Zammad” references are superseded for sequencing.
 
@@ -63,37 +63,31 @@ Full per-product specifications: [OSS Product Integration Catalog](../architectu
 
 ---
 
-## Wave 2 — Zammad → Support (current focus)
+## Wave 2 — Zammad → Support (**CLOSED**)
 
-| Field                   | Detail                                                                      |
-| ----------------------- | --------------------------------------------------------------------------- |
-| **Engine**              | Zammad CE (self-hosted)                                                     |
-| **User-facing**         | Support                                                                     |
-| **Package**             | `@apzhub/integration-zammad` **v0.6.0** — Wave 2 CERTIFIED_WITH_LIMITATIONS |
-| **Architecture**        | [ZAMMAD-ARCHITECTURE](../architecture/ZAMMAD-ARCHITECTURE.md)               |
-| **Adapter guide**       | [ZAMMAD-ADAPTER](../../integrations/zammad/docs/ZAMMAD-ADAPTER.md)          |
-| **Domain mapping**      | [ZAMMAD-MAPPING](../architecture/ZAMMAD-MAPPING.md)                         |
-| **Capability matrix**   | [ZAMMAD-CAPABILITY-MATRIX](../architecture/ZAMMAD-CAPABILITY-MATRIX.md)     |
-| **Implementation plan** | [ZAMMAD-IMPLEMENTATION-PLAN](../architecture/ZAMMAD-IMPLEMENTATION-PLAN.md) |
-| **Backlog**             | [OSS-102 Backlog](../backlog/OSS-102-Zammad-Integration-Backlog.md)         |
-| **Implementation**      | `adapter.core` + `adapter.operations` — PlatformService/HTTP/UI deferred |
+| Field                   | Detail                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------- |
+| **Engine**              | Zammad CE (self-hosted)                                                         |
+| **User-facing**         | Support                                                                         |
+| **Package**             | `@apzhub/integration-zammad` **v0.6.0** — Wave 2 CERTIFIED_WITH_LIMITATIONS     |
+| **Architecture**        | [ZAMMAD-ARCHITECTURE](../architecture/ZAMMAD-ARCHITECTURE.md)                   |
+| **Adapter guide**       | [ZAMMAD-ADAPTER](../../integrations/zammad/docs/ZAMMAD-ADAPTER.md)              |
+| **Domain mapping**      | [ZAMMAD-MAPPING](../architecture/ZAMMAD-MAPPING.md)                             |
+| **Capability matrix**   | [ZAMMAD-CAPABILITY-MATRIX](../architecture/ZAMMAD-CAPABILITY-MATRIX.md)         |
+| **Implementation plan** | [ZAMMAD-IMPLEMENTATION-PLAN](../architecture/ZAMMAD-IMPLEMENTATION-PLAN.md)     |
+| **Backlog**             | [OSS-102 Backlog](../backlog/OSS-102-Zammad-Integration-Backlog.md)             |
+| **Implementation**      | Adapter + Support Platform Services + HTTP + Module UI complete (OSS-110-10…14) |
 
-### OSS-102 milestones
+### OSS-102 / OSS-110 Support milestones
 
-| Milestone                             | Status                             |
-| ------------------------------------- | ---------------------------------- |
-| OSS-102-01 (discovery & architecture) | **Complete**                       |
-| OSS-102-02 (integration foundation)   | **Complete**                       |
-| OSS-102-03 (core Support services)    | **Complete**                       |
-| OSS-102-04 (articles & metadata)      | **Complete**                       |
-| OSS-102-05 (search/history/analytics) | **Complete**                       |
-| OSS-102-06 (sync/events/webhooks)     | **Complete**                       |
-| OSS-102-07 (ops/diagnostics/cert)     | **Complete**                       |
-| OSS-102-08 (Wave 2 closeout)          | **Complete** — CERTIFIED_WITH_LIMITATIONS |
-| OSS-110-10                            | **Complete** — Support Platform Services |
-| OSS-110-11                            | **Complete** — Support HTTP API Surface |
-| OSS-110-12                            | **Complete** — Support vertical CERTIFIED_WITH_LIMITATIONS |
-| OSS-110-13+                           | **Blocked** — await owner approval |
+| Milestone               | Status                                                                 |
+| ----------------------- | ---------------------------------------------------------------------- |
+| OSS-102-01 … OSS-102-08 | **Complete** — Wave 2 CERTIFIED_WITH_LIMITATIONS                       |
+| OSS-110-10              | **Complete** — Support Platform Services                               |
+| OSS-110-11              | **Complete** — Support HTTP API Surface                                |
+| OSS-110-12              | **Complete** — Support vertical CERTIFIED_WITH_LIMITATIONS             |
+| OSS-110-13              | **Complete** — Support Module UI delivered                             |
+| OSS-110-14              | **Complete** — Support Module UI **PRODUCTION_READY_WITH_LIMITATIONS** |
 
 ---
 
@@ -112,16 +106,16 @@ See [Integration Authentication Architecture](../architecture/APZHUB-Integration
 
 ## Build vs integrate decisions
 
-| Capability          | Decision                    | Reference        |
-| ------------------- | --------------------------- | ---------------- |
-| Projects            | **Integrate** (Plane)       | ADR-0047         |
-| Time Tracking       | **Integrate** (Kimai)       | OSS-001          |
-| Documents           | **Integrate** (Paperless)   | OSS-001          |
-| **APZ TCMS** / Testing | **Build native** (orchestrates external result engines) | ADR-0059 |
-| Quality Engineering | **Superseded** by APZ TCMS  | ADR-0059         |
-| Kiwi TCMS wave      | **Superseded** as SoR/UI    | ADR-0059         |
-| Financial Engine    | **Build native** (deferred) | FIN-001          |
-| Law Platform        | **Build native**            | Product strategy |
+| Capability             | Decision                                                        | Reference             |
+| ---------------------- | --------------------------------------------------------------- | --------------------- |
+| Projects               | **Integrate** (Plane)                                           | ADR-0047              |
+| Time Tracking          | **Integrate** (Kimai)                                           | OSS-001               |
+| Documents              | **Integrate** (Paperless) planned; **native APZDOCS** delivered | OSS-001 / APZDOCS-006 |
+| **APZ TCMS** / Testing | **Build native** (orchestrates external result engines)         | ADR-0059              |
+| Quality Engineering    | **Superseded** by APZ TCMS                                      | ADR-0059              |
+| Kiwi TCMS wave         | **Superseded** as SoR/UI                                        | ADR-0059              |
+| Financial Engine       | **Build native** (deferred)                                     | FIN-001               |
+| Law Platform           | **Build native**                                                | Product strategy      |
 
 See [OSS vs Native Decision Model](../architecture/APZHUB-OSS-vs-Native-Capability-Decision-Model.md) · [Build vs Buy Strategy](../strategy/APZHUB-Build-vs-Buy-Strategy.md).
 

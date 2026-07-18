@@ -10,13 +10,16 @@
 ## Scope
 
 ### Support UI presentation roots
+
 - `apps/web/components/support`
 - `apps/web/lib/support`
 
 ### Workbench wiring
+
 - `apps/web/components/workbench-page.tsx`
 
 ### Manifests
+
 - `services/support/service.yaml`
 - `services/support/manifests/support/module.yaml` (activity-bar)
 - `services/support/manifests/support-requests/module.yaml`
@@ -33,6 +36,7 @@ Files scanned (UI TS/TSX under presentation roots): **47**
 ## Rules
 
 ### Presentation boundary (Support UI)
+
 - `no-zammad-integration` — MUST NOT import `@apzhub/integration-zammad` / `integrations/zammad`
 - `no-entity-mapping-store` — MUST NOT import `EntityMappingStore` / entity-mapping / mapping-store
 - `no-platform-services-impl` — MUST NOT import `@apzhub/platform-services` implementations, `support-service-impls`, `support-mapping-helpers`, `providers/zammad`
@@ -46,11 +50,13 @@ Files scanned (UI TS/TSX under presentation roots): **47**
 - `no-provider-native-id` — MUST NOT display `_zammad_` / `s*_zammad_*` provider-boundary IDs
 
 ### Workbench / manifests
+
 - Activity-bar Support module MUST exist, `status: enabled`, workspace `support`, route `/workspace/support`
 - Sidebar child modules MUST exist and be enabled with correct routes
 - `workbench-page.tsx` MUST wire `isSupportRoute` → `SupportWorkspaceRouter`
 
 ### Vertical layer (reference — still PASS)
+
 HTTP handlers, Zammad providers, and Support service implementations remain under OSS-110-12 rules. Re-run:
 
 ```bash
@@ -63,25 +69,25 @@ node scripts/support-vertical-dependency-audit.mjs
 
 ## Certification checks (script)
 
-| Check | Result |
-|-------|--------|
-| `ui-boundary-script` | PASS |
-| `support-service-yaml` | PASS |
-| `manifest-support` (activity-bar) | PASS |
-| `manifest-support-requests` | PASS |
-| `manifest-support-organizations` | PASS |
-| `manifest-support-groups` | PASS |
-| `manifest-support-users` | PASS |
-| `manifest-support-search` | PASS |
-| `manifest-support-analytics` | PASS |
-| `workbench-wiring` | PASS |
-| `support-api-v1` | PASS |
-| `ui-forbidden-imports` | PASS |
-| `ui-out-of-scope-absent` | PASS |
-| `ui-no-provider-native-ids` | PASS |
-| `internal-note-safety` | PASS |
-| `customer-reply-safety` | PASS |
-| `attachment-metadata-only` | PASS |
+| Check                             | Result |
+| --------------------------------- | ------ |
+| `ui-boundary-script`              | PASS   |
+| `support-service-yaml`            | PASS   |
+| `manifest-support` (activity-bar) | PASS   |
+| `manifest-support-requests`       | PASS   |
+| `manifest-support-organizations`  | PASS   |
+| `manifest-support-groups`         | PASS   |
+| `manifest-support-users`          | PASS   |
+| `manifest-support-search`         | PASS   |
+| `manifest-support-analytics`      | PASS   |
+| `workbench-wiring`                | PASS   |
+| `support-api-v1`                  | PASS   |
+| `ui-forbidden-imports`            | PASS   |
+| `ui-out-of-scope-absent`          | PASS   |
+| `ui-no-provider-native-ids`       | PASS   |
+| `internal-note-safety`            | PASS   |
+| `customer-reply-safety`           | PASS   |
+| `attachment-metadata-only`        | PASS   |
 
 ---
 
@@ -102,6 +108,7 @@ support-ui
 ```
 
 **Notes:**
+
 - `@apzhub/platform-service-contracts` — type/DTO imports in `apps/web/lib/support/types.ts` only (allowed; not platform-services implementation).
 - `@apzhub/ui` — shared design-system primitives (allowed).
 - No `@apzhub/platform-services`, `@apzhub/integration-zammad`, gateway, mapping, or DB packages.
@@ -119,11 +126,11 @@ None — all boundary rules and certification checks satisfied.
 
 ## Vertical dependency audit (still PASS)
 
-| Artifact | Verdict |
-|----------|---------|
-| `scripts/support-vertical-dependency-audit.mjs` | **PASS** |
-| `docs/sprint/OSS-110-12-dependency-audit.md` | PASS (0 violations, 36 files) |
-| HTTP → contracts only; providers → integration-zammad; service impls → contracts | Unchanged |
+| Artifact                                                                         | Verdict                       |
+| -------------------------------------------------------------------------------- | ----------------------------- |
+| `scripts/support-vertical-dependency-audit.mjs`                                  | **PASS**                      |
+| `docs/sprint/OSS-110-12-dependency-audit.md`                                     | PASS (0 violations, 36 files) |
+| HTTP → contracts only; providers → integration-zammad; service impls → contracts | Unchanged                     |
 
 ---
 

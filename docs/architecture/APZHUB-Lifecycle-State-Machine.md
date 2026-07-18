@@ -24,21 +24,21 @@ State is derived deterministically from consolidated diagnostics readiness gates
 
 ## Valid transitions
 
-| From | Allowed transitions |
-|------|---------------------|
-| `initializing` | `bootstrapping`, `degraded`, `stopped` |
-| `bootstrapping` | `configuration-ready`, `degraded`, `recovering`, `stopped` |
-| `configuration-ready` | `identity-ready`, `degraded`, `recovering`, `stopped` |
-| `identity-ready` | `authorization-ready`, `degraded`, `recovering`, `stopped` |
-| `authorization-ready` | `platform-ready`, `degraded`, `recovering`, `stopped` |
-| `platform-ready` | `products-ready`, `degraded`, `recovering`, `stopped` |
-| `products-ready` | `operational`, `degraded`, `recovering`, `stopped` |
-| `operational` | `maintenance`, `degraded`, `stopping`, `recovering` |
-| `maintenance` | `operational`, `stopping` |
-| `degraded` | `recovering`, `operational`, `stopping`, `stopped` |
-| `recovering` | startup states, `operational`, `degraded` |
-| `stopping` | `stopped` |
-| `stopped` | `initializing`, `recovering` |
+| From                  | Allowed transitions                                        |
+| --------------------- | ---------------------------------------------------------- |
+| `initializing`        | `bootstrapping`, `degraded`, `stopped`                     |
+| `bootstrapping`       | `configuration-ready`, `degraded`, `recovering`, `stopped` |
+| `configuration-ready` | `identity-ready`, `degraded`, `recovering`, `stopped`      |
+| `identity-ready`      | `authorization-ready`, `degraded`, `recovering`, `stopped` |
+| `authorization-ready` | `platform-ready`, `degraded`, `recovering`, `stopped`      |
+| `platform-ready`      | `products-ready`, `degraded`, `recovering`, `stopped`      |
+| `products-ready`      | `operational`, `degraded`, `recovering`, `stopped`         |
+| `operational`         | `maintenance`, `degraded`, `stopping`, `recovering`        |
+| `maintenance`         | `operational`, `stopping`                                  |
+| `degraded`            | `recovering`, `operational`, `stopping`, `stopped`         |
+| `recovering`          | startup states, `operational`, `degraded`                  |
+| `stopping`            | `stopped`                                                  |
+| `stopped`             | `initializing`, `recovering`                               |
 
 Implementation: `packages/platform-lifecycle/src/state-machine.ts`
 
@@ -46,15 +46,15 @@ Implementation: `packages/platform-lifecycle/src/state-machine.ts`
 
 ## Readiness gates
 
-| Gate | Satisfied when |
-|------|----------------|
-| Bootstrapping | Platform bootstrap completed |
-| Configuration Ready | Environment validation passed |
-| Identity Ready | Identity diagnostics available and database healthy |
-| Authorization Ready | Authorization diagnostics available |
-| Platform Ready | Bootstrap, config, identity, auth, persistence, session, tenant guard, readiness probe |
-| Products Ready | Platform ready and registered products healthy |
-| Operational | Products ready and platform health not degraded |
+| Gate                | Satisfied when                                                                         |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| Bootstrapping       | Platform bootstrap completed                                                           |
+| Configuration Ready | Environment validation passed                                                          |
+| Identity Ready      | Identity diagnostics available and database healthy                                    |
+| Authorization Ready | Authorization diagnostics available                                                    |
+| Platform Ready      | Bootstrap, config, identity, auth, persistence, session, tenant guard, readiness probe |
+| Products Ready      | Platform ready and registered products healthy                                         |
+| Operational         | Products ready and platform health not degraded                                        |
 
 Implementation: `packages/platform-lifecycle/src/lifecycle-context-builder.ts`
 

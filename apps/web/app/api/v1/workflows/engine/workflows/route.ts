@@ -3,13 +3,11 @@ export const runtime = "nodejs";
 import type { NextRequest } from "next/server";
 
 import { withPlatformApiAuth } from "@/lib/api/v1/auth/with-platform-api-auth";
-import {
-  handleListEngineWorkflows,
-} from "@/lib/api/v1/handlers/workflow-engine";
+import { handleListEngineWorkflows } from "@/lib/api/v1/handlers/workflow-engine";
 import { methodNotAllowedResponse } from "@/lib/api/v1/response";
 import { createPlatformApiTracing } from "@/lib/api/v1/request-context";
 
-const ALLOWED = ['GET'] as const;
+const ALLOWED = ["GET"] as const;
 
 export const GET = withPlatformApiAuth(handleListEngineWorkflows, {
   operation: "workflows.engine.workflows.list",

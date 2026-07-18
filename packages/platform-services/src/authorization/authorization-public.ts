@@ -1,8 +1,6 @@
 /** Public authorization surface for @apzhub/platform-services (OSS-110-06). */
 
-export {
-  AllowAllAuthorizationProvider,
-} from "./authorization-provider";
+export { AllowAllAuthorizationProvider } from "./authorization-provider";
 export type {
   PermissionKey,
   AuthorizationResource,
@@ -13,9 +11,7 @@ export type {
   AuthorizationProvider,
 } from "./authorization-provider";
 
-export {
-  InMemoryAuthorizationAccessResolver,
-} from "./authorization-access-resolver";
+export { InMemoryAuthorizationAccessResolver } from "./authorization-access-resolver";
 export type {
   AuthorizationAccessResolver,
   AuthorizationAccessSnapshot,
@@ -38,9 +34,7 @@ export type {
   ProductionAuthorizationProviderOptions,
 } from "./production-authorization-provider";
 
-export {
-  PlatformAuthorizationAccessResolver,
-} from "./platform-authorization-access-resolver";
+export { PlatformAuthorizationAccessResolver } from "./platform-authorization-access-resolver";
 export type { PlatformAuthorizationAccessResolverOptions } from "./platform-authorization-access-resolver";
 
 export {

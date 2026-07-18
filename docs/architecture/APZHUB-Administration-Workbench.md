@@ -33,10 +33,10 @@ It must not import gateway, platform-services, admin-core, admin-persistence, re
 
 Platform Operations previously occupied `/workspace/administration`. For APZADMIN-004:
 
-| Surface | Manifest parent id | Workspace key | Base route |
-| --- | --- | --- | --- |
-| Platform Operations (M8-03) | `platform-administration` | `operations` | `/workspace/operations` |
-| Administration SoR Workbench | `platform-admin` | `administration` | `/workspace/administration` |
+| Surface                      | Manifest parent id        | Workspace key    | Base route                  |
+| ---------------------------- | ------------------------- | ---------------- | --------------------------- |
+| Platform Operations (M8-03)  | `platform-administration` | `operations`     | `/workspace/operations`     |
+| Administration SoR Workbench | `platform-admin`          | `administration` | `/workspace/administration` |
 
 Ops activity-bar title remains **Platform Operations**. Administration activity-bar title is **Administration**.
 

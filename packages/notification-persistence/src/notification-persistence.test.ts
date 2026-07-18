@@ -61,15 +61,15 @@ describe("notification-persistence", () => {
   });
 
   it("requires explicit postgres for production helper", () => {
-    expect(() =>
-      createProductionNotificationPersistence({} as never),
-    ).toThrow(/explicit postgres/);
-    expect(() =>
-      createNotificationPersistence({ mode: "postgres" }),
-    ).toThrow(/requires db/);
-    expect(() =>
-      createNotificationPersistence({ mode: "nope" as never }),
-    ).toThrow(/Unsupported/);
+    expect(() => createProductionNotificationPersistence({} as never)).toThrow(
+      /explicit postgres/,
+    );
+    expect(() => createNotificationPersistence({ mode: "postgres" })).toThrow(
+      /requires db/,
+    );
+    expect(() => createNotificationPersistence({ mode: "nope" as never })).toThrow(
+      /Unsupported/,
+    );
     expect(() => createNotificationPersistenceForTest({})).toThrow(
       /allowInMemoryPersistence/,
     );
@@ -82,9 +82,7 @@ describe("notification-persistence", () => {
 
     const notification = sampleNotification();
     await repos.notifications.create(ctx, notification);
-    expect(await repos.notifications.get(ctx, notification.id)).toEqual(
-      notification,
-    );
+    expect(await repos.notifications.get(ctx, notification.id)).toEqual(notification);
     expect(await repos.notifications.get(otherCtx, notification.id)).toBeNull();
 
     const updated = {
@@ -158,9 +156,7 @@ describe("notification-persistence", () => {
     };
     await repos.preferences.create(ctx, preference);
     await repos.preferences.update(ctx, { ...preference, enabled: true });
-    expect((await repos.preferences.get(ctx, preference.id))?.enabled).toBe(
-      true,
-    );
+    expect((await repos.preferences.get(ctx, preference.id))?.enabled).toBe(true);
 
     const rule = {
       id: asNotificationRuleId("rule_1"),
@@ -186,9 +182,7 @@ describe("notification-persistence", () => {
       updatedAt: now,
     };
     await repos.recipients.create(ctx, recipient);
-    expect(await repos.recipients.listByNotification(ctx, ntf.id)).toHaveLength(
-      1,
-    );
+    expect(await repos.recipients.listByNotification(ctx, ntf.id)).toHaveLength(1);
 
     await repos.references.create(ctx, {
       id: asNotificationReferenceId("ref_1"),
@@ -221,15 +215,11 @@ describe("notification-persistence", () => {
       createdAt: now,
     });
 
-    expect(await repos.references.listByNotification(ctx, ntf.id)).toHaveLength(
+    expect(await repos.references.listByNotification(ctx, ntf.id)).toHaveLength(1);
+    expect(await repos.attachments.listByNotification(ctx, ntf.id)).toHaveLength(1);
+    expect(await repos.deliveryAttempts.listByNotification(ctx, ntf.id)).toHaveLength(
       1,
     );
-    expect(await repos.attachments.listByNotification(ctx, ntf.id)).toHaveLength(
-      1,
-    );
-    expect(
-      await repos.deliveryAttempts.listByNotification(ctx, ntf.id),
-    ).toHaveLength(1);
     expect(await repos.audits.list(ctx, ntf.id)).toHaveLength(1);
     expect(await repos.channels.list(ctx)).toHaveLength(1);
     expect(await repos.rules.list(ctx)).toHaveLength(1);
@@ -309,9 +299,9 @@ describe("notification-persistence", () => {
     const now = "2026-07-14T10:00:00.000Z";
     const ntf = sampleNotification();
     await repos.notifications.create(ctx, ntf);
-    await expect(
-      repos.notifications.create(otherCtx, ntf),
-    ).rejects.toThrow(/tenant_mismatch/);
+    await expect(repos.notifications.create(otherCtx, ntf)).rejects.toThrow(
+      /tenant_mismatch/,
+    );
 
     const template = {
       id: asNotificationTemplateId("tpl_2"),
@@ -361,9 +351,7 @@ describe("notification-persistence", () => {
       ...recipient,
       status: "delivered",
     });
-    expect((await repos.recipients.get(ctx, recipient.id))?.status).toBe(
-      "delivered",
-    );
+    expect((await repos.recipients.get(ctx, recipient.id))?.status).toBe("delivered");
     expect(await repos.recipients.get(otherCtx, recipient.id)).toBeNull();
 
     expect(

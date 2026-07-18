@@ -36,11 +36,7 @@ import type {
 import type { SearchProviderDescriptor } from "./search-provider";
 
 export type PlatformSearchExecutionProviderStatus =
-  | "ready"
-  | "degraded"
-  | "unavailable"
-  | "disabled"
-  | "unknown";
+  "ready" | "degraded" | "unavailable" | "disabled" | "unknown";
 
 export type PlatformSearchExecutionProviderRegistration = {
   readonly id: SearchProviderId;
@@ -93,19 +89,14 @@ export interface PlatformSearchExecutionProvider {
     input: SearchIndexCreateInput & { readonly indexUid: string },
   ): Promise<SearchIndex>;
 
-  deleteIndex(
-    context: SearchRequestContext,
-    indexUid: string,
-  ): Promise<void>;
+  deleteIndex(context: SearchRequestContext, indexUid: string): Promise<void>;
 
   getIndex(
     context: SearchRequestContext,
     indexUid: string,
   ): Promise<SearchIndex | null>;
 
-  listIndexes(
-    context: SearchRequestContext,
-  ): Promise<readonly SearchIndex[]>;
+  listIndexes(context: SearchRequestContext): Promise<readonly SearchIndex[]>;
 
   updateIndex(
     context: SearchRequestContext,
@@ -131,17 +122,11 @@ export interface PlatformSearchExecutionProvider {
     input: SearchDocumentGetInput,
   ): Promise<SearchIndexedDocument | null>;
 
-  getHealth(
-    context: SearchRequestContext,
-  ): Promise<SearchHealth>;
+  getHealth(context: SearchRequestContext): Promise<SearchHealth>;
 
-  getDiagnostics(
-    context: SearchRequestContext,
-  ): Promise<SearchDiagnostics>;
+  getDiagnostics(context: SearchRequestContext): Promise<SearchDiagnostics>;
 
-  getStatistics(
-    context: SearchRequestContext,
-  ): Promise<SearchStatistics>;
+  getStatistics(context: SearchRequestContext): Promise<SearchStatistics>;
 
   getCapabilities(
     context: SearchRequestContext,
@@ -157,8 +142,7 @@ export type SearchEngineExecutionProvider = PlatformSearchExecutionProvider;
  * Extends the APZSEARCH-001 reserved SearchEngineProvider with the full
  * APZSEARCH-006 method set (additive; executeQuery retained for compatibility).
  */
-export interface SearchEngineProviderComplete
-  extends PlatformSearchExecutionProvider {
+export interface SearchEngineProviderComplete extends PlatformSearchExecutionProvider {
   executeQuery?(
     context: SearchRequestContext,
     query: SearchQuery,

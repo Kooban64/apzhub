@@ -78,7 +78,9 @@ function findRegistration(
   capability: "workspace" | "project" | "team" | "user" | "search",
   provider: unknown,
 ): ProviderRegistration {
-  const match = resolver.registry.list(capability).find((entry) => entry.provider === provider);
+  const match = resolver.registry
+    .list(capability)
+    .find((entry) => entry.provider === provider);
   if (!match) {
     throw new PlatformServiceError({
       category: "configuration",
@@ -116,7 +118,10 @@ export class WorkspaceServiceImpl implements WorkspaceService {
     return { ...result, items };
   }
 
-  async getWorkspace(ctx: ServiceRequestContext, workspaceId: WorkspaceId): Promise<Workspace> {
+  async getWorkspace(
+    ctx: ServiceRequestContext,
+    workspaceId: WorkspaceId,
+  ): Promise<Workspace> {
     assertRequestContext(ctx);
     const resolved = await this.mapping.resolveExisting(ctx, workspaceId, "workspace");
     const provider = this.resolver.resolveWorkspaceProvider(ctx, {
@@ -125,7 +130,12 @@ export class WorkspaceServiceImpl implements WorkspaceService {
     });
     const registration = findRegistration(this.resolver, "workspace", provider);
     const workspace = await provider.getWorkspace(ctx, resolved.providerNativeId);
-    return this.normalizeWorkspace(ctx, registration, workspace, resolved.mapping.platformId);
+    return this.normalizeWorkspace(
+      ctx,
+      registration,
+      workspace,
+      resolved.mapping.platformId,
+    );
   }
 
   private async normalizeWorkspace(
@@ -180,12 +190,24 @@ export class ProjectServiceImpl implements ProjectService {
     });
     const registration = findRegistration(this.resolver, "project", provider);
     const project = await provider.getProject(ctx, resolved.providerNativeId);
-    return this.normalizeProject(ctx, registration, project, resolved.mapping.platformId);
+    return this.normalizeProject(
+      ctx,
+      registration,
+      project,
+      resolved.mapping.platformId,
+    );
   }
 
-  async createProject(ctx: ServiceRequestContext, input: CreateProjectInput): Promise<Project> {
+  async createProject(
+    ctx: ServiceRequestContext,
+    input: CreateProjectInput,
+  ): Promise<Project> {
     assertRequestContext(ctx);
-    const parent = await this.mapping.resolveExisting(ctx, input.workspaceId, "workspace");
+    const parent = await this.mapping.resolveExisting(
+      ctx,
+      input.workspaceId,
+      "workspace",
+    );
     const provider = this.resolver.resolveProjectProvider(ctx, {
       mappedProviderId: parent.providerId,
       mappedIntegrationId: parent.integrationId,
@@ -223,10 +245,18 @@ export class ProjectServiceImpl implements ProjectService {
     });
     const registration = findRegistration(this.resolver, "project", provider);
     const updated = await provider.updateProject(ctx, resolved.providerNativeId, input);
-    return this.normalizeProject(ctx, registration, updated, resolved.mapping.platformId);
+    return this.normalizeProject(
+      ctx,
+      registration,
+      updated,
+      resolved.mapping.platformId,
+    );
   }
 
-  async archiveProject(ctx: ServiceRequestContext, projectId: ProjectId): Promise<Project> {
+  async archiveProject(
+    ctx: ServiceRequestContext,
+    projectId: ProjectId,
+  ): Promise<Project> {
     assertRequestContext(ctx);
     const resolved = await this.mapping.resolveExisting(ctx, projectId, "project");
     const provider = this.resolver.resolveProjectProvider(ctx, {
@@ -235,7 +265,12 @@ export class ProjectServiceImpl implements ProjectService {
     });
     const registration = findRegistration(this.resolver, "project", provider);
     const archived = await provider.archiveProject(ctx, resolved.providerNativeId);
-    return this.normalizeProject(ctx, registration, archived, resolved.mapping.platformId);
+    return this.normalizeProject(
+      ctx,
+      registration,
+      archived,
+      resolved.mapping.platformId,
+    );
   }
 
   async listStatuses(
@@ -255,7 +290,12 @@ export class ProjectServiceImpl implements ProjectService {
     const items: ProjectStatusEntity[] = [];
     for (const status of result.items) {
       items.push(
-        await this.normalizeStatus(ctx, registration, status, project.mapping.platformId),
+        await this.normalizeStatus(
+          ctx,
+          registration,
+          status,
+          project.mapping.platformId,
+        ),
       );
     }
     return { ...result, items };
@@ -279,7 +319,13 @@ export class ProjectServiceImpl implements ProjectService {
       project.providerNativeId,
       status.providerNativeId,
     );
-    return this.normalizeStatus(ctx, registration, entity, project.mapping.platformId, status.mapping.platformId);
+    return this.normalizeStatus(
+      ctx,
+      registration,
+      entity,
+      project.mapping.platformId,
+      status.mapping.platformId,
+    );
   }
 
   async createStatus(
@@ -373,7 +419,9 @@ export class ProjectServiceImpl implements ProjectService {
     const result = await provider.listLabels(ctx, project.providerNativeId, query);
     const items: Label[] = [];
     for (const label of result.items) {
-      items.push(await this.normalizeLabel(ctx, registration, label, project.mapping.platformId));
+      items.push(
+        await this.normalizeLabel(ctx, registration, label, project.mapping.platformId),
+      );
     }
     return { ...result, items };
   }
@@ -469,7 +517,14 @@ export class ProjectServiceImpl implements ProjectService {
     const result = await provider.listSprints(ctx, project.providerNativeId, query);
     const items: Sprint[] = [];
     for (const sprint of result.items) {
-      items.push(await this.normalizeSprint(ctx, registration, sprint, project.mapping.platformId));
+      items.push(
+        await this.normalizeSprint(
+          ctx,
+          registration,
+          sprint,
+          project.mapping.platformId,
+        ),
+      );
     }
     return { ...result, items };
   }
@@ -498,7 +553,10 @@ export class ProjectServiceImpl implements ProjectService {
       mappedIntegrationId: sprint.integrationId,
     });
     const registration = findRegistration(this.resolver, "project", provider);
-    const sprintRef = encodePlaneSprintRef(project.providerNativeId, sprint.providerNativeId);
+    const sprintRef = encodePlaneSprintRef(
+      project.providerNativeId,
+      sprint.providerNativeId,
+    );
     const found = await provider.getSprint(ctx, sprintRef);
 
     return this.normalizeSprint(
@@ -561,7 +619,10 @@ export class ProjectServiceImpl implements ProjectService {
     return this.updateSprint(ctx, sprintId, { status: "active" });
   }
 
-  async completeSprint(ctx: ServiceRequestContext, sprintId: SprintId): Promise<Sprint> {
+  async completeSprint(
+    ctx: ServiceRequestContext,
+    sprintId: SprintId,
+  ): Promise<Sprint> {
     return this.updateSprint(ctx, sprintId, { status: "completed" });
   }
 
@@ -580,7 +641,9 @@ export class ProjectServiceImpl implements ProjectService {
     const result = await provider.listModules(ctx, project.providerNativeId, query);
     const items: ProjectModule[] = [];
     for (const mod of result.items) {
-      items.push(await this.normalizeModule(ctx, registration, mod, project.mapping.platformId));
+      items.push(
+        await this.normalizeModule(ctx, registration, mod, project.mapping.platformId),
+      );
     }
     return { ...result, items };
   }
@@ -792,7 +855,10 @@ export class ProjectServiceImpl implements ProjectService {
       mappedIntegrationId: sprint.integrationId,
     });
     const registration = findRegistration(this.resolver, "project", provider);
-    const sprintRef = encodePlaneSprintRef(project.providerNativeId, sprint.providerNativeId);
+    const sprintRef = encodePlaneSprintRef(
+      project.providerNativeId,
+      sprint.providerNativeId,
+    );
     const updated = await mutate(provider, sprintRef);
     return this.normalizeSprint(
       ctx,
@@ -939,7 +1005,14 @@ export class TeamServiceImpl implements TeamService {
     const result = await provider.listTeam(ctx, project.providerNativeId, query);
     const items: TeamMember[] = [];
     for (const member of result.items) {
-      items.push(await this.normalizeMember(ctx, registration, member, project.mapping.platformId));
+      items.push(
+        await this.normalizeMember(
+          ctx,
+          registration,
+          member,
+          project.mapping.platformId,
+        ),
+      );
     }
     return { ...result, items };
   }
@@ -1073,7 +1146,10 @@ export class UserServiceImpl implements UserService {
     private readonly _mapping: MappingOrchestrator,
   ) {}
 
-  listUsers(ctx: ServiceRequestContext, query?: ListQuery<UserListFilter, UserSortField>) {
+  listUsers(
+    ctx: ServiceRequestContext,
+    query?: ListQuery<UserListFilter, UserSortField>,
+  ) {
     assertRequestContext(ctx);
     return this.resolver.resolveUserProvider(ctx).listUsers(ctx, query);
   }

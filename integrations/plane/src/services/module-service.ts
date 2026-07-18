@@ -1,10 +1,22 @@
 import type { IntegrationRequestContext } from "@apzhub/integration-sdk";
 
-import type { PlaneModuleRecord, PlanePaginatedResponse } from "../internal/plane-api-types";
-import { mapModuleToPlaneBody, mapPlaneModule, resolveProjectPlaneId } from "../mappers/module-mapper";
+import type {
+  PlaneModuleRecord,
+  PlanePaginatedResponse,
+} from "../internal/plane-api-types";
+import {
+  mapModuleToPlaneBody,
+  mapPlaneModule,
+  resolveProjectPlaneId,
+} from "../mappers/module-mapper";
 import type { ProjectModule } from "../models/canonical";
 import type { CreateModuleInput, UpdateModuleInput } from "../models/inputs";
-import type { ModuleListFilter, PageRequest, PageResult, SortField } from "../models/query";
+import type {
+  ModuleListFilter,
+  PageRequest,
+  PageResult,
+  SortField,
+} from "../models/query";
 import {
   assertValid,
   mergeValidation,
@@ -12,8 +24,16 @@ import {
   validateRequiredString,
   validateSortFields,
 } from "../validation/request-validation";
-import { validatePlaneModuleResponse, validatePlanePaginatedResponse } from "../validation/response-validation";
-import { applyClientFilters, applyClientSort, buildPlaneListQuery, mapPaginatedResult } from "./list-helpers";
+import {
+  validatePlaneModuleResponse,
+  validatePlanePaginatedResponse,
+} from "../validation/response-validation";
+import {
+  applyClientFilters,
+  applyClientSort,
+  buildPlaneListQuery,
+  mapPaginatedResult,
+} from "./list-helpers";
 import type { PlaneServiceDeps } from "./plane-operation-runner";
 
 const MODULE_SORT_FIELDS = ["name", "start_date", "target_date"] as const;
@@ -29,7 +49,10 @@ export class PlaneModuleService {
     sort: readonly SortField<(typeof MODULE_SORT_FIELDS)[number]>[] = [],
   ): Promise<PageResult<ProjectModule>> {
     assertValid(
-      mergeValidation(validatePageRequest(page), validateSortFields(sort, MODULE_SORT_FIELDS)),
+      mergeValidation(
+        validatePageRequest(page),
+        validateSortFields(sort, MODULE_SORT_FIELDS),
+      ),
       "modules.list",
     );
 
@@ -54,7 +77,10 @@ export class PlaneModuleService {
       if (filter.status && filter.status !== "all") {
         result = {
           ...result,
-          items: applyClientFilters(result.items, (item) => item.status === filter.status),
+          items: applyClientFilters(
+            result.items,
+            (item) => item.status === filter.status,
+          ),
         };
       }
 
@@ -73,7 +99,11 @@ export class PlaneModuleService {
     });
   }
 
-  async get(context: IntegrationRequestContext, projectId: string, moduleId: string): Promise<ProjectModule> {
+  async get(
+    context: IntegrationRequestContext,
+    projectId: string,
+    moduleId: string,
+  ): Promise<ProjectModule> {
     return this.deps.runner.run(context, "modules.get", async () => {
       const record = await this.deps.client.getModule(
         context,

@@ -1,0 +1,40 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics
+name: Platform Metrics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics Administration Workbench — metadata governance only (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: metrics
+    icon: gauge
+    route: /workspace/metrics
+    order: 55
+    permission: metrics.read
+  view:
+    title: Platform Metrics
+    workspace: metrics
+    route: /workspace/metrics
+    default: true
+    permission: metrics.read
+  actions:
+    - id: platform.metrics.navigate
+      label: Go to Platform Metrics
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: metrics.read
+      palette: true
+      group: Navigation
+      icon: gauge
+      order: 55
+      description: Reveal Platform Metrics in the workbench shell.

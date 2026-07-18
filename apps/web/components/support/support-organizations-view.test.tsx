@@ -116,9 +116,9 @@ describe("SupportOrganizationsView", () => {
     render(wrap(<SupportOrganizationsView permissions={[]} />));
     expect(screen.queryByRole("button", { name: "Create" })).toBeNull();
     await waitFor(() => expect(screen.getByTestId("support-error")).toBeTruthy());
-    expect(screen.getByTestId("support-error").textContent?.toLowerCase()).not.toContain(
-      "zammad",
-    );
+    expect(
+      screen.getByTestId("support-error").textContent?.toLowerCase(),
+    ).not.toContain("zammad");
   });
 
   it("renders detail, updates, and archives with permissions", async () => {
@@ -145,7 +145,9 @@ describe("SupportOrganizationsView", () => {
       ),
     );
 
-    await waitFor(() => expect(screen.getByTestId("support-organization-detail")).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByTestId("support-organization-detail")).toBeTruthy(),
+    );
     expect(screen.getByText("VIP")).toBeTruthy();
 
     const nameInput = screen.getByDisplayValue("Acme");
@@ -159,7 +161,9 @@ describe("SupportOrganizationsView", () => {
 
     await user.click(screen.getByTestId("support-organization-archive"));
     await user.click(screen.getByTestId("support-confirm-dialog-confirm"));
-    await waitFor(() => expect(archiveSupportOrganization).toHaveBeenCalledWith(org.id));
+    await waitFor(() =>
+      expect(archiveSupportOrganization).toHaveBeenCalledWith(org.id),
+    );
     expect(push).toHaveBeenCalledWith("/workspace/support/organizations");
   });
 
@@ -168,11 +172,7 @@ describe("SupportOrganizationsView", () => {
       SupportApiError.fromHttp({ status: 404, code: "NOT_FOUND" }),
     );
 
-    render(
-      wrap(
-        <SupportOrganizationsView organizationId={org.id} permissions={[]} />,
-      ),
-    );
+    render(wrap(<SupportOrganizationsView organizationId={org.id} permissions={[]} />));
     await waitFor(() => expect(screen.getByTestId("support-error")).toBeTruthy());
   });
 });

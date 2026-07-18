@@ -85,9 +85,7 @@ export function computeQualityScore(input: {
       inverted,
     };
   });
-  const score = round2(
-    components.reduce((sum, c) => sum + c.contribution, 0),
-  );
+  const score = round2(components.reduce((sum, c) => sum + c.contribution, 0));
   return {
     id: input.id,
     scope: input.scope,
@@ -159,9 +157,7 @@ export function healthStatusFromScore(score: number): EngineeringHealthStatus {
   return "unknown";
 }
 
-export function riskLevelFromScore(
-  score: number,
-): EngineeringRiskFactor["level"] {
+export function riskLevelFromScore(score: number): EngineeringRiskFactor["level"] {
   const s = clamp01to100(score);
   if (s >= 75) return "critical";
   if (s >= 50) return "high";
@@ -176,7 +172,9 @@ export function aggregateRisk(
   const raw: readonly Omit<EngineeringRiskFactor, "level" | "reasons">[] = [
     {
       key: "quality",
-      score: round2(invertPenalty(inputs.coverage * 0.5 + (100 - inputs.failedTests) * 0.5)),
+      score: round2(
+        invertPenalty(inputs.coverage * 0.5 + (100 - inputs.failedTests) * 0.5),
+      ),
     },
     {
       key: "release",

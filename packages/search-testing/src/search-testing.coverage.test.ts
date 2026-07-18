@@ -2,10 +2,7 @@
  * APZSEARCH-013 residual coverage — classification, lifecycle, safe fields, errors.
  */
 import { describe, expect, it } from "vitest";
-import {
-  asTestCaseId,
-  type TestCase,
-} from "@apzhub/testing-contracts";
+import { asTestCaseId, type TestCase } from "@apzhub/testing-contracts";
 
 import {
   DiagnosticsStore,
@@ -104,15 +101,15 @@ describe("APZSEARCH-013 residual coverage", () => {
     expect(() => life.assertTransition("archived", "published")).toThrow();
 
     const errors = new TestingSearchErrorTranslator();
-    expect(
-      errors.translate(new Error("storageRef forbidden")).classification,
-    ).toBe("validation_failed");
-    expect(
-      errors.translate(new Error("classification required")).classification,
-    ).toBe("validation_failed");
-    expect(
-      errors.translate(new Error("tenant mismatch")).classification,
-    ).toBe("tenant_mismatch");
+    expect(errors.translate(new Error("storageRef forbidden")).classification).toBe(
+      "validation_failed",
+    );
+    expect(errors.translate(new Error("classification required")).classification).toBe(
+      "validation_failed",
+    );
+    expect(errors.translate(new Error("tenant mismatch")).classification).toBe(
+      "tenant_mismatch",
+    );
     expect(errors.translate(new Error("boom")).message).toContain("boom");
 
     const store = new DiagnosticsStore();
@@ -149,9 +146,7 @@ describe("APZSEARCH-013 residual coverage", () => {
 
     expect(mapTestingStatusToClassification("certified")).toBe("confidential");
     expect(mapTestingStatusToClassification("restricted")).toBe("confidential");
-    expect(mapTestingStatusToClassification("confidential")).toBe(
-      "confidential",
-    );
+    expect(mapTestingStatusToClassification("confidential")).toBe("confidential");
     expect(mapTestingStatusToClassification("approved")).toBe("internal");
     expect(mapTestingStatusToClassification("released")).toBe("internal");
     expect(mapTestingStatusToClassification("passed")).toBe("internal");
@@ -162,18 +157,14 @@ describe("APZSEARCH-013 residual coverage", () => {
     expect(mapTestingStatusToClassification("weird")).toBeUndefined();
     expect(mapTestingStatusToClassification(undefined)).toBeUndefined();
 
-    expect(neverDowngradeClassification("public", "confidential")).toBe(
-      "confidential",
-    );
-    expect(neverDowngradeClassification("restricted", "internal")).toBe(
-      "restricted",
-    );
+    expect(neverDowngradeClassification("public", "confidential")).toBe("confidential");
+    expect(neverDowngradeClassification("restricted", "internal")).toBe("restricted");
     expect(neverDowngradeClassification("internal")).toBe("internal");
 
     const context = ctx();
-    expect(
-      resolveTestingClassification(context, { status: "public" }),
-    ).toBe("confidential");
+    expect(resolveTestingClassification(context, { status: "public" })).toBe(
+      "confidential",
+    );
     expect(
       resolveTestingClassification(context, {
         explicit: "restricted",
@@ -196,9 +187,7 @@ describe("APZSEARCH-013 residual coverage", () => {
     expect(isForbiddenMetadataKey("payloadFingerprint")).toBe(true);
     expect(isForbiddenMetadataKey("status")).toBe(false);
     expect(isForbiddenMetadataValue("s3://bucket/obj")).toBe(true);
-    expect(isForbiddenMetadataValue("deadbeefdeadbeefdeadbeefdeadbeef")).toBe(
-      true,
-    );
+    expect(isForbiddenMetadataValue("deadbeefdeadbeefdeadbeefdeadbeef")).toBe(true);
     expect(isForbiddenMetadataValue("application/pdf")).toBe(false);
 
     const leaks = scanMetadataForStorageLeakage({

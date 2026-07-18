@@ -8,10 +8,7 @@ import type { RegressionAnalysisRecord } from "@apzhub/testing-persistence";
 import { toRepositoryContext } from "../mapping/context";
 import { requireFound } from "../services/errors";
 import type { ServiceRuntime } from "../services/types";
-import {
-  analyzeRegressionByCaseKey,
-  numericDelta,
-} from "./calculations";
+import { analyzeRegressionByCaseKey, numericDelta } from "./calculations";
 import { assertRegressionInputs } from "./validation";
 
 function toDomain(row: RegressionAnalysisRecord): RegressionAnalysisResult {
@@ -86,10 +83,7 @@ export function createRegressionAnalysisService(
     async get(ctx, id) {
       return toDomain(
         requireFound(
-          await rt.persistence.regressionAnalyses.get(
-            toRepositoryContext(ctx),
-            id,
-          ),
+          await rt.persistence.regressionAnalyses.get(toRepositoryContext(ctx), id),
           "regression_analysis",
           id,
         ),

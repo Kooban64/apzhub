@@ -188,13 +188,8 @@ export interface PlatformSearchConfigurationService {
   validate(
     context: SearchRequestContext,
     configuration: SearchConfiguration,
-  ):
-    | Promise<SearchConfigurationValidationResult>
-    | SearchConfigurationValidationResult;
-  archive(
-    context: SearchRequestContext,
-    configurationId: string,
-  ): Promise<void>;
+  ): Promise<SearchConfigurationValidationResult> | SearchConfigurationValidationResult;
+  archive(context: SearchRequestContext, configurationId: string): Promise<void>;
   /** @deprecated Prefer get() — retained for early call sites. */
   getConfiguration?(
     context: SearchRequestContext,
@@ -242,9 +237,7 @@ export type SearchCollectionUpdateInput = {
 };
 
 export interface PlatformSearchCollectionService {
-  list(
-    context: SearchRequestContext,
-  ): Promise<readonly SearchCollection[]>;
+  list(context: SearchRequestContext): Promise<readonly SearchCollection[]>;
   get(
     context: SearchRequestContext,
     collectionId: SearchCollectionId | string,
@@ -359,10 +352,7 @@ export interface PlatformSearchScopeService {
     input: SearchScopeUpdateInput,
   ): Promise<SearchScopeRecord>;
   archive(context: SearchRequestContext, scopeId: string): Promise<void>;
-  restore(
-    context: SearchRequestContext,
-    scopeId: string,
-  ): Promise<SearchScopeRecord>;
+  restore(context: SearchRequestContext, scopeId: string): Promise<SearchScopeRecord>;
 }
 
 /** Declared scope assignment record (management metadata). */
@@ -483,9 +473,7 @@ export type SearchMetadataView = SearchMetadata & {
 };
 
 export interface PlatformSearchAuditService {
-  list(
-    context: SearchRequestContext,
-  ): Promise<readonly SearchAudit[]>;
+  list(context: SearchRequestContext): Promise<readonly SearchAudit[]>;
 }
 
 export interface PlatformSearchStatisticsService {
@@ -502,9 +490,7 @@ export interface PlatformSearchValidationService {
   validateConfiguration(
     context: SearchRequestContext,
     configuration: SearchConfiguration,
-  ):
-    | Promise<SearchConfigurationValidationResult>
-    | SearchConfigurationValidationResult;
+  ): Promise<SearchConfigurationValidationResult> | SearchConfigurationValidationResult;
   validateProviderConfiguration(
     context: SearchRequestContext,
     configuration: SearchProviderConfiguration,
@@ -535,5 +521,4 @@ export type SearchPlatformGateway = {
 };
 
 /** @deprecated Use PlatformSearchProviderManagementService */
-export type PlatformSearchProviderService =
-  PlatformSearchProviderManagementService;
+export type PlatformSearchProviderService = PlatformSearchProviderManagementService;

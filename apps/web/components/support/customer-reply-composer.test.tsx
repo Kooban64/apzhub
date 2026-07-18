@@ -50,7 +50,9 @@ describe("CustomerReplyComposer", () => {
     expect(screen.getByTestId("support-customer-reply-warning").textContent).toMatch(
       /customer-visible/i,
     );
-    const channel = screen.getByTestId("support-customer-reply-channel") as HTMLSelectElement;
+    const channel = screen.getByTestId(
+      "support-customer-reply-channel",
+    ) as HTMLSelectElement;
     expect([...channel.options].map((o) => o.value)).not.toContain("note");
 
     await user.type(screen.getByTestId("support-customer-reply-body"), "Public reply");

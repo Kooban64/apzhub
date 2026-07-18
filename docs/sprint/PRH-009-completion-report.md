@@ -12,17 +12,17 @@ Create the canonical Platform Lifecycle Manager. The platform understands its op
 
 ### Implementation
 
-| Component | Location |
-|-----------|----------|
-| Platform Lifecycle package | `packages/platform-lifecycle/` |
-| Lifecycle state machine | `packages/platform-lifecycle/src/state-machine.ts` |
-| Capability & product registrations | `packages/platform-lifecycle/src/registrations.ts` |
-| Participation evaluator | `packages/platform-lifecycle/src/participation-evaluator.ts` |
-| Lifecycle manager | `packages/platform-lifecycle/src/platform-lifecycle-manager.ts` |
-| Shared runtime manager | `packages/platform-lifecycle/src/shared-manager.ts` |
-| Control plane integration | `packages/platform-operations/src/operations-control-plane-service.ts` |
-| Lifecycle API | `apps/web/app/api/platform/v1/operations/lifecycle/route.ts` |
-| Dashboard lifecycle panels | `apps/web/components/platform-operations/control-plane-overview-section.tsx` |
+| Component                          | Location                                                                     |
+| ---------------------------------- | ---------------------------------------------------------------------------- |
+| Platform Lifecycle package         | `packages/platform-lifecycle/`                                               |
+| Lifecycle state machine            | `packages/platform-lifecycle/src/state-machine.ts`                           |
+| Capability & product registrations | `packages/platform-lifecycle/src/registrations.ts`                           |
+| Participation evaluator            | `packages/platform-lifecycle/src/participation-evaluator.ts`                 |
+| Lifecycle manager                  | `packages/platform-lifecycle/src/platform-lifecycle-manager.ts`              |
+| Shared runtime manager             | `packages/platform-lifecycle/src/shared-manager.ts`                          |
+| Control plane integration          | `packages/platform-operations/src/operations-control-plane-service.ts`       |
+| Lifecycle API                      | `apps/web/app/api/platform/v1/operations/lifecycle/route.ts`                 |
+| Dashboard lifecycle panels         | `apps/web/components/platform-operations/control-plane-overview-section.tsx` |
 
 ### Lifecycle states
 
@@ -38,9 +38,9 @@ All 13 PRH-009 states implemented: Initializing, Bootstrapping, Configuration Re
 
 ### Tests
 
-| Suite | Location |
-|-------|----------|
-| Lifecycle manager | `packages/platform-lifecycle/src/platform-lifecycle.test.ts` |
+| Suite               | Location                                                       |
+| ------------------- | -------------------------------------------------------------- |
+| Lifecycle manager   | `packages/platform-lifecycle/src/platform-lifecycle.test.ts`   |
 | Lifecycle API route | `apps/web/lib/api/platform/operations-lifecycle-route.test.ts` |
 
 ### Documentation
@@ -52,27 +52,27 @@ All 13 PRH-009 states implemented: Initializing, Bootstrapping, Configuration Re
 
 ## Success criteria
 
-| Criterion | Met |
-|-----------|-----|
-| Canonical lifecycle service | ✅ `@apzhub/platform-lifecycle` |
-| Deterministic lifecycle transitions | ✅ Verified in tests |
-| Dependency ordering | ✅ `sequenceOrder` registry |
-| Graceful shutdown | ✅ `stopping` → `stopped` |
-| Recovery | ✅ `begin-recovery` action |
-| Maintenance mode | ✅ enter/exit actions |
-| Capability registration | ✅ 16 capabilities |
-| Product registration | ✅ 2 products |
-| Operations integration | ✅ Control plane + lifecycle API |
+| Criterion                           | Met                              |
+| ----------------------------------- | -------------------------------- |
+| Canonical lifecycle service         | ✅ `@apzhub/platform-lifecycle`  |
+| Deterministic lifecycle transitions | ✅ Verified in tests             |
+| Dependency ordering                 | ✅ `sequenceOrder` registry      |
+| Graceful shutdown                   | ✅ `stopping` → `stopped`        |
+| Recovery                            | ✅ `begin-recovery` action       |
+| Maintenance mode                    | ✅ enter/exit actions            |
+| Capability registration             | ✅ 16 capabilities               |
+| Product registration                | ✅ 2 products                    |
+| Operations integration              | ✅ Control plane + lifecycle API |
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| `pnpm lint` | Pass |
-| `pnpm typecheck` | Pass |
-| `pnpm build` | Pass |
-| `pnpm test` | Pass (1955 passed, 47 skipped) |
-| `pnpm test:coverage` | Pass |
+| Gate                 | Result                         |
+| -------------------- | ------------------------------ |
+| `pnpm lint`          | Pass                           |
+| `pnpm typecheck`     | Pass                           |
+| `pnpm build`         | Pass                           |
+| `pnpm test`          | Pass (1955 passed, 47 skipped) |
+| `pnpm test:coverage` | Pass                           |
 
 ## Stop condition
 

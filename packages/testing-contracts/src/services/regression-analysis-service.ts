@@ -1,9 +1,6 @@
 import type { ServiceRequestContext } from "@apzhub/platform-service-contracts";
 
-import type {
-  RegressionAnalysisResult,
-  RegressionCaseKeyResult,
-} from "../domain";
+import type { RegressionAnalysisResult, RegressionCaseKeyResult } from "../domain";
 
 /**
  * Regression analysis by case key — no ML / prediction.

@@ -25,10 +25,10 @@
 
 ## Files
 
-| File | Role |
-|---|---|
-| `pipeline-types.ts` | View models |
-| `pipeline-client.ts` | Interface + HTTP factory |
-| `pipeline-errors.ts` | Error types |
-| `mock-pipeline-client.ts` | Fixtures |
-| `pipeline-api.ts` | Module singleton |
+| File                      | Role                     |
+| ------------------------- | ------------------------ |
+| `pipeline-types.ts`       | View models              |
+| `pipeline-client.ts`      | Interface + HTTP factory |
+| `pipeline-errors.ts`      | Error types              |
+| `mock-pipeline-client.ts` | Fixtures                 |
+| `pipeline-api.ts`         | Module singleton         |

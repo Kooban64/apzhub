@@ -1,16 +1,16 @@
 # APZHUB Programme — Milestone Completion Report
 
-| Field | Value |
-| --- | --- |
-| **Document ID** | APZSEARCH-015-CR |
-| **Milestone** | APZSEARCH-015 — Cross-Product Search Publication Certification & Production Readiness |
-| **Programme** | APZHUB Platform Search |
-| **Status** | **COMPLETE** |
-| **Classification** | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| **Date** | 2026-07-15 |
-| **Authority** | Knowledge Foundation · owner-approved certification milestone |
-| **Predecessor** | APZSEARCH-014 — Reporting Search Publication Adapter (Complete) |
-| **Successor** | **APZSEARCH-016 — Product Indexing Orchestration Framework** (**recommended; not started; requires owner approval**) |
+| Field              | Value                                                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| **Document ID**    | APZSEARCH-015-CR                                                                                                     |
+| **Milestone**      | APZSEARCH-015 — Cross-Product Search Publication Certification & Production Readiness                                |
+| **Programme**      | APZHUB Platform Search                                                                                               |
+| **Status**         | **COMPLETE**                                                                                                         |
+| **Classification** | **PRODUCTION_READY_WITH_LIMITATIONS**                                                                                |
+| **Date**           | 2026-07-15                                                                                                           |
+| **Authority**      | Knowledge Foundation · owner-approved certification milestone                                                        |
+| **Predecessor**    | APZSEARCH-014 — Reporting Search Publication Adapter (Complete)                                                      |
+| **Successor**      | **APZSEARCH-016 — Product Indexing Orchestration Framework** (**recommended; not started; requires owner approval**) |
 
 ---
 
@@ -24,13 +24,13 @@ Certified the complete Cross-Product Search Publication ecosystem (Integration F
 
 ## 2. Milestone scope delivered
 
-| Item | Outcome |
-| ---- | ------- |
-| Audit `pnpm audit:search-publication` | **PASS** (0) |
-| Certification harness `testing/search-publication` | Delivered |
-| Review pack (8 docs + this CR) | Delivered |
-| Foundation stop points (015 COMPLETE → stop before 016) | Delivered |
-| Package code changes in `packages/search-*` | **None** |
+| Item                                                    | Outcome      |
+| ------------------------------------------------------- | ------------ |
+| Audit `pnpm audit:search-publication`                   | **PASS** (0) |
+| Certification harness `testing/search-publication`      | Delivered    |
+| Review pack (8 docs + this CR)                          | Delivered    |
+| Foundation stop points (015 COMPLETE → stop before 016) | Delivered    |
+| Package code changes in `packages/search-*`             | **None**     |
 
 ---
 
@@ -54,19 +54,19 @@ Product adapters (010–014) → search-integration (009)
 
 ## 5. Certified versions
 
-| Package | Version |
-| ------- | ------- |
-| `@apzhub/search-integration` | **0.1.0** |
-| `@apzhub/search-projects` | **0.1.0** |
-| `@apzhub/search-support` | **0.1.0** |
-| `@apzhub/search-documents` | **0.1.0** |
-| `@apzhub/search-testing` | **0.1.1** |
-| `@apzhub/search-reporting` | **0.1.0** |
-| `@apzhub/search-contracts` | **0.4.0** |
-| `@apzhub/search-persistence` | **0.2.0** |
-| `@apzhub/integration-search-sdk` | **0.1.0** |
-| `@apzhub/integration-meilisearch` | **0.1.0** |
-| `@apzhub/platform-services` | **0.18.0** |
+| Package                           | Version    |
+| --------------------------------- | ---------- |
+| `@apzhub/search-integration`      | **0.1.0**  |
+| `@apzhub/search-projects`         | **0.1.0**  |
+| `@apzhub/search-support`          | **0.1.0**  |
+| `@apzhub/search-documents`        | **0.1.0**  |
+| `@apzhub/search-testing`          | **0.1.1**  |
+| `@apzhub/search-reporting`        | **0.1.0**  |
+| `@apzhub/search-contracts`        | **0.4.0**  |
+| `@apzhub/search-persistence`      | **0.2.0**  |
+| `@apzhub/integration-search-sdk`  | **0.1.0**  |
+| `@apzhub/integration-meilisearch` | **0.1.0**  |
+| `@apzhub/platform-services`       | **0.18.0** |
 
 ---
 
@@ -87,14 +87,14 @@ See review pack:
 
 ## 13. Tests / Coverage / Gates
 
-| Gate | Result |
-| ---- | ------ |
-| `pnpm audit:search-publication` | **PASS** (0) |
-| Prior audits 009–014 | **PASS** |
-| `pnpm exec vitest run testing/search-publication` | **PASS** — **19** tests / 3 files |
-| Adapter package regressions | **PASS** — integration 11 · projects 9 · support 9 · documents 10 · testing 16 · reporting 10 (**65** total) |
-| `pnpm audit:search-vertical` | **PASS** (0) — Playwright/live Meilisearch remain 008 observations |
-| Coverage (015 re-measure) | See [Coverage Baseline](../reviews/APZSEARCH-015-coverage-baseline.md) — all adapters ≥95% lines/statements/functions |
+| Gate                                              | Result                                                                                                                |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `pnpm audit:search-publication`                   | **PASS** (0)                                                                                                          |
+| Prior audits 009–014                              | **PASS**                                                                                                              |
+| `pnpm exec vitest run testing/search-publication` | **PASS** — **19** tests / 3 files                                                                                     |
+| Adapter package regressions                       | **PASS** — integration 11 · projects 9 · support 9 · documents 10 · testing 16 · reporting 10 (**65** total)          |
+| `pnpm audit:search-vertical`                      | **PASS** (0) — Playwright/live Meilisearch remain 008 observations                                                    |
+| Coverage (015 re-measure)                         | See [Coverage Baseline](../reviews/APZSEARCH-015-coverage-baseline.md) — all adapters ≥95% lines/statements/functions |
 
 ---
 
@@ -133,10 +133,10 @@ Do not implement without owner approval. Do not start OCR/AI, new adapters, or S
 
 ## Document control
 
-| Item | Value |
-| --- | --- |
-| Document ID | **APZSEARCH-015-CR** |
-| Report | `docs/sprint/APZSEARCH-015-completion-report.md` |
-| Audit | `pnpm audit:search-publication` |
+| Item        | Value                                            |
+| ----------- | ------------------------------------------------ |
+| Document ID | **APZSEARCH-015-CR**                             |
+| Report      | `docs/sprint/APZSEARCH-015-completion-report.md` |
+| Audit       | `pnpm audit:search-publication`                  |
 
 **End of report.**

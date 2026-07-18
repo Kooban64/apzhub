@@ -46,28 +46,28 @@ Official baselines recorded in [Quality Report](../reviews/APZTCMS-020-quality-r
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| typecheck | PASS |
-| lint | PASS |
-| tests | PASS 103 |
-| OpenAPI | PASS |
-| architecture / dependency / boundary | PASS |
-| security | PASS |
-| Playwright live | LIMITED |
+| Gate                                 | Result   |
+| ------------------------------------ | -------- |
+| typecheck                            | PASS     |
+| lint                                 | PASS     |
+| tests                                | PASS 103 |
+| OpenAPI                              | PASS     |
+| architecture / dependency / boundary | PASS     |
+| security                             | PASS     |
+| Playwright live                      | LIMITED  |
 
 ## Technical Debt
 
-- Live Playwright blocked by pre-existing Next.js dynamic slug conflict  
-- GitHub App / OAuth live auth deferred  
-- Plane/Zammad platform-services typecheck noise unchanged  
+- Live Playwright blocked by pre-existing Next.js dynamic slug conflict
+- GitHub App / OAuth live auth deferred
+- Plane/Zammad platform-services typecheck noise unchanged
 
 ## Known Limitations
 
-- Read-only metadata (no execution/download)  
-- App/OAuth placeholders  
-- Live E2E not re-proven this closeout  
-- Live facets require provider registration  
+- Read-only metadata (no execution/download)
+- App/OAuth placeholders
+- Live E2E not re-proven this closeout
+- Live facets require provider registration
 
 ## Final Production Classification
 

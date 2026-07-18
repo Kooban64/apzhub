@@ -39,9 +39,7 @@ describe("mock administration client", () => {
       to: "active",
     });
     expect(transitioned.status).toBe("active");
-    expect(
-      "executeAdministration" in client || "provisionUser" in client,
-    ).toBe(false);
+    expect("executeAdministration" in client || "provisionUser" in client).toBe(false);
   });
 });
 
@@ -235,26 +233,23 @@ describe("HTTP administration client", () => {
     await client.getReadiness();
     await client.getManagementCapabilities();
 
-    expect(calls.some((c) => c.includes("/api/v1/administration/modules"))).toBe(
-      true,
-    );
-    expect(calls.some((c) => c.includes("/management-capabilities"))).toBe(
-      true,
-    );
+    expect(calls.some((c) => c.includes("/api/v1/administration/modules"))).toBe(true);
+    expect(calls.some((c) => c.includes("/management-capabilities"))).toBe(true);
     expect(calls.every((c) => c.includes("/api/v1/administration"))).toBe(true);
   });
 
   it("maps error envelopes", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(async () =>
-        new Response(
-          JSON.stringify({
-            error: { message: "Nope", code: "FORBIDDEN" },
-            meta: { correlationId: "c1", requestId: "r1" },
-          }),
-          { status: 403, headers: { "content-type": "application/json" } },
-        ),
+      vi.fn(
+        async () =>
+          new Response(
+            JSON.stringify({
+              error: { message: "Nope", code: "FORBIDDEN" },
+              meta: { correlationId: "c1", requestId: "r1" },
+            }),
+            { status: 403, headers: { "content-type": "application/json" } },
+          ),
       ),
     );
     const client = createHttpAdministrationClient();
@@ -287,21 +282,14 @@ describe("administration API facade and query keys", () => {
       "detail",
       "mod_1",
     ]);
-    expect(administrationQueryKeys.health()).toEqual([
-      "administration",
-      "health",
-    ]);
+    expect(administrationQueryKeys.health()).toEqual(["administration", "health"]);
   });
 
   it("formats user messages", () => {
     expect(
-      toAdministrationUserMessage(
-        new AdministrationClientError({ message: "x" }),
-      ),
+      toAdministrationUserMessage(new AdministrationClientError({ message: "x" })),
     ).toBe("x");
     expect(toAdministrationUserMessage(new Error("y"))).toBe("y");
-    expect(toAdministrationUserMessage("z")).toBe(
-      "Administration request failed",
-    );
+    expect(toAdministrationUserMessage("z")).toBe("Administration request failed");
   });
 });

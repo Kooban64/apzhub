@@ -61,7 +61,9 @@ export function wrapKnowledgeServiceForLegalSearchTracking(
   return {
     ...service,
     async query(input: KnowledgeQueryInput) {
-      const result = await runWithLegalSearchPersistenceScope(() => service.query(input));
+      const result = await runWithLegalSearchPersistenceScope(() =>
+        service.query(input),
+      );
       const queryText = input.text?.trim() ?? "";
       const legalDocumentCount = countLegalEntityDocuments(result.documents);
       const filters = readFilters();

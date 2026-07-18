@@ -11,22 +11,22 @@ Handlers never import `@apzhub/testing-services`, persistence, or adapters. No n
 
 ## Routes
 
-| Method | Path | Gateway |
-|---|---|---|
-| GET | `/score` | `score` |
-| POST | `/score` | `score` (optional scope/weights) |
-| GET | `/health` | `assessHealth` |
-| POST | `/health` | `assessHealth` (optional scope/weights) |
-| GET | `/risk` | `assessHealth` → `risk` |
-| GET | `/snapshots` | `listSnapshots` |
-| POST | `/snapshots` | `computeSnapshot` |
-| GET | `/snapshots/{snapshotId}` | `getSnapshot` |
-| GET | `/trends` | `listTrends` |
-| POST | `/trends` | `buildTrend` |
-| GET | `/benchmarks` | `listBenchmarks` |
-| POST | `/benchmarks` | `compareBenchmark` |
-| GET | `/baselines` | `listBaselines` |
-| GET | `/historical` | `listHistorical` |
+| Method | Path                      | Gateway                                 |
+| ------ | ------------------------- | --------------------------------------- |
+| GET    | `/score`                  | `score`                                 |
+| POST   | `/score`                  | `score` (optional scope/weights)        |
+| GET    | `/health`                 | `assessHealth`                          |
+| POST   | `/health`                 | `assessHealth` (optional scope/weights) |
+| GET    | `/risk`                   | `assessHealth` → `risk`                 |
+| GET    | `/snapshots`              | `listSnapshots`                         |
+| POST   | `/snapshots`              | `computeSnapshot`                       |
+| GET    | `/snapshots/{snapshotId}` | `getSnapshot`                           |
+| GET    | `/trends`                 | `listTrends`                            |
+| POST   | `/trends`                 | `buildTrend`                            |
+| GET    | `/benchmarks`             | `listBenchmarks`                        |
+| POST   | `/benchmarks`             | `compareBenchmark`                      |
+| GET    | `/baselines`              | `listBaselines`                         |
+| GET    | `/historical`             | `listHistorical`                        |
 
 Base path: `/api/v1/testing/engineering-intelligence`.
 

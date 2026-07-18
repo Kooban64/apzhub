@@ -4,10 +4,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 const ROOT = join(process.cwd(), "apps/web");
-const SCAN_DIRS = [
-  join(ROOT, "components/support"),
-  join(ROOT, "lib/support"),
-];
+const SCAN_DIRS = [join(ROOT, "components/support"), join(ROOT, "lib/support")];
 
 const FORBIDDEN_IMPORT_PATTERNS = [
   /@apzhub\/integration-zammad/,
@@ -55,7 +52,11 @@ describe("support UI architecture boundary", () => {
       }
 
       // Allow product-safe comments mentioning "never Zammad" only in tests; production UI must not label Zammad.
-      if (/zammad/i.test(content) && !rel.includes("sanitize") && !rel.includes("errors")) {
+      if (
+        /zammad/i.test(content) &&
+        !rel.includes("sanitize") &&
+        !rel.includes("errors")
+      ) {
         // errors.ts intentionally filters provider strings
         if (!rel.endsWith("errors.ts")) {
           violations.push(`${rel}: contains zammad string`);

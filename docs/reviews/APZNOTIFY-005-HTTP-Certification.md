@@ -13,12 +13,12 @@ All `/api/v1/notifications/*` routes delivered in APZNOTIFY-003 remain present a
 
 ## OpenAPI
 
-| Check | Result |
-| --- | --- |
-| Tag `Platform Notifications` | Present |
-| Spec version | **1.4.0** |
-| `pnpm openapi:validate:platform` | PASS |
-| Delivery paths (`/send`, `/deliver`, `/providers`, …) | Absent |
+| Check                                                 | Result    |
+| ----------------------------------------------------- | --------- |
+| Tag `Platform Notifications`                          | Present   |
+| Spec version                                          | **1.4.0** |
+| `pnpm openapi:validate:platform`                      | PASS      |
+| Delivery paths (`/send`, `/deliver`, `/providers`, …) | Absent    |
 
 ## Handler wiring
 

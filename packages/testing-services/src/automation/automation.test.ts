@@ -31,9 +31,7 @@ const ALL_PERMS = [
   "testing.*",
 ];
 
-function ctx(
-  overrides: Partial<ServiceRequestContext> = {},
-): ServiceRequestContext {
+function ctx(overrides: Partial<ServiceRequestContext> = {}): ServiceRequestContext {
   return {
     tenantId: "tenant-a",
     userId: "user-1",
@@ -115,7 +113,9 @@ describe("automation adapters", () => {
     expect(adapter.canParse({ payload: xml, fileNameHint: "report.xml" })).toBe(true);
     const result = adapter.parse({ payload: xml });
     expect(result.suites[0]!.cases).toHaveLength(3);
-    expect(result.suites[0]!.cases.find((c) => c.title === "fail")?.status).toBe("fail");
+    expect(result.suites[0]!.cases.find((c) => c.title === "fail")?.status).toBe(
+      "fail",
+    );
     expect(() => adapter.parse({ payload: "<html></html>" })).toThrow();
   });
 
@@ -173,7 +173,10 @@ describe("adapter registry", () => {
     expect(registry.list().length).toBeGreaterThanOrEqual(6);
     expect(registry.get("vitest")?.kind).toBe("vitest");
     const vitestPayload = {
-      payload: { success: true, testResults: [{ assertionResults: [{ fullName: "a", status: "passed" }] }] },
+      payload: {
+        success: true,
+        testResults: [{ assertionResults: [{ fullName: "a", status: "passed" }] }],
+      },
     };
     expect(registry.resolveForInput(vitestPayload).kind).toBe("vitest");
     expect(() => registry.resolveForInput({ payload: { nope: true } })).toThrow(
@@ -612,23 +615,25 @@ describe("coverage expansion", () => {
     expect(domain.requirements).toBeTruthy();
 
     // types helpers
-    const { asObject, asText, deriveExternalRunRef, readNumber, assertAdapterCanParse } =
-      await import("./adapters/types");
+    const {
+      asObject,
+      asText,
+      deriveExternalRunRef,
+      readNumber,
+      assertAdapterCanParse,
+    } = await import("./adapters/types");
     expect(asObject(new TextEncoder().encode('{"a":1}')).a).toBe(1);
     expect(asObject('[{"x":1}]').items).toEqual([{ x: 1 }]);
     expect(() => asObject("not-json")).toThrow();
     expect(asText({ a: 1 })).toContain("a");
     expect(asText(new TextEncoder().encode("hi"))).toBe("hi");
     expect(readNumber({ n: "12" }, "n")).toBe(12);
-    expect(
-      deriveExternalRunRef(
-        { payload: { id: "from-id" } },
-        "fallback",
-      ),
-    ).toBe("from-id");
-    expect(deriveExternalRunRef({ payload: {} }, "fallback").startsWith("fallback")).toBe(
-      true,
+    expect(deriveExternalRunRef({ payload: { id: "from-id" } }, "fallback")).toBe(
+      "from-id",
     );
+    expect(
+      deriveExternalRunRef({ payload: {} }, "fallback").startsWith("fallback"),
+    ).toBe(true);
     expect(() =>
       assertAdapterCanParse(createGenericJsonAdapter(), { payload: { no: true } }),
     ).toThrow(/cannot parse/i);

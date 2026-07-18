@@ -9,15 +9,13 @@ const ROOT = join(__dirname, "../..");
 
 describe("APZDOCS-004 foundation", () => {
   it("ships document HTTP routes, client, and audit", () => {
-    expect(existsSync(join(ROOT, "apps/web/app/api/v1/documents/route.ts"))).toBe(
+    expect(existsSync(join(ROOT, "apps/web/app/api/v1/documents/route.ts"))).toBe(true);
+    expect(existsSync(join(ROOT, "apps/web/lib/documents/document-client.ts"))).toBe(
       true,
     );
-    expect(
-      existsSync(join(ROOT, "apps/web/lib/documents/document-client.ts")),
-    ).toBe(true);
-    expect(
-      existsSync(join(ROOT, "scripts/apzdocs-004-document-http-audit.mjs")),
-    ).toBe(true);
+    expect(existsSync(join(ROOT, "scripts/apzdocs-004-document-http-audit.mjs"))).toBe(
+      true,
+    );
   });
 
   it("OpenAPI includes Platform Documents paths", () => {

@@ -16,15 +16,15 @@ No HTTP transport. No vendor-specific code. No `@apzhub/platform-lifecycle` impo
 
 ## Components
 
-| Component | Package path |
-|-----------|--------------|
-| `DefaultHealthProvider` | `src/health/default-health-provider.ts` |
-| `DefaultDiagnosticsProvider` | `src/diagnostics/unified-diagnostics.ts` |
-| `DefaultVersionProvider` | `src/version/types.ts` |
-| `DefaultLifecycleParticipant` | `src/lifecycle/default-lifecycle-participant.ts` |
+| Component                            | Package path                                     |
+| ------------------------------------ | ------------------------------------------------ |
+| `DefaultHealthProvider`              | `src/health/default-health-provider.ts`          |
+| `DefaultDiagnosticsProvider`         | `src/diagnostics/unified-diagnostics.ts`         |
+| `DefaultVersionProvider`             | `src/version/types.ts`                           |
+| `DefaultLifecycleParticipant`        | `src/lifecycle/default-lifecycle-participant.ts` |
 | `IntegrationAdapterLifecycleService` | `src/lifecycle/integration-lifecycle-service.ts` |
-| `createIntegrationOperationsStack` | `src/operations-stack.ts` |
-| Platform bridge | `src/lifecycle/platform-bridge.ts` |
+| `createIntegrationOperationsStack`   | `src/operations-stack.ts`                        |
+| Platform bridge                      | `src/lifecycle/platform-bridge.ts`               |
 
 ---
 

@@ -68,9 +68,7 @@ describe("APZSEARCH-013 specialised publishers", () => {
     expect(pubs.pipeline.getMapper()).toBeDefined();
 
     expect(adapter.mapper.getManualMapper()).toBe(pubs.manual.getMapper());
-    expect(adapter.mapper.getAutomationMapper()).toBe(
-      pubs.automation.getMapper(),
-    );
+    expect(adapter.mapper.getAutomationMapper()).toBe(pubs.automation.getMapper());
     expect(adapter.mapper.getCertificationMapper()).toBe(
       pubs.certification.getMapper(),
     );
@@ -95,37 +93,27 @@ describe("APZSEARCH-013 specialised publishers", () => {
     expect(pubs.reportingMetadata).toBeInstanceOf(ReportingMetadataPublisher);
     expect(pubs.pipeline).toBeInstanceOf(PipelinePublisher);
 
-    expect(adapter.publisher.resolvePublisher("test_case").domain).toBe(
-      "manual",
-    );
+    expect(adapter.publisher.resolvePublisher("test_case").domain).toBe("manual");
     expect(adapter.publisher.resolvePublisher("automation_run").domain).toBe(
       "automation",
     );
     expect(adapter.publisher.resolvePublisher("certification").domain).toBe(
       "certification",
     );
-    expect(adapter.publisher.resolvePublisher("release").domain).toBe(
-      "release",
+    expect(adapter.publisher.resolvePublisher("release").domain).toBe("release");
+    expect(adapter.publisher.resolvePublisher("engineering_snapshot").domain).toBe(
+      "engineering_intelligence",
     );
-    expect(
-      adapter.publisher.resolvePublisher("engineering_snapshot").domain,
-    ).toBe("engineering_intelligence");
     expect(adapter.publisher.resolvePublisher("quality_summary").domain).toBe(
       "quality",
     );
     expect(adapter.publisher.resolvePublisher("report_metadata").domain).toBe(
       "reporting_metadata",
     );
-    expect(adapter.publisher.resolvePublisher("pipeline_run").domain).toBe(
-      "pipeline",
-    );
+    expect(adapter.publisher.resolvePublisher("pipeline_run").domain).toBe("pipeline");
 
-    expect(TESTING_SEARCH_DOMAIN_ENTITY_TYPES.quality).toContain(
-      "defect_summary",
-    );
-    expect(TESTING_SEARCH_DOMAIN_ENTITY_TYPES.pipeline).toContain(
-      "pipeline_import",
-    );
+    expect(TESTING_SEARCH_DOMAIN_ENTITY_TYPES.quality).toContain("defect_summary");
+    expect(TESTING_SEARCH_DOMAIN_ENTITY_TYPES.pipeline).toContain("pipeline_import");
   });
 
   it("publishes quality and pipeline metadata without leakage", () => {
@@ -385,31 +373,29 @@ describe("APZSEARCH-013 specialised publishers", () => {
     expect(leanRunDraft.metadata?.secretsPresent).toBe("false");
 
     expect(
-      adapter.publisher
-        .validate(context, {
-          entityType: "defect_summary",
-          entity: {
-            id: "dfs_55555555555555555555555555555555",
-            tenantId: TENANT,
-            title: "No counts",
-          },
-        })
-        .ok,
+      adapter.publisher.validate(context, {
+        entityType: "defect_summary",
+        entity: {
+          id: "dfs_55555555555555555555555555555555",
+          tenantId: TENANT,
+          title: "No counts",
+        },
+      }).ok,
     ).toBe(false);
 
     expect(
-      adapter.publisher
-        .update(context, {
-          entityType: "quality_coverage_summary",
-          entity: coverageMetric,
-        })
-        .ok,
+      adapter.publisher.update(context, {
+        entityType: "quality_coverage_summary",
+        entity: coverageMetric,
+      }).ok,
     ).toBe(true);
 
     expect(
-      adapter.specialisedPublishers.pipeline
-        .remove(context, "pipeline", String(pipeline.id))
-        .ok,
+      adapter.specialisedPublishers.pipeline.remove(
+        context,
+        "pipeline",
+        String(pipeline.id),
+      ).ok,
     ).toBe(true);
   });
 

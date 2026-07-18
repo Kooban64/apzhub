@@ -51,8 +51,7 @@ export function mapGitHubWorkflowRun(
   record: GitHubWorkflowRunRecord,
 ): PipelineRunMetadata {
   const startedAt = record.run_started_at ?? record.created_at;
-  const completedAt =
-    record.status === "completed" ? record.updated_at : undefined;
+  const completedAt = record.status === "completed" ? record.updated_at : undefined;
   return {
     id: String(record.id),
     name: record.name ?? record.display_title ?? undefined,

@@ -8,13 +8,13 @@
 
 ## Navigation
 
-| Section | Route | Manifest permission |
-| ------- | ----- | ------------------- |
-| Reporting home | `/workspace/reporting` | `report.view` |
-| Templates | `/workspace/reporting/templates` | `report.view` |
-| Generated Reports | `/workspace/reporting/generations` | `report.view` |
-| History | `/workspace/reporting/history` | `report.view` |
-| Formats | `/workspace/reporting/formats` | `report.view` |
+| Section           | Route                              | Manifest permission |
+| ----------------- | ---------------------------------- | ------------------- |
+| Reporting home    | `/workspace/reporting`             | `report.view`       |
+| Templates         | `/workspace/reporting/templates`   | `report.view`       |
+| Generated Reports | `/workspace/reporting/generations` | `report.view`       |
+| History           | `/workspace/reporting/history`     | `report.view`       |
+| Formats           | `/workspace/reporting/formats`     | `report.view`       |
 
 Router: `ReportingWorkspaceRouter` → `PlatformReportingView`.
 
@@ -26,26 +26,26 @@ Refresh · Generate · Preview · View Metadata · Download Metadata · Validate
 
 ## UX capabilities
 
-| Capability | Result |
-| ---------- | ------ |
-| Search / filter | **PASS** |
-| Sorting (templates + generations) | **PASS** |
-| Pagination | **PASS** |
-| Metadata inspection / JSON download | **PASS** |
-| Preview panel | **PASS** |
-| Output format listing | **PASS** |
-| Responsive layout | **PASS** (flex wrap / overflow tables) |
-| Read-only administration | **PASS** |
+| Capability                          | Result                                 |
+| ----------------------------------- | -------------------------------------- |
+| Search / filter                     | **PASS**                               |
+| Sorting (templates + generations)   | **PASS**                               |
+| Pagination                          | **PASS**                               |
+| Metadata inspection / JSON download | **PASS**                               |
+| Preview panel                       | **PASS**                               |
+| Output format listing               | **PASS**                               |
+| Responsive layout                   | **PASS** (flex wrap / overflow tables) |
+| Read-only administration            | **PASS**                               |
 
 ## Accessibility
 
-| Check | Result |
-| ----- | ------ |
-| Toolbar `role="toolbar"` + label | **PASS** |
-| Status / alert regions | **PASS** |
-| Labelled search + sort controls | **PASS** |
-| Keyboard-activatable table rows (Enter/Space) | **PASS** |
-| Focusable interactive controls | **PASS** |
+| Check                                           | Result   |
+| ----------------------------------------------- | -------- |
+| Toolbar `role="toolbar"` + label                | **PASS** |
+| Status / alert regions                          | **PASS** |
+| Labelled search + sort controls                 | **PASS** |
+| Keyboard-activatable table rows (Enter/Space)   | **PASS** |
+| Focusable interactive controls                  | **PASS** |
 | Token-based colours (no hardcoded brand purple) | **PASS** |
 
 Evidence: `platform-reporting-view.test.tsx` (9 tests).

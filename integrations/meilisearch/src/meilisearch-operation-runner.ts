@@ -17,9 +17,7 @@ import {
 
 import type { MeilisearchRestClient } from "./internal/meilisearch-rest-client";
 import type { MeilisearchIndexRecord } from "./internal/meilisearch-api-types";
-import {
-  mapMeilisearchUnknownError,
-} from "./meilisearch-error-mapper";
+import { mapMeilisearchUnknownError } from "./meilisearch-error-mapper";
 import { MEILISEARCH_INTEGRATION_ID } from "./version";
 import {
   createErrorResult,
@@ -27,10 +25,7 @@ import {
   createOkResult,
   type SearchOperationResult,
 } from "./results/search-operation-result";
-import {
-  MEILISEARCH_UNSUPPORTED_FEATURES,
-  NOT_SUPPORTED,
-} from "./results/unsupported";
+import { MEILISEARCH_UNSUPPORTED_FEATURES, NOT_SUPPORTED } from "./results/unsupported";
 import type { MeilisearchMetrics } from "./observability/meilisearch-observability";
 import type { MeilisearchLogger } from "./observability/meilisearch-observability";
 import type { MeilisearchHealthProvider } from "./health/meilisearch-health-provider";
@@ -69,7 +64,9 @@ export interface MeilisearchOperationRunnerDeps {
   readonly configurationValidator: MeilisearchConfigurationValidator;
 }
 
-function toIntegrationContext(context: SearchRequestContext): IntegrationRequestContext {
+function toIntegrationContext(
+  context: SearchRequestContext,
+): IntegrationRequestContext {
   return {
     correlationId: context.correlationId,
     tenantId: context.tenantId,
@@ -77,12 +74,12 @@ function toIntegrationContext(context: SearchRequestContext): IntegrationRequest
 }
 
 function detectUnsupportedQueryFeature(query: SearchQuery): string | undefined {
-  const custom = (query as SearchQuery & {
+  const custom = query as SearchQuery & {
     readonly semantic?: boolean;
     readonly vector?: unknown;
     readonly fuzzy?: boolean;
     readonly ai?: boolean;
-  });
+  };
   if (custom.semantic) return "semantic";
   if (custom.vector) return "vector";
   if (custom.fuzzy) return "fuzzy";
@@ -110,8 +107,10 @@ function mapFilter(filter: SearchFilter): string {
         : `${filter.field} IS NOT NULL`;
     case "range": {
       const parts: string[] = [];
-      if (filter.from !== undefined) parts.push(`${filter.field} >= ${formatFilterValue(filter.from)}`);
-      if (filter.to !== undefined) parts.push(`${filter.field} <= ${formatFilterValue(filter.to)}`);
+      if (filter.from !== undefined)
+        parts.push(`${filter.field} >= ${formatFilterValue(filter.from)}`);
+      if (filter.to !== undefined)
+        parts.push(`${filter.field} <= ${formatFilterValue(filter.to)}`);
       return parts.join(" AND ");
     }
     default:
@@ -148,7 +147,8 @@ function mapHits(
         entityType: String(hit.entityType ?? "document"),
         entityId: id,
         title: String(hit.title ?? hit.name ?? id),
-        description: hit.description !== undefined ? String(hit.description) : undefined,
+        description:
+          hit.description !== undefined ? String(hit.description) : undefined,
         productId: resolveProductId(hit.productId),
         sourceId: asSearchSourceId(
           typeof hit.sourceId === "string" && hit.sourceId.length > 0
@@ -199,10 +199,13 @@ export class MeilisearchOperationRunner {
     fn: () => Promise<T>,
   ): Promise<T> {
     if (!this.deps.circuitBreaker.allowRequest()) {
-      throw Object.assign(new Error("Circuit breaker open — Meilisearch operation rejected"), {
-        vendorCode: "vendor_unavailable",
-        statusCode: 503,
-      });
+      throw Object.assign(
+        new Error("Circuit breaker open — Meilisearch operation rejected"),
+        {
+          vendorCode: "vendor_unavailable",
+          statusCode: 503,
+        },
+      );
     }
 
     const startedAt = this.deps.clock.nowMs();
@@ -281,7 +284,9 @@ export class MeilisearchOperationRunner {
         : undefined;
     const sort =
       query.sorts && query.sorts.length > 0
-        ? query.sorts.map((s) => `${s.field}:${s.direction === "desc" ? "desc" : "asc"}`)
+        ? query.sorts.map(
+            (s) => `${s.field}:${s.direction === "desc" ? "desc" : "asc"}`,
+          )
         : undefined;
 
     try {
@@ -303,16 +308,23 @@ export class MeilisearchOperationRunner {
         }),
       );
 
-      const total = response.estimatedTotalHits ?? response.totalHits ?? response.hits.length;
+      const total =
+        response.estimatedTotalHits ?? response.totalHits ?? response.hits.length;
       const facets = response.facetDistribution
         ? Object.entries(response.facetDistribution).map(([field, buckets]) => ({
             field,
-            buckets: Object.entries(buckets).map(([value, count]) => ({ value, count })),
+            buckets: Object.entries(buckets).map(([value, count]) => ({
+              value,
+              count,
+            })),
           }))
         : undefined;
 
       const pageResult: SearchResultPage = {
-        hits: mapHits(response.hits as Readonly<Record<string, unknown>>[], query.includeHighlights),
+        hits: mapHits(
+          response.hits as Readonly<Record<string, unknown>>[],
+          query.includeHighlights,
+        ),
         page,
         pageSize,
         totalEstimated: total,
@@ -343,12 +355,19 @@ export class MeilisearchOperationRunner {
     context: SearchRequestContext,
     action: "create" | "delete" | "get" | "list" | "update",
     input?: MeilisearchIndexActionInput,
-  ): Promise<SearchOperationResult<"index", MeilisearchIndexRecord | readonly MeilisearchIndexRecord[]>> {
+  ): Promise<
+    SearchOperationResult<
+      "index",
+      MeilisearchIndexRecord | readonly MeilisearchIndexRecord[]
+    >
+  > {
     const ctx = toIntegrationContext(context);
     try {
       switch (action) {
         case "list": {
-          const listed = await this.run(ctx, "index.list", () => this.deps.client.listIndexes(ctx));
+          const listed = await this.run(ctx, "index.list", () =>
+            this.deps.client.listIndexes(ctx),
+          );
           return createOkResult("index", listed.results);
         }
         case "get": {
@@ -362,7 +381,11 @@ export class MeilisearchOperationRunner {
         }
         case "create": {
           if (!input?.uid) {
-            return createErrorResult("index", "uid is required for create", "validation");
+            return createErrorResult(
+              "index",
+              "uid is required for create",
+              "validation",
+            );
           }
           await this.run(ctx, "index.create", () =>
             this.deps.client.createIndex(ctx, input.uid, input.primaryKey),
@@ -386,9 +409,15 @@ export class MeilisearchOperationRunner {
         }
         case "delete": {
           if (!input?.uid) {
-            return createErrorResult("index", "uid is required for delete", "validation");
+            return createErrorResult(
+              "index",
+              "uid is required for delete",
+              "validation",
+            );
           }
-          await this.run(ctx, "index.delete", () => this.deps.client.deleteIndex(ctx, input.uid));
+          await this.run(ctx, "index.delete", () =>
+            this.deps.client.deleteIndex(ctx, input.uid),
+          );
           return createOkResult("index", { uid: input.uid });
         }
         default:
@@ -416,14 +445,21 @@ export class MeilisearchOperationRunner {
     action: "upsert" | "delete" | "get",
     input: MeilisearchDocumentActionInput,
   ): Promise<
-    SearchOperationResult<"document", Readonly<Record<string, unknown>> | { readonly taskUid?: number }>
+    SearchOperationResult<
+      "document",
+      Readonly<Record<string, unknown>> | { readonly taskUid?: number }
+    >
   > {
     const ctx = toIntegrationContext(context);
     try {
       switch (action) {
         case "get": {
           if (!input.documentId) {
-            return createErrorResult("document", "documentId is required for get", "validation");
+            return createErrorResult(
+              "document",
+              "documentId is required for get",
+              "validation",
+            );
           }
           const doc = await this.run(ctx, "document.get", () =>
             this.deps.client.getDocument(ctx, input.indexUid, input.documentId!),
@@ -445,7 +481,11 @@ export class MeilisearchOperationRunner {
         }
         case "delete": {
           if (!input.documentId) {
-            return createErrorResult("document", "documentId is required for delete", "validation");
+            return createErrorResult(
+              "document",
+              "documentId is required for delete",
+              "validation",
+            );
           }
           const task = await this.run(ctx, "document.delete", () =>
             this.deps.client.deleteDocument(ctx, input.indexUid, input.documentId!),
@@ -490,23 +530,31 @@ export class MeilisearchOperationRunner {
         "category" in diag ? diag.category : undefined,
       );
     }
-    return createOkResult("statistics", diag.data.statistics ?? {
-      declaredIndexCount: 0,
-      declaredProviderCount: 1,
-      declaredCollectionCount: 0,
-      declaredSourceCount: 0,
-    });
+    return createOkResult(
+      "statistics",
+      diag.data.statistics ?? {
+        declaredIndexCount: 0,
+        declaredProviderCount: 1,
+        declaredCollectionCount: 0,
+        declaredSourceCount: 0,
+      },
+    );
   }
 
   readCapabilities() {
-    return createOkResult("capabilities", this.deps.capabilities.toContractCapabilities());
+    return createOkResult(
+      "capabilities",
+      this.deps.capabilities.toContractCapabilities(),
+    );
   }
 
   evaluateCompatibility() {
     return createOkResult("capabilities", this.deps.compatibility.evaluate());
   }
 
-  validateConfiguration(input: Parameters<MeilisearchConfigurationValidator["validate"]>[0]) {
+  validateConfiguration(
+    input: Parameters<MeilisearchConfigurationValidator["validate"]>[0],
+  ) {
     const result = this.deps.configurationValidator.validate(input);
     if (!result.ok) {
       return createErrorResult("validation", result.issues.join("; "), "validation");

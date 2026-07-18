@@ -18,8 +18,7 @@ export const IDENTITY_SERVICE_CAPABILITIES = [
   "administration",
 ] as const;
 
-export type IdentityServiceCapability =
-  (typeof IDENTITY_SERVICE_CAPABILITIES)[number];
+export type IdentityServiceCapability = (typeof IDENTITY_SERVICE_CAPABILITIES)[number];
 
 export function isIdentityServiceCapability(
   value: string,
@@ -37,8 +36,7 @@ export const IDENTITY_LIFECYCLE_STATUSES = [
   "archived",
 ] as const;
 
-export type IdentityLifecycleStatus =
-  (typeof IDENTITY_LIFECYCLE_STATUSES)[number];
+export type IdentityLifecycleStatus = (typeof IDENTITY_LIFECYCLE_STATUSES)[number];
 
 export function isIdentityLifecycleStatus(
   value: string,
@@ -53,8 +51,7 @@ export const IDENTITY_MEMBERSHIP_KINDS = [
   "department",
 ] as const;
 
-export type IdentityMembershipKind =
-  (typeof IDENTITY_MEMBERSHIP_KINDS)[number];
+export type IdentityMembershipKind = (typeof IDENTITY_MEMBERSHIP_KINDS)[number];
 
 export function isIdentityMembershipKind(
   value: string,
@@ -62,11 +59,7 @@ export function isIdentityMembershipKind(
   return (IDENTITY_MEMBERSHIP_KINDS as readonly string[]).includes(value);
 }
 
-export const IDENTITY_ASSIGNMENT_SUBJECT_KINDS = [
-  "user",
-  "group",
-  "role",
-] as const;
+export const IDENTITY_ASSIGNMENT_SUBJECT_KINDS = ["user", "group", "role"] as const;
 
 export type IdentityAssignmentSubjectKind =
   (typeof IDENTITY_ASSIGNMENT_SUBJECT_KINDS)[number];
@@ -74,9 +67,7 @@ export type IdentityAssignmentSubjectKind =
 export function isIdentityAssignmentSubjectKind(
   value: string,
 ): value is IdentityAssignmentSubjectKind {
-  return (IDENTITY_ASSIGNMENT_SUBJECT_KINDS as readonly string[]).includes(
-    value,
-  );
+  return (IDENTITY_ASSIGNMENT_SUBJECT_KINDS as readonly string[]).includes(value);
 }
 
 export const IDENTITY_INVITATION_STATUSES = [
@@ -87,8 +78,7 @@ export const IDENTITY_INVITATION_STATUSES = [
   "revoked",
 ] as const;
 
-export type IdentityInvitationStatus =
-  (typeof IDENTITY_INVITATION_STATUSES)[number];
+export type IdentityInvitationStatus = (typeof IDENTITY_INVITATION_STATUSES)[number];
 
 export function isIdentityInvitationStatus(
   value: string,
@@ -106,9 +96,7 @@ export const IDENTITY_POLICY_KINDS = [
 
 export type IdentityPolicyKind = (typeof IDENTITY_POLICY_KINDS)[number];
 
-export function isIdentityPolicyKind(
-  value: string,
-): value is IdentityPolicyKind {
+export function isIdentityPolicyKind(value: string): value is IdentityPolicyKind {
   return (IDENTITY_POLICY_KINDS as readonly string[]).includes(value);
 }
 
@@ -125,9 +113,7 @@ export const IDENTITY_REFERENCE_KINDS = [
 
 export type IdentityReferenceKind = (typeof IDENTITY_REFERENCE_KINDS)[number];
 
-export function isIdentityReferenceKind(
-  value: string,
-): value is IdentityReferenceKind {
+export function isIdentityReferenceKind(value: string): value is IdentityReferenceKind {
   return (IDENTITY_REFERENCE_KINDS as readonly string[]).includes(value);
 }
 
@@ -147,9 +133,7 @@ export const IDENTITY_AUDIT_ACTIONS = [
 
 export type IdentityAuditAction = (typeof IDENTITY_AUDIT_ACTIONS)[number];
 
-export function isIdentityAuditAction(
-  value: string,
-): value is IdentityAuditAction {
+export function isIdentityAuditAction(value: string): value is IdentityAuditAction {
   return (IDENTITY_AUDIT_ACTIONS as readonly string[]).includes(value);
 }
 
@@ -161,8 +145,7 @@ export const IDENTITY_STATUS_SUBJECT_KINDS = [
   "assignment",
 ] as const;
 
-export type IdentityStatusSubjectKind =
-  (typeof IDENTITY_STATUS_SUBJECT_KINDS)[number];
+export type IdentityStatusSubjectKind = (typeof IDENTITY_STATUS_SUBJECT_KINDS)[number];
 
 export function isIdentityStatusSubjectKind(
   value: string,

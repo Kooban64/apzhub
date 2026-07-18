@@ -76,9 +76,10 @@ describe("APZSEARCH-015 dependency boundaries", () => {
       if (adapter === "packages/search-testing") {
         expect(hasDep(json, "@apzhub/testing-contracts")).toBe(true);
       } else {
-        expect(hasDep(json, "@apzhub/testing-contracts"), `${adapter} testing-contracts`).toBe(
-          false,
-        );
+        expect(
+          hasDep(json, "@apzhub/testing-contracts"),
+          `${adapter} testing-contracts`,
+        ).toBe(false);
       }
     }
   });
@@ -98,7 +99,7 @@ describe("APZSEARCH-015 dependency boundaries", () => {
   });
 
   it("pins certified adapter + framework versions", () => {
-    expect(pkgJson("packages/search-integration").version).toBe("0.1.0");
+    expect(pkgJson("packages/search-integration").version).toBe("0.2.0");
     expect(pkgJson("packages/search-projects").version).toBe("0.1.0");
     expect(pkgJson("packages/search-support").version).toBe("0.1.0");
     expect(pkgJson("packages/search-documents").version).toBe("0.1.0");

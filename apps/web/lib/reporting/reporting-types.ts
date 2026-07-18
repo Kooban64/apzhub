@@ -13,12 +13,7 @@ export type ReportingCollectionResult<T> = {
 };
 
 export type ReportOutputFormatViewModel =
-  | "html"
-  | "markdown"
-  | "pdf"
-  | "docx"
-  | "json"
-  | "csv";
+  "html" | "markdown" | "pdf" | "docx" | "json" | "csv";
 
 export type ReportTypeViewModel = string;
 

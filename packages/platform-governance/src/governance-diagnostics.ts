@@ -8,14 +8,19 @@ export class GovernanceDiagnosticsService {
   ) {}
 
   async getDiagnostics(): Promise<GovernanceDiagnostics> {
-    const [capabilityCount, enablementCount, provisioningCount, featureFlagCount, overrideCount] =
-      await Promise.all([
-        this.repositories.governance.countCapabilities(),
-        this.repositories.governance.countEnablements(),
-        this.repositories.provisioning.countRecords(),
-        this.repositories.featureFlags.countFlags(),
-        this.repositories.featureFlags.countOverrides(),
-      ]);
+    const [
+      capabilityCount,
+      enablementCount,
+      provisioningCount,
+      featureFlagCount,
+      overrideCount,
+    ] = await Promise.all([
+      this.repositories.governance.countCapabilities(),
+      this.repositories.governance.countEnablements(),
+      this.repositories.provisioning.countRecords(),
+      this.repositories.featureFlags.countFlags(),
+      this.repositories.featureFlags.countOverrides(),
+    ]);
 
     return {
       capabilityCount,

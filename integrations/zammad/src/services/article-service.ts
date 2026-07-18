@@ -94,11 +94,17 @@ export class ZammadArticleService {
       const mapperCtx = { tenantId: this.deps.serviceContext.tenantId };
       let mapped = list.items.map((item) => {
         assertValid(validateZammadArticleResponse(item), "article.entity");
-        return mapZammadArticle(item as ZammadArticleRecord, mapperCtx, supportTicketId);
+        return mapZammadArticle(
+          item as ZammadArticleRecord,
+          mapperCtx,
+          supportTicketId,
+        );
       });
 
       mapped = [
-        ...applyClientFilters(mapped, (article) => matchesArticleFilter(article, filter)),
+        ...applyClientFilters(mapped, (article) =>
+          matchesArticleFilter(article, filter),
+        ),
       ];
 
       if (sort.length > 0) {
@@ -133,9 +139,13 @@ export class ZammadArticleService {
         extractSupportArticleZammadId(articleId),
       );
       assertValid(validateZammadArticleResponse(record), "article.entity");
-      return mapZammadArticle(record, {
-        tenantId: this.deps.serviceContext.tenantId,
-      }, supportTicketId);
+      return mapZammadArticle(
+        record,
+        {
+          tenantId: this.deps.serviceContext.tenantId,
+        },
+        supportTicketId,
+      );
     });
   }
 
@@ -176,9 +186,13 @@ export class ZammadArticleService {
 
       const record = await this.deps.client.createTicketArticle(context, payload);
       assertValid(validateZammadArticleResponse(record), "article.entity");
-      const mapped = mapZammadArticle(record, {
-        tenantId: this.deps.serviceContext.tenantId,
-      }, input.supportTicketId);
+      const mapped = mapZammadArticle(
+        record,
+        {
+          tenantId: this.deps.serviceContext.tenantId,
+        },
+        input.supportTicketId,
+      );
       if (mapped.visibility !== "internal") {
         throw Object.assign(new Error("Created note is not internal"), {
           category: "mapping" as const,
@@ -242,9 +256,13 @@ export class ZammadArticleService {
 
       const record = await this.deps.client.createTicketArticle(context, payload);
       assertValid(validateZammadArticleResponse(record), "article.entity");
-      const mapped = mapZammadArticle(record, {
-        tenantId: this.deps.serviceContext.tenantId,
-      }, input.supportTicketId);
+      const mapped = mapZammadArticle(
+        record,
+        {
+          tenantId: this.deps.serviceContext.tenantId,
+        },
+        input.supportTicketId,
+      );
       if (mapped.visibility !== "public") {
         throw Object.assign(new Error("Created reply is not customer-visible"), {
           category: "mapping" as const,
@@ -282,7 +300,11 @@ export class ZammadArticleService {
     }
 
     const channel = input.channel ?? "email";
-    if (!SUPPORTED_CREATE_CHANNELS.includes(channel as (typeof SUPPORTED_CREATE_CHANNELS)[number])) {
+    if (
+      !SUPPORTED_CREATE_CHANNELS.includes(
+        channel as (typeof SUPPORTED_CREATE_CHANNELS)[number],
+      )
+    ) {
       throw Object.assign(new Error(`Unsupported article channel: ${channel}`), {
         category: "validation" as const,
         code: "zammad.validation.invalid_article_type",

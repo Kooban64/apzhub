@@ -13,12 +13,15 @@ export function validateZammadTicketResponse(value: unknown): ValidationResult {
   if (typeof value.title !== "string" || !value.title.trim()) {
     issues.push("ticket.title must be a non-empty string");
   }
-  if (typeof value.group_id !== "number") issues.push("ticket.group_id must be a number");
+  if (typeof value.group_id !== "number")
+    issues.push("ticket.group_id must be a number");
   if (typeof value.customer_id !== "number") {
     issues.push("ticket.customer_id must be a number");
   }
-  if (typeof value.created_at !== "string") issues.push("ticket.created_at must be a string");
-  if (typeof value.updated_at !== "string") issues.push("ticket.updated_at must be a string");
+  if (typeof value.created_at !== "string")
+    issues.push("ticket.created_at must be a string");
+  if (typeof value.updated_at !== "string")
+    issues.push("ticket.updated_at must be a string");
   return { ok: issues.length === 0, issues };
 }
 
@@ -49,8 +52,10 @@ export function validateZammadGroupResponse(value: unknown): ValidationResult {
   if (typeof value.name !== "string" || !value.name.trim()) {
     issues.push("group.name must be a non-empty string");
   }
-  if (typeof value.created_at !== "string") issues.push("group.created_at must be a string");
-  if (typeof value.updated_at !== "string") issues.push("group.updated_at must be a string");
+  if (typeof value.created_at !== "string")
+    issues.push("group.created_at must be a string");
+  if (typeof value.updated_at !== "string")
+    issues.push("group.updated_at must be a string");
   return { ok: issues.length === 0, issues };
 }
 

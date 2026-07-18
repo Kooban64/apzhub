@@ -47,9 +47,7 @@ describe("PlatformConfigurationView", () => {
     render(wrap(<PlatformConfigurationView section="overview" />));
 
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
       expect(screen.getByTestId("card-configurations-count")).toBeTruthy();
     });
 
@@ -151,18 +149,10 @@ describe("PlatformConfigurationView", () => {
     render(wrap(<PlatformConfigurationView section="diagnostics" />));
 
     await waitFor(() => {
-      expect(screen.getByTestId("diag-runtime").textContent).toContain(
-        "Unavailable",
-      );
-      expect(screen.getByTestId("diag-flags").textContent).toContain(
-        "Unavailable",
-      );
-      expect(screen.getByTestId("diag-secrets").textContent).toContain(
-        "Unavailable",
-      );
-      expect(screen.getByTestId("diag-event-bus").textContent).toContain(
-        "Unavailable",
-      );
+      expect(screen.getByTestId("diag-runtime").textContent).toContain("Unavailable");
+      expect(screen.getByTestId("diag-flags").textContent).toContain("Unavailable");
+      expect(screen.getByTestId("diag-secrets").textContent).toContain("Unavailable");
+      expect(screen.getByTestId("diag-event-bus").textContent).toContain("Unavailable");
     });
   });
 
@@ -176,9 +166,7 @@ describe("PlatformConfigurationView", () => {
 
   it("approves configuration when canManage", async () => {
     const user = userEvent.setup();
-    render(
-      wrap(<PlatformConfigurationView section="configurations" canManage />),
-    );
+    render(wrap(<PlatformConfigurationView section="configurations" canManage />));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: /^Approve$/i })).toBeTruthy();
@@ -193,9 +181,7 @@ describe("PlatformConfigurationView", () => {
 
   it("hides manage commands when canManage is false", async () => {
     render(
-      wrap(
-        <PlatformConfigurationView section="configurations" canManage={false} />,
-      ),
+      wrap(<PlatformConfigurationView section="configurations" canManage={false} />),
     );
 
     await waitFor(() => {
@@ -208,9 +194,8 @@ describe("PlatformConfigurationView", () => {
     setConfigurationClient({
       ...createMockConfigurationClient(),
       async listConfigurations() {
-        const { ConfigurationClientError } = await import(
-          "@/lib/configuration/configuration-errors"
-        );
+        const { ConfigurationClientError } =
+          await import("@/lib/configuration/configuration-errors");
         throw new ConfigurationClientError({
           message: "Denied",
           status: 403,
@@ -229,9 +214,7 @@ describe("PlatformConfigurationView", () => {
   it("router mounts overview from pathname", async () => {
     render(wrap(<ConfigurationWorkspaceRouter />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
     });
   });
 

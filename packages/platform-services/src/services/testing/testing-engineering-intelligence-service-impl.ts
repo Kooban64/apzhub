@@ -15,9 +15,7 @@ async function runTestingOperation<T>(
   return withTestingErrorMapping(fn, ctx.correlationId);
 }
 
-export class TestingEngineeringIntelligenceServiceImpl
-  implements TestingEngineeringIntelligenceService
-{
+export class TestingEngineeringIntelligenceServiceImpl implements TestingEngineeringIntelligenceService {
   constructor(private readonly domain: TestingDomainServices) {}
 
   score(

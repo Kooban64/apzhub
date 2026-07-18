@@ -42,7 +42,9 @@ export function formatSupportStatus(status: SupportRequestStatus | string): stri
   return STATUS_LABELS[status as SupportRequestStatus] ?? String(status);
 }
 
-export function formatSupportPriority(priority: SupportRequestPriority | string): string {
+export function formatSupportPriority(
+  priority: SupportRequestPriority | string,
+): string {
   return PRIORITY_LABELS[priority as SupportRequestPriority] ?? String(priority);
 }
 

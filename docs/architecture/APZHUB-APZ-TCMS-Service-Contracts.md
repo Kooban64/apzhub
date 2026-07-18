@@ -8,18 +8,18 @@
 
 ## Service catalogue
 
-| Service ID | Interface | Responsibility (contract) |
-|------------|-----------|---------------------------|
-| `testing-service` | `TestingService` | Requirements, risks, plans, suites, cases/steps, evidence metadata, defect links |
-| `certification-service` | `CertificationService` | Certification records, state transitions, gates, approvals, release readiness |
-| `evidence-service` | `EvidenceService` | Evidence / attachment metadata registration |
-| `traceability-service` | `TraceabilityService` | Traceability links and matrices |
-| `execution-service` | `ExecutionService` | Sessions, manual/automated executions, runs, results |
-| `automation-service` | `AutomationService` | Automation job metadata lifecycle |
-| `coverage-service` | `CoverageService` | Coverage metrics listing + recompute request acknowledgement |
-| `approval-service` | `ApprovalService` | Approval request / decide / sign / witness |
-| `reporting-service` | `ReportingService` | Report descriptors (stub formats) |
-| `dashboard-service` | `DashboardService` | Dashboard snapshots |
+| Service ID              | Interface              | Responsibility (contract)                                                        |
+| ----------------------- | ---------------------- | -------------------------------------------------------------------------------- |
+| `testing-service`       | `TestingService`       | Requirements, risks, plans, suites, cases/steps, evidence metadata, defect links |
+| `certification-service` | `CertificationService` | Certification records, state transitions, gates, approvals, release readiness    |
+| `evidence-service`      | `EvidenceService`      | Evidence / attachment metadata registration                                      |
+| `traceability-service`  | `TraceabilityService`  | Traceability links and matrices                                                  |
+| `execution-service`     | `ExecutionService`     | Sessions, manual/automated executions, runs, results                             |
+| `automation-service`    | `AutomationService`    | Automation job metadata lifecycle                                                |
+| `coverage-service`      | `CoverageService`      | Coverage metrics listing + recompute request acknowledgement                     |
+| `approval-service`      | `ApprovalService`      | Approval request / decide / sign / witness                                       |
+| `reporting-service`     | `ReportingService`     | Report descriptors (stub formats)                                                |
+| `dashboard-service`     | `DashboardService`     | Dashboard snapshots                                                              |
 
 All methods accept `ServiceRequestContext` from `@apzhub/platform-service-contracts` and return `Promise` of domain types or void-ish acknowledgements.
 
@@ -27,9 +27,9 @@ All methods accept `ServiceRequestContext` from `@apzhub/platform-service-contra
 
 ## Manifests
 
-| Service | Manifest |
-|---------|----------|
-| TestingService | `services/testing/service.yaml` |
+| Service              | Manifest                              |
+| -------------------- | ------------------------------------- |
+| TestingService       | `services/testing/service.yaml`       |
 | CertificationService | `services/certification/service.yaml` |
 
 Both reference:

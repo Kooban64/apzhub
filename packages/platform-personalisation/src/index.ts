@@ -2,14 +2,18 @@ import { createInMemoryPersonalisationRepositories } from "./repositories/in-mem
 import { PersonalisationService } from "./personalisation-service";
 
 let sharedPersonalisationService: PersonalisationService | undefined;
-let sharedRepositories: ReturnType<typeof createInMemoryPersonalisationRepositories> | undefined;
+let sharedRepositories:
+  ReturnType<typeof createInMemoryPersonalisationRepositories> | undefined;
 
 export function createInMemoryPersonalisationService(): {
   readonly service: PersonalisationService;
   readonly repositories: ReturnType<typeof createInMemoryPersonalisationRepositories>;
 } {
   const repositories = createInMemoryPersonalisationRepositories();
-  const service = new PersonalisationService({ repositories, storageBackend: "memory" });
+  const service = new PersonalisationService({
+    repositories,
+    storageBackend: "memory",
+  });
   return { service, repositories };
 }
 
@@ -73,4 +77,7 @@ export {
   InMemoryWorkbenchLayoutRepository,
 } from "./repositories/in-memory-repositories";
 
-export { mergePreferencesFromRecords, seedDefaultPreferencesForUser } from "./personalisation-defaults";
+export {
+  mergePreferencesFromRecords,
+  seedDefaultPreferencesForUser,
+} from "./personalisation-defaults";

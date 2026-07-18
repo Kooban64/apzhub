@@ -33,19 +33,19 @@ Modules / future API layer
 
 ## Authorisation model
 
-| Field | Meaning |
-|-------|---------|
-| Subject | Authenticated actor (effective user) |
-| Tenant | Required tenancy scope |
-| Organisation | Optional organisation scope |
-| Role | Platform roles (not engine roles) |
-| Permission | Catalogue key `{capability}.{action}` |
-| Action | Operation action (list/read/create/…) |
-| Resource type / ID | Typed resource under evaluation |
+| Field                  | Meaning                                    |
+| ---------------------- | ------------------------------------------ |
+| Subject                | Authenticated actor (effective user)       |
+| Tenant                 | Required tenancy scope                     |
+| Organisation           | Optional organisation scope                |
+| Role                   | Platform roles (not engine roles)          |
+| Permission             | Catalogue key `{capability}.{action}`      |
+| Action                 | Operation action (list/read/create/…)      |
+| Resource type / ID     | Typed resource under evaluation            |
 | Ownership / membership | Resource-scoped facts from access snapshot |
-| Decision | `allow` \| `deny` |
-| Reason / denial code | Safe public reason + internal code |
-| Policy metadata | Composable policy outcomes |
+| Decision               | `allow` \| `deny`                          |
+| Reason / denial code   | Safe public reason + internal code         |
+| Policy metadata        | Composable policy outcomes                 |
 
 ---
 
@@ -57,15 +57,15 @@ Deny-by-default. See [ADR-0050](../adr/ADR-0050-production-authorisation-policy-
 
 ## Policies (production set)
 
-| Policy ID | Priority | Responsibility |
-|-----------|----------|----------------|
-| `authenticated-actor-required` | 10 | Non-anonymous `userId` |
-| `active-account-required` | 20 | Subject status `active` |
-| `active-tenant-membership-required` | 30 | Active membership in `tenantId` |
-| `organisation-scope-validation` | 40 | Org membership when `organisationId` set |
-| `impersonation-controls` | 50 | Impersonation permission / escalation gates |
-| `mapping-tenant-isolation` | 60 | Mapped resource tenant/org must match context |
-| `maintenance-mode` | 70 | Contract hook when maintenance flag set |
+| Policy ID                           | Priority | Responsibility                                |
+| ----------------------------------- | -------- | --------------------------------------------- |
+| `authenticated-actor-required`      | 10       | Non-anonymous `userId`                        |
+| `active-account-required`           | 20       | Subject status `active`                       |
+| `active-tenant-membership-required` | 30       | Active membership in `tenantId`               |
+| `organisation-scope-validation`     | 40       | Org membership when `organisationId` set      |
+| `impersonation-controls`            | 50       | Impersonation permission / escalation gates   |
+| `mapping-tenant-isolation`          | 60       | Mapped resource tenant/org must match context |
+| `maintenance-mode`                  | 70       | Contract hook when maintenance flag set       |
 
 Policies short-circuit on first deny (`POLICY_DENIED`). Permission evaluation remains in the provider.
 
@@ -75,21 +75,21 @@ Policies short-circuit on first deny (`POLICY_DENIED`). Permission evaluation re
 
 Explicit table in `operation-authorization-map.ts`. Examples:
 
-| Service | Operation | Permission | Resource |
-|---------|-----------|------------|----------|
-| workspace | `listWorkspaces` | `workspace.list` | workspace |
-| project | `getProject` | `project.read` | project + ID |
-| project | `createProject` | `project.create` | project |
-| project | `archiveProject` | `project.archive` | project + ID |
-| team | `listTeams` | `team.list` | team |
-| user | `listUsers` / `getUser` | `user.list` / `user.read` | user |
-| search | `search` | `search.execute` | search |
-| support | `listSupportRequests` | `support.requests.list` | support_request |
-| support | `closeSupportRequest` | `support.requests.transition` | support_request + ID |
-| support | `assignSupportRequest` | `support.requests.assign` | support_request + ID |
-| supportOrganization | `listOrganizations` | `support.organizations.list` | support_organization |
-| supportArticle | `createNote` | `support.articles.create` | support_article |
-| supportAnalytics | `getSupportIntelligence` | `support.analytics.read` | support_analytics |
+| Service             | Operation                | Permission                    | Resource             |
+| ------------------- | ------------------------ | ----------------------------- | -------------------- |
+| workspace           | `listWorkspaces`         | `workspace.list`              | workspace            |
+| project             | `getProject`             | `project.read`                | project + ID         |
+| project             | `createProject`          | `project.create`              | project              |
+| project             | `archiveProject`         | `project.archive`             | project + ID         |
+| team                | `listTeams`              | `team.list`                   | team                 |
+| user                | `listUsers` / `getUser`  | `user.list` / `user.read`     | user                 |
+| search              | `search`                 | `search.execute`              | search               |
+| support             | `listSupportRequests`    | `support.requests.list`       | support_request      |
+| support             | `closeSupportRequest`    | `support.requests.transition` | support_request + ID |
+| support             | `assignSupportRequest`   | `support.requests.assign`     | support_request + ID |
+| supportOrganization | `listOrganizations`      | `support.organizations.list`  | support_organization |
+| supportArticle      | `createNote`             | `support.articles.create`     | support_article      |
+| supportAnalytics    | `getSupportIntelligence` | `support.analytics.read`      | support_analytics    |
 
 Full catalogue: [Permission Catalogue](../specs/APZHUB-Platform-Permission-Catalogue.md).
 
@@ -97,10 +97,10 @@ Full catalogue: [Permission Catalogue](../specs/APZHUB-Platform-Permission-Catal
 
 ## Bootstrap
 
-| Env | Values |
-|-----|--------|
-| `AUTHORIZATION_PROVIDER_MODE` | `production` \| `allow-all` \| `deny-all` |
-| `AUTHORIZATION_ALLOW_ALL_IN_PRODUCTION` | `true` only as explicit escape hatch |
+| Env                                     | Values                                    |
+| --------------------------------------- | ----------------------------------------- |
+| `AUTHORIZATION_PROVIDER_MODE`           | `production` \| `allow-all` \| `deny-all` |
+| `AUTHORIZATION_ALLOW_ALL_IN_PRODUCTION` | `true` only as explicit escape hatch      |
 
 Production must not silently use allow-all. Missing/invalid configuration fails with `INVALID_AUTHORIZATION_CONFIGURATION`.
 
@@ -114,17 +114,17 @@ Production must not silently use allow-all. Missing/invalid configuration fails 
 
 ## Errors
 
-| Code | Typical cause |
-|------|---------------|
-| `AUTHENTICATION_REQUIRED` | Anonymous / missing actor |
-| `INVALID_ACTOR` / `INACTIVE_ACTOR` | Bad or inactive subject |
-| `TENANT_MEMBERSHIP_REQUIRED` | No active tenant membership |
-| `ORGANISATION_SCOPE_MISMATCH` | Org scope failure |
-| `PERMISSION_DENIED` | Provider deny |
-| `POLICY_DENIED` | Policy deny |
-| `IMPERSONATION_DENIED` | Impersonation rule failure |
-| `AUTHORIZATION_UNAVAILABLE` | Provider/resolver failure |
-| `INVALID_AUTHORIZATION_CONFIGURATION` | Bootstrap misconfiguration |
+| Code                                  | Typical cause               |
+| ------------------------------------- | --------------------------- |
+| `AUTHENTICATION_REQUIRED`             | Anonymous / missing actor   |
+| `INVALID_ACTOR` / `INACTIVE_ACTOR`    | Bad or inactive subject     |
+| `TENANT_MEMBERSHIP_REQUIRED`          | No active tenant membership |
+| `ORGANISATION_SCOPE_MISMATCH`         | Org scope failure           |
+| `PERMISSION_DENIED`                   | Provider deny               |
+| `POLICY_DENIED`                       | Policy deny                 |
+| `IMPERSONATION_DENIED`                | Impersonation rule failure  |
+| `AUTHORIZATION_UNAVAILABLE`           | Provider/resolver failure   |
+| `INVALID_AUTHORIZATION_CONFIGURATION` | Bootstrap misconfiguration  |
 
 Public messages must not reveal internal role graphs, hidden permissions, or DB details.
 

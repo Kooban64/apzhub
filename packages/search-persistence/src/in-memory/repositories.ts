@@ -37,10 +37,7 @@ import type {
   SearchSourceRepository,
   SearchStatisticsRepository,
 } from "../ports";
-import {
-  assertSameTenant,
-  matchesOrganisation,
-} from "../authorization";
+import { assertSameTenant, matchesOrganisation } from "../authorization";
 import type { SearchRepositoryContext } from "../types";
 
 export type SearchInMemoryStores = {
@@ -87,20 +84,18 @@ function key(tenantId: string, id: string): string {
   return `${tenantId}::${id}`;
 }
 
-function visible<T extends { tenantId: string; organisationId?: string; deletedAt?: string }>(
-  ctx: SearchRepositoryContext,
-  record: T | undefined,
-): T | null {
+function visible<
+  T extends { tenantId: string; organisationId?: string; deletedAt?: string },
+>(ctx: SearchRepositoryContext, record: T | undefined): T | null {
   if (!record || record.deletedAt) return null;
   if (record.tenantId !== ctx.tenantId) return null;
   if (!matchesOrganisation(ctx, record.organisationId)) return null;
   return record;
 }
 
-function listVisible<T extends { tenantId: string; organisationId?: string; deletedAt?: string }>(
-  ctx: SearchRepositoryContext,
-  values: Iterable<T>,
-): T[] {
+function listVisible<
+  T extends { tenantId: string; organisationId?: string; deletedAt?: string },
+>(ctx: SearchRepositoryContext, values: Iterable<T>): T[] {
   return [...values].filter((r) => visible(ctx, r) !== null);
 }
 
@@ -197,10 +192,7 @@ export function createInMemorySearchPersistence(
       return record;
     },
     async getByProvider(ctx, providerId) {
-      return visible(
-        ctx,
-        stores.statuses.get(key(ctx.tenantId, providerId)),
-      );
+      return visible(ctx, stores.statuses.get(key(ctx.tenantId, providerId)));
     },
   };
 
@@ -267,11 +259,9 @@ export function createInMemorySearchPersistence(
     },
   };
 
-  function softDeleteStore<T extends { revision: number; updatedAt: string; deletedAt?: string }>(
-    map: Map<string, T>,
-    ctx: SearchRepositoryContext,
-    id: string,
-  ): void {
+  function softDeleteStore<
+    T extends { revision: number; updatedAt: string; deletedAt?: string },
+  >(map: Map<string, T>, ctx: SearchRepositoryContext, id: string): void {
     const existing = map.get(key(ctx.tenantId, id));
     if (!existing) return;
     map.set(key(ctx.tenantId, id), {
@@ -282,11 +272,15 @@ export function createInMemorySearchPersistence(
     });
   }
 
-  function restoreStore<T extends { revision: number; updatedAt: string; deletedAt?: string; tenantId: string; organisationId?: string }>(
-    map: Map<string, T>,
-    ctx: SearchRepositoryContext,
-    id: string,
-  ): T | null {
+  function restoreStore<
+    T extends {
+      revision: number;
+      updatedAt: string;
+      deletedAt?: string;
+      tenantId: string;
+      organisationId?: string;
+    },
+  >(map: Map<string, T>, ctx: SearchRepositoryContext, id: string): T | null {
     const existing = map.get(key(ctx.tenantId, id));
     if (!existing || existing.tenantId !== ctx.tenantId) return null;
     if (!matchesOrganisation(ctx, existing.organisationId)) return null;
@@ -475,10 +469,7 @@ export function createInMemorySearchPersistence(
       return record;
     },
     async getByProvider(ctx, providerId) {
-      return visible(
-        ctx,
-        stores.capabilities.get(key(ctx.tenantId, providerId)),
-      );
+      return visible(ctx, stores.capabilities.get(key(ctx.tenantId, providerId)));
     },
   };
 

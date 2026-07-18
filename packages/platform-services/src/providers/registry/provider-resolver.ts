@@ -103,7 +103,11 @@ export class ProviderResolver {
     ctx: ServiceRequestContext,
     criteria?: Partial<ProviderSelectionCriteria>,
   ): SupportOrganizationProvider {
-    return this.resolveProvider("support_organization", ctx, criteria) as SupportOrganizationProvider;
+    return this.resolveProvider(
+      "support_organization",
+      ctx,
+      criteria,
+    ) as SupportOrganizationProvider;
   }
 
   resolveSupportGroupProvider(
@@ -124,28 +128,44 @@ export class ProviderResolver {
     ctx: ServiceRequestContext,
     criteria?: Partial<ProviderSelectionCriteria>,
   ): SupportArticleProvider {
-    return this.resolveProvider("support_article", ctx, criteria) as SupportArticleProvider;
+    return this.resolveProvider(
+      "support_article",
+      ctx,
+      criteria,
+    ) as SupportArticleProvider;
   }
 
   resolveSupportSearchProvider(
     ctx: ServiceRequestContext,
     criteria?: Partial<ProviderSelectionCriteria>,
   ): SupportSearchProvider {
-    return this.resolveProvider("support_search", ctx, criteria) as SupportSearchProvider;
+    return this.resolveProvider(
+      "support_search",
+      ctx,
+      criteria,
+    ) as SupportSearchProvider;
   }
 
   resolveSupportHistoryProvider(
     ctx: ServiceRequestContext,
     criteria?: Partial<ProviderSelectionCriteria>,
   ): SupportHistoryProvider {
-    return this.resolveProvider("support_history", ctx, criteria) as SupportHistoryProvider;
+    return this.resolveProvider(
+      "support_history",
+      ctx,
+      criteria,
+    ) as SupportHistoryProvider;
   }
 
   resolveSupportAnalyticsProvider(
     ctx: ServiceRequestContext,
     criteria?: Partial<ProviderSelectionCriteria>,
   ): SupportAnalyticsProvider {
-    return this.resolveProvider("support_analytics", ctx, criteria) as SupportAnalyticsProvider;
+    return this.resolveProvider(
+      "support_analytics",
+      ctx,
+      criteria,
+    ) as SupportAnalyticsProvider;
   }
 
   resolveSupportSyncProvider(
@@ -159,7 +179,11 @@ export class ProviderResolver {
     ctx: ServiceRequestContext,
     criteria?: Partial<ProviderSelectionCriteria>,
   ): SupportWebhookProvider {
-    return this.resolveProvider("support_webhook", ctx, criteria) as SupportWebhookProvider;
+    return this.resolveProvider(
+      "support_webhook",
+      ctx,
+      criteria,
+    ) as SupportWebhookProvider;
   }
 
   resolvePipelineRepositoryProvider(
@@ -241,7 +265,9 @@ export class ProviderResolver {
     }
 
     if (criteria.preferredProviderId) {
-      const match = candidates.find((entry) => entry.providerId === criteria.preferredProviderId);
+      const match = candidates.find(
+        (entry) => entry.providerId === criteria.preferredProviderId,
+      );
       if (match) {
         return match.provider as TProvider;
       }
@@ -257,7 +283,9 @@ export class ProviderResolver {
     }
 
     if (criteria.mappedProviderId) {
-      const match = candidates.find((entry) => entry.providerId === criteria.mappedProviderId);
+      const match = candidates.find(
+        (entry) => entry.providerId === criteria.mappedProviderId,
+      );
       if (match) {
         return match.provider as TProvider;
       }

@@ -37,9 +37,7 @@ describe("APZSEARCH-010 residual coverage", () => {
     const life = new ProjectsSearchLifecycle();
     expect(life.suggestFromDomainStatus("task", "cancelled")).toBe("archived");
     expect(life.suggestFromDomainStatus("sprint", "planned")).toBe("draft");
-    expect(life.suggestFromDomainStatus("project", "completed")).toBe(
-      "archived",
-    );
+    expect(life.suggestFromDomainStatus("project", "completed")).toBe("archived");
     expect(life.suggestFromDomainStatus("module", undefined)).toBe("validated");
     expect(life.canTransition("published", "removed")).toBe(true);
     expect(() => life.assertTransition("archived", "published")).toThrow();
@@ -48,9 +46,9 @@ describe("APZSEARCH-010 residual coverage", () => {
     expect(
       errors.translate(new Error("Plane identifiers forbidden")).classification,
     ).toBe("validation_failed");
-    expect(
-      errors.translate(new Error("tenant mismatch")).classification,
-    ).toBe("tenant_mismatch");
+    expect(errors.translate(new Error("tenant mismatch")).classification).toBe(
+      "tenant_mismatch",
+    );
     expect(errors.translate(new Error("boom")).message).toContain("boom");
   });
 
@@ -93,9 +91,9 @@ describe("APZSEARCH-010 residual coverage", () => {
       createdAt: "2026-01-01T00:00:00.000Z",
       updatedAt: "2026-02-01T00:00:00.000Z",
     };
-    expect(
-      adapter.mapper.mapTask(context, archivedTask).classification,
-    ).toBe("restricted");
+    expect(adapter.mapper.mapTask(context, archivedTask).classification).toBe(
+      "restricted",
+    );
 
     const ok = adapter.publisher.validate(context, {
       entityType: "project",
@@ -118,8 +116,8 @@ describe("APZSEARCH-010 residual coverage", () => {
     expect(adapter.publisher.getMapper()).toBe(adapter.mapper);
     expect(adapter.publisher.getValidator()).toBe(adapter.validator);
     expect(adapter.publisher.getLifecycle()).toBe(adapter.lifecycle);
-    expect(adapter.publisher.getMetrics().snapshot().publicationFailures).toBeGreaterThan(
-      0,
-    );
+    expect(
+      adapter.publisher.getMetrics().snapshot().publicationFailures,
+    ).toBeGreaterThan(0);
   });
 });

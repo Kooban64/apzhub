@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-diagnostics
+name: Diagnostics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Diagnostics sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Diagnostics
+    icon: stethoscope
+    route: /workspace/metrics/diagnostics
+    order: 230
+    permission: metrics.read
+  view:
+    title: Diagnostics
+    workspace: metrics
+    route: /workspace/metrics/diagnostics
+    permission: metrics.read

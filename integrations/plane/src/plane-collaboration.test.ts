@@ -118,12 +118,10 @@ describe("PlaneCommentService", () => {
   it("filters comments by author and search", async () => {
     const { adapter, factory } = await createAdapter();
     await adapter.initialise();
-    const filtered = await adapter.core.comments.list(
-      ctx,
-      projectId,
-      taskId,
-      { authorId: "user_plane_user-001", search: "good" },
-    );
+    const filtered = await adapter.core.comments.list(ctx, projectId, taskId, {
+      authorId: "user_plane_user-001",
+      search: "good",
+    });
     expect(filtered.items.length).toBe(1);
     const empty = await adapter.core.comments.list(ctx, projectId, taskId, {
       search: "missing-term",
@@ -357,7 +355,9 @@ describe("mapping and error translation", () => {
 
     const { adapter, factory } = await createAdapter(failingFetch);
     await adapter.initialise();
-    await expect(adapter.core.comments.list(ctx, projectId, taskId)).rejects.toMatchObject({
+    await expect(
+      adapter.core.comments.list(ctx, projectId, taskId),
+    ).rejects.toMatchObject({
       category: "vendor_unavailable",
     });
     await disposePlaneAdapter(adapter, factory);
@@ -377,7 +377,9 @@ describe("mapping and error translation", () => {
 
     const { adapter, factory } = await createAdapter(failingFetch);
     await adapter.initialise();
-    await expect(adapter.core.watchers.list(ctx, projectId, taskId)).rejects.toMatchObject({
+    await expect(
+      adapter.core.watchers.list(ctx, projectId, taskId),
+    ).rejects.toMatchObject({
       category: "authorization",
     });
     await disposePlaneAdapter(adapter, factory);

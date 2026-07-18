@@ -34,9 +34,7 @@ const ALL_PERMS = [
   "risk.*",
 ] as const;
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_1",
     userId: "user_1",
@@ -100,9 +98,9 @@ describe("quality calculations (pure)", () => {
     expect(() =>
       assertDefectCreateInput({ providerKind: "internal", status: "open" }),
     ).not.toThrow();
-    expect(() =>
-      assertReleaseCalculationInputs({ hasPlanOrRelease: false }),
-    ).toThrow(DomainRuleError);
+    expect(() => assertReleaseCalculationInputs({ hasPlanOrRelease: false })).toThrow(
+      DomainRuleError,
+    );
     expect(() =>
       assertRegressionInputs({
         baselineLabel: "",
@@ -133,12 +131,7 @@ describe("DefectLinkService", () => {
     expect(linked.caseIds).toContain("case_01");
     expect(q.events.listByType("defect_link.linked").length).toBeGreaterThan(0);
 
-    const unlinked = await q.defects.unlinkFrom(
-      ctx(),
-      created.id,
-      "case",
-      "case_01",
-    );
+    const unlinked = await q.defects.unlinkFrom(ctx(), created.id, "case", "case_01");
     expect(unlinked.caseIds ?? []).not.toContain("case_01");
 
     const updated = await q.defects.update(ctx(), created.id, {
@@ -493,10 +486,10 @@ describe("coverage expansion paths", () => {
     expect(suggestedReleaseStatusFromDimensions(["partial", "ready"])).toBe(
       "partially_ready",
     );
-    expect(suggestedReleaseStatusFromDimensions(["blocked", "ready"])).toBe(
-      "blocked",
-    );
-    expect(countExecutionStatuses([{ overallResult: "passed" }, { status: "skip" }]).pass).toBe(1);
+    expect(suggestedReleaseStatusFromDimensions(["blocked", "ready"])).toBe("blocked");
+    expect(
+      countExecutionStatuses([{ overallResult: "passed" }, { status: "skip" }]).pass,
+    ).toBe(1);
     expect(severityWeight(undefined)).toBe(1);
     expect(severityWeight("unknown")).toBe(1);
     expect(numericDelta(10, 4)).toBe(6);
@@ -612,7 +605,15 @@ describe("factory wiring + boundary", () => {
     const path = await import("node:path");
     const { fileURLToPath } = await import("node:url");
     const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)));
-    const forbidden = [/jira/i, /github/i, /gitlab/i, /azure.?devops/i, /express/, /@apzhub\/ui/, /apps\/web/];
+    const forbidden = [
+      /jira/i,
+      /github/i,
+      /gitlab/i,
+      /azure.?devops/i,
+      /express/,
+      /@apzhub\/ui/,
+      /apps\/web/,
+    ];
     function walk(dir: string, acc: string[] = []): string[] {
       for (const entry of readdirSync(dir)) {
         if (entry.endsWith(".test.ts")) continue;

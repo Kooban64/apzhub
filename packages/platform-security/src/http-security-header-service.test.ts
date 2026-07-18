@@ -22,14 +22,22 @@ describe("HttpSecurityHeaderService", () => {
     expect(headers[HTTP_SECURITY_HEADER_NAMES.referrerPolicy]).toBe(
       "strict-origin-when-cross-origin",
     );
-    expect(headers[HTTP_SECURITY_HEADER_NAMES.permissionsPolicy]).toContain("camera=()");
+    expect(headers[HTTP_SECURITY_HEADER_NAMES.permissionsPolicy]).toContain(
+      "camera=()",
+    );
     expect(headers[HTTP_SECURITY_HEADER_NAMES.crossOriginOpenerPolicy]).toBe(
       "same-origin-allow-popups",
     );
-    expect(headers[HTTP_SECURITY_HEADER_NAMES.crossOriginResourcePolicy]).toBe("same-site");
-    expect(headers[HTTP_SECURITY_HEADER_NAMES.crossOriginEmbedderPolicy]).toBe("unsafe-none");
+    expect(headers[HTTP_SECURITY_HEADER_NAMES.crossOriginResourcePolicy]).toBe(
+      "same-site",
+    );
+    expect(headers[HTTP_SECURITY_HEADER_NAMES.crossOriginEmbedderPolicy]).toBe(
+      "unsafe-none",
+    );
     expect(headers[HTTP_SECURITY_HEADER_NAMES.originAgentCluster]).toBe("?1");
-    expect(headers[HTTP_SECURITY_HEADER_NAMES.contentSecurityPolicyReportOnly]).toBeDefined();
+    expect(
+      headers[HTTP_SECURITY_HEADER_NAMES.contentSecurityPolicyReportOnly],
+    ).toBeDefined();
     expect(headers[HTTP_SECURITY_HEADER_NAMES.cacheControl]).toBeUndefined();
   });
 
@@ -45,10 +53,14 @@ describe("HttpSecurityHeaderService", () => {
       surface: "page",
     });
 
-    expect(prod[HTTP_SECURITY_HEADER_NAMES.strictTransportSecurity]).toContain("max-age=");
+    expect(prod[HTTP_SECURITY_HEADER_NAMES.strictTransportSecurity]).toContain(
+      "max-age=",
+    );
     expect(dev[HTTP_SECURITY_HEADER_NAMES.strictTransportSecurity]).toBeUndefined();
     expect(prod[HTTP_SECURITY_HEADER_NAMES.contentSecurityPolicy]).toBeDefined();
-    expect(dev[HTTP_SECURITY_HEADER_NAMES.contentSecurityPolicyReportOnly]).toBeDefined();
+    expect(
+      dev[HTTP_SECURITY_HEADER_NAMES.contentSecurityPolicyReportOnly],
+    ).toBeDefined();
   });
 
   it("adds Cache-Control on API, health, and diagnostics surfaces", () => {
@@ -93,8 +105,12 @@ describe("HttpSecurityHeaderService", () => {
       surface: "health",
     });
 
-    expect(response.headers.get(HTTP_SECURITY_HEADER_NAMES.xContentTypeOptions)).toBe("nosniff");
-    expect(response.headers.get(HTTP_SECURITY_HEADER_NAMES.cacheControl)).toContain("no-store");
+    expect(response.headers.get(HTTP_SECURITY_HEADER_NAMES.xContentTypeOptions)).toBe(
+      "nosniff",
+    );
+    expect(response.headers.get(HTTP_SECURITY_HEADER_NAMES.cacheControl)).toContain(
+      "no-store",
+    );
   });
 });
 
@@ -104,14 +120,20 @@ describe("withPlatformSecurityHeaders", () => {
     expect(wrapped.poweredByHeader).toBe(false);
 
     const rules = await wrapped.headers();
-    expect(rules.some((rule: { source: string }) => rule.source === "/api/:path*")).toBe(true);
-    expect(rules.some((rule: { source: string }) => rule.source === "/(.*)")).toBe(true);
+    expect(
+      rules.some((rule: { source: string }) => rule.source === "/api/:path*"),
+    ).toBe(true);
+    expect(rules.some((rule: { source: string }) => rule.source === "/(.*)")).toBe(
+      true,
+    );
   });
 });
 
 describe("PLATFORM_HTTP_ENDPOINT_SAMPLES", () => {
   it("covers health, diagnostics, swagger, api, and page surfaces", () => {
-    const surfaces = new Set(PLATFORM_HTTP_ENDPOINT_SAMPLES.map((sample) => sample.surface));
+    const surfaces = new Set(
+      PLATFORM_HTTP_ENDPOINT_SAMPLES.map((sample) => sample.surface),
+    );
     expect(surfaces.has("health")).toBe(true);
     expect(surfaces.has("diagnostics")).toBe(true);
     expect(surfaces.has("swagger")).toBe(true);

@@ -18,9 +18,7 @@ import type {
   CanonicalWorkflowTemplateMetadata,
 } from "../models/canonical";
 
-function countConnections(
-  connections: N8nWorkflowRecord["connections"],
-): number {
+function countConnections(connections: N8nWorkflowRecord["connections"]): number {
   if (!connections || typeof connections !== "object") return 0;
   let total = 0;
   for (const value of Object.values(connections)) {

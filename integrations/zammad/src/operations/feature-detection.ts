@@ -10,7 +10,9 @@ export interface FeatureDetectionDeps {
     readonly capabilityId: string;
     readonly endpoint: string;
     readonly optional: boolean;
-    readonly run: (context: IntegrationRequestContext) => Promise<{ readonly statusCode?: number }>;
+    readonly run: (
+      context: IntegrationRequestContext,
+    ) => Promise<{ readonly statusCode?: number }>;
   }[];
 }
 

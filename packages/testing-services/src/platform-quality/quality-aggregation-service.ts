@@ -61,15 +61,10 @@ export function createQualityAggregationService(
       const coverageLabels = contributions
         .filter((c) => c.coveragePercent !== undefined)
         .map((c) => `${c.productKey}:${c.coveragePercent}%`);
-      const riskLabels = [
-        ...new Set(contributions.flatMap((c) => c.riskLabels)),
-      ];
+      const riskLabels = [...new Set(contributions.flatMap((c) => c.riskLabels))];
       const certificationLabels = contributions
         .filter((c) => c.certificationRecordIds.length > 0)
-        .map(
-          (c) =>
-            `${c.productKey}:certs:${c.certificationRecordIds.length}`,
-        );
+        .map((c) => `${c.productKey}:certs:${c.certificationRecordIds.length}`);
       const defectLabels = contributions
         .filter((c) => c.openIssueCount > 0)
         .map((c) => `${c.productKey}:open:${c.openIssueCount}`);

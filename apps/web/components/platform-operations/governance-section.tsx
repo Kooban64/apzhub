@@ -7,7 +7,13 @@ import {
   fetchGovernanceDiagnostics,
 } from "@/lib/platform-operations/ops-api";
 
-import { OpsErrorState, OpsJsonPanel, OpsLoadingState, OpsPageShell, OpsTable } from "./ops-ui";
+import {
+  OpsErrorState,
+  OpsJsonPanel,
+  OpsLoadingState,
+  OpsPageShell,
+  OpsTable,
+} from "./ops-ui";
 
 export function GovernanceSection() {
   const [governance, setGovernance] = useState<Record<string, unknown> | null>(null);
@@ -36,7 +42,8 @@ export function GovernanceSection() {
   }, []);
 
   if (loading) return <OpsLoadingState />;
-  if (error || !governance) return <OpsErrorState message={error ?? "Governance unavailable."} />;
+  if (error || !governance)
+    return <OpsErrorState message={error ?? "Governance unavailable."} />;
 
   const enablements = (governance.enablements ?? []) as Array<{
     scopeType: string;

@@ -109,7 +109,8 @@ export function certifyPlaneWithSdkHarness(
 
   const capabilityCertifications = certifyCapabilities();
   const planeCompat = buildPlaneCompatibilityMatrix({
-    detectedPlaneVersion: input.detectedPlaneVersion ?? PLANE_SUPPORTED_VERSION_RANGE.min,
+    detectedPlaneVersion:
+      input.detectedPlaneVersion ?? PLANE_SUPPORTED_VERSION_RANGE.min,
   });
 
   const compatibility = evaluateAdapterCompatibility({

@@ -16,7 +16,9 @@ import { ProviderResolver } from "../../providers/registry/provider-resolver";
 import { registerGitHubActionsProviders } from "../../providers/github-actions";
 import { createTestingPlatformServicesForTest } from "./create-testing-platform-services";
 
-function ctx(permissions: string[] = ["pipeline.*", "testing.admin"]): ServiceRequestContext {
+function ctx(
+  permissions: string[] = ["pipeline.*", "testing.admin"],
+): ServiceRequestContext {
   return {
     tenantId: "tenant-a",
     organisationId: "org-a",
@@ -29,9 +31,7 @@ function ctx(permissions: string[] = ["pipeline.*", "testing.admin"]): ServiceRe
 }
 
 function createMockCore(): GitHubActionsCoreServices {
-  const jobs: readonly PipelineJob[] = [
-    { key: "1", name: "unit", status: "passed" },
-  ];
+  const jobs: readonly PipelineJob[] = [{ key: "1", name: "unit", status: "passed" }];
   const artifacts: readonly ArtifactReference[] = [{ name: "junit.xml" }];
   const summary: PipelineSummary = {
     headline: "CI",
@@ -197,9 +197,8 @@ describe("testing pipeline live gateway facets", () => {
       githubActionsCore: createMockCore(),
     });
     const resolver = new ProviderResolver({ registry });
-    const { createGitHubActionsPipelineResultAdapter } = await import(
-      "@apzhub/integration-github-actions"
-    );
+    const { createGitHubActionsPipelineResultAdapter } =
+      await import("@apzhub/integration-github-actions");
     const { createGenericCiAdapter } = await import("@apzhub/testing-services");
 
     const testing = createTestingPlatformServicesForTest({

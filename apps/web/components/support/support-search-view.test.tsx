@@ -55,7 +55,9 @@ describe("SupportSearchView", () => {
     await user.type(screen.getByTestId("support-search-q"), "vpn");
     await user.click(screen.getByTestId("support-search-submit"));
 
-    await waitFor(() => expect(screen.getByTestId("support-search-results")).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByTestId("support-search-results")).toBeTruthy(),
+    );
     expect(screen.getAllByText("Request").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Organization").length).toBeGreaterThan(0);
     expect(screen.getByText("VPN issue")).toBeTruthy();

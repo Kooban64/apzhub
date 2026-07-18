@@ -53,7 +53,10 @@ const GENEROUS_THRESHOLD_MS = 5000;
 // Helpers
 // ---------------------------------------------------------------------------
 
-function makeRequest(url: string, init?: { method?: string; body?: string }): NextRequest {
+function makeRequest(
+  url: string,
+  init?: { method?: string; body?: string },
+): NextRequest {
   return new NextRequest(new URL(url, "http://localhost:3300"), {
     method: init?.method ?? "GET",
     body: init?.body,
@@ -68,7 +71,10 @@ function makeContext(tenantId = TENANT): PlatformApiRequestContext {
       correlationId: CORR,
       timestamp: "2026-07-11T00:00:00.000Z",
     },
-    session: buildMockSession({ userId: USER, tenantId }) as PlatformApiRequestContext["session"],
+    session: buildMockSession({
+      userId: USER,
+      tenantId,
+    }) as PlatformApiRequestContext["session"],
     serviceContext: {
       tenantId,
       userId: USER,
@@ -272,7 +278,6 @@ describe("OSS-110-12 Support Vertical performance baseline (mocked)", () => {
       expect(row.ms).toBeLessThan(GENEROUS_THRESHOLD_MS);
     }
 
-    // eslint-disable-next-line no-console
     console.log(
       "SUPPORT_VERTICAL_HTTP_PERF_BASELINE",
       JSON.stringify({
@@ -315,7 +320,8 @@ describe("OSS-110-12 Support Vertical performance baseline (mocked)", () => {
       }),
     );
 
-    const items = (await bundle.gateway.support.listSupportRequests(serviceCtx, {})).items;
+    const items = (await bundle.gateway.support.listSupportRequests(serviceCtx, {}))
+      .items;
     const pid = items[0]!.id;
 
     baselines.push(
@@ -374,7 +380,6 @@ describe("OSS-110-12 Support Vertical performance baseline (mocked)", () => {
       expect(row.ms).toBeLessThan(GENEROUS_THRESHOLD_MS);
     }
 
-    // eslint-disable-next-line no-console
     console.log(
       "SUPPORT_VERTICAL_GATEWAY_PERF_BASELINE",
       JSON.stringify({

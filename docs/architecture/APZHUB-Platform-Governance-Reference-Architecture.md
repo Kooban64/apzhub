@@ -6,13 +6,13 @@ Platform Governance owns **what is enabled** on the platform. Provisioning owns 
 
 ## Separation of concerns
 
-| Concern | Owner |
-| --- | --- |
-| WHO | Identity |
-| WHAT | Authorization |
-| HOW | Personalisation |
-| WHAT IS ENABLED | Governance |
-| WHAT IS AVAILABLE | Provisioning |
+| Concern           | Owner           |
+| ----------------- | --------------- |
+| WHO               | Identity        |
+| WHAT              | Authorization   |
+| HOW               | Personalisation |
+| WHAT IS ENABLED   | Governance      |
+| WHAT IS AVAILABLE | Provisioning    |
 
 ## Package
 
@@ -36,13 +36,13 @@ No percentage rollouts, A/B tests, or scheduled activation in M8-05.
 
 ## APIs
 
-| Route | Methods |
-| --- | --- |
-| `/api/platform/v1/governance` | GET, PATCH |
-| `/api/platform/v1/governance/diagnostics` | GET |
-| `/api/platform/v1/provisioning` | GET, POST |
-| `/api/platform/v1/feature-flags` | GET, PATCH |
-| `/api/platform/v1/capabilities` | GET |
+| Route                                     | Methods    |
+| ----------------------------------------- | ---------- |
+| `/api/platform/v1/governance`             | GET, PATCH |
+| `/api/platform/v1/governance/diagnostics` | GET        |
+| `/api/platform/v1/provisioning`           | GET, POST  |
+| `/api/platform/v1/feature-flags`          | GET, PATCH |
+| `/api/platform/v1/capabilities`           | GET        |
 
 ## Out of scope
 

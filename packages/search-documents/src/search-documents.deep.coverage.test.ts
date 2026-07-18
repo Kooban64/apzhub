@@ -69,9 +69,7 @@ const document: Document = {
     userId: "user-1",
     displayName: "Owner",
   },
-  permissions: [
-    { principalType: "user", principalId: "user-1", action: "read" },
-  ],
+  permissions: [{ principalType: "user", principalId: "user-1", action: "read" }],
   createdAt: "2026-01-01T00:00:00.000Z",
   updatedAt: "2026-01-01T00:00:00.000Z",
 };
@@ -103,20 +101,22 @@ describe("APZSEARCH-012 deep coverage", () => {
     const context = ctx();
 
     expect(
-      adapter.validator.validateDraft(context, {
-        entityId: "",
-        entityType: "document",
-        title: "",
-        classification: undefined,
-        metadata: {
-          documentType: "file",
-          status: "active",
-          meiliUid: "x",
-          storageRef: "bad",
-          retentionNotes: "nope",
-          objectKey: "k",
-        },
-      }).issues.map((i) => i.code),
+      adapter.validator
+        .validateDraft(context, {
+          entityId: "",
+          entityType: "document",
+          title: "",
+          classification: undefined,
+          metadata: {
+            documentType: "file",
+            status: "active",
+            meiliUid: "x",
+            storageRef: "bad",
+            retentionNotes: "nope",
+            objectKey: "k",
+          },
+        })
+        .issues.map((i) => i.code),
     ).toEqual(
       expect.arrayContaining([
         "required",
@@ -127,31 +127,35 @@ describe("APZSEARCH-012 deep coverage", () => {
     );
 
     expect(
-      adapter.validator.validateDraft(context, {
-        entityId: "s3://leaky",
-        entityType: "unknown",
-        title: "T",
-        classification: "internal",
-        permissions: ["x"],
-        metadata: {},
-      }).issues.some((i) => i.code === "unsupported" || i.code === "storage_leakage"),
+      adapter.validator
+        .validateDraft(context, {
+          entityId: "s3://leaky",
+          entityType: "unknown",
+          title: "T",
+          classification: "internal",
+          permissions: ["x"],
+          metadata: {},
+        })
+        .issues.some((i) => i.code === "unsupported" || i.code === "storage_leakage"),
     ).toBe(true);
 
     expect(
-      adapter.validator.validateDraft(
-        {
-          ...context,
-          tenantId: "",
-          permissions: null as unknown as readonly string[],
-        },
-        {
-          entityId: "x",
-          entityType: "document_tag",
-          title: "T",
-          classification: "internal",
-          metadata: {},
-        },
-      ).issues.map((i) => i.field),
+      adapter.validator
+        .validateDraft(
+          {
+            ...context,
+            tenantId: "",
+            permissions: null as unknown as readonly string[],
+          },
+          {
+            entityId: "x",
+            entityType: "document_tag",
+            title: "T",
+            classification: "internal",
+            metadata: {},
+          },
+        )
+        .issues.map((i) => i.field),
     ).toEqual(expect.arrayContaining(["tenantId", "permissions"]));
 
     const s3Folder: DocumentFolder = {
@@ -206,12 +210,8 @@ describe("APZSEARCH-012 deep coverage", () => {
     ).toBe("update");
     expect(adapter.hooks.onDocumentClassified(context, document).ok).toBe(true);
     expect(adapter.hooks.onDocumentTagged(context, document).ok).toBe(true);
-    expect(adapter.hooks.onDocumentFolderAssigned(context, document).ok).toBe(
-      true,
-    );
-    expect(
-      adapter.hooks.onDocumentCollectionAssigned(context, document).ok,
-    ).toBe(true);
+    expect(adapter.hooks.onDocumentFolderAssigned(context, document).ok).toBe(true);
+    expect(adapter.hooks.onDocumentCollectionAssigned(context, document).ok).toBe(true);
 
     const versioned = adapter.hooks.onDocumentVersionCommitted(
       context,
@@ -220,10 +220,12 @@ describe("APZSEARCH-012 deep coverage", () => {
     );
     expect(versioned.ok).toBe(true);
 
-    expect(adapter.hooks.onDocumentArchived(context, {
-      ...document,
-      status: "archived",
-    }).ok).toBe(true);
+    expect(
+      adapter.hooks.onDocumentArchived(context, {
+        ...document,
+        status: "archived",
+      }).ok,
+    ).toBe(true);
     expect(
       adapter.hooks.onDocumentRestored(context, {
         ...document,
@@ -233,9 +235,7 @@ describe("APZSEARCH-012 deep coverage", () => {
     expect(
       adapter.hooks.onDocumentRetentionChanged(context, document, retention).ok,
     ).toBe(true);
-    expect(adapter.hooks.onGeneratedReportLinked(context, document).ok).toBe(
-      true,
-    );
+    expect(adapter.hooks.onGeneratedReportLinked(context, document).ok).toBe(true);
 
     const relationship: DocumentRelationship = {
       id: asDocumentRelationshipId("drel_33333333333333333333333333333333"),
@@ -246,11 +246,7 @@ describe("APZSEARCH-012 deep coverage", () => {
       createdBy: "user-1",
     };
     expect(
-      adapter.hooks.onDocumentRelationshipChanged(
-        context,
-        document,
-        relationship,
-      ).ok,
+      adapter.hooks.onDocumentRelationshipChanged(context, document, relationship).ok,
     ).toBe(true);
 
     const collection: DocumentCollection = {
@@ -274,9 +270,7 @@ describe("APZSEARCH-012 deep coverage", () => {
       id: asDocumentCategoryId("dcat_66666666666666666666666666666666"),
       tenantId: "tenant-a",
       name: "Cat",
-      parentCategoryId: asDocumentCategoryId(
-        "dcat_eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-      ),
+      parentCategoryId: asDocumentCategoryId("dcat_eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"),
       createdAt: "2026-01-01T00:00:00.000Z",
       updatedAt: "2026-01-01T00:00:00.000Z",
     };
@@ -290,26 +284,18 @@ describe("APZSEARCH-012 deep coverage", () => {
     expect(adapter.hooks.onDocumentCollectionUpserted(context, collection).ok).toBe(
       true,
     );
-    expect(adapter.hooks.onDocumentFolderUpserted(context, folder).ok).toBe(
-      true,
-    );
+    expect(adapter.hooks.onDocumentFolderUpserted(context, folder).ok).toBe(true);
     expect(adapter.mapper.mapDocumentFolder(context, folder).metadata?.path).toBe(
       "relative/ok",
     );
-    expect(adapter.hooks.onDocumentCategoryUpserted(context, category).ok).toBe(
-      true,
-    );
+    expect(adapter.hooks.onDocumentCategoryUpserted(context, category).ok).toBe(true);
     expect(adapter.hooks.onDocumentTagUpserted(context, tag).ok).toBe(true);
 
-    expect(
-      adapter.hooks.onDocumentCollectionRemoved(context, collection.id).ok,
-    ).toBe(true);
-    expect(adapter.hooks.onDocumentFolderRemoved(context, folder.id).ok).toBe(
+    expect(adapter.hooks.onDocumentCollectionRemoved(context, collection.id).ok).toBe(
       true,
     );
-    expect(
-      adapter.hooks.onDocumentCategoryRemoved(context, category.id).ok,
-    ).toBe(true);
+    expect(adapter.hooks.onDocumentFolderRemoved(context, folder.id).ok).toBe(true);
+    expect(adapter.hooks.onDocumentCategoryRemoved(context, category.id).ok).toBe(true);
     expect(adapter.hooks.onDocumentTagRemoved(context, tag.id).ok).toBe(true);
     expect(adapter.hooks.onDocumentDeleted(context, document.id).ok).toBe(true);
 
@@ -402,12 +388,8 @@ describe("APZSEARCH-012 deep coverage", () => {
         entity: document,
       }).ok,
     ).toBe(false);
-    expect(
-      publisherOkMap.remove(context, "document", document.id).ok,
-    ).toBe(false);
-    expect(
-      publisherOkMap.lifecycle(context, document.id, "archived").ok,
-    ).toBe(false);
+    expect(publisherOkMap.remove(context, "document", document.id).ok).toBe(false);
+    expect(publisherOkMap.lifecycle(context, document.id, "archived").ok).toBe(false);
     expect(
       publisherOkMap.validate(context, {
         entityType: "document",
@@ -471,17 +453,19 @@ describe("APZSEARCH-012 deep coverage", () => {
 
     // empty permissions on draft and context
     expect(
-      adapter.validator.validateDraft(
-        { ...context, permissions: [] },
-        {
-          entityId: "ok",
-          entityType: "document_folder",
-          title: "T",
-          classification: "internal",
-          permissions: [],
-          metadata: {},
-        },
-      ).issues.some((i) => i.field === "permissions"),
+      adapter.validator
+        .validateDraft(
+          { ...context, permissions: [] },
+          {
+            entityId: "ok",
+            entityType: "document_folder",
+            title: "T",
+            classification: "internal",
+            permissions: [],
+            metadata: {},
+          },
+        )
+        .issues.some((i) => i.field === "permissions"),
     ).toBe(true);
   });
 });

@@ -37,22 +37,28 @@ export interface TestingPlatformServicesBundle {
   wrapWithPipeline(pipeline: RequestPipeline): TestingPlatformGatewayWithReporting;
 }
 
-export interface CreateTestingPlatformServicesInput
-  extends Omit<ManualTestingServiceDeps, "persistence"> {
+export interface CreateTestingPlatformServicesInput extends Omit<
+  ManualTestingServiceDeps,
+  "persistence"
+> {
   readonly domain?: TestingDomainServices;
   readonly persistence?: TestingPersistence;
   /** When set, live pipeline gateway facets resolve via ProviderRegistry. */
   readonly providerResolver?: ProviderResolver;
 }
 
-export interface CreateTestingPlatformServicesForProductionInput
-  extends Omit<ManualTestingServiceDeps, "persistence"> {
+export interface CreateTestingPlatformServicesForProductionInput extends Omit<
+  ManualTestingServiceDeps,
+  "persistence"
+> {
   readonly postgresDb: Parameters<typeof createPostgresTestingPersistence>[0];
   readonly providerResolver?: ProviderResolver;
 }
 
-export interface CreateTestingPlatformServicesForTestInput
-  extends Omit<ManualTestingServiceDeps, "persistence"> {
+export interface CreateTestingPlatformServicesForTestInput extends Omit<
+  ManualTestingServiceDeps,
+  "persistence"
+> {
   readonly domain?: TestingDomainServices;
   readonly persistence?: TestingPersistence;
   /**
@@ -114,15 +120,27 @@ export function wrapTestingPlatformGatewayWithPipeline(
       pipeline,
       "testingExecution",
     ),
-    evidence: wrapServiceWithPipeline(gatewaySurface.evidence, pipeline, "testingEvidence"),
+    evidence: wrapServiceWithPipeline(
+      gatewaySurface.evidence,
+      pipeline,
+      "testingEvidence",
+    ),
     automation: wrapServiceWithPipeline(
       gatewaySurface.automation,
       pipeline,
       "testingAutomation",
     ),
-    coverage: wrapServiceWithPipeline(gatewaySurface.coverage, pipeline, "testingCoverage"),
+    coverage: wrapServiceWithPipeline(
+      gatewaySurface.coverage,
+      pipeline,
+      "testingCoverage",
+    ),
     defects: wrapServiceWithPipeline(gatewaySurface.defects, pipeline, "testingDefect"),
-    quality: wrapServiceWithPipeline(gatewaySurface.quality, pipeline, "testingQuality"),
+    quality: wrapServiceWithPipeline(
+      gatewaySurface.quality,
+      pipeline,
+      "testingQuality",
+    ),
     engineeringIntelligence: wrapServiceWithPipeline(
       gatewaySurface.engineeringIntelligence,
       pipeline,
@@ -188,9 +206,21 @@ export function wrapTestingPlatformGatewayWithPipeline(
       pipeline,
       "testingTraceability",
     ),
-    approvals: wrapServiceWithPipeline(gatewaySurface.approvals, pipeline, "testingApproval"),
-    dashboard: wrapServiceWithPipeline(gatewaySurface.dashboard, pipeline, "testingDashboard"),
-    reporting: wrapServiceWithPipeline(gatewaySurface.reporting, pipeline, "testingReporting"),
+    approvals: wrapServiceWithPipeline(
+      gatewaySurface.approvals,
+      pipeline,
+      "testingApproval",
+    ),
+    dashboard: wrapServiceWithPipeline(
+      gatewaySurface.dashboard,
+      pipeline,
+      "testingDashboard",
+    ),
+    reporting: wrapServiceWithPipeline(
+      gatewaySurface.reporting,
+      pipeline,
+      "testingReporting",
+    ),
   };
 }
 

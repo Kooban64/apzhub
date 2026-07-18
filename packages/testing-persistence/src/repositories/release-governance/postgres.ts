@@ -128,7 +128,11 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       }
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleaseRecord>;
       return {
         ...meta,
@@ -162,7 +166,11 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       if (input.kind !== undefined) validateReleaseScopeKind(String(input.kind));
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleaseScopeRecord>;
       return {
         ...meta,
@@ -191,7 +199,11 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       assertRequiredString(input.versionLabel, "versionLabel");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleasePackageRecord>;
       return {
         ...meta,
@@ -225,14 +237,19 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       }
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleaseCandidateRecord>;
       return {
         ...meta,
         releaseId: String(existing?.releaseId ?? data.releaseId),
         label: String(data.label ?? existing?.label ?? ""),
-        status:
-          (data.status ?? existing?.status ?? "draft") as ReleaseCandidateRecord["status"],
+        status: (data.status ??
+          existing?.status ??
+          "draft") as ReleaseCandidateRecord["status"],
         notes: data.notes ?? existing?.notes,
       };
     },
@@ -263,19 +280,22 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       }
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleaseApprovalRecord>;
       return {
         ...meta,
         releaseId: String(existing?.releaseId ?? data.releaseId),
-        stageKind:
-          (data.stageKind ??
-            existing?.stageKind ??
-            "technical") as ReleaseApprovalRecord["stageKind"],
-        status:
-          (data.status ?? existing?.status ?? "pending") as ReleaseApprovalRecord["status"],
-        requestedFromUserId:
-          data.requestedFromUserId ?? existing?.requestedFromUserId,
+        stageKind: (data.stageKind ??
+          existing?.stageKind ??
+          "technical") as ReleaseApprovalRecord["stageKind"],
+        status: (data.status ??
+          existing?.status ??
+          "pending") as ReleaseApprovalRecord["status"],
+        requestedFromUserId: data.requestedFromUserId ?? existing?.requestedFromUserId,
         decidedByUserId: data.decidedByUserId ?? existing?.decidedByUserId,
         decidedAt: data.decidedAt ?? existing?.decidedAt,
         comments: data.comments ?? existing?.comments,
@@ -307,15 +327,18 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       }
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleaseDecisionRecord>;
       return {
         ...meta,
         releaseId: String(existing?.releaseId ?? data.releaseId),
-        verdict:
-          (data.verdict ??
-            existing?.verdict ??
-            "rejected") as ReleaseDecisionRecord["verdict"],
+        verdict: (data.verdict ??
+          existing?.verdict ??
+          "rejected") as ReleaseDecisionRecord["verdict"],
         decidedByUserId: String(
           data.decidedByUserId ?? existing?.decidedByUserId ?? "",
         ),
@@ -345,7 +368,11 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       assertRequiredString(input.refId, "refId");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleaseEvidenceRecord>;
       return {
         ...meta,
@@ -373,13 +400,16 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       assertRequiredString(input.kind, "kind");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleaseDependencyRecord>;
       return {
         ...meta,
         releaseId: String(existing?.releaseId ?? data.releaseId),
-        dependsOnReleaseId:
-          data.dependsOnReleaseId ?? existing?.dependsOnReleaseId,
+        dependsOnReleaseId: data.dependsOnReleaseId ?? existing?.dependsOnReleaseId,
         kind: String(data.kind ?? existing?.kind ?? ""),
         required: Boolean(data.required ?? existing?.required ?? true),
         notes: data.notes ?? existing?.notes,
@@ -405,7 +435,11 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       assertRequiredString(input.body, "body");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleaseNoteRecord>;
       return {
         ...meta,
@@ -435,7 +469,11 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       assertRequiredString(input.releaseId, "releaseId");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleaseRiskAssessmentRecord>;
       return {
         ...meta,
@@ -464,7 +502,11 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       assertRequiredString(input.releaseId, "releaseId");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleaseReadinessSnapshotRecord>;
       return {
         ...meta,
@@ -493,7 +535,11 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       assertRequiredString(input.releaseId, "releaseId");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleaseSummarySnapshotRecord>;
       return {
         ...meta,
@@ -516,9 +562,7 @@ export function createPostgresReleaseGovernanceRepos(db: DatabaseExecutor) {
       assertRequiredString(input.action, "action");
       assertRequiredString(input.summary, "summary");
       const id =
-        typeof input.id === "string" && input.id.length > 0
-          ? input.id
-          : randomUUID();
+        typeof input.id === "string" && input.id.length > 0 ? input.id : randomUUID();
       const row = {
         id,
         tenantId: ctx.tenantId,

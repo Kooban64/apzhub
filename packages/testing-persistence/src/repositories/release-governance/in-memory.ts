@@ -59,10 +59,7 @@ import {
   normalizeListQuery,
   paginateItems,
 } from "../types";
-import {
-  baseMeta,
-  createInMemoryCrudRepository,
-} from "../in-memory/generic-crud";
+import { baseMeta, createInMemoryCrudRepository } from "../in-memory/generic-crud";
 
 export interface ReleaseGovernanceInMemoryStores {
   releases: Map<string, ReleaseRecord>;
@@ -126,11 +123,8 @@ export function createInMemoryReleaseGovernanceRepos(
         key: String(existing?.key ?? input.key),
         name: String(input.name ?? existing?.name ?? ""),
         status:
-          (input.status as ReleaseRecord["status"]) ??
-          existing?.status ??
-          "draft",
-        description:
-          (input.description as string | undefined) ?? existing?.description,
+          (input.status as ReleaseRecord["status"]) ?? existing?.status ?? "draft",
+        description: (input.description as string | undefined) ?? existing?.description,
         windowJson:
           (input.windowJson as Readonly<Record<string, unknown>> | undefined) ??
           existing?.windowJson,
@@ -162,10 +156,7 @@ export function createInMemoryReleaseGovernanceRepos(
       return {
         ...meta,
         releaseId: String(existing?.releaseId ?? input.releaseId),
-        kind:
-          (input.kind as ReleaseScopeRecord["kind"]) ??
-          existing?.kind ??
-          "other",
+        kind: (input.kind as ReleaseScopeRecord["kind"]) ?? existing?.kind ?? "other",
         refId: String(input.refId ?? existing?.refId ?? ""),
         label: (input.label as string | undefined) ?? existing?.label,
       };
@@ -191,11 +182,8 @@ export function createInMemoryReleaseGovernanceRepos(
         ...meta,
         releaseId: String(existing?.releaseId ?? input.releaseId),
         name: String(input.name ?? existing?.name ?? ""),
-        versionLabel: String(
-          input.versionLabel ?? existing?.versionLabel ?? "",
-        ),
-        description:
-          (input.description as string | undefined) ?? existing?.description,
+        versionLabel: String(input.versionLabel ?? existing?.versionLabel ?? ""),
+        description: (input.description as string | undefined) ?? existing?.description,
       };
     },
   });
@@ -271,13 +259,10 @@ export function createInMemoryReleaseGovernanceRepos(
           (input.requestedFromUserId as string | undefined) ??
           existing?.requestedFromUserId,
         decidedByUserId:
-          (input.decidedByUserId as string | undefined) ??
-          existing?.decidedByUserId,
-        decidedAt:
-          (input.decidedAt as string | undefined) ?? existing?.decidedAt,
+          (input.decidedByUserId as string | undefined) ?? existing?.decidedByUserId,
+        decidedAt: (input.decidedAt as string | undefined) ?? existing?.decidedAt,
         comments: (input.comments as string | undefined) ?? existing?.comments,
-        conditions:
-          (input.conditions as string | undefined) ?? existing?.conditions,
+        conditions: (input.conditions as string | undefined) ?? existing?.conditions,
       };
     },
   });
@@ -495,9 +480,7 @@ export function createInMemoryReleaseGovernanceRepos(
       assertRequiredString(input.action, "action");
       assertRequiredString(input.summary, "summary");
       const id =
-        typeof input.id === "string" && input.id.length > 0
-          ? input.id
-          : randomUUID();
+        typeof input.id === "string" && input.id.length > 0 ? input.id : randomUUID();
       const row: ReleaseAuditRecord = {
         id,
         tenantId: ctx.tenantId,

@@ -23,7 +23,8 @@ export function buildServiceRequestContext(
 ): ServiceRequestContext {
   const { session, tracing } = input;
   const userId = session.user.id;
-  const tenantId = session.tenantId ?? session.user.tenantId ?? session.user.activeTenantId;
+  const tenantId =
+    session.tenantId ?? session.user.tenantId ?? session.user.activeTenantId;
 
   if (!userId) {
     throw new Error("Session user id is required");

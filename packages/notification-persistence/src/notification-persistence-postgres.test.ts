@@ -420,10 +420,7 @@ describe("notification-persistence postgres repositories", () => {
       note: "meta",
     });
     expect(
-      await repos.deliveryAttempts.listByNotification(
-        ctx,
-        asNotificationId("ntf_1"),
-      ),
+      await repos.deliveryAttempts.listByNotification(ctx, asNotificationId("ntf_1")),
     ).toMatchObject([{ status: "recorded" }]);
 
     await repos.templates.update(ctx, {

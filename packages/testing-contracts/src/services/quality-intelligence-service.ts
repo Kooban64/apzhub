@@ -9,9 +9,6 @@ export interface QualityIntelligenceService {
     scope?: QualityScope,
     label?: string,
   ): Promise<QualitySnapshot>;
-  getSnapshot(
-    ctx: ServiceRequestContext,
-    id: string,
-  ): Promise<QualitySnapshot>;
+  getSnapshot(ctx: ServiceRequestContext, id: string): Promise<QualitySnapshot>;
   listSnapshots(ctx: ServiceRequestContext): Promise<readonly QualitySnapshot[]>;
 }

@@ -4,12 +4,12 @@
 
 ## Packages
 
-| Package | Version | Role |
-| ------- | ------- | ---- |
-| `@apzhub/platform-service-contracts` | 0.12.0 | Vendor-neutral service interfaces + gateway slots |
-| `@apzhub/platform-services` | 0.12.0 | Providers, service impls, gateway wrap, authz |
-| `@apzhub/testing-services` | 0.9.0 | Optional `pipelineAdapters` injection into SoR registry |
-| `@apzhub/integration-github-actions` | 0.1.0 | Adapter core (read-only) |
+| Package                              | Version | Role                                                    |
+| ------------------------------------ | ------- | ------------------------------------------------------- |
+| `@apzhub/platform-service-contracts` | 0.12.0  | Vendor-neutral service interfaces + gateway slots       |
+| `@apzhub/platform-services`          | 0.12.0  | Providers, service impls, gateway wrap, authz           |
+| `@apzhub/testing-services`           | 0.9.0   | Optional `pipelineAdapters` injection into SoR registry |
+| `@apzhub/integration-github-actions` | 0.1.0   | Adapter core (read-only)                                |
 
 ## Factory entry points
 

@@ -8,17 +8,17 @@
 
 ## Prefixes
 
-| Prefix | Purpose |
-|--------|---------|
-| `testing.*` | Core testing workspace assets and executions |
-| `certification.*` | Certification records and gate evaluation |
-| `evidence.*` | Evidence metadata |
-| `traceability.*` | Traceability links / matrices |
-| `automation.*` | Automation job metadata |
-| `reporting.*` | Report viewing / generation |
-| `approval.*` | Approval workflow and signatures |
-| `dashboard.*` | Dashboard snapshots |
-| `*.admin` | Scoped administration within each area |
+| Prefix            | Purpose                                      |
+| ----------------- | -------------------------------------------- |
+| `testing.*`       | Core testing workspace assets and executions |
+| `certification.*` | Certification records and gate evaluation    |
+| `evidence.*`      | Evidence metadata                            |
+| `traceability.*`  | Traceability links / matrices                |
+| `automation.*`    | Automation job metadata                      |
+| `reporting.*`     | Report viewing / generation                  |
+| `approval.*`      | Approval workflow and signatures             |
+| `dashboard.*`     | Dashboard snapshots                          |
+| `*.admin`         | Scoped administration within each area       |
 
 ---
 

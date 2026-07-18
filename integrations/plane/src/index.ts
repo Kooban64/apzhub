@@ -1,6 +1,4 @@
-export {
-  PlaneAdapter,
-} from "./plane-adapter";
+export { PlaneAdapter } from "./plane-adapter";
 export type { PlaneDiagnosticsExtension, PlaneAdapterOptions } from "./plane-adapter";
 
 export type {
@@ -128,10 +126,7 @@ export type {
   CreatePlaneAdapterInput,
   CreatePlaneAdapterResult,
 } from "./plane-factory";
-export {
-  createPlaneAdapter,
-  disposePlaneAdapter,
-} from "./plane-factory";
+export { createPlaneAdapter, disposePlaneAdapter } from "./plane-factory";
 
 export {
   createPlaneMappingProvider,
@@ -140,7 +135,10 @@ export {
   PLANE_MAPPING_PROVIDER_ID,
 } from "./mappers/plane-mapping-registry";
 
-export { PlaneCoreServices, createPlaneCoreServices } from "./services/plane-core-services";
+export {
+  PlaneCoreServices,
+  createPlaneCoreServices,
+} from "./services/plane-core-services";
 export { PlaneWorkspaceService } from "./services/workspace-service";
 export { PlaneProjectService } from "./services/project-service";
 export { PlaneProjectStateService } from "./services/project-state-service";

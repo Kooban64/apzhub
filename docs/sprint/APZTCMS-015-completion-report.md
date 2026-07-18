@@ -35,12 +35,12 @@ Pipeline, PipelineRun, PipelineStage, PipelineJob, PipelineStep, ArtifactReferen
 
 ## Testing
 
-| Suite | Result |
-| ----- | ------ |
-| Domain pipelines | green |
-| Persistence pipelines | green |
-| Platform testing-pipelines | green |
-| Combined focused | **24** tests |
+| Suite                      | Result       |
+| -------------------------- | ------------ |
+| Domain pipelines           | green        |
+| Persistence pipelines      | green        |
+| Platform testing-pipelines | green        |
+| Combined focused           | **24** tests |
 
 ## Coverage
 
@@ -48,14 +48,14 @@ Domain `pipelines/` folder: **98.28%** statements/lines, **100%** functions, **8
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| typecheck (contracts / persistence / services / platform-service-contracts) | PASS |
-| lint (`testing-services` pipelines) | PASS |
-| tests (015 suites) | PASS |
-| coverage | PASS ≥95% lines |
-| architecture / boundary | PASS (no HTTP/UI/live providers) |
-| dependency / boundary intent | PASS — no provider SDKs |
+| Gate                                                                        | Result                           |
+| --------------------------------------------------------------------------- | -------------------------------- |
+| typecheck (contracts / persistence / services / platform-service-contracts) | PASS                             |
+| lint (`testing-services` pipelines)                                         | PASS                             |
+| tests (015 suites)                                                          | PASS                             |
+| coverage                                                                    | PASS ≥95% lines                  |
+| architecture / boundary                                                     | PASS (no HTTP/UI/live providers) |
+| dependency / boundary intent                                                | PASS — no provider SDKs          |
 
 Pre-existing `@apzhub/platform-services` typecheck noise (Plane/Zammad harness + older testing tests) unchanged and out of 015 scope.
 

@@ -27,17 +27,10 @@ export class TestingSearchLifecycle {
   /**
    * Suggests a publication lifecycle from Testing domain status strings.
    */
-  suggestFromDomainStatus(
-    status: string | undefined,
-  ): SearchEntityLifecycleState {
+  suggestFromDomainStatus(status: string | undefined): SearchEntityLifecycleState {
     if (!status) return "validated";
     const s = status.toLowerCase();
-    if (
-      s === "draft" ||
-      s === "pending" ||
-      s === "queued" ||
-      s === "planned"
-    ) {
+    if (s === "draft" || s === "pending" || s === "queued" || s === "planned") {
       return "draft";
     }
     if (

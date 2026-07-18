@@ -34,12 +34,12 @@ const module = await gateway.administration.modules.create(ctx, {
 
 ## Packages
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/admin-contracts` | 0.2.0 |
-| `@apzhub/admin-core` | 0.2.0 |
-| `@apzhub/admin-persistence` | 0.1.0 |
-| `@apzhub/platform-services` | 0.22.0 |
+| Package                     | Version |
+| --------------------------- | ------- |
+| `@apzhub/admin-contracts`   | 0.2.0   |
+| `@apzhub/admin-core`        | 0.2.0   |
+| `@apzhub/admin-persistence` | 0.1.0   |
+| `@apzhub/platform-services` | 0.22.0  |
 
 ## Audit
 

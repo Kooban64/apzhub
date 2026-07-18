@@ -4,9 +4,7 @@ import type { NextRequest } from "next/server";
 
 import { withPlatformApiAuth } from "@/lib/api/v1/auth/with-platform-api-auth";
 
-import {
-  handleSubmitTestingCertificationForApproval,
-} from "@/lib/api/v1/handlers/testing";
+import { handleSubmitTestingCertificationForApproval } from "@/lib/api/v1/handlers/testing";
 
 import { methodNotAllowedResponse } from "@/lib/api/v1/response";
 

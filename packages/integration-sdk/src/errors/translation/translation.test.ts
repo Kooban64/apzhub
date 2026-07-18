@@ -2,10 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { createIntegrationError } from "../factory";
 import { DefaultErrorTranslator } from "./error-translator";
-import {
-  buildDefaultTranslatedError,
-  normalizeUnknownError,
-} from "./default-mapping";
+import { buildDefaultTranslatedError, normalizeUnknownError } from "./default-mapping";
 import type { VendorErrorMapper } from "./types";
 
 const correlationId = "corr-translate-001";
@@ -64,7 +61,9 @@ describe("error translation", () => {
 
     expect(translated.error.message).not.toContain("super-secret-token-value");
     expect(translated.vendorDiagnostics?.vendorCode).toBe("invalid_token");
-    expect(translated.vendorDiagnostics?.vendorMessageSummary).toContain("Invalid token");
+    expect(translated.vendorDiagnostics?.vendorMessageSummary).toContain(
+      "Invalid token",
+    );
     expect(translated.error.correlationId).toBe(correlationId);
   });
 

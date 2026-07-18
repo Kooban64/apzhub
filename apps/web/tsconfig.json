@@ -51,6 +51,9 @@
       "@apzhub/legal-business-core": [
         "../../packages/legal-business-core/src/index.ts"
       ],
+      "@apzhub/document-core": ["../../packages/document-core/src/index.ts"],
+      "@apzhub/document-contracts": ["../../packages/document-contracts/src/index.ts"],
+      "@apzhub/testing-contracts": ["../../packages/testing-contracts/src/index.ts"],
       "@apzhub/law-platform/api": ["../law-platform/lib/api/index.ts"]
     }
   },

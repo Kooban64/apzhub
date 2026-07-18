@@ -121,10 +121,7 @@ export type WorkflowEngineWorkflowsService = {
     input: unknown,
   ): Promise<WorkflowEngineWorkflowMetadata>;
   /** Always NOT_SUPPORTED in APZWORKFLOW-007. */
-  delete(
-    ctx: WorkflowPlatformServiceContext,
-    workflowId: string,
-  ): Promise<void>;
+  delete(ctx: WorkflowPlatformServiceContext, workflowId: string): Promise<void>;
   /** Always NOT_SUPPORTED in APZWORKFLOW-007. */
   execute(
     ctx: WorkflowPlatformServiceContext,
@@ -182,9 +179,7 @@ export type WorkflowEngineHealthService = {
 };
 
 export type WorkflowEngineDiagnosticsService = {
-  get(
-    ctx: WorkflowPlatformServiceContext,
-  ): Promise<WorkflowEngineDiagnosticsSnapshot>;
+  get(ctx: WorkflowPlatformServiceContext): Promise<WorkflowEngineDiagnosticsSnapshot>;
 };
 
 export type WorkflowEngineCompatibilityService = {

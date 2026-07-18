@@ -73,7 +73,9 @@ export class GitHubActionsRestClient {
     };
   }
 
-  async getRateLimit(context: IntegrationRequestContext): Promise<GitHubRateLimitRecord> {
+  async getRateLimit(
+    context: IntegrationRequestContext,
+  ): Promise<GitHubRateLimitRecord> {
     return this.request(context, "GET", "/rate_limit");
   }
 
@@ -257,7 +259,13 @@ export class GitHubActionsRestClient {
     body?: Record<string, unknown>,
     query?: Readonly<Record<string, string | number | boolean>>,
   ): Promise<TResponse> {
-    const response = await this.requestRaw<TResponse>(context, method, path, body, query);
+    const response = await this.requestRaw<TResponse>(
+      context,
+      method,
+      path,
+      body,
+      query,
+    );
     return response.data;
   }
 

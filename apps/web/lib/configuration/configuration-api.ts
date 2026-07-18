@@ -63,11 +63,7 @@ export function updateConfiguration(
   input: UpdateConfigurationClientInput,
   options?: ConfigurationClientRequestOptions,
 ) {
-  return getConfigurationClient().updateConfiguration(
-    configurationId,
-    input,
-    options,
-  );
+  return getConfigurationClient().updateConfiguration(configurationId, input, options);
 }
 
 export function archiveConfiguration(
@@ -121,10 +117,7 @@ export function deprecateConfiguration(
   configurationId: string,
   options?: ConfigurationClientRequestOptions,
 ) {
-  return getConfigurationClient().deprecateConfiguration(
-    configurationId,
-    options,
-  );
+  return getConfigurationClient().deprecateConfiguration(configurationId, options);
 }
 
 export function listConfigurationNamespaces(
@@ -140,9 +133,7 @@ export function getConfigurationNamespace(
   return getConfigurationClient().getNamespace(namespaceId, options);
 }
 
-export function listConfigurationGroups(
-  options?: ConfigurationClientRequestOptions,
-) {
+export function listConfigurationGroups(options?: ConfigurationClientRequestOptions) {
   return getConfigurationClient().listGroups(options);
 }
 
@@ -158,11 +149,7 @@ export function createConfigurationVersion(
   input: CreateConfigurationVersionClientInput,
   options?: ConfigurationClientRequestOptions,
 ) {
-  return getConfigurationClient().createVersion(
-    configurationId,
-    input,
-    options,
-  );
+  return getConfigurationClient().createVersion(configurationId, input, options);
 }
 
 export function publishConfigurationVersion(
@@ -170,11 +157,7 @@ export function publishConfigurationVersion(
   versionId: string,
   options?: ConfigurationClientRequestOptions,
 ) {
-  return getConfigurationClient().publishVersion(
-    configurationId,
-    versionId,
-    options,
-  );
+  return getConfigurationClient().publishVersion(configurationId, versionId, options);
 }
 
 export function listConfigurationOverrides(
@@ -199,9 +182,7 @@ export function updateConfigurationOverride(
   return getConfigurationClient().updateOverride(overrideId, input, options);
 }
 
-export function listConfigurationScopes(
-  options?: ConfigurationClientRequestOptions,
-) {
+export function listConfigurationScopes(options?: ConfigurationClientRequestOptions) {
   return getConfigurationClient().listScopes(options);
 }
 
@@ -252,15 +233,11 @@ export function getConfigurationCapabilities(
   return getConfigurationClient().getCapabilities(options);
 }
 
-export function getConfigurationHealth(
-  options?: ConfigurationClientRequestOptions,
-) {
+export function getConfigurationHealth(options?: ConfigurationClientRequestOptions) {
   return getConfigurationClient().getHealth(options);
 }
 
-export function getConfigurationReadiness(
-  options?: ConfigurationClientRequestOptions,
-) {
+export function getConfigurationReadiness(options?: ConfigurationClientRequestOptions) {
   return getConfigurationClient().getReadiness(options);
 }
 
@@ -272,9 +249,9 @@ export function getConfigurationDiagnostics(
 
 export {
   createHttpConfigurationClient,
-  createMockConfigurationClient,
   type ConfigurationClient,
 } from "./configuration-client";
+export { createMockConfigurationClient } from "./mock-configuration-client";
 export * from "./configuration-types";
 export * from "./configuration-errors";
 export * from "./routes";

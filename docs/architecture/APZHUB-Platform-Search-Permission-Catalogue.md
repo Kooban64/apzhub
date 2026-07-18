@@ -7,15 +7,15 @@
 
 ## Coarse / legacy
 
-| Key | Purpose |
-|-----|---------|
-| `search.*` | Wildcard namespace grant (not a security bypass) |
-| `search.query` | Reserved for future execution; may authorise validate-only paths where mapped |
-| `search.provider` | Coarse provider grant (implies granular provider ops) |
-| `search.diagnostics` | Coarse diagnostics/health/statistics |
-| `search.configuration` | Coarse configuration grant |
-| `search.audit` | Audit retrieval |
-| `search.execute` / `search.list` / `search.read` | Legacy compatibility |
+| Key                                              | Purpose                                                                       |
+| ------------------------------------------------ | ----------------------------------------------------------------------------- |
+| `search.*`                                       | Wildcard namespace grant (not a security bypass)                              |
+| `search.query`                                   | Reserved for future execution; may authorise validate-only paths where mapped |
+| `search.provider`                                | Coarse provider grant (implies granular provider ops)                         |
+| `search.diagnostics`                             | Coarse diagnostics/health/statistics                                          |
+| `search.configuration`                           | Coarse configuration grant                                                    |
+| `search.audit`                                   | Audit retrieval                                                               |
+| `search.execute` / `search.list` / `search.read` | Legacy compatibility                                                          |
 
 ## Granular (APZSEARCH-003)
 

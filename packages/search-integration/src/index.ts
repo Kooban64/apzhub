@@ -1,6 +1,9 @@
 /** @apzhub/search-integration — APZSEARCH-009 Cross-Product Search Integration Framework */
 
-export { SEARCH_INTEGRATION_VERSION } from "./version";
+export {
+  SEARCH_INTEGRATION_VERSION,
+  SEARCH_PUBLICATION_ORCHESTRATION_CONSUMER,
+} from "./version";
 
 export {
   asCanonicalSearchEntityId,

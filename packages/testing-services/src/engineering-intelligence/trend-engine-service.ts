@@ -26,9 +26,12 @@ function toDomain(row: EngineeringTrendSeriesRecord): TrendSeries {
   };
 }
 
-const KIND_TO_INPUT: Record<TrendSeriesKind, keyof Awaited<
-  ReturnType<ReturnType<typeof createEngineeringAggregationService>["gatherInputs"]>
->> = {
+const KIND_TO_INPUT: Record<
+  TrendSeriesKind,
+  keyof Awaited<
+    ReturnType<ReturnType<typeof createEngineeringAggregationService>["gatherInputs"]>
+  >
+> = {
   quality: "coverage",
   coverage: "coverage",
   execution: "manualExecution",

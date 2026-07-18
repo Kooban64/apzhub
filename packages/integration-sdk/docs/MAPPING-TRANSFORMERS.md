@@ -9,17 +9,17 @@
 
 Named, typed value coercions used by `FieldMapper` (via `FieldMapEntry.transformer`) or directly in custom `map` functions.
 
-| Factory | Kind | Behaviour |
-|---------|------|-----------|
-| `createDateTransformer` | `date` | Date / epoch / ISO → ISO string; invalid → `undefined` |
-| `createUuidTransformer` | `uuid` | Trim + lower-case; strict UUID regex by default |
-| `createBooleanTransformer` | `boolean` | bool / 0·1 / yes·no strings |
-| `createNumberTransformer` | `number` | Coerce number; invalid throws validation |
-| `createStringTransformer` | `string` | Stringify |
-| `createNullableTransformer` | `nullable` | Wrap another transformer; pass null/undefined |
-| `createArrayTransformer` | `array` | Map items with an item transformer |
-| `createEnumValueTransformer` | `enum` | Delegate to an `EnumMapper` |
-| `createCustomTransformer` | `custom` | Arbitrary `transform` fn |
+| Factory                      | Kind       | Behaviour                                              |
+| ---------------------------- | ---------- | ------------------------------------------------------ |
+| `createDateTransformer`      | `date`     | Date / epoch / ISO → ISO string; invalid → `undefined` |
+| `createUuidTransformer`      | `uuid`     | Trim + lower-case; strict UUID regex by default        |
+| `createBooleanTransformer`   | `boolean`  | bool / 0·1 / yes·no strings                            |
+| `createNumberTransformer`    | `number`   | Coerce number; invalid throws validation               |
+| `createStringTransformer`    | `string`   | Stringify                                              |
+| `createNullableTransformer`  | `nullable` | Wrap another transformer; pass null/undefined          |
+| `createArrayTransformer`     | `array`    | Map items with an item transformer                     |
+| `createEnumValueTransformer` | `enum`     | Delegate to an `EnumMapper`                            |
+| `createCustomTransformer`    | `custom`   | Arbitrary `transform` fn                               |
 
 ### Registry
 
@@ -58,10 +58,10 @@ Missing required fields → `integration.mapping.validation_failed`.
 
 Explicit maps only. Unknown values never invent silent canonical values without policy.
 
-| Policy | Behaviour |
-|--------|-----------|
-| `fail` | Throw `integration.mapping.enum_unknown` |
-| `fallback` | Use `fallback` (required) |
+| Policy        | Behaviour                                |
+| ------------- | ---------------------------------------- |
+| `fail`        | Throw `integration.mapping.enum_unknown` |
+| `fallback`    | Use `fallback` (required)                |
 | `passthrough` | Return string form of input as canonical |
 
 ```typescript
@@ -115,13 +115,17 @@ ZammadIdentityMapper.extractNativeId(canonicalId, "sreq");
 Maps related entity IDs (single or many) using provisional ID helpers:
 
 ```typescript
-createRelationshipMapper("plane").mapIds(source, {
-  relationName: "assignees",
-  sourceField: "assignees",
-  targetEntityType: "member",
-  idPrefix: "member",
-  many: true,
-}, context);
+createRelationshipMapper("plane").mapIds(
+  source,
+  {
+    relationName: "assignees",
+    sourceField: "assignees",
+    targetEntityType: "member",
+    idPrefix: "member",
+    many: true,
+  },
+  context,
+);
 ```
 
 ---
@@ -129,11 +133,15 @@ createRelationshipMapper("plane").mapIds(source, {
 ## CollectionMapper & NestedMapper
 
 ```typescript
-createCollectionMapper().map(items, {
-  mapItem: (item, index, ctx) => mapItem(item),
-  filter: (item) => item != null,
-  skipNullish: true,
-}, context);
+createCollectionMapper().map(
+  items,
+  {
+    mapItem: (item, index, ctx) => mapItem(item),
+    filter: (item) => item != null,
+    skipNullish: true,
+  },
+  context,
+);
 
 createNestedMapper(); // path + nested MappingDefinition
 executeNestedDefinition(definition, nestedInput, context);

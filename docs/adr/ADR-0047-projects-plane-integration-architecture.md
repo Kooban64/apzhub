@@ -81,21 +81,21 @@ Canonical reference: `docs/architecture/APZHUB-Projects-Capability-Architecture.
 
 ### Risks
 
-| Risk | Mitigation |
-|------|------------|
-| Plane API changes | Version pin (OSS-101-02); contract tests |
-| Mapping drift | Reconciliation job; sync_version |
-| Scope creep to Plane UI | ADR + architecture compliance gate |
+| Risk                    | Mitigation                               |
+| ----------------------- | ---------------------------------------- |
+| Plane API changes       | Version pin (OSS-101-02); contract tests |
+| Mapping drift           | Reconciliation job; sync_version         |
+| Scope creep to Plane UI | ADR + architecture compliance gate       |
 
 ## Compliance
 
-| Standard | Status |
-|----------|--------|
-| Document 002 (terminology) | Compliant |
-| Document 008 (layers) | Compliant |
-| Document 009 (service layer) | Compliant |
-| OSS-002 Capability Abstraction | Compliant |
-| Document 029 (events) | Compliant — canonical event IDs defined |
+| Standard                       | Status                                  |
+| ------------------------------ | --------------------------------------- |
+| Document 002 (terminology)     | Compliant                               |
+| Document 008 (layers)          | Compliant                               |
+| Document 009 (service layer)   | Compliant                               |
+| OSS-002 Capability Abstraction | Compliant                               |
+| Document 029 (events)          | Compliant — canonical event IDs defined |
 
 ## References
 

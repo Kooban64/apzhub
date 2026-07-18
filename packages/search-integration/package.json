@@ -1,9 +1,9 @@
 {
   "name": "@apzhub/search-integration",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "APZHUB Cross-Product Search Integration Framework — canonical entity publication for products (APZSEARCH-009)",
+  "description": "APZHUB Cross-Product Search Integration Framework — canonical entity publication for products (APZSEARCH-009/016)",
   "exports": {
     ".": "./src/index.ts",
     "./products": "./src/products/index.ts"

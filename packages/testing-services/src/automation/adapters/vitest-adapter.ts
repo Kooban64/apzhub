@@ -80,7 +80,8 @@ export function createVitestAdapter(): AutomationResultAdapter {
           if (assertions.length === 0 && readString(fileObj, "name")) {
             cases.push({
               title: readString(fileObj, "name") ?? "file",
-              status: (readString(fileObj, "status") ?? "unknown") as CanonicalAutomationCase["status"],
+              status: (readString(fileObj, "status") ??
+                "unknown") as CanonicalAutomationCase["status"],
               durationMs: readNumber(fileObj, "endTime", "duration"),
             });
           }
@@ -95,7 +96,10 @@ export function createVitestAdapter(): AutomationResultAdapter {
       }
 
       if (cases.length === 0) {
-        throw new DomainRuleError("INVALID_PAYLOAD", "Vitest report contained no tests");
+        throw new DomainRuleError(
+          "INVALID_PAYLOAD",
+          "Vitest report contained no tests",
+        );
       }
 
       const suites = [suiteFromCases("vitest", cases, "vitest")];

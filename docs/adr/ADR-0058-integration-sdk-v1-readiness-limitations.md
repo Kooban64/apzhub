@@ -4,6 +4,8 @@
 
 Accepted — OSS-100-10
 
+**Supersession note (version pin only):** Package version promotion to **1.0.0** and Architecture Freeze are recorded in [ADR-0065](./ADR-0065-integration-sdk-v1-architecture-freeze.md) (OSS-100-11). The limitations catalogue in this ADR remains authoritative.
+
 ## Context
 
 OSS-100-01…09 delivered `@apzhub/integration-sdk` through **v0.9.0** (RC): auth, connection, health/diagnostics/lifecycle, errors/observability, AdapterBase, transport, mapping, events contracts, and harness/certification. Owner-approved **OSS-100-10** is **Integration SDK v1.0 Certification & Release Readiness** (not provisioning; provisioning remains deferred).

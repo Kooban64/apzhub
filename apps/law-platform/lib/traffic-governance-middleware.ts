@@ -33,7 +33,10 @@ export async function enforceTrafficGovernance(
   );
 
   if (!decision.allowed) {
-    return NextResponse.json(createEdgeTrafficDeniedBody(), buildEdgeTrafficDeniedInit(decision));
+    return NextResponse.json(
+      createEdgeTrafficDeniedBody(),
+      buildEdgeTrafficDeniedInit(decision),
+    );
   }
 
   const response = NextResponse.next();

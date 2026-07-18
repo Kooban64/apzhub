@@ -87,11 +87,7 @@ export class ZammadRestClient {
     context: IntegrationRequestContext,
     query?: ZammadListQuery,
   ): Promise<ZammadListResult<ZammadTicketRecord>> {
-    return this.requestList<ZammadTicketRecord>(
-      context,
-      "/api/v1/tickets",
-      query,
-    );
+    return this.requestList<ZammadTicketRecord>(context, "/api/v1/tickets", query);
   }
 
   async searchTickets(
@@ -335,7 +331,7 @@ export class ZammadRestClient {
     const items = Array.isArray(response.data)
       ? response.data
       : Array.isArray((response.data as { tickets?: T[] }).tickets)
-        ? ((response.data as { tickets: T[] }).tickets)
+        ? (response.data as { tickets: T[] }).tickets
         : [];
 
     const totalFromHeader = Number(

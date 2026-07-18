@@ -43,7 +43,9 @@ const SENDER_BY_NAME: Readonly<Record<string, SupportArticleSenderType>> = {
   system: "system",
 };
 
-export function mapZammadArticleChannel(type: string | undefined): SupportArticleChannel {
+export function mapZammadArticleChannel(
+  type: string | undefined,
+): SupportArticleChannel {
   if (!type?.trim()) return "unknown";
   return CHANNEL_BY_TYPE[type.trim().toLowerCase()] ?? "unknown";
 }
@@ -54,7 +56,9 @@ export function mapChannelToZammadType(channel: SupportArticleChannel): string {
   return channel;
 }
 
-export function mapZammadSenderType(sender: string | undefined): SupportArticleSenderType {
+export function mapZammadSenderType(
+  sender: string | undefined,
+): SupportArticleSenderType {
   if (!sender?.trim()) return "unknown";
   return SENDER_BY_NAME[sender.trim().toLowerCase()] ?? "unknown";
 }
@@ -162,9 +166,7 @@ export function mapZammadArticleAttachment(
   };
 }
 
-function mapDeliveryStatus(
-  record: ZammadArticleRecord,
-): SupportArticleDeliveryStatus {
+function mapDeliveryStatus(record: ZammadArticleRecord): SupportArticleDeliveryStatus {
   const prefs = record.preferences ?? {};
   const delivery = prefs["delivery_status"] ?? prefs["send-error"];
   if (delivery === undefined || delivery === null) {
@@ -187,23 +189,29 @@ export function mapZammadArticle(
   expectedTicketId?: string,
 ): SupportArticle {
   if (typeof record.id !== "number" || typeof record.ticket_id !== "number") {
-    throw Object.assign(new Error("Invalid Zammad article response: missing id/ticket_id"), {
-      category: "mapping" as const,
-      code: "zammad.mapping.invalid_article",
-      message: "Invalid Zammad article response: missing id/ticket_id",
-      retryable: false,
-      correlationId: "zammad-mapping",
-    });
+    throw Object.assign(
+      new Error("Invalid Zammad article response: missing id/ticket_id"),
+      {
+        category: "mapping" as const,
+        code: "zammad.mapping.invalid_article",
+        message: "Invalid Zammad article response: missing id/ticket_id",
+        retryable: false,
+        correlationId: "zammad-mapping",
+      },
+    );
   }
 
   if (!record.created_at || typeof record.created_at !== "string") {
-    throw Object.assign(new Error("Invalid Zammad article response: missing created_at"), {
-      category: "mapping" as const,
-      code: "zammad.mapping.invalid_article",
-      message: "Invalid Zammad article response: missing created_at",
-      retryable: false,
-      correlationId: "zammad-mapping",
-    });
+    throw Object.assign(
+      new Error("Invalid Zammad article response: missing created_at"),
+      {
+        category: "mapping" as const,
+        code: "zammad.mapping.invalid_article",
+        message: "Invalid Zammad article response: missing created_at",
+        retryable: false,
+        correlationId: "zammad-mapping",
+      },
+    );
   }
 
   const supportTicketId = toSupportTicketId(record.ticket_id);

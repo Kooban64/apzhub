@@ -65,9 +65,9 @@ describe("execution state machine", () => {
 
   it.each(illegal)("rejects %s → %s", (from, to) => {
     expect(canTransitionExecutionStatus(from as never, to as never)).toBe(false);
-    expect(() =>
-      assertExecutionStatusTransition(from as never, to as never),
-    ).toThrow(DomainRuleError);
+    expect(() => assertExecutionStatusTransition(from as never, to as never)).toThrow(
+      DomainRuleError,
+    );
   });
 
   it("canonicalizes legacy statuses", () => {
@@ -98,11 +98,11 @@ describe("evidence lifecycle state machine", () => {
   });
 
   it("rejects illegal evidence jumps", () => {
-    expect(() =>
-      assertEvidenceLifecycleTransition("pending", "approved"),
-    ).toThrow(DomainRuleError);
-    expect(() =>
-      assertEvidenceLifecycleTransition("archived", "pending"),
-    ).toThrow(DomainRuleError);
+    expect(() => assertEvidenceLifecycleTransition("pending", "approved")).toThrow(
+      DomainRuleError,
+    );
+    expect(() => assertEvidenceLifecycleTransition("archived", "pending")).toThrow(
+      DomainRuleError,
+    );
   });
 });

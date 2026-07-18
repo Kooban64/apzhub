@@ -32,15 +32,15 @@ interface PipelineResultAdapter {
 
 Vendor-neutral capability surface (metadata retrieval semantics — not HTTP):
 
-| Capability | Notes |
-| ---------- | ----- |
-| list / get pipelines | Via registered Pipeline SoR |
-| list / get runs | Via imported PipelineRun SoR |
-| list stages / jobs | Derived from stored run JSON |
-| retrieve artifacts metadata | ArtifactReference only |
-| retrieve logs metadata | PipelineLogReference only |
-| retrieve approvals / environments / variables | Metadata only |
-| retrieve execution summary | PipelineSummary / metrics |
+| Capability                                    | Notes                        |
+| --------------------------------------------- | ---------------------------- |
+| list / get pipelines                          | Via registered Pipeline SoR  |
+| list / get runs                               | Via imported PipelineRun SoR |
+| list stages / jobs                            | Derived from stored run JSON |
+| retrieve artifacts metadata                   | ArtifactReference only       |
+| retrieve logs metadata                        | PipelineLogReference only    |
+| retrieve approvals / environments / variables | Metadata only                |
+| retrieve execution summary                    | PipelineSummary / metrics    |
 
 **No execution** of any capability that would mutate an external CI system.
 
@@ -63,10 +63,10 @@ Vendor-neutral capability surface (metadata retrieval semantics — not HTTP):
 
 ## Future adapters
 
-| Kind | Milestone |
-| ---- | --------- |
-| `github_actions` | **APZTCMS-016** (recommended next; not started) |
-| `gitlab_ci` / `azure_devops` / `jenkins` / `circleci` / `buildkite` | Future |
+| Kind                                                                | Milestone                                       |
+| ------------------------------------------------------------------- | ----------------------------------------------- |
+| `github_actions`                                                    | **APZTCMS-016** (recommended next; not started) |
+| `gitlab_ci` / `azure_devops` / `jenkins` / `circleci` / `buildkite` | Future                                          |
 
 Kinds are reserved in schema CHECK constraints so future adapters can persist without migration churn.
 

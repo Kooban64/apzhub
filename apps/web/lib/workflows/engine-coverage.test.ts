@@ -33,9 +33,7 @@ import {
 describe("APZWORKFLOW-008 engine coverage", () => {
   it("exercises engine-api facades against mock client", async () => {
     resetWorkflowEngineClient();
-    expect((await listEngineWorkflows()).items[0]?.id).toBe(
-      MOCK_ENGINE_WORKFLOW.id,
-    );
+    expect((await listEngineWorkflows()).items[0]?.id).toBe(MOCK_ENGINE_WORKFLOW.id);
     expect((await getEngineWorkflow(MOCK_ENGINE_WORKFLOW.id)).name).toBeTruthy();
     expect((await listEngineTemplates()).items).toHaveLength(1);
     expect((await getEngineTemplate(MOCK_ENGINE_TEMPLATE.id)).id).toBe(
@@ -44,9 +42,7 @@ describe("APZWORKFLOW-008 engine coverage", () => {
     expect((await listEngineTags()).items[0]?.name).toBe("ops");
     expect((await listEngineUsers()).items).toHaveLength(1);
     expect((await listEngineProjects()).items[0]?.id).toBe("p1");
-    expect((await getEngineCapabilities()).unsupportedOperations).toContain(
-      "execute",
-    );
+    expect((await getEngineCapabilities()).unsupportedOperations).toContain("execute");
     expect((await getEngineHealth()).sdkStatus).toBe("healthy");
     expect((await getEngineDiagnostics()).coreServiceCount).toBeGreaterThan(0);
     expect((await getEngineCompatibility()).supportedApi).toBe("v1");
@@ -99,9 +95,7 @@ describe("APZWORKFLOW-008 engine coverage", () => {
       ),
     ).toMatch(/unavailable/i);
     expect(
-      toWorkflowEngineUserMessage(
-        new WorkflowEngineClientError({ message: "custom" }),
-      ),
+      toWorkflowEngineUserMessage(new WorkflowEngineClientError({ message: "custom" })),
     ).toBe("custom");
     expect(toWorkflowEngineUserMessage(new Error("boom"))).toBe("boom");
     expect(toWorkflowEngineUserMessage("weird")).toMatch(/Unable to complete/);

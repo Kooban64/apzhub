@@ -17,16 +17,16 @@ Vendor Adapter → AuthenticationProvider → CredentialResolver → SecretProvi
 
 ## Authentication modes
 
-| Mode | OSS-100-02 status |
-|------|-------------------|
-| `api_token` | Validated |
-| `bearer` | Validated |
-| `basic` | Validated |
-| `api_key_header` | Validated (requires `headerName`) |
-| `api_key_query` | Validated (requires `queryParam`) |
-| `custom` | Validated (requires `customScheme`) |
-| `oauth2` | Type only — flows not implemented |
-| `session_cookie` | Type only — flows not implemented |
+| Mode             | OSS-100-02 status                   |
+| ---------------- | ----------------------------------- |
+| `api_token`      | Validated                           |
+| `bearer`         | Validated                           |
+| `basic`          | Validated                           |
+| `api_key_header` | Validated (requires `headerName`)   |
+| `api_key_query`  | Validated (requires `queryParam`)   |
+| `custom`         | Validated (requires `customScheme`) |
+| `oauth2`         | Type only — flows not implemented   |
+| `session_cookie` | Type only — flows not implemented   |
 
 ---
 
@@ -44,9 +44,9 @@ Resolves `AuthCredentialReference` to safe `ResolvedCredential` (masked preview 
 
 Bridge for secret material:
 
-| Implementation | Use |
-|----------------|-----|
-| `InMemorySecretProvider` | Tests and local development |
+| Implementation                   | Use                           |
+| -------------------------------- | ----------------------------- |
+| `InMemorySecretProvider`         | Tests and local development   |
 | `PlaceholderVaultSecretProvider` | Future Vault integration stub |
 
 ---

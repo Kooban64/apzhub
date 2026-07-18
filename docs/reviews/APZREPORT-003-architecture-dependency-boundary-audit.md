@@ -27,15 +27,15 @@ No reverse dependencies observed (contracts ← core ← services ← HTTP ← c
 
 ## Forbidden import matrix
 
-| Rule | Result |
-| ---- | ------ |
-| Workbench never imports reporting-core / contracts / platform-services / gateway / handlers | **PASS** |
+| Rule                                                                                         | Result   |
+| -------------------------------------------------------------------------------------------- | -------- |
+| Workbench never imports reporting-core / contracts / platform-services / gateway / handlers  | **PASS** |
 | Typed client never imports reporting-core / contracts / testing-services / platform-services | **PASS** |
-| HTTP handlers never import reporting-core / testing-services / output providers | **PASS** |
-| Gateway reporting impl never imports output provider internals | **PASS** |
-| reporting-core never imports testing-* / apps / Plane / Zammad | **PASS** |
-| reporting-contracts never imports reporting-core / testing-* / apps | **PASS** |
-| No product engine leakage (Plane/Zammad/Kimai imports) in contracts/core | **PASS** |
+| HTTP handlers never import reporting-core / testing-services / output providers              | **PASS** |
+| Gateway reporting impl never imports output provider internals                               | **PASS** |
+| reporting-core never imports testing-* / apps / Plane / Zammad                               | **PASS** |
+| reporting-contracts never imports reporting-core / testing-* / apps                          | **PASS** |
+| No product engine leakage (Plane/Zammad/Kimai imports) in contracts/core                     | **PASS** |
 
 Automated scan: **VIOLATIONS=0**.
 
@@ -43,23 +43,23 @@ Automated scan: **VIOLATIONS=0**.
 
 ## Observations (limitations — not violations)
 
-| Observation | Classification |
-| ----------- | -------------- |
-| `gateway.reporting` composed only when Testing first-consumer ports are present | **LIMITATION** |
-| `PlatformReportingServiceImpl` delegates through TCMS `domain.reporting.reporting` | **LIMITATION** |
+| Observation                                                                           | Classification     |
+| ------------------------------------------------------------------------------------- | ------------------ |
+| `gateway.reporting` composed only when Testing first-consumer ports are present       | **LIMITATION**     |
+| `PlatformReportingServiceImpl` delegates through TCMS `domain.reporting.reporting`    | **LIMITATION**     |
 | `handleRenderReport` exists without a public `/reporting/render` route / OpenAPI path | **TECHNICAL DEBT** |
-| Soft TCMS naming in contracts comments / legacy permission aliases | **ACCEPTED** |
+| Soft TCMS naming in contracts comments / legacy permission aliases                    | **ACCEPTED**       |
 
 ---
 
 ## Layering checks
 
-| Check | Result |
-| ----- | ------ |
-| No engine bypass from HTTP/UI | **PASS** |
-| RequestPipeline wraps `platformReporting` ops | **PASS** |
-| Authz maps to `platform_reporting` + `report.*` | **PASS** |
-| Product templates remain product-owned (TCMS builtins) | **PASS** |
+| Check                                                      | Result   |
+| ---------------------------------------------------------- | -------- |
+| No engine bypass from HTTP/UI                              | **PASS** |
+| RequestPipeline wraps `platformReporting` ops              | **PASS** |
+| Authz maps to `platform_reporting` + `report.*`            | **PASS** |
+| Product templates remain product-owned (TCMS builtins)     | **PASS** |
 | Platform packages remain product-neutral at contracts/core | **PASS** |
 
 ---

@@ -4,16 +4,16 @@ Canonical HTTP surface over `PlatformServiceGateway` Search facets.
 
 ## Query plane
 
-| Method | Path | Gateway |
-| --- | --- | --- |
-| POST | `/api/v1/search/query` | `searchExecution.execute` |
-| POST | `/api/v1/search/query/validate` | `searchExecution.validateQuery` |
-| POST | `/api/v1/search/suggestions` | `searchExecution.suggest` |
-| GET | `/api/v1/search/capabilities` | `searchExecutionDiagnostics.getCapabilities` |
-| GET | `/api/v1/search/health` | `searchExecutionHealth.getHealth` |
-| GET | `/api/v1/search/readiness` | `searchExecutionHealth.getReadiness` |
-| GET | `/api/v1/search/diagnostics` | `searchExecutionDiagnostics.getDiagnostics` |
-| GET | `/api/v1/search/statistics` | `searchExecutionDiagnostics.getStatistics` |
+| Method | Path                            | Gateway                                      |
+| ------ | ------------------------------- | -------------------------------------------- |
+| POST   | `/api/v1/search/query`          | `searchExecution.execute`                    |
+| POST   | `/api/v1/search/query/validate` | `searchExecution.validateQuery`              |
+| POST   | `/api/v1/search/suggestions`    | `searchExecution.suggest`                    |
+| GET    | `/api/v1/search/capabilities`   | `searchExecutionDiagnostics.getCapabilities` |
+| GET    | `/api/v1/search/health`         | `searchExecutionHealth.getHealth`            |
+| GET    | `/api/v1/search/readiness`      | `searchExecutionHealth.getReadiness`         |
+| GET    | `/api/v1/search/diagnostics`    | `searchExecutionDiagnostics.getDiagnostics`  |
+| GET    | `/api/v1/search/statistics`     | `searchExecutionDiagnostics.getStatistics`   |
 
 ## Management plane
 

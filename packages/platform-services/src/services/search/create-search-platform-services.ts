@@ -109,11 +109,7 @@ export function wrapSearchPlatformGatewayWithPipeline(
       pipeline,
       "searchMetadata",
     ),
-    searchAudit: wrapServiceWithPipeline(
-      gateway.searchAudit,
-      pipeline,
-      "searchAudit",
-    ),
+    searchAudit: wrapServiceWithPipeline(gateway.searchAudit, pipeline, "searchAudit"),
     searchStatistics: wrapServiceWithPipeline(
       gateway.searchStatistics,
       pipeline,
@@ -159,9 +155,7 @@ export function createSearchPlatformServices(
     return buildBundle(input.foundation);
   }
   if (!input.persistence) {
-    throw new Error(
-      "createSearchPlatformServices requires foundation or persistence",
-    );
+    throw new Error("createSearchPlatformServices requires foundation or persistence");
   }
   const foundation = createSearchPlatformFoundation({
     persistence: input.persistence,
@@ -192,8 +186,7 @@ export function createSearchPlatformServicesForTest(
 ): SearchPlatformServicesBundle {
   const foundation = createSearchPlatformFoundationForTest({
     postgresDb: input.postgresDb,
-    allowInMemoryPersistence:
-      input.allowInMemoryPersistence ?? !input.postgresDb,
+    allowInMemoryPersistence: input.allowInMemoryPersistence ?? !input.postgresDb,
     now: input.now,
     id: input.id,
   });

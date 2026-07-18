@@ -68,8 +68,7 @@ export class ReportingSearchPublisher {
   constructor(private readonly options: ReportingSearchPublisherOptions) {
     this.mapper = options.mapper ?? new ReportingSearchEntityMapper();
     this.validator = options.validator ?? new ReportingSearchEntityValidator();
-    this.lifecycleHelper =
-      options.lifecycle ?? new ReportingSearchLifecycle();
+    this.lifecycleHelper = options.lifecycle ?? new ReportingSearchLifecycle();
     this.metrics = options.metrics ?? new ReportingSearchMetrics();
     this.logger = options.logger ?? new ReportingSearchLogger();
     this.diagnosticsStore =
@@ -123,12 +122,9 @@ export class ReportingSearchPublisher {
     } catch (error) {
       const domain = this.errors.translate(error);
       this.metrics.record("validate", false, input.entityType);
-      this.diagnosticsStore.touch(
-        "validate",
-        context.correlationId,
-        input.entityType,
-        [{ field: "entity", code: domain.classification, message: domain.message }],
-      );
+      this.diagnosticsStore.touch("validate", context.correlationId, input.entityType, [
+        { field: "entity", code: domain.classification, message: domain.message },
+      ]);
       return failedResult("validate", context, domain.message, started);
     }
   }
@@ -166,11 +162,7 @@ export class ReportingSearchPublisher {
     entityId: string,
   ): SearchPublicationResult {
     const started = Date.now();
-    this.diagnosticsStore.touch(
-      "remove",
-      context.correlationId,
-      entityType,
-    );
+    this.diagnosticsStore.touch("remove", context.correlationId, entityType);
     try {
       const result = this.options.integrationPublisher.remove(
         toSearchIntegrationContext(context),
@@ -213,9 +205,7 @@ export class ReportingSearchPublisher {
     }
   }
 
-  diagnostics(
-    context: ReportingSearchPublicationContext,
-  ): ReportingSearchDiagnostics {
+  diagnostics(context: ReportingSearchPublicationContext): ReportingSearchDiagnostics {
     this.diagnosticsStore.touch("diagnostics", context.correlationId);
     return this.diagnosticsStore.build(
       this.metrics.snapshot(),
@@ -223,9 +213,7 @@ export class ReportingSearchPublisher {
     );
   }
 
-  statistics(
-    _context: ReportingSearchPublicationContext,
-  ): ReportingSearchStatistics {
+  statistics(_context: ReportingSearchPublicationContext): ReportingSearchStatistics {
     return this.metrics.snapshot();
   }
 
@@ -297,16 +285,12 @@ export class ReportingSearchPublisher {
       }
       const result = invoke(draft, toSearchIntegrationContext(context));
       this.metrics.record(operation, result.ok, input.entityType);
-      this.logger.log(
-        result.ok ? "info" : "error",
-        `Reporting search ${operation}`,
-        {
-          correlationId: context.correlationId,
-          operation,
-          entityType: input.entityType,
-          entityId: draft.entityId,
-        },
-      );
+      this.logger.log(result.ok ? "info" : "error", `Reporting search ${operation}`, {
+        correlationId: context.correlationId,
+        operation,
+        entityType: input.entityType,
+        entityId: draft.entityId,
+      });
       return result;
     } catch (error) {
       const domain = this.errors.translate(error);

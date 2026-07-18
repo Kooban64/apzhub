@@ -46,9 +46,7 @@ export type RenderReportInput = {
  * Product-agnostic. Consumes pre-computed parameters; does not calculate business values.
  */
 export interface PlatformReportingService {
-  listAvailableReports(
-    ctx: ReportingRequestContext,
-  ): Promise<readonly ReportTypeId[]>;
+  listAvailableReports(ctx: ReportingRequestContext): Promise<readonly ReportTypeId[]>;
   listTemplates(
     ctx: ReportingRequestContext,
     reportType?: ReportTypeId,

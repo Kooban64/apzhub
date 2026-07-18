@@ -172,12 +172,12 @@ Recovery remains **manual** in PCv2-01 — automated failover is PCv2-06.
 
 ## Observability (PCv2-01 scope)
 
-| Pillar | PCv2-01 | PCv2-07 (future) |
-|--------|---------|------------------|
-| **Health** | Liveness, readiness, health APIs; Operations Console | Prometheus scrape |
-| **Logs** | Structured logs with correlation IDs | Loki aggregation |
-| **Metrics** | Diagnostic counters in APIs | Prometheus metrics |
-| **Traces** | Correlation IDs end-to-end | OpenTelemetry |
+| Pillar      | PCv2-01                                              | PCv2-07 (future)   |
+| ----------- | ---------------------------------------------------- | ------------------ |
+| **Health**  | Liveness, readiness, health APIs; Operations Console | Prometheus scrape  |
+| **Logs**    | Structured logs with correlation IDs                 | Loki aggregation   |
+| **Metrics** | Diagnostic counters in APIs                          | Prometheus metrics |
+| **Traces**  | Correlation IDs end-to-end                           | OpenTelemetry      |
 
 **PCv2-01 delivers:** health hierarchy, consolidated diagnostics, CSP violation ingestion, rate limit status in diagnostics.
 
@@ -185,13 +185,13 @@ Recovery remains **manual** in PCv2-01 — automated failover is PCv2-06.
 
 ## Background processing dependencies
 
-| Component | PCv2-01 | PCv2-02 |
-|-----------|---------|---------|
-| Outbox table | Exists (schema) — **not processed** | Worker consumes |
-| Event bus | In-process | Async via workers |
-| Search index | Sync providers only | Async projection |
-| Notifications | Session-only | Persistent + delivery |
-| Scheduled jobs | None | Worker platform |
+| Component      | PCv2-01                             | PCv2-02               |
+| -------------- | ----------------------------------- | --------------------- |
+| Outbox table   | Exists (schema) — **not processed** | Worker consumes       |
+| Event bus      | In-process                          | Async via workers     |
+| Search index   | Sync providers only                 | Async projection      |
+| Notifications  | Session-only                        | Persistent + delivery |
+| Scheduled jobs | None                                | Worker platform       |
 
 **Planning constraint:** Bootstrap and health endpoints must expose outbox **backlog depth** as a diagnostic (read-only) to prepare for PCv2-02.
 
@@ -199,17 +199,17 @@ Recovery remains **manual** in PCv2-01 — automated failover is PCv2-06.
 
 ## Security posture (target)
 
-| Control | v1 (M8-06) | PCv2-01 target |
-|---------|------------|----------------|
-| CSP | Report-Only | **Enforced** + violation endpoint |
-| HSTS | Production | Production (unchanged) |
-| Permissions-Policy | Present | Present |
-| Rate limiting | Foundation (120/min) | Auth + platform API routes |
-| API guard | Partial coverage | **100% privileged routes** |
-| Env validation | Warn/fail checks | **Fail closed prod** |
-| Session cookies | Standard | **Hardened prod flags** |
-| Tenant RLS | Policies exist | **Integration tested** |
-| Secrets | Env vars | Env vars (Vault in PCv2-04) |
+| Control            | v1 (M8-06)           | PCv2-01 target                    |
+| ------------------ | -------------------- | --------------------------------- |
+| CSP                | Report-Only          | **Enforced** + violation endpoint |
+| HSTS               | Production           | Production (unchanged)            |
+| Permissions-Policy | Present              | Present                           |
+| Rate limiting      | Foundation (120/min) | Auth + platform API routes        |
+| API guard          | Partial coverage     | **100% privileged routes**        |
+| Env validation     | Warn/fail checks     | **Fail closed prod**              |
+| Session cookies    | Standard             | **Hardened prod flags**           |
+| Tenant RLS         | Policies exist       | **Integration tested**            |
+| Secrets            | Env vars             | Env vars (Vault in PCv2-04)       |
 
 ---
 
@@ -232,14 +232,14 @@ Future: PCv2-04 Vault references replace plain env
 
 ## Gateway (PCv2-01 vs PCv2-09)
 
-| Capability | PCv2-01 | PCv2-09 |
-|------------|---------|---------|
-| TLS termination | Caddy (existing) | Caddy / gateway |
-| Path routing | Caddy → apps | Central gateway |
-| Rate limiting | App middleware + optional Caddy config | Gateway enforcement |
-| API keys | Not implemented | Gateway |
-| Versioning | Not implemented | Gateway |
-| Webhooks | Not implemented | Gateway ingress |
+| Capability      | PCv2-01                                | PCv2-09             |
+| --------------- | -------------------------------------- | ------------------- |
+| TLS termination | Caddy (existing)                       | Caddy / gateway     |
+| Path routing    | Caddy → apps                           | Central gateway     |
+| Rate limiting   | App middleware + optional Caddy config | Gateway enforcement |
+| API keys        | Not implemented                        | Gateway             |
+| Versioning      | Not implemented                        | Gateway             |
+| Webhooks        | Not implemented                        | Gateway ingress     |
 
 PCv2-01 documents **Caddy rate-limit configuration** as optional edge defence; authoritative limiting remains in application tier.
 
@@ -282,11 +282,11 @@ Eliminates TD-M16-C01 duplication.
 
 ## Commercial readiness hooks (design only)
 
-| Hook | Location | Purpose |
-|------|----------|---------|
-| Tenant onboarding design | Architecture doc | Pilot customer flow |
-| Governance enablement sequence | Provisioning docs | Product activation |
-| Health tenant count | Operations summary | Capacity planning |
+| Hook                                    | Location             | Purpose              |
+| --------------------------------------- | -------------------- | -------------------- |
+| Tenant onboarding design                | Architecture doc     | Pilot customer flow  |
+| Governance enablement sequence          | Provisioning docs    | Product activation   |
+| Health tenant count                     | Operations summary   | Capacity planning    |
 | Diagnostics `commercialReadiness` block | Security diagnostics | Pilot gate checklist |
 
 Full commercial provisioning — **PCv2-03**.
@@ -295,13 +295,13 @@ Full commercial provisioning — **PCv2-03**.
 
 ## Monitoring (PCv2-01)
 
-| Signal | Source | Action |
-|--------|--------|--------|
-| `/system/readiness` 503 | Load balancer | Remove from pool |
-| CSP violation rate | CSP report endpoint | Tune policy |
-| Rate limit 429 rate | App logs | Tune limits |
-| Env validation fail | Startup log | Block deploy |
-| RLS test failure | CI/staging gate | Block promote |
+| Signal                  | Source              | Action           |
+| ----------------------- | ------------------- | ---------------- |
+| `/system/readiness` 503 | Load balancer       | Remove from pool |
+| CSP violation rate      | CSP report endpoint | Tune policy      |
+| Rate limit 429 rate     | App logs            | Tune limits      |
+| Env validation fail     | Startup log         | Block deploy     |
+| RLS test failure        | CI/staging gate     | Block promote    |
 
 Full metrics stack — **PCv2-07**.
 
@@ -309,13 +309,13 @@ Full metrics stack — **PCv2-07**.
 
 ## Audit completeness (target)
 
-| Path | Audit signal |
-|------|--------------|
-| Platform API guard denial | Authorization audit event |
-| Admin operations | Operations audit trail |
-| Auth login failure | Auth log (structured) |
-| Framework actions | Action audit → events (existing) |
-| Tenant switch (future) | Identity audit (design in PRH-015) |
+| Path                      | Audit signal                       |
+| ------------------------- | ---------------------------------- |
+| Platform API guard denial | Authorization audit event          |
+| Admin operations          | Operations audit trail             |
+| Auth login failure        | Auth log (structured)              |
+| Framework actions         | Action audit → events (existing)   |
+| Tenant switch (future)    | Identity audit (design in PRH-015) |
 
 ---
 

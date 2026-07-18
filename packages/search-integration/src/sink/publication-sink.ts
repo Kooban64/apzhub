@@ -1,7 +1,11 @@
 /**
  * Publication sink — journal of canonical entities only (APZSEARCH-009).
  * Does not call Search Platform services, engines, or Meilisearch.
- * Future milestones may replace the sink with a platform bridge.
+ *
+ * APZSEARCH-016: Durable orchestration (PostgreSQL journal, retry, batching)
+ * lives in `@apzhub/search-orchestrator`. That package drains into this
+ * framework's publisher; the sink here remains the in-process publication
+ * target for integration tests and non-orchestrated adapters.
  */
 
 import type { CanonicalSearchEntity } from "../entity/canonical-search-entity";
@@ -80,9 +84,8 @@ export class InMemorySearchPublicationSink implements SearchPublicationSink {
   }
 
   count(): number {
-    return [...this.store.values()].filter(
-      (e) => e.lifecycleState !== "removed",
-    ).length;
+    return [...this.store.values()].filter((e) => e.lifecycleState !== "removed")
+      .length;
   }
 }
 

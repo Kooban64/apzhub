@@ -11,9 +11,7 @@ import { WORKFLOW_NODE_KINDS } from "@apzhub/workflow-contracts";
 
 function isConfigValue(value: unknown): boolean {
   return (
-    typeof value === "string" ||
-    typeof value === "number" ||
-    typeof value === "boolean"
+    typeof value === "string" || typeof value === "number" || typeof value === "boolean"
   );
 }
 
@@ -71,9 +69,7 @@ export function validateWorkflowStructural(
     }
     nodeIds.add(node.id);
 
-    if (
-      !(WORKFLOW_NODE_KINDS as readonly string[]).includes(node.nodeKind)
-    ) {
+    if (!(WORKFLOW_NODE_KINDS as readonly string[]).includes(node.nodeKind)) {
       issues.push({
         code: "structural",
         message: `Invalid nodeKind: ${String(node.nodeKind)}`,

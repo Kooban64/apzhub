@@ -2,12 +2,12 @@
 
 ## Packages
 
-| Package | Version | Role |
-| --- | --- | --- |
-| `@apzhub/identity-contracts` | **0.2.0** | Models, permissions, `IdentityPlatformGateway` |
-| `@apzhub/identity-core` | **0.2.0** | Domain service + validation |
-| `@apzhub/identity-persistence` | **0.1.0** | Repositories |
-| `@apzhub/platform-services` | **0.23.0** | Thin services + `gateway.identity` |
+| Package                        | Version    | Role                                           |
+| ------------------------------ | ---------- | ---------------------------------------------- |
+| `@apzhub/identity-contracts`   | **0.2.0**  | Models, permissions, `IdentityPlatformGateway` |
+| `@apzhub/identity-core`        | **0.2.0**  | Domain service + validation                    |
+| `@apzhub/identity-persistence` | **0.1.0**  | Repositories                                   |
+| `@apzhub/platform-services`    | **0.23.0** | Thin services + `gateway.identity`             |
 
 ## Consume via gateway
 

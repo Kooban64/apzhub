@@ -23,7 +23,14 @@ import type {
   SupportRequestStatus,
 } from "@/lib/support/types";
 
-import { EmptyState, ErrorState, LoadingState, PageShell, StatusBadge, SupportTable } from "./support-ui";
+import {
+  EmptyState,
+  ErrorState,
+  LoadingState,
+  PageShell,
+  StatusBadge,
+  SupportTable,
+} from "./support-ui";
 
 const STATUSES: readonly SupportRequestStatus[] = [
   "new",
@@ -33,7 +40,12 @@ const STATUSES: readonly SupportRequestStatus[] = [
   "merged",
   "unknown",
 ];
-const PRIORITIES: readonly SupportRequestPriority[] = ["low", "normal", "high", "urgent"];
+const PRIORITIES: readonly SupportRequestPriority[] = [
+  "low",
+  "normal",
+  "high",
+  "urgent",
+];
 
 function readParams(searchParams: URLSearchParams): SupportRequestListParams {
   const status = searchParams.get("status") as SupportRequestStatus | null;
@@ -202,7 +214,11 @@ export function SupportInboxView({
               cells: [
                 item.displayId ?? item.id,
                 item.title,
-                <StatusBadge key="badge" status={item.status} priority={item.priority} />,
+                <StatusBadge
+                  key="badge"
+                  status={item.status}
+                  priority={item.priority}
+                />,
                 formatSupportDate(item.updatedAt),
               ],
             }))}

@@ -162,12 +162,14 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createHealthCheck(ctx, {
-      serviceKey: "web",
-      name: "healthChecks-name",
-      status: "healthy",
-      providerKind: "internal"
-} as never);
-      expect(await service.getHealthCheck(ctx, created.id)).toMatchObject({ id: created.id });
+        serviceKey: "web",
+        name: "healthChecks-name",
+        status: "healthy",
+        providerKind: "internal",
+      } as never);
+      expect(await service.getHealthCheck(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listHealthChecks(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -176,12 +178,14 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createReadinessCheck(ctx, {
-      serviceKey: "web",
-      name: "readinessChecks-name",
-      status: "ready",
-      providerKind: "internal"
-} as never);
-      expect(await service.getReadinessCheck(ctx, created.id)).toMatchObject({ id: created.id });
+        serviceKey: "web",
+        name: "readinessChecks-name",
+        status: "ready",
+        providerKind: "internal",
+      } as never);
+      expect(await service.getReadinessCheck(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listReadinessChecks(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -190,12 +194,14 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createLivenessCheck(ctx, {
-      serviceKey: "web",
-      name: "livenessChecks-name",
-      status: "alive",
-      providerKind: "internal"
-} as never);
-      expect(await service.getLivenessCheck(ctx, created.id)).toMatchObject({ id: created.id });
+        serviceKey: "web",
+        name: "livenessChecks-name",
+        status: "alive",
+        providerKind: "internal",
+      } as never);
+      expect(await service.getLivenessCheck(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listLivenessChecks(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -204,13 +210,15 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createServiceHealth(ctx, {
-      serviceKey: "web",
-      displayName: "serviceHealth-name",
-      overallStatus: "healthy",
-      readinessStatus: "ready",
-      livenessStatus: "alive"
-} as never);
-      expect(await service.getServiceHealth(ctx, created.id)).toMatchObject({ id: created.id });
+        serviceKey: "web",
+        displayName: "serviceHealth-name",
+        overallStatus: "healthy",
+        readinessStatus: "ready",
+        livenessStatus: "alive",
+      } as never);
+      expect(await service.getServiceHealth(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listServiceHealths(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -219,10 +227,12 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createServiceStatus(ctx, {
-      serviceKey: "web",
-      status: "healthy"
-} as never);
-      expect(await service.getServiceStatus(ctx, created.id)).toMatchObject({ id: created.id });
+        serviceKey: "web",
+        status: "healthy",
+      } as never);
+      expect(await service.getServiceStatus(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listServiceStatuss(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -231,12 +241,14 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createComponentStatus(ctx, {
-      serviceKey: "web",
-      componentKey: "db",
-      name: "componentStatus-name",
-      status: "healthy"
-} as never);
-      expect(await service.getComponentStatus(ctx, created.id)).toMatchObject({ id: created.id });
+        serviceKey: "web",
+        componentKey: "db",
+        name: "componentStatus-name",
+        status: "healthy",
+      } as never);
+      expect(await service.getComponentStatus(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listComponentStatuss(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -245,11 +257,13 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createMetricSample(ctx, {
-      metricDefinitionId: metric.id,
-      sampledAt: "2026-07-17T15:00:00.000Z",
-      providerKind: "internal"
-} as never);
-      expect(await service.getMetricSample(ctx, created.id)).toMatchObject({ id: created.id });
+        metricDefinitionId: metric.id,
+        sampledAt: "2026-07-17T15:00:00.000Z",
+        providerKind: "internal",
+      } as never);
+      expect(await service.getMetricSample(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listMetricSamples(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -258,11 +272,13 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createAlertState(ctx, {
-      alertDefinitionId: alert.id,
-      state: "inactive",
-      providerKind: "internal"
-} as never);
-      expect(await service.getAlertState(ctx, created.id)).toMatchObject({ id: created.id });
+        alertDefinitionId: alert.id,
+        state: "inactive",
+        providerKind: "internal",
+      } as never);
+      expect(await service.getAlertState(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listAlertStates(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -271,12 +287,14 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createDashboardDefinition(ctx, {
-      key: "dashboardDefinitions-key",
-      name: "dashboardDefinitions-name",
-      providerKind: "internal",
-      status: "active"
-} as never);
-      expect(await service.getDashboardDefinition(ctx, created.id)).toMatchObject({ id: created.id });
+        key: "dashboardDefinitions-key",
+        name: "dashboardDefinitions-name",
+        providerKind: "internal",
+        status: "active",
+      } as never);
+      expect(await service.getDashboardDefinition(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listDashboardDefinitions(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -285,13 +303,15 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createLogSource(ctx, {
-      key: "logSources-key",
-      name: "logSources-name",
-      kind: "application",
-      providerKind: "internal",
-      status: "active"
-} as never);
-      expect(await service.getLogSource(ctx, created.id)).toMatchObject({ id: created.id });
+        key: "logSources-key",
+        name: "logSources-name",
+        kind: "application",
+        providerKind: "internal",
+        status: "active",
+      } as never);
+      expect(await service.getLogSource(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listLogSources(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -300,11 +320,13 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createTraceSpan(ctx, {
-      traceDefinitionId: trace.id,
-      spanName: "traceSpans-name",
-      providerKind: "internal"
-} as never);
-      expect(await service.getTraceSpan(ctx, created.id)).toMatchObject({ id: created.id });
+        traceDefinitionId: trace.id,
+        spanName: "traceSpans-name",
+        providerKind: "internal",
+      } as never);
+      expect(await service.getTraceSpan(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listTraceSpans(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -313,11 +335,13 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createIncidentReference(ctx, {
-      key: "incidentReferences-key",
-      title: "incidentReferences-name",
-      status: "active"
-} as never);
-      expect(await service.getIncidentReference(ctx, created.id)).toMatchObject({ id: created.id });
+        key: "incidentReferences-key",
+        title: "incidentReferences-name",
+        status: "active",
+      } as never);
+      expect(await service.getIncidentReference(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listIncidentReferences(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -326,13 +350,15 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createMaintenanceWindow(ctx, {
-      key: "maintenanceWindows-key",
-      name: "maintenanceWindows-name",
-      startsAt: "2026-07-17T15:00:00.000Z",
-      endsAt: "2026-07-17T15:00:00.000Z",
-      status: "active"
-} as never);
-      expect(await service.getMaintenanceWindow(ctx, created.id)).toMatchObject({ id: created.id });
+        key: "maintenanceWindows-key",
+        name: "maintenanceWindows-name",
+        startsAt: "2026-07-17T15:00:00.000Z",
+        endsAt: "2026-07-17T15:00:00.000Z",
+        status: "active",
+      } as never);
+      expect(await service.getMaintenanceWindow(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listMaintenanceWindows(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -341,14 +367,16 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createHealthSummary(ctx, {
-      scopeKey: "healthSummaries-key",
-      overallStatus: "healthy",
-      healthyCount: 1,
-      degradedCount: 1,
-      unhealthyCount: 1,
-      evaluatedAt: "2026-07-17T15:00:00.000Z"
-} as never);
-      expect(await service.getHealthSummary(ctx, created.id)).toMatchObject({ id: created.id });
+        scopeKey: "healthSummaries-key",
+        overallStatus: "healthy",
+        healthyCount: 1,
+        degradedCount: 1,
+        unhealthyCount: 1,
+        evaluatedAt: "2026-07-17T15:00:00.000Z",
+      } as never);
+      expect(await service.getHealthSummary(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listHealthSummarys(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -357,12 +385,14 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createObservabilityMetadata(ctx, {
-      key: "metadata-key",
-      name: "metadata-name",
-      category: "metadata-key",
-      status: "active"
-} as never);
-      expect(await service.getObservabilityMetadata(ctx, created.id)).toMatchObject({ id: created.id });
+        key: "metadata-key",
+        name: "metadata-name",
+        category: "metadata-key",
+        status: "active",
+      } as never);
+      expect(await service.getObservabilityMetadata(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listObservabilityMetadatas(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -371,12 +401,14 @@ describe("createPlatformObserveService", () => {
 
     {
       const created = await service.createPlatformDiagnostic(ctx, {
-      key: "diagnostics-key",
-      name: "diagnostics-name",
-      status: "healthy",
-      providerKind: "internal"
-} as never);
-      expect(await service.getPlatformDiagnostic(ctx, created.id)).toMatchObject({ id: created.id });
+        key: "diagnostics-key",
+        name: "diagnostics-name",
+        status: "healthy",
+        providerKind: "internal",
+      } as never);
+      expect(await service.getPlatformDiagnostic(ctx, created.id)).toMatchObject({
+        id: created.id,
+      });
       expect(await service.listPlatformDiagnostics(ctx)).toEqual(
         expect.arrayContaining([expect.objectContaining({ id: created.id })]),
       );
@@ -388,7 +420,8 @@ describe("createPlatformObserveService", () => {
     await service.updateTraceDefinition(ctx, { id: trace.id, status: "inactive" });
     expect((await service.diagnosticsHealth(ctx)).status).toBe("healthy");
     expect((await service.diagnosticsCapabilities(ctx)).providerExecution).toBe(false);
-    await expect(service.getHealthCheck(ctx, "missing" as never)).rejects.toThrow(/not found/);
+    await expect(service.getHealthCheck(ctx, "missing" as never)).rejects.toThrow(
+      /not found/,
+    );
   });
-
 });

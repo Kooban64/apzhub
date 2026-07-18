@@ -22,7 +22,9 @@ export class PersonalisationService {
     this.preferences = new PreferenceService(options.repositories.preferences);
     this.favorites = new FavoritesService(options.repositories.favorites);
     this.recentItems = new RecentItemsService(options.repositories.recentItems);
-    this.workbenchLayout = new WorkbenchLayoutService(options.repositories.workbenchLayouts);
+    this.workbenchLayout = new WorkbenchLayoutService(
+      options.repositories.workbenchLayouts,
+    );
     this.diagnostics = new PersonalisationDiagnosticsService(
       options.repositories,
       options.storageBackend ?? "memory",

@@ -27,7 +27,11 @@ function walkSuites(
     const name = readString(s, "title", "name") ?? "suite";
     const key = readString(s, "id", "key") ?? parentKey;
     const cases: CanonicalAutomationCase[] = [];
-    const specs = Array.isArray(s.specs) ? s.specs : Array.isArray(s.tests) ? s.tests : [];
+    const specs = Array.isArray(s.specs)
+      ? s.specs
+      : Array.isArray(s.tests)
+        ? s.tests
+        : [];
     for (const spec of specs) {
       if (!spec || typeof spec !== "object") continue;
       const sp = spec as Record<string, unknown>;

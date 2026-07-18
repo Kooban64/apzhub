@@ -4,14 +4,14 @@
 
 ## Permissions
 
-| Permission | Use |
-| --- | --- |
-| `configuration.*` | Wildcard |
-| `configuration.read` | list/get/diagnostics |
-| `configuration.manage` | configurations, namespaces, groups, overrides |
-| `configuration.version` | version create/publish/deprecate |
-| `configuration.validation` | validate metadata, list rules |
-| `configuration.audit` | audit list/get |
+| Permission                 | Use                                           |
+| -------------------------- | --------------------------------------------- |
+| `configuration.*`          | Wildcard                                      |
+| `configuration.read`       | list/get/diagnostics                          |
+| `configuration.manage`     | configurations, namespaces, groups, overrides |
+| `configuration.version`    | version create/publish/deprecate              |
+| `configuration.validation` | validate metadata, list rules                 |
+| `configuration.audit`      | audit list/get                                |
 
 ## Operation map
 

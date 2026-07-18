@@ -2,7 +2,7 @@
  * APZADMIN-004 — Administration Workbench boundary harness.
  */
 import { execFileSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
@@ -35,8 +35,8 @@ describe("APZADMIN-004 Administration Workbench", () => {
 
   it("relocates Platform Operations off /workspace/administration", () => {
     const opsRoutes = join(ROOT, "apps/web/lib/platform-operations/routes.ts");
-    const content = require("node:fs").readFileSync(opsRoutes, "utf8");
-    expect(content).toContain('/workspace/operations');
+    const content = readFileSync(opsRoutes, "utf8");
+    expect(content).toContain("/workspace/operations");
     expect(content).not.toContain(
       'PLATFORM_OPERATIONS_BASE = "/workspace/administration"',
     );

@@ -2,7 +2,6 @@ import type { ServiceRequestContext } from "@apzhub/platform-service-contracts";
 import type {
   CanonicalReportDocument,
   GenerateReportInput as PlatformGenerateReportInput,
-  PreviewReportInput as PlatformPreviewReportInput,
   RegisterTemplateInput,
   RenderReportInput,
   ReportGenerationMetadata,
@@ -34,17 +33,12 @@ export type { RegisterTemplateInput, RenderReportInput };
  * Implemented via `@apzhub/reporting-core` (APZREPORT-001).
  */
 export interface ReportingService {
-  listAvailableReports(
-    ctx: ServiceRequestContext,
-  ): Promise<readonly ReportType[]>;
+  listAvailableReports(ctx: ServiceRequestContext): Promise<readonly ReportType[]>;
   listTemplates(
     ctx: ServiceRequestContext,
     reportType?: ReportType,
   ): Promise<readonly ReportTemplate[]>;
-  getTemplate(
-    ctx: ServiceRequestContext,
-    templateId: string,
-  ): Promise<ReportTemplate>;
+  getTemplate(ctx: ServiceRequestContext, templateId: string): Promise<ReportTemplate>;
   registerTemplate(
     ctx: ServiceRequestContext,
     input: RegisterTemplateInput,
@@ -78,8 +72,4 @@ export interface ReportingService {
   ): Promise<ReportGenerationMetadata>;
 }
 
-export type {
-  CanonicalReportDocument,
-  ReportOutputFormat,
-  ReportParameters,
-};
+export type { CanonicalReportDocument, ReportOutputFormat, ReportParameters };

@@ -17,7 +17,10 @@ describe("validateUserTenantMembership", () => {
       isPrimary: true,
     });
 
-    const result = await validateUserTenantMembership("user-a", DEFAULT_PLATFORM_TENANT_ID);
+    const result = await validateUserTenantMembership(
+      "user-a",
+      DEFAULT_PLATFORM_TENANT_ID,
+    );
     expect(result.valid).toBe(true);
   });
 
@@ -45,9 +48,13 @@ describe("validateUserTenantMembership", () => {
   it("allows default tenant without membership in non-production dev fallback", async () => {
     resetSharedTenantManagement();
 
-    const result = await validateUserTenantMembership("user-new", DEFAULT_PLATFORM_TENANT_ID, {
-      allowDefaultWithoutMembership: true,
-    });
+    const result = await validateUserTenantMembership(
+      "user-new",
+      DEFAULT_PLATFORM_TENANT_ID,
+      {
+        allowDefaultWithoutMembership: true,
+      },
+    );
 
     expect(result.valid).toBe(true);
   });

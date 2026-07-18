@@ -1,47 +1,71 @@
 # APZHUB Current Milestone
 
 > **Purpose:** Where development currently stops and what requires owner approval  
-> **Last updated:** 2026-07-17  
-> **Current status:** Active — **APZOBSERVE-006 COMPLETE** (Observability Wave Certification & Architecture Freeze — programme **closed/frozen**); **PRODUCTION_READY_WITH_LIMITATIONS** retained. Administration / Configuration / Notification / Workflow / Identity programmes closed/frozen. **APZSEARCH-016** remains deferred. **APZCONFIG-007** / **APZNOTIFY-007** / **APZWORKFLOW-012** roadmap only.
+> **Last updated:** 2026-07-18  
+> **Current status:** Active — **Phase 3 Product Engineering**. Platform Foundation **CLOSED** ([APZHUB-FOUNDATION-001](./APZHUB-FOUNDATION-001-Platform-Foundation-Completion-Report.md) **ACCEPTED**). **No product programme authorised** — await explicit Owner Approval.
+
+---
+
+## Programme tracking states
+
+| State                                 | Meaning                                                      |
+| ------------------------------------- | ------------------------------------------------------------ |
+| **Completed & Accepted**              | Owner Acceptance given; programme **CLOSED**                 |
+| **Implemented, Awaiting Acceptance**  | Delivery + Acceptance Report done; awaiting Owner Acceptance |
+| **Approved, Awaiting Implementation** | Owner Approval given; implementation authorised              |
+| **Recommended, Awaiting Approval**    | Recommendation report only; **not** authorised               |
 
 ---
 
 ## Where development stops
 
-**Current milestone:** **APZOBSERVE-006 — Observability Wave Certification & Architecture Freeze** — **COMPLETE**
+**Engineering phase:** **Phase 3 — Product Engineering** ([Commencement Directive](./APZHUB-PHASE-3-Product-Engineering-Commencement.md))
 
-**Outcome:** Platform Observability programme **closed/frozen**. Reference Standard published. Architecture freeze in force. `pnpm audit:observe-wave` PASS. Classification **PRODUCTION_READY_WITH_LIMITATIONS** retained. Metadata governance only — **no Grafana/Prometheus/Loki/OTel/AlertManager, collection/ingest, alert delivery, Event Bus, AI.**
+**Platform Foundation:** **CLOSED** — [APZHUB-FOUNDATION-001](./APZHUB-FOUNDATION-001-Platform-Foundation-Completion-Report.md) Owner-accepted.
 
-**Stop condition:** Await owner approval before **APZMETRICS-001 — Platform Metrics Foundation**. Do **not** implement metrics/providers/Observability path changes without ADR + owner approval. Identity/Administration remain frozen.
+**Last platform programme closed:** **OSS-100-12+** — Product Provisioning Flows — **ACCEPTED / CLOSED** (`@apzhub/platform-provisioning` **0.1.0**).
 
-**Also awaiting owner (unchanged):** **APZCONFIG-007**, **APZNOTIFY-007**, **APZWORKFLOW-012**, **APZSEARCH-016**, `@apzhub/integration-sdk` **1.0.0**, Platform Event Bus, webhook ingress, provisioning, GitLab CI, AI Assist (deferred).
+**Stop condition:** Remain in Product Engineering mode. **Do not** recommend or bootstrap an implementation programme until explicit Owner Approval of the first Product Engineering programme.
+
+**Primary AI entry:** [AI-MANIFEST.md](./AI-MANIFEST.md)
+
+---
+
+## Product portfolios (Phase 3)
+
+1. Projects · 2. Time · 3. Support · 4. Documents · 5. Analytics · 6. Workflow · 7. Law Platform
+
+Platform work only when required by a product, operational necessity, or ADR (+ owner).
 
 ---
 
 ## Last completed milestones
 
-| Milestone | Deliverable | Status |
-| --- | --- | --- |
-| **APZOBSERVE-006** | Observability Wave Certification & Architecture Freeze | Complete — programme **closed/frozen**; `audit:observe-wave` |
-| **APZOBSERVE-005** | Observability Vertical Certification | Complete — **PRODUCTION_READY_WITH_LIMITATIONS**; `certify:observe-vertical` |
-| **APZOBSERVE-004** | Observability Administration Workbench | Complete — `audit:observe-workbench`; `/workspace/observability` |
-| **APZOBSERVE-003** | Observability HTTP API & Production Typed Client | Complete — `audit:observe-http-client`; OpenAPI **1.8.0** |
-| **APZOBSERVE-002** | Observability Platform Services, Gateway & Authorization | Complete — `audit:observe-platform-services`; contracts/core **0.2.0**; platform-services **0.24.0** |
-| **APZOBSERVE-001** | Platform Observability Foundation | Complete — `audit:observe-foundation`; persistence **0.1.0**; migrations **0054/0055** |
-| **APZIDENTITY-006** | Identity Wave Certification & Architecture Freeze | Complete — programme **closed/frozen** |
-| **APZADMIN-006** | Administration Wave Certification & Architecture Freeze | Complete — programme **closed/frozen** |
+| Milestone                 | Deliverable                                  | Status                                                            |
+| ------------------------- | -------------------------------------------- | ----------------------------------------------------------------- |
+| **APZHUB-FOUNDATION-001** | Platform Foundation Completion Report        | **ACCEPTED** — phase **CLOSED**                                   |
+| **OSS-100-12+**           | Platform Product Provisioning Flows          | **ACCEPTED / CLOSED** — `@apzhub/platform-provisioning` **0.1.0** |
+| **PRH-012–018**           | Production Hardening & Operational Readiness | **ACCEPTED / CLOSED**                                             |
+| **OSS-100-12**            | Platform Event Bus & Webhook Ingress         | **ACCEPTED / CLOSED** — `@apzhub/platform-event-bus` **0.1.0**    |
+| **PCv2-02**               | Outbox Workers & Event Replay                | **ACCEPTED / CLOSED** — `@apzhub/platform-outbox` **0.1.0**       |
+| **APZHUB-KF-002**         | AI Bootstrap Manifest                        | Complete                                                          |
+| **OSS-100-11**            | Integration SDK v1.0.0 Wave Freeze           | Complete — **1.0.0** · Architecture Frozen                        |
 
 ---
 
-## Recommended next (not authorised)
+## Next
 
-**APZMETRICS-001 — Platform Metrics Foundation** (**do not implement**).
+1. **Await Owner Acceptance** of [APZHUB-QA-002](./completion-reports/APZHUB-QA-002-acceptance-report.md) (proposed certification: **PRODUCTION READY**).
+2. **No product programme authorised** until explicit Owner Approval after QA acceptance.
 
 ---
 
 ## See also
 
-- [APZOBSERVE-006 Completion Report](../sprint/APZOBSERVE-006-completion-report.md)
-- [Observability Architecture Freeze Notice](../architecture/APZHUB-Observability-Architecture-Freeze-Notice.md)
-- [Observability Reference Standard](../architecture/APZHUB-Observability-Reference-Standard.md)
-- [APZOBSERVE-005 Completion Report](../sprint/APZOBSERVE-005-completion-report.md)
+- [APZHUB-QA-002 Completion Report](./completion-reports/APZHUB-QA-002-completion-report.md) · [Acceptance](./completion-reports/APZHUB-QA-002-acceptance-report.md) · [Certification](./completion-reports/APZHUB-QA-002-repository-quality-certification.md)
+- [APZHUB-QA-001 Repository Production Quality Report](./completion-reports/APZHUB-QA-001-repository-production-quality-report.md)
+- [Product Engineering Framework (APZHUB-PRODUCTS-000)](../products/README.md)
+- [APZHUB-PHASE-3 Product Engineering Commencement](./APZHUB-PHASE-3-Product-Engineering-Commencement.md)
+- [APZHUB-FOUNDATION-001 — Platform Foundation Completion Report](./APZHUB-FOUNDATION-001-Platform-Foundation-Completion-Report.md)
+- [PRODUCT-CATALOGUE](./PRODUCT-CATALOGUE.md)
+- [ACTIVE-BACKLOG](./ACTIVE-BACKLOG.md)

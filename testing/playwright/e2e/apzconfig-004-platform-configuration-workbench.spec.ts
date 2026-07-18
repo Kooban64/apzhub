@@ -204,7 +204,14 @@ async function mockConfigurationHttpApi(page: Page) {
       return;
     }
 
-    if (path.includes("/approve") || path.includes("/publish") || path.includes("/archive") || path.includes("/restore") || path.includes("/validate") || path.includes("/transition")) {
+    if (
+      path.includes("/approve") ||
+      path.includes("/publish") ||
+      path.includes("/archive") ||
+      path.includes("/restore") ||
+      path.includes("/validate") ||
+      path.includes("/transition")
+    ) {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -216,7 +223,10 @@ async function mockConfigurationHttpApi(page: Page) {
       return;
     }
 
-    if (path.includes("/configurations/cfg_pw") || path.match(/\/configurations\/[^/]+$/)) {
+    if (
+      path.includes("/configurations/cfg_pw") ||
+      path.match(/\/configurations\/[^/]+$/)
+    ) {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -241,13 +251,13 @@ async function mockConfigurationHttpApi(page: Page) {
 }
 
 test.describe("APZCONFIG-004 Configuration Workbench", () => {
-  test("opens overview with unavailable capability banners", async ({
-    page,
-  }) => {
+  test("opens overview with unavailable capability banners", async ({ page }) => {
     await mockConfigurationHttpApi(page);
     await signIn(page);
     await page.goto(`${CONFIGURATION_HOME}/overview`);
-    await expect(page.getByRole("heading", { level: 1, name: "Overview" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { level: 1, name: "Overview" }),
+    ).toBeVisible();
     await expect(page.getByTestId("card-runtime-status")).toContainText(
       "RUNTIME RESOLUTION NOT AVAILABLE",
     );
@@ -264,9 +274,7 @@ test.describe("APZCONFIG-004 Configuration Workbench", () => {
     await signIn(page);
     await page.goto(`${CONFIGURATION_HOME}/configurations`);
     await expect(page.getByText("cfg_pw")).toBeVisible();
-    await expect(page.getByTestId("value-hidden-notice")).toContainText(
-      "VALUE HIDDEN",
-    );
+    await expect(page.getByTestId("value-hidden-notice")).toContainText("VALUE HIDDEN");
 
     await page.goto(`${CONFIGURATION_HOME}/diagnostics`);
     await expect(page.getByTestId("diag-runtime")).toContainText("Unavailable");

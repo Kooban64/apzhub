@@ -28,7 +28,9 @@ function bucketize(
       label: value.label,
       count: value.count,
     }))
-    .sort((left, right) => right.count - left.count || left.key.localeCompare(right.key));
+    .sort(
+      (left, right) => right.count - left.count || left.key.localeCompare(right.key),
+    );
 }
 
 function isOverdue(ticket: SupportTicket, nowMs: number): boolean {

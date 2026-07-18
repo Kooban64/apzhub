@@ -12,20 +12,20 @@ Wall-clock Vitest focused on Document Platform packages + HTTP handlers + typed 
 
 ## Suite timings
 
-| Suite | Approx. wall clock |
-| ----- | ------------------ |
-| Document vertical Vitest (88 tests, 22 files) | **~11.2 s** |
-| Architecture audit (`apzdocs-006`) | **&lt;1 s** |
-| OpenAPI validate platform | **~4 s** |
+| Suite                                         | Approx. wall clock |
+| --------------------------------------------- | ------------------ |
+| Document vertical Vitest (88 tests, 22 files) | **~11.2 s**        |
+| Architecture audit (`apzdocs-006`)            | **&lt;1 s**        |
+| OpenAPI validate platform                     | **~4 s**           |
 
 ## Surface sizes (order of magnitude)
 
-| Surface | Notes |
-| ------- | ----- |
-| HTTP handlers | Thin gateway delegation |
-| Typed client | Metadata JSON only |
-| Workbench | React Query + client-side filter/sort/paginate |
-| Storage metadata | Descriptor lookups (no binary streaming) |
+| Surface          | Notes                                          |
+| ---------------- | ---------------------------------------------- |
+| HTTP handlers    | Thin gateway delegation                        |
+| Typed client     | Metadata JSON only                             |
+| Workbench        | React Query + client-side filter/sort/paginate |
+| Storage metadata | Descriptor lookups (no binary streaming)       |
 
 ## Observations
 

@@ -81,7 +81,8 @@ export async function buildLawApiAuthenticatedContext(
         ok: false,
         response: forbiddenResponse(tracing, {
           code: "TENANT_MEMBERSHIP_DENIED",
-          message: membership.message ?? "Tenant membership is required for this request.",
+          message:
+            membership.message ?? "Tenant membership is required for this request.",
         }),
       };
     }

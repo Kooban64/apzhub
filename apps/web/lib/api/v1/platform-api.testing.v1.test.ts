@@ -61,7 +61,11 @@ import { GET as getTestingDashboardRoute } from "@/app/api/v1/testing/dashboard/
 
 function makeRequest(
   url: string,
-  init?: { readonly method?: string; readonly body?: string; readonly headers?: Record<string, string> },
+  init?: {
+    readonly method?: string;
+    readonly body?: string;
+    readonly headers?: Record<string, string>;
+  },
 ): NextRequest {
   return new NextRequest(new URL(url, "http://localhost:3300"), {
     method: init?.method ?? "GET",
@@ -170,7 +174,11 @@ describe("APZTCMS-012 Testing HTTP API", () => {
       expect((await got.json()).data.id).toBe(API_TEST_PLAN_ID);
 
       expect(onCall).toHaveBeenCalledWith("testing.plans", "list", expect.any(Object));
-      expect(onCall).toHaveBeenCalledWith("testing.plans", "create", expect.any(Object));
+      expect(onCall).toHaveBeenCalledWith(
+        "testing.plans",
+        "create",
+        expect.any(Object),
+      );
       expect(onCall).toHaveBeenCalledWith("testing.plans", "get", expect.any(Object));
     });
 
@@ -198,14 +206,20 @@ describe("APZTCMS-012 Testing HTTP API", () => {
     installMockGateway({ onCall });
 
     const response = await handleArchiveTestingRequirement(
-      makeRequest(`/api/v1/testing/requirements/${API_TEST_REQ_ID}`, { method: "DELETE" }),
+      makeRequest(`/api/v1/testing/requirements/${API_TEST_REQ_ID}`, {
+        method: "DELETE",
+      }),
       makeContext(),
       { params: Promise.resolve({ requirementId: API_TEST_REQ_ID }) },
     );
 
     expect(response.status).toBe(200);
     expect((await response.json()).data.id).toBe(API_TEST_REQ_ID);
-    expect(onCall).toHaveBeenCalledWith("testing.requirements", "archive", expect.any(Object));
+    expect(onCall).toHaveBeenCalledWith(
+      "testing.requirements",
+      "archive",
+      expect.any(Object),
+    );
   });
 
   it("starts an execution and rejects invalid execution path IDs", async () => {
@@ -213,7 +227,9 @@ describe("APZTCMS-012 Testing HTTP API", () => {
     installMockGateway({ onCall });
 
     const response = await handleStartTestingExecution(
-      makeRequest(`/api/v1/testing/executions/${API_TEST_EXEC_ID}/start`, { method: "POST" }),
+      makeRequest(`/api/v1/testing/executions/${API_TEST_EXEC_ID}/start`, {
+        method: "POST",
+      }),
       makeContext(),
       { params: Promise.resolve({ executionId: API_TEST_EXEC_ID }) },
     );
@@ -227,7 +243,11 @@ describe("APZTCMS-012 Testing HTTP API", () => {
         { params: Promise.resolve({ executionId: " " }) },
       ),
     ).rejects.toMatchObject({ status: 400 });
-    expect(onCall).toHaveBeenCalledWith("testing.executions", "start", expect.any(Object));
+    expect(onCall).toHaveBeenCalledWith(
+      "testing.executions",
+      "start",
+      expect.any(Object),
+    );
   });
 
   it("registers evidence metadata only", async () => {
@@ -251,7 +271,11 @@ describe("APZTCMS-012 Testing HTTP API", () => {
 
     expect(response.status).toBe(201);
     expect((await response.json()).data.storageRef).toBe("metadata:exec-1");
-    expect(onCall).toHaveBeenCalledWith("testing.evidence", "registerEvidence", expect.any(Object));
+    expect(onCall).toHaveBeenCalledWith(
+      "testing.evidence",
+      "registerEvidence",
+      expect.any(Object),
+    );
   });
 
   it("validates and imports automation results without running tests", async () => {
@@ -282,8 +306,16 @@ describe("APZTCMS-012 Testing HTTP API", () => {
     );
     expect(imported.status).toBe(201);
     expect((await imported.json()).data.importRecord.id).toBeTruthy();
-    expect(onCall).toHaveBeenCalledWith("testing.automation", "validateImport", expect.any(Object));
-    expect(onCall).toHaveBeenCalledWith("testing.automation", "importResult", expect.any(Object));
+    expect(onCall).toHaveBeenCalledWith(
+      "testing.automation",
+      "validateImport",
+      expect.any(Object),
+    );
+    expect(onCall).toHaveBeenCalledWith(
+      "testing.automation",
+      "importResult",
+      expect.any(Object),
+    );
   });
 
   it("lists coverage and accepts recompute requests", async () => {
@@ -306,8 +338,16 @@ describe("APZTCMS-012 Testing HTTP API", () => {
     );
     expect(recompute.status).toBe(202);
     expect((await recompute.json()).data.accepted).toBe(true);
-    expect(onCall).toHaveBeenCalledWith("testing.coverage", "listMetricsByKind", expect.any(Object));
-    expect(onCall).toHaveBeenCalledWith("testing.coverage", "requestRecompute", expect.any(Object));
+    expect(onCall).toHaveBeenCalledWith(
+      "testing.coverage",
+      "listMetricsByKind",
+      expect.any(Object),
+    );
+    expect(onCall).toHaveBeenCalledWith(
+      "testing.coverage",
+      "requestRecompute",
+      expect.any(Object),
+    );
   });
 
   it("approves certifications and returns advisory release readiness", async () => {
@@ -332,7 +372,11 @@ describe("APZTCMS-012 Testing HTTP API", () => {
     );
     expect(readiness.status).toBe(200);
     expect((await readiness.json()).data.isDecision).toBe(false);
-    expect(onCall).toHaveBeenCalledWith("testing.certification", "approve", expect.any(Object));
+    expect(onCall).toHaveBeenCalledWith(
+      "testing.certification",
+      "approve",
+      expect.any(Object),
+    );
     expect(onCall).toHaveBeenCalledWith(
       "testing.releaseReadiness",
       "calculateForPlan",
@@ -361,7 +405,10 @@ describe("APZTCMS-012 Testing HTTP API", () => {
   it("maps quality risk to 501 capability unsupported", async () => {
     installMockGateway();
     await expect(
-      handleTestingQualityRisk(makeRequest("/api/v1/testing/quality/risk"), makeContext()),
+      handleTestingQualityRisk(
+        makeRequest("/api/v1/testing/quality/risk"),
+        makeContext(),
+      ),
     ).rejects.toMatchObject({ code: "PROVIDER_CAPABILITY_UNSUPPORTED" });
     expect(
       mapPlatformErrorToHttpStatus(
@@ -380,7 +427,9 @@ describe("APZTCMS-012 Testing HTTP API", () => {
     installMockGateway();
     vi.mocked(getValidatedSession).mockResolvedValue(null as never);
 
-    const response = await getTestingDashboardRoute(makeRequest("/api/v1/testing/dashboard"));
+    const response = await getTestingDashboardRoute(
+      makeRequest("/api/v1/testing/dashboard"),
+    );
     expect(response.status).toBe(401);
     expect((await response.json()).error.code).toBe("AUTHENTICATION_REQUIRED");
   });
@@ -454,7 +503,11 @@ describe("APZTCMS-012 Testing HTTP API", () => {
       if (source.includes("@apzhub/testing-persistence")) {
         violations.push(`${rel}: imports @apzhub/testing-persistence`);
       }
-      if (/multipart|formData\(|request\.formData|Content-Type["']?\s*,\s*["']multipart/i.test(source)) {
+      if (
+        /multipart|formData\(|request\.formData|Content-Type["']?\s*,\s*["']multipart/i.test(
+          source,
+        )
+      ) {
         violations.push(`${rel}: exposes binary or multipart evidence handling`);
       }
     }

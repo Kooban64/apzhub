@@ -158,8 +158,7 @@ export function scanMetadataForStorageLeakage(
       issues.push({
         field: `${fieldPrefix}.${key}`,
         code: "storage_leakage",
-        message:
-          "metadata value looks like storage URI, credential, or checksum hex",
+        message: "metadata value looks like storage URI, credential, or checksum hex",
       });
     }
   }

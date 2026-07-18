@@ -30,7 +30,9 @@ describe("testing local state helpers", () => {
       selectedIds: ["a", "b"],
     });
 
-    expect(toggleSelection({ mode: "bulk", selectedIds: ["a", "b"] }, "a", true)).toEqual({
+    expect(
+      toggleSelection({ mode: "bulk", selectedIds: ["a", "b"] }, "a", true),
+    ).toEqual({
       mode: "single",
       selectedIds: ["b"],
     });
@@ -70,13 +72,21 @@ describe("testing local state helpers", () => {
       sort: "updatedAt",
       order: "asc",
     };
-    expect(applyListFilters(items, asc).map((item) => item.id)).toEqual(["2", "3", "1"]);
+    expect(applyListFilters(items, asc).map((item) => item.id)).toEqual([
+      "2",
+      "3",
+      "1",
+    ]);
 
     const desc: TestingFilterState = {
       ...DEFAULT_TESTING_FILTERS,
       sort: "updatedAt",
       order: "desc",
     };
-    expect(applyListFilters(items, desc).map((item) => item.id)).toEqual(["1", "3", "2"]);
+    expect(applyListFilters(items, desc).map((item) => item.id)).toEqual([
+      "1",
+      "3",
+      "2",
+    ]);
   });
 });

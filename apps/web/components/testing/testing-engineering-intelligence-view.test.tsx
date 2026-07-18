@@ -40,9 +40,7 @@ describe("TestingEngineeringIntelligenceView", () => {
 
   it("renders executive overview with quality score", async () => {
     render(
-      wrap(
-        <TestingEngineeringIntelligenceView permissions={["engineering.*"]} />,
-      ),
+      wrap(<TestingEngineeringIntelligenceView permissions={["engineering.*"]} />),
     );
 
     await waitFor(() => {
@@ -54,7 +52,9 @@ describe("TestingEngineeringIntelligenceView", () => {
       ).toBeTruthy();
     });
 
-    expect(screen.getByRole("tablist", { name: /Engineering Intelligence panels/i })).toBeTruthy();
+    expect(
+      screen.getByRole("tablist", { name: /Engineering Intelligence panels/i }),
+    ).toBeTruthy();
   });
 
   it("shows forbidden empty state without permissions", async () => {
@@ -73,11 +73,12 @@ describe("TestingEngineeringIntelligenceView", () => {
         status: 503,
       }),
     );
+    const mockClient = createMockEngineeringIntelligenceClient();
     vi.spyOn(testingApi, "getEngineeringHealth").mockResolvedValue(
-      createMockEngineeringIntelligenceClient().getHealth(),
+      await mockClient.getHealth(),
     );
     vi.spyOn(testingApi, "getEngineeringRisk").mockResolvedValue(
-      createMockEngineeringIntelligenceClient().getRisk(),
+      await mockClient.getRisk(),
     );
     vi.spyOn(testingApi, "listEngineeringTrends").mockResolvedValue({
       items: [],
@@ -85,9 +86,7 @@ describe("TestingEngineeringIntelligenceView", () => {
     });
 
     render(
-      wrap(
-        <TestingEngineeringIntelligenceView permissions={["analytics.view"]} />,
-      ),
+      wrap(<TestingEngineeringIntelligenceView permissions={["analytics.view"]} />),
     );
 
     await waitFor(() => {
@@ -97,11 +96,7 @@ describe("TestingEngineeringIntelligenceView", () => {
 
   it("switches to trends panel and filters by kind", async () => {
     const user = userEvent.setup();
-    render(
-      wrap(
-        <TestingEngineeringIntelligenceView permissions={["quality.view"]} />,
-      ),
-    );
+    render(wrap(<TestingEngineeringIntelligenceView permissions={["quality.view"]} />));
 
     await waitFor(() => {
       expect(screen.getByText("Executive Overview")).toBeTruthy();
@@ -121,9 +116,7 @@ describe("TestingEngineeringIntelligenceView", () => {
   it("opens score, health, risk, benchmarks, and historical panels", async () => {
     const user = userEvent.setup();
     render(
-      wrap(
-        <TestingEngineeringIntelligenceView permissions={["engineering.view"]} />,
-      ),
+      wrap(<TestingEngineeringIntelligenceView permissions={["engineering.view"]} />),
     );
 
     await waitFor(() => {
@@ -134,7 +127,9 @@ describe("TestingEngineeringIntelligenceView", () => {
     expect(await screen.findByText("Quality Score breakdown")).toBeTruthy();
 
     await user.click(screen.getByRole("tab", { name: "Engineering Health" }));
-    expect(await screen.findByRole("region", { name: "Engineering Health" })).toBeTruthy();
+    expect(
+      await screen.findByRole("region", { name: "Engineering Health" }),
+    ).toBeTruthy();
 
     await user.click(screen.getByRole("tab", { name: "Risk Overview" }));
     expect(await screen.findByText("Risk overview")).toBeTruthy();
@@ -144,7 +139,9 @@ describe("TestingEngineeringIntelligenceView", () => {
     await user.click(screen.getByRole("button", { name: "Compare Baselines" }));
 
     await user.click(screen.getByRole("tab", { name: "Historical Analysis" }));
-    expect(await screen.findByRole("region", { name: "Historical snapshots" })).toBeTruthy();
+    expect(
+      await screen.findByRole("region", { name: "Historical snapshots" }),
+    ).toBeTruthy();
     expect(await screen.findByText("June 2026")).toBeTruthy();
 
     await user.click(screen.getByRole("button", { name: "Refresh" }));
@@ -158,9 +155,7 @@ describe("TestingEngineeringIntelligenceView", () => {
   it("filters trends by search query to empty state", async () => {
     const user = userEvent.setup();
     render(
-      wrap(
-        <TestingEngineeringIntelligenceView permissions={["engineering.view"]} />,
-      ),
+      wrap(<TestingEngineeringIntelligenceView permissions={["engineering.view"]} />),
     );
 
     await waitFor(() => {

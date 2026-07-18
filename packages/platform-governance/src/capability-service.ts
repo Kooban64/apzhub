@@ -16,11 +16,15 @@ export class CapabilityService {
     return this.repository.getCapability(capabilityKey);
   }
 
-  async registerCapability(input: RegisterCapabilityInput): Promise<PlatformCapability> {
+  async registerCapability(
+    input: RegisterCapabilityInput,
+  ): Promise<PlatformCapability> {
     return this.repository.registerCapability(input);
   }
 
-  async listDependencies(capabilityKey: string): Promise<readonly CapabilityDependency[]> {
+  async listDependencies(
+    capabilityKey: string,
+  ): Promise<readonly CapabilityDependency[]> {
     const capability = await this.repository.getCapability(capabilityKey);
     if (!capability) {
       return [];

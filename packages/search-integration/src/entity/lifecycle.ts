@@ -56,9 +56,7 @@ export class SearchEntityLifecycle {
     to: SearchEntityLifecycleState,
   ): void {
     if (!this.canTransition(from, to)) {
-      throw new Error(
-        `Invalid search entity lifecycle transition: ${from} → ${to}`,
-      );
+      throw new Error(`Invalid search entity lifecycle transition: ${from} → ${to}`);
     }
   }
 }

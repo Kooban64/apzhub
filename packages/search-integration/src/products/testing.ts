@@ -12,9 +12,8 @@ export const TESTING_SEARCH_ENTITY_TYPES = [
   "defect",
 ] as const;
 
-export const TestingSearchPublicationContract: ProductSearchPublicationContract =
-  {
-    productId: "testing",
-    label: "APZ TCMS",
-    supportedEntityTypes: TESTING_SEARCH_ENTITY_TYPES,
-  };
+export const TestingSearchPublicationContract: ProductSearchPublicationContract = {
+  productId: "testing",
+  label: "APZ TCMS",
+  supportedEntityTypes: TESTING_SEARCH_ENTITY_TYPES,
+};

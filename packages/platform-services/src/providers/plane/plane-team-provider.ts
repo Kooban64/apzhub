@@ -11,9 +11,7 @@ import type {
   UserId,
 } from "@apzhub/platform-service-contracts";
 import type { ProjectId, TeamMemberId } from "@apzhub/platform-service-contracts";
-import {
-  PlatformServiceError,
-} from "@apzhub/platform-service-contracts";
+import { PlatformServiceError } from "@apzhub/platform-service-contracts";
 
 import { toIntegrationContext } from "../../context/to-integration-context";
 import { withProviderErrorMapping } from "../../errors/map-provider-error";

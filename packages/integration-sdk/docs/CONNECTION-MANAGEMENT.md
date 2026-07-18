@@ -31,12 +31,12 @@ Invalid transitions return `integration.connection.invalid_lifecycle_transition`
 
 ## Components
 
-| Component | Responsibility |
-|-----------|----------------|
-| `ConnectionManager` | Register, open, close, disable, diagnostics |
-| `ConnectionRegistry` | In-memory tenant-scoped connection store |
-| `ConnectionLifecycleService` | Deterministic state transitions |
-| `validateConnectionDefinition` | Structured configuration validation |
+| Component                      | Responsibility                              |
+| ------------------------------ | ------------------------------------------- |
+| `ConnectionManager`            | Register, open, close, disable, diagnostics |
+| `ConnectionRegistry`           | In-memory tenant-scoped connection store    |
+| `ConnectionLifecycleService`   | Deterministic state transitions             |
+| `validateConnectionDefinition` | Structured configuration validation         |
 
 ---
 

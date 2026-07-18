@@ -27,20 +27,25 @@ describe("APZSEARCH-015 publication contract conformance", () => {
     ["documents", () => createDocumentsSearchAdapterForTest().publisher],
     ["testing", () => createTestingSearchAdapterForTest().publisher],
     ["reporting", () => createReportingSearchAdapterForTest().publisher],
-  ] as const)("%s publisher exposes all 8 publication operations", (_product, factory) => {
-    const publisher = factory();
-    for (const op of OPERATIONS) {
-      expect(typeof publisher[op], op).toBe("function");
-      expect(
-        op in publisher || typeof (publisher as Record<string, unknown>)[op] === "function",
-        `${op} on instance`,
-      ).toBe(true);
-    }
-    const proto = Object.getPrototypeOf(publisher) as Record<string, unknown>;
-    for (const op of OPERATIONS) {
-      expect(typeof proto[op] === "function" || typeof publisher[op] === "function", `proto.${op}`).toBe(
-        true,
-      );
-    }
-  });
+  ] as const)(
+    "%s publisher exposes all 8 publication operations",
+    (_product, factory) => {
+      const publisher = factory();
+      for (const op of OPERATIONS) {
+        expect(typeof publisher[op], op).toBe("function");
+        expect(
+          op in publisher ||
+            typeof (publisher as Record<string, unknown>)[op] === "function",
+          `${op} on instance`,
+        ).toBe(true);
+      }
+      const proto = Object.getPrototypeOf(publisher) as Record<string, unknown>;
+      for (const op of OPERATIONS) {
+        expect(
+          typeof proto[op] === "function" || typeof publisher[op] === "function",
+          `proto.${op}`,
+        ).toBe(true);
+      }
+    },
+  );
 });

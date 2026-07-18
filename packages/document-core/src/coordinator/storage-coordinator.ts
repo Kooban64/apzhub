@@ -5,7 +5,6 @@
 
 import type {
   DeleteDocumentContentInput,
-  DocumentBinaryResult,
   DocumentContentService,
   DocumentContentVersionRecord,
   DocumentId,
@@ -16,9 +15,7 @@ import type {
   StoreDocumentContentInput,
   StoreDocumentContentResult,
 } from "@apzhub/document-contracts";
-import {
-  asDocumentVersionId,
-} from "@apzhub/document-contracts";
+import { asDocumentVersionId } from "@apzhub/document-contracts";
 
 import { createDocumentIntegrityService } from "../integrity/integrity-service";
 import { DocumentDomainError, requireFound } from "../ports/types";
@@ -41,10 +38,7 @@ export type DocumentStorageCoordinatorDeps = {
   readonly integrity?: ReturnType<typeof createDocumentIntegrityService>;
 };
 
-function assertPermission(
-  ctx: DocumentRequestContext,
-  required: string,
-): void {
+function assertPermission(ctx: DocumentRequestContext, required: string): void {
   const granted = ctx.permissions;
   if (!granted || granted.length === 0) return;
   if (
@@ -287,10 +281,7 @@ export function createDocumentStorageCoordinator(
         as: "bytes",
       });
       if (binary.kind !== "bytes") {
-        throw new DocumentDomainError(
-          "unsupported",
-          "Expected bytes for verification",
-        );
+        throw new DocumentDomainError("unsupported", "Expected bytes for verification");
       }
       return integrity.verify({
         bytes: binary.bytes,

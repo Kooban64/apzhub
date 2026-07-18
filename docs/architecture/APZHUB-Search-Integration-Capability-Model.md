@@ -1,10 +1,10 @@
 # Search Integration Capability Model
 
-| Field | Value |
-| --- | --- |
-| **Document** | APZHUB-Search-Integration-Capability-Model |
-| **Milestone** | APZSEARCH-004 |
-| **Status** | Declarative only |
+| Field         | Value                                      |
+| ------------- | ------------------------------------------ |
+| **Document**  | APZHUB-Search-Integration-Capability-Model |
+| **Milestone** | APZSEARCH-004                              |
+| **Status**    | Declarative only                           |
 
 ## 1. Two layers
 
@@ -13,20 +13,20 @@
 
 ## 2. Declared capabilities
 
-| ID | Aligns to `SearchCapabilities` |
-| --- | --- |
-| `keyword_search` | `keywords` |
-| `phrase_search` | `phrases` |
-| `filtering` | `filters` |
-| `sorting` | `sorting` |
-| `facets` | `facets` |
-| `highlighting` | `highlighting` |
-| `suggestions` | `suggestions` |
-| `pagination` | `pagination` |
-| `index_lifecycle` | (SDK-only; not a contract boolean) |
-| `health` | SDK health surface |
-| `diagnostics` | SDK diagnostics surface |
-| `configuration_validation` | SDK validator surface |
+| ID                         | Aligns to `SearchCapabilities`     |
+| -------------------------- | ---------------------------------- |
+| `keyword_search`           | `keywords`                         |
+| `phrase_search`            | `phrases`                          |
+| `filtering`                | `filters`                          |
+| `sorting`                  | `sorting`                          |
+| `facets`                   | `facets`                           |
+| `highlighting`             | `highlighting`                     |
+| `suggestions`              | `suggestions`                      |
+| `pagination`               | `pagination`                       |
+| `index_lifecycle`          | (SDK-only; not a contract boolean) |
+| `health`                   | SDK health surface                 |
+| `diagnostics`              | SDK diagnostics surface            |
+| `configuration_validation` | SDK validator surface              |
 
 Contract flags `semantic`, `vector`, `fuzzy` remain **hard-false**. Declaring them `true` fails configuration validation and compatibility.
 

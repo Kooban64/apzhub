@@ -16,22 +16,14 @@ export const PLATFORM_NOTIFICATION_PERMISSIONS = [
 export type PlatformNotificationPermission =
   (typeof PLATFORM_NOTIFICATION_PERMISSIONS)[number];
 
-export const PLATFORM_NOTIFICATION_PERMISSION_WILDCARD =
-  "notification.*" as const;
+export const PLATFORM_NOTIFICATION_PERMISSION_WILDCARD = "notification.*" as const;
 
 export function isPlatformNotificationPermission(value: string): boolean {
-  return (PLATFORM_NOTIFICATION_PERMISSIONS as readonly string[]).includes(
-    value,
-  );
+  return (PLATFORM_NOTIFICATION_PERMISSIONS as readonly string[]).includes(value);
 }
 
 export type NotificationPermissionOp =
-  | "read"
-  | "manage"
-  | "template"
-  | "preference"
-  | "audit"
-  | "delivery";
+  "read" | "manage" | "template" | "preference" | "audit" | "delivery";
 
 export function hasNotificationPermission(
   permissions: readonly string[],

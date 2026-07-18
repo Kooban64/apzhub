@@ -1,6 +1,6 @@
 # APZHUB APZ TCMS — Release Readiness Model
 
-**Milestone:** APZTCMS-014  
+**Milestone:** APZTCMS-014
 
 ## Rule
 

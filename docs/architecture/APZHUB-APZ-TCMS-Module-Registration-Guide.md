@@ -8,11 +8,11 @@
 
 ## Manifest locations
 
-| Artefact | Path |
-|----------|------|
-| Module | `services/testing/manifests/testing/module.yaml` |
-| TestingService | `services/testing/service.yaml` |
-| CertificationService | `services/certification/service.yaml` |
+| Artefact             | Path                                             |
+| -------------------- | ------------------------------------------------ |
+| Module               | `services/testing/manifests/testing/module.yaml` |
+| TestingService       | `services/testing/service.yaml`                  |
+| CertificationService | `services/certification/service.yaml`            |
 
 Navigation is declared inside `module.yaml` (no separate `navigation.yaml` pattern required for this milestone).
 
@@ -20,18 +20,18 @@ Navigation is declared inside `module.yaml` (no separate `navigation.yaml` patte
 
 ## Declared sidebar routes (no pages yet)
 
-| Sidebar ID | Route |
-|------------|-------|
-| `testing.dashboard` | `/workspace/testing` |
-| `testing.requirements` | `/workspace/testing/requirements` |
-| `testing.plans` | `/workspace/testing/plans` |
-| `testing.suites` | `/workspace/testing/suites` |
-| `testing.cases` | `/workspace/testing/cases` |
-| `testing.executions` | `/workspace/testing/executions` |
-| `testing.automation` | `/workspace/testing/automation` |
-| `testing.evidence` | `/workspace/testing/evidence` |
-| `testing.certification` | `/workspace/testing/certification` |
-| `testing.reports` | `/workspace/testing/reports` |
+| Sidebar ID               | Route                               |
+| ------------------------ | ----------------------------------- |
+| `testing.dashboard`      | `/workspace/testing`                |
+| `testing.requirements`   | `/workspace/testing/requirements`   |
+| `testing.plans`          | `/workspace/testing/plans`          |
+| `testing.suites`         | `/workspace/testing/suites`         |
+| `testing.cases`          | `/workspace/testing/cases`          |
+| `testing.executions`     | `/workspace/testing/executions`     |
+| `testing.automation`     | `/workspace/testing/automation`     |
+| `testing.evidence`       | `/workspace/testing/evidence`       |
+| `testing.certification`  | `/workspace/testing/certification`  |
+| `testing.reports`        | `/workspace/testing/reports`        |
 | `testing.administration` | `/workspace/testing/administration` |
 
 Do **not** create `apps/web` routes or components in APZTCMS-002.

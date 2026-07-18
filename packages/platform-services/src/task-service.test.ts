@@ -34,7 +34,10 @@ import { ProductionAuthorizationProvider } from "./authorization/production-auth
 import { createDefaultProductionPolicies } from "./authorization/production-policies";
 import { InMemoryAuthorizationAuditSink } from "./authorization/authorization-audit";
 
-async function seedProjectMapping(store: InMemoryEntityMappingStore, tenantId = TEST_SERVICE_CONTEXT.tenantId) {
+async function seedProjectMapping(
+  store: InMemoryEntityMappingStore,
+  tenantId = TEST_SERVICE_CONTEXT.tenantId,
+) {
   const projectId = generateGlobalId("project");
   await store.create({
     platformId: projectId,
@@ -121,8 +124,8 @@ function createTaskBundle(options?: {
 }
 
 describe("OSS-110-08 package version", () => {
-  it("bumps platform-services to 0.7.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
+  it("bumps platform-services to 0.25.0", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
   });
 });
 
@@ -137,11 +140,13 @@ describe("Plane task capability provider", () => {
         hasNextPage: false,
       })),
       get: vi.fn(async () => TEST_PROVIDER_TASK),
-      create: vi.fn(async (_ctx: unknown, _projectId: string, input: { title: string }) => ({
-        ...TEST_PROVIDER_TASK,
-        title: input.title,
-        id: "task_plane_new",
-      })),
+      create: vi.fn(
+        async (_ctx: unknown, _projectId: string, input: { title: string }) => ({
+          ...TEST_PROVIDER_TASK,
+          title: input.title,
+          id: "task_plane_new",
+        }),
+      ),
       update: vi.fn(async () => ({ ...TEST_PROVIDER_TASK, title: "Updated" })),
       archive: vi.fn(async () => ({
         ...TEST_PROVIDER_TASK,
@@ -254,7 +259,9 @@ describe("TaskServiceImpl mapping-aware behaviour", () => {
   it("rejects self-parenting", async () => {
     const { task, mappingStore } = createTaskBundle();
     const projectId = await seedProjectMapping(mappingStore);
-    const created = await task.createTask(TEST_SERVICE_CONTEXT, projectId, { title: "A" });
+    const created = await task.createTask(TEST_SERVICE_CONTEXT, projectId, {
+      title: "A",
+    });
 
     await expect(
       task.updateTask(TEST_SERVICE_CONTEXT, created.id, { parentTaskId: created.id }),
@@ -339,7 +346,9 @@ describe("TaskServiceImpl mapping-aware behaviour", () => {
     });
 
     const { task } = createPlatformServices({ registry, mappingStore });
-    const created = await task.createTask(TEST_SERVICE_CONTEXT, projectId, { title: "Mapped" });
+    const created = await task.createTask(TEST_SERVICE_CONTEXT, projectId, {
+      title: "Mapped",
+    });
     expect(planeCalls).toHaveBeenCalled();
     expect(otherCalls).not.toHaveBeenCalled();
 
@@ -419,8 +428,10 @@ describe("TaskServiceImpl mapping-aware behaviour", () => {
             id: taskId,
             title: input.title ?? TEST_PROVIDER_TASK.title,
             statusId: input.statusId ?? TEST_PROVIDER_TASK.statusId,
-            assigneeId: input.assigneeId === null ? undefined : input.assigneeId ?? undefined,
-            sprintId: input.sprintId === null ? undefined : input.sprintId ?? undefined,
+            assigneeId:
+              input.assigneeId === null ? undefined : (input.assigneeId ?? undefined),
+            sprintId:
+              input.sprintId === null ? undefined : (input.sprintId ?? undefined),
           };
         },
         async transitionTaskStatus(_ctx, _projectId, taskId, input) {
@@ -467,9 +478,13 @@ describe("TaskServiceImpl mapping-aware behaviour", () => {
     });
     expect(clearedRelations.sprintId).toBeUndefined();
 
-    const transitioned = await task.transitionTaskStatus(TEST_SERVICE_CONTEXT, created.id, {
-      statusId,
-    });
+    const transitioned = await task.transitionTaskStatus(
+      TEST_SERVICE_CONTEXT,
+      created.id,
+      {
+        statusId,
+      },
+    );
     expect(transitioned.statusId).toBe(statusId);
 
     const assigned = await task.assignTask(TEST_SERVICE_CONTEXT, created.id, {
@@ -531,10 +546,14 @@ describe("TaskServiceImpl mapping-aware behaviour", () => {
     });
 
     const { task } = createTaskBundle({ mappingStore });
-    const created = await task.createTask(TEST_SERVICE_CONTEXT, projectId, { title: "X" });
+    const created = await task.createTask(TEST_SERVICE_CONTEXT, projectId, {
+      title: "X",
+    });
 
     await expect(
-      task.transitionTaskStatus(TEST_SERVICE_CONTEXT, created.id, { statusId: foreignStatus }),
+      task.transitionTaskStatus(TEST_SERVICE_CONTEXT, created.id, {
+        statusId: foreignStatus,
+      }),
     ).rejects.toMatchObject({ code: "VALIDATION_FAILED" });
   });
 
@@ -639,12 +658,18 @@ describe("TaskServiceImpl mapping-aware behaviour", () => {
   it("throws controlled unsupported for comments and attachments", async () => {
     const { task, mappingStore } = createTaskBundle();
     const projectId = await seedProjectMapping(mappingStore);
-    const created = await task.createTask(TEST_SERVICE_CONTEXT, projectId, { title: "T" });
+    const created = await task.createTask(TEST_SERVICE_CONTEXT, projectId, {
+      title: "T",
+    });
 
-    await expect(task.listComments(TEST_SERVICE_CONTEXT, created.id)).rejects.toMatchObject({
+    await expect(
+      task.listComments(TEST_SERVICE_CONTEXT, created.id),
+    ).rejects.toMatchObject({
       code: "CONFIGURATION_ERROR",
     });
-    await expect(task.listAttachments(TEST_SERVICE_CONTEXT, created.id)).rejects.toMatchObject({
+    await expect(
+      task.listAttachments(TEST_SERVICE_CONTEXT, created.id),
+    ).rejects.toMatchObject({
       code: "CONFIGURATION_ERROR",
     });
   });
@@ -708,9 +733,11 @@ describe("Task permissions and authorisation", () => {
       requiredPermission: "task.archive",
       action: "archive",
     });
-    expect(resolveOperationAuthorization("task", "transitionTaskStatus")).toMatchObject({
-      requiredPermission: "task.transition",
-    });
+    expect(resolveOperationAuthorization("task", "transitionTaskStatus")).toMatchObject(
+      {
+        requiredPermission: "task.transition",
+      },
+    );
   });
 
   it("allows permitted actors and denies anonymous / missing permission", async () => {
@@ -725,9 +752,13 @@ describe("Task permissions and authorisation", () => {
     expect(isValidGlobalId(allowed.id)).toBe(true);
 
     await expect(
-      gateway.tasks.createTask(buildServiceContext({ userId: "anonymous" }), projectId, {
-        title: "Denied",
-      }),
+      gateway.tasks.createTask(
+        buildServiceContext({ userId: "anonymous" }),
+        projectId,
+        {
+          title: "Denied",
+        },
+      ),
     ).rejects.toMatchObject({ category: "authorization" });
 
     const provider = new ProductionAuthorizationProvider({

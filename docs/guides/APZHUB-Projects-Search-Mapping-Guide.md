@@ -7,15 +7,15 @@
 
 Imported from `@apzhub/platform-service-contracts`:
 
-| Entity type | Canonical type |
-| ----------- | -------------- |
-| workspace | `Workspace` |
-| project | `Project` |
-| task | `Task` |
-| sprint | `Sprint` |
-| milestone | `Milestone` |
-| module | `ProjectModule` |
-| team | `Team` |
+| Entity type | Canonical type  |
+| ----------- | --------------- |
+| workspace   | `Workspace`     |
+| project     | `Project`       |
+| task        | `Task`          |
+| sprint      | `Sprint`        |
+| milestone   | `Milestone`     |
+| module      | `ProjectModule` |
+| team        | `Team`          |
 
 ## Mapped fields
 

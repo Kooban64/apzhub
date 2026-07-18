@@ -2,10 +2,7 @@
  * Module-level Platform Workflow client accessor + facades (APZWORKFLOW-003).
  */
 
-import {
-  createHttpWorkflowClient,
-  type WorkflowClient,
-} from "./workflow-client";
+import { createHttpWorkflowClient, type WorkflowClient } from "./workflow-client";
 import { createMockWorkflowClient } from "./mock-workflow-client";
 import type {
   CreateWorkflowCategoryClientInput,
@@ -249,11 +246,7 @@ export function getWorkflowDiagnostics(
   return getWorkflowClient().getDiagnostics(options);
 }
 
-export {
-  createHttpWorkflowClient,
-  createMockWorkflowClient,
-  type WorkflowClient,
-};
+export { createHttpWorkflowClient, createMockWorkflowClient, type WorkflowClient };
 export * from "./workflow-types";
 export * from "./workflow-errors";
 export * from "./routes";

@@ -46,7 +46,10 @@ function ctx(): IntegrationRequestContext {
 
 describe("n8n coverage — mappers / config / operations", () => {
   it("maps all canonical entity types", () => {
-    expect(mapN8nWorkflowToCanonical({ ...MOCK_WORKFLOW, connections: undefined }).connectionCount).toBe(0);
+    expect(
+      mapN8nWorkflowToCanonical({ ...MOCK_WORKFLOW, connections: undefined })
+        .connectionCount,
+    ).toBe(0);
     expect(mapN8nWorkflowAsTemplateMetadata(MOCK_WORKFLOW).support).toBe("partial");
     expect(mapN8nCredentialMetadata(MOCK_CREDENTIAL).secretsIncluded).toBe(false);
     expect(mapN8nVariableMetadata(MOCK_VARIABLE).valueIncluded).toBe(false);
@@ -169,7 +172,7 @@ describe("n8n coverage — mappers / config / operations", () => {
         context,
       ).error.category,
     ).toBe("vendor_unavailable");
-    expect(mapper.map({ context }) ).toBeNull();
+    expect(mapper.map({ context })).toBeNull();
   });
 });
 
@@ -188,16 +191,10 @@ describe("n8n coverage — adapter surface", () => {
     expect((await adapter.core.getWorkflow(ctx(), "1")).id).toBe("1");
     expect((await adapter.core.listWorkflowTemplates(ctx())).length).toBe(1);
     expect((await adapter.core.getWorkflowTemplate(ctx(), "1")).id).toBe("1");
-    expect((await adapter.core.getCredentialMetadata(ctx(), "c1")).type).toBe(
-      "smtp",
-    );
+    expect((await adapter.core.getCredentialMetadata(ctx(), "c1")).type).toBe("smtp");
     expect((await adapter.core.getExecutionMetadata(ctx(), "e1")).id).toBe("e1");
-    expect((await adapter.core.listVariablesMetadata(ctx()))[0]?.key).toBe(
-      "ENV_LABEL",
-    );
-    expect((await adapter.core.getVariableMetadata(ctx(), "var1")).id).toBe(
-      "var1",
-    );
+    expect((await adapter.core.listVariablesMetadata(ctx()))[0]?.key).toBe("ENV_LABEL");
+    expect((await adapter.core.getVariableMetadata(ctx(), "var1")).id).toBe("var1");
     expect((await adapter.core.listUsers(ctx()))[0]?.email).toContain("@");
     expect((await adapter.core.getUser(ctx(), "u1")).id).toBe("u1");
     expect((await adapter.core.listProjects(ctx()))[0]?.name).toBe("Default");
@@ -205,9 +202,7 @@ describe("n8n coverage — adapter surface", () => {
 
     const caps = adapter.core.getCapabilities();
     expect(caps.unsupportedOperations).toContain("execute");
-    expect(adapter.core.getCompatibility().compatibilityStatus).toBe(
-      "compatible",
-    );
+    expect(adapter.core.getCompatibility().compatibilityStatus).toBe("compatible");
     expect(adapter.listCapabilityRegistration().capabilityIds.length).toBeGreaterThan(
       0,
     );
@@ -239,9 +234,9 @@ describe("n8n coverage — adapter surface", () => {
       },
     });
     await missingVars.adapter.connect(ctx());
-    await expect(
-      missingVars.adapter.core.listVariablesMetadata(ctx()),
-    ).rejects.toThrow(/does not support/);
+    await expect(missingVars.adapter.core.listVariablesMetadata(ctx())).rejects.toThrow(
+      /does not support/,
+    );
     await disposeN8nAdapter(missingVars.adapter, missingVars.factory);
   });
 

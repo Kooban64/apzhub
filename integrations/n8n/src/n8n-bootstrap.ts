@@ -3,11 +3,7 @@ import type { AdapterBootstrapConfiguration } from "@apzhub/integration-sdk/adap
 
 import type { N8nConfiguration, N8nConfigurationInput } from "./n8n-config";
 import { normalizeN8nConfiguration } from "./n8n-config";
-import {
-  N8N_ADAPTER_ID,
-  N8N_ADAPTER_VERSION,
-  N8N_INTEGRATION_ID,
-} from "./version";
+import { N8N_ADAPTER_ID, N8N_ADAPTER_VERSION, N8N_INTEGRATION_ID } from "./version";
 
 export const N8N_SDK_CAPABILITIES = [
   "authentication",
@@ -77,8 +73,7 @@ export function createN8nBootstrapConfiguration(
       baseUrl: n8n.baseUrl,
       authenticationMode,
       credentialRef,
-      usernameRef:
-        n8n.authMode === "basic" ? n8n.basicUsernameRef : undefined,
+      usernameRef: n8n.authMode === "basic" ? n8n.basicUsernameRef : undefined,
       metadata: {
         apiBaseUrl: n8n.apiBaseUrl,
         authMode: n8n.authMode,

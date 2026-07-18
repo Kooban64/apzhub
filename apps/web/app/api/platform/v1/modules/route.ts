@@ -8,7 +8,9 @@ import { Runtime } from "@apzhub/platform-runtime/server";
 
 import { ensurePlatformRuntimeReady } from "@/lib/runtime-init";
 
-function mapCapability(record: ReturnType<ReturnType<typeof Runtime.registry>["getModules"]>[number]) {
+function mapCapability(
+  record: ReturnType<ReturnType<typeof Runtime.registry>["getModules"]>[number],
+) {
   return {
     id: record.id,
     name: record.name,

@@ -139,9 +139,7 @@ const canonicalReportDocumentSchema = z
       .strict()
       .optional(),
     metadata: z.record(z.string()),
-    metrics: z.array(
-      z.object({ label: z.string(), value: z.string() }).strict(),
-    ),
+    metrics: z.array(z.object({ label: z.string(), value: z.string() }).strict()),
     sections: z.array(
       z
         .object({

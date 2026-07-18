@@ -52,12 +52,12 @@ flowchart TD
 
 ## Package responsibilities
 
-| Package | Role |
-|---------|------|
-| `@apzhub/platform-lifecycle` | Canonical lifecycle state machine, registrations, operator actions |
-| `@apzhub/platform-runtime` | Manifest capability lifecycle (discovered → active) |
-| `@apzhub/platform-operations` | Control plane integration and production verification |
-| `@apzhub/platform-bootstrap` | Bootstrap orchestration and diagnostics loading |
+| Package                       | Role                                                               |
+| ----------------------------- | ------------------------------------------------------------------ |
+| `@apzhub/platform-lifecycle`  | Canonical lifecycle state machine, registrations, operator actions |
+| `@apzhub/platform-runtime`    | Manifest capability lifecycle (discovered → active)                |
+| `@apzhub/platform-operations` | Control plane integration and production verification              |
+| `@apzhub/platform-bootstrap`  | Bootstrap orchestration and diagnostics loading                    |
 
 Runtime manifest lifecycle (SPR-002) remains in `@apzhub/platform-runtime`. PRH-009 adds the **platform operational lifecycle** layer above consolidated diagnostics.
 
@@ -65,33 +65,33 @@ Runtime manifest lifecycle (SPR-002) remains in `@apzhub/platform-runtime`. PRH-
 
 ## Lifecycle states
 
-| State | Meaning |
-|-------|---------|
-| `initializing` | Platform startup initiated |
-| `bootstrapping` | Runtime bootstrap in progress or complete |
-| `configuration-ready` | Environment configuration valid |
-| `identity-ready` | Identity services ready |
-| `authorization-ready` | Authorization services ready |
-| `platform-ready` | Core platform capabilities ready |
-| `products-ready` | Registered products ready |
-| `operational` | Platform serving traffic |
-| `maintenance` | Operator maintenance mode |
-| `degraded` | Serving with degraded health |
-| `recovering` | Recovery in progress |
-| `stopping` | Graceful shutdown draining |
-| `stopped` | Platform lifecycle stopped |
+| State                 | Meaning                                   |
+| --------------------- | ----------------------------------------- |
+| `initializing`        | Platform startup initiated                |
+| `bootstrapping`       | Runtime bootstrap in progress or complete |
+| `configuration-ready` | Environment configuration valid           |
+| `identity-ready`      | Identity services ready                   |
+| `authorization-ready` | Authorization services ready              |
+| `platform-ready`      | Core platform capabilities ready          |
+| `products-ready`      | Registered products ready                 |
+| `operational`         | Platform serving traffic                  |
+| `maintenance`         | Operator maintenance mode                 |
+| `degraded`            | Serving with degraded health              |
+| `recovering`          | Recovery in progress                      |
+| `stopping`            | Graceful shutdown draining                |
+| `stopped`             | Platform lifecycle stopped                |
 
 ---
 
 ## Operator actions
 
-| Action | Effect |
-|--------|--------|
-| `enter-maintenance` | Enters maintenance mode |
-| `exit-maintenance` | Returns to evaluated operational state |
-| `begin-shutdown` | Initiates graceful shutdown (draining) |
-| `complete-shutdown` | Marks lifecycle stopped |
-| `begin-recovery` | Initiates recovery toward operational |
+| Action              | Effect                                 |
+| ------------------- | -------------------------------------- |
+| `enter-maintenance` | Enters maintenance mode                |
+| `exit-maintenance`  | Returns to evaluated operational state |
+| `begin-shutdown`    | Initiates graceful shutdown (draining) |
+| `complete-shutdown` | Marks lifecycle stopped                |
+| `begin-recovery`    | Initiates recovery toward operational  |
 
 ---
 

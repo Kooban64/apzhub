@@ -36,9 +36,7 @@ import {
   createSearchExecutionProviderResolver,
   SearchExecutionProviderResolver,
 } from "./search-execution-provider-resolver";
-import {
-  createSearchExecutionServiceImpls,
-} from "./search-execution-service-impls";
+import { createSearchExecutionServiceImpls } from "./search-execution-service-impls";
 import {
   isSearchExecutionMeilisearchConfigured,
   resolveSearchMeilisearchProviderEnv,
@@ -265,9 +263,7 @@ function buildBundle(
     searchIndexes: wrapFacet(domainGateway.searchIndexes),
     searchDocuments: wrapFacet(domainGateway.searchDocuments),
     searchExecutionHealth: wrapFacet(domainGateway.searchExecutionHealth),
-    searchExecutionDiagnostics: wrapFacet(
-      domainGateway.searchExecutionDiagnostics,
-    ),
+    searchExecutionDiagnostics: wrapFacet(domainGateway.searchExecutionDiagnostics),
   };
 
   return {
@@ -384,11 +380,9 @@ export async function createSearchExecutionServicesForTest(
     tenantId: input.tenantId ?? "tenant_test",
     meilisearch: {
       baseUrl:
-        input.meilisearchConfig?.baseUrl ??
-        DEFAULT_TEST_MEILISEARCH_CONFIG.baseUrl,
+        input.meilisearchConfig?.baseUrl ?? DEFAULT_TEST_MEILISEARCH_CONFIG.baseUrl,
       apiKeyRef:
-        input.meilisearchConfig?.apiKeyRef ??
-        DEFAULT_TEST_MEILISEARCH_CONFIG.apiKeyRef,
+        input.meilisearchConfig?.apiKeyRef ?? DEFAULT_TEST_MEILISEARCH_CONFIG.apiKeyRef,
       defaultIndexUid:
         input.meilisearchConfig?.defaultIndexUid ??
         DEFAULT_TEST_MEILISEARCH_CONFIG.defaultIndexUid,

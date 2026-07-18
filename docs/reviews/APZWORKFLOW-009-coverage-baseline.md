@@ -6,12 +6,12 @@ Scoped modules:
 
 ## Measured (2026-07-15)
 
-| Scope | Stmts/Lines | Functions | Branches |
-| --- | --- | --- | --- |
-| `components/workflow-engine/**` | **98.9%** | **100%** | **~86%** meaningful |
-| `engine-definition-viewer.tsx` | **100%** | **100%** | **70%** |
-| `platform-workflow-engine-view.tsx` | **98.8%** | **100%** | **~87%** |
-| `workflow-engine-workspace-router.tsx` | **100%** | **100%** | **100%** |
+| Scope                                  | Stmts/Lines | Functions | Branches            |
+| -------------------------------------- | ----------- | --------- | ------------------- |
+| `components/workflow-engine/**`        | **98.9%**   | **100%**  | **~86%** meaningful |
+| `engine-definition-viewer.tsx`         | **100%**    | **100%**  | **70%**             |
+| `platform-workflow-engine-view.tsx`    | **98.8%**   | **100%**  | **~87%**            |
+| `workflow-engine-workspace-router.tsx` | **100%**    | **100%**  | **100%**            |
 
 ```bash
 pnpm exec vitest run \

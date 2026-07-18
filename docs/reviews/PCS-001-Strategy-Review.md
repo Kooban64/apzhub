@@ -30,48 +30,48 @@ The PCS-001 strategy suite is **coherent, aligned with certified architecture, a
 
 ## Strengths
 
-| # | Strength | Evidence |
-|---|----------|----------|
-| S1 | **Clear platform/product boundary** | Product Portfolio Strategy; Document 003 alignment |
-| S2 | **Self-hosted first preserved** | Platform Core Strategy; OSS CE mandate |
-| S3 | **Phased commercial model** | Commercial Roadmap tiers match PC-001 assessment |
-| S4 | **OSS integration discipline** | Per-engine auth/authz/provisioning/diagnostics/replacement |
-| S5 | **Build vs buy clarity** | Never-outsource list protects moat |
-| S6 | **v2 rationale well grounded** | Directly addresses PC-001 observations |
-| S7 | **AI governed by design** | No module LLM calls; permission-filtered RAG |
-| S8 | **Engineering roadmap realistic** | PCv2-01 first; OSS gated; product stops explicit |
-| S9 | **Financial Engine defer respected** | FIN-001 preconditions referenced |
-| S10 | **Five-year vision without overcommit** | v3 bridge acknowledges unknowns |
+| #   | Strength                                | Evidence                                                   |
+| --- | --------------------------------------- | ---------------------------------------------------------- |
+| S1  | **Clear platform/product boundary**     | Product Portfolio Strategy; Document 003 alignment         |
+| S2  | **Self-hosted first preserved**         | Platform Core Strategy; OSS CE mandate                     |
+| S3  | **Phased commercial model**             | Commercial Roadmap tiers match PC-001 assessment           |
+| S4  | **OSS integration discipline**          | Per-engine auth/authz/provisioning/diagnostics/replacement |
+| S5  | **Build vs buy clarity**                | Never-outsource list protects moat                         |
+| S6  | **v2 rationale well grounded**          | Directly addresses PC-001 observations                     |
+| S7  | **AI governed by design**               | No module LLM calls; permission-filtered RAG               |
+| S8  | **Engineering roadmap realistic**       | PCv2-01 first; OSS gated; product stops explicit           |
+| S9  | **Financial Engine defer respected**    | FIN-001 preconditions referenced                           |
+| S10 | **Five-year vision without overcommit** | v3 bridge acknowledges unknowns                            |
 
 ---
 
 ## Risks
 
-| # | Risk | Severity | Mitigation in strategy |
-|---|------|----------|------------------------|
-| R1 | PCv2 delayed by product pressure | High | Explicit sequencing; owner gates |
-| R2 | OSS integration complexity underestimated | Medium | One engine per sprint; integration.yaml mandate |
-| R3 | Law + platform competing for capacity | Medium | 50/25 allocation guidance |
-| R4 | Commercial SaaS before hardening | High | Tier gates tied to PCv2 phases |
-| R5 | AI scope creep into modules | Medium | AI governance; architecture checker |
-| R6 | Financial extraction premature | High | FIN-001 defer; preconditions listed |
-| R7 | Marketplace too early | Low | Year 4 placement; v3 dependency |
-| R8 | Multi-product divergence | Medium | Platform Core consumption rule |
+| #   | Risk                                      | Severity | Mitigation in strategy                          |
+| --- | ----------------------------------------- | -------- | ----------------------------------------------- |
+| R1  | PCv2 delayed by product pressure          | High     | Explicit sequencing; owner gates                |
+| R2  | OSS integration complexity underestimated | Medium   | One engine per sprint; integration.yaml mandate |
+| R3  | Law + platform competing for capacity     | Medium   | 50/25 allocation guidance                       |
+| R4  | Commercial SaaS before hardening          | High     | Tier gates tied to PCv2 phases                  |
+| R5  | AI scope creep into modules               | Medium   | AI governance; architecture checker             |
+| R6  | Financial extraction premature            | High     | FIN-001 defer; preconditions listed             |
+| R7  | Marketplace too early                     | Low      | Year 4 placement; v3 dependency                 |
+| R8  | Multi-product divergence                  | Medium   | Platform Core consumption rule                  |
 
 ---
 
 ## Missing capabilities (identified)
 
-| Capability | Gap | Recommended phase |
-|------------|-----|-------------------|
-| **Email delivery** | No SMTP notification channel | PCv2+ / ENF extension |
-| **File storage service** | S3-compatible referenced but not platform service | PCv2 or OSS Phase 1 |
-| **Webhook platform** | Mentioned in gateway; not detailed | PCv2-09 |
-| **Backup/restore automation** | DR manual only | PCv2-06 |
-| **Mobile clients** | Explicitly out of scope; no strategy | Future product decision |
-| **Multi-language/i18n** | Foundation silent | Product or PCv3 |
-| **Platform SDK publish** | Internal only today | E-40 engineering roadmap |
-| **Customer status page** | SaaS tier needs | PCv2-03/Commercial |
+| Capability                    | Gap                                               | Recommended phase        |
+| ----------------------------- | ------------------------------------------------- | ------------------------ |
+| **Email delivery**            | No SMTP notification channel                      | PCv2+ / ENF extension    |
+| **File storage service**      | S3-compatible referenced but not platform service | PCv2 or OSS Phase 1      |
+| **Webhook platform**          | Mentioned in gateway; not detailed                | PCv2-09                  |
+| **Backup/restore automation** | DR manual only                                    | PCv2-06                  |
+| **Mobile clients**            | Explicitly out of scope; no strategy              | Future product decision  |
+| **Multi-language/i18n**       | Foundation silent                                 | Product or PCv3          |
+| **Platform SDK publish**      | Internal only today                               | E-40 engineering roadmap |
+| **Customer status page**      | SaaS tier needs                                   | PCv2-03/Commercial       |
 
 None block PCS-001 approval; document for PCv2 sprint guides.
 
@@ -98,15 +98,15 @@ None block PCS-001 approval; document for PCv2 sprint guides.
 
 ## Alignment check
 
-| Source document | Alignment |
-|-----------------|-----------|
-| PC-001 Certification | ✅ Consistent — v2 addresses observations |
-| M16 Engineering Review | ✅ VERY GOOD rating preserved |
-| Document 001 Vision | ✅ Not a portal; OSS engines invisible |
-| Document 007 IAM | ✅ BetterAuth + platform permissions |
-| Document 008 Modules | ✅ Module→Service→Connector |
-| FIN-001 | ✅ Defer extraction respected |
-| PC-001 stop condition | ✅ No implementation in PCS-001 |
+| Source document        | Alignment                                 |
+| ---------------------- | ----------------------------------------- |
+| PC-001 Certification   | ✅ Consistent — v2 addresses observations |
+| M16 Engineering Review | ✅ VERY GOOD rating preserved             |
+| Document 001 Vision    | ✅ Not a portal; OSS engines invisible    |
+| Document 007 IAM       | ✅ BetterAuth + platform permissions      |
+| Document 008 Modules   | ✅ Module→Service→Connector               |
+| FIN-001                | ✅ Defer extraction respected             |
+| PC-001 stop condition  | ✅ No implementation in PCS-001           |
 
 ---
 
@@ -124,6 +124,6 @@ PCS-001 strategy is **ratified** with sequencing amendments documented in [PCS-0
 
 ## References
 
-- [Platform Core Strategy](./APZHUB-Platform-Core-Strategy.md)
+- [Platform Core Strategy](../strategy/APZHUB-Platform-Core-Strategy.md)
 - [PCS-001 Completion Report](../sprint/PCS-001-completion-report.md)
 - [PC-001 Certification](./APZHUB-Platform-Core-Certification.md)

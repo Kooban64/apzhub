@@ -116,13 +116,7 @@ describe("PlatformObservabilityView coverage", () => {
   });
 
   it("covers unknown section and detail errors", async () => {
-    render(
-      wrap(
-        <PlatformObservabilityView
-          section={"unknown" as never}
-        />,
-      ),
-    );
+    render(wrap(<PlatformObservabilityView section={"unknown" as never} />));
     expect(screen.getByText(/Section not found/i)).toBeTruthy();
 
     cleanup();
@@ -257,9 +251,7 @@ describe("PlatformObservabilityView coverage", () => {
     });
     resolveReadiness?.(undefined);
     await waitFor(() => {
-      expect(screen.getByTestId("diag-readiness").textContent).not.toMatch(
-        /Loading/i,
-      );
+      expect(screen.getByTestId("diag-readiness").textContent).not.toMatch(/Loading/i);
     });
   });
 

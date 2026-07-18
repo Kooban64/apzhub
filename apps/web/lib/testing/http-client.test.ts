@@ -31,7 +31,12 @@ describe("createHttpTestingClient", () => {
   it("uses /api/v1/testing URLs for list and detail calls", async () => {
     const client = createHttpTestingClient();
 
-    await client.listPlans({ search: "release", sort: "name", order: "asc", status: "draft" });
+    await client.listPlans({
+      search: "release",
+      sort: "name",
+      order: "asc",
+      status: "draft",
+    });
     await client.getPlan("plan/with space");
 
     expect(fetchMock).toHaveBeenNthCalledWith(

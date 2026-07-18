@@ -1,15 +1,13 @@
 "use client";
 
 import { Button, Card, CardContent, CardHeader, CardTitle } from "@apzhub/ui";
-import {
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  type ReactNode,
-} from "react";
+import { useCallback, useEffect, useId, useRef, type ReactNode } from "react";
 
-import { formatBytes, formatSupportPriority, formatSupportStatus } from "@/lib/support/format";
+import {
+  formatBytes,
+  formatSupportPriority,
+  formatSupportStatus,
+} from "@/lib/support/format";
 import type {
   SupportArticleAttachment,
   SupportRequestPriority,
@@ -34,19 +32,29 @@ export function PageShell({
           <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-muted-foreground)]">
             Support
           </p>
-          <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">{title}</h1>
+          <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">
+            {title}
+          </h1>
           {description ? (
-            <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">{description}</p>
+            <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+              {description}
+            </p>
           ) : null}
         </div>
-        {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
+        {actions ? (
+          <div className="flex flex-wrap items-center gap-2">{actions}</div>
+        ) : null}
       </header>
       {children}
     </div>
   );
 }
 
-export function LoadingState({ label = "Loading Support…" }: { readonly label?: string }) {
+export function LoadingState({
+  label = "Loading Support…",
+}: {
+  readonly label?: string;
+}) {
   return (
     <div
       className="rounded-lg border border-[var(--color-border)] px-4 py-8 text-center text-sm text-[var(--color-muted-foreground)]"
@@ -74,7 +82,9 @@ export function EmptyState({
     >
       <p className="font-medium text-[var(--color-foreground)]">{title}</p>
       {description ? (
-        <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">{description}</p>
+        <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+          {description}
+        </p>
       ) : null}
       {action ? <div className="mt-4 flex justify-center">{action}</div> : null}
     </div>
@@ -94,7 +104,9 @@ export function ErrorState({
       data-testid="support-error"
       role="alert"
     >
-      <p className="font-medium text-[var(--color-foreground)]">Unable to load Support</p>
+      <p className="font-medium text-[var(--color-foreground)]">
+        Unable to load Support
+      </p>
       <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">{message}</p>
       {onRetry ? (
         <div className="mt-3">
@@ -115,7 +127,10 @@ export function StatusBadge({
   readonly priority?: SupportRequestPriority | string;
 }) {
   return (
-    <span className="inline-flex flex-wrap items-center gap-2" data-testid="support-status-badge">
+    <span
+      className="inline-flex flex-wrap items-center gap-2"
+      data-testid="support-status-badge"
+    >
       {status ? (
         <span
           className="inline-flex items-center gap-1 rounded-md border border-[var(--color-border)] px-2 py-0.5 text-xs"
@@ -167,13 +182,18 @@ export function AttachmentMetadataList({
 }) {
   if (attachments.length === 0) return null;
   return (
-    <ul className="mt-2 space-y-1 text-xs text-[var(--color-muted-foreground)]" data-testid="support-attachments">
+    <ul
+      className="mt-2 space-y-1 text-xs text-[var(--color-muted-foreground)]"
+      data-testid="support-attachments"
+    >
       {attachments.map((attachment) => (
         <li
           key={attachment.id}
           className="rounded border border-[var(--color-border)] px-2 py-1"
         >
-          <span className="font-medium text-[var(--color-foreground)]">{attachment.filename}</span>
+          <span className="font-medium text-[var(--color-foreground)]">
+            {attachment.filename}
+          </span>
           {" · "}
           {attachment.contentType ?? "unknown type"}
           {" · "}
@@ -249,7 +269,10 @@ export function ConfirmDialog({
         <h2 id={titleId} className="text-lg font-semibold">
           {title}
         </h2>
-        <p id={descriptionId} className="mt-2 text-sm text-[var(--color-muted-foreground)]">
+        <p
+          id={descriptionId}
+          className="mt-2 text-sm text-[var(--color-muted-foreground)]"
+        >
           {description}
         </p>
         <div className="mt-4 flex justify-end gap-2">
@@ -289,7 +312,9 @@ export function SupportStatCard({
       </CardHeader>
       <CardContent>
         <p className="text-2xl font-semibold">{value}</p>
-        {hint ? <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">{hint}</p> : null}
+        {hint ? (
+          <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">{hint}</p>
+        ) : null}
       </CardContent>
     </Card>
   );

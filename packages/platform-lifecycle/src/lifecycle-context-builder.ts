@@ -1,4 +1,7 @@
-import type { ConsolidatedOperationalDiagnostics, HealthSignalStatus } from "@apzhub/platform-security";
+import type {
+  ConsolidatedOperationalDiagnostics,
+  HealthSignalStatus,
+} from "@apzhub/platform-security";
 
 import type { PlatformLifecycleState } from "./types";
 
@@ -55,10 +58,12 @@ export function buildLifecycleEvaluationContext(input: {
 
   const lawReady =
     productStatuses["law-platform"] === "healthy" ||
-    (productStatuses["law-platform"] === undefined && Boolean(consolidated.lawPlatform));
+    (productStatuses["law-platform"] === undefined &&
+      Boolean(consolidated.lawPlatform));
   const trustReady =
     productStatuses["trust-accounting"] === "healthy" ||
-    (productStatuses["trust-accounting"] === undefined && Boolean(consolidated.trustAccounting));
+    (productStatuses["trust-accounting"] === undefined &&
+      Boolean(consolidated.trustAccounting));
 
   const productsReady = platformCoreReady && lawReady && trustReady;
 
@@ -85,10 +90,7 @@ export function buildLifecycleEvaluationContext(input: {
   if (satisfiedGates.includes("identity-ready") && authorizationReady) {
     satisfiedGates.push("authorization-ready");
   }
-  if (
-    satisfiedGates.includes("authorization-ready") &&
-    platformCoreReady
-  ) {
+  if (satisfiedGates.includes("authorization-ready") && platformCoreReady) {
     satisfiedGates.push("platform-ready");
   }
   if (satisfiedGates.includes("platform-ready") && productsReady) {

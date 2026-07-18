@@ -207,10 +207,7 @@ import {
   paginateItems,
   type ListQuery,
 } from "../types";
-import {
-  createPostgresCrudRepository,
-  type PostgresCrudTable,
-} from "./generic-crud";
+import { createPostgresCrudRepository, type PostgresCrudTable } from "./generic-crud";
 import {
   loadCaseRequirementIds,
   loadCaseStepIds,
@@ -236,9 +233,7 @@ function asTable(table: unknown): PostgresCrudTable {
   return table as PostgresCrudTable;
 }
 
-function createVersionRepos(
-  db: DatabaseExecutor,
-): {
+function createVersionRepos(db: DatabaseExecutor): {
   testCaseVersions: TestCaseVersionRepository;
   testPlanVersions: TestPlanVersionRepository;
   testSuiteVersions: TestSuiteVersionRepository;
@@ -480,7 +475,11 @@ export function createPostgresTestingPersistence(
 ): TestingPersistence {
   const versions = createVersionRepos(db);
 
-  const requirements = createPostgresCrudRepository<RequirementCreate, RequirementUpdate, RequirementRecord>({
+  const requirements = createPostgresCrudRepository<
+    RequirementCreate,
+    RequirementUpdate,
+    RequirementRecord
+  >({
     kind: "requirement",
     db,
     table: asTable(testingRequirement),
@@ -494,7 +493,11 @@ export function createPostgresTestingPersistence(
       if (input.priority !== undefined) validatePriority(String(input.priority));
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<RequirementRecord>;
       return {
         ...meta,
@@ -519,7 +522,11 @@ export function createPostgresTestingPersistence(
     }),
   });
 
-  const workItems = createPostgresCrudRepository<WorkItemCreate, WorkItemUpdate, WorkItemRecord>({
+  const workItems = createPostgresCrudRepository<
+    WorkItemCreate,
+    WorkItemUpdate,
+    WorkItemRecord
+  >({
     kind: "work_item",
     db,
     table: asTable(testingWorkItem),
@@ -533,7 +540,11 @@ export function createPostgresTestingPersistence(
       if (input.kind !== undefined) validateWorkItemKind(String(input.kind));
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<WorkItemRecord>;
       return {
         ...meta,
@@ -564,7 +575,11 @@ export function createPostgresTestingPersistence(
       if (input.level !== undefined) validateRiskLevel(String(input.level));
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<RiskRecord>;
       return {
         ...meta,
@@ -586,12 +601,7 @@ export function createPostgresTestingPersistence(
     toRow: (record) => riskToRow(record),
     rowToRecord: (row) => rowToRisk(row as never),
     afterWrite: async (ctx, record) => {
-      await replaceRiskRequirements(
-        db,
-        ctx.tenantId,
-        record.id,
-        record.requirementIds,
-      );
+      await replaceRiskRequirements(db, ctx.tenantId, record.id, record.requirementIds);
     },
     enrichOnRead: async (ctx, record) => ({
       ...record,
@@ -599,7 +609,11 @@ export function createPostgresTestingPersistence(
     }),
   });
 
-  const testPlans = createPostgresCrudRepository<TestPlanCreate, TestPlanUpdate, TestPlanRecord>({
+  const testPlans = createPostgresCrudRepository<
+    TestPlanCreate,
+    TestPlanUpdate,
+    TestPlanRecord
+  >({
     kind: "test_plan",
     db,
     table: asTable(testingTestPlan),
@@ -613,7 +627,11 @@ export function createPostgresTestingPersistence(
       if (input.status !== undefined) validateTestStatus(String(input.status));
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<TestPlanRecord>;
       return {
         ...meta,
@@ -636,12 +654,7 @@ export function createPostgresTestingPersistence(
     rowToRecord: (row) => rowToTestPlan(row as never),
     afterWrite: async (ctx, record) => {
       await replacePlanSuites(db, ctx.tenantId, record.id, record.suiteIds);
-      await replacePlanRequirements(
-        db,
-        ctx.tenantId,
-        record.id,
-        record.requirementIds,
-      );
+      await replacePlanRequirements(db, ctx.tenantId, record.id, record.requirementIds);
       await replacePlanRisks(db, ctx.tenantId, record.id, record.riskIds);
     },
     enrichOnRead: async (ctx, record) => ({
@@ -652,7 +665,11 @@ export function createPostgresTestingPersistence(
     }),
   });
 
-  const testSuites = createPostgresCrudRepository<TestSuiteCreate, TestSuiteUpdate, TestSuiteRecord>({
+  const testSuites = createPostgresCrudRepository<
+    TestSuiteCreate,
+    TestSuiteUpdate,
+    TestSuiteRecord
+  >({
     kind: "test_suite",
     db,
     table: asTable(testingTestSuite),
@@ -666,7 +683,11 @@ export function createPostgresTestingPersistence(
       if (input.status !== undefined) validateTestStatus(String(input.status));
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<TestSuiteRecord>;
       return {
         ...meta,
@@ -696,7 +717,11 @@ export function createPostgresTestingPersistence(
     }),
   });
 
-  const testCases = createPostgresCrudRepository<TestCaseCreate, TestCaseUpdate, TestCaseRecord>({
+  const testCases = createPostgresCrudRepository<
+    TestCaseCreate,
+    TestCaseUpdate,
+    TestCaseRecord
+  >({
     kind: "test_case",
     db,
     table: asTable(testingTestCase),
@@ -712,7 +737,11 @@ export function createPostgresTestingPersistence(
       if (input.priority !== undefined) validatePriority(String(input.priority));
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<TestCaseRecord>;
       return {
         ...meta,
@@ -743,12 +772,7 @@ export function createPostgresTestingPersistence(
     toRow: (record) => testCaseToRow(record),
     rowToRecord: (row) => rowToTestCase(row as never),
     afterWrite: async (ctx, record) => {
-      await replaceCaseRequirements(
-        db,
-        ctx.tenantId,
-        record.id,
-        record.requirementIds,
-      );
+      await replaceCaseRequirements(db, ctx.tenantId, record.id, record.requirementIds);
     },
     enrichOnRead: async (ctx, record) => ({
       ...record,
@@ -758,7 +782,11 @@ export function createPostgresTestingPersistence(
     }),
   });
 
-  const testSteps = createPostgresCrudRepository<TestStepCreate, TestStepUpdate, TestStepRecord>({
+  const testSteps = createPostgresCrudRepository<
+    TestStepCreate,
+    TestStepUpdate,
+    TestStepRecord
+  >({
     kind: "test_step",
     db,
     table: asTable(testingTestStep),
@@ -769,7 +797,11 @@ export function createPostgresTestingPersistence(
       assertRequiredString(input.expectedResult, "expectedResult");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<TestStepRecord>;
       return {
         ...meta,
@@ -784,7 +816,11 @@ export function createPostgresTestingPersistence(
     rowToRecord: (row) => rowToTestStep(row as never),
   });
 
-  const regressionSets = createPostgresCrudRepository<RegressionSetCreate, RegressionSetUpdate, RegressionSetRecord>({
+  const regressionSets = createPostgresCrudRepository<
+    RegressionSetCreate,
+    RegressionSetUpdate,
+    RegressionSetRecord
+  >({
     kind: "regression_set",
     db,
     table: asTable(testingRegressionSet),
@@ -794,7 +830,11 @@ export function createPostgresTestingPersistence(
       assertRequiredString(input.name, "name");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<RegressionSetRecord>;
       return {
         ...meta,
@@ -810,7 +850,11 @@ export function createPostgresTestingPersistence(
     rowToRecord: (row) => rowToRegressionSet(row as never),
   });
 
-  const executionSessions = createPostgresCrudRepository<ExecutionSessionCreate, ExecutionSessionUpdate, ExecutionSessionRecord>({
+  const executionSessions = createPostgresCrudRepository<
+    ExecutionSessionCreate,
+    ExecutionSessionUpdate,
+    ExecutionSessionRecord
+  >({
     kind: "execution_session",
     db,
     table: asTable(testingExecutionSession),
@@ -826,7 +870,11 @@ export function createPostgresTestingPersistence(
       if (input.status !== undefined) validateExecutionStatus(String(input.status));
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ExecutionSessionRecord>;
       return {
         ...meta,
@@ -844,7 +892,11 @@ export function createPostgresTestingPersistence(
     rowToRecord: (row) => rowToExecutionSession(row as never),
   });
 
-  const manualExecutions = createPostgresCrudRepository<ManualExecutionCreate, ManualExecutionUpdate, ManualExecutionRecord>({
+  const manualExecutions = createPostgresCrudRepository<
+    ManualExecutionCreate,
+    ManualExecutionUpdate,
+    ManualExecutionRecord
+  >({
     kind: "manual_execution",
     db,
     table: asTable(testingManualExecution),
@@ -870,7 +922,11 @@ export function createPostgresTestingPersistence(
       }
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ManualExecutionRecord>;
       return {
         ...meta,
@@ -906,7 +962,11 @@ export function createPostgresTestingPersistence(
     },
   });
 
-  const evidence = createPostgresCrudRepository<EvidenceCreate, EvidenceUpdate, EvidenceRecord>({
+  const evidence = createPostgresCrudRepository<
+    EvidenceCreate,
+    EvidenceUpdate,
+    EvidenceRecord
+  >({
     kind: "evidence",
     db,
     table: asTable(testingEvidence),
@@ -926,7 +986,11 @@ export function createPostgresTestingPersistence(
       }
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<EvidenceRecord>;
       return {
         ...meta,
@@ -957,7 +1021,11 @@ export function createPostgresTestingPersistence(
     rowToRecord: (row) => rowToEvidence(row as never),
   });
 
-  const approvals = createPostgresCrudRepository<ApprovalCreate, ApprovalUpdate, ApprovalRecord>({
+  const approvals = createPostgresCrudRepository<
+    ApprovalCreate,
+    ApprovalUpdate,
+    ApprovalRecord
+  >({
     kind: "approval",
     db,
     table: asTable(testingApproval),
@@ -970,7 +1038,11 @@ export function createPostgresTestingPersistence(
       if (input.status !== undefined) validateApprovalStatus(String(input.status));
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ApprovalRecord>;
       return {
         ...meta,
@@ -1001,7 +1073,11 @@ export function createPostgresTestingPersistence(
     rowToRecord: (row) => rowToApproval(row as never),
   });
 
-  const certificationRecords = createPostgresCrudRepository<CertificationCreate, CertificationUpdate, CertificationRecordRecord>({
+  const certificationRecords = createPostgresCrudRepository<
+    CertificationCreate,
+    CertificationUpdate,
+    CertificationRecordRecord
+  >({
     kind: "certification_record",
     db,
     table: asTable(testingCertificationRecord),
@@ -1017,7 +1093,11 @@ export function createPostgresTestingPersistence(
       }
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<CertificationRecordRecord>;
       return {
         ...meta,
@@ -1046,7 +1126,11 @@ export function createPostgresTestingPersistence(
 
   const certificationEngine = createPostgresCertificationRepos(db);
 
-  const releaseReadiness = createPostgresCrudRepository<ReleaseReadinessCreate, ReleaseReadinessUpdate, ReleaseReadinessRecord>({
+  const releaseReadiness = createPostgresCrudRepository<
+    ReleaseReadinessCreate,
+    ReleaseReadinessUpdate,
+    ReleaseReadinessRecord
+  >({
     kind: "release_readiness",
     db,
     table: asTable(testingReleaseReadiness),
@@ -1062,7 +1146,11 @@ export function createPostgresTestingPersistence(
       }
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ReleaseReadinessRecord>;
       return {
         ...meta,
@@ -1081,7 +1169,11 @@ export function createPostgresTestingPersistence(
     rowToRecord: (row) => rowToReleaseReadiness(row as never),
   });
 
-  const coverageRecords = createPostgresCrudRepository<CoverageCreate, CoverageUpdate, CoverageRecord>({
+  const coverageRecords = createPostgresCrudRepository<
+    CoverageCreate,
+    CoverageUpdate,
+    CoverageRecord
+  >({
     kind: "coverage_record",
     db,
     table: asTable(testingCoverageRecord),
@@ -1094,7 +1186,11 @@ export function createPostgresTestingPersistence(
       if (input.kind !== undefined) validateCoverageKind(String(input.kind));
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<CoverageRecord>;
       return {
         ...meta,
@@ -1136,7 +1232,11 @@ export function createPostgresTestingPersistence(
       if (input.status !== undefined) validateDefectStatus(String(input.status));
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<DefectLinkRecord>;
       return {
         ...meta,
@@ -1187,7 +1287,11 @@ export function createPostgresTestingPersistence(
       assertRequiredString(String(input.computedAt ?? ""), "computedAt");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<QualitySnapshotRecord>;
       return {
         ...meta,
@@ -1218,7 +1322,11 @@ export function createPostgresTestingPersistence(
       assertRequiredString(String(input.computedAt ?? ""), "computedAt");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<RegressionAnalysisRecord>;
       return {
         ...meta,
@@ -1239,7 +1347,11 @@ export function createPostgresTestingPersistence(
     rowToRecord: (row) => rowToRegressionAnalysis(row as never),
   });
 
-  const automationDefinitions = createPostgresCrudRepository<AutomationDefinitionCreate, AutomationDefinitionUpdate, AutomationDefinitionRecord>({
+  const automationDefinitions = createPostgresCrudRepository<
+    AutomationDefinitionCreate,
+    AutomationDefinitionUpdate,
+    AutomationDefinitionRecord
+  >({
     kind: "automation_definition",
     db,
     table: asTable(testingAutomationDefinition),
@@ -1255,7 +1367,11 @@ export function createPostgresTestingPersistence(
       }
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<AutomationDefinitionRecord>;
       return {
         ...meta,
@@ -1274,7 +1390,11 @@ export function createPostgresTestingPersistence(
     rowToRecord: (row) => rowToAutomationDefinition(row as never),
   });
 
-  const traceabilityLinks = createPostgresCrudRepository<TraceabilityLinkCreate, TraceabilityLinkUpdate, TraceabilityLinkRecord>({
+  const traceabilityLinks = createPostgresCrudRepository<
+    TraceabilityLinkCreate,
+    TraceabilityLinkUpdate,
+    TraceabilityLinkRecord
+  >({
     kind: "traceability_link",
     db,
     table: asTable(testingTraceabilityLink),
@@ -1290,7 +1410,11 @@ export function createPostgresTestingPersistence(
       if (input.type !== undefined) validateTraceabilityType(String(input.type));
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<TraceabilityLinkRecord>;
       return {
         ...meta,
@@ -1306,7 +1430,11 @@ export function createPostgresTestingPersistence(
     rowToRecord: (row) => rowToTraceabilityLink(row as never),
   });
 
-  const configurations = createPostgresCrudRepository<ConfigurationCreate, ConfigurationUpdate, ConfigurationRecord>({
+  const configurations = createPostgresCrudRepository<
+    ConfigurationCreate,
+    ConfigurationUpdate,
+    ConfigurationRecord
+  >({
     kind: "configuration",
     db,
     table: asTable(testingConfiguration),
@@ -1315,7 +1443,11 @@ export function createPostgresTestingPersistence(
       assertRequiredString(input.configKey, "configKey");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<ConfigurationRecord>;
       return {
         ...meta,
@@ -1327,7 +1459,11 @@ export function createPostgresTestingPersistence(
     rowToRecord: (row) => rowToConfiguration(row as never),
   });
 
-  const registryEntries = createPostgresCrudRepository<RegistryEntryCreate, RegistryEntryUpdate, RegistryEntryRecord>({
+  const registryEntries = createPostgresCrudRepository<
+    RegistryEntryCreate,
+    RegistryEntryUpdate,
+    RegistryEntryRecord
+  >({
     kind: "registry_entry",
     db,
     table: asTable(testingRegistryEntry),
@@ -1338,7 +1474,11 @@ export function createPostgresTestingPersistence(
       assertRequiredString(input.name, "name");
     },
     toRecord: (ctx, input, existing) => {
-      const meta = baseMeta(ctx, input as { id?: string; organisationId?: string }, existing);
+      const meta = baseMeta(
+        ctx,
+        input as { id?: string; organisationId?: string },
+        existing,
+      );
       const data = input as Partial<RegistryEntryRecord>;
       return {
         ...meta,

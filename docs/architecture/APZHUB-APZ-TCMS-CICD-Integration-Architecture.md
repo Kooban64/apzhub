@@ -37,27 +37,27 @@ External systems supply **payloads** (Generic CI JSON today). Adapters are **par
 
 ## Packages
 
-| Package | Version |
-| ------- | ------- |
-| `@apzhub/testing-contracts` | **0.9.0** |
-| `@apzhub/testing-persistence` | **0.9.0** |
-| `@apzhub/testing-services` | **0.8.0** |
+| Package                              | Version    |
+| ------------------------------------ | ---------- |
+| `@apzhub/testing-contracts`          | **0.9.0**  |
+| `@apzhub/testing-persistence`        | **0.9.0**  |
+| `@apzhub/testing-services`           | **0.8.0**  |
 | `@apzhub/platform-service-contracts` | **0.11.0** |
-| `@apzhub/platform-services` | **0.11.0** |
+| `@apzhub/platform-services`          | **0.11.0** |
 
 ---
 
 ## Supported providers (design)
 
-| Provider | Status in APZTCMS-015 |
-| -------- | --------------------- |
-| Generic CI | **Implemented** (parse-only adapter) |
-| GitHub Actions | Kind reserved — adapter deferred (**APZTCMS-016**) |
-| GitLab CI | Kind reserved — future |
-| Azure DevOps Pipelines | Kind reserved — future |
-| Jenkins | Kind reserved — future |
-| CircleCI | Kind reserved — future |
-| Buildkite | Kind reserved — future |
+| Provider               | Status in APZTCMS-015                              |
+| ---------------------- | -------------------------------------------------- |
+| Generic CI             | **Implemented** (parse-only adapter)               |
+| GitHub Actions         | Kind reserved — adapter deferred (**APZTCMS-016**) |
+| GitLab CI              | Kind reserved — future                             |
+| Azure DevOps Pipelines | Kind reserved — future                             |
+| Jenkins                | Kind reserved — future                             |
+| CircleCI               | Kind reserved — future                             |
+| Buildkite              | Kind reserved — future                             |
 
 ---
 

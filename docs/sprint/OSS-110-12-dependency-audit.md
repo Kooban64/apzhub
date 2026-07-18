@@ -7,6 +7,7 @@
 ## Scope
 
 ### HTTP Handler/Route/Schema roots
+
 - `apps/web/app/api/v1/support-requests`
 - `apps/web/app/api/v1/support-organizations`
 - `apps/web/app/api/v1/support-groups`
@@ -17,9 +18,11 @@
 - `apps/web/lib/api/v1/schemas/support.ts`
 
 ### Platform Services Zammad Providers
+
 - `packages/platform-services/src/providers/zammad`
 
 ### Support Service Implementations
+
 - `packages/platform-services/src/services/support-service-impls.ts`
 - `packages/platform-services/src/services/support-mapping-helpers.ts`
 
@@ -28,6 +31,7 @@ Files scanned: **36**
 ## Rules
 
 ### HTTP Handler/Route/Schema layer
+
 - `handler-no-zammad-integration` — MUST NOT import `@apzhub/integration-zammad` or `integrations/zammad`
 - `handler-no-mapping-store` — MUST NOT import `EntityMappingStore` / `entity-mapping` / `mapping-store`
 - `handler-no-database` — MUST NOT import drizzle/postgres/prisma directly
@@ -35,11 +39,13 @@ Files scanned: **36**
 - `handler-no-zammad-rest-types` — MUST NOT reference Zammad internal REST API types
 
 ### Zammad Providers (platform-services)
+
 - `provider-no-nextjs` — MUST NOT import Next.js
 - `provider-no-apps-web` — MUST NOT import from apps/web
 - `provider-no-database` — MUST NOT import database clients
 
 ### Support Service Implementations
+
 - `service-impl-no-zammad-integration` — MUST NOT import `@apzhub/integration-zammad` directly
 - `service-impl-no-nextjs` — MUST NOT import Next.js
 
@@ -63,4 +69,3 @@ None — all boundary rules satisfied.
 
 - Machine-readable: `docs/sprint/OSS-110-12-dependency-audit.json`
 - Script: `scripts/support-vertical-dependency-audit.mjs`
-

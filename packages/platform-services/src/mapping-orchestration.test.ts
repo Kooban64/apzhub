@@ -37,14 +37,20 @@ describe("global ID generation", () => {
 
   it("rejects invalid and type-mismatched IDs", () => {
     expect(isValidGlobalId("proj_plane_abc")).toBe(false);
-    expect(() => assertGlobalId("not-an-id", TEST_CORRELATION_ID)).toThrow(PlatformServiceError);
+    expect(() => assertGlobalId("not-an-id", TEST_CORRELATION_ID)).toThrow(
+      PlatformServiceError,
+    );
     const id = generateGlobalId("workspace");
-    expect(() => assertGlobalId(id, TEST_CORRELATION_ID, "project")).toThrow(PlatformServiceError);
+    expect(() => assertGlobalId(id, TEST_CORRELATION_ID, "project")).toThrow(
+      PlatformServiceError,
+    );
   });
 
   it("extracts provisional Plane-style native IDs", () => {
     expect(extractProvisionalProviderNativeId("proj_plane_abc", "project")).toBe("abc");
-    expect(extractProvisionalProviderNativeId("sreq_zammad_42", "support_request")).toBe("42");
+    expect(
+      extractProvisionalProviderNativeId("sreq_zammad_42", "support_request"),
+    ).toBe("42");
     expect(extractProvisionalProviderNativeId("abc", "project")).toBe("abc");
   });
 });
@@ -64,9 +70,9 @@ describe("InMemoryEntityMappingStore", () => {
     });
 
     expect(created.revision).toBe(1);
-    expect(await store.resolveProviderNativeId({ platformId, tenantId: TEST_TENANT_ID })).toBe(
-      "native-1",
-    );
+    expect(
+      await store.resolveProviderNativeId({ platformId, tenantId: TEST_TENANT_ID }),
+    ).toBe("native-1");
     expect(
       await store.resolvePlatformId({
         tenantId: TEST_TENANT_ID,
@@ -145,7 +151,11 @@ describe("InMemoryEntityMappingStore", () => {
     expect(listed).toHaveLength(1);
 
     await expect(
-      store.update(childId, { status: "inactive", expectedRevision: 99 }, TEST_TENANT_ID),
+      store.update(
+        childId,
+        { status: "inactive", expectedRevision: 99 },
+        TEST_TENANT_ID,
+      ),
     ).rejects.toMatchObject({ code: "MAPPING_REVISION_CONFLICT" });
 
     const deactivated = await store.deactivate(childId, TEST_TENANT_ID);
@@ -473,9 +483,13 @@ describe("mapping-aware team and sprint operations", () => {
     expect(isValidGlobalId(members.items[0]!.id)).toBe(true);
     expect(members.items[0]!.projectId).toBe(projectId);
 
-    const sprint = await services.project.createSprint(TEST_SERVICE_CONTEXT, projectId, {
-      name: "Sprint 1",
-    });
+    const sprint = await services.project.createSprint(
+      TEST_SERVICE_CONTEXT,
+      projectId,
+      {
+        name: "Sprint 1",
+      },
+    );
     expect(isValidGlobalId(sprint.id)).toBe(true);
     expect(sprint.projectId).toBe(projectId);
 
@@ -570,7 +584,8 @@ describe("PlatformServiceGateway", () => {
       }),
     ).toThrow(PlatformServiceError);
 
-    const listed = await services.gateway.workspaces.listWorkspaces(TEST_SERVICE_CONTEXT);
+    const listed =
+      await services.gateway.workspaces.listWorkspaces(TEST_SERVICE_CONTEXT);
     expect(listed.items).toHaveLength(1);
   });
 });
@@ -621,10 +636,14 @@ describe("reconciliation reporting", () => {
     });
 
     expect(report.issueCount).toBeGreaterThan(0);
-    expect(report.issues.some((i) => i.kind === "provider_entity_missing_mapping")).toBe(true);
-    expect(report.issues.some((i) => i.kind === "mapping_missing_provider_entity")).toBe(true);
-    expect(report.issues.some((i) => i.kind === "inactive_provider_with_active_mapping")).toBe(
-      true,
-    );
+    expect(
+      report.issues.some((i) => i.kind === "provider_entity_missing_mapping"),
+    ).toBe(true);
+    expect(
+      report.issues.some((i) => i.kind === "mapping_missing_provider_entity"),
+    ).toBe(true);
+    expect(
+      report.issues.some((i) => i.kind === "inactive_provider_with_active_mapping"),
+    ).toBe(true);
   });
 });

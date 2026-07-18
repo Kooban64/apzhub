@@ -254,7 +254,7 @@ The backlog originally scoped OSS-101-05 as ProjectService + UI. Owner milestone
 
 **Deliverables:**
 
-- [PLANE-TASK-SERVICE.md](../integrations/plane/docs/PLANE-TASK-SERVICE.md)
+- [PLANE-TASK-SERVICE.md](../../integrations/plane/docs/PLANE-TASK-SERVICE.md)
 - [OSS-101-06 Completion Report](../sprint/OSS-101-06-completion-report.md)
 
 **Stop condition:** ✅ Complete — await owner approval before OSS-110-08 (recommended) or OSS-101-07.

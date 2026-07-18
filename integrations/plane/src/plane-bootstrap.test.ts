@@ -1,8 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  createInMemoryCapabilityRegistration,
-} from "@apzhub/integration-sdk/adapter";
+import { createInMemoryCapabilityRegistration } from "@apzhub/integration-sdk/adapter";
 
 import {
   createPlaneBootstrapConfiguration,
@@ -22,9 +20,13 @@ describe("Plane bootstrap configuration", () => {
     });
 
     expect(configuration.manifest.integrationId).toBe(PLANE_INTEGRATION_ID);
-    expect(configuration.manifest.declaredCapabilities).toEqual([...PLANE_SDK_CAPABILITIES]);
+    expect(configuration.manifest.declaredCapabilities).toEqual([
+      ...PLANE_SDK_CAPABILITIES,
+    ]);
     expect(configuration.connection?.baseUrl).toBe(DEFAULT_TEST_PLANE_CONFIG.baseUrl);
-    expect(configuration.connection?.credentialRef).toBe(DEFAULT_TEST_PLANE_CONFIG.apiTokenRef);
+    expect(configuration.connection?.credentialRef).toBe(
+      DEFAULT_TEST_PLANE_CONFIG.apiTokenRef,
+    );
     expect(configuration.connection?.headerName).toBe("X-Api-Key");
     expect(configuration.connection?.metadata?.workspaceSlug).toBe("apzhub");
     expect(configuration.connection?.metadata?.extendedCapabilities).toBe(

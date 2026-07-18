@@ -60,16 +60,20 @@ const libFiles = walk(join(ROOT, "apps/web/lib/administration")).filter(
   (f) => !f.includes(".test."),
 );
 
-scan([...componentFiles, ...libFiles], [
-  {
-    rule: "ui-no-admin-core",
-    pattern: /@apzhub\/admin-core|@apzhub\/admin-persistence/,
-  },
-  {
-    rule: "ui-no-platform-services",
-    pattern: /@apzhub\/platform-services|getPlatformServiceGateway|PlatformServiceGateway/,
-  },
-]);
+scan(
+  [...componentFiles, ...libFiles],
+  [
+    {
+      rule: "ui-no-admin-core",
+      pattern: /@apzhub\/admin-core|@apzhub\/admin-persistence/,
+    },
+    {
+      rule: "ui-no-platform-services",
+      pattern:
+        /@apzhub\/platform-services|getPlatformServiceGateway|PlatformServiceGateway/,
+    },
+  ],
+);
 
 scan(componentFiles, [
   {
@@ -91,7 +95,8 @@ scan(componentFiles, [
   },
   {
     rule: "ui-no-runtime-admin-words",
-    pattern: /\b(Start Module|Stop Module|Deploy Module|Grant Permission|Revoke Permission|Provision)\b/,
+    pattern:
+      /\b(Start Module|Stop Module|Deploy Module|Grant Permission|Revoke Permission|Provision)\b/,
   },
 ]);
 

@@ -67,9 +67,7 @@ function toDate(value?: string): Date | null {
   return value ? new Date(value) : null;
 }
 
-function mapNotification(
-  row: typeof platformNotification.$inferSelect,
-): Notification {
+function mapNotification(row: typeof platformNotification.$inferSelect): Notification {
   return {
     id: asNotificationId(row.id),
     tenantId: row.tenantId,
@@ -80,12 +78,8 @@ function mapNotification(
     body: row.body ?? undefined,
     status: row.status as NotificationStatus,
     priority: row.priority as NotificationPriority,
-    categoryId: row.categoryId
-      ? asNotificationCategoryId(row.categoryId)
-      : undefined,
-    templateId: row.templateId
-      ? asNotificationTemplateId(row.templateId)
-      : undefined,
+    categoryId: row.categoryId ? asNotificationCategoryId(row.categoryId) : undefined,
+    templateId: row.templateId ? asNotificationTemplateId(row.templateId) : undefined,
     channelKinds: (row.channelKindsJson ?? []) as NotificationChannelKind[],
     expiresAt: row.expiresAt?.toISOString(),
     archivedAt: row.archivedAt?.toISOString(),
@@ -126,9 +120,7 @@ function mapTemplate(
     key: row.key,
     name: row.name,
     description: row.description ?? undefined,
-    categoryId: row.categoryId
-      ? asNotificationCategoryId(row.categoryId)
-      : undefined,
+    categoryId: row.categoryId ? asNotificationCategoryId(row.categoryId) : undefined,
     defaultPriority: row.defaultPriority as NotificationPriority,
     defaultChannelKinds: (row.defaultChannelKindsJson ??
       []) as NotificationChannelKind[],
@@ -182,9 +174,7 @@ function mapPreference(
     tenantId: row.tenantId,
     organisationId: row.organisationId ?? undefined,
     userId: row.userId,
-    categoryId: row.categoryId
-      ? asNotificationCategoryId(row.categoryId)
-      : undefined,
+    categoryId: row.categoryId ? asNotificationCategoryId(row.categoryId) : undefined,
     channelKind: row.channelKind as NotificationChannelKind,
     enabled: row.enabled,
     quietHours: row.quietHours ?? undefined,
@@ -193,9 +183,7 @@ function mapPreference(
   };
 }
 
-function mapRule(
-  row: typeof platformNotificationRule.$inferSelect,
-): NotificationRule {
+function mapRule(row: typeof platformNotificationRule.$inferSelect): NotificationRule {
   return {
     id: asNotificationRuleId(row.id),
     tenantId: row.tenantId,
@@ -203,9 +191,7 @@ function mapRule(
     key: row.key,
     name: row.name,
     enabled: row.enabled,
-    categoryId: row.categoryId
-      ? asNotificationCategoryId(row.categoryId)
-      : undefined,
+    categoryId: row.categoryId ? asNotificationCategoryId(row.categoryId) : undefined,
     priority: row.priority as NotificationPriority,
     channelKinds: (row.channelKindsJson ?? []) as NotificationChannelKind[],
     conditionRef: row.conditionRef ?? undefined,
@@ -662,9 +648,7 @@ export function createPostgresNotificationRepositories(
       const rows = await db
         .select()
         .from(platformNotificationReference)
-        .where(
-          eq(platformNotificationReference.notificationId, notificationId),
-        );
+        .where(eq(platformNotificationReference.notificationId, notificationId));
       return rows.map(mapReference);
     },
   };
@@ -686,10 +670,7 @@ export function createPostgresNotificationRepositories(
         .select()
         .from(platformNotificationAttachmentMetadata)
         .where(
-          eq(
-            platformNotificationAttachmentMetadata.notificationId,
-            notificationId,
-          ),
+          eq(platformNotificationAttachmentMetadata.notificationId, notificationId),
         );
       return rows.map(mapAttachment);
     },
@@ -712,12 +693,7 @@ export function createPostgresNotificationRepositories(
       const rows = await db
         .select()
         .from(platformNotificationDeliveryAttempt)
-        .where(
-          eq(
-            platformNotificationDeliveryAttempt.notificationId,
-            notificationId,
-          ),
-        );
+        .where(eq(platformNotificationDeliveryAttempt.notificationId, notificationId));
       return rows.map(mapDeliveryAttempt);
     },
   };

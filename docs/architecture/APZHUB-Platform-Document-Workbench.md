@@ -20,19 +20,19 @@ Workbench (PlatformDocumentsView)
 
 ## Sections
 
-| Section | Path | Content |
-|---------|------|---------|
-| Overview | `/workspace/documents/overview` | Summary + document list |
-| Documents | `/workspace/documents/documents` | Document list / details |
-| Versions | `/workspace/documents/versions` | Version + checksum metadata |
-| Collections | `/workspace/documents/collections` | Collection assignment rollup |
-| Folders | `/workspace/documents/folders` | Folder assignment rollup |
-| Tags | `/workspace/documents/tags` | Tag rollup |
+| Section       | Path                                 | Content                        |
+| ------------- | ------------------------------------ | ------------------------------ |
+| Overview      | `/workspace/documents/overview`      | Summary + document list        |
+| Documents     | `/workspace/documents/documents`     | Document list / details        |
+| Versions      | `/workspace/documents/versions`      | Version + checksum metadata    |
+| Collections   | `/workspace/documents/collections`   | Collection assignment rollup   |
+| Folders       | `/workspace/documents/folders`       | Folder assignment rollup       |
+| Tags          | `/workspace/documents/tags`          | Tag rollup                     |
 | Relationships | `/workspace/documents/relationships` | Read-only relationship context |
-| Retention | `/workspace/documents/retention` | Retention IDs |
-| Audit | `/workspace/documents/audit` | Audit history |
-| Diagnostics | `/workspace/documents/diagnostics` | Safe readiness metadata |
-| Metadata | `/workspace/documents/metadata` | Metadata-focused list |
+| Retention     | `/workspace/documents/retention`     | Retention IDs                  |
+| Audit         | `/workspace/documents/audit`         | Audit history                  |
+| Diagnostics   | `/workspace/documents/diagnostics`   | Safe readiness metadata        |
+| Metadata      | `/workspace/documents/metadata`      | Metadata-focused list          |
 
 ## Commands
 

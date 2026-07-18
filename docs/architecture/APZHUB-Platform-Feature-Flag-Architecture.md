@@ -36,7 +36,9 @@ Precedence (highest first): **user → module → product → tenant → global 
 import { resolveSessionGovernance } from "@apzhub/platform-governance/server";
 
 const snapshot = await resolveSessionGovernance({
-  userId, tenantId, productKey: "law-platform",
+  userId,
+  tenantId,
+  productKey: "law-platform",
 });
 const trustEnabled = snapshot.featureFlags["law.trust.accounting"];
 ```

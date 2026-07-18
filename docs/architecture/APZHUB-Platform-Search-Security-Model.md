@@ -9,13 +9,13 @@
 
 Every search result path must respect:
 
-| Control | Enforcement |
-|---------|-------------|
-| Tenant | Hit `tenantId` must match request context |
-| Organisation | When both set, org ids must match |
-| Permissions | Actor requires `search.query` (or legacy `search.execute`/`search.read`, or `search.*`) |
-| Classification | Declared on `SearchMetadata`; product/service layers filter |
-| Product ownership | `productId` / `sourceId` identify owning product |
+| Control           | Enforcement                                                                             |
+| ----------------- | --------------------------------------------------------------------------------------- |
+| Tenant            | Hit `tenantId` must match request context                                               |
+| Organisation      | When both set, org ids must match                                                       |
+| Permissions       | Actor requires `search.query` (or legacy `search.execute`/`search.read`, or `search.*`) |
+| Classification    | Declared on `SearchMetadata`; product/service layers filter                             |
+| Product ownership | `productId` / `sourceId` identify owning product                                        |
 
 ## Helpers
 

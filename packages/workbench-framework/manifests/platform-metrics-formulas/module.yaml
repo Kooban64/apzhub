@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-formulas
+name: Metric Formulas
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metric Formulas sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metric Formulas
+    icon: function-square
+    route: /workspace/metrics/formulas
+    order: 100
+    permission: metrics.definition
+  view:
+    title: Metric Formulas
+    workspace: metrics
+    route: /workspace/metrics/formulas
+    permission: metrics.definition

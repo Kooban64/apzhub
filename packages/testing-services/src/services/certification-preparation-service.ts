@@ -82,9 +82,7 @@ export function createCertificationPreparationService(
     }
 
     const approvals = (await rt.persistence.approvals.list(rctx)).items.filter((a) =>
-      certificationRecordId
-        ? a.certificationRecordId === certificationRecordId
-        : true,
+      certificationRecordId ? a.certificationRecordId === certificationRecordId : true,
     );
     const pendingApprovalIds = approvals
       .filter((a) => a.status === "pending" || a.status === "rework")

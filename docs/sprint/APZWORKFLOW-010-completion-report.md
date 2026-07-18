@@ -62,15 +62,15 @@ Consolidated ≥95% lines/functions on engine vertical scopes — [Coverage Base
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:workflow-engine-vertical` | PASS |
-| Prior 006–009 audits (nested) | PASS |
-| `pnpm openapi:validate:platform` | PASS |
-| Vitest `testing/workflow-engine-vertical` | PASS |
-| Vitest workbench/client/handler regressions | PASS |
-| Lint (engine workbench scoped) | PASS |
-| Playwright mock (`apzworkflow-009-*`) | Shipped; live LIMITED (external) |
+| Gate                                        | Result                           |
+| ------------------------------------------- | -------------------------------- |
+| `pnpm audit:workflow-engine-vertical`       | PASS                             |
+| Prior 006–009 audits (nested)               | PASS                             |
+| `pnpm openapi:validate:platform`            | PASS                             |
+| Vitest `testing/workflow-engine-vertical`   | PASS                             |
+| Vitest workbench/client/handler regressions | PASS                             |
+| Lint (engine workbench scoped)              | PASS                             |
+| Playwright mock (`apzworkflow-009-*`)       | Shipped; live LIMITED (external) |
 
 ## Production Classification
 

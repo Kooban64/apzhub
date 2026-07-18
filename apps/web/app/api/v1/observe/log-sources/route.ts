@@ -19,13 +19,25 @@ export const POST = withPlatformApiAuth(handleCreateLogSource, {
 });
 
 export async function PATCH(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","POST"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "POST"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }
 
 export async function PUT(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","POST"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "POST"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }
 
 export async function DELETE(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","POST"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "POST"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }

@@ -48,9 +48,7 @@ export type PlatformNotificationServiceDeps = {
 };
 
 export type PlatformNotificationDomainService = {
-  listNotifications(
-    ctx: NotificationRequestContext,
-  ): Promise<readonly Notification[]>;
+  listNotifications(ctx: NotificationRequestContext): Promise<readonly Notification[]>;
   getNotification(
     ctx: NotificationRequestContext,
     notificationId: Notification["id"],
@@ -75,9 +73,7 @@ export type PlatformNotificationDomainService = {
     ctx: NotificationRequestContext,
     input: TransitionNotificationLifecycleInput,
   ): Promise<Notification>;
-  validateNotification(
-    notification: Notification,
-  ): NotificationValidationResult;
+  validateNotification(notification: Notification): NotificationValidationResult;
   listTemplates(
     ctx: NotificationRequestContext,
   ): Promise<readonly NotificationTemplate[]>;
@@ -510,8 +506,7 @@ export function createPlatformNotificationService(
               ? input.categoryId
               : existing.categoryId,
         defaultPriority: input.defaultPriority ?? existing.defaultPriority,
-        defaultChannelKinds:
-          input.defaultChannelKinds ?? existing.defaultChannelKinds,
+        defaultChannelKinds: input.defaultChannelKinds ?? existing.defaultChannelKinds,
         subjectTemplate:
           input.subjectTemplate === null
             ? undefined

@@ -7,25 +7,25 @@
 
 ## Contract surface (all products)
 
-| Operation | Purpose |
-| --------- | ------- |
-| `publish` | Accept validated canonical draft into publication sink |
-| `update` | Update previously published entity |
-| `remove` | Soft-remove / tombstone from sink |
-| `validate` | Fail-closed local + framework validation |
-| `preview` | Redacted dry-run draft |
-| `diagnostics` | Product diagnostics snapshot |
-| `lifecycle` | Lifecycle transition via framework |
-| `statistics` | In-process publication metrics |
+| Operation     | Purpose                                                |
+| ------------- | ------------------------------------------------------ |
+| `publish`     | Accept validated canonical draft into publication sink |
+| `update`      | Update previously published entity                     |
+| `remove`      | Soft-remove / tombstone from sink                      |
+| `validate`    | Fail-closed local + framework validation               |
+| `preview`     | Redacted dry-run draft                                 |
+| `diagnostics` | Product diagnostics snapshot                           |
+| `lifecycle`   | Lifecycle transition via framework                     |
+| `statistics`  | In-process publication metrics                         |
 
 ## Factory patterns
 
-| Product | Production factory | Test factory |
-| ------- | ------------------ | ------------ |
-| Projects | `createProjectsSearchAdapter` | (defaults to in-memory framework) |
-| Support | `createSupportSearchAdapter` | (defaults to in-memory framework) |
+| Product   | Production factory                                      | Test factory                          |
+| --------- | ------------------------------------------------------- | ------------------------------------- |
+| Projects  | `createProjectsSearchAdapter`                           | (defaults to in-memory framework)     |
+| Support   | `createSupportSearchAdapter`                            | (defaults to in-memory framework)     |
 | Documents | `createDocumentsSearchAdapter` (explicit sink required) | `createDocumentsSearchAdapterForTest` |
-| Testing | `createTestingSearchAdapter` (explicit sink required) | `createTestingSearchAdapterForTest` |
+| Testing   | `createTestingSearchAdapter` (explicit sink required)   | `createTestingSearchAdapterForTest`   |
 | Reporting | `createReportingSearchAdapter` (explicit sink required) | `createReportingSearchAdapterForTest` |
 
 ## Evidence

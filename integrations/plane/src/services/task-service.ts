@@ -8,11 +8,12 @@ import type {
   UpdateTaskInput,
 } from "@apzhub/platform-service-contracts";
 
-import type { PlaneIssueRecord, PlaneListQuery, PlanePaginatedResponse } from "../internal/plane-api-types";
-import {
-  extractPlaneId,
-  extractTaskPlaneId,
-} from "../mappers/mapper-context";
+import type {
+  PlaneIssueRecord,
+  PlaneListQuery,
+  PlanePaginatedResponse,
+} from "../internal/plane-api-types";
+import { extractPlaneId, extractTaskPlaneId } from "../mappers/mapper-context";
 import {
   mapPlaneIssue,
   mapTaskToPlaneCreateBody,
@@ -52,14 +53,15 @@ const TASK_SORT_FIELDS = [
 const PRIORITY_VALUES = new Set(["none", "low", "medium", "high", "urgent"]);
 
 /** Canonical TaskSortField → Plane `order_by` field names (internal only). */
-const TASK_SORT_TO_PLANE: Readonly<Record<(typeof TASK_SORT_FIELDS)[number], string>> = {
-  title: "name",
-  status: "state__name",
-  priority: "priority",
-  rank: "sort_order",
-  createdAt: "created_at",
-  updatedAt: "updated_at",
-};
+const TASK_SORT_TO_PLANE: Readonly<Record<(typeof TASK_SORT_FIELDS)[number], string>> =
+  {
+    title: "name",
+    status: "state__name",
+    priority: "priority",
+    rank: "sort_order",
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+  };
 
 function buildIssueListQuery(
   page: PageRequest,
@@ -83,7 +85,9 @@ function buildIssueListQuery(
     search: filter.search,
     archived: filter.archived,
     state: filter.statusId ? extractPlaneId(filter.statusId, "status") : undefined,
-    assignees: filter.assigneeId ? extractPlaneId(filter.assigneeId, "user") : undefined,
+    assignees: filter.assigneeId
+      ? extractPlaneId(filter.assigneeId, "user")
+      : undefined,
     labels: filter.labelId ? extractPlaneId(filter.labelId, "label") : undefined,
     cycle: filter.sprintId ? extractPlaneId(filter.sprintId, "sprint") : undefined,
     module: filter.projectModuleId
@@ -91,7 +95,9 @@ function buildIssueListQuery(
       : undefined,
     parent: filter.parentTaskId ? extractTaskPlaneId(filter.parentTaskId) : undefined,
     priority:
-      filter.priority && PRIORITY_VALUES.has(filter.priority) ? filter.priority : undefined,
+      filter.priority && PRIORITY_VALUES.has(filter.priority)
+        ? filter.priority
+        : undefined,
     created_at__gte: filter.createdAfter,
     created_at__lte: filter.createdBefore,
     updated_at__gte: filter.updatedAfter,
@@ -99,7 +105,9 @@ function buildIssueListQuery(
   };
 }
 
-function validateTaskFilter(filter: TaskListFilter): ReturnType<typeof mergeValidation> {
+function validateTaskFilter(
+  filter: TaskListFilter,
+): ReturnType<typeof mergeValidation> {
   const issues: string[] = [];
   if (filter.priority && !PRIORITY_VALUES.has(filter.priority)) {
     issues.push(`unsupported priority filter: ${filter.priority}`);
@@ -151,7 +159,9 @@ export class PlaneTaskService {
 
       result = {
         ...result,
-        items: applyClientFilters(result.items, (item) => matchesClientFilter(item, filter)),
+        items: applyClientFilters(result.items, (item) =>
+          matchesClientFilter(item, filter),
+        ),
       };
 
       if (sort.length > 0) {
@@ -246,7 +256,10 @@ export class PlaneTaskService {
 
     const body = mapTaskToPlaneUpdateBody(input);
     if (Object.keys(body).length === 0) {
-      assertValid({ ok: false, issues: ["at least one update field is required"] }, "tasks.update");
+      assertValid(
+        { ok: false, issues: ["at least one update field is required"] },
+        "tasks.update",
+      );
     }
 
     return this.deps.runner.run(context, "plane.tasks.update", async () => {
@@ -445,9 +458,15 @@ export class PlaneTaskService {
     taskId: string,
     cycleId: string,
   ): Promise<Task> {
-    return this.updateRelation(context, projectId, taskId, {
-      cycle: extractPlaneId(cycleId, "sprint"),
-    }, "plane.tasks.add_cycle");
+    return this.updateRelation(
+      context,
+      projectId,
+      taskId,
+      {
+        cycle: extractPlaneId(cycleId, "sprint"),
+      },
+      "plane.tasks.add_cycle",
+    );
   }
 
   async removeFromCycle(
@@ -455,7 +474,13 @@ export class PlaneTaskService {
     projectId: string,
     taskId: string,
   ): Promise<Task> {
-    return this.updateRelation(context, projectId, taskId, { cycle: null }, "plane.tasks.remove_cycle");
+    return this.updateRelation(
+      context,
+      projectId,
+      taskId,
+      { cycle: null },
+      "plane.tasks.remove_cycle",
+    );
   }
 
   async addToModule(
@@ -464,9 +489,15 @@ export class PlaneTaskService {
     taskId: string,
     moduleId: string,
   ): Promise<Task> {
-    return this.updateRelation(context, projectId, taskId, {
-      module: extractPlaneId(moduleId, "module"),
-    }, "plane.tasks.add_module");
+    return this.updateRelation(
+      context,
+      projectId,
+      taskId,
+      {
+        module: extractPlaneId(moduleId, "module"),
+      },
+      "plane.tasks.add_module",
+    );
   }
 
   async removeFromModule(

@@ -96,9 +96,9 @@ describe("SupportUsersView", () => {
     render(wrap(<SupportUsersView />));
     await waitFor(() => expect(screen.getByTestId("support-error")).toBeTruthy());
     expect(screen.getByTestId("support-error").textContent).toMatch(/permission/i);
-    expect(screen.getByTestId("support-error").textContent?.toLowerCase()).not.toContain(
-      "zammad",
-    );
+    expect(
+      screen.getByTestId("support-error").textContent?.toLowerCase(),
+    ).not.toContain("zammad");
   });
 
   it("renders user detail read-only", async () => {

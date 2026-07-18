@@ -39,10 +39,7 @@ export function requireFound<T>(
 
 export interface DocumentRepositoryPort {
   create(ctx: DocumentRequestContext, document: Document): Promise<Document>;
-  get(
-    ctx: DocumentRequestContext,
-    documentId: DocumentId,
-  ): Promise<Document | null>;
+  get(ctx: DocumentRequestContext, documentId: DocumentId): Promise<Document | null>;
   update(ctx: DocumentRequestContext, document: Document): Promise<Document>;
   list(ctx: DocumentRequestContext): Promise<readonly Document[]>;
 }
@@ -60,14 +57,8 @@ export interface DocumentMetadataRepositoryPort {
 
 export interface DocumentTagRepositoryPort {
   list(ctx: DocumentRequestContext): Promise<readonly DocumentTag[]>;
-  get(
-    ctx: DocumentRequestContext,
-    tagId: DocumentTagId,
-  ): Promise<DocumentTag | null>;
-  ensure(
-    ctx: DocumentRequestContext,
-    name: string,
-  ): Promise<DocumentTag>;
+  get(ctx: DocumentRequestContext, tagId: DocumentTagId): Promise<DocumentTag | null>;
+  ensure(ctx: DocumentRequestContext, name: string): Promise<DocumentTag>;
 }
 
 export interface DocumentRelationshipRepositoryPort {
@@ -82,10 +73,7 @@ export interface DocumentRelationshipRepositoryPort {
 }
 
 export interface DocumentAuditRepositoryPort {
-  append(
-    ctx: DocumentRequestContext,
-    audit: DocumentAudit,
-  ): Promise<DocumentAudit>;
+  append(ctx: DocumentRequestContext, audit: DocumentAudit): Promise<DocumentAudit>;
   listByDocument(
     ctx: DocumentRequestContext,
     documentId: DocumentId,
@@ -100,10 +88,7 @@ export interface DocumentCategoryRepositoryPort {
 }
 
 export interface DocumentFolderRepositoryPort {
-  get(
-    ctx: DocumentRequestContext,
-    folderId: string,
-  ): Promise<DocumentFolder | null>;
+  get(ctx: DocumentRequestContext, folderId: string): Promise<DocumentFolder | null>;
 }
 
 export interface DocumentRetentionRepositoryPort {

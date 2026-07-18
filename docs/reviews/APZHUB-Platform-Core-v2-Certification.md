@@ -28,12 +28,12 @@ Platform Core v2 includes all capabilities delivered through PRH-001–PRH-010 a
 
 ## Success criteria
 
-| Criterion | Result |
-|-----------|--------|
+| Criterion                                      | Result                                        |
+| ---------------------------------------------- | --------------------------------------------- |
 | Every product consumes Platform Core correctly | ✅ Law Platform + Trust via platform packages |
-| No architectural violations | ✅ One cycle remediated; none remaining |
-| Platform Core v2 internally consistent | ✅ Registry alignment verified |
-| Final certification verdict | ✅ **CERTIFIED WITH OBSERVATIONS** |
+| No architectural violations                    | ✅ One cycle remediated; none remaining       |
+| Platform Core v2 internally consistent         | ✅ Registry alignment verified                |
+| Final certification verdict                    | ✅ **CERTIFIED WITH OBSERVATIONS**            |
 
 ---
 
@@ -48,15 +48,15 @@ Platform Core v2 includes all capabilities delivered through PRH-001–PRH-010 a
 
 ## Evidence
 
-| Artifact | Location |
-|----------|----------|
-| Architecture Compliance Report | `docs/reviews/APZHUB-Architecture-Compliance-Report.md` |
-| Capability Certification Matrix | `docs/reviews/APZHUB-Capability-Certification-Matrix.md` |
-| Dependency Review | `docs/reviews/APZHUB-Platform-Dependency-Review.md` |
-| Package Review | `docs/reviews/APZHUB-Platform-Package-Review.md` |
-| Boundary Review | `docs/reviews/APZHUB-Platform-Boundary-Review.md` |
-| Reliability Validation | `docs/reviews/APZHUB-Reliability-Validation-Report.md` — PASS |
-| Compliance tests | `packages/platform-operations/src/platform-architecture-compliance.test.ts` |
+| Artifact                        | Location                                                                    |
+| ------------------------------- | --------------------------------------------------------------------------- |
+| Architecture Compliance Report  | `docs/reviews/APZHUB-Architecture-Compliance-Report.md`                     |
+| Capability Certification Matrix | `docs/reviews/APZHUB-Capability-Certification-Matrix.md`                    |
+| Dependency Review               | `docs/reviews/APZHUB-Platform-Dependency-Review.md`                         |
+| Package Review                  | `docs/reviews/APZHUB-Platform-Package-Review.md`                            |
+| Boundary Review                 | `docs/reviews/APZHUB-Platform-Boundary-Review.md`                           |
+| Reliability Validation          | `docs/reviews/APZHUB-Reliability-Validation-Report.md` — PASS               |
+| Compliance tests                | `packages/platform-operations/src/platform-architecture-compliance.test.ts` |
 
 ---
 

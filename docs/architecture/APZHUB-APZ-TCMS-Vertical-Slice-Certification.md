@@ -32,13 +32,13 @@ No new business functionality, APIs, UI, domain behaviour, AI, Event Bus, notifi
 
 ### Why not full PRODUCTION_READY
 
-| Limitation | Category | Impact |
-| ---------- | -------- | ------ |
-| Playwright E2E not executed in this session (`:3300` unavailable) | Evidence gap | Specs exist (`apztcms-010`, `apztcms-012`); live browser certification deferred to ops re-run |
-| `apps/web` excluded from root Vitest coverage include | Measurement | UI/handler line % not in consolidated V8 report; certified via unit/component pass + boundary tests |
-| Pre-existing Plane/Zammad / harness typecheck debt | Cross-product | Outside TCMS domain packages (domain typecheck **PASS**) |
-| Explicit product exclusions (AI, Event Bus, binary evidence, live runners) | Design | Accepted constraints — not defects |
-| Typed-client collection gaps carried from APZTCMS-012 | Known debt | Empty collections where HTTP endpoints absent |
+| Limitation                                                                 | Category      | Impact                                                                                              |
+| -------------------------------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------- |
+| Playwright E2E not executed in this session (`:3300` unavailable)          | Evidence gap  | Specs exist (`apztcms-010`, `apztcms-012`); live browser certification deferred to ops re-run       |
+| `apps/web` excluded from root Vitest coverage include                      | Measurement   | UI/handler line % not in consolidated V8 report; certified via unit/component pass + boundary tests |
+| Pre-existing Plane/Zammad / harness typecheck debt                         | Cross-product | Outside TCMS domain packages (domain typecheck **PASS**)                                            |
+| Explicit product exclusions (AI, Event Bus, binary evidence, live runners) | Design        | Accepted constraints — not defects                                                                  |
+| Typed-client collection gaps carried from APZTCMS-012                      | Known debt    | Empty collections where HTTP endpoints absent                                                       |
 
 ### Why not READY_WITH_LIMITATIONS / NOT_READY
 
@@ -48,35 +48,35 @@ Architecture, dependency, and boundary audits report **zero violations**. Domain
 
 ## Layer outcomes
 
-| Layer | Outcome |
-| ----- | ------- |
-| Architecture / dependency / boundary | **PASS** — 0 violations |
-| HTTP API + OpenAPI | **PASS** — OpenAPI valid; 73 routes; gateway-only handlers |
-| Typed client | **PASS** — `/api/v1/testing` scoped; abort/credentials/errors covered |
-| Workbench UI | **PASS** (unit/component) — presentation-only; permissions/nav/views covered |
-| Domain manual / automation / quality / certification | **PASS** — domain Vitest green |
-| Platform services + gateway | **PASS** — `gateway.testing.*`; boundary tests |
-| Persistence + PostgreSQL | **PASS** — persistence suite green |
-| Security | **PASS** with documented exclusions |
-| Accessibility | **PASS** (component + Playwright specs); live axe run deferred |
-| Performance | **BASELINE COLLECTED** — measure-only |
-| Coverage (packages) | **PASS** for domain/platform testing packages (see Quality Report) |
-| Playwright live | **NOT RUN** this session — limitation |
+| Layer                                                | Outcome                                                                      |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Architecture / dependency / boundary                 | **PASS** — 0 violations                                                      |
+| HTTP API + OpenAPI                                   | **PASS** — OpenAPI valid; 73 routes; gateway-only handlers                   |
+| Typed client                                         | **PASS** — `/api/v1/testing` scoped; abort/credentials/errors covered        |
+| Workbench UI                                         | **PASS** (unit/component) — presentation-only; permissions/nav/views covered |
+| Domain manual / automation / quality / certification | **PASS** — domain Vitest green                                               |
+| Platform services + gateway                          | **PASS** — `gateway.testing.*`; boundary tests                               |
+| Persistence + PostgreSQL                             | **PASS** — persistence suite green                                           |
+| Security                                             | **PASS** with documented exclusions                                          |
+| Accessibility                                        | **PASS** (component + Playwright specs); live axe run deferred               |
+| Performance                                          | **BASELINE COLLECTED** — measure-only                                        |
+| Coverage (packages)                                  | **PASS** for domain/platform testing packages (see Quality Report)           |
+| Playwright live                                      | **NOT RUN** this session — limitation                                        |
 
 ---
 
 ## Companion reports
 
-| Document | Path |
-| -------- | ---- |
-| Production Readiness | [APZTCMS-013-production-readiness.md](../reviews/APZTCMS-013-production-readiness.md) |
+| Document                                   | Path                                                                                                                      |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| Production Readiness                       | [APZTCMS-013-production-readiness.md](../reviews/APZTCMS-013-production-readiness.md)                                     |
 | Architecture / Dependency / Boundary Audit | [APZTCMS-013-architecture-dependency-boundary-audit.md](../reviews/APZTCMS-013-architecture-dependency-boundary-audit.md) |
-| API Audit | [APZTCMS-013-api-audit.md](../reviews/APZTCMS-013-api-audit.md) |
-| Security Audit | [APZTCMS-013-security-audit.md](../reviews/APZTCMS-013-security-audit.md) |
-| Accessibility Report | [APZTCMS-013-accessibility-report.md](../reviews/APZTCMS-013-accessibility-report.md) |
-| Performance Baseline | [APZTCMS-013-performance-baseline.md](../reviews/APZTCMS-013-performance-baseline.md) |
-| Quality Report | [APZTCMS-013-quality-report.md](../reviews/APZTCMS-013-quality-report.md) |
-| Completion Report | [APZTCMS-013-completion-report.md](../sprint/APZTCMS-013-completion-report.md) |
+| API Audit                                  | [APZTCMS-013-api-audit.md](../reviews/APZTCMS-013-api-audit.md)                                                           |
+| Security Audit                             | [APZTCMS-013-security-audit.md](../reviews/APZTCMS-013-security-audit.md)                                                 |
+| Accessibility Report                       | [APZTCMS-013-accessibility-report.md](../reviews/APZTCMS-013-accessibility-report.md)                                     |
+| Performance Baseline                       | [APZTCMS-013-performance-baseline.md](../reviews/APZTCMS-013-performance-baseline.md)                                     |
+| Quality Report                             | [APZTCMS-013-quality-report.md](../reviews/APZTCMS-013-quality-report.md)                                                 |
+| Completion Report                          | [APZTCMS-013-completion-report.md](../sprint/APZTCMS-013-completion-report.md)                                            |
 
 ---
 

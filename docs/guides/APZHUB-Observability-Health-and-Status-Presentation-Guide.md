@@ -15,15 +15,15 @@ Use **only canonical domain values** from Observability contracts. The Workbench
 
 ## Surfaces
 
-| Surface | Canonical fields (examples) |
-| --- | --- |
-| Service Health | `overallStatus`, `readinessStatus`, `livenessStatus` |
-| Service Status | `status` |
-| Component Status | `status` |
-| Alert Definitions | `severity`, `status` |
-| Alert States | `state` |
-| Health Summaries | `overallStatus` |
-| Diagnostics | readiness Ready / Not ready / Loading; provider execution always Unavailable |
+| Surface           | Canonical fields (examples)                                                  |
+| ----------------- | ---------------------------------------------------------------------------- |
+| Service Health    | `overallStatus`, `readinessStatus`, `livenessStatus`                         |
+| Service Status    | `status`                                                                     |
+| Component Status  | `status`                                                                     |
+| Alert Definitions | `severity`, `status`                                                         |
+| Alert States      | `state`                                                                      |
+| Health Summaries  | `overallStatus`                                                              |
+| Diagnostics       | readiness Ready / Not ready / Loading; provider execution always Unavailable |
 
 ## Unknown
 

@@ -435,7 +435,10 @@ export function createTestCaseService(rt: ServiceRuntime): TestCaseService {
         id,
       );
       if (existing.suiteIds.includes(suiteId)) {
-        return toDomain(existing, await loadSteps(rt, ctx, existing.id, existing.stepIds));
+        return toDomain(
+          existing,
+          await loadSteps(rt, ctx, existing.id, existing.stepIds),
+        );
       }
       const row = await rt.persistence.testCases.update(rctx, id, existing.revision, {
         suiteIds: [...existing.suiteIds, suiteId],

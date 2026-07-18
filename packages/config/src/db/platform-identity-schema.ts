@@ -1,4 +1,11 @@
-import { boolean, jsonb, pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  jsonb,
+  pgTable,
+  text,
+  timestamp,
+  uniqueIndex,
+} from "drizzle-orm/pg-core";
 import { user } from "./schema";
 
 export const platformTenant = pgTable(
@@ -31,7 +38,10 @@ export const platformUserTenant = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
-    uniqueIndex("platform_user_tenant_user_tenant_uidx").on(table.userId, table.tenantId),
+    uniqueIndex("platform_user_tenant_user_tenant_uidx").on(
+      table.userId,
+      table.tenantId,
+    ),
   ],
 );
 

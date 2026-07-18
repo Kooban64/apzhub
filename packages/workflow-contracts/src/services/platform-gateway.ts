@@ -53,18 +53,12 @@ export type WorkflowService = {
     ctx: WorkflowPlatformServiceContext,
     input: CreateWorkflowInput,
   ): Promise<Workflow>;
-  get(
-    ctx: WorkflowPlatformServiceContext,
-    workflowId: WorkflowId,
-  ): Promise<Workflow>;
+  get(ctx: WorkflowPlatformServiceContext, workflowId: WorkflowId): Promise<Workflow>;
   update(
     ctx: WorkflowPlatformServiceContext,
     input: UpdateWorkflowInput,
   ): Promise<Workflow>;
-  delete(
-    ctx: WorkflowPlatformServiceContext,
-    workflowId: WorkflowId,
-  ): Promise<void>;
+  delete(ctx: WorkflowPlatformServiceContext, workflowId: WorkflowId): Promise<void>;
   find(
     ctx: WorkflowPlatformServiceContext,
     input?: FindWorkflowsInput,
@@ -119,9 +113,7 @@ export type WorkflowTemplateService = {
     ctx: WorkflowPlatformServiceContext,
     templateId: WorkflowTemplateId,
   ): Promise<void>;
-  list(
-    ctx: WorkflowPlatformServiceContext,
-  ): Promise<readonly WorkflowTemplate[]>;
+  list(ctx: WorkflowPlatformServiceContext): Promise<readonly WorkflowTemplate[]>;
 };
 
 export type WorkflowCategoryService = {
@@ -133,9 +125,7 @@ export type WorkflowCategoryService = {
     ctx: WorkflowPlatformServiceContext,
     categoryId: WorkflowCategoryId,
   ): Promise<WorkflowCategory | null>;
-  list(
-    ctx: WorkflowPlatformServiceContext,
-  ): Promise<readonly WorkflowCategory[]>;
+  list(ctx: WorkflowPlatformServiceContext): Promise<readonly WorkflowCategory[]>;
 };
 
 export type WorkflowFolderService = {

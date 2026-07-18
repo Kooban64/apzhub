@@ -3,7 +3,7 @@
 > **Sprint:** SPR-006 — Event & Notification Framework  
 > **Milestone:** 6 — Event & Notification Framework  
 > **Mode:** EN-018 complete — **Milestone 6 closed; await owner approval before M7**  
-> **Authority:** [SPR-006 sprint guide](./SPR-006-event-notification-framework.md) · [Document 021](../021-notification-activity-attention-management-framework.md) · [Document 029](../029-platform-event-sdk-event-bus-event-manifest-specification.md) · [Platform Design Patterns](../architecture/APZHUB-Platform-Design-Patterns.md)
+> **Authority:** [SPR-006 sprint guide](../sprint/SPR-006-event-notification-framework.md) · [Document 021](../021-notification-activity-attention-management-framework.md) · [Document 029](../029-platform-event-sdk-event-bus-event-manifest-specification.md) · [Platform Design Patterns](../architecture/APZHUB-Platform-Design-Patterns.md)
 
 ---
 

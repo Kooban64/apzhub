@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-definitions
+name: Metric Definitions
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metric Definitions sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metric Definitions
+    icon: file-text
+    route: /workspace/metrics/definitions
+    order: 30
+    permission: metrics.definition
+  view:
+    title: Metric Definitions
+    workspace: metrics
+    route: /workspace/metrics/definitions
+    permission: metrics.definition

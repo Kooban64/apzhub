@@ -48,17 +48,17 @@ Phase 3 — Future
 
 ## Wave dependency graph
 
-| Wave                  | Depends on                                                                  | Enables                       |
-| --------------------- | --------------------------------------------------------------------------- | ----------------------------- |
-| 1 Plane               | PCv2-02*, M17* (*historical gates; Wave 1 delivered under owner sequencing) | Reference Adapter pattern     |
-| 2 Zammad (OSS-102)    | Wave 1 complete                                                             | Support capability            |
-| 3 Kimai               | Wave 1                                                                      | Time ↔ Project linking        |
-| 4 Paperless           | Wave 1                                                                      | Document ↔ Project linking    |
-| 5 Quality Engineering | PCv2-02, M17, Wave 1                                                        | Release gates, CI integration |
-| 6 Metabase            | Waves 1–2, QE-009                                                           | Cross-product dashboards      |
+| Wave                  | Depends on                                                                  | Enables                                                                                                                                           |
+| --------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 Plane               | PCv2-02*, M17* (*historical gates; Wave 1 delivered under owner sequencing) | Reference Adapter pattern                                                                                                                         |
+| 2 Zammad (OSS-102)    | Wave 1 complete                                                             | Support capability                                                                                                                                |
+| 3 Kimai               | Wave 1                                                                      | Time ↔ Project linking                                                                                                                            |
+| 4 Paperless           | Wave 1                                                                      | Document ↔ Project linking                                                                                                                        |
+| 5 Quality Engineering | PCv2-02, M17, Wave 1                                                        | Release gates, CI integration                                                                                                                     |
+| 6 Metabase            | Waves 1–2, QE-009                                                           | Cross-product dashboards                                                                                                                          |
 | 7 n8n                 | Waves 1–4, QE-008                                                           | **Delivered as APZWORKFLOW-006…011** (Workflow Engine Reference Adapter; frozen). Historical “Wave 7 Automation” label superseded for sequencing. |
-| 8 Observability       | Platform Core                                                               | Monitoring for all connectors |
-| 9 Security Ops        | Wave 8                                                                      | Security scan observability   |
+| 8 Observability       | Platform Core                                                               | Monitoring for all connectors                                                                                                                     |
+| 9 Security Ops        | Wave 8                                                                      | Security scan observability                                                                                                                       |
 
 **Owner amendment (2026-07-10):** Zammad / Support is **Wave 2 via OSS-102**, immediately after Plane Reference Adapter certification. Historical documents that list Zammad as Wave 4 (OSS-401) are superseded for sequencing; effort estimates may still reference OSS-401 IDs until revised.
 

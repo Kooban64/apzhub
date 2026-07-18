@@ -15,10 +15,7 @@ export function resetSharedPlatformSecurityService(): void {
   resetSharedCspViolationService();
 }
 
-export {
-  PlatformSecurityService,
-  SecurityService,
-} from "./platform-security-service";
+export { PlatformSecurityService, SecurityService } from "./platform-security-service";
 
 export { EnvironmentValidationService } from "./environment-validation-service";
 export { SecurityHeadersService } from "./security-headers-service";
@@ -67,7 +64,11 @@ export type {
 } from "./platform-api-guard";
 
 export { CspPolicyService, STABLE_ENFORCED_DIRECTIVES } from "./csp-policy-service";
-export { CspViolationService, getSharedCspViolationService, resetSharedCspViolationService } from "./csp-violation-service";
+export {
+  CspViolationService,
+  getSharedCspViolationService,
+  resetSharedCspViolationService,
+} from "./csp-violation-service";
 
 export {
   DEFAULT_RATE_LIMIT_PER_MINUTE,

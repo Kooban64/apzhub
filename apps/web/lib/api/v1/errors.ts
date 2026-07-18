@@ -1,4 +1,7 @@
-import { PlatformServiceError, isPlatformServiceError } from "@apzhub/platform-service-contracts";
+import {
+  PlatformServiceError,
+  isPlatformServiceError,
+} from "@apzhub/platform-service-contracts";
 
 import { jsonErrorResponse } from "./response";
 import type { PlatformApiErrorBody, PlatformApiTracingContext } from "./types";
@@ -111,14 +114,23 @@ function sanitizeErrorDetails(
     if (blocked.has(key.toLowerCase())) {
       continue;
     }
-    if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+    if (
+      typeof value === "string" ||
+      typeof value === "number" ||
+      typeof value === "boolean"
+    ) {
       safe[key] = value;
-    } else if (Array.isArray(value) && value.every((item) => typeof item === "string")) {
+    } else if (
+      Array.isArray(value) &&
+      value.every((item) => typeof item === "string")
+    ) {
       safe[key] = value;
     } else if (
       value &&
       typeof value === "object" &&
-      (key === "fieldErrors" || key === "formErrors" || "fieldErrors" in (value as object))
+      (key === "fieldErrors" ||
+        key === "formErrors" ||
+        "fieldErrors" in (value as object))
     ) {
       safe[key] = value;
     }
@@ -135,7 +147,9 @@ export function toPublicErrorBody(error: PlatformServiceError): PlatformApiError
   };
 }
 
-export function toPublicHttpErrorBody(body: PlatformApiErrorBody): PlatformApiErrorBody {
+export function toPublicHttpErrorBody(
+  body: PlatformApiErrorBody,
+): PlatformApiErrorBody {
   return {
     code: body.code,
     message: body.message,

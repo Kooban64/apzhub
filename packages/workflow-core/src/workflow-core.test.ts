@@ -112,9 +112,9 @@ describe("workflow-core", () => {
       "archived",
       "deprecated",
     ]);
-    expect(() =>
-      assertWorkflowLifecycleTransition("active", "draft"),
-    ).toThrow(WorkflowDomainError);
+    expect(() => assertWorkflowLifecycleTransition("active", "draft")).toThrow(
+      WorkflowDomainError,
+    );
     assertWorkflowLifecycleTransition("draft", "active");
   });
 
@@ -216,9 +216,7 @@ describe("workflow-core", () => {
     ).toBeGreaterThan(0);
 
     expect(
-      validateWorkflowVersion({ versionNumber: 0 }).some(
-        (i) => i.code === "version",
-      ),
+      validateWorkflowVersion({ versionNumber: 0 }).some((i) => i.code === "version"),
     ).toBe(true);
     expect(
       validateWorkflowVersion({
@@ -226,16 +224,12 @@ describe("workflow-core", () => {
         existingVersionNumbers: [2],
       }).length,
     ).toBeGreaterThan(0);
-    expect(
-      validateWorkflowVersion({ status: "running" }).length,
-    ).toBeGreaterThan(0);
-    expect(
-      validateWorkflowVersion({ status: "published" }).length,
-    ).toBeGreaterThan(0);
+    expect(validateWorkflowVersion({ status: "running" }).length).toBeGreaterThan(0);
+    expect(validateWorkflowVersion({ status: "published" }).length).toBeGreaterThan(0);
 
-    expect(
-      validateWorkflowLifecycle({ lifecycle: "running" }).length,
-    ).toBeGreaterThan(0);
+    expect(validateWorkflowLifecycle({ lifecycle: "running" }).length).toBeGreaterThan(
+      0,
+    );
     expect(
       validateWorkflowLifecycle({
         fromLifecycle: "active",
@@ -277,9 +271,7 @@ describe("workflow-core", () => {
   });
 
   it("createWorkflowFoundation requires explicit repos", () => {
-    expect(() => createWorkflowFoundation({} as never)).toThrow(
-      /explicit repos/,
-    );
+    expect(() => createWorkflowFoundation({} as never)).toThrow(/explicit repos/);
     expect(() =>
       createWorkflowFoundation({
         repos: { ...stubRepos(), workflows: null as never },
@@ -426,11 +418,7 @@ describe("workflow-core", () => {
   });
 
   it("requireFound throws WorkflowDomainError", () => {
-    expect(() => requireFound(null, "workflow", "x")).toThrow(
-      WorkflowDomainError,
-    );
-    expect(requireFound(asWorkflowId("wf_1"), "workflow", "wf_1")).toBe(
-      "wf_1",
-    );
+    expect(() => requireFound(null, "workflow", "x")).toThrow(WorkflowDomainError);
+    expect(requireFound(asWorkflowId("wf_1"), "workflow", "wf_1")).toBe("wf_1");
   });
 });

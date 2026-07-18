@@ -5,7 +5,10 @@ import { methodNotAllowedResponse } from "@/lib/api/v1/response";
 
 export function disallowedMethods(
   allowed: readonly string[],
-): Record<"POST" | "PATCH" | "PUT" | "DELETE" | "GET", (request: NextRequest) => Promise<Response>> {
+): Record<
+  "POST" | "PATCH" | "PUT" | "DELETE" | "GET",
+  (request: NextRequest) => Promise<Response>
+> {
   const handler = async (request: NextRequest) =>
     methodNotAllowedResponse(allowed, createPlatformApiTracing(), request.method);
   return {

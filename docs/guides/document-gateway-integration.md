@@ -89,12 +89,12 @@ gateway.documentPlatform.documents.get(ctx, documentId);
 
 ## What stays off the gateway
 
-| Capability | Where it lives |
-| ---------- | -------------- |
-| `storeContent` / `readContent` | `foundation.content` (Document Core) — not gateway |
-| Provider `put` / `get` / `delete` | Storage providers only |
-| REST `/api/v1/documents` | **APZDOCS-004** (not authorised) |
-| Workbench uploads | Future milestone |
+| Capability                        | Where it lives                                     |
+| --------------------------------- | -------------------------------------------------- |
+| `storeContent` / `readContent`    | `foundation.content` (Document Core) — not gateway |
+| Provider `put` / `get` / `delete` | Storage providers only                             |
+| REST `/api/v1/documents`          | **APZDOCS-004** (not authorised)                   |
+| Workbench uploads                 | Future milestone                                   |
 
 Binary store in tests may call `documents.foundation.content.storeContent(...)` directly; products must not import Document Core for production flows once HTTP exists — until then, in-process platform consumers use the gateway for metadata and Core only behind the platform boundary.
 

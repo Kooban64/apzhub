@@ -14,22 +14,22 @@ Controlled failure injection validates Platform Core readiness for production. A
 
 ## Scenarios validated
 
-| Scenario | Expected behaviour | Result |
-|----------|-------------------|--------|
-| Bootstrap failure | Stops at `initializing` | ✅ Pass |
-| Missing configuration | Stops at `bootstrapping` | ✅ Pass |
-| Database unavailable | Stops at `configuration-ready` | ✅ Pass |
-| Authorization failure | Stops at `identity-ready` | ✅ Pass |
-| Product failure | Blocks `products-ready` / `operational` | ✅ Pass |
-| Redis degradation | Blocks `platform-ready` | ✅ Pass |
-| Health degradation | Lifecycle `degraded` | ✅ Pass |
-| Maintenance mode | Deterministic enter/exit | ✅ Pass |
-| Graceful shutdown | `stopping` → `stopped` | ✅ Pass |
-| Recovery | `recovering` → `operational` | ✅ Pass |
-| Recovery regression | Critical dependency loss → `degraded` | ✅ Pass |
-| Version incompatibility | Detected for platform `0.0.1` | ✅ Pass |
+| Scenario                | Expected behaviour                          | Result  |
+| ----------------------- | ------------------------------------------- | ------- |
+| Bootstrap failure       | Stops at `initializing`                     | ✅ Pass |
+| Missing configuration   | Stops at `bootstrapping`                    | ✅ Pass |
+| Database unavailable    | Stops at `configuration-ready`              | ✅ Pass |
+| Authorization failure   | Stops at `identity-ready`                   | ✅ Pass |
+| Product failure         | Blocks `products-ready` / `operational`     | ✅ Pass |
+| Redis degradation       | Blocks `platform-ready`                     | ✅ Pass |
+| Health degradation      | Lifecycle `degraded`                        | ✅ Pass |
+| Maintenance mode        | Deterministic enter/exit                    | ✅ Pass |
+| Graceful shutdown       | `stopping` → `stopped`                      | ✅ Pass |
+| Recovery                | `recovering` → `operational`                | ✅ Pass |
+| Recovery regression     | Critical dependency loss → `degraded`       | ✅ Pass |
+| Version incompatibility | Detected for platform `0.0.1`               | ✅ Pass |
 | Production verification | `NOT_READY` on bootstrap/config/DB failures | ✅ Pass |
-| Control plane | No credential leakage in snapshots | ✅ Pass |
+| Control plane           | No credential leakage in snapshots          | ✅ Pass |
 
 ---
 
@@ -45,10 +45,10 @@ Controlled failure injection validates Platform Core readiness for production. A
 
 ## Test coverage
 
-| Suite | Tests |
-|-------|-------|
-| `platform-reliability-validation.test.ts` | 20 |
-| `platform-reliability-validation.test.ts` (operations) | 10 |
+| Suite                                                  | Tests |
+| ------------------------------------------------------ | ----- |
+| `platform-reliability-validation.test.ts`              | 20    |
+| `platform-reliability-validation.test.ts` (operations) | 10    |
 
 ---
 

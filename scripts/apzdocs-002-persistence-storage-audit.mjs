@@ -24,7 +24,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -64,37 +65,69 @@ const packageRoots = [
 for (const root of packageRoots) {
   scan(walk(join(ROOT, root)), [
     { rule: "no-apps-web", pattern: /apps\/web|@\/components|@\/lib\/api/ },
-    { rule: "no-http-routes", pattern: /\/api\/v1\/|NextRequest|withPlatformApiAuth|OpenAPI/ },
-    { rule: "no-workbench", pattern: /workbench-framework|PlatformReportingView|WorkbenchShell/ },
-    { rule: "no-ocr-ai", pattern: /openai|anthropic|tesseract|ocr\.|embedding|vector.?search/i },
+    {
+      rule: "no-http-routes",
+      pattern: /\/api\/v1\/|NextRequest|withPlatformApiAuth|OpenAPI/,
+    },
+    {
+      rule: "no-workbench",
+      pattern: /workbench-framework|PlatformReportingView|WorkbenchShell/,
+    },
+    {
+      rule: "no-ocr-ai",
+      pattern: /openai|anthropic|tesseract|ocr\.|embedding|vector.?search/i,
+    },
     { rule: "no-fts-engine", pattern: /meilisearch|opensearch|elasticsearch|pg_trgm/i },
     { rule: "no-event-bus", pattern: /EventBus|createPlatformEvent|publishEvent\(/ },
     {
       rule: "no-product-integrations",
-      pattern: /@apzhub\/integration-plane|@apzhub\/integration-zammad|@apzhub\/testing-services/,
+      pattern:
+        /@apzhub\/integration-plane|@apzhub\/integration-zammad|@apzhub\/testing-services/,
     },
   ]);
 }
 
 scan(walk(join(ROOT, "packages/document-contracts")), [
-  { rule: "contracts-no-persistence", pattern: /@apzhub\/document-persistence|@apzhub\/document-storage|@apzhub\/document-core/ },
-  { rule: "contracts-no-cloud-sdk", pattern: /@aws-sdk|@azure\/storage|@google-cloud\/storage/ },
+  {
+    rule: "contracts-no-persistence",
+    pattern:
+      /@apzhub\/document-persistence|@apzhub\/document-storage|@apzhub\/document-core/,
+  },
+  {
+    rule: "contracts-no-cloud-sdk",
+    pattern: /@aws-sdk|@azure\/storage|@google-cloud\/storage/,
+  },
 ]);
 
 scan(walk(join(ROOT, "packages/document-core")), [
-  { rule: "core-no-persistence", pattern: /@apzhub\/document-persistence|@apzhub\/document-storage/ },
-  { rule: "core-no-cloud-sdk", pattern: /@aws-sdk\/client-s3|@azure\/storage-blob|@google-cloud\/storage/ },
+  {
+    rule: "core-no-persistence",
+    pattern: /@apzhub\/document-persistence|@apzhub\/document-storage/,
+  },
+  {
+    rule: "core-no-cloud-sdk",
+    pattern: /@aws-sdk\/client-s3|@azure\/storage-blob|@google-cloud\/storage/,
+  },
   { rule: "core-no-bytea", pattern: /bytea|BYTEA|sql`.*\\\\x/ },
 ]);
 
 scan(walk(join(ROOT, "packages/document-persistence")), [
   { rule: "persistence-no-apps", pattern: /apps\/web|@apzhub\/document-storage/ },
-  { rule: "persistence-no-binary-columns", pattern: /\.bytea\(|sql\.raw\(["']\\\\x|Buffer\.from\(.*bytea/i },
-  { rule: "persistence-no-cloud-sdk", pattern: /@aws-sdk\/client-s3|@azure\/storage-blob|@google-cloud\/storage/ },
+  {
+    rule: "persistence-no-binary-columns",
+    pattern: /\.bytea\(|sql\.raw\(["']\\\\x|Buffer\.from\(.*bytea/i,
+  },
+  {
+    rule: "persistence-no-cloud-sdk",
+    pattern: /@aws-sdk\/client-s3|@azure\/storage-blob|@google-cloud\/storage/,
+  },
 ]);
 
 scan(walk(join(ROOT, "packages/document-storage")), [
-  { rule: "storage-no-products", pattern: /@apzhub\/testing-services|@apzhub\/integration-plane|modules\// },
+  {
+    rule: "storage-no-products",
+    pattern: /@apzhub\/testing-services|@apzhub\/integration-plane|modules\//,
+  },
   { rule: "storage-no-apps", pattern: /apps\/web/ },
 ]);
 
@@ -102,7 +135,8 @@ scan(walk(join(ROOT, "packages/document-storage")), [
 scan(walk(join(ROOT, "packages")), [
   {
     rule: "reporting-no-document-core",
-    pattern: /@apzhub\/document-core|@apzhub\/document-storage|@apzhub\/document-persistence/,
+    pattern:
+      /@apzhub\/document-core|@apzhub\/document-storage|@apzhub\/document-persistence/,
   },
 ]);
 

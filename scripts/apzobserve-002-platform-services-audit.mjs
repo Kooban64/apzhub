@@ -24,7 +24,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -41,7 +42,11 @@ function scan(files, rules) {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       const trimmed = line.trim();
-      if (trimmed.startsWith("//") || trimmed.startsWith("*") || trimmed.startsWith("/*")) {
+      if (
+        trimmed.startsWith("//") ||
+        trimmed.startsWith("*") ||
+        trimmed.startsWith("/*")
+      ) {
         continue;
       }
       for (const rule of rules) {
@@ -72,7 +77,8 @@ if (!existsSync(join(ROOT, observeDir))) {
     { rule: "no-workbench", pattern: /workbench-framework|\/workspace\/observe/ },
     {
       rule: "no-provider-sdks",
-      pattern: /from ["']@grafana|from ["']prom-client|from ["']@opentelemetry|winston-loki|alertmanager-client/,
+      pattern:
+        /from ["']@grafana|from ["']prom-client|from ["']@opentelemetry|winston-loki|alertmanager-client/,
     },
     { rule: "no-event-bus", pattern: /EventBus|publishEvent\(/ },
   ]);
@@ -110,7 +116,10 @@ if (!existsSync(join(ROOT, observeDir))) {
 
 {
   const opMap = readFileSync(
-    join(ROOT, "packages/platform-services/src/authorization/operation-authorization-map.ts"),
+    join(
+      ROOT,
+      "packages/platform-services/src/authorization/operation-authorization-map.ts",
+    ),
     "utf8",
   );
   if (!opMap.includes("observePlatformOps")) {
@@ -166,12 +175,12 @@ if (!existsSync(join(ROOT, observeDir))) {
       detail: "createPlatformServices must accept and wire observe bundle",
     });
   }
-  if (!create.includes('PLATFORM_SERVICES_VERSION = "0.24.0"')) {
+  if (!create.includes('PLATFORM_SERVICES_VERSION = "0.25.0"')) {
     violations.push({
       file: "packages/platform-services/src/services/create-platform-services.ts",
       line: 1,
       rule: "platform-services-version",
-      detail: "PLATFORM_SERVICES_VERSION must be 0.24.0",
+      detail: "PLATFORM_SERVICES_VERSION must be 0.25.0",
     });
   }
 }
@@ -224,12 +233,12 @@ if (!existsSync(join(ROOT, observeDir))) {
       });
     }
   }
-  if (pkg.version !== "0.24.0") {
+  if (pkg.version !== "0.25.0") {
     violations.push({
       file: "packages/platform-services/package.json",
       line: 1,
       rule: "platform-services-pkg-version",
-      detail: `Expected 0.24.0, found ${pkg.version}`,
+      detail: `Expected 0.25.0, found ${pkg.version}`,
     });
   }
 }
@@ -290,5 +299,7 @@ if (violations.length > 0) {
   process.exit(1);
 }
 
-console.log("\nRESULT: PASS (0 architecture/dependency/boundary/authorization violations)");
+console.log(
+  "\nRESULT: PASS (0 architecture/dependency/boundary/authorization violations)",
+);
 process.exit(0);

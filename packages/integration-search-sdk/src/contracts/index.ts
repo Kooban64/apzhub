@@ -9,10 +9,7 @@ export type {
   SearchNotImplementedResult,
 } from "./not-implemented";
 
-export {
-  SearchOperationRunner,
-  createSearchOperationRunner,
-} from "./operations";
+export { SearchOperationRunner, createSearchOperationRunner } from "./operations";
 export type {
   SearchQueryOperation,
   SearchIndexOperation,

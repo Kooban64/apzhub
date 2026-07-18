@@ -37,9 +37,7 @@ describe("APZOBSERVE-003 observe typed client", () => {
       ).id,
     ).toBe("hc_new");
     expect((await client.getCapabilities()).providerExecutionEnabled).toBe(false);
-    expect((await client.diagnostics.health()).providerExecutionEnabled).toBe(
-      false,
-    );
+    expect((await client.diagnostics.health()).providerExecutionEnabled).toBe(false);
     expect(client).not.toHaveProperty("scrape");
     expect(client).not.toHaveProperty("queryPrometheus");
     expect(client).not.toHaveProperty("ingestLogs");
@@ -124,9 +122,9 @@ describe("APZOBSERVE-003 observe typed client", () => {
 
     const client = createHttpObserveClient();
     const controller = new AbortController();
-    expect((await client.getCapabilities({ signal: controller.signal })).observeEnabled).toBe(
-      true,
-    );
+    expect(
+      (await client.getCapabilities({ signal: controller.signal })).observeEnabled,
+    ).toBe(true);
     expect((await client.healthChecks.list({ limit: 5 })).items[0]?.id).toBe("hc_1");
     expect(
       (
@@ -139,7 +137,9 @@ describe("APZOBSERVE-003 observe typed client", () => {
       ).id,
     ).toBe("hc_1");
     expect((await client.healthChecks.get("hc_1")).id).toBe("hc_1");
-    expect((await client.healthChecks.update("hc_1", { name: "Updated" })).revision).toBe(2);
+    expect(
+      (await client.healthChecks.update("hc_1", { name: "Updated" })).revision,
+    ).toBe(2);
 
     await expect(client.healthChecks.get("missing")).rejects.toBeInstanceOf(
       ObserveClientError,
@@ -151,9 +151,9 @@ describe("APZOBSERVE-003 observe typed client", () => {
       /only call \/api\/v1\/observe/,
     );
     for (const segment of OBSERVE_FORBIDDEN_HTTP_SEGMENTS) {
-      expect(() =>
-        assertObserveApiPath(`/api/v1/observe/${segment}`),
-      ).toThrow(/Forbidden observe HTTP segment/);
+      expect(() => assertObserveApiPath(`/api/v1/observe/${segment}`)).toThrow(
+        /Forbidden observe HTTP segment/,
+      );
     }
   });
 

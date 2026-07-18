@@ -1,7 +1,7 @@
 # Integration SDK v1.0 Certification Report
 
 > **Milestone:** OSS-100-10 — Integration SDK v1.0 Certification & Release Readiness  
-> **Package:** `@apzhub/integration-sdk` **0.9.0** (not bumped)  
+> **Package:** `@apzhub/integration-sdk` **1.0.0** (promoted OSS-100-11; this doc originated at 0.9.0 certification)  
 > **Date:** 2026-07-12  
 > **Authority:** [sdk-v1-audit-notes.md](../../../docs/architecture/sdk-v1-audit-notes.md) · [026](../../../docs/026-integration-sdk-adapter-framework-integration-manifest-specification.md)  
 > **Status:** Certified — **PRODUCTION_READY_WITH_LIMITATIONS**

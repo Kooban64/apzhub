@@ -5,15 +5,15 @@
 
 ## Verified conventions
 
-| Area | Notes |
-| --- | --- |
-| Toolbar | `role="toolbar"` + labelled Workflows commands |
-| Tables | Captions (`sr-only`), row keyboard Enter/Space where selectable |
-| Status / errors | `role="status"` / `role="alert"` for live regions |
+| Area                      | Notes                                                                |
+| ------------------------- | -------------------------------------------------------------------- |
+| Toolbar                   | `role="toolbar"` + labelled Workflows commands                       |
+| Tables                    | Captions (`sr-only`), row keyboard Enter/Space where selectable      |
+| Status / errors           | `role="status"` / `role="alert"` for live regions                    |
 | Definition Viewer / Graph | Section/`aria-label` landmarks; SVG nodes exposed via testids/labels |
-| Audit Timeline | List semantics with entry identity |
-| Empty / loading | Distinct `data-testid` empty/loading states for assistive tech |
-| Tokens | Design tokens only (contrast via theme system) |
+| Audit Timeline            | List semantics with entry identity                                   |
+| Empty / loading           | Distinct `data-testid` empty/loading states for assistive tech       |
+| Tokens                    | Design tokens only (contrast via theme system)                       |
 
 ## Residual (non-blocking)
 

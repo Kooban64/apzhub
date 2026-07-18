@@ -4,13 +4,13 @@
 
 ## Operations
 
-| Operation | Permission | Notes |
-|-----------|------------|-------|
-| `register` | `search.provider` | Duplicate prevention; validates configuration; writes registration + status UNKNOWN |
-| `unregister` | `search.provider` | Soft-delete provider; status UNAVAILABLE |
-| `listProviders` / `getProvider` | `search.provider` | Metadata only |
-| `setActiveProvider` / `getActiveProviderId` | `search.provider` | Single active provider per tenant scope |
-| Diagnostics / health / configuration | `search.diagnostics` / `search.provider` | Safe payloads; refs only |
+| Operation                                   | Permission                               | Notes                                                                               |
+| ------------------------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------- |
+| `register`                                  | `search.provider`                        | Duplicate prevention; validates configuration; writes registration + status UNKNOWN |
+| `unregister`                                | `search.provider`                        | Soft-delete provider; status UNAVAILABLE                                            |
+| `listProviders` / `getProvider`             | `search.provider`                        | Metadata only                                                                       |
+| `setActiveProvider` / `getActiveProviderId` | `search.provider`                        | Single active provider per tenant scope                                             |
+| Diagnostics / health / configuration        | `search.diagnostics` / `search.provider` | Safe payloads; refs only                                                            |
 
 ## Lifecycle contract
 

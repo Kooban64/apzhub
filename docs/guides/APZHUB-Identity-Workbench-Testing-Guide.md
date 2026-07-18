@@ -4,13 +4,13 @@
 
 ## Test layers
 
-| Layer | Location | Purpose |
-| --- | --- | --- |
-| Component (Vitest) | `apps/web/components/identity/platform-identity-view.test.tsx` | Renders `PlatformIdentityView` / `IdentityWorkspaceRouter` against `createMockIdentityClient`; asserts banners, memberships/service-assignment panels, form flows, no password fields |
-| Lib (Vitest) | `apps/web/lib/identity/*.test.ts` | `routes.ts`, `query-keys.ts`, `identity-client.ts` typed-client behaviour |
-| Architecture harness (Vitest) | `testing/identity-workbench/apzidentity-004-workbench.test.ts` | Runs the boundary audit script and asserts required files/manifests exist |
-| Boundary audit (Node script) | `scripts/apzidentity-004-identity-workbench-audit.mjs` | Static scan for forbidden imports/words, required banners, manifests, shell wiring |
-| End-to-end (Playwright) | `testing/playwright/e2e/apzidentity-004-identity-workbench.spec.ts` | Mock-routed browser journey: Overview → Users → user detail (memberships/assignments) → Memberships/Service Assignments sections → Diagnostics |
+| Layer                         | Location                                                            | Purpose                                                                                                                                                                               |
+| ----------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Component (Vitest)            | `apps/web/components/identity/platform-identity-view.test.tsx`      | Renders `PlatformIdentityView` / `IdentityWorkspaceRouter` against `createMockIdentityClient`; asserts banners, memberships/service-assignment panels, form flows, no password fields |
+| Lib (Vitest)                  | `apps/web/lib/identity/*.test.ts`                                   | `routes.ts`, `query-keys.ts`, `identity-client.ts` typed-client behaviour                                                                                                             |
+| Architecture harness (Vitest) | `testing/identity-workbench/apzidentity-004-workbench.test.ts`      | Runs the boundary audit script and asserts required files/manifests exist                                                                                                             |
+| Boundary audit (Node script)  | `scripts/apzidentity-004-identity-workbench-audit.mjs`              | Static scan for forbidden imports/words, required banners, manifests, shell wiring                                                                                                    |
+| End-to-end (Playwright)       | `testing/playwright/e2e/apzidentity-004-identity-workbench.spec.ts` | Mock-routed browser journey: Overview → Users → user detail (memberships/assignments) → Memberships/Service Assignments sections → Diagnostics                                        |
 
 ## Running the suite
 

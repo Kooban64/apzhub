@@ -111,7 +111,9 @@ function auditFrom(row: {
   };
 }
 
-function mapHealthCheck(row: typeof platformObserveHealthCheck.$inferSelect): HealthCheck {
+function mapHealthCheck(
+  row: typeof platformObserveHealthCheck.$inferSelect,
+): HealthCheck {
   return {
     id: asHealthCheckId(row.id),
     tenantId: row.tenantId,
@@ -149,7 +151,9 @@ function toHealthCheckRow(entity: HealthCheck) {
   };
 }
 
-function mapReadinessCheck(row: typeof platformObserveReadinessCheck.$inferSelect): ReadinessCheck {
+function mapReadinessCheck(
+  row: typeof platformObserveReadinessCheck.$inferSelect,
+): ReadinessCheck {
   return {
     id: asReadinessCheckId(row.id),
     tenantId: row.tenantId,
@@ -185,7 +189,9 @@ function toReadinessCheckRow(entity: ReadinessCheck) {
   };
 }
 
-function mapLivenessCheck(row: typeof platformObserveLivenessCheck.$inferSelect): LivenessCheck {
+function mapLivenessCheck(
+  row: typeof platformObserveLivenessCheck.$inferSelect,
+): LivenessCheck {
   return {
     id: asLivenessCheckId(row.id),
     tenantId: row.tenantId,
@@ -221,7 +227,9 @@ function toLivenessCheckRow(entity: LivenessCheck) {
   };
 }
 
-function mapServiceHealth(row: typeof platformObserveServiceHealth.$inferSelect): ServiceHealth {
+function mapServiceHealth(
+  row: typeof platformObserveServiceHealth.$inferSelect,
+): ServiceHealth {
   return {
     id: asServiceHealthId(row.id),
     tenantId: row.tenantId,
@@ -257,7 +265,9 @@ function toServiceHealthRow(entity: ServiceHealth) {
   };
 }
 
-function mapServiceStatus(row: typeof platformObserveServiceStatus.$inferSelect): ServiceStatus {
+function mapServiceStatus(
+  row: typeof platformObserveServiceStatus.$inferSelect,
+): ServiceStatus {
   return {
     id: asServiceStatusId(row.id),
     tenantId: row.tenantId,
@@ -289,7 +299,9 @@ function toServiceStatusRow(entity: ServiceStatus) {
   };
 }
 
-function mapComponentStatus(row: typeof platformObserveComponentStatus.$inferSelect): ComponentStatus {
+function mapComponentStatus(
+  row: typeof platformObserveComponentStatus.$inferSelect,
+): ComponentStatus {
   return {
     id: asComponentStatusId(row.id),
     tenantId: row.tenantId,
@@ -325,7 +337,9 @@ function toComponentStatusRow(entity: ComponentStatus) {
   };
 }
 
-function mapMetricDefinition(row: typeof platformObserveMetricDefinition.$inferSelect): MetricDefinition {
+function mapMetricDefinition(
+  row: typeof platformObserveMetricDefinition.$inferSelect,
+): MetricDefinition {
   return {
     id: asMetricDefinitionId(row.id),
     tenantId: row.tenantId,
@@ -367,7 +381,9 @@ function toMetricDefinitionRow(entity: MetricDefinition) {
   };
 }
 
-function mapMetricSample(row: typeof platformObserveMetricSample.$inferSelect): MetricSample {
+function mapMetricSample(
+  row: typeof platformObserveMetricSample.$inferSelect,
+): MetricSample {
   return {
     id: asMetricSampleId(row.id),
     tenantId: row.tenantId,
@@ -401,7 +417,9 @@ function toMetricSampleRow(entity: MetricSample) {
   };
 }
 
-function mapAlertDefinition(row: typeof platformObserveAlertDefinition.$inferSelect): AlertDefinition {
+function mapAlertDefinition(
+  row: typeof platformObserveAlertDefinition.$inferSelect,
+): AlertDefinition {
   return {
     id: asAlertDefinitionId(row.id),
     tenantId: row.tenantId,
@@ -477,7 +495,9 @@ function toAlertStateRow(entity: AlertState) {
   };
 }
 
-function mapDashboardDefinition(row: typeof platformObserveDashboard.$inferSelect): DashboardDefinition {
+function mapDashboardDefinition(
+  row: typeof platformObserveDashboard.$inferSelect,
+): DashboardDefinition {
   return {
     id: asDashboardDefinitionId(row.id),
     tenantId: row.tenantId,
@@ -549,7 +569,9 @@ function toLogSourceRow(entity: LogSource) {
   };
 }
 
-function mapTraceDefinition(row: typeof platformObserveTraceDefinition.$inferSelect): TraceDefinition {
+function mapTraceDefinition(
+  row: typeof platformObserveTraceDefinition.$inferSelect,
+): TraceDefinition {
   return {
     id: asTraceDefinitionId(row.id),
     tenantId: row.tenantId,
@@ -623,7 +645,9 @@ function toTraceSpanRow(entity: TraceSpan) {
   };
 }
 
-function mapIncidentReference(row: typeof platformObserveIncidentReference.$inferSelect): IncidentReference {
+function mapIncidentReference(
+  row: typeof platformObserveIncidentReference.$inferSelect,
+): IncidentReference {
   return {
     id: asIncidentReferenceId(row.id),
     tenantId: row.tenantId,
@@ -631,7 +655,9 @@ function mapIncidentReference(row: typeof platformObserveIncidentReference.$infe
     key: row.key,
     title: row.title,
     serviceKey: row.serviceKey ?? undefined,
-    alertDefinitionId: row.alertDefinitionId ? asAlertDefinitionId(row.alertDefinitionId) : undefined,
+    alertDefinitionId: row.alertDefinitionId
+      ? asAlertDefinitionId(row.alertDefinitionId)
+      : undefined,
     status: row.status as IncidentReference["status"],
     externalRef: row.externalRef ?? undefined,
     metadata: (row.metadata ?? undefined) as Record<string, unknown> | undefined,
@@ -659,7 +685,9 @@ function toIncidentReferenceRow(entity: IncidentReference) {
   };
 }
 
-function mapMaintenanceWindow(row: typeof platformObserveMaintenanceWindow.$inferSelect): MaintenanceWindow {
+function mapMaintenanceWindow(
+  row: typeof platformObserveMaintenanceWindow.$inferSelect,
+): MaintenanceWindow {
   return {
     id: asMaintenanceWindowId(row.id),
     tenantId: row.tenantId,
@@ -695,7 +723,9 @@ function toMaintenanceWindowRow(entity: MaintenanceWindow) {
   };
 }
 
-function mapHealthSummary(row: typeof platformObserveHealthSummary.$inferSelect): HealthSummary {
+function mapHealthSummary(
+  row: typeof platformObserveHealthSummary.$inferSelect,
+): HealthSummary {
   return {
     id: asHealthSummaryId(row.id),
     tenantId: row.tenantId,
@@ -731,7 +761,9 @@ function toHealthSummaryRow(entity: HealthSummary) {
   };
 }
 
-function mapPlatformDiagnostic(row: typeof platformObserveDiagnostic.$inferSelect): PlatformDiagnostic {
+function mapPlatformDiagnostic(
+  row: typeof platformObserveDiagnostic.$inferSelect,
+): PlatformDiagnostic {
   return {
     id: asPlatformDiagnosticId(row.id),
     tenantId: row.tenantId,
@@ -769,7 +801,9 @@ function toPlatformDiagnosticRow(entity: PlatformDiagnostic) {
   };
 }
 
-function mapObservabilityMetadata(row: typeof platformObserveMetadata.$inferSelect): ObservabilityMetadata {
+function mapObservabilityMetadata(
+  row: typeof platformObserveMetadata.$inferSelect,
+): ObservabilityMetadata {
   return {
     id: asObservabilityMetadataId(row.id),
     tenantId: row.tenantId,
@@ -815,7 +849,12 @@ export function createPostgresObserveRepositories(
       const rows = await db
         .select()
         .from(platformObserveHealthCheck)
-        .where(and(eq(platformObserveHealthCheck.id, id), eq(platformObserveHealthCheck.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveHealthCheck.id, id),
+            eq(platformObserveHealthCheck.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapHealthCheck(row) : null;
@@ -839,14 +878,21 @@ export function createPostgresObserveRepositories(
 
   const readinessChecks: ReadinessCheckRepositoryPort = {
     async create(_ctx, entity) {
-      await db.insert(platformObserveReadinessCheck).values(toReadinessCheckRow(entity));
+      await db
+        .insert(platformObserveReadinessCheck)
+        .values(toReadinessCheckRow(entity));
       return entity;
     },
     async get(ctx, id) {
       const rows = await db
         .select()
         .from(platformObserveReadinessCheck)
-        .where(and(eq(platformObserveReadinessCheck.id, id), eq(platformObserveReadinessCheck.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveReadinessCheck.id, id),
+            eq(platformObserveReadinessCheck.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapReadinessCheck(row) : null;
@@ -877,7 +923,12 @@ export function createPostgresObserveRepositories(
       const rows = await db
         .select()
         .from(platformObserveLivenessCheck)
-        .where(and(eq(platformObserveLivenessCheck.id, id), eq(platformObserveLivenessCheck.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveLivenessCheck.id, id),
+            eq(platformObserveLivenessCheck.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapLivenessCheck(row) : null;
@@ -908,7 +959,12 @@ export function createPostgresObserveRepositories(
       const rows = await db
         .select()
         .from(platformObserveServiceHealth)
-        .where(and(eq(platformObserveServiceHealth.id, id), eq(platformObserveServiceHealth.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveServiceHealth.id, id),
+            eq(platformObserveServiceHealth.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapServiceHealth(row) : null;
@@ -939,7 +995,12 @@ export function createPostgresObserveRepositories(
       const rows = await db
         .select()
         .from(platformObserveServiceStatus)
-        .where(and(eq(platformObserveServiceStatus.id, id), eq(platformObserveServiceStatus.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveServiceStatus.id, id),
+            eq(platformObserveServiceStatus.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapServiceStatus(row) : null;
@@ -963,14 +1024,21 @@ export function createPostgresObserveRepositories(
 
   const componentStatuses: ComponentStatusRepositoryPort = {
     async create(_ctx, entity) {
-      await db.insert(platformObserveComponentStatus).values(toComponentStatusRow(entity));
+      await db
+        .insert(platformObserveComponentStatus)
+        .values(toComponentStatusRow(entity));
       return entity;
     },
     async get(ctx, id) {
       const rows = await db
         .select()
         .from(platformObserveComponentStatus)
-        .where(and(eq(platformObserveComponentStatus.id, id), eq(platformObserveComponentStatus.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveComponentStatus.id, id),
+            eq(platformObserveComponentStatus.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapComponentStatus(row) : null;
@@ -994,14 +1062,21 @@ export function createPostgresObserveRepositories(
 
   const metricDefinitions: MetricDefinitionRepositoryPort = {
     async create(_ctx, entity) {
-      await db.insert(platformObserveMetricDefinition).values(toMetricDefinitionRow(entity));
+      await db
+        .insert(platformObserveMetricDefinition)
+        .values(toMetricDefinitionRow(entity));
       return entity;
     },
     async get(ctx, id) {
       const rows = await db
         .select()
         .from(platformObserveMetricDefinition)
-        .where(and(eq(platformObserveMetricDefinition.id, id), eq(platformObserveMetricDefinition.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveMetricDefinition.id, id),
+            eq(platformObserveMetricDefinition.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapMetricDefinition(row) : null;
@@ -1032,7 +1107,12 @@ export function createPostgresObserveRepositories(
       const rows = await db
         .select()
         .from(platformObserveMetricSample)
-        .where(and(eq(platformObserveMetricSample.id, id), eq(platformObserveMetricSample.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveMetricSample.id, id),
+            eq(platformObserveMetricSample.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapMetricSample(row) : null;
@@ -1056,14 +1136,21 @@ export function createPostgresObserveRepositories(
 
   const alertDefinitions: AlertDefinitionRepositoryPort = {
     async create(_ctx, entity) {
-      await db.insert(platformObserveAlertDefinition).values(toAlertDefinitionRow(entity));
+      await db
+        .insert(platformObserveAlertDefinition)
+        .values(toAlertDefinitionRow(entity));
       return entity;
     },
     async get(ctx, id) {
       const rows = await db
         .select()
         .from(platformObserveAlertDefinition)
-        .where(and(eq(platformObserveAlertDefinition.id, id), eq(platformObserveAlertDefinition.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveAlertDefinition.id, id),
+            eq(platformObserveAlertDefinition.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapAlertDefinition(row) : null;
@@ -1094,7 +1181,12 @@ export function createPostgresObserveRepositories(
       const rows = await db
         .select()
         .from(platformObserveAlertState)
-        .where(and(eq(platformObserveAlertState.id, id), eq(platformObserveAlertState.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveAlertState.id, id),
+            eq(platformObserveAlertState.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapAlertState(row) : null;
@@ -1118,14 +1210,21 @@ export function createPostgresObserveRepositories(
 
   const dashboards: DashboardDefinitionRepositoryPort = {
     async create(_ctx, entity) {
-      await db.insert(platformObserveDashboard).values(toDashboardDefinitionRow(entity));
+      await db
+        .insert(platformObserveDashboard)
+        .values(toDashboardDefinitionRow(entity));
       return entity;
     },
     async get(ctx, id) {
       const rows = await db
         .select()
         .from(platformObserveDashboard)
-        .where(and(eq(platformObserveDashboard.id, id), eq(platformObserveDashboard.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveDashboard.id, id),
+            eq(platformObserveDashboard.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapDashboardDefinition(row) : null;
@@ -1156,7 +1255,12 @@ export function createPostgresObserveRepositories(
       const rows = await db
         .select()
         .from(platformObserveLogSource)
-        .where(and(eq(platformObserveLogSource.id, id), eq(platformObserveLogSource.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveLogSource.id, id),
+            eq(platformObserveLogSource.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapLogSource(row) : null;
@@ -1180,14 +1284,21 @@ export function createPostgresObserveRepositories(
 
   const traceDefinitions: TraceDefinitionRepositoryPort = {
     async create(_ctx, entity) {
-      await db.insert(platformObserveTraceDefinition).values(toTraceDefinitionRow(entity));
+      await db
+        .insert(platformObserveTraceDefinition)
+        .values(toTraceDefinitionRow(entity));
       return entity;
     },
     async get(ctx, id) {
       const rows = await db
         .select()
         .from(platformObserveTraceDefinition)
-        .where(and(eq(platformObserveTraceDefinition.id, id), eq(platformObserveTraceDefinition.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveTraceDefinition.id, id),
+            eq(platformObserveTraceDefinition.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapTraceDefinition(row) : null;
@@ -1218,7 +1329,12 @@ export function createPostgresObserveRepositories(
       const rows = await db
         .select()
         .from(platformObserveTraceSpan)
-        .where(and(eq(platformObserveTraceSpan.id, id), eq(platformObserveTraceSpan.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveTraceSpan.id, id),
+            eq(platformObserveTraceSpan.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapTraceSpan(row) : null;
@@ -1242,14 +1358,21 @@ export function createPostgresObserveRepositories(
 
   const incidentReferences: IncidentReferenceRepositoryPort = {
     async create(_ctx, entity) {
-      await db.insert(platformObserveIncidentReference).values(toIncidentReferenceRow(entity));
+      await db
+        .insert(platformObserveIncidentReference)
+        .values(toIncidentReferenceRow(entity));
       return entity;
     },
     async get(ctx, id) {
       const rows = await db
         .select()
         .from(platformObserveIncidentReference)
-        .where(and(eq(platformObserveIncidentReference.id, id), eq(platformObserveIncidentReference.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveIncidentReference.id, id),
+            eq(platformObserveIncidentReference.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapIncidentReference(row) : null;
@@ -1273,14 +1396,21 @@ export function createPostgresObserveRepositories(
 
   const maintenanceWindows: MaintenanceWindowRepositoryPort = {
     async create(_ctx, entity) {
-      await db.insert(platformObserveMaintenanceWindow).values(toMaintenanceWindowRow(entity));
+      await db
+        .insert(platformObserveMaintenanceWindow)
+        .values(toMaintenanceWindowRow(entity));
       return entity;
     },
     async get(ctx, id) {
       const rows = await db
         .select()
         .from(platformObserveMaintenanceWindow)
-        .where(and(eq(platformObserveMaintenanceWindow.id, id), eq(platformObserveMaintenanceWindow.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveMaintenanceWindow.id, id),
+            eq(platformObserveMaintenanceWindow.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapMaintenanceWindow(row) : null;
@@ -1311,7 +1441,12 @@ export function createPostgresObserveRepositories(
       const rows = await db
         .select()
         .from(platformObserveHealthSummary)
-        .where(and(eq(platformObserveHealthSummary.id, id), eq(platformObserveHealthSummary.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveHealthSummary.id, id),
+            eq(platformObserveHealthSummary.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapHealthSummary(row) : null;
@@ -1335,14 +1470,21 @@ export function createPostgresObserveRepositories(
 
   const diagnostics: PlatformDiagnosticRepositoryPort = {
     async create(_ctx, entity) {
-      await db.insert(platformObserveDiagnostic).values(toPlatformDiagnosticRow(entity));
+      await db
+        .insert(platformObserveDiagnostic)
+        .values(toPlatformDiagnosticRow(entity));
       return entity;
     },
     async get(ctx, id) {
       const rows = await db
         .select()
         .from(platformObserveDiagnostic)
-        .where(and(eq(platformObserveDiagnostic.id, id), eq(platformObserveDiagnostic.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveDiagnostic.id, id),
+            eq(platformObserveDiagnostic.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapPlatformDiagnostic(row) : null;
@@ -1366,14 +1508,21 @@ export function createPostgresObserveRepositories(
 
   const metadata: ObservabilityMetadataRepositoryPort = {
     async create(_ctx, entity) {
-      await db.insert(platformObserveMetadata).values(toObservabilityMetadataRow(entity));
+      await db
+        .insert(platformObserveMetadata)
+        .values(toObservabilityMetadataRow(entity));
       return entity;
     },
     async get(ctx, id) {
       const rows = await db
         .select()
         .from(platformObserveMetadata)
-        .where(and(eq(platformObserveMetadata.id, id), eq(platformObserveMetadata.tenantId, ctx.tenantId)))
+        .where(
+          and(
+            eq(platformObserveMetadata.id, id),
+            eq(platformObserveMetadata.tenantId, ctx.tenantId),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row ? mapObservabilityMetadata(row) : null;

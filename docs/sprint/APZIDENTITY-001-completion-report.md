@@ -21,11 +21,11 @@ Identity Administration (SoR)
 → Platform Services (APZIDENTITY-002 — not started)
 ```
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/identity-contracts` | 0.1.0 |
-| `@apzhub/identity-core` | 0.1.0 |
-| `@apzhub/identity-persistence` | 0.1.0 |
+| Package                        | Version |
+| ------------------------------ | ------- |
+| `@apzhub/identity-contracts`   | 0.1.0   |
+| `@apzhub/identity-core`        | 0.1.0   |
+| `@apzhub/identity-persistence` | 0.1.0   |
 
 Migrations: `0052_apz_platform_iam.sql` · `0053_apz_platform_iam_rls.sql` (`platform_iam_*`, distinct from auth `0011_platform_identity.sql`).
 
@@ -53,11 +53,11 @@ Scoped measurement (`packages/identity-*`): **~97.6% lines / ~95.8% functions** 
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:identity-foundation` | PASS (0 violations) |
-| Vitest (identity packages + harness) | PASS |
-| Coverage (scoped) | PASS (≥95% lines/functions) |
+| Gate                                 | Result                      |
+| ------------------------------------ | --------------------------- |
+| `pnpm audit:identity-foundation`     | PASS (0 violations)         |
+| Vitest (identity packages + harness) | PASS                        |
+| Coverage (scoped)                    | PASS (≥95% lines/functions) |
 
 ## Technical Debt
 

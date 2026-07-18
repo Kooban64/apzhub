@@ -83,7 +83,9 @@ describe("testing architecture boundaries", () => {
 
   it("allows testing HTTP routes under /api/v1/testing but forbids event bus and AI assist folders", () => {
     const testingRouteRoot = join(REPO_ROOT, "apps/web/app/api/v1/testing");
-    const routeFiles = listFiles(testingRouteRoot).filter((file) => file.endsWith("route.ts"));
+    const routeFiles = listFiles(testingRouteRoot).filter((file) =>
+      file.endsWith("route.ts"),
+    );
 
     // APZTCMS-012 shipped the Testing HTTP surface — routes must exist and stay gateway-thin.
     expect(routeFiles.length).toBeGreaterThan(0);
@@ -95,17 +97,23 @@ describe("testing architecture boundaries", () => {
       expect(text).not.toMatch(/multipart\/form-data/);
     }
 
-    expect(existsSync(join(REPO_ROOT, "packages/platform-services/src/services/testing/events"))).toBe(
-      false,
-    );
-    expect(existsSync(join(REPO_ROOT, "packages/platform-services/src/services/testing/event-bus"))).toBe(
-      false,
-    );
-    expect(existsSync(join(REPO_ROOT, "packages/platform-services/src/services/testing/ai"))).toBe(
-      false,
-    );
     expect(
-      existsSync(join(REPO_ROOT, "packages/platform-services/src/services/testing/ai-assist")),
+      existsSync(
+        join(REPO_ROOT, "packages/platform-services/src/services/testing/events"),
+      ),
+    ).toBe(false);
+    expect(
+      existsSync(
+        join(REPO_ROOT, "packages/platform-services/src/services/testing/event-bus"),
+      ),
+    ).toBe(false);
+    expect(
+      existsSync(join(REPO_ROOT, "packages/platform-services/src/services/testing/ai")),
+    ).toBe(false);
+    expect(
+      existsSync(
+        join(REPO_ROOT, "packages/platform-services/src/services/testing/ai-assist"),
+      ),
     ).toBe(false);
   });
 
@@ -117,7 +125,9 @@ describe("testing architecture boundaries", () => {
       ),
     ).toEqual([]);
     expect(
-      existsSync(join(REPO_ROOT, "packages/platform-services/src/services/testing/http")),
+      existsSync(
+        join(REPO_ROOT, "packages/platform-services/src/services/testing/http"),
+      ),
     ).toBe(false);
   });
 

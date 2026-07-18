@@ -53,23 +53,24 @@ describe("createHttpWorkflowClient", () => {
   it("maps HTTP errors to WorkflowClientError", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(async () =>
-        new Response(
-          JSON.stringify({
-            error: { message: "forbidden", code: "FORBIDDEN" },
-            meta: { correlationId: "c1" },
-          }),
-          { status: 403, headers: { "content-type": "application/json" } },
-        ),
+      vi.fn(
+        async () =>
+          new Response(
+            JSON.stringify({
+              error: { message: "forbidden", code: "FORBIDDEN" },
+              meta: { correlationId: "c1" },
+            }),
+            { status: 403, headers: { "content-type": "application/json" } },
+          ),
       ),
     );
     const client = createHttpWorkflowClient();
     await expect(client.getWorkflow("wf_1")).rejects.toBeInstanceOf(
       WorkflowClientError,
     );
-    expect(toWorkflowUserMessage(new WorkflowClientError({ message: "x", status: 404 }))).toContain(
-      "not found",
-    );
+    expect(
+      toWorkflowUserMessage(new WorkflowClientError({ message: "x", status: 404 })),
+    ).toContain("not found");
   });
 
   it("covers lifecycle + catalogue HTTP helpers", async () => {
@@ -256,12 +257,12 @@ describe("createHttpWorkflowClient", () => {
     await getWorkflowDiagnostics();
     await deleteWorkflow(wf.id);
 
-    expect(toWorkflowUserMessage(new WorkflowClientError({ message: "x", status: 401 }))).toContain(
-      "authorized",
-    );
-    expect(toWorkflowUserMessage(new WorkflowClientError({ message: "x", status: 403 }))).toContain(
-      "permission",
-    );
+    expect(
+      toWorkflowUserMessage(new WorkflowClientError({ message: "x", status: 401 })),
+    ).toContain("authorized");
+    expect(
+      toWorkflowUserMessage(new WorkflowClientError({ message: "x", status: 403 })),
+    ).toContain("permission");
     expect(
       toWorkflowUserMessage(
         new WorkflowClientError({
@@ -278,9 +279,7 @@ describe("createHttpWorkflowClient", () => {
   it("route helpers reject forbidden segments", () => {
     expect(() => assertWorkflowApiPath("/api/v1/documents")).toThrow();
     for (const segment of WORKFLOW_FORBIDDEN_HTTP_SEGMENTS) {
-      expect(() =>
-        assertWorkflowApiPath(`/api/v1/workflows/${segment}`),
-      ).toThrow();
+      expect(() => assertWorkflowApiPath(`/api/v1/workflows/${segment}`)).toThrow();
     }
     expect(workflowQueryKeys.detail("wf_1")).toEqual(["workflows", "detail", "wf_1"]);
   });

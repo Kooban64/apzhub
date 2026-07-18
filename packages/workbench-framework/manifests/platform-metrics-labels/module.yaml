@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-labels
+name: Metric Labels
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metric Labels sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metric Labels
+    icon: tags
+    route: /workspace/metrics/labels
+    order: 80
+    permission: metrics.metadata
+  view:
+    title: Metric Labels
+    workspace: metrics
+    route: /workspace/metrics/labels
+    permission: metrics.metadata

@@ -149,7 +149,8 @@ export function buildZammadCompatibilityMatrix(
     compatibilityStatus,
     edition,
     selfHostedCeCompatible: edition === "community" || edition === "enterprise",
-    enterpriseIndicators: edition === "enterprise" ? ["edition_configured_enterprise"] : [],
+    enterpriseIndicators:
+      edition === "enterprise" ? ["edition_configured_enterprise"] : [],
     unsupportedFeatures: [...new Set(unsupportedFeatures)].sort(),
     deprecatedApis: [],
     unavailableEndpoints: [...new Set(unavailableEndpoints)].sort(),

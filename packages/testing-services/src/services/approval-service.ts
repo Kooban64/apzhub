@@ -192,7 +192,12 @@ export function createApprovalService(rt: ServiceRuntime): ApprovalService {
       if (role === "author") patch.authorUserId = userId;
       if (role === "reviewer") patch.reviewerUserId = userId;
       if (role === "approver") patch.approverUserId = userId;
-      const row = await rt.persistence.approvals.update(rctx, id, existing.revision, patch);
+      const row = await rt.persistence.approvals.update(
+        rctx,
+        id,
+        existing.revision,
+        patch,
+      );
       return toDomain(row);
     },
     async decideApproval(ctx, id, decision) {
@@ -360,7 +365,10 @@ export function createApprovalService(rt: ServiceRuntime): ApprovalService {
         witnessedAt: witness.witnessedAt,
         statement: witness.statement,
       };
-      const witnesses = [...(existing.witnessesJson ?? []), w as unknown as Record<string, unknown>];
+      const witnesses = [
+        ...(existing.witnessesJson ?? []),
+        w as unknown as Record<string, unknown>,
+      ];
       const row = await rt.persistence.approvals.update(rctx, id, existing.revision, {
         witnessesJson: witnesses,
       });

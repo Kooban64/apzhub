@@ -43,8 +43,7 @@ export class ZammadAnalyticsService {
           articleCount += articles.totalCount;
         }
 
-        const capturedAt =
-          this.deps.clock?.now() ?? new Date().toISOString();
+        const capturedAt = this.deps.clock?.now() ?? new Date().toISOString();
 
         return mapSupportIntelligenceSnapshot({
           tickets,

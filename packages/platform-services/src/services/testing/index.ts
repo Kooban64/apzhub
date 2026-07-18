@@ -44,9 +44,7 @@ export {
   PipelineSummaryServiceImpl,
 } from "./testing-pipeline-live-service-impls";
 
-export {
-  createTestingReadinessIndicators,
-} from "./testing-readiness";
+export { createTestingReadinessIndicators } from "./testing-readiness";
 export type { TestingReadinessIndicators } from "./testing-readiness";
 
 export { assertTestingContext } from "./assert-testing-context";

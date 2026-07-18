@@ -9,10 +9,7 @@ import { isSupportApiError } from "@/lib/support/errors";
 import { supportQueryKeys } from "@/lib/support/query-keys";
 import { createSupportRequest } from "@/lib/support/support-api";
 import { supportRequestDetailPath } from "@/lib/support/routes";
-import type {
-  SupportRequestPriority,
-  SupportRequestStatus,
-} from "@/lib/support/types";
+import type { SupportRequestPriority, SupportRequestStatus } from "@/lib/support/types";
 
 import { SupportLookupSelect } from "./support-lookup-select";
 import { PageShell } from "./support-ui";
@@ -136,7 +133,11 @@ export function SupportRequestCreateView() {
           </p>
         ) : null}
         <div className="flex gap-2">
-          <Button type="submit" disabled={mutation.isPending} data-testid="support-create-submit">
+          <Button
+            type="submit"
+            disabled={mutation.isPending}
+            data-testid="support-create-submit"
+          >
             {mutation.isPending ? "Creating…" : "Create request"}
           </Button>
           <Button

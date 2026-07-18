@@ -6,19 +6,19 @@ Manual recovery guidance for self-hosted APZHUB. **No automation** in M8-06.
 
 ## System of record
 
-| Data | Store | Recovery |
-|------|-------|----------|
-| Platform metadata | PostgreSQL | Restore from backup; replay migrations |
-| Sessions / rate limits | Redis | Rebuild; users re-authenticate if needed |
-| Secrets | Environment / host | Restore from secure vault |
-| Business data | Product engines | Product-specific DR (out of Platform Core scope) |
+| Data                   | Store              | Recovery                                         |
+| ---------------------- | ------------------ | ------------------------------------------------ |
+| Platform metadata      | PostgreSQL         | Restore from backup; replay migrations           |
+| Sessions / rate limits | Redis              | Rebuild; users re-authenticate if needed         |
+| Secrets                | Environment / host | Restore from secure vault                        |
+| Business data          | Product engines    | Product-specific DR (out of Platform Core scope) |
 
 ## RTO / RPO (targets — not enforced)
 
-| Tier | RTO | RPO |
-|------|-----|-----|
+| Tier          | RTO              | RPO                         |
+| ------------- | ---------------- | --------------------------- |
 | Platform Core | 4 hours (manual) | 24 hours (backup-dependent) |
-| Product data | Product-defined | Product-defined |
+| Product data  | Product-defined  | Product-defined             |
 
 ## Recovery sequence
 

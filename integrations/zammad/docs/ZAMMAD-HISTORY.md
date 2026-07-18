@@ -22,11 +22,11 @@ adapter.core.history
 
 ## Supported operations
 
-| Method | Operation | Notes |
-| --- | --- | --- |
-| `getSupportTimeline` | full timeline | Chronological ascending |
-| `getTimeline` | paged/filtered | Alias surface for list UX |
-| `list` | alias of `getTimeline` | |
+| Method               | Operation              | Notes                     |
+| -------------------- | ---------------------- | ------------------------- |
+| `getSupportTimeline` | full timeline          | Chronological ascending   |
+| `getTimeline`        | paged/filtered         | Alias surface for list UX |
+| `list`               | alias of `getTimeline` |                           |
 
 All operations are **read-only**.
 
@@ -34,13 +34,13 @@ All operations are **read-only**.
 
 ## Canonical models
 
-| Contract | Role |
-| --- | --- |
-| `SupportHistoryEvent` | Single timeline event |
-| `SupportHistoryActor` | Agent / customer / system / unknown |
-| `SupportHistoryAction` | created, state/owner/priority/customer/org/group changes, article, attachment metadata, unknown |
-| `SupportHistoryFieldChange` | Optional from/to field values |
-| `SupportTimeline` | Ticket-scoped event collection |
+| Contract                    | Role                                                                                            |
+| --------------------------- | ----------------------------------------------------------------------------------------------- |
+| `SupportHistoryEvent`       | Single timeline event                                                                           |
+| `SupportHistoryActor`       | Agent / customer / system / unknown                                                             |
+| `SupportHistoryAction`      | created, state/owner/priority/customer/org/group changes, article, attachment metadata, unknown |
+| `SupportHistoryFieldChange` | Optional from/to field values                                                                   |
+| `SupportTimeline`           | Ticket-scoped event collection                                                                  |
 
 Provisional IDs: `shist_zammad_*`.
 
@@ -48,18 +48,18 @@ Provisional IDs: `shist_zammad_*`.
 
 ## Timeline mapping
 
-| Provider signal (examples) | Canonical action |
-| --- | --- |
-| created / create | `created` |
-| state / state_id | `state_changed` |
-| owner / owner_id | `owner_changed` |
-| priority / priority_id | `priority_changed` |
-| customer / customer_id | `customer_changed` |
+| Provider signal (examples)     | Canonical action       |
+| ------------------------------ | ---------------------- |
+| created / create               | `created`              |
+| state / state_id               | `state_changed`        |
+| owner / owner_id               | `owner_changed`        |
+| priority / priority_id         | `priority_changed`     |
+| customer / customer_id         | `customer_changed`     |
 | organization / organization_id | `organization_changed` |
-| group / group_id | `group_changed` |
-| article object | `article_created` |
-| attachment attribute / object | `attachment_added` |
-| other | `unknown` |
+| group / group_id               | `group_changed`        |
+| article object                 | `article_created`      |
+| attachment attribute / object  | `attachment_added`     |
+| other                          | `unknown`              |
 
 Events are sorted chronologically by `occurredAt`.
 

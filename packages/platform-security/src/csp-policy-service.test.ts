@@ -55,7 +55,10 @@ describe("CspViolationService", () => {
     const result = service.ingestReport("web", body, body.length);
     expect(result.accepted).toBe(true);
 
-    const diagnostics = service.getDiagnostics("/api/platform/v1/security/csp-report", "enforced");
+    const diagnostics = service.getDiagnostics(
+      "/api/platform/v1/security/csp-report",
+      "enforced",
+    );
     expect(diagnostics.totalReports).toBe(1);
     expect(diagnostics.byDirective["script-src"]).toBe(1);
   });
@@ -76,7 +79,10 @@ describe("CspViolationService", () => {
     });
 
     service.ingestReport("web", body, body.length);
-    const recent = service.getDiagnostics("/api/platform/v1/security/csp-report", "enforced").recent;
+    const recent = service.getDiagnostics(
+      "/api/platform/v1/security/csp-report",
+      "enforced",
+    ).recent;
     expect(recent[0]?.violatedDirective).toBe("connect-src");
   });
 });

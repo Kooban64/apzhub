@@ -96,10 +96,14 @@ export class MeilisearchLogger {
   }
 }
 
-export function createMeilisearchMetrics(delegate: IntegrationMetrics): MeilisearchMetrics {
+export function createMeilisearchMetrics(
+  delegate: IntegrationMetrics,
+): MeilisearchMetrics {
   return new MeilisearchMetrics(delegate);
 }
 
-export function createMeilisearchLogger(delegate: IntegrationLogger): MeilisearchLogger {
+export function createMeilisearchLogger(
+  delegate: IntegrationLogger,
+): MeilisearchLogger {
   return new MeilisearchLogger(delegate);
 }

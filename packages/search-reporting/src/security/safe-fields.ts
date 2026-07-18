@@ -48,9 +48,7 @@ export type SafeFieldScanIssue = {
 };
 
 export function isSafeMetadataKey(key: string): boolean {
-  return (REPORTING_SEARCH_SAFE_METADATA_KEYS as readonly string[]).includes(
-    key,
-  );
+  return (REPORTING_SEARCH_SAFE_METADATA_KEYS as readonly string[]).includes(key);
 }
 
 export function isForbiddenMetadataKey(key: string): boolean {

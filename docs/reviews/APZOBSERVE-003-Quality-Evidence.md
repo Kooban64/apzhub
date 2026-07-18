@@ -16,12 +16,12 @@ pnpm exec vitest run --config vitest.config.ts \
 
 ## Results
 
-| Check | Result |
-| --- | --- |
-| Architecture / boundary audit | PASS (0 violations) |
-| OpenAPI platform validate | PASS (v1.8.0) |
-| Vitest observe HTTP/client | PASS |
-| Scoped coverage lines/functions | 99.45% / 100% |
+| Check                           | Result              |
+| ------------------------------- | ------------------- |
+| Architecture / boundary audit   | PASS (0 violations) |
+| OpenAPI platform validate       | PASS (v1.8.0)       |
+| Vitest observe HTTP/client      | PASS                |
+| Scoped coverage lines/functions | 99.45% / 100%       |
 
 ## Explicit exclusions verified
 

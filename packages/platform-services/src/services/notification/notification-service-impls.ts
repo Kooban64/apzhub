@@ -19,9 +19,7 @@ import {
   type PlatformNotificationDomainService,
 } from "@apzhub/notification-core";
 
-function toNotificationCtx(
-  ctx: ServiceRequestContext,
-): NotificationRequestContext {
+function toNotificationCtx(ctx: ServiceRequestContext): NotificationRequestContext {
   return {
     tenantId: ctx.tenantId,
     userId: ctx.userId,
@@ -72,18 +70,13 @@ export function mapNotificationDomainError(
   });
 }
 
-function mapUnknownError(
-  error: unknown,
-  correlationId: string,
-): PlatformServiceError {
+function mapUnknownError(error: unknown, correlationId: string): PlatformServiceError {
   if (isPlatformServiceError(error)) return error;
   if (error instanceof NotificationDomainError) {
     return mapNotificationDomainError(error, correlationId);
   }
   const message =
-    error instanceof Error
-      ? error.message
-      : "Unexpected notification service error";
+    error instanceof Error ? error.message : "Unexpected notification service error";
   if (
     /drizzle|postgres|pg_|relation |"platform_notification|ECONNREFUSED|tenant_mismatch/i.test(
       message,
@@ -143,10 +136,7 @@ export function createNotificationPlatformServiceImpls(input: {
         ),
       updateMetadata: (ctx, updateInput) =>
         withNotificationErrorMapping(ctx, () =>
-          domain.updateNotificationMetadata(
-            toNotificationCtx(ctx),
-            updateInput,
-          ),
+          domain.updateNotificationMetadata(toNotificationCtx(ctx), updateInput),
         ),
       archive: (ctx, notificationId) =>
         withNotificationErrorMapping(ctx, () =>

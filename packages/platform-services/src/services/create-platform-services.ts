@@ -30,7 +30,10 @@ import {
   type AuthorizationProviderMode,
   type AuthorizationBootstrapEnv,
 } from "../authorization/create-authorization-provider";
-import { RequestPipeline, type RequestPipelineOptions } from "../execution/request-pipeline";
+import {
+  RequestPipeline,
+  type RequestPipelineOptions,
+} from "../execution/request-pipeline";
 import { wrapServiceWithPipeline } from "../execution/wrap-service";
 import type { PipelineLogger } from "../execution/logging";
 import type { PipelineMetrics } from "../execution/metrics";
@@ -103,6 +106,7 @@ import type { ConfigurationPlatformServicesBundle } from "./configuration";
 import type { AdministrationPlatformServicesBundle } from "./administration";
 import type { IdentityPlatformServicesBundle } from "./identity";
 import type { ObservePlatformServicesBundle } from "./observe";
+import type { MetricsPlatformServicesBundle } from "./metrics";
 
 export interface PlatformServicesBundle {
   readonly registry: ProviderRegistry;
@@ -135,6 +139,7 @@ export interface PlatformServicesBundle {
   readonly administration?: AdministrationPlatformServicesBundle;
   readonly identity?: IdentityPlatformServicesBundle;
   readonly observe?: ObservePlatformServicesBundle;
+  readonly metricsPlatform?: MetricsPlatformServicesBundle;
   readonly gateway: PlatformServiceGateway;
 }
 
@@ -166,10 +171,13 @@ export interface CreatePlatformServicesInput {
   readonly administration?: AdministrationPlatformServicesBundle;
   readonly identity?: IdentityPlatformServicesBundle;
   readonly observe?: ObservePlatformServicesBundle;
+  readonly metricsPlatform?: MetricsPlatformServicesBundle;
 }
 
-export interface CreatePlatformServicesFromEnvInput
-  extends Omit<CreatePlatformServicesInput, "mappingStore"> {
+export interface CreatePlatformServicesFromEnvInput extends Omit<
+  CreatePlatformServicesInput,
+  "mappingStore"
+> {
   readonly mappingStoreOptions?: CreateEntityMappingStoreOptions;
 }
 
@@ -281,10 +289,18 @@ export function createPlatformServices(
     pipeline,
     "workspace",
   ) as WorkspaceService;
-  const projectApi = wrapServiceWithPipeline(project, pipeline, "project") as ProjectService;
+  const projectApi = wrapServiceWithPipeline(
+    project,
+    pipeline,
+    "project",
+  ) as ProjectService;
   const teamApi = wrapServiceWithPipeline(team, pipeline, "team") as TeamService;
   const userApi = wrapServiceWithPipeline(user, pipeline, "user") as UserService;
-  const searchApi = wrapServiceWithPipeline(search, pipeline, "search") as SearchService;
+  const searchApi = wrapServiceWithPipeline(
+    search,
+    pipeline,
+    "search",
+  ) as SearchService;
 
   const hasTaskProvider = registry.list("task").length > 0;
   const taskApi = hasTaskProvider
@@ -303,19 +319,39 @@ export function createPlatformServices(
       ) as SupportOrganizationService)
     : undefined;
   const supportGroupApi = hasSupportProvider
-    ? (wrapServiceWithPipeline(supportGroup, pipeline, "supportGroup") as SupportGroupService)
+    ? (wrapServiceWithPipeline(
+        supportGroup,
+        pipeline,
+        "supportGroup",
+      ) as SupportGroupService)
     : undefined;
   const supportUserApi = hasSupportProvider
-    ? (wrapServiceWithPipeline(supportUser, pipeline, "supportUser") as SupportUserService)
+    ? (wrapServiceWithPipeline(
+        supportUser,
+        pipeline,
+        "supportUser",
+      ) as SupportUserService)
     : undefined;
   const supportArticleApi = hasSupportProvider
-    ? (wrapServiceWithPipeline(supportArticle, pipeline, "supportArticle") as SupportArticleService)
+    ? (wrapServiceWithPipeline(
+        supportArticle,
+        pipeline,
+        "supportArticle",
+      ) as SupportArticleService)
     : undefined;
   const supportSearchApi = hasSupportProvider
-    ? (wrapServiceWithPipeline(supportSearch, pipeline, "supportSearch") as SupportSearchService)
+    ? (wrapServiceWithPipeline(
+        supportSearch,
+        pipeline,
+        "supportSearch",
+      ) as SupportSearchService)
     : undefined;
   const supportHistoryApi = hasSupportProvider
-    ? (wrapServiceWithPipeline(supportHistory, pipeline, "supportHistory") as SupportHistoryService)
+    ? (wrapServiceWithPipeline(
+        supportHistory,
+        pipeline,
+        "supportHistory",
+      ) as SupportHistoryService)
     : undefined;
   const supportAnalyticsApi = hasSupportProvider
     ? (wrapServiceWithPipeline(
@@ -332,12 +368,10 @@ export function createPlatformServices(
         "platformReporting",
       ) as PlatformReportingService)
     : undefined;
-  const platformQualityApi = input.platformQuality?.wrapPlatformQualityWithPipeline(
-    pipeline,
-  );
-  const platformReleaseApi = input.platformQuality?.wrapPlatformReleaseWithPipeline(
-    pipeline,
-  );
+  const platformQualityApi =
+    input.platformQuality?.wrapPlatformQualityWithPipeline(pipeline);
+  const platformReleaseApi =
+    input.platformQuality?.wrapPlatformReleaseWithPipeline(pipeline);
   const platformGovernanceApi =
     input.platformQuality?.wrapPlatformGovernanceWithPipeline(pipeline);
   const documentsApi = input.documents?.wrapWithPipeline(pipeline);
@@ -349,6 +383,7 @@ export function createPlatformServices(
   const administrationApi = input.administration?.wrapWithPipeline(pipeline);
   const identityApi = input.identity?.wrapWithPipeline(pipeline);
   const observeApi = input.observe?.wrapWithPipeline(pipeline);
+  const metricsApi = input.metricsPlatform?.wrapWithPipeline(pipeline);
 
   const gateway = new PlatformServiceGateway({
     workspace,
@@ -390,6 +425,7 @@ export function createPlatformServices(
     administrationApi,
     identityApi,
     observeApi,
+    metricsApi,
     platformQualityApi,
     platformReleaseApi,
     platformGovernanceApi,
@@ -430,6 +466,7 @@ export function createPlatformServices(
     administration: input.administration,
     identity: input.identity,
     observe: input.observe,
+    metricsPlatform: input.metricsPlatform,
     gateway,
   };
 }
@@ -514,4 +551,4 @@ export type { RegisterZammadProvidersInput } from "../providers/zammad/register-
 export { registerGitHubActionsProviders } from "../providers/github-actions/register-github-actions-providers";
 export type { RegisterGitHubActionsProvidersInput } from "../providers/github-actions/register-github-actions-providers";
 
-export const PLATFORM_SERVICES_VERSION = "0.24.0";
+export const PLATFORM_SERVICES_VERSION = "0.25.0";

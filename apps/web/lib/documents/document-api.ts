@@ -2,10 +2,7 @@
  * Module-level Platform Document client accessor + facades (APZDOCS-004/005).
  */
 
-import {
-  createHttpDocumentClient,
-  type DocumentClient,
-} from "./document-client";
+import { createHttpDocumentClient, type DocumentClient } from "./document-client";
 import { createMockDocumentClient } from "./mock-document-client";
 import type {
   ClassifyDocumentClientInput,
@@ -175,10 +172,6 @@ export function getDiagnostics(
   return getDocumentClient().getDiagnostics(options);
 }
 
-export {
-  createHttpDocumentClient,
-  createMockDocumentClient,
-  type DocumentClient,
-};
+export { createHttpDocumentClient, createMockDocumentClient, type DocumentClient };
 export * from "./document-types";
 export * from "./document-errors";

@@ -31,7 +31,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -76,7 +77,10 @@ function requireExists(path, rule) {
 // --- Workbench ---
 scan(walk(join(ROOT, "apps/web/components/documents")), [
   { rule: "workbench-no-document-core", pattern: /@apzhub\/document-core/ },
-  { rule: "workbench-no-document-persistence", pattern: /@apzhub\/document-persistence/ },
+  {
+    rule: "workbench-no-document-persistence",
+    pattern: /@apzhub\/document-persistence/,
+  },
   { rule: "workbench-no-document-storage", pattern: /@apzhub\/document-storage/ },
   { rule: "workbench-no-platform-services", pattern: /@apzhub\/platform-services/ },
   {
@@ -310,7 +314,10 @@ scan(walk(join(ROOT, "packages/document-contracts/src")), [
 // --- Authz map / OpenAPI / manifests / shell mount ---
 {
   const authMap = readFileSync(
-    join(ROOT, "packages/platform-services/src/authorization/operation-authorization-map.ts"),
+    join(
+      ROOT,
+      "packages/platform-services/src/authorization/operation-authorization-map.ts",
+    ),
     "utf8",
   );
   if (!authMap.includes("documentPlatformOps")) {
@@ -400,7 +407,9 @@ if (violations.length > 0) {
 console.log("APZDOCS-006 Document Vertical Audit PASSED");
 console.log("RESULT: PASS");
 console.log("Violations: 0");
-console.log("  - Workbench / typed client / HTTP / services / core / persistence / storage / contracts boundaries intact");
+console.log(
+  "  - Workbench / typed client / HTTP / services / core / persistence / storage / contracts boundaries intact",
+);
 console.log("  - Dependency direction respected; no Azure/GCS providers");
 console.log("  - OpenAPI Platform Documents + manifests + shell mount present");
 if (observations.length > 0) {

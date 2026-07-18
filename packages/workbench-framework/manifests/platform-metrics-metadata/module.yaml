@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-metadata
+name: Metadata
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metadata sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metadata
+    icon: info
+    route: /workspace/metrics/metadata
+    order: 220
+    permission: metrics.metadata
+  view:
+    title: Metadata
+    workspace: metrics
+    route: /workspace/metrics/metadata
+    permission: metrics.metadata

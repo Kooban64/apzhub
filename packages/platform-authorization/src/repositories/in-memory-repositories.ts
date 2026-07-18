@@ -225,8 +225,13 @@ export class InMemoryRoleAssignmentRepository implements RoleAssignmentRepositor
     return [...this.items.values()].filter((item) => {
       if (item.userId !== userId) return false;
       if (filter?.status && item.status !== filter.status) return false;
-      if (filter?.tenantId && item.tenantId && item.tenantId !== filter.tenantId) return false;
-      if (filter?.productKey && item.productKey && item.productKey !== filter.productKey) {
+      if (filter?.tenantId && item.tenantId && item.tenantId !== filter.tenantId)
+        return false;
+      if (
+        filter?.productKey &&
+        item.productKey &&
+        item.productKey !== filter.productKey
+      ) {
         return false;
       }
       return true;

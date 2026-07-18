@@ -28,11 +28,11 @@ PostgreSQL (metadata)
 
 ## Packages
 
-| Package | Role |
-| --- | --- |
-| `@apzhub/observe-contracts` | Models, permissions, service ports |
-| `@apzhub/observe-core` | Validation, lifecycle, repository ports, foundation factory |
-| `@apzhub/observe-persistence` | In-memory (tests) + PostgreSQL adapters |
+| Package                       | Role                                                        |
+| ----------------------------- | ----------------------------------------------------------- |
+| `@apzhub/observe-contracts`   | Models, permissions, service ports                          |
+| `@apzhub/observe-core`        | Validation, lifecycle, repository ports, foundation factory |
+| `@apzhub/observe-persistence` | In-memory (tests) + PostgreSQL adapters                     |
 
 ## Ownership
 

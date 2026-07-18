@@ -6,12 +6,8 @@ import {
   AllowAllAuthorizationProvider,
   type AuthorizationProvider,
 } from "./authorization/authorization-provider";
-import {
-  InMemoryPipelineLogger,
-} from "./execution/logging";
-import {
-  InMemoryPipelineMetrics,
-} from "./execution/metrics";
+import { InMemoryPipelineLogger } from "./execution/logging";
+import { InMemoryPipelineMetrics } from "./execution/metrics";
 import { RequestPipeline } from "./execution/request-pipeline";
 import { wrapServiceWithPipeline } from "./execution/wrap-service";
 import type { ServiceMiddleware } from "./middleware/service-middleware";
@@ -283,7 +279,8 @@ describe("gateway pipeline integration", () => {
     });
 
     const services = createPlatformServices({ registry, logger, metrics });
-    const listed = await services.gateway.workspaces.listWorkspaces(TEST_SERVICE_CONTEXT);
+    const listed =
+      await services.gateway.workspaces.listWorkspaces(TEST_SERVICE_CONTEXT);
 
     expect(listed.items).toHaveLength(1);
     expect(metrics.events.some((e) => e.kind === "operation_succeeded")).toBe(true);

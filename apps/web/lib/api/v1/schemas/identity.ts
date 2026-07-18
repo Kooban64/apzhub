@@ -9,11 +9,7 @@ import { paginationQuerySchema } from "./common";
 
 const idPattern = /^[a-zA-Z0-9][a-zA-Z0-9_.:-]{1,127}$/;
 const idParam = (label: string) =>
-  z
-    .string()
-    .min(1)
-    .max(128)
-    .regex(idPattern, `Invalid ${label} identifier format`);
+  z.string().min(1).max(128).regex(idPattern, `Invalid ${label} identifier format`);
 
 export const identityUserIdParamSchema = idParam("user");
 export const identityGroupIdParamSchema = idParam("group");
@@ -23,9 +19,7 @@ export const identityTenantIdParamSchema = idParam("tenant");
 export const identityDepartmentIdParamSchema = idParam("department");
 export const identityPositionIdParamSchema = idParam("position");
 export const identityMembershipIdParamSchema = idParam("membership");
-export const identityServiceAssignmentIdParamSchema = idParam(
-  "serviceAssignment",
-);
+export const identityServiceAssignmentIdParamSchema = idParam("serviceAssignment");
 export const identityInvitationIdParamSchema = idParam("invitation");
 export const identityActivationIdParamSchema = idParam("activation");
 export const identityDeactivationIdParamSchema = idParam("deactivation");
@@ -51,11 +45,7 @@ export const identityMembershipKindSchema = z.enum([
   "department",
 ]);
 
-export const identityAssignmentSubjectKindSchema = z.enum([
-  "user",
-  "group",
-  "role",
-]);
+export const identityAssignmentSubjectKindSchema = z.enum(["user", "group", "role"]);
 
 export const identityServiceCapabilitySchema = z.enum([
   "projects",

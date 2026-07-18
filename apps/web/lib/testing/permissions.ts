@@ -4,10 +4,7 @@
  */
 
 export type TestingPermissionSource =
-  | readonly string[]
-  | ReadonlySet<string>
-  | undefined
-  | null;
+  readonly string[] | ReadonlySet<string> | undefined | null;
 
 function asSet(source: TestingPermissionSource): ReadonlySet<string> {
   if (!source) return new Set();
@@ -141,9 +138,7 @@ export function canViewEngineeringIntelligence(
   );
 }
 
-export function canViewExecutiveDashboards(
-  source: TestingPermissionSource,
-): boolean {
+export function canViewExecutiveDashboards(source: TestingPermissionSource): boolean {
   return (
     canViewEngineeringIntelligence(source) ||
     hasTestingPermission(source, "benchmark.view") ||

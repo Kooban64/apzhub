@@ -25,7 +25,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -67,11 +68,13 @@ scan(files, [
   },
   {
     rule: "no-http-routes",
-    pattern: /NextRequest|NextResponse|OpenAPIHono|withPlatformApiAuth|\/api\/v1\/search|createRoute\(|app\.(get|post|put|delete)\(/,
+    pattern:
+      /NextRequest|NextResponse|OpenAPIHono|withPlatformApiAuth|\/api\/v1\/search|createRoute\(|app\.(get|post|put|delete)\(/,
   },
   {
     rule: "no-workbench",
-    pattern: /workbench-framework|PlatformReportingView|SearchWorkbench|WorkbenchLayout/,
+    pattern:
+      /workbench-framework|PlatformReportingView|SearchWorkbench|WorkbenchLayout/,
   },
   {
     rule: "no-platform-services",
@@ -91,7 +94,9 @@ for (const file of files) {
   // Flag methods that appear to return result pages with hits.
   if (
     /async\s+executeQuery[\s\S]{0,800}hits\s*:/.test(content) &&
-    !/NOT_IMPLEMENTED|createNotImplementedResult|SearchNotImplementedResult/.test(content)
+    !/NOT_IMPLEMENTED|createNotImplementedResult|SearchNotImplementedResult/.test(
+      content,
+    )
   ) {
     violations.push({
       file: path,
@@ -120,7 +125,15 @@ if (pkgJson.version !== "0.1.0") {
     detail: `Expected 0.1.0, got ${pkgJson.version}`,
   });
 }
-const requiredExports = [".", "./adapter", "./capabilities", "./errors", "./health", "./diagnostics", "./testing"];
+const requiredExports = [
+  ".",
+  "./adapter",
+  "./capabilities",
+  "./errors",
+  "./health",
+  "./diagnostics",
+  "./testing",
+];
 for (const exp of requiredExports) {
   if (!pkgJson.exports?.[exp]) {
     violations.push({

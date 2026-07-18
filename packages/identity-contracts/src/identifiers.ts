@@ -16,10 +16,7 @@ export type IdentityTenantId = Brand<string, "IdentityTenantId">;
 export type IdentityDepartmentId = Brand<string, "IdentityDepartmentId">;
 export type IdentityPositionId = Brand<string, "IdentityPositionId">;
 export type IdentityEmploymentId = Brand<string, "IdentityEmploymentId">;
-export type IdentityServiceAssignmentId = Brand<
-  string,
-  "IdentityServiceAssignmentId"
->;
+export type IdentityServiceAssignmentId = Brand<string, "IdentityServiceAssignmentId">;
 export type IdentityMembershipId = Brand<string, "IdentityMembershipId">;
 export type IdentityInvitationId = Brand<string, "IdentityInvitationId">;
 export type IdentityActivationId = Brand<string, "IdentityActivationId">;
@@ -58,9 +55,7 @@ export function asIdentityPermissionAssignmentId(
 ): IdentityPermissionAssignmentId {
   return brandId(value);
 }
-export function asIdentityOrganizationId(
-  value: string,
-): IdentityOrganizationId {
+export function asIdentityOrganizationId(value: string): IdentityOrganizationId {
   return brandId(value);
 }
 export function asIdentityTenantId(value: string): IdentityTenantId {
@@ -89,9 +84,7 @@ export function asIdentityInvitationId(value: string): IdentityInvitationId {
 export function asIdentityActivationId(value: string): IdentityActivationId {
   return brandId(value);
 }
-export function asIdentityDeactivationId(
-  value: string,
-): IdentityDeactivationId {
+export function asIdentityDeactivationId(value: string): IdentityDeactivationId {
   return brandId(value);
 }
 export function asIdentityStatusId(value: string): IdentityStatusId {

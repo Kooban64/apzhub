@@ -16,11 +16,7 @@ import type {
   DocumentSummary,
   DocumentTag,
 } from "../domain/document";
-import type {
-  DocumentId,
-  DocumentTagId,
-  DocumentVersionId,
-} from "../identifiers";
+import type { DocumentId, DocumentTagId, DocumentVersionId } from "../identifiers";
 import type { DocumentIntegrityResult } from "../integrity/types";
 import type { DocumentReconciliationInspectionResult } from "../reconciliation/types";
 import type {
@@ -58,10 +54,7 @@ export type DocumentService = {
     ctx: DocumentPlatformServiceContext,
     input: CreateDocumentInput,
   ): Promise<Document>;
-  get(
-    ctx: DocumentPlatformServiceContext,
-    documentId: DocumentId,
-  ): Promise<Document>;
+  get(ctx: DocumentPlatformServiceContext, documentId: DocumentId): Promise<Document>;
   summarize(
     ctx: DocumentPlatformServiceContext,
     documentId: DocumentId,

@@ -80,7 +80,4 @@ export {
   updateNotificationPreference,
   updateNotificationTemplate,
 } from "./notification-api";
-export {
-  clearNotificationQueries,
-  notificationQueryKeys,
-} from "./query-keys";
+export { clearNotificationQueries, notificationQueryKeys } from "./query-keys";

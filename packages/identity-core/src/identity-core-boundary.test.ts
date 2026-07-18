@@ -5,9 +5,7 @@ import { describe, expect, it } from "vitest";
 
 describe("identity-core boundary", () => {
   it("depends on identity-contracts only", () => {
-    const pkg = JSON.parse(
-      readFileSync(join(__dirname, "../package.json"), "utf8"),
-    );
+    const pkg = JSON.parse(readFileSync(join(__dirname, "../package.json"), "utf8"));
     expect(pkg.dependencies).toEqual({
       "@apzhub/identity-contracts": "workspace:*",
     });

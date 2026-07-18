@@ -33,7 +33,10 @@ export interface RoleRepository {
     productKey?: string;
     status?: AuthorizationRoleStatus;
   }): readonly PlatformRole[];
-  update(roleId: string, patch: Partial<Pick<PlatformRole, "name" | "status" | "metadata">>): PlatformRole | undefined;
+  update(
+    roleId: string,
+    patch: Partial<Pick<PlatformRole, "name" | "status" | "metadata">>,
+  ): PlatformRole | undefined;
   count(): number;
 }
 
@@ -48,11 +51,14 @@ export interface RoleAssignmentRepository {
   assign(input: AssignRoleInput): RoleAssignment;
   remove(assignmentId: string): RoleAssignment | undefined;
   get(assignmentId: string): RoleAssignment | undefined;
-  listByUser(userId: string, filter?: {
-    tenantId?: string;
-    productKey?: string;
-    status?: AuthorizationAssignmentStatus;
-  }): readonly RoleAssignment[];
+  listByUser(
+    userId: string,
+    filter?: {
+      tenantId?: string;
+      productKey?: string;
+      status?: AuthorizationAssignmentStatus;
+    },
+  ): readonly RoleAssignment[];
   listByRole(roleId: string): readonly RoleAssignment[];
   count(): number;
 }

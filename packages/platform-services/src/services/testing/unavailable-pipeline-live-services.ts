@@ -10,10 +10,7 @@ import type {
   TestingPipelineWorkflowService,
 } from "@apzhub/platform-service-contracts";
 
-function unavailable(
-  ctx: ServiceRequestContext,
-  capability: string,
-): Promise<never> {
+function unavailable(ctx: ServiceRequestContext, capability: string): Promise<never> {
   return Promise.reject(
     new PlatformServiceError({
       category: "configuration",

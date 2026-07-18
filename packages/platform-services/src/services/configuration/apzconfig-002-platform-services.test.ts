@@ -25,9 +25,7 @@ import {
   resolveOperationAuthorization,
 } from "../../index";
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_cfg",
     userId: "user_cfg",
@@ -39,8 +37,8 @@ function ctx(
 }
 
 describe("APZCONFIG-002 configuration platform services", () => {
-  it("exports platform services version 0.24.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
+  it("exports platform services version 0.25.0", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
   });
 
   it("registers configuration permissions in the platform catalogue", () => {
@@ -67,8 +65,7 @@ describe("APZCONFIG-002 configuration platform services", () => {
         ?.requiredPermission,
     ).toBe("configuration.validation");
     expect(
-      resolveOperationAuthorization("configurationAudit", "list")
-        ?.requiredPermission,
+      resolveOperationAuthorization("configurationAudit", "list")?.requiredPermission,
     ).toBe("configuration.audit");
     expect(
       resolveOperationAuthorization("configurationDiagnostics", "health")
@@ -80,9 +77,9 @@ describe("APZCONFIG-002 configuration platform services", () => {
     expect(() => createConfigurationPlatformServicesForTest({})).toThrow(
       /allowInMemoryPersistence/,
     );
-    expect(() =>
-      createConfigurationPlatformServicesForProduction({} as never),
-    ).toThrow(/postgresDb/);
+    expect(() => createConfigurationPlatformServicesForProduction({} as never)).toThrow(
+      /postgresDb/,
+    );
   });
 
   it("env gate is deny-by-default", () => {
@@ -115,10 +112,8 @@ describe("APZCONFIG-002 configuration platform services", () => {
       ).code,
     ).toBe("BUSINESS_RULE_VIOLATION");
     expect(
-      mapConfigurationDomainError(
-        new ConfigurationDomainError("duplicate", "dup"),
-        "c",
-      ).code,
+      mapConfigurationDomainError(new ConfigurationDomainError("duplicate", "dup"), "c")
+        .code,
     ).toBe("CONFLICT");
   });
 
@@ -133,18 +128,15 @@ describe("APZCONFIG-002 configuration platform services", () => {
       authorizationMode: "allow-all",
     });
 
-    const created = await bundle.gateway.configuration.configurations.create(
-      ctx(),
-      {
-        namespaceKey: "platform",
-        key: "feature.x",
-        displayName: "Feature X",
-        valueKind: "string",
-        hierarchyLevel: "tenant",
-        scope: { kind: "tenant", tenantId: "tenant_cfg" },
-        references: [{ kind: "projects", resourceId: "proj_1" }],
-      },
-    );
+    const created = await bundle.gateway.configuration.configurations.create(ctx(), {
+      namespaceKey: "platform",
+      key: "feature.x",
+      displayName: "Feature X",
+      valueKind: "string",
+      hierarchyLevel: "tenant",
+      scope: { kind: "tenant", tenantId: "tenant_cfg" },
+      references: [{ kind: "projects", resourceId: "proj_1" }],
+    });
     expect(created.status).toBe("draft");
 
     const got = await bundle.gateway.configuration.configurations.get(
@@ -156,18 +148,22 @@ describe("APZCONFIG-002 configuration platform services", () => {
     const listed = await bundle.gateway.configuration.configurations.list(ctx());
     expect(listed).toHaveLength(1);
 
-    const updated =
-      await bundle.gateway.configuration.configurations.updateMetadata(ctx(), {
+    const updated = await bundle.gateway.configuration.configurations.updateMetadata(
+      ctx(),
+      {
         configurationId: created.id,
         hierarchyLevel: "organisation",
-      });
+      },
+    );
     expect(updated.hierarchyLevel).toBe("organisation");
 
-    const validated =
-      await bundle.gateway.configuration.configurations.transition(ctx(), {
+    const validated = await bundle.gateway.configuration.configurations.transition(
+      ctx(),
+      {
         configurationId: created.id,
         to: "validated",
-      });
+      },
+    );
     expect(validated.status).toBe("validated");
 
     const archived = await bundle.gateway.configuration.configurations.archive(
@@ -191,10 +187,10 @@ describe("APZCONFIG-002 configuration platform services", () => {
       to: "approved",
     });
 
-    const namespace = await bundle.gateway.configuration.namespaces.create(
-      ctx(),
-      { key: "custom", name: "Custom" },
-    );
+    const namespace = await bundle.gateway.configuration.namespaces.create(ctx(), {
+      key: "custom",
+      name: "Custom",
+    });
     expect(namespace.key).toBe("custom");
     await bundle.gateway.configuration.namespaces.update(ctx(), {
       namespaceId: namespace.id,
@@ -225,16 +221,13 @@ describe("APZCONFIG-002 configuration platform services", () => {
     );
     expect(published.isCurrent).toBe(true);
 
-    const override = await bundle.gateway.configuration.overrides.create(
-      ctx(),
-      {
-        configurationId: created.id,
-        hierarchyLevel: "user",
-        scope: { kind: "user", userId: "user_cfg" },
-        valueKind: "string",
-        payload: "override",
-      },
-    );
+    const override = await bundle.gateway.configuration.overrides.create(ctx(), {
+      configurationId: created.id,
+      hierarchyLevel: "user",
+      scope: { kind: "user", userId: "user_cfg" },
+      valueKind: "string",
+      payload: "override",
+    });
     await bundle.gateway.configuration.overrides.update(ctx(), {
       overrideId: override.id,
       payload: "override-2",
@@ -242,34 +235,24 @@ describe("APZCONFIG-002 configuration platform services", () => {
 
     const scopes = await bundle.gateway.configuration.scopes.list(ctx());
     expect(scopes.length).toBeGreaterThan(0);
-    const scope = await bundle.gateway.configuration.scopes.get(
-      ctx(),
-      created.id,
-    );
+    const scope = await bundle.gateway.configuration.scopes.get(ctx(), created.id);
     expect(scope.scopeKind).toBe("tenant");
 
-    const validation =
-      await bundle.gateway.configuration.validation.validateMetadata(
-        ctx(),
-        created,
-      );
+    const validation = await bundle.gateway.configuration.validation.validateMetadata(
+      ctx(),
+      created,
+    );
     expect(validation.valid).toBe(true);
     const rules = await bundle.gateway.configuration.validation.listRules(ctx());
     expect(rules.length).toBeGreaterThan(0);
 
-    const refs = await bundle.gateway.configuration.references.list(
-      ctx(),
-      created.id,
-    );
+    const refs = await bundle.gateway.configuration.references.list(ctx(), created.id);
     expect(refs).toHaveLength(1);
     expect(
       await bundle.gateway.configuration.references.get(ctx(), refs[0]!.id),
     ).toMatchObject({ kind: "projects" });
 
-    const audits = await bundle.gateway.configuration.audit.list(
-      ctx(),
-      created.id,
-    );
+    const audits = await bundle.gateway.configuration.audit.list(ctx(), created.id);
     expect(audits.length).toBeGreaterThan(0);
     expect(
       await bundle.gateway.configuration.audit.get(ctx(), audits[0]!.id),
@@ -278,11 +261,9 @@ describe("APZCONFIG-002 configuration platform services", () => {
     const health = await bundle.gateway.configuration.diagnostics.health(ctx());
     expect(health.runtimeApplyEnabled).toBe(false);
     expect(health.status).toBe("healthy");
-    const readiness =
-      await bundle.gateway.configuration.diagnostics.readiness(ctx());
+    const readiness = await bundle.gateway.configuration.diagnostics.readiness(ctx());
     expect(readiness.ready).toBe(true);
-    const caps =
-      await bundle.gateway.configuration.diagnostics.capabilities(ctx());
+    const caps = await bundle.gateway.configuration.diagnostics.capabilities(ctx());
     expect(caps.runtimeApply).toBe(false);
     expect(caps.facets).toContain("configurations");
 
@@ -307,9 +288,7 @@ describe("APZCONFIG-002 configuration platform services", () => {
     });
 
     await expect(
-      bundle.gateway.configuration.configurations.list(
-        ctx({ permissions: [] }),
-      ),
+      bundle.gateway.configuration.configurations.list(ctx({ permissions: [] })),
     ).rejects.toSatisfy((error: unknown) => isPlatformServiceError(error));
   });
 
@@ -326,10 +305,8 @@ describe("APZCONFIG-002 configuration platform services", () => {
     expect(composed.readiness.configurationEnabled).toBe(true);
 
     expect(
-      mapConfigurationDomainError(
-        new ConfigurationDomainError("forbidden", "no"),
-        "c",
-      ).code,
+      mapConfigurationDomainError(new ConfigurationDomainError("forbidden", "no"), "c")
+        .code,
     ).toBe("FORBIDDEN");
     expect(
       mapConfigurationDomainError(
@@ -338,9 +315,8 @@ describe("APZCONFIG-002 configuration platform services", () => {
       ).code,
     ).toBe("VALIDATION_FAILED");
 
-    const { createConfigurationPlatformServiceImpls } = await import(
-      "./configuration-service-impls"
-    );
+    const { createConfigurationPlatformServiceImpls } =
+      await import("./configuration-service-impls");
     const domain = {
       async listConfigurations() {
         throw new Error('relation "platform_configuration" does not exist');
@@ -401,7 +377,9 @@ describe("APZCONFIG-002 configuration platform services", () => {
     ];
     for (const file of files) {
       const content = readFileSync(join(root, file), "utf8");
-      expect(content).not.toMatch(/NextRequest|\/api\/v1\/|hotReload|applyConfiguration/i);
+      expect(content).not.toMatch(
+        /NextRequest|\/api\/v1\/|hotReload|applyConfiguration/i,
+      );
       expect(content).not.toMatch(/EventBus|workbench-framework/);
     }
   });

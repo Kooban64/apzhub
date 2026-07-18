@@ -183,7 +183,8 @@ export function certifyPlaneCapabilities(
     if (!serviceUp) reasons.push("service_not_constructed");
     if (featureBlocked) reasons.push("feature_detection_unavailable");
     if (providerDown && !meta.optional) reasons.push("provider_unreachable");
-    if (authDown && capability.serviceId !== "events") reasons.push("authentication_invalid");
+    if (authDown && capability.serviceId !== "events")
+      reasons.push("authentication_invalid");
     if (!capabilityEnabled) reasons.push("capability_disabled");
     if (degraded) reasons.push("operating_in_degraded_mode");
 

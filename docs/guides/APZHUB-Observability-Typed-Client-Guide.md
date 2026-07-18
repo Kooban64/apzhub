@@ -9,13 +9,13 @@ Production typed client for the Observability HTTP API. Consumes **only** `/api/
 
 ## API surface
 
-| Export | Role |
-| --- | --- |
-| `createHttpObserveClient()` | Fetch-based client |
-| `createMockObserveClient()` | In-memory test client |
-| `getObserveClient` / `setObserveClient` / `resetObserveClient` | Runtime accessor |
-| `observeQueryKeys` | TanStack Query keys for all 19 facets + diagnostics |
-| `assertObserveApiPath` | Path guard + forbidden segment enforcement |
+| Export                                                         | Role                                                |
+| -------------------------------------------------------------- | --------------------------------------------------- |
+| `createHttpObserveClient()`                                    | Fetch-based client                                  |
+| `createMockObserveClient()`                                    | In-memory test client                               |
+| `getObserveClient` / `setObserveClient` / `resetObserveClient` | Runtime accessor                                    |
+| `observeQueryKeys`                                             | TanStack Query keys for all 19 facets + diagnostics |
+| `assertObserveApiPath`                                         | Path guard + forbidden segment enforcement          |
 
 ## Facet methods
 

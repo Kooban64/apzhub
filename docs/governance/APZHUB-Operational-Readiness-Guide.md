@@ -9,15 +9,15 @@
 
 Answer these questions using **Platform Operations → Dashboard**:
 
-| Question | Dashboard location |
-|----------|-------------------|
-| Is the platform healthy? | Platform health + Readiness score |
-| Is the platform production ready? | Production readiness verdict |
-| Which capability is degraded? | Capability status table |
-| What caused the degradation? | Degraded capabilities recommendations |
-| Which products are affected? | Production verification → Affected products |
-| What should be done next? | Capability recommendations + Recovery guidance (Resilience section) |
-| Which technical debt remains? | Outstanding technical debt panel |
+| Question                          | Dashboard location                                                  |
+| --------------------------------- | ------------------------------------------------------------------- |
+| Is the platform healthy?          | Platform health + Readiness score                                   |
+| Is the platform production ready? | Production readiness verdict                                        |
+| Which capability is degraded?     | Capability status table                                             |
+| What caused the degradation?      | Degraded capabilities recommendations                               |
+| Which products are affected?      | Production verification → Affected products                         |
+| What should be done next?         | Capability recommendations + Recovery guidance (Resilience section) |
+| Which technical debt remains?     | Outstanding technical debt panel                                    |
 
 ---
 

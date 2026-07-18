@@ -11,13 +11,13 @@ Defines the stable boundary between APZHUB modules and platform services. All ty
 
 ## Contents
 
-| Area | Description |
-|------|-------------|
-| `common/` | Request context, paging, sorting, result wrappers, errors |
-| `domain/` | Canonical DTOs (Project, Task, Workspace, User, etc.) |
-| `queries/` | List filters and sort field types |
-| `inputs/` | Create/update/command inputs |
-| `services/` | Service interface definitions |
+| Area                | Description                                                            |
+| ------------------- | ---------------------------------------------------------------------- |
+| `common/`           | Request context, paging, sorting, result wrappers, errors              |
+| `domain/`           | Canonical DTOs (Project, Task, Workspace, User, etc.)                  |
+| `queries/`          | List filters and sort field types                                      |
+| `inputs/`           | Create/update/command inputs                                           |
+| `services/`         | Service interface definitions                                          |
 | `services/testing/` | **APZTCMS-011** — Testing platform gateway + per-capability interfaces |
 
 ## Service interfaces

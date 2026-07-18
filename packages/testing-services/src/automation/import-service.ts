@@ -95,8 +95,15 @@ export interface AutomationImportServiceDeps {
 export function createAutomationImportService(
   deps: AutomationImportServiceDeps,
 ): AutomationImportService {
-  const { runtime: rt, registry, normalization, validation, evidence, traceability, coverage } =
-    deps;
+  const {
+    runtime: rt,
+    registry,
+    normalization,
+    validation,
+    evidence,
+    traceability,
+    coverage,
+  } = deps;
 
   async function persistImport(
     ctx: Parameters<AutomationImportService["importResult"]>[0],
@@ -112,7 +119,11 @@ export function createAutomationImportService(
       metadata: input.metadata,
     };
     const adapter = input.adapterKind
-      ? requireFound(registry.get(input.adapterKind), "automation_adapter", input.adapterKind)
+      ? requireFound(
+          registry.get(input.adapterKind),
+          "automation_adapter",
+          input.adapterKind,
+        )
       : registry.resolveForInput(adapterInput);
 
     const startedAt = rt.now();
@@ -236,7 +247,7 @@ export function createAutomationImportService(
       const automationType: AutomationType =
         input.automationType && isAutomationType(input.automationType)
           ? input.automationType
-          : normalized.automationType ?? "other";
+          : (normalized.automationType ?? "other");
 
       const execution = await rt.persistence.automatedExecutions.create(rctx, {
         sessionId: input.sessionId,
@@ -370,11 +381,13 @@ export function createAutomationImportService(
           adapterSourceId: execution.adapterSourceId,
           externalRunRef: execution.externalRunRef,
           environment: execution.environment,
-          overallStatus: execution.overallStatus as CanonicalAutomationResult["overallStatus"],
+          overallStatus:
+            execution.overallStatus as CanonicalAutomationResult["overallStatus"],
           durationMs: execution.durationMs,
           startedAt: execution.startedAt,
           completedAt: execution.completedAt,
-          adapterKind: execution.adapterKind as CanonicalAutomationResult["adapterKind"],
+          adapterKind:
+            execution.adapterKind as CanonicalAutomationResult["adapterKind"],
           createdAt: execution.createdAt,
           updatedAt: execution.updatedAt,
           createdBy: execution.createdBy,
@@ -408,11 +421,16 @@ export function createAutomationImportService(
     } catch (error) {
       const message = error instanceof Error ? error.message : "Import failed";
       try {
-        await rt.persistence.automationImports.update(rctx, pending.id, pending.revision, {
-          status: "failed",
-          completedAt: rt.now(),
-          errorSummary: message,
-        });
+        await rt.persistence.automationImports.update(
+          rctx,
+          pending.id,
+          pending.revision,
+          {
+            status: "failed",
+            completedAt: rt.now(),
+            errorSummary: message,
+          },
+        );
       } catch {
         // best-effort
       }

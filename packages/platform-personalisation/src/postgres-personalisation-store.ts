@@ -8,7 +8,10 @@ import {
   platformUserWorkbenchLayout,
 } from "@apzhub/config/db";
 
-import { mergePreferencesFromRecords, seedDefaultPreferencesForUser } from "./personalisation-defaults";
+import {
+  mergePreferencesFromRecords,
+  seedDefaultPreferencesForUser,
+} from "./personalisation-defaults";
 import type {
   AddFavoriteInput,
   FavoriteItem,
@@ -103,7 +106,11 @@ export class PostgresPreferenceRepository implements PreferenceRepository {
     return (await this.get(input.userId, input.category, input.preferenceKey))!;
   }
 
-  async delete(userId: string, category: string, preferenceKey: string): Promise<boolean> {
+  async delete(
+    userId: string,
+    category: string,
+    preferenceKey: string,
+  ): Promise<boolean> {
     const db = getDb();
     const result = await db
       .delete(platformUserPreference)
@@ -134,7 +141,11 @@ export class PostgresFavoritesRepository implements FavoritesRepository {
     return rows.map(mapFavoriteRow);
   }
 
-  async get(userId: string, itemType: string, itemKey: string): Promise<FavoriteItem | undefined> {
+  async get(
+    userId: string,
+    itemType: string,
+    itemKey: string,
+  ): Promise<FavoriteItem | undefined> {
     const db = getDb();
     const [row] = await db
       .select()
@@ -178,7 +189,10 @@ export class PostgresFavoritesRepository implements FavoritesRepository {
     const result = await db
       .delete(platformUserFavorite)
       .where(
-        and(eq(platformUserFavorite.userId, userId), eq(platformUserFavorite.favoriteId, favoriteId)),
+        and(
+          eq(platformUserFavorite.userId, userId),
+          eq(platformUserFavorite.favoriteId, favoriteId),
+        ),
       );
     return (result.rowCount ?? 0) > 0;
   }
@@ -255,7 +269,9 @@ export class PostgresRecentItemsRepository implements RecentItemsRepository {
 
   async clear(userId: string): Promise<void> {
     const db = getDb();
-    await db.delete(platformUserRecentItem).where(eq(platformUserRecentItem.userId, userId));
+    await db
+      .delete(platformUserRecentItem)
+      .where(eq(platformUserRecentItem.userId, userId));
   }
 
   async count(): Promise<number> {
@@ -282,7 +298,10 @@ export class PostgresWorkbenchLayoutRepository implements WorkbenchLayoutReposit
       : undefined;
   }
 
-  async save(userId: string, layout: Record<string, unknown>): Promise<WorkbenchLayoutRecord> {
+  async save(
+    userId: string,
+    layout: Record<string, unknown>,
+  ): Promise<WorkbenchLayoutRecord> {
     const db = getDb();
     const timestamp = new Date();
 
@@ -319,7 +338,9 @@ export class PostgresWorkbenchLayoutRepository implements WorkbenchLayoutReposit
   }
 }
 
-function mapPreferenceRow(row: typeof platformUserPreference.$inferSelect): PreferenceRecord {
+function mapPreferenceRow(
+  row: typeof platformUserPreference.$inferSelect,
+): PreferenceRecord {
   return {
     preferenceId: row.preferenceId,
     userId: row.userId,
@@ -389,11 +410,15 @@ export async function resolvePostgresSessionPersonalisation(
   return mergePreferencesFromRecords(records);
 }
 
-export async function listPostgresFavorites(userId: string): Promise<readonly FavoriteItem[]> {
+export async function listPostgresFavorites(
+  userId: string,
+): Promise<readonly FavoriteItem[]> {
   return new PostgresFavoritesRepository().listByUser(userId);
 }
 
-export async function listPostgresRecentItems(userId: string): Promise<readonly RecentItem[]> {
+export async function listPostgresRecentItems(
+  userId: string,
+): Promise<readonly RecentItem[]> {
   return new PostgresRecentItemsRepository().listByUser(userId);
 }
 

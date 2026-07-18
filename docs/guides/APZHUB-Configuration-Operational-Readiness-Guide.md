@@ -28,15 +28,15 @@ Single SoR for configuration **metadata**. No distributed runtime config mesh in
 
 ## Operational limitations (by design)
 
-| Capability | Status |
-| --- | --- |
-| Runtime resolution | **RUNTIME RESOLUTION NOT AVAILABLE** |
-| Runtime application | Not available |
-| Feature flags | Not available |
-| Secrets / Vault | Not available |
-| Env injection / ConfigMaps | Not available |
-| Hot reload / rollout | Not available |
-| Event Bus | Not available |
+| Capability                 | Status                               |
+| -------------------------- | ------------------------------------ |
+| Runtime resolution         | **RUNTIME RESOLUTION NOT AVAILABLE** |
+| Runtime application        | Not available                        |
+| Feature flags              | Not available                        |
+| Secrets / Vault            | Not available                        |
+| Env injection / ConfigMaps | Not available                        |
+| Hot reload / rollout       | Not available                        |
+| Event Bus                  | Not available                        |
 
 These are not outages — they are programme boundaries.
 

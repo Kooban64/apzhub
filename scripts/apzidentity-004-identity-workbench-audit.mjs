@@ -60,20 +60,24 @@ const libFiles = walk(join(ROOT, "apps/web/lib/identity")).filter(
   (f) => !f.includes(".test."),
 );
 
-scan([...componentFiles, ...libFiles], [
-  {
-    rule: "ui-no-identity-core",
-    pattern: /@apzhub\/identity-core|@apzhub\/identity-persistence/,
-  },
-  {
-    rule: "ui-no-platform-services",
-    pattern: /@apzhub\/platform-services|getPlatformServiceGateway|PlatformServiceGateway/,
-  },
-  {
-    rule: "ui-no-drizzle-postgres",
-    pattern: /\bdrizzle-orm\b|\bfrom ["']pg["']|\bnode-postgres\b/,
-  },
-]);
+scan(
+  [...componentFiles, ...libFiles],
+  [
+    {
+      rule: "ui-no-identity-core",
+      pattern: /@apzhub\/identity-core|@apzhub\/identity-persistence/,
+    },
+    {
+      rule: "ui-no-platform-services",
+      pattern:
+        /@apzhub\/platform-services|getPlatformServiceGateway|PlatformServiceGateway/,
+    },
+    {
+      rule: "ui-no-drizzle-postgres",
+      pattern: /\bdrizzle-orm\b|\bfrom ["']pg["']|\bnode-postgres\b/,
+    },
+  ],
+);
 
 scan(componentFiles, [
   {
@@ -164,7 +168,10 @@ if (!existsSync(viewFile)) {
   }
 }
 
-const routerFile = join(ROOT, "apps/web/components/identity/identity-workspace-router.tsx");
+const routerFile = join(
+  ROOT,
+  "apps/web/components/identity/identity-workspace-router.tsx",
+);
 if (!existsSync(routerFile)) {
   violations.push({
     file: "apps/web/components/identity/identity-workspace-router.tsx",
@@ -174,7 +181,10 @@ if (!existsSync(routerFile)) {
   });
 }
 
-const shell = readFileSync(join(ROOT, "apps/web/components/workbench-page.tsx"), "utf8");
+const shell = readFileSync(
+  join(ROOT, "apps/web/components/workbench-page.tsx"),
+  "utf8",
+);
 if (!shell.includes("IdentityWorkspaceRouter")) {
   violations.push({
     file: "apps/web/components/workbench-page.tsx",
@@ -293,13 +303,16 @@ if (existsSync(join(ROOT, "apps/web/app/workspace/identity"))) {
 
 // Identity must never reach into the frozen Administration architecture for
 // its own business (metadata-only) concerns — no cross-vertical coupling.
-scan([...componentFiles, ...libFiles], [
-  {
-    rule: "identity-no-administration-coupling",
-    pattern:
-      /@\/(lib|components)\/administration\/|@apzhub\/admin-core|@apzhub\/admin-persistence/,
-  },
-]);
+scan(
+  [...componentFiles, ...libFiles],
+  [
+    {
+      rule: "identity-no-administration-coupling",
+      pattern:
+        /@\/(lib|components)\/administration\/|@apzhub\/admin-core|@apzhub\/admin-persistence/,
+    },
+  ],
+);
 
 if (violations.length > 0) {
   console.error("APZIDENTITY-004 architecture audit FAILED:\n");
@@ -315,7 +328,9 @@ console.log("APZIDENTITY-004 architecture audit PASSED");
 console.log("  Workbench → identity-api typed client only");
 console.log("  no gateway/core/persistence imports");
 console.log("  no auth/provisioning/directory-sync surface in UI");
-console.log("  capability banners present (authentication / provisioning / directory sync)");
+console.log(
+  "  capability banners present (authentication / provisioning / directory sync)",
+);
 console.log("  manifest-driven registration (platform-identity)");
 console.log("  no dedicated app/workspace/identity tree");
 console.log("  no coupling into frozen Administration architecture");

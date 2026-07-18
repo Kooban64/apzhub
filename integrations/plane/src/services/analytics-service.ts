@@ -38,7 +38,10 @@ export class PlaneAnalyticsService {
     context: IntegrationRequestContext,
     projectId: string,
   ): Promise<ProjectStatistics> {
-    assertValid(validateRequiredString(projectId, "projectId"), "analytics.projectStats");
+    assertValid(
+      validateRequiredString(projectId, "projectId"),
+      "analytics.projectStats",
+    );
 
     return this.deps.runner.run(context, "plane.analytics.projectStats", async () => {
       const planeProjectId = extractProjectPlaneId(projectId);
@@ -47,7 +50,8 @@ export class PlaneAnalyticsService {
       const [statsList, issues] = await Promise.all([
         this.deps.client.getProjectStats(context, {
           project_ids: planeProjectId,
-          fields: "total_issues,completed_issues,total_members,total_cycles,total_modules",
+          fields:
+            "total_issues,completed_issues,total_members,total_cycles,total_modules",
         }),
         this.deps.client.listIssues(context, planeProjectId, {
           per_page: 100,
@@ -55,7 +59,8 @@ export class PlaneAnalyticsService {
         }),
       ]);
 
-      const stats = statsList.find((entry) => entry.id === planeProjectId) ?? statsList[0];
+      const stats =
+        statsList.find((entry) => entry.id === planeProjectId) ?? statsList[0];
       const tasks = issues.results.map((item) => {
         assertValid(validatePlaneIssueResponse(item), "task.entity");
         return mapPlaneIssue(item, projectId);

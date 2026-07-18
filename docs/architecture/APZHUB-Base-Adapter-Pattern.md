@@ -36,13 +36,13 @@ Vendor REST API
 
 ## Responsibilities split
 
-| Concern | Owner |
-|---------|-------|
-| Business validation, permissions, audit, events | Capability Service |
-| Connection, auth, retry, circuit breaker, rate limit | Integration SDK (`AdapterBase`) |
-| Vendor DTO ↔ APZHUB DTO mapping | Vendor Adapter domain methods |
-| Raw HTTP paths and vendor payload shapes | Internal vendor client only |
-| Health, diagnostics, lifecycle hooks | `AdapterBase` defaults + vendor overrides |
+| Concern                                              | Owner                                     |
+| ---------------------------------------------------- | ----------------------------------------- |
+| Business validation, permissions, audit, events      | Capability Service                        |
+| Connection, auth, retry, circuit breaker, rate limit | Integration SDK (`AdapterBase`)           |
+| Vendor DTO ↔ APZHUB DTO mapping                      | Vendor Adapter domain methods             |
+| Raw HTTP paths and vendor payload shapes             | Internal vendor client only               |
+| Health, diagnostics, lifecycle hooks                 | `AdapterBase` defaults + vendor overrides |
 
 **Vendor adapters contain no business rules.** If a rule applies across tenants or products, it belongs in the Capability Service.
 
@@ -91,13 +91,13 @@ class PlaneAdapter extends AdapterBase implements PlaneAdapterPort {
 
 Adapters are constructed via a **factory** registered at platform bootstrap:
 
-| Dependency | Source |
-|------------|--------|
-| `ConfigurationProvider` | `@apzhub/config` |
-| `FeatureFlagProvider` | `@apzhub/platform-governance` |
-| `IntegrationClient` | SDK factory (REST transport) |
-| Mapping providers | SDK + platform PostgreSQL repositories |
-| Logger / metrics | SDK observability module |
+| Dependency              | Source                                 |
+| ----------------------- | -------------------------------------- |
+| `ConfigurationProvider` | `@apzhub/config`                       |
+| `FeatureFlagProvider`   | `@apzhub/platform-governance`          |
+| `IntegrationClient`     | SDK factory (REST transport)           |
+| Mapping providers       | SDK + platform PostgreSQL repositories |
+| Logger / metrics        | SDK observability module               |
 
 Capability Services receive the adapter through **interface injection** — never `new PlaneAdapter()` in service code outside integration package wiring.
 
@@ -107,13 +107,13 @@ Capability Services receive the adapter through **interface injection** — neve
 
 Each integration may include an internal `{Engine}Client` class:
 
-| Rule | Requirement |
-|------|-------------|
-| Location | `integrations/{engine}/src/` only |
-| Transport | Must use SDK `IntegrationClient` |
-| Imports | Never imported outside `integrations/{engine}/` |
-| Naming | `{Engine}Client` — internal, not user-facing |
-| Tests | Contract tests with mocked SDK client |
+| Rule      | Requirement                                     |
+| --------- | ----------------------------------------------- |
+| Location  | `integrations/{engine}/src/` only               |
+| Transport | Must use SDK `IntegrationClient`                |
+| Imports   | Never imported outside `integrations/{engine}/` |
+| Naming    | `{Engine}Client` — internal, not user-facing    |
+| Tests     | Contract tests with mocked SDK client           |
 
 ---
 
@@ -121,13 +121,13 @@ Each integration may include an internal `{Engine}Client` class:
 
 `AdapterBase` provides default lifecycle behaviour:
 
-| Event | Default behaviour | Vendor override |
-|-------|-------------------|-----------------|
-| `onEnable` | Validate config, warm connection pool | Add engine-specific scope validation |
-| `onDisable` | Drain connections, open circuit | Pause webhooks |
-| `onProvision` | Call abstract `provisionVendorScope()` | Engine workspace/customer creation |
-| `onReconcile` | Compare mapping store vs engine | Report drift |
-| `onShutdown` | Release all connections gracefully | Cancel polling registrations |
+| Event         | Default behaviour                      | Vendor override                      |
+| ------------- | -------------------------------------- | ------------------------------------ |
+| `onEnable`    | Validate config, warm connection pool  | Add engine-specific scope validation |
+| `onDisable`   | Drain connections, open circuit        | Pause webhooks                       |
+| `onProvision` | Call abstract `provisionVendorScope()` | Engine workspace/customer creation   |
+| `onReconcile` | Compare mapping store vs engine        | Report drift                         |
+| `onShutdown`  | Release all connections gracefully     | Cancel polling registrations         |
 
 ---
 
@@ -145,26 +145,26 @@ Capability Services handle only `IntegrationError` typed categories.
 
 ## Testing pattern
 
-| Layer | Test type |
-|-------|-----------|
-| SDK (`AdapterBase`) | Unit tests with mocked providers |
-| Vendor adapter | Contract tests vs mock `IntegrationClient` |
-| Vendor adapter | Integration tests vs engine test instance |
-| Capability Service | Service tests vs mock adapter interface |
-| E2E | No direct vendor API calls (015) |
+| Layer               | Test type                                  |
+| ------------------- | ------------------------------------------ |
+| SDK (`AdapterBase`) | Unit tests with mocked providers           |
+| Vendor adapter      | Contract tests vs mock `IntegrationClient` |
+| Vendor adapter      | Integration tests vs engine test instance  |
+| Capability Service  | Service tests vs mock adapter interface    |
+| E2E                 | No direct vendor API calls (015)           |
 
 ---
 
 ## Anti-patterns (prohibited)
 
-| Anti-pattern | Why |
-|--------------|-----|
-| Service imports `PlaneClient` | Bypasses adapter boundary |
-| Module calls adapter | Layer violation (008) |
-| Adapter implements permission checks | Belongs in service + Authorization |
-| Adapter publishes platform events | Service publishes (029) |
-| Duplicate retry/circuit logic per adapter | Use SDK policies |
-| Hardcoded config in adapter | Use `ConfigurationProvider` |
+| Anti-pattern                              | Why                                |
+| ----------------------------------------- | ---------------------------------- |
+| Service imports `PlaneClient`             | Bypasses adapter boundary          |
+| Module calls adapter                      | Layer violation (008)              |
+| Adapter implements permission checks      | Belongs in service + Authorization |
+| Adapter publishes platform events         | Service publishes (029)            |
+| Duplicate retry/circuit logic per adapter | Use SDK policies                   |
+| Hardcoded config in adapter               | Use `ConfigurationProvider`        |
 
 ---
 

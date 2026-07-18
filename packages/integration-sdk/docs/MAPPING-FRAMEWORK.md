@@ -28,11 +28,11 @@ MappingResult<T>  (ok + value | error)
 
 ## Boundary: SDK mapping vs platform EntityMappingStore
 
-| Concern | Owner | Role |
-|---------|-------|------|
-| Field / enum / shape translation (provider ↔ canonical DTO) | **Integration SDK** (`/mapping`) | Stateless rules, profiles, pipeline |
-| Durable global ID bindings (`task_{32-hex}` ↔ native) | **Platform** `EntityMappingStore` (ADR-0049) | SoR for ID mappings |
-| Resolve / bind / orchestrate across store + providers | **Platform** `MappingOrchestrator` | Platform-services only |
+| Concern                                                     | Owner                                        | Role                                |
+| ----------------------------------------------------------- | -------------------------------------------- | ----------------------------------- |
+| Field / enum / shape translation (provider ↔ canonical DTO) | **Integration SDK** (`/mapping`)             | Stateless rules, profiles, pipeline |
+| Durable global ID bindings (`task_{32-hex}` ↔ native)       | **Platform** `EntityMappingStore` (ADR-0049) | SoR for ID mappings                 |
+| Resolve / bind / orchestrate across store + providers       | **Platform** `MappingOrchestrator`           | Platform-services only              |
 
 Adapters may still emit **provisional** IDs `{prefix}_{plane|zammad}_{native}` until the platform store binds durable IDs. Wire format is unchanged.
 
@@ -40,21 +40,21 @@ Adapters may still emit **provisional** IDs `{prefix}_{plane|zammad}_{native}` u
 
 ## Public surface
 
-| Symbol | Purpose |
-|--------|---------|
-| `MappingProvider` | Adapter-owned set of definitions + capabilities |
-| `MappingRegistry` / `InMemoryMappingRegistry` | Register, resolve, diagnose providers |
-| `MappingPipeline` / `DefaultMappingPipeline` | Execute definitions with metrics |
-| `MappingDefinition` / `createDefinition` | Single executable mapping rule |
-| `MappingProfile` / `MappingDirection` | Profile and direction selectors |
-| `MappingContext` | Tenant + correlation context |
-| `MappingResult` / `MappingError` | Safe execution outcome |
-| `MappingCapabilities` / `MappingDiagnostics` | Discovery and ops snapshots |
-| `FieldMapper` | Declarative field path maps |
-| `ValueTransformer` (+ registry) | Coercion helpers (date, uuid, enum, …) |
-| `EnumMapper` / `IdentityMapper` | Explicit enums; provisional ID helpers |
-| `RelationshipMapper` / `CollectionMapper` | Related IDs and list mapping |
-| `createMockMappingProvider` | Test fixtures |
+| Symbol                                        | Purpose                                         |
+| --------------------------------------------- | ----------------------------------------------- |
+| `MappingProvider`                             | Adapter-owned set of definitions + capabilities |
+| `MappingRegistry` / `InMemoryMappingRegistry` | Register, resolve, diagnose providers           |
+| `MappingPipeline` / `DefaultMappingPipeline`  | Execute definitions with metrics                |
+| `MappingDefinition` / `createDefinition`      | Single executable mapping rule                  |
+| `MappingProfile` / `MappingDirection`         | Profile and direction selectors                 |
+| `MappingContext`                              | Tenant + correlation context                    |
+| `MappingResult` / `MappingError`              | Safe execution outcome                          |
+| `MappingCapabilities` / `MappingDiagnostics`  | Discovery and ops snapshots                     |
+| `FieldMapper`                                 | Declarative field path maps                     |
+| `ValueTransformer` (+ registry)               | Coercion helpers (date, uuid, enum, …)          |
+| `EnumMapper` / `IdentityMapper`               | Explicit enums; provisional ID helpers          |
+| `RelationshipMapper` / `CollectionMapper`     | Related IDs and list mapping                    |
+| `createMockMappingProvider`                   | Test fixtures                                   |
 
 ---
 
@@ -130,25 +130,25 @@ Mapping errors use categories `mapping` | `validation`, never include provider i
 
 Common codes:
 
-| Code | Meaning |
-|------|---------|
-| `integration.mapping.validation_failed` | Invalid definition / input / transformer |
-| `integration.mapping.provider_not_found` | Unknown provider id |
-| `integration.mapping.definition_not_found` | No rule for entity/profile/direction |
-| `integration.mapping.duplicate_provider` | Register without `force` |
-| `integration.mapping.enum_unknown` | Enum policy `fail` / missing reverse |
+| Code                                       | Meaning                                  |
+| ------------------------------------------ | ---------------------------------------- |
+| `integration.mapping.validation_failed`    | Invalid definition / input / transformer |
+| `integration.mapping.provider_not_found`   | Unknown provider id                      |
+| `integration.mapping.definition_not_found` | No rule for entity/profile/direction     |
+| `integration.mapping.duplicate_provider`   | Register without `force`                 |
+| `integration.mapping.enum_unknown`         | Enum policy `fail` / missing reverse     |
 
 ---
 
 ## Package docs
 
-| Document | Path |
-|----------|------|
-| Profiles & directions | [MAPPING-PROFILES.md](./MAPPING-PROFILES.md) |
-| Registry & diagnostics | [MAPPING-REGISTRY.md](./MAPPING-REGISTRY.md) |
-| Transformers & helpers | [MAPPING-TRANSFORMERS.md](./MAPPING-TRANSFORMERS.md) |
-| Adapter migration | [MAPPING-MIGRATION.md](./MAPPING-MIGRATION.md) |
-| Architecture index | [APZHUB-Integration-SDK-Mapping-Framework.md](../../../docs/architecture/APZHUB-Integration-SDK-Mapping-Framework.md) |
+| Document               | Path                                                                                                                  |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Profiles & directions  | [MAPPING-PROFILES.md](./MAPPING-PROFILES.md)                                                                          |
+| Registry & diagnostics | [MAPPING-REGISTRY.md](./MAPPING-REGISTRY.md)                                                                          |
+| Transformers & helpers | [MAPPING-TRANSFORMERS.md](./MAPPING-TRANSFORMERS.md)                                                                  |
+| Adapter migration      | [MAPPING-MIGRATION.md](./MAPPING-MIGRATION.md)                                                                        |
+| Architecture index     | [APZHUB-Integration-SDK-Mapping-Framework.md](../../../docs/architecture/APZHUB-Integration-SDK-Mapping-Framework.md) |
 
 ---
 

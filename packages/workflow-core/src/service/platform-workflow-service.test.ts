@@ -15,9 +15,7 @@ import {
   type WorkflowFoundationRepos,
 } from "../ports/repository-ports";
 
-function ctx(
-  overrides?: Partial<WorkflowRequestContext>,
-): WorkflowRequestContext {
+function ctx(overrides?: Partial<WorkflowRequestContext>): WorkflowRequestContext {
   return {
     tenantId: "tenant_core",
     userId: "user_core",
@@ -169,8 +167,6 @@ describe("createPlatformWorkflowService", () => {
     expect(found).toHaveLength(1);
 
     await service.deleteWorkflow(request, created.id);
-    await expect(service.getWorkflow(request, created.id)).rejects.toThrow(
-      /not found/,
-    );
+    await expect(service.getWorkflow(request, created.id)).rejects.toThrow(/not found/);
   });
 });

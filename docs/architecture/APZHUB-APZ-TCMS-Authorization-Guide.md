@@ -22,11 +22,11 @@ Default authorization seed registers wildcards:
 
 Examples:
 
-| Aggregate | Create requires (any match) |
-| --- | --- |
-| `test_plan` | `testing.plans.create` or `testing.admin` (or granted `testing.*` / `*`) |
-| `evidence` | `evidence.register` or `evidence.admin` |
-| `configuration` | `testing.admin` or `administration.testing` |
+| Aggregate       | Create requires (any match)                                              |
+| --------------- | ------------------------------------------------------------------------ |
+| `test_plan`     | `testing.plans.create` or `testing.admin` (or granted `testing.*` / `*`) |
+| `evidence`      | `evidence.register` or `evidence.admin`                                  |
+| `configuration` | `testing.admin` or `administration.testing`                              |
 
 There is **no** repository allow-all mode. Platform admin `*` works only because `permissionPatternMatches("*", key)` is true — still evaluated as a granted pattern.
 

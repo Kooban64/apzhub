@@ -41,13 +41,13 @@ Package-scoped Vitest coverage (executable sources, excluding postgres live driv
 
 ## Quality Gates
 
-| Gate | Result |
-|------|--------|
-| Typecheck | PASS |
-| Lint | PASS |
-| Tests | PASS |
-| Coverage ≥95% | PASS |
-| Architecture / dependency / boundary / authorization audit | PASS |
+| Gate                                                       | Result |
+| ---------------------------------------------------------- | ------ |
+| Typecheck                                                  | PASS   |
+| Lint                                                       | PASS   |
+| Tests                                                      | PASS   |
+| Coverage ≥95%                                              | PASS   |
+| Architecture / dependency / boundary / authorization audit | PASS   |
 
 ## Technical Debt
 

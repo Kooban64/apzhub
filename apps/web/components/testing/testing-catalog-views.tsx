@@ -72,9 +72,7 @@ function ListQueryStates({
 }) {
   if (isLoading) return <LoadingState />;
   if (isError) {
-    return (
-      <ErrorState message={toTestingUserMessage(error)} onRetry={onRetry} />
-    );
+    return <ErrorState message={toTestingUserMessage(error)} onRetry={onRetry} />;
   }
   if (isEmpty) return <EmptyState title={emptyTitle} />;
   return children;
@@ -199,21 +197,29 @@ export function TestingPlansView({
         <Panel title="Plan details">
           <dl className="grid gap-2 text-sm sm:grid-cols-2">
             <div>
-              <dt className="font-medium text-[var(--color-muted-foreground)]">Status</dt>
+              <dt className="font-medium text-[var(--color-muted-foreground)]">
+                Status
+              </dt>
               <dd>
                 <StatusBadge status={plan.status} />
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-[var(--color-muted-foreground)]">Version</dt>
+              <dt className="font-medium text-[var(--color-muted-foreground)]">
+                Version
+              </dt>
               <dd>{plan.version}</dd>
             </div>
             <div>
-              <dt className="font-medium text-[var(--color-muted-foreground)]">Suites</dt>
+              <dt className="font-medium text-[var(--color-muted-foreground)]">
+                Suites
+              </dt>
               <dd>{plan.suiteCount}</dd>
             </div>
             <div>
-              <dt className="font-medium text-[var(--color-muted-foreground)]">Updated</dt>
+              <dt className="font-medium text-[var(--color-muted-foreground)]">
+                Updated
+              </dt>
               <dd>{formatTestingDate(plan.updatedAt)}</dd>
             </div>
           </dl>
@@ -350,9 +356,7 @@ export function TestingSuitesView({
             <Button
               type="button"
               size="sm"
-              disabled={
-                createMutation.isPending || !suiteName.trim() || !planId.trim()
-              }
+              disabled={createMutation.isPending || !suiteName.trim() || !planId.trim()}
               onClick={() => createMutation.mutate()}
               data-testid="testing-suites-create"
             >
@@ -705,7 +709,14 @@ export function TestingDefectsView({
         {query.isSuccess ? (
           <TestingTable
             caption="Defects"
-            columns={["Title", "Severity", "Status", "Linked case", "Source", "Updated"]}
+            columns={[
+              "Title",
+              "Severity",
+              "Status",
+              "Linked case",
+              "Source",
+              "Updated",
+            ]}
             rows={query.data.items.map((item) => ({
               id: item.id,
               cells: [

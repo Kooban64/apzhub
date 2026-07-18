@@ -47,34 +47,34 @@ describe("APZSEARCH-010 deep coverage", () => {
     const context = ctx();
 
     expect(
-      adapter.validator.validateDraft(context, {
-        entityId: "",
-        entityType: "project",
-        title: "",
-        classification: undefined,
-        metadata: {
-          status: "active",
-          identifier: "X",
-          workspaceId: "ws_plane_bad",
-          meiliUid: "x",
-        },
-      }).issues.map((i) => i.code),
+      adapter.validator
+        .validateDraft(context, {
+          entityId: "",
+          entityType: "project",
+          title: "",
+          classification: undefined,
+          metadata: {
+            status: "active",
+            identifier: "X",
+            workspaceId: "ws_plane_bad",
+            meiliUid: "x",
+          },
+        })
+        .issues.map((i) => i.code),
     ).toEqual(
-      expect.arrayContaining([
-        "required",
-        "plane_id_forbidden",
-        "provider_leakage",
-      ]),
+      expect.arrayContaining(["required", "plane_id_forbidden", "provider_leakage"]),
     );
 
     expect(
-      adapter.validator.validateDraft(context, {
-        entityId: "task_plane_x",
-        entityType: "unknown",
-        title: "T",
-        classification: "internal",
-        metadata: {},
-      }).issues.some((i) => i.code === "unsupported"),
+      adapter.validator
+        .validateDraft(context, {
+          entityId: "task_plane_x",
+          entityType: "unknown",
+          title: "T",
+          classification: "internal",
+          metadata: {},
+        })
+        .issues.some((i) => i.code === "unsupported"),
     ).toBe(true);
 
     expect(
@@ -94,20 +94,22 @@ describe("APZSEARCH-010 deep coverage", () => {
 
     // Force validator codes for empty tenant / null permissions
     expect(
-      adapter.validator.validateDraft(
-        {
-          ...context,
-          tenantId: "",
-          permissions: null as unknown as readonly string[],
-        },
-        {
-          entityId: "x",
-          entityType: "team",
-          title: "T",
-          classification: "internal",
-          metadata: {},
-        },
-      ).issues.map((i) => i.field),
+      adapter.validator
+        .validateDraft(
+          {
+            ...context,
+            tenantId: "",
+            permissions: null as unknown as readonly string[],
+          },
+          {
+            entityId: "x",
+            entityType: "team",
+            title: "T",
+            classification: "internal",
+            metadata: {},
+          },
+        )
+        .issues.map((i) => i.field),
     ).toEqual(expect.arrayContaining(["tenantId", "permissions"]));
 
     const ws: Workspace = {
@@ -180,12 +182,8 @@ describe("APZSEARCH-010 deep coverage", () => {
     expect(adapter.hooks.onWorkspaceRemoved(context, ws.id).ok).toBe(true);
     expect(adapter.hooks.onTaskRemoved(context, task.id).ok).toBe(true);
     expect(adapter.hooks.onSprintRemoved(context, sprint.id).ok).toBe(true);
-    expect(adapter.hooks.onMilestoneRemoved(context, milestone.id).ok).toBe(
-      true,
-    );
-    expect(adapter.hooks.onModuleRemoved(context, moduleEntity.id).ok).toBe(
-      true,
-    );
+    expect(adapter.hooks.onMilestoneRemoved(context, milestone.id).ok).toBe(true);
+    expect(adapter.hooks.onModuleRemoved(context, moduleEntity.id).ok).toBe(true);
     expect(adapter.hooks.onTeamRemoved(context, team.id).ok).toBe(true);
     expect(adapter.hooks.onProjectRemoved(context, project.id).ok).toBe(true);
 
@@ -268,30 +266,22 @@ describe("APZSEARCH-010 deep coverage", () => {
       validator: {
         validateDraft: () => ({
           valid: false,
-          issues: [
-            { field: "title", code: "required", message: "forced" },
-          ],
+          issues: [{ field: "title", code: "required", message: "forced" }],
         }),
       } as never,
     });
     expect(
-      publisherThrow.publish(context, { entityType: "project", entity: project })
-        .ok,
+      publisherThrow.publish(context, { entityType: "project", entity: project }).ok,
     ).toBe(false);
 
     const publisherOkMap = new ProjectsSearchPublisher({
       integrationPublisher: throwing,
     });
     expect(
-      publisherOkMap.publish(context, { entityType: "project", entity: project })
-        .ok,
+      publisherOkMap.publish(context, { entityType: "project", entity: project }).ok,
     ).toBe(false);
-    expect(
-      publisherOkMap.remove(context, "project", project.id).ok,
-    ).toBe(false);
-    expect(
-      publisherOkMap.lifecycle(context, project.id, "archived").ok,
-    ).toBe(false);
+    expect(publisherOkMap.remove(context, "project", project.id).ok).toBe(false);
+    expect(publisherOkMap.lifecycle(context, project.id, "archived").ok).toBe(false);
 
     void broken;
     expect(adapter.lifecycle.suggestFromDomainStatus("project", "active")).toBe(

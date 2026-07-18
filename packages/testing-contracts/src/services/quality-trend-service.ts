@@ -11,7 +11,13 @@ export interface QualityTrendService {
   ): Promise<QualityTrendComparison>;
   compareWindows(
     ctx: ServiceRequestContext,
-    baseline: { readonly label: string; readonly metrics: Readonly<Record<string, number>> },
-    current: { readonly label: string; readonly metrics: Readonly<Record<string, number>> },
+    baseline: {
+      readonly label: string;
+      readonly metrics: Readonly<Record<string, number>>;
+    },
+    current: {
+      readonly label: string;
+      readonly metrics: Readonly<Record<string, number>>;
+    },
   ): Promise<QualityTrendComparison>;
 }

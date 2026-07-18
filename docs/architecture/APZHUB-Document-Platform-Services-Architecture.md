@@ -23,43 +23,43 @@ Product / HTTP (`/api/v1/documents` — APZDOCS-004)
                   → StorageCoordinator → DocumentStorageProvider
 ```
 
-| Layer | Responsibility | Must not |
-| ----- | -------------- | -------- |
-| Gateway facets | Typed accessors, pipeline wrapping | Binary I/O, provider SDKs |
+| Layer                  | Responsibility                                 | Must not                            |
+| ---------------------- | ---------------------------------------------- | ----------------------------------- |
+| Gateway facets         | Typed accessors, pipeline wrapping             | Binary I/O, provider SDKs           |
 | Platform service impls | Map `ServiceRequestContext` → domain; delegate | Business rules, storage SDK imports |
-| Document Core | Domain rules, coordinator, integrity | HTTP, gateway, platform-services |
-| Persistence / Storage | SoR metadata + binary providers | Called from products |
+| Document Core          | Domain rules, coordinator, integrity           | HTTP, gateway, platform-services    |
+| Persistence / Storage  | SoR metadata + binary providers                | Called from products                |
 
 ## Gateway surface (`DocumentPlatformGateway`)
 
 Contract: `packages/document-contracts/src/services/platform-services.ts`
 
-| Facet | Pipeline service key | Role |
-| ----- | -------------------- | ---- |
-| `documents` | `documentService` | Create, get, summarize, archive, restore |
-| `documentVersions` | `documentVersion` | List/get content version **metadata** |
-| `documentStorage` | `documentStorage` | Storage metadata, integrity verify, reconciliation inspect |
-| `documentCollections` | `documentCollection` | Assign collection |
-| `documentFolders` | `documentFolder` | Assign folder |
-| `documentTags` | `documentTag` | Tag / list / get tags |
-| `documentRelationships` | `documentRelationship` | Relate documents |
-| `documentRetention` | `documentRetention` | Apply retention |
-| `documentAudit` | `documentAudit` | List audit entries |
-| `documentMetadata` | `documentMetadata` | Update metadata |
-| `documentClassification` | `documentClassification` | Classify |
-| `documentSearchMetadata` | `documentSearchMetadata` | Metadata filter/find (not FTS engine) |
-| `documentDiagnostics` | `documentDiagnostics` | Provider/repo readiness (secrets redacted) |
+| Facet                    | Pipeline service key     | Role                                                       |
+| ------------------------ | ------------------------ | ---------------------------------------------------------- |
+| `documents`              | `documentService`        | Create, get, summarize, archive, restore                   |
+| `documentVersions`       | `documentVersion`        | List/get content version **metadata**                      |
+| `documentStorage`        | `documentStorage`        | Storage metadata, integrity verify, reconciliation inspect |
+| `documentCollections`    | `documentCollection`     | Assign collection                                          |
+| `documentFolders`        | `documentFolder`         | Assign folder                                              |
+| `documentTags`           | `documentTag`            | Tag / list / get tags                                      |
+| `documentRelationships`  | `documentRelationship`   | Relate documents                                           |
+| `documentRetention`      | `documentRetention`      | Apply retention                                            |
+| `documentAudit`          | `documentAudit`          | List audit entries                                         |
+| `documentMetadata`       | `documentMetadata`       | Update metadata                                            |
+| `documentClassification` | `documentClassification` | Classify                                                   |
+| `documentSearchMetadata` | `documentSearchMetadata` | Metadata filter/find (not FTS engine)                      |
+| `documentDiagnostics`    | `documentDiagnostics`    | Provider/repo readiness (secrets redacted)                 |
 
 Also available as `gateway.documentPlatform` (full nested object) and individual `gateway.document*` getters on `PlatformServiceGateway`.
 
 ## Factories
 
-| Factory | Use |
-| ------- | --- |
-| `createDocumentPlatformServices` | Compose from persistence + storage bundles |
-| `createDocumentPlatformServicesForProduction` | Requires `postgresDb` + production `storageConfig` — **no silent memory fallback** |
-| `createDocumentPlatformServicesForTest` | In-memory persistence/storage allowed for tests |
-| `wrapDocumentPlatformGatewayWithPipeline` | Applied via `bundle.wrapWithPipeline(pipeline)` when registered on `createPlatformServices({ documents })` |
+| Factory                                       | Use                                                                                                        |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `createDocumentPlatformServices`              | Compose from persistence + storage bundles                                                                 |
+| `createDocumentPlatformServicesForProduction` | Requires `postgresDb` + production `storageConfig` — **no silent memory fallback**                         |
+| `createDocumentPlatformServicesForTest`       | In-memory persistence/storage allowed for tests                                                            |
+| `wrapDocumentPlatformGatewayWithPipeline`     | Applied via `bundle.wrapWithPipeline(pipeline)` when registered on `createPlatformServices({ documents })` |
 
 ## Authorization
 

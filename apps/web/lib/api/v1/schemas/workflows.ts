@@ -48,20 +48,11 @@ export const workflowLifecycleSchema = z.enum([
   "restored",
 ]);
 
-export const workflowValueTypeSchema = z.enum([
-  "string",
-  "number",
-  "boolean",
-  "json",
-]);
+export const workflowValueTypeSchema = z.enum(["string", "number", "boolean", "json"]);
 
 export const workflowNodeKindSchema = z.enum(["trigger", "action", "condition"]);
 
-const workflowConfigValueSchema = z.union([
-  z.string(),
-  z.number(),
-  z.boolean(),
-]);
+const workflowConfigValueSchema = z.union([z.string(), z.number(), z.boolean()]);
 
 const workflowConfigSchema = z.record(workflowConfigValueSchema);
 

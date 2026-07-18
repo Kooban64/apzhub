@@ -27,7 +27,7 @@ describe("APZNOTIFY-006 Notification Wave Closeout", () => {
       "packages/notification-contracts/package.json": "0.2.0",
       "packages/notification-core/package.json": "0.2.0",
       "packages/notification-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.21.0",
+      "packages/platform-services/package.json": "0.25.0",
       "packages/platform-service-contracts/package.json": "0.16.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
@@ -38,10 +38,7 @@ describe("APZNOTIFY-006 Notification Wave Closeout", () => {
 
   it("ships freeze notice and recommends APZNOTIFY-007 only", () => {
     const freeze = readFileSync(
-      join(
-        ROOT,
-        "docs/architecture/APZHUB-Notification-Architecture-Freeze-Notice.md",
-      ),
+      join(ROOT, "docs/architecture/APZHUB-Notification-Architecture-Freeze-Notice.md"),
       "utf8",
     );
     expect(freeze).toMatch(/frozen/i);

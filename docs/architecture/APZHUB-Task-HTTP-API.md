@@ -31,21 +31,21 @@ Handlers may only validate input, construct context (via auth wrapper), invoke t
 
 ## Endpoints
 
-| Method | Path | Gateway | Permission (pipeline) |
-|--------|------|---------|------------------------|
-| GET | `/api/v1/tasks` | `listTasks` | `task.list` |
-| POST | `/api/v1/tasks` | `createTask` | `task.create` |
-| GET | `/api/v1/tasks/{taskId}` | `getTask` | `task.read` |
-| PATCH | `/api/v1/tasks/{taskId}` | `updateTask` | `task.update` |
-| DELETE | `/api/v1/tasks/{taskId}` | `archiveTask` | `task.archive` |
-| POST | `.../transition` | `transitionTaskStatus` | `task.transition` |
-| POST | `.../assignees` | `assignTask` | `task.assign` |
-| DELETE | `.../assignees/{assigneeId}` | `getTask` + `assignTask` | `task.read` then `task.assign` |
-| POST | `.../labels` | `getTask` + `updateTask` | `task.read` then `task.update` |
-| DELETE | `.../labels/{labelId}` | `getTask` + `updateTask` | `task.read` then `task.update` |
-| POST / DELETE | `.../sprint` | `updateTask` | `task.update` |
-| POST / DELETE | `.../module` | `updateTask` | `task.update` |
-| POST / DELETE | `.../parent` | `updateTask` | `task.update` |
+| Method        | Path                         | Gateway                  | Permission (pipeline)          |
+| ------------- | ---------------------------- | ------------------------ | ------------------------------ |
+| GET           | `/api/v1/tasks`              | `listTasks`              | `task.list`                    |
+| POST          | `/api/v1/tasks`              | `createTask`             | `task.create`                  |
+| GET           | `/api/v1/tasks/{taskId}`     | `getTask`                | `task.read`                    |
+| PATCH         | `/api/v1/tasks/{taskId}`     | `updateTask`             | `task.update`                  |
+| DELETE        | `/api/v1/tasks/{taskId}`     | `archiveTask`            | `task.archive`                 |
+| POST          | `.../transition`             | `transitionTaskStatus`   | `task.transition`              |
+| POST          | `.../assignees`              | `assignTask`             | `task.assign`                  |
+| DELETE        | `.../assignees/{assigneeId}` | `getTask` + `assignTask` | `task.read` then `task.assign` |
+| POST          | `.../labels`                 | `getTask` + `updateTask` | `task.read` then `task.update` |
+| DELETE        | `.../labels/{labelId}`       | `getTask` + `updateTask` | `task.read` then `task.update` |
+| POST / DELETE | `.../sprint`                 | `updateTask`             | `task.update`                  |
+| POST / DELETE | `.../module`                 | `updateTask`             | `task.update`                  |
+| POST / DELETE | `.../parent`                 | `updateTask`             | `task.update`                  |
 
 DELETE on the task resource is soft-archive only.
 
@@ -57,17 +57,17 @@ Required: `projectId`.
 
 Optional (strict — unknown keys rejected):
 
-| Query | Maps to |
-|-------|---------|
-| `stateId` | `TaskListFilter.statusId` |
-| `assigneeId` | `assigneeId` |
-| `labelId` | `labelId` |
-| `priority` | `priority` |
-| `moduleId` | `projectModuleId` |
-| `sprintId` | `sprintId` |
-| `search` | `search` |
-| `limit` / `cursor` / `sort` / `order` | pagination / sort |
-| `workspaceId` | Accepted for client convenience; **not** applied as a TaskListFilter field |
+| Query                                 | Maps to                                                                    |
+| ------------------------------------- | -------------------------------------------------------------------------- |
+| `stateId`                             | `TaskListFilter.statusId`                                                  |
+| `assigneeId`                          | `assigneeId`                                                               |
+| `labelId`                             | `labelId`                                                                  |
+| `priority`                            | `priority`                                                                 |
+| `moduleId`                            | `projectModuleId`                                                          |
+| `sprintId`                            | `sprintId`                                                                 |
+| `search`                              | `search`                                                                   |
+| `limit` / `cursor` / `sort` / `order` | pagination / sort                                                          |
+| `workspaceId`                         | Accepted for client convenience; **not** applied as a TaskListFilter field |
 
 ---
 

@@ -11,10 +11,10 @@
 
 ## Classification examples
 
-| Source | Platform code |
-| --- | --- |
-| NOT_SUPPORTED / mutations | `PROVIDER_CAPABILITY_UNSUPPORTED` |
-| Integration auth failure | `UNAUTHENTICATED` / `FORBIDDEN` |
-| Vendor unavailable | `INTEGRATION_UNAVAILABLE` |
-| Not found | `NOT_FOUND` |
+| Source                      | Platform code                     |
+| --------------------------- | --------------------------------- |
+| NOT_SUPPORTED / mutations   | `PROVIDER_CAPABILITY_UNSUPPORTED` |
+| Integration auth failure    | `UNAUTHENTICATED` / `FORBIDDEN`   |
+| Vendor unavailable          | `INTEGRATION_UNAVAILABLE`         |
+| Not found                   | `NOT_FOUND`                       |
 | Missing engine registration | `PROVIDER_CAPABILITY_UNSUPPORTED` |

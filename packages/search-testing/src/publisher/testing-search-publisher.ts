@@ -85,10 +85,7 @@ function buildDefaultSpecialisedPublishers(
   return {
     manual: new ManualTestingPublisher(deps, mapper.getManualMapper()),
     automation: new AutomationPublisher(deps, mapper.getAutomationMapper()),
-    certification: new CertificationPublisher(
-      deps,
-      mapper.getCertificationMapper(),
-    ),
+    certification: new CertificationPublisher(deps, mapper.getCertificationMapper()),
     release: new ReleasePublisher(deps, mapper.getReleaseMapper()),
     engineeringIntelligence: new EngineeringIntelligencePublisher(
       deps,
@@ -105,10 +102,7 @@ function buildDefaultSpecialisedPublishers(
 
 export class TestingSearchPublisher {
   private readonly specialised: TestingSearchSpecialisedPublishers;
-  private readonly byEntityType: ReadonlyMap<
-    string,
-    TestingDomainSearchPublisher
-  >;
+  private readonly byEntityType: ReadonlyMap<string, TestingDomainSearchPublisher>;
   private readonly mapper: TestingSearchEntityMapper;
   private readonly validator: TestingSearchEntityValidator;
   private readonly lifecycleHelper: TestingSearchLifecycle;
@@ -122,12 +116,10 @@ export class TestingSearchPublisher {
     this.integrationPublisher = options.integrationPublisher;
     this.mapper = options.mapper ?? new TestingSearchEntityMapper();
     this.validator = options.validator ?? new TestingSearchEntityValidator();
-    this.lifecycleHelper =
-      options.lifecycle ?? new TestingSearchLifecycle();
+    this.lifecycleHelper = options.lifecycle ?? new TestingSearchLifecycle();
     this.metrics = options.metrics ?? new TestingSearchMetrics();
     this.logger = options.logger ?? new TestingSearchLogger();
-    this.diagnosticsStore =
-      options.diagnostics ?? new TestingSearchDiagnostics();
+    this.diagnosticsStore = options.diagnostics ?? new TestingSearchDiagnostics();
     this.errors = options.errors ?? new TestingSearchErrorTranslator();
     this.specialised =
       options.specialisedPublishers ??
@@ -174,12 +166,7 @@ export class TestingSearchPublisher {
       return this.resolvePublisher(input.entityType).validate(context, input);
     } catch (error) {
       const domain = this.errors.translate(error);
-      return failedPublicationResult(
-        "validate",
-        context,
-        domain.message,
-        Date.now(),
-      );
+      return failedPublicationResult("validate", context, domain.message, Date.now());
     }
   }
 
@@ -191,12 +178,7 @@ export class TestingSearchPublisher {
       return this.resolvePublisher(input.entityType).preview(context, input);
     } catch (error) {
       const domain = this.errors.translate(error);
-      return failedPublicationResult(
-        "preview",
-        context,
-        domain.message,
-        Date.now(),
-      );
+      return failedPublicationResult("preview", context, domain.message, Date.now());
     }
   }
 
@@ -208,12 +190,7 @@ export class TestingSearchPublisher {
       return this.resolvePublisher(input.entityType).publish(context, input);
     } catch (error) {
       const domain = this.errors.translate(error);
-      return failedPublicationResult(
-        "publish",
-        context,
-        domain.message,
-        Date.now(),
-      );
+      return failedPublicationResult("publish", context, domain.message, Date.now());
     }
   }
 
@@ -225,12 +202,7 @@ export class TestingSearchPublisher {
       return this.resolvePublisher(input.entityType).update(context, input);
     } catch (error) {
       const domain = this.errors.translate(error);
-      return failedPublicationResult(
-        "update",
-        context,
-        domain.message,
-        Date.now(),
-      );
+      return failedPublicationResult("update", context, domain.message, Date.now());
     }
   }
 
@@ -240,19 +212,10 @@ export class TestingSearchPublisher {
     entityId: string,
   ): SearchPublicationResult {
     try {
-      return this.resolvePublisher(entityType).remove(
-        context,
-        entityType,
-        entityId,
-      );
+      return this.resolvePublisher(entityType).remove(context, entityType, entityId);
     } catch (error) {
       const domain = this.errors.translate(error);
-      return failedPublicationResult(
-        "remove",
-        context,
-        domain.message,
-        Date.now(),
-      );
+      return failedPublicationResult("remove", context, domain.message, Date.now());
     }
   }
 
@@ -288,9 +251,7 @@ export class TestingSearchPublisher {
     );
   }
 
-  statistics(
-    _context: TestingSearchPublicationContext,
-  ): TestingSearchStatistics {
+  statistics(_context: TestingSearchPublicationContext): TestingSearchStatistics {
     return this.metrics.snapshot();
   }
 

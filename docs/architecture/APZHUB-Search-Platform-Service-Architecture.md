@@ -23,33 +23,33 @@ This milestone does **not** execute searches, index content, or bind a search en
 
 ## Management plane vs execution plane
 
-| Plane | Status |
-|-------|--------|
-| Provider registration / lifecycle | Implemented |
-| Configuration (secret refs only) | Implemented |
-| Collections / sources / scopes / profiles / metadata | Implemented (metadata only) |
-| Capabilities / health / diagnostics / statistics / audit / validation | Implemented |
-| Search query execution | **Unavailable** — reserved |
-| Indexing / engines / adapters | **Not implemented** |
+| Plane                                                                 | Status                      |
+| --------------------------------------------------------------------- | --------------------------- |
+| Provider registration / lifecycle                                     | Implemented                 |
+| Configuration (secret refs only)                                      | Implemented                 |
+| Collections / sources / scopes / profiles / metadata                  | Implemented (metadata only) |
+| Capabilities / health / diagnostics / statistics / audit / validation | Implemented                 |
+| Search query execution                                                | **Unavailable** — reserved  |
+| Indexing / engines / adapters                                         | **Not implemented**         |
 
 ## Gateway facets
 
-| Facet | Role |
-|-------|------|
-| `searchQuery` | `validateQuery` only (`query` throws `search_execution_unavailable`) |
-| `searchProviders` | Provider management + lifecycle |
-| `searchConfigurations` | Configuration CRUD / version / activate / validate / archive |
-| `searchCapabilities` | Capability inspection |
-| `searchHealth` | Management vs execution readiness |
-| `searchDiagnostics` | Safe diagnostics (no secrets) |
-| `searchCollections` | Collection metadata |
-| `searchSources` | Source metadata (+ provider/collection assignment) |
-| `searchScopes` | Scope metadata |
-| `searchProfiles` | Profile metadata |
-| `searchMetadata` | Declared entity metadata projections |
-| `searchAudit` | Immutable audit retrieval |
-| `searchStatistics` | Metadata counts only |
-| `searchValidation` | Deterministic validation |
+| Facet                  | Role                                                                 |
+| ---------------------- | -------------------------------------------------------------------- |
+| `searchQuery`          | `validateQuery` only (`query` throws `search_execution_unavailable`) |
+| `searchProviders`      | Provider management + lifecycle                                      |
+| `searchConfigurations` | Configuration CRUD / version / activate / validate / archive         |
+| `searchCapabilities`   | Capability inspection                                                |
+| `searchHealth`         | Management vs execution readiness                                    |
+| `searchDiagnostics`    | Safe diagnostics (no secrets)                                        |
+| `searchCollections`    | Collection metadata                                                  |
+| `searchSources`        | Source metadata (+ provider/collection assignment)                   |
+| `searchScopes`         | Scope metadata                                                       |
+| `searchProfiles`       | Profile metadata                                                     |
+| `searchMetadata`       | Declared entity metadata projections                                 |
+| `searchAudit`          | Immutable audit retrieval                                            |
+| `searchStatistics`     | Metadata counts only                                                 |
+| `searchValidation`     | Deterministic validation                                             |
 
 Legacy Plane `gateway.search` (unified product search scaffold) remains separate and is **not** wired to APZSEARCH execution.
 

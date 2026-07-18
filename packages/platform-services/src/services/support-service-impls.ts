@@ -76,12 +76,20 @@ export class SupportServiceImpl implements SupportService {
   ): Promise<PageResult<SupportTicket>> {
     assertRequestContext(ctx);
     const provider = this.resolver.resolveSupportRequestProvider(ctx);
-    const registration = findSupportRegistration(this.resolver, "support_request", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_request",
+      provider,
+    );
 
     const providerQuery = query
       ? {
           ...query,
-          filter: await this.translateTicketFilterOutbound(ctx, registration, query.filter ?? {}),
+          filter: await this.translateTicketFilterOutbound(
+            ctx,
+            registration,
+            query.filter ?? {},
+          ),
         }
       : undefined;
 
@@ -98,19 +106,22 @@ export class SupportServiceImpl implements SupportService {
     supportRequestId: SupportTicketId,
   ): Promise<SupportTicket> {
     assertRequestContext(ctx);
-    const resolved = await this.mapping.resolveExisting(ctx, supportRequestId, "support_request");
+    const resolved = await this.mapping.resolveExisting(
+      ctx,
+      supportRequestId,
+      "support_request",
+    );
     const provider = this.resolver.resolveSupportRequestProvider(ctx, {
       mappedProviderId: resolved.providerId,
       mappedIntegrationId: resolved.integrationId,
     });
-    const registration = findSupportRegistration(this.resolver, "support_request", provider);
-    const ticket = await provider.getSupportRequest(ctx, resolved.providerNativeId);
-    return this.normalizeTicket(
-      ctx,
-      registration,
-      ticket,
-      resolved.mapping.platformId,
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_request",
+      provider,
     );
+    const ticket = await provider.getSupportRequest(ctx, resolved.providerNativeId);
+    return this.normalizeTicket(ctx, registration, ticket, resolved.mapping.platformId);
   }
 
   async createSupportRequest(
@@ -119,7 +130,11 @@ export class SupportServiceImpl implements SupportService {
   ): Promise<SupportTicket> {
     assertRequestContext(ctx);
     const provider = this.resolver.resolveSupportRequestProvider(ctx);
-    const registration = findSupportRegistration(this.resolver, "support_request", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_request",
+      provider,
+    );
     const providerInput = await this.translateCreateTicketOutbound(ctx, input);
     const created = await provider.createSupportRequest(ctx, providerInput);
     const mapping = await this.mapping.ensureMappingAfterCreate({
@@ -178,8 +193,16 @@ export class SupportServiceImpl implements SupportService {
       ctx,
       supportRequestId,
     );
-    const reopened = await provider.reopenSupportRequest(ctx, resolved.providerNativeId);
-    return this.normalizeTicket(ctx, registration, reopened, resolved.mapping.platformId);
+    const reopened = await provider.reopenSupportRequest(
+      ctx,
+      resolved.providerNativeId,
+    );
+    return this.normalizeTicket(
+      ctx,
+      registration,
+      reopened,
+      resolved.mapping.platformId,
+    );
   }
 
   async assignSupportRequest(
@@ -198,7 +221,12 @@ export class SupportServiceImpl implements SupportService {
       resolved.providerNativeId,
       providerInput,
     );
-    return this.normalizeTicket(ctx, registration, assigned, resolved.mapping.platformId);
+    return this.normalizeTicket(
+      ctx,
+      registration,
+      assigned,
+      resolved.mapping.platformId,
+    );
   }
 
   async changeSupportRequestPriority(
@@ -216,7 +244,12 @@ export class SupportServiceImpl implements SupportService {
       resolved.providerNativeId,
       input,
     );
-    return this.normalizeTicket(ctx, registration, updated, resolved.mapping.platformId);
+    return this.normalizeTicket(
+      ctx,
+      registration,
+      updated,
+      resolved.mapping.platformId,
+    );
   }
 
   async changeSupportRequestState(
@@ -234,7 +267,12 @@ export class SupportServiceImpl implements SupportService {
       resolved.providerNativeId,
       input,
     );
-    return this.normalizeTicket(ctx, registration, updated, resolved.mapping.platformId);
+    return this.normalizeTicket(
+      ctx,
+      registration,
+      updated,
+      resolved.mapping.platformId,
+    );
   }
 
   async searchSupportRequests(
@@ -243,11 +281,19 @@ export class SupportServiceImpl implements SupportService {
   ): Promise<PageResult<SupportTicket>> {
     assertRequestContext(ctx);
     const provider = this.resolver.resolveSupportRequestProvider(ctx);
-    const registration = findSupportRegistration(this.resolver, "support_request", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_request",
+      provider,
+    );
     const providerQuery = query
       ? {
           ...query,
-          filter: await this.translateTicketFilterOutbound(ctx, registration, query.filter ?? {}),
+          filter: await this.translateTicketFilterOutbound(
+            ctx,
+            registration,
+            query.filter ?? {},
+          ),
         }
       : undefined;
     const result = await provider.searchSupportRequests(ctx, providerQuery);
@@ -258,13 +304,24 @@ export class SupportServiceImpl implements SupportService {
     return { ...result, items };
   }
 
-  private async resolveTicketContext(ctx: ServiceRequestContext, supportRequestId: SupportTicketId) {
-    const resolved = await this.mapping.resolveExisting(ctx, supportRequestId, "support_request");
+  private async resolveTicketContext(
+    ctx: ServiceRequestContext,
+    supportRequestId: SupportTicketId,
+  ) {
+    const resolved = await this.mapping.resolveExisting(
+      ctx,
+      supportRequestId,
+      "support_request",
+    );
     const provider = this.resolver.resolveSupportRequestProvider(ctx, {
       mappedProviderId: resolved.providerId,
       mappedIntegrationId: resolved.integrationId,
     });
-    const registration = findSupportRegistration(this.resolver, "support_request", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_request",
+      provider,
+    );
     return { resolved, provider, registration };
   }
 
@@ -276,14 +333,29 @@ export class SupportServiceImpl implements SupportService {
     return {
       ...filter,
       groupId: filter.groupId
-        ? await resolveOutboundSupportId(this.mapping, ctx, filter.groupId, "support_group")
+        ? await resolveOutboundSupportId(
+            this.mapping,
+            ctx,
+            filter.groupId,
+            "support_group",
+          )
         : filter.groupId,
       assigneeId:
         typeof filter.assigneeId === "string"
-          ? await resolveOutboundSupportId(this.mapping, ctx, filter.assigneeId, "support_user")
+          ? await resolveOutboundSupportId(
+              this.mapping,
+              ctx,
+              filter.assigneeId,
+              "support_user",
+            )
           : filter.assigneeId,
       requesterId: filter.requesterId
-        ? await resolveOutboundSupportId(this.mapping, ctx, filter.requesterId, "support_user")
+        ? await resolveOutboundSupportId(
+            this.mapping,
+            ctx,
+            filter.requesterId,
+            "support_user",
+          )
         : filter.requesterId,
       organizationId: filter.organizationId
         ? await resolveOutboundSupportId(
@@ -302,7 +374,12 @@ export class SupportServiceImpl implements SupportService {
   ): Promise<CreateSupportTicketInput> {
     return {
       ...input,
-      groupId: await resolveOutboundSupportId(this.mapping, ctx, input.groupId, "support_group"),
+      groupId: await resolveOutboundSupportId(
+        this.mapping,
+        ctx,
+        input.groupId,
+        "support_group",
+      ),
       requesterId: await resolveOutboundSupportId(
         this.mapping,
         ctx,
@@ -310,7 +387,12 @@ export class SupportServiceImpl implements SupportService {
         "support_user",
       ),
       assigneeId: input.assigneeId
-        ? await resolveOutboundSupportId(this.mapping, ctx, input.assigneeId, "support_user")
+        ? await resolveOutboundSupportId(
+            this.mapping,
+            ctx,
+            input.assigneeId,
+            "support_user",
+          )
         : input.assigneeId,
       organizationId: input.organizationId
         ? await resolveOutboundSupportId(
@@ -330,10 +412,20 @@ export class SupportServiceImpl implements SupportService {
     return {
       ...input,
       groupId: input.groupId
-        ? await resolveOutboundSupportId(this.mapping, ctx, input.groupId, "support_group")
+        ? await resolveOutboundSupportId(
+            this.mapping,
+            ctx,
+            input.groupId,
+            "support_group",
+          )
         : input.groupId,
       requesterId: input.requesterId
-        ? await resolveOutboundSupportId(this.mapping, ctx, input.requesterId, "support_user")
+        ? await resolveOutboundSupportId(
+            this.mapping,
+            ctx,
+            input.requesterId,
+            "support_user",
+          )
         : input.requesterId,
       assigneeId: await resolveOptionalOutboundSupportId(
         this.mapping,
@@ -471,7 +563,11 @@ export class SupportOrganizationServiceImpl implements SupportOrganizationServic
   ): Promise<PageResult<SupportOrganization>> {
     assertRequestContext(ctx);
     const provider = this.resolver.resolveSupportOrganizationProvider(ctx);
-    const registration = findSupportRegistration(this.resolver, "support_organization", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_organization",
+      provider,
+    );
     const result = await provider.listOrganizations(ctx, query);
     const items: SupportOrganization[] = [];
     for (const org of result.items) {
@@ -494,7 +590,11 @@ export class SupportOrganizationServiceImpl implements SupportOrganizationServic
       mappedProviderId: resolved.providerId,
       mappedIntegrationId: resolved.integrationId,
     });
-    const registration = findSupportRegistration(this.resolver, "support_organization", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_organization",
+      provider,
+    );
     const org = await provider.getOrganization(ctx, resolved.providerNativeId);
     return this.normalizeOrganization(
       ctx,
@@ -510,7 +610,11 @@ export class SupportOrganizationServiceImpl implements SupportOrganizationServic
   ): Promise<SupportOrganization> {
     assertRequestContext(ctx);
     const provider = this.resolver.resolveSupportOrganizationProvider(ctx);
-    const registration = findSupportRegistration(this.resolver, "support_organization", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_organization",
+      provider,
+    );
     const created = await provider.createOrganization(ctx, input);
     const mapping = await this.mapping.ensureMappingAfterCreate({
       ctx,
@@ -537,7 +641,11 @@ export class SupportOrganizationServiceImpl implements SupportOrganizationServic
       mappedProviderId: resolved.providerId,
       mappedIntegrationId: resolved.integrationId,
     });
-    const registration = findSupportRegistration(this.resolver, "support_organization", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_organization",
+      provider,
+    );
     const updated = await provider.updateOrganization(
       ctx,
       resolved.providerNativeId,
@@ -565,7 +673,11 @@ export class SupportOrganizationServiceImpl implements SupportOrganizationServic
       mappedProviderId: resolved.providerId,
       mappedIntegrationId: resolved.integrationId,
     });
-    const registration = findSupportRegistration(this.resolver, "support_organization", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_organization",
+      provider,
+    );
     const archived = await provider.archiveOrganization(ctx, resolved.providerNativeId);
     return this.normalizeOrganization(
       ctx,
@@ -607,7 +719,11 @@ export class SupportGroupServiceImpl implements SupportGroupService {
   ): Promise<PageResult<SupportGroup>> {
     assertRequestContext(ctx);
     const provider = this.resolver.resolveSupportGroupProvider(ctx);
-    const registration = findSupportRegistration(this.resolver, "support_group", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_group",
+      provider,
+    );
     const result = await provider.listGroups(ctx, query);
     const items: SupportGroup[] = [];
     for (const group of result.items) {
@@ -616,14 +732,21 @@ export class SupportGroupServiceImpl implements SupportGroupService {
     return { ...result, items };
   }
 
-  async getGroup(ctx: ServiceRequestContext, groupId: SupportGroupId): Promise<SupportGroup> {
+  async getGroup(
+    ctx: ServiceRequestContext,
+    groupId: SupportGroupId,
+  ): Promise<SupportGroup> {
     assertRequestContext(ctx);
     const resolved = await this.mapping.resolveExisting(ctx, groupId, "support_group");
     const provider = this.resolver.resolveSupportGroupProvider(ctx, {
       mappedProviderId: resolved.providerId,
       mappedIntegrationId: resolved.integrationId,
     });
-    const registration = findSupportRegistration(this.resolver, "support_group", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_group",
+      provider,
+    );
     const group = await provider.getGroup(ctx, resolved.providerNativeId);
     return this.normalizeGroup(ctx, registration, group, resolved.mapping.platformId);
   }
@@ -634,7 +757,11 @@ export class SupportGroupServiceImpl implements SupportGroupService {
   ): Promise<SupportGroup> {
     assertRequestContext(ctx);
     const provider = this.resolver.resolveSupportGroupProvider(ctx);
-    const registration = findSupportRegistration(this.resolver, "support_group", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_group",
+      provider,
+    );
     const created = await provider.createGroup(ctx, input);
     const mapping = await this.mapping.ensureMappingAfterCreate({
       ctx,
@@ -657,7 +784,11 @@ export class SupportGroupServiceImpl implements SupportGroupService {
       mappedProviderId: resolved.providerId,
       mappedIntegrationId: resolved.integrationId,
     });
-    const registration = findSupportRegistration(this.resolver, "support_group", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_group",
+      provider,
+    );
     const updated = await provider.updateGroup(ctx, resolved.providerNativeId, input);
     return this.normalizeGroup(ctx, registration, updated, resolved.mapping.platformId);
   }
@@ -694,7 +825,11 @@ export class SupportUserServiceImpl implements SupportUserService {
   ): Promise<PageResult<SupportUser>> {
     assertRequestContext(ctx);
     const provider = this.resolver.resolveSupportUserProvider(ctx);
-    const registration = findSupportRegistration(this.resolver, "support_user", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_user",
+      provider,
+    );
     const result = await provider.listUsers(ctx, query);
     const items: SupportUser[] = [];
     for (const user of result.items) {
@@ -703,14 +838,21 @@ export class SupportUserServiceImpl implements SupportUserService {
     return { ...result, items };
   }
 
-  async getUser(ctx: ServiceRequestContext, userId: SupportUserId): Promise<SupportUser> {
+  async getUser(
+    ctx: ServiceRequestContext,
+    userId: SupportUserId,
+  ): Promise<SupportUser> {
     assertRequestContext(ctx);
     const resolved = await this.mapping.resolveExisting(ctx, userId, "support_user");
     const provider = this.resolver.resolveSupportUserProvider(ctx, {
       mappedProviderId: resolved.providerId,
       mappedIntegrationId: resolved.integrationId,
     });
-    const registration = findSupportRegistration(this.resolver, "support_user", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_user",
+      provider,
+    );
     const user = await provider.getUser(ctx, resolved.providerNativeId);
     return this.normalizeUser(ctx, registration, user, resolved.mapping.platformId);
   }
@@ -721,7 +863,11 @@ export class SupportUserServiceImpl implements SupportUserService {
   ): Promise<SupportUser | undefined> {
     assertRequestContext(ctx);
     const provider = this.resolver.resolveSupportUserProvider(ctx);
-    const registration = findSupportRegistration(this.resolver, "support_user", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_user",
+      provider,
+    );
     const user = await provider.lookup(ctx, input);
     if (!user) return undefined;
     return this.normalizeUser(ctx, registration, user);
@@ -734,7 +880,11 @@ export class SupportUserServiceImpl implements SupportUserService {
   ): Promise<PageResult<SupportUser>> {
     assertRequestContext(ctx);
     const provider = this.resolver.resolveSupportUserProvider(ctx);
-    const registration = findSupportRegistration(this.resolver, "support_user", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_user",
+      provider,
+    );
     const result = await provider.search(ctx, queryText, query);
     const items: SupportUser[] = [];
     for (const user of result.items) {
@@ -763,7 +913,13 @@ export class SupportUserServiceImpl implements SupportUserService {
     if (user.organizationIds?.length) {
       organizationIds = await Promise.all(
         user.organizationIds.map((id) =>
-          toPlatformSupportId(this.mapping, ctx, registration, "support_organization", id),
+          toPlatformSupportId(
+            this.mapping,
+            ctx,
+            registration,
+            "support_organization",
+            id,
+          ),
         ),
       );
     }
@@ -785,12 +941,20 @@ export class SupportArticleServiceImpl implements SupportArticleService {
     query?: ListQuery<SupportArticleListFilter, SupportArticleSortField>,
   ): Promise<PageResult<SupportArticle>> {
     assertRequestContext(ctx);
-    const ticket = await this.mapping.resolveExisting(ctx, supportTicketId, "support_request");
+    const ticket = await this.mapping.resolveExisting(
+      ctx,
+      supportTicketId,
+      "support_request",
+    );
     const provider = this.resolver.resolveSupportArticleProvider(ctx, {
       mappedProviderId: ticket.providerId,
       mappedIntegrationId: ticket.integrationId,
     });
-    const registration = findSupportRegistration(this.resolver, "support_article", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_article",
+      provider,
+    );
     const providerQuery = query
       ? {
           ...query,
@@ -822,13 +986,25 @@ export class SupportArticleServiceImpl implements SupportArticleService {
     articleId: SupportArticleId,
   ): Promise<SupportArticle> {
     assertRequestContext(ctx);
-    const ticket = await this.mapping.resolveExisting(ctx, supportTicketId, "support_request");
-    const articleResolved = await this.mapping.resolveExisting(ctx, articleId, "support_article");
+    const ticket = await this.mapping.resolveExisting(
+      ctx,
+      supportTicketId,
+      "support_request",
+    );
+    const articleResolved = await this.mapping.resolveExisting(
+      ctx,
+      articleId,
+      "support_article",
+    );
     const provider = this.resolver.resolveSupportArticleProvider(ctx, {
       mappedProviderId: ticket.providerId,
       mappedIntegrationId: ticket.integrationId,
     });
-    const registration = findSupportRegistration(this.resolver, "support_article", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_article",
+      provider,
+    );
     const article = await provider.get(
       ctx,
       ticket.providerNativeId,
@@ -888,7 +1064,11 @@ export class SupportArticleServiceImpl implements SupportArticleService {
       mappedProviderId: ticket.providerId,
       mappedIntegrationId: ticket.integrationId,
     });
-    const registration = findSupportRegistration(this.resolver, "support_article", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_article",
+      provider,
+    );
     const translated = {
       ...input,
       supportTicketId: ticket.providerNativeId,
@@ -920,7 +1100,12 @@ export class SupportArticleServiceImpl implements SupportArticleService {
     return {
       ...filter,
       authorId: filter.authorId
-        ? await resolveOutboundSupportId(this.mapping, ctx, filter.authorId, "support_user")
+        ? await resolveOutboundSupportId(
+            this.mapping,
+            ctx,
+            filter.authorId,
+            "support_user",
+          )
         : filter.authorId,
     };
   }
@@ -987,7 +1172,11 @@ export class SupportSearchServiceImpl implements SupportSearchService {
   ): Promise<SupportSearchResult> {
     assertRequestContext(ctx);
     const provider = this.resolver.resolveSupportSearchProvider(ctx);
-    const registration = findSupportRegistration(this.resolver, "support_search", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_search",
+      provider,
+    );
     const providerQuery = query
       ? {
           ...query,
@@ -1154,13 +1343,24 @@ export class SupportHistoryServiceImpl implements SupportHistoryService {
     return { ...timeline, supportTicketId: ticket.platformId, events };
   }
 
-  private async resolveTicket(ctx: ServiceRequestContext, supportTicketId: SupportTicketId) {
-    const resolved = await this.mapping.resolveExisting(ctx, supportTicketId, "support_request");
+  private async resolveTicket(
+    ctx: ServiceRequestContext,
+    supportTicketId: SupportTicketId,
+  ) {
+    const resolved = await this.mapping.resolveExisting(
+      ctx,
+      supportTicketId,
+      "support_request",
+    );
     const provider = this.resolver.resolveSupportHistoryProvider(ctx, {
       mappedProviderId: resolved.providerId,
       mappedIntegrationId: resolved.integrationId,
     });
-    const registration = findSupportRegistration(this.resolver, "support_history", provider);
+    const registration = findSupportRegistration(
+      this.resolver,
+      "support_history",
+      provider,
+    );
     return {
       provider,
       registration,
@@ -1176,7 +1376,12 @@ export class SupportHistoryServiceImpl implements SupportHistoryService {
     return {
       ...filter,
       actorId: filter.actorId
-        ? await resolveOutboundSupportId(this.mapping, ctx, filter.actorId, "support_user")
+        ? await resolveOutboundSupportId(
+            this.mapping,
+            ctx,
+            filter.actorId,
+            "support_user",
+          )
         : filter.actorId,
     };
   }

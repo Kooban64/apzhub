@@ -61,11 +61,11 @@ Guides: [Testing Permission Catalogue](../architecture/APZHUB-Testing-Permission
 
 ## Bootstrap & Configuration
 
-| Factory | Use |
-| ------- | --- |
-| `createTestingPlatformServices` | Custom persistence or pre-built domain — throws without input |
-| `createTestingPlatformServicesForProduction` | Postgres only |
-| `createTestingPlatformServicesForTest` | Requires persistence or `allowInMemoryPersistence: true` |
+| Factory                                      | Use                                                           |
+| -------------------------------------------- | ------------------------------------------------------------- |
+| `createTestingPlatformServices`              | Custom persistence or pre-built domain — throws without input |
+| `createTestingPlatformServicesForProduction` | Postgres only                                                 |
+| `createTestingPlatformServicesForTest`       | Requires persistence or `allowInMemoryPersistence: true`      |
 
 Env: **`TESTING_SERVICE_ENABLED`** — only `"true"` enables wiring at app bootstrap.
 
@@ -107,11 +107,11 @@ Updated: [Testing Workbench Architecture](../architecture/APZHUB-APZ-TCMS-Testin
 
 ## Tests
 
-| Suite | Scope | Result |
-| ----- | ----- | ------ |
-| Platform testing (targeted) | `platform-services/src/services/testing/*`, `testing-operation-authorization.test.ts` | **33** passed |
-| Testing domain regression | `testing-contracts`, `testing-persistence`, `testing-services` | **204** passed |
-| Architecture boundary | Import scan + no HTTP/AI/event folders | **PASS** |
+| Suite                       | Scope                                                                                 | Result         |
+| --------------------------- | ------------------------------------------------------------------------------------- | -------------- |
+| Platform testing (targeted) | `platform-services/src/services/testing/*`, `testing-operation-authorization.test.ts` | **33** passed  |
+| Testing domain regression   | `testing-contracts`, `testing-persistence`, `testing-services`                        | **204** passed |
+| Architecture boundary       | Import scan + no HTTP/AI/event folders                                                | **PASS**       |
 
 User brief cited ~**45+** targeted platform tests — current targeted APZTCMS-011 suite is **33** Vitest cases; domain regression **204** green.
 
@@ -119,27 +119,27 @@ User brief cited ~**45+** targeted platform tests — current targeted APZTCMS-0
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| Platform-services targeted tests | **PASS** (33) |
-| Testing domain packages regression | **PASS** (204) |
-| Architecture boundary | **PASS** |
-| Domain lint/typecheck (testing packages) | **PASS** (unchanged) |
-| `apps/web` typecheck | **FAIL** — pre-existing plane/zammad harness errors (**not introduced by 011**) |
-| HTTP / Event Bus / AI / binary evidence | **PASS** (excluded as required) |
-| Silent in-memory / allow-all production | **PASS** (guarded by factory throws + authz mode) |
+| Gate                                     | Result                                                                          |
+| ---------------------------------------- | ------------------------------------------------------------------------------- |
+| Platform-services targeted tests         | **PASS** (33)                                                                   |
+| Testing domain packages regression       | **PASS** (204)                                                                  |
+| Architecture boundary                    | **PASS**                                                                        |
+| Domain lint/typecheck (testing packages) | **PASS** (unchanged)                                                            |
+| `apps/web` typecheck                     | **FAIL** — pre-existing plane/zammad harness errors (**not introduced by 011**) |
+| HTTP / Event Bus / AI / binary evidence  | **PASS** (excluded as required)                                                 |
+| Silent in-memory / allow-all production  | **PASS** (guarded by factory throws + authz mode)                               |
 
 ---
 
 ## Technical Debt
 
-1. No HTTP `/api/v1/testing-*` routes — APZTCMS-012  
-2. Workbench mock client not swapped to platform gateway — APZTCMS-012  
-3. `services/testing/service.yaml` `implementationPackage` updated to `@apzhub/platform-services` but manifest `contractVersion` still references early 0.1.0 stub — align on future manifest pass  
-4. Reporting service returns placeholders only — no report engine  
-5. Binary evidence storage remains out-of-scope  
-6. Event Bus not wired — domain events not published through platform  
-7. Pre-existing `apps/web` typecheck failures (plane/zammad) unrelated to testing platform layer  
+1. No HTTP `/api/v1/testing-*` routes — APZTCMS-012
+2. Workbench mock client not swapped to platform gateway — APZTCMS-012
+3. `services/testing/service.yaml` `implementationPackage` updated to `@apzhub/platform-services` but manifest `contractVersion` still references early 0.1.0 stub — align on future manifest pass
+4. Reporting service returns placeholders only — no report engine
+5. Binary evidence storage remains out-of-scope
+6. Event Bus not wired — domain events not published through platform
+7. Pre-existing `apps/web` typecheck failures (plane/zammad) unrelated to testing platform layer
 
 ---
 
@@ -147,11 +147,11 @@ User brief cited ~**45+** targeted platform tests — current targeted APZTCMS-0
 
 **Testing HTTP API, OpenAPI & Production Typed Client** — recommended next:
 
-1. `/api/v1/testing-*` route handlers — auth → context → `gateway.testing.*` only  
-2. OpenAPI spec aligned with platform contracts and operation map  
-3. Production `HttpTestingClient` implementing existing `TestingClient` surface  
-4. Standard response envelope + `PlatformServiceError` mapping  
-5. E2E against live API (replace mock-only Playwright path incrementally)  
+1. `/api/v1/testing-*` route handlers — auth → context → `gateway.testing.*` only
+2. OpenAPI spec aligned with platform contracts and operation map
+3. Production `HttpTestingClient` implementing existing `TestingClient` surface
+4. Standard response envelope + `PlatformServiceError` mapping
+5. E2E against live API (replace mock-only Playwright path incrementally)
 
 Do **not** start APZTCMS-012 without owner approval.
 
@@ -161,17 +161,17 @@ Do **not** start APZTCMS-012 without owner approval.
 
 ## Deliverable checklist
 
-| Item | Status |
-| ---- | ------ |
-| `@apzhub/platform-service-contracts` **0.8.0** — testing service interfaces + gateway | ✅ |
-| `@apzhub/platform-services` **0.8.0** — impls, factories, error map, readiness | ✅ |
-| `gateway.testing.*` on `PlatformServiceGateway` | ✅ |
-| Operation authorization map (testing ops) | ✅ |
-| `TESTING_SERVICE_ENABLED` + no silent in-memory/allow-all | ✅ |
-| Architecture docs pack (10 guides) | ✅ |
-| Workbench architecture note (mock remains) | ✅ |
-| Platform gateway spec updated | ✅ |
-| Package README updates | ✅ |
-| `services/testing/service.yaml` implementationPackage | ✅ |
-| Foundation / backlog / changelog / docs README closeout | ✅ |
-| Stop before APZTCMS-012 | ✅ |
+| Item                                                                                  | Status |
+| ------------------------------------------------------------------------------------- | ------ |
+| `@apzhub/platform-service-contracts` **0.8.0** — testing service interfaces + gateway | ✅     |
+| `@apzhub/platform-services` **0.8.0** — impls, factories, error map, readiness        | ✅     |
+| `gateway.testing.*` on `PlatformServiceGateway`                                       | ✅     |
+| Operation authorization map (testing ops)                                             | ✅     |
+| `TESTING_SERVICE_ENABLED` + no silent in-memory/allow-all                             | ✅     |
+| Architecture docs pack (10 guides)                                                    | ✅     |
+| Workbench architecture note (mock remains)                                            | ✅     |
+| Platform gateway spec updated                                                         | ✅     |
+| Package README updates                                                                | ✅     |
+| `services/testing/service.yaml` implementationPackage                                 | ✅     |
+| Foundation / backlog / changelog / docs README closeout                               | ✅     |
+| Stop before APZTCMS-012                                                               | ✅     |

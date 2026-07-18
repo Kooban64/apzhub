@@ -53,7 +53,9 @@ export function validateRequiredString(
   return { ok: issues.length === 0, issues };
 }
 
-export function mergeValidation(...results: readonly ValidationResult[]): ValidationResult {
+export function mergeValidation(
+  ...results: readonly ValidationResult[]
+): ValidationResult {
   const issues = results.flatMap((result) => result.issues);
   return { ok: issues.length === 0, issues };
 }

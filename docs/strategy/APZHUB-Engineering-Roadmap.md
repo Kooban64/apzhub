@@ -26,30 +26,30 @@ PCv2-01 Hardening → PCv2-02 Workers → M17 CI/CD → OSS Wave 1 (Plane)
 
 ## Priority 1: Platform Core v2 (must-have)
 
-| ID | Initiative | Phases | Effort | Dependency |
-|----|------------|--------|--------|------------|
-| E-01 | Production SaaS Hardening | PCv2-01 | M | PC-001, PCS-001 |
-| E-02 | Outbox Workers & Replay | PCv2-02 | L | E-01 |
-| E-03 | API Gateway | PCv2-09 | L | E-01 |
-| E-04 | Vault Integration | PCv2-04 | M | E-01 |
-| E-05 | Observability Stack | PCv2-07 | L | E-04 |
-| E-06 | Commercial Provisioning | PCv2-03 | M | E-02 |
-| E-07 | Commercial Licensing | PCv2-10 | M | E-06 |
-| E-08 | SOC/SIEM Export | PCv2-05 | M | E-05 |
-| E-09 | HA & DR | PCv2-06 | L | E-05 |
-| E-10 | Background Workers Platform | PCv2-08 | L | E-02 |
+| ID   | Initiative                  | Phases  | Effort | Dependency      |
+| ---- | --------------------------- | ------- | ------ | --------------- |
+| E-01 | Production SaaS Hardening   | PCv2-01 | M      | PC-001, PCS-001 |
+| E-02 | Outbox Workers & Replay     | PCv2-02 | L      | E-01            |
+| E-03 | API Gateway                 | PCv2-09 | L      | E-01            |
+| E-04 | Vault Integration           | PCv2-04 | M      | E-01            |
+| E-05 | Observability Stack         | PCv2-07 | L      | E-04            |
+| E-06 | Commercial Provisioning     | PCv2-03 | M      | E-02            |
+| E-07 | Commercial Licensing        | PCv2-10 | M      | E-06            |
+| E-08 | SOC/SIEM Export             | PCv2-05 | M      | E-05            |
+| E-09 | HA & DR                     | PCv2-06 | L      | E-05            |
+| E-10 | Background Workers Platform | PCv2-08 | L      | E-02            |
 
 ---
 
 ## Priority 2: Engineering infrastructure
 
-| ID | Initiative | Rationale | Debt ref | Gate |
-|----|------------|-----------|----------|------|
-| E-11 | GitHub Actions CI | Automated quality gates | TD-M16-M02 | After PCv2-02 |
-| E-12 | App bootstrap package | Single `ensurePlatformReady` | TD-M16-C01 | PCv2-01 |
-| E-13 | Playwright CI green | E2E in pipeline | TD-T04 | M17 |
-| E-14 | Pre-commit optimisation | Faster feedback | TD-M16-M03 | M17 |
-| E-15 | OpenAPI publish pipeline | Integrator onboarding | TD-T05 | Post OSS Wave 3 |
+| ID   | Initiative               | Rationale                    | Debt ref   | Gate            |
+| ---- | ------------------------ | ---------------------------- | ---------- | --------------- |
+| E-11 | GitHub Actions CI        | Automated quality gates      | TD-M16-M02 | After PCv2-02   |
+| E-12 | App bootstrap package    | Single `ensurePlatformReady` | TD-M16-C01 | PCv2-01         |
+| E-13 | Playwright CI green      | E2E in pipeline              | TD-T04     | M17             |
+| E-14 | Pre-commit optimisation  | Faster feedback              | TD-M16-M03 | M17             |
+| E-15 | OpenAPI publish pipeline | Integrator onboarding        | TD-T05     | Post OSS Wave 3 |
 
 ---
 
@@ -57,17 +57,17 @@ PCv2-01 Hardening → PCv2-02 Workers → M17 CI/CD → OSS Wave 1 (Plane)
 
 > **Owner wave order:** Plane → Kimai → Paperless → Zammad → Kiwi → Metabase → n8n → Observability → Security.
 
-| ID | Initiative | Engine | Wave | Sprint pattern |
-|----|------------|--------|------|----------------|
-| E-20 | Projects integration | Plane | 1 | integration.yaml → adapter → ProjectService |
-| E-22 | Time integration | Kimai | 2 | TimeTrackingService |
-| E-21 | Documents integration | Paperless-ngx | 3 | DocumentService |
-| E-25 | Support integration | Zammad | 4 | SupportService |
-| E-26 | Testing integration | Kiwi TCMS | 5 | TestingService |
-| E-23 | Analytics integration | Metabase | 6 | AnalyticsService |
-| E-24 | Automation integration | n8n | 7 | AutomationService + action gateway |
-| E-27 | Observability connectors | Grafana/Prometheus/Loki | 8 | Ops connectors |
-| E-28 | Security ops connectors | Greenbone/MobSF/Faraday | 9 | Enterprise pack |
+| ID   | Initiative               | Engine                  | Wave | Sprint pattern                              |
+| ---- | ------------------------ | ----------------------- | ---- | ------------------------------------------- |
+| E-20 | Projects integration     | Plane                   | 1    | integration.yaml → adapter → ProjectService |
+| E-22 | Time integration         | Kimai                   | 2    | TimeTrackingService                         |
+| E-21 | Documents integration    | Paperless-ngx           | 3    | DocumentService                             |
+| E-25 | Support integration      | Zammad                  | 4    | SupportService                              |
+| E-26 | Testing integration      | Kiwi TCMS               | 5    | TestingService                              |
+| E-23 | Analytics integration    | Metabase                | 6    | AnalyticsService                            |
+| E-24 | Automation integration   | n8n                     | 7    | AutomationService + action gateway          |
+| E-27 | Observability connectors | Grafana/Prometheus/Loki | 8    | Ops connectors                              |
+| E-28 | Security ops connectors  | Greenbone/MobSF/Faraday | 9    | Enterprise pack                             |
 
 **Gate:** E-20 starts only after **PCv2-01, PCv2-02, and M17** minimum complete.
 
@@ -75,14 +75,14 @@ PCv2-01 Hardening → PCv2-02 Workers → M17 CI/CD → OSS Wave 1 (Plane)
 
 ## Priority 4: Product engineering
 
-| ID | Initiative | Product | Gate |
-|----|------------|---------|------|
-| E-30 | Trust Phase 2 | Law | Owner approval; bank feeds deferred |
-| E-31 | Billing saga | Law | Payment entity; time→invoice linkage |
-| E-32 | Law production hardening | Law | PCv2-01 minimum |
-| E-33 | Financial Engine extraction | Shared | FIN-001 preconditions + owner approval |
-| E-34 | Exchange charter | APZEX | Owner approval; not before E-01 |
-| E-35 | Banking charter | APZBNK | Owner approval; not before FIN extraction |
+| ID   | Initiative                  | Product | Gate                                      |
+| ---- | --------------------------- | ------- | ----------------------------------------- |
+| E-30 | Trust Phase 2               | Law     | Owner approval; bank feeds deferred       |
+| E-31 | Billing saga                | Law     | Payment entity; time→invoice linkage      |
+| E-32 | Law production hardening    | Law     | PCv2-01 minimum                           |
+| E-33 | Financial Engine extraction | Shared  | FIN-001 preconditions + owner approval    |
+| E-34 | Exchange charter            | APZEX   | Owner approval; not before E-01           |
+| E-35 | Banking charter             | APZBNK  | Owner approval; not before FIN extraction |
 
 **Explicit stop:** No E-33, E-34, E-35 without owner approval post-PCS-001.
 
@@ -90,14 +90,14 @@ PCv2-01 Hardening → PCv2-02 Workers → M17 CI/CD → OSS Wave 1 (Plane)
 
 ## Priority 5: Developer tooling
 
-| ID | Initiative | Description |
-|----|------------|-------------|
-| E-40 | Published SDK packages | `@apzhub/sdk` npm publish (internal registry first) |
-| E-41 | Integration scaffolder CLI | `integration.yaml` + adapter boilerplate |
-| E-42 | Module scaffolder CLI | `module.yaml` + workbench boilerplate |
-| E-43 | Architecture compliance checker | CI rule: no connector imports in modules |
-| E-44 | Local stack composer | Single command dev environment |
-| E-45 | Deployment guides | Enterprise install runbooks |
+| ID   | Initiative                      | Description                                         |
+| ---- | ------------------------------- | --------------------------------------------------- |
+| E-40 | Published SDK packages          | `@apzhub/sdk` npm publish (internal registry first) |
+| E-41 | Integration scaffolder CLI      | `integration.yaml` + adapter boilerplate            |
+| E-42 | Module scaffolder CLI           | `module.yaml` + workbench boilerplate               |
+| E-43 | Architecture compliance checker | CI rule: no connector imports in modules            |
+| E-44 | Local stack composer            | Single command dev environment                      |
+| E-45 | Deployment guides               | Enterprise install runbooks                         |
 
 ---
 
@@ -136,12 +136,12 @@ PCv2-01 Hardening → PCv2-02 Workers → M17 CI/CD → OSS Wave 1 (Plane)
 
 ## Resource allocation guidance
 
-| Stream | Suggested allocation |
-|--------|---------------------|
-| Platform Core v2 | 50% |
-| OSS integrations | 20% |
-| Law product | 25% |
-| Developer tooling | 5% |
+| Stream            | Suggested allocation |
+| ----------------- | -------------------- |
+| Platform Core v2  | 50%                  |
+| OSS integrations  | 20%                  |
+| Law product       | 25%                  |
+| Developer tooling | 5%                   |
 
 Adjust per owner priority. **No new product streams** without charter approval.
 
@@ -149,14 +149,14 @@ Adjust per owner priority. **No new product streams** without charter approval.
 
 ## Success metrics
 
-| Metric | Target (12 months) |
-|--------|-------------------|
-| CI pipeline | Green on every PR |
-| Outbox processing | 100% events delivered within SLA |
-| Pilot customers | ≥1 supervised deployment |
-| OSS integrations live | ≥3 (Projects, Documents, Time) |
-| Platform test count | Maintain ≥1800; no regression |
-| Debt critical items | TD-M16-C01 closed |
+| Metric                | Target (12 months)               |
+| --------------------- | -------------------------------- |
+| CI pipeline           | Green on every PR                |
+| Outbox processing     | 100% events delivered within SLA |
+| Pilot customers       | ≥1 supervised deployment         |
+| OSS integrations live | ≥3 (Projects, Documents, Time)   |
+| Platform test count   | Maintain ≥1800; no regression    |
+| Debt critical items   | TD-M16-C01 closed                |
 
 ---
 

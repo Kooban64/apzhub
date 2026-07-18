@@ -1,5 +1,8 @@
 import type { AuditFields } from "./audit";
-import type { CertificationPreparationSummary, ReleaseReadinessInputs } from "./certification";
+import type {
+  CertificationPreparationSummary,
+  ReleaseReadinessInputs,
+} from "./certification";
 import type { CoverageMetric } from "./analytics";
 import type {
   QualitySnapshotId,

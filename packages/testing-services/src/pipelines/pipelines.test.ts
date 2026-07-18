@@ -17,9 +17,7 @@ import {
   fingerprintPipelinePayload,
 } from "./index";
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant-a",
     organisationId: "org-a",
@@ -382,7 +380,9 @@ describe("pipeline ingestion domain", () => {
     await services.links.linkReleases(c, outcome.run!.id, asReleaseId("rel_facade1"));
     const links = await services.links.getLinks(c, outcome.run!.id);
     expect(links.releaseId).toBe("rel_facade1");
-    expect((await services.pipelineRegistry.listPipelines(c)).length).toBeGreaterThan(0);
+    expect((await services.pipelineRegistry.listPipelines(c)).length).toBeGreaterThan(
+      0,
+    );
     await services.pipelineRegistry.archivePipeline(c, pipeline.id);
   });
 
@@ -511,7 +511,9 @@ describe("pipeline ingestion domain", () => {
     const parsed = adapter.parse({
       externalRunRef: "edge-1",
       status: "in_progress",
-      stages: [{ name: "s1", status: "running", jobs: [{ name: "j1", status: "running" }] }],
+      stages: [
+        { name: "s1", status: "running", jobs: [{ name: "j1", status: "running" }] },
+      ],
       environment: {
         name: "prod",
         url: "https://ci",

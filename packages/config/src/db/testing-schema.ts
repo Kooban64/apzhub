@@ -525,9 +525,8 @@ export const testingApproval = pgTable(
     subjectId: text("subject_id"),
     stagesJson: jsonb("stages_json").$type<Array<Record<string, unknown>>>(),
     currentStageOrdinal: integer("current_stage_ordinal"),
-    stageDecisionsJson: jsonb("stage_decisions_json").$type<
-      Array<Record<string, unknown>>
-    >(),
+    stageDecisionsJson:
+      jsonb("stage_decisions_json").$type<Array<Record<string, unknown>>>(),
     ...auditRevisionColumns(),
   },
   (table) => [
@@ -667,9 +666,8 @@ export const testingCertificationRule = pgTable(
       .$type<string[]>()
       .notNull()
       .default([]),
-    approvalStagesJson: jsonb("approval_stages_json").$type<
-      Array<Record<string, unknown>>
-    >(),
+    approvalStagesJson:
+      jsonb("approval_stages_json").$type<Array<Record<string, unknown>>>(),
     enabled: boolean("enabled").notNull().default(true),
     configJson: jsonb("config_json").$type<Record<string, unknown>>().default({}),
     ...auditRevisionColumns(),
@@ -698,7 +696,10 @@ export const testingCertificationAudit = pgTable(
   },
   (table) => [
     index("testing_cert_audit_tenant_idx").on(table.tenantId),
-    index("testing_cert_audit_cert_idx").on(table.tenantId, table.certificationRecordId),
+    index("testing_cert_audit_cert_idx").on(
+      table.tenantId,
+      table.certificationRecordId,
+    ),
     index("testing_cert_audit_occurred_idx").on(table.tenantId, table.occurredAt),
   ],
 );
@@ -883,8 +884,14 @@ export const testingRegressionAnalysis = pgTable(
     baselineLabel: text("baseline_label").notNull(),
     currentLabel: text("current_label").notNull(),
     newFailures: jsonb("new_failures").$type<string[]>().notNull().default([]),
-    resolvedFailures: jsonb("resolved_failures").$type<string[]>().notNull().default([]),
-    reopenedFailures: jsonb("reopened_failures").$type<string[]>().notNull().default([]),
+    resolvedFailures: jsonb("resolved_failures")
+      .$type<string[]>()
+      .notNull()
+      .default([]),
+    reopenedFailures: jsonb("reopened_failures")
+      .$type<string[]>()
+      .notNull()
+      .default([]),
     coverageDelta: real("coverage_delta").notNull().default(0),
     executionDelta: real("execution_delta").notNull().default(0),
     computedAt: timestamp("computed_at", { withTimezone: true }).notNull(),
@@ -1121,10 +1128,7 @@ export const testingAutomationCoverageSnapshot = pgTable(
     ...tenantOrgColumns(),
     importId: text("import_id"),
     executionId: text("execution_id"),
-    summary: jsonb("summary")
-      .$type<Record<string, unknown>>()
-      .notNull()
-      .default({}),
+    summary: jsonb("summary").$type<Record<string, unknown>>().notNull().default({}),
     coveredCount: integer("covered_count"),
     totalCount: integer("total_count"),
     percentage: real("percentage"),
@@ -1253,7 +1257,6 @@ export const testingRegistryEntry = pgTable(
   ],
 );
 
-
 /** Manual execution result aggregate (APZTCMS-004). */
 export const testingManualExecution = pgTable(
   "testing_manual_execution",
@@ -1272,7 +1275,9 @@ export const testingManualExecution = pgTable(
     completedAt: timestamp("completed_at", { withTimezone: true }),
     approvalState: varchar("approval_state", { length: 32 }).notNull().default("none"),
     comments: jsonb("comments")
-      .$type<Array<{ id: string; authorUserId: string; body: string; createdAt: string }>>()
+      .$type<
+        Array<{ id: string; authorUserId: string; body: string; createdAt: string }>
+      >()
       .notNull()
       .default([]),
     stepActuals: jsonb("step_actuals")
@@ -1459,13 +1464,9 @@ export const testingApprovalHistory = pgTable(
       table.tenantId,
       table.approvalId,
     ),
-    index("testing_approval_history_occurred_idx").on(
-      table.tenantId,
-      table.occurredAt,
-    ),
+    index("testing_approval_history_occurred_idx").on(table.tenantId, table.occurredAt),
   ],
 );
-
 
 /** TCMS release aggregate (APZTCMS-014 Release & Quality Governance). */
 export const testingRelease = pgTable(
@@ -1698,10 +1699,16 @@ export const testingReleaseReadinessSnapshot = pgTable(
     ...auditRevisionColumns(),
   },
   (table) => [
-    check("testing_release_readiness_snap_decision_chk", sql`${table.isDecision} = false`),
+    check(
+      "testing_release_readiness_snap_decision_chk",
+      sql`${table.isDecision} = false`,
+    ),
     check("testing_release_readiness_snap_revision_chk", sql`${table.revision} >= 1`),
     index("testing_release_readiness_snap_tenant_idx").on(table.tenantId),
-    index("testing_release_readiness_snap_release_idx").on(table.tenantId, table.releaseId),
+    index("testing_release_readiness_snap_release_idx").on(
+      table.tenantId,
+      table.releaseId,
+    ),
   ],
 );
 
@@ -1768,10 +1775,7 @@ export const testingPipeline = pgTable(
       "testing_pipeline_provider_chk",
       sql`${table.providerKind} in ('generic_ci','github_actions','gitlab_ci','azure_devops','jenkins','circleci','buildkite')`,
     ),
-    check(
-      "testing_pipeline_status_chk",
-      sql`${table.status} in ('active','archived')`,
-    ),
+    check("testing_pipeline_status_chk", sql`${table.status} in ('active','archived')`),
     check("testing_pipeline_revision_chk", sql`${table.revision} >= 1`),
     uniqueIndex("testing_pipeline_tenant_key_uidx").on(table.tenantId, table.key),
     index("testing_pipeline_tenant_idx").on(table.tenantId),
@@ -1840,8 +1844,14 @@ export const testingPipelineRun = pgTable(
       .$type<Record<string, unknown>>()
       .notNull()
       .default({}),
-    linksJson: jsonb("links_json").$type<Record<string, unknown>>().notNull().default({}),
-    summaryJson: jsonb("summary_json").$type<Record<string, unknown>>().notNull().default({}),
+    linksJson: jsonb("links_json")
+      .$type<Record<string, unknown>>()
+      .notNull()
+      .default({}),
+    summaryJson: jsonb("summary_json")
+      .$type<Record<string, unknown>>()
+      .notNull()
+      .default({}),
     metricsJson: jsonb("metrics_json").$type<Record<string, unknown>>(),
     logsJson: jsonb("logs_json").$type<unknown[]>().default([]),
     variablesJson: jsonb("variables_json").$type<unknown[]>().default([]),
@@ -1898,7 +1908,6 @@ export const testingPipelineImportHistory = pgTable(
   ],
 );
 
-
 /** Engineering intelligence snapshot (APZTCMS-021). */
 export const testingEngineeringSnapshot = pgTable(
   "testing_engineering_snapshot",
@@ -1910,7 +1919,10 @@ export const testingEngineeringSnapshot = pgTable(
       .$type<Record<string, unknown>>()
       .notNull()
       .default({}),
-    healthJson: jsonb("health_json").$type<Record<string, unknown>>().notNull().default({}),
+    healthJson: jsonb("health_json")
+      .$type<Record<string, unknown>>()
+      .notNull()
+      .default({}),
     riskJson: jsonb("risk_json").$type<Record<string, unknown>>().notNull().default({}),
     indicatorsJson: jsonb("indicators_json").$type<unknown[]>().notNull().default([]),
     trendsJson: jsonb("trends_json").$type<unknown[]>().notNull().default([]),
@@ -1921,7 +1933,10 @@ export const testingEngineeringSnapshot = pgTable(
   (table) => [
     check("testing_engineering_snapshot_revision_chk", sql`${table.revision} >= 1`),
     index("testing_engineering_snapshot_tenant_idx").on(table.tenantId),
-    index("testing_engineering_snapshot_computed_idx").on(table.tenantId, table.computedAt),
+    index("testing_engineering_snapshot_computed_idx").on(
+      table.tenantId,
+      table.computedAt,
+    ),
   ],
 );
 
@@ -1932,11 +1947,17 @@ export const testingEngineeringHistoricalSnapshot = pgTable(
     id: text("id").primaryKey(),
     ...tenantOrgColumns(),
     scope: jsonb("scope").$type<Record<string, unknown>>().notNull().default({}),
-    periodJson: jsonb("period_json").$type<Record<string, unknown>>().notNull().default({}),
+    periodJson: jsonb("period_json")
+      .$type<Record<string, unknown>>()
+      .notNull()
+      .default({}),
     qualityScore: real("quality_score").notNull().default(0),
     engineeringHealthScore: real("engineering_health_score").notNull().default(0),
     indicatorsJson: jsonb("indicators_json").$type<unknown[]>().notNull().default([]),
-    metricsJson: jsonb("metrics_json").$type<Record<string, unknown>>().notNull().default({}),
+    metricsJson: jsonb("metrics_json")
+      .$type<Record<string, unknown>>()
+      .notNull()
+      .default({}),
     sourceRefsJson: jsonb("source_refs_json")
       .$type<Record<string, unknown>>()
       .notNull()
@@ -2006,7 +2027,10 @@ export const testingEngineeringBenchmark = pgTable(
   (table) => [
     check("testing_engineering_benchmark_revision_chk", sql`${table.revision} >= 1`),
     index("testing_engineering_benchmark_tenant_idx").on(table.tenantId),
-    index("testing_engineering_benchmark_computed_idx").on(table.tenantId, table.computedAt),
+    index("testing_engineering_benchmark_computed_idx").on(
+      table.tenantId,
+      table.computedAt,
+    ),
   ],
 );
 
@@ -2029,7 +2053,10 @@ export const testingEngineeringBaseline = pgTable(
   (table) => [
     check("testing_engineering_baseline_revision_chk", sql`${table.revision} >= 1`),
     index("testing_engineering_baseline_tenant_idx").on(table.tenantId),
-    index("testing_engineering_baseline_computed_idx").on(table.tenantId, table.computedAt),
+    index("testing_engineering_baseline_computed_idx").on(
+      table.tenantId,
+      table.computedAt,
+    ),
   ],
 );
 
@@ -2091,7 +2118,10 @@ export const testingReportTemplate = pgTable(
   (table) => [
     check("testing_report_template_revision_chk", sql`${table.revision} >= 1`),
     index("testing_report_template_tenant_idx").on(table.tenantId),
-    index("testing_report_template_tenant_type_idx").on(table.tenantId, table.reportType),
+    index("testing_report_template_tenant_type_idx").on(
+      table.tenantId,
+      table.reportType,
+    ),
   ],
 );
 

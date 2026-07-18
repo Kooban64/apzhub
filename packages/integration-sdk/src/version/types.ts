@@ -1,5 +1,10 @@
 import type { ConnectionRecord } from "../connection/types";
-import type { IntegrationRequestContext, VendorVersionInfo, VersionCompatibilityResult, VersionRange } from "../types";
+import type {
+  IntegrationRequestContext,
+  VendorVersionInfo,
+  VersionCompatibilityResult,
+  VersionRange,
+} from "../types";
 import {
   checkVersionCompatibility,
   extractDeclaredVersionRange,
@@ -17,7 +22,9 @@ export interface VersionProvider {
     detected: VendorVersionInfo,
     declared: VersionRange,
   ): VersionCompatibilityResult;
-  resolveDeclaredRange(metadata: Readonly<Record<string, string>>): VersionRange | undefined;
+  resolveDeclaredRange(
+    metadata: Readonly<Record<string, string>>,
+  ): VersionRange | undefined;
 }
 
 export class DefaultVersionProvider implements VersionProvider {
@@ -32,7 +39,9 @@ export class DefaultVersionProvider implements VersionProvider {
     return checkVersionCompatibility(detected, declared);
   }
 
-  resolveDeclaredRange(metadata: Readonly<Record<string, string>>): VersionRange | undefined {
+  resolveDeclaredRange(
+    metadata: Readonly<Record<string, string>>,
+  ): VersionRange | undefined {
     return extractDeclaredVersionRange(metadata);
   }
 }

@@ -4,10 +4,10 @@
 
 ## Environment
 
-| Variable | Behaviour |
-| --- | --- |
+| Variable                  | Behaviour                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------- |
 | `APZHUB_IDENTITY_ENABLED` | Deny-by-default. Enable with `1` / `true` / `on`. Disable with `0` / `false` / `off`. |
-| `DATABASE_URL` | Required when Identity is enabled in production bootstrap |
+| `DATABASE_URL`            | Required when Identity is enabled in production bootstrap                             |
 
 ## Factories
 

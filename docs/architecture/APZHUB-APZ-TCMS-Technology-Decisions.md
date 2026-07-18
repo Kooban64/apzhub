@@ -3,7 +3,7 @@
 **Product:** APZ TCMS  
 **Milestone:** APZTCMS-001  
 **Status:** Technology evaluation — **engines/tools TCMS integrates with**, not TCMS itself  
-**Authority:** [004](../004-technology-stack-engineering-standards.md) · [015](../015-software-quality-testing-qa-cicd-release-management-framework.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)
+**Authority:** [004](../004-technology-stack-repository-standards-development-environment.md) · [015](../015-software-quality-testing-qa-cicd-release-management-framework.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)
 
 ---
 

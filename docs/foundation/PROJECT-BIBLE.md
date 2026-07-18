@@ -30,10 +30,10 @@ Before any significant code, the programme established **30 foundation documents
 
 ## Chapter 2 — Repository bootstrap (BUILD-001, SPR-001)
 
-| Milestone | What happened |
-|-----------|---------------|
-| **BUILD-001** | Monorepo scaffold — pnpm workspace, Next.js app, empty packages, CI scaffold |
-| **SPR-001** | Foundation environment — BetterAuth, PostgreSQL, Redis, Docker, minimal shell |
+| Milestone     | What happened                                                                 |
+| ------------- | ----------------------------------------------------------------------------- |
+| **BUILD-001** | Monorepo scaffold — pnpm workspace, Next.js app, empty packages, CI scaffold  |
+| **SPR-001**   | Foundation environment — BetterAuth, PostgreSQL, Redis, Docker, minimal shell |
 
 **Outcome:** `v0.1.0-foundation` — reviewed PASS WITH OBSERVATIONS. A minimal desktop shell (Header, Activity Bar, Sidebar, Workspace, Status Bar) with dark/light themes and `GET /api/health`.
 
@@ -65,12 +65,12 @@ SPR-003 delivered `@apzhub/workbench-framework` — Workbench Manager, eight eng
 
 Four framework milestones established the platform's interaction model:
 
-| Milestone | Framework | Core capability |
-|-----------|-----------|-----------------|
-| **M4 (SPR-004)** | Action / Command | Ctrl+Shift+P command palette, action engine |
-| **M5 (SPR-005)** | Knowledge & Discovery | Unified search, knowledge providers |
-| **M6 (SPR-006)** | Event & Notification | Event bus, notification routing, attention |
-| **M7 (SPR-007)** | Activity & Timeline | Activity stream, timeline experiences |
+| Milestone        | Framework             | Core capability                             |
+| ---------------- | --------------------- | ------------------------------------------- |
+| **M4 (SPR-004)** | Action / Command      | Ctrl+Shift+P command palette, action engine |
+| **M5 (SPR-005)** | Knowledge & Discovery | Unified search, knowledge providers         |
+| **M6 (SPR-006)** | Event & Notification  | Event bus, notification routing, attention  |
+| **M7 (SPR-007)** | Activity & Timeline   | Activity stream, timeline experiences       |
 
 **Why events drive everything:** Modules publish events; the platform decides notifications, search indexing, audit, and activity. No module-to-module coupling.
 
@@ -84,14 +84,14 @@ Four framework milestones established the platform's interaction model:
 
 Milestone 8 delivered the operational backbone:
 
-| Phase | Capability | Package |
-|-------|------------|---------|
-| M8-01 | Identity & Tenants | `@apzhub/platform-identity` |
-| M8-02 | Authorization / RBAC | `@apzhub/platform-authorization` |
-| M8-03 | Operations Console | `@apzhub/platform-operations` |
-| M8-04 | Personalisation | `@apzhub/platform-personalisation` |
-| M8-05 | Governance & Provisioning | `@apzhub/platform-governance` |
-| M8-06 | Security & Resilience | `@apzhub/platform-security` |
+| Phase | Capability                | Package                            |
+| ----- | ------------------------- | ---------------------------------- |
+| M8-01 | Identity & Tenants        | `@apzhub/platform-identity`        |
+| M8-02 | Authorization / RBAC      | `@apzhub/platform-authorization`   |
+| M8-03 | Operations Console        | `@apzhub/platform-operations`      |
+| M8-04 | Personalisation           | `@apzhub/platform-personalisation` |
+| M8-05 | Governance & Provisioning | `@apzhub/platform-governance`      |
+| M8-06 | Security & Resilience     | `@apzhub/platform-security`        |
 
 **Why Platform-owned IAM:** BetterAuth handles authentication only. APZHUB owns permissions, roles, provisioning, and audit. Backend engine roles are never exposed in UI.
 
@@ -134,17 +134,17 @@ Trust Accounting became the most complex Law Platform capability:
 
 PCv2-01 addressed production readiness gaps identified after PC-001:
 
-| Story | Focus |
-|-------|-------|
-| PRH-001 | Bootstrap consolidation |
-| PRH-002–003 | CSP audit, HTTP security headers |
-| PRH-004 | Configuration & secrets governance |
-| PRH-005–006 | Traffic governance, session security |
-| PRH-007 | Tenant isolation validation |
-| PRH-008 | Operations Control Plane |
-| PRH-009 | Lifecycle Management |
-| PRH-010 | Reliability & failure validation |
-| PRH-011 | Architecture compliance & certification |
+| Story       | Focus                                   |
+| ----------- | --------------------------------------- |
+| PRH-001     | Bootstrap consolidation                 |
+| PRH-002–003 | CSP audit, HTTP security headers        |
+| PRH-004     | Configuration & secrets governance      |
+| PRH-005–006 | Traffic governance, session security    |
+| PRH-007     | Tenant isolation validation             |
+| PRH-008     | Operations Control Plane                |
+| PRH-009     | Lifecycle Management                    |
+| PRH-010     | Reliability & failure validation        |
+| PRH-011     | Architecture compliance & certification |
 
 **Why a dedicated hardening sprint:** Certification without production readiness is meaningless. PRH-000 froze the contractual baseline before implementation began.
 
@@ -173,12 +173,12 @@ PCS-001 ratified the master strategy:
 
 ## Chapter 11 — OSS integration planning (OSS-001, OSS-002, OSS-100, OSS-101)
 
-| Milestone | Deliverable |
-|-----------|-------------|
+| Milestone   | Deliverable                                                           |
+| ----------- | --------------------------------------------------------------------- |
 | **OSS-001** | Master architecture, nine-wave catalog, capability mapping, standards |
-| **OSS-002** | Capability abstraction standard, adapter boundary, build/buy model |
-| **OSS-100** | Integration SDK architecture, adapter specs, connection lifecycle |
-| **OSS-101** | Projects/Plane architecture, ADR-0047, domain mapping, UX spec |
+| **OSS-002** | Capability abstraction standard, adapter boundary, build/buy model    |
+| **OSS-100** | Integration SDK architecture, adapter specs, connection lifecycle     |
+| **OSS-101** | Projects/Plane architecture, ADR-0047, domain mapping, UX spec        |
 
 **Why Integration SDK before adapters:** Every OSS engine shares auth, connection, health, error translation, and lifecycle patterns. Building adapters without shared SDK would duplicate code and violate the adapter boundary.
 
@@ -186,9 +186,9 @@ PCS-001 ratified the master strategy:
 
 ## Chapter 12 — Integration SDK implementation (OSS-100-01, OSS-100-02)
 
-| Milestone | Deliverable |
-|-----------|-------------|
-| **OSS-100-01** | `@apzhub/integration-sdk` v0.1.0 — types, interfaces, placeholder client/adapter |
+| Milestone      | Deliverable                                                                                                            |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **OSS-100-01** | `@apzhub/integration-sdk` v0.1.0 — types, interfaces, placeholder client/adapter                                       |
 | **OSS-100-02** | v0.2.0 — AuthenticationProvider, CredentialResolver, ConnectionManager, ConnectionRegistry, ConnectionLifecycleService |
 
 **Key architectural decision:** Credentials stay inside the integration boundary. Capability services never handle vendor secrets. Diagnostics and errors never expose tokens, passwords, or API keys.
@@ -216,9 +216,9 @@ Projects capability manifests registered:
 
 **APZ TCMS** is APZHUB’s native Test & Certification Management System (product identity established in **APZTCMS-001**). It **orchestrates** testing and certification; execution engines (Vitest, Playwright, JUnit XML, scanners, etc.) remain independent and feed results via future adapters.
 
-- **Not** a Kiwi TCMS fork; Kiwi wave-as-SoR/UI is superseded  
-- **Not** a Playwright/Vitest wrapper  
-- User-facing workbench module: **Testing** (`testing`); services: `TestingService`, `CertificationService`  
+- **Not** a Kiwi TCMS fork; Kiwi wave-as-SoR/UI is superseded
+- **Not** a Playwright/Vitest wrapper
+- User-facing workbench module: **Testing** (`testing`); services: `TestingService`, `CertificationService`
 - Delivery IDs: **APZTCMS-*** (QE-* backlog superseded for new work)
 
 See [APZ TCMS Product Vision](../strategy/APZHUB-APZ-TCMS-Product-Vision.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md) · [APZTCMS Backlog](../backlog/APZTCMS-Backlog.md).
@@ -239,26 +239,26 @@ See [FIN-001 Architecture Review](../reviews/FIN-001-Architecture-Review.md).
 
 ## Lessons learned
 
-| Lesson | Source |
-|--------|--------|
-| **Constitution before code** | 000–029 prevented architectural drift across 2000+ tests |
-| **Manifest first** | Registry discovery catches dependency errors at bootstrap |
-| **Phase gates work** | ADR-0017 review gates caught issues before production |
-| **Products validate platform** | Law Platform proved Platform Core in real workflows |
-| **Not everything is OSS** | Trust Accounting, QE, Financial Engine are native |
-| **Owner approval gates** | PRH-000, PCS-001 prevented unauthorised scope |
-| **Credential boundary matters** | OSS-100-02 established before any adapter code |
-| **Documentation is the product** | Knowledge Foundation (APZHUB-000) formalises this |
+| Lesson                           | Source                                                    |
+| -------------------------------- | --------------------------------------------------------- |
+| **Constitution before code**     | 000–029 prevented architectural drift across 2000+ tests  |
+| **Manifest first**               | Registry discovery catches dependency errors at bootstrap |
+| **Phase gates work**             | ADR-0017 review gates caught issues before production     |
+| **Products validate platform**   | Law Platform proved Platform Core in real workflows       |
+| **Not everything is OSS**        | Trust Accounting, QE, Financial Engine are native         |
+| **Owner approval gates**         | PRH-000, PCS-001 prevented unauthorised scope             |
+| **Credential boundary matters**  | OSS-100-02 established before any adapter code            |
+| **Documentation is the product** | Knowledge Foundation (APZHUB-000) formalises this         |
 
 ---
 
 ## Future evolution
 
-| Horizon | Direction |
-|---------|-----------|
-| **Near term** | OSS-100-03 (health/diagnostics), OSS-100-05 (AdapterBase), OSS-101-04 (Plane adapter) |
-| **Medium term** | Remaining OSS waves, PCv2-02 (workers, vault, HA), APZTCMS-002+ |
-| **Long term** | Commercial GA, SaaS tier, Financial Engine extraction, new verticals |
+| Horizon         | Direction                                                                             |
+| --------------- | ------------------------------------------------------------------------------------- |
+| **Near term**   | OSS-100-03 (health/diagnostics), OSS-100-05 (AdapterBase), OSS-101-04 (Plane adapter) |
+| **Medium term** | Remaining OSS waves, PCv2-02 (workers, vault, HA), APZTCMS-002+                       |
+| **Long term**   | Commercial GA, SaaS tier, Financial Engine extraction, new verticals                  |
 
 See [APZHUB-VISION](./APZHUB-VISION.md) · [CURRENT-MILESTONE](./CURRENT-MILESTONE.md).
 

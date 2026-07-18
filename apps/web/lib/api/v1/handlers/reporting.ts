@@ -55,10 +55,7 @@ export async function handleListReportOutputFormats(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  return jsonDataResponse(
-    { formats: [...REPORT_OUTPUT_FORMATS] },
-    context.tracing,
-  );
+  return jsonDataResponse({ formats: [...REPORT_OUTPUT_FORMATS] }, context.tracing);
 }
 
 export async function handleListAvailableReports(
@@ -67,9 +64,7 @@ export async function handleListAvailableReports(
 ) {
   parseQuery(reportingListQuerySchema, request.nextUrl.searchParams);
   const gateway = await getPlatformServiceGateway();
-  const items = await gateway.reporting.listAvailableReports(
-    context.serviceContext,
-  );
+  const items = await gateway.reporting.listAvailableReports(context.serviceContext);
   return collection(items, context);
 }
 
@@ -77,10 +72,7 @@ export async function handleListReportTemplates(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const query = parseQuery(
-    reportingTemplatesQuerySchema,
-    request.nextUrl.searchParams,
-  );
+  const query = parseQuery(reportingTemplatesQuerySchema, request.nextUrl.searchParams);
   const gateway = await getPlatformServiceGateway();
   const items = await gateway.reporting.listTemplates(
     context.serviceContext,
@@ -164,9 +156,7 @@ export async function handleListReportGenerations(
 ) {
   parseQuery(reportingListQuerySchema, request.nextUrl.searchParams);
   const gateway = await getPlatformServiceGateway();
-  const items = await gateway.reporting.listReportMetadata(
-    context.serviceContext,
-  );
+  const items = await gateway.reporting.listReportMetadata(context.serviceContext);
   return collection(items, context);
 }
 

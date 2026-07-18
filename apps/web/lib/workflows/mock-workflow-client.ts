@@ -160,10 +160,7 @@ export function createMockWorkflowClient(
 ): WorkflowClient {
   const workflows = new Map(seed.map((w) => [w.id, { ...w }]));
   const versions = new Map<string, WorkflowVersionViewModel[]>([
-    [
-      MOCK_WORKFLOW.id,
-      [{ ...MOCK_WORKFLOW_VERSION }, { ...MOCK_WORKFLOW_VERSION_V2 }],
-    ],
+    [MOCK_WORKFLOW.id, [{ ...MOCK_WORKFLOW_VERSION }, { ...MOCK_WORKFLOW_VERSION_V2 }]],
   ]);
   const templates = new Map([
     [MOCK_WORKFLOW_TEMPLATE.id, { ...MOCK_WORKFLOW_TEMPLATE }],
@@ -227,11 +224,11 @@ export function createMockWorkflowClient(
         categoryId:
           input.categoryId === undefined
             ? existing.categoryId
-            : input.categoryId ?? undefined,
+            : (input.categoryId ?? undefined),
         folderId:
           input.folderId === undefined
             ? existing.folderId
-            : input.folderId ?? undefined,
+            : (input.folderId ?? undefined),
         updatedAt: "2026-07-15T13:00:00.000Z",
       };
       workflows.set(workflowId, updated);
@@ -381,14 +378,11 @@ export function createMockWorkflowClient(
                 id: String(node.id ?? `node_${index}`),
                 nodeKind: String(node.nodeKind ?? "action"),
                 kind: String(node.kind ?? "unknown"),
-                label:
-                  node.label !== undefined ? String(node.label) : undefined,
+                label: node.label !== undefined ? String(node.label) : undefined,
               })),
               connections: input.graph.connections.map((conn, index) => ({
                 id: String(conn.id ?? `conn_${index}`),
-                sourceNodeId: String(
-                  conn.sourceNodeId ?? conn.fromNodeId ?? "",
-                ),
+                sourceNodeId: String(conn.sourceNodeId ?? conn.fromNodeId ?? ""),
                 targetNodeId: String(conn.targetNodeId ?? conn.toNodeId ?? ""),
                 label: conn.label !== undefined ? String(conn.label) : undefined,
               })),

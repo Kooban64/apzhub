@@ -47,13 +47,13 @@ Scoped `integrations/n8n/src` (excluding tests/types/models): **~95.1%** lines/s
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| Typecheck | PASS |
-| Vitest | PASS (21) |
-| Coverage (≥95% lines/functions scoped) | PASS |
-| `pnpm audit:n8n-adapter` | PASS |
-| No platform-services / apps/web wiring | PASS |
+| Gate                                   | Result    |
+| -------------------------------------- | --------- |
+| Typecheck                              | PASS      |
+| Vitest                                 | PASS (21) |
+| Coverage (≥95% lines/functions scoped) | PASS      |
+| `pnpm audit:n8n-adapter`               | PASS      |
+| No platform-services / apps/web wiring | PASS      |
 
 ## Technical Debt
 

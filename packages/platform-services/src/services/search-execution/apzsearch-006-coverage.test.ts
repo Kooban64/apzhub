@@ -38,16 +38,14 @@ const ctx = (overrides: Record<string, unknown> = {}) => ({
   actorUserId: "u",
   tenantId: "tenant_a",
   organisationId: "org_a",
-  permissions: [
-    "search.*",
-    "search.query.execute",
-    "search.query.select-provider",
-  ],
+  permissions: ["search.*", "search.query.execute", "search.query.select-provider"],
   ...overrides,
 });
 
 async function makeProvider(
-  registration: ConstructorParameters<typeof MeilisearchSearchProvider>[0]["registration"],
+  registration: ConstructorParameters<
+    typeof MeilisearchSearchProvider
+  >[0]["registration"],
   seedUid = "apzhub_documents",
 ) {
   const fetchFn = createMockMeilisearchFetch({
@@ -182,12 +180,10 @@ describe("APZSEARCH-006 coverage", () => {
     expect(resolver.resolve(ctx(), { profileId: "prof_1" }).descriptor.id).toBe(
       "p_profile",
     );
-    expect(
-      resolver.resolve(ctx(), { collectionId: "documents" }).descriptor.id,
-    ).toBe("p_coll");
-    expect(resolver.resolve(ctx(), { sourceId: "src_1" }).descriptor.id).toBe(
-      "p_src",
+    expect(resolver.resolve(ctx(), { collectionId: "documents" }).descriptor.id).toBe(
+      "p_coll",
     );
+    expect(resolver.resolve(ctx(), { sourceId: "src_1" }).descriptor.id).toBe("p_src");
     expect(resolver.resolve(ctx()).descriptor.id).toBe("p_tenant");
 
     const noTenant = createSearchExecutionProviderResolver({
@@ -200,9 +196,7 @@ describe("APZSEARCH-006 coverage", () => {
     });
     expect(onlyPriority.resolve(ctx()).descriptor.id).toBe("p_prio");
 
-    expect(onlyPriority.list(ctx()).map((p) => p.descriptor.id)).toEqual([
-      "p_prio",
-    ]);
+    expect(onlyPriority.list(ctx()).map((p) => p.descriptor.id)).toEqual(["p_prio"]);
 
     const ineligibleExplicit = createSearchExecutionProviderResolver({
       providers: [hidden, highPriority],
@@ -224,12 +218,9 @@ describe("APZSEARCH-006 coverage", () => {
       platformActive: true,
     });
 
+    expect(provider.validateQuery(ctx(), { keywords: "ok" }).valid).toBe(true);
     expect(
-      provider.validateQuery(ctx(), { keywords: "ok" }).valid,
-    ).toBe(true);
-    expect(
-      provider.validateQuery(ctx(), { keywords: "x", semantic: true } as never)
-        .valid,
+      provider.validateQuery(ctx(), { keywords: "x", semantic: true } as never).valid,
     ).toBe(false);
 
     await expect(
@@ -252,7 +243,17 @@ describe("APZSEARCH-006 coverage", () => {
     await provider.updateIndex(ctx(), "apzhub_new_coll", { primaryKey: "id" });
     await provider.upsertDocuments(ctx(), "apzhub_new_coll", {
       collectionId: "new_coll",
-      documents: [{ id: "d1", fields: { title: "T", productId: "documents", sourceId: "s", entityType: "document" } }],
+      documents: [
+        {
+          id: "d1",
+          fields: {
+            title: "T",
+            productId: "documents",
+            sourceId: "s",
+            entityType: "document",
+          },
+        },
+      ],
     });
     const got = await provider.getDocument(ctx(), "apzhub_new_coll", {
       collectionId: "new_coll",
@@ -279,22 +280,36 @@ describe("APZSEARCH-006 coverage", () => {
     });
     const domain = bundle.domainGateway;
 
-    await domain.searchExecution.executeWithFacets!(ctx(), {
-      query: { keywords: "Doc" },
-    }, { collectionId: "documents" });
+    await domain.searchExecution.executeWithFacets!(
+      ctx(),
+      {
+        query: { keywords: "Doc" },
+      },
+      { collectionId: "documents" },
+    );
 
-    await domain.searchExecution.executeWithHighlights!(ctx(), {
-      query: { keywords: "Doc" },
-    }, { collectionId: "documents" });
+    await domain.searchExecution.executeWithHighlights!(
+      ctx(),
+      {
+        query: { keywords: "Doc" },
+      },
+      { collectionId: "documents" },
+    );
 
-    await domain.searchExecution.suggest!(ctx(), { keywords: "Doc" }, {
-      collectionId: "documents",
-    });
+    await domain.searchExecution.suggest!(
+      ctx(),
+      { keywords: "Doc" },
+      {
+        collectionId: "documents",
+      },
+    );
 
     expect(
-      (domain.searchExecution.validateQuery(ctx(), {
-        keywords: "a",
-      }) as { valid: boolean }).valid,
+      (
+        domain.searchExecution.validateQuery(ctx(), {
+          keywords: "a",
+        }) as { valid: boolean }
+      ).valid,
     ).toBe(true);
 
     const indexes = await domain.searchIndexes.list(ctx());
@@ -372,12 +387,14 @@ describe("APZSEARCH-006 coverage", () => {
     await fromProviders.dispose();
 
     const fromTestProviders = await createSearchExecutionServicesForTest({
-      providers: [await makeProvider({
-        id: asSearchProviderId("t2"),
-        enabled: true,
-        healthy: true,
-        platformActive: true,
-      })],
+      providers: [
+        await makeProvider({
+          id: asSearchProviderId("t2"),
+          enabled: true,
+          healthy: true,
+          platformActive: true,
+        }),
+      ],
     });
     await fromTestProviders.dispose();
   });
@@ -420,9 +437,7 @@ describe("APZSEARCH-006 coverage", () => {
       fetchFn: createMockMeilisearchFetch({ failHealth: true }),
     });
     const health = await failHealth.providers[0]!.getHealth(ctx());
-    expect(health.status === "unavailable" || health.status === "degraded").toBe(
-      true,
-    );
+    expect(health.status === "unavailable" || health.status === "degraded").toBe(true);
     const stats = await failHealth.providers[0]!.getStatistics(ctx());
     expect(stats.declaredProviderCount).toBeGreaterThanOrEqual(1);
     await failHealth.dispose();
@@ -432,18 +447,20 @@ describe("APZSEARCH-006 coverage", () => {
       indexPrefix: "apzhub_",
     });
     await expect(
-      failSearch.domainGateway.searchExecution.execute(ctx(), {
-        query: { keywords: "x" },
-      }, { collectionId: "documents" }),
+      failSearch.domainGateway.searchExecution.execute(
+        ctx(),
+        {
+          query: { keywords: "x" },
+        },
+        { collectionId: "documents" },
+      ),
     ).rejects.toThrow();
     await failSearch.dispose();
 
     const failIndexes = await createSearchExecutionServicesForTest({
       fetchFn: createMockMeilisearchFetch({ failIndexes: true, seedIndexes: [] }),
     });
-    await expect(
-      failIndexes.domainGateway.searchIndexes.list(ctx()),
-    ).rejects.toThrow();
+    await expect(failIndexes.domainGateway.searchIndexes.list(ctx())).rejects.toThrow();
     await failIndexes.dispose();
 
     await expect(
@@ -498,10 +515,8 @@ describe("APZSEARCH-006 coverage", () => {
   });
 
   it("covers Meilisearch operation error branches via operations spy", async () => {
-    const {
-      createErrorResult,
-      createNotSupportedResult,
-    } = await import("@apzhub/integration-meilisearch");
+    const { createErrorResult, createNotSupportedResult } =
+      await import("@apzhub/integration-meilisearch");
     const provider = await makeProvider({
       id: asSearchProviderId("spy"),
       enabled: true,
@@ -517,7 +532,10 @@ describe("APZSEARCH-006 coverage", () => {
       }
     ).adapter;
 
-    vi.spyOn(adapter.operations as { manageIndex: (...a: unknown[]) => unknown }, "manageIndex")
+    vi.spyOn(
+      adapter.operations as { manageIndex: (...a: unknown[]) => unknown },
+      "manageIndex",
+    )
       .mockResolvedValueOnce(createNotSupportedResult("index", "create"))
       .mockResolvedValueOnce(createErrorResult("index", "boom"))
       .mockResolvedValueOnce(createNotSupportedResult("index", "list"))
@@ -602,9 +620,7 @@ describe("APZSEARCH-006 coverage", () => {
     vi.spyOn(adapter, "search").mockResolvedValueOnce(
       createNotSupportedResult("query", "vector"),
     );
-    await expect(provider.query(ctx(), { keywords: "x" })).rejects.toThrow(
-      /vector/,
-    );
+    await expect(provider.query(ctx(), { keywords: "x" })).rejects.toThrow(/vector/);
 
     await provider.dispose();
   });
@@ -689,9 +705,9 @@ describe("APZSEARCH-006 coverage", () => {
       executionEnabled: true,
     });
 
-    await expect(
-      services.searchIndexes.delete(ctx(), "missing"),
-    ).rejects.toThrow(/not found/i);
+    await expect(services.searchIndexes.delete(ctx(), "missing")).rejects.toThrow(
+      /not found/i,
+    );
 
     const readiness = await services.searchExecutionHealth.getReadiness(ctx());
     expect(readiness.providerBound).toBe(false);

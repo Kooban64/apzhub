@@ -18,8 +18,7 @@ export const ADMINISTRATION_MODULE_KEYS = [
   "future",
 ] as const;
 
-export type AdministrationModuleKey =
-  (typeof ADMINISTRATION_MODULE_KEYS)[number];
+export type AdministrationModuleKey = (typeof ADMINISTRATION_MODULE_KEYS)[number];
 
 export function isAdministrationModuleKey(
   value: string,
@@ -41,9 +40,7 @@ export type AdministrationLifecycleStatus =
 export function isAdministrationLifecycleStatus(
   value: string,
 ): value is AdministrationLifecycleStatus {
-  return (ADMINISTRATION_LIFECYCLE_STATUSES as readonly string[]).includes(
-    value,
-  );
+  return (ADMINISTRATION_LIFECYCLE_STATUSES as readonly string[]).includes(value);
 }
 
 export const ADMINISTRATION_ACTION_KINDS = [
@@ -55,8 +52,7 @@ export const ADMINISTRATION_ACTION_KINDS = [
   "maintain",
 ] as const;
 
-export type AdministrationActionKind =
-  (typeof ADMINISTRATION_ACTION_KINDS)[number];
+export type AdministrationActionKind = (typeof ADMINISTRATION_ACTION_KINDS)[number];
 
 export function isAdministrationActionKind(
   value: string,
@@ -76,9 +72,7 @@ export type AdministrationNavigationVisibility =
 export function isAdministrationNavigationVisibility(
   value: string,
 ): value is AdministrationNavigationVisibility {
-  return (ADMINISTRATION_NAVIGATION_VISIBILITY as readonly string[]).includes(
-    value,
-  );
+  return (ADMINISTRATION_NAVIGATION_VISIBILITY as readonly string[]).includes(value);
 }
 
 export const ADMINISTRATION_DIAGNOSTIC_SEVERITY = [
@@ -94,9 +88,7 @@ export type AdministrationDiagnosticSeverity =
 export function isAdministrationDiagnosticSeverity(
   value: string,
 ): value is AdministrationDiagnosticSeverity {
-  return (ADMINISTRATION_DIAGNOSTIC_SEVERITY as readonly string[]).includes(
-    value,
-  );
+  return (ADMINISTRATION_DIAGNOSTIC_SEVERITY as readonly string[]).includes(value);
 }
 
 export const ADMINISTRATION_REFERENCE_KINDS = [
@@ -122,8 +114,7 @@ export const ADMINISTRATION_POLICY_KINDS = [
   "operational",
 ] as const;
 
-export type AdministrationPolicyKind =
-  (typeof ADMINISTRATION_POLICY_KINDS)[number];
+export type AdministrationPolicyKind = (typeof ADMINISTRATION_POLICY_KINDS)[number];
 
 export function isAdministrationPolicyKind(
   value: string,
@@ -139,8 +130,7 @@ export const ADMINISTRATION_WIDGET_KINDS = [
   "metric",
 ] as const;
 
-export type AdministrationWidgetKind =
-  (typeof ADMINISTRATION_WIDGET_KINDS)[number];
+export type AdministrationWidgetKind = (typeof ADMINISTRATION_WIDGET_KINDS)[number];
 
 export function isAdministrationWidgetKind(
   value: string,
@@ -158,8 +148,7 @@ export const ADMINISTRATION_AUDIT_ACTIONS = [
   "archived",
 ] as const;
 
-export type AdministrationAuditAction =
-  (typeof ADMINISTRATION_AUDIT_ACTIONS)[number];
+export type AdministrationAuditAction = (typeof ADMINISTRATION_AUDIT_ACTIONS)[number];
 
 export function isAdministrationAuditAction(
   value: string,

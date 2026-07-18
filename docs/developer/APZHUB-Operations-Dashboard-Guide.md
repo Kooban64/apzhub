@@ -53,12 +53,12 @@ Operations guide references for runbooks and governance.
 
 ## API endpoints
 
-| Endpoint | Purpose |
-|----------|---------|
-| `GET /api/platform/v1/operations/control-plane` | Canonical control plane snapshot (PRH-008) |
-| `GET /api/platform/v1/operations/summary` | Legacy aggregate summary (health, counts, consolidated JSON) |
-| `GET /api/platform/v1/operations/configuration` | Masked configuration diagnostics |
-| `GET /api/platform/v1/security/diagnostics` | Security-focused diagnostics |
+| Endpoint                                        | Purpose                                                      |
+| ----------------------------------------------- | ------------------------------------------------------------ |
+| `GET /api/platform/v1/operations/control-plane` | Canonical control plane snapshot (PRH-008)                   |
+| `GET /api/platform/v1/operations/summary`       | Legacy aggregate summary (health, counts, consolidated JSON) |
+| `GET /api/platform/v1/operations/configuration` | Masked configuration diagnostics                             |
+| `GET /api/platform/v1/security/diagnostics`     | Security-focused diagnostics                                 |
 
 All privileged endpoints require administration permission.
 

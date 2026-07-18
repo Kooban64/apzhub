@@ -6,11 +6,7 @@
  */
 
 import type { SearchEntityDraft } from "@apzhub/search-integration";
-import type {
-  Pipeline,
-  PipelineImport,
-  PipelineRun,
-} from "@apzhub/testing-contracts";
+import type { Pipeline, PipelineImport, PipelineRun } from "@apzhub/testing-contracts";
 
 import type { TestingSearchPublicationContext } from "../context/testing-search-publication-context";
 import {
@@ -63,24 +59,15 @@ export class PipelineSearchMapper {
       title: pipeline.name,
       summary: pipeline.description?.slice(0, 280),
       organisationId:
-        pipeline.organisationId ??
-        extras?.organisationId ??
-        context.organisationId,
+        pipeline.organisationId ?? extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        pipeline.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, pipeline.status, classification),
       metadata: {
         key: pipeline.key,
         status: pipeline.status,
         providerKind: pipeline.providerKind,
         secretsPresent: pipeline.secretRefs?.length ? "true" : "false",
-        ...(pipeline.defaultBranch
-          ? { defaultBranch: pipeline.defaultBranch }
-          : {}),
+        ...(pipeline.defaultBranch ? { defaultBranch: pipeline.defaultBranch } : {}),
         ...(pipeline.revision !== undefined
           ? { revision: String(pipeline.revision) }
           : {}),
@@ -91,8 +78,7 @@ export class PipelineSearchMapper {
       navigationTarget: navigationTarget("pipeline", String(pipeline.id)),
       sourceId: "testing:pipeline",
       ownerUserId: pipeline.createdBy ?? context.actorUserId,
-      version:
-        pipeline.revision !== undefined ? String(pipeline.revision) : undefined,
+      version: pipeline.revision !== undefined ? String(pipeline.revision) : undefined,
     };
   }
 
@@ -109,8 +95,7 @@ export class PipelineSearchMapper {
       status: run.status,
     });
     const title =
-      extras?.title ??
-      `Pipeline run ${run.status} (${String(run.id).slice(0, 12)})`;
+      extras?.title ?? `Pipeline run ${run.status} (${String(run.id).slice(0, 12)})`;
     return {
       entityId: String(run.id),
       entityType: "pipeline_run",
@@ -132,15 +117,11 @@ export class PipelineSearchMapper {
         secretsPresent: run.secretRefs?.length ? "true" : "false",
         ...(run.startedAt ? { startedAt: run.startedAt } : {}),
         ...(run.completedAt ? { completedAt: run.completedAt } : {}),
-        ...(run.durationMs !== undefined
-          ? { durationMs: String(run.durationMs) }
-          : {}),
+        ...(run.durationMs !== undefined ? { durationMs: String(run.durationMs) } : {}),
         ...(run.summary?.overallStatus
           ? { overallResult: run.summary.overallStatus }
           : {}),
-        ...(run.revision !== undefined
-          ? { revision: String(run.revision) }
-          : {}),
+        ...(run.revision !== undefined ? { revision: String(run.revision) } : {}),
       },
       keywords: [title, run.status, run.providerKind],
       createdAt: run.createdAt,
@@ -179,28 +160,17 @@ export class PipelineSearchMapper {
       title,
       summary: imported.errorSummary?.slice(0, 280),
       organisationId:
-        imported.organisationId ??
-        extras?.organisationId ??
-        context.organisationId,
+        imported.organisationId ?? extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        imported.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, imported.status, classification),
       metadata: {
         status: imported.status,
         providerKind: imported.providerKind,
         adapterKind: imported.adapterVersion,
         externalRunRef: imported.externalRunRef,
         checksumPresent: imported.checksum ? "true" : "false",
-        ...(imported.pipelineId
-          ? { pipelineId: String(imported.pipelineId) }
-          : {}),
-        ...(imported.pipelineRunId
-          ? { runId: String(imported.pipelineRunId) }
-          : {}),
+        ...(imported.pipelineId ? { pipelineId: String(imported.pipelineId) } : {}),
+        ...(imported.pipelineRunId ? { runId: String(imported.pipelineRunId) } : {}),
         ...(imported.startedAt ? { startedAt: imported.startedAt } : {}),
         ...(imported.completedAt ? { completedAt: imported.completedAt } : {}),
         ...(imported.revision !== undefined
@@ -213,8 +183,7 @@ export class PipelineSearchMapper {
       navigationTarget: navigationTarget("pipeline_import", String(imported.id)),
       sourceId: "testing:pipeline_import",
       ownerUserId: imported.createdBy ?? context.actorUserId,
-      version:
-        imported.revision !== undefined ? String(imported.revision) : undefined,
+      version: imported.revision !== undefined ? String(imported.revision) : undefined,
     };
   }
 }

@@ -20,9 +20,7 @@ function normalizePath(pathname: string): string {
 
 export function isReportingRoute(pathname: string): boolean {
   const normalized = normalizePath(pathname);
-  return (
-    normalized === REPORTING_BASE || normalized.startsWith(`${REPORTING_BASE}/`)
-  );
+  return normalized === REPORTING_BASE || normalized.startsWith(`${REPORTING_BASE}/`);
 }
 
 export function resolveReportingSection(

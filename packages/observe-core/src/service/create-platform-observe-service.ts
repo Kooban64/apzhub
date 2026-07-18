@@ -133,81 +133,255 @@ function requireString(value: string | undefined, field: string): string {
 
 export type PlatformObserveDomainService = {
   listHealthChecks(ctx: ObserveRequestContext): Promise<readonly HealthCheck[]>;
-  getHealthCheck(ctx: ObserveRequestContext, id: HealthCheck["id"]): Promise<HealthCheck>;
-  createHealthCheck(ctx: ObserveRequestContext, input: CreateHealthCheckInput): Promise<HealthCheck>;
-  updateHealthCheck(ctx: ObserveRequestContext, input: UpdateHealthCheckInput): Promise<HealthCheck>;
+  getHealthCheck(
+    ctx: ObserveRequestContext,
+    id: HealthCheck["id"],
+  ): Promise<HealthCheck>;
+  createHealthCheck(
+    ctx: ObserveRequestContext,
+    input: CreateHealthCheckInput,
+  ): Promise<HealthCheck>;
+  updateHealthCheck(
+    ctx: ObserveRequestContext,
+    input: UpdateHealthCheckInput,
+  ): Promise<HealthCheck>;
   listReadinessChecks(ctx: ObserveRequestContext): Promise<readonly ReadinessCheck[]>;
-  getReadinessCheck(ctx: ObserveRequestContext, id: ReadinessCheck["id"]): Promise<ReadinessCheck>;
-  createReadinessCheck(ctx: ObserveRequestContext, input: CreateReadinessCheckInput): Promise<ReadinessCheck>;
-  updateReadinessCheck(ctx: ObserveRequestContext, input: UpdateReadinessCheckInput): Promise<ReadinessCheck>;
+  getReadinessCheck(
+    ctx: ObserveRequestContext,
+    id: ReadinessCheck["id"],
+  ): Promise<ReadinessCheck>;
+  createReadinessCheck(
+    ctx: ObserveRequestContext,
+    input: CreateReadinessCheckInput,
+  ): Promise<ReadinessCheck>;
+  updateReadinessCheck(
+    ctx: ObserveRequestContext,
+    input: UpdateReadinessCheckInput,
+  ): Promise<ReadinessCheck>;
   listLivenessChecks(ctx: ObserveRequestContext): Promise<readonly LivenessCheck[]>;
-  getLivenessCheck(ctx: ObserveRequestContext, id: LivenessCheck["id"]): Promise<LivenessCheck>;
-  createLivenessCheck(ctx: ObserveRequestContext, input: CreateLivenessCheckInput): Promise<LivenessCheck>;
-  updateLivenessCheck(ctx: ObserveRequestContext, input: UpdateLivenessCheckInput): Promise<LivenessCheck>;
+  getLivenessCheck(
+    ctx: ObserveRequestContext,
+    id: LivenessCheck["id"],
+  ): Promise<LivenessCheck>;
+  createLivenessCheck(
+    ctx: ObserveRequestContext,
+    input: CreateLivenessCheckInput,
+  ): Promise<LivenessCheck>;
+  updateLivenessCheck(
+    ctx: ObserveRequestContext,
+    input: UpdateLivenessCheckInput,
+  ): Promise<LivenessCheck>;
   listServiceHealths(ctx: ObserveRequestContext): Promise<readonly ServiceHealth[]>;
-  getServiceHealth(ctx: ObserveRequestContext, id: ServiceHealth["id"]): Promise<ServiceHealth>;
-  createServiceHealth(ctx: ObserveRequestContext, input: CreateServiceHealthInput): Promise<ServiceHealth>;
-  updateServiceHealth(ctx: ObserveRequestContext, input: UpdateServiceHealthInput): Promise<ServiceHealth>;
+  getServiceHealth(
+    ctx: ObserveRequestContext,
+    id: ServiceHealth["id"],
+  ): Promise<ServiceHealth>;
+  createServiceHealth(
+    ctx: ObserveRequestContext,
+    input: CreateServiceHealthInput,
+  ): Promise<ServiceHealth>;
+  updateServiceHealth(
+    ctx: ObserveRequestContext,
+    input: UpdateServiceHealthInput,
+  ): Promise<ServiceHealth>;
   listServiceStatuss(ctx: ObserveRequestContext): Promise<readonly ServiceStatus[]>;
-  getServiceStatus(ctx: ObserveRequestContext, id: ServiceStatus["id"]): Promise<ServiceStatus>;
-  createServiceStatus(ctx: ObserveRequestContext, input: CreateServiceStatusInput): Promise<ServiceStatus>;
-  updateServiceStatus(ctx: ObserveRequestContext, input: UpdateServiceStatusInput): Promise<ServiceStatus>;
+  getServiceStatus(
+    ctx: ObserveRequestContext,
+    id: ServiceStatus["id"],
+  ): Promise<ServiceStatus>;
+  createServiceStatus(
+    ctx: ObserveRequestContext,
+    input: CreateServiceStatusInput,
+  ): Promise<ServiceStatus>;
+  updateServiceStatus(
+    ctx: ObserveRequestContext,
+    input: UpdateServiceStatusInput,
+  ): Promise<ServiceStatus>;
   listComponentStatuss(ctx: ObserveRequestContext): Promise<readonly ComponentStatus[]>;
-  getComponentStatus(ctx: ObserveRequestContext, id: ComponentStatus["id"]): Promise<ComponentStatus>;
-  createComponentStatus(ctx: ObserveRequestContext, input: CreateComponentStatusInput): Promise<ComponentStatus>;
-  updateComponentStatus(ctx: ObserveRequestContext, input: UpdateComponentStatusInput): Promise<ComponentStatus>;
-  listMetricDefinitions(ctx: ObserveRequestContext): Promise<readonly MetricDefinition[]>;
-  getMetricDefinition(ctx: ObserveRequestContext, id: MetricDefinition["id"]): Promise<MetricDefinition>;
-  createMetricDefinition(ctx: ObserveRequestContext, input: CreateMetricDefinitionInput): Promise<MetricDefinition>;
-  updateMetricDefinition(ctx: ObserveRequestContext, input: UpdateMetricDefinitionInput): Promise<MetricDefinition>;
+  getComponentStatus(
+    ctx: ObserveRequestContext,
+    id: ComponentStatus["id"],
+  ): Promise<ComponentStatus>;
+  createComponentStatus(
+    ctx: ObserveRequestContext,
+    input: CreateComponentStatusInput,
+  ): Promise<ComponentStatus>;
+  updateComponentStatus(
+    ctx: ObserveRequestContext,
+    input: UpdateComponentStatusInput,
+  ): Promise<ComponentStatus>;
+  listMetricDefinitions(
+    ctx: ObserveRequestContext,
+  ): Promise<readonly MetricDefinition[]>;
+  getMetricDefinition(
+    ctx: ObserveRequestContext,
+    id: MetricDefinition["id"],
+  ): Promise<MetricDefinition>;
+  createMetricDefinition(
+    ctx: ObserveRequestContext,
+    input: CreateMetricDefinitionInput,
+  ): Promise<MetricDefinition>;
+  updateMetricDefinition(
+    ctx: ObserveRequestContext,
+    input: UpdateMetricDefinitionInput,
+  ): Promise<MetricDefinition>;
   listMetricSamples(ctx: ObserveRequestContext): Promise<readonly MetricSample[]>;
-  getMetricSample(ctx: ObserveRequestContext, id: MetricSample["id"]): Promise<MetricSample>;
-  createMetricSample(ctx: ObserveRequestContext, input: CreateMetricSampleInput): Promise<MetricSample>;
-  updateMetricSample(ctx: ObserveRequestContext, input: UpdateMetricSampleInput): Promise<MetricSample>;
+  getMetricSample(
+    ctx: ObserveRequestContext,
+    id: MetricSample["id"],
+  ): Promise<MetricSample>;
+  createMetricSample(
+    ctx: ObserveRequestContext,
+    input: CreateMetricSampleInput,
+  ): Promise<MetricSample>;
+  updateMetricSample(
+    ctx: ObserveRequestContext,
+    input: UpdateMetricSampleInput,
+  ): Promise<MetricSample>;
   listAlertDefinitions(ctx: ObserveRequestContext): Promise<readonly AlertDefinition[]>;
-  getAlertDefinition(ctx: ObserveRequestContext, id: AlertDefinition["id"]): Promise<AlertDefinition>;
-  createAlertDefinition(ctx: ObserveRequestContext, input: CreateAlertDefinitionInput): Promise<AlertDefinition>;
-  updateAlertDefinition(ctx: ObserveRequestContext, input: UpdateAlertDefinitionInput): Promise<AlertDefinition>;
+  getAlertDefinition(
+    ctx: ObserveRequestContext,
+    id: AlertDefinition["id"],
+  ): Promise<AlertDefinition>;
+  createAlertDefinition(
+    ctx: ObserveRequestContext,
+    input: CreateAlertDefinitionInput,
+  ): Promise<AlertDefinition>;
+  updateAlertDefinition(
+    ctx: ObserveRequestContext,
+    input: UpdateAlertDefinitionInput,
+  ): Promise<AlertDefinition>;
   listAlertStates(ctx: ObserveRequestContext): Promise<readonly AlertState[]>;
   getAlertState(ctx: ObserveRequestContext, id: AlertState["id"]): Promise<AlertState>;
-  createAlertState(ctx: ObserveRequestContext, input: CreateAlertStateInput): Promise<AlertState>;
-  updateAlertState(ctx: ObserveRequestContext, input: UpdateAlertStateInput): Promise<AlertState>;
-  listDashboardDefinitions(ctx: ObserveRequestContext): Promise<readonly DashboardDefinition[]>;
-  getDashboardDefinition(ctx: ObserveRequestContext, id: DashboardDefinition["id"]): Promise<DashboardDefinition>;
-  createDashboardDefinition(ctx: ObserveRequestContext, input: CreateDashboardDefinitionInput): Promise<DashboardDefinition>;
-  updateDashboardDefinition(ctx: ObserveRequestContext, input: UpdateDashboardDefinitionInput): Promise<DashboardDefinition>;
+  createAlertState(
+    ctx: ObserveRequestContext,
+    input: CreateAlertStateInput,
+  ): Promise<AlertState>;
+  updateAlertState(
+    ctx: ObserveRequestContext,
+    input: UpdateAlertStateInput,
+  ): Promise<AlertState>;
+  listDashboardDefinitions(
+    ctx: ObserveRequestContext,
+  ): Promise<readonly DashboardDefinition[]>;
+  getDashboardDefinition(
+    ctx: ObserveRequestContext,
+    id: DashboardDefinition["id"],
+  ): Promise<DashboardDefinition>;
+  createDashboardDefinition(
+    ctx: ObserveRequestContext,
+    input: CreateDashboardDefinitionInput,
+  ): Promise<DashboardDefinition>;
+  updateDashboardDefinition(
+    ctx: ObserveRequestContext,
+    input: UpdateDashboardDefinitionInput,
+  ): Promise<DashboardDefinition>;
   listLogSources(ctx: ObserveRequestContext): Promise<readonly LogSource[]>;
   getLogSource(ctx: ObserveRequestContext, id: LogSource["id"]): Promise<LogSource>;
-  createLogSource(ctx: ObserveRequestContext, input: CreateLogSourceInput): Promise<LogSource>;
-  updateLogSource(ctx: ObserveRequestContext, input: UpdateLogSourceInput): Promise<LogSource>;
+  createLogSource(
+    ctx: ObserveRequestContext,
+    input: CreateLogSourceInput,
+  ): Promise<LogSource>;
+  updateLogSource(
+    ctx: ObserveRequestContext,
+    input: UpdateLogSourceInput,
+  ): Promise<LogSource>;
   listTraceDefinitions(ctx: ObserveRequestContext): Promise<readonly TraceDefinition[]>;
-  getTraceDefinition(ctx: ObserveRequestContext, id: TraceDefinition["id"]): Promise<TraceDefinition>;
-  createTraceDefinition(ctx: ObserveRequestContext, input: CreateTraceDefinitionInput): Promise<TraceDefinition>;
-  updateTraceDefinition(ctx: ObserveRequestContext, input: UpdateTraceDefinitionInput): Promise<TraceDefinition>;
+  getTraceDefinition(
+    ctx: ObserveRequestContext,
+    id: TraceDefinition["id"],
+  ): Promise<TraceDefinition>;
+  createTraceDefinition(
+    ctx: ObserveRequestContext,
+    input: CreateTraceDefinitionInput,
+  ): Promise<TraceDefinition>;
+  updateTraceDefinition(
+    ctx: ObserveRequestContext,
+    input: UpdateTraceDefinitionInput,
+  ): Promise<TraceDefinition>;
   listTraceSpans(ctx: ObserveRequestContext): Promise<readonly TraceSpan[]>;
   getTraceSpan(ctx: ObserveRequestContext, id: TraceSpan["id"]): Promise<TraceSpan>;
-  createTraceSpan(ctx: ObserveRequestContext, input: CreateTraceSpanInput): Promise<TraceSpan>;
-  updateTraceSpan(ctx: ObserveRequestContext, input: UpdateTraceSpanInput): Promise<TraceSpan>;
-  listIncidentReferences(ctx: ObserveRequestContext): Promise<readonly IncidentReference[]>;
-  getIncidentReference(ctx: ObserveRequestContext, id: IncidentReference["id"]): Promise<IncidentReference>;
-  createIncidentReference(ctx: ObserveRequestContext, input: CreateIncidentReferenceInput): Promise<IncidentReference>;
-  updateIncidentReference(ctx: ObserveRequestContext, input: UpdateIncidentReferenceInput): Promise<IncidentReference>;
-  listMaintenanceWindows(ctx: ObserveRequestContext): Promise<readonly MaintenanceWindow[]>;
-  getMaintenanceWindow(ctx: ObserveRequestContext, id: MaintenanceWindow["id"]): Promise<MaintenanceWindow>;
-  createMaintenanceWindow(ctx: ObserveRequestContext, input: CreateMaintenanceWindowInput): Promise<MaintenanceWindow>;
-  updateMaintenanceWindow(ctx: ObserveRequestContext, input: UpdateMaintenanceWindowInput): Promise<MaintenanceWindow>;
+  createTraceSpan(
+    ctx: ObserveRequestContext,
+    input: CreateTraceSpanInput,
+  ): Promise<TraceSpan>;
+  updateTraceSpan(
+    ctx: ObserveRequestContext,
+    input: UpdateTraceSpanInput,
+  ): Promise<TraceSpan>;
+  listIncidentReferences(
+    ctx: ObserveRequestContext,
+  ): Promise<readonly IncidentReference[]>;
+  getIncidentReference(
+    ctx: ObserveRequestContext,
+    id: IncidentReference["id"],
+  ): Promise<IncidentReference>;
+  createIncidentReference(
+    ctx: ObserveRequestContext,
+    input: CreateIncidentReferenceInput,
+  ): Promise<IncidentReference>;
+  updateIncidentReference(
+    ctx: ObserveRequestContext,
+    input: UpdateIncidentReferenceInput,
+  ): Promise<IncidentReference>;
+  listMaintenanceWindows(
+    ctx: ObserveRequestContext,
+  ): Promise<readonly MaintenanceWindow[]>;
+  getMaintenanceWindow(
+    ctx: ObserveRequestContext,
+    id: MaintenanceWindow["id"],
+  ): Promise<MaintenanceWindow>;
+  createMaintenanceWindow(
+    ctx: ObserveRequestContext,
+    input: CreateMaintenanceWindowInput,
+  ): Promise<MaintenanceWindow>;
+  updateMaintenanceWindow(
+    ctx: ObserveRequestContext,
+    input: UpdateMaintenanceWindowInput,
+  ): Promise<MaintenanceWindow>;
   listHealthSummarys(ctx: ObserveRequestContext): Promise<readonly HealthSummary[]>;
-  getHealthSummary(ctx: ObserveRequestContext, id: HealthSummary["id"]): Promise<HealthSummary>;
-  createHealthSummary(ctx: ObserveRequestContext, input: CreateHealthSummaryInput): Promise<HealthSummary>;
-  updateHealthSummary(ctx: ObserveRequestContext, input: UpdateHealthSummaryInput): Promise<HealthSummary>;
-  listObservabilityMetadatas(ctx: ObserveRequestContext): Promise<readonly ObservabilityMetadata[]>;
-  getObservabilityMetadata(ctx: ObserveRequestContext, id: ObservabilityMetadata["id"]): Promise<ObservabilityMetadata>;
-  createObservabilityMetadata(ctx: ObserveRequestContext, input: CreateObservabilityMetadataInput): Promise<ObservabilityMetadata>;
-  updateObservabilityMetadata(ctx: ObserveRequestContext, input: UpdateObservabilityMetadataInput): Promise<ObservabilityMetadata>;
-  listPlatformDiagnostics(ctx: ObserveRequestContext): Promise<readonly PlatformDiagnostic[]>;
-  getPlatformDiagnostic(ctx: ObserveRequestContext, id: PlatformDiagnostic["id"]): Promise<PlatformDiagnostic>;
-  createPlatformDiagnostic(ctx: ObserveRequestContext, input: CreatePlatformDiagnosticInput): Promise<PlatformDiagnostic>;
-  updatePlatformDiagnostic(ctx: ObserveRequestContext, input: UpdatePlatformDiagnosticInput): Promise<PlatformDiagnostic>;
+  getHealthSummary(
+    ctx: ObserveRequestContext,
+    id: HealthSummary["id"],
+  ): Promise<HealthSummary>;
+  createHealthSummary(
+    ctx: ObserveRequestContext,
+    input: CreateHealthSummaryInput,
+  ): Promise<HealthSummary>;
+  updateHealthSummary(
+    ctx: ObserveRequestContext,
+    input: UpdateHealthSummaryInput,
+  ): Promise<HealthSummary>;
+  listObservabilityMetadatas(
+    ctx: ObserveRequestContext,
+  ): Promise<readonly ObservabilityMetadata[]>;
+  getObservabilityMetadata(
+    ctx: ObserveRequestContext,
+    id: ObservabilityMetadata["id"],
+  ): Promise<ObservabilityMetadata>;
+  createObservabilityMetadata(
+    ctx: ObserveRequestContext,
+    input: CreateObservabilityMetadataInput,
+  ): Promise<ObservabilityMetadata>;
+  updateObservabilityMetadata(
+    ctx: ObserveRequestContext,
+    input: UpdateObservabilityMetadataInput,
+  ): Promise<ObservabilityMetadata>;
+  listPlatformDiagnostics(
+    ctx: ObserveRequestContext,
+  ): Promise<readonly PlatformDiagnostic[]>;
+  getPlatformDiagnostic(
+    ctx: ObserveRequestContext,
+    id: PlatformDiagnostic["id"],
+  ): Promise<PlatformDiagnostic>;
+  createPlatformDiagnostic(
+    ctx: ObserveRequestContext,
+    input: CreatePlatformDiagnosticInput,
+  ): Promise<PlatformDiagnostic>;
+  updatePlatformDiagnostic(
+    ctx: ObserveRequestContext,
+    input: UpdatePlatformDiagnosticInput,
+  ): Promise<PlatformDiagnostic>;
   diagnosticsHealth(ctx: ObserveRequestContext): Promise<{
     readonly status: "healthy" | "degraded" | "unavailable";
     readonly persistenceMode: "postgres" | "memory";
@@ -262,7 +436,11 @@ export function createPlatformObserveService(
     },
     async getHealthCheck(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.healthChecks.get(ctx, id), "HealthCheck", id);
+      return requireFound(
+        await deps.repos.healthChecks.get(ctx, id),
+        "HealthCheck",
+        id,
+      );
     },
     async createHealthCheck(ctx, input) {
       assertCtx(ctx);
@@ -272,10 +450,22 @@ export function createPlatformObserveService(
         id: asHealthCheckId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        serviceKey: typeof input.serviceKey === "string" ? requireString(input.serviceKey, "serviceKey") : input.serviceKey,
-        name: typeof input.name === "string" ? requireString(input.name, "name") : input.name,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
-        providerKind: typeof input.providerKind === "string" ? requireString(input.providerKind, "providerKind") : input.providerKind,
+        serviceKey:
+          typeof input.serviceKey === "string"
+            ? requireString(input.serviceKey, "serviceKey")
+            : input.serviceKey,
+        name:
+          typeof input.name === "string"
+            ? requireString(input.name, "name")
+            : input.name,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
+        providerKind:
+          typeof input.providerKind === "string"
+            ? requireString(input.providerKind, "providerKind")
+            : input.providerKind,
         description: input.description,
         checkedAt: input.checkedAt,
         providerRef: input.providerRef,
@@ -296,18 +486,36 @@ export function createPlatformObserveService(
         "HealthCheck",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
-        serviceKey: input.serviceKey === null ? undefined : input.serviceKey ?? existing.serviceKey,
+        serviceKey:
+          input.serviceKey === null
+            ? undefined
+            : (input.serviceKey ?? existing.serviceKey),
         name: input.name ?? existing.name,
         status: input.status ?? existing.status,
         providerKind: input.providerKind ?? existing.providerKind,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        description: input.description === null ? undefined : input.description ?? existing.description,
-        checkedAt: input.checkedAt === null ? undefined : input.checkedAt ?? existing.checkedAt,
-        providerRef: input.providerRef === null ? undefined : input.providerRef ?? existing.providerRef,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        description:
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
+        checkedAt:
+          input.checkedAt === null
+            ? undefined
+            : (input.checkedAt ?? existing.checkedAt),
+        providerRef:
+          input.providerRef === null
+            ? undefined
+            : (input.providerRef ?? existing.providerRef),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -324,7 +532,11 @@ export function createPlatformObserveService(
     },
     async getReadinessCheck(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.readinessChecks.get(ctx, id), "ReadinessCheck", id);
+      return requireFound(
+        await deps.repos.readinessChecks.get(ctx, id),
+        "ReadinessCheck",
+        id,
+      );
     },
     async createReadinessCheck(ctx, input) {
       assertCtx(ctx);
@@ -334,10 +546,22 @@ export function createPlatformObserveService(
         id: asReadinessCheckId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        serviceKey: typeof input.serviceKey === "string" ? requireString(input.serviceKey, "serviceKey") : input.serviceKey,
-        name: typeof input.name === "string" ? requireString(input.name, "name") : input.name,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
-        providerKind: typeof input.providerKind === "string" ? requireString(input.providerKind, "providerKind") : input.providerKind,
+        serviceKey:
+          typeof input.serviceKey === "string"
+            ? requireString(input.serviceKey, "serviceKey")
+            : input.serviceKey,
+        name:
+          typeof input.name === "string"
+            ? requireString(input.name, "name")
+            : input.name,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
+        providerKind:
+          typeof input.providerKind === "string"
+            ? requireString(input.providerKind, "providerKind")
+            : input.providerKind,
         checkedAt: input.checkedAt,
         providerRef: input.providerRef,
         metadata: input.metadata,
@@ -357,17 +581,32 @@ export function createPlatformObserveService(
         "ReadinessCheck",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
-        serviceKey: input.serviceKey === null ? undefined : input.serviceKey ?? existing.serviceKey,
+        serviceKey:
+          input.serviceKey === null
+            ? undefined
+            : (input.serviceKey ?? existing.serviceKey),
         name: input.name ?? existing.name,
         status: input.status ?? existing.status,
         providerKind: input.providerKind ?? existing.providerKind,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        checkedAt: input.checkedAt === null ? undefined : input.checkedAt ?? existing.checkedAt,
-        providerRef: input.providerRef === null ? undefined : input.providerRef ?? existing.providerRef,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        checkedAt:
+          input.checkedAt === null
+            ? undefined
+            : (input.checkedAt ?? existing.checkedAt),
+        providerRef:
+          input.providerRef === null
+            ? undefined
+            : (input.providerRef ?? existing.providerRef),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -382,7 +621,11 @@ export function createPlatformObserveService(
     },
     async getLivenessCheck(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.livenessChecks.get(ctx, id), "LivenessCheck", id);
+      return requireFound(
+        await deps.repos.livenessChecks.get(ctx, id),
+        "LivenessCheck",
+        id,
+      );
     },
     async createLivenessCheck(ctx, input) {
       assertCtx(ctx);
@@ -392,10 +635,22 @@ export function createPlatformObserveService(
         id: asLivenessCheckId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        serviceKey: typeof input.serviceKey === "string" ? requireString(input.serviceKey, "serviceKey") : input.serviceKey,
-        name: typeof input.name === "string" ? requireString(input.name, "name") : input.name,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
-        providerKind: typeof input.providerKind === "string" ? requireString(input.providerKind, "providerKind") : input.providerKind,
+        serviceKey:
+          typeof input.serviceKey === "string"
+            ? requireString(input.serviceKey, "serviceKey")
+            : input.serviceKey,
+        name:
+          typeof input.name === "string"
+            ? requireString(input.name, "name")
+            : input.name,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
+        providerKind:
+          typeof input.providerKind === "string"
+            ? requireString(input.providerKind, "providerKind")
+            : input.providerKind,
         checkedAt: input.checkedAt,
         providerRef: input.providerRef,
         metadata: input.metadata,
@@ -415,17 +670,32 @@ export function createPlatformObserveService(
         "LivenessCheck",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
-        serviceKey: input.serviceKey === null ? undefined : input.serviceKey ?? existing.serviceKey,
+        serviceKey:
+          input.serviceKey === null
+            ? undefined
+            : (input.serviceKey ?? existing.serviceKey),
         name: input.name ?? existing.name,
         status: input.status ?? existing.status,
         providerKind: input.providerKind ?? existing.providerKind,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        checkedAt: input.checkedAt === null ? undefined : input.checkedAt ?? existing.checkedAt,
-        providerRef: input.providerRef === null ? undefined : input.providerRef ?? existing.providerRef,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        checkedAt:
+          input.checkedAt === null
+            ? undefined
+            : (input.checkedAt ?? existing.checkedAt),
+        providerRef:
+          input.providerRef === null
+            ? undefined
+            : (input.providerRef ?? existing.providerRef),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -440,7 +710,11 @@ export function createPlatformObserveService(
     },
     async getServiceHealth(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.serviceHealth.get(ctx, id), "ServiceHealth", id);
+      return requireFound(
+        await deps.repos.serviceHealth.get(ctx, id),
+        "ServiceHealth",
+        id,
+      );
     },
     async createServiceHealth(ctx, input) {
       assertCtx(ctx);
@@ -450,11 +724,26 @@ export function createPlatformObserveService(
         id: asServiceHealthId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        serviceKey: typeof input.serviceKey === "string" ? requireString(input.serviceKey, "serviceKey") : input.serviceKey,
-        displayName: typeof input.displayName === "string" ? requireString(input.displayName, "displayName") : input.displayName,
-        overallStatus: typeof input.overallStatus === "string" ? requireString(input.overallStatus, "overallStatus") : input.overallStatus,
-        readinessStatus: typeof input.readinessStatus === "string" ? requireString(input.readinessStatus, "readinessStatus") : input.readinessStatus,
-        livenessStatus: typeof input.livenessStatus === "string" ? requireString(input.livenessStatus, "livenessStatus") : input.livenessStatus,
+        serviceKey:
+          typeof input.serviceKey === "string"
+            ? requireString(input.serviceKey, "serviceKey")
+            : input.serviceKey,
+        displayName:
+          typeof input.displayName === "string"
+            ? requireString(input.displayName, "displayName")
+            : input.displayName,
+        overallStatus:
+          typeof input.overallStatus === "string"
+            ? requireString(input.overallStatus, "overallStatus")
+            : input.overallStatus,
+        readinessStatus:
+          typeof input.readinessStatus === "string"
+            ? requireString(input.readinessStatus, "readinessStatus")
+            : input.readinessStatus,
+        livenessStatus:
+          typeof input.livenessStatus === "string"
+            ? requireString(input.livenessStatus, "livenessStatus")
+            : input.livenessStatus,
         lastEvaluatedAt: input.lastEvaluatedAt,
         metadata: input.metadata,
         createdAt: now,
@@ -473,17 +762,29 @@ export function createPlatformObserveService(
         "ServiceHealth",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
-        serviceKey: input.serviceKey === null ? undefined : input.serviceKey ?? existing.serviceKey,
+        serviceKey:
+          input.serviceKey === null
+            ? undefined
+            : (input.serviceKey ?? existing.serviceKey),
         displayName: input.displayName ?? existing.displayName,
         overallStatus: input.overallStatus ?? existing.overallStatus,
         readinessStatus: input.readinessStatus ?? existing.readinessStatus,
         livenessStatus: input.livenessStatus ?? existing.livenessStatus,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        lastEvaluatedAt: input.lastEvaluatedAt === null ? undefined : input.lastEvaluatedAt ?? existing.lastEvaluatedAt,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        lastEvaluatedAt:
+          input.lastEvaluatedAt === null
+            ? undefined
+            : (input.lastEvaluatedAt ?? existing.lastEvaluatedAt),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -500,7 +801,11 @@ export function createPlatformObserveService(
     },
     async getServiceStatus(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.serviceStatuses.get(ctx, id), "ServiceStatus", id);
+      return requireFound(
+        await deps.repos.serviceStatuses.get(ctx, id),
+        "ServiceStatus",
+        id,
+      );
     },
     async createServiceStatus(ctx, input) {
       assertCtx(ctx);
@@ -510,8 +815,14 @@ export function createPlatformObserveService(
         id: asServiceStatusId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        serviceKey: typeof input.serviceKey === "string" ? requireString(input.serviceKey, "serviceKey") : input.serviceKey,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
+        serviceKey:
+          typeof input.serviceKey === "string"
+            ? requireString(input.serviceKey, "serviceKey")
+            : input.serviceKey,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
         message: input.message,
         observedAt: input.observedAt,
         metadata: input.metadata,
@@ -531,15 +842,28 @@ export function createPlatformObserveService(
         "ServiceStatus",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
-        serviceKey: input.serviceKey === null ? undefined : input.serviceKey ?? existing.serviceKey,
+        serviceKey:
+          input.serviceKey === null
+            ? undefined
+            : (input.serviceKey ?? existing.serviceKey),
         status: input.status ?? existing.status,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        message: input.message === null ? undefined : input.message ?? existing.message,
-        observedAt: input.observedAt === null ? undefined : input.observedAt ?? existing.observedAt,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        message:
+          input.message === null ? undefined : (input.message ?? existing.message),
+        observedAt:
+          input.observedAt === null
+            ? undefined
+            : (input.observedAt ?? existing.observedAt),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -556,7 +880,11 @@ export function createPlatformObserveService(
     },
     async getComponentStatus(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.componentStatuses.get(ctx, id), "ComponentStatus", id);
+      return requireFound(
+        await deps.repos.componentStatuses.get(ctx, id),
+        "ComponentStatus",
+        id,
+      );
     },
     async createComponentStatus(ctx, input) {
       assertCtx(ctx);
@@ -566,10 +894,22 @@ export function createPlatformObserveService(
         id: asComponentStatusId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        serviceKey: typeof input.serviceKey === "string" ? requireString(input.serviceKey, "serviceKey") : input.serviceKey,
-        componentKey: typeof input.componentKey === "string" ? requireString(input.componentKey, "componentKey") : input.componentKey,
-        name: typeof input.name === "string" ? requireString(input.name, "name") : input.name,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
+        serviceKey:
+          typeof input.serviceKey === "string"
+            ? requireString(input.serviceKey, "serviceKey")
+            : input.serviceKey,
+        componentKey:
+          typeof input.componentKey === "string"
+            ? requireString(input.componentKey, "componentKey")
+            : input.componentKey,
+        name:
+          typeof input.name === "string"
+            ? requireString(input.name, "name")
+            : input.name,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
         message: input.message,
         observedAt: input.observedAt,
         metadata: input.metadata,
@@ -589,17 +929,30 @@ export function createPlatformObserveService(
         "ComponentStatus",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
-        serviceKey: input.serviceKey === null ? undefined : input.serviceKey ?? existing.serviceKey,
+        serviceKey:
+          input.serviceKey === null
+            ? undefined
+            : (input.serviceKey ?? existing.serviceKey),
         componentKey: input.componentKey ?? existing.componentKey,
         name: input.name ?? existing.name,
         status: input.status ?? existing.status,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        message: input.message === null ? undefined : input.message ?? existing.message,
-        observedAt: input.observedAt === null ? undefined : input.observedAt ?? existing.observedAt,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        message:
+          input.message === null ? undefined : (input.message ?? existing.message),
+        observedAt:
+          input.observedAt === null
+            ? undefined
+            : (input.observedAt ?? existing.observedAt),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -616,7 +969,11 @@ export function createPlatformObserveService(
     },
     async getMetricDefinition(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.metricDefinitions.get(ctx, id), "MetricDefinition", id);
+      return requireFound(
+        await deps.repos.metricDefinitions.get(ctx, id),
+        "MetricDefinition",
+        id,
+      );
     },
     async createMetricDefinition(ctx, input) {
       assertCtx(ctx);
@@ -626,11 +983,24 @@ export function createPlatformObserveService(
         id: asMetricDefinitionId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        key: typeof input.key === "string" ? requireString(input.key, "key") : input.key,
-        name: typeof input.name === "string" ? requireString(input.name, "name") : input.name,
-        kind: typeof input.kind === "string" ? requireString(input.kind, "kind") : input.kind,
-        providerKind: typeof input.providerKind === "string" ? requireString(input.providerKind, "providerKind") : input.providerKind,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
+        key:
+          typeof input.key === "string" ? requireString(input.key, "key") : input.key,
+        name:
+          typeof input.name === "string"
+            ? requireString(input.name, "name")
+            : input.name,
+        kind:
+          typeof input.kind === "string"
+            ? requireString(input.kind, "kind")
+            : input.kind,
+        providerKind:
+          typeof input.providerKind === "string"
+            ? requireString(input.providerKind, "providerKind")
+            : input.providerKind,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
         description: input.description,
         unit: input.unit,
         providerRef: input.providerRef,
@@ -652,7 +1022,9 @@ export function createPlatformObserveService(
         "MetricDefinition",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
         key: input.key ?? existing.key,
@@ -660,12 +1032,22 @@ export function createPlatformObserveService(
         kind: input.kind ?? existing.kind,
         providerKind: input.providerKind ?? existing.providerKind,
         status: input.status ?? existing.status,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        description: input.description === null ? undefined : input.description ?? existing.description,
-        unit: input.unit === null ? undefined : input.unit ?? existing.unit,
-        providerRef: input.providerRef === null ? undefined : input.providerRef ?? existing.providerRef,
-        labels: input.labels === null ? undefined : input.labels ?? existing.labels,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        description:
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
+        unit: input.unit === null ? undefined : (input.unit ?? existing.unit),
+        providerRef:
+          input.providerRef === null
+            ? undefined
+            : (input.providerRef ?? existing.providerRef),
+        labels: input.labels === null ? undefined : (input.labels ?? existing.labels),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -682,7 +1064,11 @@ export function createPlatformObserveService(
     },
     async getMetricSample(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.metricSamples.get(ctx, id), "MetricSample", id);
+      return requireFound(
+        await deps.repos.metricSamples.get(ctx, id),
+        "MetricSample",
+        id,
+      );
     },
     async createMetricSample(ctx, input) {
       assertCtx(ctx);
@@ -693,8 +1079,14 @@ export function createPlatformObserveService(
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
         metricDefinitionId: input.metricDefinitionId,
-        sampledAt: typeof input.sampledAt === "string" ? requireString(input.sampledAt, "sampledAt") : input.sampledAt,
-        providerKind: typeof input.providerKind === "string" ? requireString(input.providerKind, "providerKind") : input.providerKind,
+        sampledAt:
+          typeof input.sampledAt === "string"
+            ? requireString(input.sampledAt, "sampledAt")
+            : input.sampledAt,
+        providerKind:
+          typeof input.providerKind === "string"
+            ? requireString(input.providerKind, "providerKind")
+            : input.providerKind,
         valueLabel: input.valueLabel,
         providerRef: input.providerRef,
         metadata: input.metadata,
@@ -714,16 +1106,28 @@ export function createPlatformObserveService(
         "MetricSample",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
         metricDefinitionId: input.metricDefinitionId ?? existing.metricDefinitionId,
         sampledAt: input.sampledAt ?? existing.sampledAt,
         providerKind: input.providerKind ?? existing.providerKind,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        valueLabel: input.valueLabel === null ? undefined : input.valueLabel ?? existing.valueLabel,
-        providerRef: input.providerRef === null ? undefined : input.providerRef ?? existing.providerRef,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        valueLabel:
+          input.valueLabel === null
+            ? undefined
+            : (input.valueLabel ?? existing.valueLabel),
+        providerRef:
+          input.providerRef === null
+            ? undefined
+            : (input.providerRef ?? existing.providerRef),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -738,7 +1142,11 @@ export function createPlatformObserveService(
     },
     async getAlertDefinition(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.alertDefinitions.get(ctx, id), "AlertDefinition", id);
+      return requireFound(
+        await deps.repos.alertDefinitions.get(ctx, id),
+        "AlertDefinition",
+        id,
+      );
     },
     async createAlertDefinition(ctx, input) {
       assertCtx(ctx);
@@ -748,11 +1156,24 @@ export function createPlatformObserveService(
         id: asAlertDefinitionId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        key: typeof input.key === "string" ? requireString(input.key, "key") : input.key,
-        name: typeof input.name === "string" ? requireString(input.name, "name") : input.name,
-        severity: typeof input.severity === "string" ? requireString(input.severity, "severity") : input.severity,
-        providerKind: typeof input.providerKind === "string" ? requireString(input.providerKind, "providerKind") : input.providerKind,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
+        key:
+          typeof input.key === "string" ? requireString(input.key, "key") : input.key,
+        name:
+          typeof input.name === "string"
+            ? requireString(input.name, "name")
+            : input.name,
+        severity:
+          typeof input.severity === "string"
+            ? requireString(input.severity, "severity")
+            : input.severity,
+        providerKind:
+          typeof input.providerKind === "string"
+            ? requireString(input.providerKind, "providerKind")
+            : input.providerKind,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
         description: input.description,
         providerRef: input.providerRef,
         metadata: input.metadata,
@@ -772,7 +1193,9 @@ export function createPlatformObserveService(
         "AlertDefinition",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
         key: input.key ?? existing.key,
@@ -780,10 +1203,20 @@ export function createPlatformObserveService(
         severity: input.severity ?? existing.severity,
         providerKind: input.providerKind ?? existing.providerKind,
         status: input.status ?? existing.status,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        description: input.description === null ? undefined : input.description ?? existing.description,
-        providerRef: input.providerRef === null ? undefined : input.providerRef ?? existing.providerRef,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        description:
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
+        providerRef:
+          input.providerRef === null
+            ? undefined
+            : (input.providerRef ?? existing.providerRef),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -811,8 +1244,14 @@ export function createPlatformObserveService(
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
         alertDefinitionId: input.alertDefinitionId,
-        state: typeof input.state === "string" ? requireString(input.state, "state") : input.state,
-        providerKind: typeof input.providerKind === "string" ? requireString(input.providerKind, "providerKind") : input.providerKind,
+        state:
+          typeof input.state === "string"
+            ? requireString(input.state, "state")
+            : input.state,
+        providerKind:
+          typeof input.providerKind === "string"
+            ? requireString(input.providerKind, "providerKind")
+            : input.providerKind,
         firedAt: input.firedAt,
         resolvedAt: input.resolvedAt,
         message: input.message,
@@ -834,18 +1273,35 @@ export function createPlatformObserveService(
         "AlertState",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
-        alertDefinitionId: input.alertDefinitionId === null ? undefined : input.alertDefinitionId ?? existing.alertDefinitionId,
+        alertDefinitionId:
+          input.alertDefinitionId === null
+            ? undefined
+            : (input.alertDefinitionId ?? existing.alertDefinitionId),
         state: input.state ?? existing.state,
         providerKind: input.providerKind ?? existing.providerKind,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        firedAt: input.firedAt === null ? undefined : input.firedAt ?? existing.firedAt,
-        resolvedAt: input.resolvedAt === null ? undefined : input.resolvedAt ?? existing.resolvedAt,
-        message: input.message === null ? undefined : input.message ?? existing.message,
-        providerRef: input.providerRef === null ? undefined : input.providerRef ?? existing.providerRef,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        firedAt:
+          input.firedAt === null ? undefined : (input.firedAt ?? existing.firedAt),
+        resolvedAt:
+          input.resolvedAt === null
+            ? undefined
+            : (input.resolvedAt ?? existing.resolvedAt),
+        message:
+          input.message === null ? undefined : (input.message ?? existing.message),
+        providerRef:
+          input.providerRef === null
+            ? undefined
+            : (input.providerRef ?? existing.providerRef),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -862,7 +1318,11 @@ export function createPlatformObserveService(
     },
     async getDashboardDefinition(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.dashboards.get(ctx, id), "DashboardDefinition", id);
+      return requireFound(
+        await deps.repos.dashboards.get(ctx, id),
+        "DashboardDefinition",
+        id,
+      );
     },
     async createDashboardDefinition(ctx, input) {
       assertCtx(ctx);
@@ -872,10 +1332,20 @@ export function createPlatformObserveService(
         id: asDashboardDefinitionId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        key: typeof input.key === "string" ? requireString(input.key, "key") : input.key,
-        name: typeof input.name === "string" ? requireString(input.name, "name") : input.name,
-        providerKind: typeof input.providerKind === "string" ? requireString(input.providerKind, "providerKind") : input.providerKind,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
+        key:
+          typeof input.key === "string" ? requireString(input.key, "key") : input.key,
+        name:
+          typeof input.name === "string"
+            ? requireString(input.name, "name")
+            : input.name,
+        providerKind:
+          typeof input.providerKind === "string"
+            ? requireString(input.providerKind, "providerKind")
+            : input.providerKind,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
         description: input.description,
         providerRef: input.providerRef,
         metadata: input.metadata,
@@ -895,17 +1365,29 @@ export function createPlatformObserveService(
         "DashboardDefinition",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
         key: input.key ?? existing.key,
         name: input.name ?? existing.name,
         providerKind: input.providerKind ?? existing.providerKind,
         status: input.status ?? existing.status,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        description: input.description === null ? undefined : input.description ?? existing.description,
-        providerRef: input.providerRef === null ? undefined : input.providerRef ?? existing.providerRef,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        description:
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
+        providerRef:
+          input.providerRef === null
+            ? undefined
+            : (input.providerRef ?? existing.providerRef),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -932,11 +1414,24 @@ export function createPlatformObserveService(
         id: asLogSourceId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        key: typeof input.key === "string" ? requireString(input.key, "key") : input.key,
-        name: typeof input.name === "string" ? requireString(input.name, "name") : input.name,
-        kind: typeof input.kind === "string" ? requireString(input.kind, "kind") : input.kind,
-        providerKind: typeof input.providerKind === "string" ? requireString(input.providerKind, "providerKind") : input.providerKind,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
+        key:
+          typeof input.key === "string" ? requireString(input.key, "key") : input.key,
+        name:
+          typeof input.name === "string"
+            ? requireString(input.name, "name")
+            : input.name,
+        kind:
+          typeof input.kind === "string"
+            ? requireString(input.kind, "kind")
+            : input.kind,
+        providerKind:
+          typeof input.providerKind === "string"
+            ? requireString(input.providerKind, "providerKind")
+            : input.providerKind,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
         providerRef: input.providerRef,
         metadata: input.metadata,
         createdAt: now,
@@ -955,7 +1450,9 @@ export function createPlatformObserveService(
         "LogSource",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
         key: input.key ?? existing.key,
@@ -963,9 +1460,16 @@ export function createPlatformObserveService(
         kind: input.kind ?? existing.kind,
         providerKind: input.providerKind ?? existing.providerKind,
         status: input.status ?? existing.status,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        providerRef: input.providerRef === null ? undefined : input.providerRef ?? existing.providerRef,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        providerRef:
+          input.providerRef === null
+            ? undefined
+            : (input.providerRef ?? existing.providerRef),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -982,7 +1486,11 @@ export function createPlatformObserveService(
     },
     async getTraceDefinition(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.traceDefinitions.get(ctx, id), "TraceDefinition", id);
+      return requireFound(
+        await deps.repos.traceDefinitions.get(ctx, id),
+        "TraceDefinition",
+        id,
+      );
     },
     async createTraceDefinition(ctx, input) {
       assertCtx(ctx);
@@ -992,10 +1500,20 @@ export function createPlatformObserveService(
         id: asTraceDefinitionId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        key: typeof input.key === "string" ? requireString(input.key, "key") : input.key,
-        name: typeof input.name === "string" ? requireString(input.name, "name") : input.name,
-        providerKind: typeof input.providerKind === "string" ? requireString(input.providerKind, "providerKind") : input.providerKind,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
+        key:
+          typeof input.key === "string" ? requireString(input.key, "key") : input.key,
+        name:
+          typeof input.name === "string"
+            ? requireString(input.name, "name")
+            : input.name,
+        providerKind:
+          typeof input.providerKind === "string"
+            ? requireString(input.providerKind, "providerKind")
+            : input.providerKind,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
         description: input.description,
         providerRef: input.providerRef,
         metadata: input.metadata,
@@ -1015,17 +1533,29 @@ export function createPlatformObserveService(
         "TraceDefinition",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
         key: input.key ?? existing.key,
         name: input.name ?? existing.name,
         providerKind: input.providerKind ?? existing.providerKind,
         status: input.status ?? existing.status,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        description: input.description === null ? undefined : input.description ?? existing.description,
-        providerRef: input.providerRef === null ? undefined : input.providerRef ?? existing.providerRef,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        description:
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
+        providerRef:
+          input.providerRef === null
+            ? undefined
+            : (input.providerRef ?? existing.providerRef),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -1053,8 +1583,14 @@ export function createPlatformObserveService(
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
         traceDefinitionId: input.traceDefinitionId,
-        spanName: typeof input.spanName === "string" ? requireString(input.spanName, "spanName") : input.spanName,
-        providerKind: typeof input.providerKind === "string" ? requireString(input.providerKind, "providerKind") : input.providerKind,
+        spanName:
+          typeof input.spanName === "string"
+            ? requireString(input.spanName, "spanName")
+            : input.spanName,
+        providerKind:
+          typeof input.providerKind === "string"
+            ? requireString(input.providerKind, "providerKind")
+            : input.providerKind,
         serviceKey: input.serviceKey,
         startedAt: input.startedAt,
         endedAt: input.endedAt,
@@ -1076,18 +1612,34 @@ export function createPlatformObserveService(
         "TraceSpan",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
         traceDefinitionId: input.traceDefinitionId ?? existing.traceDefinitionId,
         spanName: input.spanName ?? existing.spanName,
         providerKind: input.providerKind ?? existing.providerKind,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        serviceKey: input.serviceKey === null ? undefined : input.serviceKey ?? existing.serviceKey,
-        startedAt: input.startedAt === null ? undefined : input.startedAt ?? existing.startedAt,
-        endedAt: input.endedAt === null ? undefined : input.endedAt ?? existing.endedAt,
-        providerRef: input.providerRef === null ? undefined : input.providerRef ?? existing.providerRef,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        serviceKey:
+          input.serviceKey === null
+            ? undefined
+            : (input.serviceKey ?? existing.serviceKey),
+        startedAt:
+          input.startedAt === null
+            ? undefined
+            : (input.startedAt ?? existing.startedAt),
+        endedAt:
+          input.endedAt === null ? undefined : (input.endedAt ?? existing.endedAt),
+        providerRef:
+          input.providerRef === null
+            ? undefined
+            : (input.providerRef ?? existing.providerRef),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -1102,7 +1654,11 @@ export function createPlatformObserveService(
     },
     async getIncidentReference(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.incidentReferences.get(ctx, id), "IncidentReference", id);
+      return requireFound(
+        await deps.repos.incidentReferences.get(ctx, id),
+        "IncidentReference",
+        id,
+      );
     },
     async createIncidentReference(ctx, input) {
       assertCtx(ctx);
@@ -1112,9 +1668,16 @@ export function createPlatformObserveService(
         id: asIncidentReferenceId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        key: typeof input.key === "string" ? requireString(input.key, "key") : input.key,
-        title: typeof input.title === "string" ? requireString(input.title, "title") : input.title,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
+        key:
+          typeof input.key === "string" ? requireString(input.key, "key") : input.key,
+        title:
+          typeof input.title === "string"
+            ? requireString(input.title, "title")
+            : input.title,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
         serviceKey: input.serviceKey,
         alertDefinitionId: input.alertDefinitionId,
         externalRef: input.externalRef,
@@ -1135,17 +1698,32 @@ export function createPlatformObserveService(
         "IncidentReference",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
         key: input.key ?? existing.key,
         title: input.title ?? existing.title,
         status: input.status ?? existing.status,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        serviceKey: input.serviceKey === null ? undefined : input.serviceKey ?? existing.serviceKey,
-        alertDefinitionId: input.alertDefinitionId === null ? undefined : input.alertDefinitionId ?? existing.alertDefinitionId,
-        externalRef: input.externalRef === null ? undefined : input.externalRef ?? existing.externalRef,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        serviceKey:
+          input.serviceKey === null
+            ? undefined
+            : (input.serviceKey ?? existing.serviceKey),
+        alertDefinitionId:
+          input.alertDefinitionId === null
+            ? undefined
+            : (input.alertDefinitionId ?? existing.alertDefinitionId),
+        externalRef:
+          input.externalRef === null
+            ? undefined
+            : (input.externalRef ?? existing.externalRef),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -1162,7 +1740,11 @@ export function createPlatformObserveService(
     },
     async getMaintenanceWindow(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.maintenanceWindows.get(ctx, id), "MaintenanceWindow", id);
+      return requireFound(
+        await deps.repos.maintenanceWindows.get(ctx, id),
+        "MaintenanceWindow",
+        id,
+      );
     },
     async createMaintenanceWindow(ctx, input) {
       assertCtx(ctx);
@@ -1172,11 +1754,24 @@ export function createPlatformObserveService(
         id: asMaintenanceWindowId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        key: typeof input.key === "string" ? requireString(input.key, "key") : input.key,
-        name: typeof input.name === "string" ? requireString(input.name, "name") : input.name,
-        startsAt: typeof input.startsAt === "string" ? requireString(input.startsAt, "startsAt") : input.startsAt,
-        endsAt: typeof input.endsAt === "string" ? requireString(input.endsAt, "endsAt") : input.endsAt,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
+        key:
+          typeof input.key === "string" ? requireString(input.key, "key") : input.key,
+        name:
+          typeof input.name === "string"
+            ? requireString(input.name, "name")
+            : input.name,
+        startsAt:
+          typeof input.startsAt === "string"
+            ? requireString(input.startsAt, "startsAt")
+            : input.startsAt,
+        endsAt:
+          typeof input.endsAt === "string"
+            ? requireString(input.endsAt, "endsAt")
+            : input.endsAt,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
         serviceKey: input.serviceKey,
         metadata: input.metadata,
         createdAt: now,
@@ -1195,7 +1790,9 @@ export function createPlatformObserveService(
         "MaintenanceWindow",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
         key: input.key ?? existing.key,
@@ -1203,9 +1800,16 @@ export function createPlatformObserveService(
         startsAt: input.startsAt ?? existing.startsAt,
         endsAt: input.endsAt ?? existing.endsAt,
         status: input.status ?? existing.status,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        serviceKey: input.serviceKey === null ? undefined : input.serviceKey ?? existing.serviceKey,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        serviceKey:
+          input.serviceKey === null
+            ? undefined
+            : (input.serviceKey ?? existing.serviceKey),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -1222,7 +1826,11 @@ export function createPlatformObserveService(
     },
     async getHealthSummary(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.healthSummaries.get(ctx, id), "HealthSummary", id);
+      return requireFound(
+        await deps.repos.healthSummaries.get(ctx, id),
+        "HealthSummary",
+        id,
+      );
     },
     async createHealthSummary(ctx, input) {
       assertCtx(ctx);
@@ -1232,12 +1840,21 @@ export function createPlatformObserveService(
         id: asHealthSummaryId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        scopeKey: typeof input.scopeKey === "string" ? requireString(input.scopeKey, "scopeKey") : input.scopeKey,
-        overallStatus: typeof input.overallStatus === "string" ? requireString(input.overallStatus, "overallStatus") : input.overallStatus,
+        scopeKey:
+          typeof input.scopeKey === "string"
+            ? requireString(input.scopeKey, "scopeKey")
+            : input.scopeKey,
+        overallStatus:
+          typeof input.overallStatus === "string"
+            ? requireString(input.overallStatus, "overallStatus")
+            : input.overallStatus,
         healthyCount: input.healthyCount,
         degradedCount: input.degradedCount,
         unhealthyCount: input.unhealthyCount,
-        evaluatedAt: typeof input.evaluatedAt === "string" ? requireString(input.evaluatedAt, "evaluatedAt") : input.evaluatedAt,
+        evaluatedAt:
+          typeof input.evaluatedAt === "string"
+            ? requireString(input.evaluatedAt, "evaluatedAt")
+            : input.evaluatedAt,
         metadata: input.metadata,
         createdAt: now,
         updatedAt: now,
@@ -1255,7 +1872,9 @@ export function createPlatformObserveService(
         "HealthSummary",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
         scopeKey: input.scopeKey ?? existing.scopeKey,
@@ -1264,8 +1883,12 @@ export function createPlatformObserveService(
         degradedCount: input.degradedCount ?? existing.degradedCount,
         unhealthyCount: input.unhealthyCount ?? existing.unhealthyCount,
         evaluatedAt: input.evaluatedAt ?? existing.evaluatedAt,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -1282,7 +1905,11 @@ export function createPlatformObserveService(
     },
     async getObservabilityMetadata(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.metadata.get(ctx, id), "ObservabilityMetadata", id);
+      return requireFound(
+        await deps.repos.metadata.get(ctx, id),
+        "ObservabilityMetadata",
+        id,
+      );
     },
     async createObservabilityMetadata(ctx, input) {
       assertCtx(ctx);
@@ -1292,10 +1919,20 @@ export function createPlatformObserveService(
         id: asObservabilityMetadataId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        key: typeof input.key === "string" ? requireString(input.key, "key") : input.key,
-        name: typeof input.name === "string" ? requireString(input.name, "name") : input.name,
-        category: typeof input.category === "string" ? requireString(input.category, "category") : input.category,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
+        key:
+          typeof input.key === "string" ? requireString(input.key, "key") : input.key,
+        name:
+          typeof input.name === "string"
+            ? requireString(input.name, "name")
+            : input.name,
+        category:
+          typeof input.category === "string"
+            ? requireString(input.category, "category")
+            : input.category,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
         payload: input.payload,
         createdAt: now,
         updatedAt: now,
@@ -1313,15 +1950,21 @@ export function createPlatformObserveService(
         "ObservabilityMetadata",
         input.id,
       );
-      assertNoCredentialPayload((input.payload === null ? undefined : input.payload ?? existing.payload));
+      assertNoCredentialPayload(
+        input.payload === null ? undefined : (input.payload ?? existing.payload),
+      );
       const next = {
         ...existing,
         key: input.key ?? existing.key,
         name: input.name ?? existing.name,
         category: input.category ?? existing.category,
         status: input.status ?? existing.status,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        payload: input.payload === null ? undefined : input.payload ?? existing.payload,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        payload:
+          input.payload === null ? undefined : (input.payload ?? existing.payload),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,
@@ -1338,7 +1981,11 @@ export function createPlatformObserveService(
     },
     async getPlatformDiagnostic(ctx, id) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.diagnostics.get(ctx, id), "PlatformDiagnostic", id);
+      return requireFound(
+        await deps.repos.diagnostics.get(ctx, id),
+        "PlatformDiagnostic",
+        id,
+      );
     },
     async createPlatformDiagnostic(ctx, input) {
       assertCtx(ctx);
@@ -1348,10 +1995,20 @@ export function createPlatformObserveService(
         id: asPlatformDiagnosticId(deps.id()),
         tenantId: ctx.tenantId,
         organisationId: input.organisationId,
-        key: typeof input.key === "string" ? requireString(input.key, "key") : input.key,
-        name: typeof input.name === "string" ? requireString(input.name, "name") : input.name,
-        status: typeof input.status === "string" ? requireString(input.status, "status") : input.status,
-        providerKind: typeof input.providerKind === "string" ? requireString(input.providerKind, "providerKind") : input.providerKind,
+        key:
+          typeof input.key === "string" ? requireString(input.key, "key") : input.key,
+        name:
+          typeof input.name === "string"
+            ? requireString(input.name, "name")
+            : input.name,
+        status:
+          typeof input.status === "string"
+            ? requireString(input.status, "status")
+            : input.status,
+        providerKind:
+          typeof input.providerKind === "string"
+            ? requireString(input.providerKind, "providerKind")
+            : input.providerKind,
         serviceKey: input.serviceKey,
         detail: input.detail,
         providerRef: input.providerRef,
@@ -1372,18 +2029,30 @@ export function createPlatformObserveService(
         "PlatformDiagnostic",
         input.id,
       );
-      assertNoCredentialPayload((input.metadata === null ? undefined : input.metadata ?? existing.metadata));
+      assertNoCredentialPayload(
+        input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
+      );
       const next = {
         ...existing,
         key: input.key ?? existing.key,
         name: input.name ?? existing.name,
         status: input.status ?? existing.status,
         providerKind: input.providerKind ?? existing.providerKind,
-        organisationId: input.organisationId === null ? undefined : input.organisationId ?? existing.organisationId,
-        serviceKey: input.serviceKey === null ? undefined : input.serviceKey ?? existing.serviceKey,
-        detail: input.detail === null ? undefined : input.detail ?? existing.detail,
-        providerRef: input.providerRef === null ? undefined : input.providerRef ?? existing.providerRef,
-        metadata: input.metadata === null ? undefined : input.metadata ?? existing.metadata,
+        organisationId:
+          input.organisationId === null
+            ? undefined
+            : (input.organisationId ?? existing.organisationId),
+        serviceKey:
+          input.serviceKey === null
+            ? undefined
+            : (input.serviceKey ?? existing.serviceKey),
+        detail: input.detail === null ? undefined : (input.detail ?? existing.detail),
+        providerRef:
+          input.providerRef === null
+            ? undefined
+            : (input.providerRef ?? existing.providerRef),
+        metadata:
+          input.metadata === null ? undefined : (input.metadata ?? existing.metadata),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
         revision: existing.revision + 1,

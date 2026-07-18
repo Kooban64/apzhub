@@ -47,12 +47,12 @@ Tables `testing_report_template` and `testing_report_generation_metadata` with m
 
 ## Testing
 
-| Suite | Result |
-| ----- | ------ |
-| `reporting-framework.test.ts` | 10 tests green |
-| `reporting-persistence.test.ts` | 4 tests green |
-| `testing-reporting-gateway.test.ts` | 5 tests green |
-| `reporting-boundary.test.ts` | PASS |
+| Suite                                     | Result               |
+| ----------------------------------------- | -------------------- |
+| `reporting-framework.test.ts`             | 10 tests green       |
+| `reporting-persistence.test.ts`           | 4 tests green        |
+| `testing-reporting-gateway.test.ts`       | 5 tests green        |
+| `reporting-boundary.test.ts`              | PASS                 |
 | `testing-operation-authorization.test.ts` | PASS (reporting ops) |
 
 ## Coverage
@@ -61,13 +61,13 @@ Scoped reporting modules: **~97.5%** lines (template engine, providers, service,
 
 ## Quality Gates
 
-| Gate | Result |
-|------|--------|
-| Typecheck (contracts, persistence, services, platform contracts) | PASS |
-| Vitest reporting suites | PASS |
-| Architecture boundary audit | PASS |
-| Dependency audit (no pdf/docx npm deps) | PASS |
-| Authorization map completeness | PASS |
+| Gate                                                             | Result |
+| ---------------------------------------------------------------- | ------ |
+| Typecheck (contracts, persistence, services, platform contracts) | PASS   |
+| Vitest reporting suites                                          | PASS   |
+| Architecture boundary audit                                      | PASS   |
+| Dependency audit (no pdf/docx npm deps)                          | PASS   |
+| Authorization map completeness                                   | PASS   |
 
 ## Technical Debt
 

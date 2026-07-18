@@ -64,7 +64,9 @@ export function buildVendorErrorDiagnostics(
   };
 }
 
-export function resolveCategoryFromInput(input: VendorErrorInput): IntegrationErrorCategory {
+export function resolveCategoryFromInput(
+  input: VendorErrorInput,
+): IntegrationErrorCategory {
   if (input.timeout) {
     return "timeout";
   }
@@ -101,7 +103,8 @@ export function buildDefaultTranslatedError(
       ? `${input.context.integrationId}.vendor.${input.vendorCode}`
       : `integration.${category}.default`);
   const message =
-    overrides?.message ?? buildOperatorSafeMessage(category, input.context.integrationId);
+    overrides?.message ??
+    buildOperatorSafeMessage(category, input.context.integrationId);
 
   const error = createIntegrationError({
     category,
@@ -194,7 +197,8 @@ export function normalizeUnknownError(
             : undefined,
       context,
       timeout: candidate.timeout === true || candidate.name === "TimeoutError",
-      networkError: candidate.networkError === true || candidate.code === "ECONNREFUSED",
+      networkError:
+        candidate.networkError === true || candidate.code === "ECONNREFUSED",
     };
   }
 

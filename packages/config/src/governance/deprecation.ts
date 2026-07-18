@@ -19,7 +19,11 @@ export const DEPRECATED_ENV_ALIASES: readonly DeprecatedEnvAlias[] = [
 
 export function getDeprecatedVariableUsage(
   env: NodeJS.ProcessEnv = process.env,
-): readonly { readonly alias: string; readonly replacement: string; readonly since: string }[] {
+): readonly {
+  readonly alias: string;
+  readonly replacement: string;
+  readonly since: string;
+}[] {
   return DEPRECATED_ENV_ALIASES.filter((entry) => env[entry.alias] !== undefined).map(
     (entry) => ({
       alias: entry.alias,
@@ -34,7 +38,10 @@ export function applyDeprecatedAliases(
 ): NodeJS.ProcessEnv {
   const resolved = { ...env };
   for (const entry of DEPRECATED_ENV_ALIASES) {
-    if (resolved[entry.alias] !== undefined && resolved[entry.replacement] === undefined) {
+    if (
+      resolved[entry.alias] !== undefined &&
+      resolved[entry.replacement] === undefined
+    ) {
       resolved[entry.replacement] = resolved[entry.alias];
     }
   }

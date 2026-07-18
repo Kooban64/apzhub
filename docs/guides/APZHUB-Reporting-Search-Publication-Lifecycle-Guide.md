@@ -8,12 +8,12 @@
 
 ## Domain → Search lifecycle suggest
 
-| Domain marker | Search lifecycle |
-| ------------- | ---------------- |
-| preview / draft | `draft` |
-| active / published / ready | `validated` |
-| archived | `archived` |
-| deleted / removed / expired | `removed` |
+| Domain marker               | Search lifecycle |
+| --------------------------- | ---------------- |
+| preview / draft             | `draft`          |
+| active / published / ready  | `validated`      |
+| archived                    | `archived`       |
+| deleted / removed / expired | `removed`        |
 
 Generation/output entities treat `preview` as `draft`.
 

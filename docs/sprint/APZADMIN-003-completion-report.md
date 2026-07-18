@@ -59,47 +59,47 @@ Canonical TanStack keys for modules, categories, sections, actions, permissions,
 
 ## Tests
 
-| Suite | Result |
-| --- | --- |
-| Handler Vitest | PASS |
-| Client / routes / coverage Vitest | PASS |
-| Boundary harness `testing/administration-http-client` | PASS |
-| Playwright mock HTTP | Present (`apzadmin-003-administration-http.spec.ts`) |
-| OpenAPI document assertions | PASS |
+| Suite                                                 | Result                                               |
+| ----------------------------------------------------- | ---------------------------------------------------- |
+| Handler Vitest                                        | PASS                                                 |
+| Client / routes / coverage Vitest                     | PASS                                                 |
+| Boundary harness `testing/administration-http-client` | PASS                                                 |
+| Playwright mock HTTP                                  | Present (`apzadmin-003-administration-http.spec.ts`) |
+| OpenAPI document assertions                           | PASS                                                 |
 
 ## Coverage
 
-| Metric | Value (handlers + `lib/administration`) |
-| --- | --- |
-| Lines / statements | **99.17%** |
-| Functions | **100%** |
-| Branches | **70.82%** (meaningful) |
+| Metric             | Value (handlers + `lib/administration`) |
+| ------------------ | --------------------------------------- |
+| Lines / statements | **99.17%**                              |
+| Functions          | **100%**                                |
+| Branches           | **70.82%** (meaningful)                 |
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:administration-http-client` | **PASS** |
+| Gate                                          | Result   |
+| --------------------------------------------- | -------- |
+| `pnpm audit:administration-http-client`       | **PASS** |
 | `pnpm audit:administration-platform-services` | **PASS** |
-| `pnpm audit:admin-foundation` | **PASS** |
-| `pnpm openapi:validate:platform` | **PASS** |
-| Vitest (19 tests scoped) | **PASS** |
+| `pnpm audit:admin-foundation`                 | **PASS** |
+| `pnpm openapi:validate:platform`              | **PASS** |
+| Vitest (19 tests scoped)                      | **PASS** |
 
 ## Technical Debt
 
-- Administration Workbench deferred to APZADMIN-004  
-- No runtime administration / live diagnostic probes  
-- No user/role/tenant/organisation management  
-- Live Postgres E2E optional / env-dependent  
+- Administration Workbench deferred to APZADMIN-004
+- No runtime administration / live diagnostic probes
+- No user/role/tenant/organisation management
+- Live Postgres E2E optional / env-dependent
 - Branch coverage on client fetch paths lower than lines (acceptable for thin transport)
 
 ## Documentation
 
-- [Administration HTTP API](../architecture/APZHUB-Administration-HTTP-API.md)  
-- [Route Catalogue](../guides/APZHUB-Administration-Route-Catalogue.md)  
-- [Typed Client Guide](../guides/APZHUB-Administration-Typed-Client-Guide.md)  
-- [HTTP Security Guide](../guides/APZHUB-Administration-HTTP-Security-Guide.md)  
-- [Consumer Guide](../developer/APZHUB-Administration-HTTP-Consumer-Guide.md)  
+- [Administration HTTP API](../architecture/APZHUB-Administration-HTTP-API.md)
+- [Route Catalogue](../guides/APZHUB-Administration-Route-Catalogue.md)
+- [Typed Client Guide](../guides/APZHUB-Administration-Typed-Client-Guide.md)
+- [HTTP Security Guide](../guides/APZHUB-Administration-HTTP-Security-Guide.md)
+- [Consumer Guide](../developer/APZHUB-Administration-HTTP-Consumer-Guide.md)
 - [Coverage Baseline](../reviews/APZADMIN-003-coverage-baseline.md)
 
 ## Recommendation

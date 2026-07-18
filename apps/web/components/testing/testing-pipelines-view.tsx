@@ -173,7 +173,7 @@ export function TestingPipelinesHomeView({
                 item.providerKind,
                 <StatusBadge key="status" status={item.status} />,
                 item.repositoryRef ?? "—",
-                formatTestingDate(item.updatedAt),
+                item.updatedAt ? formatTestingDate(item.updatedAt) : "—",
               ],
             }))}
             onRowClick={(id) => {
@@ -269,9 +269,14 @@ export function TestingPipelineRepositoryView({
         </>
       }
     >
-      <dl className="grid gap-3 sm:grid-cols-2" data-testid="pipeline-repository-details">
+      <dl
+        className="grid gap-3 sm:grid-cols-2"
+        data-testid="pipeline-repository-details"
+      >
         <div>
-          <dt className="text-xs text-[var(--color-muted-foreground)]">Default branch</dt>
+          <dt className="text-xs text-[var(--color-muted-foreground)]">
+            Default branch
+          </dt>
           <dd className="text-sm text-[var(--color-foreground)]">
             {repository.defaultBranch ?? "—"}
           </dd>
@@ -284,7 +289,9 @@ export function TestingPipelineRepositoryView({
         </div>
         <div className="sm:col-span-2">
           <dt className="text-xs text-[var(--color-muted-foreground)]">Provider URL</dt>
-          <dd className="text-sm text-[var(--color-foreground)]">{repository.htmlUrl}</dd>
+          <dd className="text-sm text-[var(--color-foreground)]">
+            {repository.htmlUrl}
+          </dd>
         </div>
       </dl>
     </PageShell>
@@ -310,7 +317,10 @@ export function TestingPipelineWorkflowsView({
 
   if (query.isLoading) {
     return (
-      <PageShell title="Workflows" breadcrumbs={["Pipelines", `${owner}/${repo}`, "Workflows"]}>
+      <PageShell
+        title="Workflows"
+        breadcrumbs={["Pipelines", `${owner}/${repo}`, "Workflows"]}
+      >
         <LoadingState />
       </PageShell>
     );
@@ -318,7 +328,10 @@ export function TestingPipelineWorkflowsView({
 
   if (query.isError || !query.data) {
     return (
-      <PageShell title="Workflows" breadcrumbs={["Pipelines", `${owner}/${repo}`, "Workflows"]}>
+      <PageShell
+        title="Workflows"
+        breadcrumbs={["Pipelines", `${owner}/${repo}`, "Workflows"]}
+      >
         <ErrorState
           message={toPipelineUserMessage(query.error)}
           onRetry={() => void query.refetch()}
@@ -347,7 +360,7 @@ export function TestingPipelineWorkflowsView({
               item.name,
               item.path,
               <StatusBadge key="state" status={item.state} />,
-              formatTestingDate(item.updatedAt),
+              item.updatedAt ? formatTestingDate(item.updatedAt) : "—",
             ],
           }))}
         />
@@ -403,7 +416,10 @@ export function TestingPipelineRunsView({
 
   if (query.isLoading) {
     return (
-      <PageShell title="Workflow runs" breadcrumbs={["Pipelines", `${owner}/${repo}`, "Runs"]}>
+      <PageShell
+        title="Workflow runs"
+        breadcrumbs={["Pipelines", `${owner}/${repo}`, "Runs"]}
+      >
         <LoadingState />
       </PageShell>
     );
@@ -411,7 +427,10 @@ export function TestingPipelineRunsView({
 
   if (query.isError || !query.data) {
     return (
-      <PageShell title="Workflow runs" breadcrumbs={["Pipelines", `${owner}/${repo}`, "Runs"]}>
+      <PageShell
+        title="Workflow runs"
+        breadcrumbs={["Pipelines", `${owner}/${repo}`, "Runs"]}
+      >
         <ErrorState
           message={toPipelineUserMessage(query.error)}
           onRetry={() => void query.refetch()}
@@ -431,7 +450,11 @@ export function TestingPipelineRunsView({
         </Button>
       }
     >
-      <div className="flex flex-wrap gap-3" role="search" aria-label="Filter workflow runs">
+      <div
+        className="flex flex-wrap gap-3"
+        role="search"
+        aria-label="Filter workflow runs"
+      >
         <Input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -454,11 +477,22 @@ export function TestingPipelineRunsView({
       </div>
 
       {filtered.length === 0 ? (
-        <EmptyState title="No workflow runs" description="No runs match the current filters." />
+        <EmptyState
+          title="No workflow runs"
+          description="No runs match the current filters."
+        />
       ) : (
         <TestingTable
           caption="Workflow runs"
-          columns={["Run", "Status", "Branch", "Commit", "Actor", "Duration", "Started"]}
+          columns={[
+            "Run",
+            "Status",
+            "Branch",
+            "Commit",
+            "Actor",
+            "Duration",
+            "Started",
+          ]}
           rows={filtered.map((item) => ({
             id: item.id,
             cells: [
@@ -468,7 +502,7 @@ export function TestingPipelineRunsView({
               item.commit ?? "—",
               item.actorRef ?? "—",
               item.durationLabel,
-              formatTestingDate(item.startedAt),
+              item.startedAt ? formatTestingDate(item.startedAt) : "—",
             ],
           }))}
           onRowClick={(id) => router.push(testingPipelineRunPath(owner, repo, id))}
@@ -529,7 +563,10 @@ export function TestingPipelineRunDetailView({
 
   if (runQuery.isLoading) {
     return (
-      <PageShell title="Run details" breadcrumbs={["Pipelines", `${owner}/${repo}`, "Runs", runId]}>
+      <PageShell
+        title="Run details"
+        breadcrumbs={["Pipelines", `${owner}/${repo}`, "Runs", runId]}
+      >
         <LoadingState />
       </PageShell>
     );
@@ -537,7 +574,10 @@ export function TestingPipelineRunDetailView({
 
   if (runQuery.isError || !runQuery.data) {
     return (
-      <PageShell title="Run details" breadcrumbs={["Pipelines", `${owner}/${repo}`, "Runs", runId]}>
+      <PageShell
+        title="Run details"
+        breadcrumbs={["Pipelines", `${owner}/${repo}`, "Runs", runId]}
+      >
         <ErrorState
           message={toPipelineUserMessage(runQuery.error)}
           onRetry={() => void runQuery.refetch()}
@@ -574,7 +614,10 @@ export function TestingPipelineRunDetailView({
         ) : null
       }
     >
-      <div className="flex flex-wrap items-center gap-3" data-testid="pipeline-run-header">
+      <div
+        className="flex flex-wrap items-center gap-3"
+        data-testid="pipeline-run-header"
+      >
         <StatusBadge status={run.status} />
         <span className="text-sm text-[var(--color-muted-foreground)]">
           Duration {run.durationLabel}
@@ -599,7 +642,11 @@ export function TestingPipelineRunDetailView({
             columns={["Job", "Status", "Duration"]}
             rows={jobs.map((job) => ({
               id: job.id,
-              cells: [job.name, <StatusBadge key="s" status={job.status} />, job.durationLabel],
+              cells: [
+                job.name,
+                <StatusBadge key="s" status={job.status} />,
+                job.durationLabel,
+              ],
             }))}
           />
         )}
@@ -610,14 +657,21 @@ export function TestingPipelineRunDetailView({
           Steps
         </h2>
         {steps.length === 0 ? (
-          <EmptyState title="No steps" description="Select a job with recorded steps." />
+          <EmptyState
+            title="No steps"
+            description="Select a job with recorded steps."
+          />
         ) : (
           <TestingTable
             caption="Steps"
             columns={["Step", "Status", "Duration"]}
             rows={steps.map((step) => ({
               id: step.id,
-              cells: [step.name, <StatusBadge key="s" status={step.status} />, step.durationLabel],
+              cells: [
+                step.name,
+                <StatusBadge key="s" status={step.status} />,
+                step.durationLabel,
+              ],
             }))}
           />
         )}
@@ -643,14 +697,18 @@ export function TestingPipelineRunDetailView({
                 artifact.name,
                 artifact.type ?? "—",
                 artifact.sizeLabel,
-                formatTestingDate(artifact.createdAt),
+                artifact.createdAt ? formatTestingDate(artifact.createdAt) : "—",
               ],
             }))}
           />
         )}
       </section>
 
-      <section id="summary" className="space-y-3" aria-labelledby="pipeline-summary-heading">
+      <section
+        id="summary"
+        className="space-y-3"
+        aria-labelledby="pipeline-summary-heading"
+      >
         <h2 id="pipeline-summary-heading" className="text-sm font-semibold">
           Pipeline summary
         </h2>
@@ -669,7 +727,10 @@ export function TestingPipelineRunDetailView({
         )}
       </section>
 
-      <section className="grid gap-3 md:grid-cols-2" aria-label="Linked platform records">
+      <section
+        className="grid gap-3 md:grid-cols-2"
+        aria-label="Linked platform records"
+      >
         <Panel title="Evidence">
           {(links?.evidenceIds.length ?? 0) === 0 ? (
             <EmptyState title="No evidence links" />
@@ -726,16 +787,26 @@ export function TestingPipelinesView({
 }) {
   if (mode === "repository" && owner && repo) {
     return (
-      <TestingPipelineRepositoryView owner={owner} repo={repo} permissions={permissions} />
+      <TestingPipelineRepositoryView
+        owner={owner}
+        repo={repo}
+        permissions={permissions}
+      />
     );
   }
   if (mode === "workflows" && owner && repo) {
     return (
-      <TestingPipelineWorkflowsView owner={owner} repo={repo} permissions={permissions} />
+      <TestingPipelineWorkflowsView
+        owner={owner}
+        repo={repo}
+        permissions={permissions}
+      />
     );
   }
   if (mode === "runs" && owner && repo) {
-    return <TestingPipelineRunsView owner={owner} repo={repo} permissions={permissions} />;
+    return (
+      <TestingPipelineRunsView owner={owner} repo={repo} permissions={permissions} />
+    );
   }
   if (mode === "run-detail" && owner && repo && runId) {
     return (

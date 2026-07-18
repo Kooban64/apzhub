@@ -35,23 +35,23 @@ Component Vitest (28 view + router cases), route/boundary tests, Playwright mock
 
 Scoped workbench instrumentation (`apps/web/components/notifications/**`):
 
-| Metric | Result |
-| --- | --- |
-| Lines | **99.48%** |
+| Metric     | Result     |
+| ---------- | ---------- |
+| Lines      | **99.48%** |
 | Statements | **99.48%** |
-| Branches | **89.45%** |
-| Functions | **85.45%** |
+| Branches   | **89.45%** |
+| Functions  | **85.45%** |
 
 Target ≥95% lines met.
 
 ## Quality gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:notification-workbench` | PASS |
-| Vitest workbench + routes + boundary | PASS (31) |
-| Scoped coverage ≥95% lines | PASS (99.48%) |
-| Prior notification audits | Regression PASS |
+| Gate                                 | Result          |
+| ------------------------------------ | --------------- |
+| `pnpm audit:notification-workbench`  | PASS            |
+| Vitest workbench + routes + boundary | PASS (31)       |
+| Scoped coverage ≥95% lines           | PASS (99.48%)   |
+| Prior notification audits            | Regression PASS |
 
 ## Technical debt
 

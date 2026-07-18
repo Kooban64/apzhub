@@ -15,40 +15,23 @@ export function isObserveHealthStatus(value: string): value is ObserveHealthStat
   return (OBSERVE_HEALTH_STATUSES as readonly string[]).includes(value);
 }
 
-export const OBSERVE_READINESS_STATUSES = [
-  "unknown",
-  "ready",
-  "not_ready",
-] as const;
-export type ObserveReadinessStatus =
-  (typeof OBSERVE_READINESS_STATUSES)[number];
+export const OBSERVE_READINESS_STATUSES = ["unknown", "ready", "not_ready"] as const;
+export type ObserveReadinessStatus = (typeof OBSERVE_READINESS_STATUSES)[number];
 export function isObserveReadinessStatus(
   value: string,
 ): value is ObserveReadinessStatus {
   return (OBSERVE_READINESS_STATUSES as readonly string[]).includes(value);
 }
 
-export const OBSERVE_LIVENESS_STATUSES = [
-  "unknown",
-  "alive",
-  "not_alive",
-] as const;
+export const OBSERVE_LIVENESS_STATUSES = ["unknown", "alive", "not_alive"] as const;
 export type ObserveLivenessStatus = (typeof OBSERVE_LIVENESS_STATUSES)[number];
-export function isObserveLivenessStatus(
-  value: string,
-): value is ObserveLivenessStatus {
+export function isObserveLivenessStatus(value: string): value is ObserveLivenessStatus {
   return (OBSERVE_LIVENESS_STATUSES as readonly string[]).includes(value);
 }
 
-export const OBSERVE_ALERT_SEVERITIES = [
-  "info",
-  "warning",
-  "critical",
-] as const;
+export const OBSERVE_ALERT_SEVERITIES = ["info", "warning", "critical"] as const;
 export type ObserveAlertSeverity = (typeof OBSERVE_ALERT_SEVERITIES)[number];
-export function isObserveAlertSeverity(
-  value: string,
-): value is ObserveAlertSeverity {
+export function isObserveAlertSeverity(value: string): value is ObserveAlertSeverity {
   return (OBSERVE_ALERT_SEVERITIES as readonly string[]).includes(value);
 }
 
@@ -60,9 +43,7 @@ export const OBSERVE_ALERT_STATES = [
   "silenced",
 ] as const;
 export type ObserveAlertStateKind = (typeof OBSERVE_ALERT_STATES)[number];
-export function isObserveAlertStateKind(
-  value: string,
-): value is ObserveAlertStateKind {
+export function isObserveAlertStateKind(value: string): value is ObserveAlertStateKind {
   return (OBSERVE_ALERT_STATES as readonly string[]).includes(value);
 }
 
@@ -86,9 +67,7 @@ export const OBSERVE_LOG_SOURCE_KINDS = [
   "other",
 ] as const;
 export type ObserveLogSourceKind = (typeof OBSERVE_LOG_SOURCE_KINDS)[number];
-export function isObserveLogSourceKind(
-  value: string,
-): value is ObserveLogSourceKind {
+export function isObserveLogSourceKind(value: string): value is ObserveLogSourceKind {
   return (OBSERVE_LOG_SOURCE_KINDS as readonly string[]).includes(value);
 }
 
@@ -102,9 +81,7 @@ export const OBSERVE_PROVIDER_KINDS = [
   "unknown",
 ] as const;
 export type ObserveProviderKind = (typeof OBSERVE_PROVIDER_KINDS)[number];
-export function isObserveProviderKind(
-  value: string,
-): value is ObserveProviderKind {
+export function isObserveProviderKind(value: string): value is ObserveProviderKind {
   return (OBSERVE_PROVIDER_KINDS as readonly string[]).includes(value);
 }
 
@@ -115,8 +92,6 @@ export const OBSERVE_METADATA_STATUSES = [
   "archived",
 ] as const;
 export type ObserveMetadataStatus = (typeof OBSERVE_METADATA_STATUSES)[number];
-export function isObserveMetadataStatus(
-  value: string,
-): value is ObserveMetadataStatus {
+export function isObserveMetadataStatus(value: string): value is ObserveMetadataStatus {
   return (OBSERVE_METADATA_STATUSES as readonly string[]).includes(value);
 }

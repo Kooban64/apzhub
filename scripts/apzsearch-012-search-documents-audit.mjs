@@ -25,7 +25,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -200,8 +201,12 @@ console.log(
 console.log(`RESULT: ${violations.length === 0 ? "PASS" : "FAIL"}`);
 console.log(`Violations: ${violations.length}`);
 if (violations.length === 0) {
-  console.log("  - @apzhub/search-documents 0.1.0 → search-integration + document-contracts + platform-service-contracts");
-  console.log("  - No Meilisearch / platform-services / persistence / storage / Event Bus / OCR");
+  console.log(
+    "  - @apzhub/search-documents 0.1.0 → search-integration + document-contracts + platform-service-contracts",
+  );
+  console.log(
+    "  - No Meilisearch / platform-services / persistence / storage / Event Bus / OCR",
+  );
   console.log("  - Required DocumentsSearch* exports present");
 } else {
   for (const v of violations.slice(0, 40)) {

@@ -33,8 +33,6 @@ export function isAuthenticationMode(value: unknown): value is AuthenticationMod
   return typeof value === "string" && modeSet.has(value);
 }
 
-export function isImplementedAuthenticationMode(
-  mode: AuthenticationMode,
-): boolean {
+export function isImplementedAuthenticationMode(mode: AuthenticationMode): boolean {
   return implementedSet.has(mode);
 }

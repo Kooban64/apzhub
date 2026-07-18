@@ -118,9 +118,7 @@ describe("APZWORKFLOW-008 workflow engine handlers", () => {
         })),
       },
       tags: {
-        list: vi.fn(async () => [
-          { id: "t1", name: "ops", engine: "workflow_engine" },
-        ]),
+        list: vi.fn(async () => [{ id: "t1", name: "ops", engine: "workflow_engine" }]),
       },
       users: {
         list: vi.fn(async () => [{ id: "u1", engine: "workflow_engine" }]),
@@ -182,9 +180,7 @@ describe("APZWORKFLOW-008 workflow engine handlers", () => {
 
     const context = ctx();
     const listed = await handleListEngineWorkflows(
-      request(
-        "http://localhost/api/v1/workflows/engine/workflows?limit=5",
-      ),
+      request("http://localhost/api/v1/workflows/engine/workflows?limit=5"),
       context,
     );
     expect(listed.status).toBe(200);
@@ -207,10 +203,7 @@ describe("APZWORKFLOW-008 workflow engine handlers", () => {
     await handleGetEngineCapabilities(request("http://x/capabilities"), context);
     await handleGetEngineHealth(request("http://x/health"), context);
     await handleGetEngineDiagnostics(request("http://x/diagnostics"), context);
-    await handleGetEngineCompatibility(
-      request("http://x/compatibility"),
-      context,
-    );
+    await handleGetEngineCompatibility(request("http://x/compatibility"), context);
     await handleValidateEngineConnection(request("http://x/validate"), context);
 
     expect(engine.connection.validate).toHaveBeenCalled();

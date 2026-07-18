@@ -26,10 +26,7 @@ describe("APZDOCS-003 foundation", () => {
   it("bumps contracts/core and platform-services for APZDOCS-003", () => {
     expect(
       JSON.parse(
-        readFileSync(
-          join(ROOT, "packages/document-contracts/package.json"),
-          "utf8",
-        ),
+        readFileSync(join(ROOT, "packages/document-contracts/package.json"), "utf8"),
       ).version,
     ).toBe("0.3.0");
     expect(
@@ -39,20 +36,14 @@ describe("APZDOCS-003 foundation", () => {
     ).toBe("0.3.0");
     expect(
       JSON.parse(
-        readFileSync(
-          join(ROOT, "packages/platform-services/package.json"),
-          "utf8",
-        ),
+        readFileSync(join(ROOT, "packages/platform-services/package.json"), "utf8"),
       ).version,
-    ).toBe("0.19.0"); // certified floor after APZWORKFLOW-002 (APZDOCS-003 introduced 0.16.0)
+    ).toBe("0.25.0"); // certified floor after APZWORKFLOW-002 (APZDOCS-003 introduced 0.16.0)
   });
 
   it("gateway exposes document facets without REST handlers", () => {
     const gateway = readFileSync(
-      join(
-        ROOT,
-        "packages/platform-services/src/gateway/platform-service-gateway.ts",
-      ),
+      join(ROOT, "packages/platform-services/src/gateway/platform-service-gateway.ts"),
       "utf8",
     );
     expect(gateway).toContain("get documents(");

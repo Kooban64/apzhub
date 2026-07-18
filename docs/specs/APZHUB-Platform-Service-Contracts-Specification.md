@@ -34,28 +34,28 @@ packages/platform-service-contracts/
 
 ## Shared contracts
 
-| Contract | Description |
-|----------|-------------|
-| `ServiceRequestContext` | Tenant, user, correlation ID, permissions, optional workspace/locale/timezone |
-| `PageRequest` / `PageResult<T>` | Offset paging |
-| `CursorPageRequest` / `CursorPageResult<T>` | Cursor paging (activity streams) |
-| `SortField` / `SortSpec` | Typed sorting |
-| `ListQuery<TFilter, TSort>` | Combined page + sort + filter |
-| `ServiceResult<T>` / `ServiceListResult<T>` | Response wrappers with metadata |
-| `PlatformServiceError` | Vendor-neutral error contract (010 categories) |
+| Contract                                    | Description                                                                   |
+| ------------------------------------------- | ----------------------------------------------------------------------------- |
+| `ServiceRequestContext`                     | Tenant, user, correlation ID, permissions, optional workspace/locale/timezone |
+| `PageRequest` / `PageResult<T>`             | Offset paging                                                                 |
+| `CursorPageRequest` / `CursorPageResult<T>` | Cursor paging (activity streams)                                              |
+| `SortField` / `SortSpec`                    | Typed sorting                                                                 |
+| `ListQuery<TFilter, TSort>`                 | Combined page + sort + filter                                                 |
+| `ServiceResult<T>` / `ServiceListResult<T>` | Response wrappers with metadata                                               |
+| `PlatformServiceError`                      | Vendor-neutral error contract (010 categories)                                |
 
 ---
 
 ## Service interfaces
 
-| Interface | Service ID | Responsibility |
-|-----------|------------|----------------|
-| `WorkspaceService` | `workspace-service` | List/get workspaces |
-| `ProjectService` | `project-service` | Projects, statuses, labels, sprints, modules, milestones, roadmap, activity |
-| `TaskService` | `task-service` | Tasks, backlog, comments, attachments, my work |
-| `TeamService` | `team-service` | Project team membership |
-| `UserService` | `user-service` | Platform user lookup and profile |
-| `SearchService` | `search-service` | Unified search and suggestions (020) |
+| Interface          | Service ID          | Responsibility                                                              |
+| ------------------ | ------------------- | --------------------------------------------------------------------------- |
+| `WorkspaceService` | `workspace-service` | List/get workspaces                                                         |
+| `ProjectService`   | `project-service`   | Projects, statuses, labels, sprints, modules, milestones, roadmap, activity |
+| `TaskService`      | `task-service`      | Tasks, backlog, comments, attachments, my work                              |
+| `TeamService`      | `team-service`      | Project team membership                                                     |
+| `UserService`      | `user-service`      | Platform user lookup and profile                                            |
+| `SearchService`    | `search-service`    | Unified search and suggestions (020)                                        |
 
 Full method signatures live in the package source under `src/services/`.
 

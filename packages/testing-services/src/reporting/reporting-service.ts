@@ -63,9 +63,7 @@ function asBranding(
     ...(typeof value.organisationName === "string"
       ? { organisationName: value.organisationName }
       : {}),
-    ...(typeof value.footerText === "string"
-      ? { footerText: value.footerText }
-      : {}),
+    ...(typeof value.footerText === "string" ? { footerText: value.footerText } : {}),
   };
 }
 
@@ -95,9 +93,7 @@ function templateFromRecord(row: ReportTemplateRecord): ReportTemplate {
     ...(row.subtitle !== undefined ? { subtitle: row.subtitle } : {}),
     ...(row.header !== undefined ? { header: row.header } : {}),
     ...(row.footer !== undefined ? { footer: row.footer } : {}),
-    ...(asBranding(row.brandingJson)
-      ? { branding: asBranding(row.brandingJson) }
-      : {}),
+    ...(asBranding(row.brandingJson) ? { branding: asBranding(row.brandingJson) } : {}),
     ...(asStringRecord(row.metadataJson)
       ? { metadata: asStringRecord(row.metadataJson) }
       : {}),
@@ -117,9 +113,7 @@ function metadataFromRecord(
   return {
     id: row.id,
     tenantId: row.tenantId,
-    ...(row.organisationId !== undefined
-      ? { organisationId: row.organisationId }
-      : {}),
+    ...(row.organisationId !== undefined ? { organisationId: row.organisationId } : {}),
     requestId: row.requestId,
     templateId: row.templateId,
     reportType: row.reportType as ReportType,
@@ -141,8 +135,7 @@ function metadataFromRecord(
 }
 
 const tcmsCatalogue: BuiltinTemplateCatalogue = {
-  list: (reportType) =>
-    listBuiltinTemplates(reportType as ReportType | undefined),
+  list: (reportType) => listBuiltinTemplates(reportType as ReportType | undefined),
   get: getBuiltinTemplate,
   defaultIdFor: (reportType) => defaultTemplateIdFor(reportType as ReportType),
   listReportTypes: () => REPORT_TYPES,
@@ -151,42 +144,32 @@ const tcmsCatalogue: BuiltinTemplateCatalogue = {
 function createTemplatePort(rt: ServiceRuntime): ReportTemplateRepositoryPort {
   return {
     async list(ctx) {
-      return (
-        await rt.persistence.reportTemplates.list(toRepoCtx(ctx))
-      ).items.map(templateFromRecord);
+      return (await rt.persistence.reportTemplates.list(toRepoCtx(ctx))).items.map(
+        templateFromRecord,
+      );
     },
     async get(ctx, templateId) {
-      const row = await rt.persistence.reportTemplates.get(
-        toRepoCtx(ctx),
-        templateId,
-      );
+      const row = await rt.persistence.reportTemplates.get(toRepoCtx(ctx), templateId);
       return row ? templateFromRecord(row) : null;
     },
     async create(ctx, input) {
-      const row = await rt.persistence.reportTemplates.create(
-        toRepoCtx(ctx),
-        {
-          id: input.id,
-          reportType: input.reportType,
-          name: input.name,
-          description: input.description,
-          version: input.version,
-          title: input.title,
-          subtitle: input.subtitle,
-          header: input.header,
-          footer: input.footer,
-          brandingJson: (input.branding ?? {}) as Readonly<
-            Record<string, unknown>
-          >,
-          metadataJson: (input.metadata ?? {}) as Readonly<
-            Record<string, unknown>
-          >,
-          metricKeysJson: input.metricKeys ?? [],
-          sectionsJson: input.sections,
-          builtin: false,
-          organisationId: input.organisationId ?? ctx.organisationId,
-        },
-      );
+      const row = await rt.persistence.reportTemplates.create(toRepoCtx(ctx), {
+        id: input.id,
+        reportType: input.reportType,
+        name: input.name,
+        description: input.description,
+        version: input.version,
+        title: input.title,
+        subtitle: input.subtitle,
+        header: input.header,
+        footer: input.footer,
+        brandingJson: (input.branding ?? {}) as Readonly<Record<string, unknown>>,
+        metadataJson: (input.metadata ?? {}) as Readonly<Record<string, unknown>>,
+        metricKeysJson: input.metricKeys ?? [],
+        sectionsJson: input.sections,
+        builtin: false,
+        organisationId: input.organisationId ?? ctx.organisationId,
+      });
       return templateFromRecord(row);
     },
   };
@@ -195,24 +178,21 @@ function createTemplatePort(rt: ServiceRuntime): ReportTemplateRepositoryPort {
 function createMetadataPort(rt: ServiceRuntime): ReportMetadataRepositoryPort {
   return {
     async create(ctx, input) {
-      const row = await rt.persistence.reportGenerationMetadata.create(
-        toRepoCtx(ctx),
-        {
-          id: input.id,
-          requestId: input.requestId,
-          templateId: input.templateId,
-          reportType: input.reportType,
-          outputFormat: input.outputFormat,
-          parametersJson: input.parametersJson,
-          generatedAt: input.generatedAt,
-          generatedBy: input.generatedBy,
-          version: input.version,
-          checksumSha256: input.checksumSha256,
-          byteLength: input.byteLength,
-          preview: input.preview,
-          organisationId: input.organisationId,
-        },
-      );
+      const row = await rt.persistence.reportGenerationMetadata.create(toRepoCtx(ctx), {
+        id: input.id,
+        requestId: input.requestId,
+        templateId: input.templateId,
+        reportType: input.reportType,
+        outputFormat: input.outputFormat,
+        parametersJson: input.parametersJson,
+        generatedAt: input.generatedAt,
+        generatedBy: input.generatedBy,
+        version: input.version,
+        checksumSha256: input.checksumSha256,
+        byteLength: input.byteLength,
+        preview: input.preview,
+        organisationId: input.organisationId,
+      });
       return metadataFromRecord(row);
     },
     async get(ctx, metadataId) {
@@ -224,17 +204,12 @@ function createMetadataPort(rt: ServiceRuntime): ReportMetadataRepositoryPort {
     },
     async list(ctx) {
       return (
-        await rt.persistence.reportGenerationMetadata.list(
-          toRepoCtx(ctx),
-        )
+        await rt.persistence.reportGenerationMetadata.list(toRepoCtx(ctx))
       ).items.map(metadataFromRecord);
     },
     async archive(ctx, metadataId) {
       const existing = requireFound(
-        await rt.persistence.reportGenerationMetadata.get(
-          toRepoCtx(ctx),
-          metadataId,
-        ),
+        await rt.persistence.reportGenerationMetadata.get(toRepoCtx(ctx), metadataId),
         "report_generation_metadata",
         metadataId,
       );

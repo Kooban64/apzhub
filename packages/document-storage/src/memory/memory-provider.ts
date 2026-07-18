@@ -52,10 +52,7 @@ export function createMemoryDocumentStorageProvider(
       return { healthy: true, message: "memory provider ready" };
     },
     async putObject(input: DocumentStoragePutInput) {
-      if (
-        input.ref.storageKey.includes("..") ||
-        input.ref.storageKey.startsWith("/")
-      ) {
+      if (input.ref.storageKey.includes("..") || input.ref.storageKey.startsWith("/")) {
         throw new Error("Invalid storage key");
       }
       const bytes = await collectProviderBinarySource(input.source, {
@@ -78,17 +75,12 @@ export function createMemoryDocumentStorageProvider(
         checksum: { algorithm: "sha256", hex: checksumHex },
       };
     },
-    async getObject(
-      input: DocumentStorageGetInput,
-    ): Promise<DocumentBinaryResult> {
+    async getObject(input: DocumentStorageGetInput): Promise<DocumentBinaryResult> {
       const row = store.get(keyOf(input.ref));
       if (!row) throw new Error("Object not found");
       return { kind: "bytes", bytes: row.bytes };
     },
-    async headObject(
-      _ctx: DocumentRequestContext,
-      ref: DocumentStorageReference,
-    ) {
+    async headObject(_ctx: DocumentRequestContext, ref: DocumentStorageReference) {
       const row = store.get(keyOf(ref));
       if (!row) return null;
       return {

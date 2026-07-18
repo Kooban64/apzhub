@@ -27,7 +27,9 @@ import {
 const ctx = { correlationId: TEST_CORRELATION_ID, tenantId: TEST_TENANT_ID };
 const ticketId = `sreq_zammad_${MOCK_TICKET.id}`;
 
-async function createAdapter(fetchOptions?: Parameters<typeof createMockZammadFetch>[0]) {
+async function createAdapter(
+  fetchOptions?: Parameters<typeof createMockZammadFetch>[0],
+) {
   return createZammadAdapter({
     zammad: DEFAULT_TEST_ZAMMAD_CONFIG,
     tenantId: TEST_TENANT_ID,
@@ -106,7 +108,9 @@ describe("Zammad article listing", () => {
     ).rejects.toMatchObject({ category: "not_found" });
 
     const denied = await createAdapter({ articlesStatus: 403 });
-    await expect(denied.adapter.core.articles.list(ctx, ticketId)).rejects.toMatchObject({
+    await expect(
+      denied.adapter.core.articles.list(ctx, ticketId),
+    ).rejects.toMatchObject({
       category: "authorization",
     });
   });
@@ -136,12 +140,20 @@ describe("Zammad article retrieval", () => {
     ).rejects.toMatchObject({ category: "not_found" });
 
     await expect(
-      adapter.core.articles.get(ctx, "sreq_zammad_101", `sart_zammad_${MOCK_ARTICLE_NOTE.id}`),
+      adapter.core.articles.get(
+        ctx,
+        "sreq_zammad_101",
+        `sart_zammad_${MOCK_ARTICLE_NOTE.id}`,
+      ),
     ).rejects.toMatchObject({ category: "not_found" });
 
     const malformed = await createAdapter({ malformedArticle: true });
     await expect(
-      malformed.adapter.core.articles.get(ctx, ticketId, `sart_zammad_${MOCK_ARTICLE_NOTE.id}`),
+      malformed.adapter.core.articles.get(
+        ctx,
+        ticketId,
+        `sart_zammad_${MOCK_ARTICLE_NOTE.id}`,
+      ),
     ).rejects.toBeTruthy();
   });
 
@@ -228,9 +240,9 @@ describe("Zammad customer replies", () => {
     });
     expect(created.visibility).toBe("public");
     expect(created.recipients?.to).toContain("customer@example.com");
-    expect(created.deliveryStatus === "pending" || created.deliveryStatus === "unknown").toBe(
-      true,
-    );
+    expect(
+      created.deliveryStatus === "pending" || created.deliveryStatus === "unknown",
+    ).toBe(true);
   });
 
   it("rejects note channel for customer replies and permission failures", async () => {
@@ -331,7 +343,9 @@ describe("Zammad article create helpers", () => {
     const byAuthor = await adapter.core.articles.list(ctx, ticketId, {
       authorId: "suser_zammad_3",
     });
-    expect(byAuthor.items.every((a) => a.author.userId === "suser_zammad_3")).toBe(true);
+    expect(byAuthor.items.every((a) => a.author.userId === "suser_zammad_3")).toBe(
+      true,
+    );
 
     const bounded = await adapter.core.articles.list(ctx, ticketId, {
       createdAfter: "2026-06-01T09:20:00.000Z",
@@ -352,7 +366,9 @@ describe("Zammad article create helpers", () => {
     const created = await adapter.core.articles.createNote(ctx, {
       supportTicketId: ticketId,
       body: "note with meta",
-      attachments: [{ filename: "log.txt", contentType: "text/plain", dataBase64: "aGVsbG8=" }],
+      attachments: [
+        { filename: "log.txt", contentType: "text/plain", dataBase64: "aGVsbG8=" },
+      ],
     });
     expect(created.attachments.length).toBeGreaterThanOrEqual(1);
     expect(created.attachments[0]?.filename).toBe("log.txt");
@@ -391,13 +407,9 @@ describe("Zammad article create helpers", () => {
 
   it("supports descending sort and senderType filter", async () => {
     const { adapter } = await createAdapter();
-    const desc = await adapter.core.articles.list(
-      ctx,
-      ticketId,
-      {},
-      {},
-      [{ field: "createdAt", direction: "desc" }],
-    );
+    const desc = await adapter.core.articles.list(ctx, ticketId, {}, {}, [
+      { field: "createdAt", direction: "desc" },
+    ]);
     const times = desc.items.map((item) => item.createdAt);
     expect(times).toEqual([...times].sort().reverse());
 
@@ -446,15 +458,14 @@ describe("Zammad article mapper edge cases", () => {
 
   it("throws on missing required article fields", () => {
     expect(() =>
-      mapZammadArticle(
-        { id: 1, ticket_id: 1, created_at: "" } as never,
-        { tenantId: TEST_TENANT_ID },
-      ),
+      mapZammadArticle({ id: 1, ticket_id: 1, created_at: "" } as never, {
+        tenantId: TEST_TENANT_ID,
+      }),
     ).toThrow(/created_at/i);
   });
 });
 
-  describe("Zammad article architecture boundaries", () => {
+describe("Zammad article architecture boundaries", () => {
   it("forbids platform-services, gateway, mapping-store, plane comment reuse, and public API types", () => {
     const root = join(process.cwd(), "integrations/zammad/src");
     const files: string[] = [];
@@ -478,7 +489,10 @@ describe("Zammad article mapper edge cases", () => {
     expect(index).not.toMatch(/ZammadArticleRecord/);
     expect(index).not.toMatch(/zammad-api-types/);
 
-    const fetchClient = readFileSync(join(root, "internal/zammad-fetch-client.ts"), "utf8");
+    const fetchClient = readFileSync(
+      join(root, "internal/zammad-fetch-client.ts"),
+      "utf8",
+    );
     expect(fetchClient).toMatch(/@apzhub\/integration-sdk\/client/);
     const services = files
       .filter((file) => file.includes("/services/"))

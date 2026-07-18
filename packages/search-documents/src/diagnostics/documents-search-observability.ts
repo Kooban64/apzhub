@@ -37,10 +37,7 @@ export class DocumentsSearchMetrics {
     entityType?: string,
   ): void {
     if (entityType) {
-      this.byEntityType.set(
-        entityType,
-        (this.byEntityType.get(entityType) ?? 0) + 1,
-      );
+      this.byEntityType.set(entityType, (this.byEntityType.get(entityType) ?? 0) + 1);
     }
     if (!ok) {
       if (operation === "validate") this.validationFailures += 1;

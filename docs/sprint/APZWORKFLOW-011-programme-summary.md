@@ -7,19 +7,19 @@
 
 ## Platform track (SoR)
 
-1. **001** — Foundation (contracts, core, persistence)  
-2. **002** — Platform Services, Gateway, Authorization  
-3. **003** — HTTP API & Typed Client  
-4. **004** — Workbench  
+1. **001** — Foundation (contracts, core, persistence)
+2. **002** — Platform Services, Gateway, Authorization
+3. **003** — HTTP API & Typed Client
+4. **004** — Workbench
 5. **005** — Vertical Certification → **PRODUCTION_READY_WITH_LIMITATIONS**
 
 ## Engine track (n8n)
 
-6. **006** — n8n Reference Adapter (`@apzhub/integration-n8n` 0.1.0)  
-7. **007** — Platform Services Integration (`gateway.workflow.engine.*`)  
-8. **008** — Engine HTTP & Typed Client (OpenAPI 1.3.0)  
-9. **009** — Engine Workbench (`/workspace/workflow-engine`)  
-10. **010** — Engine Vertical Certification → **PRODUCTION_READY_WITH_LIMITATIONS**  
+6. **006** — n8n Reference Adapter (`@apzhub/integration-n8n` 0.1.0)
+7. **007** — Platform Services Integration (`gateway.workflow.engine.*`)
+8. **008** — Engine HTTP & Typed Client (OpenAPI 1.3.0)
+9. **009** — Engine Workbench (`/workspace/workflow-engine`)
+10. **010** — Engine Vertical Certification → **PRODUCTION_READY_WITH_LIMITATIONS**
 11. **011** — Wave Certification & Reference Adapter Closeout → **frozen**
 
 ## Certified stacks

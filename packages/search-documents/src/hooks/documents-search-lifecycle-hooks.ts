@@ -195,12 +195,10 @@ export function createDocumentsSearchLifecycleHooks(
       publisher.remove(c, "document_collection", id),
     onDocumentFolderUpserted: (c, e) =>
       upsert(c, { entityType: "document_folder", entity: e }),
-    onDocumentFolderRemoved: (c, id) =>
-      publisher.remove(c, "document_folder", id),
+    onDocumentFolderRemoved: (c, id) => publisher.remove(c, "document_folder", id),
     onDocumentCategoryUpserted: (c, e) =>
       upsert(c, { entityType: "document_category", entity: e }),
-    onDocumentCategoryRemoved: (c, id) =>
-      publisher.remove(c, "document_category", id),
+    onDocumentCategoryRemoved: (c, id) => publisher.remove(c, "document_category", id),
     onDocumentTagUpserted: (c, e) =>
       upsert(c, { entityType: "document_tag", entity: e }),
     onDocumentTagRemoved: (c, id) => publisher.remove(c, "document_tag", id),

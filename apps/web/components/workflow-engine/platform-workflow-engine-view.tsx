@@ -40,10 +40,7 @@ function PageShell({
   readonly children: ReactNode;
 }) {
   return (
-    <div
-      className="flex flex-col gap-6 p-1"
-      data-testid="workflow-engine-page"
-    >
+    <div className="flex flex-col gap-6 p-1" data-testid="workflow-engine-page">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-muted-foreground)]">
@@ -101,17 +98,13 @@ function ErrorState({
   return (
     <div
       className="rounded-lg border border-[var(--color-border)] bg-[var(--color-muted)]/30 px-4 py-6"
-      data-testid={
-        forbidden ? "workflow-engine-forbidden" : "workflow-engine-error"
-      }
+      data-testid={forbidden ? "workflow-engine-forbidden" : "workflow-engine-error"}
       role="alert"
     >
       <p className="font-medium text-[var(--color-foreground)]">
         {forbidden ? "Access denied" : "Unable to load Workflow Engine"}
       </p>
-      <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
-        {message}
-      </p>
+      <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">{message}</p>
       {onRetry ? (
         <div className="mt-3">
           <Button type="button" variant="outline" size="sm" onClick={onRetry}>
@@ -138,9 +131,7 @@ function StatusCard({
     <div
       className={[
         "rounded-lg border border-[var(--color-border)] px-4 py-3",
-        emphasize
-          ? "border-[var(--color-foreground)] bg-[var(--color-muted)]/40"
-          : "",
+        emphasize ? "border-[var(--color-foreground)] bg-[var(--color-muted)]/40" : "",
       ]
         .filter(Boolean)
         .join(" ")}
@@ -149,9 +140,7 @@ function StatusCard({
       <p className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">
         {label}
       </p>
-      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">
-        {value}
-      </p>
+      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">{value}</p>
     </div>
   );
 }
@@ -200,9 +189,7 @@ function DataTable({
               key={row.id}
               className={[
                 "border-b border-[var(--color-border)]",
-                onRowClick
-                  ? "cursor-pointer hover:bg-[var(--color-muted)]/20"
-                  : "",
+                onRowClick ? "cursor-pointer hover:bg-[var(--color-muted)]/20" : "",
                 selectedId === row.id ? "bg-[var(--color-muted)]/30" : "",
               ]
                 .filter(Boolean)
@@ -314,12 +301,8 @@ export function PlatformWorkflowEngineView({
   readonly canViewHealth?: boolean;
 }) {
   const queryClient = useQueryClient();
-  const [selectedWorkflowId, setSelectedWorkflowId] = useState<string | null>(
-    null,
-  );
-  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(
-    null,
-  );
+  const [selectedWorkflowId, setSelectedWorkflowId] = useState<string | null>(null);
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
   const [showDetails, setShowDetails] = useState(true);
   const [apiMetadataOpen, setApiMetadataOpen] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -375,8 +358,7 @@ export function PlatformWorkflowEngineView({
   });
 
   const workflows = workflowsQuery.data?.items ?? [];
-  const selectedId =
-    selectedWorkflowId ?? workflows[0]?.id ?? null;
+  const selectedId = selectedWorkflowId ?? workflows[0]?.id ?? null;
 
   const detailQuery = useQuery({
     queryKey: workflowEngineQueryKeys.workflow(selectedId ?? ""),
@@ -385,8 +367,7 @@ export function PlatformWorkflowEngineView({
   });
 
   const templates = templatesQuery.data?.items ?? [];
-  const templateId =
-    selectedTemplateId ?? templates[0]?.id ?? null;
+  const templateId = selectedTemplateId ?? templates[0]?.id ?? null;
 
   const templateDetailQuery = useQuery({
     queryKey: workflowEngineQueryKeys.template(templateId ?? ""),
@@ -593,9 +574,7 @@ export function PlatformWorkflowEngineView({
         <dl className="grid gap-2 text-sm sm:grid-cols-2">
           <div>
             <dt className="text-[var(--color-muted-foreground)]">ID</dt>
-            <dd className="text-[var(--color-foreground)]">
-              {detailQuery.data.id}
-            </dd>
+            <dd className="text-[var(--color-foreground)]">{detailQuery.data.id}</dd>
           </div>
           <div>
             <dt className="text-[var(--color-muted-foreground)]">Active</dt>
@@ -705,11 +684,7 @@ export function PlatformWorkflowEngineView({
           />
           <StatusCard
             label="Engine Health"
-            value={
-              canViewHealth
-                ? (healthQuery.data?.level ?? "—")
-                : "hidden"
-            }
+            value={canViewHealth ? (healthQuery.data?.level ?? "—") : "hidden"}
             testId="card-engine-health"
           />
           <StatusCard
@@ -782,11 +757,7 @@ export function PlatformWorkflowEngineView({
             onRowClick={setSelectedTemplateId}
             rows={templates.map((item) => ({
               id: item.id,
-              cells: [
-                item.name,
-                item.support,
-                item.tagNames.join(", ") || "—",
-              ],
+              cells: [item.name, item.support, item.tagNames.join(", ") || "—"],
             }))}
           />
         )}
@@ -804,9 +775,7 @@ export function PlatformWorkflowEngineView({
                 <dd>{templateDetailQuery.data.id}</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-muted-foreground)]">
-                  Description
-                </dt>
+                <dt className="text-[var(--color-muted-foreground)]">Description</dt>
                 <dd>{templateDetailQuery.data.description ?? "—"}</dd>
               </div>
               <div>
@@ -921,10 +890,7 @@ export function PlatformWorkflowEngineView({
       body = (
         <div className="flex flex-col gap-4" data-testid="workflow-engine-capabilities">
           <div className="grid gap-3 sm:grid-cols-2">
-            <StatusCard
-              label="Provider / API"
-              value="Workflow Engine metadata API"
-            />
+            <StatusCard label="Provider / API" value="Workflow Engine metadata API" />
             <StatusCard label="Authentication" value="session + server authz" />
           </div>
           <section aria-label="Supported capabilities">
@@ -974,16 +940,10 @@ export function PlatformWorkflowEngineView({
     } else {
       const health = healthQuery.data!;
       body = (
-        <div
-          className="grid gap-3 sm:grid-cols-2"
-          data-testid="workflow-engine-health"
-        >
+        <div className="grid gap-3 sm:grid-cols-2" data-testid="workflow-engine-health">
           <StatusCard label="Level" value={health.level} />
           <StatusCard label="SDK status" value={health.sdkStatus} />
-          <StatusCard
-            label="Reasons"
-            value={health.reasons.join("; ") || "none"}
-          />
+          <StatusCard label="Reasons" value={health.reasons.join("; ") || "none"} />
           <StatusCard label="Mode" value="READ-ONLY ENGINE" emphasize />
         </div>
       );
@@ -1021,17 +981,12 @@ export function PlatformWorkflowEngineView({
           <StatusCard label="Readiness (API)" value={d.apiStatus} />
           <StatusCard
             label="Latency"
-            value={
-              d.lastLatencyMs !== undefined ? `${d.lastLatencyMs} ms` : "—"
-            }
+            value={d.lastLatencyMs !== undefined ? `${d.lastLatencyMs} ms` : "—"}
           />
           <StatusCard label="Compatibility" value={d.compatibilityStatus} />
           <StatusCard label="Provider version" value={d.adapterVersion} />
           <StatusCard label="Auth mode" value={d.authMode} />
-          <StatusCard
-            label="Auth status"
-            value={d.authenticationStatus}
-          />
+          <StatusCard label="Auth status" value={d.authenticationStatus} />
           <StatusCard
             label="Supported operations (core count)"
             value={String(d.coreServiceCount)}
@@ -1065,7 +1020,10 @@ export function PlatformWorkflowEngineView({
     } else {
       const c = compatibilityQuery.data!;
       body = (
-        <div className="flex flex-col gap-4" data-testid="workflow-engine-compatibility">
+        <div
+          className="flex flex-col gap-4"
+          data-testid="workflow-engine-compatibility"
+        >
           <div className="grid gap-3 sm:grid-cols-2">
             <StatusCard label="Status" value={c.compatibilityStatus} />
             <StatusCard label="Supported API" value={c.supportedApi} />
@@ -1074,8 +1032,8 @@ export function PlatformWorkflowEngineView({
           <section aria-label="Supported capabilities">
             <h2 className="mb-2 text-sm font-semibold">Supported capabilities</h2>
             <p className="text-sm text-[var(--color-muted-foreground)]">
-              Read-only metadata: list/get workflows, templates, projects, users,
-              tags, capabilities, health, diagnostics, compatibility, validate.
+              Read-only metadata: list/get workflows, templates, projects, users, tags,
+              capabilities, health, diagnostics, compatibility, validate.
             </p>
           </section>
           <section aria-label="Unsupported capabilities">

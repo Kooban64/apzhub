@@ -15,21 +15,21 @@ Define how APZHUB global entity IDs map to provider-native IDs without leaking v
 
 ## Mapping record
 
-| Field | Description |
-|-------|-------------|
-| `platformId` | APZHUB global ID (ADR-0048) |
-| `entityType` | Canonical entity type union |
-| `providerId` | Capability provider instance id |
-| `integrationId` | Integration manifest id (e.g. `plane`) |
-| `providerNativeId` | Engine-native ID (never exposed as primary ID) |
-| `parentPlatformId` | Optional parent APZHUB ID |
-| `parentProviderNativeId` | Optional parent native ID |
-| `tenantId` | Tenant scope (required) |
-| `organisationId` | Optional organisation scope (OSS-110-05 additive) |
-| `status` | `active` \| `inactive` \| `pending` \| `orphaned` |
-| `createdAt` / `updatedAt` | ISO-8601 timestamps |
-| `metadata` | String key/value bag |
-| `revision` | Optimistic concurrency counter |
+| Field                     | Description                                       |
+| ------------------------- | ------------------------------------------------- |
+| `platformId`              | APZHUB global ID (ADR-0048)                       |
+| `entityType`              | Canonical entity type union                       |
+| `providerId`              | Capability provider instance id                   |
+| `integrationId`           | Integration manifest id (e.g. `plane`)            |
+| `providerNativeId`        | Engine-native ID (never exposed as primary ID)    |
+| `parentPlatformId`        | Optional parent APZHUB ID                         |
+| `parentProviderNativeId`  | Optional parent native ID                         |
+| `tenantId`                | Tenant scope (required)                           |
+| `organisationId`          | Optional organisation scope (OSS-110-05 additive) |
+| `status`                  | `active` \| `inactive` \| `pending` \| `orphaned` |
+| `createdAt` / `updatedAt` | ISO-8601 timestamps                               |
+| `metadata`                | String key/value bag                              |
+| `revision`                | Optimistic concurrency counter                    |
 
 ---
 
@@ -50,9 +50,9 @@ Inactive/orphaned rows may reuse a provider-native identity after rebind.
 
 ## Persistence boundary
 
-| Implementation | Use |
-|----------------|-----|
-| `InMemoryEntityMappingStore` | Development and isolated tests |
+| Implementation               | Use                                          |
+| ---------------------------- | -------------------------------------------- |
+| `InMemoryEntityMappingStore` | Development and isolated tests               |
 | `PostgresEntityMappingStore` | Production-capable environments (OSS-110-05) |
 
 Table: `platform_entity_mapping` (owned by `@apzhub/config`, migration `0015_platform_entity_mapping`).
@@ -61,12 +61,12 @@ Adapters never write to the mapping store. Platform services / orchestration own
 
 ### Bootstrap
 
-| Variable | Values | Behaviour |
-|----------|--------|-----------|
-| `ENTITY_MAPPING_STORE_MODE` | `memory` \| `postgres` | Explicit backend selection |
-| (default) | — | `memory` outside production; `postgres` when `NODE_ENV=production` |
-| `ENTITY_MAPPING_ALLOW_MEMORY_IN_PRODUCTION` | `true` \| `false` | Required escape hatch for memory in production |
-| `DATABASE_URL` | connection string | Required when mode is `postgres` |
+| Variable                                    | Values                 | Behaviour                                                          |
+| ------------------------------------------- | ---------------------- | ------------------------------------------------------------------ |
+| `ENTITY_MAPPING_STORE_MODE`                 | `memory` \| `postgres` | Explicit backend selection                                         |
+| (default)                                   | —                      | `memory` outside production; `postgres` when `NODE_ENV=production` |
+| `ENTITY_MAPPING_ALLOW_MEMORY_IN_PRODUCTION` | `true` \| `false`      | Required escape hatch for memory in production                     |
+| `DATABASE_URL`                              | connection string      | Required when mode is `postgres`                                   |
 
 **Production rule:** PostgreSQL mode never silently falls back to in-memory. Misconfiguration or database unavailability fails with `CONFIGURATION_ERROR` / `PERSISTENCE_UNAVAILABLE`.
 
@@ -93,17 +93,17 @@ Factory: `createEntityMappingStore()` / `createPlatformServicesFromEnv()`.
 
 ## Error classifications
 
-| Condition | Error code |
-|-----------|------------|
-| No mapping | `MAPPING_NOT_FOUND` |
-| Wrong entity type | `MAPPING_TYPE_MISMATCH` |
-| Inactive mapping | `MAPPING_INACTIVE` |
-| Duplicate / unique bind | `MAPPING_CONFLICT` |
-| Revision mismatch | `MAPPING_REVISION_CONFLICT` |
-| Persistence failure | `MAPPING_PERSISTENCE_FAILED` |
-| Database unavailable | `PERSISTENCE_UNAVAILABLE` |
-| Invalid global ID | `INVALID_GLOBAL_ID` |
-| Provider create OK, map fail | `RECONCILIATION_REQUIRED` |
+| Condition                    | Error code                   |
+| ---------------------------- | ---------------------------- |
+| No mapping                   | `MAPPING_NOT_FOUND`          |
+| Wrong entity type            | `MAPPING_TYPE_MISMATCH`      |
+| Inactive mapping             | `MAPPING_INACTIVE`           |
+| Duplicate / unique bind      | `MAPPING_CONFLICT`           |
+| Revision mismatch            | `MAPPING_REVISION_CONFLICT`  |
+| Persistence failure          | `MAPPING_PERSISTENCE_FAILED` |
+| Database unavailable         | `PERSISTENCE_UNAVAILABLE`    |
+| Invalid global ID            | `INVALID_GLOBAL_ID`          |
+| Provider create OK, map fail | `RECONCILIATION_REQUIRED`    |
 
 Public errors never include SQL, connection strings, credentials, or table names.
 

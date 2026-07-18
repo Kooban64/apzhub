@@ -24,10 +24,7 @@ export abstract class IntegrationAdapterBase implements AdapterBase {
   private connected = false;
   private disposed = false;
 
-  constructor(
-    context: AdapterContext,
-    configuration: AdapterBootstrapConfiguration,
-  ) {
+  constructor(context: AdapterContext, configuration: AdapterBootstrapConfiguration) {
     this.context = context;
     this.configuration = configuration;
     this.integrationId = context.integrationId;
@@ -133,13 +130,19 @@ export abstract class IntegrationAdapterBase implements AdapterBase {
 
     if (connection) {
       if (!connection.connectionId.trim()) {
-        issues.push("connection.connectionId is required when connection defaults are supplied");
+        issues.push(
+          "connection.connectionId is required when connection defaults are supplied",
+        );
       }
       if (!connection.baseUrl.trim()) {
-        issues.push("connection.baseUrl is required when connection defaults are supplied");
+        issues.push(
+          "connection.baseUrl is required when connection defaults are supplied",
+        );
       }
       if (!connection.credentialRef.trim()) {
-        issues.push("connection.credentialRef is required when connection defaults are supplied");
+        issues.push(
+          "connection.credentialRef is required when connection defaults are supplied",
+        );
       }
     }
 
@@ -262,7 +265,9 @@ export abstract class IntegrationAdapterBase implements AdapterBase {
   }
 
   /** Closes the configured logical connection. */
-  async disconnect(context: IntegrationRequestContext): Promise<AdapterLifecycleResult> {
+  async disconnect(
+    context: IntegrationRequestContext,
+  ): Promise<AdapterLifecycleResult> {
     this.assertNotDisposed();
 
     const connection = this.configuration.connection;
@@ -290,7 +295,9 @@ export abstract class IntegrationAdapterBase implements AdapterBase {
   }
 
   /** Runs the standard health check suite — override to append vendor checks. */
-  async performHealthCheck(context: IntegrationRequestContext): Promise<IntegrationHealth> {
+  async performHealthCheck(
+    context: IntegrationRequestContext,
+  ): Promise<IntegrationHealth> {
     this.assertNotDisposed();
 
     const baseHealth = await this.healthManager.check({
@@ -311,7 +318,9 @@ export abstract class IntegrationAdapterBase implements AdapterBase {
   }
 
   /** Collects unified runtime diagnostics. */
-  async collectDiagnostics(context: IntegrationRequestContext): Promise<IntegrationDiagnostics> {
+  async collectDiagnostics(
+    context: IntegrationRequestContext,
+  ): Promise<IntegrationDiagnostics> {
     this.assertNotDisposed();
 
     const diagnostics = await this.diagnosticsManager.collect({
@@ -334,7 +343,9 @@ export abstract class IntegrationAdapterBase implements AdapterBase {
   }
 
   /** Releases adapter resources — idempotent. */
-  async dispose(reason: AdapterDisposeReason = "shutdown"): Promise<AdapterDisposeResult> {
+  async dispose(
+    reason: AdapterDisposeReason = "shutdown",
+  ): Promise<AdapterDisposeResult> {
     if (this.disposed) {
       return { ok: true, message: "Adapter already disposed", reason };
     }
@@ -403,7 +414,9 @@ export abstract class IntegrationAdapterBase implements AdapterBase {
 
   protected assertInitialised(): void {
     if (!this.initialised) {
-      throw new Error(`Adapter "${this.integrationId}" must be initialised before this operation`);
+      throw new Error(
+        `Adapter "${this.integrationId}" must be initialised before this operation`,
+      );
     }
   }
 }

@@ -66,31 +66,29 @@ describe("APZSEARCH-014 residual coverage", () => {
     expect(life.suggestFromReportingStatus("archived")).toBe("archived");
     expect(life.suggestFromReportingStatus("deleted")).toBe("removed");
     expect(life.suggestFromReportingStatus(undefined)).toBe("validated");
-    expect(
-      life.suggestFromDomainStatus("report_generation_metadata", "preview"),
-    ).toBe("draft");
-    expect(
-      life.suggestFromDomainStatus("report_generation_metadata", "archived"),
-    ).toBe("archived");
-    expect(
-      life.suggestFromDomainStatus("report_output_metadata", "deleted"),
-    ).toBe("removed");
-    expect(life.suggestFromDomainStatus("report_template", "draft")).toBe(
+    expect(life.suggestFromDomainStatus("report_generation_metadata", "preview")).toBe(
       "draft",
     );
+    expect(life.suggestFromDomainStatus("report_generation_metadata", "archived")).toBe(
+      "archived",
+    );
+    expect(life.suggestFromDomainStatus("report_output_metadata", "deleted")).toBe(
+      "removed",
+    );
+    expect(life.suggestFromDomainStatus("report_template", "draft")).toBe("draft");
     expect(life.canTransition("published", "removed")).toBe(true);
     expect(() => life.assertTransition("archived", "published")).toThrow();
 
     const errors = new ReportingSearchErrorTranslator();
-    expect(
-      errors.translate(new Error("parametersJson forbidden")).classification,
-    ).toBe("validation_failed");
-    expect(
-      errors.translate(new Error("classification required")).classification,
-    ).toBe("validation_failed");
-    expect(
-      errors.translate(new Error("tenant mismatch")).classification,
-    ).toBe("tenant_mismatch");
+    expect(errors.translate(new Error("parametersJson forbidden")).classification).toBe(
+      "validation_failed",
+    );
+    expect(errors.translate(new Error("classification required")).classification).toBe(
+      "validation_failed",
+    );
+    expect(errors.translate(new Error("tenant mismatch")).classification).toBe(
+      "tenant_mismatch",
+    );
     expect(errors.translate(new Error("boom")).message).toContain("boom");
 
     const store = new DiagnosticsStore();
@@ -123,9 +121,9 @@ describe("APZSEARCH-014 residual coverage", () => {
       classification: "restricted",
     });
     expect(resolveReportingClassification(context)).toBe("restricted");
-    expect(
-      resolveReportingClassification(context, { classification: "public" }),
-    ).toBe("restricted");
+    expect(resolveReportingClassification(context, { classification: "public" })).toBe(
+      "restricted",
+    );
     expect(
       resolveReportingClassification(context, {
         classification: "public",
@@ -163,9 +161,7 @@ describe("APZSEARCH-014 residual coverage", () => {
     expect(isForbiddenMetadataKey("renderedBody")).toBe(true);
     expect(isForbiddenMetadataKey("byteLength")).toBe(false);
     expect(isForbiddenMetadataValue("s3://bucket/obj")).toBe(true);
-    expect(isForbiddenMetadataValue("deadbeefdeadbeefdeadbeefdeadbeef")).toBe(
-      true,
-    );
+    expect(isForbiddenMetadataValue("deadbeefdeadbeefdeadbeefdeadbeef")).toBe(true);
     expect(isForbiddenMetadataValue("pdf")).toBe(false);
 
     const leaks = scanMetadataForReportingLeakage({

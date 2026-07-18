@@ -123,9 +123,10 @@ describe("createHttpEngineeringIntelligenceClient", () => {
 
     const client = createHttpEngineeringIntelligenceClient();
     expect((await client.getScore()).score).toBe(0);
-    expect((await client.compareBenchmark({ metricKey: "x", values: [1] })).comparison.direction).toBe(
-      "unknown",
-    );
+    expect(
+      (await client.compareBenchmark({ metricKey: "x", values: [1] })).comparison
+        .direction,
+    ).toBe("unknown");
     expect((await client.listHistorical()).items[0]?.id).toBe("h1");
     expect((await client.listTrends()).items[0]?.kind).toBe("");
     expect((await client.getSnapshot("s1")).id).toBe("s1");
@@ -146,8 +147,11 @@ describe("createHttpEngineeringIntelligenceClient", () => {
       }),
     );
 
-    await client.scoreWithScope({ scope: { productId: "p1" } }, { correlationId: "c-corr" });
-    await client.assessHealth({ scope: { productId: "p1" } });
+    await client.scoreWithScope(
+      { scope: { tenantId: "t1" } },
+      { correlationId: "c-corr" },
+    );
+    await client.assessHealth({ scope: { tenantId: "t1" } });
     await client.computeSnapshot({ label: "l1" });
     await client.buildTrend({ kind: "quality", periodKind: "weekly" });
     await client.compareBenchmark({
@@ -169,11 +173,16 @@ describe("createHttpEngineeringIntelligenceClient", () => {
   it("maps unauthorized and forbidden errors", async () => {
     fetchMock.mockResolvedValueOnce(
       jsonResponse(
-        { error: { message: "Missing engineering.view" }, meta: { correlationId: "c1" } },
+        {
+          error: { message: "Missing engineering.view" },
+          meta: { correlationId: "c1" },
+        },
         { status: 401 },
       ),
     );
-    await expect(createHttpEngineeringIntelligenceClient().getScore()).rejects.toMatchObject({
+    await expect(
+      createHttpEngineeringIntelligenceClient().getScore(),
+    ).rejects.toMatchObject({
       code: "unauthorized",
       status: 401,
     });
@@ -181,7 +190,9 @@ describe("createHttpEngineeringIntelligenceClient", () => {
     fetchMock.mockResolvedValueOnce(
       jsonResponse({ error: { message: "Forbidden" } }, { status: 403 }),
     );
-    await expect(createHttpEngineeringIntelligenceClient().getScore()).rejects.toMatchObject({
+    await expect(
+      createHttpEngineeringIntelligenceClient().getScore(),
+    ).rejects.toMatchObject({
       code: "forbidden",
       status: 403,
     });
@@ -189,7 +200,9 @@ describe("createHttpEngineeringIntelligenceClient", () => {
     fetchMock.mockResolvedValueOnce(
       jsonResponse({ error: { message: "Gone", code: "NOT_FOUND" } }, { status: 404 }),
     );
-    await expect(createHttpEngineeringIntelligenceClient().getScore()).rejects.toMatchObject({
+    await expect(
+      createHttpEngineeringIntelligenceClient().getScore(),
+    ).rejects.toMatchObject({
       status: 404,
     });
   });
@@ -270,9 +283,13 @@ describe("engineering-intelligence-api facade", () => {
 
   it("mock client supports scoped and build helpers", async () => {
     const client = createMockEngineeringIntelligenceClient();
-    await expect(client.scoreWithScope()).resolves.toMatchObject({ score: MOCK_EI_SCORE.score });
+    await expect(client.scoreWithScope()).resolves.toMatchObject({
+      score: MOCK_EI_SCORE.score,
+    });
     await expect(client.assessHealth()).resolves.toMatchObject({ status: "watch" });
-    await expect(client.computeSnapshot()).resolves.toMatchObject({ id: "eisnap_mock" });
+    await expect(client.computeSnapshot()).resolves.toMatchObject({
+      id: "eisnap_mock",
+    });
     await expect(client.getSnapshot("x")).resolves.toMatchObject({ id: "x" });
     await expect(client.buildTrend({ kind: "defect" })).resolves.toMatchObject({
       kind: "defect",

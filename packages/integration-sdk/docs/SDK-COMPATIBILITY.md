@@ -1,7 +1,7 @@
 # Integration SDK — Compatibility & Migration
 
 > **Milestone:** OSS-100-10  
-> **Package:** `@apzhub/integration-sdk` **0.9.0**  
+> **Package:** `@apzhub/integration-sdk` **1.0.0** (promoted OSS-100-11; prior cert at 0.9.0)  
 > **Date:** 2026-07-12  
 > **Source:** [sdk-v1-audit-notes.md](../../../docs/architecture/sdk-v1-audit-notes.md)  
 > **Companion:** [SDK-V1-CERTIFICATION.md](./SDK-V1-CERTIFICATION.md) · [SDK-PUBLIC-API.md](./SDK-PUBLIC-API.md)
@@ -16,13 +16,13 @@ Compatibility matrix, migration notes, and interoperability rules for `@apzhub/i
 
 ## Version matrix
 
-| Component                                  | Version    | Notes                                   |
-| ------------------------------------------ | ---------- | --------------------------------------- |
-| `@apzhub/integration-sdk` (`package.json`) | **0.9.0**  | Remain until owner promotes             |
-| `INTEGRATION_SDK_VERSION` constant         | **0.9.0**  | **Matches** package version             |
-| `@apzhub/integration-plane`                | **0.6.0**  | `workspace:*` SDK dependency            |
-| `@apzhub/integration-zammad`               | **0.6.0**  | `workspace:*` SDK dependency            |
-| Promote to **1.0.0**                       | Owner gate | Semver 1.0 commits to stable public API |
+| Component                                  | Version   | Notes                                     |
+| ------------------------------------------ | --------- | ----------------------------------------- |
+| `@apzhub/integration-sdk` (`package.json`) | **1.0.0** | Promoted OSS-100-11 · Architecture Frozen |
+| `INTEGRATION_SDK_VERSION` constant         | **1.0.0** | **Matches** package version               |
+| `@apzhub/integration-plane`                | **0.6.0** | `workspace:*` SDK dependency              |
+| `@apzhub/integration-zammad`               | **0.6.0** | `workspace:*` SDK dependency              |
+| Semver 1.x policy                          | Active    | PATCH/MINOR/MAJOR per Reference Standard  |
 
 ---
 
@@ -41,19 +41,9 @@ Compatibility matrix, migration notes, and interoperability rules for `@apzhub/i
 
 ## Migration / promotion notes
 
-### Remaining at 0.9.0 (current)
+### Promoted to 1.0.0 (OSS-100-11 — current)
 
-No consumer migration required. Certification is governance-only; public APIs are unchanged by OSS-100-10 documentation closeout.
-
-### Promoting to 1.0.0 (owner-approved future)
-
-When the owner authorises promotion:
-
-1. Accept documented limitations (Event Bus, ingress, provisioning, durable stores, PlaceholderVault, large root barrel).
-2. Freeze the public API (prefer publishing a stable API matrix; prefer subpath imports).
-3. Bump `@apzhub/integration-sdk` to **1.0.0** and align `INTEGRATION_SDK_VERSION`.
-4. Re-run `testing/sdk-v1/integration-sdk-v1-recertification.test.ts` and Plane/Zammad suites.
-5. Do **not** treat 1.0.0 as implying Event Bus, ingress, or provisioning delivery.
+No consumer migration required beyond picking up **1.0.0** via `workspace:*`. Public APIs are backward compatible with 0.9.0. Architecture Frozen — Event Bus, ingress, and provisioning remain absent by design.
 
 ### Optional pre-1.0 polish (non-blocking)
 

@@ -9,14 +9,9 @@ import {
   asNotificationPreferenceId,
   type NotificationRequestContext,
 } from "@apzhub/notification-contracts";
-import {
-  createNotificationPersistenceForTest,
-} from "@apzhub/notification-persistence";
+import { createNotificationPersistenceForTest } from "@apzhub/notification-persistence";
 
-import {
-  createPlatformNotificationService,
-  NotificationDomainError,
-} from "../index";
+import { createPlatformNotificationService, NotificationDomainError } from "../index";
 
 const ctx: NotificationRequestContext = {
   tenantId: "tenant_a",
@@ -42,9 +37,9 @@ describe("createPlatformNotificationService", () => {
   }
 
   it("requires repos", () => {
-    expect(() =>
-      createPlatformNotificationService({} as never),
-    ).toThrow(NotificationDomainError);
+    expect(() => createPlatformNotificationService({} as never)).toThrow(
+      NotificationDomainError,
+    );
   });
 
   it("rejects missing context fields", async () => {
@@ -137,8 +132,7 @@ describe("createPlatformNotificationService", () => {
       channelKind: "sms",
     });
     expect(
-      (await service.getPreference(ctx, asNotificationPreferenceId("pref_1")))
-        .enabled,
+      (await service.getPreference(ctx, asNotificationPreferenceId("pref_1"))).enabled,
     ).toBe(false);
 
     expect(await service.listCategories(ctx)).toEqual([]);
@@ -215,7 +209,9 @@ describe("createPlatformNotificationService", () => {
       createdAt: now,
       updatedAt: now,
     });
-    expect(await service.getCategory(ctx, asNotificationCategoryId("cat_ok"))).toMatchObject({
+    expect(
+      await service.getCategory(ctx, asNotificationCategoryId("cat_ok")),
+    ).toMatchObject({
       key: "sys",
     });
     expect(await service.getChannel(ctx, "ch_ok" as never)).toMatchObject({

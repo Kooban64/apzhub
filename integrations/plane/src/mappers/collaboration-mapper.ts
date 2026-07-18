@@ -31,7 +31,10 @@ function resolveActorId(
 }
 
 function resolveCommentBody(record: PlaneCommentRecord): string {
-  if (typeof record.comment_stripped === "string" && record.comment_stripped.length > 0) {
+  if (
+    typeof record.comment_stripped === "string" &&
+    record.comment_stripped.length > 0
+  ) {
     return record.comment_stripped;
   }
   if (typeof record.comment === "string" && record.comment.length > 0) {
@@ -43,10 +46,7 @@ function resolveCommentBody(record: PlaneCommentRecord): string {
   return "";
 }
 
-export function mapPlaneComment(
-  record: PlaneCommentRecord,
-  taskId: string,
-): Comment {
+export function mapPlaneComment(record: PlaneCommentRecord, taskId: string): Comment {
   const planeTaskId =
     typeof record.issue === "string" && record.issue.length > 0
       ? record.issue
@@ -95,7 +95,9 @@ export function mapPlaneActivity(
   ].filter((part): part is string => Boolean(part));
 
   const planeIssueId =
-    typeof record.issue === "string" && record.issue.length > 0 ? record.issue : undefined;
+    typeof record.issue === "string" && record.issue.length > 0
+      ? record.issue
+      : undefined;
   const planeProjectId =
     typeof record.project === "string" && record.project.length > 0
       ? record.project
@@ -112,10 +114,10 @@ export function mapPlaneActivity(
   };
 }
 
-function resolveSubscriberUserId(
-  subscriber: string | { readonly id: string },
-): string {
-  return typeof subscriber === "string" ? toUserId(subscriber) : toUserId(subscriber.id);
+function resolveSubscriberUserId(subscriber: string | { readonly id: string }): string {
+  return typeof subscriber === "string"
+    ? toUserId(subscriber)
+    : toUserId(subscriber.id);
 }
 
 export function mapPlaneSubscriber(
@@ -123,7 +125,9 @@ export function mapPlaneSubscriber(
   taskId: string,
 ): Watcher {
   const planeIssueId =
-    typeof record.issue === "string" && record.issue.length > 0 ? record.issue : undefined;
+    typeof record.issue === "string" && record.issue.length > 0
+      ? record.issue
+      : undefined;
   return {
     id: toWatcherId(record.id),
     taskId: planeIssueId ? toTaskId(planeIssueId) : taskId,

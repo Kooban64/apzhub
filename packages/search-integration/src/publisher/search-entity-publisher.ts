@@ -8,7 +8,10 @@ import {
   SearchEntityLifecycle,
   type SearchEntityLifecycleState,
 } from "../entity/lifecycle";
-import { SearchEntityMapper, type SearchEntityDraft } from "../mapper/search-entity-mapper";
+import {
+  SearchEntityMapper,
+  type SearchEntityDraft,
+} from "../mapper/search-entity-mapper";
 import { createSearchPublicationDiagnostics } from "../publication/diagnostics";
 import { SearchPublicationErrorTranslator } from "../publication/error-translator";
 import { SearchPublicationLogger } from "../publication/logger";
@@ -72,9 +75,7 @@ export class SearchEntityPublisher {
     const started = Date.now();
     this.touch("validate", context);
     const canonicalInput =
-      "entityId" in input
-        ? this.mapper.toInput(context, input)
-        : input;
+      "entityId" in input ? this.mapper.toInput(context, input) : input;
     const validation = this.validator.validate(context, canonicalInput);
     this.metrics.record("validate", validation.valid);
     this.logger.log(
@@ -161,10 +162,7 @@ export class SearchEntityPublisher {
     return this.write("update", context, input, "updated");
   }
 
-  remove(
-    context: SearchIntegrationContext,
-    entityId: string,
-  ): SearchPublicationResult {
+  remove(context: SearchIntegrationContext, entityId: string): SearchPublicationResult {
     const started = Date.now();
     this.touch("remove", context);
     try {
@@ -316,10 +314,17 @@ export class SearchEntityPublisher {
           : this.validator.assertValid(context, input);
 
       const existing = this.options.sink.get(entity.id);
-      if (operation === "publish" && existing && existing.lifecycleState !== "removed") {
+      if (
+        operation === "publish" &&
+        existing &&
+        existing.lifecycleState !== "removed"
+      ) {
         throw new Error(`Search entity already published: ${entity.id}`);
       }
-      if (operation === "update" && (!existing || existing.lifecycleState === "removed")) {
+      if (
+        operation === "update" &&
+        (!existing || existing.lifecycleState === "removed")
+      ) {
         throw new Error(`Search entity not found: ${entity.id}`);
       }
       if (existing && existing.lifecycleState !== "removed") {

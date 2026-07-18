@@ -15,23 +15,23 @@ Introduce platform-level service interfaces defining APZHUB business capabilitie
 
 ## Deliverables
 
-| Deliverable | Status |
-|-------------|--------|
-| `@apzhub/platform-service-contracts` package | ✅ |
-| Shared contracts (context, paging, sorting, results, errors) | ✅ |
-| Canonical domain DTOs | ✅ |
-| Query objects, filters, sort fields | ✅ |
-| Input/command DTOs | ✅ |
-| `WorkspaceService` interface | ✅ |
-| `ProjectService` interface | ✅ |
-| `TaskService` interface | ✅ |
-| `TeamService` interface | ✅ |
-| `UserService` interface | ✅ |
-| `SearchService` interface | ✅ |
-| Plane adapter migration to contracts package | ✅ |
-| Contract tests | ✅ 8 passed |
-| Specification document | ✅ |
-| Foundation doc updates | ✅ |
+| Deliverable                                                  | Status      |
+| ------------------------------------------------------------ | ----------- |
+| `@apzhub/platform-service-contracts` package                 | ✅          |
+| Shared contracts (context, paging, sorting, results, errors) | ✅          |
+| Canonical domain DTOs                                        | ✅          |
+| Query objects, filters, sort fields                          | ✅          |
+| Input/command DTOs                                           | ✅          |
+| `WorkspaceService` interface                                 | ✅          |
+| `ProjectService` interface                                   | ✅          |
+| `TaskService` interface                                      | ✅          |
+| `TeamService` interface                                      | ✅          |
+| `UserService` interface                                      | ✅          |
+| `SearchService` interface                                    | ✅          |
+| Plane adapter migration to contracts package                 | ✅          |
+| Contract tests                                               | ✅ 8 passed |
+| Specification document                                       | ✅          |
+| Foundation doc updates                                       | ✅          |
 
 ---
 
@@ -94,11 +94,11 @@ packages/platform-service-contracts/
 
 ## Canonical model migration
 
-| Before (OSS-101-05) | After (OSS-110-01) |
-|---------------------|-------------------|
-| `integrations/plane/src/models/canonical.ts` | Re-exports from `@apzhub/platform-service-contracts` |
-| `integrations/plane/src/models/query.ts` | Re-exports from contracts |
-| `integrations/plane/src/models/inputs.ts` | Re-exports + adapter `CreateProjectInput` omitting `workspaceId` |
+| Before (OSS-101-05)                          | After (OSS-110-01)                                               |
+| -------------------------------------------- | ---------------------------------------------------------------- |
+| `integrations/plane/src/models/canonical.ts` | Re-exports from `@apzhub/platform-service-contracts`             |
+| `integrations/plane/src/models/query.ts`     | Re-exports from contracts                                        |
+| `integrations/plane/src/models/inputs.ts`    | Re-exports + adapter `CreateProjectInput` omitting `workspaceId` |
 
 Plane types remain internal to `integrations/plane/src/internal/` only.
 
@@ -139,13 +139,13 @@ class PlatformServiceError {
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| `pnpm --filter @apzhub/platform-service-contracts typecheck` | Pass |
-| `pnpm --filter @apzhub/integration-plane typecheck` | Pass |
-| Contract tests | 8 passed |
-| Plane adapter tests | 37 passed |
-| ESLint (contracts + plane models) | Pass |
+| Gate                                                         | Result    |
+| ------------------------------------------------------------ | --------- |
+| `pnpm --filter @apzhub/platform-service-contracts typecheck` | Pass      |
+| `pnpm --filter @apzhub/integration-plane typecheck`          | Pass      |
+| Contract tests                                               | 8 passed  |
+| Plane adapter tests                                          | 37 passed |
+| ESLint (contracts + plane models)                            | Pass      |
 
 ---
 

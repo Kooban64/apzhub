@@ -33,9 +33,7 @@ import {
 import { resolveOperationAuthorization } from "../../authorization/operation-authorization-map";
 import { RequestPipeline } from "../../execution/request-pipeline";
 
-function svcCtx(
-  overrides: Partial<ServiceRequestContext> = {},
-): ServiceRequestContext {
+function svcCtx(overrides: Partial<ServiceRequestContext> = {}): ServiceRequestContext {
   return {
     correlationId: "corr-006",
     requestId: "req-006",
@@ -65,7 +63,11 @@ function svcCtx(
   };
 }
 
-function searchCtx(overrides: Parameters<typeof applyMandatorySearchSecurityFilters>[0] extends infer C ? Partial<C> : never = {}) {
+function searchCtx(
+  overrides: Parameters<typeof applyMandatorySearchSecurityFilters>[0] extends infer C
+    ? Partial<C>
+    : never = {},
+) {
   return {
     correlationId: "corr-006",
     actorUserId: "user_1",
@@ -83,16 +85,14 @@ describe("APZSEARCH-006 search execution", () => {
 
   it("bumps package versions", () => {
     expect(SEARCH_CONTRACTS_VERSION).toBe("0.4.0");
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
-    expect(PLATFORM_SEARCH_EXECUTION_CAPABILITY_ID).toBe(
-      "platform_search_execution",
-    );
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
+    expect(PLATFORM_SEARCH_EXECUTION_CAPABILITY_ID).toBe("platform_search_execution");
   });
 
   it("maps canonical collection to provider index uid (internal)", () => {
-    expect(
-      toProviderIndexUid("Documents Core!", { indexPrefix: "apzhub_" }),
-    ).toBe("apzhub_documents_core");
+    expect(toProviderIndexUid("Documents Core!", { indexPrefix: "apzhub_" })).toBe(
+      "apzhub_documents_core",
+    );
     expect(toProviderDocumentId("doc/1")).toBe("doc_1");
   });
 
@@ -121,10 +121,9 @@ describe("APZSEARCH-006 search execution", () => {
     ).toThrow(/must not supply or override tenantId/);
 
     expect(() =>
-      applyMandatorySearchSecurityFilters(
-        searchCtx({ tenantId: "   " }),
-        { keywords: "x" },
-      ),
+      applyMandatorySearchSecurityFilters(searchCtx({ tenantId: "   " }), {
+        keywords: "x",
+      }),
     ).toThrow(/tenantId/);
   });
 
@@ -179,9 +178,7 @@ describe("APZSEARCH-006 search execution", () => {
 
     expect(page.providerId).toBeDefined();
     expect(page.page.hits.length).toBeGreaterThan(0);
-    expect(page.request.query.filters?.some((f) => f.field === "tenantId")).toBe(
-      true,
-    );
+    expect(page.request.query.filters?.some((f) => f.field === "tenantId")).toBe(true);
 
     const phrase = await execution.domainGateway.searchExecution.execute(
       searchCtx(),
@@ -272,28 +269,22 @@ describe("APZSEARCH-006 search execution", () => {
 
   it("index/document ops are permission-separated from query in authz map", () => {
     expect(
-      resolveOperationAuthorization("searchExecution", "execute")
-        ?.requiredPermission,
+      resolveOperationAuthorization("searchExecution", "execute")?.requiredPermission,
     ).toBe("search.query.execute");
     expect(
-      resolveOperationAuthorization("searchIndexes", "create")
-        ?.requiredPermission,
+      resolveOperationAuthorization("searchIndexes", "create")?.requiredPermission,
     ).toBe("search.index.create");
     expect(
-      resolveOperationAuthorization("searchDocuments", "upsert")
-        ?.requiredPermission,
+      resolveOperationAuthorization("searchDocuments", "upsert")?.requiredPermission,
     ).toBe("search.document.upsert");
     expect(
       resolveOperationAuthorization("searchExecutionHealth", "getHealth")
         ?.requiredPermission,
     ).toBe("search.execution.health");
     // Management validate remains; no query execution on searchQuery facet
+    expect(resolveOperationAuthorization("searchQuery", "query")).toBeUndefined();
     expect(
-      resolveOperationAuthorization("searchQuery", "query"),
-    ).toBeUndefined();
-    expect(
-      resolveOperationAuthorization("searchQuery", "validateQuery")
-        ?.requiredPermission,
+      resolveOperationAuthorization("searchQuery", "validateQuery")?.requiredPermission,
     ).toBe("search.validation.execute");
   });
 
@@ -309,10 +300,7 @@ describe("APZSEARCH-006 search execution", () => {
       },
     });
 
-    const wrapped = wrapSearchExecutionGatewayWithPipeline(
-      execution.impls,
-      pipeline,
-    );
+    const wrapped = wrapSearchExecutionGatewayWithPipeline(execution.impls, pipeline);
 
     await expect(
       wrapped.searchExecution.execute(svcCtx({ permissions: [] }), {
@@ -352,29 +340,26 @@ describe("APZSEARCH-006 search execution", () => {
       indexPrefix: "apzhub_",
     });
 
-    const created = await execution.domainGateway.searchIndexes.create(
-      searchCtx(),
-      { collectionId: "coll_docs", primaryKey: "id" },
-    );
+    const created = await execution.domainGateway.searchIndexes.create(searchCtx(), {
+      collectionId: "coll_docs",
+      primaryKey: "id",
+    });
     expect(created.id).toBe("coll_docs");
 
-    const upsert = await execution.domainGateway.searchDocuments.upsert(
-      searchCtx(),
-      {
-        collectionId: "coll_docs",
-        documents: [
-          {
-            id: "doc-42",
-            fields: {
-              title: "Hello",
-              entityType: "document",
-              productId: "documents",
-              sourceId: "src_1",
-            },
+    const upsert = await execution.domainGateway.searchDocuments.upsert(searchCtx(), {
+      collectionId: "coll_docs",
+      documents: [
+        {
+          id: "doc-42",
+          fields: {
+            title: "Hello",
+            entityType: "document",
+            productId: "documents",
+            sourceId: "src_1",
           },
-        ],
-      },
-    );
+        },
+      ],
+    });
     expect(upsert.accepted).toBe(1);
 
     const doc = await execution.domainGateway.searchDocuments.get(searchCtx(), {
@@ -394,16 +379,13 @@ describe("APZSEARCH-006 search execution", () => {
 
   it("health/diagnostics/capabilities surfaces are available", async () => {
     const execution = await createSearchExecutionServicesForTest();
-    const health = await execution.domainGateway.searchExecutionHealth.getHealth(
-      searchCtx(),
-    );
+    const health =
+      await execution.domainGateway.searchExecutionHealth.getHealth(searchCtx());
     expect(["available", "degraded", "unavailable", "unknown"]).toContain(
       health.status,
     );
     const readiness =
-      await execution.domainGateway.searchExecutionHealth.getReadiness(
-        searchCtx(),
-      );
+      await execution.domainGateway.searchExecutionHealth.getReadiness(searchCtx());
     expect(readiness.executionEnabled).toBe(true);
     const caps =
       await execution.domainGateway.searchExecutionDiagnostics.getCapabilities(

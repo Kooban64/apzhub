@@ -45,10 +45,8 @@ export function createSupportSearchAdapter(
   options: CreateSupportSearchAdapterOptions = {},
 ): SupportSearchAdapter {
   const integration =
-    options.integration ??
-    createSearchIntegration(options.searchIntegrationOptions);
-  const integrationPublisher =
-    options.integrationPublisher ?? integration.publisher;
+    options.integration ?? createSearchIntegration(options.searchIntegrationOptions);
+  const integrationPublisher = options.integrationPublisher ?? integration.publisher;
 
   const mapper = new SupportSearchEntityMapper();
   const validator = new SupportSearchEntityValidator();

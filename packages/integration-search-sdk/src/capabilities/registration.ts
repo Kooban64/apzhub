@@ -39,9 +39,7 @@ export interface SearchCapabilityDiscoveryFilter {
   readonly searchCapability?: SearchIntegrationCapabilityId;
 }
 
-function emptyPlatformResult(
-  manifest: AdapterManifest,
-): CapabilityRegistrationResult {
+function emptyPlatformResult(manifest: AdapterManifest): CapabilityRegistrationResult {
   return {
     ok: false,
     integrationId: manifest.integrationId,
@@ -157,9 +155,7 @@ export class SearchCapabilityRegistration {
   getDeclaredSearchCapabilities(
     integrationId: string,
   ): readonly SearchIntegrationCapabilityId[] {
-    return (this.searchRecords.get(integrationId) ?? []).map(
-      (r) => r.searchCapability,
-    );
+    return (this.searchRecords.get(integrationId) ?? []).map((r) => r.searchCapability);
   }
 
   hasSearchCapability(

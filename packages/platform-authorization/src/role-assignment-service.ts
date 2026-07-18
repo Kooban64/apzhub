@@ -1,5 +1,8 @@
 import type { AssignRoleInput, RoleAssignment } from "./authorization-types";
-import type { RoleAssignmentRepository, RoleRepository } from "./repositories/repository-interfaces";
+import type {
+  RoleAssignmentRepository,
+  RoleRepository,
+} from "./repositories/repository-interfaces";
 import type { AuthorizationEventPublisher } from "./authorization-events";
 
 export class RoleAssignmentService {
@@ -15,11 +18,21 @@ export class RoleAssignmentService {
       throw new Error(`Role not found: ${input.roleId}`);
     }
 
-    if (role.scope === "tenant" && input.tenantId && role.tenantId && role.tenantId !== input.tenantId) {
+    if (
+      role.scope === "tenant" &&
+      input.tenantId &&
+      role.tenantId &&
+      role.tenantId !== input.tenantId
+    ) {
       throw new Error("Tenant mismatch for tenant-scoped role assignment.");
     }
 
-    if (role.scope === "product" && input.productKey && role.productKey && role.productKey !== input.productKey) {
+    if (
+      role.scope === "product" &&
+      input.productKey &&
+      role.productKey &&
+      role.productKey !== input.productKey
+    ) {
       throw new Error("Product mismatch for product-scoped role assignment.");
     }
 

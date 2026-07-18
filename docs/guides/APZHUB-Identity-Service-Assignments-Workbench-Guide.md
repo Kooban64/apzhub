@@ -7,16 +7,16 @@
 
 A Service Assignment is a **metadata record** linking a subject (a user, group, or other identity entity — `subjectKind` + `subjectId`) to a downstream service capability (`serviceCapability`, e.g. `projects`, `documents`, `reporting`, `search`, `support`, `testing`, `administration`, `configuration`, `notifications`, `workflow-engine`/`workflows`). It answers "which services is this identity entity associated with?" — it does **not** grant, revoke, or provision anything in the target service.
 
-| Field | Type | Notes |
-| --- | --- | --- |
-| `id` | string | Platform-generated |
-| `tenantId` | string | — |
-| `subjectKind` | string | e.g. `user`, `group` |
-| `subjectId` | string | Foreign key to the subject within Identity metadata |
-| `serviceCapability` | string | Fixed catalogue (`SERVICE_CAPABILITY_OPTIONS`) |
-| `status` | string | Lifecycle status (e.g. `active`) |
-| `createdAt` / `updatedAt` | string | Audit timestamps |
-| `createdBy` / `updatedBy` | string | Actor user id |
+| Field                     | Type   | Notes                                               |
+| ------------------------- | ------ | --------------------------------------------------- |
+| `id`                      | string | Platform-generated                                  |
+| `tenantId`                | string | —                                                   |
+| `subjectKind`             | string | e.g. `user`, `group`                                |
+| `subjectId`               | string | Foreign key to the subject within Identity metadata |
+| `serviceCapability`       | string | Fixed catalogue (`SERVICE_CAPABILITY_OPTIONS`)      |
+| `status`                  | string | Lifecycle status (e.g. `active`)                    |
+| `createdAt` / `updatedAt` | string | Audit timestamps                                    |
+| `createdBy` / `updatedBy` | string | Actor user id                                       |
 
 ## Where it surfaces
 

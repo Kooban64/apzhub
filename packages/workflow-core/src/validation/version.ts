@@ -21,19 +21,14 @@ export function validateWorkflowVersion(
   const issues: WorkflowValidationIssue[] = [];
 
   if (input.versionNumber !== undefined) {
-    if (
-      !Number.isInteger(input.versionNumber) ||
-      input.versionNumber < 1
-    ) {
+    if (!Number.isInteger(input.versionNumber) || input.versionNumber < 1) {
       issues.push({
         code: "version",
         message: "versionNumber must be a positive integer",
         path: "versionNumber",
         severity: "error",
       });
-    } else if (
-      input.existingVersionNumbers?.includes(input.versionNumber)
-    ) {
+    } else if (input.existingVersionNumbers?.includes(input.versionNumber)) {
       issues.push({
         code: "version",
         message: `versionNumber ${input.versionNumber} already exists`,

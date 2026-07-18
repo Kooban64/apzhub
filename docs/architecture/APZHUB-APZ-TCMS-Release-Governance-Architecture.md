@@ -2,7 +2,7 @@
 
 **Milestone:** APZTCMS-014 — Release & Quality Governance Domain  
 **Status:** Implemented (domain + persistence + gateway facet; no HTTP/UI)  
-**Authority:** [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md) · Document 009  
+**Authority:** [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md) · Document 009
 
 > **Scope note:** Owner redefined APZTCMS-014 as **TCMS-only** Release & Quality Governance.  
 > Prior cross-product “Platform Quality Integration Layer” / Product Registry work is **superseded** for this milestone’s meaning and must not be treated as the 014 deliverable. See deprecated Platform Quality docs.
@@ -31,13 +31,13 @@ PostgreSQL (migrations 0029 / 0030)
 
 ## Packages
 
-| Package | Version |
-| ------- | ------- |
-| `@apzhub/testing-contracts` | **0.8.0** |
-| `@apzhub/testing-persistence` | **0.8.0** |
-| `@apzhub/testing-services` | **0.7.0** |
+| Package                              | Version    |
+| ------------------------------------ | ---------- |
+| `@apzhub/testing-contracts`          | **0.8.0**  |
+| `@apzhub/testing-persistence`        | **0.8.0**  |
+| `@apzhub/testing-services`           | **0.7.0**  |
 | `@apzhub/platform-service-contracts` | **0.10.0** |
-| `@apzhub/platform-services` | **0.10.0** |
+| `@apzhub/platform-services`          | **0.10.0** |
 
 ## Explicit exclusions
 

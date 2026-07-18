@@ -209,7 +209,9 @@ describe("runtime diagnostics API", () => {
       context: { correlationId, tenantId },
     });
 
-    expect(diagnostics.health?.checks.some((check) => check.name === "circuit_breaker")).toBe(true);
+    expect(
+      diagnostics.health?.checks.some((check) => check.name === "circuit_breaker"),
+    ).toBe(true);
     expect(diagnostics.circuitBreaker?.state).toBe("closed");
     expect(diagnostics.metrics?.requestsTotal).toBe(1);
     expect(diagnostics.errors?.totalErrors).toBe(1);

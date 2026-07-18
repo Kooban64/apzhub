@@ -19,10 +19,10 @@ Delivered the APZHUB Platform Notification foundation: contracts, domain core (l
 Products → Notification Platform → (future Delivery Providers)
 ```
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/notification-contracts` | **0.1.0** |
-| `@apzhub/notification-core` | **0.1.0** |
+| Package                            | Version   |
+| ---------------------------------- | --------- |
+| `@apzhub/notification-contracts`   | **0.1.0** |
+| `@apzhub/notification-core`        | **0.1.0** |
 | `@apzhub/notification-persistence` | **0.1.0** |
 
 ## Domain
@@ -52,21 +52,21 @@ Domain, lifecycle, validation, permission, in-memory persistence, mocked postgre
 
 See [APZNOTIFY-001 coverage baseline](../reviews/APZNOTIFY-001-coverage-baseline.md).
 
-| Metric | Combined |
-| --- | ---: |
-| Lines | **99.11%** |
+| Metric    |   Combined |
+| --------- | ---------: |
+| Lines     | **99.11%** |
 | Functions | **99.16%** |
-| Branches | **80.80%** |
+| Branches  | **80.80%** |
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| Architecture / dependency / boundary audit | PASS (`pnpm audit:notification-foundation`) |
-| Typecheck (notification packages) | PASS |
-| Lint (notification packages) | PASS |
-| Vitest | PASS |
-| Coverage ≥95% lines/functions · ≥80% branches | PASS |
+| Gate                                          | Result                                      |
+| --------------------------------------------- | ------------------------------------------- |
+| Architecture / dependency / boundary audit    | PASS (`pnpm audit:notification-foundation`) |
+| Typecheck (notification packages)             | PASS                                        |
+| Lint (notification packages)                  | PASS                                        |
+| Vitest                                        | PASS                                        |
+| Coverage ≥95% lines/functions · ≥80% branches | PASS                                        |
 
 ## Technical Debt
 

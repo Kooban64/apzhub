@@ -21,11 +21,7 @@ import { ObserveDomainError } from "../ports/repository-ports";
 function requireNonEmpty(value: string | undefined, field: string): string {
   const trimmed = value?.trim() ?? "";
   if (!trimmed) {
-    throw new ObserveDomainError(
-      "validation_error",
-      `${field} is required`,
-      { field },
-    );
+    throw new ObserveDomainError("validation_error", `${field} is required`, { field });
   }
   return trimmed;
 }
@@ -45,11 +41,9 @@ export function validateHealthCheck(input: HealthCheck): HealthCheck {
     });
   }
   if (!isObserveProviderKind(input.providerKind)) {
-    throw new ObserveDomainError(
-      "validation_error",
-      "providerKind is invalid",
-      { field: "providerKind" },
-    );
+    throw new ObserveDomainError("validation_error", "providerKind is invalid", {
+      field: "providerKind",
+    });
   }
   return input;
 }
@@ -59,18 +53,14 @@ export function validateServiceHealth(input: ServiceHealth): ServiceHealth {
   requireNonEmpty(input.serviceKey, "serviceKey");
   requireNonEmpty(input.displayName, "displayName");
   if (!isObserveHealthStatus(input.overallStatus)) {
-    throw new ObserveDomainError(
-      "validation_error",
-      "overallStatus is invalid",
-      { field: "overallStatus" },
-    );
+    throw new ObserveDomainError("validation_error", "overallStatus is invalid", {
+      field: "overallStatus",
+    });
   }
   return input;
 }
 
-export function validateMetricDefinition(
-  input: MetricDefinition,
-): MetricDefinition {
+export function validateMetricDefinition(input: MetricDefinition): MetricDefinition {
   requireNonEmpty(input.tenantId, "tenantId");
   requireNonEmpty(input.key, "key");
   requireNonEmpty(input.name, "name");
@@ -87,9 +77,7 @@ export function validateMetricDefinition(
   return input;
 }
 
-export function validateAlertDefinition(
-  input: AlertDefinition,
-): AlertDefinition {
+export function validateAlertDefinition(input: AlertDefinition): AlertDefinition {
   requireNonEmpty(input.tenantId, "tenantId");
   requireNonEmpty(input.key, "key");
   requireNonEmpty(input.name, "name");

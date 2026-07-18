@@ -28,11 +28,11 @@ No runtime application in this milestone.
 
 ## Packages
 
-| Package | Version | Role |
-| ------- | ------- | ---- |
-| `@apzhub/configuration-contracts` | 0.1.0 | Models, permissions, service interface |
-| `@apzhub/configuration-core` | 0.1.0 | Lifecycle, hierarchy precedence, validation metadata, versioning |
-| `@apzhub/configuration-persistence` | 0.1.0 | In-memory (tests) + PostgreSQL |
+| Package                             | Version | Role                                                             |
+| ----------------------------------- | ------- | ---------------------------------------------------------------- |
+| `@apzhub/configuration-contracts`   | 0.1.0   | Models, permissions, service interface                           |
+| `@apzhub/configuration-core`        | 0.1.0   | Lifecycle, hierarchy precedence, validation metadata, versioning |
+| `@apzhub/configuration-persistence` | 0.1.0   | In-memory (tests) + PostgreSQL                                   |
 
 ## Persistence
 

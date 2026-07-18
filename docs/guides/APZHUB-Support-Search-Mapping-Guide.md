@@ -7,13 +7,13 @@
 
 Imported from `@apzhub/platform-service-contracts` (`domain/support.ts`):
 
-| Entity type | Type |
-| ----------- | ---- |
-| support_request | `SupportTicket` |
-| support_article | `SupportArticle` |
+| Entity type          | Type                  |
+| -------------------- | --------------------- |
+| support_request      | `SupportTicket`       |
+| support_article      | `SupportArticle`      |
 | support_organisation | `SupportOrganization` |
-| support_group | `SupportGroup` |
-| support_user | `SupportUser` |
+| support_group        | `SupportGroup`        |
+| support_user         | `SupportUser`         |
 
 ## Field mapping (summary)
 

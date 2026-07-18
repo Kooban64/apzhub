@@ -162,7 +162,9 @@ export function discoverPlaneCoreServiceCapabilities(): readonly PlaneServiceCap
 export function getPlaneServiceCapability(
   serviceId: PlaneCoreServiceId,
 ): PlaneServiceCapability | undefined {
-  return PLANE_CORE_SERVICE_CAPABILITIES.find((capability) => capability.serviceId === serviceId);
+  return PLANE_CORE_SERVICE_CAPABILITIES.find(
+    (capability) => capability.serviceId === serviceId,
+  );
 }
 
 export const PLANE_CORE_SERVICE_IDS = PLANE_CORE_SERVICE_CAPABILITIES.map(

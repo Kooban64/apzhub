@@ -43,9 +43,7 @@ export function precedenceRankForHierarchyLevel(
 export function sortOverridesByPrecedence(
   overrides: readonly ConfigurationOverride[],
 ): readonly ConfigurationOverride[] {
-  return [...overrides].sort(
-    (a, b) => a.precedenceRank - b.precedenceRank,
-  );
+  return [...overrides].sort((a, b) => a.precedenceRank - b.precedenceRank);
 }
 
 export function assertValidHierarchyLevel(level: string): ConfigurationHierarchyLevel {

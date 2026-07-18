@@ -8,12 +8,12 @@
 
 ## Measured (Vitest v8, scoped to `packages/workflow-*`)
 
-| Package | Lines | Functions | Branches | Statements |
-| --- | ---: | ---: | ---: | ---: |
-| `@apzhub/workflow-contracts` | **100.00%** | **100.00%** | **100.00%** | **100.00%** |
-| `@apzhub/workflow-core` | **99.60%** | **100.00%** | **96.40%** | **99.60%** |
-| `@apzhub/workflow-persistence` | **99.06%** | **98.15%** | **80.74%** | **99.06%** |
-| **Combined** | **99.37%** | **98.92%** | **89.05%** | **99.37%** |
+| Package                        |       Lines |   Functions |    Branches |  Statements |
+| ------------------------------ | ----------: | ----------: | ----------: | ----------: |
+| `@apzhub/workflow-contracts`   | **100.00%** | **100.00%** | **100.00%** | **100.00%** |
+| `@apzhub/workflow-core`        |  **99.60%** | **100.00%** |  **96.40%** |  **99.60%** |
+| `@apzhub/workflow-persistence` |  **99.06%** |  **98.15%** |  **80.74%** |  **99.06%** |
+| **Combined**                   |  **99.37%** |  **98.92%** |  **89.05%** |  **99.37%** |
 
 Type-only contract modules (`common/`, `domain/`, `services/`) are excluded from coverage (no executable statements).
 

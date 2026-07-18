@@ -14,9 +14,7 @@ import {
   resolveOperationAuthorization,
 } from "../../index";
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_docs",
     userId: "user_docs",
@@ -36,16 +34,14 @@ describe("APZDOCS-003 document platform services", () => {
 
   it("maps gateway operations to document permissions (no allow-all)", () => {
     expect(
-      resolveOperationAuthorization("documentService", "create")
-        ?.requiredPermission,
+      resolveOperationAuthorization("documentService", "create")?.requiredPermission,
     ).toBe("document.create");
     expect(
       resolveOperationAuthorization("documentStorage", "inspectReconciliation")
         ?.requiredPermission,
     ).toBe("document.reconciliation.read");
     expect(
-      resolveOperationAuthorization("documentFolder", "assign")
-        ?.requiredPermission,
+      resolveOperationAuthorization("documentFolder", "assign")?.requiredPermission,
     ).toBe("document.folder.write");
   });
 
@@ -122,10 +118,7 @@ describe("APZDOCS-003 document platform services", () => {
         mimeType: "text/plain",
       },
     );
-    const versions = await bundle.gateway.documentVersions.list(
-      request,
-      created.id,
-    );
+    const versions = await bundle.gateway.documentVersions.list(request, created.id);
     expect(versions).toHaveLength(1);
     const meta = await bundle.gateway.documentStorage.getStorageMetadata(
       request,
@@ -135,9 +128,8 @@ describe("APZDOCS-003 document platform services", () => {
     expect(meta.version.checksumHex).toBeTruthy();
     expect(meta).not.toHaveProperty("bytes");
 
-    const diagnostics = await bundle.gateway.documentDiagnostics.getDiagnostics(
-      request,
-    );
+    const diagnostics =
+      await bundle.gateway.documentDiagnostics.getDiagnostics(request);
     expect(diagnostics.providerReady).toBe(true);
     expect(diagnostics.checksumReady).toBe(true);
     expect(JSON.stringify(diagnostics)).not.toMatch(/\/tmp|secret|AKIA/);
@@ -166,15 +158,12 @@ describe("APZDOCS-003 document platform services", () => {
       title: "Private",
     });
     const other = ctx({ tenantId: "other_tenant" });
-    await expect(
-      bundle.gateway.documents.get(other, doc.id),
-    ).rejects.toBeTruthy();
+    await expect(bundle.gateway.documents.get(other, doc.id)).rejects.toBeTruthy();
   });
 
   it("production factory requires postgres and configured storage", async () => {
-    const { createDocumentPlatformServicesForProduction } = await import(
-      "./create-document-platform-services"
-    );
+    const { createDocumentPlatformServicesForProduction } =
+      await import("./create-document-platform-services");
     await expect(
       createDocumentPlatformServicesForProduction({
         postgresDb: undefined as never,

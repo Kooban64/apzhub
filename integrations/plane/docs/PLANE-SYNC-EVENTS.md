@@ -8,10 +8,10 @@
 
 ## Capabilities
 
-| Service | Access | Role |
-|---------|--------|------|
-| Webhooks | `adapter.core.webhooks` | Create / update / delete / list / validate Plane CE webhooks |
-| Events | `adapter.core.events` | Translate Plane webhook payloads → canonical APZHUB events |
+| Service         | Access                         | Role                                                               |
+| --------------- | ------------------------------ | ------------------------------------------------------------------ |
+| Webhooks        | `adapter.core.webhooks`        | Create / update / delete / list / validate Plane CE webhooks       |
+| Events          | `adapter.core.events`          | Translate Plane webhook payloads → canonical APZHUB events         |
 | Synchronisation | `adapter.core.synchronisation` | Full / incremental sync APIs, cursors, resume tokens, safe restart |
 
 Capability registration IDs: `webhooks`, `events`, `synchronisation`.
@@ -69,13 +69,13 @@ adapter.core.synchronisation.getLastSyncTimestamp();
 adapter.core.synchronisation.safeRestart();
 ```
 
-| Concern | Behaviour |
-|---------|-----------|
-| Full sync | Lists projects + issues (no `updated_at` filter) |
-| Incremental | Uses `updated_at__gte` from `since` / last success / resume token |
-| Resume tokens | Base64url JSON cursor payload |
-| Safe restart | Clears stuck `running` status |
-| Scheduling / workers | **Not implemented** — APIs only |
+| Concern              | Behaviour                                                         |
+| -------------------- | ----------------------------------------------------------------- |
+| Full sync            | Lists projects + issues (no `updated_at` filter)                  |
+| Incremental          | Uses `updated_at__gte` from `since` / last success / resume token |
+| Resume tokens        | Base64url JSON cursor payload                                     |
+| Safe restart         | Clears stuck `running` status                                     |
+| Scheduling / workers | **Not implemented** — APIs only                                   |
 
 `SyncStatus` includes last success/fail, records processed, duration, provider latency, errors, cursor.
 
@@ -104,11 +104,11 @@ No PlatformService changes, HTTP routes, UI, background scheduler, workers, noti
 
 Additive Integration SDK contracts (`@apzhub/integration-sdk/events` v0.8.0) — public webhook/sync/event APIs unchanged:
 
-| Helper | Role |
-|--------|------|
-| `asPlaneWebhookManager` | Wraps `PlaneWebhookService` as SDK `WebhookManager` |
+| Helper                               | Role                                                        |
+| ------------------------------------ | ----------------------------------------------------------- |
+| `asPlaneWebhookManager`              | Wraps `PlaneWebhookService` as SDK `WebhookManager`         |
 | `translatePlaneWebhookToSourceEvent` | Bridges `EventTranslationResult` → `IntegrationSourceEvent` |
-| `createPlanePollingSource` | Wraps synchronisation as SDK `PollingSource` |
+| `createPlanePollingSource`           | Wraps synchronisation as SDK `PollingSource`                |
 
 No HTTP ingress, Event Bus publish, workers, or schedulers. See [EVENT-ENVELOPE.md](../../packages/integration-sdk/docs/EVENT-ENVELOPE.md) · [WEBHOOK-POLLING-MIGRATION.md](../../packages/integration-sdk/docs/WEBHOOK-POLLING-MIGRATION.md).
 

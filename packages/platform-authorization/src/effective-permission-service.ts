@@ -105,7 +105,11 @@ export class EffectivePermissionService {
       }
 
       if (role.scope === "tenant") {
-        if (context.tenantId && assignment.tenantId && assignment.tenantId !== context.tenantId) {
+        if (
+          context.tenantId &&
+          assignment.tenantId &&
+          assignment.tenantId !== context.tenantId
+        ) {
           return false;
         }
         if (role.tenantId && context.tenantId && role.tenantId !== context.tenantId) {
@@ -115,10 +119,18 @@ export class EffectivePermissionService {
       }
 
       if (role.scope === "product") {
-        if (context.productKey && assignment.productKey && assignment.productKey !== context.productKey) {
+        if (
+          context.productKey &&
+          assignment.productKey &&
+          assignment.productKey !== context.productKey
+        ) {
           return false;
         }
-        if (role.productKey && context.productKey && role.productKey !== context.productKey) {
+        if (
+          role.productKey &&
+          context.productKey &&
+          role.productKey !== context.productKey
+        ) {
           return false;
         }
         return true;
@@ -139,10 +151,20 @@ export function listApplicableRoles(
 ): readonly PlatformRole[] {
   return roles.filter((role) => {
     if (role.status !== "active") return false;
-    if (role.scope === "tenant" && role.tenantId && context.tenantId && role.tenantId !== context.tenantId) {
+    if (
+      role.scope === "tenant" &&
+      role.tenantId &&
+      context.tenantId &&
+      role.tenantId !== context.tenantId
+    ) {
       return false;
     }
-    if (role.scope === "product" && role.productKey && context.productKey && role.productKey !== context.productKey) {
+    if (
+      role.scope === "product" &&
+      role.productKey &&
+      context.productKey &&
+      role.productKey !== context.productKey
+    ) {
       return false;
     }
     return true;

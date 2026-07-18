@@ -62,9 +62,7 @@ export function createReportingSearchPublicationContext(input: {
     (hasServiceShape(ctx) ? ctx.permissions : undefined);
 
   if (!permissions) {
-    throw new Error(
-      "permissions are required on Reporting Search publication context",
-    );
+    throw new Error("permissions are required on Reporting Search publication context");
   }
 
   const correlationId =
@@ -75,9 +73,7 @@ export function createReportingSearchPublicationContext(input: {
 
   return {
     correlationId,
-    requestId:
-      input.requestId ??
-      (hasServiceShape(ctx) ? ctx.requestId : undefined),
+    requestId: input.requestId ?? (hasServiceShape(ctx) ? ctx.requestId : undefined),
     actorUserId: ctx.userId,
     tenantId: ctx.tenantId,
     organisationId:
@@ -85,10 +81,8 @@ export function createReportingSearchPublicationContext(input: {
       ctx.organisationId ??
       (hasServiceShape(ctx) ? ctx.organisationId : undefined),
     workspaceId:
-      input.workspaceId ??
-      (hasServiceShape(ctx) ? ctx.workspaceId : undefined),
-    locale:
-      input.locale ?? (hasServiceShape(ctx) ? ctx.locale : undefined),
+      input.workspaceId ?? (hasServiceShape(ctx) ? ctx.workspaceId : undefined),
+    locale: input.locale ?? (hasServiceShape(ctx) ? ctx.locale : undefined),
     permissions,
     // Fail-closed: default confidential when not provided.
     classification: input.classification ?? "confidential",

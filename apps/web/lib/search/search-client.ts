@@ -58,9 +58,7 @@ export interface SearchClient {
     options?: SearchClientRequestOptions,
   ): Promise<SearchCapabilitiesViewModel>;
   getHealth(options?: SearchClientRequestOptions): Promise<SearchHealthViewModel>;
-  getReadiness(
-    options?: SearchClientRequestOptions,
-  ): Promise<SearchReadinessViewModel>;
+  getReadiness(options?: SearchClientRequestOptions): Promise<SearchReadinessViewModel>;
   getDiagnostics(
     options?: SearchClientRequestOptions,
   ): Promise<SearchDiagnosticsViewModel>;
@@ -130,9 +128,7 @@ function mapHit(raw: unknown): SearchHitViewModel {
     classification:
       meta.classification !== undefined ? String(meta.classification) : undefined,
     navigationTarget:
-      meta.navigationTarget !== undefined
-        ? String(meta.navigationTarget)
-        : undefined,
+      meta.navigationTarget !== undefined ? String(meta.navigationTarget) : undefined,
     highlightSnippets: snippets,
   };
 }
@@ -161,8 +157,7 @@ function mapResponse(raw: unknown): SearchResponseViewModel {
     hasMore: Boolean(page.hasMore),
     suggestions: mapSuggestions(page.suggestions),
     tookMs: page.tookMs !== undefined ? Number(page.tookMs) : undefined,
-    providerId:
-      root.providerId !== undefined ? String(root.providerId) : undefined,
+    providerId: root.providerId !== undefined ? String(root.providerId) : undefined,
   };
 }
 
@@ -336,9 +331,7 @@ async function requestJson<T>(
     },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiSuccessEnvelope<T>
-    | ApiCollectionEnvelope<unknown>
-    | ApiErrorEnvelope;
+    ApiSuccessEnvelope<T> | ApiCollectionEnvelope<unknown> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new SearchClientError({

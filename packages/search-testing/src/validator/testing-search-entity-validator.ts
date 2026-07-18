@@ -176,10 +176,7 @@ export class TestingSearchEntityValidator {
     if (isTestingSearchEntityType(draft.entityType)) {
       const mandatory = MANDATORY_BY_TYPE[draft.entityType] ?? [];
       for (const key of mandatory) {
-        if (
-          metadata[key] === undefined ||
-          String(metadata[key]).trim().length === 0
-        ) {
+        if (metadata[key] === undefined || String(metadata[key]).trim().length === 0) {
           issues.push({
             field: `metadata.${key}`,
             code: "required",

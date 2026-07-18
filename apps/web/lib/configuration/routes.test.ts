@@ -20,22 +20,18 @@ describe("configuration routes", () => {
   });
 
   it("rejects paths outside configuration base", () => {
-    expect(() => assertConfigurationApiPath("/api/v1/projects")).toThrow(
-      /only call/,
-    );
+    expect(() => assertConfigurationApiPath("/api/v1/projects")).toThrow(/only call/);
   });
 
   it("resolves workspace sections", () => {
     expect(isConfigurationRoute(CONFIGURATION_WORKSPACE_BASE)).toBe(true);
-    expect(resolveConfigurationSection("/workspace/configuration")).toBe(
+    expect(resolveConfigurationSection("/workspace/configuration")).toBe("overview");
+    expect(resolveConfigurationSection("/workspace/configuration/versions")).toBe(
+      "versions",
+    );
+    expect(resolveConfigurationSection("/workspace/configuration/unknown")).toBe(
       "overview",
     );
-    expect(
-      resolveConfigurationSection("/workspace/configuration/versions"),
-    ).toBe("versions");
-    expect(
-      resolveConfigurationSection("/workspace/configuration/unknown"),
-    ).toBe("overview");
     expect(configurationSectionPath("diagnostics")).toBe(
       "/workspace/configuration/diagnostics",
     );

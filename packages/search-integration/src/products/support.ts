@@ -11,9 +11,8 @@ export const SUPPORT_SEARCH_ENTITY_TYPES = [
   "organization",
 ] as const;
 
-export const SupportSearchPublicationContract: ProductSearchPublicationContract =
-  {
-    productId: "support",
-    label: "Support",
-    supportedEntityTypes: SUPPORT_SEARCH_ENTITY_TYPES,
-  };
+export const SupportSearchPublicationContract: ProductSearchPublicationContract = {
+  productId: "support",
+  label: "Support",
+  supportedEntityTypes: SUPPORT_SEARCH_ENTITY_TYPES,
+};

@@ -29,9 +29,7 @@ import {
   validateDocumentStorageConfig,
 } from "./index";
 
-function ctx(
-  overrides?: Partial<DocumentRequestContext>,
-): DocumentRequestContext {
+function ctx(overrides?: Partial<DocumentRequestContext>): DocumentRequestContext {
   return {
     tenantId: "tenant_1",
     userId: "user_1",
@@ -175,10 +173,7 @@ describe("APZDOCS-002 document-core", () => {
     expect(sha256Hex(collected)).toBe(hex);
 
     await expect(
-      integrity.collect(
-        { kind: "bytes", bytes: new Uint8Array(20) },
-        { maxBytes: 10 },
-      ),
+      integrity.collect({ kind: "bytes", bytes: new Uint8Array(20) }, { maxBytes: 10 }),
     ).rejects.toThrow(/max/i);
   });
 

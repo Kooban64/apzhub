@@ -12,16 +12,16 @@ APZ TCMS stores **artifact references only**. Binaries are never downloaded, upl
 
 ## ArtifactReference fields
 
-| Field | Purpose |
-| ----- | ------- |
-| `name` | Display / identity label |
-| `sizeBytes` | Optional size metadata |
-| `type` | MIME or logical type |
-| `checksum` | Integrity fingerprint (e.g. sha256) |
-| `storageProvider` | Hint (s3, gcs, azure_blob, …) |
-| `uriReference` | Opaque URI or locator string |
-| `createdAt` | Creation timestamp |
-| `retentionDays` / `retentionUntil` | Retention metadata |
+| Field                              | Purpose                             |
+| ---------------------------------- | ----------------------------------- |
+| `name`                             | Display / identity label            |
+| `sizeBytes`                        | Optional size metadata              |
+| `type`                             | MIME or logical type                |
+| `checksum`                         | Integrity fingerprint (e.g. sha256) |
+| `storageProvider`                  | Hint (s3, gcs, azure_blob, …)       |
+| `uriReference`                     | Opaque URI or locator string        |
+| `createdAt`                        | Creation timestamp                  |
+| `retentionDays` / `retentionUntil` | Retention metadata                  |
 
 ---
 
@@ -35,9 +35,9 @@ APZ TCMS stores **artifact references only**. Binaries are never downloaded, upl
 
 ## Explicit non-goals
 
-- Artifact download APIs  
-- Binary storage buckets owned by TCMS CI/CD domain  
-- Streaming log content  
+- Artifact download APIs
+- Binary storage buckets owned by TCMS CI/CD domain
+- Streaming log content
 - Retention enforcement jobs (metadata only)
 
 ---

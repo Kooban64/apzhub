@@ -10,8 +10,6 @@ import {
 import { methodNotAllowedResponse } from "@/lib/api/v1/response";
 import { createPlatformApiTracing } from "@/lib/api/v1/request-context";
 
-const ALLOWED = ["GET","PATCH"] as const;
-
 export const GET = withPlatformApiAuth(handleGetConfigurationOverride, {
   operation: "configuration.overrides.get",
 });
@@ -21,13 +19,25 @@ export const PATCH = withPlatformApiAuth(handleUpdateConfigurationOverride, {
 });
 
 export async function POST(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","PATCH"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "PATCH"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }
 
 export async function PUT(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","PATCH"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "PATCH"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }
 
 export async function DELETE(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","PATCH"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "PATCH"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }

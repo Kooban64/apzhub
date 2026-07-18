@@ -40,20 +40,20 @@ Client (safe message only)
 
 ## Error categories
 
-| Category | Retryable | Typical vendor signals |
-|----------|-----------|------------------------|
-| `authentication` | No* | 401, invalid token, expired session |
-| `authorization` | No | 403, insufficient scope |
-| `validation` | No | 400, 422, schema validation |
-| `not_found` | No | 404 |
-| `conflict` | No | 409, duplicate key |
-| `rate_limited` | Yes | 429, Retry-After |
-| `vendor_unavailable` | Yes | 502, 503, connection refused |
-| `timeout` | Yes | Request timeout, socket hang |
-| `mapping` | No | Unknown vendor ID, broken entity map |
-| `provisioning` | Conditional | Workspace create failed |
-| `version_incompatible` | No | Unsupported API version |
-| `internal` | No | Unmapped vendor error — logged with correlation ID |
+| Category               | Retryable   | Typical vendor signals                             |
+| ---------------------- | ----------- | -------------------------------------------------- |
+| `authentication`       | No*         | 401, invalid token, expired session                |
+| `authorization`        | No          | 403, insufficient scope                            |
+| `validation`           | No          | 400, 422, schema validation                        |
+| `not_found`            | No          | 404                                                |
+| `conflict`             | No          | 409, duplicate key                                 |
+| `rate_limited`         | Yes         | 429, Retry-After                                   |
+| `vendor_unavailable`   | Yes         | 502, 503, connection refused                       |
+| `timeout`              | Yes         | Request timeout, socket hang                       |
+| `mapping`              | No          | Unknown vendor ID, broken entity map               |
+| `provisioning`         | Conditional | Workspace create failed                            |
+| `version_incompatible` | No          | Unsupported API version                            |
+| `internal`             | No          | Unmapped vendor error — logged with correlation ID |
 
 *Auth may retry once after token refresh via `AuthenticationProvider`.
 
@@ -64,12 +64,12 @@ Client (safe message only)
 ```typescript
 interface IntegrationError {
   readonly category: IntegrationErrorCategory;
-  readonly code: string;              // stable — e.g. "plane.issue.not_found"
-  readonly message: string;           // operator-safe — not raw vendor text
+  readonly code: string; // stable — e.g. "plane.issue.not_found"
+  readonly message: string; // operator-safe — not raw vendor text
   readonly retryable: boolean;
   readonly correlationId: string;
   readonly vendorStatusCode?: number;
-  readonly details?: Readonly<Record<string, string>>;  // opaque IDs only
+  readonly details?: Readonly<Record<string, string>>; // opaque IDs only
 }
 ```
 
@@ -90,8 +90,8 @@ interface VendorErrorMapper {
 interface VendorErrorInput {
   readonly statusCode?: number;
   readonly vendorCode?: string;
-  readonly vendorMessage?: string;   // adapter-internal — discarded after map
-  readonly body?: unknown;           // never forwarded
+  readonly vendorMessage?: string; // adapter-internal — discarded after map
+  readonly body?: unknown; // never forwarded
   readonly context: ErrorTranslationContext;
 }
 ```
@@ -104,18 +104,18 @@ Mapper returns `null` to fall through to SDK defaults.
 
 When vendor mapper returns `null`:
 
-| Condition | Category |
-|-----------|----------|
-| Status 401 | `authentication` |
-| Status 403 | `authorization` |
-| Status 404 | `not_found` |
-| Status 409 | `conflict` |
-| Status 422, 400 | `validation` |
-| Status 429 | `rate_limited` |
+| Condition       | Category             |
+| --------------- | -------------------- |
+| Status 401      | `authentication`     |
+| Status 403      | `authorization`      |
+| Status 404      | `not_found`          |
+| Status 409      | `conflict`           |
+| Status 422, 400 | `validation`         |
+| Status 429      | `rate_limited`       |
 | Status 502, 503 | `vendor_unavailable` |
-| Timeout | `timeout` |
-| Network error | `vendor_unavailable` |
-| Unknown | `internal` |
+| Timeout         | `timeout`            |
+| Network error   | `vendor_unavailable` |
+| Unknown         | `internal`           |
 
 ---
 
@@ -123,17 +123,17 @@ When vendor mapper returns `null`:
 
 Capability Services map `IntegrationError` to platform API envelope:
 
-| Integration category | Platform envelope category (010) |
-|---------------------|----------------------------------|
-| `authentication` | `UNAUTHORIZED` |
-| `authorization` | `FORBIDDEN` |
-| `validation` | `VALIDATION_ERROR` |
-| `not_found` | `NOT_FOUND` |
-| `conflict` | `CONFLICT` |
-| `rate_limited` | `RATE_LIMITED` |
-| `vendor_unavailable`, `timeout` | `SERVICE_UNAVAILABLE` |
-| `mapping`, `provisioning`, `version_incompatible` | `INTEGRATION_ERROR` |
-| `internal` | `INTERNAL_ERROR` |
+| Integration category                              | Platform envelope category (010) |
+| ------------------------------------------------- | -------------------------------- |
+| `authentication`                                  | `UNAUTHORIZED`                   |
+| `authorization`                                   | `FORBIDDEN`                      |
+| `validation`                                      | `VALIDATION_ERROR`               |
+| `not_found`                                       | `NOT_FOUND`                      |
+| `conflict`                                        | `CONFLICT`                       |
+| `rate_limited`                                    | `RATE_LIMITED`                   |
+| `vendor_unavailable`, `timeout`                   | `SERVICE_UNAVAILABLE`            |
+| `mapping`, `provisioning`, `version_incompatible` | `INTEGRATION_ERROR`              |
+| `internal`                                        | `INTERNAL_ERROR`                 |
 
 User-facing messages use APZHUB terminology (002) — e.g. "Task not found", never "Issue not found".
 
@@ -141,12 +141,12 @@ User-facing messages use APZHUB terminology (002) — e.g. "Task not found", nev
 
 ## Retry interaction
 
-| Category | RetryPolicy | CircuitBreaker |
-|----------|-------------|----------------|
-| `rate_limited` | Yes — honour Retry-After | No trip |
-| `vendor_unavailable`, `timeout` | Yes — exponential backoff | Counts toward open |
-| `authentication` | Once after refresh | Trip on repeated fail |
-| All others | No | No trip |
+| Category                        | RetryPolicy               | CircuitBreaker        |
+| ------------------------------- | ------------------------- | --------------------- |
+| `rate_limited`                  | Yes — honour Retry-After  | No trip               |
+| `vendor_unavailable`, `timeout` | Yes — exponential backoff | Counts toward open    |
+| `authentication`                | Once after refresh        | Trip on repeated fail |
+| All others                      | No                        | No trip               |
 
 ---
 
@@ -173,12 +173,12 @@ Minimum coverage defined in OSS-100-09 certification phase.
 
 ## Plane reference mapping (illustrative)
 
-| Plane signal | Integration category | APZHUB code |
-|--------------|---------------------|-------------|
-| Invalid API token | `authentication` | `plane.auth.invalid_token` |
-| Workspace not found | `not_found` | `plane.workspace.not_found` |
-| Issue state invalid | `validation` | `plane.task.invalid_transition` |
-| Rate limit | `rate_limited` | `plane.rate_limited` |
+| Plane signal        | Integration category | APZHUB code                     |
+| ------------------- | -------------------- | ------------------------------- |
+| Invalid API token   | `authentication`     | `plane.auth.invalid_token`      |
+| Workspace not found | `not_found`          | `plane.workspace.not_found`     |
+| Issue state invalid | `validation`         | `plane.task.invalid_transition` |
+| Rate limit          | `rate_limited`       | `plane.rate_limited`            |
 
 Full mapping authored in OSS-101-04 adapter implementation — not in OSS-100.
 

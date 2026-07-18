@@ -16,18 +16,18 @@ M8-01 delivers the platform-owned tenant foundation: entities, management servic
 
 ## Deliverables
 
-| # | Deliverable | Location | Status |
-| - | ----------- | -------- | ------ |
-| 1 | Platform Identity Reference Architecture | [APZHUB-Platform-Identity-Reference-Architecture.md](../architecture/APZHUB-Platform-Identity-Reference-Architecture.md) | ✅ |
-| 2 | Platform Tenant Architecture | [APZHUB-Platform-Tenant-Architecture.md](../architecture/APZHUB-Platform-Tenant-Architecture.md) | ✅ |
-| 3 | ADR-0040 Platform Tenant Foundation | [ADR-0040-platform-tenant-foundation.md](../adr/ADR-0040-platform-tenant-foundation.md) | ✅ |
-| 4 | `@apzhub/platform-identity` package | `packages/platform-identity/` | ✅ |
-| 5 | PostgreSQL schema + migration | `0011_platform_identity.sql` | ✅ |
-| 6 | Auth session tenant enrichment | `packages/auth/src/tenant-session.ts`, `session.ts` | ✅ |
-| 7 | Law tenant resolver session-claim | `apps/law-platform/lib/persistence/tenant-resolver.ts` | ✅ |
-| 8 | Platform API routes | `/api/platform/v1/tenants`, `/api/platform/v1/identity/diagnostics` | ✅ |
-| 9 | Unit tests | `tenant-management-service.test.ts`, persistence hardening | ✅ |
-| 10 | This completion report | `docs/sprint/M8-01-completion-report.md` | ✅ |
+| #   | Deliverable                              | Location                                                                                                                 | Status |
+| --- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------ |
+| 1   | Platform Identity Reference Architecture | [APZHUB-Platform-Identity-Reference-Architecture.md](../architecture/APZHUB-Platform-Identity-Reference-Architecture.md) | ✅     |
+| 2   | Platform Tenant Architecture             | [APZHUB-Platform-Tenant-Architecture.md](../architecture/APZHUB-Platform-Tenant-Architecture.md)                         | ✅     |
+| 3   | ADR-0040 Platform Tenant Foundation      | [ADR-0040-platform-tenant-foundation.md](../adr/ADR-0040-platform-tenant-foundation.md)                                  | ✅     |
+| 4   | `@apzhub/platform-identity` package      | `packages/platform-identity/`                                                                                            | ✅     |
+| 5   | PostgreSQL schema + migration            | `0011_platform_identity.sql`                                                                                             | ✅     |
+| 6   | Auth session tenant enrichment           | `packages/auth/src/tenant-session.ts`, `session.ts`                                                                      | ✅     |
+| 7   | Law tenant resolver session-claim        | `apps/law-platform/lib/persistence/tenant-resolver.ts`                                                                   | ✅     |
+| 8   | Platform API routes                      | `/api/platform/v1/tenants`, `/api/platform/v1/identity/diagnostics`                                                      | ✅     |
+| 9   | Unit tests                               | `tenant-management-service.test.ts`, persistence hardening                                                               | ✅     |
+| 10  | This completion report                   | `docs/sprint/M8-01-completion-report.md`                                                                                 | ✅     |
 
 ---
 
@@ -63,22 +63,22 @@ M8-01 delivers the platform-owned tenant foundation: entities, management servic
 
 ## TD-P02 status
 
-| Before | After M8-01 |
-| ------ | ----------- |
+| Before                                                            | After M8-01                                                                                                     |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | No tenant on auth session; resolvers used `DEFAULT_LAW_TENANT_ID` | Session carries `tenantId` when membership/active tenant exists; session-claim is first-class resolution source |
-| Multi-tenant bypass in validation | **Partially resolved** — RBAC and full tenant admin remain M8-02+ |
+| Multi-tenant bypass in validation                                 | **Partially resolved** — RBAC and full tenant admin remain M8-02+                                               |
 
 ---
 
 ## Quality gates
 
-| Gate | Result |
-| ---- | ------ |
-| `pnpm lint` | ✅ Pass |
-| `pnpm typecheck` | ✅ Pass |
-| `pnpm build` | ✅ Pass |
-| `pnpm test` | ✅ 1851 passed, 44 skipped (371 files) |
-| `pnpm test:coverage` | ✅ Pass (≥80% thresholds) |
+| Gate                 | Result                                 |
+| -------------------- | -------------------------------------- |
+| `pnpm lint`          | ✅ Pass                                |
+| `pnpm typecheck`     | ✅ Pass                                |
+| `pnpm build`         | ✅ Pass                                |
+| `pnpm test`          | ✅ 1851 passed, 44 skipped (371 files) |
+| `pnpm test:coverage` | ✅ Pass (≥80% thresholds)              |
 
 ---
 

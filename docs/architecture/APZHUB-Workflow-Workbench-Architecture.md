@@ -20,17 +20,17 @@ Workbench (PlatformWorkflowsView)
 
 ## Sections
 
-| Section | Path | Content |
-|---------|------|---------|
-| Overview | `/workspace/workflows/overview` | Status cards; Execution Status always "Workflow Execution Not Available" |
-| Workflows | `/workspace/workflows/workflows` | Library + detail, definition viewer/graph, dependencies, lifecycle |
-| Versions | `/workspace/workflows/versions` | Version list, compare, definition viewer/graph |
-| Templates | `/workspace/workflows/templates` | Template list/detail (no editor) |
-| Categories | `/workspace/workflows/categories` | Category catalogue |
-| Folders | `/workspace/workflows/folders` | Folder catalogue |
-| Validation | `/workspace/workflows/validation` | Issues grouped by severity |
-| Audit | `/workspace/workflows/audit` | Audit timeline |
-| Diagnostics | `/workspace/workflows/diagnostics` | Capabilities / health / readiness; execution unavailable |
+| Section     | Path                               | Content                                                                  |
+| ----------- | ---------------------------------- | ------------------------------------------------------------------------ |
+| Overview    | `/workspace/workflows/overview`    | Status cards; Execution Status always "Workflow Execution Not Available" |
+| Workflows   | `/workspace/workflows/workflows`   | Library + detail, definition viewer/graph, dependencies, lifecycle       |
+| Versions    | `/workspace/workflows/versions`    | Version list, compare, definition viewer/graph                           |
+| Templates   | `/workspace/workflows/templates`   | Template list/detail (no editor)                                         |
+| Categories  | `/workspace/workflows/categories`  | Category catalogue                                                       |
+| Folders     | `/workspace/workflows/folders`     | Folder catalogue                                                         |
+| Validation  | `/workspace/workflows/validation`  | Issues grouped by severity                                               |
+| Audit       | `/workspace/workflows/audit`       | Audit timeline                                                           |
+| Diagnostics | `/workspace/workflows/diagnostics` | Capabilities / health / readiness; execution unavailable                 |
 
 ## Commands
 

@@ -112,7 +112,12 @@ export class SearchProviderCapabilities {
     if (capabilities.highlighting) declared.push("highlighting");
     if (capabilities.suggestions) declared.push("suggestions");
     if (capabilities.pagination) declared.push("pagination");
-    declared.push("index_lifecycle", "health", "diagnostics", "configuration_validation");
+    declared.push(
+      "index_lifecycle",
+      "health",
+      "diagnostics",
+      "configuration_validation",
+    );
     return new SearchProviderCapabilities(declared);
   }
 }

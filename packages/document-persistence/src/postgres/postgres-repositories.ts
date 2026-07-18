@@ -17,13 +17,10 @@ import type {
   Document,
   DocumentAudit,
   DocumentContentVersionRecord,
-  DocumentId,
   DocumentMetadata,
   DocumentRelationship,
-  DocumentRequestContext,
   DocumentStorageObjectRecord,
   DocumentTag,
-  DocumentVersionId,
 } from "@apzhub/document-contracts";
 import {
   asDocumentId,
@@ -242,9 +239,7 @@ export function createPostgresDocumentRepositories(db: DatabaseExecutor): {
             lifecycleReason: document.lifecycle.reason,
             currentVersionId: document.currentVersionId,
             updatedAt: new Date(document.updatedAt),
-            archivedAt: document.archivedAt
-              ? new Date(document.archivedAt)
-              : null,
+            archivedAt: document.archivedAt ? new Date(document.archivedAt) : null,
             deletedAt: document.deletedAt ? new Date(document.deletedAt) : null,
           })
           .where(
@@ -343,14 +338,12 @@ export function createPostgresDocumentRepositories(db: DatabaseExecutor): {
           .from(platformDocumentTag)
           .where(eq(platformDocumentTag.tenantId, ctx.tenantId))
           .orderBy(asc(platformDocumentTag.name));
-        return rows.map(
-          (row): DocumentTag => ({
-            id: asDocumentTagId(row.id),
-            tenantId: row.tenantId,
-            name: row.name,
-            createdAt: row.createdAt.toISOString(),
-          }),
-        );
+        return rows.map((row): DocumentTag => ({
+          id: asDocumentTagId(row.id),
+          tenantId: row.tenantId,
+          name: row.name,
+          createdAt: row.createdAt.toISOString(),
+        }));
       },
       async get(ctx, tagId) {
         const rows = await db
@@ -435,30 +428,27 @@ export function createPostgresDocumentRepositories(db: DatabaseExecutor): {
               sql`(${platformDocumentRelationship.sourceDocumentId} = ${documentId} OR ${platformDocumentRelationship.targetDocumentId} = ${documentId})`,
             ),
           );
-        return rows.map(
-          (row): DocumentRelationship => ({
-            id: asDocumentRelationshipId(row.id),
-            tenantId: row.tenantId,
-            sourceDocumentId: asDocumentId(row.sourceDocumentId),
-            targetDocumentId: row.targetDocumentId
-              ? asDocumentId(row.targetDocumentId)
+        return rows.map((row): DocumentRelationship => ({
+          id: asDocumentRelationshipId(row.id),
+          tenantId: row.tenantId,
+          sourceDocumentId: asDocumentId(row.sourceDocumentId),
+          targetDocumentId: row.targetDocumentId
+            ? asDocumentId(row.targetDocumentId)
+            : undefined,
+          kind: row.kind as DocumentRelationship["kind"],
+          reference:
+            row.referenceProduct && row.referenceExternalId
+              ? {
+                  product: row.referenceProduct as NonNullable<
+                    DocumentRelationship["reference"]
+                  >["product"],
+                  externalId: row.referenceExternalId,
+                  label: row.referenceLabel ?? undefined,
+                }
               : undefined,
-            kind: row.kind as DocumentRelationship["kind"],
-            reference:
-              row.referenceProduct && row.referenceExternalId
-                ? {
-                    product:
-                      row.referenceProduct as NonNullable<
-                        DocumentRelationship["reference"]
-                      >["product"],
-                    externalId: row.referenceExternalId,
-                    label: row.referenceLabel ?? undefined,
-                  }
-                : undefined,
-            createdAt: row.createdAt.toISOString(),
-            createdBy: row.createdBy,
-          }),
-        );
+          createdAt: row.createdAt.toISOString(),
+          createdBy: row.createdBy,
+        }));
       },
     },
     audits: {
@@ -486,18 +476,16 @@ export function createPostgresDocumentRepositories(db: DatabaseExecutor): {
             ),
           )
           .orderBy(asc(platformDocumentAudit.createdAt));
-        return rows.map(
-          (row): DocumentAudit => ({
-            id: asDocumentAuditId(row.id),
-            documentId: asDocumentId(row.documentId),
-            tenantId: row.tenantId,
-            action: row.action,
-            actorUserId: row.actorUserId,
-            correlationId: row.correlationId ?? undefined,
-            details: row.detailsJson ?? {},
-            createdAt: row.createdAt.toISOString(),
-          }),
-        );
+        return rows.map((row): DocumentAudit => ({
+          id: asDocumentAuditId(row.id),
+          documentId: asDocumentId(row.documentId),
+          tenantId: row.tenantId,
+          action: row.action,
+          actorUserId: row.actorUserId,
+          correlationId: row.correlationId ?? undefined,
+          details: row.detailsJson ?? {},
+          createdAt: row.createdAt.toISOString(),
+        }));
       },
     },
     versions: {
@@ -597,9 +585,7 @@ export function createPostgresDocumentRepositories(db: DatabaseExecutor): {
           .update(platformDocumentVersion)
           .set({
             storageStatus: status,
-            verifiedAt: options?.verifiedAt
-              ? new Date(options.verifiedAt)
-              : undefined,
+            verifiedAt: options?.verifiedAt ? new Date(options.verifiedAt) : undefined,
             revision: existing.revision + 1,
           })
           .where(

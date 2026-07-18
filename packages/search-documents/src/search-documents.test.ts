@@ -59,9 +59,7 @@ const document: Document = {
   },
   tagIds: [],
   creatorUserId: "user-1",
-  permissions: [
-    { principalType: "user", principalId: "user-1", action: "read" },
-  ],
+  permissions: [{ principalType: "user", principalId: "user-1", action: "read" }],
   currentVersionId: asDocumentVersionId("dver_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"),
   createdAt: "2026-01-01T00:00:00.000Z",
   updatedAt: "2026-01-02T00:00:00.000Z",
@@ -120,9 +118,7 @@ describe("APZSEARCH-012 search-documents", () => {
     expect(isDocumentsSearchEntityType("support_request")).toBe(false);
     expect(looksLikeStorageLeak("storageKey_abc")).toBe(true);
     expect(looksLikeStorageLeak("s3://bucket/key")).toBe(true);
-    expect(looksLikeStorageLeak("doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")).toBe(
-      false,
-    );
+    expect(looksLikeStorageLeak("doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")).toBe(false);
   });
 
   it("maps and publishes all Documents entity types without storage leakage", () => {
@@ -220,9 +216,7 @@ describe("APZSEARCH-012 search-documents", () => {
       },
     });
     expect(storageReject.valid).toBe(false);
-    expect(
-      storageReject.issues.some((i) => i.code === "storage_leakage"),
-    ).toBe(true);
+    expect(storageReject.issues.some((i) => i.code === "storage_leakage")).toBe(true);
 
     const published = adapter.publisher.publish(context, {
       entityType: "document",
@@ -263,9 +257,9 @@ describe("APZSEARCH-012 search-documents", () => {
       "document_version",
     );
 
-    expect(() =>
-      adapter.mapper.mapDocumentVersion(context, version),
-    ).toThrow(/parentDocument/);
+    expect(() => adapter.mapper.mapDocumentVersion(context, version)).toThrow(
+      /parentDocument/,
+    );
   });
 
   it("supports production factory with explicit sink and rejects silent memory", () => {

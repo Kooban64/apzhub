@@ -220,9 +220,7 @@ describe("APZIDENTITY-003 identity handlers", () => {
   });
 
   it("ships only authenticated identity route entrypoints without forbidden segments", () => {
-    const routes = walkRoutes(
-      join(process.cwd(), "apps/web/app/api/v1/identity"),
-    );
+    const routes = walkRoutes(join(process.cwd(), "apps/web/app/api/v1/identity"));
     expect(routes.length).toBeGreaterThanOrEqual(36);
     for (const route of routes) {
       const content = readFileSync(route, "utf8");
@@ -242,13 +240,13 @@ describe("APZIDENTITY-003 identity handlers", () => {
     }
   });
 
-  it("documents identity in OpenAPI 1.7.0 without forbidden auth surfaces", () => {
+  it("documents identity in OpenAPI 1.9.0 without forbidden auth surfaces", () => {
     const spec = loadPlatformOpenApiSpecObject() as {
       info?: { version?: string };
       paths?: Record<string, unknown>;
       tags?: Array<{ name?: string }>;
     };
-    expect(spec.info?.version).toBe("1.7.0");
+    expect(spec.info?.version).toBe("1.9.0");
 
     const expectedPaths = [
       "/identity/users",

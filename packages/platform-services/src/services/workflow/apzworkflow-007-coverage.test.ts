@@ -29,9 +29,7 @@ import {
   mapEngineError,
 } from "./workflow-engine-service-impls";
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_eng_cov",
     userId: "user_eng_cov",
@@ -110,15 +108,11 @@ describe("APZWORKFLOW-007 coverage", () => {
     await expect(gateway.templates.get(request, "tpl")).rejects.toSatisfy(
       isPlatformServiceError,
     );
-    await expect(gateway.tags.list(request)).rejects.toSatisfy(
-      isPlatformServiceError,
-    );
+    await expect(gateway.tags.list(request)).rejects.toSatisfy(isPlatformServiceError);
     await expect(gateway.tags.get(request, "t1")).rejects.toSatisfy(
       isPlatformServiceError,
     );
-    await expect(gateway.users.list(request)).rejects.toSatisfy(
-      isPlatformServiceError,
-    );
+    await expect(gateway.users.list(request)).rejects.toSatisfy(isPlatformServiceError);
     await expect(gateway.users.get(request, "u1")).rejects.toSatisfy(
       isPlatformServiceError,
     );
@@ -131,9 +125,7 @@ describe("APZWORKFLOW-007 coverage", () => {
     await expect(gateway.capabilities.get(request)).rejects.toSatisfy(
       isPlatformServiceError,
     );
-    await expect(gateway.health.get(request)).rejects.toSatisfy(
-      isPlatformServiceError,
-    );
+    await expect(gateway.health.get(request)).rejects.toSatisfy(isPlatformServiceError);
     await expect(gateway.diagnostics.get(request)).rejects.toSatisfy(
       isPlatformServiceError,
     );

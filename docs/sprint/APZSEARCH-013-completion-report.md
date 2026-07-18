@@ -1,16 +1,16 @@
 # APZHUB Programme — Milestone Completion Report
 
-| Field | Value |
-| --- | --- |
-| **Document ID** | APZSEARCH-013-CR |
-| **Milestone** | APZSEARCH-013 — APZ TCMS Search Publication Adapter |
-| **Programme** | APZHUB Platform Search |
-| **Status** | **COMPLETE** |
-| **Classification** | TCMS publication adapter (metadata-only; Search Platform frozen) |
-| **Date** | 2026-07-15 |
-| **Authority** | Knowledge Foundation · owner-approved milestone |
-| **Predecessor** | APZSEARCH-012 — Documents Search Publication Adapter (Complete) |
-| **Successor** | **APZSEARCH-014 — Reporting Search Publication Adapter** (**recommended; not started; requires owner approval**) |
+| Field              | Value                                                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| **Document ID**    | APZSEARCH-013-CR                                                                                                 |
+| **Milestone**      | APZSEARCH-013 — APZ TCMS Search Publication Adapter                                                              |
+| **Programme**      | APZHUB Platform Search                                                                                           |
+| **Status**         | **COMPLETE**                                                                                                     |
+| **Classification** | TCMS publication adapter (metadata-only; Search Platform frozen)                                                 |
+| **Date**           | 2026-07-15                                                                                                       |
+| **Authority**      | Knowledge Foundation · owner-approved milestone                                                                  |
+| **Predecessor**    | APZSEARCH-012 — Documents Search Publication Adapter (Complete)                                                  |
+| **Successor**      | **APZSEARCH-014 — Reporting Search Publication Adapter** (**recommended; not started; requires owner approval**) |
 
 ---
 
@@ -78,14 +78,14 @@ Publication counts, failures, validation failures, entity/lifecycle distribution
 
 ## 9. Tests / Coverage / Gates
 
-| Gate | Result |
-| ---- | ------ |
-| Unit tests | **16 PASS** |
-| Typecheck | **PASS** |
-| Lint | **PASS** |
-| `pnpm audit:search-testing` | **PASS** (0) |
-| Coverage | **98.06%** lines/statements · **100%** functions · **80.97%** branches |
-| search-integration / projects / support / documents | **untouched** (frozen) |
+| Gate                                                | Result                                                                 |
+| --------------------------------------------------- | ---------------------------------------------------------------------- |
+| Unit tests                                          | **16 PASS**                                                            |
+| Typecheck                                           | **PASS**                                                               |
+| Lint                                                | **PASS**                                                               |
+| `pnpm audit:search-testing`                         | **PASS** (0)                                                           |
+| Coverage                                            | **98.06%** lines/statements · **100%** functions · **80.97%** branches |
+| search-integration / projects / support / documents | **untouched** (frozen)                                                 |
 
 ---
 
@@ -120,11 +120,11 @@ Do not implement without owner approval.
 
 ## Document control
 
-| Item | Value |
-| --- | --- |
-| Document ID | **APZSEARCH-013-CR** |
-| Report | `docs/sprint/APZSEARCH-013-completion-report.md` |
-| Audit | `pnpm audit:search-testing` |
-| Package | `@apzhub/search-testing` **0.1.1** |
+| Item        | Value                                            |
+| ----------- | ------------------------------------------------ |
+| Document ID | **APZSEARCH-013-CR**                             |
+| Report      | `docs/sprint/APZSEARCH-013-completion-report.md` |
+| Audit       | `pnpm audit:search-testing`                      |
+| Package     | `@apzhub/search-testing` **0.1.1**               |
 
 **End of report.**

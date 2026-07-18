@@ -267,9 +267,7 @@ export function createPlatformWorkflowService(
         ...existing,
         name: input.name?.trim() || existing.name,
         description:
-          input.description !== undefined
-            ? input.description
-            : existing.description,
+          input.description !== undefined ? input.description : existing.description,
         categoryId,
         folderId,
         updatedAt: now,
@@ -309,8 +307,7 @@ export function createPlatformWorkflowService(
         const q = input.query.trim().toLowerCase();
         rows = rows.filter(
           (row) =>
-            row.name.toLowerCase().includes(q) ||
-            row.key.toLowerCase().includes(q),
+            row.name.toLowerCase().includes(q) || row.key.toLowerCase().includes(q),
         );
       }
       const limit = input?.limit ?? 100;
@@ -324,10 +321,7 @@ export function createPlatformWorkflowService(
         "workflow",
         input.workflowId,
       );
-      const prior = await deps.repos.versions.listByWorkflow(
-        ctx,
-        input.workflowId,
-      );
+      const prior = await deps.repos.versions.listByWorkflow(ctx, input.workflowId);
       const versionNumber =
         prior.reduce((max, row) => Math.max(max, row.versionNumber), 0) + 1;
       const validation = validateWorkflow({
@@ -436,10 +430,7 @@ export function createPlatformWorkflowService(
         folderId = folderId ?? workflow.folderId;
         templateId = templateId ?? workflow.templateId;
         if (workflow.currentVersionId && !graph) {
-          const version = await deps.repos.versions.get(
-            ctx,
-            workflow.currentVersionId,
-          );
+          const version = await deps.repos.versions.get(ctx, workflow.currentVersionId);
           if (version) {
             graph = version.graph;
             variables = variables ?? version.variables;
@@ -564,9 +555,7 @@ export function createPlatformWorkflowService(
         ...existing,
         name: input.name?.trim() || existing.name,
         description:
-          input.description !== undefined
-            ? input.description
-            : existing.description,
+          input.description !== undefined ? input.description : existing.description,
         categoryId,
         graph: input.graph ?? existing.graph,
         parameters: input.parameters ?? existing.parameters,

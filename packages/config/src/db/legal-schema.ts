@@ -294,7 +294,7 @@ export const lawInvoiceLineItem = pgTable(
   ],
 );
 
-/** Outbox skeleton for reliable event delivery (LAW-012-02 — no worker yet). */
+/** Outbox for reliable event delivery (LAW-012-02 write path; PCv2-02 worker lifecycle). */
 export const lawOutboxEvent = pgTable(
   "law_outbox_event",
   {
@@ -306,8 +306,23 @@ export const lawOutboxEvent = pgTable(
     payload: jsonb("payload").$type<Record<string, unknown>>().notNull(),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     publishedAt: timestamp("published_at", { withTimezone: true }),
+    status: varchar("status", { length: 32 }).notNull().default("pending"),
+    attemptCount: integer("attempt_count").notNull().default(0),
+    maxAttempts: integer("max_attempts").notNull().default(5),
+    nextAttemptAt: timestamp("next_attempt_at", { withTimezone: true }),
+    lastError: text("last_error"),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    correlationId: text("correlation_id"),
   },
-  (table) => [index("law_outbox_event_tenant_idx").on(table.tenantId)],
+  (table) => [
+    index("law_outbox_event_tenant_idx").on(table.tenantId),
+    index("law_outbox_event_status_idx").on(table.status),
+    index("law_outbox_event_claim_idx").on(
+      table.status,
+      table.nextAttemptAt,
+      table.createdAt,
+    ),
+  ],
 );
 
 /** Trust bank account aggregate (LAW-015-11). */

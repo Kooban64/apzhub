@@ -6,7 +6,10 @@ import {
   PLATFORM_API_ENDPOINT_SAMPLES,
   resolveTrafficPolicy,
 } from "./policies";
-import { resetSharedTrafficGovernanceService, TrafficGovernanceService } from "./traffic-governance-service";
+import {
+  resetSharedTrafficGovernanceService,
+  TrafficGovernanceService,
+} from "./traffic-governance-service";
 
 describe("TrafficGovernanceService", () => {
   afterEach(() => {
@@ -14,7 +17,9 @@ describe("TrafficGovernanceService", () => {
   });
 
   it("resolves canonical policies for platform and law endpoints", () => {
-    expect(resolveTrafficPolicy("/api/platform/v1/tenants").id).toBe("platform-privileged");
+    expect(resolveTrafficPolicy("/api/platform/v1/tenants").id).toBe(
+      "platform-privileged",
+    );
     expect(resolveTrafficPolicy("/api/law/v1/clients").id).toBe("law-api");
     expect(resolveTrafficPolicy("/api/auth/sign-in/email").id).toBe("auth-sensitive");
     expect(resolveTrafficPolicy("/api/health").id).toBe("public-health");
@@ -82,12 +87,16 @@ describe("canonical traffic policy registry", () => {
   it("covers all platform and law endpoint samples", () => {
     for (const endpoint of PLATFORM_API_ENDPOINT_SAMPLES) {
       const policy = resolveTrafficPolicy(endpoint);
-      expect(CANONICAL_TRAFFIC_POLICIES.some((entry) => entry.id === policy.id)).toBe(true);
+      expect(CANONICAL_TRAFFIC_POLICIES.some((entry) => entry.id === policy.id)).toBe(
+        true,
+      );
     }
 
     for (const endpoint of LAW_API_ENDPOINT_SAMPLES) {
       const policy = resolveTrafficPolicy(endpoint);
-      expect(CANONICAL_TRAFFIC_POLICIES.some((entry) => entry.id === policy.id)).toBe(true);
+      expect(CANONICAL_TRAFFIC_POLICIES.some((entry) => entry.id === policy.id)).toBe(
+        true,
+      );
     }
   });
 });

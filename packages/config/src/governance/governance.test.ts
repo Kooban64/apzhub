@@ -38,8 +38,12 @@ describe("secret masking", () => {
   it("masks secrets and connection strings", () => {
     expect(maskSecretValue("short")).toBe("****");
     expect(maskSecretValue("abcdefghijklmnopqrstuvwxyz", "secret")).toContain("*");
-    expect(maskSecretValue("postgresql://apzhub:secret@localhost:5432/db", "connection-string")).not
-      .toContain("secret");
+    expect(
+      maskSecretValue(
+        "postgresql://apzhub:secret@localhost:5432/db",
+        "connection-string",
+      ),
+    ).not.toContain("secret");
   });
 });
 
@@ -86,9 +90,11 @@ describe("getConfigurationDiagnostics", () => {
   it("reports configuration health and secret status without exposing raw secrets", () => {
     const diagnostics = getConfigurationDiagnostics({ env: baseEnv });
     expect(diagnostics.healthy).toBe(true);
-    expect(diagnostics.secrets.every((secret) => !secret.maskedPreview?.includes("test-test"))).toBe(
-      true,
-    );
+    expect(
+      diagnostics.secrets.every(
+        (secret) => !secret.maskedPreview?.includes("test-test"),
+      ),
+    ).toBe(true);
     expect(diagnostics.vault.provider).toBe("environment");
   });
 
@@ -104,7 +110,9 @@ describe("ensureEnvironmentValid", () => {
   });
 
   it("does not abort the process in development when abortProcess is false", () => {
-    const exitSpy = vi.spyOn(process, "exit").mockImplementation(() => undefined as never);
+    const exitSpy = vi
+      .spyOn(process, "exit")
+      .mockImplementation(() => undefined as never);
     ensureEnvironmentValid({
       env: { NODE_ENV: "development" },
       abortProcess: false,

@@ -16,16 +16,16 @@ In `NODE_ENV=test`, `engineering-intelligence-api` uses `createMockEngineeringIn
 
 ## Operations
 
-| Method | HTTP |
-|---|---|
-| `getScore` / `scoreWithScope` | GET/POST `/score` |
-| `getHealth` / `assessHealth` | GET/POST `/health` |
-| `getRisk` | GET `/risk` |
+| Method                                              | HTTP                      |
+| --------------------------------------------------- | ------------------------- |
+| `getScore` / `scoreWithScope`                       | GET/POST `/score`         |
+| `getHealth` / `assessHealth`                        | GET/POST `/health`        |
+| `getRisk`                                           | GET `/risk`               |
 | `listSnapshots` / `getSnapshot` / `computeSnapshot` | GET/GET/POST `/snapshots` |
-| `listTrends` / `buildTrend` | GET/POST `/trends` |
-| `listBenchmarks` / `compareBenchmark` | GET/POST `/benchmarks` |
-| `listBaselines` | GET `/baselines` |
-| `listHistorical` | GET `/historical` |
+| `listTrends` / `buildTrend`                         | GET/POST `/trends`        |
+| `listBenchmarks` / `compareBenchmark`               | GET/POST `/benchmarks`    |
+| `listBaselines`                                     | GET `/baselines`          |
+| `listHistorical`                                    | GET `/historical`         |
 
 ## Constraints
 

@@ -1,7 +1,7 @@
 /**
  * Platform Observability HTTP handler coverage (APZOBSERVE-003).
  */
-import { readdirSync, statSync } from "node:fs";
+import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { NextRequest } from "next/server";
 import { afterEach, describe, expect, it } from "vitest";
@@ -183,12 +183,10 @@ describe("APZOBSERVE-003 observe handlers", () => {
   });
 
   it("ships observe App Router routes with withPlatformApiAuth", () => {
-    const routes = walkRoutes(
-      join(process.cwd(), "apps/web/app/api/v1/observe"),
-    );
+    const routes = walkRoutes(join(process.cwd(), "apps/web/app/api/v1/observe"));
     expect(routes.length).toBeGreaterThanOrEqual(40);
     for (const file of routes) {
-      const content = require("node:fs").readFileSync(file, "utf8");
+      const content = readFileSync(file, "utf8");
       expect(content).toContain("withPlatformApiAuth");
     }
   });

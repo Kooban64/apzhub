@@ -3,9 +3,7 @@
  * @apzhub/integration-meilisearch public API only (APZSEARCH-006).
  */
 
-import type {
-  MeilisearchAdapter,
-} from "@apzhub/integration-meilisearch";
+import type { MeilisearchAdapter } from "@apzhub/integration-meilisearch";
 import {
   MEILISEARCH_ADAPTER_VERSION,
   MEILISEARCH_PROVIDER_KIND,
@@ -41,10 +39,7 @@ import {
   validateSearchQuery,
 } from "@apzhub/search-contracts";
 
-import {
-  toProviderDocumentId,
-  toPublicIndexId,
-} from "./search-index-naming";
+import { toProviderDocumentId, toPublicIndexId } from "./search-index-naming";
 
 export type MeilisearchSearchProviderOptions = {
   readonly adapter: MeilisearchAdapter;
@@ -66,10 +61,7 @@ const MEILI_CAPABILITIES: SearchCapabilities = {
   fuzzy: false,
 };
 
-function mapIndexRecord(
-  record: unknown,
-  now: string,
-): SearchIndex {
+function mapIndexRecord(record: unknown, now: string): SearchIndex {
   const row = record as Readonly<Record<string, unknown>>;
   const uid = String(row.uid ?? row.name ?? "unknown");
   return {
@@ -194,10 +186,7 @@ export class MeilisearchSearchProvider implements PlatformSearchExecutionProvide
     return mapIndexRecord(result.data, this.now());
   }
 
-  async deleteIndex(
-    context: SearchRequestContext,
-    indexUid: string,
-  ): Promise<void> {
+  async deleteIndex(context: SearchRequestContext, indexUid: string): Promise<void> {
     const result = await this.adapter.operations.manageIndex(context, "delete", {
       uid: indexUid,
     });
@@ -226,9 +215,7 @@ export class MeilisearchSearchProvider implements PlatformSearchExecutionProvide
     return mapIndexRecord(result.data, this.now());
   }
 
-  async listIndexes(
-    context: SearchRequestContext,
-  ): Promise<readonly SearchIndex[]> {
+  async listIndexes(context: SearchRequestContext): Promise<readonly SearchIndex[]> {
     const result = await this.adapter.operations.manageIndex(context, "list");
     if (result.status !== SEARCH_OPERATION_STATUS_OK) {
       if (result.status === "NOT_SUPPORTED") {
@@ -269,16 +256,13 @@ export class MeilisearchSearchProvider implements PlatformSearchExecutionProvide
     const documents = input.documents.map((doc) => ({
       id: toProviderDocumentId(doc.id),
       tenantId: context.tenantId,
-      ...(context.organisationId
-        ? { organisationId: context.organisationId }
-        : {}),
+      ...(context.organisationId ? { organisationId: context.organisationId } : {}),
       ...doc.fields,
     }));
-    const result = await this.adapter.operations.manageDocument(
-      context,
-      "upsert",
-      { indexUid, documents },
-    );
+    const result = await this.adapter.operations.manageDocument(context, "upsert", {
+      indexUid,
+      documents,
+    });
     if (result.status !== SEARCH_OPERATION_STATUS_OK) {
       if (result.status === "NOT_SUPPORTED") {
         throw searchCapabilityUnsupported(result.feature);
@@ -297,14 +281,10 @@ export class MeilisearchSearchProvider implements PlatformSearchExecutionProvide
     indexUid: string,
     input: SearchDocumentDeleteInput,
   ): Promise<void> {
-    const result = await this.adapter.operations.manageDocument(
-      context,
-      "delete",
-      {
-        indexUid,
-        documentId: toProviderDocumentId(input.documentId),
-      },
-    );
+    const result = await this.adapter.operations.manageDocument(context, "delete", {
+      indexUid,
+      documentId: toProviderDocumentId(input.documentId),
+    });
     if (result.status !== SEARCH_OPERATION_STATUS_OK) {
       if (result.status === "NOT_SUPPORTED") {
         throw searchCapabilityUnsupported(result.feature);

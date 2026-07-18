@@ -44,7 +44,6 @@ export function buildDocumentClassification(input: {
   return {
     code: input.code,
     label: input.label,
-    customCode:
-      input.code === "custom" ? input.customCode?.trim() : undefined,
+    customCode: input.code === "custom" ? input.customCode?.trim() : undefined,
   };
 }

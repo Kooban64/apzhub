@@ -155,8 +155,12 @@ export function buildObserveManagementPlaneDto(input: {
     gatewayRegistered: input.observeEnabled,
     requestPipelineReady: input.observeEnabled,
     authorizationReady: input.observeEnabled,
-    metadataCompleteness: input.observeEnabled ? ("foundation" as const) : ("unavailable" as const),
-    registrationState: input.observeEnabled ? ("registered" as const) : ("unregistered" as const),
+    metadataCompleteness: input.observeEnabled
+      ? ("foundation" as const)
+      : ("unavailable" as const),
+    registrationState: input.observeEnabled
+      ? ("registered" as const)
+      : ("unregistered" as const),
     providerExecutionEnabled: false as const,
     grafanaIntegrationReady: false as const,
     prometheusIntegrationReady: false as const,
@@ -647,7 +651,10 @@ export async function handleGetMetricDefinition(
     await param(routeContext, "metricDefinitionId", metricDefinitionIdParamSchema),
   );
   const gateway = await requireObserveGateway();
-  const result = await gateway.observe.metricDefinitions.get(context.serviceContext, id);
+  const result = await gateway.observe.metricDefinitions.get(
+    context.serviceContext,
+    id,
+  );
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -666,10 +673,13 @@ export async function handleUpdateMetricDefinition(
   );
   const gateway = await requireObserveGateway();
   const mapped = body;
-  const result = await gateway.observe.metricDefinitions.update(context.serviceContext, {
-    id,
-    ...mapped,
-  });
+  const result = await gateway.observe.metricDefinitions.update(
+    context.serviceContext,
+    {
+      id,
+      ...mapped,
+    },
+  );
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -698,13 +708,10 @@ export async function handleCreateMetricSample(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireObserveGateway();
-  const result = await gateway.observe.metricSamples.create(
-    context.serviceContext,
-    {
-      ...body,
-      metricDefinitionId: body.metricDefinitionId !== undefined ? asMetricDefinitionId(body.metricDefinitionId) : undefined,
-    },
-  );
+  const result = await gateway.observe.metricSamples.create(context.serviceContext, {
+    ...body,
+    metricDefinitionId: asMetricDefinitionId(body.metricDefinitionId),
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -736,9 +743,12 @@ export async function handleUpdateMetricSample(
   );
   const gateway = await requireObserveGateway();
   const mapped = {
-      ...body,
-      metricDefinitionId: body.metricDefinitionId != null ? asMetricDefinitionId(body.metricDefinitionId) : body.metricDefinitionId,
-    };
+    ...body,
+    metricDefinitionId:
+      body.metricDefinitionId != null
+        ? asMetricDefinitionId(body.metricDefinitionId)
+        : body.metricDefinitionId,
+  };
   const result = await gateway.observe.metricSamples.update(context.serviceContext, {
     id,
     ...mapped,
@@ -838,13 +848,10 @@ export async function handleCreateAlertState(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireObserveGateway();
-  const result = await gateway.observe.alertStates.create(
-    context.serviceContext,
-    {
-      ...body,
-      alertDefinitionId: body.alertDefinitionId !== undefined ? asAlertDefinitionId(body.alertDefinitionId) : undefined,
-    },
-  );
+  const result = await gateway.observe.alertStates.create(context.serviceContext, {
+    ...body,
+    alertDefinitionId: asAlertDefinitionId(body.alertDefinitionId),
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -876,9 +883,12 @@ export async function handleUpdateAlertState(
   );
   const gateway = await requireObserveGateway();
   const mapped = {
-      ...body,
-      alertDefinitionId: body.alertDefinitionId != null ? asAlertDefinitionId(body.alertDefinitionId) : body.alertDefinitionId,
-    };
+    ...body,
+    alertDefinitionId:
+      body.alertDefinitionId != null
+        ? asAlertDefinitionId(body.alertDefinitionId)
+        : body.alertDefinitionId,
+  };
   const result = await gateway.observe.alertStates.update(context.serviceContext, {
     id,
     ...mapped,
@@ -924,10 +934,17 @@ export async function handleGetDashboardDefinition(
   routeContext?: RouteContext,
 ) {
   const id = asDashboardDefinitionId(
-    await param(routeContext, "dashboardDefinitionId", dashboardDefinitionIdParamSchema),
+    await param(
+      routeContext,
+      "dashboardDefinitionId",
+      dashboardDefinitionIdParamSchema,
+    ),
   );
   const gateway = await requireObserveGateway();
-  const result = await gateway.observe.dashboardDefinitions.get(context.serviceContext, id);
+  const result = await gateway.observe.dashboardDefinitions.get(
+    context.serviceContext,
+    id,
+  );
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -937,7 +954,11 @@ export async function handleUpdateDashboardDefinition(
   routeContext?: RouteContext,
 ) {
   const id = asDashboardDefinitionId(
-    await param(routeContext, "dashboardDefinitionId", dashboardDefinitionIdParamSchema),
+    await param(
+      routeContext,
+      "dashboardDefinitionId",
+      dashboardDefinitionIdParamSchema,
+    ),
   );
   const body = await parseJsonBody(
     request,
@@ -946,10 +967,13 @@ export async function handleUpdateDashboardDefinition(
   );
   const gateway = await requireObserveGateway();
   const mapped = body;
-  const result = await gateway.observe.dashboardDefinitions.update(context.serviceContext, {
-    id,
-    ...mapped,
-  });
+  const result = await gateway.observe.dashboardDefinitions.update(
+    context.serviceContext,
+    {
+      id,
+      ...mapped,
+    },
+  );
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -978,10 +1002,7 @@ export async function handleCreateLogSource(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireObserveGateway();
-  const result = await gateway.observe.logSources.create(
-    context.serviceContext,
-    body,
-  );
+  const result = await gateway.observe.logSources.create(context.serviceContext, body);
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1112,13 +1133,10 @@ export async function handleCreateTraceSpan(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireObserveGateway();
-  const result = await gateway.observe.traceSpans.create(
-    context.serviceContext,
-    {
-      ...body,
-      traceDefinitionId: body.traceDefinitionId !== undefined ? asTraceDefinitionId(body.traceDefinitionId) : undefined,
-    },
-  );
+  const result = await gateway.observe.traceSpans.create(context.serviceContext, {
+    ...body,
+    traceDefinitionId: asTraceDefinitionId(body.traceDefinitionId),
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1150,9 +1168,12 @@ export async function handleUpdateTraceSpan(
   );
   const gateway = await requireObserveGateway();
   const mapped = {
-      ...body,
-      traceDefinitionId: body.traceDefinitionId != null ? asTraceDefinitionId(body.traceDefinitionId) : body.traceDefinitionId,
-    };
+    ...body,
+    traceDefinitionId:
+      body.traceDefinitionId != null
+        ? asTraceDefinitionId(body.traceDefinitionId)
+        : body.traceDefinitionId,
+  };
   const result = await gateway.observe.traceSpans.update(context.serviceContext, {
     id,
     ...mapped,
@@ -1189,7 +1210,10 @@ export async function handleCreateIncidentReference(
     context.serviceContext,
     {
       ...body,
-      alertDefinitionId: body.alertDefinitionId !== undefined ? asAlertDefinitionId(body.alertDefinitionId) : undefined,
+      alertDefinitionId:
+        body.alertDefinitionId !== undefined
+          ? asAlertDefinitionId(body.alertDefinitionId)
+          : undefined,
     },
   );
   return jsonDataResponse(result, context.tracing);
@@ -1204,7 +1228,10 @@ export async function handleGetIncidentReference(
     await param(routeContext, "incidentReferenceId", incidentReferenceIdParamSchema),
   );
   const gateway = await requireObserveGateway();
-  const result = await gateway.observe.incidentReferences.get(context.serviceContext, id);
+  const result = await gateway.observe.incidentReferences.get(
+    context.serviceContext,
+    id,
+  );
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1223,13 +1250,19 @@ export async function handleUpdateIncidentReference(
   );
   const gateway = await requireObserveGateway();
   const mapped = {
-      ...body,
-      alertDefinitionId: body.alertDefinitionId != null ? asAlertDefinitionId(body.alertDefinitionId) : body.alertDefinitionId,
-    };
-  const result = await gateway.observe.incidentReferences.update(context.serviceContext, {
-    id,
-    ...mapped,
-  });
+    ...body,
+    alertDefinitionId:
+      body.alertDefinitionId != null
+        ? asAlertDefinitionId(body.alertDefinitionId)
+        : body.alertDefinitionId,
+  };
+  const result = await gateway.observe.incidentReferences.update(
+    context.serviceContext,
+    {
+      id,
+      ...mapped,
+    },
+  );
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1274,7 +1307,10 @@ export async function handleGetMaintenanceWindow(
     await param(routeContext, "maintenanceWindowId", maintenanceWindowIdParamSchema),
   );
   const gateway = await requireObserveGateway();
-  const result = await gateway.observe.maintenanceWindows.get(context.serviceContext, id);
+  const result = await gateway.observe.maintenanceWindows.get(
+    context.serviceContext,
+    id,
+  );
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1293,10 +1329,13 @@ export async function handleUpdateMaintenanceWindow(
   );
   const gateway = await requireObserveGateway();
   const mapped = body;
-  const result = await gateway.observe.maintenanceWindows.update(context.serviceContext, {
-    id,
-    ...mapped,
-  });
+  const result = await gateway.observe.maintenanceWindows.update(
+    context.serviceContext,
+    {
+      id,
+      ...mapped,
+    },
+  );
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1392,10 +1431,7 @@ export async function handleCreateObservabilityMetadata(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireObserveGateway();
-  const result = await gateway.observe.metadata.create(
-    context.serviceContext,
-    body,
-  );
+  const result = await gateway.observe.metadata.create(context.serviceContext, body);
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -1484,9 +1520,7 @@ export async function handleGetObserveDiagnostics(
   await assertObserveHttpEnabled();
   const gateway = await getPlatformServiceGateway();
   const health = await gateway.observe.diagnostics.health(context.serviceContext);
-  const readiness = await gateway.observe.diagnostics.readiness(
-    context.serviceContext,
-  );
+  const readiness = await gateway.observe.diagnostics.readiness(context.serviceContext);
   return jsonDataResponse(
     {
       ...buildObserveManagementPlaneDto({
@@ -1522,10 +1556,7 @@ export async function handleCreatePlatformDiagnostic(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireObserveGateway();
-  const result = await gateway.observe.diagnostics.create(
-    context.serviceContext,
-    body,
-  );
+  const result = await gateway.observe.diagnostics.create(context.serviceContext, body);
   return jsonDataResponse(result, context.tracing);
 }
 

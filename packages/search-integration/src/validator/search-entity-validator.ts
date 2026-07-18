@@ -13,9 +13,7 @@ import type {
   CanonicalSearchEntity,
   CanonicalSearchEntityInput,
 } from "../entity/canonical-search-entity";
-import {
-  asCanonicalSearchEntityId,
-} from "../entity/canonical-search-entity";
+import { asCanonicalSearchEntityId } from "../entity/canonical-search-entity";
 import {
   isSearchEntityLifecycleState,
   type SearchEntityLifecycleState,
@@ -128,9 +126,7 @@ export class SearchEntityValidator {
             message: "metadata values must be strings (no provider payloads)",
           });
         }
-        if (
-          /meili|opensearch|elasticsearch|typesense|primaryKey|_geo/i.test(key)
-        ) {
+        if (/meili|opensearch|elasticsearch|typesense|primaryKey|_geo/i.test(key)) {
           issues.push({
             field: `metadata.${key}`,
             code: "provider_leakage",

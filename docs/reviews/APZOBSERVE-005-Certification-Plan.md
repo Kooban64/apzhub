@@ -12,25 +12,25 @@
 
 ## Gates (19)
 
-1. Foundation audit  
-2. Platform Services audit  
-3. HTTP/client audit  
-4. Workbench audit  
-5. Vertical audit  
-6. OpenAPI validation  
-7. Certification harness  
-8. Scoped vertical coverage  
-9. Authorization review  
-10. Tenant-isolation review  
-11. Organisation-isolation review  
-12. Persistence review  
-13. Provider-boundary review  
-14. Secret-exposure review  
-15. Status and severity consistency review  
-16. Operational-readiness review  
-17. Accessibility review  
-18. Playwright certification  
-19. Regression suite  
+1. Foundation audit
+2. Platform Services audit
+3. HTTP/client audit
+4. Workbench audit
+5. Vertical audit
+6. OpenAPI validation
+7. Certification harness
+8. Scoped vertical coverage
+9. Authorization review
+10. Tenant-isolation review
+11. Organisation-isolation review
+12. Persistence review
+13. Provider-boundary review
+14. Secret-exposure review
+15. Status and severity consistency review
+16. Operational-readiness review
+17. Accessibility review
+18. Playwright certification
+19. Regression suite
 
 Each gate: **PASS** | **LIMITED** | **FAIL**. Blocking FAIL prevents production-ready classification.
 

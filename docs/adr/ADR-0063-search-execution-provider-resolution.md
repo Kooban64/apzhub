@@ -1,11 +1,11 @@
 # ADR-0063: Search Execution Provider Resolution Precedence
 
-| Field | Value |
-| --- | --- |
-| **Status** | Accepted |
-| **Date** | 2026-07-14 |
-| **Milestone** | APZSEARCH-006 |
-| **Deciders** | Owner / Architecture |
+| Field         | Value                |
+| ------------- | -------------------- |
+| **Status**    | Accepted             |
+| **Date**      | 2026-07-14           |
+| **Milestone** | APZSEARCH-006        |
+| **Deciders**  | Owner / Architecture |
 
 ---
 
@@ -40,11 +40,13 @@ Ineligible explicit requests fail with `execution_provider_not_found` or `provid
 ## Consequences
 
 ### Positive
+
 - Predictable multi-provider behaviour
 - Permission gate on explicit selection
 - No accidental cross-tenant provider visibility
 
 ### Negative / accepted
+
 - Operators must mark at least one provider tenant/platform active or set priority
 - Future AI / semantic providers will need capability checks before entering eligibility
 

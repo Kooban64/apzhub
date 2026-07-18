@@ -1,11 +1,16 @@
-import type { IntegrationHealth, IntegrationHealthCheckStatus } from "../diagnostics/types";
+import type {
+  IntegrationHealth,
+  IntegrationHealthCheckStatus,
+} from "../diagnostics/types";
 import { CRITICAL_HEALTH_CHECK_NAMES, type AggregateHealthChecksInput } from "./types";
 
 function isCriticalCheck(name: string): boolean {
   return (CRITICAL_HEALTH_CHECK_NAMES as readonly string[]).includes(name);
 }
 
-export function aggregateHealthChecks(input: AggregateHealthChecksInput): IntegrationHealth {
+export function aggregateHealthChecks(
+  input: AggregateHealthChecksInput,
+): IntegrationHealth {
   if (input.disabled) {
     return {
       status: "disabled",
@@ -31,7 +36,10 @@ export function aggregateHealthChecks(input: AggregateHealthChecksInput): Integr
     if (check.status === "fail" && isCriticalCheck(check.name)) {
       hasCriticalFail = true;
     }
-    if (check.status === "warn" || (check.status === "fail" && !isCriticalCheck(check.name))) {
+    if (
+      check.status === "warn" ||
+      (check.status === "fail" && !isCriticalCheck(check.name))
+    ) {
       hasDegradedSignal = true;
     }
   }

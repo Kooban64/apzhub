@@ -14,10 +14,14 @@ describe("testing-ui states", () => {
   it("renders ErrorState with retry", async () => {
     const user = userEvent.setup();
     const onRetry = vi.fn();
-    render(<ErrorState message="Testing is temporarily unavailable." onRetry={onRetry} />);
+    render(
+      <ErrorState message="Testing is temporarily unavailable." onRetry={onRetry} />,
+    );
 
     expect(screen.getByTestId("testing-error")).toBeTruthy();
-    expect(screen.getByTestId("testing-error").textContent).toMatch(/Unable to load Testing/i);
+    expect(screen.getByTestId("testing-error").textContent).toMatch(
+      /Unable to load Testing/i,
+    );
     await user.click(screen.getByRole("button", { name: "Retry" }));
     expect(onRetry).toHaveBeenCalled();
   });
@@ -30,7 +34,9 @@ describe("testing-ui states", () => {
 
   it("renders StatusBadge with formatted label", () => {
     render(<StatusBadge status="pending_approval" />);
-    expect(screen.getByTestId("testing-status-badge").textContent).toBe("Pending Approval");
+    expect(screen.getByTestId("testing-status-badge").textContent).toBe(
+      "Pending Approval",
+    );
   });
 
   it("renders TestingStatCard with tone", () => {

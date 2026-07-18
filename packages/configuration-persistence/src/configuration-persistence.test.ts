@@ -163,16 +163,18 @@ describe("configuration-persistence", () => {
         })
       ).length,
     ).toBe(0);
-    expect((await foundation.values.listByConfiguration(ctx, configuration.id))[0]
-      ?.payload).toBe("dark");
-    expect((await foundation.versions.listByConfiguration(ctx, configuration.id))
-      .length).toBe(1);
-    expect((await foundation.overrides.listByConfiguration(ctx, configuration.id))
-      .length).toBe(1);
+    expect(
+      (await foundation.values.listByConfiguration(ctx, configuration.id))[0]?.payload,
+    ).toBe("dark");
+    expect(
+      (await foundation.versions.listByConfiguration(ctx, configuration.id)).length,
+    ).toBe(1);
+    expect(
+      (await foundation.overrides.listByConfiguration(ctx, configuration.id)).length,
+    ).toBe(1);
     expect((await foundation.validations.listByKey(ctx, key.id)).length).toBe(1);
     expect(
-      (await foundation.references.listByConfiguration(ctx, configuration.id))
-        .length,
+      (await foundation.references.listByConfiguration(ctx, configuration.id)).length,
     ).toBe(1);
     expect(
       (await foundation.history.listByConfiguration(ctx, configuration.id)).length,
@@ -184,18 +186,18 @@ describe("configuration-persistence", () => {
   });
 
   it("forbids silent production in-memory fallback", () => {
-    expect(() =>
-      createConfigurationPersistence({ mode: "postgres" }),
-    ).toThrow(/requires db/);
+    expect(() => createConfigurationPersistence({ mode: "postgres" })).toThrow(
+      /requires db/,
+    );
     expect(() => createProductionConfigurationPersistence({} as never)).toThrow(
       /explicit postgres/,
     );
     expect(() => createConfigurationPersistenceForTest({})).toThrow(
       /allowInMemoryPersistence/,
     );
-    expect(() =>
-      createConfigurationPersistence({ mode: "redis" as never }),
-    ).toThrow(/Unsupported/);
+    expect(() => createConfigurationPersistence({ mode: "redis" as never })).toThrow(
+      /Unsupported/,
+    );
   });
 
   it("wires postgres factory when db provided", () => {

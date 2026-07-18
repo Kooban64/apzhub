@@ -1,11 +1,11 @@
 # ADR-0060: Meilisearch Reference Search Adapter
 
-| Field | Value |
-| --- | --- |
-| **Status** | Accepted |
-| **Date** | 2026-07-14 |
-| **Milestone** | APZSEARCH-005 |
-| **Deciders** | Owner / Architecture |
+| Field         | Value                |
+| ------------- | -------------------- |
+| **Status**    | Accepted             |
+| **Date**      | 2026-07-14           |
+| **Milestone** | APZSEARCH-005        |
+| **Deciders**  | Owner / Architecture |
 
 ---
 
@@ -23,12 +23,12 @@ APZSEARCH-001–004 delivered a vendor-neutral Search Platform and Search Integr
 
 ## Options considered
 
-| Engine | Pros | Cons for first reference |
-| --- | --- | --- |
-| **Meilisearch** | Simple HTTP API; strong keyword UX; OSS CE; low ops cost; easy mockability | Semantic/vector limited in CE without extras |
-| **OpenSearch** | Mature; rich aggregations; strong enterprise ecosystem | Heavier ops footprint; better as a later certified engine |
-| **Typesense** | Similar niche to Meilisearch | Smaller ecosystem footprint in APZHUB self-hosted matrix |
-| **PostgreSQL FTS** | Already in platform PostgreSQL | Not a dedicated search engine; poor fit as the first certified *engine* adapter |
+| Engine             | Pros                                                                       | Cons for first reference                                                        |
+| ------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| **Meilisearch**    | Simple HTTP API; strong keyword UX; OSS CE; low ops cost; easy mockability | Semantic/vector limited in CE without extras                                    |
+| **OpenSearch**     | Mature; rich aggregations; strong enterprise ecosystem                     | Heavier ops footprint; better as a later certified engine                       |
+| **Typesense**      | Similar niche to Meilisearch                                               | Smaller ecosystem footprint in APZHUB self-hosted matrix                        |
+| **PostgreSQL FTS** | Already in platform PostgreSQL                                             | Not a dedicated search engine; poor fit as the first certified _engine_ adapter |
 
 ## Decision
 
@@ -42,11 +42,13 @@ APZSEARCH-001–004 delivered a vendor-neutral Search Platform and Search Integr
 ## Consequences
 
 ### Positive
+
 - Certifies the Search Integration SDK against a real engine contract surface
 - Keeps vendor code isolated; platform stays engine-agnostic
 - Low operational cost for first reference certification (mock REST in CI)
 
 ### Negative / accepted
+
 - Semantic/vector capabilities deferred
 - Live Meilisearch integration tests deferred beyond mock REST certification
 - Platform HTTP exposure remains a later milestone (APZSEARCH-007)

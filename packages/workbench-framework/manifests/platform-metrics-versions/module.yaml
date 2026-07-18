@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-versions
+name: Metric Versions
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metric Versions sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metric Versions
+    icon: git-branch
+    route: /workspace/metrics/versions
+    order: 40
+    permission: metrics.definition
+  view:
+    title: Metric Versions
+    workspace: metrics
+    route: /workspace/metrics/versions
+    permission: metrics.definition

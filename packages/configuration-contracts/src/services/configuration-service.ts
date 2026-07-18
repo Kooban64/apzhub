@@ -37,16 +37,12 @@ export type ConfigurationPlatformService = {
     ctx: ConfigurationRequestContext,
     namespaceId: ConfigurationNamespaceId,
   ): Promise<ConfigurationNamespace | null>;
-  listGroups(
-    ctx: ConfigurationRequestContext,
-  ): Promise<readonly ConfigurationGroup[]>;
+  listGroups(ctx: ConfigurationRequestContext): Promise<readonly ConfigurationGroup[]>;
   getGroup(
     ctx: ConfigurationRequestContext,
     groupId: ConfigurationGroupId,
   ): Promise<ConfigurationGroup | null>;
-  listKeys(
-    ctx: ConfigurationRequestContext,
-  ): Promise<readonly ConfigurationKey[]>;
+  listKeys(ctx: ConfigurationRequestContext): Promise<readonly ConfigurationKey[]>;
   getKey(
     ctx: ConfigurationRequestContext,
     keyId: ConfigurationKeyId,

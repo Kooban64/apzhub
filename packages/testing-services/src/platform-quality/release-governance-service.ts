@@ -36,10 +36,7 @@ import {
 
 import { DomainRuleError } from "../lifecycle/state-machines";
 import type { Clock, IdGenerator } from "../services/types";
-import {
-  combineReadinessVerdicts,
-  qualityStatusToReadiness,
-} from "./status";
+import { combineReadinessVerdicts, qualityStatusToReadiness } from "./status";
 import type { PlatformQualityStore } from "./store";
 
 export interface ReleaseGovernanceServiceDeps {
@@ -75,14 +72,8 @@ function emptyApprovalStatuses(): Record<PlatformGovernanceApprovalKind, string>
 export function createReleaseGovernanceService(
   deps: ReleaseGovernanceServiceDeps,
 ): PlatformReleaseGovernanceService {
-  const {
-    store,
-    now,
-    id,
-    productRegistry,
-    dependencies,
-    multiProductCertification,
-  } = deps;
+  const { store, now, id, productRegistry, dependencies, multiProductCertification } =
+    deps;
 
   function requireRelease(
     ctx: ServiceRequestContext,
@@ -180,9 +171,7 @@ export function createReleaseGovernanceService(
     async listReleases(
       ctx: ServiceRequestContext,
     ): Promise<readonly PlatformRelease[]> {
-      return [...store.releases.values()].filter(
-        (r) => r.tenantId === ctx.tenantId,
-      );
+      return [...store.releases.values()].filter((r) => r.tenantId === ctx.tenantId);
     },
 
     async addProducts(
@@ -194,9 +183,7 @@ export function createReleaseGovernanceService(
       for (const productId of productIds) {
         await productRegistry.getProduct(ctx, productId);
       }
-      const merged = [
-        ...new Set([...release.scope.productIds, ...productIds]),
-      ];
+      const merged = [...new Set([...release.scope.productIds, ...productIds])];
       return saveRelease({
         ...release,
         scope: { ...release.scope, productIds: merged },
@@ -216,9 +203,7 @@ export function createReleaseGovernanceService(
         ...release,
         scope: {
           ...release.scope,
-          productIds: release.scope.productIds.filter(
-            (id) => !removeSet.has(id),
-          ),
+          productIds: release.scope.productIds.filter((id) => !removeSet.has(id)),
         },
         updatedAt: now(),
         updatedBy: ctx.userId,
@@ -383,10 +368,7 @@ export function createReleaseGovernanceService(
       releaseId: PlatformReleaseId,
     ): Promise<DependencyValidationResult> {
       const release = requireRelease(ctx, releaseId);
-      const validation = await dependencies.validate(
-        ctx,
-        release.scope.productIds,
-      );
+      const validation = await dependencies.validate(ctx, release.scope.productIds);
       const related = await dependencies.listDependencies(ctx);
       const scoped = related.filter(
         (d) =>
@@ -510,9 +492,7 @@ export function createReleaseGovernanceService(
       },
     ): Promise<PlatformReleaseSummary> {
       const release = requireRelease(ctx, releaseId);
-      const recommendationCode = recommendationFromVerdict(
-        input.readiness.verdict,
-      );
+      const recommendationCode = recommendationFromVerdict(input.readiness.verdict);
       const recommendationReasons = [
         ...input.readiness.blockingFactors.map((f) => `blocking:${f}`),
         ...input.readiness.warningFactors.map((f) => `warning:${f}`),
@@ -536,9 +516,7 @@ export function createReleaseGovernanceService(
       _releaseId: PlatformReleaseId,
       summary: PlatformReleaseSummary,
     ): Promise<PlatformReleaseSummary> {
-      const recommendationCode = recommendationFromVerdict(
-        summary.readiness.verdict,
-      );
+      const recommendationCode = recommendationFromVerdict(summary.readiness.verdict);
       return {
         ...summary,
         recommendationCode,
@@ -592,10 +570,7 @@ export function createReleaseGovernanceService(
       releaseId: PlatformReleaseId,
     ): Promise<PlatformReleaseManifest> {
       const release = requireRelease(ctx, releaseId);
-      const productKeys = await productKeysForScope(
-        ctx,
-        release.scope.productIds,
-      );
+      const productKeys = await productKeysForScope(ctx, release.scope.productIds);
       return {
         releaseId,
         productKeys,

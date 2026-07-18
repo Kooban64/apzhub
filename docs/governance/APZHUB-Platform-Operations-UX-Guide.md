@@ -22,13 +22,13 @@
 
 Shared components: `apps/web/components/platform-operations/ops-ui.tsx`
 
-| Component | Use |
-| --------- | --- |
-| `OpsPageShell` | Page title and description |
-| `OpsStatCard` | Dashboard metrics |
-| `OpsTable` | Tabular lists (users, roles, modules) |
-| `OpsStatusBadge` | Health status chips |
-| `OpsJsonPanel` | Raw diagnostics |
+| Component        | Use                                   |
+| ---------------- | ------------------------------------- |
+| `OpsPageShell`   | Page title and description            |
+| `OpsStatCard`    | Dashboard metrics                     |
+| `OpsTable`       | Tabular lists (users, roles, modules) |
+| `OpsStatusBadge` | Health status chips                   |
+| `OpsJsonPanel`   | Raw diagnostics                       |
 
 ---
 

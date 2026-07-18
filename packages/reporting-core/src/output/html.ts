@@ -20,9 +20,7 @@ function renderBlock(block: ReportBlock): string {
       return `<div class="metric"><span class="label">${escapeHtml(block.label)}</span>: <span class="value">${escapeHtml(block.value)}${unit}</span></div>`;
     }
     case "table": {
-      const head = block.columns
-        .map((c) => `<th>${escapeHtml(c)}</th>`)
-        .join("");
+      const head = block.columns.map((c) => `<th>${escapeHtml(c)}</th>`).join("");
       const body = block.rows
         .map(
           (row) =>
@@ -33,9 +31,7 @@ function renderBlock(block: ReportBlock): string {
     }
     case "list": {
       const tag = block.ordered ? "ol" : "ul";
-      const items = block.items
-        .map((item) => `<li>${escapeHtml(item)}</li>`)
-        .join("");
+      const items = block.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
       return `<${tag}>${items}</${tag}>`;
     }
     case "summary":
@@ -63,8 +59,7 @@ export function renderHtmlDocument(document: CanonicalReportDocument): string {
     : "";
   const metrics = document.metrics
     .map(
-      (m) =>
-        `<li><strong>${escapeHtml(m.label)}</strong>: ${escapeHtml(m.value)}</li>`,
+      (m) => `<li><strong>${escapeHtml(m.label)}</strong>: ${escapeHtml(m.value)}</li>`,
     )
     .join("");
   const sections = document.sections

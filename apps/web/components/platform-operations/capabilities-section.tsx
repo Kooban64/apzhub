@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 
 import { fetchCapabilities } from "@/lib/platform-operations/ops-api";
 
-import { OpsErrorState, OpsJsonPanel, OpsLoadingState, OpsPageShell, OpsTable } from "./ops-ui";
+import {
+  OpsErrorState,
+  OpsJsonPanel,
+  OpsLoadingState,
+  OpsPageShell,
+  OpsTable,
+} from "./ops-ui";
 
 export function CapabilitiesSection() {
   const [data, setData] = useState<Record<string, unknown> | null>(null);
@@ -18,7 +24,10 @@ export function CapabilitiesSection() {
         if (active) setData(result);
       })
       .catch((cause: unknown) => {
-        if (active) setError(cause instanceof Error ? cause.message : "Failed to load capabilities.");
+        if (active)
+          setError(
+            cause instanceof Error ? cause.message : "Failed to load capabilities.",
+          );
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -29,7 +38,8 @@ export function CapabilitiesSection() {
   }, []);
 
   if (loading) return <OpsLoadingState />;
-  if (error || !data) return <OpsErrorState message={error ?? "Capabilities unavailable."} />;
+  if (error || !data)
+    return <OpsErrorState message={error ?? "Capabilities unavailable."} />;
 
   const capabilities = (data.capabilities ?? []) as Array<{
     capabilityKey: string;

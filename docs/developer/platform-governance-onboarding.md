@@ -59,7 +59,10 @@ await service.featureFlags.setOverride({
 ## Testing
 
 ```typescript
-import { createInMemoryGovernanceService, resetSharedGovernanceService } from "@apzhub/platform-governance";
+import {
+  createInMemoryGovernanceService,
+  resetSharedGovernanceService,
+} from "@apzhub/platform-governance";
 
 resetSharedGovernanceService();
 const { service } = createInMemoryGovernanceService();

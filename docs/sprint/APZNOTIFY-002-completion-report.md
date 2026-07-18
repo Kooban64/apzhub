@@ -17,12 +17,12 @@ Wired the Notification Platform SoR into APZHUB Platform Services: nested `gatew
 Products → gateway.notification.* → RequestPipeline → Authz → Thin Services → Core → Persistence → PostgreSQL
 ```
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/notification-contracts` | **0.2.0** |
-| `@apzhub/notification-core` | **0.2.0** |
-| `@apzhub/notification-persistence` | **0.1.0** |
-| `@apzhub/platform-services` | **0.21.0** |
+| Package                            | Version    |
+| ---------------------------------- | ---------- |
+| `@apzhub/notification-contracts`   | **0.2.0**  |
+| `@apzhub/notification-core`        | **0.2.0**  |
+| `@apzhub/notification-persistence` | **0.1.0**  |
+| `@apzhub/platform-services`        | **0.21.0** |
 
 ## Gateway
 
@@ -54,13 +54,13 @@ See [APZNOTIFY-002 coverage baseline](../reviews/APZNOTIFY-002-coverage-baseline
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:notification-platform-services` | PASS |
-| Typecheck | PASS |
-| Lint | PASS |
-| Vitest | PASS |
-| Coverage ≥95% | PASS |
+| Gate                                        | Result |
+| ------------------------------------------- | ------ |
+| `pnpm audit:notification-platform-services` | PASS   |
+| Typecheck                                   | PASS   |
+| Lint                                        | PASS   |
+| Vitest                                      | PASS   |
+| Coverage ≥95%                               | PASS   |
 
 ## Technical Debt
 

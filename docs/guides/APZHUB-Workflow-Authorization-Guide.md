@@ -11,19 +11,19 @@
 
 Notable keys:
 
-| Permission | Use |
-| ---------- | --- |
-| `workflow.view` | get / find / list versions / categories / folders |
-| `workflow.create` | create workflow / category / folder |
-| `workflow.update` | update / transition |
-| `workflow.delete` | delete workflow |
-| `workflow.publish` | publish |
-| `workflow.archive` | archive |
-| `workflow.restore` | restore |
-| `workflow.validation` | validation.validate |
-| `workflow.audit` | audit.list |
-| `workflow.template.*` | template facet operations |
-| `workflow.*` | wildcard role grant (not a security bypass) |
+| Permission            | Use                                               |
+| --------------------- | ------------------------------------------------- |
+| `workflow.view`       | get / find / list versions / categories / folders |
+| `workflow.create`     | create workflow / category / folder               |
+| `workflow.update`     | update / transition                               |
+| `workflow.delete`     | delete workflow                                   |
+| `workflow.publish`    | publish                                           |
+| `workflow.archive`    | archive                                           |
+| `workflow.restore`    | restore                                           |
+| `workflow.validation` | validation.validate                               |
+| `workflow.audit`      | audit.list                                        |
+| `workflow.template.*` | template facet operations                         |
+| `workflow.*`          | wildcard role grant (not a security bypass)       |
 
 ## Production path
 

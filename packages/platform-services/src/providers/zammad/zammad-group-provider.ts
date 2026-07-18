@@ -37,12 +37,15 @@ function mapGroupSort(
   });
 }
 
-export function createZammadGroupProvider(core: ZammadCoreServices): SupportGroupProvider {
+export function createZammadGroupProvider(
+  core: ZammadCoreServices,
+): SupportGroupProvider {
   return {
     listGroups(ctx, query) {
-      const { page, sort, filter } = unwrapListQuery<SupportGroupListFilter, SupportGroupSortField>(
-        query,
-      );
+      const { page, sort, filter } = unwrapListQuery<
+        SupportGroupListFilter,
+        SupportGroupSortField
+      >(query);
       return withProviderErrorMapping(ctx.correlationId, () =>
         core.groups.list(toIntegrationContext(ctx), filter, page, mapGroupSort(sort)),
       );

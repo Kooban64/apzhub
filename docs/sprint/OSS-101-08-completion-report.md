@@ -17,15 +17,15 @@ Completed Plane production-readiness at the adapter boundary: webhook registrati
 
 ## Capabilities added
 
-| Capability | Service | Status |
-|------------|---------|--------|
-| Webhook CRUD + validate | `PlaneWebhookService` | ✅ |
-| Event translation | `PlaneEventService` + `translatePlaneWebhookPayload` | ✅ |
-| Full / incremental sync | `PlaneSyncService` | ✅ |
-| Sync status / cursors / resume / safe restart | `PlaneSyncService` | ✅ |
-| Capability registration | `webhooks`, `events`, `synchronisation` | ✅ |
-| Diagnostics / metrics / error mapping | Adapter + `PlaneVendorErrorMapper` | ✅ |
-| Mock API | webhooks, sync failures, incremental filters | ✅ |
+| Capability                                    | Service                                              | Status |
+| --------------------------------------------- | ---------------------------------------------------- | ------ |
+| Webhook CRUD + validate                       | `PlaneWebhookService`                                | ✅     |
+| Event translation                             | `PlaneEventService` + `translatePlaneWebhookPayload` | ✅     |
+| Full / incremental sync                       | `PlaneSyncService`                                   | ✅     |
+| Sync status / cursors / resume / safe restart | `PlaneSyncService`                                   | ✅     |
+| Capability registration                       | `webhooks`, `events`, `synchronisation`              | ✅     |
+| Diagnostics / metrics / error mapping         | Adapter + `PlaneVendorErrorMapper`                   | ✅     |
+| Mock API                                      | webhooks, sync failures, incremental filters         | ✅     |
 
 ---
 
@@ -66,39 +66,39 @@ No scheduler or background workers — synchronisation APIs only.
 
 ## Files created
 
-| Path | Role |
-|------|------|
-| `packages/platform-service-contracts/src/domain/integration-events.ts` | Canonical event/webhook/sync DTOs |
-| `integrations/plane/src/events/event-translator.ts` | Plane → canonical event translation |
-| `integrations/plane/src/services/webhook-service.ts` | Webhook lifecycle |
-| `integrations/plane/src/services/event-service.ts` | Translation + metrics/diagnostics |
-| `integrations/plane/src/services/sync-service.ts` | Sync APIs + state |
-| `integrations/plane/src/plane-sync-events.test.ts` | Contract tests |
-| `integrations/plane/docs/PLANE-SYNC-EVENTS.md` | Capability docs |
-| `docs/sprint/OSS-101-08-completion-report.md` | This report |
+| Path                                                                   | Role                                |
+| ---------------------------------------------------------------------- | ----------------------------------- |
+| `packages/platform-service-contracts/src/domain/integration-events.ts` | Canonical event/webhook/sync DTOs   |
+| `integrations/plane/src/events/event-translator.ts`                    | Plane → canonical event translation |
+| `integrations/plane/src/services/webhook-service.ts`                   | Webhook lifecycle                   |
+| `integrations/plane/src/services/event-service.ts`                     | Translation + metrics/diagnostics   |
+| `integrations/plane/src/services/sync-service.ts`                      | Sync APIs + state                   |
+| `integrations/plane/src/plane-sync-events.test.ts`                     | Contract tests                      |
+| `integrations/plane/docs/PLANE-SYNC-EVENTS.md`                         | Capability docs                     |
+| `docs/sprint/OSS-101-08-completion-report.md`                          | This report                         |
 
 ---
 
 ## Files modified
 
-| Path | Change |
-|------|--------|
-| `packages/platform-service-contracts/src/domain/index.ts` | Re-export integration event types |
-| `integrations/plane` REST client, API types, mocks, capabilities, bootstrap, adapter diagnostics, error mapper, core services, exports, package v0.5.0 | Sync/events/webhooks wiring |
-| Foundation docs / CHANGELOG / docs/README / architecture / backlog | Milestone closeout |
+| Path                                                                                                                                                   | Change                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------- |
+| `packages/platform-service-contracts/src/domain/index.ts`                                                                                              | Re-export integration event types |
+| `integrations/plane` REST client, API types, mocks, capabilities, bootstrap, adapter diagnostics, error mapper, core services, exports, package v0.5.0 | Sync/events/webhooks wiring       |
+| Foundation docs / CHANGELOG / docs/README / architecture / backlog                                                                                     | Milestone closeout                |
 
 ---
 
 ## Coverage / tests
 
-| Suite | Result |
-|-------|--------|
-| Plane package tests | 89 passed (incl. 12 sync/events) |
-| Contracts | 8 passed |
-| Combined Plane + platform-services + contracts | 234 passed |
-| Typecheck (`integration-plane`) | ✅ |
-| ESLint (`integrations/plane/src`) | ✅ |
-| Live Plane | Not used |
+| Suite                                          | Result                           |
+| ---------------------------------------------- | -------------------------------- |
+| Plane package tests                            | 89 passed (incl. 12 sync/events) |
+| Contracts                                      | 8 passed                         |
+| Combined Plane + platform-services + contracts | 234 passed                       |
+| Typecheck (`integration-plane`)                | ✅                               |
+| ESLint (`integrations/plane/src`)              | ✅                               |
+| Live Plane                                     | Not used                         |
 
 ---
 

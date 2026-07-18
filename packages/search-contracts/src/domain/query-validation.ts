@@ -1,7 +1,11 @@
 /** Search query validation (APZSEARCH-001) — contracts only, no ranking. */
 
 import type { SearchConfiguration, SearchQuery, SearchRequest } from "../domain/search";
-import { isSearchProductId, isSearchScope, isSearchSortDirection } from "../enums/catalogue";
+import {
+  isSearchProductId,
+  isSearchScope,
+  isSearchSortDirection,
+} from "../enums/catalogue";
 
 export type SearchQueryValidationIssue = {
   readonly code: string;

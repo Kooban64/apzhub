@@ -21,16 +21,16 @@ Configuration Workbench
 
 ## Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:configuration-foundation` | PASS |
-| `pnpm audit:configuration-platform-services` | PASS |
-| `pnpm audit:configuration-http-client` | PASS |
-| `pnpm audit:configuration-workbench` | PASS |
-| `pnpm audit:configuration-vertical` | PASS (required) |
-| `pnpm openapi:validate:platform` | PASS |
-| Vitest `testing/configuration-vertical` | Required harness |
-| Playwright live webServer | LIMITED (Testing slug conflict — external) |
+| Gate                                         | Result                                     |
+| -------------------------------------------- | ------------------------------------------ |
+| `pnpm audit:configuration-foundation`        | PASS                                       |
+| `pnpm audit:configuration-platform-services` | PASS                                       |
+| `pnpm audit:configuration-http-client`       | PASS                                       |
+| `pnpm audit:configuration-workbench`         | PASS                                       |
+| `pnpm audit:configuration-vertical`          | PASS (required)                            |
+| `pnpm openapi:validate:platform`             | PASS                                       |
+| Vitest `testing/configuration-vertical`      | Required harness                           |
+| Playwright live webServer                    | LIMITED (Testing slug conflict — external) |
 
 ## Intentional non-defects
 

@@ -31,9 +31,9 @@ import {
 } from "@apzhub/integration-zammad";
 
 describe("OSS-100-10 Integration SDK v1.0 re-certification", () => {
-  it("aligns INTEGRATION_SDK_VERSION with package 0.9.0 RC", () => {
+  it("aligns INTEGRATION_SDK_VERSION with package 1.0.0", () => {
     expect(INTEGRATION_SDK_PACKAGE).toBe("@apzhub/integration-sdk");
-    expect(INTEGRATION_SDK_VERSION).toBe("0.9.0");
+    expect(INTEGRATION_SDK_VERSION).toBe("1.0.0");
   });
 
   it("createPlaneAdapterHarness boots and cleans up", async () => {
@@ -63,8 +63,7 @@ describe("OSS-100-10 Integration SDK v1.0 re-certification", () => {
       (c) => c.category === "Architecture",
     );
     expect(architecture?.outcome).not.toBe("fail");
-    const archFails =
-      architecture?.checks.filter((c) => c.outcome === "fail") ?? [];
+    const archFails = architecture?.checks.filter((c) => c.outcome === "fail") ?? [];
     expect(archFails).toEqual([]);
   });
 
@@ -94,8 +93,7 @@ describe("OSS-100-10 Integration SDK v1.0 re-certification", () => {
       (c) => c.category === "Architecture",
     );
     expect(architecture?.outcome).not.toBe("fail");
-    const archFails =
-      architecture?.checks.filter((c) => c.outcome === "fail") ?? [];
+    const archFails = architecture?.checks.filter((c) => c.outcome === "fail") ?? [];
     expect(archFails).toEqual([]);
   });
 
@@ -115,8 +113,7 @@ describe("OSS-100-10 Integration SDK v1.0 re-certification", () => {
       files: {
         "src/bad.ts": 'import { x } from "@apzhub/platform-services";\n',
         "src/map.ts": "const store = EntityMappingStore;\n",
-        "src/leak.ts":
-          'import { PlaneAdapter } from "@apzhub/integration-plane";\n',
+        "src/leak.ts": 'import { PlaneAdapter } from "@apzhub/integration-plane";\n',
       },
     });
     expect(dirty.overall).toBe("fail");

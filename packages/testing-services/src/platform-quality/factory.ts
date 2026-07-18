@@ -10,10 +10,7 @@ import { createProductHealthService } from "./product-health-service";
 import { createProductRegistryService } from "./product-registry-service";
 import { createQualityAggregationService } from "./quality-aggregation-service";
 import { createReleaseGovernanceService } from "./release-governance-service";
-import {
-  createPlatformQualityStore,
-  type PlatformQualityStore,
-} from "./store";
+import { createPlatformQualityStore, type PlatformQualityStore } from "./store";
 import { createPlatformTraceabilityService } from "./traceability-service";
 
 export interface PlatformQualityServiceDeps {

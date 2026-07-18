@@ -1,9 +1,9 @@
 {
   "name": "@apzhub/integration-sdk",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Platform Integration SDK — shared foundation for OSS and vendor adapters (OSS-100)",
+  "description": "Platform Integration SDK — shared foundation for OSS and vendor adapters (OSS-100; v1.0.0 Architecture Frozen)",
   "exports": {
     ".": "./src/index.ts",
     "./client": "./src/client/index.ts",

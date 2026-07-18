@@ -26,10 +26,10 @@ describe("document-core boundary", () => {
       join(ROOT, "packages/document-core/src/storage/storage-provider.ts"),
       "utf8",
     );
-    expect(content).toMatch(
-      /export (?:type|interface) DocumentStorageProvider/,
-    );
+    expect(content).toMatch(/export (?:type|interface) DocumentStorageProvider/);
     expect(content).not.toMatch(/class\s+\w+StorageProvider/);
-    expect(content).not.toMatch(/fs\.promises|@aws-sdk|@azure\/storage|@google-cloud\/storage/);
+    expect(content).not.toMatch(
+      /fs\.promises|@aws-sdk|@azure\/storage|@google-cloud\/storage/,
+    );
   });
 });

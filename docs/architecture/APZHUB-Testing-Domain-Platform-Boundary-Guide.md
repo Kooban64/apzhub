@@ -32,15 +32,15 @@ apps/web (presentation)
 
 ## Responsibility split
 
-| Concern | Domain | Platform |
-| ------- | ------ | -------- |
-| State machines | ✅ | ❌ |
-| Gate evaluation logic | ✅ | ❌ |
-| SQL / repositories | ✅ (persistence pkg) | ❌ |
-| `ServiceRequestContext` enforcement | ❌ | ✅ |
-| `PlatformServiceError` translation | ❌ | ✅ |
-| RequestPipeline / authz map | ❌ | ✅ |
-| `gateway.testing.*` surface | ❌ | ✅ |
+| Concern                                | Domain                     | Platform                             |
+| -------------------------------------- | -------------------------- | ------------------------------------ |
+| State machines                         | ✅                         | ❌                                   |
+| Gate evaluation logic                  | ✅                         | ❌                                   |
+| SQL / repositories                     | ✅ (persistence pkg)       | ❌                                   |
+| `ServiceRequestContext` enforcement    | ❌                         | ✅                                   |
+| `PlatformServiceError` translation     | ❌                         | ✅                                   |
+| RequestPipeline / authz map            | ❌                         | ✅                                   |
+| `gateway.testing.*` surface            | ❌                         | ✅                                   |
 | Dashboard aggregation for platform API | ✅ (data) / ✅ (thin impl) | Presentation-oriented counts in impl |
 
 Platform impls are **thin delegates** — no duplicated business rules.
@@ -49,10 +49,10 @@ Platform impls are **thin delegates** — no duplicated business rules.
 
 ## Error boundary
 
-| Side | Error type |
-| ---- | ---------- |
-| Domain | `DomainRuleError` |
-| Persistence | `PersistenceError` |
+| Side                    | Error type                  |
+| ----------------------- | --------------------------- |
+| Domain                  | `DomainRuleError`           |
+| Persistence             | `PersistenceError`          |
 | Platform public surface | `PlatformServiceError` only |
 
 Domain errors must not escape past `withTestingErrorMapping`.
@@ -67,12 +67,12 @@ Domain services accept platform-compatible context (tenant, user, permissions sn
 
 ## What APZTCMS-011 added vs prior milestones
 
-| Prior (APZTCMS-004–009) | APZTCMS-011 |
-| ----------------------- | ----------- |
-| Domain factories only | Platform service impls + contracts |
-| Repo-level authz | + Pipeline operation authz |
-| No gateway | `gateway.testing.*` nested surface |
-| Direct domain tests | + Platform integration tests |
+| Prior (APZTCMS-004–009) | APZTCMS-011                        |
+| ----------------------- | ---------------------------------- |
+| Domain factories only   | Platform service impls + contracts |
+| Repo-level authz        | + Pipeline operation authz         |
+| No gateway              | `gateway.testing.*` nested surface |
+| Direct domain tests     | + Platform integration tests       |
 
 Domain package versions **unchanged**.
 

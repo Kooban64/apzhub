@@ -37,7 +37,11 @@ function listSourceFiles(directory: string): string[] {
       files.push(...listSourceFiles(fullPath));
       continue;
     }
-    if (/\.(ts|tsx)$/.test(entry) && !entry.endsWith(".test.ts") && !entry.endsWith(".test.tsx")) {
+    if (
+      /\.(ts|tsx)$/.test(entry) &&
+      !entry.endsWith(".test.ts") &&
+      !entry.endsWith(".test.tsx")
+    ) {
       files.push(fullPath);
     }
   }
@@ -149,7 +153,10 @@ describe("platform architecture compliance (PRH-011)", () => {
 
   it("validates law API tenant membership through platform identity", () => {
     const membershipGate = readFileSync(
-      path.join(REPO_ROOT, "apps/web/lib/api/tenant/validate-law-api-tenant-membership.ts"),
+      path.join(
+        REPO_ROOT,
+        "apps/web/lib/api/tenant/validate-law-api-tenant-membership.ts",
+      ),
       "utf8",
     );
     const lawApiAuth = readFileSync(
@@ -167,7 +174,9 @@ describe("platform architecture compliance (PRH-011)", () => {
   });
 
   it("assigns unique capability ids with documented platform owners", () => {
-    const capabilityIds = PLATFORM_CAPABILITY_DEFINITIONS.map((entry) => entry.capabilityId);
+    const capabilityIds = PLATFORM_CAPABILITY_DEFINITIONS.map(
+      (entry) => entry.capabilityId,
+    );
     expect(new Set(capabilityIds).size).toBe(capabilityIds.length);
 
     const ownedPackages = new Set([

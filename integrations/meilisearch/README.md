@@ -1,10 +1,10 @@
 # `@apzhub/integration-meilisearch` — Meilisearch Reference Adapter (APZSEARCH-005)
 
-| Field | Value |
-| --- | --- |
-| **Package** | `@apzhub/integration-meilisearch` **0.1.0** |
-| **Path** | `integrations/meilisearch/` |
-| **Milestone** | APZSEARCH-005 |
+| Field          | Value                                                                                     |
+| -------------- | ----------------------------------------------------------------------------------------- |
+| **Package**    | `@apzhub/integration-meilisearch` **0.1.0**                                               |
+| **Path**       | `integrations/meilisearch/`                                                               |
+| **Milestone**  | APZSEARCH-005                                                                             |
 | **Depends on** | `@apzhub/integration-sdk` · `@apzhub/integration-search-sdk` · `@apzhub/search-contracts` |
 
 ## Purpose

@@ -27,17 +27,17 @@ Consumer / future Workbench
 
 ## Management plane only
 
-| Capability | Available |
-| --- | --- |
-| Metadata CRUD (configurations, namespaces, groups, versions, overrides) | Yes |
-| Lifecycle (draft → validated → approved → published → deprecated → archived) | Yes |
-| Scopes, validation metadata, references, audit | Yes |
-| Diagnostics (capabilities, health, readiness) | Yes |
-| Runtime resolution / effective values | **No** |
-| Runtime application / apply | **No** |
-| Feature flags | **No** |
-| Secret management | **No** |
-| Hot reload / Event Bus | **No** |
+| Capability                                                                   | Available |
+| ---------------------------------------------------------------------------- | --------- |
+| Metadata CRUD (configurations, namespaces, groups, versions, overrides)      | Yes       |
+| Lifecycle (draft → validated → approved → published → deprecated → archived) | Yes       |
+| Scopes, validation metadata, references, audit                               | Yes       |
+| Diagnostics (capabilities, health, readiness)                                | Yes       |
+| Runtime resolution / effective values                                        | **No**    |
+| Runtime application / apply                                                  | **No**    |
+| Feature flags                                                                | **No**    |
+| Secret management                                                            | **No**    |
+| Hot reload / Event Bus                                                       | **No**    |
 
 Configuration SoR (`@apzhub/configuration-*`) is distinct from runtime `@apzhub/config` — not integrated in this milestone.
 

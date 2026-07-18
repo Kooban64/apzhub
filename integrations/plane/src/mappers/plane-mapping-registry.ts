@@ -12,7 +12,10 @@ import {
   type MappingProvider,
   type MappingRegistry,
 } from "@apzhub/integration-sdk/mapping";
-import type { CreateTaskInput, UpdateTaskInput } from "@apzhub/platform-service-contracts";
+import type {
+  CreateTaskInput,
+  UpdateTaskInput,
+} from "@apzhub/platform-service-contracts";
 
 import type { PlaneIssueRecord } from "../internal/plane-api-types";
 import type { MapperContext } from "./mapper-context";
@@ -79,14 +82,16 @@ export function createPlaneMappingProvider(): MappingProvider {
         entityType: "project",
         direction: "write",
         profile: "create",
-        map: (input) => mapProjectToPlaneBody(input as Parameters<typeof mapProjectToPlaneBody>[0]),
+        map: (input) =>
+          mapProjectToPlaneBody(input as Parameters<typeof mapProjectToPlaneBody>[0]),
       }),
       createDefinition({
         id: "plane.project.update.partial",
         entityType: "project",
         direction: "partial_update",
         profile: "update",
-        map: (input) => mapProjectToPlaneBody(input as Parameters<typeof mapProjectToPlaneBody>[0]),
+        map: (input) =>
+          mapProjectToPlaneBody(input as Parameters<typeof mapProjectToPlaneBody>[0]),
       }),
       createDefinition({
         id: "plane.member.default.read",
@@ -106,7 +111,8 @@ export function createPlaneMappingProvider(): MappingProvider {
         entityType: "member",
         direction: "partial_update",
         profile: "update",
-        map: (input) => mapMemberToPlaneBody(input as Parameters<typeof mapMemberToPlaneBody>[0]),
+        map: (input) =>
+          mapMemberToPlaneBody(input as Parameters<typeof mapMemberToPlaneBody>[0]),
       }),
     ],
     capabilities: {

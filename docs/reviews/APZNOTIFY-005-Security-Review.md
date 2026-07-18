@@ -4,14 +4,14 @@
 
 ## Verified absences
 
-| Risk | Status |
-| --- | --- |
-| Provider secrets / SMTP credentials | Not present — no providers |
-| Delivery payloads / email bodies in persistence as SoR delivery | Not applicable — metadata-only |
-| SMS / push token leakage surfaces | Absent |
-| Webhook signing secrets | Absent |
-| Raw backend errors to clients | Translated via platform error envelope |
-| Secrets in Workbench / typed client | None |
+| Risk                                                            | Status                                 |
+| --------------------------------------------------------------- | -------------------------------------- |
+| Provider secrets / SMTP credentials                             | Not present — no providers             |
+| Delivery payloads / email bodies in persistence as SoR delivery | Not applicable — metadata-only         |
+| SMS / push token leakage surfaces                               | Absent                                 |
+| Webhook signing secrets                                         | Absent                                 |
+| Raw backend errors to clients                                   | Translated via platform error envelope |
+| Secrets in Workbench / typed client                             | None                                   |
 
 ## Controls retained
 

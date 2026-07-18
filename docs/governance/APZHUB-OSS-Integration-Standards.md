@@ -10,11 +10,11 @@
 
 All capabilities — OSS-backed and native — must comply with the [Capability Abstraction Standard](../architecture/APZHUB-Capability-Abstraction-Standard.md).
 
-| Type | Applies OSS Integration Standards | Adapter |
-|------|-----------------------------------|---------|
-| OSS-backed product module | Full standards below | Required — [Adapter Boundary Pattern](../architecture/APZHUB-Adapter-Boundary-Pattern.md) |
-| Native product module (e.g. Quality Engineering) | Sections 2–11 below; **no** `integration.yaml` | Internal engine boundary only |
-| Operator / security tier | Partial — no end-user module | Required |
+| Type                                             | Applies OSS Integration Standards              | Adapter                                                                                   |
+| ------------------------------------------------ | ---------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| OSS-backed product module                        | Full standards below                           | Required — [Adapter Boundary Pattern](../architecture/APZHUB-Adapter-Boundary-Pattern.md) |
+| Native product module (e.g. Quality Engineering) | Sections 2–11 below; **no** `integration.yaml` | Internal engine boundary only                                                             |
+| Operator / security tier                         | Partial — no end-user module                   | Required                                                                                  |
 
 Users see APZHUB capability names only. Engines are never exposed.
 
@@ -22,23 +22,23 @@ Users see APZHUB capability names only. Engines are never exposed.
 
 ## 1. Manifest-first
 
-| Artifact | Required before code | Location |
-|----------|---------------------|----------|
-| `integration.yaml` | Yes | `integrations/{id}/` |
-| `service.yaml` | Yes | `services/{id}/` |
-| `module.yaml` | Yes (product modules) | `modules/{id}/` |
-| `event.yaml` | Per event type | `events/{id}/` |
+| Artifact           | Required before code  | Location             |
+| ------------------ | --------------------- | -------------------- |
+| `integration.yaml` | Yes                   | `integrations/{id}/` |
+| `service.yaml`     | Yes                   | `services/{id}/`     |
+| `module.yaml`      | Yes (product modules) | `modules/{id}/`      |
+| `event.yaml`       | Per event type        | `events/{id}/`       |
 
 ---
 
 ## 2. Naming (Document 002)
 
-| Rule | Example |
-|------|---------|
-| User-facing: APZHUB names only | Projects, not Plane |
-| Service: `{Domain}Service` | `ProjectService`, not `PlaneService` |
-| Adapter internal client | `PlaneClient` — never imported outside adapter |
-| Module ID | `projects`, not `plane` |
+| Rule                           | Example                                        |
+| ------------------------------ | ---------------------------------------------- |
+| User-facing: APZHUB names only | Projects, not Plane                            |
+| Service: `{Domain}Service`     | `ProjectService`, not `PlaneService`           |
+| Adapter internal client        | `PlaneClient` — never imported outside adapter |
+| Module ID                      | `projects`, not `plane`                        |
 
 ---
 
@@ -118,16 +118,16 @@ Users see APZHUB capability names only. Engines are never exposed.
 
 ## 10. Quality gates (per wave)
 
-| Gate | Command |
-|------|---------|
-| Lint | `pnpm lint` |
-| Types | `pnpm typecheck` |
-| Build | `pnpm build` |
-| Tests | `pnpm test` |
-| Coverage | `pnpm test:coverage` |
-| E2E smoke | Playwright wave smoke suite |
-| Security review | Mandatory |
-| Architecture compliance | No layer bypass |
+| Gate                    | Command                     |
+| ----------------------- | --------------------------- |
+| Lint                    | `pnpm lint`                 |
+| Types                   | `pnpm typecheck`            |
+| Build                   | `pnpm build`                |
+| Tests                   | `pnpm test`                 |
+| Coverage                | `pnpm test:coverage`        |
+| E2E smoke               | Playwright wave smoke suite |
+| Security review         | Mandatory                   |
+| Architecture compliance | No layer bypass             |
 
 ---
 

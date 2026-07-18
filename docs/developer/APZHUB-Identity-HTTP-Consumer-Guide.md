@@ -3,10 +3,7 @@
 ## Preferred consumption
 
 ```typescript
-import {
-  createHttpIdentityClient,
-  identityQueryKeys,
-} from "@/lib/identity";
+import { createHttpIdentityClient, identityQueryKeys } from "@/lib/identity";
 
 const client = createHttpIdentityClient();
 const users = await client.listUsers();

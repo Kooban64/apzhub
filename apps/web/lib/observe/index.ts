@@ -10,10 +10,7 @@ export {
   observeSectionPath,
 } from "./routes";
 export type { ObserveSection } from "./routes";
-export {
-  ObserveClientError,
-  toObserveUserMessage,
-} from "./observe-errors";
+export { ObserveClientError, toObserveUserMessage } from "./observe-errors";
 export type {
   ObserveClientRequestOptions,
   ObserveCollectionResult,
@@ -22,10 +19,7 @@ export type {
   ObserveEntityViewModel,
   ObserveManagementPlaneViewModel,
 } from "./observe-types";
-export {
-  createHttpObserveClient,
-  type ObserveClient,
-} from "./observe-client";
+export { createHttpObserveClient, type ObserveClient } from "./observe-client";
 export { createMockObserveClient } from "./mock-observe-client";
 export {
   getObserveCapabilities,

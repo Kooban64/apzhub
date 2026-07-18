@@ -125,7 +125,10 @@ async function mockSupportApi(page: Page) {
       return;
     }
 
-    if (path === `/api/v1/support-requests/${REQUEST_ID}/articles` && method === "GET") {
+    if (
+      path === `/api/v1/support-requests/${REQUEST_ID}/articles` &&
+      method === "GET"
+    ) {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -156,7 +159,10 @@ async function mockSupportApi(page: Page) {
       return;
     }
 
-    if (path === `/api/v1/support-requests/${REQUEST_ID}/articles/notes` && method === "POST") {
+    if (
+      path === `/api/v1/support-requests/${REQUEST_ID}/articles/notes` &&
+      method === "POST"
+    ) {
       const body = request.postDataJSON() as { body: string };
       const note = {
         id: NOTE_ID,
@@ -182,7 +188,10 @@ async function mockSupportApi(page: Page) {
       return;
     }
 
-    if (path === `/api/v1/support-requests/${REQUEST_ID}/articles/replies` && method === "POST") {
+    if (
+      path === `/api/v1/support-requests/${REQUEST_ID}/articles/replies` &&
+      method === "POST"
+    ) {
       const body = request.postDataJSON() as { body: string; channel?: string };
       const reply = {
         id: REPLY_ID,
@@ -219,7 +228,10 @@ async function mockSupportApi(page: Page) {
       return;
     }
 
-    if (path === `/api/v1/support-requests/${REQUEST_ID}/priority` && method === "POST") {
+    if (
+      path === `/api/v1/support-requests/${REQUEST_ID}/priority` &&
+      method === "POST"
+    ) {
       const body = request.postDataJSON() as { priority: string };
       current = supportRequest({ ...current, priority: body.priority });
       await route.fulfill({
@@ -396,7 +408,9 @@ test.describe("OSS-110-13 Support Module UI", () => {
     await expect(page.getByText("VPN cannot connect")).toBeVisible();
 
     await page.getByText("VPN cannot connect").click();
-    await expect(page).toHaveURL(new RegExp(`/workspace/support/requests/${REQUEST_ID}`));
+    await expect(page).toHaveURL(
+      new RegExp(`/workspace/support/requests/${REQUEST_ID}`),
+    );
     await expect(page.getByTestId("support-request-detail")).toBeVisible();
 
     await page.getByTestId("support-internal-note-body").fill("Checking logs");

@@ -184,9 +184,7 @@ describe("APZSEARCH-007 search client", () => {
     expect((await client.listScopes()).items).toEqual([]);
     expect((await client.listProfiles()).items).toEqual([]);
     expect((await client.getManagementHealth()).status).toBe("available");
-    expect((await client.getManagementDiagnostics()).health.status).toBe(
-      "available",
-    );
+    expect((await client.getManagementDiagnostics()).health.status).toBe("available");
     expect((await client.listAudit()).items).toEqual([]);
   });
 
@@ -406,14 +404,10 @@ describe("APZSEARCH-007 search client", () => {
     expect((await client.listProfiles()).items[0]?.name).toBe("Default");
     expect((await client.listAudit()).items[0]?.action).toContain("search");
     expect((await client.listProviders()).items[0]?.ownership).toBe("tenant");
-    expect((await client.listConfigurations()).items[0]?.defaultPageSize).toBe(
-      25,
-    );
+    expect((await client.listConfigurations()).items[0]?.defaultPageSize).toBe(25);
     expect((await client.getReadiness()).message).toBe("degraded");
     expect((await client.getDiagnostics()).notes?.[0]).toBe("note-1");
-    expect((await client.getManagementDiagnostics()).health.status).toBe(
-      "degraded",
-    );
+    expect((await client.getManagementDiagnostics()).health.status).toBe("degraded");
   });
 
   it("maps malformed envelopes empty root and non-json error bodies", async () => {
@@ -453,15 +447,14 @@ describe("APZSEARCH-007 search client", () => {
   it("maps HTTP errors and user messages", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(
-        async () =>
-          jsonResponse(
-            {
-              error: { message: "Nope", code: "FORBIDDEN" },
-              meta: { correlationId: "c1" },
-            },
-            403,
-          ),
+      vi.fn(async () =>
+        jsonResponse(
+          {
+            error: { message: "Nope", code: "FORBIDDEN" },
+            meta: { correlationId: "c1" },
+          },
+          403,
+        ),
       ),
     );
     const client = createHttpSearchClient();
@@ -484,9 +477,9 @@ describe("APZSEARCH-007 search client", () => {
     expect(
       toSearchUserMessage(new SearchClientError({ status: 404, message: "x" })),
     ).toMatch(/not found/i);
-    expect(
-      toSearchUserMessage(new SearchClientError({ message: "" })),
-    ).toMatch(/Unable/);
+    expect(toSearchUserMessage(new SearchClientError({ message: "" }))).toMatch(
+      /Unable/,
+    );
     expect(toSearchUserMessage(new Error("boom"))).toBe("boom");
     expect(toSearchUserMessage({})).toMatch(/Unable/);
   });
@@ -496,9 +489,7 @@ describe("APZSEARCH-007 search client", () => {
     setSearchClient(client);
     expect(getSearchClient()).toBe(client);
     expect((await client.validateQuery({ keywords: "x" })).valid).toBe(true);
-    expect((await client.suggest({ keywords: "hi" })).suggestions[0]?.text).toBe(
-      "hi",
-    );
+    expect((await client.suggest({ keywords: "hi" })).suggestions[0]?.text).toBe("hi");
     expect((await client.getHealth()).status).toBe("available");
     expect((await client.getReadiness()).healthy).toBe(true);
     expect((await client.getDiagnostics()).statistics.declaredIndexCount).toBe(1);
@@ -533,9 +524,7 @@ describe("APZSEARCH-007 search client", () => {
     expect((await listSearchScopes()).items[0]?.scope).toBe("tenant");
     expect((await listSearchProfiles()).items[0]?.name).toBe("Default");
     expect((await listSearchAudit()).items[0]?.action).toContain("search");
-    expect(
-      (await getSearchManagementDiagnostics()).health.status,
-    ).toBe("available");
+    expect((await getSearchManagementDiagnostics()).health.status).toBe("available");
   });
 
   it("sanitises highlight HTML", () => {

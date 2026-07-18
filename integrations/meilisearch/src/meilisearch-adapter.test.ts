@@ -107,7 +107,10 @@ describe("Meilisearch error mapper", () => {
     const notFound = mapper.map({
       statusCode: 404,
       body: { code: "index_not_found", message: "missing" },
-      context: { correlationId: TEST_CORRELATION_ID, integrationId: MEILISEARCH_INTEGRATION_ID },
+      context: {
+        correlationId: TEST_CORRELATION_ID,
+        integrationId: MEILISEARCH_INTEGRATION_ID,
+      },
     });
     expect(notFound?.error.category).toBe("not_found");
 
@@ -371,6 +374,8 @@ describe("Meilisearch certification contract", () => {
     expect(adapter.meilisearchMetrics).toBeDefined();
     expect(adapter.meilisearchLogger).toBeDefined();
     expect(adapter.getSearchCapabilities().keywords).toBe(true);
-    expect(adapter.evaluateCompatibility("meilisearch").providerKind).toBe("meilisearch");
+    expect(adapter.evaluateCompatibility("meilisearch").providerKind).toBe(
+      "meilisearch",
+    );
   });
 });

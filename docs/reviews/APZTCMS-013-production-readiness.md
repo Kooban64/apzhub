@@ -13,20 +13,20 @@ Full product path Workbench → Typed Client → HTTP → Gateway → RequestPip
 
 ## Readiness checklist
 
-| Area | Status | Notes |
-| ---- | ------ | ----- |
-| Architecture boundaries | Ready | Zero forbidden-import violations |
-| API + OpenAPI | Ready | `pnpm openapi:validate:platform` PASS |
-| Domain quality | Ready | Typecheck/lint/tests PASS |
-| Platform testing services | Ready | Vitest + boundary tests PASS |
-| Security controls | Ready | Authn/authz/tenancy/correlation |
-| Certification engine | Ready | Human approve only; advisory recs |
-| Release readiness | Ready | `isDecision: false` |
-| Workbench presentation | Ready | No UI business logic |
-| Live Playwright on :3300 | Limitation | Specs present; runtime not available this session |
-| apps/web V8 coverage | Limitation | Not in root coverage include |
-| Cross-product typecheck debt | Limitation | Plane/Zammad harness noise |
-| AI / Event Bus / runners / binary evidence | Excluded | By design |
+| Area                                       | Status     | Notes                                             |
+| ------------------------------------------ | ---------- | ------------------------------------------------- |
+| Architecture boundaries                    | Ready      | Zero forbidden-import violations                  |
+| API + OpenAPI                              | Ready      | `pnpm openapi:validate:platform` PASS             |
+| Domain quality                             | Ready      | Typecheck/lint/tests PASS                         |
+| Platform testing services                  | Ready      | Vitest + boundary tests PASS                      |
+| Security controls                          | Ready      | Authn/authz/tenancy/correlation                   |
+| Certification engine                       | Ready      | Human approve only; advisory recs                 |
+| Release readiness                          | Ready      | `isDecision: false`                               |
+| Workbench presentation                     | Ready      | No UI business logic                              |
+| Live Playwright on :3300                   | Limitation | Specs present; runtime not available this session |
+| apps/web V8 coverage                       | Limitation | Not in root coverage include                      |
+| Cross-product typecheck debt               | Limitation | Plane/Zammad harness noise                        |
+| AI / Event Bus / runners / binary evidence | Excluded   | By design                                         |
 
 ## Production classification evidence
 

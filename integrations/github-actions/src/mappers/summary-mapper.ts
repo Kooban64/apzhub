@@ -1,6 +1,9 @@
 import type { PipelineLogReference, PipelineSummary } from "@apzhub/testing-contracts";
 
-import type { GitHubJobRecord, GitHubWorkflowRunRecord } from "../internal/github-actions-api-types";
+import type {
+  GitHubJobRecord,
+  GitHubWorkflowRunRecord,
+} from "../internal/github-actions-api-types";
 import { mapGitHubActionsStatus } from "./status-mapper";
 import { mapGitHubJob } from "./job-mapper";
 

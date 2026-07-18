@@ -1,7 +1,5 @@
 import type { AuthorizationRepositoryBundle } from "./repositories/repository-interfaces";
-import {
-  createInMemoryAuthorizationRepositories,
-} from "./repositories/in-memory-repositories";
+import { createInMemoryAuthorizationRepositories } from "./repositories/in-memory-repositories";
 import { AuthorizationService } from "./authorization-service";
 import { InMemoryAuthorizationEventPublisher } from "./authorization-events";
 import {
@@ -69,7 +67,10 @@ export {
   type AuthorizationServiceOptions,
 } from "./authorization-service";
 
-export { PermissionService, AuthorizationDiagnosticsTracker } from "./permission-service";
+export {
+  PermissionService,
+  AuthorizationDiagnosticsTracker,
+} from "./permission-service";
 export { RoleService } from "./role-service";
 export { RoleAssignmentService } from "./role-assignment-service";
 export { EffectivePermissionService } from "./effective-permission-service";

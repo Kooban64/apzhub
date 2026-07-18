@@ -2,12 +2,12 @@
 
 ## Severity levels
 
-| Level | Example | Response |
-|-------|---------|----------|
-| P1 | Platform unreachable; auth down | Immediate; all hands |
-| P2 | Readiness failing; degraded DB/Redis | Within 1 hour |
-| P3 | Environment warn; single framework degraded | Next business day |
-| P4 | CSP report-only findings | Backlog |
+| Level | Example                                     | Response             |
+| ----- | ------------------------------------------- | -------------------- |
+| P1    | Platform unreachable; auth down             | Immediate; all hands |
+| P2    | Readiness failing; degraded DB/Redis        | Within 1 hour        |
+| P3    | Environment warn; single framework degraded | Next business day    |
+| P4    | CSP report-only findings                    | Backlog              |
 
 ## Detection
 

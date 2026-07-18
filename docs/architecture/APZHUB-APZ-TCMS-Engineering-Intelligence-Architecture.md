@@ -21,13 +21,13 @@ PlatformServiceGateway.testing.engineeringIntelligence
 
 ## Packages
 
-| Package | Version | Role |
-|---------|---------|------|
-| `@apzhub/testing-contracts` | 0.10.0 | Canonical EI models + service interfaces |
-| `@apzhub/testing-persistence` | 0.10.0 | Migrations 0033/0034 + repos |
-| `@apzhub/testing-services` | 0.10.0 | Domain implementations |
-| `@apzhub/platform-service-contracts` | 0.13.0 | Gateway facet |
-| `@apzhub/platform-services` | 0.13.0 | Impl + authz map |
+| Package                              | Version | Role                                     |
+| ------------------------------------ | ------- | ---------------------------------------- |
+| `@apzhub/testing-contracts`          | 0.10.0  | Canonical EI models + service interfaces |
+| `@apzhub/testing-persistence`        | 0.10.0  | Migrations 0033/0034 + repos             |
+| `@apzhub/testing-services`           | 0.10.0  | Domain implementations                   |
+| `@apzhub/platform-service-contracts` | 0.13.0  | Gateway facet                            |
+| `@apzhub/platform-services`          | 0.13.0  | Impl + authz map                         |
 
 ## Aggregation rule
 

@@ -62,7 +62,8 @@ export async function GET(): Promise<NextResponse> {
   const runtimeHealthy = bootstrap?.success ?? false;
   const allHealthy = database.ok && redis.ok && runtimeHealthy;
   const securityService = getSharedPlatformSecurityService();
-  const securityDiagnostics = securityService.securityDiagnostics.getSecurityDiagnostics();
+  const securityDiagnostics =
+    securityService.securityDiagnostics.getSecurityDiagnostics();
   const resilience = await securityService.resilience.getResilienceSnapshot({
     runtimeReady: runtimeHealthy,
   });

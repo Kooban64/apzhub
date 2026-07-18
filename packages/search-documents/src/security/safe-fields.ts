@@ -48,7 +48,7 @@ const FORBIDDEN_KEY_PATTERN =
  */
 
 const FORBIDDEN_VALUE_PATTERN =
-  /s3:\/\/|https?:\/\/.*[?&](signature|token|credential|X-Amz)|Bearer\s+[A-Za-z0-9._\-]+|\/var\/|\/tmp\/|[A-Za-z]:\\|\.pem\b|AKIA[0-9A-Z]{16}/i;
+  /s3:\/\/|https?:\/\/.*[?&](signature|token|credential|X-Amz)|Bearer\s+[A-Za-z0-9._-]+|\/var\/|\/tmp\/|[A-Za-z]:\\|\.pem\b|AKIA[0-9A-Z]{16}/i;
 
 const CHECKSUM_HEX_VALUE = /^[a-f0-9]{32,128}$/i;
 
@@ -59,9 +59,7 @@ export type SafeFieldScanIssue = {
 };
 
 export function isSafeMetadataKey(key: string): boolean {
-  return (DOCUMENTS_SEARCH_SAFE_METADATA_KEYS as readonly string[]).includes(
-    key,
-  );
+  return (DOCUMENTS_SEARCH_SAFE_METADATA_KEYS as readonly string[]).includes(key);
 }
 
 export function isForbiddenMetadataKey(key: string): boolean {

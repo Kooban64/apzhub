@@ -1,10 +1,22 @@
 import type { IntegrationRequestContext } from "@apzhub/integration-sdk";
 
-import type { PlaneLabelRecord, PlanePaginatedResponse } from "../internal/plane-api-types";
-import { mapLabelToPlaneBody, mapPlaneLabel, resolveProjectPlaneId } from "../mappers/label-mapper";
+import type {
+  PlaneLabelRecord,
+  PlanePaginatedResponse,
+} from "../internal/plane-api-types";
+import {
+  mapLabelToPlaneBody,
+  mapPlaneLabel,
+  resolveProjectPlaneId,
+} from "../mappers/label-mapper";
 import type { Label } from "../models/canonical";
 import type { CreateLabelInput, UpdateLabelInput } from "../models/inputs";
-import type { LabelListFilter, PageRequest, PageResult, SortField } from "../models/query";
+import type {
+  LabelListFilter,
+  PageRequest,
+  PageResult,
+  SortField,
+} from "../models/query";
 import {
   assertValid,
   mergeValidation,
@@ -12,8 +24,15 @@ import {
   validateRequiredString,
   validateSortFields,
 } from "../validation/request-validation";
-import { validatePlaneLabelResponse, validatePlanePaginatedResponse } from "../validation/response-validation";
-import { applyClientSort, buildPlaneListQuery, mapPaginatedResult } from "./list-helpers";
+import {
+  validatePlaneLabelResponse,
+  validatePlanePaginatedResponse,
+} from "../validation/response-validation";
+import {
+  applyClientSort,
+  buildPlaneListQuery,
+  mapPaginatedResult,
+} from "./list-helpers";
 import type { PlaneServiceDeps } from "./plane-operation-runner";
 
 const LABEL_SORT_FIELDS = ["name"] as const;
@@ -29,7 +48,10 @@ export class PlaneLabelService {
     sort: readonly SortField<(typeof LABEL_SORT_FIELDS)[number]>[] = [],
   ): Promise<PageResult<Label>> {
     assertValid(
-      mergeValidation(validatePageRequest(page), validateSortFields(sort, LABEL_SORT_FIELDS)),
+      mergeValidation(
+        validatePageRequest(page),
+        validateSortFields(sort, LABEL_SORT_FIELDS),
+      ),
       "labels.list",
     );
 
@@ -37,7 +59,11 @@ export class PlaneLabelService {
       const response = (await this.deps.client.listLabels(
         context,
         resolveProjectPlaneId(projectId),
-        buildPlaneListQuery(page, sort, filter.search ? { search: filter.search } : undefined),
+        buildPlaneListQuery(
+          page,
+          sort,
+          filter.search ? { search: filter.search } : undefined,
+        ),
       )) as PlanePaginatedResponse<PlaneLabelRecord>;
 
       assertValid(validatePlanePaginatedResponse(response), "labels.list.response");
@@ -54,7 +80,11 @@ export class PlaneLabelService {
       if (sort.length > 0) {
         result = {
           ...result,
-          items: applyClientSort(result.items, sort, (item, field) => item[field as keyof Label] as string),
+          items: applyClientSort(
+            result.items,
+            sort,
+            (item, field) => item[field as keyof Label] as string,
+          ),
         };
       }
 
@@ -62,7 +92,11 @@ export class PlaneLabelService {
     });
   }
 
-  async get(context: IntegrationRequestContext, projectId: string, labelId: string): Promise<Label> {
+  async get(
+    context: IntegrationRequestContext,
+    projectId: string,
+    labelId: string,
+  ): Promise<Label> {
     return this.deps.runner.run(context, "labels.get", async () => {
       const record = await this.deps.client.getLabel(
         context,
@@ -110,7 +144,11 @@ export class PlaneLabelService {
     });
   }
 
-  async delete(context: IntegrationRequestContext, projectId: string, labelId: string): Promise<void> {
+  async delete(
+    context: IntegrationRequestContext,
+    projectId: string,
+    labelId: string,
+  ): Promise<void> {
     await this.deps.runner.run(context, "labels.delete", async () => {
       await this.deps.client.deleteLabel(
         context,

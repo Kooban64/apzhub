@@ -42,16 +42,16 @@ Public factory API remains `createTestingSearchPublisher` / `createTestingSearch
 
 Each implements `TestingDomainSearchPublisher` via `DomainSearchPublisherBase` (shared validate/publish/update/preview/remove pipeline + diagnostics):
 
-| Publisher | Domain id | Entity types |
-| --------- | --------- | ------------ |
-| `ManualTestingPublisher` | `manual` | test_plan, test_suite, test_case, test_execution, test_run, execution_step, evidence, approval, requirement, defect |
-| `AutomationPublisher` | `automation` | automation_run, automation_suite, imported_result, coverage_summary |
-| `CertificationPublisher` | `certification` | certification, certification_gate, certification_approval, certification_evidence, certification_decision |
-| `ReleasePublisher` | `release` | release, release_candidate, release_package, release_scope, release_approval, release_decision, release_manifest, release_summary |
-| `EngineeringIntelligencePublisher` | `engineering_intelligence` | engineering_snapshot, engineering_trend, benchmark, historical_snapshot, risk_summary |
-| `QualityPublisher` | `quality` | quality_summary, quality_coverage_summary, defect_summary |
-| `ReportingMetadataPublisher` | `reporting_metadata` | report_metadata, report_template |
-| `PipelinePublisher` | `pipeline` | pipeline, pipeline_run, pipeline_import |
+| Publisher                          | Domain id                  | Entity types                                                                                                                      |
+| ---------------------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `ManualTestingPublisher`           | `manual`                   | test_plan, test_suite, test_case, test_execution, test_run, execution_step, evidence, approval, requirement, defect               |
+| `AutomationPublisher`              | `automation`               | automation_run, automation_suite, imported_result, coverage_summary                                                               |
+| `CertificationPublisher`           | `certification`            | certification, certification_gate, certification_approval, certification_evidence, certification_decision                         |
+| `ReleasePublisher`                 | `release`                  | release, release_candidate, release_package, release_scope, release_approval, release_decision, release_manifest, release_summary |
+| `EngineeringIntelligencePublisher` | `engineering_intelligence` | engineering_snapshot, engineering_trend, benchmark, historical_snapshot, risk_summary                                             |
+| `QualityPublisher`                 | `quality`                  | quality_summary, quality_coverage_summary, defect_summary                                                                         |
+| `ReportingMetadataPublisher`       | `reporting_metadata`       | report_metadata, report_template                                                                                                  |
+| `PipelinePublisher`                | `pipeline`                 | pipeline, pipeline_run, pipeline_import                                                                                           |
 
 Engineering Score is published as existing `engineering_snapshot` (`EngineeringSnapshot`).
 

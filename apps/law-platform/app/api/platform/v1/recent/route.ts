@@ -1,7 +1,10 @@
 import { headers } from "next/headers";
 
 import { getValidatedSession } from "@apzhub/auth/server";
-import { handleGetRecent, handlePostRecent } from "@apzhub/platform-personalisation/server";
+import {
+  handleGetRecent,
+  handlePostRecent,
+} from "@apzhub/platform-personalisation/server";
 
 async function resolveSession() {
   return getValidatedSession(await headers());

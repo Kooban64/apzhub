@@ -18,9 +18,13 @@ export function OpsPageShell({
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-muted-foreground)]">
           Platform Operations
         </p>
-        <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">{title}</h1>
+        <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">
+          {title}
+        </h1>
         {description ? (
-          <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">{description}</p>
+          <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+            {description}
+          </p>
         ) : null}
       </header>
       {children}
@@ -46,17 +50,15 @@ export function OpsStatCard({
       </CardHeader>
       <CardContent>
         <p className="text-2xl font-semibold">{value}</p>
-        {hint ? <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">{hint}</p> : null}
+        {hint ? (
+          <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">{hint}</p>
+        ) : null}
       </CardContent>
     </Card>
   );
 }
 
-export function OpsStatusBadge({
-  status,
-}: {
-  readonly status: string;
-}) {
+export function OpsStatusBadge({ status }: { readonly status: string }) {
   const normalized = status.toLowerCase();
   const tone =
     normalized === "ready" ||
@@ -64,14 +66,18 @@ export function OpsStatusBadge({
     normalized === "active" ||
     normalized === "allow"
       ? "bg-emerald-500/15 text-emerald-700"
-      : normalized.includes("ready_with") || normalized.includes("degraded") || normalized === "pending"
+      : normalized.includes("ready_with") ||
+          normalized.includes("degraded") ||
+          normalized === "pending"
         ? "bg-amber-500/15 text-amber-700"
         : normalized.includes("not_ready") || normalized.includes("unhealthy")
           ? "bg-red-500/15 text-red-700"
           : "bg-muted text-[var(--color-muted-foreground)]";
 
   return (
-    <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${tone}`}>
+    <span
+      className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${tone}`}
+    >
       {status}
     </span>
   );
@@ -108,7 +114,10 @@ export function OpsTable({
             </tr>
           ) : (
             rows.map((row, index) => (
-              <tr key={`row-${index}`} className="border-t border-[var(--color-border)]">
+              <tr
+                key={`row-${index}`}
+                className="border-t border-[var(--color-border)]"
+              >
                 {row.map((cell, cellIndex) => (
                   <td key={`${index}-${cellIndex}`} className="px-4 py-2 align-top">
                     {cell}
@@ -132,7 +141,11 @@ export function OpsJsonPanel({ value }: { readonly value: unknown }) {
 }
 
 export function OpsLoadingState() {
-  return <p className="text-sm text-[var(--color-muted-foreground)]">Loading platform data…</p>;
+  return (
+    <p className="text-sm text-[var(--color-muted-foreground)]">
+      Loading platform data…
+    </p>
+  );
 }
 
 export function OpsErrorState({ message }: { readonly message: string }) {

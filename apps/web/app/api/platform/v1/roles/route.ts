@@ -29,7 +29,12 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   if (!body.slug || !body.name || !body.scope) {
     return NextResponse.json(
-      { error: { code: "VALIDATION_ERROR", message: "slug, name, and scope are required." } },
+      {
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "slug, name, and scope are required.",
+        },
+      },
       { status: 400 },
     );
   }

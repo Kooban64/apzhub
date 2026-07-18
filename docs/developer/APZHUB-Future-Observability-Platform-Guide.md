@@ -13,20 +13,20 @@ The frozen Platform Observability programme remains the canonical metadata Syste
 
 ## Possible future programmes
 
-| Programme | Intent |
-| --- | --- |
-| Grafana provider | Provider adapter for Grafana metadata/connectivity (not Workbench embed by default) |
-| Prometheus provider | Prometheus integration behind explicit provider contracts |
-| Loki provider | Log provider adapter |
-| OpenTelemetry provider | Trace/metrics exporter/provider integration |
-| AlertManager provider | Alert routing provider integration |
-| Metrics collection | Live metric collection pipelines |
-| Log ingestion | Live log ingestion pipelines |
-| Trace ingestion | Live span/trace ingestion pipelines |
-| Live dashboards | Dashboard rendering / embedding (distinct from definition metadata) |
-| Telemetry streaming | WebSocket / SSE live telemetry |
-| Event Bus integration | Async observability events on platform Event Bus |
-| AI-assisted diagnostics | AI analysis over safe diagnostics metadata |
+| Programme               | Intent                                                                              |
+| ----------------------- | ----------------------------------------------------------------------------------- |
+| Grafana provider        | Provider adapter for Grafana metadata/connectivity (not Workbench embed by default) |
+| Prometheus provider     | Prometheus integration behind explicit provider contracts                           |
+| Loki provider           | Log provider adapter                                                                |
+| OpenTelemetry provider  | Trace/metrics exporter/provider integration                                         |
+| AlertManager provider   | Alert routing provider integration                                                  |
+| Metrics collection      | Live metric collection pipelines                                                    |
+| Log ingestion           | Live log ingestion pipelines                                                        |
+| Trace ingestion         | Live span/trace ingestion pipelines                                                 |
+| Live dashboards         | Dashboard rendering / embedding (distinct from definition metadata)                 |
+| Telemetry streaming     | WebSocket / SSE live telemetry                                                      |
+| Event Bus integration   | Async observability events on platform Event Bus                                    |
+| AI-assisted diagnostics | AI analysis over safe diagnostics metadata                                          |
 
 ## Distinct recommended next programme
 

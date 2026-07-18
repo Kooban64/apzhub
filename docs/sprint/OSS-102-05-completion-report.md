@@ -82,36 +82,36 @@ Additive contracts in `@apzhub/platform-service-contracts` v0.5.0:
 
 ## Package versions
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/integration-zammad` | **0.4.0** |
+| Package                              | Version   |
+| ------------------------------------ | --------- |
+| `@apzhub/integration-zammad`         | **0.4.0** |
 | `@apzhub/platform-service-contracts` | **0.5.0** |
 
 ---
 
 ## Tests & coverage
 
-| Suite | Result |
-| --- | --- |
-| Zammad package | **75 passed** |
-| Plane + Zammad + contracts regression | **184 passed** |
-| `ZammadSearchService` lines | **~92.9%** (functions 100%) |
-| `ZammadHistoryService` lines | **100%** |
-| `ZammadAnalyticsService` lines | **100%** |
-| Package lines | **~90.8%** |
-| Architecture boundary checks | Pass |
+| Suite                                 | Result                      |
+| ------------------------------------- | --------------------------- |
+| Zammad package                        | **75 passed**               |
+| Plane + Zammad + contracts regression | **184 passed**              |
+| `ZammadSearchService` lines           | **~92.9%** (functions 100%) |
+| `ZammadHistoryService` lines          | **100%**                    |
+| `ZammadAnalyticsService` lines        | **100%**                    |
+| Package lines                         | **~90.8%**                  |
+| Architecture boundary checks          | Pass                        |
 
 ---
 
 ## Quality gates
 
-| Gate | Result |
-| --- | --- |
-| Lint (`eslint` on zammad + contracts) | **Pass** |
-| Typecheck (zammad + contracts) | **Pass** |
-| Tests (Zammad 75; Plane+Zammad+contracts 184) | **Pass** |
-| Coverage (zammad package lines) | **~90.8%** — no regressions |
-| `pnpm build` (`apps/web`) | **Pre-existing failure** — Next.js `/_not-found` prerender `useContext` null; unrelated to adapter changes |
+| Gate                                          | Result                                                                                                     |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Lint (`eslint` on zammad + contracts)         | **Pass**                                                                                                   |
+| Typecheck (zammad + contracts)                | **Pass**                                                                                                   |
+| Tests (Zammad 75; Plane+Zammad+contracts 184) | **Pass**                                                                                                   |
+| Coverage (zammad package lines)               | **~90.8%** — no regressions                                                                                |
+| `pnpm build` (`apps/web`)                     | **Pre-existing failure** — Next.js `/_not-found` prerender `useContext` null; unrelated to adapter changes |
 
 ---
 
@@ -128,14 +128,14 @@ Additive contracts in `@apzhub/platform-service-contracts` v0.5.0:
 
 ## Reference Adapter comparison
 
-| Pattern | Plane (Reference) | Zammad (this milestone) |
-| --- | --- | --- |
-| Base | `IntegrationAdapterBase` | Same |
-| Runner | `PlaneOperationRunner` | `ZammadOperationRunner` |
-| Search | Project/task list filters + activity | Dedicated Support `search` service |
-| History/activity | `activity` | `history` (Support timeline) |
-| Analytics | Project intelligence | Support intelligence |
-| Domain DTOs | Project/Task/Comment | SupportTicket/Article/History/Search |
+| Pattern          | Plane (Reference)                    | Zammad (this milestone)              |
+| ---------------- | ------------------------------------ | ------------------------------------ |
+| Base             | `IntegrationAdapterBase`             | Same                                 |
+| Runner           | `PlaneOperationRunner`               | `ZammadOperationRunner`              |
+| Search           | Project/task list filters + activity | Dedicated Support `search` service   |
+| History/activity | `activity`                           | `history` (Support timeline)         |
+| Analytics        | Project intelligence                 | Support intelligence                 |
+| Domain DTOs      | Project/Task/Comment                 | SupportTicket/Article/History/Search |
 
 Architecture remains frozen to the Reference Adapter Standard.
 

@@ -37,12 +37,15 @@ function mapUserSort(
   });
 }
 
-export function createZammadUserProvider(core: ZammadCoreServices): SupportUserProvider {
+export function createZammadUserProvider(
+  core: ZammadCoreServices,
+): SupportUserProvider {
   return {
     listUsers(ctx, query) {
-      const { page, sort, filter } = unwrapListQuery<SupportUserListFilter, SupportUserSortField>(
-        query,
-      );
+      const { page, sort, filter } = unwrapListQuery<
+        SupportUserListFilter,
+        SupportUserSortField
+      >(query);
       return withProviderErrorMapping(ctx.correlationId, () =>
         core.users.list(toIntegrationContext(ctx), filter, page, mapUserSort(sort)),
       );
@@ -61,9 +64,10 @@ export function createZammadUserProvider(core: ZammadCoreServices): SupportUserP
     },
 
     search(ctx, queryText, query) {
-      const { page, sort, filter } = unwrapListQuery<SupportUserListFilter, SupportUserSortField>(
-        query,
-      );
+      const { page, sort, filter } = unwrapListQuery<
+        SupportUserListFilter,
+        SupportUserSortField
+      >(query);
       return withProviderErrorMapping(ctx.correlationId, () =>
         core.users.search(
           toIntegrationContext(ctx),

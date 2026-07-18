@@ -13,14 +13,14 @@ Exposed the Platform Observability metadata management plane through `/api/v1/ob
 
 ## Package / artefact versions
 
-| Package / artefact | Version / note |
-| --- | --- |
-| Platform OpenAPI | **1.8.0** |
-| `@apzhub/observe-contracts` | **0.2.0** (unchanged) |
-| `@apzhub/observe-core` | **0.2.0** (unchanged) |
-| `@apzhub/observe-persistence` | **0.1.0** (unchanged) |
-| `@apzhub/platform-services` | **0.24.0** (unchanged) |
-| `@apzhub/web` | depends on `@apzhub/observe-contracts` |
+| Package / artefact            | Version / note                         |
+| ----------------------------- | -------------------------------------- |
+| Platform OpenAPI              | **1.8.0**                              |
+| `@apzhub/observe-contracts`   | **0.2.0** (unchanged)                  |
+| `@apzhub/observe-core`        | **0.2.0** (unchanged)                  |
+| `@apzhub/observe-persistence` | **0.1.0** (unchanged)                  |
+| `@apzhub/platform-services`   | **0.24.0** (unchanged)                 |
+| `@apzhub/web`                 | depends on `@apzhub/observe-contracts` |
 
 ## Architecture
 
@@ -54,33 +54,33 @@ Metadata only. No provider credentials. Diagnostics do not probe Grafana/Prometh
 
 ## Testing
 
-| Suite | Result |
-| --- | --- |
-| Handler tests + full-surface coverage | PASS |
-| Typed client / routes / query keys | PASS |
-| Boundary harness `testing/observe-http-client` | PASS |
-| Playwright mock HTTP `apzobserve-003-observe-http.spec.ts` | shipped |
-| `pnpm audit:observe-http-client` | PASS (0 violations) |
+| Suite                                                      | Result              |
+| ---------------------------------------------------------- | ------------------- |
+| Handler tests + full-surface coverage                      | PASS                |
+| Typed client / routes / query keys                         | PASS                |
+| Boundary harness `testing/observe-http-client`             | PASS                |
+| Playwright mock HTTP `apzobserve-003-observe-http.spec.ts` | shipped             |
+| `pnpm audit:observe-http-client`                           | PASS (0 violations) |
 
 ## Coverage (scoped)
 
-| Metric | Value |
-| --- | ---: |
-| Lines | **99.45%** |
-| Functions | **100%** |
-| Branches | **89.45%** |
+| Metric    |      Value |
+| --------- | ---------: |
+| Lines     | **99.45%** |
+| Functions |   **100%** |
+| Branches  | **89.45%** |
 
 Scope: `handlers/observe.ts` + `apps/web/lib/observe/**` (excluding type-only module).
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| Lint (observe handlers/schemas/client) | PASS |
-| Vitest (observe HTTP/client) | PASS |
-| OpenAPI validate platform | PASS |
-| Architecture / dependency / boundary audit | PASS |
-| Prior observe-001/002 audits | unchanged PASS |
+| Gate                                       | Result         |
+| ------------------------------------------ | -------------- |
+| Lint (observe handlers/schemas/client)     | PASS           |
+| Vitest (observe HTTP/client)               | PASS           |
+| OpenAPI validate platform                  | PASS           |
+| Architecture / dependency / boundary audit | PASS           |
+| Prior observe-001/002 audits               | unchanged PASS |
 
 ## Technical Debt
 

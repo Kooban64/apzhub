@@ -24,73 +24,73 @@ From this point forward, AI conversations and engineering work should begin by r
 
 ### Layer 1 — Executive Foundation
 
-| Document | Path |
-|----------|------|
+| Document            | Path                                     |
+| ------------------- | ---------------------------------------- |
 | APZHUB Master Brief | `docs/foundation/APZHUB-MASTER-BRIEF.md` |
 | APZHUB Constitution | `docs/foundation/APZHUB-CONSTITUTION.md` |
-| APZHUB Vision | `docs/foundation/APZHUB-VISION.md` |
+| APZHUB Vision       | `docs/foundation/APZHUB-VISION.md`       |
 
 ### Layer 2 — Engineering Foundation
 
-| Document | Path |
-|----------|------|
-| Engineering Handbook | `docs/foundation/ENGINEERING-HANDBOOK.md` |
-| Architecture Handbook | `docs/foundation/ARCHITECTURE-HANDBOOK.md` |
+| Document                      | Path                                               |
+| ----------------------------- | -------------------------------------------------- |
+| Engineering Handbook          | `docs/foundation/ENGINEERING-HANDBOOK.md`          |
+| Architecture Handbook         | `docs/foundation/ARCHITECTURE-HANDBOOK.md`         |
 | Platform Capability Catalogue | `docs/foundation/PLATFORM-CAPABILITY-CATALOGUE.md` |
-| Package Catalogue | `docs/foundation/PACKAGE-CATALOGUE.md` |
-| Product Catalogue | `docs/foundation/PRODUCT-CATALOGUE.md` |
-| OSS Catalogue | `docs/foundation/OSS-CATALOGUE.md` |
-| Integration Catalogue | `docs/foundation/INTEGRATION-CATALOGUE.md` |
+| Package Catalogue             | `docs/foundation/PACKAGE-CATALOGUE.md`             |
+| Product Catalogue             | `docs/foundation/PRODUCT-CATALOGUE.md`             |
+| OSS Catalogue                 | `docs/foundation/OSS-CATALOGUE.md`                 |
+| Integration Catalogue         | `docs/foundation/INTEGRATION-CATALOGUE.md`         |
 
 ### Layer 3 — Programme Knowledge
 
-| Document | Path |
-|----------|------|
+| Document      | Path                               |
+| ------------- | ---------------------------------- |
 | Project Bible | `docs/foundation/PROJECT-BIBLE.md` |
 
 ### Layer 4 — Decision Foundation
 
-| Document | Path |
-|----------|------|
+| Document          | Path                                   |
+| ----------------- | -------------------------------------- |
 | Decision Register | `docs/foundation/DECISION-REGISTER.md` |
-| ADR Catalogue | `docs/foundation/ADR-CATALOGUE.md` |
+| ADR Catalogue     | `docs/foundation/ADR-CATALOGUE.md`     |
 
 ### Layer 5 — AI Foundation
 
-| Document | Path |
-|----------|------|
-| AI Context | `docs/foundation/AI-CONTEXT.md` |
+| Document                 | Path                                          |
+| ------------------------ | --------------------------------------------- |
+| AI Context               | `docs/foundation/AI-CONTEXT.md`               |
 | AI Engineering Standards | `docs/foundation/AI-ENGINEERING-STANDARDS.md` |
-| AI Workflow | `docs/foundation/AI-WORKFLOW.md` |
-| Current State | `docs/foundation/CURRENT-STATE.md` |
-| Current Milestone | `docs/foundation/CURRENT-MILESTONE.md` |
-| Active Backlog | `docs/foundation/ACTIVE-BACKLOG.md` |
+| AI Workflow              | `docs/foundation/AI-WORKFLOW.md`              |
+| Current State            | `docs/foundation/CURRENT-STATE.md`            |
+| Current Milestone        | `docs/foundation/CURRENT-MILESTONE.md`        |
+| Active Backlog           | `docs/foundation/ACTIVE-BACKLOG.md`           |
 
 ### Layer 6 — Navigation
 
-| Document | Path |
-|----------|------|
-| Project Index | `docs/foundation/PROJECT-INDEX.md` |
-| Document Map | `docs/foundation/DOCUMENT-MAP.md` |
-| Repository Guide | `docs/foundation/REPOSITORY-GUIDE.md` |
-| Foundation README | `docs/foundation/README.md` |
+| Document          | Path                                  |
+| ----------------- | ------------------------------------- |
+| Project Index     | `docs/foundation/PROJECT-INDEX.md`    |
+| Document Map      | `docs/foundation/DOCUMENT-MAP.md`     |
+| Repository Guide  | `docs/foundation/REPOSITORY-GUIDE.md` |
+| Foundation README | `docs/foundation/README.md`           |
 
 ---
 
 ## Cross-reference coverage
 
-| Area | Coverage |
-|------|----------|
-| Foundation docs 000–029 | Referenced from all layers |
-| Architecture documents | Indexed in ARCHITECTURE-HANDBOOK, DOCUMENT-MAP |
-| ADRs (0001–0047) | DECISION-REGISTER + ADR-CATALOGUE |
-| Strategy (PCS-001) | MASTER-BRIEF, VISION, ACTIVE-BACKLOG |
-| Sprint completion reports | PROJECT-BIBLE, CURRENT-STATE |
-| Backlogs (13 active/complete) | ACTIVE-BACKLOG index |
-| Packages (24) | PACKAGE-CATALOGUE |
-| Products | PRODUCT-CATALOGUE |
-| OSS waves (9) | OSS-CATALOGUE |
-| Integration SDK phases | INTEGRATION-CATALOGUE |
+| Area                          | Coverage                                       |
+| ----------------------------- | ---------------------------------------------- |
+| Foundation docs 000–029       | Referenced from all layers                     |
+| Architecture documents        | Indexed in ARCHITECTURE-HANDBOOK, DOCUMENT-MAP |
+| ADRs (0001–0047)              | DECISION-REGISTER + ADR-CATALOGUE              |
+| Strategy (PCS-001)            | MASTER-BRIEF, VISION, ACTIVE-BACKLOG           |
+| Sprint completion reports     | PROJECT-BIBLE, CURRENT-STATE                   |
+| Backlogs (13 active/complete) | ACTIVE-BACKLOG index                           |
+| Packages (24)                 | PACKAGE-CATALOGUE                              |
+| Products                      | PRODUCT-CATALOGUE                              |
+| OSS waves (9)                 | OSS-CATALOGUE                                  |
+| Integration SDK phases        | INTEGRATION-CATALOGUE                          |
 
 All Knowledge Foundation documents link to authoritative sources rather than duplicating content.
 
@@ -98,41 +98,41 @@ All Knowledge Foundation documents link to authoritative sources rather than dup
 
 ## Documentation review findings
 
-| Check | Result |
-|-------|--------|
-| Consistency with 000 Constitution | Pass — no contradictions introduced |
-| Terminology (APZHUB names) | Pass — engine names only in adapter/integration context |
-| Duplicate content | Minimised — index/summary pattern with links to canonical docs |
-| Conflicting decisions | None introduced — DECISION-REGISTER reflects ADR status |
-| Outdated references | CURRENT-STATE and CURRENT-MILESTONE reflect OSS-100-02 stop point |
-| Missing indexes | Resolved — PROJECT-INDEX, DOCUMENT-MAP, foundation README |
-| Broken links | Internal links verified at authoring time |
+| Check                             | Result                                                            |
+| --------------------------------- | ----------------------------------------------------------------- |
+| Consistency with 000 Constitution | Pass — no contradictions introduced                               |
+| Terminology (APZHUB names)        | Pass — engine names only in adapter/integration context           |
+| Duplicate content                 | Minimised — index/summary pattern with links to canonical docs    |
+| Conflicting decisions             | None introduced — DECISION-REGISTER reflects ADR status           |
+| Outdated references               | CURRENT-STATE and CURRENT-MILESTONE reflect OSS-100-02 stop point |
+| Missing indexes                   | Resolved — PROJECT-INDEX, DOCUMENT-MAP, foundation README         |
+| Broken links                      | Internal links verified at authoring time                         |
 
 ---
 
 ## Consistency review
 
-| Criterion | Result |
-|-----------|--------|
-| No new architecture invented | ✅ References existing docs only |
-| No redesign of existing work | ✅ Consolidation and indexing |
-| Canonical sources identified | ✅ 000 supreme; architecture docs for detail |
-| Stop conditions preserved | ✅ OSS-100-03 next; OSS-101-04 blocked |
-| Plane adapter gate documented | ✅ OSS-100-05 required |
-| Platform Core certification status | ✅ CERTIFIED WITH OBSERVATIONS |
+| Criterion                          | Result                                       |
+| ---------------------------------- | -------------------------------------------- |
+| No new architecture invented       | ✅ References existing docs only             |
+| No redesign of existing work       | ✅ Consolidation and indexing                |
+| Canonical sources identified       | ✅ 000 supreme; architecture docs for detail |
+| Stop conditions preserved          | ✅ OSS-100-03 next; OSS-101-04 blocked       |
+| Plane adapter gate documented      | ✅ OSS-100-05 required                       |
+| Platform Core certification status | ✅ CERTIFIED WITH OBSERVATIONS               |
 
 ---
 
 ## Remaining documentation debt
 
-| Item | Priority | Notes |
-|------|----------|-------|
-| `docs/adr/README.md` missing ADR-0040–0047 | Medium | ADR-CATALOGUE complete; adr README update recommended |
-| Release tags pending | Low | v0.1.0–v0.7.0 prepared; owner instruction needed |
-| Strategy README stale stop conditions | Low | Some sections still reference older milestones |
-| Per-package README coverage | Low | Most packages lack dedicated README |
-| Financial Engine docs | Deferred | FIN-001 defer decision documented |
-| PCv2-02 planning docs | Future | Not yet chartered |
+| Item                                       | Priority | Notes                                                 |
+| ------------------------------------------ | -------- | ----------------------------------------------------- |
+| `docs/adr/README.md` missing ADR-0040–0047 | Medium   | ADR-CATALOGUE complete; adr README update recommended |
+| Release tags pending                       | Low      | v0.1.0–v0.7.0 prepared; owner instruction needed      |
+| Strategy README stale stop conditions      | Low      | Some sections still reference older milestones        |
+| Per-package README coverage                | Low      | Most packages lack dedicated README                   |
+| Financial Engine docs                      | Deferred | FIN-001 defer decision documented                     |
+| PCv2-02 planning docs                      | Future   | Not yet chartered                                     |
 
 ---
 
@@ -160,28 +160,28 @@ All Knowledge Foundation documents link to authoritative sources rather than dup
 
 ## Constraints confirmed
 
-| Constraint | Result |
-|------------|--------|
-| No production code | ✅ Documentation only |
-| No Platform Core changes | ✅ |
-| No Law Platform changes | ✅ |
-| No OSS integration work | ✅ |
-| No Financial Engine work | ✅ |
-| No backlog implementation | ✅ |
-| OSS-100-03 not started | ✅ |
-| Plane adapter not started | ✅ |
+| Constraint                | Result                |
+| ------------------------- | --------------------- |
+| No production code        | ✅ Documentation only |
+| No Platform Core changes  | ✅                    |
+| No Law Platform changes   | ✅                    |
+| No OSS integration work   | ✅                    |
+| No Financial Engine work  | ✅                    |
+| No backlog implementation | ✅                    |
+| OSS-100-03 not started    | ✅                    |
+| Plane adapter not started | ✅                    |
 
 ---
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| `pnpm lint` | Pass |
-| `pnpm typecheck` | Pass |
-| `pnpm build` | Pass |
-| `pnpm test` | Pass — 2042 passed, 47 skipped (413 files) |
-| `pnpm test:coverage` | Pass |
+| Gate                 | Result                                     |
+| -------------------- | ------------------------------------------ |
+| `pnpm lint`          | Pass                                       |
+| `pnpm typecheck`     | Pass                                       |
+| `pnpm build`         | Pass                                       |
+| `pnpm test`          | Pass — 2042 passed, 47 skipped (413 files) |
+| `pnpm test:coverage` | Pass                                       |
 
 No code changes — gates verify repository health unchanged.
 

@@ -1,13 +1,7 @@
 import type { IntegrationRequestContext } from "../types";
 
 export type IntegrationHttpMethod =
-  | "GET"
-  | "POST"
-  | "PUT"
-  | "PATCH"
-  | "DELETE"
-  | "HEAD"
-  | "OPTIONS";
+  "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS";
 
 export interface IntegrationRequestOptions {
   readonly context: IntegrationRequestContext;

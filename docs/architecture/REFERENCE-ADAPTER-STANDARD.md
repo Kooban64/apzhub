@@ -2,7 +2,7 @@
 
 > **Purpose:** Mandatory engineering standard for every future OSS / vendor integration adapter  
 > **Audience:** Platform engineers, integration authors, AI agents, reviewers  
-> **Authoritative references:** [026 — Integration SDK](../026-integration-sdk-adapter-framework-integration-manifest-specification.md) · [008 — Modules & Connectors](../008-module-platform-service-connector-architecture.md) · [009 — Platform Service Layer](../009-platform-service-layer-business-logic-orchestration-standard.md) · [Base Adapter Pattern](./APZHUB-Base-Adapter-Pattern.md) · [Adapter Boundary Pattern](./APZHUB-Adapter-Boundary-Pattern.md)  
+> **Authoritative references:** [026 — Integration SDK](../026-integration-sdk-adapter-framework-integration-manifest-specification.md) · [008 — Modules & Connectors](../008-module-plugin-connector-architecture.md) · [009 — Platform Service Layer](../009-platform-service-layer-integration-framework.md) · [Base Adapter Pattern](./APZHUB-Base-Adapter-Pattern.md) · [Adapter Boundary Pattern](./APZHUB-Adapter-Boundary-Pattern.md)  
 > **Status:** Mandatory — Wave 1 certified (OSS-101-10)  
 > **Last updated:** 2026-07-10  
 > **Reference implementation:** `@apzhub/integration-plane` (Plane) — vendor-specific; this document is vendor-neutral  
@@ -134,14 +134,14 @@ Adapters must not persist platform mappings. Mapping lookups happen in Platform 
 
 ## 7a. Webhook & polling (SDK contracts — OSS-100-08)
 
-| Concern | Owner |
-| ------- | ----- |
-| Webhook registration CRUD | Adapter implements / wraps `WebhookManager` (`@apzhub/integration-sdk/events`) |
-| Payload → `IntegrationSourceEvent` | Adapter translator + optional SDK pipeline |
-| Polling pages / sync | Adapter implements / wraps `PollingSource` |
-| Signature verification / replay / dedup helpers | SDK contracts; adapter supplies vendor specifics |
-| HTTP webhook ingress | **Platform future — not adapter** |
-| Workers / schedulers / Event Bus publish | **Platform future — not adapter / not SDK** |
+| Concern                                         | Owner                                                                          |
+| ----------------------------------------------- | ------------------------------------------------------------------------------ |
+| Webhook registration CRUD                       | Adapter implements / wraps `WebhookManager` (`@apzhub/integration-sdk/events`) |
+| Payload → `IntegrationSourceEvent`              | Adapter translator + optional SDK pipeline                                     |
+| Polling pages / sync                            | Adapter implements / wraps `PollingSource`                                     |
+| Signature verification / replay / dedup helpers | SDK contracts; adapter supplies vendor specifics                               |
+| HTTP webhook ingress                            | **Platform future — not adapter**                                              |
+| Workers / schedulers / Event Bus publish        | **Platform future — not adapter / not SDK**                                    |
 
 Adapters expose management and poll/translate APIs only. Do not implement ingress receivers, bus publish, or background schedulers in the adapter package.
 

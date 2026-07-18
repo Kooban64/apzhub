@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-retention-policies
+name: Retention Policies
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Retention Policies sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Retention Policies
+    icon: clock
+    route: /workspace/metrics/retention-policies
+    order: 150
+    permission: metrics.retention
+  view:
+    title: Retention Policies
+    workspace: metrics
+    route: /workspace/metrics/retention-policies
+    permission: metrics.retention

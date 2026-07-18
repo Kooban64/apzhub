@@ -33,11 +33,11 @@ ARIA headings/labels on tables and forms; keyboard-accessible controls; status b
 
 ## Testing
 
-| Suite | Result |
-| ----- | ------ |
-| Vitest handlers / OpenAPI / client / view | green (**34+** focused) |
-| OpenAPI validate | PASS |
-| Boundary (no domain/adapter imports in UI/handlers) | PASS |
+| Suite                                               | Result                                                                 |
+| --------------------------------------------------- | ---------------------------------------------------------------------- |
+| Vitest handlers / OpenAPI / client / view           | green (**34+** focused)                                                |
+| OpenAPI validate                                    | PASS                                                                   |
+| Boundary (no domain/adapter imports in UI/handlers) | PASS                                                                   |
 | Playwright `apztcms-018-pipeline-workbench.spec.ts` | Spec added; **env limitation** — no baseURL/app server in this session |
 
 No live GitHub.
@@ -48,19 +48,19 @@ New presentation modules aggregate **~96.6%** lines (handlers **100%**; client/a
 
 ## Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| OpenAPI validate | PASS |
-| Vitest (018 focused) | PASS |
-| coverage ≥95% lines (new modules aggregate) | PASS |
-| boundary audit | PASS |
-| Playwright live | LIMITED (spec present; runner needs app server) |
+| Gate                                        | Result                                          |
+| ------------------------------------------- | ----------------------------------------------- |
+| OpenAPI validate                            | PASS                                            |
+| Vitest (018 focused)                        | PASS                                            |
+| coverage ≥95% lines (new modules aggregate) | PASS                                            |
+| boundary audit                              | PASS                                            |
+| Playwright live                             | LIMITED (spec present; runner needs app server) |
 
 ## Technical Debt
 
-- Playwright E2E needs CI/app server with baseURL to run green  
-- View function coverage below client/handler levels  
-- SoR register/update/archive UI not exposed (read + import refresh only)  
+- Playwright E2E needs CI/app server with baseURL to run green
+- View function coverage below client/handler levels
+- SoR register/update/archive UI not exposed (read + import refresh only)
 - Default owner/repo still form-driven (no prefs store)
 
 ## Recommendation

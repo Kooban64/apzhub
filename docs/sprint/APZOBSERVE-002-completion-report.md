@@ -18,12 +18,12 @@ Consumers → gateway.observe.* → RequestPipeline → Authz
 → Platform Services → Core → Persistence → PostgreSQL
 ```
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/observe-contracts` | **0.2.0** |
-| `@apzhub/observe-core` | **0.2.0** |
-| `@apzhub/observe-persistence` | **0.1.0** |
-| `@apzhub/platform-services` | **0.24.0** |
+| Package                       | Version    |
+| ----------------------------- | ---------- |
+| `@apzhub/observe-contracts`   | **0.2.0**  |
+| `@apzhub/observe-core`        | **0.2.0**  |
+| `@apzhub/observe-persistence` | **0.1.0**  |
+| `@apzhub/platform-services`   | **0.24.0** |
 
 ## Gateway
 
@@ -53,21 +53,21 @@ Platform Services, gateway, authorization, bootstrap/env, metadata CRUD, boundar
 
 See [APZOBSERVE-002 coverage baseline](../reviews/APZOBSERVE-002-coverage-baseline.md).
 
-| Metric | Combined (observe 002 scope) |
-| --- | ---: |
-| Lines | **≥95%** (measured **~97.5%**) |
-| Functions | **≥95%** (measured **~98%**) |
-| Branches | Meaningful |
+| Metric    |   Combined (observe 002 scope) |
+| --------- | -----------------------------: |
+| Lines     | **≥95%** (measured **~97.5%**) |
+| Functions |   **≥95%** (measured **~98%**) |
+| Branches  |                     Meaningful |
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
+| Gate                                       | Result                                        |
+| ------------------------------------------ | --------------------------------------------- |
 | Architecture / dependency / boundary audit | PASS (`pnpm audit:observe-platform-services`) |
-| Typecheck | PASS |
-| Lint | PASS |
-| Vitest | PASS |
-| Coverage ≥95% lines/functions | PASS |
+| Typecheck                                  | PASS                                          |
+| Lint                                       | PASS                                          |
+| Vitest                                     | PASS                                          |
+| Coverage ≥95% lines/functions              | PASS                                          |
 
 ## Technical Debt
 

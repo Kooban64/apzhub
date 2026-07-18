@@ -3,14 +3,18 @@ import { PlatformGovernanceService } from "./platform-governance-service";
 import { seedDefaultGovernanceCatalog } from "./governance-seed";
 
 let sharedGovernanceService: PlatformGovernanceService | undefined;
-let sharedRepositories: ReturnType<typeof createInMemoryGovernanceRepositories> | undefined;
+let sharedRepositories:
+  ReturnType<typeof createInMemoryGovernanceRepositories> | undefined;
 
 export function createInMemoryGovernanceService(): {
   readonly service: PlatformGovernanceService;
   readonly repositories: ReturnType<typeof createInMemoryGovernanceRepositories>;
 } {
   const repositories = createInMemoryGovernanceRepositories();
-  const service = new PlatformGovernanceService({ repositories, storageBackend: "memory" });
+  const service = new PlatformGovernanceService({
+    repositories,
+    storageBackend: "memory",
+  });
   void seedDefaultGovernanceCatalog(service);
   return { service, repositories };
 }

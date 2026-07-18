@@ -42,12 +42,8 @@ describe("configuration-core", () => {
   });
 
   it("enforces lifecycle transitions fail-closed", () => {
-    expect(canTransitionConfigurationLifecycle("draft", "validated")).toBe(
-      true,
-    );
-    expect(canTransitionConfigurationLifecycle("draft", "published")).toBe(
-      false,
-    );
+    expect(canTransitionConfigurationLifecycle("draft", "validated")).toBe(true);
+    expect(canTransitionConfigurationLifecycle("draft", "published")).toBe(false);
     expect(listAllowedConfigurationLifecycleTransitions("published")).toEqual([
       "deprecated",
       "archived",
@@ -63,9 +59,7 @@ describe("configuration-core", () => {
     expect(canInheritFrom("tenant", "platform")).toBe(true);
     expect(canInheritFrom("platform", "tenant")).toBe(false);
     expect(assertValidHierarchyLevel("organisation")).toBe("organisation");
-    expect(() => assertValidHierarchyLevel("cluster")).toThrow(
-      /Invalid hierarchy/,
-    );
+    expect(() => assertValidHierarchyLevel("cluster")).toThrow(/Invalid hierarchy/);
 
     const sorted = sortOverridesByPrecedence([
       {
@@ -116,9 +110,9 @@ describe("configuration-core", () => {
     };
     validateValidationRuleMetadata(rule);
 
-    expect(() =>
-      validateValidationRuleMetadata({ ...rule, min: 20, max: 1 }),
-    ).toThrow(/range/);
+    expect(() => validateValidationRuleMetadata({ ...rule, min: 20, max: 1 })).toThrow(
+      /range/,
+    );
 
     expect(() =>
       validateValidationRuleMetadata({
@@ -161,16 +155,10 @@ describe("configuration-core", () => {
       }),
     ).toThrow(/non-empty/);
     expect(() =>
-      validateConfigurationValueMetadata(
-        { ...value, valueKind: "string" },
-        key,
-      ),
+      validateConfigurationValueMetadata({ ...value, valueKind: "string" }, key),
     ).toThrow(/does not match/);
     expect(() =>
-      validateConfigurationValueMetadata(
-        { ...value, valueKind: "boolean" },
-        key,
-      ),
+      validateConfigurationValueMetadata({ ...value, valueKind: "boolean" }, key),
     ).toThrow(/does not match/);
   });
 

@@ -88,6 +88,13 @@
     "audit:search-testing": "node scripts/apzsearch-013-search-testing-audit.mjs",
     "audit:search-reporting": "node scripts/apzsearch-014-search-reporting-audit.mjs",
     "audit:search-publication": "node scripts/apzsearch-015-search-publication-audit.mjs",
+    "audit:search-orchestrator": "node scripts/apzsearch-016-search-orchestrator-audit.mjs",
+    "audit:search-publication-admin": "node scripts/apzsearch-017-search-publication-admin-audit.mjs",
+    "audit:search-publication-reliability": "node scripts/apzsearch-018-search-publication-reliability-audit.mjs",
+    "certify:search-publication": "node scripts/apzsearch-018-certify-search-publication.mjs",
+    "audit:search-publication-wave": "node scripts/apzsearch-019-search-publication-wave-audit.mjs",
+    "audit:integration-sdk-wave": "node scripts/oss-100-11-integration-sdk-wave-audit.mjs",
+    "certify:integration-sdk": "node scripts/oss-100-11-certify-integration-sdk.mjs",
     "openapi:postman": "node scripts/generate-law-postman-collection.mjs",
     "openapi:bruno": "node scripts/generate-law-bruno-collection.mjs",
     "openapi:collections": "pnpm openapi:postman && pnpm openapi:bruno",
@@ -98,9 +105,21 @@
     "audit:identity-workbench": "node scripts/apzidentity-004-identity-workbench-audit.mjs",
     "audit:identity-vertical": "node scripts/apzidentity-005-identity-vertical-audit.mjs",
     "certify:identity-vertical": "node scripts/apzidentity-005-certify-identity-vertical.mjs",
-    "audit:identity-wave": "node scripts/apzidentity-006-identity-wave-closeout-audit.mjs"
+    "audit:identity-wave": "node scripts/apzidentity-006-identity-wave-closeout-audit.mjs",
+    "audit:metrics-foundation": "node scripts/apzmetrics-001-metrics-foundation-audit.mjs",
+    "audit:metrics-platform-services": "node scripts/apzmetrics-002-metrics-platform-services-audit.mjs",
+    "audit:metrics-http-client": "node scripts/apzmetrics-003-metrics-http-audit.mjs",
+    "audit:metrics-workbench": "node scripts/apzmetrics-004-metrics-workbench-audit.mjs",
+    "audit:metrics-vertical": "node scripts/apzmetrics-005-metrics-vertical-audit.mjs",
+    "certify:metrics-vertical": "node scripts/apzmetrics-005-certify-metrics-vertical.mjs",
+    "audit:metrics-wave": "node scripts/apzmetrics-006-metrics-wave-closeout-audit.mjs",
+    "worker:outbox": "node scripts/worker-outbox.mjs",
+    "audit:platform-outbox": "node scripts/pcv2-02-platform-outbox-audit.mjs",
+    "audit:platform-event-bus": "node scripts/oss-100-12-platform-event-bus-audit.mjs",
+    "audit:platform-provisioning": "node scripts/oss-100-12-plus-platform-provisioning-audit.mjs",
+    "audit:prh-012-018": "node scripts/prh-012-018-production-hardening-audit.mjs",
+    "test:production-smoke": "playwright test --config testing/e2e/production-smoke/playwright.config.ts"
   },
-
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
@@ -140,5 +159,12 @@
     "*.{js,mjs,ts,tsx}": [
       "eslint --fix"
     ]
+  },
+  "pnpm": {
+    "overrides": {
+      "esbuild": ">=0.25.0",
+      "postcss": ">=8.5.10",
+      "drizzle-orm": ">=0.45.2"
+    }
   }
 }

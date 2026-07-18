@@ -1,8 +1,5 @@
 import type { EnrichedValidatedSession } from "./tenant-session";
-import {
-  getSessionSecurityPolicy,
-  type SessionSecurityPolicy,
-} from "./session-policy";
+import { getSessionSecurityPolicy, type SessionSecurityPolicy } from "./session-policy";
 
 export interface SessionCookiePosture {
   readonly secure: boolean;
@@ -48,11 +45,15 @@ export function getSessionSecurityDiagnostics(
   }
 
   if (policy.devRegistrationAllowed && policy.environment !== "development") {
-    recommendations.push("Dev registration is enabled outside development — disable ALLOW_DEV_REGISTRATION.");
+    recommendations.push(
+      "Dev registration is enabled outside development — disable ALLOW_DEV_REGISTRATION.",
+    );
   }
 
   if (policy.environment === "development") {
-    recommendations.push("Development profile relaxes secure cookie requirements for localhost.");
+    recommendations.push(
+      "Development profile relaxes secure cookie requirements for localhost.",
+    );
   }
 
   recommendations.push(

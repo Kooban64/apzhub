@@ -21,15 +21,15 @@ const bundle = createPlatformServicesWithGitHubActions(githubActionsCore);
 
 ## Provider IDs
 
-| Provider ID | Capability |
-| ----------- | ---------- |
+| Provider ID                          | Capability            |
+| ------------------------------------ | --------------------- |
 | `github-actions-pipeline-repository` | `pipeline_repository` |
-| `github-actions-pipeline-workflow` | `pipeline_workflow` |
-| `github-actions-pipeline-run` | `pipeline_run` |
-| `github-actions-pipeline-artifact` | `pipeline_artifact` |
-| `github-actions-pipeline-job` | `pipeline_job` |
-| `github-actions-pipeline-step` | `pipeline_step` |
-| `github-actions-pipeline-summary` | `pipeline_summary` |
+| `github-actions-pipeline-workflow`   | `pipeline_workflow`   |
+| `github-actions-pipeline-run`        | `pipeline_run`        |
+| `github-actions-pipeline-artifact`   | `pipeline_artifact`   |
+| `github-actions-pipeline-job`        | `pipeline_job`        |
+| `github-actions-pipeline-step`       | `pipeline_step`       |
+| `github-actions-pipeline-summary`    | `pipeline_summary`    |
 
 Integration id: `github-actions`. Priority: `100`.
 

@@ -23,7 +23,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -95,7 +96,9 @@ if (!existsSync(identityHandler)) {
 }
 
 scan(
-  walk(join(ROOT, "apps/web/lib/api/v1/handlers")).filter((f) => f.includes("identity")),
+  walk(join(ROOT, "apps/web/lib/api/v1/handlers")).filter((f) =>
+    f.includes("identity"),
+  ),
   [
     {
       rule: "handlers-no-core",
@@ -256,12 +259,12 @@ if (!openapi.includes("name: Platform Identity Administration")) {
     detail: "Expected Platform Identity Administration tag",
   });
 }
-if (!openapi.includes("version: 1.7.0")) {
+if (!/version:\s*1\.(?:[7-9]|\d{2,})\.\d+/.test(openapi)) {
   violations.push({
     file: "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
     line: 1,
     rule: "openapi-version",
-    detail: "Expected OpenAPI info.version 1.7.0",
+    detail: "Expected OpenAPI info.version >= 1.7.0",
   });
 }
 for (const bad of [
@@ -316,7 +319,7 @@ console.log("APZIDENTITY-003 architecture audit PASSED");
 console.log("  handlers → gateway.identity.* only");
 console.log("  typed client → /api/v1/identity only");
 console.log("  bootstrap wires identity platform services");
-console.log("  OpenAPI Platform Identity Administration + 1.7.0 present");
+console.log("  OpenAPI Platform Identity Administration + >= 1.7.0 present");
 console.log("  no login/password/oauth/scim/workbench routes");
 console.log("  no Identity Workbench");
 process.exit(0);

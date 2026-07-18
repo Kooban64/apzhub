@@ -12,7 +12,11 @@ import type { IntegrationLifecycleParticipant } from "../lifecycle/participant-t
 import type { Clock } from "../auth/authentication-provider";
 import { systemClock } from "../auth/authentication-provider";
 import { buildRuntimeDiagnosticsExtensions } from "./runtime-types";
-import type { DiagnosticsCollectContext, DiagnosticsProvider, IntegrationDiagnostics } from "./types";
+import type {
+  DiagnosticsCollectContext,
+  DiagnosticsProvider,
+  IntegrationDiagnostics,
+} from "./types";
 
 export interface DefaultDiagnosticsProviderOptions {
   readonly integrationId: string;
@@ -121,7 +125,8 @@ export class DefaultDiagnosticsProvider implements DiagnosticsProvider {
     });
 
     let engineVersion: string | undefined;
-    let versionCompatibility: IntegrationDiagnostics["versionCompatibility"] = "not_checked";
+    let versionCompatibility: IntegrationDiagnostics["versionCompatibility"] =
+      "not_checked";
 
     if (primaryConnection && this.versionProvider) {
       const detected = await this.versionProvider.probe({
@@ -130,9 +135,14 @@ export class DefaultDiagnosticsProvider implements DiagnosticsProvider {
       });
       engineVersion = detected?.version;
 
-      const declared = this.versionProvider.resolveDeclaredRange(primaryConnection.metadata);
+      const declared = this.versionProvider.resolveDeclaredRange(
+        primaryConnection.metadata,
+      );
       if (detected && declared) {
-        versionCompatibility = this.versionProvider.checkCompatibility(detected, declared).status;
+        versionCompatibility = this.versionProvider.checkCompatibility(
+          detected,
+          declared,
+        ).status;
       }
     }
 
@@ -146,7 +156,9 @@ export class DefaultDiagnosticsProvider implements DiagnosticsProvider {
     const recommendations = mergeWarnings(
       connectionDiagnostics.recommendations,
       authenticationDiagnostics.recommendations,
-      health.status !== "healthy" ? ["Review integration health checks in operations console"] : [],
+      health.status !== "healthy"
+        ? ["Review integration health checks in operations console"]
+        : [],
     );
 
     const runtimeExtensions = buildRuntimeDiagnosticsExtensions({

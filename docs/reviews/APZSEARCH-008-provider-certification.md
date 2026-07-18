@@ -9,20 +9,20 @@
 
 ## Re-certified artefacts
 
-| Artefact | Status |
-| -------- | ------ |
-| Meilisearch Reference Adapter | **PASS** |
+| Artefact                                                                                            | Status               |
+| --------------------------------------------------------------------------------------------------- | -------------------- |
+| Meilisearch Reference Adapter                                                                       | **PASS**             |
 | Capability matrix (keyword, filter, sort, facets, highlight; NOT_SUPPORTED: semantic/vector/OCR/AI) | **PASS** (unchanged) |
-| Compatibility matrix (CE OSS / self-hosted first) | **PASS** |
-| Health / diagnostics / configuration validation | **PASS** |
-| Public API consumption only from execution provider | **PASS** |
-| Adapter does not import platform-services / apps/web / persistence | **PASS** |
+| Compatibility matrix (CE OSS / self-hosted first)                                                   | **PASS**             |
+| Health / diagnostics / configuration validation                                                     | **PASS**             |
+| Public API consumption only from execution provider                                                 | **PASS**             |
+| Adapter does not import platform-services / apps/web / persistence                                  | **PASS**             |
 
 ## Evidence
 
-- `pnpm audit:meilisearch-adapter` — 0 violations  
-- APZSEARCH-005 coverage baseline: statements/lines **95.01%**  
-- `pnpm audit:search-execution` — provider resolver + MeilisearchSearchProvider boundaries  
+- `pnpm audit:meilisearch-adapter` — 0 violations
+- APZSEARCH-005 coverage baseline: statements/lines **95.01%**
+- `pnpm audit:search-execution` — provider resolver + MeilisearchSearchProvider boundaries
 
 ## Limitations (by design)
 

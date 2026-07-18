@@ -1,10 +1,22 @@
 import type { IntegrationRequestContext } from "@apzhub/integration-sdk";
 
-import type { PlaneCycleRecord, PlanePaginatedResponse } from "../internal/plane-api-types";
-import { mapCycleToPlaneBody, mapPlaneCycle, resolveProjectPlaneId } from "../mappers/cycle-mapper";
+import type {
+  PlaneCycleRecord,
+  PlanePaginatedResponse,
+} from "../internal/plane-api-types";
+import {
+  mapCycleToPlaneBody,
+  mapPlaneCycle,
+  resolveProjectPlaneId,
+} from "../mappers/cycle-mapper";
 import type { Sprint } from "../models/canonical";
 import type { CreateCycleInput, UpdateCycleInput } from "../models/inputs";
-import type { CycleListFilter, PageRequest, PageResult, SortField } from "../models/query";
+import type {
+  CycleListFilter,
+  PageRequest,
+  PageResult,
+  SortField,
+} from "../models/query";
 import {
   assertValid,
   mergeValidation,
@@ -12,8 +24,16 @@ import {
   validateRequiredString,
   validateSortFields,
 } from "../validation/request-validation";
-import { validatePlaneCycleResponse, validatePlanePaginatedResponse } from "../validation/response-validation";
-import { applyClientFilters, applyClientSort, buildPlaneListQuery, mapPaginatedResult } from "./list-helpers";
+import {
+  validatePlaneCycleResponse,
+  validatePlanePaginatedResponse,
+} from "../validation/response-validation";
+import {
+  applyClientFilters,
+  applyClientSort,
+  buildPlaneListQuery,
+  mapPaginatedResult,
+} from "./list-helpers";
 import type { PlaneServiceDeps } from "./plane-operation-runner";
 
 const CYCLE_SORT_FIELDS = ["name", "start_date", "end_date"] as const;
@@ -29,7 +49,10 @@ export class PlaneCycleService {
     sort: readonly SortField<(typeof CYCLE_SORT_FIELDS)[number]>[] = [],
   ): Promise<PageResult<Sprint>> {
     assertValid(
-      mergeValidation(validatePageRequest(page), validateSortFields(sort, CYCLE_SORT_FIELDS)),
+      mergeValidation(
+        validatePageRequest(page),
+        validateSortFields(sort, CYCLE_SORT_FIELDS),
+      ),
       "cycles.list",
     );
 
@@ -54,7 +77,10 @@ export class PlaneCycleService {
       if (filter.status && filter.status !== "all") {
         result = {
           ...result,
-          items: applyClientFilters(result.items, (item) => item.status === filter.status),
+          items: applyClientFilters(
+            result.items,
+            (item) => item.status === filter.status,
+          ),
         };
       }
 
@@ -73,7 +99,11 @@ export class PlaneCycleService {
     });
   }
 
-  async get(context: IntegrationRequestContext, projectId: string, cycleId: string): Promise<Sprint> {
+  async get(
+    context: IntegrationRequestContext,
+    projectId: string,
+    cycleId: string,
+  ): Promise<Sprint> {
     return this.deps.runner.run(context, "cycles.get", async () => {
       const record = await this.deps.client.getCycle(
         context,

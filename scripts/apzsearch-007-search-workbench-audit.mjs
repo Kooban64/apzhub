@@ -23,7 +23,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -62,17 +63,20 @@ if (!existsSync(view)) {
     detail: "platform-search-view required",
   });
 } else {
-  scan([view], [
-    {
-      rule: "ui-no-platform-services",
-      pattern:
-        /@apzhub\/platform-services|getPlatformServiceGateway|@apzhub\/integration-meilisearch|from \"@\/lib\/api\/v1\/gateway/,
-    },
-    {
-      rule: "ui-no-direct-fetch",
-      pattern: /\bfetch\s*\(/,
-    },
-  ]);
+  scan(
+    [view],
+    [
+      {
+        rule: "ui-no-platform-services",
+        pattern:
+          /@apzhub\/platform-services|getPlatformServiceGateway|@apzhub\/integration-meilisearch|from "@\/lib\/api\/v1\/gateway/,
+      },
+      {
+        rule: "ui-no-direct-fetch",
+        pattern: /\bfetch\s*\(/,
+      },
+    ],
+  );
   const content = readFileSync(view, "utf8");
   if (!content.includes("@/lib/search/search-api")) {
     violations.push({
@@ -87,7 +91,10 @@ if (!existsSync(view)) {
 const page = join(ROOT, "apps/web/components/workbench-page.tsx");
 if (existsSync(page)) {
   const content = readFileSync(page, "utf8");
-  if (!content.includes("SearchWorkspaceRouter") || !content.includes("isSearchRoute")) {
+  if (
+    !content.includes("SearchWorkspaceRouter") ||
+    !content.includes("isSearchRoute")
+  ) {
     violations.push({
       file: rel(page),
       line: 1,

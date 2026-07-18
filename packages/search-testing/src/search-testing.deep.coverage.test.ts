@@ -141,9 +141,7 @@ describe("APZSEARCH-013 deep coverage", () => {
     expect(hooks.onReleaseUpserted(context, release).ok).toBe(true);
     expect(hooks.onTestPlanRemoved(context, plan.id).ok).toBe(true);
     expect(hooks.onTestCaseRemoved(context, testCase.id).ok).toBe(true);
-    expect(hooks.onEntityRemoved(context, "requirement", requirement.id).ok).toBe(
-      true,
-    );
+    expect(hooks.onEntityRemoved(context, "requirement", requirement.id).ok).toBe(true);
   });
 
   it("covers publisher validation failure, lifecycle, and throwing sink", () => {
@@ -181,12 +179,7 @@ describe("APZSEARCH-013 deep coverage", () => {
       entity: plan,
     });
     expect(published.ok).toBe(true);
-    const life = okAdapter.publisher.lifecycle(
-      context,
-      plan.id,
-      "archived",
-      "deep",
-    );
+    const life = okAdapter.publisher.lifecycle(context, plan.id, "archived", "deep");
     expect(life.ok).toBe(true);
 
     const removeFail = okAdapter.publisher.remove(
@@ -671,14 +664,16 @@ describe("APZSEARCH-013 deep coverage", () => {
     };
 
     expect(hooks.onTestSuiteUpserted(context, suiteEntity).ok).toBe(true);
-    expect(hooks.onTestExecutionUpserted(context, {
-      id: asManualExecutionId("mex_dddddddddddddddddddddddddddddddd"),
-      ...audit,
-      sessionId: asExecutionSessionId("ses_dddddddddddddddddddddddddddddddd"),
-      caseId: testCase.id,
-      status: "paused",
-      stepActuals: [],
-    }).ok).toBe(true);
+    expect(
+      hooks.onTestExecutionUpserted(context, {
+        id: asManualExecutionId("mex_dddddddddddddddddddddddddddddddd"),
+        ...audit,
+        sessionId: asExecutionSessionId("ses_dddddddddddddddddddddddddddddddd"),
+        caseId: testCase.id,
+        status: "paused",
+        stepActuals: [],
+      }).ok,
+    ).toBe(true);
     expect(hooks.onTestRunUpserted(context, run).ok).toBe(true);
     expect(hooks.onApprovalUpserted(context, approval).ok).toBe(true);
     expect(hooks.onDefectUpserted(context, defect).ok).toBe(true);
@@ -695,10 +690,12 @@ describe("APZSEARCH-013 deep coverage", () => {
     expect(hooks.onCoverageSummaryUpserted(context, coverage).ok).toBe(true);
     expect(hooks.onCertificationUpserted(context, cert).ok).toBe(true);
     expect(hooks.onCertificationGateUpserted(context, gate).ok).toBe(true);
-    expect(hooks.onCertificationApprovalUpserted(context, {
-      ...approval,
-      id: asApprovalId("apr_ffffffffffffffffffffffffffffffff"),
-    }).ok).toBe(true);
+    expect(
+      hooks.onCertificationApprovalUpserted(context, {
+        ...approval,
+        id: asApprovalId("apr_ffffffffffffffffffffffffffffffff"),
+      }).ok,
+    ).toBe(true);
     expect(
       hooks.onCertificationEvidenceUpserted(context, {
         id: "cev_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -721,9 +718,7 @@ describe("APZSEARCH-013 deep coverage", () => {
     expect(hooks.onEngineeringSnapshotUpserted(context, eng).ok).toBe(true);
     expect(hooks.onEngineeringTrendUpserted(context, trend).ok).toBe(true);
     expect(hooks.onBenchmarkUpserted(context, benchmark).ok).toBe(true);
-    expect(hooks.onHistoricalSnapshotUpserted(context, historical).ok).toBe(
-      true,
-    );
+    expect(hooks.onHistoricalSnapshotUpserted(context, historical).ok).toBe(true);
     expect(hooks.onReportMetadataUpserted(context, reportMeta).ok).toBe(true);
     expect(
       hooks.onReportTemplateUpserted(context, reportTemplate, {
@@ -818,12 +813,8 @@ describe("APZSEARCH-013 deep coverage", () => {
         entity: testCase,
       }).ok,
     ).toBe(false);
-    expect(publisherOkMap.remove(context, "test_case", testCase.id).ok).toBe(
-      false,
-    );
-    expect(
-      publisherOkMap.lifecycle(context, testCase.id, "removed").ok,
-    ).toBe(false);
+    expect(publisherOkMap.remove(context, "test_case", testCase.id).ok).toBe(false);
+    expect(publisherOkMap.lifecycle(context, testCase.id, "removed").ok).toBe(false);
     expect(
       publisherOkMap.validate(context, {
         entityType: "test_case",
@@ -921,19 +912,14 @@ describe("APZSEARCH-013 deep coverage", () => {
     expect(life.suggestFromEntityStatus("release_manifest", "active")).toBe(
       "validated",
     );
-    expect(life.suggestFromEntityStatus("report_metadata", "deleted")).toBe(
-      "removed",
-    );
+    expect(life.suggestFromEntityStatus("report_metadata", "deleted")).toBe("removed");
 
     // Mapper optional / branch coverage helpers
     expect(
-      adapter.mapper.map(
-        context,
-        {
-          entityType: "certification_decision",
-          entity: cert,
-        },
-      ).entityType,
+      adapter.mapper.map(context, {
+        entityType: "certification_decision",
+        entity: cert,
+      }).entityType,
     ).toBe("certification_decision");
     expect(() =>
       adapter.mapper.map(context, {
@@ -969,5 +955,3 @@ describe("APZSEARCH-013 deep coverage", () => {
     ).toThrow(/tenantId/);
   });
 });
-
-

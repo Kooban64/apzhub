@@ -30,7 +30,12 @@ export type SupportSearchMappableEntity =
 
 function stripHtml(text: string | undefined): string | undefined {
   if (!text) return undefined;
-  return text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() || undefined;
+  return (
+    text
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim() || undefined
+  );
 }
 
 function bodyExcerpt(body: string | undefined, max = 280): string | undefined {
@@ -99,9 +104,7 @@ export class SupportSearchEntityMapper {
         groupId: ticket.groupId,
         requesterId: ticket.requesterId,
         ...(ticket.assigneeId ? { assigneeId: ticket.assigneeId } : {}),
-        ...(ticket.organizationId
-          ? { organizationId: ticket.organizationId }
-          : {}),
+        ...(ticket.organizationId ? { organizationId: ticket.organizationId } : {}),
         ...(ticket.displayId ? { displayId: ticket.displayId } : {}),
       },
       keywords: [
@@ -124,10 +127,7 @@ export class SupportSearchEntityMapper {
     article: SupportArticle,
   ): SearchEntityDraft {
     assertPlatformEntityId(article.id, "support_article.id");
-    assertPlatformEntityId(
-      article.supportTicketId,
-      "support_article.supportTicketId",
-    );
+    assertPlatformEntityId(article.supportTicketId, "support_article.supportTicketId");
     this.assertTenant(article.tenantId, context);
     const title = article.subject?.trim() || "Article";
     // Never publish originMetadata or zammad keys into search metadata.
@@ -187,10 +187,7 @@ export class SupportSearchEntityMapper {
       ],
       createdAt: organisation.createdAt,
       updatedAt: organisation.updatedAt,
-      navigationTarget: navigationTarget(
-        "support_organisation",
-        organisation.id,
-      ),
+      navigationTarget: navigationTarget("support_organisation", organisation.id),
       sourceId: "support:support_organisation",
       ownerUserId: context.actorUserId,
     };
@@ -260,9 +257,7 @@ export class SupportSearchEntityMapper {
     context: SupportSearchPublicationContext,
   ): void {
     if (entityTenantId !== context.tenantId) {
-      throw new Error(
-        "tenant mismatch between Support entity and publication context",
-      );
+      throw new Error("tenant mismatch between Support entity and publication context");
     }
   }
 }

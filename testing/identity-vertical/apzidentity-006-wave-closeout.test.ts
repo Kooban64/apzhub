@@ -28,7 +28,7 @@ describe("APZIDENTITY-006 Identity Wave Closeout", () => {
       "packages/identity-contracts/package.json": "0.2.0",
       "packages/identity-core/package.json": "0.2.0",
       "packages/identity-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.24.0",
+      "packages/platform-services/package.json": "0.25.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const actual = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;
@@ -38,10 +38,7 @@ describe("APZIDENTITY-006 Identity Wave Closeout", () => {
 
   it("ships freeze notice, reference standard, and recommends APZOBSERVE-001 only", () => {
     const freeze = readFileSync(
-      join(
-        ROOT,
-        "docs/architecture/APZHUB-Identity-Architecture-Freeze-Notice.md",
-      ),
+      join(ROOT, "docs/architecture/APZHUB-Identity-Architecture-Freeze-Notice.md"),
       "utf8",
     );
     expect(freeze).toMatch(/frozen/i);
@@ -82,9 +79,7 @@ describe("APZIDENTITY-006 Identity Wave Closeout", () => {
       ),
     ).toBe(true);
     expect(
-      existsSync(
-        join(ROOT, "docs/developer/APZHUB-Future-Identity-Platform-Guide.md"),
-      ),
+      existsSync(join(ROOT, "docs/developer/APZHUB-Future-Identity-Platform-Guide.md")),
     ).toBe(true);
     const identityRoutes = readFileSync(
       join(ROOT, "apps/web/lib/identity/routes.ts"),
@@ -92,10 +87,7 @@ describe("APZIDENTITY-006 Identity Wave Closeout", () => {
     );
     expect(identityRoutes).toContain("/workspace/identity");
     const adminManifest = readFileSync(
-      join(
-        ROOT,
-        "packages/workbench-framework/manifests/platform-admin/module.yaml",
-      ),
+      join(ROOT, "packages/workbench-framework/manifests/platform-admin/module.yaml"),
       "utf8",
     );
     expect(adminManifest).toContain("/workspace/administration");

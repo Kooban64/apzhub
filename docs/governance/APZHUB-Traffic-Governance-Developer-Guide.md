@@ -6,7 +6,10 @@ Traffic governance is applied in Next.js middleware — no per-route code requir
 
 ```typescript
 // apps/web/middleware.ts
-import { enforceTrafficGovernance, shouldApplyTrafficGovernance } from "@apzhub/platform-security/traffic";
+import {
+  enforceTrafficGovernance,
+  shouldApplyTrafficGovernance,
+} from "@apzhub/platform-security/traffic";
 ```
 
 ## Law APIs

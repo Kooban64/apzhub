@@ -2,13 +2,13 @@
 
 ## Surfaces
 
-| View | Route kind | Data source |
-|---|---|---|
-| Pipelines home | `pipelines` | SoR `listPipelines` + `listProviders` |
-| Repository | `pipeline-repository` | Live `getRepository` |
-| Workflows | `pipeline-workflows` | Live `listWorkflows` |
-| Runs | `pipeline-runs` | Live `listRuns` |
-| Run detail | `pipeline-run-detail` | Live jobs/steps/artifacts/summary + SoR `getLinks` |
+| View           | Route kind            | Data source                                        |
+| -------------- | --------------------- | -------------------------------------------------- |
+| Pipelines home | `pipelines`           | SoR `listPipelines` + `listProviders`              |
+| Repository     | `pipeline-repository` | Live `getRepository`                               |
+| Workflows      | `pipeline-workflows`  | Live `listWorkflows`                               |
+| Runs           | `pipeline-runs`       | Live `listRuns`                                    |
+| Run detail     | `pipeline-run-detail` | Live jobs/steps/artifacts/summary + SoR `getLinks` |
 
 ## UX rules
 

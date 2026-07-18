@@ -81,9 +81,7 @@ export function isAdministrationRoute(pathname: string): boolean {
   );
 }
 
-export function resolveAdministrationSection(
-  pathname: string,
-): AdministrationSection {
+export function resolveAdministrationSection(pathname: string): AdministrationSection {
   const normalized = normalizePath(pathname);
   if (normalized === ADMINISTRATION_WORKSPACE_BASE) return "overview";
   const suffix = normalized.slice(ADMINISTRATION_WORKSPACE_BASE.length + 1);
@@ -94,9 +92,7 @@ export function resolveAdministrationSection(
   return "overview";
 }
 
-export function administrationSectionPath(
-  section?: AdministrationSection,
-): string {
+export function administrationSectionPath(section?: AdministrationSection): string {
   if (!section || section === "overview") {
     return `${ADMINISTRATION_WORKSPACE_BASE}/overview`;
   }

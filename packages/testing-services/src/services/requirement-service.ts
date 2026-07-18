@@ -1,8 +1,9 @@
-import type { Requirement, RequirementService, WorkItemRef } from "@apzhub/testing-contracts";
-import {
-  asRequirementId,
-  asRiskId,
+import type {
+  Requirement,
+  RequirementService,
+  WorkItemRef,
 } from "@apzhub/testing-contracts";
+import { asRequirementId, asRiskId } from "@apzhub/testing-contracts";
 import type { RequirementRecord } from "@apzhub/testing-persistence";
 
 import { toRepositoryContext } from "../mapping/context";
@@ -73,15 +74,20 @@ export function createRequirementService(rt: ServiceRuntime): RequirementService
         "requirement",
         id,
       );
-      const row = await rt.persistence.requirements.update(rctx, id, existing.revision, {
-        title: input.title,
-        description: input.description,
-        priority: input.priority,
-        tags: input.tags,
-        workItemRefs: input.workItemRefs,
-        riskIds: input.riskIds as readonly string[] | undefined,
-        ownerId: input.ownerId,
-      });
+      const row = await rt.persistence.requirements.update(
+        rctx,
+        id,
+        existing.revision,
+        {
+          title: input.title,
+          description: input.description,
+          priority: input.priority,
+          tags: input.tags,
+          workItemRefs: input.workItemRefs,
+          riskIds: input.riskIds as readonly string[] | undefined,
+          ownerId: input.ownerId,
+        },
+      );
       rt.events.record({
         eventType: "requirement.updated",
         tenantId: ctx.tenantId,

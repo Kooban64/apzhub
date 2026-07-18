@@ -39,10 +39,7 @@ function buildLookup(parameters: ReportParameters): Map<string, string> {
   return bag;
 }
 
-function resolvePlaceholders(
-  text: string,
-  bag: ReadonlyMap<string, string>,
-): string {
+function resolvePlaceholders(text: string, bag: ReadonlyMap<string, string>): string {
   return text.replace(PLACEHOLDER, (_match, path: string) => bag.get(path) ?? "");
 }
 
@@ -158,9 +155,7 @@ export function bindTemplateToDocument(
   const { template, parameters } = args;
   const bag = buildLookup(parameters);
 
-  const sections = template.sections.map((s) =>
-    bindSection(s, parameters, bag),
-  );
+  const sections = template.sections.map((s) => bindSection(s, parameters, bag));
 
   const metrics: { readonly label: string; readonly value: string }[] = [];
   for (const section of sections) {
@@ -235,14 +230,10 @@ export function validateTemplateBinding(
     for (const block of section.blocks) {
       if (block.kind === "metric") metricKeys.add(block.valueKey);
       if (block.kind === "table" && !parameters.tables?.[block.tableKey]) {
-        warnings.push(
-          `Missing table "${block.tableKey}" — empty table will be used`,
-        );
+        warnings.push(`Missing table "${block.tableKey}" — empty table will be used`);
       }
       if (block.kind === "list" && !parameters.lists?.[block.listKey]) {
-        warnings.push(
-          `Missing list "${block.listKey}" — empty list will be used`,
-        );
+        warnings.push(`Missing list "${block.listKey}" — empty list will be used`);
       }
       if (
         block.kind === "summary" &&

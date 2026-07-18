@@ -32,7 +32,9 @@ import {
 describe("permission catalogue and operation mapping", () => {
   it("exposes deterministic catalogue entries", () => {
     expect(PLATFORM_SERVICE_PERMISSION_CATALOGUE).toContain("project.create");
-    expect(PLATFORM_SERVICE_PERMISSION_CATALOGUE).toContain("platform.impersonation.use");
+    expect(PLATFORM_SERVICE_PERMISSION_CATALOGUE).toContain(
+      "platform.impersonation.use",
+    );
   });
 
   it("maps gateway operations to permissions explicitly", () => {
@@ -436,7 +438,9 @@ describe("tenant isolation with mapping-aware operations", () => {
 
 describe("authorization bootstrap", () => {
   it("defaults to allow-all outside production and production in production", () => {
-    expect(resolveAuthorizationProviderMode({ NODE_ENV: "test" }).mode).toBe("allow-all");
+    expect(resolveAuthorizationProviderMode({ NODE_ENV: "test" }).mode).toBe(
+      "allow-all",
+    );
     expect(resolveAuthorizationProviderMode({ NODE_ENV: "production" }).mode).toBe(
       "production",
     );

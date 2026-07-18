@@ -56,9 +56,9 @@ import { toListQuery, toPlatformApiPage } from "./paging";
 // Path param helpers
 // ---------------------------------------------------------------------------
 
-async function resolveSupportRequestId(
-  routeContext?: { params: Promise<Record<string, string>> },
-): Promise<string> {
+async function resolveSupportRequestId(routeContext?: {
+  params: Promise<Record<string, string>>;
+}): Promise<string> {
   const params = await routeContext?.params;
   return parsePathParam(
     supportRequestIdParamSchema,
@@ -67,22 +67,26 @@ async function resolveSupportRequestId(
   );
 }
 
-async function resolveArticleId(
-  routeContext?: { params: Promise<Record<string, string>> },
-): Promise<{ supportRequestId: string; articleId: string }> {
+async function resolveArticleId(routeContext?: {
+  params: Promise<Record<string, string>>;
+}): Promise<{ supportRequestId: string; articleId: string }> {
   const params = await routeContext?.params;
   const supportRequestId = parsePathParam(
     supportRequestIdParamSchema,
     params?.supportRequestId ?? "",
     "supportRequestId",
   );
-  const articleId = parsePathParam(articleIdParamSchema, params?.articleId ?? "", "articleId");
+  const articleId = parsePathParam(
+    articleIdParamSchema,
+    params?.articleId ?? "",
+    "articleId",
+  );
   return { supportRequestId, articleId };
 }
 
-async function resolveOrganizationId(
-  routeContext?: { params: Promise<Record<string, string>> },
-): Promise<string> {
+async function resolveOrganizationId(routeContext?: {
+  params: Promise<Record<string, string>>;
+}): Promise<string> {
   const params = await routeContext?.params;
   return parsePathParam(
     organizationIdParamSchema,
@@ -91,16 +95,16 @@ async function resolveOrganizationId(
   );
 }
 
-async function resolveGroupId(
-  routeContext?: { params: Promise<Record<string, string>> },
-): Promise<string> {
+async function resolveGroupId(routeContext?: {
+  params: Promise<Record<string, string>>;
+}): Promise<string> {
   const params = await routeContext?.params;
   return parsePathParam(groupIdParamSchema, params?.groupId ?? "", "groupId");
 }
 
-async function resolveSupportUserId(
-  routeContext?: { params: Promise<Record<string, string>> },
-): Promise<string> {
+async function resolveSupportUserId(routeContext?: {
+  params: Promise<Record<string, string>>;
+}): Promise<string> {
   const params = await routeContext?.params;
   return parsePathParam(supportUserIdParamSchema, params?.userId ?? "", "userId");
 }
@@ -109,7 +113,9 @@ async function resolveSupportUserId(
 // Input mappers
 // ---------------------------------------------------------------------------
 
-function toCreateSupportRequestInput(body: CreateSupportRequestBody): CreateSupportTicketInput {
+function toCreateSupportRequestInput(
+  body: CreateSupportRequestBody,
+): CreateSupportTicketInput {
   return {
     title: body.title,
     groupId: body.groupId,
@@ -122,7 +128,9 @@ function toCreateSupportRequestInput(body: CreateSupportRequestBody): CreateSupp
   };
 }
 
-function toUpdateSupportRequestInput(body: UpdateSupportRequestBody): UpdateSupportTicketInput {
+function toUpdateSupportRequestInput(
+  body: UpdateSupportRequestBody,
+): UpdateSupportTicketInput {
   const input: UpdateSupportTicketInput = {
     title: body.title,
     groupId: body.groupId,
@@ -164,7 +172,11 @@ export async function handleListSupportRequests(
       search: query.search,
     },
   });
-  return jsonCollectionResponse(result.items, toPlatformApiPage(result, query), context.tracing);
+  return jsonCollectionResponse(
+    result.items,
+    toPlatformApiPage(result, query),
+    context.tracing,
+  );
 }
 
 export async function handleGetSupportRequest(
@@ -174,7 +186,10 @@ export async function handleGetSupportRequest(
 ) {
   const supportRequestId = await resolveSupportRequestId(routeContext);
   const gateway = await getPlatformServiceGateway();
-  const ticket = await gateway.support.getSupportRequest(context.serviceContext, supportRequestId);
+  const ticket = await gateway.support.getSupportRequest(
+    context.serviceContext,
+    supportRequestId,
+  );
   return jsonDataResponse(ticket, context.tracing);
 }
 
@@ -226,7 +241,10 @@ export async function handleCloseSupportRequest(
 ) {
   const supportRequestId = await resolveSupportRequestId(routeContext);
   const gateway = await getPlatformServiceGateway();
-  const ticket = await gateway.support.closeSupportRequest(context.serviceContext, supportRequestId);
+  const ticket = await gateway.support.closeSupportRequest(
+    context.serviceContext,
+    supportRequestId,
+  );
   return jsonDataResponse(ticket, context.tracing);
 }
 
@@ -250,7 +268,11 @@ export async function handleChangeSupportState(
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
   const supportRequestId = await resolveSupportRequestId(routeContext);
-  const body = await parseJsonBody(request, changeSupportStateBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const body = await parseJsonBody(
+    request,
+    changeSupportStateBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
   const gateway = await getPlatformServiceGateway();
   const ticket = await gateway.support.changeSupportRequestState(
     context.serviceContext,
@@ -360,13 +382,21 @@ export async function handleListSupportArticles(
   const query = parseQuery(paginationQuerySchema, request.nextUrl.searchParams);
   const gateway = await getPlatformServiceGateway();
   const listQuery = toListQuery(query);
-  const result = await gateway.supportArticles.list(context.serviceContext, supportRequestId, {
-    page: listQuery.page,
-    sort: listQuery.sort as
-      | readonly { field: SupportArticleSortField; direction: "asc" | "desc" }[]
-      | undefined,
-  });
-  return jsonCollectionResponse(result.items, toPlatformApiPage(result, query), context.tracing);
+  const result = await gateway.supportArticles.list(
+    context.serviceContext,
+    supportRequestId,
+    {
+      page: listQuery.page,
+      sort: listQuery.sort as
+        | readonly { field: SupportArticleSortField; direction: "asc" | "desc" }[]
+        | undefined,
+    },
+  );
+  return jsonCollectionResponse(
+    result.items,
+    toPlatformApiPage(result, query),
+    context.tracing,
+  );
 }
 
 export async function handleGetSupportArticle(
@@ -411,7 +441,10 @@ export async function handleCreateInternalNote(
     subject: body.subject,
   };
   const gateway = await getPlatformServiceGateway();
-  const article = await gateway.supportArticles.createNote(context.serviceContext, input);
+  const article = await gateway.supportArticles.createNote(
+    context.serviceContext,
+    input,
+  );
   return jsonDataResponse(article, context.tracing, { status: 201 });
 }
 
@@ -446,7 +479,10 @@ export async function handleCreateCustomerReply(
     bcc: body.bcc,
   };
   const gateway = await getPlatformServiceGateway();
-  const article = await gateway.supportArticles.createReply(context.serviceContext, input);
+  const article = await gateway.supportArticles.createReply(
+    context.serviceContext,
+    input,
+  );
   return jsonDataResponse(article, context.tracing, { status: 201 });
 }
 
@@ -477,7 +513,11 @@ export async function handleGetSupportHistory(
       },
     },
   );
-  return jsonCollectionResponse(result.items, toPlatformApiPage(result, query), context.tracing);
+  return jsonCollectionResponse(
+    result.items,
+    toPlatformApiPage(result, query),
+    context.tracing,
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -491,17 +531,24 @@ export async function handleListOrganizations(
   const query = parseQuery(organizationListQuerySchema, request.nextUrl.searchParams);
   const gateway = await getPlatformServiceGateway();
   const listQuery = toListQuery(query);
-  const result = await gateway.supportOrganizations.listOrganizations(context.serviceContext, {
-    page: listQuery.page,
-    sort: listQuery.sort as
-      | readonly { field: SupportOrganizationSortField; direction: "asc" | "desc" }[]
-      | undefined,
-    filter: {
-      search: query.search,
-      active: query.active === undefined ? undefined : query.active === "true",
+  const result = await gateway.supportOrganizations.listOrganizations(
+    context.serviceContext,
+    {
+      page: listQuery.page,
+      sort: listQuery.sort as
+        | readonly { field: SupportOrganizationSortField; direction: "asc" | "desc" }[]
+        | undefined,
+      filter: {
+        search: query.search,
+        active: query.active === undefined ? undefined : query.active === "true",
+      },
     },
-  });
-  return jsonCollectionResponse(result.items, toPlatformApiPage(result, query), context.tracing);
+  );
+  return jsonCollectionResponse(
+    result.items,
+    toPlatformApiPage(result, query),
+    context.tracing,
+  );
 }
 
 export async function handleGetOrganization(
@@ -534,7 +581,10 @@ export async function handleCreateOrganization(
     shared: body.shared,
   };
   const gateway = await getPlatformServiceGateway();
-  const org = await gateway.supportOrganizations.createOrganization(context.serviceContext, input);
+  const org = await gateway.supportOrganizations.createOrganization(
+    context.serviceContext,
+    input,
+  );
   return jsonDataResponse(org, context.tracing, { status: 201 });
 }
 
@@ -603,7 +653,11 @@ export async function handleListGroups(
       active: query.active === undefined ? undefined : query.active === "true",
     },
   });
-  return jsonCollectionResponse(result.items, toPlatformApiPage(result, query), context.tracing);
+  return jsonCollectionResponse(
+    result.items,
+    toPlatformApiPage(result, query),
+    context.tracing,
+  );
 }
 
 export async function handleGetGroup(
@@ -621,7 +675,11 @@ export async function handleCreateGroup(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const body = await parseJsonBody(request, createGroupBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const body = await parseJsonBody(
+    request,
+    createGroupBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
   const input: CreateSupportGroupInput = {
     name: body.name,
     note: body.note,
@@ -638,13 +696,21 @@ export async function handleUpdateGroup(
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
   const groupId = await resolveGroupId(routeContext);
-  const body = await parseJsonBody(request, updateGroupBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const body = await parseJsonBody(
+    request,
+    updateGroupBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
   const gateway = await getPlatformServiceGateway();
-  const group = await gateway.supportGroups.updateGroup(context.serviceContext, groupId, {
-    name: body.name,
-    note: body.note,
-    active: body.active,
-  });
+  const group = await gateway.supportGroups.updateGroup(
+    context.serviceContext,
+    groupId,
+    {
+      name: body.name,
+      note: body.note,
+      active: body.active,
+    },
+  );
   return jsonDataResponse(group, context.tracing);
 }
 
@@ -682,16 +748,20 @@ export async function handleListSupportUsers(
   // text search
   if (query.search) {
     const listQuery = toListQuery(query);
-    const result = await gateway.supportUsers.search(context.serviceContext, query.search, {
-      page: listQuery.page,
-      sort: listQuery.sort as
-        | readonly { field: SupportUserSortField; direction: "asc" | "desc" }[]
-        | undefined,
-      filter: {
-        active: query.active === undefined ? undefined : query.active === "true",
-        role: query.role,
+    const result = await gateway.supportUsers.search(
+      context.serviceContext,
+      query.search,
+      {
+        page: listQuery.page,
+        sort: listQuery.sort as
+          | readonly { field: SupportUserSortField; direction: "asc" | "desc" }[]
+          | undefined,
+        filter: {
+          active: query.active === undefined ? undefined : query.active === "true",
+          role: query.role,
+        },
       },
-    });
+    );
     return jsonCollectionResponse(
       result.items,
       toPlatformApiPage(result, query),
@@ -704,14 +774,17 @@ export async function handleListSupportUsers(
   const result = await gateway.supportUsers.listUsers(context.serviceContext, {
     page: listQuery.page,
     sort: listQuery.sort as
-      | readonly { field: SupportUserSortField; direction: "asc" | "desc" }[]
-      | undefined,
+      readonly { field: SupportUserSortField; direction: "asc" | "desc" }[] | undefined,
     filter: {
       active: query.active === undefined ? undefined : query.active === "true",
       role: query.role,
     },
   });
-  return jsonCollectionResponse(result.items, toPlatformApiPage(result, query), context.tracing);
+  return jsonCollectionResponse(
+    result.items,
+    toPlatformApiPage(result, query),
+    context.tracing,
+  );
 }
 
 export async function handleGetSupportUser(
@@ -738,7 +811,10 @@ export async function handleSupportSearch(
   const gateway = await getPlatformServiceGateway();
 
   const kindsFilter: string[] | undefined = query.kinds
-    ? query.kinds.split(",").map((k) => k.trim()).filter(Boolean)
+    ? query.kinds
+        .split(",")
+        .map((k) => k.trim())
+        .filter(Boolean)
     : undefined;
 
   const result = await gateway.supportSearch.search(context.serviceContext, queryText, {
@@ -765,6 +841,8 @@ export async function handleSupportAnalytics(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await getPlatformServiceGateway();
-  const snapshot = await gateway.supportAnalytics.getSupportIntelligence(context.serviceContext);
+  const snapshot = await gateway.supportAnalytics.getSupportIntelligence(
+    context.serviceContext,
+  );
   return jsonDataResponse(snapshot, context.tracing);
 }

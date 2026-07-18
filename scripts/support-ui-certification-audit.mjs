@@ -116,8 +116,7 @@ const BOUNDARY_FORBIDDEN = [
 const OUT_OF_SCOPE = [
   {
     rule: "no-event-bus-ui",
-    pattern:
-      /\bEventBus\b|event-bus|publishSupportEvent|useEventBus|PlatformEventBus/,
+    pattern: /\bEventBus\b|event-bus|publishSupportEvent|useEventBus|PlatformEventBus/,
   },
   {
     rule: "no-webhook-ui",
@@ -133,7 +132,8 @@ const OUT_OF_SCOPE = [
 const PROVIDER_NATIVE_ID = [
   {
     rule: "no-provider-native-id",
-    pattern: /_zammad_|sreq_zammad_|sorg_zammad_|sgrp_zammad_|suser_zammad_|sart_zammad_/,
+    pattern:
+      /_zammad_|sreq_zammad_|sorg_zammad_|sgrp_zammad_|suser_zammad_|sart_zammad_/,
   },
 ];
 
@@ -149,7 +149,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -174,7 +175,11 @@ function addCheck(id, ok, detail) {
 function runBoundaryScript() {
   const script = join(ROOT, "scripts/support-ui-boundary-audit.mjs");
   if (!existsSync(script)) {
-    addCheck("ui-boundary-script", false, "scripts/support-ui-boundary-audit.mjs missing");
+    addCheck(
+      "ui-boundary-script",
+      false,
+      "scripts/support-ui-boundary-audit.mjs missing",
+    );
     return;
   }
   const result = spawnSync(process.execPath, [script], {
@@ -254,7 +259,10 @@ function verifyWorkbenchWiring() {
   if (!content.includes('from "@/components/support/support-workspace-router"')) {
     problems.push("missing SupportWorkspaceRouter import");
   }
-  if (!content.includes('from "@/lib/support/routes"') || !content.includes("isSupportRoute")) {
+  if (
+    !content.includes('from "@/lib/support/routes"') ||
+    !content.includes("isSupportRoute")
+  ) {
     problems.push("missing isSupportRoute import/usage");
   }
   if (!content.includes("<SupportWorkspaceRouter")) {
@@ -498,13 +506,16 @@ function main() {
   violations.push(...uniqueViolations);
 
   const failedChecks = checks.filter((c) => !c.ok).length;
-  const verdict =
-    violations.length === 0 && failedChecks === 0 ? "PASS" : "FAIL";
+  const verdict = violations.length === 0 && failedChecks === 0 ? "PASS" : "FAIL";
 
   const report = {
     milestone: "OSS-110-14",
     scannedAt: new Date().toISOString(),
-    scanRoots: [...UI_ROOTS, "services/support", "apps/web/components/workbench-page.tsx"],
+    scanRoots: [
+      ...UI_ROOTS,
+      "services/support",
+      "apps/web/components/workbench-page.tsx",
+    ],
     filesScanned: allFiles.length,
     checkCount: checks.length,
     checks,
@@ -539,7 +550,9 @@ function main() {
   }
 
   if (violations.length > 0) {
-    console.error(`Support UI certification audit FAILED (${violations.length} violation(s)):`);
+    console.error(
+      `Support UI certification audit FAILED (${violations.length} violation(s)):`,
+    );
     for (const v of violations) {
       const loc = v.line > 0 ? `${v.file}:${v.line}` : v.file;
       console.error(`  [${v.rule}] ${loc} — ${v.detail}`);

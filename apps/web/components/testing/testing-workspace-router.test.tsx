@@ -15,7 +15,9 @@ vi.mock("./testing-dashboard-view", () => ({
 vi.mock("./testing-catalog-views", () => ({
   TestingRequirementsView: () => <div data-testid="route-requirements" />,
   TestingPlansView: ({ planId }: { planId?: string }) => (
-    <div data-testid={planId ? "route-plan-detail" : "route-plans"}>{planId ?? "list"}</div>
+    <div data-testid={planId ? "route-plan-detail" : "route-plans"}>
+      {planId ?? "list"}
+    </div>
   ),
   TestingSuitesView: () => <div data-testid="route-suites" />,
   TestingCasesView: () => <div data-testid="route-cases" />,
@@ -37,7 +39,9 @@ vi.mock("./testing-execution-view", () => ({
 vi.mock("./testing-certification-view", () => ({
   TestingCertificationView: ({ certificationId }: { certificationId?: string }) => (
     <div
-      data-testid={certificationId ? "route-certification-detail" : "route-certification"}
+      data-testid={
+        certificationId ? "route-certification-detail" : "route-certification"
+      }
     >
       {certificationId ?? "list"}
     </div>
@@ -55,11 +59,7 @@ vi.mock("./testing-engineering-intelligence-view", () => ({
   ),
 }));
 vi.mock("./testing-executive-dashboards-view", () => ({
-  TestingExecutiveDashboardsView: ({
-    category,
-  }: {
-    category?: string;
-  }) => (
+  TestingExecutiveDashboardsView: ({ category }: { category?: string }) => (
     <div data-testid="route-executive-dashboards">{category ?? "executive"}</div>
   ),
 }));

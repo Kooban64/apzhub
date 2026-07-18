@@ -96,21 +96,29 @@ export function TestingExecutionView({
         <Panel title="Execution details">
           <dl className="grid gap-2 text-sm sm:grid-cols-2">
             <div>
-              <dt className="font-medium text-[var(--color-muted-foreground)]">Status</dt>
+              <dt className="font-medium text-[var(--color-muted-foreground)]">
+                Status
+              </dt>
               <dd>
                 <StatusBadge status={execution.status} />
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-[var(--color-muted-foreground)]">Assignee</dt>
+              <dt className="font-medium text-[var(--color-muted-foreground)]">
+                Assignee
+              </dt>
               <dd>{execution.assignee}</dd>
             </div>
             <div>
-              <dt className="font-medium text-[var(--color-muted-foreground)]">Progress</dt>
+              <dt className="font-medium text-[var(--color-muted-foreground)]">
+                Progress
+              </dt>
               <dd>{execution.progressLabel}</dd>
             </div>
             <div>
-              <dt className="font-medium text-[var(--color-muted-foreground)]">Updated</dt>
+              <dt className="font-medium text-[var(--color-muted-foreground)]">
+                Updated
+              </dt>
               <dd>{formatTestingDate(execution.updatedAt)}</dd>
             </div>
           </dl>

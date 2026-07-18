@@ -23,12 +23,12 @@ PlatformDocumentService + DocumentContentService
 
 Packages:
 
-| Package | Version |
-|---------|---------|
-| `@apzhub/document-contracts` | **0.2.0** |
-| `@apzhub/document-core` | **0.2.0** |
-| `@apzhub/document-persistence` | **0.2.0** |
-| `@apzhub/document-storage` | **0.1.0** (new) |
+| Package                        | Version         |
+| ------------------------------ | --------------- |
+| `@apzhub/document-contracts`   | **0.2.0**       |
+| `@apzhub/document-core`        | **0.2.0**       |
+| `@apzhub/document-persistence` | **0.2.0**       |
+| `@apzhub/document-storage`     | **0.1.0** (new) |
 
 ## Persistence
 
@@ -39,12 +39,12 @@ Packages:
 
 ## Storage providers
 
-| Provider | Status |
-|----------|--------|
-| Filesystem | Implemented |
-| S3-compatible (AWS / MinIO) | Implemented |
-| Memory | Test-only |
-| Azure Blob / GCS | Unimplemented placeholders only |
+| Provider                    | Status                          |
+| --------------------------- | ------------------------------- |
+| Filesystem                  | Implemented                     |
+| S3-compatible (AWS / MinIO) | Implemented                     |
+| Memory                      | Test-only                       |
+| Azure Blob / GCS            | Unimplemented placeholders only |
 
 Factories: `createDocumentStorageForProduction` / `ForTest`. Registry rejects `implemented: false`.
 
@@ -61,11 +61,11 @@ Factories: `createDocumentStorageForProduction` / `ForTest`. Registry rejects `i
 
 ## Testing
 
-| Suite | Result |
-|-------|--------|
+| Suite                                                                  | Result                     |
+| ---------------------------------------------------------------------- | -------------------------- |
 | document-contracts / core / persistence / storage + foundation harness | **42** Vitest tests passed |
-| Architecture audit `scripts/apzdocs-002-persistence-storage-audit.mjs` | **PASS** (0 violations) |
-| Package typecheck (contracts/core/persistence/storage) | **PASS** |
+| Architecture audit `scripts/apzdocs-002-persistence-storage-audit.mjs` | **PASS** (0 violations)    |
+| Package typecheck (contracts/core/persistence/storage)                 | **PASS**                   |
 
 ## Coverage
 
@@ -73,12 +73,12 @@ Target ≥95% on coordinator / integrity / filesystem / registry / factories; Po
 
 ## Quality Gates
 
-| Gate | Result |
-|------|--------|
-| Architecture / dependency / boundary audit | PASS |
-| Vitest (document packages + foundation) | PASS (40) |
-| No REST / Workbench / OCR / AI / FTS / Event Bus in document packages | PASS |
-| Reporting must not depend on document-core | PASS |
+| Gate                                                                  | Result    |
+| --------------------------------------------------------------------- | --------- |
+| Architecture / dependency / boundary audit                            | PASS      |
+| Vitest (document packages + foundation)                               | PASS (40) |
+| No REST / Workbench / OCR / AI / FTS / Event Bus in document packages | PASS      |
+| Reporting must not depend on document-core                            | PASS      |
 
 ## Documentation delivered
 

@@ -33,9 +33,7 @@ export function validateWorkflowLifecycle(
   }
 
   if (input.fromLifecycle !== undefined && input.toLifecycle !== undefined) {
-    if (
-      !canTransitionWorkflowLifecycle(input.fromLifecycle, input.toLifecycle)
-    ) {
+    if (!canTransitionWorkflowLifecycle(input.fromLifecycle, input.toLifecycle)) {
       issues.push({
         code: "lifecycle",
         message: `Lifecycle transition not allowed: ${input.fromLifecycle} → ${input.toLifecycle}`,

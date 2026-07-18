@@ -37,10 +37,7 @@ export class TestingSearchMetrics {
     entityType?: string,
   ): void {
     if (entityType) {
-      this.byEntityType.set(
-        entityType,
-        (this.byEntityType.get(entityType) ?? 0) + 1,
-      );
+      this.byEntityType.set(entityType, (this.byEntityType.get(entityType) ?? 0) + 1);
     }
     if (!ok) {
       if (operation === "validate") this.validationFailures += 1;
@@ -184,9 +181,7 @@ export class TestingSearchErrorTranslator {
   translate(error: unknown): SearchDomainError {
     if (
       error instanceof Error &&
-      /storage|checksum|credential|payload|secret|binary|body/i.test(
-        error.message,
-      )
+      /storage|checksum|credential|payload|secret|binary|body/i.test(error.message)
     ) {
       return new SearchDomainError("validation_failed", error.message);
     }

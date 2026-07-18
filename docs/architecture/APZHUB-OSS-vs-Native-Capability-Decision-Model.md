@@ -16,12 +16,12 @@ Both OSS-backed and native capabilities must present identically to users via th
 
 ## Decision outcomes
 
-| Outcome | When | User experience |
-|---------|------|-----------------|
-| **Integrate OSS** | Mature CE engine; domain not differentiator; adapter cost ≪ build | APZHUB capability name; engine hidden |
-| **Build native** | Core differentiator; no suitable OSS; must own SoR; UX is the product | APZHUB capability; platform PostgreSQL SoR |
-| **Commercial purchase** | OSS gap; compliance cert; time-to-market; budget approved | Same abstraction — commercial adapter |
-| **Defer** | Dependency unmet; scope unclear; cost exceeds value at gate | Not in portfolio until re-evaluated |
+| Outcome                 | When                                                                  | User experience                            |
+| ----------------------- | --------------------------------------------------------------------- | ------------------------------------------ |
+| **Integrate OSS**       | Mature CE engine; domain not differentiator; adapter cost ≪ build     | APZHUB capability name; engine hidden      |
+| **Build native**        | Core differentiator; no suitable OSS; must own SoR; UX is the product | APZHUB capability; platform PostgreSQL SoR |
+| **Commercial purchase** | OSS gap; compliance cert; time-to-market; budget approved             | Same abstraction — commercial adapter      |
+| **Defer**               | Dependency unmet; scope unclear; cost exceeds value at gate           | Not in portfolio until re-evaluated        |
 
 ---
 
@@ -29,17 +29,17 @@ Both OSS-backed and native capabilities must present identically to users via th
 
 Score each dimension **Low / Medium / High** impact on the decision.
 
-| Dimension | Favours OSS | Favours native | Favours commercial | Favours defer |
-|-----------|-------------|----------------|-------------------|---------------|
-| **Differentiation** | Commodity domain | Strategic product | Certified niche | Unknown value |
-| **Time to market** | Need capability in < 6 months | Can invest 6+ months | Need < 3 months + budget | No deadline pressure |
-| **SoR ownership** | Engine can own domain data | Platform must own data | Vendor SoR acceptable | — |
-| **UX coherence** | Engine UI fully hidden | Custom UX required | Embed-only acceptable | — |
-| **Platform integration depth** | Shallow sync sufficient | Deep Playwright/AI/events | API-only integration | — |
-| **Operational cost** | Team can run CE engine | Prefer single stack | Vendor SLA needed | No ops capacity |
-| **License risk** | Permissive OSS / CE | N/A | Budget for license | License unclear |
-| **Exit flexibility** | Good export APIs | Full control | Contract terms | — |
-| **Team expertise** | Adapter patterns known | Domain expertise in-house | Vendor support | Gap in skills |
+| Dimension                      | Favours OSS                   | Favours native            | Favours commercial       | Favours defer        |
+| ------------------------------ | ----------------------------- | ------------------------- | ------------------------ | -------------------- |
+| **Differentiation**            | Commodity domain              | Strategic product         | Certified niche          | Unknown value        |
+| **Time to market**             | Need capability in < 6 months | Can invest 6+ months      | Need < 3 months + budget | No deadline pressure |
+| **SoR ownership**              | Engine can own domain data    | Platform must own data    | Vendor SoR acceptable    | —                    |
+| **UX coherence**               | Engine UI fully hidden        | Custom UX required        | Embed-only acceptable    | —                    |
+| **Platform integration depth** | Shallow sync sufficient       | Deep Playwright/AI/events | API-only integration     | —                    |
+| **Operational cost**           | Team can run CE engine        | Prefer single stack       | Vendor SLA needed        | No ops capacity      |
+| **License risk**               | Permissive OSS / CE           | N/A                       | Budget for license       | License unclear      |
+| **Exit flexibility**           | Good export APIs              | Full control              | Contract terms           | —                    |
+| **Team expertise**             | Adapter patterns known        | Domain expertise in-house | Vendor support           | Gap in skills        |
 
 **Rule of thumb:**
 
@@ -52,19 +52,19 @@ Score each dimension **Low / Medium / High** impact on the decision.
 
 ## Worked examples (APZHUB portfolio)
 
-| Capability | Decision | Rationale |
-|------------|----------|-----------|
-| Projects | Integrate OSS (Plane) | Mature PM; years to build |
-| Documents | Integrate OSS (Paperless) | OCR/tagging complex |
-| Time Tracking | Integrate OSS (Kimai) | Commodity; billing via service |
-| Support | Integrate OSS (Zammad) | Standard ticketing |
-| Analytics | Integrate OSS (Metabase) | BI engine not differentiator |
-| Automation | Integrate OSS (n8n) | Workflow engine standard |
-| **Quality Engineering** | **Build native** | Playwright-first; AI-native; platform SoR; commercial potential — see below |
-| Observability | Integrate OSS (G/P/L) | Industry standard; operator tier |
-| Security Ops | Integrate OSS (G/M/F) | Specialised scanners; admin tier |
-| Law Platform | Build native | Vertical differentiator |
-| Workbench / Platform Core | Build native | Core identity |
+| Capability                | Decision                  | Rationale                                                                   |
+| ------------------------- | ------------------------- | --------------------------------------------------------------------------- |
+| Projects                  | Integrate OSS (Plane)     | Mature PM; years to build                                                   |
+| Documents                 | Integrate OSS (Paperless) | OCR/tagging complex                                                         |
+| Time Tracking             | Integrate OSS (Kimai)     | Commodity; billing via service                                              |
+| Support                   | Integrate OSS (Zammad)    | Standard ticketing                                                          |
+| Analytics                 | Integrate OSS (Metabase)  | BI engine not differentiator                                                |
+| Automation                | Integrate OSS (n8n)       | Workflow engine standard                                                    |
+| **Quality Engineering**   | **Build native**          | Playwright-first; AI-native; platform SoR; commercial potential — see below |
+| Observability             | Integrate OSS (G/P/L)     | Industry standard; operator tier                                            |
+| Security Ops              | Integrate OSS (G/M/F)     | Specialised scanners; admin tier                                            |
+| Law Platform              | Build native              | Vertical differentiator                                                     |
+| Workbench / Platform Core | Build native              | Core identity                                                               |
 
 ---
 
@@ -74,14 +74,14 @@ Score each dimension **Low / Medium / High** impact on the decision.
 
 **OSS-002 decision:** **Replace with native APZHUB Quality Engineering Platform.**
 
-| Factor | Kiwi TCMS (OSS) | Native Quality Engineering |
-|--------|-----------------|---------------------------|
-| Differentiation | Low — commodity TMS | **High** — Playwright-first, AI-native |
-| Platform integration | Adapter sync; XML-RPC legacy | **Deep** — events, gates, M17 CI |
-| UX coherence | Separate TMS mental model | **Unified** APZHUB quality workspace |
-| SoR | Split (Kiwi DB + platform) | **Platform PostgreSQL** authoritative |
-| Commercial potential | None | **Future product** tier |
-| Playwright alignment | Ingest results only | **First-class** execution engine |
+| Factor               | Kiwi TCMS (OSS)              | Native Quality Engineering             |
+| -------------------- | ---------------------------- | -------------------------------------- |
+| Differentiation      | Low — commodity TMS          | **High** — Playwright-first, AI-native |
+| Platform integration | Adapter sync; XML-RPC legacy | **Deep** — events, gates, M17 CI       |
+| UX coherence         | Separate TMS mental model    | **Unified** APZHUB quality workspace   |
+| SoR                  | Split (Kiwi DB + platform)   | **Platform PostgreSQL** authoritative  |
+| Commercial potential | None                         | **Future product** tier                |
+| Playwright alignment | Ingest results only          | **First-class** execution engine       |
 
 **Verdict:** Build native. Kiwi TCMS **deferred / superseded** for Wave 5.
 

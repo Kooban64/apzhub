@@ -224,10 +224,7 @@ for (const child of requiredChildren) {
   }
 }
 
-const routes = readFileSync(
-  join(ROOT, "apps/web/lib/workflows/routes.ts"),
-  "utf8",
-);
+const routes = readFileSync(join(ROOT, "apps/web/lib/workflows/routes.ts"), "utf8");
 if (
   !routes.includes("WORKFLOW_ENGINE_WORKSPACE_BASE") ||
   !routes.includes("resolveWorkflowEngineSection") ||

@@ -18,16 +18,12 @@
   "violationCount": 0,
   "violations": [],
   "importGraph": {
-    "support-http-handler": [
-      "@apzhub/platform-service-contracts"
-    ],
+    "support-http-handler": ["@apzhub/platform-service-contracts"],
     "platform-services/providers/zammad": [
       "@apzhub/integration-zammad",
       "@apzhub/platform-service-contracts"
     ],
-    "platform-services/services": [
-      "@apzhub/platform-service-contracts"
-    ]
+    "platform-services/services": ["@apzhub/platform-service-contracts"]
   },
   "verdict": "PASS"
 }

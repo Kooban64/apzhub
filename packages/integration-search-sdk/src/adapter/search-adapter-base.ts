@@ -186,9 +186,7 @@ export abstract class SearchIntegrationAdapterBase extends IntegrationAdapterBas
     return [];
   }
 
-  protected assertSearchCapability(
-    capability: SearchIntegrationCapabilityId,
-  ): void {
+  protected assertSearchCapability(capability: SearchIntegrationCapabilityId): void {
     if (!this.searchContext.searchCapabilities.has(capability)) {
       throw new Error(`Search capability "${capability}" is not declared`);
     }

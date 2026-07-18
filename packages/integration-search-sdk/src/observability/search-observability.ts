@@ -26,9 +26,7 @@ export class SearchMetrics {
   recordRequest(options: RequestMetricOptions): void {
     this.delegate.recordRequest({
       ...options,
-      operation: options.operation
-        ? `search.${options.operation}`
-        : "search.operation",
+      operation: options.operation ? `search.${options.operation}` : "search.operation",
       labels: {
         plane: "search_integration",
         ...(options.labels ?? {}),

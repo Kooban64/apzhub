@@ -48,9 +48,7 @@ async function param(
   return parsePathParam(schema, params?.[key] ?? "", key);
 }
 
-function scopeFromBody(
-  body: z.infer<typeof engineeringScopeBodySchema>,
-): ScoreArgs[1] {
+function scopeFromBody(body: z.infer<typeof engineeringScopeBodySchema>): ScoreArgs[1] {
   if (!body.scope) return undefined;
   return body.scope as ScoreArgs[1];
 }

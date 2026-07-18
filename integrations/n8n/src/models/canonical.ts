@@ -4,10 +4,7 @@
  * Secrets, tokens, and execution payloads are never present.
  */
 
-export type CanonicalSupport =
-  | "supported"
-  | "partial"
-  | "not_supported";
+export type CanonicalSupport = "supported" | "partial" | "not_supported";
 
 export interface CanonicalWorkflowMetadata {
   readonly id: string;

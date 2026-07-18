@@ -17,9 +17,7 @@ export function assertVersionImmutable(version: ConfigurationVersion): void {
   }
 }
 
-export function nextVersionNumber(
-  existing: readonly ConfigurationVersion[],
-): number {
+export function nextVersionNumber(existing: readonly ConfigurationVersion[]): number {
   if (existing.length === 0) return 1;
   return Math.max(...existing.map((v) => v.versionNumber)) + 1;
 }

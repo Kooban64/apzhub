@@ -161,6 +161,20 @@ export {
   isObserveServiceEnabled,
   mapObserveDomainError,
 } from "./services/observe";
+export {
+  isMetricsServiceEnabled,
+  createMetricsPlatformServices,
+  createMetricsPlatformServicesForProduction,
+  createMetricsPlatformServicesForTest,
+  wrapMetricsPlatformGatewayWithPipeline,
+  createMetricsPlatformServiceImpls,
+  mapMetricsDomainError,
+  type MetricsPlatformServicesBundle,
+  type CreateMetricsPlatformServicesInput,
+  type CreateMetricsPlatformServicesForProductionInput,
+  type CreateMetricsPlatformServicesForTestInput,
+  type MetricsPlatformServiceImpls,
+} from "./services/metrics";
 
 export type {
   CreatePlatformServicesInput,
@@ -500,10 +514,7 @@ export type {
   PipelineLogEvent,
   PipelineLogger,
 } from "./execution/logging";
-export {
-  InMemoryPipelineMetrics,
-  noopPipelineMetrics,
-} from "./execution/metrics";
+export { InMemoryPipelineMetrics, noopPipelineMetrics } from "./execution/metrics";
 export type {
   PipelineMetricKind,
   PipelineMetricEvent,

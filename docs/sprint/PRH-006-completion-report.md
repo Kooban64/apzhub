@@ -12,16 +12,16 @@ Harden platform session handling with canonical policy owned by Platform Securit
 
 ### Implementation
 
-| Component | Location |
-|-----------|----------|
-| Canonical session policy | `packages/auth/src/session-policy.ts` |
-| Session diagnostics | `packages/auth/src/session-diagnostics.ts` |
-| Validation helpers | `packages/auth/src/session-validation.ts` |
-| Middleware session helper | `packages/auth/src/middleware-session.ts` |
-| Better Auth hardening | `packages/auth/src/server.ts` |
-| Platform posture integration | `platform-api-guard.ts` |
-| Prod dev-registration fail | `packages/config/src/governance/validation.ts` |
-| App middleware | `apps/*/middleware.ts` |
+| Component                    | Location                                       |
+| ---------------------------- | ---------------------------------------------- |
+| Canonical session policy     | `packages/auth/src/session-policy.ts`          |
+| Session diagnostics          | `packages/auth/src/session-diagnostics.ts`     |
+| Validation helpers           | `packages/auth/src/session-validation.ts`      |
+| Middleware session helper    | `packages/auth/src/middleware-session.ts`      |
+| Better Auth hardening        | `packages/auth/src/server.ts`                  |
+| Platform posture integration | `platform-api-guard.ts`                        |
+| Prod dev-registration fail   | `packages/config/src/governance/validation.ts` |
+| App middleware               | `apps/*/middleware.ts`                         |
 
 ### Security controls
 

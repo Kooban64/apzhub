@@ -36,8 +36,7 @@ function mapEntity(raw: unknown): ObserveEntityViewModel {
     ...r,
     id: String(r.id ?? ""),
     tenantId: r.tenantId != null ? String(r.tenantId) : undefined,
-    organisationId:
-      r.organisationId != null ? String(r.organisationId) : undefined,
+    organisationId: r.organisationId != null ? String(r.organisationId) : undefined,
     createdAt: r.createdAt != null ? String(r.createdAt) : undefined,
     updatedAt: r.updatedAt != null ? String(r.updatedAt) : undefined,
     createdBy: r.createdBy != null ? String(r.createdBy) : undefined,
@@ -73,8 +72,7 @@ async function requestJson<T>(
     },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiSuccessEnvelope<T>
-    | ApiErrorEnvelope;
+    ApiSuccessEnvelope<T> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new ObserveClientError({
@@ -102,8 +100,7 @@ async function requestCollection(
     },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiCollectionEnvelope<unknown>
-    | ApiErrorEnvelope;
+    ApiCollectionEnvelope<unknown> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new ObserveClientError({
@@ -127,10 +124,7 @@ async function requestCollection(
 function facetMethods(path: string) {
   return {
     list(query?: { limit?: number }, options?: ObserveClientRequestOptions) {
-      return requestCollection(
-        `${API_BASE}/${path}${buildQuery(query)}`,
-        options,
-      );
+      return requestCollection(`${API_BASE}/${path}${buildQuery(query)}`, options);
     },
     get(id: string, options?: ObserveClientRequestOptions) {
       return requestJson<ObserveEntityViewModel>(
@@ -139,10 +133,7 @@ function facetMethods(path: string) {
         options,
       ).then(mapEntity);
     },
-    create(
-      input: Record<string, unknown>,
-      options?: ObserveClientRequestOptions,
-    ) {
+    create(input: Record<string, unknown>, options?: ObserveClientRequestOptions) {
       return requestJson<ObserveEntityViewModel>(
         `${API_BASE}/${path}`,
         { method: "POST", body: JSON.stringify(input) },

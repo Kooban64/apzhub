@@ -18,7 +18,10 @@ function mapModuleStatus(status?: string): ProjectModule["status"] {
   }
 }
 
-export function mapPlaneModule(record: PlaneModuleRecord, projectId: string): ProjectModule {
+export function mapPlaneModule(
+  record: PlaneModuleRecord,
+  projectId: string,
+): ProjectModule {
   const now = new Date().toISOString();
   return {
     id: toModuleId(record.id),

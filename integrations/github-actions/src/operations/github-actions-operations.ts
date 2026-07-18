@@ -30,16 +30,8 @@ export interface GitHubActionsOperationsServiceDeps {
   readonly getRestClient: () => GitHubActionsRestClient;
   readonly clock: AdapterClock;
   readonly validateConfiguration: () => Promise<AdapterConfigurationValidationResult>;
-  readonly getAuthenticationStatus: () =>
-    | "valid"
-    | "missing"
-    | "invalid"
-    | "unknown";
-  readonly getApiStatus: () =>
-    | "reachable"
-    | "degraded"
-    | "unavailable"
-    | "not_tested";
+  readonly getAuthenticationStatus: () => "valid" | "missing" | "invalid" | "unknown";
+  readonly getApiStatus: () => "reachable" | "degraded" | "unavailable" | "not_tested";
   readonly getLastConnectionLatencyMs: () => number | undefined;
   readonly getConnectedLogin: () => string | undefined;
   readonly getAuthMode: () => string;
@@ -135,10 +127,7 @@ export class GitHubActionsOperationsService {
 
   buildRuntimeDiagnostics(input?: {
     readonly featureDetection?: GitHubActionsFeatureDetectionResult;
-    readonly configurationValidationStatus?:
-      | "valid"
-      | "invalid"
-      | "not_checked";
+    readonly configurationValidationStatus?: "valid" | "invalid" | "not_checked";
   }): GitHubActionsRuntimeDiagnosticsSnapshot {
     const health = this.classifyHealth({
       featureDetection: input?.featureDetection,
@@ -177,7 +166,4 @@ export function createGitHubActionsOperationsService(
   return new GitHubActionsOperationsService(deps);
 }
 
-export {
-  classifyGitHubActionsOperationalHealth,
-  mapOperationalHealthToSdkStatus,
-};
+export { classifyGitHubActionsOperationalHealth, mapOperationalHealthToSdkStatus };

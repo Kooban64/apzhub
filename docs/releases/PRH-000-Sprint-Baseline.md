@@ -42,20 +42,20 @@ The platform will be ready for **supervised single-org pilot deployment** with a
 
 PCv2-01 is **done** when all of the following are true:
 
-| # | Criterion |
-|---|-----------|
-| 1 | All stories PRH-001 through PRH-018 are complete per frozen acceptance criteria |
-| 2 | ADR-0046 (CSP & production security posture) is accepted |
-| 3 | Success criteria SC-01 through SC-15 are met |
-| 4 | Quality gates pass: `lint`, `typecheck`, `build`, `test`, `test:coverage` (≥80%) |
-| 5 | RLS integration tests pass locally |
-| 6 | Production smoke E2E passes locally |
-| 7 | Production documentation published and staging-validated |
-| 8 | Technical debt register updated (TD-M16-C01, TD-P09, TD-P10 closed) |
-| 9 | PCv2-01 completion report published |
-| 10 | PCv2-01 closeout readiness review is READY or READY WITH OBSERVATIONS |
-| 11 | No scope items from the excluded list were implemented |
-| 12 | Platform Core v1 certification criteria show no regression |
+| #   | Criterion                                                                        |
+| --- | -------------------------------------------------------------------------------- |
+| 1   | All stories PRH-001 through PRH-018 are complete per frozen acceptance criteria  |
+| 2   | ADR-0046 (CSP & production security posture) is accepted                         |
+| 3   | Success criteria SC-01 through SC-15 are met                                     |
+| 4   | Quality gates pass: `lint`, `typecheck`, `build`, `test`, `test:coverage` (≥80%) |
+| 5   | RLS integration tests pass locally                                               |
+| 6   | Production smoke E2E passes locally                                              |
+| 7   | Production documentation published and staging-validated                         |
+| 8   | Technical debt register updated (TD-M16-C01, TD-P09, TD-P10 closed)              |
+| 9   | PCv2-01 completion report published                                              |
+| 10  | PCv2-01 closeout readiness review is READY or READY WITH OBSERVATIONS            |
+| 11  | No scope items from the excluded list were implemented                           |
+| 12  | Platform Core v1 certification criteria show no regression                       |
 
 ---
 
@@ -63,17 +63,17 @@ PCv2-01 is **done** when all of the following are true:
 
 For the purposes of this sprint, **Production Ready** means:
 
-| Dimension | PCv2-01 standard |
-|-----------|------------------|
-| **Security** | Zero Trust fail-closed on secrets; CSP enforced; rate limits on sensitive routes; sessions hardened; API guard on all privileged routes |
-| **Isolation** | Tenant context validated; RLS cross-tenant denial proven by integration tests |
-| **Operations** | Liveness, readiness, health, and consolidated diagnostics operational; incident/recovery guides current |
-| **Deployment** | Documented self-hosted deployment path; operator checklist; upgrade/rollback procedures |
-| **Quality** | Full test pyramid green locally; coverage ≥80%; no critical unfixed regressions |
-| **Observability** | Health hierarchy and diagnostics (light); full metrics stack deferred to PCv2-07 |
-| **Async processing** | Outbox schema exists; worker processing deferred to PCv2-02 |
-| **CI/CD** | Local gates documented; GitHub Actions deferred to M17 |
-| **Commercial** | Onboarding design and monitoring hooks only; provisioning deferred to PCv2-03 |
+| Dimension            | PCv2-01 standard                                                                                                                        |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| **Security**         | Zero Trust fail-closed on secrets; CSP enforced; rate limits on sensitive routes; sessions hardened; API guard on all privileged routes |
+| **Isolation**        | Tenant context validated; RLS cross-tenant denial proven by integration tests                                                           |
+| **Operations**       | Liveness, readiness, health, and consolidated diagnostics operational; incident/recovery guides current                                 |
+| **Deployment**       | Documented self-hosted deployment path; operator checklist; upgrade/rollback procedures                                                 |
+| **Quality**          | Full test pyramid green locally; coverage ≥80%; no critical unfixed regressions                                                         |
+| **Observability**    | Health hierarchy and diagnostics (light); full metrics stack deferred to PCv2-07                                                        |
+| **Async processing** | Outbox schema exists; worker processing deferred to PCv2-02                                                                             |
+| **CI/CD**            | Local gates documented; GitHub Actions deferred to M17                                                                                  |
+| **Commercial**       | Onboarding design and monitoring hooks only; provisioning deferred to PCv2-03                                                           |
 
 Production Ready **does not** mean: HA, automated DR, Vault, SOC/SIEM, commercial licensing, or OSS integrations.
 
@@ -81,18 +81,18 @@ Production Ready **does not** mean: HA, automated DR, Vault, SOC/SIEM, commercia
 
 ## Success metrics
 
-| Metric | Target | Verification |
-|--------|--------|--------------|
-| CSP mode in production | `Content-Security-Policy` enforced | Header inspection |
-| Privileged API guard coverage | 100% | PRH-009 audit checklist |
-| RLS cross-tenant tests | 100% pass | Integration suite |
-| Bootstrap duplication | 0 (TD-M16-C01 closed) | Single shared package |
-| Production docs published | 3 guides + checklist | Governance folder |
-| Quality gate pass rate | 100% at closeout | CI commands |
-| Test coverage | ≥80% | `pnpm test:coverage` |
-| Production smoke E2E | Pass locally | PRH-017 suite |
-| Scope creep incidents | 0 excluded items shipped | Closeout review |
-| PC-001 regression | 0 new critical observations | Certification criteria check |
+| Metric                        | Target                             | Verification                 |
+| ----------------------------- | ---------------------------------- | ---------------------------- |
+| CSP mode in production        | `Content-Security-Policy` enforced | Header inspection            |
+| Privileged API guard coverage | 100%                               | PRH-009 audit checklist      |
+| RLS cross-tenant tests        | 100% pass                          | Integration suite            |
+| Bootstrap duplication         | 0 (TD-M16-C01 closed)              | Single shared package        |
+| Production docs published     | 3 guides + checklist               | Governance folder            |
+| Quality gate pass rate        | 100% at closeout                   | CI commands                  |
+| Test coverage                 | ≥80%                               | `pnpm test:coverage`         |
+| Production smoke E2E          | Pass locally                       | PRH-017 suite                |
+| Scope creep incidents         | 0 excluded items shipped           | Closeout review              |
+| PC-001 regression             | 0 new critical observations        | Certification criteria check |
 
 ---
 
@@ -120,12 +120,12 @@ OSS Waves
 
 ## Governance references
 
-| Document | Purpose |
-|----------|---------|
-| [PRH-000 Owner Acceptance](../reviews/PRH-000-Owner-Acceptance.md) | Owner approval and contractual scope |
+| Document                                                                         | Purpose                                |
+| -------------------------------------------------------------------------------- | -------------------------------------- |
+| [PRH-000 Owner Acceptance](../reviews/PRH-000-Owner-Acceptance.md)               | Owner approval and contractual scope   |
 | [PRH-000 Implementation Baseline](../reviews/PRH-000-Implementation-Baseline.md) | Frozen architecture, backlog, criteria |
-| [PCv2-01 Sprint Guide](../sprint/PCv2-01-Production-Readiness-Sprint-Guide.md) | Execution blueprint |
-| [PCv2-01 Backlog](../backlog/PCv2-01-Backlog.md) | Engineering stories |
+| [PCv2-01 Sprint Guide](../sprint/PCv2-01-Production-Readiness-Sprint-Guide.md)   | Execution blueprint                    |
+| [PCv2-01 Backlog](../backlog/PCv2-01-Backlog.md)                                 | Engineering stories                    |
 
 ---
 

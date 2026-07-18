@@ -26,7 +26,10 @@ export interface CapabilityDiscoveryFilter {
 }
 
 export interface CapabilityRegistration {
-  register(manifest: AdapterManifest, registeredAt?: string): CapabilityRegistrationResult;
+  register(
+    manifest: AdapterManifest,
+    registeredAt?: string,
+  ): CapabilityRegistrationResult;
   unregister(integrationId: string): boolean;
   discover(filter?: CapabilityDiscoveryFilter): readonly RegisteredCapabilityRecord[];
   getDeclaredCapabilities(integrationId: string): readonly IntegrationCapabilityId[];
@@ -36,7 +39,10 @@ export interface CapabilityRegistration {
 export class InMemoryCapabilityRegistration implements CapabilityRegistration {
   private readonly records = new Map<string, RegisteredCapabilityRecord[]>();
 
-  register(manifest: AdapterManifest, registeredAt?: string): CapabilityRegistrationResult {
+  register(
+    manifest: AdapterManifest,
+    registeredAt?: string,
+  ): CapabilityRegistrationResult {
     const issues: string[] = [];
 
     if (!manifest.integrationId.trim()) {
@@ -94,7 +100,9 @@ export class InMemoryCapabilityRegistration implements CapabilityRegistration {
     return this.records.delete(integrationId);
   }
 
-  discover(filter: CapabilityDiscoveryFilter = {}): readonly RegisteredCapabilityRecord[] {
+  discover(
+    filter: CapabilityDiscoveryFilter = {},
+  ): readonly RegisteredCapabilityRecord[] {
     const all = [...this.records.values()].flat();
 
     return all.filter((record) => {
@@ -122,6 +130,8 @@ export function createInMemoryCapabilityRegistration(): CapabilityRegistration {
   return new InMemoryCapabilityRegistration();
 }
 
-export function validateAdapterManifest(manifest: AdapterManifest): CapabilityRegistrationResult {
+export function validateAdapterManifest(
+  manifest: AdapterManifest,
+): CapabilityRegistrationResult {
   return createInMemoryCapabilityRegistration().register(manifest);
 }

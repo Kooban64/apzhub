@@ -141,9 +141,7 @@ export function createCertificationRecommendationService(
         id: asCertificationRecommendationId(String(json.id ?? "latest")),
         certificationRecordId: asCertificationRecordId(certificationRecordId),
         code: record.currentRecommendation as CertificationRecommendationCode,
-        reasons: Array.isArray(json.reasons)
-          ? json.reasons.map(String)
-          : [],
+        reasons: Array.isArray(json.reasons) ? json.reasons.map(String) : [],
         gateEvaluationIds: (record.gateEvaluationIds ?? []).map((id) =>
           asCertificationGateEvaluationId(id),
         ),

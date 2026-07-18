@@ -25,18 +25,18 @@ No alternative execution paths are permitted.
 
 ## What is frozen
 
-| Surface | Freeze scope |
-| --- | --- |
-| Contracts | `@apzhub/identity-contracts` **0.2.0** |
-| Core | `@apzhub/identity-core` **0.2.0** |
-| Persistence | `@apzhub/identity-persistence` **0.1.0** |
-| Platform Services | `gateway.identity.*` wiring in **0.23.0** |
-| HTTP API | `/api/v1/identity/*` · OpenAPI **1.7.0** · **36** App Router routes |
-| Typed client | `apps/web/lib/identity` |
-| Workbench | `/workspace/identity` + `platform-identity` manifests (16 sections) |
-| Authorization | `identityPlatformOps` + `PLATFORM_IDENTITY_PERMISSIONS` |
-| Schema | Migrations `0052` / `0053` · `platform_iam_*` |
-| Boundary | Metadata administration only — not authentication |
+| Surface           | Freeze scope                                                        |
+| ----------------- | ------------------------------------------------------------------- |
+| Contracts         | `@apzhub/identity-contracts` **0.2.0**                              |
+| Core              | `@apzhub/identity-core` **0.2.0**                                   |
+| Persistence       | `@apzhub/identity-persistence` **0.1.0**                            |
+| Platform Services | `gateway.identity.*` wiring in **0.23.0**                           |
+| HTTP API          | `/api/v1/identity/*` · OpenAPI **1.7.0** · **36** App Router routes |
+| Typed client      | `apps/web/lib/identity`                                             |
+| Workbench         | `/workspace/identity` + `platform-identity` manifests (16 sections) |
+| Authorization     | `identityPlatformOps` + `PLATFORM_IDENTITY_PERMISSIONS`             |
+| Schema            | Migrations `0052` / `0053` · `platform_iam_*`                       |
+| Boundary          | Metadata administration only — not authentication                   |
 
 ## Intentionally unavailable (frozen absence)
 
@@ -49,11 +49,11 @@ No alternative execution paths are permitted.
 
 ## Separation (frozen)
 
-| Capability | Path / ownership |
-| --- | --- |
-| Identity Administration | `/workspace/identity` — this SoR |
+| Capability              | Path / ownership                                  |
+| ----------------------- | ------------------------------------------------- |
+| Identity Administration | `/workspace/identity` — this SoR                  |
 | Platform Administration | `/workspace/administration` — frozen separate SoR |
-| Platform Operations | `/workspace/operations` — separate product |
+| Platform Operations     | `/workspace/operations` — separate product        |
 
 ## Change control
 

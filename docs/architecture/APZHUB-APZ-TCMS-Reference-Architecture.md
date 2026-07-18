@@ -3,7 +3,7 @@
 **Product:** APZ TCMS (APZHUB Test & Certification Management System)  
 **Milestone:** APZTCMS-001 (architecture) · **APZTCMS-002** (foundation packages) · **APZTCMS-003** (persistence)  
 **Status:** Architecture + foundation + **persistence layer exist** — **still no product UI/APIs/runners**  
-**Authority:** [000](../000-apzhub-engineering-constitution.md) · [003](../003-system-architecture-layered-design-principles.md) · [008](../008-module-platform-service-connector-architecture.md) · [009](../009-platform-service-layer-business-logic-architecture.md) · [011](../011-data-architecture-system-of-record-principles.md) · [012](../012-event-driven-architecture-background-processing.md) · [013](../013-security-architecture-zero-trust-model.md) · [015](../015-software-quality-testing-qa-cicd-release-management-framework.md) · [026](../026-integration-sdk-adapter-framework-integration-manifest-specification.md) · [Reference Adapter Standard](./REFERENCE-ADAPTER-STANDARD.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)
+**Authority:** [000](../000-apzhub-engineering-constitution.md) · [003](../003-overall-system-architecture-design-principles.md) · [008](../008-module-plugin-connector-architecture.md) · [009](../009-platform-service-layer-integration-framework.md) · [011](../011-platform-data-architecture-database-design-principles.md) · [012](../012-event-driven-architecture-background-processing-workflow-framework.md) · [013](../013-security-architecture-zero-trust-framework.md) · [015](../015-software-quality-testing-qa-cicd-release-management-framework.md) · [026](../026-integration-sdk-adapter-framework-integration-manifest-specification.md) · [Reference Adapter Standard](./REFERENCE-ADAPTER-STANDARD.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)
 
 **Supersedes:** [QE Reference Architecture](./APZHUB-Quality-Engineering-Reference-Architecture.md) for product architecture direction.
 
@@ -11,12 +11,12 @@
 
 ## Implementation status note
 
-| Layer | Status |
-| ----- | ------ |
-| Vision / reference architecture (APZTCMS-001) | ✅ Complete (docs) |
-| Foundation packages & manifests (APZTCMS-002) | ✅ `@apzhub/testing-contracts` / `@apzhub/testing-foundation` **0.1.0**; service + disabled module manifests |
-| Persistence / live authz (APZTCMS-003) | ✅ `@apzhub/testing-persistence` **0.1.0**; `testing_*` schema + migrations 0016/0017; platform authz namespaces |
-| Product runtime (APIs, UI, workers, adapters) | ❌ Not started — still excluded |
+| Layer                                         | Status                                                                                                           |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Vision / reference architecture (APZTCMS-001) | ✅ Complete (docs)                                                                                               |
+| Foundation packages & manifests (APZTCMS-002) | ✅ `@apzhub/testing-contracts` / `@apzhub/testing-foundation` **0.1.0**; service + disabled module manifests     |
+| Persistence / live authz (APZTCMS-003)        | ✅ `@apzhub/testing-persistence` **0.1.0**; `testing_*` schema + migrations 0016/0017; platform authz namespaces |
+| Product runtime (APIs, UI, workers, adapters) | ❌ Not started — still excluded                                                                                  |
 
 See [Persistence Architecture](./APZHUB-APZ-TCMS-Persistence-Architecture.md) · [Foundation Architecture](./APZHUB-APZ-TCMS-Foundation-Architecture.md) · [APZTCMS-003 Completion Report](../sprint/APZTCMS-003-completion-report.md).
 
@@ -174,12 +174,12 @@ Health hierarchy includes Testing module → TestingService / CertificationServi
 
 ## Manifest-first (APZTCMS-002 delivered; later phases remaining)
 
-| Manifest                                    | Purpose                                     | Milestone                |
-| ------------------------------------------- | ------------------------------------------- | ------------------------ |
+| Manifest                                    | Purpose                                     | Milestone                        |
+| ------------------------------------------- | ------------------------------------------- | -------------------------------- |
 | `module.yaml` (`testing`)                   | Module registration, nav, permissions hooks | **APZTCMS-002** (disabled shell) |
-| `service.yaml` (`testing`, `certification`) | Service contracts                           | **APZTCMS-002**          |
-| `integration.yaml` (result adapters)        | Adapter capabilities                        | Later ingestion phases   |
-| `event.yaml`                                | Domain events                               | With event wiring phases |
+| `service.yaml` (`testing`, `certification`) | Service contracts                           | **APZTCMS-002**                  |
+| `integration.yaml` (result adapters)        | Adapter capabilities                        | Later ingestion phases           |
+| `event.yaml`                                | Domain events                               | With event wiring phases         |
 
 ---
 

@@ -44,13 +44,13 @@ flowchart TD
 
 ## Packages under validation
 
-| Domain | Package / surface |
-|--------|-------------------|
-| Lifecycle | `@apzhub/platform-lifecycle` |
-| Operations | `@apzhub/platform-operations` |
-| Security & resilience | `@apzhub/platform-security` |
-| Bootstrap | `@apzhub/platform-bootstrap` |
-| Runtime | `@apzhub/platform-runtime` |
+| Domain                | Package / surface             |
+| --------------------- | ----------------------------- |
+| Lifecycle             | `@apzhub/platform-lifecycle`  |
+| Operations            | `@apzhub/platform-operations` |
+| Security & resilience | `@apzhub/platform-security`   |
+| Bootstrap             | `@apzhub/platform-bootstrap`  |
+| Runtime               | `@apzhub/platform-runtime`    |
 
 ---
 
@@ -67,10 +67,10 @@ flowchart TD
 
 ## Test assets
 
-| Asset | Location |
-|-------|----------|
-| Failure fixtures | `packages/platform-lifecycle/src/failure-fixtures.ts` |
-| Lifecycle reliability tests | `packages/platform-lifecycle/src/platform-reliability-validation.test.ts` |
+| Asset                           | Location                                                                   |
+| ------------------------------- | -------------------------------------------------------------------------- |
+| Failure fixtures                | `packages/platform-lifecycle/src/failure-fixtures.ts`                      |
+| Lifecycle reliability tests     | `packages/platform-lifecycle/src/platform-reliability-validation.test.ts`  |
 | Control plane reliability tests | `packages/platform-operations/src/platform-reliability-validation.test.ts` |
 
 ---

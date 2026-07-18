@@ -1,0 +1,21 @@
+{
+  "name": "@apzhub/metrics-persistence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Metrics persistence — in-memory + PostgreSQL (APZMETRICS-001)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/metrics-persistence"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/metrics-contracts": "workspace:*",
+    "@apzhub/metrics-core": "workspace:*",
+    "drizzle-orm": "^0.45.2"
+  }
+}

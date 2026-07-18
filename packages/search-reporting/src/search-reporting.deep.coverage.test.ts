@@ -77,62 +77,60 @@ describe("APZSEARCH-014 deep coverage", () => {
     const context = ctx();
 
     expect(
-      adapter.validator.validateDraft(context, {
-        entityId: "",
-        entityType: "report_template",
-        title: "",
-        classification: undefined,
-        metadata: {
-          reportType: "x",
-          version: "1",
-          meiliUid: "x",
-          parametersJson: "bad",
-          checksumSha256: "aa".repeat(32),
-        },
-      }).issues.map((i) => i.code),
+      adapter.validator
+        .validateDraft(context, {
+          entityId: "",
+          entityType: "report_template",
+          title: "",
+          classification: undefined,
+          metadata: {
+            reportType: "x",
+            version: "1",
+            meiliUid: "x",
+            parametersJson: "bad",
+            checksumSha256: "aa".repeat(32),
+          },
+        })
+        .issues.map((i) => i.code),
     ).toEqual(
-      expect.arrayContaining([
-        "required",
-        "provider_leakage",
-        "content_leakage",
-      ]),
+      expect.arrayContaining(["required", "provider_leakage", "content_leakage"]),
     );
 
     expect(
-      adapter.validator.validateDraft(context, {
-        entityId: "parametersJson_leak",
-        entityType: "unknown",
-        title: "T",
-        classification: "internal",
-        permissions: ["x"],
-        metadata: {},
-      }).issues.some(
-        (i) => i.code === "unsupported" || i.code === "content_leakage",
-      ),
+      adapter.validator
+        .validateDraft(context, {
+          entityId: "parametersJson_leak",
+          entityType: "unknown",
+          title: "T",
+          classification: "internal",
+          permissions: ["x"],
+          metadata: {},
+        })
+        .issues.some((i) => i.code === "unsupported" || i.code === "content_leakage"),
     ).toBe(true);
 
     expect(
-      adapter.validator.validateDraft(
-        {
-          ...context,
-          tenantId: "",
-          permissions: null as unknown as readonly string[],
-        },
-        {
-          entityId: "x",
-          entityType: "report_type",
-          title: "T",
-          classification: "internal",
-          metadata: {},
-        },
-      ).issues.map((i) => i.field),
+      adapter.validator
+        .validateDraft(
+          {
+            ...context,
+            tenantId: "",
+            permissions: null as unknown as readonly string[],
+          },
+          {
+            entityId: "x",
+            entityType: "report_type",
+            title: "T",
+            classification: "internal",
+            metadata: {},
+          },
+        )
+        .issues.map((i) => i.field),
     ).toEqual(expect.arrayContaining(["tenantId", "permissions"]));
 
-    const fromTemplate = adapter.mapper.mapReportDefinition(
-      context,
-      template,
-      { tenantId: "tenant-a" },
-    );
+    const fromTemplate = adapter.mapper.mapReportDefinition(context, template, {
+      tenantId: "tenant-a",
+    });
     expect(fromTemplate.entityType).toBe("report_definition");
     expect(fromTemplate.metadata?.templateId).toBe(template.id);
     expect(JSON.stringify(fromTemplate)).not.toMatch(/heading/);
@@ -222,17 +220,14 @@ describe("APZSEARCH-014 deep coverage", () => {
       }).ok,
     ).toBe(true);
 
-    const recorded = adapter.hooks.onReportGenerationRecorded(
-      context,
-      generation,
-    );
+    const recorded = adapter.hooks.onReportGenerationRecorded(context, generation);
     expect(recorded.ok).toBe(true);
     expect(adapter.integration.sink.get(generation.id)?.entityType).toBe(
       "report_generation_metadata",
     );
-    expect(
-      adapter.integration.sink.get(`output:${generation.id}`)?.entityType,
-    ).toBe("report_output_metadata");
+    expect(adapter.integration.sink.get(`output:${generation.id}`)?.entityType).toBe(
+      "report_output_metadata",
+    );
 
     expect(
       adapter.hooks.onReportGenerationArchived(context, {
@@ -240,37 +235,25 @@ describe("APZSEARCH-014 deep coverage", () => {
         archivedAt: "2026-02-01T00:00:00.000Z",
       }).ok,
     ).toBe(true);
-    expect(
-      adapter.hooks.onReportOutputMetadataPublished(context, generation).ok,
-    ).toBe(true);
+    expect(adapter.hooks.onReportOutputMetadataPublished(context, generation).ok).toBe(
+      true,
+    );
 
-    expect(adapter.hooks.onReportTemplateRemoved(context, template.id).ok).toBe(
-      true,
-    );
-    expect(adapter.hooks.onReportCategoryRemoved(context, "cat_h").ok).toBe(
-      true,
-    );
-    expect(adapter.hooks.onReportDefinitionRemoved(context, "def_h").ok).toBe(
-      true,
-    );
+    expect(adapter.hooks.onReportTemplateRemoved(context, template.id).ok).toBe(true);
+    expect(adapter.hooks.onReportCategoryRemoved(context, "cat_h").ok).toBe(true);
+    expect(adapter.hooks.onReportDefinitionRemoved(context, "def_h").ok).toBe(true);
     expect(adapter.hooks.onReportTypeRemoved(context, "rtype_h").ok).toBe(true);
-    expect(adapter.hooks.onReportProfileRemoved(context, "prof_h").ok).toBe(
+    expect(adapter.hooks.onReportProfileRemoved(context, "prof_h").ok).toBe(true);
+    expect(adapter.hooks.onReportConsumerRemoved(context, "cons_h").ok).toBe(true);
+    expect(adapter.hooks.onReportGenerationRemoved(context, generation.id).ok).toBe(
       true,
     );
-    expect(adapter.hooks.onReportConsumerRemoved(context, "cons_h").ok).toBe(
-      true,
-    );
-    expect(
-      adapter.hooks.onReportGenerationRemoved(context, generation.id).ok,
-    ).toBe(true);
 
     const diag = adapter.publisher.diagnostics(context);
     expect(diag.productId).toBe("reporting");
     expect(diag.supportedEntityTypes).toContain("report_template");
     expect(adapter.publisher.getLogger().recent().length).toBeGreaterThan(0);
-    expect(adapter.publisher.getMetrics().snapshot().published).toBeGreaterThan(
-      0,
-    );
+    expect(adapter.publisher.getMetrics().snapshot().published).toBeGreaterThan(0);
     expect(adapter.publisher.getMapper()).toBe(adapter.mapper);
     expect(adapter.publisher.getValidator()).toBe(adapter.validator);
     expect(adapter.publisher.getLifecycle()).toBe(adapter.lifecycle);
@@ -342,9 +325,7 @@ describe("APZSEARCH-014 deep coverage", () => {
       entityType: "report_type",
       entity: { id: "life_1", name: "Life" },
     });
-    expect(happy.publisher.lifecycle(context, "life_1", "archived").ok).toBe(
-      true,
-    );
+    expect(happy.publisher.lifecycle(context, "life_1", "archived").ok).toBe(true);
 
     // Production factory branches
     const integration = createSearchIntegration();
@@ -360,15 +341,15 @@ describe("APZSEARCH-014 deep coverage", () => {
         sink: integration.sink,
       }).publisher,
     ).toBeDefined();
-    expect(
-      createReportingSearchAdapter({ integration }).publisher,
-    ).toBeDefined();
+    expect(createReportingSearchAdapter({ integration }).publisher).toBeDefined();
     expect(
       createReportingSearchAdapter({
         searchIntegrationOptions: { sink: integration.sink },
       }).publisher,
     ).toBeDefined();
-    expect(createReportingSearchPublisherForTest().getIntegrationPublisher()).toBeDefined();
+    expect(
+      createReportingSearchPublisherForTest().getIntegrationPublisher(),
+    ).toBeDefined();
 
     // Mapping remaining thin types with optional fields
     const mapper = happy.mapper;
@@ -396,11 +377,9 @@ describe("APZSEARCH-014 deep coverage", () => {
       }).metadata?.generationCount,
     ).toBe("1");
     expect(
-      mapper
-        .mapReportGeneration(context, generation, "report_generation", {
-          title: "Custom title",
-        })
-        .title,
+      mapper.mapReportGeneration(context, generation, "report_generation", {
+        title: "Custom title",
+      }).title,
     ).toBe("Custom title");
 
     // Context creation without permissions throws
@@ -413,8 +392,8 @@ describe("APZSEARCH-014 deep coverage", () => {
       }),
     ).toThrow(/permissions/);
 
-    expect(() =>
-      createReportingSearchPublicationContext({}),
-    ).toThrow(/requires reportingContext or serviceContext/);
+    expect(() => createReportingSearchPublicationContext({})).toThrow(
+      /requires reportingContext or serviceContext/,
+    );
   });
 });

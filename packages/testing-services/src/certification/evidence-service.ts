@@ -70,7 +70,10 @@ async function mutateLinks(
   );
   await appendCertificationAudit(rt, ctx, {
     certificationRecordId: certificationRecordId as never,
-    action: mode === "link" ? "certification.evidence_linked" : "certification.evidence_unlinked",
+    action:
+      mode === "link"
+        ? "certification.evidence_linked"
+        : "certification.evidence_unlinked",
     summary: `${mode === "link" ? "Linked" : "Unlinked"} evidence for certification`,
     detailsJson: { mode, links },
   });
@@ -83,4 +86,3 @@ async function mutateLinks(
   });
   return merged;
 }
-

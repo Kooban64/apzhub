@@ -389,9 +389,9 @@ describe("postgres identity repositories", () => {
       updatedBy: "u",
       revision: 1,
     });
-    expect(await repos.users.get(ctx, asIdentityUserId("user_1"))).toMatchObject(
-      { displayName: "Ada" },
-    );
+    expect(await repos.users.get(ctx, asIdentityUserId("user_1"))).toMatchObject({
+      displayName: "Ada",
+    });
     expect((await repos.users.list(ctx)).length).toBe(1);
     await repos.users.update(ctx, {
       id: asIdentityUserId("user_1"),
@@ -454,9 +454,7 @@ describe("postgres identity repositories", () => {
     });
     expect((await auditRepos.audits.list(ctx)).length).toBe(1);
 
-    expect(
-      createProductionIdentityPersistence({ db: mockDb() }).users,
-    ).toBeDefined();
+    expect(createProductionIdentityPersistence({ db: mockDb() }).users).toBeDefined();
   });
 
   it("exercises remaining postgres ports for coverage", async () => {
@@ -515,7 +513,13 @@ describe("postgres identity repositories", () => {
       createdAt: now,
       updatedAt: now,
     };
-    const posRow = { ...deptRow, id: "pos_1", key: "eng", name: "Engineer", organisationId: "org_1" };
+    const posRow = {
+      ...deptRow,
+      id: "pos_1",
+      key: "eng",
+      name: "Engineer",
+      organisationId: "org_1",
+    };
     const empRow = {
       id: "emp_1",
       tenantId: "tenant_a",
@@ -954,5 +958,4 @@ describe("postgres identity repositories", () => {
 
     void baseUser;
   });
-
 });

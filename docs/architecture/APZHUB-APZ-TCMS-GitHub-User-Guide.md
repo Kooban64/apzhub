@@ -23,10 +23,10 @@ Read-only Testing workbench guidance for viewing GitHub Actions (and vendor-neut
 
 ## Permissions
 
-| Permission | UI effect |
-|---|---|
-| `pipeline.read` | View pipelines section and live/SoR reads |
-| `pipeline.import` | Refresh / importFromProvider |
+| Permission           | UI effect                                         |
+| -------------------- | ------------------------------------------------- |
+| `pipeline.read`      | View pipelines section and live/SoR reads         |
+| `pipeline.import`    | Refresh / importFromProvider                      |
 | `pipeline.providers` | Provider list (also covered by read in workbench) |
 
 Server authorization remains authoritative.

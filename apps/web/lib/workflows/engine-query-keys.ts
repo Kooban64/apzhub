@@ -27,16 +27,14 @@ export const workflowEngineQueryKeys = {
     detail: (workflowId: string) =>
       [...ROOT, "workflows", "detail", workflowId] as const,
   },
-  workflow: (workflowId: string) =>
-    [...ROOT, "workflow", workflowId] as const,
+  workflow: (workflowId: string) => [...ROOT, "workflow", workflowId] as const,
   templates: {
     all: [...ROOT, "templates"] as const,
     list: () => [...ROOT, "templates", "list"] as const,
     detail: (templateId: string) =>
       [...ROOT, "templates", "detail", templateId] as const,
   },
-  template: (templateId: string) =>
-    [...ROOT, "template", templateId] as const,
+  template: (templateId: string) => [...ROOT, "template", templateId] as const,
   tags: () => [...ROOT, "tags"] as const,
   users: () => [...ROOT, "users"] as const,
   projects: () => [...ROOT, "projects"] as const,

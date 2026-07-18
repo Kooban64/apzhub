@@ -10,25 +10,25 @@
 
 ## Sidebar sections
 
-| Order | Section | Route suffix | Permission |
-| --- | --- | --- | --- |
-| 10 | Overview | `/overview` | `admin.read` |
-| 20 | Modules | `/modules` | `admin.read` |
-| 30 | Categories | `/categories` | `admin.read` |
-| 40 | Sections | `/sections` | `admin.read` |
-| 50 | Registrations | `/registrations` | `admin.registration` |
-| 60 | Capabilities | `/capabilities` | `admin.read` |
-| 70 | Actions | `/actions` | `admin.read` |
-| 80 | Permissions | `/permissions` | `admin.read` |
-| 90 | Policies | `/policies` | `admin.policy` |
-| 100 | Navigation | `/navigation` | `admin.navigation` |
-| 110 | Shortcuts | `/shortcuts` | `admin.navigation` |
-| 120 | Dashboards | `/dashboards` | `admin.read` |
-| 130 | Widgets | `/widgets` | `admin.read` |
-| 140 | References | `/references` | `admin.read` |
-| 150 | Audit | `/audit` | `admin.audit` |
-| 160 | History | `/history` | `admin.audit` |
-| 170 | Diagnostics | `/diagnostics` | `admin.diagnostics` |
+| Order | Section       | Route suffix     | Permission           |
+| ----- | ------------- | ---------------- | -------------------- |
+| 10    | Overview      | `/overview`      | `admin.read`         |
+| 20    | Modules       | `/modules`       | `admin.read`         |
+| 30    | Categories    | `/categories`    | `admin.read`         |
+| 40    | Sections      | `/sections`      | `admin.read`         |
+| 50    | Registrations | `/registrations` | `admin.registration` |
+| 60    | Capabilities  | `/capabilities`  | `admin.read`         |
+| 70    | Actions       | `/actions`       | `admin.read`         |
+| 80    | Permissions   | `/permissions`   | `admin.read`         |
+| 90    | Policies      | `/policies`      | `admin.policy`       |
+| 100   | Navigation    | `/navigation`    | `admin.navigation`   |
+| 110   | Shortcuts     | `/shortcuts`     | `admin.navigation`   |
+| 120   | Dashboards    | `/dashboards`    | `admin.read`         |
+| 130   | Widgets       | `/widgets`       | `admin.read`         |
+| 140   | References    | `/references`    | `admin.read`         |
+| 150   | Audit         | `/audit`         | `admin.audit`        |
+| 160   | History       | `/history`       | `admin.audit`        |
+| 170   | Diagnostics   | `/diagnostics`   | `admin.diagnostics`  |
 
 ## Coexistence
 

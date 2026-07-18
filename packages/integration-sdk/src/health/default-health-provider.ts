@@ -6,7 +6,10 @@ import { buildCircuitBreakerHealthMessage } from "../resilience/circuit-breaker"
 import type { Clock } from "../auth/authentication-provider";
 import { systemClock } from "../auth/authentication-provider";
 import type { IntegrationHealthCheck } from "../diagnostics/types";
-import { aggregateHealthChecks, mapConnectionLifecycleToHealthSignal } from "./aggregation";
+import {
+  aggregateHealthChecks,
+  mapConnectionLifecycleToHealthSignal,
+} from "./aggregation";
 import type { HealthCheckContext, HealthProvider } from "./types";
 
 export interface DefaultHealthProviderOptions {
@@ -32,7 +35,9 @@ function findTenantConnection(
   tenantId: string,
   integrationId: string,
 ): ConnectionRecord | undefined {
-  return registry.listByTenant(tenantId).find((record) => record.integrationId === integrationId);
+  return registry
+    .listByTenant(tenantId)
+    .find((record) => record.integrationId === integrationId);
 }
 
 export class DefaultHealthProvider implements HealthProvider {
@@ -108,7 +113,9 @@ export class DefaultHealthProvider implements HealthProvider {
     });
   }
 
-  private buildConfigurationCheck(connection: ConnectionRecord): IntegrationHealthCheck {
+  private buildConfigurationCheck(
+    connection: ConnectionRecord,
+  ): IntegrationHealthCheck {
     const configured =
       connection.lifecycleState !== "unconfigured" &&
       connection.lifecycleState !== "misconfigured" &&
@@ -134,7 +141,9 @@ export class DefaultHealthProvider implements HealthProvider {
     };
   }
 
-  private buildAuthenticationCheck(connection: ConnectionRecord): IntegrationHealthCheck {
+  private buildAuthenticationCheck(
+    connection: ConnectionRecord,
+  ): IntegrationHealthCheck {
     const hasCredentialRef = Boolean(connection.credentialRef.trim());
     const authSignal = mapConnectionLifecycleToHealthSignal(connection.lifecycleState);
 
@@ -164,7 +173,9 @@ export class DefaultHealthProvider implements HealthProvider {
     };
   }
 
-  private buildAuthorizationCheck(connection: ConnectionRecord): IntegrationHealthCheck {
+  private buildAuthorizationCheck(
+    connection: ConnectionRecord,
+  ): IntegrationHealthCheck {
     if (connection.lifecycleState === "connected") {
       return {
         name: "authorization",
@@ -219,7 +230,8 @@ export class DefaultHealthProvider implements HealthProvider {
       return {
         name: "version",
         status: "fail",
-        message: compatibility.message ?? "Engine version incompatible with declared range",
+        message:
+          compatibility.message ?? "Engine version incompatible with declared range",
       };
     }
 

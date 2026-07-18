@@ -13,7 +13,10 @@ import {
   TEST_TENANT_ID,
 } from "./testing/mock-plane-api";
 import { discoverPlaneCoreServiceCapabilities } from "./capabilities/service-capabilities";
-import { createPlaneVendorErrorMapper, mapPlaneUnknownError } from "./plane-error-mapper";
+import {
+  createPlaneVendorErrorMapper,
+  mapPlaneUnknownError,
+} from "./plane-error-mapper";
 import { PLANE_ADAPTER_VERSION, translatePlaneWebhookPayload } from "./index";
 
 const ctx = { correlationId: TEST_CORRELATION_ID, tenantId: TEST_TENANT_ID };
@@ -54,7 +57,9 @@ describe("OSS-101-08 capability registration", () => {
     expect(diagnostics.syncEventsCapability.webhooksRegistered).toBe(true);
     expect(diagnostics.syncEventsCapability.eventsRegistered).toBe(true);
     expect(diagnostics.syncEventsCapability.synchronisationRegistered).toBe(true);
-    expect(diagnostics.syncEventsCapability.supportedWebhookOperations).toContain("create");
+    expect(diagnostics.syncEventsCapability.supportedWebhookOperations).toContain(
+      "create",
+    );
     expect(diagnostics.syncEventsCapability.supportedEventTypes).toContain("issue");
     await disposePlaneAdapter(adapter, factory);
   });
@@ -119,7 +124,9 @@ describe("PlaneWebhookService", () => {
 
     await disposePlaneAdapter(adapter, factory);
 
-    const failing = await createAdapter(createMockPlaneCoreFetch({ webhookStatus: 503 }));
+    const failing = await createAdapter(
+      createMockPlaneCoreFetch({ webhookStatus: 503 }),
+    );
     await failing.adapter.initialise();
     await expect(failing.adapter.core.webhooks.list(ctx)).rejects.toMatchObject({
       category: "vendor_unavailable",
@@ -209,7 +216,9 @@ describe("PlaneSyncService", () => {
 
     const state = adapter.core.synchronisation.getSyncState();
     expect(state.cursor.lastSyncAt).toBeDefined();
-    expect(adapter.core.synchronisation.getLastSyncTimestamp()).toBe(state.lastSuccessfulSyncAt);
+    expect(adapter.core.synchronisation.getLastSyncTimestamp()).toBe(
+      state.lastSuccessfulSyncAt,
+    );
 
     const incremental = await adapter.core.synchronisation.runIncrementalSync(ctx, {
       since: "2099-01-01T00:00:00.000Z",
@@ -224,7 +233,9 @@ describe("PlaneSyncService", () => {
     const { adapter, factory } = await createAdapter();
     await adapter.initialise();
 
-    const limited = await adapter.core.synchronisation.runFullSync(ctx, { maxRecords: 1 });
+    const limited = await adapter.core.synchronisation.runFullSync(ctx, {
+      maxRecords: 1,
+    });
     expect(limited.recordsProcessed).toBe(1);
 
     const resumed = await adapter.core.synchronisation.runFullSync(ctx, {
@@ -236,10 +247,11 @@ describe("PlaneSyncService", () => {
     expect(resumed.status.status).toBe("succeeded");
 
     // Force running then safe-restart
-    (adapter.core.synchronisation as unknown as { status: { status: string } }).status = {
-      ...(adapter.core.synchronisation.getSyncState() as object),
-      status: "running",
-    } as never;
+    (adapter.core.synchronisation as unknown as { status: { status: string } }).status =
+      {
+        ...(adapter.core.synchronisation.getSyncState() as object),
+        status: "running",
+      } as never;
     const restarted = adapter.core.synchronisation.safeRestart();
     expect(restarted.status).toBe("idle");
     expect(restarted.errors).toContain("safe_restart_cleared_running_state");
@@ -261,7 +273,9 @@ describe("PlaneSyncService", () => {
     expect(state.lastFailedSyncAt).toBeDefined();
     expect(state.cursor.resumeToken).toBeDefined();
     expect(adapter.core.synchronisation.getDiagnostics().syncHealth).toBe("unhealthy");
-    expect(adapter.core.synchronisation.getDiagnostics().retryCounts).toBeGreaterThanOrEqual(1);
+    expect(
+      adapter.core.synchronisation.getDiagnostics().retryCounts,
+    ).toBeGreaterThanOrEqual(1);
 
     await disposePlaneAdapter(adapter, factory);
   });

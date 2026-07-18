@@ -42,11 +42,7 @@ import type {
   AutomationRunRecord,
   AutomatedExecutionRecord,
 } from "../records";
-import {
-  dateFromIso,
-  isoFromDate,
-  metaFromRow,
-} from "../mappers/row-mappers";
+import { dateFromIso, isoFromDate, metaFromRow } from "../mappers/row-mappers";
 import {
   compareValues,
   normalizeListQuery,
@@ -320,7 +316,8 @@ export function createPostgresAutomationRepos(db: DatabaseExecutor): {
         return {
           id: existing?.id ?? String(input.id ?? randomUUID()),
           tenantId: ctx.tenantId,
-          organisationId: (input.organisationId as string | undefined) ??
+          organisationId:
+            (input.organisationId as string | undefined) ??
             existing?.organisationId ??
             ctx.organisationId,
           revision: existing ? existing.revision + 1 : 1,
@@ -353,8 +350,8 @@ export function createPostgresAutomationRepos(db: DatabaseExecutor): {
             (input.completedAt as string | undefined) ?? existing?.completedAt,
           canonicalSnapshot:
             (input.canonicalSnapshot as
-              | Readonly<Record<string, unknown>>
-              | undefined) ?? existing?.canonicalSnapshot,
+              Readonly<Record<string, unknown>> | undefined) ??
+            existing?.canonicalSnapshot,
           automatedExecutionId:
             (input.automatedExecutionId as string | undefined) ??
             existing?.automatedExecutionId,
@@ -382,7 +379,8 @@ export function createPostgresAutomationRepos(db: DatabaseExecutor): {
         return {
           id: existing?.id ?? String(input.id ?? randomUUID()),
           tenantId: ctx.tenantId,
-          organisationId: (input.organisationId as string | undefined) ??
+          organisationId:
+            (input.organisationId as string | undefined) ??
             existing?.organisationId ??
             ctx.organisationId,
           revision: existing ? existing.revision + 1 : 1,
@@ -439,7 +437,8 @@ export function createPostgresAutomationRepos(db: DatabaseExecutor): {
         return {
           id: existing?.id ?? String(input.id ?? randomUUID()),
           tenantId: ctx.tenantId,
-          organisationId: (input.organisationId as string | undefined) ??
+          organisationId:
+            (input.organisationId as string | undefined) ??
             existing?.organisationId ??
             ctx.organisationId,
           revision: existing ? existing.revision + 1 : 1,
@@ -484,7 +483,8 @@ export function createPostgresAutomationRepos(db: DatabaseExecutor): {
         return {
           id: existing?.id ?? String(input.id ?? randomUUID()),
           tenantId: ctx.tenantId,
-          organisationId: (input.organisationId as string | undefined) ??
+          organisationId:
+            (input.organisationId as string | undefined) ??
             existing?.organisationId ??
             ctx.organisationId,
           revision: existing ? existing.revision + 1 : 1,
@@ -639,7 +639,8 @@ export function createPostgresAutomationRepos(db: DatabaseExecutor): {
         return {
           id: existing?.id ?? String(input.id ?? randomUUID()),
           tenantId: ctx.tenantId,
-          organisationId: (input.organisationId as string | undefined) ??
+          organisationId:
+            (input.organisationId as string | undefined) ??
             existing?.organisationId ??
             ctx.organisationId,
           revision: existing ? existing.revision + 1 : 1,

@@ -11,8 +11,6 @@ import {
 import { methodNotAllowedResponse } from "@/lib/api/v1/response";
 import { createPlatformApiTracing } from "@/lib/api/v1/request-context";
 
-const ALLOWED = ["GET","PATCH","DELETE"] as const;
-
 export const GET = withPlatformApiAuth(handleGetConfiguration, {
   operation: "configuration.configurations.get",
 });
@@ -26,9 +24,17 @@ export const DELETE = withPlatformApiAuth(handleDeleteConfiguration, {
 });
 
 export async function POST(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","PATCH","DELETE"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "PATCH", "DELETE"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }
 
 export async function PUT(request: NextRequest) {
-  return methodNotAllowedResponse(["GET","PATCH","DELETE"], createPlatformApiTracing(), request.method);
+  return methodNotAllowedResponse(
+    ["GET", "PATCH", "DELETE"],
+    createPlatformApiTracing(),
+    request.method,
+  );
 }

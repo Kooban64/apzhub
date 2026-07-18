@@ -97,9 +97,7 @@ export function createAutomationCertificationPreparationService(
     }
 
     const result: AutomationCertificationPreparationInputs = {
-      importId: resolvedImportId
-        ? asAutomationImportId(resolvedImportId)
-        : undefined,
+      importId: resolvedImportId ? asAutomationImportId(resolvedImportId) : undefined,
       executionId: resolvedExecutionId
         ? asAutomatedExecutionId(resolvedExecutionId)
         : undefined,

@@ -60,7 +60,10 @@ async function runTestingOperation<T>(
   return withTestingErrorMapping(fn, ctx.correlationId);
 }
 
-function toCount(label: string, count: number): { readonly label: string; readonly count: number } {
+function toCount(
+  label: string,
+  count: number,
+): { readonly label: string; readonly count: number } {
   return { label, count };
 }
 
@@ -81,7 +84,11 @@ function countBy<T>(
 export class TestingPlanServiceImpl implements TestingPlanService {
   constructor(private readonly domain: TestingDomainServices) {}
 
-  list(ctx: ServiceRequestContext): Promise<ReturnType<TestingPlanService["list"]> extends Promise<infer T> ? T : never> {
+  list(
+    ctx: ServiceRequestContext,
+  ): Promise<
+    ReturnType<TestingPlanService["list"]> extends Promise<infer T> ? T : never
+  > {
     return runTestingOperation(ctx, () => this.domain.testPlans.list(ctx));
   }
 
@@ -89,7 +96,10 @@ export class TestingPlanServiceImpl implements TestingPlanService {
     return runTestingOperation(ctx, () => this.domain.testPlans.get(ctx, id));
   }
 
-  create(ctx: ServiceRequestContext, input: Parameters<TestingPlanService["create"]>[1]) {
+  create(
+    ctx: ServiceRequestContext,
+    input: Parameters<TestingPlanService["create"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.testPlans.create(ctx, input));
   }
 
@@ -106,10 +116,15 @@ export class TestingPlanServiceImpl implements TestingPlanService {
     id: Parameters<TestingPlanService["clone"]>[1],
     options?: Parameters<TestingPlanService["clone"]>[2],
   ) {
-    return runTestingOperation(ctx, () => this.domain.testPlans.clone(ctx, id, options));
+    return runTestingOperation(ctx, () =>
+      this.domain.testPlans.clone(ctx, id, options),
+    );
   }
 
-  archive(ctx: ServiceRequestContext, id: Parameters<TestingPlanService["archive"]>[1]) {
+  archive(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingPlanService["archive"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.testPlans.archive(ctx, id));
   }
 }
@@ -125,7 +140,10 @@ export class TestingSuiteServiceImpl implements TestingSuiteService {
     return runTestingOperation(ctx, () => this.domain.testSuites.get(ctx, id));
   }
 
-  create(ctx: ServiceRequestContext, input: Parameters<TestingSuiteService["create"]>[1]) {
+  create(
+    ctx: ServiceRequestContext,
+    input: Parameters<TestingSuiteService["create"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.testSuites.create(ctx, input));
   }
 
@@ -134,7 +152,9 @@ export class TestingSuiteServiceImpl implements TestingSuiteService {
     id: Parameters<TestingSuiteService["update"]>[1],
     input: Parameters<TestingSuiteService["update"]>[2],
   ) {
-    return runTestingOperation(ctx, () => this.domain.testSuites.update(ctx, id, input));
+    return runTestingOperation(ctx, () =>
+      this.domain.testSuites.update(ctx, id, input),
+    );
   }
 
   clone(
@@ -142,10 +162,15 @@ export class TestingSuiteServiceImpl implements TestingSuiteService {
     id: Parameters<TestingSuiteService["clone"]>[1],
     options?: Parameters<TestingSuiteService["clone"]>[2],
   ) {
-    return runTestingOperation(ctx, () => this.domain.testSuites.clone(ctx, id, options));
+    return runTestingOperation(ctx, () =>
+      this.domain.testSuites.clone(ctx, id, options),
+    );
   }
 
-  archive(ctx: ServiceRequestContext, id: Parameters<TestingSuiteService["archive"]>[1]) {
+  archive(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingSuiteService["archive"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.testSuites.archive(ctx, id));
   }
 }
@@ -161,7 +186,10 @@ export class TestingCaseServiceImpl implements TestingCaseService {
     return runTestingOperation(ctx, () => this.domain.testCases.get(ctx, id));
   }
 
-  create(ctx: ServiceRequestContext, input: Parameters<TestingCaseService["create"]>[1]) {
+  create(
+    ctx: ServiceRequestContext,
+    input: Parameters<TestingCaseService["create"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.testCases.create(ctx, input));
   }
 
@@ -178,10 +206,15 @@ export class TestingCaseServiceImpl implements TestingCaseService {
     id: Parameters<TestingCaseService["clone"]>[1],
     options?: Parameters<TestingCaseService["clone"]>[2],
   ) {
-    return runTestingOperation(ctx, () => this.domain.testCases.clone(ctx, id, options));
+    return runTestingOperation(ctx, () =>
+      this.domain.testCases.clone(ctx, id, options),
+    );
   }
 
-  archive(ctx: ServiceRequestContext, id: Parameters<TestingCaseService["archive"]>[1]) {
+  archive(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingCaseService["archive"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.testCases.archive(ctx, id));
   }
 
@@ -207,7 +240,10 @@ export class TestingRequirementServiceImpl implements TestingRequirementService 
     return runTestingOperation(ctx, () => this.domain.requirements.get(ctx, id));
   }
 
-  create(ctx: ServiceRequestContext, input: Parameters<TestingRequirementService["create"]>[1]) {
+  create(
+    ctx: ServiceRequestContext,
+    input: Parameters<TestingRequirementService["create"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.requirements.create(ctx, input));
   }
 
@@ -216,10 +252,15 @@ export class TestingRequirementServiceImpl implements TestingRequirementService 
     id: Parameters<TestingRequirementService["update"]>[1],
     input: Parameters<TestingRequirementService["update"]>[2],
   ) {
-    return runTestingOperation(ctx, () => this.domain.requirements.update(ctx, id, input));
+    return runTestingOperation(ctx, () =>
+      this.domain.requirements.update(ctx, id, input),
+    );
   }
 
-  archive(ctx: ServiceRequestContext, id: Parameters<TestingRequirementService["archive"]>[1]) {
+  archive(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingRequirementService["archive"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.requirements.archive(ctx, id));
   }
 }
@@ -235,8 +276,13 @@ export class TestingExecutionServiceImpl implements TestingExecutionService {
     return runTestingOperation(ctx, () => this.domain.manualExecutions.get(ctx, id));
   }
 
-  create(ctx: ServiceRequestContext, input: Parameters<TestingExecutionService["create"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.manualExecutions.create(ctx, input));
+  create(
+    ctx: ServiceRequestContext,
+    input: Parameters<TestingExecutionService["create"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.manualExecutions.create(ctx, input),
+    );
   }
 
   assign(
@@ -249,15 +295,24 @@ export class TestingExecutionServiceImpl implements TestingExecutionService {
     );
   }
 
-  start(ctx: ServiceRequestContext, id: Parameters<TestingExecutionService["start"]>[1]) {
+  start(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingExecutionService["start"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.manualExecutions.start(ctx, id));
   }
 
-  pause(ctx: ServiceRequestContext, id: Parameters<TestingExecutionService["pause"]>[1]) {
+  pause(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingExecutionService["pause"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.manualExecutions.pause(ctx, id));
   }
 
-  resume(ctx: ServiceRequestContext, id: Parameters<TestingExecutionService["resume"]>[1]) {
+  resume(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingExecutionService["resume"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.manualExecutions.resume(ctx, id));
   }
 
@@ -266,11 +321,18 @@ export class TestingExecutionServiceImpl implements TestingExecutionService {
     id: Parameters<TestingExecutionService["block"]>[1],
     reason?: string,
   ) {
-    return runTestingOperation(ctx, () => this.domain.manualExecutions.block(ctx, id, reason));
+    return runTestingOperation(ctx, () =>
+      this.domain.manualExecutions.block(ctx, id, reason),
+    );
   }
 
-  unblock(ctx: ServiceRequestContext, id: Parameters<TestingExecutionService["unblock"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.manualExecutions.unblock(ctx, id));
+  unblock(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingExecutionService["unblock"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.manualExecutions.unblock(ctx, id),
+    );
   }
 
   complete(
@@ -312,7 +374,10 @@ export class TestingExecutionServiceImpl implements TestingExecutionService {
     );
   }
 
-  reopen(ctx: ServiceRequestContext, id: Parameters<TestingExecutionService["reopen"]>[1]) {
+  reopen(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingExecutionService["reopen"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.manualExecutions.reopen(ctx, id));
   }
 
@@ -326,12 +391,22 @@ export class TestingExecutionServiceImpl implements TestingExecutionService {
     );
   }
 
-  archive(ctx: ServiceRequestContext, id: Parameters<TestingExecutionService["archive"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.manualExecutions.archive(ctx, id));
+  archive(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingExecutionService["archive"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.manualExecutions.archive(ctx, id),
+    );
   }
 
-  restore(ctx: ServiceRequestContext, id: Parameters<TestingExecutionService["restore"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.manualExecutions.restore(ctx, id));
+  restore(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingExecutionService["restore"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.manualExecutions.restore(ctx, id),
+    );
   }
 
   recordStepActual(
@@ -364,7 +439,10 @@ export class TestingEvidenceServiceImpl implements TestingEvidenceService {
     return runTestingOperation(ctx, () => this.domain.evidence.listEvidence(ctx));
   }
 
-  getEvidence(ctx: ServiceRequestContext, id: Parameters<TestingEvidenceService["getEvidence"]>[1]) {
+  getEvidence(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingEvidenceService["getEvidence"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.evidence.getEvidence(ctx, id));
   }
 
@@ -372,7 +450,9 @@ export class TestingEvidenceServiceImpl implements TestingEvidenceService {
     ctx: ServiceRequestContext,
     input: Parameters<TestingEvidenceService["registerEvidence"]>[1],
   ) {
-    return runTestingOperation(ctx, () => this.domain.evidence.registerEvidence(ctx, input));
+    return runTestingOperation(ctx, () =>
+      this.domain.evidence.registerEvidence(ctx, input),
+    );
   }
 
   submitEvidence(
@@ -396,7 +476,9 @@ export class TestingEvidenceServiceImpl implements TestingEvidenceService {
     ctx: ServiceRequestContext,
     id: Parameters<TestingEvidenceService["approveEvidence"]>[1],
   ) {
-    return runTestingOperation(ctx, () => this.domain.evidence.approveEvidence(ctx, id));
+    return runTestingOperation(ctx, () =>
+      this.domain.evidence.approveEvidence(ctx, id),
+    );
   }
 
   rejectEvidence(
@@ -413,29 +495,46 @@ export class TestingEvidenceServiceImpl implements TestingEvidenceService {
     ctx: ServiceRequestContext,
     id: Parameters<TestingEvidenceService["archiveEvidence"]>[1],
   ) {
-    return runTestingOperation(ctx, () => this.domain.evidence.archiveEvidence(ctx, id));
+    return runTestingOperation(ctx, () =>
+      this.domain.evidence.archiveEvidence(ctx, id),
+    );
   }
 }
 
 export class TestingAutomationServiceImpl implements TestingAutomationService {
   constructor(private readonly domain: TestingDomainServices) {}
 
-  validateImport(ctx: ServiceRequestContext, result: Parameters<TestingAutomationService["validateImport"]>[1]) {
+  validateImport(
+    ctx: ServiceRequestContext,
+    result: Parameters<TestingAutomationService["validateImport"]>[1],
+  ) {
     return runTestingOperation(ctx, async () => {
       this.domain.automation.validation.validateCanonical(result);
     });
   }
 
-  importResult(ctx: ServiceRequestContext, input: Parameters<TestingAutomationService["importResult"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.automation.imports.importResult(ctx, input));
+  importResult(
+    ctx: ServiceRequestContext,
+    input: Parameters<TestingAutomationService["importResult"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.automation.imports.importResult(ctx, input),
+    );
   }
 
   listImports(ctx: ServiceRequestContext) {
-    return runTestingOperation(ctx, () => this.domain.automation.results.listImports(ctx));
+    return runTestingOperation(ctx, () =>
+      this.domain.automation.results.listImports(ctx),
+    );
   }
 
-  getImport(ctx: ServiceRequestContext, id: Parameters<TestingAutomationService["getImport"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.automation.results.getImport(ctx, id));
+  getImport(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingAutomationService["getImport"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.automation.results.getImport(ctx, id),
+    );
   }
 
   listImportHistory(
@@ -451,14 +550,22 @@ export class TestingAutomationServiceImpl implements TestingAutomationService {
     return runTestingOperation(ctx, () => this.domain.automation.history.list(ctx));
   }
 
-  listRuns(ctx: ServiceRequestContext, executionId: Parameters<TestingAutomationService["listRuns"]>[1]) {
+  listRuns(
+    ctx: ServiceRequestContext,
+    executionId: Parameters<TestingAutomationService["listRuns"]>[1],
+  ) {
     return runTestingOperation(ctx, () =>
       this.domain.automation.results.listRuns(ctx, executionId),
     );
   }
 
-  getRun(ctx: ServiceRequestContext, id: Parameters<TestingAutomationService["getRun"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.automation.results.getRun(ctx, id));
+  getRun(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingAutomationService["getRun"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.automation.results.getRun(ctx, id),
+    );
   }
 
   listResultItems(
@@ -492,12 +599,22 @@ export class TestingAutomationServiceImpl implements TestingAutomationService {
 export class TestingCoverageServiceImpl implements TestingCoverageService {
   constructor(private readonly domain: TestingDomainServices) {}
 
-  recompute(ctx: ServiceRequestContext, scope: Parameters<TestingCoverageService["recompute"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.quality.coverage.recompute(ctx, scope));
+  recompute(
+    ctx: ServiceRequestContext,
+    scope: Parameters<TestingCoverageService["recompute"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.quality.coverage.recompute(ctx, scope),
+    );
   }
 
-  recomputeAll(ctx: ServiceRequestContext, scope?: Parameters<TestingCoverageService["recomputeAll"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.quality.coverage.recomputeAll(ctx, scope));
+  recomputeAll(
+    ctx: ServiceRequestContext,
+    scope?: Parameters<TestingCoverageService["recomputeAll"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.quality.coverage.recomputeAll(ctx, scope),
+    );
   }
 
   requestRecompute(
@@ -510,11 +627,18 @@ export class TestingCoverageServiceImpl implements TestingCoverageService {
   }
 
   listMetrics(ctx: ServiceRequestContext) {
-    return runTestingOperation(ctx, () => this.domain.quality.coverage.listMetrics(ctx));
+    return runTestingOperation(ctx, () =>
+      this.domain.quality.coverage.listMetrics(ctx),
+    );
   }
 
-  getMetric(ctx: ServiceRequestContext, id: Parameters<TestingCoverageService["getMetric"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.quality.coverage.getMetric(ctx, id));
+  getMetric(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingCoverageService["getMetric"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.quality.coverage.getMetric(ctx, id),
+    );
   }
 
   listMetricsByKind(
@@ -553,8 +677,13 @@ export class TestingDefectServiceImpl implements TestingDefectService {
     return runTestingOperation(ctx, () => this.domain.quality.defects.get(ctx, id));
   }
 
-  create(ctx: ServiceRequestContext, input: Parameters<TestingDefectService["create"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.quality.defects.create(ctx, input));
+  create(
+    ctx: ServiceRequestContext,
+    input: Parameters<TestingDefectService["create"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.quality.defects.create(ctx, input),
+    );
   }
 
   link(
@@ -573,10 +702,15 @@ export class TestingDefectServiceImpl implements TestingDefectService {
     id: Parameters<TestingDefectService["update"]>[1],
     input: Parameters<TestingDefectService["update"]>[2],
   ) {
-    return runTestingOperation(ctx, () => this.domain.quality.defects.update(ctx, id, input));
+    return runTestingOperation(ctx, () =>
+      this.domain.quality.defects.update(ctx, id, input),
+    );
   }
 
-  archive(ctx: ServiceRequestContext, id: Parameters<TestingDefectService["archive"]>[1]) {
+  archive(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingDefectService["archive"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.quality.defects.archive(ctx, id));
   }
 }
@@ -584,16 +718,25 @@ export class TestingDefectServiceImpl implements TestingDefectService {
 export class TestingQualityServiceImpl implements TestingQualityService {
   constructor(private readonly domain: TestingDomainServices) {}
 
-  summarize(ctx: ServiceRequestContext, scope?: Parameters<TestingQualityService["summarize"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.quality.summary.summarize(ctx, scope));
+  summarize(
+    ctx: ServiceRequestContext,
+    scope?: Parameters<TestingQualityService["summarize"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.quality.summary.summarize(ctx, scope),
+    );
   }
 
   getSnapshot(ctx: ServiceRequestContext, id: string) {
-    return runTestingOperation(ctx, () => this.domain.quality.intelligence.getSnapshot(ctx, id));
+    return runTestingOperation(ctx, () =>
+      this.domain.quality.intelligence.getSnapshot(ctx, id),
+    );
   }
 
   listSnapshots(ctx: ServiceRequestContext) {
-    return runTestingOperation(ctx, () => this.domain.quality.intelligence.listSnapshots(ctx));
+    return runTestingOperation(ctx, () =>
+      this.domain.quality.intelligence.listSnapshots(ctx),
+    );
   }
 
   computeSnapshot(
@@ -606,9 +749,17 @@ export class TestingQualityServiceImpl implements TestingQualityService {
     );
   }
 
-  compareSnapshots(ctx: ServiceRequestContext, baselineSnapshotId: string, currentSnapshotId: string) {
+  compareSnapshots(
+    ctx: ServiceRequestContext,
+    baselineSnapshotId: string,
+    currentSnapshotId: string,
+  ) {
     return runTestingOperation(ctx, () =>
-      this.domain.quality.trends.compareSnapshots(ctx, baselineSnapshotId, currentSnapshotId),
+      this.domain.quality.trends.compareSnapshots(
+        ctx,
+        baselineSnapshotId,
+        currentSnapshotId,
+      ),
     );
   }
 
@@ -626,13 +777,19 @@ export class TestingQualityServiceImpl implements TestingQualityService {
 export class TestingCertificationServiceImpl implements TestingCertificationService {
   constructor(private readonly domain: TestingDomainServices) {}
 
-  create(ctx: ServiceRequestContext, input: Parameters<TestingCertificationService["create"]>[1]) {
+  create(
+    ctx: ServiceRequestContext,
+    input: Parameters<TestingCertificationService["create"]>[1],
+  ) {
     return runTestingOperation(ctx, () =>
       this.domain.certification.records.createCertificationRecord(ctx, input),
     );
   }
 
-  get(ctx: ServiceRequestContext, id: Parameters<TestingCertificationService["get"]>[1]) {
+  get(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingCertificationService["get"]>[1],
+  ) {
     return runTestingOperation(ctx, () =>
       this.domain.certification.records.getCertificationRecord(ctx, id),
     );
@@ -644,55 +801,116 @@ export class TestingCertificationServiceImpl implements TestingCertificationServ
     );
   }
 
-  prepareForPlan(ctx: ServiceRequestContext, planId: Parameters<TestingCertificationService["prepareForPlan"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.certificationPreparation.prepareForPlan(ctx, planId));
+  prepareForPlan(
+    ctx: ServiceRequestContext,
+    planId: Parameters<TestingCertificationService["prepareForPlan"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.certificationPreparation.prepareForPlan(ctx, planId),
+    );
   }
 
   prepareForCertification(
     ctx: ServiceRequestContext,
-    certificationRecordId: Parameters<TestingCertificationService["prepareForCertification"]>[1],
+    certificationRecordId: Parameters<
+      TestingCertificationService["prepareForCertification"]
+    >[1],
   ) {
     return runTestingOperation(ctx, () =>
-      this.domain.certificationPreparation.prepareForCertification(ctx, certificationRecordId),
+      this.domain.certificationPreparation.prepareForCertification(
+        ctx,
+        certificationRecordId,
+      ),
     );
   }
 
-  private transition(ctx: ServiceRequestContext, id: Parameters<TestingCertificationService["get"]>[1], nextStatus: CertificationStatus, reason?: string) {
+  private transition(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingCertificationService["get"]>[1],
+    nextStatus: CertificationStatus,
+    reason?: string,
+  ) {
     return runTestingOperation(ctx, () =>
       this.domain.certification.workflow.transition(ctx, id, nextStatus, reason),
     );
   }
 
-  startReview(ctx: ServiceRequestContext, id: Parameters<TestingCertificationService["startReview"]>[1], reason?: string) {
-    return runTestingOperation(ctx, () => this.domain.certification.workflow.startReview(ctx, id, reason));
+  startReview(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingCertificationService["startReview"]>[1],
+    reason?: string,
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.certification.workflow.startReview(ctx, id, reason),
+    );
   }
 
-  requestChanges(ctx: ServiceRequestContext, id: Parameters<TestingCertificationService["requestChanges"]>[1], reason: string) {
-    return runTestingOperation(ctx, () => this.domain.certification.workflow.requestChanges(ctx, id, reason));
+  requestChanges(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingCertificationService["requestChanges"]>[1],
+    reason: string,
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.certification.workflow.requestChanges(ctx, id, reason),
+    );
   }
 
-  submitForApproval(ctx: ServiceRequestContext, id: Parameters<TestingCertificationService["submitForApproval"]>[1], reason?: string) {
-    return runTestingOperation(ctx, () => this.domain.certification.workflow.submitForApproval(ctx, id, reason));
+  submitForApproval(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingCertificationService["submitForApproval"]>[1],
+    reason?: string,
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.certification.workflow.submitForApproval(ctx, id, reason),
+    );
   }
 
-  approve(ctx: ServiceRequestContext, id: Parameters<TestingCertificationService["approve"]>[1], reason?: string) {
-    return runTestingOperation(ctx, () => this.domain.certification.workflow.approve(ctx, id, reason));
+  approve(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingCertificationService["approve"]>[1],
+    reason?: string,
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.certification.workflow.approve(ctx, id, reason),
+    );
   }
 
-  conditionallyApprove(ctx: ServiceRequestContext, id: Parameters<TestingCertificationService["conditionallyApprove"]>[1], conditions: string) {
-    return runTestingOperation(ctx, () => this.domain.certification.workflow.conditionallyApprove(ctx, id, conditions));
+  conditionallyApprove(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingCertificationService["conditionallyApprove"]>[1],
+    conditions: string,
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.certification.workflow.conditionallyApprove(ctx, id, conditions),
+    );
   }
 
-  reject(ctx: ServiceRequestContext, id: Parameters<TestingCertificationService["reject"]>[1], reason: string) {
-    return runTestingOperation(ctx, () => this.domain.certification.workflow.reject(ctx, id, reason));
+  reject(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingCertificationService["reject"]>[1],
+    reason: string,
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.certification.workflow.reject(ctx, id, reason),
+    );
   }
 
-  expire(ctx: ServiceRequestContext, id: Parameters<TestingCertificationService["expire"]>[1], reason?: string) {
+  expire(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingCertificationService["expire"]>[1],
+    reason?: string,
+  ) {
     return this.transition(ctx, id, "expired", reason);
   }
 
-  archive(ctx: ServiceRequestContext, id: Parameters<TestingCertificationService["archive"]>[1], reason?: string) {
-    return runTestingOperation(ctx, () => this.domain.certification.workflow.archive(ctx, id, reason));
+  archive(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingCertificationService["archive"]>[1],
+    reason?: string,
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.certification.workflow.archive(ctx, id, reason),
+    );
   }
 
   evaluateGate(
@@ -716,7 +934,9 @@ export class TestingCertificationServiceImpl implements TestingCertificationServ
 
   getRecommendation(
     ctx: ServiceRequestContext,
-    certificationRecordId: Parameters<TestingCertificationService["getRecommendation"]>[1],
+    certificationRecordId: Parameters<
+      TestingCertificationService["getRecommendation"]
+    >[1],
   ) {
     return runTestingOperation(ctx, () =>
       this.domain.certification.recommendations.getLatest(ctx, certificationRecordId),
@@ -725,7 +945,9 @@ export class TestingCertificationServiceImpl implements TestingCertificationServ
 
   getAuditHistory(
     ctx: ServiceRequestContext,
-    certificationRecordId: Parameters<TestingCertificationService["getAuditHistory"]>[1],
+    certificationRecordId: Parameters<
+      TestingCertificationService["getAuditHistory"]
+    >[1],
   ) {
     return runTestingOperation(ctx, () =>
       this.domain.certification.audit.list(ctx, certificationRecordId),
@@ -745,20 +967,33 @@ export class TestingCertificationServiceImpl implements TestingCertificationServ
 export class TestingReleaseReadinessServiceImpl implements TestingReleaseReadinessService {
   constructor(private readonly domain: TestingDomainServices) {}
 
-  calculateForPlan(ctx: ServiceRequestContext, planId: Parameters<TestingReleaseReadinessService["calculateForPlan"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.releaseReadiness.calculateForPlan(ctx, planId));
+  calculateForPlan(
+    ctx: ServiceRequestContext,
+    planId: Parameters<TestingReleaseReadinessService["calculateForPlan"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.releaseReadiness.calculateForPlan(ctx, planId),
+    );
   }
 
   calculateForCertification(
     ctx: ServiceRequestContext,
-    certificationRecordId: Parameters<TestingReleaseReadinessService["calculateForCertification"]>[1],
+    certificationRecordId: Parameters<
+      TestingReleaseReadinessService["calculateForCertification"]
+    >[1],
   ) {
     return runTestingOperation(ctx, () =>
-      this.domain.releaseReadiness.calculateForCertification(ctx, certificationRecordId),
+      this.domain.releaseReadiness.calculateForCertification(
+        ctx,
+        certificationRecordId,
+      ),
     );
   }
 
-  assessForPlan(ctx: ServiceRequestContext, planId: Parameters<NonNullable<TestingReleaseReadinessService["assessForPlan"]>>[1]) {
+  assessForPlan(
+    ctx: ServiceRequestContext,
+    planId: Parameters<NonNullable<TestingReleaseReadinessService["assessForPlan"]>>[1],
+  ) {
     return runTestingOperation(ctx, async () => {
       const assess = this.domain.quality.releaseReadiness.assessForPlan;
       if (!assess) {
@@ -770,7 +1005,9 @@ export class TestingReleaseReadinessServiceImpl implements TestingReleaseReadine
 
   assessForCertification(
     ctx: ServiceRequestContext,
-    certificationRecordId: Parameters<NonNullable<TestingReleaseReadinessService["assessForCertification"]>>[1],
+    certificationRecordId: Parameters<
+      NonNullable<TestingReleaseReadinessService["assessForCertification"]>
+    >[1],
   ) {
     return runTestingOperation(ctx, async () => {
       const assess = this.domain.quality.releaseReadiness.assessForCertification;
@@ -789,15 +1026,26 @@ export class TestingTraceabilityServiceImpl implements TestingTraceabilityServic
     return runTestingOperation(ctx, () => this.domain.traceability.listLinks(ctx));
   }
 
-  getLink(ctx: ServiceRequestContext, id: Parameters<TestingTraceabilityService["getLink"]>[1]) {
+  getLink(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingTraceabilityService["getLink"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.traceability.getLink(ctx, id));
   }
 
-  createLink(ctx: ServiceRequestContext, input: Parameters<TestingTraceabilityService["createLink"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.traceability.createLink(ctx, input));
+  createLink(
+    ctx: ServiceRequestContext,
+    input: Parameters<TestingTraceabilityService["createLink"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.traceability.createLink(ctx, input),
+    );
   }
 
-  removeLink(ctx: ServiceRequestContext, id: Parameters<TestingTraceabilityService["removeLink"]>[1]) {
+  removeLink(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingTraceabilityService["removeLink"]>[1],
+  ) {
     return runTestingOperation(ctx, () => this.domain.traceability.removeLink(ctx, id));
   }
 
@@ -805,7 +1053,9 @@ export class TestingTraceabilityServiceImpl implements TestingTraceabilityServic
     ctx: ServiceRequestContext,
     input: Parameters<TestingTraceabilityService["createRelationship"]>[1],
   ) {
-    return runTestingOperation(ctx, () => this.domain.traceability.linkEntities(ctx, input));
+    return runTestingOperation(ctx, () =>
+      this.domain.traceability.linkEntities(ctx, input),
+    );
   }
 
   removeRelationship(
@@ -840,15 +1090,22 @@ export class TestingApprovalServiceImpl implements TestingApprovalService {
     return runTestingOperation(ctx, () => this.domain.approvals.getApproval(ctx, id));
   }
 
-  request(ctx: ServiceRequestContext, input: Parameters<TestingApprovalService["request"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.approvals.requestApproval(ctx, input));
+  request(
+    ctx: ServiceRequestContext,
+    input: Parameters<TestingApprovalService["request"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.approvals.requestApproval(ctx, input),
+    );
   }
 
   submitForReview(
     ctx: ServiceRequestContext,
     input: Parameters<TestingApprovalService["submitForReview"]>[1],
   ) {
-    return runTestingOperation(ctx, () => this.domain.approvals.submitForReview(ctx, input));
+    return runTestingOperation(ctx, () =>
+      this.domain.approvals.submitForReview(ctx, input),
+    );
   }
 
   decide(
@@ -856,11 +1113,18 @@ export class TestingApprovalServiceImpl implements TestingApprovalService {
     id: Parameters<TestingApprovalService["decide"]>[1],
     decision: Parameters<TestingApprovalService["decide"]>[2],
   ) {
-    return runTestingOperation(ctx, () => this.domain.approvals.decideApproval(ctx, id, decision));
+    return runTestingOperation(ctx, () =>
+      this.domain.approvals.decideApproval(ctx, id, decision),
+    );
   }
 
-  listHistory(ctx: ServiceRequestContext, id: Parameters<TestingApprovalService["listHistory"]>[1]) {
-    return runTestingOperation(ctx, () => this.domain.approvals.listApprovalHistory(ctx, id));
+  listHistory(
+    ctx: ServiceRequestContext,
+    id: Parameters<TestingApprovalService["listHistory"]>[1],
+  ) {
+    return runTestingOperation(ctx, () =>
+      this.domain.approvals.listApprovalHistory(ctx, id),
+    );
   }
 }
 
@@ -908,12 +1172,20 @@ export class TestingDashboardServiceImpl implements TestingDashboardService {
         executionCounts: countBy(executions, (item: ManualExecution) => item.status),
         evidenceCounts: countBy(evidence, (item: Evidence) => item.lifecycleStatus),
         certificationCounts: countBy(certifications, (item) => item.status),
-        defectCounts: countBy(defects, (item) => (item.status as DefectStatus | undefined)),
-        coveragePercentages: (coverageMetrics as readonly CoverageMetric[]).map((metric) => ({
-          label: metric.kind,
-          percentage: metric.percentage,
-        })),
-        qualityCounts: countBy(snapshots as readonly QualitySnapshot[], (item) => item.label),
+        defectCounts: countBy(
+          defects,
+          (item) => item.status as DefectStatus | undefined,
+        ),
+        coveragePercentages: (coverageMetrics as readonly CoverageMetric[]).map(
+          (metric) => ({
+            label: metric.kind,
+            percentage: metric.percentage,
+          }),
+        ),
+        qualityCounts: countBy(
+          snapshots as readonly QualitySnapshot[],
+          (item) => item.label,
+        ),
       };
     });
   }

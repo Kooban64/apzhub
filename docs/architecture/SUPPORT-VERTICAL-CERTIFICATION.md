@@ -20,23 +20,23 @@ The Support Vertical delivers a production-ready, architecturally compliant REST
 
 ## Certification outcomes
 
-| Layer | Outcome | Milestone |
-|-------|---------|-----------|
-| HTTP → Gateway → Services → Mapping → Provider → Adapter | **CERTIFIED_WITH_LIMITATIONS** | OSS-110-12 |
-| Support Module UI (workbench) | **PRODUCTION_READY_WITH_LIMITATIONS** | OSS-110-14 |
+| Layer                                                    | Outcome                               | Milestone  |
+| -------------------------------------------------------- | ------------------------------------- | ---------- |
+| HTTP → Gateway → Services → Mapping → Provider → Adapter | **CERTIFIED_WITH_LIMITATIONS**        | OSS-110-12 |
+| Support Module UI (workbench)                            | **PRODUCTION_READY_WITH_LIMITATIONS** | OSS-110-14 |
 
 ### Justification for API `CERTIFIED_WITH_LIMITATIONS` (not defects)
 
 The following limitations are **accepted constraints** documented at design time, not defects requiring remediation before API certification:
 
-| Limitation | Category | Status |
-|-----------|----------|--------|
-| **No Platform Event Bus publication** — notifications/events not wired | Infrastructure dependency | Unchanged |
-| **No webhook HTTP ingress** — Zammad webhook delivery not consumed | Infrastructure dependency | Unchanged |
-| **No binary attachment transfer** — attachment upload/download deferred | Adapter limitation (from OSS-102-08) | Unchanged |
-| **Durable idempotency deferred** — persistent sync state uses in-memory only | Deployment concern | Unchanged |
-| **Next.js `/_global-error` build caveat** — known App Router behaviour | Framework quirk | Unchanged |
-| **Support UI** | Was pending UI cert | **Resolved OSS-110-14** — UI **PRODUCTION_READY_WITH_LIMITATIONS** |
+| Limitation                                                                   | Category                             | Status                                                             |
+| ---------------------------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------ |
+| **No Platform Event Bus publication** — notifications/events not wired       | Infrastructure dependency            | Unchanged                                                          |
+| **No webhook HTTP ingress** — Zammad webhook delivery not consumed           | Infrastructure dependency            | Unchanged                                                          |
+| **No binary attachment transfer** — attachment upload/download deferred      | Adapter limitation (from OSS-102-08) | Unchanged                                                          |
+| **Durable idempotency deferred** — persistent sync state uses in-memory only | Deployment concern                   | Unchanged                                                          |
+| **Next.js `/_global-error` build caveat** — known App Router behaviour       | Framework quirk                      | Unchanged                                                          |
+| **Support UI**                                                               | Was pending UI cert                  | **Resolved OSS-110-14** — UI **PRODUCTION_READY_WITH_LIMITATIONS** |
 
 ### Justification for UI `PRODUCTION_READY_WITH_LIMITATIONS`
 
@@ -48,34 +48,34 @@ See [SUPPORT-UI-CERTIFICATION.md](./SUPPORT-UI-CERTIFICATION.md): architecture/d
 
 ### What IS certified (API — OSS-110-12)
 
-| Layer | Component | Status |
-|-------|-----------|--------|
-| HTTP API | 21 support endpoints across 6 resource families | ✅ CERTIFIED |
-| Handlers | `apps/web/lib/api/v1/handlers/support.ts` (771 lines) | ✅ CERTIFIED |
-| Schemas | `apps/web/lib/api/v1/schemas/support.ts` (298 lines) | ✅ CERTIFIED |
+| Layer             | Component                                                                           | Status       |
+| ----------------- | ----------------------------------------------------------------------------------- | ------------ |
+| HTTP API          | 21 support endpoints across 6 resource families                                     | ✅ CERTIFIED |
+| Handlers          | `apps/web/lib/api/v1/handlers/support.ts` (771 lines)                               | ✅ CERTIFIED |
+| Schemas           | `apps/web/lib/api/v1/schemas/support.ts` (298 lines)                                | ✅ CERTIFIED |
 | Platform Services | `support-service-impls.ts` (1,239 lines) + `support-mapping-helpers.ts` (103 lines) | ✅ CERTIFIED |
-| Providers | 11 Zammad provider files under `packages/platform-services/src/providers/zammad/` | ✅ CERTIFIED |
-| Mapping | Entity mapping: `sreq_`, `sorg_`, `sgrp_`, `suser_`, `sart_` platform IDs | ✅ CERTIFIED |
-| Authorization | 23+ support.* permissions in catalogue; all operations mapped | ✅ CERTIFIED |
-| OpenAPI | APZHUB-Platform-OpenAPI-v1.yaml contains all support paths | ✅ CERTIFIED |
+| Providers         | 11 Zammad provider files under `packages/platform-services/src/providers/zammad/`   | ✅ CERTIFIED |
+| Mapping           | Entity mapping: `sreq_`, `sorg_`, `sgrp_`, `suser_`, `sart_` platform IDs           | ✅ CERTIFIED |
+| Authorization     | 23+ support.* permissions in catalogue; all operations mapped                       | ✅ CERTIFIED |
+| OpenAPI           | APZHUB-Platform-OpenAPI-v1.yaml contains all support paths                          | ✅ CERTIFIED |
 
 ### What IS certified (UI — OSS-110-14)
 
-| Layer | Component | Status |
-|-------|-----------|--------|
-| Workbench UI | Manifests, router, views, typed `/api/v1` client | ✅ PRODUCTION_READY_WITH_LIMITATIONS |
-| A11y / responsive / visual / perf | Playwright certification suite | ✅ Certified (mocked) |
+| Layer                             | Component                                        | Status                               |
+| --------------------------------- | ------------------------------------------------ | ------------------------------------ |
+| Workbench UI                      | Manifests, router, views, typed `/api/v1` client | ✅ PRODUCTION_READY_WITH_LIMITATIONS |
+| A11y / responsive / visual / perf | Playwright certification suite                   | ✅ Certified (mocked)                |
 
 ### What is NOT certified / not delivered
 
-| Feature | Why not in scope |
-|---------|-----------------|
-| Event Bus integration | Requires platform Event Bus (future sprint) |
-| Webhook ingress | Requires webhook infrastructure (future sprint) |
-| Binary attachment API | Adapter limitation documented in OSS-102-08 |
-| Notifications / realtime | Explicit exclusions |
-| Persistent sync / durable state | Deployment config; in-memory used in testing |
-| Live Zammad UI E2E | UI cert uses mocked `/api/v1` |
+| Feature                         | Why not in scope                                |
+| ------------------------------- | ----------------------------------------------- |
+| Event Bus integration           | Requires platform Event Bus (future sprint)     |
+| Webhook ingress                 | Requires webhook infrastructure (future sprint) |
+| Binary attachment API           | Adapter limitation documented in OSS-102-08     |
+| Notifications / realtime        | Explicit exclusions                             |
+| Persistent sync / durable state | Deployment config; in-memory used in testing    |
+| Live Zammad UI E2E              | UI cert uses mocked `/api/v1`                   |
 
 ---
 
@@ -83,17 +83,17 @@ See [SUPPORT-UI-CERTIFICATION.md](./SUPPORT-UI-CERTIFICATION.md): architecture/d
 
 All checks from `docs/sprint/OSS-110-12-architecture-audit.md` pass (API). UI architecture: `docs/sprint/OSS-110-14-architecture-audit.md` **PASS**.
 
-| Principle | Verdict |
-|-----------|---------|
-| Layered architecture (003) — no layer bypass | ✅ PASS |
-| Module → Platform Service → Connector → Engine (008) | ✅ PASS |
-| Platform ID contract: platform IDs to clients, provider IDs internal | ✅ PASS |
-| Security: auth + authz + validation on every route (013) | ✅ PASS |
-| Zero Trust: no implicit trust at any layer | ✅ PASS |
-| No module-to-module coupling | ✅ PASS |
-| No integration-zammad in HTTP handler layer | ✅ PASS |
-| OpenAPI documentation complete | ✅ PASS |
-| UI → `/api/v1` only (no gateway/provider in presentation) | ✅ PASS (OSS-110-14) |
+| Principle                                                            | Verdict              |
+| -------------------------------------------------------------------- | -------------------- |
+| Layered architecture (003) — no layer bypass                         | ✅ PASS              |
+| Module → Platform Service → Connector → Engine (008)                 | ✅ PASS              |
+| Platform ID contract: platform IDs to clients, provider IDs internal | ✅ PASS              |
+| Security: auth + authz + validation on every route (013)             | ✅ PASS              |
+| Zero Trust: no implicit trust at any layer                           | ✅ PASS              |
+| No module-to-module coupling                                         | ✅ PASS              |
+| No integration-zammad in HTTP handler layer                          | ✅ PASS              |
+| OpenAPI documentation complete                                       | ✅ PASS              |
+| UI → `/api/v1` only (no gateway/provider in presentation)            | ✅ PASS (OSS-110-14) |
 
 ---
 
@@ -101,24 +101,24 @@ All checks from `docs/sprint/OSS-110-12-architecture-audit.md` pass (API). UI ar
 
 ### API vertical (verified 2026-07-11 — OSS-110-12)
 
-| Test suite | Tests | Result |
-|------------|-------|--------|
-| `platform-api.support.v1.test.ts` | 48 HTTP API tests | ✅ PASS |
-| `support-platform-services.test.ts` | 20 platform service tests | ✅ PASS |
-| `support-vertical-stack.e2e.test.ts` | 17 full stack tests | ✅ PASS |
-| `support-vertical-certification.test.ts` | 59 assertion tests | ✅ PASS |
-| `support-vertical-performance.baseline.test.ts` | 2 performance tests | ✅ PASS |
-| **Total** | **146 tests** | **✅ PASS** |
-| Dependency audit script | 0 violations | ✅ PASS |
+| Test suite                                      | Tests                     | Result      |
+| ----------------------------------------------- | ------------------------- | ----------- |
+| `platform-api.support.v1.test.ts`               | 48 HTTP API tests         | ✅ PASS     |
+| `support-platform-services.test.ts`             | 20 platform service tests | ✅ PASS     |
+| `support-vertical-stack.e2e.test.ts`            | 17 full stack tests       | ✅ PASS     |
+| `support-vertical-certification.test.ts`        | 59 assertion tests        | ✅ PASS     |
+| `support-vertical-performance.baseline.test.ts` | 2 performance tests       | ✅ PASS     |
+| **Total**                                       | **146 tests**             | **✅ PASS** |
+| Dependency audit script                         | 0 violations              | ✅ PASS     |
 
 ### UI certification (verified 2026-07-11 — OSS-110-14)
 
-| Suite | Result |
-|-------|--------|
-| Playwright `oss-110-14-support*` | **23 passed** |
-| Vitest Support UI | **72 passed** (~94.9% lines) |
-| `support-ui-certification-audit.mjs` | PASS 17/17 |
-| Vertical dependency (still) | PASS 0/36 |
+| Suite                                | Result                       |
+| ------------------------------------ | ---------------------------- |
+| Playwright `oss-110-14-support*`     | **23 passed**                |
+| Vitest Support UI                    | **72 passed** (~94.9% lines) |
+| `support-ui-certification-audit.mjs` | PASS 17/17                   |
+| Vertical dependency (still)          | PASS 0/36                    |
 
 ---
 
@@ -131,6 +131,7 @@ All checks from `docs/sprint/OSS-110-12-architecture-audit.md` pass (API). UI ar
 **Verdict:** PASS (17/17)
 
 Rules verified (API):
+
 - No `@apzhub/integration-zammad` in HTTP handler/route/schema layer
 - No `EntityMappingStore` in HTTP layer
 - No database clients in HTTP layer
@@ -172,9 +173,9 @@ Rules verified (API):
 
 Await **owner approval** for the next APZHUB domain or platform milestone on the ratified roadmap, for example:
 
-- **OSS-100-06** — Integration SDK webhook & polling contracts  
-- **PCv2-02** / Platform Core production work  
-- **QE-001** — Quality Engineering start  
+- **OSS-100-06** — Integration SDK webhook & polling contracts
+- **PCv2-02** / Platform Core production work
+- **QE-001** — Quality Engineering start
 - Or another owner-approved domain
 
 Any Event Bus, webhook HTTP ingress, notifications, realtime, or binary attachment work for Support requires a **separately approved** milestone.
@@ -185,18 +186,18 @@ Architecture reference: [APZHUB-Support-Module-UI.md](./APZHUB-Support-Module-UI
 
 ## Companion documents
 
-| Document | Location |
-|----------|----------|
-| Architecture audit (API) | `docs/sprint/OSS-110-12-architecture-audit.md` |
-| Dependency audit (API) | `docs/sprint/OSS-110-12-dependency-audit.md` |
-| Support API certification | `docs/sprint/OSS-110-12-Support-API-Certification.md` |
-| Performance baseline (API) | `docs/sprint/OSS-110-12-performance-baseline.md` |
-| Test summary (API) | `docs/sprint/OSS-110-12-test-summary.md` |
-| Support Module UI architecture | `docs/architecture/APZHUB-Support-Module-UI.md` |
-| Support UI Certification (master) | `docs/architecture/SUPPORT-UI-CERTIFICATION.md` |
-| OSS-110-13 completion | `docs/sprint/OSS-110-13-completion-report.md` |
-| OSS-110-14 completion | `docs/sprint/OSS-110-14-completion-report.md` |
-| OSS-110-14 architecture audit | `docs/sprint/OSS-110-14-architecture-audit.md` |
-| OSS-110-14 dependency audit | `docs/sprint/OSS-110-14-dependency-audit.md` |
-| Wave Index | `docs/sprint/OSS-110-12-Wave-Index.md` |
-| Wave 2 certification (base) | `docs/sprint/OSS-102-08-Wave2-Certification.md` |
+| Document                          | Location                                              |
+| --------------------------------- | ----------------------------------------------------- |
+| Architecture audit (API)          | `docs/sprint/OSS-110-12-architecture-audit.md`        |
+| Dependency audit (API)            | `docs/sprint/OSS-110-12-dependency-audit.md`          |
+| Support API certification         | `docs/sprint/OSS-110-12-Support-API-Certification.md` |
+| Performance baseline (API)        | `docs/sprint/OSS-110-12-performance-baseline.md`      |
+| Test summary (API)                | `docs/sprint/OSS-110-12-test-summary.md`              |
+| Support Module UI architecture    | `docs/architecture/APZHUB-Support-Module-UI.md`       |
+| Support UI Certification (master) | `docs/architecture/SUPPORT-UI-CERTIFICATION.md`       |
+| OSS-110-13 completion             | `docs/sprint/OSS-110-13-completion-report.md`         |
+| OSS-110-14 completion             | `docs/sprint/OSS-110-14-completion-report.md`         |
+| OSS-110-14 architecture audit     | `docs/sprint/OSS-110-14-architecture-audit.md`        |
+| OSS-110-14 dependency audit       | `docs/sprint/OSS-110-14-dependency-audit.md`          |
+| Wave Index                        | `docs/sprint/OSS-110-12-Wave-Index.md`                |
+| Wave 2 certification (base)       | `docs/sprint/OSS-102-08-Wave2-Certification.md`       |

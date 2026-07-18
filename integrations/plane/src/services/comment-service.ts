@@ -97,7 +97,9 @@ export class PlaneCommentService {
         const needle = filter.search.toLowerCase();
         result = {
           ...result,
-          items: result.items.filter((item) => item.body.toLowerCase().includes(needle)),
+          items: result.items.filter((item) =>
+            item.body.toLowerCase().includes(needle),
+          ),
         };
       }
       return result;

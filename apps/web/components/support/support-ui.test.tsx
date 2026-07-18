@@ -26,10 +26,10 @@ describe("support-ui states", () => {
     await user.click(screen.getByRole("button", { name: "Retry" }));
     expect(onRetry).toHaveBeenCalled();
 
-    render(
-      <ErrorState message="You do not have permission to perform this action." />,
+    render(<ErrorState message="You do not have permission to perform this action." />);
+    expect(screen.getAllByTestId("support-error")[1]?.textContent).toMatch(
+      /permission/i,
     );
-    expect(screen.getAllByTestId("support-error")[1]?.textContent).toMatch(/permission/i);
   });
 
   it("renders badges, empty state, attachments, table row click, and confirm dialog", async () => {

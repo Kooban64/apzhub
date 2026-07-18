@@ -42,11 +42,11 @@ import {
 } from "./index";
 
 describe("harness package version alignment", () => {
-  it("package.json and exports target 0.9.0", () => {
+  it("package.json and exports target 1.0.0", () => {
     const pkg = JSON.parse(
       readFileSync(join(__dirname, "../../package.json"), "utf8"),
     ) as { version: string; exports: Record<string, string> };
-    expect(pkg.version).toBe("0.9.0");
+    expect(pkg.version).toBe("1.0.0");
     expect(pkg.exports["./harness"]).toBe("./src/harness/index.ts");
   });
 });

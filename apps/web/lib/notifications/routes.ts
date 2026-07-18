@@ -56,10 +56,7 @@ export function assertNotificationApiPath(pathname: string): void {
     throw new Error("Notification client may only call /api/v1/notifications");
   }
   for (const segment of NOTIFICATION_FORBIDDEN_HTTP_SEGMENTS) {
-    if (
-      pathname.includes(`/${segment}/`) ||
-      pathname.endsWith(`/${segment}`)
-    ) {
+    if (pathname.includes(`/${segment}/`) || pathname.endsWith(`/${segment}`)) {
       throw new Error(`Forbidden notification HTTP segment: ${segment}`);
     }
   }
@@ -80,9 +77,7 @@ export function isNotificationsRoute(pathname: string): boolean {
   );
 }
 
-export function resolveNotificationsSection(
-  pathname: string,
-): NotificationsSection {
+export function resolveNotificationsSection(pathname: string): NotificationsSection {
   const normalized = normalizePath(pathname);
   if (normalized === NOTIFICATIONS_WORKSPACE_BASE) return "overview";
   const suffix = normalized.slice(NOTIFICATIONS_WORKSPACE_BASE.length + 1);
@@ -93,9 +88,7 @@ export function resolveNotificationsSection(
   return "overview";
 }
 
-export function notificationsSectionPath(
-  section?: NotificationsSection,
-): string {
+export function notificationsSectionPath(section?: NotificationsSection): string {
   if (!section || section === "overview") {
     return `${NOTIFICATIONS_WORKSPACE_BASE}/overview`;
   }

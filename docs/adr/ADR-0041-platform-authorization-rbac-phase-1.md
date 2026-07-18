@@ -25,11 +25,11 @@ Introduce **`@apzhub/platform-authorization`** as the canonical Platform Authori
 
 ## Alternatives
 
-| Alternative | Why rejected |
-| ----------- | ------------ |
-| RBAC inside `@apzhub/auth` | Violates identity/authorization separation (M8-01) |
+| Alternative                     | Why rejected                                          |
+| ------------------------------- | ----------------------------------------------------- |
+| RBAC inside `@apzhub/auth`      | Violates identity/authorization separation (M8-01)    |
 | Product-local permission stores | Duplicates platform capability; breaks manifest model |
-| Full ABAC / policy engine now | Out of scope — future phase |
+| Full ABAC / policy engine now   | Out of scope — future phase                           |
 
 ## Consequences
 

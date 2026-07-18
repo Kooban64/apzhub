@@ -34,9 +34,7 @@ async function mockEngineeringIntelligenceHttpApi(page: Page, seen: string[]) {
     const risk = {
       overallScore: 22,
       overallLevel: "low",
-      factors: [
-        { key: "quality", score: 15, level: "low", reasons: ["pw"] },
-      ],
+      factors: [{ key: "quality", score: 15, level: "low", reasons: ["pw"] }],
       computedAt: "2026-07-12T12:00:00.000Z",
     };
 

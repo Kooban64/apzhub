@@ -25,7 +25,9 @@ export const ZAMMAD_POLLING_SOURCE_DEFINITION: PollingSourceDefinition = {
  * Wrap ZammadSyncService as a SDK PollingSource.
  * Delegates to existing sync methods — no scheduler or workers.
  */
-export function createZammadPollingSource(syncService: ZammadSyncService): PollingSource {
+export function createZammadPollingSource(
+  syncService: ZammadSyncService,
+): PollingSource {
   return createPollingSourceFromSync({
     definition: ZAMMAD_POLLING_SOURCE_DEFINITION,
     syncService,

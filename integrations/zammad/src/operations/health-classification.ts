@@ -50,7 +50,10 @@ export function classifyZammadOperationalHealth(
   if (input.compatibility.blockingIncompatibilities.length > 0) {
     return {
       level: "UNAVAILABLE",
-      reasons: ["blocking_version_incompatibility", ...input.compatibility.blockingIncompatibilities],
+      reasons: [
+        "blocking_version_incompatibility",
+        ...input.compatibility.blockingIncompatibilities,
+      ],
     };
   }
 
@@ -59,7 +62,9 @@ export function classifyZammadOperationalHealth(
   );
   if (requiredUnavailable.length > 0) {
     reasons.push(
-      ...requiredUnavailable.map((c) => `required_capability_unavailable:${c.capabilityId}`),
+      ...requiredUnavailable.map(
+        (c) => `required_capability_unavailable:${c.capabilityId}`,
+      ),
     );
     return { level: "LIMITED", reasons };
   }
@@ -79,7 +84,9 @@ export function classifyZammadOperationalHealth(
   }
 
   const degradedCaps = input.capabilities.filter(
-    (c) => c.optional && (c.degraded || !c.available || optionalUnavailable.has(c.capabilityId)),
+    (c) =>
+      c.optional &&
+      (c.degraded || !c.available || optionalUnavailable.has(c.capabilityId)),
   );
 
   if (

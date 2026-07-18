@@ -40,10 +40,7 @@ export const platformDocument = pgTable(
     folderId: text("folder_id"),
     retentionId: text("retention_id"),
     currentVersionId: text("current_version_id"),
-    tagIdsJson: jsonb("tag_ids_json")
-      .$type<string[]>()
-      .notNull()
-      .default([]),
+    tagIdsJson: jsonb("tag_ids_json").$type<string[]>().notNull().default([]),
     permissionsJson: jsonb("permissions_json")
       .$type<Record<string, unknown>[]>()
       .notNull()
@@ -55,15 +52,9 @@ export const platformDocument = pgTable(
     lifecycleChangedBy: text("lifecycle_changed_by").notNull(),
     lifecycleReason: text("lifecycle_reason"),
     templateRefJson: jsonb("template_ref_json").$type<Record<string, unknown>>(),
-    generationRefJson: jsonb("generation_ref_json").$type<
-      Record<string, unknown>
-    >(),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    generationRefJson: jsonb("generation_ref_json").$type<Record<string, unknown>>(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     archivedAt: timestamp("archived_at", { withTimezone: true }),
     deletedAt: timestamp("deleted_at", { withTimezone: true }),
     revision: integer("revision").notNull().default(1),
@@ -87,12 +78,8 @@ export const platformDocumentMetadata = pgTable("platform_document_metadata", {
     .$type<Record<string, string>>()
     .notNull()
     .default({}),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformDocumentTag = pgTable(
@@ -101,9 +88,7 @@ export const platformDocumentTag = pgTable(
     id: text("id").primaryKey(),
     tenantId: text("tenant_id").notNull(),
     name: text("name").notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
     uniqueIndex("platform_document_tag_tenant_name_uidx").on(
@@ -119,31 +104,22 @@ export const platformDocumentCategory = pgTable("platform_document_category", {
   name: text("name").notNull(),
   description: text("description"),
   parentCategoryId: text("parent_category_id"),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const platformDocumentRelationship = pgTable(
-  "platform_document_relationship",
-  {
-    id: text("id").primaryKey(),
-    tenantId: text("tenant_id").notNull(),
-    sourceDocumentId: text("source_document_id").notNull(),
-    targetDocumentId: text("target_document_id"),
-    kind: varchar("kind", { length: 64 }).notNull(),
-    referenceProduct: varchar("reference_product", { length: 64 }),
-    referenceExternalId: text("reference_external_id"),
-    referenceLabel: text("reference_label"),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    createdBy: text("created_by").notNull(),
-  },
-);
+export const platformDocumentRelationship = pgTable("platform_document_relationship", {
+  id: text("id").primaryKey(),
+  tenantId: text("tenant_id").notNull(),
+  sourceDocumentId: text("source_document_id").notNull(),
+  targetDocumentId: text("target_document_id"),
+  kind: varchar("kind", { length: 64 }).notNull(),
+  referenceProduct: varchar("reference_product", { length: 64 }),
+  referenceExternalId: text("reference_external_id"),
+  referenceLabel: text("reference_label"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text("created_by").notNull(),
+});
 
 export const platformDocumentRetention = pgTable("platform_document_retention", {
   id: text("id").primaryKey(),
@@ -153,12 +129,8 @@ export const platformDocumentRetention = pgTable("platform_document_retention", 
   retainUntil: timestamp("retain_until", { withTimezone: true }),
   legalHold: boolean("legal_hold").notNull().default(false),
   notes: text("notes"),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const platformDocumentAudit = pgTable("platform_document_audit", {
@@ -172,9 +144,7 @@ export const platformDocumentAudit = pgTable("platform_document_audit", {
     .$type<Record<string, string>>()
     .notNull()
     .default({}),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 /** Immutable content version metadata (APZDOCS-002) — no binary columns. */
@@ -198,9 +168,7 @@ export const platformDocumentVersion = pgTable(
     immutable: boolean("immutable").notNull().default(true),
     displayFilename: text("display_filename"),
     declaredMimeType: varchar("declared_mime_type", { length: 255 }),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     createdBy: text("created_by").notNull(),
     verifiedAt: timestamp("verified_at", { withTimezone: true }),
     revision: integer("revision").notNull().default(1),
@@ -233,12 +201,8 @@ export const platformDocumentStorageObject = pgTable(
     etag: text("etag"),
     encryptionKeyRef: text("encryption_key_ref"),
     verifiedAt: timestamp("verified_at", { withTimezone: true }),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     revision: integer("revision").notNull().default(1),
   },
 );

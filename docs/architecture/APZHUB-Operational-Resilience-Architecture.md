@@ -8,12 +8,12 @@ Keep the platform operating under dependency failure. Resilience complements sec
 
 `OperationalResilienceService` in `@apzhub/platform-security`:
 
-| Probe | Intent |
-|-------|--------|
-| Liveness | Process is running — always healthy when handler responds |
-| Readiness | Database, Redis, environment validation, runtime bootstrap |
-| Health | Aggregated status + dependency signals |
-| Recovery guidance | Actionable steps when checks fail |
+| Probe             | Intent                                                     |
+| ----------------- | ---------------------------------------------------------- |
+| Liveness          | Process is running — always healthy when handler responds  |
+| Readiness         | Database, Redis, environment validation, runtime bootstrap |
+| Health            | Aggregated status + dependency signals                     |
+| Recovery guidance | Actionable steps when checks fail                          |
 
 ## Dependency diagnostics
 

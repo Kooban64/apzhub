@@ -1,9 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  createInMemoryTestingPersistence,
-  type RepositoryContext,
-} from "../../index";
+import { createInMemoryTestingPersistence, type RepositoryContext } from "../../index";
 
 function ctx(overrides?: Partial<RepositoryContext>): RepositoryContext {
   return {
@@ -116,8 +113,6 @@ describe("pipeline repositories (in-memory)", () => {
 
   it("rejects unauthorized pipeline access", async () => {
     const db = createInMemoryTestingPersistence();
-    await expect(
-      db.pipelines.list(ctx({ permissions: [] })),
-    ).rejects.toThrow();
+    await expect(db.pipelines.list(ctx({ permissions: [] }))).rejects.toThrow();
   });
 });

@@ -33,10 +33,7 @@ import type {
 } from "@apzhub/search-contracts";
 import { and, desc, eq, isNull } from "drizzle-orm";
 
-import {
-  assertSameTenant,
-  matchesOrganisation,
-} from "../authorization";
+import { assertSameTenant, matchesOrganisation } from "../authorization";
 import type { SearchPersistenceBundle } from "../ports";
 import type {
   SearchAuditRecord,
@@ -105,7 +102,8 @@ function asConfiguration(row: {
     defaultPageSize: row.defaultPageSize,
     maxPageSize: row.maxPageSize,
     maxKeywordLength: row.maxKeywordLength,
-    allowedProviderKinds: (row.allowedProviderKindsJson ?? []) as SearchConfiguration["allowedProviderKinds"],
+    allowedProviderKinds: (row.allowedProviderKindsJson ??
+      []) as SearchConfiguration["allowedProviderKinds"],
     enforceTenantIsolation: true,
     enforceOrganisationIsolation: true,
     enforcePermissionFilter: true,
@@ -209,7 +207,8 @@ export function createPostgresSearchPersistence(
               version: row.version,
               enabled: row.enabled,
               active: row.active,
-              ownership: (row.ownership as SearchProviderRecord["ownership"]) ?? "tenant",
+              ownership:
+                (row.ownership as SearchProviderRecord["ownership"]) ?? "tenant",
               capabilities: asCapabilities(row.capabilitiesJson),
               configuration:
                 row.configurationJson as unknown as SearchProviderConfiguration,
@@ -280,9 +279,7 @@ export function createPostgresSearchPersistence(
         label: record.label,
         version: record.version,
         registeredAt: new Date(record.registeredAt),
-        unregisteredAt: record.unregisteredAt
-          ? new Date(record.unregisteredAt)
-          : null,
+        unregisteredAt: record.unregisteredAt ? new Date(record.unregisteredAt) : null,
         registeredBy: record.registeredBy,
         createdAt: new Date(record.createdAt),
         updatedAt: new Date(record.updatedAt),
@@ -346,10 +343,7 @@ export function createPostgresSearchPersistence(
   };
 
   const providerStatuses = {
-    async upsert(
-      ctx: SearchRepositoryContext,
-      record: SearchProviderStatusRecord,
-    ) {
+    async upsert(ctx: SearchRepositoryContext, record: SearchProviderStatusRecord) {
       assertSameTenant(ctx, record.tenantId);
       await db
         .insert(platformSearchProviderStatus)
@@ -409,7 +403,9 @@ export function createPostgresSearchPersistence(
   };
 
   const configurations = {
-    mapRow(row: typeof platformSearchConfiguration.$inferSelect): SearchConfigurationRecord {
+    mapRow(
+      row: typeof platformSearchConfiguration.$inferSelect,
+    ): SearchConfigurationRecord {
       return {
         id: row.id,
         tenantId: row.tenantId,
@@ -488,10 +484,7 @@ export function createPostgresSearchPersistence(
         .filter((row) => orgFilter(ctx, row.organisationId))
         .map((row) => configurations.mapRow(row));
     },
-    async upsert(
-      ctx: SearchRepositoryContext,
-      record: SearchConfigurationRecord,
-    ) {
+    async upsert(ctx: SearchRepositoryContext, record: SearchConfigurationRecord) {
       assertSameTenant(ctx, record.tenantId);
       await db
         .insert(platformSearchConfiguration)
@@ -504,9 +497,7 @@ export function createPostgresSearchPersistence(
           defaultPageSize: record.configuration.defaultPageSize,
           maxPageSize: record.configuration.maxPageSize,
           maxKeywordLength: record.configuration.maxKeywordLength,
-          allowedProviderKindsJson: [
-            ...record.configuration.allowedProviderKinds,
-          ],
+          allowedProviderKindsJson: [...record.configuration.allowedProviderKinds],
           enforceTenantIsolation: true,
           enforceOrganisationIsolation: true,
           enforcePermissionFilter: true,
@@ -524,9 +515,7 @@ export function createPostgresSearchPersistence(
             defaultPageSize: record.configuration.defaultPageSize,
             maxPageSize: record.configuration.maxPageSize,
             maxKeywordLength: record.configuration.maxKeywordLength,
-            allowedProviderKindsJson: [
-              ...record.configuration.allowedProviderKinds,
-            ],
+            allowedProviderKindsJson: [...record.configuration.allowedProviderKinds],
             currentVersion: record.currentVersion,
             updatedAt: new Date(record.updatedAt),
             deletedAt: record.deletedAt ? new Date(record.deletedAt) : null,
@@ -606,10 +595,7 @@ export function createPostgresSearchPersistence(
         .where(
           and(
             eq(platformSearchConfigurationVersion.tenantId, ctx.tenantId),
-            eq(
-              platformSearchConfigurationVersion.configurationId,
-              configurationId,
-            ),
+            eq(platformSearchConfigurationVersion.configurationId, configurationId),
             isNull(platformSearchConfigurationVersion.deletedAt),
           ),
         );
@@ -766,7 +752,8 @@ export function createPostgresSearchPersistence(
         name: row.name,
         defaultScopes: (row.defaultScopesJson ?? []) as SearchScope[],
         defaultCollections: row.defaultCollectionsJson ?? [],
-        defaultSorts: (row.defaultSortsJson ?? []) as unknown as SearchProfileRecord["defaultSorts"],
+        defaultSorts: (row.defaultSortsJson ??
+          []) as unknown as SearchProfileRecord["defaultSorts"],
         createdAt: requireIso(row.createdAt),
         updatedAt: requireIso(row.updatedAt),
         deletedAt: iso(row.deletedAt),
@@ -792,9 +779,8 @@ export function createPostgresSearchPersistence(
           name: row.name,
           defaultScopes: (row.defaultScopesJson ?? []) as SearchScope[],
           defaultCollections: row.defaultCollectionsJson ?? [],
-          defaultSorts:
-            (row.defaultSortsJson ??
-              []) as unknown as SearchProfileRecord["defaultSorts"],
+          defaultSorts: (row.defaultSortsJson ??
+            []) as unknown as SearchProfileRecord["defaultSorts"],
           createdAt: requireIso(row.createdAt),
           updatedAt: requireIso(row.updatedAt),
           deletedAt: iso(row.deletedAt),
@@ -1319,9 +1305,7 @@ export function createPostgresSearchPersistence(
         .onConflictDoUpdate({
           target: platformSearchSession.id,
           set: {
-            lastQueryAt: record.lastQueryAt
-              ? new Date(record.lastQueryAt)
-              : null,
+            lastQueryAt: record.lastQueryAt ? new Date(record.lastQueryAt) : null,
             updatedAt: new Date(record.updatedAt),
             revision: record.revision,
           },
@@ -1406,10 +1390,7 @@ export function createPostgresSearchPersistence(
   };
 
   const diagnostics = {
-    async append(
-      ctx: SearchRepositoryContext,
-      record: SearchDiagnosticsRecord,
-    ) {
+    async append(ctx: SearchRepositoryContext, record: SearchDiagnosticsRecord) {
       assertSameTenant(ctx, record.tenantId);
       await db.insert(platformSearchDiagnostics).values({
         id: record.id,
@@ -1501,10 +1482,7 @@ export function createPostgresSearchPersistence(
   };
 
   const statistics = {
-    async upsert(
-      ctx: SearchRepositoryContext,
-      record: SearchStatisticsRecord,
-    ) {
+    async upsert(ctx: SearchRepositoryContext, record: SearchStatisticsRecord) {
       assertSameTenant(ctx, record.tenantId);
       await db
         .insert(platformSearchStatistics)
@@ -1568,10 +1546,7 @@ export function createPostgresSearchPersistence(
   };
 
   const capabilities = {
-    async upsert(
-      ctx: SearchRepositoryContext,
-      record: SearchCapabilitiesRecord,
-    ) {
+    async upsert(ctx: SearchRepositoryContext, record: SearchCapabilitiesRecord) {
       assertSameTenant(ctx, record.tenantId);
       await db
         .insert(platformSearchCapabilities)

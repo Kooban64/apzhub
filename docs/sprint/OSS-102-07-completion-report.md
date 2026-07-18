@@ -19,21 +19,21 @@ OSS-102-07 certifies `@apzhub/integration-zammad` as a production-quality adapte
 
 ## Milestone scope delivered
 
-| Area | Delivered |
-| --- | --- |
-| Capability certification model | ✅ |
-| Compatibility matrix (6.3.0–6.5.x) | ✅ |
-| Edition / feature detection | ✅ |
-| Health model HEALTHY/DEGRADED/LIMITED/UNAVAILABLE | ✅ |
-| Readiness checks (12) | ✅ |
-| Runtime diagnostics | ✅ |
-| Operational reports | ✅ |
-| Certification outcomes | ✅ |
-| Sync / webhook / event / article / search / history / analytics certification | ✅ |
-| Reference Adapter compliance assessment | ✅ |
-| Architecture / dependency boundary tests | ✅ |
-| Mock operational scenarios | ✅ |
-| Documentation + foundation closeout | ✅ |
+| Area                                                                          | Delivered |
+| ----------------------------------------------------------------------------- | --------- |
+| Capability certification model                                                | ✅        |
+| Compatibility matrix (6.3.0–6.5.x)                                            | ✅        |
+| Edition / feature detection                                                   | ✅        |
+| Health model HEALTHY/DEGRADED/LIMITED/UNAVAILABLE                             | ✅        |
+| Readiness checks (12)                                                         | ✅        |
+| Runtime diagnostics                                                           | ✅        |
+| Operational reports                                                           | ✅        |
+| Certification outcomes                                                        | ✅        |
+| Sync / webhook / event / article / search / history / analytics certification | ✅        |
+| Reference Adapter compliance assessment                                       | ✅        |
+| Architecture / dependency boundary tests                                      | ✅        |
+| Mock operational scenarios                                                    | ✅        |
+| Documentation + foundation closeout                                           | ✅        |
 
 ---
 
@@ -47,38 +47,38 @@ No contracts package change required.
 
 ## Certification outcome
 
-| Outcome | Decision rule |
-| --- | --- |
-| `CERTIFIED` | Required caps available; compatible; ready; healthy; fully compliant |
+| Outcome                      | Decision rule                                                                    |
+| ---------------------------- | -------------------------------------------------------------------------------- |
+| `CERTIFIED`                  | Required caps available; compatible; ready; healthy; fully compliant             |
 | `CERTIFIED_WITH_LIMITATIONS` | Ready with optional gaps, unverified version, documented deviations, or DEGRADED |
-| `NOT_CERTIFIED` | Required missing; readiness blocked; LIMITED/UNAVAILABLE |
-| `INCOMPATIBLE` | Blocking version incompatibility or failed mandatory architecture checks |
+| `NOT_CERTIFIED`              | Required missing; readiness blocked; LIMITED/UNAVAILABLE                         |
+| `INCOMPATIBLE`               | Blocking version incompatibility or failed mandatory architecture checks         |
 
 ---
 
 ## Capability certification matrix (summary)
 
-| Capability | Implemented | Optional | Notes |
-| --- | --- | --- | --- |
-| support / organizations / groups / users | Yes | No | Core Support |
-| articles | Yes | No | Metadata attachments; no update/delete/binary |
-| events | Yes | No | Translation only |
-| synchronisation | Yes | No | In-memory; no article sync |
-| search / history / analytics | Yes | Yes | Read-only |
-| webhooks | Yes | Yes | Registration only |
-| attachments | No | Yes | Placeholder — not certified |
+| Capability                               | Implemented | Optional | Notes                                         |
+| ---------------------------------------- | ----------- | -------- | --------------------------------------------- |
+| support / organizations / groups / users | Yes         | No       | Core Support                                  |
+| articles                                 | Yes         | No       | Metadata attachments; no update/delete/binary |
+| events                                   | Yes         | No       | Translation only                              |
+| synchronisation                          | Yes         | No       | In-memory; no article sync                    |
+| search / history / analytics             | Yes         | Yes      | Read-only                                     |
+| webhooks                                 | Yes         | Yes      | Registration only                             |
+| attachments                              | No          | Yes      | Placeholder — not certified                   |
 
 ---
 
 ## Compatibility matrix
 
-| Field | Value |
-| --- | --- |
-| Minimum supported | 6.3.0 |
-| Verified family | 6.3.0 – 6.5.x |
-| Edition | CE first |
-| Older than min | incompatible (blocking) |
-| Newer than max | unverified (non-blocking) |
+| Field             | Value                     |
+| ----------------- | ------------------------- |
+| Minimum supported | 6.3.0                     |
+| Verified family   | 6.3.0 – 6.5.x             |
+| Edition           | CE first                  |
+| Older than min    | incompatible (blocking)   |
+| Newer than max    | unverified (non-blocking) |
 
 ---
 
@@ -121,18 +121,18 @@ Mandatory boundaries verified: no platform-services, gateway, mapping-store, Nex
 
 ## Tests & coverage
 
-| Suite | Result |
-| --- | --- |
-| Zammad package | **112 passed** (10 files) |
-| Plane + SDK + contracts regression | **174 passed** |
-| Combined (Zammad + Plane + SDK + contracts) | **286 passed** |
+| Suite                                       | Result                    |
+| ------------------------------------------- | ------------------------- |
+| Zammad package                              | **112 passed** (10 files) |
+| Plane + SDK + contracts regression          | **174 passed**            |
+| Combined (Zammad + Plane + SDK + contracts) | **286 passed**            |
 
 | Coverage metric | Package (`integrations/zammad/src`) | Operations folder |
-| --- | --- | --- |
-| Statements | **92.12%** | **95.27%** |
-| Branches | **74.39%** | **82.98%** |
-| Functions | **97.59%** | **96.66%** |
-| Lines | **92.12%** | **95.27%** |
+| --------------- | ----------------------------------- | ----------------- |
+| Statements      | **92.12%**                          | **95.27%**        |
+| Branches        | **74.39%**                          | **82.98%**        |
+| Functions       | **97.59%**                          | **96.66%**        |
+| Lines           | **92.12%**                          | **95.27%**        |
 
 Key evaluators (lines): certification ~99.7%; compatibility 100%; health ~97.7%; readiness ~92.8%; report facade ~95.8%.
 
@@ -140,15 +140,15 @@ Key evaluators (lines): certification ~99.7%; compatibility 100%; health ~97.7%;
 
 ## Quality gates
 
-| Gate | Result |
-| --- | --- |
-| Format / lint (zammad) | Pass |
-| Typecheck (zammad) | Pass |
-| Zammad tests | Pass (111) |
-| Plane / SDK / contracts regression | Pass (174) |
-| Dependency boundary checks | Pass |
-| Coverage (zammad package lines) | **~92.1%** |
-| `pnpm build` (apps/web) | **Fail** — pre-existing Next.js `/_global-error` `useContext` null (unrelated to this milestone; also previously observed as `/_not-found`) |
+| Gate                               | Result                                                                                                                                      |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Format / lint (zammad)             | Pass                                                                                                                                        |
+| Typecheck (zammad)                 | Pass                                                                                                                                        |
+| Zammad tests                       | Pass (111)                                                                                                                                  |
+| Plane / SDK / contracts regression | Pass (174)                                                                                                                                  |
+| Dependency boundary checks         | Pass                                                                                                                                        |
+| Coverage (zammad package lines)    | **~92.1%**                                                                                                                                  |
+| `pnpm build` (apps/web)            | **Fail** — pre-existing Next.js `/_global-error` `useContext` null (unrelated to this milestone; also previously observed as `/_not-found`) |
 
 ---
 

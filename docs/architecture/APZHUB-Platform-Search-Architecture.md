@@ -27,27 +27,27 @@ Products (System of Record)
 
 ## Principles
 
-| Rule | Detail |
-|------|--------|
-| Products are SoR | Search never owns business entities |
-| Contracts first | APZSEARCH-001 ships interfaces and models only |
-| No engine binding | OpenSearch/ES/Postgres FTS/Meilisearch/Typesense/Azure AI Search reserved |
-| Authorization mandatory | Tenant, organisation, permissions, classification, product ownership |
-| Derived index only | Future indexes are derived; never authoritative |
+| Rule                    | Detail                                                                    |
+| ----------------------- | ------------------------------------------------------------------------- |
+| Products are SoR        | Search never owns business entities                                       |
+| Contracts first         | APZSEARCH-001 ships interfaces and models only                            |
+| No engine binding       | OpenSearch/ES/Postgres FTS/Meilisearch/Typesense/Azure AI Search reserved |
+| Authorization mandatory | Tenant, organisation, permissions, classification, product ownership      |
+| Derived index only      | Future indexes are derived; never authoritative                           |
 
 ## Package surface
 
-| Area | Location |
-|------|----------|
-| Domain models | `packages/search-contracts/src/domain/` |
-| Query validation | `domain/query-validation.ts` |
-| Provider ports | `providers/search-provider.ts` |
-| Product adapters | `adapters/product-search-adapter.ts` |
-| Platform services | `services/platform-search-services.ts` |
-| Permissions | `permissions/catalogue.ts` |
-| Security helpers | `security/boundary.ts` |
-| Diagnostics | `diagnostics/types.ts` |
-| Configuration | `config/types.ts` |
+| Area              | Location                                |
+| ----------------- | --------------------------------------- |
+| Domain models     | `packages/search-contracts/src/domain/` |
+| Query validation  | `domain/query-validation.ts`            |
+| Provider ports    | `providers/search-provider.ts`          |
+| Product adapters  | `adapters/product-search-adapter.ts`    |
+| Platform services | `services/platform-search-services.ts`  |
+| Permissions       | `permissions/catalogue.ts`              |
+| Security helpers  | `security/boundary.ts`                  |
+| Diagnostics       | `diagnostics/types.ts`                  |
+| Configuration     | `config/types.ts`                       |
 
 ## Explicit exclusions (APZSEARCH-001)
 

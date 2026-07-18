@@ -48,9 +48,7 @@ describe("PlatformNotificationsView", () => {
     render(wrap(<PlatformNotificationsView section="overview" />));
 
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
       expect(screen.getByTestId("card-notifications-count")).toBeTruthy();
     });
 
@@ -94,9 +92,9 @@ describe("PlatformNotificationsView", () => {
     await waitFor(() => {
       expect(screen.getByTestId("channels-delivery-unavailable")).toBeTruthy();
     });
-    expect(
-      screen.getByTestId("channels-delivery-unavailable").textContent,
-    ).toContain("Delivery unavailable");
+    expect(screen.getByTestId("channels-delivery-unavailable").textContent).toContain(
+      "Delivery unavailable",
+    );
   });
 
   it("shows diagnostics delivery and providers unavailable", async () => {
@@ -105,9 +103,9 @@ describe("PlatformNotificationsView", () => {
     await waitFor(() => {
       expect(screen.getByTestId("diagnostics-delivery-status")).toBeTruthy();
     });
-    expect(
-      screen.getByTestId("diagnostics-delivery-status").textContent,
-    ).toContain("DELIVERY PROVIDERS NOT AVAILABLE");
+    expect(screen.getByTestId("diagnostics-delivery-status").textContent).toContain(
+      "DELIVERY PROVIDERS NOT AVAILABLE",
+    );
     expect(screen.getByText("Providers").parentElement?.textContent).toContain(
       "unavailable",
     );
@@ -155,17 +153,13 @@ describe("PlatformNotificationsView", () => {
   it("router resolves overview section", async () => {
     render(wrap(<NotificationsWorkspaceRouter />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
     });
   });
 
   it("hides lifecycle when canManage is false", async () => {
     render(
-      wrap(
-        <PlatformNotificationsView section="notifications" canManage={false} />,
-      ),
+      wrap(<PlatformNotificationsView section="notifications" canManage={false} />),
     );
     await waitFor(() => {
       expect(screen.getByText(MOCK_NOTIFICATION.title)).toBeTruthy();
@@ -238,9 +232,8 @@ describe("PlatformNotificationsView", () => {
   });
 
   it("covers recipients and references query errors", async () => {
-    const { NotificationClientError } = await import(
-      "@/lib/notifications/notification-errors"
-    );
+    const { NotificationClientError } =
+      await import("@/lib/notifications/notification-errors");
     const broken = createMockNotificationClient();
     broken.listRecipients = async () => {
       throw new NotificationClientError({ message: "recipients", status: 500 });
@@ -268,9 +261,8 @@ describe("PlatformNotificationsView", () => {
   });
 
   it("covers notification detail not-found and clipboard failure", async () => {
-    const { NotificationClientError } = await import(
-      "@/lib/notifications/notification-errors"
-    );
+    const { NotificationClientError } =
+      await import("@/lib/notifications/notification-errors");
     const missing = createMockNotificationClient();
     missing.getNotification = async () => {
       throw new NotificationClientError({
@@ -311,9 +303,7 @@ describe("PlatformNotificationsView", () => {
     const user = userEvent.setup();
     render(wrap(<PlatformNotificationsView section="notifications" />));
     await waitFor(() => {
-      expect(screen.getAllByText(MOCK_NOTIFICATION.title).length).toBeGreaterThan(
-        0,
-      );
+      expect(screen.getAllByText(MOCK_NOTIFICATION.title).length).toBeGreaterThan(0);
     });
     const row = screen.getAllByText(MOCK_NOTIFICATION.title)[0]!.closest("tr");
     row!.focus();
@@ -451,9 +441,8 @@ describe("PlatformNotificationsView", () => {
   });
 
   it("shows forbidden and empty list states", async () => {
-    const { NotificationClientError } = await import(
-      "@/lib/notifications/notification-errors"
-    );
+    const { NotificationClientError } =
+      await import("@/lib/notifications/notification-errors");
     const forbidden = createMockNotificationClient();
     forbidden.listNotifications = async () => {
       throw new NotificationClientError({
@@ -547,9 +536,8 @@ describe("PlatformNotificationsView", () => {
   });
 
   it("shows section error with retry control", async () => {
-    const { NotificationClientError } = await import(
-      "@/lib/notifications/notification-errors"
-    );
+    const { NotificationClientError } =
+      await import("@/lib/notifications/notification-errors");
     const flaky = createMockNotificationClient();
     flaky.listTemplates = async () => {
       throw new NotificationClientError({
@@ -575,9 +563,7 @@ describe("PlatformNotificationsView", () => {
     cleanup();
     render(wrap(<PlatformNotificationsView section="notifications" />));
     await waitFor(() => {
-      expect(screen.getAllByText(MOCK_NOTIFICATION.title).length).toBeGreaterThan(
-        0,
-      );
+      expect(screen.getAllByText(MOCK_NOTIFICATION.title).length).toBeGreaterThan(0);
     });
     await userEvent.setup().click(screen.getByRole("button", { name: /Mark Read/i }));
     await waitFor(() => {
@@ -591,9 +577,7 @@ describe("PlatformNotificationsView", () => {
     const user = userEvent.setup();
     render(wrap(<PlatformNotificationsView section="notifications" />));
     await waitFor(() => {
-      expect(screen.getAllByText(MOCK_NOTIFICATION.title).length).toBeGreaterThan(
-        0,
-      );
+      expect(screen.getAllByText(MOCK_NOTIFICATION.title).length).toBeGreaterThan(0);
     });
     const row = screen.getAllByText(MOCK_NOTIFICATION.title)[0]!.closest("tr");
     expect(row).toBeTruthy();
@@ -684,9 +668,8 @@ describe("PlatformNotificationsView", () => {
   });
 
   it("shows preference and audit error retry controls", async () => {
-    const { NotificationClientError } = await import(
-      "@/lib/notifications/notification-errors"
-    );
+    const { NotificationClientError } =
+      await import("@/lib/notifications/notification-errors");
     const broken = createMockNotificationClient();
     broken.listPreferences = async () => {
       throw new NotificationClientError({ message: "prefs", status: 500 });

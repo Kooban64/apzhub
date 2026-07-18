@@ -8,8 +8,8 @@
 
 ## Wave closed
 
-| Track | Milestones | Classification |
-| ----- | ---------- | -------------- |
+| Track                       | Milestones        | Classification                                 |
+| --------------------------- | ----------------- | ---------------------------------------------- |
 | Notification SoR (metadata) | APZNOTIFY-001…006 | **PRODUCTION_READY_WITH_LIMITATIONS** (frozen) |
 
 ## Architecture freeze
@@ -18,15 +18,15 @@ See [Architecture Freeze Notice](../architecture/APZHUB-Notification-Architectur
 
 ## Audit evidence
 
-| Audit | Result |
-| ----- | ------ |
-| `pnpm audit:notification-foundation` (001) | PASS (via vertical) |
+| Audit                                             | Result              |
+| ------------------------------------------------- | ------------------- |
+| `pnpm audit:notification-foundation` (001)        | PASS (via vertical) |
 | `pnpm audit:notification-platform-services` (002) | PASS (via vertical) |
-| `pnpm audit:notification-http-client` (003) | PASS (via vertical) |
-| `pnpm audit:notification-workbench` (004) | PASS (via vertical) |
-| `pnpm audit:notification-vertical` (005) | PASS |
-| `pnpm audit:notification-wave` (006) | PASS |
-| `pnpm openapi:validate:platform` | PASS |
+| `pnpm audit:notification-http-client` (003)       | PASS (via vertical) |
+| `pnpm audit:notification-workbench` (004)         | PASS (via vertical) |
+| `pnpm audit:notification-vertical` (005)          | PASS                |
+| `pnpm audit:notification-wave` (006)              | PASS                |
+| `pnpm openapi:validate:platform`                  | PASS                |
 
 ## Stop
 

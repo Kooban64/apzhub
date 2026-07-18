@@ -231,9 +231,7 @@ describe("workflow-persistence postgres repositories", () => {
     });
     expect(version.versionNumber).toBe(1);
     expect(await repos.versions.get(ctx, asWorkflowVersionId("ver_1"))).toBeTruthy();
-    expect(
-      await repos.versions.listByWorkflow(ctx, asWorkflowId("wf_1")),
-    ).toBeTruthy();
+    expect(await repos.versions.listByWorkflow(ctx, asWorkflowId("wf_1"))).toBeTruthy();
 
     await repos.templates.create(ctx, {
       id: asWorkflowTemplateId("tpl_1"),
@@ -473,8 +471,7 @@ describe("workflow-persistence postgres repositories", () => {
         ?.parentCategoryId,
     ).toBe("cat_parent");
     expect(
-      (await repos.folders.get(ctx, asWorkflowFolderId("fold_child")))
-        ?.parentFolderId,
+      (await repos.folders.get(ctx, asWorkflowFolderId("fold_child")))?.parentFolderId,
     ).toBe("fold_parent");
 
     await repos.workflows.create(ctx, {

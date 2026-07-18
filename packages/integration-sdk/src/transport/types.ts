@@ -2,20 +2,11 @@ import type { CircuitBreaker } from "../resilience/types";
 
 /** HTTP methods supported by the shared transport. */
 export type TransportHttpMethod =
-  | "GET"
-  | "POST"
-  | "PUT"
-  | "PATCH"
-  | "DELETE"
-  | "HEAD"
-  | "OPTIONS";
+  "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS";
 
 export type TransportHeaders = Readonly<Record<string, string>>;
 
-export type FetchFn = (
-  input: string,
-  init?: RequestInit,
-) => Promise<Response>;
+export type FetchFn = (input: string, init?: RequestInit) => Promise<Response>;
 
 export interface TransportContext {
   readonly correlationId?: string;
@@ -30,12 +21,7 @@ export interface TransportContext {
  * real transfer is out of scope for OSS-100-06.
  */
 export type TransportBodyKind =
-  | "json"
-  | "text"
-  | "multipart"
-  | "binary"
-  | "stream"
-  | "empty";
+  "json" | "text" | "multipart" | "binary" | "stream" | "empty";
 
 export interface TransportRequestBody {
   readonly kind: TransportBodyKind;
@@ -50,12 +36,7 @@ export interface TransportRequestBody {
 }
 
 export type TransportResponseKind =
-  | "json"
-  | "text"
-  | "binary"
-  | "stream"
-  | "empty"
-  | "error";
+  "json" | "text" | "binary" | "stream" | "empty" | "error";
 
 export interface TransportRequest {
   readonly method: TransportHttpMethod;
@@ -250,7 +231,10 @@ export interface TimeoutPolicyOptions {
 
 export interface TimeoutPolicy {
   readonly options: TimeoutPolicyOptions;
-  createController(overrideMs?: number, parent?: AbortSignal): {
+  createController(
+    overrideMs?: number,
+    parent?: AbortSignal,
+  ): {
     readonly controller: AbortController;
     readonly timeoutMs: number;
     dispose(): void;
@@ -427,7 +411,9 @@ export interface MockTransportScriptedResponse {
 
 export interface MockTransportOptions {
   readonly baseUrl?: string;
-  readonly responses?: Readonly<Record<string, MockTransportScriptedResponse | MockTransportScriptedResponse[]>>;
+  readonly responses?: Readonly<
+    Record<string, MockTransportScriptedResponse | MockTransportScriptedResponse[]>
+  >;
   readonly defaultResponse?: MockTransportScriptedResponse;
   readonly defaultLatencyMs?: number;
 }

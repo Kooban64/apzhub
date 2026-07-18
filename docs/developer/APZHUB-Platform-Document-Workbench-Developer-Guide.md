@@ -4,14 +4,14 @@
 
 ## Entry points
 
-| Concern | Path |
-|---------|------|
-| View | `apps/web/components/documents/platform-documents-view.tsx` |
-| Router | `apps/web/components/documents/documents-workspace-router.tsx` |
-| Routes | `apps/web/lib/documents/routes.ts` |
-| Client facades | `apps/web/lib/documents/document-api.ts` |
-| Manifests | `packages/workbench-framework/manifests/platform-documents*/` |
-| Shell mount | `apps/web/components/workbench-page.tsx` → `DocumentsWorkspaceRouter` |
+| Concern        | Path                                                                  |
+| -------------- | --------------------------------------------------------------------- |
+| View           | `apps/web/components/documents/platform-documents-view.tsx`           |
+| Router         | `apps/web/components/documents/documents-workspace-router.tsx`        |
+| Routes         | `apps/web/lib/documents/routes.ts`                                    |
+| Client facades | `apps/web/lib/documents/document-api.ts`                              |
+| Manifests      | `packages/workbench-framework/manifests/platform-documents*/`         |
+| Shell mount    | `apps/web/components/workbench-page.tsx` → `DocumentsWorkspaceRouter` |
 
 ## Rules
 

@@ -3,39 +3,42 @@
 > **Purpose:** Index of APZHUB products and their status  
 > **Audience:** Product owners, architects, engineers, AI agents  
 > **Authoritative references:** [Product Portfolio Strategy](../strategy/APZHUB-Product-Portfolio-Strategy.md) · [002 — Terminology](../002-product-naming-positioning-terminology-standard.md)  
-> **Related documents:** [OSS-CATALOGUE](./OSS-CATALOGUE.md) · [PLATFORM-CAPABILITY-CATALOGUE](./PLATFORM-CAPABILITY-CATALOGUE.md)  
+> **Related documents:** [OSS-CATALOGUE](./OSS-CATALOGUE.md) · [PLATFORM-CAPABILITY-CATALOGUE](./PLATFORM-CAPABILITY-CATALOGUE.md) · [INTEGRATION-PRODUCT-CAPABILITY-INVENTORY](./INTEGRATION-PRODUCT-CAPABILITY-INVENTORY.md)  
 > **Reading order:** After Master Brief  
-> **Last updated:** 2026-07-16  
-> **Current status:** Active — **APZIDENTITY-001 complete** (Identity Administration Foundation); **APZADMIN-006 complete** (Administration SoR **frozen**); **APZCONFIG-006 complete** (Configuration SoR **frozen**); **APZNOTIFY-006 complete** (Notification SoR **frozen**); **APZWORKFLOW-011 complete** (Workflow Engine wave **frozen**); Search **APZSEARCH-015 complete**; **APZSEARCH-016** deferred; Documents vertical **PRODUCTION_READY_WITH_LIMITATIONS** (APZDOCS-006)
+> **Last updated:** 2026-07-18  
+> **Current status:** Active — reconciled under **APZHUB-KF-001** to repository + completion reports. Engineering packages unchanged since **OSS-100-11** (Integration SDK **1.0.0** · Architecture Frozen).
 
 ---
 
 ## Product classification
 
-| Product                 | Type                | App / Module                         | Status                              | Commercial                      |
-| ----------------------- | ------------------- | ------------------------------------ | ----------------------------------- | ------------------------------- |
-| **Platform**            | Core                | `apps/web`                           | v2 certified                        | Internal + future SaaS          |
-| **Law Platform**        | Vertical            | `apps/law-platform`                  | Validation advanced                 | **Primary commercial offering** |
-| **Trust Accounting**    | Law capability      | Law app module                       | Milestone closed (LAW-015)          | Part of Law offering            |
-| **Financial Engine**    | Shared engine       | —                                    | **DEFER EXTRACTION** (FIN-001)      | Future licensed component       |
-| **Projects**            | Productivity module | Wave 1 adapter certified; UI planned | `@apzhub/integration-plane` v0.6.0  | Bundled in suite                |
-| **Documents**           | Platform capability | **APZDOCS-006 complete** — **PRODUCTION_READY_WITH_LIMITATIONS** (metadata path; no binary HTTP) | Stable (architecture frozen) | Bundled                         |
-| **Workflow**            | Platform capability | **APZWORKFLOW-011 complete** — SoR + Engine wave **frozen**; `@apzhub/integration-n8n` **0.1.0** official Reference Adapter (**PRODUCTION_READY_WITH_LIMITATIONS**) | **APZWORKFLOW-012** roadmap only | Bundled                         |
-| **Configuration**       | Platform capability | **APZCONFIG-006 complete** — SoR wave **frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**); metadata management plane only | **APZCONFIG-007** roadmap only | Bundled                         |
-| **Identity Administration** | Platform capability | **APZIDENTITY-001 complete** — SoR foundation (`@apzhub/identity-*` **0.1.0**); metadata only (not authentication) | **APZIDENTITY-002** next | Bundled                         |
-| **Administration**      | Platform capability | **APZADMIN-006 complete** — SoR wave **frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**); metadata governance plane only; Platform Operations separate | Closed | Bundled                         |
-| **Notifications**       | Platform capability | **APZNOTIFY-006 complete** — SoR wave **frozen** (**PRODUCTION_READY_WITH_LIMITATIONS**); metadata plane only | **APZNOTIFY-007** roadmap only | Bundled                         |
-| **Search**              | Platform capability | **APZSEARCH-015 complete** — publication ecosystem **PRODUCTION_READY_WITH_LIMITATIONS**; platform query vertical still **PRODUCTION_READY_WITH_LIMITATIONS** (008) | **APZSEARCH-016** deferred | Bundled                         |
-| **Time Tracking**       | Productivity module | Planned                              | OSS Wave (Kimai)                    | Bundled                         |
-| **Support**             | Productivity module | Wave 2 CLOSED — CERTIFIED_WITH_LIMITATIONS; UI delivered (OSS-110-13); UI cert → OSS-110-14 | `@apzhub/integration-zammad` v0.6.0 | Bundled                         |
-| **Analytics**           | Productivity module | Planned                              | OSS Wave 5                          | Bundled                         |
-| **Automation**          | Productivity module | Engine metadata via Workflow Engine Reference Adapter (`@apzhub/integration-n8n`) — read-only wave closed | Future execution under new milestone | Bundled                         |
-| **APZ TCMS**            | Native product      | **APZREPORT-003 complete** — Reporting **PRODUCTION_READY_WITH_LIMITATIONS** | Document consumers later | Bundled / enterprise cert tier  |
-| **Testing**             | Workbench module    | Module of APZ TCMS (`testing`) — enabled workbench | Certification views within module   | Bundled                         |
-| **Security Ops**        | Ops module          | Planned                              | OSS Wave 8–9                        | Enterprise add-on               |
-| **Quality Engineering** | *(superseded name)* | Superseded by **APZ TCMS**           | See APZTCMS backlog                 | —                               |
-| **Exchange (APZEX)**    | Vertical            | Not started                          | Unchartered                         | Future commercial               |
-| **Banking (APZBNK)**    | Vertical            | Not started                          | Unchartered                         | Future commercial               |
+| Product                     | Type                | App / Module                                                                                            | Status                                                | Commercial                      |
+| --------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------- |
+| **Platform**                | Core                | `apps/web`                                                                                              | v2 certified                                          | Internal + future SaaS          |
+| **Law Platform**            | Vertical            | `apps/law-platform`                                                                                     | Validation advanced                                   | **Primary commercial offering** |
+| **Trust Accounting**        | Law capability      | Law app module                                                                                          | Milestone closed (LAW-015)                            | Part of Law offering            |
+| **Financial Engine**        | Shared engine       | —                                                                                                       | **DEFER EXTRACTION** (FIN-001)                        | Future licensed component       |
+| **Projects**                | Productivity module | Wave 1 adapter certified; UI deferred                                                                   | `@apzhub/integration-plane` **0.6.0**                 | Bundled in suite                |
+| **Documents**               | Platform capability | **APZDOCS-006** — **PRODUCTION_READY_WITH_LIMITATIONS** (architecture frozen)                           | Native platform (not Paperless adapter)               | Bundled                         |
+| **Workflow**                | Platform capability | **APZWORKFLOW-011** — SoR + Engine wave **frozen**; `@apzhub/integration-n8n` **0.1.0**                 | **PRODUCTION_READY_WITH_LIMITATIONS**                 | Bundled                         |
+| **Configuration**           | Platform capability | **APZCONFIG-006** — SoR wave **frozen**                                                                 | **PRODUCTION_READY_WITH_LIMITATIONS**; metadata plane | Bundled                         |
+| **Identity Administration** | Platform capability | **APZIDENTITY-006** — SoR wave **frozen**; identity-* contracts/core **0.2.0**, persistence **0.1.0**   | Metadata only (not authentication)                    | Bundled                         |
+| **Administration**          | Platform capability | **APZADMIN-006** — SoR wave **frozen**                                                                  | **PRODUCTION_READY_WITH_LIMITATIONS**                 | Bundled                         |
+| **Notifications**           | Platform capability | **APZNOTIFY-006** — SoR wave **frozen**                                                                 | **PRODUCTION_READY_WITH_LIMITATIONS**; metadata plane | Bundled                         |
+| **Observability**           | Platform capability | **APZOBSERVE-006** — SoR wave **frozen**                                                                | Metadata SoR (not Grafana/Prometheus/Loki adapters)   | Bundled                         |
+| **Metrics**                 | Platform capability | **APZMETRICS-006** — SoR wave **frozen** / **Architecture Frozen**                                      | Metadata SoR                                          | Bundled                         |
+| **Search**                  | Platform capability | **APZSEARCH-008** + **019** — Platform + Publication **Architecture Frozen**                            | **PRODUCTION_READY_WITH_LIMITATIONS**                 | Bundled                         |
+| **Reporting**               | Platform capability | **APZREPORT-003** — **PRODUCTION_READY_WITH_LIMITATIONS**                                               | Platform reporting + TCMS consumer                    | Bundled                         |
+| **Time Tracking**           | Productivity module | Not started on disk                                                                                     | Planned OSS (Kimai) — no package                      | Bundled                         |
+| **Support**                 | Productivity module | Wave 2 **CLOSED** — CERTIFIED_WITH_LIMITATIONS; UI **PRODUCTION_READY_WITH_LIMITATIONS** (OSS-110-14)   | `@apzhub/integration-zammad` **0.6.0**                | Bundled                         |
+| **Analytics**               | Productivity module | Not started on disk                                                                                     | Planned OSS (Metabase)                                | Bundled                         |
+| **Automation**              | Productivity module | Engine metadata via n8n Reference Adapter (`@apzhub/integration-n8n` **0.1.0**) — read-only wave closed | Frozen under APZWORKFLOW-011                          | Bundled                         |
+| **APZ TCMS**                | Native product      | **APZTCMS-001…024 complete**; testing-* **0.11.0**; GHA Reference Adapter frozen                        | **PRODUCTION_READY_WITH_LIMITATIONS** where certified | Bundled / enterprise cert tier  |
+| **Testing**                 | Workbench module    | Module of APZ TCMS (`testing`) — enabled workbench                                                      | Certification views within module                     | Bundled                         |
+| **Security Ops**            | Ops module          | Not started on disk                                                                                     | Planned OSS Wave 8–9                                  | Enterprise add-on               |
+| **Quality Engineering**     | _(superseded name)_ | Superseded by **APZ TCMS**                                                                              | See APZTCMS backlog                                   | —                               |
+| **Exchange (APZEX)**        | Vertical            | Not started                                                                                             | Unchartered                                           | Future commercial               |
+| **Banking (APZBNK)**        | Vertical            | Not started                                                                                             | Unchartered                                           | Future commercial               |
 
 ---
 
@@ -68,17 +71,17 @@ Matters, Clients, Documents, Tasks, Time Entries, Invoices, Calendar, Trust Acco
 
 ---
 
-## Projects (OSS-backed — planned)
+## Projects (OSS-backed)
 
 | Field                | Detail                                                                                         |
 | -------------------- | ---------------------------------------------------------------------------------------------- |
 | **User-facing name** | Projects                                                                                       |
 | **Engine**           | Plane (hidden)                                                                                 |
 | **Service**          | `ProjectService`                                                                               |
-| **Adapter**          | `PlaneAdapter` (not implemented)                                                               |
+| **Adapter**          | `@apzhub/integration-plane` **0.6.0** — **Certified Reference Adapter** (OSS-101-10)           |
 | **Architecture**     | [Projects Capability Architecture](../architecture/APZHUB-Projects-Capability-Architecture.md) |
 | **ADR**              | [ADR-0047](../adr/ADR-0047-projects-plane-integration-architecture.md)                         |
-| **Status**           | OSS-101-01–03 complete; adapter blocked until OSS-100-05                                       |
+| **Status**           | OSS-101-01…10 **complete** (Wave 1 closed); Projects UI deferred                               |
 
 ---
 
@@ -94,21 +97,21 @@ Matters, Clients, Documents, Tasks, Time Entries, Invoices, Calendar, Trust Acco
 
 ## APZ TCMS (Testing & Certification)
 
-| Field                | Detail                                                                                         |
-| -------------------- | ---------------------------------------------------------------------------------------------- |
-| **Product**          | APZ TCMS — APZHUB Test & Certification Management System                                       |
-| **User-facing**      | Testing (Activity Bar); Certification views within module                                      |
-| **Module ID**        | `testing`                                                                                      |
-| **Services**         | `TestingService`, `CertificationService`                                                       |
-| **SoR**              | Platform PostgreSQL (metadata); S3-compatible evidence blobs                                   |
-| **Architecture**     | [APZ TCMS Reference Architecture](../architecture/APZHUB-APZ-TCMS-Reference-Architecture.md)   |
-| **Vision**           | [APZ TCMS Product Vision](../strategy/APZHUB-APZ-TCMS-Product-Vision.md)                       |
-| **ADR**              | [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)                            |
-| **Backlog**          | [APZTCMS-Backlog](../backlog/APZTCMS-Backlog.md)                                               |
-| **Packages**         | testing-contracts **0.9.0** · testing-persistence **0.9.0** · testing-services **0.9.0** · platform **0.12.0** · `@apzhub/integration-github-actions` **0.1.0** |
-| **Status**           | APZTCMS-021 **complete** — Engineering Intelligence domain services; stop before APZTCMS-022 |
-| **Certification**    | [Engineering Intelligence Architecture](../architecture/APZHUB-APZ-TCMS-Engineering-Intelligence-Architecture.md) · [APZTCMS-021 Completion Report](../sprint/APZTCMS-021-completion-report.md) · [CI/CD Reference Adapter Standard](../architecture/APZHUB-CICD-Reference-Adapter-Standard.md) |
-| **Supersedes**       | QE product naming; Kiwi TCMS as user-facing / SoR Testing engine                               |
+| Field               | Detail                                                                                                                                                               |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Product**         | APZ TCMS — APZHUB Test & Certification Management System                                                                                                             |
+| **User-facing**     | Testing (Activity Bar); Certification views within module                                                                                                            |
+| **Module ID**       | `testing`                                                                                                                                                            |
+| **Services**        | `TestingService`, `CertificationService`                                                                                                                             |
+| **SoR**             | Platform PostgreSQL (metadata); S3-compatible evidence blobs                                                                                                         |
+| **Architecture**    | [APZ TCMS Reference Architecture](../architecture/APZHUB-APZ-TCMS-Reference-Architecture.md)                                                                         |
+| **Vision**          | [APZ TCMS Product Vision](../strategy/APZHUB-APZ-TCMS-Product-Vision.md)                                                                                             |
+| **ADR**             | [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)                                                                                                  |
+| **Backlog**         | [APZTCMS-Backlog](../backlog/APZTCMS-Backlog.md)                                                                                                                     |
+| **Packages (disk)** | testing-contracts / persistence / services **0.11.0** · testing-foundation **0.1.0** · platform-services **0.25.0** · `@apzhub/integration-github-actions` **0.1.0** |
+| **Status**          | **APZTCMS-001…024 complete** (through Reporting Framework); CI/CD Reference Adapter frozen at APZTCMS-020                                                            |
+| **Certification**   | Vertical / GHA slices **PRODUCTION_READY_WITH_LIMITATIONS** where certified; see sprint completion reports                                                           |
+| **Supersedes**      | QE product naming; Kiwi TCMS as user-facing / SoR Testing engine                                                                                                     |
 
 ---
 

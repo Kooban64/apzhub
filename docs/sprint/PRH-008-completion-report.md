@@ -12,16 +12,16 @@ Transform existing diagnostics into a unified Platform Operations Control Plane 
 
 ### Implementation
 
-| Component | Location |
-|-----------|----------|
-| Operations Control Plane package | `packages/platform-operations/` |
-| Capability registry | `packages/platform-operations/src/capability-definitions.ts` |
-| Capability health builder | `packages/platform-operations/src/capability-health-builder.ts` |
-| Production verification service | `packages/platform-operations/src/production-verification-service.ts` |
-| Control plane aggregator | `packages/platform-operations/src/operations-control-plane-service.ts` |
-| Canonical API endpoint | `apps/web/app/api/platform/v1/operations/control-plane/route.ts` |
-| Enhanced operations dashboard | `apps/web/components/platform-operations/control-plane-overview-section.tsx` |
-| Bootstrap loader update | `packages/platform-bootstrap/src/operational-diagnostics-loader.ts` |
+| Component                        | Location                                                                     |
+| -------------------------------- | ---------------------------------------------------------------------------- |
+| Operations Control Plane package | `packages/platform-operations/`                                              |
+| Capability registry              | `packages/platform-operations/src/capability-definitions.ts`                 |
+| Capability health builder        | `packages/platform-operations/src/capability-health-builder.ts`              |
+| Production verification service  | `packages/platform-operations/src/production-verification-service.ts`        |
+| Control plane aggregator         | `packages/platform-operations/src/operations-control-plane-service.ts`       |
+| Canonical API endpoint           | `apps/web/app/api/platform/v1/operations/control-plane/route.ts`             |
+| Enhanced operations dashboard    | `apps/web/components/platform-operations/control-plane-overview-section.tsx` |
+| Bootstrap loader update          | `packages/platform-bootstrap/src/operational-diagnostics-loader.ts`          |
 
 ### Operator surfaces
 
@@ -30,10 +30,10 @@ Transform existing diagnostics into a unified Platform Operations Control Plane 
 
 ### Tests
 
-| Suite | Location |
-|-------|----------|
+| Suite                        | Location                                                            |
+| ---------------------------- | ------------------------------------------------------------------- |
 | Control plane + verification | `packages/platform-operations/src/operations-control-plane.test.ts` |
-| API route | `apps/web/lib/api/platform/operations-control-plane-route.test.ts` |
+| API route                    | `apps/web/lib/api/platform/operations-control-plane-route.test.ts`  |
 
 ### Documentation
 
@@ -45,24 +45,24 @@ Transform existing diagnostics into a unified Platform Operations Control Plane 
 
 ## Success criteria
 
-| Criterion | Met |
-|-----------|-----|
-| Operator can assess platform health in < 2 min | ✅ Dashboard + control plane API |
-| Production readiness verdict with findings | ✅ `READY` / `READY_WITH_OBSERVATIONS` / `NOT_READY` |
-| Every capability contributes diagnostics | ✅ 18 registered capabilities |
-| No duplicate diagnostics | ✅ Single canonical snapshot |
-| Consistent status values | ✅ `HealthSignalStatus` enum only |
-| Deterministic readiness calculations | ✅ Verified in tests |
+| Criterion                                      | Met                                                  |
+| ---------------------------------------------- | ---------------------------------------------------- |
+| Operator can assess platform health in < 2 min | ✅ Dashboard + control plane API                     |
+| Production readiness verdict with findings     | ✅ `READY` / `READY_WITH_OBSERVATIONS` / `NOT_READY` |
+| Every capability contributes diagnostics       | ✅ 18 registered capabilities                        |
+| No duplicate diagnostics                       | ✅ Single canonical snapshot                         |
+| Consistent status values                       | ✅ `HealthSignalStatus` enum only                    |
+| Deterministic readiness calculations           | ✅ Verified in tests                                 |
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| `pnpm lint` | Pass |
-| `pnpm typecheck` | Pass |
-| `pnpm build` | Pass |
-| `pnpm test` | Pass (1942 passed, 47 skipped) |
-| `pnpm test:coverage` | Pass |
+| Gate                 | Result                         |
+| -------------------- | ------------------------------ |
+| `pnpm lint`          | Pass                           |
+| `pnpm typecheck`     | Pass                           |
+| `pnpm build`         | Pass                           |
+| `pnpm test`          | Pass (1942 passed, 47 skipped) |
+| `pnpm test:coverage` | Pass                           |
 
 ## Stop condition
 

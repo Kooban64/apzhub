@@ -12,10 +12,7 @@ import {
 import { AdministrationDomainError } from "../ports/repository-ports";
 
 const ALLOWED: Readonly<
-  Record<
-    AdministrationLifecycleStatus,
-    readonly AdministrationLifecycleStatus[]
-  >
+  Record<AdministrationLifecycleStatus, readonly AdministrationLifecycleStatus[]>
 > = {
   draft: ["registered", "archived"],
   registered: ["active", "draft", "archived"],

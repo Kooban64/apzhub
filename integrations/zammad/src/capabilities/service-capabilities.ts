@@ -208,5 +208,7 @@ export function discoverZammadCoreServiceCapabilities(): readonly ZammadServiceC
 export function getZammadCoreServiceCapability(
   serviceId: ZammadCoreServiceId,
 ): ZammadServiceCapability | undefined {
-  return ZAMMAD_CORE_SERVICE_CAPABILITIES.find((entry) => entry.serviceId === serviceId);
+  return ZAMMAD_CORE_SERVICE_CAPABILITIES.find(
+    (entry) => entry.serviceId === serviceId,
+  );
 }

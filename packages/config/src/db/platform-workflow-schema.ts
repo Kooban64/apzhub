@@ -27,22 +27,15 @@ export const platformWorkflow = pgTable(
     categoryId: text("category_id"),
     folderId: text("folder_id"),
     templateId: text("template_id"),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     createdBy: text("created_by").notNull(),
     updatedBy: text("updated_by").notNull(),
     archivedAt: timestamp("archived_at", { withTimezone: true }),
     revision: integer("revision").notNull().default(1),
   },
   (table) => [
-    uniqueIndex("platform_workflow_tenant_key_uidx").on(
-      table.tenantId,
-      table.key,
-    ),
+    uniqueIndex("platform_workflow_tenant_key_uidx").on(table.tenantId, table.key),
   ],
 );
 
@@ -60,34 +53,14 @@ export const platformWorkflowVersion = pgTable(
       .$type<Record<string, unknown>>()
       .notNull()
       .default({}),
-    variablesJson: jsonb("variables_json")
-      .$type<unknown[]>()
-      .notNull()
-      .default([]),
-    parametersJson: jsonb("parameters_json")
-      .$type<unknown[]>()
-      .notNull()
-      .default([]),
-    triggersJson: jsonb("triggers_json")
-      .$type<unknown[]>()
-      .notNull()
-      .default([]),
-    actionsJson: jsonb("actions_json")
-      .$type<unknown[]>()
-      .notNull()
-      .default([]),
-    conditionsJson: jsonb("conditions_json")
-      .$type<unknown[]>()
-      .notNull()
-      .default([]),
-    connectionsJson: jsonb("connections_json")
-      .$type<unknown[]>()
-      .notNull()
-      .default([]),
+    variablesJson: jsonb("variables_json").$type<unknown[]>().notNull().default([]),
+    parametersJson: jsonb("parameters_json").$type<unknown[]>().notNull().default([]),
+    triggersJson: jsonb("triggers_json").$type<unknown[]>().notNull().default([]),
+    actionsJson: jsonb("actions_json").$type<unknown[]>().notNull().default([]),
+    conditionsJson: jsonb("conditions_json").$type<unknown[]>().notNull().default([]),
+    connectionsJson: jsonb("connections_json").$type<unknown[]>().notNull().default([]),
     changeSummary: text("change_summary"),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     createdBy: text("created_by").notNull(),
     revision: integer("revision").notNull().default(1),
   },
@@ -115,20 +88,10 @@ export const platformWorkflowTemplate = pgTable(
       .$type<Record<string, unknown>>()
       .notNull()
       .default({}),
-    parametersJson: jsonb("parameters_json")
-      .$type<unknown[]>()
-      .notNull()
-      .default([]),
-    variablesJson: jsonb("variables_json")
-      .$type<unknown[]>()
-      .notNull()
-      .default([]),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    parametersJson: jsonb("parameters_json").$type<unknown[]>().notNull().default([]),
+    variablesJson: jsonb("variables_json").$type<unknown[]>().notNull().default([]),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     createdBy: text("created_by").notNull(),
     updatedBy: text("updated_by").notNull(),
     revision: integer("revision").notNull().default(1),
@@ -141,65 +104,46 @@ export const platformWorkflowTemplate = pgTable(
   ],
 );
 
-export const platformWorkflowCategory = pgTable(
-  "platform_workflow_category",
-  {
-    id: text("id").primaryKey(),
-    tenantId: text("tenant_id").notNull(),
-    organisationId: text("organisation_id"),
-    name: text("name").notNull(),
-    description: text("description"),
-    parentCategoryId: text("parent_category_id"),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    revision: integer("revision").notNull().default(1),
-  },
-);
+export const platformWorkflowCategory = pgTable("platform_workflow_category", {
+  id: text("id").primaryKey(),
+  tenantId: text("tenant_id").notNull(),
+  organisationId: text("organisation_id"),
+  name: text("name").notNull(),
+  description: text("description"),
+  parentCategoryId: text("parent_category_id"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  revision: integer("revision").notNull().default(1),
+});
 
-export const platformWorkflowFolder = pgTable(
-  "platform_workflow_folder",
-  {
-    id: text("id").primaryKey(),
-    tenantId: text("tenant_id").notNull(),
-    organisationId: text("organisation_id"),
-    name: text("name").notNull(),
-    parentFolderId: text("parent_folder_id"),
-    path: text("path").notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    revision: integer("revision").notNull().default(1),
-  },
-);
+export const platformWorkflowFolder = pgTable("platform_workflow_folder", {
+  id: text("id").primaryKey(),
+  tenantId: text("tenant_id").notNull(),
+  organisationId: text("organisation_id"),
+  name: text("name").notNull(),
+  parentFolderId: text("parent_folder_id"),
+  path: text("path").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  revision: integer("revision").notNull().default(1),
+});
 
-export const platformWorkflowAudit = pgTable(
-  "platform_workflow_audit",
-  {
-    id: text("id").primaryKey(),
-    tenantId: text("tenant_id").notNull(),
-    organisationId: text("organisation_id"),
-    workflowId: text("workflow_id").notNull(),
-    versionId: text("version_id"),
-    action: text("action").notNull(),
-    actorUserId: text("actor_user_id").notNull(),
-    correlationId: text("correlation_id"),
-    detailJson: jsonb("detail_json")
-      .$type<Record<string, string>>()
-      .notNull()
-      .default({}),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    revision: integer("revision").notNull().default(1),
-  },
-);
+export const platformWorkflowAudit = pgTable("platform_workflow_audit", {
+  id: text("id").primaryKey(),
+  tenantId: text("tenant_id").notNull(),
+  organisationId: text("organisation_id"),
+  workflowId: text("workflow_id").notNull(),
+  versionId: text("version_id"),
+  action: text("action").notNull(),
+  actorUserId: text("actor_user_id").notNull(),
+  correlationId: text("correlation_id"),
+  detailJson: jsonb("detail_json")
+    .$type<Record<string, string>>()
+    .notNull()
+    .default({}),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  revision: integer("revision").notNull().default(1),
+});
 
 export const platformWorkflowSchema = {
   platformWorkflow,

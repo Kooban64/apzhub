@@ -5,17 +5,17 @@
 ## Surface
 
 ```ts
-bundle.gateway.workflow.engine.workflows.list(ctx)
-bundle.gateway.workflow.engine.workflows.get(ctx, id)
-bundle.gateway.workflow.engine.templates.list(ctx)
-bundle.gateway.workflow.engine.tags.list(ctx)
-bundle.gateway.workflow.engine.users.list(ctx)
-bundle.gateway.workflow.engine.projects.list(ctx)
-bundle.gateway.workflow.engine.capabilities.get(ctx)
-bundle.gateway.workflow.engine.health.get(ctx)
-bundle.gateway.workflow.engine.diagnostics.get(ctx)
-bundle.gateway.workflow.engine.compatibility.get(ctx)
-bundle.gateway.workflow.engine.connection.validate(ctx)
+bundle.gateway.workflow.engine.workflows.list(ctx);
+bundle.gateway.workflow.engine.workflows.get(ctx, id);
+bundle.gateway.workflow.engine.templates.list(ctx);
+bundle.gateway.workflow.engine.tags.list(ctx);
+bundle.gateway.workflow.engine.users.list(ctx);
+bundle.gateway.workflow.engine.projects.list(ctx);
+bundle.gateway.workflow.engine.capabilities.get(ctx);
+bundle.gateway.workflow.engine.health.get(ctx);
+bundle.gateway.workflow.engine.diagnostics.get(ctx);
+bundle.gateway.workflow.engine.compatibility.get(ctx);
+bundle.gateway.workflow.engine.connection.validate(ctx);
 ```
 
 ## Rules
@@ -26,15 +26,15 @@ bundle.gateway.workflow.engine.connection.validate(ctx)
 
 ## Pipeline service names
 
-| Facet | Service name |
-| --- | --- |
-| workflows | `workflowEngineWorkflows` |
-| templates | `workflowEngineTemplates` |
-| tags | `workflowEngineTags` |
-| users | `workflowEngineUsers` |
-| projects | `workflowEngineProjects` |
-| capabilities | `workflowEngineCapabilities` |
-| health | `workflowEngineHealth` |
-| diagnostics | `workflowEngineDiagnostics` |
+| Facet         | Service name                  |
+| ------------- | ----------------------------- |
+| workflows     | `workflowEngineWorkflows`     |
+| templates     | `workflowEngineTemplates`     |
+| tags          | `workflowEngineTags`          |
+| users         | `workflowEngineUsers`         |
+| projects      | `workflowEngineProjects`      |
+| capabilities  | `workflowEngineCapabilities`  |
+| health        | `workflowEngineHealth`        |
+| diagnostics   | `workflowEngineDiagnostics`   |
 | compatibility | `workflowEngineCompatibility` |
-| connection | `workflowEngineConnection` |
+| connection    | `workflowEngineConnection`    |

@@ -11,7 +11,10 @@ function createConsolidatedFixture(
 ): ConsolidatedOperationalDiagnostics {
   return {
     generatedAt: "2026-07-09T08:00:00.000Z",
-    runtime: { platformReady: true, bootstrap: { package: "@apzhub/platform-bootstrap" } },
+    runtime: {
+      platformReady: true,
+      bootstrap: { package: "@apzhub/platform-bootstrap" },
+    },
     identity: { inMemory: { tenantCount: 1 } },
     authorization: { inMemory: { roleCount: 3 } },
     operations: { consoleSections: 19 },
@@ -89,12 +92,21 @@ function createConsolidatedFixture(
           overrideUsage: [],
           secretStatus: [],
           validationErrors: [],
-          vault: { provider: "none", status: "not-configured", note: "Vault not configured." },
+          vault: {
+            provider: "none",
+            status: "not-configured",
+            note: "Vault not configured.",
+          },
         },
       },
       rateLimit: { backend: "memory", enabled: true, defaultLimitPerMinute: 120 },
       trafficGovernance: {
-        status: { enabled: true, backend: "memory", environment: "test", profileMultiplier: 1 },
+        status: {
+          enabled: true,
+          backend: "memory",
+          environment: "test",
+          profileMultiplier: 1,
+        },
         activePolicy: { id: "default", service: "platform", source: "canonical" },
         rateLimit: { backend: "memory", enabled: true, defaultLimitPerMinute: 120 },
         throttle: { active: false, burstWindowSeconds: 10 },
@@ -130,8 +142,12 @@ describe("platform operations control plane", () => {
     const reports = buildCapabilityHealthReports(consolidated, true);
 
     expect(reports).toHaveLength(PLATFORM_CAPABILITY_DEFINITIONS.length);
-    expect(new Set(reports.map((report) => report.capabilityId)).size).toBe(reports.length);
-    expect(reports.every((report) => report.lastValidation === consolidated.generatedAt)).toBe(true);
+    expect(new Set(reports.map((report) => report.capabilityId)).size).toBe(
+      reports.length,
+    );
+    expect(
+      reports.every((report) => report.lastValidation === consolidated.generatedAt),
+    ).toBe(true);
   });
 
   it("uses consistent health signal values", () => {
@@ -168,7 +184,9 @@ describe("platform operations control plane", () => {
     });
 
     expect(verification.verdict).toBe("NOT_READY");
-    expect(verification.findings.some((finding) => finding.id === "bootstrap.ready")).toBe(true);
+    expect(
+      verification.findings.some((finding) => finding.id === "bootstrap.ready"),
+    ).toBe(true);
   });
 
   it("returns READY_WITH_OBSERVATIONS when warnings exist without failures", () => {
@@ -213,8 +231,12 @@ describe("platform operations control plane", () => {
     const first = buildOperationsControlPlaneSnapshot(input);
     const second = buildOperationsControlPlaneSnapshot(input);
 
-    expect(first.productionVerification.verdict).toBe(second.productionVerification.verdict);
-    expect(first.productionVerification.score).toBe(second.productionVerification.score);
+    expect(first.productionVerification.verdict).toBe(
+      second.productionVerification.verdict,
+    );
+    expect(first.productionVerification.score).toBe(
+      second.productionVerification.score,
+    );
     expect(first.capabilities.length).toBe(second.capabilities.length);
     expect(first.technicalDebt.openCount).toBeGreaterThan(0);
   });

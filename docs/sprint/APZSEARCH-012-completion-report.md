@@ -1,16 +1,16 @@
 # APZHUB Programme — Milestone Completion Report
 
-| Field | Value |
-| --- | --- |
-| **Document ID** | APZSEARCH-012-CR |
-| **Milestone** | APZSEARCH-012 — Documents Search Publication Adapter |
-| **Programme** | APZHUB Platform Search |
-| **Status** | **COMPLETE** |
-| **Classification** | Documents publication adapter (metadata-only; Search Platform frozen) |
-| **Date** | 2026-07-15 |
-| **Authority** | Knowledge Foundation · owner-approved milestone |
-| **Predecessor** | APZSEARCH-011 — Support Search Publication Adapter (Complete) |
-| **Successor** | **APZSEARCH-013 — APZ TCMS Search Publication Adapter** (**recommended; not started; requires owner approval**) |
+| Field              | Value                                                                                                           |
+| ------------------ | --------------------------------------------------------------------------------------------------------------- |
+| **Document ID**    | APZSEARCH-012-CR                                                                                                |
+| **Milestone**      | APZSEARCH-012 — Documents Search Publication Adapter                                                            |
+| **Programme**      | APZHUB Platform Search                                                                                          |
+| **Status**         | **COMPLETE**                                                                                                    |
+| **Classification** | Documents publication adapter (metadata-only; Search Platform frozen)                                           |
+| **Date**           | 2026-07-15                                                                                                      |
+| **Authority**      | Knowledge Foundation · owner-approved milestone                                                                 |
+| **Predecessor**    | APZSEARCH-011 — Support Search Publication Adapter (Complete)                                                   |
+| **Successor**      | **APZSEARCH-013 — APZ TCMS Search Publication Adapter** (**recommended; not started; requires owner approval**) |
 
 ---
 
@@ -26,15 +26,15 @@ No binary indexing, OCR, AI, Meilisearch, Search Platform, HTTP, Workbench, stor
 
 ## 2. Milestone scope delivered
 
-| Item | Outcome |
-| ---- | ------- |
-| Package `@apzhub/search-documents` | **0.1.0** |
-| Publisher / mapper / validator / context / lifecycle | Done |
-| Diagnostics / metrics / logger / error translator | Done |
-| Explicit lifecycle hooks | Done |
-| Safe-field allowlist + storage leakage rejection | Done |
-| Audit `pnpm audit:search-documents` | **PASS** (0) |
-| Docs + foundation stop points | Done |
+| Item                                                 | Outcome      |
+| ---------------------------------------------------- | ------------ |
+| Package `@apzhub/search-documents`                   | **0.1.0**    |
+| Publisher / mapper / validator / context / lifecycle | Done         |
+| Diagnostics / metrics / logger / error translator    | Done         |
+| Explicit lifecycle hooks                             | Done         |
+| Safe-field allowlist + storage leakage rejection     | Done         |
+| Audit `pnpm audit:search-documents`                  | **PASS** (0) |
+| Docs + foundation stop points                        | Done         |
 
 ---
 
@@ -154,14 +154,14 @@ No document-persistence, document-storage, document-core, platform-services, Mei
 
 ## 26. Tests / Coverage / Gates
 
-| Gate | Result |
-| ---- | ------ |
-| Unit tests | **10 PASS** |
-| Typecheck | **PASS** |
-| `pnpm audit:search-documents` | **PASS** |
-| Coverage | **97.03%** lines/statements · **100%** functions · **90.24%** branches |
-| search-integration / projects / support regression | **PASS** |
-| Document foundation (after pin fix) | re-run PASS expected |
+| Gate                                               | Result                                                                 |
+| -------------------------------------------------- | ---------------------------------------------------------------------- |
+| Unit tests                                         | **10 PASS**                                                            |
+| Typecheck                                          | **PASS**                                                               |
+| `pnpm audit:search-documents`                      | **PASS**                                                               |
+| Coverage                                           | **97.03%** lines/statements · **100%** functions · **90.24%** branches |
+| search-integration / projects / support regression | **PASS**                                                               |
+| Document foundation (after pin fix)                | re-run PASS expected                                                   |
 
 ---
 
@@ -196,10 +196,10 @@ Do not implement without owner approval.
 
 ## Document control
 
-| Item | Value |
-| --- | --- |
-| Document ID | **APZSEARCH-012-CR** |
-| Report | `docs/sprint/APZSEARCH-012-completion-report.md` |
-| Audit | `pnpm audit:search-documents` |
+| Item        | Value                                            |
+| ----------- | ------------------------------------------------ |
+| Document ID | **APZSEARCH-012-CR**                             |
+| Report      | `docs/sprint/APZSEARCH-012-completion-report.md` |
+| Audit       | `pnpm audit:search-documents`                    |
 
 **End of report.**

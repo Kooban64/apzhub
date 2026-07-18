@@ -40,7 +40,7 @@ const testContext = {
 describe("@apzhub/integration-sdk package exports", () => {
   it("exposes package identity constants", () => {
     expect(INTEGRATION_SDK_PACKAGE).toBe("@apzhub/integration-sdk");
-    expect(INTEGRATION_SDK_VERSION).toBe("0.9.0");
+    expect(INTEGRATION_SDK_VERSION).toBe("1.0.0");
   });
 
   it("re-exports subpath modules from the root entry", () => {

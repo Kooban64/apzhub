@@ -4,7 +4,8 @@
  * never query identity tables directly from AuthorizationProvider.
  */
 
-export type ActorAccessStatus = "active" | "inactive" | "suspended" | "revoked" | "anonymous";
+export type ActorAccessStatus =
+  "active" | "inactive" | "suspended" | "revoked" | "anonymous";
 
 export type MembershipAccessStatus = "active" | "inactive" | "missing" | "suspended";
 
@@ -91,7 +92,9 @@ export class InMemoryAuthorizationAccessResolver implements AuthorizationAccessR
     this.snapshots.clear();
   }
 
-  async resolve(input: ResolveAuthorizationAccessInput): Promise<AuthorizationAccessSnapshot> {
+  async resolve(
+    input: ResolveAuthorizationAccessInput,
+  ): Promise<AuthorizationAccessSnapshot> {
     const existing = this.snapshots.get(keyFor(input.userId, input.tenantId));
     if (existing) {
       return existing;

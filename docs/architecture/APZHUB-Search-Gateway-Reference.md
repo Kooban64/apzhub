@@ -5,7 +5,10 @@
 ## Access
 
 ```typescript
-const { gateway } = createPlatformServices({ searchPlatform, authorizationMode: "production" });
+const { gateway } = createPlatformServices({
+  searchPlatform,
+  authorizationMode: "production",
+});
 
 await gateway.searchProviders.listProviders(ctx);
 await gateway.searchConfigurations.validate(ctx, configurationId);
@@ -21,9 +24,9 @@ Every facet method runs through `RequestPipeline` (`wrapSearchPlatformGatewayWit
 
 ## Legacy vs platform search
 
-| Accessor | Meaning |
-|----------|---------|
-| `gateway.search` | Legacy Plane/product search scaffold — not APZSEARCH execution |
-| `gateway.searchPlatform` / facet getters | APZSEARCH-003 management plane |
+| Accessor                                 | Meaning                                                        |
+| ---------------------------------------- | -------------------------------------------------------------- |
+| `gateway.search`                         | Legacy Plane/product search scaffold — not APZSEARCH execution |
+| `gateway.searchPlatform` / facet getters | APZSEARCH-003 management plane                                 |
 
 Do not collapse these surfaces.

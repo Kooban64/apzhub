@@ -74,7 +74,10 @@ export interface PlatformServiceErrorContract {
 }
 
 /** Thrown by platform service implementations; mapped to API envelope at gateway. */
-export class PlatformServiceError extends Error implements PlatformServiceErrorContract {
+export class PlatformServiceError
+  extends Error
+  implements PlatformServiceErrorContract
+{
   readonly category: PlatformServiceErrorCategory;
   readonly code: PlatformServiceErrorCode;
   readonly correlationId: string;

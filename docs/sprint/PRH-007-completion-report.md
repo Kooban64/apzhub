@@ -12,27 +12,27 @@ Validate tenant isolation across the platform; implement only fixes required to 
 
 ### Implementation
 
-| Component | Location |
-|-----------|----------|
-| Tenant membership validation | `packages/platform-identity/src/tenant-membership-validation.ts` |
-| Law API membership gate | `apps/web/lib/api/tenant/validate-law-api-tenant-membership.ts` |
-| Authenticated context hardening | `apps/web/lib/api/context/build-authenticated-context.ts` |
-| Search tenant scope | `apps/law-platform/lib/knowledge/legal-search-tenant-scope.ts` |
-| Platform admin route guard | `apps/web/lib/api/platform/platform-route-guard.ts` |
-| Platform ops route protection | `apps/web/app/api/platform/v1/operations/summary/route.ts`, `tenants/route.ts`, `authorization/diagnostics/route.ts` |
+| Component                       | Location                                                                                                             |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Tenant membership validation    | `packages/platform-identity/src/tenant-membership-validation.ts`                                                     |
+| Law API membership gate         | `apps/web/lib/api/tenant/validate-law-api-tenant-membership.ts`                                                      |
+| Authenticated context hardening | `apps/web/lib/api/context/build-authenticated-context.ts`                                                            |
+| Search tenant scope             | `apps/law-platform/lib/knowledge/legal-search-tenant-scope.ts`                                                       |
+| Platform admin route guard      | `apps/web/lib/api/platform/platform-route-guard.ts`                                                                  |
+| Platform ops route protection   | `apps/web/app/api/platform/v1/operations/summary/route.ts`, `tenants/route.ts`, `authorization/diagnostics/route.ts` |
 
 ### Tests
 
-| Suite | Location |
-|-------|----------|
-| RLS cross-tenant denial | `packages/config/src/db/rls-cross-tenant-denial.integration.test.ts` |
-| Tenant membership | `packages/platform-identity/src/tenant-membership-validation.test.ts` |
-| Law API membership | `apps/web/lib/api/tenant/tenant-membership-validation.test.ts` |
-| Law API ALS audit | `apps/web/lib/api/law-api-route-tenant-coverage.test.ts` |
-| Matter repository isolation | `apps/law-platform/lib/matters/postgres-matter-repository.integration.test.ts` |
-| Search isolation | `apps/law-platform/lib/knowledge/legal-search-tenant-isolation.test.ts` |
-| Authorization tenant mismatch | `packages/platform-authorization/src/authorization-tenant-isolation.test.ts` |
-| Platform admin guard | `apps/web/lib/api/platform/platform-api-tenant-guard.test.ts` |
+| Suite                         | Location                                                                       |
+| ----------------------------- | ------------------------------------------------------------------------------ |
+| RLS cross-tenant denial       | `packages/config/src/db/rls-cross-tenant-denial.integration.test.ts`           |
+| Tenant membership             | `packages/platform-identity/src/tenant-membership-validation.test.ts`          |
+| Law API membership            | `apps/web/lib/api/tenant/tenant-membership-validation.test.ts`                 |
+| Law API ALS audit             | `apps/web/lib/api/law-api-route-tenant-coverage.test.ts`                       |
+| Matter repository isolation   | `apps/law-platform/lib/matters/postgres-matter-repository.integration.test.ts` |
+| Search isolation              | `apps/law-platform/lib/knowledge/legal-search-tenant-isolation.test.ts`        |
+| Authorization tenant mismatch | `packages/platform-authorization/src/authorization-tenant-isolation.test.ts`   |
+| Platform admin guard          | `apps/web/lib/api/platform/platform-api-tenant-guard.test.ts`                  |
 
 ### Documentation
 

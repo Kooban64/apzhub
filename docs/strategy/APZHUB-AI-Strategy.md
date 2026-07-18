@@ -18,70 +18,70 @@ AI in APZHUB is a **governed platform capability** — not a feature bolted onto
 
 ### 1. Developer AI
 
-| Aspect | Strategy |
-|--------|----------|
-| **Purpose** | Accelerate manifest-first development, codegen, test generation |
-| **Users** | Engineers, Cursor/IDE workflows |
-| **Models** | Cloud (Cursor); local optional for air-gap |
-| **Governance** | No production secrets in prompts; constitution + foundation docs as context |
-| **Build vs buy** | IDE tools (buy); compliance checker (build) |
-| **Timeline** | Continuous (Cursor rules, skills — already active) |
+| Aspect           | Strategy                                                                    |
+| ---------------- | --------------------------------------------------------------------------- |
+| **Purpose**      | Accelerate manifest-first development, codegen, test generation             |
+| **Users**        | Engineers, Cursor/IDE workflows                                             |
+| **Models**       | Cloud (Cursor); local optional for air-gap                                  |
+| **Governance**   | No production secrets in prompts; constitution + foundation docs as context |
+| **Build vs buy** | IDE tools (buy); compliance checker (build)                                 |
+| **Timeline**     | Continuous (Cursor rules, skills — already active)                          |
 
 ### 2. Knowledge AI
 
-| Aspect | Strategy |
-|--------|----------|
-| **Purpose** | Semantic search, document summarisation, cross-module discovery |
-| **Users** | All platform users |
-| **Integration** | Knowledge & Discovery Framework providers |
-| **Models** | Local embeddings (Ollama/pgvector) default; cloud optional |
-| **RAG** | Permission-filtered index (Document 020); derived not SoR |
-| **Governance** | Query-time permission filter; no index without authz |
-| **Timeline** | Post PCv2-01; after persistent search index |
+| Aspect          | Strategy                                                        |
+| --------------- | --------------------------------------------------------------- |
+| **Purpose**     | Semantic search, document summarisation, cross-module discovery |
+| **Users**       | All platform users                                              |
+| **Integration** | Knowledge & Discovery Framework providers                       |
+| **Models**      | Local embeddings (Ollama/pgvector) default; cloud optional      |
+| **RAG**         | Permission-filtered index (Document 020); derived not SoR       |
+| **Governance**  | Query-time permission filter; no index without authz            |
+| **Timeline**    | Post PCv2-01; after persistent search index                     |
 
 ### 3. Legal AI
 
-| Aspect | Strategy |
-|--------|----------|
-| **Purpose** | Matter summarisation, deadline extraction, document review assist |
-| **Users** | Law Platform users |
-| **Integration** | Law Platform Services — not Workbench directly |
-| **Models** | Enterprise: local preferred; cloud with DPA |
-| **Governance** | Matter-scoped context; audit every AI invocation |
-| **Compliance** | No training on client data; jurisdiction profiles |
-| **Timeline** | Post Law production hardening |
+| Aspect          | Strategy                                                          |
+| --------------- | ----------------------------------------------------------------- |
+| **Purpose**     | Matter summarisation, deadline extraction, document review assist |
+| **Users**       | Law Platform users                                                |
+| **Integration** | Law Platform Services — not Workbench directly                    |
+| **Models**      | Enterprise: local preferred; cloud with DPA                       |
+| **Governance**  | Matter-scoped context; audit every AI invocation                  |
+| **Compliance**  | No training on client data; jurisdiction profiles                 |
+| **Timeline**    | Post Law production hardening                                     |
 
 ### 4. Operational AI
 
-| Aspect | Strategy |
-|--------|----------|
-| **Purpose** | Anomaly detection, incident summarisation, runbook suggestions |
-| **Users** | Platform operators |
-| **Integration** | Operations Console + observability connectors |
-| **Models** | Local or cloud; ops-tier permission only |
-| **Governance** | No PII in ops prompts; masked diagnostics |
-| **Timeline** | Post PCv2-07 observability |
+| Aspect          | Strategy                                                       |
+| --------------- | -------------------------------------------------------------- |
+| **Purpose**     | Anomaly detection, incident summarisation, runbook suggestions |
+| **Users**       | Platform operators                                             |
+| **Integration** | Operations Console + observability connectors                  |
+| **Models**      | Local or cloud; ops-tier permission only                       |
+| **Governance**  | No PII in ops prompts; masked diagnostics                      |
+| **Timeline**    | Post PCv2-07 observability                                     |
 
 ### 5. Workflow AI
 
-| Aspect | Strategy |
-|--------|----------|
-| **Purpose** | Natural language → action execution; automation suggestions |
-| **Users** | Power users |
-| **Integration** | Action Framework AI gateway (stub exists M4) |
-| **Models** | Cloud for NLU; local for classification |
-| **Governance** | Permission-filtered action catalogue; confirm destructive actions |
-| **Timeline** | Post n8n integration (E-24) |
+| Aspect          | Strategy                                                          |
+| --------------- | ----------------------------------------------------------------- |
+| **Purpose**     | Natural language → action execution; automation suggestions       |
+| **Users**       | Power users                                                       |
+| **Integration** | Action Framework AI gateway (stub exists M4)                      |
+| **Models**      | Cloud for NLU; local for classification                           |
+| **Governance**  | Permission-filtered action catalogue; confirm destructive actions |
+| **Timeline**    | Post n8n integration (E-24)                                       |
 
 ---
 
 ## Model strategy
 
-| Tier | Technology | Use case |
-|------|------------|----------|
-| **Local** | Ollama, llama.cpp, pgvector | Enterprise air-gap; embeddings; classification |
-| **Cloud** | OpenAI, Anthropic APIs | Complex reasoning; optional |
-| **Hybrid** | Local embed + cloud reason | Cost/latency balance |
+| Tier       | Technology                  | Use case                                       |
+| ---------- | --------------------------- | ---------------------------------------------- |
+| **Local**  | Ollama, llama.cpp, pgvector | Enterprise air-gap; embeddings; classification |
+| **Cloud**  | OpenAI, Anthropic APIs      | Complex reasoning; optional                    |
+| **Hybrid** | Local embed + cloud reason  | Cost/latency balance                           |
 
 **Default:** Self-hosted local models for enterprise; cloud opt-in per tenant via governance flag.
 
@@ -123,39 +123,39 @@ User intent → Agent Orchestrator (Platform AI Service)
 
 ## Prompt management
 
-| Concern | Approach |
-|---------|----------|
-| Storage | Versioned prompt templates in platform metadata (not code) |
-| Variables | Context injection via typed slots (tenant, matter, user) |
-| Versioning | Semantic version per prompt; rollback support |
-| Testing | Evaluation harness with golden datasets |
-| Exposure | Never in client bundles; server-side only |
+| Concern    | Approach                                                   |
+| ---------- | ---------------------------------------------------------- |
+| Storage    | Versioned prompt templates in platform metadata (not code) |
+| Variables  | Context injection via typed slots (tenant, matter, user)   |
+| Versioning | Semantic version per prompt; rollback support              |
+| Testing    | Evaluation harness with golden datasets                    |
+| Exposure   | Never in client bundles; server-side only                  |
 
 ---
 
 ## Evaluation
 
-| Type | Method |
-|------|--------|
+| Type              | Method                                            |
+| ----------------- | ------------------------------------------------- |
 | Retrieval quality | Precision/recall on permission-filtered test sets |
-| Response quality | Human review + LLM-as-judge (offline) |
-| Safety | Red team prompts; jailbreak resistance |
-| Latency | P95 targets per model tier |
-| Cost | Token metering hooks (PCv2-10) |
+| Response quality  | Human review + LLM-as-judge (offline)             |
+| Safety            | Red team prompts; jailbreak resistance            |
+| Latency           | P95 targets per model tier                        |
+| Cost              | Token metering hooks (PCv2-10)                    |
 
 ---
 
 ## AI governance
 
-| Control | Owner |
-|---------|-------|
-| Feature flags per AI capability | Platform Governance |
-| Model allowlist per tenant | Governance + license |
-| Audit log of AI invocations | Platform audit |
-| Data residency policy | Tenant config |
-| PII redaction before LLM | Platform AI Service |
-| User consent for cloud models | Preference + org policy |
-| Rate limits on AI endpoints | Platform Security |
+| Control                         | Owner                   |
+| ------------------------------- | ----------------------- |
+| Feature flags per AI capability | Platform Governance     |
+| Model allowlist per tenant      | Governance + license    |
+| Audit log of AI invocations     | Platform audit          |
+| Data residency policy           | Tenant config           |
+| PII redaction before LLM        | Platform AI Service     |
+| User consent for cloud models   | Preference + org policy |
+| Rate limits on AI endpoints     | Platform Security       |
 
 **Modules never call LLM APIs directly** — violation of Document 003.
 
@@ -176,12 +176,12 @@ Phase 5: Agent orchestrator platform service
 
 ## Risks
 
-| Risk | Mitigation |
-|------|------------|
-| Data leakage to cloud LLM | Local default; governance gate; redaction |
-| Ungoverned module LLM calls | Architecture compliance checker (E-43) |
-| Hallucination in legal context | Human-in-loop; cite sources; audit |
-| Cost explosion | Rate limits; metering; model tiering |
+| Risk                           | Mitigation                                |
+| ------------------------------ | ----------------------------------------- |
+| Data leakage to cloud LLM      | Local default; governance gate; redaction |
+| Ungoverned module LLM calls    | Architecture compliance checker (E-43)    |
+| Hallucination in legal context | Human-in-loop; cite sources; audit        |
+| Cost explosion                 | Rate limits; metering; model tiering      |
 
 ---
 

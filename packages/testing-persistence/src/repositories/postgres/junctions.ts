@@ -141,7 +141,10 @@ export async function replaceSuiteCases(
   await db
     .delete(testingSuiteCase)
     .where(
-      and(eq(testingSuiteCase.tenantId, tenantId), eq(testingSuiteCase.suiteId, suiteId)),
+      and(
+        eq(testingSuiteCase.tenantId, tenantId),
+        eq(testingSuiteCase.suiteId, suiteId),
+      ),
     );
   if (caseIds.length === 0) return;
   await db.insert(testingSuiteCase).values(
@@ -162,7 +165,10 @@ export async function loadSuiteCaseIds(
     .select({ caseId: testingSuiteCase.caseId })
     .from(testingSuiteCase)
     .where(
-      and(eq(testingSuiteCase.tenantId, tenantId), eq(testingSuiteCase.suiteId, suiteId)),
+      and(
+        eq(testingSuiteCase.tenantId, tenantId),
+        eq(testingSuiteCase.suiteId, suiteId),
+      ),
     );
   return rows
     .map((row) => row.caseId)
@@ -178,7 +184,10 @@ export async function loadSuitePlanIds(
     .select({ planId: testingPlanSuite.planId })
     .from(testingPlanSuite)
     .where(
-      and(eq(testingPlanSuite.tenantId, tenantId), eq(testingPlanSuite.suiteId, suiteId)),
+      and(
+        eq(testingPlanSuite.tenantId, tenantId),
+        eq(testingPlanSuite.suiteId, suiteId),
+      ),
     );
   return rows
     .map((row) => row.planId)
@@ -259,9 +268,7 @@ export async function loadCaseStepIds(
         isNull(testingTestStep.archivedAt),
       ),
     );
-  return rows
-    .map((row) => row.id)
-    .filter((id): id is string => typeof id === "string");
+  return rows.map((row) => row.id).filter((id): id is string => typeof id === "string");
 }
 
 export async function replaceRiskRequirements(

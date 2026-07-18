@@ -1,20 +1,19 @@
 import { checkVersionCompatibility } from "@apzhub/integration-sdk";
 
-import type { PlaneEdition, PlaneCompatibilityMatrix, PlaneFeatureDetectionResult } from "./types";
+import type {
+  PlaneEdition,
+  PlaneCompatibilityMatrix,
+  PlaneFeatureDetectionResult,
+} from "./types";
 
 export const PLANE_SUPPORTED_VERSION_RANGE = {
   min: "0.23.0",
   max: "0.24.99",
 } as const;
 
-export const PLANE_DEPRECATED_APIS = [
-  "legacy_issue_bulk_update_v0",
-] as const;
+export const PLANE_DEPRECATED_APIS = ["legacy_issue_bulk_update_v0"] as const;
 
-export const PLANE_OPTIONAL_CAPABILITIES = [
-  "analytics",
-  "webhooks",
-] as const;
+export const PLANE_OPTIONAL_CAPABILITIES = ["analytics", "webhooks"] as const;
 
 export const PLANE_CE_VS_EE_NOTES = [
   "APZHUB targets Plane Community Edition (CE) APIs only — no mandatory Enterprise Edition dependencies",

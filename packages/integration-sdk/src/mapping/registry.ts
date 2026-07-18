@@ -102,18 +102,20 @@ export class InMemoryMappingRegistry implements MappingRegistry {
 
   getDiagnostics(): MappingDiagnostics {
     const providers = this.list();
-    const providerDiagnostics: MappingProviderDiagnostics[] = providers.map((provider) => {
-      const definitions = provider.listDefinitions();
-      return {
-        id: provider.id,
-        integrationSlug: provider.integrationSlug,
-        entityTypes: [...provider.capabilities.entityTypes],
-        profiles: [...provider.capabilities.profiles],
-        directions: [...provider.capabilities.directions],
-        definitionCount: definitions.length,
-        capabilities: provider.capabilities,
-      };
-    });
+    const providerDiagnostics: MappingProviderDiagnostics[] = providers.map(
+      (provider) => {
+        const definitions = provider.listDefinitions();
+        return {
+          id: provider.id,
+          integrationSlug: provider.integrationSlug,
+          entityTypes: [...provider.capabilities.entityTypes],
+          profiles: [...provider.capabilities.profiles],
+          directions: [...provider.capabilities.directions],
+          definitionCount: definitions.length,
+          capabilities: provider.capabilities,
+        };
+      },
+    );
 
     const entityTypes = new Set<string>();
     let totalDefinitions = 0;

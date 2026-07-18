@@ -2,12 +2,12 @@
 
 ## Packages
 
-| Package | Version | Milestone |
-| --- | --- | --- |
-| `@apzhub/identity-contracts` | **0.2.0** | APZIDENTITY-002 |
-| `@apzhub/identity-core` | **0.2.0** | APZIDENTITY-002 |
-| `@apzhub/identity-persistence` | **0.1.0** | APZIDENTITY-001 |
-| `@apzhub/platform-services` | **0.23.0** | APZIDENTITY-002 (`gateway.identity`) |
+| Package                        | Version    | Milestone                            |
+| ------------------------------ | ---------- | ------------------------------------ |
+| `@apzhub/identity-contracts`   | **0.2.0**  | APZIDENTITY-002                      |
+| `@apzhub/identity-core`        | **0.2.0**  | APZIDENTITY-002                      |
+| `@apzhub/identity-persistence` | **0.1.0**  | APZIDENTITY-001                      |
+| `@apzhub/platform-services`    | **0.23.0** | APZIDENTITY-002 (`gateway.identity`) |
 
 ## Preferred consumption (APZIDENTITY-002)
 

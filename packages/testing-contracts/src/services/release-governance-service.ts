@@ -19,12 +19,9 @@ import type {
 } from "../domain/release-governance";
 import type {
   ReleaseApprovalId,
-  ReleaseCandidateId,
   ReleaseDependencyId,
   ReleaseEvidenceId,
   ReleaseId,
-  ReleaseNoteId,
-  ReleasePackageId,
   ReleaseScopeId,
 } from "../identifiers";
 import type {

@@ -60,7 +60,9 @@ export interface MeilisearchSearchResponse {
   readonly offset?: number;
   readonly estimatedTotalHits?: number;
   readonly totalHits?: number;
-  readonly facetDistribution?: Readonly<Record<string, Readonly<Record<string, number>>>>;
+  readonly facetDistribution?: Readonly<
+    Record<string, Readonly<Record<string, number>>>
+  >;
   readonly facetStats?: Readonly<Record<string, unknown>>;
 }
 

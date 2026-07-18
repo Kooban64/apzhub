@@ -1,12 +1,6 @@
 import type { ServiceRequestContext } from "@apzhub/platform-service-contracts";
-import type {
-  ReleaseId,
-  ReleaseRiskAssessment,
-} from "@apzhub/testing-contracts";
-import {
-  asReleaseId,
-  asReleaseRiskAssessmentId,
-} from "@apzhub/testing-contracts";
+import type { ReleaseId, ReleaseRiskAssessment } from "@apzhub/testing-contracts";
+import { asReleaseId, asReleaseRiskAssessmentId } from "@apzhub/testing-contracts";
 import type { ReleaseRiskAssessmentRecord } from "@apzhub/testing-persistence";
 
 import { toRepositoryContext } from "../mapping/context";
@@ -43,10 +37,7 @@ export function riskAssessmentFromRecord(
   };
 }
 
-function overallRiskLabel(counts: {
-  blockers: number;
-  warnings: number;
-}): string {
+function overallRiskLabel(counts: { blockers: number; warnings: number }): string {
   if (counts.blockers > 0) return "high_risk";
   if (counts.warnings > 0) return "elevated_risk";
   return "low_risk";
@@ -99,9 +90,7 @@ export async function evaluateReleaseRisk(
     else warnings += 1;
   }
 
-  const executions = (
-    await rt.persistence.manualExecutions.list(rctx, listAll)
-  ).items;
+  const executions = (await rt.persistence.manualExecutions.list(rctx, listAll)).items;
   for (const ex of executions) {
     if (
       ex.overallResult === "fail" ||
@@ -117,9 +106,8 @@ export async function evaluateReleaseRisk(
     }
   }
 
-  const autoExecs = (
-    await rt.persistence.automatedExecutions.list(rctx, listAll)
-  ).items;
+  const autoExecs = (await rt.persistence.automatedExecutions.list(rctx, listAll))
+    .items;
   for (const ax of autoExecs) {
     if (
       ax.overallStatus === "fail" ||
@@ -144,9 +132,7 @@ export async function evaluateReleaseRisk(
       warnings += 1;
     }
   }
-  const platformApprovals = (
-    await rt.persistence.approvals.list(rctx, listAll)
-  ).items;
+  const platformApprovals = (await rt.persistence.approvals.list(rctx, listAll)).items;
   for (const a of platformApprovals) {
     if (a.status === "pending") {
       missingApprovalLabels.push(`missing_platform_approval:${a.id}`);

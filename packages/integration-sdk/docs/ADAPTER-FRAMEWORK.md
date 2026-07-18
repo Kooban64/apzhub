@@ -9,13 +9,13 @@
 
 OSS-100-05 delivers the vendor-neutral adapter foundation every APZHUB integration extends:
 
-| Component | Purpose |
-|-----------|---------|
-| `IntegrationAdapterBase` | Abstract class composing the full SDK |
-| `AdapterContext` | Strongly typed dependency injection container |
-| `CapabilityRegistration` | Manifest-driven capability discovery |
-| `AdapterFactory` | Deterministic adapter construction and disposal |
-| `MockAdapter` | Canonical reference implementation |
+| Component                | Purpose                                         |
+| ------------------------ | ----------------------------------------------- |
+| `IntegrationAdapterBase` | Abstract class composing the full SDK           |
+| `AdapterContext`         | Strongly typed dependency injection container   |
+| `CapabilityRegistration` | Manifest-driven capability discovery            |
+| `AdapterFactory`         | Deterministic adapter construction and disposal |
+| `MockAdapter`            | Canonical reference implementation              |
 
 The legacy `AdapterBase` **interface** and `PlaceholderAdapterBase` remain unchanged for backward compatibility.
 
@@ -48,15 +48,15 @@ class ExampleAdapter extends IntegrationAdapterBase {
 
 ### Lifecycle methods
 
-| Method | Purpose |
-|--------|---------|
-| `initialise()` | Validate configuration and run vendor hooks |
-| `connect(context)` | Register and open logical connection |
-| `disconnect(context)` | Close logical connection |
-| `validateConfiguration()` | Manifest and connection validation |
-| `performHealthCheck(context)` | Standard + vendor health checks |
-| `collectDiagnostics(context)` | Unified runtime diagnostics |
-| `dispose(reason)` | Idempotent resource cleanup |
+| Method                        | Purpose                                     |
+| ----------------------------- | ------------------------------------------- |
+| `initialise()`                | Validate configuration and run vendor hooks |
+| `connect(context)`            | Register and open logical connection        |
+| `disconnect(context)`         | Close logical connection                    |
+| `validateConfiguration()`     | Manifest and connection validation          |
+| `performHealthCheck(context)` | Standard + vendor health checks             |
+| `collectDiagnostics(context)` | Unified runtime diagnostics                 |
+| `dispose(reason)`             | Idempotent resource cleanup                 |
 
 ### Protected SDK access
 
@@ -80,8 +80,8 @@ Built via `buildAdapterContext()` — wires auth, connection, health, diagnostic
 ```typescript
 const context = buildAdapterContext({
   configuration: {
-    manifest: { /* integrationId, adapterId, declaredCapabilities, ... */ },
-    connection: { /* optional defaults */ },
+    manifest: {/* integrationId, adapterId, declaredCapabilities, ... */},
+    connection: {/* optional defaults */},
   },
   secretProvider,
   clock,

@@ -25,8 +25,7 @@ export async function handleListTeams(
   const result = await gateway.teams.listTeam(context.serviceContext, query.projectId, {
     page: listQuery.page,
     sort: listQuery.sort as
-      | readonly { field: "role" | "joinedAt"; direction: "asc" | "desc" }[]
-      | undefined,
+      readonly { field: "role" | "joinedAt"; direction: "asc" | "desc" }[] | undefined,
   });
 
   return jsonCollectionResponse(

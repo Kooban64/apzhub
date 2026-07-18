@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 
 import { fetchFeatureFlags } from "@/lib/platform-operations/ops-api";
 
-import { OpsErrorState, OpsJsonPanel, OpsLoadingState, OpsPageShell, OpsTable } from "./ops-ui";
+import {
+  OpsErrorState,
+  OpsJsonPanel,
+  OpsLoadingState,
+  OpsPageShell,
+  OpsTable,
+} from "./ops-ui";
 
 export function FeatureFlagsSection() {
   const [data, setData] = useState<Record<string, unknown> | null>(null);
@@ -18,7 +24,10 @@ export function FeatureFlagsSection() {
         if (active) setData(result);
       })
       .catch((cause: unknown) => {
-        if (active) setError(cause instanceof Error ? cause.message : "Failed to load feature flags.");
+        if (active)
+          setError(
+            cause instanceof Error ? cause.message : "Failed to load feature flags.",
+          );
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -29,7 +38,8 @@ export function FeatureFlagsSection() {
   }, []);
 
   if (loading) return <OpsLoadingState />;
-  if (error || !data) return <OpsErrorState message={error ?? "Feature flags unavailable."} />;
+  if (error || !data)
+    return <OpsErrorState message={error ?? "Feature flags unavailable."} />;
 
   const flags = (data.flags ?? []) as Array<{
     flagKey: string;

@@ -31,7 +31,9 @@ export interface EvaluateReadinessInput {
  * Structured operational readiness validation — required checks block readiness;
  * optional gaps become warnings only.
  */
-export function evaluatePlaneReadiness(input: EvaluateReadinessInput): PlaneReadinessResult {
+export function evaluatePlaneReadiness(
+  input: EvaluateReadinessInput,
+): PlaneReadinessResult {
   const checks: PlaneReadinessCheckResult[] = [
     {
       id: "configuration",
@@ -106,7 +108,9 @@ export function evaluatePlaneReadiness(input: EvaluateReadinessInput): PlaneRead
       id: "metrics_availability",
       ok: input.metricsAvailable,
       required: true,
-      message: input.metricsAvailable ? "Metrics provider available" : "Metrics provider missing",
+      message: input.metricsAvailable
+        ? "Metrics provider available"
+        : "Metrics provider missing",
     },
     {
       id: "logger_availability",
@@ -121,8 +125,12 @@ export function evaluatePlaneReadiness(input: EvaluateReadinessInput): PlaneRead
     .map((check) => `${check.id}:${check.message}`);
 
   const warnings = [
-    ...checks.filter((check) => !check.required && !check.ok).map((check) => check.message),
-    ...input.compatibility.reasons.filter((reason) => reason !== "provider_version_not_detected"),
+    ...checks
+      .filter((check) => !check.required && !check.ok)
+      .map((check) => check.message),
+    ...input.compatibility.reasons.filter(
+      (reason) => reason !== "provider_version_not_detected",
+    ),
   ];
 
   const health = classifyPlaneOperationalHealth({

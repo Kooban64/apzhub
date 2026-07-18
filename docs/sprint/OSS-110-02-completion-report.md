@@ -19,11 +19,11 @@ OSS-110-02 delivers the first APZHUB platform service implementation layer. Five
 *ServiceImpl → ProviderResolver → ProviderRegistry → CapabilityProvider → PlaneCoreServices
 ```
 
-| Layer | Package |
-|-------|---------|
-| Contracts | `@apzhub/platform-service-contracts` |
-| Implementations | `@apzhub/platform-services` |
-| Adapter | `@apzhub/integration-plane` (unchanged) |
+| Layer           | Package                                 |
+| --------------- | --------------------------------------- |
+| Contracts       | `@apzhub/platform-service-contracts`    |
+| Implementations | `@apzhub/platform-services`             |
+| Adapter         | `@apzhub/integration-plane` (unchanged) |
 
 Provider selection supports explicit active provider, priority fallback, and multi-provider registration for future engines.
 
@@ -31,21 +31,21 @@ Provider selection supports explicit active provider, priority fallback, and mul
 
 ## Deliverables
 
-| Deliverable | Status |
-|-------------|--------|
-| `WorkspaceServiceImpl` | ✅ |
-| `ProjectServiceImpl` | ✅ |
-| `TeamServiceImpl` | ✅ |
-| `UserServiceImpl` | ✅ |
-| `SearchServiceImpl` | ✅ |
-| `TaskServiceImpl` | ⏸ Deferred per scope |
-| `ProviderRegistry` | ✅ |
-| `ProviderResolver` | ✅ |
-| Plane capability providers | ✅ |
-| Error propagation mapping | ✅ |
-| Dependency injection factories | ✅ |
-| Unit tests (mocked providers) | ✅ 29 passed |
-| Documentation updates | ✅ |
+| Deliverable                    | Status               |
+| ------------------------------ | -------------------- |
+| `WorkspaceServiceImpl`         | ✅                   |
+| `ProjectServiceImpl`           | ✅                   |
+| `TeamServiceImpl`              | ✅                   |
+| `UserServiceImpl`              | ✅                   |
+| `SearchServiceImpl`            | ✅                   |
+| `TaskServiceImpl`              | ⏸ Deferred per scope |
+| `ProviderRegistry`             | ✅                   |
+| `ProviderResolver`             | ✅                   |
+| Plane capability providers     | ✅                   |
+| Error propagation mapping      | ✅                   |
+| Dependency injection factories | ✅                   |
+| Unit tests (mocked providers)  | ✅ 29 passed         |
+| Documentation updates          | ✅                   |
 
 ---
 
@@ -107,33 +107,33 @@ integrations/plane/docs/PLANE-ADAPTER.md    — platform services wiring note
 
 ## Test statistics
 
-| Suite | Tests |
-|-------|-------|
-| Provider registry/resolver | 10 |
-| Error propagation | 5 |
-| Service delegation | 7 |
-| Plane providers | 7 |
-| **Total** | **29 passed** |
+| Suite                      | Tests         |
+| -------------------------- | ------------- |
+| Provider registry/resolver | 10            |
+| Error propagation          | 5             |
+| Service delegation         | 7             |
+| Plane providers            | 7             |
+| **Total**                  | **29 passed** |
 
 ---
 
 ## Coverage (platform-services scoped)
 
-| Metric | Result |
-|--------|--------|
+| Metric     | Result |
+| ---------- | ------ |
 | Statements | 60.46% |
-| Branches | 86.91% |
-| Functions | 39.50% |
-| Lines | 60.46% |
+| Branches   | 86.91% |
+| Functions  | 39.50% |
+| Lines      | 60.46% |
 
 Higher-signal areas:
 
-| Area | Line coverage |
-|------|---------------|
-| Context mapping | 100% |
-| Error mapping | 95% |
-| Provider registry/resolver | ~88% |
-| Plane workspace provider | 96% |
+| Area                       | Line coverage |
+| -------------------------- | ------------- |
+| Context mapping            | 100%          |
+| Error mapping              | 95%           |
+| Provider registry/resolver | ~88%          |
+| Plane workspace provider   | 96%           |
 
 Lower coverage reflects thin delegation methods on `ProjectServiceImpl` (one-line forwards) not individually exercised — acceptable for OSS-110-02 delegation scope.
 
@@ -141,24 +141,24 @@ Lower coverage reflects thin delegation methods on `ProjectServiceImpl` (one-lin
 
 ## Outstanding technical debt
 
-| Item | Notes |
-|------|-------|
+| Item                    | Notes                                                                                                 |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- |
 | Sprint-by-id operations | `getSprint`, `updateSprint`, etc. require project context — blocked until mapping store (OSS-110-03+) |
-| Milestones | Plane provider throws unsupported — no Plane CE milestone API wired |
-| User directory | Plane provider scaffold throws — platform identity owns users |
-| Search indexing | Returns empty scaffold — awaits Search Framework provider wiring |
-| Permission enforcement | Deferred to gateway/service orchestration milestone |
-| TaskServiceImpl | Explicitly excluded from OSS-110-02 |
+| Milestones              | Plane provider throws unsupported — no Plane CE milestone API wired                                   |
+| User directory          | Plane provider scaffold throws — platform identity owns users                                         |
+| Search indexing         | Returns empty scaffold — awaits Search Framework provider wiring                                      |
+| Permission enforcement  | Deferred to gateway/service orchestration milestone                                                   |
+| TaskServiceImpl         | Explicitly excluded from OSS-110-02                                                                   |
 
 ---
 
 ## Risks
 
-| Risk | Mitigation |
-|------|------------|
-| Sprint ID resolution without project context | Document limitation; mapping store in OSS-110-03 |
-| User/search scaffolds return empty/throw | Clear `PlatformServiceError` / empty results; tests verify |
-| Multi-provider selection complexity | Registry + resolver tested with multiple providers |
+| Risk                                         | Mitigation                                                 |
+| -------------------------------------------- | ---------------------------------------------------------- |
+| Sprint ID resolution without project context | Document limitation; mapping store in OSS-110-03           |
+| User/search scaffolds return empty/throw     | Clear `PlatformServiceError` / empty results; tests verify |
+| Multi-provider selection complexity          | Registry + resolver tested with multiple providers         |
 
 ---
 
@@ -176,13 +176,13 @@ Proceed with **OSS-110-03 — Platform Service Orchestration**:
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| `pnpm --filter @apzhub/platform-services typecheck` | Pass |
+| Gate                                                | Result           |
+| --------------------------------------------------- | ---------------- |
+| `pnpm --filter @apzhub/platform-services typecheck` | Pass             |
 | `pnpm --filter @apzhub/integration-plane typecheck` | Pass (unchanged) |
-| Platform services tests | 29 passed |
-| ESLint (`packages/platform-services`) | Pass |
-| Plane adapter modified | No |
+| Platform services tests                             | 29 passed        |
+| ESLint (`packages/platform-services`)               | Pass             |
+| Plane adapter modified                              | No               |
 
 ---
 

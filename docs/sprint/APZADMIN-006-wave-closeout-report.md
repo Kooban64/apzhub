@@ -7,14 +7,14 @@
 
 The Administration metadata governance SoR programme wave is **closed** and **architecture-frozen**.
 
-| Milestone | Outcome |
-| --- | --- |
-| APZADMIN-001 | Foundation |
-| APZADMIN-002 | Platform Services, Gateway & Authorization |
-| APZADMIN-003 | HTTP API & Typed Client |
-| APZADMIN-004 | Workbench |
+| Milestone    | Outcome                                                        |
+| ------------ | -------------------------------------------------------------- |
+| APZADMIN-001 | Foundation                                                     |
+| APZADMIN-002 | Platform Services, Gateway & Authorization                     |
+| APZADMIN-003 | HTTP API & Typed Client                                        |
+| APZADMIN-004 | Workbench                                                      |
 | APZADMIN-005 | Vertical Certification — **PRODUCTION_READY_WITH_LIMITATIONS** |
-| APZADMIN-006 | Wave Certification & Architecture Freeze |
+| APZADMIN-006 | Wave Certification & Architecture Freeze                       |
 
 ## Freeze artefacts
 

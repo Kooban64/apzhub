@@ -70,7 +70,9 @@ function isHttpUrl(url: string): boolean {
 export class ZammadWebhookService {
   constructor(private readonly deps: ZammadServiceDeps) {}
 
-  validateConfiguration(input: CreateWebhookInput | UpdateWebhookInput): WebhookValidationResult {
+  validateConfiguration(
+    input: CreateWebhookInput | UpdateWebhookInput,
+  ): WebhookValidationResult {
     const issues: string[] = [];
 
     if ("url" in input && input.url !== undefined) {
@@ -86,7 +88,11 @@ export class ZammadWebhookService {
         issues.push("event_types_required");
       }
       for (const eventType of input.eventTypes) {
-        if (!(ZAMMAD_SUPPORTED_WEBHOOK_EVENT_TYPES as readonly string[]).includes(eventType)) {
+        if (
+          !(ZAMMAD_SUPPORTED_WEBHOOK_EVENT_TYPES as readonly string[]).includes(
+            eventType,
+          )
+        ) {
           issues.push(`unsupported_event_type:${eventType}`);
         }
       }
@@ -95,7 +101,9 @@ export class ZammadWebhookService {
     return { ok: issues.length === 0, issues };
   }
 
-  async list(context: IntegrationRequestContext): Promise<readonly WebhookRegistration[]> {
+  async list(
+    context: IntegrationRequestContext,
+  ): Promise<readonly WebhookRegistration[]> {
     return this.deps.runner.run(context, "zammad.webhooks.list", async () => {
       const response = await this.deps.client.listWebhooks(
         context,
@@ -139,7 +147,10 @@ export class ZammadWebhookService {
         ...buildWebhookBody(input),
       });
       this.deps.metricsProvider
-        ?.counter("zammad.webhook.registration", { operation: "create", result: "success" })
+        ?.counter("zammad.webhook.registration", {
+          operation: "create",
+          result: "success",
+        })
         .inc();
       return mapWebhook(record);
     });
@@ -164,7 +175,10 @@ export class ZammadWebhookService {
         buildWebhookBody(input),
       );
       this.deps.metricsProvider
-        ?.counter("zammad.webhook.registration", { operation: "update", result: "success" })
+        ?.counter("zammad.webhook.registration", {
+          operation: "update",
+          result: "success",
+        })
         .inc();
       return mapWebhook(record);
     });
@@ -176,7 +190,10 @@ export class ZammadWebhookService {
     return this.deps.runner.run(context, "zammad.webhooks.delete", async () => {
       await this.deps.client.deleteWebhook(context, extractWebhookZammadId(webhookId));
       this.deps.metricsProvider
-        ?.counter("zammad.webhook.registration", { operation: "delete", result: "success" })
+        ?.counter("zammad.webhook.registration", {
+          operation: "delete",
+          result: "success",
+        })
         .inc();
     });
   }

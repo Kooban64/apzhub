@@ -2,7 +2,7 @@
 
 > **Story:** LAW-014-07  
 > **Base path:** `/api/law/v1/`  
-> **OpenAPI:** [/api/law/v1/openapi.yaml](/api/law/v1/openapi.yaml)
+> **OpenAPI:** [/api/law/v1/openapi.yaml](../specs/LAW-OpenAPI-v1.yaml)
 
 ---
 
@@ -77,9 +77,9 @@ Clients, Matters, Documents, Tasks, Calendar Events, Time Entries, Invoices.
 
 ## Interactive docs
 
-- **Documentation landing:** [/api/docs](/api/docs)
-- **OpenAPI YAML:** [/api/law/v1/openapi.yaml](/api/law/v1/openapi.yaml)
-- **OpenAPI JSON:** [/api/law/v1/openapi.json](/api/law/v1/openapi.json)
+- **Documentation landing:** [/api/docs](../developer/legal-api-developer-guide.md)
+- **OpenAPI YAML:** [/api/law/v1/openapi.yaml](../specs/LAW-OpenAPI-v1.yaml)
+- **OpenAPI JSON:** [/api/law/v1/openapi.json](../specs/LAW-OpenAPI-v1.yaml)
 
 ---
 

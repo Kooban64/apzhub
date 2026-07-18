@@ -193,7 +193,10 @@ export type CreatePlanInput = { readonly name: string };
 export type CreateSuiteInput = { readonly name: string; readonly planId: string };
 export type CreateCaseInput = { readonly title: string; readonly suiteId: string };
 export type StartExecutionInput = { readonly caseId: string };
-export type EvidenceSubmitInput = { readonly executionId: string; readonly title: string };
+export type EvidenceSubmitInput = {
+  readonly executionId: string;
+  readonly title: string;
+};
 export type ApprovalDecisionInput = {
   readonly certificationId: string;
   readonly decision: "approve" | "reject" | "review";

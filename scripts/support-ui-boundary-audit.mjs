@@ -15,10 +15,7 @@ const ROOT = process.cwd();
 /** @type {Violation[]} */
 const violations = [];
 
-const SCAN_ROOTS = [
-  "apps/web/components/support",
-  "apps/web/lib/support",
-];
+const SCAN_ROOTS = ["apps/web/components/support", "apps/web/lib/support"];
 
 const FORBIDDEN = [
   {
@@ -56,7 +53,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -122,7 +120,9 @@ for (const root of SCAN_ROOTS) {
 }
 
 if (violations.length > 0) {
-  console.error(`Support UI boundary audit FAILED (${violations.length} violation(s)):`);
+  console.error(
+    `Support UI boundary audit FAILED (${violations.length} violation(s)):`,
+  );
   for (const v of violations) {
     console.error(`  [${v.rule}] ${v.file}:${v.line} — ${v.detail}`);
   }

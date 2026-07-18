@@ -25,12 +25,12 @@ PostgreSQL (metadata)
 
 ## Packages
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/observe-contracts` | **0.2.0** |
-| `@apzhub/observe-core` | **0.2.0** |
-| `@apzhub/observe-persistence` | **0.1.0** |
-| `@apzhub/platform-services` | **0.24.0** |
+| Package                       | Version    |
+| ----------------------------- | ---------- |
+| `@apzhub/observe-contracts`   | **0.2.0**  |
+| `@apzhub/observe-core`        | **0.2.0**  |
+| `@apzhub/observe-persistence` | **0.1.0**  |
+| `@apzhub/platform-services`   | **0.24.0** |
 
 ## Ownership
 

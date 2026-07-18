@@ -44,18 +44,14 @@ describe("DocumentClientError", () => {
     expect(err.correlationId).toBe("c1");
     expect(toDocumentUserMessage(err)).toContain("permission");
     expect(
-      toDocumentUserMessage(
-        new DocumentClientError({ message: "x", status: 401 }),
-      ),
+      toDocumentUserMessage(new DocumentClientError({ message: "x", status: 401 })),
     ).toContain("authorized");
     expect(
-      toDocumentUserMessage(
-        new DocumentClientError({ message: "x", status: 404 }),
-      ),
+      toDocumentUserMessage(new DocumentClientError({ message: "x", status: 404 })),
     ).toContain("not found");
-    expect(
-      toDocumentUserMessage(new DocumentClientError({ message: "custom" })),
-    ).toBe("custom");
+    expect(toDocumentUserMessage(new DocumentClientError({ message: "custom" }))).toBe(
+      "custom",
+    );
     expect(toDocumentUserMessage(new Error("plain"))).toBe("plain");
     expect(toDocumentUserMessage("nope")).toContain("Unable");
   });

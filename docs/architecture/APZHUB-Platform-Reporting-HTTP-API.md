@@ -17,17 +17,17 @@ Handlers contain no business logic.
 
 ## Endpoints
 
-| Method | Path | Gateway op |
-|--------|------|------------|
-| GET | `/formats` | static formats |
-| GET | `/types` | `listAvailableReports` |
-| GET | `/templates` | `listTemplates` |
-| GET | `/templates/{templateId}` | `getTemplate` |
-| POST | `/validate` | `validateReport` |
-| POST | `/generate` | `generateReport` |
-| POST | `/preview` | `previewReport` |
-| GET | `/generations` | `listReportMetadata` |
-| GET | `/generations/{metadataId}` | `getReportMetadata` |
+| Method | Path                        | Gateway op             |
+| ------ | --------------------------- | ---------------------- |
+| GET    | `/formats`                  | static formats         |
+| GET    | `/types`                    | `listAvailableReports` |
+| GET    | `/templates`                | `listTemplates`        |
+| GET    | `/templates/{templateId}`   | `getTemplate`          |
+| POST   | `/validate`                 | `validateReport`       |
+| POST   | `/generate`                 | `generateReport`       |
+| POST   | `/preview`                  | `previewReport`        |
+| GET    | `/generations`              | `listReportMetadata`   |
+| GET    | `/generations/{metadataId}` | `getReportMetadata`    |
 
 ## Permissions
 

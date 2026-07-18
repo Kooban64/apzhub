@@ -9,14 +9,20 @@ import {
   enforceTrafficGovernanceForHandler,
 } from "@apzhub/platform-security/traffic";
 
-import { authenticatePlatformApiRequest, requireAuthenticatedSession } from "./authenticate";
+import {
+  authenticatePlatformApiRequest,
+  requireAuthenticatedSession,
+} from "./authenticate";
 import {
   PlatformApiHttpError,
   translatePlatformApiError,
   validationError,
 } from "../errors";
 import { logPlatformApiRequest, logPlatformApiResponse } from "../logging";
-import { createPlatformApiTracing, resolvePlatformApiTracing } from "../request-context";
+import {
+  createPlatformApiTracing,
+  resolvePlatformApiTracing,
+} from "../request-context";
 import { buildServiceRequestContext } from "../service-context";
 import type { PlatformApiTracingContext } from "../types";
 

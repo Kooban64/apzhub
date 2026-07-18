@@ -61,7 +61,11 @@ export async function handleCreateProject(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const body = await parseJsonBody(request, createProjectBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const body = await parseJsonBody(
+    request,
+    createProjectBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
   const gateway = await getPlatformServiceGateway();
   const project = await gateway.projects.createProject(context.serviceContext, body);
   return jsonDataResponse(project, context.tracing, { status: 201 });
@@ -78,7 +82,11 @@ export async function handleUpdateProject(
     params?.projectId ?? "",
     "projectId",
   );
-  const body = await parseJsonBody(request, updateProjectBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const body = await parseJsonBody(
+    request,
+    updateProjectBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
   const gateway = await getPlatformServiceGateway();
   const project = await gateway.projects.updateProject(
     context.serviceContext,

@@ -37,10 +37,19 @@ export function classifyResponseKind(
   if (lower.includes("event-stream") || lower.includes("ndjson")) {
     return "stream";
   }
-  if (lower.startsWith("text/") || lower.includes("xml") || lower.includes("javascript")) {
+  if (
+    lower.startsWith("text/") ||
+    lower.includes("xml") ||
+    lower.includes("javascript")
+  ) {
     return "text";
   }
-  if (lower.includes("octet-stream") || lower.startsWith("image/") || lower.startsWith("audio/") || lower.startsWith("video/")) {
+  if (
+    lower.includes("octet-stream") ||
+    lower.startsWith("image/") ||
+    lower.startsWith("audio/") ||
+    lower.startsWith("video/")
+  ) {
     return "binary";
   }
 

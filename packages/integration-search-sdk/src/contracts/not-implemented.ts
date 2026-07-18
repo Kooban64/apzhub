@@ -5,8 +5,7 @@
 
 export const SEARCH_OPERATION_STATUS_NOT_IMPLEMENTED = "NOT_IMPLEMENTED" as const;
 
-export type SearchOperationStatus =
-  typeof SEARCH_OPERATION_STATUS_NOT_IMPLEMENTED;
+export type SearchOperationStatus = typeof SEARCH_OPERATION_STATUS_NOT_IMPLEMENTED;
 
 export type SearchOperationName =
   | "query"
@@ -21,14 +20,15 @@ export type SearchOperationName =
   | "capabilities"
   | "validation";
 
-export type SearchNotImplementedResult<TOperation extends SearchOperationName = SearchOperationName> =
-  {
-    readonly status: typeof SEARCH_OPERATION_STATUS_NOT_IMPLEMENTED;
-    readonly operation: TOperation;
-    readonly message: string;
-    readonly executionEnabled: false;
-    readonly hits?: never;
-  };
+export type SearchNotImplementedResult<
+  TOperation extends SearchOperationName = SearchOperationName,
+> = {
+  readonly status: typeof SEARCH_OPERATION_STATUS_NOT_IMPLEMENTED;
+  readonly operation: TOperation;
+  readonly message: string;
+  readonly executionEnabled: false;
+  readonly hits?: never;
+};
 
 export function createNotImplementedResult<TOperation extends SearchOperationName>(
   operation: TOperation,

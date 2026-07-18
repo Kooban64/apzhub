@@ -7,10 +7,10 @@
 
 ## Suite timings
 
-| Measurement | Value |
-| ----------- | ----- |
+| Measurement                                       | Value            |
+| ------------------------------------------------- | ---------------- |
 | Vertical regression Vitest (17 files / 103 tests) | **~9.74 s** wall |
-| APZTCMS-019 comparable run | ~10.8 s |
+| APZTCMS-019 comparable run                        | ~10.8 s          |
 
 ## Coverage collection batch
 
@@ -18,6 +18,6 @@ Included adapter, providers, domain pipelines, and presentation module coverage 
 
 ## Notes
 
-- No live GitHub API latency sampled.  
-- No rendering FPS / browser profiling.  
+- No live GitHub API latency sampled.
+- No rendering FPS / browser profiling.
 - Official baseline for future CI/CD adapters: meet or beat these quality bars without claiming this wall-clock as an SLA.

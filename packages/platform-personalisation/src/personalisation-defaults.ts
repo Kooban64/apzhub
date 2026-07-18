@@ -46,7 +46,11 @@ export async function seedDefaultPreferencesForUser(
 }
 
 export function mergePreferencesFromRecords(
-  records: readonly { category: PersonalisationCategory; preferenceKey: string; value: unknown }[],
+  records: readonly {
+    category: PersonalisationCategory;
+    preferenceKey: string;
+    value: unknown;
+  }[],
 ): UserPreferences {
   const merged: UserPreferences = structuredClone(DEFAULT_USER_PREFERENCES);
 

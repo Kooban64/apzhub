@@ -85,7 +85,11 @@ export function createRiskService(rt: ServiceRuntime): RiskService {
     },
     async update(ctx, id, input) {
       const rctx = toRepositoryContext(ctx);
-      const existing = requireFound(await rt.persistence.risks.get(rctx, id), "risk", id);
+      const existing = requireFound(
+        await rt.persistence.risks.get(rctx, id),
+        "risk",
+        id,
+      );
       if (input.likelihood) assertValidLikelihood(input.likelihood);
       const row = await rt.persistence.risks.update(rctx, id, existing.revision, {
         title: input.title,
@@ -111,7 +115,11 @@ export function createRiskService(rt: ServiceRuntime): RiskService {
     },
     async archive(ctx, id: RiskId) {
       const rctx = toRepositoryContext(ctx);
-      const existing = requireFound(await rt.persistence.risks.get(rctx, id), "risk", id);
+      const existing = requireFound(
+        await rt.persistence.risks.get(rctx, id),
+        "risk",
+        id,
+      );
       return toDomain(await rt.persistence.risks.archive(rctx, id, existing.revision));
     },
     async setSeverity(ctx, id, severity: Severity) {

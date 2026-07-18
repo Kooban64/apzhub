@@ -14,15 +14,15 @@ const workflows = await client.listWorkflows({ lifecycle: "draft" });
 
 ## Modules
 
-| File | Role |
-|------|------|
-| `workflow-client.ts` | `createHttpWorkflowClient` — fetch `/api/v1/workflows` only |
-| `mock-workflow-client.ts` | In-memory mock for tests |
-| `workflow-api.ts` | Module accessor + facade helpers |
-| `workflow-types.ts` | View models / inputs |
-| `workflow-errors.ts` | `WorkflowClientError` |
-| `routes.ts` | Path helpers + forbidden segments |
-| `query-keys.ts` | TanStack Query keys |
+| File                      | Role                                                        |
+| ------------------------- | ----------------------------------------------------------- |
+| `workflow-client.ts`      | `createHttpWorkflowClient` — fetch `/api/v1/workflows` only |
+| `mock-workflow-client.ts` | In-memory mock for tests                                    |
+| `workflow-api.ts`         | Module accessor + facade helpers                            |
+| `workflow-types.ts`       | View models / inputs                                        |
+| `workflow-errors.ts`      | `WorkflowClientError`                                       |
+| `routes.ts`               | Path helpers + forbidden segments                           |
+| `query-keys.ts`           | TanStack Query keys                                         |
 
 ## Constraints
 

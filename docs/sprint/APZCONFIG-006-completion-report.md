@@ -14,11 +14,11 @@ Formally closed the Platform Configuration SoR programme wave. Froze contracts, 
 
 ## Wave Summary
 
-| Milestone | Outcome |
-| --------- | ------- |
-| APZCONFIG-001…004 | Foundation → Services → HTTP/Client → Workbench |
-| APZCONFIG-005 | Vertical Certification **PRODUCTION_READY_WITH_LIMITATIONS** |
-| APZCONFIG-006 | Wave closeout + architecture freeze + Reference Standard |
+| Milestone         | Outcome                                                      |
+| ----------------- | ------------------------------------------------------------ |
+| APZCONFIG-001…004 | Foundation → Services → HTTP/Client → Workbench              |
+| APZCONFIG-005     | Vertical Certification **PRODUCTION_READY_WITH_LIMITATIONS** |
+| APZCONFIG-006     | Wave closeout + architecture freeze + Reference Standard     |
 
 See [Programme Summary](./APZCONFIG-006-programme-summary.md) · [Wave Closeout Report](./APZCONFIG-006-wave-closeout-report.md).
 
@@ -49,12 +49,12 @@ Metadata SoR only. **RUNTIME RESOLUTION NOT AVAILABLE.** Feature flags / secrets
 
 ## Quality Evidence
 
-| Gate | Result |
-| ---- | ------ |
-| `pnpm audit:configuration-vertical` | PASS |
-| `pnpm audit:configuration-wave` | PASS |
-| OpenAPI validate | PASS |
-| Package versions | Frozen Configuration packages (contracts/core 0.2.0 · persistence 0.1.0); `platform-services` **0.22.0** (additive Administration only) |
+| Gate                                | Result                                                                                                                                  |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `pnpm audit:configuration-vertical` | PASS                                                                                                                                    |
+| `pnpm audit:configuration-wave`     | PASS                                                                                                                                    |
+| OpenAPI validate                    | PASS                                                                                                                                    |
+| Package versions                    | Frozen Configuration packages (contracts/core 0.2.0 · persistence 0.1.0); `platform-services` **0.22.0** (additive Administration only) |
 
 Details: [Quality Evidence](../reviews/APZCONFIG-006-Quality-Evidence.md) · [Wave Certification](../reviews/APZCONFIG-006-Wave-Certification.md)
 
@@ -68,12 +68,12 @@ Details: [Quality Evidence](../reviews/APZCONFIG-006-Quality-Evidence.md) · [Wa
 
 ## Known Limitations
 
-- Metadata plane only  
-- Runtime resolution / apply unavailable by design  
-- Feature flags / secrets / hot reload / Event Bus unavailable by design  
-- Playwright live LIMITED (external Testing slug conflict)  
-- Live Postgres optional in unit CI  
-- Configuration SoR ≠ `@apzhub/config` runtime manager  
+- Metadata plane only
+- Runtime resolution / apply unavailable by design
+- Feature flags / secrets / hot reload / Event Bus unavailable by design
+- Playwright live LIMITED (external Testing slug conflict)
+- Live Postgres optional in unit CI
+- Configuration SoR ≠ `@apzhub/config` runtime manager
 
 ## Operational Readiness
 
@@ -85,10 +85,10 @@ Details: [Quality Evidence](../reviews/APZCONFIG-006-Quality-Evidence.md) · [Wa
 
 ## Documentation Produced
 
-- Wave Closeout Report · Programme Summary · Completion Report  
-- Architecture Freeze Notice · Configuration Reference Standard  
-- Operational Readiness Guide · Future Configuration Platform Guide  
-- Wave Certification · Quality Evidence · Architecture Freeze Review · Security Confirmation  
+- Wave Closeout Report · Programme Summary · Completion Report
+- Architecture Freeze Notice · Configuration Reference Standard
+- Operational Readiness Guide · Future Configuration Platform Guide
+- Wave Certification · Quality Evidence · Architecture Freeze Review · Security Confirmation
 
 ## Recommendation
 

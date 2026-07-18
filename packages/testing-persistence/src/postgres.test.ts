@@ -31,7 +31,16 @@ function createMockDb(rows: unknown[] = []) {
 const ctx: RepositoryContext = {
   tenantId: "tenant-a",
   actorUserId: "user-1",
-  permissions: ["testing.*", "administration.*", "evidence.*", "approval.*", "certification.*", "reporting.*", "automation.*", "traceability.*"],
+  permissions: [
+    "testing.*",
+    "administration.*",
+    "evidence.*",
+    "approval.*",
+    "certification.*",
+    "reporting.*",
+    "automation.*",
+    "traceability.*",
+  ],
 };
 
 function metaRow(overrides: Record<string, unknown> = {}) {

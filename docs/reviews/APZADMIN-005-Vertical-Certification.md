@@ -21,16 +21,16 @@ Administration Workbench
 
 ## Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:admin-foundation` | PASS |
-| `pnpm audit:administration-platform-services` | PASS |
-| `pnpm audit:administration-http-client` | PASS |
-| `pnpm audit:administration-workbench` | PASS |
-| `pnpm audit:administration-vertical` | PASS (required) |
-| `pnpm openapi:validate:platform` | PASS |
-| Vitest `testing/administration-vertical` | Required harness |
-| Playwright live webServer | LIMITED (Testing slug conflict — external) |
+| Gate                                          | Result                                     |
+| --------------------------------------------- | ------------------------------------------ |
+| `pnpm audit:admin-foundation`                 | PASS                                       |
+| `pnpm audit:administration-platform-services` | PASS                                       |
+| `pnpm audit:administration-http-client`       | PASS                                       |
+| `pnpm audit:administration-workbench`         | PASS                                       |
+| `pnpm audit:administration-vertical`          | PASS (required)                            |
+| `pnpm openapi:validate:platform`              | PASS                                       |
+| Vitest `testing/administration-vertical`      | Required harness                           |
+| Playwright live webServer                     | LIMITED (Testing slug conflict — external) |
 
 ## Intentional non-defects
 

@@ -33,7 +33,10 @@ import {
   listRegisteredPlaceholderCapabilityIds,
   ZAMMAD_PLACEHOLDER_CAPABILITIES,
 } from "./capabilities/placeholder-capabilities";
-import { ZAMMAD_CORE_SERVICE_CAPABILITIES, getZammadCoreServiceCapability } from "./capabilities/service-capabilities";
+import {
+  ZAMMAD_CORE_SERVICE_CAPABILITIES,
+  getZammadCoreServiceCapability,
+} from "./capabilities/service-capabilities";
 import {
   createZammadCoreServices,
   type ZammadCoreServices,
@@ -226,8 +229,7 @@ export class ZammadAdapter extends IntegrationAdapterBase {
       loggerAvailable: Boolean(context.logger),
       metricsAvailable: Boolean(context.metrics) && Boolean(context.metricsProvider),
       diagnosticsAvailable: true,
-      edition:
-        this.detectedEdition === "unknown" ? "community" : this.detectedEdition,
+      edition: this.detectedEdition === "unknown" ? "community" : this.detectedEdition,
     });
   }
 
@@ -254,15 +256,7 @@ export class ZammadAdapter extends IntegrationAdapterBase {
       articleListingAvailable: coreAvailable,
       internalNoteCreationAvailable: coreAvailable,
       customerReplyCreationAvailable: coreAvailable,
-      supportedArticleChannels: [
-        "note",
-        "email",
-        "phone",
-        "web",
-        "chat",
-        "sms",
-        "fax",
-      ],
+      supportedArticleChannels: ["note", "email", "phone", "web", "chat", "sms", "fax"],
       attachmentMetadataSupport: true,
       binaryAttachmentSupport: false,
       unsupportedArticleMutations: ["update", "delete"],
@@ -677,9 +671,7 @@ export class ZammadAdapter extends IntegrationAdapterBase {
       warnings.push(`operational:${reason}`);
     }
     if (compatibility.unsupportedFeatures.length > 0) {
-      warnings.push(
-        `unsupported_features:${compatibility.unsupportedFeatures.length}`,
-      );
+      warnings.push(`unsupported_features:${compatibility.unsupportedFeatures.length}`);
     }
 
     const sdkCompatibility =

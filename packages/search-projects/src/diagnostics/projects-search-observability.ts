@@ -2,9 +2,7 @@
  * ProjectsSearchMetrics / Diagnostics / Logger / Error translator (APZSEARCH-010).
  */
 
-import type {
-  SearchPublicationOperation,
-} from "@apzhub/search-integration";
+import type { SearchPublicationOperation } from "@apzhub/search-integration";
 import { SearchPublicationErrorTranslator } from "@apzhub/search-integration";
 import { SearchDomainError } from "@apzhub/search-contracts";
 
@@ -39,10 +37,7 @@ export class ProjectsSearchMetrics {
     entityType?: string,
   ): void {
     if (entityType) {
-      this.byEntityType.set(
-        entityType,
-        (this.byEntityType.get(entityType) ?? 0) + 1,
-      );
+      this.byEntityType.set(entityType, (this.byEntityType.get(entityType) ?? 0) + 1);
     }
     if (!ok) {
       if (operation === "validate") this.validationFailures += 1;

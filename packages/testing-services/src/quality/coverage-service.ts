@@ -18,10 +18,7 @@ import type { CoverageRecord } from "@apzhub/testing-persistence";
 import { toRepositoryContext } from "../mapping/context";
 import { requireFound } from "../services/errors";
 import type { ServiceRuntime } from "../services/types";
-import {
-  coveragePercentage,
-  stableSortIds,
-} from "./calculations";
+import { coveragePercentage, stableSortIds } from "./calculations";
 import { assertCoverageIntegrity } from "./validation";
 
 function toDomain(row: CoverageRecord): CoverageMetric {
@@ -36,9 +33,7 @@ function toDomain(row: CoverageRecord): CoverageMetric {
     computedAt: row.computedAt,
     planId: row.planId ? asTestPlanId(row.planId) : undefined,
     suiteId: row.suiteId ? asTestSuiteId(row.suiteId) : undefined,
-    requirementId: row.requirementId
-      ? asRequirementId(row.requirementId)
-      : undefined,
+    requirementId: row.requirementId ? asRequirementId(row.requirementId) : undefined,
     riskId: row.riskId ? asRiskId(row.riskId) : undefined,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
@@ -75,15 +70,11 @@ async function computeCoverageForScope(
   const manualExecs = (await rt.persistence.manualExecutions.list(rctx)).items;
   const autoExecs = (await rt.persistence.automatedExecutions.list(rctx)).items;
 
-  const scopedPlans = scope.planId
-    ? plans.filter((p) => p.id === scope.planId)
-    : plans;
+  const scopedPlans = scope.planId ? plans.filter((p) => p.id === scope.planId) : plans;
   const scopedSuites = scope.suiteId
     ? suites.filter((s) => s.id === scope.suiteId)
     : scope.planId
-      ? suites.filter((s) =>
-          scopedPlans.some((p) => p.suiteIds.includes(s.id)),
-        )
+      ? suites.filter((s) => scopedPlans.some((p) => p.suiteIds.includes(s.id)))
       : suites;
   const scopedCases = cases.filter((c) =>
     scopedSuites.length === 0
@@ -91,9 +82,9 @@ async function computeCoverageForScope(
       : c.suiteIds.some((sid) => scopedSuites.some((s) => s.id === sid)),
   );
   const scopedReqIds = new Set(
-    scopedPlans.flatMap((p) => p.requirementIds).concat(
-      scopedCases.flatMap((c) => c.requirementIds),
-    ),
+    scopedPlans
+      .flatMap((p) => p.requirementIds)
+      .concat(scopedCases.flatMap((c) => c.requirementIds)),
   );
   const scopedReqs =
     scopedReqIds.size > 0
@@ -115,9 +106,7 @@ async function computeCoverageForScope(
           (l.sourceKind === "case" || l.sourceKind === "test_case")),
     );
     const hasExec = manualExecs.some((e) =>
-      scopedCases.some(
-        (c) => c.id === e.caseId && c.requirementIds.includes(req.id),
-      ),
+      scopedCases.some((c) => c.id === e.caseId && c.requirementIds.includes(req.id)),
     );
     return hasCase || hasLink || hasExec;
   });
@@ -222,9 +211,7 @@ async function computeCoverageForScope(
   // Risk coverage
   const scopedRisks =
     scope.planId || scope.suiteId
-      ? risks.filter((r) =>
-          r.requirementIds.some((rid) => scopedReqIds.has(rid)),
-        )
+      ? risks.filter((r) => r.requirementIds.some((rid) => scopedReqIds.has(rid)))
       : risks;
   const riskCovered = scopedRisks.filter((risk) => {
     const hasCase = scopedCases.some((c) =>
@@ -259,8 +246,7 @@ async function computeCoverageForScope(
   }
 
   return results.sort(
-    (a, b) =>
-      a.kind.localeCompare(b.kind) || a.subjectId.localeCompare(b.subjectId),
+    (a, b) => a.kind.localeCompare(b.kind) || a.subjectId.localeCompare(b.subjectId),
   );
 }
 
@@ -277,10 +263,7 @@ async function persistComputed(
     assertCoverageIntegrity(item.coveredCount, item.totalCount);
     const percentage = coveragePercentage(item.coveredCount, item.totalCount);
     const match = existing.find(
-      (e) =>
-        e.kind === item.kind &&
-        e.subjectId === item.subjectId &&
-        !e.archivedAt,
+      (e) => e.kind === item.kind && e.subjectId === item.subjectId && !e.archivedAt,
     );
     const payload = {
       kind: item.kind,
@@ -317,9 +300,7 @@ async function persistComputed(
 export function createCoverageService(rt: ServiceRuntime): CoverageService {
   return {
     async listMetrics(ctx) {
-      const page = await rt.persistence.coverageRecords.list(
-        toRepositoryContext(ctx),
-      );
+      const page = await rt.persistence.coverageRecords.list(toRepositoryContext(ctx));
       return page.items.map(toDomain);
     },
     async getMetric(ctx, id: CoverageMetricId) {

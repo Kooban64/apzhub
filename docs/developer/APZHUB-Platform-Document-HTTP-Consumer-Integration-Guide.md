@@ -23,15 +23,15 @@ Workbench / Typed Client → HTTP → Gateway → RequestPipeline → Authz
 
 ## Future consumer onboarding (document only — not implemented)
 
-| Product | Suggested first use | Notes |
-| ------- | ------------------- | ----- |
-| **Projects** | Spec / delivery artefact metadata refs | No Plane DTOs in UI |
-| **Support** | Ticket attachment metadata refs | No Zammad DTOs in UI |
-| **Reporting** | Evidence / control pack metadata | Coordinate with reporting; no binary SoR in reporting |
-| **APZ TCMS** | Evidence metadata linkage | Uploads remain out of Document HTTP scope here |
-| **Documents** | Operator Workbench (delivered) | Metadata only |
-| **Workflow** | Approval artefact references | No Event Bus required for metadata reads |
-| **Analytics** | Derived document counts/status | Derived indexes only; Document SoR remains engines/platform docs |
+| Product       | Suggested first use                    | Notes                                                            |
+| ------------- | -------------------------------------- | ---------------------------------------------------------------- |
+| **Projects**  | Spec / delivery artefact metadata refs | No Plane DTOs in UI                                              |
+| **Support**   | Ticket attachment metadata refs        | No Zammad DTOs in UI                                             |
+| **Reporting** | Evidence / control pack metadata       | Coordinate with reporting; no binary SoR in reporting            |
+| **APZ TCMS**  | Evidence metadata linkage              | Uploads remain out of Document HTTP scope here                   |
+| **Documents** | Operator Workbench (delivered)         | Metadata only                                                    |
+| **Workflow**  | Approval artefact references           | No Event Bus required for metadata reads                         |
+| **Analytics** | Derived document counts/status         | Derived indexes only; Document SoR remains engines/platform docs |
 
 ### Onboarding checklist
 

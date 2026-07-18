@@ -37,18 +37,16 @@ describe("admin-core", () => {
   });
 
   it("enforces lifecycle transitions fail-closed", () => {
-    expect(canTransitionAdministrationLifecycle("draft", "registered")).toBe(
-      true,
-    );
+    expect(canTransitionAdministrationLifecycle("draft", "registered")).toBe(true);
     expect(canTransitionAdministrationLifecycle("draft", "active")).toBe(false);
     expect(canTransitionAdministrationLifecycle("active", "active")).toBe(true);
     expect(listAllowedAdministrationLifecycleTransitions("active")).toEqual([
       "deprecated",
       "archived",
     ]);
-    expect(() =>
-      assertAdministrationLifecycleTransition("archived", "active"),
-    ).toThrow(/Cannot transition/);
+    expect(() => assertAdministrationLifecycleTransition("archived", "active")).toThrow(
+      /Cannot transition/,
+    );
   });
 
   it("validates module, capability, navigation, and secret notes", () => {
@@ -198,8 +196,6 @@ describe("admin-core", () => {
 
   it("requireFound helper", () => {
     expect(requireFound({ a: 1 }, "x", "1")).toEqual({ a: 1 });
-    expect(() => requireFound(null, "x", "1")).toThrow(
-      AdministrationDomainError,
-    );
+    expect(() => requireFound(null, "x", "1")).toThrow(AdministrationDomainError);
   });
 });

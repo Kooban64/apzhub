@@ -5,16 +5,16 @@
 
 ## Reconfirmed
 
-| Control | Status |
-| --- | --- |
-| Tenant isolation | PASS (persistence + certification Journey 2) |
-| Organisation isolation | PASS (context + authz rules) |
-| Deny-by-default authorization | PASS (`identityPlatformOps` + production mode) |
-| Immutable audit/history | PASS (append-only ports; HTTP mutations method-not-allowed) |
-| Credential exclusion | PASS (Workbench, OpenAPI, migrations, typed client) |
-| Authentication separation | PASS (no auth routes/surfaces) |
-| Metadata integrity | PASS (canonical contracts + Core rules) |
-| Diagnostics safety | PASS (controlled 503; no IdP probes; no stack traces in UI) |
+| Control                       | Status                                                      |
+| ----------------------------- | ----------------------------------------------------------- |
+| Tenant isolation              | PASS (persistence + certification Journey 2)                |
+| Organisation isolation        | PASS (context + authz rules)                                |
+| Deny-by-default authorization | PASS (`identityPlatformOps` + production mode)              |
+| Immutable audit/history       | PASS (append-only ports; HTTP mutations method-not-allowed) |
+| Credential exclusion          | PASS (Workbench, OpenAPI, migrations, typed client)         |
+| Authentication separation     | PASS (no auth routes/surfaces)                              |
+| Metadata integrity            | PASS (canonical contracts + Core rules)                     |
+| Diagnostics safety            | PASS (controlled 503; no IdP probes; no stack traces in UI) |
 
 ## Intentional exclusions (roadmap — not certification failures)
 

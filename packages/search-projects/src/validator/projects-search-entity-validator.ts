@@ -22,17 +22,16 @@ export type ProjectsSearchValidationResult = {
   readonly issues: readonly ProjectsSearchValidationIssue[];
 };
 
-const MANDATORY_BY_TYPE: Readonly<
-  Record<ProjectsSearchEntityType, readonly string[]>
-> = {
-  workspace: ["slug"],
-  project: ["status", "identifier", "workspaceId"],
-  task: ["status", "priority", "projectId"],
-  sprint: ["status", "projectId"],
-  milestone: ["status", "projectId"],
-  module: ["status", "projectId"],
-  team: [],
-};
+const MANDATORY_BY_TYPE: Readonly<Record<ProjectsSearchEntityType, readonly string[]>> =
+  {
+    workspace: ["slug"],
+    project: ["status", "identifier", "workspaceId"],
+    task: ["status", "priority", "projectId"],
+    sprint: ["status", "projectId"],
+    milestone: ["status", "projectId"],
+    module: ["status", "projectId"],
+    team: [],
+  };
 
 export class ProjectsSearchEntityValidator {
   validateDraft(

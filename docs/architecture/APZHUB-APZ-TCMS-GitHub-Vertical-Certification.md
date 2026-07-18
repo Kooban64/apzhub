@@ -28,15 +28,15 @@ The GitHub Actions vertical is certified for production use as a **read-only CI/
 
 ## Supporting audits
 
-| Document | Verdict |
-| -------- | ------- |
-| [Architecture / Dependency / Boundary Audit](../reviews/APZTCMS-019-architecture-dependency-boundary-audit.md) | PASS — 0 violations |
-| [API Audit](../reviews/APZTCMS-019-api-audit.md) | PASS |
-| [Workbench Audit](../reviews/APZTCMS-019-workbench-audit.md) | PASS (unit/component) |
-| [Security Audit](../reviews/APZTCMS-019-security-audit.md) | PASS |
-| [Performance Baseline](../reviews/APZTCMS-019-performance-baseline.md) | COLLECTED |
-| [Quality Report](../reviews/APZTCMS-019-quality-report.md) | PASS |
-| [Production Readiness](../reviews/APZTCMS-019-production-readiness.md) | **PRODUCTION_READY_WITH_LIMITATIONS** |
+| Document                                                                                                       | Verdict                               |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| [Architecture / Dependency / Boundary Audit](../reviews/APZTCMS-019-architecture-dependency-boundary-audit.md) | PASS — 0 violations                   |
+| [API Audit](../reviews/APZTCMS-019-api-audit.md)                                                               | PASS                                  |
+| [Workbench Audit](../reviews/APZTCMS-019-workbench-audit.md)                                                   | PASS (unit/component)                 |
+| [Security Audit](../reviews/APZTCMS-019-security-audit.md)                                                     | PASS                                  |
+| [Performance Baseline](../reviews/APZTCMS-019-performance-baseline.md)                                         | COLLECTED                             |
+| [Quality Report](../reviews/APZTCMS-019-quality-report.md)                                                     | PASS                                  |
+| [Production Readiness](../reviews/APZTCMS-019-production-readiness.md)                                         | **PRODUCTION_READY_WITH_LIMITATIONS** |
 
 ## Explicit non-goals (certified as excluded)
 

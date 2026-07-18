@@ -27,15 +27,15 @@ Vendor Adapter
 
 ## Public surface
 
-| Symbol | Purpose |
-|--------|---------|
-| `TransportClient` | HTTP client interface (`request`, verb helpers, diagnostics) |
-| `createTransportClient` / `DefaultTransportClient` | Production transport |
-| `createHttpIntegrationClient` / `HttpIntegrationClient` | `IntegrationClient` bridge for adapters |
-| `createMockTransport` / `MockTransportClient` | Scripted mock for adapter tests |
-| `createCircuitBreakerInterceptor` | Optional transport-level CB (off by default) |
-| Policies | `DefaultRetryPolicy`, `DefaultTimeoutPolicy`, TLS / compression / redirect / rate-limit stubs |
-| Observability | `createTransportMetrics`, `createTransportLogger` (redacts secrets) |
+| Symbol                                                  | Purpose                                                                                       |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `TransportClient`                                       | HTTP client interface (`request`, verb helpers, diagnostics)                                  |
+| `createTransportClient` / `DefaultTransportClient`      | Production transport                                                                          |
+| `createHttpIntegrationClient` / `HttpIntegrationClient` | `IntegrationClient` bridge for adapters                                                       |
+| `createMockTransport` / `MockTransportClient`           | Scripted mock for adapter tests                                                               |
+| `createCircuitBreakerInterceptor`                       | Optional transport-level CB (off by default)                                                  |
+| Policies                                                | `DefaultRetryPolicy`, `DefaultTimeoutPolicy`, TLS / compression / redirect / rate-limit stubs |
+| Observability                                           | `createTransportMetrics`, `createTransportLogger` (redacts secrets)                           |
 
 ---
 
@@ -84,14 +84,14 @@ Public adapter APIs remain unchanged. Plane and Zammad stay at package version *
 
 ## Defaults (migration parity)
 
-| Setting | Default | Rationale |
-|---------|---------|-----------|
-| Retry `maxAttempts` | `1` (disabled) | Match prior Plane/Zammad fetch clients |
-| Circuit-breaker interceptor | Off | Adapters keep CB in operation runners |
-| Compression Accept-Encoding (bridge) | Empty | Preserve prior header set |
-| Compression (raw transport) | `gzip, br, identity` | Standard fetch behaviour |
-| Redirects | Follow (`maxRedirects` 20) | Fetch default |
-| TLS custom CA | Config/diagnostics only | Node undici/fetch limitation |
+| Setting                              | Default                    | Rationale                              |
+| ------------------------------------ | -------------------------- | -------------------------------------- |
+| Retry `maxAttempts`                  | `1` (disabled)             | Match prior Plane/Zammad fetch clients |
+| Circuit-breaker interceptor          | Off                        | Adapters keep CB in operation runners  |
+| Compression Accept-Encoding (bridge) | Empty                      | Preserve prior header set              |
+| Compression (raw transport)          | `gzip, br, identity`       | Standard fetch behaviour               |
+| Redirects                            | Follow (`maxRedirects` 20) | Fetch default                          |
+| TLS custom CA                        | Config/diagnostics only    | Node undici/fetch limitation           |
 
 ---
 

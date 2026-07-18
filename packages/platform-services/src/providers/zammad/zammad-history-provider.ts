@@ -20,7 +20,9 @@ export const ZAMMAD_HISTORY_PROVIDER_REGISTRATION = {
   priority: 100,
 };
 
-const HISTORY_SORT_MAP: Partial<Record<SupportHistorySortField, SupportHistorySortField>> = {
+const HISTORY_SORT_MAP: Partial<
+  Record<SupportHistorySortField, SupportHistorySortField>
+> = {
   occurredAt: "occurredAt",
 };
 
@@ -33,7 +35,9 @@ function mapHistorySort(
   });
 }
 
-export function createZammadHistoryProvider(core: ZammadCoreServices): SupportHistoryProvider {
+export function createZammadHistoryProvider(
+  core: ZammadCoreServices,
+): SupportHistoryProvider {
   return {
     getTimeline(ctx, supportTicketId, query) {
       const { page, sort, filter } = unwrapListQuery<

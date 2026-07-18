@@ -9,15 +9,15 @@
 
 ## Allowed transitions (summary)
 
-| From | To |
-|------|----|
-| draft | active, archived, deleted |
-| active | archived, retained, deleted, expired |
-| archived | active, retained, deleted, restored |
-| retained | archived, expired, deleted |
-| deleted | restored |
-| restored | active, archived, deleted |
-| expired | retained, deleted |
+| From     | To                                   |
+| -------- | ------------------------------------ |
+| draft    | active, archived, deleted            |
+| active   | archived, retained, deleted, expired |
+| archived | active, retained, deleted, restored  |
+| retained | archived, expired, deleted           |
+| deleted  | restored                             |
+| restored | active, archived, deleted            |
+| expired  | retained, deleted                    |
 
 ## Rules
 

@@ -184,7 +184,10 @@ describe("APZTCMS-024 reporting gateway facet", () => {
       },
     });
     expect(registered.builtin).toBe(false);
-    const loaded = await services.gateway.testing.reporting.getTemplate(ctx, registered.id);
+    const loaded = await services.gateway.testing.reporting.getTemplate(
+      ctx,
+      registered.id,
+    );
     expect(loaded.title).toBe("Custom QA Report");
   });
 });

@@ -16,14 +16,14 @@ Products consume authorization. Products must not implement authorization logic.
 
 ## Package: `@apzhub/platform-authorization`
 
-| Service | Responsibility |
-| ------- | -------------- |
-| `AuthorizationService` | Facade — evaluate, effective permissions, diagnostics |
-| `PermissionService` | Permission catalog registration and lookup |
-| `RoleService` | Role lifecycle, inheritance, role-permission grants |
-| `RoleAssignmentService` | User ↔ role assignments (tenant/product scoped) |
+| Service                      | Responsibility                                             |
+| ---------------------------- | ---------------------------------------------------------- |
+| `AuthorizationService`       | Facade — evaluate, effective permissions, diagnostics      |
+| `PermissionService`          | Permission catalog registration and lookup                 |
+| `RoleService`                | Role lifecycle, inheritance, role-permission grants        |
+| `RoleAssignmentService`      | User ↔ role assignments (tenant/product scoped)            |
 | `EffectivePermissionService` | Computes direct + inherited + scoped effective permissions |
-| `AuthorizationDiagnostics` | Evaluation counters, cache stats, entity counts |
+| `AuthorizationDiagnostics`   | Evaluation counters, cache stats, entity counts            |
 
 **Exports:** `.` (in-memory bundle), `./server` (session bridge), `./postgres` (Drizzle store)
 
@@ -33,11 +33,11 @@ Products consume authorization. Products must not implement authorization logic.
 
 ### Role scopes
 
-| Scope | Binding | Example |
-| ----- | ------- | ------- |
-| `platform` | Global | `platform-admin` |
-| `tenant` | `tenant_id` | `tenant-member` |
-| `product` | `product_key` | `law-operator` |
+| Scope      | Binding       | Example          |
+| ---------- | ------------- | ---------------- |
+| `platform` | Global        | `platform-admin` |
+| `tenant`   | `tenant_id`   | `tenant-member`  |
+| `product`  | `product_key` | `law-operator`   |
 
 ### Role types (Phase 1)
 
@@ -76,23 +76,23 @@ Sources: **direct role permissions**, **inherited role permissions**, **tenant s
 
 ## Authorization evaluation
 
-| Outcome | Meaning |
-| ------- | ------- |
-| `allow` | Granted permission matches effective set |
-| `deny` | No matching allow, or explicit deny |
-| `not_applicable` | Empty/undefined permission key |
-| `unknown_permission` | Key not in catalog and not canonical namespace |
-| `unknown_role` | Assignment references missing role |
-| `tenant_mismatch` | Tenant-scoped assignment/role incompatible with context |
+| Outcome              | Meaning                                                 |
+| -------------------- | ------------------------------------------------------- |
+| `allow`              | Granted permission matches effective set                |
+| `deny`               | No matching allow, or explicit deny                     |
+| `not_applicable`     | Empty/undefined permission key                          |
+| `unknown_permission` | Key not in catalog and not canonical namespace          |
+| `unknown_role`       | Assignment references missing role                      |
+| `tenant_mismatch`    | Tenant-scoped assignment/role incompatible with context |
 
 ---
 
 ## Repository layer
 
-| Repository | Implementations |
-| ---------- | --------------- |
-| `PermissionRepository` | In-memory, PostgreSQL |
-| `RoleRepository` | In-memory, PostgreSQL |
+| Repository                 | Implementations       |
+| -------------------------- | --------------------- |
+| `PermissionRepository`     | In-memory, PostgreSQL |
+| `RoleRepository`           | In-memory, PostgreSQL |
 | `RolePermissionRepository` | In-memory, PostgreSQL |
 | `RoleAssignmentRepository` | In-memory, PostgreSQL |
 
@@ -104,10 +104,10 @@ Repository parity tests validate in-memory contract (PostgreSQL path via `postgr
 
 ## Platform events
 
-| Event ID | Trigger |
-| -------- | ------- |
-| `platform.authorization.role.created` | Role created |
-| `platform.authorization.role.updated` | Role updated |
+| Event ID                                    | Trigger            |
+| ------------------------------------------- | ------------------ |
+| `platform.authorization.role.created`       | Role created       |
+| `platform.authorization.role.updated`       | Role updated       |
 | `platform.authorization.assignment.created` | Assignment created |
 | `platform.authorization.assignment.removed` | Assignment removed |
 
@@ -117,12 +117,12 @@ Manifests: `events/platform/authorization/*/event.yaml`
 
 ## Platform APIs
 
-| Route | Methods | Purpose |
-| ----- | ------- | ------- |
-| `/api/platform/v1/roles` | GET, POST | List/create roles |
-| `/api/platform/v1/permissions` | GET, POST | List/register permissions |
-| `/api/platform/v1/assignments` | GET, POST, DELETE | Role assignments |
-| `/api/platform/v1/authorization/diagnostics` | GET | Diagnostics + recent events |
+| Route                                        | Methods           | Purpose                     |
+| -------------------------------------------- | ----------------- | --------------------------- |
+| `/api/platform/v1/roles`                     | GET, POST         | List/create roles           |
+| `/api/platform/v1/permissions`               | GET, POST         | List/register permissions   |
+| `/api/platform/v1/assignments`               | GET, POST, DELETE | Role assignments            |
+| `/api/platform/v1/authorization/diagnostics` | GET               | Diagnostics + recent events |
 
 All routes require validated session (M8-01).
 

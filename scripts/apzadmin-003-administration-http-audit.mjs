@@ -23,7 +23,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -95,8 +96,18 @@ if (!existsSync(administrationHandler)) {
       detail: "no admin-core/persistence/drizzle/postgres in handlers",
     });
   }
-  for (const segment of ["resolve", "effective", "apply", "secrets", "feature-flags", "runtime"]) {
-    if (content.includes(`/${segment}`) && !content.includes("runtimeResolutionReady")) {
+  for (const segment of [
+    "resolve",
+    "effective",
+    "apply",
+    "secrets",
+    "feature-flags",
+    "runtime",
+  ]) {
+    if (
+      content.includes(`/${segment}`) &&
+      !content.includes("runtimeResolutionReady")
+    ) {
       // allow false flags in DTO only
     }
   }

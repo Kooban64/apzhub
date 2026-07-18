@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-consumers
+name: Metric Consumers
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metric Consumers sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metric Consumers
+    icon: users
+    route: /workspace/metrics/consumers
+    order: 140
+    permission: metrics.read
+  view:
+    title: Metric Consumers
+    workspace: metrics
+    route: /workspace/metrics/consumers
+    permission: metrics.read

@@ -1,16 +1,16 @@
 # APZHUB Programme — Milestone Completion Report
 
-| Field | Value |
-| --- | --- |
-| **Document ID** | APZSEARCH-011-CR |
-| **Milestone** | APZSEARCH-011 — Support Search Publication Adapter |
-| **Programme** | APZHUB Platform Search |
-| **Status** | **COMPLETE** |
-| **Classification** | Support publication adapter (framework consumer; Search Platform frozen) |
-| **Date** | 2026-07-14 |
-| **Authority** | Knowledge Foundation · owner-approved milestone |
-| **Predecessor** | APZSEARCH-010 — Projects Search Publication Adapter (Complete) |
-| **Successor** | **APZSEARCH-012 — Documents Search Publication Adapter** (**recommended; not started; requires owner approval**) |
+| Field              | Value                                                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| **Document ID**    | APZSEARCH-011-CR                                                                                                 |
+| **Milestone**      | APZSEARCH-011 — Support Search Publication Adapter                                                               |
+| **Programme**      | APZHUB Platform Search                                                                                           |
+| **Status**         | **COMPLETE**                                                                                                     |
+| **Classification** | Support publication adapter (framework consumer; Search Platform frozen)                                         |
+| **Date**           | 2026-07-14                                                                                                       |
+| **Authority**      | Knowledge Foundation · owner-approved milestone                                                                  |
+| **Predecessor**    | APZSEARCH-010 — Projects Search Publication Adapter (Complete)                                                   |
+| **Successor**      | **APZSEARCH-012 — Documents Search Publication Adapter** (**recommended; not started; requires owner approval**) |
 
 ---
 
@@ -69,12 +69,12 @@ Tenant isolation; Zammad IDs forbidden; `originMetadata` excluded; classificatio
 
 ## 8. Tests / Coverage / Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| Unit tests | **9 PASS** |
-| Typecheck | **PASS** |
-| `pnpm audit:search-support` | **PASS** (0 violations) |
-| Coverage | **97.61%** lines/statements · **100%** functions · **94.55%** branches |
+| Gate                        | Result                                                                 |
+| --------------------------- | ---------------------------------------------------------------------- |
+| Unit tests                  | **9 PASS**                                                             |
+| Typecheck                   | **PASS**                                                               |
+| `pnpm audit:search-support` | **PASS** (0 violations)                                                |
+| Coverage                    | **97.61%** lines/statements · **100%** functions · **94.55%** branches |
 
 ---
 
@@ -102,10 +102,10 @@ Do not implement without owner approval.
 
 ## Document control
 
-| Item | Value |
-| --- | --- |
-| Document ID | **APZSEARCH-011-CR** |
-| Report | `docs/sprint/APZSEARCH-011-completion-report.md` |
-| Audit | `pnpm audit:search-support` |
+| Item        | Value                                            |
+| ----------- | ------------------------------------------------ |
+| Document ID | **APZSEARCH-011-CR**                             |
+| Report      | `docs/sprint/APZSEARCH-011-completion-report.md` |
+| Audit       | `pnpm audit:search-support`                      |
 
 **End of report.**

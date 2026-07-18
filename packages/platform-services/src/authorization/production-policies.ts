@@ -1,7 +1,14 @@
-import type { Policy, PolicyDecision, PolicyExecutionContext } from "../policy/policy-pipeline";
+import type {
+  Policy,
+  PolicyDecision,
+  PolicyExecutionContext,
+} from "../policy/policy-pipeline";
 import type { AuthorizationAccessResolver } from "./authorization-access-resolver";
 import type { EntityMappingStore } from "../mapping/entity-mapping-store";
-import { resolveOperationAuthorization, extractResourceId } from "./operation-authorization-map";
+import {
+  resolveOperationAuthorization,
+  extractResourceId,
+} from "./operation-authorization-map";
 
 /** Priority bands — lower runs first. */
 export const POLICY_PRIORITY = {
@@ -281,7 +288,9 @@ export function createMaintenanceModePolicy(options?: {
         };
       }
 
-      const mutating = /^(create|update|archive|delete|add|remove)/i.test(input.operation);
+      const mutating = /^(create|update|archive|delete|add|remove)/i.test(
+        input.operation,
+      );
       if (mutating) {
         return {
           effect: "deny",

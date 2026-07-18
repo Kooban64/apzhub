@@ -24,7 +24,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -41,7 +42,11 @@ function scan(files, rules) {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       const trimmed = line.trim();
-      if (trimmed.startsWith("//") || trimmed.startsWith("*") || trimmed.startsWith("/*")) {
+      if (
+        trimmed.startsWith("//") ||
+        trimmed.startsWith("*") ||
+        trimmed.startsWith("/*")
+      ) {
         continue;
       }
       for (const rule of rules) {
@@ -70,7 +75,10 @@ if (!existsSync(join(ROOT, configDir))) {
   scan(walk(join(ROOT, configDir)), [
     { rule: "no-http-routes", pattern: /\/api\/v1\/|NextRequest|createRouteHandler/ },
     { rule: "no-workbench", pattern: /workbench-framework|\/workspace\/configuration/ },
-    { rule: "no-runtime-apply", pattern: /\b(hotReload|applyConfiguration|injectEnv)\b/ },
+    {
+      rule: "no-runtime-apply",
+      pattern: /\b(hotReload|applyConfiguration|injectEnv)\b/,
+    },
     { rule: "no-event-bus", pattern: /EventBus|publishEvent\(/ },
     { rule: "no-secrets", pattern: /hashicorp|aws-secrets|secretManager/ },
   ]);
@@ -81,12 +89,16 @@ if (!existsSync(join(ROOT, configDir))) {
     join(ROOT, "packages/platform-services/src/gateway/platform-service-gateway.ts"),
     "utf8",
   );
-  if (!gateway.includes("configurationApi") || !gateway.includes("get configuration(")) {
+  if (
+    !gateway.includes("configurationApi") ||
+    !gateway.includes("get configuration(")
+  ) {
     violations.push({
       file: "packages/platform-services/src/gateway/platform-service-gateway.ts",
       line: 1,
       rule: "gateway-configuration-facet",
-      detail: "PlatformServiceGateway must expose configurationApi and get configuration()",
+      detail:
+        "PlatformServiceGateway must expose configurationApi and get configuration()",
     });
   }
 }
@@ -108,7 +120,10 @@ if (!existsSync(join(ROOT, configDir))) {
 
 {
   const opMap = readFileSync(
-    join(ROOT, "packages/platform-services/src/authorization/operation-authorization-map.ts"),
+    join(
+      ROOT,
+      "packages/platform-services/src/authorization/operation-authorization-map.ts",
+    ),
     "utf8",
   );
   if (!opMap.includes("configurationPlatformOps")) {
@@ -244,5 +259,7 @@ if (violations.length > 0) {
   process.exit(1);
 }
 
-console.log("\nRESULT: PASS (0 architecture/dependency/boundary/authorization violations)");
+console.log(
+  "\nRESULT: PASS (0 architecture/dependency/boundary/authorization violations)",
+);
 process.exit(0);

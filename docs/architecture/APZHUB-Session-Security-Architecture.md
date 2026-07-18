@@ -6,12 +6,12 @@ Harden platform session handling through canonical policy owned by `@apzhub/auth
 
 ## Owner
 
-| Concern | Owner |
-|---------|-------|
-| Session policy & Better Auth config | `@apzhub/auth` |
-| Tenant binding resolution | `@apzhub/auth` + `@apzhub/platform-identity` |
-| Session diagnostics in security probes | `@apzhub/platform-security` |
-| Law API session consumption | `withLawApiAuth` → `getValidatedSession` |
+| Concern                                | Owner                                        |
+| -------------------------------------- | -------------------------------------------- |
+| Session policy & Better Auth config    | `@apzhub/auth`                               |
+| Tenant binding resolution              | `@apzhub/auth` + `@apzhub/platform-identity` |
+| Session diagnostics in security probes | `@apzhub/platform-security`                  |
+| Law API session consumption            | `withLawApiAuth` → `getValidatedSession`     |
 
 ## Components
 
@@ -26,20 +26,20 @@ Harden platform session handling through canonical policy owned by `@apzhub/auth
 
 ## Timeout policy
 
-| Control | Value |
-|---------|-------|
-| Absolute timeout | 7 days |
+| Control                | Value               |
+| ---------------------- | ------------------- |
+| Absolute timeout       | 7 days              |
 | Idle / sliding refresh | 1 day (`updateAge`) |
-| Cookie cache | 5 minutes |
+| Cookie cache           | 5 minutes           |
 
 ## Cookie policy (production)
 
 | Attribute | Value |
-|-----------|-------|
-| Secure | true |
-| HttpOnly | true |
-| SameSite | lax |
-| Path | / |
+| --------- | ----- |
+| Secure    | true  |
+| HttpOnly  | true  |
+| SameSite  | lax   |
+| Path      | /     |
 
 Development relaxes `Secure` for localhost.
 

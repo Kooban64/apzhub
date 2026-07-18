@@ -1,16 +1,16 @@
 # APZHUB Programme — Milestone Completion Report
 
-| Field | Value |
-| --- | --- |
-| **Document ID** | APZSEARCH-004-CR |
-| **Milestone** | APZSEARCH-004 — Search Integration SDK |
-| **Programme** | APZHUB Platform Search |
-| **Status** | **COMPLETE** |
-| **Classification** | Vendor-neutral Integration SDK (no engine binding) |
-| **Date** | 2026-07-14 |
-| **Authority** | Knowledge Foundation · owner-approved milestone scope |
-| **Predecessor** | APZSEARCH-003 — Search Platform Services, Gateway & Authorization (Complete) |
-| **Successor** | APZSEARCH-005 — Meilisearch Reference Adapter Evaluation & Certification (**recommended; not started; requires owner approval**) |
+| Field              | Value                                                                                                                            |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Document ID**    | APZSEARCH-004-CR                                                                                                                 |
+| **Milestone**      | APZSEARCH-004 — Search Integration SDK                                                                                           |
+| **Programme**      | APZHUB Platform Search                                                                                                           |
+| **Status**         | **COMPLETE**                                                                                                                     |
+| **Classification** | Vendor-neutral Integration SDK (no engine binding)                                                                               |
+| **Date**           | 2026-07-14                                                                                                                       |
+| **Authority**      | Knowledge Foundation · owner-approved milestone scope                                                                            |
+| **Predecessor**    | APZSEARCH-003 — Search Platform Services, Gateway & Authorization (Complete)                                                     |
+| **Successor**      | APZSEARCH-005 — Meilisearch Reference Adapter Evaluation & Certification (**recommended; not started; requires owner approval**) |
 
 ---
 
@@ -30,12 +30,12 @@ It follows the same architectural pattern as the Plane, Zammad, and GitHub Actio
 
 ## 2. Programme context
 
-| Milestone | Status |
-| --- | --- |
-| APZSEARCH-001 — Platform Search Foundation | Complete |
-| APZSEARCH-002 — Search Persistence & Provider Framework | Complete |
-| APZSEARCH-003 — Search Platform Services, Gateway & Authorization | Complete (management plane) |
-| **APZSEARCH-004 — Search Integration SDK** | **Complete** |
+| Milestone                                                                | Status                            |
+| ------------------------------------------------------------------------ | --------------------------------- |
+| APZSEARCH-001 — Platform Search Foundation                               | Complete                          |
+| APZSEARCH-002 — Search Persistence & Provider Framework                  | Complete                          |
+| APZSEARCH-003 — Search Platform Services, Gateway & Authorization        | Complete (management plane)       |
+| **APZSEARCH-004 — Search Integration SDK**                               | **Complete**                      |
 | APZSEARCH-005 — Meilisearch Reference Adapter Evaluation & Certification | Recommended next (not authorised) |
 
 ---
@@ -58,11 +58,11 @@ Future adapters may include OpenSearch, Elasticsearch, Meilisearch, Typesense, P
 
 ## 4. Package versions
 
-| Package | Prior | Delivered | Change |
-| --- | --- | --- | --- |
-| `@apzhub/integration-search-sdk` | — | **0.1.0** | New package |
-| `@apzhub/integration-sdk` | 0.9.0 | **0.9.0** | Unchanged (dependency) |
-| `@apzhub/search-contracts` | 0.3.0 | **0.3.0** | Unchanged (dependency) |
+| Package                          | Prior | Delivered | Change                 |
+| -------------------------------- | ----- | --------- | ---------------------- |
+| `@apzhub/integration-search-sdk` | —     | **0.1.0** | New package            |
+| `@apzhub/integration-sdk`        | 0.9.0 | **0.9.0** | Unchanged (dependency) |
+| `@apzhub/search-contracts`       | 0.3.0 | **0.3.0** | Unchanged (dependency) |
 
 Placement: `packages/integration-search-sdk/` (vendor-neutral SDK). Engine packages will later live under `integrations/`.
 
@@ -70,23 +70,23 @@ Placement: `packages/integration-search-sdk/` (vendor-neutral SDK). Engine packa
 
 ## 5. Deliverables implemented
 
-| Component | Outcome |
-| --- | --- |
-| `SearchIntegrationAdapterBase` | Abstract base extending `IntegrationAdapterBase` |
-| `SearchAdapterFactory` / `createSearchAdapterFactory` | Compose + register + optional initialise |
-| `SearchAdapterContext` / builder | Typed search helpers over SDK `AdapterContext` |
-| `SearchCapabilityRegistration` | Declarative capability registry |
-| `SearchOperationRunner` | All ops return `NOT_IMPLEMENTED` |
-| `SearchProviderDiagnostics` | Safe diagnostics (no secrets / query payloads) |
-| `SearchProviderHealth` | Health aggregation helpers |
-| `SearchProviderCapabilities` | Declarative capability model |
-| `SearchProviderLifecycle` | Lifecycle state helper |
-| `SearchConfigurationValidator` | Deterministic config validation (secret refs) |
-| `SearchMetrics` / `SearchLogger` | Thin wrappers over Integration SDK observability |
-| `SearchErrorTranslator` | Search-domain error translation helper |
-| `SearchCompatibilityReport` | Adapter/SDK compatibility matrix output |
-| Bootstrap | `createSearchIntegrationBootstrapConfiguration` with capability `"search"` |
-| `MockSearchIntegrationAdapter` | Test-only mock |
+| Component                                             | Outcome                                                                    |
+| ----------------------------------------------------- | -------------------------------------------------------------------------- |
+| `SearchIntegrationAdapterBase`                        | Abstract base extending `IntegrationAdapterBase`                           |
+| `SearchAdapterFactory` / `createSearchAdapterFactory` | Compose + register + optional initialise                                   |
+| `SearchAdapterContext` / builder                      | Typed search helpers over SDK `AdapterContext`                             |
+| `SearchCapabilityRegistration`                        | Declarative capability registry                                            |
+| `SearchOperationRunner`                               | All ops return `NOT_IMPLEMENTED`                                           |
+| `SearchProviderDiagnostics`                           | Safe diagnostics (no secrets / query payloads)                             |
+| `SearchProviderHealth`                                | Health aggregation helpers                                                 |
+| `SearchProviderCapabilities`                          | Declarative capability model                                               |
+| `SearchProviderLifecycle`                             | Lifecycle state helper                                                     |
+| `SearchConfigurationValidator`                        | Deterministic config validation (secret refs)                              |
+| `SearchMetrics` / `SearchLogger`                      | Thin wrappers over Integration SDK observability                           |
+| `SearchErrorTranslator`                               | Search-domain error translation helper                                     |
+| `SearchCompatibilityReport`                           | Adapter/SDK compatibility matrix output                                    |
+| Bootstrap                                             | `createSearchIntegrationBootstrapConfiguration` with capability `"search"` |
+| `MockSearchIntegrationAdapter`                        | Test-only mock                                                             |
 
 Reusable Integration SDK concerns (auth, connection, circuit breaker, secrets, generic health/diagnostics stack) are composed, not duplicated.
 
@@ -114,13 +114,13 @@ Default runner / base methods return status **`NOT_IMPLEMENTED`**. No engine HTT
 
 ## 8. Hard exclusions verified
 
-| Exclusion | Evidence |
-| --- | --- |
-| Engine clients (OpenSearch/ES/Meilisearch/Typesense/PG FTS/Azure) | Audit `no-engine-clients` |
-| HTTP routes | Audit `no-http-routes` |
-| Workbench | Audit `no-workbench` |
-| Import of `@apzhub/platform-services` | Audit `no-platform-services` |
-| Query hit execution | Runner + audit `no-query-hits-execution` |
+| Exclusion                                                         | Evidence                                 |
+| ----------------------------------------------------------------- | ---------------------------------------- |
+| Engine clients (OpenSearch/ES/Meilisearch/Typesense/PG FTS/Azure) | Audit `no-engine-clients`                |
+| HTTP routes                                                       | Audit `no-http-routes`                   |
+| Workbench                                                         | Audit `no-workbench`                     |
+| Import of `@apzhub/platform-services`                             | Audit `no-platform-services`             |
+| Query hit execution                                               | Runner + audit `no-query-hits-execution` |
 
 Command: `pnpm audit:search-integration-sdk` — **PASS (0 violations)**.
 
@@ -128,20 +128,20 @@ Command: `pnpm audit:search-integration-sdk` — **PASS (0 violations)**.
 
 ## 9. Testing
 
-| Suite | Result |
-| --- | --- |
+| Suite                                         | Result      |
+| --------------------------------------------- | ----------- |
 | Unit tests (`integration-search-sdk.test.ts`) | **26 PASS** |
-| Mock adapters only | Yes |
-| Live providers | None |
+| Mock adapters only                            | Yes         |
+| Live providers                                | None        |
 
 Coverage (package-scoped; see [baseline](../reviews/APZSEARCH-004-coverage-baseline.md)):
 
-| Metric | Coverage |
-| --- | --- |
+| Metric     | Coverage   |
+| ---------- | ---------- |
 | Statements | **98.01%** |
-| Branches | **93.8%** |
-| Functions | **97.79%** |
-| Lines | **98.01%** |
+| Branches   | **93.8%**  |
+| Functions  | **97.79%** |
+| Lines      | **98.01%** |
 
 Thresholds (≥95% lines/statements, ≥90% functions, ≥80% branches): **PASS**.
 
@@ -149,28 +149,28 @@ Thresholds (≥95% lines/statements, ≥90% functions, ≥80% branches): **PASS*
 
 ## 10. Quality gates
 
-| Gate | Result |
-| --- | --- |
-| Typecheck | **PASS** |
-| Unit tests | **PASS** (26) |
-| Coverage ≥95% (scoped) | **PASS** |
-| Architecture audit | **PASS** (0 violations) |
+| Gate                   | Result                  |
+| ---------------------- | ----------------------- |
+| Typecheck              | **PASS**                |
+| Unit tests             | **PASS** (26)           |
+| Coverage ≥95% (scoped) | **PASS**                |
+| Architecture audit     | **PASS** (0 violations) |
 
 ---
 
 ## 11. Documentation delivered
 
-| Document | Path |
-| --- | --- |
-| Search Integration SDK Architecture | `docs/architecture/APZHUB-Search-Integration-SDK-Architecture.md` |
-| Capability Model | `docs/architecture/APZHUB-Search-Integration-Capability-Model.md` |
-| Compatibility Model | `docs/architecture/APZHUB-Search-Integration-Compatibility-Model.md` |
-| Adapter Development Guide | `docs/guides/search-integration-adapter-development.md` |
-| Adapter Lifecycle | `docs/guides/search-integration-adapter-lifecycle.md` |
-| Developer Guide | `docs/developer/APZHUB-Search-Integration-SDK-Developer-Guide.md` |
-| Coverage baseline | `docs/reviews/APZSEARCH-004-coverage-baseline.md` |
-| Package README | `packages/integration-search-sdk/README.md` |
-| This completion report | `docs/sprint/APZSEARCH-004-completion-report.md` |
+| Document                            | Path                                                                 |
+| ----------------------------------- | -------------------------------------------------------------------- |
+| Search Integration SDK Architecture | `docs/architecture/APZHUB-Search-Integration-SDK-Architecture.md`    |
+| Capability Model                    | `docs/architecture/APZHUB-Search-Integration-Capability-Model.md`    |
+| Compatibility Model                 | `docs/architecture/APZHUB-Search-Integration-Compatibility-Model.md` |
+| Adapter Development Guide           | `docs/guides/search-integration-adapter-development.md`              |
+| Adapter Lifecycle                   | `docs/guides/search-integration-adapter-lifecycle.md`                |
+| Developer Guide                     | `docs/developer/APZHUB-Search-Integration-SDK-Developer-Guide.md`    |
+| Coverage baseline                   | `docs/reviews/APZSEARCH-004-coverage-baseline.md`                    |
+| Package README                      | `packages/integration-search-sdk/README.md`                          |
+| This completion report              | `docs/sprint/APZSEARCH-004-completion-report.md`                     |
 
 Foundation/stop-point updates: `AI-CONTEXT`, `CURRENT-MILESTONE`, `CURRENT-STATE`, `ACTIVE-BACKLOG`, `SESSION-START`, `PACKAGE-CATALOGUE`, `PRODUCT-CATALOGUE`, `ARCHITECTURE-HANDBOOK`, `docs/README`, root `README`, `CHANGELOG`.
 
@@ -186,11 +186,11 @@ Foundation/stop-point updates: `AI-CONTEXT`, `CURRENT-MILESTONE`, `CURRENT-STATE
 
 ## 13. Risks
 
-| Risk | Mitigation |
-| --- | --- |
-| Premature engine selection | Stop line before APZSEARCH-005; no engine clients in package |
-| Accidental query execution | Default runner returns `NOT_IMPLEMENTED`; audit forbids hit-returning paths |
-| Duplicating Integration SDK | Search SDK composes `IntegrationAdapterBase` / factory / observability |
+| Risk                        | Mitigation                                                                  |
+| --------------------------- | --------------------------------------------------------------------------- |
+| Premature engine selection  | Stop line before APZSEARCH-005; no engine clients in package                |
+| Accidental query execution  | Default runner returns `NOT_IMPLEMENTED`; audit forbids hit-returning paths |
+| Duplicating Integration SDK | Search SDK composes `IntegrationAdapterBase` / factory / observability      |
 
 ---
 
@@ -200,10 +200,10 @@ Foundation/stop-point updates: `AI-CONTEXT`, `CURRENT-MILESTONE`, `CURRENT-STATE
 
 Recommended (no implementation in this report):
 
-1. Evaluate Meilisearch Community Edition (self-hosted OSS) as the first reference search engine.  
-2. Implement a certified reference adapter under `integrations/` using `@apzhub/integration-search-sdk`.  
-3. Produce a capability certification matrix, health probes, error translation, and secret-ref connection only.  
-4. Keep engine-specific logic inside the adapter.  
+1. Evaluate Meilisearch Community Edition (self-hosted OSS) as the first reference search engine.
+2. Implement a certified reference adapter under `integrations/` using `@apzhub/integration-search-sdk`.
+3. Produce a capability certification matrix, health probes, error translation, and secret-ref connection only.
+4. Keep engine-specific logic inside the adapter.
 5. Still no platform HTTP Search API / Workbench unless separately approved.
 
 **Do not begin APZSEARCH-005 without explicit owner approval.**
@@ -220,11 +220,11 @@ Await explicit owner approval before APZSEARCH-005 or any engine, HTTP, Workbenc
 
 ## Document control
 
-| Item | Value |
-| --- | --- |
-| Report location | `docs/sprint/APZSEARCH-004-completion-report.md` |
-| Package | `@apzhub/integration-search-sdk` **0.1.0** |
-| Programme stop point | `docs/foundation/CURRENT-MILESTONE.md` |
-| Prepared for | Owner filing / programme archive |
+| Item                 | Value                                            |
+| -------------------- | ------------------------------------------------ |
+| Report location      | `docs/sprint/APZSEARCH-004-completion-report.md` |
+| Package              | `@apzhub/integration-search-sdk` **0.1.0**       |
+| Programme stop point | `docs/foundation/CURRENT-MILESTONE.md`           |
+| Prepared for         | Owner filing / programme archive                 |
 
 **End of report.**

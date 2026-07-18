@@ -4,7 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@apzhub/ui";
 
 import type { PlatformControlPlaneSnapshot } from "@/lib/platform-operations/types";
 
-import { OpsJsonPanel, OpsPageShell, OpsStatCard, OpsStatusBadge, OpsTable } from "./ops-ui";
+import {
+  OpsJsonPanel,
+  OpsPageShell,
+  OpsStatCard,
+  OpsStatusBadge,
+  OpsTable,
+} from "./ops-ui";
 
 export function ControlPlaneOverviewSection({
   controlPlane,
@@ -29,7 +35,10 @@ export function ControlPlaneOverviewSection({
       description="Unified operational visibility — health, readiness, capabilities, and production verification."
     >
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <OpsStatCard label="Platform health" value={controlPlane.overview.platformHealth} />
+        <OpsStatCard
+          label="Platform health"
+          value={controlPlane.overview.platformHealth}
+        />
         <OpsStatCard
           label="Production readiness"
           value={controlPlane.overview.productionReadiness}
@@ -40,7 +49,10 @@ export function ControlPlaneOverviewSection({
         />
         <OpsStatCard label="Environment" value={controlPlane.environment} />
         {controlPlane.overview.lifecycleState ? (
-          <OpsStatCard label="Lifecycle state" value={controlPlane.overview.lifecycleState} />
+          <OpsStatCard
+            label="Lifecycle state"
+            value={controlPlane.overview.lifecycleState}
+          />
         ) : null}
         {controlPlane.overview.maintenanceMode !== undefined ? (
           <OpsStatCard
@@ -62,11 +74,17 @@ export function ControlPlaneOverviewSection({
           <div className="flex flex-wrap gap-3">
             <OpsStatusBadge status={controlPlane.productionVerification.verdict} />
             <span>Pass: {controlPlane.productionVerification.summary.passCount}</span>
-            <span>Warnings: {controlPlane.productionVerification.summary.warnCount}</span>
-            <span>Failures: {controlPlane.productionVerification.summary.failCount}</span>
+            <span>
+              Warnings: {controlPlane.productionVerification.summary.warnCount}
+            </span>
+            <span>
+              Failures: {controlPlane.productionVerification.summary.failCount}
+            </span>
           </div>
           {controlPlane.overview.affectedProducts.length > 0 ? (
-            <p>Affected products: {controlPlane.overview.affectedProducts.join(", ")}</p>
+            <p>
+              Affected products: {controlPlane.overview.affectedProducts.join(", ")}
+            </p>
           ) : (
             <p>No product-specific degradation detected.</p>
           )}
@@ -86,7 +104,9 @@ export function ControlPlaneOverviewSection({
                 <span>Recovery: {controlPlane.lifecycle.recoveryStatus}</span>
                 <span>
                   Version compatible:{" "}
-                  {controlPlane.lifecycle.versionCompatibility.compatible ? "yes" : "no"}
+                  {controlPlane.lifecycle.versionCompatibility.compatible
+                    ? "yes"
+                    : "no"}
                 </span>
               </div>
               {controlPlane.lifecycle.recommendations.length > 0 ? (
@@ -135,7 +155,14 @@ export function ControlPlaneOverviewSection({
             </CardHeader>
             <CardContent>
               <OpsTable
-                columns={["Capability", "Order", "Lifecycle", "Readiness", "Shutdown", "Recovery"]}
+                columns={[
+                  "Capability",
+                  "Order",
+                  "Lifecycle",
+                  "Readiness",
+                  "Shutdown",
+                  "Recovery",
+                ]}
                 rows={controlPlane.lifecycle.capabilities.map((capability) => [
                   capability.name,
                   String(capability.sequenceOrder),
@@ -210,14 +237,14 @@ export function ControlPlaneOverviewSection({
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
             <p>Open items: {controlPlane.technicalDebt.openCount}</p>
-            <p className="text-muted-foreground">{controlPlane.technicalDebt.registerReference}</p>
+            <p className="text-muted-foreground">
+              {controlPlane.technicalDebt.registerReference}
+            </p>
             <OpsTable
               columns={["ID", "Priority", "Summary"]}
-              rows={controlPlane.technicalDebt.openItems.slice(0, 6).map((item) => [
-                item.id,
-                item.priority,
-                item.summary,
-              ])}
+              rows={controlPlane.technicalDebt.openItems
+                .slice(0, 6)
+                .map((item) => [item.id, item.priority, item.summary])}
             />
           </CardContent>
         </Card>

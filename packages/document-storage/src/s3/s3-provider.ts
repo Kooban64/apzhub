@@ -182,9 +182,7 @@ export async function createS3DocumentStorageProvider(
         etag: result.ETag,
       };
     },
-    async getObject(
-      input: DocumentStorageGetInput,
-    ): Promise<DocumentBinaryResult> {
+    async getObject(input: DocumentStorageGetInput): Promise<DocumentBinaryResult> {
       assertSafeStorageKey(input.ref.storageKey);
       const result = await client!.send(
         new GetObjectCommand({
@@ -195,10 +193,7 @@ export async function createS3DocumentStorageProvider(
       const bytes = await bodyToBytes(result.Body);
       return { kind: "bytes", bytes };
     },
-    async headObject(
-      _ctx: DocumentRequestContext,
-      ref: DocumentStorageReference,
-    ) {
+    async headObject(_ctx: DocumentRequestContext, ref: DocumentStorageReference) {
       assertSafeStorageKey(ref.storageKey);
       try {
         const result = await client!.send(
@@ -254,9 +249,7 @@ export async function createS3DocumentStorageProvider(
   return provider;
 }
 
-export function s3ProviderDiagnostics(
-  providerId: string,
-): Record<string, unknown> {
+export function s3ProviderDiagnostics(providerId: string): Record<string, unknown> {
   return {
     providerId,
     kind: "s3",

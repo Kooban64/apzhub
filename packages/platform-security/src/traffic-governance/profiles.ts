@@ -2,7 +2,9 @@ import type { TrafficPolicyLimits, TrafficPolicySource } from "./types";
 
 export type EnvironmentProfile = "development" | "test" | "production";
 
-export function resolveEnvironmentProfileMultiplier(profile: EnvironmentProfile): number {
+export function resolveEnvironmentProfileMultiplier(
+  profile: EnvironmentProfile,
+): number {
   switch (profile) {
     case "development":
       return 10;

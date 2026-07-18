@@ -9,12 +9,12 @@ The certified Observability path is frozen per [Architecture Freeze Notice](../a
 
 ## Change control
 
-| Requirement | Mandatory |
-| --- | --- |
-| ADR | Yes |
-| Owner approval | Yes |
-| Architecture review | Yes |
-| New approved milestone | Yes |
+| Requirement            | Mandatory |
+| ---------------------- | --------- |
+| ADR                    | Yes       |
+| Owner approval         | Yes       |
+| Architecture review    | Yes       |
+| New approved milestone | Yes       |
 
 No exceptions for runtime path changes.
 

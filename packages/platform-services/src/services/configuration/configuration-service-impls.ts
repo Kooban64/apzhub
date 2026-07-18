@@ -17,9 +17,7 @@ import {
   type PlatformConfigurationDomainService,
 } from "@apzhub/configuration-core";
 
-function toConfigurationCtx(
-  ctx: ServiceRequestContext,
-): ConfigurationRequestContext {
+function toConfigurationCtx(ctx: ServiceRequestContext): ConfigurationRequestContext {
   return {
     tenantId: ctx.tenantId,
     userId: ctx.userId,
@@ -78,18 +76,13 @@ export function mapConfigurationDomainError(
   });
 }
 
-function mapUnknownError(
-  error: unknown,
-  correlationId: string,
-): PlatformServiceError {
+function mapUnknownError(error: unknown, correlationId: string): PlatformServiceError {
   if (isPlatformServiceError(error)) return error;
   if (error instanceof ConfigurationDomainError) {
     return mapConfigurationDomainError(error, correlationId);
   }
   const message =
-    error instanceof Error
-      ? error.message
-      : "Unexpected configuration service error";
+    error instanceof Error ? error.message : "Unexpected configuration service error";
   if (
     /drizzle|postgres|pg_|relation |"platform_configuration|ECONNREFUSED|tenant_mismatch/i.test(
       message,
@@ -146,10 +139,7 @@ export function createConfigurationPlatformServiceImpls(input: {
         ),
       updateMetadata: (ctx, updateInput) =>
         withConfigurationErrorMapping(ctx, () =>
-          domain.updateConfigurationMetadata(
-            toConfigurationCtx(ctx),
-            updateInput,
-          ),
+          domain.updateConfigurationMetadata(toConfigurationCtx(ctx), updateInput),
         ),
       archive: (ctx, configurationId) =>
         withConfigurationErrorMapping(ctx, () =>
@@ -256,9 +246,7 @@ export function createConfigurationPlatformServiceImpls(input: {
           domain.validateConfigurationMetadata(configuration),
         ),
       listRules: (ctx) =>
-        withConfigurationErrorMapping(ctx, async () =>
-          domain.listValidationRules(),
-        ),
+        withConfigurationErrorMapping(ctx, async () => domain.listValidationRules()),
     },
     references: {
       list: (ctx, configurationId) =>

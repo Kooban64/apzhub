@@ -22,8 +22,8 @@ export const FOUNDATION_SEARCH_CAPABILITIES: SearchCapabilities = {
   fuzzy: false,
 };
 
-export function createUnknownSearchHealth(now = (): string =>
-  new Date().toISOString(),
+export function createUnknownSearchHealth(
+  now = (): string => new Date().toISOString(),
 ): SearchHealth {
   return {
     status: "unknown",

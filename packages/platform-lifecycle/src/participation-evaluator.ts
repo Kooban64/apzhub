@@ -13,7 +13,10 @@ import type {
   VersionCompatibilityReport,
 } from "./types";
 import type { LifecycleEvaluationContext } from "./lifecycle-context-builder";
-import type { ConsolidatedOperationalDiagnostics, HealthSignalStatus } from "@apzhub/platform-security";
+import type {
+  ConsolidatedOperationalDiagnostics,
+  HealthSignalStatus,
+} from "@apzhub/platform-security";
 import { lifecycleStateIndex } from "./lifecycle-states";
 
 function mapCapabilityLifecycleState(
@@ -62,11 +65,17 @@ function readinessForCapability(
     case "platform.security":
       return consolidated.resilience.health.status;
     case "platform.traffic-governance":
-      return consolidated.security.trafficGovernance.status.enabled ? "healthy" : "degraded";
+      return consolidated.security.trafficGovernance.status.enabled
+        ? "healthy"
+        : "degraded";
     case "platform.session-security":
-      return consolidated.security.session.sessionDiagnostics.healthy ? "healthy" : "degraded";
+      return consolidated.security.session.sessionDiagnostics.healthy
+        ? "healthy"
+        : "degraded";
     case "platform.tenant-isolation":
-      return consolidated.security.apiGuard.permissionEnforcement ? "healthy" : "degraded";
+      return consolidated.security.apiGuard.permissionEnforcement
+        ? "healthy"
+        : "degraded";
     case "platform.workbench":
       return consolidated.workbench ? "healthy" : "degraded";
     case "platform.api-framework":
@@ -88,7 +97,10 @@ export function evaluateVersionCompatibility(
       id: registration.capabilityId,
       version: registration.version,
       constraint: registration.minPlatformVersion,
-      compatible: satisfiesPlatformVersion(registration.minPlatformVersion, platformVersion),
+      compatible: satisfiesPlatformVersion(
+        registration.minPlatformVersion,
+        platformVersion,
+      ),
       message: registration.minPlatformVersion
         ? `Requires platform ${registration.minPlatformVersion}`
         : "No platform version constraint.",
@@ -97,7 +109,10 @@ export function evaluateVersionCompatibility(
       id: registration.productId,
       version: registration.version,
       constraint: registration.minPlatformVersion,
-      compatible: satisfiesPlatformVersion(registration.minPlatformVersion, platformVersion),
+      compatible: satisfiesPlatformVersion(
+        registration.minPlatformVersion,
+        platformVersion,
+      ),
       message: registration.minPlatformVersion
         ? `Requires platform ${registration.minPlatformVersion}`
         : "No platform version constraint.",
@@ -142,7 +157,9 @@ export function buildCapabilityParticipations(input: {
     const warnings: string[] = [];
 
     if (!versionCompatible) {
-      warnings.push(`Version constraint ${registration.minPlatformVersion ?? "unknown"} not satisfied.`);
+      warnings.push(
+        `Version constraint ${registration.minPlatformVersion ?? "unknown"} not satisfied.`,
+      );
     }
     if (readiness === "degraded") {
       warnings.push("Capability readiness is degraded.");
@@ -216,7 +233,11 @@ export function buildProductParticipations(input: {
       productId: registration.productId,
       name: registration.name,
       version: registration.version,
-      lifecycleState: mapCapabilityLifecycleState(registration.productId, readiness, platformState),
+      lifecycleState: mapCapabilityLifecycleState(
+        registration.productId,
+        readiness,
+        platformState,
+      ),
       dependencies: [...registration.dependencies],
       readiness,
       shutdownStatus,

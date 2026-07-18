@@ -39,14 +39,14 @@ This milestone stops at the Search Integration Framework.
 
 ## Entity types
 
-| Type | Canonical model | Independent discovery |
-| ---- | --------------- | --------------------- |
-| `document` | `Document` | **Primary** |
-| `document_version` | `DocumentVersion` + parent `Document` | Optional |
-| `document_collection` | `DocumentCollection` | Yes |
-| `document_folder` | `DocumentFolder` | Yes |
-| `document_category` | `DocumentCategory` | Yes |
-| `document_tag` | `DocumentTag` | Yes |
+| Type                  | Canonical model                       | Independent discovery |
+| --------------------- | ------------------------------------- | --------------------- |
+| `document`            | `Document`                            | **Primary**           |
+| `document_version`    | `DocumentVersion` + parent `Document` | Optional              |
+| `document_collection` | `DocumentCollection`                  | Yes                   |
+| `document_folder`     | `DocumentFolder`                      | Yes                   |
+| `document_category`   | `DocumentCategory`                    | Yes                   |
+| `document_tag`        | `DocumentTag`                         | Yes                   |
 
 Relationships and audit records are **not** independent Search entities. Generated-report refs and retention summaries ride on the Document.
 

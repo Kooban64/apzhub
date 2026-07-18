@@ -7,16 +7,16 @@
 
 ## Forbidden matrix
 
-| Rule | Result |
-| ---- | ------ |
+| Rule                                                                                             | Result   |
+| ------------------------------------------------------------------------------------------------ | -------- |
 | UI never imports platform-services / providers / adapters / SDK / testing-services / persistence | **PASS** |
-| HTTP never imports adapters / providers / SDK / testing-services / persistence | **PASS** |
-| Gateway never imports adapter internals | **PASS** |
-| Platform services never import GitHub DTOs / RestClient | **PASS** |
-| Providers call `adapter.core` only | **PASS** |
-| Adapter never imports platform-services | **PASS** |
-| No GitHub DTO leakage outside adapter package | **PASS** |
-| No adapter bypass from HTTP/UI | **PASS** |
+| HTTP never imports adapters / providers / SDK / testing-services / persistence                   | **PASS** |
+| Gateway never imports adapter internals                                                          | **PASS** |
+| Platform services never import GitHub DTOs / RestClient                                          | **PASS** |
+| Providers call `adapter.core` only                                                               | **PASS** |
+| Adapter never imports platform-services                                                          | **PASS** |
+| No GitHub DTO leakage outside adapter package                                                    | **PASS** |
+| No adapter bypass from HTTP/UI                                                                   | **PASS** |
 
 Scan result: **VIOLATIONS=0**.
 

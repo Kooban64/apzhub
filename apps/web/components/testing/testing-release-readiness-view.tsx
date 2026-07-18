@@ -73,7 +73,9 @@ export function TestingReleaseReadinessView({
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Updated</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Updated
+                </dt>
                 <dd>{formatTestingDate(release.updatedAt)}</dd>
               </div>
             </dl>

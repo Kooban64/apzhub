@@ -69,10 +69,7 @@ export function mapObserveDomainError(
   });
 }
 
-function mapUnknownError(
-  error: unknown,
-  correlationId: string,
-): PlatformServiceError {
+function mapUnknownError(error: unknown, correlationId: string): PlatformServiceError {
   if (isPlatformServiceError(error)) return error;
   if (error instanceof ObserveDomainError) {
     return mapObserveDomainError(error, correlationId);
@@ -122,9 +119,7 @@ export function createObservePlatformServiceImpls(input: {
   return {
     healthChecks: {
       list: (ctx) =>
-        withObserveErrorMapping(ctx, () =>
-          domain.listHealthChecks(toObserveCtx(ctx)),
-        ),
+        withObserveErrorMapping(ctx, () => domain.listHealthChecks(toObserveCtx(ctx))),
       get: (ctx, id) =>
         withObserveErrorMapping(ctx, () =>
           domain.getHealthCheck(toObserveCtx(ctx), id),
@@ -248,9 +243,7 @@ export function createObservePlatformServiceImpls(input: {
     },
     metricSamples: {
       list: (ctx) =>
-        withObserveErrorMapping(ctx, () =>
-          domain.listMetricSamples(toObserveCtx(ctx)),
-        ),
+        withObserveErrorMapping(ctx, () => domain.listMetricSamples(toObserveCtx(ctx))),
       get: (ctx, id) =>
         withObserveErrorMapping(ctx, () =>
           domain.getMetricSample(toObserveCtx(ctx), id),
@@ -284,13 +277,9 @@ export function createObservePlatformServiceImpls(input: {
     },
     alertStates: {
       list: (ctx) =>
-        withObserveErrorMapping(ctx, () =>
-          domain.listAlertStates(toObserveCtx(ctx)),
-        ),
+        withObserveErrorMapping(ctx, () => domain.listAlertStates(toObserveCtx(ctx))),
       get: (ctx, id) =>
-        withObserveErrorMapping(ctx, () =>
-          domain.getAlertState(toObserveCtx(ctx), id),
-        ),
+        withObserveErrorMapping(ctx, () => domain.getAlertState(toObserveCtx(ctx), id)),
       create: (ctx, createInput) =>
         withObserveErrorMapping(ctx, () =>
           domain.createAlertState(toObserveCtx(ctx), createInput),
@@ -320,13 +309,9 @@ export function createObservePlatformServiceImpls(input: {
     },
     logSources: {
       list: (ctx) =>
-        withObserveErrorMapping(ctx, () =>
-          domain.listLogSources(toObserveCtx(ctx)),
-        ),
+        withObserveErrorMapping(ctx, () => domain.listLogSources(toObserveCtx(ctx))),
       get: (ctx, id) =>
-        withObserveErrorMapping(ctx, () =>
-          domain.getLogSource(toObserveCtx(ctx), id),
-        ),
+        withObserveErrorMapping(ctx, () => domain.getLogSource(toObserveCtx(ctx), id)),
       create: (ctx, createInput) =>
         withObserveErrorMapping(ctx, () =>
           domain.createLogSource(toObserveCtx(ctx), createInput),
@@ -356,13 +341,9 @@ export function createObservePlatformServiceImpls(input: {
     },
     traceSpans: {
       list: (ctx) =>
-        withObserveErrorMapping(ctx, () =>
-          domain.listTraceSpans(toObserveCtx(ctx)),
-        ),
+        withObserveErrorMapping(ctx, () => domain.listTraceSpans(toObserveCtx(ctx))),
       get: (ctx, id) =>
-        withObserveErrorMapping(ctx, () =>
-          domain.getTraceSpan(toObserveCtx(ctx), id),
-        ),
+        withObserveErrorMapping(ctx, () => domain.getTraceSpan(toObserveCtx(ctx), id)),
       create: (ctx, createInput) =>
         withObserveErrorMapping(ctx, () =>
           domain.createTraceSpan(toObserveCtx(ctx), createInput),
@@ -446,9 +427,7 @@ export function createObservePlatformServiceImpls(input: {
     },
     diagnostics: {
       health: (ctx) =>
-        withObserveErrorMapping(ctx, () =>
-          domain.diagnosticsHealth(toObserveCtx(ctx)),
-        ),
+        withObserveErrorMapping(ctx, () => domain.diagnosticsHealth(toObserveCtx(ctx))),
       readiness: (ctx) =>
         withObserveErrorMapping(ctx, () =>
           domain.diagnosticsReadiness(toObserveCtx(ctx)),

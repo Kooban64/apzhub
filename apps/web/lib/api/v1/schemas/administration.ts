@@ -380,4 +380,5 @@ export const administrationAuditListQuerySchema = paginationQuerySchema
   })
   .strict();
 
-export const administrationOptionalModuleListQuerySchema = paginationQuerySchema.strict();
+export const administrationOptionalModuleListQuerySchema =
+  paginationQuerySchema.strict();

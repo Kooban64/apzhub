@@ -91,8 +91,6 @@ export function asHealthSummaryId(value: string): HealthSummaryId {
 export function asPlatformDiagnosticId(value: string): PlatformDiagnosticId {
   return brandId(value);
 }
-export function asObservabilityMetadataId(
-  value: string,
-): ObservabilityMetadataId {
+export function asObservabilityMetadataId(value: string): ObservabilityMetadataId {
   return brandId(value);
 }

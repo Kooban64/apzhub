@@ -1,4 +1,7 @@
-import { PlatformServiceError, isPlatformServiceError } from "@apzhub/platform-service-contracts";
+import {
+  PlatformServiceError,
+  isPlatformServiceError,
+} from "@apzhub/platform-service-contracts";
 import type {
   PlatformServiceErrorCategory,
   PlatformServiceErrorCode,
@@ -106,13 +109,14 @@ export function mapTestingDomainError(
   }
 
   if (error instanceof DomainRuleError) {
-    const mapped =
-      DOMAIN_CODE_MAPPINGS.find(([pattern]) => pattern.test(error.code))?.[1] ?? {
-        category: "business_rule" as const,
-        code: "BUSINESS_RULE_VIOLATION" as const,
-        message: "Testing business rule violation",
-        retryable: false,
-      };
+    const mapped = DOMAIN_CODE_MAPPINGS.find(([pattern]) =>
+      pattern.test(error.code),
+    )?.[1] ?? {
+      category: "business_rule" as const,
+      code: "BUSINESS_RULE_VIOLATION" as const,
+      message: "Testing business rule violation",
+      retryable: false,
+    };
 
     return new PlatformServiceError({
       ...mapped,

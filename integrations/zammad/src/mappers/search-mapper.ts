@@ -8,9 +8,7 @@ import type {
   SupportUser,
   SupportArticle,
 } from "../models/canonical";
-import {
-  toSupportSearchHitId,
-} from "./mapper-context";
+import { toSupportSearchHitId } from "./mapper-context";
 
 export function mapTicketToSearchHit(ticket: SupportTicket): SupportSearchHit {
   return {
@@ -27,7 +25,10 @@ export function mapOrganizationToSearchHit(
   organization: SupportOrganization,
 ): SupportSearchHit {
   return {
-    id: toSupportSearchHitId("organization", organization.id.replace(/^sorg_zammad_/, "")),
+    id: toSupportSearchHitId(
+      "organization",
+      organization.id.replace(/^sorg_zammad_/, ""),
+    ),
     kind: "organization",
     title: organization.name,
     snippet: organization.domain,

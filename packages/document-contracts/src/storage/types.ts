@@ -17,8 +17,7 @@ export type DocumentStorageOperationState =
   (typeof DOCUMENT_STORAGE_OPERATION_STATES)[number];
 
 export const DOCUMENT_CHECKSUM_ALGORITHMS = ["sha256"] as const;
-export type DocumentChecksumAlgorithm =
-  (typeof DOCUMENT_CHECKSUM_ALGORITHMS)[number];
+export type DocumentChecksumAlgorithm = (typeof DOCUMENT_CHECKSUM_ALGORITHMS)[number];
 
 /** Opaque binary source — never a filesystem path from domain callers. */
 export type DocumentBinarySource =

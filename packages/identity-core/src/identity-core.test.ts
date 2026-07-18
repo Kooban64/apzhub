@@ -57,9 +57,9 @@ describe("identity-core", () => {
       "deactivated",
       "archived",
     ]);
-    expect(() =>
-      assertIdentityLifecycleTransition("archived", "active"),
-    ).toThrow(/Cannot transition/);
+    expect(() => assertIdentityLifecycleTransition("archived", "active")).toThrow(
+      /Cannot transition/,
+    );
   });
 
   it("validates users, groups, roles and forbids credentials", () => {
@@ -78,12 +78,10 @@ describe("identity-core", () => {
     validateIdentityUser(user);
     validateIdentityAggregate(user);
 
-    expect(() =>
-      validateIdentityUser({ ...user, displayName: "  " }),
-    ).toThrow(/displayName/);
-    expect(() =>
-      validateIdentityUser({ ...user, tenantId: "  " }),
-    ).toThrow(/tenantId/);
+    expect(() => validateIdentityUser({ ...user, displayName: "  " })).toThrow(
+      /displayName/,
+    );
+    expect(() => validateIdentityUser({ ...user, tenantId: "  " })).toThrow(/tenantId/);
     expect(() => assertNoCredentialFields("passwordHash=abc")).toThrow(
       /must not store authentication credentials/,
     );
@@ -270,9 +268,7 @@ describe("identity-core", () => {
         updatedBy: "u",
       }),
     ).toThrow(/subjectId/);
-    expect(() =>
-      validateIdentityAggregate({ tenantId: "  " }),
-    ).toThrow(/tenantId/);
+    expect(() => validateIdentityAggregate({ tenantId: "  " })).toThrow(/tenantId/);
     validateIdentityAggregate({});
     validateIdentityMetadataNotes({
       id: "md_1" as never,

@@ -4,7 +4,7 @@
 **Module:** Testing (`testing`)  
 **Milestone:** APZTCMS-010 (originally APZTCMS-001)  
 **Status:** **Implemented in APZTCMS-010** — presentation-only workbench UI (typed client + mock transport; no HTTP/DB)  
-**Authority:** [005](../005-desktop-environment-framework-shell-architecture.md) · [016](../016-desktop-shell-architecture-user-experience-framework.md) · [017](../017-navigation-framework-workspace-navigation-architecture.md) · [006](../006-design-system-ui-component-architecture.md) · [Module Catalogue](./APZHUB-APZ-TCMS-Module-Catalogue.md)
+**Authority:** [005](../005-desktop-experience-workspace-framework.md) · [016](../016-desktop-shell-architecture-user-experience-framework.md) · [017](../017-navigation-framework-workspace-navigation-architecture.md) · [006](../006-enterprise-design-system-ui-standards.md) · [Module Catalogue](./APZHUB-APZ-TCMS-Module-Catalogue.md)
 
 ---
 

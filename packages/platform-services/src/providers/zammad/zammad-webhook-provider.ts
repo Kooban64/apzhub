@@ -1,5 +1,8 @@
 import type { ZammadCoreServices } from "@apzhub/integration-zammad";
-import type { CreateWebhookInput, UpdateWebhookInput } from "@apzhub/platform-service-contracts";
+import type {
+  CreateWebhookInput,
+  UpdateWebhookInput,
+} from "@apzhub/platform-service-contracts";
 
 import { toIntegrationContext } from "../../context/to-integration-context";
 import { withProviderErrorMapping } from "../../errors/map-provider-error";
@@ -15,7 +18,9 @@ export const ZAMMAD_WEBHOOK_PROVIDER_REGISTRATION = {
   priority: 100,
 };
 
-export function createZammadWebhookProvider(core: ZammadCoreServices): SupportWebhookProvider {
+export function createZammadWebhookProvider(
+  core: ZammadCoreServices,
+): SupportWebhookProvider {
   return {
     validateConfiguration(input) {
       return core.webhooks.validateConfiguration(input);

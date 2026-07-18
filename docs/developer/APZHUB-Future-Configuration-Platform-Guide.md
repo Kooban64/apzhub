@@ -8,7 +8,7 @@
 
 ## Purpose
 
-Describe possible future programmes that build *beyond* the frozen Configuration metadata SoR. This document is guidance only.
+Describe possible future programmes that build _beyond_ the frozen Configuration metadata SoR. This document is guidance only.
 
 ## Frozen baseline (do not alter here)
 
@@ -33,7 +33,7 @@ APZCONFIG-001…006 certified metadata plane remains frozen. See [Architecture F
 
 - Secret storage, rotation, reference resolution
 - Vault or equivalent integration behind Integration SDK adapters
-- Configuration SoR may hold *references* only — never secret payloads
+- Configuration SoR may hold _references_ only — never secret payloads
 
 ### 4. Configuration Rollout Platform
 

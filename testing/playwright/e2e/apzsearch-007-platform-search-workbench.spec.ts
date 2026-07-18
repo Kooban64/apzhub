@@ -119,7 +119,9 @@ test.describe("APZSEARCH-007 platform search workbench", () => {
     await signIn(page);
     await page.goto(SEARCH_HOME);
     await expect(page.getByTestId("search-page")).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByRole("heading", { level: 1, name: "Overview" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { level: 1, name: "Overview" }),
+    ).toBeVisible();
     await expect(page.getByTestId("search-health-status")).toContainText(/available/i);
     expect(seen.some((p) => p.includes("/api/v1/search"))).toBeTruthy();
   });

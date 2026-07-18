@@ -44,7 +44,8 @@ export function mapZammadUser(
     lastName: record.lastname,
     active: record.active !== false,
     role: mapSupportUserRole(record),
-    organizationIds: organizationIds.length > 0 ? [...new Set(organizationIds)] : undefined,
+    organizationIds:
+      organizationIds.length > 0 ? [...new Set(organizationIds)] : undefined,
     createdAt: record.created_at ?? new Date(0).toISOString(),
     updatedAt: record.updated_at ?? record.created_at ?? new Date(0).toISOString(),
   };

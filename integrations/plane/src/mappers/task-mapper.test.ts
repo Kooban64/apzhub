@@ -15,7 +15,9 @@ import {
 
 describe("mapPlaneIssue", () => {
   it("maps a full Plane issue to a canonical Task", () => {
-    const task = mapPlaneIssue(MOCK_ISSUE, "proj_plane_proj-001", { stateGroup: "started" });
+    const task = mapPlaneIssue(MOCK_ISSUE, "proj_plane_proj-001", {
+      stateGroup: "started",
+    });
 
     expect(task.id).toBe("task_plane_issue-001");
     expect(task.projectId).toBe("proj_plane_proj-001");
@@ -182,14 +184,16 @@ describe("mapTaskToPlaneCreateBody / mapTaskToPlaneUpdateBody", () => {
     });
 
     expect(mapTaskToPlaneUpdateBody({ assigneeIds: null })).toEqual({ assignees: [] });
-    expect(
-      mapTaskToPlaneUpdateBody({ assigneeIds: ["user_plane_user-002"] }),
-    ).toEqual({ assignees: ["user-002"] });
+    expect(mapTaskToPlaneUpdateBody({ assigneeIds: ["user_plane_user-002"] })).toEqual({
+      assignees: ["user-002"],
+    });
 
     expect(mapTaskToPlaneUpdateBody({ description: "Updated" })).toEqual({
       description_html: "Updated",
     });
-    expect(mapTaskToPlaneUpdateBody({ estimate: {} })).toEqual({ estimate_point: null });
+    expect(mapTaskToPlaneUpdateBody({ estimate: {} })).toEqual({
+      estimate_point: null,
+    });
   });
 
   it("prefers assigneeIds over assigneeId on create", () => {

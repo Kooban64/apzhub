@@ -1,12 +1,7 @@
 import type { CspAppProfile } from "./csp-types";
 
 export type HttpSecuritySurface =
-  | "page"
-  | "api"
-  | "health"
-  | "diagnostics"
-  | "swagger"
-  | "static";
+  "page" | "api" | "health" | "diagnostics" | "swagger" | "static";
 
 export interface HttpSecurityHeaderBuildInput {
   readonly app: CspAppProfile;

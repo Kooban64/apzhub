@@ -25,7 +25,9 @@ export const ZAMMAD_SUPPORT_PROVIDER_REGISTRATION = {
   priority: 100,
 };
 
-const SUPPORT_SORT_MAP: Partial<Record<SupportTicketSortField, SupportTicketSortField>> = {
+const SUPPORT_SORT_MAP: Partial<
+  Record<SupportTicketSortField, SupportTicketSortField>
+> = {
   title: "title",
   displayId: "displayId",
   status: "status",
@@ -47,11 +49,17 @@ function mapSupportSort(
 export function createZammadSupportProvider(core: ZammadCoreServices): SupportProvider {
   return {
     listSupportRequests(ctx, query) {
-      const { page, sort, filter } = unwrapListQuery<SupportTicketListFilter, SupportTicketSortField>(
-        query,
-      );
+      const { page, sort, filter } = unwrapListQuery<
+        SupportTicketListFilter,
+        SupportTicketSortField
+      >(query);
       return withProviderErrorMapping(ctx.correlationId, () =>
-        core.support.list(toIntegrationContext(ctx), filter, page, mapSupportSort(sort)),
+        core.support.list(
+          toIntegrationContext(ctx),
+          filter,
+          page,
+          mapSupportSort(sort),
+        ),
       );
     },
 
@@ -101,16 +109,21 @@ export function createZammadSupportProvider(core: ZammadCoreServices): SupportPr
       );
     },
 
-    changeSupportRequestState(ctx, supportRequestId, input: ChangeSupportTicketStateInput) {
+    changeSupportRequestState(
+      ctx,
+      supportRequestId,
+      input: ChangeSupportTicketStateInput,
+    ) {
       return withProviderErrorMapping(ctx.correlationId, () =>
         core.support.changeState(toIntegrationContext(ctx), supportRequestId, input),
       );
     },
 
     searchSupportRequests(ctx, query) {
-      const { page, sort, filter } = unwrapListQuery<SupportTicketListFilter, SupportTicketSortField>(
-        query,
-      );
+      const { page, sort, filter } = unwrapListQuery<
+        SupportTicketListFilter,
+        SupportTicketSortField
+      >(query);
       return withProviderErrorMapping(ctx.correlationId, async () => {
         if (filter.displayId?.trim()) {
           return core.support.searchByTicketNumber(

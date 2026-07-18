@@ -114,7 +114,9 @@ export class ZammadSyncService {
 
     const startedAt = this.deps.clock?.nowMs() ?? Date.now();
     const startedIso = new Date(startedAt).toISOString();
-    const resume = decodeResumeToken(options.resumeToken ?? this.status.cursor.resumeToken);
+    const resume = decodeResumeToken(
+      options.resumeToken ?? this.status.cursor.resumeToken,
+    );
     const since =
       mode === "incremental"
         ? (options.since ?? resume?.since ?? this.getLastSyncTimestamp())
@@ -142,7 +144,9 @@ export class ZammadSyncService {
       );
 
       const durationMs = (this.deps.clock?.nowMs() ?? Date.now()) - startedAt;
-      const completedAt = new Date(this.deps.clock?.nowMs() ?? Date.now()).toISOString();
+      const completedAt = new Date(
+        this.deps.clock?.nowMs() ?? Date.now(),
+      ).toISOString();
 
       this.status = {
         mode,
@@ -253,7 +257,8 @@ export class ZammadSyncService {
       );
       for (const organization of organizations.items) {
         if (recordsProcessed >= maxRecords) break;
-        if (mode === "incremental" && !matchesSince(organization.updated_at, since)) continue;
+        if (mode === "incremental" && !matchesSince(organization.updated_at, since))
+          continue;
         organizationCount += 1;
         recordsProcessed += 1;
       }

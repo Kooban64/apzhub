@@ -40,12 +40,13 @@ apz-portal/
 
 ## Applications (`apps/`)
 
-| App | Package | Purpose |
-|-----|---------|---------|
-| `apps/web/` | `@apzhub/web` | Primary platform application — shell, platform APIs |
-| `apps/law-platform/` | `@apzhub/law-platform` | Law Platform product application |
+| App                  | Package                | Purpose                                             |
+| -------------------- | ---------------------- | --------------------------------------------------- |
+| `apps/web/`          | `@apzhub/web`          | Primary platform application — shell, platform APIs |
+| `apps/law-platform/` | `@apzhub/law-platform` | Law Platform product application                    |
 
 Both apps:
+
 - Next.js App Router
 - Share Platform Core bootstrap via `@apzhub/platform-bootstrap`
 - Use `@apzhub/workbench-framework` and `@apzhub/workspace`
@@ -81,12 +82,12 @@ Product:             legal-business-core
 
 ## Capabilities (manifest directories)
 
-| Directory | Manifest | Purpose |
-|-----------|----------|---------|
-| `services/{id}/` | `service.yaml` | Platform Services — business logic layer |
-| `integrations/{id}/` | `integration.yaml` | OSS adapter connectors |
-| `modules/{id}/` | `module.yaml` | Business modules — presentation layer |
-| `events/{id}/` | `event.yaml` | Platform event definitions |
+| Directory            | Manifest           | Purpose                                  |
+| -------------------- | ------------------ | ---------------------------------------- |
+| `services/{id}/`     | `service.yaml`     | Platform Services — business logic layer |
+| `integrations/{id}/` | `integration.yaml` | OSS adapter connectors                   |
+| `modules/{id}/`      | `module.yaml`      | Business modules — presentation layer    |
+| `events/{id}/`       | `event.yaml`       | Platform event definitions               |
 
 Discovery: `@apzhub/platform-runtime` scans these at bootstrap.
 
@@ -94,24 +95,24 @@ Discovery: `@apzhub/platform-runtime` scans these at bootstrap.
 
 ## Documentation (`docs/`)
 
-| Directory | Contents |
-|-----------|----------|
-| `docs/foundation/` | **Knowledge Foundation (APZHUB-000)** |
-| `docs/` (root) | Foundation docs 000–029, quick references |
-| `docs/architecture/` | Architecture documents |
-| `docs/adr/` | Architecture Decision Records |
-| `docs/strategy/` | Master strategy and roadmaps |
-| `docs/specs/` | Technical specifications |
-| `docs/backlog/` | Engineering backlogs |
-| `docs/sprint/` | Sprint guides and completion reports |
-| `docs/reviews/` | Architecture and readiness reviews |
-| `docs/governance/` | Engineering and operational guides |
-| `docs/developer/` | Developer onboarding guides |
-| `docs/security/` | Security audits and compliance |
-| `docs/releases/` | Release notes |
-| `docs/roadmap/` | Roadmaps |
-| `docs/build/` | Build guides |
-| `docs/operator/` | Operator guides |
+| Directory            | Contents                                  |
+| -------------------- | ----------------------------------------- |
+| `docs/foundation/`   | **Knowledge Foundation (APZHUB-000)**     |
+| `docs/` (root)       | Foundation docs 000–029, quick references |
+| `docs/architecture/` | Architecture documents                    |
+| `docs/adr/`          | Architecture Decision Records             |
+| `docs/strategy/`     | Master strategy and roadmaps              |
+| `docs/specs/`        | Technical specifications                  |
+| `docs/backlog/`      | Engineering backlogs                      |
+| `docs/sprint/`       | Sprint guides and completion reports      |
+| `docs/reviews/`      | Architecture and readiness reviews        |
+| `docs/governance/`   | Engineering and operational guides        |
+| `docs/developer/`    | Developer onboarding guides               |
+| `docs/security/`     | Security audits and compliance            |
+| `docs/releases/`     | Release notes                             |
+| `docs/roadmap/`      | Roadmaps                                  |
+| `docs/build/`        | Build guides                              |
+| `docs/operator/`     | Operator guides                           |
 
 Navigation: [PROJECT-INDEX](./PROJECT-INDEX.md) · [DOCUMENT-MAP](./DOCUMENT-MAP.md)
 
@@ -119,13 +120,14 @@ Navigation: [PROJECT-INDEX](./PROJECT-INDEX.md) · [DOCUMENT-MAP](./DOCUMENT-MAP
 
 ## Testing (`testing/`)
 
-| Path | Purpose |
-|------|---------|
-| `testing/playwright/` | E2E configs for web and law-platform |
-| Package `*.test.ts` | Unit and integration tests co-located with source |
-| `vitest.config.ts` | Root test runner with path aliases |
+| Path                  | Purpose                                           |
+| --------------------- | ------------------------------------------------- |
+| `testing/playwright/` | E2E configs for web and law-platform              |
+| Package `*.test.ts`   | Unit and integration tests co-located with source |
+| `vitest.config.ts`    | Root test runner with path aliases                |
 
 Commands:
+
 ```bash
 pnpm test              # All Vitest tests
 pnpm test:coverage     # With coverage
@@ -137,11 +139,12 @@ pnpm test:e2e:law      # Playwright (law)
 
 ## Infrastructure (`infrastructure/`)
 
-| Path | Purpose |
-|------|---------|
+| Path                     | Purpose                                           |
+| ------------------------ | ------------------------------------------------- |
 | `infrastructure/docker/` | Docker Compose for dev (PostgreSQL, Redis, Caddy) |
 
 Commands:
+
 ```bash
 pnpm docker:up
 pnpm docker:down
@@ -157,26 +160,26 @@ Database migration, seeding, OpenAPI collection generation. Root `package.json` 
 
 ## Configuration files
 
-| File | Purpose |
-|------|---------|
-| `tsconfig.base.json` | Shared TS paths and strict settings |
-| `eslint.config.js` | ESLint flat config |
-| `.prettierrc` | Formatting |
-| `pnpm-workspace.yaml` | Workspace package globs |
-| `.cursor/rules/` | Cursor AI rules (apzhub-foundation.mdc) |
+| File                  | Purpose                                 |
+| --------------------- | --------------------------------------- |
+| `tsconfig.base.json`  | Shared TS paths and strict settings     |
+| `eslint.config.js`    | ESLint flat config                      |
+| `.prettierrc`         | Formatting                              |
+| `pnpm-workspace.yaml` | Workspace package globs                 |
+| `.cursor/rules/`      | Cursor AI rules (apzhub-foundation.mdc) |
 
 ---
 
 ## Conventions
 
-| Convention | Rule |
-|------------|------|
-| Package naming | `@apzhub/{kebab-case}` |
-| File naming | kebab-case for files; PascalCase for React components |
-| Test files | `*.test.ts` / `*.test.tsx` co-located |
-| Manifest first | YAML in capability directory before TypeScript |
-| Imports | Use path aliases from `tsconfig.base.json` |
-| No secrets in repo | Environment variables via `@apzhub/config` |
+| Convention         | Rule                                                  |
+| ------------------ | ----------------------------------------------------- |
+| Package naming     | `@apzhub/{kebab-case}`                                |
+| File naming        | kebab-case for files; PascalCase for React components |
+| Test files         | `*.test.ts` / `*.test.tsx` co-located                 |
+| Manifest first     | YAML in capability directory before TypeScript        |
+| Imports            | Use path aliases from `tsconfig.base.json`            |
+| No secrets in repo | Environment variables via `@apzhub/config`            |
 
 ---
 

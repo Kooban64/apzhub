@@ -61,9 +61,7 @@ export interface ConfigurationRepositoryPort {
     ctx: ConfigurationRequestContext,
     configuration: Configuration,
   ): Promise<Configuration>;
-  list(
-    ctx: ConfigurationRequestContext,
-  ): Promise<readonly Configuration[]>;
+  list(ctx: ConfigurationRequestContext): Promise<readonly Configuration[]>;
 }
 
 export interface ConfigurationNamespaceRepositoryPort {
@@ -79,9 +77,7 @@ export interface ConfigurationNamespaceRepositoryPort {
     ctx: ConfigurationRequestContext,
     namespace: ConfigurationNamespace,
   ): Promise<ConfigurationNamespace>;
-  list(
-    ctx: ConfigurationRequestContext,
-  ): Promise<readonly ConfigurationNamespace[]>;
+  list(ctx: ConfigurationRequestContext): Promise<readonly ConfigurationNamespace[]>;
 }
 
 export interface ConfigurationGroupRepositoryPort {
@@ -97,9 +93,7 @@ export interface ConfigurationGroupRepositoryPort {
     ctx: ConfigurationRequestContext,
     group: ConfigurationGroup,
   ): Promise<ConfigurationGroup>;
-  list(
-    ctx: ConfigurationRequestContext,
-  ): Promise<readonly ConfigurationGroup[]>;
+  list(ctx: ConfigurationRequestContext): Promise<readonly ConfigurationGroup[]>;
 }
 
 export interface ConfigurationKeyRepositoryPort {
@@ -111,9 +105,7 @@ export interface ConfigurationKeyRepositoryPort {
     ctx: ConfigurationRequestContext,
     keyId: ConfigurationKeyId,
   ): Promise<ConfigurationKey | null>;
-  list(
-    ctx: ConfigurationRequestContext,
-  ): Promise<readonly ConfigurationKey[]>;
+  list(ctx: ConfigurationRequestContext): Promise<readonly ConfigurationKey[]>;
 }
 
 export interface ConfigurationValueRepositoryPort {
@@ -211,9 +203,7 @@ export interface ConfigurationAuditRepositoryPort {
     ctx: ConfigurationRequestContext,
     auditId: ConfigurationAuditEntry["id"],
   ): Promise<ConfigurationAuditEntry | null>;
-  list(
-    ctx: ConfigurationRequestContext,
-  ): Promise<readonly ConfigurationAuditEntry[]>;
+  list(ctx: ConfigurationRequestContext): Promise<readonly ConfigurationAuditEntry[]>;
 }
 
 export type ConfigurationFoundationRepos = {

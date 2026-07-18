@@ -9,9 +9,9 @@
 
 ## Result (as certified at APZCONFIG-002 closeout)
 
-| Surface | Lines | Functions |
-| --- | --- | --- |
-| Configuration platform-services module + core domain service + contracts gateway | ≥95% | ≥95% |
+| Surface                                                                          | Lines | Functions |
+| -------------------------------------------------------------------------------- | ----- | --------- |
+| Configuration platform-services module + core domain service + contracts gateway | ≥95%  | ≥95%      |
 
 ## Notes
 

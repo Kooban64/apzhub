@@ -52,11 +52,14 @@ export class GovernancePolicyService {
       );
       const scoped = [
         input.userId
-          ? candidates.find((item) => item.scopeType === "user" && item.scopeKey === input.userId)
+          ? candidates.find(
+              (item) => item.scopeType === "user" && item.scopeKey === input.userId,
+            )
           : undefined,
         input.productKey
           ? candidates.find(
-              (item) => item.scopeType === "product" && item.scopeKey === input.productKey,
+              (item) =>
+                item.scopeType === "product" && item.scopeKey === input.productKey,
             )
           : undefined,
         input.tenantId
@@ -64,19 +67,29 @@ export class GovernancePolicyService {
               (item) => item.scopeType === "tenant" && item.scopeKey === input.tenantId,
             )
           : undefined,
-        candidates.find((item) => item.scopeType === "platform" && item.scopeKey === ""),
+        candidates.find(
+          (item) => item.scopeType === "platform" && item.scopeKey === "",
+        ),
       ].find(Boolean);
       return scoped?.enabled ?? true;
     };
 
     const products = [
-      ...new Set(enablements.filter((e) => e.targetType === "product").map((e) => e.targetKey)),
+      ...new Set(
+        enablements.filter((e) => e.targetType === "product").map((e) => e.targetKey),
+      ),
     ].filter((key) => isEnabled("product", key));
     const modules = [
-      ...new Set(enablements.filter((e) => e.targetType === "module").map((e) => e.targetKey)),
+      ...new Set(
+        enablements.filter((e) => e.targetType === "module").map((e) => e.targetKey),
+      ),
     ].filter((key) => isEnabled("module", key));
     const capabilities = [
-      ...new Set(enablements.filter((e) => e.targetType === "capability").map((e) => e.targetKey)),
+      ...new Set(
+        enablements
+          .filter((e) => e.targetType === "capability")
+          .map((e) => e.targetKey),
+      ),
     ].filter((key) => isEnabled("capability", key));
 
     return {
@@ -125,10 +138,14 @@ export class GovernanceEnablementService {
     return this.policy.resolveSessionSnapshot(input);
   }
 
-  async getCapabilityDiagnostics(repository: GovernanceRepository): Promise<CapabilityDiagnostics> {
+  async getCapabilityDiagnostics(
+    repository: GovernanceRepository,
+  ): Promise<CapabilityDiagnostics> {
     const capabilities = await repository.listCapabilities();
     const dependencies = (
-      await Promise.all(capabilities.map((cap) => repository.listDependencies(cap.capabilityId)))
+      await Promise.all(
+        capabilities.map((cap) => repository.listDependencies(cap.capabilityId)),
+      )
     ).flat();
     const enablements = await repository.listEnablements();
 

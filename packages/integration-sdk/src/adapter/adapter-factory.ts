@@ -1,4 +1,8 @@
-import { buildAdapterContext, type AdapterContext, type BuildAdapterContextInput } from "./adapter-context";
+import {
+  buildAdapterContext,
+  type AdapterContext,
+  type BuildAdapterContextInput,
+} from "./adapter-context";
 import { IntegrationAdapterBase } from "./adapter-base";
 import {
   createInMemoryCapabilityRegistration,
@@ -36,7 +40,9 @@ export class AdapterFactory {
       options.capabilityRegistration ?? createInMemoryCapabilityRegistration();
   }
 
-  validateRegistration(manifest: AdapterBootstrapConfiguration["manifest"]): CapabilityRegistrationResult {
+  validateRegistration(
+    manifest: AdapterBootstrapConfiguration["manifest"],
+  ): CapabilityRegistrationResult {
     return validateAdapterManifest(manifest);
   }
 
@@ -44,7 +50,9 @@ export class AdapterFactory {
     AdapterType: AdapterConstructor<T>,
     options: CreateAdapterOptions,
   ): Promise<AdapterFactoryCreateResult<T>> {
-    const registration = this.capabilityRegistration.register(options.configuration.manifest);
+    const registration = this.capabilityRegistration.register(
+      options.configuration.manifest,
+    );
     if (!registration.ok) {
       throw new Error(registration.message);
     }
@@ -62,7 +70,9 @@ export class AdapterFactory {
     return { adapter, context, registration };
   }
 
-  createMockAdapter(options: CreateAdapterOptions): Promise<AdapterFactoryCreateResult<MockAdapter>> {
+  createMockAdapter(
+    options: CreateAdapterOptions,
+  ): Promise<AdapterFactoryCreateResult<MockAdapter>> {
     return this.create(MockAdapter, options);
   }
 

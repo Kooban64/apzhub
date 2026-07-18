@@ -71,11 +71,7 @@ export function updateNotification(
   input: UpdateNotificationClientInput,
   options?: NotificationClientRequestOptions,
 ): Promise<NotificationViewModel> {
-  return getNotificationClient().updateNotification(
-    notificationId,
-    input,
-    options,
-  );
+  return getNotificationClient().updateNotification(notificationId, input, options);
 }
 
 export function archiveNotification(
@@ -97,11 +93,7 @@ export function transitionNotification(
   input: TransitionNotificationClientInput,
   options?: NotificationClientRequestOptions,
 ): Promise<NotificationViewModel> {
-  return getNotificationClient().transitionNotification(
-    notificationId,
-    input,
-    options,
-  );
+  return getNotificationClient().transitionNotification(notificationId, input, options);
 }
 
 export function markNotificationRead(
@@ -115,10 +107,7 @@ export function acknowledgeNotification(
   notificationId: string,
   options?: NotificationClientRequestOptions,
 ): Promise<NotificationViewModel> {
-  return getNotificationClient().acknowledgeNotification(
-    notificationId,
-    options,
-  );
+  return getNotificationClient().acknowledgeNotification(notificationId, options);
 }
 
 export function dismissNotification(
@@ -181,11 +170,7 @@ export function updateNotificationPreference(
   input: UpdateNotificationPreferenceClientInput,
   options?: NotificationClientRequestOptions,
 ): Promise<NotificationPreferenceViewModel> {
-  return getNotificationClient().updatePreference(
-    preferenceId,
-    input,
-    options,
-  );
+  return getNotificationClient().updatePreference(preferenceId, input, options);
 }
 
 export function listNotificationCategories(
@@ -226,11 +211,7 @@ export function getNotificationRecipient(
   recipientId: string,
   options?: NotificationClientRequestOptions,
 ): Promise<NotificationRecipientViewModel> {
-  return getNotificationClient().getRecipient(
-    notificationId,
-    recipientId,
-    options,
-  );
+  return getNotificationClient().getRecipient(notificationId, recipientId, options);
 }
 
 export function listNotificationReferences(

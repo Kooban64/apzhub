@@ -114,7 +114,9 @@ export class MappingOrchestrator {
    * After a successful provider create, allocate a global ID and persist the mapping.
    * If persistence fails, throws RECONCILIATION_REQUIRED — never silent success.
    */
-  async ensureMappingAfterCreate(input: EnsureMappingInput): Promise<EntityMappingRecord> {
+  async ensureMappingAfterCreate(
+    input: EnsureMappingInput,
+  ): Promise<EntityMappingRecord> {
     const { ctx, entityType } = input;
     const providerNativeId = extractProvisionalProviderNativeId(
       input.providerEntityId,
@@ -199,7 +201,9 @@ export class MappingOrchestrator {
    * Ensures a mapping exists for a provider-returned entity (list/get paths).
    * Creates a mapping lazily when the provider entity is seen for the first time.
    */
-  async ensureMappingForProviderEntity(input: EnsureMappingInput): Promise<EntityMappingRecord> {
+  async ensureMappingForProviderEntity(
+    input: EnsureMappingInput,
+  ): Promise<EntityMappingRecord> {
     return this.ensureMappingAfterCreate(input);
   }
 
@@ -212,7 +216,10 @@ export class MappingOrchestrator {
     providerEntityId: string,
     parent?: { platformId?: string; providerNativeId?: string },
   ): Promise<string> {
-    if (isValidGlobalId(providerEntityId) && !isProvisionalProviderId(providerEntityId)) {
+    if (
+      isValidGlobalId(providerEntityId) &&
+      !isProvisionalProviderId(providerEntityId)
+    ) {
       return providerEntityId;
     }
 

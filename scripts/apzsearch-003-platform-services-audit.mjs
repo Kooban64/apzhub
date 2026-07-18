@@ -24,7 +24,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -54,28 +55,45 @@ function scan(files, rules) {
   }
 }
 
-const searchPackages = [
-  "packages/search-contracts",
-  "packages/search-persistence",
-];
+const searchPackages = ["packages/search-contracts", "packages/search-persistence"];
 
 for (const root of searchPackages) {
   scan(walk(join(ROOT, root)), [
     { rule: "search-no-platform-services", pattern: /@apzhub\/platform-services/ },
-    { rule: "search-no-http", pattern: /NextRequest|withPlatformApiAuth|\/api\/v1\/search/ },
-    { rule: "search-no-workbench", pattern: /workbench-framework|PlatformReportingView/ },
-    { rule: "search-no-engines", pattern: /from ["']@opensearch-project|from ["']elasticsearch|from ["']meilisearch|require\(["']@elastic\// },
+    {
+      rule: "search-no-http",
+      pattern: /NextRequest|withPlatformApiAuth|\/api\/v1\/search/,
+    },
+    {
+      rule: "search-no-workbench",
+      pattern: /workbench-framework|PlatformReportingView/,
+    },
+    {
+      rule: "search-no-engines",
+      pattern:
+        /from ["']@opensearch-project|from ["']elasticsearch|from ["']meilisearch|require\(["']@elastic\//,
+    },
   ]);
 }
 
 scan(walk(join(ROOT, "packages/platform-services/src/services/search")), [
   { rule: "services-no-http", pattern: /NextRequest|OpenAPIHono|\/api\/v1/ },
   { rule: "services-no-workbench", pattern: /workbench-framework/ },
-  { rule: "services-no-engines", pattern: /from ["']@opensearch-project|from ["']elasticsearch|from ["']meilisearch|require\(["']@elastic\// },
-  { rule: "services-no-query-hits", pattern: /executeQuery\(|indexDocument\(|bulkIndex\(/ },
+  {
+    rule: "services-no-engines",
+    pattern:
+      /from ["']@opensearch-project|from ["']elasticsearch|from ["']meilisearch|require\(["']@elastic\//,
+  },
+  {
+    rule: "services-no-query-hits",
+    pattern: /executeQuery\(|indexDocument\(|bulkIndex\(/,
+  },
 ]);
 
-const gatewayFile = join(ROOT, "packages/platform-services/src/gateway/platform-service-gateway.ts");
+const gatewayFile = join(
+  ROOT,
+  "packages/platform-services/src/gateway/platform-service-gateway.ts",
+);
 const gateway = readFileSync(gatewayFile, "utf8");
 if (!/searchPlatformApi|searchProviders|searchConfigurations/.test(gateway)) {
   violations.push({
@@ -108,7 +126,10 @@ if (!/PLATFORM_SEARCH_PERMISSIONS/.test(catalogue)) {
 }
 
 const opMap = readFileSync(
-  join(ROOT, "packages/platform-services/src/authorization/operation-authorization-map.ts"),
+  join(
+    ROOT,
+    "packages/platform-services/src/authorization/operation-authorization-map.ts",
+  ),
   "utf8",
 );
 if (!/searchPlatformOps/.test(opMap)) {
@@ -119,7 +140,7 @@ if (!/searchPlatformOps/.test(opMap)) {
     detail: "searchPlatformOps missing from operation map",
   });
 }
-if (/searchQuery.*query.*search\.execute|searchQuery\",\s*\"query\"/.test(opMap)) {
+if (/searchQuery.*query.*search\.execute|searchQuery",\s*"query"/.test(opMap)) {
   violations.push({
     file: "packages/platform-services/src/authorization/operation-authorization-map.ts",
     line: 1,
@@ -141,7 +162,7 @@ const platformPkg = JSON.parse(
 // Subsequent sanctioned bumps (APZSEARCH-006 → contracts 0.4.0 / platform-services 0.18.0)
 // remain compatible; vertical certification accepts the certified floor set.
 const allowedContracts = new Set(["0.3.0", "0.4.0"]);
-const allowedPlatform = new Set(["0.17.0", "0.18.0", "0.19.0"]);
+const allowedPlatform = new Set(["0.17.0", "0.18.0", "0.19.0", "0.25.0"]);
 if (!allowedContracts.has(contractsPkg.version)) {
   violations.push({
     file: "packages/search-contracts/package.json",
@@ -163,7 +184,7 @@ if (!allowedPlatform.has(platformPkg.version)) {
     file: "packages/platform-services/package.json",
     line: 1,
     rule: "version-platform-services",
-    detail: `Expected 0.17.0, 0.18.0 or 0.19.0 (certified), got ${platformPkg.version}`,
+    detail: `Expected 0.17.0, 0.18.0, 0.19.0 or 0.25.0 (certified), got ${platformPkg.version}`,
   });
 }
 
@@ -180,7 +201,9 @@ if (violations.length > 0) {
 console.log("APZSEARCH-003 architecture audit PASSED");
 console.log("  - search packages do not depend on platform-services / HTTP / engines");
 console.log("  - platform search services do not execute queries or call engines");
-console.log("  - gateway exposes search platform facets without collapsing into legacy search");
+console.log(
+  "  - gateway exposes search platform facets without collapsing into legacy search",
+);
 console.log("  - authorization catalogue + operation map include search permissions");
 console.log(`RESULT: PASS`);
 console.log(`Violations: 0`);

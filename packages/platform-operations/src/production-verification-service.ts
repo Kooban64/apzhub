@@ -1,6 +1,10 @@
 import type { ConsolidatedOperationalDiagnostics } from "@apzhub/platform-security";
 
-import type { CapabilityHealthReport, ProductionVerificationFinding, ProductionVerificationReport } from "./types";
+import type {
+  CapabilityHealthReport,
+  ProductionVerificationFinding,
+  ProductionVerificationReport,
+} from "./types";
 
 function finding(
   id: string,
@@ -34,7 +38,13 @@ export function evaluateProductionVerification(input: {
     );
   } else {
     findings.push(
-      finding("bootstrap.ready", "bootstrap", "pass", "Platform bootstrap is ready.", "platform.bootstrap"),
+      finding(
+        "bootstrap.ready",
+        "bootstrap",
+        "pass",
+        "Platform bootstrap is ready.",
+        "platform.bootstrap",
+      ),
     );
   }
 
@@ -61,7 +71,9 @@ export function evaluateProductionVerification(input: {
     );
   }
 
-  const envWarns = consolidated.security.environment.checks.filter((check) => check.status === "warn");
+  const envWarns = consolidated.security.environment.checks.filter(
+    (check) => check.status === "warn",
+  );
   for (const warn of envWarns) {
     findings.push(
       finding(
@@ -88,7 +100,13 @@ export function evaluateProductionVerification(input: {
     );
   } else {
     findings.push(
-      finding("readiness.probe", "health", "pass", "Readiness probe passed.", "platform.security"),
+      finding(
+        "readiness.probe",
+        "health",
+        "pass",
+        "Readiness probe passed.",
+        "platform.security",
+      ),
     );
   }
 
@@ -203,7 +221,8 @@ export function evaluateProductionVerification(input: {
     }
 
     const expectedFoundationGap =
-      capability.maturityLevel === "foundation" || capability.maturityLevel === "experimental";
+      capability.maturityLevel === "foundation" ||
+      capability.maturityLevel === "experimental";
     if (
       !expectedFoundationGap &&
       (capability.health === "degraded" || capability.readiness === "degraded")
@@ -234,7 +253,9 @@ export function evaluateProductionVerification(input: {
 
   const totalChecks = passCount + warnCount + failCount;
   const score =
-    totalChecks === 0 ? 0 : Math.round(((passCount + warnCount * 0.5) / totalChecks) * 100);
+    totalChecks === 0
+      ? 0
+      : Math.round(((passCount + warnCount * 0.5) / totalChecks) * 100);
 
   return {
     verdict,

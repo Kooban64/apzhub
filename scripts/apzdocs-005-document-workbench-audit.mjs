@@ -60,20 +60,24 @@ const libFiles = walk(join(ROOT, "apps/web/lib/documents")).filter(
   (f) => !f.includes("document-boundary"),
 );
 
-scan([...componentFiles, ...libFiles], [
-  {
-    rule: "ui-no-document-core",
-    pattern: /@apzhub\/document-core|@apzhub\/document-persistence|@apzhub\/document-storage/,
-  },
-  {
-    rule: "ui-no-platform-services",
-    pattern: /@apzhub\/platform-services|getPlatformServiceGateway/,
-  },
-  {
-    rule: "ui-no-binary",
-    pattern: /FormData|multipart\/form-data|createReadStream|arrayBuffer\(/,
-  },
-]);
+scan(
+  [...componentFiles, ...libFiles],
+  [
+    {
+      rule: "ui-no-document-core",
+      pattern:
+        /@apzhub\/document-core|@apzhub\/document-persistence|@apzhub\/document-storage/,
+    },
+    {
+      rule: "ui-no-platform-services",
+      pattern: /@apzhub\/platform-services|getPlatformServiceGateway/,
+    },
+    {
+      rule: "ui-no-binary",
+      pattern: /FormData|multipart\/form-data|createReadStream|arrayBuffer\(/,
+    },
+  ],
+);
 
 const view = join(ROOT, "apps/web/components/documents/platform-documents-view.tsx");
 if (!existsSync(view)) {

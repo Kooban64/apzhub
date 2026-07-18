@@ -21,16 +21,16 @@ Workflow Workbench
 
 ## Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:workflow-foundation` | PASS |
-| `pnpm audit:workflow-platform-services` | PASS |
-| `pnpm audit:workflow-http-client` | PASS |
-| `pnpm audit:workflow-workbench` | PASS |
-| `pnpm audit:workflow-vertical` | PASS (required) |
-| `pnpm openapi:validate:platform` | PASS |
-| Vitest `testing/workflow-vertical` | Required harness |
-| Playwright live webServer | LIMITED (Testing slug conflict — external) |
+| Gate                                    | Result                                     |
+| --------------------------------------- | ------------------------------------------ |
+| `pnpm audit:workflow-foundation`        | PASS                                       |
+| `pnpm audit:workflow-platform-services` | PASS                                       |
+| `pnpm audit:workflow-http-client`       | PASS                                       |
+| `pnpm audit:workflow-workbench`         | PASS                                       |
+| `pnpm audit:workflow-vertical`          | PASS (required)                            |
+| `pnpm openapi:validate:platform`        | PASS                                       |
+| Vitest `testing/workflow-vertical`      | Required harness                           |
+| Playwright live webServer               | LIMITED (Testing slug conflict — external) |
 
 ## Intentional non-defects
 

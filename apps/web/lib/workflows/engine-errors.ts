@@ -33,10 +33,7 @@ export function toWorkflowEngineUserMessage(error: unknown): string {
     if (error.status === 501 || error.code === "PROVIDER_CAPABILITY_UNSUPPORTED") {
       return "This workflow engine operation is not supported.";
     }
-    if (
-      error.status === 503 ||
-      error.code === "WORKFLOW_SERVICE_UNAVAILABLE"
-    ) {
+    if (error.status === 503 || error.code === "WORKFLOW_SERVICE_UNAVAILABLE") {
       return "Workflow engine is temporarily unavailable.";
     }
     return error.message || "Unable to complete workflow engine request.";

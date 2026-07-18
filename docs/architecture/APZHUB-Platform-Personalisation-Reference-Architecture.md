@@ -6,11 +6,11 @@ Platform Personalisation owns how each user experiences APZHUB — appearance, r
 
 ## Separation of concerns
 
-| Concern | Owner |
-| --- | --- |
-| WHO | Identity (`platform-identity`) |
-| WHAT | Authorization (`platform-authorization`) |
-| HOW | Personalisation (`platform-personalisation`) |
+| Concern | Owner                                        |
+| ------- | -------------------------------------------- |
+| WHO     | Identity (`platform-identity`)               |
+| WHAT    | Authorization (`platform-authorization`)     |
+| HOW     | Personalisation (`platform-personalisation`) |
 
 ## Package
 
@@ -38,13 +38,13 @@ In-memory repositories for development and tests; PostgreSQL repositories when `
 
 ## APIs
 
-| Route | Methods |
-| --- | --- |
-| `/api/platform/v1/preferences` | GET, PATCH |
-| `/api/platform/v1/favorites` | GET, POST, DELETE |
-| `/api/platform/v1/recent` | GET, POST |
-| `/api/platform/v1/personalisation/diagnostics` | GET |
-| `/api/platform/v1/personalisation/workbench-layout` | GET, PUT |
+| Route                                               | Methods           |
+| --------------------------------------------------- | ----------------- |
+| `/api/platform/v1/preferences`                      | GET, PATCH        |
+| `/api/platform/v1/favorites`                        | GET, POST, DELETE |
+| `/api/platform/v1/recent`                           | GET, POST         |
+| `/api/platform/v1/personalisation/diagnostics`      | GET               |
+| `/api/platform/v1/personalisation/workbench-layout` | GET, PUT          |
 
 ## Product integration
 

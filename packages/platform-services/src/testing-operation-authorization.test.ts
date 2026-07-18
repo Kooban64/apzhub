@@ -197,7 +197,14 @@ const TESTING_GATEWAY_OPERATIONS = {
     "getMatrixForRequirement",
     "listMatrix",
   ],
-  testingApproval: ["list", "get", "request", "submitForReview", "decide", "listHistory"],
+  testingApproval: [
+    "list",
+    "get",
+    "request",
+    "submitForReview",
+    "decide",
+    "listHistory",
+  ],
   testingDashboard: ["getDashboardSummary"],
   testingReporting: [
     "listReportPlaceholders",
@@ -236,7 +243,9 @@ const TESTING_IMPLS_BY_SERVICE = {
   testingReporting: TestingReportingServiceImpl,
 } as const;
 
-function prototypeMethodNames(service: keyof typeof TESTING_IMPLS_BY_SERVICE): readonly string[] {
+function prototypeMethodNames(
+  service: keyof typeof TESTING_IMPLS_BY_SERVICE,
+): readonly string[] {
   return Object.getOwnPropertyNames(TESTING_IMPLS_BY_SERVICE[service].prototype).filter(
     (name) => name !== "constructor" && name !== "transition",
   );

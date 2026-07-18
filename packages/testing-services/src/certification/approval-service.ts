@@ -1,7 +1,4 @@
-import type {
-  Approval,
-  CertificationApprovalService,
-} from "@apzhub/testing-contracts";
+import type { Approval, CertificationApprovalService } from "@apzhub/testing-contracts";
 import {
   asApprovalId,
   asCertificationRecordId,

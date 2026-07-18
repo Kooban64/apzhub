@@ -73,11 +73,9 @@ export function assertHasReleasePermission(
       (p.endsWith(".*") && permission.startsWith(p.slice(0, -1))),
   );
   if (!ok) {
-    throw new DomainRuleError(
-      "permission_denied",
-      `Missing permission ${permission}`,
-      { permission },
-    );
+    throw new DomainRuleError("permission_denied", `Missing permission ${permission}`, {
+      permission,
+    });
   }
 }
 
@@ -321,12 +319,9 @@ async function transitionRelease(
   const rctx = toRepositoryContext(ctx);
   const existing = await loadRelease(rt, ctx, id);
   assertReleaseGovernanceTransition(existing.status, nextStatus);
-  const row = await rt.persistence.releases.update(
-    rctx,
-    id,
-    existing.revision,
-    { status: nextStatus },
-  );
+  const row = await rt.persistence.releases.update(rctx, id, existing.revision, {
+    status: nextStatus,
+  });
   await appendReleaseAudit(rt, ctx, {
     releaseId: id,
     action,
@@ -391,22 +386,15 @@ export function createReleaseGovernanceService(
         assertReleaseGovernanceTransition(existing.status, "planning");
         status = "planning";
       }
-      const row = await rt.persistence.releases.update(
-        rctx,
-        id,
-        existing.revision,
-        {
-          name: input.name,
-          description: input.description,
-          windowJson:
-            input.window !== undefined
-              ? windowToJson(input.window)
-              : existing.windowJson,
-          metadataJson:
-            input.metadata !== undefined ? input.metadata : existing.metadataJson,
-          status,
-        },
-      );
+      const row = await rt.persistence.releases.update(rctx, id, existing.revision, {
+        name: input.name,
+        description: input.description,
+        windowJson:
+          input.window !== undefined ? windowToJson(input.window) : existing.windowJson,
+        metadataJson:
+          input.metadata !== undefined ? input.metadata : existing.metadataJson,
+        status,
+      });
       await appendReleaseAudit(rt, ctx, {
         releaseId: id,
         action: "release.metadata_updated",
@@ -422,17 +410,14 @@ export function createReleaseGovernanceService(
     async addScope(ctx, releaseId, input) {
       assertHasReleasePermission(ctx, "release.update");
       await loadRelease(rt, ctx, releaseId);
-      const row = await rt.persistence.releaseScopes.create(
-        toRepositoryContext(ctx),
-        {
-          id: rt.id(),
-          releaseId,
-          kind: input.kind,
-          refId: input.refId,
-          label: input.label,
-          organisationId: ctx.organisationId,
-        },
-      );
+      const row = await rt.persistence.releaseScopes.create(toRepositoryContext(ctx), {
+        id: rt.id(),
+        releaseId,
+        kind: input.kind,
+        refId: input.refId,
+        label: input.label,
+        organisationId: ctx.organisationId,
+      });
       await appendReleaseAudit(rt, ctx, {
         releaseId,
         action: "release.scope_added",
@@ -503,11 +488,7 @@ export function createReleaseGovernanceService(
           { releaseId, evidenceId },
         );
       }
-      await rt.persistence.releaseEvidence.archive(
-        rctx,
-        evidenceId,
-        evidence.revision,
-      );
+      await rt.persistence.releaseEvidence.archive(rctx, evidenceId, evidence.revision);
       await appendReleaseAudit(rt, ctx, {
         releaseId,
         action: "release.evidence_removed",
@@ -567,18 +548,15 @@ export function createReleaseGovernanceService(
       assertNonEmpty(input.title, "title");
       assertNonEmpty(input.body, "body");
       await loadRelease(rt, ctx, releaseId);
-      const row = await rt.persistence.releaseNotes.create(
-        toRepositoryContext(ctx),
-        {
-          id: rt.id(),
-          releaseId,
-          title: input.title,
-          body: input.body,
-          authoredAt: rt.now(),
-          authorUserId: ctx.userId,
-          organisationId: ctx.organisationId,
-        },
-      );
+      const row = await rt.persistence.releaseNotes.create(toRepositoryContext(ctx), {
+        id: rt.id(),
+        releaseId,
+        title: input.title,
+        body: input.body,
+        authoredAt: rt.now(),
+        authorUserId: ctx.userId,
+        organisationId: ctx.organisationId,
+      });
       await appendReleaseAudit(rt, ctx, {
         releaseId,
         action: "release.note_added",
@@ -680,12 +658,7 @@ export function createReleaseGovernanceService(
 
     async evaluateApprovals(ctx, releaseId) {
       assertHasReleasePermission(ctx, "release.readiness.evaluate");
-      const snapshot = await evaluateReleaseReadiness(
-        rt,
-        ctx,
-        releaseId,
-        "approvals",
-      );
+      const snapshot = await evaluateReleaseReadiness(rt, ctx, releaseId, "approvals");
       await appendReleaseAudit(rt, ctx, {
         releaseId,
         action: "release.approvals_evaluated",
@@ -704,8 +677,7 @@ export function createReleaseGovernanceService(
           filters: { releaseId },
         })
       ).items;
-      const approvalStatuses: Partial<Record<ReleaseApprovalStageKind, string>> =
-        {};
+      const approvalStatuses: Partial<Record<ReleaseApprovalStageKind, string>> = {};
       for (const a of approvals) {
         approvalStatuses[a.stageKind] = a.status;
       }
@@ -1015,10 +987,10 @@ export function createReleaseGovernanceService(
     async listPackages(ctx, releaseId) {
       assertHasReleasePermission(ctx, "release.view");
       await loadRelease(rt, ctx, releaseId);
-      const page = await rt.persistence.releasePackages.list(
-        toRepositoryContext(ctx),
-        { pageSize: 200, filters: { releaseId } },
-      );
+      const page = await rt.persistence.releasePackages.list(toRepositoryContext(ctx), {
+        pageSize: 200,
+        filters: { releaseId },
+      });
       return page.items.map(toPackage);
     },
 
@@ -1035,30 +1007,30 @@ export function createReleaseGovernanceService(
     async listScope(ctx, releaseId) {
       assertHasReleasePermission(ctx, "release.view");
       await loadRelease(rt, ctx, releaseId);
-      const page = await rt.persistence.releaseScopes.list(
-        toRepositoryContext(ctx),
-        { pageSize: 200, filters: { releaseId } },
-      );
+      const page = await rt.persistence.releaseScopes.list(toRepositoryContext(ctx), {
+        pageSize: 200,
+        filters: { releaseId },
+      });
       return page.items.map(toScope);
     },
 
     async listEvidence(ctx, releaseId) {
       assertHasReleasePermission(ctx, "release.view");
       await loadRelease(rt, ctx, releaseId);
-      const page = await rt.persistence.releaseEvidence.list(
-        toRepositoryContext(ctx),
-        { pageSize: 200, filters: { releaseId } },
-      );
+      const page = await rt.persistence.releaseEvidence.list(toRepositoryContext(ctx), {
+        pageSize: 200,
+        filters: { releaseId },
+      });
       return page.items.map(toEvidence);
     },
 
     async listNotes(ctx, releaseId) {
       assertHasReleasePermission(ctx, "release.view");
       await loadRelease(rt, ctx, releaseId);
-      const page = await rt.persistence.releaseNotes.list(
-        toRepositoryContext(ctx),
-        { pageSize: 200, filters: { releaseId } },
-      );
+      const page = await rt.persistence.releaseNotes.list(toRepositoryContext(ctx), {
+        pageSize: 200,
+        filters: { releaseId },
+      });
       return page.items.map(toNote);
     },
 

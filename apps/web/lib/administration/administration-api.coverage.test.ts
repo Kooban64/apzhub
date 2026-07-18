@@ -100,9 +100,7 @@ describe("APZADMIN-003 administration-api facade coverage", () => {
     expect((await updateModule("mod_new", { name: "S2" })).name).toBe("S2");
     expect((await archiveModule("mod_new")).status).toBe("archived");
     expect((await restoreModule("mod_new")).status).toBe("draft");
-    expect((await transitionModule("mod_new", { to: "active" })).status).toBe(
-      "active",
-    );
+    expect((await transitionModule("mod_new", { to: "active" })).status).toBe("active");
     await listModuleAudit("mod_new");
     await listModuleHistory("mod_new");
     await listModuleMetadata("mod_new");
@@ -198,8 +196,12 @@ describe("APZADMIN-003 administration-api facade coverage", () => {
     await getReadiness();
     expect((await getManagementCapabilities()).httpEnabled).toBe(true);
 
-    expect(administrationQueryKeys.modules.list({ status: "draft", key: "" })[2]).toBe("list");
-    expect(administrationQueryKeys.modules.list({ status: "draft", limit: 10 })[3]).toContain("draft");
+    expect(administrationQueryKeys.modules.list({ status: "draft", key: "" })[2]).toBe(
+      "list",
+    );
+    expect(
+      administrationQueryKeys.modules.list({ status: "draft", limit: 10 })[3],
+    ).toContain("draft");
     expect(administrationQueryKeys.modules.detail("mod")[3]).toBe("mod");
     expect(administrationQueryKeys.modules.audit("m")[3]).toBe("m");
     expect(administrationQueryKeys.modules.history("m")[3]).toBe("m");
@@ -237,7 +239,9 @@ describe("APZADMIN-003 administration-api facade coverage", () => {
     expect(administrationQueryKeys.history.detail("h")[3]).toBe("h");
     expect(administrationQueryKeys.diagnostics.list()[2]).toBe("list");
     expect(administrationQueryKeys.diagnostics.detail("d")[3]).toBe("d");
-    expect(administrationQueryKeys.managementCapabilities()[1]).toBe("management-capabilities");
+    expect(administrationQueryKeys.managementCapabilities()[1]).toBe(
+      "management-capabilities",
+    );
     expect(administrationQueryKeys.health()[1]).toBe("health");
     expect(administrationQueryKeys.readiness()[1]).toBe("readiness");
 

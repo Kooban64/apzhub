@@ -13,16 +13,12 @@ import {
 describe("administration routes", () => {
   it("detects administration API paths", () => {
     expect(isAdministrationApiPath(ADMINISTRATION_API_BASE)).toBe(true);
-    expect(isAdministrationApiPath(`${ADMINISTRATION_API_BASE}/modules`)).toBe(
-      true,
-    );
+    expect(isAdministrationApiPath(`${ADMINISTRATION_API_BASE}/modules`)).toBe(true);
     expect(isAdministrationApiPath("/api/v1/configuration")).toBe(false);
   });
 
   it("rejects paths outside base and forbidden segments", () => {
-    expect(() => assertAdministrationApiPath("/api/v1/other")).toThrow(
-      /may only call/,
-    );
+    expect(() => assertAdministrationApiPath("/api/v1/other")).toThrow(/may only call/);
     expect(() =>
       assertAdministrationApiPath(`${ADMINISTRATION_API_BASE}/runtime`),
     ).toThrow(/Forbidden/);
@@ -36,15 +32,13 @@ describe("administration routes", () => {
 
   it("resolves workspace sections", () => {
     expect(isAdministrationRoute(ADMINISTRATION_WORKSPACE_BASE)).toBe(true);
-    expect(resolveAdministrationSection("/workspace/administration")).toBe(
+    expect(resolveAdministrationSection("/workspace/administration")).toBe("overview");
+    expect(resolveAdministrationSection("/workspace/administration/modules")).toBe(
+      "modules",
+    );
+    expect(resolveAdministrationSection("/workspace/administration/unknown")).toBe(
       "overview",
     );
-    expect(
-      resolveAdministrationSection("/workspace/administration/modules"),
-    ).toBe("modules");
-    expect(
-      resolveAdministrationSection("/workspace/administration/unknown"),
-    ).toBe("overview");
     expect(administrationSectionPath("diagnostics")).toBe(
       "/workspace/administration/diagnostics",
     );

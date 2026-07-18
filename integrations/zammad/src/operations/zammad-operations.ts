@@ -104,7 +104,9 @@ export class ZammadOperationsService {
     });
   }
 
-  async detectFeatures(context: IntegrationRequestContext): Promise<ZammadFeatureDetectionResult> {
+  async detectFeatures(
+    context: IntegrationRequestContext,
+  ): Promise<ZammadFeatureDetectionResult> {
     this.featureDetection = await detectZammadFeatures(context, {
       client: this.deps.getRestClient(),
       clock: this.deps.clock,
@@ -112,10 +114,14 @@ export class ZammadOperationsService {
     return this.featureDetection;
   }
 
-  async evaluateReadiness(context: IntegrationRequestContext): Promise<ZammadReadinessResult> {
+  async evaluateReadiness(
+    context: IntegrationRequestContext,
+  ): Promise<ZammadReadinessResult> {
     void context;
     const configurationValidation = await this.deps.validateConfiguration();
-    const capabilities = this.certifyCapabilities().filter((c) => c.capabilityId !== "attachments");
+    const capabilities = this.certifyCapabilities().filter(
+      (c) => c.capabilityId !== "attachments",
+    );
     const compatibility = this.getCompatibilityMatrix();
     const syncHealth = this.deps.core.synchronisation.getDiagnostics().syncHealth;
 
@@ -129,9 +135,9 @@ export class ZammadOperationsService {
       compatibility,
       coreSupportAvailable: Boolean(
         this.deps.core.support &&
-          this.deps.core.organizations &&
-          this.deps.core.groups &&
-          this.deps.core.users,
+        this.deps.core.organizations &&
+        this.deps.core.groups &&
+        this.deps.core.users,
       ),
       articleServiceAvailable: Boolean(this.deps.core.articles),
       syncServiceAvailable: Boolean(this.deps.core.synchronisation),
@@ -142,13 +148,16 @@ export class ZammadOperationsService {
       capabilities,
       circuitBreakerOpen: this.deps.getCircuitBreakerState() === "open",
       syncUnhealthy: syncHealth === "unhealthy",
-      webhookUnhealthy: this.featureDetection?.unavailableCapabilities.includes("webhooks"),
+      webhookUnhealthy:
+        this.featureDetection?.unavailableCapabilities.includes("webhooks"),
       featureDetection: this.featureDetection,
     });
   }
 
   classifyHealth(): ReturnType<typeof classifyZammadOperationalHealth> {
-    const capabilities = this.certifyCapabilities().filter((c) => c.capabilityId !== "attachments");
+    const capabilities = this.certifyCapabilities().filter(
+      (c) => c.capabilityId !== "attachments",
+    );
     const compatibility = this.getCompatibilityMatrix();
     const syncHealth = this.deps.core.synchronisation.getDiagnostics().syncHealth;
 
@@ -160,7 +169,8 @@ export class ZammadOperationsService {
       capabilities,
       featureDetection: this.featureDetection,
       syncUnhealthy: syncHealth === "unhealthy",
-      webhookUnhealthy: this.featureDetection?.unavailableCapabilities.includes("webhooks"),
+      webhookUnhealthy:
+        this.featureDetection?.unavailableCapabilities.includes("webhooks"),
     });
   }
 
@@ -187,7 +197,10 @@ export class ZammadOperationsService {
       implementedCapabilityCount: implemented.length,
       degradedCapabilityCount: capabilities.filter((c) => c.degraded).length,
       unavailableCapabilityCount: capabilities.filter(
-        (c) => !c.available || c.status === "unavailable" || c.status === "optional_unavailable",
+        (c) =>
+          !c.available ||
+          c.status === "unavailable" ||
+          c.status === "optional_unavailable",
       ).length,
       capabilityHealth: health.level,
       webhookHealth: webhookUnavailable

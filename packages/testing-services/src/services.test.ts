@@ -46,8 +46,8 @@ function services() {
 }
 
 describe("@apzhub/testing-services", () => {
-  it("exports version 0.7.0", () => {
-    expect(TESTING_SERVICES_VERSION).toBe("0.9.0");
+  it("exports version 0.11.0", () => {
+    expect(TESTING_SERVICES_VERSION).toBe("0.11.0");
   });
 });
 
@@ -81,9 +81,9 @@ describe("lifecycle state machines", () => {
 
 describe("validation rules", () => {
   it("rejects self links and illegal approval transitions", () => {
-    expect(() =>
-      assertNoSelfLink("test_case", "c1", "test_case", "c1"),
-    ).toThrow(DomainRuleError);
+    expect(() => assertNoSelfLink("test_case", "c1", "test_case", "c1")).toThrow(
+      DomainRuleError,
+    );
     expect(() => assertApprovalDecisionAllowed("pending", "approved")).not.toThrow();
     expect(() => assertApprovalDecisionAllowed("withdrawn", "approved")).toThrow(
       DomainRuleError,
@@ -190,11 +190,15 @@ describe("TestPlan / Suite / Case", () => {
     const versions = await svc.testCases.listVersions(ctx(), testCase.id);
     expect(versions.length).toBeGreaterThan(0);
 
-    const fromTemplate = await svc.testCases.createFromTemplate(ctx(), "login-template", {
-      tenantId: "tenant_1",
-      key: "TC-T",
-      title: "From template",
-    });
+    const fromTemplate = await svc.testCases.createFromTemplate(
+      ctx(),
+      "login-template",
+      {
+        tenantId: "tenant_1",
+        key: "TC-T",
+        title: "From template",
+      },
+    );
     expect(fromTemplate.templateKey).toBe("login-template");
   });
 });
@@ -269,7 +273,9 @@ describe("ManualExecutionService", () => {
 
     const cancelled = await local.manualExecutions.cancel(rctx, restarted.id);
     expect(cancelled.status).toBe("cancelled");
-    expect(local.events.listByType("manual_execution.started").length).toBeGreaterThan(0);
+    expect(local.events.listByType("manual_execution.started").length).toBeGreaterThan(
+      0,
+    );
   });
 });
 
@@ -395,17 +401,14 @@ describe("permissions", () => {
   it("denies create without grants", async () => {
     const svc = services();
     await expect(
-      svc.requirements.create(
-        ctx({ permissions: [] }),
-        {
-          tenantId: "tenant_1",
-          key: "X",
-          title: "X",
-          priority: "low",
-          workItemRefs: [],
-          riskIds: [],
-        },
-      ),
+      svc.requirements.create(ctx({ permissions: [] }), {
+        tenantId: "tenant_1",
+        key: "X",
+        title: "X",
+        priority: "low",
+        workItemRefs: [],
+        riskIds: [],
+      }),
     ).rejects.toThrow();
   });
 });

@@ -39,9 +39,7 @@ export type SearchErrorResult<TOp extends string> = {
 };
 
 export type SearchOperationResult<TOp extends string, TData = unknown> =
-  | SearchOkResult<TOp, TData>
-  | SearchNotSupportedResult<TOp>
-  | SearchErrorResult<TOp>;
+  SearchOkResult<TOp, TData> | SearchNotSupportedResult<TOp> | SearchErrorResult<TOp>;
 
 export function createOkResult<TOp extends string, TData>(
   operation: TOp,

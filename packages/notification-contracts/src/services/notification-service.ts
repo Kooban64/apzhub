@@ -15,10 +15,7 @@ import type {
   NotificationTemplate,
 } from "../domain/notification";
 import type { NotificationStatus } from "../enums/catalogue";
-import type {
-  NotificationId,
-  NotificationTemplateId,
-} from "../identifiers";
+import type { NotificationId, NotificationTemplateId } from "../identifiers";
 
 export type NotificationValidationIssue = {
   readonly code: string;
@@ -67,9 +64,7 @@ export interface NotificationPlatformService {
   listPreferences(
     ctx: NotificationRequestContext,
   ): Promise<readonly NotificationPreference[]>;
-  listRules(
-    ctx: NotificationRequestContext,
-  ): Promise<readonly NotificationRule[]>;
+  listRules(ctx: NotificationRequestContext): Promise<readonly NotificationRule[]>;
   listRecipients(
     ctx: NotificationRequestContext,
     notificationId: NotificationId,

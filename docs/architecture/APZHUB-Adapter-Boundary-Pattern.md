@@ -138,13 +138,13 @@ interface IntegrationAdapter {
 
 ## Testing requirements
 
-| Test type | Scope |
-|-----------|-------|
-| Contract tests | Adapter interface vs mock engine |
-| Integration tests | Adapter vs engine test instance |
-| Error translation tests | Every mapped error category |
-| Health probe tests | Healthy, degraded, unavailable paths |
-| Provisioning idempotency | Duplicate provision calls |
+| Test type                | Scope                                |
+| ------------------------ | ------------------------------------ |
+| Contract tests           | Adapter interface vs mock engine     |
+| Integration tests        | Adapter vs engine test instance      |
+| Error translation tests  | Every mapped error category          |
+| Health probe tests       | Healthy, degraded, unavailable paths |
+| Provisioning idempotency | Duplicate provision calls            |
 
 ---
 

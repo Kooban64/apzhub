@@ -80,10 +80,10 @@ No PlatformService changes, HTTP routes, UI, webhook ingress, event bus, workers
 
 Thin wrappers in `src/harness/plane-harness.ts` adopt `@apzhub/integration-sdk/harness` without changing operations APIs:
 
-| Export | Role |
-| ------ | ---- |
-| `getPlaneHarnessMetadata` | Declared certification subject for SDK engine |
-| `createPlaneAdapterHarness` | SDK `AdapterHarness` with Plane fixtures |
+| Export                       | Role                                                                                   |
+| ---------------------------- | -------------------------------------------------------------------------------------- |
+| `getPlaneHarnessMetadata`    | Declared certification subject for SDK engine                                          |
+| `createPlaneAdapterHarness`  | SDK `AdapterHarness` with Plane fixtures                                               |
 | `certifyPlaneWithSdkHarness` | Runs SDK `certifyAdapter` **plus** existing `certifyPlaneCapabilities` / compatibility |
 
 See [ADAPTER-HARNESS.md](../../packages/integration-sdk/docs/ADAPTER-HARNESS.md) · [ADR-0057](../../docs/adr/ADR-0057-sdk-harness-vs-adapter-operations-certification.md).

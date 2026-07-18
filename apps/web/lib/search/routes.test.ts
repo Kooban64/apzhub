@@ -15,9 +15,11 @@ describe("search routes helpers", () => {
     expect(resolveSearchSection(SEARCH_BASE)).toBe("overview");
     expect(resolveSearchSection(`${SEARCH_BASE}/`)).toBe("overview");
     expect(resolveSearchSection(`${SEARCH_BASE}/providers`)).toBe("providers");
+    expect(resolveSearchSection(`${SEARCH_BASE}/publication`)).toBe("publication");
     expect(resolveSearchSection(`${SEARCH_BASE}/unknown`)).toBe("overview");
     expect(searchSectionPath()).toBe(`${SEARCH_BASE}/overview`);
     expect(searchSectionPath("overview")).toBe(`${SEARCH_BASE}/overview`);
     expect(searchSectionPath("query")).toBe(`${SEARCH_BASE}/query`);
+    expect(searchSectionPath("publication")).toBe(`${SEARCH_BASE}/publication`);
   });
 });

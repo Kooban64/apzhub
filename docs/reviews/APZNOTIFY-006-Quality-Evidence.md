@@ -5,21 +5,21 @@
 
 ## Audits
 
-| Command | Result |
-| ------- | ------ |
-| `pnpm audit:notification-vertical` | PASS |
-| `pnpm audit:notification-wave` | PASS |
-| `pnpm openapi:validate:platform` | PASS |
+| Command                            | Result |
+| ---------------------------------- | ------ |
+| `pnpm audit:notification-vertical` | PASS   |
+| `pnpm audit:notification-wave`     | PASS   |
+| `pnpm openapi:validate:platform`   | PASS   |
 
 ## Package versions (frozen)
 
-| Package | Version |
-| ------- | ------- |
-| `@apzhub/notification-contracts` | 0.2.0 |
-| `@apzhub/notification-core` | 0.2.0 |
-| `@apzhub/notification-persistence` | 0.1.0 |
-| `@apzhub/platform-services` | 0.21.0 |
-| `@apzhub/platform-service-contracts` | 0.16.0 |
+| Package                              | Version |
+| ------------------------------------ | ------- |
+| `@apzhub/notification-contracts`     | 0.2.0   |
+| `@apzhub/notification-core`          | 0.2.0   |
+| `@apzhub/notification-persistence`   | 0.1.0   |
+| `@apzhub/platform-services`          | 0.21.0  |
+| `@apzhub/platform-service-contracts` | 0.16.0  |
 
 ## Coverage (retained from APZNOTIFY-005)
 

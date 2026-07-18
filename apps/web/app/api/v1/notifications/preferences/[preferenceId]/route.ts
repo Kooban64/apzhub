@@ -10,7 +10,7 @@ import {
 import { methodNotAllowedResponse } from "@/lib/api/v1/response";
 import { createPlatformApiTracing } from "@/lib/api/v1/request-context";
 
-const ALLOWED = ['GET', 'PATCH'] as const;
+const ALLOWED = ["GET", "PATCH"] as const;
 
 export const GET = withPlatformApiAuth(handleGetNotificationPreference, {
   operation: "notifications.preferences.get",

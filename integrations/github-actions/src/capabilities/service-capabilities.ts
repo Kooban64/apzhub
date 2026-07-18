@@ -1,9 +1,5 @@
 export type GitHubActionsServiceOperation =
-  | "get"
-  | "list"
-  | "listSteps"
-  | "listLogsMetadata"
-  | "retrieveSummary";
+  "get" | "list" | "listSteps" | "listLogsMetadata" | "retrieveSummary";
 
 export type GitHubActionsCoreServiceId =
   | "repositories"
@@ -49,9 +45,7 @@ export const GITHUB_ACTIONS_CORE_SERVICE_CAPABILITIES: readonly GitHubActionsSer
       supportsPaging: true,
       supportsFiltering: true,
       implemented: true,
-      notes: [
-        "Unsupported mutations: dispatch, rerun, cancel",
-      ],
+      notes: ["Unsupported mutations: dispatch, rerun, cancel"],
     },
     {
       serviceId: "jobs",
@@ -119,7 +113,9 @@ export const GITHUB_ACTIONS_UNSUPPORTED_OPERATIONS = [
 export function getGitHubActionsCoreServiceCapability(
   serviceId: GitHubActionsCoreServiceId,
 ): GitHubActionsServiceCapability | undefined {
-  return GITHUB_ACTIONS_CORE_SERVICE_CAPABILITIES.find((c) => c.serviceId === serviceId);
+  return GITHUB_ACTIONS_CORE_SERVICE_CAPABILITIES.find(
+    (c) => c.serviceId === serviceId,
+  );
 }
 
 export function discoverGitHubActionsCoreServiceCapabilities(): readonly GitHubActionsServiceCapability[] {

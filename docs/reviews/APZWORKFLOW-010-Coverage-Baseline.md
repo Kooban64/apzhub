@@ -5,12 +5,12 @@
 
 ## Layer baselines (prior milestones)
 
-| Layer | Source | Lines | Functions |
-| --- | --- | --- | --- |
-| Adapter (006) | APZWORKFLOW-006 coverage notes | ≥95% scoped | ≥95% |
-| Platform Services engine (007) | 007 report — scoped engine façade | **100%** scoped | **100%** |
-| HTTP + Typed Client (008) | 008 report | **~98%** | **100%** |
-| Workbench (009) | [009 Coverage Baseline](./APZWORKFLOW-009-coverage-baseline.md) | **98.9%** | **100%** |
+| Layer                          | Source                                                          | Lines           | Functions |
+| ------------------------------ | --------------------------------------------------------------- | --------------- | --------- |
+| Adapter (006)                  | APZWORKFLOW-006 coverage notes                                  | ≥95% scoped     | ≥95%      |
+| Platform Services engine (007) | 007 report — scoped engine façade                               | **100%** scoped | **100%**  |
+| HTTP + Typed Client (008)      | 008 report                                                      | **~98%**        | **100%**  |
+| Workbench (009)                | [009 Coverage Baseline](./APZWORKFLOW-009-coverage-baseline.md) | **98.9%**       | **100%**  |
 
 ## Consolidated 010 command
 

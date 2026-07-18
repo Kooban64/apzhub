@@ -61,17 +61,16 @@ export type ExecutiveDashboardFilterState = {
   readonly order: "asc" | "desc";
 };
 
-export const DEFAULT_EXECUTIVE_DASHBOARD_FILTERS: ExecutiveDashboardFilterState =
-  {
-    search: "",
-    product: "",
-    release: "",
-    dateFrom: "",
-    dateTo: "",
-    comparison: "none",
-    sort: "kind",
-    order: "asc",
-  };
+export const DEFAULT_EXECUTIVE_DASHBOARD_FILTERS: ExecutiveDashboardFilterState = {
+  search: "",
+  product: "",
+  release: "",
+  dateFrom: "",
+  dateTo: "",
+  comparison: "none",
+  sort: "kind",
+  order: "asc",
+};
 
 const FILTER_STORAGE_KEY = "apzhub.testing.executive-dashboards.filters";
 
@@ -157,9 +156,7 @@ export function healthTone(
   return "neutral";
 }
 
-export function riskTone(
-  level: string,
-): "neutral" | "success" | "warning" | "danger" {
+export function riskTone(level: string): "neutral" | "success" | "warning" | "danger" {
   if (level === "low") return "success";
   if (level === "medium") return "warning";
   if (level === "high" || level === "critical") return "danger";

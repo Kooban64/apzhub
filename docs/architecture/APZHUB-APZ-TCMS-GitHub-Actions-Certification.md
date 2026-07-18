@@ -9,17 +9,17 @@
 
 ## Vertical re-certification
 
-| Layer | Result |
-| ----- | ------ |
-| Workbench | PASS (unit/component); Playwright live LIMITED |
-| Typed Client | PASS |
-| HTTP API + OpenAPI | PASS (18 routes; OpenAPI valid) |
-| Gateway + RequestPipeline + Authz | PASS |
-| Platform Services + Providers | PASS |
-| GitHub Actions Adapter | PASS |
-| Integration SDK usage | PASS |
-| Canonical models | PASS |
-| Release governance linkage | PASS |
+| Layer                             | Result                                         |
+| --------------------------------- | ---------------------------------------------- |
+| Workbench                         | PASS (unit/component); Playwright live LIMITED |
+| Typed Client                      | PASS                                           |
+| HTTP API + OpenAPI                | PASS (18 routes; OpenAPI valid)                |
+| Gateway + RequestPipeline + Authz | PASS                                           |
+| Platform Services + Providers     | PASS                                           |
+| GitHub Actions Adapter            | PASS                                           |
+| Integration SDK usage             | PASS                                           |
+| Canonical models                  | PASS                                           |
+| Release governance linkage        | PASS                                           |
 
 Architecture / dependency / boundary re-audit (APZTCMS-020): **VIOLATIONS=0**.
 
@@ -31,14 +31,14 @@ See [Capability Matrix](./APZHUB-APZ-TCMS-GitHub-Actions-Capability-Matrix.md).
 
 ## Operational certification
 
-| Concern | Result |
-| ------- | ------ |
-| Readiness / connect probe | PASS |
-| Diagnostics (secret-free) | PASS |
-| Health HEALTHY/DEGRADED/LIMITED/UNAVAILABLE | PASS |
-| Compatibility detection | PASS |
-| Capability discovery | PASS |
-| Structured reporting | PASS |
+| Concern                                     | Result |
+| ------------------------------------------- | ------ |
+| Readiness / connect probe                   | PASS   |
+| Diagnostics (secret-free)                   | PASS   |
+| Health HEALTHY/DEGRADED/LIMITED/UNAVAILABLE | PASS   |
+| Compatibility detection                     | PASS   |
+| Capability discovery                        | PASS   |
+| Structured reporting                        | PASS   |
 
 ## Production classification evidence
 

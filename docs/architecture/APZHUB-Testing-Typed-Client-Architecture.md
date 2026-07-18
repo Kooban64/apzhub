@@ -2,7 +2,7 @@
 
 **Purpose:** Describe the production Testing workbench client boundary after APZTCMS-012.  
 **Audience:** Frontend engineers, platform engineers, AI agents.  
-**Authority:** [005 Desktop Framework](../005-desktop-environment-framework-shell-architecture.md) · [APZ TCMS Testing Workbench Architecture](./APZHUB-APZ-TCMS-Testing-Workbench-Architecture.md)  
+**Authority:** [005 Desktop Framework](../005-desktop-experience-workspace-framework.md) · [APZ TCMS Testing Workbench Architecture](./APZHUB-APZ-TCMS-Testing-Workbench-Architecture.md)  
 **Status:** Implemented — APZTCMS-012 complete.  
 **Last updated:** 2026-07-12
 

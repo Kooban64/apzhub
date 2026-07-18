@@ -98,9 +98,7 @@ export interface NotificationTemplateRepositoryPort {
     ctx: NotificationRequestContext,
     template: NotificationTemplate,
   ): Promise<NotificationTemplate>;
-  list(
-    ctx: NotificationRequestContext,
-  ): Promise<readonly NotificationTemplate[]>;
+  list(ctx: NotificationRequestContext): Promise<readonly NotificationTemplate[]>;
 }
 
 export interface NotificationCategoryRepositoryPort {
@@ -112,9 +110,7 @@ export interface NotificationCategoryRepositoryPort {
     ctx: NotificationRequestContext,
     categoryId: NotificationCategoryId,
   ): Promise<NotificationCategory | null>;
-  list(
-    ctx: NotificationRequestContext,
-  ): Promise<readonly NotificationCategory[]>;
+  list(ctx: NotificationRequestContext): Promise<readonly NotificationCategory[]>;
 }
 
 export interface NotificationChannelRepositoryPort {
@@ -126,9 +122,7 @@ export interface NotificationChannelRepositoryPort {
     ctx: NotificationRequestContext,
     channelId: NotificationChannelId,
   ): Promise<NotificationChannel | null>;
-  list(
-    ctx: NotificationRequestContext,
-  ): Promise<readonly NotificationChannel[]>;
+  list(ctx: NotificationRequestContext): Promise<readonly NotificationChannel[]>;
 }
 
 export interface NotificationPreferenceRepositoryPort {
@@ -144,9 +138,7 @@ export interface NotificationPreferenceRepositoryPort {
     ctx: NotificationRequestContext,
     preference: NotificationPreference,
   ): Promise<NotificationPreference>;
-  list(
-    ctx: NotificationRequestContext,
-  ): Promise<readonly NotificationPreference[]>;
+  list(ctx: NotificationRequestContext): Promise<readonly NotificationPreference[]>;
 }
 
 export interface NotificationRuleRepositoryPort {

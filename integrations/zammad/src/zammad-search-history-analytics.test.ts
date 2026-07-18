@@ -26,7 +26,9 @@ import type { ZammadHistoryRecord } from "./internal/zammad-api-types";
 const ctx = { correlationId: TEST_CORRELATION_ID, tenantId: TEST_TENANT_ID };
 const ticketId = `sreq_zammad_${MOCK_TICKET.id}`;
 
-async function createAdapter(fetchOptions?: Parameters<typeof createMockZammadFetch>[0]) {
+async function createAdapter(
+  fetchOptions?: Parameters<typeof createMockZammadFetch>[0],
+) {
   return createZammadAdapter({
     zammad: DEFAULT_TEST_ZAMMAD_CONFIG,
     tenantId: TEST_TENANT_ID,
@@ -113,12 +115,16 @@ describe("ZammadSearchService", () => {
   it("translates provider and permission failures", async () => {
     const unavailable = await createAdapter({ failSearch: true });
     await expect(
-      unavailable.adapter.core.search.search(ctx, "password", { kinds: ["support_request"] }),
+      unavailable.adapter.core.search.search(ctx, "password", {
+        kinds: ["support_request"],
+      }),
     ).rejects.toMatchObject({ category: expect.any(String) });
 
     const forbidden = await createAdapter({ searchStatus: 403 });
     await expect(
-      forbidden.adapter.core.search.search(ctx, "password", { kinds: ["support_request"] }),
+      forbidden.adapter.core.search.search(ctx, "password", {
+        kinds: ["support_request"],
+      }),
     ).rejects.toMatchObject({ category: "authorization" });
   });
 });
@@ -132,11 +138,21 @@ describe("ZammadHistoryService", () => {
     const times = timeline.events.map((event) => event.occurredAt);
     expect(times).toEqual([...times].sort());
     expect(timeline.events.some((event) => event.action === "created")).toBe(true);
-    expect(timeline.events.some((event) => event.action === "state_changed")).toBe(true);
-    expect(timeline.events.some((event) => event.action === "owner_changed")).toBe(true);
-    expect(timeline.events.some((event) => event.action === "priority_changed")).toBe(true);
-    expect(timeline.events.some((event) => event.action === "article_created")).toBe(true);
-    expect(timeline.events.some((event) => event.action === "attachment_added")).toBe(true);
+    expect(timeline.events.some((event) => event.action === "state_changed")).toBe(
+      true,
+    );
+    expect(timeline.events.some((event) => event.action === "owner_changed")).toBe(
+      true,
+    );
+    expect(timeline.events.some((event) => event.action === "priority_changed")).toBe(
+      true,
+    );
+    expect(timeline.events.some((event) => event.action === "article_created")).toBe(
+      true,
+    );
+    expect(timeline.events.some((event) => event.action === "attachment_added")).toBe(
+      true,
+    );
     expect(JSON.stringify(timeline)).not.toMatch(/history_type|history_object/);
   });
 
@@ -169,7 +185,9 @@ describe("ZammadHistoryService", () => {
 
   it("translates history provider failures", async () => {
     const { adapter } = await createAdapter({ failHistory: true });
-    await expect(adapter.core.history.getSupportTimeline(ctx, ticketId)).rejects.toMatchObject({
+    await expect(
+      adapter.core.history.getSupportTimeline(ctx, ticketId),
+    ).rejects.toMatchObject({
       category: expect.any(String),
     });
   });
@@ -226,9 +244,9 @@ describe("ZammadAnalyticsService", () => {
     const { adapter } = await createAdapter();
     const snapshot = await adapter.core.analytics.getSupportIntelligence(ctx);
     expect(snapshot.totalTickets).toBeGreaterThan(0);
-    expect(snapshot.openTickets + snapshot.closedTickets + snapshot.pendingTickets).toBeGreaterThan(
-      0,
-    );
+    expect(
+      snapshot.openTickets + snapshot.closedTickets + snapshot.pendingTickets,
+    ).toBeGreaterThan(0);
     expect(snapshot.byPriority.length).toBeGreaterThan(0);
     expect(snapshot.byState.length).toBeGreaterThan(0);
     expect(snapshot.byGroup.length).toBeGreaterThan(0);
@@ -301,7 +319,9 @@ describe("OSS-102-05 architecture boundaries", () => {
     expect(joined).not.toMatch(/@apzhub\/platform-services/);
     expect(joined).not.toMatch(/PlatformServiceGateway/);
     expect(joined).not.toMatch(/app\/api\/|NextResponse/);
-    expect(joined).not.toMatch(/\bregisterWebhookIngress\b|\bstartSynchronisationWorker\b/);
+    expect(joined).not.toMatch(
+      /\bregisterWebhookIngress\b|\bstartSynchronisationWorker\b/,
+    );
     expect(joined).not.toMatch(/from ["']@apzhub\/platform-event/);
   });
 });

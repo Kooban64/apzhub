@@ -9,7 +9,10 @@ import {
 import type { CanonicalEntityType } from "../mapping/types";
 import type { MappingOrchestrator } from "../orchestration/mapping-orchestrator";
 import type { ProviderResolver } from "../providers/registry/provider-resolver";
-import type { PlatformProviderCapability, ProviderRegistration } from "../providers/types";
+import type {
+  PlatformProviderCapability,
+  ProviderRegistration,
+} from "../providers/types";
 
 export function assertRequestContext(ctx: ServiceRequestContext): void {
   if (!ctx.tenantId || !ctx.userId || !ctx.correlationId) {
@@ -28,7 +31,9 @@ export function findSupportRegistration(
   capability: PlatformProviderCapability,
   provider: unknown,
 ): ProviderRegistration {
-  const match = resolver.registry.list(capability).find((entry) => entry.provider === provider);
+  const match = resolver.registry
+    .list(capability)
+    .find((entry) => entry.provider === provider);
   if (!match) {
     throw new PlatformServiceError({
       category: "configuration",
@@ -80,7 +85,10 @@ export async function toPlatformSupportId(
     return providerEntityId;
   }
 
-  const providerNativeId = extractProvisionalProviderNativeId(providerEntityId, entityType);
+  const providerNativeId = extractProvisionalProviderNativeId(
+    providerEntityId,
+    entityType,
+  );
   const existing = await mapping.store.getByProviderNativeId({
     tenantId: ctx.tenantId,
     entityType,

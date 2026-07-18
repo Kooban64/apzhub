@@ -7,12 +7,12 @@
 
 Scoped to `packages/configuration-*/src/**` (excluding type-only `domain/`, `common/`, `services/`):
 
-| Metric | Combined |
-| --- | ---: |
-| Lines | **95.48%** |
+| Metric     |   Combined |
+| ---------- | ---------: |
+| Lines      | **95.48%** |
 | Statements | **95.48%** |
-| Functions | **95.32%** |
-| Branches | **81.61%** |
+| Functions  | **95.32%** |
+| Branches   | **81.61%** |
 
 ## Audit
 

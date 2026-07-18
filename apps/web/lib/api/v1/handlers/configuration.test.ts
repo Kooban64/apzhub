@@ -247,9 +247,10 @@ describe("APZCONFIG-003 configuration handlers", () => {
     expect(body.data.secretManagementReady).toBe(false);
     expect(body.data.hotReloadReady).toBe(false);
     expect(body.data.eventBusReady).toBe(false);
-    expect(buildConfigurationManagementPlaneDto({ configurationEnabled: true }).capabilities.runtimeResolution).toBe(
-      false,
-    );
+    expect(
+      buildConfigurationManagementPlaneDto({ configurationEnabled: true }).capabilities
+        .runtimeResolution,
+    ).toBe(false);
   });
 
   it("lists audit entries", async () => {
@@ -309,8 +310,8 @@ describe("APZCONFIG-003 configuration handlers", () => {
     ).toBe("Renamed");
 
     expect(
-      (await (await handleListConfigurationGroups(makeRequest("/"), ctx)).json()).data[0]
-        ?.id,
+      (await (await handleListConfigurationGroups(makeRequest("/"), ctx)).json())
+        .data[0]?.id,
     ).toBeDefined();
     expect(
       (
@@ -354,8 +355,11 @@ describe("APZCONFIG-003 configuration handlers", () => {
     ).toBe("Group 2");
 
     expect(
-      (await (await handleListConfigurationVersions(makeRequest("/"), ctx, cfgRoute)).json())
-        .data.length,
+      (
+        await (
+          await handleListConfigurationVersions(makeRequest("/"), ctx, cfgRoute)
+        ).json()
+      ).data.length,
     ).toBeGreaterThan(0);
     expect(
       (
@@ -378,20 +382,32 @@ describe("APZCONFIG-003 configuration handlers", () => {
       params: Promise.resolve({ configurationId: "cfg_1", versionId: "ver_1" }),
     };
     expect(
-      (await (await handleGetConfigurationVersion(makeRequest("/"), ctx, versionRoute)).json())
-        .data.id,
+      (
+        await (
+          await handleGetConfigurationVersion(makeRequest("/"), ctx, versionRoute)
+        ).json()
+      ).data.id,
     ).toBe("ver_1");
     expect(
-      (await (await handleValidateConfigurationVersion(makeRequest("/"), ctx, versionRoute)).json())
-        .data.valid,
+      (
+        await (
+          await handleValidateConfigurationVersion(makeRequest("/"), ctx, versionRoute)
+        ).json()
+      ).data.valid,
     ).toBe(true);
     expect(
-      (await (await handlePublishConfigurationVersion(makeRequest("/"), ctx, versionRoute)).json())
-        .data.id,
+      (
+        await (
+          await handlePublishConfigurationVersion(makeRequest("/"), ctx, versionRoute)
+        ).json()
+      ).data.id,
     ).toBeDefined();
     expect(
-      (await (await handleDeprecateConfigurationVersion(makeRequest("/"), ctx, versionRoute)).json())
-        .data.id,
+      (
+        await (
+          await handleDeprecateConfigurationVersion(makeRequest("/"), ctx, versionRoute)
+        ).json()
+      ).data.id,
     ).toBeDefined();
 
     expect(
@@ -448,17 +464,25 @@ describe("APZCONFIG-003 configuration handlers", () => {
     ).toBe("ovr_1");
 
     expect(
-      (await (await handleListConfigurationScopes(makeRequest("/"), ctx)).json()).data.length,
+      (await (await handleListConfigurationScopes(makeRequest("/"), ctx)).json()).data
+        .length,
     ).toBeGreaterThan(0);
     expect(
-      (await (await handleGetConfigurationScope(makeRequest("/"), ctx, {
-        params: Promise.resolve({ scopeId: "cfg_1" }),
-      })).json()).data.configurationId,
+      (
+        await (
+          await handleGetConfigurationScope(makeRequest("/"), ctx, {
+            params: Promise.resolve({ scopeId: "cfg_1" }),
+          })
+        ).json()
+      ).data.configurationId,
     ).toBe("cfg_1");
 
     expect(
-      (await (await handleListConfigurationReferences(makeRequest("/"), ctx, cfgRoute)).json())
-        .data[0]?.id,
+      (
+        await (
+          await handleListConfigurationReferences(makeRequest("/"), ctx, cfgRoute)
+        ).json()
+      ).data[0]?.id,
     ).toBeDefined();
     expect(
       (
@@ -471,18 +495,33 @@ describe("APZCONFIG-003 configuration handlers", () => {
     ).toBe("ref_1");
 
     expect(
-      (await (await handleGetConfigurationAuditEntry(makeRequest("/"), ctx, {
-        params: Promise.resolve({ auditId: "aud_1" }),
-      })).json()).data.id,
+      (
+        await (
+          await handleGetConfigurationAuditEntry(makeRequest("/"), ctx, {
+            params: Promise.resolve({ auditId: "aud_1" }),
+          })
+        ).json()
+      ).data.id,
     ).toBeDefined();
     expect(
-      (await (await handleListConfigurationScopedAudit(makeRequest("/"), ctx, cfgRoute)).json())
-        .data.length,
+      (
+        await (
+          await handleListConfigurationScopedAudit(makeRequest("/"), ctx, cfgRoute)
+        ).json()
+      ).data.length,
     ).toBeGreaterThan(0);
 
-    expect((await (await handleGetConfigurationHealth(makeRequest("/"), ctx)).json()).data).toBeDefined();
-    expect((await (await handleGetConfigurationReadiness(makeRequest("/"), ctx)).json()).data).toBeDefined();
-    expect((await (await handleGetConfigurationDiagnostics(makeRequest("/"), ctx)).json()).data).toBeDefined();
+    expect(
+      (await (await handleGetConfigurationHealth(makeRequest("/"), ctx)).json()).data,
+    ).toBeDefined();
+    expect(
+      (await (await handleGetConfigurationReadiness(makeRequest("/"), ctx)).json())
+        .data,
+    ).toBeDefined();
+    expect(
+      (await (await handleGetConfigurationDiagnostics(makeRequest("/"), ctx)).json())
+        .data,
+    ).toBeDefined();
   });
 
   it("supports lifecycle shortcuts archive restore approve publish deprecate", async () => {
@@ -498,17 +537,21 @@ describe("APZCONFIG-003 configuration handlers", () => {
     expect((await archived.json()).data.archived).toBe(true);
 
     await handleArchiveConfiguration(makeRequest("/"), ctx, route);
-    expect((await (await handleRestoreConfiguration(makeRequest("/"), ctx, route)).json()).data.status).toBe(
-      "draft",
-    );
     expect(
-      (await (await handleApproveConfiguration(makeRequest("/"), ctx, route)).json()).data.status,
+      (await (await handleRestoreConfiguration(makeRequest("/"), ctx, route)).json())
+        .data.status,
+    ).toBe("draft");
+    expect(
+      (await (await handleApproveConfiguration(makeRequest("/"), ctx, route)).json())
+        .data.status,
     ).toBe("approved");
     expect(
-      (await (await handlePublishConfiguration(makeRequest("/"), ctx, route)).json()).data.status,
+      (await (await handlePublishConfiguration(makeRequest("/"), ctx, route)).json())
+        .data.status,
     ).toBe("published");
     expect(
-      (await (await handleDeprecateConfiguration(makeRequest("/"), ctx, route)).json()).data.status,
+      (await (await handleDeprecateConfiguration(makeRequest("/"), ctx, route)).json())
+        .data.status,
     ).toBe("deprecated");
   });
 
@@ -563,7 +606,7 @@ describe("APZCONFIG-003 configuration handlers", () => {
       tags?: { name: string }[];
       info?: { version?: string };
     };
-    expect(["1.5.0", "1.6.0", "1.7.0"]).toContain(spec.info?.version);
+    expect(["1.5.0", "1.6.0", "1.7.0", "1.8.0", "1.9.0"]).toContain(spec.info?.version);
     expect(spec.paths["/configuration/configurations"]).toBeDefined();
     expect(spec.paths["/configuration/capabilities"]).toBeDefined();
     expect(spec.paths["/configuration/validation"]).toBeDefined();

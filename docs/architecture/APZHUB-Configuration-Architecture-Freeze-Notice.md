@@ -25,18 +25,18 @@ No alternative execution paths are permitted.
 
 ## What is frozen
 
-| Surface | Freeze scope |
-| --- | --- |
-| Contracts | `@apzhub/configuration-contracts` **0.2.0** |
-| Core | `@apzhub/configuration-core` **0.2.0** |
-| Persistence | `@apzhub/configuration-persistence` **0.1.0** |
-| Platform Services | `gateway.configuration.*` wiring in **0.21.0** |
-| HTTP API | `/api/v1/configuration/*` · OpenAPI **1.5.0** |
-| Typed client | `apps/web/lib/configuration` |
-| Workbench | `/workspace/configuration` + manifests |
-| Authorization | `configurationPlatformOps` + permission catalogue |
-| Lifecycle | draft → validated → approved → published → deprecated → archived |
-| Boundary vs `@apzhub/config` | SoR ≠ runtime configuration-manager |
+| Surface                      | Freeze scope                                                     |
+| ---------------------------- | ---------------------------------------------------------------- |
+| Contracts                    | `@apzhub/configuration-contracts` **0.2.0**                      |
+| Core                         | `@apzhub/configuration-core` **0.2.0**                           |
+| Persistence                  | `@apzhub/configuration-persistence` **0.1.0**                    |
+| Platform Services            | `gateway.configuration.*` wiring in **0.21.0**                   |
+| HTTP API                     | `/api/v1/configuration/*` · OpenAPI **1.5.0**                    |
+| Typed client                 | `apps/web/lib/configuration`                                     |
+| Workbench                    | `/workspace/configuration` + manifests                           |
+| Authorization                | `configurationPlatformOps` + permission catalogue                |
+| Lifecycle                    | draft → validated → approved → published → deprecated → archived |
+| Boundary vs `@apzhub/config` | SoR ≠ runtime configuration-manager                              |
 
 ## Intentionally unavailable (frozen absence)
 

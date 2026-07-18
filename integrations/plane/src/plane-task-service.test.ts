@@ -35,7 +35,15 @@ describe("Plane task capability registration", () => {
     const tasks = capabilities.find((entry) => entry.serviceId === "tasks");
     expect(tasks).toBeDefined();
     expect(tasks?.operations).toEqual(
-      expect.arrayContaining(["list", "get", "create", "update", "archive", "transition", "assign"]),
+      expect.arrayContaining([
+        "list",
+        "get",
+        "create",
+        "update",
+        "archive",
+        "transition",
+        "assign",
+      ]),
     );
     expect(capabilities).toHaveLength(15);
   });
@@ -97,9 +105,9 @@ describe("PlaneTaskService core operations", () => {
     const { adapter } = await createAdapter();
     await adapter.initialise();
 
-    await expect(adapter.core.tasks.create(ctx, projectId, { title: "" })).rejects.toThrow(
-      /title is required/i,
-    );
+    await expect(
+      adapter.core.tasks.create(ctx, projectId, { title: "" }),
+    ).rejects.toThrow(/title is required/i);
     await expect(adapter.core.tasks.update(ctx, projectId, taskId, {})).rejects.toThrow(
       /at least one update field/i,
     );
@@ -155,7 +163,9 @@ describe("PlaneTaskService query behaviour", () => {
     });
     expect(byStatus.items.length).toBeGreaterThan(0);
 
-    const bySearch = await adapter.core.tasks.list(ctx, projectId, { search: "Implement" });
+    const bySearch = await adapter.core.tasks.list(ctx, projectId, {
+      search: "Implement",
+    });
     expect(bySearch.items.some((item) => item.title.includes("Implement"))).toBe(true);
 
     const byDates = await adapter.core.tasks.list(ctx, projectId, {
@@ -164,20 +174,28 @@ describe("PlaneTaskService query behaviour", () => {
     });
     expect(byDates.items.length).toBeGreaterThan(0);
 
-    const empty = await adapter.core.tasks.list(ctx, projectId, { search: "no-such-task-xyz" });
+    const empty = await adapter.core.tasks.list(ctx, projectId, {
+      search: "no-such-task-xyz",
+    });
     expect(empty.items).toEqual([]);
 
-    const archivedOnly = await adapter.core.tasks.list(ctx, projectId, { archived: true });
+    const archivedOnly = await adapter.core.tasks.list(ctx, projectId, {
+      archived: true,
+    });
     expect(archivedOnly.items.every((item) => Boolean(item.archivedAt))).toBe(true);
 
-    const activeOnly = await adapter.core.tasks.list(ctx, projectId, { archived: false });
+    const activeOnly = await adapter.core.tasks.list(ctx, projectId, {
+      archived: false,
+    });
     expect(activeOnly.items.every((item) => !item.archivedAt)).toBe(true);
 
     const withParent = await adapter.core.tasks.create(ctx, projectId, {
       title: "Child task",
       parentTaskId: taskId,
     });
-    const byParent = await adapter.core.tasks.list(ctx, projectId, { parentTaskId: taskId });
+    const byParent = await adapter.core.tasks.list(ctx, projectId, {
+      parentTaskId: taskId,
+    });
     expect(byParent.items.some((item) => item.id === withParent.id)).toBe(true);
 
     const roots = await adapter.core.tasks.list(ctx, projectId, { parentTaskId: null });
@@ -192,9 +210,9 @@ describe("PlaneTaskService query behaviour", () => {
       adapter.core.tasks.list(ctx, projectId, { priority: "critical" as "high" }),
     ).rejects.toThrow(/unsupported priority/i);
 
-    await expect(adapter.core.tasks.list(ctx, projectId, {}, { page: 0 })).rejects.toThrow(
-      /page must be at least 1/i,
-    );
+    await expect(
+      adapter.core.tasks.list(ctx, projectId, {}, { page: 0 }),
+    ).rejects.toThrow(/page must be at least 1/i);
 
     await expect(
       adapter.core.tasks.list(ctx, projectId, {}, {}, [
@@ -224,7 +242,12 @@ describe("PlaneTaskService state transitions", () => {
     expect(transitioned.status).toBe("in_progress");
 
     await expect(
-      adapter.core.tasks.transition(ctx, projectId, taskId, "status_plane_foreign-state"),
+      adapter.core.tasks.transition(
+        ctx,
+        projectId,
+        taskId,
+        "status_plane_foreign-state",
+      ),
     ).rejects.toThrow(/does not belong to the project/i);
   });
 });
@@ -272,14 +295,20 @@ describe("PlaneTaskService relationships", () => {
     ]);
     expect(withLabels.labelIds).toContain("label_plane_label-001");
 
-    const replacedLabels = await adapter.core.tasks.setLabels(ctx, projectId, created.id, [
-      "label_plane_label-001",
-    ]);
+    const replacedLabels = await adapter.core.tasks.setLabels(
+      ctx,
+      projectId,
+      created.id,
+      ["label_plane_label-001"],
+    );
     expect(replacedLabels.labelIds).toEqual(["label_plane_label-001"]);
 
-    const withoutLabel = await adapter.core.tasks.removeLabels(ctx, projectId, created.id, [
-      "label_plane_label-001",
-    ]);
+    const withoutLabel = await adapter.core.tasks.removeLabels(
+      ctx,
+      projectId,
+      created.id,
+      ["label_plane_label-001"],
+    );
     expect(withoutLabel.labelIds).not.toContain("label_plane_label-001");
 
     const withCycle = await adapter.core.tasks.addToCycle(
@@ -290,7 +319,11 @@ describe("PlaneTaskService relationships", () => {
     );
     expect(withCycle.sprintId).toBe("sprint_plane_cycle-001");
 
-    const withoutCycle = await adapter.core.tasks.removeFromCycle(ctx, projectId, created.id);
+    const withoutCycle = await adapter.core.tasks.removeFromCycle(
+      ctx,
+      projectId,
+      created.id,
+    );
     expect(withoutCycle.sprintId).toBeUndefined();
 
     const withModule = await adapter.core.tasks.addToModule(
@@ -301,7 +334,11 @@ describe("PlaneTaskService relationships", () => {
     );
     expect(withModule.projectModuleId).toBe("module_plane_module-001");
 
-    const withoutModule = await adapter.core.tasks.removeFromModule(ctx, projectId, created.id);
+    const withoutModule = await adapter.core.tasks.removeFromModule(
+      ctx,
+      projectId,
+      created.id,
+    );
     expect(withoutModule.projectModuleId).toBeUndefined();
 
     const withParent = await adapter.core.tasks.update(ctx, projectId, created.id, {
@@ -335,14 +372,20 @@ describe("PlaneTaskService error handling", () => {
 
     for (const scenario of scenarios) {
       const fetchFn: FetchFn = async (input, init) => {
-        if (pathnameOf(input).includes("/issues/") && (init?.method ?? "GET") === "GET") {
+        if (
+          pathnameOf(input).includes("/issues/") &&
+          (init?.method ?? "GET") === "GET"
+        ) {
           return new Response(
             JSON.stringify({
               error_code: scenario.code,
               message: scenario.code,
               api_key: "secret-should-not-leak",
             }),
-            { status: scenario.status, headers: { "Content-Type": "application/json" } },
+            {
+              status: scenario.status,
+              headers: { "Content-Type": "application/json" },
+            },
           );
         }
         return base(input, init);
@@ -351,7 +394,9 @@ describe("PlaneTaskService error handling", () => {
       const { adapter } = await createAdapter(fetchFn);
       await adapter.initialise();
 
-      await expect(adapter.core.tasks.get(ctx, projectId, taskId)).rejects.toMatchObject({
+      await expect(
+        adapter.core.tasks.get(ctx, projectId, taskId),
+      ).rejects.toMatchObject({
         category: scenario.category,
       });
     }
@@ -360,7 +405,10 @@ describe("PlaneTaskService error handling", () => {
   it("rejects malformed vendor responses and preserves safe diagnostics", async () => {
     const base = createMockPlaneCoreFetch();
     const fetchFn: FetchFn = async (input, init) => {
-      if (pathnameOf(input).match(/\/issues\/[^/]+\/$/) && (init?.method ?? "GET") === "GET") {
+      if (
+        pathnameOf(input).match(/\/issues\/[^/]+\/$/) &&
+        (init?.method ?? "GET") === "GET"
+      ) {
         return new Response(JSON.stringify({ id: "x" }), {
           status: 200,
           headers: { "Content-Type": "application/json" },
@@ -372,7 +420,9 @@ describe("PlaneTaskService error handling", () => {
     const { adapter } = await createAdapter(fetchFn);
     await adapter.initialise();
 
-    await expect(adapter.core.tasks.get(ctx, projectId, taskId)).rejects.toThrow(/issue\./i);
+    await expect(adapter.core.tasks.get(ctx, projectId, taskId)).rejects.toThrow(
+      /issue\./i,
+    );
   });
 
   it("does not leak secrets through public adapter errors", async () => {
@@ -420,9 +470,9 @@ describe("PlaneTaskService SDK integration", () => {
       serviceAvailable: true,
       apiAssumption: expect.stringContaining("issues API"),
     });
-    expect(adapter.planeDiagnosticsExtension.taskCapability.supportedOperations).toContain(
-      "transition",
-    );
+    expect(
+      adapter.planeDiagnosticsExtension.taskCapability.supportedOperations,
+    ).toContain("transition");
 
     await disposePlaneAdapter(adapter, factory);
   });

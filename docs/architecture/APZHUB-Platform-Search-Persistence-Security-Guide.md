@@ -4,14 +4,14 @@
 
 ## Controls
 
-| Control | Mechanism |
-|---------|-----------|
-| Tenant | Context + RLS `app.tenant_id` + repository filters |
-| Organisation | Context match when both set |
-| Permissions | `search.provider` / `search.configuration` / `search.diagnostics` / `search.audit` / `search.query` / `search.*` |
-| Provider ownership | Tenant-scoped provider records; no cross-tenant register |
-| Secrets | Refs only; diagnostics never include credential values |
-| No bypass | Registry and services assert permissions; providers cannot skip platform authz |
+| Control            | Mechanism                                                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| Tenant             | Context + RLS `app.tenant_id` + repository filters                                                               |
+| Organisation       | Context match when both set                                                                                      |
+| Permissions        | `search.provider` / `search.configuration` / `search.diagnostics` / `search.audit` / `search.query` / `search.*` |
+| Provider ownership | Tenant-scoped provider records; no cross-tenant register                                                         |
+| Secrets            | Refs only; diagnostics never include credential values                                                           |
+| No bypass          | Registry and services assert permissions; providers cannot skip platform authz                                   |
 
 ## Authorization
 

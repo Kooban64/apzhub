@@ -1,5 +1,7 @@
 /**
  * Factory for Cross-Product Search Integration Framework (APZSEARCH-009).
+ * APZSEARCH-016: Durable enqueue/retry is `@apzhub/search-orchestrator`;
+ * that layer calls `publisher` from this factory — products must not bypass it.
  */
 
 import { SearchEntityMapper } from "./mapper/search-entity-mapper";

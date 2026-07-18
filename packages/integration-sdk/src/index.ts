@@ -1,4 +1,4 @@
-export const INTEGRATION_SDK_VERSION = "0.9.0";
+export const INTEGRATION_SDK_VERSION = "1.0.0";
 export const INTEGRATION_SDK_PACKAGE = "@apzhub/integration-sdk";
 
 export type {
@@ -182,7 +182,10 @@ export type {
   IntegrationLifecycleTransitionInput,
 } from "./lifecycle";
 
-export type { IntegrationOperationsStack, CreateIntegrationOperationsStackInput } from "./operations-stack";
+export type {
+  IntegrationOperationsStack,
+  CreateIntegrationOperationsStackInput,
+} from "./operations-stack";
 export { createIntegrationOperationsStack } from "./operations-stack";
 
 export type {

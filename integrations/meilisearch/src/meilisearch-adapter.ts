@@ -54,10 +54,7 @@ import {
   type MeilisearchLogger,
   type MeilisearchMetrics,
 } from "./observability/meilisearch-observability";
-import {
-  MEILISEARCH_ADAPTER_VERSION,
-  MEILISEARCH_INTEGRATION_ID,
-} from "./version";
+import { MEILISEARCH_ADAPTER_VERSION, MEILISEARCH_INTEGRATION_ID } from "./version";
 import {
   MEILISEARCH_UNSUPPORTED_OPERATIONS,
   NOT_SUPPORTED,
@@ -247,9 +244,13 @@ export class MeilisearchAdapter extends SearchIntegrationAdapterBase {
     this.searchContext.searchErrorTranslator.registerMapper(this.errorMapper);
   }
 
-  protected override async onSearchDispose(_reason: AdapterDisposeReason): Promise<void> {
+  protected override async onSearchDispose(
+    _reason: AdapterDisposeReason,
+  ): Promise<void> {
     this.errorTranslator.unregisterMapper(MEILISEARCH_INTEGRATION_ID);
-    this.searchContext.searchErrorTranslator.unregisterMapper(MEILISEARCH_INTEGRATION_ID);
+    this.searchContext.searchErrorTranslator.unregisterMapper(
+      MEILISEARCH_INTEGRATION_ID,
+    );
     this.apiStatus = "not_tested";
     this.authenticationStatus = "unknown";
     this.engineVersion = undefined;
@@ -308,13 +309,13 @@ export class MeilisearchAdapter extends SearchIntegrationAdapterBase {
     ];
   }
 
-  async validateProviderConfiguration(
-    configuration: SearchProviderConfiguration,
-  ) {
+  async validateProviderConfiguration(configuration: SearchProviderConfiguration) {
     return this.configurationValidator.validateProviderConfiguration(configuration);
   }
 
-  private async resolveApiKey(context: IntegrationRequestContext): Promise<string | undefined> {
+  private async resolveApiKey(
+    context: IntegrationRequestContext,
+  ): Promise<string | undefined> {
     const credentialRef = this.meilisearchConfig.apiKeyRef;
     if (!credentialRef) {
       return undefined;

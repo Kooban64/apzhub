@@ -2,19 +2,23 @@
 
 ## Endpoints
 
-| Endpoint | Auth | Permission |
-|----------|------|------------|
-| `GET /api/platform/v1/security` | Session | Authenticated user |
+| Endpoint                                    | Auth    | Permission                         |
+| ------------------------------------------- | ------- | ---------------------------------- |
+| `GET /api/platform/v1/security`             | Session | Authenticated user                 |
 | `GET /api/platform/v1/security/diagnostics` | Session | `platform.nav.administration.view` |
-| `GET /api/platform/v1/system/health` | None | Public probe |
-| `GET /api/platform/v1/system/readiness` | None | Public probe |
-| `GET /api/platform/v1/system/liveness` | None | Public probe |
+| `GET /api/platform/v1/system/health`        | None    | Public probe                       |
+| `GET /api/platform/v1/system/readiness`     | None    | Public probe                       |
+| `GET /api/platform/v1/system/liveness`      | None    | Public probe                       |
 
 ## Security diagnostics shape
 
 ```json
 {
-  "headers": { "xFrameOptions": true, "crossOriginOpenerPolicy": true, "contentSecurityPolicy": "report-only" },
+  "headers": {
+    "xFrameOptions": true,
+    "crossOriginOpenerPolicy": true,
+    "contentSecurityPolicy": "report-only"
+  },
   "httpHeaders": { "compliant": true, "missing": [], "recommendations": [] },
   "environment": {
     "valid": true,

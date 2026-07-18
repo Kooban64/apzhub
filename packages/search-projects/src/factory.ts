@@ -45,10 +45,8 @@ export function createProjectsSearchAdapter(
   options: CreateProjectsSearchAdapterOptions = {},
 ): ProjectsSearchAdapter {
   const integration =
-    options.integration ??
-    createSearchIntegration(options.searchIntegrationOptions);
-  const integrationPublisher =
-    options.integrationPublisher ?? integration.publisher;
+    options.integration ?? createSearchIntegration(options.searchIntegrationOptions);
+  const integrationPublisher = options.integrationPublisher ?? integration.publisher;
 
   const mapper = new ProjectsSearchEntityMapper();
   const validator = new ProjectsSearchEntityValidator();

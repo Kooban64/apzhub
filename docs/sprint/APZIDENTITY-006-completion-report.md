@@ -14,11 +14,11 @@ Formally closed the Platform Identity Administration programme wave. Froze contr
 
 ## Wave Summary
 
-| Milestone | Outcome |
-| --------- | ------- |
-| APZIDENTITY-001…004 | Foundation → Services → HTTP/Client → Workbench |
-| APZIDENTITY-005 | Vertical Certification **PRODUCTION_READY_WITH_LIMITATIONS** |
-| APZIDENTITY-006 | Wave closeout + architecture freeze + Reference Standard |
+| Milestone           | Outcome                                                      |
+| ------------------- | ------------------------------------------------------------ |
+| APZIDENTITY-001…004 | Foundation → Services → HTTP/Client → Workbench              |
+| APZIDENTITY-005     | Vertical Certification **PRODUCTION_READY_WITH_LIMITATIONS** |
+| APZIDENTITY-006     | Wave closeout + architecture freeze + Reference Standard     |
 
 See [Programme Summary](./APZIDENTITY-006-programme-summary.md) · [Wave Closeout Report](./APZIDENTITY-006-wave-closeout-report.md).
 
@@ -55,26 +55,26 @@ Identity Workbench
 
 ## Quality Evidence
 
-| Gate | Result |
-| ---- | ------ |
-| `pnpm audit:identity-vertical` | PASS |
-| `pnpm audit:identity-wave` | PASS |
-| `pnpm certify:identity-vertical` | PASS |
-| `pnpm openapi:validate:platform` | PASS |
-| Wave closeout Vitest harness | PASS |
-| Package versions | Frozen (contracts/core 0.2.0 · persistence 0.1.0 · services 0.23.0 · OpenAPI 1.7.0) |
+| Gate                             | Result                                                                              |
+| -------------------------------- | ----------------------------------------------------------------------------------- |
+| `pnpm audit:identity-vertical`   | PASS                                                                                |
+| `pnpm audit:identity-wave`       | PASS                                                                                |
+| `pnpm certify:identity-vertical` | PASS                                                                                |
+| `pnpm openapi:validate:platform` | PASS                                                                                |
+| Wave closeout Vitest harness     | PASS                                                                                |
+| Package versions                 | Frozen (contracts/core 0.2.0 · persistence 0.1.0 · services 0.23.0 · OpenAPI 1.7.0) |
 
 Details: [Quality Evidence](../reviews/APZIDENTITY-006-Quality-Evidence.md) · [Wave Certification](../reviews/APZIDENTITY-006-Wave-Certification.md)
 
 ## Known Limitations
 
-- Metadata administration plane only  
-- Authentication / passwords / MFA / OAuth / OIDC / SAML unavailable by design  
-- SCIM / LDAP / Entra / Google Workspace sync unavailable by design  
-- Provisioning unavailable by design  
-- Event Bus / AI unavailable by design  
-- Invitation email delivery owned by Notification platform  
-- Playwright live LIMITED (external Testing slug conflict)  
+- Metadata administration plane only
+- Authentication / passwords / MFA / OAuth / OIDC / SAML unavailable by design
+- SCIM / LDAP / Entra / Google Workspace sync unavailable by design
+- Provisioning unavailable by design
+- Event Bus / AI unavailable by design
+- Invitation email delivery owned by Notification platform
+- Playwright live LIMITED (external Testing slug conflict)
 - Live Postgres optional in unit CI (production requires PostgreSQL)
 
 ## Future Roadmap
@@ -83,10 +83,10 @@ Details: [Quality Evidence](../reviews/APZIDENTITY-006-Quality-Evidence.md) · [
 
 ## Documentation Produced
 
-- Wave Closeout Report · Programme Summary · Completion Report  
-- Architecture Freeze Notice · Identity Reference Standard  
-- Operational Readiness Guide · Future Identity Platform Guide  
-- Wave Certification · Quality Evidence · Architecture Freeze Review · Security Confirmation  
+- Wave Closeout Report · Programme Summary · Completion Report
+- Architecture Freeze Notice · Identity Reference Standard
+- Operational Readiness Guide · Future Identity Platform Guide
+- Wave Certification · Quality Evidence · Architecture Freeze Review · Security Confirmation
 
 ## Recommendation
 

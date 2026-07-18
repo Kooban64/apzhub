@@ -21,10 +21,7 @@ import {
 } from "@apzhub/search-contracts";
 import { randomUUID } from "node:crypto";
 
-import {
-  assertProviderPermission,
-  SearchAuthorizationError,
-} from "../authorization";
+import { assertProviderPermission, SearchAuthorizationError } from "../authorization";
 import type { SearchPersistenceBundle } from "../ports";
 import type { SearchRepositoryContext } from "../types";
 
@@ -38,18 +35,16 @@ function toRepoCtx(context: SearchRequestContext): SearchRepositoryContext {
   };
 }
 
-function toSearchProvider(
-  record: {
-    id: string;
-    kind: SearchProvider["kind"];
-    label: string;
-    enabled: boolean;
-    active?: boolean;
-    ownership?: SearchProvider["ownership"];
-    version?: string;
-    capabilities: SearchCapabilities;
-  },
-): SearchProvider {
+function toSearchProvider(record: {
+  id: string;
+  kind: SearchProvider["kind"];
+  label: string;
+  enabled: boolean;
+  active?: boolean;
+  ownership?: SearchProvider["ownership"];
+  version?: string;
+  capabilities: SearchCapabilities;
+}): SearchProvider {
   return {
     id: asSearchProviderId(record.id),
     kind: record.kind,
@@ -148,8 +143,9 @@ export function createSearchProviderRegistry(
         version: input.version,
         enabled: true,
         active: Boolean(input.active),
-        ownership: (input as { ownership?: "platform" | "tenant" | "organisation" })
-          .ownership ?? "tenant",
+        ownership:
+          (input as { ownership?: "platform" | "tenant" | "organisation" }).ownership ??
+          "tenant",
         capabilities,
         configuration: input.configuration,
         createdAt: ts,
@@ -226,11 +222,7 @@ export function createSearchProviderRegistry(
       }
       const ts = now();
       await persistence.providers.softDelete(ctx, providerId);
-      await persistence.providerRegistrations.markUnregistered(
-        ctx,
-        providerId,
-        ts,
-      );
+      await persistence.providerRegistrations.markUnregistered(ctx, providerId, ts);
       await persistence.providerStatuses.upsert(ctx, {
         id: id(),
         tenantId: ctx.tenantId,
@@ -287,10 +279,7 @@ export function createSearchProviderRegistry(
       const ctx = toRepoCtx(context);
       const provider = await persistence.providers.get(ctx, providerId);
       if (!provider) return { exists: false };
-      const status = await persistence.providerStatuses.getByProvider(
-        ctx,
-        providerId,
-      );
+      const status = await persistence.providerStatuses.getByProvider(ctx, providerId);
       const payload = {
         providerId: provider.id,
         kind: provider.kind,
@@ -299,9 +288,7 @@ export function createSearchProviderRegistry(
         active: provider.active,
         status: status?.status ?? "UNKNOWN",
         capabilities: provider.capabilities,
-        endpointPresent: Boolean(
-          provider.configuration.endpointMetadata?.baseUrl,
-        ),
+        endpointPresent: Boolean(provider.configuration.endpointMetadata?.baseUrl),
         authRefsPresent: Boolean(
           provider.configuration.authenticationRefs?.credentialRef,
         ),
@@ -314,10 +301,7 @@ export function createSearchProviderRegistry(
 
     async getProviderHealth(context, providerId) {
       const ctx = toRepoCtx(context);
-      const status = await persistence.providerStatuses.getByProvider(
-        ctx,
-        providerId,
-      );
+      const status = await persistence.providerStatuses.getByProvider(ctx, providerId);
       if (!status) return null;
       return {
         status: status.status,

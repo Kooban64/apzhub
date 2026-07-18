@@ -18,12 +18,12 @@ Define **canonical APZHUB Projects events** published by `ProjectService`. Map i
 
 All Projects events use `PlatformEventEnvelope` with:
 
-| Field | Value |
-|-------|-------|
-| `category` | `business` |
-| `publisher` | `project-service` |
+| Field           | Value             |
+| --------------- | ----------------- |
+| `category`      | `business`        |
+| `publisher`     | `project-service` |
 | `sourceService` | `project-service` |
-| `tenantId` | Required |
+| `tenantId`      | Required          |
 
 Each event requires `event.yaml` manifest before implementation (029).
 
@@ -33,47 +33,47 @@ Each event requires `event.yaml` manifest before implementation (029).
 
 ### Project events
 
-| Event ID | Description | Payload (summary) |
-|----------|-------------|-------------------|
-| `project.created` | Project provisioned | `projectId`, `name`, `status` |
-| `project.updated` | Metadata changed | `projectId`, `changedFields` |
-| `project.status_changed` | Lifecycle transition | `projectId`, `from`, `to` |
-| `project.archived` | Project archived | `projectId` |
-| `project.member_added` | Team member joined | `projectId`, `userId`, `role` |
-| `project.member_removed` | Team member removed | `projectId`, `userId` |
+| Event ID                 | Description          | Payload (summary)             |
+| ------------------------ | -------------------- | ----------------------------- |
+| `project.created`        | Project provisioned  | `projectId`, `name`, `status` |
+| `project.updated`        | Metadata changed     | `projectId`, `changedFields`  |
+| `project.status_changed` | Lifecycle transition | `projectId`, `from`, `to`     |
+| `project.archived`       | Project archived     | `projectId`                   |
+| `project.member_added`   | Team member joined   | `projectId`, `userId`, `role` |
+| `project.member_removed` | Team member removed  | `projectId`, `userId`         |
 
 ### Task events
 
-| Event ID | Description | Payload (summary) |
-|----------|-------------|-------------------|
-| `task.created` | Task created | `taskId`, `projectId`, `title`, `status` |
-| `task.updated` | Task metadata changed | `taskId`, `projectId`, `changedFields` |
-| `task.status_changed` | Status transition | `taskId`, `projectId`, `from`, `to`, `statusId` |
-| `task.assigned` | Assignee changed | `taskId`, `projectId`, `assigneeId`, `previousAssigneeId` |
-| `task.completed` | Task reached done | `taskId`, `projectId` |
-| `task.commented` | Comment added | `taskId`, `projectId`, `commentId`, `authorId` |
-| `task.deleted` | Task removed | `taskId`, `projectId` |
+| Event ID              | Description           | Payload (summary)                                         |
+| --------------------- | --------------------- | --------------------------------------------------------- |
+| `task.created`        | Task created          | `taskId`, `projectId`, `title`, `status`                  |
+| `task.updated`        | Task metadata changed | `taskId`, `projectId`, `changedFields`                    |
+| `task.status_changed` | Status transition     | `taskId`, `projectId`, `from`, `to`, `statusId`           |
+| `task.assigned`       | Assignee changed      | `taskId`, `projectId`, `assigneeId`, `previousAssigneeId` |
+| `task.completed`      | Task reached done     | `taskId`, `projectId`                                     |
+| `task.commented`      | Comment added         | `taskId`, `projectId`, `commentId`, `authorId`            |
+| `task.deleted`        | Task removed          | `taskId`, `projectId`                                     |
 
 ### Sprint events
 
-| Event ID | Description | Payload (summary) |
-|----------|-------------|-------------------|
-| `sprint.created` | Sprint defined | `sprintId`, `projectId`, `name` |
-| `sprint.started` | Sprint activated | `sprintId`, `projectId` |
-| `sprint.completed` | Sprint closed | `sprintId`, `projectId` |
-| `sprint.cancelled` | Sprint cancelled | `sprintId`, `projectId` |
+| Event ID           | Description      | Payload (summary)               |
+| ------------------ | ---------------- | ------------------------------- |
+| `sprint.created`   | Sprint defined   | `sprintId`, `projectId`, `name` |
+| `sprint.started`   | Sprint activated | `sprintId`, `projectId`         |
+| `sprint.completed` | Sprint closed    | `sprintId`, `projectId`         |
+| `sprint.cancelled` | Sprint cancelled | `sprintId`, `projectId`         |
 
 ### Milestone events
 
-| Event ID | Description | Payload (summary) |
-|----------|-------------|-------------------|
-| `milestone.created` | Milestone created | `milestoneId`, `projectId` |
+| Event ID              | Description       | Payload (summary)          |
+| --------------------- | ----------------- | -------------------------- |
+| `milestone.created`   | Milestone created | `milestoneId`, `projectId` |
 | `milestone.completed` | Milestone reached | `milestoneId`, `projectId` |
 
 ### Backlog events
 
-| Event ID | Description | Payload (summary) |
-|----------|-------------|-------------------|
+| Event ID            | Description           | Payload (summary)      |
+| ------------------- | --------------------- | ---------------------- |
 | `backlog.reordered` | Backlog order changed | `projectId`, `taskIds` |
 
 ---
@@ -111,21 +111,21 @@ interface ProjectCreatedPayload {
 
 Mapping occurs in adapter ingest layer or ProjectService after adapter normalizes. **Not exported.**
 
-| Plane internal signal | APZHUB event | Notes |
-|-----------------------|--------------|-------|
-| `plane.issue.created` | `task.created` | After DTO mapping |
-| `plane.issue.updated` (state) | `task.status_changed` | Detect state field change |
-| `plane.issue.updated` (assignee) | `task.assigned` | |
-| `plane.issue.updated` (other) | `task.updated` | |
-| `plane.issue.deleted` | `task.deleted` | |
-| `plane.comment.created` | `task.commented` | |
-| `plane.project.created` | `project.created` | |
-| `plane.project.updated` | `project.updated` | |
-| `plane.cycle.created` | `sprint.created` | |
-| `plane.cycle.started` | `sprint.started` | |
-| `plane.cycle.completed` | `sprint.completed` | |
-| `plane.member.added` | `project.member_added` | |
-| `plane.member.removed` | `project.member_removed` | |
+| Plane internal signal            | APZHUB event             | Notes                     |
+| -------------------------------- | ------------------------ | ------------------------- |
+| `plane.issue.created`            | `task.created`           | After DTO mapping         |
+| `plane.issue.updated` (state)    | `task.status_changed`    | Detect state field change |
+| `plane.issue.updated` (assignee) | `task.assigned`          |                           |
+| `plane.issue.updated` (other)    | `task.updated`           |                           |
+| `plane.issue.deleted`            | `task.deleted`           |                           |
+| `plane.comment.created`          | `task.commented`         |                           |
+| `plane.project.created`          | `project.created`        |                           |
+| `plane.project.updated`          | `project.updated`        |                           |
+| `plane.cycle.created`            | `sprint.created`         |                           |
+| `plane.cycle.started`            | `sprint.started`         |                           |
+| `plane.cycle.completed`          | `sprint.completed`       |                           |
+| `plane.member.added`             | `project.member_added`   |                           |
+| `plane.member.removed`           | `project.member_removed` |                           |
 
 Plane webhook event names (if used) are consumed only in `integrations/plane/src/ingest/` — converted to `PlaneDomainEvent` then to APZHUB events by ProjectService.
 
@@ -147,13 +147,13 @@ Async reconciliation (outbox) publishes same canonical events — idempotent by 
 
 ## Subscriber registration
 
-| Framework | Subscribes to | Action |
-|-----------|---------------|--------|
-| **Notifications (021)** | `task.assigned`, `task.status_changed`, `task.commented`, `project.member_added` | Route to notification templates |
-| **Activity (007)** | All `project.*`, `task.*`, `sprint.*` | Activity mappers → timeline |
-| **Search (020)** | `project.*`, `task.*` | Async index upsert/delete |
-| **Knowledge (020)** | `task.updated` (link fields) | Knowledge graph update |
-| **Automation (future n8n)** | `task.completed`, `sprint.completed` | Workflow triggers |
+| Framework                   | Subscribes to                                                                    | Action                          |
+| --------------------------- | -------------------------------------------------------------------------------- | ------------------------------- |
+| **Notifications (021)**     | `task.assigned`, `task.status_changed`, `task.commented`, `project.member_added` | Route to notification templates |
+| **Activity (007)**          | All `project.*`, `task.*`, `sprint.*`                                            | Activity mappers → timeline     |
+| **Search (020)**            | `project.*`, `task.*`                                                            | Async index upsert/delete       |
+| **Knowledge (020)**         | `task.updated` (link fields)                                                     | Knowledge graph update          |
+| **Automation (future n8n)** | `task.completed`, `sprint.completed`                                             | Workflow triggers               |
 
 Modules **do not** subscribe directly — frameworks only.
 
@@ -161,23 +161,23 @@ Modules **do not** subscribe directly — frameworks only.
 
 ## Notification route mapping (illustrative)
 
-| Event | Notification template ID | Audience |
-|-------|-------------------------|----------|
-| `task.assigned` | `projects.task.assigned` | Assignee |
-| `task.status_changed` | `projects.task.status_changed` | Watchers |
-| `task.commented` | `projects.task.commented` | Assignee + watchers |
-| `project.member_added` | `projects.member.added` | Added user |
+| Event                  | Notification template ID       | Audience            |
+| ---------------------- | ------------------------------ | ------------------- |
+| `task.assigned`        | `projects.task.assigned`       | Assignee            |
+| `task.status_changed`  | `projects.task.status_changed` | Watchers            |
+| `task.commented`       | `projects.task.commented`      | Assignee + watchers |
+| `project.member_added` | `projects.member.added`        | Added user          |
 
 ---
 
 ## Activity mapper mapping (illustrative)
 
-| Event | Activity action key | Summary template |
-|-------|---------------------|------------------|
-| `task.created` | `projects.task.created` | "{actor} created task {title}" |
-| `task.status_changed` | `projects.task.status_changed` | "{actor} moved {title} to {status}" |
-| `task.assigned` | `projects.task.assigned` | "{actor} assigned {title} to {assignee}" |
-| `sprint.started` | `projects.sprint.started` | "{actor} started sprint {name}" |
+| Event                 | Activity action key            | Summary template                         |
+| --------------------- | ------------------------------ | ---------------------------------------- |
+| `task.created`        | `projects.task.created`        | "{actor} created task {title}"           |
+| `task.status_changed` | `projects.task.status_changed` | "{actor} moved {title} to {status}"      |
+| `task.assigned`       | `projects.task.assigned`       | "{actor} assigned {title} to {assignee}" |
+| `sprint.started`      | `projects.sprint.started`      | "{actor} started sprint {name}"          |
 
 Activity mappers use APZHUB payload only — no Plane fields.
 
@@ -185,11 +185,11 @@ Activity mappers use APZHUB payload only — no Plane fields.
 
 ## Idempotency
 
-| Concern | Rule |
-|---------|------|
-| Duplicate publish | Subscribers use `envelopeId` dedup |
-| Outbox replay | Same `correlationId` chain; payload includes `syncVersion` |
-| Webhook duplicate | Adapter dedup by Plane event ID before normalize |
+| Concern           | Rule                                                       |
+| ----------------- | ---------------------------------------------------------- |
+| Duplicate publish | Subscribers use `envelopeId` dedup                         |
+| Outbox replay     | Same `correlationId` chain; payload includes `syncVersion` |
+| Webhook duplicate | Adapter dedup by Plane event ID before normalize           |
 
 ---
 

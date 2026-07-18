@@ -60,9 +60,7 @@ export type TestingSearchAdapter = {
   readonly specialisedPublishers: TestingSearchSpecialisedPublishers;
 };
 
-function resolveProductionIntegration(
-  options: CreateTestingSearchAdapterOptions,
-): {
+function resolveProductionIntegration(options: CreateTestingSearchAdapterOptions): {
   integration: SearchIntegrationFramework;
   integrationPublisher: SearchIntegrationPublisher;
 } {
@@ -94,8 +92,7 @@ function resolveProductionIntegration(
     options.searchIntegrationOptions?.sinkKind
   ) {
     const integration =
-      options.integration ??
-      createSearchIntegration(options.searchIntegrationOptions);
+      options.integration ?? createSearchIntegration(options.searchIntegrationOptions);
     return { integration, integrationPublisher: integration.publisher };
   }
 
@@ -119,10 +116,7 @@ function buildSpecialisedPublishers(
   return {
     manual: new ManualTestingPublisher(deps, mapper.getManualMapper()),
     automation: new AutomationPublisher(deps, mapper.getAutomationMapper()),
-    certification: new CertificationPublisher(
-      deps,
-      mapper.getCertificationMapper(),
-    ),
+    certification: new CertificationPublisher(deps, mapper.getCertificationMapper()),
     release: new ReleasePublisher(deps, mapper.getReleaseMapper()),
     engineeringIntelligence: new EngineeringIntelligencePublisher(
       deps,
@@ -213,8 +207,7 @@ export function createTestingSearchAdapterForTest(
         ? { sink: options.sink, ...options.searchIntegrationOptions }
         : options.searchIntegrationOptions,
     );
-  const integrationPublisher =
-    options.integrationPublisher ?? integration.publisher;
+  const integrationPublisher = options.integrationPublisher ?? integration.publisher;
   return buildAdapter(integration, integrationPublisher);
 }
 

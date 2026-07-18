@@ -188,10 +188,7 @@ export function resolveReportingClassification(
   return candidate;
 }
 
-function navigationTarget(
-  entityType: ReportingSearchEntityType,
-  id: string,
-): string {
+function navigationTarget(entityType: ReportingSearchEntityType, id: string): string {
   switch (entityType) {
     case "report_template":
       return `/workspace/reporting/templates/${id}`;
@@ -247,11 +244,7 @@ export class ReportingSearchEntityMapper {
       case "report_category":
         return this.mapReportCategory(context, input.entity, input.extras);
       case "report_placeholder_catalogue":
-        return this.mapPlaceholderCatalogue(
-          context,
-          input.entity,
-          input.extras,
-        );
+        return this.mapPlaceholderCatalogue(context, input.entity, input.extras);
       case "report_definition":
         return this.mapReportDefinition(context, input.entity, input.extras);
       case "report_type":
@@ -273,11 +266,7 @@ export class ReportingSearchEntityMapper {
           input.extras,
         );
       case "report_output_metadata":
-        return this.mapReportOutputMetadata(
-          context,
-          input.entity,
-          input.extras,
-        );
+        return this.mapReportOutputMetadata(context, input.entity, input.extras);
       case "report_consumer":
         return this.mapReportConsumer(context, input.entity, input.extras);
       case "report_usage_summary":
@@ -335,10 +324,7 @@ export class ReportingSearchEntityMapper {
     assertPlatformEntityId(entity.id, "report_category.id");
     this.assertOptionalTenant(entity.tenantId, context);
     const title =
-      extras?.title?.trim() ||
-      entity.title?.trim() ||
-      entity.name?.trim() ||
-      "";
+      extras?.title?.trim() || entity.title?.trim() || entity.name?.trim() || "";
     if (!title) {
       throw new Error("report_category title/name is required");
     }
@@ -370,10 +356,7 @@ export class ReportingSearchEntityMapper {
     assertPlatformEntityId(entity.id, "report_placeholder_catalogue.id");
     this.assertOptionalTenant(entity.tenantId, context);
     const title =
-      extras?.title?.trim() ||
-      entity.title?.trim() ||
-      entity.name?.trim() ||
-      "";
+      extras?.title?.trim() || entity.title?.trim() || entity.name?.trim() || "";
     if (!title) {
       throw new Error("report_placeholder_catalogue title/name is required");
     }
@@ -392,10 +375,7 @@ export class ReportingSearchEntityMapper {
       keywords: [title, ...labels, ...(extras?.keywords ?? [])],
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt ?? entity.createdAt,
-      navigationTarget: navigationTarget(
-        "report_placeholder_catalogue",
-        entity.id,
-      ),
+      navigationTarget: navigationTarget("report_placeholder_catalogue", entity.id),
       sourceId: "reporting:report_placeholder_catalogue",
       ownerUserId: context.actorUserId,
     };
@@ -423,10 +403,7 @@ export class ReportingSearchEntityMapper {
     assertPlatformEntityId(entity.id, "report_definition.id");
     this.assertOptionalTenant(entity.tenantId ?? extras?.tenantId, context);
     const title =
-      extras?.title?.trim() ||
-      entity.title?.trim() ||
-      entity.name?.trim() ||
-      "";
+      extras?.title?.trim() || entity.title?.trim() || entity.name?.trim() || "";
     if (!title) {
       throw new Error("report_definition title/name is required");
     }
@@ -530,9 +507,7 @@ export class ReportingSearchEntityMapper {
       generatedAt: meta.generatedAt,
       generatedBy: meta.generatedBy,
       ...(meta.archivedAt ? { archivedAt: meta.archivedAt } : {}),
-      ...(meta.organisationId
-        ? { organisationId: meta.organisationId }
-        : {}),
+      ...(meta.organisationId ? { organisationId: meta.organisationId } : {}),
     };
 
     return {
@@ -571,8 +546,7 @@ export class ReportingSearchEntityMapper {
       entityId: `output:${meta.id}`,
       entityType: "report_output_metadata",
       title:
-        extras?.title?.trim() ||
-        `${meta.reportType} output (${meta.outputFormat})`,
+        extras?.title?.trim() || `${meta.reportType} output (${meta.outputFormat})`,
       organisationId: meta.organisationId ?? context.organisationId,
       classification: resolveReportingClassification(context, extras),
       permissions: [...context.permissions],
@@ -638,9 +612,7 @@ export class ReportingSearchEntityMapper {
         ...(entity.generationCount !== undefined
           ? { generationCount: String(entity.generationCount) }
           : {}),
-        ...(entity.lastGeneratedAt
-          ? { lastGeneratedAt: entity.lastGeneratedAt }
-          : {}),
+        ...(entity.lastGeneratedAt ? { lastGeneratedAt: entity.lastGeneratedAt } : {}),
       },
       keywords: [entity.title, ...(extras?.keywords ?? [])],
       createdAt: entity.createdAt,

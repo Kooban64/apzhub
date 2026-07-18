@@ -6,18 +6,18 @@
 
 ## Closeout checklist
 
-| Item | Status |
-| --- | --- |
-| Re-validate APZIDENTITY-001…005 | ✅ via `audit:identity-vertical` |
-| Wave audit `audit:identity-wave` | ✅ |
-| Architecture Freeze Notice published | ✅ |
-| Identity Reference Standard published | ✅ |
-| Final Operational Readiness Guide published | ✅ |
-| Future Identity roadmap published (docs only) | ✅ |
-| Security confirmation | ✅ |
-| Classification retained | ✅ PRODUCTION_READY_WITH_LIMITATIONS |
-| No product/behaviour changes | ✅ |
-| Foundation stop point advanced | ✅ → APZOBSERVE-001 |
+| Item                                          | Status                               |
+| --------------------------------------------- | ------------------------------------ |
+| Re-validate APZIDENTITY-001…005               | ✅ via `audit:identity-vertical`     |
+| Wave audit `audit:identity-wave`              | ✅                                   |
+| Architecture Freeze Notice published          | ✅                                   |
+| Identity Reference Standard published         | ✅                                   |
+| Final Operational Readiness Guide published   | ✅                                   |
+| Future Identity roadmap published (docs only) | ✅                                   |
+| Security confirmation                         | ✅                                   |
+| Classification retained                       | ✅ PRODUCTION_READY_WITH_LIMITATIONS |
+| No product/behaviour changes                  | ✅                                   |
+| Foundation stop point advanced                | ✅ → APZOBSERVE-001                  |
 
 ## Freeze statement
 

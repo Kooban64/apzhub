@@ -86,7 +86,17 @@ export function seedDefaultAuthorizationCatalog(service: AuthorizationService): 
         tenantId: DEFAULT_PLATFORM_TENANT_ID,
         parentRoleId: DEFAULT_LAW_OPERATOR_ROLE_ID,
       },
-      ["tenant.*", "workspace.*", "project.*", "team.list", "team.read", "user.read", "search.execute", "legal.client.view", "legal.trust.view"],
+      [
+        "tenant.*",
+        "workspace.*",
+        "project.*",
+        "team.list",
+        "team.read",
+        "user.read",
+        "search.execute",
+        "legal.client.view",
+        "legal.trust.view",
+      ],
     );
   }
 }

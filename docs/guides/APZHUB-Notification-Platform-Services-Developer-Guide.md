@@ -4,12 +4,12 @@
 
 ## Packages
 
-| Package | Role |
-| --- | --- |
-| `@apzhub/notification-contracts` **0.2.0** | Gateway facet contracts |
-| `@apzhub/notification-core` **0.2.0** | Domain service + lifecycle |
-| `@apzhub/notification-persistence` **0.1.0** | Repositories |
-| `@apzhub/platform-services` **0.21.0** | Thin wrappers + gateway + authz |
+| Package                                      | Role                            |
+| -------------------------------------------- | ------------------------------- |
+| `@apzhub/notification-contracts` **0.2.0**   | Gateway facet contracts         |
+| `@apzhub/notification-core` **0.2.0**        | Domain service + lifecycle      |
+| `@apzhub/notification-persistence` **0.1.0** | Repositories                    |
+| `@apzhub/platform-services` **0.21.0**       | Thin wrappers + gateway + authz |
 
 ## Audit
 

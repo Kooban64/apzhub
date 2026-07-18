@@ -30,10 +30,7 @@ export function createDocumentPlatformServiceImpls(input: {
   readonly getStorageObject?: (
     ctx: DocumentRequestContext,
     versionId: string,
-  ) => Promise<
-    | import("@apzhub/document-contracts").DocumentStorageObjectRecord
-    | null
-  >;
+  ) => Promise<import("@apzhub/document-contracts").DocumentStorageObjectRecord | null>;
 }): DocumentPlatformServiceImpls {
   const docs: PlatformDocumentService = input.foundation.documents;
   const content: DocumentContentService = input.foundation.content;
@@ -41,7 +38,8 @@ export function createDocumentPlatformServiceImpls(input: {
 
   return {
     documents: {
-      create: (ctx, createInput) => docs.createDocument(toDocumentCtx(ctx), createInput),
+      create: (ctx, createInput) =>
+        docs.createDocument(toDocumentCtx(ctx), createInput),
       get: (ctx, documentId) => docs.getDocument(toDocumentCtx(ctx), documentId),
       summarize: (ctx, documentId) =>
         docs.summarizeDocument(toDocumentCtx(ctx), documentId),
@@ -68,8 +66,7 @@ export function createDocumentPlatformServiceImpls(input: {
         docs.relateDocument(toDocumentCtx(ctx), relateInput),
     },
     documentFolders: {
-      assign: (ctx, assignInput) =>
-        docs.assignFolder(toDocumentCtx(ctx), assignInput),
+      assign: (ctx, assignInput) => docs.assignFolder(toDocumentCtx(ctx), assignInput),
     },
     documentCollections: {
       assign: (ctx, assignInput) =>
@@ -83,8 +80,7 @@ export function createDocumentPlatformServiceImpls(input: {
       list: (ctx, documentId) => docs.listAudit(toDocumentCtx(ctx), documentId),
     },
     documentVersions: {
-      list: (ctx, documentId) =>
-        content.listVersions(toDocumentCtx(ctx), documentId),
+      list: (ctx, documentId) => content.listVersions(toDocumentCtx(ctx), documentId),
       get: (ctx, documentId, versionId) =>
         content.getVersion(toDocumentCtx(ctx), documentId, versionId),
     },
@@ -99,12 +95,10 @@ export function createDocumentPlatformServiceImpls(input: {
       },
       verifyIntegrity: (ctx, documentId, versionId) =>
         content.verifyContent(toDocumentCtx(ctx), { documentId, versionId }),
-      inspectReconciliation: (ctx) =>
-        content.inspectReconciliation(toDocumentCtx(ctx)),
+      inspectReconciliation: (ctx) => content.inspectReconciliation(toDocumentCtx(ctx)),
     },
     documentSearchMetadata: {
-      find: (ctx, findInput) =>
-        docs.findDocuments(toDocumentCtx(ctx), findInput),
+      find: (ctx, findInput) => docs.findDocuments(toDocumentCtx(ctx), findInput),
     },
     documentDiagnostics: {
       async getDiagnostics(ctx) {

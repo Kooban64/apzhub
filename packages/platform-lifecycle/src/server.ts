@@ -1,2 +1,5 @@
 export * from "./index";
-export { getSharedPlatformLifecycleManager, resetSharedPlatformLifecycleManagerForTests } from "./shared-manager";
+export {
+  getSharedPlatformLifecycleManager,
+  resetSharedPlatformLifecycleManagerForTests,
+} from "./shared-manager";

@@ -6,7 +6,10 @@ import type {
   TaskStatus,
   UpdateTaskInput,
 } from "@apzhub/platform-service-contracts";
-import { createBidirectionalEnumMapper, createEnumMapper } from "@apzhub/integration-sdk/mapping";
+import {
+  createBidirectionalEnumMapper,
+  createEnumMapper,
+} from "@apzhub/integration-sdk/mapping";
 
 import type { PlaneIssueRecord } from "../internal/plane-api-types";
 import {
@@ -68,9 +71,10 @@ function asIdList(
     .filter((id): id is string => typeof id === "string" && id.length > 0);
 }
 
-function resolveStateId(
-  state: PlaneIssueRecord["state"],
-): { readonly statusId: string; readonly group?: string } {
+function resolveStateId(state: PlaneIssueRecord["state"]): {
+  readonly statusId: string;
+  readonly group?: string;
+} {
   if (!state) {
     return { statusId: "unknown" };
   }
@@ -137,8 +141,7 @@ export function mapPlaneIssue(
     assigneeId: primaryAssignee ? toUserId(primaryAssignee) : undefined,
     assigneeIds: additionalAssignees.length > 0 ? additionalAssignees : undefined,
     labelIds: labelPlaneIds.map(toLabelId),
-    sprintId:
-      typeof record.cycle === "string" ? toSprintId(record.cycle) : undefined,
+    sprintId: typeof record.cycle === "string" ? toSprintId(record.cycle) : undefined,
     projectModuleId:
       typeof record.module === "string" ? toModuleId(record.module) : undefined,
     parentTaskId:
@@ -153,7 +156,9 @@ export function mapPlaneIssue(
   };
 }
 
-export function mapTaskToPlaneCreateBody(input: CreateTaskInput): Record<string, unknown> {
+export function mapTaskToPlaneCreateBody(
+  input: CreateTaskInput,
+): Record<string, unknown> {
   const body: Record<string, unknown> = {
     name: input.title,
   };
@@ -199,13 +204,17 @@ export function mapTaskToPlaneCreateBody(input: CreateTaskInput): Record<string,
 }
 
 /** Partial update — only explicitly supplied fields. */
-export function mapTaskToPlaneUpdateBody(input: UpdateTaskInput): Record<string, unknown> {
+export function mapTaskToPlaneUpdateBody(
+  input: UpdateTaskInput,
+): Record<string, unknown> {
   const body: Record<string, unknown> = {};
 
   if (input.title !== undefined) body.name = input.title;
   if (input.description !== undefined) body.description_html = input.description;
-  if (input.statusId !== undefined) body.state = extractPlaneId(input.statusId, "status");
-  if (input.priority !== undefined) body.priority = priorityEnums.toProvider(input.priority);
+  if (input.statusId !== undefined)
+    body.state = extractPlaneId(input.statusId, "status");
+  if (input.priority !== undefined)
+    body.priority = priorityEnums.toProvider(input.priority);
 
   if (input.assigneeIds !== undefined) {
     body.assignees =
@@ -213,14 +222,16 @@ export function mapTaskToPlaneUpdateBody(input: UpdateTaskInput): Record<string,
         ? []
         : input.assigneeIds.map((id) => extractPlaneId(id, "user"));
   } else if (input.assigneeId !== undefined) {
-    body.assignees = input.assigneeId === null ? [] : [extractPlaneId(input.assigneeId, "user")];
+    body.assignees =
+      input.assigneeId === null ? [] : [extractPlaneId(input.assigneeId, "user")];
   }
 
   if (input.labelIds !== undefined) {
     body.labels = input.labelIds.map((id) => extractPlaneId(id, "label"));
   }
   if (input.sprintId !== undefined) {
-    body.cycle = input.sprintId === null ? null : extractPlaneId(input.sprintId, "sprint");
+    body.cycle =
+      input.sprintId === null ? null : extractPlaneId(input.sprintId, "sprint");
   }
   if (input.projectModuleId !== undefined) {
     body.module =
@@ -239,7 +250,8 @@ export function mapTaskToPlaneUpdateBody(input: UpdateTaskInput): Record<string,
     body.target_date = input.dueDate;
   }
   if (input.estimate !== undefined) {
-    body.estimate_point = input.estimate === null ? null : input.estimate.points ?? null;
+    body.estimate_point =
+      input.estimate === null ? null : (input.estimate.points ?? null);
   }
 
   return body;
@@ -270,7 +282,9 @@ export function mapPriorityToPlane(priority: TaskPriority): string {
   return priorityEnums.toProvider(priority);
 }
 
-export function mapPlanePriorityToCanonical(value: string | null | undefined): TaskPriority {
+export function mapPlanePriorityToCanonical(
+  value: string | null | undefined,
+): TaskPriority {
   return mapPriority(value);
 }
 

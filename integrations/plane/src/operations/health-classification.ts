@@ -79,14 +79,18 @@ export function classifyPlaneOperationalHealth(
   }
   if (degradedCaps.length > 0) {
     reasons.push(
-      ...degradedCaps.map((capability) => `capability_degraded:${capability.serviceId}`),
+      ...degradedCaps.map(
+        (capability) => `capability_degraded:${capability.serviceId}`,
+      ),
     );
   }
   if (input.compatibility.compatibilityStatus === "warning") {
     reasons.push("provider_version_at_maximum");
   }
   if (input.readiness && !input.readiness.ready) {
-    reasons.push(...input.readiness.warnings.map((warning) => `readiness_warning:${warning}`));
+    reasons.push(
+      ...input.readiness.warnings.map((warning) => `readiness_warning:${warning}`),
+    );
   }
 
   if (

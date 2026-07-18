@@ -98,7 +98,11 @@ export function validateMappingProvider(
     if (!validation.valid) {
       errors.push(...validation.errors.map((e) => `${definition.id}: ${e}`));
     }
-    const key = definitionKey(definition.entityType, definition.profile, definition.direction);
+    const key = definitionKey(
+      definition.entityType,
+      definition.profile,
+      definition.direction,
+    );
     if (keys.has(key)) {
       errors.push(`Duplicate definition "${key}"`);
     }
@@ -108,8 +112,14 @@ export function validateMappingProvider(
   return { valid: errors.length === 0, errors };
 }
 
-function validateCapabilities(capabilities: MappingCapabilities, errors: string[]): void {
-  if (!Array.isArray(capabilities.entityTypes) || capabilities.entityTypes.length === 0) {
+function validateCapabilities(
+  capabilities: MappingCapabilities,
+  errors: string[],
+): void {
+  if (
+    !Array.isArray(capabilities.entityTypes) ||
+    capabilities.entityTypes.length === 0
+  ) {
     errors.push("Capabilities must declare at least one entityType");
   }
   if (!Array.isArray(capabilities.profiles) || capabilities.profiles.length === 0) {

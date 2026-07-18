@@ -4,15 +4,15 @@
 
 ## Certified controls
 
-| Control | Status |
-| --- | --- |
-| Tenant isolation | Enforced via trusted context + persistence |
-| Organisation isolation | Enforced via trusted context + persistence |
-| Production authz map (`administrationPlatformOps`) | Deny-by-default |
-| Metadata-only mutation surface | Archive/restore/transition — no runtime execute |
-| Audit integrity | Read-oriented audit/history APIs; no identity-plane leakage |
-| Logging safety | No raw secrets / credentials in HTTP/client surfaces |
-| Route surface hygiene | No users/roles/tenants/provision/execute HTTP paths |
+| Control                                            | Status                                                      |
+| -------------------------------------------------- | ----------------------------------------------------------- |
+| Tenant isolation                                   | Enforced via trusted context + persistence                  |
+| Organisation isolation                             | Enforced via trusted context + persistence                  |
+| Production authz map (`administrationPlatformOps`) | Deny-by-default                                             |
+| Metadata-only mutation surface                     | Archive/restore/transition — no runtime execute             |
+| Audit integrity                                    | Read-oriented audit/history APIs; no identity-plane leakage |
+| Logging safety                                     | No raw secrets / credentials in HTTP/client surfaces        |
+| Route surface hygiene                              | No users/roles/tenants/provision/execute HTTP paths         |
 
 ## Confirmed absent (by design)
 

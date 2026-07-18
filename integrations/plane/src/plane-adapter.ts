@@ -13,10 +13,7 @@ import type { SecretProvider } from "@apzhub/integration-sdk/auth";
 import { missingCredentialsError } from "@apzhub/integration-sdk/errors";
 import type { ErrorTranslationContext } from "@apzhub/integration-sdk/errors";
 
-import {
-  type PlaneConfiguration,
-  validatePlaneConfiguration,
-} from "./plane-config";
+import { type PlaneConfiguration, validatePlaneConfiguration } from "./plane-config";
 import {
   getPlaneExtendedCapabilities,
   type PlaneBootstrapConfiguration,
@@ -32,7 +29,10 @@ import type { FetchFn } from "./internal/plane-fetch-client";
 import { PlaneClient } from "./internal/plane-client";
 import type { PlaneConnectionTestResult } from "./internal/plane-api-types";
 import { getPlaneServiceCapability } from "./capabilities/service-capabilities";
-import { createPlaneCoreServices, type PlaneCoreServices } from "./services/plane-core-services";
+import {
+  createPlaneCoreServices,
+  type PlaneCoreServices,
+} from "./services/plane-core-services";
 import {
   createPlaneOperationsService,
   mapOperationalHealthToSdkStatus,
@@ -41,9 +41,7 @@ import {
   type PlaneOperationalReport,
   type PlaneRuntimeDiagnosticsSnapshot,
 } from "./operations";
-import {
-  createPlaneMappingRegistry,
-} from "./mappers/plane-mapping-registry";
+import { createPlaneMappingRegistry } from "./mappers/plane-mapping-registry";
 import type { MappingRegistry } from "@apzhub/integration-sdk/mapping";
 
 export interface PlaneDiagnosticsExtension {
@@ -121,7 +119,8 @@ export class PlaneAdapter extends IntegrationAdapterBase {
   private lastConnectionTest?: PlaneConnectionTestResult;
   private lastConnectionTestAt?: string;
   private apiStatus: PlaneDiagnosticsExtension["apiStatus"] = "not_tested";
-  private authenticationStatus: PlaneDiagnosticsExtension["authenticationStatus"] = "unknown";
+  private authenticationStatus: PlaneDiagnosticsExtension["authenticationStatus"] =
+    "unknown";
 
   constructor(
     context: AdapterContext,
@@ -145,10 +144,10 @@ export class PlaneAdapter extends IntegrationAdapterBase {
       client: transport,
       workspaceSlug: configuration.plane.workspaceSlug,
       getAuth: async () => {
-        const apiKey = await this.resolveApiKey(
-          configuration.plane.apiTokenRef,
-          { correlationId: "plane-client-auth", tenantId: configuration.connection?.tenantId ?? "unknown" },
-        );
+        const apiKey = await this.resolveApiKey(configuration.plane.apiTokenRef, {
+          correlationId: "plane-client-auth",
+          tenantId: configuration.connection?.tenantId ?? "unknown",
+        });
         return { apiKey };
       },
     });
@@ -208,7 +207,9 @@ export class PlaneAdapter extends IntegrationAdapterBase {
       workspaceName: this.lastConnectionTest?.workspaceName,
       apiStatus: this.apiStatus,
       authenticationStatus: this.authenticationStatus,
-      extendedCapabilities: getPlaneExtendedCapabilities(this.configuration as PlaneBootstrapConfiguration),
+      extendedCapabilities: getPlaneExtendedCapabilities(
+        this.configuration as PlaneBootstrapConfiguration,
+      ),
       taskCapability: {
         registered: Boolean(taskCapability),
         serviceAvailable: Boolean(this.core?.tasks),
@@ -224,10 +225,13 @@ export class PlaneAdapter extends IntegrationAdapterBase {
       syncEventsCapability: {
         webhooksRegistered: Boolean(getPlaneServiceCapability("webhooks")),
         eventsRegistered: Boolean(getPlaneServiceCapability("events")),
-        synchronisationRegistered: Boolean(getPlaneServiceCapability("synchronisation")),
+        synchronisationRegistered: Boolean(
+          getPlaneServiceCapability("synchronisation"),
+        ),
         webhookCapability: Boolean(this.core?.webhooks),
         syncCapability: Boolean(this.core?.synchronisation),
-        supportedEventTypes: this.core?.events.getDiagnostics().supportedEventTypes ?? [],
+        supportedEventTypes:
+          this.core?.events.getDiagnostics().supportedEventTypes ?? [],
         supportedWebhookOperations: this.core?.webhooks.supportedOperations() ?? [],
         syncHealth: this.core?.synchronisation.getDiagnostics().syncHealth ?? "unknown",
         providerLatencyMs:
@@ -281,12 +285,17 @@ export class PlaneAdapter extends IntegrationAdapterBase {
   }
 
   /** Tests Plane API connectivity and records version/workspace metadata. */
-  async testConnection(context: IntegrationRequestContext): Promise<AdapterLifecycleResult> {
+  async testConnection(
+    context: IntegrationRequestContext,
+  ): Promise<AdapterLifecycleResult> {
     this.assertNotDisposed();
     this.assertInitialised();
 
     if (!this.circuitBreaker.allowRequest()) {
-      return { ok: false, message: "Circuit breaker open — Plane connection test rejected" };
+      return {
+        ok: false,
+        message: "Circuit breaker open — Plane connection test rejected",
+      };
     }
 
     const startedAt = this.context.clock.now();
@@ -323,12 +332,17 @@ export class PlaneAdapter extends IntegrationAdapterBase {
         message: `Plane connection verified (version ${result.engineVersion ?? "unknown"})`,
       };
     } catch (error) {
-      const translated = mapPlaneUnknownError(error, this.buildErrorContext(context, "connection_test"));
+      const translated = mapPlaneUnknownError(
+        error,
+        this.buildErrorContext(context, "connection_test"),
+      );
       this.errorSummary.record(translated.error);
       this.circuitBreaker.recordFailure(translated.error);
       this.apiStatus = "unavailable";
       this.authenticationStatus =
-        translated.error.category === "authentication" ? "invalid" : this.authenticationStatus;
+        translated.error.category === "authentication"
+          ? "invalid"
+          : this.authenticationStatus;
 
       this.metrics.recordRequest({
         durationMs: Date.now() - new Date(startedAt).getTime(),
@@ -350,7 +364,9 @@ export class PlaneAdapter extends IntegrationAdapterBase {
   }
 
   /** Discovers Plane engine version via instance endpoint. */
-  async discoverVersion(context: IntegrationRequestContext): Promise<string | undefined> {
+  async discoverVersion(
+    context: IntegrationRequestContext,
+  ): Promise<string | undefined> {
     this.assertNotDisposed();
     const instance = await this.planeClient.getInstance(context);
     return instance.instance.version;
@@ -373,7 +389,9 @@ export class PlaneAdapter extends IntegrationAdapterBase {
     return { ok: true, message: "Plane configuration valid" };
   }
 
-  protected override async onConnect(context: IntegrationRequestContext): Promise<void> {
+  protected override async onConnect(
+    context: IntegrationRequestContext,
+  ): Promise<void> {
     const test = await this.testConnection(context);
     if (!test.ok) {
       throw new Error(test.message);
@@ -406,7 +424,8 @@ export class PlaneAdapter extends IntegrationAdapterBase {
         status:
           this.authenticationStatus === "valid"
             ? "pass"
-            : this.authenticationStatus === "missing" || this.authenticationStatus === "invalid"
+            : this.authenticationStatus === "missing" ||
+                this.authenticationStatus === "invalid"
               ? "fail"
               : "warn",
         message: `Plane authentication: ${this.authenticationStatus}`,
@@ -461,9 +480,7 @@ export class PlaneAdapter extends IntegrationAdapterBase {
       warnings.push(`operational:${reason}`);
     }
     if (compatibility.unsupportedFeatures.length > 0) {
-      warnings.push(
-        `unsupported_features:${compatibility.unsupportedFeatures.length}`,
-      );
+      warnings.push(`unsupported_features:${compatibility.unsupportedFeatures.length}`);
     }
 
     return {
@@ -527,7 +544,8 @@ export class PlaneAdapter extends IntegrationAdapterBase {
       tenantId: context.tenantId,
       correlationId: context.correlationId,
       integrationId: PLANE_INTEGRATION_ID,
-      connectionId: this.configuration.connection?.connectionId ?? "plane-default-connection",
+      connectionId:
+        this.configuration.connection?.connectionId ?? "plane-default-connection",
       credential: {
         credentialRef,
         authenticationMode: "api_key_header",
@@ -540,7 +558,9 @@ export class PlaneAdapter extends IntegrationAdapterBase {
     }
 
     if (!this.secretProvider) {
-      throw new Error("SecretProvider is required to materialize Plane API credentials");
+      throw new Error(
+        "SecretProvider is required to materialize Plane API credentials",
+      );
     }
 
     const material = await this.secretProvider.resolve({
@@ -569,4 +589,3 @@ export class PlaneAdapter extends IntegrationAdapterBase {
     };
   }
 }
-

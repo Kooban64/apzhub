@@ -2,10 +2,7 @@
  * Module-level Platform Search client accessor + facades (APZSEARCH-007).
  */
 
-import {
-  createHttpSearchClient,
-  type SearchClient,
-} from "./search-client";
+import { createHttpSearchClient, type SearchClient } from "./search-client";
 import { createMockSearchClient } from "./mock-search-client";
 import type {
   SearchAuditViewModel,
@@ -144,11 +141,7 @@ export function listSearchAudit(
   return getSearchClient().listAudit(options);
 }
 
-export {
-  createHttpSearchClient,
-  createMockSearchClient,
-  type SearchClient,
-};
+export { createHttpSearchClient, createMockSearchClient, type SearchClient };
 export * from "./search-types";
 export * from "./search-errors";
 export * from "./highlight";

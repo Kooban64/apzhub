@@ -56,10 +56,7 @@ export interface SearchEngineProvider {
     context: SearchRequestContext,
     query: SearchQuery,
   ): Promise<SearchResultPage>;
-  query?(
-    context: SearchRequestContext,
-    query: SearchQuery,
-  ): Promise<SearchResultPage>;
+  query?(context: SearchRequestContext, query: SearchQuery): Promise<SearchResultPage>;
   validateQuery?(
     context: SearchRequestContext,
     query: SearchQuery,
@@ -68,17 +65,12 @@ export interface SearchEngineProvider {
     context: SearchRequestContext,
     input: SearchIndexCreateInput & { readonly indexUid: string },
   ): Promise<SearchIndex>;
-  deleteIndex?(
-    context: SearchRequestContext,
-    indexUid: string,
-  ): Promise<void>;
+  deleteIndex?(context: SearchRequestContext, indexUid: string): Promise<void>;
   getIndex?(
     context: SearchRequestContext,
     indexUid: string,
   ): Promise<SearchIndex | null>;
-  listIndexes?(
-    context: SearchRequestContext,
-  ): Promise<readonly SearchIndex[]>;
+  listIndexes?(context: SearchRequestContext): Promise<readonly SearchIndex[]>;
   updateIndex?(
     context: SearchRequestContext,
     indexUid: string,
@@ -99,12 +91,8 @@ export interface SearchEngineProvider {
     indexUid: string,
     input: SearchDocumentGetInput,
   ): Promise<SearchIndexedDocument | null>;
-  getDiagnostics?(
-    context: SearchRequestContext,
-  ): Promise<SearchDiagnostics>;
-  getStatistics?(
-    context: SearchRequestContext,
-  ): Promise<SearchStatistics>;
+  getDiagnostics?(context: SearchRequestContext): Promise<SearchDiagnostics>;
+  getStatistics?(context: SearchRequestContext): Promise<SearchStatistics>;
   dispose?(): Promise<void>;
 }
 
@@ -123,6 +111,7 @@ export interface SearchProviderRegistry {
 export interface SearchIndexMetadataProvider {
   listDeclaredIndexes(
     context: SearchRequestContext,
-  ): Promise<readonly { readonly id: string; readonly name: string }[]> |
-    readonly { readonly id: string; readonly name: string }[];
+  ):
+    | Promise<readonly { readonly id: string; readonly name: string }[]>
+    | readonly { readonly id: string; readonly name: string }[];
 }

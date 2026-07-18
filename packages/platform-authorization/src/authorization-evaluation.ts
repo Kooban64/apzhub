@@ -64,7 +64,11 @@ export function evaluatePermissionAgainstEffective(
     }
   }
 
-  const mismatch = detectTenantMismatch(options.assignments, options.roles, options.context);
+  const mismatch = detectTenantMismatch(
+    options.assignments,
+    options.roles,
+    options.context,
+  );
   if (mismatch) {
     return {
       outcome: "tenant_mismatch",

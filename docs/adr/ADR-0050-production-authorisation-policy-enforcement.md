@@ -30,14 +30,14 @@ Related prior decisions: [ADR-0041](./ADR-0041-platform-authorization-rbac-phase
 
 Strict order — no ambiguity:
 
-1. Invalid / inactive / anonymous actor  
-2. Tenant membership missing or inactive  
-3. Organisation membership mismatch (when organisation-scoped)  
-4. Explicit deny permission (where model supports deny grants)  
-5. Platform administrator override (governed; default enabled)  
-6. Explicit / role-derived allow grant  
-7. Resource ownership / membership grant  
-8. Default deny  
+1. Invalid / inactive / anonymous actor
+2. Tenant membership missing or inactive
+3. Organisation membership mismatch (when organisation-scoped)
+4. Explicit deny permission (where model supports deny grants)
+5. Platform administrator override (governed; default enabled)
+6. Explicit / role-derived allow grant
+7. Resource ownership / membership grant
+8. Default deny
 
 Impersonation is validated before effective-actor permission evaluation.
 

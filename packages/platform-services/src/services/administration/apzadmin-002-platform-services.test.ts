@@ -25,9 +25,7 @@ import {
   resolveOperationAuthorization,
 } from "../../index";
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_adm",
     userId: "user_adm",
@@ -39,8 +37,8 @@ function ctx(
 }
 
 describe("APZADMIN-002 administration platform services", () => {
-  it("exports platform services version 0.24.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.24.0");
+  it("exports platform services version 0.25.0", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
   });
 
   it("registers admin permissions in the platform catalogue", () => {
@@ -55,12 +53,10 @@ describe("APZADMIN-002 administration platform services", () => {
         ?.requiredPermission,
     ).toBe("admin.manage");
     expect(
-      resolveOperationAuthorization("administrationModules", "get")
-        ?.requiredPermission,
+      resolveOperationAuthorization("administrationModules", "get")?.requiredPermission,
     ).toBe("admin.read");
     expect(
-      resolveOperationAuthorization("administrationAudit", "list")
-        ?.requiredPermission,
+      resolveOperationAuthorization("administrationAudit", "list")?.requiredPermission,
     ).toBe("admin.audit");
     expect(
       resolveOperationAuthorization("administrationPolicies", "create")
@@ -144,26 +140,22 @@ describe("APZADMIN-002 administration platform services", () => {
     });
     expect(created.status).toBe("draft");
 
-    const got = await bundle.gateway.administration.modules.get(
-      ctx(),
-      created.id,
-    );
+    const got = await bundle.gateway.administration.modules.get(ctx(), created.id);
     expect(got.id).toBe(created.id);
 
     const listed = await bundle.gateway.administration.modules.list(ctx());
     expect(listed).toHaveLength(1);
 
-    const updated =
-      await bundle.gateway.administration.modules.updateMetadata(ctx(), {
-        moduleId: created.id,
-        name: "Configuration Admin",
-      });
+    const updated = await bundle.gateway.administration.modules.updateMetadata(ctx(), {
+      moduleId: created.id,
+      name: "Configuration Admin",
+    });
     expect(updated.name).toBe("Configuration Admin");
 
-    const registered = await bundle.gateway.administration.modules.transition(
-      ctx(),
-      { moduleId: created.id, to: "registered" },
-    );
+    const registered = await bundle.gateway.administration.modules.transition(ctx(), {
+      moduleId: created.id,
+      to: "registered",
+    });
     expect(registered.status).toBe("registered");
 
     await bundle.gateway.administration.modules.transition(ctx(), {
@@ -183,10 +175,11 @@ describe("APZADMIN-002 administration platform services", () => {
     );
     expect(restored.status).toBe("draft");
 
-    const category = await bundle.gateway.administration.categories.create(
-      ctx(),
-      { key: "general", name: "General", moduleId: created.id },
-    );
+    const category = await bundle.gateway.administration.categories.create(ctx(), {
+      key: "general",
+      name: "General",
+      moduleId: created.id,
+    });
     await bundle.gateway.administration.categories.update(ctx(), {
       categoryId: category.id,
       name: "General 2",
@@ -213,26 +206,28 @@ describe("APZADMIN-002 administration platform services", () => {
       name: "View 2",
     });
 
-    const permission = await bundle.gateway.administration.permissions.create(
-      ctx(),
-      { key: "admin.read", name: "Read" },
-    );
+    const permission = await bundle.gateway.administration.permissions.create(ctx(), {
+      key: "admin.read",
+      name: "Read",
+    });
     await bundle.gateway.administration.permissions.update(ctx(), {
       permissionId: permission.id,
       name: "Read Admin",
     });
 
-    const registration =
-      await bundle.gateway.administration.registrations.create(ctx(), {
+    const registration = await bundle.gateway.administration.registrations.create(
+      ctx(),
+      {
         moduleKey: "configuration",
         version: "1.0.0",
-      });
+      },
+    );
     expect(registration.status).toBe("registered");
 
-    const metadata = await bundle.gateway.administration.metadata.create(
-      ctx(),
-      { moduleId: created.id, tags: ["core"] },
-    );
+    const metadata = await bundle.gateway.administration.metadata.create(ctx(), {
+      moduleId: created.id,
+      tags: ["core"],
+    });
     await bundle.gateway.administration.metadata.update(ctx(), {
       metadataId: metadata.id,
       notes: "ok",
@@ -258,46 +253,43 @@ describe("APZADMIN-002 administration platform services", () => {
       await bundle.gateway.administration.references.get(ctx(), ref.id),
     ).toMatchObject({ kind: "documentation" });
 
-    const capability = await bundle.gateway.administration.capabilities.create(
-      ctx(),
-      {
-        moduleId: created.id,
-        key: "cfg.admin",
-        name: "Config Admin",
-        owner: "platform",
-        version: "0.1.0",
-      },
-    );
+    const capability = await bundle.gateway.administration.capabilities.create(ctx(), {
+      moduleId: created.id,
+      key: "cfg.admin",
+      name: "Config Admin",
+      owner: "platform",
+      version: "0.1.0",
+    });
     expect(capability.key).toBe("cfg.admin");
 
-    const navigation = await bundle.gateway.administration.navigations.create(
-      ctx(),
-      {
-        moduleId: created.id,
-        key: "home",
-        label: "Home",
-        ordering: 1,
-        visibility: "visible",
-      },
-    );
+    const navigation = await bundle.gateway.administration.navigations.create(ctx(), {
+      moduleId: created.id,
+      key: "home",
+      label: "Home",
+      ordering: 1,
+      visibility: "visible",
+    });
     await bundle.gateway.administration.navigations.update(ctx(), {
       navigationId: navigation.id,
       label: "Home 2",
     });
 
-    const shortcut = await bundle.gateway.administration.shortcuts.create(
-      ctx(),
-      { key: "go", label: "Go", ordering: 1, moduleId: created.id },
-    );
+    const shortcut = await bundle.gateway.administration.shortcuts.create(ctx(), {
+      key: "go",
+      label: "Go",
+      ordering: 1,
+      moduleId: created.id,
+    });
     await bundle.gateway.administration.shortcuts.update(ctx(), {
       shortcutId: shortcut.id,
       label: "Go 2",
     });
 
-    const dashboard = await bundle.gateway.administration.dashboards.create(
-      ctx(),
-      { key: "main", name: "Main", moduleId: created.id },
-    );
+    const dashboard = await bundle.gateway.administration.dashboards.create(ctx(), {
+      key: "main",
+      name: "Main",
+      moduleId: created.id,
+    });
     const widget = await bundle.gateway.administration.widgets.create(ctx(), {
       dashboardId: dashboard.id,
       key: "summary",
@@ -316,38 +308,27 @@ describe("APZADMIN-002 administration platform services", () => {
       await bundle.gateway.administration.widgets.list(ctx(), dashboard.id),
     ).toHaveLength(1);
 
-    expect(
-      await bundle.gateway.administration.categories.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.administration.categories.list(ctx())).toHaveLength(1);
     expect(
       await bundle.gateway.administration.categories.get(ctx(), category.id),
     ).toBeDefined();
-    expect(
-      await bundle.gateway.administration.sections.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.administration.sections.list(ctx())).toHaveLength(1);
     expect(
       await bundle.gateway.administration.sections.get(ctx(), section.id),
     ).toBeDefined();
-    expect(await bundle.gateway.administration.actions.list(ctx())).toHaveLength(
-      1,
-    );
+    expect(await bundle.gateway.administration.actions.list(ctx())).toHaveLength(1);
     expect(
       await bundle.gateway.administration.actions.get(ctx(), action.id),
     ).toBeDefined();
-    expect(
-      await bundle.gateway.administration.permissions.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.administration.permissions.list(ctx())).toHaveLength(1);
     expect(
       await bundle.gateway.administration.permissions.get(ctx(), permission.id),
     ).toBeDefined();
+    expect(await bundle.gateway.administration.registrations.list(ctx())).toHaveLength(
+      1,
+    );
     expect(
-      await bundle.gateway.administration.registrations.list(ctx()),
-    ).toHaveLength(1);
-    expect(
-      await bundle.gateway.administration.registrations.get(
-        ctx(),
-        registration.id,
-      ),
+      await bundle.gateway.administration.registrations.get(ctx(), registration.id),
     ).toBeDefined();
     await bundle.gateway.administration.registrations.update(ctx(), {
       registrationId: registration.id,
@@ -359,18 +340,16 @@ describe("APZADMIN-002 administration platform services", () => {
     expect(
       await bundle.gateway.administration.metadata.get(ctx(), metadata.id),
     ).toBeDefined();
-    expect(
-      await bundle.gateway.administration.policies.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.administration.policies.list(ctx())).toHaveLength(1);
     expect(
       await bundle.gateway.administration.policies.get(ctx(), policy.id),
     ).toBeDefined();
     expect(
       await bundle.gateway.administration.references.list(ctx(), created.id),
     ).toHaveLength(1);
-    expect(
-      await bundle.gateway.administration.capabilities.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.administration.capabilities.list(ctx())).toHaveLength(
+      1,
+    );
     expect(
       await bundle.gateway.administration.capabilities.get(ctx(), capability.id),
     ).toBeDefined();
@@ -378,21 +357,15 @@ describe("APZADMIN-002 administration platform services", () => {
       capabilityId: capability.id,
       name: "Config Admin 2",
     });
-    expect(
-      await bundle.gateway.administration.navigations.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.administration.navigations.list(ctx())).toHaveLength(1);
     expect(
       await bundle.gateway.administration.navigations.get(ctx(), navigation.id),
     ).toBeDefined();
-    expect(
-      await bundle.gateway.administration.shortcuts.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.administration.shortcuts.list(ctx())).toHaveLength(1);
     expect(
       await bundle.gateway.administration.shortcuts.get(ctx(), shortcut.id),
     ).toBeDefined();
-    expect(
-      await bundle.gateway.administration.dashboards.list(ctx()),
-    ).toHaveLength(1);
+    expect(await bundle.gateway.administration.dashboards.list(ctx())).toHaveLength(1);
     expect(
       await bundle.gateway.administration.dashboards.get(ctx(), dashboard.id),
     ).toBeDefined();
@@ -401,38 +374,28 @@ describe("APZADMIN-002 administration platform services", () => {
       name: "Main 2",
     });
 
-    const audits = await bundle.gateway.administration.audit.list(
-      ctx(),
-      created.id,
-    );
+    const audits = await bundle.gateway.administration.audit.list(ctx(), created.id);
     expect(audits.length).toBeGreaterThan(0);
     expect(
       await bundle.gateway.administration.audit.get(ctx(), audits[0]!.id),
     ).toBeDefined();
 
-    const history = await bundle.gateway.administration.history.list(
-      ctx(),
-      created.id,
-    );
+    const history = await bundle.gateway.administration.history.list(ctx(), created.id);
     expect(history.length).toBeGreaterThan(0);
     expect(
       await bundle.gateway.administration.history.get(ctx(), history[0]!.id),
     ).toBeDefined();
 
-    expect(
-      await bundle.gateway.administration.diagnostics.list(ctx()),
-    ).toEqual([]);
+    expect(await bundle.gateway.administration.diagnostics.list(ctx())).toEqual([]);
 
     const health = await bundle.gateway.administration.diagnostics.health(ctx());
     expect(health.runtimeAdminEnabled).toBe(false);
     expect(health.workbenchEnabled).toBe(false);
     expect(health.httpEnabled).toBe(false);
     expect(health.status).toBe("healthy");
-    const readiness =
-      await bundle.gateway.administration.diagnostics.readiness(ctx());
+    const readiness = await bundle.gateway.administration.diagnostics.readiness(ctx());
     expect(readiness.ready).toBe(true);
-    const caps =
-      await bundle.gateway.administration.diagnostics.capabilities(ctx());
+    const caps = await bundle.gateway.administration.diagnostics.capabilities(ctx());
     expect(caps.runtimeAdmin).toBe(false);
     expect(caps.facets).toContain("modules");
 
@@ -473,17 +436,13 @@ describe("APZADMIN-002 administration platform services", () => {
     });
     expect(composed.readiness.administrationEnabled).toBe(true);
 
-    const { wrapAdministrationPlatformGatewayWithPipeline } = await import(
-      "./create-administration-platform-services"
-    );
+    const { wrapAdministrationPlatformGatewayWithPipeline } =
+      await import("./create-administration-platform-services");
     const wrapped = wrapAdministrationPlatformGatewayWithPipeline(
       composed.gatewaySurface,
       {
         execute: async (request: {
-          invoke: (
-            ctx: ServiceRequestContext,
-            args: unknown[],
-          ) => Promise<unknown>;
+          invoke: (ctx: ServiceRequestContext, args: unknown[]) => Promise<unknown>;
           context: ServiceRequestContext;
           args: unknown[];
         }) => request.invoke(request.context, request.args),
@@ -517,9 +476,8 @@ describe("APZADMIN-002 administration platform services", () => {
       ).code,
     ).toBe("VALIDATION_FAILED");
 
-    const { createAdministrationPlatformServiceImpls } = await import(
-      "./administration-service-impls"
-    );
+    const { createAdministrationPlatformServiceImpls } =
+      await import("./administration-service-impls");
     const domain = {
       async listModules() {
         throw new Error('relation "platform_administration" does not exist');

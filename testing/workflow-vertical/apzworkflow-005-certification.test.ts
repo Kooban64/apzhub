@@ -11,10 +11,7 @@ const ROOT = join(__dirname, "../..");
 
 describe("APZWORKFLOW-005 Workflow Vertical Certification", () => {
   it("passes architecture / dependency / boundary audit (0 violations)", () => {
-    const script = join(
-      ROOT,
-      "scripts/apzworkflow-005-workflow-vertical-audit.mjs",
-    );
+    const script = join(ROOT, "scripts/apzworkflow-005-workflow-vertical-audit.mjs");
     const output = execFileSync(process.execPath, [script], {
       cwd: ROOT,
       encoding: "utf8",
@@ -123,9 +120,7 @@ describe("APZWORKFLOW-005 Workflow Vertical Certification", () => {
     expect(
       existsSync(join(ROOT, "apps/web/lib/workflows/mock-workflow-client.ts")),
     ).toBe(true);
-    expect(existsSync(join(ROOT, "apps/web/lib/workflows/query-keys.ts"))).toBe(
-      true,
-    );
+    expect(existsSync(join(ROOT, "apps/web/lib/workflows/query-keys.ts"))).toBe(true);
   });
 
   it("keeps workbench manifests and Workflow UI components", () => {
@@ -153,9 +148,7 @@ describe("APZWORKFLOW-005 Workflow Vertical Certification", () => {
       ),
     ).toBe(true);
     expect(
-      existsSync(
-        join(ROOT, "apps/web/components/workflows/definition-viewer.tsx"),
-      ),
+      existsSync(join(ROOT, "apps/web/components/workflows/definition-viewer.tsx")),
     ).toBe(true);
     expect(
       existsSync(join(ROOT, "apps/web/components/workflows/definition-graph.tsx")),
@@ -168,7 +161,7 @@ describe("APZWORKFLOW-005 Workflow Vertical Certification", () => {
       "packages/workflow-contracts/package.json": "0.3.0",
       "packages/workflow-core/package.json": "0.1.1",
       "packages/workflow-persistence/package.json": "0.1.1",
-      "packages/platform-services/package.json": "0.21.0",
+      "packages/platform-services/package.json": "0.25.0",
       "packages/platform-service-contracts/package.json": "0.16.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
@@ -182,7 +175,7 @@ describe("APZWORKFLOW-005 Workflow Vertical Certification", () => {
       existsSync(
         join(
           ROOT,
-          "apps/web/app/api/v1/testing/traceability/[relationshipId]",
+          "apps/web/app/api/v1/testing/traceability/relationships/[relationshipId]",
         ),
       ),
     ).toBe(true);

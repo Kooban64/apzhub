@@ -5,8 +5,8 @@
 > **Authoritative references:** [000](../000-apzhub-engineering-constitution.md) · [004 — Technology Stack](../004-technology-stack-repository-standards-development-environment.md) · [015 — Quality](../015-software-quality-testing-qa-cicd-release-management-framework.md) · [Governance Engineering Handbook](../governance/APZHUB-Engineering-Handbook.md)  
 > **Related documents:** [ARCHITECTURE-HANDBOOK](./ARCHITECTURE-HANDBOOK.md) · [REPOSITORY-GUIDE](./REPOSITORY-GUIDE.md) · [AI-ENGINEERING-STANDARDS](./AI-ENGINEERING-STANDARDS.md)  
 > **Reading order:** After Constitution and Master Brief  
-> **Last updated:** 2026-07-16  
-> **Current status:** Active — APZIDENTITY-001 Identity Administration Foundation complete; stop before APZIDENTITY-002 (Administration/Configuration/Notification/Workflow programmes frozen; **APZSEARCH-016** deferred)
+> **Last updated:** 2026-07-18  
+> **Current status:** Active — **OSS-100-11 COMPLETE** — Integration SDK **1.0.0** · **Architecture Frozen** (`pnpm certify:integration-sdk`); Search Publication **Architecture Frozen**; Administration/Configuration/Notification/Workflow/Observability/Identity/Metrics programmes frozen
 
 ---
 
@@ -48,7 +48,13 @@ See [REPOSITORY-GUIDE](./REPOSITORY-GUIDE.md) · [PACKAGE-CATALOGUE](./PACKAGE-C
 
 **Administration (APZADMIN-006):** Platform Administration SoR wave **closed and frozen**. Audits `pnpm audit:administration-vertical` · `pnpm audit:administration-wave`. Classification **PRODUCTION_READY_WITH_LIMITATIONS**. Official [Administration Reference Standard](../architecture/APZHUB-Administration-Reference-Standard.md). See [APZADMIN-006 Completion Report](../sprint/APZADMIN-006-completion-report.md) · [Freeze Notice](../architecture/APZHUB-Administration-Architecture-Freeze-Notice.md).
 
-**Search (APZSEARCH-015):** Cross-Product Search Publication Certification — **PRODUCTION_READY_WITH_LIMITATIONS**. Framework + five adapters frozen. See [APZSEARCH-015 Completion Report](../sprint/APZSEARCH-015-completion-report.md). **APZSEARCH-016** deferred.
+**Metrics (APZMETRICS-006):** Platform Metrics SoR wave **closed and frozen**. Audits `pnpm audit:metrics-vertical` · `pnpm certify:metrics-vertical` · `pnpm audit:metrics-wave`. Classification **PRODUCTION_READY_WITH_LIMITATIONS**. Official [Metrics Reference Standard](../architecture/APZHUB-Metrics-Reference-Standard.md). See [APZMETRICS-006 Completion Report](../sprint/APZMETRICS-006-completion-report.md) · [Freeze Notice](../architecture/APZHUB-Metrics-Architecture-Freeze-Notice.md).
+
+**Search (APZSEARCH-019):** Search Publication Wave Certification & Architecture Freeze — `pnpm audit:search-publication-wave`. Programme **closed / Architecture Frozen**. Official [Freeze Notice](../architecture/APZHUB-Search-Publication-Architecture-Freeze-Notice.md) · [Reference Standard](../architecture/APZHUB-Search-Publication-Reference-Standard.md). Classification **PRODUCTION_READY_WITH_LIMITATIONS** retained. See [APZSEARCH-019 Completion Report](../sprint/APZSEARCH-019-completion-report.md).
+
+**Search (APZSEARCH-018):** Publication Reliability Certification — `pnpm certify:search-publication`. See [APZSEARCH-018 Completion Report](../sprint/APZSEARCH-018-completion-report.md).
+
+**Search (APZSEARCH-017):** Publication Operations & Administration — `@apzhub/search-publication-admin` **0.1.0**. See [APZSEARCH-017 Completion Report](../sprint/APZSEARCH-017-completion-report.md).
 
 **Search (APZSEARCH-002):** persistence + provider registry — `@apzhub/search-persistence` **0.1.0**, contracts **0.2.0**, migrations 0041/0042. No HTTP/Workbench/engines/execution. See [Search Persistence Architecture](../architecture/APZHUB-Platform-Search-Persistence-Architecture.md).
 
@@ -160,7 +166,7 @@ Law Platform patterns:
 
 OSS adapter pattern:
 
-1. Integration SDK (`@apzhub/integration-sdk`)
+1. Integration SDK (`@apzhub/integration-sdk` **1.0.0** · **Architecture Frozen** — OSS-100-11)
 2. `integration.yaml` manifest
 3. Platform Service (`service.yaml`)
 4. Module (`module.yaml`) — presentation only

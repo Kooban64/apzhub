@@ -69,10 +69,7 @@ export function mapWorkflowDomainError(
   });
 }
 
-function mapUnknownError(
-  error: unknown,
-  correlationId: string,
-): PlatformServiceError {
+function mapUnknownError(error: unknown, correlationId: string): PlatformServiceError {
   if (isPlatformServiceError(error)) return error;
   if (error instanceof WorkflowDomainError) {
     return mapWorkflowDomainError(error, correlationId);
@@ -80,11 +77,7 @@ function mapUnknownError(
   const message =
     error instanceof Error ? error.message : "Unexpected workflow service error";
   // Never leak pg / drizzle internals to callers.
-  if (
-    /drizzle|postgres|pg_|relation |"platform_workflow|ECONNREFUSED/i.test(
-      message,
-    )
-  ) {
+  if (/drizzle|postgres|pg_|relation |"platform_workflow|ECONNREFUSED/i.test(message)) {
     return new PlatformServiceError({
       category: "integration",
       code: "PROVIDER_UNAVAILABLE",
@@ -114,10 +107,7 @@ async function withWorkflowErrorMapping<T>(
 }
 
 /** SoR facets only — engine composed separately (APZWORKFLOW-007). */
-export type WorkflowPlatformServiceImpls = Omit<
-  WorkflowPlatformGateway,
-  "engine"
->;
+export type WorkflowPlatformServiceImpls = Omit<WorkflowPlatformGateway, "engine">;
 
 /**
  * Thin wrappers: map ServiceRequestContext → WorkflowRequestContext and translate errors.
@@ -198,9 +188,7 @@ export function createWorkflowPlatformServiceImpls(input: {
           domain.deleteTemplate(toWorkflowCtx(ctx), templateId),
         ),
       list: (ctx) =>
-        withWorkflowErrorMapping(ctx, () =>
-          domain.listTemplates(toWorkflowCtx(ctx)),
-        ),
+        withWorkflowErrorMapping(ctx, () => domain.listTemplates(toWorkflowCtx(ctx))),
     },
     categories: {
       create: (ctx, createInput) =>
@@ -212,9 +200,7 @@ export function createWorkflowPlatformServiceImpls(input: {
           domain.getCategory(toWorkflowCtx(ctx), categoryId),
         ),
       list: (ctx) =>
-        withWorkflowErrorMapping(ctx, () =>
-          domain.listCategories(toWorkflowCtx(ctx)),
-        ),
+        withWorkflowErrorMapping(ctx, () => domain.listCategories(toWorkflowCtx(ctx))),
     },
     folders: {
       create: (ctx, createInput) =>
@@ -226,9 +212,7 @@ export function createWorkflowPlatformServiceImpls(input: {
           domain.getFolder(toWorkflowCtx(ctx), folderId),
         ),
       list: (ctx) =>
-        withWorkflowErrorMapping(ctx, () =>
-          domain.listFolders(toWorkflowCtx(ctx)),
-        ),
+        withWorkflowErrorMapping(ctx, () => domain.listFolders(toWorkflowCtx(ctx))),
     },
     validation: {
       validate: (ctx, validateInput) =>

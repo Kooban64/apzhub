@@ -1,11 +1,6 @@
 import type { ServiceRequestContext } from "@apzhub/platform-service-contracts";
 
-import type {
-  TestCase,
-  TestCaseParameter,
-  TestCaseVersion,
-  TestStep,
-} from "../domain";
+import type { TestCase, TestCaseParameter, TestCaseVersion, TestStep } from "../domain";
 import type { Priority, Severity, TestStatus } from "../enums";
 import type { TestCaseId, TestCaseVersionId, TestSuiteId } from "../identifiers";
 

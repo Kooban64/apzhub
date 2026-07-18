@@ -22,22 +22,22 @@ TrafficGovernanceService
 
 ## Policy dimensions
 
-| Dimension | Key format | Used for |
-|-----------|------------|----------|
-| IP | `ip:{address}` | Auth brute-force, public endpoints |
-| Endpoint | `endpoint:{method}:{path}` | Per-route fairness |
-| User | `user:{id}` | Authenticated platform/Law APIs |
-| Tenant | `tenant:{id}` | Multi-tenant isolation |
-| Service | `service:{platform\|law\|auth\|public}` | Service-level quotas |
+| Dimension | Key format                              | Used for                           |
+| --------- | --------------------------------------- | ---------------------------------- |
+| IP        | `ip:{address}`                          | Auth brute-force, public endpoints |
+| Endpoint  | `endpoint:{method}:{path}`              | Per-route fairness                 |
+| User      | `user:{id}`                             | Authenticated platform/Law APIs    |
+| Tenant    | `tenant:{id}`                           | Multi-tenant isolation             |
+| Service   | `service:{platform\|law\|auth\|public}` | Service-level quotas               |
 
 ## Enforcement points
 
-| Surface | Integration |
-|---------|-------------|
-| Platform APIs | `apps/*/middleware.ts` via `@apzhub/platform-security/traffic-edge` |
-| Law APIs (authenticated) | `withLawApiAuth` via full `TrafficGovernanceService` |
-| Law APIs (public) | `apps/web/middleware.ts` edge evaluator |
-| Auth APIs | `apps/*/middleware.ts` edge evaluator |
+| Surface                  | Integration                                                         |
+| ------------------------ | ------------------------------------------------------------------- |
+| Platform APIs            | `apps/*/middleware.ts` via `@apzhub/platform-security/traffic-edge` |
+| Law APIs (authenticated) | `withLawApiAuth` via full `TrafficGovernanceService`                |
+| Law APIs (public)        | `apps/web/middleware.ts` edge evaluator                             |
+| Auth APIs                | `apps/*/middleware.ts` edge evaluator                               |
 
 ## Backends
 

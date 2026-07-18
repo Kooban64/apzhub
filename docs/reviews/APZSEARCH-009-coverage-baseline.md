@@ -16,11 +16,11 @@ pnpm exec vitest run --coverage \
   packages/search-integration
 ```
 
-| Metric | Coverage |
-| ------ | -------- |
+| Metric         | Coverage   |
+| -------------- | ---------- |
 | **Statements** | **95.95%** |
-| **Branches** | **87.74%** |
-| **Functions** | **97.14%** |
-| **Lines** | **95.95%** |
+| **Branches**   | **87.74%** |
+| **Functions**  | **97.14%** |
+| **Lines**      | **95.95%** |
 
 **Verdict:** PASS (≥95% lines/statements; ≥90% functions; ≥80% branches).

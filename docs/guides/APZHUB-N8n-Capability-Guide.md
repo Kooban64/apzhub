@@ -6,17 +6,17 @@
 
 ## Services
 
-| Service | Support |
-| --- | --- |
-| workflows | supported |
-| workflowTemplates | partial |
-| credentialsMetadata | supported (metadata only) |
-| variablesMetadata | partial (edition-dependent) |
-| executionsMetadata | supported (metadata only) |
-| tags | supported |
-| users | partial |
-| projects | partial |
-| version / compatibility | supported |
+| Service                 | Support                     |
+| ----------------------- | --------------------------- |
+| workflows               | supported                   |
+| workflowTemplates       | partial                     |
+| credentialsMetadata     | supported (metadata only)   |
+| variablesMetadata       | partial (edition-dependent) |
+| executionsMetadata      | supported (metadata only)   |
+| tags                    | supported                   |
+| users                   | partial                     |
+| projects                | partial                     |
+| version / compatibility | supported                   |
 
 ## Unsupported (by design)
 

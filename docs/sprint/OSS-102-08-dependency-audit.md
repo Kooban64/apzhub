@@ -44,4 +44,3 @@ None.
 
 - Machine-readable: `OSS-102-08-dependency-audit.json`
 - Script: `scripts/wave2-dependency-audit.mjs`
-

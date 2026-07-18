@@ -3,7 +3,10 @@ import { describe, expect, it, vi } from "vitest";
 import { IntegrationSdkError } from "@apzhub/integration-sdk/errors";
 import { PlatformServiceError } from "@apzhub/platform-service-contracts";
 
-import { mapProviderError, withProviderErrorMapping } from "./errors/map-provider-error";
+import {
+  mapProviderError,
+  withProviderErrorMapping,
+} from "./errors/map-provider-error";
 
 describe("mapProviderError", () => {
   it("re-throws existing PlatformServiceError instances", () => {
@@ -39,7 +42,9 @@ describe("mapProviderError", () => {
   });
 
   it("wraps unknown errors as internal platform service errors", () => {
-    expect(() => mapProviderError(new Error("boom"), "corr_3")).toThrow(PlatformServiceError);
+    expect(() => mapProviderError(new Error("boom"), "corr_3")).toThrow(
+      PlatformServiceError,
+    );
   });
 });
 

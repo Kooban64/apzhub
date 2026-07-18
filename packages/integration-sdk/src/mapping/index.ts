@@ -90,7 +90,11 @@ export {
 export type { MappingRegistry, MappingRegistryOptions } from "./registry";
 export { InMemoryMappingRegistry, createMappingRegistry } from "./registry";
 
-export { DefaultMappingMetrics, createMappingMetrics, STANDARD_MAPPING_METRIC_NAMES } from "./metrics";
+export {
+  DefaultMappingMetrics,
+  createMappingMetrics,
+  STANDARD_MAPPING_METRIC_NAMES,
+} from "./metrics";
 
 export type { MappingPipeline, MappingPipelineOptions } from "./pipeline";
 export { DefaultMappingPipeline, createMappingPipeline } from "./pipeline";

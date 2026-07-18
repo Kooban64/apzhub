@@ -9,16 +9,16 @@
 
 A **profile** selects which rule set to use for an entity within a provider. Definitions are uniquely keyed by `(entityType, profile, direction)`.
 
-| Profile | Typical use |
-|---------|-------------|
-| `default` | Standard read/write mapping (pipeline default when omitted) |
-| `summary` | Lightweight list/card projection |
-| `detail` | Full entity projection |
-| `create` | Canonical → provider create body |
-| `update` | Canonical → provider update / partial body |
-| `search` | Search hit / query DTO shaping |
-| `analytics` | Aggregates / intelligence projections |
-| *(custom string)* | Adapter-specific extensions via branded `string & {}` |
+| Profile           | Typical use                                                 |
+| ----------------- | ----------------------------------------------------------- |
+| `default`         | Standard read/write mapping (pipeline default when omitted) |
+| `summary`         | Lightweight list/card projection                            |
+| `detail`          | Full entity projection                                      |
+| `create`          | Canonical → provider create body                            |
+| `update`          | Canonical → provider update / partial body                  |
+| `search`          | Search hit / query DTO shaping                              |
+| `analytics`       | Aggregates / intelligence projections                       |
+| _(custom string)_ | Adapter-specific extensions via branded `string & {}`       |
 
 ```typescript
 createDefinition({
@@ -34,16 +34,16 @@ createDefinition({
 
 ## MappingDirection
 
-| Direction | Intent |
-|-----------|--------|
+| Direction               | Intent                               |
+| ----------------------- | ------------------------------------ |
 | `provider_to_canonical` | Engine record → APZHUB canonical DTO |
 | `canonical_to_provider` | Canonical → engine payload (generic) |
-| `read_only` | One-way read projection |
-| `write` | Create / full write to provider |
-| `partial_update` | Patch / partial update body |
-| `relationship` | Related-entity ID translation |
-| `collection` | List/collection item mapping |
-| `nested` | Nested object via nested definition |
+| `read_only`             | One-way read projection              |
+| `write`                 | Create / full write to provider      |
+| `partial_update`        | Patch / partial update body          |
+| `relationship`          | Related-entity ID translation        |
+| `collection`            | List/collection item mapping         |
+| `nested`                | Nested object via nested definition  |
 
 Capabilities (`supportsRelationships`, `supportsCollections`, `supportsNested`, `supportsPartialUpdate`) are derived from registered directions unless overridden on `createMappingProvider`.
 
@@ -103,13 +103,13 @@ Check `ok` before reading `value`. Pipeline failures populate `error` instead of
 
 ## Plane / Zammad profile usage (examples)
 
-| Provider | Entity | Profile | Direction |
-|----------|--------|---------|-----------|
-| `plane.entity-mapping` | `task` | `default` | `provider_to_canonical` |
-| `plane.entity-mapping` | `task` | `create` | `write` |
-| `plane.entity-mapping` | `task` | `update` | `partial_update` |
-| `zammad.entity-mapping` | `support_ticket` | `default` | `provider_to_canonical` |
-| `zammad.entity-mapping` | `support_ticket_status` | `create` | `write` |
+| Provider                | Entity                  | Profile   | Direction               |
+| ----------------------- | ----------------------- | --------- | ----------------------- |
+| `plane.entity-mapping`  | `task`                  | `default` | `provider_to_canonical` |
+| `plane.entity-mapping`  | `task`                  | `create`  | `write`                 |
+| `plane.entity-mapping`  | `task`                  | `update`  | `partial_update`        |
+| `zammad.entity-mapping` | `support_ticket`        | `default` | `provider_to_canonical` |
+| `zammad.entity-mapping` | `support_ticket_status` | `create`  | `write`                 |
 
 Public mapper functions remain the implementation; definitions wrap them for registry discovery and optional pipeline execution.
 

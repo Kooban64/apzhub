@@ -15,13 +15,13 @@ Architecture index for the owner-approved **Mapping Provider Framework**. Provid
 
 ## Package documentation
 
-| Document | Path |
-|----------|------|
-| Framework overview | [MAPPING-FRAMEWORK.md](../../packages/integration-sdk/docs/MAPPING-FRAMEWORK.md) |
-| Profiles & directions | [MAPPING-PROFILES.md](../../packages/integration-sdk/docs/MAPPING-PROFILES.md) |
-| Registry & diagnostics | [MAPPING-REGISTRY.md](../../packages/integration-sdk/docs/MAPPING-REGISTRY.md) |
-| Transformers & helpers | [MAPPING-TRANSFORMERS.md](../../packages/integration-sdk/docs/MAPPING-TRANSFORMERS.md) |
-| Adapter migration guide | [MAPPING-MIGRATION.md](../../packages/integration-sdk/docs/MAPPING-MIGRATION.md) |
+| Document                | Path                                                                                   |
+| ----------------------- | -------------------------------------------------------------------------------------- |
+| Framework overview      | [MAPPING-FRAMEWORK.md](../../packages/integration-sdk/docs/MAPPING-FRAMEWORK.md)       |
+| Profiles & directions   | [MAPPING-PROFILES.md](../../packages/integration-sdk/docs/MAPPING-PROFILES.md)         |
+| Registry & diagnostics  | [MAPPING-REGISTRY.md](../../packages/integration-sdk/docs/MAPPING-REGISTRY.md)         |
+| Transformers & helpers  | [MAPPING-TRANSFORMERS.md](../../packages/integration-sdk/docs/MAPPING-TRANSFORMERS.md) |
+| Adapter migration guide | [MAPPING-MIGRATION.md](../../packages/integration-sdk/docs/MAPPING-MIGRATION.md)       |
 
 ---
 
@@ -47,11 +47,11 @@ Vendor Adapter (Plane / Zammad / …)
 
 **Separation of concerns**
 
-| Layer | Responsibility |
-|-------|----------------|
-| SDK `/mapping` | Stateless translation rules, registry, pipeline, diagnostics |
-| Platform EntityMappingStore | Persistent entity ID bindings (SoR) |
-| Platform MappingOrchestrator | Orchestrates store + resolution — not SDK |
+| Layer                        | Responsibility                                               |
+| ---------------------------- | ------------------------------------------------------------ |
+| SDK `/mapping`               | Stateless translation rules, registry, pipeline, diagnostics |
+| Platform EntityMappingStore  | Persistent entity ID bindings (SoR)                          |
+| Platform MappingOrchestrator | Orchestrates store + resolution — not SDK                    |
 
 ---
 

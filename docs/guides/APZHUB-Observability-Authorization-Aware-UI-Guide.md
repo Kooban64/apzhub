@@ -16,15 +16,15 @@ Server authorization remains authoritative. The Workbench is permission-aware at
 
 ## Permission catalogue (presentation guidance)
 
-| Area | Permissions (examples) |
-| --- | --- |
-| Read / navigate | `observe.read` |
-| Health facets | health-scoped `observe.*` |
-| Metrics | metrics-scoped `observe.*` |
-| Logs metadata | logs-scoped `observe.*` |
-| Traces metadata | traces-scoped `observe.*` |
-| Alerts metadata | alerts-scoped `observe.*` |
-| Diagnostics | diagnostics-scoped `observe.*` |
+| Area            | Permissions (examples)         |
+| --------------- | ------------------------------ |
+| Read / navigate | `observe.read`                 |
+| Health facets   | health-scoped `observe.*`      |
+| Metrics         | metrics-scoped `observe.*`     |
+| Logs metadata   | logs-scoped `observe.*`        |
+| Traces metadata | traces-scoped `observe.*`      |
+| Alerts metadata | alerts-scoped `observe.*`      |
+| Diagnostics     | diagnostics-scoped `observe.*` |
 
 Do not introduce allow-all production behaviour. Do not authorize solely by hiding table rows.
 

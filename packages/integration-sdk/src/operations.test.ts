@@ -6,10 +6,7 @@ import {
   containsLikelySecret,
 } from "./auth";
 import { InMemoryConnectionRegistry } from "./connection";
-import {
-  aggregateHealthChecks,
-  createDefaultHealthProvider,
-} from "./health";
+import { aggregateHealthChecks, createDefaultHealthProvider } from "./health";
 import {
   checkVersionCompatibility,
   createDefaultVersionProvider,
@@ -89,7 +86,9 @@ describe("health provider", () => {
 
     expect(health.status).toBe("unavailable");
     expect(
-      health.checks.some((check) => check.name === "configuration" && check.status === "fail"),
+      health.checks.some(
+        (check) => check.name === "configuration" && check.status === "fail",
+      ),
     ).toBe(true);
   });
 
@@ -113,7 +112,9 @@ describe("health provider", () => {
 
 describe("unified diagnostics", () => {
   it("combines connection and auth diagnostics without secret leakage", async () => {
-    const secretProvider = new InMemorySecretProvider({ secrets: { "secret/ref": rawSecret } });
+    const secretProvider = new InMemorySecretProvider({
+      secrets: { "secret/ref": rawSecret },
+    });
     const credentialResolver = new DefaultCredentialResolver({ secretProvider });
     const registry = new InMemoryConnectionRegistry(fixedClock);
     const versionProvider = createDefaultVersionProvider();

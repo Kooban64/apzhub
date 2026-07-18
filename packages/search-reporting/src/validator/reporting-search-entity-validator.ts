@@ -28,12 +28,7 @@ const MANDATORY_BY_TYPE: Readonly<
   Partial<Record<ReportingSearchEntityType, readonly string[]>>
 > = {
   report_template: ["reportType", "version"],
-  report_generation: [
-    "reportType",
-    "outputFormat",
-    "byteLength",
-    "checksumPresent",
-  ],
+  report_generation: ["reportType", "outputFormat", "byteLength", "checksumPresent"],
   report_generation_metadata: [
     "reportType",
     "outputFormat",
@@ -132,7 +127,8 @@ export class ReportingSearchEntityValidator {
         issues.push({
           field: `metadata.${key}`,
           code: "content_leakage",
-          message: "rendered content / parameter / checksum metadata keys are forbidden",
+          message:
+            "rendered content / parameter / checksum metadata keys are forbidden",
         });
       }
       if (typeof value === "string" && looksLikeReportingLeak(value)) {
@@ -158,10 +154,7 @@ export class ReportingSearchEntityValidator {
     const resolved = resolveReportingSearchEntityType(draft.entityType);
     if (resolved) {
       for (const key of MANDATORY_BY_TYPE[resolved] ?? []) {
-        if (
-          metadata[key] === undefined ||
-          String(metadata[key]).trim().length === 0
-        ) {
+        if (metadata[key] === undefined || String(metadata[key]).trim().length === 0) {
           issues.push({
             field: `metadata.${key}`,
             code: "required",

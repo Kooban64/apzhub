@@ -30,7 +30,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -234,7 +235,12 @@ for (const audit of priorAudits) {
       file: audit.script,
       line: 1,
       rule: "prior-audit-failed",
-      detail: combined.split("\n").filter(Boolean).slice(0, 4).join(" | ").slice(0, 240),
+      detail: combined
+        .split("\n")
+        .filter(Boolean)
+        .slice(0, 4)
+        .join(" | ")
+        .slice(0, 240),
     });
   }
 }
@@ -274,7 +280,7 @@ try {
 // 3. Version pins
 // ---------------------------------------------------------------------------
 const versionPins = [
-  ["packages/search-integration/package.json", "0.1.0", "version-search-integration"],
+  ["packages/search-integration/package.json", "0.2.0", "version-search-integration"],
   ["packages/search-projects/package.json", "0.1.0", "version-search-projects"],
   ["packages/search-support/package.json", "0.1.0", "version-search-support"],
   ["packages/search-documents/package.json", "0.1.0", "version-search-documents"],
@@ -282,9 +288,13 @@ const versionPins = [
   ["packages/search-testing/package.json", "0.1.1", "version-search-testing"],
   ["packages/search-contracts/package.json", "0.4.0", "version-search-contracts"],
   ["packages/search-persistence/package.json", "0.2.0", "version-search-persistence"],
-  ["packages/integration-search-sdk/package.json", "0.1.0", "version-integration-search-sdk"],
+  [
+    "packages/integration-search-sdk/package.json",
+    "0.1.0",
+    "version-integration-search-sdk",
+  ],
   ["integrations/meilisearch/package.json", "0.1.0", "version-integration-meilisearch"],
-  ["packages/platform-services/package.json", "0.19.0", "version-platform-services"],
+  ["packages/platform-services/package.json", "0.25.0", "version-platform-services"],
 ];
 for (const [path, expected, rule] of versionPins) {
   requirePackageVersion(path, expected, rule);
@@ -294,7 +304,10 @@ for (const [path, expected, rule] of versionPins) {
 // 4. Cross-adapter boundary + security + publisher contract
 // ---------------------------------------------------------------------------
 const forbiddenImportRules = [
-  { rule: "no-meilisearch", pattern: /@apzhub\/integration-meilisearch|from\s+["']meilisearch["']/ },
+  {
+    rule: "no-meilisearch",
+    pattern: /@apzhub\/integration-meilisearch|from\s+["']meilisearch["']/,
+  },
   { rule: "no-search-persistence", pattern: /@apzhub\/search-persistence/ },
   { rule: "no-platform-services", pattern: /@apzhub\/platform-services/ },
   { rule: "no-apps-web", pattern: /apps\/web|from\s+["']@\/|NextRequest|NextResponse/ },
@@ -463,7 +476,7 @@ for (const doc of requiredDocs) {
 
 observations.push({
   file: "packages/search-*/src",
-  note: "In-memory publication journals / lifecycle hooks not wired to Platform Services — indexing bridge deferred to APZSEARCH-016",
+  note: "Product adapters retain in-memory sinks; durable orchestration is @apzhub/search-orchestrator (APZSEARCH-016) via composition hooks (platform-services source unmodified)",
 });
 observations.push({
   file: "docs/adr/ADR-0064-search-http-api-and-workbench-surface.md",
@@ -478,17 +491,17 @@ Dependency graph (certified):
 
   packages/search-projects ──┐
   packages/search-support ───┤
-  packages/search-documents ─┼──► @apzhub/search-integration 0.1.0
+  packages/search-documents ─┼──► @apzhub/search-integration 0.2.0
   packages/search-testing ───┤         │
   packages/search-reporting ─┘         │
                                        ▼
-                         (future) Search Platform indexing bridge
-                         → Provider / Meilisearch (APZSEARCH-016+)
+                         @apzhub/search-orchestrator (APZSEARCH-016)
+                         → Search Integration → Frozen Search Platform
 
   Frozen platform stack:
     search-contracts 0.4.0 · search-persistence 0.2.0
     integration-search-sdk 0.1.0 · integration-meilisearch 0.1.0
-    platform-services 0.19.0
+    platform-services 0.25.0
 `.trim();
 
 if (violations.length > 0) {
@@ -511,8 +524,12 @@ console.log("APZSEARCH-015 Search Publication Certification audit PASSED");
 console.log("RESULT: PASS");
 console.log("Violations: 0");
 console.log("  - Prior audits APZSEARCH-009–014: PASS");
-console.log("  - Certified versions pinned (publication adapters + frozen platform stack)");
-console.log("  - Cross-adapter boundaries + publisher contract + safe-field/leak scanners OK");
+console.log(
+  "  - Certified versions pinned (publication adapters + frozen platform stack)",
+);
+console.log(
+  "  - Cross-adapter boundaries + publisher contract + safe-field/leak scanners OK",
+);
 console.log("  - Required APZSEARCH-015 review / CR artefacts present");
 console.log(dependencyGraph);
 if (observations.length > 0) {

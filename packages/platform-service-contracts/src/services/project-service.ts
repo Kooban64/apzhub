@@ -45,7 +45,10 @@ export interface ProjectService {
 
   getProject(ctx: ServiceRequestContext, projectId: ProjectId): Promise<Project>;
 
-  createProject(ctx: ServiceRequestContext, input: CreateProjectInput): Promise<Project>;
+  createProject(
+    ctx: ServiceRequestContext,
+    input: CreateProjectInput,
+  ): Promise<Project>;
 
   updateProject(
     ctx: ServiceRequestContext,
@@ -61,7 +64,11 @@ export interface ProjectService {
     query?: ListQuery<ProjectStateListFilter>,
   ): Promise<PageResult<ProjectStatusEntity>>;
 
-  getStatus(ctx: ServiceRequestContext, projectId: ProjectId, statusId: StatusId): Promise<ProjectStatusEntity>;
+  getStatus(
+    ctx: ServiceRequestContext,
+    projectId: ProjectId,
+    statusId: StatusId,
+  ): Promise<ProjectStatusEntity>;
 
   createStatus(
     ctx: ServiceRequestContext,
@@ -101,7 +108,11 @@ export interface ProjectService {
     input: UpdateLabelInput,
   ): Promise<Label>;
 
-  deleteLabel(ctx: ServiceRequestContext, projectId: ProjectId, labelId: string): Promise<void>;
+  deleteLabel(
+    ctx: ServiceRequestContext,
+    projectId: ProjectId,
+    labelId: string,
+  ): Promise<void>;
 
   listSprints(
     ctx: ServiceRequestContext,
@@ -135,7 +146,11 @@ export interface ProjectService {
     query?: ListQuery<ModuleListFilter>,
   ): Promise<PageResult<ProjectModule>>;
 
-  getModule(ctx: ServiceRequestContext, projectId: ProjectId, moduleId: string): Promise<ProjectModule>;
+  getModule(
+    ctx: ServiceRequestContext,
+    projectId: ProjectId,
+    moduleId: string,
+  ): Promise<ProjectModule>;
 
   createModule(
     ctx: ServiceRequestContext,
@@ -150,9 +165,16 @@ export interface ProjectService {
     input: UpdateModuleInput,
   ): Promise<ProjectModule>;
 
-  archiveModule(ctx: ServiceRequestContext, projectId: ProjectId, moduleId: string): Promise<ProjectModule>;
+  archiveModule(
+    ctx: ServiceRequestContext,
+    projectId: ProjectId,
+    moduleId: string,
+  ): Promise<ProjectModule>;
 
-  listMilestones(ctx: ServiceRequestContext, projectId: ProjectId): Promise<readonly Milestone[]>;
+  listMilestones(
+    ctx: ServiceRequestContext,
+    projectId: ProjectId,
+  ): Promise<readonly Milestone[]>;
 
   createMilestone(
     ctx: ServiceRequestContext,

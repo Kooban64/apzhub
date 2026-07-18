@@ -30,10 +30,7 @@ import {
   normalizeListQuery,
   paginateItems,
 } from "../types";
-import {
-  baseMeta,
-  createInMemoryCrudRepository,
-} from "../in-memory/generic-crud";
+import { baseMeta, createInMemoryCrudRepository } from "../in-memory/generic-crud";
 
 export interface CertificationInMemoryStores {
   certificationGateDefinitions: Map<string, CertificationGateDefinitionRecord>;
@@ -72,15 +69,13 @@ export function createInMemoryCertificationRepos(stores: CertificationInMemorySt
         ...meta,
         gateKey: String(existing?.gateKey ?? input.gateKey),
         name: String(input.name ?? existing?.name ?? ""),
-        description:
-          (input.description as string | undefined) ?? existing?.description,
+        description: (input.description as string | undefined) ?? existing?.description,
         kind: String(input.kind ?? existing?.kind ?? "builtin"),
         required: Boolean(input.required ?? existing?.required ?? true),
         configJson:
           (input.configJson as Readonly<Record<string, unknown>> | undefined) ??
           existing?.configJson,
-        templateKey:
-          (input.templateKey as string | undefined) ?? existing?.templateKey,
+        templateKey: (input.templateKey as string | undefined) ?? existing?.templateKey,
         ordinal: (input.ordinal as number | undefined) ?? existing?.ordinal,
         enabled: Boolean(input.enabled ?? existing?.enabled ?? true),
       };
@@ -114,8 +109,7 @@ export function createInMemoryCertificationRepos(stores: CertificationInMemorySt
           existing?.certificationRecordId ?? input.certificationRecordId,
         ),
         gateDefinitionId:
-          (input.gateDefinitionId as string | undefined) ??
-          existing?.gateDefinitionId,
+          (input.gateDefinitionId as string | undefined) ?? existing?.gateDefinitionId,
         gateKey: String(existing?.gateKey ?? input.gateKey),
         status: String(input.status ?? existing?.status ?? "pending"),
         reason: String(input.reason ?? existing?.reason ?? ""),
@@ -127,8 +121,7 @@ export function createInMemoryCertificationRepos(stores: CertificationInMemorySt
           input.evaluatedAt ?? existing?.evaluatedAt ?? new Date().toISOString(),
         ),
         evaluatorUserId:
-          (input.evaluatorUserId as string | undefined) ??
-          existing?.evaluatorUserId,
+          (input.evaluatorUserId as string | undefined) ?? existing?.evaluatorUserId,
         traceabilityRefs:
           (input.traceabilityRefs as readonly string[]) ??
           existing?.traceabilityRefs ??
@@ -174,8 +167,8 @@ export function createInMemoryCertificationRepos(stores: CertificationInMemorySt
           [],
         approvalStagesJson:
           (input.approvalStagesJson as
-            | readonly Readonly<Record<string, unknown>>[]
-            | undefined) ?? existing?.approvalStagesJson,
+            readonly Readonly<Record<string, unknown>>[] | undefined) ??
+          existing?.approvalStagesJson,
         enabled: Boolean(input.enabled ?? existing?.enabled ?? true),
         configJson:
           (input.configJson as Readonly<Record<string, unknown>> | undefined) ??
@@ -191,9 +184,7 @@ export function createInMemoryCertificationRepos(stores: CertificationInMemorySt
       assertRequiredString(input.action, "action");
       assertRequiredString(input.summary, "summary");
       const id =
-        typeof input.id === "string" && input.id.length > 0
-          ? input.id
-          : randomUUID();
+        typeof input.id === "string" && input.id.length > 0 ? input.id : randomUUID();
       const row: CertificationAuditRecord = {
         id,
         tenantId: ctx.tenantId,
@@ -245,9 +236,7 @@ export function createInMemoryCertificationRepos(stores: CertificationInMemorySt
       assertRequiredString(input.certificationRecordId, "certificationRecordId");
       assertRequiredString(input.toStatus, "toStatus");
       const id =
-        typeof input.id === "string" && input.id.length > 0
-          ? input.id
-          : randomUUID();
+        typeof input.id === "string" && input.id.length > 0 ? input.id : randomUUID();
       const row: CertificationHistoryRecord = {
         id,
         tenantId: ctx.tenantId,

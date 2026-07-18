@@ -10,10 +10,7 @@ import {
   asWorkflowConnectionId,
   type WorkflowGraphSnapshot,
 } from "@apzhub/workflow-contracts";
-import {
-  createWorkflowFoundation,
-  WorkflowDomainError,
-} from "@apzhub/workflow-core";
+import { createWorkflowFoundation, WorkflowDomainError } from "@apzhub/workflow-core";
 import {
   createEmptyWorkflowInMemoryStores,
   createInMemoryWorkflowRepositories,
@@ -34,9 +31,7 @@ import {
 } from "./workflow-service-impls";
 import { createPlatformWorkflowService } from "@apzhub/workflow-core";
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_cov",
     userId: "user_cov",
@@ -75,24 +70,12 @@ function graph(): WorkflowGraphSnapshot {
 
 describe("APZWORKFLOW-002 coverage", () => {
   it("evaluates isWorkflowServiceEnabled from env", () => {
-    expect(isWorkflowServiceEnabled({ APZHUB_WORKFLOW_ENABLED: "true" })).toBe(
-      true,
-    );
-    expect(isWorkflowServiceEnabled({ APZHUB_WORKFLOW_ENABLED: "1" })).toBe(
-      true,
-    );
-    expect(isWorkflowServiceEnabled({ APZHUB_WORKFLOW_ENABLED: "on" })).toBe(
-      true,
-    );
-    expect(isWorkflowServiceEnabled({ APZHUB_WORKFLOW_ENABLED: "false" })).toBe(
-      false,
-    );
-    expect(isWorkflowServiceEnabled({ APZHUB_WORKFLOW_ENABLED: "0" })).toBe(
-      false,
-    );
-    expect(isWorkflowServiceEnabled({ APZHUB_WORKFLOW_ENABLED: "off" })).toBe(
-      false,
-    );
+    expect(isWorkflowServiceEnabled({ APZHUB_WORKFLOW_ENABLED: "true" })).toBe(true);
+    expect(isWorkflowServiceEnabled({ APZHUB_WORKFLOW_ENABLED: "1" })).toBe(true);
+    expect(isWorkflowServiceEnabled({ APZHUB_WORKFLOW_ENABLED: "on" })).toBe(true);
+    expect(isWorkflowServiceEnabled({ APZHUB_WORKFLOW_ENABLED: "false" })).toBe(false);
+    expect(isWorkflowServiceEnabled({ APZHUB_WORKFLOW_ENABLED: "0" })).toBe(false);
+    expect(isWorkflowServiceEnabled({ APZHUB_WORKFLOW_ENABLED: "off" })).toBe(false);
     expect(isWorkflowServiceEnabled({})).toBe(false);
   });
 
@@ -110,10 +93,7 @@ describe("APZWORKFLOW-002 coverage", () => {
       ["other_code", "business_rule"],
     ];
     for (const [code, category] of cases) {
-      const mapped = mapWorkflowDomainError(
-        new WorkflowDomainError(code, code),
-        "c",
-      );
+      const mapped = mapWorkflowDomainError(new WorkflowDomainError(code, code), "c");
       expect(mapped.category).toBe(category);
     }
   });
@@ -131,30 +111,23 @@ describe("APZWORKFLOW-002 coverage", () => {
     domain.getWorkflow = async () => {
       throw new Error('relation "platform_workflow" does not exist');
     };
-    await expect(
-      impls.workflows.get(ctx(), "wf_x" as never),
-    ).rejects.toMatchObject({
+    await expect(impls.workflows.get(ctx(), "wf_x" as never)).rejects.toMatchObject({
       category: "integration",
       code: "PROVIDER_UNAVAILABLE",
     });
     domain.getWorkflow = async () => {
       throw Object.assign(new Error("boom"), { name: "Weird" });
     };
-    await expect(
-      impls.workflows.get(ctx(), "wf_y" as never),
-    ).rejects.toMatchObject({
+    await expect(impls.workflows.get(ctx(), "wf_y" as never)).rejects.toMatchObject({
       category: "system",
       code: "INTERNAL_ERROR",
     });
     domain.getWorkflow = async () => {
-      throw mapWorkflowDomainError(
-        new WorkflowDomainError("not_found", "gone"),
-        "c",
-      );
+      throw mapWorkflowDomainError(new WorkflowDomainError("not_found", "gone"), "c");
     };
-    await expect(
-      impls.workflows.get(ctx(), "wf_z" as never),
-    ).rejects.toSatisfy(isPlatformServiceError);
+    await expect(impls.workflows.get(ctx(), "wf_z" as never)).rejects.toSatisfy(
+      isPlatformServiceError,
+    );
     domain.getWorkflow = original;
   });
 
@@ -245,10 +218,7 @@ describe("APZWORKFLOW-002 coverage", () => {
       workflowId: created.id,
       graph: graph(),
     });
-    const gotVersion = await bundle.gateway.workflow.versions.get(
-      request,
-      version.id,
-    );
+    const gotVersion = await bundle.gateway.workflow.versions.get(request, version.id);
     expect(gotVersion.id).toBe(version.id);
 
     const template = await bundle.gateway.workflow.templates.create(request, {
@@ -280,9 +250,7 @@ describe("APZWORKFLOW-002 coverage", () => {
       name: "Fold",
       path: "/f",
     });
-    expect(
-      await bundle.gateway.workflow.folders.get(request, folder.id),
-    ).toBeTruthy();
+    expect(await bundle.gateway.workflow.folders.get(request, folder.id)).toBeTruthy();
     expect(
       (await bundle.gateway.workflow.folders.list(request)).length,
     ).toBeGreaterThan(0);

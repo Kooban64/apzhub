@@ -1,15 +1,16 @@
 import { z } from "zod";
 
-const booleanFromEnv = z
-  .enum(["true", "false"])
-  .transform((value) => value === "true");
+const booleanFromEnv = z.enum(["true", "false"]).transform((value) => value === "true");
 
 export const platformEnvSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   PORT: z.coerce.number().default(3300),
   APP_URL: z.string().url().default("http://localhost:3300"),
   NEXT_PUBLIC_APP_URL: z.string().url().optional(),
-  ALLOW_DEV_REGISTRATION: z.enum(["true", "false"]).default("false").transform((v) => v === "true"),
+  ALLOW_DEV_REGISTRATION: z
+    .enum(["true", "false"])
+    .default("false")
+    .transform((v) => v === "true"),
   NEXT_PUBLIC_ALLOW_DEV_REGISTRATION: z.enum(["true", "false"]).optional(),
   PLATFORM_VERSION: z.string().default("0.0.0"),
   BUILD_NUMBER: z.string().default("local"),

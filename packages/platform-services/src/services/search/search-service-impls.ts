@@ -46,10 +46,7 @@ function mapSearchDomainError(
   ) {
     category = "validation";
     code = "VALIDATION_FAILED";
-  } else if (
-    classification.endsWith("_not_found") ||
-    classification === "not_found"
-  ) {
+  } else if (classification.endsWith("_not_found") || classification === "not_found") {
     category = "not_found";
     code = "NOT_FOUND";
   } else if (
@@ -60,9 +57,7 @@ function mapSearchDomainError(
   ) {
     category = "conflict";
     code = "CONFLICT";
-  } else if (
-    classification === "authorization_denied"
-  ) {
+  } else if (classification === "authorization_denied") {
     category = "authorization";
     code = "FORBIDDEN";
   } else if (classification === "tenant_mismatch") {
@@ -124,10 +119,7 @@ async function withSearchErrorMapping<T>(
     if (isSearchDomainError(error)) {
       throw mapSearchDomainError(error, ctx.correlationId);
     }
-    if (
-      error instanceof Error &&
-      error.name === "SearchAuthorizationError"
-    ) {
+    if (error instanceof Error && error.name === "SearchAuthorizationError") {
       throw new PlatformServiceError({
         category: "authorization",
         code: "FORBIDDEN",

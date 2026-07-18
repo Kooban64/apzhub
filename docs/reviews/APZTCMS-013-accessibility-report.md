@@ -8,15 +8,15 @@
 
 ## Scope
 
-| Check | Method | Result |
-| ----- | ------ | ------ |
-| Keyboard navigation | Component tests (`testing-ui.test.tsx` Enter activation) | **PASS** |
-| Focus / interactive tables | Component suite | **PASS** |
-| ARIA / semantic structure | Shared `@apzhub/ui` + workbench patterns; axe in Playwright specs | **PASS** (spec); live run deferred |
-| Contrast | Design tokens / theme (dark + light) | **PASS** by convention; visual spot-check deferred |
-| Screen readers | Relies on semantic UI + headings in views | **PASS** by design review; live SR deferred |
-| Responsive | Playwright viewport cases (desktop 1440 / mobile 390) | Spec **PASS**; live run deferred |
-| Loading / empty / error states | Component Vitest for catalog/dashboard/certification/execution | **PASS** |
+| Check                          | Method                                                            | Result                                             |
+| ------------------------------ | ----------------------------------------------------------------- | -------------------------------------------------- |
+| Keyboard navigation            | Component tests (`testing-ui.test.tsx` Enter activation)          | **PASS**                                           |
+| Focus / interactive tables     | Component suite                                                   | **PASS**                                           |
+| ARIA / semantic structure      | Shared `@apzhub/ui` + workbench patterns; axe in Playwright specs | **PASS** (spec); live run deferred                 |
+| Contrast                       | Design tokens / theme (dark + light)                              | **PASS** by convention; visual spot-check deferred |
+| Screen readers                 | Relies on semantic UI + headings in views                         | **PASS** by design review; live SR deferred        |
+| Responsive                     | Playwright viewport cases (desktop 1440 / mobile 390)             | Spec **PASS**; live run deferred                   |
+| Loading / empty / error states | Component Vitest for catalog/dashboard/certification/execution    | **PASS**                                           |
 
 ---
 

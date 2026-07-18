@@ -1,9 +1,21 @@
 import { getDeprecatedVariableUsage } from "./deprecation";
 import { resolveConfigSource } from "./precedence";
-import { ENV_PROFILE_RULES, resolveEnvironmentProfile, resolveValidationTier } from "./profiles";
-import { KNOWN_CONFIG_KEYS, PLATFORM_CONFIG_REGISTRY, getConfigDefinition } from "./registry";
+import {
+  ENV_PROFILE_RULES,
+  resolveEnvironmentProfile,
+  resolveValidationTier,
+} from "./profiles";
+import {
+  KNOWN_CONFIG_KEYS,
+  PLATFORM_CONFIG_REGISTRY,
+  getConfigDefinition,
+} from "./registry";
 import { platformEnvSchema } from "./schema";
-import { buildSecretDiagnostics, maskSecretValue, redactSecretsInMessage } from "./secrets";
+import {
+  buildSecretDiagnostics,
+  maskSecretValue,
+  redactSecretsInMessage,
+} from "./secrets";
 import type {
   ConfigValidationIssue,
   ConfigurationDiagnostics,
@@ -13,7 +25,15 @@ import type {
   ValidationTier,
 } from "./types";
 
-const IGNORED_UNKNOWN_PREFIXES = ["npm_", "VITEST_", "CI", "NEXT_", "VERCEL_", "TURBO_", "__"];
+const IGNORED_UNKNOWN_PREFIXES = [
+  "npm_",
+  "VITEST_",
+  "CI",
+  "NEXT_",
+  "VERCEL_",
+  "TURBO_",
+  "__",
+];
 
 export function validatePlatformEnvironment(input?: {
   readonly env?: NodeJS.ProcessEnv;
@@ -108,7 +128,9 @@ export function getConfigurationDiagnostics(input?: {
   const tier = resolveValidationTier(profile);
   const validation = validatePlatformEnvironment({ env, tier });
 
-  const deprecatedVariables = getDeprecatedVariableUsage(env).map((entry) => entry.alias);
+  const deprecatedVariables = getDeprecatedVariableUsage(env).map(
+    (entry) => entry.alias,
+  );
   const unknownVariables = Object.keys(env).filter((key) => {
     if (KNOWN_CONFIG_KEYS.has(key)) return false;
     return !IGNORED_UNKNOWN_PREFIXES.some((prefix) => key.startsWith(prefix));
@@ -218,7 +240,9 @@ export function ensureEnvironmentValid(input?: {
   return result;
 }
 
-export function getActiveProfile(env: NodeJS.ProcessEnv = process.env): EnvironmentProfile {
+export function getActiveProfile(
+  env: NodeJS.ProcessEnv = process.env,
+): EnvironmentProfile {
   return resolveEnvironmentProfile(env.NODE_ENV);
 }
 

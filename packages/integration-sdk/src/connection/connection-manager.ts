@@ -10,10 +10,7 @@ import type { Clock } from "../auth/authentication-provider";
 import { systemClock } from "../auth/authentication-provider";
 import { ConnectionLifecycleService } from "./lifecycle-service";
 import type { ConnectionRegistry } from "./registry";
-import type {
-  ConnectionDefinition,
-  ConnectionRecord,
-} from "./types";
+import type { ConnectionDefinition, ConnectionRecord } from "./types";
 import { validateConnectionDefinition } from "./validation";
 import { buildConnectionDiagnostics } from "./connection-diagnostics";
 
@@ -22,8 +19,14 @@ export interface ConnectionManager {
     definition: ConnectionDefinition,
     correlationId: string,
   ): Promise<SdkResult<ConnectionRecord>>;
-  open(connectionId: string, correlationId: string): Promise<SdkResult<ConnectionRecord>>;
-  close(connectionId: string, correlationId: string): Promise<SdkResult<ConnectionRecord>>;
+  open(
+    connectionId: string,
+    correlationId: string,
+  ): Promise<SdkResult<ConnectionRecord>>;
+  close(
+    connectionId: string,
+    correlationId: string,
+  ): Promise<SdkResult<ConnectionRecord>>;
   getState(connectionId: string, correlationId: string): SdkResult<ConnectionRecord>;
   disable(connectionId: string, correlationId: string): SdkResult<ConnectionRecord>;
   getDiagnostics(tenantId?: string): ReturnType<typeof buildConnectionDiagnostics>;
@@ -180,10 +183,7 @@ export class DefaultConnectionManager implements ConnectionManager {
       return disabled;
     }
 
-    return this.registry.replace(
-      { ...disabled.value, enabled: false },
-      correlationId,
-    );
+    return this.registry.replace({ ...disabled.value, enabled: false }, correlationId);
   }
 
   getDiagnostics(tenantId?: string) {

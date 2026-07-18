@@ -4,10 +4,7 @@
  */
 
 export type SupportPermissionSource =
-  | readonly string[]
-  | ReadonlySet<string>
-  | undefined
-  | null;
+  readonly string[] | ReadonlySet<string> | undefined | null;
 
 function asSet(source: SupportPermissionSource): ReadonlySet<string> {
   if (!source) return new Set();

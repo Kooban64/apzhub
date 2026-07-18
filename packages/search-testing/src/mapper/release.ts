@@ -27,7 +27,17 @@ import {
 
 export type ReleaseMappableEntity = Extract<
   TestingSearchMappableEntity,
-  { readonly entityType: "release" | "release_candidate" | "release_package" | "release_scope" | "release_approval" | "release_decision" | "release_manifest" | "release_summary" }
+  {
+    readonly entityType:
+      | "release"
+      | "release_candidate"
+      | "release_package"
+      | "release_scope"
+      | "release_approval"
+      | "release_decision"
+      | "release_manifest"
+      | "release_summary";
+  }
 >;
 
 export class ReleaseSearchMapper {
@@ -72,16 +82,9 @@ export class ReleaseSearchMapper {
       title: release.name,
       summary: release.description,
       organisationId:
-        release.organisationId ??
-        extras?.organisationId ??
-        context.organisationId,
+        release.organisationId ?? extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        release.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, release.status, classification),
       metadata: {
         key: release.key,
         status: release.status,
@@ -113,12 +116,7 @@ export class ReleaseSearchMapper {
       summary: candidate.notes?.slice(0, 280),
       organisationId: extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        candidate.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, candidate.status, classification),
       metadata: {
         status: candidate.status,
         releaseId: candidate.releaseId,
@@ -177,9 +175,7 @@ export class ReleaseSearchMapper {
       explicit: extras?.classification,
     });
     const title =
-      scope.label?.trim() ||
-      extras?.title ||
-      `${scope.kind}:${scope.refId}`;
+      scope.label?.trim() || extras?.title || `${scope.kind}:${scope.refId}`;
     return {
       entityId: scope.id,
       entityType: "release_scope",
@@ -214,8 +210,7 @@ export class ReleaseSearchMapper {
       status: approval.status,
     });
     const title =
-      extras?.title ??
-      `Release approval ${approval.stageKind} (${approval.status})`;
+      extras?.title ?? `Release approval ${approval.stageKind} (${approval.status})`;
     return {
       entityId: approval.id,
       entityType: "release_approval",
@@ -223,12 +218,7 @@ export class ReleaseSearchMapper {
       summary: approval.comments?.slice(0, 280),
       organisationId: extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        approval.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, approval.status, classification),
       metadata: {
         status: approval.status,
         releaseId: approval.releaseId,
@@ -258,8 +248,7 @@ export class ReleaseSearchMapper {
       explicit: extras?.classification,
       status: decision.verdict,
     });
-    const title =
-      extras?.title ?? `Release decision ${decision.verdict}`;
+    const title = extras?.title ?? `Release decision ${decision.verdict}`;
     return {
       entityId: decision.id,
       entityType: "release_decision",
@@ -267,12 +256,7 @@ export class ReleaseSearchMapper {
       summary: decision.rationale.slice(0, 280),
       organisationId: extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        decision.verdict,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, decision.verdict, classification),
       metadata: {
         verdict: decision.verdict,
         releaseId: decision.releaseId,
@@ -297,21 +281,16 @@ export class ReleaseSearchMapper {
   ): SearchEntityDraft {
     const id = extras?.entityId ?? `manifest:${manifest.releaseId}`;
     assertPlatformEntityId(id, "release_manifest.id");
-    const tenantId =
-      extras?.tenantId ?? extras?.parentRelease?.tenantId;
+    const tenantId = extras?.tenantId ?? extras?.parentRelease?.tenantId;
     if (!tenantId) {
-      throw new Error(
-        "tenantId is required via extras when mapping release_manifest",
-      );
+      throw new Error("tenantId is required via extras when mapping release_manifest");
     }
     assertTenant(tenantId, context);
     const classification = resolveTestingClassification(context, {
       explicit: extras?.classification,
     });
     const title =
-      extras?.title ??
-      extras?.parentRelease?.name ??
-      `Manifest ${manifest.releaseId}`;
+      extras?.title ?? extras?.parentRelease?.name ?? `Manifest ${manifest.releaseId}`;
     return {
       entityId: id,
       entityType: "release_manifest",
@@ -328,10 +307,7 @@ export class ReleaseSearchMapper {
       keywords: [title, manifest.releaseId],
       createdAt: manifest.generatedAt,
       updatedAt: manifest.generatedAt,
-      navigationTarget: navigationTarget(
-        "release_manifest",
-        manifest.releaseId,
-      ),
+      navigationTarget: navigationTarget("release_manifest", manifest.releaseId),
       sourceId: "testing:release_manifest",
       ownerUserId: context.actorUserId,
     };
@@ -343,21 +319,16 @@ export class ReleaseSearchMapper {
     extras?: TestingSearchMappingExtras,
   ): SearchEntityDraft {
     assertPlatformEntityId(summary.id, "release_summary.id");
-    const tenantId =
-      extras?.tenantId ?? extras?.parentRelease?.tenantId;
+    const tenantId = extras?.tenantId ?? extras?.parentRelease?.tenantId;
     if (!tenantId) {
-      throw new Error(
-        "tenantId is required via extras when mapping release_summary",
-      );
+      throw new Error("tenantId is required via extras when mapping release_summary");
     }
     assertTenant(tenantId, context);
     const classification = resolveTestingClassification(context, {
       explicit: extras?.classification,
       status: summary.recommendationCode,
     });
-    const title =
-      extras?.title ??
-      `Release summary ${summary.recommendationCode}`;
+    const title = extras?.title ?? `Release summary ${summary.recommendationCode}`;
     return {
       entityId: summary.id,
       entityType: "release_summary",

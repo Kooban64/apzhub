@@ -41,7 +41,9 @@ export function buildActiveSnapshot(
   };
 }
 
-export function buildPlatformAdminSnapshot(userId = "user-admin"): AuthorizationAccessSnapshot {
+export function buildPlatformAdminSnapshot(
+  userId = "user-admin",
+): AuthorizationAccessSnapshot {
   return buildActiveSnapshot({
     userId,
     roleIds: ["role-platform-admin"],
@@ -51,7 +53,9 @@ export function buildPlatformAdminSnapshot(userId = "user-admin"): Authorization
   });
 }
 
-export function buildStandardUserSnapshot(userId = "user-standard"): AuthorizationAccessSnapshot {
+export function buildStandardUserSnapshot(
+  userId = "user-standard",
+): AuthorizationAccessSnapshot {
   return buildActiveSnapshot({
     userId,
     roleSlugs: ["standard-user"],
@@ -76,7 +80,9 @@ export function buildStandardUserSnapshot(userId = "user-standard"): Authorizati
   });
 }
 
-export function buildManagerSnapshot(userId = "user-manager"): AuthorizationAccessSnapshot {
+export function buildManagerSnapshot(
+  userId = "user-manager",
+): AuthorizationAccessSnapshot {
   return buildActiveSnapshot({
     userId,
     roleSlugs: ["manager"],
@@ -92,7 +98,9 @@ export function buildManagerSnapshot(userId = "user-manager"): AuthorizationAcce
   });
 }
 
-export function buildInactiveActorSnapshot(userId = "user-inactive"): AuthorizationAccessSnapshot {
+export function buildInactiveActorSnapshot(
+  userId = "user-inactive",
+): AuthorizationAccessSnapshot {
   return buildActiveSnapshot({
     userId,
     subject: { userId, status: "inactive" },
@@ -100,7 +108,9 @@ export function buildInactiveActorSnapshot(userId = "user-inactive"): Authorizat
   });
 }
 
-export function buildSuspendedActorSnapshot(userId = "user-suspended"): AuthorizationAccessSnapshot {
+export function buildSuspendedActorSnapshot(
+  userId = "user-suspended",
+): AuthorizationAccessSnapshot {
   return buildActiveSnapshot({
     userId,
     subject: { userId, status: "suspended" },
@@ -118,7 +128,9 @@ export function buildNoTenantMembershipSnapshot(
   });
 }
 
-export function buildImpersonatorSnapshot(userId = "user-impersonator"): AuthorizationAccessSnapshot {
+export function buildImpersonatorSnapshot(
+  userId = "user-impersonator",
+): AuthorizationAccessSnapshot {
   return buildActiveSnapshot({
     userId,
     roleSlugs: ["administrator"],

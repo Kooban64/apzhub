@@ -27,13 +27,13 @@ Knowledge result selection **must** route through existing Platform 2.0 executio
 
 ### Prohibited patterns
 
-| Pattern                                   | Reason                                                                                                          |
-| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Knowledge Source invokes handler directly | Bypasses CommandExecutor and permission model                                                                   |
-| Overlay calls Workbench Manager internals | Violates API layering                                                                                           |
-| New `KnowledgeExecutor` dispatch layer    | Parallel pipeline — rejected                                                                                    |
-| Client-side permission-only filtering     | Server must filter before hydration ([Document 020 §11](./020-unified-search-knowledge-discovery-framework.md)) |
-| Semantic/AI source executes actions       | AI consumes orchestrator results; routes through same paths                                                     |
+| Pattern                                   | Reason                                                                                                           |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Knowledge Source invokes handler directly | Bypasses CommandExecutor and permission model                                                                    |
+| Overlay calls Workbench Manager internals | Violates API layering                                                                                            |
+| New `KnowledgeExecutor` dispatch layer    | Parallel pipeline — rejected                                                                                     |
+| Client-side permission-only filtering     | Server must filter before hydration ([Document 020 §11](../020-unified-search-knowledge-discovery-framework.md)) |
+| Semantic/AI source executes actions       | AI consumes orchestrator results; routes through same paths                                                      |
 
 ### Orchestrator boundary
 

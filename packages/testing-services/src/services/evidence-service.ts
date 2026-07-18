@@ -36,9 +36,7 @@ function toDomain(row: EvidenceRecord): Evidence {
     checksum: row.checksum ?? row.contentHash,
     mimeType: row.mimeType ?? row.contentType,
     relationships: row.relationships,
-    executionId: row.executionId
-      ? asManualExecutionId(row.executionId)
-      : undefined,
+    executionId: row.executionId ? asManualExecutionId(row.executionId) : undefined,
     lifecycleStatus: row.lifecycleStatus ?? "pending",
     verificationState: row.verificationState,
     approvalState: row.evidenceApprovalState,
@@ -203,13 +201,9 @@ export function createEvidenceService(rt: ServiceRuntime): EvidenceService {
       const current = await this.getEvidence(ctx, id);
       const from = current.lifecycleStatus ?? "pending";
       if (from === "submitted") {
-        await transitionLifecycle(
-          rt,
-          ctx,
-          id,
-          "verified",
-          { verificationState: "auto_verified" },
-        );
+        await transitionLifecycle(rt, ctx, id, "verified", {
+          verificationState: "auto_verified",
+        });
       }
       return transitionLifecycle(
         rt,
@@ -286,7 +280,10 @@ export function createEvidenceService(rt: ServiceRuntime): EvidenceService {
         await rt.persistence.evidence.archive(rctx, id, existing.revision),
       );
     },
-    async putViaStorage(ctx, input: EvidenceStoragePutInput): Promise<EvidenceStorageObject> {
+    async putViaStorage(
+      ctx,
+      input: EvidenceStoragePutInput,
+    ): Promise<EvidenceStorageObject> {
       void ctx;
       return rt.storage.put(input);
     },

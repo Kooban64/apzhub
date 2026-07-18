@@ -6,14 +6,14 @@
 
 ## Programme consistency
 
-| Gate | Result |
-| ---- | ------ |
-| SoR vertical `audit:workflow-vertical` | PASS |
-| Engine vertical `audit:workflow-engine-vertical` | PASS |
-| Wave closeout `audit:workflow-engine-wave` | PASS |
-| OpenAPI platform validate | PASS |
-| Package versions frozen | PASS |
-| Documentation pack complete | PASS |
+| Gate                                             | Result |
+| ------------------------------------------------ | ------ |
+| SoR vertical `audit:workflow-vertical`           | PASS   |
+| Engine vertical `audit:workflow-engine-vertical` | PASS   |
+| Wave closeout `audit:workflow-engine-wave`       | PASS   |
+| OpenAPI platform validate                        | PASS   |
+| Package versions frozen                          | PASS   |
+| Documentation pack complete                      | PASS   |
 
 ## Patterns frozen
 

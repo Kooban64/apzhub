@@ -17,7 +17,10 @@ export async function enforceTrafficGovernance(
   },
 ): Promise<NextResponse | null> {
   const { pathname } = request.nextUrl;
-  if (!shouldApplyTrafficGovernance(pathname) && !shouldApplyLawTrafficGovernance(pathname)) {
+  if (
+    !shouldApplyTrafficGovernance(pathname) &&
+    !shouldApplyLawTrafficGovernance(pathname)
+  ) {
     return null;
   }
 
@@ -35,7 +38,10 @@ export async function enforceTrafficGovernance(
   );
 
   if (!decision.allowed) {
-    return NextResponse.json(createEdgeTrafficDeniedBody(), buildEdgeTrafficDeniedInit(decision));
+    return NextResponse.json(
+      createEdgeTrafficDeniedBody(),
+      buildEdgeTrafficDeniedInit(decision),
+    );
   }
 
   const response = NextResponse.next();

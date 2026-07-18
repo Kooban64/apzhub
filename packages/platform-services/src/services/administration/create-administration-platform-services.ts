@@ -88,11 +88,7 @@ export function wrapAdministrationPlatformGatewayWithPipeline(
       pipeline,
       "administrationPermissions",
     ),
-    audit: wrapServiceWithPipeline(
-      gateway.audit,
-      pipeline,
-      "administrationAudit",
-    ),
+    audit: wrapServiceWithPipeline(gateway.audit, pipeline, "administrationAudit"),
     history: wrapServiceWithPipeline(
       gateway.history,
       pipeline,
@@ -162,8 +158,7 @@ function buildBundle(input: {
   });
   let seq = 0;
   const now = input.now ?? (() => new Date().toISOString());
-  const id =
-    input.id ?? (() => `adm_${Date.now().toString(36)}_${++seq}`);
+  const id = input.id ?? (() => `adm_${Date.now().toString(36)}_${++seq}`);
   const domain = createPlatformAdministrationService({
     repos: input.persistence,
     now,

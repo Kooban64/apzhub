@@ -15,21 +15,14 @@ export const PLATFORM_CONFIGURATION_PERMISSIONS = [
 export type PlatformConfigurationPermission =
   (typeof PLATFORM_CONFIGURATION_PERMISSIONS)[number];
 
-export const PLATFORM_CONFIGURATION_PERMISSION_WILDCARD =
-  "configuration.*" as const;
+export const PLATFORM_CONFIGURATION_PERMISSION_WILDCARD = "configuration.*" as const;
 
 export function isPlatformConfigurationPermission(value: string): boolean {
-  return (PLATFORM_CONFIGURATION_PERMISSIONS as readonly string[]).includes(
-    value,
-  );
+  return (PLATFORM_CONFIGURATION_PERMISSIONS as readonly string[]).includes(value);
 }
 
 export type ConfigurationPermissionOp =
-  | "read"
-  | "manage"
-  | "version"
-  | "validation"
-  | "audit";
+  "read" | "manage" | "version" | "validation" | "audit";
 
 export function hasConfigurationPermission(
   permissions: readonly string[],

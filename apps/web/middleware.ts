@@ -2,7 +2,11 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { fetchMiddlewareSession } from "@apzhub/auth/middleware-session";
 
-import { enforceTrafficGovernance, shouldApplyLawTrafficGovernance, shouldApplyTrafficGovernance } from "./lib/traffic-governance-middleware";
+import {
+  enforceTrafficGovernance,
+  shouldApplyLawTrafficGovernance,
+  shouldApplyTrafficGovernance,
+} from "./lib/traffic-governance-middleware";
 
 const publicPaths = ["/login", "/register", "/forgot-password", "/api/health"];
 
@@ -54,7 +58,10 @@ async function applySharedTrafficGovernance(
   input?: { readonly userId?: string; readonly tenantId?: string },
 ): Promise<NextResponse | null> {
   const { pathname } = request.nextUrl;
-  if (!shouldApplyTrafficGovernance(pathname) && !shouldApplyLawTrafficGovernance(pathname)) {
+  if (
+    !shouldApplyTrafficGovernance(pathname) &&
+    !shouldApplyLawTrafficGovernance(pathname)
+  ) {
     return null;
   }
 

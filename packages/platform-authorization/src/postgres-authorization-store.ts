@@ -16,7 +16,10 @@ import {
   DEFAULT_TENANT_MEMBER_ROLE_ID,
   seedDefaultAuthorizationCatalog,
 } from "./authorization-seed";
-import type { ResolveSessionAuthorizationInput, SessionAuthorizationSnapshot } from "./server";
+import type {
+  ResolveSessionAuthorizationInput,
+  SessionAuthorizationSnapshot,
+} from "./server";
 
 export async function seedDefaultAuthorizationRows(): Promise<void> {
   const db = getDb();
@@ -93,16 +96,43 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
 
   const rolePermissions = [
     { roleId: DEFAULT_PLATFORM_ADMIN_ROLE_ID, permissionKey: "*", grantType: "allow" },
-    { roleId: DEFAULT_LAW_OPERATOR_ROLE_ID, permissionKey: "legal.*", grantType: "allow" },
-    { roleId: DEFAULT_LAW_OPERATOR_ROLE_ID, permissionKey: "law.*", grantType: "allow" },
-    { roleId: DEFAULT_LAW_OPERATOR_ROLE_ID, permissionKey: "trust.*", grantType: "allow" },
-    { roleId: DEFAULT_TENANT_MEMBER_ROLE_ID, permissionKey: "tenant.*", grantType: "allow" },
-    { roleId: DEFAULT_TENANT_MEMBER_ROLE_ID, permissionKey: "legal.client.view", grantType: "allow" },
-    { roleId: DEFAULT_TENANT_MEMBER_ROLE_ID, permissionKey: "legal.trust.view", grantType: "allow" },
+    {
+      roleId: DEFAULT_LAW_OPERATOR_ROLE_ID,
+      permissionKey: "legal.*",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_LAW_OPERATOR_ROLE_ID,
+      permissionKey: "law.*",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_LAW_OPERATOR_ROLE_ID,
+      permissionKey: "trust.*",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "tenant.*",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "legal.client.view",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "legal.trust.view",
+      grantType: "allow",
+    },
   ] as const;
 
   for (const grant of rolePermissions) {
-    await db.insert(platformAuthorizationRolePermission).values(grant).onConflictDoNothing();
+    await db
+      .insert(platformAuthorizationRolePermission)
+      .values(grant)
+      .onConflictDoNothing();
   }
 }
 
@@ -141,7 +171,9 @@ export async function ensureUserAuthorizationMembership(input: {
         createdAt: timestamp,
         updatedAt: timestamp,
       })
-      .onConflictDoNothing({ target: platformAuthorizationRoleAssignment.assignmentId });
+      .onConflictDoNothing({
+        target: platformAuthorizationRoleAssignment.assignmentId,
+      });
   }
 }
 
@@ -193,14 +225,14 @@ export async function resolvePostgresSessionAuthorization(
   }
 
   const roleRows =
-    roleIds.size === 0
-      ? []
-      : await db.select().from(platformAuthorizationRole);
+    roleIds.size === 0 ? [] : await db.select().from(platformAuthorizationRole);
 
   const applicableRoles = roleRows.filter((role) => {
     if (role.status !== "active") return false;
-    if (input.tenantId && role.tenantId && role.tenantId !== input.tenantId) return false;
-    if (input.productKey && role.productKey && role.productKey !== input.productKey) return false;
+    if (input.tenantId && role.tenantId && role.tenantId !== input.tenantId)
+      return false;
+    if (input.productKey && role.productKey && role.productKey !== input.productKey)
+      return false;
     return roleIds.has(role.roleId);
   });
 

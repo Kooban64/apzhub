@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-groups
+name: Metric Groups
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metric Groups sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metric Groups
+    icon: layers
+    route: /workspace/metrics/groups
+    order: 60
+    permission: metrics.metadata
+  view:
+    title: Metric Groups
+    workspace: metrics
+    route: /workspace/metrics/groups
+    permission: metrics.metadata

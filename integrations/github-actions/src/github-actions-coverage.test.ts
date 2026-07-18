@@ -101,9 +101,9 @@ describe("adapter lifecycle coverage", () => {
     });
 
     const before = await adapter.health(ctx);
-    expect(
-      before.checks.find((c) => c.name === "github_actions_api")?.status,
-    ).toBe("warn");
+    expect(before.checks.find((c) => c.name === "github_actions_api")?.status).toBe(
+      "warn",
+    );
 
     await adapter.testConnection(ctx);
     const after = await adapter.health(ctx);
@@ -155,9 +155,7 @@ describe("bootstrap, errors, operations edges", () => {
       tenantId: TEST_TENANT_ID,
     });
     expect(configuration.connection?.authenticationMode).toBe("bearer");
-    expect(getGitHubActionsExtendedCapabilities(configuration)).toContain(
-      "workflows",
-    );
+    expect(getGitHubActionsExtendedCapabilities(configuration)).toContain("workflows");
 
     const pipeline = createGitHubActionsMappingPipeline();
     expect(pipeline).toBeDefined();

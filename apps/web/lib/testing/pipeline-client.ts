@@ -263,7 +263,8 @@ function toRepository(raw: JsonRecord): PipelineRepositoryViewModel {
     private: Boolean(raw.private),
     htmlUrl: String(raw.htmlUrl ?? ""),
     description: typeof raw.description === "string" ? raw.description : undefined,
-    defaultBranch: typeof raw.defaultBranch === "string" ? raw.defaultBranch : undefined,
+    defaultBranch:
+      typeof raw.defaultBranch === "string" ? raw.defaultBranch : undefined,
     ownerLogin: typeof raw.ownerLogin === "string" ? raw.ownerLogin : undefined,
   };
 }
@@ -359,8 +360,10 @@ function toSorPipeline(raw: JsonRecord): SorPipelineViewModel {
     name: String(raw.name ?? ""),
     providerKind: String(raw.providerKind ?? ""),
     status: String(raw.status ?? ""),
-    defaultBranch: typeof raw.defaultBranch === "string" ? raw.defaultBranch : undefined,
-    repositoryRef: typeof raw.repositoryRef === "string" ? raw.repositoryRef : undefined,
+    defaultBranch:
+      typeof raw.defaultBranch === "string" ? raw.defaultBranch : undefined,
+    repositoryRef:
+      typeof raw.repositoryRef === "string" ? raw.repositoryRef : undefined,
     description: typeof raw.description === "string" ? raw.description : undefined,
     updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : undefined,
   };
@@ -391,7 +394,9 @@ function toLinks(raw: JsonRecord): PipelineLinksViewModel {
     evidenceIds: asStrings(raw.evidenceIds),
     coverageMetricIds: asStrings(raw.coverageMetricIds),
     certificationRecordId:
-      typeof raw.certificationRecordId === "string" ? raw.certificationRecordId : undefined,
+      typeof raw.certificationRecordId === "string"
+        ? raw.certificationRecordId
+        : undefined,
     releaseId: typeof raw.releaseId === "string" ? raw.releaseId : undefined,
     automationImportId:
       typeof raw.automationImportId === "string" ? raw.automationImportId : undefined,

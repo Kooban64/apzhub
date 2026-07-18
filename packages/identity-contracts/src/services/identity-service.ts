@@ -85,23 +85,17 @@ export type IdentityPlatformService = {
     ctx: IdentityRequestContext,
     tenantId: IdentityTenantId,
   ): Promise<IdentityTenant | null>;
-  listDepartments(
-    ctx: IdentityRequestContext,
-  ): Promise<readonly IdentityDepartment[]>;
+  listDepartments(ctx: IdentityRequestContext): Promise<readonly IdentityDepartment[]>;
   getDepartment(
     ctx: IdentityRequestContext,
     departmentId: IdentityDepartmentId,
   ): Promise<IdentityDepartment | null>;
-  listPositions(
-    ctx: IdentityRequestContext,
-  ): Promise<readonly IdentityPosition[]>;
+  listPositions(ctx: IdentityRequestContext): Promise<readonly IdentityPosition[]>;
   getPosition(
     ctx: IdentityRequestContext,
     positionId: IdentityPositionId,
   ): Promise<IdentityPosition | null>;
-  listEmployments(
-    ctx: IdentityRequestContext,
-  ): Promise<readonly IdentityEmployment[]>;
+  listEmployments(ctx: IdentityRequestContext): Promise<readonly IdentityEmployment[]>;
   getEmployment(
     ctx: IdentityRequestContext,
     employmentId: IdentityEmploymentId,
@@ -113,23 +107,17 @@ export type IdentityPlatformService = {
     ctx: IdentityRequestContext,
     assignmentId: IdentityServiceAssignmentId,
   ): Promise<IdentityServiceAssignment | null>;
-  listMemberships(
-    ctx: IdentityRequestContext,
-  ): Promise<readonly IdentityMembership[]>;
+  listMemberships(ctx: IdentityRequestContext): Promise<readonly IdentityMembership[]>;
   getMembership(
     ctx: IdentityRequestContext,
     membershipId: IdentityMembershipId,
   ): Promise<IdentityMembership | null>;
-  listInvitations(
-    ctx: IdentityRequestContext,
-  ): Promise<readonly IdentityInvitation[]>;
+  listInvitations(ctx: IdentityRequestContext): Promise<readonly IdentityInvitation[]>;
   getInvitation(
     ctx: IdentityRequestContext,
     invitationId: IdentityInvitationId,
   ): Promise<IdentityInvitation | null>;
-  listActivations(
-    ctx: IdentityRequestContext,
-  ): Promise<readonly IdentityActivation[]>;
+  listActivations(ctx: IdentityRequestContext): Promise<readonly IdentityActivation[]>;
   getActivation(
     ctx: IdentityRequestContext,
     activationId: IdentityActivationId,
@@ -151,9 +139,7 @@ export type IdentityPlatformService = {
     ctx: IdentityRequestContext,
     policyId: IdentityPolicyId,
   ): Promise<IdentityPolicy | null>;
-  listAudits(
-    ctx: IdentityRequestContext,
-  ): Promise<readonly IdentityAuditEntry[]>;
+  listAudits(ctx: IdentityRequestContext): Promise<readonly IdentityAuditEntry[]>;
   getAudit(
     ctx: IdentityRequestContext,
     auditId: IdentityAuditId,

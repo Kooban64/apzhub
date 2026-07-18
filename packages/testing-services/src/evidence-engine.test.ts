@@ -72,11 +72,16 @@ describe("evidence engine", () => {
       title: "Note",
       storageRef: "temp://x",
     });
-    const bound = await svc.evidence.bindStorageRef(rctx, registered.id, put.storageRef, {
-      contentType: put.contentType,
-      sizeBytes: put.sizeBytes,
-      contentHash: put.contentHash,
-    });
+    const bound = await svc.evidence.bindStorageRef(
+      rctx,
+      registered.id,
+      put.storageRef,
+      {
+        contentType: put.contentType,
+        sizeBytes: put.sizeBytes,
+        contentHash: put.contentHash,
+      },
+    );
     expect(bound.storageRef).toBe(put.storageRef);
 
     const captured = await svc.evidence.captureEvidence(rctx, {

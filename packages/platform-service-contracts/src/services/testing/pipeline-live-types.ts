@@ -73,9 +73,4 @@ export interface PipelineProviderImportInput {
   readonly pipelineId?: string;
 }
 
-export type {
-  ArtifactReference,
-  PipelineJob,
-  PipelineStep,
-  PipelineSummary,
-};
+export type { ArtifactReference, PipelineJob, PipelineStep, PipelineSummary };

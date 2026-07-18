@@ -41,13 +41,7 @@ import {
 } from "./testing-ui";
 
 type EiPanel =
-  | "overview"
-  | "score"
-  | "health"
-  | "trends"
-  | "risk"
-  | "benchmarks"
-  | "historical";
+  "overview" | "score" | "health" | "trends" | "risk" | "benchmarks" | "historical";
 
 const PANELS: readonly { readonly id: EiPanel; readonly label: string }[] = [
   { id: "overview", label: "Executive Overview" },
@@ -171,10 +165,7 @@ export function TestingEngineeringIntelligenceView({
   }
 
   const firstError =
-    scoreQuery.error ??
-    healthQuery.error ??
-    riskQuery.error ??
-    trendsQuery.error;
+    scoreQuery.error ?? healthQuery.error ?? riskQuery.error ?? trendsQuery.error;
 
   if (firstError) {
     return (
@@ -322,10 +313,7 @@ export function TestingEngineeringIntelligenceView({
                   : "danger"
             }
           />
-          <TestingStatCard
-            label="Coverage"
-            value={health.coverageScore.toFixed(1)}
-          />
+          <TestingStatCard label="Coverage" value={health.coverageScore.toFixed(1)} />
           <TestingStatCard
             label="Automation"
             value={health.automationScore.toFixed(1)}
@@ -385,10 +373,7 @@ export function TestingEngineeringIntelligenceView({
               },
               {
                 id: "release",
-                cells: [
-                  "Release readiness",
-                  String(health.releaseReadinessScore),
-                ],
+                cells: ["Release readiness", String(health.releaseReadinessScore)],
               },
               {
                 id: "coverage",
@@ -502,13 +487,7 @@ export function TestingEngineeringIntelligenceView({
             ) : (
               <TestingTable
                 caption="Benchmarks"
-                columns={[
-                  "Metric",
-                  "Current",
-                  "Previous",
-                  "Baseline",
-                  "Direction",
-                ]}
+                columns={["Metric", "Current", "Previous", "Baseline", "Direction"]}
                 rows={(benchmarksQuery.data?.items ?? []).map((r) => ({
                   id: r.id,
                   cells: [
@@ -516,10 +495,7 @@ export function TestingEngineeringIntelligenceView({
                     String(r.comparison.current),
                     String(r.comparison.previous ?? "—"),
                     String(r.comparison.baseline ?? "—"),
-                    <StatusBadge
-                      key="dir"
-                      status={r.comparison.direction}
-                    />,
+                    <StatusBadge key="dir" status={r.comparison.direction} />,
                   ],
                 }))}
               />
@@ -553,12 +529,7 @@ export function TestingEngineeringIntelligenceView({
                 columns={["Kind", "Metric", "Value", "Label"]}
                 rows={(baselinesQuery.data?.items ?? []).map((r) => ({
                   id: r.id,
-                  cells: [
-                    r.kind,
-                    r.metricKey,
-                    String(r.value),
-                    r.label ?? "—",
-                  ],
+                  cells: [r.kind, r.metricKey, String(r.value), r.label ?? "—"],
                 }))}
               />
             )}
@@ -573,9 +544,7 @@ export function TestingEngineeringIntelligenceView({
               <LoadingState label="Loading historical data…" />
             ) : (
               <>
-                <h3 className="mb-2 text-sm font-medium">
-                  Immutable period captures
-                </h3>
+                <h3 className="mb-2 text-sm font-medium">Immutable period captures</h3>
                 {(historicalQuery.data?.items.length ?? 0) === 0 ? (
                   <EmptyState title="No historical snapshots" />
                 ) : (
@@ -593,9 +562,7 @@ export function TestingEngineeringIntelligenceView({
                     }))}
                   />
                 )}
-                <h3 className="mb-2 mt-6 text-sm font-medium">
-                  Engineering snapshots
-                </h3>
+                <h3 className="mb-2 mt-6 text-sm font-medium">Engineering snapshots</h3>
                 {(snapshotsQuery.data?.items.length ?? 0) === 0 ? (
                   <EmptyState title="No engineering snapshots" />
                 ) : (

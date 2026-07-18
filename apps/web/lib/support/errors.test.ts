@@ -12,7 +12,9 @@ describe("SupportApiError", () => {
       requestId: "r1",
     });
     expect(forbidden.code).toBe("FORBIDDEN");
-    expect(forbidden.message).toBe("You do not have permission to perform this action.");
+    expect(forbidden.message).toBe(
+      "You do not have permission to perform this action.",
+    );
     expect(forbidden.correlationId).toBe("c1");
 
     const unavailable = SupportApiError.fromHttp({

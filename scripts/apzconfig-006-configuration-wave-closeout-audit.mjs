@@ -83,7 +83,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.23.0",
+  "0.25.0",
   "version-platform-services",
 );
 requirePackageVersion(
@@ -190,9 +190,7 @@ for (const omitted of [
 // ---------------------------------------------------------------------------
 // Re-exec vertical certification (programme consistency 001–005)
 // ---------------------------------------------------------------------------
-const priorAudits = [
-  "scripts/apzconfig-005-configuration-vertical-audit.mjs",
-];
+const priorAudits = ["scripts/apzconfig-005-configuration-vertical-audit.mjs"];
 
 for (const script of priorAudits) {
   const full = join(ROOT, script);
@@ -241,7 +239,9 @@ console.log("APZCONFIG-006 Configuration Wave Closeout Audit PASSED");
 console.log("RESULT: PASS");
 console.log("Violations: 0");
 console.log("  - Programme 001–005 vertical retained PASS");
-console.log("  - Architecture freeze + reference standard + operational readiness present");
+console.log(
+  "  - Architecture freeze + reference standard + operational readiness present",
+);
 console.log("  - Package versions frozen; no runtime/secrets routes");
 console.log("  - Classification PRODUCTION_READY_WITH_LIMITATIONS retained");
 if (observations.length > 0) {

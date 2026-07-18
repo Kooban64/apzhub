@@ -38,10 +38,7 @@ import {
   normalizeListQuery,
   paginateItems,
 } from "../types";
-import {
-  baseMeta,
-  createInMemoryCrudRepository,
-} from "../in-memory/generic-crud";
+import { baseMeta, createInMemoryCrudRepository } from "../in-memory/generic-crud";
 
 export interface AutomationInMemoryStores {
   automationImports: Map<string, AutomationImportRecord>;
@@ -143,8 +140,8 @@ export function createInMemoryAutomationRepos(stores: AutomationInMemoryStores):
             (input.completedAt as string | undefined) ?? existing?.completedAt,
           canonicalSnapshot:
             (input.canonicalSnapshot as
-              | Readonly<Record<string, unknown>>
-              | undefined) ?? existing?.canonicalSnapshot,
+              Readonly<Record<string, unknown>> | undefined) ??
+            existing?.canonicalSnapshot,
           automatedExecutionId:
             (input.automatedExecutionId as string | undefined) ??
             existing?.automatedExecutionId,

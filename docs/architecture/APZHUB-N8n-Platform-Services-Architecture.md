@@ -52,11 +52,11 @@ Mutations (`create` / `update` / `delete` / `execute`) always reject as `PROVIDE
 
 ## Bootstrap
 
-| Factory | Behaviour |
-| --- | --- |
-| `createWorkflowEngineServicesForProduction({ adapter })` | Requires explicit `N8nAdapter` — no mock / in-memory fallback |
-| `createWorkflowEngineServicesForTest({ adapter \| allowUnavailableEngine })` | Mock adapter or unavailable stubs |
-| `createWorkflowPlatformServices*(…, { engine })` | Injects prebuilt engine bundle; omit → unavailable stubs |
+| Factory                                                                      | Behaviour                                                     |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `createWorkflowEngineServicesForProduction({ adapter })`                     | Requires explicit `N8nAdapter` — no mock / in-memory fallback |
+| `createWorkflowEngineServicesForTest({ adapter \| allowUnavailableEngine })` | Mock adapter or unavailable stubs                             |
+| `createWorkflowPlatformServices*(…, { engine })`                             | Injects prebuilt engine bundle; omit → unavailable stubs      |
 
 ---
 

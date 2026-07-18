@@ -209,4 +209,4 @@ No evidence of critical performance defects at current scale. Architectural choi
 
 ---
 
-_Related: [Testing Review](./APZHUB-Platform-Testing-Review.md) · [LAW-013 Performance](../reviews/LAW-013-performance-assessment.md)_
+_Related: [Testing Review](./APZHUB-Platform-Testing-Review.md) · [LAW-013 Performance](../reviews/LAW-013-performance-review.md)_

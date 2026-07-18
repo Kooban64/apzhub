@@ -48,18 +48,17 @@ export interface ProductSearchAdapter {
   }>;
 }
 
-export const DECLARED_PRODUCT_SEARCH_ADAPTERS: readonly ProductSearchAdapterId[] =
-  [
-    "projects",
-    "support",
-    "documents",
-    "testing",
-    "reporting",
-    "workflow",
-    "analytics",
-    "identity",
-    "administration",
-  ] as const;
+export const DECLARED_PRODUCT_SEARCH_ADAPTERS: readonly ProductSearchAdapterId[] = [
+  "projects",
+  "support",
+  "documents",
+  "testing",
+  "reporting",
+  "workflow",
+  "analytics",
+  "identity",
+  "administration",
+] as const;
 
 export function isDeclaredProductSearchAdapter(
   value: string,

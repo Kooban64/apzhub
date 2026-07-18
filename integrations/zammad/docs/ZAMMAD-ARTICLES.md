@@ -23,24 +23,24 @@ adapter.core.articles
 
 ## Distinction
 
-| Concept | Domain | DTO |
-| --- | --- | --- |
-| Support Request | Support | `SupportTicket` |
-| Support Article / Message | Support | `SupportArticle` |
-| Project Task | Projects | `Task` |
-| Project Comment | Projects | `Comment` |
+| Concept                   | Domain   | DTO              |
+| ------------------------- | -------- | ---------------- |
+| Support Request           | Support  | `SupportTicket`  |
+| Support Article / Message | Support  | `SupportArticle` |
+| Project Task              | Projects | `Task`           |
+| Project Comment           | Projects | `Comment`        |
 
 ---
 
 ## Supported operations
 
-| Method | Operation name | Notes |
-| --- | --- | --- |
-| `list` | `zammad.articles.list` | By support ticket; filter/sort/paginate client-side |
-| `get` | `zammad.articles.get` | Verifies ticket relationship |
-| `createNote` | `zammad.articles.createNote` | **Always** `internal=true`, channel `note` |
-| `createReply` | `zammad.articles.createReply` | **Always** `internal=false` |
-| `create` | routes to note/reply | Requires explicit `visibility` |
+| Method        | Operation name                | Notes                                               |
+| ------------- | ----------------------------- | --------------------------------------------------- |
+| `list`        | `zammad.articles.list`        | By support ticket; filter/sort/paginate client-side |
+| `get`         | `zammad.articles.get`         | Verifies ticket relationship                        |
+| `createNote`  | `zammad.articles.createNote`  | **Always** `internal=true`, channel `note`          |
+| `createReply` | `zammad.articles.createReply` | **Always** `internal=false`                         |
+| `create`      | routes to note/reply          | Requires explicit `visibility`                      |
 
 ### Unsupported mutations
 
@@ -51,10 +51,10 @@ These operations are **not** exposed. Diagnostics list `unsupportedArticleMutati
 
 ## Visibility rules
 
-| Canonical | Zammad `internal` | Default create behaviour |
-| --- | --- | --- |
-| `internal` | `true` | `createNote` — never customer-visible |
-| `public` | `false` | `createReply` — customer-visible |
+| Canonical  | Zammad `internal` | Default create behaviour              |
+| ---------- | ----------------- | ------------------------------------- |
+| `internal` | `true`            | `createNote` — never customer-visible |
+| `public`   | `false`           | `createReply` — customer-visible      |
 
 Internal-note creation **never** defaults to public. Tests assert request payload `internal === true`.
 
@@ -62,16 +62,16 @@ Internal-note creation **never** defaults to public. Tests assert request payloa
 
 ## Channel mapping
 
-| Zammad `type` (examples) | Canonical `SupportArticleChannel` |
-| --- | --- |
-| `note` | `note` |
-| `email`, `email outbound/inbound` | `email` |
-| `phone` | `phone` |
-| `web` | `web` |
-| `chat` | `chat` |
-| `sms` | `sms` |
-| `fax` | `fax` |
-| unknown / social | `unknown` |
+| Zammad `type` (examples)          | Canonical `SupportArticleChannel` |
+| --------------------------------- | --------------------------------- |
+| `note`                            | `note`                            |
+| `email`, `email outbound/inbound` | `email`                           |
+| `phone`                           | `phone`                           |
+| `web`                             | `web`                             |
+| `chat`                            | `chat`                            |
+| `sms`                             | `sms`                             |
+| `fax`                             | `fax`                             |
+| unknown / social                  | `unknown`                         |
 
 Unknown values map safely to `unknown` without corrupting the model.
 
@@ -79,11 +79,11 @@ Unknown values map safely to `unknown` without corrupting the model.
 
 ## Body formats
 
-| Canonical | Zammad `content_type` |
-| --- | --- |
+| Canonical    | Zammad `content_type` |
+| ------------ | --------------------- |
 | `text/plain` | `text/plain` / `text` |
-| `text/html` | contains `html` |
-| `unknown` | other |
+| `text/html`  | contains `html`       |
+| `unknown`    | other                 |
 
 The adapter **does not** sanitise or render HTML. Presentation sanitisation is a future consumer responsibility.
 
@@ -114,11 +114,11 @@ Inline `dataBase64` on create descriptors is optional for provider association o
 
 ## IDs
 
-| Entity | Provisional prefix |
-| --- | --- |
-| Article | `sart_zammad_` |
-| Attachment | `satt_zammad_` |
-| Ticket | `sreq_zammad_` |
+| Entity     | Provisional prefix |
+| ---------- | ------------------ |
+| Article    | `sart_zammad_`     |
+| Attachment | `satt_zammad_`     |
+| Ticket     | `sreq_zammad_`     |
 
 ---
 

@@ -20,7 +20,9 @@ import { MOCK_TICKET, MOCK_WEBHOOK } from "./testing/mock-zammad-core-data";
 
 const ctx = { correlationId: TEST_CORRELATION_ID, tenantId: TEST_TENANT_ID };
 
-async function createAdapter(fetchOptions?: Parameters<typeof createMockZammadFetch>[0]) {
+async function createAdapter(
+  fetchOptions?: Parameters<typeof createMockZammadFetch>[0],
+) {
   return createZammadAdapter({
     zammad: DEFAULT_TEST_ZAMMAD_CONFIG,
     tenantId: TEST_TENANT_ID,
@@ -52,7 +54,9 @@ describe("OSS-102-06 capability registration", () => {
     expect(extension.syncEventsCapability.webhooksRegistered).toBe(true);
     expect(extension.syncEventsCapability.eventsRegistered).toBe(true);
     expect(extension.syncEventsCapability.synchronisationRegistered).toBe(true);
-    expect(extension.syncEventsCapability.supportedWebhookOperations).toContain("create");
+    expect(extension.syncEventsCapability.supportedWebhookOperations).toContain(
+      "create",
+    );
     expect(extension.syncEventsCapability.supportedEventTypes).toContain("ticket");
     expect(extension.syncEventsCapability.syncReadiness).toBe(true);
     expect(extension.syncEventsCapability.webhookReadiness).toBe(true);
@@ -261,7 +265,9 @@ describe("ZammadSyncService", () => {
       since: "2026-01-01T00:00:00.000Z",
     });
     expect(incremental.status.status).toBe("succeeded");
-    expect(adapter.core.synchronisation.getDiagnostics().supportsIncremental).toBe(true);
+    expect(adapter.core.synchronisation.getDiagnostics().supportsIncremental).toBe(
+      true,
+    );
   });
 
   it("supports safe restart and resume tokens after failure", async () => {
@@ -271,12 +277,15 @@ describe("ZammadSyncService", () => {
     expect(failed.status).toBe("failed");
     expect(failed.lastFailedSyncAt).toBeDefined();
     expect(failed.cursor.resumeToken).toBeDefined();
-    expect(adapter.core.synchronisation.getDiagnostics().retryCounts).toBeGreaterThan(0);
+    expect(adapter.core.synchronisation.getDiagnostics().retryCounts).toBeGreaterThan(
+      0,
+    );
 
-    (adapter.core.synchronisation as unknown as { status: { status: string } }).status = {
-      ...(adapter.core.synchronisation.getSyncState() as object),
-      status: "running",
-    } as never;
+    (adapter.core.synchronisation as unknown as { status: { status: string } }).status =
+      {
+        ...(adapter.core.synchronisation.getSyncState() as object),
+        status: "running",
+      } as never;
     const restarted = adapter.core.synchronisation.safeRestart();
     expect(restarted.status).toBe("idle");
     expect(restarted.errors).toContain("safe_restart_cleared_running_state");
@@ -284,8 +293,11 @@ describe("ZammadSyncService", () => {
 
   it("resumes with an explicit resume token on a healthy provider", async () => {
     const failing = await createAdapter({ failSync: true });
-    await expect(failing.adapter.core.synchronisation.runFullSync(ctx)).rejects.toBeTruthy();
-    const token = failing.adapter.core.synchronisation.getSyncState().cursor.resumeToken;
+    await expect(
+      failing.adapter.core.synchronisation.runFullSync(ctx),
+    ).rejects.toBeTruthy();
+    const token =
+      failing.adapter.core.synchronisation.getSyncState().cursor.resumeToken;
     expect(token).toBeTruthy();
 
     const healthy = await createAdapter();

@@ -46,17 +46,13 @@ describe("PlatformWorkflowEngineView", () => {
     render(wrap(<PlatformWorkflowEngineView section="overview" />));
 
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
       expect(screen.getByTestId("card-readonly-engine").textContent).toContain(
         "READ-ONLY ENGINE",
       );
     });
 
-    expect(screen.getByTestId("card-total-workflows").textContent).toContain(
-      "1",
-    );
+    expect(screen.getByTestId("card-total-workflows").textContent).toContain("1");
     expect(
       screen.getByRole("toolbar", { name: /Workflow Engine commands/i }),
     ).toBeTruthy();
@@ -157,9 +153,7 @@ describe("PlatformWorkflowEngineView", () => {
     );
     await waitFor(() => {
       expect(screen.getByTestId("workflow-engine-capabilities")).toBeTruthy();
-      expect(
-        screen.getByRole("heading", { name: /^Unsupported$/i }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { name: /^Unsupported$/i })).toBeTruthy();
     });
 
     rerender(wrap(<PlatformWorkflowEngineView section="health" />));
@@ -192,12 +186,7 @@ describe("PlatformWorkflowEngineView", () => {
     });
 
     rerender(
-      wrap(
-        <PlatformWorkflowEngineView
-          section="health"
-          canViewHealth={false}
-        />,
-      ),
+      wrap(<PlatformWorkflowEngineView section="health" canViewHealth={false} />),
     );
     await waitFor(() => {
       expect(screen.getByTestId("workflow-engine-forbidden")).toBeTruthy();
@@ -205,10 +194,7 @@ describe("PlatformWorkflowEngineView", () => {
 
     rerender(
       wrap(
-        <PlatformWorkflowEngineView
-          section="diagnostics"
-          canViewDiagnostics={false}
-        />,
+        <PlatformWorkflowEngineView section="diagnostics" canViewDiagnostics={false} />,
       ),
     );
     await waitFor(() => {
@@ -261,9 +247,7 @@ describe("PlatformWorkflowEngineView", () => {
         screen.getByTestId(`workflow-engine-row-${MOCK_ENGINE_WORKFLOW.id}`),
       ).toBeTruthy();
     });
-    const row = screen.getByTestId(
-      `workflow-engine-row-${MOCK_ENGINE_WORKFLOW.id}`,
-    );
+    const row = screen.getByTestId(`workflow-engine-row-${MOCK_ENGINE_WORKFLOW.id}`);
     row.focus();
     await user.keyboard("{Enter}");
     await waitFor(() => {
@@ -331,9 +315,9 @@ describe("PlatformWorkflowEngineView", () => {
     await user.click(screen.getByTestId("workflow-engine-validate"));
     await waitFor(() => {
       expect(validate).toHaveBeenCalled();
-      expect(
-        screen.getByTestId("workflow-engine-status").textContent,
-      ).toMatch(/Engine unreachable/i);
+      expect(screen.getByTestId("workflow-engine-status").textContent).toMatch(
+        /Engine unreachable/i,
+      );
     });
   });
 
@@ -356,9 +340,7 @@ describe("PlatformWorkflowEngineView", () => {
     });
     await user.click(screen.getByTestId("workflow-engine-validate"));
     await waitFor(() => {
-      expect(
-        screen.getByText(/temporarily unavailable/i),
-      ).toBeTruthy();
+      expect(screen.getByText(/temporarily unavailable/i)).toBeTruthy();
     });
   });
 
@@ -492,9 +474,7 @@ describe("PlatformWorkflowEngineView", () => {
       expect(screen.getByTestId("card-platform-health").textContent).toContain(
         "hidden",
       );
-      expect(screen.getByTestId("card-compatibility").textContent).toContain(
-        "hidden",
-      );
+      expect(screen.getByTestId("card-compatibility").textContent).toContain("hidden");
     });
 
     const { rerender } = render(
@@ -509,12 +489,7 @@ describe("PlatformWorkflowEngineView", () => {
       expect(screen.getByTestId("workflow-engine-forbidden")).toBeTruthy();
     });
     rerender(
-      wrap(
-        <PlatformWorkflowEngineView
-          section="compatibility"
-          canViewCapabilities
-        />,
-      ),
+      wrap(<PlatformWorkflowEngineView section="compatibility" canViewCapabilities />),
     );
     await waitFor(() => {
       expect(screen.getByTestId("workflow-engine-compatibility")).toBeTruthy();
@@ -650,9 +625,7 @@ describe("PlatformWorkflowEngineView", () => {
         screen.getByTestId(`workflow-engine-row-${MOCK_ENGINE_WORKFLOW.id}`),
       ).toBeTruthy();
     });
-    const row = screen.getByTestId(
-      `workflow-engine-row-${MOCK_ENGINE_WORKFLOW.id}`,
-    );
+    const row = screen.getByTestId(`workflow-engine-row-${MOCK_ENGINE_WORKFLOW.id}`);
     row.focus();
     await user.keyboard(" ");
     await waitFor(() => {
@@ -720,8 +693,7 @@ describe("EngineDefinitionViewer", () => {
     );
     expect(screen.getAllByText(/^None$/).length).toBeGreaterThan(0);
     expect(
-      screen.getAllByText(/not returned by the read-only engine client/i)
-        .length,
+      screen.getAllByText(/not returned by the read-only engine client/i).length,
     ).toBeGreaterThan(0);
   });
 });
@@ -735,9 +707,7 @@ describe("WorkflowEngineWorkspaceRouter", () => {
   it("resolves overview from pathname", async () => {
     render(wrap(<WorkflowEngineWorkspaceRouter />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
     });
   });
 });

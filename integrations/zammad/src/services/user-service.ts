@@ -78,7 +78,9 @@ export class ZammadUserService {
 
       result = {
         ...result,
-        items: applyClientFilters(result.items, (user) => matchesUserFilter(user, filter)),
+        items: applyClientFilters(result.items, (user) =>
+          matchesUserFilter(user, filter),
+        ),
       };
 
       if (sort.length > 0) {
@@ -98,10 +100,7 @@ export class ZammadUserService {
     });
   }
 
-  async get(
-    context: IntegrationRequestContext,
-    userId: string,
-  ): Promise<SupportUser> {
+  async get(context: IntegrationRequestContext, userId: string): Promise<SupportUser> {
     return this.deps.runner.run(context, "users.get", async () => {
       const record = await this.deps.client.getUser(
         context,
@@ -128,7 +127,10 @@ export class ZammadUserService {
     );
 
     const query = input.email?.trim() || input.login?.trim() || "";
-    const page = await this.search(context, query, { email: input.email, login: input.login });
+    const page = await this.search(context, query, {
+      email: input.email,
+      login: input.login,
+    });
     return page.items[0];
   }
 
@@ -168,7 +170,9 @@ export class ZammadUserService {
 
       result = {
         ...result,
-        items: applyClientFilters(result.items, (user) => matchesUserFilter(user, filter)),
+        items: applyClientFilters(result.items, (user) =>
+          matchesUserFilter(user, filter),
+        ),
       };
 
       return result;
@@ -176,10 +180,7 @@ export class ZammadUserService {
   }
 }
 
-function matchesUserFilter(
-  user: SupportUser,
-  filter: SupportUserListFilter,
-): boolean {
+function matchesUserFilter(user: SupportUser, filter: SupportUserListFilter): boolean {
   if (filter.active !== undefined && user.active !== filter.active) return false;
   if (filter.role && user.role !== filter.role) return false;
   if (filter.email && user.email?.toLowerCase() !== filter.email.toLowerCase()) {
@@ -189,7 +190,8 @@ function matchesUserFilter(
     return false;
   }
   if (filter.search) {
-    const haystack = `${user.displayName} ${user.email ?? ""} ${user.login ?? ""}`.toLowerCase();
+    const haystack =
+      `${user.displayName} ${user.email ?? ""} ${user.login ?? ""}`.toLowerCase();
     if (!haystack.includes(filter.search.toLowerCase())) return false;
   }
   return true;

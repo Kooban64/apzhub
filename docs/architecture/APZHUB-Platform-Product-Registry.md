@@ -1,19 +1,19 @@
 # APZHUB Platform Product Registry
 
-**Milestone:** APZTCMS-014  
+**Milestone:** APZTCMS-014
 
 ## Canonical products
 
-| Key | Display name (default) |
-| --- | ---------------------- |
-| projects | Projects |
-| support | Support |
-| testing | Testing |
-| identity | Identity |
-| documents | Documents |
-| analytics | Analytics |
-| workflow | Workflow |
-| administration | Administration |
+| Key            | Display name (default) |
+| -------------- | ---------------------- |
+| projects       | Projects               |
+| support        | Support                |
+| testing        | Testing                |
+| identity       | Identity               |
+| documents      | Documents              |
+| analytics      | Analytics              |
+| workflow       | Workflow               |
+| administration | Administration         |
 
 ## Fields per product
 

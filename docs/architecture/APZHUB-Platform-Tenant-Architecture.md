@@ -16,25 +16,25 @@ APZHUB owns tenant metadata as platform data. Backend engines (Law, future produ
 
 ### `platform_tenant`
 
-| Column | Type | Notes |
-| ------ | ---- | ----- |
-| `tenant_id` | text PK | Stable platform ID (e.g. `t0000001-…`) |
-| `slug` | text unique | URL-safe identifier |
-| `name` | text | Display name |
-| `status` | text | `active` \| `suspended` \| `archived` |
-| `metadata` | jsonb | Product keys, display hints (non-authoritative for RBAC) |
-| `created_at`, `updated_at` | timestamptz | Audit |
+| Column                     | Type        | Notes                                                    |
+| -------------------------- | ----------- | -------------------------------------------------------- |
+| `tenant_id`                | text PK     | Stable platform ID (e.g. `t0000001-…`)                   |
+| `slug`                     | text unique | URL-safe identifier                                      |
+| `name`                     | text        | Display name                                             |
+| `status`                   | text        | `active` \| `suspended` \| `archived`                    |
+| `metadata`                 | jsonb       | Product keys, display hints (non-authoritative for RBAC) |
+| `created_at`, `updated_at` | timestamptz | Audit                                                    |
 
 ### `platform_user_tenant`
 
-| Column | Type | Notes |
-| ------ | ---- | ----- |
-| `membership_id` | text PK | |
-| `user_id` | text FK → `user.id` | Better Auth user |
-| `tenant_id` | text FK → `platform_tenant.tenant_id` | |
-| `is_primary` | boolean | Primary tenant for session default |
-| `status` | text | `active` \| `inactive` |
-| `created_at`, `updated_at` | timestamptz | Audit |
+| Column                     | Type                                  | Notes                              |
+| -------------------------- | ------------------------------------- | ---------------------------------- |
+| `membership_id`            | text PK                               |                                    |
+| `user_id`                  | text FK → `user.id`                   | Better Auth user                   |
+| `tenant_id`                | text FK → `platform_tenant.tenant_id` |                                    |
+| `is_primary`               | boolean                               | Primary tenant for session default |
+| `status`                   | text                                  | `active` \| `inactive`             |
+| `created_at`, `updated_at` | timestamptz                           | Audit                              |
 
 ### `user.active_tenant_id`
 
@@ -46,10 +46,10 @@ Better Auth additional field mapped to `active_tenant_id`. Session resolution pr
 
 ## Default tenant
 
-| Constant | Value |
-| -------- | ----- |
+| Constant                     | Value                                  |
+| ---------------------------- | -------------------------------------- |
 | `DEFAULT_PLATFORM_TENANT_ID` | `t0000001-0000-4000-8000-000000000001` |
-| Default slug | `default-firm` |
+| Default slug                 | `default-firm`                         |
 
 Aligned with Law Platform `DEFAULT_LAW_TENANT_ID` for single-firm migration paths. Seed runs via `packages/config/src/db/seed.ts` and `seedDefaultPlatformTenantRow()`.
 
@@ -59,14 +59,14 @@ Aligned with Law Platform `DEFAULT_LAW_TENANT_ID` for single-firm migration path
 
 Platform service (in `@apzhub/platform-identity`):
 
-| Operation | Description |
-| --------- | ----------- |
-| `createTenant` | Register tenant with slug uniqueness |
-| `getTenant` / `listTenants` | Read |
-| `suspendTenant` / `activateTenant` / `archiveTenant` | Lifecycle |
-| `assignUserToTenant` | Membership + optional primary |
-| `listUserTenants` / `listTenantUsers` | Membership queries |
-| `getDiagnostics` | Counts for health/admin |
+| Operation                                            | Description                          |
+| ---------------------------------------------------- | ------------------------------------ |
+| `createTenant`                                       | Register tenant with slug uniqueness |
+| `getTenant` / `listTenants`                          | Read                                 |
+| `suspendTenant` / `activateTenant` / `archiveTenant` | Lifecycle                            |
+| `assignUserToTenant`                                 | Membership + optional primary        |
+| `listUserTenants` / `listTenantUsers`                | Membership queries                   |
+| `getDiagnostics`                                     | Counts for health/admin              |
 
 **Stores:**
 
@@ -106,11 +106,11 @@ Production multi-tenant deployments must supply session tenant; fallback is deve
 
 ## Diagnostics
 
-| Source | Fields |
-| ------ | ------ |
-| `TenantManagementService.getDiagnostics()` | tenantCount, activeTenantCount, membershipCount, primaryMembershipCount |
-| `GET /api/platform/v1/identity/diagnostics` | in-memory + postgres counts, session tenant snapshot |
-| Law persistence diagnostics | `tenantSource` includes `session-claim` |
+| Source                                      | Fields                                                                  |
+| ------------------------------------------- | ----------------------------------------------------------------------- |
+| `TenantManagementService.getDiagnostics()`  | tenantCount, activeTenantCount, membershipCount, primaryMembershipCount |
+| `GET /api/platform/v1/identity/diagnostics` | in-memory + postgres counts, session tenant snapshot                    |
+| Law persistence diagnostics                 | `tenantSource` includes `session-claim`                                 |
 
 ---
 

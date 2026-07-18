@@ -5,15 +5,15 @@
 
 ## Certified properties
 
-| Property | Status |
-| --- | --- |
-| Catch-all mount via `AdministrationWorkspaceRouter` | PASS |
-| Typed-client facades only (`administration-api`) | PASS |
-| Capability banners (runtime / provision / execution / …) | PASS |
-| Unavailable cards (users / roles / tenants / Event Bus / AI …) | PASS |
-| Child manifests for all required sections | PASS |
-| No direct `fetch` / localStorage / gateway / core | PASS |
-| Distinct from Platform Operations `/workspace/operations` | PASS |
+| Property                                                       | Status |
+| -------------------------------------------------------------- | ------ |
+| Catch-all mount via `AdministrationWorkspaceRouter`            | PASS   |
+| Typed-client facades only (`administration-api`)               | PASS   |
+| Capability banners (runtime / provision / execution / …)       | PASS   |
+| Unavailable cards (users / roles / tenants / Event Bus / AI …) | PASS   |
+| Child manifests for all required sections                      | PASS   |
+| No direct `fetch` / localStorage / gateway / core              | PASS   |
+| Distinct from Platform Operations `/workspace/operations`      | PASS   |
 
 ## Manifests
 

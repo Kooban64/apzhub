@@ -42,7 +42,9 @@ describe("legal search tenant isolation", () => {
     registerLegalSearchKnowledgeProviders(bootstrap.registry);
     const provider = bootstrap.registry.getProvider(LEGAL_CLIENT_SEARCH_SOURCE_ID)!;
 
-    const tenantContext = createLawPersistenceContext({ tenantId: DEFAULT_LAW_TENANT_ID });
+    const tenantContext = createLawPersistenceContext({
+      tenantId: DEFAULT_LAW_TENANT_ID,
+    });
 
     const client = ClientFactory.create({
       displayName: "Scoped Search Client",

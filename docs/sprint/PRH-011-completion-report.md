@@ -12,22 +12,22 @@ Perform complete architectural compliance review of Platform Core and produce Pl
 
 ### Compliance review artifacts
 
-| Document | Location |
-|----------|----------|
-| Architecture Compliance Report | `docs/reviews/APZHUB-Architecture-Compliance-Report.md` |
-| Capability Certification Matrix | `docs/reviews/APZHUB-Capability-Certification-Matrix.md` |
-| Dependency Review | `docs/reviews/APZHUB-Platform-Dependency-Review.md` |
-| Package Review | `docs/reviews/APZHUB-Platform-Package-Review.md` |
-| Platform Boundary Review | `docs/reviews/APZHUB-Platform-Boundary-Review.md` |
-| Commercial Readiness Update | `docs/reviews/APZHUB-Platform-Core-v2-Commercial-Readiness-Update.md` |
-| Technical Debt Review | `docs/reviews/APZHUB-Platform-Core-v2-Technical-Debt-Review.md` |
-| Platform Core v2 Certification | `docs/reviews/APZHUB-Platform-Core-v2-Certification.md` |
+| Document                        | Location                                                              |
+| ------------------------------- | --------------------------------------------------------------------- |
+| Architecture Compliance Report  | `docs/reviews/APZHUB-Architecture-Compliance-Report.md`               |
+| Capability Certification Matrix | `docs/reviews/APZHUB-Capability-Certification-Matrix.md`              |
+| Dependency Review               | `docs/reviews/APZHUB-Platform-Dependency-Review.md`                   |
+| Package Review                  | `docs/reviews/APZHUB-Platform-Package-Review.md`                      |
+| Platform Boundary Review        | `docs/reviews/APZHUB-Platform-Boundary-Review.md`                     |
+| Commercial Readiness Update     | `docs/reviews/APZHUB-Platform-Core-v2-Commercial-Readiness-Update.md` |
+| Technical Debt Review           | `docs/reviews/APZHUB-Platform-Core-v2-Technical-Debt-Review.md`       |
+| Platform Core v2 Certification  | `docs/reviews/APZHUB-Platform-Core-v2-Certification.md`               |
 
 ### Automated compliance validation
 
-| Suite | Location | Tests |
-|-------|----------|-------|
-| Architecture compliance | `packages/platform-operations/src/platform-architecture-compliance.test.ts` | 9 |
+| Suite                   | Location                                                                    | Tests |
+| ----------------------- | --------------------------------------------------------------------------- | ----- |
+| Architecture compliance | `packages/platform-operations/src/platform-architecture-compliance.test.ts` | 9     |
 
 ### Remediation (architectural violation only)
 
@@ -39,22 +39,22 @@ Perform complete architectural compliance review of Platform Core and produce Pl
 
 ## Success criteria
 
-| Criterion | Met |
-|-----------|-----|
-| Products consume Platform Core correctly | ✅ |
-| No architectural violations | ✅ (one remediated) |
-| Platform Core v2 internally consistent | ✅ |
-| Final certification verdict | ✅ |
+| Criterion                                | Met                 |
+| ---------------------------------------- | ------------------- |
+| Products consume Platform Core correctly | ✅                  |
+| No architectural violations              | ✅ (one remediated) |
+| Platform Core v2 internally consistent   | ✅                  |
+| Final certification verdict              | ✅                  |
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| `pnpm lint` | Pass |
-| `pnpm typecheck` | Pass |
-| `pnpm build` | Pass |
-| `pnpm test` | Pass (1994 passed, 47 skipped) |
-| `pnpm test:coverage` | Pass |
+| Gate                 | Result                         |
+| -------------------- | ------------------------------ |
+| `pnpm lint`          | Pass                           |
+| `pnpm typecheck`     | Pass                           |
+| `pnpm build`         | Pass                           |
+| `pnpm test`          | Pass (1994 passed, 47 skipped) |
+| `pnpm test:coverage` | Pass                           |
 
 ## Stop condition
 

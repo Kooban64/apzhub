@@ -8,12 +8,12 @@ Scoped modules:
 
 ## Measured (2026-07-15)
 
-| Scope | Stmts/Lines | Notes |
-| --- | --- | --- |
-| Helper components (timeline, graph, viewer, compare, router) | **93–100%** | Practical ≥95% on focused helpers |
-| `platform-workflows-view.tsx` | **~83%** | Large section switcher; remaining lines are alternate error/export branches |
-| `workflow-export.ts` | **~89%** | Template export helper lightly used |
-| Combined workbench + routes | **~87%** | Practical coverage; target ≥95% on helpers met |
+| Scope                                                        | Stmts/Lines | Notes                                                                       |
+| ------------------------------------------------------------ | ----------- | --------------------------------------------------------------------------- |
+| Helper components (timeline, graph, viewer, compare, router) | **93–100%** | Practical ≥95% on focused helpers                                           |
+| `platform-workflows-view.tsx`                                | **~83%**    | Large section switcher; remaining lines are alternate error/export branches |
+| `workflow-export.ts`                                         | **~89%**    | Template export helper lightly used                                         |
+| Combined workbench + routes                                  | **~87%**    | Practical coverage; target ≥95% on helpers met                              |
 
 ```bash
 pnpm exec vitest run \

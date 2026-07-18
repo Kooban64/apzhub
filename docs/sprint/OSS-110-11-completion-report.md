@@ -16,18 +16,18 @@ Exposed the completed Support Platform Services (OSS-110-10) through the existin
 
 ## Milestone scope delivered
 
-| Area | Status |
-|------|--------|
-| Support request CRUD + commands | ✅ |
-| Nested articles (notes / replies) | ✅ |
-| Organisations / groups / users | ✅ |
-| Search / history / analytics | ✅ |
-| Trusted auth context + Zod | ✅ |
-| Gateway-only handlers | ✅ |
-| OpenAPI 3.1 Support paths | ✅ |
-| Tests + architecture boundaries | ✅ |
-| Zammad bootstrap flag | ✅ |
-| HTTP/UI/Event Bus/ingress/binary | ❌ excluded |
+| Area                              | Status      |
+| --------------------------------- | ----------- |
+| Support request CRUD + commands   | ✅          |
+| Nested articles (notes / replies) | ✅          |
+| Organisations / groups / users    | ✅          |
+| Search / history / analytics      | ✅          |
+| Trusted auth context + Zod        | ✅          |
+| Gateway-only handlers             | ✅          |
+| OpenAPI 3.1 Support paths         | ✅          |
+| Tests + architecture boundaries   | ✅          |
+| Zammad bootstrap flag             | ✅          |
+| HTTP/UI/Event Bus/ingress/binary  | ❌ excluded |
 
 ---
 
@@ -48,24 +48,24 @@ HTTP /api/v1/support-*
 
 ## Routes implemented
 
-| Method | Path | Gateway |
-|--------|------|---------|
-| GET/POST | `/api/v1/support-requests` | list / create |
-| GET/PATCH/DELETE | `/api/v1/support-requests/{id}` | get / update / **close** |
-| POST | `.../close`, `.../reopen`, `.../state`, `.../priority` | commands |
-| POST/DELETE | `.../owner` | assign / clear owner |
-| POST | `.../customer` | `updateSupportRequest({ requesterId })` |
-| GET | `.../articles` | list |
-| POST | `.../articles/notes`, `.../articles/replies` | createNote / createReply |
-| GET | `.../articles/{articleId}` | get |
-| GET | `.../history` | timeline |
-| GET/POST | `/api/v1/support-organizations` | list / create |
-| GET/PATCH/DELETE | `/api/v1/support-organizations/{id}` | get / update / archive |
-| GET/POST | `/api/v1/support-groups` | list / create |
-| GET/PATCH | `/api/v1/support-groups/{id}` | get / update |
-| GET | `/api/v1/support-users`, `.../{userId}` | list/lookup/search / get |
-| GET | `/api/v1/support-search` | unified search |
-| GET | `/api/v1/support-analytics` | intelligence snapshot |
+| Method           | Path                                                   | Gateway                                 |
+| ---------------- | ------------------------------------------------------ | --------------------------------------- |
+| GET/POST         | `/api/v1/support-requests`                             | list / create                           |
+| GET/PATCH/DELETE | `/api/v1/support-requests/{id}`                        | get / update / **close**                |
+| POST             | `.../close`, `.../reopen`, `.../state`, `.../priority` | commands                                |
+| POST/DELETE      | `.../owner`                                            | assign / clear owner                    |
+| POST             | `.../customer`                                         | `updateSupportRequest({ requesterId })` |
+| GET              | `.../articles`                                         | list                                    |
+| POST             | `.../articles/notes`, `.../articles/replies`           | createNote / createReply                |
+| GET              | `.../articles/{articleId}`                             | get                                     |
+| GET              | `.../history`                                          | timeline                                |
+| GET/POST         | `/api/v1/support-organizations`                        | list / create                           |
+| GET/PATCH/DELETE | `/api/v1/support-organizations/{id}`                   | get / update / archive                  |
+| GET/POST         | `/api/v1/support-groups`                               | list / create                           |
+| GET/PATCH        | `/api/v1/support-groups/{id}`                          | get / update                            |
+| GET              | `/api/v1/support-users`, `.../{userId}`                | list/lookup/search / get                |
+| GET              | `/api/v1/support-search`                               | unified search                          |
+| GET              | `/api/v1/support-analytics`                            | intelligence snapshot                   |
 
 ---
 
@@ -146,48 +146,48 @@ Existing translator: validation `400`, auth `401`, permission `403`, not found `
 
 ## Files created
 
-| Path | Role |
-|------|------|
-| `apps/web/lib/api/v1/schemas/support.ts` | Zod validation |
-| `apps/web/lib/api/v1/handlers/support.ts` | Gateway-only handlers |
-| `apps/web/app/api/v1/support-*/**/route.ts` | 21 App Router modules |
-| `apps/web/lib/api/v1/platform-api.support.v1.test.ts` | Support API tests |
-| `docs/architecture/APZHUB-Support-HTTP-API.md` | Architecture |
-| `docs/sprint/OSS-110-11-completion-report.md` | This report |
+| Path                                                  | Role                  |
+| ----------------------------------------------------- | --------------------- |
+| `apps/web/lib/api/v1/schemas/support.ts`              | Zod validation        |
+| `apps/web/lib/api/v1/handlers/support.ts`             | Gateway-only handlers |
+| `apps/web/app/api/v1/support-*/**/route.ts`           | 21 App Router modules |
+| `apps/web/lib/api/v1/platform-api.support.v1.test.ts` | Support API tests     |
+| `docs/architecture/APZHUB-Support-HTTP-API.md`        | Architecture          |
+| `docs/sprint/OSS-110-11-completion-report.md`         | This report           |
 
 ## Files modified
 
-| Path | Change |
-|------|--------|
-| `apps/web/lib/api/v1/gateway/bootstrap.ts` | Zammad registration |
-| `apps/web/lib/api/v1/testing/fixtures.ts` | Support mocks/builders |
-| `apps/web/lib/api/v1/wave1-stack.e2e.test.ts` | Session typing fix (typecheck) |
-| `docs/specs/APZHUB-Platform-OpenAPI-v1.yaml` | Support paths/schemas |
-| `docs/architecture/APZHUB-Platform-HTTP-API.md` | Route catalogue |
-| `apps/web/package.json` | `@apzhub/integration-zammad` dep |
-| `tsconfig.base.json` | path alias |
-| Foundation docs / CHANGELOG / docs/README | Closeout |
+| Path                                            | Change                           |
+| ----------------------------------------------- | -------------------------------- |
+| `apps/web/lib/api/v1/gateway/bootstrap.ts`      | Zammad registration              |
+| `apps/web/lib/api/v1/testing/fixtures.ts`       | Support mocks/builders           |
+| `apps/web/lib/api/v1/wave1-stack.e2e.test.ts`   | Session typing fix (typecheck)   |
+| `docs/specs/APZHUB-Platform-OpenAPI-v1.yaml`    | Support paths/schemas            |
+| `docs/architecture/APZHUB-Platform-HTTP-API.md` | Route catalogue                  |
+| `apps/web/package.json`                         | `@apzhub/integration-zammad` dep |
+| `tsconfig.base.json`                            | path alias                       |
+| Foundation docs / CHANGELOG / docs/README       | Closeout                         |
 
 ---
 
 ## Package versions
 
-| Package | Version | Notes |
-|---------|---------|-------|
-| `@apzhub/web` | `0.0.0` | unchanged (app scaffold) |
-| `@apzhub/platform-services` | `0.7.0` | unchanged |
-| `@apzhub/platform-service-contracts` | `0.7.0` | unchanged |
-| `@apzhub/integration-zammad` | `0.6.0` | unchanged |
+| Package                              | Version | Notes                    |
+| ------------------------------------ | ------- | ------------------------ |
+| `@apzhub/web`                        | `0.0.0` | unchanged (app scaffold) |
+| `@apzhub/platform-services`          | `0.7.0` | unchanged                |
+| `@apzhub/platform-service-contracts` | `0.7.0` | unchanged                |
+| `@apzhub/integration-zammad`         | `0.6.0` | unchanged                |
 
 ---
 
 ## Tests
 
-| Suite | Result |
-|-------|--------|
-| `platform-api.support.v1.test.ts` | **48 passed** |
-| API v1 + tasks + wave1 + platform-services + contracts | **253 passed** |
-| Areas | CRUD, commands, articles visibility, orgs/groups/users, search kinds, history, analytics, validation, authz, tenancy, errors, OpenAPI, no-Zammad import boundary |
+| Suite                                                  | Result                                                                                                                                                           |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `platform-api.support.v1.test.ts`                      | **48 passed**                                                                                                                                                    |
+| API v1 + tasks + wave1 + platform-services + contracts | **253 passed**                                                                                                                                                   |
+| Areas                                                  | CRUD, commands, articles visibility, orgs/groups/users, search kinds, history, analytics, validation, authz, tenancy, errors, OpenAPI, no-Zammad import boundary |
 
 ---
 
@@ -199,13 +199,13 @@ Support handlers/schemas exercised by 48 dedicated tests (list/get/create/update
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| OpenAPI validate | ✅ |
-| ESLint (Support API surface) | ✅ |
-| Typecheck `@apzhub/web` | ✅ |
-| API + platform regression | **253 passed** |
-| `pnpm build` (apps/web) | **FAIL** — pre-existing Next.js `/_global-error` prerender (`useContext` null); unrelated to `/api/v1/support-*` |
+| Gate                         | Result                                                                                                           |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| OpenAPI validate             | ✅                                                                                                               |
+| ESLint (Support API surface) | ✅                                                                                                               |
+| Typecheck `@apzhub/web`      | ✅                                                                                                               |
+| API + platform regression    | **253 passed**                                                                                                   |
+| `pnpm build` (apps/web)      | **FAIL** — pre-existing Next.js `/_global-error` prerender (`useContext` null); unrelated to `/api/v1/support-*` |
 
 ---
 

@@ -48,7 +48,10 @@ describe("APZIDENTITY-004 Identity Administration Workbench", () => {
   });
 
   it("wires IdentityWorkspaceRouter and isIdentityRoute into the shell", () => {
-    const shell = readFileSync(join(ROOT, "apps/web/components/workbench-page.tsx"), "utf8");
+    const shell = readFileSync(
+      join(ROOT, "apps/web/components/workbench-page.tsx"),
+      "utf8",
+    );
     expect(shell).toContain("IdentityWorkspaceRouter");
     expect(shell).toContain("isIdentityRoute");
   });

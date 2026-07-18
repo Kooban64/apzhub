@@ -8,22 +8,22 @@
 
 ## Confirmation matrix
 
-| Control | Result |
-| --- | --- |
-| Deny-by-default authorization (`observePlatformOps`) | Confirmed |
-| Granular `observe.*` permission mapping | Confirmed |
-| Tenant isolation (persistence + RLS 0055) | Confirmed |
-| Organisation context on ServiceRequestContext | Confirmed |
-| Metadata integrity (Core validation + lifecycle) | Confirmed |
-| Provider-secret exclusion | Confirmed |
-| Credential / API-key / bearer / webhook exclusion | Confirmed |
-| Diagnostics safety (no provider probes / secrets) | Confirmed |
-| HTTP safety (thin handlers; controlled 503) | Confirmed |
+| Control                                                 | Result    |
+| ------------------------------------------------------- | --------- |
+| Deny-by-default authorization (`observePlatformOps`)    | Confirmed |
+| Granular `observe.*` permission mapping                 | Confirmed |
+| Tenant isolation (persistence + RLS 0055)               | Confirmed |
+| Organisation context on ServiceRequestContext           | Confirmed |
+| Metadata integrity (Core validation + lifecycle)        | Confirmed |
+| Provider-secret exclusion                               | Confirmed |
+| Credential / API-key / bearer / webhook exclusion       | Confirmed |
+| Diagnostics safety (no provider probes / secrets)       | Confirmed |
+| HTTP safety (thin handlers; controlled 503)             | Confirmed |
 | Workbench safety (typed client only; no secret editors) | Confirmed |
-| PostgreSQL required in production | Confirmed |
-| RLS expectations (migration 0055) | Confirmed |
-| Production bootstrap (no silent memory fallback) | Confirmed |
-| Frozen Admin / Identity untouched | Confirmed |
+| PostgreSQL required in production                       | Confirmed |
+| RLS expectations (migration 0055)                       | Confirmed |
+| Production bootstrap (no silent memory fallback)        | Confirmed |
+| Frozen Admin / Identity untouched                       | Confirmed |
 
 ## Architectural security blockers (certified scope)
 

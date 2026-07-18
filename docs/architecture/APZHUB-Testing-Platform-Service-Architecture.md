@@ -31,13 +31,13 @@ TestingPersistence / repositories  (@apzhub/testing-persistence)
 Platform PostgreSQL  (testing_* tables)
 ```
 
-| Layer | Owns | Does not own |
-| ----- | ---- | ------------ |
-| **Presentation** (`apps/web`) | View models, permission-gated UI, typed client transport | Business rules, DB, gateway |
-| **Platform contracts** | Vendor-neutral service interfaces, `ServiceRequestContext` | Implementations |
-| **Platform implementations** | Context assertion, error translation, pipeline wiring, orchestration façade | Domain state machines, repository SQL |
-| **Domain services** | Lifecycle, validation, traceability, certification gates, audit semantics | HTTP, UI, platform permission catalogue |
-| **Persistence** | Repositories, RLS, tenant scoping, permission asserts at repo boundary | Platform pipeline, OpenAPI |
+| Layer                         | Owns                                                                        | Does not own                            |
+| ----------------------------- | --------------------------------------------------------------------------- | --------------------------------------- |
+| **Presentation** (`apps/web`) | View models, permission-gated UI, typed client transport                    | Business rules, DB, gateway             |
+| **Platform contracts**        | Vendor-neutral service interfaces, `ServiceRequestContext`                  | Implementations                         |
+| **Platform implementations**  | Context assertion, error translation, pipeline wiring, orchestration façade | Domain state machines, repository SQL   |
+| **Domain services**           | Lifecycle, validation, traceability, certification gates, audit semantics   | HTTP, UI, platform permission catalogue |
+| **Persistence**               | Repositories, RLS, tenant scoping, permission asserts at repo boundary      | Platform pipeline, OpenAPI              |
 
 ---
 
@@ -88,17 +88,17 @@ When testing is not wired, `gateway.testing` throws `PlatformServiceError` with 
 
 ## Explicit exclusions (APZTCMS-011)
 
-| Excluded | Notes |
-| -------- | ----- |
-| HTTP route handlers | APZTCMS-012 |
-| OpenAPI / generated typed HTTP client | APZTCMS-012 |
-| Workbench transport swap | Mock client unchanged in `apps/web/lib/testing` |
-| Event Bus / notifications / search indexing | Not wired; readiness reports `eventBus: "not-wired"` |
-| AI assist / suggestions | Deferred after APZTCMS-012 (former 011 AI scope) |
+| Excluded                                     | Notes                                                  |
+| -------------------------------------------- | ------------------------------------------------------ |
+| HTTP route handlers                          | APZTCMS-012                                            |
+| OpenAPI / generated typed HTTP client        | APZTCMS-012                                            |
+| Workbench transport swap                     | Mock client unchanged in `apps/web/lib/testing`        |
+| Event Bus / notifications / search indexing  | Not wired; readiness reports `eventBus: "not-wired"`   |
+| AI assist / suggestions                      | Deferred after APZTCMS-012 (former 011 AI scope)       |
 | Binary evidence storage / object storage SDK | Metadata-only; `binaryEvidenceStorage: "out-of-scope"` |
-| Test runners / CI workers | Domain ingestion only; no execution engines |
-| Silent in-memory production fallback | Production factory requires Postgres |
-| Silent allow-all authz in production | Same rules as OSS-110-06 |
+| Test runners / CI workers                    | Domain ingestion only; no execution engines            |
+| Silent in-memory production fallback         | Production factory requires Postgres                   |
+| Silent allow-all authz in production         | Same rules as OSS-110-06                               |
 
 ---
 

@@ -8,15 +8,15 @@ Sidebar: **Engineering Intelligence** (`engineering.view`).
 
 ## Panels (read-only)
 
-| Panel | Content |
-|---|---|
-| Executive Overview | Quality score, health, risk, coverage/automation/certification cards |
-| Quality Score | Component breakdown table |
-| Engineering Health | Metric table + status badge |
-| Trends | Search, kind filter, direction badges |
-| Risk Overview | Factor table |
-| Benchmarks | Benchmark + baseline tables; Compare Baselines |
-| Historical Analysis | Immutable historical + engineering snapshots |
+| Panel               | Content                                                              |
+| ------------------- | -------------------------------------------------------------------- |
+| Executive Overview  | Quality score, health, risk, coverage/automation/certification cards |
+| Quality Score       | Component breakdown table                                            |
+| Engineering Health  | Metric table + status badge                                          |
+| Trends              | Search, kind filter, direction badges                                |
+| Risk Overview       | Factor table                                                         |
+| Benchmarks          | Benchmark + baseline tables; Compare Baselines                       |
+| Historical Analysis | Immutable historical + engineering snapshots                         |
 
 ## Commands (read-only)
 

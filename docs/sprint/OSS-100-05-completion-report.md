@@ -16,13 +16,13 @@ Delivered the vendor-neutral **Adapter Framework** in `@apzhub/integration-sdk` 
 
 ## Architecture overview
 
-| Layer | Component |
-|-------|-----------|
-| Foundation | `IntegrationAdapterBase` — lifecycle + protected SDK access |
-| DI | `AdapterContext` / `buildAdapterContext()` |
-| Discovery | `CapabilityRegistration` / `InMemoryCapabilityRegistration` |
-| Construction | `AdapterFactory` / `createAdapterFactory()` |
-| Reference | `MockAdapter` / `createMockAdapterManifest()` |
+| Layer        | Component                                                   |
+| ------------ | ----------------------------------------------------------- |
+| Foundation   | `IntegrationAdapterBase` — lifecycle + protected SDK access |
+| DI           | `AdapterContext` / `buildAdapterContext()`                  |
+| Discovery    | `CapabilityRegistration` / `InMemoryCapabilityRegistration` |
+| Construction | `AdapterFactory` / `createAdapterFactory()`                 |
+| Reference    | `MockAdapter` / `createMockAdapterManifest()`               |
 
 ---
 
@@ -30,73 +30,73 @@ Delivered the vendor-neutral **Adapter Framework** in `@apzhub/integration-sdk` 
 
 ### Package (`@apzhub/integration-sdk` v0.5.0)
 
-| Component | Location |
-|-----------|----------|
-| `IntegrationAdapterBase` | `src/adapter/adapter-base.ts` |
-| `AdapterContext` | `src/adapter/adapter-context.ts` |
-| Capability types + registration | `src/adapter/capability-*.ts` |
-| `AdapterFactory` | `src/adapter/adapter-factory.ts` |
-| `MockAdapter` | `src/adapter/mock-adapter.ts` |
-| Tests | `src/adapter/adapter.test.ts` (13 tests) |
+| Component                       | Location                                 |
+| ------------------------------- | ---------------------------------------- |
+| `IntegrationAdapterBase`        | `src/adapter/adapter-base.ts`            |
+| `AdapterContext`                | `src/adapter/adapter-context.ts`         |
+| Capability types + registration | `src/adapter/capability-*.ts`            |
+| `AdapterFactory`                | `src/adapter/adapter-factory.ts`         |
+| `MockAdapter`                   | `src/adapter/mock-adapter.ts`            |
+| Tests                           | `src/adapter/adapter.test.ts` (13 tests) |
 
 ### Tests (65 total in package)
 
-| Suite | Tests |
-|-------|-------|
-| `adapter.test.ts` | 13 — lifecycle, factory, registration, mock |
-| `translation.test.ts` | 6 |
-| `observability.test.ts` | 5 |
-| `operations.test.ts` | 11 |
-| `auth.test.ts` | 8 |
-| `connection.test.ts` | 12 |
-| `integration-sdk.test.ts` | 10 |
+| Suite                     | Tests                                       |
+| ------------------------- | ------------------------------------------- |
+| `adapter.test.ts`         | 13 — lifecycle, factory, registration, mock |
+| `translation.test.ts`     | 6                                           |
+| `observability.test.ts`   | 5                                           |
+| `operations.test.ts`      | 11                                          |
+| `auth.test.ts`            | 8                                           |
+| `connection.test.ts`      | 12                                          |
+| `integration-sdk.test.ts` | 10                                          |
 
 ---
 
 ## Completion review
 
-| Criterion | Result |
-|-----------|--------|
-| AdapterBase abstract foundation | ✅ `IntegrationAdapterBase` |
-| AdapterContext DI | ✅ |
-| Capability registration + discovery | ✅ |
-| AdapterFactory | ✅ |
-| MockAdapter reference | ✅ |
-| Backward compatible | ✅ |
-| No vendor-specific code | ✅ |
-| OSS-101 not started | ✅ |
+| Criterion                           | Result                      |
+| ----------------------------------- | --------------------------- |
+| AdapterBase abstract foundation     | ✅ `IntegrationAdapterBase` |
+| AdapterContext DI                   | ✅                          |
+| Capability registration + discovery | ✅                          |
+| AdapterFactory                      | ✅                          |
+| MockAdapter reference               | ✅                          |
+| Backward compatible                 | ✅                          |
+| No vendor-specific code             | ✅                          |
+| OSS-101 not started                 | ✅                          |
 
 ---
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| `pnpm lint` | Pass |
-| `pnpm typecheck` | Pass |
-| `pnpm build` | Pass |
-| `pnpm test` | Pass — 2077 passed, 47 skipped (417 files) |
-| `pnpm test:coverage` | Pass |
+| Gate                 | Result                                     |
+| -------------------- | ------------------------------------------ |
+| `pnpm lint`          | Pass                                       |
+| `pnpm typecheck`     | Pass                                       |
+| `pnpm build`         | Pass                                       |
+| `pnpm test`          | Pass — 2077 passed, 47 skipped (417 files) |
+| `pnpm test:coverage` | Pass                                       |
 
 ---
 
 ## Technical debt
 
-| Item | Notes |
-|------|-------|
-| FeatureFlagProvider | Spec mentions governance flags — stub deferred to platform bootstrap wiring |
-| Manifest file loader | `registerFromManifest(path)` deferred — in-memory manifest for now |
-| RetryPolicy / RateLimitPolicy | OSS-100-06+ |
-| HTTP transport | OSS-100-06+ |
+| Item                          | Notes                                                                       |
+| ----------------------------- | --------------------------------------------------------------------------- |
+| FeatureFlagProvider           | Spec mentions governance flags — stub deferred to platform bootstrap wiring |
+| Manifest file loader          | `registerFromManifest(path)` deferred — in-memory manifest for now          |
+| RetryPolicy / RateLimitPolicy | OSS-100-06+                                                                 |
+| HTTP transport                | OSS-100-06+                                                                 |
 
 ---
 
 ## Risks
 
-| Risk | Mitigation |
-|------|------------|
-| Adapters bypass IntegrationAdapterBase | Architecture review gate; OSS-100-09 certification |
-| Capability registry in-memory only | Platform runtime will provide persistent registry at bootstrap |
+| Risk                                   | Mitigation                                                     |
+| -------------------------------------- | -------------------------------------------------------------- |
+| Adapters bypass IntegrationAdapterBase | Architecture review gate; OSS-100-09 certification             |
+| Capability registry in-memory only     | Platform runtime will provide persistent registry at bootstrap |
 
 ---
 

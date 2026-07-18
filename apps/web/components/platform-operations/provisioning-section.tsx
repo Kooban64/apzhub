@@ -17,7 +17,9 @@ import {
 } from "./ops-ui";
 
 export function ProvisioningSection() {
-  const [provisioning, setProvisioning] = useState<Record<string, unknown> | null>(null);
+  const [provisioning, setProvisioning] = useState<Record<string, unknown> | null>(
+    null,
+  );
   const [diagnostics, setDiagnostics] = useState<Record<string, unknown> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -32,7 +34,9 @@ export function ProvisioningSection() {
       })
       .catch((cause: unknown) => {
         if (!active) return;
-        setError(cause instanceof Error ? cause.message : "Failed to load provisioning.");
+        setError(
+          cause instanceof Error ? cause.message : "Failed to load provisioning.",
+        );
       })
       .finally(() => {
         if (active) setLoading(false);

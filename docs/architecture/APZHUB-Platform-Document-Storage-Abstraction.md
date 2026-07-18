@@ -9,15 +9,15 @@ Binary storage is pluggable. APZDOCS-001 defined `DocumentStorageProvider` and r
 
 ## Supported providers
 
-| Kind | Notes |
-|------|-------|
+| Kind         | Notes                                                     |
+| ------------ | --------------------------------------------------------- |
 | `filesystem` | Implemented — local/on-prem with explicit production flag |
-| `s3` | Implemented — S3-compatible (AWS / MinIO) |
-| `azure_blob` | Unimplemented placeholder |
-| `gcs` | Unimplemented placeholder |
-| `minio` | Use `s3` kind with custom endpoint |
-| `memory` | Test-only (`memory_test` mode) |
-| `custom` | Extension |
+| `s3`         | Implemented — S3-compatible (AWS / MinIO)                 |
+| `azure_blob` | Unimplemented placeholder                                 |
+| `gcs`        | Unimplemented placeholder                                 |
+| `minio`      | Use `s3` kind with custom endpoint                        |
+| `memory`     | Test-only (`memory_test` mode)                            |
+| `custom`     | Extension                                                 |
 
 ## Contract
 

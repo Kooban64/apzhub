@@ -51,21 +51,27 @@ export async function fetchPlatformPermissions(): Promise<unknown[]> {
   return body.data;
 }
 
-export async function fetchPlatformModules(): Promise<readonly PlatformCapabilitySummary[]> {
+export async function fetchPlatformModules(): Promise<
+  readonly PlatformCapabilitySummary[]
+> {
   const body = await fetchJson<{ data: readonly PlatformCapabilitySummary[] }>(
     "/api/platform/v1/modules",
   );
   return body.data;
 }
 
-export async function fetchPlatformServices(): Promise<readonly PlatformCapabilitySummary[]> {
+export async function fetchPlatformServices(): Promise<
+  readonly PlatformCapabilitySummary[]
+> {
   const body = await fetchJson<{ data: readonly PlatformCapabilitySummary[] }>(
     "/api/platform/v1/services",
   );
   return body.data;
 }
 
-export async function fetchPlatformProducts(): Promise<readonly PlatformCapabilitySummary[]> {
+export async function fetchPlatformProducts(): Promise<
+  readonly PlatformCapabilitySummary[]
+> {
   const body = await fetchJson<{ data: readonly PlatformCapabilitySummary[] }>(
     "/api/platform/v1/products",
   );
@@ -93,14 +99,18 @@ export async function fetchIdentityDiagnostics(): Promise<Record<string, unknown
   return body.data;
 }
 
-export async function fetchAuthorizationDiagnostics(): Promise<Record<string, unknown>> {
+export async function fetchAuthorizationDiagnostics(): Promise<
+  Record<string, unknown>
+> {
   const body = await fetchJson<{ data: Record<string, unknown> }>(
     "/api/platform/v1/authorization/diagnostics",
   );
   return body.data;
 }
 
-export async function fetchPersonalisationPreferences(): Promise<Record<string, unknown>> {
+export async function fetchPersonalisationPreferences(): Promise<
+  Record<string, unknown>
+> {
   const body = await fetchJson<{ data: Record<string, unknown> }>(
     "/api/platform/v1/preferences",
   );
@@ -133,7 +143,9 @@ export async function fetchPersonalisationRecent(): Promise<unknown[]> {
   return body.data;
 }
 
-export async function fetchPersonalisationDiagnostics(): Promise<Record<string, unknown>> {
+export async function fetchPersonalisationDiagnostics(): Promise<
+  Record<string, unknown>
+> {
   const body = await fetchJson<{ data: Record<string, unknown> }>(
     "/api/platform/v1/personalisation/diagnostics",
   );
@@ -141,7 +153,9 @@ export async function fetchPersonalisationDiagnostics(): Promise<Record<string, 
 }
 
 export async function fetchGovernance(): Promise<Record<string, unknown>> {
-  const body = await fetchJson<{ data: Record<string, unknown> }>("/api/platform/v1/governance");
+  const body = await fetchJson<{ data: Record<string, unknown> }>(
+    "/api/platform/v1/governance",
+  );
   return body.data;
 }
 
@@ -167,12 +181,16 @@ export async function fetchFeatureFlags(): Promise<Record<string, unknown>> {
 }
 
 export async function fetchCapabilities(): Promise<Record<string, unknown>> {
-  const body = await fetchJson<{ data: Record<string, unknown> }>("/api/platform/v1/capabilities");
+  const body = await fetchJson<{ data: Record<string, unknown> }>(
+    "/api/platform/v1/capabilities",
+  );
   return body.data;
 }
 
 export async function fetchPlatformSecurity(): Promise<Record<string, unknown>> {
-  const body = await fetchJson<{ data: Record<string, unknown> }>("/api/platform/v1/security");
+  const body = await fetchJson<{ data: Record<string, unknown> }>(
+    "/api/platform/v1/security",
+  );
   return body.data;
 }
 

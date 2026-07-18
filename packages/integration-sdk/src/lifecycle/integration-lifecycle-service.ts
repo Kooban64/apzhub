@@ -23,7 +23,9 @@ export class IntegrationAdapterLifecycleService {
     this.clock = clock;
   }
 
-  transition(input: IntegrationLifecycleTransitionInput): SdkResult<IntegrationLifecycleState> {
+  transition(
+    input: IntegrationLifecycleTransitionInput,
+  ): SdkResult<IntegrationLifecycleState> {
     if (!canTransitionIntegrationLifecycle(input.from, input.to)) {
       return sdkErr(
         invalidIntegrationLifecycleTransitionError(
@@ -44,7 +46,10 @@ export class IntegrationAdapterLifecycleService {
     return current;
   }
 
-  resolveReadyTarget(current: IntegrationLifecycleState, degraded: boolean): IntegrationLifecycleState {
+  resolveReadyTarget(
+    current: IntegrationLifecycleState,
+    degraded: boolean,
+  ): IntegrationLifecycleState {
     if (current === "initialising") {
       return degraded ? "degraded" : "ready";
     }
@@ -66,7 +71,9 @@ export class IntegrationAdapterLifecycleService {
     return "shutdown";
   }
 
-  getAllowedTransitions(from: IntegrationLifecycleState): readonly IntegrationLifecycleState[] {
+  getAllowedTransitions(
+    from: IntegrationLifecycleState,
+  ): readonly IntegrationLifecycleState[] {
     return getAllowedIntegrationLifecycleTransitions(from);
   }
 

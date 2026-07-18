@@ -103,7 +103,11 @@ export async function handleGetPipelineWorkflow(
   routeContext?: RouteContext,
 ) {
   const { owner, repo } = await ownerRepo(routeContext);
-  const workflowId = await param(routeContext, "workflowId", pipelineWorkflowIdParamSchema);
+  const workflowId = await param(
+    routeContext,
+    "workflowId",
+    pipelineWorkflowIdParamSchema,
+  );
   const gateway = await getPlatformServiceGateway();
   const result = await (
     gateway.testing.pipelineWorkflows as TestingPipelineWorkflowService
@@ -232,7 +236,11 @@ export async function handleGetSorPipeline(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = (await param(routeContext, "pipelineId", pipelineIdParamSchema)) as PipelineId;
+  const id = (await param(
+    routeContext,
+    "pipelineId",
+    pipelineIdParamSchema,
+  )) as PipelineId;
   const gateway = await getPlatformServiceGateway();
   return jsonDataResponse(
     await gateway.testing.pipelines.getPipeline(context.serviceContext, id),
@@ -263,7 +271,11 @@ export async function handleGetSorPipelineRun(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const runId = (await param(routeContext, "runId", pipelineRunIdParamSchema)) as PipelineRunId;
+  const runId = (await param(
+    routeContext,
+    "runId",
+    pipelineRunIdParamSchema,
+  )) as PipelineRunId;
   const gateway = await getPlatformServiceGateway();
   return jsonDataResponse(
     await gateway.testing.pipelines.getRun(context.serviceContext, runId),
@@ -276,7 +288,11 @@ export async function handleGetSorPipelineRunLinks(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const runId = (await param(routeContext, "runId", pipelineRunIdParamSchema)) as PipelineRunId;
+  const runId = (await param(
+    routeContext,
+    "runId",
+    pipelineRunIdParamSchema,
+  )) as PipelineRunId;
   const gateway = await getPlatformServiceGateway();
   return jsonDataResponse(
     await gateway.testing.pipelines.getLinks(context.serviceContext, runId),
@@ -289,7 +305,11 @@ export async function handleListSorPipelineRunJobs(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const runId = (await param(routeContext, "runId", pipelineRunIdParamSchema)) as PipelineRunId;
+  const runId = (await param(
+    routeContext,
+    "runId",
+    pipelineRunIdParamSchema,
+  )) as PipelineRunId;
   const gateway = await getPlatformServiceGateway();
   return collection(
     await gateway.testing.pipelines.listJobs(context.serviceContext, runId),
@@ -302,7 +322,11 @@ export async function handleListSorPipelineRunStages(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const runId = (await param(routeContext, "runId", pipelineRunIdParamSchema)) as PipelineRunId;
+  const runId = (await param(
+    routeContext,
+    "runId",
+    pipelineRunIdParamSchema,
+  )) as PipelineRunId;
   const gateway = await getPlatformServiceGateway();
   return collection(
     await gateway.testing.pipelines.listStages(context.serviceContext, runId),
@@ -315,7 +339,9 @@ export async function handleListPipelineProviders(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await getPlatformServiceGateway();
-  const providers = await gateway.testing.pipelines.listProviders(context.serviceContext);
+  const providers = await gateway.testing.pipelines.listProviders(
+    context.serviceContext,
+  );
   return collection(providers.map(toProviderDescriptor), context);
 }
 

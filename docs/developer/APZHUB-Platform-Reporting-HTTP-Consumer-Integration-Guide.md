@@ -15,22 +15,22 @@ Never import `@apzhub/reporting-core` from UI modules. Never call product engine
 
 ## Certified consumer — APZ TCMS
 
-| Concern | Status |
-| ------- | ------ |
-| `listReportPlaceholders` via platform reporting client | Compatible |
-| Permission gating `report.view` (+ legacy `reporting.view`) | Compatible |
-| Server-side `gateway.testing.reporting` facet | Retained for TCMS domain callers |
-| Behavioural regressions in this milestone | None (certification only) |
+| Concern                                                     | Status                           |
+| ----------------------------------------------------------- | -------------------------------- |
+| `listReportPlaceholders` via platform reporting client      | Compatible                       |
+| Permission gating `report.view` (+ legacy `reporting.view`) | Compatible                       |
+| Server-side `gateway.testing.reporting` facet               | Retained for TCMS domain callers |
+| Behavioural regressions in this milestone                   | None (certification only)        |
 
 ## Future consumer onboarding (document only — not implemented)
 
-| Product | Suggested first use | Onboarding steps |
-| ------- | ------------------- | ---------------- |
-| **Projects** | Portfolio / delivery summary templates | Own `module` templates → call `/api/v1/reporting` via typed client → register `report.*` for roles |
-| **Support** | SLA / quality packs | Product parameters from Support services only; no Zammad DTOs in templates |
-| **Documents** | Control / evidence packs | Coordinate with future Document Management (APZDOCS); no binary SoR in reporting |
-| **Analytics** | Export / pack summaries | Do not reimplement analytics engines; reporting formats only |
-| **Workflow** | Run / approval summaries | Scheduling remains out of scope until a later approved milestone |
+| Product       | Suggested first use                    | Onboarding steps                                                                                   |
+| ------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **Projects**  | Portfolio / delivery summary templates | Own `module` templates → call `/api/v1/reporting` via typed client → register `report.*` for roles |
+| **Support**   | SLA / quality packs                    | Product parameters from Support services only; no Zammad DTOs in templates                         |
+| **Documents** | Control / evidence packs               | Coordinate with future Document Management (APZDOCS); no binary SoR in reporting                   |
+| **Analytics** | Export / pack summaries                | Do not reimplement analytics engines; reporting formats only                                       |
+| **Workflow**  | Run / approval summaries               | Scheduling remains out of scope until a later approved milestone                                   |
 
 ### Onboarding checklist (any future product)
 

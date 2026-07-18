@@ -6,7 +6,7 @@
 > **Milestone:** OSS-110-13 delivery · **OSS-110-14 certification**  
 > **Status:** **Certified** — **PRODUCTION_READY_WITH_LIMITATIONS** (OSS-110-14)  
 > **Last updated:** 2026-07-11  
-> **Authoritative references:** [025 Module SDK](../025-module-sdk-module-manifest-module-development-standard.md) · [008 Modules & Connectors](../008-module-platform-service-connector-architecture.md) · [009 Platform Services](../009-platform-service-layer-architecture.md) · [010 API Gateway](../010-api-gateway-integration-communication-standards.md) · [Support HTTP API](./APZHUB-Support-HTTP-API.md) · [Support Vertical Certification](./SUPPORT-VERTICAL-CERTIFICATION.md) · [Support UI Certification](./SUPPORT-UI-CERTIFICATION.md)  
+> **Authoritative references:** [025 Module SDK](../025-module-sdk-module-manifest-module-development-standard.md) · [008 Modules & Connectors](../008-module-plugin-connector-architecture.md) · [009 Platform Services](../009-platform-service-layer-integration-framework.md) · [010 API Gateway](../010-api-gateway-integration-communication-standards.md) · [Support HTTP API](./APZHUB-Support-HTTP-API.md) · [Support Vertical Certification](./SUPPORT-VERTICAL-CERTIFICATION.md) · [Support UI Certification](./SUPPORT-UI-CERTIFICATION.md)  
 > **Ops guide:** [APZHUB Support User Guide](../guides/APZHUB-Support-User-Guide.md)  
 > **Completion:** [OSS-110-13 Completion Report](../sprint/OSS-110-13-completion-report.md) · [OSS-110-14 Completion Report](../sprint/OSS-110-14-completion-report.md)
 
@@ -30,16 +30,16 @@ No React code imports adapters, providers, mapping stores, or Zammad clients. En
 
 ### 2.1 Request path
 
-| Layer | Location | Responsibility |
-| --- | --- | --- |
-| Presentation | `apps/web/components/support/*` | Views, composers, permission-gated controls |
-| Typed client | `apps/web/lib/support/support-api.ts` | Fetch `/api/v1/support-*` only; envelope parse; errors |
-| HTTP routes | `apps/web/app/api/v1/support-*` | Thin handlers → gateway (OSS-110-11) |
-| Gateway | Platform Service Gateway | Auth → Authz → validation → service |
-| Platform Services | `@apzhub/platform-services` | Support orchestration (OSS-110-10) |
-| Mapping | Entity mapping (`sreq_` / `sorg_` / `sgrp_` / `suser_` / `sart_`) | Platform IDs only to clients |
-| Provider | Zammad providers | Adapter boundary |
-| Engine | Zammad (self-hosted CE) | System of record for tickets |
+| Layer             | Location                                                          | Responsibility                                         |
+| ----------------- | ----------------------------------------------------------------- | ------------------------------------------------------ |
+| Presentation      | `apps/web/components/support/*`                                   | Views, composers, permission-gated controls            |
+| Typed client      | `apps/web/lib/support/support-api.ts`                             | Fetch `/api/v1/support-*` only; envelope parse; errors |
+| HTTP routes       | `apps/web/app/api/v1/support-*`                                   | Thin handlers → gateway (OSS-110-11)                   |
+| Gateway           | Platform Service Gateway                                          | Auth → Authz → validation → service                    |
+| Platform Services | `@apzhub/platform-services`                                       | Support orchestration (OSS-110-10)                     |
+| Mapping           | Entity mapping (`sreq_` / `sorg_` / `sgrp_` / `suser_` / `sart_`) | Platform IDs only to clients                           |
+| Provider          | Zammad providers                                                  | Adapter boundary                                       |
+| Engine            | Zammad (self-hosted CE)                                           | System of record for tickets                           |
 
 ### 2.2 Boundary rules (mandatory)
 
@@ -50,11 +50,11 @@ No React code imports adapters, providers, mapping stores, or Zammad clients. En
 
 ### 2.3 Service & module manifests
 
-| Artifact | Path |
-| --- | --- |
-| Support service | `services/support/service.yaml` |
-| Activity-bar module | `services/support/manifests/support/module.yaml` |
-| Sidebar modules | `services/support/manifests/support-{requests,organizations,groups,users,search,analytics}/module.yaml` |
+| Artifact            | Path                                                                                                    |
+| ------------------- | ------------------------------------------------------------------------------------------------------- |
+| Support service     | `services/support/service.yaml`                                                                         |
+| Activity-bar module | `services/support/manifests/support/module.yaml`                                                        |
+| Sidebar modules     | `services/support/manifests/support-{requests,organizations,groups,users,search,analytics}/module.yaml` |
 
 Parent module: Activity Bar **Support** (`life-buoy`), workspace `support`, route `/workspace/support`, permission `support.requests.list`, status **enabled**.
 
@@ -64,13 +64,13 @@ Shell wiring: `apps/web/components/workbench-page.tsx` uses `isSupportRoute(path
 
 ## 3. Workbench integration
 
-| Concern | Behaviour |
-| --- | --- |
-| Activity Bar | **Support** entry from `support/module.yaml` |
-| Workspace | `support` |
-| Sidebar | Requests, Organizations, Groups, Users, Search, Analytics (child manifests) |
-| Shell | Header / Activity Bar / Sidebar / Workspace / Status Bar unchanged |
-| Routing | Client-side resolution via `resolveSupportRoute` in `apps/web/lib/support/routes.ts` |
+| Concern      | Behaviour                                                                            |
+| ------------ | ------------------------------------------------------------------------------------ |
+| Activity Bar | **Support** entry from `support/module.yaml`                                         |
+| Workspace    | `support`                                                                            |
+| Sidebar      | Requests, Organizations, Groups, Users, Search, Analytics (child manifests)          |
+| Shell        | Header / Activity Bar / Sidebar / Workspace / Status Bar unchanged                   |
+| Routing      | Client-side resolution via `resolveSupportRoute` in `apps/web/lib/support/routes.ts` |
 
 Manifest `workbench.navigation.permission` values gate nav visibility; the HTTP API remains authoritative for every mutation and read.
 
@@ -80,20 +80,20 @@ Manifest `workbench.navigation.permission` values gate nav visibility; the HTTP 
 
 Base: `/workspace/support`
 
-| Path | Route kind | View |
-| --- | --- | --- |
-| `/workspace/support` | `inbox` | Requests inbox |
-| `/workspace/support/requests` | `inbox` | Requests inbox |
-| `/workspace/support/requests/new` · `/requests/create` | `create` | Create request |
-| `/workspace/support/requests/{sreq_…}` | `detail` | Request detail + conversation + commands |
-| `/workspace/support/organizations` | `organizations` | Org list / create |
-| `/workspace/support/organizations/{sorg_…}` | `organization-detail` | Org detail / update / archive |
-| `/workspace/support/groups` | `groups` | Group list / create |
-| `/workspace/support/groups/{sgrp_…}` | `group-detail` | Group detail / update |
-| `/workspace/support/users` | `users` | User directory |
-| `/workspace/support/users/{suser_…}` | `user-detail` | User detail |
-| `/workspace/support/search` | `search` | Support search |
-| `/workspace/support/analytics` | `analytics` | Intelligence snapshot |
+| Path                                                   | Route kind            | View                                     |
+| ------------------------------------------------------ | --------------------- | ---------------------------------------- |
+| `/workspace/support`                                   | `inbox`               | Requests inbox                           |
+| `/workspace/support/requests`                          | `inbox`               | Requests inbox                           |
+| `/workspace/support/requests/new` · `/requests/create` | `create`              | Create request                           |
+| `/workspace/support/requests/{sreq_…}`                 | `detail`              | Request detail + conversation + commands |
+| `/workspace/support/organizations`                     | `organizations`       | Org list / create                        |
+| `/workspace/support/organizations/{sorg_…}`            | `organization-detail` | Org detail / update / archive            |
+| `/workspace/support/groups`                            | `groups`              | Group list / create                      |
+| `/workspace/support/groups/{sgrp_…}`                   | `group-detail`        | Group detail / update                    |
+| `/workspace/support/users`                             | `users`               | User directory                           |
+| `/workspace/support/users/{suser_…}`                   | `user-detail`         | User detail                              |
+| `/workspace/support/search`                            | `search`              | Support search                           |
+| `/workspace/support/analytics`                         | `analytics`           | Intelligence snapshot                    |
 
 Unknown Support paths render an empty state (“Unknown Support route”).
 
@@ -141,13 +141,13 @@ Helpers: `isSupportRoute`, `resolveSupportSection`, `parseSupportDetailId`, `sup
 
 **Component:** `InternalNoteComposer`
 
-| Rule | Implementation |
-| --- | --- |
-| Separate composer | Distinct from customer reply |
-| Visibility fixed | Hidden field `visibility=internal`; copy states customers cannot see notes |
-| No override | UI does not offer public/customer visibility for notes |
-| API | `POST …/articles/notes` via `createInternalNote` |
-| Permission gate | Requires article create permission helper |
+| Rule              | Implementation                                                             |
+| ----------------- | -------------------------------------------------------------------------- |
+| Separate composer | Distinct from customer reply                                               |
+| Visibility fixed  | Hidden field `visibility=internal`; copy states customers cannot see notes |
+| No override       | UI does not offer public/customer visibility for notes                     |
+| API               | `POST …/articles/notes` via `createInternalNote`                           |
+| Permission gate   | Requires article create permission helper                                  |
 
 ---
 
@@ -155,13 +155,13 @@ Helpers: `isSupportRoute`, `resolveSupportSection`, `parseSupportDetailId`, `sup
 
 **Component:** `CustomerReplyComposer`
 
-| Rule | Implementation |
-| --- | --- |
-| Separate composer | Distinct from internal note |
-| Explicit warning | Customer-visible warning banner (`role="note"`) |
-| Channel select | email / phone / web / chat / sms / fax |
-| API | `POST …/articles/replies` via `createCustomerReply` |
-| No silent note | Cannot submit as internal note from this form |
+| Rule              | Implementation                                      |
+| ----------------- | --------------------------------------------------- |
+| Separate composer | Distinct from internal note                         |
+| Explicit warning  | Customer-visible warning banner (`role="note"`)     |
+| Channel select    | email / phone / web / chat / sms / fax              |
+| API               | `POST …/articles/replies` via `createCustomerReply` |
+| No silent note    | Cannot submit as internal note from this form       |
 
 ---
 
@@ -181,13 +181,13 @@ Helpers: `isSupportRoute`, `resolveSupportSection`, `parseSupportDetailId`, `sup
 
 Permission-gated actions:
 
-| Action | Typical permission |
-| --- | --- |
-| Close / Reopen | `support.requests.transition` |
-| Change state | `support.requests.transition` |
-| Change priority | `support.requests.update` |
-| Assign / remove owner | `support.requests.assign` |
-| Change customer | `support.requests.assign` / update path as API defines |
+| Action                | Typical permission                                     |
+| --------------------- | ------------------------------------------------------ |
+| Close / Reopen        | `support.requests.transition`                          |
+| Change state          | `support.requests.transition`                          |
+| Change priority       | `support.requests.update`                              |
+| Assign / remove owner | `support.requests.assign`                              |
+| Change customer       | `support.requests.assign` / update path as API defines |
 
 Close uses a confirm dialog. Failed commands surface safe API error messages (no provider leakage).
 
@@ -195,11 +195,11 @@ Close uses a confirm dialog. Failed commands surface safe API error messages (no
 
 ## 12. Organizations / groups / users
 
-| View | Capabilities |
-| --- | --- |
+| View                       | Capabilities                                             |
+| -------------------------- | -------------------------------------------------------- |
 | `SupportOrganizationsView` | List, create, detail, update, archive (permission-gated) |
-| `SupportGroupsView` | List, create, detail, update |
-| `SupportUsersView` | List / detail (directory; read-oriented) |
+| `SupportGroupsView`        | List, create, detail, update                             |
+| `SupportUsersView`         | List / detail (directory; read-oriented)                 |
 
 Lookup selects (`SupportLookupSelect`) load options via the typed client for forms that need org/group/user IDs.
 
@@ -238,29 +238,29 @@ No upload, download, preview, or binary transfer UI. Aligns with certified verti
 
 **Primary file:** `apps/web/lib/support/support-api.ts`
 
-| Concern | Design |
-| --- | --- |
-| Base URL | `/api/v1` only |
-| Credentials | `credentials: "include"` (session cookies) |
-| Correlation | Optional `x-correlation-id`; reads `meta.correlationId` |
-| Envelopes | Success / collection / error envelopes typed in `types.ts` |
-| Errors | `SupportApiError` — sanitises provider/adapter leakage (`errors.ts`) |
-| Surface | Named functions + `supportApi` aggregate for tests |
+| Concern     | Design                                                               |
+| ----------- | -------------------------------------------------------------------- |
+| Base URL    | `/api/v1` only                                                       |
+| Credentials | `credentials: "include"` (session cookies)                           |
+| Correlation | Optional `x-correlation-id`; reads `meta.correlationId`              |
+| Envelopes   | Success / collection / error envelopes typed in `types.ts`           |
+| Errors      | `SupportApiError` — sanitises provider/adapter leakage (`errors.ts`) |
+| Surface     | Named functions + `supportApi` aggregate for tests                   |
 
 Exported operations cover requests lifecycle, articles (notes/replies), history, organizations, groups, users, search, and analytics.
 
 Related helpers:
 
-| File | Role |
-| --- | --- |
-| `types.ts` | DTOs aligned to platform Support API |
-| `errors.ts` | Controlled error mapping |
-| `query-keys.ts` | TanStack Query key factory + `clearSupportQueries` |
-| `routes.ts` | Path resolution |
-| `permissions.ts` | UI-only permission helpers |
-| `format.ts` | Dates, statuses, priorities, byte sizes |
-| `sanitize-article-body.ts` | Safe text rendering |
-| `index.ts` | Barrel re-exports |
+| File                       | Role                                               |
+| -------------------------- | -------------------------------------------------- |
+| `types.ts`                 | DTOs aligned to platform Support API               |
+| `errors.ts`                | Controlled error mapping                           |
+| `query-keys.ts`            | TanStack Query key factory + `clearSupportQueries` |
+| `routes.ts`                | Path resolution                                    |
+| `permissions.ts`           | UI-only permission helpers                         |
+| `format.ts`                | Dates, statuses, priorities, byte sizes            |
+| `sanitize-article-body.ts` | Safe text rendering                                |
+| `index.ts`                 | Barrel re-exports                                  |
 
 ---
 
@@ -268,15 +268,15 @@ Related helpers:
 
 Root key: `["support"]`.
 
-| Key factory | Example |
-| --- | --- |
-| `supportQueryKeys.requests.list(params)` | Inbox lists (stable param serialisation) |
-| `supportQueryKeys.requests.detail(id)` | Detail |
-| `supportQueryKeys.requests.articles(id)` | Conversation |
-| `supportQueryKeys.requests.history(id, params)` | History |
-| `supportQueryKeys.organizations.*` / `groups.*` / `users.*` | Directories |
-| `supportQueryKeys.search(params)` | Search |
-| `supportQueryKeys.analytics()` | Analytics |
+| Key factory                                                 | Example                                  |
+| ----------------------------------------------------------- | ---------------------------------------- |
+| `supportQueryKeys.requests.list(params)`                    | Inbox lists (stable param serialisation) |
+| `supportQueryKeys.requests.detail(id)`                      | Detail                                   |
+| `supportQueryKeys.requests.articles(id)`                    | Conversation                             |
+| `supportQueryKeys.requests.history(id, params)`             | History                                  |
+| `supportQueryKeys.organizations.*` / `groups.*` / `users.*` | Directories                              |
+| `supportQueryKeys.search(params)`                           | Search                                   |
+| `supportQueryKeys.analytics()`                              | Analytics                                |
 
 `clearSupportQueries(queryClient)` removes all Support caches (e.g. tenant change). Mutations invalidate the affected request/list/article keys.
 
@@ -291,19 +291,19 @@ Root key: `["support"]`.
 
 ### Permissions / action visibility (summary)
 
-| UI surface | Permission(s) |
-| --- | --- |
-| Inbox / nav Support | `support.requests.list` |
-| Create request | `support.requests.create` |
-| Update fields / priority | `support.requests.update` |
-| Assign owner / customer | `support.requests.assign` |
-| Close / reopen / state | `support.requests.transition` |
-| List / create articles | `support.articles.list` / `support.articles.create` |
-| Organizations CRUD/archive | `support.organizations.*` |
-| Groups CRUD | `support.groups.*` |
-| Users list/read | `support.users.list` / `support.users.read` |
-| Search | `support.search.execute` |
-| Analytics | `support.analytics.read` |
+| UI surface                 | Permission(s)                                       |
+| -------------------------- | --------------------------------------------------- |
+| Inbox / nav Support        | `support.requests.list`                             |
+| Create request             | `support.requests.create`                           |
+| Update fields / priority   | `support.requests.update`                           |
+| Assign owner / customer    | `support.requests.assign`                           |
+| Close / reopen / state     | `support.requests.transition`                       |
+| List / create articles     | `support.articles.list` / `support.articles.create` |
+| Organizations CRUD/archive | `support.organizations.*`                           |
+| Groups CRUD                | `support.groups.*`                                  |
+| Users list/read            | `support.users.list` / `support.users.read`         |
+| Search                     | `support.search.execute`                            |
+| Analytics                  | `support.analytics.read`                            |
 
 Catalogue source: platform permission catalogue + `services/support/service.yaml`.
 
@@ -338,14 +338,14 @@ Catalogue source: platform permission catalogue + `services/support/service.yaml
 
 ## 22. Privacy and safe-rendering rules
 
-| Rule | Enforcement |
-| --- | --- |
-| No raw HTML rendering | No `dangerouslySetInnerHTML`; strip HTML to text |
-| No engine leakage in errors | `SupportApiError` sanitisation |
-| No secrets in UI | Client never handles connector credentials |
-| Attachment metadata only | No binary content in DOM |
-| Internal vs public clarity | Distinct composers + badges |
-| Backend branding hidden | Product name **Support** only |
+| Rule                        | Enforcement                                      |
+| --------------------------- | ------------------------------------------------ |
+| No raw HTML rendering       | No `dangerouslySetInnerHTML`; strip HTML to text |
+| No engine leakage in errors | `SupportApiError` sanitisation                   |
+| No secrets in UI            | Client never handles connector credentials       |
+| Attachment metadata only    | No binary content in DOM                         |
+| Internal vs public clarity  | Distinct composers + badges                      |
+| Backend branding hidden     | Product name **Support** only                    |
 
 Boundary tests fail the suite if `dangerouslySetInnerHTML` appears under Support UI paths.
 
@@ -355,36 +355,36 @@ Boundary tests fail the suite if `dangerouslySetInnerHTML` appears under Support
 
 Inherited from OSS-110-12 / Wave 2 — **not** defects of this UI slice:
 
-| Limitation | UI behaviour |
-| --- | --- |
-| No binary attachment transfer | Metadata + “Binary access not available” |
-| No Platform Event Bus | No live event-driven UI refresh from bus |
-| No webhook ingress | No webhook-driven realtime inbox |
-| No notifications subsystem | No Support notification panel wiring |
-| No realtime | Poll/refetch via Query only; no WS/SSE Support channel |
-| Vertical still CERTIFIED_WITH_LIMITATIONS | UI delivered; **UI not yet UI-certified** |
+| Limitation                                | UI behaviour                                           |
+| ----------------------------------------- | ------------------------------------------------------ |
+| No binary attachment transfer             | Metadata + “Binary access not available”               |
+| No Platform Event Bus                     | No live event-driven UI refresh from bus               |
+| No webhook ingress                        | No webhook-driven realtime inbox                       |
+| No notifications subsystem                | No Support notification panel wiring                   |
+| No realtime                               | Poll/refetch via Query only; no WS/SSE Support channel |
+| Vertical still CERTIFIED_WITH_LIMITATIONS | UI delivered; **UI not yet UI-certified**              |
 
 ---
 
 ## 24. Component map
 
-| Component | Path | Role |
-| --- | --- | --- |
-| `SupportWorkspaceRouter` | `support-workspace-router.tsx` | Route → view |
-| `SupportInboxView` | `support-inbox-view.tsx` | Inbox |
-| `SupportRequestDetailView` | `support-request-detail-view.tsx` | Detail |
-| `SupportRequestCreateView` | `support-request-create-view.tsx` | Create |
-| `SupportRequestCommands` | `support-request-commands.tsx` | Lifecycle commands |
-| `SupportConversation` | `support-conversation.tsx` | Articles |
-| `InternalNoteComposer` | `internal-note-composer.tsx` | Internal notes |
-| `CustomerReplyComposer` | `customer-reply-composer.tsx` | Customer replies |
-| `SupportOrganizationsView` | `support-organizations-view.tsx` | Orgs |
-| `SupportGroupsView` | `support-groups-view.tsx` | Groups |
-| `SupportUsersView` | `support-users-view.tsx` | Users |
-| `SupportSearchView` | `support-search-view.tsx` | Search |
-| `SupportAnalyticsView` | `support-analytics-view.tsx` | Analytics |
-| `SupportLookupSelect` | `support-lookup-select.tsx` | Entity lookups |
-| Shared UI | `support-ui.tsx` | PageShell, badges, empty/loading, attachments, confirm |
+| Component                  | Path                              | Role                                                   |
+| -------------------------- | --------------------------------- | ------------------------------------------------------ |
+| `SupportWorkspaceRouter`   | `support-workspace-router.tsx`    | Route → view                                           |
+| `SupportInboxView`         | `support-inbox-view.tsx`          | Inbox                                                  |
+| `SupportRequestDetailView` | `support-request-detail-view.tsx` | Detail                                                 |
+| `SupportRequestCreateView` | `support-request-create-view.tsx` | Create                                                 |
+| `SupportRequestCommands`   | `support-request-commands.tsx`    | Lifecycle commands                                     |
+| `SupportConversation`      | `support-conversation.tsx`        | Articles                                               |
+| `InternalNoteComposer`     | `internal-note-composer.tsx`      | Internal notes                                         |
+| `CustomerReplyComposer`    | `customer-reply-composer.tsx`     | Customer replies                                       |
+| `SupportOrganizationsView` | `support-organizations-view.tsx`  | Orgs                                                   |
+| `SupportGroupsView`        | `support-groups-view.tsx`         | Groups                                                 |
+| `SupportUsersView`         | `support-users-view.tsx`          | Users                                                  |
+| `SupportSearchView`        | `support-search-view.tsx`         | Search                                                 |
+| `SupportAnalyticsView`     | `support-analytics-view.tsx`      | Analytics                                              |
+| `SupportLookupSelect`      | `support-lookup-select.tsx`       | Entity lookups                                         |
+| Shared UI                  | `support-ui.tsx`                  | PageShell, badges, empty/loading, attachments, confirm |
 
 Lib: `apps/web/lib/support/*` (client, keys, routes, permissions, sanitize, format, errors, types).
 
@@ -392,14 +392,14 @@ Lib: `apps/web/lib/support/*` (client, keys, routes, permissions, sanitize, form
 
 ## 25. Testing notes
 
-| Suite | Evidence |
-| --- | --- |
-| Vitest Support UI | **72** tests — `apps/web/lib/support` + `apps/web/components/support` |
-| Coverage (lines) | **support-api.ts 100%**; **components/support ~93.3%**; **overall Support UI ~94.9%** |
-| Boundary | `scripts/support-ui-boundary-audit.mjs` PASS + architecture boundary test |
-| Playwright | `testing/playwright/e2e/oss-110-13-support-module.spec.ts` (mocked `/api/v1`) |
-| Typecheck | PASS (`apps/web`) |
-| Build | FAIL pre-existing `/_global-error` prerender — unrelated to Support UI |
+| Suite             | Evidence                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------- |
+| Vitest Support UI | **72** tests — `apps/web/lib/support` + `apps/web/components/support`                 |
+| Coverage (lines)  | **support-api.ts 100%**; **components/support ~93.3%**; **overall Support UI ~94.9%** |
+| Boundary          | `scripts/support-ui-boundary-audit.mjs` PASS + architecture boundary test             |
+| Playwright        | `testing/playwright/e2e/oss-110-13-support-module.spec.ts` (mocked `/api/v1`)         |
+| Typecheck         | PASS (`apps/web`)                                                                     |
+| Build             | FAIL pre-existing `/_global-error` prerender — unrelated to Support UI                |
 
 ---
 
@@ -433,12 +433,12 @@ Master report: [SUPPORT-UI-CERTIFICATION.md](./SUPPORT-UI-CERTIFICATION.md) · C
 
 ## Companion documents
 
-| Document | Role |
-| --- | --- |
-| [SUPPORT-UI-CERTIFICATION.md](./SUPPORT-UI-CERTIFICATION.md) | UI master certification |
-| [APZHUB Support User Guide](../guides/APZHUB-Support-User-Guide.md) | Ops-facing how-to |
-| [OSS-110-13 Completion Report](../sprint/OSS-110-13-completion-report.md) | UI delivery closeout |
+| Document                                                                  | Role                      |
+| ------------------------------------------------------------------------- | ------------------------- |
+| [SUPPORT-UI-CERTIFICATION.md](./SUPPORT-UI-CERTIFICATION.md)              | UI master certification   |
+| [APZHUB Support User Guide](../guides/APZHUB-Support-User-Guide.md)       | Ops-facing how-to         |
+| [OSS-110-13 Completion Report](../sprint/OSS-110-13-completion-report.md) | UI delivery closeout      |
 | [OSS-110-14 Completion Report](../sprint/OSS-110-14-completion-report.md) | UI certification closeout |
-| [SUPPORT-VERTICAL-CERTIFICATION.md](./SUPPORT-VERTICAL-CERTIFICATION.md) | Vertical cert (API) |
-| [APZHUB-Support-HTTP-API.md](./APZHUB-Support-HTTP-API.md) | API contract |
-| [workbench-framework.md](./workbench-framework.md) | Shell architecture |
+| [SUPPORT-VERTICAL-CERTIFICATION.md](./SUPPORT-VERTICAL-CERTIFICATION.md)  | Vertical cert (API)       |
+| [APZHUB-Support-HTTP-API.md](./APZHUB-Support-HTTP-API.md)                | API contract              |
+| [workbench-framework.md](./workbench-framework.md)                        | Shell architecture        |

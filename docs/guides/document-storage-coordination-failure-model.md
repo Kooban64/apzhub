@@ -14,16 +14,16 @@
 
 ## Failure outcomes
 
-| Failure | Version status | Domain error |
-|---------|----------------|--------------|
-| Provider put throws | `failed` | `storage_write_failed` |
-| Post-write checksum fail | `reconciliation_required` | `checksum_mismatch` |
+| Failure                         | Version status            | Domain error             |
+| ------------------------------- | ------------------------- | ------------------------ |
+| Provider put throws             | `failed`                  | `storage_write_failed`   |
+| Post-write checksum fail        | `reconciliation_required` | `checksum_mismatch`      |
 | Metadata commit after put fails | `reconciliation_required` | `metadata_commit_failed` |
-| AbortSignal aborted | — | `cancelled` |
-| Missing permission | — | `forbidden` |
-| Delete while retention lock | — | `retention_lock` |
-| Binary deletion disabled | — | `deletion_disabled` |
-| Provider delete fails | `reconciliation_required` | `storage_delete_failed` |
+| AbortSignal aborted             | —                         | `cancelled`              |
+| Missing permission              | —                         | `forbidden`              |
+| Delete while retention lock     | —                         | `retention_lock`         |
+| Binary deletion disabled        | —                         | `deletion_disabled`      |
+| Provider delete fails           | `reconciliation_required` | `storage_delete_failed`  |
 
 ## Design rule
 

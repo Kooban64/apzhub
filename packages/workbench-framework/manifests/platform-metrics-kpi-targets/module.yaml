@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-kpi-targets
+name: KPI Targets
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — KPI Targets sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: KPI Targets
+    icon: flag
+    route: /workspace/metrics/kpi-targets
+    order: 200
+    permission: metrics.kpi
+  view:
+    title: KPI Targets
+    workspace: metrics
+    route: /workspace/metrics/kpi-targets
+    permission: metrics.kpi

@@ -14,19 +14,13 @@ import {
   DEFAULT_DECLARED_SEARCH_CAPABILITIES,
   type SearchIntegrationCapabilityId,
 } from "../capabilities";
-import {
-  SearchOperationRunner,
-  createSearchOperationRunner,
-} from "../contracts";
+import { SearchOperationRunner, createSearchOperationRunner } from "../contracts";
 import {
   SearchProviderDiagnostics,
   createSearchProviderDiagnostics,
 } from "../diagnostics";
 import { SearchErrorTranslator, createSearchErrorTranslator } from "../errors";
-import {
-  SearchProviderHealth,
-  createSearchProviderHealth,
-} from "../health";
+import { SearchProviderHealth, createSearchProviderHealth } from "../health";
 import {
   SearchConfigurationValidator,
   SearchProviderLifecycle,

@@ -25,7 +25,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -75,11 +76,13 @@ scan(files, [
   },
   {
     rule: "no-http-routes",
-    pattern: /NextRequest|NextResponse|OpenAPIHono|withPlatformApiAuth|\/api\/v1\/search|createRoute\(/,
+    pattern:
+      /NextRequest|NextResponse|OpenAPIHono|withPlatformApiAuth|\/api\/v1\/search|createRoute\(/,
   },
   {
     rule: "no-workbench",
-    pattern: /workbench-framework|PlatformReportingView|SearchWorkbench|WorkbenchLayout/,
+    pattern:
+      /workbench-framework|PlatformReportingView|SearchWorkbench|WorkbenchLayout/,
   },
   {
     rule: "no-platform-services",

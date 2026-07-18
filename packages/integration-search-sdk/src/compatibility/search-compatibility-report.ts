@@ -8,10 +8,7 @@ import { toSearchCapabilities } from "../capabilities/constants";
 import { SEARCH_INTEGRATION_SDK_VERSION } from "../version";
 
 export type SearchCompatibilityClassification =
-  | "supported"
-  | "degraded"
-  | "unsupported"
-  | "unknown";
+  "supported" | "degraded" | "unsupported" | "unknown";
 
 export type SearchCompatibilityReport = {
   readonly sdkVersion: typeof SEARCH_INTEGRATION_SDK_VERSION;

@@ -13,7 +13,7 @@ if (isNotificationServiceEnabled(process.env)) {
   const notification = createNotificationPlatformServicesForProduction({
     postgresDb: getDb(),
   });
-  const bundle = createPlatformServices({ notification, /* authz… */ });
+  const bundle = createPlatformServices({ notification /* authz… */ });
   // bundle.gateway.notification.*
 }
 ```

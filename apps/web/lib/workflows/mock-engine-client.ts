@@ -70,13 +70,7 @@ export const MOCK_ENGINE_CAPABILITIES: WorkflowEngineCapabilitiesViewModel = {
       operations: ["list", "get", "validate", "metadata"],
     },
   ],
-  unsupportedOperations: [
-    "create",
-    "update",
-    "delete",
-    "execute",
-    "schedule",
-  ],
+  unsupportedOperations: ["create", "update", "delete", "execute", "schedule"],
 };
 
 export const MOCK_ENGINE_HEALTH: WorkflowEngineHealthViewModel = {

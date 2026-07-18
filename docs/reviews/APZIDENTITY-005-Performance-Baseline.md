@@ -5,14 +5,14 @@
 
 ## Representative operations reviewed
 
-| Operation | Pagination | Notes |
-| --- | --- | --- |
-| User list / detail | Yes (list query) | Typed client + TanStack Query |
-| Membership list | Yes | No N+1 in certified gateway path |
-| Service assignment list | Yes | Metadata only |
-| Audit / history list | Yes | Append-only reads |
-| Diagnostics | Single calls | Health/readiness/capabilities |
-| Common mutations | Point writes | Query invalidation via `identityQueryKeys` |
+| Operation               | Pagination       | Notes                                      |
+| ----------------------- | ---------------- | ------------------------------------------ |
+| User list / detail      | Yes (list query) | Typed client + TanStack Query              |
+| Membership list         | Yes              | No N+1 in certified gateway path           |
+| Service assignment list | Yes              | Metadata only                              |
+| Audit / history list    | Yes              | Append-only reads                          |
+| Diagnostics             | Single calls     | Health/readiness/capabilities              |
+| Common mutations        | Point writes     | Query invalidation via `identityQueryKeys` |
 
 ## Guarantees
 

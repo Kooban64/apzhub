@@ -3,7 +3,10 @@
  * Wires validators + lifecycle with explicit repository ports — NO silent memory.
  */
 
-import { validateWorkflow, type ValidateWorkflowInput } from "../validation/validate-workflow";
+import {
+  validateWorkflow,
+  type ValidateWorkflowInput,
+} from "../validation/validate-workflow";
 import {
   assertWorkflowLifecycleTransition,
   canTransitionWorkflowLifecycle,

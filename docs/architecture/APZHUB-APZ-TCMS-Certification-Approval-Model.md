@@ -7,12 +7,12 @@
 
 ## Capabilities
 
-- Reviewer / approver roles  
-- Multiple approval stages (configuration-driven)  
-- Delegation placeholders  
-- Reject / rework  
-- Approval history  
-- Digital signature / witness **placeholders** only  
+- Reviewer / approver roles
+- Multiple approval stages (configuration-driven)
+- Delegation placeholders
+- Reject / rework
+- Approval history
+- Digital signature / witness **placeholders** only
 
 Subject binding: `subjectKind = certification_record`.
 
@@ -22,4 +22,4 @@ Subject binding: `subjectKind = certification_record`.
 
 Requires authorised user with `certification.approve`. Workflow `approve` / `conditionallyApprove` refuse anonymous or auto-approve paths.
 
-Related permissions: `certification.review`, `certification.reject`, `certification.override`.  
+Related permissions: `certification.review`, `certification.reject`, `certification.override`.

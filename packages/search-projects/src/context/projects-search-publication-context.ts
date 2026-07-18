@@ -32,8 +32,7 @@ export function createProjectsSearchPublicationContext(input: {
     requestId: input.serviceContext.requestId,
     actorUserId: input.serviceContext.userId,
     tenantId: input.serviceContext.tenantId,
-    organisationId:
-      input.organisationId ?? input.serviceContext.organisationId,
+    organisationId: input.organisationId ?? input.serviceContext.organisationId,
     workspaceId: input.serviceContext.workspaceId,
     locale: input.serviceContext.locale,
     permissions: input.serviceContext.permissions ?? [],

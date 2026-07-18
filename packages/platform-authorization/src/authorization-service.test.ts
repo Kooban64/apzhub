@@ -84,9 +84,11 @@ describe("AuthorizationService", () => {
       scope: "platform",
     });
 
-    expect(events.listEvents().some((event) => event.eventId === "platform.authorization.role.created")).toBe(
-      true,
-    );
+    expect(
+      events
+        .listEvents()
+        .some((event) => event.eventId === "platform.authorization.role.created"),
+    ).toBe(true);
   });
 
   it("reports diagnostics counters", () => {

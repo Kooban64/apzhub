@@ -40,14 +40,14 @@ Implement the Activity Presentation Layer — deterministic transformation from 
 
 ## Deliverables
 
-| Artifact               | Path                                                                                                |
-| ---------------------- | --------------------------------------------------------------------------------------------------- |
-| Presentation layer     | `src/presentation/`                                                                                 |
-| React hook             | `src/react/use-activity-presentation.ts`                                                            |
-| View model spec        | [ACTIVITY-VIEW-MODEL.md](../packages/activity-timeline-framework/docs/ACTIVITY-VIEW-MODEL.md)       |
-| Presentation spec      | [PRESENTATION-LAYER.md](../packages/activity-timeline-framework/docs/PRESENTATION-LAYER.md)         |
-| React presentation doc | [REACT-PRESENTATION-API.md](../packages/activity-timeline-framework/docs/REACT-PRESENTATION-API.md) |
-| Updated specification  | [SPR-007-ATF-activity-presentation-layer.md](../specs/SPR-007-ATF-activity-presentation-layer.md)   |
+| Artifact               | Path                                                                                                   |
+| ---------------------- | ------------------------------------------------------------------------------------------------------ |
+| Presentation layer     | `src/presentation/`                                                                                    |
+| React hook             | `src/react/use-activity-presentation.ts`                                                               |
+| View model spec        | [ACTIVITY-VIEW-MODEL.md](../../packages/activity-timeline-framework/docs/ACTIVITY-VIEW-MODEL.md)       |
+| Presentation spec      | [PRESENTATION-LAYER.md](../../packages/activity-timeline-framework/docs/PRESENTATION-LAYER.md)         |
+| React presentation doc | [REACT-PRESENTATION-API.md](../../packages/activity-timeline-framework/docs/REACT-PRESENTATION-API.md) |
+| Updated specification  | [SPR-007-ATF-activity-presentation-layer.md](../specs/SPR-007-ATF-activity-presentation-layer.md)      |
 
 ---
 

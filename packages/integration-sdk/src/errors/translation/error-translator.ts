@@ -1,9 +1,6 @@
 import type { Clock } from "../../auth/authentication-provider";
 import { systemClock } from "../../auth/authentication-provider";
-import {
-  buildDefaultTranslatedError,
-  normalizeUnknownError,
-} from "./default-mapping";
+import { buildDefaultTranslatedError, normalizeUnknownError } from "./default-mapping";
 import type {
   ErrorTranslationContext,
   ErrorTranslator,

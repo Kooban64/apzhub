@@ -173,8 +173,7 @@ export const CERTIFICATION_GATE_OUTCOMES = [
   "unknown",
   "pending",
 ] as const;
-export type CertificationGateOutcome =
-  (typeof CERTIFICATION_GATE_OUTCOMES)[number];
+export type CertificationGateOutcome = (typeof CERTIFICATION_GATE_OUTCOMES)[number];
 
 /** Built-in certification gate keys — custom keys are also allowed. */
 export const CERTIFICATION_GATE_KEYS = [
@@ -224,7 +223,13 @@ export type Priority = (typeof PRIORITIES)[number];
 export const RISK_LEVELS = ["low", "medium", "high", "critical"] as const;
 export type RiskLevel = (typeof RISK_LEVELS)[number];
 
-export const LIKELIHOODS = ["rare", "unlikely", "possible", "likely", "almost_certain"] as const;
+export const LIKELIHOODS = [
+  "rare",
+  "unlikely",
+  "possible",
+  "likely",
+  "almost_certain",
+] as const;
 export type Likelihood = (typeof LIKELIHOODS)[number];
 
 export const IMPACTS = ["negligible", "minor", "moderate", "major", "severe"] as const;
@@ -401,18 +406,11 @@ export const PLATFORM_RELEASE_READINESS_VERDICTS = [
 export type PlatformReleaseReadinessVerdict =
   (typeof PLATFORM_RELEASE_READINESS_VERDICTS)[number];
 
-export const DEPENDENCY_RELATION_KINDS = [
-  "upstream",
-  "downstream",
-] as const;
+export const DEPENDENCY_RELATION_KINDS = ["upstream", "downstream"] as const;
 export type DependencyRelationKind = (typeof DEPENDENCY_RELATION_KINDS)[number];
 
-export const DEPENDENCY_REQUIREMENT_KINDS = [
-  "required",
-  "optional",
-] as const;
-export type DependencyRequirementKind =
-  (typeof DEPENDENCY_REQUIREMENT_KINDS)[number];
+export const DEPENDENCY_REQUIREMENT_KINDS = ["required", "optional"] as const;
+export type DependencyRequirementKind = (typeof DEPENDENCY_REQUIREMENT_KINDS)[number];
 
 export const PLATFORM_RELEASE_LIFECYCLE_STATUSES = [
   "draft",
@@ -455,8 +453,7 @@ export const RELEASE_GOVERNANCE_STATUSES = [
   "superseded",
   "archived",
 ] as const;
-export type ReleaseGovernanceStatus =
-  (typeof RELEASE_GOVERNANCE_STATUSES)[number];
+export type ReleaseGovernanceStatus = (typeof RELEASE_GOVERNANCE_STATUSES)[number];
 
 export const RELEASE_APPROVAL_STAGE_KINDS = [
   "technical",
@@ -465,8 +462,7 @@ export const RELEASE_APPROVAL_STAGE_KINDS = [
   "security",
   "executive",
 ] as const;
-export type ReleaseApprovalStageKind =
-  (typeof RELEASE_APPROVAL_STAGE_KINDS)[number];
+export type ReleaseApprovalStageKind = (typeof RELEASE_APPROVAL_STAGE_KINDS)[number];
 
 export const RELEASE_ADVISORY_VERDICTS = [
   "READY",
@@ -688,11 +684,7 @@ export const COVERAGE_METRIC_KINDS = [
 ] as const;
 export type CoverageMetricKind = (typeof COVERAGE_METRIC_KINDS)[number];
 
-export const READINESS_DIMENSION_STATUSES = [
-  "ready",
-  "partial",
-  "blocked",
-] as const;
+export const READINESS_DIMENSION_STATUSES = ["ready", "partial", "blocked"] as const;
 export type ReadinessDimensionStatus = (typeof READINESS_DIMENSION_STATUSES)[number];
 
 export const EXECUTION_APPROVAL_STATES = [
@@ -707,7 +699,9 @@ export type ExecutionApprovalState = (typeof EXECUTION_APPROVAL_STATES)[number];
  * Maps legacy `ready` to canonical `approved` for lifecycle comparisons.
  * Other statuses pass through unchanged.
  */
-export function canonicalizeTestStatus(status: TestStatus): TestCaseLifecycleStatus | TestStatus {
+export function canonicalizeTestStatus(
+  status: TestStatus,
+): TestCaseLifecycleStatus | TestStatus {
   if (status === "ready") return "approved";
   return status;
 }
@@ -829,9 +823,7 @@ export function isCertificationGateOutcome(
   return isEnumMember(CERTIFICATION_GATE_OUTCOMES, value);
 }
 
-export function isCertificationGateKey(
-  value: string,
-): value is CertificationGateKey {
+export function isCertificationGateKey(value: string): value is CertificationGateKey {
   return isEnumMember(CERTIFICATION_GATE_KEYS, value);
 }
 
@@ -891,9 +883,7 @@ export function isAutomationType(value: string): value is AutomationType {
   return isEnumMember(AUTOMATION_TYPES, value);
 }
 
-export function isAutomationAdapterKind(
-  value: string,
-): value is AutomationAdapterKind {
+export function isAutomationAdapterKind(value: string): value is AutomationAdapterKind {
   return isEnumMember(AUTOMATION_ADAPTER_KINDS, value);
 }
 
@@ -945,9 +935,7 @@ export function isPlatformProductKey(value: string): value is PlatformProductKey
   return isEnumMember(PLATFORM_PRODUCT_KEYS, value);
 }
 
-export function isPlatformQualityStatus(
-  value: string,
-): value is PlatformQualityStatus {
+export function isPlatformQualityStatus(value: string): value is PlatformQualityStatus {
   return isEnumMember(PLATFORM_QUALITY_STATUSES, value);
 }
 
@@ -1017,9 +1005,7 @@ export function isPipelineApprovalKind(value: string): value is PipelineApproval
   return isEnumMember(PIPELINE_APPROVAL_KINDS, value);
 }
 
-export function isHistoricalPeriodKind(
-  value: string,
-): value is HistoricalPeriodKind {
+export function isHistoricalPeriodKind(value: string): value is HistoricalPeriodKind {
   return isEnumMember(HISTORICAL_PERIOD_KINDS, value);
 }
 

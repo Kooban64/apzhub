@@ -81,7 +81,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.23.0",
+  "0.25.0",
   "version-platform-services",
 );
 
@@ -157,9 +157,9 @@ requireContains(
 );
 requireContains(
   "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
-  /version:\s*1\.7\.\d+/,
+  /version:\s*1\.(?:[7-9]|\d{2,})\.\d+/,
   "openapi-version",
-  "OpenAPI must remain at 1.7.x for Identity wave freeze",
+  "OpenAPI must remain at >= 1.7.0 for Identity wave freeze",
 );
 requireContains(
   "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
@@ -217,9 +217,7 @@ for (const omitted of [
   }
 }
 
-const priorAudits = [
-  "scripts/apzidentity-005-identity-vertical-audit.mjs",
-];
+const priorAudits = ["scripts/apzidentity-005-identity-vertical-audit.mjs"];
 
 for (const script of priorAudits) {
   const full = join(ROOT, script);

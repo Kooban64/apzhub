@@ -15,17 +15,17 @@ Exposed the shared Reporting Platform through `/api/v1/reporting`, a production 
 
 Gateway-only handlers under `/api/v1/reporting`:
 
-| Endpoint | Purpose |
-| --- | --- |
-| `GET /formats` | Supported output formats |
-| `GET /types` | Available report types |
-| `GET /templates` | List templates (optional `reportType`) |
-| `GET /templates/{id}` | Template lookup |
-| `POST /validate` | Template validation |
-| `POST /generate` | Report generation |
-| `POST /preview` | Report preview |
-| `GET /generations` | Generation history / metadata list |
-| `GET /generations/{id}` | Generation metadata |
+| Endpoint                | Purpose                                |
+| ----------------------- | -------------------------------------- |
+| `GET /formats`          | Supported output formats               |
+| `GET /types`            | Available report types                 |
+| `GET /templates`        | List templates (optional `reportType`) |
+| `GET /templates/{id}`   | Template lookup                        |
+| `POST /validate`        | Template validation                    |
+| `POST /generate`        | Report generation                      |
+| `POST /preview`         | Report preview                         |
+| `GET /generations`      | Generation history / metadata list     |
+| `GET /generations/{id}` | Generation metadata                    |
 
 Request path: HTTP → PlatformServiceGateway → RequestPipeline → Authorization → Platform Reporting Services.
 
@@ -62,33 +62,33 @@ ARIA toolbar/status/alerts, labelled filters/sort controls, keyboard-reachable t
 
 ## Testing
 
-| Suite | Result |
-| --- | --- |
-| Vitest (handlers, client, api, routes, boundary, view, router, gateway) | **29** passed |
-| Playwright `apzreport-002-platform-reporting-workbench.spec.ts` | Mock `/api/v1/reporting` |
-| OpenAPI validation | **PASS** |
-| Boundary audit | No `testing-services` / reporting-core in HTTP client/handlers |
+| Suite                                                                   | Result                                                         |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Vitest (handlers, client, api, routes, boundary, view, router, gateway) | **29** passed                                                  |
+| Playwright `apzreport-002-platform-reporting-workbench.spec.ts`         | Mock `/api/v1/reporting`                                       |
+| OpenAPI validation                                                      | **PASS**                                                       |
+| Boundary audit                                                          | No `testing-services` / reporting-core in HTTP client/handlers |
 
 ## Coverage
 
 Scoped APZREPORT-002 modules (excluding mocks + type-only files):
 
-| Metric | Result |
-| --- | --- |
-| Lines | **~98%+** |
-| Functions | **~96%+** |
-| Branches | **~93%+** (meaningful) |
-| Handlers / gateway impl | **100%** lines |
+| Metric                  | Result                 |
+| ----------------------- | ---------------------- |
+| Lines                   | **~98%+**              |
+| Functions               | **~96%+**              |
+| Branches                | **~93%+** (meaningful) |
+| Handlers / gateway impl | **100%** lines         |
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| OpenAPI validate | PASS |
-| Vitest focused suites | PASS |
-| Coverage ≥95% lines/functions | PASS |
-| Boundary audit | PASS |
-| Architecture (no new generation logic) | PASS |
+| Gate                                   | Result |
+| -------------------------------------- | ------ |
+| OpenAPI validate                       | PASS   |
+| Vitest focused suites                  | PASS   |
+| Coverage ≥95% lines/functions          | PASS   |
+| Boundary audit                         | PASS   |
+| Architecture (no new generation logic) | PASS   |
 
 ## Technical Debt
 

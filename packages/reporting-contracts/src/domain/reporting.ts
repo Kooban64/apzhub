@@ -6,13 +6,7 @@
 /** Product-supplied report kind identifier (e.g. TCMS "executive", Projects "portfolio"). */
 export type ReportTypeId = string;
 
-export type ReportOutputFormat =
-  | "html"
-  | "markdown"
-  | "pdf"
-  | "docx"
-  | "json"
-  | "csv";
+export type ReportOutputFormat = "html" | "markdown" | "pdf" | "docx" | "json" | "csv";
 
 export const REPORT_OUTPUT_FORMATS: readonly ReportOutputFormat[] = [
   "html",

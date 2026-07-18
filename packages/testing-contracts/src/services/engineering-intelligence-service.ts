@@ -121,11 +121,6 @@ export interface EngineeringIntelligenceService {
     label?: string,
     weights?: QualityScoreWeights,
   ): Promise<EngineeringSnapshot>;
-  getSnapshot(
-    ctx: ServiceRequestContext,
-    id: string,
-  ): Promise<EngineeringSnapshot>;
-  listSnapshots(
-    ctx: ServiceRequestContext,
-  ): Promise<readonly EngineeringSnapshot[]>;
+  getSnapshot(ctx: ServiceRequestContext, id: string): Promise<EngineeringSnapshot>;
+  listSnapshots(ctx: ServiceRequestContext): Promise<readonly EngineeringSnapshot[]>;
 }

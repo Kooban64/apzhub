@@ -112,7 +112,4 @@ export const TESTING_SEARCH_DOMAIN_ENTITY_TYPES = {
   quality: ["quality_summary", "quality_coverage_summary", "defect_summary"],
   reporting_metadata: ["report_metadata", "report_template"],
   pipeline: ["pipeline", "pipeline_run", "pipeline_import"],
-} as const satisfies Record<
-  TestingSearchDomainId,
-  readonly TestingSearchEntityType[]
->;
+} as const satisfies Record<TestingSearchDomainId, readonly TestingSearchEntityType[]>;

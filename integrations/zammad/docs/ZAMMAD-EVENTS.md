@@ -22,15 +22,15 @@ adapter.core.events.translate(payload)
 
 ## Canonical Support event resources
 
-| Vendor signal | Canonical resource |
-| --- | --- |
-| ticket | `support_request` |
-| article | `article` |
-| organization | `organization` |
-| group | `group` |
-| user | `support_user` |
-| attachment | `article` + `attachment.metadata_recorded` |
-| unknown | ignored safely |
+| Vendor signal | Canonical resource                         |
+| ------------- | ------------------------------------------ |
+| ticket        | `support_request`                          |
+| article       | `article`                                  |
+| organization  | `organization`                             |
+| group         | `group`                                    |
+| user          | `support_user`                             |
+| attachment    | `article` + `attachment.metadata_recorded` |
+| unknown       | ignored safely                             |
 
 Actions include create/update/close/reopen/assignment/priority/state and attachment metadata.
 

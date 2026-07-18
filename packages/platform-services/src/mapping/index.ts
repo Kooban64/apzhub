@@ -9,10 +9,7 @@ export type {
   EntityMappingScope,
 } from "./types";
 
-export {
-  ENTITY_TYPE_TO_PREFIX,
-  PREFIX_TO_ENTITY_TYPE,
-} from "./types";
+export { ENTITY_TYPE_TO_PREFIX, PREFIX_TO_ENTITY_TYPE } from "./types";
 
 export type { EntityMappingStore } from "./entity-mapping-store";
 export { InMemoryEntityMappingStore } from "./in-memory-entity-mapping-store";

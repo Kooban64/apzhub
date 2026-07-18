@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: APZHUB Platform HTTP API
-  version: 1.8.0
+  version: 1.9.0
   description: |
     Production HTTP surface over PlatformServiceGateway (OSS-110-07, OSS-110-11).
     Routes contain no business logic and never call integration adapters directly.
@@ -196,6 +196,20 @@ tags:
   - name: Observability Maintenance
   - name: Observability Metadata
   - name: Observability Diagnostics
+  - name: Platform Workflow
+    description: >
+      Canonical Platform Workflow management API (APZWORKFLOW-003).
+      Metadata and lifecycle only — no execution, runs, schedules, or n8n credentials.
+  - name: Workflow Engine
+    description: >
+      Read-only Workflow Engine plane (APZWORKFLOW-008). Discovery and diagnostics only —
+      no execution, activation, scheduling, or credential mutation.
+  - name: Platform Metrics Administration
+    description: >
+      Canonical Platform Metrics management API (APZMETRICS-003).
+      Maps 1:1 to gateway.metrics.* — metadata and lifecycle only.
+      No formula/KPI execution, Prometheus, Grafana, OpenTelemetry, analytics, dashboards, or Workbench.
+      Controlled 503 when APZHUB_METRICS_ENABLED is false.
 security:
   - sessionCookie: []
 paths:
@@ -2943,7 +2957,7 @@ paths:
       summary: Create testing traceability link
       requestBody: *TestingResourceRequestBody
       responses: *TestingCreatedResponses
-  /testing/traceability/{relationshipId}:
+  /testing/traceability/relationships/{relationshipId}:
     parameters:
       - $ref: "#/components/parameters/TestingRelationshipId"
     delete:
@@ -2951,6 +2965,7 @@ paths:
       tags: [Testing Traceability]
       summary: Remove testing traceability link
       responses: *TestingResourceResponses
+
   /testing/traceability/{resourceType}/{resourceId}:
     parameters:
       - name: resourceType
@@ -3953,7 +3968,18 @@ paths:
           in: query
           schema:
             type: string
-            enum: [draft, pending, queued, delivered, read, acknowledged, dismissed, expired, archived]
+            enum:
+              [
+                draft,
+                pending,
+                queued,
+                delivered,
+                read,
+                acknowledged,
+                dismissed,
+                expired,
+                archived,
+              ]
         - name: priority
           in: query
           schema:
@@ -4501,7 +4527,6 @@ paths:
       summary: Safe configuration diagnostics metadata
       responses: *TestingResourceResponses
       x-apzhub-permissions: [configuration.read]
-
 
   /administration/modules:
     get:
@@ -6405,6 +6430,942 @@ paths:
       responses: *TestingResourceResponses
       x-apzhub-permissions: [observe.diagnostics]
 
+  # Platform Metrics Administration (APZMETRICS-003)
+  /metrics/metrics:
+    get:
+      operationId: listMetricsMetrics
+      tags: [Platform Metrics Administration]
+      summary: List Metric metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.read]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsMetrics
+      tags: [Platform Metrics Administration]
+      summary: Create Metric metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.manage]
+  /metrics/metrics/{metricId}:
+    parameters:
+      - name: metricId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsMetrics
+      tags: [Platform Metrics Administration]
+      summary: Get Metric metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.read]
+    patch:
+      operationId: updateMetricsMetrics
+      tags: [Platform Metrics Administration]
+      summary: Update Metric metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.manage]
+
+  /metrics/definitions:
+    get:
+      operationId: listMetricsDefinitions
+      tags: [Platform Metrics Administration]
+      summary: List Definition metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.definition]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsDefinitions
+      tags: [Platform Metrics Administration]
+      summary: Create Definition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+  /metrics/definitions/{definitionId}:
+    parameters:
+      - name: definitionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsDefinitions
+      tags: [Platform Metrics Administration]
+      summary: Get Definition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+    patch:
+      operationId: updateMetricsDefinitions
+      tags: [Platform Metrics Administration]
+      summary: Update Definition metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+
+  /metrics/versions:
+    get:
+      operationId: listMetricsVersions
+      tags: [Platform Metrics Administration]
+      summary: List Version metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.definition]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsVersions
+      tags: [Platform Metrics Administration]
+      summary: Create Version metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+  /metrics/versions/{versionId}:
+    parameters:
+      - name: versionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsVersions
+      tags: [Platform Metrics Administration]
+      summary: Get Version metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+    patch:
+      operationId: updateMetricsVersions
+      tags: [Platform Metrics Administration]
+      summary: Update Version metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+
+  /metrics/categories:
+    get:
+      operationId: listMetricsCategories
+      tags: [Platform Metrics Administration]
+      summary: List Category metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.metadata]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsCategories
+      tags: [Platform Metrics Administration]
+      summary: Create Category metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.manage]
+  /metrics/categories/{categoryId}:
+    parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsCategories
+      tags: [Platform Metrics Administration]
+      summary: Get Category metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+    patch:
+      operationId: updateMetricsCategories
+      tags: [Platform Metrics Administration]
+      summary: Update Category metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.manage]
+
+  /metrics/groups:
+    get:
+      operationId: listMetricsGroups
+      tags: [Platform Metrics Administration]
+      summary: List Group metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.metadata]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsGroups
+      tags: [Platform Metrics Administration]
+      summary: Create Group metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.manage]
+  /metrics/groups/{groupId}:
+    parameters:
+      - name: groupId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsGroups
+      tags: [Platform Metrics Administration]
+      summary: Get Group metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+    patch:
+      operationId: updateMetricsGroups
+      tags: [Platform Metrics Administration]
+      summary: Update Group metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.manage]
+
+  /metrics/dimensions:
+    get:
+      operationId: listMetricsDimensions
+      tags: [Platform Metrics Administration]
+      summary: List Dimension metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.metadata]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsDimensions
+      tags: [Platform Metrics Administration]
+      summary: Create Dimension metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+  /metrics/dimensions/{dimensionId}:
+    parameters:
+      - name: dimensionId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsDimensions
+      tags: [Platform Metrics Administration]
+      summary: Get Dimension metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+    patch:
+      operationId: updateMetricsDimensions
+      tags: [Platform Metrics Administration]
+      summary: Update Dimension metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+
+  /metrics/labels:
+    get:
+      operationId: listMetricsLabels
+      tags: [Platform Metrics Administration]
+      summary: List Label metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.metadata]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsLabels
+      tags: [Platform Metrics Administration]
+      summary: Create Label metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+  /metrics/labels/{labelId}:
+    parameters:
+      - name: labelId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsLabels
+      tags: [Platform Metrics Administration]
+      summary: Get Label metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+    patch:
+      operationId: updateMetricsLabels
+      tags: [Platform Metrics Administration]
+      summary: Update Label metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+
+  /metrics/units:
+    get:
+      operationId: listMetricsUnits
+      tags: [Platform Metrics Administration]
+      summary: List Unit metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.metadata]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsUnits
+      tags: [Platform Metrics Administration]
+      summary: Create Unit metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+  /metrics/units/{unitId}:
+    parameters:
+      - name: unitId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsUnits
+      tags: [Platform Metrics Administration]
+      summary: Get Unit metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+    patch:
+      operationId: updateMetricsUnits
+      tags: [Platform Metrics Administration]
+      summary: Update Unit metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+
+  /metrics/formulas:
+    get:
+      operationId: listMetricsFormulas
+      tags: [Platform Metrics Administration]
+      summary: List Formula metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.definition]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsFormulas
+      tags: [Platform Metrics Administration]
+      summary: Create Formula metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+  /metrics/formulas/{formulaId}:
+    parameters:
+      - name: formulaId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsFormulas
+      tags: [Platform Metrics Administration]
+      summary: Get Formula metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+    patch:
+      operationId: updateMetricsFormulas
+      tags: [Platform Metrics Administration]
+      summary: Update Formula metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+
+  /metrics/aggregations:
+    get:
+      operationId: listMetricsAggregations
+      tags: [Platform Metrics Administration]
+      summary: List Aggregation metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.definition]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsAggregations
+      tags: [Platform Metrics Administration]
+      summary: Create Aggregation metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+  /metrics/aggregations/{aggregationId}:
+    parameters:
+      - name: aggregationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsAggregations
+      tags: [Platform Metrics Administration]
+      summary: Get Aggregation metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+    patch:
+      operationId: updateMetricsAggregations
+      tags: [Platform Metrics Administration]
+      summary: Update Aggregation metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+
+  /metrics/thresholds:
+    get:
+      operationId: listMetricsThresholds
+      tags: [Platform Metrics Administration]
+      summary: List Threshold metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.definition]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsThresholds
+      tags: [Platform Metrics Administration]
+      summary: Create Threshold metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+  /metrics/thresholds/{thresholdId}:
+    parameters:
+      - name: thresholdId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsThresholds
+      tags: [Platform Metrics Administration]
+      summary: Get Threshold metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+    patch:
+      operationId: updateMetricsThresholds
+      tags: [Platform Metrics Administration]
+      summary: Update Threshold metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+
+  /metrics/owners:
+    get:
+      operationId: listMetricsOwners
+      tags: [Platform Metrics Administration]
+      summary: List Owner metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.read]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsOwners
+      tags: [Platform Metrics Administration]
+      summary: Create Owner metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.manage]
+  /metrics/owners/{ownerId}:
+    parameters:
+      - name: ownerId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsOwners
+      tags: [Platform Metrics Administration]
+      summary: Get Owner metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.read]
+    patch:
+      operationId: updateMetricsOwners
+      tags: [Platform Metrics Administration]
+      summary: Update Owner metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.manage]
+
+  /metrics/consumers:
+    get:
+      operationId: listMetricsConsumers
+      tags: [Platform Metrics Administration]
+      summary: List Consumer metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.read]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsConsumers
+      tags: [Platform Metrics Administration]
+      summary: Create Consumer metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.manage]
+  /metrics/consumers/{consumerId}:
+    parameters:
+      - name: consumerId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsConsumers
+      tags: [Platform Metrics Administration]
+      summary: Get Consumer metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.read]
+    patch:
+      operationId: updateMetricsConsumers
+      tags: [Platform Metrics Administration]
+      summary: Update Consumer metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.manage]
+
+  /metrics/retention-policies:
+    get:
+      operationId: listMetricsRetentionPolicies
+      tags: [Platform Metrics Administration]
+      summary: List RetentionPolicy metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.retention]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsRetentionPolicies
+      tags: [Platform Metrics Administration]
+      summary: Create RetentionPolicy metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.retention]
+  /metrics/retention-policies/{retentionPolicyId}:
+    parameters:
+      - name: retentionPolicyId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsRetentionPolicies
+      tags: [Platform Metrics Administration]
+      summary: Get RetentionPolicy metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.retention]
+    patch:
+      operationId: updateMetricsRetentionPolicies
+      tags: [Platform Metrics Administration]
+      summary: Update RetentionPolicy metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.retention]
+
+  /metrics/classifications:
+    get:
+      operationId: listMetricsClassifications
+      tags: [Platform Metrics Administration]
+      summary: List Classification metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.classification]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsClassifications
+      tags: [Platform Metrics Administration]
+      summary: Create Classification metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.classification]
+  /metrics/classifications/{classificationId}:
+    parameters:
+      - name: classificationId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsClassifications
+      tags: [Platform Metrics Administration]
+      summary: Get Classification metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.classification]
+    patch:
+      operationId: updateMetricsClassifications
+      tags: [Platform Metrics Administration]
+      summary: Update Classification metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.classification]
+
+  /metrics/dependencies:
+    get:
+      operationId: listMetricsDependencies
+      tags: [Platform Metrics Administration]
+      summary: List Dependency metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.definition]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsDependencies
+      tags: [Platform Metrics Administration]
+      summary: Create Dependency metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+  /metrics/dependencies/{dependencyId}:
+    parameters:
+      - name: dependencyId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsDependencies
+      tags: [Platform Metrics Administration]
+      summary: Get Dependency metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+    patch:
+      operationId: updateMetricsDependencies
+      tags: [Platform Metrics Administration]
+      summary: Update Dependency metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+
+  /metrics/kpis:
+    get:
+      operationId: listMetricsKpis
+      tags: [Platform Metrics Administration]
+      summary: List KPI metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.kpi]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsKpis
+      tags: [Platform Metrics Administration]
+      summary: Create KPI metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.kpi]
+  /metrics/kpis/{kpiId}:
+    parameters:
+      - name: kpiId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsKpis
+      tags: [Platform Metrics Administration]
+      summary: Get KPI metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.kpi]
+    patch:
+      operationId: updateMetricsKpis
+      tags: [Platform Metrics Administration]
+      summary: Update KPI metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.kpi]
+
+  /metrics/kpi-groups:
+    get:
+      operationId: listMetricsKpiGroups
+      tags: [Platform Metrics Administration]
+      summary: List KPIGroup metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.kpi]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsKpiGroups
+      tags: [Platform Metrics Administration]
+      summary: Create KPIGroup metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.kpi]
+  /metrics/kpi-groups/{kpiGroupId}:
+    parameters:
+      - name: kpiGroupId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsKpiGroups
+      tags: [Platform Metrics Administration]
+      summary: Get KPIGroup metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.kpi]
+    patch:
+      operationId: updateMetricsKpiGroups
+      tags: [Platform Metrics Administration]
+      summary: Update KPIGroup metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.kpi]
+
+  /metrics/kpi-targets:
+    get:
+      operationId: listMetricsKpiTargets
+      tags: [Platform Metrics Administration]
+      summary: List KPITarget metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.kpi]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsKpiTargets
+      tags: [Platform Metrics Administration]
+      summary: Create KPITarget metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.kpi]
+  /metrics/kpi-targets/{kpiTargetId}:
+    parameters:
+      - name: kpiTargetId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsKpiTargets
+      tags: [Platform Metrics Administration]
+      summary: Get KPITarget metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.kpi]
+    patch:
+      operationId: updateMetricsKpiTargets
+      tags: [Platform Metrics Administration]
+      summary: Update KPITarget metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.kpi]
+
+  /metrics/relationships:
+    get:
+      operationId: listMetricsRelationships
+      tags: [Platform Metrics Administration]
+      summary: List Relationship metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.definition]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsRelationships
+      tags: [Platform Metrics Administration]
+      summary: Create Relationship metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+  /metrics/relationships/{relationshipId}:
+    parameters:
+      - name: relationshipId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsRelationships
+      tags: [Platform Metrics Administration]
+      summary: Get Relationship metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+    patch:
+      operationId: updateMetricsRelationships
+      tags: [Platform Metrics Administration]
+      summary: Update Relationship metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.definition]
+
+  /metrics/metadata:
+    get:
+      operationId: listMetricsMetadata
+      tags: [Platform Metrics Administration]
+      summary: List Metadata metadata
+      description: Metadata only — no formula/KPI execution.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [metrics.metadata]
+      x-apzhub-scope: management-plane-only
+    post:
+      operationId: createMetricsMetadata
+      tags: [Platform Metrics Administration]
+      summary: Create Metadata metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+  /metrics/metadata/{metadataId}:
+    parameters:
+      - name: metadataId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getMetricsMetadata
+      tags: [Platform Metrics Administration]
+      summary: Get Metadata metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+    patch:
+      operationId: updateMetricsMetadata
+      tags: [Platform Metrics Administration]
+      summary: Update Metadata metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.metadata]
+
+  /metrics/diagnostics/health:
+    get:
+      operationId: getMetricsDiagnosticsHealth
+      tags: [Platform Metrics Administration]
+      summary: Metrics diagnostics health (metadata readiness)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.read]
+  /metrics/diagnostics/readiness:
+    get:
+      operationId: getMetricsDiagnosticsReadiness
+      tags: [Platform Metrics Administration]
+      summary: Metrics diagnostics readiness
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.read]
+  /metrics/diagnostics/capabilities:
+    get:
+      operationId: getMetricsDiagnosticsCapabilities
+      tags: [Platform Metrics Administration]
+      summary: Metrics diagnostics capabilities
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.read]
+  /metrics/health:
+    get:
+      operationId: getMetricsHealth
+      tags: [Platform Metrics Administration]
+      summary: Metrics health alias
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.read]
+  /metrics/readiness:
+    get:
+      operationId: getMetricsReadiness
+      tags: [Platform Metrics Administration]
+      summary: Metrics readiness alias
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.read]
+  /metrics/capabilities:
+    get:
+      operationId: getMetricsCapabilities
+      tags: [Platform Metrics Administration]
+      summary: Metrics management-plane capabilities
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.read]
+  /metrics/management-diagnostics:
+    get:
+      operationId: getMetricsManagementDiagnostics
+      tags: [Platform Metrics Administration]
+      summary: Metrics management-plane diagnostics
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [metrics.read]
+
+  # Platform Workflow (APZWORKFLOW-003) — management plane
+  /workflows:
+    get:
+      operationId: listPlatformWorkflows
+      tags: [Platform Workflow]
+      summary: List platform workflows
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.read]
+    post:
+      operationId: createPlatformWorkflow
+      tags: [Platform Workflow]
+      summary: Create platform workflow metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWorkflowRequest"
+      responses: *TestingCreatedResponses
+      x-apzhub-permissions: [workflow.manage]
+  /workflows/{workflowId}:
+    parameters:
+      - name: workflowId
+        in: path
+        required: true
+        schema: { type: string }
+    get:
+      operationId: getPlatformWorkflow
+      tags: [Platform Workflow]
+      summary: Get platform workflow
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.read]
+  /workflows/{workflowId}/versions:
+    parameters:
+      - name: workflowId
+        in: path
+        required: true
+        schema: { type: string }
+    get:
+      operationId: listPlatformWorkflowVersions
+      tags: [Platform Workflow]
+      summary: List workflow versions
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.read]
+  /workflows/validation:
+    post:
+      operationId: validatePlatformWorkflow
+      tags: [Platform Workflow]
+      summary: Validate workflow metadata
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.read]
+  /workflows/capabilities:
+    get:
+      operationId: getPlatformWorkflowCapabilities
+      tags: [Platform Workflow]
+      summary: Workflow management-plane capabilities
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.read]
+  /workflows/health:
+    get:
+      operationId: getPlatformWorkflowHealth
+      tags: [Platform Workflow]
+      summary: Workflow management-plane health
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.read]
+
+  # Workflow Engine (APZWORKFLOW-008) — read-only engine plane
+  /workflows/engine/workflows:
+    get:
+      operationId: listWorkflowEngineWorkflows
+      tags: [Workflow Engine]
+      summary: List engine workflows (read-only)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.engine.read]
+  /workflows/engine/workflows/{workflowId}:
+    parameters:
+      - name: workflowId
+        in: path
+        required: true
+        schema: { type: string }
+    get:
+      operationId: getWorkflowEngineWorkflow
+      tags: [Workflow Engine]
+      summary: Get engine workflow (read-only)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.engine.read]
+  /workflows/engine/templates:
+    get:
+      operationId: listWorkflowEngineTemplates
+      tags: [Workflow Engine]
+      summary: List engine templates (read-only)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.engine.read]
+  /workflows/engine/capabilities:
+    get:
+      operationId: getWorkflowEngineCapabilities
+      tags: [Workflow Engine]
+      summary: Engine capabilities
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.engine.read]
+  /workflows/engine/health:
+    get:
+      operationId: getWorkflowEngineHealth
+      tags: [Workflow Engine]
+      summary: Engine health
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.engine.read]
+  /workflows/engine/diagnostics:
+    get:
+      operationId: getWorkflowEngineDiagnostics
+      tags: [Workflow Engine]
+      summary: Engine diagnostics
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.engine.read]
+  /workflows/engine/compatibility:
+    get:
+      operationId: getWorkflowEngineCompatibility
+      tags: [Workflow Engine]
+      summary: Engine compatibility
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.engine.read]
+  /workflows/engine/validate:
+    post:
+      operationId: validateWorkflowEngineDefinition
+      tags: [Workflow Engine]
+      summary: Validate engine definition (read-only advisory)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [workflow.engine.read]
+
 components:
   securitySchemes:
     sessionCookie:
@@ -6675,6 +7636,15 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorEnvelope"
   schemas:
+    CreateWorkflowRequest:
+      type: object
+      additionalProperties: false
+      required: [key, name]
+      properties:
+        key: { type: string, minLength: 1, maxLength: 128 }
+        name: { type: string, minLength: 1, maxLength: 256 }
+        description: { type: string, maxLength: 2000 }
+        categoryId: { type: string, maxLength: 128 }
     Meta:
       type: object
       required: [requestId, correlationId]
@@ -6889,7 +7859,18 @@ components:
           maxItems: 16
           items:
             type: string
-            enum: [projects, support, documents, testing, reporting, workflow, analytics, identity, administration]
+            enum:
+              [
+                projects,
+                support,
+                documents,
+                testing,
+                reporting,
+                workflow,
+                analytics,
+                identity,
+                administration,
+              ]
         page: { type: integer, minimum: 1, maximum: 10000 }
         pageSize: { type: integer, minimum: 1, maximum: 100 }
         includeFacets: { type: boolean }
@@ -6963,7 +7944,17 @@ components:
           type: array
           items:
             type: string
-            enum: [opensearch, elasticsearch, postgresql_fts, meilisearch, typesense, azure_ai_search, vector_future, custom]
+            enum:
+              [
+                opensearch,
+                elasticsearch,
+                postgresql_fts,
+                meilisearch,
+                typesense,
+                azure_ai_search,
+                vector_future,
+                custom,
+              ]
         enforceTenantIsolation: { type: boolean, enum: [true] }
         enforceOrganisationIsolation: { type: boolean, enum: [true] }
         enforcePermissionFilter: { type: boolean, enum: [true] }
@@ -8393,7 +9384,8 @@ components:
               addressHint: { type: string, maxLength: 256 }
               channelKind:
                 type: string
-                enum: [email, sms, push, in_app, webhook, microsoft_teams, slack, future]
+                enum:
+                  [email, sms, push, in_app, webhook, microsoft_teams, slack, future]
         references:
           type: array
           maxItems: 50
@@ -8404,7 +9396,17 @@ components:
             properties:
               kind:
                 type: string
-                enum: [projects, support, testing, reporting, documents, workflow, search, future]
+                enum:
+                  [
+                    projects,
+                    support,
+                    testing,
+                    reporting,
+                    documents,
+                    workflow,
+                    search,
+                    future,
+                  ]
               resourceId: { type: string, maxLength: 256 }
               label: { type: string, maxLength: 256 }
     UpdateNotificationRequest:
@@ -8433,7 +9435,18 @@ components:
       properties:
         to:
           type: string
-          enum: [draft, pending, queued, delivered, read, acknowledged, dismissed, expired, archived]
+          enum:
+            [
+              draft,
+              pending,
+              queued,
+              delivered,
+              read,
+              acknowledged,
+              dismissed,
+              expired,
+              archived,
+            ]
         reason: { type: string, maxLength: 512 }
     CreateNotificationTemplateRequest:
       type: object

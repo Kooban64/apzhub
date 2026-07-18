@@ -27,7 +27,7 @@ describe("APZCONFIG-006 Configuration Wave Closeout", () => {
       "packages/configuration-contracts/package.json": "0.2.0",
       "packages/configuration-core/package.json": "0.2.0",
       "packages/configuration-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.24.0",
+      "packages/platform-services/package.json": "0.25.0",
       "packages/platform-service-contracts/package.json": "0.16.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
@@ -46,10 +46,7 @@ describe("APZCONFIG-006 Configuration Wave Closeout", () => {
     );
     expect(freeze).toMatch(/frozen/i);
     const standard = readFileSync(
-      join(
-        ROOT,
-        "docs/architecture/APZHUB-Configuration-Reference-Standard.md",
-      ),
+      join(ROOT, "docs/architecture/APZHUB-Configuration-Reference-Standard.md"),
       "utf8",
     );
     expect(standard).toMatch(/Reference Standard/i);
@@ -77,18 +74,12 @@ describe("APZCONFIG-006 Configuration Wave Closeout", () => {
   it("ships operational readiness and future guide", () => {
     expect(
       existsSync(
-        join(
-          ROOT,
-          "docs/guides/APZHUB-Configuration-Operational-Readiness-Guide.md",
-        ),
+        join(ROOT, "docs/guides/APZHUB-Configuration-Operational-Readiness-Guide.md"),
       ),
     ).toBe(true);
     expect(
       existsSync(
-        join(
-          ROOT,
-          "docs/developer/APZHUB-Future-Configuration-Platform-Guide.md",
-        ),
+        join(ROOT, "docs/developer/APZHUB-Future-Configuration-Platform-Guide.md"),
       ),
     ).toBe(true);
   });

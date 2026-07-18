@@ -10,8 +10,6 @@ export type {
   CreateDocumentPlatformServicesInput,
   DocumentPlatformServicesBundle,
 } from "./create-document-platform-services";
-export {
-  createDocumentPlatformServiceImpls,
-} from "./document-service-impls";
+export { createDocumentPlatformServiceImpls } from "./document-service-impls";
 export type { DocumentPlatformServiceImpls } from "./document-service-impls";
 export { isDocumentServiceEnabled } from "./document-env";

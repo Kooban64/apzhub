@@ -91,7 +91,9 @@ describe("TestingPipelinesView", () => {
       expect(screen.getAllByText("CI").length).toBeGreaterThan(0);
     });
 
-    expect(screen.getByRole("heading", { level: 1, name: "Workflow runs" })).toBeTruthy();
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Workflow runs" }),
+    ).toBeTruthy();
   });
 
   it("renders run detail panels including empty link states", async () => {
@@ -245,7 +247,9 @@ describe("TestingPipelinesView", () => {
       ),
     );
     await waitFor(() => {
-      expect(screen.getAllByTestId("pipeline-repository-details").length).toBeGreaterThan(0);
+      expect(
+        screen.getAllByTestId("pipeline-repository-details").length,
+      ).toBeGreaterThan(0);
     });
 
     render(
@@ -259,7 +263,9 @@ describe("TestingPipelinesView", () => {
       ),
     );
     await waitFor(() => {
-      expect(screen.getAllByRole("heading", { name: "Workflows" }).length).toBeGreaterThan(0);
+      expect(
+        screen.getAllByRole("heading", { name: "Workflows" }).length,
+      ).toBeGreaterThan(0);
     });
 
     render(
@@ -273,7 +279,9 @@ describe("TestingPipelinesView", () => {
       ),
     );
     await waitFor(() => {
-      expect(screen.getAllByRole("heading", { name: "Workflow runs" }).length).toBeGreaterThan(0);
+      expect(
+        screen.getAllByRole("heading", { name: "Workflow runs" }).length,
+      ).toBeGreaterThan(0);
     });
 
     render(wrap(<TestingPipelinesView permissions={["pipeline.read"]} />));
@@ -301,7 +309,10 @@ describe("TestingPipelinesView", () => {
       expect(screen.getByText("Repo missing")).toBeTruthy();
     });
 
-    vi.spyOn(testingApi, "listPipelineWorkflows").mockResolvedValue({ items: [], total: 0 });
+    vi.spyOn(testingApi, "listPipelineWorkflows").mockResolvedValue({
+      items: [],
+      total: 0,
+    });
     render(
       wrap(
         <TestingPipelineWorkflowsView
@@ -332,7 +343,11 @@ describe("TestingPipelinesView", () => {
       expect(screen.getByText("No workflow runs")).toBeTruthy();
     });
 
-    render(wrap(<TestingPipelinesView permissions={[]} mode="workflows" owner="a" repo="b" />));
+    render(
+      wrap(
+        <TestingPipelinesView permissions={[]} mode="workflows" owner="a" repo="b" />,
+      ),
+    );
     await waitFor(() => {
       expect(screen.getAllByText("Pipelines unavailable").length).toBeGreaterThan(0);
     });

@@ -22,14 +22,14 @@ async function runTestingOperation<T>(
   return withTestingErrorMapping(fn, ctx.correlationId);
 }
 
-export class PipelineRepositoryServiceImpl
-  implements TestingPipelineRepositoryService
-{
+export class PipelineRepositoryServiceImpl implements TestingPipelineRepositoryService {
   constructor(private readonly resolver: ProviderResolver) {}
 
   getRepository(ctx: ServiceRequestContext, owner: string, repo: string) {
     return runTestingOperation(ctx, () =>
-      this.resolver.resolvePipelineRepositoryProvider(ctx).getRepository(ctx, owner, repo),
+      this.resolver
+        .resolvePipelineRepositoryProvider(ctx)
+        .getRepository(ctx, owner, repo),
     );
   }
 }
@@ -39,7 +39,9 @@ export class PipelineWorkflowServiceImpl implements TestingPipelineWorkflowServi
 
   listWorkflows(ctx: ServiceRequestContext, owner: string, repo: string) {
     return runTestingOperation(ctx, () =>
-      this.resolver.resolvePipelineWorkflowProvider(ctx).listWorkflows(ctx, owner, repo),
+      this.resolver
+        .resolvePipelineWorkflowProvider(ctx)
+        .listWorkflows(ctx, owner, repo),
     );
   }
 

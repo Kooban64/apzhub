@@ -87,9 +87,7 @@ function jsonResponse(body: unknown, status = 200): Response {
   });
 }
 
-export function createMockN8nFetch(
-  options: MockN8nApiOptions = {},
-): FetchFn {
+export function createMockN8nFetch(options: MockN8nApiOptions = {}): FetchFn {
   return async (input: string, init?: RequestInit) => {
     const url = input;
     const headers = new Headers(init?.headers);

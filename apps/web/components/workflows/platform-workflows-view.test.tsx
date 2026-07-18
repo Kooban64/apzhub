@@ -12,17 +12,13 @@ import {
   MOCK_WORKFLOW_TEMPLATE,
   MOCK_WORKFLOW_VERSION,
 } from "@/lib/workflows/mock-workflow-client";
-import {
-  resetWorkflowClient,
-  setWorkflowClient,
-} from "@/lib/workflows/workflow-api";
+import { resetWorkflowClient, setWorkflowClient } from "@/lib/workflows/workflow-api";
 
 import { DefinitionGraph } from "./definition-graph";
 import { DefinitionViewer } from "./definition-viewer";
 import { PlatformWorkflowsView } from "./platform-workflows-view";
 import { VersionCompare, compareWorkflowVersions } from "./version-compare";
 import { AuditTimeline } from "./audit-timeline";
-import { WorkflowsWorkspaceRouter } from "./workflows-workspace-router";
 import {
   buildWorkflowExportPayload,
   exportWorkflowAsJson,
@@ -55,18 +51,14 @@ describe("PlatformWorkflowsView", () => {
     render(wrap(<PlatformWorkflowsView section="overview" />));
 
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
       expect(screen.getByText(MOCK_WORKFLOW.name)).toBeTruthy();
     });
 
     expect(screen.getByTestId("card-execution-status").textContent).toContain(
       "Workflow Execution Not Available",
     );
-    expect(
-      screen.getByRole("toolbar", { name: /Workflows commands/i }),
-    ).toBeTruthy();
+    expect(screen.getByRole("toolbar", { name: /Workflows commands/i })).toBeTruthy();
     expect(screen.getByTestId("workflows-page")).toBeTruthy();
   });
 
@@ -112,9 +104,7 @@ describe("PlatformWorkflowsView", () => {
     render(wrap(<PlatformWorkflowsView section="versions" />));
 
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Versions" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Versions" })).toBeTruthy();
       expect(screen.getByText(MOCK_WORKFLOW.name)).toBeTruthy();
     });
 
@@ -125,9 +115,7 @@ describe("PlatformWorkflowsView", () => {
   });
 
   it("renders templates, categories, folders, diagnostics, validation, audit", async () => {
-    const { rerender } = render(
-      wrap(<PlatformWorkflowsView section="templates" />),
-    );
+    const { rerender } = render(wrap(<PlatformWorkflowsView section="templates" />));
     await waitFor(() => {
       expect(screen.getByText(MOCK_WORKFLOW_TEMPLATE.name)).toBeTruthy();
     });
@@ -286,10 +274,7 @@ describe("Definition Viewer / Graph / Compare / Audit helpers", () => {
   });
 
   it("exports metadata as json yaml markdown", () => {
-    const payload = buildWorkflowExportPayload(
-      MOCK_WORKFLOW,
-      MOCK_WORKFLOW_VERSION,
-    );
+    const payload = buildWorkflowExportPayload(MOCK_WORKFLOW, MOCK_WORKFLOW_VERSION);
     expect(exportWorkflowAsJson(payload)).toContain(MOCK_WORKFLOW.id);
     expect(exportWorkflowAsYaml(payload)).toContain("workflow:");
     expect(exportWorkflowAsYaml(payload)).toContain("version:");

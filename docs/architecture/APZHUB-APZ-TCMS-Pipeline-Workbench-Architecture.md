@@ -15,10 +15,10 @@ Presentation must not call adapters, testing-services, or persistence.
 
 ## Live vs SoR
 
-| Concern | Gateway facet | HTTP namespace |
-|---|---|---|
-| Live CI reads | `pipelineRepositories`, `pipelineWorkflows`, `pipelineRuns`, `pipelineJobs`, `pipelineSteps`, `pipelineArtifacts`, `pipelineSummaries` | `/pipelines/repositories/{owner}/{repo}/…` |
-| Persisted metadata | `pipelines` | `/pipelines`, `/pipelines/{id}`, `/pipelines/runs/{id}` |
+| Concern            | Gateway facet                                                                                                                          | HTTP namespace                                          |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| Live CI reads      | `pipelineRepositories`, `pipelineWorkflows`, `pipelineRuns`, `pipelineJobs`, `pipelineSteps`, `pipelineArtifacts`, `pipelineSummaries` | `/pipelines/repositories/{owner}/{repo}/…`              |
+| Persisted metadata | `pipelines`                                                                                                                            | `/pipelines`, `/pipelines/{id}`, `/pipelines/runs/{id}` |
 
 Naming keeps live `pipelineRuns.getRun` distinct from SoR `pipelines.getRun`.
 

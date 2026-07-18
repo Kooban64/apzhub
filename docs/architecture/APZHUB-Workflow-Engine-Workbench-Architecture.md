@@ -23,22 +23,22 @@ Workflow Engine Workbench (PlatformWorkflowEngineView)
 
 ## Sections
 
-| Section | Path | Content |
-|---------|------|---------|
-| Overview | `/workspace/workflow-engine/overview` | Inventory cards; prominent **READ-ONLY ENGINE** |
-| Workflows | `…/workflows` | List, detail, metadata, definition viewer (counts) |
-| Templates | `…/templates` | List / detail / usage note |
-| Projects | `…/projects` | List / metadata |
-| Users | `…/users` | List / assignments note |
-| Tags | `…/tags` | List / usage counts from list join |
-| Capabilities | `…/capabilities` | Supported / unsupported |
-| Health | `…/health` | Platform & engine health |
-| Diagnostics | `…/diagnostics` | Latency, readiness, versions |
-| Compatibility | `…/compatibility` | Supported / unsupported / limitations |
+| Section       | Path                                  | Content                                            |
+| ------------- | ------------------------------------- | -------------------------------------------------- |
+| Overview      | `/workspace/workflow-engine/overview` | Inventory cards; prominent **READ-ONLY ENGINE**    |
+| Workflows     | `…/workflows`                         | List, detail, metadata, definition viewer (counts) |
+| Templates     | `…/templates`                         | List / detail / usage note                         |
+| Projects      | `…/projects`                          | List / metadata                                    |
+| Users         | `…/users`                             | List / assignments note                            |
+| Tags          | `…/tags`                              | List / usage counts from list join                 |
+| Capabilities  | `…/capabilities`                      | Supported / unsupported                            |
+| Health        | `…/health`                            | Platform & engine health                           |
+| Diagnostics   | `…/diagnostics`                       | Latency, readiness, versions                       |
+| Compatibility | `…/compatibility`                     | Supported / unsupported / limitations              |
 
 ## Commands
 
-Refresh · View Details · Copy ID · Open API Metadata · Validate Connection  
+Refresh · View Details · Copy ID · Open API Metadata · Validate Connection
 
 No execute / activate / deactivate / schedule / deploy / run.
 

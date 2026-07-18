@@ -64,9 +64,7 @@ export const IDENTITY_FORBIDDEN_HTTP_SEGMENTS = [
 ] as const;
 
 export function isIdentityApiPath(pathname: string): boolean {
-  return (
-    pathname === IDENTITY_API_BASE || pathname.startsWith(`${IDENTITY_API_BASE}/`)
-  );
+  return pathname === IDENTITY_API_BASE || pathname.startsWith(`${IDENTITY_API_BASE}/`);
 }
 
 export function assertIdentityApiPath(pathname: string): void {

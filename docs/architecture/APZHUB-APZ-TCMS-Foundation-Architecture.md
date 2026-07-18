@@ -3,7 +3,7 @@
 **Product:** APZ TCMS  
 **Milestone:** APZTCMS-002 (contracts) · **APZTCMS-003** (persistence)  
 **Status:** Core platform foundation (contracts + manifests) **plus persistence** (`@apzhub/testing-persistence` **0.1.0**) — **still no APIs, UI, or runners**  
-**Authority:** [000](../000-apzhub-engineering-constitution.md) · [003](../003-system-architecture-layered-design-principles.md) · [008](../008-module-platform-service-connector-architecture.md) · [009](../009-platform-service-layer-business-logic-architecture.md) · [027](../027-platform-service-sdk-business-service-framework-service-manifest-specification.md) · [Reference Architecture](./APZHUB-APZ-TCMS-Reference-Architecture.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)
+**Authority:** [000](../000-apzhub-engineering-constitution.md) · [003](../003-overall-system-architecture-design-principles.md) · [008](../008-module-plugin-connector-architecture.md) · [009](../009-platform-service-layer-integration-framework.md) · [027](../027-platform-service-sdk-business-service-framework-service-manifest-specification.md) · [Reference Architecture](./APZHUB-APZ-TCMS-Reference-Architecture.md) · [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)
 
 ---
 
@@ -15,13 +15,13 @@ SoR schema, migrations (0016/0017), repositories, and live authz asserts are del
 
 ## Scope delivered (APZTCMS-002)
 
-| Deliverable | Location |
-|-------------|----------|
-| Domain / service / event / permission / config contracts | `@apzhub/testing-contracts` `0.1.0` |
-| In-memory registries + validation helpers | `@apzhub/testing-foundation` `0.1.0` |
-| `TestingService` manifest | `services/testing/service.yaml` |
-| `CertificationService` manifest | `services/certification/service.yaml` |
-| Testing module shell (disabled/planned) | `services/testing/manifests/testing/module.yaml` |
+| Deliverable                                              | Location                                         |
+| -------------------------------------------------------- | ------------------------------------------------ |
+| Domain / service / event / permission / config contracts | `@apzhub/testing-contracts` `0.1.0`              |
+| In-memory registries + validation helpers                | `@apzhub/testing-foundation` `0.1.0`             |
+| `TestingService` manifest                                | `services/testing/service.yaml`                  |
+| `CertificationService` manifest                          | `services/certification/service.yaml`            |
+| Testing module shell (disabled/planned)                  | `services/testing/manifests/testing/module.yaml` |
 
 ---
 
@@ -32,7 +32,7 @@ SoR schema, migrations (0016/0017), repositories, and live authz asserts are del
 - No Event Bus, notifications, AI runtime, evidence blob upload pipelines
 - No `TestingServiceImpl` / certification engine / full runner UX
 
-*(APZTCMS-002 owner brief forbade DB; APZTCMS-003 delivered persistence — that exclusion is closed.)*
+_(APZTCMS-002 owner brief forbade DB; APZTCMS-003 delivered persistence — that exclusion is closed.)_
 
 ---
 
@@ -62,12 +62,12 @@ Invariant: modules never call engines; services never skip connectors for engine
 
 ## Package ownership
 
-| Package | Owns | Does not own |
-|---------|------|--------------|
-| `@apzhub/testing-contracts` | Product domain contracts for TCMS | Platform-wide Project/Support DTOs |
-| `@apzhub/testing-foundation` | Registries + validators | Business rules / orchestration |
-| `@apzhub/testing-persistence` | Repositories, authz asserts, SoR mappers | HTTP / UI / orchestration |
-| `@apzhub/platform-service-contracts` | Shared `ServiceRequestContext` etc. | TCMS product models |
+| Package                              | Owns                                     | Does not own                       |
+| ------------------------------------ | ---------------------------------------- | ---------------------------------- |
+| `@apzhub/testing-contracts`          | Product domain contracts for TCMS        | Platform-wide Project/Support DTOs |
+| `@apzhub/testing-foundation`         | Registries + validators                  | Business rules / orchestration     |
+| `@apzhub/testing-persistence`        | Repositories, authz asserts, SoR mappers | HTTP / UI / orchestration          |
+| `@apzhub/platform-service-contracts` | Shared `ServiceRequestContext` etc.      | TCMS product models                |
 
 TCMS contracts remain product-owned — they are **not** folded into `platform-service-contracts`.
 
@@ -77,14 +77,14 @@ TCMS contracts remain product-owned — they are **not** folded into `platform-s
 
 Runtime codes are snake_case; display labels match the Domain Model:
 
-| Code | Label |
-|------|-------|
-| `development_ready` | Development Ready |
-| `qa_ready` | QA Ready |
-| `regression_ready` | Regression Ready |
-| `uat_ready` | UAT Ready |
-| `production_ready` | Production Ready |
-| `certified` | Certified |
+| Code                   | Label                |
+| ---------------------- | -------------------- |
+| `development_ready`    | Development Ready    |
+| `qa_ready`             | QA Ready             |
+| `regression_ready`     | Regression Ready     |
+| `uat_ready`            | UAT Ready            |
+| `production_ready`     | Production Ready     |
+| `certified`            | Certified            |
 | `failed_certification` | Failed Certification |
 | `conditional_approval` | Conditional Approval |
 

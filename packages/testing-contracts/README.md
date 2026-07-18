@@ -11,15 +11,15 @@ Defines the stable product-owned boundary for **APZ TCMS** (Testing & Certificat
 
 ## Contents
 
-| Area | Description |
-|------|-------------|
-| `identifiers.ts` | Branded platform IDs + shape helpers |
-| `enums/` | Execution, test, evidence, certification, approval, severity, priority, risk, automation, defect, coverage, readiness enums |
-| `domain/` | Canonical models including quality intelligence (`QualitySnapshot`, `DefectLink`, readiness assessments) |
-| `services/` | Interfaces only — manual, automation, quality intelligence, and certification engine service contracts |
-| `events/` | Past-tense event envelopes — **no Event Bus** |
-| `permissions/` | `testing.*`, `quality.*`, `coverage.*`, `defects.*`, `release.*`, … catalogue constants |
-| `config/` | `ApzTcmsConfiguration` + defaults factory |
+| Area             | Description                                                                                                                 |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `identifiers.ts` | Branded platform IDs + shape helpers                                                                                        |
+| `enums/`         | Execution, test, evidence, certification, approval, severity, priority, risk, automation, defect, coverage, readiness enums |
+| `domain/`        | Canonical models including quality intelligence (`QualitySnapshot`, `DefectLink`, readiness assessments)                    |
+| `services/`      | Interfaces only — manual, automation, quality intelligence, and certification engine service contracts                      |
+| `events/`        | Past-tense event envelopes — **no Event Bus**                                                                               |
+| `permissions/`   | `testing.*`, `quality.*`, `coverage.*`, `defects.*`, `release.*`, … catalogue constants                                     |
+| `config/`        | `ApzTcmsConfiguration` + defaults factory                                                                                   |
 
 ## Usage
 

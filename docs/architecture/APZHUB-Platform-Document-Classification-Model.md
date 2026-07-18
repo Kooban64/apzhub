@@ -5,20 +5,20 @@
 
 ## Codes
 
-| Code | Meaning |
-|------|---------|
-| `public` | Publicly shareable |
-| `internal` | Internal default |
-| `confidential` | Confidential |
-| `restricted` | Restricted access |
-| `legal` | Legal matter content |
-| `financial` | Financial records |
-| `compliance` | Compliance artefacts |
-| `evidence` | Evidence packs |
+| Code               | Meaning                    |
+| ------------------ | -------------------------- |
+| `public`           | Publicly shareable         |
+| `internal`         | Internal default           |
+| `confidential`     | Confidential               |
+| `restricted`       | Restricted access          |
+| `legal`            | Legal matter content       |
+| `financial`        | Financial records          |
+| `compliance`       | Compliance artefacts       |
+| `evidence`         | Evidence packs             |
 | `generated_report` | Reporting Platform outputs |
-| `template` | Templates |
-| `attachment` | Attachments |
-| `custom` | Requires `customCode` |
+| `template`         | Templates                  |
+| `attachment`       | Attachments                |
+| `custom`           | Requires `customCode`      |
 
 ## Rules
 

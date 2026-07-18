@@ -1,9 +1,9 @@
-import { createBidirectionalEnumMapper, createEnumMapper } from "@apzhub/integration-sdk/mapping";
+import {
+  createBidirectionalEnumMapper,
+  createEnumMapper,
+} from "@apzhub/integration-sdk/mapping";
 
-import type {
-  SupportTicketPriority,
-  SupportTicketStatus,
-} from "../models/canonical";
+import type { SupportTicketPriority, SupportTicketStatus } from "../models/canonical";
 
 const statusMapper = createEnumMapper<SupportTicketStatus>({
   map: {

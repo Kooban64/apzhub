@@ -4,13 +4,13 @@
 
 ## Catalogue
 
-| Permission | Use |
-| --- | --- |
-| `workflow.engine.*` | Wildcard grant for engine surface |
-| `workflow.engine.read` | list/get workflows, templates, tags, users, projects; mutation stubs (still NOT_SUPPORTED after authz) |
-| `workflow.engine.health` | health + connection.validate |
-| `workflow.engine.diagnostics` | diagnostics |
-| `workflow.engine.capabilities` | capabilities + compatibility |
+| Permission                     | Use                                                                                                    |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `workflow.engine.*`            | Wildcard grant for engine surface                                                                      |
+| `workflow.engine.read`         | list/get workflows, templates, tags, users, projects; mutation stubs (still NOT_SUPPORTED after authz) |
+| `workflow.engine.health`       | health + connection.validate                                                                           |
+| `workflow.engine.diagnostics`  | diagnostics                                                                                            |
+| `workflow.engine.capabilities` | capabilities + compatibility                                                                           |
 
 Note: platform wildcard `workflow.*` also matches `workflow.engine.*` via namespace rules.
 

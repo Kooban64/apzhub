@@ -1,16 +1,16 @@
 # APZHUB Programme — Milestone Completion Report
 
-| Field | Value |
-| --- | --- |
-| **Document ID** | APZSEARCH-003-CR |
-| **Milestone** | APZSEARCH-003 — Search Platform Services, Gateway & Authorization Integration |
-| **Programme** | APZHUB Platform Search |
-| **Status** | **COMPLETE** |
-| **Classification** | Management-plane integration (no execution) |
-| **Date** | 2026-07-14 |
-| **Authority** | Knowledge Foundation · owner-approved milestone scope |
-| **Predecessor** | APZSEARCH-002 (Complete) |
-| **Successor** | APZSEARCH-004 — Search Provider Selection & Reference Engine Adapter (**not started; requires owner approval**) |
+| Field              | Value                                                                                                           |
+| ------------------ | --------------------------------------------------------------------------------------------------------------- |
+| **Document ID**    | APZSEARCH-003-CR                                                                                                |
+| **Milestone**      | APZSEARCH-003 — Search Platform Services, Gateway & Authorization Integration                                   |
+| **Programme**      | APZHUB Platform Search                                                                                          |
+| **Status**         | **COMPLETE**                                                                                                    |
+| **Classification** | Management-plane integration (no execution)                                                                     |
+| **Date**           | 2026-07-14                                                                                                      |
+| **Authority**      | Knowledge Foundation · owner-approved milestone scope                                                           |
+| **Predecessor**    | APZSEARCH-002 (Complete)                                                                                        |
+| **Successor**      | APZSEARCH-004 — Search Provider Selection & Reference Engine Adapter (**not started; requires owner approval**) |
 
 ---
 
@@ -37,44 +37,44 @@ PlatformServiceGateway
 
 ## 2. Milestone scope delivered
 
-| Requirement area | Outcome |
-| --- | --- |
-| Platform service contracts | Delivered — 14 gateway facets |
-| Canonical model reuse | Delivered — no domain duplication |
-| Thin platform-service implementations | Delivered |
-| Provider management | Delivered |
-| Provider lifecycle | Delivered (no search execution) |
-| Configuration service | Delivered (secret refs only) |
-| Collections / sources / scopes / profiles | Delivered (metadata only) |
-| Capabilities / health / diagnostics | Delivered |
-| Statistics / audit / validation | Delivered |
-| PlatformServiceGateway integration | Delivered |
-| RequestPipeline integration | Delivered |
-| Permission catalogue | Delivered (62 keys; coarse + granular) |
-| Explicit operation→permission map | Delivered (`searchPlatformOps`, 74 mappings) |
-| Production authorisation | Delivered |
-| Tenant / organisation isolation | Delivered |
-| Provider ownership | Delivered (`platform` \| `tenant` \| `organisation`) |
-| Impersonation controls | Applied via existing platform pipeline |
-| Error translation | Delivered → `PlatformServiceError` |
-| Logging / metrics | Via RequestPipeline abstractions |
-| Production / test factories | Delivered |
-| Platform bootstrap (`SEARCH_SERVICE_ENABLED`) | Delivered |
-| Health / readiness integration | Delivered |
-| Backward compatibility | Maintained |
-| Architecture boundary checks | Audit PASS (0 violations) |
-| Tests + coverage ≥95% (scoped) | PASS |
-| Documentation + foundation stop-point updates | Delivered |
+| Requirement area                              | Outcome                                              |
+| --------------------------------------------- | ---------------------------------------------------- |
+| Platform service contracts                    | Delivered — 14 gateway facets                        |
+| Canonical model reuse                         | Delivered — no domain duplication                    |
+| Thin platform-service implementations         | Delivered                                            |
+| Provider management                           | Delivered                                            |
+| Provider lifecycle                            | Delivered (no search execution)                      |
+| Configuration service                         | Delivered (secret refs only)                         |
+| Collections / sources / scopes / profiles     | Delivered (metadata only)                            |
+| Capabilities / health / diagnostics           | Delivered                                            |
+| Statistics / audit / validation               | Delivered                                            |
+| PlatformServiceGateway integration            | Delivered                                            |
+| RequestPipeline integration                   | Delivered                                            |
+| Permission catalogue                          | Delivered (62 keys; coarse + granular)               |
+| Explicit operation→permission map             | Delivered (`searchPlatformOps`, 74 mappings)         |
+| Production authorisation                      | Delivered                                            |
+| Tenant / organisation isolation               | Delivered                                            |
+| Provider ownership                            | Delivered (`platform` \| `tenant` \| `organisation`) |
+| Impersonation controls                        | Applied via existing platform pipeline               |
+| Error translation                             | Delivered → `PlatformServiceError`                   |
+| Logging / metrics                             | Via RequestPipeline abstractions                     |
+| Production / test factories                   | Delivered                                            |
+| Platform bootstrap (`SEARCH_SERVICE_ENABLED`) | Delivered                                            |
+| Health / readiness integration                | Delivered                                            |
+| Backward compatibility                        | Maintained                                           |
+| Architecture boundary checks                  | Audit PASS (0 violations)                            |
+| Tests + coverage ≥95% (scoped)                | PASS                                                 |
+| Documentation + foundation stop-point updates | Delivered                                            |
 
 ---
 
 ## 3. Package versions
 
-| Package | Prior | Delivered | Change |
-| --- | --- | --- | --- |
-| `@apzhub/search-contracts` | 0.2.0 | **0.3.0** | Additive contracts, permissions, errors, gateway surface |
-| `@apzhub/search-persistence` | 0.1.0 | **0.2.0** | Full management thin services; migration 0043 |
-| `@apzhub/platform-services` | 0.16.0 | **0.17.0** | Search factories, gateway facets, authz map, bootstrap |
+| Package                      | Prior  | Delivered  | Change                                                   |
+| ---------------------------- | ------ | ---------- | -------------------------------------------------------- |
+| `@apzhub/search-contracts`   | 0.2.0  | **0.3.0**  | Additive contracts, permissions, errors, gateway surface |
+| `@apzhub/search-persistence` | 0.1.0  | **0.2.0**  | Full management thin services; migration 0043            |
+| `@apzhub/platform-services`  | 0.16.0 | **0.17.0** | Search factories, gateway facets, authz map, bootstrap   |
 
 Unrelated packages were not version-bumped for this milestone.
 
@@ -93,19 +93,19 @@ PlatformServiceGateway
 
 ### 4.2 Management plane vs execution plane
 
-| Plane | Status in APZSEARCH-003 |
-| --- | --- |
-| Management plane (providers, config, metadata, diagnostics, validation) | **Operational** |
-| Provider lifecycle readiness | Supported for stub/managed providers |
-| Search-execution readiness | **Unavailable / false** |
-| Indexing / engine binding | **Not implemented** |
+| Plane                                                                   | Status in APZSEARCH-003              |
+| ----------------------------------------------------------------------- | ------------------------------------ |
+| Management plane (providers, config, metadata, diagnostics, validation) | **Operational**                      |
+| Provider lifecycle readiness                                            | Supported for stub/managed providers |
+| Search-execution readiness                                              | **Unavailable / false**              |
+| Indexing / engine binding                                               | **Not implemented**                  |
 
 ### 4.3 Legacy coexistence
 
-| Surface | Role |
-| --- | --- |
-| `gateway.searchPlatform` / `gateway.searchProviders` … | APZSEARCH-003 management plane |
-| `gateway.search` | Legacy Plane/product search scaffold — **not** APZSEARCH execution |
+| Surface                                                | Role                                                               |
+| ------------------------------------------------------ | ------------------------------------------------------------------ |
+| `gateway.searchPlatform` / `gateway.searchProviders` … | APZSEARCH-003 management plane                                     |
+| `gateway.search`                                       | Legacy Plane/product search scaffold — **not** APZSEARCH execution |
 
 These surfaces are deliberately not collapsed.
 
@@ -115,22 +115,22 @@ These surfaces are deliberately not collapsed.
 
 Contracts live in `@apzhub/search-contracts` (`SearchPlatformGateway` and facet interfaces).
 
-| Facet | Interface role |
-| --- | --- |
-| `searchQuery` | `validateQuery` only; reserved `query` throws `search_execution_unavailable` |
-| `searchProviders` | Provider registration, lifecycle, activation, validation |
-| `searchConfigurations` | Configuration CRUD, versioning, activate, validate, archive |
-| `searchCapabilities` | Capability inspection |
-| `searchHealth` | Health + management/execution readiness differentiation |
-| `searchDiagnostics` | Safe diagnostics (redacted) |
-| `searchCollections` | Collection metadata lifecycle |
-| `searchSources` | Source metadata + provider/collection assignment |
-| `searchScopes` | Scope metadata |
-| `searchProfiles` | Profile metadata |
-| `searchMetadata` | Declared entity metadata projections (not an index) |
-| `searchAudit` | Immutable audit retrieval |
-| `searchStatistics` | Metadata counts only (no invented query volumes) |
-| `searchValidation` | Deterministic validation — no business search execution |
+| Facet                  | Interface role                                                               |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| `searchQuery`          | `validateQuery` only; reserved `query` throws `search_execution_unavailable` |
+| `searchProviders`      | Provider registration, lifecycle, activation, validation                     |
+| `searchConfigurations` | Configuration CRUD, versioning, activate, validate, archive                  |
+| `searchCapabilities`   | Capability inspection                                                        |
+| `searchHealth`         | Health + management/execution readiness differentiation                      |
+| `searchDiagnostics`    | Safe diagnostics (redacted)                                                  |
+| `searchCollections`    | Collection metadata lifecycle                                                |
+| `searchSources`        | Source metadata + provider/collection assignment                             |
+| `searchScopes`         | Scope metadata                                                               |
+| `searchProfiles`       | Profile metadata                                                             |
+| `searchMetadata`       | Declared entity metadata projections (not an index)                          |
+| `searchAudit`          | Immutable audit retrieval                                                    |
+| `searchStatistics`     | Metadata counts only (no invented query volumes)                             |
+| `searchValidation`     | Deterministic validation — no business search execution                      |
 
 No search-execution service was introduced.
 
@@ -152,8 +152,8 @@ Platform wrappers are limited to:
 
 Thin implementations:
 
-1. Persistence package thin services over repositories + registry  
-2. Platform-services adapters that remap context, invoke the Search gateway surface, and translate domain errors  
+1. Persistence package thin services over repositories + registry
+2. Platform-services adapters that remap context, invoke the Search gateway surface, and translate domain errors
 
 They may validate context, invoke persistence/registry, translate controlled errors, and emit pipeline logging/metrics.  
 They must not (and do not) execute searches, index content, call engine SDKs, rank results, generate embeddings, or load plugins from user input.
@@ -203,7 +203,7 @@ Collections are governed search metadata/scope configuration. They are **not** p
 
 Metadata operations: create · get · list · update · enable · disable · archive · restore · assign provider · assign collection · capability-requirement retrieval.
 
-Sources may *represent* future domains (Projects, Support, Documents, Testing, Reporting, etc.). Product adapters are not implemented and business data is not read.
+Sources may _represent_ future domains (Projects, Support, Documents, Testing, Reporting, etc.). Product adapters are not implemented and business data is not read.
 
 ---
 
@@ -373,12 +373,12 @@ Credentials, resolved secrets, credential-bearing URLs, business search queries,
 
 Factories:
 
-| Factory | Behaviour |
-| --- | --- |
-| `createSearchPlatformServices` | Compose from foundation/persistence |
+| Factory                                     | Behaviour                                              |
+| ------------------------------------------- | ------------------------------------------------------ |
+| `createSearchPlatformServices`              | Compose from foundation/persistence                    |
 | `createSearchPlatformServicesForProduction` | Requires PostgreSQL — **no** silent in-memory fallback |
-| `createSearchPlatformServicesForTest` | Explicit in-memory opt-in permitted |
-| `wrapSearchPlatformGatewayWithPipeline` | RequestPipeline facet wrapping |
+| `createSearchPlatformServicesForTest`       | Explicit in-memory opt-in permitted                    |
+| `wrapSearchPlatformGatewayWithPipeline`     | RequestPipeline facet wrapping                         |
 
 Production requires PostgreSQL Search persistence, ProductionAuthorizationProvider (via platform composition), RequestPipeline, logger/metrics abstractions, and validated Search configuration. Production must not silently use in-memory persistence, allow-all authorisation, mock providers, or test secret providers.
 
@@ -388,11 +388,11 @@ Production requires PostgreSQL Search persistence, ProductionAuthorizationProvid
 
 Feature switch: `SEARCH_SERVICE_ENABLED=true` (requires `DATABASE_URL`).
 
-| State | Behaviour |
-| --- | --- |
-| Disabled | Existing platform unchanged; Search facets unavailable (controlled error) |
-| Enabled + misconfigured | Clear readiness failure — no silent fallback |
-| Enabled + healthy | Search management facets registered |
+| State                   | Behaviour                                                                 |
+| ----------------------- | ------------------------------------------------------------------------- |
+| Disabled                | Existing platform unchanged; Search facets unavailable (controlled error) |
+| Enabled + misconfigured | Clear readiness failure — no silent fallback                              |
+| Enabled + healthy       | Search management facets registered                                       |
 
 No HTTP routes were added.
 
@@ -462,13 +462,13 @@ Legacy Plane `gateway.search` remains unsupported for APZSEARCH execution and wa
 
 ## 37. Tests added / totals
 
-| Suite | Tests |
-| --- | --- |
-| `@apzhub/search-contracts` | 11 |
-| `@apzhub/search-persistence` | 20 |
-| platform-services Search (`apzsearch-003-platform-services.test.ts`) | 13 |
-| foundation harness (`apzsearch-003-foundation.test.ts`) | 3 |
-| **Milestone-relevant total** | **47** |
+| Suite                                                                | Tests  |
+| -------------------------------------------------------------------- | ------ |
+| `@apzhub/search-contracts`                                           | 11     |
+| `@apzhub/search-persistence`                                         | 20     |
+| platform-services Search (`apzsearch-003-platform-services.test.ts`) | 13     |
+| foundation harness (`apzsearch-003-foundation.test.ts`)              | 3      |
+| **Milestone-relevant total**                                         | **47** |
 
 Regression focus: Search contracts, Search persistence, platform-services Search wiring, production-authorization map presence, readiness/bootstrap enablement patterns, architecture audit. No live search engine required.
 
@@ -478,10 +478,10 @@ Regression focus: Search contracts, Search persistence, platform-services Search
 
 Scoped Vitest coverage (see [APZSEARCH-003 coverage baseline](../reviews/APZSEARCH-003-coverage-baseline.md)):
 
-| Scope | Statements | Branches | Functions | Lines |
-| --- | --- | --- | --- | --- |
+| Scope                                                                   | Statements | Branches   | Functions  | Lines      |
+| ----------------------------------------------------------------------- | ---------- | ---------- | ---------- | ---------- |
 | `search-persistence` (excl. postgres drivers / ports / records / types) | **98.23%** | **89.16%** | **98.96%** | **98.23%** |
-| `platform-services/src/services/search` | **100%** | **98.03%** | **100%** | **100%** |
+| `platform-services/src/services/search`                                 | **100%**   | **98.03%** | **100%**   | **100%**   |
 
 Operation-to-permission map: **100%** of public Search platform methods mapped (asserted by test).
 
@@ -491,37 +491,37 @@ Operation-to-permission map: **100%** of public Search platform methods mapped (
 
 Command: `pnpm audit:search-platform-services`
 
-| Check | Result |
-| --- | --- |
-| search-contracts / search-persistence do not depend on platform-services / HTTP / engines | PASS |
-| Search platform services do not execute queries or call engines | PASS |
-| Gateway exposes Search platform facets without collapsing into legacy `search` | PASS |
-| Catalogue + operation map include Search permissions | PASS |
-| **Violations** | **0** |
+| Check                                                                                     | Result |
+| ----------------------------------------------------------------------------------------- | ------ |
+| search-contracts / search-persistence do not depend on platform-services / HTTP / engines | PASS   |
+| Search platform services do not execute queries or call engines                           | PASS   |
+| Gateway exposes Search platform facets without collapsing into legacy `search`            | PASS   |
+| Catalogue + operation map include Search permissions                                      | PASS   |
+| **Violations**                                                                            | **0**  |
 
 ---
 
 ## 40. Security and redaction results
 
-| Control | Result |
-| --- | --- |
-| Secret references only in configuration | PASS |
-| No resolved secrets in diagnostics/config responses | PASS |
-| Tenant/organisation isolation | PASS |
-| Provider ownership visibility | PASS |
-| Deny-by-default production authz map | PASS |
-| No query-execution surface | PASS |
+| Control                                             | Result |
+| --------------------------------------------------- | ------ |
+| Secret references only in configuration             | PASS   |
+| No resolved secrets in diagnostics/config responses | PASS   |
+| Tenant/organisation isolation                       | PASS   |
+| Provider ownership visibility                       | PASS   |
+| Deny-by-default production authz map                | PASS   |
+| No query-execution surface                          | PASS   |
 
 ---
 
 ## 41. Quality-gate results
 
-| Gate | Result |
-| --- | --- |
-| Typecheck (`search-contracts`, `search-persistence`, `platform-services`) | **PASS** |
-| Milestone unit/foundation tests (47) | **PASS** |
-| Coverage thresholds (≥95% lines/statements scoped) | **PASS** |
-| Architecture audit | **PASS** (0 violations) |
+| Gate                                                                      | Result                  |
+| ------------------------------------------------------------------------- | ----------------------- |
+| Typecheck (`search-contracts`, `search-persistence`, `platform-services`) | **PASS**                |
+| Milestone unit/foundation tests (47)                                      | **PASS**                |
+| Coverage thresholds (≥95% lines/statements scoped)                        | **PASS**                |
+| Architecture audit                                                        | **PASS** (0 violations) |
 
 Unrelated repository suites outside this milestone scope were not claimed as complete by this report.
 
@@ -538,23 +538,23 @@ Unrelated repository suites outside this milestone scope were not claimed as com
 
 ## 43. Technical debt
 
-| Item | Notes |
-| --- | --- |
-| Live DB integration tests for Search repositories | Deferred; current CI uses in-memory |
-| Engine provider selection | Deferred to APZSEARCH-004 |
-| Full OpenAPI/HTTP exposure | Future HTTP milestone (not authorised) |
-| Workbench Search module | Future UI milestone (not authorised) |
+| Item                                              | Notes                                  |
+| ------------------------------------------------- | -------------------------------------- |
+| Live DB integration tests for Search repositories | Deferred; current CI uses in-memory    |
+| Engine provider selection                         | Deferred to APZSEARCH-004              |
+| Full OpenAPI/HTTP exposure                        | Future HTTP milestone (not authorised) |
+| Workbench Search module                           | Future UI milestone (not authorised)   |
 
 ---
 
 ## 44. Risks
 
-| Risk | Mitigation |
-| --- | --- |
-| Premature engine binding | Stop line before APZSEARCH-004; no engine SDKs in shared packages |
-| Accidental query API activation | Reserved `query` throws; audit forbids execution; no HTTP routes |
-| Silent fallbacks in production | Factories refuse in-memory / allow-all silent fallback |
-| Confusion with legacy `gateway.search` | Documented dual-surface coexistence; facets kept distinct |
+| Risk                                   | Mitigation                                                        |
+| -------------------------------------- | ----------------------------------------------------------------- |
+| Premature engine binding               | Stop line before APZSEARCH-004; no engine SDKs in shared packages |
+| Accidental query API activation        | Reserved `query` throws; audit forbids execution; no HTTP routes  |
+| Silent fallbacks in production         | Factories refuse in-memory / allow-all silent fallback            |
+| Confusion with legacy `gateway.search` | Documented dual-surface coexistence; facets kept distinct         |
 
 ---
 
@@ -565,13 +565,13 @@ Unrelated repository suites outside this milestone scope were not claimed as com
 
 That milestone should:
 
-1. Evaluate governed provider options  
-2. Select the first production search engine  
-3. Implement it as an isolated Integration SDK adapter  
-4. Support canonical keyword-query execution and index-management contracts  
-5. Avoid HTTP API and Workbench changes  
-6. Retain engine-specific logic inside the adapter  
-7. Provide mocked certification evidence  
+1. Evaluate governed provider options
+2. Select the first production search engine
+3. Implement it as an isolated Integration SDK adapter
+4. Support canonical keyword-query execution and index-management contracts
+5. Avoid HTTP API and Workbench changes
+6. Retain engine-specific logic inside the adapter
+7. Provide mocked certification evidence
 
 **Do not begin APZSEARCH-004 without explicit owner approval.**
 
@@ -587,12 +587,12 @@ Development stops here. Do not begin provider selection, search execution, index
 
 ## Document control
 
-| Item | Value |
-| --- | --- |
-| Report location | `docs/sprint/APZSEARCH-003-completion-report.md` |
-| Coverage baseline | `docs/reviews/APZSEARCH-003-coverage-baseline.md` |
-| Architecture entry | `docs/architecture/APZHUB-Search-Platform-Service-Architecture.md` |
-| Programme stop point | `docs/foundation/CURRENT-MILESTONE.md` |
-| Prepared for | Owner filing / programme archive |
+| Item                 | Value                                                              |
+| -------------------- | ------------------------------------------------------------------ |
+| Report location      | `docs/sprint/APZSEARCH-003-completion-report.md`                   |
+| Coverage baseline    | `docs/reviews/APZSEARCH-003-coverage-baseline.md`                  |
+| Architecture entry   | `docs/architecture/APZHUB-Search-Platform-Service-Architecture.md` |
+| Programme stop point | `docs/foundation/CURRENT-MILESTONE.md`                             |
+| Prepared for         | Owner filing / programme archive                                   |
 
 **End of report.**

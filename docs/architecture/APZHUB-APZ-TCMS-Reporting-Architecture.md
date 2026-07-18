@@ -31,13 +31,13 @@ PlatformServiceGateway.testing.reporting
 
 ## Packages
 
-| Package | Version | Role |
-|---------|---------|------|
-| `@apzhub/testing-contracts` | 0.11.0 | Canonical models + `ReportingService` interface |
-| `@apzhub/testing-persistence` | 0.11.0 | Migrations 0035/0036 + repos |
-| `@apzhub/testing-services` | 0.11.0 | Template engine, renderers, domain service |
-| `@apzhub/platform-service-contracts` | 0.14.0 | `TestingReportingService` gateway facet |
-| `@apzhub/platform-services` | 0.14.0 | Impl + `testingReportingOps` authz map |
+| Package                              | Version | Role                                            |
+| ------------------------------------ | ------- | ----------------------------------------------- |
+| `@apzhub/testing-contracts`          | 0.11.0  | Canonical models + `ReportingService` interface |
+| `@apzhub/testing-persistence`        | 0.11.0  | Migrations 0035/0036 + repos                    |
+| `@apzhub/testing-services`           | 0.11.0  | Template engine, renderers, domain service      |
+| `@apzhub/platform-service-contracts` | 0.14.0  | `TestingReportingService` gateway facet         |
+| `@apzhub/platform-services`          | 0.14.0  | Impl + `testingReportingOps` authz map          |
 
 ## Report types (14)
 

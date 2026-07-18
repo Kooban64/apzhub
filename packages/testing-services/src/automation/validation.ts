@@ -16,9 +16,7 @@ import { toRepositoryContext } from "../mapping/context";
 import { DomainRuleError } from "../services/errors";
 import type { ServiceRuntime } from "../services/types";
 
-export function fingerprintPayload(
-  payload: AutomationAdapterInput["payload"],
-): string {
+export function fingerprintPayload(payload: AutomationAdapterInput["payload"]): string {
   let bytes: Uint8Array;
   if (typeof payload === "string") {
     bytes = new TextEncoder().encode(payload);
@@ -49,7 +47,10 @@ export function createAutomationValidationService(
         throw new DomainRuleError("VALIDATION_FAILED", "Invalid overallStatus");
       }
       if (!Array.isArray(result.suites) || result.suites.length === 0) {
-        throw new DomainRuleError("VALIDATION_FAILED", "At least one suite is required");
+        throw new DomainRuleError(
+          "VALIDATION_FAILED",
+          "At least one suite is required",
+        );
       }
       for (const suite of result.suites) {
         if (!suite.name) {

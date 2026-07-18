@@ -16,10 +16,10 @@
 
 ## Result (APZOBSERVE-005 closeout)
 
-| Metric | Result |
-| --- | --- |
-| Lines | **98.22%** |
-| Functions | **96.97%** |
-| Branches | **76.52%** (LIMITED residual — critical authz/disabled/lifecycle branches covered) |
+| Metric    | Result                                                                             |
+| --------- | ---------------------------------------------------------------------------------- |
+| Lines     | **98.22%**                                                                         |
+| Functions | **96.97%**                                                                         |
+| Branches  | **76.52%** (LIMITED residual — critical authz/disabled/lifecycle branches covered) |
 
 Target lines/functions ≥95%: **PASS**. Branch residual documented in Known Limitations L-12.

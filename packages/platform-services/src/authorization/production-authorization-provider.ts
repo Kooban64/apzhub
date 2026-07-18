@@ -144,10 +144,7 @@ export class ProductionAuthorizationProvider implements AuthorizationProvider {
         }
       }
 
-      if (
-        this.allowPlatformAdministratorOverride &&
-        snapshot.isPlatformAdministrator
-      ) {
+      if (this.allowPlatformAdministratorOverride && snapshot.isPlatformAdministrator) {
         return {
           effect: "allow",
           reason: "platform-administrator-override",
@@ -211,8 +208,12 @@ export class ProductionAuthorizationProvider implements AuthorizationProvider {
       return deny("impersonation_denied", "Impersonation actor is not active");
     }
 
-    if (!anyPermissionMatches(original.allowPermissions, "platform.impersonation.use")) {
-      if (!(this.allowPlatformAdministratorOverride && original.isPlatformAdministrator)) {
+    if (
+      !anyPermissionMatches(original.allowPermissions, "platform.impersonation.use")
+    ) {
+      if (!(
+        this.allowPlatformAdministratorOverride && original.isPlatformAdministrator
+      )) {
         return deny("impersonation_denied", "Impersonation is not permitted");
       }
     }
@@ -224,10 +225,7 @@ export class ProductionAuthorizationProvider implements AuthorizationProvider {
       productKey: this.productKey,
     });
 
-    if (
-      effective.isPlatformAdministrator &&
-      !original.isPlatformAdministrator
-    ) {
+    if (effective.isPlatformAdministrator && !original.isPlatformAdministrator) {
       return deny(
         "privilege_escalation_denied",
         "Cannot impersonate a platform administrator",
@@ -245,7 +243,9 @@ export class ProductionAuthorizationProvider implements AuthorizationProvider {
   }
 }
 
-function resolveRequiredPermissions(request: AuthorizeRequest): readonly PermissionKey[] {
+function resolveRequiredPermissions(
+  request: AuthorizeRequest,
+): readonly PermissionKey[] {
   if (request.requiredPermissions && request.requiredPermissions.length > 0) {
     return request.requiredPermissions;
   }

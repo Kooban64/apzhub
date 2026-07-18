@@ -20,11 +20,12 @@ export const ZAMMAD_SEARCH_PROVIDER_REGISTRATION = {
   priority: 100,
 };
 
-const SEARCH_SORT_MAP: Partial<Record<SupportSearchSortField, SupportSearchSortField>> = {
-  score: "score",
-  updatedAt: "updatedAt",
-  title: "title",
-};
+const SEARCH_SORT_MAP: Partial<Record<SupportSearchSortField, SupportSearchSortField>> =
+  {
+    score: "score",
+    updatedAt: "updatedAt",
+    title: "title",
+  };
 
 function mapSearchSort(
   sort: readonly { field: SupportSearchSortField; direction: "asc" | "desc" }[],
@@ -35,12 +36,15 @@ function mapSearchSort(
   });
 }
 
-export function createZammadSearchProvider(core: ZammadCoreServices): SupportSearchProvider {
+export function createZammadSearchProvider(
+  core: ZammadCoreServices,
+): SupportSearchProvider {
   return {
     search(ctx, queryText, query) {
-      const { page, sort, filter } = unwrapListQuery<SupportSearchFilter, SupportSearchSortField>(
-        query,
-      );
+      const { page, sort, filter } = unwrapListQuery<
+        SupportSearchFilter,
+        SupportSearchSortField
+      >(query);
       return withProviderErrorMapping(ctx.correlationId, () =>
         core.search.search(
           toIntegrationContext(ctx),

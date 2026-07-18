@@ -3,7 +3,7 @@
 > **Story:** LAW-012-02 — Persistence Foundation: Client + Matter  
 > **Status:** **Complete**  
 > **Date:** 2026-07-06  
-> **Authority:** [LAW-012-01 Architecture](./LAW-012-01-Persistence-Architecture.md)
+> **Authority:** [LAW-012-01 Architecture](../architecture/LAW-012-01-Persistence-Architecture.md)
 
 ---
 

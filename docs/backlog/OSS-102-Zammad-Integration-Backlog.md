@@ -20,22 +20,22 @@
 
 ## Phase overview
 
-| #   | ID         | Title                                               | Status       |
-| --- | ---------- | --------------------------------------------------- | ------------ |
-| 1   | OSS-102-01 | Discovery & architecture                            | **Complete** |
-| 2   | OSS-102-02 | Integration foundation (adapter scaffold)           | **Complete** |
-| 3   | OSS-102-03 | Core Support services (`adapter.core`)              | **Complete** |
-| 4   | OSS-102-04 | Articles, conversations & attachment metadata       | **Complete** |
-| 5   | OSS-102-05 | Search, history & support intelligence              | **Complete** |
-| 6   | OSS-102-06 | Synchronisation, events & webhooks                  | **Complete** |
-| 7   | OSS-102-07 | Operations, diagnostics & certification             | **Complete** |
-| 8   | OSS-102-08 | Wave 2 certification & closeout                     | **Complete** |
-| 9   | OSS-102-09 | _(Reserved — owner sequencing)_                     | Planned      |
-| —   | OSS-110-10 | Support PlatformService contracts / providers       | **Complete** |
-| —   | OSS-110-11 | Support HTTP API Surface                            | **Complete** |
-| —   | OSS-110-12 | Support Vertical-Slice Certification                | **Complete** — CERTIFIED_WITH_LIMITATIONS |
-| —   | OSS-110-13 | Support Module UI                                   | **Complete** — UI delivered; cert → OSS-110-14 |
-| —   | OSS-110-14 | Support Module UI Certification                     | **Await approval** |
+| #   | ID         | Title                                         | Status                                         |
+| --- | ---------- | --------------------------------------------- | ---------------------------------------------- |
+| 1   | OSS-102-01 | Discovery & architecture                      | **Complete**                                   |
+| 2   | OSS-102-02 | Integration foundation (adapter scaffold)     | **Complete**                                   |
+| 3   | OSS-102-03 | Core Support services (`adapter.core`)        | **Complete**                                   |
+| 4   | OSS-102-04 | Articles, conversations & attachment metadata | **Complete**                                   |
+| 5   | OSS-102-05 | Search, history & support intelligence        | **Complete**                                   |
+| 6   | OSS-102-06 | Synchronisation, events & webhooks            | **Complete**                                   |
+| 7   | OSS-102-07 | Operations, diagnostics & certification       | **Complete**                                   |
+| 8   | OSS-102-08 | Wave 2 certification & closeout               | **Complete**                                   |
+| 9   | OSS-102-09 | _(Reserved — owner sequencing)_               | Planned                                        |
+| —   | OSS-110-10 | Support PlatformService contracts / providers | **Complete**                                   |
+| —   | OSS-110-11 | Support HTTP API Surface                      | **Complete**                                   |
+| —   | OSS-110-12 | Support Vertical-Slice Certification          | **Complete** — CERTIFIED_WITH_LIMITATIONS      |
+| —   | OSS-110-13 | Support Module UI                             | **Complete** — UI delivered; cert → OSS-110-14 |
+| —   | OSS-110-14 | Support Module UI Certification               | **Await approval**                             |
 
 ---
 
@@ -111,6 +111,7 @@
 **Status:** ✅ Complete — `@apzhub/integration-zammad` **v0.4.0**
 
 **Delivered:**
+
 - `adapter.core.search` / `history` / `analytics`
 - Canonical Support search, history timeline, and intelligence DTOs (`platform-service-contracts` v0.5.0)
 - Mock API, diagnostics, capability promotion
@@ -128,6 +129,7 @@
 **Status:** ✅ Complete — `@apzhub/integration-zammad` **v0.5.0**
 
 **Delivered:**
+
 - `adapter.core.synchronisation` / `events` / `webhooks`
 - Canonical Support event types (contracts v0.6.0)
 - Mock API, diagnostics, metrics, error translation, capability promotion

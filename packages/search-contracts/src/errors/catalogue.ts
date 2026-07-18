@@ -40,8 +40,7 @@ export const SEARCH_ERROR_CLASSIFICATIONS = [
   "engine_operation_failed",
 ] as const;
 
-export type SearchErrorClassification =
-  (typeof SEARCH_ERROR_CLASSIFICATIONS)[number];
+export type SearchErrorClassification = (typeof SEARCH_ERROR_CLASSIFICATIONS)[number];
 
 export function isSearchErrorClassification(
   value: string,
@@ -94,27 +93,20 @@ export function searchTenantMismatch(
   expected: string,
   actual: string,
 ): SearchDomainError {
-  return new SearchDomainError(
-    "tenant_mismatch",
-    "Search tenant isolation violation",
-    { expected, actual },
-  );
+  return new SearchDomainError("tenant_mismatch", "Search tenant isolation violation", {
+    expected,
+    actual,
+  });
 }
 
-export function searchExecutionUnavailable(
-  detail?: string,
-): SearchDomainError {
+export function searchExecutionUnavailable(detail?: string): SearchDomainError {
   return new SearchDomainError(
     "search_execution_unavailable",
-    detail ??
-      "Search execution is unavailable — provider not configured or disabled",
+    detail ?? "Search execution is unavailable — provider not configured or disabled",
   );
 }
 
-export function searchNotFound(
-  kind: string,
-  id: string,
-): SearchDomainError {
+export function searchNotFound(kind: string, id: string): SearchDomainError {
   return new SearchDomainError("not_found", `${kind} not found: ${id}`, {
     kind,
     id,
@@ -133,27 +125,21 @@ export function searchExecutionProviderNotFound(
   );
 }
 
-export function searchExecutionProviderUnavailable(
-  detail?: string,
-): SearchDomainError {
+export function searchExecutionProviderUnavailable(detail?: string): SearchDomainError {
   return new SearchDomainError(
     "execution_provider_unavailable",
     detail ?? "Search execution provider is unavailable",
   );
 }
 
-export function searchExecutionProviderUnhealthy(
-  detail?: string,
-): SearchDomainError {
+export function searchExecutionProviderUnhealthy(detail?: string): SearchDomainError {
   return new SearchDomainError(
     "execution_provider_unhealthy",
     detail ?? "Search execution provider is unhealthy",
   );
 }
 
-export function searchProviderResolutionFailed(
-  detail?: string,
-): SearchDomainError {
+export function searchProviderResolutionFailed(detail?: string): SearchDomainError {
   return new SearchDomainError(
     "provider_resolution_failed",
     detail ??
@@ -161,9 +147,7 @@ export function searchProviderResolutionFailed(
   );
 }
 
-export function searchCapabilityUnsupported(
-  capability: string,
-): SearchDomainError {
+export function searchCapabilityUnsupported(capability: string): SearchDomainError {
   return new SearchDomainError(
     "execution_capability_unsupported",
     `Search capability not supported: ${capability}`,
@@ -171,19 +155,14 @@ export function searchCapabilityUnsupported(
   );
 }
 
-export function searchTenantFilterRequired(
-  detail?: string,
-): SearchDomainError {
+export function searchTenantFilterRequired(detail?: string): SearchDomainError {
   return new SearchDomainError(
     "tenant_filter_required",
-    detail ??
-      "Mandatory tenant security filter could not be applied — fail closed",
+    detail ?? "Mandatory tenant security filter could not be applied — fail closed",
   );
 }
 
-export function searchSecurityFilterViolation(
-  detail?: string,
-): SearchDomainError {
+export function searchSecurityFilterViolation(detail?: string): SearchDomainError {
   return new SearchDomainError(
     "security_filter_violation",
     detail ?? "Client attempted to strip or override mandatory security filters",

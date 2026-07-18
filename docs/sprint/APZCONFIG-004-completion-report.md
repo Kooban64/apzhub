@@ -13,13 +13,13 @@ Delivered a product-neutral Configuration Workbench at `/workspace/configuration
 
 ## Package versions
 
-| Artefact | Version / note |
-| --- | --- |
-| Platform OpenAPI | **1.5.0** (unchanged) |
-| `@apzhub/configuration-contracts` | **0.2.0** (unchanged) |
-| `@apzhub/configuration-core` | **0.2.0** (unchanged) |
-| `@apzhub/configuration-persistence` | **0.1.0** (unchanged) |
-| `@apzhub/platform-services` | **0.21.0** (unchanged) |
+| Artefact                            | Version / note         |
+| ----------------------------------- | ---------------------- |
+| Platform OpenAPI                    | **1.5.0** (unchanged)  |
+| `@apzhub/configuration-contracts`   | **0.2.0** (unchanged)  |
+| `@apzhub/configuration-core`        | **0.2.0** (unchanged)  |
+| `@apzhub/configuration-persistence` | **0.1.0** (unchanged)  |
+| `@apzhub/platform-services`         | **0.21.0** (unchanged) |
 
 ## Architecture
 
@@ -39,13 +39,13 @@ All required metadata views implemented. Lifecycle commands call typed-client me
 
 ## Quality gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:configuration-workbench` | PASS (0 violations) |
-| Component + route + harness tests | PASS (33+) |
-| Typed-client / HTTP regressions (scoped) | PASS |
-| Playwright mock spec | Added (`apzconfig-004-platform-configuration-workbench.spec.ts`) |
-| Workbench line coverage | **~88%** statements/lines on view modules (router 100%); remaining uncovered branches are secondary empty/error paths — tracked for APZCONFIG-005 certification |
+| Gate                                     | Result                                                                                                                                                          |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pnpm audit:configuration-workbench`     | PASS (0 violations)                                                                                                                                             |
+| Component + route + harness tests        | PASS (33+)                                                                                                                                                      |
+| Typed-client / HTTP regressions (scoped) | PASS                                                                                                                                                            |
+| Playwright mock spec                     | Added (`apzconfig-004-platform-configuration-workbench.spec.ts`)                                                                                                |
+| Workbench line coverage                  | **~88%** statements/lines on view modules (router 100%); remaining uncovered branches are secondary empty/error paths — tracked for APZCONFIG-005 certification |
 
 ## Known limitations
 

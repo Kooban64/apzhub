@@ -63,8 +63,7 @@ function normalizePath(pathname: string): string {
 
 export function isWorkflowApiPath(pathname: string): boolean {
   return (
-    pathname === WORKFLOWS_API_BASE ||
-    pathname.startsWith(`${WORKFLOWS_API_BASE}/`)
+    pathname === WORKFLOWS_API_BASE || pathname.startsWith(`${WORKFLOWS_API_BASE}/`)
   );
 }
 
@@ -73,10 +72,7 @@ export function assertWorkflowApiPath(pathname: string): void {
     throw new Error("Workflow client may only call /api/v1/workflows");
   }
   for (const segment of WORKFLOW_FORBIDDEN_HTTP_SEGMENTS) {
-    if (
-      pathname.includes(`/${segment}/`) ||
-      pathname.endsWith(`/${segment}`)
-    ) {
+    if (pathname.includes(`/${segment}/`) || pathname.endsWith(`/${segment}`)) {
       throw new Error(`Forbidden workflow HTTP segment: ${segment}`);
     }
   }
@@ -91,9 +87,7 @@ export function isWorkflowEngineApiPath(pathname: string): boolean {
 
 export function assertWorkflowEngineApiPath(pathname: string): void {
   if (!isWorkflowEngineApiPath(pathname)) {
-    throw new Error(
-      "Workflow engine client may only call /api/v1/workflows/engine",
-    );
+    throw new Error("Workflow engine client may only call /api/v1/workflows/engine");
   }
   assertWorkflowApiPath(pathname);
 }
@@ -132,9 +126,7 @@ export function isWorkflowEngineRoute(pathname: string): boolean {
   );
 }
 
-export function resolveWorkflowEngineSection(
-  pathname: string,
-): WorkflowEngineSection {
+export function resolveWorkflowEngineSection(pathname: string): WorkflowEngineSection {
   const normalized = normalizePath(pathname);
   if (normalized === WORKFLOW_ENGINE_WORKSPACE_BASE) return "overview";
   const suffix = normalized.slice(WORKFLOW_ENGINE_WORKSPACE_BASE.length + 1);
@@ -145,9 +137,7 @@ export function resolveWorkflowEngineSection(
   return "overview";
 }
 
-export function workflowEngineSectionPath(
-  section?: WorkflowEngineSection,
-): string {
+export function workflowEngineSectionPath(section?: WorkflowEngineSection): string {
   if (!section || section === "overview") {
     return `${WORKFLOW_ENGINE_WORKSPACE_BASE}/overview`;
   }

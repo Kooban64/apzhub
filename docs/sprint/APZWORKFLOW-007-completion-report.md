@@ -60,15 +60,15 @@ Scoped engine façade files (`*engine*`, `unavailable-workflow-engine*`): **100%
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
-| Typecheck (`workflow-contracts`, `platform-services`) | PASS |
-| Lint (`platform-services`) | PASS |
-| Vitest (workflow + 007 suites) | PASS |
-| Scoped coverage ≥95% | PASS (100%) |
-| `pnpm audit:workflow-n8n-platform-services` | PASS |
-| `pnpm audit:workflow-platform-services` (updated versions) | PASS |
-| Boundary: apps/web no direct n8n import | PASS |
+| Gate                                                       | Result      |
+| ---------------------------------------------------------- | ----------- |
+| Typecheck (`workflow-contracts`, `platform-services`)      | PASS        |
+| Lint (`platform-services`)                                 | PASS        |
+| Vitest (workflow + 007 suites)                             | PASS        |
+| Scoped coverage ≥95%                                       | PASS (100%) |
+| `pnpm audit:workflow-n8n-platform-services`                | PASS        |
+| `pnpm audit:workflow-platform-services` (updated versions) | PASS        |
+| Boundary: apps/web no direct n8n import                    | PASS        |
 
 ## Technical Debt
 

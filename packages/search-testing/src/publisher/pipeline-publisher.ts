@@ -5,10 +5,7 @@
 import type { SearchEntityDraft } from "@apzhub/search-integration";
 
 import type { TestingSearchPublicationContext } from "../context/testing-search-publication-context";
-import {
-  PipelineSearchMapper,
-  type PipelineMappableEntity,
-} from "../mapper/pipeline";
+import { PipelineSearchMapper, type PipelineMappableEntity } from "../mapper/pipeline";
 import type { TestingSearchMappableEntity } from "../mapper/shared";
 import {
   DomainSearchPublisherBase,

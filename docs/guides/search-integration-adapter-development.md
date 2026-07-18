@@ -1,9 +1,9 @@
 # Search Integration Adapter Development Guide
 
-| Field | Value |
-| --- | --- |
-| **Audience** | Adapter authors |
-| **Milestone** | APZSEARCH-004 |
+| Field         | Value           |
+| ------------- | --------------- |
+| **Audience**  | Adapter authors |
+| **Milestone** | APZSEARCH-004   |
 
 ## 1. Start with bootstrap
 

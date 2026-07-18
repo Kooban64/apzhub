@@ -41,19 +41,19 @@ This milestone stops at the Search Integration Framework.
 
 Local catalogue expands the framework contract (`report|template|dashboard`):
 
-| Type | Canonical model | Notes |
-| ---- | --------------- | ----- |
-| `report_template` | `ReportTemplate` (+ tenant via extras/context) | Omits sections/header/footer/branding |
-| `report_category` | thin `ReportingCategorySearchInput` | |
-| `report_placeholder_catalogue` | thin input | Placeholder **labels** only |
-| `report_definition` | thin or `ReportTemplate` shaped | Prefer thin `ReportingDefinitionSearchInput` |
-| `report_type` | thin `ReportingTypeSearchInput` | |
-| `report_profile` | thin input | |
-| `report_generation` | alias of generation metadata | Same model as metadata entity |
-| `report_generation_metadata` | `ReportGenerationMetadata` | **Primary** generation entity |
-| `report_output_metadata` | derived from generation metadata | format / byteLength / checksumPresent |
-| `report_consumer` | thin input | |
-| `report_usage_summary` | thin input | |
+| Type                           | Canonical model                                | Notes                                        |
+| ------------------------------ | ---------------------------------------------- | -------------------------------------------- |
+| `report_template`              | `ReportTemplate` (+ tenant via extras/context) | Omits sections/header/footer/branding        |
+| `report_category`              | thin `ReportingCategorySearchInput`            |                                              |
+| `report_placeholder_catalogue` | thin input                                     | Placeholder **labels** only                  |
+| `report_definition`            | thin or `ReportTemplate` shaped                | Prefer thin `ReportingDefinitionSearchInput` |
+| `report_type`                  | thin `ReportingTypeSearchInput`                |                                              |
+| `report_profile`               | thin input                                     |                                              |
+| `report_generation`            | alias of generation metadata                   | Same model as metadata entity                |
+| `report_generation_metadata`   | `ReportGenerationMetadata`                     | **Primary** generation entity                |
+| `report_output_metadata`       | derived from generation metadata               | format / byteLength / checksumPresent        |
+| `report_consumer`              | thin input                                     |                                              |
+| `report_usage_summary`         | thin input                                     |                                              |
 
 Framework aliases accepted by type guards: `template` → `report_template`, `report` → `report_generation_metadata`, `dashboard` → `report_usage_summary`.
 

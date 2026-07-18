@@ -39,11 +39,7 @@ export function wrapWorkflowEngineGatewayWithPipeline(
       "workflowEngineTemplates",
     ),
     tags: wrapServiceWithPipeline(gateway.tags, pipeline, "workflowEngineTags"),
-    users: wrapServiceWithPipeline(
-      gateway.users,
-      pipeline,
-      "workflowEngineUsers",
-    ),
+    users: wrapServiceWithPipeline(gateway.users, pipeline, "workflowEngineUsers"),
     projects: wrapServiceWithPipeline(
       gateway.projects,
       pipeline,
@@ -54,11 +50,7 @@ export function wrapWorkflowEngineGatewayWithPipeline(
       pipeline,
       "workflowEngineCapabilities",
     ),
-    health: wrapServiceWithPipeline(
-      gateway.health,
-      pipeline,
-      "workflowEngineHealth",
-    ),
+    health: wrapServiceWithPipeline(gateway.health, pipeline, "workflowEngineHealth"),
     diagnostics: wrapServiceWithPipeline(
       gateway.diagnostics,
       pipeline,

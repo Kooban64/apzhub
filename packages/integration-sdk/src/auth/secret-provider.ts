@@ -55,7 +55,10 @@ export class InMemorySecretProvider implements SecretProvider {
     if (!value) {
       return sdkErr(
         secretProviderUnavailableError(
-          { correlationId: input.correlationId, details: { credentialRef: input.credentialRef } },
+          {
+            correlationId: input.correlationId,
+            details: { credentialRef: input.credentialRef },
+          },
           `Secret not found for credential reference`,
         ),
       );

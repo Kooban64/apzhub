@@ -16,27 +16,27 @@ Zammad CE integration adapter for APZHUB **Support**. Extends `IntegrationAdapte
 
 ## Core services (`adapter.core`)
 
-| Service | Access | Notes |
-| --- | --- | --- |
-| Support Request | `adapter.core.support` | lifecycle |
-| Organizations / Groups / Users | `adapter.core.*` | CRUD / lookup |
-| Articles | `adapter.core.articles` | notes/replies + attachment metadata |
-| Search / History / Analytics | `adapter.core.search\|history\|analytics` | OSS-102-05 |
-| Webhooks | `adapter.core.webhooks` | registration only |
-| Events | `adapter.core.events` | translation only |
-| Synchronisation | `adapter.core.synchronisation` | in-memory sync APIs |
+| Service                        | Access                                    | Notes                               |
+| ------------------------------ | ----------------------------------------- | ----------------------------------- |
+| Support Request                | `adapter.core.support`                    | lifecycle                           |
+| Organizations / Groups / Users | `adapter.core.*`                          | CRUD / lookup                       |
+| Articles                       | `adapter.core.articles`                   | notes/replies + attachment metadata |
+| Search / History / Analytics   | `adapter.core.search\|history\|analytics` | OSS-102-05                          |
+| Webhooks                       | `adapter.core.webhooks`                   | registration only                   |
+| Events                         | `adapter.core.events`                     | translation only                    |
+| Synchronisation                | `adapter.core.synchronisation`            | in-memory sync APIs                 |
 
 ## Operations (`adapter.operations`)
 
-| API | Notes |
-| --- | --- |
-| `certifyCapabilities()` | Capability certification matrix |
-| `getCompatibilityMatrix()` | Version / edition / feature report |
-| `classifyHealth()` | HEALTHY / DEGRADED / LIMITED / UNAVAILABLE |
-| `detectFeatures(ctx)` | Safe optional endpoint probes |
-| `evaluateReadiness(ctx)` | Structured readiness checks |
-| `buildOperationalReport(ctx)` | Serialisable ops report |
-| `getRuntimeDiagnosticsSnapshot()` | Secret-free diagnostics |
+| API                               | Notes                                      |
+| --------------------------------- | ------------------------------------------ |
+| `certifyCapabilities()`           | Capability certification matrix            |
+| `getCompatibilityMatrix()`        | Version / edition / feature report         |
+| `classifyHealth()`                | HEALTHY / DEGRADED / LIMITED / UNAVAILABLE |
+| `detectFeatures(ctx)`             | Safe optional endpoint probes              |
+| `evaluateReadiness(ctx)`          | Structured readiness checks                |
+| `buildOperationalReport(ctx)`     | Serialisable ops report                    |
+| `getRuntimeDiagnosticsSnapshot()` | Secret-free diagnostics                    |
 
 See [ZAMMAD-OPERATIONS.md](./ZAMMAD-OPERATIONS.md).
 

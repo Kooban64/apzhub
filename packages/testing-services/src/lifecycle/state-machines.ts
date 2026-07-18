@@ -33,10 +33,7 @@ const CASE_TRANSITIONS: Readonly<Record<string, readonly string[]>> = {
   archived: [],
 };
 
-export function canTransitionTestStatus(
-  from: TestStatus,
-  to: TestStatus,
-): boolean {
+export function canTransitionTestStatus(from: TestStatus, to: TestStatus): boolean {
   if (from === to) return true;
   const allowed = CASE_TRANSITIONS[from] ?? [];
   if (allowed.includes(to)) return true;
@@ -47,10 +44,7 @@ export function canTransitionTestStatus(
   return allowedCanon.includes(String(toCanon)) || allowedCanon.includes(to);
 }
 
-export function assertTestStatusTransition(
-  from: TestStatus,
-  to: TestStatus,
-): void {
+export function assertTestStatusTransition(from: TestStatus, to: TestStatus): void {
   if (!canTransitionTestStatus(from, to)) {
     throw new DomainRuleError(
       "invalid_status_transition",

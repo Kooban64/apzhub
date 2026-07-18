@@ -18,14 +18,14 @@ Automated accessibility certification for Support workbench surfaces using **@ax
 
 ## Surfaces certified
 
-| Surface | Route | Gate |
-|---------|-------|------|
-| Inbox | `/workspace/support/requests` | axe critical/serious clean |
-| Request detail | `/workspace/support/requests/{sreq_…}` | axe critical/serious clean |
-| Search | `/workspace/support/search` | axe critical/serious clean |
-| Analytics | `/workspace/support/analytics` | axe critical/serious clean |
-| Organizations | `/workspace/support/organizations` | axe critical/serious clean |
-| Keyboard | Inbox create / status filter | Tab reaches meaningful control |
+| Surface        | Route                                  | Gate                           |
+| -------------- | -------------------------------------- | ------------------------------ |
+| Inbox          | `/workspace/support/requests`          | axe critical/serious clean     |
+| Request detail | `/workspace/support/requests/{sreq_…}` | axe critical/serious clean     |
+| Search         | `/workspace/support/search`            | axe critical/serious clean     |
+| Analytics      | `/workspace/support/analytics`         | axe critical/serious clean     |
+| Organizations  | `/workspace/support/organizations`     | axe critical/serious clean     |
+| Keyboard       | Inbox create / status filter           | Tab reaches meaningful control |
 
 ---
 
@@ -42,24 +42,24 @@ Automated accessibility certification for Support workbench surfaces using **@ax
 
 ## Results
 
-| Check | Result |
-|-------|--------|
-| Inbox axe | ✅ PASS |
-| Detail axe | ✅ PASS |
-| Search axe | ✅ PASS |
-| Analytics axe | ✅ PASS |
-| Organizations axe | ✅ PASS |
-| Keyboard Tab reach | ✅ PASS |
+| Check                  | Result                                               |
+| ---------------------- | ---------------------------------------------------- |
+| Inbox axe              | ✅ PASS                                              |
+| Detail axe             | ✅ PASS                                              |
+| Search axe             | ✅ PASS                                              |
+| Analytics axe          | ✅ PASS                                              |
+| Organizations axe      | ✅ PASS                                              |
+| Keyboard Tab reach     | ✅ PASS                                              |
 | **Suite contribution** | **6 tests** (part of Playwright **23 passed** total) |
 
 ---
 
 ## Certification defect corrections (a11y-related)
 
-| Defect | Correction | Notes |
-|--------|------------|-------|
+| Defect                      | Correction                                           | Notes                                                 |
+| --------------------------- | ---------------------------------------------------- | ----------------------------------------------------- |
 | Label / control association | `Input` uses `React.useId()` when `id`/`name` absent | Shared `@apzhub/ui` — label `htmlFor` matches control |
-| Visibility badge contrast | `VisibilityBadge` uses foreground/border tokens | Avoids low-contrast badge text |
+| Visibility badge contrast   | `VisibilityBadge` uses foreground/border tokens      | Avoids low-contrast badge text                        |
 
 These are certification defect corrections only — not new Support features.
 

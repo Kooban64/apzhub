@@ -109,9 +109,9 @@ describe("APZSEARCH-011 search-support", () => {
     expect(looksLikeZammadIdentifier("sreq_zammad_99")).toBe(true);
     expect(looksLikeZammadIdentifier("zammad_ticket_1")).toBe(true);
     expect(looksLikeZammadIdentifier("Ticket::1")).toBe(true);
-    expect(
-      looksLikeZammadIdentifier("sreq_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"),
-    ).toBe(false);
+    expect(looksLikeZammadIdentifier("sreq_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")).toBe(
+      false,
+    );
   });
 
   it("maps and publishes all Support entity types without Zammad leakage", () => {
@@ -200,12 +200,7 @@ describe("APZSEARCH-011 search-support", () => {
     expect(second.operation).toBe("update");
     expect(second.entity?.title).toBe("Cannot login (updated)");
 
-    const life = adapter.publisher.lifecycle(
-      context,
-      ticket.id,
-      "archived",
-      "done",
-    );
+    const life = adapter.publisher.lifecycle(context, ticket.id, "archived", "done");
     expect(life.ok).toBe(true);
 
     const other: SupportTicket = {
@@ -228,12 +223,12 @@ describe("APZSEARCH-011 search-support", () => {
     expect(diag.supportedEntityTypes).toContain("support_article");
     expect(diag.mapperNotes.length).toBeGreaterThan(0);
     expect(adapter.publisher.getLogger().recent().length).toBeGreaterThan(0);
-    expect(
-      adapter.lifecycle.suggestFromDomainStatus("support_request", "closed"),
-    ).toBe("archived");
-    expect(
-      adapter.lifecycle.suggestFromDomainStatus("support_request", "new"),
-    ).toBe("draft");
+    expect(adapter.lifecycle.suggestFromDomainStatus("support_request", "closed")).toBe(
+      "archived",
+    );
+    expect(adapter.lifecycle.suggestFromDomainStatus("support_request", "new")).toBe(
+      "draft",
+    );
   });
 
   it("validates mandatory metadata and provider leakage", () => {

@@ -16,7 +16,8 @@ vi.mock("@apzhub/config", () => ({
 }));
 
 vi.mock("@/lib/api/platform/platform-route-guard", () => ({
-  requirePlatformAdminRoute: (...args: unknown[]) => mockRequirePlatformAdminRoute(...args),
+  requirePlatformAdminRoute: (...args: unknown[]) =>
+    mockRequirePlatformAdminRoute(...args),
 }));
 
 vi.mock("@/lib/operational-diagnostics", () => ({
@@ -25,7 +26,8 @@ vi.mock("@/lib/operational-diagnostics", () => ({
 }));
 
 vi.mock("@/lib/runtime-init", () => ({
-  ensurePlatformRuntimeReady: (...args: unknown[]) => mockEnsurePlatformRuntimeReady(...args),
+  ensurePlatformRuntimeReady: (...args: unknown[]) =>
+    mockEnsurePlatformRuntimeReady(...args),
 }));
 
 vi.mock("@apzhub/platform-operations/server", () => ({
@@ -44,7 +46,9 @@ describe("GET /api/platform/v1/operations/control-plane", () => {
   it("returns 401 when admin guard fails", async () => {
     mockRequirePlatformAdminRoute.mockResolvedValue({
       ok: false,
-      response: new Response(JSON.stringify({ error: { code: "UNAUTHORIZED" } }), { status: 401 }),
+      response: new Response(JSON.stringify({ error: { code: "UNAUTHORIZED" } }), {
+        status: 401,
+      }),
     });
 
     const response = await getControlPlane();
@@ -54,7 +58,10 @@ describe("GET /api/platform/v1/operations/control-plane", () => {
   it("returns canonical control plane snapshot without secrets", async () => {
     mockRequirePlatformAdminRoute.mockResolvedValue({
       ok: true,
-      session: { user: { id: "admin-1" }, tenantId: "t0000001-0000-4000-8000-000000000001" },
+      session: {
+        user: { id: "admin-1" },
+        tenantId: "t0000001-0000-4000-8000-000000000001",
+      },
     });
     mockEnsurePlatformRuntimeReady.mockResolvedValue({ success: true });
     mockLoadConsolidatedOperationalDiagnostics.mockResolvedValue({
@@ -66,7 +73,9 @@ describe("GET /api/platform/v1/operations/control-plane", () => {
     mockBuildOperationsControlPlaneSnapshot.mockReturnValue({
       generatedAt: "2026-07-09T08:00:00.000Z",
       overview: { productionReadiness: "READY", readinessScore: 100 },
-      capabilities: [{ capabilityId: "platform.operations", name: "Operations Control Plane" }],
+      capabilities: [
+        { capabilityId: "platform.operations", name: "Operations Control Plane" },
+      ],
       productionVerification: { verdict: "READY" },
     });
 

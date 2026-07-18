@@ -38,9 +38,7 @@ function walk(dir: string, out: string[] = []): string[] {
 }
 
 function stripComments(content: string): string {
-  return content
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/\/\/.*$/gm, "");
+  return content.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
 }
 
 describe("APZWORKFLOW-003 presentation boundary", () => {
@@ -125,10 +123,7 @@ describe("APZWORKFLOW-004 workbench presentation boundary", () => {
   });
 
   it("workbench page mounts WorkflowsWorkspaceRouter", () => {
-    const content = readFileSync(
-      join(ROOT, "components/workbench-page.tsx"),
-      "utf8",
-    );
+    const content = readFileSync(join(ROOT, "components/workbench-page.tsx"), "utf8");
     expect(content).toContain("WorkflowsWorkspaceRouter");
     expect(content).toContain("workflowsActive");
   });

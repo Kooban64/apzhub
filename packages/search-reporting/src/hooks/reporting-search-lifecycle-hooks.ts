@@ -143,8 +143,7 @@ export function createReportingSearchLifecycleHooks(
         { entityType: "report_template", entity: template, extras },
         template.id,
       ),
-    onReportTemplateRemoved: (c, id) =>
-      publisher.remove(c, "report_template", id),
+    onReportTemplateRemoved: (c, id) => publisher.remove(c, "report_template", id),
 
     onReportCategoryUpserted: (c, category, extras) =>
       upsert(
@@ -152,8 +151,7 @@ export function createReportingSearchLifecycleHooks(
         { entityType: "report_category", entity: category, extras },
         category.id,
       ),
-    onReportCategoryRemoved: (c, id) =>
-      publisher.remove(c, "report_category", id),
+    onReportCategoryRemoved: (c, id) => publisher.remove(c, "report_category", id),
 
     onReportDefinitionUpserted: (c, definition, extras) =>
       upsert(
@@ -161,8 +159,7 @@ export function createReportingSearchLifecycleHooks(
         { entityType: "report_definition", entity: definition, extras },
         definition.id,
       ),
-    onReportDefinitionRemoved: (c, id) =>
-      publisher.remove(c, "report_definition", id),
+    onReportDefinitionRemoved: (c, id) => publisher.remove(c, "report_definition", id),
 
     onReportTypeUpserted: (c, reportType, extras) =>
       upsert(
@@ -173,13 +170,8 @@ export function createReportingSearchLifecycleHooks(
     onReportTypeRemoved: (c, id) => publisher.remove(c, "report_type", id),
 
     onReportProfileUpserted: (c, profile, extras) =>
-      upsert(
-        c,
-        { entityType: "report_profile", entity: profile, extras },
-        profile.id,
-      ),
-    onReportProfileRemoved: (c, id) =>
-      publisher.remove(c, "report_profile", id),
+      upsert(c, { entityType: "report_profile", entity: profile, extras }, profile.id),
+    onReportProfileRemoved: (c, id) => publisher.remove(c, "report_profile", id),
 
     onReportGenerationRecorded: (c, metadata, extras) => {
       // Primary: report_generation_metadata (report_generation is an alias type for the same model).
@@ -205,7 +197,10 @@ export function createReportingSearchLifecycleHooks(
         c,
         {
           entityType: "report_generation_metadata",
-          entity: { ...metadata, archivedAt: metadata.archivedAt ?? new Date().toISOString() },
+          entity: {
+            ...metadata,
+            archivedAt: metadata.archivedAt ?? new Date().toISOString(),
+          },
           extras,
         },
         metadata.id,
@@ -226,8 +221,7 @@ export function createReportingSearchLifecycleHooks(
         { entityType: "report_consumer", entity: consumer, extras },
         consumer.id,
       ),
-    onReportConsumerRemoved: (c, id) =>
-      publisher.remove(c, "report_consumer", id),
+    onReportConsumerRemoved: (c, id) => publisher.remove(c, "report_consumer", id),
 
     onReportUsageSummaryUpserted: (c, summary, extras) =>
       upsert(

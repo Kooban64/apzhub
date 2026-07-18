@@ -1,10 +1,25 @@
 import type { IntegrationRequestContext } from "@apzhub/integration-sdk";
 
-import type { PlanePaginatedResponse, PlaneStateRecord } from "../internal/plane-api-types";
-import { mapPlaneState, mapStateToPlaneBody, resolveProjectPlaneId } from "../mappers/state-mapper";
+import type {
+  PlanePaginatedResponse,
+  PlaneStateRecord,
+} from "../internal/plane-api-types";
+import {
+  mapPlaneState,
+  mapStateToPlaneBody,
+  resolveProjectPlaneId,
+} from "../mappers/state-mapper";
 import type { ProjectStatusEntity } from "../models/canonical";
-import type { CreateProjectStateInput, UpdateProjectStateInput } from "../models/inputs";
-import type { PageRequest, PageResult, ProjectStateListFilter, SortField } from "../models/query";
+import type {
+  CreateProjectStateInput,
+  UpdateProjectStateInput,
+} from "../models/inputs";
+import type {
+  PageRequest,
+  PageResult,
+  ProjectStateListFilter,
+  SortField,
+} from "../models/query";
 import {
   assertValid,
   mergeValidation,
@@ -12,8 +27,16 @@ import {
   validateRequiredString,
   validateSortFields,
 } from "../validation/request-validation";
-import { validatePlanePaginatedResponse, validatePlaneStateResponse } from "../validation/response-validation";
-import { applyClientFilters, applyClientSort, buildPlaneListQuery, mapPaginatedResult } from "./list-helpers";
+import {
+  validatePlanePaginatedResponse,
+  validatePlaneStateResponse,
+} from "../validation/response-validation";
+import {
+  applyClientFilters,
+  applyClientSort,
+  buildPlaneListQuery,
+  mapPaginatedResult,
+} from "./list-helpers";
 import type { PlaneServiceDeps } from "./plane-operation-runner";
 
 const STATE_SORT_FIELDS = ["name", "order", "group"] as const;
@@ -29,7 +52,10 @@ export class PlaneProjectStateService {
     sort: readonly SortField<(typeof STATE_SORT_FIELDS)[number]>[] = [],
   ): Promise<PageResult<ProjectStatusEntity>> {
     assertValid(
-      mergeValidation(validatePageRequest(page), validateSortFields(sort, STATE_SORT_FIELDS)),
+      mergeValidation(
+        validatePageRequest(page),
+        validateSortFields(sort, STATE_SORT_FIELDS),
+      ),
       "project_states.list",
     );
 
@@ -42,7 +68,10 @@ export class PlaneProjectStateService {
         buildPlaneListQuery(page, sort),
       )) as PlanePaginatedResponse<PlaneStateRecord>;
 
-      assertValid(validatePlanePaginatedResponse(response), "project_states.list.response");
+      assertValid(
+        validatePlanePaginatedResponse(response),
+        "project_states.list.response",
+      );
 
       let result = mapPaginatedResult(
         response,
@@ -54,7 +83,13 @@ export class PlaneProjectStateService {
       );
 
       if (filter.group) {
-        result = { ...result, items: applyClientFilters(result.items, (item) => item.group === filter.group) };
+        result = {
+          ...result,
+          items: applyClientFilters(
+            result.items,
+            (item) => item.group === filter.group,
+          ),
+        };
       }
 
       if (sort.length > 0) {
@@ -80,7 +115,11 @@ export class PlaneProjectStateService {
     const planeStateId = stateId.replace(/^status_plane_/, "");
 
     return this.deps.runner.run(context, "project_states.get", async () => {
-      const record = await this.deps.client.getState(context, planeProjectId, planeStateId);
+      const record = await this.deps.client.getState(
+        context,
+        planeProjectId,
+        planeStateId,
+      );
       assertValid(validatePlaneStateResponse(record), "project_state.entity");
       return mapPlaneState(record, projectId);
     });

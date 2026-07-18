@@ -7,11 +7,11 @@
 
 Scoped to `packages/platform-services/src/services/notification/**` + `packages/notification-core/src/service/**`:
 
-| Metric | Combined |
-| --- | ---: |
-| Lines | **95.53%** |
+| Metric    |   Combined |
+| --------- | ---------: |
+| Lines     | **95.53%** |
 | Functions | **97.33%** |
-| Branches | **90.99%** |
+| Branches  | **90.99%** |
 
 ## Audit
 

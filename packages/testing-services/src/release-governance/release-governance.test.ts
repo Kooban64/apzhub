@@ -26,9 +26,7 @@ const ALL_PERMS = [
   "reporting.*",
 ] as const;
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_1",
     userId: "user_1",
@@ -51,8 +49,8 @@ function services() {
 }
 
 describe("release-governance version & wiring", () => {
-  it("exports 0.7.0 and wires releaseGovernance on domain factory", () => {
-    expect(TESTING_SERVICES_VERSION).toBe("0.7.0");
+  it("exports 0.11.0 and wires releaseGovernance on domain factory", () => {
+    expect(TESTING_SERVICES_VERSION).toBe("0.11.0");
     const all = createTestingDomainServices({
       persistence: createInMemoryTestingPersistence(),
     });
@@ -65,55 +63,36 @@ describe("release governance state machine", () => {
   it("allows legal transitions and rejects illegal ones", () => {
     expect(canTransitionReleaseGovernanceStatus("draft", "planning")).toBe(true);
     expect(canTransitionReleaseGovernanceStatus("draft", "archived")).toBe(true);
-    expect(
-      canTransitionReleaseGovernanceStatus("planning", "ready_for_review"),
-    ).toBe(true);
+    expect(canTransitionReleaseGovernanceStatus("planning", "ready_for_review")).toBe(
+      true,
+    );
     expect(
       canTransitionReleaseGovernanceStatus("ready_for_review", "ready_for_approval"),
     ).toBe(true);
-    expect(
-      canTransitionReleaseGovernanceStatus("ready_for_approval", "approved"),
-    ).toBe(true);
+    expect(canTransitionReleaseGovernanceStatus("ready_for_approval", "approved")).toBe(
+      true,
+    );
     expect(
       canTransitionReleaseGovernanceStatus(
         "ready_for_approval",
         "conditionally_approved",
       ),
     ).toBe(true);
-    expect(
-      canTransitionReleaseGovernanceStatus("ready_for_approval", "rejected"),
-    ).toBe(true);
-    expect(canTransitionReleaseGovernanceStatus("approved", "archived")).toBe(
+    expect(canTransitionReleaseGovernanceStatus("ready_for_approval", "rejected")).toBe(
       true,
     );
-    expect(canTransitionReleaseGovernanceStatus("approved", "superseded")).toBe(
-      true,
+    expect(canTransitionReleaseGovernanceStatus("approved", "archived")).toBe(true);
+    expect(canTransitionReleaseGovernanceStatus("approved", "superseded")).toBe(true);
+    expect(canTransitionReleaseGovernanceStatus("approved", "withdrawn")).toBe(true);
+    expect(canTransitionReleaseGovernanceStatus("rejected", "planning")).toBe(true);
+    expect(canTransitionReleaseGovernanceStatus("withdrawn", "planning")).toBe(true);
+    expect(canTransitionReleaseGovernanceStatus("archived", "planning")).toBe(true);
+    expect(canTransitionReleaseGovernanceStatus("draft", "approved")).toBe(false);
+    expect(() => assertReleaseGovernanceTransition("draft", "approved")).toThrow(
+      DomainRuleError,
     );
-    expect(canTransitionReleaseGovernanceStatus("approved", "withdrawn")).toBe(
-      true,
-    );
-    expect(canTransitionReleaseGovernanceStatus("rejected", "planning")).toBe(
-      true,
-    );
-    expect(canTransitionReleaseGovernanceStatus("withdrawn", "planning")).toBe(
-      true,
-    );
-    expect(canTransitionReleaseGovernanceStatus("archived", "planning")).toBe(
-      true,
-    );
-    expect(canTransitionReleaseGovernanceStatus("draft", "approved")).toBe(
-      false,
-    );
-    expect(() =>
-      assertReleaseGovernanceTransition("draft", "approved"),
-    ).toThrow(DomainRuleError);
-    expect(releaseGovernanceTransitionsFrom("draft")).toEqual([
-      "planning",
-      "archived",
-    ]);
-    expect(canTransitionReleaseGovernanceStatus("planning", "planning")).toBe(
-      true,
-    );
+    expect(releaseGovernanceTransitionsFrom("draft")).toEqual(["planning", "archived"]);
+    expect(canTransitionReleaseGovernanceStatus("planning", "planning")).toBe(true);
   });
 });
 
@@ -296,9 +275,7 @@ describe("ReleaseGovernanceService lifecycle", () => {
       key: "REL-BAD",
       name: "Bad",
     });
-    await expect(svc.submitForReview(c, release.id)).rejects.toThrow(
-      DomainRuleError,
-    );
+    await expect(svc.submitForReview(c, release.id)).rejects.toThrow(DomainRuleError);
     await expect(svc.approveRelease(c, release.id, "nope")).rejects.toThrow(
       DomainRuleError,
     );
@@ -402,9 +379,7 @@ describe("ReleaseGovernanceService evaluate & summary", () => {
     await svc.requestApproval(c, release.id, { stageKind: "qa" });
     const approvalsEval = await svc.evaluateApprovals(c, release.id);
     expect(approvalsEval.isDecision).toBe(false);
-    expect(approvalsEval.approvalLabels.some((l) => l.includes("pending"))).toBe(
-      true,
-    );
+    expect(approvalsEval.approvalLabels.some((l) => l.includes("pending"))).toBe(true);
 
     const summary = await svc.generateReleaseSummary(c, release.id);
     expect(summary.isDecision).toBe(false);
@@ -524,34 +499,28 @@ describe("ReleaseGovernanceService permissions", () => {
   it("denies operations without required permission", async () => {
     const { releaseGovernance: svc } = services();
     const denied = ctx({ permissions: [] });
-    await expect(
-      svc.createRelease(denied, { key: "X", name: "X" }),
-    ).rejects.toThrow(DomainRuleError);
+    await expect(svc.createRelease(denied, { key: "X", name: "X" })).rejects.toThrow(
+      DomainRuleError,
+    );
 
     const c = ctx();
     const release = await svc.createRelease(c, {
       key: "REL-PERM",
       name: "Perm",
     });
-    await expect(svc.getRelease(denied, release.id)).rejects.toThrow(
-      DomainRuleError,
-    );
+    await expect(svc.getRelease(denied, release.id)).rejects.toThrow(DomainRuleError);
     await expect(svc.listReleases(denied)).rejects.toThrow(DomainRuleError);
     await expect(
       svc.updateReleaseMetadata(denied, release.id, { name: "n" }),
     ).rejects.toThrow(DomainRuleError);
-    await expect(
-      svc.submitForReview(denied, release.id),
-    ).rejects.toThrow(DomainRuleError);
-    await expect(
-      svc.evaluateReadiness(denied, release.id),
-    ).rejects.toThrow(DomainRuleError);
-    await expect(svc.evaluateRisk(denied, release.id)).rejects.toThrow(
+    await expect(svc.submitForReview(denied, release.id)).rejects.toThrow(
       DomainRuleError,
     );
-    await expect(svc.listAudit(denied, release.id)).rejects.toThrow(
+    await expect(svc.evaluateReadiness(denied, release.id)).rejects.toThrow(
       DomainRuleError,
     );
+    await expect(svc.evaluateRisk(denied, release.id)).rejects.toThrow(DomainRuleError);
+    await expect(svc.listAudit(denied, release.id)).rejects.toThrow(DomainRuleError);
   });
 
   it("allows release.admin and nested wildcards", async () => {
@@ -600,9 +569,7 @@ describe("ReleaseGovernanceService mismatch guards", () => {
       dependsOnReleaseId: b.id,
     });
 
-    await expect(svc.removeScope(c, b.id, scope.id)).rejects.toThrow(
-      DomainRuleError,
-    );
+    await expect(svc.removeScope(c, b.id, scope.id)).rejects.toThrow(DomainRuleError);
     await expect(svc.removeEvidence(c, b.id, evidence.id)).rejects.toThrow(
       DomainRuleError,
     );
@@ -614,15 +581,10 @@ describe("ReleaseGovernanceService mismatch guards", () => {
 
 describe("ReleaseGovernanceService coverage branches", () => {
   it("covers READY summary, hold path, executions, missing cert, and factory defaults", async () => {
-    expect(
-      canTransitionReleaseGovernanceStatus(
-        "not_a_status" as never,
-        "draft",
-      ),
-    ).toBe(false);
-    expect(releaseGovernanceTransitionsFrom("not_a_status" as never)).toEqual(
-      [],
+    expect(canTransitionReleaseGovernanceStatus("not_a_status" as never, "draft")).toBe(
+      false,
     );
+    expect(releaseGovernanceTransitionsFrom("not_a_status" as never)).toEqual([]);
 
     const defaults = createReleaseGovernanceServices({
       persistence: createInMemoryTestingPersistence(),
@@ -894,12 +856,12 @@ describe("ReleaseGovernanceService coverage branches", () => {
     expect(holdSummary.isDecision).toBe(false);
 
     // Validation errors
-    await expect(
-      svc.createRelease(c, { key: "", name: "x" }),
-    ).rejects.toThrow(DomainRuleError);
-    await expect(
-      svc.approveRelease(c, release.id, ""),
-    ).rejects.toThrow(DomainRuleError);
+    await expect(svc.createRelease(c, { key: "", name: "x" })).rejects.toThrow(
+      DomainRuleError,
+    );
+    await expect(svc.approveRelease(c, release.id, "")).rejects.toThrow(
+      DomainRuleError,
+    );
 
     // Withdraw from approved
     const w = await svc2.createRelease(c, {

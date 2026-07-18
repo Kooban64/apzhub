@@ -12,15 +12,15 @@ import { useMemo, useState, type ReactNode } from "react";
 
 import * as observeApi from "@/lib/observe/observe-api";
 import { observeQueryKeys } from "@/lib/observe/query-keys";
-import {
-  ObserveClientError,
-  toObserveUserMessage,
-} from "@/lib/observe/observe-errors";
+import { ObserveClientError, toObserveUserMessage } from "@/lib/observe/observe-errors";
 import type { ObserveEntityViewModel } from "@/lib/observe/observe-types";
 import type { ObserveSection } from "@/lib/observe/routes";
 
 const BANNERS = [
-  { text: "LIVE METRICS COLLECTION NOT AVAILABLE", testId: "banner-metrics-collection" },
+  {
+    text: "LIVE METRICS COLLECTION NOT AVAILABLE",
+    testId: "banner-metrics-collection",
+  },
   { text: "LIVE LOG INGESTION NOT AVAILABLE", testId: "banner-log-ingestion" },
   { text: "LIVE TRACE INGESTION NOT AVAILABLE", testId: "banner-trace-ingestion" },
   { text: "GRAFANA INTEGRATION NOT AVAILABLE", testId: "banner-grafana" },
@@ -28,8 +28,14 @@ const BANNERS = [
   { text: "LOKI INTEGRATION NOT AVAILABLE", testId: "banner-loki" },
   { text: "OPENTELEMETRY INTEGRATION NOT AVAILABLE", testId: "banner-otel" },
   { text: "ALERTMANAGER INTEGRATION NOT AVAILABLE", testId: "banner-alertmanager" },
-  { text: "ALERT NOTIFICATION DELIVERY NOT AVAILABLE", testId: "banner-alert-delivery" },
-  { text: "INCIDENT EXECUTION WORKFLOWS NOT AVAILABLE", testId: "banner-incident-execution" },
+  {
+    text: "ALERT NOTIFICATION DELIVERY NOT AVAILABLE",
+    testId: "banner-alert-delivery",
+  },
+  {
+    text: "INCIDENT EXECUTION WORKFLOWS NOT AVAILABLE",
+    testId: "banner-incident-execution",
+  },
 ] as const;
 
 type FacetKey =
@@ -68,7 +74,8 @@ const FACETS: readonly FacetConfig[] = [
     section: "health-checks",
     facet: "healthChecks",
     title: "Health Checks",
-    description: "Health check metadata only — probes are not executed from this Workbench.",
+    description:
+      "Health check metadata only — probes are not executed from this Workbench.",
     columns: ["ID", "Service", "Name", "Status", "Provider"],
     cellKeys: ["id", "serviceKey", "name", "status", "providerKind"],
     createDefaults: {
@@ -82,7 +89,8 @@ const FACETS: readonly FacetConfig[] = [
     section: "readiness-checks",
     facet: "readinessChecks",
     title: "Readiness Checks",
-    description: "Readiness metadata — distinct from liveness; external probes are not executed.",
+    description:
+      "Readiness metadata — distinct from liveness; external probes are not executed.",
     columns: ["ID", "Service", "Name", "Status", "Provider"],
     cellKeys: ["id", "serviceKey", "name", "status", "providerKind"],
     createDefaults: {
@@ -96,7 +104,8 @@ const FACETS: readonly FacetConfig[] = [
     section: "liveness-checks",
     facet: "livenessChecks",
     title: "Liveness Checks",
-    description: "Liveness metadata — processes/containers are not probed from this Workbench.",
+    description:
+      "Liveness metadata — processes/containers are not probed from this Workbench.",
     columns: ["ID", "Service", "Name", "Status", "Provider"],
     cellKeys: ["id", "serviceKey", "name", "status", "providerKind"],
     createDefaults: {
@@ -110,7 +119,8 @@ const FACETS: readonly FacetConfig[] = [
     section: "service-health",
     facet: "serviceHealth",
     title: "Service Health",
-    description: "Recorded service-health metadata — not a live probe result unless the record says so.",
+    description:
+      "Recorded service-health metadata — not a live probe result unless the record says so.",
     columns: ["ID", "Service", "Display name", "Overall", "Readiness"],
     cellKeys: ["id", "serviceKey", "displayName", "overallStatus", "readinessStatus"],
     createDefaults: {
@@ -166,7 +176,8 @@ const FACETS: readonly FacetConfig[] = [
     section: "metric-samples",
     facet: "metricSamples",
     title: "Metric Samples",
-    description: "Stored sample metadata only — not a time-series store or charting engine.",
+    description:
+      "Stored sample metadata only — not a time-series store or charting engine.",
     columns: ["ID", "Metric", "Sampled at", "Value label", "Provider"],
     cellKeys: ["id", "metricDefinitionId", "sampledAt", "valueLabel", "providerKind"],
     createDefaults: {
@@ -264,7 +275,8 @@ const FACETS: readonly FacetConfig[] = [
     section: "incident-references",
     facet: "incidentReferences",
     title: "Incident References",
-    description: "References to externally owned incidents — Observability is not the incident SoR.",
+    description:
+      "References to externally owned incidents — Observability is not the incident SoR.",
     columns: ["ID", "Key", "Title", "Status", "Service"],
     cellKeys: ["id", "key", "title", "status", "serviceKey"],
     createDefaults: {
@@ -277,7 +289,8 @@ const FACETS: readonly FacetConfig[] = [
     section: "maintenance-windows",
     facet: "maintenanceWindows",
     title: "Maintenance Windows",
-    description: "Maintenance window metadata — alerts are not automatically suppressed.",
+    description:
+      "Maintenance window metadata — alerts are not automatically suppressed.",
     columns: ["ID", "Key", "Name", "Starts", "Ends"],
     cellKeys: ["id", "key", "name", "startsAt", "endsAt"],
     createDefaults: {
@@ -292,7 +305,8 @@ const FACETS: readonly FacetConfig[] = [
     section: "health-summaries",
     facet: "healthSummaries",
     title: "Health Summaries",
-    description: "Canonical stored summaries only — no cross-provider aggregation in the UI.",
+    description:
+      "Canonical stored summaries only — no cross-provider aggregation in the UI.",
     columns: ["ID", "Scope", "Overall", "Healthy", "Unhealthy"],
     cellKeys: ["id", "scopeKey", "overallStatus", "healthyCount", "unhealthyCount"],
     createDefaults: {
@@ -322,7 +336,10 @@ const FACETS: readonly FacetConfig[] = [
 
 const LIST_FNS: Record<
   FacetKey,
-  (query?: { limit?: number }, options?: { signal?: AbortSignal }) => Promise<{
+  (
+    query?: { limit?: number },
+    options?: { signal?: AbortSignal },
+  ) => Promise<{
     items: readonly ObserveEntityViewModel[];
   }>
 > = {
@@ -566,9 +583,7 @@ function StatusCard({
       <p className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">
         {label}
       </p>
-      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">
-        {value}
-      </p>
+      <p className="mt-1 text-sm font-medium text-[var(--color-foreground)]">{value}</p>
     </div>
   );
 }
@@ -631,9 +646,7 @@ function MetaTable({
               key={row.id}
               className={[
                 "border-b border-[var(--color-border)]",
-                onRowClick
-                  ? "cursor-pointer hover:bg-[var(--color-muted)]/30"
-                  : "",
+                onRowClick ? "cursor-pointer hover:bg-[var(--color-muted)]/30" : "",
                 selectedId === row.id ? "bg-[var(--color-muted)]/40" : "",
               ].join(" ")}
               onClick={onRowClick ? () => onRowClick(row.id) : undefined}
@@ -716,7 +729,9 @@ function FacetPanel({
     if (!q) return [...source];
     return source.filter((item) =>
       config.cellKeys.some((key) =>
-        String(item[key] ?? "").toLowerCase().includes(q),
+        String(item[key] ?? "")
+          .toLowerCase()
+          .includes(q),
       ),
     );
   }, [listQuery.data?.items, filter, config.cellKeys]);
@@ -757,11 +772,7 @@ function FacetPanel({
     mutationFn: () => {
       if (!activeId) throw new Error("No record selected");
       const name =
-        draft.name ||
-        draft.displayName ||
-        draft.title ||
-        draft.spanName ||
-        undefined;
+        draft.name || draft.displayName || draft.title || draft.spanName || undefined;
       return UPDATE_FNS[config.facet](activeId, {
         ...(name ? { name, displayName: name, title: name, spanName: name } : {}),
       });
@@ -837,12 +848,19 @@ function FacetPanel({
       </div>
 
       {statusMessage ? (
-        <p className="text-sm text-[var(--color-foreground)]" data-testid="observability-status">
+        <p
+          className="text-sm text-[var(--color-foreground)]"
+          data-testid="observability-status"
+        >
           {statusMessage}
         </p>
       ) : null}
       {actionError ? (
-        <p className="text-sm text-[var(--color-destructive)]" role="alert" data-testid="observability-action-error">
+        <p
+          className="text-sm text-[var(--color-destructive)]"
+          role="alert"
+          data-testid="observability-action-error"
+        >
           {actionError}
         </p>
       ) : null}
@@ -867,9 +885,11 @@ function FacetPanel({
                 key.toLowerCase().includes("status") ||
                 key === "severity" ||
                 key === "state" ||
-                key === "overallStatus"
-                  ? <StatusBadge value={cellValue(item, key)} />
-                  : cellValue(item, key),
+                key === "overallStatus" ? (
+                  <StatusBadge value={cellValue(item, key)} />
+                ) : (
+                  cellValue(item, key)
+                ),
               ),
             }))}
           />
@@ -976,13 +996,15 @@ export function PlatformObservabilityView({
   });
   const metricDefsQuery = useQuery({
     queryKey: observeQueryKeys.metricDefinitions.list(),
-    queryFn: ({ signal }) => observeApi.listMetricDefinitions({ limit: 100 }, { signal }),
+    queryFn: ({ signal }) =>
+      observeApi.listMetricDefinitions({ limit: 100 }, { signal }),
     enabled: section === "overview",
     retry: false,
   });
   const alertDefsQuery = useQuery({
     queryKey: observeQueryKeys.alertDefinitions.list(),
-    queryFn: ({ signal }) => observeApi.listAlertDefinitions({ limit: 100 }, { signal }),
+    queryFn: ({ signal }) =>
+      observeApi.listAlertDefinitions({ limit: 100 }, { signal }),
     enabled: section === "overview",
     retry: false,
   });
@@ -1001,7 +1023,8 @@ export function PlatformObservabilityView({
   });
   const tracesQuery = useQuery({
     queryKey: observeQueryKeys.traceDefinitions.list(),
-    queryFn: ({ signal }) => observeApi.listTraceDefinitions({ limit: 100 }, { signal }),
+    queryFn: ({ signal }) =>
+      observeApi.listTraceDefinitions({ limit: 100 }, { signal }),
     enabled: section === "overview",
     retry: false,
   });
@@ -1045,15 +1068,13 @@ export function PlatformObservabilityView({
   });
   const platformDiagListQuery = useQuery({
     queryKey: observeQueryKeys.diagnostics.list(),
-    queryFn: ({ signal }) => observeApi.listPlatformDiagnostics({ limit: 50 }, { signal }),
+    queryFn: ({ signal }) =>
+      observeApi.listPlatformDiagnostics({ limit: 50 }, { signal }),
     enabled: section === "diagnostics",
     retry: false,
   });
 
-  const overviewError =
-    healthChecksQuery.error ??
-    capabilitiesQuery.error ??
-    null;
+  const overviewError = healthChecksQuery.error ?? capabilitiesQuery.error ?? null;
 
   if (
     (section === "overview" || section === "diagnostics") &&
@@ -1174,9 +1195,7 @@ export function PlatformObservabilityView({
           />
           <StatusCard
             label="Persistence readiness"
-            value={
-              capabilitiesQuery.data?.persistenceReady ? "Ready" : "Unavailable"
-            }
+            value={capabilitiesQuery.data?.persistenceReady ? "Ready" : "Unavailable"}
             testId="card-persistence-readiness"
           />
           <StatusCard
@@ -1227,9 +1246,7 @@ export function PlatformObservabilityView({
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           <StatusCard
             label="Observe enabled"
-            value={
-              capabilitiesQuery.data?.observeEnabled ? "Enabled" : "Disabled"
-            }
+            value={capabilitiesQuery.data?.observeEnabled ? "Enabled" : "Disabled"}
             testId="diag-observe-enabled"
           />
           <StatusCard
@@ -1254,16 +1271,12 @@ export function PlatformObservabilityView({
           />
           <StatusCard
             label="Metadata completeness"
-            value={String(
-              capabilitiesQuery.data?.metadataCompleteness ?? "foundation",
-            )}
+            value={String(capabilitiesQuery.data?.metadataCompleteness ?? "foundation")}
             testId="diag-metadata-completeness"
           />
           <StatusCard
             label="Registration state"
-            value={String(
-              capabilitiesQuery.data?.registrationState ?? "unknown",
-            )}
+            value={String(capabilitiesQuery.data?.registrationState ?? "unknown")}
             testId="diag-registration-state"
           />
           <StatusCard

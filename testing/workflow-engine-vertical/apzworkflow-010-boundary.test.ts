@@ -31,14 +31,11 @@ describe("APZWORKFLOW-010 Workflow Engine boundary spot-checks", () => {
   });
 
   it("workspace routes do not collide", () => {
-    const routes = readFileSync(
-      join(ROOT, "apps/web/lib/workflows/routes.ts"),
-      "utf8",
+    const routes = readFileSync(join(ROOT, "apps/web/lib/workflows/routes.ts"), "utf8");
+    expect(routes).toContain(
+      'WORKFLOW_ENGINE_WORKSPACE_BASE = "/workspace/workflow-engine"',
     );
-    expect(routes).toContain('WORKFLOW_ENGINE_WORKSPACE_BASE = "/workspace/workflow-engine"');
     expect(routes).toContain('WORKFLOWS_WORKSPACE_BASE = "/workspace/workflows"');
-    expect(existsSync(join(ROOT, "apps/web/components/workflow-engine"))).toBe(
-      true,
-    );
+    expect(existsSync(join(ROOT, "apps/web/components/workflow-engine"))).toBe(true);
   });
 });

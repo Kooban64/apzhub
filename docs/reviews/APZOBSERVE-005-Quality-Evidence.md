@@ -16,15 +16,15 @@ pnpm certify:observe-vertical
 
 ## Results
 
-| Check | Result |
-| --- | --- |
-| Layer audits 001–004 | PASS |
-| Vertical audit | PASS |
-| OpenAPI validate | PASS (1.8.0) |
-| Certification harness + regression | PASS |
-| Scoped coverage | PASS — lines **98.22%** · functions **96.97%** · branches **76.52%** |
-| Playwright | LIMITED (`--list` PASS; live webServer blocked) |
-| `pnpm certify:observe-vertical` | PASS (with LIMITED Playwright) |
+| Check                              | Result                                                               |
+| ---------------------------------- | -------------------------------------------------------------------- |
+| Layer audits 001–004               | PASS                                                                 |
+| Vertical audit                     | PASS                                                                 |
+| OpenAPI validate                   | PASS (1.8.0)                                                         |
+| Certification harness + regression | PASS                                                                 |
+| Scoped coverage                    | PASS — lines **98.22%** · functions **96.97%** · branches **76.52%** |
+| Playwright                         | LIMITED (`--list` PASS; live webServer blocked)                      |
+| `pnpm certify:observe-vertical`    | PASS (with LIMITED Playwright)                                       |
 
 ## Classification
 

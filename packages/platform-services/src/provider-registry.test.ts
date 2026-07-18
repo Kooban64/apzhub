@@ -117,10 +117,11 @@ describe("ProviderRegistry", () => {
       provider: createMockSearchProvider(),
     });
 
-    expect(registry.listCandidates("search").map((entry: { providerId: string }) => entry.providerId)).toEqual([
-      "fast",
-      "slow",
-    ]);
+    expect(
+      registry
+        .listCandidates("search")
+        .map((entry: { providerId: string }) => entry.providerId),
+    ).toEqual(["fast", "slow"]);
   });
 
   it("skips disabled providers during candidate listing", () => {
@@ -174,9 +175,9 @@ describe("ProviderResolver", () => {
     registry.setActiveProvider("workspace", "active");
 
     const resolver = new ProviderResolver({ registry });
-    const result = await resolver.resolveWorkspaceProvider(TEST_SERVICE_CONTEXT).listWorkspaces(
-      TEST_SERVICE_CONTEXT,
-    );
+    const result = await resolver
+      .resolveWorkspaceProvider(TEST_SERVICE_CONTEXT)
+      .listWorkspaces(TEST_SERVICE_CONTEXT);
 
     expect(result.items[0]?.name).toBe("Test Workspace");
   });
@@ -212,16 +213,27 @@ describe("ProviderResolver", () => {
   it("throws a platform error when no provider is registered", () => {
     const resolver = new ProviderResolver({ registry: new ProviderRegistry() });
 
-    expect(() =>
-      resolver.resolveWorkspaceProvider(TEST_SERVICE_CONTEXT),
-    ).toThrow(PlatformServiceError);
+    expect(() => resolver.resolveWorkspaceProvider(TEST_SERVICE_CONTEXT)).toThrow(
+      PlatformServiceError,
+    );
   });
 
   it("prefers preferredProviderId in resolveByCriteria", () => {
     const registry = new ProviderRegistry();
     const preferred = createMockSearchProvider({
       async search() {
-        return { status: "ok", documents: [{ id: "doc_1", kind: "project", title: "Alpha", sourceId: "projects", sourceLabel: "Projects" }] };
+        return {
+          status: "ok",
+          documents: [
+            {
+              id: "doc_1",
+              kind: "project",
+              title: "Alpha",
+              sourceId: "projects",
+              sourceLabel: "Projects",
+            },
+          ],
+        };
       },
     });
 

@@ -122,18 +122,14 @@ export function createSupportSearchLifecycleHooks(
     c: SupportSearchPublicationContext,
     e: SupportTicket,
   ) => upsert(c, { entityType: "support_request", entity: e });
-  const onSupportRequestRemoved = (
-    c: SupportSearchPublicationContext,
-    id: string,
-  ) => publisher.remove(c, "support_request", id);
+  const onSupportRequestRemoved = (c: SupportSearchPublicationContext, id: string) =>
+    publisher.remove(c, "support_request", id);
   const onSupportArticleUpserted = (
     c: SupportSearchPublicationContext,
     e: SupportArticle,
   ) => upsert(c, { entityType: "support_article", entity: e });
-  const onSupportArticleRemoved = (
-    c: SupportSearchPublicationContext,
-    id: string,
-  ) => publisher.remove(c, "support_article", id);
+  const onSupportArticleRemoved = (c: SupportSearchPublicationContext, id: string) =>
+    publisher.remove(c, "support_article", id);
   const onSupportOrganisationUpserted = (
     c: SupportSearchPublicationContext,
     e: SupportOrganization,
@@ -146,18 +142,12 @@ export function createSupportSearchLifecycleHooks(
     c: SupportSearchPublicationContext,
     e: SupportGroup,
   ) => upsert(c, { entityType: "support_group", entity: e });
-  const onSupportGroupRemoved = (
-    c: SupportSearchPublicationContext,
-    id: string,
-  ) => publisher.remove(c, "support_group", id);
-  const onSupportUserUpserted = (
-    c: SupportSearchPublicationContext,
-    e: SupportUser,
-  ) => upsert(c, { entityType: "support_user", entity: e });
-  const onSupportUserRemoved = (
-    c: SupportSearchPublicationContext,
-    id: string,
-  ) => publisher.remove(c, "support_user", id);
+  const onSupportGroupRemoved = (c: SupportSearchPublicationContext, id: string) =>
+    publisher.remove(c, "support_group", id);
+  const onSupportUserUpserted = (c: SupportSearchPublicationContext, e: SupportUser) =>
+    upsert(c, { entityType: "support_user", entity: e });
+  const onSupportUserRemoved = (c: SupportSearchPublicationContext, id: string) =>
+    publisher.remove(c, "support_user", id);
 
   return {
     onSupportRequestUpserted,

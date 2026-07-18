@@ -6,15 +6,15 @@ All implemented routes under `apps/web/app/api/v1/workflows/**` (20 route module
 
 ## Parity
 
-| Check | Result |
-| --- | --- |
-| Route catalogue ↔ OpenAPI Platform Workflow | PASS |
-| `pnpm openapi:validate:platform` | PASS |
-| Standard API v1 envelopes | PASS (platform handlers) |
-| Lifecycle commands publish/archive/restore/transition | PASS |
-| Validation single route | PASS |
-| Audit by workflow ID | PASS |
-| Categories/folders current gateway ops only | PASS (limitation retained) |
+| Check                                                 | Result                     |
+| ----------------------------------------------------- | -------------------------- |
+| Route catalogue ↔ OpenAPI Platform Workflow           | PASS                       |
+| `pnpm openapi:validate:platform`                      | PASS                       |
+| Standard API v1 envelopes                             | PASS (platform handlers)   |
+| Lifecycle commands publish/archive/restore/transition | PASS                       |
+| Validation single route                               | PASS                       |
+| Audit by workflow ID                                  | PASS                       |
+| Categories/folders current gateway ops only           | PASS (limitation retained) |
 
 ## Explicit absences (tested)
 

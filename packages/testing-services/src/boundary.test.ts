@@ -41,10 +41,7 @@ describe("testing-services boundary", () => {
     for (const file of files) {
       const content = readFileSync(file, "utf8");
       for (const pattern of FORBIDDEN_IMPORT_PATTERNS) {
-        expect(
-          pattern.test(content),
-          `${file} must not match ${pattern}`,
-        ).toBe(false);
+        expect(pattern.test(content), `${file} must not match ${pattern}`).toBe(false);
       }
     }
   });

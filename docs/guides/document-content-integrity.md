@@ -12,10 +12,10 @@ Provider ETags are **ignored** as integrity authority (`providerEtagIgnored: tru
 
 `createDocumentIntegrityService()` in `@apzhub/document-core`:
 
-| Method | Role |
-|--------|------|
-| `collect(source, { maxBytes, signal })` | Materialise bytes/stream with size cap |
-| `hash(bytes)` | SHA-256 hex |
+| Method                                               | Role                                      |
+| ---------------------------------------------------- | ----------------------------------------- |
+| `collect(source, { maxBytes, signal })`              | Materialise bytes/stream with size cap    |
+| `hash(bytes)`                                        | SHA-256 hex                               |
 | `verify({ bytes, expectedHex, expectedByteLength })` | Classify valid / mismatch / size_mismatch |
 
 ## Classifications

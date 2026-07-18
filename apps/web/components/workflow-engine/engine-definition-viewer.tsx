@@ -105,9 +105,7 @@ function Section({
       className="rounded-lg border border-[var(--color-border)] p-3"
       aria-label={title}
     >
-      <h3 className="text-sm font-semibold text-[var(--color-foreground)]">
-        {title}
-      </h3>
+      <h3 className="text-sm font-semibold text-[var(--color-foreground)]">{title}</h3>
       {empty ? (
         <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">None</p>
       ) : (
@@ -117,13 +115,7 @@ function Section({
   );
 }
 
-function Meta({
-  label,
-  value,
-}: {
-  readonly label: string;
-  readonly value: string;
-}) {
+function Meta({ label, value }: { readonly label: string; readonly value: string }) {
   return (
     <div>
       <dt className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">

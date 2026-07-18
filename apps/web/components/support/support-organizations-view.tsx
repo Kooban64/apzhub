@@ -71,7 +71,9 @@ export function SupportOrganizationsView({
       setName("");
       setDomain("");
       setNote("");
-      void queryClient.invalidateQueries({ queryKey: supportQueryKeys.organizations.all });
+      void queryClient.invalidateQueries({
+        queryKey: supportQueryKeys.organizations.all,
+      });
       router.push(`${SUPPORT_BASE}/organizations/${result.data.id}`);
     },
     onError: (cause: unknown) => {
@@ -131,7 +133,8 @@ export function SupportOrganizationsView({
             <span className="font-medium">Active:</span> {org.active ? "Yes" : "No"}
           </p>
           <p>
-            <span className="font-medium">Updated:</span> {formatSupportDate(org.updatedAt)}
+            <span className="font-medium">Updated:</span>{" "}
+            {formatSupportDate(org.updatedAt)}
           </p>
           {org.note ? <p>{org.note}</p> : null}
         </div>
@@ -163,7 +166,11 @@ export function SupportOrganizationsView({
             Archive
           </Button>
         ) : null}
-        {error ? <p className="text-sm" role="alert">{error}</p> : null}
+        {error ? (
+          <p className="text-sm" role="alert">
+            {error}
+          </p>
+        ) : null}
         <ConfirmDialog
           open={archiveOpen}
           title="Archive organization?"
@@ -187,8 +194,17 @@ export function SupportOrganizationsView({
             createMutation.mutate();
           }}
         >
-          <Input label="Name *" value={name} onChange={(e) => setName(e.target.value)} required />
-          <Input label="Domain" value={domain} onChange={(e) => setDomain(e.target.value)} />
+          <Input
+            label="Name *"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <Input
+            label="Domain"
+            value={domain}
+            onChange={(e) => setDomain(e.target.value)}
+          />
           <Input label="Note" value={note} onChange={(e) => setNote(e.target.value)} />
           <div className="flex items-end">
             <Button type="submit" size="sm" disabled={createMutation.isPending}>
@@ -226,7 +242,11 @@ export function SupportOrganizationsView({
           onRowClick={(id) => router.push(`${SUPPORT_BASE}/organizations/${id}`)}
         />
       ) : null}
-      {error ? <p className="text-sm" role="alert">{error}</p> : null}
+      {error ? (
+        <p className="text-sm" role="alert">
+          {error}
+        </p>
+      ) : null}
     </PageShell>
   );
 }

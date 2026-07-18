@@ -52,9 +52,7 @@ export function failedPublicationResult(
   };
 }
 
-export abstract class DomainSearchPublisherBase
-  implements TestingDomainSearchPublisher
-{
+export abstract class DomainSearchPublisherBase implements TestingDomainSearchPublisher {
   abstract readonly domain: TestingSearchDomainId;
   abstract readonly entityTypes: readonly TestingSearchEntityType[];
 
@@ -117,12 +115,9 @@ export abstract class DomainSearchPublisherBase
     } catch (error) {
       const domain = this.deps.errors.translate(error);
       this.deps.metrics.record("validate", false, input.entityType);
-      this.deps.diagnostics.touch(
-        "validate",
-        context.correlationId,
-        input.entityType,
-        [{ field: "entity", code: domain.classification, message: domain.message }],
-      );
+      this.deps.diagnostics.touch("validate", context.correlationId, input.entityType, [
+        { field: "entity", code: domain.classification, message: domain.message },
+      ]);
       return failedPublicationResult("validate", context, domain.message, started);
     }
   }

@@ -5,6 +5,19 @@ import { useQuery } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
 
 import {
+  acknowledgeSearchPublicationDeadLetter,
+  archiveSearchPublicationDeadLetter,
+  clearSearchPublicationCompletedRetries,
+  drainSearchPublicationBatch,
+  getSearchPublicationAdminDiagnostics,
+  getSearchPublicationQueueSummary,
+  listSearchPublicationProducts,
+  listSearchPublications,
+  retrySearchPublication,
+  retrySearchPublicationDeadLetter,
+  retrySearchPublicationFailedBatch,
+} from "@/lib/search/publication-admin-api";
+import {
   executeSearchQuery,
   getSearchDiagnostics,
   getSearchHealth,
@@ -181,9 +194,7 @@ function OverviewSection() {
     return (
       <PageShell title="Overview" description="Platform Search status">
         <ErrorState
-          message={toSearchUserMessage(
-            health.error ?? readiness.error ?? stats.error,
-          )}
+          message={toSearchUserMessage(health.error ?? readiness.error ?? stats.error)}
           onRetry={() => {
             void health.refetch();
             void readiness.refetch();
@@ -213,11 +224,7 @@ function OverviewSection() {
             Ready
           </p>
           <p className="mt-1 text-lg font-medium">
-            {readiness.data
-              ? readiness.data.healthy
-                ? "Healthy"
-                : "Not ready"
-              : "…"}
+            {readiness.data ? (readiness.data.healthy ? "Healthy" : "Not ready") : "…"}
           </p>
         </div>
         <div className="rounded-lg border border-[var(--color-border)] p-4">
@@ -542,11 +549,220 @@ function DiagnosticsSection() {
   );
 }
 
-export function PlatformSearchView({
-  section,
-}: {
-  readonly section: SearchSection;
-}) {
+function PublicationOperationsSection() {
+  const [statusFilter, setStatusFilter] = useState("queued");
+  const queue = useQuery({
+    queryKey: ["search", "publication", "queue"],
+    queryFn: () => getSearchPublicationQueueSummary(),
+  });
+  const products = useQuery({
+    queryKey: ["search", "publication", "products"],
+    queryFn: () => listSearchPublicationProducts(),
+  });
+  const diagnostics = useQuery({
+    queryKey: ["search", "publication", "diagnostics"],
+    queryFn: () => getSearchPublicationAdminDiagnostics(),
+  });
+  const journal = useQuery({
+    queryKey: ["search", "publication", "journal", statusFilter],
+    queryFn: () =>
+      listSearchPublications({
+        status: statusFilter || undefined,
+        limit: 50,
+      }),
+  });
+
+  async function refreshAll() {
+    await Promise.all([
+      queue.refetch(),
+      products.refetch(),
+      diagnostics.refetch(),
+      journal.refetch(),
+    ]);
+  }
+
+  return (
+    <PageShell
+      title="Publication Operations"
+      description="Operational visibility over the publication journal — metadata only"
+      actions={
+        <>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => void retrySearchPublicationFailedBatch(25).then(refreshAll)}
+          >
+            Retry failed batch
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() =>
+              void clearSearchPublicationCompletedRetries().then(refreshAll)
+            }
+          >
+            Clear completed retries
+          </Button>
+          <Button
+            type="button"
+            size="sm"
+            onClick={() => void drainSearchPublicationBatch().then(refreshAll)}
+          >
+            Drain batch
+          </Button>
+        </>
+      }
+    >
+      <div className="grid gap-4 md:grid-cols-3" data-testid="search-publication-ops">
+        <div className="rounded-lg border border-[var(--color-border)] p-4 text-sm">
+          <p className="font-medium">Queue</p>
+          {queue.data ? (
+            <ul className="mt-2 space-y-1 text-[var(--color-muted-foreground)]">
+              <li>Depth: {queue.data.queueDepth}</li>
+              <li>Retrying: {queue.data.retryingCount}</li>
+              <li>Failed: {queue.data.failedCount}</li>
+              <li>Dead-letter: {queue.data.deadLetterCount}</li>
+              <li>Backlog: {queue.data.backlog}</li>
+              <li>Throughput: {queue.data.throughputPublished}</li>
+              <li>Oldest: {queue.data.oldestQueuedAt ?? "—"}</li>
+            </ul>
+          ) : (
+            <p className="mt-2 text-[var(--color-muted-foreground)]">Loading…</p>
+          )}
+        </div>
+        <div className="rounded-lg border border-[var(--color-border)] p-4 text-sm">
+          <p className="font-medium">Diagnostics</p>
+          {diagnostics.data ? (
+            <ul className="mt-2 space-y-1 text-[var(--color-muted-foreground)]">
+              <li>Health: {diagnostics.data.publicationHealth}</li>
+              <li>Bootstrap: {diagnostics.data.bootstrapEnabled ? "on" : "off"}</li>
+              <li>
+                Journal: {diagnostics.data.journalReady ? "ready" : "unavailable"}
+              </li>
+              <li>
+                Composition:{" "}
+                {diagnostics.data.compositionRegistered ? "registered" : "missing"}
+              </li>
+              <li>Admin: {diagnostics.data.adminVersion}</li>
+            </ul>
+          ) : (
+            <p className="mt-2 text-[var(--color-muted-foreground)]">Loading…</p>
+          )}
+        </div>
+        <div className="rounded-lg border border-[var(--color-border)] p-4 text-sm">
+          <p className="font-medium">By product</p>
+          {products.data ? (
+            <ul className="mt-2 space-y-1 text-[var(--color-muted-foreground)]">
+              {products.data.map((p) => (
+                <li key={p.productId}>
+                  {p.productId}: {p.total} (q {p.queued} / f {p.failed} / dlq{" "}
+                  {p.deadLetter})
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-2 text-[var(--color-muted-foreground)]">Loading…</p>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-4 flex flex-wrap items-end gap-3">
+        <label className="text-sm">
+          <span className="mb-1 block text-[var(--color-muted-foreground)]">
+            Status filter
+          </span>
+          <Input
+            value={statusFilter}
+            onChange={(event) => setStatusFilter(event.target.value)}
+            placeholder="queued"
+            className="w-48"
+          />
+        </label>
+      </div>
+
+      {journal.isError ? (
+        <ErrorState
+          message={toSearchUserMessage(journal.error)}
+          onRetry={() => void journal.refetch()}
+        />
+      ) : (journal.data?.items.length ?? 0) === 0 ? (
+        <EmptyState
+          title="No publications"
+          description="No journal rows match the current filter."
+        />
+      ) : (
+        <SearchTable
+          caption="Publication journal"
+          columns={["Id", "Product", "Entity", "Status", "Attempts", "Actions"]}
+          rows={(journal.data?.items ?? []).map((item) => ({
+            id: item.id,
+            cells: [
+              item.id,
+              item.productId,
+              `${item.entityType}:${item.entityId}`,
+              item.status,
+              `${item.attemptCount}/${item.maxAttempts}`,
+              <div key={`${item.id}-actions`} className="flex flex-wrap gap-1">
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  onClick={() => void retrySearchPublication(item.id).then(refreshAll)}
+                >
+                  Retry
+                </Button>
+                {item.status === "dead-letter" ? (
+                  <>
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      onClick={() =>
+                        void retrySearchPublicationDeadLetter(item.id).then(refreshAll)
+                      }
+                    >
+                      Re-enqueue
+                    </Button>
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      onClick={() =>
+                        void acknowledgeSearchPublicationDeadLetter(
+                          item.id,
+                          "ack",
+                        ).then(refreshAll)
+                      }
+                    >
+                      Ack
+                    </Button>
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      onClick={() =>
+                        void archiveSearchPublicationDeadLetter(
+                          item.id,
+                          "archive",
+                        ).then(refreshAll)
+                      }
+                    >
+                      Archive
+                    </Button>
+                  </>
+                ) : null}
+              </div>,
+            ],
+          }))}
+        />
+      )}
+    </PageShell>
+  );
+}
+
+export function PlatformSearchView({ section }: { readonly section: SearchSection }) {
   switch (section) {
     case "query":
       return <QuerySection />;
@@ -566,6 +782,8 @@ export function PlatformSearchView({
       return <AuditSection />;
     case "diagnostics":
       return <DiagnosticsSection />;
+    case "publication":
+      return <PublicationOperationsSection />;
     case "overview":
     default:
       return <OverviewSection />;

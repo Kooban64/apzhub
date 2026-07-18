@@ -2,9 +2,7 @@ import { invalidLifecycleTransitionError } from "../errors/codes";
 import { sdkErr, sdkOk, type SdkResult } from "../errors/result";
 import type { Clock } from "../auth/authentication-provider";
 import { systemClock } from "../auth/authentication-provider";
-import {
-  canTransitionConnectionLifecycle,
-} from "./lifecycle-transitions";
+import { canTransitionConnectionLifecycle } from "./lifecycle-transitions";
 import type { ConnectionLifecycleState, ConnectionRecord } from "./types";
 
 export interface LifecycleTransitionInput {

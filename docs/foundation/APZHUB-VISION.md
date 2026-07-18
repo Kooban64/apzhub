@@ -25,13 +25,13 @@ The platform is:
 
 ## Five-year roadmap (summary)
 
-| Horizon | Focus |
-|---------|-------|
+| Horizon              | Focus                                                                                        |
+| -------------------- | -------------------------------------------------------------------------------------------- |
 | **Year 1 (current)** | Platform Core certification; Law Platform validation; Integration SDK; Wave 1 OSS (Projects) |
-| **Year 2** | Remaining OSS waves; Quality Engineering; PCv2 operational maturity (workers, HA, vault) |
-| **Year 3** | Commercial GA tiers; multi-tenant SaaS option; Financial Engine extraction decision |
-| **Year 4** | Additional verticals (Exchange, Banking); marketplace/partner integrations |
-| **Year 5** | Platform ecosystem — third-party modules, white-label, governed AI across domains |
+| **Year 2**           | Remaining OSS waves; Quality Engineering; PCv2 operational maturity (workers, HA, vault)     |
+| **Year 3**           | Commercial GA tiers; multi-tenant SaaS option; Financial Engine extraction decision          |
+| **Year 4**           | Additional verticals (Exchange, Banking); marketplace/partner integrations                   |
+| **Year 5**           | Platform ecosystem — third-party modules, white-label, governed AI across domains            |
 
 **Canonical detail:** [Platform Core Strategy](../strategy/APZHUB-Platform-Core-Strategy.md) · [Engineering Roadmap](../strategy/APZHUB-Engineering-Roadmap.md) · [OSS Wave Roadmap](../strategy/APZHUB-OSS-Wave-Roadmap.md)
 
@@ -90,13 +90,13 @@ Cloud is an **optional deployment model**, not the default:
 
 Governed AI across platform domains — **not** uncontrolled LLM integration:
 
-| Domain | Approach |
-|--------|----------|
-| **Command palette** | AI-ready ranking and action suggestions |
-| **Unified search** | Semantic/vector search without redesign (PostgreSQL FTS first) |
-| **Documentation** | AI agents read Knowledge Foundation — not chat history |
-| **Code generation** | Manifest-first; architecture compliance mandatory |
-| **Product AI** | Per-product policies; audit; no credential exposure |
+| Domain              | Approach                                                       |
+| ------------------- | -------------------------------------------------------------- |
+| **Command palette** | AI-ready ranking and action suggestions                        |
+| **Unified search**  | Semantic/vector search without redesign (PostgreSQL FTS first) |
+| **Documentation**   | AI agents read Knowledge Foundation — not chat history         |
+| **Code generation** | Manifest-first; architecture compliance mandatory              |
+| **Product AI**      | Per-product policies; audit; no credential exposure            |
 
 See [AI Strategy](../strategy/APZHUB-AI-Strategy.md) · [020 — Unified Search](../020-unified-search-knowledge-discovery-framework.md).
 

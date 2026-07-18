@@ -22,7 +22,11 @@ export interface PreferenceRepository {
 
 export interface FavoritesRepository {
   listByUser(userId: string): Promise<readonly FavoriteItem[]>;
-  get(userId: string, itemType: string, itemKey: string): Promise<FavoriteItem | undefined>;
+  get(
+    userId: string,
+    itemType: string,
+    itemKey: string,
+  ): Promise<FavoriteItem | undefined>;
   add(input: AddFavoriteInput): Promise<FavoriteItem>;
   remove(userId: string, favoriteId: string): Promise<boolean>;
   count(): Promise<number>;

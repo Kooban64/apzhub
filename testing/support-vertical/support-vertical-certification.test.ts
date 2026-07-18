@@ -38,7 +38,8 @@ const TENANT = TEST_TENANT_ID;
 function walkTs(dir: string, out: string[] = []): string[] {
   try {
     for (const entry of readdirSync(dir)) {
-      if (entry === "node_modules" || entry === "dist" || entry.startsWith(".")) continue;
+      if (entry === "node_modules" || entry === "dist" || entry.startsWith("."))
+        continue;
       const full = join(dir, entry);
       const st = statSync(full);
       if (st.isDirectory()) walkTs(full, out);
@@ -67,8 +68,8 @@ describe("OSS-110-12 Cert A — Package versions", () => {
     expect(ZAMMAD_ADAPTER_VERSION).toBe("0.6.0");
   });
 
-  it("PLATFORM_SERVICES_VERSION is 0.7.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.7.0");
+  it("PLATFORM_SERVICES_VERSION is 0.25.0", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
   });
 });
 
@@ -344,8 +345,12 @@ describe("OSS-110-12 Cert F — Support capability registration", () => {
     expect(typeof bundle.gateway.support.updateSupportRequest).toBe("function");
     expect(typeof bundle.gateway.support.closeSupportRequest).toBe("function");
     expect(typeof bundle.gateway.support.reopenSupportRequest).toBe("function");
-    expect(typeof bundle.gateway.supportOrganizations.listOrganizations).toBe("function");
-    expect(typeof bundle.gateway.supportOrganizations.createOrganization).toBe("function");
+    expect(typeof bundle.gateway.supportOrganizations.listOrganizations).toBe(
+      "function",
+    );
+    expect(typeof bundle.gateway.supportOrganizations.createOrganization).toBe(
+      "function",
+    );
     expect(typeof bundle.gateway.supportGroups.listGroups).toBe("function");
     expect(typeof bundle.gateway.supportGroups.createGroup).toBe("function");
     expect(typeof bundle.gateway.supportUsers.listUsers).toBe("function");
@@ -354,7 +359,9 @@ describe("OSS-110-12 Cert F — Support capability registration", () => {
     expect(typeof bundle.gateway.supportArticles.createReply).toBe("function");
     expect(typeof bundle.gateway.supportSearch.search).toBe("function");
     expect(typeof bundle.gateway.supportHistory.getTimeline).toBe("function");
-    expect(typeof bundle.gateway.supportAnalytics.getSupportIntelligence).toBe("function");
+    expect(typeof bundle.gateway.supportAnalytics.getSupportIntelligence).toBe(
+      "function",
+    );
 
     await disposeZammadAdapter(created.adapter, created.factory);
   });

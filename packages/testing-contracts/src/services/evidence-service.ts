@@ -19,7 +19,10 @@ export interface EvidenceService {
   /** Create pending evidence then capture (pending → captured) via storage put. */
   captureEvidence(
     ctx: ServiceRequestContext,
-    input: Omit<Evidence, "id" | "createdAt" | "updatedAt" | "storageRef" | "lifecycleStatus"> & {
+    input: Omit<
+      Evidence,
+      "id" | "createdAt" | "updatedAt" | "storageRef" | "lifecycleStatus"
+    > & {
       readonly storageRef?: string;
       readonly put?: EvidenceStoragePutInput;
     },
@@ -60,7 +63,12 @@ export interface EvidenceService {
     ctx: ServiceRequestContext,
     id: EvidenceId,
     storageRef: string,
-    meta?: Partial<Pick<Evidence, "contentType" | "sizeBytes" | "checksum" | "contentHash" | "mimeType">>,
+    meta?: Partial<
+      Pick<
+        Evidence,
+        "contentType" | "sizeBytes" | "checksum" | "contentHash" | "mimeType"
+      >
+    >,
   ): Promise<Evidence>;
   getStorageProvider(): EvidenceStorageProvider;
   listAttachments(ctx: ServiceRequestContext): Promise<readonly Attachment[]>;

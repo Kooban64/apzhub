@@ -81,11 +81,7 @@ export function wrapWorkflowPlatformGatewayWithPipeline(
       pipeline,
       "workflowWorkflows",
     ),
-    versions: wrapServiceWithPipeline(
-      gateway.versions,
-      pipeline,
-      "workflowVersions",
-    ),
+    versions: wrapServiceWithPipeline(gateway.versions, pipeline, "workflowVersions"),
     templates: wrapServiceWithPipeline(
       gateway.templates,
       pipeline,
@@ -96,11 +92,7 @@ export function wrapWorkflowPlatformGatewayWithPipeline(
       pipeline,
       "workflowCategories",
     ),
-    folders: wrapServiceWithPipeline(
-      gateway.folders,
-      pipeline,
-      "workflowFolders",
-    ),
+    folders: wrapServiceWithPipeline(gateway.folders, pipeline, "workflowFolders"),
     validation: wrapServiceWithPipeline(
       gateway.validation,
       pipeline,

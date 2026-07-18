@@ -67,9 +67,7 @@ function mapNotification(raw: unknown): NotificationViewModel {
       r.templateId !== undefined && r.templateId !== null
         ? String(r.templateId)
         : undefined,
-    channelKinds: Array.isArray(r.channelKinds)
-      ? r.channelKinds.map(String)
-      : [],
+    channelKinds: Array.isArray(r.channelKinds) ? r.channelKinds.map(String) : [],
     expiresAt:
       r.expiresAt !== undefined && r.expiresAt !== null
         ? String(r.expiresAt)
@@ -117,8 +115,7 @@ function mapTemplate(raw: unknown): NotificationTemplateViewModel {
       r.bodyTemplate !== undefined && r.bodyTemplate !== null
         ? String(r.bodyTemplate)
         : undefined,
-    locale:
-      r.locale !== undefined && r.locale !== null ? String(r.locale) : undefined,
+    locale: r.locale !== undefined && r.locale !== null ? String(r.locale) : undefined,
     createdAt: String(r.createdAt ?? ""),
     updatedAt: String(r.updatedAt ?? ""),
     createdBy: String(r.createdBy ?? ""),
@@ -201,16 +198,14 @@ function mapRecipient(raw: unknown): NotificationRecipientViewModel {
     id: String(r.id ?? ""),
     notificationId: String(r.notificationId ?? ""),
     tenantId: String(r.tenantId ?? ""),
-    userId:
-      r.userId !== undefined && r.userId !== null ? String(r.userId) : undefined,
+    userId: r.userId !== undefined && r.userId !== null ? String(r.userId) : undefined,
     addressHint:
       r.addressHint !== undefined && r.addressHint !== null
         ? String(r.addressHint)
         : undefined,
     channelKind: String(r.channelKind ?? ""),
     status: String(r.status ?? ""),
-    readAt:
-      r.readAt !== undefined && r.readAt !== null ? String(r.readAt) : undefined,
+    readAt: r.readAt !== undefined && r.readAt !== null ? String(r.readAt) : undefined,
     acknowledgedAt:
       r.acknowledgedAt !== undefined && r.acknowledgedAt !== null
         ? String(r.acknowledgedAt)
@@ -231,8 +226,7 @@ function mapReference(raw: unknown): NotificationReferenceViewModel {
     notificationId: String(r.notificationId ?? ""),
     kind: String(r.kind ?? ""),
     resourceId: String(r.resourceId ?? ""),
-    label:
-      r.label !== undefined && r.label !== null ? String(r.label) : undefined,
+    label: r.label !== undefined && r.label !== null ? String(r.label) : undefined,
   };
 }
 
@@ -251,8 +245,7 @@ function mapAudit(raw: unknown): NotificationAuditViewModel {
         : undefined,
     action: String(r.action ?? ""),
     actorUserId: String(r.actorUserId ?? ""),
-    detail:
-      r.detail !== undefined && r.detail !== null ? String(r.detail) : undefined,
+    detail: r.detail !== undefined && r.detail !== null ? String(r.detail) : undefined,
     createdAt: String(r.createdAt ?? ""),
   };
 }
@@ -315,15 +308,11 @@ async function requestJson<T>(
     },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiSuccessEnvelope<T>
-    | ApiCollectionEnvelope<unknown>
-    | ApiErrorEnvelope;
+    ApiSuccessEnvelope<T> | ApiCollectionEnvelope<unknown> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new NotificationClientError({
-      message:
-        err.error?.message ??
-        `Notification request failed (${response.status})`,
+      message: err.error?.message ?? `Notification request failed (${response.status})`,
       code: err.error?.code ?? "NOTIFICATION_HTTP_ERROR",
       correlationId: err.meta?.correlationId,
       status: response.status,
@@ -347,14 +336,11 @@ async function requestCollection<T>(
     },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiCollectionEnvelope<unknown>
-    | ApiErrorEnvelope;
+    ApiCollectionEnvelope<unknown> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new NotificationClientError({
-      message:
-        err.error?.message ??
-        `Notification request failed (${response.status})`,
+      message: err.error?.message ?? `Notification request failed (${response.status})`,
       code: err.error?.code ?? "NOTIFICATION_HTTP_ERROR",
       correlationId: err.meta?.correlationId,
       status: response.status,
@@ -572,11 +558,7 @@ export function createHttpNotificationClient(): NotificationClient {
       ).then(mapNotification);
     },
     listTemplates(options) {
-      return requestCollection(
-        `${API_BASE}/templates`,
-        mapTemplate,
-        options,
-      );
+      return requestCollection(`${API_BASE}/templates`, mapTemplate, options);
     },
     getTemplate(templateId, options) {
       return requestJson(
@@ -607,11 +589,7 @@ export function createHttpNotificationClient(): NotificationClient {
       ).then(mapTemplate);
     },
     listPreferences(options) {
-      return requestCollection(
-        `${API_BASE}/preferences`,
-        mapPreference,
-        options,
-      );
+      return requestCollection(`${API_BASE}/preferences`, mapPreference, options);
     },
     getPreference(preferenceId, options) {
       return requestJson(
@@ -628,11 +606,7 @@ export function createHttpNotificationClient(): NotificationClient {
       ).then(mapPreference);
     },
     listCategories(options) {
-      return requestCollection(
-        `${API_BASE}/categories`,
-        mapCategory,
-        options,
-      );
+      return requestCollection(`${API_BASE}/categories`, mapCategory, options);
     },
     getCategory(categoryId, options) {
       return requestJson(
@@ -690,32 +664,24 @@ export function createHttpNotificationClient(): NotificationClient {
       );
     },
     getCapabilities(options) {
-      return requestJson(
-        `${API_BASE}/capabilities`,
-        { method: "GET" },
-        options,
-      ).then(mapManagement);
+      return requestJson(`${API_BASE}/capabilities`, { method: "GET" }, options).then(
+        mapManagement,
+      );
     },
     getHealth(options) {
-      return requestJson(
-        `${API_BASE}/health`,
-        { method: "GET" },
-        options,
-      ).then(mapManagement);
+      return requestJson(`${API_BASE}/health`, { method: "GET" }, options).then(
+        mapManagement,
+      );
     },
     getReadiness(options) {
-      return requestJson(
-        `${API_BASE}/readiness`,
-        { method: "GET" },
-        options,
-      ).then(mapManagement);
+      return requestJson(`${API_BASE}/readiness`, { method: "GET" }, options).then(
+        mapManagement,
+      );
     },
     getDiagnostics(options) {
-      return requestJson(
-        `${API_BASE}/diagnostics`,
-        { method: "GET" },
-        options,
-      ).then(mapManagement);
+      return requestJson(`${API_BASE}/diagnostics`, { method: "GET" }, options).then(
+        mapManagement,
+      );
     },
   };
 }

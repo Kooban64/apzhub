@@ -8,13 +8,13 @@
 
 ## Packages
 
-| Package | Version | Role |
-| ------- | ------- | ---- |
-| `@apzhub/document-contracts` | **0.3.0** | Gateway facet contracts + permissions |
-| `@apzhub/document-core` | **0.3.0** | Domain + `assignFolder` / `assignCollection` / `applyRetention` |
-| `@apzhub/document-persistence` | 0.2.0 | PostgreSQL / test repos (unchanged surface) |
-| `@apzhub/document-storage` | 0.1.0 | Providers (unchanged surface) |
-| `@apzhub/platform-services` | **0.16.0** | Factories, thin impls, gateway, authz map |
+| Package                        | Version    | Role                                                            |
+| ------------------------------ | ---------- | --------------------------------------------------------------- |
+| `@apzhub/document-contracts`   | **0.3.0**  | Gateway facet contracts + permissions                           |
+| `@apzhub/document-core`        | **0.3.0**  | Domain + `assignFolder` / `assignCollection` / `applyRetention` |
+| `@apzhub/document-persistence` | 0.2.0      | PostgreSQL / test repos (unchanged surface)                     |
+| `@apzhub/document-storage`     | 0.1.0      | Providers (unchanged surface)                                   |
+| `@apzhub/platform-services`    | **0.16.0** | Factories, thin impls, gateway, authz map                       |
 
 ## Quality commands
 

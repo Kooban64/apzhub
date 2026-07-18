@@ -136,8 +136,7 @@ function detectMissingMappings(
     mappings
       .filter((m) => m.status === "active" || m.status === "pending")
       .map(
-        (m) =>
-          `${m.tenantId}|${m.entityType}|${m.providerId}|${m.providerNativeId}`,
+        (m) => `${m.tenantId}|${m.entityType}|${m.providerId}|${m.providerNativeId}`,
       ),
   );
 
@@ -177,7 +176,8 @@ function detectOrphanMappings(
       issues.push({
         kind: "mapping_missing_provider_entity",
         severity: "warning",
-        message: "Active mapping has no matching provider entity in the inventory snapshot",
+        message:
+          "Active mapping has no matching provider entity in the inventory snapshot",
         platformId: mapping.platformId,
         providerNativeId: mapping.providerNativeId,
         entityType: mapping.entityType,

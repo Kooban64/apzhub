@@ -1,16 +1,16 @@
 # APZHUB Programme — Milestone Completion Report
 
-| Field | Value |
-| --- | --- |
-| **Document ID** | APZSEARCH-008-CR |
-| **Milestone** | APZSEARCH-008 — Search Vertical Certification & Production Readiness |
-| **Programme** | APZHUB Platform Search |
-| **Status** | **COMPLETE** |
-| **Classification** | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| **Date** | 2026-07-14 |
-| **Authority** | Knowledge Foundation · owner-approved certification milestone · ADRs 0060 / 0061 / 0064 |
-| **Predecessor** | APZSEARCH-007 — Search HTTP API, Typed Client & Workbench (Complete) |
-| **Successor** | APZSEARCH-009 — Cross-Product Search Integration Framework (**recommended; not started; requires owner approval**) |
+| Field              | Value                                                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| **Document ID**    | APZSEARCH-008-CR                                                                                                   |
+| **Milestone**      | APZSEARCH-008 — Search Vertical Certification & Production Readiness                                               |
+| **Programme**      | APZHUB Platform Search                                                                                             |
+| **Status**         | **COMPLETE**                                                                                                       |
+| **Classification** | **PRODUCTION_READY_WITH_LIMITATIONS**                                                                              |
+| **Date**           | 2026-07-14                                                                                                         |
+| **Authority**      | Knowledge Foundation · owner-approved certification milestone · ADRs 0060 / 0061 / 0064                            |
+| **Predecessor**    | APZSEARCH-007 — Search HTTP API, Typed Client & Workbench (Complete)                                               |
+| **Successor**      | APZSEARCH-009 — Cross-Product Search Integration Framework (**recommended; not started; requires owner approval**) |
 
 ---
 
@@ -26,14 +26,14 @@ Vertical audit **0 violations**. Prior layered audits **001–007 PASS**. OpenAP
 
 ## 2. Certification Scope
 
-| In scope | Out of scope |
-| -------- | ------------ |
-| Architecture / dependency / boundary audits | New HTTP routes |
-| Security re-review (no redesign) | Provider capability changes |
-| HTTP / typed client / Workbench / gateway / platform / provider re-certification | Indexing / product adapters |
-| Coverage aggregation + harness | OCR / AI / semantic / vector |
-| Production readiness classification | Event Bus / workers / notifications |
-| Documentation + foundation stop points | OpenSearch / Typesense / PostgreSQL FTS |
+| In scope                                                                         | Out of scope                            |
+| -------------------------------------------------------------------------------- | --------------------------------------- |
+| Architecture / dependency / boundary audits                                      | New HTTP routes                         |
+| Security re-review (no redesign)                                                 | Provider capability changes             |
+| HTTP / typed client / Workbench / gateway / platform / provider re-certification | Indexing / product adapters             |
+| Coverage aggregation + harness                                                   | OCR / AI / semantic / vector            |
+| Production readiness classification                                              | Event Bus / workers / notifications     |
+| Documentation + foundation stop points                                           | OpenSearch / Typesense / PostgreSQL FTS |
 
 ---
 
@@ -62,6 +62,7 @@ Management and execution planes remain isolated. Canonical contracts only. No Me
 **PASS** — Consumers → Workbench → Client → HTTP → Gateway → Platform Services → (execution) Adapter/SDK → Contracts. No reverse dependencies. Prior audits 001–007 also **PASS**.
 
 **Certification fixes (pins only; no behaviour changes):**
+
 - APZSEARCH-003 audit version pins accept subsequent certified bumps (`search-contracts` **0.4.0**, `platform-services` **0.18.0`).
 - Foundation harnesses `testing/search-foundation/apzsearch-001-foundation.test.ts` and `apzsearch-003-foundation.test.ts` assert the certified floor (**0.4.0** / **0.2.0** / **0.18.0**) so historical milestone smoke tests remain green on the certified stack.
 
@@ -117,14 +118,14 @@ Management and execution planes remain isolated. Canonical contracts only. No Me
 
 ## 14. Testing
 
-| Gate | Result |
-| ---- | ------ |
-| `pnpm audit:search-vertical` | **PASS** (0 violations) |
-| Layered audits `audit:search-foundation` … `audit:search-workbench` | **PASS** |
-| OpenAPI `pnpm openapi:validate:platform` | **PASS** |
-| Certification harness `testing/search-vertical` | **PASS** |
-| Prior unit suites (HTTP/client/Workbench/execution/adapter/SDK) | Prior evidence **PASS** |
-| Playwright mocked e2e | Spec present; live webServer **LIMITED** (external slug conflict) |
+| Gate                                                                | Result                                                            |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `pnpm audit:search-vertical`                                        | **PASS** (0 violations)                                           |
+| Layered audits `audit:search-foundation` … `audit:search-workbench` | **PASS**                                                          |
+| OpenAPI `pnpm openapi:validate:platform`                            | **PASS**                                                          |
+| Certification harness `testing/search-vertical`                     | **PASS**                                                          |
+| Prior unit suites (HTTP/client/Workbench/execution/adapter/SDK)     | Prior evidence **PASS**                                           |
+| Playwright mocked e2e                                               | Spec present; live webServer **LIMITED** (external slug conflict) |
 
 ---
 
@@ -136,16 +137,16 @@ Scoped Search vertical re-measure (008): **statements 97.04%** · **branches 89.
 
 ## 16. Quality Gates
 
-| Gate | Result |
-| ---- | ------ |
-| Vertical architecture / dependency / boundary audit | **PASS** |
-| Security review (documentary + prior tests) | **PASS** |
-| OpenAPI validation | **PASS** |
-| Search package typecheck (contracts / persistence / SDK / meilisearch / platform-services) | **PASS** |
-| Search regression suites (170 tests) | **PASS** |
-| Product regressions (Documents / Support / Testing / Reporting / Projects plane) | **PASS** |
-| Package versions (contracts 0.4.0 / persistence 0.2.0 / SDK 0.1.0 / meilisearch 0.1.0 / platform-services 0.18.0) | **PASS** |
-| Playwright live Next | **LIMITED** (external Testing slug conflict; predates Search) |
+| Gate                                                                                                              | Result                                                        |
+| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Vertical architecture / dependency / boundary audit                                                               | **PASS**                                                      |
+| Security review (documentary + prior tests)                                                                       | **PASS**                                                      |
+| OpenAPI validation                                                                                                | **PASS**                                                      |
+| Search package typecheck (contracts / persistence / SDK / meilisearch / platform-services)                        | **PASS**                                                      |
+| Search regression suites (170 tests)                                                                              | **PASS**                                                      |
+| Product regressions (Documents / Support / Testing / Reporting / Projects plane)                                  | **PASS**                                                      |
+| Package versions (contracts 0.4.0 / persistence 0.2.0 / SDK 0.1.0 / meilisearch 0.1.0 / platform-services 0.18.0) | **PASS**                                                      |
+| Playwright live Next                                                                                              | **LIMITED** (external Testing slug conflict; predates Search) |
 
 ---
 
@@ -165,7 +166,7 @@ Evidence-based, same class as Documents: mocked e2e **LIMITED** by pre-existing 
 4. Playwright against Next `webServer` may fail due to Testing slug conflict:
    - `apps/web/app/api/v1/testing/traceability/[relationshipId]`
    - `apps/web/app/api/v1/testing/traceability/[resourceType]/[resourceId]`  
-   Predates Search; **not** a Search defect.
+     Predates Search; **not** a Search defect.
 5. Live Meilisearch not exercised in unit CI (mock REST).
 6. Postgres search persistence drivers typechecked but not fully unit-covered with live DB.
 
@@ -181,14 +182,14 @@ Evidence-based, same class as Documents: mocked e2e **LIMITED** by pre-existing 
 
 ## 20. Package / artefact versions (certified)
 
-| Artefact | Version |
-| -------- | ------- |
-| `@apzhub/search-contracts` | **0.4.0** |
-| `@apzhub/search-persistence` | **0.2.0** |
-| `@apzhub/integration-search-sdk` | **0.1.0** |
-| `@apzhub/integration-meilisearch` | **0.1.0** |
-| `@apzhub/platform-services` | **0.18.0** |
-| OpenAPI Platform Search | **1.1.0** |
+| Artefact                          | Version    |
+| --------------------------------- | ---------- |
+| `@apzhub/search-contracts`        | **0.4.0**  |
+| `@apzhub/search-persistence`      | **0.2.0**  |
+| `@apzhub/integration-search-sdk`  | **0.1.0**  |
+| `@apzhub/integration-meilisearch` | **0.1.0**  |
+| `@apzhub/platform-services`       | **0.18.0** |
+| OpenAPI Platform Search           | **1.1.0**  |
 
 No package version bumps in APZSEARCH-008 (certification only).
 
@@ -216,15 +217,15 @@ Do not start product indexing adapters, workers, OCR, AI, semantic/vector search
 
 ## Document control
 
-| Item | Value |
-| --- | --- |
-| Document ID | **APZSEARCH-008-CR** |
-| Report location | `docs/sprint/APZSEARCH-008-completion-report.md` |
-| Overview | `docs/reviews/APZSEARCH-008-search-vertical-certification.md` |
-| Coverage baseline | `docs/reviews/APZSEARCH-008-coverage-baseline.md` |
-| Audit script | `scripts/apzsearch-008-search-vertical-audit.mjs` / `pnpm audit:search-vertical` |
-| Certification harness | `testing/search-vertical/apzsearch-008-certification.test.ts` |
-| Programme stop point | `docs/foundation/CURRENT-MILESTONE.md` |
-| Prepared for | Owner filing / programme archive |
+| Item                  | Value                                                                            |
+| --------------------- | -------------------------------------------------------------------------------- |
+| Document ID           | **APZSEARCH-008-CR**                                                             |
+| Report location       | `docs/sprint/APZSEARCH-008-completion-report.md`                                 |
+| Overview              | `docs/reviews/APZSEARCH-008-search-vertical-certification.md`                    |
+| Coverage baseline     | `docs/reviews/APZSEARCH-008-coverage-baseline.md`                                |
+| Audit script          | `scripts/apzsearch-008-search-vertical-audit.mjs` / `pnpm audit:search-vertical` |
+| Certification harness | `testing/search-vertical/apzsearch-008-certification.test.ts`                    |
+| Programme stop point  | `docs/foundation/CURRENT-MILESTONE.md`                                           |
+| Prepared for          | Owner filing / programme archive                                                 |
 
 **End of report.**

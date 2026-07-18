@@ -14,12 +14,7 @@ import type {
  * Distinct from Projects TaskStatus.
  */
 export type SupportTicketStatus =
-  | "new"
-  | "open"
-  | "pending"
-  | "closed"
-  | "merged"
-  | "unknown";
+  "new" | "open" | "pending" | "closed" | "merged" | "unknown";
 
 /** Canonical Support Request priority — maps engine ticket priorities. */
 export type SupportTicketPriority = "low" | "normal" | "high" | "urgent";
@@ -110,14 +105,7 @@ export interface SupportUserSummary {
  * Distinct from Projects Comment (Plane). Never reuse Comment DTOs.
  */
 export type SupportArticleChannel =
-  | "note"
-  | "email"
-  | "phone"
-  | "web"
-  | "chat"
-  | "sms"
-  | "fax"
-  | "unknown";
+  "note" | "email" | "phone" | "web" | "chat" | "sms" | "fax" | "unknown";
 
 export type SupportArticleVisibility = "internal" | "public";
 
@@ -126,11 +114,7 @@ export type SupportArticleBodyFormat = "text/plain" | "text/html" | "unknown";
 export type SupportArticleSenderType = "agent" | "customer" | "system" | "unknown";
 
 export type SupportArticleDeliveryStatus =
-  | "none"
-  | "pending"
-  | "sent"
-  | "failed"
-  | "unknown";
+  "none" | "pending" | "sent" | "failed" | "unknown";
 
 export interface SupportArticleAuthor {
   readonly userId?: SupportUserId;
@@ -190,11 +174,7 @@ export interface SupportArticleSummary {
 
 /** Support search hit kinds — vendor-neutral. */
 export type SupportSearchHitKind =
-  | "support_request"
-  | "organization"
-  | "group"
-  | "user"
-  | "article";
+  "support_request" | "organization" | "group" | "user" | "article";
 
 export interface SupportSearchHit {
   readonly id: SupportSearchHitId;

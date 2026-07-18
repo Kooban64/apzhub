@@ -206,13 +206,19 @@ describe("pipeline client coverage", () => {
     await expect(client.listLiveJobs("acme", "portal", "99")).resolves.toMatchObject({
       total: 1,
     });
-    await expect(client.getLiveJob("acme", "portal", "99", "1")).resolves.toMatchObject({
-      name: "unit",
-    });
-    await expect(client.listLiveSteps("acme", "portal", "99", "1")).resolves.toMatchObject({
+    await expect(client.getLiveJob("acme", "portal", "99", "1")).resolves.toMatchObject(
+      {
+        name: "unit",
+      },
+    );
+    await expect(
+      client.listLiveSteps("acme", "portal", "99", "1"),
+    ).resolves.toMatchObject({
       total: 1,
     });
-    await expect(client.listLiveArtifacts("acme", "portal", "99")).resolves.toMatchObject({
+    await expect(
+      client.listLiveArtifacts("acme", "portal", "99"),
+    ).resolves.toMatchObject({
       items: [{ sizeLabel: "2.0 KB" }],
     });
     await expect(client.getLiveSummary("acme", "portal", "99")).resolves.toMatchObject({
@@ -236,7 +242,9 @@ describe("pipeline client coverage", () => {
       [408, "timeout"],
       [503, "provider_unavailable"],
     ] as const) {
-      fetchMock.mockResolvedValueOnce(jsonResponse({ error: { message: code } }, { status }));
+      fetchMock.mockResolvedValueOnce(
+        jsonResponse({ error: { message: code } }, { status }),
+      );
       await expect(createHttpPipelineClient().listPipelines()).rejects.toMatchObject({
         code,
         status,
@@ -246,12 +254,20 @@ describe("pipeline client coverage", () => {
 
   it("covers pipeline-api wrappers via mock client", async () => {
     setPipelineClient(createMockPipelineClient());
-    await expect(getPipelineRepository("a", "b")).resolves.toMatchObject({ name: "portal" });
+    await expect(getPipelineRepository("a", "b")).resolves.toMatchObject({
+      name: "portal",
+    });
     await expect(listPipelineWorkflows("a", "b")).resolves.toMatchObject({ total: 1 });
-    await expect(getPipelineWorkflow("a", "b", "7")).resolves.toMatchObject({ id: "7" });
+    await expect(getPipelineWorkflow("a", "b", "7")).resolves.toMatchObject({
+      id: "7",
+    });
     await expect(listLivePipelineRuns("a", "b")).resolves.toMatchObject({ total: 1 });
-    await expect(getLivePipelineRun("a", "b", "99")).resolves.toMatchObject({ id: "99" });
-    await expect(listLivePipelineJobs("a", "b", "99")).resolves.toMatchObject({ total: 1 });
+    await expect(getLivePipelineRun("a", "b", "99")).resolves.toMatchObject({
+      id: "99",
+    });
+    await expect(listLivePipelineJobs("a", "b", "99")).resolves.toMatchObject({
+      total: 1,
+    });
     await expect(getLivePipelineJob("a", "b", "99", "1")).resolves.toMatchObject({
       name: "unit",
     });

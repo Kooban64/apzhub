@@ -7,7 +7,10 @@ import type { ServiceRequestContext } from "@apzhub/platform-service-contracts";
 import { DomainRuleError } from "../lifecycle/state-machines";
 import { assertCertificationTransition } from "./state-machine";
 
-export function assertNonEmptyString(value: unknown, field: string): asserts value is string {
+export function assertNonEmptyString(
+  value: unknown,
+  field: string,
+): asserts value is string {
   if (typeof value !== "string" || value.trim().length === 0) {
     throw new DomainRuleError("validation_error", `${field} is required`, { field });
   }
@@ -26,11 +29,9 @@ export function assertHasPermission(
       (p.endsWith(".*") && permission.startsWith(p.slice(0, -1))),
   );
   if (!ok) {
-    throw new DomainRuleError(
-      "permission_denied",
-      `Missing permission ${permission}`,
-      { permission },
-    );
+    throw new DomainRuleError("permission_denied", `Missing permission ${permission}`, {
+      permission,
+    });
   }
 }
 
@@ -86,7 +87,9 @@ export function mergeEvidenceLinks(
   mode: "link" | "unlink",
 ): CertificationEvidenceLinks {
   const current = base ?? emptyEvidenceLinks();
-  const keys = Object.keys(emptyEvidenceLinks()) as (keyof CertificationEvidenceLinks)[];
+  const keys = Object.keys(
+    emptyEvidenceLinks(),
+  ) as (keyof CertificationEvidenceLinks)[];
   const next = { ...current };
   for (const key of keys) {
     const incoming = patch[key];

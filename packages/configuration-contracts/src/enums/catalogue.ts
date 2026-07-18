@@ -18,9 +18,7 @@ export type ConfigurationLifecycleStatus =
 export function isConfigurationLifecycleStatus(
   value: string,
 ): value is ConfigurationLifecycleStatus {
-  return (CONFIGURATION_LIFECYCLE_STATUSES as readonly string[]).includes(
-    value,
-  );
+  return (CONFIGURATION_LIFECYCLE_STATUSES as readonly string[]).includes(value);
 }
 
 /** Hierarchy levels — inheritance metadata only (no runtime apply). */
@@ -47,14 +45,7 @@ export function isConfigurationHierarchyLevel(
  * organisation → tenant → platform.
  */
 export const CONFIGURATION_OVERRIDE_PRECEDENCE: readonly ConfigurationHierarchyLevel[] =
-  [
-    "user",
-    "environment",
-    "product",
-    "organisation",
-    "tenant",
-    "platform",
-  ] as const;
+  ["user", "environment", "product", "organisation", "tenant", "platform"] as const;
 
 export const CONFIGURATION_SCOPES = [
   "global",
@@ -108,8 +99,7 @@ export const CONFIGURATION_VALUE_KINDS = [
   "null",
 ] as const;
 
-export type ConfigurationValueKind =
-  (typeof CONFIGURATION_VALUE_KINDS)[number];
+export type ConfigurationValueKind = (typeof CONFIGURATION_VALUE_KINDS)[number];
 
 export function isConfigurationValueKind(
   value: string,
@@ -129,8 +119,7 @@ export const CONFIGURATION_REFERENCE_KINDS = [
   "future",
 ] as const;
 
-export type ConfigurationReferenceKind =
-  (typeof CONFIGURATION_REFERENCE_KINDS)[number];
+export type ConfigurationReferenceKind = (typeof CONFIGURATION_REFERENCE_KINDS)[number];
 
 export function isConfigurationReferenceKind(
   value: string,
@@ -152,5 +141,4 @@ export const CONFIGURATION_AUDIT_ACTIONS = [
   "rollback_recorded",
 ] as const;
 
-export type ConfigurationAuditAction =
-  (typeof CONFIGURATION_AUDIT_ACTIONS)[number];
+export type ConfigurationAuditAction = (typeof CONFIGURATION_AUDIT_ACTIONS)[number];

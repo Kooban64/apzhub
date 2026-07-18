@@ -4,17 +4,10 @@
  */
 
 export type PlaneOperationalHealthLevel =
-  | "HEALTHY"
-  | "DEGRADED"
-  | "LIMITED"
-  | "UNAVAILABLE";
+  "HEALTHY" | "DEGRADED" | "LIMITED" | "UNAVAILABLE";
 
 export type PlaneCapabilityAvailability =
-  | "available"
-  | "degraded"
-  | "unavailable"
-  | "optional_unavailable"
-  | "unknown";
+  "available" | "degraded" | "unavailable" | "optional_unavailable" | "unknown";
 
 export type PlaneEdition = "community" | "enterprise" | "unknown";
 
@@ -39,7 +32,8 @@ export interface PlaneCompatibilityMatrix {
     readonly min: string;
     readonly max: string;
   };
-  readonly compatibilityStatus: "compatible" | "incompatible" | "warning" | "not_checked";
+  readonly compatibilityStatus:
+    "compatible" | "incompatible" | "warning" | "not_checked";
   readonly edition: PlaneEdition;
   readonly unsupportedFeatures: readonly string[];
   readonly deprecatedApis: readonly string[];

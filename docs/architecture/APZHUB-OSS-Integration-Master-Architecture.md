@@ -62,12 +62,12 @@ flowchart TB
 
 ## Integration contract
 
-| Layer | Responsibility | Must not |
-|-------|----------------|----------|
-| **Module** | Presentation, routes, commands, nav registration | Call OSS directly; implement IAM |
-| **Platform Service** | Business rules, orchestration, validation, audit | Expose engine models to UI |
-| **Integration Adapter** | API translation, health, error mapping, sync | Implement business logic |
-| **OSS Engine** | Domain SoR for engine data | Own platform identity or ops |
+| Layer                   | Responsibility                                   | Must not                         |
+| ----------------------- | ------------------------------------------------ | -------------------------------- |
+| **Module**              | Presentation, routes, commands, nav registration | Call OSS directly; implement IAM |
+| **Platform Service**    | Business rules, orchestration, validation, audit | Expose engine models to UI       |
+| **Integration Adapter** | API translation, health, error mapping, sync     | Implement business logic         |
+| **OSS Engine**          | Domain SoR for engine data                       | Own platform identity or ops     |
 
 Path: `Module → Platform Service → Integration Adapter → OSS Engine` (Documents 003, 008, 009, 026).
 
@@ -75,50 +75,50 @@ Path: `Module → Platform Service → Integration Adapter → OSS Engine` (Docu
 
 ## Authentication model (all products)
 
-| Concern | Owner | Pattern |
-|---------|-------|---------|
-| User authentication | Better Auth + `@apzhub/auth` | Single SSO — no engine login screens |
-| Service-to-engine auth | Integration Adapter | Per-tenant service account / API token (Vault in PCv2-04+) |
-| User-to-engine mapping | Platform Identity | Tenant membership + optional engine user provisioning |
-| Session handoff | Adapter + Security | Token bridge, forward-auth, or signed embed — per engine |
+| Concern                | Owner                        | Pattern                                                    |
+| ---------------------- | ---------------------------- | ---------------------------------------------------------- |
+| User authentication    | Better Auth + `@apzhub/auth` | Single SSO — no engine login screens                       |
+| Service-to-engine auth | Integration Adapter          | Per-tenant service account / API token (Vault in PCv2-04+) |
+| User-to-engine mapping | Platform Identity            | Tenant membership + optional engine user provisioning      |
+| Session handoff        | Adapter + Security           | Token bridge, forward-auth, or signed embed — per engine   |
 
 ---
 
 ## Tenant model
 
-| Rule | Implementation |
-|------|----------------|
-| Platform tenant is authoritative | `@apzhub/platform-identity` |
-| Engine tenant/workspace is derived | Provisioning on governance enablement |
-| Cross-tenant isolation | Platform RLS + engine-scoped credentials |
-| One engine instance strategy | Shared multi-tenant engine with tenant scoping (CE default) |
+| Rule                               | Implementation                                              |
+| ---------------------------------- | ----------------------------------------------------------- |
+| Platform tenant is authoritative   | `@apzhub/platform-identity`                                 |
+| Engine tenant/workspace is derived | Provisioning on governance enablement                       |
+| Cross-tenant isolation             | Platform RLS + engine-scoped credentials                    |
+| One engine instance strategy       | Shared multi-tenant engine with tenant scoping (CE default) |
 
 ---
 
 ## RBAC model
 
-| Rule | Implementation |
-|------|----------------|
-| APZHUB permissions are authoritative | `@apzhub/platform-authorization` |
-| Engine roles never shown in UI | Role translation in Platform Service |
-| Permission checks before adapter calls | Service validates; adapter executes |
-| Admin vs user surfaces | Administration workspace for ops-tier integrations |
+| Rule                                   | Implementation                                     |
+| -------------------------------------- | -------------------------------------------------- |
+| APZHUB permissions are authoritative   | `@apzhub/platform-authorization`                   |
+| Engine roles never shown in UI         | Role translation in Platform Service               |
+| Permission checks before adapter calls | Service validates; adapter executes                |
+| Admin vs user surfaces                 | Administration workspace for ops-tier integrations |
 
 ---
 
 ## Cross-cutting integrations
 
-| Capability | Registration | OSS participation |
-|------------|--------------|---------------------|
-| Navigation | Module manifest (`module.yaml`) | Module registers activity bar / sidebar |
-| Workbench | Workbench framework | Module workspace routes |
-| Search | Search provider SDK (020) | Service registers async index provider |
-| Knowledge | Knowledge provider SDK | Document/metadata extraction |
-| Notifications | Event catalog (021) | Service publishes events; ENF delivers |
-| Activity | Activity mapper (007) | Service publishes activity events |
-| API | `/api/platform/v1` or module API via gateway | Never expose engine API to client |
-| Diagnostics | Consolidated via bootstrap loader | Adapter reports health to connector probe |
-| Operations | Control plane capability registry | Connector health in ops dashboard |
+| Capability    | Registration                                 | OSS participation                         |
+| ------------- | -------------------------------------------- | ----------------------------------------- |
+| Navigation    | Module manifest (`module.yaml`)              | Module registers activity bar / sidebar   |
+| Workbench     | Workbench framework                          | Module workspace routes                   |
+| Search        | Search provider SDK (020)                    | Service registers async index provider    |
+| Knowledge     | Knowledge provider SDK                       | Document/metadata extraction              |
+| Notifications | Event catalog (021)                          | Service publishes events; ENF delivers    |
+| Activity      | Activity mapper (007)                        | Service publishes activity events         |
+| API           | `/api/platform/v1` or module API via gateway | Never expose engine API to client         |
+| Diagnostics   | Consolidated via bootstrap loader            | Adapter reports health to connector probe |
+| Operations    | Control plane capability registry            | Connector health in ops dashboard         |
 
 ---
 
@@ -149,12 +149,12 @@ Canonical path: `integrations/` per Document 026 (reconcile with `/adapters` at 
 
 ## Upgrade, backup, DR, monitoring
 
-| Concern | Platform owner | Per-integration owner |
-|---------|----------------|----------------------|
-| Upgrade | Lifecycle + ops runbooks | Adapter version matrix + contract tests |
-| Backup | Platform DR guide | Engine-specific backup in catalog |
-| DR | Platform resilience | Engine RPO/RTO documented per product |
-| Monitoring | Wave 8 observability stack | Connector metrics + ops control plane |
+| Concern    | Platform owner             | Per-integration owner                   |
+| ---------- | -------------------------- | --------------------------------------- |
+| Upgrade    | Lifecycle + ops runbooks   | Adapter version matrix + contract tests |
+| Backup     | Platform DR guide          | Engine-specific backup in catalog       |
+| DR         | Platform resilience        | Engine RPO/RTO documented per product   |
+| Monitoring | Wave 8 observability stack | Connector metrics + ops control plane   |
 
 ---
 

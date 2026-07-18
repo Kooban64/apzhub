@@ -25,7 +25,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -100,7 +101,8 @@ scan(files, [
   },
   {
     rule: "no-event-bus-workers",
-    pattern: /EventBus|BullMQ|createWorker\(|setInterval\(|bindTemplateToDocument|renderOutput|renderPdfDocument/i,
+    pattern:
+      /EventBus|BullMQ|createWorker\(|setInterval\(|bindTemplateToDocument|renderOutput|renderPdfDocument/i,
   },
 ]);
 
@@ -194,8 +196,12 @@ console.log(
 console.log(`RESULT: ${violations.length === 0 ? "PASS" : "FAIL"}`);
 console.log(`Violations: ${violations.length}`);
 if (violations.length === 0) {
-  console.log("  - @apzhub/search-reporting 0.1.0 → search-integration + reporting-contracts + reporting-core + platform-service-contracts");
-  console.log("  - No Meilisearch / platform-services / persistence / testing-* / Event Bus / rendering");
+  console.log(
+    "  - @apzhub/search-reporting 0.1.0 → search-integration + reporting-contracts + reporting-core + platform-service-contracts",
+  );
+  console.log(
+    "  - No Meilisearch / platform-services / persistence / testing-* / Event Bus / rendering",
+  );
   console.log("  - Required ReportingSearch* exports present");
 } else {
   for (const v of violations.slice(0, 40)) {

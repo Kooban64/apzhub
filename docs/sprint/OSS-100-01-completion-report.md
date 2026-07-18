@@ -16,42 +16,42 @@ Create the `@apzhub/integration-sdk` package scaffold as the shared foundation f
 
 ### Package
 
-| Item | Location |
-|------|----------|
-| Package manifest | `packages/integration-sdk/package.json` |
+| Item              | Location                                 |
+| ----------------- | ---------------------------------------- |
+| Package manifest  | `packages/integration-sdk/package.json`  |
 | TypeScript config | `packages/integration-sdk/tsconfig.json` |
-| Package README | `packages/integration-sdk/README.md` |
+| Package README    | `packages/integration-sdk/README.md`     |
 
 ### Subpath exports
 
-| Export | Path |
-|--------|------|
-| `@apzhub/integration-sdk` | `src/index.ts` |
-| `@apzhub/integration-sdk/client` | `src/client/index.ts` |
-| `@apzhub/integration-sdk/adapter` | `src/adapter/index.ts` |
+| Export                                | Path                       |
+| ------------------------------------- | -------------------------- |
+| `@apzhub/integration-sdk`             | `src/index.ts`             |
+| `@apzhub/integration-sdk/client`      | `src/client/index.ts`      |
+| `@apzhub/integration-sdk/adapter`     | `src/adapter/index.ts`     |
 | `@apzhub/integration-sdk/diagnostics` | `src/diagnostics/index.ts` |
-| `@apzhub/integration-sdk/lifecycle` | `src/lifecycle/index.ts` |
-| `@apzhub/integration-sdk/errors` | `src/errors/index.ts` |
+| `@apzhub/integration-sdk/lifecycle`   | `src/lifecycle/index.ts`   |
+| `@apzhub/integration-sdk/errors`      | `src/errors/index.ts`      |
 
 ### Core types and interfaces
 
-| Symbol | Kind |
-|--------|------|
-| `IntegrationRequestContext` | Type |
-| `ConnectionConfig`, `Connection`, `ConnectionState` | Types |
-| `IntegrationCredentials` | Type |
-| `IntegrationCapabilityMetadata` | Type |
-| `VersionRange`, `VersionCompatibilityResult`, … | Types |
-| `IntegrationClient` | Interface + placeholder |
-| `AdapterBase` | Interface + placeholder |
-| `IntegrationHealth`, `IntegrationDiagnostics` | Types + placeholders |
-| `IntegrationLifecycleState` | Type + guards |
-| `IntegrationError` | Type + guards + factory |
+| Symbol                                              | Kind                    |
+| --------------------------------------------------- | ----------------------- |
+| `IntegrationRequestContext`                         | Type                    |
+| `ConnectionConfig`, `Connection`, `ConnectionState` | Types                   |
+| `IntegrationCredentials`                            | Type                    |
+| `IntegrationCapabilityMetadata`                     | Type                    |
+| `VersionRange`, `VersionCompatibilityResult`, …     | Types                   |
+| `IntegrationClient`                                 | Interface + placeholder |
+| `AdapterBase`                                       | Interface + placeholder |
+| `IntegrationHealth`, `IntegrationDiagnostics`       | Types + placeholders    |
+| `IntegrationLifecycleState`                         | Type + guards           |
+| `IntegrationError`                                  | Type + guards + factory |
 
 ### Tests
 
-| File | Coverage |
-|------|----------|
+| File                                                   | Coverage                                |
+| ------------------------------------------------------ | --------------------------------------- |
 | `packages/integration-sdk/src/integration-sdk.test.ts` | Exports, errors, diagnostics, lifecycle |
 
 ### Tooling
@@ -63,27 +63,27 @@ Create the `@apzhub/integration-sdk` package scaffold as the shared foundation f
 
 ## Constraints confirmed
 
-| Constraint | Result |
-|------------|--------|
-| No Plane adapter | ✅ |
-| No vendor adapters | ✅ |
-| No HTTP transport | ✅ |
-| No retry / circuit breaker | ✅ |
-| No webhook / polling / provisioning | ✅ |
-| OSS-100-02 not started | ✅ |
-| OSS-101-04 not started | ✅ |
+| Constraint                          | Result |
+| ----------------------------------- | ------ |
+| No Plane adapter                    | ✅     |
+| No vendor adapters                  | ✅     |
+| No HTTP transport                   | ✅     |
+| No retry / circuit breaker          | ✅     |
+| No webhook / polling / provisioning | ✅     |
+| OSS-100-02 not started              | ✅     |
+| OSS-101-04 not started              | ✅     |
 
 ---
 
 ## Quality gates
 
-| Gate | Result |
-|------|--------|
-| `pnpm lint` | Pass |
-| `pnpm typecheck` | Pass |
-| `pnpm build` | Pass |
-| `pnpm test` | Pass (2022 passed, 47 skipped) |
-| `pnpm test:coverage` | Pass |
+| Gate                 | Result                         |
+| -------------------- | ------------------------------ |
+| `pnpm lint`          | Pass                           |
+| `pnpm typecheck`     | Pass                           |
+| `pnpm build`         | Pass                           |
+| `pnpm test`          | Pass (2022 passed, 47 skipped) |
+| `pnpm test:coverage` | Pass                           |
 
 ---
 

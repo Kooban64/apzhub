@@ -164,7 +164,12 @@ export function createSearchPlatformServices(
       assertProviderPermission(toRepoCtx(context), "read");
       return registry.getProvider(context, providerId);
     },
-    async registerProvider(context, registration: SearchProviderRegistrationInput & { ownership?: "platform" | "tenant" | "organisation" }) {
+    async registerProvider(
+      context,
+      registration: SearchProviderRegistrationInput & {
+        ownership?: "platform" | "tenant" | "organisation";
+      },
+    ) {
       assertProviderPermission(toRepoCtx(context), "register");
       await registry.register(context, registration);
       const provider = await registry.getProvider(context, registration.providerId);
@@ -177,7 +182,9 @@ export function createSearchPlatformServices(
       const existing = await persistence.providers.get(ctx, providerId);
       if (!existing) throw searchProviderNotFound(providerId);
       if (updateInput.configuration) {
-        const validation = validateSearchProviderConfiguration(updateInput.configuration);
+        const validation = validateSearchProviderConfiguration(
+          updateInput.configuration,
+        );
         if (!validation.valid) {
           throw searchConfigurationInvalid(validation.issues);
         }
@@ -201,7 +208,14 @@ export function createSearchPlatformServices(
         updatedAt: ts,
         revision: existing.revision + 1,
       });
-      await appendAudit(persistence, ctx, "search.provider.updated", { providerId }, now, id);
+      await appendAudit(
+        persistence,
+        ctx,
+        "search.provider.updated",
+        { providerId },
+        now,
+        id,
+      );
       return {
         id: asSearchProviderId(next.id),
         kind: next.kind,
@@ -224,7 +238,14 @@ export function createSearchPlatformServices(
         updatedAt: now(),
         revision: existing.revision + 1,
       });
-      await appendAudit(persistence, ctx, "search.provider.enabled", { providerId }, now, id);
+      await appendAudit(
+        persistence,
+        ctx,
+        "search.provider.enabled",
+        { providerId },
+        now,
+        id,
+      );
       return {
         id: asSearchProviderId(next.id),
         kind: next.kind,
@@ -248,7 +269,14 @@ export function createSearchPlatformServices(
         updatedAt: now(),
         revision: existing.revision + 1,
       });
-      await appendAudit(persistence, ctx, "search.provider.disabled", { providerId }, now, id);
+      await appendAudit(
+        persistence,
+        ctx,
+        "search.provider.disabled",
+        { providerId },
+        now,
+        id,
+      );
       return {
         id: asSearchProviderId(next.id),
         kind: next.kind,
@@ -401,7 +429,14 @@ export function createSearchPlatformServices(
         updatedAt: ts,
         revision: 1,
       });
-      await appendAudit(persistence, ctx, "search.configuration.created", { id: configId }, now, id);
+      await appendAudit(
+        persistence,
+        ctx,
+        "search.configuration.created",
+        { id: configId },
+        now,
+        id,
+      );
       return toConfigView(record);
     },
     async get(context, configurationId) {
@@ -446,7 +481,14 @@ export function createSearchPlatformServices(
         updatedAt: ts,
         revision: 1,
       });
-      await appendAudit(persistence, ctx, "search.configuration.updated", { id: configurationId }, now, id);
+      await appendAudit(
+        persistence,
+        ctx,
+        "search.configuration.updated",
+        { id: configurationId },
+        now,
+        id,
+      );
       return toConfigView(record);
     },
     async version(context, configurationId, changeReason) {
@@ -499,7 +541,14 @@ export function createSearchPlatformServices(
         updatedAt: ts,
         revision: existing.revision + 1,
       });
-      await appendAudit(persistence, ctx, "search.configuration.activated", { id: configurationId }, now, id);
+      await appendAudit(
+        persistence,
+        ctx,
+        "search.configuration.activated",
+        { id: configurationId },
+        now,
+        id,
+      );
       return toConfigView(record);
     },
     validate(context, configuration) {
@@ -525,11 +574,13 @@ export function createSearchPlatformServices(
     async putConfiguration(context, configuration) {
       const existing = await persistence.configurations.getActive(toRepoCtx(context));
       if (existing) {
-        return (await searchConfigurations.update(context, existing.id, { configuration }))
-          .configuration;
+        return (
+          await searchConfigurations.update(context, existing.id, { configuration })
+        ).configuration;
       }
-      return (await searchConfigurations.create(context, { configuration, activate: true }))
-        .configuration;
+      return (
+        await searchConfigurations.create(context, { configuration, activate: true })
+      ).configuration;
     },
   };
 
@@ -706,7 +757,14 @@ export function createSearchPlatformServices(
         updatedAt: ts,
         revision: 1,
       });
-      await appendAudit(persistence, ctx, "search.collection.created", { id: collectionId }, now, id);
+      await appendAudit(
+        persistence,
+        ctx,
+        "search.collection.created",
+        { id: collectionId },
+        now,
+        id,
+      );
       return {
         id: asSearchCollectionId(record.id),
         name: record.name,
@@ -779,9 +837,7 @@ export function createSearchPlatformServices(
         entityTypes: r.entityTypes,
         enabled: r.enabled,
         providerId: r.providerId ? asSearchProviderId(r.providerId) : undefined,
-        collectionId: r.collectionId
-          ? asSearchCollectionId(r.collectionId)
-          : undefined,
+        collectionId: r.collectionId ? asSearchCollectionId(r.collectionId) : undefined,
       }));
     },
     async get(context, sourceId) {
@@ -904,16 +960,14 @@ export function createSearchPlatformServices(
     async list(context) {
       assertScopePermission(toRepoCtx(context), "list");
       const rows = await persistence.scopes.list(toRepoCtx(context));
-      return rows.map(
-        (r): SearchScopeRecord => ({
-          id: r.id,
-          scope: r.scope,
-          label: r.label,
-          description: r.description,
-          enabled: r.enabled,
-          metadata: r.metadata,
-        }),
-      );
+      return rows.map((r): SearchScopeRecord => ({
+        id: r.id,
+        scope: r.scope,
+        label: r.label,
+        description: r.description,
+        enabled: r.enabled,
+        metadata: r.metadata,
+      }));
     },
     async get(context, scopeId) {
       assertScopePermission(toRepoCtx(context), "read");
@@ -1008,9 +1062,7 @@ export function createSearchPlatformServices(
         id: asSearchProfileId(r.id),
         name: r.name,
         defaultScopes: r.defaultScopes,
-        defaultCollections: r.defaultCollections.map((c) =>
-          asSearchCollectionId(c),
-        ),
+        defaultCollections: r.defaultCollections.map((c) => asSearchCollectionId(c)),
         defaultSorts: r.defaultSorts,
       }));
     },
@@ -1022,9 +1074,7 @@ export function createSearchPlatformServices(
         id: asSearchProfileId(row.id),
         name: row.name,
         defaultScopes: row.defaultScopes,
-        defaultCollections: row.defaultCollections.map((c) =>
-          asSearchCollectionId(c),
-        ),
+        defaultCollections: row.defaultCollections.map((c) => asSearchCollectionId(c)),
         defaultSorts: row.defaultSorts,
       };
     },

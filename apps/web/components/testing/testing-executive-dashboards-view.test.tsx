@@ -40,11 +40,7 @@ describe("TestingExecutiveDashboardsView", () => {
   });
 
   it("renders executive dashboard with category tabs", async () => {
-    render(
-      wrap(
-        <TestingExecutiveDashboardsView permissions={["engineering.*"]} />,
-      ),
-    );
+    render(wrap(<TestingExecutiveDashboardsView permissions={["engineering.*"]} />));
 
     await waitFor(() => {
       expect(
@@ -53,9 +49,7 @@ describe("TestingExecutiveDashboardsView", () => {
       expect(screen.getByTestId("dashboard-executive")).toBeTruthy();
     });
 
-    expect(
-      screen.getByRole("tablist", { name: /Dashboard categories/i }),
-    ).toBeTruthy();
+    expect(screen.getByRole("tablist", { name: /Dashboard categories/i })).toBeTruthy();
     expect(screen.getByRole("search")).toBeTruthy();
   });
 
@@ -84,11 +78,7 @@ describe("TestingExecutiveDashboardsView", () => {
       total: 0,
     });
 
-    render(
-      wrap(
-        <TestingExecutiveDashboardsView permissions={["analytics.view"]} />,
-      ),
-    );
+    render(wrap(<TestingExecutiveDashboardsView permissions={["analytics.view"]} />));
 
     await waitFor(() => {
       expect(screen.getByText("Provider unavailable")).toBeTruthy();
@@ -99,10 +89,7 @@ describe("TestingExecutiveDashboardsView", () => {
     const user = userEvent.setup();
     render(
       wrap(
-        <TestingExecutiveDashboardsView
-          category="qa"
-          permissions={["quality.view"]}
-        />,
+        <TestingExecutiveDashboardsView category="qa" permissions={["quality.view"]} />,
       ),
     );
 
@@ -111,9 +98,7 @@ describe("TestingExecutiveDashboardsView", () => {
     });
 
     await user.click(screen.getByRole("tab", { name: "Risk" }));
-    expect(push).toHaveBeenCalledWith(
-      "/workspace/testing/executive-dashboards/risk",
-    );
+    expect(push).toHaveBeenCalledWith("/workspace/testing/executive-dashboards/risk");
 
     await user.click(screen.getByRole("button", { name: "Refresh" }));
     await user.click(screen.getByRole("button", { name: "Compare" }));
@@ -131,11 +116,7 @@ describe("TestingExecutiveDashboardsView", () => {
 
   it("updates filters and persists comparison label", async () => {
     const user = userEvent.setup();
-    render(
-      wrap(
-        <TestingExecutiveDashboardsView permissions={["engineering.view"]} />,
-      ),
-    );
+    render(wrap(<TestingExecutiveDashboardsView permissions={["engineering.view"]} />));
 
     await waitFor(() => {
       expect(screen.getByTestId("dashboard-executive")).toBeTruthy();

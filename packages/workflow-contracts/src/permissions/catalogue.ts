@@ -27,8 +27,7 @@ export const PLATFORM_WORKFLOW_PERMISSIONS = [
   "workflow.engine.capabilities",
 ] as const;
 
-export type PlatformWorkflowPermission =
-  (typeof PLATFORM_WORKFLOW_PERMISSIONS)[number];
+export type PlatformWorkflowPermission = (typeof PLATFORM_WORKFLOW_PERMISSIONS)[number];
 
 export const PLATFORM_WORKFLOW_PERMISSION_WILDCARD = "workflow.*" as const;
 export const PLATFORM_WORKFLOW_TEMPLATE_PERMISSION_WILDCARD =
@@ -46,16 +45,12 @@ function hasWorkflowWildcard(permissions: readonly string[]): boolean {
 
 function hasTemplateWildcard(permissions: readonly string[]): boolean {
   return (
-    hasWorkflowWildcard(permissions) ||
-    permissions.includes("workflow.template.*")
+    hasWorkflowWildcard(permissions) || permissions.includes("workflow.template.*")
   );
 }
 
 function hasEngineWildcard(permissions: readonly string[]): boolean {
-  return (
-    hasWorkflowWildcard(permissions) ||
-    permissions.includes("workflow.engine.*")
-  );
+  return hasWorkflowWildcard(permissions) || permissions.includes("workflow.engine.*");
 }
 
 export type WorkflowPermissionOp =
@@ -84,11 +79,7 @@ export function hasWorkflowValidationPermission(
   return hasWorkflowPermission(permissions, "validation");
 }
 
-export type WorkflowTemplatePermissionOp =
-  | "view"
-  | "create"
-  | "update"
-  | "delete";
+export type WorkflowTemplatePermissionOp = "view" | "create" | "update" | "delete";
 
 export function hasWorkflowTemplatePermission(
   permissions: readonly string[],
@@ -99,10 +90,7 @@ export function hasWorkflowTemplatePermission(
 }
 
 export type WorkflowEnginePermissionOp =
-  | "read"
-  | "health"
-  | "diagnostics"
-  | "capabilities";
+  "read" | "health" | "diagnostics" | "capabilities";
 
 export function hasWorkflowEnginePermission(
   permissions: readonly string[],

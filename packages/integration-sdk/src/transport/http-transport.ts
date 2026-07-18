@@ -455,7 +455,10 @@ export class DefaultTransportClient implements TransportClient {
 
       for (const policy of this.policies) {
         if (policy.applyResponse) {
-          response = (await policy.applyResponse(response, ctx)) as TransportResponse<TData>;
+          response = (await policy.applyResponse(
+            response,
+            ctx,
+          )) as TransportResponse<TData>;
         }
       }
 

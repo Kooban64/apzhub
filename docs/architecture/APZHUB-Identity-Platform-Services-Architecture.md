@@ -12,14 +12,14 @@ Consumers → gateway.identity.* → RequestPipeline → Production Authorizatio
 
 ## Layers
 
-| Layer | Package / location | Responsibility |
-| --- | --- | --- |
-| Gateway | `PlatformServiceGateway.identity` | Nested facet access |
-| Authz | `identityPlatformOps` + `PLATFORM_IDENTITY_PERMISSIONS` | Deny-by-default production |
-| Thin services | `@apzhub/platform-services` `services/identity` | Validate context mapping + error translation |
-| Domain | `@apzhub/identity-core` `createPlatformIdentityService` | Lifecycle, validation, orchestration |
-| Persistence | `@apzhub/identity-persistence` | In-memory (test) / PostgreSQL (production) |
-| Contracts | `@apzhub/identity-contracts` `IdentityPlatformGateway` | Facet types + inputs |
+| Layer         | Package / location                                      | Responsibility                               |
+| ------------- | ------------------------------------------------------- | -------------------------------------------- |
+| Gateway       | `PlatformServiceGateway.identity`                       | Nested facet access                          |
+| Authz         | `identityPlatformOps` + `PLATFORM_IDENTITY_PERMISSIONS` | Deny-by-default production                   |
+| Thin services | `@apzhub/platform-services` `services/identity`         | Validate context mapping + error translation |
+| Domain        | `@apzhub/identity-core` `createPlatformIdentityService` | Lifecycle, validation, orchestration         |
+| Persistence   | `@apzhub/identity-persistence`                          | In-memory (test) / PostgreSQL (production)   |
+| Contracts     | `@apzhub/identity-contracts` `IdentityPlatformGateway`  | Facet types + inputs                         |
 
 ## Facets
 

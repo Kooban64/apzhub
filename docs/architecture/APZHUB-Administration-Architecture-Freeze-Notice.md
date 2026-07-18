@@ -25,18 +25,18 @@ No alternative execution paths are permitted.
 
 ## What is frozen
 
-| Surface | Freeze scope |
-| --- | --- |
-| Contracts | `@apzhub/admin-contracts` **0.2.0** |
-| Core | `@apzhub/admin-core` **0.2.0** |
-| Persistence | `@apzhub/admin-persistence` **0.1.0** |
-| Platform Services | `gateway.administration.*` wiring in **0.22.0** |
-| HTTP API | `/api/v1/administration/*` · OpenAPI **1.6.0** |
-| Typed client | `apps/web/lib/administration` |
-| Workbench | `/workspace/administration` + `platform-admin` manifests |
-| Authorization | `administrationPlatformOps` + `admin.*` permission catalogue |
-| Coexistence | Platform Operations at `/workspace/operations` (separate product) |
-| Boundary | Metadata governance only — does not own registered products |
+| Surface           | Freeze scope                                                      |
+| ----------------- | ----------------------------------------------------------------- |
+| Contracts         | `@apzhub/admin-contracts` **0.2.0**                               |
+| Core              | `@apzhub/admin-core` **0.2.0**                                    |
+| Persistence       | `@apzhub/admin-persistence` **0.1.0**                             |
+| Platform Services | `gateway.administration.*` wiring in **0.22.0**                   |
+| HTTP API          | `/api/v1/administration/*` · OpenAPI **1.6.0**                    |
+| Typed client      | `apps/web/lib/administration`                                     |
+| Workbench         | `/workspace/administration` + `platform-admin` manifests          |
+| Authorization     | `administrationPlatformOps` + `admin.*` permission catalogue      |
+| Coexistence       | Platform Operations at `/workspace/operations` (separate product) |
+| Boundary          | Metadata governance only — does not own registered products       |
 
 ## Intentionally unavailable (frozen absence)
 

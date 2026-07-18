@@ -12,8 +12,7 @@ export const SUPPORT_SEARCH_ENTITY_TYPES = [
   "support_user",
 ] as const;
 
-export type SupportSearchEntityType =
-  (typeof SUPPORT_SEARCH_ENTITY_TYPES)[number];
+export type SupportSearchEntityType = (typeof SUPPORT_SEARCH_ENTITY_TYPES)[number];
 
 export function isSupportSearchEntityType(
   value: string,

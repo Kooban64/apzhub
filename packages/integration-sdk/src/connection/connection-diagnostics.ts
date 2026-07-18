@@ -53,8 +53,12 @@ export function buildConnectionDiagnostics(
   const recommendations: string[] = [];
 
   if (lifecycleCounts.authentication_failed > 0) {
-    warnings.push(`${lifecycleCounts.authentication_failed} connection(s) failed authentication`);
-    recommendations.push("Review credential references and SecretProvider configuration");
+    warnings.push(
+      `${lifecycleCounts.authentication_failed} connection(s) failed authentication`,
+    );
+    recommendations.push(
+      "Review credential references and SecretProvider configuration",
+    );
   }
 
   if (lifecycleCounts.misconfigured > 0) {

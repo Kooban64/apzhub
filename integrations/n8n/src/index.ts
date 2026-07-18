@@ -1,8 +1,5 @@
 export { N8nAdapter, N8N_ADAPTER_VERSION } from "./n8n-adapter";
-export type {
-  N8nDiagnosticsExtension,
-  N8nAdapterOptions,
-} from "./n8n-adapter";
+export type { N8nDiagnosticsExtension, N8nAdapterOptions } from "./n8n-adapter";
 
 export type {
   N8nConfiguration,
@@ -40,10 +37,7 @@ export {
   N8N_INTEGRATION_ID,
 } from "./n8n-error-mapper";
 
-export type {
-  CreateN8nAdapterInput,
-  CreateN8nAdapterResult,
-} from "./n8n-factory";
+export type { CreateN8nAdapterInput, CreateN8nAdapterResult } from "./n8n-factory";
 export { createN8nAdapter, disposeN8nAdapter } from "./n8n-factory";
 
 export {

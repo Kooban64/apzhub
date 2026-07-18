@@ -1,0 +1,23 @@
+{
+  "name": "@apzhub/platform-provisioning",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Platform Product Provisioning Flows (OSS-100-12+)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/platform-provisioning"
+  },
+  "dependencies": {
+    "@apzhub/event-notification-framework": "workspace:*",
+    "@apzhub/platform-event-bus": "workspace:*",
+    "@apzhub/platform-governance": "workspace:*",
+    "@apzhub/platform-operations": "workspace:*",
+    "@apzhub/platform-outbox": "workspace:*"
+  }
+}

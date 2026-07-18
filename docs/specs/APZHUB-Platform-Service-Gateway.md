@@ -16,24 +16,24 @@ Every public accessor returns a contract surface executed through the shared `Re
 
 ## Surface
 
-| Accessor | Contract | Notes |
-|----------|----------|-------|
-| `workspaces` | `WorkspaceService` | Mapping-aware; pipeline-wrapped; authz-mapped |
-| `projects` | `ProjectService` | Mapping-aware; pipeline-wrapped; authz-mapped |
-| `teams` | `TeamService` | Mapping-aware; pipeline-wrapped; authz-mapped |
-| `users` | `UserService` | Context-enforced; pipeline-wrapped; authz-mapped |
-| `search` | `SearchService` | Context-enforced; pipeline-wrapped; authz-mapped |
-| `pipeline` | `RequestPipeline` | Shared execution pipeline (middleware/policy registration) |
-| `tasks` | `TaskService` | Pipeline-wrapped when a task provider is registered; otherwise `PROVIDER_CAPABILITY_UNSUPPORTED` |
-| `support` | `SupportService` | OSS-110-10 — Support Requests; requires Support providers |
-| `supportOrganizations` | `SupportOrganizationService` | OSS-110-10 |
-| `supportGroups` | `SupportGroupService` | OSS-110-10 |
-| `supportUsers` | `SupportUserService` | OSS-110-10 |
-| `supportArticles` | `SupportArticleService` | OSS-110-10 |
-| `supportSearch` | `SupportSearchService` | OSS-110-10 |
-| `supportHistory` | `SupportHistoryService` | OSS-110-10 |
-| `supportAnalytics` | `SupportAnalyticsService` | OSS-110-10 |
-| `testing` | `TestingPlatformGateway` | APZTCMS-011 — nested `gateway.testing.*`; requires testing bundle + `TESTING_SERVICE_ENABLED` |
+| Accessor               | Contract                     | Notes                                                                                            |
+| ---------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------ |
+| `workspaces`           | `WorkspaceService`           | Mapping-aware; pipeline-wrapped; authz-mapped                                                    |
+| `projects`             | `ProjectService`             | Mapping-aware; pipeline-wrapped; authz-mapped                                                    |
+| `teams`                | `TeamService`                | Mapping-aware; pipeline-wrapped; authz-mapped                                                    |
+| `users`                | `UserService`                | Context-enforced; pipeline-wrapped; authz-mapped                                                 |
+| `search`               | `SearchService`              | Context-enforced; pipeline-wrapped; authz-mapped                                                 |
+| `pipeline`             | `RequestPipeline`            | Shared execution pipeline (middleware/policy registration)                                       |
+| `tasks`                | `TaskService`                | Pipeline-wrapped when a task provider is registered; otherwise `PROVIDER_CAPABILITY_UNSUPPORTED` |
+| `support`              | `SupportService`             | OSS-110-10 — Support Requests; requires Support providers                                        |
+| `supportOrganizations` | `SupportOrganizationService` | OSS-110-10                                                                                       |
+| `supportGroups`        | `SupportGroupService`        | OSS-110-10                                                                                       |
+| `supportUsers`         | `SupportUserService`         | OSS-110-10                                                                                       |
+| `supportArticles`      | `SupportArticleService`      | OSS-110-10                                                                                       |
+| `supportSearch`        | `SupportSearchService`       | OSS-110-10                                                                                       |
+| `supportHistory`       | `SupportHistoryService`      | OSS-110-10                                                                                       |
+| `supportAnalytics`     | `SupportAnalyticsService`    | OSS-110-10                                                                                       |
+| `testing`              | `TestingPlatformGateway`     | APZTCMS-011 — nested `gateway.testing.*`; requires testing bundle + `TESTING_SERVICE_ENABLED`    |
 
 When testing is not wired, `gateway.testing` throws `PlatformServiceError` (`PROVIDER_CAPABILITY_UNSUPPORTED`, "Testing service is not enabled"). See [Testing Gateway Reference](../architecture/APZHUB-Testing-Gateway-Reference.md).
 
@@ -58,7 +58,11 @@ const testing = isTestingServiceEnabled()
   ? createTestingPlatformServicesForProduction({ postgresDb })
   : undefined;
 
-const services = createPlatformServices({ testing, accessResolver, authorizationMode: "production" });
+const services = createPlatformServices({
+  testing,
+  accessResolver,
+  authorizationMode: "production",
+});
 await services.gateway.testing.plans.list(ctx);
 
 supportServices.gateway.assertContext(ctx);

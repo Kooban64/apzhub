@@ -1,11 +1,11 @@
 # ADR-0061: Search Tenant Isolation Strategy
 
-| Field | Value |
-| --- | --- |
-| **Status** | Accepted |
-| **Date** | 2026-07-14 |
-| **Milestone** | APZSEARCH-006 |
-| **Deciders** | Owner / Architecture |
+| Field         | Value                |
+| ------------- | -------------------- |
+| **Status**    | Accepted             |
+| **Date**      | 2026-07-14           |
+| **Milestone** | APZSEARCH-006        |
+| **Deciders**  | Owner / Architecture |
 
 ---
 
@@ -15,10 +15,10 @@ APZSEARCH-006 wires Meilisearch into the Platform Services **execution** plane. 
 
 ## Options considered
 
-| Strategy | Pros | Cons |
-| --- | --- | --- |
-| **Tenant-scoped indexes** | Strong isolation; simpler per-tenant delete | Index proliferation; harder cross-tenant platform ops; more Meilisearch ops cost |
-| **Shared indexes + mandatory tenant filters** | Fewer indexes; natural cross-collection ops; maps cleanly to Meilisearch filters | Filter omission is catastrophic unless fail-closed; clients must never override |
+| Strategy                                      | Pros                                                                             | Cons                                                                             |
+| --------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **Tenant-scoped indexes**                     | Strong isolation; simpler per-tenant delete                                      | Index proliferation; harder cross-tenant platform ops; more Meilisearch ops cost |
+| **Shared indexes + mandatory tenant filters** | Fewer indexes; natural cross-collection ops; maps cleanly to Meilisearch filters | Filter omission is catastrophic unless fail-closed; clients must never override  |
 
 ## Decision
 
@@ -31,11 +31,13 @@ APZSEARCH-006 wires Meilisearch into the Platform Services **execution** plane. 
 ## Consequences
 
 ### Positive
+
 - Deterministic security posture independent of which provider is selected
 - Compatible with Meilisearch filter grammar already implemented in the adapter
 - Client cannot strip security filters through the gateway
 
 ### Negative / accepted
+
 - Bugs in filter application are severity-critical — covered by unit tests and execution audit
 - Tenant-scoped indexes remain a future option if ops scale requires them (would require a new ADR)
 

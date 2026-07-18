@@ -50,13 +50,13 @@
 
 ## Configuration requirements
 
-| Variable | Role |
-| -------- | ---- |
-| `APZHUB_WORKFLOW_ENGINE_ENABLED` | Opt-in engine wiring |
-| `APZHUB_WORKFLOW_ENGINE_BASE_URL` | Required when enabled |
-| `APZHUB_WORKFLOW_ENGINE_API_BASE_URL` | Optional API prefix |
-| `APZHUB_WORKFLOW_ENGINE_API_KEY` / `_API_KEY_REF` | Auth material / secret ref |
-| `APZHUB_WORKFLOW_ENGINE_AUTH_MODE` | `api_key` (default) / PAT / basic |
+| Variable                                          | Role                              |
+| ------------------------------------------------- | --------------------------------- |
+| `APZHUB_WORKFLOW_ENGINE_ENABLED`                  | Opt-in engine wiring              |
+| `APZHUB_WORKFLOW_ENGINE_BASE_URL`                 | Required when enabled             |
+| `APZHUB_WORKFLOW_ENGINE_API_BASE_URL`             | Optional API prefix               |
+| `APZHUB_WORKFLOW_ENGINE_API_KEY` / `_API_KEY_REF` | Auth material / secret ref        |
+| `APZHUB_WORKFLOW_ENGINE_AUTH_MODE`                | `api_key` (default) / PAT / basic |
 
 ## Maintenance expectations
 

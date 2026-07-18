@@ -1,7 +1,7 @@
 # Integration SDK — Public API Guide
 
 > **Milestone:** OSS-100-10  
-> **Package:** `@apzhub/integration-sdk` **0.9.0**  
+> **Package:** `@apzhub/integration-sdk` **1.0.0**  
 > **Date:** 2026-07-12  
 > **Companion:** [SDK-API-AUDIT.md](./SDK-API-AUDIT.md) · [SDK-V1-CERTIFICATION.md](./SDK-V1-CERTIFICATION.md)
 
@@ -15,11 +15,11 @@ Consumer-facing map of public API surfaces, subpath exports, and import guidance
 
 ## Version
 
-| Field                     | Value                  |
-| ------------------------- | ---------------------- |
-| npm package version       | **0.9.0**              |
-| `INTEGRATION_SDK_VERSION` | **0.9.0** (matches)    |
-| v1.0.0 promotion          | Pending owner approval |
+| Field                     | Value                              |
+| ------------------------- | ---------------------------------- |
+| npm package version       | **1.0.0**                          |
+| `INTEGRATION_SDK_VERSION` | **1.0.0** (matches)                |
+| Architecture              | **Frozen** (OSS-100-11 / ADR-0065) |
 
 ---
 

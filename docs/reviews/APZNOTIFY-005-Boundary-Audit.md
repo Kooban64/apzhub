@@ -4,17 +4,17 @@
 
 ## Layer boundaries
 
-| From | To | Allowed? |
-| --- | --- | --- |
-| Workbench | Typed client facades | Yes |
-| Workbench | Gateway / platform-services / core / persistence | No |
-| Typed client | `/api/v1/notifications/*` | Yes |
-| Typed client | Gateway / core / persistence | No |
-| HTTP handlers | `gateway.notification.*` | Yes |
-| HTTP handlers | Core / persistence packages | No |
-| Platform services | Core + persistence ports | Yes |
-| Core | Persistence package import | No (ports only) |
-| Persistence | Platform services / HTTP | No |
+| From              | To                                               | Allowed?        |
+| ----------------- | ------------------------------------------------ | --------------- |
+| Workbench         | Typed client facades                             | Yes             |
+| Workbench         | Gateway / platform-services / core / persistence | No              |
+| Typed client      | `/api/v1/notifications/*`                        | Yes             |
+| Typed client      | Gateway / core / persistence                     | No              |
+| HTTP handlers     | `gateway.notification.*`                         | Yes             |
+| HTTP handlers     | Core / persistence packages                      | No              |
+| Platform services | Core + persistence ports                         | Yes             |
+| Core              | Persistence package import                       | No (ports only) |
+| Persistence       | Platform services / HTTP                         | No              |
 
 ## Bypass checks
 

@@ -49,7 +49,9 @@ function normalizeAttribute(record: ZammadHistoryRecord): string {
   return (record.attribute ?? "").trim().toLowerCase();
 }
 
-export function mapZammadHistoryAction(record: ZammadHistoryRecord): SupportHistoryAction {
+export function mapZammadHistoryAction(
+  record: ZammadHistoryRecord,
+): SupportHistoryAction {
   const objectName = normalizeObject(record);
   const type = normalizeType(record);
   const attribute = normalizeAttribute(record);
@@ -77,7 +79,9 @@ export function mapZammadHistoryAction(record: ZammadHistoryRecord): SupportHist
   return "unknown";
 }
 
-export function mapZammadHistoryActor(record: ZammadHistoryRecord): SupportHistoryActor {
+export function mapZammadHistoryActor(
+  record: ZammadHistoryRecord,
+): SupportHistoryActor {
   if (record.created_by_id === undefined || record.created_by_id === null) {
     return { kind: "system", displayName: "System" };
   }

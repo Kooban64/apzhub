@@ -2,12 +2,12 @@
 
 ## Capability types
 
-| Type | Examples |
-| --- | --- |
-| `platform` | APZHUB Platform shell |
-| `product` | `law-platform` |
-| `module` | `platform-administration`, `platform-operations-personalisation` |
-| `service` | Platform services (future registration) |
+| Type       | Examples                                                         |
+| ---------- | ---------------------------------------------------------------- |
+| `platform` | APZHUB Platform shell                                            |
+| `product`  | `law-platform`                                                   |
+| `module`   | `platform-administration`, `platform-operations-personalisation` |
+| `service`  | Platform services (future registration)                          |
 
 ## Registry fields
 

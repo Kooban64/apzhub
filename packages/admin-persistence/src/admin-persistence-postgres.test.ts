@@ -720,10 +720,7 @@ describe("postgres administration repositories", () => {
       createdAt: now.toISOString(),
       updatedAt: now.toISOString(),
     });
-    await repos.widgets.listByDashboard(
-      ctx,
-      asAdministrationDashboardId("dash_1"),
-    );
+    await repos.widgets.listByDashboard(ctx, asAdministrationDashboardId("dash_1"));
 
     const emptyDb = mockDb([]);
     const emptyRepos = createPostgresAdministrationRepositories(emptyDb);

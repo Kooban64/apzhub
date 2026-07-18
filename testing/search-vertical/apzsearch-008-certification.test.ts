@@ -143,7 +143,7 @@ describe("APZSEARCH-008 Search Vertical Certification", () => {
       "packages/search-persistence/package.json": "0.2.0",
       "packages/integration-search-sdk/package.json": "0.1.0",
       "integrations/meilisearch/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.19.0",
+      "packages/platform-services/package.json": "0.25.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const actual = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;
@@ -154,7 +154,7 @@ describe("APZSEARCH-008 Search Vertical Certification", () => {
   it("documents Next.js slug conflict as external (not a Search defect)", () => {
     const conflictA = join(
       ROOT,
-      "apps/web/app/api/v1/testing/traceability/[relationshipId]",
+      "apps/web/app/api/v1/testing/traceability/relationships/[relationshipId]",
     );
     const conflictB = join(
       ROOT,
@@ -163,9 +163,9 @@ describe("APZSEARCH-008 Search Vertical Certification", () => {
     expect(existsSync(conflictA)).toBe(true);
     expect(existsSync(conflictB)).toBe(true);
     // Proven pre-existing Testing routes — Playwright LIMITED; Search did not introduce them.
-    expect(
-      existsSync(join(ROOT, "apps/web/app/api/v1/search/query/route.ts")),
-    ).toBe(true);
+    expect(existsSync(join(ROOT, "apps/web/app/api/v1/search/query/route.ts"))).toBe(
+      true,
+    );
   });
 
   it("documents production classification artefacts", () => {

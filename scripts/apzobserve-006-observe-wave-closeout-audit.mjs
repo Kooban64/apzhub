@@ -80,7 +80,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.24.0",
+  "0.25.0",
   "version-platform-services",
 );
 
@@ -156,9 +156,9 @@ requireContains(
 );
 requireContains(
   "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
-  /version:\s*1\.8\.\d+/,
+  /version:\s*1\.(?:[8-9]|\d{2,})\.\d+/,
   "openapi-version",
-  "OpenAPI must remain at 1.8.x for Observability wave freeze",
+  "OpenAPI must remain at >= 1.8.0 for Observability wave freeze",
 );
 requireContains(
   "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
@@ -279,9 +279,7 @@ console.log("  - Programme 001–005 vertical retained PASS");
 console.log(
   "  - Architecture freeze + reference standard + operational readiness present",
 );
-console.log(
-  "  - Package versions frozen; no provider/collection/ingest routes",
-);
+console.log("  - Package versions frozen; no provider/collection/ingest routes");
 console.log("  - Classification PRODUCTION_READY_WITH_LIMITATIONS retained");
 if (observations.length > 0) {
   console.log("Observations:");

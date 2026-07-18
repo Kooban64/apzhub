@@ -120,9 +120,7 @@ describe("APZDOCS-004 document handlers", () => {
     expect((await archived.json()).data.status).toBe("archived");
 
     const storage = await handleGetDocumentStorageMetadata(
-      makeRequest(
-        "http://localhost/api/v1/documents/doc_1/versions/ver_1/storage",
-      ),
+      makeRequest("http://localhost/api/v1/documents/doc_1/versions/ver_1/storage"),
       ctx,
       route,
     );
@@ -173,9 +171,7 @@ describe("APZDOCS-004 document handlers", () => {
     expect(
       (
         await handleGetDocumentVersion(
-          makeRequest(
-            "http://localhost/api/v1/documents/doc_1/versions/ver_1",
-          ),
+          makeRequest("http://localhost/api/v1/documents/doc_1/versions/ver_1"),
           ctx,
           route,
         )
@@ -185,10 +181,9 @@ describe("APZDOCS-004 document handlers", () => {
     expect(
       (
         await handleVerifyDocumentIntegrity(
-          makeRequest(
-            "http://localhost/api/v1/documents/doc_1/versions/ver_1/verify",
-            { method: "POST" },
-          ),
+          makeRequest("http://localhost/api/v1/documents/doc_1/versions/ver_1/verify", {
+            method: "POST",
+          }),
           ctx,
           route,
         )
@@ -273,16 +268,13 @@ describe("APZDOCS-004 document handlers", () => {
     expect(
       (
         await handleRelateDocument(
-          makeRequest(
-            "http://localhost/api/v1/documents/doc_1/relationships",
-            {
-              method: "POST",
-              body: JSON.stringify({
-                kind: "related_to",
-                targetDocumentId: "doc_2",
-              }),
-            },
-          ),
+          makeRequest("http://localhost/api/v1/documents/doc_1/relationships", {
+            method: "POST",
+            body: JSON.stringify({
+              kind: "related_to",
+              targetDocumentId: "doc_2",
+            }),
+          }),
           ctx,
           route,
         )
@@ -302,8 +294,12 @@ describe("APZDOCS-004 document handlers", () => {
     ).toBe(200);
 
     expect(
-      (await handleListDocumentTags(makeRequest("http://localhost/api/v1/documents/tags"), ctx))
-        .status,
+      (
+        await handleListDocumentTags(
+          makeRequest("http://localhost/api/v1/documents/tags"),
+          ctx,
+        )
+      ).status,
     ).toBe(200);
 
     const tag = await handleGetDocumentTag(

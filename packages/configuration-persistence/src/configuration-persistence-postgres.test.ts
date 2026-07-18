@@ -31,8 +31,10 @@ function thenableRows(rows: unknown[]) {
   const api = {
     limit: vi.fn(async () => rows),
     orderBy: vi.fn(async () => rows),
-    then: (resolve: (value: unknown) => unknown, reject?: (reason: unknown) => unknown) =>
-      Promise.resolve(rows).then(resolve, reject),
+    then: (
+      resolve: (value: unknown) => unknown,
+      reject?: (reason: unknown) => unknown,
+    ) => Promise.resolve(rows).then(resolve, reject),
   };
   return api;
 }
@@ -415,12 +417,16 @@ describe("postgres configuration repositories coverage", () => {
   it("returns null for empty get queries", async () => {
     const db = mockDb([]);
     const repos = createPostgresConfigurationRepositories(db as never);
-    expect(await repos.configurations.get(ctx, asConfigurationId("missing"))).toBeNull();
+    expect(
+      await repos.configurations.get(ctx, asConfigurationId("missing")),
+    ).toBeNull();
     expect(
       await repos.namespaces.get(ctx, asConfigurationNamespaceId("missing")),
     ).toBeNull();
     expect(await repos.groups.get(ctx, asConfigurationGroupId("missing"))).toBeNull();
     expect(await repos.keys.get(ctx, asConfigurationKeyId("missing"))).toBeNull();
-    expect(await repos.versions.get(ctx, asConfigurationVersionId("missing"))).toBeNull();
+    expect(
+      await repos.versions.get(ctx, asConfigurationVersionId("missing")),
+    ).toBeNull();
   });
 });

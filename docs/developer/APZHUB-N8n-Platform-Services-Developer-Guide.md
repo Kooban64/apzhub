@@ -4,11 +4,11 @@
 
 ## Packages
 
-| Package | Role |
-| --- | --- |
-| `@apzhub/workflow-contracts` | `WorkflowEngineGateway` + `workflow.engine.*` permissions |
-| `@apzhub/platform-services` | Thin engine services, factories, authz map, pipeline wrap |
-| `@apzhub/integration-n8n` | Certified adapter (frozen **0.1.0**) — Platform Services only |
+| Package                      | Role                                                          |
+| ---------------------------- | ------------------------------------------------------------- |
+| `@apzhub/workflow-contracts` | `WorkflowEngineGateway` + `workflow.engine.*` permissions     |
+| `@apzhub/platform-services`  | Thin engine services, factories, authz map, pipeline wrap     |
+| `@apzhub/integration-n8n`    | Certified adapter (frozen **0.1.0**) — Platform Services only |
 
 ## Layout
 

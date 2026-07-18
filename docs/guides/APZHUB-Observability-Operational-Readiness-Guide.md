@@ -14,11 +14,11 @@ Operational expectations for the **metadata governance** plane.
 
 ## Environment configuration
 
-| Variable | Requirement |
-| --- | --- |
-| `APZHUB_OBSERVE_ENABLED` | Deny-by-default; set `true` / `1` / `on` to enable |
-| PostgreSQL | Required in production for Observability SoR |
-| Platform migrations | Apply `0054_apz_platform_observe.sql` then `0055_apz_platform_observe_rls.sql` before enable |
+| Variable                 | Requirement                                                                                  |
+| ------------------------ | -------------------------------------------------------------------------------------------- |
+| `APZHUB_OBSERVE_ENABLED` | Deny-by-default; set `true` / `1` / `on` to enable                                           |
+| PostgreSQL               | Required in production for Observability SoR                                                 |
+| Platform migrations      | Apply `0054_apz_platform_observe.sql` then `0055_apz_platform_observe_rls.sql` before enable |
 
 ## Deployment prerequisites
 
@@ -84,12 +84,12 @@ Operational expectations for the **metadata governance** plane.
 
 ## Operational ownership
 
-| Area | Owner |
-| --- | --- |
-| Observability metadata SoR | Platform Observability |
-| Live telemetry providers | Future programmes (roadmap only) |
+| Area                        | Owner                                      |
+| --------------------------- | ------------------------------------------ |
+| Observability metadata SoR  | Platform Observability                     |
+| Live telemetry providers    | Future programmes (roadmap only)           |
 | Platform Operations console | Separate product (`/workspace/operations`) |
-| Administration / Identity | Frozen separate SoRs |
+| Administration / Identity   | Frozen separate SoRs                       |
 
 ## See also
 

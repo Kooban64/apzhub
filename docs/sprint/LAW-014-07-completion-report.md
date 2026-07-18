@@ -17,7 +17,7 @@ LAW-014-07 makes the completed Law Platform API easy to explore, test, and adopt
 
 | Deliverable                          | Location                                                                                   |
 | ------------------------------------ | ------------------------------------------------------------------------------------------ |
-| Documentation landing + API explorer | [/api/docs](/api/docs) → `/docs` (rewrite)                                                 |
+| Documentation landing + API explorer | [/api/docs](../developer/legal-api-developer-guide.md) → `/docs` (rewrite)                 |
 | OpenAPI YAML                         | `GET /api/law/v1/openapi.yaml`                                                             |
 | OpenAPI JSON                         | `GET /api/law/v1/openapi.json`                                                             |
 | Swagger UI component                 | `apps/web/components/law-api-docs/law-api-swagger-explorer.tsx`                            |

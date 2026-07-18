@@ -20,11 +20,11 @@
 
 Legacy stack runs Plane at:
 
-| Item | Value |
-|------|-------|
-| Public hostname | `apzprojects.apzportal.apzor.com` |
-| Host debug port | `18085` |
-| Stack | `apz-stack` (`/home/ubuntu/apzportal/docker/compose.yml`) |
+| Item            | Value                                                     |
+| --------------- | --------------------------------------------------------- |
+| Public hostname | `apzprojects.apzportal.apzor.com`                         |
+| Host debug port | `18085`                                                   |
+| Stack           | `apz-stack` (`/home/ubuntu/apzportal/docker/compose.yml`) |
 
 **APZHUB dev `.env` (illustrative — do not expose to users):**
 
@@ -61,11 +61,11 @@ PLANE_INTEGRATION_ENABLED=false
 
 ## Coexistence with legacy stack
 
-| Service | Legacy port | APZHUB dev ports |
-|---------|-------------|------------------|
-| APZHUB web | — | 3300 |
-| APZHUB PostgreSQL | — | 54334 |
-| Plane (legacy) | 18085 | Internal reference only |
+| Service           | Legacy port | APZHUB dev ports        |
+| ----------------- | ----------- | ----------------------- |
+| APZHUB web        | —           | 3300                    |
+| APZHUB PostgreSQL | —           | 54334                   |
+| Plane (legacy)    | 18085       | Internal reference only |
 
 Do not modify legacy `apz-stack` Plane without owner approval.
 

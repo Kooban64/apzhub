@@ -26,6 +26,7 @@ import type { ConfigurationPlatformGateway } from "@apzhub/configuration-contrac
 import type { AdministrationPlatformGateway } from "@apzhub/admin-contracts";
 import type { IdentityPlatformGateway } from "@apzhub/identity-contracts";
 import type { ObservePlatformGateway } from "@apzhub/observe-contracts";
+import type { MetricsPlatformGateway } from "@apzhub/metrics-contracts";
 import type { WorkflowPlatformGateway } from "@apzhub/workflow-contracts";
 import { PlatformServiceError } from "@apzhub/platform-service-contracts";
 
@@ -97,6 +98,7 @@ export interface PlatformServiceGatewayDeps {
   readonly administrationApi?: AdministrationPlatformGateway;
   readonly identityApi?: IdentityPlatformGateway;
   readonly observeApi?: ObservePlatformGateway;
+  readonly metricsApi?: MetricsPlatformGateway;
   readonly platformQualityApi?: PlatformQualityGateway;
   readonly platformReleaseApi?: PlatformReleaseGateway;
   readonly platformGovernanceApi?: PlatformGovernanceGateway;
@@ -126,7 +128,9 @@ function unsupportedTestingCapability(): PlatformServiceError {
   });
 }
 
-function unsupportedPlatformQualityCapability(serviceName: string): PlatformServiceError {
+function unsupportedPlatformQualityCapability(
+  serviceName: string,
+): PlatformServiceError {
   return new PlatformServiceError({
     category: "configuration",
     code: "PROVIDER_CAPABILITY_UNSUPPORTED",
@@ -390,6 +394,16 @@ export class PlatformServiceGateway {
   }
 
   /**
+   * Platform Metrics capability (APZMETRICS-002).
+   * Nested facets — metadata / lifecycle only; never formula/KPI execution or providers.
+   *
+   * Shape: gateway.metrics.{metrics,definitions,versions,categories,groups,dimensions,labels,units,formulas,aggregations,thresholds,owners,consumers,retentionPolicies,classifications,dependencies,kpis,kpiGroups,kpiTargets,relationships,metadata,diagnostics}
+   */
+  get metrics(): MetricsPlatformGateway {
+    return this.metricsGateway;
+  }
+
+  /**
    * Search Platform capability (APZSEARCH-003).
    * Nested management-plane facets — never merges into legacy Plane search.
    */
@@ -599,6 +613,19 @@ export class PlatformServiceGateway {
       });
     }
     return this.deps.observeApi;
+  }
+
+  private get metricsGateway(): MetricsPlatformGateway {
+    if (!this.deps.metricsApi) {
+      throw new PlatformServiceError({
+        category: "configuration",
+        code: "PROVIDER_CAPABILITY_UNSUPPORTED",
+        message: "Platform Metrics services are not enabled",
+        correlationId: "platform-gateway",
+        retryable: false,
+      });
+    }
+    return this.deps.metricsApi;
   }
 
   get platformQuality(): PlatformQualityGateway {

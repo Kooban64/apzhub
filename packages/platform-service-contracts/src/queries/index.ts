@@ -86,8 +86,10 @@ export interface CommentListFilter {
 }
 
 export type WorkspaceSortField = "name" | "slug" | "createdAt" | "updatedAt";
-export type ProjectSortField = "name" | "identifier" | "status" | "createdAt" | "updatedAt";
-export type TaskSortField = "title" | "status" | "priority" | "rank" | "createdAt" | "updatedAt";
+export type ProjectSortField =
+  "name" | "identifier" | "status" | "createdAt" | "updatedAt";
+export type TaskSortField =
+  "title" | "status" | "priority" | "rank" | "createdAt" | "updatedAt";
 export type TeamSortField = "role" | "joinedAt";
 export type UserSortField = "displayName" | "email" | "createdAt";
 export type SearchSortField = "score" | "title";
@@ -125,15 +127,11 @@ export interface SupportUserListFilter {
 }
 
 export type SupportTicketSortField =
-  | "title"
-  | "displayId"
-  | "status"
-  | "priority"
-  | "createdAt"
-  | "updatedAt";
+  "title" | "displayId" | "status" | "priority" | "createdAt" | "updatedAt";
 export type SupportOrganizationSortField = "name" | "createdAt" | "updatedAt";
 export type SupportGroupSortField = "name" | "createdAt" | "updatedAt";
-export type SupportUserSortField = "displayName" | "email" | "login" | "createdAt" | "updatedAt";
+export type SupportUserSortField =
+  "displayName" | "email" | "login" | "createdAt" | "updatedAt";
 
 export interface SupportArticleListFilter {
   readonly visibility?: "internal" | "public";
@@ -150,11 +148,7 @@ export type SupportArticleSortField = "createdAt" | "updatedAt";
 
 export interface SupportSearchFilter {
   readonly kinds?: readonly (
-    | "support_request"
-    | "organization"
-    | "group"
-    | "user"
-    | "article"
+    "support_request" | "organization" | "group" | "user" | "article"
   )[];
   readonly supportTicketId?: string;
   readonly organizationId?: string;

@@ -12,16 +12,16 @@ Expand rate limiting into a complete Platform Traffic Governance capability. Pla
 
 ### Implementation
 
-| Component | Location |
-|-----------|----------|
-| `TrafficGovernanceService` | `packages/platform-security/src/traffic-governance/` |
-| Canonical policies | `policies.ts` |
-| Environment profiles | `profiles.ts` |
-| Shared middleware | `route-middleware.ts` |
-| Future adapters (interface only) | `adapters.ts` |
-| App middleware integration | `apps/web/middleware.ts`, `apps/law-platform/middleware.ts` |
-| Law API integration | `apps/web/lib/api/middleware/with-law-api-auth.ts` |
-| Diagnostics | `SecurityDiagnostics.trafficGovernance` |
+| Component                        | Location                                                    |
+| -------------------------------- | ----------------------------------------------------------- |
+| `TrafficGovernanceService`       | `packages/platform-security/src/traffic-governance/`        |
+| Canonical policies               | `policies.ts`                                               |
+| Environment profiles             | `profiles.ts`                                               |
+| Shared middleware                | `route-middleware.ts`                                       |
+| Future adapters (interface only) | `adapters.ts`                                               |
+| App middleware integration       | `apps/web/middleware.ts`, `apps/law-platform/middleware.ts` |
+| Law API integration              | `apps/web/lib/api/middleware/with-law-api-auth.ts`          |
+| Diagnostics                      | `SecurityDiagnostics.trafficGovernance`                     |
 
 ### Policy dimensions
 

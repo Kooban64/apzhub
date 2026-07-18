@@ -48,7 +48,9 @@ export class PostgresGovernanceRepository extends InMemoryGovernanceRepository {
     return rows.map(mapCapabilityRow);
   }
 
-  override async getCapability(capabilityKey: string): Promise<PlatformCapability | undefined> {
+  override async getCapability(
+    capabilityKey: string,
+  ): Promise<PlatformCapability | undefined> {
     const db = getDb();
     const [row] = await db
       .select()
@@ -58,7 +60,9 @@ export class PostgresGovernanceRepository extends InMemoryGovernanceRepository {
     return row ? mapCapabilityRow(row) : super.getCapability(capabilityKey);
   }
 
-  override async registerCapability(input: RegisterCapabilityInput): Promise<PlatformCapability> {
+  override async registerCapability(
+    input: RegisterCapabilityInput,
+  ): Promise<PlatformCapability> {
     const capability = await super.registerCapability(input);
     const db = getDb();
     const timestamp = new Date();
@@ -104,7 +108,9 @@ export class PostgresGovernanceRepository extends InMemoryGovernanceRepository {
     return capability;
   }
 
-  override async listDependencies(capabilityId: string): Promise<readonly CapabilityDependency[]> {
+  override async listDependencies(
+    capabilityId: string,
+  ): Promise<readonly CapabilityDependency[]> {
     const db = getDb();
     const rows = await db
       .select()
@@ -129,13 +135,16 @@ export class PostgresGovernanceRepository extends InMemoryGovernanceRepository {
     const mapped = rows.map(mapEnablementRow);
     return mapped.filter((item) => {
       if (filter?.scopeType && item.scopeType !== filter.scopeType) return false;
-      if (filter?.scopeKey !== undefined && item.scopeKey !== filter.scopeKey) return false;
+      if (filter?.scopeKey !== undefined && item.scopeKey !== filter.scopeKey)
+        return false;
       if (filter?.targetType && item.targetType !== filter.targetType) return false;
       return true;
     });
   }
 
-  override async upsertEnablement(input: UpsertEnablementInput): Promise<GovernanceEnablement> {
+  override async upsertEnablement(
+    input: UpsertEnablementInput,
+  ): Promise<GovernanceEnablement> {
     const enablement = await super.upsertEnablement(input);
     const db = getDb();
     const timestamp = new Date();
@@ -204,7 +213,9 @@ export class PostgresProvisioningRepository extends InMemoryProvisioningReposito
     });
   }
 
-  override async createRecord(input: StartProvisioningInput): Promise<ProvisioningRecord> {
+  override async createRecord(
+    input: StartProvisioningInput,
+  ): Promise<ProvisioningRecord> {
     const record = await super.createRecord(input);
     const db = getDb();
     await db.insert(platformProvisioningRecord).values({
@@ -258,7 +269,9 @@ export class PostgresFeatureFlagRepository extends InMemoryFeatureFlagRepository
     return rows.map(mapFlagRow);
   }
 
-  override async registerFlag(input: RegisterFeatureFlagInput): Promise<FeatureFlagDefinition> {
+  override async registerFlag(
+    input: RegisterFeatureFlagInput,
+  ): Promise<FeatureFlagDefinition> {
     const flag = await super.registerFlag(input);
     const db = getDb();
     const timestamp = new Date();
@@ -286,7 +299,9 @@ export class PostgresFeatureFlagRepository extends InMemoryFeatureFlagRepository
     return flag;
   }
 
-  override async listOverrides(flagKey?: string): Promise<readonly FeatureFlagOverride[]> {
+  override async listOverrides(
+    flagKey?: string,
+  ): Promise<readonly FeatureFlagOverride[]> {
     const db = getDb();
     const rows = flagKey
       ? await db
@@ -300,7 +315,9 @@ export class PostgresFeatureFlagRepository extends InMemoryFeatureFlagRepository
     return rows.map(mapOverrideRow);
   }
 
-  override async setOverride(input: SetFeatureFlagOverrideInput): Promise<FeatureFlagOverride> {
+  override async setOverride(
+    input: SetFeatureFlagOverrideInput,
+  ): Promise<FeatureFlagOverride> {
     const override = await super.setOverride(input);
     const db = getDb();
     const timestamp = new Date();
@@ -342,7 +359,9 @@ export class PostgresFeatureFlagRepository extends InMemoryFeatureFlagRepository
   }
 }
 
-function mapCapabilityRow(row: typeof platformCapability.$inferSelect): PlatformCapability {
+function mapCapabilityRow(
+  row: typeof platformCapability.$inferSelect,
+): PlatformCapability {
   return {
     capabilityId: row.capabilityId,
     capabilityKey: row.capabilityKey,
@@ -357,7 +376,9 @@ function mapCapabilityRow(row: typeof platformCapability.$inferSelect): Platform
   };
 }
 
-function mapDependencyRow(row: typeof platformCapabilityDependency.$inferSelect): CapabilityDependency {
+function mapDependencyRow(
+  row: typeof platformCapabilityDependency.$inferSelect,
+): CapabilityDependency {
   return {
     dependencyId: row.dependencyId,
     capabilityId: row.capabilityId,
@@ -367,7 +388,9 @@ function mapDependencyRow(row: typeof platformCapabilityDependency.$inferSelect)
   };
 }
 
-function mapEnablementRow(row: typeof platformGovernanceEnablement.$inferSelect): GovernanceEnablement {
+function mapEnablementRow(
+  row: typeof platformGovernanceEnablement.$inferSelect,
+): GovernanceEnablement {
   return {
     enablementId: row.enablementId,
     scopeType: row.scopeType as GovernanceEnablement["scopeType"],
@@ -381,7 +404,9 @@ function mapEnablementRow(row: typeof platformGovernanceEnablement.$inferSelect)
   };
 }
 
-function mapProvisioningRow(row: typeof platformProvisioningRecord.$inferSelect): ProvisioningRecord {
+function mapProvisioningRow(
+  row: typeof platformProvisioningRecord.$inferSelect,
+): ProvisioningRecord {
   return {
     provisioningId: row.provisioningId,
     scopeType: row.scopeType as ProvisioningRecord["scopeType"],
@@ -396,7 +421,9 @@ function mapProvisioningRow(row: typeof platformProvisioningRecord.$inferSelect)
   };
 }
 
-function mapFlagRow(row: typeof platformFeatureFlag.$inferSelect): FeatureFlagDefinition {
+function mapFlagRow(
+  row: typeof platformFeatureFlag.$inferSelect,
+): FeatureFlagDefinition {
   return {
     flagKey: row.flagKey,
     name: row.name,
@@ -408,7 +435,9 @@ function mapFlagRow(row: typeof platformFeatureFlag.$inferSelect): FeatureFlagDe
   };
 }
 
-function mapOverrideRow(row: typeof platformFeatureFlagOverride.$inferSelect): FeatureFlagOverride {
+function mapOverrideRow(
+  row: typeof platformFeatureFlagOverride.$inferSelect,
+): FeatureFlagOverride {
   return {
     overrideId: row.overrideId,
     flagKey: row.flagKey,
@@ -430,7 +459,10 @@ export async function createPostgresGovernanceRepositories(): Promise<Governance
 
 export async function seedPostgresGovernanceRows(): Promise<void> {
   const repositories = createInMemoryGovernanceRepositories();
-  const service = new PlatformGovernanceService({ repositories, storageBackend: "memory" });
+  const service = new PlatformGovernanceService({
+    repositories,
+    storageBackend: "memory",
+  });
   await seedDefaultGovernanceCatalog(service);
   const postgresRepositories = await createPostgresGovernanceRepositories();
   for (const capability of await service.capabilities.listCapabilities()) {
@@ -460,14 +492,19 @@ export async function seedPostgresGovernanceRows(): Promise<void> {
 
 export async function getPostgresGovernanceDiagnostics(): Promise<GovernanceDiagnostics> {
   const repositories = await createPostgresGovernanceRepositories();
-  const [capabilityCount, enablementCount, provisioningCount, featureFlagCount, overrideCount] =
-    await Promise.all([
-      repositories.governance.countCapabilities(),
-      repositories.governance.countEnablements(),
-      repositories.provisioning.countRecords(),
-      repositories.featureFlags.countFlags(),
-      repositories.featureFlags.countOverrides(),
-    ]);
+  const [
+    capabilityCount,
+    enablementCount,
+    provisioningCount,
+    featureFlagCount,
+    overrideCount,
+  ] = await Promise.all([
+    repositories.governance.countCapabilities(),
+    repositories.governance.countEnablements(),
+    repositories.provisioning.countRecords(),
+    repositories.featureFlags.countFlags(),
+    repositories.featureFlags.countOverrides(),
+  ]);
   return {
     capabilityCount,
     enablementCount,

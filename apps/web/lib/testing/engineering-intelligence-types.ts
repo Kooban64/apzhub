@@ -77,7 +77,11 @@ export type TrendSeriesViewModel = {
   readonly direction: string;
   readonly delta: number;
   readonly periodKind: string;
-  readonly points: readonly { readonly at: string; readonly value: number; readonly label?: string }[];
+  readonly points: readonly {
+    readonly at: string;
+    readonly value: number;
+    readonly label?: string;
+  }[];
   readonly computedAt: string;
 };
 

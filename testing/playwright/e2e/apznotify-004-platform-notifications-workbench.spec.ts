@@ -154,9 +154,7 @@ test.describe("APZNOTIFY-004 Notification Workbench", () => {
       "DELIVERY PROVIDERS NOT AVAILABLE",
     );
     await expect(page.getByTestId("notifications-toolbar")).toBeVisible();
-    expect(seen.some((path) => path.includes("/api/v1/notifications"))).toBe(
-      true,
-    );
+    expect(seen.some((path) => path.includes("/api/v1/notifications"))).toBe(true);
   });
 
   test("notifications section lists metadata", async ({ page }) => {

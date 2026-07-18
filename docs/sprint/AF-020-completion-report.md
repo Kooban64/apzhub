@@ -142,6 +142,6 @@ AF-021 is documentation-only. Recommended scope:
 ## Documentation
 
 - [AF-019 completion report](./AF-019-completion-report.md)
-- [SPR-004 Action Framework sprint doc](../SPR-004-action-framework.md)
+- [SPR-004 Action Framework sprint doc](./SPR-004-action-framework.md)
 
 **Next story:** AF-021 (documentation) — do not start until AF-020 is approved.

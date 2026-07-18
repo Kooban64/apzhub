@@ -92,10 +92,7 @@ function parseJobs(raw: unknown): PipelineJob[] {
       readString(obj, "conclusion"),
     );
     jobs.push({
-      key:
-        obj.id !== undefined
-          ? String(obj.id)
-          : readString(obj, "key"),
+      key: obj.id !== undefined ? String(obj.id) : readString(obj, "key"),
       name,
       status,
       durationMs: readNumber(obj, "durationMs"),
@@ -107,9 +104,7 @@ function parseJobs(raw: unknown): PipelineJob[] {
             .filter((s): s is Record<string, unknown> => !!s && typeof s === "object")
             .map((s) => ({
               key:
-                s.number !== undefined
-                  ? String(s.number)
-                  : readString(s, "key", "id"),
+                s.number !== undefined ? String(s.number) : readString(s, "key", "id"),
               name: readString(s, "name") ?? "step",
               status: mapGitHubActionsStatus(
                 readString(s, "status"),
@@ -171,8 +166,7 @@ export function createGitHubActionsPipelineResultAdapter(): PipelineResultAdapte
         readString(obj, "status"),
         readString(obj, "conclusion"),
       );
-      const overall =
-        isPipelineRunStatus(status) ? status : ("unknown" as const);
+      const overall = isPipelineRunStatus(status) ? status : ("unknown" as const);
 
       const environment: PipelineEnvironment = {
         branch: readString(obj, "head_branch", "branch"),
@@ -199,8 +193,7 @@ export function createGitHubActionsPipelineResultAdapter(): PipelineResultAdapte
       const externalRunRef =
         obj.id !== undefined
           ? String(obj.id)
-          : (readString(obj, "externalRunRef", "id") ??
-            `github-actions-${Date.now()}`);
+          : (readString(obj, "externalRunRef", "id") ?? `github-actions-${Date.now()}`);
 
       const startedAt = readString(obj, "run_started_at", "created_at", "startedAt");
       const completedAt =
@@ -264,10 +257,7 @@ export function createGitHubActionsPipelineResultAdapter(): PipelineResultAdapte
         source: {
           repository:
             typeof obj.repository === "object" && obj.repository
-              ? readString(
-                  obj.repository as Record<string, unknown>,
-                  "full_name",
-                )
+              ? readString(obj.repository as Record<string, unknown>, "full_name")
               : undefined,
           branch: environment.branch,
           commit: environment.commit,

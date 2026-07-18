@@ -8,21 +8,21 @@
 
 ## Checklist
 
-| Area | Status |
-| ---- | ------ |
-| Canonical contracts **0.2.0** · core **0.2.0** · persistence **0.1.0** | ✅ |
-| Platform services **0.21.0** · service-contracts **0.16.0** · `gateway.notification.*` | ✅ |
-| RequestPipeline + production authorisation | ✅ |
-| HTTP API + OpenAPI Platform Notifications (info **1.4.0**) | ✅ |
-| Typed client + mock | ✅ |
-| Workbench `/workspace/notifications` + manifests | ✅ |
-| Vertical audit `pnpm audit:notification-vertical` | ✅ 0 violations |
-| Prior audits 001–004 | ✅ |
-| Consolidated coverage ≥95% lines/functions | ✅ 98.42% / 96.95% |
-| Delivery providers / email / SMS / push / Teams / Slack / webhooks | ❌ Excluded by design |
-| Event Bus / workers / queues / scheduling / realtime | ❌ Excluded by design |
-| Live PostgreSQL in unit CI | ⚠️ Factory + migration + in-memory parity; live DB optional |
-| Playwright / Next live webServer | ⚠️ LIMITED (Testing slug conflict — external) |
+| Area                                                                                   | Status                                                      |
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Canonical contracts **0.2.0** · core **0.2.0** · persistence **0.1.0**                 | ✅                                                          |
+| Platform services **0.21.0** · service-contracts **0.16.0** · `gateway.notification.*` | ✅                                                          |
+| RequestPipeline + production authorisation                                             | ✅                                                          |
+| HTTP API + OpenAPI Platform Notifications (info **1.4.0**)                             | ✅                                                          |
+| Typed client + mock                                                                    | ✅                                                          |
+| Workbench `/workspace/notifications` + manifests                                       | ✅                                                          |
+| Vertical audit `pnpm audit:notification-vertical`                                      | ✅ 0 violations                                             |
+| Prior audits 001–004                                                                   | ✅                                                          |
+| Consolidated coverage ≥95% lines/functions                                             | ✅ 98.42% / 96.95%                                          |
+| Delivery providers / email / SMS / push / Teams / Slack / webhooks                     | ❌ Excluded by design                                       |
+| Event Bus / workers / queues / scheduling / realtime                                   | ❌ Excluded by design                                       |
+| Live PostgreSQL in unit CI                                                             | ⚠️ Factory + migration + in-memory parity; live DB optional |
+| Playwright / Next live webServer                                                       | ⚠️ LIMITED (Testing slug conflict — external)               |
 
 ## Why PRODUCTION_READY_WITH_LIMITATIONS
 

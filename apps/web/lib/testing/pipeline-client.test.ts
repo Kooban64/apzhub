@@ -32,7 +32,11 @@ describe("createHttpPipelineClient", () => {
     const client = createHttpPipelineClient();
 
     await client.getRepository("acme", "portal");
-    await client.listLiveRuns("acme", "portal", { page: 1, perPage: 20, status: "passed" });
+    await client.listLiveRuns("acme", "portal", {
+      page: 1,
+      perPage: 20,
+      status: "passed",
+    });
     await client.listPipelines();
     await client.getSorRun("prun_1");
 
@@ -103,11 +107,6 @@ describe("createHttpPipelineClient", () => {
   });
 
   it("rejects non-pipeline paths", async () => {
-    const client = createHttpPipelineClient() as unknown as {
-      getRepository: typeof createHttpPipelineClient extends () => infer R
-        ? R["getRepository"]
-        : never;
-    };
     // Exercise route guard via internal request by calling a method that builds path —
     // importFromProvider still uses /testing/pipelines.
     fetchMock.mockResolvedValueOnce(
@@ -134,6 +133,5 @@ describe("createHttpPipelineClient", () => {
       "/api/v1/testing/pipelines",
       expect.objectContaining({ method: "POST" }),
     );
-    void client;
   });
 });

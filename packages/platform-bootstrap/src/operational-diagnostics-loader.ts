@@ -11,15 +11,17 @@ import {
 } from "./platform-runtime-bootstrap";
 import type { OperationalDiagnosticsExtensions } from "./types";
 
-async function loadPostgresTenantDiagnostics(): Promise<Record<string, unknown> | null> {
+async function loadPostgresTenantDiagnostics(): Promise<Record<
+  string,
+  unknown
+> | null> {
   if (!process.env.DATABASE_URL) {
     return null;
   }
 
   try {
-    const { getPlatformTenantDiagnostics } = await import(
-      "@apzhub/platform-identity/server"
-    );
+    const { getPlatformTenantDiagnostics } =
+      await import("@apzhub/platform-identity/server");
     return await getPlatformTenantDiagnostics();
   } catch {
     return null;

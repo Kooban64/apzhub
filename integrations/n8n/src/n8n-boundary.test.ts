@@ -7,9 +7,7 @@ const PKG = join(__dirname, "..");
 
 describe("@apzhub/integration-n8n boundaries", () => {
   it("depends only on integration-sdk", () => {
-    const pkg = JSON.parse(
-      readFileSync(join(PKG, "package.json"), "utf8"),
-    ) as {
+    const pkg = JSON.parse(readFileSync(join(PKG, "package.json"), "utf8")) as {
       name: string;
       dependencies?: Record<string, string>;
     };
@@ -52,13 +50,20 @@ describe("@apzhub/integration-n8n boundaries", () => {
     expect(yaml).not.toMatch(/\bexecute\b/i);
   });
 
-  it("does not wire into apps/web or platform-services package.json", () => {
-    const webPkg = readFileSync(join(ROOT, "apps/web/package.json"), "utf8");
-    const servicesPkg = readFileSync(
-      join(ROOT, "packages/platform-services/package.json"),
-      "utf8",
-    );
-    expect(webPkg).not.toContain("@apzhub/integration-n8n");
-    expect(servicesPkg).not.toContain("@apzhub/integration-n8n");
+  it("platform consumers may depend on the adapter package, never the vendor n8n SDK", () => {
+    const webPkg = JSON.parse(
+      readFileSync(join(ROOT, "apps/web/package.json"), "utf8"),
+    ) as { dependencies?: Record<string, string> };
+    const servicesPkg = JSON.parse(
+      readFileSync(join(ROOT, "packages/platform-services/package.json"), "utf8"),
+    ) as { dependencies?: Record<string, string> };
+    // APZWORKFLOW engine wave composes @apzhub/integration-n8n via platform-services / web.
+    // Products and services must not depend on the vendor `n8n` package.
+    expect(webPkg.dependencies?.n8n).toBeUndefined();
+    expect(servicesPkg.dependencies?.n8n).toBeUndefined();
+    expect(
+      servicesPkg.dependencies?.["@apzhub/integration-n8n"] ??
+        webPkg.dependencies?.["@apzhub/integration-n8n"],
+    ).toBe("workspace:*");
   });
 });

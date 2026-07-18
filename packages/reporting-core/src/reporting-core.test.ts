@@ -43,8 +43,7 @@ const template: ReportTemplate = {
 };
 
 const catalogue: BuiltinTemplateCatalogue = {
-  list: (reportType) =>
-    !reportType || reportType === "demo" ? [template] : [],
+  list: (reportType) => (!reportType || reportType === "demo" ? [template] : []),
   get: (id) => (id === template.id ? template : undefined),
   defaultIdFor: () => template.id,
   listReportTypes: () => ["demo"],
@@ -194,10 +193,7 @@ describe("@apzhub/reporting-core", () => {
     expect(generated.output.format).toBe("html");
     expect(generated.metadata.preview).toBe(false);
 
-    const archived = await service.archiveReportMetadata(
-      ctx,
-      generated.metadata.id,
-    );
+    const archived = await service.archiveReportMetadata(ctx, generated.metadata.id);
     expect(archived.archivedAt).toBe(FIXED);
   });
 });

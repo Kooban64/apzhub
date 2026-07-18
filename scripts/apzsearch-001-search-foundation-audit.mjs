@@ -24,7 +24,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -42,7 +43,11 @@ function scan(files, rules) {
       const line = lines[i];
       // Skip pure comment lines for noisy rules
       const trimmed = line.trim();
-      if (trimmed.startsWith("//") || trimmed.startsWith("*") || trimmed.startsWith("/*")) {
+      if (
+        trimmed.startsWith("//") ||
+        trimmed.startsWith("*") ||
+        trimmed.startsWith("/*")
+      ) {
         continue;
       }
       for (const rule of rules) {
@@ -69,8 +74,14 @@ const files = walk(join(ROOT, packageRoot));
 
 scan(files, [
   { rule: "no-apps-web", pattern: /apps\/web|@\/components|@\/lib\/api/ },
-  { rule: "no-http-routes", pattern: /\/api\/v1\/|NextRequest|withPlatformApiAuth|createRouteHandler/ },
-  { rule: "no-workbench", pattern: /workbench-framework|PlatformSearchView|\/workspace\/search/ },
+  {
+    rule: "no-http-routes",
+    pattern: /\/api\/v1\/|NextRequest|withPlatformApiAuth|createRouteHandler/,
+  },
+  {
+    rule: "no-workbench",
+    pattern: /workbench-framework|PlatformSearchView|\/workspace\/search/,
+  },
   {
     rule: "no-engine-sdks",
     pattern:
@@ -130,7 +141,11 @@ scan(files, [
     join(ROOT, "packages/search-contracts/src/diagnostics/types.ts"),
     "utf8",
   );
-  if (!/semantic:\s*false/.test(diag) || !/vector:\s*false/.test(diag) || !/fuzzy:\s*false/.test(diag)) {
+  if (
+    !/semantic:\s*false/.test(diag) ||
+    !/vector:\s*false/.test(diag) ||
+    !/fuzzy:\s*false/.test(diag)
+  ) {
     violations.push({
       file: "packages/search-contracts/src/diagnostics/types.ts",
       line: 1,
@@ -152,5 +167,7 @@ if (violations.length > 0) {
   process.exit(1);
 }
 
-console.log("\nRESULT: PASS (0 architecture/dependency/boundary/authorization violations)");
+console.log(
+  "\nRESULT: PASS (0 architecture/dependency/boundary/authorization violations)",
+);
 process.exit(0);

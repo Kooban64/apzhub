@@ -64,9 +64,7 @@ async function buildProvider(
     production: options.production,
   });
   if (!validation.ok) {
-    throw new Error(
-      `Invalid document storage config: ${validation.errors.join("; ")}`,
-    );
+    throw new Error(`Invalid document storage config: ${validation.errors.join("; ")}`);
   }
 
   if (config.mode === "memory_test") {
@@ -123,7 +121,9 @@ async function buildProvider(
     return provider;
   }
 
-  throw new Error(`Unsupported document storage mode: ${(config as DocumentStorageConfig).mode}`);
+  throw new Error(
+    `Unsupported document storage mode: ${(config as DocumentStorageConfig).mode}`,
+  );
 }
 
 /**

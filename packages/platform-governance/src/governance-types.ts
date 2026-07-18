@@ -22,7 +22,13 @@ export const CAPABILITY_TYPES = ["platform", "product", "module", "service"] as 
 
 export type CapabilityType = (typeof CAPABILITY_TYPES)[number];
 
-export const PROVISIONING_SCOPE_TYPES = ["tenant", "product", "module", "service", "user"] as const;
+export const PROVISIONING_SCOPE_TYPES = [
+  "tenant",
+  "product",
+  "module",
+  "service",
+  "user",
+] as const;
 
 export type ProvisioningScopeType = (typeof PROVISIONING_SCOPE_TYPES)[number];
 

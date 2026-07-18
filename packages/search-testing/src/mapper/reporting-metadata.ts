@@ -48,8 +48,7 @@ export class ReportingMetadataSearchMapper {
     const classification = resolveTestingClassification(context, {
       explicit: extras?.classification,
     });
-    const title =
-      extras?.title ?? `${meta.reportType} report (${meta.outputFormat})`;
+    const title = extras?.title ?? `${meta.reportType} report (${meta.outputFormat})`;
     return {
       entityId: meta.id,
       entityType: "report_metadata",
@@ -89,9 +88,7 @@ export class ReportingMetadataSearchMapper {
     assertPlatformEntityId(template.id, "report_template.id");
     const tenantId = extras?.tenantId;
     if (!tenantId) {
-      throw new Error(
-        "tenantId is required via extras when mapping report_template",
-      );
+      throw new Error("tenantId is required via extras when mapping report_template");
     }
     assertTenant(tenantId, context);
     const classification = resolveTestingClassification(context, {

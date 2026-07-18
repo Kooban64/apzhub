@@ -28,9 +28,7 @@ function walk(dir: string, out: string[] = []): string[] {
 }
 
 function stripComments(content: string): string {
-  return content
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/\/\/.*$/gm, "");
+  return content.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
 }
 
 describe("APZWORKFLOW-008 engine presentation boundary", () => {
@@ -46,8 +44,8 @@ describe("APZWORKFLOW-008 engine presentation boundary", () => {
   });
 
   it("engine client layer stays HTTP-only", () => {
-    const files = walk(join(ROOT, "lib/workflows")).filter((file) =>
-      /engine-/.test(file) || /mock-engine-/.test(file),
+    const files = walk(join(ROOT, "lib/workflows")).filter(
+      (file) => /engine-/.test(file) || /mock-engine-/.test(file),
     );
     expect(files.length).toBeGreaterThan(3);
     for (const file of files) {

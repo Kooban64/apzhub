@@ -23,11 +23,11 @@ pnpm exec vitest run apps/web/lib/testing apps/web/components/testing --reporter
 
 ## Packages
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/testing-contracts` | **0.6.0** |
+| Package                       | Version                              |
+| ----------------------------- | ------------------------------------ |
+| `@apzhub/testing-contracts`   | **0.6.0**                            |
 | `@apzhub/testing-persistence` | **0.7.0** (through migration `0028`) |
-| `@apzhub/testing-services` | **0.5.0** |
+| `@apzhub/testing-services`    | **0.5.0**                            |
 
 Domain package versions are **unchanged** by APZTCMS-010.
 
@@ -36,7 +36,10 @@ Domain package versions are **unchanged** by APZTCMS-010.
 ## Certification engine
 
 ```ts
-import { createCertificationEngineServices, createTestingDomainServices } from "@apzhub/testing-services";
+import {
+  createCertificationEngineServices,
+  createTestingDomainServices,
+} from "@apzhub/testing-services";
 
 const cert = createCertificationEngineServices({ persistence });
 const record = await cert.records.create(ctx, { key: "REL-1", name: "Release 1" });
@@ -59,11 +62,11 @@ Presentation-only workbench under `apps/web`. **No** imports of `@apzhub/testing
 
 ### Layout
 
-| Path | Role |
-| ---- | ---- |
-| `apps/web/lib/testing/` | Typed client, mock transport, routes, permissions, commands, types |
-| `apps/web/components/testing/` | View components, router, shared UI, commands panel |
-| `services/testing/manifests/` | Parent `testing` + 15 child module manifests (enabled) |
+| Path                           | Role                                                               |
+| ------------------------------ | ------------------------------------------------------------------ |
+| `apps/web/lib/testing/`        | Typed client, mock transport, routes, permissions, commands, types |
+| `apps/web/components/testing/` | View components, router, shared UI, commands panel                 |
+| `services/testing/manifests/`  | Parent `testing` + 15 child module manifests (enabled)             |
 
 ### Data boundary
 

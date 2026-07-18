@@ -21,29 +21,29 @@ Workbench → Typed Client → HTTP (/api/v1/search)
 
 ## Dependency direction
 
-| From | May depend on | Must not |
-| ---- | ------------- | -------- |
-| Workbench | Typed client / search-api facades | platform-services, Meilisearch, SDK, persistence, gateway, handlers |
-| Typed client | `/api/v1/search` only | platform-services, Meilisearch, SDK, persistence, gateway |
-| HTTP handlers | `getPlatformServiceGateway()` | Meilisearch, persistence, SDK, legacy `gateway.search` |
-| Management services | contracts + persistence | Meilisearch adapter, apps/web |
-| Execution services | contracts + Meilisearch public API | apps/web, persistence (except via controlled resolver path) |
-| Meilisearch adapter | Search Integration SDK + contracts | platform-services, apps/web, persistence |
-| Contracts | nothing Search-layer | platform-services, persistence, Meilisearch, apps |
+| From                | May depend on                      | Must not                                                            |
+| ------------------- | ---------------------------------- | ------------------------------------------------------------------- |
+| Workbench           | Typed client / search-api facades  | platform-services, Meilisearch, SDK, persistence, gateway, handlers |
+| Typed client        | `/api/v1/search` only              | platform-services, Meilisearch, SDK, persistence, gateway           |
+| HTTP handlers       | `getPlatformServiceGateway()`      | Meilisearch, persistence, SDK, legacy `gateway.search`              |
+| Management services | contracts + persistence            | Meilisearch adapter, apps/web                                       |
+| Execution services  | contracts + Meilisearch public API | apps/web, persistence (except via controlled resolver path)         |
+| Meilisearch adapter | Search Integration SDK + contracts | platform-services, apps/web, persistence                            |
+| Contracts           | nothing Search-layer               | platform-services, persistence, Meilisearch, apps                   |
 
 No reverse dependencies found in scanned trees.
 
 ## Boundary
 
-| Rule | Result |
-| ---- | ------ |
-| Handlers → gateway only | **PASS** |
-| UI → typed client only | **PASS** |
-| No Meilisearch in `apps/web` | **PASS** |
-| Adapter no platform-services | **PASS** |
-| Management ≠ execution | **PASS** |
-| No public internal index HTTP | **PASS** (omitted by ADR-0064) |
-| No OCR / AI / semantic / vector / workers / Event Bus | **PASS** |
+| Rule                                                  | Result                         |
+| ----------------------------------------------------- | ------------------------------ |
+| Handlers → gateway only                               | **PASS**                       |
+| UI → typed client only                                | **PASS**                       |
+| No Meilisearch in `apps/web`                          | **PASS**                       |
+| Adapter no platform-services                          | **PASS**                       |
+| Management ≠ execution                                | **PASS**                       |
+| No public internal index HTTP                         | **PASS** (omitted by ADR-0064) |
+| No OCR / AI / semantic / vector / workers / Event Bus | **PASS**                       |
 
 ## Observations (not violations)
 

@@ -57,12 +57,12 @@
 
 ## Configuration requirements
 
-| Area | Expectation |
-| ---- | ----------- |
-| PostgreSQL | Platform DB with Notification tables |
-| Redis | Platform session/cache as elsewhere (not Notification delivery) |
-| Feature flag | Notification services enabled per environment docs |
-| Secrets | None for delivery (providers absent) |
+| Area         | Expectation                                                     |
+| ------------ | --------------------------------------------------------------- |
+| PostgreSQL   | Platform DB with Notification tables                            |
+| Redis        | Platform session/cache as elsewhere (not Notification delivery) |
+| Feature flag | Notification services enabled per environment docs              |
+| Secrets      | None for delivery (providers absent)                            |
 
 ## Maintenance expectations
 

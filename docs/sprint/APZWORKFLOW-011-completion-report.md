@@ -14,11 +14,11 @@ Formally closed the Workflow Engine programme wave. Declared **`@apzhub/integrat
 
 ## Wave Summary
 
-| Track | Outcome |
-| ----- | ------- |
-| APZWORKFLOW-001…005 | Workflow Platform SoR certified & frozen |
-| APZWORKFLOW-006…010 | n8n Engine vertical certified |
-| APZWORKFLOW-011 | Wave closeout + Reference Adapter declaration + freeze |
+| Track               | Outcome                                                |
+| ------------------- | ------------------------------------------------------ |
+| APZWORKFLOW-001…005 | Workflow Platform SoR certified & frozen               |
+| APZWORKFLOW-006…010 | n8n Engine vertical certified                          |
+| APZWORKFLOW-011     | Wave closeout + Reference Adapter declaration + freeze |
 
 See [Programme Summary](./APZWORKFLOW-011-programme-summary.md) · [Wave Closeout Report](./APZWORKFLOW-011-wave-closeout-report.md).
 
@@ -43,13 +43,13 @@ Examples (docs only): Camunda, Temporal, Flowable, Zeebe.
 
 ## Quality Evidence
 
-| Gate | Result |
-| ---- | ------ |
-| `pnpm audit:workflow-vertical` | PASS |
-| `pnpm audit:workflow-engine-vertical` | PASS |
-| `pnpm audit:workflow-engine-wave` | PASS |
-| OpenAPI validate | PASS |
-| Package versions | Frozen (n8n 0.1.0 · contracts 0.3.0 · services 0.20.0) |
+| Gate                                  | Result                                                 |
+| ------------------------------------- | ------------------------------------------------------ |
+| `pnpm audit:workflow-vertical`        | PASS                                                   |
+| `pnpm audit:workflow-engine-vertical` | PASS                                                   |
+| `pnpm audit:workflow-engine-wave`     | PASS                                                   |
+| OpenAPI validate                      | PASS                                                   |
+| Package versions                      | Frozen (n8n 0.1.0 · contracts 0.3.0 · services 0.20.0) |
 
 Details: [Quality Evidence](../reviews/APZWORKFLOW-011-Quality-Evidence.md) · [Wave Certification](../reviews/APZWORKFLOW-011-Wave-Certification.md)
 
@@ -59,9 +59,9 @@ Details: [Quality Evidence](../reviews/APZWORKFLOW-011-Quality-Evidence.md) · [
 
 ## Known Limitations
 
-- Read-only engine metadata only  
-- Live n8n opt-in  
-- Definition graphs not fully exposed  
+- Read-only engine metadata only
+- Live n8n opt-in
+- Definition graphs not fully exposed
 - Playwright live LIMITED (external Testing slug conflict)
 
 ## Operational Readiness
@@ -70,15 +70,15 @@ Details: [Quality Evidence](../reviews/APZWORKFLOW-011-Quality-Evidence.md) · [
 
 ## Documentation Produced
 
-- Wave Closeout Report · Programme Summary · Completion Report  
-- Reference Adapter Standard · Final Architecture · Architecture Freeze Notice  
-- Operational Readiness Guide · Future Adapter Development Guide  
-- Wave Certification · Quality Evidence  
+- Wave Closeout Report · Programme Summary · Completion Report
+- Reference Adapter Standard · Final Architecture · Architecture Freeze Notice
+- Operational Readiness Guide · Future Adapter Development Guide
+- Wave Certification · Quality Evidence
 
 ## Technical Debt
 
-- Live n8n E2E not required for closeout  
-- Playwright slug conflict remains platform Testing debt  
+- Live n8n E2E not required for closeout
+- Playwright slug conflict remains platform Testing debt
 - SoR audit scripts + harness updated to coexist with engine track (certification defect fixes only: 001/005 version pins & path scoping; workflow-vertical harness versions)
 
 ## Future Extension Strategy

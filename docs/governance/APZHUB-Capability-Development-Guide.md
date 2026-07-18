@@ -423,7 +423,7 @@ Capabilities must not:
 
 When future milestones enable gateways, capabilities continue to declare actions in manifest YAML — execution origin is attributed by the gateway layer, not capability code.
 
-See [SPR-004-AF-invocation-sources.md](../specs/SPR-004-AF-invocation-sources.md) and [Gateway Architecture](../packages/command-framework/src/gateways/GATEWAY-ARCHITECTURE.md).
+See [SPR-004-AF-invocation-sources.md](../specs/SPR-004-AF-invocation-sources.md) and [Gateway Architecture](../../packages/command-framework/src/gateways/GATEWAY-ARCHITECTURE.md).
 
 ---
 

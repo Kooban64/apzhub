@@ -63,7 +63,8 @@ export async function GET() {
   const anyDown = !database.ok || !redis.ok || !runtimeHealthy;
 
   const securityService = getSharedPlatformSecurityService();
-  const securityDiagnostics = securityService.securityDiagnostics.getSecurityDiagnostics();
+  const securityDiagnostics =
+    securityService.securityDiagnostics.getSecurityDiagnostics();
 
   const body: PlatformHealthResponse = {
     status: allHealthy ? "healthy" : anyDown ? "unhealthy" : "degraded",

@@ -32,10 +32,7 @@ export function buildUrl(
   return url.toString();
 }
 
-export function resolveRequestUrl(
-  baseUrl: string,
-  request: TransportRequest,
-): string {
+export function resolveRequestUrl(baseUrl: string, request: TransportRequest): string {
   if (request.url) {
     if (!request.query) {
       return request.url;
@@ -54,9 +51,11 @@ export function resolveRequestUrl(
   return buildUrl(baseUrl, request.path, request.query);
 }
 
-export function serializeBody(
-  body: TransportRequestBody | undefined,
-): { readonly initBody: BodyInit | undefined; readonly contentType?: string; readonly bytes: number } {
+export function serializeBody(body: TransportRequestBody | undefined): {
+  readonly initBody: BodyInit | undefined;
+  readonly contentType?: string;
+  readonly bytes: number;
+} {
   if (!body || body.kind === "empty") {
     return { initBody: undefined, bytes: 0 };
   }

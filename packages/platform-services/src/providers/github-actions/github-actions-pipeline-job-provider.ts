@@ -4,8 +4,7 @@ import { toIntegrationContext } from "../../context/to-integration-context";
 import { withProviderErrorMapping } from "../../errors/map-provider-error";
 import { GITHUB_ACTIONS_INTEGRATION_ID } from "./github-actions-pipeline-repository-provider";
 
-export const GITHUB_ACTIONS_PIPELINE_JOB_PROVIDER_ID =
-  "github-actions-pipeline-job";
+export const GITHUB_ACTIONS_PIPELINE_JOB_PROVIDER_ID = "github-actions-pipeline-job";
 
 export const GITHUB_ACTIONS_PIPELINE_JOB_PROVIDER_REGISTRATION = {
   providerId: GITHUB_ACTIONS_PIPELINE_JOB_PROVIDER_ID,

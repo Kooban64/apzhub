@@ -19,12 +19,18 @@ export const administrationQueryKeys = {
   modules: {
     all: [...ROOT, "modules"] as const,
     list: (params?: ListAdministrationModulesClientQuery) =>
-      [...ROOT, "modules", "list", stableParams(params as Record<string, unknown>)] as const,
+      [
+        ...ROOT,
+        "modules",
+        "list",
+        stableParams(params as Record<string, unknown>),
+      ] as const,
     detail: (moduleId: string) => [...ROOT, "modules", "detail", moduleId] as const,
     audit: (moduleId: string) => [...ROOT, "modules", "audit", moduleId] as const,
     history: (moduleId: string) => [...ROOT, "modules", "history", moduleId] as const,
     metadata: (moduleId: string) => [...ROOT, "modules", "metadata", moduleId] as const,
-    references: (moduleId: string) => [...ROOT, "modules", "references", moduleId] as const,
+    references: (moduleId: string) =>
+      [...ROOT, "modules", "references", moduleId] as const,
   },
   categories: {
     all: [...ROOT, "categories"] as const,

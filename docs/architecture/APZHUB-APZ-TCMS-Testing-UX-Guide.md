@@ -3,21 +3,21 @@
 **Product:** APZ TCMS  
 **Module:** Testing (`testing`)  
 **Milestone:** APZTCMS-010  
-**Authority:** [006](../006-design-system-ui-component-architecture.md) · [016](../016-desktop-shell-architecture-user-experience-framework.md) · [UI Architecture](./APZHUB-APZ-TCMS-UI-Architecture.md)
+**Authority:** [006](../006-enterprise-design-system-ui-standards.md) · [016](../016-desktop-shell-architecture-user-experience-framework.md) · [UI Architecture](./APZHUB-APZ-TCMS-UI-Architecture.md)
 
 ---
 
 ## Design principles
 
-| Principle | APZTCMS-010 implementation |
-| --------- | -------------------------- |
-| Presentation only | Views render view models; no domain logic |
-| Tokens only | CSS variables (`--color-*`) — no hardcoded colours |
-| Shared primitives | `testing-ui.tsx` — no one-off TCMS visual language |
-| Lucide icons | Manifest references `flask-conical`, etc. via shell |
+| Principle               | APZTCMS-010 implementation                            |
+| ----------------------- | ----------------------------------------------------- |
+| Presentation only       | Views render view models; no domain logic             |
+| Tokens only             | CSS variables (`--color-*`) — no hardcoded colours    |
+| Shared primitives       | `testing-ui.tsx` — no one-off TCMS visual language    |
+| Lucide icons            | Manifest references `flask-conical`, etc. via shell   |
 | Empty / loading / error | Consistent `EmptyState`, `LoadingState`, `ErrorState` |
-| Permission-driven | Controls hidden when permission missing |
-| Server authoritative | UI gating is UX only — not security |
+| Permission-driven       | Controls hidden when permission missing               |
+| Server authoritative    | UI gating is UX only — not security                   |
 
 ---
 
@@ -39,11 +39,11 @@ All views use `PageShell` inside the DEF **Workspace** region:
 
 ### Panel usage
 
-| View | Panels |
-| ---- | ------ |
+| View                 | Panels                                                                  |
+| -------------------- | ----------------------------------------------------------------------- |
 | Certification detail | State, Recommendation, Gates, Approval history, Audit history, Commands |
-| Release readiness | One `Panel` per release with dimension table |
-| Execution detail | State, Steps, Evidence, Commands |
+| Release readiness    | One `Panel` per release with dimension table                            |
+| Execution detail     | State, Steps, Evidence, Commands                                        |
 
 `Panel` uses `aria-label` matching the panel title for screen-reader context.
 
@@ -80,15 +80,15 @@ Testing views inherit platform theme tokens (dark/light) via the shell. No modul
 
 ## Accessibility (WCAG AA target)
 
-| Area | Implementation |
-| ---- | -------------- |
-| Headings | Single H1 per view via `PageShell` |
-| Loading | `role="status"` on `LoadingState` |
-| Errors | `role="alert"` on `ErrorState` and command errors |
-| Tables | Captions, scoped headers, keyboard row activation |
-| Breadcrumbs | `<nav aria-label="Breadcrumb">` on detail views |
-| Axe | Playwright spec asserts no critical/serious violations on dashboard |
-| Viewports | E2E validates desktop (1440×900) and mobile (390×844) |
+| Area        | Implementation                                                      |
+| ----------- | ------------------------------------------------------------------- |
+| Headings    | Single H1 per view via `PageShell`                                  |
+| Loading     | `role="status"` on `LoadingState`                                   |
+| Errors      | `role="alert"` on `ErrorState` and command errors                   |
+| Tables      | Captions, scoped headers, keyboard row activation                   |
+| Breadcrumbs | `<nav aria-label="Breadcrumb">` on detail views                     |
+| Axe         | Playwright spec asserts no critical/serious violations on dashboard |
+| Viewports   | E2E validates desktop (1440×900) and mobile (390×844)               |
 
 Permission gating behaviour is validated in **Vitest** component tests; Playwright asserts shell load, navigation, and axe on representative routes.
 
@@ -115,7 +115,7 @@ The Evidence view and execution detail evidence lists show:
 Certification detail renders recommendations with explicit advisory labelling:
 
 1. Recommendation badge in dedicated **Recommendation** panel
-2. When `recommendationAdvisoryOnly` is true, displays: *“Advisory only — does not override gate evaluation or approval workflow.”*
+2. When `recommendationAdvisoryOnly` is true, displays: _“Advisory only — does not override gate evaluation or approval workflow.”_
 3. Approve / reject buttons require `certification.approve` / `certification.reject` — never triggered automatically
 4. Gate table shows evaluator, reason, and timestamp for explainability
 
@@ -127,10 +127,10 @@ No AI-generated suggestions in APZTCMS-010 (deferred to APZTCMS-011).
 
 `TestingCommandsPanel` variants:
 
-| Variant | Context required | Extra inputs |
-| ------- | ---------------- | ------------ |
-| `execution` | `executionId` optional (start uses case ID) | Case ID, evidence title |
-| `certification` | `certificationId` | Optional comment |
+| Variant         | Context required                            | Extra inputs            |
+| --------------- | ------------------------------------------- | ----------------------- |
+| `execution`     | `executionId` optional (start uses case ID) | Case ID, evidence title |
+| `certification` | `certificationId`                           | Optional comment        |
 
 Buttons use `data-testid` hooks (`testing-command-approve`, etc.). Errors display inline with `role="alert"`.
 

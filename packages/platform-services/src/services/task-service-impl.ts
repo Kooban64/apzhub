@@ -45,7 +45,9 @@ function findTaskRegistration(
   resolver: ProviderResolver,
   provider: TaskProvider,
 ): ProviderRegistration {
-  const match = resolver.registry.list("task").find((entry) => entry.provider === provider);
+  const match = resolver.registry
+    .list("task")
+    .find((entry) => entry.provider === provider);
   if (!match) {
     throw new PlatformServiceError({
       category: "configuration",
@@ -110,10 +112,16 @@ export class TaskServiceImpl implements TaskService {
         }
       : undefined;
 
-    const result = await provider.listTasks(ctx, project.providerNativeId, providerQuery);
+    const result = await provider.listTasks(
+      ctx,
+      project.providerNativeId,
+      providerQuery,
+    );
     const items: Task[] = [];
     for (const task of result.items) {
-      items.push(await this.normalizeTask(ctx, registration, task, project.mapping.platformId));
+      items.push(
+        await this.normalizeTask(ctx, registration, task, project.mapping.platformId),
+      );
     }
     return { ...result, items };
   }
@@ -168,7 +176,11 @@ export class TaskServiceImpl implements TaskService {
       input,
     );
 
-    const created = await provider.createTask(ctx, project.providerNativeId, providerInput);
+    const created = await provider.createTask(
+      ctx,
+      project.providerNativeId,
+      providerInput,
+    );
 
     const mapping = await this.mapping.ensureMappingAfterCreate({
       ctx,
@@ -262,7 +274,12 @@ export class TaskServiceImpl implements TaskService {
       await this.resolveTaskContext(ctx, taskId);
 
     const status = await this.mapping.resolveExisting(ctx, input.statusId, "status");
-    this.assertSameProjectParent(ctx, status.mapping.parentPlatformId, projectPlatformId, "status");
+    this.assertSameProjectParent(
+      ctx,
+      status.mapping.parentPlatformId,
+      projectPlatformId,
+      "status",
+    );
 
     const transitioned = await provider.transitionTaskStatus(
       ctx,
@@ -289,7 +306,11 @@ export class TaskServiceImpl implements TaskService {
     const { resolved, projectNativeId, projectPlatformId, provider, registration } =
       await this.resolveTaskContext(ctx, taskId);
 
-    const providerInput = await this.translateAssignInputOutbound(ctx, registration, input);
+    const providerInput = await this.translateAssignInputOutbound(
+      ctx,
+      registration,
+      input,
+    );
 
     const assigned = await provider.assignTask(
       ctx,
@@ -348,7 +369,10 @@ export class TaskServiceImpl implements TaskService {
     throwUnsupportedProviderOperation(ctx.correlationId, "listMyTasks");
   }
 
-  async listComments(ctx: ServiceRequestContext, _taskId: TaskId): Promise<readonly Comment[]> {
+  async listComments(
+    ctx: ServiceRequestContext,
+    _taskId: TaskId,
+  ): Promise<readonly Comment[]> {
     assertRequestContext(ctx);
     throwUnsupportedProviderOperation(ctx.correlationId, "listComments");
   }
@@ -435,16 +459,36 @@ export class TaskServiceImpl implements TaskService {
     return {
       ...filter,
       statusId: filter.statusId
-        ? await this.resolveOutboundId(ctx, filter.statusId, "status", project.mapping.platformId)
+        ? await this.resolveOutboundId(
+            ctx,
+            filter.statusId,
+            "status",
+            project.mapping.platformId,
+          )
         : filter.statusId,
       assigneeId: filter.assigneeId
-        ? await this.resolveOutboundId(ctx, filter.assigneeId, "user", project.mapping.platformId)
+        ? await this.resolveOutboundId(
+            ctx,
+            filter.assigneeId,
+            "user",
+            project.mapping.platformId,
+          )
         : filter.assigneeId,
       labelId: filter.labelId
-        ? await this.resolveOutboundId(ctx, filter.labelId, "label", project.mapping.platformId)
+        ? await this.resolveOutboundId(
+            ctx,
+            filter.labelId,
+            "label",
+            project.mapping.platformId,
+          )
         : filter.labelId,
       sprintId: filter.sprintId
-        ? await this.resolveOutboundId(ctx, filter.sprintId, "sprint", project.mapping.platformId)
+        ? await this.resolveOutboundId(
+            ctx,
+            filter.sprintId,
+            "sprint",
+            project.mapping.platformId,
+          )
         : filter.sprintId,
       projectModuleId: filter.projectModuleId
         ? await this.resolveOutboundId(
@@ -475,10 +519,20 @@ export class TaskServiceImpl implements TaskService {
     return {
       ...input,
       statusId: input.statusId
-        ? await this.resolveOutboundId(ctx, input.statusId, "status", project.mapping.platformId)
+        ? await this.resolveOutboundId(
+            ctx,
+            input.statusId,
+            "status",
+            project.mapping.platformId,
+          )
         : input.statusId,
       assigneeId: input.assigneeId
-        ? await this.resolveOutboundId(ctx, input.assigneeId, "user", project.mapping.platformId)
+        ? await this.resolveOutboundId(
+            ctx,
+            input.assigneeId,
+            "user",
+            project.mapping.platformId,
+          )
         : input.assigneeId,
       assigneeIds: input.assigneeIds
         ? await Promise.all(
@@ -495,7 +549,12 @@ export class TaskServiceImpl implements TaskService {
           )
         : input.labelIds,
       sprintId: input.sprintId
-        ? await this.resolveOutboundId(ctx, input.sprintId, "sprint", project.mapping.platformId)
+        ? await this.resolveOutboundId(
+            ctx,
+            input.sprintId,
+            "sprint",
+            project.mapping.platformId,
+          )
         : input.sprintId,
       projectModuleId: input.projectModuleId
         ? await this.resolveOutboundId(
@@ -506,7 +565,12 @@ export class TaskServiceImpl implements TaskService {
           )
         : input.projectModuleId,
       parentTaskId: input.parentTaskId
-        ? await this.resolveOutboundId(ctx, input.parentTaskId, "task", project.mapping.platformId)
+        ? await this.resolveOutboundId(
+            ctx,
+            input.parentTaskId,
+            "task",
+            project.mapping.platformId,
+          )
         : input.parentTaskId,
     };
   }
@@ -518,7 +582,10 @@ export class TaskServiceImpl implements TaskService {
     input: UpdateTaskInput,
     taskPlatformId: string,
   ): Promise<UpdateTaskInput> {
-    if (typeof input.parentTaskId === "string" && input.parentTaskId === taskPlatformId) {
+    if (
+      typeof input.parentTaskId === "string" &&
+      input.parentTaskId === taskPlatformId
+    ) {
       throw new PlatformServiceError({
         category: "validation",
         code: "VALIDATION_FAILED",
@@ -531,10 +598,20 @@ export class TaskServiceImpl implements TaskService {
     return {
       ...input,
       statusId: input.statusId
-        ? await this.resolveOutboundId(ctx, input.statusId, "status", project.platformId)
+        ? await this.resolveOutboundId(
+            ctx,
+            input.statusId,
+            "status",
+            project.platformId,
+          )
         : input.statusId,
       assigneeId: input.assigneeId
-        ? await this.resolveOutboundId(ctx, input.assigneeId, "user", project.platformId)
+        ? await this.resolveOutboundId(
+            ctx,
+            input.assigneeId,
+            "user",
+            project.platformId,
+          )
         : input.assigneeId,
       assigneeIds: input.assigneeIds
         ? await Promise.all(
@@ -552,15 +629,30 @@ export class TaskServiceImpl implements TaskService {
         : input.labelIds,
       sprintId:
         typeof input.sprintId === "string"
-          ? await this.resolveOutboundId(ctx, input.sprintId, "sprint", project.platformId)
+          ? await this.resolveOutboundId(
+              ctx,
+              input.sprintId,
+              "sprint",
+              project.platformId,
+            )
           : input.sprintId,
       projectModuleId:
         typeof input.projectModuleId === "string"
-          ? await this.resolveOutboundId(ctx, input.projectModuleId, "module", project.platformId)
+          ? await this.resolveOutboundId(
+              ctx,
+              input.projectModuleId,
+              "module",
+              project.platformId,
+            )
           : input.projectModuleId,
       parentTaskId:
         typeof input.parentTaskId === "string"
-          ? await this.resolveOutboundId(ctx, input.parentTaskId, "task", project.platformId)
+          ? await this.resolveOutboundId(
+              ctx,
+              input.parentTaskId,
+              "task",
+              project.platformId,
+            )
           : input.parentTaskId,
     };
   }

@@ -109,7 +109,8 @@ export function SupportGroupsView({
             <span className="font-medium">Active:</span> {group.active ? "Yes" : "No"}
           </p>
           <p>
-            <span className="font-medium">Updated:</span> {formatSupportDate(group.updatedAt)}
+            <span className="font-medium">Updated:</span>{" "}
+            {formatSupportDate(group.updatedAt)}
           </p>
           {group.note ? <p>{group.note}</p> : null}
         </div>
@@ -130,13 +131,20 @@ export function SupportGroupsView({
             </Button>
           </div>
         ) : null}
-        {error ? <p className="text-sm" role="alert">{error}</p> : null}
+        {error ? (
+          <p className="text-sm" role="alert">
+            {error}
+          </p>
+        ) : null}
       </PageShell>
     );
   }
 
   return (
-    <PageShell title="Groups" description="Support groups (queues). No delete — update only.">
+    <PageShell
+      title="Groups"
+      description="Support groups (queues). No delete — update only."
+    >
       {canCreateGroup(permissions) ? (
         <form
           className="grid max-w-xl gap-2 md:grid-cols-2"
@@ -145,7 +153,12 @@ export function SupportGroupsView({
             createMutation.mutate();
           }}
         >
-          <Input label="Name *" value={name} onChange={(e) => setName(e.target.value)} required />
+          <Input
+            label="Name *"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
           <Input label="Note" value={note} onChange={(e) => setNote(e.target.value)} />
           <div className="flex items-end">
             <Button type="submit" size="sm" disabled={createMutation.isPending}>
@@ -182,7 +195,11 @@ export function SupportGroupsView({
           onRowClick={(id) => router.push(`${SUPPORT_BASE}/groups/${id}`)}
         />
       ) : null}
-      {error ? <p className="text-sm" role="alert">{error}</p> : null}
+      {error ? (
+        <p className="text-sm" role="alert">
+          {error}
+        </p>
+      ) : null}
     </PageShell>
   );
 }

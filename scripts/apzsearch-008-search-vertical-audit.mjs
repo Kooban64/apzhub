@@ -32,7 +32,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -42,9 +43,7 @@ function rel(file) {
 }
 
 function stripComments(source) {
-  return source
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/\/\/.*$/gm, "");
+  return source.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
 }
 
 function usesLegacyGatewaySearch(source) {
@@ -112,7 +111,10 @@ function requirePackageVersion(pkgJsonPath, expected, rule) {
 // ---------------------------------------------------------------------------
 scan(walk(join(ROOT, "apps/web/components/search")), [
   { rule: "workbench-no-platform-services", pattern: /@apzhub\/platform-services/ },
-  { rule: "workbench-no-meili", pattern: /@apzhub\/integration-meilisearch|from\s+[\"']meilisearch[\"']/ },
+  {
+    rule: "workbench-no-meili",
+    pattern: /@apzhub\/integration-meilisearch|from\s+["']meilisearch["']/,
+  },
   { rule: "workbench-no-search-sdk", pattern: /@apzhub\/integration-search-sdk/ },
   { rule: "workbench-no-persistence", pattern: /@apzhub\/search-persistence/ },
   {
@@ -160,7 +162,10 @@ scan(walk(join(ROOT, "apps/web/components/search")), [
   const page = join(ROOT, "apps/web/components/workbench-page.tsx");
   if (existsSync(page)) {
     const content = readFileSync(page, "utf8");
-    if (!content.includes("SearchWorkspaceRouter") || !content.includes("isSearchRoute")) {
+    if (
+      !content.includes("SearchWorkspaceRouter") ||
+      !content.includes("isSearchRoute")
+    ) {
       violations.push({
         file: rel(page),
         line: 1,
@@ -176,7 +181,10 @@ scan(walk(join(ROOT, "apps/web/components/search")), [
 // ---------------------------------------------------------------------------
 scan(walk(join(ROOT, "apps/web/lib/search")), [
   { rule: "client-no-platform-services", pattern: /@apzhub\/platform-services/ },
-  { rule: "client-no-meili", pattern: /@apzhub\/integration-meilisearch|from\s+[\"']meilisearch[\"']/ },
+  {
+    rule: "client-no-meili",
+    pattern: /@apzhub\/integration-meilisearch|from\s+["']meilisearch["']/,
+  },
   { rule: "client-no-search-sdk", pattern: /@apzhub\/integration-search-sdk/ },
   { rule: "client-no-persistence", pattern: /@apzhub\/search-persistence/ },
   {
@@ -208,7 +216,10 @@ scan(walk(join(ROOT, "apps/web/lib/search")), [
         detail: "typed client must target /api/v1/search",
       });
     }
-    if (usesLegacyGatewaySearch(client) || stripComments(client).includes("searchQuery.query")) {
+    if (
+      usesLegacyGatewaySearch(client) ||
+      stripComments(client).includes("searchQuery.query")
+    ) {
       violations.push({
         file: rel(clientFile),
         line: 1,
@@ -272,7 +283,7 @@ scan(
     {
       rule: "handlers-no-meili",
       pattern:
-        /@apzhub\/integration-meilisearch|@apzhub\/search-persistence|@apzhub\/integration-search-sdk|from\s+[\"']meilisearch[\"']/,
+        /@apzhub\/integration-meilisearch|@apzhub\/search-persistence|@apzhub\/integration-search-sdk|from\s+["']meilisearch["']/,
     },
   ],
 );
@@ -280,7 +291,8 @@ scan(
 scan(walk(join(ROOT, "apps/web/app/api/v1/search")), [
   {
     rule: "routes-no-meili",
-    pattern: /@apzhub\/integration-meilisearch|@apzhub\/search-persistence|from\s+[\"']meilisearch[\"']/,
+    pattern:
+      /@apzhub\/integration-meilisearch|@apzhub\/search-persistence|from\s+["']meilisearch["']/,
   },
 ]);
 
@@ -307,7 +319,7 @@ scan(
   [
     {
       rule: "apps-web-no-meili",
-      pattern: /@apzhub\/integration-meilisearch|from\s+[\"']meilisearch[\"']/,
+      pattern: /@apzhub\/integration-meilisearch|from\s+["']meilisearch["']/,
     },
   ],
 );
@@ -361,7 +373,8 @@ scan(walk(join(ROOT, "packages/platform-services/src/services/search-execution")
         file: rel(file),
         line: 1,
         rule: "management-ne-execution",
-        detail: "Management plane must not import Meilisearch adapter (execution owns engine IO)",
+        detail:
+          "Management plane must not import Meilisearch adapter (execution owns engine IO)",
       });
     }
   }
@@ -488,7 +501,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.19.0",
+  "0.25.0",
   "version-platform-services",
 );
 
@@ -590,8 +603,12 @@ console.log("Violations: 0");
 console.log(
   "  - Workbench / typed client / HTTP / services / contracts / persistence / SDK / Meilisearch boundaries intact",
 );
-console.log("  - Management ≠ execution; no Meilisearch in apps/web; handlers → gateway only");
-console.log("  - Public index HTTP omitted; OpenAPI Platform Search + manifests present");
+console.log(
+  "  - Management ≠ execution; no Meilisearch in apps/web; handlers → gateway only",
+);
+console.log(
+  "  - Public index HTTP omitted; OpenAPI Platform Search + manifests present",
+);
 console.log("  - Prior audits APZSEARCH-001–007: PASS");
 if (observations.length > 0) {
   console.log("Observations:");

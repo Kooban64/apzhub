@@ -787,20 +787,12 @@ export function createPlatformAdministrationService(
 
     async getAudit(ctx, auditId) {
       assertCtx(ctx);
-      return requireFound(
-        await deps.repos.audits.get(ctx, auditId),
-        "audit",
-        auditId,
-      );
+      return requireFound(await deps.repos.audits.get(ctx, auditId), "audit", auditId);
     },
 
     async listHistory(ctx, moduleId) {
       assertCtx(ctx);
-      requireFound(
-        await deps.repos.modules.get(ctx, moduleId),
-        "module",
-        moduleId,
-      );
+      requireFound(await deps.repos.modules.get(ctx, moduleId), "module", moduleId);
       return deps.repos.history.listByModule(ctx, moduleId);
     },
 
@@ -872,8 +864,7 @@ export function createPlatformAdministrationService(
       const updated: AdministrationRegistration = {
         ...existing,
         version: input.version ?? existing.version,
-        notes:
-          input.notes === null ? undefined : (input.notes ?? existing.notes),
+        notes: input.notes === null ? undefined : (input.notes ?? existing.notes),
         status: input.status ?? existing.status,
       };
       return deps.repos.registrations.update(ctx, updated);
@@ -881,11 +872,7 @@ export function createPlatformAdministrationService(
 
     async listMetadata(ctx, moduleId) {
       assertCtx(ctx);
-      requireFound(
-        await deps.repos.modules.get(ctx, moduleId),
-        "module",
-        moduleId,
-      );
+      requireFound(await deps.repos.modules.get(ctx, moduleId), "module", moduleId);
       return deps.repos.metadata.listByModule(ctx, moduleId);
     },
 
@@ -925,11 +912,9 @@ export function createPlatformAdministrationService(
       );
       const updated: AdministrationMetadata = {
         ...existing,
-        labels:
-          input.labels === null ? undefined : (input.labels ?? existing.labels),
+        labels: input.labels === null ? undefined : (input.labels ?? existing.labels),
         tags: input.tags === null ? undefined : (input.tags ?? existing.tags),
-        notes:
-          input.notes === null ? undefined : (input.notes ?? existing.notes),
+        notes: input.notes === null ? undefined : (input.notes ?? existing.notes),
       };
       validateAdministrationMetadataNotes(updated);
       return deps.repos.metadata.update(ctx, updated);
@@ -990,11 +975,7 @@ export function createPlatformAdministrationService(
 
     async listReferences(ctx, moduleId) {
       assertCtx(ctx);
-      requireFound(
-        await deps.repos.modules.get(ctx, moduleId),
-        "module",
-        moduleId,
-      );
+      requireFound(await deps.repos.modules.get(ctx, moduleId), "module", moduleId);
       return deps.repos.references.listByModule(ctx, moduleId);
     },
 
@@ -1163,9 +1144,7 @@ export function createPlatformAdministrationService(
             ? undefined
             : (input.permissionKeys ?? existing.permissionKeys),
         iconKey:
-          input.iconKey === null
-            ? undefined
-            : (input.iconKey ?? existing.iconKey),
+          input.iconKey === null ? undefined : (input.iconKey ?? existing.iconKey),
         routePath:
           input.routePath === null
             ? undefined

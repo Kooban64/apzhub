@@ -8,7 +8,7 @@ function crc32(buf: Buffer): number {
   for (let i = 0; i < buf.length; i += 1) {
     c ^= buf[i]!;
     for (let k = 0; k < 8; k += 1) {
-      c = c & 1 ? (0xedb88320 ^ (c >>> 1)) : c >>> 1;
+      c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
     }
   }
   return (c ^ 0xffffffff) >>> 0;

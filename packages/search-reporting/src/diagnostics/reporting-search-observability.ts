@@ -40,10 +40,7 @@ export class ReportingSearchMetrics {
     entityType?: string,
   ): void {
     if (entityType) {
-      this.byEntityType.set(
-        entityType,
-        (this.byEntityType.get(entityType) ?? 0) + 1,
-      );
+      this.byEntityType.set(entityType, (this.byEntityType.get(entityType) ?? 0) + 1);
     }
     if (!ok) {
       if (operation === "validate") this.validationFailures += 1;
@@ -185,9 +182,7 @@ export class ReportingSearchErrorTranslator {
   translate(error: unknown): SearchDomainError {
     if (
       error instanceof Error &&
-      /parametersJson|checksum|rendered|content leakage|credential/i.test(
-        error.message,
-      )
+      /parametersJson|checksum|rendered|content leakage|credential/i.test(error.message)
     ) {
       return new SearchDomainError("validation_failed", error.message);
     }

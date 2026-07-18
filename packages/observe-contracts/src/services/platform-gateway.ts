@@ -96,8 +96,14 @@ export type UpdateHealthCheckInput = {
 export type ObserveHealthChecksService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly HealthCheck[]>;
   get(ctx: ObservePlatformServiceContext, id: HealthCheckId): Promise<HealthCheck>;
-  create(ctx: ObservePlatformServiceContext, input: CreateHealthCheckInput): Promise<HealthCheck>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateHealthCheckInput): Promise<HealthCheck>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateHealthCheckInput,
+  ): Promise<HealthCheck>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateHealthCheckInput,
+  ): Promise<HealthCheck>;
 };
 
 export type CreateReadinessCheckInput = {
@@ -125,9 +131,18 @@ export type UpdateReadinessCheckInput = {
 
 export type ObserveReadinessChecksService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly ReadinessCheck[]>;
-  get(ctx: ObservePlatformServiceContext, id: ReadinessCheckId): Promise<ReadinessCheck>;
-  create(ctx: ObservePlatformServiceContext, input: CreateReadinessCheckInput): Promise<ReadinessCheck>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateReadinessCheckInput): Promise<ReadinessCheck>;
+  get(
+    ctx: ObservePlatformServiceContext,
+    id: ReadinessCheckId,
+  ): Promise<ReadinessCheck>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateReadinessCheckInput,
+  ): Promise<ReadinessCheck>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateReadinessCheckInput,
+  ): Promise<ReadinessCheck>;
 };
 
 export type CreateLivenessCheckInput = {
@@ -156,8 +171,14 @@ export type UpdateLivenessCheckInput = {
 export type ObserveLivenessChecksService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly LivenessCheck[]>;
   get(ctx: ObservePlatformServiceContext, id: LivenessCheckId): Promise<LivenessCheck>;
-  create(ctx: ObservePlatformServiceContext, input: CreateLivenessCheckInput): Promise<LivenessCheck>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateLivenessCheckInput): Promise<LivenessCheck>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateLivenessCheckInput,
+  ): Promise<LivenessCheck>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateLivenessCheckInput,
+  ): Promise<LivenessCheck>;
 };
 
 export type CreateServiceHealthInput = {
@@ -186,8 +207,14 @@ export type UpdateServiceHealthInput = {
 export type ObserveServiceHealthFacetService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly ServiceHealth[]>;
   get(ctx: ObservePlatformServiceContext, id: ServiceHealthId): Promise<ServiceHealth>;
-  create(ctx: ObservePlatformServiceContext, input: CreateServiceHealthInput): Promise<ServiceHealth>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateServiceHealthInput): Promise<ServiceHealth>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateServiceHealthInput,
+  ): Promise<ServiceHealth>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateServiceHealthInput,
+  ): Promise<ServiceHealth>;
 };
 
 export type CreateServiceStatusInput = {
@@ -212,8 +239,14 @@ export type UpdateServiceStatusInput = {
 export type ObserveServiceStatusFacetService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly ServiceStatus[]>;
   get(ctx: ObservePlatformServiceContext, id: ServiceStatusId): Promise<ServiceStatus>;
-  create(ctx: ObservePlatformServiceContext, input: CreateServiceStatusInput): Promise<ServiceStatus>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateServiceStatusInput): Promise<ServiceStatus>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateServiceStatusInput,
+  ): Promise<ServiceStatus>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateServiceStatusInput,
+  ): Promise<ServiceStatus>;
 };
 
 export type CreateComponentStatusInput = {
@@ -241,9 +274,18 @@ export type UpdateComponentStatusInput = {
 
 export type ObserveComponentStatusFacetService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly ComponentStatus[]>;
-  get(ctx: ObservePlatformServiceContext, id: ComponentStatusId): Promise<ComponentStatus>;
-  create(ctx: ObservePlatformServiceContext, input: CreateComponentStatusInput): Promise<ComponentStatus>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateComponentStatusInput): Promise<ComponentStatus>;
+  get(
+    ctx: ObservePlatformServiceContext,
+    id: ComponentStatusId,
+  ): Promise<ComponentStatus>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateComponentStatusInput,
+  ): Promise<ComponentStatus>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateComponentStatusInput,
+  ): Promise<ComponentStatus>;
 };
 
 export type CreateMetricDefinitionInput = {
@@ -277,9 +319,18 @@ export type UpdateMetricDefinitionInput = {
 
 export type ObserveMetricDefinitionsService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly MetricDefinition[]>;
-  get(ctx: ObservePlatformServiceContext, id: MetricDefinitionId): Promise<MetricDefinition>;
-  create(ctx: ObservePlatformServiceContext, input: CreateMetricDefinitionInput): Promise<MetricDefinition>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateMetricDefinitionInput): Promise<MetricDefinition>;
+  get(
+    ctx: ObservePlatformServiceContext,
+    id: MetricDefinitionId,
+  ): Promise<MetricDefinition>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateMetricDefinitionInput,
+  ): Promise<MetricDefinition>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateMetricDefinitionInput,
+  ): Promise<MetricDefinition>;
 };
 
 export type CreateMetricSampleInput = {
@@ -306,8 +357,14 @@ export type UpdateMetricSampleInput = {
 export type ObserveMetricSamplesService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly MetricSample[]>;
   get(ctx: ObservePlatformServiceContext, id: MetricSampleId): Promise<MetricSample>;
-  create(ctx: ObservePlatformServiceContext, input: CreateMetricSampleInput): Promise<MetricSample>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateMetricSampleInput): Promise<MetricSample>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateMetricSampleInput,
+  ): Promise<MetricSample>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateMetricSampleInput,
+  ): Promise<MetricSample>;
 };
 
 export type CreateAlertDefinitionInput = {
@@ -337,9 +394,18 @@ export type UpdateAlertDefinitionInput = {
 
 export type ObserveAlertDefinitionsService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly AlertDefinition[]>;
-  get(ctx: ObservePlatformServiceContext, id: AlertDefinitionId): Promise<AlertDefinition>;
-  create(ctx: ObservePlatformServiceContext, input: CreateAlertDefinitionInput): Promise<AlertDefinition>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateAlertDefinitionInput): Promise<AlertDefinition>;
+  get(
+    ctx: ObservePlatformServiceContext,
+    id: AlertDefinitionId,
+  ): Promise<AlertDefinition>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateAlertDefinitionInput,
+  ): Promise<AlertDefinition>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateAlertDefinitionInput,
+  ): Promise<AlertDefinition>;
 };
 
 export type CreateAlertStateInput = {
@@ -370,8 +436,14 @@ export type UpdateAlertStateInput = {
 export type ObserveAlertStatesService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly AlertState[]>;
   get(ctx: ObservePlatformServiceContext, id: AlertStateId): Promise<AlertState>;
-  create(ctx: ObservePlatformServiceContext, input: CreateAlertStateInput): Promise<AlertState>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateAlertStateInput): Promise<AlertState>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateAlertStateInput,
+  ): Promise<AlertState>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateAlertStateInput,
+  ): Promise<AlertState>;
 };
 
 export type CreateDashboardDefinitionInput = {
@@ -399,9 +471,18 @@ export type UpdateDashboardDefinitionInput = {
 
 export type ObserveDashboardDefinitionsService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly DashboardDefinition[]>;
-  get(ctx: ObservePlatformServiceContext, id: DashboardDefinitionId): Promise<DashboardDefinition>;
-  create(ctx: ObservePlatformServiceContext, input: CreateDashboardDefinitionInput): Promise<DashboardDefinition>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateDashboardDefinitionInput): Promise<DashboardDefinition>;
+  get(
+    ctx: ObservePlatformServiceContext,
+    id: DashboardDefinitionId,
+  ): Promise<DashboardDefinition>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateDashboardDefinitionInput,
+  ): Promise<DashboardDefinition>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateDashboardDefinitionInput,
+  ): Promise<DashboardDefinition>;
 };
 
 export type CreateLogSourceInput = {
@@ -430,8 +511,14 @@ export type UpdateLogSourceInput = {
 export type ObserveLogSourcesService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly LogSource[]>;
   get(ctx: ObservePlatformServiceContext, id: LogSourceId): Promise<LogSource>;
-  create(ctx: ObservePlatformServiceContext, input: CreateLogSourceInput): Promise<LogSource>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateLogSourceInput): Promise<LogSource>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateLogSourceInput,
+  ): Promise<LogSource>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateLogSourceInput,
+  ): Promise<LogSource>;
 };
 
 export type CreateTraceDefinitionInput = {
@@ -459,9 +546,18 @@ export type UpdateTraceDefinitionInput = {
 
 export type ObserveTraceDefinitionsService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly TraceDefinition[]>;
-  get(ctx: ObservePlatformServiceContext, id: TraceDefinitionId): Promise<TraceDefinition>;
-  create(ctx: ObservePlatformServiceContext, input: CreateTraceDefinitionInput): Promise<TraceDefinition>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateTraceDefinitionInput): Promise<TraceDefinition>;
+  get(
+    ctx: ObservePlatformServiceContext,
+    id: TraceDefinitionId,
+  ): Promise<TraceDefinition>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateTraceDefinitionInput,
+  ): Promise<TraceDefinition>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateTraceDefinitionInput,
+  ): Promise<TraceDefinition>;
 };
 
 export type CreateTraceSpanInput = {
@@ -492,8 +588,14 @@ export type UpdateTraceSpanInput = {
 export type ObserveTraceSpansService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly TraceSpan[]>;
   get(ctx: ObservePlatformServiceContext, id: TraceSpanId): Promise<TraceSpan>;
-  create(ctx: ObservePlatformServiceContext, input: CreateTraceSpanInput): Promise<TraceSpan>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateTraceSpanInput): Promise<TraceSpan>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateTraceSpanInput,
+  ): Promise<TraceSpan>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateTraceSpanInput,
+  ): Promise<TraceSpan>;
 };
 
 export type CreateIncidentReferenceInput = {
@@ -521,9 +623,18 @@ export type UpdateIncidentReferenceInput = {
 
 export type ObserveIncidentReferencesService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly IncidentReference[]>;
-  get(ctx: ObservePlatformServiceContext, id: IncidentReferenceId): Promise<IncidentReference>;
-  create(ctx: ObservePlatformServiceContext, input: CreateIncidentReferenceInput): Promise<IncidentReference>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateIncidentReferenceInput): Promise<IncidentReference>;
+  get(
+    ctx: ObservePlatformServiceContext,
+    id: IncidentReferenceId,
+  ): Promise<IncidentReference>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateIncidentReferenceInput,
+  ): Promise<IncidentReference>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateIncidentReferenceInput,
+  ): Promise<IncidentReference>;
 };
 
 export type CreateMaintenanceWindowInput = {
@@ -551,9 +662,18 @@ export type UpdateMaintenanceWindowInput = {
 
 export type ObserveMaintenanceWindowsService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly MaintenanceWindow[]>;
-  get(ctx: ObservePlatformServiceContext, id: MaintenanceWindowId): Promise<MaintenanceWindow>;
-  create(ctx: ObservePlatformServiceContext, input: CreateMaintenanceWindowInput): Promise<MaintenanceWindow>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateMaintenanceWindowInput): Promise<MaintenanceWindow>;
+  get(
+    ctx: ObservePlatformServiceContext,
+    id: MaintenanceWindowId,
+  ): Promise<MaintenanceWindow>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateMaintenanceWindowInput,
+  ): Promise<MaintenanceWindow>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateMaintenanceWindowInput,
+  ): Promise<MaintenanceWindow>;
 };
 
 export type CreateHealthSummaryInput = {
@@ -582,8 +702,14 @@ export type UpdateHealthSummaryInput = {
 export type ObserveHealthSummariesService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly HealthSummary[]>;
   get(ctx: ObservePlatformServiceContext, id: HealthSummaryId): Promise<HealthSummary>;
-  create(ctx: ObservePlatformServiceContext, input: CreateHealthSummaryInput): Promise<HealthSummary>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateHealthSummaryInput): Promise<HealthSummary>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateHealthSummaryInput,
+  ): Promise<HealthSummary>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateHealthSummaryInput,
+  ): Promise<HealthSummary>;
 };
 
 export type CreateObservabilityMetadataInput = {
@@ -607,9 +733,18 @@ export type UpdateObservabilityMetadataInput = {
 
 export type ObserveMetadataFacetService = {
   list(ctx: ObservePlatformServiceContext): Promise<readonly ObservabilityMetadata[]>;
-  get(ctx: ObservePlatformServiceContext, id: ObservabilityMetadataId): Promise<ObservabilityMetadata>;
-  create(ctx: ObservePlatformServiceContext, input: CreateObservabilityMetadataInput): Promise<ObservabilityMetadata>;
-  update(ctx: ObservePlatformServiceContext, input: UpdateObservabilityMetadataInput): Promise<ObservabilityMetadata>;
+  get(
+    ctx: ObservePlatformServiceContext,
+    id: ObservabilityMetadataId,
+  ): Promise<ObservabilityMetadata>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreateObservabilityMetadataInput,
+  ): Promise<ObservabilityMetadata>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdateObservabilityMetadataInput,
+  ): Promise<ObservabilityMetadata>;
 };
 
 export type ObserveDiagnosticsHealth = {
@@ -661,11 +796,22 @@ export type UpdatePlatformDiagnosticInput = {
 export type ObserveDiagnosticsService = {
   health(ctx: ObservePlatformServiceContext): Promise<ObserveDiagnosticsHealth>;
   readiness(ctx: ObservePlatformServiceContext): Promise<ObserveDiagnosticsReadiness>;
-  capabilities(ctx: ObservePlatformServiceContext): Promise<ObserveDiagnosticsCapabilities>;
+  capabilities(
+    ctx: ObservePlatformServiceContext,
+  ): Promise<ObserveDiagnosticsCapabilities>;
   list(ctx: ObservePlatformServiceContext): Promise<readonly PlatformDiagnostic[]>;
-  get(ctx: ObservePlatformServiceContext, id: PlatformDiagnosticId): Promise<PlatformDiagnostic>;
-  create(ctx: ObservePlatformServiceContext, input: CreatePlatformDiagnosticInput): Promise<PlatformDiagnostic>;
-  update(ctx: ObservePlatformServiceContext, input: UpdatePlatformDiagnosticInput): Promise<PlatformDiagnostic>;
+  get(
+    ctx: ObservePlatformServiceContext,
+    id: PlatformDiagnosticId,
+  ): Promise<PlatformDiagnostic>;
+  create(
+    ctx: ObservePlatformServiceContext,
+    input: CreatePlatformDiagnosticInput,
+  ): Promise<PlatformDiagnostic>;
+  update(
+    ctx: ObservePlatformServiceContext,
+    input: UpdatePlatformDiagnosticInput,
+  ): Promise<PlatformDiagnostic>;
 };
 
 export type ObservePlatformGateway = {

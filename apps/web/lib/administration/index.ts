@@ -24,7 +24,4 @@ export {
   MOCK_ADMINISTRATION_MODULE,
 } from "./mock-administration-client";
 export * from "./administration-api";
-export {
-  clearAdministrationQueries,
-  administrationQueryKeys,
-} from "./query-keys";
+export { clearAdministrationQueries, administrationQueryKeys } from "./query-keys";

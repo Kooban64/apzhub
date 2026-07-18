@@ -15,13 +15,13 @@ Architecture index for the owner-approved **Shared HTTP Transport Layer**. Repla
 
 ## Package documentation
 
-| Document | Path |
-|----------|------|
-| HTTP Transport overview | [HTTP-TRANSPORT.md](../../packages/integration-sdk/docs/HTTP-TRANSPORT.md) |
-| Policies (retry, timeout, TLS, …) | [TRANSPORT-POLICIES.md](../../packages/integration-sdk/docs/TRANSPORT-POLICIES.md) |
-| Pipeline & interceptors | [TRANSPORT-PIPELINE.md](../../packages/integration-sdk/docs/TRANSPORT-PIPELINE.md) |
-| Diagnostics, metrics, logging | [TRANSPORT-DIAGNOSTICS.md](../../packages/integration-sdk/docs/TRANSPORT-DIAGNOSTICS.md) |
-| Adapter migration guide | [TRANSPORT-MIGRATION.md](../../packages/integration-sdk/docs/TRANSPORT-MIGRATION.md) |
+| Document                          | Path                                                                                     |
+| --------------------------------- | ---------------------------------------------------------------------------------------- |
+| HTTP Transport overview           | [HTTP-TRANSPORT.md](../../packages/integration-sdk/docs/HTTP-TRANSPORT.md)               |
+| Policies (retry, timeout, TLS, …) | [TRANSPORT-POLICIES.md](../../packages/integration-sdk/docs/TRANSPORT-POLICIES.md)       |
+| Pipeline & interceptors           | [TRANSPORT-PIPELINE.md](../../packages/integration-sdk/docs/TRANSPORT-PIPELINE.md)       |
+| Diagnostics, metrics, logging     | [TRANSPORT-DIAGNOSTICS.md](../../packages/integration-sdk/docs/TRANSPORT-DIAGNOSTICS.md) |
+| Adapter migration guide           | [TRANSPORT-MIGRATION.md](../../packages/integration-sdk/docs/TRANSPORT-MIGRATION.md)     |
 
 ---
 

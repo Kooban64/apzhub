@@ -94,7 +94,10 @@ export interface PlaneIssueRecord {
   readonly description_stripped?: string | null;
   readonly description?: string | null;
   readonly project?: string;
-  readonly state?: string | { readonly id: string; readonly group?: string; readonly name?: string } | null;
+  readonly state?:
+    | string
+    | { readonly id: string; readonly group?: string; readonly name?: string }
+    | null;
   readonly priority?: string | null;
   readonly assignees?: readonly string[] | readonly { readonly id: string }[];
   readonly labels?: readonly string[] | readonly { readonly id: string }[];

@@ -1,9 +1,9 @@
 # APZHUB Meilisearch Adapter Developer Guide
 
-| Field | Value |
-| --- | --- |
-| **Package** | `@apzhub/integration-meilisearch` **0.1.0** |
-| **Audience** | Adapter / platform engineers |
+| Field        | Value                                       |
+| ------------ | ------------------------------------------- |
+| **Package**  | `@apzhub/integration-meilisearch` **0.1.0** |
+| **Audience** | Adapter / platform engineers                |
 
 ## Create an adapter
 
@@ -32,7 +32,15 @@ import { createMockMeilisearchFetch } from "@apzhub/integration-meilisearch";
 
 const fetchFn = createMockMeilisearchFetch({
   seedDocuments: {
-    documents: [{ id: "1", title: "Hello", tenantId: "t1", productId: "documents", sourceId: "src_meili" }],
+    documents: [
+      {
+        id: "1",
+        title: "Hello",
+        tenantId: "t1",
+        productId: "documents",
+        sourceId: "src_meili",
+      },
+    ],
   },
 });
 ```

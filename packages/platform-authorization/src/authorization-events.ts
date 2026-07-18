@@ -1,4 +1,8 @@
-import type { PlatformAuthorizationEventId, RoleAssignment, PlatformRole } from "./authorization-types";
+import type {
+  PlatformAuthorizationEventId,
+  RoleAssignment,
+  PlatformRole,
+} from "./authorization-types";
 import { PLATFORM_AUTHORIZATION_EVENTS } from "./authorization-types";
 
 export interface AuthorizationEventPublisher {
@@ -13,11 +17,17 @@ export class InMemoryAuthorizationEventPublisher implements AuthorizationEventPu
   private readonly events: Record<string, unknown>[] = [];
 
   publishRoleCreated(role: PlatformRole): void {
-    this.record(PLATFORM_AUTHORIZATION_EVENTS.roleCreated, { roleId: role.roleId, slug: role.slug });
+    this.record(PLATFORM_AUTHORIZATION_EVENTS.roleCreated, {
+      roleId: role.roleId,
+      slug: role.slug,
+    });
   }
 
   publishRoleUpdated(role: PlatformRole): void {
-    this.record(PLATFORM_AUTHORIZATION_EVENTS.roleUpdated, { roleId: role.roleId, slug: role.slug });
+    this.record(PLATFORM_AUTHORIZATION_EVENTS.roleUpdated, {
+      roleId: role.roleId,
+      slug: role.slug,
+    });
   }
 
   publishAssignmentCreated(assignment: RoleAssignment): void {
@@ -40,7 +50,10 @@ export class InMemoryAuthorizationEventPublisher implements AuthorizationEventPu
     return [...this.events];
   }
 
-  private record(eventId: PlatformAuthorizationEventId, payload: Record<string, unknown>): void {
+  private record(
+    eventId: PlatformAuthorizationEventId,
+    payload: Record<string, unknown>,
+  ): void {
     this.events.push({
       eventId,
       occurredAt: new Date().toISOString(),

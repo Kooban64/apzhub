@@ -39,7 +39,9 @@ export type GlobalIdPrefix =
   | "suser"
   | "sart";
 
-export const ENTITY_TYPE_TO_PREFIX: Readonly<Record<CanonicalEntityType, GlobalIdPrefix>> = {
+export const ENTITY_TYPE_TO_PREFIX: Readonly<
+  Record<CanonicalEntityType, GlobalIdPrefix>
+> = {
   workspace: "ws",
   project: "proj",
   task: "task",
@@ -58,7 +60,9 @@ export const ENTITY_TYPE_TO_PREFIX: Readonly<Record<CanonicalEntityType, GlobalI
   support_article: "sart",
 };
 
-export const PREFIX_TO_ENTITY_TYPE: Readonly<Record<GlobalIdPrefix, CanonicalEntityType>> = {
+export const PREFIX_TO_ENTITY_TYPE: Readonly<
+  Record<GlobalIdPrefix, CanonicalEntityType>
+> = {
   ws: "workspace",
   proj: "project",
   task: "task",

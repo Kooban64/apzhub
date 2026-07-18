@@ -21,12 +21,12 @@ Deviations require an ADR and owner approval.
 
 ## 2. System of Record rules
 
-| Concern | Owner |
-| ------- | ----- |
-| Pipeline **execution** | External CI provider |
-| Quality, certification, release governance, traceability | **APZ TCMS** |
-| Canonical pipeline metadata after import | **APZ TCMS** (SoR) |
-| Live browse (optional) | Adapter → Provider → Platform Services (read-only) |
+| Concern                                                  | Owner                                              |
+| -------------------------------------------------------- | -------------------------------------------------- |
+| Pipeline **execution**                                   | External CI provider                               |
+| Quality, certification, release governance, traceability | **APZ TCMS**                                       |
+| Canonical pipeline metadata after import                 | **APZ TCMS** (SoR)                                 |
+| Live browse (optional)                                   | Adapter → Provider → Platform Services (read-only) |
 
 Adapters are **information providers**. They must not execute workflows, own runners, or download binaries unless a future milestone explicitly authorises it.
 
@@ -54,13 +54,13 @@ Internal REST client (package-private)
 Vendor CI API
 ```
 
-| Layer | May depend on | Must not depend on |
-| ----- | ------------- | ------------------ |
-| Workbench / typed client | HTTP `/api/v1/testing/*` only | Platform services, providers, adapters, SDK |
-| HTTP handlers | Gateway bootstrap, contracts, auth | Adapters, providers, testing-services, persistence |
-| Platform Services | Adapter **public** API via providers | Adapter `internal/`, vendor DTOs |
-| Adapter | Integration SDK, testing-contracts (canonical types) | `platform-services`, HTTP routes, MappingStore |
-| Parse-only `PipelineResultAdapter` | testing-contracts | Live network (parse only) |
+| Layer                              | May depend on                                        | Must not depend on                                 |
+| ---------------------------------- | ---------------------------------------------------- | -------------------------------------------------- |
+| Workbench / typed client           | HTTP `/api/v1/testing/*` only                        | Platform services, providers, adapters, SDK        |
+| HTTP handlers                      | Gateway bootstrap, contracts, auth                   | Adapters, providers, testing-services, persistence |
+| Platform Services                  | Adapter **public** API via providers                 | Adapter `internal/`, vendor DTOs                   |
+| Adapter                            | Integration SDK, testing-contracts (canonical types) | `platform-services`, HTTP routes, MappingStore     |
+| Parse-only `PipelineResultAdapter` | testing-contracts                                    | Live network (parse only)                          |
 
 ---
 
@@ -113,12 +113,12 @@ Factory: `create{Provider}Adapter()` / `dispose{Provider}Adapter()`.
 
 ## 6. Authentication
 
-| Requirement | Rule |
-| ----------- | ---- |
-| Primary mode | Document clearly (e.g. PAT) |
+| Requirement  | Rule                                                                          |
+| ------------ | ----------------------------------------------------------------------------- |
+| Primary mode | Document clearly (e.g. PAT)                                                   |
 | Placeholders | GitHub App / OAuth-style modes may be config placeholders only until approved |
-| Secrets | SecretProvider refs only; never in diagnostics, logs, or reports |
-| Headers | Via Shared HTTP Transport — no bespoke `fetch` outside transport |
+| Secrets      | SecretProvider refs only; never in diagnostics, logs, or reports              |
+| Headers      | Via Shared HTTP Transport — no bespoke `fetch` outside transport              |
 
 ---
 
@@ -167,12 +167,12 @@ HTTP/Workbench are separate milestones — adapter closeout does not require the
 
 ## 11. Testing (mandatory)
 
-| Requirement | Bar |
-| ----------- | --- |
-| Mocked contract tests | No live vendor account / network |
-| Coverage | ≥95% lines and functions on adapter `src/` (excl. tests) |
-| Scenarios | auth, list/get workflows & runs, jobs/steps, artifacts metadata, diagnostics, health, errors, rate limits, compatibility, capability discovery |
-| Boundary | Public surface never exports REST client / vendor DTOs |
+| Requirement           | Bar                                                                                                                                            |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Mocked contract tests | No live vendor account / network                                                                                                               |
+| Coverage              | ≥95% lines and functions on adapter `src/` (excl. tests)                                                                                       |
+| Scenarios             | auth, list/get workflows & runs, jobs/steps, artifacts metadata, diagnostics, health, errors, rate limits, compatibility, capability discovery |
+| Boundary              | Public surface never exports REST client / vendor DTOs                                                                                         |
 
 ---
 
@@ -201,11 +201,11 @@ Quality gates must pass before merge to main.
 
 Unless a future owner-approved milestone says otherwise:
 
-- Workflow dispatch / rerun / cancel / execution  
-- Binary artifact or log body download  
-- Repository management, Issues, PRs  
-- Event Bus, notifications, realtime, AI  
-- Adapter → Platform Services reverse dependency  
+- Workflow dispatch / rerun / cancel / execution
+- Binary artifact or log body download
+- Repository management, Issues, PRs
+- Event Bus, notifications, realtime, AI
+- Adapter → Platform Services reverse dependency
 
 ---
 

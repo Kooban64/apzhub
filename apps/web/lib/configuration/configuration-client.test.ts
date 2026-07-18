@@ -26,19 +26,27 @@ describe("APZCONFIG-003 configuration typed client", () => {
     expect(await client.listConfigurations()).toMatchObject({
       items: [{ id: "cfg_mock_1" }],
     });
-    expect((await client.createConfiguration({
-      namespaceKey: "platform",
-      key: "x",
-      displayName: "X",
-      valueKind: "string",
-      hierarchyLevel: "tenant",
-      scope: { kind: "tenant", tenantId: "tenant_a" },
-    })).id).toBe("cfg_new");
+    expect(
+      (
+        await client.createConfiguration({
+          namespaceKey: "platform",
+          key: "x",
+          displayName: "X",
+          valueKind: "string",
+          hierarchyLevel: "tenant",
+          scope: { kind: "tenant", tenantId: "tenant_a" },
+        })
+      ).id,
+    ).toBe("cfg_new");
     expect((await client.getCapabilities()).runtimeResolutionReady).toBe(false);
-    expect((await client.validateMetadata({
-      hierarchyLevel: "tenant",
-      scope: { kind: "tenant", tenantId: "tenant_a" },
-    })).valid).toBe(true);
+    expect(
+      (
+        await client.validateMetadata({
+          hierarchyLevel: "tenant",
+          scope: { kind: "tenant", tenantId: "tenant_a" },
+        })
+      ).valid,
+    ).toBe(true);
     expect(client).not.toHaveProperty("resolve");
     expect(client).not.toHaveProperty("getEffectiveConfiguration");
     expect(client).not.toHaveProperty("evaluateFlag");
@@ -66,7 +74,10 @@ describe("APZCONFIG-003 configuration typed client", () => {
           { status: 200 },
         );
       }
-      if (init?.method === "POST" && url.endsWith("/api/v1/configuration/configurations")) {
+      if (
+        init?.method === "POST" &&
+        url.endsWith("/api/v1/configuration/configurations")
+      ) {
         return new Response(
           JSON.stringify({
             data: {
@@ -233,7 +244,15 @@ describe("APZCONFIG-003 configuration typed client", () => {
           },
         ]);
       }
-      if (url.includes("/namespaces/ns_1")) return single({ id: "ns_1", tenantId: "tenant_a", key: "platform", name: "Platform", createdAt: "2026-07-16T12:00:00.000Z", updatedAt: "2026-07-16T12:00:00.000Z" });
+      if (url.includes("/namespaces/ns_1"))
+        return single({
+          id: "ns_1",
+          tenantId: "tenant_a",
+          key: "platform",
+          name: "Platform",
+          createdAt: "2026-07-16T12:00:00.000Z",
+          updatedAt: "2026-07-16T12:00:00.000Z",
+        });
       if (url.includes("/groups") && method === "GET") {
         return collection([
           {
@@ -326,10 +345,17 @@ describe("APZCONFIG-003 configuration typed client", () => {
         });
       }
       if (url.includes("/references") && method === "GET") {
-        return collection([{ id: "ref_1", configurationId: "cfg_1", kind: "projects", resourceId: "p1" }]);
+        return collection([
+          { id: "ref_1", configurationId: "cfg_1", kind: "projects", resourceId: "p1" },
+        ]);
       }
       if (url.includes("/references/ref_1")) {
-        return single({ id: "ref_1", configurationId: "cfg_1", kind: "projects", resourceId: "p1" });
+        return single({
+          id: "ref_1",
+          configurationId: "cfg_1",
+          kind: "projects",
+          resourceId: "p1",
+        });
       }
       if (url.includes("/audit") && method === "GET") {
         return collection([
@@ -346,7 +372,8 @@ describe("APZCONFIG-003 configuration typed client", () => {
       if (url.includes("/health")) return single({ status: "ok" });
       if (url.includes("/readiness")) return single({ ready: true });
       if (url.includes("/diagnostics")) return single({ checks: [] });
-      if (method === "POST" && url.includes("/validate")) return single({ valid: true, errors: [] });
+      if (method === "POST" && url.includes("/validate"))
+        return single({ valid: true, errors: [] });
       if (method === "POST") return single(cfg);
       if (method === "PATCH") return single({ ...cfg, revision: 2 });
       if (url.includes("/configurations/cfg_1") && method === "GET") return single(cfg);
@@ -399,14 +426,15 @@ describe("APZCONFIG-003 configuration typed client", () => {
   it("HTTP client maps error envelopes with status codes", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(async () =>
-        new Response(
-          JSON.stringify({
-            error: { code: "FORBIDDEN", message: "Denied" },
-            meta: { requestId: "r1", correlationId: "c1" },
-          }),
-          { status: 403 },
-        ),
+      vi.fn(
+        async () =>
+          new Response(
+            JSON.stringify({
+              error: { code: "FORBIDDEN", message: "Denied" },
+              meta: { requestId: "r1", correlationId: "c1" },
+            }),
+            { status: 403 },
+          ),
       ),
     );
     const client = createHttpConfigurationClient();
@@ -416,7 +444,9 @@ describe("APZCONFIG-003 configuration typed client", () => {
   });
 
   it("assertConfigurationApiPath rejects forbidden segments", () => {
-    expect(() => assertConfigurationApiPath("/api/v1/configuration/configurations")).not.toThrow();
+    expect(() =>
+      assertConfigurationApiPath("/api/v1/configuration/configurations"),
+    ).not.toThrow();
     for (const segment of CONFIGURATION_FORBIDDEN_HTTP_SEGMENTS) {
       expect(() =>
         assertConfigurationApiPath(`/api/v1/configuration/${segment}`),

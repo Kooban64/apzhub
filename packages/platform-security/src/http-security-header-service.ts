@@ -64,7 +64,10 @@ export class HttpSecurityHeaderService {
         key: HTTP_SECURITY_HEADER_NAMES.referrerPolicy,
         value: "strict-origin-when-cross-origin",
       },
-      { key: HTTP_SECURITY_HEADER_NAMES.permissionsPolicy, value: PERMISSIONS_POLICY_VALUE },
+      {
+        key: HTTP_SECURITY_HEADER_NAMES.permissionsPolicy,
+        value: PERMISSIONS_POLICY_VALUE,
+      },
       {
         key: HTTP_SECURITY_HEADER_NAMES.crossOriginOpenerPolicy,
         value: "same-origin-allow-popups",
@@ -104,10 +107,7 @@ export class HttpSecurityHeaderService {
     );
   }
 
-  applyToHeaders(
-    headers: Headers,
-    input: HttpSecurityHeaderBuildInput,
-  ): Headers {
+  applyToHeaders(headers: Headers, input: HttpSecurityHeaderBuildInput): Headers {
     for (const entry of this.buildHeaderEntries(input)) {
       headers.set(entry.key, entry.value);
     }
@@ -132,9 +132,13 @@ export class HttpSecurityHeaderService {
     });
   }
 
-  buildComplianceReport(input: HttpSecurityHeaderBuildInput): HttpHeaderComplianceReport {
+  buildComplianceReport(
+    input: HttpSecurityHeaderBuildInput,
+  ): HttpHeaderComplianceReport {
     const entries = this.buildHeaderEntries(input);
-    const entryMap = new Map(entries.map((entry) => [entry.key.toLowerCase(), entry.value]));
+    const entryMap = new Map(
+      entries.map((entry) => [entry.key.toLowerCase(), entry.value]),
+    );
     const surface = input.surface ?? "page";
 
     const requiredNames = this.getRequiredHeaderNames(input.isProduction);
@@ -169,7 +173,9 @@ export class HttpSecurityHeaderService {
       });
     }
 
-    const missing = headers.filter((item) => item.required && !item.present).map((item) => item.name);
+    const missing = headers
+      .filter((item) => item.required && !item.present)
+      .map((item) => item.name);
 
     return {
       compliant: missing.length === 0,
@@ -190,7 +196,9 @@ export class HttpSecurityHeaderService {
     readonly results: readonly HttpHeaderComplianceReport[];
   } {
     const isProduction = process.env.NODE_ENV === "production";
-    const samples = PLATFORM_HTTP_ENDPOINT_SAMPLES.filter((sample) => sample.app === app);
+    const samples = PLATFORM_HTTP_ENDPOINT_SAMPLES.filter(
+      (sample) => sample.app === app,
+    );
     const results = samples.map((sample) =>
       this.buildComplianceReport({
         app: sample.app,
@@ -228,7 +236,9 @@ export class HttpSecurityHeaderService {
     return names;
   }
 
-  private getEnvironmentDifferences(app: CspAppProfile): HttpHeaderEnvironmentDifference[] {
+  private getEnvironmentDifferences(
+    app: CspAppProfile,
+  ): HttpHeaderEnvironmentDifference[] {
     const dev = this.buildHeaderEntries({ app, isProduction: false, surface: "page" });
     const prod = this.buildHeaderEntries({ app, isProduction: true, surface: "page" });
     const devMap = new Map(dev.map((entry) => [entry.key, entry.value]));

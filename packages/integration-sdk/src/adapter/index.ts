@@ -1,12 +1,7 @@
 export type { AdapterBase, PlaceholderAdapterBaseOptions } from "./types";
-export {
-  PlaceholderAdapterBase,
-  createPlaceholderAdapterBase,
-} from "./placeholder";
+export { PlaceholderAdapterBase, createPlaceholderAdapterBase } from "./placeholder";
 
-export type {
-  IntegrationCapabilityId,
-} from "./capability-types";
+export type { IntegrationCapabilityId } from "./capability-types";
 export {
   INTEGRATION_CAPABILITIES,
   isIntegrationCapabilityId,

@@ -39,15 +39,24 @@ export function createPlaneUserProvider(): UserProvider {
       throwUnsupportedProviderOperation(ctx.correlationId, "user.getUser");
     },
 
-    async getUserByEmail(ctx: ServiceRequestContext, _email: string): Promise<User | null> {
+    async getUserByEmail(
+      ctx: ServiceRequestContext,
+      _email: string,
+    ): Promise<User | null> {
       throwUnsupportedProviderOperation(ctx.correlationId, "user.getUserByEmail");
     },
 
-    async getUserProfile(ctx: ServiceRequestContext, _userId: UserId): Promise<UserProfile> {
+    async getUserProfile(
+      ctx: ServiceRequestContext,
+      _userId: UserId,
+    ): Promise<UserProfile> {
       throwUnsupportedProviderOperation(ctx.correlationId, "user.getUserProfile");
     },
 
-    async createUser(ctx: ServiceRequestContext, _input: CreateUserInput): Promise<User> {
+    async createUser(
+      ctx: ServiceRequestContext,
+      _input: CreateUserInput,
+    ): Promise<User> {
       throwUnsupportedProviderOperation(ctx.correlationId, "user.createUser");
     },
 
@@ -67,7 +76,10 @@ export function createPlaneUserProvider(): UserProvider {
  */
 export function createPlaneSearchProvider(): SearchProvider {
   return {
-    async search(_ctx: ServiceRequestContext, _input: SearchQueryInput): Promise<SearchResult> {
+    async search(
+      _ctx: ServiceRequestContext,
+      _input: SearchQueryInput,
+    ): Promise<SearchResult> {
       return {
         status: "empty",
         documents: [],

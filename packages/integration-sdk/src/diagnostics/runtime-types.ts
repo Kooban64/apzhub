@@ -6,7 +6,9 @@ import type { IntegrationLifecycleState } from "../lifecycle/types";
 
 export interface IntegrationErrorSummary {
   readonly totalErrors: number;
-  readonly errorsByCategory: Readonly<Partial<Record<IntegrationErrorCategory, number>>>;
+  readonly errorsByCategory: Readonly<
+    Partial<Record<IntegrationErrorCategory, number>>
+  >;
   readonly lastErrorAt?: string;
   readonly lastErrorCode?: string;
   readonly lastErrorCategory?: IntegrationErrorCategory;

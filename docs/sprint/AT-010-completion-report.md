@@ -43,7 +43,7 @@ Establish the public Activity Timeline Service as the stable client-facing API â
 | Artifact                       | Path                                                                                          |
 | ------------------------------ | --------------------------------------------------------------------------------------------- |
 | Activity Timeline Service spec | [SPR-007-ATF-activity-timeline-service.md](../specs/SPR-007-ATF-activity-timeline-service.md) |
-| React service API doc          | [REACT-SERVICE-API.md](../packages/activity-timeline-framework/docs/REACT-SERVICE-API.md)     |
+| React service API doc          | [REACT-SERVICE-API.md](../../packages/activity-timeline-framework/docs/REACT-SERVICE-API.md)  |
 | Public service interface       | `src/client/service/activity-timeline-service.ts`                                             |
 | Default implementation         | `src/client/service/default-activity-timeline-service.ts`                                     |
 | React provider + hook          | `src/react/activity-timeline-service-context.tsx`, `use-activity-service.ts`                  |

@@ -29,14 +29,14 @@ Initiate recovery when:
 
 ## Failure-specific guidance
 
-| Failure | Operator action |
-|---------|-----------------|
-| Database unavailable | Restore PostgreSQL; verify migrations; re-check readiness |
-| Redis unavailable | Restore Redis; expect rate-limit/session cache degradation until healthy |
-| Configuration invalid | Fix environment variables; restart process if required |
-| Bootstrap failure | Review runtime bootstrap logs and manifest discovery |
-| Authorization missing | Verify platform authorization service initialization |
-| Product unavailable | Restore product diagnostics after platform core is healthy |
+| Failure               | Operator action                                                          |
+| --------------------- | ------------------------------------------------------------------------ |
+| Database unavailable  | Restore PostgreSQL; verify migrations; re-check readiness                |
+| Redis unavailable     | Restore Redis; expect rate-limit/session cache degradation until healthy |
+| Configuration invalid | Fix environment variables; restart process if required                   |
+| Bootstrap failure     | Review runtime bootstrap logs and manifest discovery                     |
+| Authorization missing | Verify platform authorization service initialization                     |
+| Product unavailable   | Restore product diagnostics after platform core is healthy               |
 
 Recovery guidance is also available via `@apzhub/platform-security` `buildRecoveryGuidance()`.
 

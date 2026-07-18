@@ -61,9 +61,7 @@ export function TestingWorkspaceRouter({
     case "plans":
       return <TestingPlansView permissions={permissions} />;
     case "plan-detail":
-      return (
-        <TestingPlansView planId={route.planId} permissions={permissions} />
-      );
+      return <TestingPlansView planId={route.planId} permissions={permissions} />;
     case "suites":
       return <TestingSuitesView permissions={permissions} />;
     case "cases":

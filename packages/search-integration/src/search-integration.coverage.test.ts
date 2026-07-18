@@ -73,15 +73,11 @@ describe("APZSEARCH-009 residual coverage", () => {
       metadata: { ok: "1", meiliUid: "x" },
     });
     expect(orgMismatch.valid).toBe(false);
-    expect(
-      orgMismatch.issues.some((i) => i.code === "organisation_mismatch"),
-    ).toBe(true);
-    expect(orgMismatch.issues.some((i) => i.field === "classification")).toBe(
+    expect(orgMismatch.issues.some((i) => i.code === "organisation_mismatch")).toBe(
       true,
     );
-    expect(orgMismatch.issues.some((i) => i.field === "lifecycleState")).toBe(
-      true,
-    );
+    expect(orgMismatch.issues.some((i) => i.field === "classification")).toBe(true);
+    expect(orgMismatch.issues.some((i) => i.field === "lifecycleState")).toBe(true);
 
     const productMismatch = validator.validate(context, {
       id: "d2",
@@ -186,7 +182,7 @@ describe("APZSEARCH-009 residual coverage", () => {
         getMetrics: () => fw.metrics,
       } as never,
     });
-    expect(broken.diagnostics(context).frameworkVersion).toBe("0.1.0");
+    expect(broken.diagnostics(context).frameworkVersion).toBe("0.2.0");
     expect(broken.statistics(context).failures).toBeGreaterThanOrEqual(0);
   });
 

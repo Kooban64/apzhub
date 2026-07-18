@@ -8,11 +8,11 @@
 
 ## Capabilities
 
-| Service | Adapter surface | Plane CE mapping |
-|---------|-----------------|------------------|
-| `PlaneCommentService` | `adapter.core.comments` | Issue comments |
-| `PlaneActivityService` | `adapter.core.activity` | Issue history (+ project aggregation) |
-| `PlaneWatcherService` | `adapter.core.watchers` | Issue subscribers |
+| Service                 | Adapter surface          | Plane CE mapping                        |
+| ----------------------- | ------------------------ | --------------------------------------- |
+| `PlaneCommentService`   | `adapter.core.comments`  | Issue comments                          |
+| `PlaneActivityService`  | `adapter.core.activity`  | Issue history (+ project aggregation)   |
+| `PlaneWatcherService`   | `adapter.core.watchers`  | Issue subscribers                       |
 | `PlaneAnalyticsService` | `adapter.core.analytics` | Project stats, cycle progress/analytics |
 
 ---
@@ -51,13 +51,13 @@ Plane subscribers exposed as APZHUB `Watcher`:
 
 ## Project intelligence (read-only)
 
-| Method | Source |
-|--------|--------|
+| Method                 | Source                                                                               |
+| ---------------------- | ------------------------------------------------------------------------------------ |
 | `getProjectStatistics` | `project-stats` + issue list derivation (distributions, overdue, blocked, workloads) |
-| `getTaskStatistics` | Issue get + comment/watcher counts |
-| `getCycleProgress` | `.../cycles/{id}/progress/` |
-| `getVelocitySnapshot` | `.../cycles/{id}/analytics/` |
-| `getBurndownSnapshot` | progress + analytics + cycle dates |
+| `getTaskStatistics`    | Issue get + comment/watcher counts                                                   |
+| `getCycleProgress`     | `.../cycles/{id}/progress/`                                                          |
+| `getVelocitySnapshot`  | `.../cycles/{id}/analytics/`                                                         |
+| `getBurndownSnapshot`  | progress + analytics + cycle dates                                                   |
 
 Canonical models: `ProjectStatistics`, `TaskStatistics`, `VelocitySnapshot`, `BurndownSnapshot`, `CycleProgressSnapshot`.
 

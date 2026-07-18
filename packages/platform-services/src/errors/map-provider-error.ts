@@ -25,21 +25,22 @@ const INTEGRATION_TO_PLATFORM_CATEGORY: Readonly<
   internal: "system",
 };
 
-const INTEGRATION_TO_PLATFORM_CODE: Readonly<Record<string, PlatformServiceErrorCode>> = {
-  authentication: "UNAUTHENTICATED",
-  authorization: "FORBIDDEN",
-  validation: "VALIDATION_FAILED",
-  not_found: "NOT_FOUND",
-  conflict: "CONFLICT",
-  rate_limited: "TEMPORARY_FAILURE",
-  vendor_unavailable: "INTEGRATION_UNAVAILABLE",
-  timeout: "TEMPORARY_FAILURE",
-  mapping: "CONFIGURATION_ERROR",
-  provisioning: "CONFIGURATION_ERROR",
-  version_incompatible: "CONFIGURATION_ERROR",
-  not_implemented: "CONFIGURATION_ERROR",
-  internal: "INTERNAL_ERROR",
-};
+const INTEGRATION_TO_PLATFORM_CODE: Readonly<Record<string, PlatformServiceErrorCode>> =
+  {
+    authentication: "UNAUTHENTICATED",
+    authorization: "FORBIDDEN",
+    validation: "VALIDATION_FAILED",
+    not_found: "NOT_FOUND",
+    conflict: "CONFLICT",
+    rate_limited: "TEMPORARY_FAILURE",
+    vendor_unavailable: "INTEGRATION_UNAVAILABLE",
+    timeout: "TEMPORARY_FAILURE",
+    mapping: "CONFIGURATION_ERROR",
+    provisioning: "CONFIGURATION_ERROR",
+    version_incompatible: "CONFIGURATION_ERROR",
+    not_implemented: "CONFIGURATION_ERROR",
+    internal: "INTERNAL_ERROR",
+  };
 
 function mapIntegrationError(
   error: IntegrationError,
@@ -79,7 +80,10 @@ export function mapProviderError(error: unknown, correlationId: string): never {
     (error as { error: IntegrationError }).error !== null &&
     "category" in (error as { error: IntegrationError }).error
   ) {
-    throw mapIntegrationError((error as { error: IntegrationError }).error, correlationId);
+    throw mapIntegrationError(
+      (error as { error: IntegrationError }).error,
+      correlationId,
+    );
   }
 
   throw new PlatformServiceError({
@@ -119,10 +123,7 @@ export function throwUnsupportedProviderOperation(
 }
 
 /** Throws when no provider is registered for a capability. */
-export function throwMissingProvider(
-  correlationId: string,
-  capability: string,
-): never {
+export function throwMissingProvider(correlationId: string, capability: string): never {
   throw new PlatformServiceError({
     category: "configuration",
     code: "CONFIGURATION_ERROR",

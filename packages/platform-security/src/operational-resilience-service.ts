@@ -38,12 +38,17 @@ export class OperationalResilienceService {
     return {
       status: ready ? "healthy" : "unhealthy",
       timestamp: new Date().toISOString(),
-      message: ready ? "Platform is ready to serve traffic." : "One or more readiness checks failed.",
+      message: ready
+        ? "Platform is ready to serve traffic."
+        : "One or more readiness checks failed.",
     };
   }
 
   async getDependencyHealth(): Promise<readonly DependencyHealthSignal[]> {
-    const [database, redis] = await Promise.all([checkDatabaseHealth(), checkRedisHealth()]);
+    const [database, redis] = await Promise.all([
+      checkDatabaseHealth(),
+      checkRedisHealth(),
+    ]);
 
     return [
       mapDependency("database", database.ok, database.latencyMs, database.message),
@@ -51,7 +56,9 @@ export class OperationalResilienceService {
     ];
   }
 
-  async getResilienceSnapshot(input: ResilienceProbeInput = {}): Promise<OperationalResilienceSnapshot> {
+  async getResilienceSnapshot(
+    input: ResilienceProbeInput = {},
+  ): Promise<OperationalResilienceSnapshot> {
     const [liveness, readiness, dependencies, environment] = await Promise.all([
       this.getLiveness(),
       this.getReadiness(input),
@@ -60,8 +67,10 @@ export class OperationalResilienceService {
     ]);
 
     const runtimeReady = input.runtimeReady ?? true;
-    const databaseOk = dependencies.find((dep) => dep.name === "database")?.status === "healthy";
-    const redisOk = dependencies.find((dep) => dep.name === "redis")?.status === "healthy";
+    const databaseOk =
+      dependencies.find((dep) => dep.name === "database")?.status === "healthy";
+    const redisOk =
+      dependencies.find((dep) => dep.name === "redis")?.status === "healthy";
 
     const healthStatus: HealthSignalStatus =
       readiness.status === "healthy"

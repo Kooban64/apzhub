@@ -1,4 +1,7 @@
-import { PlatformServiceError, isPlatformServiceError } from "@apzhub/platform-service-contracts";
+import {
+  PlatformServiceError,
+  isPlatformServiceError,
+} from "@apzhub/platform-service-contracts";
 
 function readErrorCode(error: unknown): string | undefined {
   let current: unknown = error;

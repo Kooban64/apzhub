@@ -31,7 +31,9 @@ export interface PlaneRestClientOptions {
   readonly getAuth: () => Promise<PlaneRestClientAuth>;
 }
 
-function toQueryRecord(query?: PlaneListQuery): Record<string, string | number | boolean> | undefined {
+function toQueryRecord(
+  query?: PlaneListQuery,
+): Record<string, string | number | boolean> | undefined {
   if (!query) {
     return undefined;
   }
@@ -79,7 +81,13 @@ export class PlaneRestClient {
     context: IntegrationRequestContext,
     query?: PlaneListQuery,
   ): Promise<PlanePaginatedResponse<PlaneWorkspaceResponse>> {
-    return this.request(context, "GET", "/api/workspaces/", undefined, toQueryRecord(query));
+    return this.request(
+      context,
+      "GET",
+      "/api/workspaces/",
+      undefined,
+      toQueryRecord(query),
+    );
   }
 
   async getWorkspace(
@@ -146,7 +154,9 @@ export class PlaneRestClient {
     context: IntegrationRequestContext,
     projectId: string,
   ): Promise<PlaneProjectRecord> {
-    return this.updateProject(context, projectId, { archived_at: new Date().toISOString() });
+    return this.updateProject(context, projectId, {
+      archived_at: new Date().toISOString(),
+    });
   }
 
   async listStates(
@@ -337,7 +347,9 @@ export class PlaneRestClient {
     projectId: string,
     cycleId: string,
   ): Promise<PlaneCycleRecord> {
-    return this.updateCycle(context, projectId, cycleId, { archived_at: new Date().toISOString() });
+    return this.updateCycle(context, projectId, cycleId, {
+      archived_at: new Date().toISOString(),
+    });
   }
 
   async listModules(
@@ -537,7 +549,9 @@ export class PlaneRestClient {
     projectId: string,
     issueId: string,
     query?: PlaneListQuery,
-  ): Promise<PlanePaginatedResponse<PlaneCommentRecord> | readonly PlaneCommentRecord[]> {
+  ): Promise<
+    PlanePaginatedResponse<PlaneCommentRecord> | readonly PlaneCommentRecord[]
+  > {
     return this.request(
       context,
       "GET",
@@ -607,7 +621,9 @@ export class PlaneRestClient {
     projectId: string,
     issueId: string,
     query?: PlaneListQuery,
-  ): Promise<readonly PlaneActivityRecord[] | PlanePaginatedResponse<PlaneActivityRecord>> {
+  ): Promise<
+    readonly PlaneActivityRecord[] | PlanePaginatedResponse<PlaneActivityRecord>
+  > {
     return this.request(
       context,
       "GET",
@@ -622,7 +638,9 @@ export class PlaneRestClient {
     projectId: string,
     issueId: string,
     query?: PlaneListQuery,
-  ): Promise<PlanePaginatedResponse<PlaneSubscriberRecord> | readonly PlaneSubscriberRecord[]> {
+  ): Promise<
+    PlanePaginatedResponse<PlaneSubscriberRecord> | readonly PlaneSubscriberRecord[]
+  > {
     return this.request(
       context,
       "GET",
@@ -699,7 +717,9 @@ export class PlaneRestClient {
   async listWebhooks(
     context: IntegrationRequestContext,
     query?: PlaneListQuery,
-  ): Promise<PlanePaginatedResponse<PlaneWebhookRecord> | readonly PlaneWebhookRecord[]> {
+  ): Promise<
+    PlanePaginatedResponse<PlaneWebhookRecord> | readonly PlaneWebhookRecord[]
+  > {
     return this.request(
       context,
       "GET",

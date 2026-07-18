@@ -68,13 +68,13 @@ Additive Support resources/types in contracts v0.6.0:
 
 ## Metrics
 
-| Metric | Purpose |
-| --- | --- |
-| `zammad.sync.duration_ms` | Sync duration |
-| `zammad.sync.throughput` / `failures` / `retries` | Sync outcomes |
-| `zammad.provider.latency_ms` | Provider latency |
+| Metric                                             | Purpose           |
+| -------------------------------------------------- | ----------------- |
+| `zammad.sync.duration_ms`                          | Sync duration     |
+| `zammad.sync.throughput` / `failures` / `retries`  | Sync outcomes     |
+| `zammad.provider.latency_ms`                       | Provider latency  |
 | `zammad.event.throughput` / `translation_failures` | Event translation |
-| `zammad.webhook.registration` | Webhook CRUD |
+| `zammad.webhook.registration`                      | Webhook CRUD      |
 
 ---
 
@@ -106,36 +106,36 @@ Additive Support resources/types in contracts v0.6.0:
 
 ## Package versions
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/integration-zammad` | **0.5.0** |
+| Package                              | Version   |
+| ------------------------------------ | --------- |
+| `@apzhub/integration-zammad`         | **0.5.0** |
 | `@apzhub/platform-service-contracts` | **0.6.0** |
 
 ---
 
 ## Tests & coverage
 
-| Suite | Result |
-| --- | --- |
-| Plane + Zammad + contracts | **197 passed** |
-| Sync / webhooks / events / diagnostics / metrics / rate limit / capabilities | Covered |
-| Package lines | **~90.7%** |
-| `ZammadSyncService` lines | **~96.6%** |
-| `ZammadWebhookService` lines | **~89.5%** |
-| `ZammadEventService` lines | **~97.2%** |
-| Event translator lines | **~83.3%** |
+| Suite                                                                        | Result         |
+| ---------------------------------------------------------------------------- | -------------- |
+| Plane + Zammad + contracts                                                   | **197 passed** |
+| Sync / webhooks / events / diagnostics / metrics / rate limit / capabilities | Covered        |
+| Package lines                                                                | **~90.7%**     |
+| `ZammadSyncService` lines                                                    | **~96.6%**     |
+| `ZammadWebhookService` lines                                                 | **~89.5%**     |
+| `ZammadEventService` lines                                                   | **~97.2%**     |
+| Event translator lines                                                       | **~83.3%**     |
 
 ---
 
 ## Quality gates
 
-| Gate | Result |
-| --- | --- |
-| Lint (zammad + contracts) | **Pass** |
-| Typecheck (zammad + contracts) | **Pass** |
-| Tests (regression) | **Pass** |
-| Coverage (zammad package) | **~90.7%** lines |
-| `pnpm build` (apps/web) | Pre-existing Next.js `/_not-found` failure — unrelated |
+| Gate                           | Result                                                 |
+| ------------------------------ | ------------------------------------------------------ |
+| Lint (zammad + contracts)      | **Pass**                                               |
+| Typecheck (zammad + contracts) | **Pass**                                               |
+| Tests (regression)             | **Pass**                                               |
+| Coverage (zammad package)      | **~90.7%** lines                                       |
+| `pnpm build` (apps/web)        | Pre-existing Next.js `/_not-found` failure — unrelated |
 
 ---
 
@@ -151,14 +151,14 @@ Additive Support resources/types in contracts v0.6.0:
 
 ## Comparison against the Plane Reference Adapter
 
-| Pattern | Plane | Zammad (OSS-102-06) |
-| --- | --- | --- |
-| Core surface | `webhooks` / `events` / `synchronisation` | Same |
-| Sync | In-memory + resume tokens | Same |
-| Webhooks | Registration only | Same |
-| Events | Translate, ignore unknown | Same (Support resources) |
-| Diagnostics | `syncEventsCapability` | Same shape |
-| Domain DTOs | Project/Task | Support request/article/org/group/user |
+| Pattern      | Plane                                     | Zammad (OSS-102-06)                    |
+| ------------ | ----------------------------------------- | -------------------------------------- |
+| Core surface | `webhooks` / `events` / `synchronisation` | Same                                   |
+| Sync         | In-memory + resume tokens                 | Same                                   |
+| Webhooks     | Registration only                         | Same                                   |
+| Events       | Translate, ignore unknown                 | Same (Support resources)               |
+| Diagnostics  | `syncEventsCapability`                    | Same shape                             |
+| Domain DTOs  | Project/Task                              | Support request/article/org/group/user |
 
 Architecture remains frozen to the Reference Adapter Standard.
 

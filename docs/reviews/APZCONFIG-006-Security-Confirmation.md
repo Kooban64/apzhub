@@ -5,26 +5,26 @@
 
 ## Reconfirmed
 
-| Control | Status |
-| --- | --- |
-| Tenant isolation | Retained |
-| Organisation isolation | Retained |
-| Immutable published versions | Retained |
+| Control                                  | Status   |
+| ---------------------------------------- | -------- |
+| Tenant isolation                         | Retained |
+| Organisation isolation                   | Retained |
+| Immutable published versions             | Retained |
 | Audit integrity (read-only, safe fields) | Retained |
-| Validation integrity (declarative only) | Retained |
-| Safe value handling / redaction notices | Retained |
+| Validation integrity (declarative only)  | Retained |
+| Safe value handling / redaction notices  | Retained |
 | Production Authorization deny-by-default | Retained |
-| RequestPipeline on all gateway facets | Retained |
+| RequestPipeline on all gateway facets    | Retained |
 
 ## Confirmed absent
 
-| Capability | Status |
-| --- | --- |
+| Capability                               | Status           |
+| ---------------------------------------- | ---------------- |
 | Runtime configuration resolution / apply | Absent by design |
-| Feature flags | Absent by design |
-| Secrets / Vault | Absent by design |
-| Event Bus | Absent by design |
-| Env / Kubernetes injection | Absent by design |
+| Feature flags                            | Absent by design |
+| Secrets / Vault                          | Absent by design |
+| Event Bus                                | Absent by design |
+| Env / Kubernetes injection               | Absent by design |
 
 ## Verdict
 

@@ -99,10 +99,7 @@ export function mapDocumentClassification(
   }
 }
 
-function navigationTarget(
-  entityType: DocumentsSearchEntityType,
-  id: string,
-): string {
+function navigationTarget(entityType: DocumentsSearchEntityType, id: string): string {
   switch (entityType) {
     case "document":
       return `/workspace/documents/${id}`;
@@ -152,9 +149,7 @@ function retentionMetadata(
   };
 }
 
-function generationMetadata(
-  doc: Document,
-): Record<string, string> {
+function generationMetadata(doc: Document): Record<string, string> {
   const ref = doc.generationRef;
   if (!ref) return {};
   return {
@@ -214,9 +209,7 @@ export class DocumentsSearchEntityMapper {
     if (!document.classification?.code) {
       throw new Error("classification is required on Document — fail-closed");
     }
-    const classification = mapDocumentClassification(
-      document.classification.code,
-    );
+    const classification = mapDocumentClassification(document.classification.code);
     const currentVersion = extras?.currentVersion;
     const retention = extras?.retention;
     // Primary document draft may carry current-version metadata only (no binary).
@@ -272,9 +265,7 @@ export class DocumentsSearchEntityMapper {
       navigationTarget: navigationTarget("document", document.id),
       sourceId: "documents:document",
       ownerUserId: document.owner?.userId ?? document.creatorUserId,
-      version: currentVersion
-        ? String(currentVersion.versionNumber)
-        : undefined,
+      version: currentVersion ? String(currentVersion.versionNumber) : undefined,
     };
   }
 
@@ -384,9 +375,7 @@ export class DocumentsSearchEntityMapper {
       classification: context.classification ?? "internal",
       permissions: [...context.permissions],
       metadata: {
-        ...(folder.parentFolderId
-          ? { parentFolderId: folder.parentFolderId }
-          : {}),
+        ...(folder.parentFolderId ? { parentFolderId: folder.parentFolderId } : {}),
         ...(safePath ? { path: safePath } : {}),
       },
       keywords: [folder.name, ...(safePath ? [safePath] : [])],

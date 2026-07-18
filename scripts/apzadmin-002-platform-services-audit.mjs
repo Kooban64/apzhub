@@ -24,7 +24,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -41,7 +42,11 @@ function scan(files, rules) {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       const trimmed = line.trim();
-      if (trimmed.startsWith("//") || trimmed.startsWith("*") || trimmed.startsWith("/*")) {
+      if (
+        trimmed.startsWith("//") ||
+        trimmed.startsWith("*") ||
+        trimmed.startsWith("/*")
+      ) {
         continue;
       }
       for (const rule of rules) {
@@ -69,9 +74,15 @@ if (!existsSync(join(ROOT, adminDir))) {
 } else {
   scan(walk(join(ROOT, adminDir)), [
     { rule: "no-http-routes", pattern: /\/api\/v1\/|NextRequest|createRouteHandler/ },
-    { rule: "no-workbench", pattern: /workbench-framework|\/workspace\/administration/ },
+    {
+      rule: "no-workbench",
+      pattern: /workbench-framework|\/workspace\/administration/,
+    },
     { rule: "no-user-mgmt-ui", pattern: /UserManagement|RoleEditor|TenantAdminUi/ },
-    { rule: "no-runtime-admin", pattern: /\b(executeAdminAction|liveProbe|runtimeAdminExecute)\b/ },
+    {
+      rule: "no-runtime-admin",
+      pattern: /\b(executeAdminAction|liveProbe|runtimeAdminExecute)\b/,
+    },
     { rule: "no-event-bus", pattern: /EventBus|publishEvent\(/ },
   ]);
 }
@@ -81,12 +92,16 @@ if (!existsSync(join(ROOT, adminDir))) {
     join(ROOT, "packages/platform-services/src/gateway/platform-service-gateway.ts"),
     "utf8",
   );
-  if (!gateway.includes("administrationApi") || !gateway.includes("get administration(")) {
+  if (
+    !gateway.includes("administrationApi") ||
+    !gateway.includes("get administration(")
+  ) {
     violations.push({
       file: "packages/platform-services/src/gateway/platform-service-gateway.ts",
       line: 1,
       rule: "gateway-administration-facet",
-      detail: "PlatformServiceGateway must expose administrationApi and get administration()",
+      detail:
+        "PlatformServiceGateway must expose administrationApi and get administration()",
     });
   }
 }
@@ -108,7 +123,10 @@ if (!existsSync(join(ROOT, adminDir))) {
 
 {
   const opMap = readFileSync(
-    join(ROOT, "packages/platform-services/src/authorization/operation-authorization-map.ts"),
+    join(
+      ROOT,
+      "packages/platform-services/src/authorization/operation-authorization-map.ts",
+    ),
     "utf8",
   );
   if (!opMap.includes("administrationPlatformOps")) {
@@ -154,7 +172,10 @@ if (!existsSync(join(ROOT, adminDir))) {
     join(ROOT, "packages/platform-services/src/services/create-platform-services.ts"),
     "utf8",
   );
-  if (!create.includes("administrationApi") || !create.includes("input.administration")) {
+  if (
+    !create.includes("administrationApi") ||
+    !create.includes("input.administration")
+  ) {
     violations.push({
       file: "packages/platform-services/src/services/create-platform-services.ts",
       line: 1,
@@ -251,5 +272,7 @@ if (violations.length > 0) {
   process.exit(1);
 }
 
-console.log("\nRESULT: PASS (0 architecture/dependency/boundary/authorization violations)");
+console.log(
+  "\nRESULT: PASS (0 architecture/dependency/boundary/authorization violations)",
+);
 process.exit(0);

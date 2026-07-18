@@ -38,12 +38,12 @@ Persistence ← provider config / metadata / diagnostics / audit
 
 ## Factories
 
-| Factory | Behaviour |
-|---------|-----------|
-| `createSearchPersistenceForProduction` | Requires `postgresDb` — **no** silent memory fallback |
-| `createSearchPersistenceForTest` | Requires `postgresDb` **or** `allowInMemoryPersistence: true` |
-| `createSearchProviderRegistry` | Persistence-backed registry |
-| `createSearchPlatformFoundation` | Persistence + registry + thin gateway services |
+| Factory                                | Behaviour                                                     |
+| -------------------------------------- | ------------------------------------------------------------- |
+| `createSearchPersistenceForProduction` | Requires `postgresDb` — **no** silent memory fallback         |
+| `createSearchPersistenceForTest`       | Requires `postgresDb` **or** `allowInMemoryPersistence: true` |
+| `createSearchProviderRegistry`         | Persistence-backed registry                                   |
+| `createSearchPlatformFoundation`       | Persistence + registry + thin gateway services                |
 
 ## Explicit exclusions
 

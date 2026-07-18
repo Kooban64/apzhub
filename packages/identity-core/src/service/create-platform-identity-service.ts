@@ -69,9 +69,7 @@ import {
   asIdentityUserId,
 } from "@apzhub/identity-contracts";
 
-import {
-  listAssignedServiceCapabilities,
-} from "../assignment/assignments";
+import { listAssignedServiceCapabilities } from "../assignment/assignments";
 import { assertIdentityLifecycleTransition } from "../lifecycle/transitions";
 import { summarizeMembership } from "../membership/membership";
 import {
@@ -161,66 +159,210 @@ async function appendHistory(
 
 export type PlatformIdentityDomainService = {
   listUsers(ctx: IdentityRequestContext): Promise<readonly IdentityUser[]>;
-  getUser(ctx: IdentityRequestContext, userId: IdentityUser["id"]): Promise<IdentityUser>;
-  createUser(ctx: IdentityRequestContext, input: CreateIdentityUserInput): Promise<IdentityUser>;
-  updateUser(ctx: IdentityRequestContext, input: UpdateIdentityUserInput): Promise<IdentityUser>;
+  getUser(
+    ctx: IdentityRequestContext,
+    userId: IdentityUser["id"],
+  ): Promise<IdentityUser>;
+  createUser(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityUserInput,
+  ): Promise<IdentityUser>;
+  updateUser(
+    ctx: IdentityRequestContext,
+    input: UpdateIdentityUserInput,
+  ): Promise<IdentityUser>;
   listGroups(ctx: IdentityRequestContext): Promise<readonly IdentityGroup[]>;
-  getGroup(ctx: IdentityRequestContext, groupId: IdentityGroup["id"]): Promise<IdentityGroup>;
-  createGroup(ctx: IdentityRequestContext, input: CreateIdentityGroupInput): Promise<IdentityGroup>;
-  updateGroup(ctx: IdentityRequestContext, input: UpdateIdentityGroupInput): Promise<IdentityGroup>;
+  getGroup(
+    ctx: IdentityRequestContext,
+    groupId: IdentityGroup["id"],
+  ): Promise<IdentityGroup>;
+  createGroup(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityGroupInput,
+  ): Promise<IdentityGroup>;
+  updateGroup(
+    ctx: IdentityRequestContext,
+    input: UpdateIdentityGroupInput,
+  ): Promise<IdentityGroup>;
   listRoles(ctx: IdentityRequestContext): Promise<readonly IdentityRole[]>;
-  getRole(ctx: IdentityRequestContext, roleId: IdentityRole["id"]): Promise<IdentityRole>;
-  createRole(ctx: IdentityRequestContext, input: CreateIdentityRoleInput): Promise<IdentityRole>;
-  updateRole(ctx: IdentityRequestContext, input: UpdateIdentityRoleInput): Promise<IdentityRole>;
-  listOrganizations(ctx: IdentityRequestContext): Promise<readonly IdentityOrganization[]>;
-  getOrganization(ctx: IdentityRequestContext, organisationId: IdentityOrganization["id"]): Promise<IdentityOrganization>;
-  createOrganization(ctx: IdentityRequestContext, input: CreateIdentityOrganizationInput): Promise<IdentityOrganization>;
-  updateOrganization(ctx: IdentityRequestContext, input: UpdateIdentityOrganizationInput): Promise<IdentityOrganization>;
+  getRole(
+    ctx: IdentityRequestContext,
+    roleId: IdentityRole["id"],
+  ): Promise<IdentityRole>;
+  createRole(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityRoleInput,
+  ): Promise<IdentityRole>;
+  updateRole(
+    ctx: IdentityRequestContext,
+    input: UpdateIdentityRoleInput,
+  ): Promise<IdentityRole>;
+  listOrganizations(
+    ctx: IdentityRequestContext,
+  ): Promise<readonly IdentityOrganization[]>;
+  getOrganization(
+    ctx: IdentityRequestContext,
+    organisationId: IdentityOrganization["id"],
+  ): Promise<IdentityOrganization>;
+  createOrganization(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityOrganizationInput,
+  ): Promise<IdentityOrganization>;
+  updateOrganization(
+    ctx: IdentityRequestContext,
+    input: UpdateIdentityOrganizationInput,
+  ): Promise<IdentityOrganization>;
   listTenants(ctx: IdentityRequestContext): Promise<readonly IdentityTenant[]>;
-  getTenant(ctx: IdentityRequestContext, tenantRecordId: IdentityTenant["id"]): Promise<IdentityTenant>;
-  createTenant(ctx: IdentityRequestContext, input: CreateIdentityTenantInput): Promise<IdentityTenant>;
-  updateTenant(ctx: IdentityRequestContext, input: UpdateIdentityTenantInput): Promise<IdentityTenant>;
+  getTenant(
+    ctx: IdentityRequestContext,
+    tenantRecordId: IdentityTenant["id"],
+  ): Promise<IdentityTenant>;
+  createTenant(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityTenantInput,
+  ): Promise<IdentityTenant>;
+  updateTenant(
+    ctx: IdentityRequestContext,
+    input: UpdateIdentityTenantInput,
+  ): Promise<IdentityTenant>;
   listDepartments(ctx: IdentityRequestContext): Promise<readonly IdentityDepartment[]>;
-  getDepartment(ctx: IdentityRequestContext, departmentId: IdentityDepartment["id"]): Promise<IdentityDepartment>;
-  createDepartment(ctx: IdentityRequestContext, input: CreateIdentityDepartmentInput): Promise<IdentityDepartment>;
-  updateDepartment(ctx: IdentityRequestContext, input: UpdateIdentityDepartmentInput): Promise<IdentityDepartment>;
+  getDepartment(
+    ctx: IdentityRequestContext,
+    departmentId: IdentityDepartment["id"],
+  ): Promise<IdentityDepartment>;
+  createDepartment(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityDepartmentInput,
+  ): Promise<IdentityDepartment>;
+  updateDepartment(
+    ctx: IdentityRequestContext,
+    input: UpdateIdentityDepartmentInput,
+  ): Promise<IdentityDepartment>;
   listPositions(ctx: IdentityRequestContext): Promise<readonly IdentityPosition[]>;
-  getPosition(ctx: IdentityRequestContext, positionId: IdentityPosition["id"]): Promise<IdentityPosition>;
-  createPosition(ctx: IdentityRequestContext, input: CreateIdentityPositionInput): Promise<IdentityPosition>;
-  updatePosition(ctx: IdentityRequestContext, input: UpdateIdentityPositionInput): Promise<IdentityPosition>;
+  getPosition(
+    ctx: IdentityRequestContext,
+    positionId: IdentityPosition["id"],
+  ): Promise<IdentityPosition>;
+  createPosition(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityPositionInput,
+  ): Promise<IdentityPosition>;
+  updatePosition(
+    ctx: IdentityRequestContext,
+    input: UpdateIdentityPositionInput,
+  ): Promise<IdentityPosition>;
   listMemberships(ctx: IdentityRequestContext): Promise<readonly IdentityMembership[]>;
-  getMembership(ctx: IdentityRequestContext, membershipId: IdentityMembership["id"]): Promise<IdentityMembership>;
-  createMembership(ctx: IdentityRequestContext, input: CreateIdentityMembershipInput): Promise<IdentityMembership>;
-  updateMembership(ctx: IdentityRequestContext, input: UpdateIdentityMembershipInput): Promise<IdentityMembership>;
-  listServiceAssignments(ctx: IdentityRequestContext): Promise<readonly IdentityServiceAssignment[]>;
-  getServiceAssignment(ctx: IdentityRequestContext, assignmentId: IdentityServiceAssignment["id"]): Promise<IdentityServiceAssignment>;
-  createServiceAssignment(ctx: IdentityRequestContext, input: CreateIdentityServiceAssignmentInput): Promise<IdentityServiceAssignment>;
-  updateServiceAssignment(ctx: IdentityRequestContext, input: UpdateIdentityServiceAssignmentInput): Promise<IdentityServiceAssignment>;
+  getMembership(
+    ctx: IdentityRequestContext,
+    membershipId: IdentityMembership["id"],
+  ): Promise<IdentityMembership>;
+  createMembership(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityMembershipInput,
+  ): Promise<IdentityMembership>;
+  updateMembership(
+    ctx: IdentityRequestContext,
+    input: UpdateIdentityMembershipInput,
+  ): Promise<IdentityMembership>;
+  listServiceAssignments(
+    ctx: IdentityRequestContext,
+  ): Promise<readonly IdentityServiceAssignment[]>;
+  getServiceAssignment(
+    ctx: IdentityRequestContext,
+    assignmentId: IdentityServiceAssignment["id"],
+  ): Promise<IdentityServiceAssignment>;
+  createServiceAssignment(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityServiceAssignmentInput,
+  ): Promise<IdentityServiceAssignment>;
+  updateServiceAssignment(
+    ctx: IdentityRequestContext,
+    input: UpdateIdentityServiceAssignmentInput,
+  ): Promise<IdentityServiceAssignment>;
   listInvitations(ctx: IdentityRequestContext): Promise<readonly IdentityInvitation[]>;
-  getInvitation(ctx: IdentityRequestContext, invitationId: IdentityInvitation["id"]): Promise<IdentityInvitation>;
-  createInvitation(ctx: IdentityRequestContext, input: CreateIdentityInvitationInput): Promise<IdentityInvitation>;
-  updateInvitation(ctx: IdentityRequestContext, input: UpdateIdentityInvitationInput): Promise<IdentityInvitation>;
+  getInvitation(
+    ctx: IdentityRequestContext,
+    invitationId: IdentityInvitation["id"],
+  ): Promise<IdentityInvitation>;
+  createInvitation(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityInvitationInput,
+  ): Promise<IdentityInvitation>;
+  updateInvitation(
+    ctx: IdentityRequestContext,
+    input: UpdateIdentityInvitationInput,
+  ): Promise<IdentityInvitation>;
   listActivations(ctx: IdentityRequestContext): Promise<readonly IdentityActivation[]>;
-  getActivation(ctx: IdentityRequestContext, activationId: IdentityActivation["id"]): Promise<IdentityActivation>;
-  createActivation(ctx: IdentityRequestContext, input: CreateIdentityActivationInput): Promise<IdentityActivation>;
-  listDeactivations(ctx: IdentityRequestContext): Promise<readonly IdentityDeactivation[]>;
-  getDeactivation(ctx: IdentityRequestContext, deactivationId: IdentityDeactivation["id"]): Promise<IdentityDeactivation>;
-  createDeactivation(ctx: IdentityRequestContext, input: CreateIdentityDeactivationInput): Promise<IdentityDeactivation>;
+  getActivation(
+    ctx: IdentityRequestContext,
+    activationId: IdentityActivation["id"],
+  ): Promise<IdentityActivation>;
+  createActivation(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityActivationInput,
+  ): Promise<IdentityActivation>;
+  listDeactivations(
+    ctx: IdentityRequestContext,
+  ): Promise<readonly IdentityDeactivation[]>;
+  getDeactivation(
+    ctx: IdentityRequestContext,
+    deactivationId: IdentityDeactivation["id"],
+  ): Promise<IdentityDeactivation>;
+  createDeactivation(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityDeactivationInput,
+  ): Promise<IdentityDeactivation>;
   listPolicies(ctx: IdentityRequestContext): Promise<readonly IdentityPolicy[]>;
-  getPolicy(ctx: IdentityRequestContext, policyId: IdentityPolicy["id"]): Promise<IdentityPolicy>;
-  createPolicy(ctx: IdentityRequestContext, input: CreateIdentityPolicyInput): Promise<IdentityPolicy>;
-  updatePolicy(ctx: IdentityRequestContext, input: UpdateIdentityPolicyInput): Promise<IdentityPolicy>;
+  getPolicy(
+    ctx: IdentityRequestContext,
+    policyId: IdentityPolicy["id"],
+  ): Promise<IdentityPolicy>;
+  createPolicy(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityPolicyInput,
+  ): Promise<IdentityPolicy>;
+  updatePolicy(
+    ctx: IdentityRequestContext,
+    input: UpdateIdentityPolicyInput,
+  ): Promise<IdentityPolicy>;
   listAudits(ctx: IdentityRequestContext): Promise<readonly IdentityAuditEntry[]>;
-  getAudit(ctx: IdentityRequestContext, auditId: IdentityAuditEntry["id"]): Promise<IdentityAuditEntry>;
-  listHistory(ctx: IdentityRequestContext, userId?: IdentityUser["id"]): Promise<readonly IdentityHistory[]>;
-  getHistory(ctx: IdentityRequestContext, historyId: IdentityHistory["id"]): Promise<IdentityHistory>;
-  listReferences(ctx: IdentityRequestContext, userId?: IdentityUser["id"]): Promise<readonly IdentityReference[]>;
-  getReference(ctx: IdentityRequestContext, referenceId: IdentityReference["id"]): Promise<IdentityReference>;
-  createReference(ctx: IdentityRequestContext, input: CreateIdentityReferenceInput): Promise<IdentityReference>;
-  updateReference(ctx: IdentityRequestContext, input: UpdateIdentityReferenceInput): Promise<IdentityReference>;
-  diagnosticsHealth(ctx: IdentityRequestContext): Promise<{ readonly ok: true; readonly checkedAt: string }>;
-  diagnosticsReadiness(ctx: IdentityRequestContext): Promise<IdentityDiagnosticsSnapshot>;
-  diagnosticsCapabilities(ctx: IdentityRequestContext): Promise<{ readonly facets: readonly string[] }>;
+  getAudit(
+    ctx: IdentityRequestContext,
+    auditId: IdentityAuditEntry["id"],
+  ): Promise<IdentityAuditEntry>;
+  listHistory(
+    ctx: IdentityRequestContext,
+    userId?: IdentityUser["id"],
+  ): Promise<readonly IdentityHistory[]>;
+  getHistory(
+    ctx: IdentityRequestContext,
+    historyId: IdentityHistory["id"],
+  ): Promise<IdentityHistory>;
+  listReferences(
+    ctx: IdentityRequestContext,
+    userId?: IdentityUser["id"],
+  ): Promise<readonly IdentityReference[]>;
+  getReference(
+    ctx: IdentityRequestContext,
+    referenceId: IdentityReference["id"],
+  ): Promise<IdentityReference>;
+  createReference(
+    ctx: IdentityRequestContext,
+    input: CreateIdentityReferenceInput,
+  ): Promise<IdentityReference>;
+  updateReference(
+    ctx: IdentityRequestContext,
+    input: UpdateIdentityReferenceInput,
+  ): Promise<IdentityReference>;
+  diagnosticsHealth(
+    ctx: IdentityRequestContext,
+  ): Promise<{ readonly ok: true; readonly checkedAt: string }>;
+  diagnosticsReadiness(
+    ctx: IdentityRequestContext,
+  ): Promise<IdentityDiagnosticsSnapshot>;
+  diagnosticsCapabilities(
+    ctx: IdentityRequestContext,
+  ): Promise<{ readonly facets: readonly string[] }>;
 };
 
 export function createPlatformIdentityService(
@@ -240,7 +382,11 @@ export function createPlatformIdentityService(
     },
     async getUser(ctx, userId) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.users.get(ctx, userId), "IdentityUser", userId);
+      return requireFound(
+        await deps.repos.users.get(ctx, userId),
+        "IdentityUser",
+        userId,
+      );
     },
     async createUser(ctx, input) {
       assertCtx(ctx);
@@ -262,7 +408,13 @@ export function createPlatformIdentityService(
       validateIdentityUser(user);
       validateIdentityAggregate(user);
       const created = await deps.repos.users.create(ctx, user);
-      await appendAudit(deps, ctx, "created", `User ${created.displayName} created`, created.id);
+      await appendAudit(
+        deps,
+        ctx,
+        "created",
+        `User ${created.displayName} created`,
+        created.id,
+      );
       await appendHistory(deps, ctx, `User ${created.displayName} created`, created.id);
       return created;
     },
@@ -296,7 +448,13 @@ export function createPlatformIdentityService(
       };
       validateIdentityUser(updated);
       const saved = await deps.repos.users.update(ctx, updated);
-      await appendAudit(deps, ctx, "updated", `User ${saved.displayName} updated`, saved.id);
+      await appendAudit(
+        deps,
+        ctx,
+        "updated",
+        `User ${saved.displayName} updated`,
+        saved.id,
+      );
       return saved;
     },
 
@@ -306,7 +464,11 @@ export function createPlatformIdentityService(
     },
     async getGroup(ctx, groupId) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.groups.get(ctx, groupId), "IdentityGroup", groupId);
+      return requireFound(
+        await deps.repos.groups.get(ctx, groupId),
+        "IdentityGroup",
+        groupId,
+      );
     },
     async createGroup(ctx, input) {
       assertCtx(ctx);
@@ -343,7 +505,9 @@ export function createPlatformIdentityService(
         ...existing,
         name: input.name ?? existing.name,
         description:
-          input.description === null ? undefined : (input.description ?? existing.description),
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
         status: input.status ?? existing.status,
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
@@ -359,7 +523,11 @@ export function createPlatformIdentityService(
     },
     async getRole(ctx, roleId) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.roles.get(ctx, roleId), "IdentityRole", roleId);
+      return requireFound(
+        await deps.repos.roles.get(ctx, roleId),
+        "IdentityRole",
+        roleId,
+      );
     },
     async createRole(ctx, input) {
       assertCtx(ctx);
@@ -396,7 +564,9 @@ export function createPlatformIdentityService(
         ...existing,
         name: input.name ?? existing.name,
         description:
-          input.description === null ? undefined : (input.description ?? existing.description),
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
         status: input.status ?? existing.status,
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
@@ -451,7 +621,9 @@ export function createPlatformIdentityService(
         ...existing,
         name: input.name ?? existing.name,
         description:
-          input.description === null ? undefined : (input.description ?? existing.description),
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
         status: input.status ?? existing.status,
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
@@ -503,7 +675,9 @@ export function createPlatformIdentityService(
         ...existing,
         name: input.name ?? existing.name,
         description:
-          input.description === null ? undefined : (input.description ?? existing.description),
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
         status: input.status ?? existing.status,
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
@@ -552,7 +726,9 @@ export function createPlatformIdentityService(
         ...existing,
         name: input.name ?? existing.name,
         description:
-          input.description === null ? undefined : (input.description ?? existing.description),
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
         status: input.status ?? existing.status,
         updatedAt: deps.now(),
       });
@@ -599,7 +775,9 @@ export function createPlatformIdentityService(
         ...existing,
         name: input.name ?? existing.name,
         description:
-          input.description === null ? undefined : (input.description ?? existing.description),
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
         status: input.status ?? existing.status,
         updatedAt: deps.now(),
       });
@@ -766,7 +944,9 @@ export function createPlatformIdentityService(
         ...existing,
         status: input.status ?? existing.status,
         expiresAt:
-          input.expiresAt === null ? undefined : (input.expiresAt ?? existing.expiresAt),
+          input.expiresAt === null
+            ? undefined
+            : (input.expiresAt ?? existing.expiresAt),
         updatedAt: deps.now(),
         updatedBy: ctx.userId,
       });
@@ -866,7 +1046,11 @@ export function createPlatformIdentityService(
     },
     async getPolicy(ctx, policyId) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.policies.get(ctx, policyId), "IdentityPolicy", policyId);
+      return requireFound(
+        await deps.repos.policies.get(ctx, policyId),
+        "IdentityPolicy",
+        policyId,
+      );
     },
     async createPolicy(ctx, input) {
       assertCtx(ctx);
@@ -896,7 +1080,9 @@ export function createPlatformIdentityService(
         ...existing,
         name: input.name ?? existing.name,
         description:
-          input.description === null ? undefined : (input.description ?? existing.description),
+          input.description === null
+            ? undefined
+            : (input.description ?? existing.description),
         updatedAt: deps.now(),
       });
     },
@@ -907,7 +1093,11 @@ export function createPlatformIdentityService(
     },
     async getAudit(ctx, auditId) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.audits.get(ctx, auditId), "IdentityAudit", auditId);
+      return requireFound(
+        await deps.repos.audits.get(ctx, auditId),
+        "IdentityAudit",
+        auditId,
+      );
     },
     async listHistory(ctx, userId) {
       assertCtx(ctx);
@@ -915,7 +1105,11 @@ export function createPlatformIdentityService(
     },
     async getHistory(ctx, historyId) {
       assertCtx(ctx);
-      return requireFound(await deps.repos.history.get(ctx, historyId), "IdentityHistory", historyId);
+      return requireFound(
+        await deps.repos.history.get(ctx, historyId),
+        "IdentityHistory",
+        historyId,
+      );
     },
     async listReferences(ctx, userId) {
       assertCtx(ctx);

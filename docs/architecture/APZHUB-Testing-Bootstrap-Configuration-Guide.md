@@ -8,8 +8,8 @@
 
 ## Environment flag
 
-| Variable | Values | Default | Effect |
-| -------- | ------ | ------- | ------ |
+| Variable                  | Values                   | Default          | Effect                                                                                                 |
+| ------------------------- | ------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------ |
 | `TESTING_SERVICE_ENABLED` | `"true"` / anything else | unset → disabled | App bootstrap decides whether to call testing factories and pass `testing` to `createPlatformServices` |
 
 ```typescript
@@ -63,7 +63,9 @@ const testing = createTestingPlatformServicesForTest({
   allowInMemoryPersistence: true, // explicit opt-in
 });
 // or
-const testing = createTestingPlatformServicesForTest({ persistence: customPersistence });
+const testing = createTestingPlatformServicesForTest({
+  persistence: customPersistence,
+});
 ```
 
 **Throws** without `persistence`, `domain`, or `allowInMemoryPersistence: true`.
@@ -74,12 +76,12 @@ const testing = createTestingPlatformServicesForTest({ persistence: customPersis
 
 `TestingPlatformServicesBundle`:
 
-| Field | Purpose |
-| ----- | ------- |
-| `domain` | `TestingDomainServices` instance |
-| `gatewaySurface` | Unwrapped platform impls (for direct unit tests) |
-| `impls` | Raw `TestingPlatformServiceImpls` |
-| `readiness` | Capability indicators |
+| Field                        | Purpose                                                       |
+| ---------------------------- | ------------------------------------------------------------- |
+| `domain`                     | `TestingDomainServices` instance                              |
+| `gatewaySurface`             | Unwrapped platform impls (for direct unit tests)              |
+| `impls`                      | Raw `TestingPlatformServiceImpls`                             |
+| `readiness`                  | Capability indicators                                         |
 | `wrapWithPipeline(pipeline)` | Returns pipeline-wrapped gateway for `createPlatformServices` |
 
 ---
@@ -106,11 +108,11 @@ When `testing` is omitted, `gateway.testing` is unavailable (throws controlled e
 
 Same rules as OSS-110-06:
 
-| Mode | Behaviour |
-| ---- | --------- |
+| Mode         | Behaviour                                         |
+| ------------ | ------------------------------------------------- |
 | `production` | Requires `accessResolver`; never silent allow-all |
-| `allow-all` | Explicit dev/test only |
-| `deny-all` | Explicit negative tests |
+| `allow-all`  | Explicit dev/test only                            |
+| `deny-all`   | Explicit negative tests                           |
 
 Production never silently uses allow-all unless `AUTHORIZATION_ALLOW_ALL_IN_PRODUCTION=true` (break-glass).
 
@@ -118,13 +120,13 @@ Production never silently uses allow-all unless `AUTHORIZATION_ALLOW_ALL_IN_PROD
 
 ## Anti-patterns (forbidden)
 
-| Anti-pattern | Why |
-| ------------ | --- |
-| `createTestingPlatformServices({})` in production | Throws — no persistence |
-| `createTestingPlatformServicesForTest()` without opt-in | Throws — no silent in-memory |
-| Calling domain services from HTTP without pipeline | Bypasses authz and audit |
-| Enabling testing without Postgres in production | Violates SoR / persistence architecture |
-| Using `authorizationMode: "allow-all"` in production bootstrap | Zero Trust violation |
+| Anti-pattern                                                   | Why                                     |
+| -------------------------------------------------------------- | --------------------------------------- |
+| `createTestingPlatformServices({})` in production              | Throws — no persistence                 |
+| `createTestingPlatformServicesForTest()` without opt-in        | Throws — no silent in-memory            |
+| Calling domain services from HTTP without pipeline             | Bypasses authz and audit                |
+| Enabling testing without Postgres in production                | Violates SoR / persistence architecture |
+| Using `authorizationMode: "allow-all"` in production bootstrap | Zero Trust violation                    |
 
 ---
 

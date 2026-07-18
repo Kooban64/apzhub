@@ -21,11 +21,11 @@ Production persistence requires PostgreSQL. In-memory stores are explicit test-o
 
 ## Out of scope (APZADMIN-001)
 
-- HTTP / API Gateway / typed client / OpenAPI  
-- Platform Services implementation (`packages/platform-services`)  
-- Workbench / UI / dashboard rendering  
-- Event Bus  
-- User, role, or tenant management  
+- HTTP / API Gateway / typed client / OpenAPI
+- Platform Services implementation (`packages/platform-services`)
+- Workbench / UI / dashboard rendering
+- Event Bus
+- User, role, or tenant management
 
 ## Next
 

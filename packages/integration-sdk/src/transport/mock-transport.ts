@@ -132,7 +132,9 @@ export class MockTransportClient implements TransportClient {
     const key = scriptKey(request.method, path);
     const queue = this.scripts.get(key);
     const scripted =
-      queue && queue.length > 0 ? (queue.shift() as MockTransportScriptedResponse) : this.defaultResponse;
+      queue && queue.length > 0
+        ? (queue.shift() as MockTransportScriptedResponse)
+        : this.defaultResponse;
 
     const latency = scripted.latencyMs ?? this.defaultLatencyMs;
     await sleep(latency);

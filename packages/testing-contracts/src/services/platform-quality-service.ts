@@ -28,9 +28,7 @@ import type {
   PlatformCrossProductLinkId,
   PlatformReleaseApprovalId,
   PlatformReleaseId,
-  PlatformReleasePackageId,
   ProductDependencyId,
-  ProductRegistryId,
 } from "../identifiers";
 import type {
   PlatformGovernanceApprovalKind,
@@ -91,13 +89,8 @@ export interface DependencyGraphService {
     ctx: ServiceRequestContext,
     input: ProductDependencyCreateInput,
   ): Promise<ProductDependency>;
-  removeDependency(
-    ctx: ServiceRequestContext,
-    id: ProductDependencyId,
-  ): Promise<void>;
-  listDependencies(
-    ctx: ServiceRequestContext,
-  ): Promise<readonly ProductDependency[]>;
+  removeDependency(ctx: ServiceRequestContext, id: ProductDependencyId): Promise<void>;
+  listDependencies(ctx: ServiceRequestContext): Promise<readonly ProductDependency[]>;
   listForProduct(
     ctx: ServiceRequestContext,
     productId: GovernedProductId,

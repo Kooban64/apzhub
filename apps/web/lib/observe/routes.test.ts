@@ -36,9 +36,7 @@ describe("APZOBSERVE observe routes", () => {
     expect(resolveObserveSection(`${OBSERVE_WORKSPACE_BASE}/diagnostics`)).toBe(
       "diagnostics",
     );
-    expect(resolveObserveSection(`${OBSERVE_WORKSPACE_BASE}/missing`)).toBe(
-      "overview",
-    );
+    expect(resolveObserveSection(`${OBSERVE_WORKSPACE_BASE}/missing`)).toBe("overview");
     expect(observeSectionPath("metric-definitions")).toBe(
       `${OBSERVE_WORKSPACE_BASE}/metric-definitions`,
     );

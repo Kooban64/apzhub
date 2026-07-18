@@ -21,12 +21,12 @@ pnpm exec vitest run \
 
 ## Result (APZOBSERVE-004 closeout)
 
-| Metric | Result |
-| --- | --- |
+| Metric             | Result                   |
+| ------------------ | ------------------------ |
 | Lines / Statements | **99.65%** (1139 / 1143) |
-| Functions | **100%** (50 / 50) |
-| Branches | **95.55%** (215 / 225) |
-| Workspace router | **100%** all metrics |
+| Functions          | **100%** (50 / 50)       |
+| Branches           | **95.55%** (215 / 225)   |
+| Workspace router   | **100%** all metrics     |
 
 ## Notes
 

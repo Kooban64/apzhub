@@ -18,7 +18,13 @@ export interface ApprovalService {
     ctx: ServiceRequestContext,
     input: Omit<
       Approval,
-      "id" | "createdAt" | "updatedAt" | "signature" | "witnesses" | "history" | "stageDecisions"
+      | "id"
+      | "createdAt"
+      | "updatedAt"
+      | "signature"
+      | "witnesses"
+      | "history"
+      | "stageDecisions"
     >,
   ): Promise<Approval>;
   /**
@@ -46,7 +52,10 @@ export interface ApprovalService {
   decideApproval(
     ctx: ServiceRequestContext,
     id: ApprovalId,
-    decision: Pick<Approval, "status" | "comments" | "conditions" | "decidedByUserId"> & {
+    decision: Pick<
+      Approval,
+      "status" | "comments" | "conditions" | "decidedByUserId"
+    > & {
       readonly stageKey?: string;
     },
   ): Promise<Approval>;

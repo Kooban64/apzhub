@@ -10,8 +10,8 @@ Validation is **metadata only**. Rules are recorded; validators are **not execut
 
 ## Guardrails
 
-- Range: `min <= max` when both set  
-- Enum: requires `enumValues`  
-- Pattern: requires `pattern`  
-- Custom: requires `customValidatorKey`  
+- Range: `min <= max` when both set
+- Enum: requires `enumValues`
+- Pattern: requires `pattern`
+- Custom: requires `customValidatorKey`
 - Payloads must not look like secrets/credentials

@@ -25,18 +25,18 @@ No alternative execution paths are permitted.
 
 ## What is frozen
 
-| Surface | Freeze scope |
-| --- | --- |
-| Contracts | `@apzhub/observe-contracts` **0.2.0** |
-| Core | `@apzhub/observe-core` **0.2.0** |
-| Persistence | `@apzhub/observe-persistence` **0.1.0** |
-| Platform Services | `gateway.observe.*` wiring in **0.24.0** |
-| HTTP API | `/api/v1/observe/*` · OpenAPI **1.8.0** |
-| Typed client | `apps/web/lib/observe` |
-| Workbench | `/workspace/observability` + `platform-observability` manifests |
-| Authorization | `observePlatformOps` + `PLATFORM_OBSERVE_PERMISSIONS` |
-| Schema | Migrations `0054` / `0055` · `platform_observe_*` |
-| Boundary | Metadata governance only — not live telemetry providers |
+| Surface           | Freeze scope                                                    |
+| ----------------- | --------------------------------------------------------------- |
+| Contracts         | `@apzhub/observe-contracts` **0.2.0**                           |
+| Core              | `@apzhub/observe-core` **0.2.0**                                |
+| Persistence       | `@apzhub/observe-persistence` **0.1.0**                         |
+| Platform Services | `gateway.observe.*` wiring in **0.24.0**                        |
+| HTTP API          | `/api/v1/observe/*` · OpenAPI **1.8.0**                         |
+| Typed client      | `apps/web/lib/observe`                                          |
+| Workbench         | `/workspace/observability` + `platform-observability` manifests |
+| Authorization     | `observePlatformOps` + `PLATFORM_OBSERVE_PERMISSIONS`           |
+| Schema            | Migrations `0054` / `0055` · `platform_observe_*`               |
+| Boundary          | Metadata governance only — not live telemetry providers         |
 
 ## Intentionally unavailable (frozen absence)
 
@@ -51,12 +51,12 @@ No alternative execution paths are permitted.
 
 ## Separation (frozen)
 
-| Capability | Path / ownership |
-| --- | --- |
-| Platform Observability | `/workspace/observability` — this SoR |
+| Capability              | Path / ownership                                  |
+| ----------------------- | ------------------------------------------------- |
+| Platform Observability  | `/workspace/observability` — this SoR             |
 | Platform Administration | `/workspace/administration` — frozen separate SoR |
-| Identity Administration | `/workspace/identity` — frozen separate SoR |
-| Platform Operations | `/workspace/operations` — separate product |
+| Identity Administration | `/workspace/identity` — frozen separate SoR       |
+| Platform Operations     | `/workspace/operations` — separate product        |
 
 ## Change control
 

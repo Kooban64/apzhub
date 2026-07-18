@@ -16,7 +16,7 @@ const templates = await client.listTemplates("executive");
 const result = await client.generateReport({
   reportType: "executive",
   outputFormat: "html",
-  parameters: { /* pre-computed */ },
+  parameters: {/* pre-computed */},
 });
 ```
 

@@ -92,4 +92,7 @@ export {
   validateEnrichedSession,
   isSessionExpired,
 } from "./session-validation";
-export { fetchMiddlewareSession, isMiddlewareSessionActive } from "./middleware-session";
+export {
+  fetchMiddlewareSession,
+  isMiddlewareSessionActive,
+} from "./middleware-session";

@@ -14,10 +14,10 @@ When enabled but misconfigured: readiness fails clearly — no silent in-memory 
 
 ## Factories
 
-| Factory | Use |
-|---------|-----|
-| `createSearchPlatformServicesForProduction` | Requires `postgresDb` |
-| `createSearchPlatformServicesForTest` | Explicit in-memory opt-in |
-| `createSearchPlatformFoundation*` | Persistence + registry + thin gateway (persistence package) |
+| Factory                                     | Use                                                         |
+| ------------------------------------------- | ----------------------------------------------------------- |
+| `createSearchPlatformServicesForProduction` | Requires `postgresDb`                                       |
+| `createSearchPlatformServicesForTest`       | Explicit in-memory opt-in                                   |
+| `createSearchPlatformFoundation*`           | Persistence + registry + thin gateway (persistence package) |
 
 Compose into `createPlatformServices({ searchPlatform })`.

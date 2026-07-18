@@ -41,14 +41,14 @@ Rules:
 
 ## Configuration-specific reference properties
 
-| Property | Standard |
-| --- | --- |
-| Domain | Metadata SoR for configuration keys, namespaces, groups, versions, overrides, scopes, validation, references, audit |
-| Distinct from | Runtime `@apzhub/config` configuration-manager |
-| Lifecycle | draft → validated → approved → published → deprecated → archived |
-| Published versions | Immutable |
-| Runtime apply | Out of scope for this standard |
-| Secrets / flags | Separate future platforms — not Configuration SoR |
+| Property           | Standard                                                                                                            |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| Domain             | Metadata SoR for configuration keys, namespaces, groups, versions, overrides, scopes, validation, references, audit |
+| Distinct from      | Runtime `@apzhub/config` configuration-manager                                                                      |
+| Lifecycle          | draft → validated → approved → published → deprecated → archived                                                    |
+| Published versions | Immutable                                                                                                           |
+| Runtime apply      | Out of scope for this standard                                                                                      |
+| Secrets / flags    | Separate future platforms — not Configuration SoR                                                                   |
 
 ## Non-negotiable absences (for this standard)
 

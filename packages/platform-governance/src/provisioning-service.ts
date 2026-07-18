@@ -16,7 +16,9 @@ export class ProvisioningService {
     return this.repository.listRecords(filter);
   }
 
-  async getProvisioningStatus(provisioningId: string): Promise<ProvisioningRecord | undefined> {
+  async getProvisioningStatus(
+    provisioningId: string,
+  ): Promise<ProvisioningRecord | undefined> {
     return this.repository.getRecord(provisioningId);
   }
 

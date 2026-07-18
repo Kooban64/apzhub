@@ -20,9 +20,7 @@ describe("APZSEARCH-001 Platform Search Foundation", () => {
   });
 
   it("ships search-contracts package", () => {
-    expect(existsSync(join(ROOT, "packages/search-contracts/package.json"))).toBe(
-      true,
-    );
+    expect(existsSync(join(ROOT, "packages/search-contracts/package.json"))).toBe(true);
     const pkg = JSON.parse(
       readFileSync(join(ROOT, "packages/search-contracts/package.json"), "utf8"),
     );

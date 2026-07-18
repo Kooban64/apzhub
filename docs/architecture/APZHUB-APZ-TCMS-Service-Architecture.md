@@ -20,18 +20,18 @@ Modules and HTTP never call persistence or engines directly. Services own busine
 
 ## Service catalogue
 
-1. `requirements` — RequirementService  
-2. `testPlans` — TestPlanService  
-3. `testSuites` — TestSuiteService  
-4. `testCases` — TestCaseService  
-5. `manualExecutions` — ManualExecutionService  
-6. `evidence` — EvidenceService (metadata)  
-7. `approvals` — ApprovalService  
-8. `traceability` — TraceabilityService  
-9. `regression` — RegressionService  
-10. `risks` — RiskService  
-11. `certificationPreparation` — CertificationPreparationService  
-12. `releaseReadiness` — ReleaseReadinessService  
+1. `requirements` — RequirementService
+2. `testPlans` — TestPlanService
+3. `testSuites` — TestSuiteService
+4. `testCases` — TestCaseService
+5. `manualExecutions` — ManualExecutionService
+6. `evidence` — EvidenceService (metadata)
+7. `approvals` — ApprovalService
+8. `traceability` — TraceabilityService
+9. `regression` — RegressionService
+10. `risks` — RiskService
+11. `certificationPreparation` — CertificationPreparationService
+12. `releaseReadiness` — ReleaseReadinessService
 
 Legacy monolithic `TestingService` / `ExecutionService` contracts remain in `@apzhub/testing-contracts` for compatibility; APZTCMS-004 implements the named domain services above.
 

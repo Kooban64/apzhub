@@ -10,13 +10,13 @@ Define how the Platform classifies, validates, masks, and diagnoses secrets with
 
 ## Secret classifications
 
-| Class | Examples | Diagnostics |
-|-------|----------|-------------|
-| `secret` | `BETTER_AUTH_SECRET` | Masked preview, weak-length detection |
-| `connection-string` | `DATABASE_URL`, `REDIS_URL` | URL credential redaction |
-| `credential` | Reserved for future service credentials | Masked preview |
-| `public` | `NEXT_PUBLIC_*` | Full value permitted in client context |
-| `none` | `NODE_ENV`, `PORT` | No masking required |
+| Class               | Examples                                | Diagnostics                            |
+| ------------------- | --------------------------------------- | -------------------------------------- |
+| `secret`            | `BETTER_AUTH_SECRET`                    | Masked preview, weak-length detection  |
+| `connection-string` | `DATABASE_URL`, `REDIS_URL`             | URL credential redaction               |
+| `credential`        | Reserved for future service credentials | Masked preview                         |
+| `public`            | `NEXT_PUBLIC_*`                         | Full value permitted in client context |
+| `none`              | `NODE_ENV`, `PORT`                      | No masking required                    |
 
 ## Masking rules
 

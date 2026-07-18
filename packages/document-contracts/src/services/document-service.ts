@@ -129,17 +129,12 @@ export type PlatformDocumentService = {
     ctx: DocumentRequestContext,
     documentId: DocumentId,
   ): Promise<DocumentSummary>;
-  getDocument(
-    ctx: DocumentRequestContext,
-    documentId: DocumentId,
-  ): Promise<Document>;
+  getDocument(ctx: DocumentRequestContext, documentId: DocumentId): Promise<Document>;
   listAudit(
     ctx: DocumentRequestContext,
     documentId: DocumentId,
   ): Promise<readonly DocumentAudit[]>;
-  listTags(
-    ctx: DocumentRequestContext,
-  ): Promise<readonly DocumentTag[]>;
+  listTags(ctx: DocumentRequestContext): Promise<readonly DocumentTag[]>;
   getTag(
     ctx: DocumentRequestContext,
     tagId: DocumentTagId,

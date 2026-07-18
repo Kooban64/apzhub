@@ -10,10 +10,7 @@ import {
   createMockDocumentClient,
   MOCK_DOCUMENT,
 } from "@/lib/documents/mock-document-client";
-import {
-  resetDocumentClient,
-  setDocumentClient,
-} from "@/lib/documents/document-api";
+import { resetDocumentClient, setDocumentClient } from "@/lib/documents/document-api";
 
 import { PlatformDocumentsView } from "./platform-documents-view";
 import { DocumentsWorkspaceRouter } from "./documents-workspace-router";
@@ -43,15 +40,11 @@ describe("PlatformDocumentsView", () => {
     render(wrap(<PlatformDocumentsView section="overview" />));
 
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
       expect(screen.getByText(MOCK_DOCUMENT.title)).toBeTruthy();
     });
 
-    expect(
-      screen.getByRole("toolbar", { name: /Documents commands/i }),
-    ).toBeTruthy();
+    expect(screen.getByRole("toolbar", { name: /Documents commands/i })).toBeTruthy();
     expect(screen.getByTestId("documents-page")).toBeTruthy();
   });
 
@@ -82,9 +75,7 @@ describe("PlatformDocumentsView", () => {
       expect(screen.getByText(MOCK_DOCUMENT.id)).toBeTruthy();
     });
 
-    await user.click(
-      screen.getByRole("button", { name: /Inspect Diagnostics/i }),
-    );
+    await user.click(screen.getByRole("button", { name: /Inspect Diagnostics/i }));
     await waitFor(() => {
       expect(screen.getByText(/providerReady/i)).toBeTruthy();
     });
@@ -96,13 +87,9 @@ describe("PlatformDocumentsView", () => {
   });
 
   it("renders versions, folders, tags, audit, and diagnostics sections", async () => {
-    const { rerender } = render(
-      wrap(<PlatformDocumentsView section="versions" />),
-    );
+    const { rerender } = render(wrap(<PlatformDocumentsView section="versions" />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Versions" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Versions" })).toBeTruthy();
       expect(screen.getByText(MOCK_DOCUMENT.title)).toBeTruthy();
     });
     await waitFor(() => {
@@ -149,17 +136,13 @@ describe("PlatformDocumentsView", () => {
 
     rerender(wrap(<PlatformDocumentsView section="retention" />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Retention" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Retention" })).toBeTruthy();
       expect(screen.getByText(MOCK_DOCUMENT.title)).toBeTruthy();
     });
 
     rerender(wrap(<PlatformDocumentsView section="metadata" />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Metadata" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Metadata" })).toBeTruthy();
     });
 
     await user.click(screen.getByRole("button", { name: /View Versions/i }));
@@ -256,9 +239,7 @@ describe("PlatformDocumentsView", () => {
         listAudit: async () => ({ items: [] }),
       }),
     );
-    const { rerender } = render(
-      wrap(<PlatformDocumentsView section="diagnostics" />),
-    );
+    const { rerender } = render(wrap(<PlatformDocumentsView section="diagnostics" />));
     await waitFor(() => {
       expect(screen.getByTestId("documents-error")).toBeTruthy();
       expect(screen.getByText(/diagnostics down/i)).toBeTruthy();
@@ -286,7 +267,10 @@ describe("PlatformDocumentsView", () => {
     }));
     setDocumentClient(
       createMockDocumentClient({
-        listDocuments: async () => ({ items: many, page: { limit: 12, hasMore: false } }),
+        listDocuments: async () => ({
+          items: many,
+          page: { limit: 12, hasMore: false },
+        }),
         getDocument: async (id) => ({
           id,
           title: `Paged Doc`,
@@ -335,9 +319,7 @@ describe("PlatformDocumentsView", () => {
   it("router resolves overview section", async () => {
     render(wrap(<DocumentsWorkspaceRouter />));
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { level: 1, name: "Overview" }),
-      ).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
     });
   });
 });

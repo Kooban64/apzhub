@@ -14,10 +14,10 @@
 
 ### 2. Download contract
 
-- [ ] [OpenAPI YAML](/api/law/v1/openapi.yaml)
-- [ ] [Postman collection](/specs/collections/LAW-OpenAPI-v1.postman_collection.json)
-- [ ] [Postman environment](/specs/collections/LAW-OpenAPI-v1.postman_environment.json)
-- [ ] [Bruno collection](/specs/collections/bruno/LAW-OpenAPI-v1)
+- [ ] [OpenAPI YAML](../specs/LAW-OpenAPI-v1.yaml)
+- [ ] [Postman collection](../specs/collections/LAW-OpenAPI-v1.postman_collection.json)
+- [ ] [Postman environment](../specs/collections/LAW-OpenAPI-v1.postman_environment.json)
+- [ ] [Bruno collection](../specs/collections/bruno/LAW-OpenAPI-v1)
 
 ### 3. Authenticate
 
@@ -59,5 +59,5 @@
 
 ## Support
 
-- Interactive docs: [/api/docs](/api/docs)
+- Interactive docs: [/api/docs](../developer/legal-api-developer-guide.md)
 - Changelog: [legal-api-changelog.md](./legal-api-changelog.md)

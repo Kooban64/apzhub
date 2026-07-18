@@ -80,7 +80,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.23.0",
+  "0.25.0",
   "version-platform-services",
 );
 
@@ -181,9 +181,7 @@ for (const omitted of [
   }
 }
 
-const priorAudits = [
-  "scripts/apzadmin-005-administration-vertical-audit.mjs",
-];
+const priorAudits = ["scripts/apzadmin-005-administration-vertical-audit.mjs"];
 
 for (const script of priorAudits) {
   const full = join(ROOT, script);
@@ -232,7 +230,9 @@ console.log("APZADMIN-006 Administration Wave Closeout Audit PASSED");
 console.log("RESULT: PASS");
 console.log("Violations: 0");
 console.log("  - Programme 001–005 vertical retained PASS");
-console.log("  - Architecture freeze + reference standard + operational readiness present");
+console.log(
+  "  - Architecture freeze + reference standard + operational readiness present",
+);
 console.log("  - Package versions frozen; no runtime/identity/provision routes");
 console.log("  - Classification PRODUCTION_READY_WITH_LIMITATIONS retained");
 if (observations.length > 0) {

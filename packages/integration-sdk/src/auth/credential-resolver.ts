@@ -5,10 +5,7 @@ import {
 } from "../errors/codes";
 import { sdkErr, sdkOk, type SdkResult } from "../errors/result";
 import { maskCredentialRef, maskSecretValue } from "./masking";
-import {
-  isAuthenticationMode,
-  isImplementedAuthenticationMode,
-} from "./modes";
+import { isAuthenticationMode, isImplementedAuthenticationMode } from "./modes";
 import type { SecretProvider } from "./secret-provider";
 import type {
   AuthCredentialReference,
@@ -36,10 +33,7 @@ function validateCredentialReference(
 ): SdkResult<void> {
   if (!credential.credentialRef.trim()) {
     return sdkErr(
-      missingCredentialsError(
-        { correlationId },
-        "credentialRef is required",
-      ),
+      missingCredentialsError({ correlationId }, "credentialRef is required"),
     );
   }
 
@@ -61,7 +55,10 @@ function validateCredentialReference(
     );
   }
 
-  if (credential.authenticationMode === "api_key_header" && !credential.headerName?.trim()) {
+  if (
+    credential.authenticationMode === "api_key_header" &&
+    !credential.headerName?.trim()
+  ) {
     return sdkErr(
       invalidCredentialsError(
         { correlationId, details: { field: "headerName" } },
@@ -70,7 +67,10 @@ function validateCredentialReference(
     );
   }
 
-  if (credential.authenticationMode === "api_key_query" && !credential.queryParam?.trim()) {
+  if (
+    credential.authenticationMode === "api_key_query" &&
+    !credential.queryParam?.trim()
+  ) {
     return sdkErr(
       invalidCredentialsError(
         { correlationId, details: { field: "queryParam" } },

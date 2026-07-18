@@ -9,14 +9,14 @@
 
 ## Milestone chain
 
-| Milestone | Deliverable |
-| --- | --- |
-| APZIDENTITY-001 | Identity Administration Foundation |
-| APZIDENTITY-002 | Platform Services, Gateway & Authorization |
-| APZIDENTITY-003 | Identity HTTP API & Production Typed Client |
-| APZIDENTITY-004 | Identity Administration Workbench |
+| Milestone       | Deliverable                                   |
+| --------------- | --------------------------------------------- |
+| APZIDENTITY-001 | Identity Administration Foundation            |
+| APZIDENTITY-002 | Platform Services, Gateway & Authorization    |
+| APZIDENTITY-003 | Identity HTTP API & Production Typed Client   |
+| APZIDENTITY-004 | Identity Administration Workbench             |
 | APZIDENTITY-005 | Vertical Certification & Production Readiness |
-| APZIDENTITY-006 | Wave Certification & Architecture Freeze |
+| APZIDENTITY-006 | Wave Certification & Architecture Freeze      |
 
 ## Final architecture
 

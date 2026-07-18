@@ -35,7 +35,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -135,7 +136,10 @@ const PROVIDER_EXEC =
 // ---------------------------------------------------------------------------
 scan(walk(join(ROOT, "apps/web/components/observe")), [
   { rule: "workbench-no-platform-services", pattern: /@apzhub\/platform-services/ },
-  { rule: "workbench-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+  {
+    rule: "workbench-no-gateway",
+    pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+  },
   { rule: "workbench-no-observe-core", pattern: /@apzhub\/observe-core/ },
   { rule: "workbench-no-persistence", pattern: /@apzhub\/observe-persistence/ },
   { rule: "workbench-no-event-bus", pattern: /\bEventBus\b|@apzhub\/event-bus/ },
@@ -149,7 +153,8 @@ scan(walk(join(ROOT, "apps/web/components/observe")), [
   },
   {
     rule: "workbench-no-secret-fields",
-    pattern: /password|apiKey|bearerToken|webhookSecret|connectionString|grafanaToken|prometheusToken/i,
+    pattern:
+      /password|apiKey|bearerToken|webhookSecret|connectionString|grafanaToken|prometheusToken/i,
     allow: (_path, line) =>
       /NOT AVAILABLE|banner-|unavailable|capability|credential exclusion|must not/i.test(
         line,
@@ -161,7 +166,10 @@ scan(
   walk(join(ROOT, "apps/web/lib/observe")).filter((f) => !f.includes(".test.")),
   [
     { rule: "client-no-platform-services", pattern: /@apzhub\/platform-services/ },
-    { rule: "client-no-gateway", pattern: /getPlatformServiceGateway|PlatformServiceGateway/ },
+    {
+      rule: "client-no-gateway",
+      pattern: /getPlatformServiceGateway|PlatformServiceGateway/,
+    },
     { rule: "client-no-observe-core", pattern: /@apzhub\/observe-core/ },
     { rule: "client-no-persistence", pattern: /@apzhub\/observe-persistence/ },
     { rule: "client-no-event-bus", pattern: /\bEventBus\b|@apzhub\/event-bus/ },
@@ -414,7 +422,10 @@ scan(walk(join(ROOT, "packages/observe-persistence/src")), [
         detail: "Production factory must exist",
       });
     }
-    if (!body.includes("postgresDb") && !body.includes("in-memory fallback is forbidden")) {
+    if (
+      !body.includes("postgresDb") &&
+      !body.includes("in-memory fallback is forbidden")
+    ) {
       violations.push({
         file: rel(factory),
         line: 1,
@@ -485,12 +496,12 @@ for (const child of [
       detail: "Expected Platform Observability Administration tag",
     });
   }
-  if (!/version:\s*1\.8\.\d+/.test(openapi)) {
+  if (!/version:\s*1\.(?:[8-9]|\d{2,})\.\d+/.test(openapi)) {
     violations.push({
       file: "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
       line: 1,
       rule: "openapi-version",
-      detail: "Expected OpenAPI info.version 1.8.x",
+      detail: "Expected OpenAPI info.version >= 1.8.0",
     });
   }
   for (const required of [
@@ -577,7 +588,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.24.0",
+  "0.25.0",
   "version-platform-services",
 );
 

@@ -41,4 +41,4 @@ When dev registration is enabled, permissions may be bypassed for local testing.
 ## Related
 
 - [Authentication](./legal-api-authentication.md)
-- [OpenAPI spec](/api/law/v1/openapi.yaml) — per-operation `x-required-permission`
+- [OpenAPI spec](../specs/LAW-OpenAPI-v1.yaml) — per-operation `x-required-permission`

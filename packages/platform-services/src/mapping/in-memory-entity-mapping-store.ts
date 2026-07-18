@@ -236,7 +236,9 @@ export class InMemoryEntityMappingStore implements EntityMappingStore {
     return record.platformId;
   }
 
-  async list(filter: ListEntityMappingsFilter = {}): Promise<readonly EntityMappingRecord[]> {
+  async list(
+    filter: ListEntityMappingsFilter = {},
+  ): Promise<readonly EntityMappingRecord[]> {
     const results: EntityMappingRecord[] = [];
 
     for (const record of this.byPlatformId.values()) {
@@ -249,9 +251,13 @@ export class InMemoryEntityMappingStore implements EntityMappingStore {
       }
       if (filter.entityType && record.entityType !== filter.entityType) continue;
       if (filter.providerId && record.providerId !== filter.providerId) continue;
-      if (filter.integrationId && record.integrationId !== filter.integrationId) continue;
+      if (filter.integrationId && record.integrationId !== filter.integrationId)
+        continue;
       if (filter.status && record.status !== filter.status) continue;
-      if (filter.parentPlatformId && record.parentPlatformId !== filter.parentPlatformId) {
+      if (
+        filter.parentPlatformId &&
+        record.parentPlatformId !== filter.parentPlatformId
+      ) {
         continue;
       }
       results.push(cloneRecord(record));

@@ -14,8 +14,12 @@ describe("platform operations routes", () => {
   });
 
   it("resolves operations sections from pathname", () => {
-    expect(resolvePlatformOperationsSection(PLATFORM_OPERATIONS_BASE)).toBe("dashboard");
-    expect(resolvePlatformOperationsSection("/workspace/operations/roles")).toBe("roles");
+    expect(resolvePlatformOperationsSection(PLATFORM_OPERATIONS_BASE)).toBe(
+      "dashboard",
+    );
+    expect(resolvePlatformOperationsSection("/workspace/operations/roles")).toBe(
+      "roles",
+    );
     expect(resolvePlatformOperationsSection("/workspace/operations/governance")).toBe(
       "governance",
     );

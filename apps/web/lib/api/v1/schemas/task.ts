@@ -62,12 +62,19 @@ export const createTaskBodySchema = z
       .optional(),
   })
   .strict()
-  .refine((value) => !(value.statusId && value.stateId && value.statusId !== value.stateId), {
-    message: "statusId and stateId must match when both are provided.",
-  })
+  .refine(
+    (value) => !(value.statusId && value.stateId && value.statusId !== value.stateId),
+    {
+      message: "statusId and stateId must match when both are provided.",
+    },
+  )
   .refine(
     (value) =>
-      !(value.projectModuleId && value.moduleId && value.projectModuleId !== value.moduleId),
+      !(
+        value.projectModuleId &&
+        value.moduleId &&
+        value.projectModuleId !== value.moduleId
+      ),
     { message: "projectModuleId and moduleId must match when both are provided." },
   );
 

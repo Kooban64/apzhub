@@ -32,16 +32,8 @@ import type {
   PipelineRecord,
   PipelineRunRecord,
 } from "../records";
-import {
-  dateFromIso,
-  isoFromDate,
-  metaFromRow,
-} from "../mappers/row-mappers";
-import {
-  compareValues,
-  normalizeListQuery,
-  paginateItems,
-} from "../types";
+import { dateFromIso, isoFromDate, metaFromRow } from "../mappers/row-mappers";
+import { compareValues, normalizeListQuery, paginateItems } from "../types";
 import {
   createPostgresCrudRepository,
   type PostgresCrudTable,
@@ -81,7 +73,7 @@ function rowToPipeline(row: Record<string, unknown>): PipelineRecord {
     providerKind: String(row.providerKind ?? "generic_ci"),
     externalPipelineRef: (row.externalPipelineRef as string | null) ?? undefined,
     description: (row.description as string | null) ?? undefined,
-    status: (String(row.status ?? "active") as PipelineRecord["status"]),
+    status: String(row.status ?? "active") as PipelineRecord["status"],
     defaultBranch: (row.defaultBranch as string | null) ?? undefined,
     repositoryRef: (row.repositoryRef as string | null) ?? undefined,
     variablesJson: Array.isArray(row.variablesJson)
@@ -205,8 +197,7 @@ function rowToPipelineRun(row: Record<string, unknown>): PipelineRunRecord {
       ? (row.approvalsJson as unknown[])
       : [],
     eventsJson: Array.isArray(row.eventsJson) ? (row.eventsJson as unknown[]) : [],
-    environmentJson:
-      (row.environmentJson as Record<string, unknown> | null) ?? {},
+    environmentJson: (row.environmentJson as Record<string, unknown> | null) ?? {},
     linksJson: (row.linksJson as Record<string, unknown> | null) ?? {},
     summaryJson: (row.summaryJson as Record<string, unknown> | null) ?? {},
     metricsJson: (row.metricsJson as Record<string, unknown> | null) ?? undefined,
@@ -288,9 +279,7 @@ export function createPostgresPipelineRepos(db: DatabaseExecutor): {
           description:
             (input.description as string | undefined) ?? existing?.description,
           status:
-            (input.status as PipelineRecord["status"]) ??
-            existing?.status ??
-            "active",
+            (input.status as PipelineRecord["status"]) ?? existing?.status ?? "active",
           defaultBranch:
             (input.defaultBranch as string | undefined) ?? existing?.defaultBranch,
           repositoryRef:
@@ -362,8 +351,7 @@ export function createPostgresPipelineRepos(db: DatabaseExecutor): {
           externalRunRef: String(
             input.externalRunRef ?? existing?.externalRunRef ?? "",
           ),
-          pipelineId:
-            (input.pipelineId as string | undefined) ?? existing?.pipelineId,
+          pipelineId: (input.pipelineId as string | undefined) ?? existing?.pipelineId,
           status: String(input.status ?? existing?.status ?? "pending"),
           correlationId:
             (input.correlationId as string | undefined) ?? existing?.correlationId,
@@ -381,8 +369,8 @@ export function createPostgresPipelineRepos(db: DatabaseExecutor): {
             (input.completedAt as string | undefined) ?? existing?.completedAt,
           canonicalSnapshot:
             (input.canonicalSnapshot as
-              | Readonly<Record<string, unknown>>
-              | undefined) ?? existing?.canonicalSnapshot,
+              Readonly<Record<string, unknown>> | undefined) ??
+            existing?.canonicalSnapshot,
           pipelineRunId:
             (input.pipelineRunId as string | undefined) ?? existing?.pipelineRunId,
         };
@@ -443,8 +431,7 @@ export function createPostgresPipelineRepos(db: DatabaseExecutor): {
           status: String(input.status ?? existing?.status ?? "unknown"),
           stagesJson:
             (input.stagesJson as readonly unknown[]) ?? existing?.stagesJson ?? [],
-          jobsJson:
-            (input.jobsJson as readonly unknown[]) ?? existing?.jobsJson ?? [],
+          jobsJson: (input.jobsJson as readonly unknown[]) ?? existing?.jobsJson ?? [],
           artifactsJson:
             (input.artifactsJson as readonly unknown[]) ??
             existing?.artifactsJson ??
@@ -470,8 +457,7 @@ export function createPostgresPipelineRepos(db: DatabaseExecutor): {
           metricsJson:
             (input.metricsJson as Readonly<Record<string, unknown>> | undefined) ??
             existing?.metricsJson,
-          logsJson:
-            (input.logsJson as readonly unknown[]) ?? existing?.logsJson ?? [],
+          logsJson: (input.logsJson as readonly unknown[]) ?? existing?.logsJson ?? [],
           variablesJson:
             (input.variablesJson as readonly unknown[]) ??
             existing?.variablesJson ??
@@ -489,8 +475,7 @@ export function createPostgresPipelineRepos(db: DatabaseExecutor): {
           startedAt: (input.startedAt as string | undefined) ?? existing?.startedAt,
           completedAt:
             (input.completedAt as string | undefined) ?? existing?.completedAt,
-          durationMs:
-            (input.durationMs as number | undefined) ?? existing?.durationMs,
+          durationMs: (input.durationMs as number | undefined) ?? existing?.durationMs,
           correlationId:
             (input.correlationId as string | undefined) ?? existing?.correlationId,
         };

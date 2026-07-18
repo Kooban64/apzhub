@@ -12,16 +12,16 @@ Standardise HTTP security posture across the platform through centralised `@apzh
 
 ### Implementation
 
-| Component | Location |
-|-----------|----------|
-| `HttpSecurityHeaderService` | `packages/platform-security/src/http-security-header-service.ts` |
-| Response helpers | `packages/platform-security/src/http-security-response.ts` |
-| Types & constants | `packages/platform-security/src/http-security-header-types.ts` |
-| Next.js integration | `withPlatformSecurityHeaders` |
-| Diagnostics extension | `SecurityDiagnostics.httpHeaders` |
-| App wrappers (thin) | `apps/web/lib/security-headers.ts`, `apps/law-platform/lib/security-headers.ts` |
-| Law API headers | `apps/web/lib/api/response.ts` |
-| Platform API handlers | `packages/platform-security/src/api-handlers.ts` |
+| Component                   | Location                                                                        |
+| --------------------------- | ------------------------------------------------------------------------------- |
+| `HttpSecurityHeaderService` | `packages/platform-security/src/http-security-header-service.ts`                |
+| Response helpers            | `packages/platform-security/src/http-security-response.ts`                      |
+| Types & constants           | `packages/platform-security/src/http-security-header-types.ts`                  |
+| Next.js integration         | `withPlatformSecurityHeaders`                                                   |
+| Diagnostics extension       | `SecurityDiagnostics.httpHeaders`                                               |
+| App wrappers (thin)         | `apps/web/lib/security-headers.ts`, `apps/law-platform/lib/security-headers.ts` |
+| Law API headers             | `apps/web/lib/api/response.ts`                                                  |
+| Platform API handlers       | `packages/platform-security/src/api-handlers.ts`                                |
 
 ### Headers standardised
 

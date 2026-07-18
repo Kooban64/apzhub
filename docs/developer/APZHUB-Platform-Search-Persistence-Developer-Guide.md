@@ -4,17 +4,15 @@
 
 ## Packages
 
-| Package | Version |
-|---------|---------|
-| `@apzhub/search-contracts` | 0.2.0 |
-| `@apzhub/search-persistence` | 0.1.0 |
+| Package                      | Version |
+| ---------------------------- | ------- |
+| `@apzhub/search-contracts`   | 0.2.0   |
+| `@apzhub/search-persistence` | 0.1.0   |
 
 ## Quick start (tests)
 
 ```ts
-import {
-  createSearchPlatformFoundationForTest,
-} from "@apzhub/search-persistence";
+import { createSearchPlatformFoundationForTest } from "@apzhub/search-persistence";
 
 const foundation = createSearchPlatformFoundationForTest({
   allowInMemoryPersistence: true,

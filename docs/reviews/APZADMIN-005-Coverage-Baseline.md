@@ -5,23 +5,23 @@
 
 ## Consolidated result (APZADMIN-005 measurement)
 
-| Metric | Value |
-| --- | --- |
+| Metric             | Value      |
+| ------------------ | ---------- |
 | Statements / Lines | **99.37%** |
-| Functions | **99.43%** |
-| Branches | **82.75%** |
+| Functions          | **99.43%** |
+| Branches           | **82.75%** |
 
 ## Layer notes
 
-| Layer | Lines | Functions | Notes |
-| --- | --- | --- | --- |
-| Workbench components | 99.39% | 95.52% | Secondary empty/error paths remain |
-| Typed client / facades | 99.01% | 100% | Types-only file reports 0% (no executable stmts) |
-| HTTP handlers | 99.44% | 100% | Via `administration.test.ts` + coverage harness |
-| admin-contracts | 100% | 100% | |
-| admin-core | 100% | 100% | |
-| admin-persistence | 95.83%+ | 100% | Postgres branch edges partial |
-| platform-services/administration | 99.83% | 98.76% | |
+| Layer                            | Lines   | Functions | Notes                                            |
+| -------------------------------- | ------- | --------- | ------------------------------------------------ |
+| Workbench components             | 99.39%  | 95.52%    | Secondary empty/error paths remain               |
+| Typed client / facades           | 99.01%  | 100%      | Types-only file reports 0% (no executable stmts) |
+| HTTP handlers                    | 99.44%  | 100%      | Via `administration.test.ts` + coverage harness  |
+| admin-contracts                  | 100%    | 100%      |                                                  |
+| admin-core                       | 100%    | 100%      |                                                  |
+| admin-persistence                | 95.83%+ | 100%      | Postgres branch edges partial                    |
+| platform-services/administration | 99.83%  | 98.76%    |                                                  |
 
 ## Scope / command
 

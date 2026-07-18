@@ -31,7 +31,9 @@ describe("capability registration", () => {
     expect(result.registeredCapabilities).toContain("projects");
 
     const projects = registry.discover({ capabilityId: "projects" });
-    expect(projects.some((record) => record.integrationId === "mock-engine")).toBe(true);
+    expect(projects.some((record) => record.integrationId === "mock-engine")).toBe(
+      true,
+    );
     expect(registry.hasCapability("mock-engine", "diagnostics")).toBe(true);
   });
 
@@ -39,11 +41,16 @@ describe("capability registration", () => {
     const registry = createInMemoryCapabilityRegistration();
     const result = registry.register({
       ...createMockAdapterManifest().manifest,
-      declaredCapabilities: ["health", "invalid_capability"] as unknown as readonly import("./capability-types").IntegrationCapabilityId[],
+      declaredCapabilities: [
+        "health",
+        "invalid_capability",
+      ] as unknown as readonly import("./capability-types").IntegrationCapabilityId[],
     });
 
     expect(result.ok).toBe(false);
-    expect(result.issues?.some((issue) => issue.includes("Unknown capabilities"))).toBe(true);
+    expect(result.issues?.some((issue) => issue.includes("Unknown capabilities"))).toBe(
+      true,
+    );
   });
 
   it("validates all standard capability identifiers", () => {
@@ -133,7 +140,11 @@ describe("IntegrationAdapterBase lifecycle", () => {
     const secretProvider = new InMemorySecretProvider({
       secrets: { "mock/credential": "mock-token" },
     });
-    const context = buildAdapterContext({ configuration, secretProvider, clock: fixedClock });
+    const context = buildAdapterContext({
+      configuration,
+      secretProvider,
+      clock: fixedClock,
+    });
     const adapter = new MockAdapter(context, configuration);
 
     const init = await adapter.initialise();
@@ -166,9 +177,9 @@ describe("IntegrationAdapterBase lifecycle", () => {
     await adapter.initialise();
     await adapter.dispose();
 
-    await expect(adapter.performHealthCheck({ correlationId, tenantId })).rejects.toThrow(
-      /disposed/i,
-    );
+    await expect(
+      adapter.performHealthCheck({ correlationId, tenantId }),
+    ).rejects.toThrow(/disposed/i);
   });
 
   it("validates configuration and reports issues", async () => {
@@ -193,7 +204,11 @@ describe("MockAdapter behaviour", () => {
     const secretProvider = new InMemorySecretProvider({
       secrets: { "mock/credential": "mock-token" },
     });
-    const context = buildAdapterContext({ configuration, secretProvider, clock: fixedClock });
+    const context = buildAdapterContext({
+      configuration,
+      secretProvider,
+      clock: fixedClock,
+    });
     const adapter = new MockAdapter(context, configuration);
     await adapter.initialise();
 

@@ -11,23 +11,23 @@
 
 Fifteen sidebar views plus the dashboard, routed by `TestingWorkspaceRouter`. Each view is presentation-only: TanStack Query loads data via `testing-api` → `TestingClient` (mock in APZTCMS-010).
 
-| View component | Route(s) | Client method(s) |
-| -------------- | -------- | ---------------- |
-| `TestingDashboardView` | `/workspace/testing` | `getDashboard` |
-| `TestingRequirementsView` | `/workspace/testing/requirements` | `listRequirements` |
-| `TestingPlansView` | `/workspace/testing/plans`, `…/plans/:id` | `listPlans`, `getPlan` |
-| `TestingSuitesView` | `/workspace/testing/suites` | `listSuites` |
-| `TestingCasesView` | `/workspace/testing/cases` | `listCases` |
-| `TestingExecutionView` | `/workspace/testing/executions`, `…/executions/:id` | `listExecutions`, `getExecution` |
-| `TestingAutomationView` | `/workspace/testing/automation` | `listAutomationRuns` |
-| `TestingEvidenceView` | `/workspace/testing/evidence` | `listEvidence` |
-| `TestingCoverageView` | `/workspace/testing/coverage` | `listCoverage` |
-| `TestingDefectsView` | `/workspace/testing/defects` | `listDefects` |
-| `TestingQualityView` | `/workspace/testing/quality` | `listQualitySummaries` |
-| `TestingCertificationView` | `/workspace/testing/certification`, `…/certification/:id` | `listCertifications`, `getCertification` |
-| `TestingReleaseReadinessView` | `/workspace/testing/release-readiness` | `listReleaseReadiness` |
-| `TestingReportsView` | `/workspace/testing/reports` | `listReportPlaceholders` |
-| `TestingAdministrationView` | `/workspace/testing/administration` | `listAdminSettings` |
+| View component                | Route(s)                                                  | Client method(s)                         |
+| ----------------------------- | --------------------------------------------------------- | ---------------------------------------- |
+| `TestingDashboardView`        | `/workspace/testing`                                      | `getDashboard`                           |
+| `TestingRequirementsView`     | `/workspace/testing/requirements`                         | `listRequirements`                       |
+| `TestingPlansView`            | `/workspace/testing/plans`, `…/plans/:id`                 | `listPlans`, `getPlan`                   |
+| `TestingSuitesView`           | `/workspace/testing/suites`                               | `listSuites`                             |
+| `TestingCasesView`            | `/workspace/testing/cases`                                | `listCases`                              |
+| `TestingExecutionView`        | `/workspace/testing/executions`, `…/executions/:id`       | `listExecutions`, `getExecution`         |
+| `TestingAutomationView`       | `/workspace/testing/automation`                           | `listAutomationRuns`                     |
+| `TestingEvidenceView`         | `/workspace/testing/evidence`                             | `listEvidence`                           |
+| `TestingCoverageView`         | `/workspace/testing/coverage`                             | `listCoverage`                           |
+| `TestingDefectsView`          | `/workspace/testing/defects`                              | `listDefects`                            |
+| `TestingQualityView`          | `/workspace/testing/quality`                              | `listQualitySummaries`                   |
+| `TestingCertificationView`    | `/workspace/testing/certification`, `…/certification/:id` | `listCertifications`, `getCertification` |
+| `TestingReleaseReadinessView` | `/workspace/testing/release-readiness`                    | `listReleaseReadiness`                   |
+| `TestingReportsView`          | `/workspace/testing/reports`                              | `listReportPlaceholders`                 |
+| `TestingAdministrationView`   | `/workspace/testing/administration`                       | `listAdminSettings`                      |
 
 ---
 
@@ -176,17 +176,17 @@ Fifteen sidebar views plus the dashboard, routed by `TestingWorkspaceRouter`. Ea
 
 Defined in `testing-ui.tsx`:
 
-| Primitive | Purpose |
-| --------- | ------- |
-| `PageShell` | Title, description, breadcrumbs, actions |
-| `LoadingState` | `role="status"` loading panel |
-| `EmptyState` | Zero-data messaging |
-| `ErrorState` | `role="alert"` with optional retry |
-| `StatusBadge` | Normalised status labels |
-| `TestingStatCard` | Dashboard metric cards |
-| `TestingTable` | Accessible data tables with optional row navigation |
-| `FilterBar` | Search/filter grid (`role="search"`) |
-| `Panel` | Section panels with `aria-label` |
+| Primitive         | Purpose                                             |
+| ----------------- | --------------------------------------------------- |
+| `PageShell`       | Title, description, breadcrumbs, actions            |
+| `LoadingState`    | `role="status"` loading panel                       |
+| `EmptyState`      | Zero-data messaging                                 |
+| `ErrorState`      | `role="alert"` with optional retry                  |
+| `StatusBadge`     | Normalised status labels                            |
+| `TestingStatCard` | Dashboard metric cards                              |
+| `TestingTable`    | Accessible data tables with optional row navigation |
+| `FilterBar`       | Search/filter grid (`role="search"`)                |
+| `Panel`           | Section panels with `aria-label`                    |
 
 ---
 

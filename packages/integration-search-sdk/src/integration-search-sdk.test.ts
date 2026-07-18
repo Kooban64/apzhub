@@ -26,9 +26,7 @@ import {
   createNotImplementedResult,
   SearchErrorTranslator,
   createSearchErrorTranslator,
-  SearchProviderHealth,
   createSearchProviderHealth,
-  SearchProviderDiagnostics,
   createSearchProviderDiagnostics,
   SearchProviderLifecycle,
   createSearchProviderLifecycle,
@@ -98,7 +96,9 @@ describe("bootstrap", () => {
       integrationId: "x",
       additionalCapabilities: ["search", "health", "diagnostics"],
     });
-    expect(config.manifest.declaredCapabilities.filter((c) => c === "search")).toHaveLength(1);
+    expect(
+      config.manifest.declaredCapabilities.filter((c) => c === "search"),
+    ).toHaveLength(1);
   });
 });
 
@@ -143,7 +143,9 @@ describe("capabilities", () => {
     expect(result.ok).toBe(true);
     expect(result.searchCapabilities).toContain("keyword_search");
     expect(registration.hasSearchCapability("mock-search", "health")).toBe(true);
-    expect(registration.discover({ searchCapability: "facets" }).length).toBeGreaterThan(0);
+    expect(
+      registration.discover({ searchCapability: "facets" }).length,
+    ).toBeGreaterThan(0);
     expect(registration.discoverPlatform({ capabilityId: "search" }).length).toBe(1);
     expect(registration.getPlatformRegistration()).toBeDefined();
 
@@ -255,9 +257,7 @@ describe("configuration validator", () => {
       validator.validateDeclaredCapabilities(["nope" as "keyword_search"]).valid,
     ).toBe(false);
 
-    expect(() =>
-      validator.assertAllowedCapabilities(["keyword_search"]),
-    ).not.toThrow();
+    expect(() => validator.assertAllowedCapabilities(["keyword_search"])).not.toThrow();
     expect(() => validator.assertAllowedCapabilities([])).toThrow(/capability/);
   });
 });
@@ -365,10 +365,10 @@ describe("error translator", () => {
     });
     expect(translated.error.category).toBeDefined();
 
-    const domain = translator.translateDomainError(
-      searchProviderNotFound("missing"),
-      { correlationId: "c2", integrationId: "mock-search" },
-    );
+    const domain = translator.translateDomainError(searchProviderNotFound("missing"), {
+      correlationId: "c2",
+      integrationId: "mock-search",
+    });
     expect(domain.error.code).toBe("search.provider_not_found");
     expect(domain.error.category).toBe("not_found");
 
@@ -544,9 +544,11 @@ describe("SearchAdapterFactory", () => {
     });
     expect(validation.valid).toBe(true);
 
-    expect(factory.getSearchCapabilityRegistration().hasSearchCapability("mock-search", "facets")).toBe(
-      true,
-    );
+    expect(
+      factory
+        .getSearchCapabilityRegistration()
+        .hasSearchCapability("mock-search", "facets"),
+    ).toBe(true);
     expect(factory.validateRegistration(configuration.manifest).ok).toBe(true);
 
     await factory.dispose(adapter);
@@ -621,9 +623,9 @@ describe("SearchIntegrationAdapterBase behaviours", () => {
       },
     };
     const context = buildSearchAdapterContext({ configuration, clock: fixedClock });
-    expect(
-      () => new MockSearchIntegrationAdapter(context, configuration),
-    ).toThrow(/requires platform capability "search"/);
+    expect(() => new MockSearchIntegrationAdapter(context, configuration)).toThrow(
+      /requires platform capability "search"/,
+    );
   });
 
   it("assertSearchCapability and disposed guards", async () => {

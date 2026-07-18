@@ -12,7 +12,9 @@ import { MOCK_TICKET } from "./testing/mock-zammad-core-data";
 
 const ctx = { correlationId: TEST_CORRELATION_ID, tenantId: TEST_TENANT_ID };
 
-async function createAdapter(fetchOptions?: Parameters<typeof createMockZammadFetch>[0]) {
+async function createAdapter(
+  fetchOptions?: Parameters<typeof createMockZammadFetch>[0],
+) {
   return createZammadAdapter({
     zammad: DEFAULT_TEST_ZAMMAD_CONFIG,
     tenantId: TEST_TENANT_ID,
@@ -38,7 +40,9 @@ describe("Zammad core service capabilities", () => {
       "synchronisation",
     ]);
     expect(capabilities.every((entry) => entry.implemented)).toBe(true);
-    expect(capabilities.find((entry) => entry.serviceId === "support")?.operations).toEqual(
+    expect(
+      capabilities.find((entry) => entry.serviceId === "support")?.operations,
+    ).toEqual(
       expect.arrayContaining([
         "list",
         "get",
@@ -82,7 +86,10 @@ describe("Zammad support service lifecycle", () => {
     expect(listed.items.length).toBeGreaterThan(0);
     expect(listed.items[0]?.id).toMatch(/^sreq_zammad_/);
 
-    const fetched = await adapter.core.support.get(ctx, `sreq_zammad_${MOCK_TICKET.id}`);
+    const fetched = await adapter.core.support.get(
+      ctx,
+      `sreq_zammad_${MOCK_TICKET.id}`,
+    );
     expect(fetched.title).toBe("Cannot reset password");
     expect(fetched.status).toBe("open");
     expect(fetched.priority).toBe("normal");
@@ -114,10 +121,14 @@ describe("Zammad support service lifecycle", () => {
     const { adapter } = await createAdapter();
     const id = `sreq_zammad_${MOCK_TICKET.id}`;
 
-    const pending = await adapter.core.support.changeState(ctx, id, { status: "pending" });
+    const pending = await adapter.core.support.changeState(ctx, id, {
+      status: "pending",
+    });
     expect(pending.status).toBe("pending");
 
-    const urgent = await adapter.core.support.changePriority(ctx, id, { priority: "urgent" });
+    const urgent = await adapter.core.support.changePriority(ctx, id, {
+      priority: "urgent",
+    });
     expect(urgent.priority).toBe("urgent");
 
     const assigned = await adapter.core.support.assignOwner(ctx, id, {
@@ -151,12 +162,9 @@ describe("Zammad support service lifecycle", () => {
     const filtered = await adapter.core.support.list(ctx, { status: "closed" });
     expect(filtered.items.every((item) => item.status === "closed")).toBe(true);
 
-    const sorted = await adapter.core.support.list(
-      ctx,
-      {},
-      {},
-      [{ field: "title", direction: "asc" }],
-    );
+    const sorted = await adapter.core.support.list(ctx, {}, {}, [
+      { field: "title", direction: "asc" },
+    ]);
     const titles = sorted.items.map((item) => item.title);
     expect(titles).toEqual([...titles].sort((a, b) => a.localeCompare(b)));
   });
@@ -193,7 +201,9 @@ describe("Zammad support service lifecycle", () => {
 
   it("returns not_found for missing tickets", async () => {
     const { adapter } = await createAdapter();
-    await expect(adapter.core.support.get(ctx, "sreq_zammad_99999")).rejects.toMatchObject({
+    await expect(
+      adapter.core.support.get(ctx, "sreq_zammad_99999"),
+    ).rejects.toMatchObject({
       category: "not_found",
     });
   });
@@ -273,7 +283,9 @@ describe("Zammad user service lookup", () => {
     expect(lookedUp?.id).toBe("suser_zammad_5");
 
     const searched = await adapter.core.users.search(ctx, "agent");
-    expect(searched.items.some((user) => user.email === "agent@example.com")).toBe(true);
+    expect(searched.items.some((user) => user.email === "agent@example.com")).toBe(
+      true,
+    );
   });
 
   it("filters users by role", async () => {

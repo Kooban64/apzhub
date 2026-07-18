@@ -34,9 +34,7 @@ import {
 
 const ROOT = join(__dirname, "../..");
 
-function ctx(
-  overrides?: Partial<ServiceRequestContext>,
-): ServiceRequestContext {
+function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext {
   return {
     tenantId: "tenant_iam_a",
     userId: "actor_iam",
@@ -109,9 +107,7 @@ describe("APZIDENTITY-005 Identity Vertical Certification", () => {
       userId: user.id,
       reason: "cert-deactivate",
     });
-    expect((await identity.users.get(ctx(), user.id)).status).toBe(
-      "deactivated",
-    );
+    expect((await identity.users.get(ctx(), user.id)).status).toBe("deactivated");
 
     await identity.activation.create(ctx(), {
       userId: user.id,
@@ -170,12 +166,8 @@ describe("APZIDENTITY-005 Identity Vertical Certification", () => {
     expect(await foundation.users.get(ctxA, userA.id)).toBeDefined();
     expect(await foundation.users.get(ctxB, userA.id)).toBeNull();
     expect(await foundation.users.get(ctxA, userB.id)).toBeNull();
-    expect((await foundation.users.list(ctxA)).map((u) => u.id)).toEqual([
-      userA.id,
-    ]);
-    expect((await foundation.users.list(ctxB)).map((u) => u.id)).toEqual([
-      userB.id,
-    ]);
+    expect((await foundation.users.list(ctxA)).map((u) => u.id)).toEqual([userA.id]);
+    expect((await foundation.users.list(ctxB)).map((u) => u.id)).toEqual([userB.id]);
 
     // Gateway production path: empty permissions deny cross-context reads
     const accessResolver = new InMemoryAuthorizationAccessResolver();
@@ -313,8 +305,8 @@ describe("APZIDENTITY-005 Identity Vertical Certification", () => {
     });
     const gw = services.gateway.identity;
 
-    await expect(gw.users.list(ctx())).rejects.toSatisfy(
-      (error: unknown) => isPlatformServiceError(error),
+    await expect(gw.users.list(ctx())).rejects.toSatisfy((error: unknown) =>
+      isPlatformServiceError(error),
     );
 
     // Read-only permission cannot mutate
@@ -341,8 +333,7 @@ describe("APZIDENTITY-005 Identity Vertical Certification", () => {
     expect(created.id).toBeTruthy();
 
     expect(
-      resolveOperationAuthorization("identityUsers", "create")
-        ?.requiredPermission,
+      resolveOperationAuthorization("identityUsers", "create")?.requiredPermission,
     ).toBe("identity.user");
     expect(
       resolveOperationAuthorization("identityServiceAssignments", "create")
@@ -352,12 +343,8 @@ describe("APZIDENTITY-005 Identity Vertical Certification", () => {
 
   it("Journey 7 — disabled service gate (APZHUB_IDENTITY_ENABLED)", () => {
     expect(isIdentityServiceEnabled({})).toBe(false);
-    expect(
-      isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "false" }),
-    ).toBe(false);
-    expect(
-      isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "true" }),
-    ).toBe(true);
+    expect(isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "false" })).toBe(false);
+    expect(isIdentityServiceEnabled({ APZHUB_IDENTITY_ENABLED: "true" })).toBe(true);
 
     const withoutIdentity = createPlatformServices({
       authorizationMode: "allow-all",
@@ -380,9 +367,9 @@ describe("APZIDENTITY-005 Identity Vertical Certification", () => {
   });
 
   it("Journey 8 — persistence failure maps to safe errors (no silent fallback)", async () => {
-    expect(() =>
-      createIdentityPlatformServicesForTest({} as never),
-    ).toThrow(/allowInMemoryPersistence/);
+    expect(() => createIdentityPlatformServicesForTest({} as never)).toThrow(
+      /allowInMemoryPersistence/,
+    );
 
     const identity = createIdentityPlatformServicesForTest({
       allowInMemoryPersistence: true,
@@ -392,12 +379,11 @@ describe("APZIDENTITY-005 Identity Vertical Certification", () => {
     expect(identity.readiness.provisioningEnabled).toBe(false);
 
     // Production factory requires postgres — no silent memory
-    const { createIdentityPlatformServicesForProduction } = await import(
-      "@apzhub/platform-services"
+    const { createIdentityPlatformServicesForProduction } =
+      await import("@apzhub/platform-services");
+    expect(() => createIdentityPlatformServicesForProduction({} as never)).toThrow(
+      /postgresDb/,
     );
-    expect(() =>
-      createIdentityPlatformServicesForProduction({} as never),
-    ).toThrow(/postgresDb/);
   });
 
   it("Journey 9 — audit and history immutability", async () => {
@@ -466,10 +452,7 @@ describe("APZIDENTITY-005 Identity Vertical Certification", () => {
       expect(existsSync(join(ROOT, path)), path).toBe(true);
     }
 
-    const routes = readFileSync(
-      join(ROOT, "apps/web/lib/identity/routes.ts"),
-      "utf8",
-    );
+    const routes = readFileSync(join(ROOT, "apps/web/lib/identity/routes.ts"), "utf8");
     expect(routes).toContain("/workspace/identity");
 
     const view = readFileSync(
@@ -491,18 +474,16 @@ describe("APZIDENTITY-005 Identity Vertical Certification", () => {
     expect(shell).toContain("IdentityWorkspaceRouter");
     expect(shell).toContain("isIdentityRoute");
 
-    expect(existsSync(join(ROOT, "apps/web/app/workspace/identity"))).toBe(
-      false,
-    );
+    expect(existsSync(join(ROOT, "apps/web/app/workspace/identity"))).toBe(false);
   });
 
-  it("certifies OpenAPI 1.7.x Identity surface and route count", () => {
+  it("certifies OpenAPI 1.9.x Identity surface and route count", () => {
     const openapi = readFileSync(
       join(ROOT, "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml"),
       "utf8",
     );
     expect(openapi).toContain("Platform Identity Administration");
-    expect(openapi).toMatch(/version:\s*1\.7\.\d+/);
+    expect(openapi).toMatch(/version:\s*1\.9\.\d+/);
     for (const path of [
       "/identity/users",
       "/identity/groups",
@@ -537,7 +518,7 @@ describe("APZIDENTITY-005 Identity Vertical Certification", () => {
       "packages/identity-contracts/package.json": "0.2.0",
       "packages/identity-core/package.json": "0.2.0",
       "packages/identity-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.24.0",
+      "packages/platform-services/package.json": "0.25.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const version = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;

@@ -68,8 +68,7 @@ export async function assertWorkflowHttpEnabled(): Promise<void> {
   if (!bootstrap.workflowEnabled) {
     throw new PlatformApiHttpError(503, {
       code: "WORKFLOW_SERVICE_UNAVAILABLE",
-      message:
-        "Workflow Platform HTTP API is not enabled (APZHUB_WORKFLOW_ENABLED).",
+      message: "Workflow Platform HTTP API is not enabled (APZHUB_WORKFLOW_ENABLED).",
     });
   }
 }
@@ -117,9 +116,7 @@ export async function handleListWorkflows(
   const items = await gateway.workflow.workflows.find(context.serviceContext, {
     query: query.query,
     lifecycle: query.lifecycle,
-    categoryId: query.categoryId
-      ? asWorkflowCategoryId(query.categoryId)
-      : undefined,
+    categoryId: query.categoryId ? asWorkflowCategoryId(query.categoryId) : undefined,
     folderId: query.folderId ? asWorkflowFolderId(query.folderId) : undefined,
     limit: query.limit ?? query.perPage,
   });
@@ -138,13 +135,9 @@ export async function handleCreateWorkflow(
   const gateway = await requireWorkflowGateway();
   const result = await gateway.workflow.workflows.create(context.serviceContext, {
     ...body,
-    categoryId: body.categoryId
-      ? asWorkflowCategoryId(body.categoryId)
-      : undefined,
+    categoryId: body.categoryId ? asWorkflowCategoryId(body.categoryId) : undefined,
     folderId: body.folderId ? asWorkflowFolderId(body.folderId) : undefined,
-    templateId: body.templateId
-      ? asWorkflowTemplateId(body.templateId)
-      : undefined,
+    templateId: body.templateId ? asWorkflowTemplateId(body.templateId) : undefined,
   });
   return jsonDataResponse(result, context.tracing);
 }
@@ -273,14 +266,11 @@ export async function handleTransitionWorkflow(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireWorkflowGateway();
-  const result = await gateway.workflow.workflows.transition(
-    context.serviceContext,
-    {
-      workflowId,
-      to: body.to,
-      reason: body.reason,
-    },
-  );
+  const result = await gateway.workflow.workflows.transition(context.serviceContext, {
+    workflowId,
+    to: body.to,
+    reason: body.reason,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -344,10 +334,7 @@ export async function handleGetWorkflowVersion(
     await param(routeContext, "versionId", workflowVersionIdParamSchema),
   );
   const gateway = await requireWorkflowGateway();
-  const result = await gateway.workflow.versions.get(
-    context.serviceContext,
-    versionId,
-  );
+  const result = await gateway.workflow.versions.get(context.serviceContext, versionId);
   if (result.workflowId !== workflowId) {
     throw new PlatformApiHttpError(404, {
       code: "NOT_FOUND",
@@ -370,10 +357,7 @@ export async function handleListWorkflowAudit(
     await param(routeContext, "workflowId", workflowIdParamSchema),
   );
   const gateway = await requireWorkflowGateway();
-  const items = await gateway.workflow.audit.list(
-    context.serviceContext,
-    workflowId,
-  );
+  const items = await gateway.workflow.audit.list(context.serviceContext, workflowId);
   return collection(items, context);
 }
 
@@ -400,18 +384,13 @@ export async function handleCreateWorkflowTemplate(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireWorkflowGateway();
-  const result = await gateway.workflow.templates.create(
-    context.serviceContext,
-    {
-      ...body,
-      categoryId: body.categoryId
-        ? asWorkflowCategoryId(body.categoryId)
-        : undefined,
-      graph: body.graph as never,
-      parameters: body.parameters as never,
-      variables: body.variables as never,
-    },
-  );
+  const result = await gateway.workflow.templates.create(context.serviceContext, {
+    ...body,
+    categoryId: body.categoryId ? asWorkflowCategoryId(body.categoryId) : undefined,
+    graph: body.graph as never,
+    parameters: body.parameters as never,
+    variables: body.variables as never,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -445,23 +424,20 @@ export async function handleUpdateWorkflowTemplate(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireWorkflowGateway();
-  const result = await gateway.workflow.templates.update(
-    context.serviceContext,
-    {
-      templateId,
-      name: body.name,
-      description: body.description,
-      categoryId:
-        body.categoryId === undefined
-          ? undefined
-          : body.categoryId === null
-            ? null
-            : asWorkflowCategoryId(body.categoryId),
-      graph: body.graph as never,
-      parameters: body.parameters as never,
-      variables: body.variables as never,
-    },
-  );
+  const result = await gateway.workflow.templates.update(context.serviceContext, {
+    templateId,
+    name: body.name,
+    description: body.description,
+    categoryId:
+      body.categoryId === undefined
+        ? undefined
+        : body.categoryId === null
+          ? null
+          : asWorkflowCategoryId(body.categoryId),
+    graph: body.graph as never,
+    parameters: body.parameters as never,
+    variables: body.variables as never,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -501,15 +477,12 @@ export async function handleCreateWorkflowCategory(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireWorkflowGateway();
-  const result = await gateway.workflow.categories.create(
-    context.serviceContext,
-    {
-      ...body,
-      parentCategoryId: body.parentCategoryId
-        ? asWorkflowCategoryId(body.parentCategoryId)
-        : undefined,
-    },
-  );
+  const result = await gateway.workflow.categories.create(context.serviceContext, {
+    ...body,
+    parentCategoryId: body.parentCategoryId
+      ? asWorkflowCategoryId(body.parentCategoryId)
+      : undefined,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -576,10 +549,7 @@ export async function handleGetWorkflowFolder(
     await param(routeContext, "folderId", workflowFolderIdParamSchema),
   );
   const gateway = await requireWorkflowGateway();
-  const result = await gateway.workflow.folders.get(
-    context.serviceContext,
-    folderId,
-  );
+  const result = await gateway.workflow.folders.get(context.serviceContext, folderId);
   if (result === null) {
     throw new PlatformApiHttpError(404, {
       code: "NOT_FOUND",
@@ -603,33 +573,22 @@ export async function handleValidateWorkflow(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const gateway = await requireWorkflowGateway();
-  const result = await gateway.workflow.validation.validate(
-    context.serviceContext,
-    {
-      workflowId: body.workflowId
-        ? asWorkflowId(body.workflowId)
-        : undefined,
-      versionId: body.versionId
-        ? asWorkflowVersionId(body.versionId)
-        : undefined,
-      lifecycle: body.lifecycle,
-      graph: body.graph as never,
-      variables: body.variables as never,
-      parameters: body.parameters as never,
-      triggers: body.triggers as never,
-      actions: body.actions as never,
-      conditions: body.conditions as never,
-      connections: body.connections as never,
-      versionNumber: body.versionNumber,
-      categoryId: body.categoryId
-        ? asWorkflowCategoryId(body.categoryId)
-        : undefined,
-      folderId: body.folderId ? asWorkflowFolderId(body.folderId) : undefined,
-      templateId: body.templateId
-        ? asWorkflowTemplateId(body.templateId)
-        : undefined,
-    },
-  );
+  const result = await gateway.workflow.validation.validate(context.serviceContext, {
+    workflowId: body.workflowId ? asWorkflowId(body.workflowId) : undefined,
+    versionId: body.versionId ? asWorkflowVersionId(body.versionId) : undefined,
+    lifecycle: body.lifecycle,
+    graph: body.graph as never,
+    variables: body.variables as never,
+    parameters: body.parameters as never,
+    triggers: body.triggers as never,
+    actions: body.actions as never,
+    conditions: body.conditions as never,
+    connections: body.connections as never,
+    versionNumber: body.versionNumber,
+    categoryId: body.categoryId ? asWorkflowCategoryId(body.categoryId) : undefined,
+    folderId: body.folderId ? asWorkflowFolderId(body.folderId) : undefined,
+    templateId: body.templateId ? asWorkflowTemplateId(body.templateId) : undefined,
+  });
   return jsonDataResponse(result, context.tracing);
 }
 

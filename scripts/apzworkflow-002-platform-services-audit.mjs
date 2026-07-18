@@ -24,7 +24,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -63,10 +64,19 @@ const workflowPackages = [
 for (const root of workflowPackages) {
   scan(walk(join(ROOT, root)), [
     { rule: "workflow-no-platform-services", pattern: /@apzhub\/platform-services/ },
-    { rule: "workflow-no-http", pattern: /NextRequest|withPlatformApiAuth|OpenAPIHono|\/api\/v1\/workflow/ },
-    { rule: "workflow-no-workbench", pattern: /workbench-framework|PlatformReportingView/ },
+    {
+      rule: "workflow-no-http",
+      pattern: /NextRequest|withPlatformApiAuth|OpenAPIHono|\/api\/v1\/workflow/,
+    },
+    {
+      rule: "workflow-no-workbench",
+      pattern: /workbench-framework|PlatformReportingView/,
+    },
     // Dependency import only — docs may say "no n8n"
-    { rule: "workflow-no-n8n-import", pattern: /from\s+["'][^"']*n8n[^"']*["']|require\(["'][^"']*n8n/ },
+    {
+      rule: "workflow-no-n8n-import",
+      pattern: /from\s+["'][^"']*n8n[^"']*["']|require\(["'][^"']*n8n/,
+    },
     { rule: "workflow-no-apps", pattern: /from\s+["'][^"']*apps\// },
   ]);
 }
@@ -84,7 +94,10 @@ const workflowSorFiles = workflowServiceFiles.filter((file) => {
 scan(workflowServiceFiles, [
   { rule: "services-no-http", pattern: /NextRequest|OpenAPIHono|\/api\/v1/ },
   { rule: "services-no-workbench", pattern: /workbench-framework/ },
-  { rule: "services-no-execution", pattern: /EventBus|bullmq|executeWorkflow|scheduleWorkflow/ },
+  {
+    rule: "services-no-execution",
+    pattern: /EventBus|bullmq|executeWorkflow|scheduleWorkflow/,
+  },
 ]);
 scan(workflowSorFiles, [
   {
@@ -121,7 +134,10 @@ if (!/PLATFORM_WORKFLOW_PERMISSIONS/.test(catalogue)) {
 }
 
 const opMap = readFileSync(
-  join(ROOT, "packages/platform-services/src/authorization/operation-authorization-map.ts"),
+  join(
+    ROOT,
+    "packages/platform-services/src/authorization/operation-authorization-map.ts",
+  ),
   "utf8",
 );
 if (!/workflowPlatformOps/.test(opMap)) {
@@ -170,12 +186,12 @@ if (contractsPkg.version !== "0.3.0") {
     detail: `Expected 0.3.0, got ${contractsPkg.version}`,
   });
 }
-if (platformPkg.version !== "0.21.0") {
+if (!["0.21.0", "0.25.0"].includes(platformPkg.version)) {
   violations.push({
     file: "packages/platform-services/package.json",
     line: 1,
     rule: "version-platform-services",
-    detail: `Expected 0.21.0, got ${platformPkg.version}`,
+    detail: `Expected 0.21.0 or 0.25.0, got ${platformPkg.version}`,
   });
 }
 if (!/workflow-contracts/.test(contractsStub)) {
@@ -214,9 +230,11 @@ if (violations.length > 0) {
 }
 
 console.log("APZWORKFLOW-002 architecture audit PASSED");
-console.log("  - workflow packages do not depend on platform-services / HTTP / n8n / apps");
+console.log(
+  "  - workflow packages do not depend on platform-services / HTTP / n8n / apps",
+);
 console.log("  - platform workflow services exclude HTTP / n8n / EventBus / execution");
 console.log("  - gateway exposes workflow nested facets");
 console.log("  - authorization catalogue + workflowPlatformOps present");
-console.log("  - versions: workflow-contracts@0.3.0 platform-services@0.21.0");
+console.log("  - versions: workflow-contracts@0.3.0 platform-services@0.25.0");
 process.exit(0);

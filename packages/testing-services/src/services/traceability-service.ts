@@ -37,7 +37,9 @@ function toDomain(row: TraceabilityLinkRecord): TraceabilityLink {
 export function createTraceabilityService(rt: ServiceRuntime): TraceabilityService {
   return {
     async listLinks(ctx) {
-      const page = await rt.persistence.traceabilityLinks.list(toRepositoryContext(ctx));
+      const page = await rt.persistence.traceabilityLinks.list(
+        toRepositoryContext(ctx),
+      );
       return page.items.map(toDomain);
     },
     async getLink(ctx, id) {
@@ -54,16 +56,24 @@ export function createTraceabilityService(rt: ServiceRuntime): TraceabilityServi
       assertNonEmpty(input.sourceId, "sourceId");
       assertNonEmpty(input.targetKind, "targetKind");
       assertNonEmpty(input.targetId, "targetId");
-      assertNoSelfLink(input.sourceKind, input.sourceId, input.targetKind, input.targetId);
-      const row = await rt.persistence.traceabilityLinks.create(toRepositoryContext(ctx), {
-        type: input.type,
-        sourceKind: input.sourceKind,
-        sourceId: input.sourceId,
-        targetKind: input.targetKind,
-        targetId: input.targetId,
-        notes: input.notes,
-        organisationId: ctx.organisationId,
-      });
+      assertNoSelfLink(
+        input.sourceKind,
+        input.sourceId,
+        input.targetKind,
+        input.targetId,
+      );
+      const row = await rt.persistence.traceabilityLinks.create(
+        toRepositoryContext(ctx),
+        {
+          type: input.type,
+          sourceKind: input.sourceKind,
+          sourceId: input.sourceId,
+          targetKind: input.targetKind,
+          targetId: input.targetId,
+          notes: input.notes,
+          organisationId: ctx.organisationId,
+        },
+      );
       rt.events.record({
         eventType: "traceability.link_created",
         tenantId: ctx.tenantId,
@@ -135,9 +145,9 @@ export function createTraceabilityService(rt: ServiceRuntime): TraceabilityServi
         .map((l) =>
           asTestCaseId(l.sourceKind === "test_case" ? l.sourceId : l.targetId),
         );
-      const fromCases = (
-        await rt.persistence.testCases.list(rctx)
-      ).items.filter((c) => c.requirementIds.includes(requirementId));
+      const fromCases = (await rt.persistence.testCases.list(rctx)).items.filter((c) =>
+        c.requirementIds.includes(requirementId),
+      );
       const allCaseIds = [
         ...new Set([...caseIds, ...fromCases.map((c) => asTestCaseId(c.id))]),
       ];

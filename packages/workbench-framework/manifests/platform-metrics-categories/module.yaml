@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-categories
+name: Metric Categories
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metric Categories sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metric Categories
+    icon: folder-tree
+    route: /workspace/metrics/categories
+    order: 50
+    permission: metrics.metadata
+  view:
+    title: Metric Categories
+    workspace: metrics
+    route: /workspace/metrics/categories
+    permission: metrics.metadata

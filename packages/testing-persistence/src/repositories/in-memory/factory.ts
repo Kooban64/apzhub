@@ -391,9 +391,7 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
   const automationRepos = createInMemoryAutomationRepos(
     stores as AutomationInMemoryStores,
   );
-  const pipelineRepos = createInMemoryPipelineRepos(
-    stores as PipelineInMemoryStores,
-  );
+  const pipelineRepos = createInMemoryPipelineRepos(stores as PipelineInMemoryStores);
   const engineeringRepos = createInMemoryEngineeringRepos(
     stores as EngineeringInMemoryStores,
   );
@@ -596,7 +594,8 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
           ownerId: (input.ownerId as string | undefined) ?? existing?.ownerId,
           parentSuiteId:
             (input.parentSuiteId as string | undefined) ?? existing?.parentSuiteId,
-          sortOrder: (input.sortOrder as number | undefined) ?? existing?.sortOrder ?? 0,
+          sortOrder:
+            (input.sortOrder as number | undefined) ?? existing?.sortOrder ?? 0,
           versionNumber:
             (input.versionNumber as number | undefined) ?? existing?.versionNumber ?? 1,
           groupKey: (input.groupKey as string | undefined) ?? existing?.groupKey,
@@ -707,9 +706,7 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
         assertRequiredString(input.caseId, "caseId");
         validateCaseVersionReason(String(input.reason));
         const id =
-          typeof input.id === "string" && input.id.length > 0
-            ? input.id
-            : randomUUID();
+          typeof input.id === "string" && input.id.length > 0 ? input.id : randomUUID();
         const meta = baseMeta(ctx, { id, organisationId: input.organisationId });
         const record: TestCaseVersionRecord = {
           ...meta,
@@ -749,9 +746,7 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
         assertRequiredString(input.planId, "planId");
         validateCaseVersionReason(String(input.reason));
         const id =
-          typeof input.id === "string" && input.id.length > 0
-            ? input.id
-            : randomUUID();
+          typeof input.id === "string" && input.id.length > 0 ? input.id : randomUUID();
         const meta = baseMeta(ctx, { id, organisationId: input.organisationId });
         const record: TestPlanVersionRecord = {
           ...meta,
@@ -791,9 +786,7 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
         assertRequiredString(input.suiteId, "suiteId");
         validateCaseVersionReason(String(input.reason));
         const id =
-          typeof input.id === "string" && input.id.length > 0
-            ? input.id
-            : randomUUID();
+          typeof input.id === "string" && input.id.length > 0 ? input.id : randomUUID();
         const meta = baseMeta(ctx, { id, organisationId: input.organisationId });
         const record: TestSuiteVersionRecord = {
           ...meta,
@@ -1190,12 +1183,12 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
             existing?.currentRecommendation,
           recommendationJson:
             (input.recommendationJson as
-              | Readonly<Record<string, unknown>>
-              | undefined) ?? existing?.recommendationJson,
+              Readonly<Record<string, unknown>> | undefined) ??
+            existing?.recommendationJson,
           evidenceLinksJson:
             (input.evidenceLinksJson as
-              | Readonly<Record<string, unknown>>
-              | undefined) ?? existing?.evidenceLinksJson,
+              Readonly<Record<string, unknown>> | undefined) ??
+            existing?.evidenceLinksJson,
           ruleId: (input.ruleId as string | undefined) ?? existing?.ruleId,
         };
       },
@@ -1319,8 +1312,7 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
           priority: (input.priority as string | undefined) ?? existing?.priority,
           ownerUserId:
             (input.ownerUserId as string | undefined) ?? existing?.ownerUserId,
-          resolution:
-            (input.resolution as string | undefined) ?? existing?.resolution,
+          resolution: (input.resolution as string | undefined) ?? existing?.resolution,
           verificationState:
             (input.verificationState as string | undefined) ??
             existing?.verificationState,
@@ -1331,8 +1323,7 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
             existing?.requirementIds ??
             [],
           planIds: (input.planIds as readonly string[]) ?? existing?.planIds ?? [],
-          suiteIds:
-            (input.suiteIds as readonly string[]) ?? existing?.suiteIds ?? [],
+          suiteIds: (input.suiteIds as readonly string[]) ?? existing?.suiteIds ?? [],
           caseIds: (input.caseIds as readonly string[]) ?? existing?.caseIds ?? [],
           manualExecutionIds:
             (input.manualExecutionIds as readonly string[]) ??
@@ -1343,9 +1334,7 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
             existing?.automationExecutionIds ??
             [],
           evidenceIds:
-            (input.evidenceIds as readonly string[]) ??
-            existing?.evidenceIds ??
-            [],
+            (input.evidenceIds as readonly string[]) ?? existing?.evidenceIds ?? [],
           releaseLabel:
             (input.releaseLabel as string | undefined) ?? existing?.releaseLabel,
           riskIds: (input.riskIds as readonly string[]) ?? existing?.riskIds ?? [],
@@ -1354,8 +1343,7 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
             existing?.workItemRefs ??
             [],
           target: (input.target as string | undefined) ?? existing?.target,
-          externalId:
-            (input.externalId as string | undefined) ?? existing?.externalId,
+          externalId: (input.externalId as string | undefined) ?? existing?.externalId,
           resultId: (input.resultId as string | undefined) ?? existing?.resultId,
           runId: (input.runId as string | undefined) ?? existing?.runId,
         };
@@ -1378,9 +1366,7 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
         return {
           ...meta,
           scope:
-            (input.scope as Readonly<Record<string, unknown>>) ??
-            existing?.scope ??
-            {},
+            (input.scope as Readonly<Record<string, unknown>>) ?? existing?.scope ?? {},
           metrics:
             (input.metrics as Readonly<Record<string, unknown>>) ??
             existing?.metrics ??
@@ -1410,14 +1396,10 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
         const meta = baseMeta(ctx, input, existing);
         return {
           ...meta,
-          baselineLabel: String(
-            input.baselineLabel ?? existing?.baselineLabel ?? "",
-          ),
+          baselineLabel: String(input.baselineLabel ?? existing?.baselineLabel ?? ""),
           currentLabel: String(input.currentLabel ?? existing?.currentLabel ?? ""),
           newFailures:
-            (input.newFailures as readonly string[]) ??
-            existing?.newFailures ??
-            [],
+            (input.newFailures as readonly string[]) ?? existing?.newFailures ?? [],
           resolvedFailures:
             (input.resolvedFailures as readonly string[]) ??
             existing?.resolvedFailures ??
@@ -1426,12 +1408,8 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
             (input.reopenedFailures as readonly string[]) ??
             existing?.reopenedFailures ??
             [],
-          coverageDelta: Number(
-            input.coverageDelta ?? existing?.coverageDelta ?? 0,
-          ),
-          executionDelta: Number(
-            input.executionDelta ?? existing?.executionDelta ?? 0,
-          ),
+          coverageDelta: Number(input.coverageDelta ?? existing?.coverageDelta ?? 0),
+          executionDelta: Number(input.executionDelta ?? existing?.executionDelta ?? 0),
           computedAt: String(
             input.computedAt ?? existing?.computedAt ?? new Date().toISOString(),
           ),
@@ -1607,8 +1585,12 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
         approvals: cloneStoreMap(stores.approvals),
         approvalHistory: cloneStoreMap(stores.approvalHistory),
         certificationRecords: cloneStoreMap(stores.certificationRecords),
-        certificationGateDefinitions: cloneStoreMap(stores.certificationGateDefinitions),
-        certificationGateEvaluations: cloneStoreMap(stores.certificationGateEvaluations),
+        certificationGateDefinitions: cloneStoreMap(
+          stores.certificationGateDefinitions,
+        ),
+        certificationGateEvaluations: cloneStoreMap(
+          stores.certificationGateEvaluations,
+        ),
         certificationRules: cloneStoreMap(stores.certificationRules),
         certificationAudits: cloneStoreMap(stores.certificationAudits),
         certificationHistory: cloneStoreMap(stores.certificationHistory),
@@ -1636,9 +1618,7 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
         automationRuns: cloneStoreMap(stores.automationRuns),
         automationResultItems: cloneStoreMap(stores.automationResultItems),
         automationImportHistory: cloneStoreMap(stores.automationImportHistory),
-        automationCoverageSnapshots: cloneStoreMap(
-          stores.automationCoverageSnapshots,
-        ),
+        automationCoverageSnapshots: cloneStoreMap(stores.automationCoverageSnapshots),
         pipelines: cloneStoreMap(stores.pipelines),
         pipelineImports: cloneStoreMap(stores.pipelineImports),
         pipelineRuns: cloneStoreMap(stores.pipelineRuns),
@@ -1650,9 +1630,7 @@ function buildFromStores(stores: InMemoryStores): TestingPersistence {
         engineeringTrendSeries: cloneStoreMap(stores.engineeringTrendSeries),
         engineeringBenchmarks: cloneStoreMap(stores.engineeringBenchmarks),
         engineeringBaselines: cloneStoreMap(stores.engineeringBaselines),
-        engineeringQualitySummaries: cloneStoreMap(
-          stores.engineeringQualitySummaries,
-        ),
+        engineeringQualitySummaries: cloneStoreMap(stores.engineeringQualitySummaries),
         reportTemplates: cloneStoreMap(stores.reportTemplates),
         reportGenerationMetadata: cloneStoreMap(stores.reportGenerationMetadata),
         traceabilityLinks: cloneStoreMap(stores.traceabilityLinks),

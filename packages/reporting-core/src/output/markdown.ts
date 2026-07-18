@@ -16,16 +16,12 @@ function renderBlock(block: ReportBlock): string {
       if (block.columns.length === 0) return "";
       const header = `| ${block.columns.join(" | ")} |`;
       const sep = `| ${block.columns.map(() => "---").join(" | ")} |`;
-      const rows = block.rows.map(
-        (row) => `| ${row.join(" | ")} |`,
-      );
+      const rows = block.rows.map((row) => `| ${row.join(" | ")} |`);
       return [header, sep, ...rows].join("\n");
     }
     case "list":
       return block.items
-        .map((item, i) =>
-          block.ordered ? `${i + 1}. ${item}` : `- ${item}`,
-        )
+        .map((item, i) => (block.ordered ? `${i + 1}. ${item}` : `- ${item}`))
         .join("\n");
     case "summary":
       return `> ${block.text}`;
@@ -37,9 +33,7 @@ function renderBlock(block: ReportBlock): string {
 }
 
 /** Render a canonical report document as Markdown. */
-export function renderMarkdownDocument(
-  document: CanonicalReportDocument,
-): string {
+export function renderMarkdownDocument(document: CanonicalReportDocument): string {
   const lines: string[] = [];
   if (document.header) lines.push(document.header, "");
   lines.push(`# ${document.title}`);

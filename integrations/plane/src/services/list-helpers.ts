@@ -7,7 +7,9 @@ export function buildPlaneListQuery(
   extra?: Record<string, string | boolean>,
 ) {
   const perPage = page?.perPage ?? 25;
-  const orderBy = sort?.map((entry) => `${entry.direction === "desc" ? "-" : ""}${entry.field}`).join(",");
+  const orderBy = sort
+    ?.map((entry) => `${entry.direction === "desc" ? "-" : ""}${entry.field}`)
+    .join(",");
 
   return {
     per_page: perPage,
@@ -24,7 +26,11 @@ export function mapPaginatedResult<TPlane, TCanonical>(
 ): PageResult<TCanonical> {
   const perPage = page.perPage ?? 25;
   const currentPage = page.page ?? 1;
-  const totalCount = response.total_count ?? response.total_results ?? response.count ?? response.results.length;
+  const totalCount =
+    response.total_count ??
+    response.total_results ??
+    response.count ??
+    response.results.length;
 
   return {
     items: response.results.map((item: TPlane) => mapItem(item)),

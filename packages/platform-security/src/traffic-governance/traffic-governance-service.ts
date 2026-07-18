@@ -1,6 +1,9 @@
 import { RateLimitService } from "../rate-limit-service";
 import { resolveTrafficPolicy } from "./policies";
-import { applyEnvironmentProfileToLimits, resolveActiveEnvironmentProfile } from "./profiles";
+import {
+  applyEnvironmentProfileToLimits,
+  resolveActiveEnvironmentProfile,
+} from "./profiles";
 import type {
   TrafficEvaluationResult,
   TrafficGovernanceDecision,
@@ -87,7 +90,9 @@ export class TrafficGovernanceService {
     return this.buildDecision(true, results, primary);
   }
 
-  getDiagnostics(context?: Partial<TrafficRequestContext>): TrafficGovernanceDiagnostics {
+  getDiagnostics(
+    context?: Partial<TrafficRequestContext>,
+  ): TrafficGovernanceDiagnostics {
     const status = this.getStatus();
     const pathname = context?.pathname ?? "/api/platform/v1/system/health";
     const policyMatch = this.resolvePolicy(pathname);
@@ -157,7 +162,10 @@ export class TrafficGovernanceService {
     };
   }
 
-  private buildLimitKey(dimension: TrafficPolicyDimension, context: TrafficRequestContext): string {
+  private buildLimitKey(
+    dimension: TrafficPolicyDimension,
+    context: TrafficRequestContext,
+  ): string {
     switch (dimension) {
       case "ip":
         return `ip:${context.ip}`;
@@ -177,7 +185,10 @@ export class TrafficGovernanceService {
   private resolveBurstLimit(limits: TrafficPolicyMatch["effectiveLimits"]): number {
     const multiplier = limits.burstMultiplier ?? 1.5;
     const windowSeconds = limits.burstWindowSeconds ?? 10;
-    return Math.max(1, Math.ceil((limits.requestsPerMinute * multiplier * windowSeconds) / 60));
+    return Math.max(
+      1,
+      Math.ceil((limits.requestsPerMinute * multiplier * windowSeconds) / 60),
+    );
   }
 
   private async checkBurstLimit(
@@ -196,7 +207,12 @@ export class TrafficGovernanceService {
     }
 
     if (existing.count >= limit) {
-      return { allowed: false, remaining: 0, resetAt: existing.resetAt, count: existing.count };
+      return {
+        allowed: false,
+        remaining: 0,
+        resetAt: existing.resetAt,
+        count: existing.count,
+      };
     }
 
     existing.count += 1;

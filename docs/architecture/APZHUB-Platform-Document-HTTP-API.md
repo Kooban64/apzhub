@@ -18,29 +18,29 @@ Handlers contain no business logic and must not import `@apzhub/document-core`, 
 
 ## Endpoints (summary)
 
-| Method | Path | Gateway facet |
-|--------|------|---------------|
-| GET | `/` | `documentSearchMetadata.find` |
-| POST | `/` | `documents.create` |
-| GET | `/{documentId}` | `documents.get` |
-| PATCH | `/{documentId}` | `documentMetadata.update` |
-| POST | `/{documentId}/archive` | `documents.archive` |
-| POST | `/{documentId}/restore` | `documents.restore` |
-| GET | `/{documentId}/versions` | `documentVersions.list` |
-| GET | `/{documentId}/versions/{versionId}` | `documentVersions.get` |
-| GET | `/{documentId}/versions/{versionId}/storage` | `documentStorage.getStorageMetadata` (keys redacted) |
-| POST | `/{documentId}/versions/{versionId}/verify` | `documentStorage.verifyIntegrity` |
-| GET | `/{documentId}/audit` | `documentAudit.list` |
-| POST | `/{documentId}/classify` | `documentClassification.classify` |
-| POST | `/{documentId}/tags` | `documentTags.tag` |
-| POST | `/{documentId}/folder` | `documentFolders.assign` |
-| POST | `/{documentId}/collection` | `documentCollections.assign` |
-| POST | `/{documentId}/retention` | `documentRetention.apply` |
-| POST | `/{documentId}/relationships` | `documentRelationships.relate` |
-| GET | `/tags` | `documentTags.list` |
-| GET | `/tags/{tagId}` | `documentTags.get` |
-| GET | `/diagnostics` | `documentDiagnostics.getDiagnostics` |
-| GET | `/reconciliation` | `documentStorage.inspectReconciliation` (hints redacted) |
+| Method | Path                                         | Gateway facet                                            |
+| ------ | -------------------------------------------- | -------------------------------------------------------- |
+| GET    | `/`                                          | `documentSearchMetadata.find`                            |
+| POST   | `/`                                          | `documents.create`                                       |
+| GET    | `/{documentId}`                              | `documents.get`                                          |
+| PATCH  | `/{documentId}`                              | `documentMetadata.update`                                |
+| POST   | `/{documentId}/archive`                      | `documents.archive`                                      |
+| POST   | `/{documentId}/restore`                      | `documents.restore`                                      |
+| GET    | `/{documentId}/versions`                     | `documentVersions.list`                                  |
+| GET    | `/{documentId}/versions/{versionId}`         | `documentVersions.get`                                   |
+| GET    | `/{documentId}/versions/{versionId}/storage` | `documentStorage.getStorageMetadata` (keys redacted)     |
+| POST   | `/{documentId}/versions/{versionId}/verify`  | `documentStorage.verifyIntegrity`                        |
+| GET    | `/{documentId}/audit`                        | `documentAudit.list`                                     |
+| POST   | `/{documentId}/classify`                     | `documentClassification.classify`                        |
+| POST   | `/{documentId}/tags`                         | `documentTags.tag`                                       |
+| POST   | `/{documentId}/folder`                       | `documentFolders.assign`                                 |
+| POST   | `/{documentId}/collection`                   | `documentCollections.assign`                             |
+| POST   | `/{documentId}/retention`                    | `documentRetention.apply`                                |
+| POST   | `/{documentId}/relationships`                | `documentRelationships.relate`                           |
+| GET    | `/tags`                                      | `documentTags.list`                                      |
+| GET    | `/tags/{tagId}`                              | `documentTags.get`                                       |
+| GET    | `/diagnostics`                               | `documentDiagnostics.getDiagnostics`                     |
+| GET    | `/reconciliation`                            | `documentStorage.inspectReconciliation` (hints redacted) |
 
 ## Behaviour
 

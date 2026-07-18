@@ -32,11 +32,7 @@ export type {
   WorkspaceRole,
 } from "./workspace";
 
-export type {
-  Project,
-  ProjectSummary,
-  ProjectStatus,
-} from "./project";
+export type { Project, ProjectSummary, ProjectStatus } from "./project";
 
 export type {
   Task,
@@ -49,37 +45,15 @@ export type {
 
 export type { Sprint, SprintStatus } from "./sprint";
 
-export type {
-  Milestone,
-  Roadmap,
-  RoadmapItem,
-} from "./milestone";
+export type { Milestone, Roadmap, RoadmapItem } from "./milestone";
 
-export type {
-  ProjectModule,
-  ProjectModuleStatus,
-} from "./module";
+export type { ProjectModule, ProjectModuleStatus } from "./module";
 
-export type {
-  Team,
-  TeamMember,
-  TeamSummary,
-  TeamRole,
-} from "./team";
+export type { Team, TeamMember, TeamSummary, TeamRole } from "./team";
 
-export type {
-  ProjectStatusEntity,
-  Status,
-  StatusGroup,
-  Label,
-} from "./status-label";
+export type { ProjectStatusEntity, Status, StatusGroup, Label } from "./status-label";
 
-export type {
-  User,
-  UserSummary,
-  UserProfile,
-  UserStatus,
-} from "./user";
+export type { User, UserSummary, UserProfile, UserStatus } from "./user";
 
 export type {
   SearchDocument,

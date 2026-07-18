@@ -30,16 +30,14 @@ export const CANONICAL_PERMISSION_NAMESPACES = [
   "dashboard",
 ] as const;
 
-export type CanonicalPermissionNamespace = (typeof CANONICAL_PERMISSION_NAMESPACES)[number];
+export type CanonicalPermissionNamespace =
+  (typeof CANONICAL_PERMISSION_NAMESPACES)[number];
 
 /**
  * Match a granted permission pattern against a requested permission key.
  * Supports exact match, global wildcard, and namespace wildcard (e.g. law.*).
  */
-export function permissionPatternMatches(
-  granted: string,
-  requested: string,
-): boolean {
+export function permissionPatternMatches(granted: string, requested: string): boolean {
   if (granted === "*") {
     return true;
   }

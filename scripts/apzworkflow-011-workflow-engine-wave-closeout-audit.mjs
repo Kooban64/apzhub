@@ -8,7 +8,7 @@
  */
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
-import { join, relative } from "node:path";
+import { join } from "node:path";
 
 const ROOT = process.cwd();
 
@@ -17,10 +17,6 @@ const ROOT = process.cwd();
 const violations = [];
 /** @type {{ file: string; note: string }[]} */
 const observations = [];
-
-function rel(file) {
-  return relative(ROOT, file).replace(/\\/g, "/");
-}
 
 function requireExists(path, rule) {
   if (!existsSync(join(ROOT, path))) {
@@ -92,7 +88,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.21.0",
+  "0.25.0",
   "version-platform-services",
 );
 
@@ -212,7 +208,9 @@ console.log("Violations: 0");
 console.log("  - SoR vertical (001–005 via audit:workflow-vertical): PASS");
 console.log("  - Engine vertical (006–010 via audit:workflow-engine-vertical): PASS");
 console.log("  - Reference Adapter Standard + Architecture Freeze artefacts present");
-console.log("  - Frozen versions: integration-n8n 0.1.0 · contracts 0.3.0 · platform-services 0.21.0");
+console.log(
+  "  - Frozen versions: integration-n8n 0.1.0 · contracts 0.3.0 · platform-services 0.25.0",
+);
 if (observations.length > 0) {
   console.log("Observations:");
   for (const o of observations) console.log(`  - ${o.file}: ${o.note}`);

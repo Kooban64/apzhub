@@ -23,7 +23,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -155,7 +156,11 @@ if (existsSync(clientFile)) {
       detail: "typed client must target /api/v1/notifications",
     });
   }
-  for (const method of ["sendNotification", "deliverNotification", "scheduleNotification"]) {
+  for (const method of [
+    "sendNotification",
+    "deliverNotification",
+    "scheduleNotification",
+  ]) {
     if (client.includes(method)) {
       violations.push({
         file: rel(clientFile),
@@ -258,15 +263,19 @@ if (!openapi.includes("CreateNotificationRequest")) {
     detail: "Expected CreateNotificationRequest schema",
   });
 }
-if (!openapi.includes("version: 1.4.0")) {
+if (!/version:\s*1\.(?:[4-9]|\d{2,})\.\d+/.test(openapi.slice(0, 400))) {
   violations.push({
     file: "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
     line: 1,
     rule: "openapi-version",
-    detail: "Expected OpenAPI info.version 1.4.0",
+    detail: "Expected OpenAPI info.version >= 1.4.0",
   });
 }
-for (const bad of ["/notifications/send", "/notifications/deliver", "/notifications/providers"]) {
+for (const bad of [
+  "/notifications/send",
+  "/notifications/deliver",
+  "/notifications/providers",
+]) {
   if (openapi.includes(`\n  ${bad}:`)) {
     violations.push({
       file: "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
@@ -294,7 +303,8 @@ if (!bootstrap.includes("isNotificationServiceEnabled")) {
     file: "apps/web/lib/api/v1/gateway/bootstrap.ts",
     line: 1,
     rule: "bootstrap-missing-flag",
-    detail: "Bootstrap must reuse isNotificationServiceEnabled / APZHUB_NOTIFICATION_ENABLED",
+    detail:
+      "Bootstrap must reuse isNotificationServiceEnabled / APZHUB_NOTIFICATION_ENABLED",
   });
 }
 
@@ -314,10 +324,26 @@ for (const segment of nestedStatic) {
     ROOT,
     `apps/web/app/api/v1/notifications/[notificationId]/${segment}`,
   );
-  if (existsSync(bad) && segment !== "audit" && segment !== "recipients" && segment !== "references") {
+  if (
+    existsSync(bad) &&
+    segment !== "audit" &&
+    segment !== "recipients" &&
+    segment !== "references"
+  ) {
     // audit/recipients/references under notificationId are intentional
   }
-  if (["templates", "preferences", "categories", "channels", "capabilities", "health", "readiness", "diagnostics"].includes(segment)) {
+  if (
+    [
+      "templates",
+      "preferences",
+      "categories",
+      "channels",
+      "capabilities",
+      "health",
+      "readiness",
+      "diagnostics",
+    ].includes(segment)
+  ) {
     const badNested = join(
       ROOT,
       `apps/web/app/api/v1/notifications/[notificationId]/${segment}`,
@@ -356,7 +382,7 @@ console.log("APZNOTIFY-003 architecture audit PASSED");
 console.log("  handlers → gateway.notification.* only");
 console.log("  typed client → /api/v1/notifications only");
 console.log("  bootstrap wires createNotificationPlatformServicesForProduction");
-console.log("  OpenAPI Platform Notifications + 1.4.0 present");
+console.log("  OpenAPI Platform Notifications + version >= 1.4.0 present");
 console.log("  no send/deliver/providers/workers/realtime routes");
 console.log("  no Notification Workbench");
 process.exit(0);

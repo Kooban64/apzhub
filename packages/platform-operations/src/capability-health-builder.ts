@@ -1,10 +1,15 @@
-import type { ConsolidatedOperationalDiagnostics, HealthSignalStatus } from "@apzhub/platform-security";
+import type {
+  ConsolidatedOperationalDiagnostics,
+  HealthSignalStatus,
+} from "@apzhub/platform-security";
 
 import { PLATFORM_CAPABILITY_DEFINITIONS } from "./capability-definitions";
 import type { CapabilityHealthReport } from "./types";
 
 function asRecord(value: unknown): Record<string, unknown> | undefined {
-  return value && typeof value === "object" ? (value as Record<string, unknown>) : undefined;
+  return value && typeof value === "object"
+    ? (value as Record<string, unknown>)
+    : undefined;
 }
 
 function pickHealth(...statuses: readonly HealthSignalStatus[]): HealthSignalStatus {
@@ -50,7 +55,8 @@ function evaluateCapability(
   const dependencyHealth = consolidated.resilience.health.dependencies;
   const databaseHealthy =
     dependencyHealth.find((dep) => dep.name === "database")?.status === "healthy";
-  const redisHealthy = dependencyHealth.find((dep) => dep.name === "redis")?.status === "healthy";
+  const redisHealthy =
+    dependencyHealth.find((dep) => dep.name === "redis")?.status === "healthy";
 
   let health: HealthSignalStatus = "healthy";
   let readiness: HealthSignalStatus = "healthy";
@@ -78,7 +84,9 @@ function evaluateCapability(
       readiness = health;
       diagnostics = bootstrap ?? {};
       if (!bootstrapReady) {
-        recommendations.push("Run ensurePlatformRuntimeReady and verify workspace root.");
+        recommendations.push(
+          "Run ensurePlatformRuntimeReady and verify workspace root.",
+        );
       }
       break;
     }
@@ -110,12 +118,13 @@ function evaluateCapability(
       break;
     }
     case "platform.provisioning": {
-      diagnostics = consolidated.identity ?? {};
-      health = "degraded";
-      readiness = databaseHealthy ? "degraded" : "unknown";
-      configurationState = "unknown";
-      warnings.push("Provisioning automation is foundation maturity.");
-      recommendations.push("Complete provisioning workflows before production cutover.");
+      diagnostics = consolidated.governance ?? consolidated.identity ?? {};
+      health = consolidated.governance ? "healthy" : "degraded";
+      readiness = databaseHealthy ? health : "unknown";
+      configurationState = consolidated.governance ? "valid" : "unknown";
+      recommendations.push(
+        "Use @apzhub/platform-provisioning flows for tenant/product enablement.",
+      );
       break;
     }
     case "platform.security": {
@@ -129,7 +138,10 @@ function evaluateCapability(
     }
     case "platform.configuration": {
       configurationState = configurationStateFromEnvironment(consolidated);
-      diagnostics = consolidated.security.environment as unknown as Record<string, unknown>;
+      diagnostics = consolidated.security.environment as unknown as Record<
+        string,
+        unknown
+      >;
       health =
         configurationState === "invalid"
           ? "unhealthy"
@@ -140,17 +152,26 @@ function evaluateCapability(
       break;
     }
     case "platform.traffic-governance": {
-      diagnostics = consolidated.security.trafficGovernance as unknown as Record<string, unknown>;
-      health = consolidated.security.trafficGovernance.status.enabled ? "healthy" : "degraded";
+      diagnostics = consolidated.security.trafficGovernance as unknown as Record<
+        string,
+        unknown
+      >;
+      health = consolidated.security.trafficGovernance.status.enabled
+        ? "healthy"
+        : "degraded";
       readiness = health;
       recommendations.push(...consolidated.security.trafficGovernance.recommendations);
       break;
     }
     case "platform.session-security": {
       diagnostics = consolidated.security.session as unknown as Record<string, unknown>;
-      health = consolidated.security.session.sessionDiagnostics.healthy ? "healthy" : "degraded";
+      health = consolidated.security.session.sessionDiagnostics.healthy
+        ? "healthy"
+        : "degraded";
       readiness = health;
-      recommendations.push(...consolidated.security.session.sessionDiagnostics.recommendations);
+      recommendations.push(
+        ...consolidated.security.session.sessionDiagnostics.recommendations,
+      );
       if (consolidated.security.session.devRegistrationAllowed) {
         warnings.push("Development registration is enabled.");
       }
@@ -161,7 +182,9 @@ function evaluateCapability(
         apiGuard: consolidated.security.apiGuard,
         persistence: consolidated.persistence,
       };
-      health = consolidated.security.apiGuard.permissionEnforcement ? "healthy" : "degraded";
+      health = consolidated.security.apiGuard.permissionEnforcement
+        ? "healthy"
+        : "degraded";
       readiness = databaseHealthy ? health : "degraded";
       if (!consolidated.security.apiGuard.permissionEnforcement) {
         warnings.push("API permission enforcement posture requires review.");
@@ -173,19 +196,25 @@ function evaluateCapability(
       health = databaseHealthy ? "healthy" : "unhealthy";
       readiness = health;
       if (!databaseHealthy) {
-        recommendations.push("Restore PostgreSQL connectivity before serving write traffic.");
+        recommendations.push(
+          "Restore PostgreSQL connectivity before serving write traffic.",
+        );
       }
       break;
     }
     case "product.law-platform": {
       diagnostics = consolidated.lawPlatform ?? {};
-      health = productStatuses["law-platform"] ?? (consolidated.lawPlatform ? "healthy" : "degraded");
+      health =
+        productStatuses["law-platform"] ??
+        (consolidated.lawPlatform ? "healthy" : "degraded");
       readiness = pickHealth(health, databaseHealthy ? "healthy" : "unhealthy");
       break;
     }
     case "product.trust-accounting": {
       diagnostics = consolidated.trustAccounting ?? {};
-      health = productStatuses["trust-accounting"] ?? (consolidated.trustAccounting ? "healthy" : "degraded");
+      health =
+        productStatuses["trust-accounting"] ??
+        (consolidated.trustAccounting ? "healthy" : "degraded");
       readiness = pickHealth(health, databaseHealthy ? "healthy" : "unhealthy");
       break;
     }
@@ -264,7 +293,10 @@ export function listAffectedProducts(
       affected.add(capability.name);
     }
 
-    if (capability.capabilityId === "platform.persistence" || capability.capabilityId === "platform.security") {
+    if (
+      capability.capabilityId === "platform.persistence" ||
+      capability.capabilityId === "platform.security"
+    ) {
       affected.add("All products");
     }
   }

@@ -21,11 +21,11 @@ Vendor-neutral interfaces only. Future providers may include:
 
 ## Interfaces
 
-| Port | Responsibility |
-|------|----------------|
-| `SearchEngineProvider` | Descriptor, capabilities, health; optional `executeQuery` reserved for later (must not run in 001) |
-| `SearchProviderRegistry` | List/get declared provider metadata |
-| `SearchIndexMetadataProvider` | List declared index metadata (no content) |
+| Port                          | Responsibility                                                                                     |
+| ----------------------------- | -------------------------------------------------------------------------------------------------- |
+| `SearchEngineProvider`        | Descriptor, capabilities, health; optional `executeQuery` reserved for later (must not run in 001) |
+| `SearchProviderRegistry`      | List/get declared provider metadata                                                                |
+| `SearchIndexMetadataProvider` | List declared index metadata (no content)                                                          |
 
 ## Descriptor
 

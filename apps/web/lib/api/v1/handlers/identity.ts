@@ -408,11 +408,7 @@ export async function handleGetIdentityOrganisation(
   routeContext?: RouteContext,
 ) {
   const organisationId = asIdentityOrganizationId(
-    await param(
-      routeContext,
-      "organisationId",
-      identityOrganisationIdParamSchema,
-    ),
+    await param(routeContext, "organisationId", identityOrganisationIdParamSchema),
   );
   const gateway = await requireIdentityGateway();
   const result = await gateway.identity.organisations.get(
@@ -428,11 +424,7 @@ export async function handleUpdateIdentityOrganisation(
   routeContext?: RouteContext,
 ) {
   const organisationId = asIdentityOrganizationId(
-    await param(
-      routeContext,
-      "organisationId",
-      identityOrganisationIdParamSchema,
-    ),
+    await param(routeContext, "organisationId", identityOrganisationIdParamSchema),
   );
   const body = await parseJsonBody(
     request,
@@ -760,11 +752,7 @@ export async function handleGetIdentityServiceAssignment(
   routeContext?: RouteContext,
 ) {
   const assignmentId = asIdentityServiceAssignmentId(
-    await param(
-      routeContext,
-      "assignmentId",
-      identityServiceAssignmentIdParamSchema,
-    ),
+    await param(routeContext, "assignmentId", identityServiceAssignmentIdParamSchema),
   );
   const gateway = await requireIdentityGateway();
   const result = await gateway.identity.serviceAssignments.get(
@@ -780,11 +768,7 @@ export async function handleUpdateIdentityServiceAssignment(
   routeContext?: RouteContext,
 ) {
   const assignmentId = asIdentityServiceAssignmentId(
-    await param(
-      routeContext,
-      "assignmentId",
-      identityServiceAssignmentIdParamSchema,
-    ),
+    await param(routeContext, "assignmentId", identityServiceAssignmentIdParamSchema),
   );
   const body = await parseJsonBody(
     request,
@@ -956,11 +940,7 @@ export async function handleGetIdentityDeactivation(
   routeContext?: RouteContext,
 ) {
   const deactivationId = asIdentityDeactivationId(
-    await param(
-      routeContext,
-      "deactivationId",
-      identityDeactivationIdParamSchema,
-    ),
+    await param(routeContext, "deactivationId", identityDeactivationIdParamSchema),
   );
   const gateway = await requireIdentityGateway();
   const result = await gateway.identity.deactivation.get(
@@ -1196,7 +1176,9 @@ export async function handleGetIdentityReadiness(
   context: PlatformApiRequestContext,
 ) {
   const gateway = await requireIdentityGateway();
-  const readiness = await gateway.identity.diagnostics.readiness(context.serviceContext);
+  const readiness = await gateway.identity.diagnostics.readiness(
+    context.serviceContext,
+  );
   return jsonDataResponse(
     {
       ...readiness,

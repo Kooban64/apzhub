@@ -243,12 +243,8 @@ export function PlatformDocumentsView({
   >("title");
   const [order, setOrder] = useState<"asc" | "desc">("asc");
   const [page, setPage] = useState(1);
-  const [selectedDocumentId, setSelectedDocumentId] = useState<string | null>(
-    null,
-  );
-  const [selectedVersionId, setSelectedVersionId] = useState<string | null>(
-    null,
-  );
+  const [selectedDocumentId, setSelectedDocumentId] = useState<string | null>(null);
+  const [selectedVersionId, setSelectedVersionId] = useState<string | null>(null);
   const [detailPanel, setDetailPanel] = useState<
     | "metadata"
     | "versions"
@@ -265,13 +261,7 @@ export function PlatformDocumentsView({
   const pageSize = 10;
 
   const documentsQuery = useQuery({
-    queryKey: [
-      "documents",
-      "list",
-      statusFilter,
-      classificationFilter,
-      tagFilter,
-    ],
+    queryKey: ["documents", "list", statusFilter, classificationFilter, tagFilter],
     queryFn: ({ signal }) =>
       listDocuments(
         {
@@ -296,7 +286,8 @@ export function PlatformDocumentsView({
   const versionsQuery = useQuery({
     queryKey: ["documents", "versions", selectedId],
     queryFn: ({ signal }) => listVersions(selectedId!, { signal }),
-    enabled: Boolean(selectedId) && (section === "versions" || detailPanel === "versions"),
+    enabled:
+      Boolean(selectedId) && (section === "versions" || detailPanel === "versions"),
   });
 
   const auditQuery = useQuery({
@@ -429,7 +420,12 @@ export function PlatformDocumentsView({
       role="toolbar"
       aria-label="Documents commands"
     >
-      <Button type="button" variant="outline" size="sm" onClick={() => void refreshAll()}>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        onClick={() => void refreshAll()}
+      >
         Refresh
       </Button>
       <Button
@@ -844,8 +840,8 @@ export function PlatformDocumentsView({
           )
         ) : detailPanel === "relationships" ? (
           <p className="text-sm text-[var(--color-muted-foreground)]">
-            Relationship metadata is read-only in this milestone. Use product
-            services to create relationships; this panel confirms selection of{" "}
+            Relationship metadata is read-only in this milestone. Use product services
+            to create relationships; this panel confirms selection of{" "}
             <strong>{detail?.title}</strong> ({detail?.id}).
           </p>
         ) : detailPanel === "retention" ? (
@@ -858,8 +854,7 @@ export function PlatformDocumentsView({
           </p>
         ) : detailPanel === "collection" ? (
           <p className="text-sm">
-            Collection ID:{" "}
-            <strong>{detail?.collectionId ?? "(unassigned)"}</strong>
+            Collection ID: <strong>{detail?.collectionId ?? "(unassigned)"}</strong>
           </p>
         ) : auditQuery.isLoading ? (
           <p role="status">Loading audit…</p>
@@ -895,9 +890,9 @@ export function PlatformDocumentsView({
       {section === "overview" ? (
         <div className="space-y-4">
           <p className="text-sm text-[var(--color-muted-foreground)]">
-            Shared Document Platform metadata surface. Navigate sidebar sections
-            for list, versions, organisation structures, tags, retention, audit,
-            and safe diagnostics.
+            Shared Document Platform metadata surface. Navigate sidebar sections for
+            list, versions, organisation structures, tags, retention, audit, and safe
+            diagnostics.
           </p>
           {filters}
           {renderDocumentList("Overview document list")}
@@ -1060,7 +1055,7 @@ export function PlatformDocumentsView({
                 cells: [
                   doc.title,
                   detailQuery.data?.id === doc.documentId
-                    ? detailQuery.data.retentionId ?? "—"
+                    ? (detailQuery.data.retentionId ?? "—")
                     : "—",
                   doc.status,
                 ],
@@ -1118,8 +1113,8 @@ export function PlatformDocumentsView({
             </dl>
           )}
           <p className="text-sm text-[var(--color-muted-foreground)]">
-            Diagnostics show safe readiness metadata only — no paths, buckets,
-            keys, credentials, or binary content.
+            Diagnostics show safe readiness metadata only — no paths, buckets, keys,
+            credentials, or binary content.
           </p>
         </div>
       ) : null}

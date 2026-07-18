@@ -24,11 +24,7 @@ export async function detectGitHubActionsFeatures(
     [];
 
   try {
-    const envs = await input.client.listEnvironments(
-      context,
-      input.owner,
-      input.repo,
-    );
+    const envs = await input.client.listEnvironments(context, input.owner, input.repo);
     environmentsAvailable = true;
     detections.push({
       capabilityId: "environments",

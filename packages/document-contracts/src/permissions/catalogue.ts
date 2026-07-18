@@ -33,8 +33,7 @@ export const PLATFORM_DOCUMENT_PERMISSIONS = [
   "document.metadata.write",
 ] as const;
 
-export type PlatformDocumentPermission =
-  (typeof PLATFORM_DOCUMENT_PERMISSIONS)[number];
+export type PlatformDocumentPermission = (typeof PLATFORM_DOCUMENT_PERMISSIONS)[number];
 
 /** Wildcard namespace for role grants (not a bypass). */
 export const PLATFORM_DOCUMENT_PERMISSION_WILDCARD = "document.*" as const;

@@ -3,12 +3,12 @@
 **Date:** 2026-07-15  
 **Package:** `@apzhub/search-reporting` **0.1.0**
 
-| Metric | Coverage |
-| ------ | -------- |
+| Metric         | Coverage   |
+| -------------- | ---------- |
 | **Statements** | **96.72%** |
-| **Branches** | **82.74%** |
-| **Functions** | **100%** |
-| **Lines** | **96.72%** |
+| **Branches**   | **82.74%** |
+| **Functions**  | **100%**   |
+| **Lines**      | **96.72%** |
 
 **Verdict:** PASS (≥95% lines/statements/functions; ≥80% branches).
 

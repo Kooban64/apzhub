@@ -25,7 +25,14 @@ import {
 
 export type EngineeringIntelligenceMappableEntity = Extract<
   TestingSearchMappableEntity,
-  { readonly entityType: "engineering_snapshot" | "engineering_trend" | "benchmark" | "historical_snapshot" | "risk_summary" }
+  {
+    readonly entityType:
+      | "engineering_snapshot"
+      | "engineering_trend"
+      | "benchmark"
+      | "historical_snapshot"
+      | "risk_summary";
+  }
 >;
 
 export class EngineeringIntelligenceSearchMapper {
@@ -107,16 +114,13 @@ export class EngineeringIntelligenceSearchMapper {
     const classification = resolveTestingClassification(context, {
       explicit: extras?.classification,
     });
-    const title =
-      extras?.title ?? `Trend ${series.kind} (${series.direction})`;
+    const title = extras?.title ?? `Trend ${series.kind} (${series.direction})`;
     return {
       entityId: String(series.id),
       entityType: "engineering_trend",
       title,
       organisationId:
-        series.scope.organisationId ??
-        extras?.organisationId ??
-        context.organisationId,
+        series.scope.organisationId ?? extras?.organisationId ?? context.organisationId,
       classification,
       permissions: permissionTokens(context, extras, undefined, classification),
       metadata: {
@@ -127,10 +131,7 @@ export class EngineeringIntelligenceSearchMapper {
       keywords: [title, series.kind, series.direction],
       createdAt: series.computedAt,
       updatedAt: series.computedAt,
-      navigationTarget: navigationTarget(
-        "engineering_trend",
-        String(series.id),
-      ),
+      navigationTarget: navigationTarget("engineering_trend", String(series.id)),
       sourceId: "testing:engineering_trend",
       ownerUserId: context.actorUserId,
     };
@@ -147,9 +148,7 @@ export class EngineeringIntelligenceSearchMapper {
       explicit: extras?.classification,
     });
     const title =
-      benchmark.label?.trim() ||
-      extras?.title ||
-      `Benchmark ${benchmark.metricKey}`;
+      benchmark.label?.trim() || extras?.title || `Benchmark ${benchmark.metricKey}`;
     return {
       entityId: benchmark.id,
       entityType: "benchmark",
@@ -224,29 +223,21 @@ export class EngineeringIntelligenceSearchMapper {
     assertPlatformEntityId(id, "risk_summary.id");
     const tenantId = extras?.tenantId;
     if (!tenantId) {
-      throw new Error(
-        "tenantId is required via extras when mapping risk_summary",
-      );
+      throw new Error("tenantId is required via extras when mapping risk_summary");
     }
     assertTenant(tenantId, context);
     const classification = resolveTestingClassification(context, {
       explicit: extras?.classification,
       severity: risk.overallLevel,
     });
-    const title =
-      extras?.title ?? `Risk ${risk.overallLevel} (${risk.overallScore})`;
+    const title = extras?.title ?? `Risk ${risk.overallLevel} (${risk.overallScore})`;
     return {
       entityId: id,
       entityType: "risk_summary",
       title,
       organisationId: extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        risk.overallLevel,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, risk.overallLevel, classification),
       metadata: {
         overallLevel: risk.overallLevel,
         overallScore: String(risk.overallScore),

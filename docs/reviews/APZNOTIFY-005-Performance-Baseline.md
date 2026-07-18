@@ -6,13 +6,13 @@
 
 Vitest wall-clock observations from consolidated Notification suites (2026-07-16). Figures are indicative CI-local baselines, not SLOs.
 
-| Surface | Observation |
-| --- | --- |
-| Notification packages + services Vitest | Individual suites typically &lt; 100 ms |
-| Typed client unit suite | ~40 ms |
-| Workbench view suite (28 cases) | ~3.7 s total (jsdom + React Query) |
-| Overview render (first paint path in tests) | Sub-second within view suite |
-| HTTP handlers | Exercised via gateway/service unit path; no load test |
+| Surface                                     | Observation                                           |
+| ------------------------------------------- | ----------------------------------------------------- |
+| Notification packages + services Vitest     | Individual suites typically &lt; 100 ms               |
+| Typed client unit suite                     | ~40 ms                                                |
+| Workbench view suite (28 cases)             | ~3.7 s total (jsdom + React Query)                    |
+| Overview render (first paint path in tests) | Sub-second within view suite                          |
+| HTTP handlers                               | Exercised via gateway/service unit path; no load test |
 
 ## Notes
 

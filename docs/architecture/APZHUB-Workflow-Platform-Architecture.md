@@ -18,11 +18,11 @@ Defines the foundation architecture for the **APZHUB Workflow Platform**: engine
 Consumers → (future Platform Services) → Workflow Core → Persistence → (future engines)
 ```
 
-| Layer | Package | Responsibility |
-| --- | --- | --- |
-| Contracts | `@apzhub/workflow-contracts` **0.1.0** | Domain types, permission catalogue, service ports |
-| Core | `@apzhub/workflow-core` **0.1.0** | Lifecycle transitions, validation composition, foundation factory |
-| Persistence | `@apzhub/workflow-persistence` **0.1.0** | In-memory + PostgreSQL metadata repositories |
+| Layer       | Package                                  | Responsibility                                                    |
+| ----------- | ---------------------------------------- | ----------------------------------------------------------------- |
+| Contracts   | `@apzhub/workflow-contracts` **0.1.0**   | Domain types, permission catalogue, service ports                 |
+| Core        | `@apzhub/workflow-core` **0.1.0**        | Lifecycle transitions, validation composition, foundation factory |
+| Persistence | `@apzhub/workflow-persistence` **0.1.0** | In-memory + PostgreSQL metadata repositories                      |
 
 Contracts must not import core or persistence. Core must not import persistence. Consumers of future services call ports only — never connectors or engines.
 

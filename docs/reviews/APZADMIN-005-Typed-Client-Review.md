@@ -5,14 +5,14 @@
 
 ## Certified properties
 
-| Property | Status |
-| --- | --- |
-| `createHttpAdministrationClient()` factory | PASS |
-| Calls only `/api/v1/administration*` | PASS |
-| No gateway / platform-services / admin-core / persistence imports | PASS |
-| No runtime execute / provision / user-role methods | PASS |
-| Mock client for Workbench / Playwright | PASS |
-| `administration-api` facades consumed by Workbench | PASS |
+| Property                                                          | Status |
+| ----------------------------------------------------------------- | ------ |
+| `createHttpAdministrationClient()` factory                        | PASS   |
+| Calls only `/api/v1/administration*`                              | PASS   |
+| No gateway / platform-services / admin-core / persistence imports | PASS   |
+| No runtime execute / provision / user-role methods                | PASS   |
+| Mock client for Workbench / Playwright                            | PASS   |
+| `administration-api` facades consumed by Workbench                | PASS   |
 
 ## Forbidden method surfaces (absent)
 

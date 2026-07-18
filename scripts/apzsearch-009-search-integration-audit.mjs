@@ -25,7 +25,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -74,7 +75,8 @@ scan(files, [
   },
   {
     rule: "no-http-routes",
-    pattern: /NextRequest|NextResponse|OpenAPIHono|withPlatformApiAuth|\/api\/v1\/search/,
+    pattern:
+      /NextRequest|NextResponse|OpenAPIHono|withPlatformApiAuth|\/api\/v1\/search/,
   },
   {
     rule: "no-workbench",
@@ -86,7 +88,8 @@ scan(files, [
   },
   {
     rule: "no-product-module-coupling",
-    pattern: /@apzhub\/(document-core|document-persistence|testing-services|reporting-core|integration-plane|integration-zammad)/,
+    pattern:
+      /@apzhub\/(document-core|document-persistence|testing-services|reporting-core|integration-plane|integration-zammad)/,
   },
 ]);
 
@@ -99,12 +102,12 @@ if (pkgJson.name !== "@apzhub/search-integration") {
     detail: `Expected @apzhub/search-integration, got ${pkgJson.name}`,
   });
 }
-if (pkgJson.version !== "0.1.0") {
+if (pkgJson.version !== "0.2.0") {
   violations.push({
     file: "packages/search-integration/package.json",
     line: 1,
     rule: "package-version",
-    detail: `Expected 0.1.0, got ${pkgJson.version}`,
+    detail: `Expected 0.2.0, got ${pkgJson.version}`,
   });
 }
 if (!pkgJson.dependencies?.["@apzhub/search-contracts"]) {
@@ -165,7 +168,9 @@ for (const productFile of [
   "reporting.ts",
 ]) {
   const content = readFileSync(join(PKG, "src/products", productFile), "utf8");
-  if (/toSearchEntityDraft\s*[:=]|describeSources\s*[:=]\s*(async )?[\(\{]/.test(content)) {
+  if (
+    /toSearchEntityDraft\s*[:=]|describeSources\s*[:=]\s*(async )?[({]/.test(content)
+  ) {
     violations.push({
       file: `packages/search-integration/src/products/${productFile}`,
       line: 1,
@@ -184,7 +189,7 @@ console.log(`RESULT: ${violations.length === 0 ? "PASS" : "FAIL"}`);
 console.log(`Violations: ${violations.length}`);
 if (violations.length === 0) {
   console.log(
-    "  - Package @apzhub/search-integration 0.1.0 depends on search-contracts only",
+    "  - Package @apzhub/search-integration 0.2.0 depends on search-contracts only",
   );
   console.log(
     "  - No Meilisearch / platform-services / HTTP / workers / product adapters",

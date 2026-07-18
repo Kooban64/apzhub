@@ -37,11 +37,11 @@ AdapterFactory
 
 ## Backward compatibility
 
-| Surface | Status |
-|---------|--------|
-| `AdapterBase` interface | Unchanged |
-| `PlaceholderAdapterBase` | Unchanged |
-| OSS-100-01–04 exports | Retained |
+| Surface                                  | Status    |
+| ---------------------------------------- | --------- |
+| `AdapterBase` interface                  | Unchanged |
+| `PlaceholderAdapterBase`                 | Unchanged |
+| OSS-100-01–04 exports                    | Retained  |
 | `IntegrationDiagnostics` optional fields | Unchanged |
 
 New abstract class: `IntegrationAdapterBase` — vendor adapters extend this; does not replace the minimal interface.

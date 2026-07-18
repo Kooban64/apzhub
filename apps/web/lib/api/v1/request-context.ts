@@ -36,7 +36,9 @@ export function sanitizeCorrelationId(
 /** Validate Idempotency-Key format/length. Returns undefined when absent. */
 export function sanitizeIdempotencyKey(
   value: string | null | undefined,
-): { readonly ok: true; readonly value?: string } | { readonly ok: false; readonly message: string } {
+):
+  | { readonly ok: true; readonly value?: string }
+  | { readonly ok: false; readonly message: string } {
   if (!value) {
     return { ok: true, value: undefined };
   }
@@ -49,8 +51,7 @@ export function sanitizeIdempotencyKey(
   ) {
     return {
       ok: false,
-      message:
-        "Idempotency-Key must be 1–128 characters matching [A-Za-z0-9_.:-]",
+      message: "Idempotency-Key must be 1–128 characters matching [A-Za-z0-9_.:-]",
     };
   }
 

@@ -13,12 +13,12 @@ Wired Workflow Platform domain into existing `PlatformServiceGateway` as nested 
 
 ## Versions
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/workflow-contracts` | **0.2.0** |
-| `@apzhub/workflow-core` | **0.1.1** |
-| `@apzhub/workflow-persistence` | **0.1.1** |
-| `@apzhub/platform-services` | **0.19.0** |
+| Package                              | Version                    |
+| ------------------------------------ | -------------------------- |
+| `@apzhub/workflow-contracts`         | **0.2.0**                  |
+| `@apzhub/workflow-core`              | **0.1.1**                  |
+| `@apzhub/workflow-persistence`       | **0.1.1**                  |
+| `@apzhub/platform-services`          | **0.19.0**                 |
 | `@apzhub/platform-service-contracts` | **0.16.0** (workflow stub) |
 
 ## Gateway shape
@@ -46,11 +46,11 @@ gateway.workflow.audit
 
 ## Quality gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:workflow-platform-services` | PASS |
-| Typecheck / lint / test (workflow + platform packages) | PASS |
-| Scoped coverage on `services/workflow/**` | See coverage baseline |
+| Gate                                                   | Result                |
+| ------------------------------------------------------ | --------------------- |
+| `pnpm audit:workflow-platform-services`                | PASS                  |
+| Typecheck / lint / test (workflow + platform packages) | PASS                  |
+| Scoped coverage on `services/workflow/**`              | See coverage baseline |
 
 ## Explicit exclusions
 

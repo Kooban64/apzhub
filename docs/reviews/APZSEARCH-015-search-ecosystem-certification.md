@@ -25,15 +25,15 @@ Search Platform query/management vertical remains **PRODUCTION_READY_WITH_LIMITA
 
 ## Review pack
 
-| Document | Path |
-| -------- | ---- |
-| Publication overview | [APZSEARCH-015-publication-certification.md](./APZSEARCH-015-publication-certification.md) |
-| Canonical entity catalogue | [APZSEARCH-015-canonical-entity-catalogue.md](./APZSEARCH-015-canonical-entity-catalogue.md) |
-| Publication contract | [APZSEARCH-015-publication-contract-certification.md](./APZSEARCH-015-publication-contract-certification.md) |
-| Security | [APZSEARCH-015-security-certification.md](./APZSEARCH-015-security-certification.md) |
-| Dependency / boundaries | [APZSEARCH-015-dependency-certification.md](./APZSEARCH-015-dependency-certification.md) |
-| Production readiness | [APZSEARCH-015-production-readiness.md](./APZSEARCH-015-production-readiness.md) |
-| Coverage baseline | [APZSEARCH-015-coverage-baseline.md](./APZSEARCH-015-coverage-baseline.md) |
+| Document                   | Path                                                                                                         |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Publication overview       | [APZSEARCH-015-publication-certification.md](./APZSEARCH-015-publication-certification.md)                   |
+| Canonical entity catalogue | [APZSEARCH-015-canonical-entity-catalogue.md](./APZSEARCH-015-canonical-entity-catalogue.md)                 |
+| Publication contract       | [APZSEARCH-015-publication-contract-certification.md](./APZSEARCH-015-publication-contract-certification.md) |
+| Security                   | [APZSEARCH-015-security-certification.md](./APZSEARCH-015-security-certification.md)                         |
+| Dependency / boundaries    | [APZSEARCH-015-dependency-certification.md](./APZSEARCH-015-dependency-certification.md)                     |
+| Production readiness       | [APZSEARCH-015-production-readiness.md](./APZSEARCH-015-production-readiness.md)                             |
+| Coverage baseline          | [APZSEARCH-015-coverage-baseline.md](./APZSEARCH-015-coverage-baseline.md)                                   |
 
 ## Quality gate
 

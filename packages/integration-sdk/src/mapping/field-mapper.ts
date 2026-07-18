@@ -1,8 +1,4 @@
-import type {
-  FieldMapEntry,
-  MappingContext,
-  ValueTransformer,
-} from "./types";
+import type { FieldMapEntry, MappingContext, ValueTransformer } from "./types";
 import { mappingValidationError } from "./errors";
 import type { ValueTransformerRegistry } from "./value-transformers";
 
@@ -29,7 +25,11 @@ function readPath(source: unknown, path: string): unknown {
   return current;
 }
 
-function writePath(target: Record<string, unknown>, path: string, value: unknown): void {
+function writePath(
+  target: Record<string, unknown>,
+  path: string,
+  value: unknown,
+): void {
   if (!path.includes(".")) {
     target[path] = value;
     return;
@@ -48,10 +48,7 @@ function writePath(target: Record<string, unknown>, path: string, value: unknown
 }
 
 export interface FieldMapper {
-  map(
-    source: unknown,
-    context: MappingContext,
-  ): Record<string, unknown>;
+  map(source: unknown, context: MappingContext): Record<string, unknown>;
   readonly fieldMaps: readonly FieldMapEntry[];
 }
 
@@ -84,7 +81,9 @@ export function createFieldMapper(options: FieldMapperOptions): FieldMapper {
         }
 
         if (entry.transformer && options.transformers) {
-          const transformer = options.transformers.require(entry.transformer) as ValueTransformer;
+          const transformer = options.transformers.require(
+            entry.transformer,
+          ) as ValueTransformer;
           value = transformer.transform(value, context);
         }
 

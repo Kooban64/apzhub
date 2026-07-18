@@ -36,9 +36,7 @@ function walk(dir: string, out: string[] = []): string[] {
 }
 
 function stripComments(content: string): string {
-  return content
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/\/\/.*$/gm, "");
+  return content.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
 }
 
 describe("testing UI architecture boundary", () => {
@@ -125,7 +123,11 @@ describe("testing UI architecture boundary", () => {
       if (/integration-github-actions/.test(executable)) {
         violations.push(`${rel}: imports integration-github-actions`);
       }
-      if (/multipart|formData\(|request\.formData|Content-Type["']?\s*,\s*["']multipart/i.test(executable)) {
+      if (
+        /multipart|formData\(|request\.formData|Content-Type["']?\s*,\s*["']multipart/i.test(
+          executable,
+        )
+      ) {
         violations.push(`${rel}: exposes binary evidence route`);
       }
     }
@@ -183,6 +185,8 @@ describe("testing UI architecture boundary", () => {
       ...walk(CLIENT_DIR),
       ...walk(TESTING_API_ROUTE_DIR),
     ];
-    expect(files.filter((file) => /(^|\/)ai(\/|$)|ai-assist|copilot/i.test(file))).toEqual([]);
+    expect(
+      files.filter((file) => /(^|\/)ai(\/|$)|ai-assist|copilot/i.test(file)),
+    ).toEqual([]);
   });
 });

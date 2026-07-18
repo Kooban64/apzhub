@@ -81,7 +81,10 @@ function makeContext(
       correlationId: CORR,
       timestamp: "2026-07-10T00:00:00.000Z",
     },
-    session: buildMockSession({ userId: USER, tenantId: TENANT }) as PlatformApiRequestContext["session"],
+    session: buildMockSession({
+      userId: USER,
+      tenantId: TENANT,
+    }) as PlatformApiRequestContext["session"],
     serviceContext: {
       tenantId: TENANT,
       userId: USER,

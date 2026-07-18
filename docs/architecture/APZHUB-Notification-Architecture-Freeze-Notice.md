@@ -11,19 +11,19 @@
 
 The following are **frozen** after APZNOTIFY-006 wave closeout:
 
-| Surface | Status |
-| ------- | ------ |
-| Notification contracts (`@apzhub/notification-contracts` **0.2.0**) | Frozen |
-| Notification Core (`@apzhub/notification-core` **0.2.0**) | Frozen |
-| Notification persistence (`@apzhub/notification-persistence` **0.1.0**) | Frozen |
-| Platform Services Notification facets (`platform-services` **0.21.0**) | Frozen |
-| Gateway integration (`gateway.notification.*`) | Frozen |
-| RequestPipeline integration | Frozen |
-| Production Authorization (`notification.*` permission catalogue) | Frozen |
-| Notification lifecycle model | Frozen |
+| Surface                                                                        | Status |
+| ------------------------------------------------------------------------------ | ------ |
+| Notification contracts (`@apzhub/notification-contracts` **0.2.0**)            | Frozen |
+| Notification Core (`@apzhub/notification-core` **0.2.0**)                      | Frozen |
+| Notification persistence (`@apzhub/notification-persistence` **0.1.0**)        | Frozen |
+| Platform Services Notification facets (`platform-services` **0.21.0**)         | Frozen |
+| Gateway integration (`gateway.notification.*`)                                 | Frozen |
+| RequestPipeline integration                                                    | Frozen |
+| Production Authorization (`notification.*` permission catalogue)               | Frozen |
+| Notification lifecycle model                                                   | Frozen |
 | HTTP API (`/api/v1/notifications/*`, OpenAPI **1.4.0** Platform Notifications) | Frozen |
-| Typed client (`createHttpNotificationClient()`) | Frozen |
-| Notification Workbench (`/workspace/notifications` + manifests) | Frozen |
+| Typed client (`createHttpNotificationClient()`)                                | Frozen |
+| Notification Workbench (`/workspace/notifications` + manifests)                | Frozen |
 
 ## Change policy
 

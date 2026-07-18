@@ -1,18 +1,18 @@
 # OSS-100 Platform Integration SDK Backlog
 
 **Milestone:** OSS-100 — planning backlog  
-**Status:** Phased implementation plan — OSS-100-10 complete (v1.0 Certification; `PRODUCTION_READY_WITH_LIMITATIONS`; package remains 0.9.0)  
+**Status:** Phased implementation plan — OSS-100-11 complete (`@apzhub/integration-sdk` **1.0.0** · **Architecture Frozen**; `PRODUCTION_READY_WITH_LIMITATIONS`)  
 **Authority:** [Platform Integration SDK Architecture](../architecture/APZHUB-Platform-Integration-SDK-Architecture.md)
 
 ---
 
 ## Prerequisites
 
-| Gate | Required before |
-|------|-----------------|
-| OSS-100 planning complete | OSS-100-01 |
-| Platform Core v2 certified | OSS-100-01 |
-| Owner approval | Each phase |
+| Gate                       | Required before |
+| -------------------------- | --------------- |
+| OSS-100 planning complete  | OSS-100-01      |
+| Platform Core v2 certified | OSS-100-01      |
+| Owner approval             | Each phase      |
 
 **OSS-101-04 (Plane adapter) requires OSS-100-05 minimum before start.**
 
@@ -30,13 +30,14 @@ Older backlog labelled **OSS-100-09** as “Provisioning & upgrade compatibility
 
 **Owner-approved correction (same pattern as 100-06/08):**
 
-| ID | Older label | Owner-approved meaning | Status |
-|----|-------------|------------------------|--------|
-| **OSS-100-09** | Provisioning | **Adapter Development Harness & Certification Framework** | ✅ Complete (v0.9.0) |
-| **OSS-100-10** | Test harness (older) / Provisioning (interim) | **Integration SDK v1.0 Certification & Release Readiness** | ✅ Complete (`PRODUCTION_READY_WITH_LIMITATIONS`; remain 0.9.0) |
-| **OSS-100-11+** | Docs closeout / Provisioning | **Provisioning** (deferred) and/or further closeout — exact scope owner may confirm | Planned |
+| ID              | Older label                                   | Owner-approved meaning                                                | Status                                                            |
+| --------------- | --------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **OSS-100-09**  | Provisioning                                  | **Adapter Development Harness & Certification Framework**             | ✅ Complete (v0.9.0)                                              |
+| **OSS-100-10**  | Test harness (older) / Provisioning (interim) | **Integration SDK v1.0 Certification & Release Readiness**            | ✅ Complete (`PRODUCTION_READY_WITH_LIMITATIONS`; remained 0.9.0) |
+| **OSS-100-11**  | Provisioning (older label)                    | **Integration SDK v1.0.0 Wave Certification & Architecture Freeze**   | ✅ Complete — **1.0.0** · **Architecture Frozen**                 |
+| **OSS-100-12+** | —                                             | **Provisioning** (deferred) / Event Bus / ingress — owner may confirm | Planned                                                           |
 
-Do not bump to 1.0.0, start provisioning, Event Bus, ingress, or next domain adapter without owner approval.
+Do not start provisioning, Event Bus, ingress, or next domain adapter without owner approval.
 
 ---
 
@@ -48,20 +49,21 @@ Do not bump to 1.0.0, start provisioning, Event Bus, ingress, or next domain ada
 
 ## Phase overview
 
-| Phase | ID | Theme | Status |
-|-------|-----|-------|--------|
-| 0 | OSS-100 | SDK architecture & specifications | ✅ Complete |
-| 1 | OSS-100-01 | Core package scaffold (types + placeholders) | ✅ Complete |
-| 2 | OSS-100-02 | Authentication & connection foundation | ✅ Complete |
-| 3 | OSS-100-03 | Health, diagnostics, version, lifecycle | ✅ Complete |
-| 4 | OSS-100-04 | Error translation & observability | ✅ Complete |
-| 5 | OSS-100-05 | AdapterBase & capability registration | ✅ Complete |
-| 6 | OSS-100-06 | **Shared HTTP Transport** | ✅ Complete |
-| 7 | OSS-100-07 | **Mapping Provider Framework** | ✅ Complete |
-| 8 | OSS-100-08 | Webhook & polling contracts | ✅ Complete |
-| 9 | OSS-100-09 | **Adapter Development Harness & Certification** | ✅ Complete (v0.9.0) |
-| 10 | OSS-100-10 | **Integration SDK v1.0 Certification & Release Readiness** | ✅ Complete — `PRODUCTION_READY_WITH_LIMITATIONS`; remain 0.9.0 |
-| 11 | OSS-100-11 | Provisioning (deferred) / further closeout | Planned — await owner |
+| Phase | ID          | Theme                                                               | Status                                                            |
+| ----- | ----------- | ------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| 0     | OSS-100     | SDK architecture & specifications                                   | ✅ Complete                                                       |
+| 1     | OSS-100-01  | Core package scaffold (types + placeholders)                        | ✅ Complete                                                       |
+| 2     | OSS-100-02  | Authentication & connection foundation                              | ✅ Complete                                                       |
+| 3     | OSS-100-03  | Health, diagnostics, version, lifecycle                             | ✅ Complete                                                       |
+| 4     | OSS-100-04  | Error translation & observability                                   | ✅ Complete                                                       |
+| 5     | OSS-100-05  | AdapterBase & capability registration                               | ✅ Complete                                                       |
+| 6     | OSS-100-06  | **Shared HTTP Transport**                                           | ✅ Complete                                                       |
+| 7     | OSS-100-07  | **Mapping Provider Framework**                                      | ✅ Complete                                                       |
+| 8     | OSS-100-08  | Webhook & polling contracts                                         | ✅ Complete                                                       |
+| 9     | OSS-100-09  | **Adapter Development Harness & Certification**                     | ✅ Complete (v0.9.0)                                              |
+| 10    | OSS-100-10  | **Integration SDK v1.0 Certification & Release Readiness**          | ✅ Complete — `PRODUCTION_READY_WITH_LIMITATIONS`; remained 0.9.0 |
+| 11    | OSS-100-11  | **Integration SDK v1.0.0 Wave Certification & Architecture Freeze** | ✅ Complete — **1.0.0** · **Architecture Frozen**                 |
+| 12+   | OSS-100-12+ | Provisioning (deferred) / Event Bus / ingress                       | Planned — await owner                                             |
 
 ---
 
@@ -100,6 +102,7 @@ Do not bump to 1.0.0, start provisioning, Event Bus, ingress, or next domain ada
 **Objective:** Implement authentication and logical connection management without HTTP transport.
 
 **Scope (approved OSS-100-02):**
+
 - Authentication modes at type level; static credential validation
 - `CredentialResolver` + `InMemorySecretProvider` + Vault placeholder
 - `ConnectionManager` + in-memory registry + lifecycle service
@@ -117,6 +120,7 @@ Do not bump to 1.0.0, start provisioning, Event Bus, ingress, or next domain ada
 **Objective:** Create `@apzhub/integration-sdk` package scaffold with core types and interfaces.
 
 **Scope (approved OSS-100-01):**
+
 - Package scaffold `packages/integration-sdk/`
 - Core types: `ConnectionConfig`, `IntegrationCredentials`, `IntegrationCapabilityMetadata`, version compatibility
 - `IntegrationClient` interface (placeholder — no HTTP)
@@ -125,12 +129,14 @@ Do not bump to 1.0.0, start provisioning, Event Bus, ingress, or next domain ada
 - Subpath exports and smoke tests
 
 **Out of scope:**
+
 - HTTP transport (OSS-100-02)
 - Vendor adapters
 - Retry / circuit breaker
 - Plane adapter
 
 **Deliverables:**
+
 - `@apzhub/integration-sdk` importable package
 - OSS-100-01 completion report
 
@@ -143,6 +149,7 @@ Do not bump to 1.0.0, start provisioning, Event Bus, ingress, or next domain ada
 **Objective:** Create `@apzhub/integration-sdk` with connection management, configuration, and REST transport.
 
 **Scope:**
+
 - Package scaffold `packages/integration-sdk/`
 - `IntegrationRequestContext`, `Connection`, `ConnectionManager`
 - `ConfigurationProvider` bridge to `@apzhub/config`
@@ -151,21 +158,25 @@ Do not bump to 1.0.0, start provisioning, Event Bus, ingress, or next domain ada
 - Unit tests for connection pool and config bridge
 
 **Out of scope:**
+
 - Vendor adapters
 - GraphQL transport
 - Mapping stores
 - Webhook receivers
 
 **Platform capabilities consumed:**
+
 - Configuration (`@apzhub/config`)
 - Platform Runtime (types only)
 
 **Tests:**
+
 - Connection lifecycle unit tests
 - Config provider tests
 - REST client mock transport tests
 
 **Deliverables:**
+
 - `@apzhub/integration-sdk` core export
 - OSS-100-01 completion report
 
@@ -220,12 +231,14 @@ Do not bump to 1.0.0, start provisioning, Event Bus, ingress, or next domain ada
 **Objective:** Ship `AdapterBase` abstract class and manifest registration helper.
 
 **Scope:**
+
 - `AdapterBase` composing all SDK providers
 - `CapabilityRegistration` manifest bridge
 - Factory pattern for adapter construction
 - Reference implementation doc (not Plane — mock engine)
 
 **Out of scope:**
+
 - Plane adapter (OSS-101-04)
 - Production mapping DB migrations
 
@@ -248,6 +261,7 @@ Do not bump to 1.0.0, start provisioning, Event Bus, ingress, or next domain ada
 **Objective:** Replace interim Plane/Zammad fetch clients with a reusable SDK transport without public adapter behaviour change.
 
 **Scope (approved OSS-100-06):**
+
 - `TransportClient` + request/response pipeline + policies + interceptors
 - Auth-neutral header hooks; retries default `maxAttempts=1`
 - Circuit breaker remains in operation runners; optional transport interceptor
@@ -260,6 +274,7 @@ Do not bump to 1.0.0, start provisioning, Event Bus, ingress, or next domain ada
 **Tests:** Transport suite + Plane/Zammad regression (211)
 
 **Deliverables:**
+
 - `@apzhub/integration-sdk` v0.6.0 transport module
 - Package docs under `packages/integration-sdk/docs/TRANSPORT-*.md` / `HTTP-TRANSPORT.md`
 - OSS-100-06 completion report
@@ -272,10 +287,10 @@ Do not bump to 1.0.0, start provisioning, Event Bus, ingress, or next domain ada
 
 **Clarification — two mapping layers (do not conflate):**
 
-| Layer | Location | Role |
-|-------|----------|------|
-| **SDK Mapping Provider Framework** (this phase) | `@apzhub/integration-sdk/mapping` | Adapter-level provider ↔ canonical translation (fields, enums, provisional IDs, registry, pipeline) |
-| **Platform EntityMappingStore / MappingOrchestrator** | `@apzhub/platform-services` (ADR-0049; OSS-110-05) | Durable global ID bindings (SoR) — **UNTOUCHED** by OSS-100-07 |
+| Layer                                                 | Location                                           | Role                                                                                                |
+| ----------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| **SDK Mapping Provider Framework** (this phase)       | `@apzhub/integration-sdk/mapping`                  | Adapter-level provider ↔ canonical translation (fields, enums, provisional IDs, registry, pipeline) |
+| **Platform EntityMappingStore / MappingOrchestrator** | `@apzhub/platform-services` (ADR-0049; OSS-110-05) | Durable global ID bindings (SoR) — **UNTOUCHED** by OSS-100-07                                      |
 
 Earlier backlog drafts described “User/Permission/Entity MappingProvider + PostgreSQL repositories”. Durable ID persistence already ships in platform-services. OSS-100-07 delivered the **SDK mapping framework** only; it does **not** duplicate or relocate EntityMappingStore.
 
@@ -296,6 +311,7 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 **Objective:** Reusable vendor-neutral mapping subsystem in the Integration SDK; adapters supply provider-specific rules.
 
 **Scope (approved OSS-100-07):**
+
 - `MappingProvider` / `MappingRegistry` / `MappingPipeline`
 - Profiles, directions, definitions, context, result, error, capabilities, diagnostics
 - FieldMapper, ValueTransformer, EnumMapper, IdentityMapper, RelationshipMapper, CollectionMapper
@@ -305,6 +321,7 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 **Out of scope:** EntityMappingStore / MappingOrchestrator changes; webhooks; PostgreSQL migrations in SDK; UI
 
 **Deliverables:**
+
 - `@apzhub/integration-sdk` v0.7.0 mapping module
 - Package docs under `packages/integration-sdk/docs/MAPPING-*.md`
 - OSS-100-07 completion report
@@ -320,6 +337,7 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 > **Relocation note:** This scope was previously labelled OSS-100-06 in early backlog drafts. Owner-approved OSS-100-06 delivered Shared HTTP Transport instead.
 
 **Delivered (as implemented):**
+
 - `IntegrationSourceEvent` envelope + identity/dedup + schema versioning
 - `WebhookManager` / verification / replay / `WebhookProcessingPipeline` (not a full HTTP `WebhookReceiver`)
 - `PollingSource` / cursors / checkpoints / `PollingExecutionPipeline` (not a `PollingScheduler`)
@@ -327,6 +345,7 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 - ADRs 0052–0056
 
 **Out of scope (confirmed absent):**
+
 - HTTP webhook ingress / Platform Event Bus / workers / schedulers
 - Production durable stores
 - Plane/Zammad public API changes (versions stay 0.6.0)
@@ -340,20 +359,24 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 > Historical scope wording retained for traceability. Prefer the completion report for delivered shapes.
 
 **Scope (approved OSS-100-08):**
+
 - `WebhookReceiver` — signature verification, normalization → delivered as verifier + pipeline
 - `PollingScheduler` — worker integration stub → **not** delivered; ADR-0056 keeps scheduling on platform
 - `NormalizedVendorEvent` envelope → `IntegrationSourceEvent`
 - Idempotency key handling → identity precedence + dedup store
 
 **Out of scope:**
+
 - Plane webhooks (OSS-101-08 — already delivered at adapter level)
 - Production worker deployment
 
 **Tests:**
+
 - Webhook signature tests
 - Polling cursor idempotency tests
 
 **Deliverables:**
+
 - Webhook/polling SDK modules
 - OSS-100-08 completion report
 
@@ -368,6 +391,7 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 > **Owner renumber note:** Older drafts labelled this ID as “Provisioning”. Owner-approved OSS-100-09 is **Harness & Certification**. Provisioning is deferred (see OSS-100-11+). Certification gate delivered as **OSS-100-10**.
 
 **Delivered:**
+
 - `@apzhub/integration-sdk` **v0.9.0** — export `/harness`
 - `AdapterHarness`, `AdapterCertification`, `AdapterCompliance`, contract suite, boundary validator
 - `AdapterMockHarness`, scaffold generator, quality reports, documentation generator, CI helpers
@@ -375,6 +399,7 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 - Maturity at ship: **Release Candidate** (superseded maturity assessment by OSS-100-10)
 
 **Out of scope (confirmed absent):**
+
 - Provisioning / upgrade orchestration
 - Platform Event Bus / HTTP ingress / workers / schedulers
 - New business-domain adapters
@@ -391,6 +416,7 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 **Historical objective (relocated):** Provisioning bridge and upgrade policy evaluation.
 
 **Historical scope:**
+
 - `onProvision` / `onReconcile` full lifecycle
 - `UpgradeCompatibilityPolicy`
 - Integration with platform provisioning API
@@ -405,12 +431,14 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 > **Owner numbering:** Owner-approved **OSS-100-10 = Integration SDK v1.0 Certification & Release Readiness** (overrides older backlog “provisioning” for 100-10).
 
 **Delivered:**
+
 - Formal certification pack: `SDK-V1-CERTIFICATION.md`, `SDK-API-AUDIT.md`, `SDK-SECURITY-AUDIT.md`, `SDK-RELEASE-READINESS.md`, `SDK-PUBLIC-API.md`, `SDK-COMPATIBILITY.md`
 - Architecture index + ADR-0058 + foundation closeout
 - Plane/Zammad re-cert via `testing/sdk-v1/integration-sdk-v1-recertification.test.ts`
 - Outcome: **`PRODUCTION_READY_WITH_LIMITATIONS`**; package remains **0.9.0**
 
 **Out of scope (confirmed):**
+
 - Auto-bump to **1.0.0**
 - Event Bus / HTTP ingress / provisioning implementation
 - TypeScript production code changes
@@ -426,6 +454,7 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 **Historical objective (deferred):** Provisioning bridge and upgrade policy evaluation.
 
 **Historical scope:**
+
 - `onProvision` / `onReconcile` full lifecycle
 - `UpgradeCompatibilityPolicy`
 - Integration with platform provisioning API
@@ -448,6 +477,7 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 **Objective:** Provisioning bridge and upgrade policy evaluation, and/or any remaining documentation polish after owner-governed **1.0.0** promotion (when authorised).
 
 **Scope (indicative):**
+
 - `onProvision` / `onReconcile` full lifecycle
 - `UpgradeCompatibilityPolicy`
 - Integration with platform provisioning API
@@ -455,16 +485,19 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 - Optional post-1.0 docs polish
 
 **Out of scope:**
+
 - Per-engine provision scripts
 - Automated engine upgrades
 - Replacing SDK harness (already delivered as OSS-100-09)
 - Declaring 1.0.0 without owner gate (certification already complete under OSS-100-10)
 
 **Tests:**
+
 - Provisioning idempotency tests
 - Upgrade policy matrix tests
 
 **Deliverables:**
+
 - Provisioning SDK module (if still required)
 - Completion report under owner-assigned ID
 
@@ -473,16 +506,16 @@ Earlier backlog drafts described “User/Permission/Entity MappingProvider + Pos
 
 ## Consumer matrix
 
-| Integration | Wave | SDK required from |
-|-------------|------|-------------------|
-| Plane | OSS-101 | OSS-100-05 (+ transport/mapping/events/harness wrappers) |
-| Kimai | OSS-201 | OSS-100-11 (or owner-approved SDK gate) |
-| Paperless-ngx | OSS-301 | OSS-100-11 (or owner-approved SDK gate) |
-| Zammad | OSS-401 / OSS-102 | OSS-100-05 (+ transport/mapping/events/harness wrappers) |
-| Metabase | OSS-601 | OSS-100-11 (or owner-approved SDK gate) |
-| n8n | OSS-701 | OSS-100-11 (or owner-approved SDK gate) |
-| Grafana stack | OSS-801 | OSS-100-11 (or owner-approved SDK gate) |
-| Greenbone, MobSF, Faraday | OSS-901 | OSS-100-11 (or owner-approved SDK gate) |
+| Integration               | Wave              | SDK required from                                        |
+| ------------------------- | ----------------- | -------------------------------------------------------- |
+| Plane                     | OSS-101           | OSS-100-05 (+ transport/mapping/events/harness wrappers) |
+| Kimai                     | OSS-201           | OSS-100-11 (or owner-approved SDK gate)                  |
+| Paperless-ngx             | OSS-301           | OSS-100-11 (or owner-approved SDK gate)                  |
+| Zammad                    | OSS-401 / OSS-102 | OSS-100-05 (+ transport/mapping/events/harness wrappers) |
+| Metabase                  | OSS-601           | OSS-100-11 (or owner-approved SDK gate)                  |
+| n8n                       | OSS-701           | OSS-100-11 (or owner-approved SDK gate)                  |
+| Grafana stack             | OSS-801           | OSS-100-11 (or owner-approved SDK gate)                  |
+| Greenbone, MobSF, Faraday | OSS-901           | OSS-100-11 (or owner-approved SDK gate)                  |
 
 ---
 

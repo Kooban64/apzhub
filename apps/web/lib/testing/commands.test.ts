@@ -5,11 +5,7 @@ import { TestingClientError } from "./errors";
 import { createMockTestingClient, FIXTURE_IDS } from "./mock-client";
 import { resetTestingClient } from "./testing-api";
 
-const FULL_PERMISSIONS = [
-  "testing.*",
-  "certification.*",
-  "evidence.*",
-] as const;
+const FULL_PERMISSIONS = ["testing.*", "certification.*", "evidence.*"] as const;
 
 describe("executeTestingCommand", () => {
   beforeEach(() => {
@@ -149,11 +145,9 @@ describe("executeTestingCommand", () => {
     ).rejects.toMatchObject(forbidden);
 
     await expect(
-      executeTestingCommand(
-        "approve",
-        { certificationId: FIXTURE_IDS.certification },
-        ["certification.review"],
-      ),
+      executeTestingCommand("approve", { certificationId: FIXTURE_IDS.certification }, [
+        "certification.review",
+      ]),
     ).rejects.toMatchObject(forbidden);
   });
 
@@ -176,6 +170,8 @@ describe("executeTestingCommand", () => {
     const client = createMockTestingClient();
     const plans = await client.listPlans();
     expect(plans.items.some((plan) => plan.name === "First")).toBe(false);
-    expect(plans.items.some((plan) => plan.name === "Release 2.4 Regression")).toBe(true);
+    expect(plans.items.some((plan) => plan.name === "Release 2.4 Regression")).toBe(
+      true,
+    );
   });
 });

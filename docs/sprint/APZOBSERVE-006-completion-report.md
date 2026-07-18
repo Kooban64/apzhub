@@ -49,13 +49,13 @@ Observability Administration Workbench
 
 ## Quality Evidence
 
-| Gate | Result |
-| ---- | ------ |
-| `pnpm audit:observe-vertical` | PASS |
-| `pnpm audit:observe-wave` | PASS |
-| `pnpm certify:observe-vertical` | PASS (retained; LIMITED Playwright) |
-| `pnpm openapi:validate:platform` | PASS |
-| Package versions | Frozen (contracts/core 0.2.0 · persistence 0.1.0 · services 0.24.0 · OpenAPI 1.8.0) |
+| Gate                             | Result                                                                              |
+| -------------------------------- | ----------------------------------------------------------------------------------- |
+| `pnpm audit:observe-vertical`    | PASS                                                                                |
+| `pnpm audit:observe-wave`        | PASS                                                                                |
+| `pnpm certify:observe-vertical`  | PASS (retained; LIMITED Playwright)                                                 |
+| `pnpm openapi:validate:platform` | PASS                                                                                |
+| Package versions                 | Frozen (contracts/core 0.2.0 · persistence 0.1.0 · services 0.24.0 · OpenAPI 1.8.0) |
 
 Details: [Quality Evidence](../reviews/APZOBSERVE-006-Quality-Evidence.md) · [Wave Certification](../reviews/APZOBSERVE-006-Wave-Certification.md)
 
@@ -65,20 +65,20 @@ See [Programme Summary](./APZOBSERVE-006-programme-summary.md) · [Wave Closeout
 
 ## Known Limitations (retained)
 
-- Metadata governance plane only  
-- No Grafana/Prometheus/Loki/OTel/AlertManager  
-- No collection / ingestion / streaming  
-- No alert evaluation / delivery  
-- No incident-response execution  
-- No Event Bus / AI  
+- Metadata governance plane only
+- No Grafana/Prometheus/Loki/OTel/AlertManager
+- No collection / ingestion / streaming
+- No alert evaluation / delivery
+- No incident-response execution
+- No Event Bus / AI
 - Playwright live LIMITED (external Testing slug conflict)
 
 ## Documentation Produced
 
-- Architecture Freeze Notice · Observability Reference Standard  
-- Operational Readiness Guide · Future Observability Platform Guide  
-- Wave Certification · Quality Evidence · Architecture Freeze Review · Security Confirmation  
-- Programme Summary · Wave Closeout Report · Completion Report  
+- Architecture Freeze Notice · Observability Reference Standard
+- Operational Readiness Guide · Future Observability Platform Guide
+- Wave Certification · Quality Evidence · Architecture Freeze Review · Security Confirmation
+- Programme Summary · Wave Closeout Report · Completion Report
 
 ## Recommendation
 

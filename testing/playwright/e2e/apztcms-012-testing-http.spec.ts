@@ -55,7 +55,11 @@ async function mockTestingHttpApi(page: Page, seen: string[]) {
     await route.fulfill({
       status: 200,
       contentType: "application/json",
-      body: JSON.stringify({ data: [], page: { total: 0 }, meta: { correlationId: "pw-apztcms-012" } }),
+      body: JSON.stringify({
+        data: [],
+        page: { total: 0 },
+        meta: { correlationId: "pw-apztcms-012" },
+      }),
     });
   });
 }
@@ -65,7 +69,9 @@ test.describe("APZTCMS-012 Testing HTTP client workbench", () => {
     await signIn(page);
   });
 
-  test("opens workbench and lists plans through mocked /api/v1/testing", async ({ page }) => {
+  test("opens workbench and lists plans through mocked /api/v1/testing", async ({
+    page,
+  }) => {
     const seen: string[] = [];
     await mockTestingHttpApi(page, seen);
 

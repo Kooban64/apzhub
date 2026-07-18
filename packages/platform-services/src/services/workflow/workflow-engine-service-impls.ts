@@ -92,9 +92,7 @@ export function createWorkflowEngineServiceImpls(input: {
     },
     tags: {
       list: (ctx) =>
-        withEngineErrorMapping(ctx, () =>
-          core.listTags(toIntegrationContext(ctx)),
-        ),
+        withEngineErrorMapping(ctx, () => core.listTags(toIntegrationContext(ctx))),
       get: (ctx, tagId) =>
         withEngineErrorMapping(ctx, () =>
           core.getTag(toIntegrationContext(ctx), tagId),
@@ -102,9 +100,7 @@ export function createWorkflowEngineServiceImpls(input: {
     },
     users: {
       list: (ctx) =>
-        withEngineErrorMapping(ctx, () =>
-          core.listUsers(toIntegrationContext(ctx)),
-        ),
+        withEngineErrorMapping(ctx, () => core.listUsers(toIntegrationContext(ctx))),
       get: (ctx, userId) =>
         withEngineErrorMapping(ctx, () =>
           core.getUser(toIntegrationContext(ctx), userId),
@@ -112,9 +108,7 @@ export function createWorkflowEngineServiceImpls(input: {
     },
     projects: {
       list: (ctx) =>
-        withEngineErrorMapping(ctx, () =>
-          core.listProjects(toIntegrationContext(ctx)),
-        ),
+        withEngineErrorMapping(ctx, () => core.listProjects(toIntegrationContext(ctx))),
       get: (ctx, projectId) =>
         withEngineErrorMapping(ctx, () =>
           core.getProject(toIntegrationContext(ctx), projectId),

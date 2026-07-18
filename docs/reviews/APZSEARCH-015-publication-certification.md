@@ -9,14 +9,14 @@
 
 Re-certify Cross-Product Search Integration Framework (**009**) and product publication adapters (**010–014**) without new functionality.
 
-| Package | Version | Milestone | Role |
-| ------- | ------- | --------- | ---- |
-| `@apzhub/search-integration` | **0.1.0** | 009 | Cross-product publication framework |
-| `@apzhub/search-projects` | **0.1.0** | 010 | Projects metadata publisher |
-| `@apzhub/search-support` | **0.1.0** | 011 | Support metadata publisher |
-| `@apzhub/search-documents` | **0.1.0** | 012 | Documents metadata publisher |
-| `@apzhub/search-testing` | **0.1.1** | 013 | APZ TCMS metadata publisher |
-| `@apzhub/search-reporting` | **0.1.0** | 014 | Reporting metadata publisher |
+| Package                      | Version   | Milestone | Role                                |
+| ---------------------------- | --------- | --------- | ----------------------------------- |
+| `@apzhub/search-integration` | **0.1.0** | 009       | Cross-product publication framework |
+| `@apzhub/search-projects`    | **0.1.0** | 010       | Projects metadata publisher         |
+| `@apzhub/search-support`     | **0.1.0** | 011       | Support metadata publisher          |
+| `@apzhub/search-documents`   | **0.1.0** | 012       | Documents metadata publisher        |
+| `@apzhub/search-testing`     | **0.1.1** | 013       | APZ TCMS metadata publisher         |
+| `@apzhub/search-reporting`   | **0.1.0** | 014       | Reporting metadata publisher        |
 
 ## Certified behaviour
 

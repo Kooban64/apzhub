@@ -48,7 +48,8 @@ export function buildMeilisearchAdapterContext(
     input.meilisearchCapabilities ??
     createMeilisearchCapabilityProvider(input.declaredSearchCapabilities);
   const meilisearchConfigurationValidator =
-    input.meilisearchConfigurationValidator ?? createMeilisearchConfigurationValidator();
+    input.meilisearchConfigurationValidator ??
+    createMeilisearchConfigurationValidator();
 
   return {
     ...base,

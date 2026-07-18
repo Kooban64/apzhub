@@ -24,12 +24,12 @@ Observability owns observability **metadata and lifecycle governance**. It does 
 
 ## Package ownership
 
-| Package | Version | Owns |
-| --- | --- | --- |
-| `@apzhub/observe-contracts` | **0.2.0** | Domain models, permissions, ports |
-| `@apzhub/observe-core` | **0.2.0** | Validation, lifecycle, business rules |
-| `@apzhub/observe-persistence` | **0.1.0** | Repository adapters (memory + PostgreSQL) |
-| `@apzhub/platform-services` | **0.24.0** | `gateway.observe.*`, RequestPipeline wrap, authz |
+| Package                       | Version    | Owns                                             |
+| ----------------------------- | ---------- | ------------------------------------------------ |
+| `@apzhub/observe-contracts`   | **0.2.0**  | Domain models, permissions, ports                |
+| `@apzhub/observe-core`        | **0.2.0**  | Validation, lifecycle, business rules            |
+| `@apzhub/observe-persistence` | **0.1.0**  | Repository adapters (memory + PostgreSQL)        |
+| `@apzhub/platform-services`   | **0.24.0** | `gateway.observe.*`, RequestPipeline wrap, authz |
 
 ## Dependency boundaries
 
@@ -70,18 +70,18 @@ Observability does **not** own:
 
 ## Layer responsibilities
 
-| Layer | Responsibility |
-| --- | --- |
-| Workbench | Presentation over typed client; capability banners; permission-aware UI |
-| Typed client | Calls `/api/v1/observe/*` only; query keys; error mapping |
-| HTTP | Thin handlers → `gateway.observe.*`; controlled `OBSERVE_SERVICE_UNAVAILABLE` |
-| Gateway | Nested `observe.*` facet surface |
-| RequestPipeline | Auth → Authz → validation → execution |
-| Authorization | `PLATFORM_OBSERVE_PERMISSIONS` / `observePlatformOps` |
-| Platform Services | Orchestration, authz wrap, diagnostics readiness |
-| Core | Business rules, validation, lifecycle |
-| Persistence | Repository ports; PostgreSQL SoR; RLS |
-| PostgreSQL | `platform_observe_*` tables (migrations 0054/0055) |
+| Layer             | Responsibility                                                                |
+| ----------------- | ----------------------------------------------------------------------------- |
+| Workbench         | Presentation over typed client; capability banners; permission-aware UI       |
+| Typed client      | Calls `/api/v1/observe/*` only; query keys; error mapping                     |
+| HTTP              | Thin handlers → `gateway.observe.*`; controlled `OBSERVE_SERVICE_UNAVAILABLE` |
+| Gateway           | Nested `observe.*` facet surface                                              |
+| RequestPipeline   | Auth → Authz → validation → execution                                         |
+| Authorization     | `PLATFORM_OBSERVE_PERMISSIONS` / `observePlatformOps`                         |
+| Platform Services | Orchestration, authz wrap, diagnostics readiness                              |
+| Core              | Business rules, validation, lifecycle                                         |
+| Persistence       | Repository ports; PostgreSQL SoR; RLS                                         |
+| PostgreSQL        | `platform_observe_*` tables (migrations 0054/0055)                            |
 
 ## Authorization model (frozen)
 

@@ -172,17 +172,17 @@ Platform Tenant
 
 ## Article → Support Article mapping (OSS-102-04)
 
-| Zammad         | APZHUB `SupportArticle`                        |
-| -------------- | ---------------------------------------------- |
-| `id`           | provisional `sart_zammad_{id}`                 |
-| `ticket_id`    | `supportTicketId` (`sreq_zammad_*`)            |
-| `body`         | `body`                                         |
-| `content_type` | `bodyFormat`                                   |
-| `internal`     | `visibility: internal \| public`               |
-| `type`         | `channel`                                      |
-| `sender`       | `senderType` / `author.senderType`             |
-| `from`/`to`/`cc` | `recipients` / author email                  |
-| attachments    | `SupportArticleAttachment` metadata only       |
+| Zammad           | APZHUB `SupportArticle`                  |
+| ---------------- | ---------------------------------------- |
+| `id`             | provisional `sart_zammad_{id}`           |
+| `ticket_id`      | `supportTicketId` (`sreq_zammad_*`)      |
+| `body`           | `body`                                   |
+| `content_type`   | `bodyFormat`                             |
+| `internal`       | `visibility: internal \| public`         |
+| `type`           | `channel`                                |
+| `sender`         | `senderType` / `author.senderType`       |
+| `from`/`to`/`cc` | `recipients` / author email              |
+| attachments      | `SupportArticleAttachment` metadata only |
 
 **Not** Projects `Comment`. Binary attachment transfer is out of scope for OSS-102-04.
 

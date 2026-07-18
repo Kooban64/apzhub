@@ -17,10 +17,10 @@ Delivered the APZHUB Platform Administration foundation: contracts, domain core 
 admin-contracts → admin-core → admin-persistence
 ```
 
-| Package | Version |
-| --- | --- |
-| `@apzhub/admin-contracts` | **0.1.0** |
-| `@apzhub/admin-core` | **0.1.0** |
+| Package                     | Version   |
+| --------------------------- | --------- |
+| `@apzhub/admin-contracts`   | **0.1.0** |
+| `@apzhub/admin-core`        | **0.1.0** |
 | `@apzhub/admin-persistence` | **0.1.0** |
 
 ## Domain Model
@@ -49,26 +49,26 @@ Contracts, core (lifecycle/validation/registration/capability/factory), persiste
 
 ## Coverage
 
-| Metric | Value |
-| --- | --- |
+| Metric             | Value      |
+| ------------------ | ---------- |
 | Lines / statements | **99.09%** |
-| Functions | **100%** |
-| Branches | **80.91%** |
+| Functions          | **100%**   |
+| Branches           | **80.91%** |
 
 ## Quality Gates
 
-| Gate | Result |
-| --- | --- |
+| Gate                                       | Result                               |
+| ------------------------------------------ | ------------------------------------ |
 | Architecture / dependency / boundary audit | PASS (`pnpm audit:admin-foundation`) |
-| Vitest | PASS |
-| Coverage ≥95% lines/functions | PASS (verify in CI / local run) |
+| Vitest                                     | PASS                                 |
+| Coverage ≥95% lines/functions              | PASS (verify in CI / local run)      |
 
 ## Technical Debt
 
-- Platform Services + Gateway deferred to APZADMIN-002  
-- No HTTP / Workbench / OpenAPI / typed client  
-- No Event Bus / runtime diagnostics execution  
-- No user/role/tenant management or dashboard rendering  
+- Platform Services + Gateway deferred to APZADMIN-002
+- No HTTP / Workbench / OpenAPI / typed client
+- No Event Bus / runtime diagnostics execution
+- No user/role/tenant management or dashboard rendering
 - Live Postgres integration tests deferred (mocked drizzle paths covered)
 
 ## Recommendation

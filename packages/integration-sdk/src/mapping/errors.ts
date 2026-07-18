@@ -28,7 +28,10 @@ export function createMappingError(
   code: string,
   message: string,
   context: MappingErrorContext,
-  options: { readonly category?: MappingError["category"]; readonly retryable?: boolean } = {},
+  options: {
+    readonly category?: MappingError["category"];
+    readonly retryable?: boolean;
+  } = {},
 ): MappingError {
   return toMappingError(
     options.category ?? "mapping",

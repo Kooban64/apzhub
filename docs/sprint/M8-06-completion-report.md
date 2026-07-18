@@ -54,19 +54,19 @@ Run: `pnpm lint`, `pnpm typecheck`, `pnpm build`, `pnpm test`, `pnpm test:covera
 
 **Yes, for Phase 1 foundation.** The Platform Core now consists of:
 
-| Capability | Package / surface |
-|------------|-------------------|
-| Runtime | `@apzhub/platform-runtime` |
-| Identity | `@apzhub/platform-identity` |
-| Authorization | `@apzhub/platform-authorization` |
-| Operations | Operations Console + `/api/platform/v1/operations/*` |
-| Personalisation | `@apzhub/platform-personalisation` |
-| Governance | `@apzhub/platform-governance` |
-| Provisioning | Governance package (M8-05) |
-| Security | `@apzhub/platform-security` (M8-06) |
-| Persistence | `@apzhub/config` + migrations |
-| API Framework | Platform v1 routes + guard |
-| Workbench | `@apzhub/workbench-framework` |
+| Capability      | Package / surface                                    |
+| --------------- | ---------------------------------------------------- |
+| Runtime         | `@apzhub/platform-runtime`                           |
+| Identity        | `@apzhub/platform-identity`                          |
+| Authorization   | `@apzhub/platform-authorization`                     |
+| Operations      | Operations Console + `/api/platform/v1/operations/*` |
+| Personalisation | `@apzhub/platform-personalisation`                   |
+| Governance      | `@apzhub/platform-governance`                        |
+| Provisioning    | Governance package (M8-05)                           |
+| Security        | `@apzhub/platform-security` (M8-06)                  |
+| Persistence     | `@apzhub/config` + migrations                        |
+| API Framework   | Platform v1 routes + guard                           |
+| Workbench       | `@apzhub/workbench-framework`                        |
 
 Products (Law Platform, Trust Accounting, etc.) consume these capabilities via Platform Services and APIs — they do not duplicate platform security, identity, or operations.
 

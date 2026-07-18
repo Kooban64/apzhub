@@ -16,19 +16,19 @@ OSS-101-03 registers **APZHUB Projects** as a first-class platform capability th
 
 ## Manifest inventory
 
-| Capability | Kind | Path | ID |
-|------------|------|------|-----|
-| Project Service | service | `services/projects/service.yaml` | `project-service` |
-| Projects module | module | `services/projects/manifests/projects/module.yaml` | `projects` |
-| Plane integration | integration | `integrations/plane/integration.yaml` | `plane` |
-| Project created | event | `events/projects/project-created/event.yaml` | `projects-project-created` |
-| Project updated | event | `events/projects/project-updated/event.yaml` | `projects-project-updated` |
-| Task created | event | `events/projects/task-created/event.yaml` | `projects-task-created` |
-| Task updated | event | `events/projects/task-updated/event.yaml` | `projects-task-updated` |
-| Task status changed | event | `events/projects/task-status-changed/event.yaml` | `projects-task-status-changed` |
-| Task assigned | event | `events/projects/task-assigned/event.yaml` | `projects-task-assigned` |
-| Sprint created | event | `events/projects/sprint-created/event.yaml` | `projects-sprint-created` |
-| Sprint completed | event | `events/projects/sprint-completed/event.yaml` | `projects-sprint-completed` |
+| Capability          | Kind        | Path                                               | ID                             |
+| ------------------- | ----------- | -------------------------------------------------- | ------------------------------ |
+| Project Service     | service     | `services/projects/service.yaml`                   | `project-service`              |
+| Projects module     | module      | `services/projects/manifests/projects/module.yaml` | `projects`                     |
+| Plane integration   | integration | `integrations/plane/integration.yaml`              | `plane`                        |
+| Project created     | event       | `events/projects/project-created/event.yaml`       | `projects-project-created`     |
+| Project updated     | event       | `events/projects/project-updated/event.yaml`       | `projects-project-updated`     |
+| Task created        | event       | `events/projects/task-created/event.yaml`          | `projects-task-created`        |
+| Task updated        | event       | `events/projects/task-updated/event.yaml`          | `projects-task-updated`        |
+| Task status changed | event       | `events/projects/task-status-changed/event.yaml`   | `projects-task-status-changed` |
+| Task assigned       | event       | `events/projects/task-assigned/event.yaml`         | `projects-task-assigned`       |
+| Sprint created      | event       | `events/projects/sprint-created/event.yaml`        | `projects-sprint-created`      |
+| Sprint completed    | event       | `events/projects/sprint-completed/event.yaml`      | `projects-sprint-completed`    |
 
 Discovery roots (`packages/platform-runtime/src/discovery-engine/config.ts`) include `services/`, `integrations/`, and `events/`.
 
@@ -38,15 +38,15 @@ Discovery roots (`packages/platform-runtime/src/discovery-engine/config.ts`) inc
 
 ### Permissions
 
-| Permission | Purpose |
-|------------|---------|
-| `projects.view` | View projects workspace and project list |
-| `projects.manage` | Create and update projects |
-| `projects.task.view` | View tasks, backlog, and board |
-| `projects.task.manage` | Create, update, assign, and transition tasks |
-| `projects.sprint.view` | View sprints and sprint board |
-| `projects.sprint.manage` | Create, start, and complete sprints |
-| `projects.admin` | Administer project settings, team, archive |
+| Permission               | Purpose                                      |
+| ------------------------ | -------------------------------------------- |
+| `projects.view`          | View projects workspace and project list     |
+| `projects.manage`        | Create and update projects                   |
+| `projects.task.view`     | View tasks, backlog, and board               |
+| `projects.task.manage`   | Create, update, assign, and transition tasks |
+| `projects.sprint.view`   | View sprints and sprint board                |
+| `projects.sprint.manage` | Create, start, and complete sprints          |
+| `projects.admin`         | Administer project settings, team, archive   |
 
 ### Published events
 
@@ -63,10 +63,10 @@ Canonical event keys (see [Event Mapping Specification](../specs/APZHUB-Projects
 
 ### Knowledge sources
 
-| Source ID | Kind | Tier | Permission |
-|-----------|------|------|------------|
-| `projects.search` | metadata-index | T2 | `projects.view` |
-| `projects.knowledge` | event-index | T2 | `projects.view` |
+| Source ID            | Kind           | Tier | Permission      |
+| -------------------- | -------------- | ---- | --------------- |
+| `projects.search`    | metadata-index | T2   | `projects.view` |
+| `projects.knowledge` | event-index    | T2   | `projects.view` |
 
 Both sources are `status: planned` until OSS-101-08.
 
@@ -84,15 +84,15 @@ Manifest `dependencies.platform` arrays are empty (discovery-safe pattern per le
 
 ### Workbench navigation
 
-| Sidebar item | Route | Permission |
-|--------------|-------|------------|
-| Dashboard | `/workspace/projects` | `projects.view` |
-| All Projects | `/workspace/projects/list` | `projects.view` |
-| My Work | `/workspace/projects/my-work` | `projects.task.view` |
-| Tasks | `/workspace/projects/tasks` | `projects.task.view` |
-| Backlog | `/workspace/projects/backlog` | `projects.task.view` |
-| Sprints | `/workspace/projects/sprints` | `projects.sprint.view` |
-| Roadmap | `/workspace/projects/roadmap` | `projects.view` |
+| Sidebar item | Route                         | Permission             |
+| ------------ | ----------------------------- | ---------------------- |
+| Dashboard    | `/workspace/projects`         | `projects.view`        |
+| All Projects | `/workspace/projects/list`    | `projects.view`        |
+| My Work      | `/workspace/projects/my-work` | `projects.task.view`   |
+| Tasks        | `/workspace/projects/tasks`   | `projects.task.view`   |
+| Backlog      | `/workspace/projects/backlog` | `projects.task.view`   |
+| Sprints      | `/workspace/projects/sprints` | `projects.sprint.view` |
+| Roadmap      | `/workspace/projects/roadmap` | `projects.view`        |
 
 Project detail (planned): `/workspace/projects/{projectId}` — documented in `documentation.plannedRouteProjectDetail`.
 
@@ -100,17 +100,17 @@ Activity Bar entry: **Projects** (`folder-kanban`, order 20).
 
 ### Commands (placeholders)
 
-| Command ID | Permission |
-|------------|------------|
-| `project.open` | `projects.view` |
-| `project.create` | `projects.manage` |
-| `project.update` | `projects.manage` |
-| `task.open` | `projects.task.view` |
-| `task.create` | `projects.task.manage` |
-| `task.update` | `projects.task.manage` |
-| `task.assign` | `projects.task.manage` |
-| `sprint.open` | `projects.sprint.view` |
-| `sprint.create` | `projects.sprint.manage` |
+| Command ID        | Permission               |
+| ----------------- | ------------------------ |
+| `project.open`    | `projects.view`          |
+| `project.create`  | `projects.manage`        |
+| `project.update`  | `projects.manage`        |
+| `task.open`       | `projects.task.view`     |
+| `task.create`     | `projects.task.manage`   |
+| `task.update`     | `projects.task.manage`   |
+| `task.assign`     | `projects.task.manage`   |
+| `sprint.open`     | `projects.sprint.view`   |
+| `sprint.create`   | `projects.sprint.manage` |
 | `sprint.complete` | `projects.sprint.manage` |
 
 Workbench actions mirror commands with `service:project-service:placeholder.*` handlers — no runtime implementation.
@@ -142,11 +142,11 @@ Each event manifest sets:
 
 ## Notification routes
 
-| Route ID | Trigger event | Audience (planned) |
-|----------|---------------|-------------------|
-| `projects.task.assigned` | `projects.task.assigned` | Assignee |
+| Route ID                       | Trigger event                  | Audience (planned)  |
+| ------------------------------ | ------------------------------ | ------------------- |
+| `projects.task.assigned`       | `projects.task.assigned`       | Assignee            |
 | `projects.task.status_changed` | `projects.task.status_changed` | Watchers / assignee |
-| `projects.sprint.completed` | `projects.sprint.completed` | Project team |
+| `projects.sprint.completed`    | `projects.sprint.completed`    | Project team        |
 
 Routes are declared in service `documentation` and event subscriber references — delivery wiring is OSS-101-06+.
 
@@ -171,16 +171,16 @@ Activity provider ID: `projects.activity`.
 
 ## Governance, lifecycle, and operations metadata
 
-| Key | Value |
-|-----|-------|
-| Governance capability key | `projects` |
-| Feature flag | `capability.projects.enabled` |
-| Provisioning kind | `plane-workspace` |
-| Lifecycle product ID | `projects` |
-| Lifecycle participation | enable, disable, provision, reconcile |
-| Operations capability ID | `projects` |
-| Operations connector ID | `plane` |
-| Diagnostics extension | `projectsDiagnostics` |
+| Key                       | Value                                 |
+| ------------------------- | ------------------------------------- |
+| Governance capability key | `projects`                            |
+| Feature flag              | `capability.projects.enabled`         |
+| Provisioning kind         | `plane-workspace`                     |
+| Lifecycle product ID      | `projects`                            |
+| Lifecycle participation   | enable, disable, provision, reconcile |
+| Operations capability ID  | `projects`                            |
+| Operations connector ID   | `plane`                               |
+| Diagnostics extension     | `projectsDiagnostics`                 |
 
 Full registration behaviour documented in [Capability Registration Notes](./APZHUB-Projects-Capability-Registration-Notes.md).
 
@@ -194,14 +194,14 @@ Manifest schema validation tests: `packages/platform-runtime/src/manifest-engine
 
 ## Out of scope (OSS-101-03)
 
-| Item | Phase |
-|------|-------|
-| Plane adapter / REST client | OSS-101-04 |
-| ProjectService implementation | OSS-101-04+ |
-| Workbench UI | OSS-101-05+ |
-| Database schema / mapping store | OSS-101-04 |
-| Search index population | OSS-101-08 |
-| Live notification delivery | OSS-101-06+ |
+| Item                            | Phase       |
+| ------------------------------- | ----------- |
+| Plane adapter / REST client     | OSS-101-04  |
+| ProjectService implementation   | OSS-101-04+ |
+| Workbench UI                    | OSS-101-05+ |
+| Database schema / mapping store | OSS-101-04  |
+| Search index population         | OSS-101-08  |
+| Live notification delivery      | OSS-101-06+ |
 
 ---
 

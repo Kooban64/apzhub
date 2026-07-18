@@ -267,7 +267,9 @@ export class DefaultIntegrationMetrics implements IntegrationMetrics {
       requestsTotal,
       errorsTotal,
       errorRate5m:
-        requestsTotal > 0 ? Number((errorsTotal / requestsTotal).toFixed(4)) : undefined,
+        requestsTotal > 0
+          ? Number((errorsTotal / requestsTotal).toFixed(4))
+          : undefined,
       latencyP95Ms: durationSnapshot.count > 0 ? durationSnapshot.p95 : undefined,
       lastRequestAt: this.lastRequestAt,
     };
@@ -307,7 +309,10 @@ export class InMemoryErrorSummaryTracker implements ErrorSummaryTracker {
 
   record(error: import("../../errors/types").IntegrationError): void {
     this.totalErrors += 1;
-    this.errorsByCategory.set(error.category, (this.errorsByCategory.get(error.category) ?? 0) + 1);
+    this.errorsByCategory.set(
+      error.category,
+      (this.errorsByCategory.get(error.category) ?? 0) + 1,
+    );
     this.lastErrorAt = this.clock.now();
     this.lastErrorCode = error.code;
     this.lastErrorCategory = error.category;
@@ -324,8 +329,8 @@ export class InMemoryErrorSummaryTracker implements ErrorSummaryTracker {
   }
 }
 
-export function createInMemoryErrorSummaryTracker(
-  clock?: { now(): string },
-): InMemoryErrorSummaryTracker {
+export function createInMemoryErrorSummaryTracker(clock?: {
+  now(): string;
+}): InMemoryErrorSummaryTracker {
   return new InMemoryErrorSummaryTracker(clock);
 }

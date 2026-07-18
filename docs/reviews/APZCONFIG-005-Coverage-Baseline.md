@@ -5,21 +5,21 @@
 
 ## Consolidated result (APZCONFIG-005 measurement)
 
-| Metric | Value |
-| --- | --- |
+| Metric             | Value                    |
+| ------------------ | ------------------------ |
 | Statements / Lines | **93.11%** (5102 / 5479) |
-| Functions | **92.17%** (424 / 460) |
-| Branches | **77.19%** |
+| Functions          | **92.17%** (424 / 460)   |
+| Branches           | **77.19%**               |
 
 ## Layer notes
 
-| Layer | Notes |
-| --- | --- |
-| HTTP handlers | ~99.5% lines |
-| Typed client | ~97%+ lines |
-| Contracts / core (primary paths) | High; remaining branches in validation/hierarchy edge cases |
-| Persistence Postgres repos | Partial via mocked Drizzle; live DB optional |
-| Workbench view | Improved via APZCONFIG-005 certification tests; secondary empty/error paths remain |
+| Layer                            | Notes                                                                              |
+| -------------------------------- | ---------------------------------------------------------------------------------- |
+| HTTP handlers                    | ~99.5% lines                                                                       |
+| Typed client                     | ~97%+ lines                                                                        |
+| Contracts / core (primary paths) | High; remaining branches in validation/hierarchy edge cases                        |
+| Persistence Postgres repos       | Partial via mocked Drizzle; live DB optional                                       |
+| Workbench view                   | Improved via APZCONFIG-005 certification tests; secondary empty/error paths remain |
 
 ## Target vs actual
 

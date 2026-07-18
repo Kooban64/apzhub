@@ -1,7 +1,4 @@
-import type {
-  TestingEventEnvelope,
-  TestingEventType,
-} from "@apzhub/testing-contracts";
+import type { TestingEventEnvelope, TestingEventType } from "@apzhub/testing-contracts";
 import { createTestingEventEnvelope } from "@apzhub/testing-contracts";
 
 /** Append-only in-memory domain event collector — no Event Bus publish. */

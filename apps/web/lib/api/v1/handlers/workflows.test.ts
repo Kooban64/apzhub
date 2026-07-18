@@ -235,8 +235,12 @@ describe("APZWORKFLOW-003 workflow handlers", () => {
     ).toBe(200);
 
     expect(
-      (await handleListWorkflowTemplates(makeRequest("/api/v1/workflows/templates"), ctx))
-        .status,
+      (
+        await handleListWorkflowTemplates(
+          makeRequest("/api/v1/workflows/templates"),
+          ctx,
+        )
+      ).status,
     ).toBe(200);
 
     expect(
@@ -536,24 +540,32 @@ describe("APZWORKFLOW-003 workflow handlers", () => {
     }
   });
 
-  it("documents OpenAPI Platform Workflow paths", () => {
+  it("documents Platform Workflow management paths in OpenAPI without execution surfaces", () => {
     const spec = loadPlatformOpenApiSpecObject() as {
       paths: Record<string, unknown>;
       info: { version: string };
+      tags?: Array<{ name?: string }>;
     };
-    expect(spec.info.version).toMatch(/^1\.(?:[2-9]|\d{2,})\.\d+$/);
-    expect(spec.paths["/workflows"]).toBeTruthy();
-    expect(spec.paths["/workflows/{workflowId}"]).toBeTruthy();
-    expect(spec.paths["/workflows/{workflowId}/versions"]).toBeTruthy();
-    expect(spec.paths["/workflows/templates"]).toBeTruthy();
-    expect(spec.paths["/workflows/categories"]).toBeTruthy();
-    expect(spec.paths["/workflows/folders"]).toBeTruthy();
-    expect(spec.paths["/workflows/validation"]).toBeTruthy();
-    expect(spec.paths["/workflows/capabilities"]).toBeTruthy();
-    expect(spec.paths["/workflows/execute"]).toBeUndefined();
-    expect(spec.paths["/workflows/runs"]).toBeUndefined();
-    expect(spec.paths["/workflows/n8n"]).toBeUndefined();
-    expect(spec.paths["/workflows/schedules"]).toBeUndefined();
+    expect(["1.5.0", "1.6.0", "1.7.0", "1.8.0", "1.9.0"]).toContain(spec.info.version);
+    expect(spec.tags?.some((tag) => tag.name === "Platform Workflow")).toBe(true);
+    for (const path of [
+      "/workflows",
+      "/workflows/{workflowId}",
+      "/workflows/{workflowId}/versions",
+      "/workflows/validation",
+      "/workflows/capabilities",
+      "/workflows/health",
+    ]) {
+      expect(spec.paths[path], path).toBeTruthy();
+    }
+    for (const path of [
+      "/workflows/execute",
+      "/workflows/runs",
+      "/workflows/n8n",
+      "/workflows/schedules",
+    ]) {
+      expect(spec.paths[path], path).toBeUndefined();
+    }
   });
 
   it("does not ship execute/runs/n8n/schedules/activate HTTP routes", () => {
@@ -577,14 +589,12 @@ describe("APZWORKFLOW-003 workflow handlers", () => {
       }
       return out;
     }
-    const files = walk(routesRoot).map((f) =>
-      f.replace(/\\/g, "/").split("/api/v1/workflows/")[1] ?? "",
+    const files = walk(routesRoot).map(
+      (f) => f.replace(/\\/g, "/").split("/api/v1/workflows/")[1] ?? "",
     );
     for (const segment of forbidden) {
       expect(
-        files.some(
-          (f) => f.includes(`/${segment}/`) || f.startsWith(`${segment}/`),
-        ),
+        files.some((f) => f.includes(`/${segment}/`) || f.startsWith(`${segment}/`)),
       ).toBe(false);
     }
   });

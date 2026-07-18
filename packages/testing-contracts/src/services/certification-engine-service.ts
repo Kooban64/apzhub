@@ -293,10 +293,7 @@ export interface CertificationHistoryService {
 
 /** Validate required gates, approval order, transitions, permissions, tenant/org. */
 export interface CertificationValidationService {
-  assertTransitionAllowed(
-    from: CertificationStatus,
-    to: CertificationStatus,
-  ): void;
+  assertTransitionAllowed(from: CertificationStatus, to: CertificationStatus): void;
   assertRequiredGatesSatisfied(
     ctx: ServiceRequestContext,
     certificationRecordId: CertificationRecordId,
@@ -305,10 +302,7 @@ export interface CertificationValidationService {
     ctx: ServiceRequestContext,
     certificationRecordId: CertificationRecordId,
   ): Promise<void>;
-  assertPermission(
-    ctx: ServiceRequestContext,
-    permission: string,
-  ): void;
+  assertPermission(ctx: ServiceRequestContext, permission: string): void;
   assertTenantOrganisation(
     ctx: ServiceRequestContext,
     record: { readonly tenantId: string; readonly organisationId?: string },

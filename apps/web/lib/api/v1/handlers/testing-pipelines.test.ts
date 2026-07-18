@@ -45,9 +45,11 @@ function makeRequest(url: string, init?: RequestInit) {
   if (!headers.has("content-type") && init?.body) {
     headers.set("content-type", "application/json");
   }
+  const { signal, ...rest } = init ?? {};
   return new NextRequest(new URL(url, "http://localhost"), {
-    ...init,
+    ...rest,
     headers,
+    ...(signal != null ? { signal } : {}),
   });
 }
 
@@ -194,8 +196,12 @@ describe("testing pipeline handlers", () => {
 
   it("covers SoR pipeline handlers", async () => {
     expect(
-      (await handleListSorPipelines(makeRequest("/api/v1/testing/pipelines"), makeContext()))
-        .status,
+      (
+        await handleListSorPipelines(
+          makeRequest("/api/v1/testing/pipelines"),
+          makeContext(),
+        )
+      ).status,
     ).toBe(200);
 
     expect(

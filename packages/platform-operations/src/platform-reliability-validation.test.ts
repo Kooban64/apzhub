@@ -26,7 +26,9 @@ describe("operations control plane reliability validation (PRH-010)", () => {
     });
 
     expect(verification.verdict).toBe("NOT_READY");
-    expect(verification.findings.some((finding) => finding.id === "bootstrap.ready")).toBe(true);
+    expect(
+      verification.findings.some((finding) => finding.id === "bootstrap.ready"),
+    ).toBe(true);
   });
 
   it("returns NOT_READY when configuration validation fails", () => {
@@ -39,7 +41,9 @@ describe("operations control plane reliability validation (PRH-010)", () => {
     });
 
     expect(verification.verdict).toBe("NOT_READY");
-    expect(verification.findings.some((finding) => finding.id === "configuration.valid")).toBe(true);
+    expect(
+      verification.findings.some((finding) => finding.id === "configuration.valid"),
+    ).toBe(true);
   });
 
   it("returns NOT_READY when database dependency is unhealthy", () => {
@@ -52,7 +56,9 @@ describe("operations control plane reliability validation (PRH-010)", () => {
     });
 
     expect(verification.verdict).toBe("NOT_READY");
-    expect(verification.findings.some((finding) => finding.id === "dependency.database")).toBe(true);
+    expect(
+      verification.findings.some((finding) => finding.id === "dependency.database"),
+    ).toBe(true);
   });
 
   it("returns NOT_READY or observations when redis is degraded", () => {
@@ -65,7 +71,9 @@ describe("operations control plane reliability validation (PRH-010)", () => {
     });
 
     expect(["NOT_READY", "READY_WITH_OBSERVATIONS"]).toContain(verification.verdict);
-    expect(verification.findings.some((finding) => finding.id === "dependency.redis")).toBe(true);
+    expect(
+      verification.findings.some((finding) => finding.id === "dependency.redis"),
+    ).toBe(true);
   });
 
   it("includes lifecycle state aligned with failure conditions", () => {
@@ -87,7 +95,9 @@ describe("operations control plane reliability validation (PRH-010)", () => {
       capabilities,
     });
 
-    expect(verification.findings.some((finding) => finding.id === "tenant.api-guard")).toBe(true);
+    expect(
+      verification.findings.some((finding) => finding.id === "tenant.api-guard"),
+    ).toBe(true);
   });
 
   it("does not leak secrets in control plane snapshots under failure", () => {

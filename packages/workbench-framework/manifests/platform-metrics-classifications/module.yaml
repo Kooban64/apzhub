@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-metrics-classifications
+name: Metric Classifications
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Platform Metrics — Metric Classifications sidebar (APZMETRICS-004).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: metrics
+    parent: platform-metrics
+    label: Metric Classifications
+    icon: shield
+    route: /workspace/metrics/classifications
+    order: 160
+    permission: metrics.classification
+  view:
+    title: Metric Classifications
+    workspace: metrics
+    route: /workspace/metrics/classifications
+    permission: metrics.classification

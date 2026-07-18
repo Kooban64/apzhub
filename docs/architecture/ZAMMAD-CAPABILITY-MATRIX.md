@@ -63,23 +63,23 @@
 
 ## Implementation status (OSS-102-06)
 
-| Capability                         | Adapter status                                      |
-| ---------------------------------- | --------------------------------------------------- |
-| `support` / tickets lifecycle      | **Implemented** on `adapter.core.support`           |
-| `organizations`                    | **Implemented** on `adapter.core.organizations`     |
-| `groups`                           | **Implemented** on `adapter.core.groups`            |
-| `users` (support-domain)           | **Implemented** on `adapter.core.users`             |
-| `articles` (conversations)         | **Implemented** on `adapter.core.articles`          |
-| Attachment **metadata**            | **Implemented** via articles                        |
-| Binary `attachments`               | Deferred — placeholder only                         |
-| `search`                           | **Implemented** on `adapter.core.search`            |
-| `history`                          | **Implemented** on `adapter.core.history`           |
-| `analytics`                        | **Implemented** on `adapter.core.analytics`         |
-| `webhooks`                         | **Implemented** on `adapter.core.webhooks` (registration only) |
-| `events`                           | **Implemented** on `adapter.core.events` (translation only) |
-| `synchronisation`                  | **Implemented** on `adapter.core.synchronisation` (in-memory) |
-| Platform Event Bus / webhook ingress | Excluded until separately approved                |
-| PlatformService / HTTP / UI        | Excluded until separately approved                  |
+| Capability                           | Adapter status                                                 |
+| ------------------------------------ | -------------------------------------------------------------- |
+| `support` / tickets lifecycle        | **Implemented** on `adapter.core.support`                      |
+| `organizations`                      | **Implemented** on `adapter.core.organizations`                |
+| `groups`                             | **Implemented** on `adapter.core.groups`                       |
+| `users` (support-domain)             | **Implemented** on `adapter.core.users`                        |
+| `articles` (conversations)           | **Implemented** on `adapter.core.articles`                     |
+| Attachment **metadata**              | **Implemented** via articles                                   |
+| Binary `attachments`                 | Deferred — placeholder only                                    |
+| `search`                             | **Implemented** on `adapter.core.search`                       |
+| `history`                            | **Implemented** on `adapter.core.history`                      |
+| `analytics`                          | **Implemented** on `adapter.core.analytics`                    |
+| `webhooks`                           | **Implemented** on `adapter.core.webhooks` (registration only) |
+| `events`                             | **Implemented** on `adapter.core.events` (translation only)    |
+| `synchronisation`                    | **Implemented** on `adapter.core.synchronisation` (in-memory)  |
+| Platform Event Bus / webhook ingress | Excluded until separately approved                             |
+| PlatformService / HTTP / UI          | Excluded until separately approved                             |
 
 ---
 

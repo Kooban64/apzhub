@@ -7,19 +7,19 @@
 
 ## Models
 
-| Type | Role |
-|------|------|
-| `SearchQuery` | Keywords, phrase, filters, sorts, scopes, collections, products, pagination, facet/highlight/suggestion flags |
-| `SearchRequest` | Query + optional profile/session/correlation |
-| `SearchResponse` | Request echo + `SearchResultPage` + optional provider/diagnostics refs |
-| `SearchHit` | Hit id, optional score, `SearchMetadata`, highlights |
-| `SearchResultPage` | Hits, page, pageSize, totalEstimated, hasMore, facets, suggestions |
-| `SearchFacet` | Field + buckets |
-| `SearchFilter` | Field + op (`eq`/`neq`/`in`/`nin`/`exists`/`range`) |
-| `SearchSort` | Field + `asc`/`desc` |
-| `SearchHighlight` | Field + snippets |
-| `SearchSuggestion` | Text + kind |
-| `SearchMetadata` | Entity projection (not SoR) — tenant, org, classification, permissions, product, source, timestamps, version, status |
+| Type               | Role                                                                                                                 |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `SearchQuery`      | Keywords, phrase, filters, sorts, scopes, collections, products, pagination, facet/highlight/suggestion flags        |
+| `SearchRequest`    | Query + optional profile/session/correlation                                                                         |
+| `SearchResponse`   | Request echo + `SearchResultPage` + optional provider/diagnostics refs                                               |
+| `SearchHit`        | Hit id, optional score, `SearchMetadata`, highlights                                                                 |
+| `SearchResultPage` | Hits, page, pageSize, totalEstimated, hasMore, facets, suggestions                                                   |
+| `SearchFacet`      | Field + buckets                                                                                                      |
+| `SearchFilter`     | Field + op (`eq`/`neq`/`in`/`nin`/`exists`/`range`)                                                                  |
+| `SearchSort`       | Field + `asc`/`desc`                                                                                                 |
+| `SearchHighlight`  | Field + snippets                                                                                                     |
+| `SearchSuggestion` | Text + kind                                                                                                          |
+| `SearchMetadata`   | Entity projection (not SoR) — tenant, org, classification, permissions, product, source, timestamps, version, status |
 
 ## Supported concepts
 

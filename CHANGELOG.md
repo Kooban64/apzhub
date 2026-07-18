@@ -21,6 +21,114 @@ See [Milestone 6 review](./docs/reviews/MILESTONE-006-event-notification-framewo
 
 ## [Unreleased] — PCS-001 Platform Core Strategy + Platform Core v1.0 Certified
 
+### Added (OSS-100-11 — Integration SDK v1.0.0 Wave Certification & Architecture Freeze)
+
+- `@apzhub/integration-sdk` promoted **0.9.0 → 1.0.0** (no breaking API changes); `INTEGRATION_SDK_VERSION` aligned
+- Architecture Freeze Notice · Reference Standard · Provider Development / Compatibility / Operational Readiness guides
+- Security Review · Quality Evidence · v1.0.0 Release Notes · ADR-0065 · Completion Report
+- Commands `pnpm certify:integration-sdk` · `pnpm audit:integration-sdk-wave`
+- Scoped coverage: lines **91.82%** · functions **93.09%** · branches **84.47%** (LIMITED vs 95% target; non-blocking)
+- Knowledge Foundation: Integration SDK marked **Version 1.0.0** · **Architecture Frozen**
+- **Classification:** **PRODUCTION_READY_WITH_LIMITATIONS** retained
+- **Verdict:** OSS-100-11 COMPLETE — await owner selection for next programme (provisioning / Event Bus / ingress / PCv2-02 / roadmap items)
+
+### Added (APZSEARCH-019 — Search Publication Wave Certification & Architecture Freeze)
+
+- Governance closeout only — **no runtime changes**
+- Architecture Freeze Notice · Reference Standard · Operational Readiness (wave-final) · Future Publication Guide (roadmap only)
+- Security Confirmation · Wave Certification · Quality Evidence · Programme Summary · Wave Closeout · Completion Report
+- Audit `pnpm audit:search-publication-wave`
+- Knowledge Foundation: Search Publication programme marked **Architecture Frozen**
+- **Classification:** **PRODUCTION_READY_WITH_LIMITATIONS** retained
+- **Verdict:** APZSEARCH-019 COMPLETE — programme closed; await owner selection for next platform programme (do not invent APZSEARCH-020)
+
+### Added (APZSEARCH-018 — Publication Reliability Certification & Operational Readiness)
+
+- Certification command `pnpm certify:search-publication` + `pnpm audit:search-publication-reliability`
+- Harness `testing/search-publication-reliability` · docs pack (Certification / Operational Readiness / Reliability guides; Architecture / Security / Quality / Certification reviews; Completion Report)
+- Re-pinned 015 certification versions for `search-integration` **0.2.0** and orchestrator/admin packages
+- Scoped publication coverage: lines **97.43%** · functions **99.59%** · branches **85.76%**
+- **Classification:** **PRODUCTION_READY_WITH_LIMITATIONS** (no runtime feature delta)
+- **Verdict:** APZSEARCH-018 COMPLETE — await owner for **APZSEARCH-019 — Search Publication Wave Certification & Architecture Freeze** only
+
+### Added (APZSEARCH-017 — Search Publication Operations & Administration)
+
+- `@apzhub/search-publication-admin` **0.1.0** — gateway, service, permissions, audit, DLQ markers
+- HTTP `/api/v1/search/publication/*` + dedicated typed client
+- Search Workbench **Publication Ops** (`/workspace/search/publication`)
+- Audit `pnpm audit:search-publication-admin` · harness `testing/search-publication-admin` · Playwright journey
+- Docs: Administration Architecture, Operations/Retry/DLQ/Diagnostics guides, Developer Guide, Completion Report
+- **Verdict:** APZSEARCH-017 COMPLETE — await owner for **APZSEARCH-018 — Publication Reliability Certification & Operational Readiness** only
+
+### Added (APZSEARCH-016 — Product Indexing Orchestration Framework)
+
+- `@apzhub/search-orchestrator` **0.1.0** — durable PostgreSQL publication journal, retry, batching, dedupe, diagnostics
+- `@apzhub/search-integration` **0.2.0** — orchestration consumer marker; sink docs for 016 handoff
+- Migrations **0058** / **0059** (`platform_search_publication_journal` + RLS)
+- Composition product hooks (create/update/archive/restore/delete) — platform-services unmodified
+- Bootstrap gate `APZHUB_SEARCH_ORCHESTRATION_ENABLED` (deny-by-default)
+- Audit `pnpm audit:search-orchestrator` · harness `testing/search-orchestrator`
+- Docs: Product Indexing Architecture, Journal/Retry/Lifecycle/Failure Recovery guides, Developer Guide, Completion Report
+- Re-pinned publication audit: `search-integration` **0.2.0**, `platform-services` **0.25.0**
+- **Verdict:** APZSEARCH-016 COMPLETE — await owner for **APZSEARCH-017 — Search Publication Operations & Administration** only
+
+### Fixed (Knowledge Foundation — Search roadmap correction)
+
+- Removed erroneous post-Metrics recommendation of **APZSEARCH-001** (already complete 2026-07-13)
+- Restated Search completed state at **APZSEARCH-015** (**PRODUCTION_READY_WITH_LIMITATIONS**)
+- Recommended next Search milestone: **APZSEARCH-016 — Product Indexing Orchestration Framework** only (await owner)
+
+### Added (APZMETRICS-006 — Metrics Wave Certification & Architecture Freeze)
+
+- Architecture Freeze Notice + Platform Metrics Reference Standard
+- Wave Operational Readiness + Future Metrics Platform Guide (roadmap only)
+- `pnpm audit:metrics-wave` PASS — docs/governance only; no runtime changes
+- Programme **closed/frozen** — **PRODUCTION_READY_WITH_LIMITATIONS** retained
+- **Verdict:** APZMETRICS-006 COMPLETE — Metrics programme closed/frozen. Roadmap correction: next Search is **APZSEARCH-016** (APZSEARCH-001–015 already complete; do not re-implement 001)
+
+### Added (APZMETRICS-005 — Metrics Vertical Certification & Production Readiness)
+
+- Composite `pnpm certify:metrics-vertical` + `pnpm audit:metrics-vertical`
+- Certification harness (10 journeys) + evidence pack under `docs/reviews/APZMETRICS-005-*`
+- Classification: **PRODUCTION_READY_WITH_LIMITATIONS**
+- Scoped coverage: lines **97.32%** · functions **99.04%** · branches **73%**
+- **Verdict:** APZMETRICS-005 COMPLETE — await owner for **APZMETRICS-006 — Metrics Wave Certification & Architecture Freeze** only
+
+### Added (APZMETRICS-004 — Metrics Administration Workbench)
+
+- `/workspace/metrics` Workbench via `platform-metrics` manifests (Activity Bar order **55**, `metrics.read`)
+- `apps/web/components/metrics` — typed-client-only metadata UI (all facets + diagnostics)
+- Capability limitation banners; `METRICS_SERVICE_UNAVAILABLE` disabled-service state
+- Quality: `pnpm audit:metrics-workbench` PASS; coverage lines **99.40%** / functions **95.83%**
+- **Verdict:** APZMETRICS-004 COMPLETE — await owner for **APZMETRICS-005 — Metrics Vertical Certification & Production Readiness** only
+
+### Added (APZMETRICS-003 — Metrics HTTP API & Production Typed Client)
+
+- `/api/v1/metrics/*` handlers → `gateway.metrics.*` (metadata only)
+- `apps/web/lib/metrics` — `createHttpMetricsClient()`, mock client, `metricsQueryKeys`
+- Platform OpenAPI **1.9.0** — tag **Platform Metrics Administration**
+- Bootstrap: `APZHUB_METRICS_ENABLED` → `503 METRICS_SERVICE_UNAVAILABLE` when disabled
+- Quality: `pnpm audit:metrics-http-client` PASS; coverage lines **99.73%** / functions **99.63%**
+- **Verdict:** APZMETRICS-003 COMPLETE — await owner for **APZMETRICS-004 — Metrics Administration Workbench** only
+
+### Added (APZMETRICS-002 — Platform Services, Gateway & Authorization)
+
+- **`@apzhub/metrics-contracts` / `metrics-core` 0.2.0** — gateway facets + `createPlatformMetricsService`
+- **`@apzhub/platform-services` 0.25.0** — `gateway.metrics.*`, RequestPipeline, `metricsPlatformOps`, `APZHUB_METRICS_ENABLED` bootstrap
+- Diagnostics: readiness / persistence / registration metadata only (no providers)
+- Quality: `pnpm audit:metrics-platform-services` PASS; coverage lines **95.22%** / functions **98.95%**
+- **Verdict:** APZMETRICS-002 COMPLETE — await owner for **APZMETRICS-003 — Metrics HTTP API & Production Typed Client** only
+
+### Added (APZMETRICS-001 — Platform Metrics Foundation)
+
+- **`@apzhub/metrics-contracts` / `metrics-core` / `metrics-persistence` 0.1.0** — metric definitions & KPI governance SoR (metadata only)
+- Domain: Metric, MetricDefinition, MetricVersion, taxonomy, dimensions/labels/units, formulas/aggregations/thresholds (metadata), ownership/consumers, retention/classification, dependencies, KPI/KPIGroup/KPITarget, relationships, metadata
+- Permissions catalogue: `metrics.*`, `metrics.read`, `metrics.manage`, `metrics.kpi`, `metrics.definition`, `metrics.metadata`, `metrics.classification`, `metrics.retention`
+- Persistence: `platform_metrics_*` tables; migrations **0056** / **0057** (RLS); no silent in-memory fallback
+- Quality: `pnpm audit:metrics-foundation` PASS; coverage lines **95.43%** / functions **99.04%**
+- Docs: Platform Metrics Architecture, Domain Model, KPI/Governance/Lifecycle/Validation guides, Developer Guide, Completion Report
+- **Verdict:** APZMETRICS-001 COMPLETE — await owner for **APZMETRICS-002 — Platform Services, Gateway & Authorization** only
+
 ### Added (APZOBSERVE-006 — Observability Wave Certification & Architecture Freeze)
 
 - Programme **closed/frozen**; classification **PRODUCTION_READY_WITH_LIMITATIONS** retained

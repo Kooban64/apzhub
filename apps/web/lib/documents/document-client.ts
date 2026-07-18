@@ -107,7 +107,9 @@ export interface DocumentClient {
   listAudit(
     documentId: string,
     options?: DocumentClientRequestOptions,
-  ): Promise<DocumentCollectionResult<{ readonly id: string; readonly action: string }>>;
+  ): Promise<
+    DocumentCollectionResult<{ readonly id: string; readonly action: string }>
+  >;
   listMetadata(
     query?: ListDocumentsClientQuery,
     options?: DocumentClientRequestOptions,
@@ -129,13 +131,14 @@ function mapSummary(raw: unknown): DocumentSummaryViewModel {
     status: String(r.status ?? ""),
     classification: String(
       typeof r.classification === "object"
-        ? asRecord(r.classification).code ?? r.classification
-        : r.classification ?? "",
+        ? (asRecord(r.classification).code ?? r.classification)
+        : (r.classification ?? ""),
     ),
     documentType: String(r.documentType ?? ""),
     updatedAt: String(r.updatedAt ?? ""),
     tagNames: Array.isArray(r.tagNames) ? r.tagNames.map(String) : [],
-    folderId: r.folderId !== undefined && r.folderId !== null ? String(r.folderId) : undefined,
+    folderId:
+      r.folderId !== undefined && r.folderId !== null ? String(r.folderId) : undefined,
     collectionId:
       r.collectionId !== undefined && r.collectionId !== null
         ? String(r.collectionId)
@@ -166,7 +169,8 @@ function mapDocument(raw: unknown): DocumentViewModel {
     description: r.description !== undefined ? String(r.description) : undefined,
     updatedAt: String(r.updatedAt ?? ""),
     createdAt: String(r.createdAt ?? ""),
-    folderId: r.folderId !== undefined && r.folderId !== null ? String(r.folderId) : undefined,
+    folderId:
+      r.folderId !== undefined && r.folderId !== null ? String(r.folderId) : undefined,
     collectionId:
       r.collectionId !== undefined && r.collectionId !== null
         ? String(r.collectionId)
@@ -224,9 +228,7 @@ async function requestJson<T>(
     },
   });
   const payload = (await response.json().catch(() => ({}))) as
-    | ApiSuccessEnvelope<T>
-    | ApiCollectionEnvelope<unknown>
-    | ApiErrorEnvelope;
+    ApiSuccessEnvelope<T> | ApiCollectionEnvelope<unknown> | ApiErrorEnvelope;
   if (!response.ok) {
     const err = payload as ApiErrorEnvelope;
     throw new DocumentClientError({

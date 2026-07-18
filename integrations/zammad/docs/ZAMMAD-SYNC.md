@@ -24,14 +24,14 @@ adapter.core.synchronisation
 
 ## Supported operations
 
-| Method | Notes |
-| --- | --- |
-| `runFullSync` | Enumerate current inventory |
-| `runIncrementalSync` | Filter by `updated_at >= since` (caller or last success) |
-| `getSyncState` | Mode, status, stats, cursor, errors |
-| `getLastSyncTimestamp` | Last successful sync |
-| `safeRestart` | Clears stuck `running` → `idle` |
-| `getDiagnostics` | Health, resume/incremental/restart flags, retry counts |
+| Method                 | Notes                                                    |
+| ---------------------- | -------------------------------------------------------- |
+| `runFullSync`          | Enumerate current inventory                              |
+| `runIncrementalSync`   | Filter by `updated_at >= since` (caller or last success) |
+| `getSyncState`         | Mode, status, stats, cursor, errors                      |
+| `getLastSyncTimestamp` | Last successful sync                                     |
+| `safeRestart`          | Clears stuck `running` → `idle`                          |
+| `getDiagnostics`       | Health, resume/incremental/restart flags, retry counts   |
 
 ---
 

@@ -80,7 +80,9 @@ describe("TestingDashboardView", () => {
       expect(screen.getByText("Release 2.4 Certification")).toBeTruthy();
     });
 
-    const certificationRow = screen.getByText("Release 2.4 Certification").closest("tr");
+    const certificationRow = screen
+      .getByText("Release 2.4 Certification")
+      .closest("tr");
     expect(certificationRow).toBeTruthy();
     if (certificationRow) {
       await user.click(certificationRow);

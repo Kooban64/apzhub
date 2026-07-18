@@ -64,9 +64,7 @@ export function createProductRegistryService(
   }
 
   const service: ProductRegistryService = {
-    async ensureDefaultRegistry(
-      ctx: ServiceRequestContext,
-    ): Promise<ProductRegistry> {
+    async ensureDefaultRegistry(ctx: ServiceRequestContext): Promise<ProductRegistry> {
       const existingId = store.registryByTenant.get(ctx.tenantId);
       if (existingId) {
         const existing = store.registries.get(existingId);
@@ -172,8 +170,7 @@ export function createProductRegistryService(
           qualityStatus: input.qualityStatus ?? existing.qualityStatus,
           certificationStatus:
             input.certificationStatus ?? existing.certificationStatus,
-          releaseReadiness:
-            input.releaseReadiness ?? existing.releaseReadiness,
+          releaseReadiness: input.releaseReadiness ?? existing.releaseReadiness,
           organisationId: input.organisationId ?? existing.organisationId,
           updatedAt: timestamp,
           updatedBy: ctx.userId,

@@ -12,13 +12,13 @@ Workbench layout and navigation preferences are owned by Platform Personalisatio
 
 ## User preferences vs layout
 
-| Data | Service | Storage |
-| --- | --- | --- |
-| Theme, language, landing page, etc. | `PreferenceService` | `platform_user_preference` |
-| Sidebar, panels, open views | `WorkbenchLayoutService` | `platform_user_workbench_layout` |
-| Pinned workspaces | `PreferenceService` (`workbench.pinnedWorkspaces`) | preferences table |
-| Favorites | `FavoritesService` | `platform_user_favorite` |
-| Recent workspaces | `RecentItemsService` | `platform_user_recent_item` |
+| Data                                | Service                                            | Storage                          |
+| ----------------------------------- | -------------------------------------------------- | -------------------------------- |
+| Theme, language, landing page, etc. | `PreferenceService`                                | `platform_user_preference`       |
+| Sidebar, panels, open views         | `WorkbenchLayoutService`                           | `platform_user_workbench_layout` |
+| Pinned workspaces                   | `PreferenceService` (`workbench.pinnedWorkspaces`) | preferences table                |
+| Favorites                           | `FavoritesService`                                 | `platform_user_favorite`         |
+| Recent workspaces                   | `RecentItemsService`                               | `platform_user_recent_item`      |
 
 ## Theme bridge
 

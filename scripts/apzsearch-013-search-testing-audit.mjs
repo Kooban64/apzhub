@@ -25,7 +25,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -281,7 +282,9 @@ console.log(
 console.log(`RESULT: ${violations.length === 0 ? "PASS" : "FAIL"}`);
 console.log(`Violations: ${violations.length}`);
 if (violations.length === 0) {
-  console.log("  - @apzhub/search-testing 0.1.1 → specialised publishers + search-integration");
+  console.log(
+    "  - @apzhub/search-testing 0.1.1 → specialised publishers + search-integration",
+  );
   console.log("  - No Meilisearch / platform-services / persistence / Event Bus / OCR");
   console.log("  - Required TestingSearch* + specialised publisher exports present");
   console.log("  - Orchestrator has no domain map methods");

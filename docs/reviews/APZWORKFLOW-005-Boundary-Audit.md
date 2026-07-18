@@ -2,13 +2,13 @@
 
 ## Consolidated audits
 
-| Audit | Command | Result |
-| --- | --- | --- |
-| Foundation | `pnpm audit:workflow-foundation` | PASS |
-| Platform Services | `pnpm audit:workflow-platform-services` | PASS |
-| HTTP + client | `pnpm audit:workflow-http-client` | PASS |
-| Workbench | `pnpm audit:workflow-workbench` | PASS |
-| Vertical | `pnpm audit:workflow-vertical` | PASS |
+| Audit             | Command                                 | Result |
+| ----------------- | --------------------------------------- | ------ |
+| Foundation        | `pnpm audit:workflow-foundation`        | PASS   |
+| Platform Services | `pnpm audit:workflow-platform-services` | PASS   |
+| HTTP + client     | `pnpm audit:workflow-http-client`       | PASS   |
+| Workbench         | `pnpm audit:workflow-workbench`         | PASS   |
+| Vertical          | `pnpm audit:workflow-vertical`          | PASS   |
 
 ## Vertical rules (summary)
 

@@ -22,24 +22,24 @@ Primary docs: [APZHUB-Support-Module-UI.md](../architecture/APZHUB-Support-Modul
 
 ## Scope delivered
 
-| Item | Status |
-| --- | --- |
-| Manifests under `services/support/` (+ sidebar children) | Done |
-| Workbench wiring (`isSupportRoute` → `SupportWorkspaceRouter`) | Done |
-| Routes: inbox, create, detail, orgs, groups, users, search, analytics | Done |
-| Inbox + filters + navigation | Done |
-| Detail + conversation + commands | Done |
-| Internal-note safety (fixed visibility, separate composer) | Done |
-| Customer-reply safety (warning, separate composer, channel) | Done |
-| Org / group / user views | Done |
-| Search + analytics (overdue labelled heuristic, not SLA) | Done |
-| Typed API client + TanStack Query keys | Done |
-| Authz-aware UI helpers | Done |
-| Safe rendering (HTML stripped; no `dangerouslySetInnerHTML`) | Done |
-| Attachment metadata only | Done |
-| Boundary audit script | Done |
-| Vitest + Playwright (mocked) | Done |
-| Package bumps for zammad / platform-services / contracts | **Not done (by design)** |
+| Item                                                                  | Status                   |
+| --------------------------------------------------------------------- | ------------------------ |
+| Manifests under `services/support/` (+ sidebar children)              | Done                     |
+| Workbench wiring (`isSupportRoute` → `SupportWorkspaceRouter`)        | Done                     |
+| Routes: inbox, create, detail, orgs, groups, users, search, analytics | Done                     |
+| Inbox + filters + navigation                                          | Done                     |
+| Detail + conversation + commands                                      | Done                     |
+| Internal-note safety (fixed visibility, separate composer)            | Done                     |
+| Customer-reply safety (warning, separate composer, channel)           | Done                     |
+| Org / group / user views                                              | Done                     |
+| Search + analytics (overdue labelled heuristic, not SLA)              | Done                     |
+| Typed API client + TanStack Query keys                                | Done                     |
+| Authz-aware UI helpers                                                | Done                     |
+| Safe rendering (HTML stripped; no `dangerouslySetInnerHTML`)          | Done                     |
+| Attachment metadata only                                              | Done                     |
+| Boundary audit script                                                 | Done                     |
+| Vitest + Playwright (mocked)                                          | Done                     |
+| Package bumps for zammad / platform-services / contracts              | **Not done (by design)** |
 
 ---
 
@@ -181,15 +181,15 @@ Metadata list + “Binary access not available”; no binary APIs.
 
 ## Known limitations (honoured)
 
-| Limitation | Status |
-| --- | --- |
-| No binary attachment transfer | Honoured |
-| No Event Bus | Honoured |
-| No webhook ingress | Honoured |
-| No notifications wiring | Honoured |
-| No realtime | Honoured |
-| UI not yet UI-certified | Deferred OSS-110-14 |
-| `/_global-error` build caveat | Pre-existing |
+| Limitation                    | Status              |
+| ----------------------------- | ------------------- |
+| No binary attachment transfer | Honoured            |
+| No Event Bus                  | Honoured            |
+| No webhook ingress            | Honoured            |
+| No notifications wiring       | Honoured            |
+| No realtime                   | Honoured            |
+| UI not yet UI-certified       | Deferred OSS-110-14 |
+| `/_global-error` build caveat | Pre-existing        |
 
 ---
 
@@ -217,40 +217,40 @@ Metadata list + “Binary access not available”; no binary APIs.
 
 ## Package versions
 
-| Package | Change in OSS-110-13 |
-| --- | --- |
-| `@apzhub/web` | UI only (private `0.0.0`) — no semver bump required |
-| `@apzhub/integration-zammad` | **No bump** (remains 0.6.0) |
-| `@apzhub/platform-services` | **No bump** (remains 0.7.0) |
-| `@apzhub/platform-service-contracts` | **No bump** (remains 0.7.0) |
+| Package                              | Change in OSS-110-13                                |
+| ------------------------------------ | --------------------------------------------------- |
+| `@apzhub/web`                        | UI only (private `0.0.0`) — no semver bump required |
+| `@apzhub/integration-zammad`         | **No bump** (remains 0.6.0)                         |
+| `@apzhub/platform-services`          | **No bump** (remains 0.7.0)                         |
+| `@apzhub/platform-service-contracts` | **No bump** (remains 0.7.0)                         |
 
 ---
 
 ## Unit / component / Playwright / a11y / regression results
 
-| Gate | Result |
-| --- | --- |
-| Vitest Support UI (`lib/support` + `components/support`) | **72 passed** (23 files) |
-| Boundary audit `scripts/support-ui-boundary-audit.mjs` | **PASS** |
-| Architecture boundary test | **PASS** |
-| Playwright `oss-110-13-support-module.spec.ts` | **2 passed** — mocked API flows (open module, list, detail, note, reply, commands, search, analytics, 403/503 mapping) |
-| A11y | Component/role coverage in unit tests; **formal UI a11y cert → OSS-110-14** |
-| Typecheck (`apps/web`) | **PASS** |
-| Lint | Assumed clean for Support paths when run in CI; no Support-specific lint debt introduced for this closeout |
-| `pnpm build` (apps/web) | **FAIL** — pre-existing `/_global-error` prerender |
-| Prior Support vertical regression (OSS-110-12) | Unchanged / still valid |
+| Gate                                                     | Result                                                                                                                 |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Vitest Support UI (`lib/support` + `components/support`) | **72 passed** (23 files)                                                                                               |
+| Boundary audit `scripts/support-ui-boundary-audit.mjs`   | **PASS**                                                                                                               |
+| Architecture boundary test                               | **PASS**                                                                                                               |
+| Playwright `oss-110-13-support-module.spec.ts`           | **2 passed** — mocked API flows (open module, list, detail, note, reply, commands, search, analytics, 403/503 mapping) |
+| A11y                                                     | Component/role coverage in unit tests; **formal UI a11y cert → OSS-110-14**                                            |
+| Typecheck (`apps/web`)                                   | **PASS**                                                                                                               |
+| Lint                                                     | Assumed clean for Support paths when run in CI; no Support-specific lint debt introduced for this closeout             |
+| `pnpm build` (apps/web)                                  | **FAIL** — pre-existing `/_global-error` prerender                                                                     |
+| Prior Support vertical regression (OSS-110-12)           | Unchanged / still valid                                                                                                |
 
 ---
 
 ## Coverage numbers (verified 2026-07-11)
 
-| Scope | Lines |
-| --- | --- |
-| `support-api.ts` | **100%** |
-| `components/support` (implementation files) | **~93.3%** (1917/2054) |
+| Scope                                                     | Lines                  |
+| --------------------------------------------------------- | ---------------------- |
+| `support-api.ts`                                          | **100%**               |
+| `components/support` (implementation files)               | **~93.3%** (1917/2054) |
 | Overall Support UI (`lib/support` + `components/support`) | **~94.9%** (2744/2890) |
-| Branches (overall Support UI) | ~87.7% |
-| Functions (overall Support UI) | ~80.3% |
+| Branches (overall Support UI)                             | ~87.7%                 |
+| Functions (overall Support UI)                            | ~80.3%                 |
 
 Command used: Vitest with coverage include on Support UI paths.
 
@@ -258,11 +258,11 @@ Command used: Vitest with coverage include on Support UI paths.
 
 ## Typecheck / lint / build
 
-| Gate | Result |
-| --- | --- |
-| Typecheck | **PASS** |
-| Lint | PASS when run on web Support surface in normal CI posture |
-| Build | **FAIL** pre-existing `/_global-error` |
+| Gate      | Result                                                    |
+| --------- | --------------------------------------------------------- |
+| Typecheck | **PASS**                                                  |
+| Lint      | PASS when run on web Support surface in normal CI posture |
+| Build     | **FAIL** pre-existing `/_global-error`                    |
 
 ---
 
@@ -293,13 +293,13 @@ Command used: Vitest with coverage include on Support UI paths.
 
 ## Risks
 
-| Risk | Mitigation |
-| --- | --- |
-| Agents confuse note vs reply | Separate composers + explicit warning |
-| HTML XSS via article bodies | Strip/escape; ban `dangerouslySetInnerHTML` |
+| Risk                                 | Mitigation                                     |
+| ------------------------------------ | ---------------------------------------------- |
+| Agents confuse note vs reply         | Separate composers + explicit warning          |
+| HTML XSS via article bodies          | Strip/escape; ban `dangerouslySetInnerHTML`    |
 | UI shows actions user cannot execute | Server 403 + error mapping; permission helpers |
-| Cache bleed across tenants | `clearSupportQueries` |
-| Operators treat overdue as SLA | Explicit heuristic labelling |
+| Cache bleed across tenants           | `clearSupportQueries`                          |
+| Operators treat overdue as SLA       | Explicit heuristic labelling                   |
 
 ---
 

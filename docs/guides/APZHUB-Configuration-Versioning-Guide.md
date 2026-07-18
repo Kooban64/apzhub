@@ -4,9 +4,9 @@
 
 ## Capabilities
 
-- Version history  
-- Immutable versions  
-- Current version marker  
+- Version history
+- Immutable versions
+- Current version marker
 - Rollback **metadata** (`rollbackFromVersionId`)
 
 ## Non-capabilities

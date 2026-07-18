@@ -6,24 +6,24 @@
 
 ## Programme milestones certified
 
-| Milestone | Outcome |
-| --- | --- |
-| APZIDENTITY-001 | Foundation |
-| APZIDENTITY-002 | Platform Services, Gateway & Authorization |
-| APZIDENTITY-003 | HTTP API & Production Typed Client |
-| APZIDENTITY-004 | Identity Administration Workbench |
+| Milestone       | Outcome                                                    |
+| --------------- | ---------------------------------------------------------- |
+| APZIDENTITY-001 | Foundation                                                 |
+| APZIDENTITY-002 | Platform Services, Gateway & Authorization                 |
+| APZIDENTITY-003 | HTTP API & Production Typed Client                         |
+| APZIDENTITY-004 | Identity Administration Workbench                          |
 | APZIDENTITY-005 | Vertical Certification — PRODUCTION_READY_WITH_LIMITATIONS |
-| APZIDENTITY-006 | Wave Certification & Architecture Freeze |
+| APZIDENTITY-006 | Wave Certification & Architecture Freeze                   |
 
 ## Gates
 
-| Gate | Result |
-| --- | --- |
-| `pnpm audit:identity-vertical` | PASS (re-exec via wave audit) |
-| `pnpm audit:identity-wave` | PASS (required) |
-| `pnpm certify:identity-vertical` | PASS (quality gate) |
-| `pnpm openapi:validate:platform` | PASS |
-| Vitest wave closeout harness | PASS |
+| Gate                             | Result                        |
+| -------------------------------- | ----------------------------- |
+| `pnpm audit:identity-vertical`   | PASS (re-exec via wave audit) |
+| `pnpm audit:identity-wave`       | PASS (required)               |
+| `pnpm certify:identity-vertical` | PASS (quality gate)           |
+| `pnpm openapi:validate:platform` | PASS                          |
+| Vitest wave closeout harness     | PASS                          |
 
 ## Frozen path
 

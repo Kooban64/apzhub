@@ -54,10 +54,7 @@ export function createCertificationRuleService(
       assertHasPermission(ctx, "certification.view");
       return toDomain(
         requireFound(
-          await rt.persistence.certificationRules.get(
-            toRepositoryContext(ctx),
-            id,
-          ),
+          await rt.persistence.certificationRules.get(toRepositoryContext(ctx), id),
           "certification_rule",
           id,
         ),
@@ -79,8 +76,7 @@ export function createCertificationRuleService(
           requiredGateKeys: input.requiredGateKeys ?? [],
           optionalGateKeys: input.optionalGateKeys ?? [],
           approvalStagesJson: input.approvalStages as
-            | Record<string, unknown>[]
-            | undefined,
+            Record<string, unknown>[] | undefined,
           enabled: input.enabled ?? true,
           configJson: input.configJson,
           organisationId: ctx.organisationId,
@@ -122,8 +118,7 @@ export function createCertificationRuleService(
           requiredGateKeys: patch.requiredGateKeys,
           optionalGateKeys: patch.optionalGateKeys,
           approvalStagesJson: patch.approvalStages as
-            | Record<string, unknown>[]
-            | undefined,
+            Record<string, unknown>[] | undefined,
           enabled: patch.enabled,
           configJson: patch.configJson,
         },

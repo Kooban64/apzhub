@@ -24,7 +24,8 @@ function walk(dir, out = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, out);
-    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts")) out.push(full);
+    else if (/\.(ts|tsx|mjs|js)$/.test(entry) && !entry.endsWith(".d.ts"))
+      out.push(full);
   }
   return out;
 }
@@ -41,7 +42,11 @@ function scan(files, rules) {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       const trimmed = line.trim();
-      if (trimmed.startsWith("//") || trimmed.startsWith("*") || trimmed.startsWith("/*")) {
+      if (
+        trimmed.startsWith("//") ||
+        trimmed.startsWith("*") ||
+        trimmed.startsWith("/*")
+      ) {
         continue;
       }
       for (const rule of rules) {
@@ -76,11 +81,15 @@ for (const root of packageRoots) {
   }
   scan(walk(join(ROOT, root)), [
     { rule: "no-apps-web", pattern: /apps\/web|@\/components|@\/lib\/api/ },
-    { rule: "no-http-routes", pattern: /\/api\/v1\/|NextRequest|withPlatformApiAuth|createRouteHandler/ },
+    {
+      rule: "no-http-routes",
+      pattern: /\/api\/v1\/|NextRequest|withPlatformApiAuth|createRouteHandler/,
+    },
     { rule: "no-workbench", pattern: /workbench-framework|\/workspace\/observe/ },
     {
       rule: "no-provider-sdks",
-      pattern: /from ["']@grafana|from ["']prom-client|from ["']@opentelemetry|winston-loki|alertmanager-client/,
+      pattern:
+        /from ["']@grafana|from ["']prom-client|from ["']@opentelemetry|winston-loki|alertmanager-client/,
     },
     {
       rule: "no-event-bus",
@@ -253,5 +262,7 @@ if (violations.length > 0) {
   process.exit(1);
 }
 
-console.log("\nRESULT: PASS (0 architecture/dependency/boundary/authorization violations)");
+console.log(
+  "\nRESULT: PASS (0 architecture/dependency/boundary/authorization violations)",
+);
 process.exit(0);

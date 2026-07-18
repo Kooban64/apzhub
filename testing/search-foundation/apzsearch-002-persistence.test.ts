@@ -10,10 +10,7 @@ const ROOT = join(__dirname, "../..");
 
 describe("APZSEARCH-002 Search Persistence & Provider Framework", () => {
   it("passes architecture / dependency / boundary / authorization audit", () => {
-    const script = join(
-      ROOT,
-      "scripts/apzsearch-002-search-persistence-audit.mjs",
-    );
+    const script = join(ROOT, "scripts/apzsearch-002-search-persistence-audit.mjs");
     const output = execFileSync(process.execPath, [script], {
       cwd: ROOT,
       encoding: "utf8",

@@ -59,17 +59,20 @@ function toDomain(row: DefectLinkRecord): DefectLink {
 
 function relationshipField(
   entityKind: string,
-): keyof Pick<
-  DefectLinkRecord,
-  | "requirementIds"
-  | "planIds"
-  | "suiteIds"
-  | "caseIds"
-  | "manualExecutionIds"
-  | "automationExecutionIds"
-  | "evidenceIds"
-  | "riskIds"
-> | "workItemRefs" | null {
+):
+  | keyof Pick<
+      DefectLinkRecord,
+      | "requirementIds"
+      | "planIds"
+      | "suiteIds"
+      | "caseIds"
+      | "manualExecutionIds"
+      | "automationExecutionIds"
+      | "evidenceIds"
+      | "riskIds"
+    >
+  | "workItemRefs"
+  | null {
   switch (entityKind) {
     case "requirement":
       return "requirementIds";
@@ -137,8 +140,7 @@ export function createDefectLinkService(rt: ServiceRuntime): DefectLinkService {
         riskIds: input.riskIds ?? [],
         workItemRefs:
           (input.workItemRefs as unknown as
-            | readonly Readonly<Record<string, unknown>>[]
-            | undefined) ?? [],
+            readonly Readonly<Record<string, unknown>>[] | undefined) ?? [],
         target: input.target,
         externalId: input.externalId ?? input.externalRef,
         resultId: input.resultId,
@@ -184,8 +186,7 @@ export function createDefectLinkService(rt: ServiceRuntime): DefectLinkService {
         releaseLabel: input.releaseLabel,
         riskIds: input.riskIds,
         workItemRefs: input.workItemRefs as unknown as
-          | readonly Readonly<Record<string, unknown>>[]
-          | undefined,
+          readonly Readonly<Record<string, unknown>>[] | undefined,
         target: input.target,
         externalId: input.externalId,
         resultId: input.resultId,

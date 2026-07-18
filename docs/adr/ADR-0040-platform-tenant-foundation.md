@@ -23,11 +23,11 @@ Products consume platform tenant resolution; they do not own tenant tables or se
 
 ## Alternatives
 
-| Alternative | Why rejected |
-| ----------- | ------------ |
-| Law-only tenant tables | Violates platform ownership; duplicates identity per product |
-| Tenant claim in JWT only | Misses membership changes; Better Auth session is SoR for auth |
-| Product-specific fallbacks without gating | Perpetuates TD-P02 multi-tenant bypass |
+| Alternative                               | Why rejected                                                   |
+| ----------------------------------------- | -------------------------------------------------------------- |
+| Law-only tenant tables                    | Violates platform ownership; duplicates identity per product   |
+| Tenant claim in JWT only                  | Misses membership changes; Better Auth session is SoR for auth |
+| Product-specific fallbacks without gating | Perpetuates TD-P02 multi-tenant bypass                         |
 
 ## Consequences
 

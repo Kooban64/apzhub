@@ -28,9 +28,7 @@ export type QualityMappableEntity = Extract<
   TestingSearchMappableEntity,
   {
     readonly entityType:
-      | "quality_summary"
-      | "quality_coverage_summary"
-      | "defect_summary";
+      "quality_summary" | "quality_coverage_summary" | "defect_summary";
   }
 >;
 
@@ -43,11 +41,7 @@ export class QualitySearchMapper {
       case "quality_summary":
         return this.mapQualitySummary(context, input.entity, input.extras);
       case "quality_coverage_summary":
-        return this.mapQualityCoverageSummary(
-          context,
-          input.entity,
-          input.extras,
-        );
+        return this.mapQualityCoverageSummary(context, input.entity, input.extras);
       case "defect_summary":
         return this.mapDefectSummary(context, input.entity, input.extras);
     }
@@ -58,10 +52,7 @@ export class QualitySearchMapper {
     summary: QualitySummary,
     extras?: TestingSearchMappingExtras,
   ): SearchEntityDraft {
-    const id =
-      extras?.entityId ??
-      summary.snapshot?.id ??
-      undefined;
+    const id = extras?.entityId ?? summary.snapshot?.id ?? undefined;
     if (!id) {
       throw new Error(
         "quality_summary requires extras.entityId or summary.snapshot.id",
@@ -69,9 +60,7 @@ export class QualitySearchMapper {
     }
     assertPlatformEntityId(String(id), "quality_summary.id");
     const tenantId =
-      extras?.tenantId ??
-      summary.scope.tenantId ??
-      summary.snapshot?.tenantId;
+      extras?.tenantId ?? summary.scope.tenantId ?? summary.snapshot?.tenantId;
     if (!tenantId) {
       throw new Error(
         "tenantId is required via extras, scope, or snapshot when mapping quality_summary",
@@ -107,9 +96,7 @@ export class QualitySearchMapper {
               recommendationCode: summary.readiness.suggestedStatus,
             }
           : {}),
-        ...(summary.scope.planId
-          ? { planId: String(summary.scope.planId) }
-          : {}),
+        ...(summary.scope.planId ? { planId: String(summary.scope.planId) } : {}),
         ...(summary.scope.releaseLabel
           ? { releaseLabel: summary.scope.releaseLabel }
           : {}),
@@ -134,8 +121,7 @@ export class QualitySearchMapper {
       explicit: extras?.classification,
     });
     const title =
-      extras?.title ??
-      `Quality coverage ${metric.percentage}% (${metric.kind})`;
+      extras?.title ?? `Quality coverage ${metric.percentage}% (${metric.kind})`;
     return {
       entityId: String(metric.id),
       entityType: "quality_coverage_summary",
@@ -156,10 +142,7 @@ export class QualitySearchMapper {
       keywords: [title, metric.kind],
       createdAt: metric.createdAt,
       updatedAt: metric.updatedAt,
-      navigationTarget: navigationTarget(
-        "quality_coverage_summary",
-        String(metric.id),
-      ),
+      navigationTarget: navigationTarget("quality_coverage_summary", String(metric.id)),
       sourceId: "testing:quality_coverage_summary",
       ownerUserId: metric.createdBy ?? context.actorUserId,
     };
@@ -193,12 +176,7 @@ export class QualitySearchMapper {
         summary: entity.summary,
         organisationId: extras?.organisationId ?? context.organisationId,
         classification,
-        permissions: permissionTokens(
-          context,
-          extras,
-          entity.status,
-          classification,
-        ),
+        permissions: permissionTokens(context, extras, entity.status, classification),
         metadata: {
           status: entity.status,
           providerKind: entity.providerKind,
@@ -238,12 +216,7 @@ export class QualitySearchMapper {
       summary: entity.summary,
       organisationId: extras?.organisationId ?? context.organisationId,
       classification,
-      permissions: permissionTokens(
-        context,
-        extras,
-        entity.status,
-        classification,
-      ),
+      permissions: permissionTokens(context, extras, entity.status, classification),
       metadata: {
         ...(entity.status ? { status: entity.status } : {}),
         ...(entity.openCount !== undefined

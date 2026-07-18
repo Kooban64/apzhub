@@ -31,12 +31,12 @@ See [Persistence Completion Guide](./APZHUB-APZ-TCMS-Persistence-Completion-Guid
 
 ## Ownership rules (011)
 
-| Datum | Owner |
-| --- | --- |
-| Plans, suites, cases, steps, requirements, risks, certification metadata | APZHUB PostgreSQL |
-| Evidence **blobs** | Object storage (metadata only in SoR) |
-| Projects Features/Epics/Stories/Tasks | Soft refs (`project_ref_id` / work item refs) — never authoritative copies |
-| Execution **results** / step outcomes | Manual execution + step actual tables (APZTCMS-004/005); engine result ingestion deferred |
+| Datum                                                                    | Owner                                                                                     |
+| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Plans, suites, cases, steps, requirements, risks, certification metadata | APZHUB PostgreSQL                                                                         |
+| Evidence **blobs**                                                       | Object storage (metadata only in SoR)                                                     |
+| Projects Features/Epics/Stories/Tasks                                    | Soft refs (`project_ref_id` / work item refs) — never authoritative copies                |
+| Execution **results** / step outcomes                                    | Manual execution + step actual tables (APZTCMS-004/005); engine result ingestion deferred |
 
 ---
 

@@ -98,8 +98,7 @@ export const PLATFORM_SEARCH_PERMISSIONS = [
   "search.execution.statistics",
 ] as const;
 
-export type PlatformSearchPermission =
-  (typeof PLATFORM_SEARCH_PERMISSIONS)[number];
+export type PlatformSearchPermission = (typeof PLATFORM_SEARCH_PERMISSIONS)[number];
 
 /** Wildcard namespace for role grants (not a security bypass). */
 export const PLATFORM_SEARCH_PERMISSION_WILDCARD = "search.*" as const;
@@ -112,18 +111,11 @@ function hasWildcard(permissions: readonly string[]): boolean {
   return permissions.includes("search.*");
 }
 
-function hasAnyPrefix(
-  permissions: readonly string[],
-  prefix: string,
-): boolean {
-  return permissions.some(
-    (p) => p === prefix || p.startsWith(`${prefix}.`),
-  );
+function hasAnyPrefix(permissions: readonly string[], prefix: string): boolean {
+  return permissions.some((p) => p === prefix || p.startsWith(`${prefix}.`));
 }
 
-export function hasSearchQueryPermission(
-  permissions: readonly string[],
-): boolean {
+export function hasSearchQueryPermission(permissions: readonly string[]): boolean {
   return (
     hasWildcard(permissions) ||
     permissions.includes("search.query") ||
@@ -135,11 +127,7 @@ export function hasSearchQueryPermission(
 }
 
 export type SearchQueryPermissionOp =
-  | "execute"
-  | "validate"
-  | "facets"
-  | "highlights"
-  | "select-provider";
+  "execute" | "validate" | "facets" | "highlights" | "select-provider";
 
 export function hasSearchQueryOpPermission(
   permissions: readonly string[],
@@ -165,12 +153,7 @@ export function hasSearchQueryOpPermission(
   return permissions.includes(`search.query.${op}`);
 }
 
-export type SearchIndexPermissionOp =
-  | "list"
-  | "read"
-  | "create"
-  | "update"
-  | "delete";
+export type SearchIndexPermissionOp = "list" | "read" | "create" | "update" | "delete";
 
 export function hasSearchIndexPermission(
   permissions: readonly string[],
@@ -183,11 +166,7 @@ export function hasSearchIndexPermission(
   return hasAnyPrefix(permissions, "search.index");
 }
 
-export type SearchDocumentPermissionOp =
-  | "list"
-  | "read"
-  | "upsert"
-  | "delete";
+export type SearchDocumentPermissionOp = "list" | "read" | "upsert" | "delete";
 
 export function hasSearchDocumentPermission(
   permissions: readonly string[],
@@ -273,10 +252,7 @@ export function hasSearchConfigurationPermission(
   permissions: readonly string[],
   op?: SearchConfigurationPermissionOp,
 ): boolean {
-  if (
-    hasWildcard(permissions) ||
-    permissions.includes("search.configuration")
-  ) {
+  if (hasWildcard(permissions) || permissions.includes("search.configuration")) {
     return true;
   }
   if (op) {
@@ -297,9 +273,7 @@ export function hasSearchDiagnosticsPermission(
   );
 }
 
-export function hasSearchAuditPermission(
-  permissions: readonly string[],
-): boolean {
+export function hasSearchAuditPermission(permissions: readonly string[]): boolean {
   return (
     hasWildcard(permissions) ||
     permissions.includes("search.audit") ||
@@ -308,13 +282,7 @@ export function hasSearchAuditPermission(
 }
 
 export type SearchCollectionPermissionOp =
-  | "list"
-  | "read"
-  | "create"
-  | "update"
-  | "enable"
-  | "disable"
-  | "archive";
+  "list" | "read" | "create" | "update" | "enable" | "disable" | "archive";
 
 export function hasSearchCollectionPermission(
   permissions: readonly string[],
@@ -328,13 +296,7 @@ export function hasSearchCollectionPermission(
 }
 
 export type SearchSourcePermissionOp =
-  | "list"
-  | "read"
-  | "create"
-  | "update"
-  | "enable"
-  | "disable"
-  | "archive";
+  "list" | "read" | "create" | "update" | "enable" | "disable" | "archive";
 
 export function hasSearchSourcePermission(
   permissions: readonly string[],
@@ -347,12 +309,7 @@ export function hasSearchSourcePermission(
   return hasAnyPrefix(permissions, "search.source");
 }
 
-export type SearchScopePermissionOp =
-  | "list"
-  | "read"
-  | "create"
-  | "update"
-  | "archive";
+export type SearchScopePermissionOp = "list" | "read" | "create" | "update" | "archive";
 
 export function hasSearchScopePermission(
   permissions: readonly string[],
@@ -366,12 +323,7 @@ export function hasSearchScopePermission(
 }
 
 export type SearchProfilePermissionOp =
-  | "list"
-  | "read"
-  | "create"
-  | "update"
-  | "archive"
-  | "validate";
+  "list" | "read" | "create" | "update" | "archive" | "validate";
 
 export function hasSearchProfilePermission(
   permissions: readonly string[],
@@ -385,11 +337,7 @@ export function hasSearchProfilePermission(
 }
 
 export type SearchMetadataPermissionOp =
-  | "list"
-  | "read"
-  | "create"
-  | "update"
-  | "archive";
+  "list" | "read" | "create" | "update" | "archive";
 
 export function hasSearchMetadataPermission(
   permissions: readonly string[],
@@ -413,9 +361,7 @@ export function hasSearchCapabilitiesPermission(
   );
 }
 
-export function hasSearchHealthPermission(
-  permissions: readonly string[],
-): boolean {
+export function hasSearchHealthPermission(permissions: readonly string[]): boolean {
   return (
     hasWildcard(permissions) ||
     permissions.includes("search.health.read") ||
@@ -423,9 +369,7 @@ export function hasSearchHealthPermission(
   );
 }
 
-export function hasSearchStatisticsPermission(
-  permissions: readonly string[],
-): boolean {
+export function hasSearchStatisticsPermission(permissions: readonly string[]): boolean {
   return (
     hasWildcard(permissions) ||
     permissions.includes("search.statistics.read") ||
@@ -433,9 +377,7 @@ export function hasSearchStatisticsPermission(
   );
 }
 
-export function hasSearchValidationPermission(
-  permissions: readonly string[],
-): boolean {
+export function hasSearchValidationPermission(permissions: readonly string[]): boolean {
   return (
     hasWildcard(permissions) ||
     permissions.includes("search.validation.execute") ||

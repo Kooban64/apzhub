@@ -13,8 +13,7 @@ export const PROJECTS_SEARCH_ENTITY_TYPES = [
   "team",
 ] as const;
 
-export type ProjectsSearchEntityType =
-  (typeof PROJECTS_SEARCH_ENTITY_TYPES)[number];
+export type ProjectsSearchEntityType = (typeof PROJECTS_SEARCH_ENTITY_TYPES)[number];
 
 export function isProjectsSearchEntityType(
   value: string,
@@ -23,8 +22,7 @@ export function isProjectsSearchEntityType(
 }
 
 /** Reject Plane provisional / engine-native identifiers leaking into search. */
-const PLANE_ID_LEAK =
-  /_plane_|^(plane_|pln_)|::/i;
+const PLANE_ID_LEAK = /_plane_|^(plane_|pln_)|::/i;
 
 export function looksLikePlaneIdentifier(value: string): boolean {
   return PLANE_ID_LEAK.test(value);

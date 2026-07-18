@@ -10,11 +10,7 @@ import type { EngineeringBenchmarkRecord } from "@apzhub/testing-persistence";
 import { toRepositoryContext } from "../mapping/context";
 import { requireFound } from "../services/errors";
 import type { ServiceRuntime } from "../services/types";
-import {
-  computeTrendDirection,
-  rollingAverage,
-  round2,
-} from "./calculations";
+import { computeTrendDirection, rollingAverage, round2 } from "./calculations";
 
 function toDomain(row: EngineeringBenchmarkRecord): Benchmark {
   return {
@@ -78,10 +74,7 @@ export function createBenchmarkService(rt: ServiceRuntime): BenchmarkService {
     async get(ctx, id) {
       return toDomain(
         requireFound(
-          await rt.persistence.engineeringBenchmarks.get(
-            toRepositoryContext(ctx),
-            id,
-          ),
+          await rt.persistence.engineeringBenchmarks.get(toRepositoryContext(ctx), id),
           "engineering_benchmark",
           id,
         ),

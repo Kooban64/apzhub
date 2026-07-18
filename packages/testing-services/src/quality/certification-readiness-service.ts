@@ -7,10 +7,7 @@ import type { CertificationRecordId, TestPlanId } from "@apzhub/testing-contract
 
 import { createCertificationPreparationService } from "../services/certification-preparation-service";
 import type { ServiceRuntime } from "../services/types";
-import {
-  dimensionStatusFromScore,
-  overallReadinessScore,
-} from "./calculations";
+import { dimensionStatusFromScore, overallReadinessScore } from "./calculations";
 
 function toDimensions(
   preparation: CertificationReadinessAssessment["preparation"],
@@ -19,10 +16,7 @@ function toDimensions(
   const evidenceScore = Math.max(0, 100 - preparation.missingEvidenceCount * 10);
   const approvalScore = preparation.approvalCompletenessPercent;
   const executionScore = preparation.executionCompletenessPercent;
-  const riskScore = Math.max(
-    0,
-    100 - preparation.riskSummary.highOrCriticalCount * 20,
-  );
+  const riskScore = Math.max(0, 100 - preparation.riskSummary.highOrCriticalCount * 20);
 
   const entries: Array<{ key: string; score: number; reasons: string[] }> = [
     {
@@ -104,10 +98,7 @@ export function createCertificationReadinessService(
       });
       return result;
     },
-    async assessForCertification(
-      ctx,
-      certificationRecordId: CertificationRecordId,
-    ) {
+    async assessForCertification(ctx, certificationRecordId: CertificationRecordId) {
       const preparation = await prep.prepareForCertification(
         ctx,
         certificationRecordId,

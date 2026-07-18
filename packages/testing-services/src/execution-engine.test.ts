@@ -78,7 +78,11 @@ describe("execution engine lifecycle", () => {
     });
     expect(created.status).toBe("draft");
 
-    const assigned = await svc.manualExecutions.assignTester(rctx, created.id, "tester_1");
+    const assigned = await svc.manualExecutions.assignTester(
+      rctx,
+      created.id,
+      "tester_1",
+    );
     expect(assigned.status).toBe("assigned");
     expect(assigned.testerId).toBe("tester_1");
 
@@ -116,7 +120,11 @@ describe("execution engine lifecycle", () => {
     await svc.manualExecutions.unblock(rctx, created.id);
     await svc.manualExecutions.complete(rctx, created.id, "pass");
     await svc.manualExecutions.submitForReview(rctx, created.id);
-    const rejected = await svc.manualExecutions.reject(rctx, created.id, "needs rework");
+    const rejected = await svc.manualExecutions.reject(
+      rctx,
+      created.id,
+      "needs rework",
+    );
     expect(rejected.status).toBe("rejected");
     const reopened = await svc.manualExecutions.reopen(rctx, created.id);
     expect(reopened.status).toBe("in_progress");

@@ -47,10 +47,7 @@ export interface PostgresCrudOptions<
     record: TRecord,
     op: "create" | "update",
   ) => Promise<void>;
-  readonly enrichOnRead?: (
-    ctx: RepositoryContext,
-    record: TRecord,
-  ) => Promise<TRecord>;
+  readonly enrichOnRead?: (ctx: RepositoryContext, record: TRecord) => Promise<TRecord>;
 }
 
 function asRecord(value: object): Record<string, unknown> {
