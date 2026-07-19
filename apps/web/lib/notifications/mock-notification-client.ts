@@ -60,7 +60,7 @@ const MOCK_PLANE: NotificationManagementPlaneViewModel = {
     metadataCrud: true,
     lifecycle: true,
   },
-  platformServicesVersion: "0.25.0",
+  platformServicesVersion: "0.26.1",
 };
 
 export function createMockNotificationClient(): NotificationClient {
@@ -332,7 +332,7 @@ export function createMockNotificationClient(): NotificationClient {
       return { ...MOCK_PLANE, ready: true, status: "ready" };
     },
     async getDiagnostics() {
-      return { ...MOCK_PLANE, platformServicesVersion: "0.25.0" };
+      return { ...MOCK_PLANE, platformServicesVersion: "0.26.1" };
     },
   };
 }

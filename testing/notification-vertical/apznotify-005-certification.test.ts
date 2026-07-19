@@ -163,8 +163,8 @@ describe("APZNOTIFY-005 Notification Vertical Certification", () => {
       "packages/notification-contracts/package.json": "0.2.0",
       "packages/notification-core/package.json": "0.2.0",
       "packages/notification-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.25.0",
-      "packages/platform-service-contracts/package.json": "0.16.0",
+      "packages/platform-services/package.json": "0.26.1",
+      "packages/platform-service-contracts/package.json": "0.17.1",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const actual = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;

@@ -4,6 +4,7 @@ import type {
   PlatformReleaseGateway,
   ProjectService,
   SearchService,
+  TimePlatformGateway,
   SupportAnalyticsService,
   SupportArticleService,
   SupportGroupService,
@@ -102,6 +103,7 @@ export interface PlatformServiceGatewayDeps {
   readonly platformQualityApi?: PlatformQualityGateway;
   readonly platformReleaseApi?: PlatformReleaseGateway;
   readonly platformGovernanceApi?: PlatformGovernanceGateway;
+  readonly timeApi?: TimePlatformGateway;
   readonly mapping: MappingOrchestrator;
   readonly resolver: ProviderResolver;
   readonly registry: ProviderRegistry;
@@ -123,6 +125,16 @@ function unsupportedTestingCapability(): PlatformServiceError {
     category: "configuration",
     code: "PROVIDER_CAPABILITY_UNSUPPORTED",
     message: "Testing service is not enabled",
+    correlationId: "platform-gateway",
+    retryable: false,
+  });
+}
+
+function unsupportedTimeCapability(): PlatformServiceError {
+  return new PlatformServiceError({
+    category: "configuration",
+    code: "PROVIDER_CAPABILITY_UNSUPPORTED",
+    message: "Time platform services are not enabled",
     correlationId: "platform-gateway",
     retryable: false,
   });
@@ -253,6 +265,14 @@ export class PlatformServiceGateway {
       throw unsupportedTestingCapability();
     }
     return this.deps.testingApi;
+  }
+
+  /** Time platform capability (APZHUB-PLATFORM-TIME-001) — available when Time bundle is registered. */
+  get time(): TimePlatformGateway {
+    if (!this.deps.timeApi) {
+      throw unsupportedTimeCapability();
+    }
+    return this.deps.timeApi;
   }
 
   /**

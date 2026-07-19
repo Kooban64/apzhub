@@ -186,12 +186,12 @@ if (contractsPkg.version !== "0.3.0") {
     detail: `Expected 0.3.0, got ${contractsPkg.version}`,
   });
 }
-if (!["0.21.0", "0.25.0"].includes(platformPkg.version)) {
+if (!["0.21.0", "0.25.0", "0.26.1"].includes(platformPkg.version)) {
   violations.push({
     file: "packages/platform-services/package.json",
     line: 1,
     rule: "version-platform-services",
-    detail: `Expected 0.21.0 or 0.25.0, got ${platformPkg.version}`,
+    detail: `Expected 0.21.0, 0.25.0 or 0.26.1, got ${platformPkg.version}`,
   });
 }
 if (!/workflow-contracts/.test(contractsStub)) {
@@ -236,5 +236,5 @@ console.log(
 console.log("  - platform workflow services exclude HTTP / n8n / EventBus / execution");
 console.log("  - gateway exposes workflow nested facets");
 console.log("  - authorization catalogue + workflowPlatformOps present");
-console.log("  - versions: workflow-contracts@0.3.0 platform-services@0.25.0");
+console.log("  - versions: workflow-contracts@0.3.0 platform-services@0.26.1");
 process.exit(0);

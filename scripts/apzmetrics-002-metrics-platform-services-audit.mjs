@@ -163,12 +163,12 @@ if (!existsSync(join(ROOT, metricsDir))) {
       detail: "createPlatformServices must wire metricsPlatform → metricsApi",
     });
   }
-  if (!cps.includes('PLATFORM_SERVICES_VERSION = "0.25.0"')) {
+  if (!cps.includes('PLATFORM_SERVICES_VERSION = "0.26.1"')) {
     violations.push({
       file: "packages/platform-services/src/services/create-platform-services.ts",
       line: 1,
       rule: "platform-services-version",
-      detail: "PLATFORM_SERVICES_VERSION must be 0.25.0",
+      detail: "PLATFORM_SERVICES_VERSION must be 0.26.1",
     });
   }
 }

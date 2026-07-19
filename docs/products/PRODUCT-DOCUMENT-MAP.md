@@ -7,35 +7,42 @@
 
 ## Framework documents (`docs/products/`)
 
-| Document                                                                 | Purpose                                |
-| ------------------------------------------------------------------------ | -------------------------------------- |
-| [README.md](./README.md)                                                 | Framework entry                        |
-| [PRODUCT-ENGINEERING-HANDBOOK.md](./PRODUCT-ENGINEERING-HANDBOOK.md)     | How product engineering works          |
-| [PRODUCT-LIFECYCLE.md](./PRODUCT-LIFECYCLE.md)                           | Idea → Maintenance lifecycle           |
-| [PRODUCT-ARCHITECTURE-STANDARD.md](./PRODUCT-ARCHITECTURE-STANDARD.md)   | Product vs platform architecture rules |
-| [PRODUCT-BACKLOG-STANDARD.md](./PRODUCT-BACKLOG-STANDARD.md)             | Product backlog shape                  |
-| [PRODUCT-RELEASE-STANDARD.md](./PRODUCT-RELEASE-STANDARD.md)             | Release records                        |
-| [PRODUCT-CERTIFICATION-STANDARD.md](./PRODUCT-CERTIFICATION-STANDARD.md) | Minimum certification gates            |
-| [PRODUCT-DOCUMENT-MAP.md](./PRODUCT-DOCUMENT-MAP.md)                     | This map                               |
+| Document                                                                                                           | Purpose                                                             |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| [README.md](./README.md)                                                                                           | Framework entry                                                     |
+| [APZHUB-PRODUCT-PORTFOLIO.md](./APZHUB-PRODUCT-PORTFOLIO.md)                                                       | **Authoritative product portfolio & roadmap** (APZHUB-PRODUCTS-001) |
+| [APZHUB-PRODUCT-IMPLEMENTATION-READINESS-MATRIX.md](./APZHUB-PRODUCT-IMPLEMENTATION-READINESS-MATRIX.md)           | Cross-product readiness matrix (APZHUB-PRODUCTS-002 **ACCEPTED**)   |
+| [APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md](./APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md)                   | Portfolio readiness summary (APZHUB-PRODUCTS-002 **ACCEPTED**)      |
+| [APZHUB-PRODUCT-READINESS-ADVANCEMENT.md](./APZHUB-PRODUCT-READINESS-ADVANCEMENT.md)                               | Evaluation + IR advancement (APZHUB-PRODUCTS-003)                   |
+| [APZHUB-PRODUCT-ENGINEERING-REFERENCE-IMPLEMENTATION.md](./APZHUB-PRODUCT-ENGINEERING-REFERENCE-IMPLEMENTATION.md) | Transition report + reusable product pattern (post PROJECTS-001)    |
+| [PRODUCT-ENGINEERING-HANDBOOK.md](./PRODUCT-ENGINEERING-HANDBOOK.md)                                               | How product engineering works                                       |
+| [PRODUCT-LIFECYCLE.md](./PRODUCT-LIFECYCLE.md)                                                                     | Idea → Maintenance lifecycle                                        |
+| [PRODUCT-ARCHITECTURE-STANDARD.md](./PRODUCT-ARCHITECTURE-STANDARD.md)                                             | Product vs platform architecture rules                              |
+| [PRODUCT-BACKLOG-STANDARD.md](./PRODUCT-BACKLOG-STANDARD.md)                                                       | Product backlog shape                                               |
+| [PRODUCT-RELEASE-STANDARD.md](./PRODUCT-RELEASE-STANDARD.md)                                                       | Release records                                                     |
+| [PRODUCT-CERTIFICATION-STANDARD.md](./PRODUCT-CERTIFICATION-STANDARD.md)                                           | Minimum certification gates                                         |
+| [PRODUCT-DOCUMENT-MAP.md](./PRODUCT-DOCUMENT-MAP.md)                                                               | This map                                                            |
 
 ---
 
-## Product template (per portfolio / product)
+## Product Definition Pack (per portfolio) — APZHUB-PRODUCTS-002
 
-Required when a product programme is active:
+Required before any product implementation programme:
 
-| File                   | Purpose        |
-| ---------------------- | -------------- |
-| `README.md`            | Entry / status |
-| `VISION.md`            | Product vision |
-| `ROADMAP.md`           | Roadmap        |
-| `ARCHITECTURE.md`      | Architecture   |
-| `CAPABILITIES.md`      | Capabilities   |
-| `INTEGRATIONS.md`      | Integrations   |
-| `BACKLOG.md`           | Backlog        |
-| `ADR-INDEX.md`         | ADR index      |
-| `RELEASES.md`          | Releases       |
-| `KNOWN-LIMITATIONS.md` | Limitations    |
+| File                          | Purpose              |
+| ----------------------------- | -------------------- |
+| `README.md`                   | Entry / status       |
+| `VISION.md`                   | Product vision       |
+| `ARCHITECTURE.md`             | How it is engineered |
+| `CAPABILITIES.md`             | Capabilities         |
+| `INTEGRATIONS.md`             | Integrations         |
+| `ROADMAP.md`                  | Roadmap              |
+| `BACKLOG.md`                  | Backlog themes       |
+| `KNOWN-LIMITATIONS.md`        | Limitations          |
+| `RELEASE-PLAN.md`             | Release posture      |
+| `IMPLEMENTATION-READINESS.md` | Readiness assessment |
+
+Optional when a product programme is active: `ADR-INDEX.md` · `RELEASES.md`
 
 ---
 

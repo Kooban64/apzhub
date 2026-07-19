@@ -14,3 +14,4 @@ export type { SupportHistoryService } from "./support-history-service";
 export type { SupportAnalyticsService } from "./support-analytics-service";
 export type * from "./testing";
 export type * from "./platform-quality";
+export type * from "./time";

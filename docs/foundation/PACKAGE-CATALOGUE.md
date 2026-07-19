@@ -6,7 +6,7 @@
 > **Related documents:** [REPOSITORY-GUIDE](./REPOSITORY-GUIDE.md) · [PLATFORM-CAPABILITY-CATALOGUE](./PLATFORM-CAPABILITY-CATALOGUE.md)  
 > **Reading order:** With Repository Guide  
 > **Last updated:** 2026-07-18
-> **Current status:** Active — reconciled under **APZHUB-KF-001**. Integration SDK **1.0.0** Architecture Frozen (OSS-100-11); APZMETRICS-006 / APZOBSERVE-006 / Identity / Administration / Configuration / Notification / Workflow SoR waves **frozen**; APZSEARCH-019 Search Publication **Architecture Frozen**; search-integration **0.2.0**; testing-* **0.11.0**; platform-services **0.25.0**
+> **Current status:** Active — reconciled under **APZHUB-KF-001**. Integration SDK **1.0.0** Architecture Frozen (OSS-100-11); APZMETRICS-006 / APZOBSERVE-006 / Identity / Administration / Configuration / Notification / Workflow SoR waves **frozen**; APZSEARCH-019 Search Publication **Architecture Frozen**; search-integration **0.2.0**; testing-* **0.11.0**; platform-services **0.26.1**
 
 ---
 
@@ -56,6 +56,7 @@
 | `@apzhub/integration-zammad`         | `integrations/zammad/`             | **0.6.0** | Support adapter (Wave 2 CERTIFIED_WITH_LIMITATIONS)          |
 | `@apzhub/integration-meilisearch`    | `integrations/meilisearch/`        | **0.1.0** | Search Reference Adapter                                     |
 | `@apzhub/integration-n8n`            | `integrations/n8n/`                | **0.1.0** | Workflow Engine Reference Adapter (frozen)                   |
+| `@apzhub/integration-kimai`          | `integrations/kimai/`              | **0.2.0** | Kimai CE domain adapter (APZHUB-INTEGRATION-KIMAI-002)       |
 | `@apzhub/integration-github-actions` | `integrations/github-actions/`     | **0.1.0** | CI/CD Reference Adapter (frozen)                             |
 | `@apzhub/integration-search-sdk`     | `packages/integration-search-sdk/` | **0.1.0** | Search Integration SDK                                       |
 | `@apzhub/sdk`                        | `packages/sdk/`                    | —         | Platform SDK utilities                                       |
@@ -126,7 +127,7 @@
 | `@apzhub/search-reporting`          | `packages/search-reporting/`          | 0.1.0     | Reporting Search Publication Adapter — **frozen** (APZSEARCH-019)                                                                                  |
 | `@apzhub/search-orchestrator`       | `packages/search-orchestrator/`       | 0.1.0     | Product Indexing Orchestration — **frozen** (APZSEARCH-019)                                                                                        |
 | `@apzhub/search-publication-admin`  | `packages/search-publication-admin/`  | 0.1.0     | Publication Operations & Administration — **frozen** (APZSEARCH-019)                                                                               |
-| `@apzhub/platform-services`         | `packages/platform-services/`         | 0.25.0    | Gateway + Metrics (`gateway.metrics.*`) + Observability + Identity + Administration + Configuration + Notification + Workflow + Search + Documents |
+| `@apzhub/platform-services`         | `packages/platform-services/`         | 0.26.1    | Gateway + Metrics (`gateway.metrics.*`) + Observability + Identity + Administration + Configuration + Notification + Workflow + Search + Documents |
 | `@apzhub/platform-outbox`           | `packages/platform-outbox/`           | **0.1.0** | Outbox workers — drain / retry / DLQ / replay (PCv2-02)                                                                                            |
 | `@apzhub/platform-event-bus`        | `packages/platform-event-bus/`        | **0.1.0** | Event Bus + webhook ingress + outbox relay (OSS-100-12)                                                                                            |
 
@@ -174,12 +175,13 @@ See [Platform Dependency Review](../reviews/APZHUB-Platform-Dependency-Review.md
 | `@apzhub/integration-zammad`         | `0.6.0`            | Wave 2 certified                                          |
 | `@apzhub/integration-meilisearch`    | `0.1.0`            | Search Reference Adapter                                  |
 | `@apzhub/integration-n8n`            | `0.1.0`            | Workflow Engine Reference Adapter (frozen)                |
+| `@apzhub/integration-kimai`          | `0.2.0`            | Kimai CE domain adapter (KIMAI-002)                       |
 | `@apzhub/integration-github-actions` | `0.1.0`            | CI/CD Reference Adapter (frozen)                          |
 | `@apzhub/integration-search-sdk`     | `0.1.0`            | APZSEARCH-004                                             |
-| `@apzhub/platform-services`          | `0.25.0`           | Gateway facade                                            |
+| `@apzhub/platform-services`          | `0.26.1`           | Gateway facade + Time Platform Services (Kimai domain)    |
 | `@apzhub/platform-outbox`            | `0.1.0`            | PCv2-02 outbox worker MVP                                 |
 | `@apzhub/platform-event-bus`         | `0.1.0`            | OSS-100-12 Event Bus + webhook ingress                    |
-| `@apzhub/platform-service-contracts` | `0.16.0`           | Platform service contracts                                |
+| `@apzhub/platform-service-contracts` | `0.17.1`           | Platform service contracts (+ Time)                       |
 | `@apzhub/search-integration`         | `0.2.0`            | Frozen (APZSEARCH-019)                                    |
 | `@apzhub/testing-contracts`          | `0.11.0`           | APZ TCMS (through 024)                                    |
 | `@apzhub/testing-foundation`         | `0.1.0`            | APZTCMS-002                                               |

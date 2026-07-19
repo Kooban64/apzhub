@@ -10,10 +10,16 @@ Classification:
 QUALITY REMEDIATION — Repository-wide
 
 Status:
-COMPLETE — AWAITING OWNER ACCEPTANCE
+**ACCEPTED**
 
 Owner Acceptance:
-Pending.
+**ACCEPTED** — 2026-07-18
+
+Certification:
+**PRODUCTION READY**
+
+Repository-wide QA programmes:
+**CLOSED** — quality verification is inherited by every future programme.
 
 ---
 

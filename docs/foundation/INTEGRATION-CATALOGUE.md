@@ -114,7 +114,7 @@ See [026](../026-integration-sdk-adapter-framework-integration-manifest-specific
 
 | Component           | Manifest / spec                                                             | Status                                                                                        |
 | ------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `ProjectService`    | `services/projects/`                                                        | Implemented (`@apzhub/platform-services` **0.25.0**)                                          |
+| `ProjectService`    | `services/projects/`                                                        | Implemented (`@apzhub/platform-services` **0.26.1**)                                          |
 | `projects` module   | `modules/projects/`                                                         | Manifest registered                                                                           |
 | `plane` integration | `integrations/plane/`                                                       | **v0.6.0** — reference adapter (core → sync/events → operations/certification; OSS-101-04…09) |
 | `PlaneAdapter`      | [PlaneAdapter Specification](../specs/APZHUB-PlaneAdapter-Specification.md) | **Certified Reference Adapter** (OSS-101-10)                                                  |
@@ -156,13 +156,14 @@ See [026](../026-integration-sdk-adapter-framework-integration-manifest-specific
 
 ### Certified / frozen adapters on disk
 
-| Package                              | Version   | Role                                                |
-| ------------------------------------ | --------- | --------------------------------------------------- |
-| `@apzhub/integration-plane`          | **0.6.0** | Projects Reference Adapter (Wave 1)                 |
-| `@apzhub/integration-zammad`         | **0.6.0** | Support adapter (Wave 2 CERTIFIED_WITH_LIMITATIONS) |
-| `@apzhub/integration-meilisearch`    | **0.1.0** | Search Reference Adapter                            |
-| `@apzhub/integration-n8n`            | **0.1.0** | Workflow Engine Reference Adapter (frozen)          |
-| `@apzhub/integration-github-actions` | **0.1.0** | CI/CD Reference Adapter (frozen)                    |
-| `@apzhub/integration-search-sdk`     | **0.1.0** | Search Integration SDK                              |
+| Package                              | Version   | Role                                                                                   |
+| ------------------------------------ | --------- | -------------------------------------------------------------------------------------- |
+| `@apzhub/integration-plane`          | **0.6.0** | Projects Reference Adapter (Wave 1)                                                    |
+| `@apzhub/integration-zammad`         | **0.6.0** | Support adapter (Wave 2 CERTIFIED_WITH_LIMITATIONS)                                    |
+| `@apzhub/integration-meilisearch`    | **0.1.0** | Search Reference Adapter                                                               |
+| `@apzhub/integration-n8n`            | **0.1.0** | Workflow Engine Reference Adapter (frozen)                                             |
+| `@apzhub/integration-kimai`          | **0.2.0** | Kimai CE domain adapter (APZHUB-INTEGRATION-KIMAI-002 **ACCEPTED** · CERTIFIED_DOMAIN) |
+| `@apzhub/integration-github-actions` | **0.1.0** | CI/CD Reference Adapter (frozen)                                                       |
+| `@apzhub/integration-search-sdk`     | **0.1.0** | Search Integration SDK                                                                 |
 
 See [OSS-100-11 Completion Report](../sprint/OSS-100-11-completion-report.md) · [Freeze Notice](../architecture/APZHUB-Integration-SDK-Architecture-Freeze-Notice.md) · [Reference Standard](../architecture/APZHUB-Integration-SDK-Reference-Standard.md) · [Inventory](./INTEGRATION-PRODUCT-CAPABILITY-INVENTORY.md).

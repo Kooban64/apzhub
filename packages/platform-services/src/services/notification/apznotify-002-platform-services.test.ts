@@ -37,8 +37,8 @@ function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext 
 }
 
 describe("APZNOTIFY-002 notification platform services", () => {
-  it("exports platform services version 0.25.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
+  it("exports platform services version 0.26.1", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.26.1");
   });
 
   it("registers notification permissions in the platform catalogue", () => {

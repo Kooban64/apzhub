@@ -75,6 +75,19 @@ export {
   isDocumentServiceEnabled,
 } from "./services/documents";
 export {
+  createTimePlatformServicesForTest,
+  createTimePlatformServicesWithKimai,
+  wrapTimePlatformGatewayWithPipeline,
+  createInMemoryTimeDomainProvider,
+  createKimaiOpsProvider,
+  createKimaiLimitedDomainProvider,
+  PLATFORM_TIME_PERMISSIONS,
+  type TimePlatformServicesBundle,
+  type TimeOpsProvider,
+  type TimeDomainProvider,
+  type PlatformTimePermission,
+} from "./services/time";
+export {
   createSearchPlatformServices,
   createSearchPlatformServicesForProduction,
   createSearchPlatformServicesForTest,

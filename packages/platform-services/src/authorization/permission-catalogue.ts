@@ -38,6 +38,10 @@ import {
   PLATFORM_METRICS_PERMISSIONS,
   type PlatformMetricsPermission,
 } from "@apzhub/metrics-contracts";
+import {
+  PLATFORM_TIME_PERMISSIONS,
+  type PlatformTimePermission,
+} from "../services/time/time-permissions";
 
 /**
  * Platform permission catalogue for gateway-exposed capabilities (OSS-110-06 / OSS-110-08).
@@ -106,6 +110,7 @@ export type PlatformPermissionKey =
   | PlatformIdentityPermission
   | PlatformObservePermission
   | PlatformMetricsPermission
+  | PlatformTimePermission
   | "platform.impersonation.use";
 
 export function permissionKey(
@@ -223,6 +228,8 @@ export const PLATFORM_SERVICE_PERMISSION_CATALOGUE = [
   ...PLATFORM_OBSERVE_PERMISSIONS,
   // Metrics platform services (APZMETRICS-002) — metrics.* keys
   ...PLATFORM_METRICS_PERMISSIONS,
+  // Time platform services (APZHUB-PLATFORM-TIME-001)
+  ...PLATFORM_TIME_PERMISSIONS,
   // Legacy Administration / provider / mapping capability keys
   "administration.manage",
   "administration.administer",

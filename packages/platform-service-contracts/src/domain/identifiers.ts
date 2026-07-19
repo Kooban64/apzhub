@@ -26,3 +26,10 @@ export type SupportArticleId = string;
 export type SupportArticleAttachmentId = string;
 export type SupportHistoryEventId = string;
 export type SupportSearchHitId = string;
+
+/** Time domain — vendor-neutral platform global IDs (not Projects / Support). */
+export type TimesheetId = string;
+export type TimeActivityId = string;
+export type TimeCustomerId = string;
+export type TimeProjectId = string;
+export type TimeTagId = string;

@@ -9,7 +9,7 @@ import {
 
 describe("platform service contracts registry", () => {
   it("exports the expected contract version", () => {
-    expect(PLATFORM_SERVICE_CONTRACTS_VERSION).toBe("0.16.0");
+    expect(PLATFORM_SERVICE_CONTRACTS_VERSION).toBe("0.17.1");
   });
 
   it("registers all platform service ids", () => {
@@ -48,6 +48,13 @@ describe("platform service contracts registry", () => {
       "platform-quality-service",
       "platform-release-service",
       "platform-governance-service",
+      "time-tracking-service",
+      "time-activity-service",
+      "time-customer-service",
+      "time-project-service",
+      "timesheet-service",
+      "time-tag-service",
+      "time-reporting-service",
     ]);
   });
 });

@@ -107,6 +107,7 @@ import type { AdministrationPlatformServicesBundle } from "./administration";
 import type { IdentityPlatformServicesBundle } from "./identity";
 import type { ObservePlatformServicesBundle } from "./observe";
 import type { MetricsPlatformServicesBundle } from "./metrics";
+import type { TimePlatformServicesBundle } from "./time";
 
 export interface PlatformServicesBundle {
   readonly registry: ProviderRegistry;
@@ -140,6 +141,7 @@ export interface PlatformServicesBundle {
   readonly identity?: IdentityPlatformServicesBundle;
   readonly observe?: ObservePlatformServicesBundle;
   readonly metricsPlatform?: MetricsPlatformServicesBundle;
+  readonly time?: TimePlatformServicesBundle;
   readonly gateway: PlatformServiceGateway;
 }
 
@@ -172,6 +174,7 @@ export interface CreatePlatformServicesInput {
   readonly identity?: IdentityPlatformServicesBundle;
   readonly observe?: ObservePlatformServicesBundle;
   readonly metricsPlatform?: MetricsPlatformServicesBundle;
+  readonly time?: TimePlatformServicesBundle;
 }
 
 export interface CreatePlatformServicesFromEnvInput extends Omit<
@@ -384,6 +387,7 @@ export function createPlatformServices(
   const identityApi = input.identity?.wrapWithPipeline(pipeline);
   const observeApi = input.observe?.wrapWithPipeline(pipeline);
   const metricsApi = input.metricsPlatform?.wrapWithPipeline(pipeline);
+  const timeApi = input.time?.wrapWithPipeline(pipeline);
 
   const gateway = new PlatformServiceGateway({
     workspace,
@@ -429,6 +433,7 @@ export function createPlatformServices(
     platformQualityApi,
     platformReleaseApi,
     platformGovernanceApi,
+    timeApi,
     mapping,
     resolver,
     registry,
@@ -467,6 +472,7 @@ export function createPlatformServices(
     identity: input.identity,
     observe: input.observe,
     metricsPlatform: input.metricsPlatform,
+    time: input.time,
     gateway,
   };
 }
@@ -551,4 +557,4 @@ export type { RegisterZammadProvidersInput } from "../providers/zammad/register-
 export { registerGitHubActionsProviders } from "../providers/github-actions/register-github-actions-providers";
 export type { RegisterGitHubActionsProvidersInput } from "../providers/github-actions/register-github-actions-providers";
 
-export const PLATFORM_SERVICES_VERSION = "0.25.0";
+export const PLATFORM_SERVICES_VERSION = "0.26.1";

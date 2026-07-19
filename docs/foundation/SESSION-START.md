@@ -6,26 +6,26 @@
 > **Authoritative references:** [AI-CONTEXT](./AI-CONTEXT.md) · [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [000 — Engineering Constitution](../000-apzhub-engineering-constitution.md)  
 > **Related documents:** [PROJECT-INDEX](./PROJECT-INDEX.md) · [AI-WORKFLOW](./AI-WORKFLOW.md)  
 > **Reading order:** **AI-MANIFEST first** — then this map / CURRENT-MILESTONE  
-> **Last updated:** 2026-07-18  
-> **Current status:** Active — **Phase 3 Product Engineering**; Platform Foundation **CLOSED** (FOUNDATION-001 **ACCEPTED**); SDK **OSS-100-11** frozen; no product programme authorised
+> **Last updated:** 2026-07-19  
+> **Current status:** **Operational Delivery**; Engineering Foundation **COMPLETE**; Operating Model **ACTIVE**; QA-002 **PRODUCTION READY**; Product Engineering **ACTIVE**; APZ Projects **1.1.0** Production Release **ACCEPTED / CLOSED**; SDK frozen
 
 ---
 
 ## 1. Read these documents first (in order)
 
-| Step   | Document                                                                                  | Why                                                  |
-| ------ | ----------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| **1**  | [AI-MANIFEST](./AI-MANIFEST.md)                                                           | **Primary AI entry** — operational bootstrap         |
-| **2**  | [CURRENT-MILESTONE](./CURRENT-MILESTONE.md)                                               | Where development stops; what is approved            |
-| **3**  | [APZHUB-FOUNDATION-001](./APZHUB-FOUNDATION-001-Platform-Foundation-Completion-Report.md) | Platform Foundation COMPLETE — executive summary     |
-| **4**  | [Product Engineering Framework](../products/README.md)                                    | Phase 3 product standards (APZHUB-PRODUCTS-000)      |
-| **5**  | [AI-BOOTSTRAP](./AI-BOOTSTRAP.md)                                                         | Full operating manual (checklists, verification)     |
-| **6**  | [SESSION-START](./SESSION-START.md)                                                       | This page — short navigation map                     |
-| **7**  | [AI-CONTEXT](./AI-CONTEXT.md)                                                             | Platform rules, naming, things never to do           |
-| **8**  | [APZHUB-CONSTITUTION](./APZHUB-CONSTITUTION.md)                                           | Immutable programme principles                       |
-| **9**  | Task-specific sprint guide or backlog                                                     | Scope, constraints, stop condition for approved work |
-| **10** | Relevant foundation docs (001–029) / product docs                                         | Area-specific standards                              |
-| **11** | [AI-WORKFLOW](./AI-WORKFLOW.md)                                                           | How to plan, implement, validate, and stop           |
+| Step   | Document                                                                                                                                                                                                                                              | Why                                                  |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| **1**  | [AI-MANIFEST](./AI-MANIFEST.md)                                                                                                                                                                                                                       | **Primary AI entry** — operational bootstrap         |
+| **2**  | [CURRENT-MILESTONE](./CURRENT-MILESTONE.md)                                                                                                                                                                                                           | Where development stops; what is approved            |
+| **3**  | [APZHUB-FOUNDATION-001](./APZHUB-FOUNDATION-001-Platform-Foundation-Completion-Report.md)                                                                                                                                                             | Platform Foundation COMPLETE — executive summary     |
+| **4**  | [Engineering Operations](../operations/README.md) · [Releases](../releases/README.md) · [Product Portfolio](../products/APZHUB-PRODUCT-PORTFOLIO.md) · [Reference Implementation](../products/APZHUB-PRODUCT-ENGINEERING-REFERENCE-IMPLEMENTATION.md) | Operating model · releases · portfolio               |
+| **5**  | [AI-BOOTSTRAP](./AI-BOOTSTRAP.md)                                                                                                                                                                                                                     | Full operating manual (checklists, verification)     |
+| **6**  | [SESSION-START](./SESSION-START.md)                                                                                                                                                                                                                   | This page — short navigation map                     |
+| **7**  | [AI-CONTEXT](./AI-CONTEXT.md)                                                                                                                                                                                                                         | Platform rules, naming, things never to do           |
+| **8**  | [APZHUB-CONSTITUTION](./APZHUB-CONSTITUTION.md)                                                                                                                                                                                                       | Immutable programme principles                       |
+| **9**  | Task-specific sprint guide or backlog                                                                                                                                                                                                                 | Scope, constraints, stop condition for approved work |
+| **10** | Relevant foundation docs (001–029) / product docs                                                                                                                                                                                                     | Area-specific standards                              |
+| **11** | [AI-WORKFLOW](./AI-WORKFLOW.md)                                                                                                                                                                                                                       | How to plan, implement, validate, and stop           |
 
 **Do not rely on historical chat threads.** If a prior conversation conflicts with these documents, the Knowledge Foundation wins.
 
@@ -46,7 +46,7 @@
 | Status line at top of `docs/README.md`          | Programme-wide stop point                   |
 | "Next approved milestone (pending owner)"       | CURRENT-MILESTONE                           |
 
-**As of last update:** **Phase 3 Product Engineering** in force ([directive](./APZHUB-PHASE-3-Product-Engineering-Commencement.md)). Platform Foundation **CLOSED**. No product programme authorised — await Owner Approval (see [CURRENT-MILESTONE](./CURRENT-MILESTONE.md)).
+**As of last update:** **Operational Delivery**. Projects **1.1.0** and Time **1.0.0** Production **ACCEPTED / CLOSED**. Support **2.0** planning **Awaiting Acceptance** (already Production — IR N/A). Do not implement Support 2.0. See [CURRENT-MILESTONE](./CURRENT-MILESTONE.md).
 
 ---
 

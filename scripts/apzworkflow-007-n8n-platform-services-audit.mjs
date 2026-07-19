@@ -150,12 +150,12 @@ requireContains(
 const pkg = JSON.parse(
   readFileSync(join(ROOT, "packages/platform-services/package.json"), "utf8"),
 );
-if (pkg.version !== "0.25.0") {
+if (pkg.version !== "0.26.1") {
   violations.push({
     file: "packages/platform-services/package.json",
     line: 1,
     rule: "platform-services-version",
-    detail: `Expected 0.25.0, found ${pkg.version}`,
+    detail: `Expected 0.26.1, found ${pkg.version}`,
   });
 }
 
@@ -185,5 +185,5 @@ console.log(
   "  - apps/web must not import @apzhub/integration-n8n (gateway bootstrap allowed after 008)",
 );
 console.log("  - gateway.workflow.engine + workflowEngineOps + permissions present");
-console.log("  - versions: platform-services 0.25.0, workflow-contracts 0.3.0");
+console.log("  - versions: platform-services 0.26.1, workflow-contracts 0.3.0");
 process.exit(0);

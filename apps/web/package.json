@@ -18,6 +18,7 @@
     "@apzhub/configuration-contracts": "workspace:*",
     "@apzhub/event-notification-framework": "workspace:*",
     "@apzhub/identity-contracts": "workspace:*",
+    "@apzhub/integration-kimai": "workspace:*",
     "@apzhub/integration-n8n": "workspace:*",
     "@apzhub/integration-plane": "workspace:*",
     "@apzhub/integration-zammad": "workspace:*",

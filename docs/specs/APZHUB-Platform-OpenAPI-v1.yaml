@@ -1,10 +1,13 @@
 openapi: 3.1.0
 info:
   title: APZHUB Platform HTTP API
-  version: 1.9.0
+  version: 1.10.0
   description: |
     Production HTTP surface over PlatformServiceGateway (OSS-110-07, OSS-110-11).
     Routes contain no business logic and never call integration adapters directly.
+    Time domain (APZHUB-TIME-HTTP-001): vendor-neutral time tracking via gateway.time.*
+    under /time/* — Timesheets, Entries (alias), Activities, Customers, Time Projects, Tags,
+    foundation Reporting/Search/Health/Diagnostics. No Workbench / APZ Time product.
     Support domain (OSS-110-11): vendor-neutral ticket management via Zammad or other
     support engines. All IDs use APZHUB global ID format (sreq_, sorg_, sgrp_, suser_, sart_).
   contact:
@@ -210,6 +213,16 @@ tags:
       Maps 1:1 to gateway.metrics.* — metadata and lifecycle only.
       No formula/KPI execution, Prometheus, Grafana, OpenTelemetry, analytics, dashboards, or Workbench.
       Controlled 503 when APZHUB_METRICS_ENABLED is false.
+  - name: Time
+    description: >
+      Canonical Time Platform HTTP API (APZHUB-TIME-HTTP-001). Maps to gateway.time.*.
+      Time Entries are an alias of Timesheets. Time Projects are time-domain references,
+      not APZ Projects. Controlled 503 when APZHUB_TIME_ENABLED is false.
+      Domain CRUD may return 501 when Kimai foundation-only (limited domain).
+  - name: Time Reporting
+    description: Foundation reporting capabilities/health only — no analytics UI or exports.
+  - name: Time Diagnostics
+    description: Health, diagnostics, readiness, compatibility, and connection test.
 security:
   - sessionCookie: []
 paths:
@@ -7366,6 +7379,1062 @@ paths:
       responses: *TestingResourceResponses
       x-apzhub-permissions: [workflow.engine.read]
 
+  /time/health:
+    get:
+      operationId: getTimeHealth
+      tags: [Time Diagnostics]
+      summary: Time platform health
+      responses:
+        "200":
+          description: Health snapshot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [time.view]
+  /time/diagnostics:
+    get:
+      operationId: getTimeDiagnostics
+      tags: [Time Diagnostics]
+      summary: Time platform diagnostics
+      responses:
+        "200":
+          description: Diagnostics snapshot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [time.view]
+  /time/capabilities:
+    get:
+      operationId: getTimeCapabilities
+      tags: [Time Diagnostics]
+      summary: Time foundation capabilities
+      responses:
+        "200":
+          description: Capabilities
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [time.view]
+  /time/readiness:
+    get:
+      operationId: getTimeReadiness
+      tags: [Time Diagnostics]
+      summary: Time readiness
+      responses:
+        "200":
+          description: Readiness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [time.view]
+  /time/compatibility:
+    get:
+      operationId: getTimeCompatibility
+      tags: [Time Diagnostics]
+      summary: Time compatibility
+      responses:
+        "200":
+          description: Compatibility
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [time.view]
+  /time/connection/test:
+    post:
+      operationId: testTimeConnection
+      tags: [Time Diagnostics]
+      summary: Test Time / Kimai connection
+      responses:
+        "200":
+          description: Connection test result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [time.manage]
+  /time/search:
+    get:
+      operationId: searchTime
+      tags: [Time]
+      summary: Foundation Time search (list-scoped composition)
+      parameters:
+        - name: q
+          in: query
+          schema: { type: string, minLength: 1, maxLength: 200 }
+        - name: query
+          in: query
+          schema: { type: string, minLength: 1, maxLength: 200 }
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200":
+          description: Search hits
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeCollectionSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [time.view]
+  /time/reporting/capabilities:
+    get:
+      operationId: getTimeReportingCapabilities
+      tags: [Time Reporting]
+      summary: Time reporting capabilities (foundation)
+      responses:
+        "200":
+          description: Reporting capabilities
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [time.view]
+  /time/reporting/health:
+    get:
+      operationId: getTimeReportingHealth
+      tags: [Time Reporting]
+      summary: Time reporting health (foundation)
+      responses:
+        "200":
+          description: Reporting health
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [time.view]
+  /time/timesheets:
+    get:
+      operationId: listTimesheets
+      tags: [Time]
+      summary: List Timesheets
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: page
+          in: query
+          schema: { type: integer, minimum: 1 }
+        - name: search
+          in: query
+          schema: { type: string, maxLength: 200 }
+      responses:
+        "200":
+          description: Collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeCollectionSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.view]
+    post:
+      operationId: createTimesheet
+      tags: [Time]
+      summary: Create Timesheet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTimesheetRequest"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/timesheets/{timesheetId}:
+    get:
+      operationId: getTimesheet
+      tags: [Time]
+      summary: Get Timesheet
+      parameters:
+        - name: timesheetId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tts_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.view]
+    patch:
+      operationId: updateTimesheet
+      tags: [Time]
+      summary: Update Timesheet
+      parameters:
+        - name: timesheetId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tts_[A-Za-z0-9]+$"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTimesheetRequest"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+    delete:
+      operationId: archiveTimesheet
+      tags: [Time]
+      summary: Archive Timesheet (soft)
+      parameters:
+        - name: timesheetId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tts_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Archived
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/entries:
+    get:
+      operationId: listTimeEntrys
+      tags: [Time]
+      summary: List TimeEntrys
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: page
+          in: query
+          schema: { type: integer, minimum: 1 }
+        - name: search
+          in: query
+          schema: { type: string, maxLength: 200 }
+      responses:
+        "200":
+          description: Collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeCollectionSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.view]
+    post:
+      operationId: createTimeEntry
+      tags: [Time]
+      summary: Create TimeEntry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTimeEntryRequest"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/entries/{entryId}:
+    get:
+      operationId: getTimeEntry
+      tags: [Time]
+      summary: Get TimeEntry
+      parameters:
+        - name: entryId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tts_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.view]
+    patch:
+      operationId: updateTimeEntry
+      tags: [Time]
+      summary: Update TimeEntry
+      parameters:
+        - name: entryId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tts_[A-Za-z0-9]+$"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTimeEntryRequest"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+    delete:
+      operationId: archiveTimeEntry
+      tags: [Time]
+      summary: Archive TimeEntry (soft)
+      parameters:
+        - name: entryId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tts_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Archived
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/activities:
+    get:
+      operationId: listTimeActivitys
+      tags: [Time]
+      summary: List TimeActivitys
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: page
+          in: query
+          schema: { type: integer, minimum: 1 }
+        - name: search
+          in: query
+          schema: { type: string, maxLength: 200 }
+      responses:
+        "200":
+          description: Collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeCollectionSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.view]
+    post:
+      operationId: createTimeActivity
+      tags: [Time]
+      summary: Create TimeActivity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTimeActivityRequest"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/activities/{activityId}:
+    get:
+      operationId: getTimeActivity
+      tags: [Time]
+      summary: Get TimeActivity
+      parameters:
+        - name: activityId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tact_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.view]
+    patch:
+      operationId: updateTimeActivity
+      tags: [Time]
+      summary: Update TimeActivity
+      parameters:
+        - name: activityId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tact_[A-Za-z0-9]+$"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTimeActivityRequest"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+    delete:
+      operationId: archiveTimeActivity
+      tags: [Time]
+      summary: Archive TimeActivity (soft)
+      parameters:
+        - name: activityId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tact_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Archived
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/customers:
+    get:
+      operationId: listTimeCustomers
+      tags: [Time]
+      summary: List TimeCustomers
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: page
+          in: query
+          schema: { type: integer, minimum: 1 }
+        - name: search
+          in: query
+          schema: { type: string, maxLength: 200 }
+      responses:
+        "200":
+          description: Collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeCollectionSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.view]
+    post:
+      operationId: createTimeCustomer
+      tags: [Time]
+      summary: Create TimeCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTimeCustomerRequest"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/customers/{customerId}:
+    get:
+      operationId: getTimeCustomer
+      tags: [Time]
+      summary: Get TimeCustomer
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tcust_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.view]
+    patch:
+      operationId: updateTimeCustomer
+      tags: [Time]
+      summary: Update TimeCustomer
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tcust_[A-Za-z0-9]+$"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTimeCustomerRequest"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+    delete:
+      operationId: archiveTimeCustomer
+      tags: [Time]
+      summary: Archive TimeCustomer (soft)
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tcust_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Archived
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/projects:
+    get:
+      operationId: listTimeProjects
+      tags: [Time]
+      summary: List TimeProjects
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: page
+          in: query
+          schema: { type: integer, minimum: 1 }
+        - name: search
+          in: query
+          schema: { type: string, maxLength: 200 }
+      responses:
+        "200":
+          description: Collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeCollectionSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.view]
+    post:
+      operationId: createTimeProject
+      tags: [Time]
+      summary: Create TimeProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTimeProjectRequest"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/projects/{projectId}:
+    get:
+      operationId: getTimeProject
+      tags: [Time]
+      summary: Get TimeProject
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tproj_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.view]
+    patch:
+      operationId: updateTimeProject
+      tags: [Time]
+      summary: Update TimeProject
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tproj_[A-Za-z0-9]+$"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTimeProjectRequest"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+    delete:
+      operationId: archiveTimeProject
+      tags: [Time]
+      summary: Archive TimeProject (soft)
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tproj_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Archived
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/tags:
+    get:
+      operationId: listTimeTags
+      tags: [Time]
+      summary: List TimeTags
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: page
+          in: query
+          schema: { type: integer, minimum: 1 }
+        - name: search
+          in: query
+          schema: { type: string, maxLength: 200 }
+      responses:
+        "200":
+          description: Collection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeCollectionSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.view]
+    post:
+      operationId: createTimeTag
+      tags: [Time]
+      summary: Create TimeTag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTimeTagRequest"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/tags/{tagId}:
+    get:
+      operationId: getTimeTag
+      tags: [Time]
+      summary: Get TimeTag
+      parameters:
+        - name: tagId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^ttag_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.view]
+    patch:
+      operationId: updateTimeTag
+      tags: [Time]
+      summary: Update TimeTag
+      parameters:
+        - name: tagId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^ttag_[A-Za-z0-9]+$"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTimeTagRequest"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+    delete:
+      operationId: archiveTimeTag
+      tags: [Time]
+      summary: Archive TimeTag (soft)
+      parameters:
+        - name: tagId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^ttag_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Archived
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/timesheets/{timesheetId}/stop:
+    post:
+      operationId: stopTimesheet
+      tags: [Time]
+      summary: Stop running Timesheet
+      parameters:
+        - name: timesheetId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tts_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Stopped
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+  /time/entries/{entryId}/stop:
+    post:
+      operationId: stopTimeEntry
+      tags: [Time]
+      summary: Stop running TimeEntry
+      parameters:
+        - name: entryId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^tts_[A-Za-z0-9]+$"
+      responses:
+        "200":
+          description: Stopped
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-apzhub-permissions: [time.manage]
+
 components:
   securitySchemes:
     sessionCookie:
@@ -9499,3 +10568,112 @@ components:
         channelKind:
           type: string
           enum: [email, sms, push, in_app, webhook, microsoft_teams, slack, future]
+
+    TimeDataSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+        meta:
+          $ref: "#/components/schemas/Meta"
+    TimeCollectionSuccess:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    CreateTimesheetRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        description: { type: string, maxLength: 4000 }
+        startedAt: { type: string, format: date-time }
+        activityId: { type: string, pattern: "^tact_[A-Za-z0-9]+$" }
+        customerId: { type: string, pattern: "^tcust_[A-Za-z0-9]+$" }
+        projectId: { type: string, pattern: "^tproj_[A-Za-z0-9]+$" }
+        tagIds:
+          type: array
+          maxItems: 50
+          items: { type: string, pattern: "^ttag_[A-Za-z0-9]+$" }
+        billable: { type: boolean }
+    UpdateTimesheetRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        description: { type: string, maxLength: 4000 }
+        activityId: { type: string, nullable: true, pattern: "^tact_[A-Za-z0-9]+$" }
+        customerId: { type: string, nullable: true, pattern: "^tcust_[A-Za-z0-9]+$" }
+        projectId: { type: string, nullable: true, pattern: "^tproj_[A-Za-z0-9]+$" }
+        tagIds:
+          type: array
+          maxItems: 50
+          items: { type: string, pattern: "^ttag_[A-Za-z0-9]+$" }
+        billable: { type: boolean }
+        endedAt: { type: string, format: date-time }
+    CreateTimeEntryRequest:
+      $ref: "#/components/schemas/CreateTimesheetRequest"
+    UpdateTimeEntryRequest:
+      $ref: "#/components/schemas/UpdateTimesheetRequest"
+    CreateTimeActivityRequest:
+      type: object
+      additionalProperties: false
+      required: [name]
+      properties:
+        name: { type: string, minLength: 1, maxLength: 200 }
+        description: { type: string, maxLength: 4000 }
+        projectId: { type: string, pattern: "^tproj_[A-Za-z0-9]+$" }
+    UpdateTimeActivityRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name: { type: string, minLength: 1, maxLength: 200 }
+        description: { type: string, maxLength: 4000 }
+        projectId: { type: string, nullable: true, pattern: "^tproj_[A-Za-z0-9]+$" }
+    CreateTimeCustomerRequest:
+      type: object
+      additionalProperties: false
+      required: [name]
+      properties:
+        name: { type: string, minLength: 1, maxLength: 200 }
+        number: { type: string, minLength: 1, maxLength: 64 }
+    UpdateTimeCustomerRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name: { type: string, minLength: 1, maxLength: 200 }
+        number: { type: string, minLength: 1, maxLength: 64 }
+    CreateTimeProjectRequest:
+      type: object
+      additionalProperties: false
+      required: [name]
+      properties:
+        name: { type: string, minLength: 1, maxLength: 200 }
+        customerId: { type: string, pattern: "^tcust_[A-Za-z0-9]+$" }
+    UpdateTimeProjectRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name: { type: string, minLength: 1, maxLength: 200 }
+        customerId: { type: string, nullable: true, pattern: "^tcust_[A-Za-z0-9]+$" }
+    CreateTimeTagRequest:
+      type: object
+      additionalProperties: false
+      required: [name]
+      properties:
+        name: { type: string, minLength: 1, maxLength: 100 }
+        color: { type: string, pattern: "^#[0-9A-Fa-f]{6}$" }
+    UpdateTimeTagRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name: { type: string, minLength: 1, maxLength: 100 }
+        color: { type: string, pattern: "^#[0-9A-Fa-f]{6}$" }

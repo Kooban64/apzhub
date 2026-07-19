@@ -28,7 +28,7 @@ describe("APZIDENTITY-006 Identity Wave Closeout", () => {
       "packages/identity-contracts/package.json": "0.2.0",
       "packages/identity-core/package.json": "0.2.0",
       "packages/identity-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.25.0",
+      "packages/platform-services/package.json": "0.26.1",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const actual = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;

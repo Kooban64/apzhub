@@ -147,9 +147,9 @@ assert(
   `expected 0.4.0 got ${contractsPkg.version}`,
 );
 assert(
-  ["0.18.0", "0.19.0", "0.25.0"].includes(platformPkg.version),
+  ["0.18.0", "0.19.0", "0.25.0", "0.26.1"].includes(platformPkg.version),
   "version-platform-services",
-  `expected 0.18.0, 0.19.0 or 0.25.0 got ${platformPkg.version}`,
+  `expected 0.18.0, 0.19.0, 0.25.0 or 0.26.1 got ${platformPkg.version}`,
 );
 assert(
   meiliPkg.version === "0.1.0",
@@ -259,7 +259,7 @@ if (violations.length > 0) {
 
 console.log("APZSEARCH-006 audit PASS — 0 violations");
 console.log(
-  "  versions: search-contracts@0.4.0 platform-services@0.25.0 integration-meilisearch@0.1.0",
+  "  versions: search-contracts@0.4.0 platform-services@0.26.1 integration-meilisearch@0.1.0",
 );
 console.log(
   "  boundaries: no Meili DTOs in gateway; no RestClient internals in platform-services;",

@@ -2,7 +2,7 @@
 
 > **Purpose:** Index of APZHUB products and their status  
 > **Audience:** Product owners, architects, engineers, AI agents  
-> **Authoritative references:** [Product Portfolio Strategy](../strategy/APZHUB-Product-Portfolio-Strategy.md) · [002 — Terminology](../002-product-naming-positioning-terminology-standard.md)  
+> **Authoritative references:** [APZHUB Product Portfolio (PRODUCTS-001)](../products/APZHUB-PRODUCT-PORTFOLIO.md) · [Product Portfolio Strategy (PCS-001 historical)](../strategy/APZHUB-Product-Portfolio-Strategy.md) · [002 — Terminology](../002-product-naming-positioning-terminology-standard.md)  
 > **Related documents:** [OSS-CATALOGUE](./OSS-CATALOGUE.md) · [PLATFORM-CAPABILITY-CATALOGUE](./PLATFORM-CAPABILITY-CATALOGUE.md) · [INTEGRATION-PRODUCT-CAPABILITY-INVENTORY](./INTEGRATION-PRODUCT-CAPABILITY-INVENTORY.md)  
 > **Reading order:** After Master Brief  
 > **Last updated:** 2026-07-18  
@@ -108,7 +108,7 @@ Matters, Clients, Documents, Tasks, Time Entries, Invoices, Calendar, Trust Acco
 | **Vision**          | [APZ TCMS Product Vision](../strategy/APZHUB-APZ-TCMS-Product-Vision.md)                                                                                             |
 | **ADR**             | [ADR-0059](../adr/ADR-0059-apz-tcms-native-product-architecture.md)                                                                                                  |
 | **Backlog**         | [APZTCMS-Backlog](../backlog/APZTCMS-Backlog.md)                                                                                                                     |
-| **Packages (disk)** | testing-contracts / persistence / services **0.11.0** · testing-foundation **0.1.0** · platform-services **0.25.0** · `@apzhub/integration-github-actions` **0.1.0** |
+| **Packages (disk)** | testing-contracts / persistence / services **0.11.0** · testing-foundation **0.1.0** · platform-services **0.26.1** · `@apzhub/integration-github-actions` **0.1.0** |
 | **Status**          | **APZTCMS-001…024 complete** (through Reporting Framework); CI/CD Reference Adapter frozen at APZTCMS-020                                                            |
 | **Certification**   | Vertical / GHA slices **PRODUCTION_READY_WITH_LIMITATIONS** where certified; see sprint completion reports                                                           |
 | **Supersedes**      | QE product naming; Kiwi TCMS as user-facing / SoR Testing engine                                                                                                     |

@@ -23,7 +23,26 @@ export type {
   SupportArticleAttachmentId,
   SupportHistoryEventId,
   SupportSearchHitId,
+  TimesheetId,
+  TimeActivityId,
+  TimeCustomerId,
+  TimeProjectId,
+  TimeTagId,
 } from "./identifiers";
+
+export type {
+  Timesheet,
+  TimesheetSummary,
+  TimesheetStatus,
+  TimeActivity,
+  TimeActivityStatus,
+  TimeCustomer,
+  TimeCustomerStatus,
+  TimeProject,
+  TimeProjectStatus,
+  TimeTag,
+  TimeTagStatus,
+} from "./time";
 
 export type {
   Workspace,

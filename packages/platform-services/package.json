@@ -1,9 +1,9 @@
 {
   "name": "@apzhub/platform-services",
-  "version": "0.25.0",
+  "version": "0.26.1",
   "private": true,
   "type": "module",
-  "description": "Platform service implementations — Projects + Support + Reporting + Documents + Search + Workflow + Notification + Configuration + Administration + Identity + Observability + Metrics (APZMETRICS-002)",
+  "description": "Platform service implementations — Projects + Support + Reporting + Documents + Search + Workflow + Notification + Configuration + Administration + Identity + Observability + Metrics + Time (APZHUB-PLATFORM-TIME-001)",
   "exports": {
     ".": "./src/index.ts",
     "./testing": "./src/testing/index.ts",
@@ -20,6 +20,7 @@
     "@apzhub/integration-zammad": "workspace:*",
     "@apzhub/integration-github-actions": "workspace:*",
     "@apzhub/integration-n8n": "workspace:*",
+    "@apzhub/integration-kimai": "workspace:*",
     "@apzhub/integration-sdk": "workspace:*",
     "@apzhub/platform-authorization": "workspace:*",
     "@apzhub/platform-service-contracts": "workspace:*",

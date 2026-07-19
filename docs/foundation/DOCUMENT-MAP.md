@@ -5,8 +5,45 @@
 > **Authoritative references:** [docs/README.md](../README.md) — complete registry with tables  
 > **Related documents:** [PROJECT-INDEX](./PROJECT-INDEX.md)  
 > **Reading order:** For finding documents by category  
-> **Last updated:** 2026-07-18  
-> **Current status:** Active — **Phase 3 Product Engineering** ([directive](./APZHUB-PHASE-3-Product-Engineering-Commencement.md)); Product Framework [APZHUB-PRODUCTS-000](../products/README.md); Platform Foundation **CLOSED** ([APZHUB-FOUNDATION-001](./APZHUB-FOUNDATION-001-Platform-Foundation-Completion-Report.md) **ACCEPTED**); Integration SDK v1.0.0 frozen.
+> **Last updated:** 2026-07-19  
+> **Current status:** **Operational Delivery**; Engineering Foundation **COMPLETE**; Operating Model **ACTIVE**; Product Engineering **ACTIVE**; [APZ Projects 1.1.0](../releases/projects/1.1.0/README.md) Production Release **ACCEPTED / CLOSED**; QA-002 **PRODUCTION READY**; Platform Foundation **CLOSED**; Integration SDK v1.0.0 frozen.
+
+---
+
+## Engineering Operations (`docs/operations/`) — APZHUB-OPERATIONS-001
+
+| Document                                                                                                                                                                                | Purpose                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| [README](../operations/README.md) · [ENGINEERING-OPERATING-MODEL](../operations/ENGINEERING-OPERATING-MODEL.md)                                                                         | Permanent operating handbook — **ACTIVE** |
+| [RELEASE-MANAGEMENT-STANDARD](../operations/RELEASE-MANAGEMENT-STANDARD.md) · [BRANCHING-AND-VERSIONING](../operations/BRANCHING-AND-VERSIONING.md)                                     | Release / git / SemVer                    |
+| [CHANGE-MANAGEMENT-STANDARD](../operations/CHANGE-MANAGEMENT-STANDARD.md) · [HOTFIX-POLICY](../operations/HOTFIX-POLICY.md)                                                             | Change & hotfix                           |
+| [PRODUCTION-SUPPORT-STANDARD](../operations/PRODUCTION-SUPPORT-STANDARD.md) · [INCIDENT-MANAGEMENT-STANDARD](../operations/INCIDENT-MANAGEMENT-STANDARD.md)                             | Support & incidents                       |
+| [DEFINITION-OF-READY](../operations/DEFINITION-OF-READY.md) · [DEFINITION-OF-DONE](../operations/DEFINITION-OF-DONE.md) · [CODE-REVIEW-STANDARD](../operations/CODE-REVIEW-STANDARD.md) | Ready / Done / review                     |
+| [PRODUCT-LIFECYCLE](../operations/PRODUCT-LIFECYCLE.md) · [PLATFORM-LIFECYCLE](../operations/PLATFORM-LIFECYCLE.md)                                                                     | Lifecycles                                |
+| [AI-ENGINEERING-OPERATIONS](../operations/AI-ENGINEERING-OPERATIONS.md)                                                                                                                 | AI operating rules                        |
+| [APZHUB-OPERATIONS-001 Acceptance](./completion-reports/APZHUB-OPERATIONS-001-programme-acceptance-report.md)                                                                           | **ACCEPTED / CLOSED**                     |
+
+---
+
+## Releases (`docs/releases/`) — Operational Delivery
+
+| Document                                                                                   | Purpose                                                                                                                                       |
+| ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [README](../releases/README.md)                                                            | Release home (Product / Platform)                                                                                                             |
+| [PRODUCT-RELEASE-ROADMAP](../releases/PRODUCT-RELEASE-ROADMAP.md)                          | Per-product release posture                                                                                                                   |
+| [PLATFORM-RELEASE-ROADMAP](../releases/PLATFORM-RELEASE-ROADMAP.md)                        | Platform versioning & cadence                                                                                                                 |
+| [RELEASE-CALENDAR](../releases/RELEASE-CALENDAR.md)                                        | Release workflow (no dates)                                                                                                                   |
+| [RELEASE-NAMING-STANDARD](../releases/RELEASE-NAMING-STANDARD.md)                          | SemVer · RC · hotfix · LTS · deprecation                                                                                                      |
+| [APZ Projects 1.1.0 evidence](../releases/projects/1.1.0/README.md)                        | Current Production Release — **ACCEPTED / CLOSED**                                                                                            |
+| [APZ Time 1.0.0](../releases/time/1.0.0/README.md)                                         | Production Release — **ACCEPTED / CLOSED**                                                                                                    |
+| [APZ Support 2.0 planning](../releases/support/APZ-SUPPORT-2.0-READINESS-ASSESSMENT.md)    | Planning — **Awaiting Acceptance** · already Production                                                                                       |
+| [APZ Time final IR](../releases/time/APZ-TIME-FINAL-READINESS-ASSESSMENT.md)               | APZHUB-TIME-READINESS-002 — **ACCEPTED / CLOSED** (historical IR)                                                                             |
+| [APZ Time 1.0 planning](../releases/time/README.md)                                        | Historical planning suite — **ACCEPTED**                                                                                                      |
+| [Kimai Integration Foundation](../integrations/kimai/README.md)                            | APZHUB-INTEGRATION-KIMAI-001 — **ACCEPTED / CLOSED** · foundation **0.1.0** (superseded by **0.2.0** domain)                                  |
+| [Time Platform Services](../platform/time/README.md)                                       | APZHUB-PLATFORM-TIME-001 — **ACCEPTED / CLOSED** · [acceptance](./completion-reports/APZHUB-PLATFORM-TIME-001-programme-acceptance-report.md) |
+| [Time HTTP API](../http/time/README.md)                                                    | APZHUB-TIME-HTTP-001 — **ACCEPTED / CLOSED** · OpenAPI **1.10.0**                                                                             |
+| [Time IR reassessment](../releases/time/APZ-TIME-IMPLEMENTATION-READINESS-REASSESSMENT.md) | APZHUB-TIME-READINESS-001 — **ACCEPTED / CLOSED** (historical; superseded by READINESS-002)                                                   |
+| [Kimai Integration](../integrations/kimai/README.md)                                       | APZHUB-INTEGRATION-KIMAI-002 — **ACCEPTED / CLOSED** · **CERTIFIED_DOMAIN** **0.2.0**                                                         |
 
 ---
 
@@ -15,6 +52,11 @@
 | Document                                                                                                                                                                                                                    | Category                                                                                               |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | [README](../products/README.md) · [PRODUCT-ENGINEERING-HANDBOOK](../products/PRODUCT-ENGINEERING-HANDBOOK.md)                                                                                                               | Framework entry                                                                                        |
+| [APZHUB-PRODUCT-PORTFOLIO](../products/APZHUB-PRODUCT-PORTFOLIO.md)                                                                                                                                                         | **Authoritative product portfolio & roadmap** (APZHUB-PRODUCTS-001)                                    |
+| [APZHUB-PRODUCT-IMPLEMENTATION-READINESS-MATRIX](../products/APZHUB-PRODUCT-IMPLEMENTATION-READINESS-MATRIX.md) · [PORTFOLIO-READINESS-SUMMARY](../products/APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md)                  | Product Definition Packs / readiness (APZHUB-PRODUCTS-002 **ACCEPTED**)                                |
+| [APZHUB-PRODUCT-READINESS-ADVANCEMENT](../products/APZHUB-PRODUCT-READINESS-ADVANCEMENT.md)                                                                                                                                 | Product evaluation + IR advancement (APZHUB-PRODUCTS-003)                                              |
+| [APZHUB-PROJECTS-001 Acceptance](./completion-reports/APZHUB-PROJECTS-001-programme-acceptance-report.md) · [Completion](../sprint/APZHUB-PROJECTS-001-completion-report.md)                                                | First product implementation — **ACCEPTED / CLOSED**                                                   |
+| [APZHUB-PRODUCT-ENGINEERING-REFERENCE-IMPLEMENTATION](../products/APZHUB-PRODUCT-ENGINEERING-REFERENCE-IMPLEMENTATION.md)                                                                                                   | Product transition report + reusable implementation pattern                                            |
 | [PRODUCT-LIFECYCLE](../products/PRODUCT-LIFECYCLE.md) · [PRODUCT-ARCHITECTURE-STANDARD](../products/PRODUCT-ARCHITECTURE-STANDARD.md)                                                                                       | Lifecycle / architecture                                                                               |
 | [PRODUCT-BACKLOG-STANDARD](../products/PRODUCT-BACKLOG-STANDARD.md) · [PRODUCT-RELEASE-STANDARD](../products/PRODUCT-RELEASE-STANDARD.md) · [PRODUCT-CERTIFICATION-STANDARD](../products/PRODUCT-CERTIFICATION-STANDARD.md) | Delivery standards                                                                                     |
 | [PRODUCT-DOCUMENT-MAP](../products/PRODUCT-DOCUMENT-MAP.md)                                                                                                                                                                 | Product navigation                                                                                     |

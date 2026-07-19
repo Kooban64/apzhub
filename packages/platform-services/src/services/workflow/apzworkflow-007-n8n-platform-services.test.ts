@@ -66,8 +66,8 @@ async function withMockAdapter() {
 }
 
 describe("APZWORKFLOW-007 n8n platform services", () => {
-  it("exports platform services version 0.25.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
+  it("exports platform services version 0.26.1", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.26.1");
   });
 
   it("registers workflow.engine permissions in the platform catalogue", () => {

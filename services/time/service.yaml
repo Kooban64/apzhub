@@ -1,0 +1,86 @@
+manifestSchemaVersion: "1.0"
+id: time-tracking-service
+name: Time Tracking Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: productivity
+  description: >
+    Canonical APZHUB Time Platform Services (APZHUB-PLATFORM-TIME-001).
+    Consumes Kimai Integration CERTIFIED_DOMAIN 0.2.0. Product Workbench is APZ Time 1.0.0.
+  contractPackage: "@apzhub/platform-service-contracts"
+  contractVersion: "0.17.1"
+  implementationPackage: "@apzhub/platform-services"
+  implementationVersion: "0.26.1"
+  owner: APZHUB
+  tags:
+    - time
+    - timesheets
+    - productivity
+    - platform-services
+
+dependencies:
+  platform: []
+  integrations:
+    - kimai
+
+integrations:
+  - kimai
+
+service:
+  category: productivity
+
+permissions:
+  - time.view
+  - time.manage
+  - time.admin
+  - time.timesheet.list
+  - time.timesheet.read
+  - time.timesheet.create
+  - time.timesheet.update
+  - time.timesheet.manage
+  - time.activity.list
+  - time.activity.read
+  - time.activity.create
+  - time.activity.update
+  - time.activity.manage
+  - time.customer.list
+  - time.customer.read
+  - time.customer.create
+  - time.customer.update
+  - time.customer.manage
+  - time.project.list
+  - time.project.read
+  - time.project.create
+  - time.project.update
+  - time.project.manage
+  - time.tag.list
+  - time.tag.read
+  - time.tag.create
+  - time.tag.update
+  - time.tag.manage
+  - time.reporting.read
+  - time.reporting.manage
+
+events:
+  publishes: []
+
+health:
+  enabled: true
+
+documentation:
+  governanceCapabilityKey: time
+  governanceCapabilityType: productivity
+  featureFlagKey: capability.time.enabled
+  lifecycleProductId: time
+  operationsCapabilityId: time
+  operationsConnectorId: kimai
+  diagnosticsExtension: timeDiagnostics
+  adapterImplementation: APZHUB-PLATFORM-TIME-001
+  userVisibleProduct: true
+  productRelease: "1.0.0"
+
+tests:
+  contract: in-progress
+  integration: planned

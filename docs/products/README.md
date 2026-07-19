@@ -2,10 +2,11 @@
 
 > **Programme:** APZHUB-PRODUCTS-000  
 > **Type:** Documentation only  
-> **Status:** ACTIVE — Phase 3 Product Engineering  
+> **Status:** **COMPLETE** — Framework ACCEPTED; first product programme **APZHUB-PROJECTS-001 ACCEPTED / CLOSED**  
 > **Complements:** [Knowledge Foundation](../foundation/PROJECT-INDEX.md) (does not replace it)  
 > **Owner Directive:** [Phase 3 Commencement](../foundation/APZHUB-PHASE-3-Product-Engineering-Commencement.md)  
-> **AI bootstrap:** [AI-MANIFEST](../foundation/AI-MANIFEST.md)
+> **AI bootstrap:** [AI-MANIFEST](../foundation/AI-MANIFEST.md)  
+> **Reference pattern:** [APZHUB-PRODUCT-ENGINEERING-REFERENCE-IMPLEMENTATION](./APZHUB-PRODUCT-ENGINEERING-REFERENCE-IMPLEMENTATION.md)
 
 ---
 
@@ -17,31 +18,33 @@ Authoritative standard for every APZHUB **product**. Platform Foundation is comp
 
 ## Start here
 
-| Audience      | Document                                                              |
-| ------------- | --------------------------------------------------------------------- |
-| All           | [PRODUCT-ENGINEERING-HANDBOOK](./PRODUCT-ENGINEERING-HANDBOOK.md)     |
-| Lifecycle     | [PRODUCT-LIFECYCLE](./PRODUCT-LIFECYCLE.md)                           |
-| Architecture  | [PRODUCT-ARCHITECTURE-STANDARD](./PRODUCT-ARCHITECTURE-STANDARD.md)   |
-| Backlogs      | [PRODUCT-BACKLOG-STANDARD](./PRODUCT-BACKLOG-STANDARD.md)             |
-| Release       | [PRODUCT-RELEASE-STANDARD](./PRODUCT-RELEASE-STANDARD.md)             |
-| Certification | [PRODUCT-CERTIFICATION-STANDARD](./PRODUCT-CERTIFICATION-STANDARD.md) |
-| Navigation    | [PRODUCT-DOCUMENT-MAP](./PRODUCT-DOCUMENT-MAP.md)                     |
+| Audience              | Document                                                                                                                                          |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Strategy              | [APZHUB-PRODUCT-PORTFOLIO](./APZHUB-PRODUCT-PORTFOLIO.md) — **authoritative portfolio & roadmap**                                                 |
+| Reference pattern     | [APZHUB-PRODUCT-ENGINEERING-REFERENCE-IMPLEMENTATION](./APZHUB-PRODUCT-ENGINEERING-REFERENCE-IMPLEMENTATION.md) — first-product transition report |
+| Definition packs      | [Readiness Summary](./APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md) · [Readiness Matrix](./APZHUB-PRODUCT-IMPLEMENTATION-READINESS-MATRIX.md)    |
+| Readiness advancement | [APZHUB-PRODUCT-READINESS-ADVANCEMENT](./APZHUB-PRODUCT-READINESS-ADVANCEMENT.md) (PRODUCTS-003)                                                  |
+| All                   | [PRODUCT-ENGINEERING-HANDBOOK](./PRODUCT-ENGINEERING-HANDBOOK.md)                                                                                 |
+| Lifecycle             | [PRODUCT-LIFECYCLE](./PRODUCT-LIFECYCLE.md)                                                                                                       |
+| Architecture          | [PRODUCT-ARCHITECTURE-STANDARD](./PRODUCT-ARCHITECTURE-STANDARD.md)                                                                               |
+| Backlogs              | [PRODUCT-BACKLOG-STANDARD](./PRODUCT-BACKLOG-STANDARD.md)                                                                                         |
+| Release               | [PRODUCT-RELEASE-STANDARD](./PRODUCT-RELEASE-STANDARD.md)                                                                                         |
+| Certification         | [PRODUCT-CERTIFICATION-STANDARD](./PRODUCT-CERTIFICATION-STANDARD.md)                                                                             |
+| Navigation            | [PRODUCT-DOCUMENT-MAP](./PRODUCT-DOCUMENT-MAP.md)                                                                                                 |
 
 ---
 
 ## Product portfolios
 
-| Portfolio | Folder                     | User-facing name      |
-| --------- | -------------------------- | --------------------- |
-| Projects  | [projects/](./projects/)   | Projects              |
-| Time      | [time/](./time/)           | Time Tracking         |
-| Support   | [support/](./support/)     | Support               |
-| Documents | [documents/](./documents/) | Documents             |
-| Analytics | [analytics/](./analytics/) | Analytics             |
-| Workflow  | [workflow/](./workflow/)   | Workflow / Automation |
-| Law       | [law/](./law/)             | Law Platform          |
-
-Each portfolio folder holds product documentation. Placeholders only until a product programme is Owner-approved.
+| Portfolio | Folder                     | User-facing name      | Maturity (current)   |
+| --------- | -------------------------- | --------------------- | -------------------- |
+| Projects  | [projects/](./projects/)   | Projects              | **Production**       |
+| Time      | [time/](./time/)           | Time Tracking         | **Production 1.0.0** |
+| Support   | [support/](./support/)     | Support               | Production           |
+| Documents | [documents/](./documents/) | Documents             | Production           |
+| Analytics | [analytics/](./analytics/) | Analytics             | Concept              |
+| Workflow  | [workflow/](./workflow/)   | Workflow / Automation | Production           |
+| Law       | [law/](./law/)             | Law Platform          | In Development       |
 
 ---
 
@@ -50,7 +53,11 @@ Each portfolio folder holds product documentation. Placeholders only until a pro
 ```text
 Platform Engineering (COMPLETE)
         ↓ enables
-Product Engineering (ACTIVE)
+Product Engineering Framework (COMPLETE)
+        ↓ enables
+Owner-approved product programmes
+        ↓
+APZHUB-PROJECTS-001 ACCEPTED / CLOSED (APZ Projects Production)
 ```
 
 Products **extend** the platform. Products do **not** redesign the platform.

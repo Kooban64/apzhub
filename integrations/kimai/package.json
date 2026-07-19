@@ -1,0 +1,18 @@
+{
+  "name": "@apzhub/integration-kimai",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Kimai CE Integration adapter for APZHUB — foundation ops + domain CE APIs (APZHUB-INTEGRATION-KIMAI-002); no APZ Time product UI",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts integrations/kimai"
+  },
+  "dependencies": {
+    "@apzhub/integration-sdk": "workspace:*"
+  }
+}

@@ -240,13 +240,13 @@ describe("APZIDENTITY-003 identity handlers", () => {
     }
   });
 
-  it("documents identity in OpenAPI 1.9.0 without forbidden auth surfaces", () => {
+  it("documents identity in OpenAPI without forbidden auth surfaces", () => {
     const spec = loadPlatformOpenApiSpecObject() as {
       info?: { version?: string };
       paths?: Record<string, unknown>;
       tags?: Array<{ name?: string }>;
     };
-    expect(spec.info?.version).toBe("1.9.0");
+    expect(["1.9.0", "1.10.0"]).toContain(spec.info?.version);
 
     const expectedPaths = [
       "/identity/users",

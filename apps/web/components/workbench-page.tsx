@@ -16,9 +16,11 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { OperationsWorkspaceRouter } from "@/components/platform-operations/operations-workspace-router";
 import { DocumentsWorkspaceRouter } from "@/components/documents/documents-workspace-router";
 import { ReportingWorkspaceRouter } from "@/components/reporting/reporting-workspace-router";
+import { ProjectsWorkspaceRouter } from "@/components/projects/projects-workspace-router";
 import { SearchWorkspaceRouter } from "@/components/search/search-workspace-router";
 import { SupportWorkspaceRouter } from "@/components/support/support-workspace-router";
 import { TestingWorkspaceRouter } from "@/components/testing/testing-workspace-router";
+import { TimeWorkspaceRouter } from "@/components/time/time-workspace-router";
 import { WorkflowEngineWorkspaceRouter } from "@/components/workflow-engine/workflow-engine-workspace-router";
 import { WorkflowsWorkspaceRouter } from "@/components/workflows/workflows-workspace-router";
 import { NotificationsWorkspaceRouter } from "@/components/notifications/notifications-workspace-router";
@@ -41,8 +43,10 @@ import { isObserveRoute } from "@/lib/observe/routes";
 import { isMetricsRoute } from "@/lib/metrics/routes";
 import { isReportingRoute } from "@/lib/reporting/routes";
 import { isSearchRoute } from "@/lib/search/routes";
+import { isProjectsRoute } from "@/lib/projects/routes";
 import { isSupportRoute } from "@/lib/support/routes";
 import { isTestingRoute } from "@/lib/testing/routes";
+import { isTimeRoute } from "@/lib/time/routes";
 import { isWorkflowEngineRoute, isWorkflowsRoute } from "@/lib/workflows/routes";
 import { resolveCommandPaletteMode } from "@/lib/resolve-command-palette-mode";
 
@@ -107,12 +111,19 @@ export function WorkbenchPage() {
 
   useEffect(() => {
     activateViewForRoute(pathname);
+    // Deep-link fallback: activate the workspace root view when nested routes have no exact descriptor.
+    const segments = pathname.split("/").filter(Boolean);
+    if (segments[0] === "workspace" && segments[1] && segments.length > 2) {
+      activateViewForRoute(`/workspace/${segments[1]}`);
+    }
   }, [pathname, activateViewForRoute]);
 
   useEffect(() => {
-    if (activeView?.route && activeView.route !== pathname) {
-      router.push(activeView.route);
-    }
+    if (!activeView?.route) return;
+    if (pathname === activeView.route) return;
+    // Allow Workbench deep links under the active view route (e.g. /workspace/projects/{id}).
+    if (pathname.startsWith(`${activeView.route}/`)) return;
+    router.push(activeView.route);
   }, [activeView?.route, pathname, router]);
 
   async function handleSignOut() {
@@ -127,6 +138,8 @@ export function WorkbenchPage() {
   const operationsSection = isPlatformOperationsRoute(pathname)
     ? resolvePlatformOperationsSection(pathname)
     : null;
+  const projectsActive = isProjectsRoute(pathname);
+  const timeActive = isTimeRoute(pathname);
   const supportActive = isSupportRoute(pathname);
   const testingActive = isTestingRoute(pathname);
   const reportingActive = isReportingRoute(pathname);
@@ -166,6 +179,10 @@ export function WorkbenchPage() {
     >
       {operationsSection ? (
         <OperationsWorkspaceRouter section={operationsSection} />
+      ) : projectsActive ? (
+        <ProjectsWorkspaceRouter />
+      ) : timeActive ? (
+        <TimeWorkspaceRouter />
       ) : supportActive ? (
         <SupportWorkspaceRouter />
       ) : testingActive ? (

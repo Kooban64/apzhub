@@ -1,0 +1,36 @@
+/** Time platform permission catalogue (APZHUB-PLATFORM-TIME-001). */
+
+export const PLATFORM_TIME_PERMISSIONS = [
+  "time.view",
+  "time.manage",
+  "time.admin",
+  "time.timesheet.list",
+  "time.timesheet.read",
+  "time.timesheet.create",
+  "time.timesheet.update",
+  "time.timesheet.manage",
+  "time.activity.list",
+  "time.activity.read",
+  "time.activity.create",
+  "time.activity.update",
+  "time.activity.manage",
+  "time.customer.list",
+  "time.customer.read",
+  "time.customer.create",
+  "time.customer.update",
+  "time.customer.manage",
+  "time.project.list",
+  "time.project.read",
+  "time.project.create",
+  "time.project.update",
+  "time.project.manage",
+  "time.tag.list",
+  "time.tag.read",
+  "time.tag.create",
+  "time.tag.update",
+  "time.tag.manage",
+  "time.reporting.read",
+  "time.reporting.manage",
+] as const;
+
+export type PlatformTimePermission = (typeof PLATFORM_TIME_PERMISSIONS)[number];

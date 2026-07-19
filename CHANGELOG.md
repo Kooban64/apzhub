@@ -4,6 +4,53 @@ All notable changes to APZHUB are documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Changed
+
+- (none pending Owner direction)
+
+## [APZ Time 1.0.0] — 2026-07-19 — ACCEPTED / CLOSED
+
+Current Production Release for APZ Time (Phase 1 Workbench). Evidence: [docs/releases/time/1.0.0/](./docs/releases/time/1.0.0/README.md).
+
+### Added
+
+- Time Workbench module manifest (`services/time/manifests/time/module.yaml`)
+- Typed Time client `apps/web/lib/time` (Platform HTTP `/api/v1/time/*` only)
+- Workbench views: overview, timesheets, activities, customers, tags, search, health, diagnostics
+- Session defaults for last timesheet / customer
+- Playwright certification `apzhub-time-1.0-*.spec.ts`
+- Release docs under `docs/releases/time/`
+
+### Compatibility
+
+- `@apzhub/integration-kimai` **0.2.0** unchanged · Integration SDK **1.0.0** unchanged · Time services **0.26.1** / HTTP **1.10.0** unchanged
+
+## [APZ Projects 1.1.0] — 2026-07-19 — ACCEPTED / CLOSED
+
+Current Production Release for APZ Projects. Evidence: [docs/releases/projects/1.1.0/](./docs/releases/projects/1.1.0/README.md).
+
+### Added
+
+- Workbench task status transition and priority update via existing `/api/v1/tasks` HTTP
+- Workbench task assignee set/clear via existing assignees HTTP
+- Project edit and archive UI on project detail
+- My Work defaults: session user assignee + last project (`sessionStorage`)
+- Roadmap / Sprint honesty labels; Search empty-state guidance + health links
+- Typed Projects client methods for task get/update/transition/assign
+- Playwright certification `apzhub-projects-1.1-ui-certification.spec.ts`
+- Release docs under `docs/releases/projects/` (notes, compatibility, quality evidence)
+
+### Changed
+
+- APZ Projects product version **1.1.0** established as Production baseline (extends Phase 1 Workbench)
+- [KNOWN-LIMITATIONS](./docs/products/projects/KNOWN-LIMITATIONS.md) updated for 1.1 residual gaps
+
+### Compatibility
+
+- `@apzhub/integration-plane` **0.6.0** unchanged · Integration SDK **1.0.0** unchanged · no Platform Services redesign
+
 ## [0.3.0-workbench-framework] — Milestone 3 Complete
 
 See [Milestone 3 review](./docs/reviews/MILESTONE-003-workbench-framework-review.md) and [release notes](./docs/releases/v0.3.0-workbench-framework.md).

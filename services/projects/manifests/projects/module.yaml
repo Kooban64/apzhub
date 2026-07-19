@@ -26,8 +26,8 @@ compatibility:
 
 module:
   category: productivity
-  status: disabled
-  description: Projects capability module (manifest-first — UI implementation OSS-101-05+).
+  status: enabled
+  description: Projects capability module (APZHUB-PROJECTS-001 Workbench Phase 1).
 
 permissions:
   - id: projects.view
@@ -87,6 +87,16 @@ navigation:
       label: Roadmap
       route: /workspace/projects/roadmap
       icon: map
+      permission: projects.view
+    - id: projects.search
+      label: Search
+      route: /workspace/projects/search
+      icon: search
+      permission: projects.view
+    - id: projects.health
+      label: Health
+      route: /workspace/projects/health
+      icon: activity
       permission: projects.view
 
 commands:
@@ -149,94 +159,94 @@ workbench:
   actions:
     - id: project.open
       label: Open Project
-      handler: service:project-service:placeholder.open
+      handler: service:project-service:workbench.open
       permission: projects.view
       palette: true
       group: Projects
       icon: folder
       order: 10
-      description: Open a project in the Projects workspace (placeholder — OSS-101-05+).
+      description: Open a project in the Projects workspace (APZHUB-PROJECTS-001).
     - id: project.create
       label: Create Project
-      handler: service:project-service:placeholder.create
+      handler: service:project-service:workbench.create
       permission: projects.manage
       palette: true
       group: Projects
       icon: plus
       order: 20
-      description: Create a new project (placeholder).
+      description: Create a new project (APZHUB-PROJECTS-001).
     - id: project.update
       label: Update Project
-      handler: service:project-service:placeholder.update
+      handler: service:project-service:workbench.update
       permission: projects.manage
       palette: true
       group: Projects
       icon: pencil
       order: 30
-      description: Update project settings (placeholder).
+      description: Update project settings (APZHUB-PROJECTS-001).
     - id: task.open
       label: Open Task
-      handler: service:project-service:placeholder.task.open
+      handler: service:project-service:workbench.task.open
       permission: projects.task.view
       palette: true
       group: Projects
       icon: check-square
       order: 40
-      description: Open a task (placeholder).
+      description: Open a task (APZHUB-PROJECTS-001).
     - id: task.create
       label: Create Task
-      handler: service:project-service:placeholder.task.create
+      handler: service:project-service:workbench.task.create
       permission: projects.task.manage
       palette: true
       group: Projects
       icon: plus-square
       order: 50
-      description: Create a task (placeholder).
+      description: Create a task (APZHUB-PROJECTS-001).
     - id: task.update
       label: Update Task
-      handler: service:project-service:placeholder.task.update
+      handler: service:project-service:workbench.task.update
       permission: projects.task.manage
       palette: true
       group: Projects
       icon: pencil-line
       order: 60
-      description: Update a task (placeholder).
+      description: Update a task (APZHUB-PROJECTS-001).
     - id: task.assign
       label: Assign Task
-      handler: service:project-service:placeholder.task.assign
+      handler: service:project-service:workbench.task.assign
       permission: projects.task.manage
       palette: true
       group: Projects
       icon: user-plus
       order: 70
-      description: Assign a task (placeholder).
+      description: Assign a task (APZHUB-PROJECTS-001).
     - id: sprint.open
       label: Open Sprint
-      handler: service:project-service:placeholder.sprint.open
+      handler: service:project-service:workbench.sprint.open
       permission: projects.sprint.view
       palette: true
       group: Projects
       icon: calendar
       order: 80
-      description: Open sprint view (placeholder).
+      description: Open sprint view (APZHUB-PROJECTS-001).
     - id: sprint.create
       label: Create Sprint
-      handler: service:project-service:placeholder.sprint.create
+      handler: service:project-service:workbench.sprint.create
       permission: projects.sprint.manage
       palette: true
       group: Projects
       icon: calendar-plus
       order: 90
-      description: Create a sprint (placeholder).
+      description: Create a sprint (APZHUB-PROJECTS-001).
     - id: sprint.complete
       label: Complete Sprint
-      handler: service:project-service:placeholder.sprint.complete
+      handler: service:project-service:workbench.sprint.complete
       permission: projects.sprint.manage
       palette: true
       group: Projects
       icon: calendar-check
       order: 100
-      description: Complete active sprint (placeholder).
+      description: Complete active sprint (APZHUB-PROJECTS-001).
 
 documentation:
   plannedRouteProjectDetail: "/workspace/projects/{projectId}"
@@ -244,4 +254,4 @@ documentation:
 
 tests:
   manifest: true
-  e2e: planned
+  e2e: true

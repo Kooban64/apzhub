@@ -34,6 +34,8 @@ import {
   isObserveServiceEnabled,
   createMetricsPlatformServicesForProduction,
   isMetricsServiceEnabled,
+  createTimePlatformServicesForTest,
+  createTimePlatformServicesWithKimai,
 } from "@apzhub/platform-services";
 import type {
   TestingPlatformServicesBundle,
@@ -49,6 +51,7 @@ import type {
   IdentityPlatformServicesBundle,
   ObservePlatformServicesBundle,
   MetricsPlatformServicesBundle,
+  TimePlatformServicesBundle,
 } from "@apzhub/platform-services";
 import type { DocumentStorageConfig } from "@apzhub/document-core";
 
@@ -70,6 +73,9 @@ export interface PlatformApiGatewayBootstrap {
   readonly identityEnabled: boolean;
   readonly observeEnabled: boolean;
   readonly metricsEnabled: boolean;
+  /** APZHUB-TIME-HTTP-001 — Time Platform Services registered on gateway. */
+  readonly timeEnabled: boolean;
+  readonly timeReadiness?: TimePlatformServicesBundle["readiness"];
   readonly testingReadiness?: TestingReadinessIndicators;
   readonly documentsReadiness?: DocumentPlatformServicesBundle["readiness"];
   readonly searchReadiness?: SearchPlatformServicesBundle["readiness"];
@@ -106,6 +112,84 @@ function isPlaneEnabled(): boolean {
 
 function isZammadEnabled(): boolean {
   return process.env.ZAMMAD_INTEGRATION_ENABLED === "true";
+}
+
+/** Platform Time HTTP / services enablement (APZHUB-TIME-HTTP-001). */
+function isTimeServiceEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+  const value = env.APZHUB_TIME_ENABLED?.trim().toLowerCase();
+  if (value === "0" || value === "false" || value === "off") return false;
+  return value === "1" || value === "true" || value === "on";
+}
+
+function isKimaiIntegrationEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+  const value = env.KIMAI_INTEGRATION_ENABLED?.trim().toLowerCase();
+  if (value === "0" || value === "false" || value === "off") return false;
+  return value === "1" || value === "true" || value === "on";
+}
+
+async function createTimeServicesBundle(): Promise<TimePlatformServicesBundle> {
+  const domainMode = process.env.APZHUB_TIME_DOMAIN_MODE?.trim().toLowerCase();
+  const allowInMemory =
+    domainMode === "in_memory" && process.env.NODE_ENV !== "production";
+
+  if (isKimaiIntegrationEnabled()) {
+    const { createKimaiAdapter } = await import("@apzhub/integration-kimai");
+    const tenantId = process.env.KIMAI_BOOTSTRAP_TENANT_ID ?? "platform";
+    const baseUrl = process.env.KIMAI_BASE_URL ?? "http://localhost:8001";
+    const apiBaseUrl =
+      process.env.KIMAI_API_BASE_URL ?? `${baseUrl.replace(/\/$/, "")}/api`;
+    const result = await createKimaiAdapter({
+      tenantId,
+      kimai: {
+        baseUrl,
+        apiBaseUrl,
+        authMode: "bearer",
+        apiTokenRef: "kimai/api-token",
+      },
+      apiToken: process.env.KIMAI_API_TOKEN,
+      autoInitialise: false,
+    });
+    return createTimePlatformServicesWithKimai(result.adapter);
+  }
+
+  if (allowInMemory) {
+    return createTimePlatformServicesForTest({
+      ops: {
+        getFoundationCapabilities: async () => ({
+          adapterId: "in-memory",
+          adapterVersion: "0.0.0",
+          domainCrudAvailable: true,
+          operations: ["health", "diagnostics", "domain"],
+        }),
+        testConnection: async () => ({ ok: true, message: "in-memory" }),
+        getHealth: async () => ({
+          status: "healthy",
+          checks: [{ name: "in-memory", status: "pass" }],
+          observedAt: new Date().toISOString(),
+        }),
+        getDiagnostics: async () => ({
+          healthStatus: "healthy",
+          warnings: ["APZHUB_TIME_DOMAIN_MODE=in_memory (non-production)"],
+          recommendations: [],
+          foundationOnly: true,
+        }),
+        getCompatibility: async () => ({
+          compatibilityStatus: "compatible",
+          edition: "community",
+        }),
+        getReadiness: async () => ({
+          ready: true,
+          classification: "ready",
+          blockingFailures: [],
+          warnings: ["in-memory domain mode"],
+        }),
+      },
+    });
+  }
+
+  throw new Error(
+    "APZHUB_TIME_ENABLED=true requires KIMAI_INTEGRATION_ENABLED=true (or APZHUB_TIME_DOMAIN_MODE=in_memory in non-production)",
+  );
 }
 
 /** Optional Workflow Engine adapter enablement (APZWORKFLOW-008). */
@@ -395,6 +479,7 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
   const identityEnabled = isIdentityServiceEnabled(process.env);
   const observeEnabled = isObserveServiceEnabled(process.env);
   const metricsEnabled = isMetricsServiceEnabled(process.env);
+  const timeEnabled = isTimeServiceEnabled(process.env);
   let providersRegistered = false;
 
   // Mapping store from env (postgres in production by default).
@@ -481,6 +566,7 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
   const identity = identityEnabled ? createIdentityServicesBundle() : undefined;
   const observe = observeEnabled ? createObserveServicesBundle() : undefined;
   const metrics = metricsEnabled ? createMetricsServicesBundle() : undefined;
+  const time = timeEnabled ? await createTimeServicesBundle() : undefined;
 
   const bundle = createPlatformServices({
     registry,
@@ -499,6 +585,7 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
     identity,
     observe,
     metricsPlatform: metrics,
+    time,
   });
 
   return {
@@ -519,6 +606,8 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
     identityEnabled,
     observeEnabled,
     metricsEnabled,
+    timeEnabled,
+    timeReadiness: time?.readiness,
     testingReadiness: testing?.readiness,
     documentsReadiness: documents?.readiness,
     searchReadiness: searchPlatform?.readiness,
@@ -557,6 +646,8 @@ export function createTestPlatformApiGatewayBootstrap(
     identityEnabled: overrides.identityEnabled ?? false,
     observeEnabled: overrides.observeEnabled ?? false,
     metricsEnabled: overrides.metricsEnabled ?? false,
+    timeEnabled: overrides.timeEnabled ?? false,
+    timeReadiness: overrides.timeReadiness,
     testingReadiness: overrides.testingReadiness,
     documentsReadiness: overrides.documentsReadiness,
     searchReadiness: overrides.searchReadiness,

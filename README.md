@@ -4,6 +4,20 @@ Working name for a unified internal productivity platform — one desktop-style 
 
 ## Current phase
 
+**Operational Delivery** — Engineering Foundation **COMPLETE**.
+
+| Pillar                      | Status                                                                                                     |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Engineering Operating Model | **ACTIVE** — [docs/operations/](./docs/operations/README.md) (APZHUB-OPERATIONS-001 **ACCEPTED / CLOSED**) |
+| Releases                    | [docs/releases/](./docs/releases/README.md) — Product / Platform roadmaps                                  |
+| Repository quality          | **PRODUCTION READY** (QA-002)                                                                              |
+| Product Engineering         | **ACTIVE** — APZ Projects **1.1.0** current Production Release (**ACCEPTED / CLOSED**)                     |
+| Platform Foundation         | **CLOSED**                                                                                                 |
+
+Future delivery: Product Releases · Platform Releases · ADRs · routine engineering — not repository-wide governance programmes.
+
+AI / status entry: [docs/foundation/AI-MANIFEST.md](./docs/foundation/AI-MANIFEST.md) · [CURRENT-MILESTONE](./docs/foundation/CURRENT-MILESTONE.md).
+
 Foundation documentation (**000**, **001–029**) is complete.
 
 **BUILD-001**, **SPR-001** through **SPR-007** are **complete** — formally reviewed and accepted for release.
@@ -64,6 +78,9 @@ See [docs/developer/getting-started.md](./docs/developer/getting-started.md).
 
 | Resource                                                                                                                                                                                   | Description                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
+| [docs/operations/README.md](./docs/operations/README.md)                                                                                                                                   | **Engineering Operating Model** (ACTIVE)                       |
+| [docs/releases/README.md](./docs/releases/README.md)                                                                                                                                       | Product / Platform release roadmaps                            |
+| [docs/foundation/AI-MANIFEST.md](./docs/foundation/AI-MANIFEST.md)                                                                                                                         | AI / engineering bootstrap entry                               |
 | [docs/README.md](./docs/README.md)                                                                                                                                                         | Document registry and conventions                              |
 | [docs/000-apzhub-engineering-constitution.md](./docs/000-apzhub-engineering-constitution.md)                                                                                               | Engineering Constitution (supreme authority)                   |
 | [docs/build/BUILD-001-repository-bootstrap-guide.md](./docs/build/BUILD-001-repository-bootstrap-guide.md)                                                                                 | BUILD-001 — repo bootstrap (before SPR-001)                    |

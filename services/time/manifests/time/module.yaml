@@ -1,0 +1,225 @@
+manifestSchemaVersion: "1.0"
+id: time
+name: Time
+version: 1.0.0
+kind: module
+
+metadata:
+  category: productivity
+  description: APZHUB Time workbench — timesheets, activities, customers, tags (Release 1.0.0 Phase 1).
+  owner: APZHUB
+  icon: clock
+  tags:
+    - time
+    - timesheets
+    - activities
+    - customers
+    - tags
+
+dependencies:
+  platform: []
+  services:
+    - time-tracking-service
+
+compatibility:
+  platformVersion: ">=0.1.0"
+
+module:
+  category: productivity
+  status: enabled
+  description: Time capability module (APZ Time Release 1.0.0 Phase 1 Workbench).
+
+permissions:
+  - id: time.view
+    description: View Time workspace and timesheet list.
+  - id: time.manage
+    description: Create and update timesheets and related records.
+  - id: time.admin
+    description: Administer Time workspace settings.
+  - id: time.timesheet.list
+    description: List timesheets.
+  - id: time.timesheet.read
+    description: Read timesheet detail.
+  - id: time.timesheet.create
+    description: Create timesheets.
+  - id: time.timesheet.update
+    description: Update timesheets.
+  - id: time.timesheet.manage
+    description: Manage timesheets including stop and archive.
+  - id: time.activity.list
+    description: List activities.
+  - id: time.activity.read
+    description: Read activities.
+  - id: time.activity.create
+    description: Create activities.
+  - id: time.activity.update
+    description: Update activities.
+  - id: time.activity.manage
+    description: Manage activities.
+  - id: time.customer.list
+    description: List customers.
+  - id: time.customer.read
+    description: Read customers.
+  - id: time.customer.create
+    description: Create customers.
+  - id: time.customer.update
+    description: Update customers.
+  - id: time.customer.manage
+    description: Manage customers.
+  - id: time.project.list
+    description: List time-domain projects.
+  - id: time.project.read
+    description: Read time-domain projects.
+  - id: time.tag.list
+    description: List tags.
+  - id: time.tag.read
+    description: Read tags.
+  - id: time.tag.create
+    description: Create tags.
+  - id: time.tag.update
+    description: Update tags.
+  - id: time.tag.manage
+    description: Manage tags.
+
+navigation:
+  activityBar:
+    enabled: true
+    label: Time
+    icon: clock
+    order: 25
+    permission: time.view
+  sidebar:
+    - id: time.dashboard
+      label: Overview
+      route: /workspace/time
+      icon: layout-dashboard
+      permission: time.view
+    - id: time.timesheets
+      label: Timesheets
+      route: /workspace/time/timesheets
+      icon: clock
+      permission: time.timesheet.list
+    - id: time.activities
+      label: Activities
+      route: /workspace/time/activities
+      icon: list-checks
+      permission: time.activity.list
+    - id: time.customers
+      label: Customers
+      route: /workspace/time/customers
+      icon: building-2
+      permission: time.customer.list
+    - id: time.tags
+      label: Tags
+      route: /workspace/time/tags
+      icon: tags
+      permission: time.tag.list
+    - id: time.search
+      label: Search
+      route: /workspace/time/search
+      icon: search
+      permission: time.view
+    - id: time.health
+      label: Health
+      route: /workspace/time/health
+      icon: activity
+      permission: time.view
+    - id: time.diagnostics
+      label: Diagnostics
+      route: /workspace/time/diagnostics
+      icon: stethoscope
+      permission: time.view
+
+commands:
+  - id: time.timesheet.open
+    label: Open Timesheet
+    category: Time
+    permission: time.timesheet.read
+  - id: time.timesheet.create
+    label: Create Timesheet
+    category: Time
+    permission: time.timesheet.create
+  - id: time.activity.open
+    label: Open Activity
+    category: Time
+    permission: time.activity.read
+  - id: time.customer.open
+    label: Open Customer
+    category: Time
+    permission: time.customer.read
+  - id: time.tag.open
+    label: Open Tag
+    category: Time
+    permission: time.tag.read
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: time
+    label: Time
+    icon: clock
+    route: /workspace/time
+    order: 25
+    permission: time.view
+  view:
+    title: Time
+    workspace: time
+    route: /workspace/time
+    default: true
+    permission: time.view
+  actions:
+    - id: time.timesheet.open
+      label: Open Timesheet
+      handler: service:time-tracking-service:workbench.timesheet.open
+      permission: time.timesheet.read
+      palette: true
+      group: Time
+      icon: clock
+      order: 10
+      description: Open a timesheet in the Time workspace (APZ Time 1.0.0).
+    - id: time.timesheet.create
+      label: Create Timesheet
+      handler: service:time-tracking-service:workbench.timesheet.create
+      permission: time.timesheet.create
+      palette: true
+      group: Time
+      icon: plus
+      order: 20
+      description: Create a new timesheet (APZ Time 1.0.0).
+    - id: time.activity.open
+      label: Open Activity
+      handler: service:time-tracking-service:workbench.activity.open
+      permission: time.activity.read
+      palette: true
+      group: Time
+      icon: list-checks
+      order: 30
+      description: Open an activity (APZ Time 1.0.0).
+    - id: time.customer.open
+      label: Open Customer
+      handler: service:time-tracking-service:workbench.customer.open
+      permission: time.customer.read
+      palette: true
+      group: Time
+      icon: building-2
+      order: 40
+      description: Open a customer (APZ Time 1.0.0).
+    - id: time.tag.open
+      label: Open Tag
+      handler: service:time-tracking-service:workbench.tag.open
+      permission: time.tag.read
+      palette: true
+      group: Time
+      icon: tags
+      order: 50
+      description: Open a tag (APZ Time 1.0.0).
+
+documentation:
+  plannedRouteTimesheetDetail: "/workspace/time/timesheets/{timesheetId}"
+  engineBranding: hidden
+  release: "1.0.0"
+  programme: APZ-TIME-1.0.0-PHASE-1
+
+tests:
+  manifest: true
+  e2e: true

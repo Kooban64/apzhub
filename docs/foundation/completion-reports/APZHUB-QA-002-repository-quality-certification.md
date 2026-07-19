@@ -3,7 +3,7 @@
 > **Programme:** APZHUB-QA-002  
 > **Date:** 2026-07-18  
 > **Authority:** Post-remediation gate evidence vs [APZHUB-QA-001](./APZHUB-QA-001-repository-production-quality-report.md)  
-> **Status:** Certification issued — awaiting Owner Acceptance
+> **Status:** **ACCEPTED** by Owner — 2026-07-18
 
 ---
 
@@ -11,7 +11,7 @@
 
 # PRODUCTION READY
 
-Major remediation is **not** applicable after QA-002. Soft residual items (documented known limitations, optional full-suite re-run) do not reopen Critical/High quality-gate failures.
+**Owner-accepted.** Repository-wide engineering quality is established. Future programmes inherit this standard. Repository-wide QA programmes are **CLOSED**; quality verification is part of every future programme.
 
 ---
 

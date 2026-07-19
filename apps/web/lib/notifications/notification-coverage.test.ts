@@ -328,7 +328,7 @@ describe("APZNOTIFY-003 notification client coverage", () => {
           status: "ok",
           healthy: true,
           ready: true,
-          platformServicesVersion: "0.25.0",
+          platformServicesVersion: "0.26.1",
         });
       }
       if (
@@ -395,7 +395,7 @@ describe("APZNOTIFY-003 notification client coverage", () => {
     expect((await client.getCapabilities()).deliveryEnabled).toBe(false);
     expect((await client.getHealth()).healthy).toBe(true);
     expect((await client.getReadiness()).ready).toBe(true);
-    expect((await client.getDiagnostics()).platformServicesVersion).toBe("0.25.0");
+    expect((await client.getDiagnostics()).platformServicesVersion).toBe("0.26.1");
   });
 
   it("covers mock parity and facade accessors", async () => {
@@ -437,7 +437,7 @@ describe("APZNOTIFY-003 notification client coverage", () => {
     expect((await getNotificationCapabilities()).deliveryPlaneReady).toBe(false);
     expect((await getNotificationHealth()).healthy).toBe(true);
     expect((await getNotificationReadiness()).ready).toBe(true);
-    expect((await getNotificationDiagnostics()).platformServicesVersion).toBe("0.25.0");
+    expect((await getNotificationDiagnostics()).platformServicesVersion).toBe("0.26.1");
 
     expect(notificationQueryKeys.list({ status: "pending" })[0]).toBe("notifications");
     expect(notificationQueryKeys.templates.detail("t")[3]).toBe("t");

@@ -68,8 +68,8 @@ describe("OSS-110-12 Cert A — Package versions", () => {
     expect(ZAMMAD_ADAPTER_VERSION).toBe("0.6.0");
   });
 
-  it("PLATFORM_SERVICES_VERSION is 0.25.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
+  it("PLATFORM_SERVICES_VERSION is 0.26.1", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.26.1");
   });
 });
 

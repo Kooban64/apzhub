@@ -41,6 +41,13 @@ export type AuthorizationResourceType =
   | "platform_governance"
   | "platform_dashboard"
   | "platform_traceability"
+  | "time_tracking"
+  | "time_activity"
+  | "time_customer"
+  | "time_project"
+  | "timesheet"
+  | "time_tag"
+  | "time_reporting"
   | "document"
   | "document_version"
   | "document_storage"
@@ -6574,6 +6581,121 @@ const observePlatformOps: OperationAuthorizationMapping[] = [
   ),
 ];
 
+const timePlatformOps: OperationAuthorizationMapping[] = [
+  testingOp(
+    "timeTracking",
+    "getFoundationCapabilities",
+    "time_tracking",
+    "read",
+    "time.view",
+  ),
+  testingOp(
+    "timeTracking",
+    "testConnection",
+    "time_tracking",
+    "execute",
+    "time.manage",
+  ),
+  testingOp("timeTracking", "getHealth", "time_tracking", "read", "time.view"),
+  testingOp("timeTracking", "getDiagnostics", "time_tracking", "read", "time.view"),
+  testingOp("timeTracking", "getCompatibility", "time_tracking", "read", "time.view"),
+  testingOp("timeTracking", "getReadiness", "time_tracking", "read", "time.view"),
+  testingOp("timeActivity", "list", "time_activity", "list", "time.activity.list"),
+  testingOp("timeActivity", "get", "time_activity", "read", "time.activity.read", 0),
+  testingOp(
+    "timeActivity",
+    "create",
+    "time_activity",
+    "create",
+    "time.activity.create",
+  ),
+  testingOp(
+    "timeActivity",
+    "update",
+    "time_activity",
+    "update",
+    "time.activity.update",
+    0,
+  ),
+  testingOp(
+    "timeActivity",
+    "archive",
+    "time_activity",
+    "archive",
+    "time.activity.manage",
+    0,
+  ),
+  testingOp("timeCustomer", "list", "time_customer", "list", "time.customer.list"),
+  testingOp("timeCustomer", "get", "time_customer", "read", "time.customer.read", 0),
+  testingOp(
+    "timeCustomer",
+    "create",
+    "time_customer",
+    "create",
+    "time.customer.create",
+  ),
+  testingOp(
+    "timeCustomer",
+    "update",
+    "time_customer",
+    "update",
+    "time.customer.update",
+    0,
+  ),
+  testingOp(
+    "timeCustomer",
+    "archive",
+    "time_customer",
+    "archive",
+    "time.customer.manage",
+    0,
+  ),
+  testingOp("timeProject", "list", "time_project", "list", "time.project.list"),
+  testingOp("timeProject", "get", "time_project", "read", "time.project.read", 0),
+  testingOp("timeProject", "create", "time_project", "create", "time.project.create"),
+  testingOp(
+    "timeProject",
+    "update",
+    "time_project",
+    "update",
+    "time.project.update",
+    0,
+  ),
+  testingOp(
+    "timeProject",
+    "archive",
+    "time_project",
+    "archive",
+    "time.project.manage",
+    0,
+  ),
+  testingOp("timesheet", "list", "timesheet", "list", "time.timesheet.list"),
+  testingOp("timesheet", "get", "timesheet", "read", "time.timesheet.read", 0),
+  testingOp("timesheet", "create", "timesheet", "create", "time.timesheet.create"),
+  testingOp("timesheet", "update", "timesheet", "update", "time.timesheet.update", 0),
+  testingOp("timesheet", "stop", "timesheet", "update", "time.timesheet.update", 0),
+  testingOp("timesheet", "archive", "timesheet", "archive", "time.timesheet.manage", 0),
+  testingOp("timeTag", "list", "time_tag", "list", "time.tag.list"),
+  testingOp("timeTag", "get", "time_tag", "read", "time.tag.read", 0),
+  testingOp("timeTag", "create", "time_tag", "create", "time.tag.create"),
+  testingOp("timeTag", "update", "time_tag", "update", "time.tag.update", 0),
+  testingOp("timeTag", "archive", "time_tag", "archive", "time.tag.manage", 0),
+  testingOp(
+    "timeReporting",
+    "getReportingCapabilities",
+    "time_reporting",
+    "read",
+    "time.reporting.read",
+  ),
+  testingOp(
+    "timeReporting",
+    "getReportingHealth",
+    "time_reporting",
+    "read",
+    "time.reporting.read",
+  ),
+];
+
 export const OPERATION_AUTHORIZATION_MAPPINGS: readonly OperationAuthorizationMapping[] =
   [
     ...workspaceOps,
@@ -6631,6 +6753,7 @@ export const OPERATION_AUTHORIZATION_MAPPINGS: readonly OperationAuthorizationMa
     ...identityPlatformOps,
     ...observePlatformOps,
     ...metricsPlatformOps,
+    ...timePlatformOps,
   ];
 
 const mappingIndex = new Map<string, OperationAuthorizationMapping>(

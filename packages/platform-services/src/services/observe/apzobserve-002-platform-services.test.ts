@@ -40,8 +40,8 @@ function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext 
 }
 
 describe("APZOBSERVE-002 observe platform services", () => {
-  it("exports platform services version 0.25.0", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.25.0");
+  it("exports platform services version 0.26.1", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.26.1");
   });
 
   it("registers observe permissions in the platform catalogue", () => {

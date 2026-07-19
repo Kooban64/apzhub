@@ -2,7 +2,33 @@
 
 This directory is the canonical source for APZHUB product and architecture documentation.
 
-**Status:** Foundation documentation complete (000, 001–029). **PCv2-02 COMPLETE** — Outbox Workers (`@apzhub/platform-outbox` **0.1.0**). **APZHUB-KF-002 COMPLETE** — AI Bootstrap Manifest ([AI-MANIFEST](./foundation/AI-MANIFEST.md)). **APZHUB-KF-001 COMPLETE**. **Wave 1 COMPLETE.** **Wave 2 CLOSED.** **Support vertical CERTIFIED_WITH_LIMITATIONS** (OSS-110-12). **Support Module UI PRODUCTION_READY_WITH_LIMITATIONS** (OSS-110-14). **APZREPORT-003 COMPLETE** (Reporting **PRODUCTION_READY_WITH_LIMITATIONS**). **APZDOCS-006 COMPLETE** (Document **PRODUCTION_READY_WITH_LIMITATIONS**). **APZSEARCH-008 COMPLETE** (Search Vertical **Architecture Frozen**). **APZSEARCH-009–019 COMPLETE** — Search Publication programme **closed / Architecture Frozen**. **OSS-100-11 COMPLETE** — `@apzhub/integration-sdk` **1.0.0** · **Architecture Frozen** (`pnpm certify:integration-sdk`; **PRODUCTION_READY_WITH_LIMITATIONS** retained). **APZWORKFLOW-011 COMPLETE** (Engine wave frozen). **APZNOTIFY-006** / **APZCONFIG-006** / **APZADMIN-006** / **APZIDENTITY-006** / **APZOBSERVE-006** / **APZMETRICS-006** programmes **closed/frozen**. Stop; await owner approval for next programme (see `docs/foundation/CURRENT-MILESTONE.md`).
+**Status:** **Operational Delivery**. QA-002 **PRODUCTION READY**. Production: [Projects 1.1.0](./releases/projects/1.1.0/README.md) · [Time 1.0.0](./releases/time/1.0.0/README.md). [Support 2.0 planning](./releases/support/APZ-SUPPORT-2.0-READINESS-ASSESSMENT.md) **Awaiting Acceptance** (Support already Production). Integration SDK **1.0.0** frozen. See [CURRENT-MILESTONE](./foundation/CURRENT-MILESTONE.md).
+
+## Engineering Operations (APZHUB-OPERATIONS-001)
+
+| Document                                                                                                                 | Description                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| [Operations index](./operations/README.md)                                                                               | **Engineering Operating Model** — **ACTIVE** |
+| [ENGINEERING-OPERATING-MODEL](./operations/ENGINEERING-OPERATING-MODEL.md)                                               | Governance & ownership handbook              |
+| [AI-ENGINEERING-OPERATIONS](./operations/AI-ENGINEERING-OPERATIONS.md)                                                   | AI agent operating rules                     |
+| [DEFINITION-OF-READY](./operations/DEFINITION-OF-READY.md) / [DEFINITION-OF-DONE](./operations/DEFINITION-OF-DONE.md)    | Ready / Done gates                           |
+| [APZHUB-OPERATIONS-001 Acceptance](./foundation/completion-reports/APZHUB-OPERATIONS-001-programme-acceptance-report.md) | **ACCEPTED / CLOSED**                        |
+
+## Releases (Operational Delivery)
+
+| Document                                                                                                              | Description                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [Releases index](./releases/README.md)                                                                                | Product / Platform release home                                                       |
+| [PRODUCT-RELEASE-ROADMAP](./releases/PRODUCT-RELEASE-ROADMAP.md)                                                      | Per-product release posture                                                           |
+| [PLATFORM-RELEASE-ROADMAP](./releases/PLATFORM-RELEASE-ROADMAP.md)                                                    | Platform versioning & cadence                                                         |
+| [RELEASE-CALENDAR](./releases/RELEASE-CALENDAR.md) / [RELEASE-NAMING-STANDARD](./releases/RELEASE-NAMING-STANDARD.md) | Workflow · naming                                                                     |
+| [APZ Projects 1.1.0](./releases/projects/1.1.0/README.md)                                                             | Current Production Release — **ACCEPTED / CLOSED**                                    |
+| [APZ Time 1.0.0](./releases/time/1.0.0/README.md)                                                                     | Phase 1 Workbench — **ACCEPTED / CLOSED** · current Time Production                   |
+| [APZ Support 2.0 planning](./releases/support/APZ-SUPPORT-2.0-READINESS-ASSESSMENT.md)                                | Planning — **Awaiting Acceptance** · IR promotion N/A                                 |
+| [APZ Support releases](./releases/support/README.md)                                                                  | Support product releases / planning index                                             |
+| [Kimai Integration](./integrations/kimai/README.md)                                                                   | APZHUB-INTEGRATION-KIMAI-002 — **ACCEPTED / CLOSED** · **CERTIFIED_DOMAIN** **0.2.0** |
+| [Time Platform Services](./platform/time/README.md)                                                                   | APZHUB-PLATFORM-TIME-001 — **ACCEPTED / CLOSED**                                      |
+| [Time HTTP API](./http/time/README.md)                                                                                | APZHUB-TIME-HTTP-001 — **ACCEPTED / CLOSED** · OpenAPI **1.10.0**                     |
 
 ## Knowledge Foundation (APZHUB-000)
 

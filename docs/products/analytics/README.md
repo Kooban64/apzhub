@@ -1,11 +1,24 @@
-# Analytics (Product Portfolio)
+# APZ Analytics (Product Portfolio)
 
-> **Portfolio:** Analytics  
+> **Portfolio:** analytics  
 > **Framework:** [APZHUB-PRODUCTS-000](../README.md)  
-> **Status:** Placeholder — no product programme authorised
+> **Definition Pack:** APZHUB-PRODUCTS-002  
+> **Status:** Definition Pack complete — **no product implementation authorised**  
+> **Maturity:** **Concept**  
+> **Portfolio entry:** [APZHUB-PRODUCT-PORTFOLIO](../APZHUB-PRODUCT-PORTFOLIO.md)
 
-User-facing product name: **Analytics**.
+## Product Definition Pack
 
-Product documentation template (VISION, ROADMAP, ARCHITECTURE, etc.) will be populated when Owner approves an Analytics product programme. Do not invent implementation details here.
+| Document                                                     | Purpose              |
+| ------------------------------------------------------------ | -------------------- |
+| [VISION.md](./VISION.md)                                     | Vision & value       |
+| [ARCHITECTURE.md](./ARCHITECTURE.md)                         | How it is engineered |
+| [CAPABILITIES.md](./CAPABILITIES.md)                         | Capability inventory |
+| [INTEGRATIONS.md](./INTEGRATIONS.md)                         | Integrations         |
+| [ROADMAP.md](./ROADMAP.md)                                   | Roadmap (no IDs)     |
+| [BACKLOG.md](./BACKLOG.md)                                   | Backlog themes       |
+| [KNOWN-LIMITATIONS.md](./KNOWN-LIMITATIONS.md)               | Limitations          |
+| [RELEASE-PLAN.md](./RELEASE-PLAN.md)                         | Release posture      |
+| [IMPLEMENTATION-READINESS.md](./IMPLEMENTATION-READINESS.md) | Readiness assessment |
 
 See: [PRODUCT-ENGINEERING-HANDBOOK](../PRODUCT-ENGINEERING-HANDBOOK.md) · [CURRENT-MILESTONE](../../foundation/CURRENT-MILESTONE.md)

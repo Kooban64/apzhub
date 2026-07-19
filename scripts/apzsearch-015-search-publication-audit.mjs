@@ -294,7 +294,7 @@ const versionPins = [
     "version-integration-search-sdk",
   ],
   ["integrations/meilisearch/package.json", "0.1.0", "version-integration-meilisearch"],
-  ["packages/platform-services/package.json", "0.25.0", "version-platform-services"],
+  ["packages/platform-services/package.json", "0.26.1", "version-platform-services"],
 ];
 for (const [path, expected, rule] of versionPins) {
   requirePackageVersion(path, expected, rule);
@@ -501,7 +501,7 @@ Dependency graph (certified):
   Frozen platform stack:
     search-contracts 0.4.0 · search-persistence 0.2.0
     integration-search-sdk 0.1.0 · integration-meilisearch 0.1.0
-    platform-services 0.25.0
+    platform-services 0.26.1
 `.trim();
 
 if (violations.length > 0) {

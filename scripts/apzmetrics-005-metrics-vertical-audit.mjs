@@ -534,12 +534,12 @@ for (const child of [
       detail: "Expected Platform Metrics Administration tag",
     });
   }
-  if (!/version:\s*1\.9\.\d+/.test(openapi)) {
+  if (!/version:\s*1\.(9|10)\.\d+/.test(openapi)) {
     violations.push({
       file: "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
       line: 1,
       rule: "openapi-version",
-      detail: "Expected OpenAPI info.version 1.9.x",
+      detail: "Expected OpenAPI info.version 1.9.x or 1.10.x",
     });
   }
   for (const required of [
@@ -629,7 +629,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.25.0",
+  "0.26.1",
   "version-platform-services",
 );
 

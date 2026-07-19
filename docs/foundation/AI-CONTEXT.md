@@ -170,7 +170,7 @@ See [002 — Terminology](../002-product-naming-positioning-terminology-standard
 | **APZMETRICS-005 (Vertical Certification)**                                | **Complete** — `certify:metrics-vertical`; **PRODUCTION_READY_WITH_LIMITATIONS** retained                                                                                     |
 | **APZMETRICS-004 (Administration Workbench)**                              | **Complete** — `audit:metrics-workbench`; `/workspace/metrics`; `platform-metrics` order **55**                                                                               |
 | **APZMETRICS-003 (HTTP API & Typed Client)**                               | **Complete** — `audit:metrics-http-client`; OpenAPI **1.9.0**; `/api/v1/metrics/*`; `apps/web/lib/metrics`                                                                    |
-| **APZMETRICS-002 (Platform Services / Gateway / Authz)**                   | **Complete** — `audit:metrics-platform-services`; contracts/core **0.2.0**; platform-services **0.25.0**; `gateway.metrics.*`                                                 |
+| **APZMETRICS-002 (Platform Services / Gateway / Authz)**                   | **Complete** — `audit:metrics-platform-services`; contracts/core **0.2.0**; platform-services **0.26.1**; `gateway.metrics.*`                                                 |
 | **APZMETRICS-001 (Platform Metrics Foundation)**                           | **Complete** — `audit:metrics-foundation`; contracts/core/persistence **0.1.0→0.2.0/0.1.0**; migrations **0056/0057**                                                         |
 | **APZOBSERVE-006 (Observability Wave Freeze)**                             | **Complete** — programme **closed/frozen**; `audit:observe-wave`; Reference Standard                                                                                          |
 | **APZOBSERVE-005 (Observability Vertical Certification)**                  | **Complete** — **PRODUCTION_READY_WITH_LIMITATIONS**; `certify:observe-vertical`                                                                                              |
@@ -435,7 +435,7 @@ APZOBSERVE-006 (Observability Wave Certification & Architecture Freeze) → comp
     ↓
 APZMETRICS-001 (Platform Metrics Foundation) → complete — audit:metrics-foundation PASS; metrics packages foundation; migrations 0056/0057; metadata SoR only
     ↓
-APZMETRICS-002 (Platform Services, Gateway & Authorization) → complete — audit:metrics-platform-services PASS; gateway.metrics.*; contracts/core 0.2.0; platform-services 0.25.0; APZHUB_METRICS_ENABLED bootstrap
+APZMETRICS-002 (Platform Services, Gateway & Authorization) → complete — audit:metrics-platform-services PASS; gateway.metrics.*; contracts/core 0.2.0; platform-services 0.26.1; APZHUB_METRICS_ENABLED bootstrap
     ↓
 APZMETRICS-003 (Metrics HTTP API & Production Typed Client) → complete — audit:metrics-http-client PASS; /api/v1/metrics/*; apps/web/lib/metrics; OpenAPI 1.9.0; metadata transport only
     ↓

@@ -546,7 +546,9 @@ describe("APZWORKFLOW-003 workflow handlers", () => {
       info: { version: string };
       tags?: Array<{ name?: string }>;
     };
-    expect(["1.5.0", "1.6.0", "1.7.0", "1.8.0", "1.9.0"]).toContain(spec.info.version);
+    expect(["1.5.0", "1.6.0", "1.7.0", "1.8.0", "1.9.0", "1.10.0"]).toContain(
+      spec.info.version,
+    );
     expect(spec.tags?.some((tag) => tag.name === "Platform Workflow")).toBe(true);
     for (const path of [
       "/workflows",

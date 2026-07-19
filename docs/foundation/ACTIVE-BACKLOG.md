@@ -6,7 +6,7 @@
 > **Related documents:** [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [docs/backlog/](../backlog/)  
 > **Reading order:** When identifying approved work  
 > **Last updated:** 2026-07-18  
-> **Current status:** Active — **Phase 3 Product Engineering**; Platform Foundation **CLOSED**; OSS-100-12+ / PRH / Event Bus / Outbox **ACCEPTED / CLOSED**; Integration SDK **1.0.0** frozen; **no product programme authorised**
+> **Current status:** Active — **Phase 3 Product Engineering**; Platform Foundation **CLOSED**; QA-002 **ACCEPTED** (**PRODUCTION READY**); Product Portfolio [APZHUB-PRODUCTS-001](../products/APZHUB-PRODUCT-PORTFOLIO.md) (docs only); OSS-100-12+ / PRH / Event Bus / Outbox **ACCEPTED / CLOSED**; Integration SDK **1.0.0** frozen; **no product implementation authorised**
 
 ---
 

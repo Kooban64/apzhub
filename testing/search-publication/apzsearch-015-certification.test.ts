@@ -61,7 +61,7 @@ const CERTIFIED_VERSIONS: Record<string, string> = {
   "packages/search-persistence/package.json": "0.2.0",
   "packages/integration-search-sdk/package.json": "0.1.0",
   "integrations/meilisearch/package.json": "0.1.0",
-  "packages/platform-services/package.json": "0.25.0",
+  "packages/platform-services/package.json": "0.26.1",
 };
 
 const PUB_OPS = [

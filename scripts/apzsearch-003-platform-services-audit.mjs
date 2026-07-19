@@ -162,7 +162,7 @@ const platformPkg = JSON.parse(
 // Subsequent sanctioned bumps (APZSEARCH-006 → contracts 0.4.0 / platform-services 0.18.0)
 // remain compatible; vertical certification accepts the certified floor set.
 const allowedContracts = new Set(["0.3.0", "0.4.0"]);
-const allowedPlatform = new Set(["0.17.0", "0.18.0", "0.19.0", "0.25.0"]);
+const allowedPlatform = new Set(["0.17.0", "0.18.0", "0.19.0", "0.25.0", "0.26.1"]);
 if (!allowedContracts.has(contractsPkg.version)) {
   violations.push({
     file: "packages/search-contracts/package.json",
@@ -184,7 +184,7 @@ if (!allowedPlatform.has(platformPkg.version)) {
     file: "packages/platform-services/package.json",
     line: 1,
     rule: "version-platform-services",
-    detail: `Expected 0.17.0, 0.18.0, 0.19.0 or 0.25.0 (certified), got ${platformPkg.version}`,
+    detail: `Expected 0.17.0, 0.18.0, 0.19.0, 0.25.0 or 0.26.1 (certified), got ${platformPkg.version}`,
   });
 }
 

@@ -1,0 +1,57 @@
+manifestSchemaVersion: "1.0"
+id: kimai
+name: Kimai Time Tracking Integration
+version: 0.2.0
+kind: integration
+
+metadata:
+  category: integrations
+  description: >
+    Kimai Community Edition integration adapter with foundation ops and
+    domain CE APIs (timesheets, activities, customers, projects, tags).
+    Platform capability — not user-facing. Does not implement APZ Time Workbench.
+  owner: APZHUB
+  tags:
+    - kimai
+    - time-tracking
+    - adapter
+    - domain
+    - oss
+
+dependencies:
+  platform: []
+
+integration:
+  type: oss-application
+  capabilities:
+    - health
+    - authentication-bridge
+    - error-translation
+    - diagnostics
+    - version
+    - compatibility
+    - readiness
+    - feature-detection
+    - capability-certification
+    - metrics
+    - logging
+    - timesheets
+    - activities
+    - customers
+    - projects
+    - tags
+
+health:
+  enabled: true
+
+documentation:
+  userVisible: false
+  engineBranding: hidden
+  supportedApiVersion: "v1"
+  supportedEngineVersionMin: "Kimai 2.13.0"
+  supportedEngineVersionMax: "Kimai 2.x"
+  adapterImplementation: APZHUB-INTEGRATION-KIMAI-002
+
+tests:
+  contract: in-progress
+  integration: planned

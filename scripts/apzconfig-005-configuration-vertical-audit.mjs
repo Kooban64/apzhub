@@ -482,12 +482,12 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.25.0",
+  "0.26.1",
   "version-platform-services",
 );
 requirePackageVersion(
   "packages/platform-service-contracts/package.json",
-  "0.16.0",
+  "0.17.1",
   "version-platform-service-contracts",
 );
 

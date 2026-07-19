@@ -38,7 +38,7 @@ describe("APZDOCS-003 foundation", () => {
       JSON.parse(
         readFileSync(join(ROOT, "packages/platform-services/package.json"), "utf8"),
       ).version,
-    ).toBe("0.25.0"); // certified floor after APZWORKFLOW-002 (APZDOCS-003 introduced 0.16.0)
+    ).toBe("0.26.1"); // certified floor after APZWORKFLOW-002 (APZDOCS-003 introduced 0.16.0)
   });
 
   it("gateway exposes document facets without REST handlers", () => {

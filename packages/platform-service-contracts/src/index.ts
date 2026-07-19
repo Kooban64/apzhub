@@ -97,6 +97,32 @@ export type {
   PlatformTraceabilityService,
   PlatformReleaseGovernanceService,
   PlatformQualityDomainServices,
+  TimePlatformGateway,
+  TimeTrackingService,
+  TimeActivityService,
+  TimeCustomerService,
+  ProjectTimeService,
+  TimesheetService,
+  TimeTagService,
+  TimeReportingService,
+  TimeFoundationCapabilities,
+  TimeConnectionTestResult,
+  TimeHealthSnapshot,
+  TimeDiagnosticsSnapshot,
+  TimeCompatibilitySnapshot,
+  TimeReadinessSnapshot,
+  CreateTimeActivityInput,
+  UpdateTimeActivityInput,
+  CreateTimeCustomerInput,
+  UpdateTimeCustomerInput,
+  CreateTimeProjectInput,
+  UpdateTimeProjectInput,
+  CreateTimesheetInput,
+  UpdateTimesheetInput,
+  CreateTimeTagInput,
+  UpdateTimeTagInput,
+  TimeReportingCapabilities,
+  TimeReportingHealth,
 } from "./services";
 
 /** Canonical APZ TCMS domain models — re-exported for HTTP/fixture consumers (APZTCMS-011/012/013/014). */
@@ -163,7 +189,7 @@ export type {
 
 export type { TestingDashboardSummary } from "./domain/testing-dashboard";
 
-export const PLATFORM_SERVICE_CONTRACTS_VERSION = "0.16.0";
+export const PLATFORM_SERVICE_CONTRACTS_VERSION = "0.17.1";
 
 export const PLATFORM_SERVICE_IDS = [
   "workspace-service",
@@ -200,6 +226,13 @@ export const PLATFORM_SERVICE_IDS = [
   "platform-quality-service",
   "platform-release-service",
   "platform-governance-service",
+  "time-tracking-service",
+  "time-activity-service",
+  "time-customer-service",
+  "time-project-service",
+  "timesheet-service",
+  "time-tag-service",
+  "time-reporting-service",
 ] as const;
 
 export type PlatformServiceId = (typeof PLATFORM_SERVICE_IDS)[number];
