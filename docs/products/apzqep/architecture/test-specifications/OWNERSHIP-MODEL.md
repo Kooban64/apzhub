@@ -4,16 +4,16 @@
 
 ## Artefact ownership
 
-| Role | Responsibility |
-| ---- | -------------- |
+| Role            | Responsibility                                        |
+| --------------- | ----------------------------------------------------- |
 | Owner / steward | Accountable for Specification content and progression |
-| Reviewer | Performs In Review assessment |
-| Approver | Grants Approved state (permission-gated, future) |
-| Platform | IAM, audit pipeline, search index (derived) |
+| Reviewer        | Performs In Review assessment                         |
+| Approver        | Grants Approved state (permission-gated, future)      |
+| Platform        | IAM, audit pipeline, search index (derived)           |
 
 ## Rules
 
-- Explicit ownership on every Specification  
-- Approval is server-authoritative (future)  
-- Superadmin is an explicit tier, not a silent bypass  
+- Explicit ownership on every Specification
+- Approval is server-authoritative (future)
+- Superadmin is an explicit tier, not a silent bypass
 - Audit boundary for Specification truth is this capability

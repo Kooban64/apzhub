@@ -145,7 +145,11 @@ export function buildVerificationRequestedEvent(
 export function buildVerificationAssignedEvent(
   input: VerificationEventInput & { readonly assigneeId: string },
 ): VerificationAssigned {
-  return { ...baseEvent(input), type: "qep.verification.assigned", assigneeId: input.assigneeId };
+  return {
+    ...baseEvent(input),
+    type: "qep.verification.assigned",
+    assigneeId: input.assigneeId,
+  };
 }
 
 export function buildVerificationStartedEvent(
@@ -157,25 +161,41 @@ export function buildVerificationStartedEvent(
 export function buildVerificationCompletedEvent(
   input: VerificationEventInput & { readonly outcome: VerificationOutcome },
 ): VerificationCompleted {
-  return { ...baseEvent(input), type: "qep.verification.completed", outcome: input.outcome };
+  return {
+    ...baseEvent(input),
+    type: "qep.verification.completed",
+    outcome: input.outcome,
+  };
 }
 
 export function buildVerificationVerifiedEvent(
   input: VerificationEventInput & { readonly outcome: VerificationOutcome },
 ): VerificationVerified {
-  return { ...baseEvent(input), type: "qep.verification.verified", outcome: input.outcome };
+  return {
+    ...baseEvent(input),
+    type: "qep.verification.verified",
+    outcome: input.outcome,
+  };
 }
 
 export function buildVerificationFailedEvent(
   input: VerificationEventInput & { readonly outcome: VerificationOutcome },
 ): VerificationFailed {
-  return { ...baseEvent(input), type: "qep.verification.failed", outcome: input.outcome };
+  return {
+    ...baseEvent(input),
+    type: "qep.verification.failed",
+    outcome: input.outcome,
+  };
 }
 
 export function buildVerificationRejectedEvent(
   input: VerificationEventInput & { readonly outcome: VerificationOutcome },
 ): VerificationRejected {
-  return { ...baseEvent(input), type: "qep.verification.rejected", outcome: input.outcome };
+  return {
+    ...baseEvent(input),
+    type: "qep.verification.rejected",
+    outcome: input.outcome,
+  };
 }
 
 export function buildVerificationExpiredEvent(

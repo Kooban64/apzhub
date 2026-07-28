@@ -45,8 +45,8 @@ describe("APZQEP-ENG-040C Verification availableActions contract", () => {
   });
 
   it("respects permission grants", () => {
-    expect(computeQepVerificationAvailableActions("draft", ["qep.verification.view"])).toEqual(
-      [],
-    );
+    expect(
+      computeQepVerificationAvailableActions("draft", ["qep.verification.view"]),
+    ).toEqual([]);
   });
 });

@@ -11,13 +11,13 @@ Review and certify the complete Traceability capability (architecture, domain, p
 
 ## Accepted programmes included
 
-| Programme | Status |
-| --------- | ------ |
-| ARCH-007 Traceability Architecture | ACCEPTED / CLOSED / COMPLETE |
-| ENG-030A Part 1 Domain Foundation | ACCEPTED / CLOSED / COMPLETE |
+| Programme                                     | Status                       |
+| --------------------------------------------- | ---------------------------- |
+| ARCH-007 Traceability Architecture            | ACCEPTED / CLOSED / COMPLETE |
+| ENG-030A Part 1 Domain Foundation             | ACCEPTED / CLOSED / COMPLETE |
 | ENG-030A Part 2 Persistence / APIs / Platform | ACCEPTED / CLOSED / COMPLETE |
-| ARCH-008 Traceability Workbench Architecture | ACCEPTED / CLOSED / COMPLETE |
-| ENG-030C Traceability Workbench UI | ACCEPTED / CLOSED / COMPLETE |
+| ARCH-008 Traceability Workbench Architecture  | ACCEPTED / CLOSED / COMPLETE |
+| ENG-030C Traceability Workbench UI            | ACCEPTED / CLOSED / COMPLETE |
 
 ## Deliverables produced
 
@@ -25,19 +25,19 @@ TRACEABILITY-CERTIFICATION · CERTIFICATION-REPORT · CERTIFICATION-DECISION · 
 
 ## Version
 
-| Package | Prior | Certified baseline |
-| ------- | ----- | ------------------ |
-| `@apzhub/qep-traceability` | 0.3.0 | **1.0.0** |
-| `modules/qep-traceability` | 0.3.0 | **1.0.0** |
+| Package                    | Prior | Certified baseline |
+| -------------------------- | ----- | ------------------ |
+| `@apzhub/qep-traceability` | 0.3.0 | **1.0.0**          |
+| `modules/qep-traceability` | 0.3.0 | **1.0.0**          |
 
 ## Quality gates
 
-| Gate | Result |
-| ---- | ------ |
-| Package typecheck | PASS |
-| Package tests | PASS (52) |
-| UI + package combined | PASS (65) |
-| Architecture boundaries | PASS |
+| Gate                    | Result    |
+| ----------------------- | --------- |
+| Package typecheck       | PASS      |
+| Package tests           | PASS (52) |
+| UI + package combined   | PASS (65) |
+| Architecture boundaries | PASS      |
 
 ## Explicit non-delivery
 

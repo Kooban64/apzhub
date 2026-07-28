@@ -13,7 +13,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import {
   useEffect,
   useId,
-  useMemo,
   useRef,
   useState,
   type FormEvent,
@@ -290,7 +289,9 @@ function SpecificationExplorerView({
 }) {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [status, setStatus] = useState(initialStatus ?? searchParams.get("status") ?? "");
+  const [status, setStatus] = useState(
+    initialStatus ?? searchParams.get("status") ?? "",
+  );
   const [type, setType] = useState(searchParams.get("type") ?? "");
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
   const [applied, setApplied] = useState<QepTestSpecificationListParams>({
@@ -418,7 +419,9 @@ function DashboardView() {
             href={card.href}
             className="rounded-lg border border-[var(--color-border)] p-4 hover:bg-[var(--color-muted)]"
           >
-            <p className="text-xs uppercase text-[var(--color-muted-foreground)]">{card.label}</p>
+            <p className="text-xs uppercase text-[var(--color-muted-foreground)]">
+              {card.label}
+            </p>
             <p className="mt-2 text-3xl font-semibold">
               {card.loading ? "…" : card.total}
             </p>
@@ -428,7 +431,10 @@ function DashboardView() {
       <QepPanel title="Recently under review">
         {review.isLoading ? <QepLoadingState label="Loading…" /> : null}
         {review.data ? (
-          <ExplorerTable items={review.data.items} emptyLabel="Nothing awaiting review" />
+          <ExplorerTable
+            items={review.data.items}
+            emptyLabel="Nothing awaiting review"
+          />
         ) : null}
       </QepPanel>
     </QepPageShell>
@@ -495,7 +501,9 @@ function ActionDialog({
   useEffect(() => {
     if (!open) return;
     previouslyFocused.current =
-      typeof document !== "undefined" ? (document.activeElement as HTMLElement | null) : null;
+      typeof document !== "undefined"
+        ? (document.activeElement as HTMLElement | null)
+        : null;
     const panel = panelRef.current;
     const focusable = () =>
       panel
@@ -573,8 +581,12 @@ function SpecificationActions({ dto }: { readonly dto: QepTestSpecificationDto }
   const [error, setError] = useState<string | null>(null);
 
   const invalidate = async (id: string) => {
-    await queryClient.invalidateQueries({ queryKey: qepQueryKeys.specifications.detail(id) });
-    await queryClient.invalidateQueries({ queryKey: qepQueryKeys.specifications.all() });
+    await queryClient.invalidateQueries({
+      queryKey: qepQueryKeys.specifications.detail(id),
+    });
+    await queryClient.invalidateQueries({
+      queryKey: qepQueryKeys.specifications.all(),
+    });
   };
 
   const run = useMutation({
@@ -722,7 +734,11 @@ function SpecificationActions({ dto }: { readonly dto: QepTestSpecificationDto }
         </div>
       </ActionDialog>
 
-      <ActionDialog title="Reject" open={dialog === "reject"} onClose={() => setDialog(null)}>
+      <ActionDialog
+        title="Reject"
+        open={dialog === "reject"}
+        onClose={() => setDialog(null)}
+      >
         <label className="flex flex-col gap-1 text-sm">
           Rationale (required)
           <Input
@@ -815,7 +831,9 @@ function InspectorBody({ dto }: { readonly dto: QepTestSpecificationDto }) {
       </QepPanel>
       <QepPanel title="Relationships">
         {dto.relationships.length === 0 ? (
-          <p className="text-sm text-[var(--color-muted-foreground)]">No relationships</p>
+          <p className="text-sm text-[var(--color-muted-foreground)]">
+            No relationships
+          </p>
         ) : (
           <ul className="space-y-2 text-sm">
             {dto.relationships.map((rel) => (
@@ -823,7 +841,9 @@ function InspectorBody({ dto }: { readonly dto: QepTestSpecificationDto }) {
                 <span className="font-medium">{rel.kind}</span>
                 <RelationshipNav kind={rel.kind} artefactId={rel.artefactId} />
                 {rel.label ? (
-                  <span className="text-[var(--color-muted-foreground)]">{rel.label}</span>
+                  <span className="text-[var(--color-muted-foreground)]">
+                    {rel.label}
+                  </span>
                 ) : null}
               </li>
             ))}
@@ -847,12 +867,18 @@ function InspectorBody({ dto }: { readonly dto: QepTestSpecificationDto }) {
           ))}
           {dto.historySummaries.length === 0 ? <li>—</li> : null}
         </ul>
-        <Link className="mt-2 inline-block text-sm underline" href={QEP_TEST_SPECIFICATION_ROUTES.history(dto.id)}>
+        <Link
+          className="mt-2 inline-block text-sm underline"
+          href={QEP_TEST_SPECIFICATION_ROUTES.history(dto.id)}
+        >
           Full history
         </Link>
       </QepPanel>
       <div className="flex flex-wrap gap-3 text-sm">
-        <Link className="underline" href={QEP_TEST_SPECIFICATION_ROUTES.versions(dto.id)}>
+        <Link
+          className="underline"
+          href={QEP_TEST_SPECIFICATION_ROUTES.versions(dto.id)}
+        >
           Versions
         </Link>
         {dto.predecessorSpecificationId ? (
@@ -921,7 +947,16 @@ function SpecificationDetailView({
     return <VersionsView id={id} dto={dto} />;
   }
   if (mode === "relationships") {
-    return <RelationshipsView dto={dto} onChanged={() => void queryClient.invalidateQueries({ queryKey: qepQueryKeys.specifications.detail(id) })} />;
+    return (
+      <RelationshipsView
+        dto={dto}
+        onChanged={() =>
+          void queryClient.invalidateQueries({
+            queryKey: qepQueryKeys.specifications.detail(id),
+          })
+        }
+      />
+    );
   }
   if (mode === "compare") {
     const withId = searchParams.get("with") ?? dto.predecessorSpecificationId ?? "";
@@ -1130,8 +1165,8 @@ function RelationshipsView({
         </QepPanel>
       ) : (
         <p className="text-sm text-[var(--color-muted-foreground)]">
-          Add/remove relationships is not available for this Specification
-          (server availableActions).
+          Add/remove relationships is not available for this Specification (server
+          availableActions).
         </p>
       )}
     </QepPageShell>
@@ -1157,7 +1192,10 @@ function CompareView({
 
   if (!rightId) {
     return (
-      <QepPageShell title="Compare" breadcrumbs={["QEP", "Test Specifications", "Compare"]}>
+      <QepPageShell
+        title="Compare"
+        breadcrumbs={["QEP", "Test Specifications", "Compare"]}
+      >
         <QepEmptyState title="Select a version to compare (query ?with=)" />
       </QepPageShell>
     );
@@ -1165,14 +1203,20 @@ function CompareView({
 
   if (left.isLoading || right.isLoading) {
     return (
-      <QepPageShell title="Compare" breadcrumbs={["QEP", "Test Specifications", "Compare"]}>
+      <QepPageShell
+        title="Compare"
+        breadcrumbs={["QEP", "Test Specifications", "Compare"]}
+      >
         <QepLoadingState label="Loading versions…" />
       </QepPageShell>
     );
   }
   if (left.isError || right.isError || !left.data || !right.data) {
     return (
-      <QepPageShell title="Compare" breadcrumbs={["QEP", "Test Specifications", "Compare"]}>
+      <QepPageShell
+        title="Compare"
+        breadcrumbs={["QEP", "Test Specifications", "Compare"]}
+      >
         <QepErrorState message="Unable to load one or both Specifications for comparison." />
       </QepPageShell>
     );
@@ -1217,7 +1261,11 @@ function CompareView({
             {fields.map(([label, , b]) => (
               <div key={`r-${label}`}>
                 <dt className="font-medium">{label}</dt>
-                <dd className={fields.find((f) => f[0] === label)?.[1] !== b ? "font-semibold" : ""}>
+                <dd
+                  className={
+                    fields.find((f) => f[0] === label)?.[1] !== b ? "font-semibold" : ""
+                  }
+                >
                   {b || "—"}
                 </dd>
               </div>
@@ -1270,7 +1318,11 @@ function CreateSpecificationView() {
       title="New Specification"
       breadcrumbs={["QEP", "Test Specifications", "New"]}
     >
-      <form className="grid max-w-2xl gap-3" onSubmit={onSubmit} data-testid="qep-spec-create">
+      <form
+        className="grid max-w-2xl gap-3"
+        onSubmit={onSubmit}
+        data-testid="qep-spec-create"
+      >
         {(
           [
             ["number", "Number"],
@@ -1288,7 +1340,13 @@ function CreateSpecificationView() {
           <label key={key} className="flex flex-col gap-1 text-sm">
             {label}
             <Input
-              required={["number", "title", "description", "objective", "scope"].includes(key)}
+              required={[
+                "number",
+                "title",
+                "description",
+                "objective",
+                "scope",
+              ].includes(key)}
               value={String(form[key] ?? "")}
               onChange={(e) => setForm({ ...form, [key]: e.target.value })}
               aria-label={label}
@@ -1315,7 +1373,10 @@ function EditDraftView({ dto }: { readonly dto: QepTestSpecificationDto }) {
 
   if (!hasAction(dto, "updateDraft")) {
     return (
-      <QepPageShell title="Edit draft" breadcrumbs={["QEP", "Test Specifications", dto.number]}>
+      <QepPageShell
+        title="Edit draft"
+        breadcrumbs={["QEP", "Test Specifications", dto.number]}
+      >
         <QepErrorState message="Editing is not available (updateDraft not in availableActions)." />
       </QepPageShell>
     );
@@ -1350,7 +1411,11 @@ function EditDraftView({ dto }: { readonly dto: QepTestSpecificationDto }) {
       >
         <label className="flex flex-col gap-1 text-sm">
           Title
-          <Input value={title} onChange={(e) => setTitle(e.target.value)} aria-label="Title" />
+          <Input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            aria-label="Title"
+          />
         </label>
         <label className="flex flex-col gap-1 text-sm">
           Description
@@ -1370,7 +1435,11 @@ function EditDraftView({ dto }: { readonly dto: QepTestSpecificationDto }) {
         </label>
         <label className="flex flex-col gap-1 text-sm">
           Scope
-          <Input value={scope} onChange={(e) => setScope(e.target.value)} aria-label="Scope" />
+          <Input
+            value={scope}
+            onChange={(e) => setScope(e.target.value)}
+            aria-label="Scope"
+          />
         </label>
         {error ? <p className="text-sm text-red-600">{error}</p> : null}
         <div className="flex gap-2">

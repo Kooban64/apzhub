@@ -24,7 +24,9 @@ export type CreateTestPlanRevisionInput = {
   readonly predecessorVersionLabel?: string;
 };
 
-export function createTestPlanRevision(input: CreateTestPlanRevisionInput): TestPlanRevision {
+export function createTestPlanRevision(
+  input: CreateTestPlanRevisionInput,
+): TestPlanRevision {
   return {
     versionLabel: input.versionLabel,
     sealedAt: input.sealedAt,

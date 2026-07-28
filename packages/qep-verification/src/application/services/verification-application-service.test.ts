@@ -52,7 +52,9 @@ function buildService(registry: InMemorySubjectRegistry): {
   service: VerificationApplicationService;
   repos: QepVerificationRepositories;
 } {
-  const repos = createQepVerificationPersistenceForTest({ allowInMemoryPersistence: true });
+  const repos = createQepVerificationPersistenceForTest({
+    allowInMemoryPersistence: true,
+  });
   let counter = 0;
   const service = createVerificationApplicationService({
     verifications: repos.verifications,
@@ -95,7 +97,9 @@ describe("VerificationApplicationService", () => {
     await expect(
       service.createVerification(
         FULL_CTX,
-        baseCreateInput({ subject: { kind: "requirement", artefactId: "does_not_exist" } }),
+        baseCreateInput({
+          subject: { kind: "requirement", artefactId: "does_not_exist" },
+        }),
       ),
     ).rejects.toThrow(VerificationInvariantViolation);
   });
@@ -162,7 +166,9 @@ describe("VerificationApplicationService", () => {
   it("updates metadata, rationale, and priority while mutable", async () => {
     const created = await service.createVerification(FULL_CTX, baseCreateInput());
 
-    const withMetadata = await service.updateMetadata(FULL_CTX, created.id, { risk: "low" });
+    const withMetadata = await service.updateMetadata(FULL_CTX, created.id, {
+      risk: "low",
+    });
     expect(withMetadata.metadata.entries.risk).toBe("low");
 
     const withRationale = await service.updateRationale(
@@ -183,7 +189,9 @@ describe("VerificationApplicationService", () => {
       baseCreateInput({ subject: { kind: "requirement", artefactId: "req_1" } }),
     );
 
-    const result = await service.listVerifications(FULL_CTX, { subjectKind: "requirement" });
+    const result = await service.listVerifications(FULL_CTX, {
+      subjectKind: "requirement",
+    });
     expect(result.items).toHaveLength(2);
     expect(result.total).toBe(2);
 
@@ -200,7 +208,9 @@ describe("VerificationApplicationService", () => {
   it("returns append-only history across the lifecycle", async () => {
     const created = await service.createVerification(FULL_CTX, baseCreateInput());
     const requested = await service.requestVerification(FULL_CTX, created.id);
-    await service.assignVerification(FULL_CTX, requested.id, { assigneeId: "user_assignee" });
+    await service.assignVerification(FULL_CTX, requested.id, {
+      assigneeId: "user_assignee",
+    });
 
     const history = await service.listHistory(FULL_CTX, created.id);
     expect(history.length).toBeGreaterThanOrEqual(3);

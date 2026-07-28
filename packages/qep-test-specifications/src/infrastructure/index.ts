@@ -15,7 +15,10 @@ export {
   type TestSpecificationInMemoryStore,
 } from "./factories";
 
-export { toStoredTestSpecification, matchesListFilters } from "./mappers/specification-mapper";
+export {
+  toStoredTestSpecification,
+  matchesListFilters,
+} from "./mappers/specification-mapper";
 
 export { createInMemoryTestSpecificationRepository } from "./in-memory/specification-repository";
 

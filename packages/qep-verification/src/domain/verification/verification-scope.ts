@@ -28,10 +28,14 @@ export function createVerificationScope(input: {
   }
   const referenceId = input.referenceId?.trim();
   if (!referenceId) {
-    throw new VerificationInvariantViolation(`Verification scope ${kind} requires referenceId`);
+    throw new VerificationInvariantViolation(
+      `Verification scope ${kind} requires referenceId`,
+    );
   }
   if (kind === "baseline" && !/^rbl_[A-Za-z0-9_-]+$/.test(referenceId)) {
-    throw new VerificationInvariantViolation("Baseline scope referenceId must start with rbl_");
+    throw new VerificationInvariantViolation(
+      "Baseline scope referenceId must start with rbl_",
+    );
   }
   return { kind, referenceId };
 }

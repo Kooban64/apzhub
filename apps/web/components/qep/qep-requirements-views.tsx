@@ -236,7 +236,11 @@ export function QepRequirementsListView() {
   );
 }
 
-export function QepRequirementDetailView({ requirementId }: { readonly requirementId: string }) {
+export function QepRequirementDetailView({
+  requirementId,
+}: {
+  readonly requirementId: string;
+}) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [pendingAction, setPendingAction] = useState<string | null>(null);
@@ -259,16 +263,19 @@ export function QepRequirementDetailView({ requirementId }: { readonly requireme
   });
   const versionsQuery = useQuery({
     queryKey: qepQueryKeys.requirements.versions(requirementId),
-    queryFn: ({ signal }) => listContentVersions(requirementId, { limit: 50 }, { signal }),
+    queryFn: ({ signal }) =>
+      listContentVersions(requirementId, { limit: 50 }, { signal }),
     enabled: query.isSuccess,
   });
   const [selectedVersion, setSelectedVersion] = useState<number | null>(null);
-  const [comparisonVersions, setComparisonVersions] = useState<{ base: number; target: number } | null>(
-    null,
-  );
+  const [comparisonVersions, setComparisonVersions] = useState<{
+    base: number;
+    target: number;
+  } | null>(null);
   const versionDetailQuery = useQuery({
     queryKey: qepQueryKeys.requirements.version(requirementId, selectedVersion ?? 0),
-    queryFn: ({ signal }) => getContentVersion(requirementId, selectedVersion ?? 0, { signal }),
+    queryFn: ({ signal }) =>
+      getContentVersion(requirementId, selectedVersion ?? 0, { signal }),
     enabled: selectedVersion !== null,
   });
   const comparisonQuery = useQuery({
@@ -278,10 +285,14 @@ export function QepRequirementDetailView({ requirementId }: { readonly requireme
       comparisonVersions?.target ?? 0,
     ),
     queryFn: ({ signal }) =>
-      compareContentVersions(requirementId, {
-        baseVersionNumber: comparisonVersions?.base ?? 0,
-        targetVersionNumber: comparisonVersions?.target ?? 0,
-      }, { signal }),
+      compareContentVersions(
+        requirementId,
+        {
+          baseVersionNumber: comparisonVersions?.base ?? 0,
+          targetVersionNumber: comparisonVersions?.target ?? 0,
+        },
+        { signal },
+      ),
     enabled: comparisonVersions !== null,
   });
 
@@ -301,7 +312,9 @@ export function QepRequirementDetailView({ requirementId }: { readonly requireme
   if (query.isError || !query.data) {
     return (
       <QepErrorState
-        message={query.error instanceof Error ? query.error.message : "Requirement not found"}
+        message={
+          query.error instanceof Error ? query.error.message : "Requirement not found"
+        }
         onRetry={() => void query.refetch()}
       />
     );
@@ -349,14 +362,19 @@ export function QepRequirementDetailView({ requirementId }: { readonly requireme
           </div>
           {item.latestContentVersion ? (
             <div>
-              <dt className="font-medium text-[var(--color-muted-foreground)]">Content version</dt>
+              <dt className="font-medium text-[var(--color-muted-foreground)]">
+                Content version
+              </dt>
               <dd>
-                #{item.latestContentVersion.versionNumber} · {item.latestContentVersion.changeReason}
+                #{item.latestContentVersion.versionNumber} ·{" "}
+                {item.latestContentVersion.changeReason}
               </dd>
             </div>
           ) : null}
           <div>
-            <dt className="font-medium text-[var(--color-muted-foreground)]">Priority</dt>
+            <dt className="font-medium text-[var(--color-muted-foreground)]">
+              Priority
+            </dt>
             <dd>{item.priority}</dd>
           </div>
           <div>
@@ -364,12 +382,16 @@ export function QepRequirementDetailView({ requirementId }: { readonly requireme
             <dd>{item.type}</dd>
           </div>
           <div>
-            <dt className="font-medium text-[var(--color-muted-foreground)]">Project</dt>
+            <dt className="font-medium text-[var(--color-muted-foreground)]">
+              Project
+            </dt>
             <dd>{item.projectId}</dd>
           </div>
           {item.description ? (
             <div className="sm:col-span-2">
-              <dt className="font-medium text-[var(--color-muted-foreground)]">Description</dt>
+              <dt className="font-medium text-[var(--color-muted-foreground)]">
+                Description
+              </dt>
               <dd>{item.description}</dd>
             </div>
           ) : null}
@@ -377,7 +399,12 @@ export function QepRequirementDetailView({ requirementId }: { readonly requireme
       </QepPanel>
       <QepPanel title="Version history">
         {versionsQuery.isLoading ? <QepLoadingState /> : null}
-        {versionsQuery.isError ? <QepErrorState message="Unable to load content history" onRetry={() => void versionsQuery.refetch()} /> : null}
+        {versionsQuery.isError ? (
+          <QepErrorState
+            message="Unable to load content history"
+            onRetry={() => void versionsQuery.refetch()}
+          />
+        ) : null}
         {versionsQuery.isSuccess && versionsQuery.data.items.length === 0 ? (
           <QepEmptyState title="No content versions yet" />
         ) : null}
@@ -385,11 +412,20 @@ export function QepRequirementDetailView({ requirementId }: { readonly requireme
           <>
             <ol className="space-y-2 text-sm">
               {versionsQuery.data.items.map((version) => (
-                <li key={version.id} className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-[var(--color-border)] p-3">
+                <li
+                  key={version.id}
+                  className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-[var(--color-border)] p-3"
+                >
                   <span>
-                    <strong>Version {version.versionNumber}</strong> · {version.changeReason} · {version.createdAt}
+                    <strong>Version {version.versionNumber}</strong> ·{" "}
+                    {version.changeReason} · {version.createdAt}
                   </span>
-                  <Button type="button" size="sm" variant="outline" onClick={() => setSelectedVersion(version.versionNumber)}>
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setSelectedVersion(version.versionNumber)}
+                  >
                     View details
                   </Button>
                 </li>
@@ -407,9 +443,35 @@ export function QepRequirementDetailView({ requirementId }: { readonly requireme
                   });
                 }}
               >
-                <label className="text-sm">Base version <select name="baseVersion" defaultValue={versionsQuery.data.items[1]?.versionNumber}>{versionsQuery.data.items.map((version) => <option key={version.id} value={version.versionNumber}>{version.versionNumber}</option>)}</select></label>
-                <label className="text-sm">Target version <select name="targetVersion" defaultValue={versionsQuery.data.items[0]?.versionNumber}>{versionsQuery.data.items.map((version) => <option key={version.id} value={version.versionNumber}>{version.versionNumber}</option>)}</select></label>
-                <Button type="submit" size="sm">Compare versions</Button>
+                <label className="text-sm">
+                  Base version{" "}
+                  <select
+                    name="baseVersion"
+                    defaultValue={versionsQuery.data.items[1]?.versionNumber}
+                  >
+                    {versionsQuery.data.items.map((version) => (
+                      <option key={version.id} value={version.versionNumber}>
+                        {version.versionNumber}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="text-sm">
+                  Target version{" "}
+                  <select
+                    name="targetVersion"
+                    defaultValue={versionsQuery.data.items[0]?.versionNumber}
+                  >
+                    {versionsQuery.data.items.map((version) => (
+                      <option key={version.id} value={version.versionNumber}>
+                        {version.versionNumber}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <Button type="submit" size="sm">
+                  Compare versions
+                </Button>
               </form>
             ) : null}
           </>
@@ -417,16 +479,26 @@ export function QepRequirementDetailView({ requirementId }: { readonly requireme
         {versionDetailQuery.isSuccess ? (
           <div className="mt-4 rounded-md border border-[var(--color-border)] p-3 text-sm">
             <strong>Version {versionDetailQuery.data.versionNumber} details</strong>
-            <pre className="mt-2 overflow-auto text-xs">{JSON.stringify(versionDetailQuery.data.snapshot, null, 2)}</pre>
+            <pre className="mt-2 overflow-auto text-xs">
+              {JSON.stringify(versionDetailQuery.data.snapshot, null, 2)}
+            </pre>
           </div>
         ) : null}
         {comparisonQuery.isSuccess ? (
           <div className="mt-4" aria-live="polite">
-            <p className="text-sm font-medium">{comparisonQuery.data.changedFieldCount} changed fields</p>
+            <p className="text-sm font-medium">
+              {comparisonQuery.data.changedFieldCount} changed fields
+            </p>
             <ul className="mt-2 space-y-1 text-sm">
-              {comparisonQuery.data.fieldChanges.filter((change) => change.classification !== "unchanged").map((change) => (
-                <li key={change.field}><strong>{change.field}</strong>: {change.classification} (base: {JSON.stringify(change.base)}; target: {JSON.stringify(change.target)})</li>
-              ))}
+              {comparisonQuery.data.fieldChanges
+                .filter((change) => change.classification !== "unchanged")
+                .map((change) => (
+                  <li key={change.field}>
+                    <strong>{change.field}</strong>: {change.classification} (base:{" "}
+                    {JSON.stringify(change.base)}; target:{" "}
+                    {JSON.stringify(change.target)})
+                  </li>
+                ))}
             </ul>
           </div>
         ) : null}
@@ -484,7 +556,9 @@ export function QepRequirementDetailView({ requirementId }: { readonly requireme
                   {entry.createdAt} · {entry.actorUserId}
                 </p>
                 {entry.reason ? <p className="mt-1">Reason: {entry.reason}</p> : null}
-                {entry.comments ? <p className="mt-1">Comments: {entry.comments}</p> : null}
+                {entry.comments ? (
+                  <p className="mt-1">Comments: {entry.comments}</p>
+                ) : null}
               </li>
             ))}
           </ol>
@@ -531,15 +605,30 @@ function RequirementForm({
   return (
     <form className="flex max-w-xl flex-col gap-3" onSubmit={handleSubmit}>
       {!initial?.key ? (
-        <Input label="Key" value={key} onChange={(e) => setKey(e.target.value)} required />
+        <Input
+          label="Key"
+          value={key}
+          onChange={(e) => setKey(e.target.value)}
+          required
+        />
       ) : null}
-      <Input label="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
+      <Input
+        label="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+      />
       <Input
         label="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-      <Input label="Type" value={type} onChange={(e) => setType(e.target.value)} required />
+      <Input
+        label="Type"
+        value={type}
+        onChange={(e) => setType(e.target.value)}
+        required
+      />
       <Input
         label="Priority"
         value={priority}
@@ -603,7 +692,11 @@ export function QepRequirementCreateView() {
   );
 }
 
-export function QepRequirementEditView({ requirementId }: { readonly requirementId: string }) {
+export function QepRequirementEditView({
+  requirementId,
+}: {
+  readonly requirementId: string;
+}) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -632,7 +725,9 @@ export function QepRequirementEditView({ requirementId }: { readonly requirement
   if (query.isError || !query.data) {
     return (
       <QepErrorState
-        message={query.error instanceof Error ? query.error.message : "Requirement not found"}
+        message={
+          query.error instanceof Error ? query.error.message : "Requirement not found"
+        }
         onRetry={() => void query.refetch()}
       />
     );

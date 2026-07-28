@@ -2,7 +2,7 @@
 
 > **Programme:** APZQEP-REQ-001  
 > **Baseline version:** 1.0.0-req  
-> **Status:** **ACCEPTED**  
+> **Status:** **ACCEPTED**
 
 > **Platform baseline:** Certified Platform 1.4  
 > **Product baseline:** APZQEP-TRANSITION-001 **ACCEPTED**  

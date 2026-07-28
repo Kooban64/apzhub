@@ -1,4 +1,5 @@
-# APZQEP-OES-ARCH-012  
+# APZQEP-OES-ARCH-012
+
 # APPENDIX D — Navigation Maps
 
 ## D.1 Shell map
@@ -24,12 +25,12 @@ S-05 Inspector
 
 ## D.3 Cross-capability
 
-| From | To |
-| ---- | -- |
-| Spec relationship `requirement` | Requirements Workbench artefact |
-| Spec relationship `trace_link` | Traceability Workbench artefact |
+| From                             | To                              |
+| -------------------------------- | ------------------------------- |
+| Spec relationship `requirement`  | Requirements Workbench artefact |
+| Spec relationship `trace_link`   | Traceability Workbench artefact |
 | Spec relationship `verification` | Verification Workbench artefact |
-| Foreign capability deep link in | `…/specifications/{id}` |
+| Foreign capability deep link in  | `…/specifications/{id}`         |
 
 ## D.4 Query persistence
 

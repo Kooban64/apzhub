@@ -24,7 +24,9 @@ export function createSpecificationMetadata(
   for (const key of keys) {
     const trimmedKey = key.trim();
     if (!trimmedKey || trimmedKey.length > METADATA_KEY_MAX) {
-      throw new TestSpecificationInvariantViolation("Specification metadata key is invalid");
+      throw new TestSpecificationInvariantViolation(
+        "Specification metadata key is invalid",
+      );
     }
     const value = entries[key]?.trim() ?? "";
     if (value.length > METADATA_VALUE_MAX) {

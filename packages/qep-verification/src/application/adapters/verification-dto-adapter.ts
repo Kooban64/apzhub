@@ -98,6 +98,9 @@ export function toVerificationDto(
     supersededBy: stored.supersededBy,
     successorVerificationId: stored.successorVerificationId,
     historySummaries: stored.history.entries.map(toVerificationHistorySummaryDto),
-    availableActions: computeQepVerificationAvailableActions(stored.status, permissions),
+    availableActions: computeQepVerificationAvailableActions(
+      stored.status,
+      permissions,
+    ),
   };
 }

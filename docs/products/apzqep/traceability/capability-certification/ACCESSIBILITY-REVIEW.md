@@ -1,12 +1,12 @@
 # Accessibility Review — APZQEP-TRACE-001
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-TRACE-001 |
-| Date | 2026-07-26 |
-| Verdict | **PASS** |
-| Package | `@apzhub/qep-traceability` **1.0.0** |
-| Target | WCAG AA (platform Design System) |
+| Field     | Value                                |
+| --------- | ------------------------------------ |
+| Programme | APZQEP-TRACE-001                     |
+| Date      | 2026-07-26                           |
+| Verdict   | **PASS**                             |
+| Package   | `@apzhub/qep-traceability` **1.0.0** |
+| Target    | WCAG AA (platform Design System)     |
 
 ## Basis
 
@@ -16,15 +16,15 @@
 
 ## Findings
 
-| ID | Topic | Result |
-| -- | ----- | ------ |
-| X1 | Semantic structure via shared Workbench shells / headings | **PASS** |
-| X2 | Labelled filters and form controls on create / lifecycle flows | **PASS** |
-| X3 | Status not colour-only (badge + text) | **PASS** |
-| X4 | Confirmation dialogs for restricting lifecycle transitions | **PASS** |
-| X5 | Matrix accessible **list alternative** for keyboard / AT users | **PASS** |
-| X6 | Keyboard-operable primary flows via shared UI primitives | **PASS** |
-| X7 | Component Vitest coverage for action gating / views | **PASS** (supporting) |
+| ID  | Topic                                                          | Result                |
+| --- | -------------------------------------------------------------- | --------------------- |
+| X1  | Semantic structure via shared Workbench shells / headings      | **PASS**              |
+| X2  | Labelled filters and form controls on create / lifecycle flows | **PASS**              |
+| X3  | Status not colour-only (badge + text)                          | **PASS**              |
+| X4  | Confirmation dialogs for restricting lifecycle transitions     | **PASS**              |
+| X5  | Matrix accessible **list alternative** for keyboard / AT users | **PASS**              |
+| X6  | Keyboard-operable primary flows via shared UI primitives       | **PASS**              |
+| X7  | Component Vitest coverage for action gating / views            | **PASS** (supporting) |
 
 ## Residual / platform-level
 

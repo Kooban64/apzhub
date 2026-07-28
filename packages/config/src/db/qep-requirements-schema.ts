@@ -59,9 +59,9 @@ export const qepRequirement = pgTable(
     versionMajor: integer("version_major").notNull().default(1),
     versionMinor: integer("version_minor").notNull().default(0),
     versionPatch: integer("version_patch").notNull().default(0),
-    acceptanceCriteriaJson: jsonb("acceptance_criteria_json").$type<
-      QepRequirementAcceptanceCriteriaJson
-    >(),
+    acceptanceCriteriaJson: jsonb(
+      "acceptance_criteria_json",
+    ).$type<QepRequirementAcceptanceCriteriaJson>(),
     attributesJson: jsonb("attributes_json")
       .$type<QepRequirementAttributesJson>()
       .notNull()
@@ -138,7 +138,9 @@ export const qepRequirementContentVersion = pgTable(
     versionNumber: integer("version_number").notNull(),
     parentVersionNumber: integer("parent_version_number"),
     parentVersionId: text("parent_version_id"),
-    snapshotJson: jsonb("snapshot_json").$type<QepRequirementContentVersionSnapshotJson>().notNull(),
+    snapshotJson: jsonb("snapshot_json")
+      .$type<QepRequirementContentVersionSnapshotJson>()
+      .notNull(),
     snapshotSchemaVersion: varchar("snapshot_schema_version", { length: 64 }).notNull(),
     hashAlgorithm: varchar("hash_algorithm", { length: 32 }).notNull(),
     snapshotHash: text("snapshot_hash").notNull(),
@@ -185,14 +187,22 @@ export const qepRequirementBaseline = pgTable(
     integrityFingerprint: text("integrity_fingerprint"),
     integrityAlgorithm: varchar("integrity_algorithm", { length: 32 }),
     integritySchemaVersion: varchar("integrity_schema_version", { length: 64 }),
-    integrityVerificationStatus: varchar("integrity_verification_status", { length: 32 }),
+    integrityVerificationStatus: varchar("integrity_verification_status", {
+      length: 32,
+    }),
     integrityVerifiedAt: timestamp("integrity_verified_at", { withTimezone: true }),
     correlationId: text("correlation_id").notNull(),
   },
   (table) => [
-    uniqueIndex("qep_requirement_baseline_number_uidx").on(table.tenantId, table.baselineNumber),
+    uniqueIndex("qep_requirement_baseline_number_uidx").on(
+      table.tenantId,
+      table.baselineNumber,
+    ),
     index("qep_requirement_baseline_id_idx").on(table.tenantId, table.id),
-    index("qep_requirement_baseline_number_idx").on(table.tenantId, table.baselineNumber),
+    index("qep_requirement_baseline_number_idx").on(
+      table.tenantId,
+      table.baselineNumber,
+    ),
     index("qep_requirement_baseline_history_idx").on(table.tenantId, table.createdAt),
     index("qep_requirement_baseline_status_idx").on(table.tenantId, table.status),
     index("qep_requirement_baseline_owner_idx").on(table.tenantId, table.ownerUserId),
@@ -228,7 +238,10 @@ export const qepRequirementBaselineItem = pgTable(
       table.baselineId,
       table.displayOrder,
     ),
-    index("qep_requirement_baseline_item_requirement_idx").on(table.tenantId, table.requirementId),
+    index("qep_requirement_baseline_item_requirement_idx").on(
+      table.tenantId,
+      table.requirementId,
+    ),
     index("qep_requirement_baseline_item_content_version_idx").on(
       table.tenantId,
       table.contentVersionId,
@@ -274,8 +287,14 @@ export const qepRequirementsRelationship = pgTable(
     index("qep_req_rel_tenant_id_idx").on(table.tenantId, table.id),
     index("qep_req_rel_tenant_type_idx").on(table.tenantId, table.relationshipType),
     index("qep_req_rel_tenant_lifecycle_idx").on(table.tenantId, table.lifecycleState),
-    index("qep_req_rel_tenant_source_idx").on(table.tenantId, table.sourceRequirementId),
-    index("qep_req_rel_tenant_target_idx").on(table.tenantId, table.targetRequirementId),
+    index("qep_req_rel_tenant_source_idx").on(
+      table.tenantId,
+      table.sourceRequirementId,
+    ),
+    index("qep_req_rel_tenant_target_idx").on(
+      table.tenantId,
+      table.targetRequirementId,
+    ),
     index("qep_req_rel_tenant_scope_idx").on(
       table.tenantId,
       table.scopeKind,

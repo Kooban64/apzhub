@@ -26,11 +26,36 @@
     "certifiedProductionPackages": 5,
     "portfolioBaseline": "ESTABLISHED",
     "capabilities": [
-      { "name": "Requirements", "package": "@apzhub/qep-requirements", "version": "1.0.0", "status": "CERTIFIED / FROZEN" },
-      { "name": "Traceability", "package": "@apzhub/qep-traceability", "version": "1.0.0", "status": "CERTIFIED / FROZEN" },
-      { "name": "Verification", "package": "@apzhub/qep-verification", "version": "1.0.0", "status": "CERTIFIED / FROZEN" },
-      { "name": "Test Specifications", "package": "@apzhub/qep-test-specifications", "version": "1.0.0", "status": "CERTIFIED / FROZEN" },
-      { "name": "Test Plans", "package": "@apzhub/qep-test-plans", "version": "1.0.0", "status": "CERTIFIED / FROZEN" }
+      {
+        "name": "Requirements",
+        "package": "@apzhub/qep-requirements",
+        "version": "1.0.0",
+        "status": "CERTIFIED / FROZEN"
+      },
+      {
+        "name": "Traceability",
+        "package": "@apzhub/qep-traceability",
+        "version": "1.0.0",
+        "status": "CERTIFIED / FROZEN"
+      },
+      {
+        "name": "Verification",
+        "package": "@apzhub/qep-verification",
+        "version": "1.0.0",
+        "status": "CERTIFIED / FROZEN"
+      },
+      {
+        "name": "Test Specifications",
+        "package": "@apzhub/qep-test-specifications",
+        "version": "1.0.0",
+        "status": "CERTIFIED / FROZEN"
+      },
+      {
+        "name": "Test Plans",
+        "package": "@apzhub/qep-test-plans",
+        "version": "1.0.0",
+        "status": "CERTIFIED / FROZEN"
+      }
     ]
   },
   "phaseTransition": {

@@ -6,10 +6,10 @@
 
 ## Catalogue
 
-| OES | Title | Status |
-| --- | ----- | ------ |
-| [OES-ARCH-012](./OES-ARCH-012-Test-Specifications-Workbench-Architecture/README.md) | Test Specifications Workbench Architecture | **ACCEPTED / ARCHITECTURE BASELINED** |
-| [OES-ENG-050C](./OES-ENG-050C-Test-Specifications-Workbench-Engineering/README.md) | Test Specifications Workbench Engineering | **ACCEPTED / IMPLEMENTATION AUTHORISED** |
+| OES                                                                                 | Title                                      | Status                                   |
+| ----------------------------------------------------------------------------------- | ------------------------------------------ | ---------------------------------------- |
+| [OES-ARCH-012](./OES-ARCH-012-Test-Specifications-Workbench-Architecture/README.md) | Test Specifications Workbench Architecture | **ACCEPTED / ARCHITECTURE BASELINED**    |
+| [OES-ENG-050C](./OES-ENG-050C-Test-Specifications-Workbench-Engineering/README.md)  | Test Specifications Workbench Engineering  | **ACCEPTED / IMPLEMENTATION AUTHORISED** |
 
 ## Capability chain (Test Specifications)
 

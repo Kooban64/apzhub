@@ -9,11 +9,11 @@
 
 ## Decision record (Owner)
 
-| Field | Value |
-| ----- | ----- |
-| Decision | **ACCEPTED / CLOSED** |
-| Date | 2026-07-24 |
-| Authority | Owner |
+| Field      | Value                                                            |
+| ---------- | ---------------------------------------------------------------- |
+| Decision   | **ACCEPTED / CLOSED**                                            |
+| Date       | 2026-07-24                                                       |
+| Authority  | Owner                                                            |
 | Conditions | Product Governance phase complete; **APZQEP-DEF-001** authorised |
 
 ## Acceptance checklist (Owner)

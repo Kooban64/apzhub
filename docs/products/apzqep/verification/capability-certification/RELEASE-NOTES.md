@@ -1,11 +1,11 @@
 # Release Notes — APZ QEP Verification Capability 1.0.0
 
-| Field | Value |
-| ----- | ----- |
-| Package | `@apzhub/qep-verification` **1.0.0** |
-| Programme | APZQEP-CERT-040D |
+| Field               | Value                                 |
+| ------------------- | ------------------------------------- |
+| Package             | `@apzhub/qep-verification` **1.0.0**  |
+| Programme           | APZQEP-CERT-040D                      |
 | Certification class | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Date | 2026-07-26 |
+| Date                | 2026-07-26                            |
 
 ## What's included
 

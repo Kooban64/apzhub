@@ -65,7 +65,15 @@ describe("APZQEP-ENG-020B qep handlers", () => {
       qep: {
         requirements: {
           list: vi.fn(async () => ({
-            items: [{ id: "req_1", key: "REQ-001", title: "Login", status: "draft", priority: "high" }],
+            items: [
+              {
+                id: "req_1",
+                key: "REQ-001",
+                title: "Login",
+                status: "draft",
+                priority: "high",
+              },
+            ],
             total: 1,
             limit: 10,
             offset: 0,

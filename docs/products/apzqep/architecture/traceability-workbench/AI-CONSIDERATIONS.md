@@ -8,11 +8,11 @@ AI may consume Trace Links, search projections, and future Coverage / Impact ana
 
 ## AI never owns
 
-| Forbidden | Reason |
-| --- | --- |
-| Trace Link SoR | Domain authority |
-| Business rules / lifecycle | Part 1 domain |
-| Authority / auto-approval | Governance |
+| Forbidden                   | Reason                 |
+| --------------------------- | ---------------------- |
+| Trace Link SoR              | Domain authority       |
+| Business rules / lifecycle  | Part 1 domain          |
+| Authority / auto-approval   | Governance             |
 | Silent confidence elevation | Confidence is governed |
 
 ## Workbench implication

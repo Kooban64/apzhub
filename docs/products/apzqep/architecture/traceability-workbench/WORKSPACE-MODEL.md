@@ -4,16 +4,16 @@
 
 ## Canonical panes
 
-| Pane | Role |
-| --- | --- |
-| Explorer | Trace Link inventory, filters, saved filters, taxonomy browse entry |
-| Main | Matrix · Editor · Comparison · Validation · Search · Analysis tabs (+ split) |
-| Inspector | Trace summary, endpoints, actions |
-| History | Immutable domain history |
-| Lineage | Bounded upstream / downstream navigation |
-| Details | Extended metadata / links |
-| Activity | Validation and attention feed |
-| Status bar | Lifecycle, counts, filter summary, hints |
+| Pane       | Role                                                                         |
+| ---------- | ---------------------------------------------------------------------------- |
+| Explorer   | Trace Link inventory, filters, saved filters, taxonomy browse entry          |
+| Main       | Matrix · Editor · Comparison · Validation · Search · Analysis tabs (+ split) |
+| Inspector  | Trace summary, endpoints, actions                                            |
+| History    | Immutable domain history                                                     |
+| Lineage    | Bounded upstream / downstream navigation                                     |
+| Details    | Extended metadata / links                                                    |
+| Activity   | Validation and attention feed                                                |
+| Status bar | Lifecycle, counts, filter summary, hints                                     |
 
 ## Primary workspaces
 

@@ -1,13 +1,13 @@
 # Certification Decision — APZQEP-TRACE-001
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-TRACE-001 — Traceability Capability Certification & Baseline |
-| Date | 2026-07-26 |
-| Package | `@apzhub/qep-traceability` **1.0.0** |
-| Decision status | **DRAFT — AWAITING OWNER ACCEPTANCE** |
-| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Recommendation | **PRODUCTION READY** |
+| Field               | Value                                                               |
+| ------------------- | ------------------------------------------------------------------- |
+| Programme           | APZQEP-TRACE-001 — Traceability Capability Certification & Baseline |
+| Date                | 2026-07-26                                                          |
+| Package             | `@apzhub/qep-traceability` **1.0.0**                                |
+| Decision status     | **DRAFT — AWAITING OWNER ACCEPTANCE**                               |
+| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS**                               |
+| Recommendation      | **PRODUCTION READY**                                                |
 
 ## Decision statement
 
@@ -24,7 +24,7 @@ This decision is **proposed** by the certification pack. It becomes binding only
 5. **Quality gates verified** — typecheck PASS; package tests 52 PASS; UI+package 65 PASS; architecture boundaries PASS.
 6. **Limitations intentional** — Coverage, Impact, Verification, Evidence, Certification Engine, AI, MCP, and Graph are separate future programmes — not incomplete Traceability baseline work (same pattern as REQ-001).
 
-## What this does *not* certify
+## What this does _not_ certify
 
 - Coverage Engine / coverage percentages as SoR
 - Impact analysis Engine

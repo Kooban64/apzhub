@@ -8,10 +8,10 @@ Domain never imports drizzle/pg. `StoredTestPlan` is the persisted aggregate sha
 
 ## Implementations
 
-| Impl | Factory |
-| ---- | ------- |
+| Impl      | Factory                            |
+| --------- | ---------------------------------- |
 | In-memory | `createInMemoryTestPlanRepository` |
-| Postgres | `createPostgresTestPlanRepository` |
+| Postgres  | `createPostgresTestPlanRepository` |
 
 Persistence factories:
 

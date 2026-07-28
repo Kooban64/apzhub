@@ -34,7 +34,9 @@ export type QepVerificationPlatformServicesBundle = {
 type CommonInput = {
   readonly now?: () => string;
   readonly id?: () => string;
-  readonly onVerificationUpserted?: (verification: StoredVerification) => void | Promise<void>;
+  readonly onVerificationUpserted?: (
+    verification: StoredVerification,
+  ) => void | Promise<void>;
   readonly subjectResolver?: VerificationSubjectResolver;
 };
 
@@ -68,7 +70,9 @@ function buildBundle(input: {
   readonly persistenceMode: "postgres" | "memory";
   readonly now?: () => string;
   readonly id?: () => string;
-  readonly onVerificationUpserted?: (verification: StoredVerification) => void | Promise<void>;
+  readonly onVerificationUpserted?: (
+    verification: StoredVerification,
+  ) => void | Promise<void>;
   readonly subjectResolver?: VerificationSubjectResolver;
 }): QepVerificationPlatformServicesBundle {
   // Cross-bounded-context subject existence checks (requirements, trace links,
@@ -77,7 +81,8 @@ function buildBundle(input: {
   // permissively so Verification creation is not blocked on those domains
   // landing. Requirements/trace-backed resolvers can be supplied via
   // `subjectResolver` once the caller has that persistence in scope.
-  const subjectResolver = input.subjectResolver ?? createInMemoryVerificationSubjectResolver();
+  const subjectResolver =
+    input.subjectResolver ?? createInMemoryVerificationSubjectResolver();
 
   const application = createVerificationApplicationService({
     verifications: input.persistence.verifications,
@@ -121,7 +126,9 @@ export function createQepVerificationPlatformServicesForProduction(
       "createQepVerificationPlatformServicesForProduction requires postgresDb — in-memory fallback is forbidden",
     );
   }
-  const persistence = createQepVerificationPersistenceForProduction({ db: input.postgresDb });
+  const persistence = createQepVerificationPersistenceForProduction({
+    db: input.postgresDb,
+  });
   return buildBundle({
     persistence,
     persistenceMode: "postgres",

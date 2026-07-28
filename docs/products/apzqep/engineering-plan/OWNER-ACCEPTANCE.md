@@ -11,12 +11,12 @@
 
 ## Decision record (Owner)
 
-| Field | Value |
-| ----- | ----- |
-| Decision | **ACCEPTED** |
-| Date | 2026-07-24 |
-| Authority | Owner |
-| Baseline | APZQEP-PLAN-001 Engineering Delivery Plan (1.0.0-plan) |
+| Field      | Value                                                                                                                                       |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Decision   | **ACCEPTED**                                                                                                                                |
+| Date       | 2026-07-24                                                                                                                                  |
+| Authority  | Owner                                                                                                                                       |
+| Baseline   | APZQEP-PLAN-001 Engineering Delivery Plan (1.0.0-plan)                                                                                      |
 | Conditions | Plan Acceptance authorises **APZQEP-ENG-010** Repository Bootstrap & Sprint Zero; subsequent Engineering programmes require named Approvals |
 
 ## Acceptance checklist (Owner)

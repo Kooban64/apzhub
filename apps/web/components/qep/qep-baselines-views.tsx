@@ -26,7 +26,10 @@ import {
   type QepBaselineListParams,
 } from "@/lib/qep/qep-api";
 import { qepQueryKeys } from "@/lib/qep/query-keys";
-import { QEP_REQUIREMENTS_ROUTES, parseQepBaselineRouteId } from "@apzhub/qep-requirements/presentation";
+import {
+  QEP_REQUIREMENTS_ROUTES,
+  parseQepBaselineRouteId,
+} from "@apzhub/qep-requirements/presentation";
 
 import {
   QepEmptyState,
@@ -43,13 +46,13 @@ function formatDate(value?: string): string {
   return value ? value : "—";
 }
 
-function IntegrityBadge({
-  status,
-}: {
-  readonly status?: string;
-}) {
+function IntegrityBadge({ status }: { readonly status?: string }) {
   if (!status) {
-    return <span className="text-xs text-[var(--color-muted-foreground)]">Not applicable</span>;
+    return (
+      <span className="text-xs text-[var(--color-muted-foreground)]">
+        Not applicable
+      </span>
+    );
   }
   const label =
     status === "verified"
@@ -124,7 +127,11 @@ export function QepBaselinesListView() {
       {query.isLoading ? <QepLoadingState label="Loading baselines…" /> : null}
       {query.isError ? (
         <QepErrorState
-          message={query.error instanceof Error ? query.error.message : "Unable to load baselines"}
+          message={
+            query.error instanceof Error
+              ? query.error.message
+              : "Unable to load baselines"
+          }
           onRetry={() => void query.refetch()}
         />
       ) : null}
@@ -161,7 +168,10 @@ export function QepBaselinesListView() {
               <QepStatusBadge key="status" status={baseline.status} />,
               baseline.createdBy,
               baseline.itemCount,
-              <IntegrityBadge key="integrity" status={baseline.integrityVerificationStatus} />,
+              <IntegrityBadge
+                key="integrity"
+                status={baseline.integrityVerificationStatus}
+              />,
               formatDate(baseline.createdAt),
               formatDate(baseline.lockedAt),
               formatDate(baseline.archivedAt),
@@ -220,7 +230,9 @@ export function QepBaselineCreateView() {
         </p>
         {mutation.isError ? (
           <QepErrorState
-            message={mutation.error instanceof Error ? mutation.error.message : "Create failed"}
+            message={
+              mutation.error instanceof Error ? mutation.error.message : "Create failed"
+            }
           />
         ) : null}
         <form className="flex max-w-xl flex-col gap-3" onSubmit={handleSubmit}>
@@ -237,7 +249,11 @@ export function QepBaselineCreateView() {
             onChange={(event) => setDescription(event.target.value)}
             data-testid="qep-baseline-description"
           />
-          <Button type="submit" disabled={mutation.isPending} data-testid="qep-baseline-create-submit">
+          <Button
+            type="submit"
+            disabled={mutation.isPending}
+            data-testid="qep-baseline-create-submit"
+          >
             {mutation.isPending ? "Creating…" : "Create baseline"}
           </Button>
         </form>
@@ -306,8 +322,8 @@ function ArchiveConfirmDialog({
   return (
     <QepPanel title="Confirm archive">
       <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
-        Archiving <strong>{baselineName}</strong> retains it as historical configuration.
-        There is no restore action.
+        Archiving <strong>{baselineName}</strong> retains it as historical
+        configuration. There is no restore action.
       </p>
       <div className="flex gap-2">
         <Button
@@ -372,7 +388,9 @@ function AddBaselineItemFlow({
 }) {
   const queryClient = useQueryClient();
   const [search, setSearch] = useState("");
-  const [selectedRequirementId, setSelectedRequirementId] = useState<string | null>(null);
+  const [selectedRequirementId, setSelectedRequirementId] = useState<string | null>(
+    null,
+  );
   const [selectedVersion, setSelectedVersion] = useState<number | null>(null);
 
   const searchQuery = useQuery({
@@ -391,8 +409,12 @@ function AddBaselineItemFlow({
   const addMutation = useMutation({
     mutationFn: (input: AddQepBaselineItemInput) => addBaselineItem(baselineId, input),
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: qepQueryKeys.baselines.detail(baselineId) });
-      void queryClient.invalidateQueries({ queryKey: qepQueryKeys.baselines.items(baselineId) });
+      void queryClient.invalidateQueries({
+        queryKey: qepQueryKeys.baselines.detail(baselineId),
+      });
+      void queryClient.invalidateQueries({
+        queryKey: qepQueryKeys.baselines.items(baselineId),
+      });
       setSelectedRequirementId(null);
       setSelectedVersion(null);
       onDone();
@@ -407,7 +429,11 @@ function AddBaselineItemFlow({
     <QepPanel title="Add requirement version">
       {addMutation.isError ? (
         <QepErrorState
-          message={addMutation.error instanceof Error ? addMutation.error.message : "Add failed"}
+          message={
+            addMutation.error instanceof Error
+              ? addMutation.error.message
+              : "Add failed"
+          }
         />
       ) : null}
       <Input
@@ -420,7 +446,9 @@ function AddBaselineItemFlow({
         }}
         data-testid="qep-baseline-add-item-search"
       />
-      {searchQuery.isSuccess && searchQuery.data.items.length > 0 && !selectedRequirementId ? (
+      {searchQuery.isSuccess &&
+      searchQuery.data.items.length > 0 &&
+      !selectedRequirementId ? (
         <ul className="mt-2 space-y-1 text-sm">
           {searchQuery.data.items.map((requirement) => (
             <li key={requirement.id}>
@@ -439,7 +467,9 @@ function AddBaselineItemFlow({
       {selectedRequirementId ? (
         <div className="mt-4">
           <p className="text-sm font-medium">Requirement: {selectedRequirementId}</p>
-          {versionsQuery.isLoading ? <QepLoadingState label="Loading versions…" /> : null}
+          {versionsQuery.isLoading ? (
+            <QepLoadingState label="Loading versions…" />
+          ) : null}
           {versionsQuery.isSuccess && versionsQuery.data.items.length === 0 ? (
             <QepEmptyState title="This requirement has no content versions yet" />
           ) : null}
@@ -451,7 +481,9 @@ function AddBaselineItemFlow({
                 data-testid="qep-baseline-add-item-version"
                 value={selectedVersion ?? ""}
                 onChange={(event) =>
-                  setSelectedVersion(event.target.value ? Number(event.target.value) : null)
+                  setSelectedVersion(
+                    event.target.value ? Number(event.target.value) : null,
+                  )
                 }
               >
                 <option value="">Select a version…</option>
@@ -466,7 +498,8 @@ function AddBaselineItemFlow({
           {selectedVersionMeta ? (
             <div className="mt-3 rounded-md border border-[var(--color-border)] p-3 text-sm">
               <p>
-                Confirm adding <strong>version {selectedVersionMeta.versionNumber}</strong> of{" "}
+                Confirm adding{" "}
+                <strong>version {selectedVersionMeta.versionNumber}</strong> of{" "}
                 {selectedRequirementId} ({selectedVersionMeta.changeReason}).
               </p>
               <Button
@@ -498,7 +531,9 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
   const [editing, setEditing] = useState(false);
   const [addingItem, setAddingItem] = useState(false);
   const [pendingAction, setPendingAction] = useState<null | "lock" | "archive">(null);
-  const [removingContentVersionId, setRemovingContentVersionId] = useState<string | null>(null);
+  const [removingContentVersionId, setRemovingContentVersionId] = useState<
+    string | null
+  >(null);
 
   const query = useQuery({
     queryKey: qepQueryKeys.baselines.detail(baselineId),
@@ -512,8 +547,12 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
   });
 
   function invalidateBaseline() {
-    void queryClient.invalidateQueries({ queryKey: qepQueryKeys.baselines.detail(baselineId) });
-    void queryClient.invalidateQueries({ queryKey: qepQueryKeys.baselines.items(baselineId) });
+    void queryClient.invalidateQueries({
+      queryKey: qepQueryKeys.baselines.detail(baselineId),
+    });
+    void queryClient.invalidateQueries({
+      queryKey: qepQueryKeys.baselines.items(baselineId),
+    });
     void queryClient.invalidateQueries({ queryKey: qepQueryKeys.baselines.all() });
   }
 
@@ -528,7 +567,8 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
   });
 
   const removeMutation = useMutation({
-    mutationFn: (contentVersionId: string) => removeBaselineItem(baselineId, contentVersionId),
+    mutationFn: (contentVersionId: string) =>
+      removeBaselineItem(baselineId, contentVersionId),
     onSuccess: () => {
       setRemovingContentVersionId(null);
       invalidateBaseline();
@@ -560,7 +600,9 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
   if (query.isError || !query.data) {
     return (
       <QepErrorState
-        message={query.error instanceof Error ? query.error.message : "Baseline not found"}
+        message={
+          query.error instanceof Error ? query.error.message : "Baseline not found"
+        }
         onRetry={() => void query.refetch()}
       />
     );
@@ -660,11 +702,15 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
             <dd>{baseline.createdBy}</dd>
           </div>
           <div>
-            <dt className="font-medium text-[var(--color-muted-foreground)]">Item count</dt>
+            <dt className="font-medium text-[var(--color-muted-foreground)]">
+              Item count
+            </dt>
             <dd>{baseline.itemCount}</dd>
           </div>
           <div>
-            <dt className="font-medium text-[var(--color-muted-foreground)]">Created</dt>
+            <dt className="font-medium text-[var(--color-muted-foreground)]">
+              Created
+            </dt>
             <dd>{formatDate(baseline.createdAt)}</dd>
           </div>
           <div>
@@ -672,7 +718,9 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
             <dd>{formatDate(baseline.lockedAt)}</dd>
           </div>
           <div>
-            <dt className="font-medium text-[var(--color-muted-foreground)]">Archived</dt>
+            <dt className="font-medium text-[var(--color-muted-foreground)]">
+              Archived
+            </dt>
             <dd>{formatDate(baseline.archivedAt)}</dd>
           </div>
         </dl>
@@ -681,23 +729,33 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
       <QepPanel title="Integrity">
         <dl className="grid gap-2 text-sm sm:grid-cols-2">
           <div>
-            <dt className="font-medium text-[var(--color-muted-foreground)]">Verification status</dt>
+            <dt className="font-medium text-[var(--color-muted-foreground)]">
+              Verification status
+            </dt>
             <dd>
               <IntegrityBadge status={baseline.integrityVerificationStatus} />
             </dd>
           </div>
           <div>
-            <dt className="font-medium text-[var(--color-muted-foreground)]">Algorithm</dt>
+            <dt className="font-medium text-[var(--color-muted-foreground)]">
+              Algorithm
+            </dt>
             <dd>{baseline.integrityAlgorithm ?? "—"}</dd>
           </div>
           <div>
-            <dt className="font-medium text-[var(--color-muted-foreground)]">Verified at</dt>
+            <dt className="font-medium text-[var(--color-muted-foreground)]">
+              Verified at
+            </dt>
             <dd>{formatDate(baseline.integrityVerifiedAt)}</dd>
           </div>
           {baseline.integrityFingerprint ? (
             <div className="sm:col-span-2">
-              <dt className="font-medium text-[var(--color-muted-foreground)]">Fingerprint</dt>
-              <dd className="break-all font-mono text-xs">{baseline.integrityFingerprint}</dd>
+              <dt className="font-medium text-[var(--color-muted-foreground)]">
+                Fingerprint
+              </dt>
+              <dd className="break-all font-mono text-xs">
+                {baseline.integrityFingerprint}
+              </dd>
             </div>
           ) : null}
         </dl>
@@ -711,7 +769,10 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
           />
         ) : null}
         {verifyMutation.isSuccess ? (
-          <p className="mt-2 text-sm text-[var(--color-muted-foreground)]" role="status">
+          <p
+            className="mt-2 text-sm text-[var(--color-muted-foreground)]"
+            role="status"
+          >
             Integrity re-verified successfully.
           </p>
         ) : null}
@@ -726,7 +787,12 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
               editMutation.mutate();
             }}
           >
-            <Input label="Name" value={name} onChange={(event) => setName(event.target.value)} required />
+            <Input
+              label="Name"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              required
+            />
             <Input
               label="Description"
               value={description}
@@ -736,7 +802,12 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
               <Button type="submit" size="sm" disabled={editMutation.isPending}>
                 Save changes
               </Button>
-              <Button type="button" variant="outline" size="sm" onClick={() => setEditing(false)}>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setEditing(false)}
+              >
                 Cancel
               </Button>
             </div>
@@ -745,7 +816,10 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
       ) : null}
 
       {addingItem ? (
-        <AddBaselineItemFlow baselineId={baselineId} onDone={() => setAddingItem(false)} />
+        <AddBaselineItemFlow
+          baselineId={baselineId}
+          onDone={() => setAddingItem(false)}
+        />
       ) : null}
 
       <QepPanel title="Baseline contents">
@@ -753,7 +827,9 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
         {itemsQuery.isError ? (
           <QepErrorState
             message={
-              itemsQuery.error instanceof Error ? itemsQuery.error.message : "Unable to load contents"
+              itemsQuery.error instanceof Error
+                ? itemsQuery.error.message
+                : "Unable to load contents"
             }
             onRetry={() => void itemsQuery.refetch()}
           />
@@ -764,7 +840,13 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
         {itemsQuery.isSuccess && itemsQuery.data.length > 0 ? (
           <QepTable
             caption="Baseline contents"
-            columns={["Requirement", "Content version", "Included at", "Included by", ""]}
+            columns={[
+              "Requirement",
+              "Content version",
+              "Included at",
+              "Included by",
+              "",
+            ]}
             rows={itemsQuery.data.map((item) => ({
               id: item.contentVersionId,
               cells: [
@@ -799,8 +881,9 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
       {removingContentVersionId ? (
         <RemoveItemConfirmDialog
           requirementId={
-            itemsQuery.data?.find((item) => item.contentVersionId === removingContentVersionId)
-              ?.requirementId ?? removingContentVersionId
+            itemsQuery.data?.find(
+              (item) => item.contentVersionId === removingContentVersionId,
+            )?.requirementId ?? removingContentVersionId
           }
           isSubmitting={removeMutation.isPending}
           onCancel={() => setRemovingContentVersionId(null)}
@@ -826,13 +909,19 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
       ) : null}
       {lockMutation.isError ? (
         <QepErrorState
-          message={lockMutation.error instanceof Error ? lockMutation.error.message : "Lock failed"}
+          message={
+            lockMutation.error instanceof Error
+              ? lockMutation.error.message
+              : "Lock failed"
+          }
         />
       ) : null}
       {archiveMutation.isError ? (
         <QepErrorState
           message={
-            archiveMutation.error instanceof Error ? archiveMutation.error.message : "Archive failed"
+            archiveMutation.error instanceof Error
+              ? archiveMutation.error.message
+              : "Archive failed"
           }
         />
       ) : null}
@@ -844,7 +933,9 @@ export function QepBaselineDetailView({ baselineId }: { readonly baselineId: str
 export function QepBaselinesCompareView() {
   const [baseId, setBaseId] = useState("");
   const [targetId, setTargetId] = useState("");
-  const [submitted, setSubmitted] = useState<{ base: string; target: string } | null>(null);
+  const [submitted, setSubmitted] = useState<{ base: string; target: string } | null>(
+    null,
+  );
 
   const listQuery = useQuery({
     queryKey: qepQueryKeys.baselines.list(),
@@ -852,9 +943,15 @@ export function QepBaselinesCompareView() {
   });
 
   const compareQuery = useQuery({
-    queryKey: qepQueryKeys.baselines.compare(submitted?.base ?? "", submitted?.target ?? ""),
+    queryKey: qepQueryKeys.baselines.compare(
+      submitted?.base ?? "",
+      submitted?.target ?? "",
+    ),
     queryFn: () =>
-      compareBaselines({ baseBaselineId: submitted!.base, targetBaselineId: submitted!.target }),
+      compareBaselines({
+        baseBaselineId: submitted!.base,
+        targetBaselineId: submitted!.target,
+      }),
     enabled: Boolean(submitted),
   });
 
@@ -912,12 +1009,18 @@ export function QepBaselinesCompareView() {
       {compareQuery.isError ? (
         <QepErrorState
           message={
-            compareQuery.error instanceof Error ? compareQuery.error.message : "Comparison failed"
+            compareQuery.error instanceof Error
+              ? compareQuery.error.message
+              : "Comparison failed"
           }
         />
       ) : null}
       {compareQuery.isSuccess ? (
-        <div className="grid gap-4" aria-live="polite" data-testid="qep-baselines-compare-result">
+        <div
+          className="grid gap-4"
+          aria-live="polite"
+          data-testid="qep-baselines-compare-result"
+        >
           {compareQuery.data.versionChanged.length > 0 ? (
             <QepPanel title="Version changed">
               <ul className="space-y-1 text-sm">
@@ -982,7 +1085,11 @@ export function QepBaselinesCompareView() {
 }
 
 /** Baseline History panel embedded on the Requirement detail view. */
-export function BaselineHistoryPanel({ requirementId }: { readonly requirementId: string }) {
+export function BaselineHistoryPanel({
+  requirementId,
+}: {
+  readonly requirementId: string;
+}) {
   const query = useQuery({
     queryKey: qepQueryKeys.requirements.baselineHistory(requirementId),
     queryFn: ({ signal }) => requirementBaselineHistory(requirementId, { signal }),
@@ -994,7 +1101,9 @@ export function BaselineHistoryPanel({ requirementId }: { readonly requirementId
       {query.isError ? (
         <QepErrorState
           message={
-            query.error instanceof Error ? query.error.message : "Unable to load baseline history"
+            query.error instanceof Error
+              ? query.error.message
+              : "Unable to load baseline history"
           }
           onRetry={() => void query.refetch()}
         />
@@ -1003,14 +1112,20 @@ export function BaselineHistoryPanel({ requirementId }: { readonly requirementId
         <QepEmptyState title="This requirement is not included in any baseline yet" />
       ) : null}
       {query.isSuccess && query.data.length > 0 ? (
-        <ul className="space-y-2 text-sm" data-testid="qep-requirement-baseline-history">
+        <ul
+          className="space-y-2 text-sm"
+          data-testid="qep-requirement-baseline-history"
+        >
           {query.data.map((baseline) => (
             <li
               key={baseline.id}
               className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-[var(--color-border)] p-3"
             >
               <span>
-                <Link href={QEP_REQUIREMENTS_ROUTES.baselines.detail(baseline.id)} className="underline">
+                <Link
+                  href={QEP_REQUIREMENTS_ROUTES.baselines.detail(baseline.id)}
+                  className="underline"
+                >
                   #{baseline.number} — {baseline.name}
                 </Link>
               </span>

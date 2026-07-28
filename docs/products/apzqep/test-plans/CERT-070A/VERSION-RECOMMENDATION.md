@@ -1,11 +1,11 @@
 # Version Recommendation — APZQEP-CERT-070A
 
-| Field | Value |
-| ----- | ----- |
-| Package | `@apzhub/qep-test-plans` |
-| Current | **0.2.0** |
+| Field       | Value                                                                          |
+| ----------- | ------------------------------------------------------------------------------ |
+| Package     | `@apzhub/qep-test-plans`                                                       |
+| Current     | **0.2.0**                                                                      |
 | Recommended | **Remain 0.2.0** (label **WORKBENCH COMPONENT CERTIFIED** upon Owner Decision) |
-| 1.0.0 | **Not recommended** |
+| 1.0.0       | **Not recommended**                                                            |
 
 ## Rationale
 

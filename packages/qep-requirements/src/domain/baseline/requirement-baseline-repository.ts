@@ -1,8 +1,6 @@
 import type { RequirementBaseline } from "./requirement-baseline";
 import type { RequirementBaselineId } from "./requirement-baseline-id";
-import type {
-  RequirementBaselineIntegrityVerificationStatus,
-} from "./requirement-baseline-integrity";
+import type { RequirementBaselineIntegrityVerificationStatus } from "./requirement-baseline-integrity";
 import type { RequirementBaselineItem } from "./requirement-baseline-item";
 import type { RequirementBaselineStatus } from "./requirement-baseline-status";
 
@@ -32,7 +30,10 @@ export type RequirementBaselineListQuery = {
  */
 export interface RequirementBaselineRepository {
   createBaseline(baseline: RequirementBaseline): Promise<RequirementBaseline>;
-  getBaseline(tenantId: string, id: RequirementBaselineId): Promise<RequirementBaseline | null>;
+  getBaseline(
+    tenantId: string,
+    id: RequirementBaselineId,
+  ): Promise<RequirementBaseline | null>;
   updateDraftBaseline(baseline: RequirementBaseline): Promise<RequirementBaseline>;
   listBaselines(
     tenantId: string,

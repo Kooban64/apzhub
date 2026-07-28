@@ -4,27 +4,27 @@ These limitations are **inherited** from the three preceding Component Certifica
 
 ## Inherited from Infrastructure (APZQEP-CERT-060B)
 
-| ID | Limitation | Owner classification | Capability-level disposition |
-| -- | ---------- | -------------------- | ------------------------------ |
-| L-01 | Version comparison (`CompareVersions` / `GET .../compare`) not implemented | Deferred capability | Scope limitation. Workbench presents a live, navigable, **governed unavailable** slot — no fabricated diff, no call to a non-existent endpoint. New ENG programme required if/when delivered. |
-| L-02 | Dedicated `GET .../items` not provided; items available on plan GET DTO | Approved variance | Scope/API shape, not a correctness defect. Items panel binds to `dto.items[]` throughout the Workbench. |
+| ID   | Limitation                                                                    | Owner classification        | Capability-level disposition                                                                                                                                                                                          |
+| ---- | ----------------------------------------------------------------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| L-01 | Version comparison (`CompareVersions` / `GET .../compare`) not implemented    | Deferred capability         | Scope limitation. Workbench presents a live, navigable, **governed unavailable** slot — no fabricated diff, no call to a non-existent endpoint. New ENG programme required if/when delivered.                         |
+| L-02 | Dedicated `GET .../items` not provided; items available on plan GET DTO       | Approved variance           | Scope/API shape, not a correctness defect. Items panel binds to `dto.items[]` throughout the Workbench.                                                                                                               |
 | L-03 | Package line coverage below aspirational OES % objectives (ECR: 77.07% lines) | Accepted with justification | No artificial test expansion performed or required; behavioural coverage (Domain, Application, in-memory Infrastructure) is high; only the Postgres executor and presentation constant stubs pull the aggregate down. |
 
 ## Inherited from Workbench (APZQEP-CERT-070A)
 
-| ID | Item | Classification | Capability-level disposition |
-| -- | ---- | --------------- | ------------------------------ |
-| P-01 | Playwright journeys for Mark Ready → Start Execution → Complete → Archive chain, Supersede, Clone not asserted as discrete UI click-through tests | Test-authoring completeness gap | Does not block. Identical `availableActions`-gated rendering mechanism proven by asserted journeys (submit/approve/reject/returnToDraft/updateAssignment) and negative test E2E-10. |
-| P-02 | Not-found (404) governed state not separately Playwright-asserted (only forbidden/403 is) | Test-authoring completeness gap | Does not block. Typed error mapping exists in `qep-test-plan-api.ts` / `QepErrorState`; same code path as the asserted 403 case. |
-| P-03 | Create/Edit Draft and Relationships/History/Versions panels not separately axe-scanned | Test-authoring completeness gap | Does not block. These reuse the same `qep-ui` primitives already axe-scanned on Dashboard/Explorer/Inspector/Review/Compare. |
-| P-04 | Preference Service named saved views not implemented | Approved scope boundary (OES-ENG-070A Part 2 §10 requires only URL/session round-trip, delivered) | Does not block. Not required by the accepted OES; a future personalisation programme, if desired. |
+| ID   | Item                                                                                                                                              | Classification                                                                                    | Capability-level disposition                                                                                                                                                        |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| P-01 | Playwright journeys for Mark Ready → Start Execution → Complete → Archive chain, Supersede, Clone not asserted as discrete UI click-through tests | Test-authoring completeness gap                                                                   | Does not block. Identical `availableActions`-gated rendering mechanism proven by asserted journeys (submit/approve/reject/returnToDraft/updateAssignment) and negative test E2E-10. |
+| P-02 | Not-found (404) governed state not separately Playwright-asserted (only forbidden/403 is)                                                         | Test-authoring completeness gap                                                                   | Does not block. Typed error mapping exists in `qep-test-plan-api.ts` / `QepErrorState`; same code path as the asserted 403 case.                                                    |
+| P-03 | Create/Edit Draft and Relationships/History/Versions panels not separately axe-scanned                                                            | Test-authoring completeness gap                                                                   | Does not block. These reuse the same `qep-ui` primitives already axe-scanned on Dashboard/Explorer/Inspector/Review/Compare.                                                        |
+| P-04 | Preference Service named saved views not implemented                                                                                              | Approved scope boundary (OES-ENG-070A Part 2 §10 requires only URL/session round-trip, delivered) | Does not block. Not required by the accepted OES; a future personalisation programme, if desired.                                                                                   |
 
 ## Inherited from Domain (APZQEP-CERT-060A)
 
-| Limitation | Status |
-| ---------- | ------ |
-| No AI / MCP implementation | Expected — consumer architecture only; out of Capability Certification scope |
-| No Evidence / Coverage / Impact / Certification Engine integration | Expected — future programmes, outside the Test Plans capability boundary |
+| Limitation                                                         | Status                                                                       |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| No AI / MCP implementation                                         | Expected — consumer architecture only; out of Capability Certification scope |
+| No Evidence / Coverage / Impact / Certification Engine integration | Expected — future programmes, outside the Test Plans capability boundary     |
 
 ## Manifest metadata staleness (documentation-only, recorded, not a limitation of correctness)
 
@@ -32,12 +32,12 @@ These limitations are **inherited** from the three preceding Component Certifica
 
 ## Determination
 
-| Question | Answer |
-| -------- | ------ |
-| Do these limitations invalidate capability correctness? | **No** |
-| Do they define current capability scope / test-authoring breadth? | **Yes** |
-| Appropriate class | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Require remediation before Capability Certification? | **No** — each was already Owner-accepted at its originating layer's certification; this Capability Certification evaluates the integrated whole as delivered |
+| Question                                                          | Answer                                                                                                                                                       |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Do these limitations invalidate capability correctness?           | **No**                                                                                                                                                       |
+| Do they define current capability scope / test-authoring breadth? | **Yes**                                                                                                                                                      |
+| Appropriate class                                                 | **PRODUCTION_READY_WITH_LIMITATIONS**                                                                                                                        |
+| Require remediation before Capability Certification?              | **No** — each was already Owner-accepted at its originating layer's certification; this Capability Certification evaluates the integrated whole as delivered |
 
 ## Freeze implication
 

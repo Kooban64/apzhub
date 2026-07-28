@@ -117,7 +117,11 @@ export type QepTestPlanDto = {
   readonly title: string;
   readonly description?: string;
   readonly objective: string;
-  readonly scope: { readonly class: string; readonly label?: string; readonly externalRef?: string };
+  readonly scope: {
+    readonly class: string;
+    readonly label?: string;
+    readonly externalRef?: string;
+  };
   readonly status: string;
   readonly priority: string;
   readonly planType: string;
@@ -161,10 +165,17 @@ export function computeQepTestPlanAvailableActions(
 
   const CONTENT_EDITABLE = status === "draft" || status === "rejected";
   const ASSIGNMENT_SCHEDULE_EDITABLE =
-    status === "draft" || status === "rejected" || status === "approved" || status === "ready";
+    status === "draft" ||
+    status === "rejected" ||
+    status === "approved" ||
+    status === "ready";
   const CANCELLABLE =
-    status === "draft" || status === "review" || status === "approved" || status === "ready";
-  const SUPERSEDE_ELIGIBLE = status === "approved" || status === "ready" || status === "completed";
+    status === "draft" ||
+    status === "review" ||
+    status === "approved" ||
+    status === "ready";
+  const SUPERSEDE_ELIGIBLE =
+    status === "approved" || status === "ready" || status === "completed";
 
   const actions: QepTestPlanAction[] = [];
 
@@ -224,7 +235,11 @@ export type CreateQepTestPlanInput = {
   readonly title: string;
   readonly objective?: string;
   readonly description?: string;
-  readonly scope: { readonly class: string; readonly label?: string; readonly externalRef?: string };
+  readonly scope: {
+    readonly class: string;
+    readonly label?: string;
+    readonly externalRef?: string;
+  };
   readonly priority?: string;
   readonly ownerId?: string;
   readonly externalReferences?: readonly string[];
@@ -234,7 +249,11 @@ export type UpdateQepTestPlanContentInput = {
   readonly title?: string;
   readonly description?: string | null;
   readonly objective?: string;
-  readonly scope?: { readonly class: string; readonly label?: string; readonly externalRef?: string };
+  readonly scope?: {
+    readonly class: string;
+    readonly label?: string;
+    readonly externalRef?: string;
+  };
   readonly priority?: string;
   readonly expectedRevision: number;
 };

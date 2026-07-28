@@ -6,12 +6,12 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ARCH-007 — Requirements Traceability Architecture |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Classification | Authoritative Architecture |
-| Pack | `docs/products/apzqep/architecture/requirements-traceability/` |
+| Field               | Value                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------- |
+| Programme           | APZQEP-ARCH-007 — Requirements Traceability Architecture                                     |
+| Decision            | **ACCEPTED / CLOSED / COMPLETE**                                                             |
+| Classification      | Authoritative Architecture                                                                   |
+| Pack                | `docs/products/apzqep/architecture/requirements-traceability/`                               |
 | Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T130000Z-APZQEP-ARCH-007-ACCEPTANCE.json` |
 
 ## Effect

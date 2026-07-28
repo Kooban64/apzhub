@@ -54,9 +54,7 @@ export interface RequirementsRelationshipRepository {
       readonly excludeRelationshipId?: string;
       readonly types?: readonly RelationshipType[];
     },
-  ): Promise<
-    readonly import("./relationship-policy").RelationshipEdgeFact[]
-  >;
+  ): Promise<readonly import("./relationship-policy").RelationshipEdgeFact[]>;
   exists(tenantId: string, id: RelationshipId): Promise<boolean>;
   listHistory(
     tenantId: string,

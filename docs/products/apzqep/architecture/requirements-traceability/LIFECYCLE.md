@@ -14,6 +14,6 @@ Create · Validate · Verify · Approve · Retire · Supersede · Historical rec
 
 ## Baseline / CV
 
-- Baseline-bound views immutable when Baseline locked.  
-- CV pins follow Requirements rules.  
+- Baseline-bound views immutable when Baseline locked.
+- CV pins follow Requirements rules.
 - Context changes must be explicit — never silent switch from historical to current.

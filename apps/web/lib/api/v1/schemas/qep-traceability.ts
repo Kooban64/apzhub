@@ -71,7 +71,9 @@ const qepTraceProvenanceSchema = z
 export const qepTraceLinkListQuerySchema = paginationQuerySchema
   .extend({
     type: z.string().min(1).max(64).optional(),
-    lifecycleState: z.enum(["draft", "validated", "approved", "retired", "superseded"]).optional(),
+    lifecycleState: z
+      .enum(["draft", "validated", "approved", "retired", "superseded"])
+      .optional(),
     sourceKind: z.string().min(1).max(64).optional(),
     sourceArtefactId: z.string().min(1).max(128).optional(),
     targetKind: z.string().min(1).max(64).optional(),
@@ -160,7 +162,9 @@ export type QepTraceLinkListQuery = z.infer<typeof qepTraceLinkListQuerySchema>;
 export type QepTraceLinkEndpointQuery = z.infer<typeof qepTraceLinkEndpointQuerySchema>;
 export type QepTraceLinkCreateBody = z.infer<typeof qepTraceLinkCreateBodySchema>;
 export type QepTraceLinkSupersedeBody = z.infer<typeof qepTraceLinkSupersedeBodySchema>;
-export type QepTraceLinkConfidenceBody = z.infer<typeof qepTraceLinkConfidenceBodySchema>;
+export type QepTraceLinkConfidenceBody = z.infer<
+  typeof qepTraceLinkConfidenceBodySchema
+>;
 export type QepTraceLinkAuthorityBody = z.infer<typeof qepTraceLinkAuthorityBodySchema>;
 export type QepTraceLinkScopeBody = z.infer<typeof qepTraceLinkScopeBodySchema>;
 export type QepTraceLinkRationaleBody = z.infer<typeof qepTraceLinkRationaleBodySchema>;

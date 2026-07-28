@@ -57,7 +57,10 @@ import {
   SpecificationVersionService,
 } from "./specification-domain-service";
 import { createSpecificationId } from "./specification-id";
-import { createSpecificationStatus, isEditableSpecificationStatus } from "./specification-status";
+import {
+  createSpecificationStatus,
+  isEditableSpecificationStatus,
+} from "./specification-status";
 import {
   assertNotSelfReference,
   createSpecificationAcceptanceCriteria,
@@ -99,10 +102,7 @@ import {
   createSpecificationRelationship,
   createSpecificationRelationshipId,
 } from "./specification-relationship";
-import {
-  createSpecificationRecord,
-  withRecordVersion,
-} from "./specification-record";
+import { createSpecificationRecord, withRecordVersion } from "./specification-record";
 import { SPECIFICATION_DOMAIN_EVENT_TYPES } from "./specification-events";
 import { SPECIFICATION_TYPES } from "./constants";
 
@@ -162,15 +162,21 @@ describe("Test Specification domain — create", () => {
   });
 
   it("rejects invalid specification id", () => {
-    expect(() => baseCreate({ id: "bad" })).toThrow(TestSpecificationInvariantViolation);
+    expect(() => baseCreate({ id: "bad" })).toThrow(
+      TestSpecificationInvariantViolation,
+    );
   });
 
   it("requires title, objective, owner, classification", () => {
-    expect(() => baseCreate({ title: " " })).toThrow(TestSpecificationInvariantViolation);
+    expect(() => baseCreate({ title: " " })).toThrow(
+      TestSpecificationInvariantViolation,
+    );
     expect(() => baseCreate({ objective: " " })).toThrow(
       TestSpecificationInvariantViolation,
     );
-    expect(() => baseCreate({ owner: " " })).toThrow(TestSpecificationInvariantViolation);
+    expect(() => baseCreate({ owner: " " })).toThrow(
+      TestSpecificationInvariantViolation,
+    );
     expect(() => baseCreate({ classification: " " })).toThrow(
       TestSpecificationInvariantViolation,
     );
@@ -265,9 +271,9 @@ describe("Test Specification domain — lifecycle", () => {
       REVIEWER,
       "Incomplete",
     );
-    expect(() =>
-      approveSpecification(rejected, LATER, REVIEWER),
-    ).toThrow(TestSpecificationInvariantViolation);
+    expect(() => approveSpecification(rejected, LATER, REVIEWER)).toThrow(
+      TestSpecificationInvariantViolation,
+    );
     expect(canTransitionSpecificationStatus("rejected", "approved")).toBe(false);
   });
 
@@ -308,12 +314,12 @@ describe("Test Specification domain — lifecycle", () => {
   });
 
   it("rejects illegal lifecycle transitions", () => {
-    expect(() =>
-      assertSpecificationLifecycleTransition("draft", "approved"),
-    ).toThrow(TestSpecificationInvariantViolation);
-    expect(() =>
-      assertSpecificationLifecycleTransition("approved", "draft"),
-    ).toThrow(TestSpecificationInvariantViolation);
+    expect(() => assertSpecificationLifecycleTransition("draft", "approved")).toThrow(
+      TestSpecificationInvariantViolation,
+    );
+    expect(() => assertSpecificationLifecycleTransition("approved", "draft")).toThrow(
+      TestSpecificationInvariantViolation,
+    );
   });
 });
 
@@ -400,11 +406,16 @@ describe("Test Specification domain — versioning", () => {
     expect(successor.record.predecessorSpecificationId).toBe("tsp_1");
     expect(successor.record.status).toBe("draft");
 
-    const superseded = supersedeSpecification(approved, successor.record.id, LATER, ACTOR);
-    expect(superseded.record.status).toBe("superseded");
-    expect(superseded.domainEvents.some((e) => e.type === "qep.specification.superseded")).toBe(
-      true,
+    const superseded = supersedeSpecification(
+      approved,
+      successor.record.id,
+      LATER,
+      ACTOR,
     );
+    expect(superseded.record.status).toBe("superseded");
+    expect(
+      superseded.domainEvents.some((e) => e.type === "qep.specification.superseded"),
+    ).toBe(true);
   });
 
   it("forbids successor creation from non-approved", () => {
@@ -420,9 +431,9 @@ describe("Test Specification domain — versioning", () => {
   });
 
   it("forbids self-supersession", () => {
-    expect(() =>
-      supersedeSpecification(toApproved(), "tsp_1", LATER, ACTOR),
-    ).toThrow(TestSpecificationInvariantViolation);
+    expect(() => supersedeSpecification(toApproved(), "tsp_1", LATER, ACTOR)).toThrow(
+      TestSpecificationInvariantViolation,
+    );
   });
 
   it("enforces unique version labels in lineage", () => {
@@ -466,12 +477,7 @@ describe("Test Specification domain — relationships", () => {
       ["tsr_e", "execution", "exec_1"],
       ["tsr_ev", "evidence", "ev_1"],
     ] as const) {
-      spec = addSpecificationRelationship(
-        spec,
-        { id, kind, artefactId },
-        LATER,
-        ACTOR,
-      );
+      spec = addSpecificationRelationship(spec, { id, kind, artefactId }, LATER, ACTOR);
     }
     expect(spec.relationships).toHaveLength(6);
   });
@@ -518,9 +524,9 @@ describe("Test Specification domain — governance", () => {
   });
 
   it("requires reviewer when starting review", () => {
-    expect(() =>
-      startSpecificationReview(baseCreate(), " ", LATER, ACTOR),
-    ).toThrow(TestSpecificationInvariantViolation);
+    expect(() => startSpecificationReview(baseCreate(), " ", LATER, ACTOR)).toThrow(
+      TestSpecificationInvariantViolation,
+    );
   });
 
   it("requires rejection comment", () => {
@@ -565,8 +571,12 @@ describe("Test Specification domain — value objects", () => {
   });
 
   it("rejects invalid value objects", () => {
-    expect(() => createSpecificationId("x")).toThrow(TestSpecificationInvariantViolation);
-    expect(() => createSpecificationTitle("")).toThrow(TestSpecificationInvariantViolation);
+    expect(() => createSpecificationId("x")).toThrow(
+      TestSpecificationInvariantViolation,
+    );
+    expect(() => createSpecificationTitle("")).toThrow(
+      TestSpecificationInvariantViolation,
+    );
     expect(() => createSpecificationTimestamp("not-a-date")).toThrow(
       TestSpecificationInvariantViolation,
     );
@@ -683,11 +693,9 @@ describe("Test Specification domain — policies and services", () => {
       owner: "o1",
       classification: "c",
     });
-    expect(
-      SpecificationVersionService.latestApprovedLabel([
-        toApproved().record,
-      ]),
-    ).toBe("0.1");
+    expect(SpecificationVersionService.latestApprovedLabel([toApproved().record])).toBe(
+      "0.1",
+    );
   });
 
   it("lists the full domain event catalogue", () => {
@@ -716,17 +724,15 @@ describe("Test Specification domain — coverage gaps", () => {
   it("covers metadata validation failures", () => {
     expect(() =>
       createSpecificationMetadata(
-        Object.fromEntries(
-          Array.from({ length: 65 }, (_, i) => [`k${i}`, "v"]),
-        ),
+        Object.fromEntries(Array.from({ length: 65 }, (_, i) => [`k${i}`, "v"])),
       ),
     ).toThrow(TestSpecificationInvariantViolation);
     expect(() => createSpecificationMetadata({ " ": "v" })).toThrow(
       TestSpecificationInvariantViolation,
     );
-    expect(() =>
-      createSpecificationMetadata({ k: "x".repeat(513) }),
-    ).toThrow(TestSpecificationInvariantViolation);
+    expect(() => createSpecificationMetadata({ k: "x".repeat(513) })).toThrow(
+      TestSpecificationInvariantViolation,
+    );
   });
 
   it("covers relationship helpers and id validation", () => {
@@ -809,10 +815,7 @@ describe("Test Specification domain — coverage gaps", () => {
       ]),
     ).toBeUndefined();
 
-    const bumped = withRecordVersion(
-      approved.record,
-      createSpecificationVersion(2, 0),
-    );
+    const bumped = withRecordVersion(approved.record, createSpecificationVersion(2, 0));
     expect(bumped.version.label).toBe("2.0");
   });
 
@@ -842,18 +845,18 @@ describe("Test Specification domain — coverage gaps", () => {
     expect(() => ReviewPolicy.assertReviewerPresent(undefined)).toThrow(
       TestSpecificationInvariantViolation,
     );
-    expect(() =>
-      RelationshipPolicy.assertReferencePresent(undefined),
-    ).toThrow(TestSpecificationInvariantViolation);
+    expect(() => RelationshipPolicy.assertReferencePresent(undefined)).toThrow(
+      TestSpecificationInvariantViolation,
+    );
     expect(() => PriorityPolicy.assertKnownPriority("urgent")).toThrow(
       TestSpecificationInvariantViolation,
     );
     expect(() => RiskPolicy.assertRiskIdentity(" ", "s")).toThrow(
       TestSpecificationInvariantViolation,
     );
-    expect(() =>
-      ImmutabilityPolicy.assertNotSupersededOrRetired("superseded"),
-    ).toThrow(TestSpecificationInvariantViolation);
+    expect(() => ImmutabilityPolicy.assertNotSupersededOrRetired("superseded")).toThrow(
+      TestSpecificationInvariantViolation,
+    );
     expect(() =>
       ImmutabilityPolicy.assertApprovedImmutableForContent("approved"),
     ).toThrow(TestSpecificationInvariantViolation);
@@ -888,7 +891,14 @@ describe("Test Specification domain — coverage gaps", () => {
         postconditions: ["Q"],
         acceptanceCriteria: ["AC"],
         risks: [{ id: "r2", summary: "R2", severity: "low" }],
-        dependencies: [{ id: "d2", summary: "D2", referenceKind: "verification", referenceId: "ver_9" }],
+        dependencies: [
+          {
+            id: "d2",
+            summary: "D2",
+            referenceKind: "verification",
+            referenceId: "ver_9",
+          },
+        ],
       },
       LATER,
       ACTOR,

@@ -9,14 +9,14 @@
 
 ## Decision record (Owner)
 
-| Field | Value |
-| ----- | ----- |
-| Decision | **ACCEPTED** |
-| Date | 2026-07-24 |
-| Authority | Owner |
-| Baseline version | 1.0.0-def (expanded) |
-| Prior programme | APZQEP-DEF-001 — structure accepted |
-| Conditions | Definition accepted; **APZQEP-ARCH-001** authorised |
+| Field            | Value                                               |
+| ---------------- | --------------------------------------------------- |
+| Decision         | **ACCEPTED**                                        |
+| Date             | 2026-07-24                                          |
+| Authority        | Owner                                               |
+| Baseline version | 1.0.0-def (expanded)                                |
+| Prior programme  | APZQEP-DEF-001 — structure accepted                 |
+| Conditions       | Definition accepted; **APZQEP-ARCH-001** authorised |
 
 ## Acceptance checklist (Owner)
 

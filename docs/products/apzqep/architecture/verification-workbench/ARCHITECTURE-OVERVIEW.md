@@ -19,13 +19,13 @@ Platform Desktop Shell (005 / 016–023)
 
 ## Key separations
 
-| Separation | Rule |
-| ---------- | ---- |
-| ARCH-006 vs ARCH-010 | Grammar reused; Verification specialises content |
-| Queues vs domain rules | Queues are presentation filters only |
-| Status vs Outcome | Distinct UX dimensions |
+| Separation             | Rule                                                               |
+| ---------------------- | ------------------------------------------------------------------ |
+| ARCH-006 vs ARCH-010   | Grammar reused; Verification specialises content                   |
+| Queues vs domain rules | Queues are presentation filters only                               |
+| Status vs Outcome      | Distinct UX dimensions                                             |
 | SoR vs future analysis | Evidence / Execution / Certification / Coverage / Impact are slots |
-| UI vs domain | Client never invents lifecycle or permissions |
+| UI vs domain           | Client never invents lifecycle or permissions                      |
 
 ## Downstream gate
 

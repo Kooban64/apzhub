@@ -1,11 +1,11 @@
 # APZQEP Engineering Platform Version 1 — Milestone Recognition
 
-| Field | Value |
-| ----- | ----- |
-| Document | Engineering Platform v1 Milestone |
-| Date | 2026-07-28 |
-| Authority | Owner assessment (post PORTFOLIO-001 Acceptance) |
-| Status | **RECOGNISED** |
+| Field                | Value                                                                                           |
+| -------------------- | ----------------------------------------------------------------------------------------------- |
+| Document             | Engineering Platform v1 Milestone                                                               |
+| Date                 | 2026-07-28                                                                                      |
+| Authority            | Owner assessment (post PORTFOLIO-001 Acceptance)                                                |
+| Status               | **RECOGNISED**                                                                                  |
 | Product Constitution | [APZQEP-CONSTITUTION.md](./APZQEP-CONSTITUTION.md) **v1.0.0 RATIFIED / BASELINED** (2026-07-28) |
 
 ---
@@ -14,9 +14,9 @@
 
 APZQEP has reached **Version 1 of its engineering platform**, even though the application continues to expand.
 
-| Lifecycle | State |
-| --------- | ----- |
-| **Engineering platform** | **Mature / v1** — methodology validated through practice |
+| Lifecycle                | State                                                            |
+| ------------------------ | ---------------------------------------------------------------- |
+| **Engineering platform** | **Mature / v1** — methodology validated through practice         |
 | **Product capabilities** | **Expanding** — five frozen baselines; Wave 2 not yet authorised |
 
 This distinction is permanent and is restated in the [APZQEP Constitution](./APZQEP-CONSTITUTION.md) §3.
@@ -36,10 +36,10 @@ Phase 2 Capability Expansion    ⏳ READY (not started)
 
 APZQEP has built and validated through actual delivery:
 
-- an engineering methodology,  
-- an architecture methodology,  
-- a governance methodology,  
-- a certification methodology,  
+- an engineering methodology,
+- an architecture methodology,
+- a governance methodology,
+- a certification methodology,
 - and a production release methodology.
 
 These are proven operational systems, not intentions alone.
@@ -48,17 +48,17 @@ These are proven operational systems, not intentions alone.
 
 ## Maturity assessment (Owner)
 
-| Area | Maturity |
-| ---- | -------- |
-| Engineering Governance | ⭐⭐⭐⭐⭐ |
-| Architecture Discipline | ⭐⭐⭐⭐⭐ |
+| Area                      | Maturity   |
+| ------------------------- | ---------- |
+| Engineering Governance    | ⭐⭐⭐⭐⭐ |
+| Architecture Discipline   | ⭐⭐⭐⭐⭐ |
 | Quality Assurance Process | ⭐⭐⭐⭐⭐ |
-| Traceability | ⭐⭐⭐⭐⭐ |
-| Release Governance | ⭐⭐⭐⭐⭐ |
-| Certification | ⭐⭐⭐⭐⭐ |
-| Auditability | ⭐⭐⭐⭐⭐ |
-| AI Readiness | ⭐⭐⭐⭐⭐ |
-| Enterprise Readiness | ⭐⭐⭐⭐⭐ |
+| Traceability              | ⭐⭐⭐⭐⭐ |
+| Release Governance        | ⭐⭐⭐⭐⭐ |
+| Certification             | ⭐⭐⭐⭐⭐ |
+| Auditability              | ⭐⭐⭐⭐⭐ |
+| AI Readiness              | ⭐⭐⭐⭐⭐ |
+| Enterprise Readiness      | ⭐⭐⭐⭐⭐ |
 
 ---
 
@@ -66,9 +66,9 @@ These are proven operational systems, not intentions alone.
 
 Owner guidance (binding until superseded):
 
-1. **Do not rush** into Wave 2.  
-2. Ratify [APZQEP-CONSTITUTION.md](./APZQEP-CONSTITUTION.md) as the permanent first-read document.  
-3. Improve onboarding clarity so a new engineer or AI agent can execute the lifecycle from documentation alone.  
+1. **Do not rush** into Wave 2.
+2. Ratify [APZQEP-CONSTITUTION.md](./APZQEP-CONSTITUTION.md) as the permanent first-read document.
+3. Improve onboarding clarity so a new engineer or AI agent can execute the lifecycle from documentation alone.
 4. Authorise Wave 2 only via a specific Owner-approved Architecture programme.
 
 ---

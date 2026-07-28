@@ -13,37 +13,37 @@ AI can reduce toil in requirement analysis, verification design, triage, and nar
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| AI session | Bounded interaction producing recommendations |
-| AI content status | Draft → Reviewed → Approved → Rejected → Superseded |
-| Human gate | Mandatory decision before SoR write |
+| Concept                   | Product meaning                                     |
+| ------------------------- | --------------------------------------------------- |
+| AI session                | Bounded interaction producing recommendations       |
+| AI content status         | Draft → Reviewed → Approved → Rejected → Superseded |
+| Human gate                | Mandatory decision before SoR write                 |
 | Non-authoritative overlay | Readiness/cert narratives that do not change status |
-| Prompt governance | Policy-controlled prompts and retention |
-| Provider adapter | Replaceable AI backend via extensibility |
-| AI audit | Log of prompts, outputs, and decisions |
+| Prompt governance         | Policy-controlled prompts and retention             |
+| Provider adapter          | Replaceable AI backend via extensibility            |
+| AI audit                  | Log of prompts, outputs, and decisions              |
 
 ## AI content statuses
 
 Draft → Reviewed → Approved → Rejected → Superseded
 
-| Status | Meaning |
-| ------ | ------- |
-| Draft | AI output; not relied upon |
-| Reviewed | Human saw content; no SoR commit yet |
-| Approved | Human accepts for intended use / SoR write |
-| Rejected | Discarded with reason |
-| Superseded | Newer AI or human version replaces |
+| Status     | Meaning                                    |
+| ---------- | ------------------------------------------ |
+| Draft      | AI output; not relied upon                 |
+| Reviewed   | Human saw content; no SoR commit yet       |
+| Approved   | Human accepts for intended use / SoR write |
+| Rejected   | Discarded with reason                      |
+| Superseded | Newer AI or human version replaces         |
 
 ## Primary objects
 
-| Object | Description |
-| ------ | ----------- |
-| AI assist request | User-initiated scoped ask |
-| AI recommendation | Structured output with explanation |
-| AI content record | Versioned artefact with status |
-| Accept/reject decision | Human gate outcome |
-| AI audit entry | Correlation to session and actor |
+| Object                 | Description                                     |
+| ---------------------- | ----------------------------------------------- |
+| AI assist request      | User-initiated scoped ask                       |
+| AI recommendation      | Structured output with explanation              |
+| AI content record      | Versioned artefact with status                  |
+| Accept/reject decision | Human gate outcome                              |
+| AI audit entry         | Correlation to session and actor                |
 | Provider configuration | Tenant-scoped adapter settings — off by default |
 
 ## Canonical AI workflow
@@ -60,17 +60,17 @@ flowchart LR
 
 ## Workflow catalogue (product)
 
-| Workflow | Trigger | Human gate | SoR write |
-| -------- | ------- | ---------- | --------- |
-| Requirement analysis | BA requests | Accept suggestions | Only accepted edits |
-| Verification generation | QA requests draft | Accept/edit before Library | On accept |
-| Coverage analysis | Gap review | Informational / accept tasks | Task creation optional |
-| Regression analysis | Release prep | Human selects suite | On selection |
-| Risk analysis | Risk review | Human accepts residual risk | On risk accept |
-| Defect clustering | Triage | Human merges/links | On confirm |
-| Readiness narrative | RM requests | Non-authoritative overlay | No cert change |
-| Certification recommendation | Cert review | **Human decides certify** | Cert module only via human |
-| NL query | User asks | Answers cite SoR | No silent write |
+| Workflow                     | Trigger           | Human gate                   | SoR write                  |
+| ---------------------------- | ----------------- | ---------------------------- | -------------------------- |
+| Requirement analysis         | BA requests       | Accept suggestions           | Only accepted edits        |
+| Verification generation      | QA requests draft | Accept/edit before Library   | On accept                  |
+| Coverage analysis            | Gap review        | Informational / accept tasks | Task creation optional     |
+| Regression analysis          | Release prep      | Human selects suite          | On selection               |
+| Risk analysis                | Risk review       | Human accepts residual risk  | On risk accept             |
+| Defect clustering            | Triage            | Human merges/links           | On confirm                 |
+| Readiness narrative          | RM requests       | Non-authoritative overlay    | No cert change             |
+| Certification recommendation | Cert review       | **Human decides certify**    | Cert module only via human |
+| NL query                     | User asks         | Answers cite SoR             | No silent write            |
 
 ## Lifecycle
 
@@ -90,12 +90,12 @@ stateDiagram-v2
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
-| Tenant Administrator | Enables AI entitlements and providers |
-| Security Officer | Approves AI enablement in enterprise/regulated |
-| QA Manager | Governs which workflows teams may use |
-| Human actor per workflow | Accept/reject decisions |
+| Role                     | Ownership                                      |
+| ------------------------ | ---------------------------------------------- |
+| Tenant Administrator     | Enables AI entitlements and providers          |
+| Security Officer         | Approves AI enablement in enterprise/regulated |
+| QA Manager               | Governs which workflows teams may use          |
+| Human actor per workflow | Accept/reject decisions                        |
 
 ## Relationships
 
@@ -119,16 +119,16 @@ AI subsystem: Disabled (default) → Enabled → Session active. Content statuse
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
+| Rule  | Statement                                                            |
+| ----- | -------------------------------------------------------------------- |
 | AI-01 | Every capability disabled by default until authorised and configured |
-| AI-02 | Prompt governance and AI audit mandatory when enabled |
-| AI-03 | Providers replaceable without changing workflow semantics |
-| AI-04 | AI Agent persona **cannot certify** |
-| AI-05 | AI never independent SoR — human accept for writes |
-| AI-06 | Readiness and cert narratives labelled non-authoritative |
-| AI-07 | NL query cites sources; no silent write |
-| AI-08 | Continuous signals and AI are distinct — neither auto-certifies |
+| AI-02 | Prompt governance and AI audit mandatory when enabled                |
+| AI-03 | Providers replaceable without changing workflow semantics            |
+| AI-04 | AI Agent persona **cannot certify**                                  |
+| AI-05 | AI never independent SoR — human accept for writes                   |
+| AI-06 | Readiness and cert narratives labelled non-authoritative             |
+| AI-07 | NL query cites sources; no silent write                              |
+| AI-08 | Continuous signals and AI are distinct — neither auto-certifies      |
 
 ## Approval rules
 
@@ -136,14 +136,14 @@ Enable AI: Tenant Admin + Security Officer (regulated). Per-content Approved sta
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| Business Analyst | Accept/reject requirement analysis |
-| QA Engineer | Accept verification drafts |
-| QA Manager | Policy for team AI usage |
-| Release Manager | Uses readiness narrative — owns cert decision |
-| Security Officer | AI enablement approval |
-| AI Agent | Operates only within gated tools — no cert |
+| Persona          | Responsibility                                |
+| ---------------- | --------------------------------------------- |
+| Business Analyst | Accept/reject requirement analysis            |
+| QA Engineer      | Accept verification drafts                    |
+| QA Manager       | Policy for team AI usage                      |
+| Release Manager  | Uses readiness narrative — owns cert decision |
+| Security Officer | AI enablement approval                        |
+| AI Agent         | Operates only within gated tools — no cert    |
 
 ## Reporting
 
@@ -171,12 +171,12 @@ Fine-tuned domain models (customer-hosted), evaluation benchmarks for suggestion
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Governed assist workflows | General-purpose chatbot |
-| Draft → accept → SoR | Autonomous agent closure |
-| Cert **recommendation** | Cert **decision** |
-| NL query over SoR | Internet browsing as authority |
+| In boundary               | Out of boundary                |
+| ------------------------- | ------------------------------ |
+| Governed assist workflows | General-purpose chatbot        |
+| Draft → accept → SoR      | Autonomous agent closure       |
+| Cert **recommendation**   | Cert **decision**              |
+| NL query over SoR         | Internet browsing as authority |
 
 ## Example scenarios
 
@@ -192,7 +192,7 @@ Fine-tuned domain models (customer-hosted), evaluation benchmarks for suggestion
 
 ## Rules (summary)
 
-- Every capability disabled by default until authorised and configured  
-- Prompt governance and AI audit mandatory when enabled  
-- Providers replaceable  
-- AI Agent persona cannot certify  
+- Every capability disabled by default until authorised and configured
+- Prompt governance and AI audit mandatory when enabled
+- Providers replaceable
+- AI Agent persona cannot certify

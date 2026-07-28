@@ -15,28 +15,28 @@ Deliver the first functional Requirements vertical slice: persistence, repositor
 
 ## Pack
 
-| Document | Path |
-| -------- | ---- |
-| Persistence | [PERSISTENCE.md](./PERSISTENCE.md) |
-| CRUD | [CRUD.md](./CRUD.md) |
-| Search | [SEARCH.md](./SEARCH.md) |
-| Authorization | [AUTHORIZATION.md](./AUTHORIZATION.md) |
-| Audit | [AUDIT.md](./AUDIT.md) |
-| Testing | [TESTING.md](./TESTING.md) |
-| Completion | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md) |
-| Owner acceptance | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) |
+| Document         | Path                                           |
+| ---------------- | ---------------------------------------------- |
+| Persistence      | [PERSISTENCE.md](./PERSISTENCE.md)             |
+| CRUD             | [CRUD.md](./CRUD.md)                           |
+| Search           | [SEARCH.md](./SEARCH.md)                       |
+| Authorization    | [AUTHORIZATION.md](./AUTHORIZATION.md)         |
+| Audit            | [AUDIT.md](./AUDIT.md)                         |
+| Testing          | [TESTING.md](./TESTING.md)                     |
+| Completion       | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md) |
+| Owner acceptance | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)   |
 
 ## Scope boundary
 
-| In scope | Out of scope |
-| -------- | ------------ |
-| Persistence + migrations | Approval workflows |
-| Repository adapters | Baselines |
-| CRUD + soft archive | Historical version storage |
-| Platform search product `qep` | Relationship graphs |
-| Permission enforcement | Import/export |
-| Audit on mutations | AI / MCP |
-| Working list/detail/forms UI | Certification workflows |
+| In scope                      | Out of scope               |
+| ----------------------------- | -------------------------- |
+| Persistence + migrations      | Approval workflows         |
+| Repository adapters           | Baselines                  |
+| CRUD + soft archive           | Historical version storage |
+| Platform search product `qep` | Relationship graphs        |
+| Permission enforcement        | Import/export              |
+| Audit on mutations            | AI / MCP                   |
+| Working list/detail/forms UI  | Certification workflows    |
 
 ## STOP
 

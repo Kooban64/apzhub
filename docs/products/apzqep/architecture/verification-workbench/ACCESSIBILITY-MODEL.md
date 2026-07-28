@@ -12,8 +12,8 @@ Never colour-only — text and icons required.
 
 ## Responsive
 
-| Viewport | Behaviour |
-| -------- | --------- |
-| Desktop | Full three-region layout |
-| Tablet | Queue-first; inspector overlay; collapsible filters |
-| Mobile | Queue-first; full-screen inspector; compact timeline |
+| Viewport | Behaviour                                            |
+| -------- | ---------------------------------------------------- |
+| Desktop  | Full three-region layout                             |
+| Tablet   | Queue-first; inspector overlay; collapsible filters  |
+| Mobile   | Queue-first; full-screen inspector; compact timeline |

@@ -75,9 +75,9 @@ describe("SpecificationApplicationService", () => {
   });
 
   it("creates a Specification in draft and enforces the create permission", async () => {
-    await expect(service.createSpecification(READ_ONLY_CTX, baseCreateInput())).rejects.toThrow(
-      TestSpecificationForbiddenError,
-    );
+    await expect(
+      service.createSpecification(READ_ONLY_CTX, baseCreateInput()),
+    ).rejects.toThrow(TestSpecificationForbiddenError);
 
     const created = await service.createSpecification(FULL_CTX, baseCreateInput());
     expect(created.record.status).toBe("draft");
@@ -110,7 +110,9 @@ describe("SpecificationApplicationService", () => {
 
   it("rejects a specification under review", async () => {
     const created = await service.createSpecification(FULL_CTX, baseCreateInput());
-    await service.submitForReview(FULL_CTX, created.record.id, { reviewerId: REVIEWER });
+    await service.submitForReview(FULL_CTX, created.record.id, {
+      reviewerId: REVIEWER,
+    });
 
     const rejected = await service.reject(FULL_CTX, created.record.id, {
       reviewComment: "Needs more detail",
@@ -124,7 +126,10 @@ describe("SpecificationApplicationService", () => {
     const cancelled = await service.cancel(FULL_CTX, created.record.id);
     expect(cancelled.record.status).toBe("cancelled");
 
-    const created2 = await service.createSpecification(FULL_CTX, baseCreateInput({ number: "TS-APP-002" }));
+    const created2 = await service.createSpecification(
+      FULL_CTX,
+      baseCreateInput({ number: "TS-APP-002" }),
+    );
     const withdrawn = await service.withdraw(FULL_CTX, created2.record.id);
     expect(withdrawn.record.status).toBe("withdrawn");
   });
@@ -147,16 +152,22 @@ describe("SpecificationApplicationService", () => {
   it("supersedes by creating a successor draft in one operation", async () => {
     const approved = await driveToApproved(service);
 
-    const { predecessor, successor } = await service.supersede(FULL_CTX, approved.record.id, {
-      createSuccessor: {
-        bump: "minor",
-        title: "Successor draft",
+    const { predecessor, successor } = await service.supersede(
+      FULL_CTX,
+      approved.record.id,
+      {
+        createSuccessor: {
+          bump: "minor",
+          title: "Successor draft",
+        },
       },
-    });
+    );
     expect(predecessor.record.status).toBe("superseded");
     expect(successor?.record.status).toBe("draft");
     expect(successor?.record.number).toBe(approved.record.number);
-    expect(successor?.record.version.minor).toBeGreaterThan(approved.record.version.minor);
+    expect(successor?.record.version.minor).toBeGreaterThan(
+      approved.record.version.minor,
+    );
   });
 
   it("retires an approved specification", async () => {
@@ -168,12 +179,16 @@ describe("SpecificationApplicationService", () => {
   it("manages relationships on draft specifications", async () => {
     const created = await service.createSpecification(FULL_CTX, baseCreateInput());
 
-    const withRelationship = await service.addRelationship(FULL_CTX, created.record.id, {
-      id: "tsr_app_1",
-      kind: "requirement",
-      artefactId: "req_app_1",
-      owningDomain: "requirements",
-    });
+    const withRelationship = await service.addRelationship(
+      FULL_CTX,
+      created.record.id,
+      {
+        id: "tsr_app_1",
+        kind: "requirement",
+        artefactId: "req_app_1",
+        owningDomain: "requirements",
+      },
+    );
     expect(withRelationship.relationships).toHaveLength(1);
 
     const removed = await service.removeRelationship(
@@ -188,7 +203,11 @@ describe("SpecificationApplicationService", () => {
     await service.createSpecification(FULL_CTX, baseCreateInput());
     await service.createSpecification(
       FULL_CTX,
-      baseCreateInput({ number: "TS-APP-SEARCH", title: "Searchable login flow", tags: [] }),
+      baseCreateInput({
+        number: "TS-APP-SEARCH",
+        title: "Searchable login flow",
+        tags: [],
+      }),
     );
 
     const listed = await service.list(FULL_CTX, { type: "functional" });
@@ -252,7 +271,10 @@ describe("SpecificationApplicationService", () => {
       owningDomain: "requirements",
     });
 
-    const relationships = await service.listRelationships(READ_ONLY_CTX, created.record.id);
+    const relationships = await service.listRelationships(
+      READ_ONLY_CTX,
+      created.record.id,
+    );
     expect(relationships).toHaveLength(1);
     expect(relationships[0]?.reference.artefactId).toBe("req_list_rel");
   });
@@ -262,7 +284,10 @@ describe("SpecificationApplicationService", () => {
       FULL_CTX,
       baseCreateInput({ number: "TS-APP-NO-APPROVED" }),
     );
-    const latest = await service.findLatestApproved(READ_ONLY_CTX, "TS-APP-NO-APPROVED");
+    const latest = await service.findLatestApproved(
+      READ_ONLY_CTX,
+      "TS-APP-NO-APPROVED",
+    );
     expect(latest).toBeNull();
   });
 
@@ -306,7 +331,10 @@ describe("SpecificationApplicationService", () => {
       },
     });
 
-    const created = await hookedService.createSpecification(FULL_CTX, baseCreateInput());
+    const created = await hookedService.createSpecification(
+      FULL_CTX,
+      baseCreateInput(),
+    );
     expect(created.record.id).toBe("tsp_hooked_1");
     expect(auditEntries.length).toBeGreaterThan(0);
     expect(domainEvents).toContain("qep.specification.created");
@@ -314,7 +342,10 @@ describe("SpecificationApplicationService", () => {
     expect(transactionRuns).toBeGreaterThan(0);
 
     await expect(
-      hookedService.createSpecification(READ_ONLY_CTX, baseCreateInput({ number: "TS-APP-FORBIDDEN" })),
+      hookedService.createSpecification(
+        READ_ONLY_CTX,
+        baseCreateInput({ number: "TS-APP-FORBIDDEN" }),
+      ),
     ).rejects.toThrow(TestSpecificationForbiddenError);
     expect(observations.some((entry) => entry.endsWith(":error"))).toBe(true);
   });
@@ -324,7 +355,10 @@ describe("SpecificationApplicationService", () => {
       ...FULL_CTX,
       permissions: ["qep.specification.*"],
     };
-    const created = await service.createSpecification(wildcardCtx, baseCreateInput({ number: "TS-APP-WILD" }));
+    const created = await service.createSpecification(
+      wildcardCtx,
+      baseCreateInput({ number: "TS-APP-WILD" }),
+    );
     expect(created.record.number).toBe("TS-APP-WILD");
   });
 });

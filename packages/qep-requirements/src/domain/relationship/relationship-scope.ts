@@ -30,7 +30,9 @@ export function createRelationshipScope(input: {
     throw new QepInvariantViolation(`Scope ${kind} requires a reference id`);
   }
   if (kind === "baseline" && !/^rbl_[A-Za-z0-9_-]+$/.test(referenceId)) {
-    throw new QepInvariantViolation("Baseline scope reference must be a requirement baseline id (rbl_)");
+    throw new QepInvariantViolation(
+      "Baseline scope reference must be a requirement baseline id (rbl_)",
+    );
   }
   return { kind, referenceId };
 }

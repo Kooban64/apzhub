@@ -1,28 +1,28 @@
 # Engineering Evidence — APZQEP-ENG-040A
 
-| Field | Value |
-| --- | --- |
-| Programme | APZQEP-ENG-040A |
-| Recorded | 2026-07-26 |
-| Package | `@apzhub/qep-verification` **0.1.0** |
-| Architecture | ARCH-009 **ACCEPTED** |
+| Field        | Value                                |
+| ------------ | ------------------------------------ |
+| Programme    | APZQEP-ENG-040A                      |
+| Recorded     | 2026-07-26                           |
+| Package      | `@apzhub/qep-verification` **0.1.0** |
+| Architecture | ARCH-009 **ACCEPTED**                |
 
 ## Validation
 
-| Gate | Result |
-| --- | --- |
-| `pnpm --filter @apzhub/qep-verification test` | **PASS** (112) |
-| Architecture boundary (no infra in domain) | **PASS** |
-| No application / infrastructure / presentation layers | **PASS** |
-| Status ≠ Outcome enforced | **PASS** |
-| Programme marker `APZQEP-ENG-040A IMPLEMENTED AWAITING OWNER ACCEPTANCE` | **PASS** |
+| Gate                                                                     | Result         |
+| ------------------------------------------------------------------------ | -------------- |
+| `pnpm --filter @apzhub/qep-verification test`                            | **PASS** (112) |
+| Architecture boundary (no infra in domain)                               | **PASS**       |
+| No application / infrastructure / presentation layers                    | **PASS**       |
+| Status ≠ Outcome enforced                                                | **PASS**       |
+| Programme marker `APZQEP-ENG-040A IMPLEMENTED AWAITING OWNER ACCEPTANCE` | **PASS**       |
 
 ## Test breakdown
 
-| File | Tests | Result |
-| ---- | ----- | ------ |
-| `verification.domain.test.ts` | 107 | PASS |
-| `architecture-boundaries.test.ts` | 5 | PASS |
+| File                              | Tests | Result |
+| --------------------------------- | ----- | ------ |
+| `verification.domain.test.ts`     | 107   | PASS   |
+| `architecture-boundaries.test.ts` | 5     | PASS   |
 
 ## Portfolio evidence
 

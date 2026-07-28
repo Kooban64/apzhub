@@ -9,7 +9,10 @@ import { PlatformServiceError } from "@apzhub/platform-service-contracts";
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PLATFORM_API_MAX_BODY_BYTES } from "../constants";
 import { PlatformApiHttpError } from "../errors";
-import { getPlatformApiGatewayBootstrap, getPlatformServiceGateway } from "../gateway/bootstrap";
+import {
+  getPlatformApiGatewayBootstrap,
+  getPlatformServiceGateway,
+} from "../gateway/bootstrap";
 import { jsonCollectionResponse, jsonDataResponse } from "../response";
 import { parseJsonBody, parsePathParam, parseQuery } from "../schemas/common";
 import {
@@ -91,7 +94,10 @@ function mapHandlerError(error: unknown): never {
   throw error;
 }
 
-async function invoke<T>(_context: PlatformApiRequestContext, fn: () => Promise<T>): Promise<T> {
+async function invoke<T>(
+  _context: PlatformApiRequestContext,
+  fn: () => Promise<T>,
+): Promise<T> {
   try {
     return await fn();
   } catch (error) {
@@ -120,7 +126,9 @@ export async function handleListQepTestPlans(
   };
 
   const result = query.q
-    ? await invoke(context, () => service.search(context.serviceContext, query.q!, listOptions))
+    ? await invoke(context, () =>
+        service.search(context.serviceContext, query.q!, listOptions),
+      )
     : await invoke(context, () => service.list(context.serviceContext, listOptions));
 
   return jsonCollectionResponse(
@@ -140,7 +148,9 @@ export async function handleCreateQepTestPlan(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const service = await requireQepTestPlanGateway();
-  const created = await invoke(context, () => service.createPlan(context.serviceContext, body));
+  const created = await invoke(context, () =>
+    service.createPlan(context.serviceContext, body),
+  );
   return jsonDataResponse(created, context.tracing, { status: 201 });
 }
 
@@ -168,7 +178,9 @@ export async function handleGetQepTestPlanByNumber(
 ) {
   const number = await param(routeContext, "number", qepTestPlanNumberParamSchema);
   const service = await requireQepTestPlanGateway();
-  const item = await invoke(context, () => service.getByNumber(context.serviceContext, number));
+  const item = await invoke(context, () =>
+    service.getByNumber(context.serviceContext, number),
+  );
   if (!item) {
     throw new PlatformApiHttpError(404, {
       code: "NOT_FOUND",
@@ -280,7 +292,9 @@ export async function handleAddQepTestPlanItem(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const service = await requireQepTestPlanGateway();
-  const updated = await invoke(context, () => service.addItem(context.serviceContext, id, body));
+  const updated = await invoke(context, () =>
+    service.addItem(context.serviceContext, id, body),
+  );
   return jsonDataResponse(updated, context.tracing, { status: 201 });
 }
 
@@ -291,7 +305,11 @@ export async function handleUpdateQepTestPlanItem(
 ) {
   const params = routeContext ? await routeContext.params : {};
   const id = parsePathParam(qepTestPlanIdParamSchema, params.planId ?? "", "planId");
-  const itemId = parsePathParam(qepTestPlanItemIdParamSchema, params.itemId ?? "", "itemId");
+  const itemId = parsePathParam(
+    qepTestPlanItemIdParamSchema,
+    params.itemId ?? "",
+    "itemId",
+  );
   const body = await parseJsonBody(
     request,
     qepTestPlanUpdateItemBodySchema,
@@ -311,7 +329,11 @@ export async function handleRemoveQepTestPlanItem(
 ) {
   const params = routeContext ? await routeContext.params : {};
   const id = parsePathParam(qepTestPlanIdParamSchema, params.planId ?? "", "planId");
-  const itemId = parsePathParam(qepTestPlanItemIdParamSchema, params.itemId ?? "", "itemId");
+  const itemId = parsePathParam(
+    qepTestPlanItemIdParamSchema,
+    params.itemId ?? "",
+    "itemId",
+  );
   const body = await parseJsonBody(
     request,
     qepTestPlanRemoveItemBodySchema,
@@ -372,7 +394,9 @@ export async function handleApproveQepTestPlan(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const service = await requireQepTestPlanGateway();
-  const updated = await invoke(context, () => service.approve(context.serviceContext, id, body));
+  const updated = await invoke(context, () =>
+    service.approve(context.serviceContext, id, body),
+  );
   return jsonDataResponse(updated, context.tracing);
 }
 
@@ -388,7 +412,9 @@ export async function handleRejectQepTestPlan(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const service = await requireQepTestPlanGateway();
-  const updated = await invoke(context, () => service.reject(context.serviceContext, id, body));
+  const updated = await invoke(context, () =>
+    service.reject(context.serviceContext, id, body),
+  );
   return jsonDataResponse(updated, context.tracing);
 }
 
@@ -458,7 +484,9 @@ export async function handleCompleteQepTestPlan(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const service = await requireQepTestPlanGateway();
-  const updated = await invoke(context, () => service.complete(context.serviceContext, id, body));
+  const updated = await invoke(context, () =>
+    service.complete(context.serviceContext, id, body),
+  );
   return jsonDataResponse(updated, context.tracing);
 }
 
@@ -474,7 +502,9 @@ export async function handleArchiveQepTestPlan(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const service = await requireQepTestPlanGateway();
-  const updated = await invoke(context, () => service.archive(context.serviceContext, id, body));
+  const updated = await invoke(context, () =>
+    service.archive(context.serviceContext, id, body),
+  );
   return jsonDataResponse(updated, context.tracing);
 }
 
@@ -490,7 +520,9 @@ export async function handleCancelQepTestPlan(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const service = await requireQepTestPlanGateway();
-  const updated = await invoke(context, () => service.cancel(context.serviceContext, id, body));
+  const updated = await invoke(context, () =>
+    service.cancel(context.serviceContext, id, body),
+  );
   return jsonDataResponse(updated, context.tracing);
 }
 
@@ -506,7 +538,9 @@ export async function handleSupersedeQepTestPlan(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const service = await requireQepTestPlanGateway();
-  const result = await invoke(context, () => service.supersede(context.serviceContext, id, body));
+  const result = await invoke(context, () =>
+    service.supersede(context.serviceContext, id, body),
+  );
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -522,7 +556,9 @@ export async function handleCloneQepTestPlan(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const service = await requireQepTestPlanGateway();
-  const cloned = await invoke(context, () => service.clone(context.serviceContext, id, body));
+  const cloned = await invoke(context, () =>
+    service.clone(context.serviceContext, id, body),
+  );
   return jsonDataResponse(cloned, context.tracing, { status: 201 });
 }
 
@@ -533,7 +569,9 @@ export async function handleGetQepTestPlanHistory(
 ) {
   const id = await param(routeContext, "planId", qepTestPlanIdParamSchema);
   const service = await requireQepTestPlanGateway();
-  const history = await invoke(context, () => service.listHistory(context.serviceContext, id));
+  const history = await invoke(context, () =>
+    service.listHistory(context.serviceContext, id),
+  );
   return jsonDataResponse(history, context.tracing);
 }
 

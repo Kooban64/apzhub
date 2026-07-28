@@ -10,17 +10,17 @@ See [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md).
 
 A complete Domain OES defining:
 
-- `TestPlan` aggregate, commands, composition  
-- Entities: Item, Revision, Approval, Assignment, Schedule  
-- Value objects: status, type/scope, priority, readiness, metrics, version reference  
-- Full lifecycle matrix with preconditions/postconditions  
-- Versioning, clone, supersede, immutability  
-- Policies: approval, scheduling, assignment, readiness, archival  
-- Justified domain services  
-- Business rules + domain exception model  
-- Domain event catalogue  
-- AI boundary (Domain stays deterministic)  
-- Explicit exclusions of all infrastructure / production code  
+- `TestPlan` aggregate, commands, composition
+- Entities: Item, Revision, Approval, Assignment, Schedule
+- Value objects: status, type/scope, priority, readiness, metrics, version reference
+- Full lifecycle matrix with preconditions/postconditions
+- Versioning, clone, supersede, immutability
+- Policies: approval, scheduling, assignment, readiness, archival
+- Justified domain services
+- Business rules + domain exception model
+- Domain event catalogue
+- AI boundary (Domain stays deterministic)
+- Explicit exclusions of all infrastructure / production code
 
 ## What was deliberately not delivered
 

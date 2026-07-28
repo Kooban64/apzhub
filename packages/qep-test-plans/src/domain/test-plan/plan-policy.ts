@@ -29,7 +29,9 @@ export type ApprovalPolicyInput = {
 export const ApprovalPolicy = {
   assertCanDecide(input: ApprovalPolicyInput): void {
     if (input.status !== "review") {
-      throw new InvalidPlanStateError("Approval decisions are only allowed in review status");
+      throw new InvalidPlanStateError(
+        "Approval decisions are only allowed in review status",
+      );
     }
     if (
       input.decision === "approved" &&
@@ -51,22 +53,38 @@ export const ApprovalPolicy = {
 
 export const SchedulingPolicy = {
   assertEditable(status: PlanStatus): void {
-    if (!SCHEDULE_EDITABLE_STATUSES.includes(status as (typeof SCHEDULE_EDITABLE_STATUSES)[number])) {
+    if (
+      !SCHEDULE_EDITABLE_STATUSES.includes(
+        status as (typeof SCHEDULE_EDITABLE_STATUSES)[number],
+      )
+    ) {
       throw new InvalidPlanStateError(`Schedule cannot be edited in ${status} status`);
     }
   },
 
   assertValidSchedule(schedule: TestPlanSchedule): void {
-    if (schedule.plannedStart && schedule.plannedEnd && schedule.plannedEnd < schedule.plannedStart) {
-      throw new PlanValidationError("plannedEnd must be greater than or equal to plannedStart");
+    if (
+      schedule.plannedStart &&
+      schedule.plannedEnd &&
+      schedule.plannedEnd < schedule.plannedStart
+    ) {
+      throw new PlanValidationError(
+        "plannedEnd must be greater than or equal to plannedStart",
+      );
     }
   },
 };
 
 export const AssignmentPolicy = {
   assertEditable(status: PlanStatus): void {
-    if (!ASSIGNMENT_EDITABLE_STATUSES.includes(status as (typeof ASSIGNMENT_EDITABLE_STATUSES)[number])) {
-      throw new InvalidPlanStateError(`Assignment cannot be edited in ${status} status`);
+    if (
+      !ASSIGNMENT_EDITABLE_STATUSES.includes(
+        status as (typeof ASSIGNMENT_EDITABLE_STATUSES)[number],
+      )
+    ) {
+      throw new InvalidPlanStateError(
+        `Assignment cannot be edited in ${status} status`,
+      );
     }
   },
 
@@ -79,8 +97,14 @@ export const AssignmentPolicy = {
 
 export const ContentPolicy = {
   assertEditable(status: PlanStatus): void {
-    if (!CONTENT_EDITABLE_STATUSES.includes(status as (typeof CONTENT_EDITABLE_STATUSES)[number])) {
-      throw new InvalidPlanStateError(`Plan content cannot be edited in ${status} status`);
+    if (
+      !CONTENT_EDITABLE_STATUSES.includes(
+        status as (typeof CONTENT_EDITABLE_STATUSES)[number],
+      )
+    ) {
+      throw new InvalidPlanStateError(
+        `Plan content cannot be edited in ${status} status`,
+      );
     }
   },
 };
@@ -96,13 +120,21 @@ export const ArchivalPolicy = {
 export const LifecyclePolicy = {
   assertNotTerminal(status: PlanStatus): void {
     if (TERMINAL_STATUSES.includes(status as (typeof TERMINAL_STATUSES)[number])) {
-      throw new InvalidPlanStateError(`Plan in terminal status ${status} cannot be mutated`);
+      throw new InvalidPlanStateError(
+        `Plan in terminal status ${status} cannot be mutated`,
+      );
     }
   },
 
   assertCanTransferOwnership(status: PlanStatus): void {
-    if (!CONTENT_EDITABLE_STATUSES.includes(status as (typeof CONTENT_EDITABLE_STATUSES)[number])) {
-      throw new InvalidPlanStateError("Ownership can only be transferred in draft or rejected status");
+    if (
+      !CONTENT_EDITABLE_STATUSES.includes(
+        status as (typeof CONTENT_EDITABLE_STATUSES)[number],
+      )
+    ) {
+      throw new InvalidPlanStateError(
+        "Ownership can only be transferred in draft or rejected status",
+      );
     }
   },
 
@@ -129,19 +161,29 @@ export const LifecyclePolicy = {
       (item) => isActiveItem(item) && item.itemStatus === "included",
     ).length;
     if (includedCount < 1) {
-      throw new PlanInvariantViolationError("At least one included item is required for review");
+      throw new PlanInvariantViolationError(
+        "At least one included item is required for review",
+      );
     }
   },
 
   assertCanSupersede(status: PlanStatus): void {
-    if (!SUPERSEDE_ELIGIBLE_STATUSES.includes(status as (typeof SUPERSEDE_ELIGIBLE_STATUSES)[number])) {
+    if (
+      !SUPERSEDE_ELIGIBLE_STATUSES.includes(
+        status as (typeof SUPERSEDE_ELIGIBLE_STATUSES)[number],
+      )
+    ) {
       throw new InvalidPlanStateError(`Plan in ${status} status cannot be superseded`);
     }
   },
 };
 
 export const ItemPolicy = {
-  assertNoDuplicateSpecPin(items: readonly TestPlanItem[], candidate: TestPlanItem, excludeId?: string): void {
+  assertNoDuplicateSpecPin(
+    items: readonly TestPlanItem[],
+    candidate: TestPlanItem,
+    excludeId?: string,
+  ): void {
     const key = itemSpecPinKey(candidate);
     for (const item of items) {
       if (!isActiveItem(item)) {

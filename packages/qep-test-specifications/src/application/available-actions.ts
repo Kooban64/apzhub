@@ -13,7 +13,10 @@ export function computeSpecificationAvailableActions(
   specification: Pick<StoredTestSpecification, "record">,
   permissions?: readonly string[],
 ): readonly QepTestSpecificationAction[] {
-  return computeQepTestSpecificationAvailableActions(specification.record.status, permissions);
+  return computeQepTestSpecificationAvailableActions(
+    specification.record.status,
+    permissions,
+  );
 }
 
 export { type QepTestSpecificationAction };

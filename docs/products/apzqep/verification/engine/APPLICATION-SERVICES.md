@@ -12,14 +12,14 @@ tenant/actor context → permission → subject resolution (on create) → domai
 
 ## Dependencies (injected)
 
-| Dependency | Role |
-| --- | --- |
-| `verifications` | `VerificationRepository` |
-| `subjectResolver` | Optional; default in-memory permissive registry at Platform composition |
-| `audits` | Optional appender |
-| `onDomainEvent` | Optional domain-event hook |
-| `onVerificationUpserted` | Search projection hook |
-| `onObservation` | Observability timing/outcome |
-| `runInTransaction` | Optional transactional boundary |
+| Dependency               | Role                                                                    |
+| ------------------------ | ----------------------------------------------------------------------- |
+| `verifications`          | `VerificationRepository`                                                |
+| `subjectResolver`        | Optional; default in-memory permissive registry at Platform composition |
+| `audits`                 | Optional appender                                                       |
+| `onDomainEvent`          | Optional domain-event hook                                              |
+| `onVerificationUpserted` | Search projection hook                                                  |
+| `onObservation`          | Observability timing/outcome                                            |
+| `runInTransaction`       | Optional transactional boundary                                         |
 
 Domain remains the sole business-rule authority (ENG-040A ACCEPTED).

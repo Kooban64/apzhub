@@ -56,7 +56,9 @@ if (!/Authoritative Architecture/i.test(spec)) {
   fail("Specification must declare Authoritative Architecture classification");
 }
 if (!/Phase — PLANNING/.test(spec) || !/AUTHORISED TO BEGIN/.test(spec)) {
-  fail("Specification must normalise ENG-020F as Phase PLANNING / Implementation AUTHORISED TO BEGIN");
+  fail(
+    "Specification must normalise ENG-020F as Phase PLANNING / Implementation AUTHORISED TO BEGIN",
+  );
 }
 
 if (/ENG-020F[^\n]{0,120}\bIMPLEMENTED\b/i.test(spec)) {
@@ -68,7 +70,8 @@ const forbiddenGlobs = [
   "packages/config/drizzle/0077_apz_qep_requirement_relationship",
 ];
 for (const path of forbiddenGlobs) {
-  if (existsSync(join(root, path))) fail(`Forbidden implementation path exists: ${path}`);
+  if (existsSync(join(root, path)))
+    fail(`Forbidden implementation path exists: ${path}`);
 }
 
 const packFiles = readdirSync(join(root, pack)).filter((f) => f.endsWith(".md"));
@@ -83,7 +86,9 @@ for (const file of packFiles) {
 }
 
 const owner = read(`${pack}/OWNER-ACCEPTANCE.md`);
-const decisionLine = owner.split("\n").find((line) => /^>\s*\*\*Decision:\*\*/.test(line));
+const decisionLine = owner
+  .split("\n")
+  .find((line) => /^>\s*\*\*Decision:\*\*/.test(line));
 if (!decisionLine || !/ACCEPTED\s*\/\s*CLOSED\s*\/\s*COMPLETE/.test(decisionLine)) {
   fail("OWNER-ACCEPTANCE.md Decision must be ACCEPTED / CLOSED / COMPLETE");
 }

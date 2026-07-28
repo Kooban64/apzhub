@@ -178,7 +178,9 @@ describe("TraceLink domain — lifecycle", () => {
     let trace = baseCreate();
     trace = validateTraceLink(trace, NOW, ACTOR, { endpointFacts: existenceFacts() });
     expect(trace.lifecycleState).toBe("validated");
-    expect(trace.domainEvents.some((e) => e.type === "qep.trace_link.validated")).toBe(true);
+    expect(trace.domainEvents.some((e) => e.type === "qep.trace_link.validated")).toBe(
+      true,
+    );
 
     trace = approveTraceLink(trace, NOW, ACTOR);
     expect(trace.lifecycleState).toBe("approved");
@@ -200,7 +202,9 @@ describe("TraceLink domain — lifecycle", () => {
 
   it("rejects validation without endpoint facts", () => {
     const draft = baseCreate();
-    expect(() => validateTraceLink(draft, NOW, ACTOR, {})).toThrow(TraceInvariantViolation);
+    expect(() => validateTraceLink(draft, NOW, ACTOR, {})).toThrow(
+      TraceInvariantViolation,
+    );
   });
 
   it("rejects validation when endpoint missing", () => {
@@ -222,7 +226,9 @@ describe("TraceLink domain — lifecycle", () => {
     trace = supersedeTraceLink(trace, "trl_2", NOW, ACTOR);
     expect(trace.lifecycleState).toBe("superseded");
     expect(trace.successorTraceId).toBe("trl_2");
-    expect(trace.domainEvents.some((e) => e.type === "qep.trace_link.superseded")).toBe(true);
+    expect(trace.domainEvents.some((e) => e.type === "qep.trace_link.superseded")).toBe(
+      true,
+    );
   });
 
   it("forbids mutation after retire", () => {
@@ -344,9 +350,9 @@ describe("TraceLink domain — policies", () => {
       },
     ];
     // Adding a→spec again when path spec→a exists would cycle
-    expect(() => assertCircularTracePolicy("requirement_specified_by", a, spec, edges)).toThrow(
-      TraceInvariantViolation,
-    );
+    expect(() =>
+      assertCircularTracePolicy("requirement_specified_by", a, spec, edges),
+    ).toThrow(TraceInvariantViolation);
   });
 
   it("updates scope, authority, and endpoint in draft", () => {

@@ -64,27 +64,27 @@ function mapRelationshipRow(
       direction: {
         source: {
           mode: row.sourceMode as Relationship["direction"]["source"]["mode"],
-          requirementId: row.sourceRequirementId as Relationship["direction"]["source"]["requirementId"],
+          requirementId:
+            row.sourceRequirementId as Relationship["direction"]["source"]["requirementId"],
           tenantId: row.tenantId,
           ...(row.sourceContentVersionId
             ? {
-                contentVersionId:
-                  row.sourceContentVersionId as NonNullable<
-                    Relationship["direction"]["source"]["contentVersionId"]
-                  >,
+                contentVersionId: row.sourceContentVersionId as NonNullable<
+                  Relationship["direction"]["source"]["contentVersionId"]
+                >,
               }
             : {}),
         },
         target: {
           mode: row.targetMode as Relationship["direction"]["target"]["mode"],
-          requirementId: row.targetRequirementId as Relationship["direction"]["target"]["requirementId"],
+          requirementId:
+            row.targetRequirementId as Relationship["direction"]["target"]["requirementId"],
           tenantId: row.tenantId,
           ...(row.targetContentVersionId
             ? {
-                contentVersionId:
-                  row.targetContentVersionId as NonNullable<
-                    Relationship["direction"]["target"]["contentVersionId"]
-                  >,
+                contentVersionId: row.targetContentVersionId as NonNullable<
+                  Relationship["direction"]["target"]["contentVersionId"]
+                >,
               }
             : {}),
         },
@@ -143,7 +143,9 @@ function toInsertValues(relationship: Relationship, revision: number) {
     updatedBy: relationship.updatedBy,
     activatedAt: relationship.activatedAt ? new Date(relationship.activatedAt) : null,
     activatedBy: relationship.activatedBy ?? null,
-    deprecatedAt: relationship.deprecatedAt ? new Date(relationship.deprecatedAt) : null,
+    deprecatedAt: relationship.deprecatedAt
+      ? new Date(relationship.deprecatedAt)
+      : null,
     deprecatedBy: relationship.deprecatedBy ?? null,
     retiredAt: relationship.retiredAt ? new Date(relationship.retiredAt) : null,
     retiredBy: relationship.retiredBy ?? null,
@@ -291,23 +293,35 @@ export function createPostgresRequirementsRelationshipRepository(
         conditions.push(eq(qepRequirementsRelationship.relationshipType, query.type));
       }
       if (query.lifecycleState) {
-        conditions.push(eq(qepRequirementsRelationship.lifecycleState, query.lifecycleState));
+        conditions.push(
+          eq(qepRequirementsRelationship.lifecycleState, query.lifecycleState),
+        );
       }
       if (query.conflictsOnly) {
-        conditions.push(eq(qepRequirementsRelationship.relationshipType, "conflicts_with"));
+        conditions.push(
+          eq(qepRequirementsRelationship.relationshipType, "conflicts_with"),
+        );
       }
       if (query.supersessionOnly) {
         conditions.push(eq(qepRequirementsRelationship.relationshipType, "supersedes"));
       }
       if (query.baselineId) {
         conditions.push(eq(qepRequirementsRelationship.scopeKind, "baseline"));
-        conditions.push(eq(qepRequirementsRelationship.scopeReferenceId, query.baselineId));
+        conditions.push(
+          eq(qepRequirementsRelationship.scopeReferenceId, query.baselineId),
+        );
       }
       if (query.contentVersionId) {
         conditions.push(
           or(
-            eq(qepRequirementsRelationship.sourceContentVersionId, query.contentVersionId),
-            eq(qepRequirementsRelationship.targetContentVersionId, query.contentVersionId),
+            eq(
+              qepRequirementsRelationship.sourceContentVersionId,
+              query.contentVersionId,
+            ),
+            eq(
+              qepRequirementsRelationship.targetContentVersionId,
+              query.contentVersionId,
+            ),
           )!,
         );
       }
@@ -363,45 +377,41 @@ export function createPostgresRequirementsRelationshipRepository(
         .select()
         .from(qepRequirementsRelationship)
         .where(and(...conditions));
-      return rows.map(
-        (row): RelationshipEdgeFact => ({
-          relationshipId: row.id,
-          type: row.relationshipType as RelationshipType,
-          source: {
-            mode: row.sourceMode as RelationshipEdgeFact["source"]["mode"],
-            requirementId:
-              row.sourceRequirementId as RelationshipEdgeFact["source"]["requirementId"],
-            tenantId: row.tenantId,
-            ...(row.sourceContentVersionId
-              ? {
-                  contentVersionId:
-                    row.sourceContentVersionId as NonNullable<
-                      RelationshipEdgeFact["source"]["contentVersionId"]
-                    >,
-                }
-              : {}),
-          },
-          target: {
-            mode: row.targetMode as RelationshipEdgeFact["target"]["mode"],
-            requirementId:
-              row.targetRequirementId as RelationshipEdgeFact["target"]["requirementId"],
-            tenantId: row.tenantId,
-            ...(row.targetContentVersionId
-              ? {
-                  contentVersionId:
-                    row.targetContentVersionId as NonNullable<
-                      RelationshipEdgeFact["target"]["contentVersionId"]
-                    >,
-                }
-              : {}),
-          },
-          scope: {
-            kind: row.scopeKind as RelationshipEdgeFact["scope"]["kind"],
-            ...(row.scopeReferenceId ? { referenceId: row.scopeReferenceId } : {}),
-          },
-          lifecycleState: row.lifecycleState as RelationshipEdgeFact["lifecycleState"],
-        }),
-      );
+      return rows.map((row): RelationshipEdgeFact => ({
+        relationshipId: row.id,
+        type: row.relationshipType as RelationshipType,
+        source: {
+          mode: row.sourceMode as RelationshipEdgeFact["source"]["mode"],
+          requirementId:
+            row.sourceRequirementId as RelationshipEdgeFact["source"]["requirementId"],
+          tenantId: row.tenantId,
+          ...(row.sourceContentVersionId
+            ? {
+                contentVersionId: row.sourceContentVersionId as NonNullable<
+                  RelationshipEdgeFact["source"]["contentVersionId"]
+                >,
+              }
+            : {}),
+        },
+        target: {
+          mode: row.targetMode as RelationshipEdgeFact["target"]["mode"],
+          requirementId:
+            row.targetRequirementId as RelationshipEdgeFact["target"]["requirementId"],
+          tenantId: row.tenantId,
+          ...(row.targetContentVersionId
+            ? {
+                contentVersionId: row.targetContentVersionId as NonNullable<
+                  RelationshipEdgeFact["target"]["contentVersionId"]
+                >,
+              }
+            : {}),
+        },
+        scope: {
+          kind: row.scopeKind as RelationshipEdgeFact["scope"]["kind"],
+          ...(row.scopeReferenceId ? { referenceId: row.scopeReferenceId } : {}),
+        },
+        lifecycleState: row.lifecycleState as RelationshipEdgeFact["lifecycleState"],
+      }));
     },
 
     async exists(tenantId, id) {
@@ -443,8 +453,10 @@ function mapTaxonomyRow(
     symmetric: row.symmetric === "true",
     inverseLabel: row.inverseLabel,
     cyclePolicy: row.cyclePolicy as RelationshipTaxonomyDefinition["cyclePolicy"],
-    rationalePolicy: row.rationalePolicy as RelationshipTaxonomyDefinition["rationalePolicy"],
-    defaultStrength: row.defaultStrength as RelationshipTaxonomyDefinition["defaultStrength"],
+    rationalePolicy:
+      row.rationalePolicy as RelationshipTaxonomyDefinition["rationalePolicy"],
+    defaultStrength:
+      row.defaultStrength as RelationshipTaxonomyDefinition["defaultStrength"],
     certificationRelevant:
       row.certificationRelevant === "conditional"
         ? "conditional"

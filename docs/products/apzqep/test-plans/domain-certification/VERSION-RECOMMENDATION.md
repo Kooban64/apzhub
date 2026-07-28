@@ -1,10 +1,10 @@
 # Version Recommendation — APZQEP-CERT-060A
 
-| Field | Value |
-| ----- | ----- |
-| Package | `@apzhub/qep-test-plans` |
-| Owner Decision | **Remain 0.1.0 CERTIFIED** |
-| 1.0.0 | **Not authorised** under Domain / Component Certification |
+| Field          | Value                                                     |
+| -------------- | --------------------------------------------------------- |
+| Package        | `@apzhub/qep-test-plans`                                  |
+| Owner Decision | **Remain 0.1.0 CERTIFIED**                                |
+| 1.0.0          | **Not authorised** under Domain / Component Certification |
 
 ## Owner rationale (recorded)
 

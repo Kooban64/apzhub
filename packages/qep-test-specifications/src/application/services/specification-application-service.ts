@@ -4,7 +4,10 @@ import type { QepRequestContext } from "@apzhub/qep-contracts";
 
 import type { SpecificationDomainEvent } from "../../domain/test-specification/specification-events";
 import type { SpecificationHistoryEntry } from "../../domain/test-specification/specification-history";
-import { createSpecificationId, type SpecificationId } from "../../domain/test-specification/specification-id";
+import {
+  createSpecificationId,
+  type SpecificationId,
+} from "../../domain/test-specification/specification-id";
 import type { SpecificationRelationship } from "../../domain/test-specification/specification-relationship";
 import type {
   StoredTestSpecification,
@@ -169,7 +172,10 @@ export type SpecificationApplicationService = {
     ctx: QepRequestContext,
     id: string,
     input?: SupersedeSpecificationCommandInput,
-  ): Promise<{ readonly predecessor: StoredTestSpecification; readonly successor?: StoredTestSpecification }>;
+  ): Promise<{
+    readonly predecessor: StoredTestSpecification;
+    readonly successor?: StoredTestSpecification;
+  }>;
   retire(ctx: QepRequestContext, id: string): Promise<StoredTestSpecification>;
   cancel(ctx: QepRequestContext, id: string): Promise<StoredTestSpecification>;
   addRelationship(
@@ -207,7 +213,10 @@ export type SpecificationApplicationService = {
     ctx: QepRequestContext,
     id: string,
   ): Promise<readonly SpecificationHistoryEntry[]>;
-  listVersions(ctx: QepRequestContext, id: string): Promise<readonly StoredTestSpecification[]>;
+  listVersions(
+    ctx: QepRequestContext,
+    id: string,
+  ): Promise<readonly StoredTestSpecification[]>;
   findLatestApproved(
     ctx: QepRequestContext,
     number: string,
@@ -241,12 +250,19 @@ function runInTransaction<T>(
   return deps.runInTransaction ? deps.runInTransaction(work) : work();
 }
 
-function nextSpecificationId(deps: SpecificationApplicationServiceDeps): SpecificationId {
+function nextSpecificationId(
+  deps: SpecificationApplicationServiceDeps,
+): SpecificationId {
   const generated = deps.id?.() ?? randomUUID().replace(/-/g, "").slice(0, 16);
-  return createSpecificationId(generated.startsWith("tsp_") ? generated : `tsp_${generated}`);
+  return createSpecificationId(
+    generated.startsWith("tsp_") ? generated : `tsp_${generated}`,
+  );
 }
 
-function assertAnyPermission(ctx: QepRequestContext, requiredOneOf: readonly string[]): void {
+function assertAnyPermission(
+  ctx: QepRequestContext,
+  requiredOneOf: readonly string[],
+): void {
   const granted = ctx.permissions;
   if (!granted || granted.length === 0) return;
   if (granted.includes("qep.specification.*")) return;
@@ -282,10 +298,18 @@ async function observe<T>(
   const started = Date.now();
   try {
     const result = await work();
-    deps.onObservation?.({ operation, durationMs: Date.now() - started, outcome: "success" });
+    deps.onObservation?.({
+      operation,
+      durationMs: Date.now() - started,
+      outcome: "success",
+    });
     return result;
   } catch (error) {
-    deps.onObservation?.({ operation, durationMs: Date.now() - started, outcome: "error" });
+    deps.onObservation?.({
+      operation,
+      durationMs: Date.now() - started,
+      outcome: "error",
+    });
     throw error;
   }
 }
@@ -304,7 +328,10 @@ async function requireSpecification(
   tenantId: string,
   id: string,
 ): Promise<StoredTestSpecification> {
-  const specification = await deps.specifications.get(tenantId, createSpecificationId(id));
+  const specification = await deps.specifications.get(
+    tenantId,
+    createSpecificationId(id),
+  );
   if (!specification) {
     throw new TestSpecificationNotFoundError(`Test Specification not found: ${id}`);
   }
@@ -342,7 +369,9 @@ async function persistCreate(
   auditAction: string,
   auditDetails: Readonly<Record<string, unknown>> = {},
 ): Promise<StoredTestSpecification> {
-  const stored = await runInTransaction(deps, async () => deps.specifications.create(created));
+  const stored = await runInTransaction(deps, async () =>
+    deps.specifications.create(created),
+  );
   await appendAudit(deps, ctx, stored.record.id, auditAction, auditDetails);
   await emitEvents(deps, created);
   try {
@@ -657,7 +686,11 @@ export function createSpecificationApplicationService(
           ...queryOptions,
           query,
         });
-        return filterAndPaginate(items, queryOptions.limit ?? 50, queryOptions.offset ?? 0);
+        return filterAndPaginate(
+          items,
+          queryOptions.limit ?? 50,
+          queryOptions.offset ?? 0,
+        );
       });
     },
 
@@ -672,7 +705,10 @@ export function createSpecificationApplicationService(
       return observe(deps, "specification.list_versions", async () => {
         assertAnyPermission(ctx, [READ]);
         const existing = await requireSpecification(deps, ctx.tenantId, id);
-        return deps.specifications.listVersionsByNumber(ctx.tenantId, existing.record.number);
+        return deps.specifications.listVersionsByNumber(
+          ctx.tenantId,
+          existing.record.number,
+        );
       });
     },
 

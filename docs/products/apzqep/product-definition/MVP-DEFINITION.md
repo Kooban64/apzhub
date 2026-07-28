@@ -13,35 +13,35 @@ MVP delivers a **thin slice through the full lifecycle**, not a partial module d
 
 ## MVP must support
 
-| Area | MVP inclusion | Enterprise expectation |
-| ---- | ------------- | ---------------------- |
-| Tenant and user management | Yes | Multi-tenant RBAC; role-based workspace access |
-| Project quality workspace | Yes | Portfolio and project contexts for QE scope |
-| Requirements | Yes | Approve, baseline, import; quality-relevant only |
-| Manual verification | Yes — first-class | Structured and exploratory sessions |
-| Verification library | Yes | Reusable procedures; version awareness |
-| Verification runs/sessions | Yes | Human-centred execution with result capture |
-| Evidence | Yes | Capture, pack assembly, pre-cert review |
-| Defects | Yes | Raise, link to verification, retest cycle |
-| Traceability | Yes | Matrix, coverage gaps, requirement linkage |
-| Release readiness | Yes | Gates, waivers, aggregated snapshot |
-| Human certification | Yes | Named accountable actor; locked evidence |
-| Dashboards | Yes | Home, project, release views |
-| Audit | Yes | Search, export, immutable trail |
-| Basic integrations | Yes | Platform + GitHub ingest foundation |
-| Import and export | Yes | Requirements import; report/cert export |
+| Area                       | MVP inclusion     | Enterprise expectation                           |
+| -------------------------- | ----------------- | ------------------------------------------------ |
+| Tenant and user management | Yes               | Multi-tenant RBAC; role-based workspace access   |
+| Project quality workspace  | Yes               | Portfolio and project contexts for QE scope      |
+| Requirements               | Yes               | Approve, baseline, import; quality-relevant only |
+| Manual verification        | Yes — first-class | Structured and exploratory sessions              |
+| Verification library       | Yes               | Reusable procedures; version awareness           |
+| Verification runs/sessions | Yes               | Human-centred execution with result capture      |
+| Evidence                   | Yes               | Capture, pack assembly, pre-cert review          |
+| Defects                    | Yes               | Raise, link to verification, retest cycle        |
+| Traceability               | Yes               | Matrix, coverage gaps, requirement linkage       |
+| Release readiness          | Yes               | Gates, waivers, aggregated snapshot              |
+| Human certification        | Yes               | Named accountable actor; locked evidence         |
+| Dashboards                 | Yes               | Home, project, release views                     |
+| Audit                      | Yes               | Search, export, immutable trail                  |
+| Basic integrations         | Yes               | Platform + GitHub ingest foundation              |
+| Import and export          | Yes               | Requirements import; report/cert export          |
 
 ## Explicitly not required ON for MVP
 
-| Area | Posture |
-| ---- | ------- |
-| AI Quality Workspace runtime | OFF — not required for MVP certification path |
-| Advanced MCP write tools | Deferred — catalogue documented; runtime later |
-| Continuous verification/cert modes | Deferred — Phase 3 / L7 maturity |
-| Full ALM sync | Optional/later — link foundation only |
-| Marketplace | Out — not MVP scope |
-| Quality Intelligence advanced | Phase 2 — basic reporting in MVP |
-| Knowledge base full | Phase 2 — minimal optional in MVP |
+| Area                               | Posture                                        |
+| ---------------------------------- | ---------------------------------------------- |
+| AI Quality Workspace runtime       | OFF — not required for MVP certification path  |
+| Advanced MCP write tools           | Deferred — catalogue documented; runtime later |
+| Continuous verification/cert modes | Deferred — Phase 3 / L7 maturity               |
+| Full ALM sync                      | Optional/later — link foundation only          |
+| Marketplace                        | Out — not MVP scope                            |
+| Quality Intelligence advanced      | Phase 2 — basic reporting in MVP               |
+| Knowledge base full                | Phase 2 — minimal optional in MVP              |
 
 ## MVP persona coverage
 
@@ -49,12 +49,12 @@ MVP must support the primary certification path for: Release Manager (primary ce
 
 ## MVP success measures
 
-- Manual verification session completable end-to-end with evidence capture  
-- Certification decision recorded with named human actor and locked evidence pack  
-- Zero dependency on AI for MVP certification path  
-- Traceability shows coverage gaps before certification  
-- Audit trail searchable for certification decision and evidence lock  
-- Release readiness snapshot reflects defects, risk, and gate status  
+- Manual verification session completable end-to-end with evidence capture
+- Certification decision recorded with named human actor and locked evidence pack
+- Zero dependency on AI for MVP certification path
+- Traceability shows coverage gaps before certification
+- Audit trail searchable for certification decision and evidence lock
+- Release readiness snapshot reflects defects, risk, and gate status
 
 ## Completeness statement
 

@@ -2,16 +2,16 @@
 
 ## Smoke test checklist
 
-| # | Check | Expected |
-| --- | --- | --- |
-| 1 | Migrations **0081** / **0082** applied | Tables `qep_verification`, `qep_verification_history` with RLS |
-| 2 | `GET /api/v1/qep/verifications` (authorised) | Paginated list (empty OK) |
-| 3 | `POST /api/v1/qep/verifications` | Creates draft; returns DTO |
-| 4 | Lifecycle: request → assign → start → complete | Status/outcome evolve per domain rules |
-| 5 | `GET .../{id}/history` | Append-only domain history |
-| 6 | Permission denial | 403 without required `qep.verification.*` |
-| 7 | Search upsert hook | `verification_record` projected; retired/superseded/cancelled removed |
-| 8 | Workbench routes | **Absent** — no Workbench under ENG-040B |
+| #   | Check                                          | Expected                                                              |
+| --- | ---------------------------------------------- | --------------------------------------------------------------------- |
+| 1   | Migrations **0081** / **0082** applied         | Tables `qep_verification`, `qep_verification_history` with RLS        |
+| 2   | `GET /api/v1/qep/verifications` (authorised)   | Paginated list (empty OK)                                             |
+| 3   | `POST /api/v1/qep/verifications`               | Creates draft; returns DTO                                            |
+| 4   | Lifecycle: request → assign → start → complete | Status/outcome evolve per domain rules                                |
+| 5   | `GET .../{id}/history`                         | Append-only domain history                                            |
+| 6   | Permission denial                              | 403 without required `qep.verification.*`                             |
+| 7   | Search upsert hook                             | `verification_record` projected; retired/superseded/cancelled removed |
+| 8   | Workbench routes                               | **Absent** — no Workbench under ENG-040B                              |
 
 ## Enablement
 

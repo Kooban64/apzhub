@@ -9,12 +9,12 @@
 
 ## Freeze scope (binding)
 
-| Surface | Freeze rule |
-| ------- | ----------- |
-| Domain / Infrastructure / Workbench | No uncontrolled changes |
+| Surface                                    | Freeze rule                                                      |
+| ------------------------------------------ | ---------------------------------------------------------------- |
+| Domain / Infrastructure / Workbench        | No uncontrolled changes                                          |
 | Public REST `/api/v1/qep/specifications/*` | No breaking / behavioural contract changes without new programme |
-| Contracts & domain events | Frozen public contract / catalogue |
-| Patch line | **1.0.x** under new Owner-authorised programmes only |
+| Contracts & domain events                  | Frozen public contract / catalogue                               |
+| Patch line                                 | **1.0.x** under new Owner-authorised programmes only             |
 
 ## Explicitly out of this baseline
 

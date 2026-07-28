@@ -6,12 +6,12 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ENG-040A — Verification Domain Model |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Package at acceptance | `@apzhub/qep-verification` **0.1.0** |
-| Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T180000Z-APZQEP-ENG-040A-ACCEPTANCE.json` |
+| Field                 | Value                                                                                        |
+| --------------------- | -------------------------------------------------------------------------------------------- |
+| Programme             | APZQEP-ENG-040A — Verification Domain Model                                                  |
+| Decision              | **ACCEPTED / CLOSED / COMPLETE**                                                             |
+| Package at acceptance | `@apzhub/qep-verification` **0.1.0**                                                         |
+| Acceptance evidence   | `docs/operations/evidence/portfolio-recert/20260726T180000Z-APZQEP-ENG-040A-ACCEPTANCE.json` |
 
 ## Effect
 

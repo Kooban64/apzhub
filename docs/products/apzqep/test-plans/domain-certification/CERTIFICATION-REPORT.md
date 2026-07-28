@@ -1,19 +1,19 @@
 # Certification Report — APZQEP-CERT-060A
 
-| Field | Value |
-| ----- | ----- |
-| Programme | **APZQEP-CERT-060A** |
-| Title | Test Plans Domain Certification |
-| Package | `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** |
-| Status | **CERTIFIED / APPROVED / CLOSED** |
-| Certification level | **Component Certification** |
-| Certification class | **DOMAIN_PRODUCTION_READY_WITH_LIMITATIONS** |
-| Outcome | **PASS** — Owner Certification Decision recorded |
-| Nature | Independent assurance — no engineering |
-| Date | 2026-07-27 |
-| Owner Decision | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) · `20260727T174500Z-APZQEP-CERT-060A-ACCEPTANCE.json` |
-| Independence | [OES-CERTIFICATION-INDEPENDENCE.md](../../../../engineering/oes/OES-CERTIFICATION-INDEPENDENCE.md) |
-| Levels | [OES-CERTIFICATION-LEVELS.md](../../../../engineering/oes/OES-CERTIFICATION-LEVELS.md) |
+| Field               | Value                                                                                              |
+| ------------------- | -------------------------------------------------------------------------------------------------- |
+| Programme           | **APZQEP-CERT-060A**                                                                               |
+| Title               | Test Plans Domain Certification                                                                    |
+| Package             | `@apzhub/qep-test-plans` **0.1.0 CERTIFIED**                                                       |
+| Status              | **CERTIFIED / APPROVED / CLOSED**                                                                  |
+| Certification level | **Component Certification**                                                                        |
+| Certification class | **DOMAIN_PRODUCTION_READY_WITH_LIMITATIONS**                                                       |
+| Outcome             | **PASS** — Owner Certification Decision recorded                                                   |
+| Nature              | Independent assurance — no engineering                                                             |
+| Date                | 2026-07-27                                                                                         |
+| Owner Decision      | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) · `20260727T174500Z-APZQEP-CERT-060A-ACCEPTANCE.json` |
+| Independence        | [OES-CERTIFICATION-INDEPENDENCE.md](../../../../engineering/oes/OES-CERTIFICATION-INDEPENDENCE.md) |
+| Levels              | [OES-CERTIFICATION-LEVELS.md](../../../../engineering/oes/OES-CERTIFICATION-LEVELS.md)             |
 
 ## Decision (Owner-accepted)
 

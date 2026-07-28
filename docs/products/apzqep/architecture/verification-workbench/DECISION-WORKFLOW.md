@@ -8,12 +8,12 @@ request · assign · start · verify/complete · reject · expire · withdraw ·
 
 ## UX elements
 
-| Element | Rule |
-| ------- | ---- |
-| Confirmation | Required for mutating decisions |
-| Warnings | Terminal / irreversible / expire / retire / supersede |
-| Rationale | Required when policy says so; strongly for reject / withdraw / cancel / supersede |
-| Outcome | Captured distinctly from status on completion |
+| Element      | Rule                                                                              |
+| ------------ | --------------------------------------------------------------------------------- |
+| Confirmation | Required for mutating decisions                                                   |
+| Warnings     | Terminal / irreversible / expire / retire / supersede                             |
+| Rationale    | Required when policy says so; strongly for reject / withdraw / cancel / supersede |
+| Outcome      | Captured distinctly from status on completion                                     |
 
 ## Surfaces
 

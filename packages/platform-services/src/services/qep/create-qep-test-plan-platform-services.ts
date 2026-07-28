@@ -32,7 +32,9 @@ export type QepTestPlanPlatformServicesBundle = {
 type CommonInput = {
   readonly now?: () => string;
   readonly id?: () => string;
-  readonly allocateNumber?: (ctx: { readonly tenantId: string }) => Promise<string> | string;
+  readonly allocateNumber?: (ctx: {
+    readonly tenantId: string;
+  }) => Promise<string> | string;
   readonly onPlanUpserted?: (plan: StoredTestPlan) => void | Promise<void>;
 };
 
@@ -54,7 +56,11 @@ export function wrapQepTestPlanPlatformServiceWithPipeline(
   service: QepTestPlanPlatformService,
   pipeline: RequestPipeline,
 ): QepTestPlanPlatformService {
-  return wrapServiceWithPipeline(service, pipeline, "qepTestPlan") as QepTestPlanPlatformService;
+  return wrapServiceWithPipeline(
+    service,
+    pipeline,
+    "qepTestPlan",
+  ) as QepTestPlanPlatformService;
 }
 
 function buildBundle(input: {
@@ -62,7 +68,9 @@ function buildBundle(input: {
   readonly persistenceMode: "postgres" | "memory";
   readonly now?: () => string;
   readonly id?: () => string;
-  readonly allocateNumber?: (ctx: { readonly tenantId: string }) => Promise<string> | string;
+  readonly allocateNumber?: (ctx: {
+    readonly tenantId: string;
+  }) => Promise<string> | string;
   readonly onPlanUpserted?: (plan: StoredTestPlan) => void | Promise<void>;
 }): QepTestPlanPlatformServicesBundle {
   const application = createPlanApplicationService({
@@ -81,7 +89,8 @@ function buildBundle(input: {
       planEnabled: true,
       persistenceMode: input.persistenceMode,
     },
-    wrapWithPipeline: (pipeline) => wrapQepTestPlanPlatformServiceWithPipeline(service, pipeline),
+    wrapWithPipeline: (pipeline) =>
+      wrapQepTestPlanPlatformServiceWithPipeline(service, pipeline),
   };
 }
 
@@ -106,7 +115,9 @@ export function createQepTestPlanPlatformServicesForProduction(
       "createQepTestPlanPlatformServicesForProduction requires postgresDb — in-memory fallback is forbidden",
     );
   }
-  const persistence = createQepTestPlanPersistenceForProduction({ db: input.postgresDb });
+  const persistence = createQepTestPlanPersistenceForProduction({
+    db: input.postgresDb,
+  });
   return buildBundle({
     persistence,
     persistenceMode: "postgres",

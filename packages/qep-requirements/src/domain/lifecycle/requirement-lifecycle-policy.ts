@@ -62,4 +62,5 @@ export const requirementLifecyclePolicy: LifecyclePolicy<RequirementStatus> = {
   },
 };
 
-export const REQUIREMENT_LIFECYCLE_TRANSITION_MATRIX = requirementLifecyclePolicy.transitions;
+export const REQUIREMENT_LIFECYCLE_TRANSITION_MATRIX =
+  requirementLifecyclePolicy.transitions;

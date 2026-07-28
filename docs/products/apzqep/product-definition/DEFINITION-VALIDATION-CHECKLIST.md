@@ -48,7 +48,7 @@
 
 ## Sign-off (author)
 
-| Role | Result | Date |
-| ---- | ------ | ---- |
-| Author validation | PASS | 2026-07-24 |
-| Ready for Owner Product Definition Acceptance | YES | 2026-07-24 |
+| Role                                          | Result | Date       |
+| --------------------------------------------- | ------ | ---------- |
+| Author validation                             | PASS   | 2026-07-24 |
+| Ready for Owner Product Definition Acceptance | YES    | 2026-07-24 |

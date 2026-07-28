@@ -16,17 +16,17 @@
 
 ## Freeze assessment
 
-| Lifecycle Stage | Status |
-| --------------- | ------ |
-| Requirements | ✅ Complete |
-| Architecture | ✅ Accepted |
-| Engineering Specification | ✅ Accepted |
-| Implementation | ✅ Complete |
-| Engineering Completion Review | ✅ PASS |
-| Owner Acceptance | ✅ PASS |
-| Independent Certification | ✅ PASS |
-| Version Promotion | ✅ 1.0.0 |
-| Production Classification | ✅ PRODUCTION_READY_WITH_LIMITATIONS |
+| Lifecycle Stage               | Status                               |
+| ----------------------------- | ------------------------------------ |
+| Requirements                  | ✅ Complete                          |
+| Architecture                  | ✅ Accepted                          |
+| Engineering Specification     | ✅ Accepted                          |
+| Implementation                | ✅ Complete                          |
+| Engineering Completion Review | ✅ PASS                              |
+| Owner Acceptance              | ✅ PASS                              |
+| Independent Certification     | ✅ PASS                              |
+| Version Promotion             | ✅ 1.0.0                             |
+| Production Classification     | ✅ PRODUCTION_READY_WITH_LIMITATIONS |
 
 No mandatory governance gate remains outstanding.
 
@@ -46,28 +46,28 @@ Frozen Version **1.0.0** is the authoritative implementation.
 
 ### Engineering restrictions (not permitted on frozen baseline)
 
-- Uncontrolled code changes  
-- Architectural modifications  
-- API contract changes  
-- Behavioural changes  
-- Documentation edits that alter technical intent  
+- Uncontrolled code changes
+- Architectural modifications
+- API contract changes
+- Behavioural changes
+- Documentation edits that alter technical intent
 
 ### Permitted activities (governed programmes only)
 
-- Defect correction  
-- Security updates  
-- Documentation errata  
-- Minor improvements  
-- New capabilities  
-- Future major versions  
+- Defect correction
+- Security updates
+- Documentation errata
+- Minor improvements
+- New capabilities
+- Future major versions
 
 All such work SHALL commence under a **new authorised programme identifier** and follow the full APZOR engineering lifecycle.
 
 ## Effect
 
-- Test Specifications capability: **ENGINEERED · CERTIFIED · PROMOTED · FROZEN**  
-- Official baseline: **1.0.0 CERTIFIED / FROZEN**  
-- Owner Freeze Review closed  
+- Test Specifications capability: **ENGINEERED · CERTIFIED · PROMOTED · FROZEN**
+- Official baseline: **1.0.0 CERTIFIED / FROZEN**
+- Owner Freeze Review closed
 
 ## STOP
 

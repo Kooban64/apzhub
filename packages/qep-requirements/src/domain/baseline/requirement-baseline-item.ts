@@ -1,11 +1,7 @@
 import type { RequirementContentVersionId } from "../content-version/requirement-content-version-id";
-import {
-  createRequirementContentVersionId,
-} from "../content-version/requirement-content-version-id";
+import { createRequirementContentVersionId } from "../content-version/requirement-content-version-id";
 import type { RequirementContentVersionNumber } from "../content-version/requirement-content-version-number";
-import {
-  createRequirementContentVersionNumber,
-} from "../content-version/requirement-content-version-number";
+import { createRequirementContentVersionNumber } from "../content-version/requirement-content-version-number";
 import type { RequirementId } from "../value-objects/requirement-id";
 import { createRequirementId } from "../value-objects/requirement-id";
 import { QepInvariantViolation } from "../../shared/errors";
@@ -38,7 +34,9 @@ export function createRequirementBaselineItem(input: {
   return {
     requirementId: createRequirementId(input.requirementId),
     contentVersionId: createRequirementContentVersionId(input.contentVersionId),
-    contentVersionNumber: createRequirementContentVersionNumber(input.contentVersionNumber),
+    contentVersionNumber: createRequirementContentVersionNumber(
+      input.contentVersionNumber,
+    ),
     includedAt,
     includedBy,
   };

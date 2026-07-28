@@ -1,12 +1,13 @@
 # APZQEP-OES-ENG-070A
+
 # PART 5 — AI/MCP Boundaries, Quality Gates & Owner Acceptance Criteria
 
-| Item | Value |
-| ---- | ----- |
-| Document | APZQEP-OES-ENG-070A |
-| Part | **5 of 5** |
-| Programme | APZQEP-OES-ENG-070A |
-| Status | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
+| Item      | Value                                       |
+| --------- | ------------------------------------------- |
+| Document  | APZQEP-OES-ENG-070A                         |
+| Part      | **5 of 5**                                  |
+| Programme | APZQEP-OES-ENG-070A                         |
+| Status    | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
 
 ---
 
@@ -20,16 +21,16 @@ This Part defines the **AI authority matrix**, **MCP boundaries**, the **quality
 
 ## 2. AI authority matrix (implementation-time)
 
-| Activity | AI MAY | AI MUST NOT |
-| -------- | ------ | ----------- |
-| Generate UI from this OES + APZQEP-ARCH-014 (once ENG-070A is authorised) | ✅ | Invent architecture, routes, or actions not specified |
-| Suggest copy, a11y fixes, or refactors | ✅ | Approve a lifecycle transition |
-| Wire `availableActions` exactly as coded by the server | ✅ | Fabricate, cache, or infer an action not present in the response |
-| Suggest draft Plan content (title, objective, item selection) | ✅ (future, separately authorised) | Auto-submit, auto-approve, or bypass human confirmation |
-| Decide Owner Acceptance, Review outcomes, or Certification | ❌ | ❌ |
-| Change Domain or Infrastructure contracts | ❌ without a separate Owner ENG delta | ❌ silently |
-| Begin coding before this OES is Accepted and ENG-070A is authorised | ❌ | ❌ |
-| Implement a client-side Version Compare to work around L-01 | ❌ | ❌ — always |
+| Activity                                                                  | AI MAY                                | AI MUST NOT                                                      |
+| ------------------------------------------------------------------------- | ------------------------------------- | ---------------------------------------------------------------- |
+| Generate UI from this OES + APZQEP-ARCH-014 (once ENG-070A is authorised) | ✅                                    | Invent architecture, routes, or actions not specified            |
+| Suggest copy, a11y fixes, or refactors                                    | ✅                                    | Approve a lifecycle transition                                   |
+| Wire `availableActions` exactly as coded by the server                    | ✅                                    | Fabricate, cache, or infer an action not present in the response |
+| Suggest draft Plan content (title, objective, item selection)             | ✅ (future, separately authorised)    | Auto-submit, auto-approve, or bypass human confirmation          |
+| Decide Owner Acceptance, Review outcomes, or Certification                | ❌                                    | ❌                                                               |
+| Change Domain or Infrastructure contracts                                 | ❌ without a separate Owner ENG delta | ❌ silently                                                      |
+| Begin coding before this OES is Accepted and ENG-070A is authorised       | ❌                                    | ❌                                                               |
+| Implement a client-side Version Compare to work around L-01               | ❌                                    | ❌ — always                                                      |
 
 ### 2.1 Mandatory AI-assisted mutation path
 
@@ -56,14 +57,14 @@ No alternate path exists. **No AI approve bypass under any circumstance** — th
 
 ## 4. Quality gates before implementation start (`APZQEP-ENG-070A`)
 
-| Gate | Criterion |
-| ---- | --------- |
-| G1 | Parts 1–5 + Appendices A–E of this OES filed |
-| G2 | `COMPLETE.md` assembled and self-consistent |
-| G3 | Owner Acceptance of this OES (OES-002) = **ACCEPTED** (or **ACCEPTED WITH CONDITIONS** with conditions tracked) |
-| G4 | APZQEP-ARCH-014 Accepted / Architecture Baselined / Closed (done, 2026-07-28) |
-| G5 | Domain 0.1.0 CERTIFIED (CERT-060A) and Infrastructure 0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED (CERT-060B) remain closed and unmodified |
-| G6 | A separate Owner Programme Instruction names `APZQEP-ENG-070A` |
+| Gate | Criterion                                                                                                                               |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| G1   | Parts 1–5 + Appendices A–E of this OES filed                                                                                            |
+| G2   | `COMPLETE.md` assembled and self-consistent                                                                                             |
+| G3   | Owner Acceptance of this OES (OES-002) = **ACCEPTED** (or **ACCEPTED WITH CONDITIONS** with conditions tracked)                         |
+| G4   | APZQEP-ARCH-014 Accepted / Architecture Baselined / Closed (done, 2026-07-28)                                                           |
+| G5   | Domain 0.1.0 CERTIFIED (CERT-060A) and Infrastructure 0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED (CERT-060B) remain closed and unmodified |
+| G6   | A separate Owner Programme Instruction names `APZQEP-ENG-070A`                                                                          |
 
 Implementation **MUST NOT** start if any of G1–G6 fail.
 
@@ -71,18 +72,18 @@ Implementation **MUST NOT** start if any of G1–G6 fail.
 
 ## 5. Quality gates before future Workbench Owner Acceptance (implementation-time preview)
 
-| Gate | Criterion |
-| ---- | --------- |
-| I1 | All WP-01…18 (Part 2) complete, or explicitly deferred with documented Owner-approved rationale |
-| I2 | Mandatory Playwright journeys E2E-01…14 (Part 4 §3) PASS |
-| I3 | Accessibility gates A11Y-01…06 (Part 4 §4) PASS |
-| I4 | Negative/boundary tests N-01…06 (Part 4 §6) PASS |
-| I5 | Lint / types / build / unit / integration PASS |
-| I6 | No Domain/Infrastructure rule changes made without separate authority |
-| I7 | `availableActions` algorithm (Part 3 §4) respected with zero invented transitions |
-| I8 | Compare presented strictly as governed unavailable per Part 3 §7 — no fabricated diff, no call to a non-existent endpoint |
-| I9 | Product delivery pack filed under `docs/products/apzqep/test-plans/workbench/` (WP-18) |
-| I10 | Engineering Completion Review (ECR) PASS under OES-002 v1.1.0 |
+| Gate | Criterion                                                                                                                 |
+| ---- | ------------------------------------------------------------------------------------------------------------------------- |
+| I1   | All WP-01…18 (Part 2) complete, or explicitly deferred with documented Owner-approved rationale                           |
+| I2   | Mandatory Playwright journeys E2E-01…14 (Part 4 §3) PASS                                                                  |
+| I3   | Accessibility gates A11Y-01…06 (Part 4 §4) PASS                                                                           |
+| I4   | Negative/boundary tests N-01…06 (Part 4 §6) PASS                                                                          |
+| I5   | Lint / types / build / unit / integration PASS                                                                            |
+| I6   | No Domain/Infrastructure rule changes made without separate authority                                                     |
+| I7   | `availableActions` algorithm (Part 3 §4) respected with zero invented transitions                                         |
+| I8   | Compare presented strictly as governed unavailable per Part 3 §7 — no fabricated diff, no call to a non-existent endpoint |
+| I9   | Product delivery pack filed under `docs/products/apzqep/test-plans/workbench/` (WP-18)                                    |
+| I10  | Engineering Completion Review (ECR) PASS under OES-002 v1.1.0                                                             |
 
 ---
 
@@ -102,12 +103,12 @@ This OES (`COMPLETE.md`) is **Accepted** only when the Owner confirms:
 
 ### 6.1 Outcomes (OES-002)
 
-| Outcome | Effect |
-| ------- | ------ |
-| **ACCEPTED** | This OES is baselined; a separate Owner Instruction **MAY** subsequently authorise `APZQEP-ENG-070A` implementation |
-| **ACCEPTED WITH CONDITIONS** | Listed conditions **MUST** close before or as the first `APZQEP-ENG-070A` gate |
-| **REJECTED** | Rework Parts of this OES; no implementation authorised |
-| **DEFERRED** | Parked; no implementation authority |
+| Outcome                      | Effect                                                                                                              |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **ACCEPTED**                 | This OES is baselined; a separate Owner Instruction **MAY** subsequently authorise `APZQEP-ENG-070A` implementation |
+| **ACCEPTED WITH CONDITIONS** | Listed conditions **MUST** close before or as the first `APZQEP-ENG-070A` gate                                      |
+| **REJECTED**                 | Rework Parts of this OES; no implementation authorised                                                              |
+| **DEFERRED**                 | Parked; no implementation authority                                                                                 |
 
 AI **MUST NOT** issue any of these outcomes.
 
@@ -128,13 +129,13 @@ NO CAPABILITY CERTIFICATION WITHOUT FURTHER OWNER INSTRUCTION
 
 ## 8. Traceability
 
-| This Part | Trace |
-| --------- | ----- |
-| AI/MCP | ARCH-014 Part 5 §6–7 · OES-000 AI matrix |
-| Review outcomes | OES-002 v1.1.0 |
-| Quality / DoD | Document 015 |
-| Prior Parts | This OES Parts 1–4 |
-| Precedent | APZQEP-OES-ENG-050C Part 5 |
+| This Part       | Trace                                    |
+| --------------- | ---------------------------------------- |
+| AI/MCP          | ARCH-014 Part 5 §6–7 · OES-000 AI matrix |
+| Review outcomes | OES-002 v1.1.0                           |
+| Quality / DoD   | Document 015                             |
+| Prior Parts     | This OES Parts 1–4                       |
+| Precedent       | APZQEP-OES-ENG-050C Part 5               |
 
 ---
 

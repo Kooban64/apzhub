@@ -11,32 +11,32 @@ Release Readiness is the product capability that evaluates whether a defined rel
 
 Release decisions fail when teams discover gaps too late: untested requirements, open critical defects, missing evidence, or unaccepted risks. Readiness provides a structured, repeatable gate before certification effort — saving audit cycles and preventing false confidence from green dashboards alone.
 
-Readiness snapshots create a point-in-time record of what the organisation knew when it asked *are we ready to seek certification?* — essential for regulated enterprises and post-incident review.
+Readiness snapshots create a point-in-time record of what the organisation knew when it asked _are we ready to seek certification?_ — essential for regulated enterprises and post-incident review.
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| Release record | Governed scope container for a release candidate |
-| Readiness snapshot | Immutable point-in-time evaluation |
-| Readiness gate | Policy threshold check (coverage, defects, evidence, approvals) |
-| Readiness score | Composite indicator with explainability — advisory |
-| Waiver / exception | Explicit recorded deviation linked to risk acceptance |
-| Missing action | Human-actionable item blocking readiness |
-| Handoff | Snapshot feeds certification request — not cert itself |
+| Concept            | Product meaning                                                 |
+| ------------------ | --------------------------------------------------------------- |
+| Release record     | Governed scope container for a release candidate                |
+| Readiness snapshot | Immutable point-in-time evaluation                              |
+| Readiness gate     | Policy threshold check (coverage, defects, evidence, approvals) |
+| Readiness score    | Composite indicator with explainability — advisory              |
+| Waiver / exception | Explicit recorded deviation linked to risk acceptance           |
+| Missing action     | Human-actionable item blocking readiness                        |
+| Handoff            | Snapshot feeds certification request — not cert itself          |
 
 ## Primary objects
 
-| Object | Description |
-| ------ | ----------- |
-| Release record | Version, scope, included requirements/changes/defects |
-| Scope membership | Requirements, change records, fix versions in scope |
-| Readiness evaluation | Current or historical assessment run |
-| Gate result | Per-gate pass/fail/waived outcome |
-| Readiness explanation | Narrative and structured contributors |
-| Waiver record | Linked risk acceptance or qualification |
-| Comparison view | Diff between release candidates or snapshots |
-| Executive release view | Portfolio-level readiness summary |
+| Object                 | Description                                           |
+| ---------------------- | ----------------------------------------------------- |
+| Release record         | Version, scope, included requirements/changes/defects |
+| Scope membership       | Requirements, change records, fix versions in scope   |
+| Readiness evaluation   | Current or historical assessment run                  |
+| Gate result            | Per-gate pass/fail/waived outcome                     |
+| Readiness explanation  | Narrative and structured contributors                 |
+| Waiver record          | Linked risk acceptance or qualification               |
+| Comparison view        | Diff between release candidates or snapshots          |
+| Executive release view | Portfolio-level readiness summary                     |
 
 ## Lifecycle
 
@@ -60,13 +60,13 @@ Continuous signals may trigger re-evaluation request; they do not auto-change re
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
-| Release Manager | Owns release record and readiness outcome narrative |
-| Product Owner | Scope membership and priority trade-offs |
-| QA Manager | Verification and evidence gate interpretation |
-| Developer | Defect resolution status in scope |
-| Compliance Officer | Waiver policy and snapshot retention |
+| Role               | Ownership                                           |
+| ------------------ | --------------------------------------------------- |
+| Release Manager    | Owns release record and readiness outcome narrative |
+| Product Owner      | Scope membership and priority trade-offs            |
+| QA Manager         | Verification and evidence gate interpretation       |
+| Developer          | Defect resolution status in scope                   |
+| Compliance Officer | Waiver policy and snapshot retention                |
 
 ## Relationships
 
@@ -91,64 +91,64 @@ flowchart TB
 
 ## States
 
-| State | Meaning |
-| ----- | ------- |
-| Draft | Release record forming; scope not evaluable |
-| Scope defined | Minimum scope stable for evaluation |
-| Evaluating | Gate engine running |
-| Not ready | One or more blocking gates failed |
-| Ready | All required gates pass |
-| Ready with waivers | Proceeding with recorded waivers/acceptances |
-| Snapshot captured | Point-in-time frozen for cert handoff |
-| Certification requested | Linked cert request in flight |
-| Released | Release executed per policy |
+| State                   | Meaning                                      |
+| ----------------------- | -------------------------------------------- |
+| Draft                   | Release record forming; scope not evaluable  |
+| Scope defined           | Minimum scope stable for evaluation          |
+| Evaluating              | Gate engine running                          |
+| Not ready               | One or more blocking gates failed            |
+| Ready                   | All required gates pass                      |
+| Ready with waivers      | Proceeding with recorded waivers/acceptances |
+| Snapshot captured       | Point-in-time frozen for cert handoff        |
+| Certification requested | Linked cert request in flight                |
+| Released                | Release executed per policy                  |
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
-| RR-01 | Readiness alone never replaces human certification |
-| RR-02 | Gate outcomes: Ready / Not ready / Ready with waivers |
-| RR-03 | Waivers must link to governed risk acceptance or qualification |
-| RR-04 | Snapshots are retained; re-evaluation creates new snapshot lineage |
-| RR-05 | Readiness score is explainable; not a substitute for gates |
-| RR-06 | Continuous signals may request re-evaluation; never auto-certify |
+| Rule  | Statement                                                            |
+| ----- | -------------------------------------------------------------------- |
+| RR-01 | Readiness alone never replaces human certification                   |
+| RR-02 | Gate outcomes: Ready / Not ready / Ready with waivers                |
+| RR-03 | Waivers must link to governed risk acceptance or qualification       |
+| RR-04 | Snapshots are retained; re-evaluation creates new snapshot lineage   |
+| RR-05 | Readiness score is explainable; not a substitute for gates           |
+| RR-06 | Continuous signals may request re-evaluation; never auto-certify     |
 | RR-07 | Unsupported traceability claims block Ready unless waived per policy |
 
 ## Approval rules
 
-| Action | Approver |
-| ------ | -------- |
-| Scope freeze for evaluation | Release Manager + Product Owner (typical) |
-| Waiver to achieve Ready with waivers | Per Risk Model acceptance authority |
-| Snapshot certification handoff | Release Manager initiates; QA Manager co-sign optional |
-| Override of blocking gate | Compliance Officer / policy-defined only — audited |
+| Action                               | Approver                                               |
+| ------------------------------------ | ------------------------------------------------------ |
+| Scope freeze for evaluation          | Release Manager + Product Owner (typical)              |
+| Waiver to achieve Ready with waivers | Per Risk Model acceptance authority                    |
+| Snapshot certification handoff       | Release Manager initiates; QA Manager co-sign optional |
+| Override of blocking gate            | Compliance Officer / policy-defined only — audited     |
 
 Readiness does not approve certification — only prepares certification request.
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| Release Manager | Runs evaluations; owns snapshot handoff |
-| Product Owner | Confirms scope and accepts scope risks |
-| QA Manager | Validates verification and evidence gates |
-| QA Engineer | Resolves missing verification actions |
-| Developer | Closes in-scope defects |
-| Executive | Reviews executive release view |
-| Auditor | Compares snapshot to eventual cert decision |
-| AI Agent | May summarise readiness — no gate override |
+| Persona         | Responsibility                              |
+| --------------- | ------------------------------------------- |
+| Release Manager | Runs evaluations; owns snapshot handoff     |
+| Product Owner   | Confirms scope and accepts scope risks      |
+| QA Manager      | Validates verification and evidence gates   |
+| QA Engineer     | Resolves missing verification actions       |
+| Developer       | Closes in-scope defects                     |
+| Executive       | Reviews executive release view              |
+| Auditor         | Compares snapshot to eventual cert decision |
+| AI Agent        | May summarise readiness — no gate override  |
 
 ## Reporting
 
 Standard reports: readiness dashboard, gate failure detail, waiver summary, release comparison, missing actions list, snapshot history, and executive portfolio release view. Readiness explanation exportable to evidence pack as supporting material.
 
-| Report | Audience |
-| ------ | -------- |
-| Gate failure detail | QA Manager, Release Manager |
-| Waiver summary | Compliance Officer, Auditor |
-| Release comparison | Release Manager, Product Owner |
-| Snapshot history | Auditor |
+| Report              | Audience                       |
+| ------------------- | ------------------------------ |
+| Gate failure detail | QA Manager, Release Manager    |
+| Waiver summary      | Compliance Officer, Auditor    |
+| Release comparison  | Release Manager, Product Owner |
+| Snapshot history    | Auditor                        |
 
 ## Search
 
@@ -172,12 +172,12 @@ Future intent: richer change-impact suggestions, continuous readiness drift aler
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Aggregate quality gates for release | Deploy software to production |
-| Snapshot for certification | Issue certification autonomously |
-| Link CI ingest status | Operate pipelines |
-| Executive release posture | ALM release calendar replacement |
+| In boundary                         | Out of boundary                  |
+| ----------------------------------- | -------------------------------- |
+| Aggregate quality gates for release | Deploy software to production    |
+| Snapshot for certification          | Issue certification autonomously |
+| Link CI ingest status               | Operate pipelines                |
+| Executive release posture           | ALM release calendar replacement |
 
 QEP is not a CI/CD or deployment orchestrator.
 

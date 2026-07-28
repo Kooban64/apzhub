@@ -35,7 +35,10 @@
     "total": 18,
     "complete": 18,
     "deferred": 0,
-    "governedUnavailable": ["WP-12 Compare sub-scope (L-01)", "WP-14 cross-capability slots"]
+    "governedUnavailable": [
+      "WP-12 Compare sub-scope (L-01)",
+      "WP-14 cross-capability slots"
+    ]
   },
   "confirmations": {
     "noDomainOrInfrastructureContractChanges": true,

@@ -1,13 +1,13 @@
 # APZOR Engineering Operating Model — Validation Record
 
-| Field | Value |
-| ----- | ----- |
-| Document | APZOR Engineering Operating Model Validation |
-| Version considered | **1.0.0** (OES-000 / OES-001 / OES-002 governance trilogy + Document 000) |
-| Date originally filed | 2026-07-27 |
-| Superseding recognition | **2026-07-28** — Owner Portfolio Declaration + APZQEP-PORTFOLIO-001 |
-| Authority | Owner |
-| Status | **FULLY VALIDATED THROUGH PRACTICE** |
+| Field                   | Value                                                                     |
+| ----------------------- | ------------------------------------------------------------------------- |
+| Document                | APZOR Engineering Operating Model Validation                              |
+| Version considered      | **1.0.0** (OES-000 / OES-001 / OES-002 governance trilogy + Document 000) |
+| Date originally filed   | 2026-07-27                                                                |
+| Superseding recognition | **2026-07-28** — Owner Portfolio Declaration + APZQEP-PORTFOLIO-001       |
+| Authority               | Owner                                                                     |
+| Status                  | **FULLY VALIDATED THROUGH PRACTICE**                                      |
 
 ## Observation
 
@@ -15,10 +15,10 @@ The complete APZOR engineering lifecycle has been exercised successfully across 
 
 ### Capabilities completing Architecture → … → Owner Freeze
 
-1. **Requirements** — **1.0.0 CERTIFIED / FROZEN**  
-2. **Traceability** — **1.0.0 CERTIFIED / FROZEN**  
-3. **Verification** — **1.0.0 CERTIFIED / FROZEN**  
-4. **Test Specifications** — **1.0.0 CERTIFIED / FROZEN**  
+1. **Requirements** — **1.0.0 CERTIFIED / FROZEN**
+2. **Traceability** — **1.0.0 CERTIFIED / FROZEN**
+3. **Verification** — **1.0.0 CERTIFIED / FROZEN**
+4. **Test Specifications** — **1.0.0 CERTIFIED / FROZEN**
 5. **Test Plans** — **1.0.0 CERTIFIED / FROZEN** (first fully governed orchestration capability; Domain / Infrastructure / Workbench Component Certification + Integrated Capability Certification + Freeze)
 
 The lifecycle is therefore **empirically proven**, not theoretical.
@@ -47,10 +47,10 @@ Governing standards (Document 000, OES-000, OES-001, OES-002) function as the en
 
 ## Complementary references
 
-- Operational handbook: [APZQEP Engineering Lifecycle Handbook](../../products/apzqep/ENGINEERING-LIFECYCLE-HANDBOOK.md)  
-- Owner Portfolio Declaration: [OWNER-PORTFOLIO-DECLARATION.md](../../products/apzqep/OWNER-PORTFOLIO-DECLARATION.md)  
-- Foundation Completion pack: [APZQEP-PORTFOLIO-001](../../products/apzqep/portfolio/PORTFOLIO-001/README.md)  
-- Certification independence: [OES-CERTIFICATION-INDEPENDENCE.md](./OES-CERTIFICATION-INDEPENDENCE.md)  
+- Operational handbook: [APZQEP Engineering Lifecycle Handbook](../../products/apzqep/ENGINEERING-LIFECYCLE-HANDBOOK.md)
+- Owner Portfolio Declaration: [OWNER-PORTFOLIO-DECLARATION.md](../../products/apzqep/OWNER-PORTFOLIO-DECLARATION.md)
+- Foundation Completion pack: [APZQEP-PORTFOLIO-001](../../products/apzqep/portfolio/PORTFOLIO-001/README.md)
+- Certification independence: [OES-CERTIFICATION-INDEPENDENCE.md](./OES-CERTIFICATION-INDEPENDENCE.md)
 - Certification levels: [OES-CERTIFICATION-LEVELS.md](./OES-CERTIFICATION-LEVELS.md)
 
 ## STOP

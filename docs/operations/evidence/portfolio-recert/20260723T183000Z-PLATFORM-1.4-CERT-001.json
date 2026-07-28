@@ -57,7 +57,12 @@
     "affectedVitest": "PASS_60",
     "repositoryCertificationSample": "PASS"
   },
-  "operationalQualifications": ["OQ-BLD-001", "OQ-PW-001", "OQ-DUR-001", "OQ-SCOPE-001"],
+  "operationalQualifications": [
+    "OQ-BLD-001",
+    "OQ-PW-001",
+    "OQ-DUR-001",
+    "OQ-SCOPE-001"
+  ],
   "pack": "docs/operations/platform-1.4-cert-001/",
   "maintenanceModePendingOwnerAcceptance": true,
   "platform20": "NOT_AUTHORISED"

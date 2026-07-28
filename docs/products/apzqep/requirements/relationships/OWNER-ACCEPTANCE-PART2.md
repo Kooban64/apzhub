@@ -6,14 +6,14 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ENG-020F — Requirements Relationship Engine |
-| Phase | Part 2 — Persistence, Application Services, APIs and Platform Integration |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Package | `@apzhub/qep-requirements` **0.9.0** |
-| Implementation evidence | `docs/operations/evidence/portfolio-recert/20260726T090200Z-APZQEP-ENG-020F-PART2.json` |
-| Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T092900Z-APZQEP-ENG-020F-PART2-ACCEPTANCE.json` |
+| Field                   | Value                                                                                              |
+| ----------------------- | -------------------------------------------------------------------------------------------------- |
+| Programme               | APZQEP-ENG-020F — Requirements Relationship Engine                                                 |
+| Phase                   | Part 2 — Persistence, Application Services, APIs and Platform Integration                          |
+| Decision                | **ACCEPTED / CLOSED / COMPLETE**                                                                   |
+| Package                 | `@apzhub/qep-requirements` **0.9.0**                                                               |
+| Implementation evidence | `docs/operations/evidence/portfolio-recert/20260726T090200Z-APZQEP-ENG-020F-PART2.json`            |
+| Acceptance evidence     | `docs/operations/evidence/portfolio-recert/20260726T092900Z-APZQEP-ENG-020F-PART2-ACCEPTANCE.json` |
 
 ## Effect
 

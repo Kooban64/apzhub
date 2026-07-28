@@ -25,9 +25,7 @@
     "version": "0.3.0"
   },
   "adr0074": "HONOURED",
-  "authorises": [
-    "Capability Certification programme for Test Specifications"
-  ],
+  "authorises": ["Capability Certification programme for Test Specifications"],
   "notAuthorised": [
     "Version Promotion to 1.0.0 without Certification",
     "Freeze without Owner Freeze Decision",

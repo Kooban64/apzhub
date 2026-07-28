@@ -62,7 +62,14 @@ function dto(overrides: Record<string, unknown> = {}) {
         summary: "Created",
       },
     ],
-    availableActions: ["updateDraft", "submitForReview", "cancel", "withdraw", "addRelationship", "removeRelationship"],
+    availableActions: [
+      "updateDraft",
+      "submitForReview",
+      "cancel",
+      "withdraw",
+      "addRelationship",
+      "removeRelationship",
+    ],
     ...overrides,
   };
 }
@@ -75,7 +82,11 @@ async function mockSpecificationsApi(page: Page, options?: { forbidDetail?: bool
     const method = request.method();
     const path = url.pathname;
 
-    if (options?.forbidDetail && method === "GET" && /\/specifications\/[^/]+$/.test(path)) {
+    if (
+      options?.forbidDetail &&
+      method === "GET" &&
+      /\/specifications\/[^/]+$/.test(path)
+    ) {
       await route.fulfill({
         status: 403,
         contentType: "application/json",
@@ -91,7 +102,10 @@ async function mockSpecificationsApi(page: Page, options?: { forbidDetail?: bool
       const query = url.searchParams.get("query");
       let items = [current];
       if (status) items = items.filter((i) => i.status === status);
-      if (query) items = items.filter((i) => i.title.includes(query) || i.number.includes(query));
+      if (query)
+        items = items.filter(
+          (i) => i.title.includes(query) || i.number.includes(query),
+        );
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -410,7 +424,9 @@ test.describe("APZQEP-ENG-050C authenticated journeys (mocked API)", () => {
     await page.getByRole("button", { name: /Submit for review/i }).click();
     await expect(page.getByTestId("qep-spec-action-dialog")).toBeVisible();
     await page.getByRole("button", { name: /^Submit$/i }).click();
-    await expect(page.getByText(/under review/i).first()).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText(/under review/i).first()).toBeVisible({
+      timeout: 30_000,
+    });
 
     await page.getByRole("button", { name: /^Approve$/i }).click();
     await expect(page.getByTestId("qep-spec-action-dialog")).toBeVisible();
@@ -436,7 +452,9 @@ test.describe("APZQEP-ENG-050C authenticated journeys (mocked API)", () => {
       await route.continue();
     });
 
-    await page.goto(`${BASE}/specifications/tsp_e2e_1`, { waitUntil: "domcontentloaded" });
+    await page.goto(`${BASE}/specifications/tsp_e2e_1`, {
+      waitUntil: "domcontentloaded",
+    });
     await expect(page.getByRole("button", { name: /^Reject$/i })).toBeVisible({
       timeout: 30_000,
     });
@@ -466,7 +484,9 @@ test.describe("APZQEP-ENG-050C authenticated journeys (mocked API)", () => {
     });
 
     page.once("dialog", (dialog) => dialog.accept());
-    await page.goto(`${BASE}/specifications/tsp_e2e_1`, { waitUntil: "domcontentloaded" });
+    await page.goto(`${BASE}/specifications/tsp_e2e_1`, {
+      waitUntil: "domcontentloaded",
+    });
     await expect(page.getByRole("button", { name: /Supersede/i })).toBeVisible({
       timeout: 30_000,
     });
@@ -483,7 +503,9 @@ test.describe("APZQEP-ENG-050C authenticated journeys (mocked API)", () => {
     await page.goto(`${BASE}/specifications/tsp_e2e_1/relationships`, {
       waitUntil: "domcontentloaded",
     });
-    await expect(page.getByText(/requirement/i).first()).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText(/requirement/i).first()).toBeVisible({
+      timeout: 30_000,
+    });
   });
 
   test("permission denial shows governed forbidden state", async ({ page }) => {
@@ -512,7 +534,9 @@ test.describe("APZQEP-ENG-050C authenticated journeys (mocked API)", () => {
     await page.goto(`${BASE}/specifications/tsp_e2e_1`, {
       waitUntil: "domcontentloaded",
     });
-    await expect(page.getByTestId("qep-spec-inspector")).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByTestId("qep-spec-inspector")).toBeVisible({
+      timeout: 30_000,
+    });
     await expect(page.getByText("TS-E2E-001")).toBeVisible();
   });
 

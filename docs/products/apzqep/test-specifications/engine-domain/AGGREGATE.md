@@ -6,15 +6,15 @@
 
 ## Composition
 
-| Member | Role |
-| ------ | ---- |
-| `record` | `SpecificationRecord` — identity and content |
-| `metadata` | Extensible string attributes |
-| `history` | Append-only audit trail |
-| `relationships` | Reference-only links |
-| `approval` | Latest review/approval decision |
-| `versionLineage` | Version labels known to this aggregate |
-| `domainEvents` | Uncommitted domain events (cleared at command start) |
+| Member           | Role                                                 |
+| ---------------- | ---------------------------------------------------- |
+| `record`         | `SpecificationRecord` — identity and content         |
+| `metadata`       | Extensible string attributes                         |
+| `history`        | Append-only audit trail                              |
+| `relationships`  | Reference-only links                                 |
+| `approval`       | Latest review/approval decision                      |
+| `versionLineage` | Version labels known to this aggregate               |
+| `domainEvents`   | Uncommitted domain events (cleared at command start) |
 
 ## Commands (selected)
 

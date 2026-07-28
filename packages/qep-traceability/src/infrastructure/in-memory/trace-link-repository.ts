@@ -81,7 +81,11 @@ export function createInMemoryTraceLinkRepository(
         throw new TraceNotFoundError(`Trace Link not found: ${trace.id}`);
       }
       if (existing.revision !== expectedRevision) {
-        throw new TraceRevisionConflictError(trace.id, expectedRevision, existing.revision);
+        throw new TraceRevisionConflictError(
+          trace.id,
+          expectedRevision,
+          existing.revision,
+        );
       }
       assertNoActiveDuplicate(store.traceLinks, trace, trace.id);
       const stored = toStoredTraceLink(trace);

@@ -1,5 +1,8 @@
 import { QepInvariantViolation } from "../../shared/errors";
-import { createRequirementId, type RequirementId } from "../value-objects/requirement-id";
+import {
+  createRequirementId,
+  type RequirementId,
+} from "../value-objects/requirement-id";
 import {
   createRequirementContentVersionId,
   type RequirementContentVersionId,
@@ -65,7 +68,9 @@ export function assertDistinctEndpoints(
   target: RelationshipEndpoint,
 ): void {
   if (source.tenantId !== target.tenantId) {
-    throw new QepInvariantViolation("Relationship endpoints must share the same tenant");
+    throw new QepInvariantViolation(
+      "Relationship endpoints must share the same tenant",
+    );
   }
   if (
     source.requirementId === target.requirementId &&

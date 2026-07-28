@@ -34,8 +34,17 @@ export interface VerificationRepository {
    * Persist a mutated aggregate. Requires `expectedRevision` for optimistic concurrency
    * (the revision the aggregate had before the mutation being persisted).
    */
-  save(verification: Verification, expectedRevision: number): Promise<StoredVerification>;
-  list(tenantId: string, query?: VerificationListQuery): Promise<readonly StoredVerification[]>;
+  save(
+    verification: Verification,
+    expectedRevision: number,
+  ): Promise<StoredVerification>;
+  list(
+    tenantId: string,
+    query?: VerificationListQuery,
+  ): Promise<readonly StoredVerification[]>;
   exists(tenantId: string, id: VerificationId): Promise<boolean>;
-  listHistory(tenantId: string, id: VerificationId): Promise<readonly VerificationHistoryEntry[]>;
+  listHistory(
+    tenantId: string,
+    id: VerificationId,
+  ): Promise<readonly VerificationHistoryEntry[]>;
 }

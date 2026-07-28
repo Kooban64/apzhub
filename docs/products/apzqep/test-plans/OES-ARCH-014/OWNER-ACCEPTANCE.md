@@ -8,10 +8,10 @@
 
 ## Governing Standards
 
-- Document 000 v1.0.0  
-- OES-000 v1.0.0  
-- OES-001 v1.0.0  
-- OES-002 v1.1.0  
+- Document 000 v1.0.0
+- OES-000 v1.0.0
+- OES-001 v1.0.0
+- OES-002 v1.1.0
 
 ## Decision
 
@@ -29,34 +29,34 @@ The submitted architecture correctly positions the Workbench as a presentation l
 
 The architecture demonstrates:
 
-- Consumption of the **certified Domain v0.1.0** without behavioural modification.  
-- Consumption of the **certified Infrastructure v0.2.0** without architectural duplication.  
-- Clear separation between presentation, application, infrastructure, and domain responsibilities.  
-- Action execution driven exclusively through the Infrastructure `availableActions` contract.  
-- Honest treatment of known limitation **L-01** within the Compare experience.  
-- Accessibility, security, and AI boundaries defined at architectural level.  
+- Consumption of the **certified Domain v0.1.0** without behavioural modification.
+- Consumption of the **certified Infrastructure v0.2.0** without architectural duplication.
+- Clear separation between presentation, application, infrastructure, and domain responsibilities.
+- Action execution driven exclusively through the Infrastructure `availableActions` contract.
+- Honest treatment of known limitation **L-01** within the Compare experience.
+- Accessibility, security, and AI boundaries defined at architectural level.
 - No implementation or production code introduced.
 
 The architecture remains within the authorised scope.
 
 ## Owner Acceptance Checklist
 
-| Review Area | Result |
-| ----------- | ------ |
-| Architecture Compliance | ✅ PASS |
+| Review Area                        | Result  |
+| ---------------------------------- | ------- |
+| Architecture Compliance            | ✅ PASS |
 | Workbench Information Architecture | ✅ PASS |
-| Workspace Integration | ✅ PASS |
-| Explorer / Inspector Pattern | ✅ PASS |
-| Dashboard Pattern | ✅ PASS |
-| Review Workspace | ✅ PASS |
-| availableActions Contract | ✅ PASS |
-| Persona Journeys | ✅ PASS |
-| Certified Component Consumption | ✅ PASS |
-| Accessibility (WCAG AA) | ✅ PASS |
-| Security Boundary | ✅ PASS |
-| AI Boundary | ✅ PASS |
-| Separation of Concerns | ✅ PASS |
-| Production Code Introduced | ✅ NONE |
+| Workspace Integration              | ✅ PASS |
+| Explorer / Inspector Pattern       | ✅ PASS |
+| Dashboard Pattern                  | ✅ PASS |
+| Review Workspace                   | ✅ PASS |
+| availableActions Contract          | ✅ PASS |
+| Persona Journeys                   | ✅ PASS |
+| Certified Component Consumption    | ✅ PASS |
+| Accessibility (WCAG AA)            | ✅ PASS |
+| Security Boundary                  | ✅ PASS |
+| AI Boundary                        | ✅ PASS |
+| Separation of Concerns             | ✅ PASS |
+| Production Code Introduced         | ✅ NONE |
 
 ## Architectural principle (binding)
 
@@ -68,10 +68,10 @@ This principle is an architectural invariant across APZQEP and SHALL be preserve
 
 ## Owner directives (effective immediately)
 
-- **APZQEP-ARCH-014 is closed.**  
-- The architecture is baselined.  
-- No further architectural modifications shall occur under this programme identifier.  
-- Workbench engineering shall conform to this accepted architecture.  
+- **APZQEP-ARCH-014 is closed.**
+- The architecture is baselined.
+- No further architectural modifications shall occur under this programme identifier.
+- Workbench engineering shall conform to this accepted architecture.
 - Any future architectural changes require a separately authorised Architecture programme.
 
 ## Authorises next

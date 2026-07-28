@@ -6,12 +6,12 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ENG-020D — Requirements Content Versioning |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Baseline for | APZQEP-ENG-020E — Requirements Baselines |
-| Evidence | `docs/operations/evidence/portfolio-recert/20260725T160000Z-APZQEP-ENG-020D.json` |
+| Field               | Value                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------- |
+| Programme           | APZQEP-ENG-020D — Requirements Content Versioning                                            |
+| Decision            | **ACCEPTED / CLOSED / COMPLETE**                                                             |
+| Baseline for        | APZQEP-ENG-020E — Requirements Baselines                                                     |
+| Evidence            | `docs/operations/evidence/portfolio-recert/20260725T160000Z-APZQEP-ENG-020D.json`            |
 | Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260725T170000Z-APZQEP-ENG-020D-ACCEPTANCE.json` |
 
 ## Binding foundations retained

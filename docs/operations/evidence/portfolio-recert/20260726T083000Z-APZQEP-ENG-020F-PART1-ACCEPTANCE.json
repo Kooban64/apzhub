@@ -8,9 +8,7 @@
   "finalPartState": "ACCEPTED / CLOSED / COMPLETE",
   "architecture": "APZQEP-ARCH-005 — ACCEPTED / CLOSED / COMPLETE",
   "package": "@apzhub/qep-requirements@0.8.0",
-  "implementationEvidence": [
-    "20260726T081600Z-APZQEP-ENG-020F-PART1.json"
-  ],
+  "implementationEvidence": ["20260726T081600Z-APZQEP-ENG-020F-PART1.json"],
   "documentationPack": "docs/products/apzqep/requirements/relationships/",
   "assessment": {
     "architectureFidelity": "PASS",

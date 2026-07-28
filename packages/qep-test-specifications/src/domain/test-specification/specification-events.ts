@@ -182,7 +182,9 @@ export function buildSpecificationWithdrawnEvent(
 }
 
 export function buildSpecificationSupersededEvent(
-  input: SpecificationEventInput & { readonly successorSpecificationId: SpecificationId },
+  input: SpecificationEventInput & {
+    readonly successorSpecificationId: SpecificationId;
+  },
 ): SpecificationSuperseded {
   return {
     ...baseEvent(input),

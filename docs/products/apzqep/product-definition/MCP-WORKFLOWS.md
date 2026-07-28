@@ -14,15 +14,15 @@ Developers need requirements, standards, defects, and coverage context inside th
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| MCP tool | Named capability exposed via MCP protocol |
-| Scoped session | Auth token bound to tenant, project, role |
-| Read tool | SoR read without approval |
-| Gated write | Draft queue requiring human approval |
-| Tool audit | Log of invocation, args class, outcome |
-| Revocation | Admin disables tool or token instantly |
-| IDE agent | Non-human actor — same rules as AI Agent for cert |
+| Concept        | Product meaning                                   |
+| -------------- | ------------------------------------------------- |
+| MCP tool       | Named capability exposed via MCP protocol         |
+| Scoped session | Auth token bound to tenant, project, role         |
+| Read tool      | SoR read without approval                         |
+| Gated write    | Draft queue requiring human approval              |
+| Tool audit     | Log of invocation, args class, outcome            |
+| Revocation     | Admin disables tool or token instantly            |
+| IDE agent      | Non-human actor — same rules as AI Agent for cert |
 
 ## Interaction model
 
@@ -37,31 +37,31 @@ flowchart LR
 
 ## Primary objects
 
-| Object | Description |
-| ------ | ----------- |
-| MCP connection | Tenant-scoped authenticated binding |
-| Tool manifest | Registered capability metadata |
-| Invocation record | Audit log entry |
-| Draft submission | Gated write pending human review |
-| Scope policy | Project/release/read/write limits |
-| Revocation event | Admin forced disconnect |
+| Object            | Description                         |
+| ----------------- | ----------------------------------- |
+| MCP connection    | Tenant-scoped authenticated binding |
+| Tool manifest     | Registered capability metadata      |
+| Invocation record | Audit log entry                     |
+| Draft submission  | Gated write pending human review    |
+| Scope policy      | Project/release/read/write limits   |
+| Revocation event  | Admin forced disconnect             |
 
 ## Governed capabilities (product)
 
-| Capability | Type | Human approval |
-| ---------- | ---- | -------------- |
-| Retrieve approved requirements | Read | No |
-| Retrieve verification context | Read | No |
-| Retrieve coding/quality standards | Read | No |
-| Retrieve known defects | Read | No |
-| Retrieve release scope | Read | No |
-| Retrieve missing coverage | Read | No |
-| Retrieve execution results | Read | No |
-| Retrieve certification readiness | Read | No |
-| Request quality explanations | Read | No |
-| Propose verification | Draft | Yes before SoR |
-| Submit verification drafts | Gated write | Yes |
-| Submit evidence references | Gated write | Yes |
+| Capability                        | Type        | Human approval |
+| --------------------------------- | ----------- | -------------- |
+| Retrieve approved requirements    | Read        | No             |
+| Retrieve verification context     | Read        | No             |
+| Retrieve coding/quality standards | Read        | No             |
+| Retrieve known defects            | Read        | No             |
+| Retrieve release scope            | Read        | No             |
+| Retrieve missing coverage         | Read        | No             |
+| Retrieve execution results        | Read        | No             |
+| Retrieve certification readiness  | Read        | No             |
+| Request quality explanations      | Read        | No             |
+| Propose verification              | Draft       | Yes before SoR |
+| Submit verification drafts        | Gated write | Yes            |
+| Submit evidence references        | Gated write | Yes            |
 
 ## Lifecycle
 
@@ -81,13 +81,13 @@ stateDiagram-v2
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
-| Tenant Administrator | Enable MCP; assign scopes |
-| Security Officer | Approve MCP in enterprise/regulated |
-| QA Engineer | Review draft submissions from MCP |
-| Developer | Invokes tools within granted scope |
-| Platform Administrator | Global tool manifest governance |
+| Role                   | Ownership                           |
+| ---------------------- | ----------------------------------- |
+| Tenant Administrator   | Enable MCP; assign scopes           |
+| Security Officer       | Approve MCP in enterprise/regulated |
+| QA Engineer            | Review draft submissions from MCP   |
+| Developer              | Invokes tools within granted scope  |
+| Platform Administrator | Global tool manifest governance     |
 
 ## Relationships
 
@@ -113,15 +113,15 @@ Unrestricted database access · Bypass product workflows · Autonomous certifica
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
-| MCP-01 | All calls authenticated and authorised |
-| MCP-02 | Mutations use draft/gated paths except audited admin APIs (not MCP) |
-| MCP-03 | Every invocation audited with correlation ID |
-| MCP-04 | Cross-tenant access forbidden |
+| Rule   | Statement                                                              |
+| ------ | ---------------------------------------------------------------------- |
+| MCP-01 | All calls authenticated and authorised                                 |
+| MCP-02 | Mutations use draft/gated paths except audited admin APIs (not MCP)    |
+| MCP-03 | Every invocation audited with correlation ID                           |
+| MCP-04 | Cross-tenant access forbidden                                          |
 | MCP-05 | Certification and risk acceptance require human in product UI/workflow |
-| MCP-06 | MCP entitlement typically Enterprise add-on |
-| MCP-07 | Read tools still permission-filtered |
+| MCP-06 | MCP entitlement typically Enterprise add-on                            |
+| MCP-07 | Read tools still permission-filtered                                   |
 
 ## Approval rules
 
@@ -129,14 +129,14 @@ Draft verification and evidence references: QA Engineer or QA Manager accept per
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| Developer | Uses read tools; submits drafts appropriately |
-| QA Engineer | Reviews MCP-originated drafts |
-| Tenant Administrator | Scope and revoke connections |
-| Security Officer | MCP risk assessment |
-| AI Agent | Same prohibitions — no cert |
-| Release Manager | Not primary MCP actor; cert stays in product |
+| Persona              | Responsibility                                |
+| -------------------- | --------------------------------------------- |
+| Developer            | Uses read tools; submits drafts appropriately |
+| QA Engineer          | Reviews MCP-originated drafts                 |
+| Tenant Administrator | Scope and revoke connections                  |
+| Security Officer     | MCP risk assessment                           |
+| AI Agent             | Same prohibitions — no cert                   |
+| Release Manager      | Not primary MCP actor; cert stays in product  |
 
 ## Reporting
 
@@ -164,21 +164,21 @@ Additional read tools (knowledge base), batch draft import with mandatory review
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Governed MCP tools | Raw SQL MCP |
-| Draft write queue | Direct cert API |
+| In boundary           | Out of boundary                         |
+| --------------------- | --------------------------------------- |
+| Governed MCP tools    | Raw SQL MCP                             |
+| Draft write queue     | Direct cert API                         |
 | IDE context retrieval | IDE plugin marketplace (implementation) |
 
 ## Workflow: MCP-originated verification proposal
 
-| Step | Actor | Outcome |
-| ---- | ----- | ------- |
-| 1 | Developer/Agent retrieves requirements via MCP | Context loaded |
-| 2 | Agent proposes verification draft | Draft in approval queue |
-| 3 | QA Engineer reviews in QEP | Accept/edit/reject |
-| 4 | On accept | Verification enters Library/Design path |
-| 5 | Audit | Tool calls + decision recorded |
+| Step | Actor                                          | Outcome                                 |
+| ---- | ---------------------------------------------- | --------------------------------------- |
+| 1    | Developer/Agent retrieves requirements via MCP | Context loaded                          |
+| 2    | Agent proposes verification draft              | Draft in approval queue                 |
+| 3    | QA Engineer reviews in QEP                     | Accept/edit/reject                      |
+| 4    | On accept                                      | Verification enters Library/Design path |
+| 5    | Audit                                          | Tool calls + decision recorded          |
 
 ## Example scenarios
 

@@ -2,11 +2,11 @@
 
 APZ QEP Test Specifications bounded context — **ENG-050A** Domain + **ENG-050B** Infrastructure (ARCH-011).
 
-| Field | Value |
-| --- | --- |
-| Version | **0.2.0** |
+| Field     | Value                                                             |
+| --------- | ----------------------------------------------------------------- |
+| Version   | **0.2.0**                                                         |
 | Programme | **APZQEP-ENG-050B** — **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
-| Layers | Domain · Application · Infrastructure |
+| Layers    | Domain · Application · Infrastructure                             |
 
 ## Exports
 

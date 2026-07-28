@@ -6,10 +6,10 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ARCH-011 — Test Specifications Capability Architecture |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
+| Field               | Value                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------- |
+| Programme           | APZQEP-ARCH-011 — Test Specifications Capability Architecture                                |
+| Decision            | **ACCEPTED / CLOSED / COMPLETE**                                                             |
 | Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T212000Z-APZQEP-ARCH-011-ACCEPTANCE.json` |
 
 ## Effect

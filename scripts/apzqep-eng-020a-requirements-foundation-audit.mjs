@@ -38,9 +38,7 @@ for (const dir of requiredDirs) {
   if (!existsSync(join(pkgRoot, dir))) fail(`Missing directory: ${dir}`);
 }
 
-const packageJson = JSON.parse(
-  readFileSync(join(pkgRoot, "package.json"), "utf8"),
-);
+const packageJson = JSON.parse(readFileSync(join(pkgRoot, "package.json"), "utf8"));
 if (packageJson.name !== "@apzhub/qep-requirements") {
   fail(`Unexpected package name: ${packageJson.name}`);
 }
@@ -97,10 +95,7 @@ if (!placeholderSrc.includes("Requirements Module Coming Soon")) {
   fail("Placeholder must display 'Requirements Module Coming Soon'");
 }
 
-const docsRoot = join(
-  root,
-  "docs/products/apzqep/requirements/domain-foundation",
-);
+const docsRoot = join(root, "docs/products/apzqep/requirements/domain-foundation");
 for (const doc of [
   "README.md",
   "DOMAIN-MODEL.md",
@@ -115,10 +110,7 @@ for (const doc of [
   if (!existsSync(join(docsRoot, doc))) fail(`Missing doc: domain-foundation/${doc}`);
 }
 
-const ownerAcceptance = readFileSync(
-  join(docsRoot, "OWNER-ACCEPTANCE.md"),
-  "utf8",
-);
+const ownerAcceptance = readFileSync(join(docsRoot, "OWNER-ACCEPTANCE.md"), "utf8");
 if (!ownerAcceptance.includes("AWAITING OWNER ACCEPTANCE")) {
   fail("OWNER-ACCEPTANCE.md must remain AWAITING OWNER ACCEPTANCE");
 }

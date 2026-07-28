@@ -1,19 +1,19 @@
 # APZQEP-OES-ARCH-014 — COMPLETE
 
-| Item | Value |
-| ---- | ----- |
-| Document | **APZQEP-OES-ARCH-014** |
-| Programme | **APZQEP-ARCH-014** |
-| Title | Test Plans Workbench Architecture |
-| Role | Authoritative Workbench architecture baseline |
-| Status | **ACCEPTED / APPROVED / ARCHITECTURE BASELINED / PROGRAMME CLOSED** |
-| Version | **1.0.0-oes** |
-| Date | 2026-07-28 |
-| Acceptance | **ACCEPTED** — see [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) |
-| Governing standards | Document 000 · OES-000 · OES-001 · OES-002 v1.1.0 |
-| Baselines consumed | APZQEP-ARCH-013 **ACCEPTED / BASELINED** · Domain `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** (ENG-060A/CERT-060A) · Infrastructure `@apzhub/qep-test-plans` **0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED** (ENG-060B/CERT-060B) |
-| Shell precedent | APZQEP-OES-ARCH-012 (Test Specifications Workbench Architecture) |
-| Nature | **Architecture only — no engineering, no React/Next.js, no production code** |
+| Item                | Value                                                                                                                                                                                                                           |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document            | **APZQEP-OES-ARCH-014**                                                                                                                                                                                                         |
+| Programme           | **APZQEP-ARCH-014**                                                                                                                                                                                                             |
+| Title               | Test Plans Workbench Architecture                                                                                                                                                                                               |
+| Role                | Authoritative Workbench architecture baseline                                                                                                                                                                                   |
+| Status              | **ACCEPTED / APPROVED / ARCHITECTURE BASELINED / PROGRAMME CLOSED**                                                                                                                                                             |
+| Version             | **1.0.0-oes**                                                                                                                                                                                                                   |
+| Date                | 2026-07-28                                                                                                                                                                                                                      |
+| Acceptance          | **ACCEPTED** — see [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                                                                                                                                                                 |
+| Governing standards | Document 000 · OES-000 · OES-001 · OES-002 v1.1.0                                                                                                                                                                               |
+| Baselines consumed  | APZQEP-ARCH-013 **ACCEPTED / BASELINED** · Domain `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** (ENG-060A/CERT-060A) · Infrastructure `@apzhub/qep-test-plans` **0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED** (ENG-060B/CERT-060B) |
+| Shell precedent     | APZQEP-OES-ARCH-012 (Test Specifications Workbench Architecture)                                                                                                                                                                |
+| Nature              | **Architecture only — no engineering, no React/Next.js, no production code**                                                                                                                                                    |
 
 ---
 

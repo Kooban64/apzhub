@@ -70,13 +70,13 @@ This foundation pack is **ACCEPTED**. Requirements Domain Foundation (**APZQEP-E
 
 ## Related packs
 
-| Pack                    | Path                                                      | Status                 |
-| ----------------------- | --------------------------------------------------------- | ---------------------- |
-| Engineering Plan        | [../engineering-plan/](../engineering-plan/README.md)     | **ACCEPTED**           |
-| Enterprise Architecture | [../architecture/](../architecture/README.md)             | **ACCEPTED**           |
-| Product Definition      | [../product-definition/](../product-definition/README.md) | **ACCEPTED**           |
+| Pack                           | Path                                                                              | Status                |
+| ------------------------------ | --------------------------------------------------------------------------------- | --------------------- |
+| Engineering Plan               | [../engineering-plan/](../engineering-plan/README.md)                             | **ACCEPTED**          |
+| Enterprise Architecture        | [../architecture/](../architecture/README.md)                                     | **ACCEPTED**          |
+| Product Definition             | [../product-definition/](../product-definition/README.md)                         | **ACCEPTED**          |
 | Requirements Domain Foundation | [../requirements/domain-foundation/](../requirements/domain-foundation/README.md) | **ACCEPTED / CLOSED** |
-| Product root            | [../README.md](../README.md)                              | —                      |
+| Product root                   | [../README.md](../README.md)                                                      | —                     |
 
 ## Quick commands
 

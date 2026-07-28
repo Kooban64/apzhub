@@ -2,25 +2,25 @@
 
 ## Catalogue
 
-| Permission | Use |
-| ---------- | --- |
-| `qep.plan.create` | Create |
-| `qep.plan.read` | Get / list / versions / history / readiness |
-| `qep.plan.update` | Draft content, metadata updates |
-| `qep.plan.assign` | Ownership transfer, assignment updates |
-| `qep.plan.schedule` | Schedule updates |
-| `qep.plan.submit` | Submit for review |
-| `qep.plan.approve` | Approve |
-| `qep.plan.reject` | Reject |
-| `qep.plan.ready` | Mark ready for execution |
-| `qep.plan.execute` | Start execution |
-| `qep.plan.complete` | Complete |
-| `qep.plan.archive` | Archive |
-| `qep.plan.cancel` | Cancel |
-| `qep.plan.supersede` | Supersede |
-| `qep.plan.clone` | Clone |
-| `qep.plan.search` | Search |
-| `qep.plan.history.view` | History |
+| Permission              | Use                                         |
+| ----------------------- | ------------------------------------------- |
+| `qep.plan.create`       | Create                                      |
+| `qep.plan.read`         | Get / list / versions / history / readiness |
+| `qep.plan.update`       | Draft content, metadata updates             |
+| `qep.plan.assign`       | Ownership transfer, assignment updates      |
+| `qep.plan.schedule`     | Schedule updates                            |
+| `qep.plan.submit`       | Submit for review                           |
+| `qep.plan.approve`      | Approve                                     |
+| `qep.plan.reject`       | Reject                                      |
+| `qep.plan.ready`        | Mark ready for execution                    |
+| `qep.plan.execute`      | Start execution                             |
+| `qep.plan.complete`     | Complete                                    |
+| `qep.plan.archive`      | Archive                                     |
+| `qep.plan.cancel`       | Cancel                                      |
+| `qep.plan.supersede`    | Supersede                                   |
+| `qep.plan.clone`        | Clone                                       |
+| `qep.plan.search`       | Search                                      |
+| `qep.plan.history.view` | History                                     |
 
 Item management (add/update/reorder/remove) authorises against `qep.plan.update`.
 

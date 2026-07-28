@@ -4,11 +4,11 @@ Contract: `VerificationSubjectResolver` → `SubjectResolutionFact` (`exists`, `
 
 Verification stores **subject references only** — it does not own subject artefacts.
 
-| Adapter | Role |
-| ------- | ---- |
-| In-memory registry | Tests and pre-registered facts; default Platform composition until stricter resolvers are wired |
-| Requirements adapter | Optional lookups for `requirement` / `requirement_content_version` / `requirement_baseline` |
-| Trace Link adapter | Optional lookups for `trace_link` subjects |
+| Adapter              | Role                                                                                            |
+| -------------------- | ----------------------------------------------------------------------------------------------- |
+| In-memory registry   | Tests and pre-registered facts; default Platform composition until stricter resolvers are wired |
+| Requirements adapter | Optional lookups for `requirement` / `requirement_content_version` / `requirement_baseline`     |
+| Trace Link adapter   | Optional lookups for `trace_link` subjects                                                      |
 
 ## Known limitation
 

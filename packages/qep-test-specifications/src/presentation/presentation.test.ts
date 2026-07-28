@@ -15,20 +15,26 @@ import {
 
 describe("APZQEP-ENG-050C Test Specifications presentation routes", () => {
   it("recognises Test Specifications workspace routes", () => {
-    expect(isQepTestSpecificationsRoute("/workspace/qep/test-specifications")).toBe(true);
-    expect(isQepTestSpecificationsDashboardRoute("/workspace/qep/test-specifications")).toBe(
+    expect(isQepTestSpecificationsRoute("/workspace/qep/test-specifications")).toBe(
       true,
     );
     expect(
-      isQepTestSpecificationsExplorerRoute("/workspace/qep/test-specifications/explorer"),
+      isQepTestSpecificationsDashboardRoute("/workspace/qep/test-specifications"),
     ).toBe(true);
-    expect(isQepTestSpecificationsReviewRoute("/workspace/qep/test-specifications/review")).toBe(
+    expect(
+      isQepTestSpecificationsExplorerRoute(
+        "/workspace/qep/test-specifications/explorer",
+      ),
+    ).toBe(true);
+    expect(
+      isQepTestSpecificationsReviewRoute("/workspace/qep/test-specifications/review"),
+    ).toBe(true);
+    expect(
+      isQepTestSpecificationsSearchRoute("/workspace/qep/test-specifications/search"),
+    ).toBe(true);
+    expect(isQepTestSpecificationsNewRoute(QEP_TEST_SPECIFICATION_ROUTES.new)).toBe(
       true,
     );
-    expect(isQepTestSpecificationsSearchRoute("/workspace/qep/test-specifications/search")).toBe(
-      true,
-    );
-    expect(isQepTestSpecificationsNewRoute(QEP_TEST_SPECIFICATION_ROUTES.new)).toBe(true);
   });
 
   it("parses Specification ids under /specifications/:id", () => {
@@ -47,14 +53,20 @@ describe("APZQEP-ENG-050C Test Specifications presentation routes", () => {
         "/workspace/qep/test-specifications/specifications/tsp_abc/compare",
       ),
     ).toBe("compare");
-    expect(parseQepTestSpecificationRouteId(QEP_TEST_SPECIFICATION_ROUTES.explorer)).toBeNull();
-    expect(parseQepTestSpecificationRouteId("/workspace/qep/test-specifications")).toBeNull();
+    expect(
+      parseQepTestSpecificationRouteId(QEP_TEST_SPECIFICATION_ROUTES.explorer),
+    ).toBeNull();
+    expect(
+      parseQepTestSpecificationRouteId("/workspace/qep/test-specifications"),
+    ).toBeNull();
   });
 
   it("exposes navigation contributions", () => {
     expect(QEP_TEST_SPECIFICATIONS_NAVIGATION.sidebar.href).toBe(
       "/workspace/qep/test-specifications",
     );
-    expect(QEP_TEST_SPECIFICATIONS_NAVIGATION.additionalViews.length).toBeGreaterThanOrEqual(4);
+    expect(
+      QEP_TEST_SPECIFICATIONS_NAVIGATION.additionalViews.length,
+    ).toBeGreaterThanOrEqual(4);
   });
 });

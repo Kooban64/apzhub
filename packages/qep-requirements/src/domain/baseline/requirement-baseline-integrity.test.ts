@@ -7,7 +7,10 @@ import {
   verifyBaselineIntegrityFingerprint,
   type RequirementBaselineIntegrityMembershipInput,
 } from "./requirement-baseline-integrity";
-import { QepBaselineIntegrityError, QepBaselineInvalidStateError } from "../../shared/errors";
+import {
+  QepBaselineIntegrityError,
+  QepBaselineInvalidStateError,
+} from "../../shared/errors";
 
 const membership = (
   overrides: Partial<RequirementBaselineIntegrityMembershipInput> = {},

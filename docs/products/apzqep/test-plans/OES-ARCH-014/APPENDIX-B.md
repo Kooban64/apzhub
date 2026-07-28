@@ -20,34 +20,34 @@ Any permitted state → Cloned (new unrelated Draft)
 
 ## Command catalogue (presentation view)
 
-| Command (action id) | Typical from → to | Dialog |
-| -------------------- | ------------------- | ------ |
-| `submit-for-review` | Draft → Review | Submit for review |
-| `approve` | Review → Approved | Approve |
-| `reject` | Review → Rejected | Reject (rationale required) |
-| `return-to-draft` | Rejected → Draft | Return to Draft confirm |
-| `mark-ready` | Approved → Ready | Mark Ready confirm |
-| `start-execution` | Ready → In Execution | Start Execution confirm |
-| `complete` | In Execution → Completed | Complete confirm |
-| `archive` | Completed → Archived | Archive confirm |
-| `cancel` | early states → Cancelled | Cancel confirm |
-| `supersede` | Approved / Ready / In Execution → Superseded (+ successor) | Supersede flow |
-| `clone` | any permitted state → new Draft | Clone confirm |
+| Command (action id) | Typical from → to                                          | Dialog                      |
+| ------------------- | ---------------------------------------------------------- | --------------------------- |
+| `submit-for-review` | Draft → Review                                             | Submit for review           |
+| `approve`           | Review → Approved                                          | Approve                     |
+| `reject`            | Review → Rejected                                          | Reject (rationale required) |
+| `return-to-draft`   | Rejected → Draft                                           | Return to Draft confirm     |
+| `mark-ready`        | Approved → Ready                                           | Mark Ready confirm          |
+| `start-execution`   | Ready → In Execution                                       | Start Execution confirm     |
+| `complete`          | In Execution → Completed                                   | Complete confirm            |
+| `archive`           | Completed → Archived                                       | Archive confirm             |
+| `cancel`            | early states → Cancelled                                   | Cancel confirm              |
+| `supersede`         | Approved / Ready / In Execution → Superseded (+ successor) | Supersede flow              |
+| `clone`             | any permitted state → new Draft                            | Clone confirm               |
 
 ## Status → UI treatment
 
-| Status | Badge tone (semantic token) | Actionable in Inspector | Editable content |
-| ------ | ---------------------------- | ------------------------ | ------------------ |
-| Draft | Neutral | Yes | Yes |
-| Review | Info | Yes (approve/reject only, per grant) | No |
-| Approved | Success | Yes | No |
-| Ready | Success (emphasis) | Yes | No |
-| In Execution | Info (emphasis) | Yes (complete only) | No |
-| Completed | Success (muted) | Yes (archive only) | No |
-| Archived | Neutral (muted) | No | No |
-| Rejected | Warning | Yes (return-to-draft / cancel only) | No |
-| Cancelled | Neutral (muted) | No | No |
-| Superseded | Neutral (muted) | No | No |
+| Status       | Badge tone (semantic token) | Actionable in Inspector              | Editable content |
+| ------------ | --------------------------- | ------------------------------------ | ---------------- |
+| Draft        | Neutral                     | Yes                                  | Yes              |
+| Review       | Info                        | Yes (approve/reject only, per grant) | No               |
+| Approved     | Success                     | Yes                                  | No               |
+| Ready        | Success (emphasis)          | Yes                                  | No               |
+| In Execution | Info (emphasis)             | Yes (complete only)                  | No               |
+| Completed    | Success (muted)             | Yes (archive only)                   | No               |
+| Archived     | Neutral (muted)             | No                                   | No               |
+| Rejected     | Warning                     | Yes (return-to-draft / cancel only)  | No               |
+| Cancelled    | Neutral (muted)             | No                                   | No               |
+| Superseded   | Neutral (muted)             | No                                   | No               |
 
 ## Invariants (architecture)
 

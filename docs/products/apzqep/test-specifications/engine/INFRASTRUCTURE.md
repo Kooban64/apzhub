@@ -15,13 +15,13 @@ REST (apps/web)
 
 `@apzhub/qep-test-specifications` **0.2.0**
 
-| Export | Contents |
-| ------ | -------- |
-| `.` | Programme markers + re-exports |
-| `./domain` | Aggregate, VOs, policies, repository port |
-| `./application` | Commands/queries/DTO adapter |
-| `./infrastructure` | Persistence factories, repos, mappers |
-| `./shared` | Errors, pagination |
+| Export             | Contents                                  |
+| ------------------ | ----------------------------------------- |
+| `.`                | Programme markers + re-exports            |
+| `./domain`         | Aggregate, VOs, policies, repository port |
+| `./application`    | Commands/queries/DTO adapter              |
+| `./infrastructure` | Persistence factories, repos, mappers     |
+| `./shared`         | Errors, pagination                        |
 
 ## Non-ownership
 

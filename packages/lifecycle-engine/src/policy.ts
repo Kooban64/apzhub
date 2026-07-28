@@ -8,11 +8,7 @@ export type LifecyclePolicy<S extends string> = {
     readonly to: S;
     readonly action: string;
   }[];
-  readonly canTransition?: (
-    from: S,
-    to: S,
-    ctx: LifecycleContext,
-  ) => boolean | string;
+  readonly canTransition?: (from: S, to: S, ctx: LifecycleContext) => boolean | string;
 };
 
 export function isLifecycleState<S extends string>(

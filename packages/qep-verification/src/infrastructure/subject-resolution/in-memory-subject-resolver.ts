@@ -1,4 +1,7 @@
-import type { SubjectResolutionFact, VerificationSubjectResolver } from "./subject-resolver";
+import type {
+  SubjectResolutionFact,
+  VerificationSubjectResolver,
+} from "./subject-resolver";
 
 export type InMemorySubjectRegistry = Map<string, SubjectResolutionFact>;
 

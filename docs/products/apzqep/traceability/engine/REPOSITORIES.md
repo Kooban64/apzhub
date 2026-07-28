@@ -1,8 +1,8 @@
 # Repositories
 
-| Port | Implementations |
-| ---- | ----------------- |
-| `TraceLinkRepository` | Postgres + in-memory |
+| Port                      | Implementations                                     |
+| ------------------------- | --------------------------------------------------- |
+| `TraceLinkRepository`     | Postgres + in-memory                                |
 | `TraceTaxonomyRepository` | Postgres + in-memory (seed from normative taxonomy) |
 
 ## Capabilities

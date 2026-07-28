@@ -8,5 +8,13 @@
   "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
   "freeze": "CERTIFIED / FROZEN",
   "effect": "Verification 1.0.0 frozen. APZQEP-ARCH-011 Test Specifications Capability Architecture authorised (architecture only).",
-  "notAuthorised": ["Evidence", "Coverage", "Impact", "Certification Engine", "AI", "MCP", "Test Specifications engineering"]
+  "notAuthorised": [
+    "Evidence",
+    "Coverage",
+    "Impact",
+    "Certification Engine",
+    "AI",
+    "MCP",
+    "Test Specifications engineering"
+  ]
 }

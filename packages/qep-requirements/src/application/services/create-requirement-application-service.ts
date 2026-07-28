@@ -73,7 +73,10 @@ export type RequirementApplicationService = RequirementLifecycleApplicationServi
     id: string,
     input: UpdateQepRequirementInput,
   ): Promise<PersistedRequirement>;
-  getRequirement(ctx: QepRequestContext, id: string): Promise<PersistedRequirement | null>;
+  getRequirement(
+    ctx: QepRequestContext,
+    id: string,
+  ): Promise<PersistedRequirement | null>;
   listRequirements(
     ctx: QepRequestContext,
     query: ListQepRequirementsQuery,
@@ -117,7 +120,10 @@ export type RequirementApplicationService = RequirementLifecycleApplicationServi
     id: string,
     versionNumber: number,
   ): Promise<RequirementContentVersion>;
-  getLatestContentVersion(ctx: QepRequestContext, id: string): Promise<RequirementContentVersion>;
+  getLatestContentVersion(
+    ctx: QepRequestContext,
+    id: string,
+  ): Promise<RequirementContentVersion>;
   compareContentVersions(
     ctx: QepRequestContext,
     id: string,
@@ -176,7 +182,10 @@ function contentVersion(
     requirementId: requirement.id,
     versionNumber,
     ...(input.parent
-      ? { parentVersionNumber: input.parent.versionNumber, parentVersionId: input.parent.id }
+      ? {
+          parentVersionNumber: input.parent.versionNumber,
+          parentVersionId: input.parent.id,
+        }
       : {}),
     snapshot: buildCanonicalSnapshot(requirement),
     snapshotSchemaVersion: "requirement-snapshot/v1",
@@ -285,16 +294,18 @@ export function createRequirementApplicationService(
         projectId: created.projectId,
         versionNumber: version.versionNumber,
       });
-      await deps.onDomainEvent?.(buildRequirementContentVersionCreatedEvent({
-        tenantId: ctx.tenantId,
-        requirementId: created.id,
-        correlationId: ctx.correlationId,
-        occurredAt: timestamp,
-        versionNumber: version.versionNumber,
-        contentVersionId: version.id,
-        sourceRevision: version.sourceRevision,
-        changeReason: version.changeReason,
-      }));
+      await deps.onDomainEvent?.(
+        buildRequirementContentVersionCreatedEvent({
+          tenantId: ctx.tenantId,
+          requirementId: created.id,
+          correlationId: ctx.correlationId,
+          occurredAt: timestamp,
+          versionNumber: version.versionNumber,
+          contentVersionId: version.id,
+          sourceRevision: version.sourceRevision,
+          changeReason: version.changeReason,
+        }),
+      );
       await deps.onUpserted?.(created);
       return created;
     },
@@ -347,8 +358,7 @@ export function createRequirementApplicationService(
         acceptanceCriteriaItems:
           input.acceptanceCriteriaItems === null
             ? undefined
-            : (input.acceptanceCriteriaItems ??
-              existing.acceptanceCriteria?.items),
+            : (input.acceptanceCriteriaItems ?? existing.acceptanceCriteria?.items),
         attributes: input.attributes ?? existing.attributes,
         references:
           input.references?.map((ref) => createRequirementReference(ref)) ??
@@ -379,7 +389,9 @@ export function createRequirementApplicationService(
         throw new QepNoContentChangeError();
       }
       if (!input.changeReason?.trim()) {
-        throw new QepInvariantViolation("Change reason is required for content updates");
+        throw new QepInvariantViolation(
+          "Change reason is required for content updates",
+        );
       }
       const { updated, version } = await runInTransaction(deps, async () => {
         const updated = await deps.requirements.update(persisted);
@@ -401,16 +413,18 @@ export function createRequirementApplicationService(
         sourceRevision: version.sourceRevision,
         contentVersionId: version.id,
       });
-      await deps.onDomainEvent?.(buildRequirementContentVersionCreatedEvent({
-        tenantId: ctx.tenantId,
-        requirementId: updated.id,
-        correlationId: ctx.correlationId,
-        occurredAt: timestamp,
-        versionNumber: version.versionNumber,
-        contentVersionId: version.id,
-        sourceRevision: version.sourceRevision,
-        changeReason: version.changeReason,
-      }));
+      await deps.onDomainEvent?.(
+        buildRequirementContentVersionCreatedEvent({
+          tenantId: ctx.tenantId,
+          requirementId: updated.id,
+          correlationId: ctx.correlationId,
+          occurredAt: timestamp,
+          versionNumber: version.versionNumber,
+          contentVersionId: version.id,
+          sourceRevision: version.sourceRevision,
+          changeReason: version.changeReason,
+        }),
+      );
       await deps.onUpserted?.(updated);
       return updated;
     },
@@ -422,7 +436,11 @@ export function createRequirementApplicationService(
 
     async listContentVersions(ctx, id, pagination) {
       assertPermission(ctx, "qep.requirements.versions.history");
-      return deps.contentVersions.listMetadata(ctx.tenantId, createRequirementId(id), pagination);
+      return deps.contentVersions.listMetadata(
+        ctx.tenantId,
+        createRequirementId(id),
+        pagination,
+      );
     },
 
     async getContentVersion(ctx, id, versionNumber) {
@@ -432,14 +450,21 @@ export function createRequirementApplicationService(
         createRequirementId(id),
         versionNumber as import("../../domain/content-version").RequirementContentVersionNumber,
       );
-      if (!version) throw new QepVersionNotFoundError(`Content version not found: ${versionNumber}`);
+      if (!version)
+        throw new QepVersionNotFoundError(
+          `Content version not found: ${versionNumber}`,
+        );
       return version;
     },
 
     async getLatestContentVersion(ctx, id) {
       assertPermission(ctx, "qep.requirements.versions.view");
-      const version = await deps.contentVersions.getLatest(ctx.tenantId, createRequirementId(id));
-      if (!version) throw new QepVersionNotFoundError("Requirement has no content version");
+      const version = await deps.contentVersions.getLatest(
+        ctx.tenantId,
+        createRequirementId(id),
+      );
+      if (!version)
+        throw new QepVersionNotFoundError("Requirement has no content version");
       return version;
     },
 
@@ -459,7 +484,9 @@ export function createRequirementApplicationService(
         ),
       ]);
       if (!base || !target) {
-        throw new QepVersionNotFoundError("Content version selected for comparison was not found");
+        throw new QepVersionNotFoundError(
+          "Content version selected for comparison was not found",
+        );
       }
       verifyIntegrity(base.snapshot, base.snapshotHash);
       verifyIntegrity(target.snapshot, target.snapshotHash);
@@ -484,14 +511,23 @@ export function createRequirementApplicationService(
         createRequirementId(id),
         versionNumber as import("../../domain/content-version").RequirementContentVersionNumber,
       );
-      if (!version) throw new QepVersionNotFoundError(`Content version not found: ${versionNumber}`);
+      if (!version)
+        throw new QepVersionNotFoundError(
+          `Content version not found: ${versionNumber}`,
+        );
       try {
         verifyIntegrity(version.snapshot, version.snapshotHash);
       } catch (error) {
-        await appendAudit(deps, ctx, id, "qep.requirement.content_version_integrity_failed", {
-          versionNumber,
-          contentVersionId: version.id,
-        });
+        await appendAudit(
+          deps,
+          ctx,
+          id,
+          "qep.requirement.content_version_integrity_failed",
+          {
+            versionNumber,
+            contentVersionId: version.id,
+          },
+        );
         throw error;
       }
     },

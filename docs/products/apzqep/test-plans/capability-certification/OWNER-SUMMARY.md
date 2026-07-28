@@ -36,13 +36,13 @@ An **independent Capability Certification** of the complete Test Plans capabilit
 
 ## Decision recorded
 
-| Topic | Outcome |
-| ----- | ------- |
-| Capability outcome | **PASS** |
-| Class | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Version | Promoted **0.2.0 → 1.0.0** per Owner Certification Decision — see [VERSION-PROMOTION.md](./VERSION-PROMOTION.md) (**APPLIED**) |
-| Freeze | **FROZEN / APPROVED / CLOSED** under **APZQEP-FREEZE-080A** ([../freeze/README.md](../freeze/README.md)) — `@apzhub/qep-test-plans` **1.0.0 CERTIFIED / FROZEN / BASELINE ESTABLISHED** |
-| Limitations | Scope-defining (L-01 Compare deferred, L-02 items-on-DTO, L-03 coverage, P-01…P-04 test breadth) — do **not** block capability certification |
+| Topic              | Outcome                                                                                                                                                                                 |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Capability outcome | **PASS**                                                                                                                                                                                |
+| Class              | **PRODUCTION_READY_WITH_LIMITATIONS**                                                                                                                                                   |
+| Version            | Promoted **0.2.0 → 1.0.0** per Owner Certification Decision — see [VERSION-PROMOTION.md](./VERSION-PROMOTION.md) (**APPLIED**)                                                          |
+| Freeze             | **FROZEN / APPROVED / CLOSED** under **APZQEP-FREEZE-080A** ([../freeze/README.md](../freeze/README.md)) — `@apzhub/qep-test-plans` **1.0.0 CERTIFIED / FROZEN / BASELINE ESTABLISHED** |
+| Limitations        | Scope-defining (L-01 Compare deferred, L-02 items-on-DTO, L-03 coverage, P-01…P-04 test breadth) — do **not** block capability certification                                            |
 
 ## Owner Decision recorded
 

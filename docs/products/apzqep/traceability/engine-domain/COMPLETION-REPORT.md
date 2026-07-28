@@ -2,12 +2,12 @@
 
 **Part 1 implemented but not Owner-accepted.**
 
-| Field | Value |
-| --- | --- |
-| Programme | APZQEP-ENG-030A |
-| Part | 1 — Domain Model and Business Rules |
-| Status | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
-| Package | `@apzhub/qep-traceability` **0.1.0** |
+| Field        | Value                                            |
+| ------------ | ------------------------------------------------ |
+| Programme    | APZQEP-ENG-030A                                  |
+| Part         | 1 — Domain Model and Business Rules              |
+| Status       | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE**      |
+| Package      | `@apzhub/qep-traceability` **0.1.0**             |
 | Architecture | APZQEP-ARCH-007 **ACCEPTED / CLOSED / COMPLETE** |
 
 ## Final repository state (required)
@@ -23,12 +23,12 @@ AWAITING OWNER ACCEPTANCE
 
 ## Files created (primary)
 
-| Path | Role |
-| --- | --- |
-| `packages/qep-traceability/**` | Domain package |
-| `docs/products/apzqep/traceability/engine-domain/**` | Programme docs |
-| `docs/operations/evidence/portfolio-recert/20260726T133000Z-APZQEP-ENG-030A-PART1.json` | Evidence |
-| `docs/products/apzqep/architecture/requirements-traceability/OWNER-ACCEPTANCE.md` | ARCH-007 acceptance |
+| Path                                                                                    | Role                |
+| --------------------------------------------------------------------------------------- | ------------------- |
+| `packages/qep-traceability/**`                                                          | Domain package      |
+| `docs/products/apzqep/traceability/engine-domain/**`                                    | Programme docs      |
+| `docs/operations/evidence/portfolio-recert/20260726T133000Z-APZQEP-ENG-030A-PART1.json` | Evidence            |
+| `docs/products/apzqep/architecture/requirements-traceability/OWNER-ACCEPTANCE.md`       | ARCH-007 acceptance |
 
 ## Aggregates / entities / VOs / policies / services / events
 

@@ -20,10 +20,10 @@
 
 This classification is intentionally distinct from **PRODUCTION_READY_WITH_LIMITATIONS**. Scope is the **Domain layer only**. It communicates that:
 
-- the Domain is production quality;  
-- Infrastructure has not yet been engineered;  
-- REST has not yet been engineered;  
-- Workbench has not yet been engineered;  
+- the Domain is production quality;
+- Infrastructure has not yet been engineered;
+- REST has not yet been engineered;
+- Workbench has not yet been engineered;
 - the complete capability has therefore **not** reached production status.
 
 Limitations remain in [KNOWN-LIMITATIONS.md](./KNOWN-LIMITATIONS.md).
@@ -50,22 +50,22 @@ No freeze while Infrastructure, Workbench, and end-to-end Capability Certificati
 
 ## Certification assessment (Owner)
 
-| Certification Area | Result |
-| ------------------ | ------ |
-| Governance Compliance | ✅ PASS |
-| Domain Correctness | ✅ PASS |
-| Engineering Evidence | ✅ PASS |
-| Type Checking | ✅ PASS |
-| Test Suite | ✅ PASS (62 tests) |
-| Mandatory Domain Gates | ✅ PASS |
-| Documentation | ✅ PASS |
-| Certification Independence | ✅ PASS |
+| Certification Area         | Result             |
+| -------------------------- | ------------------ |
+| Governance Compliance      | ✅ PASS            |
+| Domain Correctness         | ✅ PASS            |
+| Engineering Evidence       | ✅ PASS            |
+| Type Checking              | ✅ PASS            |
+| Test Suite                 | ✅ PASS (62 tests) |
+| Mandatory Domain Gates     | ✅ PASS            |
+| Documentation              | ✅ PASS            |
+| Certification Independence | ✅ PASS            |
 
 ## Effect
 
-- **APZQEP-CERT-060A** is **CLOSED**.  
-- No further certification activity under this programme identifier.  
-- Domain package **0.1.0** is **CERTIFIED** (Component / Domain Certification).  
+- **APZQEP-CERT-060A** is **CLOSED**.
+- No further certification activity under this programme identifier.
+- Domain package **0.1.0** is **CERTIFIED** (Component / Domain Certification).
 - Capability Certification and Capability Freeze remain **NOT STARTED / NOT AUTHORISED**.
 
 ## Governance precedent

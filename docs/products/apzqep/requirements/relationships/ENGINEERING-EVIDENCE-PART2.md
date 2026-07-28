@@ -1,24 +1,24 @@
 # APZQEP-ENG-020F Part 2 — Engineering Evidence
 
-| Field | Value |
-| --- | --- |
-| Programme | APZQEP-ENG-020F |
-| Part | 2 — Persistence, Application Services, APIs and Platform Integration |
-| Recorded | 2026-07-26 |
-| Package | `@apzhub/qep-requirements` **0.9.0** |
-| Architecture compliance | Realises APZQEP-ARCH-005 via accepted Part 1 domain; no redesign |
+| Field                   | Value                                                                |
+| ----------------------- | -------------------------------------------------------------------- |
+| Programme               | APZQEP-ENG-020F                                                      |
+| Part                    | 2 — Persistence, Application Services, APIs and Platform Integration |
+| Recorded                | 2026-07-26                                                           |
+| Package                 | `@apzhub/qep-requirements` **0.9.0**                                 |
+| Architecture compliance | Realises APZQEP-ARCH-005 via accepted Part 1 domain; no redesign     |
 
 ## Validation
 
-| Check | Result |
-| --- | --- |
-| `pnpm --filter @apzhub/qep-requirements typecheck` | PASS |
-| `pnpm --filter @apzhub/qep-requirements test` | PASS (includes relationship repo + application tests) |
-| `pnpm --filter @apzhub/qep-contracts test` | PASS |
-| `pnpm --filter @apzhub/search-qep test` | PASS |
-| `pnpm --filter @apzhub/platform-services typecheck` | PASS |
-| Migrations | 0077 + 0078 registered in drizzle journal |
-| Workbench / UI | Not present (Part 3) |
+| Check                                               | Result                                                |
+| --------------------------------------------------- | ----------------------------------------------------- |
+| `pnpm --filter @apzhub/qep-requirements typecheck`  | PASS                                                  |
+| `pnpm --filter @apzhub/qep-requirements test`       | PASS (includes relationship repo + application tests) |
+| `pnpm --filter @apzhub/qep-contracts test`          | PASS                                                  |
+| `pnpm --filter @apzhub/search-qep test`             | PASS                                                  |
+| `pnpm --filter @apzhub/platform-services typecheck` | PASS                                                  |
+| Migrations                                          | 0077 + 0078 registered in drizzle journal             |
+| Workbench / UI                                      | Not present (Part 3)                                  |
 
 ## Portfolio evidence
 

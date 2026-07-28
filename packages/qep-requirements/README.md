@@ -2,12 +2,12 @@
 
 APZ QEP Requirements bounded context.
 
-| Programme | Scope | Status |
-| -------- | ----- | ------ |
-| APZQEP-ENG-020A | Domain foundation (DDD skeleton) | **ACCEPTED / CLOSED** |
-| APZQEP-ENG-020B | Persistence & CRUD foundation | **ACCEPTED / CLOSED** |
-| APZQEP-ENG-020C | Lifecycle engine integration | **ACCEPTED / CLOSED** |
-| APZQEP-ENG-020D | Append-only requirement content versioning | **ACCEPTED / CLOSED / COMPLETE** |
+| Programme       | Scope                                                                                              | Status                           |
+| --------------- | -------------------------------------------------------------------------------------------------- | -------------------------------- |
+| APZQEP-ENG-020A | Domain foundation (DDD skeleton)                                                                   | **ACCEPTED / CLOSED**            |
+| APZQEP-ENG-020B | Persistence & CRUD foundation                                                                      | **ACCEPTED / CLOSED**            |
+| APZQEP-ENG-020C | Lifecycle engine integration                                                                       | **ACCEPTED / CLOSED**            |
+| APZQEP-ENG-020D | Append-only requirement content versioning                                                         | **ACCEPTED / CLOSED / COMPLETE** |
 | APZQEP-ENG-020E | Requirement Baselines — domain, application, persistence, API, integrity, Workbench UI (Parts 1–3) | **ACCEPTED / CLOSED / COMPLETE** |
 
 ## Current capabilities (0.7.0)

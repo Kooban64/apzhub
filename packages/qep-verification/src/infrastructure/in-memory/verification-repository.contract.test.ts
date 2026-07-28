@@ -1,7 +1,13 @@
 import { describe, expect, it } from "vitest";
 
-import { createVerification, updateRationale } from "../../domain/verification/verification";
-import { VerificationNotFoundError, VerificationRevisionConflictError } from "../../shared/errors";
+import {
+  createVerification,
+  updateRationale,
+} from "../../domain/verification/verification";
+import {
+  VerificationNotFoundError,
+  VerificationRevisionConflictError,
+} from "../../shared/errors";
 import {
   createEmptyVerificationStore,
   createInMemoryVerificationRepository,
@@ -35,7 +41,10 @@ describe("VerificationRepository contract (in-memory)", () => {
     expect(await repo.get(TENANT, created.id)).toEqual(created);
     expect(await repo.exists(TENANT, created.id)).toBe(true);
 
-    const listed = await repo.list(TENANT, { subjectKind: "requirement", subjectArtefactId: "req_a1" });
+    const listed = await repo.list(TENANT, {
+      subjectKind: "requirement",
+      subjectArtefactId: "req_a1",
+    });
     expect(listed).toHaveLength(1);
 
     const mutated = updateRationale(
@@ -53,7 +62,9 @@ describe("VerificationRepository contract (in-memory)", () => {
   it("throws revision conflict and not-found for invalid saves", async () => {
     const store = createEmptyVerificationStore();
     const repo = createInMemoryVerificationRepository(store);
-    const created = await repo.create(draftVerification("ver_contract_rev", "req_rev_1"));
+    const created = await repo.create(
+      draftVerification("ver_contract_rev", "req_rev_1"),
+    );
 
     const mutated = updateRationale(
       created,
@@ -62,7 +73,9 @@ describe("VerificationRepository contract (in-memory)", () => {
       ACTOR,
     );
 
-    await expect(repo.save(mutated, 99)).rejects.toThrow(VerificationRevisionConflictError);
+    await expect(repo.save(mutated, 99)).rejects.toThrow(
+      VerificationRevisionConflictError,
+    );
     await expect(
       repo.save({ ...mutated, id: "ver_missing" as typeof created.id }, 1),
     ).rejects.toThrow(VerificationNotFoundError);

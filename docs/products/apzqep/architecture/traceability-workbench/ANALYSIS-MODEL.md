@@ -8,17 +8,17 @@ Define interaction slots for future analysis capabilities. **No calculations** u
 
 ## Views (presentation only)
 
-| View | Intent | Truth owner |
-| --- | --- | --- |
-| Coverage | Indicators on Matrix / Explorer | Future Coverage Engine |
-| Impact | Neighbourhood / scoring presentation | Future Impact Engine |
-| Certification lineage | Chain navigation | Trace Links + Certification SoR |
-| Evidence lineage | Chain navigation | Trace Links + Evidence SoR |
-| Missing traces | Expected-absent cells (future policy) | Policy + Trace queries |
-| Orphan / broken traces | Unresolved endpoints | Endpoint resolver |
-| Potential cycles | Warning inbox | Traceability domain |
-| Duplicate traces | Candidate list | Traceability domain |
-| Warnings | Aggregate attention | Traceability + Attention Engine |
+| View                   | Intent                                | Truth owner                     |
+| ---------------------- | ------------------------------------- | ------------------------------- |
+| Coverage               | Indicators on Matrix / Explorer       | Future Coverage Engine          |
+| Impact                 | Neighbourhood / scoring presentation  | Future Impact Engine            |
+| Certification lineage  | Chain navigation                      | Trace Links + Certification SoR |
+| Evidence lineage       | Chain navigation                      | Trace Links + Evidence SoR      |
+| Missing traces         | Expected-absent cells (future policy) | Policy + Trace queries          |
+| Orphan / broken traces | Unresolved endpoints                  | Endpoint resolver               |
+| Potential cycles       | Warning inbox                         | Traceability domain             |
+| Duplicate traces       | Candidate list                        | Traceability domain             |
+| Warnings               | Aggregate attention                   | Traceability + Attention Engine |
 
 ## Boundary
 

@@ -2,17 +2,17 @@
 
 ## States
 
-| State | Description |
-| ----- | ----------- |
-| `draft` | Initial editable state |
-| `proposed` | Submitted for consideration |
-| `in_review` | Under active review |
-| `approved` | Accepted requirement |
-| `rejected` | Rejected during review |
-| `implemented` | Implementation complete |
-| `verified` | Verification complete |
-| `deprecated` | Superseded but retained |
-| `archived` | Soft-archived terminal state |
+| State         | Description                  |
+| ------------- | ---------------------------- |
+| `draft`       | Initial editable state       |
+| `proposed`    | Submitted for consideration  |
+| `in_review`   | Under active review          |
+| `approved`    | Accepted requirement         |
+| `rejected`    | Rejected during review       |
+| `implemented` | Implementation complete      |
+| `verified`    | Verification complete        |
+| `deprecated`  | Superseded but retained      |
+| `archived`    | Soft-archived terminal state |
 
 ## Diagram
 

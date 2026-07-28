@@ -1,10 +1,10 @@
 # Requirements Relationship Persistence
 
-| Field | Value |
-| --- | --- |
-| Programme | APZQEP-ENG-020F Part 2 |
+| Field      | Value                                                                                          |
+| ---------- | ---------------------------------------------------------------------------------------------- |
+| Programme  | APZQEP-ENG-020F Part 2                                                                         |
 | Migrations | `0077_apz_qep_requirements_relationship.sql`, `0078_apz_qep_requirements_relationship_rls.sql` |
-| Schema | `packages/config/src/db/qep-requirements-schema.ts` |
+| Schema     | `packages/config/src/db/qep-requirements-schema.ts`                                            |
 
 ## Tables
 
@@ -28,9 +28,9 @@ RLS policies use `app.tenant_id` (migration 0078).
 
 ## Repositories
 
-| Port | Implementations |
-| --- | --- |
+| Port                                 | Implementations      |
+| ------------------------------------ | -------------------- |
 | `RequirementsRelationshipRepository` | Postgres + in-memory |
-| `RelationshipTaxonomyRepository` | Postgres + in-memory |
+| `RelationshipTaxonomyRepository`     | Postgres + in-memory |
 
 Repositories persist aggregates produced by domain mutations; they do not replace domain validation.

@@ -1,17 +1,17 @@
 # APZQEP-CERT-070A — COMPLETE
 
-| Item | Value |
-| ---- | ----- |
-| Document | **APZQEP-CERT-070A** |
-| Programme | **APZQEP-CERT-070A** |
-| Title | Test Plans Workbench Component Certification |
-| Status | **CERTIFIED / APPROVED / CLOSED** |
-| Owner Decision | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) — **CERTIFIED / APPROVED / CLOSED** (2026-07-28) |
-| Certified class | **WORKBENCH_PRODUCTION_READY_WITH_LIMITATIONS** |
-| Package | `@apzhub/qep-test-plans` **0.2.0 WORKBENCH COMPONENT CERTIFIED** |
-| Date | 2026-07-28 |
-| Evidence | `docs/operations/evidence/portfolio-recert/20260728T073000Z-APZQEP-CERT-070A.json` · `20260728T080924Z-APZQEP-CERT-070A-ACCEPTANCE.json` |
-| Nature | Independent assurance — no implementation, no engineering, no remediation |
+| Item            | Value                                                                                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Document        | **APZQEP-CERT-070A**                                                                                                                                   |
+| Programme       | **APZQEP-CERT-070A**                                                                                                                                   |
+| Title           | Test Plans Workbench Component Certification                                                                                                           |
+| Status          | **CERTIFIED / APPROVED / CLOSED**                                                                                                                      |
+| Owner Decision  | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) — **CERTIFIED / APPROVED / CLOSED** (2026-07-28)                                                          |
+| Certified class | **WORKBENCH_PRODUCTION_READY_WITH_LIMITATIONS**                                                                                                        |
+| Package         | `@apzhub/qep-test-plans` **0.2.0 WORKBENCH COMPONENT CERTIFIED**                                                                                       |
+| Date            | 2026-07-28                                                                                                                                             |
+| Evidence        | `docs/operations/evidence/portfolio-recert/20260728T073000Z-APZQEP-CERT-070A.json` · `20260728T080924Z-APZQEP-CERT-070A-ACCEPTANCE.json`               |
+| Nature          | Independent assurance — no implementation, no engineering, no remediation                                                                              |
 | Authorises next | **APZQEP-CERT-080A — Test Plans Integrated Capability Certification** — [../capability-certification/README.md](../capability-certification/README.md) |
 
 ## Authoritative content (by reference)

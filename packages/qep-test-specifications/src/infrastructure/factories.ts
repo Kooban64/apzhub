@@ -82,7 +82,10 @@ export function createQepTestSpecificationPersistenceForTest(
       "createQepTestSpecificationPersistenceForTest requires postgresDb or allowInMemoryPersistence: true",
     );
   }
-  return createQepTestSpecificationPersistence({ mode: "memory", stores: input.stores });
+  return createQepTestSpecificationPersistence({
+    mode: "memory",
+    stores: input.stores,
+  });
 }
 
 export {

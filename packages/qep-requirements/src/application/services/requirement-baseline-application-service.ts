@@ -36,7 +36,10 @@ import { verifyIntegrity } from "../../domain/content-version";
 import type { RequirementAuditRepository } from "../../domain/repositories/requirement-audit-repository";
 import type { RequirementContentVersionRepository } from "../../domain/repositories/requirement-content-version-repository";
 import { createRequirementContentVersionId } from "../../domain/content-version/requirement-content-version-id";
-import { createRequirementId, type RequirementId } from "../../domain/value-objects/requirement-id";
+import {
+  createRequirementId,
+  type RequirementId,
+} from "../../domain/value-objects/requirement-id";
 import {
   QepBaselineIntegrityError,
   QepBaselineInvalidStateError,
@@ -67,10 +70,11 @@ export type RequirementBaselineApplicationServiceDeps = {
   readonly runInTransaction?: <T>(work: () => Promise<T>) => Promise<T>;
 };
 
-export type RequirementBaselineCompareResult = RequirementBaselineMembershipComparison & {
-  readonly baseBaselineId: RequirementBaselineId;
-  readonly targetBaselineId: RequirementBaselineId;
-};
+export type RequirementBaselineCompareResult =
+  RequirementBaselineMembershipComparison & {
+    readonly baseBaselineId: RequirementBaselineId;
+    readonly targetBaselineId: RequirementBaselineId;
+  };
 
 export type RequirementBaselineApplicationService = {
   createBaseline(
@@ -94,7 +98,10 @@ export type RequirementBaselineApplicationService = {
   ): Promise<RequirementBaseline>;
   lockBaseline(ctx: QepRequestContext, id: string): Promise<RequirementBaseline>;
   archiveBaseline(ctx: QepRequestContext, id: string): Promise<RequirementBaseline>;
-  verifyBaselineIntegrity(ctx: QepRequestContext, id: string): Promise<RequirementBaseline>;
+  verifyBaselineIntegrity(
+    ctx: QepRequestContext,
+    id: string,
+  ): Promise<RequirementBaseline>;
   listBaselines(
     ctx: QepRequestContext,
     query?: ListQepBaselinesQuery,
@@ -141,7 +148,10 @@ function nextAuditId(deps: RequirementBaselineApplicationServiceDeps): string {
   return deps.id?.() ?? randomUUID();
 }
 
-function assertAnyPermission(ctx: QepRequestContext, requiredOneOf: readonly string[]): void {
+function assertAnyPermission(
+  ctx: QepRequestContext,
+  requiredOneOf: readonly string[],
+): void {
   const granted = ctx.permissions;
   if (!granted || granted.length === 0) return;
   if (granted.includes("qep.requirements.*")) return;
@@ -183,10 +193,18 @@ async function observe<T>(
   const started = Date.now();
   try {
     const result = await work();
-    deps.onObservation?.({ operation, durationMs: Date.now() - started, outcome: "success" });
+    deps.onObservation?.({
+      operation,
+      durationMs: Date.now() - started,
+      outcome: "success",
+    });
     return result;
   } catch (error) {
-    deps.onObservation?.({ operation, durationMs: Date.now() - started, outcome: "error" });
+    deps.onObservation?.({
+      operation,
+      durationMs: Date.now() - started,
+      outcome: "error",
+    });
     throw error;
   }
 }
@@ -258,12 +276,20 @@ export function createRequirementBaselineApplicationService(
           createdBy: ctx.userId,
           correlationId: ctx.correlationId,
         });
-        const created = await runInTransaction(deps, () => deps.baselines.createBaseline(baseline));
-        await appendBaselineAudit(deps, ctx, created.id, "qep.requirement_baseline.created", {
-          baselineId: created.id,
-          number: created.number,
-          name: created.name,
-        });
+        const created = await runInTransaction(deps, () =>
+          deps.baselines.createBaseline(baseline),
+        );
+        await appendBaselineAudit(
+          deps,
+          ctx,
+          created.id,
+          "qep.requirement_baseline.created",
+          {
+            baselineId: created.id,
+            number: created.number,
+            name: created.name,
+          },
+        );
         await deps.onDomainEvent?.(
           buildBaselineCreatedEvent({
             tenantId: ctx.tenantId,
@@ -300,9 +326,15 @@ export function createRequirementBaselineApplicationService(
         const persisted = await runInTransaction(deps, () =>
           deps.baselines.updateDraftBaseline(updated),
         );
-        await appendBaselineAudit(deps, ctx, persisted.id, "qep.requirement_baseline.updated", {
-          baselineId: persisted.id,
-        });
+        await appendBaselineAudit(
+          deps,
+          ctx,
+          persisted.id,
+          "qep.requirement_baseline.updated",
+          {
+            baselineId: persisted.id,
+          },
+        );
         await deps.onBaselineUpserted?.(persisted);
         return persisted;
       });
@@ -322,7 +354,10 @@ export function createRequirementBaselineApplicationService(
             `Content version not found: ${input.contentVersionId}`,
           );
         }
-        if (input.requirementId && version.requirementId !== createRequirementId(input.requirementId)) {
+        if (
+          input.requirementId &&
+          version.requirementId !== createRequirementId(input.requirementId)
+        ) {
           throw new QepInvariantViolation(
             "Content version does not belong to the given requirement",
           );
@@ -338,7 +373,13 @@ export function createRequirementBaselineApplicationService(
         // Domain-side validation mirrors the persisted mutation so both in-memory
         // and PostgreSQL repositories share identical invariants (uniqueness, draft-only).
         const updated = await runInTransaction(deps, () =>
-          deps.baselines.addRequirementVersion(ctx.tenantId, baselineId, item, timestamp, ctx.userId),
+          deps.baselines.addRequirementVersion(
+            ctx.tenantId,
+            baselineId,
+            item,
+            timestamp,
+            ctx.userId,
+          ),
         );
         await appendBaselineAudit(
           deps,
@@ -414,9 +455,18 @@ export function createRequirementBaselineApplicationService(
             "A baseline must contain at least one Requirement Content Version before it can be locked",
           );
         }
-        const membership = await buildIntegrityMembership(deps, ctx.tenantId, existing.items);
+        const membership = await buildIntegrityMembership(
+          deps,
+          ctx.tenantId,
+          existing.items,
+        );
         const timestamp = nowIso(deps);
-        const lockedDomain = lockRequirementBaseline(existing, membership, timestamp, ctx.userId);
+        const lockedDomain = lockRequirementBaseline(
+          existing,
+          membership,
+          timestamp,
+          ctx.userId,
+        );
         const persisted = await runInTransaction(deps, () =>
           deps.baselines.lockBaseline(
             ctx.tenantId,
@@ -432,10 +482,16 @@ export function createRequirementBaselineApplicationService(
             lockedDomain.lockedBy as string,
           ),
         );
-        await appendBaselineAudit(deps, ctx, persisted.id, "qep.requirement_baseline.locked", {
-          baselineId: persisted.id,
-          integrityFingerprint: persisted.integrityFingerprint,
-        });
+        await appendBaselineAudit(
+          deps,
+          ctx,
+          persisted.id,
+          "qep.requirement_baseline.locked",
+          {
+            baselineId: persisted.id,
+            integrityFingerprint: persisted.integrityFingerprint,
+          },
+        );
         await deps.onDomainEvent?.(
           buildBaselineLockedEvent({
             tenantId: ctx.tenantId,
@@ -458,11 +514,22 @@ export function createRequirementBaselineApplicationService(
         // Validates the draft/locked/archived state machine before persistence.
         archiveRequirementBaseline(existing, timestamp, ctx.userId);
         const persisted = await runInTransaction(deps, () =>
-          deps.baselines.archiveBaseline(ctx.tenantId, baselineId, timestamp, ctx.userId),
+          deps.baselines.archiveBaseline(
+            ctx.tenantId,
+            baselineId,
+            timestamp,
+            ctx.userId,
+          ),
         );
-        await appendBaselineAudit(deps, ctx, persisted.id, "qep.requirement_baseline.archived", {
-          baselineId: persisted.id,
-        });
+        await appendBaselineAudit(
+          deps,
+          ctx,
+          persisted.id,
+          "qep.requirement_baseline.archived",
+          {
+            baselineId: persisted.id,
+          },
+        );
         await deps.onDomainEvent?.(
           buildBaselineArchivedEvent({
             tenantId: ctx.tenantId,
@@ -478,7 +545,9 @@ export function createRequirementBaselineApplicationService(
 
     async listBaselines(ctx, query = {}) {
       assertAnyPermission(ctx, ["qep.requirements.baselines.view"]);
-      const all = await deps.baselines.listBaselines(ctx.tenantId, { status: query.status as RequirementBaseline["status"] | undefined });
+      const all = await deps.baselines.listBaselines(ctx.tenantId, {
+        status: query.status as RequirementBaseline["status"] | undefined,
+      });
       return filterAndPaginate(all, query.limit, query.offset);
     },
 
@@ -489,7 +558,10 @@ export function createRequirementBaselineApplicationService(
 
     async listBaselineItems(ctx, id) {
       assertAnyPermission(ctx, ["qep.requirements.baselines.view"]);
-      return deps.baselines.listBaselineItems(ctx.tenantId, createRequirementBaselineId(id));
+      return deps.baselines.listBaselineItems(
+        ctx.tenantId,
+        createRequirementBaselineId(id),
+      );
     },
 
     async requirementBaselineHistory(ctx, requirementId) {
@@ -509,12 +581,21 @@ export function createRequirementBaselineApplicationService(
           requireBaseline(deps, ctx.tenantId, baseId),
           requireBaseline(deps, ctx.tenantId, targetId),
         ]);
-        const comparison = compareRequirementBaselineMembership(base.items, target.items);
-        await appendBaselineAudit(deps, ctx, baseId, "qep.requirement_baseline.compared", {
-          baseBaselineId: baseId,
-          targetBaselineId: targetId,
-          ...comparison.summary,
-        });
+        const comparison = compareRequirementBaselineMembership(
+          base.items,
+          target.items,
+        );
+        await appendBaselineAudit(
+          deps,
+          ctx,
+          baseId,
+          "qep.requirement_baseline.compared",
+          {
+            baseBaselineId: baseId,
+            targetBaselineId: targetId,
+            ...comparison.summary,
+          },
+        );
         await deps.onDomainEvent?.(
           buildBaselineComparedEvent({
             tenantId: ctx.tenantId,
@@ -546,7 +627,11 @@ export function createRequirementBaselineApplicationService(
           );
         }
         const timestamp = nowIso(deps);
-        const membership = await buildIntegrityMembership(deps, ctx.tenantId, existing.items);
+        const membership = await buildIntegrityMembership(
+          deps,
+          ctx.tenantId,
+          existing.items,
+        );
         let verification;
         try {
           verification = verifyBaselineIntegrityFingerprint({
@@ -582,7 +667,10 @@ export function createRequirementBaselineApplicationService(
           ctx,
           persisted.id,
           "qep.requirement_baseline.integrity_verified",
-          { baselineId: persisted.id, verificationStatus: verification.verificationStatus },
+          {
+            baselineId: persisted.id,
+            verificationStatus: verification.verificationStatus,
+          },
         );
         await deps.onDomainEvent?.(
           buildBaselineIntegrityVerifiedEvent({

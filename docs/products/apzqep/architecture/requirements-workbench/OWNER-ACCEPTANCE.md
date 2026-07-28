@@ -6,12 +6,12 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ARCH-006 — Requirements Workbench Architecture |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Classification | Authoritative Architecture |
-| Pack | `docs/products/apzqep/architecture/requirements-workbench/` |
+| Field               | Value                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------- |
+| Programme           | APZQEP-ARCH-006 — Requirements Workbench Architecture                                        |
+| Decision            | **ACCEPTED / CLOSED / COMPLETE**                                                             |
+| Classification      | Authoritative Architecture                                                                   |
+| Pack                | `docs/products/apzqep/architecture/requirements-workbench/`                                  |
 | Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T095000Z-APZQEP-ARCH-006-ACCEPTANCE.json` |
 
 ## Effect

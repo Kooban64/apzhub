@@ -4,11 +4,7 @@
   "classification": "PRODUCT_GOVERNANCE",
   "lifecycle": "Product Transition",
   "baseline": "Certified Platform 1.4",
-  "reference": [
-    "Platform-1.4-CERT-001",
-    "APZHUB-PRODUCTS-004",
-    "APZTCMS-REQ-001"
-  ],
+  "reference": ["Platform-1.4-CERT-001", "APZHUB-PRODUCTS-004", "APZTCMS-REQ-001"],
   "timestamp": "2026-07-24T08:30:00Z",
   "status": "ACCEPTED",
   "acceptedAt": "2026-07-24",

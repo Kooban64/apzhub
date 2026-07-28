@@ -12,7 +12,5 @@
     "infrastructure-under-eng-060a",
     "engineering-under-cert-060a"
   ],
-  "documents": [
-    "docs/products/apzqep/test-plans/CERTIFICATION-HOLD.md"
-  ]
+  "documents": ["docs/products/apzqep/test-plans/CERTIFICATION-HOLD.md"]
 }

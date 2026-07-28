@@ -197,11 +197,15 @@ export function buildPlanRejectedEvent(
   };
 }
 
-export function buildPlanReadyEvent(input: Omit<BuildEventInput, "type">): PlanReadyEvent {
+export function buildPlanReadyEvent(
+  input: Omit<BuildEventInput, "type">,
+): PlanReadyEvent {
   return { ...buildBase({ ...input, type: "qep.plan.ready" }) };
 }
 
-export function buildPlanStartedEvent(input: Omit<BuildEventInput, "type">): PlanStartedEvent {
+export function buildPlanStartedEvent(
+  input: Omit<BuildEventInput, "type">,
+): PlanStartedEvent {
   return { ...buildBase({ ...input, type: "qep.plan.started" }) };
 }
 
@@ -211,7 +215,9 @@ export function buildPlanCompletedEvent(
   return { ...buildBase({ ...input, type: "qep.plan.completed" }) };
 }
 
-export function buildPlanArchivedEvent(input: Omit<BuildEventInput, "type">): PlanArchivedEvent {
+export function buildPlanArchivedEvent(
+  input: Omit<BuildEventInput, "type">,
+): PlanArchivedEvent {
   return { ...buildBase({ ...input, type: "qep.plan.archived" }) };
 }
 

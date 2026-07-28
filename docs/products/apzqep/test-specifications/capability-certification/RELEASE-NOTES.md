@@ -1,11 +1,11 @@
 # Release Notes — APZ QEP Test Specifications Capability 1.0.0
 
-| Field | Value |
-| ----- | ----- |
-| Package | `@apzhub/qep-test-specifications` **1.0.0** |
-| Programme | APZQEP-CERT-050D |
-| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Date | 2026-07-27 |
+| Field               | Value                                       |
+| ------------------- | ------------------------------------------- |
+| Package             | `@apzhub/qep-test-specifications` **1.0.0** |
+| Programme           | APZQEP-CERT-050D                            |
+| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS**       |
+| Date                | 2026-07-27                                  |
 
 ## What's included
 

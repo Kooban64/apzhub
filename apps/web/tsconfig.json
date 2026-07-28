@@ -54,9 +54,7 @@
       "@apzhub/document-core": ["../../packages/document-core/src/index.ts"],
       "@apzhub/document-contracts": ["../../packages/document-contracts/src/index.ts"],
       "@apzhub/testing-contracts": ["../../packages/testing-contracts/src/index.ts"],
-      "@apzhub/qep-requirements": [
-        "../../packages/qep-requirements/src/index.ts"
-      ],
+      "@apzhub/qep-requirements": ["../../packages/qep-requirements/src/index.ts"],
       "@apzhub/qep-requirements/presentation": [
         "../../packages/qep-requirements/src/presentation/index.ts"
       ],
@@ -66,9 +64,7 @@
       "@apzhub/qep-test-specifications/presentation": [
         "../../packages/qep-test-specifications/src/presentation/index.ts"
       ],
-      "@apzhub/qep-test-plans": [
-        "../../packages/qep-test-plans/src/index.ts"
-      ],
+      "@apzhub/qep-test-plans": ["../../packages/qep-test-plans/src/index.ts"],
       "@apzhub/qep-test-plans/presentation": [
         "../../packages/qep-test-plans/src/presentation/index.ts"
       ],

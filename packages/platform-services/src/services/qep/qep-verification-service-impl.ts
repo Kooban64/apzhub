@@ -112,18 +112,27 @@ export type QepVerificationPlatformService = {
     ctx: ServiceRequestContext,
     query?: ListQepVerificationsQuery,
   ): Promise<QepVerificationListResult>;
-  getVerification(ctx: ServiceRequestContext, id: string): Promise<QepVerificationDto | null>;
+  getVerification(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<QepVerificationDto | null>;
   createVerification(
     ctx: ServiceRequestContext,
     input: CreateQepVerificationInput,
   ): Promise<QepVerificationDto>;
-  requestVerification(ctx: ServiceRequestContext, id: string): Promise<QepVerificationDto>;
+  requestVerification(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<QepVerificationDto>;
   assignVerification(
     ctx: ServiceRequestContext,
     id: string,
     input: AssignQepVerificationInput,
   ): Promise<QepVerificationDto>;
-  startVerification(ctx: ServiceRequestContext, id: string): Promise<QepVerificationDto>;
+  startVerification(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<QepVerificationDto>;
   completeVerification(
     ctx: ServiceRequestContext,
     id: string,
@@ -134,15 +143,27 @@ export type QepVerificationPlatformService = {
     id: string,
     input: RejectQepVerificationInput,
   ): Promise<QepVerificationDto>;
-  expireVerification(ctx: ServiceRequestContext, id: string): Promise<QepVerificationDto>;
-  withdrawVerification(ctx: ServiceRequestContext, id: string): Promise<QepVerificationDto>;
+  expireVerification(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<QepVerificationDto>;
+  withdrawVerification(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<QepVerificationDto>;
   supersedeVerification(
     ctx: ServiceRequestContext,
     id: string,
     input: SupersedeQepVerificationInput,
   ): Promise<QepVerificationDto>;
-  cancelVerification(ctx: ServiceRequestContext, id: string): Promise<QepVerificationDto>;
-  retireVerification(ctx: ServiceRequestContext, id: string): Promise<QepVerificationDto>;
+  cancelVerification(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<QepVerificationDto>;
+  retireVerification(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<QepVerificationDto>;
   updateVerificationMetadata(
     ctx: ServiceRequestContext,
     id: string,
@@ -174,7 +195,9 @@ export function createQepVerificationPlatformService(
 ): QepVerificationPlatformService {
   return {
     async listVerifications(ctx, query = {}) {
-      const result = await invoke(ctx, (verCtx) => service.listVerifications(verCtx, query));
+      const result = await invoke(ctx, (verCtx) =>
+        service.listVerifications(verCtx, query),
+      );
       return {
         items: result.items.map((item) => toVerificationDto(item, ctx.permissions)),
         total: result.total,
@@ -187,11 +210,15 @@ export function createQepVerificationPlatformService(
       return found ? toVerificationDto(found, ctx.permissions) : null;
     },
     async createVerification(ctx, input) {
-      const created = await invoke(ctx, (verCtx) => service.createVerification(verCtx, input));
+      const created = await invoke(ctx, (verCtx) =>
+        service.createVerification(verCtx, input),
+      );
       return toVerificationDto(created, ctx.permissions);
     },
     async requestVerification(ctx, id) {
-      const updated = await invoke(ctx, (verCtx) => service.requestVerification(verCtx, id));
+      const updated = await invoke(ctx, (verCtx) =>
+        service.requestVerification(verCtx, id),
+      );
       return toVerificationDto(updated, ctx.permissions);
     },
     async assignVerification(ctx, id, input) {
@@ -201,7 +228,9 @@ export function createQepVerificationPlatformService(
       return toVerificationDto(updated, ctx.permissions);
     },
     async startVerification(ctx, id) {
-      const updated = await invoke(ctx, (verCtx) => service.startVerification(verCtx, id));
+      const updated = await invoke(ctx, (verCtx) =>
+        service.startVerification(verCtx, id),
+      );
       return toVerificationDto(updated, ctx.permissions);
     },
     async completeVerification(ctx, id, input) {
@@ -217,11 +246,15 @@ export function createQepVerificationPlatformService(
       return toVerificationDto(updated, ctx.permissions);
     },
     async expireVerification(ctx, id) {
-      const updated = await invoke(ctx, (verCtx) => service.expireVerification(verCtx, id));
+      const updated = await invoke(ctx, (verCtx) =>
+        service.expireVerification(verCtx, id),
+      );
       return toVerificationDto(updated, ctx.permissions);
     },
     async withdrawVerification(ctx, id) {
-      const updated = await invoke(ctx, (verCtx) => service.withdrawVerification(verCtx, id));
+      const updated = await invoke(ctx, (verCtx) =>
+        service.withdrawVerification(verCtx, id),
+      );
       return toVerificationDto(updated, ctx.permissions);
     },
     async supersedeVerification(ctx, id, input) {
@@ -231,11 +264,15 @@ export function createQepVerificationPlatformService(
       return toVerificationDto(updated, ctx.permissions);
     },
     async cancelVerification(ctx, id) {
-      const updated = await invoke(ctx, (verCtx) => service.cancelVerification(verCtx, id));
+      const updated = await invoke(ctx, (verCtx) =>
+        service.cancelVerification(verCtx, id),
+      );
       return toVerificationDto(updated, ctx.permissions);
     },
     async retireVerification(ctx, id) {
-      const updated = await invoke(ctx, (verCtx) => service.retireVerification(verCtx, id));
+      const updated = await invoke(ctx, (verCtx) =>
+        service.retireVerification(verCtx, id),
+      );
       return toVerificationDto(updated, ctx.permissions);
     },
     async updateVerificationMetadata(ctx, id, patch) {
@@ -260,7 +297,9 @@ export function createQepVerificationPlatformService(
       return invoke(ctx, (verCtx) => service.listHistory(verCtx, id));
     },
     async listVerificationsBySubject(ctx, kind, artefactId) {
-      const results = await invoke(ctx, (verCtx) => service.listBySubject(verCtx, kind, artefactId));
+      const results = await invoke(ctx, (verCtx) =>
+        service.listBySubject(verCtx, kind, artefactId),
+      );
       return results.map((item) => toVerificationDto(item, ctx.permissions));
     },
   };

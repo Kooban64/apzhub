@@ -1,22 +1,22 @@
 # Behavioural Completeness — APZQEP-CERT-060A
 
-| Field | Value |
-| ----- | ----- |
-| Result | **PASS** |
+| Field     | Value                                                                    |
+| --------- | ------------------------------------------------------------------------ |
+| Result    | **PASS**                                                                 |
 | Precedent | Owner Acceptance ENG-060A — behavioural completeness over raw coverage % |
 
 ## Assessment
 
-| Behaviour family | Exercised | Result |
-| ---------------- | --------- | ------ |
-| Create / update / lifecycle transitions | Yes | **PASS** |
-| Illegal transition rejection | Yes | **PASS** |
-| Readiness / approval / assignment policies | Yes | **PASS** |
-| Seal / revise / revision history | Yes | **PASS** |
-| Clone | Yes | **PASS** |
-| Supersede | Yes | **PASS** |
-| Domain event emission on mutations | Yes | **PASS** |
-| Business invariants (duplicate pin, terminal immutability, etc.) | Yes | **PASS** |
+| Behaviour family                                                 | Exercised | Result   |
+| ---------------------------------------------------------------- | --------- | -------- |
+| Create / update / lifecycle transitions                          | Yes       | **PASS** |
+| Illegal transition rejection                                     | Yes       | **PASS** |
+| Readiness / approval / assignment policies                       | Yes       | **PASS** |
+| Seal / revise / revision history                                 | Yes       | **PASS** |
+| Clone                                                            | Yes       | **PASS** |
+| Supersede                                                        | Yes       | **PASS** |
+| Domain event emission on mutations                               | Yes       | **PASS** |
+| Business invariants (duplicate pin, terminal immutability, etc.) | Yes       | **PASS** |
 
 ## Principle applied
 

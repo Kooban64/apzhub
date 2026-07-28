@@ -1,5 +1,8 @@
 import { QepInvariantViolation } from "../../shared/errors";
-import { assertDistinctEndpoints, type RelationshipEndpoint } from "./relationship-endpoint";
+import {
+  assertDistinctEndpoints,
+  type RelationshipEndpoint,
+} from "./relationship-endpoint";
 import { endpointSortKey } from "./relationship-direction";
 import type { RelationshipLifecycleState } from "./relationship-lifecycle-state";
 import type { RelationshipRationale } from "./relationship-rationale";
@@ -50,7 +53,9 @@ export function assertEndpointPair(
   tenantId: string,
 ): void {
   if (source.tenantId !== tenantId || target.tenantId !== tenantId) {
-    throw new QepInvariantViolation("Relationship and endpoints must share the same tenant");
+    throw new QepInvariantViolation(
+      "Relationship and endpoints must share the same tenant",
+    );
   }
   assertDistinctEndpoints(source, target);
 }
@@ -63,7 +68,8 @@ export function assertEndpointExistence(
   for (const endpoint of [source, target]) {
     const fact = facts.find(
       (entry) =>
-        entry.tenantId === endpoint.tenantId && entry.requirementId === endpoint.requirementId,
+        entry.tenantId === endpoint.tenantId &&
+        entry.requirementId === endpoint.requirementId,
     );
     if (!fact || !fact.exists) {
       throw new QepInvariantViolation(
@@ -127,9 +133,7 @@ export function assertRationalePolicy(
 ): void {
   const taxonomy = getRelationshipTaxonomyDefinition(type);
   if (taxonomy.rationalePolicy === "mandatory" && rationale === undefined) {
-    throw new QepInvariantViolation(
-      `Relationship type ${type} requires a rationale`,
-    );
+    throw new QepInvariantViolation(`Relationship type ${type} requires a rationale`);
   }
 }
 
@@ -319,13 +323,19 @@ export function assertBaselineInteractionRules(input: {
   }
 }
 
-export function assertRelationshipDraftMutable(state: RelationshipLifecycleState): void {
+export function assertRelationshipDraftMutable(
+  state: RelationshipLifecycleState,
+): void {
   if (state !== "draft") {
-    throw new QepInvariantViolation("Only draft relationships may change type or endpoints");
+    throw new QepInvariantViolation(
+      "Only draft relationships may change type or endpoints",
+    );
   }
 }
 
-export function assertRelationshipProfileMutable(state: RelationshipLifecycleState): void {
+export function assertRelationshipProfileMutable(
+  state: RelationshipLifecycleState,
+): void {
   if (state !== "draft" && state !== "active") {
     throw new QepInvariantViolation(
       "Only draft or active relationships may change semantic profile attributes",
@@ -335,6 +345,8 @@ export function assertRelationshipProfileMutable(state: RelationshipLifecycleSta
 
 export function assertRelationshipNotRetired(state: RelationshipLifecycleState): void {
   if (state === "retired") {
-    throw new QepInvariantViolation("Retired relationships are immutable historical facts");
+    throw new QepInvariantViolation(
+      "Retired relationships are immutable historical facts",
+    );
   }
 }

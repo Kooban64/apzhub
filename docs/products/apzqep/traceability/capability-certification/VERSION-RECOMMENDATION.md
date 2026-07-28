@@ -1,13 +1,13 @@
 # Version Recommendation — `@apzhub/qep-traceability`
 
-| Field | Value |
-| ----- | ----- |
-| Package | `@apzhub/qep-traceability` |
-| Module | `modules/qep-traceability` |
-| Recommended SemVer | **1.0.0** |
-| Prior version | **0.3.0** |
-| Programme | APZQEP-TRACE-001 |
-| Date | 2026-07-26 |
+| Field              | Value                      |
+| ------------------ | -------------------------- |
+| Package            | `@apzhub/qep-traceability` |
+| Module             | `modules/qep-traceability` |
+| Recommended SemVer | **1.0.0**                  |
+| Prior version      | **0.3.0**                  |
+| Programme          | APZQEP-TRACE-001           |
+| Date               | 2026-07-26                 |
 
 ## Recommendation
 
@@ -23,11 +23,11 @@ Promote `@apzhub/qep-traceability` from **0.3.0** to **1.0.0** as the first stab
 
 ## SemVer policy after promotion (pending Owner Acceptance)
 
-| Line | Meaning |
-| ---- | ------- |
-| **1.0.0** | Certified Traceability baseline |
-| **1.0.x** | Defect fixes only (requires Owner Instruction) |
-| **1.1.0+** / **2.0.0** | Not authorised without new Owner Instruction |
+| Line                   | Meaning                                        |
+| ---------------------- | ---------------------------------------------- |
+| **1.0.0**              | Certified Traceability baseline                |
+| **1.0.x**              | Defect fixes only (requires Owner Instruction) |
+| **1.1.0+** / **2.0.0** | Not authorised without new Owner Instruction   |
 
 ## See also
 

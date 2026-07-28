@@ -67,7 +67,10 @@ export function parseQepTraceLinkRouteId(pathname: string): string | null {
   if (!isQepTraceLinksRoute(normalized) || normalized === QEP_TRACE_LINKS_BASE_PATH) {
     return null;
   }
-  if (isQepTraceLinksNewRoute(normalized) || isQepTraceLinksSupersedeRoute(normalized)) {
+  if (
+    isQepTraceLinksNewRoute(normalized) ||
+    isQepTraceLinksSupersedeRoute(normalized)
+  ) {
     return null;
   }
   const prefix = `${QEP_TRACE_LINKS_BASE_PATH}/`;

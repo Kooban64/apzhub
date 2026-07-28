@@ -62,7 +62,10 @@ export function mapTraceDomainError(
       retryable: false,
     });
   }
-  if (error instanceof TraceConflictError || error instanceof TraceRevisionConflictError) {
+  if (
+    error instanceof TraceConflictError ||
+    error instanceof TraceRevisionConflictError
+  ) {
     return new PlatformServiceError({
       category: "conflict",
       code: "CONFLICT",
@@ -177,7 +180,9 @@ export function createQepTraceabilityPlatformService(
 ): QepTraceabilityPlatformService {
   return {
     async listTraceLinks(ctx, query = {}) {
-      const result = await invoke(ctx, (traceCtx) => service.listTraceLinks(traceCtx, query));
+      const result = await invoke(ctx, (traceCtx) =>
+        service.listTraceLinks(traceCtx, query),
+      );
       return {
         items: result.items.map((item) => toTraceLinkDto(item, ctx.permissions)),
         total: result.total,
@@ -190,19 +195,27 @@ export function createQepTraceabilityPlatformService(
       return found ? toTraceLinkDto(found, ctx.permissions) : null;
     },
     async createTraceLink(ctx, input) {
-      const created = await invoke(ctx, (traceCtx) => service.createTraceLink(traceCtx, input));
+      const created = await invoke(ctx, (traceCtx) =>
+        service.createTraceLink(traceCtx, input),
+      );
       return toTraceLinkDto(created, ctx.permissions);
     },
     async validateTraceLink(ctx, id) {
-      const updated = await invoke(ctx, (traceCtx) => service.validateTraceLink(traceCtx, id));
+      const updated = await invoke(ctx, (traceCtx) =>
+        service.validateTraceLink(traceCtx, id),
+      );
       return toTraceLinkDto(updated, ctx.permissions);
     },
     async approveTraceLink(ctx, id) {
-      const updated = await invoke(ctx, (traceCtx) => service.approveTraceLink(traceCtx, id));
+      const updated = await invoke(ctx, (traceCtx) =>
+        service.approveTraceLink(traceCtx, id),
+      );
       return toTraceLinkDto(updated, ctx.permissions);
     },
     async retireTraceLink(ctx, id) {
-      const updated = await invoke(ctx, (traceCtx) => service.retireTraceLink(traceCtx, id));
+      const updated = await invoke(ctx, (traceCtx) =>
+        service.retireTraceLink(traceCtx, id),
+      );
       return toTraceLinkDto(updated, ctx.permissions);
     },
     async supersedeTraceLink(ctx, id, input) {
@@ -224,7 +237,9 @@ export function createQepTraceabilityPlatformService(
       return toTraceLinkDto(updated, ctx.permissions);
     },
     async updateTraceLinkScope(ctx, id, scope) {
-      const updated = await invoke(ctx, (traceCtx) => service.updateScope(traceCtx, id, scope));
+      const updated = await invoke(ctx, (traceCtx) =>
+        service.updateScope(traceCtx, id, scope),
+      );
       return toTraceLinkDto(updated, ctx.permissions);
     },
     async updateTraceLinkRationale(ctx, id, rationale) {
@@ -240,7 +255,9 @@ export function createQepTraceabilityPlatformService(
       return toTraceLinkDto(updated, ctx.permissions);
     },
     async updateTraceLinkOrigin(ctx, id, origin) {
-      const updated = await invoke(ctx, (traceCtx) => service.updateOrigin(traceCtx, id, origin));
+      const updated = await invoke(ctx, (traceCtx) =>
+        service.updateOrigin(traceCtx, id, origin),
+      );
       return toTraceLinkDto(updated, ctx.permissions);
     },
     async updateTraceLinkEndpoint(ctx, id, input) {

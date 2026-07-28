@@ -38,7 +38,13 @@ export const SPECIFICATION_TYPES = [
 
 export const SPECIFICATION_PRIORITIES = ["critical", "high", "medium", "low"] as const;
 
-export const SPECIFICATION_COMPLEXITIES = ["trivial", "simple", "moderate", "complex", "epic"] as const;
+export const SPECIFICATION_COMPLEXITIES = [
+  "trivial",
+  "simple",
+  "moderate",
+  "complex",
+  "epic",
+] as const;
 
 export const SPECIFICATION_REFERENCE_KINDS = [
   "requirement",
@@ -53,4 +59,10 @@ export const SPECIFICATION_REFERENCE_KINDS = [
 
 export const MUTABLE_STATUSES = ["draft"] as const;
 
-export const IMMUTABLE_STATUSES = ["approved", "superseded", "retired", "withdrawn", "cancelled"] as const;
+export const IMMUTABLE_STATUSES = [
+  "approved",
+  "superseded",
+  "retired",
+  "withdrawn",
+  "cancelled",
+] as const;

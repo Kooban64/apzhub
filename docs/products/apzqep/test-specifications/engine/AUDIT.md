@@ -10,6 +10,6 @@ create · update · approve · reject · withdraw · supersede · retire · canc
 
 ## Rules
 
-- Append-only entries with tenant, actor, correlation id, action, details  
-- No duplicated Platform Audit subsystem inside the package  
+- Append-only entries with tenant, actor, correlation id, action, details
+- No duplicated Platform Audit subsystem inside the package
 - Platform Service layer may centralise durable audit later without Domain changes

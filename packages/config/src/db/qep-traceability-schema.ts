@@ -87,7 +87,10 @@ export const qepTraceLink = pgTable(
   (table) => [
     index("qep_trace_link_tenant_id_idx").on(table.tenantId, table.id),
     index("qep_trace_link_tenant_type_idx").on(table.tenantId, table.traceType),
-    index("qep_trace_link_tenant_lifecycle_idx").on(table.tenantId, table.lifecycleState),
+    index("qep_trace_link_tenant_lifecycle_idx").on(
+      table.tenantId,
+      table.lifecycleState,
+    ),
     index("qep_trace_link_tenant_source_idx").on(
       table.tenantId,
       table.sourceKind,
@@ -114,7 +117,9 @@ export const qepTraceLinkHistory = pgTable(
   {
     id: text("id").primaryKey(),
     tenantId: text("tenant_id").notNull(),
-    traceId: text("trace_id").notNull().references(() => qepTraceLink.id),
+    traceId: text("trace_id")
+      .notNull()
+      .references(() => qepTraceLink.id),
     occurredAt: timestamp("occurred_at", { withTimezone: true }).notNull(),
     actorUserId: text("actor_user_id").notNull(),
     kind: text("kind").notNull(),
@@ -140,8 +145,14 @@ export const qepTraceLinkTaxonomy = pgTable(
     displayName: text("display_name").notNull(),
     description: text("description").notNull(),
     family: text("family").notNull(),
-    allowedSourceKinds: jsonb("allowed_source_kinds").$type<string[]>().notNull().default([]),
-    allowedTargetKinds: jsonb("allowed_target_kinds").$type<string[]>().notNull().default([]),
+    allowedSourceKinds: jsonb("allowed_source_kinds")
+      .$type<string[]>()
+      .notNull()
+      .default([]),
+    allowedTargetKinds: jsonb("allowed_target_kinds")
+      .$type<string[]>()
+      .notNull()
+      .default([]),
     directionDefault: varchar("direction_default", { length: 16 }).notNull(),
     symmetric: varchar("symmetric", { length: 8 }).notNull(),
     governanceClass: varchar("governance_class", { length: 32 }).notNull(),

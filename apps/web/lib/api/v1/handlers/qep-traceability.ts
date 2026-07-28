@@ -151,7 +151,9 @@ export async function handleGetQepTraceLink(
 ) {
   const id = await param(routeContext, "traceLinkId", qepTraceLinkIdParamSchema);
   const service = await requireQepTraceabilityGateway();
-  const item = await invoke(context, () => service.getTraceLink(context.serviceContext, id));
+  const item = await invoke(context, () =>
+    service.getTraceLink(context.serviceContext, id),
+  );
   if (!item) {
     throw new PlatformApiHttpError(404, {
       code: "NOT_FOUND",
@@ -379,10 +381,18 @@ export async function handleListQepTraceLinksByEndpoint(
     "artefactId",
     qepTraceEndpointArtefactIdParamSchema,
   );
-  const query = parseQuery(qepTraceLinkEndpointQuerySchema, request.nextUrl.searchParams);
+  const query = parseQuery(
+    qepTraceLinkEndpointQuerySchema,
+    request.nextUrl.searchParams,
+  );
   const service = await requireQepTraceabilityGateway();
   const items = await invoke(context, () =>
-    service.listTraceLinksByEndpoint(context.serviceContext, kind, artefactId, query.direction),
+    service.listTraceLinksByEndpoint(
+      context.serviceContext,
+      kind,
+      artefactId,
+      query.direction,
+    ),
   );
   return jsonDataResponse(items, context.tracing);
 }

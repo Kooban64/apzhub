@@ -1,9 +1,7 @@
 import { randomUUID } from "node:crypto";
 
 import type { RequirementBaselineId } from "./requirement-baseline-id";
-import type {
-  RequirementBaselineIntegrityVerificationStatus,
-} from "./requirement-baseline-integrity";
+import type { RequirementBaselineIntegrityVerificationStatus } from "./requirement-baseline-integrity";
 import type { RequirementBaselineItem } from "./requirement-baseline-item";
 
 export type RequirementBaselineEventBase = {
@@ -81,13 +79,22 @@ function baseEvent(input: BaselineEventInput): RequirementBaselineEventBase {
 export function buildBaselineCreatedEvent(
   input: BaselineEventInput & { readonly number: number; readonly name: string },
 ): BaselineCreated {
-  return { ...baseEvent(input), type: "qep.requirement_baseline.created", number: input.number, name: input.name };
+  return {
+    ...baseEvent(input),
+    type: "qep.requirement_baseline.created",
+    number: input.number,
+    name: input.name,
+  };
 }
 
 export function buildBaselineItemAddedEvent(
   input: BaselineEventInput & { readonly item: RequirementBaselineItem },
 ): BaselineItemAdded {
-  return { ...baseEvent(input), type: "qep.requirement_baseline.item_added", item: input.item };
+  return {
+    ...baseEvent(input),
+    type: "qep.requirement_baseline.item_added",
+    item: input.item,
+  };
 }
 
 export function buildBaselineItemRemovedEvent(
@@ -104,7 +111,9 @@ export function buildBaselineLockedEvent(input: BaselineEventInput): BaselineLoc
   return { ...baseEvent(input), type: "qep.requirement_baseline.locked" };
 }
 
-export function buildBaselineArchivedEvent(input: BaselineEventInput): BaselineArchived {
+export function buildBaselineArchivedEvent(
+  input: BaselineEventInput,
+): BaselineArchived {
   return { ...baseEvent(input), type: "qep.requirement_baseline.archived" };
 }
 

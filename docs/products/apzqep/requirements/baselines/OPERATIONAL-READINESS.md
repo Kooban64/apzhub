@@ -16,11 +16,11 @@
 
 ## Limits (practical)
 
-| Concern | Guidance |
-|---|---|
+| Concern         | Guidance                                                         |
+| --------------- | ---------------------------------------------------------------- |
 | Membership size | Prefer bounded UI pages; fingerprint cost scales with membership |
-| Comparison | Membership-only; large baselines may need progressive UI |
-| Search | Eventual consistency via publication hooks |
+| Comparison      | Membership-only; large baselines may need progressive UI         |
+| Search          | Eventual consistency via publication hooks                       |
 
 ## Forbidden support actions
 

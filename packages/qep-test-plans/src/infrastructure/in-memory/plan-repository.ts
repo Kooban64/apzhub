@@ -3,7 +3,11 @@ import type {
   TestPlanListQuery,
   TestPlanRepository,
 } from "../../domain/test-plan/plan-repository";
-import { PlanConcurrencyError, PlanConflictError, PlanNotFoundError } from "../../shared/errors";
+import {
+  PlanConcurrencyError,
+  PlanConflictError,
+  PlanNotFoundError,
+} from "../../shared/errors";
 import { matchesListFilters, toStoredTestPlan } from "../mappers/plan-mapper";
 
 export type TestPlanInMemoryStore = {
@@ -24,7 +28,9 @@ export function createInMemoryTestPlanRepository(
       }
       for (const row of store.plans.values()) {
         if (row.tenantId === plan.tenantId && row.number === plan.number) {
-          throw new PlanConflictError(`Test Plan number already exists for tenant: ${plan.number}`);
+          throw new PlanConflictError(
+            `Test Plan number already exists for tenant: ${plan.number}`,
+          );
         }
       }
       const stored = toStoredTestPlan(plan);

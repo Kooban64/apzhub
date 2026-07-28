@@ -42,9 +42,10 @@ export type CreateQepTestSpecificationPlatformServicesInput = CommonInput & {
   readonly persistenceMode?: "postgres" | "memory";
 };
 
-export type CreateQepTestSpecificationPlatformServicesForProductionInput = CommonInput & {
-  readonly postgresDb: DatabaseExecutor;
-};
+export type CreateQepTestSpecificationPlatformServicesForProductionInput =
+  CommonInput & {
+    readonly postgresDb: DatabaseExecutor;
+  };
 
 export type CreateQepTestSpecificationPlatformServicesForTestInput = CommonInput & {
   readonly postgresDb?: DatabaseExecutor;
@@ -111,7 +112,9 @@ export function createQepTestSpecificationPlatformServicesForProduction(
       "createQepTestSpecificationPlatformServicesForProduction requires postgresDb — in-memory fallback is forbidden",
     );
   }
-  const persistence = createQepTestSpecificationPersistenceForProduction({ db: input.postgresDb });
+  const persistence = createQepTestSpecificationPersistenceForProduction({
+    db: input.postgresDb,
+  });
   return buildBundle({
     persistence,
     persistenceMode: "postgres",

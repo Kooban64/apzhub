@@ -15,37 +15,37 @@ MVP **must** deliver complete manual verification value without AI or automation
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| Structured procedure | Steps, expected outcomes, preconditions |
-| Exploratory session | Charter-driven time-boxed investigation |
-| Checklist | Lightweight confirmation list |
-| Human observation | Qualitative finding as evidence |
-| Verification session | Human-centred execution container |
-| Peer review | Independent review of session/procedure |
-| Sign-off | Optional formal session completion attestation |
+| Concept              | Product meaning                                |
+| -------------------- | ---------------------------------------------- |
+| Structured procedure | Steps, expected outcomes, preconditions        |
+| Exploratory session  | Charter-driven time-boxed investigation        |
+| Checklist            | Lightweight confirmation list                  |
+| Human observation    | Qualitative finding as evidence                |
+| Verification session | Human-centred execution container              |
+| Peer review          | Independent review of session/procedure        |
+| Sign-off             | Optional formal session completion attestation |
 
 ## Supported manual forms
 
-| Form | Description |
-| ---- | ----------- |
-| Structured test procedures | Steps, expected outcomes, preconditions |
-| Exploratory sessions | Charters, time-boxed observation, notes |
-| Checklists | Lightweight confirmation lists |
-| Human observations | Qualitative findings attached as evidence |
+| Form                       | Description                               |
+| -------------------------- | ----------------------------------------- |
+| Structured test procedures | Steps, expected outcomes, preconditions   |
+| Exploratory sessions       | Charters, time-boxed observation, notes   |
+| Checklists                 | Lightweight confirmation lists            |
+| Human observations         | Qualitative findings attached as evidence |
 
 ## Primary objects
 
-| Object | Description |
-| ------ | ----------- |
-| Verification procedure | Reusable manual specification |
-| Session plan | Scheduled execution intent |
-| Verification session | Active or completed human execution |
-| Step result | Pass / Fail / Blocked / N/A per step |
-| Session evidence | Attachments and observations |
-| Review record | Peer review outcome |
-| Sign-off record | Optional formal closure |
-| Archived version | Superseded procedure retained |
+| Object                 | Description                          |
+| ---------------------- | ------------------------------------ |
+| Verification procedure | Reusable manual specification        |
+| Session plan           | Scheduled execution intent           |
+| Verification session   | Active or completed human execution  |
+| Step result            | Pass / Fail / Blocked / N/A per step |
+| Session evidence       | Attachments and observations         |
+| Review record          | Peer review outcome                  |
+| Sign-off record        | Optional formal closure              |
+| Archived version       | Superseded procedure retained        |
 
 ## Lifecycle
 
@@ -69,13 +69,13 @@ Product path: Draft → In review → Approved → Ready for execution → In se
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
-| QA Engineer | Procedure design and approval support |
-| Manual Tester | Session execution and evidence capture |
-| Exploratory Tester | Charter sessions |
-| QA Manager | Approval and sign-off policy |
-| Peer reviewer | Independent review when required |
+| Role               | Ownership                              |
+| ------------------ | -------------------------------------- |
+| QA Engineer        | Procedure design and approval support  |
+| Manual Tester      | Session execution and evidence capture |
+| Exploratory Tester | Charter sessions                       |
+| QA Manager         | Approval and sign-off policy           |
+| Peer reviewer      | Independent review when required       |
 
 ## Relationships
 
@@ -94,17 +94,17 @@ flowchart LR
 
 ## States
 
-| State | Meaning |
-| ----- | ------- |
-| Draft | Procedure editing |
-| In review | Awaiting approval |
-| Approved | Executable specification |
-| Ready for execution | Planned |
-| In session | Active execution |
-| Completed | Results recorded |
-| Peer reviewed | Independent review done |
-| Signed off | Formal closure optional |
-| Archived | Historical version |
+| State               | Meaning                  |
+| ------------------- | ------------------------ |
+| Draft               | Procedure editing        |
+| In review           | Awaiting approval        |
+| Approved            | Executable specification |
+| Ready for execution | Planned                  |
+| In session          | Active execution         |
+| Completed           | Results recorded         |
+| Peer reviewed       | Independent review done  |
+| Signed off          | Formal closure optional  |
+| Archived            | Historical version       |
 
 ## Manual capabilities (normative)
 
@@ -112,22 +112,22 @@ Structured procedures · Exploratory sessions · Checklists · Human observation
 
 ## Operating modes
 
-| Mode | Meaning |
-| ---- | ------- |
-| Standalone | Organisation operates entirely on manual verification |
+| Mode                 | Meaning                                                         |
+| -------------------- | --------------------------------------------------------------- |
+| Standalone           | Organisation operates entirely on manual verification           |
 | Alongside automation | Same requirements verified manually and via ingested automation |
-| Hybrid session | Human executes while referencing automation results |
+| Hybrid session       | Human executes while referencing automation results             |
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
+| Rule  | Statement                                                               |
+| ----- | ----------------------------------------------------------------------- |
 | MV-01 | Manual verification is never temporary or inferior in product semantics |
-| MV-02 | Automation not required to certify |
-| MV-03 | AI observation replacement requires human accept path — AI default OFF |
-| MV-04 | Blocked and N/A dispositions require rationale when policy enabled |
-| MV-05 | Retest links to original session and defect |
-| MV-06 | Archived procedures retain execution history |
+| MV-02 | Automation not required to certify                                      |
+| MV-03 | AI observation replacement requires human accept path — AI default OFF  |
+| MV-04 | Blocked and N/A dispositions require rationale when policy enabled      |
+| MV-05 | Retest links to original session and defect                             |
+| MV-06 | Archived procedures retain execution history                            |
 
 ## Approval rules
 
@@ -135,14 +135,14 @@ Procedure approval: QA Manager or peer per policy. Session sign-off: Manual Test
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| Manual Tester | Execute sessions; capture evidence |
-| Exploratory Tester | Charter-based sessions |
-| QA Engineer | Design procedures; support retest |
-| QA Manager | Approve procedures; audit quality |
-| Release Manager | Consumes manual results in readiness |
-| Product Owner | Prioritises manual coverage for features |
+| Persona            | Responsibility                           |
+| ------------------ | ---------------------------------------- |
+| Manual Tester      | Execute sessions; capture evidence       |
+| Exploratory Tester | Charter-based sessions                   |
+| QA Engineer        | Design procedures; support retest        |
+| QA Manager         | Approve procedures; audit quality        |
+| Release Manager    | Consumes manual results in readiness     |
+| Product Owner      | Prioritises manual coverage for features |
 
 ## Reporting
 
@@ -170,17 +170,17 @@ Mobile session capture, richer media evidence, voice notes with transcription (h
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Session SoR | Screen recorder product replacement |
-| Exploratory charters | Test management ALM |
-| Manual cert chain | Device farm execution |
+| In boundary          | Out of boundary                     |
+| -------------------- | ----------------------------------- |
+| Session SoR          | Screen recorder product replacement |
+| Exploratory charters | Test management ALM                 |
+| Manual cert chain    | Device farm execution               |
 
 ## Explicit exclusions
 
-- Treating manual as “legacy to remove”  
-- Requiring automation to certify  
-- Replacing human observation with AI without accept path  
+- Treating manual as “legacy to remove”
+- Requiring automation to certify
+- Replacing human observation with AI without accept path
 
 ## MVP obligation
 

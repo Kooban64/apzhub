@@ -24,20 +24,59 @@
   "pointer": "docs/products/apzqep/portfolio/README.md",
   "consolidates": {
     "capabilities": [
-      { "name": "Requirements", "package": "@apzhub/qep-requirements", "version": "1.0.0", "status": "FROZEN" },
-      { "name": "Traceability", "package": "@apzhub/qep-traceability", "version": "1.0.0", "status": "FROZEN" },
-      { "name": "Verification", "package": "@apzhub/qep-verification", "version": "1.0.0", "status": "FROZEN" },
-      { "name": "Test Specifications", "package": "@apzhub/qep-test-specifications", "version": "1.0.0", "status": "FROZEN" },
-      { "name": "Test Plans", "package": "@apzhub/qep-test-plans", "version": "1.0.0", "status": "FROZEN" }
+      {
+        "name": "Requirements",
+        "package": "@apzhub/qep-requirements",
+        "version": "1.0.0",
+        "status": "FROZEN"
+      },
+      {
+        "name": "Traceability",
+        "package": "@apzhub/qep-traceability",
+        "version": "1.0.0",
+        "status": "FROZEN"
+      },
+      {
+        "name": "Verification",
+        "package": "@apzhub/qep-verification",
+        "version": "1.0.0",
+        "status": "FROZEN"
+      },
+      {
+        "name": "Test Specifications",
+        "package": "@apzhub/qep-test-specifications",
+        "version": "1.0.0",
+        "status": "FROZEN"
+      },
+      {
+        "name": "Test Plans",
+        "package": "@apzhub/qep-test-plans",
+        "version": "1.0.0",
+        "status": "FROZEN"
+      }
     ],
     "certificationProgrammes": [
-      "APZQEP-REQ-001", "APZQEP-TRACE-001", "APZQEP-CERT-040D", "APZQEP-CERT-050D",
-      "APZQEP-CERT-060A", "APZQEP-CERT-060B", "APZQEP-CERT-070A", "APZQEP-CERT-080A"
+      "APZQEP-REQ-001",
+      "APZQEP-TRACE-001",
+      "APZQEP-CERT-040D",
+      "APZQEP-CERT-050D",
+      "APZQEP-CERT-060A",
+      "APZQEP-CERT-060B",
+      "APZQEP-CERT-070A",
+      "APZQEP-CERT-080A"
     ],
     "architectureProgrammes": [
-      "APZQEP-ARCH-001", "APZQEP-ARCH-005", "APZQEP-ARCH-006", "APZQEP-ARCH-007",
-      "APZQEP-ARCH-008", "APZQEP-ARCH-009", "APZQEP-ARCH-010", "APZQEP-ARCH-011",
-      "APZQEP-OES-ARCH-012", "APZQEP-ARCH-013", "APZQEP-ARCH-014"
+      "APZQEP-ARCH-001",
+      "APZQEP-ARCH-005",
+      "APZQEP-ARCH-006",
+      "APZQEP-ARCH-007",
+      "APZQEP-ARCH-008",
+      "APZQEP-ARCH-009",
+      "APZQEP-ARCH-010",
+      "APZQEP-ARCH-011",
+      "APZQEP-OES-ARCH-012",
+      "APZQEP-ARCH-013",
+      "APZQEP-ARCH-014"
     ],
     "freezeProgrammes": [
       "APZQEP-REQ-001 (combined)",
@@ -61,8 +100,13 @@
   "wave2Roadmap": {
     "status": "INDICATIVE ONLY — NOT AUTHORISED",
     "capabilities": [
-      "Test Execution", "Test Runs", "Test Suites", "Evidence Management",
-      "Defect Management", "Coverage & Quality Analytics", "Reporting & Dashboards",
+      "Test Execution",
+      "Test Runs",
+      "Test Suites",
+      "Evidence Management",
+      "Defect Management",
+      "Coverage & Quality Analytics",
+      "Reporting & Dashboards",
       "AI-Assisted Testing"
     ],
     "rule": "Each capability requires its own separate Owner-authorised Architecture programme; no ENG authorised by this evidence record"

@@ -8,7 +8,10 @@ import {
   VerificationNotFoundError,
   VerificationRevisionConflictError,
 } from "../../shared/errors";
-import { toStoredVerification, verificationMatchesListFilters } from "../mappers/verification-mapper";
+import {
+  toStoredVerification,
+  verificationMatchesListFilters,
+} from "../mappers/verification-mapper";
 
 export type VerificationInMemoryStore = {
   readonly verifications: Map<string, StoredVerification>;
@@ -26,7 +29,9 @@ export function createInMemoryVerificationRepository(
   return {
     async create(verification) {
       if (store.verifications.has(verification.id)) {
-        throw new VerificationConflictError(`Verification already exists: ${verification.id}`);
+        throw new VerificationConflictError(
+          `Verification already exists: ${verification.id}`,
+        );
       }
       const stored = toStoredVerification(verification);
       store.verifications.set(verification.id, stored);
@@ -41,7 +46,9 @@ export function createInMemoryVerificationRepository(
     async save(verification, expectedRevision) {
       const existing = store.verifications.get(verification.id);
       if (!existing || existing.tenantId !== verification.tenantId) {
-        throw new VerificationNotFoundError(`Verification not found: ${verification.id}`);
+        throw new VerificationNotFoundError(
+          `Verification not found: ${verification.id}`,
+        );
       }
       if (existing.revision !== expectedRevision) {
         throw new VerificationRevisionConflictError(

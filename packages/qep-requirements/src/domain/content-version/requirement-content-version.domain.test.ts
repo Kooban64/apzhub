@@ -54,8 +54,8 @@ describe("Requirement content versions", () => {
     expect(computeSnapshotHash(snapshot)).toBe(computeSnapshotHash(reordered));
     expect(shouldCreateVersion(snapshot, reordered)).toBe(false);
     expect(shouldCreateVersion(snapshot, { ...snapshot, title: "Changed" })).toBe(true);
-    expect(
-      shouldCreateVersion(snapshot, { ...snapshot, sourceRevision: 99 }),
-    ).toBe(false);
+    expect(shouldCreateVersion(snapshot, { ...snapshot, sourceRevision: 99 })).toBe(
+      false,
+    );
   });
 });

@@ -6,12 +6,12 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ARCH-008 — Traceability Workbench Architecture |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Classification | Authoritative Architecture |
-| Pack | `docs/products/apzqep/architecture/traceability-workbench/` |
+| Field               | Value                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------- |
+| Programme           | APZQEP-ARCH-008 — Traceability Workbench Architecture                                        |
+| Decision            | **ACCEPTED / CLOSED / COMPLETE**                                                             |
+| Classification      | Authoritative Architecture                                                                   |
+| Pack                | `docs/products/apzqep/architecture/traceability-workbench/`                                  |
 | Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T154500Z-APZQEP-ARCH-008-ACCEPTANCE.json` |
 
 ## Effect

@@ -6,18 +6,18 @@
 
 ## Aggregate
 
-| Aggregate | Module |
-| --------- | ------ |
+| Aggregate   | Module                                |
+| ----------- | ------------------------------------- |
 | `TraceLink` | `src/domain/trace-link/trace-link.ts` |
 
 ## Entities
 
-| Entity | Representation |
-| ------ | -------------- |
-| TraceLink | Aggregate root |
-| TraceEndpoint | Endpoint entity (`role` + reference) |
-| TraceHistory | Append-only `TraceHistory` / `TraceHistoryEntry` |
-| TraceMetadata | Extensible string map entity |
+| Entity        | Representation                                   |
+| ------------- | ------------------------------------------------ |
+| TraceLink     | Aggregate root                                   |
+| TraceEndpoint | Endpoint entity (`role` + reference)             |
+| TraceHistory  | Append-only `TraceHistory` / `TraceHistoryEntry` |
+| TraceMetadata | Extensible string map entity                     |
 
 ## Value objects
 

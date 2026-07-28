@@ -9,20 +9,20 @@ The Quality Engineering Lifecycle defines the end-to-end product journey from bu
 
 ## Business rationale
 
-Quality engineering fails when stages are implicit: requirements change without re-verification, evidence is collected after the fact, and release decisions lack a recorded chain. A explicit lifecycle aligns personas, approvals, and artefacts so organisations can answer the central question: *Can we release with confidence?*
+Quality engineering fails when stages are implicit: requirements change without re-verification, evidence is collected after the fact, and release decisions lack a recorded chain. A explicit lifecycle aligns personas, approvals, and artefacts so organisations can answer the central question: _Can we release with confidence?_
 
 The lifecycle supports manual-first adoption, automation ingest, AI assistance (optional), and regulated certification without requiring every maturity level upfront.
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| Stage | Named phase with entry/exit criteria |
-| Gate | Approval or quality check between stages |
-| Feedback loop | Operational learning feeding improvement |
-| Exception path | Waiver or qualification — never silent |
+| Concept          | Product meaning                                     |
+| ---------------- | --------------------------------------------------- |
+| Stage            | Named phase with entry/exit criteria                |
+| Gate             | Approval or quality check between stages            |
+| Feedback loop    | Operational learning feeding improvement            |
+| Exception path   | Waiver or qualification — never silent              |
 | Maturity overlay | L1–L7 verification maturity without skipping stages |
-| Re-entry | Return to earlier stage on change or drift |
+| Re-entry         | Return to earlier stage on change or drift          |
 
 ## Lifecycle overview
 
@@ -52,37 +52,37 @@ flowchart TB
 
 ## Primary objects
 
-| Object | Lifecycle role |
-| ------ | -------------- |
-| Business objective | Origin of quality intent |
-| Requirement | Governed need — approved before design |
-| Verification procedure | Proof specification |
-| Execution plan / session / run | Planned and actual verification |
-| Evidence item / pack | Proof artefacts |
-| Defect / risk | Failure or exposure handling |
-| Readiness snapshot | Pre-cert aggregation |
-| Certification decision | Human attestation |
-| Release record | Declared release event |
-| Knowledge item | Reuse from learning |
+| Object                         | Lifecycle role                         |
+| ------------------------------ | -------------------------------------- |
+| Business objective             | Origin of quality intent               |
+| Requirement                    | Governed need — approved before design |
+| Verification procedure         | Proof specification                    |
+| Execution plan / session / run | Planned and actual verification        |
+| Evidence item / pack           | Proof artefacts                        |
+| Defect / risk                  | Failure or exposure handling           |
+| Readiness snapshot             | Pre-cert aggregation                   |
+| Certification decision         | Human attestation                      |
+| Release record                 | Declared release event                 |
+| Knowledge item                 | Reuse from learning                    |
 
 ## Stage table
 
-| Stage | Entry criteria | Exit criteria | Accountable | Supporting | Evidence / approvals |
-| ----- | -------------- | ------------- | ----------- | ---------- | -------------------- |
-| Requirement | Objective identified | Requirement drafted | BA / PO | QA | Draft record |
-| Requirement approval | Draft complete | Approved | PO (typical) | BA, Compliance | Approval record |
-| Verification design | Approved requirement | Design draft | QA Engineer | BA | Design notes |
-| Verification review / approval | Draft ready | Approved verification | QA Manager / peer | QA Engineer | Approval |
-| Execution planning | Approved verification | Planned run / session | QA Manager | Testers | Plan |
-| Execution | Plan ready | Results recorded | Manual Tester / Automation | QA | Results + evidence |
-| Evaluation | Results exist | Pass / fail disposition | QA | Dev | Comments |
-| Defect / risk | Failure / risk found | Handled or accepted | QA / Dev / Risk approver | RM | Defect / risk records |
-| Retest | Fix / risk treatment | Retest result | Tester | Dev | Retest evidence |
-| Readiness | Scope frozen enough | Ready / Not ready / Ready with waivers | Release Manager | PO, QA | Snapshot |
-| Certification | Readiness + packs | Human decision | Release Manager + co-approvers | Auditor (observe) | Locked pack + decision |
-| Release | Cert decision allows | Released | Release Manager | Ops | Cert statement |
-| Learning | Release / ops feedback | Knowledge updated | QA Manager | All | Knowledge item |
-| Continuous improvement | Trends identified | Objectives updated | QA Leadership | All | Planning records |
+| Stage                          | Entry criteria         | Exit criteria                          | Accountable                    | Supporting        | Evidence / approvals   |
+| ------------------------------ | ---------------------- | -------------------------------------- | ------------------------------ | ----------------- | ---------------------- |
+| Requirement                    | Objective identified   | Requirement drafted                    | BA / PO                        | QA                | Draft record           |
+| Requirement approval           | Draft complete         | Approved                               | PO (typical)                   | BA, Compliance    | Approval record        |
+| Verification design            | Approved requirement   | Design draft                           | QA Engineer                    | BA                | Design notes           |
+| Verification review / approval | Draft ready            | Approved verification                  | QA Manager / peer              | QA Engineer       | Approval               |
+| Execution planning             | Approved verification  | Planned run / session                  | QA Manager                     | Testers           | Plan                   |
+| Execution                      | Plan ready             | Results recorded                       | Manual Tester / Automation     | QA                | Results + evidence     |
+| Evaluation                     | Results exist          | Pass / fail disposition                | QA                             | Dev               | Comments               |
+| Defect / risk                  | Failure / risk found   | Handled or accepted                    | QA / Dev / Risk approver       | RM                | Defect / risk records  |
+| Retest                         | Fix / risk treatment   | Retest result                          | Tester                         | Dev               | Retest evidence        |
+| Readiness                      | Scope frozen enough    | Ready / Not ready / Ready with waivers | Release Manager                | PO, QA            | Snapshot               |
+| Certification                  | Readiness + packs      | Human decision                         | Release Manager + co-approvers | Auditor (observe) | Locked pack + decision |
+| Release                        | Cert decision allows   | Released                               | Release Manager                | Ops               | Cert statement         |
+| Learning                       | Release / ops feedback | Knowledge updated                      | QA Manager                     | All               | Knowledge item         |
+| Continuous improvement         | Trends identified      | Objectives updated                     | QA Leadership                  | All               | Planning records       |
 
 ## Lifecycle
 
@@ -122,15 +122,15 @@ Each primary object carries module-specific states (see Verification, Evidence, 
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
-| QEL-01 | Requirement approval precedes verification design counting toward coverage |
-| QEL-02 | Evidence before opinion — no cert without pack |
-| QEL-03 | Waivers and Approved with qualifications are explicit exception paths |
+| Rule   | Statement                                                                         |
+| ------ | --------------------------------------------------------------------------------- |
+| QEL-01 | Requirement approval precedes verification design counting toward coverage        |
+| QEL-02 | Evidence before opinion — no cert without pack                                    |
+| QEL-03 | Waivers and Approved with qualifications are explicit exception paths             |
 | QEL-04 | Continuous signals re-enter at Readiness/Certification request — no auto-decision |
-| QEL-05 | AI assists design/analysis only with human accept — default OFF |
-| QEL-06 | Manual verification delivers full lifecycle value without automation |
-| QEL-07 | QEP is not ALM, CI, or runner — external tools referenced only |
+| QEL-05 | AI assists design/analysis only with human accept — default OFF                   |
+| QEL-06 | Manual verification delivers full lifecycle value without automation              |
+| QEL-07 | QEP is not ALM, CI, or runner — external tools referenced only                    |
 
 ## Approval rules
 
@@ -138,17 +138,17 @@ Stage gates in table; certification multi-approver per edition; risk acceptance 
 
 ## Role responsibilities
 
-| Persona | Primary stages |
-| ------- | -------------- |
-| Product Owner | Requirement approval; scope |
-| QA Engineer | Design, execution support |
-| Manual Tester | Execution, evidence |
-| QA Manager | Verification approval; defect/risk oversight |
-| Release Manager | Readiness, certification, release |
-| Developer | Defect fix, retest support |
-| Compliance Officer | Regulated gates |
-| Auditor | Observe cert; backward trace |
-| AI Agent | Draft assist only |
+| Persona            | Primary stages                               |
+| ------------------ | -------------------------------------------- |
+| Product Owner      | Requirement approval; scope                  |
+| QA Engineer        | Design, execution support                    |
+| Manual Tester      | Execution, evidence                          |
+| QA Manager         | Verification approval; defect/risk oversight |
+| Release Manager    | Readiness, certification, release            |
+| Developer          | Defect fix, retest support                   |
+| Compliance Officer | Regulated gates                              |
+| Auditor            | Observe cert; backward trace                 |
+| AI Agent           | Draft assist only                            |
 
 ## Reporting
 
@@ -176,10 +176,10 @@ Richer stage SLAs, automated **task** creation from QI (not decisions), industry
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Product lifecycle stages | Sprint planning in ALM |
-| Gate semantics | Pipeline YAML |
+| In boundary                 | Out of boundary           |
+| --------------------------- | ------------------------- |
+| Product lifecycle stages    | Sprint planning in ALM    |
+| Gate semantics              | Pipeline YAML             |
 | Learning → improvement loop | HR performance management |
 
 ## Example scenarios

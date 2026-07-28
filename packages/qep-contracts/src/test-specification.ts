@@ -48,7 +48,8 @@ export const QEP_TEST_SPECIFICATION_ACTIONS = [
   "removeRelationship",
 ] as const;
 
-export type QepTestSpecificationAction = (typeof QEP_TEST_SPECIFICATION_ACTIONS)[number];
+export type QepTestSpecificationAction =
+  (typeof QEP_TEST_SPECIFICATION_ACTIONS)[number];
 
 export type QepTestSpecificationDto = {
   readonly id: string;
@@ -59,7 +60,11 @@ export type QepTestSpecificationDto = {
   readonly objective: string;
   readonly scope: string;
   readonly status: string;
-  readonly version: { readonly major: number; readonly minor: number; readonly label: string };
+  readonly version: {
+    readonly major: number;
+    readonly minor: number;
+    readonly label: string;
+  };
   readonly type: string;
   readonly priority: string;
   readonly complexity: string;

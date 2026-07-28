@@ -10,9 +10,13 @@ export type RequirementBaselineNumber = number & {
   readonly [requirementBaselineNumberBrand]: "RequirementBaselineNumber";
 };
 
-export function createRequirementBaselineNumber(value: number): RequirementBaselineNumber {
+export function createRequirementBaselineNumber(
+  value: number,
+): RequirementBaselineNumber {
   if (!Number.isInteger(value) || value < 1) {
-    throw new QepInvariantViolation("Requirement baseline number must be a positive integer");
+    throw new QepInvariantViolation(
+      "Requirement baseline number must be a positive integer",
+    );
   }
   return value as RequirementBaselineNumber;
 }

@@ -29,19 +29,19 @@ Infrastructure 0.2.0     INFRASTRUCTURE COMPONENT CERTIFIED (CERT-060B)
 
 ## Pack
 
-| Document | Path |
-| -------- | ---- |
-| Owner Certification Decision | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) — **CERTIFIED / APPROVED / CLOSED** |
-| Owner Summary | [OWNER-SUMMARY.md](./OWNER-SUMMARY.md) |
-| Certification Report | [CERTIFICATION-REPORT.md](./CERTIFICATION-REPORT.md) |
+| Document                                             | Path                                                                                         |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Owner Certification Decision                         | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) — **CERTIFIED / APPROVED / CLOSED**             |
+| Owner Summary                                        | [OWNER-SUMMARY.md](./OWNER-SUMMARY.md)                                                       |
+| Certification Report                                 | [CERTIFICATION-REPORT.md](./CERTIFICATION-REPORT.md)                                         |
 | Workbench Component Certification Report (assurance) | [WORKBENCH-COMPONENT-CERTIFICATION-REPORT.md](./WORKBENCH-COMPONENT-CERTIFICATION-REPORT.md) |
-| Evidence Pack | [EVIDENCE-PACK.md](./EVIDENCE-PACK.md) |
-| Quality Gates | [QUALITY-GATES.md](./QUALITY-GATES.md) |
-| Operational Readiness | [OPERATIONAL-READINESS.md](./OPERATIONAL-READINESS.md) |
-| Known Limitations Review | [KNOWN-LIMITATIONS-REVIEW.md](./KNOWN-LIMITATIONS-REVIEW.md) |
-| Version Recommendation | [VERSION-RECOMMENDATION.md](./VERSION-RECOMMENDATION.md) |
-| Release Recommendation | [RELEASE-RECOMMENDATION.md](./RELEASE-RECOMMENDATION.md) |
-| COMPLETE | [COMPLETE.md](./COMPLETE.md) |
+| Evidence Pack                                        | [EVIDENCE-PACK.md](./EVIDENCE-PACK.md)                                                       |
+| Quality Gates                                        | [QUALITY-GATES.md](./QUALITY-GATES.md)                                                       |
+| Operational Readiness                                | [OPERATIONAL-READINESS.md](./OPERATIONAL-READINESS.md)                                       |
+| Known Limitations Review                             | [KNOWN-LIMITATIONS-REVIEW.md](./KNOWN-LIMITATIONS-REVIEW.md)                                 |
+| Version Recommendation                               | [VERSION-RECOMMENDATION.md](./VERSION-RECOMMENDATION.md)                                     |
+| Release Recommendation                               | [RELEASE-RECOMMENDATION.md](./RELEASE-RECOMMENDATION.md)                                     |
+| COMPLETE                                             | [COMPLETE.md](./COMPLETE.md)                                                                 |
 
 ## Lifecycle
 

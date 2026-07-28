@@ -5,10 +5,7 @@ import {
   PlanReadinessError,
   PlanValidationError,
 } from "../../shared/errors";
-import {
-  CANCELLABLE_STATUSES,
-  PLAN_INITIAL_VERSION_LABEL,
-} from "./constants";
+import { CANCELLABLE_STATUSES, PLAN_INITIAL_VERSION_LABEL } from "./constants";
 import { createTestPlanApproval } from "./plan-approval";
 import { createTestPlanAssignment } from "./plan-assignment";
 import {
@@ -174,7 +171,9 @@ function withMutation(
     actorId: ctx.actorId,
     action,
     summary,
-    ...(statusChange ? { fromStatus: statusChange.from, toStatus: statusChange.to } : {}),
+    ...(statusChange
+      ? { fromStatus: statusChange.from, toStatus: statusChange.to }
+      : {}),
     ...(ctx.correlationId ? { correlationId: ctx.correlationId } : {}),
   });
   const items = patch.items ?? plan.items;
@@ -204,7 +203,10 @@ function evaluateReadiness(
   });
 }
 
-function assertReadiness(plan: TestPlan, context: "markReady" | "startExecution"): void {
+function assertReadiness(
+  plan: TestPlan,
+  context: "markReady" | "startExecution",
+): void {
   const readiness = evaluateReadiness(plan, context);
   if (!readiness.ready) {
     throw new PlanReadinessError(readiness.reasons);
@@ -239,9 +241,7 @@ export function createTestPlan(input: CreateTestPlanInput): TestPlan {
   const title = createPlanTitle(input.title);
   const ownerId = createActorId(input.ownerId);
   const number = createPlanNumber(input.number);
-  const objective = input.objective?.trim()
-    ? createPlanObjective(input.objective)
-    : "";
+  const objective = input.objective?.trim() ? createPlanObjective(input.objective) : "";
   const description = createPlanDescription(input.description);
   const priority = createPriority(input.priority);
   const createdAt = input.createdAt.trim();
@@ -291,7 +291,9 @@ export function createTestPlan(input: CreateTestPlanInput): TestPlan {
     revisions: [],
     history,
     metrics: PlanMetricsCalculator.recompute(items),
-    ...(input.externalReferences ? { externalReferences: [...input.externalReferences] } : {}),
+    ...(input.externalReferences
+      ? { externalReferences: [...input.externalReferences] }
+      : {}),
     uncommittedEvents: [createdEvent],
   };
 }
@@ -303,14 +305,19 @@ export function updateTestPlanContent(
     readonly title?: string;
     readonly description?: string | null;
     readonly objective?: string;
-    readonly scope?: { readonly class: string; readonly label?: string; readonly externalRef?: string };
+    readonly scope?: {
+      readonly class: string;
+      readonly label?: string;
+      readonly externalRef?: string;
+    };
     readonly priority?: string;
   },
 ): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   ContentPolicy.assertEditable(current.status);
   LifecyclePolicy.assertNotTerminal(current.status);
-  const title = patch.title !== undefined ? createPlanTitle(patch.title) : current.title;
+  const title =
+    patch.title !== undefined ? createPlanTitle(patch.title) : current.title;
   const description =
     patch.description === null
       ? undefined
@@ -318,9 +325,13 @@ export function updateTestPlanContent(
         ? createPlanDescription(patch.description)
         : current.description;
   const objective =
-    patch.objective !== undefined ? createPlanObjective(patch.objective) : current.objective;
-  const scope = patch.scope !== undefined ? createPlanScope(patch.scope) : current.scope;
-  const priority = patch.priority !== undefined ? createPriority(patch.priority) : current.priority;
+    patch.objective !== undefined
+      ? createPlanObjective(patch.objective)
+      : current.objective;
+  const scope =
+    patch.scope !== undefined ? createPlanScope(patch.scope) : current.scope;
+  const priority =
+    patch.priority !== undefined ? createPriority(patch.priority) : current.priority;
   return withMutation(
     current,
     ctx,
@@ -348,7 +359,7 @@ export function updateTestPlanMetadata(
   ctx: CommandContext,
   metadata: Readonly<Record<string, string>>,
 ): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   ContentPolicy.assertEditable(current.status);
   LifecyclePolicy.assertNotTerminal(current.status);
   return withMutation(
@@ -366,8 +377,12 @@ export function updateTestPlanMetadata(
   );
 }
 
-export function transferOwnership(plan: TestPlan, ctx: CommandContext, ownerId: string): TestPlan {
-  let current = beginCommand(plan, ctx);
+export function transferOwnership(
+  plan: TestPlan,
+  ctx: CommandContext,
+  ownerId: string,
+): TestPlan {
+  const current = beginCommand(plan, ctx);
   LifecyclePolicy.assertCanTransferOwnership(current.status);
   AssignmentPolicy.assertOwnerPresent(ownerId);
   return withMutation(
@@ -390,11 +405,12 @@ export function updateAssignment(
   ctx: CommandContext,
   input: { readonly leadId?: string | null; readonly assigneeIds?: readonly string[] },
 ): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   AssignmentPolicy.assertEditable(current.status);
   LifecyclePolicy.assertNotTerminal(current.status);
   const assignment = createTestPlanAssignment({
-    leadId: input.leadId === null ? undefined : input.leadId ?? current.assignment.leadId,
+    leadId:
+      input.leadId === null ? undefined : (input.leadId ?? current.assignment.leadId),
     assigneeIds: input.assigneeIds ?? current.assignment.assigneeIds,
     updatedAt: ctx.changedAt,
     updatedBy: ctx.actorId,
@@ -424,17 +440,26 @@ export function updateSchedule(
     readonly timezone?: string | null;
   },
 ): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   SchedulingPolicy.assertEditable(current.status);
   LifecyclePolicy.assertNotTerminal(current.status);
   const schedule = createTestPlanSchedule({
     plannedStart:
-      input.plannedStart === null ? undefined : input.plannedStart ?? current.schedule.plannedStart,
+      input.plannedStart === null
+        ? undefined
+        : (input.plannedStart ?? current.schedule.plannedStart),
     plannedEnd:
-      input.plannedEnd === null ? undefined : input.plannedEnd ?? current.schedule.plannedEnd,
+      input.plannedEnd === null
+        ? undefined
+        : (input.plannedEnd ?? current.schedule.plannedEnd),
     milestoneRef:
-      input.milestoneRef === null ? undefined : input.milestoneRef ?? current.schedule.milestoneRef,
-    timezone: input.timezone === null ? undefined : input.timezone ?? current.schedule.timezone,
+      input.milestoneRef === null
+        ? undefined
+        : (input.milestoneRef ?? current.schedule.milestoneRef),
+    timezone:
+      input.timezone === null
+        ? undefined
+        : (input.timezone ?? current.schedule.timezone),
   });
   SchedulingPolicy.assertValidSchedule(schedule);
   return withMutation(
@@ -457,11 +482,13 @@ export function addPlanItem(
   ctx: CommandContext,
   input: CreateTestPlanItemInput,
 ): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   ContentPolicy.assertEditable(current.status);
   LifecyclePolicy.assertNotTerminal(current.status);
   if (current.items.some((item) => item.id === input.id.trim())) {
-    throw new PlanInvariantViolationError("Plan item id must be unique within the plan");
+    throw new PlanInvariantViolationError(
+      "Plan item id must be unique within the plan",
+    );
   }
   const activeItems = current.items.filter((item) => isActiveItem(item));
   const sequence = input.sequence ?? activeItems.length;
@@ -490,7 +517,7 @@ export function updatePlanItem(
   itemId: string,
   patch: Parameters<typeof updateTestPlanItem>[1],
 ): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   ContentPolicy.assertEditable(current.status);
   LifecyclePolicy.assertNotTerminal(current.status);
   const index = current.items.findIndex((item) => item.id === itemId);
@@ -520,8 +547,12 @@ export function updatePlanItem(
   );
 }
 
-export function removePlanItem(plan: TestPlan, ctx: CommandContext, itemId: string): TestPlan {
-  let current = beginCommand(plan, ctx);
+export function removePlanItem(
+  plan: TestPlan,
+  ctx: CommandContext,
+  itemId: string,
+): TestPlan {
+  const current = beginCommand(plan, ctx);
   ContentPolicy.assertEditable(current.status);
   LifecyclePolicy.assertNotTerminal(current.status);
   const index = current.items.findIndex((item) => item.id === itemId);
@@ -554,17 +585,21 @@ export function reorderPlanItems(
   ctx: CommandContext,
   orderedItemIds: readonly string[],
 ): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   ContentPolicy.assertEditable(current.status);
   LifecyclePolicy.assertNotTerminal(current.status);
   const activeItems = current.items.filter((item) => isActiveItem(item));
   const activeIds = new Set(activeItems.map((item) => item.id));
   if (orderedItemIds.length !== activeItems.length) {
-    throw new PlanValidationError("Reorder must include all active plan items exactly once");
+    throw new PlanValidationError(
+      "Reorder must include all active plan items exactly once",
+    );
   }
   for (const id of orderedItemIds) {
     if (!activeIds.has(id)) {
-      throw new PlanValidationError(`Unknown or inactive plan item id in reorder: ${id}`);
+      throw new PlanValidationError(
+        `Unknown or inactive plan item id in reorder: ${id}`,
+      );
     }
   }
   const sequenceById = new Map(orderedItemIds.map((id, index) => [id, index]));
@@ -595,7 +630,7 @@ export function reorderPlanItems(
 }
 
 export function submitForReview(plan: TestPlan, ctx: CommandContext): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   LifecyclePolicy.assertCanSubmitForReview({
     status: current.status,
     title: current.title,
@@ -616,9 +651,12 @@ export function submitForReview(plan: TestPlan, ctx: CommandContext): TestPlan {
 
 export function approvePlan(
   plan: TestPlan,
-  ctx: CommandContext & { readonly allowSelfApproval?: boolean; readonly comment?: string },
+  ctx: CommandContext & {
+    readonly allowSelfApproval?: boolean;
+    readonly comment?: string;
+  },
 ): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   ApprovalPolicy.assertCanDecide({
     status: current.status,
     ownerId: current.ownerId,
@@ -671,7 +709,7 @@ export function rejectPlan(
   ctx: CommandContext,
   comment: string,
 ): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   ApprovalPolicy.assertCanDecide({
     status: current.status,
     ownerId: current.ownerId,
@@ -708,7 +746,7 @@ export function rejectPlan(
 }
 
 export function returnToDraft(plan: TestPlan, ctx: CommandContext): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   if (current.status !== "rejected") {
     throw new InvalidPlanStateError("Only rejected plans can be returned to draft");
   }
@@ -729,7 +767,7 @@ export function returnToDraft(plan: TestPlan, ctx: CommandContext): TestPlan {
 }
 
 export function markReady(plan: TestPlan, ctx: CommandContext): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   if (current.status !== "approved") {
     throw new InvalidPlanStateError("Only approved plans can be marked ready");
   }
@@ -746,7 +784,7 @@ export function markReady(plan: TestPlan, ctx: CommandContext): TestPlan {
 }
 
 export function startExecution(plan: TestPlan, ctx: CommandContext): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   if (current.status !== "ready") {
     throw new InvalidPlanStateError("Only ready plans can start execution");
   }
@@ -763,7 +801,7 @@ export function startExecution(plan: TestPlan, ctx: CommandContext): TestPlan {
 }
 
 export function completePlan(plan: TestPlan, ctx: CommandContext): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   if (current.status !== "in_execution") {
     throw new InvalidPlanStateError("Only in-execution plans can be completed");
   }
@@ -779,7 +817,7 @@ export function completePlan(plan: TestPlan, ctx: CommandContext): TestPlan {
 }
 
 export function archivePlan(plan: TestPlan, ctx: CommandContext): TestPlan {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   ArchivalPolicy.assertCanArchive(current.status);
   return withMutation(
     current,
@@ -793,9 +831,15 @@ export function archivePlan(plan: TestPlan, ctx: CommandContext): TestPlan {
 }
 
 export function cancelPlan(plan: TestPlan, ctx: CommandContext): TestPlan {
-  let current = beginCommand(plan, ctx);
-  if (!CANCELLABLE_STATUSES.includes(current.status as (typeof CANCELLABLE_STATUSES)[number])) {
-    throw new InvalidPlanStateError(`Plan in ${current.status} status cannot be cancelled`);
+  const current = beginCommand(plan, ctx);
+  if (
+    !CANCELLABLE_STATUSES.includes(
+      current.status as (typeof CANCELLABLE_STATUSES)[number],
+    )
+  ) {
+    throw new InvalidPlanStateError(
+      `Plan in ${current.status} status cannot be cancelled`,
+    );
   }
   return withMutation(
     current,
@@ -821,7 +865,7 @@ export function supersedePlan(
     readonly successorNumber: string;
   },
 ): SupersedePlanResult {
-  let current = beginCommand(plan, ctx);
+  const current = beginCommand(plan, ctx);
   PlanLineageService.assertSupersedeAllowed(current);
   LifecyclePolicy.assertCanSupersede(current.status);
   const draft = PlanCloneService.buildDraftFrom({

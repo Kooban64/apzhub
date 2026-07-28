@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import { PlanValidationError } from "../../shared/errors";
-import { createEmptyTestPlanAssignment, createTestPlanAssignment } from "./plan-assignment";
+import {
+  createEmptyTestPlanAssignment,
+  createTestPlanAssignment,
+} from "./plan-assignment";
 import { createTestPlanApproval } from "./plan-approval";
 import { createEmptyTestPlanSchedule, createTestPlanSchedule } from "./plan-schedule";
 import { ItemPolicy, projectApprovalState } from "./plan-policy";
@@ -77,7 +80,12 @@ describe("value objects and helpers", () => {
   it("computes fingerprints, version labels, clone titles, approval projection", () => {
     expect(
       computeItemFingerprint([
-        { id: "1", itemStatus: "included", specificationId: "s", specificationVersionPin: "1" },
+        {
+          id: "1",
+          itemStatus: "included",
+          specificationId: "s",
+          specificationVersionPin: "1",
+        },
         { id: "2", itemStatus: "removed", specificationId: "x" },
       ]),
     ).toContain("s:1:included");
@@ -88,18 +96,22 @@ describe("value objects and helpers", () => {
     expect(cloneTitleFromSource("A")).toBe("Copy of A");
     expect(deriveApprovalState("review", [])).toBe("pending_review");
     expect(deriveApprovalState("draft", [])).toBe("none");
-    expect(deriveApprovalState("approved", [{ decision: "approved" }])).toBe("approved");
-    expect(projectApprovalState("rejected", [
-      {
-        id: "1",
-        decision: "rejected",
-        decidedBy: "r",
-        decidedAt: "t",
-        fromStatus: "review",
-        toStatus: "rejected",
-        comment: "bad enough",
-      },
-    ])).toBe("rejected");
+    expect(deriveApprovalState("approved", [{ decision: "approved" }])).toBe(
+      "approved",
+    );
+    expect(
+      projectApprovalState("rejected", [
+        {
+          id: "1",
+          decision: "rejected",
+          decidedBy: "r",
+          decidedAt: "t",
+          fromStatus: "review",
+          toStatus: "rejected",
+          comment: "bad enough",
+        },
+      ]),
+    ).toBe("rejected");
   });
 
   it("item policy allows excludeId when updating same item", () => {

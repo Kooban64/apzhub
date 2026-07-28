@@ -85,7 +85,10 @@ export function mapTestPlanDomainError(
       retryable: false,
     });
   }
-  if (error instanceof PlanInvariantViolationError || error instanceof PlanReadinessError) {
+  if (
+    error instanceof PlanInvariantViolationError ||
+    error instanceof PlanReadinessError
+  ) {
     return new PlatformServiceError({
       category: "validation",
       code: "VALIDATION_FAILED",
@@ -119,15 +122,24 @@ async function invoke<T>(
 
 /** Platform-facing Test Plan service with short operation names for pipeline auth. */
 export type QepTestPlanPlatformService = {
-  list(ctx: ServiceRequestContext, query?: ListQepTestPlansQuery): Promise<QepTestPlanListResult>;
+  list(
+    ctx: ServiceRequestContext,
+    query?: ListQepTestPlansQuery,
+  ): Promise<QepTestPlanListResult>;
   get(ctx: ServiceRequestContext, id: string): Promise<QepTestPlanDto | null>;
-  getByNumber(ctx: ServiceRequestContext, number: string): Promise<QepTestPlanDto | null>;
+  getByNumber(
+    ctx: ServiceRequestContext,
+    number: string,
+  ): Promise<QepTestPlanDto | null>;
   search(
     ctx: ServiceRequestContext,
     query: string,
     options?: Omit<ListQepTestPlansQuery, "query">,
   ): Promise<QepTestPlanListResult>;
-  createPlan(ctx: ServiceRequestContext, input: CreateQepTestPlanInput): Promise<QepTestPlanDto>;
+  createPlan(
+    ctx: ServiceRequestContext,
+    input: CreateQepTestPlanInput,
+  ): Promise<QepTestPlanDto>;
   updateContent(
     ctx: ServiceRequestContext,
     id: string,
@@ -238,7 +250,10 @@ export type QepTestPlanPlatformService = {
     ctx: ServiceRequestContext,
     id: string,
   ): Promise<readonly QepTestPlanRevisionDto[]>;
-  getExecutionReadiness(ctx: ServiceRequestContext, id: string): Promise<ExecutionReadiness>;
+  getExecutionReadiness(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<ExecutionReadiness>;
 };
 
 export function createQepTestPlanPlatformService(
@@ -261,7 +276,9 @@ export function createQepTestPlanPlatformService(
       return found ? toPlanDto(found, ctx.permissions) : null;
     },
     async getByNumber(ctx, number) {
-      const found = await invoke(ctx, (planCtx) => service.getByNumber(planCtx, number));
+      const found = await invoke(ctx, (planCtx) =>
+        service.getByNumber(planCtx, number),
+      );
       return found ? toPlanDto(found, ctx.permissions) : null;
     },
     async search(ctx, query, options = {}) {
@@ -276,15 +293,21 @@ export function createQepTestPlanPlatformService(
       } satisfies QepTestPlanListResult;
     },
     async createPlan(ctx, input) {
-      const created = await invoke(ctx, (planCtx) => service.createPlan(planCtx, input));
+      const created = await invoke(ctx, (planCtx) =>
+        service.createPlan(planCtx, input),
+      );
       return toPlanDto(created, ctx.permissions);
     },
     async updateContent(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.updateContent(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.updateContent(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async updateMetadata(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.updateMetadata(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.updateMetadata(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async transferOwnership(ctx, id, input) {
@@ -300,11 +323,15 @@ export function createQepTestPlanPlatformService(
       return toPlanDto(updated, ctx.permissions);
     },
     async updateSchedule(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.updateSchedule(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.updateSchedule(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async addItem(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.addItem(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.addItem(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async updateItem(ctx, id, itemId, input) {
@@ -320,47 +347,69 @@ export function createQepTestPlanPlatformService(
       return toPlanDto(updated, ctx.permissions);
     },
     async reorderItems(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.reorderItems(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.reorderItems(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async submitForReview(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.submitForReview(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.submitForReview(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async approve(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.approve(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.approve(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async reject(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.reject(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.reject(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async returnToDraft(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.returnToDraft(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.returnToDraft(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async markReady(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.markReady(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.markReady(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async startExecution(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.startExecution(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.startExecution(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async complete(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.complete(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.complete(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async archive(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.archive(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.archive(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async cancel(ctx, id, input) {
-      const updated = await invoke(ctx, (planCtx) => service.cancel(planCtx, id, input));
+      const updated = await invoke(ctx, (planCtx) =>
+        service.cancel(planCtx, id, input),
+      );
       return toPlanDto(updated, ctx.permissions);
     },
     async supersede(ctx, id, input) {
-      const result = await invoke(ctx, (planCtx) => service.supersede(planCtx, id, input));
+      const result = await invoke(ctx, (planCtx) =>
+        service.supersede(planCtx, id, input),
+      );
       return {
         source: toPlanDto(result.source, ctx.permissions),
         successor: toPlanDto(result.successor, ctx.permissions),
@@ -384,7 +433,9 @@ export function createQepTestPlanPlatformService(
       }));
     },
     async listRevisions(ctx, id) {
-      const revisions = await invoke(ctx, (planCtx) => service.listRevisions(planCtx, id));
+      const revisions = await invoke(ctx, (planCtx) =>
+        service.listRevisions(planCtx, id),
+      );
       return revisions.map((revision) => ({
         versionLabel: revision.versionLabel,
         sealedAt: revision.sealedAt,

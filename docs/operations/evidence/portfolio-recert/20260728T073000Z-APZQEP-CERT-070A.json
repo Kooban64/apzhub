@@ -28,8 +28,19 @@
   },
   "qualityGates": {
     "aggregate": "ALL_MANDATORY_WORKBENCH_COMPONENT_GATES_PASS",
-    "packageTests": { "total": 104, "failed": 0, "result": "PASS", "reverifiedUtc": "2026-07-28" },
-    "presentationSpecificTests": { "routes": 5, "views": 15, "total": 20, "failed": 0, "result": "PASS" },
+    "packageTests": {
+      "total": 104,
+      "failed": 0,
+      "result": "PASS",
+      "reverifiedUtc": "2026-07-28"
+    },
+    "presentationSpecificTests": {
+      "routes": 5,
+      "views": 15,
+      "total": 20,
+      "failed": 0,
+      "result": "PASS"
+    },
     "typecheck": "PASS",
     "playwrightSpecPresent": true,
     "playwrightSpecPath": "testing/playwright/e2e/apzqep-eng-070a-test-plans-workbench.spec.ts",

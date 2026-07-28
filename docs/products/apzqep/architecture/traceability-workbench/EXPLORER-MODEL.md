@@ -8,18 +8,18 @@ List-first navigational inventory of Trace Links with hierarchical grouping, end
 
 ## Capabilities
 
-| Capability | Rule |
-| --- | --- |
-| Hierarchical browsing | Group by Trace Type, endpoint kinds, lifecycle, scope, confidence, authority, origin |
-| Endpoint browsing | Inbound / outbound / both from an artefact reference |
-| Taxonomy browsing | Entry to normative Trace Types |
-| Tenant filtering | Session-authoritative tenant only |
-| Lifecycle / confidence / authority / origin / scope filters | Combinable (AND); saved filters supported |
-| Selection | Single primary; bulk multi-select with action intersection |
-| Row contract | ENG-030A Part 2 list summary + `availableActions` — no N+1 detail |
+| Capability                                                  | Rule                                                                                 |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Hierarchical browsing                                       | Group by Trace Type, endpoint kinds, lifecycle, scope, confidence, authority, origin |
+| Endpoint browsing                                           | Inbound / outbound / both from an artefact reference                                 |
+| Taxonomy browsing                                           | Entry to normative Trace Types                                                       |
+| Tenant filtering                                            | Session-authoritative tenant only                                                    |
+| Lifecycle / confidence / authority / origin / scope filters | Combinable (AND); saved filters supported                                            |
+| Selection                                                   | Single primary; bulk multi-select with action intersection                           |
+| Row contract                                                | ENG-030A Part 2 list summary + `availableActions` — no N+1 detail                    |
 
 ## Non-goals
 
-- Graph rendering  
-- Loading confidential endpoint body content into rows  
-- Client-side business-rule inference  
+- Graph rendering
+- Loading confidential endpoint body content into rows
+- Client-side business-rule inference

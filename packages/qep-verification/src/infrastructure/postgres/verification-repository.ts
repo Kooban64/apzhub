@@ -3,7 +3,10 @@ import { qepVerification, qepVerificationHistory } from "@apzhub/config";
 import { and, asc, desc, eq } from "drizzle-orm";
 import { randomUUID } from "node:crypto";
 
-import type { VerificationAuthority, VerificationAuthorityKind } from "../../domain/verification/verification-authority";
+import type {
+  VerificationAuthority,
+  VerificationAuthorityKind,
+} from "../../domain/verification/verification-authority";
 import type { VerificationDecision } from "../../domain/verification/verification-decision";
 import type { VerificationHistoryEntry } from "../../domain/verification/verification-history";
 import type { VerificationId } from "../../domain/verification/verification-id";
@@ -12,7 +15,10 @@ import type { VerificationOutcome } from "../../domain/verification/verification
 import type { VerificationPriority } from "../../domain/verification/verification-priority";
 import type { VerificationScopeKind } from "../../domain/verification/verification-scope";
 import type { VerificationStatus } from "../../domain/verification/verification-status";
-import type { VerificationSubjectKind, VerificationSubjectReference } from "../../domain/verification/verification-subject";
+import type {
+  VerificationSubjectKind,
+  VerificationSubjectReference,
+} from "../../domain/verification/verification-subject";
 import type { Verification } from "../../domain/verification/verification";
 import type {
   StoredVerification,
@@ -24,8 +30,6 @@ import {
   VerificationNotFoundError,
   VerificationRevisionConflictError,
 } from "../../shared/errors";
-import { toStoredVerification } from "../mappers/verification-mapper";
-
 type VerificationRow = typeof qepVerification.$inferSelect;
 type HistoryRow = typeof qepVerificationHistory.$inferSelect;
 
@@ -54,7 +58,9 @@ function mapVerificationRow(
   const subject: VerificationSubjectReference = {
     kind: row.subjectKind as VerificationSubjectKind,
     artefactId: row.subjectArtefactId,
-    ...(row.subjectContentVersionId ? { contentVersionId: row.subjectContentVersionId } : {}),
+    ...(row.subjectContentVersionId
+      ? { contentVersionId: row.subjectContentVersionId }
+      : {}),
     ...(row.subjectBaselineId ? { baselineId: row.subjectBaselineId } : {}),
     ...(row.subjectExternalUri ? { externalUri: row.subjectExternalUri } : {}),
     owningDomain: row.subjectOwningDomain,
@@ -88,7 +94,9 @@ function mapVerificationRow(
     authority,
     context: {
       ...(row.contextBaselineId ? { baselineId: row.contextBaselineId } : {}),
-      ...(row.contextContentVersionId ? { contentVersionId: row.contextContentVersionId } : {}),
+      ...(row.contextContentVersionId
+        ? { contentVersionId: row.contextContentVersionId }
+        : {}),
       immutable: row.contextImmutable,
     },
     scope: {
@@ -165,7 +173,9 @@ function toInsertValues(verification: Verification) {
     metadataJson: { ...verification.metadata.entries },
 
     decisionOutcome: verification.decision?.outcome ?? null,
-    decisionAt: verification.decision?.decidedAt ? new Date(verification.decision.decidedAt) : null,
+    decisionAt: verification.decision?.decidedAt
+      ? new Date(verification.decision.decidedAt)
+      : null,
     decisionBy: verification.decision?.decidedBy ?? null,
     decisionRationale: verification.decision?.rationale ?? null,
     decisionComment: verification.decision?.comment ?? null,
@@ -182,7 +192,9 @@ function toInsertValues(verification: Verification) {
     withdrawnAt: verification.withdrawnAt ? new Date(verification.withdrawnAt) : null,
     cancelledAt: verification.cancelledAt ? new Date(verification.cancelledAt) : null,
     retiredAt: verification.retiredAt ? new Date(verification.retiredAt) : null,
-    supersededAt: verification.supersededAt ? new Date(verification.supersededAt) : null,
+    supersededAt: verification.supersededAt
+      ? new Date(verification.supersededAt)
+      : null,
     supersededBy: verification.supersededBy ?? null,
     successorVerificationId: verification.successorVerificationId ?? null,
 
@@ -245,7 +257,10 @@ export function createPostgresVerificationRepository(
     }
   }
 
-  async function load(tenantId: string, id: VerificationId): Promise<StoredVerification | null> {
+  async function load(
+    tenantId: string,
+    id: VerificationId,
+  ): Promise<StoredVerification | null> {
     const [row] = await db
       .select()
       .from(qepVerification)
@@ -264,11 +279,17 @@ export function createPostgresVerificationRepository(
           .values(toInsertValues(verification))
           .returning();
         if (!row) throw new VerificationConflictError("Failed to create Verification");
-        await syncHistory(verification.tenantId, verification.id, verification.history.entries);
+        await syncHistory(
+          verification.tenantId,
+          verification.id,
+          verification.history.entries,
+        );
         return mapVerificationRow(row, [...verification.history.entries]);
       } catch (error) {
         if (isUniqueViolation(error)) {
-          throw new VerificationConflictError(`Verification already exists: ${verification.id}`);
+          throw new VerificationConflictError(
+            `Verification already exists: ${verification.id}`,
+          );
         }
         throw error;
       }
@@ -294,7 +315,9 @@ export function createPostgresVerificationRepository(
         if (!row) {
           const existing = await load(verification.tenantId, verification.id);
           if (!existing) {
-            throw new VerificationNotFoundError(`Verification not found: ${verification.id}`);
+            throw new VerificationNotFoundError(
+              `Verification not found: ${verification.id}`,
+            );
           }
           throw new VerificationRevisionConflictError(
             verification.id,
@@ -302,12 +325,18 @@ export function createPostgresVerificationRepository(
             existing.revision,
           );
         }
-        await syncHistory(verification.tenantId, verification.id, verification.history.entries);
+        await syncHistory(
+          verification.tenantId,
+          verification.id,
+          verification.history.entries,
+        );
         const history = await loadHistory(verification.tenantId, verification.id);
         return mapVerificationRow(row, history);
       } catch (error) {
         if (isUniqueViolation(error)) {
-          throw new VerificationConflictError(`Verification already exists: ${verification.id}`);
+          throw new VerificationConflictError(
+            `Verification already exists: ${verification.id}`,
+          );
         }
         throw error;
       }

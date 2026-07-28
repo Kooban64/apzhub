@@ -100,7 +100,10 @@ export async function handleListQepVerifications(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const query = parseQuery(qepVerificationListQuerySchema, request.nextUrl.searchParams);
+  const query = parseQuery(
+    qepVerificationListQuerySchema,
+    request.nextUrl.searchParams,
+  );
   const service = await requireQepVerificationGateway();
   const result = await invoke(context, () =>
     service.listVerifications(context.serviceContext, {
@@ -143,7 +146,9 @@ export async function handleGetQepVerification(
 ) {
   const id = await param(routeContext, "verificationId", qepVerificationIdParamSchema);
   const service = await requireQepVerificationGateway();
-  const item = await invoke(context, () => service.getVerification(context.serviceContext, id));
+  const item = await invoke(context, () =>
+    service.getVerification(context.serviceContext, id),
+  );
   if (!item) {
     throw new PlatformApiHttpError(404, {
       code: "NOT_FOUND",

@@ -269,7 +269,8 @@ const defaultClient = createQepTestSpecificationHttpClient();
 
 export const listSpecifications = defaultClient.listSpecifications.bind(defaultClient);
 export const getSpecification = defaultClient.getSpecification.bind(defaultClient);
-export const createSpecification = defaultClient.createSpecification.bind(defaultClient);
+export const createSpecification =
+  defaultClient.createSpecification.bind(defaultClient);
 export const updateDraft = defaultClient.updateDraft.bind(defaultClient);
 export const submitForReview = defaultClient.submitForReview.bind(defaultClient);
 export const approveSpecification = defaultClient.approve.bind(defaultClient);
@@ -282,6 +283,7 @@ export const getSpecificationHistory = defaultClient.getHistory.bind(defaultClie
 export const listSpecificationVersions = defaultClient.listVersions.bind(defaultClient);
 export const listSpecificationRelationships =
   defaultClient.listRelationships.bind(defaultClient);
-export const addSpecificationRelationship = defaultClient.addRelationship.bind(defaultClient);
+export const addSpecificationRelationship =
+  defaultClient.addRelationship.bind(defaultClient);
 export const removeSpecificationRelationship =
   defaultClient.removeRelationship.bind(defaultClient);

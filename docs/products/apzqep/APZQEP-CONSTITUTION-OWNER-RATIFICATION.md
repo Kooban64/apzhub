@@ -8,11 +8,11 @@
 
 ## Governing Authority
 
-- Document 000 v1.0.0  
-- APZQEP-CONSTITUTION v1.0.0  
-- OES-000 v1.0.0  
-- OES-001 v1.0.0  
-- OES-002 v1.1.0  
+- Document 000 v1.0.0
+- APZQEP-CONSTITUTION v1.0.0
+- OES-000 v1.0.0
+- OES-001 v1.0.0
+- OES-002 v1.1.0
 
 ## Decision
 
@@ -24,36 +24,36 @@
 
 ## Ratification assessment
 
-The Constitution appropriately establishes permanent governing principles for APZQEP without duplicating implementation standards. It defines *what must always be true*; OES documents, engineering specifications, and capability documentation define *how those principles are implemented*.
+The Constitution appropriately establishes permanent governing principles for APZQEP without duplicating implementation standards. It defines _what must always be true_; OES documents, engineering specifications, and capability documentation define _how those principles are implemented_.
 
-| Constitutional Area | Result |
-| ------------------- | ------ |
-| Vision and Purpose | ✅ Ratified |
-| Authority Hierarchy | ✅ Ratified |
-| Architectural Principles | ✅ Ratified |
-| Engineering Principles | ✅ Ratified |
-| Governance Principles | ✅ Ratified |
-| Certification Principles | ✅ Ratified |
-| Versioning Policy | ✅ Ratified |
-| Freeze Policy | ✅ Ratified |
-| Change Control Principles | ✅ Ratified |
-| AI Engineering Principles | ✅ Ratified |
-| Platform Invariants | ✅ Ratified |
+| Constitutional Area            | Result      |
+| ------------------------------ | ----------- |
+| Vision and Purpose             | ✅ Ratified |
+| Authority Hierarchy            | ✅ Ratified |
+| Architectural Principles       | ✅ Ratified |
+| Engineering Principles         | ✅ Ratified |
+| Governance Principles          | ✅ Ratified |
+| Certification Principles       | ✅ Ratified |
+| Versioning Policy              | ✅ Ratified |
+| Freeze Policy                  | ✅ Ratified |
+| Change Control Principles      | ✅ Ratified |
+| AI Engineering Principles      | ✅ Ratified |
+| Platform Invariants            | ✅ Ratified |
 | Mandatory Capability Lifecycle | ✅ Ratified |
 
 ## Constitutional invariants (binding)
 
 ### Architecture
 
-- Domain owns business behaviour.  
-- Infrastructure orchestrates capability services.  
-- Workbench presents information and invokes authorised actions only.  
+- Domain owns business behaviour.
+- Infrastructure orchestrates capability services.
+- Workbench presents information and invokes authorised actions only.
 - Architectural separation between layers is mandatory.
 
 ### User Interface
 
-- Workbench never owns business behaviour.  
-- `availableActions` is the sole authority for executable user actions.  
+- Workbench never owns business behaviour.
+- `availableActions` is the sole authority for executable user actions.
 - Presentation must never infer or invent business permissions.
 
 ### Governance
@@ -86,8 +86,8 @@ This document is the constitutional entry point for APZQEP.
 
 ## Amendment rule
 
-- Amendments require a dedicated Owner-authorised constitutional programme.  
-- Amendments shall not be introduced indirectly through engineering specifications, architecture documents, or capability documentation.  
+- Amendments require a dedicated Owner-authorised constitutional programme.
+- Amendments shall not be introduced indirectly through engineering specifications, architecture documents, or capability documentation.
 - Subordinate documents shall remain consistent with the Constitution.
 
 ## Final declaration (Owner)

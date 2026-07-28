@@ -11,10 +11,6 @@
  * - Does not emit Platform business audit events
  */
 
-import { createRequire } from "node:module";
-
-const require = createRequire(import.meta.url);
-
 async function main() {
   const tenantId = process.env.TENANT_ID;
   if (!tenantId) {

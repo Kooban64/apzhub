@@ -80,8 +80,12 @@ describe("APZQEP-ENG-020C qep platform services", () => {
   });
 
   it("requires explicit postgres for production and explicit memory for tests", () => {
-    expect(() => createQepPlatformServicesForProduction({} as never)).toThrow(/postgresDb/);
-    expect(() => createQepPlatformServicesForTest({})).toThrow(/allowInMemoryPersistence/);
+    expect(() => createQepPlatformServicesForProduction({} as never)).toThrow(
+      /postgresDb/,
+    );
+    expect(() => createQepPlatformServicesForTest({})).toThrow(
+      /allowInMemoryPersistence/,
+    );
   });
 
   it("env enablement is enabled unless explicitly false", () => {
@@ -121,16 +125,20 @@ describe("APZQEP-ENG-020C qep platform services", () => {
 
   it("maps gateway operations to qep traceability permissions", () => {
     expect(
-      resolveOperationAuthorization("qepTraceability", "listTraceLinks")?.requiredPermission,
+      resolveOperationAuthorization("qepTraceability", "listTraceLinks")
+        ?.requiredPermission,
     ).toBe("qep.traceability.trace_links.view");
     expect(
-      resolveOperationAuthorization("qepTraceability", "createTraceLink")?.requiredPermission,
+      resolveOperationAuthorization("qepTraceability", "createTraceLink")
+        ?.requiredPermission,
     ).toBe("qep.traceability.trace_links.create");
     expect(
-      resolveOperationAuthorization("qepTraceability", "validateTraceLink")?.requiredPermission,
+      resolveOperationAuthorization("qepTraceability", "validateTraceLink")
+        ?.requiredPermission,
     ).toBe("qep.traceability.trace_links.validate");
     expect(
-      resolveOperationAuthorization("qepTraceability", "approveTraceLink")?.requiredPermission,
+      resolveOperationAuthorization("qepTraceability", "approveTraceLink")
+        ?.requiredPermission,
     ).toBe("qep.traceability.trace_links.approve");
     expect(
       resolveOperationAuthorization("qepTraceability", "listTraceLinkTaxonomy")
@@ -162,10 +170,16 @@ describe("APZQEP-ENG-020C qep platform services", () => {
     });
     expect(created.lifecycleState).toBe("draft");
 
-    const validated = await gateway.qep.traceability.validateTraceLink(traceCtx(), created.id);
+    const validated = await gateway.qep.traceability.validateTraceLink(
+      traceCtx(),
+      created.id,
+    );
     expect(validated.lifecycleState).toBe("validated");
 
-    const approved = await gateway.qep.traceability.approveTraceLink(traceCtx(), validated.id);
+    const approved = await gateway.qep.traceability.approveTraceLink(
+      traceCtx(),
+      validated.id,
+    );
     expect(approved.lifecycleState).toBe("approved");
 
     const taxonomy = await gateway.qep.traceability.listTraceLinkTaxonomy(traceCtx());
@@ -180,16 +194,20 @@ describe("APZQEP-ENG-020C qep platform services", () => {
 
   it("maps gateway operations to qep verification permissions", () => {
     expect(
-      resolveOperationAuthorization("qepVerification", "listVerifications")?.requiredPermission,
+      resolveOperationAuthorization("qepVerification", "listVerifications")
+        ?.requiredPermission,
     ).toBe("qep.verification.view");
     expect(
-      resolveOperationAuthorization("qepVerification", "createVerification")?.requiredPermission,
+      resolveOperationAuthorization("qepVerification", "createVerification")
+        ?.requiredPermission,
     ).toBe("qep.verification.create");
     expect(
-      resolveOperationAuthorization("qepVerification", "requestVerification")?.requiredPermission,
+      resolveOperationAuthorization("qepVerification", "requestVerification")
+        ?.requiredPermission,
     ).toBe("qep.verification.request");
     expect(
-      resolveOperationAuthorization("qepVerification", "completeVerification")?.requiredPermission,
+      resolveOperationAuthorization("qepVerification", "completeVerification")
+        ?.requiredPermission,
     ).toBe("qep.verification.complete");
     expect(
       resolveOperationAuthorization("qepVerification", "getVerificationHistory")
@@ -212,10 +230,13 @@ describe("APZQEP-ENG-020C qep platform services", () => {
     const bundle = createPlatformServices({ qepPlatform: qep });
     const gateway = bundle.gateway;
 
-    const created = await gateway.qep.verification.createVerification(verificationCtx(), {
-      subject: { kind: "requirement", artefactId: "req_1" },
-      authority: { kind: "system", actorId: "user_1" },
-    });
+    const created = await gateway.qep.verification.createVerification(
+      verificationCtx(),
+      {
+        subject: { kind: "requirement", artefactId: "req_1" },
+        authority: { kind: "system", actorId: "user_1" },
+      },
+    );
     expect(created.status).toBe("draft");
 
     const requested = await gateway.qep.verification.requestVerification(
@@ -259,23 +280,28 @@ describe("APZQEP-ENG-020C qep platform services", () => {
   });
 
   it("maps gateway operations to qep test specification permissions", () => {
-    expect(resolveOperationAuthorization("qepTestSpecification", "list")?.requiredPermission).toBe(
-      "qep.specification.read",
-    );
-    expect(resolveOperationAuthorization("qepTestSpecification", "create")?.requiredPermission).toBe(
-      "qep.specification.create",
-    );
     expect(
-      resolveOperationAuthorization("qepTestSpecification", "submitForReview")?.requiredPermission,
+      resolveOperationAuthorization("qepTestSpecification", "list")?.requiredPermission,
+    ).toBe("qep.specification.read");
+    expect(
+      resolveOperationAuthorization("qepTestSpecification", "create")
+        ?.requiredPermission,
+    ).toBe("qep.specification.create");
+    expect(
+      resolveOperationAuthorization("qepTestSpecification", "submitForReview")
+        ?.requiredPermission,
     ).toBe("qep.specification.review");
     expect(
-      resolveOperationAuthorization("qepTestSpecification", "approve")?.requiredPermission,
+      resolveOperationAuthorization("qepTestSpecification", "approve")
+        ?.requiredPermission,
     ).toBe("qep.specification.approve");
     expect(
-      resolveOperationAuthorization("qepTestSpecification", "listHistory")?.requiredPermission,
+      resolveOperationAuthorization("qepTestSpecification", "listHistory")
+        ?.requiredPermission,
     ).toBe("qep.specification.history.view");
     expect(
-      resolveOperationAuthorization("qepTestSpecification", "search")?.requiredPermission,
+      resolveOperationAuthorization("qepTestSpecification", "search")
+        ?.requiredPermission,
     ).toBe("qep.specification.search");
   });
 
@@ -304,9 +330,13 @@ describe("APZQEP-ENG-020C qep platform services", () => {
     );
     expect(submitted.status).toBe("under_review");
 
-    const approved = await gateway.qep.specifications.approve(specificationCtx(), submitted.id, {
-      approvalComment: "Approved",
-    });
+    const approved = await gateway.qep.specifications.approve(
+      specificationCtx(),
+      submitted.id,
+      {
+        approvalComment: "Approved",
+      },
+    );
     expect(approved.status).toBe("approved");
     expect(approved.isAuthoritative).toBe(true);
 
@@ -324,27 +354,28 @@ describe("APZQEP-ENG-020C qep platform services", () => {
   });
 
   it("maps gateway operations to qep test plan permissions", () => {
-    expect(resolveOperationAuthorization("qepTestPlan", "list")?.requiredPermission).toBe(
-      "qep.plan.read",
-    );
-    expect(resolveOperationAuthorization("qepTestPlan", "createPlan")?.requiredPermission).toBe(
-      "qep.plan.create",
-    );
     expect(
-      resolveOperationAuthorization("qepTestPlan", "submitForReview")?.requiredPermission,
+      resolveOperationAuthorization("qepTestPlan", "list")?.requiredPermission,
+    ).toBe("qep.plan.read");
+    expect(
+      resolveOperationAuthorization("qepTestPlan", "createPlan")?.requiredPermission,
+    ).toBe("qep.plan.create");
+    expect(
+      resolveOperationAuthorization("qepTestPlan", "submitForReview")
+        ?.requiredPermission,
     ).toBe("qep.plan.submit");
-    expect(resolveOperationAuthorization("qepTestPlan", "approve")?.requiredPermission).toBe(
-      "qep.plan.approve",
-    );
-    expect(resolveOperationAuthorization("qepTestPlan", "listHistory")?.requiredPermission).toBe(
-      "qep.plan.history.view",
-    );
-    expect(resolveOperationAuthorization("qepTestPlan", "search")?.requiredPermission).toBe(
-      "qep.plan.search",
-    );
-    expect(resolveOperationAuthorization("qepTestPlan", "supersede")?.requiredPermission).toBe(
-      "qep.plan.supersede",
-    );
+    expect(
+      resolveOperationAuthorization("qepTestPlan", "approve")?.requiredPermission,
+    ).toBe("qep.plan.approve");
+    expect(
+      resolveOperationAuthorization("qepTestPlan", "listHistory")?.requiredPermission,
+    ).toBe("qep.plan.history.view");
+    expect(
+      resolveOperationAuthorization("qepTestPlan", "search")?.requiredPermission,
+    ).toBe("qep.plan.search");
+    expect(
+      resolveOperationAuthorization("qepTestPlan", "supersede")?.requiredPermission,
+    ).toBe("qep.plan.supersede");
   });
 
   it("wires the test plan gateway through create, item add, submit, approve, and lifecycle", async () => {

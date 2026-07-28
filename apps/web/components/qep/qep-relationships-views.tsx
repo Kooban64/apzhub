@@ -1,6 +1,9 @@
 "use client";
 
-import type { QepRelationshipDto, QepRelationshipTaxonomyDto } from "@apzhub/qep-contracts";
+import type {
+  QepRelationshipDto,
+  QepRelationshipTaxonomyDto,
+} from "@apzhub/qep-contracts";
 import { Button, Input } from "@apzhub/ui";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
@@ -69,7 +72,9 @@ function endpointLabel(endpoint: QepRelationshipDto["source"]): string {
 
 function RationaleIndicator({ rationale }: { readonly rationale?: string }) {
   if (!rationale) {
-    return <span className="text-xs text-[var(--color-muted-foreground)]">No rationale</span>;
+    return (
+      <span className="text-xs text-[var(--color-muted-foreground)]">No rationale</span>
+    );
   }
   return (
     <span
@@ -85,9 +90,8 @@ function RationaleIndicator({ rationale }: { readonly rationale?: string }) {
 /** APZQEP-ENG-020F Part 3 — Requirements Relationships list (Relationship Explorer). */
 export function QepRelationshipsListView() {
   const [type, setType] = useState<string>("");
-  const [lifecycleState, setLifecycleState] = useState<QepRelationshipListParams["lifecycleState"]>(
-    undefined,
-  );
+  const [lifecycleState, setLifecycleState] =
+    useState<QepRelationshipListParams["lifecycleState"]>(undefined);
   const [conflictsOnly, setConflictsOnly] = useState(false);
   const startedAt = useMemo(() => Date.now(), []);
 
@@ -173,7 +177,8 @@ export function QepRelationshipsListView() {
             value={lifecycleState ?? ""}
             onChange={(event) =>
               setLifecycleState(
-                (event.target.value || undefined) as QepRelationshipListParams["lifecycleState"],
+                (event.target.value ||
+                  undefined) as QepRelationshipListParams["lifecycleState"],
               )
             }
           >
@@ -198,7 +203,9 @@ export function QepRelationshipsListView() {
       {query.isError ? (
         <QepErrorState
           message={
-            query.error instanceof Error ? query.error.message : "Unable to load relationships"
+            query.error instanceof Error
+              ? query.error.message
+              : "Unable to load relationships"
           }
           onRetry={() => void query.refetch()}
         />
@@ -350,7 +357,11 @@ function OptionalContentVersionPin({
   );
 }
 
-function TaxonomyRationaleHint({ taxonomy }: { readonly taxonomy?: QepRelationshipTaxonomyDto }) {
+function TaxonomyRationaleHint({
+  taxonomy,
+}: {
+  readonly taxonomy?: QepRelationshipTaxonomyDto;
+}) {
   if (!taxonomy) {
     return null;
   }
@@ -360,7 +371,8 @@ function TaxonomyRationaleHint({ taxonomy }: { readonly taxonomy?: QepRelationsh
       role="note"
       data-testid="qep-relationships-rationale-policy"
     >
-      Rationale policy for <strong>{taxonomy.displayName}</strong>: {taxonomy.rationalePolicy}
+      Rationale policy for <strong>{taxonomy.displayName}</strong>:{" "}
+      {taxonomy.rationalePolicy}
     </p>
   );
 }
@@ -409,12 +421,16 @@ export function QepRelationshipCreateView() {
       return;
     }
     const source = {
-      mode: sourceContentVersionId ? ("content_version_pinned" as const) : ("requirement" as const),
+      mode: sourceContentVersionId
+        ? ("content_version_pinned" as const)
+        : ("requirement" as const),
       requirementId: sourceRequirementId,
       ...(sourceContentVersionId ? { contentVersionId: sourceContentVersionId } : {}),
     };
     const target = {
-      mode: targetContentVersionId ? ("content_version_pinned" as const) : ("requirement" as const),
+      mode: targetContentVersionId
+        ? ("content_version_pinned" as const)
+        : ("requirement" as const),
       requirementId: targetRequirementId,
       ...(targetContentVersionId ? { contentVersionId: targetContentVersionId } : {}),
     };
@@ -445,7 +461,9 @@ export function QepRelationshipCreateView() {
           <div aria-live="polite">
             <QepErrorState
               message={
-                mutation.error instanceof Error ? mutation.error.message : "Create failed"
+                mutation.error instanceof Error
+                  ? mutation.error.message
+                  : "Create failed"
               }
             />
           </div>
@@ -573,7 +591,10 @@ export function QepRelationshipCreateView() {
           <Button
             type="submit"
             disabled={
-              mutation.isPending || !sourceRequirementId || !targetRequirementId || !type
+              mutation.isPending ||
+              !sourceRequirementId ||
+              !targetRequirementId ||
+              !type
             }
             data-testid="qep-relationships-create-submit"
           >
@@ -624,11 +645,15 @@ function LifecycleConfirmDialog({
 }
 
 /** Multi-pane relationship detail view. */
-export function QepRelationshipDetailView({ relationshipId }: { readonly relationshipId: string }) {
+export function QepRelationshipDetailView({
+  relationshipId,
+}: {
+  readonly relationshipId: string;
+}) {
   const queryClient = useQueryClient();
-  const [pendingLifecycle, setPendingLifecycle] = useState<null | "activate" | "deprecate" | "retire">(
-    null,
-  );
+  const [pendingLifecycle, setPendingLifecycle] = useState<
+    null | "activate" | "deprecate" | "retire"
+  >(null);
   const [editingField, setEditingField] = useState<
     null | "rationale" | "strength" | "criticality" | "classification" | "scope"
   >(null);
@@ -673,7 +698,10 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
     onSuccess: () => {
       setPendingLifecycle(null);
       invalidate();
-      emitQepWorkbenchTelemetry({ event: "relationships.activate", outcome: "success" });
+      emitQepWorkbenchTelemetry({
+        event: "relationships.activate",
+        outcome: "success",
+      });
     },
     onError: () => {
       emitQepWorkbenchTelemetry({ event: "relationships.activate", outcome: "error" });
@@ -685,7 +713,10 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
     onSuccess: () => {
       setPendingLifecycle(null);
       invalidate();
-      emitQepWorkbenchTelemetry({ event: "relationships.deprecate", outcome: "success" });
+      emitQepWorkbenchTelemetry({
+        event: "relationships.deprecate",
+        outcome: "success",
+      });
     },
     onError: () => {
       emitQepWorkbenchTelemetry({ event: "relationships.deprecate", outcome: "error" });
@@ -741,7 +772,8 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
   });
 
   const classificationMutation = useMutation({
-    mutationFn: () => updateRelationshipClassification(relationshipId, editClassification),
+    mutationFn: () =>
+      updateRelationshipClassification(relationshipId, editClassification),
     onSuccess: () => {
       setEditingField(null);
       invalidate();
@@ -774,7 +806,9 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
   if (query.isError || !query.data) {
     return (
       <QepErrorState
-        message={query.error instanceof Error ? query.error.message : "Relationship not found"}
+        message={
+          query.error instanceof Error ? query.error.message : "Relationship not found"
+        }
         onRetry={() => void query.refetch()}
       />
     );
@@ -799,7 +833,8 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
           role="status"
           data-testid="qep-relationships-immutable-banner"
         >
-          This relationship is <strong>{relationship.lifecycleState}</strong> and is immutable.
+          This relationship is <strong>{relationship.lifecycleState}</strong> and is
+          immutable.
         </p>
       ) : null}
       {endpointHasPin(relationship.source) || endpointHasPin(relationship.target) ? (
@@ -830,14 +865,18 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
           <QepPanel title="Context">
             <dl className="space-y-2 text-sm">
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Lifecycle</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Lifecycle
+                </dt>
                 <dd data-testid="qep-relationships-status">
                   <QepStatusBadge status={relationship.lifecycleState} />{" "}
                   <span>{relationship.lifecycleState}</span>
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Scope</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Scope
+                </dt>
                 <dd>
                   {relationship.scope.kind}
                   {relationship.scope.referenceId
@@ -846,11 +885,15 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Revision</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Revision
+                </dt>
                 <dd>{relationship.revision}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Created</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Created
+                </dt>
                 <dd>{formatDate(relationship.createdAt)}</dd>
               </div>
             </dl>
@@ -861,14 +904,20 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
           <QepPanel title="Summary">
             <dl className="grid gap-3 text-sm sm:grid-cols-2">
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Type</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Type
+                </dt>
                 <dd>{relationship.type}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Source</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Source
+                </dt>
                 <dd>
                   <Link
-                    href={QEP_REQUIREMENTS_ROUTES.detail(relationship.source.requirementId)}
+                    href={QEP_REQUIREMENTS_ROUTES.detail(
+                      relationship.source.requirementId,
+                    )}
                     className="underline"
                   >
                     {endpointLabel(relationship.source)}
@@ -876,10 +925,14 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Target</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Target
+                </dt>
                 <dd>
                   <Link
-                    href={QEP_REQUIREMENTS_ROUTES.detail(relationship.target.requirementId)}
+                    href={QEP_REQUIREMENTS_ROUTES.detail(
+                      relationship.target.requirementId,
+                    )}
                     className="underline"
                   >
                     {endpointLabel(relationship.target)}
@@ -887,19 +940,27 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Strength</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Strength
+                </dt>
                 <dd>{relationship.strength}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Criticality</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Criticality
+                </dt>
                 <dd>{relationship.criticality}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Classification</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Classification
+                </dt>
                 <dd>{relationship.classification}</dd>
               </div>
               <div className="sm:col-span-2">
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Rationale</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Rationale
+                </dt>
                 <dd>{relationship.rationale ?? "—"}</dd>
               </div>
             </dl>
@@ -908,7 +969,10 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
 
         <aside aria-label="Relationship inspector">
           <QepPanel title="Inspector">
-            <div className="flex flex-col gap-2" data-testid="qep-relationships-actions">
+            <div
+              className="flex flex-col gap-2"
+              data-testid="qep-relationships-actions"
+            >
               {actions.has("activate") ? (
                 <Button
                   type="button"
@@ -1014,7 +1078,10 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
                 </Button>
               ) : null}
               {actions.size === 0 ? (
-                <p className="text-sm text-[var(--color-muted-foreground)]" role="status">
+                <p
+                  className="text-sm text-[var(--color-muted-foreground)]"
+                  role="status"
+                >
                   Read-only — no actions available.
                 </p>
               ) : null}
@@ -1032,7 +1099,8 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
                       key={`${entry.at}-${index}`}
                       className="rounded-md border border-[var(--color-border)] p-2"
                     >
-                      <span className="font-medium">{entry.kind}</span> — {entry.summary}
+                      <span className="font-medium">{entry.kind}</span> —{" "}
+                      {entry.summary}
                       <p className="text-[var(--color-muted-foreground)]">
                         {entry.at} · {entry.by}
                       </p>
@@ -1265,7 +1333,11 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
               </select>
             </label>
             <div className="flex gap-2">
-              <Button type="submit" size="sm" disabled={classificationMutation.isPending}>
+              <Button
+                type="submit"
+                size="sm"
+                disabled={classificationMutation.isPending}
+              >
                 Save
               </Button>
               <Button
@@ -1339,9 +1411,9 @@ export function QepRelationshipDetailView({ relationshipId }: { readonly relatio
         </QepPanel>
       ) : null}
 
-      {(activateMutation.isError ||
-        deprecateMutation.isError ||
-        retireMutation.isError) ? (
+      {activateMutation.isError ||
+      deprecateMutation.isError ||
+      retireMutation.isError ? (
         <div aria-live="polite">
           <QepErrorState
             message={(() => {
@@ -1374,13 +1446,16 @@ export function QepRequirementRelationshipsPanel({
   });
 
   const outbound =
-    query.data?.filter((relationship) => relationship.source.requirementId === requirementId) ??
-    [];
+    query.data?.filter(
+      (relationship) => relationship.source.requirementId === requirementId,
+    ) ?? [];
   const inbound =
-    query.data?.filter((relationship) => relationship.target.requirementId === requirementId) ??
-    [];
+    query.data?.filter(
+      (relationship) => relationship.target.requirementId === requirementId,
+    ) ?? [];
   const conflictCount =
-    query.data?.filter((relationship) => relationship.type === "conflicts_with").length ?? 0;
+    query.data?.filter((relationship) => relationship.type === "conflicts_with")
+      .length ?? 0;
 
   return (
     <QepPanel title="Relationships">
@@ -1388,15 +1463,21 @@ export function QepRequirementRelationshipsPanel({
       {query.isError ? (
         <QepErrorState
           message={
-            query.error instanceof Error ? query.error.message : "Unable to load relationships"
+            query.error instanceof Error
+              ? query.error.message
+              : "Unable to load relationships"
           }
           onRetry={() => void query.refetch()}
         />
       ) : null}
       {query.isSuccess ? (
-        <div className="space-y-3 text-sm" data-testid="qep-requirement-relationships-panel">
+        <div
+          className="space-y-3 text-sm"
+          data-testid="qep-requirement-relationships-panel"
+        >
           <p>
-            <strong>{outbound.length}</strong> outbound · <strong>{inbound.length}</strong> inbound
+            <strong>{outbound.length}</strong> outbound ·{" "}
+            <strong>{inbound.length}</strong> inbound
             {conflictCount > 0 ? (
               <span className="ml-2 text-[var(--color-destructive)]">
                 · {conflictCount} conflict{conflictCount === 1 ? "" : "s"}
@@ -1454,16 +1535,24 @@ export function QepRequirementRelationshipsPanel({
  */
 export function QepRelationshipSupersedeView() {
   const router = useRouter();
-  const [successorRequirementId, setSuccessorRequirementId] = useState<string | null>(null);
-  const [predecessorRequirementId, setPredecessorRequirementId] = useState<string | null>(null);
+  const [successorRequirementId, setSuccessorRequirementId] = useState<string | null>(
+    null,
+  );
+  const [predecessorRequirementId, setPredecessorRequirementId] = useState<
+    string | null
+  >(null);
   const [rationale, setRationale] = useState("");
   const [scopeKind, setScopeKind] = useState("product");
   const [scopeReferenceId, setScopeReferenceId] = useState("");
 
   const mutation = useMutation({
-    mutationFn: (input: SupersedeQepRelationshipClientInput) => supersedeRelationship(input),
+    mutationFn: (input: SupersedeQepRelationshipClientInput) =>
+      supersedeRelationship(input),
     onSuccess: (created) => {
-      emitQepWorkbenchTelemetry({ event: "relationships.supersede", outcome: "success" });
+      emitQepWorkbenchTelemetry({
+        event: "relationships.supersede",
+        outcome: "success",
+      });
       router.push(QEP_REQUIREMENTS_ROUTES.relationships.detail(created.id));
     },
     onError: () => {
@@ -1495,14 +1584,16 @@ export function QepRelationshipSupersedeView() {
     >
       <QepPanel title="Supersession">
         <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
-          Successor replaces predecessor for forward work. Rationale is mandatory. No delete or
-          restore of historical facts.
+          Successor replaces predecessor for forward work. Rationale is mandatory. No
+          delete or restore of historical facts.
         </p>
         {mutation.isError ? (
           <div aria-live="polite">
             <QepErrorState
               message={
-                mutation.error instanceof Error ? mutation.error.message : "Supersede failed"
+                mutation.error instanceof Error
+                  ? mutation.error.message
+                  : "Supersede failed"
               }
             />
           </div>
@@ -1575,7 +1666,11 @@ export function QepRelationshipSupersedeView() {
 }
 
 /** Dispatches among the relationship surfaces based on pathname. */
-export function QepRelationshipsRouterView({ pathname }: { readonly pathname: string }) {
+export function QepRelationshipsRouterView({
+  pathname,
+}: {
+  readonly pathname: string;
+}) {
   const normalized = pathname.replace(/\/+$/, "");
   if (isQepRelationshipsNewRoute(normalized)) {
     return <QepRelationshipCreateView />;

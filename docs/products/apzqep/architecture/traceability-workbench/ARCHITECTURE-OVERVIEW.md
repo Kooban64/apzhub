@@ -19,12 +19,12 @@ Platform Desktop Shell (005 / 016–023)
 
 ## Key separations
 
-| Separation | Rule |
-| ---------- | ---- |
-| ARCH-006 vs ARCH-008 | Grammar reused; Traceability specialises content |
-| Trace Links vs Requirements Relationships | Distinct UX and permissions |
-| SoR vs analysis | Coverage / Impact are future projections |
-| UI vs domain | Client never invents lifecycle or authority |
+| Separation                                | Rule                                             |
+| ----------------------------------------- | ------------------------------------------------ |
+| ARCH-006 vs ARCH-008                      | Grammar reused; Traceability specialises content |
+| Trace Links vs Requirements Relationships | Distinct UX and permissions                      |
+| SoR vs analysis                           | Coverage / Impact are future projections         |
+| UI vs domain                              | Client never invents lifecycle or authority      |
 
 ## Downstream gate
 

@@ -7,24 +7,24 @@
 
 ## Programme under review
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-TRACE-001 — Traceability Capability Certification & Baseline |
-| Nature | Documentation / governance only |
-| Certification class (proposed) | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Recommendation (proposed) | **PRODUCTION READY** |
-| Authoritative report | [TRACEABILITY-CERTIFICATION.md](./TRACEABILITY-CERTIFICATION.md) |
-| Decision draft | [CERTIFICATION-DECISION.md](./CERTIFICATION-DECISION.md) |
+| Field                          | Value                                                               |
+| ------------------------------ | ------------------------------------------------------------------- |
+| Programme                      | APZQEP-TRACE-001 — Traceability Capability Certification & Baseline |
+| Nature                         | Documentation / governance only                                     |
+| Certification class (proposed) | **PRODUCTION_READY_WITH_LIMITATIONS**                               |
+| Recommendation (proposed)      | **PRODUCTION READY**                                                |
+| Authoritative report           | [TRACEABILITY-CERTIFICATION.md](./TRACEABILITY-CERTIFICATION.md)    |
+| Decision draft                 | [CERTIFICATION-DECISION.md](./CERTIFICATION-DECISION.md)            |
 
 ## Prerequisites (already closed)
 
-| Prerequisite | Status |
-| ------------ | ------ |
-| APZQEP-ARCH-007 | ACCEPTED |
-| APZQEP-ENG-030A Part 1 | ACCEPTED |
-| APZQEP-ENG-030A Part 2 | ACCEPTED |
-| APZQEP-ARCH-008 | ACCEPTED |
-| APZQEP-ENG-030C | ACCEPTED (`traceability/workbench/OWNER-ACCEPTANCE.md`) |
+| Prerequisite           | Status                                                  |
+| ---------------------- | ------------------------------------------------------- |
+| APZQEP-ARCH-007        | ACCEPTED                                                |
+| APZQEP-ENG-030A Part 1 | ACCEPTED                                                |
+| APZQEP-ENG-030A Part 2 | ACCEPTED                                                |
+| APZQEP-ARCH-008        | ACCEPTED                                                |
+| APZQEP-ENG-030C        | ACCEPTED (`traceability/workbench/OWNER-ACCEPTANCE.md`) |
 
 ## Owner checklist
 
@@ -40,14 +40,14 @@
 
 ## Decision record (Owner completes)
 
-| Field | Value |
-| ----- | ----- |
-| Decision | _Pending — not accepted_ |
-| Date | |
-| Owner | |
-| Package | `@apzhub/qep-traceability` **1.0.0** |
-| Certification class | PRODUCTION_READY_WITH_LIMITATIONS _(proposed)_ |
-| Acceptance evidence path | _(to be filed on Acceptance)_ |
+| Field                    | Value                                          |
+| ------------------------ | ---------------------------------------------- |
+| Decision                 | _Pending — not accepted_                       |
+| Date                     |                                                |
+| Owner                    |                                                |
+| Package                  | `@apzhub/qep-traceability` **1.0.0**           |
+| Certification class      | PRODUCTION_READY_WITH_LIMITATIONS _(proposed)_ |
+| Acceptance evidence path | _(to be filed on Acceptance)_                  |
 
 ## Effect if Accepted (not yet in force)
 

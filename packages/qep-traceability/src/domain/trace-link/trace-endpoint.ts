@@ -55,7 +55,11 @@ function assertArtefactIdShape(kind: TraceEndpointKind, artefactId: string): voi
       `Trace endpoint kind ${kind} requires artefactId matching ${prefix}`,
     );
   }
-  if (!prefix && !/^[a-z][a-z0-9]*_[A-Za-z0-9_-]+$/.test(artefactId) && kind !== "external_reference") {
+  if (
+    !prefix &&
+    !/^[a-z][a-z0-9]*_[A-Za-z0-9_-]+$/.test(artefactId) &&
+    kind !== "external_reference"
+  ) {
     throw new TraceInvariantViolation(
       `Trace endpoint artefactId must use prefix_id form for kind ${kind}`,
     );
@@ -84,17 +88,22 @@ export function createTraceEndpointReference(input: {
   if (kind === "external_reference") {
     const externalUri = input.externalUri?.trim();
     if (!externalUri) {
-      throw new TraceInvariantViolation("external_reference endpoint requires externalUri");
+      throw new TraceInvariantViolation(
+        "external_reference endpoint requires externalUri",
+      );
     }
     try {
-      // eslint-disable-next-line no-new
       new URL(externalUri);
     } catch {
-      throw new TraceInvariantViolation("external_reference externalUri must be a valid URI");
+      throw new TraceInvariantViolation(
+        "external_reference externalUri must be a valid URI",
+      );
     }
     const artefactId = input.artefactId.trim();
     if (!artefactId) {
-      throw new TraceInvariantViolation("external_reference endpoint requires artefactId");
+      throw new TraceInvariantViolation(
+        "external_reference endpoint requires artefactId",
+      );
     }
     return {
       kind,
@@ -119,7 +128,11 @@ export function createTraceEndpointReference(input: {
   if (baselineId && !/^rbl_[A-Za-z0-9_-]+$/.test(baselineId)) {
     throw new TraceInvariantViolation("Endpoint baselineId must start with rbl_");
   }
-  if (kind === "requirement_content_version" && !contentVersionId && !artefactId.startsWith("rcv_")) {
+  if (
+    kind === "requirement_content_version" &&
+    !contentVersionId &&
+    !artefactId.startsWith("rcv_")
+  ) {
     throw new TraceInvariantViolation(
       "requirement_content_version endpoint requires contentVersionId or rcv_ artefactId",
     );

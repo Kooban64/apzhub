@@ -28,26 +28,25 @@ describe("computeTraceLinkAvailableActions", () => {
 
   it("returns no actions for retired or superseded links", () => {
     expect(computeTraceLinkAvailableActions({ lifecycleState: "retired" })).toEqual([]);
-    expect(computeTraceLinkAvailableActions({ lifecycleState: "superseded" })).toEqual([]);
+    expect(computeTraceLinkAvailableActions({ lifecycleState: "superseded" })).toEqual(
+      [],
+    );
   });
 
   it("filters actions by explicit permission grants", () => {
-    const viewOnly = computeTraceLinkAvailableActions(
-      { lifecycleState: "draft" },
-      ["qep.traceability.trace_links.view"],
-    );
+    const viewOnly = computeTraceLinkAvailableActions({ lifecycleState: "draft" }, [
+      "qep.traceability.trace_links.view",
+    ]);
     expect(viewOnly).toEqual([]);
 
-    const validateOnly = computeTraceLinkAvailableActions(
-      { lifecycleState: "draft" },
-      ["qep.traceability.trace_links.validate"],
-    );
+    const validateOnly = computeTraceLinkAvailableActions({ lifecycleState: "draft" }, [
+      "qep.traceability.trace_links.validate",
+    ]);
     expect(validateOnly).toEqual(["validate"]);
 
-    const wildcard = computeTraceLinkAvailableActions(
-      { lifecycleState: "approved" },
-      ["qep.traceability.*"],
-    );
+    const wildcard = computeTraceLinkAvailableActions({ lifecycleState: "approved" }, [
+      "qep.traceability.*",
+    ]);
     expect(wildcard).toContain("retire");
     expect(wildcard).toContain("supersede");
   });

@@ -134,7 +134,12 @@ describe("QepRelationshipCreateView", () => {
     vi.mocked(createRelationship).mockReset();
     vi.mocked(listRelationshipTaxonomy).mockReset();
     vi.mocked(listRelationshipTaxonomy).mockResolvedValue(TAXONOMY);
-    vi.mocked(listContentVersions).mockResolvedValue({ items: [], total: 0, limit: 50, offset: 0 });
+    vi.mocked(listContentVersions).mockResolvedValue({
+      items: [],
+      total: 0,
+      limit: 50,
+      offset: 0,
+    });
     pushMock.mockReset();
   });
 
@@ -165,7 +170,10 @@ describe("QepRelationshipCreateView", () => {
     await waitFor(() => {
       expect(screen.getByRole("option", { name: "Depends on" })).toBeTruthy();
     });
-    await user.selectOptions(screen.getByTestId("qep-relationships-type"), "depends_on");
+    await user.selectOptions(
+      screen.getByTestId("qep-relationships-type"),
+      "depends_on",
+    );
 
     await user.type(screen.getByTestId("qep-relationships-target-search"), "REQ-2");
 
@@ -185,7 +193,9 @@ describe("QepRelationshipCreateView", () => {
       expect(createRelationship).toHaveBeenCalled();
     });
     await waitFor(() => {
-      expect(pushMock).toHaveBeenCalledWith("/workspace/qep/requirements/relationships/rrl_1");
+      expect(pushMock).toHaveBeenCalledWith(
+        "/workspace/qep/requirements/relationships/rrl_1",
+      );
     });
   });
 });

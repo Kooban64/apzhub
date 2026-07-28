@@ -4,20 +4,20 @@
 
 ## Core concepts
 
-| Concept | Role |
-| ------- | ---- |
-| Verification Record | Aggregate root |
-| Subject | What is verified |
-| Target | What it is verified against |
-| Authority | Who decides |
-| Result / Outcome | Conclusion taxonomy |
-| Status | Lifecycle state |
-| Context | Scope / pins / immutability |
-| History | Append-only domain evolution |
-| Metadata | Extensible annotations |
-| Rationale | Explanation |
-| Timestamp | Decision chronology |
-| Version | Optimistic concurrency |
+| Concept             | Role                         |
+| ------------------- | ---------------------------- |
+| Verification Record | Aggregate root               |
+| Subject             | What is verified             |
+| Target              | What it is verified against  |
+| Authority           | Who decides                  |
+| Result / Outcome    | Conclusion taxonomy          |
+| Status              | Lifecycle state              |
+| Context             | Scope / pins / immutability  |
+| History             | Append-only domain evolution |
+| Metadata            | Extensible annotations       |
+| Rationale           | Explanation                  |
+| Timestamp           | Decision chronology          |
+| Version             | Optimistic concurrency       |
 
 ## Status ≠ Outcome
 

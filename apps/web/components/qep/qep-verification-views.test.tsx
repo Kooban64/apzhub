@@ -113,7 +113,12 @@ describe("QepVerificationExplorerView", () => {
   });
 
   it("renders empty state", async () => {
-    vi.mocked(listVerifications).mockResolvedValue({ items: [], total: 0, limit: 50, offset: 0 });
+    vi.mocked(listVerifications).mockResolvedValue({
+      items: [],
+      total: 0,
+      limit: 50,
+      offset: 0,
+    });
     render(wrap(<QepVerificationExplorerView />));
     await waitFor(() => {
       expect(screen.getByTestId("qep-empty")).toBeTruthy();
@@ -122,17 +127,21 @@ describe("QepVerificationExplorerView", () => {
 
   it("renders my queue presentation", async () => {
     vi.mocked(listVerifications).mockResolvedValue({
-      items: [{ ...BASE, status: "assigned", assignedTo: "workbench-user", availableActions: ["start"] }],
+      items: [
+        {
+          ...BASE,
+          status: "assigned",
+          assignedTo: "workbench-user",
+          availableActions: ["start"],
+        },
+      ],
       total: 1,
       limit: 50,
       offset: 0,
     });
     render(
       wrap(
-        <QepVerificationExplorerView
-          title="My Verification Queue"
-          queue="my_work"
-        />,
+        <QepVerificationExplorerView title="My Verification Queue" queue="my_work" />,
       ),
     );
     await waitFor(() => {
@@ -195,7 +204,12 @@ describe("QepVerificationDetailView availableActions", () => {
 describe("QepVerificationDashboardView", () => {
   beforeEach(() => {
     vi.mocked(listVerifications).mockReset();
-    vi.mocked(listVerifications).mockResolvedValue({ items: [BASE], total: 1, limit: 20, offset: 0 });
+    vi.mocked(listVerifications).mockResolvedValue({
+      items: [BASE],
+      total: 1,
+      limit: 20,
+      offset: 0,
+    });
   });
 
   it("renders dashboard widgets", async () => {

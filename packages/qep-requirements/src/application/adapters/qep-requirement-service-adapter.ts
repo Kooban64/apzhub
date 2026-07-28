@@ -34,7 +34,10 @@ import {
   type UpdateQepRequirementInput,
 } from "@apzhub/qep-contracts";
 
-import type { RequirementBaseline, RequirementBaselineItem } from "../../domain/baseline";
+import type {
+  RequirementBaseline,
+  RequirementBaselineItem,
+} from "../../domain/baseline";
 import type { RequirementContentVersion } from "../../domain/content-version";
 import type { PersistedRequirement } from "../../domain/persisted-requirement";
 import type {
@@ -76,11 +79,13 @@ function toDto(record: PersistedRequirement): QepRequirementDto {
       tags: [...record.attributes.tags],
       custom: { ...record.attributes.custom },
     },
-    references: record.references.map((ref: PersistedRequirement["references"][number]) => ({
-      system: ref.system,
-      externalId: ref.externalId,
-      label: ref.label,
-    })),
+    references: record.references.map(
+      (ref: PersistedRequirement["references"][number]) => ({
+        system: ref.system,
+        externalId: ref.externalId,
+        label: ref.label,
+      }),
+    ),
     baseline: record.baseline
       ? {
           baselineId: record.baseline.baselineId,
@@ -98,7 +103,9 @@ function toDto(record: PersistedRequirement): QepRequirementDto {
 }
 
 function toHistoryDto(
-  entry: Awaited<ReturnType<RequirementApplicationService["getLifecycleHistory"]>>[number],
+  entry: Awaited<
+    ReturnType<RequirementApplicationService["getLifecycleHistory"]>
+  >[number],
 ): QepRequirementLifecycleHistoryDto {
   return {
     id: entry.id,
@@ -136,7 +143,9 @@ function toVersionMetadataDto(
   };
 }
 
-function toVersionDetailDto(record: RequirementContentVersion): QepRequirementContentVersionDetailDto {
+function toVersionDetailDto(
+  record: RequirementContentVersion,
+): QepRequirementContentVersionDetailDto {
   return { ...toVersionMetadataDto(record), snapshot: record.snapshot };
 }
 
@@ -150,7 +159,10 @@ function toBaselineItemDto(item: RequirementBaselineItem): QepBaselineItemDto {
   };
 }
 
-function toBaselineDto(baseline: RequirementBaseline, ctx: QepRequestContext): QepBaselineDto {
+function toBaselineDto(
+  baseline: RequirementBaseline,
+  ctx: QepRequestContext,
+): QepBaselineDto {
   return {
     id: baseline.id,
     tenantId: baseline.tenantId,
@@ -174,11 +186,16 @@ function toBaselineDto(baseline: RequirementBaseline, ctx: QepRequestContext): Q
     lockedBy: baseline.lockedBy,
     archivedAt: baseline.archivedAt,
     archivedBy: baseline.archivedBy,
-    availableActions: computeQepBaselineAvailableActions(baseline.status, ctx.permissions),
+    availableActions: computeQepBaselineAvailableActions(
+      baseline.status,
+      ctx.permissions,
+    ),
   };
 }
 
-function toRelationshipEndpointDto(endpoint: RelationshipEndpoint): QepRelationshipEndpointDto {
+function toRelationshipEndpointDto(
+  endpoint: RelationshipEndpoint,
+): QepRelationshipEndpointDto {
   return {
     mode: endpoint.mode,
     requirementId: endpoint.requirementId,
@@ -270,7 +287,12 @@ export function createQepRequirementServiceAdapter(
   return {
     async createRequirement(ctx: QepRequestContext, input: CreateQepRequirementInput) {
       const record = await service.createRequirement(ctx, input);
-      return { ...toDto(record), latestContentVersion: toVersionMetadataDto(await service.getLatestContentVersion(ctx, record.id)) };
+      return {
+        ...toDto(record),
+        latestContentVersion: toVersionMetadataDto(
+          await service.getLatestContentVersion(ctx, record.id),
+        ),
+      };
     },
     async updateRequirement(
       ctx: QepRequestContext,
@@ -278,7 +300,12 @@ export function createQepRequirementServiceAdapter(
       input: UpdateQepRequirementInput,
     ) {
       const record = await service.updateRequirement(ctx, id, input);
-      return { ...toDto(record), latestContentVersion: toVersionMetadataDto(await service.getLatestContentVersion(ctx, record.id)) };
+      return {
+        ...toDto(record),
+        latestContentVersion: toVersionMetadataDto(
+          await service.getLatestContentVersion(ctx, record.id),
+        ),
+      };
     },
     async archiveRequirement(
       ctx: QepRequestContext,
@@ -313,13 +340,11 @@ export function createQepRequirementServiceAdapter(
     },
     async getAvailableTransitions(ctx, id) {
       const transitions = await service.getAvailableTransitions(ctx, id);
-      return transitions.map(
-        (item): QepRequirementLifecycleTransitionDto => ({
-          from: item.from,
-          to: item.to,
-          action: item.action,
-        }),
-      );
+      return transitions.map((item): QepRequirementLifecycleTransitionDto => ({
+        from: item.from,
+        to: item.to,
+        action: item.action,
+      }));
     },
     async getLifecycleHistory(ctx, id) {
       const history = await service.getLifecycleHistory(ctx, id);
@@ -328,7 +353,12 @@ export function createQepRequirementServiceAdapter(
     async getRequirement(ctx: QepRequestContext, id: string) {
       const record = await service.getRequirement(ctx, id);
       return record
-        ? { ...toDto(record), latestContentVersion: toVersionMetadataDto(await service.getLatestContentVersion(ctx, id)) }
+        ? {
+            ...toDto(record),
+            latestContentVersion: toVersionMetadataDto(
+              await service.getLatestContentVersion(ctx, id),
+            ),
+          }
         : null;
     },
     async listRequirements(ctx: QepRequestContext, query: ListQepRequirementsQuery) {
@@ -340,7 +370,10 @@ export function createQepRequirementServiceAdapter(
         offset: result.offset,
       };
     },
-    async searchRequirements(ctx: QepRequestContext, query: SearchQepRequirementsQuery) {
+    async searchRequirements(
+      ctx: QepRequestContext,
+      query: SearchQepRequirementsQuery,
+    ) {
       const result = await service.searchRequirements(ctx, query);
       return {
         items: result.items.map(toDto),
@@ -349,7 +382,11 @@ export function createQepRequirementServiceAdapter(
         offset: result.offset,
       };
     },
-    async listContentVersions(ctx, id, query: ListQepRequirementContentVersionsQuery = {}) {
+    async listContentVersions(
+      ctx,
+      id,
+      query: ListQepRequirementContentVersionsQuery = {},
+    ) {
       const all = await service.listContentVersions(ctx, id);
       const offset = query.offset ?? 0;
       const limit = query.limit ?? 50;
@@ -361,13 +398,20 @@ export function createQepRequirementServiceAdapter(
       };
     },
     async getContentVersion(ctx, id, versionNumber) {
-      return toVersionDetailDto(await service.getContentVersion(ctx, id, versionNumber));
+      return toVersionDetailDto(
+        await service.getContentVersion(ctx, id, versionNumber),
+      );
     },
     async getLatestContentVersion(ctx, id) {
       return toVersionDetailDto(await service.getLatestContentVersion(ctx, id));
     },
     async compareContentVersions(ctx, id, input) {
-      return service.compareContentVersions(ctx, id, input.baseVersionNumber, input.targetVersionNumber);
+      return service.compareContentVersions(
+        ctx,
+        id,
+        input.baseVersionNumber,
+        input.targetVersionNumber,
+      );
     },
     async verifyContentVersionIntegrity(ctx, id, versionNumber) {
       await service.verifyContentVersionIntegrity(ctx, id, versionNumber);
@@ -383,10 +427,18 @@ export function createQepRequirementServiceAdapter(
     ) {
       return toBaselineDto(await baselines.updateDraftBaseline(ctx, id, input), ctx);
     },
-    async addBaselineItem(ctx: QepRequestContext, id: string, input: AddQepBaselineItemInput) {
+    async addBaselineItem(
+      ctx: QepRequestContext,
+      id: string,
+      input: AddQepBaselineItemInput,
+    ) {
       return toBaselineDto(await baselines.addRequirementVersion(ctx, id, input), ctx);
     },
-    async removeBaselineItem(ctx: QepRequestContext, id: string, contentVersionId: string) {
+    async removeBaselineItem(
+      ctx: QepRequestContext,
+      id: string,
+      contentVersionId: string,
+    ) {
       return toBaselineDto(
         await baselines.removeRequirementVersion(ctx, id, contentVersionId),
         ctx,
@@ -439,23 +491,45 @@ export function createQepRequirementServiceAdapter(
       } satisfies QepBaselineCompareResult;
     },
 
-    async createRelationship(ctx: QepRequestContext, input: CreateQepRelationshipInput) {
+    async createRelationship(
+      ctx: QepRequestContext,
+      input: CreateQepRelationshipInput,
+    ) {
       const created = await requireRelationships().createRelationship(ctx, input);
       return toRelationshipDto(created, ctx);
     },
     async activateRelationship(ctx: QepRequestContext, id: string) {
-      return toRelationshipDto(await requireRelationships().activateRelationship(ctx, id), ctx);
+      return toRelationshipDto(
+        await requireRelationships().activateRelationship(ctx, id),
+        ctx,
+      );
     },
     async deprecateRelationship(ctx: QepRequestContext, id: string) {
-      return toRelationshipDto(await requireRelationships().deprecateRelationship(ctx, id), ctx);
+      return toRelationshipDto(
+        await requireRelationships().deprecateRelationship(ctx, id),
+        ctx,
+      );
     },
     async retireRelationship(ctx: QepRequestContext, id: string) {
-      return toRelationshipDto(await requireRelationships().retireRelationship(ctx, id), ctx);
+      return toRelationshipDto(
+        await requireRelationships().retireRelationship(ctx, id),
+        ctx,
+      );
     },
-    async supersedeRelationship(ctx: QepRequestContext, input: SupersedeQepRelationshipInput) {
-      return toRelationshipDto(await requireRelationships().supersedeRelationship(ctx, input), ctx);
+    async supersedeRelationship(
+      ctx: QepRequestContext,
+      input: SupersedeQepRelationshipInput,
+    ) {
+      return toRelationshipDto(
+        await requireRelationships().supersedeRelationship(ctx, input),
+        ctx,
+      );
     },
-    async updateRelationshipRationale(ctx: QepRequestContext, id: string, rationale: string) {
+    async updateRelationshipRationale(
+      ctx: QepRequestContext,
+      id: string,
+      rationale: string,
+    ) {
       return toRelationshipDto(
         await requireRelationships().updateRationale(ctx, id, rationale),
         ctx,
@@ -471,8 +545,15 @@ export function createQepRequirementServiceAdapter(
         ctx,
       );
     },
-    async updateRelationshipStrength(ctx: QepRequestContext, id: string, strength: string) {
-      return toRelationshipDto(await requireRelationships().updateStrength(ctx, id, strength), ctx);
+    async updateRelationshipStrength(
+      ctx: QepRequestContext,
+      id: string,
+      strength: string,
+    ) {
+      return toRelationshipDto(
+        await requireRelationships().updateStrength(ctx, id, strength),
+        ctx,
+      );
     },
     async updateRelationshipClassification(
       ctx: QepRequestContext,
@@ -484,7 +565,11 @@ export function createQepRequirementServiceAdapter(
         ctx,
       );
     },
-    async updateRelationshipCriticality(ctx: QepRequestContext, id: string, criticality: string) {
+    async updateRelationshipCriticality(
+      ctx: QepRequestContext,
+      id: string,
+      criticality: string,
+    ) {
       return toRelationshipDto(
         await requireRelationships().updateCriticality(ctx, id, criticality),
         ctx,
@@ -495,13 +580,19 @@ export function createQepRequirementServiceAdapter(
       id: string,
       scope: { readonly kind: string; readonly referenceId?: string },
     ) {
-      return toRelationshipDto(await requireRelationships().updateScope(ctx, id, scope), ctx);
+      return toRelationshipDto(
+        await requireRelationships().updateScope(ctx, id, scope),
+        ctx,
+      );
     },
     async getRelationship(ctx: QepRequestContext, id: string) {
       const found = await requireRelationships().getRelationship(ctx, id);
       return found ? toRelationshipDto(found, ctx) : null;
     },
-    async listRelationships(ctx: QepRequestContext, query: ListQepRelationshipsQuery = {}) {
+    async listRelationships(
+      ctx: QepRequestContext,
+      query: ListQepRelationshipsQuery = {},
+    ) {
       const result = await requireRelationships().listRelationships(ctx, {
         type: query.type as never,
         lifecycleState: query.lifecycleState as never,
@@ -526,7 +617,11 @@ export function createQepRequirementServiceAdapter(
       requirementId: string,
       direction?: "inbound" | "outbound" | "both",
     ) {
-      const items = await requireRelationships().listByRequirement(ctx, requirementId, direction);
+      const items = await requireRelationships().listByRequirement(
+        ctx,
+        requirementId,
+        direction,
+      );
       return items.map((item) => toRelationshipDto(item, ctx));
     },
     async listInboundRelationships(ctx: QepRequestContext, requirementId: string) {
@@ -549,8 +644,14 @@ export function createQepRequirementServiceAdapter(
       const items = await requireRelationships().listByBaseline(ctx, baselineId);
       return items.map((item) => toRelationshipDto(item, ctx));
     },
-    async listRelationshipsByContentVersion(ctx: QepRequestContext, contentVersionId: string) {
-      const items = await requireRelationships().listByContentVersion(ctx, contentVersionId);
+    async listRelationshipsByContentVersion(
+      ctx: QepRequestContext,
+      contentVersionId: string,
+    ) {
+      const items = await requireRelationships().listByContentVersion(
+        ctx,
+        contentVersionId,
+      );
       return items.map((item) => toRelationshipDto(item, ctx));
     },
     async listRelationshipConflicts(ctx: QepRequestContext) {
@@ -558,7 +659,10 @@ export function createQepRequirementServiceAdapter(
       return items.map((item) => toRelationshipDto(item, ctx));
     },
     async listSupersessionChains(ctx: QepRequestContext, requirementId?: string) {
-      const items = await requireRelationships().listSupersessionChains(ctx, requirementId);
+      const items = await requireRelationships().listSupersessionChains(
+        ctx,
+        requirementId,
+      );
       return items.map((item) => toRelationshipDto(item, ctx));
     },
     async listRelationshipTaxonomy(ctx: QepRequestContext) {

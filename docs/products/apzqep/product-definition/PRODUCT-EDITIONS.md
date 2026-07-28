@@ -15,34 +15,34 @@ Editions also enforce Constitution-aligned defaults: AI off until entitled, huma
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| Edition | Named capability bundle and policy ceiling |
-| Entitlement | Licensed right to use edition features |
-| Upgrade path | Supported migration between editions |
-| Limitation | Explicit excluded or capped capability |
-| Add-on | Capability outside base edition (e.g. AI, advanced QI) |
-| Education terms | Non-production restrictions for academic use |
+| Concept         | Product meaning                                        |
+| --------------- | ------------------------------------------------------ |
+| Edition         | Named capability bundle and policy ceiling             |
+| Entitlement     | Licensed right to use edition features                 |
+| Upgrade path    | Supported migration between editions                   |
+| Limitation      | Explicit excluded or capped capability                 |
+| Add-on          | Capability outside base edition (e.g. AI, advanced QI) |
+| Education terms | Non-production restrictions for academic use           |
 
 ## Primary objects
 
-| Object | Description |
-| ------ | ----------- |
+| Object             | Description                                     |
+| ------------------ | ----------------------------------------------- |
 | Edition definition | Marketing and product contract for a SKU family |
-| Entitlement record | Tenant binding to edition and add-ons |
-| Feature matrix | Edition × capability mapping |
-| Limitation policy | Scale, approver count, retention defaults |
-| Upgrade request | Commercial/operational path to higher edition |
+| Entitlement record | Tenant binding to edition and add-ons           |
+| Feature matrix     | Edition × capability mapping                    |
+| Limitation policy  | Scale, approver count, retention defaults       |
+| Upgrade request    | Commercial/operational path to higher edition   |
 
 ## Edition catalogue
 
-| Edition | Target customer | Included (intent) | Limitations (intent) |
-| ------- | --------------- | ----------------- | -------------------- |
-| **Developer** | Individual / dev teams evaluating | Core manual lifecycle subset; single project emphasis; basic traceability; basic readiness view | Limited scale; single approver patterns; AI OFF; no advanced cert policies |
-| **Team** | Small / mid teams | Multi-project; manual + automation ingest foundation; dashboards; team RBAC | Advanced cert multi-approver limited; regulated retention packs reduced |
-| **Enterprise** | Large organisations | Full RBAC; retention; cert multi-approver; integrations breadth; advanced QI | AI still OFF until entitled + authorised |
-| **Regulated enterprise** | Audit-heavy / regulated industries | Enterprise + stronger retention, legal hold, compliance packs, export controls | Higher operational expectations on customer |
-| **Education** | Training / academic institutions | Team-like capabilities with education licensing terms | Non-production entitlements; support tier limited |
+| Edition                  | Target customer                    | Included (intent)                                                                               | Limitations (intent)                                                       |
+| ------------------------ | ---------------------------------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| **Developer**            | Individual / dev teams evaluating  | Core manual lifecycle subset; single project emphasis; basic traceability; basic readiness view | Limited scale; single approver patterns; AI OFF; no advanced cert policies |
+| **Team**                 | Small / mid teams                  | Multi-project; manual + automation ingest foundation; dashboards; team RBAC                     | Advanced cert multi-approver limited; regulated retention packs reduced    |
+| **Enterprise**           | Large organisations                | Full RBAC; retention; cert multi-approver; integrations breadth; advanced QI                    | AI still OFF until entitled + authorised                                   |
+| **Regulated enterprise** | Audit-heavy / regulated industries | Enterprise + stronger retention, legal hold, compliance packs, export controls                  | Higher operational expectations on customer                                |
+| **Education**            | Training / academic institutions   | Team-like capabilities with education licensing terms                                           | Non-production entitlements; support tier limited                          |
 
 ## Lifecycle
 
@@ -60,12 +60,12 @@ Customer data ownership remains with customer/tenant under self-hosted and contr
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
-| Product Owner (APZ) | Edition definition and matrix |
+| Role                 | Ownership                                             |
+| -------------------- | ----------------------------------------------------- |
+| Product Owner (APZ)  | Edition definition and matrix                         |
 | Tenant Administrator | Assigns users to edition entitlements within contract |
-| Commercial / Owner | Pricing and SKU authorisation — outside this document |
-| Compliance Officer | Validates Regulated edition policy fit |
+| Commercial / Owner   | Pricing and SKU authorisation — outside this document |
+| Compliance Officer   | Validates Regulated edition policy fit                |
 
 ## Relationships
 
@@ -83,26 +83,26 @@ flowchart TB
 
 ## States
 
-| State | Meaning |
-| ----- | ------- |
-| Active entitlement | Tenant within contract using edition |
-| Trial / evaluation | Developer or time-boxed Team trial |
-| Grace | Contract lapsed; read-only policy per commercial rules |
-| Suspended | Admin or compliance suspension |
-| Upgraded | Higher edition replaces prior entitlement |
-| Education restricted | Non-production enforcement |
+| State                | Meaning                                                |
+| -------------------- | ------------------------------------------------------ |
+| Active entitlement   | Tenant within contract using edition                   |
+| Trial / evaluation   | Developer or time-boxed Team trial                     |
+| Grace                | Contract lapsed; read-only policy per commercial rules |
+| Suspended            | Admin or compliance suspension                         |
+| Upgraded             | Higher edition replaces prior entitlement              |
+| Education restricted | Non-production enforcement                             |
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
-| ED-01 | Manual verification is first-class in every edition including Developer |
-| ED-02 | AI default OFF in all editions until add-on + tenant authorisation |
-| ED-03 | No edition permits autonomous certification |
-| ED-04 | Upgrade preserves SoR history and audit immutability |
-| ED-05 | Education edition shall not be used for production certification per terms |
+| Rule  | Statement                                                                          |
+| ----- | ---------------------------------------------------------------------------------- |
+| ED-01 | Manual verification is first-class in every edition including Developer            |
+| ED-02 | AI default OFF in all editions until add-on + tenant authorisation                 |
+| ED-03 | No edition permits autonomous certification                                        |
+| ED-04 | Upgrade preserves SoR history and audit immutability                               |
+| ED-05 | Education edition shall not be used for production certification per terms         |
 | ED-06 | Regulated enterprise requires compliance pack entitlements for legal hold features |
-| ED-07 | Developer edition limits do not imply manual verification is deprecated |
+| ED-07 | Developer edition limits do not imply manual verification is deprecated            |
 
 ## Approval rules
 
@@ -112,13 +112,13 @@ Regulated edition activation may require Compliance Officer acknowledgment on te
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| Tenant Administrator | Maps users and projects to edition limits |
-| Platform Administrator | Provisions entitlement records |
-| Compliance Officer | Confirms Regulated edition policies enabled |
-| Release Manager | Uses cert features available in edition |
-| Integrator | Builds to lowest edition APIs when targeting Team |
+| Persona                | Responsibility                                    |
+| ---------------------- | ------------------------------------------------- |
+| Tenant Administrator   | Maps users and projects to edition limits         |
+| Platform Administrator | Provisions entitlement records                    |
+| Compliance Officer     | Confirms Regulated edition policies enabled       |
+| Release Manager        | Uses cert features available in edition           |
+| Integrator             | Builds to lowest edition APIs when targeting Team |
 
 ## Reporting
 
@@ -146,12 +146,12 @@ Potential future editions or add-ons: industry packs (medical device, automotive
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Capability packaging | Infrastructure sizing guides |
-| Entitlement limits | Cloud region architecture |
-| Upgrade path definition | Migration runbooks (implementation) |
-| Education non-production terms | Academic pricing tables |
+| In boundary                    | Out of boundary                     |
+| ------------------------------ | ----------------------------------- |
+| Capability packaging           | Infrastructure sizing guides        |
+| Entitlement limits             | Cloud region architecture           |
+| Upgrade path definition        | Migration runbooks (implementation) |
+| Education non-production terms | Academic pricing tables             |
 
 This document does not specify prices — Owner commercial decision.
 

@@ -29,7 +29,9 @@ export function createVerificationMetadata(
     }
     const value = entries[key]?.trim() ?? "";
     if (value.length > VERIFICATION_METADATA_VALUE_MAX_LENGTH) {
-      throw new VerificationInvariantViolation("Verification metadata value exceeds maximum length");
+      throw new VerificationInvariantViolation(
+        "Verification metadata value exceeds maximum length",
+      );
     }
     normalized[trimmedKey] = value;
   }

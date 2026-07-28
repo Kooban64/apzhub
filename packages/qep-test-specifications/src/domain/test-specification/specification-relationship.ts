@@ -20,7 +20,9 @@ export type SpecificationRelationship = {
   readonly createdBy: string;
 };
 
-export function createSpecificationRelationshipId(value: string): SpecificationRelationshipId {
+export function createSpecificationRelationshipId(
+  value: string,
+): SpecificationRelationshipId {
   const normalized = value.trim();
   if (!/^tsr_[A-Za-z0-9_-]+$/.test(normalized)) {
     throw new TestSpecificationInvariantViolation(

@@ -1,10 +1,10 @@
 # Persistence — Verifications
 
-| Field | Value |
-| --- | --- |
+| Field      | Value                                                                |
+| ---------- | -------------------------------------------------------------------- |
 | Migrations | `0081_apz_qep_verification.sql`, `0082_apz_qep_verification_rls.sql` |
-| Schema | `packages/config/src/db/qep-verification-schema.ts` |
-| Tables | `qep_verification`, `qep_verification_history` |
+| Schema     | `packages/config/src/db/qep-verification-schema.ts`                  |
+| Tables     | `qep_verification`, `qep_verification_history`                       |
 
 ## Design notes
 

@@ -26,12 +26,12 @@ Plan Inspector
 
 ## Cross-capability deep links (consume existing)
 
-| From Plans | To |
-| ---------- | -- |
-| Plan Item row | Test Specifications Inspector |
-| Requirement reference | Requirements Workbench |
-| Verification subject reference | Verification Inspector |
-| Future Execution | Test Execution Workbench (unavailable until exists) |
+| From Plans                     | To                                                  |
+| ------------------------------ | --------------------------------------------------- |
+| Plan Item row                  | Test Specifications Inspector                       |
+| Requirement reference          | Requirements Workbench                              |
+| Verification subject reference | Verification Inspector                              |
+| Future Execution               | Test Execution Workbench (unavailable until exists) |
 
 ## Permission filtering
 

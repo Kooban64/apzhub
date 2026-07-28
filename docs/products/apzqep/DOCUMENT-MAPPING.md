@@ -25,13 +25,13 @@
 
 ## Terminology mapping (cross-links)
 
-| Old term                        | New term                                                            |
-| ------------------------------- | ------------------------------------------------------------------- |
-| APZ TCMS                        | APZ QEP (APZ Quality Engineering Platform)                          |
-| Test Case Management            | Quality Engineering / Verification Management                       |
-| Test case (as product identity) | Verification (manual procedure remains valid form)                  |
-| APZTCMS-DEF-001 (planned)       | Superseded → **APZQEP-DEF-001** after Requirements Acceptance       |
-| APZTCMS-REQ-001                 | Preserved; evolved into **APZQEP-REQ-001**                          |
+| Old term                        | New term                                                      |
+| ------------------------------- | ------------------------------------------------------------- |
+| APZ TCMS                        | APZ QEP (APZ Quality Engineering Platform)                    |
+| Test Case Management            | Quality Engineering / Verification Management                 |
+| Test case (as product identity) | Verification (manual procedure remains valid form)            |
+| APZTCMS-DEF-001 (planned)       | Superseded → **APZQEP-DEF-001** after Requirements Acceptance |
+| APZTCMS-REQ-001                 | Preserved; evolved into **APZQEP-REQ-001**                    |
 
 ## Indexes updated in this programme
 

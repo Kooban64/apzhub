@@ -2,13 +2,13 @@
 
 ## Tables
 
-| Table | Purpose | Key constraints |
-| ----- | ------- | --------------- |
-| `qep_test_plans` | Aggregate head | PK `id`; UNIQUE `(tenant_id, number)`; `revision` |
-| `qep_test_plan_items` | Items | FK `plan_id`; ordered `sequence` |
-| `qep_test_plan_approvals` | Approval records | FK `plan_id` |
-| `qep_test_plan_revisions` | Sealed snapshots | FK `plan_id`; immutable rows |
-| `qep_test_plan_history` | Append-only history | FK `plan_id`; no updates |
+| Table                     | Purpose             | Key constraints                                   |
+| ------------------------- | ------------------- | ------------------------------------------------- |
+| `qep_test_plans`          | Aggregate head      | PK `id`; UNIQUE `(tenant_id, number)`; `revision` |
+| `qep_test_plan_items`     | Items               | FK `plan_id`; ordered `sequence`                  |
+| `qep_test_plan_approvals` | Approval records    | FK `plan_id`                                      |
+| `qep_test_plan_revisions` | Sealed snapshots    | FK `plan_id`; immutable rows                      |
+| `qep_test_plan_history`   | Append-only history | FK `plan_id`; no updates                          |
 
 ## Indexes (minimum)
 

@@ -61,7 +61,9 @@ describe("APZQEP-ENG-020E baseline routes: no unlock/restore/delete surface", ()
   });
 
   it("archive rejects GET with an explicit 405", async () => {
-    const response = await archiveRoute.GET(request("http://localhost/x/archive", "GET"));
+    const response = await archiveRoute.GET(
+      request("http://localhost/x/archive", "GET"),
+    );
     expect(response.status).toBe(405);
   });
 
@@ -84,9 +86,13 @@ describe("APZQEP-ENG-020E baseline routes: no unlock/restore/delete surface", ()
   it("the item-removal route rejects GET/POST/PATCH/PUT with an explicit 405", async () => {
     const get = await itemRoute.GET(request("http://localhost/x/items/rcv_1", "GET"));
     expect(get.status).toBe(405);
-    const post = await itemRoute.POST(request("http://localhost/x/items/rcv_1", "POST"));
+    const post = await itemRoute.POST(
+      request("http://localhost/x/items/rcv_1", "POST"),
+    );
     expect(post.status).toBe(405);
-    const patch = await itemRoute.PATCH(request("http://localhost/x/items/rcv_1", "PATCH"));
+    const patch = await itemRoute.PATCH(
+      request("http://localhost/x/items/rcv_1", "PATCH"),
+    );
     expect(patch.status).toBe(405);
     const put = await itemRoute.PUT(request("http://localhost/x/items/rcv_1", "PUT"));
     expect(put.status).toBe(405);

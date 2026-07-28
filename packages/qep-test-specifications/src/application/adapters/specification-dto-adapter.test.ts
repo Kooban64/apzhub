@@ -21,7 +21,9 @@ const LATER = "2026-07-26T13:00:00.000Z";
 
 describe("toSpecificationDto", () => {
   it("maps a stored specification to a platform DTO with available actions", async () => {
-    const repo = createInMemoryTestSpecificationRepository(createEmptyTestSpecificationStore());
+    const repo = createInMemoryTestSpecificationRepository(
+      createEmptyTestSpecificationStore(),
+    );
     const draft = createTestSpecification({
       id: "tsp_dto_1",
       tenantId: TENANT,
@@ -41,7 +43,12 @@ describe("toSpecificationDto", () => {
       acceptanceCriteria: ["Login succeeds"],
       risks: [{ id: "risk_1", summary: "Credential leak", severity: "high" }],
       dependencies: [
-        { id: "dep_1", summary: "Auth service", referenceKind: "requirement", referenceId: "req_auth" },
+        {
+          id: "dep_1",
+          summary: "Auth service",
+          referenceKind: "requirement",
+          referenceId: "req_auth",
+        },
       ],
       tags: ["login", "security"],
       metadata: { environment: "staging" },
@@ -92,7 +99,12 @@ describe("toSpecificationDto", () => {
       { id: "risk_1", summary: "Credential leak", severity: "high" },
     ]);
     expect(unrestricted.dependencies).toEqual([
-      { id: "dep_1", summary: "Auth service", referenceKind: "requirement", referenceId: "req_auth" },
+      {
+        id: "dep_1",
+        summary: "Auth service",
+        referenceKind: "requirement",
+        referenceId: "req_auth",
+      },
     ]);
     expect(unrestricted.tags).toEqual(["login", "security"]);
     expect(unrestricted.isAuthoritative).toBe(true);
@@ -135,7 +147,9 @@ describe("toSpecificationDto", () => {
   });
 
   it("omits approval when the stored specification has none", async () => {
-    const repo = createInMemoryTestSpecificationRepository(createEmptyTestSpecificationStore());
+    const repo = createInMemoryTestSpecificationRepository(
+      createEmptyTestSpecificationStore(),
+    );
     const draft = createTestSpecification({
       id: "tsp_dto_draft",
       tenantId: TENANT,

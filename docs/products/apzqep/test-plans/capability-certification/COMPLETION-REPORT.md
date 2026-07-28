@@ -1,14 +1,14 @@
 # Completion Report — APZQEP-CERT-080A
 
-| Field | Value |
-| ----- | ----- |
-| Programme | **APZQEP-CERT-080A** |
-| Title | Test Plans Integrated Capability Certification |
-| Package | `@apzhub/qep-test-plans` **0.2.0** (unchanged under this pack) |
-| Status | **IMPLEMENTED / AWAITING OWNER CERTIFICATION DECISION** |
-| Recommended class | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Date | 2026-07-28 |
-| Evidence | `docs/operations/evidence/portfolio-recert/20260728T081500Z-APZQEP-CERT-080A.json` |
+| Field             | Value                                                                              |
+| ----------------- | ---------------------------------------------------------------------------------- |
+| Programme         | **APZQEP-CERT-080A**                                                               |
+| Title             | Test Plans Integrated Capability Certification                                     |
+| Package           | `@apzhub/qep-test-plans` **0.2.0** (unchanged under this pack)                     |
+| Status            | **IMPLEMENTED / AWAITING OWNER CERTIFICATION DECISION**                            |
+| Recommended class | **PRODUCTION_READY_WITH_LIMITATIONS**                                              |
+| Date              | 2026-07-28                                                                         |
+| Evidence          | `docs/operations/evidence/portfolio-recert/20260728T081500Z-APZQEP-CERT-080A.json` |
 
 ## Deliverables produced
 
@@ -27,11 +27,11 @@ All Owner-instructed deliverables filed under this pack (see [README.md](./READM
 
 ## Prerequisite acceptances recorded
 
-| Programme | Decision |
-| --------- | -------- |
-| APZQEP-CERT-060A (Domain) | **CERTIFIED / APPROVED / CLOSED** — [../domain-certification/OWNER-ACCEPTANCE.md](../domain-certification/OWNER-ACCEPTANCE.md) |
-| APZQEP-CERT-060B (Infrastructure) | **CERTIFIED / APPROVED / CLOSED** — [../CERT-060B/OWNER-ACCEPTANCE.md](../CERT-060B/OWNER-ACCEPTANCE.md) |
-| APZQEP-CERT-070A (Workbench) | **CERTIFIED / APPROVED / CLOSED** — [../CERT-070A/OWNER-ACCEPTANCE.md](../CERT-070A/OWNER-ACCEPTANCE.md) |
+| Programme                         | Decision                                                                                                                       |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| APZQEP-CERT-060A (Domain)         | **CERTIFIED / APPROVED / CLOSED** — [../domain-certification/OWNER-ACCEPTANCE.md](../domain-certification/OWNER-ACCEPTANCE.md) |
+| APZQEP-CERT-060B (Infrastructure) | **CERTIFIED / APPROVED / CLOSED** — [../CERT-060B/OWNER-ACCEPTANCE.md](../CERT-060B/OWNER-ACCEPTANCE.md)                       |
+| APZQEP-CERT-070A (Workbench)      | **CERTIFIED / APPROVED / CLOSED** — [../CERT-070A/OWNER-ACCEPTANCE.md](../CERT-070A/OWNER-ACCEPTANCE.md)                       |
 
 ## Independent re-verification performed
 

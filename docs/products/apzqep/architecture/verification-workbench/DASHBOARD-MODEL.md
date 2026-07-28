@@ -8,8 +8,8 @@ My Queue · Team Queue · Pending Reviews · Rejected · Expiring Soon · Overdu
 
 ## Rules
 
-- Presentation only — no analytics calculations  
-- Counts from bounded server queries  
-- Deep-link into queues / Explorer  
-- Permission-gated  
+- Presentation only — no analytics calculations
+- Counts from bounded server queries
+- Deep-link into queues / Explorer
+- Permission-gated
 - Not a substitute for Coverage / Impact engines

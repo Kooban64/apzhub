@@ -11,12 +11,12 @@
 
 ## Decision record (Owner)
 
-| Field | Value |
-| ----- | ----- |
-| Decision | **ACCEPTED** |
-| Date | 2026-07-24 |
-| Authority | Owner |
-| Baseline | APZQEP-ARCH-001 Enterprise Architecture Pack (1.0.0-arch) |
+| Field      | Value                                                                                                                                       |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Decision   | **ACCEPTED**                                                                                                                                |
+| Date       | 2026-07-24                                                                                                                                  |
+| Authority  | Owner                                                                                                                                       |
+| Baseline   | APZQEP-ARCH-001 Enterprise Architecture Pack (1.0.0-arch)                                                                                   |
 | Conditions | Architecture Acceptance authorises Engineering Planning (**APZQEP-PLAN-001**); production Engineering only under subsequent named Approvals |
 
 ## Purpose

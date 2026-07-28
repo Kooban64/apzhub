@@ -20,12 +20,8 @@ import type {
   RequirementSearchQuery,
 } from "../../domain/repositories/requirement-repository";
 import type { RequirementId } from "../../domain/value-objects/requirement-id";
-import type {
-  RequirementContentVersion,
-} from "../../domain/content-version/requirement-content-version";
-import type {
-  RequirementContentVersionRepository,
-} from "../../domain/repositories/requirement-content-version-repository";
+import type { RequirementContentVersion } from "../../domain/content-version/requirement-content-version";
+import type { RequirementContentVersionRepository } from "../../domain/repositories/requirement-content-version-repository";
 import {
   QepConflictError,
   QepNotFoundError,
@@ -321,14 +317,20 @@ export function createPostgresQepRequirementsRepositories(
           correlationId: version.correlationId,
         })
         .returning();
-      if (!row) throw new QepConflictError("Failed to append requirement content version");
+      if (!row)
+        throw new QepConflictError("Failed to append requirement content version");
       return mapContentVersionRow(row);
     },
     async getById(tenantId, id) {
       const [row] = await db
         .select()
         .from(qepRequirementContentVersion)
-        .where(and(eq(qepRequirementContentVersion.tenantId, tenantId), eq(qepRequirementContentVersion.id, id)))
+        .where(
+          and(
+            eq(qepRequirementContentVersion.tenantId, tenantId),
+            eq(qepRequirementContentVersion.id, id),
+          ),
+        )
         .limit(1);
       return row ? mapContentVersionRow(row) : null;
     },
@@ -336,11 +338,13 @@ export function createPostgresQepRequirementsRepositories(
       const [row] = await db
         .select()
         .from(qepRequirementContentVersion)
-        .where(and(
-          eq(qepRequirementContentVersion.tenantId, tenantId),
-          eq(qepRequirementContentVersion.requirementId, requirementId),
-          eq(qepRequirementContentVersion.versionNumber, versionNumber),
-        ))
+        .where(
+          and(
+            eq(qepRequirementContentVersion.tenantId, tenantId),
+            eq(qepRequirementContentVersion.requirementId, requirementId),
+            eq(qepRequirementContentVersion.versionNumber, versionNumber),
+          ),
+        )
         .limit(1);
       return row ? mapContentVersionRow(row) : null;
     },
@@ -348,10 +352,12 @@ export function createPostgresQepRequirementsRepositories(
       const [row] = await db
         .select()
         .from(qepRequirementContentVersion)
-        .where(and(
-          eq(qepRequirementContentVersion.tenantId, tenantId),
-          eq(qepRequirementContentVersion.requirementId, requirementId),
-        ))
+        .where(
+          and(
+            eq(qepRequirementContentVersion.tenantId, tenantId),
+            eq(qepRequirementContentVersion.requirementId, requirementId),
+          ),
+        )
         .orderBy(desc(qepRequirementContentVersion.versionNumber))
         .limit(1);
       return row ? mapContentVersionRow(row) : null;
@@ -375,10 +381,12 @@ export function createPostgresQepRequirementsRepositories(
           correlationId: qepRequirementContentVersion.correlationId,
         })
         .from(qepRequirementContentVersion)
-        .where(and(
-          eq(qepRequirementContentVersion.tenantId, tenantId),
-          eq(qepRequirementContentVersion.requirementId, requirementId),
-        ))
+        .where(
+          and(
+            eq(qepRequirementContentVersion.tenantId, tenantId),
+            eq(qepRequirementContentVersion.requirementId, requirementId),
+          ),
+        )
         .orderBy(desc(qepRequirementContentVersion.versionNumber))
         .limit(pagination.limit ?? 100)
         .offset(pagination.offset ?? 0);
@@ -388,10 +396,16 @@ export function createPostgresQepRequirementsRepositories(
         requirementId: row.requirementId as RequirementId,
         versionNumber: row.versionNumber as RequirementContentVersion["versionNumber"],
         ...(row.parentVersionNumber !== null
-          ? { parentVersionNumber: row.parentVersionNumber as RequirementContentVersion["versionNumber"] }
+          ? {
+              parentVersionNumber:
+                row.parentVersionNumber as RequirementContentVersion["versionNumber"],
+            }
           : {}),
-        ...(row.parentVersionId ? { parentVersionId: row.parentVersionId as RequirementContentVersion["id"] } : {}),
-        snapshotSchemaVersion: row.snapshotSchemaVersion as RequirementContentVersion["snapshotSchemaVersion"],
+        ...(row.parentVersionId
+          ? { parentVersionId: row.parentVersionId as RequirementContentVersion["id"] }
+          : {}),
+        snapshotSchemaVersion:
+          row.snapshotSchemaVersion as RequirementContentVersion["snapshotSchemaVersion"],
         hashAlgorithm: row.hashAlgorithm as RequirementContentVersion["hashAlgorithm"],
         snapshotHash: row.snapshotHash,
         changeReason: row.changeReason as RequirementContentVersion["changeReason"],
@@ -402,11 +416,13 @@ export function createPostgresQepRequirementsRepositories(
       }));
     },
     async exists(tenantId, requirementId, versionNumber) {
-      return (await contentVersions.getByRequirementAndNumber(
-        tenantId,
-        requirementId,
-        versionNumber,
-      )) !== null;
+      return (
+        (await contentVersions.getByRequirementAndNumber(
+          tenantId,
+          requirementId,
+          versionNumber,
+        )) !== null
+      );
     },
   };
 
@@ -434,13 +450,17 @@ function mapContentVersionRow(
     requirementId: row.requirementId as RequirementId,
     versionNumber: row.versionNumber as RequirementContentVersion["versionNumber"],
     ...(row.parentVersionNumber !== null
-      ? { parentVersionNumber: row.parentVersionNumber as RequirementContentVersion["versionNumber"] }
+      ? {
+          parentVersionNumber:
+            row.parentVersionNumber as RequirementContentVersion["versionNumber"],
+        }
       : {}),
     ...(row.parentVersionId
       ? { parentVersionId: row.parentVersionId as RequirementContentVersion["id"] }
       : {}),
     snapshot: row.snapshotJson as RequirementContentVersion["snapshot"],
-    snapshotSchemaVersion: row.snapshotSchemaVersion as RequirementContentVersion["snapshotSchemaVersion"],
+    snapshotSchemaVersion:
+      row.snapshotSchemaVersion as RequirementContentVersion["snapshotSchemaVersion"],
     hashAlgorithm: row.hashAlgorithm as RequirementContentVersion["hashAlgorithm"],
     snapshotHash: row.snapshotHash,
     changeReason: row.changeReason as RequirementContentVersion["changeReason"],
@@ -451,12 +471,15 @@ function mapContentVersionRow(
   };
 }
 
-function mapLifecycleHistoryRow(row: typeof qepRequirementLifecycleHistory.$inferSelect): RequirementLifecycleHistoryEntry {
+function mapLifecycleHistoryRow(
+  row: typeof qepRequirementLifecycleHistory.$inferSelect,
+): RequirementLifecycleHistoryEntry {
   return {
     id: row.id,
     tenantId: row.tenantId,
     requirementId: row.requirementId as RequirementId,
-    previousState: row.previousState as RequirementLifecycleHistoryEntry["previousState"],
+    previousState:
+      row.previousState as RequirementLifecycleHistoryEntry["previousState"],
     newState: row.newState as RequirementLifecycleHistoryEntry["newState"],
     action: row.action,
     actorUserId: row.actorUserId,

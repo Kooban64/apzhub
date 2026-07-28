@@ -8,6 +8,7 @@ export type QepWorkbenchTelemetryEvent =
   | "relationships.deprecate"
   | "relationships.retire"
   | "relationships.update"
+  | "relationships.supersede"
   | "traceability.list.load"
   | "traceability.detail.load"
   | "traceability.history.load"

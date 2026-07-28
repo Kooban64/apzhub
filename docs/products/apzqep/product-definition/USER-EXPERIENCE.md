@@ -6,22 +6,22 @@
 
 ## Experience principles
 
-| Principle | Meaning |
-| --------- | ------- |
-| Role-aware | Surfaces follow permissions and workspace |
-| Task-oriented | Workspaces optimise jobs-to-be-done |
-| Progressive disclosure | Complexity appears when needed |
-| Context preservation | Cross-module navigation keeps object context |
-| Search-first access | Global search reaches SoR objects quickly |
-| Evidence before opinion | Claims show artefacts |
-| Human gates visible | Approvals and cert decisions are explicit |
-| AI clearly labelled | Suggestions never silent SoR writes |
-| Manual first-class | Manual sessions are polished, not second-class |
-| Honest empty states | Limitations and next actions clear |
+| Principle               | Meaning                                        |
+| ----------------------- | ---------------------------------------------- |
+| Role-aware              | Surfaces follow permissions and workspace      |
+| Task-oriented           | Workspaces optimise jobs-to-be-done            |
+| Progressive disclosure  | Complexity appears when needed                 |
+| Context preservation    | Cross-module navigation keeps object context   |
+| Search-first access     | Global search reaches SoR objects quickly      |
+| Evidence before opinion | Claims show artefacts                          |
+| Human gates visible     | Approvals and cert decisions are explicit      |
+| AI clearly labelled     | Suggestions never silent SoR writes            |
+| Manual first-class      | Manual sessions are polished, not second-class |
+| Honest empty states     | Limitations and next actions clear             |
 
 ## Overall experience philosophy
 
-APZ QEP is a **confidence platform**, not a test tool. Every surface should help a human answer: *Can this software be released with sufficient confidence?* The experience prioritises **accountability, traceability, and clarity** over volume of data or speed of clicks.
+APZ QEP is a **confidence platform**, not a test tool. Every surface should help a human answer: _Can this software be released with sufficient confidence?_ The experience prioritises **accountability, traceability, and clarity** over volume of data or speed of clicks.
 
 Users should always understand **where they are** (scope, release, object), **what they can do** (permission-filtered actions), and **what the system will not decide for them** (certification, approvals, authoritative writes from AI). Complexity is introduced progressively: daily operators see task-focused workspaces; governance roles see gates, packs, and audit trails when their job requires them.
 
@@ -33,14 +33,14 @@ Experience quality is measured by **time-to-trusted-action** (open assigned work
 
 Each persona receives a **primary workspace** — a composed Home layout, default module emphasis, and saved views — without gaining permissions they do not hold. See [ROLE-WORKSPACES.md](./ROLE-WORKSPACES.md) and [PERSONAS.md](./PERSONAS.md).
 
-| Experience tier | Who | What they feel |
-| --------------- | --- | -------------- |
-| Command | Executive, Release Manager | Exceptions, gates, certification posture — not operational noise |
-| Design & govern | QA Manager, QA Engineer, BA | Coverage, design quality, traceability, approval queues |
-| Execute | Manual Tester, Automation Engineer | Assigned work, session flow, evidence capture, defect raise |
-| Fix & integrate | Developer, Integrator | Defect context, failure evidence, integration health |
-| Assure & investigate | Auditor, Compliance, Security | Immutable history, export, policy visibility |
-| Administer | Tenant / Platform Admin | Policy, users, entitlements — separated from daily quality work |
+| Experience tier      | Who                                | What they feel                                                   |
+| -------------------- | ---------------------------------- | ---------------------------------------------------------------- |
+| Command              | Executive, Release Manager         | Exceptions, gates, certification posture — not operational noise |
+| Design & govern      | QA Manager, QA Engineer, BA        | Coverage, design quality, traceability, approval queues          |
+| Execute              | Manual Tester, Automation Engineer | Assigned work, session flow, evidence capture, defect raise      |
+| Fix & integrate      | Developer, Integrator              | Defect context, failure evidence, integration health             |
+| Assure & investigate | Auditor, Compliance, Security      | Immutable history, export, policy visibility                     |
+| Administer           | Tenant / Platform Admin            | Policy, users, entitlements — separated from daily quality work  |
 
 Role-specific experiences **share the same object model and navigation grammar**. A Manual Tester and Release Manager both open a Verification Session, but the Release Manager’s Home emphasises readiness widgets and cert queues while the tester’s emphasises assigned sessions. Secondary workspace pins are personal preferences, not permission grants.
 
@@ -92,12 +92,12 @@ Command palette integration (when APZHUB UCP is available) follows the same perm
 
 Accessibility is a **first-class product requirement**, not a post-release patch. Target: **WCAG 2.1 Level AA** for all primary flows.
 
-| Topic | Definition |
-| ----- | ---------- |
-| Perceivable | Semantic structure; meaningful headings; colour not sole status indicator |
-| Operable | Keyboard-complete primary flows; sufficient focus visibility; no time limits on approvals without extension |
-| Understandable | Consistent labels aligned to [PRODUCT-GLOSSARY.md](./PRODUCT-GLOSSARY.md); errors explain remediation |
-| Robust | Screen reader support for primary objects and status changes |
+| Topic          | Definition                                                                                                  |
+| -------------- | ----------------------------------------------------------------------------------------------------------- |
+| Perceivable    | Semantic structure; meaningful headings; colour not sole status indicator                                   |
+| Operable       | Keyboard-complete primary flows; sufficient focus visibility; no time limits on approvals without extension |
+| Understandable | Consistent labels aligned to [PRODUCT-GLOSSARY.md](./PRODUCT-GLOSSARY.md); errors explain remediation       |
+| Robust         | Screen reader support for primary objects and status changes                                                |
 
 Primary flows include: Home work queue, manual verification session step execution, evidence attach/view, defect create/link, approval accept/reject with reason, certification pack review, audit search/export initiation, and Administration user/role assignment.
 
@@ -107,14 +107,14 @@ Responsive posture: **desktop-first**; tablet acceptable for review/approve; mob
 
 All **primary flows** must be fully operable by keyboard without requiring pointer hover for essential actions.
 
-| Flow category | Keyboard expectation |
-| ------------- | -------------------- |
-| Navigation | Activity Bar, sidebar, breadcrumbs, and search reachable and activatable |
+| Flow category       | Keyboard expectation                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| Navigation          | Activity Bar, sidebar, breadcrumbs, and search reachable and activatable                   |
 | Manual verification | Step advance, pass/fail/blocked/NA, comment entry, evidence attach, session pause/complete |
-| Review & approval | Queue navigation, open detail, accept/reject with mandatory reason field focus |
-| Certification | Pack section navigation, decision actions, qualification entry when outcome requires it |
-| Search | Open search, move results, open selection, return to prior context |
-| Tables & lists | Sort, filter, row open where lists are primary (defect queues, audit results) |
+| Review & approval   | Queue navigation, open detail, accept/reject with mandatory reason field focus             |
+| Certification       | Pack section navigation, decision actions, qualification entry when outcome requires it    |
+| Search              | Open search, move results, open selection, return to prior context                         |
+| Tables & lists      | Sort, filter, row open where lists are primary (defect queues, audit results)              |
 
 Shortcuts must not override platform shell conventions. Custom shortcuts, when offered, are documented in-product and avoid conflicting with assistive technology.
 
@@ -136,12 +136,12 @@ Peer review of verifications and managerial sign-off of risk/waivers follow the 
 
 Evidence is **proof**, not attachment clutter. Users attach, organise, and consume evidence without leaving execution or certification context.
 
-| Moment | Experience intent |
-| ------ | ----------------- |
-| During execution | Attach from session step with minimal friction; link to external artefacts when integrated |
-| After execution | Evidence appears on run/session and rolls up to packs |
-| During certification | Pack review shows completeness, gaps, and locked artefacts post-decision |
-| During audit | Evidence opens with integrity context (who/when/scope) — not editable after lock |
+| Moment               | Experience intent                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------ |
+| During execution     | Attach from session step with minimal friction; link to external artefacts when integrated |
+| After execution      | Evidence appears on run/session and rolls up to packs                                      |
+| During certification | Pack review shows completeness, gaps, and locked artefacts post-decision                   |
+| During audit         | Evidence opens with integrity context (who/when/scope) — not editable after lock           |
 
 Claims in readiness and certification views **link to evidence** (“evidence before opinion”). Missing evidence is explicit in readiness explanations, not implied green status.
 
@@ -180,12 +180,12 @@ Exploratory sessions share execution module entry with different emphasis (chart
 
 Automation Management surfaces **health, ingestion, and quality signals** — not CI pipeline administration (DEF-D-008). Automation engineers monitor what QEP ingested, what failed to map, and what is flaky — then jump to Execution or Defects.
 
-| Surface | Intent |
-| ------- | ------ |
-| Ingest status | Last run mapped, parse errors, orphaned results |
-| Flaky / unstable signals | Trends prompting human review — not auto-waiver |
-| Promotion queue | Automation candidates for verification library — human promotion |
-| Failure drill-down | Link to execution results, evidence, and defects |
+| Surface                  | Intent                                                           |
+| ------------------------ | ---------------------------------------------------------------- |
+| Ingest status            | Last run mapped, parse errors, orphaned results                  |
+| Flaky / unstable signals | Trends prompting human review — not auto-waiver                  |
+| Promotion queue          | Automation candidates for verification library — human promotion |
+| Failure drill-down       | Link to execution results, evidence, and defects                 |
 
 When automation is absent, Automation module areas show honest empty states directing users to manual execution — not broken placeholders.
 
@@ -231,11 +231,11 @@ See [AI-WORKFLOWS.md](./AI-WORKFLOWS.md).
 
 Notifications **direct attention**, they do not replace in-product queues. Platform Attention Engine delivers; QEP modules publish events — modules do not implement parallel notification subsystems.
 
-| Category | Examples | UX intent |
-| -------- | -------- | --------- |
+| Category        | Examples                                                 | UX intent                          |
+| --------------- | -------------------------------------------------------- | ---------------------------------- |
 | Action required | Approval pending, session assigned, cert decision needed | High salience; deep link to action |
-| Awareness | Readiness changed, defect severity escalated | Medium; dismissible |
-| Informational | Integration sync completed | Low; batched where possible |
+| Awareness       | Readiness changed, defect severity escalated             | Medium; dismissible                |
+| Informational   | Integration sync completed                               | Low; batched where possible        |
 
 Notifications respect role and permission: users are not notified about objects they cannot access. Digest and subscription behaviour follows platform policy. Notification text uses product glossary terms.
 
@@ -243,13 +243,13 @@ Notifications respect role and permission: users are not notified about objects 
 
 Errors must be **honest, actionable, and safe** — no raw integration or backend details exposed to standard users.
 
-| Error class | User-facing intent |
-| ----------- | ------------------ |
-| Permission denied | Explain missing permission or role; suggest admin contact — not “404” disguise |
-| Validation | Field-level or summary with fix guidance |
-| Conflict | Concurrent edit, stale approval — show refresh/recover path |
-| Integration unavailable | Name the integration generically; status in Integration Centre |
-| Policy block | Gate not met, SoD violation — cite policy name and remediation |
+| Error class             | User-facing intent                                                             |
+| ----------------------- | ------------------------------------------------------------------------------ |
+| Permission denied       | Explain missing permission or role; suggest admin contact — not “404” disguise |
+| Validation              | Field-level or summary with fix guidance                                       |
+| Conflict                | Concurrent edit, stale approval — show refresh/recover path                    |
+| Integration unavailable | Name the integration generically; status in Integration Centre                 |
+| Policy block            | Gate not met, SoD violation — cite policy name and remediation                 |
 
 Transient failures offer retry where appropriate. Destructive actions require confirmation with scope restated. Errors on certification or approval paths never leave ambiguous partial state without user-visible recovery guidance.
 
@@ -265,37 +265,37 @@ Avoid fake placeholder data. Distinguish “zero records” from “filtered to 
 
 Enterprise deployments introduce scale, segregation, and governance constraints the experience must anticipate at product-intent level:
 
-| Concern | Experience intent |
-| ------- | ----------------- |
-| Multi-tenant isolation | No cross-tenant leakage in search, recents, or favourites |
-| Large portfolios | Pagination, saved views, and search-first access — not unbounded trees |
-| Delegation & SoD | Approval and cert paths enforce policy with clear messaging |
-| Regional / BU structure | Organisation and team scoping visible in navigation and filters |
-| Long retention | Audit and certification history remain discoverable — archive ≠ hidden |
-| Entitlements | Edition-gated modules (AI, MCP, advanced intelligence) show upgrade/admin path — not broken nav |
-| Brand masking | Backend engine names never appear in standard user surfaces (APZHUB guardrail) |
-| Operational continuity | Integration degradation surfaces in Home and Integration Centre — not silent staleness |
+| Concern                 | Experience intent                                                                               |
+| ----------------------- | ----------------------------------------------------------------------------------------------- |
+| Multi-tenant isolation  | No cross-tenant leakage in search, recents, or favourites                                       |
+| Large portfolios        | Pagination, saved views, and search-first access — not unbounded trees                          |
+| Delegation & SoD        | Approval and cert paths enforce policy with clear messaging                                     |
+| Regional / BU structure | Organisation and team scoping visible in navigation and filters                                 |
+| Long retention          | Audit and certification history remain discoverable — archive ≠ hidden                          |
+| Entitlements            | Edition-gated modules (AI, MCP, advanced intelligence) show upgrade/admin path — not broken nav |
+| Brand masking           | Backend engine names never appear in standard user surfaces (APZHUB guardrail)                  |
+| Operational continuity  | Integration degradation surfaces in Home and Integration Centre — not silent staleness          |
 
 ## Experience patterns
 
-| Pattern | Intent |
-| ------- | ------ |
-| Command-centre | Home as situational awareness |
-| Review and approval | Queues with accept/reject reasons |
-| Evidence-capture | Attach during/after session without friction |
-| Manual-verification | Step execution, pass/fail/blocked/na, comments |
-| Automation-monitoring | Health and flaky signals, not pipeline admin |
-| AI-review | Draft → explain → accept/reject |
-| Certification | Pack review → human decision → immutable record |
-| Executive | Aggregates and exceptions, not operational clutter |
-| Audit | Investigation search/export |
+| Pattern               | Intent                                             |
+| --------------------- | -------------------------------------------------- |
+| Command-centre        | Home as situational awareness                      |
+| Review and approval   | Queues with accept/reject reasons                  |
+| Evidence-capture      | Attach during/after session without friction       |
+| Manual-verification   | Step execution, pass/fail/blocked/na, comments     |
+| Automation-monitoring | Health and flaky signals, not pipeline admin       |
+| AI-review             | Draft → explain → accept/reject                    |
+| Certification         | Pack review → human decision → immutable record    |
+| Executive             | Aggregates and exceptions, not operational clutter |
+| Audit                 | Investigation search/export                        |
 
 ## Related definition documents
 
-| Document | Relationship |
-| -------- | ------------ |
-| [NAVIGATION-MAP.md](./NAVIGATION-MAP.md) | Navigation areas and entry points |
-| [ROLE-WORKSPACES.md](./ROLE-WORKSPACES.md) | Workspace catalogue |
-| [INFORMATION-ARCHITECTURE.md](./INFORMATION-ARCHITECTURE.md) | Object meanings and relationships |
-| [PRODUCT-MODULES.md](./PRODUCT-MODULES.md) | Module areas supporting UX |
-| [PRODUCT-DEFINITION-DECISIONS.md](./PRODUCT-DEFINITION-DECISIONS.md) | DEF-001 decisions preserved |
+| Document                                                             | Relationship                      |
+| -------------------------------------------------------------------- | --------------------------------- |
+| [NAVIGATION-MAP.md](./NAVIGATION-MAP.md)                             | Navigation areas and entry points |
+| [ROLE-WORKSPACES.md](./ROLE-WORKSPACES.md)                           | Workspace catalogue               |
+| [INFORMATION-ARCHITECTURE.md](./INFORMATION-ARCHITECTURE.md)         | Object meanings and relationships |
+| [PRODUCT-MODULES.md](./PRODUCT-MODULES.md)                           | Module areas supporting UX        |
+| [PRODUCT-DEFINITION-DECISIONS.md](./PRODUCT-DEFINITION-DECISIONS.md) | DEF-001 decisions preserved       |

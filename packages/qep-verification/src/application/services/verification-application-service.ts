@@ -21,7 +21,10 @@ import {
   type Verification,
 } from "../../domain/verification/verification";
 import type { VerificationDomainEvent } from "../../domain/verification/verification-events";
-import { createVerificationId, type VerificationId } from "../../domain/verification/verification-id";
+import {
+  createVerificationId,
+  type VerificationId,
+} from "../../domain/verification/verification-id";
 import type { VerificationHistoryEntry } from "../../domain/verification/verification-history";
 import type {
   StoredVerification,
@@ -107,7 +110,9 @@ export type VerificationApplicationServiceDeps = {
   readonly now?: () => string;
   readonly id?: () => string;
   readonly onDomainEvent?: (event: VerificationDomainEvent) => void | Promise<void>;
-  readonly onVerificationUpserted?: (verification: StoredVerification) => void | Promise<void>;
+  readonly onVerificationUpserted?: (
+    verification: StoredVerification,
+  ) => void | Promise<void>;
   readonly onObservation?: (event: VerificationObservationEvent) => void;
   readonly runInTransaction?: <T>(work: () => Promise<T>) => Promise<T>;
 };
@@ -148,10 +153,21 @@ export type VerificationApplicationService = {
     id: string,
     patch: Readonly<Record<string, string>>,
   ): Promise<StoredVerification>;
-  updateRationale(ctx: QepRequestContext, id: string, rationale: string): Promise<StoredVerification>;
-  updatePriority(ctx: QepRequestContext, id: string, priority: string): Promise<StoredVerification>;
+  updateRationale(
+    ctx: QepRequestContext,
+    id: string,
+    rationale: string,
+  ): Promise<StoredVerification>;
+  updatePriority(
+    ctx: QepRequestContext,
+    id: string,
+    priority: string,
+  ): Promise<StoredVerification>;
 
-  getVerification(ctx: QepRequestContext, id: string): Promise<StoredVerification | null>;
+  getVerification(
+    ctx: QepRequestContext,
+    id: string,
+  ): Promise<StoredVerification | null>;
   listVerifications(
     ctx: QepRequestContext,
     query?: VerificationListCommandQuery,
@@ -166,7 +182,10 @@ export type VerificationApplicationService = {
     kind: string,
     artefactId: string,
   ): Promise<readonly StoredVerification[]>;
-  listHistory(ctx: QepRequestContext, id: string): Promise<readonly VerificationHistoryEntry[]>;
+  listHistory(
+    ctx: QepRequestContext,
+    id: string,
+  ): Promise<readonly VerificationHistoryEntry[]>;
   supersessionChain(
     ctx: QepRequestContext,
     verificationId?: string,
@@ -201,10 +220,15 @@ function runInTransaction<T>(
 
 function nextVerificationId(deps: VerificationApplicationServiceDeps): VerificationId {
   const generated = deps.id?.() ?? randomUUID().replace(/-/g, "").slice(0, 16);
-  return createVerificationId(generated.startsWith("ver_") ? generated : `ver_${generated}`);
+  return createVerificationId(
+    generated.startsWith("ver_") ? generated : `ver_${generated}`,
+  );
 }
 
-function assertAnyPermission(ctx: QepRequestContext, requiredOneOf: readonly string[]): void {
+function assertAnyPermission(
+  ctx: QepRequestContext,
+  requiredOneOf: readonly string[],
+): void {
   const granted = ctx.permissions;
   if (!granted || granted.length === 0) return;
   if (granted.includes("qep.verification.*")) return;
@@ -240,10 +264,18 @@ async function observe<T>(
   const started = Date.now();
   try {
     const result = await work();
-    deps.onObservation?.({ operation, durationMs: Date.now() - started, outcome: "success" });
+    deps.onObservation?.({
+      operation,
+      durationMs: Date.now() - started,
+      outcome: "success",
+    });
     return result;
   } catch (error) {
-    deps.onObservation?.({ operation, durationMs: Date.now() - started, outcome: "error" });
+    deps.onObservation?.({
+      operation,
+      durationMs: Date.now() - started,
+      outcome: "error",
+    });
     throw error;
   }
 }
@@ -275,7 +307,11 @@ async function assertSubjectExists(
   subject: { readonly kind: string; readonly artefactId: string },
 ): Promise<void> {
   if (!deps.subjectResolver || subject.kind === "external_reference") return;
-  const resolved = await deps.subjectResolver.resolve(tenantId, subject.kind, subject.artefactId);
+  const resolved = await deps.subjectResolver.resolve(
+    tenantId,
+    subject.kind,
+    subject.artefactId,
+  );
   if (!resolved.exists) {
     throw new VerificationInvariantViolation(
       `Verification subject does not exist: ${subject.kind}:${subject.artefactId}`,
@@ -334,7 +370,9 @@ export function createVerificationApplicationService(
           correlationId: ctx.correlationId,
         });
 
-        const stored = await runInTransaction(deps, async () => deps.verifications.create(created));
+        const stored = await runInTransaction(deps, async () =>
+          deps.verifications.create(created),
+        );
         await appendAudit(deps, ctx, stored.id, "qep.verification.created", {
           subjectKind: stored.subject.kind,
         });
@@ -353,7 +391,13 @@ export function createVerificationApplicationService(
         assertAnyPermission(ctx, [REQUEST]);
         const existing = await requireVerification(deps, ctx.tenantId, id);
         const mutated = requestVerification(existing, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.verification.requested");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.verification.requested",
+        );
       });
     },
 
@@ -361,10 +405,22 @@ export function createVerificationApplicationService(
       return observe(deps, "verification.assign", async () => {
         assertAnyPermission(ctx, [ASSIGN]);
         const existing = await requireVerification(deps, ctx.tenantId, id);
-        const mutated = assignVerification(existing, input.assigneeId, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.verification.assigned", {
-          assigneeId: input.assigneeId,
-        });
+        const mutated = assignVerification(
+          existing,
+          input.assigneeId,
+          nowIso(deps),
+          ctx.userId,
+        );
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.verification.assigned",
+          {
+            assigneeId: input.assigneeId,
+          },
+        );
       });
     },
 
@@ -373,7 +429,13 @@ export function createVerificationApplicationService(
         assertAnyPermission(ctx, [START]);
         const existing = await requireVerification(deps, ctx.tenantId, id);
         const mutated = startVerification(existing, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.verification.started");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.verification.started",
+        );
       });
     },
 
@@ -382,9 +444,16 @@ export function createVerificationApplicationService(
         assertAnyPermission(ctx, [COMPLETE]);
         const existing = await requireVerification(deps, ctx.tenantId, id);
         const mutated = verifyVerification(existing, input, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.verification.verified", {
-          outcome: input.outcome,
-        });
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.verification.verified",
+          {
+            outcome: input.outcome,
+          },
+        );
       });
     },
 
@@ -393,9 +462,16 @@ export function createVerificationApplicationService(
         assertAnyPermission(ctx, [REJECT]);
         const existing = await requireVerification(deps, ctx.tenantId, id);
         const mutated = rejectVerification(existing, input, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.verification.rejected", {
-          outcome: input.outcome,
-        });
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.verification.rejected",
+          {
+            outcome: input.outcome,
+          },
+        );
       });
     },
 
@@ -404,7 +480,13 @@ export function createVerificationApplicationService(
         assertAnyPermission(ctx, [EXPIRE]);
         const existing = await requireVerification(deps, ctx.tenantId, id);
         const mutated = expireVerification(existing, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.verification.expired");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.verification.expired",
+        );
       });
     },
 
@@ -413,7 +495,13 @@ export function createVerificationApplicationService(
         assertAnyPermission(ctx, [WITHDRAW]);
         const existing = await requireVerification(deps, ctx.tenantId, id);
         const mutated = withdrawVerification(existing, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.verification.withdrawn");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.verification.withdrawn",
+        );
       });
     },
 
@@ -436,9 +524,16 @@ export function createVerificationApplicationService(
           nowIso(deps),
           ctx.userId,
         );
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.verification.superseded", {
-          successorVerificationId: input.successorVerificationId,
-        });
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.verification.superseded",
+          {
+            successorVerificationId: input.successorVerificationId,
+          },
+        );
       });
     },
 
@@ -447,7 +542,13 @@ export function createVerificationApplicationService(
         assertAnyPermission(ctx, [CANCEL]);
         const existing = await requireVerification(deps, ctx.tenantId, id);
         const mutated = cancelVerification(existing, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.verification.cancelled");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.verification.cancelled",
+        );
       });
     },
 
@@ -456,7 +557,13 @@ export function createVerificationApplicationService(
         assertAnyPermission(ctx, [RETIRE]);
         const existing = await requireVerification(deps, ctx.tenantId, id);
         const mutated = retireVerification(existing, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.verification.retired");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.verification.retired",
+        );
       });
     },
 
@@ -479,7 +586,12 @@ export function createVerificationApplicationService(
       return observe(deps, "verification.update_rationale", async () => {
         assertAnyPermission(ctx, [MODIFY]);
         const existing = await requireVerification(deps, ctx.tenantId, id);
-        const mutated = applyRationaleUpdate(existing, rationale, nowIso(deps), ctx.userId);
+        const mutated = applyRationaleUpdate(
+          existing,
+          rationale,
+          nowIso(deps),
+          ctx.userId,
+        );
         return persistMutation(
           deps,
           ctx,
@@ -494,7 +606,12 @@ export function createVerificationApplicationService(
       return observe(deps, "verification.update_priority", async () => {
         assertAnyPermission(ctx, [MODIFY]);
         const existing = await requireVerification(deps, ctx.tenantId, id);
-        const mutated = applyPriorityUpdate(existing, priority, nowIso(deps), ctx.userId);
+        const mutated = applyPriorityUpdate(
+          existing,
+          priority,
+          nowIso(deps),
+          ctx.userId,
+        );
         return persistMutation(
           deps,
           ctx,
@@ -517,8 +634,12 @@ export function createVerificationApplicationService(
       return observe(deps, "verification.list", async () => {
         assertAnyPermission(ctx, [VIEW]);
         const items = await deps.verifications.list(ctx.tenantId, {
-          ...(query.status ? { status: query.status as StoredVerification["status"] } : {}),
-          ...(query.outcome ? { outcome: query.outcome as NonNullable<StoredVerification["outcome"]> } : {}),
+          ...(query.status
+            ? { status: query.status as StoredVerification["status"] }
+            : {}),
+          ...(query.outcome
+            ? { outcome: query.outcome as NonNullable<StoredVerification["outcome"]> }
+            : {}),
           subjectKind: query.subjectKind,
           subjectArtefactId: query.subjectArtefactId,
           authorityActorId: query.authorityActorId,
@@ -547,10 +668,13 @@ export function createVerificationApplicationService(
     async supersessionChain(ctx, verificationId) {
       return observe(deps, "verification.supersession_chain", async () => {
         assertAnyPermission(ctx, [VIEW]);
-        const rows = await deps.verifications.list(ctx.tenantId, { status: "superseded" });
+        const rows = await deps.verifications.list(ctx.tenantId, {
+          status: "superseded",
+        });
         if (!verificationId) return rows;
         return rows.filter(
-          (row) => row.id === verificationId || row.successorVerificationId === verificationId,
+          (row) =>
+            row.id === verificationId || row.successorVerificationId === verificationId,
         );
       });
     },

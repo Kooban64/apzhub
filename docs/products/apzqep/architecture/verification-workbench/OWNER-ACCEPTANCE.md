@@ -6,10 +6,10 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ARCH-010 — Verification Workbench Architecture |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
+| Field               | Value                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------- |
+| Programme           | APZQEP-ARCH-010 — Verification Workbench Architecture                                        |
+| Decision            | **ACCEPTED / CLOSED / COMPLETE**                                                             |
 | Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T193000Z-APZQEP-ARCH-010-ACCEPTANCE.json` |
 
 ## Effect

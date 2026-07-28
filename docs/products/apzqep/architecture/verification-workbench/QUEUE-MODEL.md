@@ -12,14 +12,14 @@ My Work · Assigned · Requested · Awaiting Review · Rejected · Expired · Ov
 
 ## Classes
 
-| Class | Scope |
-| ----- | ----- |
-| My Verification Queue | Current actor |
+| Class                   | Scope                          |
+| ----------------------- | ------------------------------ |
+| My Verification Queue   | Current actor                  |
 | Team Verification Queue | Team / role (permission-gated) |
 
 ## Rules
 
-- Membership from server queries only  
-- Counts via bounded aggregations  
-- Empty / permission states governed  
+- Membership from server queries only
+- Counts via bounded aggregations
+- Empty / permission states governed
 - Opening an item selects Verification + Inspector

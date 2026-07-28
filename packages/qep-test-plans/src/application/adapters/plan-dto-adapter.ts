@@ -73,7 +73,9 @@ function toRevisionDto(revision: TestPlanRevision): QepTestPlanRevisionDto {
   };
 }
 
-function toHistorySummaryDto(entry: TestPlanHistoryEntry): QepTestPlanHistorySummaryDto {
+function toHistorySummaryDto(
+  entry: TestPlanHistoryEntry,
+): QepTestPlanHistorySummaryDto {
   return {
     sequence: entry.sequence,
     at: entry.at,

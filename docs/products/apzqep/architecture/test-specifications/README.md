@@ -14,35 +14,35 @@ Authoritative architecture for the APZ QEP **Test Specifications** capability �
 
 ## Baselines
 
-| Field | Value |
-| ----- | ----- |
-| Platform | APZHUB 1.4 CERTIFIED |
-| Requirements | **1.0.0 CERTIFIED / FROZEN** |
-| Traceability | **1.0.0 CERTIFIED / FROZEN** |
-| Verification | **1.0.0 CERTIFIED / FROZEN** |
-| Workbench grammar | APZQEP-ARCH-006 ACCEPTED |
+| Field                  | Value                                                                                                              |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Platform               | APZHUB 1.4 CERTIFIED                                                                                               |
+| Requirements           | **1.0.0 CERTIFIED / FROZEN**                                                                                       |
+| Traceability           | **1.0.0 CERTIFIED / FROZEN**                                                                                       |
+| Verification           | **1.0.0 CERTIFIED / FROZEN**                                                                                       |
+| Workbench grammar      | APZQEP-ARCH-006 ACCEPTED                                                                                           |
 | Downstream engineering | **ENG-050A** / **ENG-050B** **ACCEPTED** · **OES-ARCH-012** **ACCEPTED** · **OES-ENG-050C** ready for Owner Review |
 
 ## Pack
 
-| Document | Purpose |
-| -------- | ------- |
+| Document                                                                     | Purpose                              |
+| ---------------------------------------------------------------------------- | ------------------------------------ |
 | [TEST-SPECIFICATIONS-ARCHITECTURE.md](./TEST-SPECIFICATIONS-ARCHITECTURE.md) | Complete authoritative specification |
-| [CAPABILITY-OVERVIEW.md](./CAPABILITY-OVERVIEW.md) | Overview companion |
-| [DOMAIN-BOUNDARIES.md](./DOMAIN-BOUNDARIES.md) | Ownership / non-ownership |
-| [OWNERSHIP-MODEL.md](./OWNERSHIP-MODEL.md) | What the capability owns |
-| [RELATIONSHIP-MODEL.md](./RELATIONSHIP-MODEL.md) | Cross-capability references |
-| [LIFECYCLE.md](./LIFECYCLE.md) | Lifecycle states |
-| [GOVERNANCE.md](./GOVERNANCE.md) | Ownership, review, approval |
-| [VERSIONING.md](./VERSIONING.md) | Immutable versions |
-| [WORKBENCH-ARCHITECTURE.md](./WORKBENCH-ARCHITECTURE.md) | Future Workbench principles |
-| [PERFORMANCE.md](./PERFORMANCE.md) | Scale model |
-| [ACCESSIBILITY.md](./ACCESSIBILITY.md) | Accessibility model |
-| [AI-CONSIDERATIONS.md](./AI-CONSIDERATIONS.md) | AI as consumer |
-| [MCP-CONSIDERATIONS.md](./MCP-CONSIDERATIONS.md) | MCP as consumer |
-| [ARCHITECTURE-DECISION-RECORDS.md](./ARCHITECTURE-DECISION-RECORDS.md) | ADR index |
-| [ARCHITECTURE-COMPLETION-REPORT.md](./ARCHITECTURE-COMPLETION-REPORT.md) | Completion report |
-| [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) | Owner Acceptance |
+| [CAPABILITY-OVERVIEW.md](./CAPABILITY-OVERVIEW.md)                           | Overview companion                   |
+| [DOMAIN-BOUNDARIES.md](./DOMAIN-BOUNDARIES.md)                               | Ownership / non-ownership            |
+| [OWNERSHIP-MODEL.md](./OWNERSHIP-MODEL.md)                                   | What the capability owns             |
+| [RELATIONSHIP-MODEL.md](./RELATIONSHIP-MODEL.md)                             | Cross-capability references          |
+| [LIFECYCLE.md](./LIFECYCLE.md)                                               | Lifecycle states                     |
+| [GOVERNANCE.md](./GOVERNANCE.md)                                             | Ownership, review, approval          |
+| [VERSIONING.md](./VERSIONING.md)                                             | Immutable versions                   |
+| [WORKBENCH-ARCHITECTURE.md](./WORKBENCH-ARCHITECTURE.md)                     | Future Workbench principles          |
+| [PERFORMANCE.md](./PERFORMANCE.md)                                           | Scale model                          |
+| [ACCESSIBILITY.md](./ACCESSIBILITY.md)                                       | Accessibility model                  |
+| [AI-CONSIDERATIONS.md](./AI-CONSIDERATIONS.md)                               | AI as consumer                       |
+| [MCP-CONSIDERATIONS.md](./MCP-CONSIDERATIONS.md)                             | MCP as consumer                      |
+| [ARCHITECTURE-DECISION-RECORDS.md](./ARCHITECTURE-DECISION-RECORDS.md)       | ADR index                            |
+| [ARCHITECTURE-COMPLETION-REPORT.md](./ARCHITECTURE-COMPLETION-REPORT.md)     | Completion report                    |
+| [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                                 | Owner Acceptance                     |
 
 ## STOP
 

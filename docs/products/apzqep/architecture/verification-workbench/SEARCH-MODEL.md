@@ -8,7 +8,7 @@ Global verification search (`verification_record`) · subject · authority · st
 
 ## Rules
 
-- Platform Unified Search (020)  
-- Permission-filtered at query time  
-- Index is derived, not SoR  
+- Platform Unified Search (020)
+- Permission-filtered at query time
+- Index is derived, not SoR
 - Opening a result selects Verification + Inspector

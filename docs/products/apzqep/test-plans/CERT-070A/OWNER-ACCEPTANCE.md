@@ -8,10 +8,10 @@
 
 ## Governing Standards
 
-- Document 000 v1.0.0  
-- OES-000 v1.0.0  
-- OES-001 v1.0.0  
-- OES-002 v1.1.0  
+- Document 000 v1.0.0
+- OES-000 v1.0.0
+- OES-001 v1.0.0
+- OES-002 v1.1.0
 
 ## Decision
 
@@ -25,19 +25,19 @@
 
 The certification has remained fully independent of engineering and has assessed the Workbench implementation exactly as delivered.
 
-| Certification Area | Result |
-| ------------------ | ------ |
-| Governance Compliance | ✅ PASS |
-| Workbench Architecture Conformance | ✅ PASS |
+| Certification Area                    | Result  |
+| ------------------------------------- | ------- |
+| Governance Compliance                 | ✅ PASS |
+| Workbench Architecture Conformance    | ✅ PASS |
 | Engineering Specification Conformance | ✅ PASS |
-| Presentation Layer Integrity | ✅ PASS |
-| Domain Contract Preservation | ✅ PASS |
-| Infrastructure Contract Preservation | ✅ PASS |
-| `availableActions` Enforcement | ✅ PASS |
-| L-01 / L-02 Honest Presentation | ✅ PASS |
-| Workbench Test Suite | ✅ PASS |
-| Documentation | ✅ PASS |
-| Certification Independence | ✅ PASS |
+| Presentation Layer Integrity          | ✅ PASS |
+| Domain Contract Preservation          | ✅ PASS |
+| Infrastructure Contract Preservation  | ✅ PASS |
+| `availableActions` Enforcement        | ✅ PASS |
+| L-01 / L-02 Honest Presentation       | ✅ PASS |
+| Workbench Test Suite                  | ✅ PASS |
+| Documentation                         | ✅ PASS |
+| Certification Independence            | ✅ PASS |
 
 ## Production classification
 
@@ -65,7 +65,7 @@ Integrated Capability Certification has not yet been completed.
 
 ## Owner directives
 
-- **APZQEP-CERT-070A is closed.**  
+- **APZQEP-CERT-070A is closed.**
 - No further certification activity under this programme identifier.
 
 ## Authorises next

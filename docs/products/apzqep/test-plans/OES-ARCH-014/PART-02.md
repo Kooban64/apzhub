@@ -1,12 +1,13 @@
 # APZQEP-OES-ARCH-014
+
 # PART 2 — Information Architecture, Navigation & Session Restore
 
-| Item | Value |
-| ---- | ----- |
-| Document | APZQEP-OES-ARCH-014 |
-| Part | **2 of 5** |
-| Programme | APZQEP-ARCH-014 |
-| Status | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
+| Item      | Value                                       |
+| --------- | ------------------------------------------- |
+| Document  | APZQEP-OES-ARCH-014                         |
+| Part      | **2 of 5**                                  |
+| Programme | APZQEP-ARCH-014                             |
+| Status    | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
 
 ---
 
@@ -34,30 +35,30 @@ It **SHALL** enable an engineer to implement navigation and discovery without in
 
 ### 3.1 Activity Bar
 
-| Element | Requirement |
-| ------- | ----------- |
+| Element     | Requirement                                                                                                                        |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | **APZ QEP** | Existing Activity Bar affordance hosting all QEP capabilities; Test Plans registers under it — no new top-level Activity Bar entry |
 
 ### 3.2 Sidebar (Test Plans module)
 
 The Sidebar **SHALL** expose, at minimum, under a **Test Plans** entry:
 
-| Nav item | Purpose | Default route concept |
-| -------- | ------- | ---------------------- |
-| **Dashboard** | Attention / counts / queues (Part 3) | `/workspace/qep/test-plans` |
-| **Explorer** | Primary inventory | `/workspace/qep/test-plans/explorer` |
-| **Review** | Plans awaiting review/approval decisions | `/workspace/qep/test-plans/review` |
-| **Search** | Capability-scoped search entry (also reachable via global search) | `/workspace/qep/test-plans/search` |
+| Nav item      | Purpose                                                           | Default route concept                |
+| ------------- | ----------------------------------------------------------------- | ------------------------------------ |
+| **Dashboard** | Attention / counts / queues (Part 3)                              | `/workspace/qep/test-plans`          |
+| **Explorer**  | Primary inventory                                                 | `/workspace/qep/test-plans/explorer` |
+| **Review**    | Plans awaiting review/approval decisions                          | `/workspace/qep/test-plans/review`   |
+| **Search**    | Capability-scoped search entry (also reachable via global search) | `/workspace/qep/test-plans/search`   |
 
 Additional Sidebar items **MAY** be added only if a later accepted revision of this Part defines them. They **MUST NOT** appear in implementation before definition.
 
 ### 3.3 Workspace regions
 
-| Region | Content |
-| ------ | ------- |
-| Primary workspace | Explorer table / Review queue / Dashboard widgets / Search results |
-| Inspector (context panel or split) | Selected Plan detail (Part 3) |
-| Overlays | Dialogs for submit / approve / reject / mark-ready / start-execution / complete / archive / cancel / supersede / clone / assign / schedule (Part 3 §9–10), driven by `availableActions` |
+| Region                             | Content                                                                                                                                                                                 |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Primary workspace                  | Explorer table / Review queue / Dashboard widgets / Search results                                                                                                                      |
+| Inspector (context panel or split) | Selected Plan detail (Part 3)                                                                                                                                                           |
+| Overlays                           | Dialogs for submit / approve / reject / mark-ready / start-execution / complete / archive / cancel / supersede / clone / assign / schedule (Part 3 §9–10), driven by `availableActions` |
 
 ---
 
@@ -67,21 +68,21 @@ Additional Sidebar items **MAY** be added only if a later accepted revision of t
 
 Routes below are **architectural URL contracts**. Concrete Next.js file layout is deferred to Workbench Engineering; the paths **SHALL** remain stable.
 
-| Pattern | Meaning |
-| ------- | ------- |
-| `/workspace/qep/test-plans` | Capability root → Dashboard |
-| `/workspace/qep/test-plans/explorer` | Explorer |
-| `/workspace/qep/test-plans/review` | Review queue |
-| `/workspace/qep/test-plans/search` | Capability search |
-| `/workspace/qep/test-plans/new` | Create Draft |
-| `/workspace/qep/test-plans/plans/{planId}` | Plan deep link (Inspector primary — Summary) |
-| `/workspace/qep/test-plans/plans/{planId}/edit` | Edit Draft |
-| `/workspace/qep/test-plans/plans/{planId}/items` | Linked Specifications (Plan Items) panel |
-| `/workspace/qep/test-plans/plans/{planId}/relationships` | Relationships panel |
-| `/workspace/qep/test-plans/plans/{planId}/history` | History panel |
-| `/workspace/qep/test-plans/plans/{planId}/versions` | Versions / lineage panel |
+| Pattern                                                                | Meaning                                                                                          |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `/workspace/qep/test-plans`                                            | Capability root → Dashboard                                                                      |
+| `/workspace/qep/test-plans/explorer`                                   | Explorer                                                                                         |
+| `/workspace/qep/test-plans/review`                                     | Review queue                                                                                     |
+| `/workspace/qep/test-plans/search`                                     | Capability search                                                                                |
+| `/workspace/qep/test-plans/new`                                        | Create Draft                                                                                     |
+| `/workspace/qep/test-plans/plans/{planId}`                             | Plan deep link (Inspector primary — Summary)                                                     |
+| `/workspace/qep/test-plans/plans/{planId}/edit`                        | Edit Draft                                                                                       |
+| `/workspace/qep/test-plans/plans/{planId}/items`                       | Linked Specifications (Plan Items) panel                                                         |
+| `/workspace/qep/test-plans/plans/{planId}/relationships`               | Relationships panel                                                                              |
+| `/workspace/qep/test-plans/plans/{planId}/history`                     | History panel                                                                                    |
+| `/workspace/qep/test-plans/plans/{planId}/versions`                    | Versions / lineage panel                                                                         |
 | `/workspace/qep/test-plans/plans/{planId}/compare?from={rev}&to={rev}` | Compare — **governed unavailable** contract slot until Infrastructure L-01 is closed (Part 4 §6) |
-| `/workspace/qep/test-plans/plans/{planId}/audit` | Audit panel |
+| `/workspace/qep/test-plans/plans/{planId}/audit`                       | Audit panel                                                                                      |
 
 ### 4.2 Deep-link rules
 
@@ -95,12 +96,12 @@ Routes below are **architectural URL contracts**. Concrete Next.js file layout i
 
 ## 5. Persona → entry surfaces
 
-| Persona | Primary entry | Secondary |
-| ------- | ------------- | --------- |
-| Viewer | Explorer | Search, Plan deep link |
-| Tester | Explorer (assigned filter) | Plan deep link (assigned items) |
-| Lead | Dashboard (My owned / My assigned) | Explorer, Create Draft |
-| QA Manager | Review queue | Dashboard, Explorer |
+| Persona    | Primary entry                      | Secondary                       |
+| ---------- | ---------------------------------- | ------------------------------- |
+| Viewer     | Explorer                           | Search, Plan deep link          |
+| Tester     | Explorer (assigned filter)         | Plan deep link (assigned items) |
+| Lead       | Dashboard (My owned / My assigned) | Explorer, Create Draft          |
+| QA Manager | Review queue                       | Dashboard, Explorer             |
 
 Permission Platform **SHALL** gate visibility of Sidebar items and actions. The Workbench **MUST NOT** show actions absent from `availableActions` / grants.
 
@@ -114,31 +115,31 @@ The **Plan Explorer** is the list-first inventory of Test Plans for a tenant.
 
 ### 6.2 Browseable columns (minimum)
 
-| Column | Source | Notes |
-| ------ | ------ | ----- |
-| Number | Infrastructure DTO `number` | e.g. `TP-001` |
-| Title | DTO `title` | Primary label |
-| Status | DTO `status` | Badge; Draft…Archived (Appendix B) |
-| Scope | DTO `scope` / `planType` | Release, Product, Feature, Milestone, Sprint, Regression, Certification, Custom |
-| Priority | DTO `priority` | |
-| Owner | DTO ownership | |
-| Assigned lead | DTO assignment | |
-| Planned start / end | DTO schedule | |
-| Item count | Derived from items on DTO | Included vs total |
-| Updated | DTO `updatedAt` | Sort default: updated desc |
-| Version | DTO `versionLabel` | Label |
+| Column              | Source                      | Notes                                                                           |
+| ------------------- | --------------------------- | ------------------------------------------------------------------------------- |
+| Number              | Infrastructure DTO `number` | e.g. `TP-001`                                                                   |
+| Title               | DTO `title`                 | Primary label                                                                   |
+| Status              | DTO `status`                | Badge; Draft…Archived (Appendix B)                                              |
+| Scope               | DTO `scope` / `planType`    | Release, Product, Feature, Milestone, Sprint, Regression, Certification, Custom |
+| Priority            | DTO `priority`              |                                                                                 |
+| Owner               | DTO ownership               |                                                                                 |
+| Assigned lead       | DTO assignment              |                                                                                 |
+| Planned start / end | DTO schedule                |                                                                                 |
+| Item count          | Derived from items on DTO   | Included vs total                                                               |
+| Updated             | DTO `updatedAt`             | Sort default: updated desc                                                      |
+| Version             | DTO `versionLabel`          | Label                                                                           |
 
 ### 6.3 Explorer capabilities
 
-| Capability | Rule |
-| ---------- | ---- |
-| Filtering | Contextual: status, scope, owner, lead, priority, tags, scheduled window, text query (`q`) |
-| Sorting | At least: `updatedAt`, `createdAt`, `number`, `title`, `status`, `priority`, `plannedStart` (ENG-060B Part 2 §5) |
-| Saved views | Named filter + column presets per user (Preference Service, Document 023) — presentation only |
-| Selection | Single select opens Inspector; multi-select **MAY** enable bulk UI only for actions present in **every** selected row's `availableActions` intersection |
-| Pagination | Server-driven; max `pageSize` = 50 (ARCH-013 / ENG-060B) |
-| Empty / loading / error | Design-system governed states (Part 4 §7) |
-| Default set | Excludes `archived`, `cancelled`, `superseded` unless explicitly requested (mirrors ENG-060B Part 3 §5 default query behaviour) |
+| Capability              | Rule                                                                                                                                                    |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Filtering               | Contextual: status, scope, owner, lead, priority, tags, scheduled window, text query (`q`)                                                              |
+| Sorting                 | At least: `updatedAt`, `createdAt`, `number`, `title`, `status`, `priority`, `plannedStart` (ENG-060B Part 2 §5)                                        |
+| Saved views             | Named filter + column presets per user (Preference Service, Document 023) — presentation only                                                           |
+| Selection               | Single select opens Inspector; multi-select **MAY** enable bulk UI only for actions present in **every** selected row's `availableActions` intersection |
+| Pagination              | Server-driven; max `pageSize` = 50 (ARCH-013 / ENG-060B)                                                                                                |
+| Empty / loading / error | Design-system governed states (Part 4 §7)                                                                                                               |
+| Default set             | Excludes `archived`, `cancelled`, `superseded` unless explicitly requested (mirrors ENG-060B Part 3 §5 default query behaviour)                         |
 
 ### 6.4 Explorer non-goals
 
@@ -175,11 +176,11 @@ A filtered operational list of Plans in `review` (and, where useful, recently `r
 
 ### 8.1 Global vs contextual
 
-| Mode | Behaviour |
-| ---- | --------- |
-| **Global search** | Platform Unified Search (Document 020); Plan documents appear among permitted types |
-| **Capability search** | Test Plans Search surface; same index fields; results open Explorer/Inspector |
-| **Explorer filter `q`** | Contextual quick filter within Explorer |
+| Mode                    | Behaviour                                                                           |
+| ----------------------- | ----------------------------------------------------------------------------------- |
+| **Global search**       | Platform Unified Search (Document 020); Plan documents appear among permitted types |
+| **Capability search**   | Test Plans Search surface; same index fields; results open Explorer/Inspector       |
+| **Explorer filter `q`** | Contextual quick filter within Explorer                                             |
 
 ### 8.2 Indexed fields (consumed, not owned)
 
@@ -200,13 +201,13 @@ Number · Title · Objective/description · Status (facet) · Scope/plan type (f
 
 ### 9.1 Outbound references (from a Plan)
 
-| Reference kind | Navigation target | If unavailable |
-| --------------- | ------------------ | --------------- |
-| `specification` (Plan Item) | Test Specifications Inspector deep link | Governed unavailable |
-| `requirement` | Requirements Workbench artefact | Governed unavailable |
-| `trace_link` | Traceability Workbench artefact | Governed unavailable |
-| `verification` | Verification Workbench artefact | Governed unavailable |
-| `execution` / `run` / `evidence` / `defect` | Future capabilities | Slot only — governed unavailable until those capabilities exist |
+| Reference kind                              | Navigation target                       | If unavailable                                                  |
+| ------------------------------------------- | --------------------------------------- | --------------------------------------------------------------- |
+| `specification` (Plan Item)                 | Test Specifications Inspector deep link | Governed unavailable                                            |
+| `requirement`                               | Requirements Workbench artefact         | Governed unavailable                                            |
+| `trace_link`                                | Traceability Workbench artefact         | Governed unavailable                                            |
+| `verification`                              | Verification Workbench artefact         | Governed unavailable                                            |
+| `execution` / `run` / `evidence` / `defect` | Future capabilities                     | Slot only — governed unavailable until those capabilities exist |
 
 ### 9.2 Inbound navigation (to a Plan)
 
@@ -262,16 +263,16 @@ Activity Bar: APZ QEP
 
 ## 13. Traceability
 
-| This Part | Trace |
-| --------- | ----- |
-| Shell grammar | Documents 005 / 016 / 017 |
-| Sessions / preferences | Documents 018 / 023 |
-| Capability boundaries | ARCH-013 |
-| REST consumption | ENG-060B Part 4 `/api/v1/qep/plans` |
-| Domain statuses / actions | ENG-060A |
-| Search fields | ENG-060B Part 4 §3 |
-| Frozen upstream | Requirements / Traceability / Verification / Test Specifications 1.0.0 |
-| Workbench grammar precedent | APZQEP-OES-ARCH-012 |
+| This Part                   | Trace                                                                  |
+| --------------------------- | ---------------------------------------------------------------------- |
+| Shell grammar               | Documents 005 / 016 / 017                                              |
+| Sessions / preferences      | Documents 018 / 023                                                    |
+| Capability boundaries       | ARCH-013                                                               |
+| REST consumption            | ENG-060B Part 4 `/api/v1/qep/plans`                                    |
+| Domain statuses / actions   | ENG-060A                                                               |
+| Search fields               | ENG-060B Part 4 §3                                                     |
+| Frozen upstream             | Requirements / Traceability / Verification / Test Specifications 1.0.0 |
+| Workbench grammar precedent | APZQEP-OES-ARCH-012                                                    |
 
 ---
 

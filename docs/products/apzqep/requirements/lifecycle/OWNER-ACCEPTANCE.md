@@ -11,15 +11,15 @@
 
 ## Decision record (Owner)
 
-| Field | Value |
-| ----- | ----- |
-| Decision | **ACCEPTED** |
-| Repository status | **CLOSED** |
-| Classification | **COMPLETE** |
-| Date | 2026-07-25 |
-| Authority | Owner |
-| Baseline | APZQEP-ENG-020C Requirements Lifecycle Engine — authoritative (`@apzhub/lifecycle-engine` 0.1.0 · Requirements 0.3.0) |
-| Conditions | Acceptance authorises **APZQEP-ENG-020D** Requirements Versioning & Baselines |
+| Field             | Value                                                                                                                 |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Decision          | **ACCEPTED**                                                                                                          |
+| Repository status | **CLOSED**                                                                                                            |
+| Classification    | **COMPLETE**                                                                                                          |
+| Date              | 2026-07-25                                                                                                            |
+| Authority         | Owner                                                                                                                 |
+| Baseline          | APZQEP-ENG-020C Requirements Lifecycle Engine — authoritative (`@apzhub/lifecycle-engine` 0.1.0 · Requirements 0.3.0) |
+| Conditions        | Acceptance authorises **APZQEP-ENG-020D** Requirements Versioning & Baselines                                         |
 
 ## Acceptance checklist (Owner)
 

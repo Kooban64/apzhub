@@ -8,7 +8,7 @@ Summary · Subject · Authority · Status · Outcome · Priority · Version · H
 
 ## Rules
 
-- Read-mostly; mutations via commands  
-- Actions from `availableActions` only  
-- Related capabilities: navigate or governed unavailable  
+- Read-mostly; mutations via commands
+- Actions from `availableActions` only
+- Related capabilities: navigate or governed unavailable
 - Overlay/drawer on tablet/mobile

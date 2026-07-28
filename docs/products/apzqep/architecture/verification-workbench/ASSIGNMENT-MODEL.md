@@ -8,8 +8,8 @@ assign · reassign · claim · release · delegate · queue routing · team assi
 
 ## Rules
 
-- Affordances only when in `availableActions`  
-- Confirmation for ownership-changing actions  
-- Workload visibility = server counts, not a scheduler  
-- Client never invents assignee eligibility  
+- Affordances only when in `availableActions`
+- Confirmation for ownership-changing actions
+- Workload visibility = server counts, not a scheduler
+- Client never invents assignee eligibility
 - Ownership shown in Inspector and Explorer

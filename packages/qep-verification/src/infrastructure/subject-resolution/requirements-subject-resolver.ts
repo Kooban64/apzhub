@@ -1,4 +1,7 @@
-import type { SubjectResolutionFact, VerificationSubjectResolver } from "./subject-resolver";
+import type {
+  SubjectResolutionFact,
+  VerificationSubjectResolver,
+} from "./subject-resolver";
 
 /**
  * Structural (duck-typed) ports mirroring the Requirements bounded context's

@@ -4,15 +4,15 @@
 
 ## Canonical panes
 
-| Pane | Role |
-| --- | --- |
-| Explorer | Inventory, filters, saved views |
-| Main | Editor / compare / analyse (+ split) |
-| Inspector | Selection properties and actions |
+| Pane         | Role                                   |
+| ------------ | -------------------------------------- |
+| Explorer     | Inventory, filters, saved views        |
+| Main         | Editor / compare / analyse (+ split)   |
+| Inspector    | Selection properties and actions       |
 | Relationship | Inbound/outbound/grouped Relationships |
-| Details | Extended metadata / links |
-| Activity | Validation and attention feed |
-| Status bar | Lifecycle, counts, scope, hints |
+| Details      | Extended metadata / links              |
+| Activity     | Validation and attention feed          |
+| Status bar   | Lifecycle, counts, scope, hints        |
 
 ## Layout rules
 

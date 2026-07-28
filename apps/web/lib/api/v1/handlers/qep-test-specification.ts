@@ -100,7 +100,10 @@ export async function handleListQepTestSpecifications(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const query = parseQuery(qepTestSpecificationListQuerySchema, request.nextUrl.searchParams);
+  const query = parseQuery(
+    qepTestSpecificationListQuerySchema,
+    request.nextUrl.searchParams,
+  );
   const service = await requireQepTestSpecificationGateway();
   const listOptions = {
     status: query.status,
@@ -109,7 +112,10 @@ export async function handleListQepTestSpecifications(
     classification: query.classification,
     priority: query.priority,
     number: query.number,
-    isAuthoritative: query.isAuthoritative,
+    isAuthoritative:
+      query.isAuthoritative === undefined
+        ? undefined
+        : query.isAuthoritative === "true",
     limit: query.limit ?? query.perPage,
     offset: query.offset,
   };
@@ -137,7 +143,9 @@ export async function handleCreateQepTestSpecification(
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const service = await requireQepTestSpecificationGateway();
-  const created = await invoke(context, () => service.create(context.serviceContext, body));
+  const created = await invoke(context, () =>
+    service.create(context.serviceContext, body),
+  );
   return jsonDataResponse(created, context.tracing, { status: 201 });
 }
 
@@ -146,7 +154,11 @@ export async function handleGetQepTestSpecification(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const service = await requireQepTestSpecificationGateway();
   const item = await invoke(context, () => service.get(context.serviceContext, id));
   if (!item) {
@@ -163,7 +175,11 @@ export async function handleUpdateQepTestSpecificationDraft(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const body = await parseJsonBody(
     request,
     qepTestSpecificationUpdateDraftBodySchema,
@@ -181,7 +197,11 @@ export async function handleSubmitQepTestSpecificationReview(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const body = await parseJsonBody(
     request,
     qepTestSpecificationSubmitReviewBodySchema,
@@ -199,7 +219,11 @@ export async function handleApproveQepTestSpecification(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const body = await parseJsonBody(
     request,
     qepTestSpecificationApproveBodySchema,
@@ -217,7 +241,11 @@ export async function handleRejectQepTestSpecification(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const body = await parseJsonBody(
     request,
     qepTestSpecificationRejectBodySchema,
@@ -235,9 +263,15 @@ export async function handleWithdrawQepTestSpecification(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const service = await requireQepTestSpecificationGateway();
-  const updated = await invoke(context, () => service.withdraw(context.serviceContext, id));
+  const updated = await invoke(context, () =>
+    service.withdraw(context.serviceContext, id),
+  );
   return jsonDataResponse(updated, context.tracing);
 }
 
@@ -246,14 +280,20 @@ export async function handleSupersedeQepTestSpecification(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const body = await parseJsonBody(
     request,
     qepTestSpecificationSupersedeBodySchema,
     PLATFORM_API_MAX_BODY_BYTES,
   );
   const service = await requireQepTestSpecificationGateway();
-  const result = await invoke(context, () => service.supersede(context.serviceContext, id, body));
+  const result = await invoke(context, () =>
+    service.supersede(context.serviceContext, id, body),
+  );
   return jsonDataResponse(result, context.tracing);
 }
 
@@ -262,9 +302,15 @@ export async function handleRetireQepTestSpecification(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const service = await requireQepTestSpecificationGateway();
-  const updated = await invoke(context, () => service.retire(context.serviceContext, id));
+  const updated = await invoke(context, () =>
+    service.retire(context.serviceContext, id),
+  );
   return jsonDataResponse(updated, context.tracing);
 }
 
@@ -273,9 +319,15 @@ export async function handleCancelQepTestSpecification(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const service = await requireQepTestSpecificationGateway();
-  const updated = await invoke(context, () => service.cancel(context.serviceContext, id));
+  const updated = await invoke(context, () =>
+    service.cancel(context.serviceContext, id),
+  );
   return jsonDataResponse(updated, context.tracing);
 }
 
@@ -284,9 +336,15 @@ export async function handleGetQepTestSpecificationHistory(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const service = await requireQepTestSpecificationGateway();
-  const history = await invoke(context, () => service.listHistory(context.serviceContext, id));
+  const history = await invoke(context, () =>
+    service.listHistory(context.serviceContext, id),
+  );
   return jsonDataResponse(history, context.tracing);
 }
 
@@ -295,9 +353,15 @@ export async function handleListQepTestSpecificationVersions(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const service = await requireQepTestSpecificationGateway();
-  const versions = await invoke(context, () => service.listVersions(context.serviceContext, id));
+  const versions = await invoke(context, () =>
+    service.listVersions(context.serviceContext, id),
+  );
   return jsonDataResponse(versions, context.tracing);
 }
 
@@ -306,7 +370,11 @@ export async function handleListQepTestSpecificationRelationships(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const service = await requireQepTestSpecificationGateway();
   const relationships = await invoke(context, () =>
     service.listRelationships(context.serviceContext, id),
@@ -319,7 +387,11 @@ export async function handleAddQepTestSpecificationRelationship(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const id = await param(routeContext, "specificationId", qepTestSpecificationIdParamSchema);
+  const id = await param(
+    routeContext,
+    "specificationId",
+    qepTestSpecificationIdParamSchema,
+  );
   const body = await parseJsonBody(
     request,
     qepTestSpecificationAddRelationshipBodySchema,

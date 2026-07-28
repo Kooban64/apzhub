@@ -8,10 +8,10 @@
 
 ## Governing Standards
 
-- Document 000 v1.0.0  
-- OES-000 v1.0.0  
-- OES-001 v1.0.0  
-- OES-002 v1.1.0  
+- Document 000 v1.0.0
+- OES-000 v1.0.0
+- OES-001 v1.0.0
+- OES-002 v1.1.0
 
 ## Decision
 
@@ -25,20 +25,20 @@
 
 The certification remained fully independent of engineering and evaluated the Test Plans capability as an integrated whole.
 
-| Certification Area | Result |
-| ------------------ | ------ |
-| Governance Compliance | ✅ PASS |
-| Domain Integration | ✅ PASS |
-| Infrastructure Integration | ✅ PASS |
-| Workbench Integration | ✅ PASS |
-| Cross-Layer Contract Integrity | ✅ PASS |
-| End-to-End Workflow Validation | ✅ PASS |
-| Permissions & Security Flow | ✅ PASS |
-| Audit & Observability | ✅ PASS |
-| Test Suite | ✅ PASS (124 / 124) |
-| Type Checking | ✅ PASS |
-| Documentation | ✅ PASS |
-| Certification Independence | ✅ PASS |
+| Certification Area             | Result              |
+| ------------------------------ | ------------------- |
+| Governance Compliance          | ✅ PASS             |
+| Domain Integration             | ✅ PASS             |
+| Infrastructure Integration     | ✅ PASS             |
+| Workbench Integration          | ✅ PASS             |
+| Cross-Layer Contract Integrity | ✅ PASS             |
+| End-to-End Workflow Validation | ✅ PASS             |
+| Permissions & Security Flow    | ✅ PASS             |
+| Audit & Observability          | ✅ PASS             |
+| Test Suite                     | ✅ PASS (124 / 124) |
+| Type Checking                  | ✅ PASS             |
+| Documentation                  | ✅ PASS             |
+| Certification Independence     | ✅ PASS             |
 
 ## Production classification
 
@@ -72,9 +72,9 @@ No Freeze is applied under **CERT-080A**. Freeze requires **APZQEP-FREEZE-080A**
 
 ## Owner directives
 
-- **APZQEP-CERT-080A is closed.**  
-- **`@apzhub/qep-test-plans` is promoted to v1.0.0.**  
-- The capability remains **eligible** for Freeze but is **not frozen**.  
+- **APZQEP-CERT-080A is closed.**
+- **`@apzhub/qep-test-plans` is promoted to v1.0.0.**
+- The capability remains **eligible** for Freeze but is **not frozen**.
 - Subsequent changes follow normal change control and semantic versioning under new programme identifiers.
 
 ## Authorises next

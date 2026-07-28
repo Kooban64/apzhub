@@ -1,5 +1,9 @@
 import type { DatabaseExecutor } from "@apzhub/config";
-import { qepTraceLink, qepTraceLinkHistory, qepTraceLinkTaxonomy } from "@apzhub/config";
+import {
+  qepTraceLink,
+  qepTraceLinkHistory,
+  qepTraceLinkTaxonomy,
+} from "@apzhub/config";
 import { and, asc, desc, eq, inArray, ne } from "drizzle-orm";
 import { randomUUID } from "node:crypto";
 
@@ -37,8 +41,12 @@ import {
   type TraceTaxonomyDefinition,
 } from "../../domain/trace-link/trace-taxonomy";
 import type { TraceType } from "../../domain/trace-link/trace-type";
-import { TraceConflictError, TraceNotFoundError, TraceRevisionConflictError } from "../../shared/errors";
-import { computeTraceLinkDuplicateKey, toStoredTraceLink } from "../mappers/trace-link-mapper";
+import {
+  TraceConflictError,
+  TraceNotFoundError,
+  TraceRevisionConflictError,
+} from "../../shared/errors";
+import { computeTraceLinkDuplicateKey } from "../mappers/trace-link-mapper";
 
 type TraceLinkRow = typeof qepTraceLink.$inferSelect;
 type HistoryRow = typeof qepTraceLinkHistory.$inferSelect;
@@ -61,13 +69,18 @@ function mapHistoryRows(rows: readonly HistoryRow[]): TraceHistoryEntry[] {
   }));
 }
 
-function mapTraceLinkRow(row: TraceLinkRow, historyEntries: readonly TraceHistoryEntry[]): StoredTraceLink {
+function mapTraceLinkRow(
+  row: TraceLinkRow,
+  historyEntries: readonly TraceHistoryEntry[],
+): StoredTraceLink {
   const source: TraceEndpoint = {
     role: "source",
     kind: row.sourceKind as TraceEndpointKind,
     artefactId: row.sourceArtefactId,
     tenantId: row.tenantId,
-    ...(row.sourceContentVersionId ? { contentVersionId: row.sourceContentVersionId } : {}),
+    ...(row.sourceContentVersionId
+      ? { contentVersionId: row.sourceContentVersionId }
+      : {}),
     ...(row.sourceBaselineId ? { baselineId: row.sourceBaselineId } : {}),
     ...(row.sourceExternalUri ? { externalUri: row.sourceExternalUri } : {}),
     owningDomain: row.sourceOwningDomain,
@@ -77,7 +90,9 @@ function mapTraceLinkRow(row: TraceLinkRow, historyEntries: readonly TraceHistor
     kind: row.targetKind as TraceEndpointKind,
     artefactId: row.targetArtefactId,
     tenantId: row.tenantId,
-    ...(row.targetContentVersionId ? { contentVersionId: row.targetContentVersionId } : {}),
+    ...(row.targetContentVersionId
+      ? { contentVersionId: row.targetContentVersionId }
+      : {}),
     ...(row.targetBaselineId ? { baselineId: row.targetBaselineId } : {}),
     ...(row.targetExternalUri ? { externalUri: row.targetExternalUri } : {}),
     owningDomain: row.targetOwningDomain,
@@ -90,7 +105,9 @@ function mapTraceLinkRow(row: TraceLinkRow, historyEntries: readonly TraceHistor
     actorId: row.provenanceActorId,
     correlationId: row.provenanceCorrelationId,
     ...(row.provenanceSourceSystem ? { sourceSystem: row.provenanceSourceSystem } : {}),
-    ...(row.provenanceImportBatchId ? { importBatchId: row.provenanceImportBatchId } : {}),
+    ...(row.provenanceImportBatchId
+      ? { importBatchId: row.provenanceImportBatchId }
+      : {}),
     ...(row.provenanceRationaleRef ? { rationaleRef: row.provenanceRationaleRef } : {}),
   };
 
@@ -113,7 +130,9 @@ function mapTraceLinkRow(row: TraceLinkRow, historyEntries: readonly TraceHistor
     },
     context: {
       ...(row.contextBaselineId ? { baselineId: row.contextBaselineId } : {}),
-      ...(row.contextContentVersionId ? { contentVersionId: row.contextContentVersionId } : {}),
+      ...(row.contextContentVersionId
+        ? { contentVersionId: row.contextContentVersionId }
+        : {}),
       immutable: row.contextImmutable,
     },
     ...(row.rationale ? { rationale: row.rationale as TraceRationale } : {}),
@@ -133,7 +152,9 @@ function mapTraceLinkRow(row: TraceLinkRow, historyEntries: readonly TraceHistor
     ...(row.retiredBy ? { retiredBy: row.retiredBy } : {}),
     ...(row.supersededAt ? { supersededAt: row.supersededAt.toISOString() } : {}),
     ...(row.supersededBy ? { supersededBy: row.supersededBy } : {}),
-    ...(row.successorTraceId ? { successorTraceId: row.successorTraceId as TraceId } : {}),
+    ...(row.successorTraceId
+      ? { successorTraceId: row.successorTraceId as TraceId }
+      : {}),
     domainEvents: [],
   };
 }
@@ -203,8 +224,13 @@ function toInsertValues(trace: TraceLink) {
   };
 }
 
-export function createPostgresTraceLinkRepository(db: DatabaseExecutor): TraceLinkRepository {
-  async function loadHistory(tenantId: string, traceId: string): Promise<TraceHistoryEntry[]> {
+export function createPostgresTraceLinkRepository(
+  db: DatabaseExecutor,
+): TraceLinkRepository {
+  async function loadHistory(
+    tenantId: string,
+    traceId: string,
+  ): Promise<TraceHistoryEntry[]> {
     const rows = await db
       .select()
       .from(qepTraceLinkHistory)
@@ -263,13 +289,18 @@ export function createPostgresTraceLinkRepository(db: DatabaseExecutor): TraceLi
   return {
     async create(trace) {
       try {
-        const [row] = await db.insert(qepTraceLink).values(toInsertValues(trace)).returning();
+        const [row] = await db
+          .insert(qepTraceLink)
+          .values(toInsertValues(trace))
+          .returning();
         if (!row) throw new TraceConflictError("Failed to create Trace Link");
         await syncHistory(trace.tenantId, trace.id, trace.history.entries);
         return mapTraceLinkRow(row, [...trace.history.entries]);
       } catch (error) {
         if (isUniqueViolation(error)) {
-          throw new TraceConflictError(`Duplicate Trace Link already exists: ${trace.id}`);
+          throw new TraceConflictError(
+            `Duplicate Trace Link already exists: ${trace.id}`,
+          );
         }
         throw error;
       }
@@ -297,14 +328,20 @@ export function createPostgresTraceLinkRepository(db: DatabaseExecutor): TraceLi
           if (!existing) {
             throw new TraceNotFoundError(`Trace Link not found: ${trace.id}`);
           }
-          throw new TraceRevisionConflictError(trace.id, expectedRevision, existing.revision);
+          throw new TraceRevisionConflictError(
+            trace.id,
+            expectedRevision,
+            existing.revision,
+          );
         }
         await syncHistory(trace.tenantId, trace.id, trace.history.entries);
         const history = await loadHistory(trace.tenantId, trace.id);
         return mapTraceLinkRow(row, history);
       } catch (error) {
         if (isUniqueViolation(error)) {
-          throw new TraceConflictError(`Duplicate Trace Link already exists: ${trace.id}`);
+          throw new TraceConflictError(
+            `Duplicate Trace Link already exists: ${trace.id}`,
+          );
         }
         throw error;
       }
@@ -374,35 +411,37 @@ export function createPostgresTraceLinkRepository(db: DatabaseExecutor): TraceLi
         .select()
         .from(qepTraceLink)
         .where(and(...conditions));
-      return rows.map(
-        (row): TraceEdgeFact => ({
-          traceId: row.id as TraceId,
-          type: row.traceType as TraceType,
-          source: {
-            kind: row.sourceKind as TraceEndpointKind,
-            artefactId: row.sourceArtefactId,
-            tenantId: row.tenantId,
-            ...(row.sourceContentVersionId ? { contentVersionId: row.sourceContentVersionId } : {}),
-            ...(row.sourceBaselineId ? { baselineId: row.sourceBaselineId } : {}),
-            ...(row.sourceExternalUri ? { externalUri: row.sourceExternalUri } : {}),
-            owningDomain: row.sourceOwningDomain,
-          },
-          target: {
-            kind: row.targetKind as TraceEndpointKind,
-            artefactId: row.targetArtefactId,
-            tenantId: row.tenantId,
-            ...(row.targetContentVersionId ? { contentVersionId: row.targetContentVersionId } : {}),
-            ...(row.targetBaselineId ? { baselineId: row.targetBaselineId } : {}),
-            ...(row.targetExternalUri ? { externalUri: row.targetExternalUri } : {}),
-            owningDomain: row.targetOwningDomain,
-          },
-          scope: {
-            kind: row.scopeKind as TraceScopeKind,
-            ...(row.scopeReferenceId ? { referenceId: row.scopeReferenceId } : {}),
-          },
-          lifecycleState: row.lifecycleState as TraceLifecycleState,
-        }),
-      );
+      return rows.map((row): TraceEdgeFact => ({
+        traceId: row.id as TraceId,
+        type: row.traceType as TraceType,
+        source: {
+          kind: row.sourceKind as TraceEndpointKind,
+          artefactId: row.sourceArtefactId,
+          tenantId: row.tenantId,
+          ...(row.sourceContentVersionId
+            ? { contentVersionId: row.sourceContentVersionId }
+            : {}),
+          ...(row.sourceBaselineId ? { baselineId: row.sourceBaselineId } : {}),
+          ...(row.sourceExternalUri ? { externalUri: row.sourceExternalUri } : {}),
+          owningDomain: row.sourceOwningDomain,
+        },
+        target: {
+          kind: row.targetKind as TraceEndpointKind,
+          artefactId: row.targetArtefactId,
+          tenantId: row.tenantId,
+          ...(row.targetContentVersionId
+            ? { contentVersionId: row.targetContentVersionId }
+            : {}),
+          ...(row.targetBaselineId ? { baselineId: row.targetBaselineId } : {}),
+          ...(row.targetExternalUri ? { externalUri: row.targetExternalUri } : {}),
+          owningDomain: row.targetOwningDomain,
+        },
+        scope: {
+          kind: row.scopeKind as TraceScopeKind,
+          ...(row.scopeReferenceId ? { referenceId: row.scopeReferenceId } : {}),
+        },
+        lifecycleState: row.lifecycleState as TraceLifecycleState,
+      }));
     },
 
     async exists(tenantId, id) {
@@ -434,7 +473,8 @@ function mapTaxonomyRow(
     family: row.family,
     allowedSourceKinds: row.allowedSourceKinds as TraceEndpointKind[],
     allowedTargetKinds: row.allowedTargetKinds as TraceEndpointKind[],
-    directionDefault: row.directionDefault as TraceTaxonomyDefinition["directionDefault"],
+    directionDefault:
+      row.directionDefault as TraceTaxonomyDefinition["directionDefault"],
     symmetric: row.symmetric === "true",
     governanceClass: row.governanceClass as TraceGovernanceClass,
     cyclePolicy: row.cyclePolicy as TraceCyclePolicy,
@@ -498,7 +538,10 @@ export function createPostgresTraceTaxonomyRepository(
         .select()
         .from(qepTraceLinkTaxonomy)
         .where(
-          and(eq(qepTraceLinkTaxonomy.tenantId, tenantId), eq(qepTraceLinkTaxonomy.traceType, type)),
+          and(
+            eq(qepTraceLinkTaxonomy.tenantId, tenantId),
+            eq(qepTraceLinkTaxonomy.traceType, type),
+          ),
         )
         .limit(1);
       return row ? mapTaxonomyRow(row) : null;

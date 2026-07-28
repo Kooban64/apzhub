@@ -5,12 +5,12 @@
 
 ## Permissions enforced
 
-| Operation | Permission |
-| --------- | ---------- |
-| list / get / search | `qep.requirements.view` |
-| create | `qep.requirements.create` |
-| update | `qep.requirements.edit` |
-| archive | `qep.requirements.delete` |
+| Operation           | Permission                |
+| ------------------- | ------------------------- |
+| list / get / search | `qep.requirements.view`   |
+| create              | `qep.requirements.create` |
+| update              | `qep.requirements.edit`   |
+| archive             | `qep.requirements.delete` |
 
 ## Registration
 

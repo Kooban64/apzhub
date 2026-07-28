@@ -18,12 +18,12 @@ Requirements 1.0.0 · Traceability 1.0.0 · future Test / Execution / Evidence /
 
 ## Key separations
 
-| Separation | Rule |
-| ---------- | ---- |
-| Status vs Outcome | Lifecycle ≠ conclusion |
-| Execution vs Verification | Runs are inputs; decisions are Verification |
-| Trace Links vs Verification | Traceability links; Verification decides |
-| SoR vs analysis | Coverage/Impact remain derived elsewhere |
+| Separation                  | Rule                                        |
+| --------------------------- | ------------------------------------------- |
+| Status vs Outcome           | Lifecycle ≠ conclusion                      |
+| Execution vs Verification   | Runs are inputs; decisions are Verification |
+| Trace Links vs Verification | Traceability links; Verification decides    |
+| SoR vs analysis             | Coverage/Impact remain derived elsewhere    |
 
 ## Downstream gate
 

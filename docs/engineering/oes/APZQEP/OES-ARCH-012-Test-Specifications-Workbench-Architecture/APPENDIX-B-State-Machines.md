@@ -1,4 +1,5 @@
-# APZQEP-OES-ARCH-012  
+# APZQEP-OES-ARCH-012
+
 # APPENDIX B — State Machines (Presentation View)
 
 > **Authority:** Domain ENG-050A + `@apzhub/qep-contracts` `availableActions`.  

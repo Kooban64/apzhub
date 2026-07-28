@@ -4,10 +4,10 @@ Authoritative state machine for Requirement Baselines.
 
 ## States
 
-| State | Mutability |
-|---|---|
-| Draft | Metadata and membership may change |
-| Locked | Immutable; integrity fingerprint stored |
+| State    | Mutability                                     |
+| -------- | ---------------------------------------------- |
+| Draft    | Metadata and membership may change             |
+| Locked   | Immutable; integrity fingerprint stored        |
 | Archived | Immutable; retained for history and comparison |
 
 ## Transitions

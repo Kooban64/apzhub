@@ -6,23 +6,23 @@
 
 ## Summary
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-TRACE-001 |
-| Package | `@apzhub/qep-traceability` **1.0.0** |
-| Status | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
-| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Recommendation | **PRODUCTION READY** |
-| Nature | Documentation / governance only |
+| Field               | Value                                       |
+| ------------------- | ------------------------------------------- |
+| Programme           | APZQEP-TRACE-001                            |
+| Package             | `@apzhub/qep-traceability` **1.0.0**        |
+| Status              | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
+| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS**       |
+| Recommendation      | **PRODUCTION READY**                        |
+| Nature              | Documentation / governance only             |
 
 ## Quality gates (snapshot)
 
-| Gate | Result |
-| ---- | ------ |
-| Package typecheck | PASS |
-| Package tests | PASS (52) |
-| UI + package combined | PASS (65) |
-| Architecture boundaries | PASS |
+| Gate                    | Result    |
+| ----------------------- | --------- |
+| Package typecheck       | PASS      |
+| Package tests           | PASS (52) |
+| UI + package combined   | PASS (65) |
+| Architecture boundaries | PASS      |
 
 ## Decision
 

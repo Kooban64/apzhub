@@ -34,7 +34,9 @@ const tenant = "tenant_1";
 const at = "2026-07-26T10:00:00.000Z";
 const by = "user_1";
 
-function draft(overrides: Partial<Parameters<typeof createRequirementsRelationship>[0]> = {}) {
+function draft(
+  overrides: Partial<Parameters<typeof createRequirementsRelationship>[0]> = {},
+) {
   return createRequirementsRelationship({
     id: "rrl_1",
     tenantId: tenant,
@@ -93,10 +95,12 @@ describe("RequirementsRelationship value objects", () => {
     expect(createRelationshipStrength("mandatory")).toBe("mandatory");
     expect(() => createRelationshipStrength("deprecated")).toThrow();
     expect(createRelationshipScope({ kind: "product" })).toEqual({ kind: "product" });
-    expect(createRelationshipScope({ kind: "baseline", referenceId: "rbl_1" }).referenceId).toBe(
-      "rbl_1",
-    );
-    expect(() => createRelationshipScope({ kind: "baseline", referenceId: "req_1" })).toThrow();
+    expect(
+      createRelationshipScope({ kind: "baseline", referenceId: "rbl_1" }).referenceId,
+    ).toBe("rbl_1");
+    expect(() =>
+      createRelationshipScope({ kind: "baseline", referenceId: "req_1" }),
+    ).toThrow();
     expect(() => createRelationshipScope({ kind: "project" })).toThrow();
   });
 
@@ -151,7 +155,9 @@ describe("RequirementsRelationship lifecycle", () => {
   it("creates only in draft and emits created event", () => {
     const relationship = draft();
     expect(relationship.lifecycleState).toBe("draft");
-    expect(relationship.domainEvents[0]?.type).toBe("qep.requirements_relationship.created");
+    expect(relationship.domainEvents[0]?.type).toBe(
+      "qep.requirements_relationship.created",
+    );
     expect(relationship.history).toHaveLength(1);
   });
 
@@ -170,7 +176,11 @@ describe("RequirementsRelationship lifecycle", () => {
       by,
     );
     expect(relationship.lifecycleState).toBe("deprecated");
-    relationship = retireRequirementsRelationship(relationship, "2026-07-26T13:00:00.000Z", by);
+    relationship = retireRequirementsRelationship(
+      relationship,
+      "2026-07-26T13:00:00.000Z",
+      by,
+    );
     expect(relationship.lifecycleState).toBe("retired");
     expect(relationship.history.map((entry) => entry.kind)).toEqual([
       "created",
@@ -188,7 +198,12 @@ describe("RequirementsRelationship lifecycle", () => {
       activationContext(),
     );
     expect(() =>
-      activateRequirementsRelationship(active, "2026-07-26T12:00:00.000Z", by, activationContext()),
+      activateRequirementsRelationship(
+        active,
+        "2026-07-26T12:00:00.000Z",
+        by,
+        activationContext(),
+      ),
     ).toThrow();
     const retired = retireRequirementsRelationship(
       deprecateRequirementsRelationship(active, "2026-07-26T12:00:00.000Z", by),
@@ -196,7 +211,12 @@ describe("RequirementsRelationship lifecycle", () => {
       by,
     );
     expect(() =>
-      changeRelationshipStrength(retired, "recommended", "2026-07-26T14:00:00.000Z", by),
+      changeRelationshipStrength(
+        retired,
+        "recommended",
+        "2026-07-26T14:00:00.000Z",
+        by,
+      ),
     ).toThrow();
   });
 
@@ -216,8 +236,12 @@ describe("RequirementsRelationship lifecycle", () => {
 describe("taxonomy and rationale", () => {
   it("loads normative taxonomy behaviour matrix", () => {
     expect(getRelationshipTaxonomyDefinition("conflicts_with").symmetric).toBe(true);
-    expect(getRelationshipTaxonomyDefinition("relates_to").rationalePolicy).toBe("mandatory");
-    expect(getRelationshipTaxonomyDefinition("relates_to").defaultStrength).toBe("informational");
+    expect(getRelationshipTaxonomyDefinition("relates_to").rationalePolicy).toBe(
+      "mandatory",
+    );
+    expect(getRelationshipTaxonomyDefinition("relates_to").defaultStrength).toBe(
+      "informational",
+    );
   });
 
   it("requires rationale for relates_to on activation", () => {
@@ -254,7 +278,9 @@ describe("activation validation", () => {
     expect(() =>
       activateRequirementsRelationship(relationship, "2026-07-26T11:00:00.000Z", by, {
         existingEdges: [],
-        endpointFacts: [{ tenantId: tenant, requirementId: "req_source", exists: true }],
+        endpointFacts: [
+          { tenantId: tenant, requirementId: "req_source", exists: true },
+        ],
         pinFacts: [],
         scopeFacts: [],
       }),
@@ -323,29 +349,31 @@ describe("activation validation", () => {
     expect(() =>
       assertBaselineInteractionRules({ claimsBaselineMembershipMutation: true }),
     ).toThrow();
-    expect(() => validateRelationshipForActivation({
-      tenantId: tenant,
-      relationshipId: "rrl_1",
-      type: "refines",
-      source: createRelationshipEndpoint({
-        mode: "requirement",
-        requirementId: "req_a",
+    expect(() =>
+      validateRelationshipForActivation({
         tenantId: tenant,
+        relationshipId: "rrl_1",
+        type: "refines",
+        source: createRelationshipEndpoint({
+          mode: "requirement",
+          requirementId: "req_a",
+          tenantId: tenant,
+        }),
+        target: createRelationshipEndpoint({
+          mode: "requirement",
+          requirementId: "req_b",
+          tenantId: tenant,
+        }),
+        scope: { kind: "product" },
+        strength: "mandatory",
+        classification: "structural",
+        existingEdges: [],
+        endpointFacts: endpointFacts("req_a", "req_b"),
+        pinFacts: [],
+        scopeFacts: [],
+        claimsBaselineMembershipMutation: true,
       }),
-      target: createRelationshipEndpoint({
-        mode: "requirement",
-        requirementId: "req_b",
-        tenantId: tenant,
-      }),
-      scope: { kind: "product" },
-      strength: "mandatory",
-      classification: "structural",
-      existingEdges: [],
-      endpointFacts: endpointFacts("req_a", "req_b"),
-      pinFacts: [],
-      scopeFacts: [],
-      claimsBaselineMembershipMutation: true,
-    })).toThrow();
+    ).toThrow();
   });
 });
 
@@ -633,7 +661,12 @@ describe("semantic profile and attribute changes", () => {
       by,
     );
     expect(() =>
-      changeRelationshipStrength(deprecated, "mandatory", "2026-07-26T12:30:00.000Z", by),
+      changeRelationshipStrength(
+        deprecated,
+        "mandatory",
+        "2026-07-26T12:30:00.000Z",
+        by,
+      ),
     ).toThrow();
   });
 

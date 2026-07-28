@@ -148,7 +148,11 @@ export function buildTraceSupersededEvent(
 export function buildTraceOriginChangedEvent(
   input: TraceEventInput & { readonly origin: TraceOrigin },
 ): TraceOriginChanged {
-  return { ...baseEvent(input), type: "qep.trace_link.origin_changed", origin: input.origin };
+  return {
+    ...baseEvent(input),
+    type: "qep.trace_link.origin_changed",
+    origin: input.origin,
+  };
 }
 
 export function buildTraceConfidenceChangedEvent(
@@ -174,7 +178,11 @@ export function buildTraceAuthorityChangedEvent(
 export function buildTraceScopeChangedEvent(
   input: TraceEventInput & { readonly scope: TraceScope },
 ): TraceScopeChanged {
-  return { ...baseEvent(input), type: "qep.trace_link.scope_changed", scope: input.scope };
+  return {
+    ...baseEvent(input),
+    type: "qep.trace_link.scope_changed",
+    scope: input.scope,
+  };
 }
 
 export function buildTraceEndpointChangedEvent(

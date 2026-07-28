@@ -110,7 +110,7 @@
 
 - **APZQEP-ENG-070A** — **ACCEPTED / APPROVED / PROGRAMME CLOSED**
 - Owner assessment confirmed: correct consumption of certified Domain 0.1.0 and Infrastructure 0.2.0 without contract change; complete Workbench presentation layer; Compare presented as governed unavailable per L-01; Items presented per the approved L-02 contract; actions derived exclusively from `availableActions`; no business rules introduced
-- Binding invariant reaffirmed: *"The Workbench is a pure presentation layer. It renders state supplied by the certified Infrastructure and executes only actions explicitly authorised through the `availableActions` contract."*
+- Binding invariant reaffirmed: _"The Workbench is a pure presentation layer. It renders state supplied by the certified Infrastructure and executes only actions explicitly authorised through the `availableActions` contract."_
 - Decision: [OWNER-ACCEPTANCE.md](./test-plans/workbench/OWNER-ACCEPTANCE.md)
 - Evidence: `20260728T072749Z-APZQEP-ENG-070A-ACCEPTANCE.json`
 - Authorises next: **APZQEP-CERT-070A — Test Plans Workbench Component Certification** (independent assurance; no engineering)
@@ -149,7 +149,7 @@
 ## 2026-07-28 — APZQEP-ARCH-014 Owner Architecture Acceptance · ARCHITECTURE BASELINED / PROGRAMME CLOSED
 
 - **APZQEP-ARCH-014** — **ACCEPTED / APPROVED / ARCHITECTURE BASELINED / PROGRAMME CLOSED**
-- Owner directive (binding invariant): *"The Workbench SHALL never determine what a user may do"* — actions only from server `availableActions`
+- Owner directive (binding invariant): _"The Workbench SHALL never determine what a user may do"_ — actions only from server `availableActions`
 - Decision: [OWNER-ACCEPTANCE.md](./test-plans/OES-ARCH-014/OWNER-ACCEPTANCE.md)
 - Evidence: `20260728T062849Z-APZQEP-ARCH-014-ACCEPTANCE.json`
 - Authorises next: **APZQEP-OES-ENG-070A** — Test Plans Workbench Engineering Specification (preparation authorised)

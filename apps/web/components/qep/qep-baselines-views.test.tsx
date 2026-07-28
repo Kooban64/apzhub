@@ -31,8 +31,6 @@ vi.mock("@/lib/qep/qep-api", () => ({
 }));
 
 import {
-  addBaselineItem,
-  archiveBaseline,
   compareBaselines,
   createBaseline,
   getBaseline,
@@ -40,7 +38,6 @@ import {
   listBaselines,
   lockBaseline,
   requirementBaselineHistory,
-  verifyBaselineIntegrity,
 } from "@/lib/qep/qep-api";
 
 import { BaselineHistoryPanel } from "./qep-baselines-views";
@@ -108,7 +105,12 @@ describe("QepBaselinesListView", () => {
   });
 
   it("renders an empty state when there are no baselines", async () => {
-    vi.mocked(listBaselines).mockResolvedValue({ items: [], total: 0, limit: 50, offset: 0 });
+    vi.mocked(listBaselines).mockResolvedValue({
+      items: [],
+      total: 0,
+      limit: 50,
+      offset: 0,
+    });
     render(wrap(<QepBaselinesListView />));
     await waitFor(() => {
       expect(screen.getByTestId("qep-empty")).toBeTruthy();
@@ -134,10 +136,15 @@ describe("QepBaselineCreateView", () => {
     fireEvent.click(screen.getByTestId("qep-baseline-create-submit"));
 
     await waitFor(() => {
-      expect(createBaseline).toHaveBeenCalledWith({ name: "Release 1.0", description: undefined });
+      expect(createBaseline).toHaveBeenCalledWith({
+        name: "Release 1.0",
+        description: undefined,
+      });
     });
     await waitFor(() => {
-      expect(pushMock).toHaveBeenCalledWith("/workspace/qep/requirements/baselines/rbl_1");
+      expect(pushMock).toHaveBeenCalledWith(
+        "/workspace/qep/requirements/baselines/rbl_1",
+      );
     });
   });
 });
@@ -169,7 +176,9 @@ describe("QepBaselineDetailView lock confirmation", () => {
     });
     fireEvent.click(screen.getByTestId("qep-baseline-lock-open"));
 
-    const confirmButton = screen.getByTestId("qep-baseline-lock-confirm") as HTMLButtonElement;
+    const confirmButton = screen.getByTestId(
+      "qep-baseline-lock-confirm",
+    ) as HTMLButtonElement;
     expect(confirmButton.disabled).toBe(true);
 
     fireEvent.click(screen.getByTestId("qep-baseline-lock-ack"));
@@ -234,19 +243,29 @@ describe("QepBaselinesCompareView", () => {
           },
         },
       ],
-      summary: { addedCount: 0, removedCount: 0, unchangedCount: 0, versionChangedCount: 1 },
+      summary: {
+        addedCount: 0,
+        removedCount: 0,
+        unchangedCount: 0,
+        versionChangedCount: 1,
+      },
     });
 
     render(wrap(<QepBaselinesCompareView />));
 
     await waitFor(() => {
       expect(
-        screen.getByTestId("qep-baselines-compare-base").querySelector('option[value="rbl_2"]'),
+        screen
+          .getByTestId("qep-baselines-compare-base")
+          .querySelector('option[value="rbl_2"]'),
       ).toBeTruthy();
     });
     const user = userEvent.setup();
     await user.selectOptions(screen.getByTestId("qep-baselines-compare-base"), "rbl_1");
-    await user.selectOptions(screen.getByTestId("qep-baselines-compare-target"), "rbl_2");
+    await user.selectOptions(
+      screen.getByTestId("qep-baselines-compare-target"),
+      "rbl_2",
+    );
     fireEvent.click(screen.getByTestId("qep-baselines-compare-submit"));
 
     await waitFor(() => {

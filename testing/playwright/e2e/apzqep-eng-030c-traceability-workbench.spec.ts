@@ -6,7 +6,9 @@ import { expect, test } from "@playwright/test";
  * This suite verifies route reservation and Workbench entry when the app is reachable.
  */
 test.describe("APZQEP-ENG-030C Traceability Workbench", () => {
-  test("traceability route is reserved and reachable under QEP workspace", async ({ page }) => {
+  test("traceability route is reserved and reachable under QEP workspace", async ({
+    page,
+  }) => {
     const response = await page.goto("/workspace/qep/traceability", {
       waitUntil: "domcontentloaded",
     });
@@ -38,7 +40,10 @@ test.describe("APZQEP-ENG-030C Traceability Workbench", () => {
   });
 
   test("trace matrix and taxonomy routes do not 500", async ({ page }) => {
-    for (const path of ["/workspace/qep/traceability/matrix", "/workspace/qep/traceability/taxonomy"]) {
+    for (const path of [
+      "/workspace/qep/traceability/matrix",
+      "/workspace/qep/traceability/taxonomy",
+    ]) {
       const response = await page.goto(path, { waitUntil: "domcontentloaded" });
       expect(response?.status()).toBeLessThan(500);
     }

@@ -24,7 +24,11 @@ function requireNonEmpty(label: string, value: string, max: number): string {
   return normalized;
 }
 
-function optionalText(label: string, value: string | undefined, max: number): string | undefined {
+function optionalText(
+  label: string,
+  value: string | undefined,
+  max: number,
+): string | undefined {
   if (value === undefined) return undefined;
   const normalized = value.trim();
   if (!normalized) return undefined;
@@ -38,17 +42,25 @@ function optionalText(label: string, value: string | undefined, max: number): st
 
 export type SpecificationNumber = string & { readonly __brand: "SpecificationNumber" };
 export type SpecificationTitle = string & { readonly __brand: "SpecificationTitle" };
-export type SpecificationDescription = string & { readonly __brand: "SpecificationDescription" };
-export type SpecificationObjective = string & { readonly __brand: "SpecificationObjective" };
+export type SpecificationDescription = string & {
+  readonly __brand: "SpecificationDescription";
+};
+export type SpecificationObjective = string & {
+  readonly __brand: "SpecificationObjective";
+};
 export type SpecificationScope = string & { readonly __brand: "SpecificationScope" };
 export type SpecificationClassification = string & {
   readonly __brand: "SpecificationClassification";
 };
 export type SpecificationOwner = string & { readonly __brand: "SpecificationOwner" };
-export type SpecificationReviewer = string & { readonly __brand: "SpecificationReviewer" };
+export type SpecificationReviewer = string & {
+  readonly __brand: "SpecificationReviewer";
+};
 export type SpecificationAuthor = string & { readonly __brand: "SpecificationAuthor" };
 export type SpecificationTag = string & { readonly __brand: "SpecificationTag" };
-export type SpecificationTimestamp = string & { readonly __brand: "SpecificationTimestamp" };
+export type SpecificationTimestamp = string & {
+  readonly __brand: "SpecificationTimestamp";
+};
 
 export type SpecificationType = (typeof SPECIFICATION_TYPES)[number];
 export type SpecificationPriority = (typeof SPECIFICATION_PRIORITIES)[number];
@@ -103,10 +115,16 @@ export function createSpecificationNumber(value: string): SpecificationNumber {
 }
 
 export function createSpecificationTitle(value: string): SpecificationTitle {
-  return requireNonEmpty("Specification title", value, SPECIFICATION_TITLE_MAX) as SpecificationTitle;
+  return requireNonEmpty(
+    "Specification title",
+    value,
+    SPECIFICATION_TITLE_MAX,
+  ) as SpecificationTitle;
 }
 
-export function createSpecificationDescription(value: string): SpecificationDescription {
+export function createSpecificationDescription(
+  value: string,
+): SpecificationDescription {
   return requireNonEmpty(
     "Specification description",
     value,
@@ -123,10 +141,16 @@ export function createSpecificationObjective(value: string): SpecificationObject
 }
 
 export function createSpecificationScope(value: string): SpecificationScope {
-  return requireNonEmpty("Specification scope", value, SPECIFICATION_TEXT_MAX) as SpecificationScope;
+  return requireNonEmpty(
+    "Specification scope",
+    value,
+    SPECIFICATION_TEXT_MAX,
+  ) as SpecificationScope;
 }
 
-export function createSpecificationClassification(value: string): SpecificationClassification {
+export function createSpecificationClassification(
+  value: string,
+): SpecificationClassification {
   return requireNonEmpty(
     "Specification classification",
     value,
@@ -135,7 +159,11 @@ export function createSpecificationClassification(value: string): SpecificationC
 }
 
 export function createSpecificationOwner(value: string): SpecificationOwner {
-  return requireNonEmpty("Specification owner", value, SPECIFICATION_TITLE_MAX) as SpecificationOwner;
+  return requireNonEmpty(
+    "Specification owner",
+    value,
+    SPECIFICATION_TITLE_MAX,
+  ) as SpecificationOwner;
 }
 
 export function createSpecificationReviewer(value: string): SpecificationReviewer {
@@ -155,13 +183,19 @@ export function createSpecificationAuthor(value: string): SpecificationAuthor {
 }
 
 export function createSpecificationTag(value: string): SpecificationTag {
-  return requireNonEmpty("Specification tag", value, SPECIFICATION_TAG_MAX) as SpecificationTag;
+  return requireNonEmpty(
+    "Specification tag",
+    value,
+    SPECIFICATION_TAG_MAX,
+  ) as SpecificationTag;
 }
 
 export function createSpecificationTimestamp(value: string): SpecificationTimestamp {
   const normalized = value.trim();
   if (!normalized || Number.isNaN(Date.parse(normalized))) {
-    throw new TestSpecificationInvariantViolation("Specification timestamp must be a valid ISO date");
+    throw new TestSpecificationInvariantViolation(
+      "Specification timestamp must be a valid ISO date",
+    );
   }
   return normalized as SpecificationTimestamp;
 }
@@ -169,7 +203,9 @@ export function createSpecificationTimestamp(value: string): SpecificationTimest
 export function createSpecificationType(value: string): SpecificationType {
   const normalized = value.trim().toLowerCase();
   if (!(SPECIFICATION_TYPES as readonly string[]).includes(normalized)) {
-    throw new TestSpecificationInvariantViolation(`Unknown Specification type: ${value}`);
+    throw new TestSpecificationInvariantViolation(
+      `Unknown Specification type: ${value}`,
+    );
   }
   return normalized as SpecificationType;
 }
@@ -177,7 +213,9 @@ export function createSpecificationType(value: string): SpecificationType {
 export function createSpecificationPriority(value: string): SpecificationPriority {
   const normalized = value.trim().toLowerCase();
   if (!(SPECIFICATION_PRIORITIES as readonly string[]).includes(normalized)) {
-    throw new TestSpecificationInvariantViolation(`Unknown Specification priority: ${value}`);
+    throw new TestSpecificationInvariantViolation(
+      `Unknown Specification priority: ${value}`,
+    );
   }
   return normalized as SpecificationPriority;
 }
@@ -185,17 +223,26 @@ export function createSpecificationPriority(value: string): SpecificationPriorit
 export function createSpecificationComplexity(value: string): SpecificationComplexity {
   const normalized = value.trim().toLowerCase();
   if (!(SPECIFICATION_COMPLEXITIES as readonly string[]).includes(normalized)) {
-    throw new TestSpecificationInvariantViolation(`Unknown Specification complexity: ${value}`);
+    throw new TestSpecificationInvariantViolation(
+      `Unknown Specification complexity: ${value}`,
+    );
   }
   return normalized as SpecificationComplexity;
 }
 
-export function createSpecificationVersion(major: number, minor: number): SpecificationVersion {
+export function createSpecificationVersion(
+  major: number,
+  minor: number,
+): SpecificationVersion {
   if (!Number.isInteger(major) || major < 0) {
-    throw new TestSpecificationInvariantViolation("Major version must be a non-negative integer");
+    throw new TestSpecificationInvariantViolation(
+      "Major version must be a non-negative integer",
+    );
   }
   if (!Number.isInteger(minor) || minor < 0) {
-    throw new TestSpecificationInvariantViolation("Minor version must be a non-negative integer");
+    throw new TestSpecificationInvariantViolation(
+      "Minor version must be a non-negative integer",
+    );
   }
   return {
     __brand: "SpecificationVersion",
@@ -230,7 +277,11 @@ export function createSpecificationAcceptanceCriteria(
 ): SpecificationAcceptanceCriteria {
   return {
     items: items.map((item, index) =>
-      requireNonEmpty(`Acceptance criterion ${index + 1}`, item, SPECIFICATION_TEXT_MAX),
+      requireNonEmpty(
+        `Acceptance criterion ${index + 1}`,
+        item,
+        SPECIFICATION_TEXT_MAX,
+      ),
     ),
   };
 }
@@ -257,17 +308,29 @@ export function createSpecificationDependency(input: {
 }): SpecificationDependency {
   return {
     id: requireNonEmpty("Dependency id", input.id, SPECIFICATION_TITLE_MAX),
-    summary: requireNonEmpty("Dependency summary", input.summary, SPECIFICATION_TEXT_MAX),
+    summary: requireNonEmpty(
+      "Dependency summary",
+      input.summary,
+      SPECIFICATION_TEXT_MAX,
+    ),
     ...(input.referenceKind
       ? { referenceKind: createSpecificationReferenceKind(input.referenceKind) }
       : {}),
     ...(input.referenceId
-      ? { referenceId: requireNonEmpty("Dependency reference id", input.referenceId, 240) }
+      ? {
+          referenceId: requireNonEmpty(
+            "Dependency reference id",
+            input.referenceId,
+            240,
+          ),
+        }
       : {}),
   };
 }
 
-export function createSpecificationReferenceKind(value: string): SpecificationReferenceKind {
+export function createSpecificationReferenceKind(
+  value: string,
+): SpecificationReferenceKind {
   const normalized = value.trim().toLowerCase();
   if (!(SPECIFICATION_REFERENCE_KINDS as readonly string[]).includes(normalized)) {
     throw new TestSpecificationInvariantViolation(
@@ -289,7 +352,9 @@ export function createSpecificationReference(input: {
     ...(input.owningDomain
       ? { owningDomain: optionalText("Owning domain", input.owningDomain, 120) }
       : {}),
-    ...(input.label ? { label: optionalText("Reference label", input.label, 240) } : {}),
+    ...(input.label
+      ? { label: optionalText("Reference label", input.label, 240) }
+      : {}),
   };
 }
 

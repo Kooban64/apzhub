@@ -23,7 +23,9 @@ function mapReferences(
   return (references ?? []).map((ref) => createRequirementReference(ref));
 }
 
-export function rowToPersistedRequirement(row: QepRequirementRow): PersistedRequirement {
+export function rowToPersistedRequirement(
+  row: QepRequirementRow,
+): PersistedRequirement {
   const base = createRequirement({
     id: row.id,
     key: row.key,
@@ -35,7 +37,11 @@ export function rowToPersistedRequirement(row: QepRequirementRow): PersistedRequ
     category: row.category ?? undefined,
     owner: row.ownerJson ? createRequirementOwner(row.ownerJson) : undefined,
     approvalState: row.approvalState,
-    version: createRequirementVersion(row.versionMajor, row.versionMinor, row.versionPatch),
+    version: createRequirementVersion(
+      row.versionMajor,
+      row.versionMinor,
+      row.versionPatch,
+    ),
     acceptanceCriteriaItems: row.acceptanceCriteriaJson?.items,
     attributes: row.attributesJson ?? undefined,
     references: mapReferences(row.referencesJson),
@@ -76,7 +82,9 @@ export function persistedRequirementToRow(
     ownerJson: record.owner
       ? {
           userId: record.owner.userId,
-          ...(record.owner.displayName ? { displayName: record.owner.displayName } : {}),
+          ...(record.owner.displayName
+            ? { displayName: record.owner.displayName }
+            : {}),
         }
       : null,
     approvalState: record.approvalState,
@@ -114,10 +122,8 @@ export function matchesRequirementSearch(
 ): boolean {
   const needle = q.trim().toLowerCase();
   if (!needle) return true;
-  const haystacks = [
-    record.key,
-    record.title,
-    record.description ?? "",
-  ].map((value) => value.toLowerCase());
+  const haystacks = [record.key, record.title, record.description ?? ""].map((value) =>
+    value.toLowerCase(),
+  );
   return haystacks.some((value) => value.includes(needle));
 }

@@ -5,7 +5,9 @@ import { expect, test } from "@playwright/test";
  * Full authenticated mutation flows are covered by Vitest component tests with API mocks.
  */
 test.describe("APZQEP-ENG-040C Verification Workbench", () => {
-  test("verification route is reserved and reachable under QEP workspace", async ({ page }) => {
+  test("verification route is reserved and reachable under QEP workspace", async ({
+    page,
+  }) => {
     const response = await page.goto("/workspace/qep/verification", {
       waitUntil: "domcontentloaded",
     });
@@ -18,7 +20,9 @@ test.describe("APZQEP-ENG-040C Verification Workbench", () => {
     ).toBeTruthy();
   });
 
-  test("queue, team, search, history, dashboard routes do not 500", async ({ page }) => {
+  test("queue, team, search, history, dashboard routes do not 500", async ({
+    page,
+  }) => {
     for (const path of [
       "/workspace/qep/verification/queue",
       "/workspace/qep/verification/team",

@@ -6,12 +6,12 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ENG-030A Part 2 — Traceability Engine Persistence, Application Services, APIs and Platform Integration |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Package at acceptance | `@apzhub/qep-traceability` **0.2.0** |
-| Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T153000Z-APZQEP-ENG-030A-PART2-ACCEPTANCE.json` |
+| Field                 | Value                                                                                                         |
+| --------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Programme             | APZQEP-ENG-030A Part 2 — Traceability Engine Persistence, Application Services, APIs and Platform Integration |
+| Decision              | **ACCEPTED / CLOSED / COMPLETE**                                                                              |
+| Package at acceptance | `@apzhub/qep-traceability` **0.2.0**                                                                          |
+| Acceptance evidence   | `docs/operations/evidence/portfolio-recert/20260726T153000Z-APZQEP-ENG-030A-PART2-ACCEPTANCE.json`            |
 
 ## Effect
 

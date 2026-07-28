@@ -6,14 +6,14 @@
 
 ## Binding freeze scope
 
-| Surface | Freeze rule |
-| ------- | ----------- |
-| Test Specifications Domain | No uncontrolled changes |
-| Test Specifications Infrastructure | No uncontrolled changes |
-| Test Specifications Workbench | No uncontrolled changes |
-| Public REST APIs (`/api/v1/qep/specifications/*`) | No breaking / behavioural contract changes without new programme |
-| Contracts (`@apzhub/qep-contracts` Test Specification types) | Frozen public contract |
-| Domain events | Catalogue frozen |
+| Surface                                                      | Freeze rule                                                      |
+| ------------------------------------------------------------ | ---------------------------------------------------------------- |
+| Test Specifications Domain                                   | No uncontrolled changes                                          |
+| Test Specifications Infrastructure                           | No uncontrolled changes                                          |
+| Test Specifications Workbench                                | No uncontrolled changes                                          |
+| Public REST APIs (`/api/v1/qep/specifications/*`)            | No breaking / behavioural contract changes without new programme |
+| Contracts (`@apzhub/qep-contracts` Test Specification types) | Frozen public contract                                           |
+| Domain events                                                | Catalogue frozen                                                 |
 
 ## Patch line
 

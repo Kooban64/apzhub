@@ -75,9 +75,7 @@ export function validateTraceLinkStructure(context: TraceValidationContext): voi
 /**
  * Additional checks before moving draft → validated.
  */
-export function validateTraceLinkForValidation(
-  context: TraceValidationContext,
-): void {
+export function validateTraceLinkForValidation(context: TraceValidationContext): void {
   validateTraceLinkStructure(context);
   if (!context.endpointFacts || context.endpointFacts.length === 0) {
     throw new TraceInvariantViolation(

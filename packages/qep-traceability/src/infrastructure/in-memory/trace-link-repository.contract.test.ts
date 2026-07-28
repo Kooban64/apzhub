@@ -1,7 +1,14 @@
 import { describe, expect, it } from "vitest";
 
-import { createTraceLink, updateTraceRationale } from "../../domain/trace-link/trace-link";
-import { TraceConflictError, TraceNotFoundError, TraceRevisionConflictError } from "../../shared/errors";
+import {
+  createTraceLink,
+  updateTraceRationale,
+} from "../../domain/trace-link/trace-link";
+import {
+  TraceConflictError,
+  TraceNotFoundError,
+  TraceRevisionConflictError,
+} from "../../shared/errors";
 import {
   createEmptyTraceLinkStore,
   createInMemoryTraceLinkRepository,
@@ -39,10 +46,18 @@ describe("TraceLinkRepository contract (in-memory)", () => {
     expect(await repo.get(TENANT, created.id)).toEqual(created);
     expect(await repo.exists(TENANT, created.id)).toBe(true);
 
-    const listed = await repo.list(TENANT, { sourceKind: "requirement", sourceArtefactId: "req_a1" });
+    const listed = await repo.list(TENANT, {
+      sourceKind: "requirement",
+      sourceArtefactId: "req_a1",
+    });
     expect(listed).toHaveLength(1);
 
-    const mutated = updateTraceRationale(created, "Updated contract rationale", "2026-07-26T10:05:00.000Z", ACTOR);
+    const mutated = updateTraceRationale(
+      created,
+      "Updated contract rationale",
+      "2026-07-26T10:05:00.000Z",
+      ACTOR,
+    );
     const saved = await repo.save(mutated, created.revision);
     expect(saved.revision).toBe(2);
     expect(saved.rationale).toBe("Updated contract rationale");
@@ -62,9 +77,16 @@ describe("TraceLinkRepository contract (in-memory)", () => {
   it("throws revision conflict and not-found for invalid saves", async () => {
     const store = createEmptyTraceLinkStore();
     const repo = createInMemoryTraceLinkRepository(store);
-    const created = await repo.create(draftTrace("trl_contract_rev", "req_rev_1", "tc_rev_1"));
+    const created = await repo.create(
+      draftTrace("trl_contract_rev", "req_rev_1", "tc_rev_1"),
+    );
 
-    const mutated = updateTraceRationale(created, "Updated rationale", "2026-07-26T10:06:00.000Z", ACTOR);
+    const mutated = updateTraceRationale(
+      created,
+      "Updated rationale",
+      "2026-07-26T10:06:00.000Z",
+      ACTOR,
+    );
 
     await expect(repo.save(mutated, 99)).rejects.toThrow(TraceRevisionConflictError);
     await expect(
@@ -85,7 +107,9 @@ describe("TraceLinkRepository contract (in-memory)", () => {
     expect(excluded).toHaveLength(1);
     expect(excluded[0]?.traceId).not.toBe(a.id);
 
-    const byType = await repo.listEdgeFacts(TENANT, { types: ["requirement_tested_by"] });
+    const byType = await repo.listEdgeFacts(TENANT, {
+      types: ["requirement_tested_by"],
+    });
     expect(byType).toHaveLength(2);
   });
 

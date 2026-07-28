@@ -30,13 +30,13 @@ An **independent Component Certification** of the Test Plans **Workbench** (pres
 
 ## Decision recorded (2026-07-28)
 
-| Topic | Owner Decision |
-| ----- | --------------- |
-| Certification outcome | **PASS** — CERTIFIED |
-| Production classification | **WORKBENCH_PRODUCTION_READY_WITH_LIMITATIONS** |
-| Package version | **Remains 0.2.0** — labelled **WORKBENCH COMPONENT CERTIFIED** |
-| Freeze | **NOT AUTHORISED** |
-| SemVer 1.0.0 | **Not promoted** — reserved for Capability Certification |
+| Topic                     | Owner Decision                                                 |
+| ------------------------- | -------------------------------------------------------------- |
+| Certification outcome     | **PASS** — CERTIFIED                                           |
+| Production classification | **WORKBENCH_PRODUCTION_READY_WITH_LIMITATIONS**                |
+| Package version           | **Remains 0.2.0** — labelled **WORKBENCH COMPONENT CERTIFIED** |
+| Freeze                    | **NOT AUTHORISED**                                             |
+| SemVer 1.0.0              | **Not promoted** — reserved for Capability Certification       |
 
 See [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) for the full recorded Decision.
 

@@ -39,7 +39,12 @@ export const VERIFICATION_SUBJECT_KINDS = [
   "external_reference",
 ] as const;
 
-export const VERIFICATION_AUTHORITY_KINDS = ["user", "role", "system", "delegated"] as const;
+export const VERIFICATION_AUTHORITY_KINDS = [
+  "user",
+  "role",
+  "system",
+  "delegated",
+] as const;
 
 export const VERIFICATION_SCOPE_KINDS = [
   "product",

@@ -21,20 +21,20 @@
 
 ## Start here
 
-| Audience | Document |
-| -------- | -------- |
-| **Everyone (first read)** | [APZQEP-CONSTITUTION.md](./APZQEP-CONSTITUTION.md) **v1.0.0** — **RATIFIED / APPROVED / BASELINED** (2026-07-28) |
-| **Engineering Platform v1 milestone** | [ENGINEERING-PLATFORM-V1-MILESTONE.md](./ENGINEERING-PLATFORM-V1-MILESTONE.md) |
-| **Portfolio Foundation Completion (ACCEPTED / CLOSED)** | [portfolio/PORTFOLIO-001/OWNER-SUMMARY.md](./portfolio/PORTFOLIO-001/OWNER-SUMMARY.md) |
-| **Integrated Capability Certification (CERTIFIED / CLOSED)** | [test-plans/capability-certification/OWNER-SUMMARY.md](./test-plans/capability-certification/OWNER-SUMMARY.md) |
-| **Capability Freeze (FROZEN / CLOSED)** | [test-plans/freeze/README.md](./test-plans/freeze/README.md) |
-| Workbench Component CERT (closed) | [test-plans/CERT-070A/OWNER-ACCEPTANCE.md](./test-plans/CERT-070A/OWNER-ACCEPTANCE.md) |
-| Workbench Engineering (accepted / closed) | [test-plans/workbench/OWNER-ACCEPTANCE.md](./test-plans/workbench/OWNER-ACCEPTANCE.md) |
-| Workbench Engineering Specification (accepted / closed) | [test-plans/OES-ENG-070A/OWNER-ACCEPTANCE.md](./test-plans/OES-ENG-070A/OWNER-ACCEPTANCE.md) |
-| Workbench Architecture (accepted / closed) | [test-plans/OES-ARCH-014/OWNER-ACCEPTANCE.md](./test-plans/OES-ARCH-014/OWNER-ACCEPTANCE.md) |
-| Infra CERT (closed) | [test-plans/CERT-060B/OWNER-ACCEPTANCE.md](./test-plans/CERT-060B/OWNER-ACCEPTANCE.md) |
-| Infra ENG (closed) | [test-plans/infrastructure/OWNER-ACCEPTANCE.md](./test-plans/infrastructure/OWNER-ACCEPTANCE.md) |
-| Domain CERT (closed) | [test-plans/domain-certification/OWNER-ACCEPTANCE.md](./test-plans/domain-certification/OWNER-ACCEPTANCE.md) |
+| Audience                                                     | Document                                                                                                         |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| **Everyone (first read)**                                    | [APZQEP-CONSTITUTION.md](./APZQEP-CONSTITUTION.md) **v1.0.0** — **RATIFIED / APPROVED / BASELINED** (2026-07-28) |
+| **Engineering Platform v1 milestone**                        | [ENGINEERING-PLATFORM-V1-MILESTONE.md](./ENGINEERING-PLATFORM-V1-MILESTONE.md)                                   |
+| **Portfolio Foundation Completion (ACCEPTED / CLOSED)**      | [portfolio/PORTFOLIO-001/OWNER-SUMMARY.md](./portfolio/PORTFOLIO-001/OWNER-SUMMARY.md)                           |
+| **Integrated Capability Certification (CERTIFIED / CLOSED)** | [test-plans/capability-certification/OWNER-SUMMARY.md](./test-plans/capability-certification/OWNER-SUMMARY.md)   |
+| **Capability Freeze (FROZEN / CLOSED)**                      | [test-plans/freeze/README.md](./test-plans/freeze/README.md)                                                     |
+| Workbench Component CERT (closed)                            | [test-plans/CERT-070A/OWNER-ACCEPTANCE.md](./test-plans/CERT-070A/OWNER-ACCEPTANCE.md)                           |
+| Workbench Engineering (accepted / closed)                    | [test-plans/workbench/OWNER-ACCEPTANCE.md](./test-plans/workbench/OWNER-ACCEPTANCE.md)                           |
+| Workbench Engineering Specification (accepted / closed)      | [test-plans/OES-ENG-070A/OWNER-ACCEPTANCE.md](./test-plans/OES-ENG-070A/OWNER-ACCEPTANCE.md)                     |
+| Workbench Architecture (accepted / closed)                   | [test-plans/OES-ARCH-014/OWNER-ACCEPTANCE.md](./test-plans/OES-ARCH-014/OWNER-ACCEPTANCE.md)                     |
+| Infra CERT (closed)                                          | [test-plans/CERT-060B/OWNER-ACCEPTANCE.md](./test-plans/CERT-060B/OWNER-ACCEPTANCE.md)                           |
+| Infra ENG (closed)                                           | [test-plans/infrastructure/OWNER-ACCEPTANCE.md](./test-plans/infrastructure/OWNER-ACCEPTANCE.md)                 |
+| Domain CERT (closed)                                         | [test-plans/domain-certification/OWNER-ACCEPTANCE.md](./test-plans/domain-certification/OWNER-ACCEPTANCE.md)     |
 
 ## Lifecycle gate
 

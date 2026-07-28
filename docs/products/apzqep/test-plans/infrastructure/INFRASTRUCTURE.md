@@ -15,14 +15,14 @@ REST (apps/web)
 
 `@apzhub/qep-test-plans` **0.2.0**
 
-| Export | Contents |
-| ------ | -------- |
-| `.` | Programme markers + re-exports |
-| `./domain` | Aggregate, VOs, policies, repository port (additive — `plan-repository.ts`) |
-| `./application` | Commands/queries/DTO adapter/available actions |
-| `./infrastructure` | Persistence factories, repos, mapper |
-| `./presentation` | Permissions constants, route constants, navigation stub (no UI) |
-| `./shared` | Errors, pagination |
+| Export             | Contents                                                                    |
+| ------------------ | --------------------------------------------------------------------------- |
+| `.`                | Programme markers + re-exports                                              |
+| `./domain`         | Aggregate, VOs, policies, repository port (additive — `plan-repository.ts`) |
+| `./application`    | Commands/queries/DTO adapter/available actions                              |
+| `./infrastructure` | Persistence factories, repos, mapper                                        |
+| `./presentation`   | Permissions constants, route constants, navigation stub (no UI)             |
+| `./shared`         | Errors, pagination                                                          |
 
 ## Non-ownership
 

@@ -78,7 +78,9 @@ function mapHistoryRows(rows: readonly HistoryRow[]): SpecificationHistoryEntry[
   }));
 }
 
-function mapRelationshipRows(rows: readonly RelationshipRow[]): SpecificationRelationship[] {
+function mapRelationshipRows(
+  rows: readonly RelationshipRow[],
+): SpecificationRelationship[] {
   return rows.map((row) => ({
     id: createSpecificationRelationshipId(row.id),
     specificationId: createSpecificationId(row.specificationId),
@@ -102,7 +104,9 @@ function mapApproval(row: SpecificationRow): SpecificationApproval | undefined {
     decidedAt: createSpecificationTimestamp(row.approvalDecidedAt.toISOString()),
     decidedBy: createSpecificationOwner(row.approvalDecidedBy),
     ...(row.approvalReviewComment ? { reviewComment: row.approvalReviewComment } : {}),
-    ...(row.approvalApprovalComment ? { approvalComment: row.approvalApprovalComment } : {}),
+    ...(row.approvalApprovalComment
+      ? { approvalComment: row.approvalApprovalComment }
+      : {}),
   };
 }
 
@@ -125,16 +129,24 @@ function mapRecord(row: SpecificationRow): SpecificationRecord {
     ...(row.reviewer ? { reviewer: createSpecificationReviewer(row.reviewer) } : {}),
     preconditions: createSpecificationPreconditions(row.preconditionsJson ?? []),
     postconditions: createSpecificationPostconditions(row.postconditionsJson ?? []),
-    acceptanceCriteria: createSpecificationAcceptanceCriteria(row.acceptanceCriteriaJson ?? []),
+    acceptanceCriteria: createSpecificationAcceptanceCriteria(
+      row.acceptanceCriteriaJson ?? [],
+    ),
     risks: (row.risksJson ?? []).map(createSpecificationRisk),
     dependencies: (row.dependenciesJson ?? []).map(createSpecificationDependency),
     tags: (row.tagsJson ?? []).map(createSpecificationTag),
     isAuthoritative: row.isAuthoritative,
     ...(row.predecessorSpecificationId
-      ? { predecessorSpecificationId: createSpecificationId(row.predecessorSpecificationId) }
+      ? {
+          predecessorSpecificationId: createSpecificationId(
+            row.predecessorSpecificationId,
+          ),
+        }
       : {}),
     ...(row.successorSpecificationId
-      ? { successorSpecificationId: createSpecificationId(row.successorSpecificationId) }
+      ? {
+          successorSpecificationId: createSpecificationId(row.successorSpecificationId),
+        }
       : {}),
     ...(row.comparisonNotes ? { comparisonNotes: row.comparisonNotes } : {}),
   };
@@ -145,7 +157,9 @@ function mapSpecificationRow(
   historyEntries: readonly SpecificationHistoryEntry[],
   relationships: readonly SpecificationRelationship[],
 ): StoredTestSpecification {
-  const metadata: SpecificationMetadata = createSpecificationMetadata(row.metadataJson ?? {});
+  const metadata: SpecificationMetadata = createSpecificationMetadata(
+    row.metadataJson ?? {},
+  );
   return {
     record: mapRecord(row),
     metadata,
@@ -160,7 +174,9 @@ function mapSpecificationRow(
     updatedBy: row.updatedBy,
     correlationId: row.correlationId,
     versionLineage: row.versionLineageJson ?? [],
-    ...(row.reviewStartedAt ? { reviewStartedAt: row.reviewStartedAt.toISOString() } : {}),
+    ...(row.reviewStartedAt
+      ? { reviewStartedAt: row.reviewStartedAt.toISOString() }
+      : {}),
     ...(row.reviewStartedBy ? { reviewStartedBy: row.reviewStartedBy } : {}),
     ...(row.withdrawnAt ? { withdrawnAt: row.withdrawnAt.toISOString() } : {}),
     ...(row.cancelledAt ? { cancelledAt: row.cancelledAt.toISOString() } : {}),
@@ -215,7 +231,9 @@ function toInsertValues(specification: TestSpecification) {
     withdrawnAt: specification.withdrawnAt ? new Date(specification.withdrawnAt) : null,
     cancelledAt: specification.cancelledAt ? new Date(specification.cancelledAt) : null,
     retiredAt: specification.retiredAt ? new Date(specification.retiredAt) : null,
-    supersededAt: specification.supersededAt ? new Date(specification.supersededAt) : null,
+    supersededAt: specification.supersededAt
+      ? new Date(specification.supersededAt)
+      : null,
     versionLineageJson: [...specification.versionLineage],
     createdAt: new Date(specification.createdAt),
     createdBy: specification.createdBy,
@@ -381,7 +399,12 @@ export function createPostgresTestSpecificationRepository(
     const [row] = await db
       .select()
       .from(qepTestSpecification)
-      .where(and(eq(qepTestSpecification.tenantId, tenantId), eq(qepTestSpecification.id, id)))
+      .where(
+        and(
+          eq(qepTestSpecification.tenantId, tenantId),
+          eq(qepTestSpecification.id, id),
+        ),
+      )
       .limit(1);
     if (!row) return null;
     const history = await loadHistory(tenantId, id);
@@ -397,7 +420,9 @@ export function createPostgresTestSpecificationRepository(
           .values(toInsertValues(specification))
           .returning();
         if (!row) {
-          throw new TestSpecificationConflictError("Failed to create Test Specification");
+          throw new TestSpecificationConflictError(
+            "Failed to create Test Specification",
+          );
         }
         await upsertVersion(specification);
         await syncRelationships(specification.tenantId, specification);
@@ -460,7 +485,10 @@ export function createPostgresTestSpecificationRepository(
           specification.history.entries,
           { updatedBy: specification.updatedBy, revision: specification.revision },
         );
-        const history = await loadHistory(specification.tenantId, specification.record.id);
+        const history = await loadHistory(
+          specification.tenantId,
+          specification.record.id,
+        );
         const relationships = await loadRelationships(
           specification.tenantId,
           specification.record.id,
@@ -484,10 +512,13 @@ export function createPostgresTestSpecificationRepository(
       if (query.classification) {
         conditions.push(eq(qepTestSpecification.classification, query.classification));
       }
-      if (query.priority) conditions.push(eq(qepTestSpecification.priority, query.priority));
+      if (query.priority)
+        conditions.push(eq(qepTestSpecification.priority, query.priority));
       if (query.number) conditions.push(eq(qepTestSpecification.number, query.number));
       if (query.isAuthoritative !== undefined) {
-        conditions.push(eq(qepTestSpecification.isAuthoritative, query.isAuthoritative));
+        conditions.push(
+          eq(qepTestSpecification.isAuthoritative, query.isAuthoritative),
+        );
       }
 
       const rows = await db
@@ -515,7 +546,12 @@ export function createPostgresTestSpecificationRepository(
       const [row] = await db
         .select({ id: qepTestSpecification.id })
         .from(qepTestSpecification)
-        .where(and(eq(qepTestSpecification.tenantId, tenantId), eq(qepTestSpecification.id, id)))
+        .where(
+          and(
+            eq(qepTestSpecification.tenantId, tenantId),
+            eq(qepTestSpecification.id, id),
+          ),
+        )
         .limit(1);
       return Boolean(row);
     },
@@ -541,7 +577,10 @@ export function createPostgresTestSpecificationRepository(
 
       const results: StoredTestSpecification[] = [];
       for (const versionRow of versionRows) {
-        const loaded = await load(tenantId, createSpecificationId(versionRow.specificationId));
+        const loaded = await load(
+          tenantId,
+          createSpecificationId(versionRow.specificationId),
+        );
         if (loaded) results.push(loaded);
       }
       return results;

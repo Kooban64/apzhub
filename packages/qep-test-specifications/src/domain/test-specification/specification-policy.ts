@@ -27,7 +27,10 @@ export const LifecyclePolicy = {
       );
     }
   },
-  assertRejectedCannotBecomeApproved(from: SpecificationStatus, to: SpecificationStatus): void {
+  assertRejectedCannotBecomeApproved(
+    from: SpecificationStatus,
+    to: SpecificationStatus,
+  ): void {
     if (from === "rejected" && to === "approved") {
       throw new TestSpecificationInvariantViolation(
         "Rejected Specifications cannot become Approved",
@@ -167,7 +170,10 @@ export const VersionPolicy = {
       );
     }
   },
-  assertOnlyOneAuthoritative(isAuthoritative: boolean, status: SpecificationStatus): void {
+  assertOnlyOneAuthoritative(
+    isAuthoritative: boolean,
+    status: SpecificationStatus,
+  ): void {
     LifecyclePolicy.assertAuthoritativeOnlyWhenApproved(status, isAuthoritative);
   },
 };
@@ -228,19 +234,25 @@ export const ValidationPolicy = {
     readonly classification?: string;
   }): void {
     if (!input.id?.trim()) {
-      throw new TestSpecificationInvariantViolation("Every Specification has an Identifier");
+      throw new TestSpecificationInvariantViolation(
+        "Every Specification has an Identifier",
+      );
     }
     if (!input.title?.trim()) {
       throw new TestSpecificationInvariantViolation("Every Specification has a Title");
     }
     if (!input.objective?.trim()) {
-      throw new TestSpecificationInvariantViolation("Every Specification has an Objective");
+      throw new TestSpecificationInvariantViolation(
+        "Every Specification has an Objective",
+      );
     }
     if (!input.owner?.trim()) {
       throw new TestSpecificationInvariantViolation("Every Specification has an Owner");
     }
     if (!input.classification?.trim()) {
-      throw new TestSpecificationInvariantViolation("Every Specification has Classification");
+      throw new TestSpecificationInvariantViolation(
+        "Every Specification has Classification",
+      );
     }
   },
 };

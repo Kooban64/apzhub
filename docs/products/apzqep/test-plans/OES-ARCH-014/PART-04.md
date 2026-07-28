@@ -1,12 +1,13 @@
 # APZQEP-OES-ARCH-014
+
 # PART 4 — Workflow, Lifecycle UX & Persona Journeys
 
-| Item | Value |
-| ---- | ----- |
-| Document | APZQEP-OES-ARCH-014 |
-| Part | **4 of 5** |
-| Programme | APZQEP-ARCH-014 |
-| Status | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
+| Item      | Value                                       |
+| --------- | ------------------------------------------- |
+| Document  | APZQEP-OES-ARCH-014                         |
+| Part      | **4 of 5**                                  |
+| Programme | APZQEP-ARCH-014                             |
+| Status    | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
 
 ---
 
@@ -22,18 +23,18 @@ The Workbench **SHALL** present lifecycle; it **MUST NOT** own or invent lifecyc
 
 ### 2.1 Normative statuses (Domain ENG-060A, display mapping)
 
-| Status (Domain) | User-facing label | Mutable content | Terminal |
-| ---------------- | ------------------ | ---------------- | -------- |
-| `draft` | Draft | Yes (if `qep.plan.update`) | No |
-| `review` | Under review | No | No |
-| `approved` | Approved | No | No |
-| `ready` | Ready | No | No |
-| `in_execution` | In execution | No | No |
-| `completed` | Completed | No | No |
-| `archived` | Archived | No | **Yes** |
-| `rejected` | Rejected | No (until `return-to-draft`) | No |
-| `cancelled` | Cancelled | No | **Yes** |
-| `superseded` | Superseded | No | **Yes** |
+| Status (Domain) | User-facing label | Mutable content              | Terminal |
+| --------------- | ----------------- | ---------------------------- | -------- |
+| `draft`         | Draft             | Yes (if `qep.plan.update`)   | No       |
+| `review`        | Under review      | No                           | No       |
+| `approved`      | Approved          | No                           | No       |
+| `ready`         | Ready             | No                           | No       |
+| `in_execution`  | In execution      | No                           | No       |
+| `completed`     | Completed         | No                           | No       |
+| `archived`      | Archived          | No                           | **Yes**  |
+| `rejected`      | Rejected          | No (until `return-to-draft`) | No       |
+| `cancelled`     | Cancelled         | No                           | **Yes**  |
+| `superseded`    | Superseded        | No                           | **Yes**  |
 
 ### 2.2 UX rules
 
@@ -141,20 +142,20 @@ Search / Explorer → deep link
 
 The table below is a **UX expectation aid**. Server validation remains authoritative; the Workbench **MUST NOT** assume success without a server response.
 
-| From | Action | Expected to (typical) |
-| ---- | ------ | ----------------------- |
-| draft | `submit-for-review` | review |
-| review | `approve` | approved |
-| review | `reject` | rejected |
-| rejected | `return-to-draft` | draft |
-| rejected | `cancel` | cancelled |
-| approved | `mark-ready` | ready |
-| ready | `start-execution` | in_execution |
-| in_execution | `complete` | completed |
-| completed | `archive` | archived |
-| draft / review / approved / ready | `cancel` | cancelled |
-| approved / ready / completed | `supersede` | superseded (+ successor) |
-| any permitted state | `clone` | new draft (successor unrelated to lineage) |
+| From                              | Action              | Expected to (typical)                      |
+| --------------------------------- | ------------------- | ------------------------------------------ |
+| draft                             | `submit-for-review` | review                                     |
+| review                            | `approve`           | approved                                   |
+| review                            | `reject`            | rejected                                   |
+| rejected                          | `return-to-draft`   | draft                                      |
+| rejected                          | `cancel`            | cancelled                                  |
+| approved                          | `mark-ready`        | ready                                      |
+| ready                             | `start-execution`   | in_execution                               |
+| in_execution                      | `complete`          | completed                                  |
+| completed                         | `archive`           | archived                                   |
+| draft / review / approved / ready | `cancel`            | cancelled                                  |
+| approved / ready / completed      | `supersede`         | superseded (+ successor)                   |
+| any permitted state               | `clone`             | new draft (successor unrelated to lineage) |
 
 ---
 
@@ -166,13 +167,13 @@ Operational attention surface for Plans awaiting review decisions (Part 2 §7).
 
 ### 5.2 Behaviour
 
-| Element | Rule |
-| ------- | ---- |
-| Default filter | `status=review` |
-| Optional filters | Owner, lead, scope, priority, updated |
-| Row actions | Same as Explorer — open Inspector |
-| Empty state | "No Test Plans awaiting review" — governed empty |
-| Permission | Queue **MAY** be hidden if the user lacks `qep.plan.approve` / `qep.plan.reject` |
+| Element          | Rule                                                                             |
+| ---------------- | -------------------------------------------------------------------------------- |
+| Default filter   | `status=review`                                                                  |
+| Optional filters | Owner, lead, scope, priority, updated                                            |
+| Row actions      | Same as Explorer — open Inspector                                                |
+| Empty state      | "No Test Plans awaiting review" — governed empty                                 |
+| Permission       | Queue **MAY** be hidden if the user lacks `qep.plan.approve` / `qep.plan.reject` |
 
 ### 5.3 Reviewer guidance (UX copy principles)
 
@@ -202,10 +203,10 @@ Infrastructure Certification (CERT-060B) recorded **L-01**: `CompareVersions` / 
 
 Aligned with [021](../../../../021-notification-activity-attention-management-framework.md):
 
-| Event (Infrastructure/Domain emits) | Workbench role |
-| ------------------------------------- | ---------------- |
+| Event (Infrastructure/Domain emits)                                                                                                                                           | Workbench role                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
 | `qep.plan.created` / `.submitted` / `.approved` / `.rejected` / `.readied` / `.started` / `.completed` / `.archived` / `.cancelled` / `.superseded` / `.cloned` / item events | Deep-link target for Attention Engine deliveries |
-| Activity stream | Read-only consume when the platform exposes it |
+| Activity stream                                                                                                                                                               | Read-only consume when the platform exposes it   |
 
 The Workbench **MUST NOT** implement its own notification subsystem, delivery channel, or digesting logic.
 
@@ -213,16 +214,16 @@ The Workbench **MUST NOT** implement its own notification subsystem, delivery ch
 
 ## 8. Empty, loading, error, forbidden
 
-| State | Requirement |
-| ----- | ----------- |
-| Loading | Design System loading patterns; no blank flash of stale/wrong data |
-| Empty Explorer | Guided CTA to Create (if `qep.plan.create` permitted) or adjust filters |
-| Empty Review queue | "No Test Plans awaiting review" |
-| Not found | Governed 404-style panel for deep links to missing plans |
-| Forbidden | Governed 403-style panel — no data leakage about the Plan's existence or content |
-| API error | Typed error envelope messaging (Document 010); retry where safe |
-| Unavailable foreign link | Slot message — capability not present or no permission |
-| Unavailable Compare | Governed message per Part 4 §6 — not an error state |
+| State                    | Requirement                                                                      |
+| ------------------------ | -------------------------------------------------------------------------------- |
+| Loading                  | Design System loading patterns; no blank flash of stale/wrong data               |
+| Empty Explorer           | Guided CTA to Create (if `qep.plan.create` permitted) or adjust filters          |
+| Empty Review queue       | "No Test Plans awaiting review"                                                  |
+| Not found                | Governed 404-style panel for deep links to missing plans                         |
+| Forbidden                | Governed 403-style panel — no data leakage about the Plan's existence or content |
+| API error                | Typed error envelope messaging (Document 010); retry where safe                  |
+| Unavailable foreign link | Slot message — capability not present or no permission                           |
+| Unavailable Compare      | Governed message per Part 4 §6 — not an error state                              |
 
 ---
 
@@ -237,25 +238,25 @@ The Workbench **MUST NOT** implement its own notification subsystem, delivery ch
 
 ## 10. Persona → surface matrix
 
-| Persona | Primary surfaces | Typical actions |
-| ------- | ----------------- | ----------------- |
-| Viewer | Explorer, Search, Inspector | read-only |
-| Tester | Explorer (assigned), Inspector | read; assignment notes if Domain exposes them |
-| Lead | Dashboard, Explorer, Create/Edit, Inspector | create, update, assign, schedule, submit-for-review, mark-ready, clone |
-| QA Manager | Review queue, Dashboard, Inspector | approve, reject, mark-ready, start-execution, complete, archive, cancel, supersede |
+| Persona    | Primary surfaces                            | Typical actions                                                                    |
+| ---------- | ------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Viewer     | Explorer, Search, Inspector                 | read-only                                                                          |
+| Tester     | Explorer (assigned), Inspector              | read; assignment notes if Domain exposes them                                      |
+| Lead       | Dashboard, Explorer, Create/Edit, Inspector | create, update, assign, schedule, submit-for-review, mark-ready, clone             |
+| QA Manager | Review queue, Dashboard, Inspector          | approve, reject, mark-ready, start-execution, complete, archive, cancel, supersede |
 
 ---
 
 ## 11. Traceability
 
-| This Part | Trace |
-| --------- | ----- |
-| Lifecycle states | ENG-060A · ARCH-013 §3 |
-| Actions | ENG-060B Parts 3–4 |
+| This Part         | Trace                                                                                 |
+| ----------------- | ------------------------------------------------------------------------------------- |
+| Lifecycle states  | ENG-060A · ARCH-013 §3                                                                |
+| Actions           | ENG-060B Parts 3–4                                                                    |
 | Known limitations | ENG-060B `KNOWN-LIMITATIONS.md`, CERT-060B `KNOWN-LIMITATIONS-REVIEW.md` (L-01, L-02) |
-| Notifications | Document 021 (consume) |
-| Sessions | Document 018 |
-| Components | OES-ARCH-014 Part 3 |
+| Notifications     | Document 021 (consume)                                                                |
+| Sessions          | Document 018                                                                          |
+| Components        | OES-ARCH-014 Part 3                                                                   |
 
 ---
 

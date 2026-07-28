@@ -26,7 +26,9 @@ export type BackfillRequirementContentVersionsInput = {
 export async function backfillRequirementContentVersions(
   input: BackfillRequirementContentVersionsInput,
 ): Promise<{ readonly examined: number; readonly appended: number }> {
-  const requirements = await input.requirements.list(input.tenantId, { includeArchived: true });
+  const requirements = await input.requirements.list(input.tenantId, {
+    includeArchived: true,
+  });
   let appended = 0;
   for (const requirement of requirements) {
     if (await input.contentVersions.getLatest(input.tenantId, requirement.id)) continue;

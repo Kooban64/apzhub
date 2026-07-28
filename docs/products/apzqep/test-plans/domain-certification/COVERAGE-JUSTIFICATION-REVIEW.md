@@ -1,17 +1,17 @@
 # Coverage Justification Review — APZQEP-CERT-060A
 
-| Field | Value |
-| ----- | ----- |
+| Field  | Value                             |
+| ------ | --------------------------------- |
 | Result | **PASS** (justification retained) |
-| Source | ENG-060A ECR + Owner Acceptance |
+| Source | ENG-060A ECR + Owner Acceptance   |
 
 ## Measured (package-scoped, quality objectives)
 
-| Metric | OES objective | Actual | CERT determination |
-| ------ | ------------- | ------ | ------------------ |
-| Lines | ≥95% | **92.94%** | Justified — **PASS** |
-| Functions | ≥95% | **94.59%** | Justified — **PASS** |
-| Branches | ≥90% | **78.91%** | Justified — **PASS** |
+| Metric    | OES objective | Actual     | CERT determination   |
+| --------- | ------------- | ---------- | -------------------- |
+| Lines     | ≥95%          | **92.94%** | Justified — **PASS** |
+| Functions | ≥95%          | **94.59%** | Justified — **PASS** |
+| Branches  | ≥90%          | **78.91%** | Justified — **PASS** |
 
 ## Classification
 

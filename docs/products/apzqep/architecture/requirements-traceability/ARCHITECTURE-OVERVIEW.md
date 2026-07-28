@@ -19,11 +19,11 @@ Requirements / Verification / Execution / Evidence / Certification / Documents S
 
 ## Key separations
 
-| Separation | Rule |
-| ---------- | ---- |
-| Semantic Relationships vs Trace Links | Requirements owns the former; Traceability owns the latter |
-| SoR vs analysis | Coverage/impact are derived |
-| Domains vs Traceability | Domains own artefacts; Traceability owns links and analysis contracts |
+| Separation                            | Rule                                                                  |
+| ------------------------------------- | --------------------------------------------------------------------- |
+| Semantic Relationships vs Trace Links | Requirements owns the former; Traceability owns the latter            |
+| SoR vs analysis                       | Coverage/impact are derived                                           |
+| Domains vs Traceability               | Domains own artefacts; Traceability owns links and analysis contracts |
 
 ## Downstream gate
 

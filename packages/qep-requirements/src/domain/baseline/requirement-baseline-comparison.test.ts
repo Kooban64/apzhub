@@ -3,7 +3,11 @@ import { describe, expect, it } from "vitest";
 import { createRequirementBaselineItem } from "./requirement-baseline-item";
 import { compareRequirementBaselineMembership } from "./requirement-baseline-comparison";
 
-const item = (requirementId: string, contentVersionId: string, contentVersionNumber = 1) =>
+const item = (
+  requirementId: string,
+  contentVersionId: string,
+  contentVersionNumber = 1,
+) =>
   createRequirementBaselineItem({
     requirementId,
     contentVersionId,
@@ -19,9 +23,13 @@ describe("compareRequirementBaselineMembership", () => {
 
     const comparison = compareRequirementBaselineMembership(base, target);
 
-    expect(comparison.unchanged.map((entry) => entry.contentVersionId)).toEqual(["rcv_1"]);
+    expect(comparison.unchanged.map((entry) => entry.contentVersionId)).toEqual([
+      "rcv_1",
+    ]);
     expect(comparison.added.map((entry) => entry.contentVersionId)).toEqual(["rcv_3"]);
-    expect(comparison.removed.map((entry) => entry.contentVersionId)).toEqual(["rcv_2"]);
+    expect(comparison.removed.map((entry) => entry.contentVersionId)).toEqual([
+      "rcv_2",
+    ]);
     expect(comparison.summary).toEqual({
       addedCount: 1,
       removedCount: 1,

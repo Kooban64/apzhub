@@ -8,10 +8,10 @@ Domain never imports drizzle/pg.
 
 ## Implementations
 
-| Impl | Factory |
-| ---- | ------- |
+| Impl      | Factory                                     |
+| --------- | ------------------------------------------- |
 | In-memory | `createInMemoryTestSpecificationRepository` |
-| Postgres | `createPostgresTestSpecificationRepository` |
+| Postgres  | `createPostgresTestSpecificationRepository` |
 
 Persistence factories:
 

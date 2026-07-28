@@ -20,7 +20,9 @@ export function createTraceScope(input: {
   }
   if (kind === "tenant_global") {
     if (input.referenceId !== undefined && input.referenceId.trim() !== "") {
-      throw new TraceInvariantViolation("tenant_global scope must not include referenceId");
+      throw new TraceInvariantViolation(
+        "tenant_global scope must not include referenceId",
+      );
     }
     return { kind };
   }
@@ -29,7 +31,9 @@ export function createTraceScope(input: {
     throw new TraceInvariantViolation(`Trace scope ${kind} requires referenceId`);
   }
   if (kind === "baseline" && !/^rbl_[A-Za-z0-9_-]+$/.test(referenceId)) {
-    throw new TraceInvariantViolation("Baseline scope referenceId must start with rbl_");
+    throw new TraceInvariantViolation(
+      "Baseline scope referenceId must start with rbl_",
+    );
   }
   return { kind, referenceId };
 }

@@ -1,11 +1,11 @@
 # Executive Summary — APZQEP-PORTFOLIO-001
 
-| Field | Value |
-| ----- | ----- |
+| Field     | Value                                                             |
+| --------- | ----------------------------------------------------------------- |
 | Programme | APZQEP-PORTFOLIO-001 — Foundation Completion & Portfolio Baseline |
-| Date | 2026-07-28 |
-| Status | **ACCEPTED / APPROVED / CLOSED** |
-| Nature | Portfolio / documentation baseline only |
+| Date      | 2026-07-28                                                        |
+| Status    | **ACCEPTED / APPROVED / CLOSED**                                  |
+| Nature    | Portfolio / documentation baseline only                           |
 
 ## The one-paragraph version
 

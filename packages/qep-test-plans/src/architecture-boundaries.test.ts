@@ -31,9 +31,7 @@ function collectSourceFiles(dir: string): string[] {
 describe("APZQEP-ENG-060A/060B architecture boundaries", () => {
   it("exports programme markers and event catalogue", () => {
     expect(QEP_TEST_PLANS_VERSION).toBe("1.0.0");
-    expect(QEP_TEST_PLANS_PROGRAMME).toBe(
-      "APZQEP-TEST-PLANS 1.0.0 CERTIFIED FROZEN",
-    );
+    expect(QEP_TEST_PLANS_PROGRAMME).toBe("APZQEP-TEST-PLANS 1.0.0 CERTIFIED FROZEN");
     expect(PLAN_DOMAIN_EVENT_TYPES).toContain("qep.plan.created");
     expect(PLAN_DOMAIN_EVENT_TYPES).toContain("qep.plan.approved");
     expect(PLAN_DOMAIN_EVENT_TYPES).toContain("qep.plan.superseded");
@@ -45,13 +43,13 @@ describe("APZQEP-ENG-060A/060B architecture boundaries", () => {
     const forbidden = [
       "drizzle",
       "postgres",
-      "\"pg\"",
+      '"pg"',
       "'pg'",
       "@apzhub/config",
       "@apzhub/platform-services",
       "next/server",
       "next/",
-      "\"react\"",
+      '"react"',
       "'react'",
       "react-dom",
       "node:fs",
@@ -62,20 +60,24 @@ describe("APZQEP-ENG-060A/060B architecture boundaries", () => {
     for (const file of collectSourceFiles(domainRoot)) {
       const source = readFileSync(file, "utf8");
       for (const token of forbidden) {
-        expect(source.includes(token), `${file} must not reference ${token}`).toBe(false);
+        expect(source.includes(token), `${file} must not reference ${token}`).toBe(
+          false,
+        );
       }
       expect(sqlish.test(source), `${file} must not contain SQL`).toBe(false);
     }
   });
 
   it("forbids Next.js / React framework imports in application and infrastructure layers", () => {
-    const forbidden = ["next/server", "next/", "\"react\"", "'react'", "react-dom"];
+    const forbidden = ["next/server", "next/", '"react"', "'react'", "react-dom"];
     for (const layer of ["application", "infrastructure"]) {
       const root = join(packageRoot, "src", layer);
       for (const file of collectSourceFiles(root)) {
         const source = readFileSync(file, "utf8");
         for (const token of forbidden) {
-          expect(source.includes(token), `${file} must not reference ${token}`).toBe(false);
+          expect(source.includes(token), `${file} must not reference ${token}`).toBe(
+            false,
+          );
         }
       }
     }
@@ -83,13 +85,17 @@ describe("APZQEP-ENG-060A/060B architecture boundaries", () => {
 
   it("forbids the presentation layer from containing React/UI code (no Workbench in ENG-060B)", () => {
     const presentationRoot = join(packageRoot, "src", "presentation");
-    const forbidden = ["\"react\"", "'react'", "react-dom", ".tsx", "next/server"];
+    const forbidden = ['"react"', "'react'", "react-dom", ".tsx", "next/server"];
     for (const file of collectSourceFiles(presentationRoot)) {
-      expect(file.endsWith(".tsx"), `${file} must not be a React component`).toBe(false);
+      expect(file.endsWith(".tsx"), `${file} must not be a React component`).toBe(
+        false,
+      );
       const source = readFileSync(file, "utf8");
       for (const token of forbidden) {
         if (token === ".tsx") continue;
-        expect(source.includes(token), `${file} must not reference ${token}`).toBe(false);
+        expect(source.includes(token), `${file} must not reference ${token}`).toBe(
+          false,
+        );
       }
     }
   });

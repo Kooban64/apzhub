@@ -11,15 +11,15 @@
 
 ## Decision record (Owner)
 
-| Field | Value |
-| ----- | ----- |
-| Decision | **ACCEPTED** |
-| Repository status | **CLOSED** |
-| Classification | **COMPLETE** |
-| Date | 2026-07-24 |
-| Authority | Owner |
-| Baseline | APZQEP-ENG-020B Requirements Persistence & CRUD Foundation (0.2.0) — authoritative |
-| Conditions | Acceptance authorises **APZQEP-ENG-020C** Requirements Lifecycle Engine & State Machine |
+| Field             | Value                                                                                   |
+| ----------------- | --------------------------------------------------------------------------------------- |
+| Decision          | **ACCEPTED**                                                                            |
+| Repository status | **CLOSED**                                                                              |
+| Classification    | **COMPLETE**                                                                            |
+| Date              | 2026-07-24                                                                              |
+| Authority         | Owner                                                                                   |
+| Baseline          | APZQEP-ENG-020B Requirements Persistence & CRUD Foundation (0.2.0) — authoritative      |
+| Conditions        | Acceptance authorises **APZQEP-ENG-020C** Requirements Lifecycle Engine & State Machine |
 
 ## Acceptance checklist (Owner)
 

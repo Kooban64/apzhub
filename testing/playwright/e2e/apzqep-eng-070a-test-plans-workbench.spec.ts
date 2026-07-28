@@ -97,7 +97,10 @@ async function mockPlansApi(page: Page, options?: { forbidDetail?: boolean }) {
       const query = url.searchParams.get("query");
       let items = [current];
       if (status) items = items.filter((i) => i.status === status);
-      if (query) items = items.filter((i) => i.title.includes(query) || i.number.includes(query));
+      if (query)
+        items = items.filter(
+          (i) => i.title.includes(query) || i.number.includes(query),
+        );
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -229,7 +232,9 @@ async function mockPlansApi(page: Page, options?: { forbidDetail?: boolean }) {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
-        body: JSON.stringify({ data: { ...current, successor: { id: "tpl_successor" } } }),
+        body: JSON.stringify({
+          data: { ...current, successor: { id: "tpl_successor" } },
+        }),
       });
       return;
     }
@@ -263,7 +268,9 @@ async function mockPlansApi(page: Page, options?: { forbidDetail?: boolean }) {
     }
 
     if (rest === "compare" || rest.startsWith("compare")) {
-      throw new Error("Compare API must never be called for Test Plans (governed unavailable)");
+      throw new Error(
+        "Compare API must never be called for Test Plans (governed unavailable)",
+      );
     }
 
     await route.fulfill({
@@ -390,14 +397,19 @@ test.describe("APZQEP-ENG-070A authenticated journeys (mocked API)", () => {
     await expect(page.getByText(/rejected/i).first()).toBeVisible({ timeout: 30_000 });
   });
 
-  test("returnToDraft is offered when the server exposes it on rejected", async ({ page }) => {
+  test("returnToDraft is offered when the server exposes it on rejected", async ({
+    page,
+  }) => {
     await page.route("**/api/v1/qep/plans/tpl_e2e_1", async (route) => {
       if (route.request().method() === "GET") {
         await route.fulfill({
           status: 200,
           contentType: "application/json",
           body: JSON.stringify({
-            data: dto({ status: "rejected", availableActions: ["returnToDraft", "cancel"] }),
+            data: dto({
+              status: "rejected",
+              availableActions: ["returnToDraft", "cancel"],
+            }),
           }),
         });
         return;
@@ -418,7 +430,9 @@ test.describe("APZQEP-ENG-070A authenticated journeys (mocked API)", () => {
   test("compare route shows governed unavailable and never calls compare API", async ({
     page,
   }) => {
-    await page.goto(`${BASE}/plans/tpl_e2e_1/compare`, { waitUntil: "domcontentloaded" });
+    await page.goto(`${BASE}/plans/tpl_e2e_1/compare`, {
+      waitUntil: "domcontentloaded",
+    });
     await expect(page.getByTestId("qep-plan-compare-unavailable")).toBeVisible({
       timeout: 30_000,
     });
@@ -449,7 +463,9 @@ test.describe("APZQEP-ENG-070A authenticated journeys (mocked API)", () => {
 
   test("deep links open Inspector", async ({ page }) => {
     await page.goto(`${BASE}/plans/tpl_e2e_1`, { waitUntil: "domcontentloaded" });
-    await expect(page.getByTestId("qep-plan-inspector")).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByTestId("qep-plan-inspector")).toBeVisible({
+      timeout: 30_000,
+    });
     await expect(page.getByText("TP-E2E-001")).toBeVisible();
   });
 

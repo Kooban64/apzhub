@@ -14,17 +14,10 @@ export function toStoredTestSpecification(
   };
 }
 
-function matchesQueryText(
-  row: StoredTestSpecification,
-  query: string,
-): boolean {
+function matchesQueryText(row: StoredTestSpecification, query: string): boolean {
   const normalized = query.trim().toLowerCase();
   if (!normalized) return true;
-  const haystack = [
-    row.record.title,
-    row.record.number,
-    ...row.record.tags,
-  ]
+  const haystack = [row.record.title, row.record.number, ...row.record.tags]
     .join(" ")
     .toLowerCase();
   return haystack.includes(normalized);

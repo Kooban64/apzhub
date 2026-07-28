@@ -2,11 +2,11 @@
 
 ## Hooks
 
-| Hook | Purpose |
-| ---- | ------- |
-| `onObservation` | Operation name, durationMs, outcome |
-| Structured domain/application errors | Typed codes (`NOT_FOUND`, `CONFLICT`, `REVISION_CONFLICT`, …) |
-| Platform gateway health | QEP readiness surface includes specifications persistence mode |
+| Hook                                 | Purpose                                                        |
+| ------------------------------------ | -------------------------------------------------------------- |
+| `onObservation`                      | Operation name, durationMs, outcome                            |
+| Structured domain/application errors | Typed codes (`NOT_FOUND`, `CONFLICT`, `REVISION_CONFLICT`, …)  |
+| Platform gateway health              | QEP readiness surface includes specifications persistence mode |
 
 ## Standards
 

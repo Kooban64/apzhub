@@ -4,17 +4,17 @@
 
 ## AI may
 
-- Summarise Verification history and rationale  
-- Prioritise queue presentation suggestions  
-- Recommend assignees or next actions  
-- Draft rationale text for human edit  
+- Summarise Verification history and rationale
+- Prioritise queue presentation suggestions
+- Recommend assignees or next actions
+- Draft rationale text for human edit
 
 ## AI must never
 
-- Verify  
-- Approve  
-- Reject  
-- Own Verification truth, lifecycle, or authority  
+- Verify
+- Approve
+- Reject
+- Own Verification truth, lifecycle, or authority
 
 ## Rule
 

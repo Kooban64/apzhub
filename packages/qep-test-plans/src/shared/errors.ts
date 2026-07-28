@@ -39,11 +39,9 @@ export class PlanReadinessError extends PlanDomainError {
   readonly reasons: readonly string[];
 
   constructor(reasons: readonly string[]) {
-    super(
-      "PLAN_READINESS",
-      `Plan is not ready for execution: ${reasons.join(", ")}`,
-      { reasons },
-    );
+    super("PLAN_READINESS", `Plan is not ready for execution: ${reasons.join(", ")}`, {
+      reasons,
+    });
     this.name = "PlanReadinessError";
     this.reasons = reasons;
   }

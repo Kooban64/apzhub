@@ -11,22 +11,22 @@ APZ QEP governs the quality lifecycle from approved requirements through verific
 
 ## APZ QEP is not
 
-| Not | May still |
-| --- | --------- |
-| An ALM platform | Link/sync issues and projects via Platform Services; represent quality project contexts |
-| A project-management platform | Represent quality projects, releases, and scopes within QE governance |
-| A source-control platform | Link repositories and builds as references for traceability and evidence |
-| A CI/CD platform | Ingest pipeline metadata and automated verification results |
-| An automation runner | Reference external runners; govern and ingest results — never execute as product identity |
-| A device cloud | Attach device-cloud evidence references to verification sessions |
-| A generic document-management platform | Use Platform Documents for evidence packs and compliance artefacts |
-| A generic observability platform | Consume Platform Observability for operational quality signals |
-| A general-purpose AI chatbot | Provide governed AI Quality Workspace with human gates |
-| A replacement for every engineering tool | Integrate via Platform Services and connectors; remain QE-focused |
+| Not                                      | May still                                                                                 |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------- |
+| An ALM platform                          | Link/sync issues and projects via Platform Services; represent quality project contexts   |
+| A project-management platform            | Represent quality projects, releases, and scopes within QE governance                     |
+| A source-control platform                | Link repositories and builds as references for traceability and evidence                  |
+| A CI/CD platform                         | Ingest pipeline metadata and automated verification results                               |
+| An automation runner                     | Reference external runners; govern and ingest results — never execute as product identity |
+| A device cloud                           | Attach device-cloud evidence references to verification sessions                          |
+| A generic document-management platform   | Use Platform Documents for evidence packs and compliance artefacts                        |
+| A generic observability platform         | Consume Platform Observability for operational quality signals                            |
+| A general-purpose AI chatbot             | Provide governed AI Quality Workspace with human gates                                    |
+| A replacement for every engineering tool | Integrate via Platform Services and connectors; remain QE-focused                         |
 
 ## Boundary tests (Definition)
 
-**In-boundary:** A proposed capability improves the answer to *Can this software be released with sufficient confidence?* via governed quality information — requirements, verification, evidence, defects, risk, traceability, readiness, certification, audit, or quality intelligence.
+**In-boundary:** A proposed capability improves the answer to _Can this software be released with sufficient confidence?_ via governed quality information — requirements, verification, evidence, defects, risk, traceability, readiness, certification, audit, or quality intelligence.
 
 **Out-of-boundary:** A proposed capability primarily manages work items, pipelines, code hosting, device farms, or unrestricted agent automation without QE SoR purpose.
 
@@ -34,14 +34,14 @@ APZ QEP governs the quality lifecycle from approved requirements through verific
 
 ## Enterprise boundary posture
 
-| Concern | QEP role | External system role |
-| ------- | -------- | -------------------- |
-| Requirements | SoR for quality-relevant requirements; approve/baseline | ALM may source or sync; QEP governs quality approval |
-| Verification | SoR for verification design, library, sessions, runs | Runners execute; QEP governs and ingests |
-| Evidence | SoR for evidence packs; lock on certification | Documents/storage may hold files; QEP governs pack integrity |
-| Defects | SoR for quality defects linked to verification | External trackers may sync; QEP governs quality linkage |
-| Certification | SoR for human certification decisions | Release tools may consume cert status; QEP is authoritative |
-| Audit | SoR for quality audit trail | Platform audit complements; QEP owns quality events |
+| Concern       | QEP role                                                | External system role                                         |
+| ------------- | ------------------------------------------------------- | ------------------------------------------------------------ |
+| Requirements  | SoR for quality-relevant requirements; approve/baseline | ALM may source or sync; QEP governs quality approval         |
+| Verification  | SoR for verification design, library, sessions, runs    | Runners execute; QEP governs and ingests                     |
+| Evidence      | SoR for evidence packs; lock on certification           | Documents/storage may hold files; QEP governs pack integrity |
+| Defects       | SoR for quality defects linked to verification          | External trackers may sync; QEP governs quality linkage      |
+| Certification | SoR for human certification decisions                   | Release tools may consume cert status; QEP is authoritative  |
+| Audit         | SoR for quality audit trail                             | Platform audit complements; QEP owns quality events          |
 
 ## DEF-002 note
 

@@ -6,13 +6,13 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ENG-020F Part 3 — Requirements Workbench Exposure |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Architecture | APZQEP-ARCH-006 ACCEPTED |
-| Package at acceptance | `@apzhub/qep-requirements` **0.10.0** (subsequently certified as **1.0.0**) |
-| Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T103000Z-APZQEP-ENG-020F-PART3-ACCEPTANCE.json` |
+| Field                 | Value                                                                                              |
+| --------------------- | -------------------------------------------------------------------------------------------------- |
+| Programme             | APZQEP-ENG-020F Part 3 — Requirements Workbench Exposure                                           |
+| Decision              | **ACCEPTED / CLOSED / COMPLETE**                                                                   |
+| Architecture          | APZQEP-ARCH-006 ACCEPTED                                                                           |
+| Package at acceptance | `@apzhub/qep-requirements` **0.10.0** (subsequently certified as **1.0.0**)                        |
+| Acceptance evidence   | `docs/operations/evidence/portfolio-recert/20260726T103000Z-APZQEP-ENG-020F-PART3-ACCEPTANCE.json` |
 
 ## Effect
 

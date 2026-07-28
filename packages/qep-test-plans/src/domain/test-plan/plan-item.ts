@@ -1,5 +1,9 @@
 import { PlanValidationError } from "../../shared/errors";
-import { createPlanNotes, createRequirementId, createSpecificationId } from "./value-objects";
+import {
+  createPlanNotes,
+  createRequirementId,
+  createSpecificationId,
+} from "./value-objects";
 import type { PlanItemStatus, RequirementId, SpecificationId } from "./value-objects";
 
 export type TestPlanItem = {
@@ -63,7 +67,11 @@ export function updateTestPlanItem(
         ? patch.specificationVersionPin.trim() || undefined
         : item.specificationVersionPin;
   const notes =
-    patch.notes === null ? undefined : patch.notes !== undefined ? createPlanNotes(patch.notes) : item.notes;
+    patch.notes === null
+      ? undefined
+      : patch.notes !== undefined
+        ? createPlanNotes(patch.notes)
+        : item.notes;
   const requirementRefs =
     patch.requirementRefs === null
       ? undefined

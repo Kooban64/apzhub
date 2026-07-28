@@ -100,7 +100,11 @@ function baseDto(overrides: Partial<QepTestPlanDto> = {}): QepTestPlanDto {
       },
     ],
     schedule: {},
-    assignment: { assigneeIds: [], updatedAt: "2026-07-27T00:00:00.000Z", updatedBy: "user_1" },
+    assignment: {
+      assigneeIds: [],
+      updatedAt: "2026-07-27T00:00:00.000Z",
+      updatedBy: "user_1",
+    },
     approvals: [],
     revisions: [],
     externalReferences: [],
@@ -135,13 +139,19 @@ describe("APZQEP-ENG-070A routing helpers", () => {
   it("parses detail and secondary modes", () => {
     const id = "tpl_demo";
     expect(parseQepTestPlanRouteId(QEP_TEST_PLAN_ROUTES.detail(id))).toBe(id);
-    expect(parseQepTestPlanDetailMode(QEP_TEST_PLAN_ROUTES.history(id))).toBe("history");
-    expect(parseQepTestPlanDetailMode(QEP_TEST_PLAN_ROUTES.versions(id))).toBe("versions");
+    expect(parseQepTestPlanDetailMode(QEP_TEST_PLAN_ROUTES.history(id))).toBe(
+      "history",
+    );
+    expect(parseQepTestPlanDetailMode(QEP_TEST_PLAN_ROUTES.versions(id))).toBe(
+      "versions",
+    );
     expect(parseQepTestPlanDetailMode(QEP_TEST_PLAN_ROUTES.items(id))).toBe("items");
     expect(parseQepTestPlanDetailMode(QEP_TEST_PLAN_ROUTES.relationships(id))).toBe(
       "relationships",
     );
-    expect(parseQepTestPlanDetailMode(QEP_TEST_PLAN_ROUTES.compare(id))).toBe("compare");
+    expect(parseQepTestPlanDetailMode(QEP_TEST_PLAN_ROUTES.compare(id))).toBe(
+      "compare",
+    );
     expect(parseQepTestPlanDetailMode(QEP_TEST_PLAN_ROUTES.audit(id))).toBe("audit");
   });
 });
@@ -170,7 +180,9 @@ describe("APZQEP-ENG-070A Workbench journeys (mocked API)", () => {
       offset: 0,
     });
 
-    render(wrap(<QepTestPlanRouterView pathname="/workspace/qep/test-plans/explorer" />));
+    render(
+      wrap(<QepTestPlanRouterView pathname="/workspace/qep/test-plans/explorer" />),
+    );
 
     await waitFor(() => {
       expect(screen.getByText("TP-001")).toBeTruthy();
@@ -185,8 +197,12 @@ describe("APZQEP-ENG-070A Workbench journeys (mocked API)", () => {
 
     fireEvent.change(screen.getByLabelText("Title"), { target: { value: "New plan" } });
     fireEvent.change(screen.getByLabelText("Objective"), { target: { value: "Obj" } });
-    fireEvent.change(screen.getByLabelText("Description"), { target: { value: "Desc" } });
-    fireEvent.change(screen.getByLabelText("Scope class"), { target: { value: "regression" } });
+    fireEvent.change(screen.getByLabelText("Description"), {
+      target: { value: "Desc" },
+    });
+    fireEvent.change(screen.getByLabelText("Scope class"), {
+      target: { value: "regression" },
+    });
     fireEvent.click(screen.getByRole("button", { name: /Create draft/i }));
 
     await waitFor(() => {
@@ -220,7 +236,9 @@ describe("APZQEP-ENG-070A Workbench journeys (mocked API)", () => {
     });
     fireEvent.click(screen.getByRole("button", { name: /^Submit$/i }));
     await waitFor(() => {
-      expect(submitPlanForReview).toHaveBeenCalledWith("tpl_1", { expectedRevision: 1 });
+      expect(submitPlanForReview).toHaveBeenCalledWith("tpl_1", {
+        expectedRevision: 1,
+      });
     });
   });
 
@@ -236,9 +254,13 @@ describe("APZQEP-ENG-070A Workbench journeys (mocked API)", () => {
       wrap(<QepTestPlanRouterView pathname="/workspace/qep/test-plans/plans/tpl_1" />),
     );
 
-    await waitFor(() => expect(screen.getByRole("button", { name: /^Approve$/i })).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: /^Approve$/i })).toBeTruthy(),
+    );
     fireEvent.click(screen.getByRole("button", { name: /^Approve$/i }));
-    await waitFor(() => expect(screen.getByTestId("qep-plan-confirm-approve")).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByTestId("qep-plan-confirm-approve")).toBeTruthy(),
+    );
     fireEvent.click(screen.getByTestId("qep-plan-confirm-approve"));
     await waitFor(() => {
       expect(approvePlan).toHaveBeenCalledWith("tpl_1", {
@@ -260,7 +282,9 @@ describe("APZQEP-ENG-070A Workbench journeys (mocked API)", () => {
       wrap(<QepTestPlanRouterView pathname="/workspace/qep/test-plans/plans/tpl_1" />),
     );
 
-    await waitFor(() => expect(screen.getByRole("button", { name: /^Reject$/i })).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: /^Reject$/i })).toBeTruthy(),
+    );
     fireEvent.click(screen.getByRole("button", { name: /^Reject$/i }));
     await waitFor(() => expect(screen.getByLabelText(/Rationale/i)).toBeTruthy());
     fireEvent.change(screen.getByLabelText(/Rationale/i), {
@@ -280,7 +304,10 @@ describe("APZQEP-ENG-070A Workbench journeys (mocked API)", () => {
       baseDto({ status: "rejected", availableActions: ["returnToDraft", "cancel"] }),
     );
     vi.mocked(returnPlanToDraft).mockResolvedValue(
-      baseDto({ status: "draft", availableActions: ["updateContent", "submitForReview"] }),
+      baseDto({
+        status: "draft",
+        availableActions: ["updateContent", "submitForReview"],
+      }),
     );
 
     render(
@@ -291,7 +318,9 @@ describe("APZQEP-ENG-070A Workbench journeys (mocked API)", () => {
       expect(screen.getByRole("button", { name: /Return to draft/i })).toBeTruthy(),
     );
     fireEvent.click(screen.getByRole("button", { name: /Return to draft/i }));
-    await waitFor(() => expect(screen.getByTestId("qep-plan-confirm-returnToDraft")).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByTestId("qep-plan-confirm-returnToDraft")).toBeTruthy(),
+    );
     fireEvent.click(screen.getByTestId("qep-plan-confirm-returnToDraft"));
     await waitFor(() => {
       expect(returnPlanToDraft).toHaveBeenCalledWith("tpl_1", { expectedRevision: 1 });
@@ -302,10 +331,14 @@ describe("APZQEP-ENG-070A Workbench journeys (mocked API)", () => {
     vi.mocked(getPlan).mockResolvedValue(
       baseDto({ availableActions: ["updateContent"], revision: 3 }),
     );
-    vi.mocked(updatePlanContent).mockResolvedValue(baseDto({ title: "Updated", revision: 4 }));
+    vi.mocked(updatePlanContent).mockResolvedValue(
+      baseDto({ title: "Updated", revision: 4 }),
+    );
 
     render(
-      wrap(<QepTestPlanRouterView pathname="/workspace/qep/test-plans/plans/tpl_1/edit" />),
+      wrap(
+        <QepTestPlanRouterView pathname="/workspace/qep/test-plans/plans/tpl_1/edit" />,
+      ),
     );
 
     await waitFor(() => expect(screen.getByTestId("qep-plan-edit")).toBeTruthy());
@@ -345,15 +378,20 @@ describe("APZQEP-ENG-070A Workbench journeys (mocked API)", () => {
       expect(screen.getByTestId("qep-plan-compare-unavailable")).toBeTruthy();
       expect(screen.getByText(/not yet available for Test Plans/i)).toBeTruthy();
     });
-    const calledUrls = (globalThis.fetch as unknown as ReturnType<typeof vi.fn> | undefined)
-      ?.mock?.calls;
+    const calledUrls = (
+      globalThis.fetch as unknown as ReturnType<typeof vi.fn> | undefined
+    )?.mock?.calls;
     if (calledUrls) {
-      expect(calledUrls.some((call) => String(call[0]).includes("/compare"))).toBe(false);
+      expect(calledUrls.some((call) => String(call[0]).includes("/compare"))).toBe(
+        false,
+      );
     }
   });
 
   it("surfaces optimistic concurrency conflict on edit", async () => {
-    vi.mocked(getPlan).mockResolvedValue(baseDto({ availableActions: ["updateContent"] }));
+    vi.mocked(getPlan).mockResolvedValue(
+      baseDto({ availableActions: ["updateContent"] }),
+    );
     const conflict = new Error("Revision conflict") as Error & {
       status?: number;
       code?: string;
@@ -363,7 +401,9 @@ describe("APZQEP-ENG-070A Workbench journeys (mocked API)", () => {
     vi.mocked(updatePlanContent).mockRejectedValue(conflict);
 
     render(
-      wrap(<QepTestPlanRouterView pathname="/workspace/qep/test-plans/plans/tpl_1/edit" />),
+      wrap(
+        <QepTestPlanRouterView pathname="/workspace/qep/test-plans/plans/tpl_1/edit" />,
+      ),
     );
 
     await waitFor(() => expect(screen.getByTestId("qep-plan-edit")).toBeTruthy());

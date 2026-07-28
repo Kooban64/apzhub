@@ -13,7 +13,10 @@ import type { VerificationStatus } from "./verification-status";
  * expired      -> superseded | retired | requested (re-open)
  * withdrawn, cancelled, retired, superseded -> (terminal, no further transitions)
  */
-const VERIFICATION_TRANSITIONS: Record<VerificationStatus, readonly VerificationStatus[]> = {
+const VERIFICATION_TRANSITIONS: Record<
+  VerificationStatus,
+  readonly VerificationStatus[]
+> = {
   draft: ["requested", "cancelled", "retired"],
   requested: ["assigned", "in_progress", "cancelled", "withdrawn"],
   assigned: ["in_progress", "cancelled", "withdrawn"],

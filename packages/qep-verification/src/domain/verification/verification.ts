@@ -1,7 +1,16 @@
 import { VerificationInvariantViolation } from "../../shared/errors";
-import { createVerificationAuthority, type VerificationAuthority } from "./verification-authority";
-import { createVerificationComment, type VerificationComment } from "./verification-comment";
-import { createVerificationContext, type VerificationContext } from "./verification-context";
+import {
+  createVerificationAuthority,
+  type VerificationAuthority,
+} from "./verification-authority";
+import {
+  createVerificationComment,
+  type VerificationComment,
+} from "./verification-comment";
+import {
+  createVerificationContext,
+  type VerificationContext,
+} from "./verification-context";
 import {
   createVerificationDecision,
   type VerificationDecision,
@@ -34,16 +43,28 @@ import {
   mergeVerificationMetadata,
   type VerificationMetadata,
 } from "./verification-metadata";
-import { createVerificationOrigin, type VerificationOrigin } from "./verification-origin";
+import {
+  createVerificationOrigin,
+  type VerificationOrigin,
+} from "./verification-origin";
 import {
   createVerificationOutcome,
   FAILURE_VERIFICATION_OUTCOMES,
   SUCCESS_VERIFICATION_OUTCOMES,
   type VerificationOutcome,
 } from "./verification-outcome";
-import { createVerificationPriority, type VerificationPriority } from "./verification-priority";
-import { createVerificationRationale, type VerificationRationale } from "./verification-rationale";
-import { createVerificationReason, type VerificationReason } from "./verification-reason";
+import {
+  createVerificationPriority,
+  type VerificationPriority,
+} from "./verification-priority";
+import {
+  createVerificationRationale,
+  type VerificationRationale,
+} from "./verification-rationale";
+import {
+  createVerificationReason,
+  type VerificationReason,
+} from "./verification-reason";
 import {
   createVerificationResultSummary,
   type VerificationResultSummary,
@@ -210,7 +231,9 @@ export function createVerification(input: CreateVerificationInput): Verification
   const scope = createVerificationScope(input.scope ?? { kind: "tenant_global" });
   const priority = createVerificationPriority(input.priority ?? "medium");
   const origin = createVerificationOrigin(input.origin ?? "user");
-  const rationale = input.rationale ? createVerificationRationale(input.rationale) : undefined;
+  const rationale = input.rationale
+    ? createVerificationRationale(input.rationale)
+    : undefined;
   const reason = input.reason ? createVerificationReason(input.reason) : undefined;
   const comment = input.comment ? createVerificationComment(input.comment) : undefined;
   const metadata = createVerificationMetadata(input.metadata);
@@ -287,7 +310,9 @@ export function assignVerification(
   assertVerificationLifecycleTransition(base.status, "assigned");
   const trimmedAssignee = assigneeId.trim();
   if (!trimmedAssignee) {
-    throw new VerificationInvariantViolation("Verification assignment requires assigneeId");
+    throw new VerificationInvariantViolation(
+      "Verification assignment requires assigneeId",
+    );
   }
   const occurredAt = createVerificationTimestamp(at);
   return withChange(
@@ -345,7 +370,9 @@ export function verifyVerification(
   const base = clearEvents(v);
   assertVerificationLifecycleTransition(base.status, "verified");
   if (!input.outcome) {
-    throw new VerificationInvariantViolation("Verification outcome is required to complete");
+    throw new VerificationInvariantViolation(
+      "Verification outcome is required to complete",
+    );
   }
   const outcome = createVerificationOutcome(input.outcome);
   if (!SUCCESS_VERIFICATION_OUTCOMES.includes(outcome)) {
@@ -353,8 +380,12 @@ export function verifyVerification(
       `Verification cannot be completed as verified with outcome ${outcome}`,
     );
   }
-  const rationale = input.rationale ? createVerificationRationale(input.rationale) : base.rationale;
-  const comment = input.comment ? createVerificationComment(input.comment) : base.comment;
+  const rationale = input.rationale
+    ? createVerificationRationale(input.rationale)
+    : base.rationale;
+  const comment = input.comment
+    ? createVerificationComment(input.comment)
+    : base.comment;
   PolicyService.runCompletePolicies("verified", outcome, rationale);
 
   const occurredAt = createVerificationTimestamp(at);
@@ -405,7 +436,9 @@ export function rejectVerification(
   const base = clearEvents(v);
   assertVerificationLifecycleTransition(base.status, "rejected");
   if (!input.outcome) {
-    throw new VerificationInvariantViolation("Verification outcome is required to complete");
+    throw new VerificationInvariantViolation(
+      "Verification outcome is required to complete",
+    );
   }
   const outcome = createVerificationOutcome(input.outcome);
   if (!REJECT_OUTCOMES.includes(outcome)) {
@@ -413,8 +446,12 @@ export function rejectVerification(
       `Verification cannot be rejected with outcome ${outcome}`,
     );
   }
-  const rationale = input.rationale ? createVerificationRationale(input.rationale) : base.rationale;
-  const comment = input.comment ? createVerificationComment(input.comment) : base.comment;
+  const rationale = input.rationale
+    ? createVerificationRationale(input.rationale)
+    : base.rationale;
+  const comment = input.comment
+    ? createVerificationComment(input.comment)
+    : base.comment;
   PolicyService.runCompletePolicies("rejected", outcome, rationale);
 
   const occurredAt = createVerificationTimestamp(at);
@@ -432,7 +469,9 @@ export function rejectVerification(
     buildVerificationCompletedEvent({ ...eventInput(base, occurredAt), outcome }),
   ];
   if (outcome === "failed") {
-    events.push(buildVerificationFailedEvent({ ...eventInput(base, occurredAt), outcome }));
+    events.push(
+      buildVerificationFailedEvent({ ...eventInput(base, occurredAt), outcome }),
+    );
   }
 
   return withChange(
@@ -591,7 +630,15 @@ export function updateMetadata(
   const base = clearEvents(v);
   assertUpdatable(base.status);
   const metadata = mergeVerificationMetadata(base.metadata, patch);
-  return withChange(base, { metadata }, at, by, "metadata_changed", "Verification metadata updated", []);
+  return withChange(
+    base,
+    { metadata },
+    at,
+    by,
+    "metadata_changed",
+    "Verification metadata updated",
+    [],
+  );
 }
 
 export function updatePriority(

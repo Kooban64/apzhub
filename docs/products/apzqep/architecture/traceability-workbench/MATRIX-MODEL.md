@@ -9,20 +9,20 @@ Presentation architecture for Trace Matrices. Defines interaction for rows, colu
 ## Matrix families (future catalogue)
 
 Requirement ↔ Specification · Test Case · Execution · Evidence · Verification · Certification  
-Execution ↔ Evidence · Evidence ↔ Certification  
+Execution ↔ Evidence · Evidence ↔ Certification
 
 Extensible registry when domains exist.
 
 ## Structural rules
 
-| Element | Rule |
-| --- | --- |
-| Rows / columns | Artefact identities; paginated / virtualised |
-| Cell | Empty · one link · multiple (chooser) |
-| Status indicators | Lifecycle / confidence / warnings |
+| Element                      | Rule                                                 |
+| ---------------------------- | ---------------------------------------------------- |
+| Rows / columns               | Artefact identities; paginated / virtualised         |
+| Cell                         | Empty · one link · multiple (chooser)                |
+| Status indicators            | Lifecycle / confidence / warnings                    |
 | Coverage / impact indicators | **Display slots only** — no calculations in ARCH-008 |
-| Create from empty | Prefill endpoints when `create` available |
-| Bounds | Server windowing mandatory at scale |
+| Create from empty            | Prefill endpoints when `create` available            |
+| Bounds                       | Server windowing mandatory at scale                  |
 
 ## Explicit non-goals
 

@@ -4,12 +4,12 @@
 
 ## References
 
-| Target | Cardinality |
-| ------ | ----------- |
-| Requirement | one or many |
-| Trace Link | one or many |
-| Verification | zero or many |
-| Future Test Case / Suite / Execution / Evidence | slots only |
+| Target                                          | Cardinality  |
+| ----------------------------------------------- | ------------ |
+| Requirement                                     | one or many  |
+| Trace Link                                      | one or many  |
+| Verification                                    | zero or many |
+| Future Test Case / Suite / Execution / Evidence | slots only   |
 
 ## Rules
 

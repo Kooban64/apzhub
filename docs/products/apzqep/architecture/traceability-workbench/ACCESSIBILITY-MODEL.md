@@ -4,16 +4,16 @@
 
 ## Requirements
 
-| Area | Rule |
-| --- | --- |
-| Keyboard navigation | Full operation without pointer |
-| Screen readers | Named regions; table/grid semantics; live regions for validation |
-| High contrast | Token themes (006/022) |
-| Focus management | Visible focus; restore after dialogs; logical pane order |
-| ARIA | Roles for Explorer list, Matrix grid, Inspector, dialogs |
-| Responsive | Collapsible panes; Matrix may fall back to list |
-| Colour independence | State never colour-only |
-| WCAG | Target **AA** |
+| Area                | Rule                                                             |
+| ------------------- | ---------------------------------------------------------------- |
+| Keyboard navigation | Full operation without pointer                                   |
+| Screen readers      | Named regions; table/grid semantics; live regions for validation |
+| High contrast       | Token themes (006/022)                                           |
+| Focus management    | Visible focus; restore after dialogs; logical pane order         |
+| ARIA                | Roles for Explorer list, Matrix grid, Inspector, dialogs         |
+| Responsive          | Collapsible panes; Matrix may fall back to list                  |
+| Colour independence | State never colour-only                                          |
+| WCAG                | Target **AA**                                                    |
 
 ## Large datasets
 

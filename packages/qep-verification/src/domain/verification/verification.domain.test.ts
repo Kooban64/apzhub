@@ -59,8 +59,14 @@ import { createVerificationScope } from "./verification-scope";
 import { createVerificationPriority } from "./verification-priority";
 import { createVerificationOrigin } from "./verification-origin";
 import { createVerificationResultSummary } from "./verification-result-summary";
-import { createVerificationMetadata, mergeVerificationMetadata } from "./verification-metadata";
-import { appendVerificationHistory, createEmptyVerificationHistory } from "./verification-history";
+import {
+  createVerificationMetadata,
+  mergeVerificationMetadata,
+} from "./verification-metadata";
+import {
+  appendVerificationHistory,
+  createEmptyVerificationHistory,
+} from "./verification-history";
 import { createVerificationDecision } from "./verification-decision";
 import { VERIFICATION_DOMAIN_EVENT_TYPES } from "./verification-events";
 
@@ -103,15 +109,21 @@ describe("Verification domain — create", () => {
   });
 
   it("requires tenantId", () => {
-    expect(() => baseCreate({ tenantId: "  " })).toThrow(VerificationInvariantViolation);
+    expect(() => baseCreate({ tenantId: "  " })).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("requires createdBy", () => {
-    expect(() => baseCreate({ createdBy: " " })).toThrow(VerificationInvariantViolation);
+    expect(() => baseCreate({ createdBy: " " })).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("requires correlationId", () => {
-    expect(() => baseCreate({ correlationId: " " })).toThrow(VerificationInvariantViolation);
+    expect(() => baseCreate({ correlationId: " " })).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("requires a subject reference", () => {
@@ -127,15 +139,15 @@ describe("Verification domain — create", () => {
   });
 
   it("requires authority actorId", () => {
-    expect(() =>
-      baseCreate({ authority: { kind: "user", actorId: "  " } }),
-    ).toThrow(VerificationInvariantViolation);
+    expect(() => baseCreate({ authority: { kind: "user", actorId: "  " } })).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("rejects unknown authority kind", () => {
-    expect(() =>
-      baseCreate({ authority: { kind: "robot", actorId: ACTOR } }),
-    ).toThrow(VerificationInvariantViolation);
+    expect(() => baseCreate({ authority: { kind: "robot", actorId: ACTOR } })).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("accepts external_reference subjects with a valid URI", () => {
@@ -224,7 +236,12 @@ describe("Verification domain — reject path", () => {
 
   it("rejects with a failure outcome and rationale", () => {
     let v = toInProgress();
-    v = rejectVerification(v, { outcome: "failed", rationale: "Test failed" }, LATER, ACTOR);
+    v = rejectVerification(
+      v,
+      { outcome: "failed", rationale: "Test failed" },
+      LATER,
+      ACTOR,
+    );
     expect(v.status).toBe("rejected");
     expect(v.outcome).toBe("failed");
     expect(v.decision?.rationale).toBe("Test failed");
@@ -249,7 +266,12 @@ describe("Verification domain — reject path", () => {
 
   it("re-opens a rejected verification back to requested", () => {
     let v = toInProgress();
-    v = rejectVerification(v, { outcome: "failed", rationale: "First attempt failed" }, LATER, ACTOR);
+    v = rejectVerification(
+      v,
+      { outcome: "failed", rationale: "First attempt failed" },
+      LATER,
+      ACTOR,
+    );
     v = requestVerification(v, LATER, ACTOR);
     expect(v.status).toBe("requested");
   });
@@ -280,7 +302,9 @@ describe("Verification domain — outcome/status independence", () => {
     v = requestVerification(v, NOW, ACTOR);
     v = startVerification(v, NOW, ACTOR);
     // @ts-expect-error intentionally omitting outcome to prove runtime validation
-    expect(() => verifyVerification(v, {}, LATER, ACTOR)).toThrow(VerificationInvariantViolation);
+    expect(() => verifyVerification(v, {}, LATER, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("requires an outcome to reach rejected", () => {
@@ -288,25 +312,27 @@ describe("Verification domain — outcome/status independence", () => {
     v = requestVerification(v, NOW, ACTOR);
     v = startVerification(v, NOW, ACTOR);
     // @ts-expect-error intentionally omitting outcome to prove runtime validation
-    expect(() => rejectVerification(v, {}, LATER, ACTOR)).toThrow(VerificationInvariantViolation);
+    expect(() => rejectVerification(v, {}, LATER, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("rejects success outcomes being passed to rejectVerification", () => {
     let v = baseCreate();
     v = requestVerification(v, NOW, ACTOR);
     v = startVerification(v, NOW, ACTOR);
-    expect(() =>
-      rejectVerification(v, { outcome: "verified" }, LATER, ACTOR),
-    ).toThrow(VerificationInvariantViolation);
+    expect(() => rejectVerification(v, { outcome: "verified" }, LATER, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("rejects failure outcomes being passed to verifyVerification", () => {
     let v = baseCreate();
     v = requestVerification(v, NOW, ACTOR);
     v = startVerification(v, NOW, ACTOR);
-    expect(() =>
-      verifyVerification(v, { outcome: "failed" }, LATER, ACTOR),
-    ).toThrow(VerificationInvariantViolation);
+    expect(() => verifyVerification(v, { outcome: "failed" }, LATER, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 });
 
@@ -327,7 +353,12 @@ describe("Verification domain — rationale requirements", () => {
 
   it("accepts waived outcome with rationale", () => {
     const v = toInProgress();
-    const decided = verifyVerification(v, { outcome: "waived", rationale: "Risk accepted" }, LATER, ACTOR);
+    const decided = verifyVerification(
+      v,
+      { outcome: "waived", rationale: "Risk accepted" },
+      LATER,
+      ACTOR,
+    );
     expect(decided.outcome).toBe("waived");
   });
 
@@ -368,7 +399,9 @@ describe("Verification domain — invalid transitions", () => {
 
   it("rejects draft -> in_progress directly", () => {
     const v = baseCreate();
-    expect(() => startVerification(v, NOW, ACTOR)).toThrow(VerificationInvariantViolation);
+    expect(() => startVerification(v, NOW, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("rejects draft -> assigned directly", () => {
@@ -383,14 +416,18 @@ describe("Verification domain — invalid transitions", () => {
     v = requestVerification(v, NOW, ACTOR);
     v = startVerification(v, NOW, ACTOR);
     v = verifyVerification(v, { outcome: "verified" }, LATER, ACTOR);
-    expect(() => requestVerification(v, LATER, ACTOR)).toThrow(VerificationInvariantViolation);
+    expect(() => requestVerification(v, LATER, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("rejects re-requesting from assigned", () => {
     let v = baseCreate();
     v = requestVerification(v, NOW, ACTOR);
     v = assignVerification(v, "user_2", NOW, ACTOR);
-    expect(() => requestVerification(v, LATER, ACTOR)).toThrow(VerificationInvariantViolation);
+    expect(() => requestVerification(v, LATER, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 });
 
@@ -404,22 +441,30 @@ describe("Verification domain — terminal states", () => {
 
   it("withdrawn is terminal — no further transitions", () => {
     const v = toWithdrawn();
-    expect(() => requestVerification(v, LATER, ACTOR)).toThrow(VerificationInvariantViolation);
-    expect(() => cancelVerification(v, LATER, ACTOR)).toThrow(VerificationInvariantViolation);
+    expect(() => requestVerification(v, LATER, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
+    expect(() => cancelVerification(v, LATER, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("cancelled is terminal", () => {
     let v = baseCreate();
     v = cancelVerification(v, NOW, ACTOR);
     expect(v.status).toBe("cancelled");
-    expect(() => requestVerification(v, LATER, ACTOR)).toThrow(VerificationInvariantViolation);
+    expect(() => requestVerification(v, LATER, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("retired is terminal", () => {
     let v = baseCreate();
     v = retireVerification(v, NOW, ACTOR);
     expect(v.status).toBe("retired");
-    expect(() => requestVerification(v, LATER, ACTOR)).toThrow(VerificationInvariantViolation);
+    expect(() => requestVerification(v, LATER, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("superseded is terminal", () => {
@@ -430,7 +475,9 @@ describe("Verification domain — terminal states", () => {
     v = supersedeVerification(v, "ver_2", LATER, ACTOR);
     expect(v.status).toBe("superseded");
     expect(v.successorVerificationId).toBe("ver_2");
-    expect(() => retireVerification(v, LATER, ACTOR)).toThrow(VerificationInvariantViolation);
+    expect(() => retireVerification(v, LATER, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("rejects supersession by self", () => {
@@ -455,7 +502,9 @@ describe("Verification domain — terminal states", () => {
     v = requestVerification(v, NOW, ACTOR);
     v = startVerification(v, NOW, ACTOR);
     v = verifyVerification(v, { outcome: "verified" }, LATER, ACTOR);
-    expect(() => updatePriority(v, "high", LATER, ACTOR)).toThrow(VerificationInvariantViolation);
+    expect(() => updatePriority(v, "high", LATER, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 });
 
@@ -466,13 +515,20 @@ describe("Verification domain — cancel / expire / withdraw / retire", () => {
     let v = requestVerification(baseCreate(), NOW, ACTOR);
     expect(cancelVerification(v, NOW, ACTOR).status).toBe("cancelled");
 
-    v = assignVerification(requestVerification(baseCreate(), NOW, ACTOR), "user_2", NOW, ACTOR);
+    v = assignVerification(
+      requestVerification(baseCreate(), NOW, ACTOR),
+      "user_2",
+      NOW,
+      ACTOR,
+    );
     expect(cancelVerification(v, NOW, ACTOR).status).toBe("cancelled");
   });
 
   it("expires only from verified", () => {
     let v = baseCreate();
-    expect(() => expireVerification(v, NOW, ACTOR)).toThrow(VerificationInvariantViolation);
+    expect(() => expireVerification(v, NOW, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
     v = requestVerification(v, NOW, ACTOR);
     v = startVerification(v, NOW, ACTOR);
     v = verifyVerification(v, { outcome: "verified" }, LATER, ACTOR);
@@ -485,7 +541,11 @@ describe("Verification domain — cancel / expire / withdraw / retire", () => {
     let v = requestVerification(baseCreate(), NOW, ACTOR);
     expect(withdrawVerification(v, NOW, ACTOR).status).toBe("withdrawn");
 
-    v = startVerification(requestVerification(baseCreate({ id: "ver_2" }), NOW, ACTOR), NOW, ACTOR);
+    v = startVerification(
+      requestVerification(baseCreate({ id: "ver_2" }), NOW, ACTOR),
+      NOW,
+      ACTOR,
+    );
     v = verifyVerification(v, { outcome: "verified" }, LATER, ACTOR);
     expect(withdrawVerification(v, LATER, ACTOR).status).toBe("withdrawn");
   });
@@ -493,7 +553,11 @@ describe("Verification domain — cancel / expire / withdraw / retire", () => {
   it("retires from draft, verified, rejected, or expired", () => {
     expect(retireVerification(baseCreate(), NOW, ACTOR).status).toBe("retired");
 
-    let v = startVerification(requestVerification(baseCreate({ id: "ver_2" }), NOW, ACTOR), NOW, ACTOR);
+    let v = startVerification(
+      requestVerification(baseCreate({ id: "ver_2" }), NOW, ACTOR),
+      NOW,
+      ACTOR,
+    );
     v = rejectVerification(v, { outcome: "inconclusive" }, LATER, ACTOR);
     expect(retireVerification(v, LATER, ACTOR).status).toBe("retired");
   });
@@ -502,11 +566,18 @@ describe("Verification domain — cancel / expire / withdraw / retire", () => {
 describe("Verification domain — assignment", () => {
   it("requires a non-empty assigneeId", () => {
     const v = requestVerification(baseCreate(), NOW, ACTOR);
-    expect(() => assignVerification(v, "  ", NOW, ACTOR)).toThrow(VerificationInvariantViolation);
+    expect(() => assignVerification(v, "  ", NOW, ACTOR)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("records assignedAt and assignedTo", () => {
-    const v = assignVerification(requestVerification(baseCreate(), NOW, ACTOR), "user_9", LATER, ACTOR);
+    const v = assignVerification(
+      requestVerification(baseCreate(), NOW, ACTOR),
+      "user_9",
+      LATER,
+      ACTOR,
+    );
     expect(v.assignedTo).toBe("user_9");
     expect(v.assignedAt).toBe(LATER);
   });
@@ -555,9 +626,17 @@ describe("Verification domain — domainEvents are per-call, not cumulative", ()
   it("emits both verified and completed events with matching outcome", () => {
     let v = requestVerification(baseCreate(), NOW, ACTOR);
     v = startVerification(v, NOW, ACTOR);
-    v = verifyVerification(v, { outcome: "partially_verified", rationale: "partial coverage" }, LATER, ACTOR);
+    v = verifyVerification(
+      v,
+      { outcome: "partially_verified", rationale: "partial coverage" },
+      LATER,
+      ACTOR,
+    );
     for (const event of v.domainEvents) {
-      if (event.type === "qep.verification.verified" || event.type === "qep.verification.completed") {
+      if (
+        event.type === "qep.verification.verified" ||
+        event.type === "qep.verification.completed"
+      ) {
         expect(event.outcome).toBe("partially_verified");
       }
     }
@@ -599,30 +678,39 @@ describe("Verification value objects — id / status / outcome", () => {
   });
 
   it("createVerificationId rejects ids without the prefix", () => {
-    expect(() => createVerificationId("abc-123")).toThrow(VerificationInvariantViolation);
+    expect(() => createVerificationId("abc-123")).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("createVerificationStatus validates against the known set", () => {
     expect(createVerificationStatus("draft")).toBe("draft");
-    expect(() => createVerificationStatus("bogus")).toThrow(VerificationInvariantViolation);
+    expect(() => createVerificationStatus("bogus")).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("createVerificationOutcome validates against the known set", () => {
     expect(createVerificationOutcome("waived")).toBe("waived");
-    expect(() => createVerificationOutcome("bogus")).toThrow(VerificationInvariantViolation);
+    expect(() => createVerificationOutcome("bogus")).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 });
 
 describe("Verification value objects — subject / authority / context / scope", () => {
   it("createVerificationSubject builds owningDomain by kind", () => {
-    const subject = createVerificationSubject({ kind: "test_case", artefactId: "tc_1" });
+    const subject = createVerificationSubject({
+      kind: "test_case",
+      artefactId: "tc_1",
+    });
     expect(subject.owningDomain).toBe("verification");
   });
 
   it("createVerificationAuthority validates kind and actorId", () => {
-    expect(createVerificationAuthority({ kind: "delegated", actorId: "svc_1" }).kind).toBe(
-      "delegated",
-    );
+    expect(
+      createVerificationAuthority({ kind: "delegated", actorId: "svc_1" }).kind,
+    ).toBe("delegated");
     expect(() => createVerificationAuthority({ kind: "user", actorId: "" })).toThrow(
       VerificationInvariantViolation,
     );
@@ -639,7 +727,9 @@ describe("Verification value objects — subject / authority / context / scope",
   });
 
   it("createVerificationScope requires referenceId except for tenant_global", () => {
-    expect(createVerificationScope({ kind: "tenant_global" }).kind).toBe("tenant_global");
+    expect(createVerificationScope({ kind: "tenant_global" }).kind).toBe(
+      "tenant_global",
+    );
     expect(() => createVerificationScope({ kind: "project" })).toThrow(
       VerificationInvariantViolation,
     );
@@ -649,15 +739,17 @@ describe("Verification value objects — subject / authority / context / scope",
     expect(() =>
       createVerificationScope({ kind: "baseline", referenceId: "not-a-baseline" }),
     ).toThrow(VerificationInvariantViolation);
-    expect(createVerificationScope({ kind: "baseline", referenceId: "rbl_1" }).referenceId).toBe(
-      "rbl_1",
-    );
+    expect(
+      createVerificationScope({ kind: "baseline", referenceId: "rbl_1" }).referenceId,
+    ).toBe("rbl_1");
   });
 });
 
 describe("Verification value objects — rationale / reason / comment / result summary", () => {
   it("rejects empty rationale", () => {
-    expect(() => createVerificationRationale("   ")).toThrow(VerificationInvariantViolation);
+    expect(() => createVerificationRationale("   ")).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("rejects rationale exceeding the max length", () => {
@@ -667,7 +759,9 @@ describe("Verification value objects — rationale / reason / comment / result s
   });
 
   it("accepts a valid reason", () => {
-    expect(createVerificationReason("scheduled maintenance")).toBe("scheduled maintenance");
+    expect(createVerificationReason("scheduled maintenance")).toBe(
+      "scheduled maintenance",
+    );
   });
 
   it("accepts a valid comment", () => {
@@ -694,23 +788,31 @@ describe("Verification value objects — timestamp / version / priority / origin
   });
 
   it("rejects empty timestamps", () => {
-    expect(() => createVerificationTimestamp("  ")).toThrow(VerificationInvariantViolation);
+    expect(() => createVerificationTimestamp("  ")).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("createVerificationVersion requires a positive integer", () => {
     expect(createVerificationVersion(1)).toBe(1);
     expect(() => createVerificationVersion(0)).toThrow(VerificationInvariantViolation);
-    expect(() => createVerificationVersion(1.5)).toThrow(VerificationInvariantViolation);
+    expect(() => createVerificationVersion(1.5)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("createVerificationPriority validates against the known set", () => {
     expect(createVerificationPriority("high")).toBe("high");
-    expect(() => createVerificationPriority("urgent")).toThrow(VerificationInvariantViolation);
+    expect(() => createVerificationPriority("urgent")).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("createVerificationOrigin validates against the known set", () => {
     expect(createVerificationOrigin("ai_suggestion")).toBe("ai_suggestion");
-    expect(() => createVerificationOrigin("bogus")).toThrow(VerificationInvariantViolation);
+    expect(() => createVerificationOrigin("bogus")).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 });
 
@@ -725,7 +827,9 @@ describe("Verification metadata", () => {
     for (let i = 0; i < 65; i += 1) {
       entries[`k${i}`] = "v";
     }
-    expect(() => createVerificationMetadata(entries)).toThrow(VerificationInvariantViolation);
+    expect(() => createVerificationMetadata(entries)).toThrow(
+      VerificationInvariantViolation,
+    );
   });
 
   it("merges without mutating the original", () => {
@@ -739,10 +843,18 @@ describe("Verification metadata", () => {
 describe("Verification decision", () => {
   it("requires decidedAt and decidedBy", () => {
     expect(() =>
-      createVerificationDecision({ outcome: "verified", decidedAt: "", decidedBy: ACTOR }),
+      createVerificationDecision({
+        outcome: "verified",
+        decidedAt: "",
+        decidedBy: ACTOR,
+      }),
     ).toThrow(VerificationInvariantViolation);
     expect(() =>
-      createVerificationDecision({ outcome: "verified", decidedAt: NOW, decidedBy: " " }),
+      createVerificationDecision({
+        outcome: "verified",
+        decidedAt: NOW,
+        decidedBy: " ",
+      }),
     ).toThrow(VerificationInvariantViolation);
   });
 
@@ -758,8 +870,12 @@ describe("Verification decision", () => {
 
 describe("Verification lifecycle-state module", () => {
   it("assertVerificationLifecycleTransition allows documented transitions", () => {
-    expect(() => assertVerificationLifecycleTransition("draft", "requested")).not.toThrow();
-    expect(() => assertVerificationLifecycleTransition("rejected", "requested")).not.toThrow();
+    expect(() =>
+      assertVerificationLifecycleTransition("draft", "requested"),
+    ).not.toThrow();
+    expect(() =>
+      assertVerificationLifecycleTransition("rejected", "requested"),
+    ).not.toThrow();
   });
 
   it("assertVerificationLifecycleTransition rejects undocumented transitions", () => {
@@ -794,7 +910,9 @@ describe("Verification policy assertions", () => {
   it("assertHasSubject requires a subject with an artefactId", () => {
     expect(() => assertHasSubject(undefined)).toThrow(VerificationInvariantViolation);
     expect(() =>
-      assertHasSubject(createVerificationSubject({ kind: "requirement", artefactId: "req_1" })),
+      assertHasSubject(
+        createVerificationSubject({ kind: "requirement", artefactId: "req_1" }),
+      ),
     ).not.toThrow();
   });
 
@@ -815,7 +933,9 @@ describe("Verification policy assertions", () => {
       VerificationInvariantViolation,
     );
     expect(() => assertOutcomeRequiredForCompletion("draft", undefined)).not.toThrow();
-    expect(() => assertOutcomeRequiredForCompletion("verified", "verified")).not.toThrow();
+    expect(() =>
+      assertOutcomeRequiredForCompletion("verified", "verified"),
+    ).not.toThrow();
   });
 
   it("assertNoFinalOutcomeBeforeCompletion forbids outcomes on draft/requested/assigned", () => {
@@ -831,16 +951,24 @@ describe("Verification policy assertions", () => {
   });
 
   it("assertNoFinalOutcomeBeforeCompletion allows interim outcomes only while in_progress", () => {
-    expect(() => assertNoFinalOutcomeBeforeCompletion("in_progress", "blocked")).not.toThrow();
-    expect(() => assertNoFinalOutcomeBeforeCompletion("in_progress", "deferred")).not.toThrow();
-    expect(() => assertNoFinalOutcomeBeforeCompletion("in_progress", "verified")).toThrow(
-      VerificationInvariantViolation,
-    );
+    expect(() =>
+      assertNoFinalOutcomeBeforeCompletion("in_progress", "blocked"),
+    ).not.toThrow();
+    expect(() =>
+      assertNoFinalOutcomeBeforeCompletion("in_progress", "deferred"),
+    ).not.toThrow();
+    expect(() =>
+      assertNoFinalOutcomeBeforeCompletion("in_progress", "verified"),
+    ).toThrow(VerificationInvariantViolation);
   });
 
   it("assertNoFinalOutcomeBeforeCompletion allows completion outcomes on verified/rejected", () => {
-    expect(() => assertNoFinalOutcomeBeforeCompletion("verified", "verified")).not.toThrow();
-    expect(() => assertNoFinalOutcomeBeforeCompletion("rejected", "failed")).not.toThrow();
+    expect(() =>
+      assertNoFinalOutcomeBeforeCompletion("verified", "verified"),
+    ).not.toThrow();
+    expect(() =>
+      assertNoFinalOutcomeBeforeCompletion("rejected", "failed"),
+    ).not.toThrow();
   });
 
   it("assertMutable forbids terminal immutable statuses", () => {
@@ -862,7 +990,9 @@ describe("Verification policy assertions", () => {
   });
 
   it("assertSupersession forbids self-supersession", () => {
-    expect(() => assertSupersession("ver_1", "ver_1")).toThrow(VerificationInvariantViolation);
+    expect(() => assertSupersession("ver_1", "ver_1")).toThrow(
+      VerificationInvariantViolation,
+    );
     expect(() => assertSupersession("ver_1", "ver_2")).not.toThrow();
   });
 
@@ -892,15 +1022,20 @@ describe("Verification domain services", () => {
   it("VerificationLifecycleService wraps lifecycle helpers", () => {
     expect(VerificationLifecycleService.isTerminal("retired")).toBe(true);
     expect(VerificationLifecycleService.canTransition("draft", "requested")).toBe(true);
-    expect(() => VerificationLifecycleService.assertTransition("draft", "verified")).toThrow(
-      VerificationInvariantViolation,
-    );
+    expect(() =>
+      VerificationLifecycleService.assertTransition("draft", "verified"),
+    ).toThrow(VerificationInvariantViolation);
   });
 
   it("ValidationService.validateCreateInput enforces subject and authority", () => {
-    const subject = createVerificationSubject({ kind: "requirement", artefactId: "req_1" });
+    const subject = createVerificationSubject({
+      kind: "requirement",
+      artefactId: "req_1",
+    });
     const authority = createVerificationAuthority({ kind: "user", actorId: ACTOR });
-    expect(() => ValidationService.validateCreateInput({ subject, authority })).not.toThrow();
+    expect(() =>
+      ValidationService.validateCreateInput({ subject, authority }),
+    ).not.toThrow();
   });
 
   it("OutcomeService classifies outcomes", () => {

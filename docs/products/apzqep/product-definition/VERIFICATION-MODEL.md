@@ -17,51 +17,51 @@ APZ QEP shall not require automation before delivering value. Manual verificatio
 
 A **Verification** is a governed work unit that proves one or more approved requirements (or justified exceptions) are addressed. It may be performed through:
 
-| Method | Description |
-| ------ | ----------- |
-| **Manual** | Human-executed procedures, exploratory sessions, checklists, observations |
-| **Automated** | Runner/CI-produced results linked into QEP |
-| **AI-assisted** | AI-drafted or AI-reviewed content — human-governed before SoR accept |
-| **Continuous** | Ongoing signals from pipelines/monitors ingested as verification instances |
-| **Hybrid** | Combination of methods against the same requirement/scope |
+| Method          | Description                                                                |
+| --------------- | -------------------------------------------------------------------------- |
+| **Manual**      | Human-executed procedures, exploratory sessions, checklists, observations  |
+| **Automated**   | Runner/CI-produced results linked into QEP                                 |
+| **AI-assisted** | AI-drafted or AI-reviewed content — human-governed before SoR accept       |
+| **Continuous**  | Ongoing signals from pipelines/monitors ingested as verification instances |
+| **Hybrid**      | Combination of methods against the same requirement/scope                  |
 
 The same approved requirement may be verified through multiple methods simultaneously.
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
+| Concept                | Product meaning                                        |
+| ---------------------- | ------------------------------------------------------ |
 | Verification procedure | Reusable specification (includes classical test cases) |
-| Verification suite | Organised collection |
-| Verification template | Pattern for rapid creation |
-| Verification run | Planned execution instance — often automated/batch |
-| Verification session | Human-centred execution — manual/hybrid |
-| Execution result | Outcome at run/session/step level |
-| Verification maturity | Organisational L1–L7 adoption overlay |
+| Verification suite     | Organised collection                                   |
+| Verification template  | Pattern for rapid creation                             |
+| Verification run       | Planned execution instance — often automated/batch     |
+| Verification session   | Human-centred execution — manual/hybrid                |
+| Execution result       | Outcome at run/session/step level                      |
+| Verification maturity  | Organisational L1–L7 adoption overlay                  |
 
 ## Primary objects
 
-| Object | Meaning |
-| ------ | ------- |
-| Verification procedure | Reusable specification (includes classical test cases as a form) |
-| Verification suite / collection | Organised set of procedures |
-| Verification template | Reusable pattern for creation |
-| Verification run | Planned execution instance (often automated/batch) |
-| Verification session | Human-centred execution context (manual/hybrid) |
-| Execution result | Outcome at run/session/step level |
-| Maturity record | Level L1–L7 for programme — not a gate on value |
+| Object                          | Meaning                                                          |
+| ------------------------------- | ---------------------------------------------------------------- |
+| Verification procedure          | Reusable specification (includes classical test cases as a form) |
+| Verification suite / collection | Organised set of procedures                                      |
+| Verification template           | Reusable pattern for creation                                    |
+| Verification run                | Planned execution instance (often automated/batch)               |
+| Verification session            | Human-centred execution context (manual/hybrid)                  |
+| Execution result                | Outcome at run/session/step level                                |
+| Maturity record                 | Level L1–L7 for programme — not a gate on value                  |
 
 ## Maturity (organisational adoption)
 
-| Level | Name | Value without forcing higher levels |
-| ----- | ---- | ----------------------------------- |
-| L1 | Manual confirmation | Ad-hoc/human confirmation recorded |
-| L2 | Structured manual verification | Procedures, steps, expected outcomes |
-| L3 | Managed and reusable verification | Library, templates, ownership, versions |
-| L4 | Automated verification | Results ingested; runners external |
-| L5 | AI-assisted verification | Drafts/reviews under human gates |
-| L6 | Continuous verification | Ongoing signals in SoR |
-| L7 | Continuous certification signals | Re-cert signals; humans still decide |
+| Level | Name                              | Value without forcing higher levels     |
+| ----- | --------------------------------- | --------------------------------------- |
+| L1    | Manual confirmation               | Ad-hoc/human confirmation recorded      |
+| L2    | Structured manual verification    | Procedures, steps, expected outcomes    |
+| L3    | Managed and reusable verification | Library, templates, ownership, versions |
+| L4    | Automated verification            | Results ingested; runners external      |
+| L5    | AI-assisted verification          | Drafts/reviews under human gates        |
+| L6    | Continuous verification           | Ongoing signals in SoR                  |
+| L7    | Continuous certification signals  | Re-cert signals; humans still decide    |
 
 Organisations may operate at L2 while receiving full readiness/certification value; higher levels add efficiency — not legitimacy.
 
@@ -82,13 +82,13 @@ flowchart TB
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
-| QA Engineer | Procedure design |
-| QA Manager | Approval and library hygiene |
-| Manual Tester | Sessions |
-| Automation Engineer | Run linkage and ingest |
-| Product Owner | Priority scope for verification |
+| Role                | Ownership                       |
+| ------------------- | ------------------------------- |
+| QA Engineer         | Procedure design                |
+| QA Manager          | Approval and library hygiene    |
+| Manual Tester       | Sessions                        |
+| Automation Engineer | Run linkage and ingest          |
+| Product Owner       | Priority scope for verification |
 
 ## Relationships
 
@@ -112,39 +112,39 @@ See also: [MANUAL-VERIFICATION.md](./MANUAL-VERIFICATION.md) · [AUTOMATION-MANA
 
 ## States
 
-| State | Applies to | Meaning |
-| ----- | ---------- | ------- |
-| Draft | Procedure | In design |
-| In review | Procedure | Pending approval |
-| Approved | Procedure | May execute |
-| Planned | Run/session | Scheduled |
-| In progress | Run/session | Executing |
-| Completed | Run/session | Results recorded |
-| Superseded | Procedure | New version active |
-| Retired | Procedure | No new executions |
+| State       | Applies to  | Meaning            |
+| ----------- | ----------- | ------------------ |
+| Draft       | Procedure   | In design          |
+| In review   | Procedure   | Pending approval   |
+| Approved    | Procedure   | May execute        |
+| Planned     | Run/session | Scheduled          |
+| In progress | Run/session | Executing          |
+| Completed   | Run/session | Results recorded   |
+| Superseded  | Procedure   | New version active |
+| Retired     | Procedure   | No new executions  |
 
 ## Result vocabulary (manual-capable)
 
 Pass · Fail · Blocked · Not applicable — plus comments, evidence, defect creation, retest, peer review, approval, sign-off.
 
-| Result | Meaning |
-| ------ | ------- |
-| Pass | Requirement aspect satisfied for step/scope |
-| Fail | Not satisfied; defect typical |
-| Blocked | Could not execute; reason required |
+| Result         | Meaning                                         |
+| -------------- | ----------------------------------------------- |
+| Pass           | Requirement aspect satisfied for step/scope     |
+| Fail           | Not satisfied; defect typical                   |
+| Blocked        | Could not execute; reason required              |
 | Not applicable | Out of scope for this execution; reason typical |
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
+| Rule   | Statement                                                              |
+| ------ | ---------------------------------------------------------------------- |
 | VER-01 | Verification must link to approved requirement or documented exception |
-| VER-02 | Multiple methods may verify same requirement |
-| VER-03 | AI-assisted content Draft until human accept |
-| VER-04 | Continuous instances ingested — never auto-certify |
-| VER-05 | Superseded procedures retain historical execution |
-| VER-06 | “Test case” is not used as primary product noun in UI copy |
-| VER-07 | Hybrid records both method contributions in trace |
+| VER-02 | Multiple methods may verify same requirement                           |
+| VER-03 | AI-assisted content Draft until human accept                           |
+| VER-04 | Continuous instances ingested — never auto-certify                     |
+| VER-05 | Superseded procedures retain historical execution                      |
+| VER-06 | “Test case” is not used as primary product noun in UI copy             |
+| VER-07 | Hybrid records both method contributions in trace                      |
 
 ## Approval rules
 
@@ -152,14 +152,14 @@ Verification design approval before execution counts toward coverage (typical). 
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| QA Engineer | Creates verification artefacts |
-| QA Manager | Approves library entries |
-| Manual Tester | Executes sessions |
-| Automation Engineer | Maps runs to verification |
-| Release Manager | Consumes verification status at readiness |
-| AI Agent | Draft only |
+| Persona             | Responsibility                            |
+| ------------------- | ----------------------------------------- |
+| QA Engineer         | Creates verification artefacts            |
+| QA Manager          | Approves library entries                  |
+| Manual Tester       | Executes sessions                         |
+| Automation Engineer | Maps runs to verification                 |
+| Release Manager     | Consumes verification status at readiness |
+| AI Agent            | Draft only                                |
 
 ## Reporting
 
@@ -187,11 +187,11 @@ Stronger continuous signal taxonomy, verification reuse marketplace templates, c
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Verification SoR | ALM test plan import as SoR replacement |
-| Run/session results | Executing automation |
-| Continuous ingest instances | Observability platform |
+| In boundary                 | Out of boundary                         |
+| --------------------------- | --------------------------------------- |
+| Verification SoR            | ALM test plan import as SoR replacement |
+| Run/session results         | Executing automation                    |
+| Continuous ingest instances | Observability platform                  |
 
 ## Example scenarios
 

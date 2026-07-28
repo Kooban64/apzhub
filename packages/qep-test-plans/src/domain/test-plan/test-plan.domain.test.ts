@@ -59,7 +59,9 @@ function ctx(overrides: Partial<CommandContext> = {}): CommandContext {
   };
 }
 
-function basePlan(overrides: Partial<Parameters<typeof createTestPlan>[0]> = {}): TestPlan {
+function basePlan(
+  overrides: Partial<Parameters<typeof createTestPlan>[0]> = {},
+): TestPlan {
   return createTestPlan({
     id: "plan_1",
     tenantId: TENANT,
@@ -159,9 +161,9 @@ describe("TestPlan domain — content and metadata", () => {
 
   it("forbids content edits when approved", () => {
     const plan = approvedPlan(basePlan());
-    expect(() =>
-      updateTestPlanContent(plan, ctx(), { title: "Nope" }),
-    ).toThrow(InvalidPlanStateError);
+    expect(() => updateTestPlanContent(plan, ctx(), { title: "Nope" })).toThrow(
+      InvalidPlanStateError,
+    );
   });
 
   it("allows content edits when rejected", () => {
@@ -202,7 +204,7 @@ describe("TestPlan domain — items", () => {
   });
 
   it("rejects duplicate spec+pin pairs", () => {
-    let plan = addPlanItem(basePlan(), ctx(), {
+    const plan = addPlanItem(basePlan(), ctx(), {
       id: "item_1",
       specificationId: "spec_1",
       specificationVersionPin: "1.0",
@@ -285,7 +287,9 @@ describe("TestPlan domain — assignment, schedule, ownership", () => {
     let plan = transferOwnership(basePlan(), ctx(), "new_owner");
     expect(plan.ownerId).toBe("new_owner");
     plan = approvedPlan(plan);
-    expect(() => transferOwnership(plan, ctx(), "other")).toThrow(InvalidPlanStateError);
+    expect(() => transferOwnership(plan, ctx(), "other")).toThrow(
+      InvalidPlanStateError,
+    );
   });
 });
 
@@ -317,7 +321,9 @@ describe("TestPlan domain — review lifecycle", () => {
   });
 
   it("fails submit without included items", () => {
-    expect(() => submitForReview(basePlan(), ctx())).toThrow(PlanInvariantViolationError);
+    expect(() => submitForReview(basePlan(), ctx())).toThrow(
+      PlanInvariantViolationError,
+    );
   });
 
   it("approves plan, seals version 1.0, and records revision", () => {
@@ -428,13 +434,15 @@ describe("TestPlan domain — completion and archival", () => {
   });
 
   it("forbids archive from non-completed status", () => {
-    expect(() => archivePlan(approvedPlan(basePlan()), ctx())).toThrow(InvalidPlanStateError);
+    expect(() => archivePlan(approvedPlan(basePlan()), ctx())).toThrow(
+      InvalidPlanStateError,
+    );
   });
 });
 
 describe("TestPlan domain — cancel", () => {
   it("cancels from eligible states", () => {
-    let plan = cancelPlan(readyForReview(basePlan()), ctx());
+    const plan = cancelPlan(readyForReview(basePlan()), ctx());
     expect(plan.status).toBe("cancelled");
     expect(plan.uncommittedEvents[0]?.type).toBe("qep.plan.cancelled");
   });
@@ -480,7 +488,7 @@ describe("TestPlan domain — clone and supersede", () => {
   });
 
   it("successor approve seals next major version from predecessor", () => {
-    let source = approvedPlan(basePlan());
+    const source = approvedPlan(basePlan());
     const { successor } = supersedePlan(source, ctx(), {
       successorId: "plan_2",
       successorNumber: "TP-002",
@@ -496,7 +504,7 @@ describe("TestPlan domain — clone and supersede", () => {
   });
 
   it("forbids double supersede", () => {
-    let source = approvedPlan(basePlan());
+    const source = approvedPlan(basePlan());
     const first = supersedePlan(source, ctx(), {
       successorId: "plan_2",
       successorNumber: "TP-002",
@@ -586,10 +594,18 @@ describe("TestPlan domain — policies and metrics", () => {
   });
 
   it("policy helpers enforce editable matrices", () => {
-    expect(() => ContentPolicy.assertEditable("approved")).toThrow(InvalidPlanStateError);
-    expect(() => SchedulingPolicy.assertEditable("review")).toThrow(InvalidPlanStateError);
-    expect(() => AssignmentPolicy.assertEditable("in_execution")).toThrow(InvalidPlanStateError);
-    expect(() => ArchivalPolicy.assertCanArchive("ready")).toThrow(InvalidPlanStateError);
+    expect(() => ContentPolicy.assertEditable("approved")).toThrow(
+      InvalidPlanStateError,
+    );
+    expect(() => SchedulingPolicy.assertEditable("review")).toThrow(
+      InvalidPlanStateError,
+    );
+    expect(() => AssignmentPolicy.assertEditable("in_execution")).toThrow(
+      InvalidPlanStateError,
+    );
+    expect(() => ArchivalPolicy.assertCanArchive("ready")).toThrow(
+      InvalidPlanStateError,
+    );
     expect(() =>
       ApprovalPolicy.assertCanDecide({
         status: "draft",
@@ -603,9 +619,9 @@ describe("TestPlan domain — policies and metrics", () => {
 
 describe("TestPlan domain — illegal transitions", () => {
   it("rejects draft to approved", () => {
-    expect(() => approvePlan(readyForReview(basePlan()), { ...ctx(), actorId: REVIEWER })).toThrow(
-      InvalidPlanStateError,
-    );
+    expect(() =>
+      approvePlan(readyForReview(basePlan()), { ...ctx(), actorId: REVIEWER }),
+    ).toThrow(InvalidPlanStateError);
   });
 
   it("rejects ready to draft", () => {
@@ -625,7 +641,9 @@ describe("TestPlan domain — illegal transitions", () => {
   });
 
   it("rejects startExecution when not ready", () => {
-    expect(() => startExecution(approvedPlan(basePlan()), ctx())).toThrow(InvalidPlanStateError);
+    expect(() => startExecution(approvedPlan(basePlan()), ctx())).toThrow(
+      InvalidPlanStateError,
+    );
   });
 });
 
@@ -672,9 +690,9 @@ describe("TestPlan domain — edge coverage", () => {
 
   it("rejects empty leadId and validates schedule ordering", () => {
     const plan = basePlan();
-    expect(() =>
-      updateAssignment(plan, ctx(), { leadId: "   " }),
-    ).toThrow(PlanValidationError);
+    expect(() => updateAssignment(plan, ctx(), { leadId: "   " })).toThrow(
+      PlanValidationError,
+    );
     expect(() =>
       updateSchedule(plan, ctx(), {
         plannedStart: "2026-08-02T00:00:00.000Z",
@@ -720,7 +738,9 @@ describe("TestPlan domain — edge coverage", () => {
       itemStatus: "optional",
     });
     expect(plan.items[0]?.itemStatus).toBe("optional");
-    expect(plan.uncommittedEvents.some((e) => e.type === "qep.plan.item.updated")).toBe(true);
+    expect(plan.uncommittedEvents.some((e) => e.type === "qep.plan.item.updated")).toBe(
+      true,
+    );
 
     plan = addPlanItem(plan, ctx(), {
       id: "item_b",
@@ -735,7 +755,9 @@ describe("TestPlan domain — edge coverage", () => {
 
     const removed = removePlanItem(plan, ctx(), "item_b");
     expect(removed.items.find((i) => i.id === "item_b")?.itemStatus).toBe("removed");
-    expect(removed.uncommittedEvents.some((e) => e.type === "qep.plan.item.removed")).toBe(true);
+    expect(
+      removed.uncommittedEvents.some((e) => e.type === "qep.plan.item.removed"),
+    ).toBe(true);
 
     const meta = updateTestPlanMetadata(basePlan(), ctx(), { a: "1" });
     expect(meta.metadata?.a).toBe("1");
@@ -761,7 +783,9 @@ describe("TestPlan domain — edge coverage", () => {
     let plan = approvedPlan(basePlan());
     plan = markReady(plan, ctx());
     plan = startExecution(plan, ctx());
-    expect(plan.uncommittedEvents.some((e) => e.type === "qep.plan.started")).toBe(true);
+    expect(plan.uncommittedEvents.some((e) => e.type === "qep.plan.started")).toBe(
+      true,
+    );
     plan = completePlan(plan, ctx());
     expect(plan.status).toBe("completed");
     plan = archivePlan(plan, ctx());
@@ -771,9 +795,9 @@ describe("TestPlan domain — edge coverage", () => {
     );
 
     expect(cancelPlan(basePlan(), ctx()).status).toBe("cancelled");
-    expect(cancelPlan(submitForReview(readyForReview(basePlan()), ctx()), ctx()).status).toBe(
-      "cancelled",
-    );
+    expect(
+      cancelPlan(submitForReview(readyForReview(basePlan()), ctx()), ctx()).status,
+    ).toBe("cancelled");
   });
 
   it("clone clears schedule and supersede from completed seals next major", () => {
@@ -826,7 +850,9 @@ describe("TestPlan domain — edge coverage", () => {
       items: [],
       context: "markReady" as const,
     };
-    expect(PlanReadinessService.evaluate(approvedEmpty).reasons).toContain("NO_INCLUDED_ITEMS");
+    expect(PlanReadinessService.evaluate(approvedEmpty).reasons).toContain(
+      "NO_INCLUDED_ITEMS",
+    );
 
     let plan = withIncludedItem(basePlan());
     plan = submitForReview(plan, ctx());
@@ -878,7 +904,9 @@ describe("TestPlan domain — edge coverage", () => {
     ).toThrow(PlanLineageError);
 
     const approved = approvedPlan(basePlan());
-    expect(() => transferOwnership(approved, ctx(), "other")).toThrow(InvalidPlanStateError);
+    expect(() => transferOwnership(approved, ctx(), "other")).toThrow(
+      InvalidPlanStateError,
+    );
     const transferred = transferOwnership(basePlan(), ctx(), "other_owner");
     expect(transferred.ownerId).toBe("other_owner");
   });

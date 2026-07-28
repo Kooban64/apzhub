@@ -24,9 +24,16 @@ import {
   endpointIdentityKey,
   type TraceEndpointReference,
 } from "../../domain/trace-link/trace-endpoint";
-import type { EndpointExistenceFact, TraceEdgeFact } from "../../domain/trace-link/trace-policy";
+import type {
+  EndpointExistenceFact,
+  TraceEdgeFact,
+} from "../../domain/trace-link/trace-policy";
 import { assertEndpointExistence } from "../../domain/trace-link/trace-policy";
-import { createTraceScope, traceScopeKey, type TraceScope } from "../../domain/trace-link/trace-scope";
+import {
+  createTraceScope,
+  traceScopeKey,
+  type TraceScope,
+} from "../../domain/trace-link/trace-scope";
 import { createTraceType, type TraceType } from "../../domain/trace-link/trace-type";
 import type { TraceHistoryEntry } from "../../domain/trace-link/trace-history";
 import type {
@@ -36,7 +43,11 @@ import type {
 } from "../../domain/trace-link/trace-link-repository";
 import type { TraceTaxonomyDefinition } from "../../domain/trace-link/trace-taxonomy";
 import type { TraceEndpointResolver } from "../../infrastructure/endpoint-resolution/endpoint-resolver";
-import { TraceForbiddenError, TraceInvariantViolation, TraceNotFoundError } from "../../shared/errors";
+import {
+  TraceForbiddenError,
+  TraceInvariantViolation,
+  TraceNotFoundError,
+} from "../../shared/errors";
 import { filterAndPaginate } from "../../shared/pagination";
 
 export type TraceLinkAuditEntry = {
@@ -166,13 +177,21 @@ export type TraceLinkApplicationService = {
     id: string,
     scope: { readonly kind: string; readonly referenceId?: string },
   ): Promise<StoredTraceLink>;
-  updateRationale(ctx: QepRequestContext, id: string, rationale: string): Promise<StoredTraceLink>;
+  updateRationale(
+    ctx: QepRequestContext,
+    id: string,
+    rationale: string,
+  ): Promise<StoredTraceLink>;
   updateMetadata(
     ctx: QepRequestContext,
     id: string,
     patch: Readonly<Record<string, string>>,
   ): Promise<StoredTraceLink>;
-  updateOrigin(ctx: QepRequestContext, id: string, origin: string): Promise<StoredTraceLink>;
+  updateOrigin(
+    ctx: QepRequestContext,
+    id: string,
+    origin: string,
+  ): Promise<StoredTraceLink>;
   updateEndpoint(
     ctx: QepRequestContext,
     id: string,
@@ -199,8 +218,14 @@ export type TraceLinkApplicationService = {
     kind: string,
     artefactId: string,
   ): Promise<readonly StoredTraceLink[]>;
-  inbound(ctx: QepRequestContext, artefactId: string): Promise<readonly StoredTraceLink[]>;
-  outbound(ctx: QepRequestContext, artefactId: string): Promise<readonly StoredTraceLink[]>;
+  inbound(
+    ctx: QepRequestContext,
+    artefactId: string,
+  ): Promise<readonly StoredTraceLink[]>;
+  outbound(
+    ctx: QepRequestContext,
+    artefactId: string,
+  ): Promise<readonly StoredTraceLink[]>;
   history(ctx: QepRequestContext, id: string): Promise<readonly TraceHistoryEntry[]>;
   taxonomy(ctx: QepRequestContext): Promise<readonly TraceTaxonomyDefinition[]>;
   duplicateCandidates(
@@ -240,7 +265,10 @@ function nextTraceId(deps: TraceLinkApplicationServiceDeps): TraceId {
   return createTraceId(generated.startsWith("trl_") ? generated : `trl_${generated}`);
 }
 
-function assertAnyPermission(ctx: QepRequestContext, requiredOneOf: readonly string[]): void {
+function assertAnyPermission(
+  ctx: QepRequestContext,
+  requiredOneOf: readonly string[],
+): void {
   const granted = ctx.permissions;
   if (!granted || granted.length === 0) return;
   if (granted.includes("qep.traceability.*")) return;
@@ -291,10 +319,18 @@ async function observe<T>(
   const started = Date.now();
   try {
     const result = await work();
-    deps.onObservation?.({ operation, durationMs: Date.now() - started, outcome: "success" });
+    deps.onObservation?.({
+      operation,
+      durationMs: Date.now() - started,
+      outcome: "success",
+    });
     return result;
   } catch (error) {
-    deps.onObservation?.({ operation, durationMs: Date.now() - started, outcome: "error" });
+    deps.onObservation?.({
+      operation,
+      durationMs: Date.now() - started,
+      outcome: "error",
+    });
     throw error;
   }
 }
@@ -328,10 +364,15 @@ async function resolveEndpointFacts(
   const facts: EndpointExistenceFact[] = [];
   for (const endpoint of endpoints) {
     if (endpoint.kind === "external_reference") continue;
-    const resolved = await deps.endpointResolver.resolve(tenantId, endpoint.kind, endpoint.artefactId, {
-      contentVersionId: endpoint.contentVersionId,
-      baselineId: endpoint.baselineId,
-    });
+    const resolved = await deps.endpointResolver.resolve(
+      tenantId,
+      endpoint.kind,
+      endpoint.artefactId,
+      {
+        contentVersionId: endpoint.contentVersionId,
+        baselineId: endpoint.baselineId,
+      },
+    );
     facts.push({
       tenantId,
       kind: endpoint.kind,
@@ -351,7 +392,9 @@ async function persistMutation(
   auditAction: string,
   auditDetails: Readonly<Record<string, unknown>> = {},
 ): Promise<StoredTraceLink> {
-  const stored = await runInTransaction(deps, async () => deps.traceLinks.save(mutated, expectedRevision));
+  const stored = await runInTransaction(deps, async () =>
+    deps.traceLinks.save(mutated, expectedRevision),
+  );
   await appendAudit(deps, ctx, stored.id, auditAction, {
     ...auditDetails,
     lifecycleState: stored.lifecycleState,
@@ -401,8 +444,12 @@ export function createTraceLinkApplicationService(
         ]);
         assertEndpointExistence(created.source, created.target, endpointFacts);
 
-        const stored = await runInTransaction(deps, async () => deps.traceLinks.create(created));
-        await appendAudit(deps, ctx, stored.id, "qep.trace_link.created", { type: stored.type });
+        const stored = await runInTransaction(deps, async () =>
+          deps.traceLinks.create(created),
+        );
+        await appendAudit(deps, ctx, stored.id, "qep.trace_link.created", {
+          type: stored.type,
+        });
         await emitEvents(deps, created);
         try {
           await deps.onTraceLinkUpserted?.(stored);
@@ -428,7 +475,13 @@ export function createTraceLinkApplicationService(
           existingEdges,
           endpointFacts,
         });
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.trace_link.validated");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.trace_link.validated",
+        );
       });
     },
 
@@ -437,7 +490,13 @@ export function createTraceLinkApplicationService(
         assertAnyPermission(ctx, [APPROVE]);
         const existing = await requireTraceLink(deps, ctx.tenantId, id);
         const mutated = approveTraceLink(existing, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.trace_link.approved");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.trace_link.approved",
+        );
       });
     },
 
@@ -446,7 +505,13 @@ export function createTraceLinkApplicationService(
         assertAnyPermission(ctx, [RETIRE]);
         const existing = await requireTraceLink(deps, ctx.tenantId, id);
         const mutated = retireTraceLink(existing, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.trace_link.retired");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.trace_link.retired",
+        );
       });
     },
 
@@ -463,10 +528,22 @@ export function createTraceLinkApplicationService(
             `Successor Trace Link does not exist: ${input.successorTraceId}`,
           );
         }
-        const mutated = supersedeTraceLink(existing, input.successorTraceId, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.trace_link.superseded", {
-          successorTraceId: input.successorTraceId,
-        });
+        const mutated = supersedeTraceLink(
+          existing,
+          input.successorTraceId,
+          nowIso(deps),
+          ctx.userId,
+        );
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.trace_link.superseded",
+          {
+            successorTraceId: input.successorTraceId,
+          },
+        );
       });
     },
 
@@ -474,7 +551,12 @@ export function createTraceLinkApplicationService(
       return observe(deps, "trace_link.update_confidence", async () => {
         assertAnyPermission(ctx, [MODIFY]);
         const existing = await requireTraceLink(deps, ctx.tenantId, id);
-        const mutated = updateTraceConfidence(existing, confidence, nowIso(deps), ctx.userId);
+        const mutated = updateTraceConfidence(
+          existing,
+          confidence,
+          nowIso(deps),
+          ctx.userId,
+        );
         return persistMutation(
           deps,
           ctx,
@@ -490,7 +572,12 @@ export function createTraceLinkApplicationService(
       return observe(deps, "trace_link.update_authority", async () => {
         assertAnyPermission(ctx, [MODIFY]);
         const existing = await requireTraceLink(deps, ctx.tenantId, id);
-        const mutated = updateTraceAuthority(existing, authority, nowIso(deps), ctx.userId);
+        const mutated = updateTraceAuthority(
+          existing,
+          authority,
+          nowIso(deps),
+          ctx.userId,
+        );
         return persistMutation(
           deps,
           ctx,
@@ -507,9 +594,16 @@ export function createTraceLinkApplicationService(
         assertAnyPermission(ctx, [MODIFY]);
         const existing = await requireTraceLink(deps, ctx.tenantId, id);
         const mutated = updateTraceScope(existing, scope, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.trace_link.scope_changed", {
-          scope,
-        });
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.trace_link.scope_changed",
+          {
+            scope,
+          },
+        );
       });
     },
 
@@ -517,7 +611,12 @@ export function createTraceLinkApplicationService(
       return observe(deps, "trace_link.update_rationale", async () => {
         assertAnyPermission(ctx, [MODIFY]);
         const existing = await requireTraceLink(deps, ctx.tenantId, id);
-        const mutated = updateTraceRationale(existing, rationale, nowIso(deps), ctx.userId);
+        const mutated = updateTraceRationale(
+          existing,
+          rationale,
+          nowIso(deps),
+          ctx.userId,
+        );
         return persistMutation(
           deps,
           ctx,
@@ -548,9 +647,16 @@ export function createTraceLinkApplicationService(
         assertAnyPermission(ctx, [MODIFY]);
         const existing = await requireTraceLink(deps, ctx.tenantId, id);
         const mutated = updateTraceOrigin(existing, origin, nowIso(deps), ctx.userId);
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.trace_link.origin_changed", {
-          origin,
-        });
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.trace_link.origin_changed",
+          {
+            origin,
+          },
+        );
       });
     },
 
@@ -565,7 +671,8 @@ export function createTraceLinkApplicationService(
           nowIso(deps),
           ctx.userId,
         );
-        const changedEndpoint = input.role === "source" ? mutated.source : mutated.target;
+        const changedEndpoint =
+          input.role === "source" ? mutated.source : mutated.target;
         const facts = await resolveEndpointFacts(deps, ctx.tenantId, [changedEndpoint]);
         assertEndpointExistence(mutated.source, mutated.target, [
           ...facts,
@@ -574,7 +681,9 @@ export function createTraceLinkApplicationService(
             tenantId: ctx.tenantId,
             kind: input.role === "source" ? existing.target.kind : existing.source.kind,
             artefactId:
-              input.role === "source" ? existing.target.artefactId : existing.source.artefactId,
+              input.role === "source"
+                ? existing.target.artefactId
+                : existing.source.artefactId,
             exists: true,
           },
         ]);
@@ -602,7 +711,10 @@ export function createTraceLinkApplicationService(
         const items = await deps.traceLinks.list(ctx.tenantId, {
           ...(query.type ? { type: createTraceType(query.type) } : {}),
           ...(query.lifecycleState
-            ? { lifecycleState: query.lifecycleState as StoredTraceLink["lifecycleState"] }
+            ? {
+                lifecycleState:
+                  query.lifecycleState as StoredTraceLink["lifecycleState"],
+              }
             : {}),
           sourceKind: query.sourceKind,
           sourceArtefactId: query.sourceArtefactId,
@@ -619,21 +731,30 @@ export function createTraceLinkApplicationService(
     async listBySource(ctx, kind, artefactId) {
       return observe(deps, "trace_link.list_by_source", async () => {
         assertAnyPermission(ctx, [VIEW]);
-        return deps.traceLinks.list(ctx.tenantId, { sourceKind: kind, sourceArtefactId: artefactId });
+        return deps.traceLinks.list(ctx.tenantId, {
+          sourceKind: kind,
+          sourceArtefactId: artefactId,
+        });
       });
     },
 
     async listByTarget(ctx, kind, artefactId) {
       return observe(deps, "trace_link.list_by_target", async () => {
         assertAnyPermission(ctx, [VIEW]);
-        return deps.traceLinks.list(ctx.tenantId, { targetKind: kind, targetArtefactId: artefactId });
+        return deps.traceLinks.list(ctx.tenantId, {
+          targetKind: kind,
+          targetArtefactId: artefactId,
+        });
       });
     },
 
     async outbound(ctx, artefactId) {
       return observe(deps, "trace_link.outbound", async () => {
         assertAnyPermission(ctx, [VIEW]);
-        return deps.traceLinks.list(ctx.tenantId, { artefactId, direction: "outbound" });
+        return deps.traceLinks.list(ctx.tenantId, {
+          artefactId,
+          direction: "outbound",
+        });
       });
     },
 
@@ -662,8 +783,14 @@ export function createTraceLinkApplicationService(
       return observe(deps, "trace_link.duplicate_candidates", async () => {
         assertAnyPermission(ctx, [VIEW]);
         const type = createTraceType(query.type);
-        const source = createTraceEndpointReference({ ...query.source, tenantId: ctx.tenantId });
-        const target = createTraceEndpointReference({ ...query.target, tenantId: ctx.tenantId });
+        const source = createTraceEndpointReference({
+          ...query.source,
+          tenantId: ctx.tenantId,
+        });
+        const target = createTraceEndpointReference({
+          ...query.target,
+          tenantId: ctx.tenantId,
+        });
         const scope = createTraceScope(query.scope ?? { kind: "tenant_global" });
         const key = duplicateKeyOf({ type, source, target, scope });
         const edges = await deps.traceLinks.listEdgeFacts(ctx.tenantId, {});
@@ -680,9 +807,13 @@ export function createTraceLinkApplicationService(
     async supersessionChain(ctx, traceId) {
       return observe(deps, "trace_link.supersession_chain", async () => {
         assertAnyPermission(ctx, [VIEW]);
-        const rows = await deps.traceLinks.list(ctx.tenantId, { lifecycleState: "superseded" });
+        const rows = await deps.traceLinks.list(ctx.tenantId, {
+          lifecycleState: "superseded",
+        });
         if (!traceId) return rows;
-        return rows.filter((row) => row.id === traceId || row.successorTraceId === traceId);
+        return rows.filter(
+          (row) => row.id === traceId || row.successorTraceId === traceId,
+        );
       });
     },
   };

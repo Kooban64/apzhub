@@ -10,14 +10,14 @@
 
 ## Pack
 
-| Document | Role |
-| -------- | ---- |
-| [COMPLETE.md](./COMPLETE.md) | Authoritative assembly |
-| [PART-01.md](./PART-01.md) … [PART-05.md](./PART-05.md) | Normative parts |
-| [APPENDIX-A.md](./APPENDIX-A.md) … [APPENDIX-E.md](./APPENDIX-E.md) | Appendices |
-| [OWNER-SUMMARY.md](./OWNER-SUMMARY.md) | Owner entry |
-| [INFRASTRUCTURE-ENGINEERING-SPECIFICATION-COMPLETION-REPORT.md](./INFRASTRUCTURE-ENGINEERING-SPECIFICATION-COMPLETION-REPORT.md) | Completion report |
-| [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) | Owner Decision (pending) |
+| Document                                                                                                                         | Role                     |
+| -------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| [COMPLETE.md](./COMPLETE.md)                                                                                                     | Authoritative assembly   |
+| [PART-01.md](./PART-01.md) … [PART-05.md](./PART-05.md)                                                                          | Normative parts          |
+| [APPENDIX-A.md](./APPENDIX-A.md) … [APPENDIX-E.md](./APPENDIX-E.md)                                                              | Appendices               |
+| [OWNER-SUMMARY.md](./OWNER-SUMMARY.md)                                                                                           | Owner entry              |
+| [INFRASTRUCTURE-ENGINEERING-SPECIFICATION-COMPLETION-REPORT.md](./INFRASTRUCTURE-ENGINEERING-SPECIFICATION-COMPLETION-REPORT.md) | Completion report        |
+| [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                                                                                     | Owner Decision (pending) |
 
 ## Next
 
@@ -29,4 +29,3 @@
 APZQEP-OES-ENG-060B
 ACCEPTED / ENGINEERING SPECIFICATION BASELINED / CLOSED
 ```
-

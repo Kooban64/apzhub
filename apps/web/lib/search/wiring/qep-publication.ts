@@ -2,11 +2,18 @@
  * QEP Platform Services → Search Publication wiring (APZQEP-ENG-020B).
  */
 
-import type { PersistedRequirement, RequirementBaseline, StoredRequirementsRelationship } from "@apzhub/qep-requirements/domain";
+import type {
+  PersistedRequirement,
+  RequirementBaseline,
+  StoredRequirementsRelationship,
+} from "@apzhub/qep-requirements/domain";
 import type { QepPlatformServicesBundle } from "@apzhub/platform-services";
 import { toTraceLinkDto, type StoredTraceLink } from "@apzhub/qep-traceability";
 import { toVerificationDto, type StoredVerification } from "@apzhub/qep-verification";
-import { toSpecificationDto, type StoredTestSpecification } from "@apzhub/qep-test-specifications";
+import {
+  toSpecificationDto,
+  type StoredTestSpecification,
+} from "@apzhub/qep-test-specifications";
 import {
   createQepSearchAdapter,
   type QepSearchMappableBaseline,
@@ -18,7 +25,9 @@ import {
 
 import { markSearchCompositionRegistered } from "../publication-runtime";
 
-function toSearchRequirement(record: PersistedRequirement): QepSearchMappableRequirement {
+function toSearchRequirement(
+  record: PersistedRequirement,
+): QepSearchMappableRequirement {
   return {
     id: record.id,
     tenantId: record.tenantId,
@@ -48,7 +57,9 @@ function toSearchBaseline(record: RequirementBaseline): QepSearchMappableBaselin
   };
 }
 
-function toSearchRelationship(record: StoredRequirementsRelationship): QepSearchMappableRelationship {
+function toSearchRelationship(
+  record: StoredRequirementsRelationship,
+): QepSearchMappableRelationship {
   return {
     id: record.id,
     tenantId: record.tenantId,
@@ -90,7 +101,9 @@ function toSearchTraceLink(record: StoredTraceLink): QepSearchMappableTraceLink 
   };
 }
 
-function toSearchVerification(record: StoredVerification): QepSearchMappableVerification {
+function toSearchVerification(
+  record: StoredVerification,
+): QepSearchMappableVerification {
   const dto = toVerificationDto(record);
   return {
     id: dto.id,
@@ -121,7 +134,9 @@ export type QepSearchMappableSpecification = {
   readonly updatedAt: string;
 };
 
-function toSearchSpecification(record: StoredTestSpecification): QepSearchMappableSpecification {
+function toSearchSpecification(
+  record: StoredTestSpecification,
+): QepSearchMappableSpecification {
   const dto = toSpecificationDto(record);
   return {
     id: dto.id,
@@ -142,30 +157,7 @@ function toSearchSpecification(record: StoredTestSpecification): QepSearchMappab
 export function wireQepBundleSearchPublication(
   bundle: QepPlatformServicesBundle,
 ): QepPlatformServicesBundle {
-  const adapter = createQepSearchAdapter();
   markSearchCompositionRegistered("qep");
-
-  const onUpserted = async (record: PersistedRequirement) => {
-    adapter.hooks.onRequirementUpserted(
-      {
-        tenantId: record.tenantId,
-        correlationId: `qep-search-${record.id}`,
-        actorUserId: record.updatedBy,
-      },
-      toSearchRequirement(record),
-    );
-  };
-
-  const onArchived = async (record: PersistedRequirement) => {
-    adapter.hooks.onRequirementArchived(
-      {
-        tenantId: record.tenantId,
-        correlationId: `qep-search-archive-${record.id}`,
-        actorUserId: record.archivedBy ?? record.updatedBy,
-      },
-      toSearchRequirement(record),
-    );
-  };
 
   return {
     ...bundle,
@@ -186,7 +178,9 @@ export function createQepSearchLifecycleOptions(): {
   ) => Promise<void>;
   readonly onTraceLinkUpserted: (traceLink: StoredTraceLink) => Promise<void>;
   readonly onVerificationUpserted: (verification: StoredVerification) => Promise<void>;
-  readonly onSpecificationUpserted: (specification: StoredTestSpecification) => Promise<void>;
+  readonly onSpecificationUpserted: (
+    specification: StoredTestSpecification,
+  ) => Promise<void>;
 } {
   const adapter = createQepSearchAdapter();
   markSearchCompositionRegistered("qep");

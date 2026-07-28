@@ -8,8 +8,7 @@ export const qepQueryKeys = {
       [...qepQueryKeys.requirements.all(), "list", params ?? {}] as const,
     search: (params: QepListParams & { q: string }) =>
       [...qepQueryKeys.requirements.all(), "search", params] as const,
-    detail: (id: string) =>
-      [...qepQueryKeys.requirements.all(), "detail", id] as const,
+    detail: (id: string) => [...qepQueryKeys.requirements.all(), "detail", id] as const,
     transitions: (id: string) =>
       [...qepQueryKeys.requirements.all(), "transitions", id] as const,
     lifecycle: (id: string) =>
@@ -19,7 +18,13 @@ export const qepQueryKeys = {
     version: (id: string, versionNumber: number) =>
       [...qepQueryKeys.requirements.all(), "version", id, versionNumber] as const,
     comparison: (id: string, baseVersionNumber: number, targetVersionNumber: number) =>
-      [...qepQueryKeys.requirements.all(), "comparison", id, baseVersionNumber, targetVersionNumber] as const,
+      [
+        ...qepQueryKeys.requirements.all(),
+        "comparison",
+        id,
+        baseVersionNumber,
+        targetVersionNumber,
+      ] as const,
     baselineHistory: (id: string) =>
       [...qepQueryKeys.requirements.all(), "baselineHistory", id] as const,
   },
@@ -30,15 +35,26 @@ export const qepQueryKeys = {
     detail: (id: string) => [...qepQueryKeys.baselines.all(), "detail", id] as const,
     items: (id: string) => [...qepQueryKeys.baselines.all(), "items", id] as const,
     compare: (baseBaselineId: string, targetBaselineId: string) =>
-      [...qepQueryKeys.baselines.all(), "compare", baseBaselineId, targetBaselineId] as const,
+      [
+        ...qepQueryKeys.baselines.all(),
+        "compare",
+        baseBaselineId,
+        targetBaselineId,
+      ] as const,
   },
   relationships: {
     all: () => [...qepQueryKeys.all(), "relationships"] as const,
     list: (params?: Record<string, unknown>) =>
       [...qepQueryKeys.relationships.all(), "list", params ?? {}] as const,
-    detail: (id: string) => [...qepQueryKeys.relationships.all(), "detail", id] as const,
+    detail: (id: string) =>
+      [...qepQueryKeys.relationships.all(), "detail", id] as const,
     byRequirement: (requirementId: string, direction?: string) =>
-      [...qepQueryKeys.relationships.all(), "byRequirement", requirementId, direction ?? "both"] as const,
+      [
+        ...qepQueryKeys.relationships.all(),
+        "byRequirement",
+        requirementId,
+        direction ?? "both",
+      ] as const,
     taxonomy: () => [...qepQueryKeys.relationships.all(), "taxonomy"] as const,
     conflicts: () => [...qepQueryKeys.relationships.all(), "conflicts"] as const,
   },
@@ -47,7 +63,8 @@ export const qepQueryKeys = {
     list: (params?: Record<string, unknown>) =>
       [...qepQueryKeys.traceability.all(), "list", params ?? {}] as const,
     detail: (id: string) => [...qepQueryKeys.traceability.all(), "detail", id] as const,
-    history: (id: string) => [...qepQueryKeys.traceability.all(), "history", id] as const,
+    history: (id: string) =>
+      [...qepQueryKeys.traceability.all(), "history", id] as const,
     taxonomy: () => [...qepQueryKeys.traceability.all(), "taxonomy"] as const,
     byEndpoint: (kind: string, artefactId: string, direction?: string) =>
       [
@@ -67,7 +84,8 @@ export const qepQueryKeys = {
     search: (params?: Record<string, unknown>) =>
       [...qepQueryKeys.verification.all(), "search", params ?? {}] as const,
     detail: (id: string) => [...qepQueryKeys.verification.all(), "detail", id] as const,
-    history: (id: string) => [...qepQueryKeys.verification.all(), "history", id] as const,
+    history: (id: string) =>
+      [...qepQueryKeys.verification.all(), "history", id] as const,
   },
   specifications: {
     all: () => [...qepQueryKeys.all(), "specifications"] as const,
@@ -75,9 +93,12 @@ export const qepQueryKeys = {
       [...qepQueryKeys.specifications.all(), "list", params ?? {}] as const,
     search: (params?: Record<string, unknown>) =>
       [...qepQueryKeys.specifications.all(), "search", params ?? {}] as const,
-    detail: (id: string) => [...qepQueryKeys.specifications.all(), "detail", id] as const,
-    history: (id: string) => [...qepQueryKeys.specifications.all(), "history", id] as const,
-    versions: (id: string) => [...qepQueryKeys.specifications.all(), "versions", id] as const,
+    detail: (id: string) =>
+      [...qepQueryKeys.specifications.all(), "detail", id] as const,
+    history: (id: string) =>
+      [...qepQueryKeys.specifications.all(), "history", id] as const,
+    versions: (id: string) =>
+      [...qepQueryKeys.specifications.all(), "versions", id] as const,
   },
   plans: {
     all: () => [...qepQueryKeys.all(), "plans"] as const,

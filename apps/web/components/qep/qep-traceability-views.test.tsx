@@ -140,7 +140,12 @@ describe("QepTraceLinksListView", () => {
   });
 
   it("renders empty state when there are no trace links", async () => {
-    vi.mocked(listTraceLinks).mockResolvedValue({ items: [], total: 0, limit: 50, offset: 0 });
+    vi.mocked(listTraceLinks).mockResolvedValue({
+      items: [],
+      total: 0,
+      limit: 50,
+      offset: 0,
+    });
 
     render(wrap(<QepTraceLinksListView />));
     await waitFor(() => {
@@ -217,7 +222,12 @@ describe("QepTraceMatrixView", () => {
   });
 
   it("renders empty state when no trace links are returned for the selected kinds", async () => {
-    vi.mocked(listTraceLinks).mockResolvedValue({ items: [], total: 0, limit: 100, offset: 0 });
+    vi.mocked(listTraceLinks).mockResolvedValue({
+      items: [],
+      total: 0,
+      limit: 100,
+      offset: 0,
+    });
 
     render(wrap(<QepTraceMatrixView />));
 

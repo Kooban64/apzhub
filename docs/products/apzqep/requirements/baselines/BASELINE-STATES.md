@@ -1,10 +1,10 @@
 # Baseline States
 
-| State | Meaning | Mutation |
-| --- | --- | --- |
-| `draft` | Baseline is being assembled | Metadata and membership may change |
-| `locked` | Configuration is frozen | Immutable |
-| `archived` | Retained historical configuration | Immutable |
+| State      | Meaning                           | Mutation                           |
+| ---------- | --------------------------------- | ---------------------------------- |
+| `draft`    | Baseline is being assembled       | Metadata and membership may change |
+| `locked`   | Configuration is frozen           | Immutable                          |
+| `archived` | Retained historical configuration | Immutable                          |
 
 Allowed transitions are:
 

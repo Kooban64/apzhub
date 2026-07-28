@@ -181,19 +181,27 @@ export const qepTestPlanCloneBodySchema = z
 
 export type QepTestPlanListQuery = z.infer<typeof qepTestPlanListQuerySchema>;
 export type QepTestPlanCreateBody = z.infer<typeof qepTestPlanCreateBodySchema>;
-export type QepTestPlanUpdateContentBody = z.infer<typeof qepTestPlanUpdateContentBodySchema>;
-export type QepTestPlanUpdateMetadataBody = z.infer<typeof qepTestPlanUpdateMetadataBodySchema>;
+export type QepTestPlanUpdateContentBody = z.infer<
+  typeof qepTestPlanUpdateContentBodySchema
+>;
+export type QepTestPlanUpdateMetadataBody = z.infer<
+  typeof qepTestPlanUpdateMetadataBodySchema
+>;
 export type QepTestPlanTransferOwnershipBody = z.infer<
   typeof qepTestPlanTransferOwnershipBodySchema
 >;
 export type QepTestPlanUpdateAssignmentBody = z.infer<
   typeof qepTestPlanUpdateAssignmentBodySchema
 >;
-export type QepTestPlanUpdateScheduleBody = z.infer<typeof qepTestPlanUpdateScheduleBodySchema>;
+export type QepTestPlanUpdateScheduleBody = z.infer<
+  typeof qepTestPlanUpdateScheduleBodySchema
+>;
 export type QepTestPlanAddItemBody = z.infer<typeof qepTestPlanAddItemBodySchema>;
 export type QepTestPlanUpdateItemBody = z.infer<typeof qepTestPlanUpdateItemBodySchema>;
 export type QepTestPlanRemoveItemBody = z.infer<typeof qepTestPlanRemoveItemBodySchema>;
-export type QepTestPlanReorderItemsBody = z.infer<typeof qepTestPlanReorderItemsBodySchema>;
+export type QepTestPlanReorderItemsBody = z.infer<
+  typeof qepTestPlanReorderItemsBodySchema
+>;
 export type QepTestPlanExpectedRevisionBody = z.infer<
   typeof qepTestPlanExpectedRevisionBodySchema
 >;

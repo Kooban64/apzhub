@@ -8,37 +8,37 @@ All services are **pure** — no repositories, databases, HTTP, or Platform Serv
 
 ## VerificationLifecycleService
 
-| Method | Role |
-| ------ | ---- |
-| `isTerminal` | Whether status has no outbound transitions |
-| `canTransition` | Soft check for allowed transition |
-| `assertTransition` | Hard assert; throws on illegal transition |
+| Method             | Role                                       |
+| ------------------ | ------------------------------------------ |
+| `isTerminal`       | Whether status has no outbound transitions |
+| `canTransition`    | Soft check for allowed transition          |
+| `assertTransition` | Hard assert; throws on illegal transition  |
 
 ## ValidationService
 
-| Method | Role |
-| ------ | ---- |
+| Method                | Role                        |
+| --------------------- | --------------------------- |
 | `validateCreateInput` | Subject + authority present |
 
 ## OutcomeService
 
-| Method | Role |
-| ------ | ---- |
+| Method             | Role                                         |
+| ------------------ | -------------------------------------------- |
 | `isSuccessOutcome` | `verified` · `partially_verified` · `waived` |
-| `isFailureOutcome` | `failed` · `blocked` · `inconclusive` |
-| `isInterimOutcome` | `blocked` · `deferred` |
+| `isFailureOutcome` | `failed` · `blocked` · `inconclusive`        |
+| `isInterimOutcome` | `blocked` · `deferred`                       |
 
 ## AuthorityService
 
-| Method | Role |
-| ------ | ---- |
+| Method                   | Role                      |
+| ------------------------ | ------------------------- |
 | `assertAuthorityPresent` | Non-empty authority actor |
 
 ## PolicyService
 
-| Method | Role |
-| ------ | ---- |
-| `runCreatePolicies` | Create-time structural policies |
+| Method                | Role                                                |
+| --------------------- | --------------------------------------------------- |
+| `runCreatePolicies`   | Create-time structural policies                     |
 | `runCompletePolicies` | Outcome required / no premature outcome / rationale |
 
 ## Aggregate as primary API

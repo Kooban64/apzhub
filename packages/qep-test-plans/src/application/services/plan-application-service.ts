@@ -4,7 +4,10 @@ import type { QepRequestContext } from "@apzhub/qep-contracts";
 
 import type { PlanDomainEvent } from "../../domain/test-plan/plan-events";
 import type { TestPlanHistoryEntry } from "../../domain/test-plan/plan-history";
-import type { CreateTestPlanItemInput, TestPlanItem } from "../../domain/test-plan/plan-item";
+import type {
+  CreateTestPlanItemInput,
+  TestPlanItem,
+} from "../../domain/test-plan/plan-item";
 import type {
   StoredTestPlan,
   TestPlanListQuery,
@@ -37,7 +40,11 @@ import {
   type TestPlan,
 } from "../../domain/test-plan/test-plan";
 import type { ExecutionReadiness } from "../../domain/test-plan/value-objects";
-import { PlanConflictError, PlanForbiddenError, PlanNotFoundError } from "../../shared/errors";
+import {
+  PlanConflictError,
+  PlanForbiddenError,
+  PlanNotFoundError,
+} from "../../shared/errors";
 import { filterAndPaginate } from "../../shared/pagination";
 
 export type PlanAuditEntry = {
@@ -65,7 +72,11 @@ export type CreatePlanCommandInput = {
   readonly title: string;
   readonly objective?: string;
   readonly description?: string;
-  readonly scope: { readonly class: string; readonly label?: string; readonly externalRef?: string };
+  readonly scope: {
+    readonly class: string;
+    readonly label?: string;
+    readonly externalRef?: string;
+  };
   readonly priority?: string;
   readonly ownerId?: string;
   readonly externalReferences?: readonly string[];
@@ -75,7 +86,11 @@ export type UpdatePlanContentCommandInput = {
   readonly title?: string;
   readonly description?: string | null;
   readonly objective?: string;
-  readonly scope?: { readonly class: string; readonly label?: string; readonly externalRef?: string };
+  readonly scope?: {
+    readonly class: string;
+    readonly label?: string;
+    readonly externalRef?: string;
+  };
   readonly priority?: string;
   readonly expectedRevision: number;
 };
@@ -184,7 +199,10 @@ export type PlanApplicationServiceDeps = {
 };
 
 export type PlanApplicationService = {
-  createPlan(ctx: QepRequestContext, input: CreatePlanCommandInput): Promise<StoredTestPlan>;
+  createPlan(
+    ctx: QepRequestContext,
+    input: CreatePlanCommandInput,
+  ): Promise<StoredTestPlan>;
   updateContent(
     ctx: QepRequestContext,
     id: string,
@@ -242,7 +260,11 @@ export type PlanApplicationService = {
     id: string,
     input: ApprovePlanCommandInput,
   ): Promise<StoredTestPlan>;
-  reject(ctx: QepRequestContext, id: string, input: RejectPlanCommandInput): Promise<StoredTestPlan>;
+  reject(
+    ctx: QepRequestContext,
+    id: string,
+    input: RejectPlanCommandInput,
+  ): Promise<StoredTestPlan>;
   returnToDraft(
     ctx: QepRequestContext,
     id: string,
@@ -305,9 +327,18 @@ export type PlanApplicationService = {
     limit: number;
     offset: number;
   }>;
-  listHistory(ctx: QepRequestContext, id: string): Promise<readonly TestPlanHistoryEntry[]>;
-  listRevisions(ctx: QepRequestContext, id: string): Promise<readonly TestPlanRevision[]>;
-  getExecutionReadiness(ctx: QepRequestContext, id: string): Promise<ExecutionReadiness>;
+  listHistory(
+    ctx: QepRequestContext,
+    id: string,
+  ): Promise<readonly TestPlanHistoryEntry[]>;
+  listRevisions(
+    ctx: QepRequestContext,
+    id: string,
+  ): Promise<readonly TestPlanRevision[]>;
+  getExecutionReadiness(
+    ctx: QepRequestContext,
+    id: string,
+  ): Promise<ExecutionReadiness>;
 };
 
 const READ = "qep.plan.read";
@@ -358,10 +389,15 @@ async function allocateNumber(
       return candidate;
     }
   }
-  throw new PlanConflictError("Unable to allocate a unique Test Plan number after multiple attempts");
+  throw new PlanConflictError(
+    "Unable to allocate a unique Test Plan number after multiple attempts",
+  );
 }
 
-function defaultAssertPermission(ctx: QepRequestContext, requiredOneOf: readonly string[]): void {
+function defaultAssertPermission(
+  ctx: QepRequestContext,
+  requiredOneOf: readonly string[],
+): void {
   const granted = ctx.permissions;
   if (!granted || granted.length === 0) return;
   if (granted.includes("qep.plan.*")) return;
@@ -410,15 +446,26 @@ async function observe<T>(
   const started = Date.now();
   try {
     const result = await work();
-    deps.onObservation?.({ operation, durationMs: Date.now() - started, outcome: "success" });
+    deps.onObservation?.({
+      operation,
+      durationMs: Date.now() - started,
+      outcome: "success",
+    });
     return result;
   } catch (error) {
-    deps.onObservation?.({ operation, durationMs: Date.now() - started, outcome: "error" });
+    deps.onObservation?.({
+      operation,
+      durationMs: Date.now() - started,
+      outcome: "error",
+    });
     throw error;
   }
 }
 
-async function emitEvents(deps: PlanApplicationServiceDeps, plan: TestPlan): Promise<void> {
+async function emitEvents(
+  deps: PlanApplicationServiceDeps,
+  plan: TestPlan,
+): Promise<void> {
   for (const event of plan.uncommittedEvents) {
     await deps.onDomainEvent?.(event);
   }
@@ -444,8 +491,13 @@ async function persistMutation(
   auditAction: string,
   auditDetails: Readonly<Record<string, unknown>> = {},
 ): Promise<StoredTestPlan> {
-  const stored = await runInTransaction(deps, async () => deps.plans.save(mutated, expectedRevision));
-  await appendAudit(deps, ctx, stored.id, auditAction, { ...auditDetails, status: stored.status });
+  const stored = await runInTransaction(deps, async () =>
+    deps.plans.save(mutated, expectedRevision),
+  );
+  await appendAudit(deps, ctx, stored.id, auditAction, {
+    ...auditDetails,
+    status: stored.status,
+  });
   await emitEvents(deps, mutated);
   try {
     await deps.onPlanUpserted?.(stored);
@@ -517,7 +569,13 @@ export function createPlanApplicationService(
             priority: input.priority,
           },
         );
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.content_updated");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.content_updated",
+        );
       });
     },
 
@@ -530,7 +588,13 @@ export function createPlanApplicationService(
           commandContext(deps, ctx, input.expectedRevision),
           input.metadata,
         );
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.metadata_updated");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.metadata_updated",
+        );
       });
     },
 
@@ -543,9 +607,16 @@ export function createPlanApplicationService(
           commandContext(deps, ctx, input.expectedRevision),
           input.ownerId,
         );
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.ownership_transferred", {
-          ownerId: input.ownerId,
-        });
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.ownership_transferred",
+          {
+            ownerId: input.ownerId,
+          },
+        );
       });
     },
 
@@ -553,11 +624,21 @@ export function createPlanApplicationService(
       return observe(deps, "plan.update_assignment", async () => {
         assertPermission(ctx, [ASSIGN]);
         const existing = await requirePlan(deps, ctx.tenantId, id);
-        const mutated = updateAssignment(existing, commandContext(deps, ctx, input.expectedRevision), {
-          leadId: input.leadId,
-          assigneeIds: input.assigneeIds,
-        });
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.assignment_updated");
+        const mutated = updateAssignment(
+          existing,
+          commandContext(deps, ctx, input.expectedRevision),
+          {
+            leadId: input.leadId,
+            assigneeIds: input.assigneeIds,
+          },
+        );
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.assignment_updated",
+        );
       });
     },
 
@@ -565,13 +646,23 @@ export function createPlanApplicationService(
       return observe(deps, "plan.update_schedule", async () => {
         assertPermission(ctx, [SCHEDULE]);
         const existing = await requirePlan(deps, ctx.tenantId, id);
-        const mutated = updateSchedule(existing, commandContext(deps, ctx, input.expectedRevision), {
-          plannedStart: input.plannedStart,
-          plannedEnd: input.plannedEnd,
-          milestoneRef: input.milestoneRef,
-          timezone: input.timezone,
-        });
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.schedule_updated");
+        const mutated = updateSchedule(
+          existing,
+          commandContext(deps, ctx, input.expectedRevision),
+          {
+            plannedStart: input.plannedStart,
+            plannedEnd: input.plannedEnd,
+            milestoneRef: input.milestoneRef,
+            timezone: input.timezone,
+          },
+        );
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.schedule_updated",
+        );
       });
     },
 
@@ -593,9 +684,16 @@ export function createPlanApplicationService(
           commandContext(deps, ctx, input.expectedRevision),
           itemInput,
         );
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.item_added", {
-          specificationId: input.specificationId,
-        });
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.item_added",
+          {
+            specificationId: input.specificationId,
+          },
+        );
       });
     },
 
@@ -615,9 +713,16 @@ export function createPlanApplicationService(
             requirementRefs: input.requirementRefs,
           },
         );
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.item_updated", {
-          itemId,
-        });
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.item_updated",
+          {
+            itemId,
+          },
+        );
       });
     },
 
@@ -630,9 +735,16 @@ export function createPlanApplicationService(
           commandContext(deps, ctx, input.expectedRevision),
           itemId,
         );
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.item_removed", {
-          itemId,
-        });
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.item_removed",
+          {
+            itemId,
+          },
+        );
       });
     },
 
@@ -645,7 +757,13 @@ export function createPlanApplicationService(
           commandContext(deps, ctx, input.expectedRevision),
           input.orderedItemIds,
         );
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.items_reordered");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.items_reordered",
+        );
       });
     },
 
@@ -653,8 +771,17 @@ export function createPlanApplicationService(
       return observe(deps, "plan.submit_for_review", async () => {
         assertPermission(ctx, [SUBMIT]);
         const existing = await requirePlan(deps, ctx.tenantId, id);
-        const mutated = submitForReview(existing, commandContext(deps, ctx, input.expectedRevision));
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.review_submitted");
+        const mutated = submitForReview(
+          existing,
+          commandContext(deps, ctx, input.expectedRevision),
+        );
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.review_submitted",
+        );
       });
     },
 
@@ -667,7 +794,13 @@ export function createPlanApplicationService(
           allowSelfApproval: input.allowSelfApproval,
           comment: input.comment,
         });
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.approved");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.approved",
+        );
       });
     },
 
@@ -680,7 +813,13 @@ export function createPlanApplicationService(
           commandContext(deps, ctx, input.expectedRevision),
           input.comment,
         );
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.rejected");
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.rejected",
+        );
       });
     },
 
@@ -688,8 +827,17 @@ export function createPlanApplicationService(
       return observe(deps, "plan.return_to_draft", async () => {
         assertPermission(ctx, [UPDATE]);
         const existing = await requirePlan(deps, ctx.tenantId, id);
-        const mutated = returnToDraft(existing, commandContext(deps, ctx, input.expectedRevision));
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.returned_to_draft");
+        const mutated = returnToDraft(
+          existing,
+          commandContext(deps, ctx, input.expectedRevision),
+        );
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.returned_to_draft",
+        );
       });
     },
 
@@ -697,8 +845,17 @@ export function createPlanApplicationService(
       return observe(deps, "plan.mark_ready", async () => {
         assertPermission(ctx, [READY]);
         const existing = await requirePlan(deps, ctx.tenantId, id);
-        const mutated = markReady(existing, commandContext(deps, ctx, input.expectedRevision));
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.marked_ready");
+        const mutated = markReady(
+          existing,
+          commandContext(deps, ctx, input.expectedRevision),
+        );
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.marked_ready",
+        );
       });
     },
 
@@ -706,8 +863,17 @@ export function createPlanApplicationService(
       return observe(deps, "plan.start_execution", async () => {
         assertPermission(ctx, [EXECUTE]);
         const existing = await requirePlan(deps, ctx.tenantId, id);
-        const mutated = startExecution(existing, commandContext(deps, ctx, input.expectedRevision));
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.execution_started");
+        const mutated = startExecution(
+          existing,
+          commandContext(deps, ctx, input.expectedRevision),
+        );
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.execution_started",
+        );
       });
     },
 
@@ -715,8 +881,17 @@ export function createPlanApplicationService(
       return observe(deps, "plan.complete", async () => {
         assertPermission(ctx, [COMPLETE]);
         const existing = await requirePlan(deps, ctx.tenantId, id);
-        const mutated = completePlan(existing, commandContext(deps, ctx, input.expectedRevision));
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.completed");
+        const mutated = completePlan(
+          existing,
+          commandContext(deps, ctx, input.expectedRevision),
+        );
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.completed",
+        );
       });
     },
 
@@ -724,8 +899,17 @@ export function createPlanApplicationService(
       return observe(deps, "plan.archive", async () => {
         assertPermission(ctx, [ARCHIVE]);
         const existing = await requirePlan(deps, ctx.tenantId, id);
-        const mutated = archivePlan(existing, commandContext(deps, ctx, input.expectedRevision));
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.archived");
+        const mutated = archivePlan(
+          existing,
+          commandContext(deps, ctx, input.expectedRevision),
+        );
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.archived",
+        );
       });
     },
 
@@ -733,8 +917,17 @@ export function createPlanApplicationService(
       return observe(deps, "plan.cancel", async () => {
         assertPermission(ctx, [CANCEL]);
         const existing = await requirePlan(deps, ctx.tenantId, id);
-        const mutated = cancelPlan(existing, commandContext(deps, ctx, input.expectedRevision));
-        return persistMutation(deps, ctx, mutated, existing.revision, "qep.plan.cancelled");
+        const mutated = cancelPlan(
+          existing,
+          commandContext(deps, ctx, input.expectedRevision),
+        );
+        return persistMutation(
+          deps,
+          ctx,
+          mutated,
+          existing.revision,
+          "qep.plan.cancelled",
+        );
       });
     },
 
@@ -743,7 +936,8 @@ export function createPlanApplicationService(
         assertPermission(ctx, [SUPERSEDE]);
         const existing = await requirePlan(deps, ctx.tenantId, id);
         const successorId = input.successorId ?? nextPlanId(deps);
-        const successorNumber = input.successorNumber ?? (await allocateNumber(deps, ctx));
+        const successorNumber =
+          input.successorNumber ?? (await allocateNumber(deps, ctx));
 
         const { source, successor } = supersedePlan(
           existing,
@@ -781,7 +975,9 @@ export function createPlanApplicationService(
           number: cloneNumber,
           title: input.title,
         });
-        return persistCreate(deps, ctx, cloned, "qep.plan.cloned", { predecessorPlanId: existing.id });
+        return persistCreate(deps, ctx, cloned, "qep.plan.cloned", {
+          predecessorPlanId: existing.id,
+        });
       });
     },
 
@@ -811,7 +1007,11 @@ export function createPlanApplicationService(
       return observe(deps, "plan.search", async () => {
         assertPermission(ctx, [READ, SEARCH]);
         const items = await deps.plans.list(ctx.tenantId, { ...queryOptions, query });
-        return filterAndPaginate(items, queryOptions.limit ?? 50, queryOptions.offset ?? 0);
+        return filterAndPaginate(
+          items,
+          queryOptions.limit ?? 50,
+          queryOptions.offset ?? 0,
+        );
       });
     },
 

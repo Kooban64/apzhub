@@ -409,7 +409,8 @@ export const getPlan = defaultClient.getPlan.bind(defaultClient);
 export const createPlan = defaultClient.createPlan.bind(defaultClient);
 export const updatePlanContent = defaultClient.updateContent.bind(defaultClient);
 export const updatePlanMetadata = defaultClient.updateMetadata.bind(defaultClient);
-export const transferPlanOwnership = defaultClient.transferOwnership.bind(defaultClient);
+export const transferPlanOwnership =
+  defaultClient.transferOwnership.bind(defaultClient);
 export const updatePlanAssignment = defaultClient.updateAssignment.bind(defaultClient);
 export const updatePlanSchedule = defaultClient.updateSchedule.bind(defaultClient);
 export const addPlanItem = defaultClient.addItem.bind(defaultClient);

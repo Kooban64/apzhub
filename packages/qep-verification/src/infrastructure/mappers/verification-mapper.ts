@@ -19,7 +19,9 @@ export function verificationMatchesListFilters(
   if (query.status && row.status !== query.status) return false;
   if (query.outcome && row.outcome !== query.outcome) return false;
   if (query.subjectKind && row.subject.kind !== query.subjectKind) return false;
-  if (query.subjectArtefactId && row.subject.artefactId !== query.subjectArtefactId) return false;
-  if (query.authorityActorId && row.authority.actorId !== query.authorityActorId) return false;
+  if (query.subjectArtefactId && row.subject.artefactId !== query.subjectArtefactId)
+    return false;
+  if (query.authorityActorId && row.authority.actorId !== query.authorityActorId)
+    return false;
   return true;
 }

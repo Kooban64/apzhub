@@ -121,7 +121,9 @@ describe("APZQEP-ENG-020E requirement baseline handlers", () => {
   });
 
   it("reads, updates a draft, and returns 404 for a missing baseline", async () => {
-    const getBaseline = vi.fn(async (): Promise<typeof SAMPLE_BASELINE | null> => SAMPLE_BASELINE);
+    const getBaseline = vi.fn(
+      async (): Promise<typeof SAMPLE_BASELINE | null> => SAMPLE_BASELINE,
+    );
     bootstrap({
       getBaseline,
       updateDraftBaseline: vi.fn(async () => ({ ...SAMPLE_BASELINE, name: "Renamed" })),
@@ -188,7 +190,9 @@ describe("APZQEP-ENG-020E requirement baseline handlers", () => {
     expect(items.status).toBe(200);
 
     const removed = await handleRemoveQepBaselineItem(
-      makeRequest("/api/v1/qep/requirements/baselines/rbl_1/items/rcv_1", { method: "DELETE" }),
+      makeRequest("/api/v1/qep/requirements/baselines/rbl_1/items/rcv_1", {
+        method: "DELETE",
+      }),
       ctx,
       routeContext({ baselineId: "rbl_1", contentVersionId: "rcv_1" }),
     );
@@ -223,14 +227,18 @@ describe("APZQEP-ENG-020E requirement baseline handlers", () => {
     expect(lockedBody.data.integrityVerificationStatus).toBe("verified");
 
     const archived = await handleArchiveQepBaseline(
-      makeRequest("/api/v1/qep/requirements/baselines/rbl_1/archive", { method: "POST" }),
+      makeRequest("/api/v1/qep/requirements/baselines/rbl_1/archive", {
+        method: "POST",
+      }),
       ctx,
       routeContext({ baselineId: "rbl_1" }),
     );
     expect(archived.status).toBe(200);
 
     const verified = await handleVerifyQepBaselineIntegrity(
-      makeRequest("/api/v1/qep/requirements/baselines/rbl_1/verify", { method: "POST" }),
+      makeRequest("/api/v1/qep/requirements/baselines/rbl_1/verify", {
+        method: "POST",
+      }),
       ctx,
       routeContext({ baselineId: "rbl_1" }),
     );
@@ -253,7 +261,9 @@ describe("APZQEP-ENG-020E requirement baseline handlers", () => {
 
     await expect(
       handleVerifyQepBaselineIntegrity(
-        makeRequest("/api/v1/qep/requirements/baselines/rbl_1/verify", { method: "POST" }),
+        makeRequest("/api/v1/qep/requirements/baselines/rbl_1/verify", {
+          method: "POST",
+        }),
         ctx,
         routeContext({ baselineId: "rbl_1" }),
       ),
@@ -276,7 +286,9 @@ describe("APZQEP-ENG-020E requirement baseline handlers", () => {
 
     await expect(
       handleVerifyQepBaselineIntegrity(
-        makeRequest("/api/v1/qep/requirements/baselines/rbl_1/verify", { method: "POST" }),
+        makeRequest("/api/v1/qep/requirements/baselines/rbl_1/verify", {
+          method: "POST",
+        }),
         ctx,
         routeContext({ baselineId: "rbl_1" }),
       ),
@@ -292,7 +304,12 @@ describe("APZQEP-ENG-020E requirement baseline handlers", () => {
         removed: [],
         unchanged: [],
         versionChanged: [],
-        summary: { addedCount: 0, removedCount: 0, unchangedCount: 0, versionChangedCount: 0 },
+        summary: {
+          addedCount: 0,
+          removedCount: 0,
+          unchangedCount: 0,
+          versionChangedCount: 0,
+        },
       })),
       requirementBaselineHistory: vi.fn(async () => [SAMPLE_BASELINE]),
     });

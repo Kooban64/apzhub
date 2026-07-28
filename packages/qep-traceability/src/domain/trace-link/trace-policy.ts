@@ -14,10 +14,7 @@ import { createTraceRationale } from "./trace-rationale";
 import type { TraceScope } from "./trace-scope";
 import { traceScopeKey } from "./trace-scope";
 import type { TraceType } from "./trace-type";
-import {
-  assertApprovedTraceType,
-  getTraceTaxonomyDefinition,
-} from "./trace-taxonomy";
+import { assertApprovedTraceType, getTraceTaxonomyDefinition } from "./trace-taxonomy";
 import type { TraceContext } from "./trace-context";
 
 /** Persistence-independent edge fact for duplicate / cycle checks. */
@@ -49,7 +46,9 @@ export function assertEndpointPair(
   type: TraceType,
 ): void {
   if (source.tenantId !== tenantId || target.tenantId !== tenantId) {
-    throw new TraceInvariantViolation("Trace Link and endpoints must share the same tenant");
+    throw new TraceInvariantViolation(
+      "Trace Link and endpoints must share the same tenant",
+    );
   }
   const taxonomy = getTraceTaxonomyDefinition(type);
   if (!taxonomy.allowsSelfLink) {
@@ -132,14 +131,13 @@ export function assertConfidenceForOrigin(
     }
   }
   if (origin === "user" && confidence === "inferred") {
-    throw new TraceInvariantViolation("User-origin traces must not use inferred confidence");
+    throw new TraceInvariantViolation(
+      "User-origin traces must not use inferred confidence",
+    );
   }
 }
 
-export function assertOriginForProjection(
-  type: TraceType,
-  origin: TraceOrigin,
-): void {
+export function assertOriginForProjection(type: TraceType, origin: TraceOrigin): void {
   const taxonomy = getTraceTaxonomyDefinition(type);
   if (taxonomy.projectionOnly && origin !== "system_rule" && origin !== "migration") {
     throw new TraceInvariantViolation(
@@ -169,9 +167,7 @@ export function assertRationalePolicy(
 
 export function assertTraceMutable(state: TraceLifecycleState): void {
   if (state === "retired" || state === "superseded") {
-    throw new TraceInvariantViolation(
-      `Trace Link in ${state} state is immutable`,
-    );
+    throw new TraceInvariantViolation(`Trace Link in ${state} state is immutable`);
   }
 }
 

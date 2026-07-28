@@ -51,20 +51,20 @@ Source: [test-plans/capability-certification/KNOWN-LIMITATIONS.md](../../test-pl
 
 Inherited from Infrastructure (CERT-060B):
 
-| ID | Limitation | Disposition |
-| -- | ---------- | ------------ |
-| L-01 | Version comparison (`CompareVersions` / `GET .../compare`) not implemented | Deferred capability; Workbench presents a governed unavailable slot, no fabricated diff |
-| L-02 | Dedicated `GET .../items` not provided; items available on plan GET DTO | Approved variance, not a correctness defect |
-| L-03 | Package line coverage below aspirational OES objectives (ECR: 77.07% lines) | Accepted with justification; behavioural coverage is high |
+| ID   | Limitation                                                                  | Disposition                                                                             |
+| ---- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| L-01 | Version comparison (`CompareVersions` / `GET .../compare`) not implemented  | Deferred capability; Workbench presents a governed unavailable slot, no fabricated diff |
+| L-02 | Dedicated `GET .../items` not provided; items available on plan GET DTO     | Approved variance, not a correctness defect                                             |
+| L-03 | Package line coverage below aspirational OES objectives (ECR: 77.07% lines) | Accepted with justification; behavioural coverage is high                               |
 
 Inherited from Workbench (CERT-070A):
 
-| ID | Item | Disposition |
-| -- | ---- | ------------ |
+| ID   | Item                                                                                  | Disposition                                                                            |
+| ---- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | P-01 | Some lifecycle-chain Playwright journeys not asserted as discrete click-through tests | Does not block — identical `availableActions`-gated mechanism already proven elsewhere |
-| P-02 | Not-found (404) governed state not separately Playwright-asserted (only 403 is) | Does not block — same code path as the asserted 403 case |
-| P-03 | Some panels not separately axe-scanned | Does not block — reuse already axe-scanned primitives |
-| P-04 | Preference Service named saved views not implemented | Approved scope boundary; URL/session round-trip satisfies the accepted OES |
+| P-02 | Not-found (404) governed state not separately Playwright-asserted (only 403 is)       | Does not block — same code path as the asserted 403 case                               |
+| P-03 | Some panels not separately axe-scanned                                                | Does not block — reuse already axe-scanned primitives                                  |
+| P-04 | Preference Service named saved views not implemented                                  | Approved scope boundary; URL/session round-trip satisfies the accepted OES             |
 
 Inherited from Domain (CERT-060A): no AI / MCP implementation; no Evidence / Coverage / Impact / Certification Engine integration — expected, future programmes, outside the Test Plans capability boundary.
 

@@ -1,6 +1,9 @@
 "use client";
 
-import type { QepVerificationDto, QepVerificationHistorySummaryDto } from "@apzhub/qep-contracts";
+import type {
+  QepVerificationDto,
+  QepVerificationHistorySummaryDto,
+} from "@apzhub/qep-contracts";
 import { Button, Input } from "@apzhub/ui";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
@@ -127,9 +130,15 @@ function subjectLabel(v: QepVerificationDto): string {
 }
 
 function isTerminalStatus(status: string): boolean {
-  return ["verified", "rejected", "expired", "withdrawn", "superseded", "cancelled", "retired"].includes(
-    status,
-  );
+  return [
+    "verified",
+    "rejected",
+    "expired",
+    "withdrawn",
+    "superseded",
+    "cancelled",
+    "retired",
+  ].includes(status);
 }
 
 function GovernedUnavailable({ capability }: { readonly capability: string }) {
@@ -144,17 +153,29 @@ function GovernedUnavailable({ capability }: { readonly capability: string }) {
   );
 }
 
-function SubjectNavigation({ verification }: { readonly verification: QepVerificationDto }) {
+function SubjectNavigation({
+  verification,
+}: {
+  readonly verification: QepVerificationDto;
+}) {
   const kind = verification.subject.kind;
   const id = verification.subject.artefactId;
 
-  if (kind === "requirement" || kind === "requirement_content_version" || kind === "requirement_baseline") {
+  if (
+    kind === "requirement" ||
+    kind === "requirement_content_version" ||
+    kind === "requirement_baseline"
+  ) {
     const href =
       kind === "requirement"
         ? QEP_REQUIREMENTS_ROUTES.detail(id)
         : QEP_REQUIREMENTS_ROUTES.list;
     return (
-      <Link href={href} className="underline" data-testid="qep-verification-nav-requirement">
+      <Link
+        href={href}
+        className="underline"
+        data-testid="qep-verification-nav-requirement"
+      >
         Open Requirement context
       </Link>
     );
@@ -234,28 +255,33 @@ export function QepVerificationExplorerView({
 }) {
   const searchParams = useSearchParams();
   const initialQueue =
-    queue ??
-    ((searchParams.get("view") as VerificationQueueId | null) || undefined);
-  const [status, setStatus] = useState(initialQueue ? queueListParams(initialQueue, 0).status ?? "" : "");
+    queue ?? ((searchParams.get("view") as VerificationQueueId | null) || undefined);
+  const [status, setStatus] = useState(
+    initialQueue ? (queueListParams(initialQueue, 0).status ?? "") : "",
+  );
   const [outcome, setOutcome] = useState("");
   const [subjectKind, setSubjectKind] = useState("");
-  const [groupBy, setGroupBy] = useState<"none" | "status" | "priority" | "assignee">("none");
-  const [sortKey, setSortKey] = useState<"updatedAt" | "createdAt" | "priority" | "status">(
-    "updatedAt",
+  const [groupBy, setGroupBy] = useState<"none" | "status" | "priority" | "assignee">(
+    "none",
   );
+  const [sortKey, setSortKey] = useState<
+    "updatedAt" | "createdAt" | "priority" | "status"
+  >("updatedAt");
   const [offset, setOffset] = useState(0);
   const [selected, setSelected] = useState<ReadonlySet<string>>(new Set());
   const [savedViewName, setSavedViewName] = useState("");
-  const [savedViews, setSavedViews] = useState<readonly { name: string; status: string; outcome: string }[]>(
-    [],
-  );
+  const [savedViews, setSavedViews] = useState<
+    readonly { name: string; status: string; outcome: string }[]
+  >([]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     try {
       const raw = window.localStorage.getItem("qep.verification.savedViews");
       if (raw) {
-        setSavedViews(JSON.parse(raw) as { name: string; status: string; outcome: string }[]);
+        setSavedViews(
+          JSON.parse(raw) as { name: string; status: string; outcome: string }[],
+        );
       }
     } catch {
       /* ignore */
@@ -274,7 +300,11 @@ export function QepVerificationExplorerView({
   }, [initialQueue, status, outcome, subjectKind, offset]);
 
   const query = useQuery({
-    queryKey: qepQueryKeys.verification.list({ ...params, queue: initialQueue, teamMode }),
+    queryKey: qepQueryKeys.verification.list({
+      ...params,
+      queue: initialQueue,
+      teamMode,
+    }),
     queryFn: ({ signal }) => listVerifications(params, { signal }),
   });
 
@@ -301,7 +331,7 @@ export function QepVerificationExplorerView({
           ? item.status
           : groupBy === "priority"
             ? item.priority
-            : item.assignedTo ?? "unassigned";
+            : (item.assignedTo ?? "unassigned");
       map[key] = map[key] ?? [];
       map[key].push(item);
     }
@@ -349,7 +379,8 @@ export function QepVerificationExplorerView({
     >
       {teamMode ? (
         <p className="text-sm text-[var(--color-muted-foreground)]" role="status">
-          Team queue — presentation filter over server list (no client-owned business rules).
+          Team queue — presentation filter over server list (no client-owned business
+          rules).
         </p>
       ) : null}
 
@@ -415,7 +446,10 @@ export function QepVerificationExplorerView({
             </label>
           </>
         ) : (
-          <div className="flex flex-wrap gap-2" data-testid="qep-verification-queue-tabs">
+          <div
+            className="flex flex-wrap gap-2"
+            data-testid="qep-verification-queue-tabs"
+          >
             {QUEUE_DEFS.map((def) => (
               <Link
                 key={def.id}
@@ -436,9 +470,7 @@ export function QepVerificationExplorerView({
           <select
             className="mt-1 block rounded-md border border-[var(--color-border)] bg-transparent px-2 py-1 text-sm"
             value={sortKey}
-            onChange={(event) =>
-              setSortKey(event.target.value as typeof sortKey)
-            }
+            onChange={(event) => setSortKey(event.target.value as typeof sortKey)}
             data-testid="qep-verification-sort"
           >
             <option value="updatedAt">Updated</option>
@@ -452,9 +484,7 @@ export function QepVerificationExplorerView({
           <select
             className="mt-1 block rounded-md border border-[var(--color-border)] bg-transparent px-2 py-1 text-sm"
             value={groupBy}
-            onChange={(event) =>
-              setGroupBy(event.target.value as typeof groupBy)
-            }
+            onChange={(event) => setGroupBy(event.target.value as typeof groupBy)}
             data-testid="qep-verification-group"
           >
             <option value="none">None</option>
@@ -484,7 +514,9 @@ export function QepVerificationExplorerView({
               className="mt-1 block rounded-md border border-[var(--color-border)] bg-transparent px-2 py-1 text-sm"
               defaultValue=""
               onChange={(event) => {
-                const view = savedViews.find((entry) => entry.name === event.target.value);
+                const view = savedViews.find(
+                  (entry) => entry.name === event.target.value,
+                );
                 if (!view) return;
                 setStatus(view.status);
                 setOutcome(view.outcome);
@@ -506,7 +538,9 @@ export function QepVerificationExplorerView({
       {query.isLoading ? <QepLoadingState label="Loading verifications…" /> : null}
       {query.isError ? (
         <QepErrorState
-          message={query.error instanceof Error ? query.error.message : "Failed to load"}
+          message={
+            query.error instanceof Error ? query.error.message : "Failed to load"
+          }
           onRetry={() => void query.refetch()}
         />
       ) : null}
@@ -561,7 +595,10 @@ export function QepVerificationExplorerView({
                       {item.id}
                     </Link>,
                     subjectLabel(item),
-                    <span key={`st-${item.id}`} className="inline-flex items-center gap-1">
+                    <span
+                      key={`st-${item.id}`}
+                      className="inline-flex items-center gap-1"
+                    >
                       <QepStatusBadge status={item.status} />
                       <span>{item.status}</span>
                     </span>,
@@ -613,19 +650,23 @@ export function QepVerificationExplorerView({
 export function QepVerificationDashboardView() {
   const myQueue = useQuery({
     queryKey: qepQueryKeys.verification.list({ queue: "my_work" }),
-    queryFn: ({ signal }) => listVerifications({ status: "assigned", limit: 20 }, { signal }),
+    queryFn: ({ signal }) =>
+      listVerifications({ status: "assigned", limit: 20 }, { signal }),
   });
   const pending = useQuery({
     queryKey: qepQueryKeys.verification.list({ queue: "awaiting_review" }),
-    queryFn: ({ signal }) => listVerifications({ status: "in_progress", limit: 20 }, { signal }),
+    queryFn: ({ signal }) =>
+      listVerifications({ status: "in_progress", limit: 20 }, { signal }),
   });
   const rejected = useQuery({
     queryKey: qepQueryKeys.verification.list({ queue: "rejected" }),
-    queryFn: ({ signal }) => listVerifications({ status: "rejected", limit: 20 }, { signal }),
+    queryFn: ({ signal }) =>
+      listVerifications({ status: "rejected", limit: 20 }, { signal }),
   });
   const completed = useQuery({
     queryKey: qepQueryKeys.verification.list({ queue: "completed" }),
-    queryFn: ({ signal }) => listVerifications({ status: "verified", limit: 20 }, { signal }),
+    queryFn: ({ signal }) =>
+      listVerifications({ status: "verified", limit: 20 }, { signal }),
   });
   const recent = useQuery({
     queryKey: qepQueryKeys.verification.list({ queue: "recently_updated" }),
@@ -664,8 +705,11 @@ export function QepVerificationDashboardView() {
       id: "expiring",
       title: "Expiring Soon",
       href: `${QEP_VERIFICATION_ROUTES.queue}?view=overdue`,
-      count: applyPresentationQueueFilter(myQueue.data?.items ?? [], "overdue", DEFAULT_ACTOR_ID)
-        .length,
+      count: applyPresentationQueueFilter(
+        myQueue.data?.items ?? [],
+        "overdue",
+        DEFAULT_ACTOR_ID,
+      ).length,
       loading: myQueue.isLoading,
     },
     {
@@ -704,7 +748,9 @@ export function QepVerificationDashboardView() {
             className="rounded-lg border border-[var(--color-border)] p-4 hover:bg-[var(--color-muted)]/20"
             data-testid={`qep-verification-widget-${widget.id}`}
           >
-            <p className="text-sm text-[var(--color-muted-foreground)]">{widget.title}</p>
+            <p className="text-sm text-[var(--color-muted-foreground)]">
+              {widget.title}
+            </p>
             <p className="mt-2 text-2xl font-semibold">
               {widget.loading ? "…" : (widget.count ?? 0)}
             </p>
@@ -717,14 +763,21 @@ export function QepVerificationDashboardView() {
           <QepEmptyState title="No recent verification activity." />
         ) : null}
         {recent.isSuccess && recent.data.items.length > 0 ? (
-          <ul className="space-y-2 text-sm" data-testid="qep-verification-recent-activity">
+          <ul
+            className="space-y-2 text-sm"
+            data-testid="qep-verification-recent-activity"
+          >
             {recent.data.items.map((item) => (
               <li key={item.id}>
-                <Link href={QEP_VERIFICATION_ROUTES.detail(item.id)} className="underline">
+                <Link
+                  href={QEP_VERIFICATION_ROUTES.detail(item.id)}
+                  className="underline"
+                >
                   {item.id}
                 </Link>{" "}
                 · {item.status}
-                {item.outcome ? ` / ${item.outcome}` : ""} · {formatDate(item.updatedAt)}
+                {item.outcome ? ` / ${item.outcome}` : ""} ·{" "}
+                {formatDate(item.updatedAt)}
               </li>
             ))}
           </ul>
@@ -777,8 +830,12 @@ export function QepVerificationSearchView() {
               pageSize: 50,
               filters: [
                 { field: "entityType", op: "eq", value: "verification_record" },
-                ...(status ? [{ field: "status", op: "eq" as const, value: status }] : []),
-                ...(outcome ? [{ field: "outcome", op: "eq" as const, value: outcome }] : []),
+                ...(status
+                  ? [{ field: "status", op: "eq" as const, value: status }]
+                  : []),
+                ...(outcome
+                  ? [{ field: "outcome", op: "eq" as const, value: outcome }]
+                  : []),
                 ...(subjectKind
                   ? [{ field: "subjectKind", op: "eq" as const, value: subjectKind }]
                   : []),
@@ -808,7 +865,8 @@ export function QepVerificationSearchView() {
         { signal },
       );
       const items = collection.items.filter((item) => {
-        const hay = `${item.id} ${subjectLabel(item)} ${item.rationale ?? ""} ${item.priority}`.toLowerCase();
+        const hay =
+          `${item.id} ${subjectLabel(item)} ${item.rationale ?? ""} ${item.priority}`.toLowerCase();
         const matchQ = !submitted || hay.includes(submitted.toLowerCase());
         const matchPriority = !priority || item.priority === priority;
         return matchQ && matchPriority;
@@ -827,7 +885,10 @@ export function QepVerificationSearchView() {
     const next = [...new Set([...savedSearches, `${savedName.trim()}::${submitted}`])];
     setSavedSearches(next);
     if (typeof window !== "undefined") {
-      window.localStorage.setItem("qep.verification.savedSearches", JSON.stringify(next));
+      window.localStorage.setItem(
+        "qep.verification.savedSearches",
+        JSON.stringify(next),
+      );
     }
     setSavedName("");
   }
@@ -838,7 +899,11 @@ export function QepVerificationSearchView() {
       description="Platform Search for verification_record with advanced REST filters as fallback."
       breadcrumbs={["Verification", "Search"]}
     >
-      <form className="flex flex-col gap-3" onSubmit={onSearch} data-testid="qep-verification-search-form">
+      <form
+        className="flex flex-col gap-3"
+        onSubmit={onSearch}
+        data-testid="qep-verification-search-form"
+      >
         <QepFilterBar>
           <label className="text-xs grow">
             Keywords
@@ -967,15 +1032,23 @@ export function QepVerificationSearchView() {
       ) : listFallback.isError ? (
         <QepErrorState
           message={
-            listFallback.error instanceof Error ? listFallback.error.message : "Search failed"
+            listFallback.error instanceof Error
+              ? listFallback.error.message
+              : "Search failed"
           }
         />
-      ) : listFallback.data?.mode === "platform" && listFallback.data.hits.length > 0 ? (
+      ) : listFallback.data?.mode === "platform" &&
+        listFallback.data.hits.length > 0 ? (
         <ul className="space-y-2" data-testid="qep-verification-search-results">
           {listFallback.data.hits.map((hit) => (
-            <li key={hit.id} className="rounded-md border border-[var(--color-border)] p-3 text-sm">
+            <li
+              key={hit.id}
+              className="rounded-md border border-[var(--color-border)] p-3 text-sm"
+            >
               <Link
-                href={hit.navigationTarget ?? QEP_VERIFICATION_ROUTES.detail(hit.entityId)}
+                href={
+                  hit.navigationTarget ?? QEP_VERIFICATION_ROUTES.detail(hit.entityId)
+                }
                 className="font-medium underline"
               >
                 {hit.title || hit.entityId}
@@ -987,8 +1060,14 @@ export function QepVerificationSearchView() {
       ) : listFallback.data?.items.length ? (
         <ul className="space-y-2" data-testid="qep-verification-search-results">
           {listFallback.data.items.map((item) => (
-            <li key={item.id} className="rounded-md border border-[var(--color-border)] p-3 text-sm">
-              <Link href={QEP_VERIFICATION_ROUTES.detail(item.id)} className="font-medium underline">
+            <li
+              key={item.id}
+              className="rounded-md border border-[var(--color-border)] p-3 text-sm"
+            >
+              <Link
+                href={QEP_VERIFICATION_ROUTES.detail(item.id)}
+                className="font-medium underline"
+              >
                 {item.id}
               </Link>
               <p className="text-[var(--color-muted-foreground)]">
@@ -1102,7 +1181,11 @@ export function QepVerificationCreateView() {
             {error}
           </p>
         ) : null}
-        <Button type="submit" disabled={mutation.isPending} data-testid="qep-verification-create-submit">
+        <Button
+          type="submit"
+          disabled={mutation.isPending}
+          data-testid="qep-verification-create-submit"
+        >
           Create
         </Button>
       </form>
@@ -1119,9 +1202,14 @@ export function QepVerificationSupersedeView() {
 
   const mutation = useMutation({
     mutationFn: () =>
-      supersedeVerification(predecessor, { successorVerificationId: successorId.trim() }),
+      supersedeVerification(predecessor, {
+        successorVerificationId: successorId.trim(),
+      }),
     onSuccess: () => {
-      emitQepWorkbenchTelemetry({ event: "verification.supersede", outcome: "success" });
+      emitQepWorkbenchTelemetry({
+        event: "verification.supersede",
+        outcome: "success",
+      });
       router.push(QEP_VERIFICATION_ROUTES.detail(predecessor));
     },
     onError: (err) => {
@@ -1194,7 +1282,9 @@ export function QepVerificationHistoryView({
 
   const entries = useMemo(() => {
     const rows = query.data ?? [];
-    const filtered = kindFilter ? rows.filter((entry) => entry.kind === kindFilter) : rows;
+    const filtered = kindFilter
+      ? rows.filter((entry) => entry.kind === kindFilter)
+      : rows;
     return [...filtered].sort((a, b) => b.at.localeCompare(a.at));
   }, [query.data, kindFilter]);
 
@@ -1202,8 +1292,9 @@ export function QepVerificationHistoryView({
     if (!groupByKind) return { All: entries };
     const map: Record<string, QepVerificationHistorySummaryDto[]> = {};
     for (const entry of entries) {
-      map[entry.kind] = map[entry.kind] ?? [];
-      map[entry.kind].push(entry);
+      const bucket = map[entry.kind] ?? [];
+      bucket.push(entry);
+      map[entry.kind] = bucket;
     }
     return map;
   }, [entries, groupByKind]);
@@ -1220,7 +1311,10 @@ export function QepVerificationHistoryView({
       {id ? (
         <>
           <p className="text-sm text-[var(--color-muted-foreground)]">
-            Verification <Link href={QEP_VERIFICATION_ROUTES.detail(id)} className="underline">{id}</Link>
+            Verification{" "}
+            <Link href={QEP_VERIFICATION_ROUTES.detail(id)} className="underline">
+              {id}
+            </Link>
           </p>
           <QepFilterBar>
             <label className="text-xs">
@@ -1245,7 +1339,9 @@ export function QepVerificationHistoryView({
           {query.isLoading ? <QepLoadingState label="Loading history…" /> : null}
           {query.isError ? (
             <QepErrorState
-              message={query.error instanceof Error ? query.error.message : "History failed"}
+              message={
+                query.error instanceof Error ? query.error.message : "History failed"
+              }
             />
           ) : null}
           {query.isSuccess && entries.length === 0 ? (
@@ -1356,7 +1452,10 @@ export function QepVerificationDetailView({
       setConfirmError(null);
       setRationale("");
       invalidate();
-      emitQepWorkbenchTelemetry({ event: "verification.lifecycle", outcome: "success" });
+      emitQepWorkbenchTelemetry({
+        event: "verification.lifecycle",
+        outcome: "success",
+      });
     },
     onError: (err) => {
       setConfirmError(err instanceof Error ? err.message : "Action failed");
@@ -1384,7 +1483,9 @@ export function QepVerificationDetailView({
   if (query.isError || !query.data) {
     return (
       <QepErrorState
-        message={query.error instanceof Error ? query.error.message : "Verification not found"}
+        message={
+          query.error instanceof Error ? query.error.message : "Verification not found"
+        }
         onRetry={() => void query.refetch()}
       />
     );
@@ -1392,9 +1493,9 @@ export function QepVerificationDetailView({
 
   const verification = query.data;
   const actions = new Set(verification.availableActions ?? []);
-  const timeline = (historyQuery.data ?? verification.historySummaries).slice().sort((a, b) =>
-    a.at.localeCompare(b.at),
-  );
+  const timeline = (historyQuery.data ?? verification.historySummaries)
+    .slice()
+    .sort((a, b) => a.at.localeCompare(b.at));
 
   return (
     <QepPageShell
@@ -1427,25 +1528,37 @@ export function QepVerificationDetailView({
           <QepPanel title="Summary">
             <dl className="space-y-2 text-sm">
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Status</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Status
+                </dt>
                 <dd data-testid="qep-verification-status">
                   <QepStatusBadge status={verification.status} /> {verification.status}
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Outcome</dt>
-                <dd data-testid="qep-verification-outcome">{verification.outcome ?? "—"}</dd>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Outcome
+                </dt>
+                <dd data-testid="qep-verification-outcome">
+                  {verification.outcome ?? "—"}
+                </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Priority</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Priority
+                </dt>
                 <dd>{verification.priority}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Version</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Version
+                </dt>
                 <dd>{verification.revision}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Assigned</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Assigned
+                </dt>
                 <dd>{verification.assignedTo ?? "—"}</dd>
               </div>
             </dl>
@@ -1462,32 +1575,46 @@ export function QepVerificationDetailView({
           <QepPanel title="Details">
             <dl className="grid gap-3 text-sm sm:grid-cols-2">
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Subject</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Subject
+                </dt>
                 <dd>{subjectLabel(verification)}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Authority</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Authority
+                </dt>
                 <dd>
                   {verification.authority.kind}:{verification.authority.actorId}
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Scope</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Scope
+                </dt>
                 <dd>
                   {verification.scope.kind}
-                  {verification.scope.referenceId ? ` · ${verification.scope.referenceId}` : ""}
+                  {verification.scope.referenceId
+                    ? ` · ${verification.scope.referenceId}`
+                    : ""}
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Origin</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Origin
+                </dt>
                 <dd>{verification.origin}</dd>
               </div>
               <div className="sm:col-span-2">
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Rationale</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Rationale
+                </dt>
                 <dd>{verification.rationale ?? "—"}</dd>
               </div>
               <div className="sm:col-span-2">
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Metadata</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Metadata
+                </dt>
                 <dd>
                   {Object.keys(verification.metadata).length === 0
                     ? "—"
@@ -1501,7 +1628,9 @@ export function QepVerificationDetailView({
 
           <QepPanel title="Timeline">
             {timeline.length === 0 ? (
-              <p className="text-sm text-[var(--color-muted-foreground)]">No timeline events yet.</p>
+              <p className="text-sm text-[var(--color-muted-foreground)]">
+                No timeline events yet.
+              </p>
             ) : (
               <ol className="space-y-2 text-sm" data-testid="qep-verification-timeline">
                 {timeline.map((entry, index) => (
@@ -1596,7 +1725,10 @@ export function QepVerificationDetailView({
                 </Button>
               ) : null}
               {actions.size === 0 ? (
-                <p className="text-sm text-[var(--color-muted-foreground)]" role="status">
+                <p
+                  className="text-sm text-[var(--color-muted-foreground)]"
+                  role="status"
+                >
                   Read-only — no actions available.
                 </p>
               ) : null}
@@ -1605,13 +1737,17 @@ export function QepVerificationDetailView({
             {verification.historySummaries.length > 0 ? (
               <div className="mt-4">
                 <h3 className="text-sm font-medium">History summary</h3>
-                <ol className="mt-2 space-y-2 text-xs" data-testid="qep-verification-history-preview">
+                <ol
+                  className="mt-2 space-y-2 text-xs"
+                  data-testid="qep-verification-history-preview"
+                >
                   {verification.historySummaries.slice(0, 5).map((entry, index) => (
                     <li
                       key={`${entry.at}-${index}`}
                       className="rounded-md border border-[var(--color-border)] p-2"
                     >
-                      <span className="font-medium">{entry.kind}</span> — {entry.summary}
+                      <span className="font-medium">{entry.kind}</span> —{" "}
+                      {entry.summary}
                     </li>
                   ))}
                 </ol>
@@ -1619,7 +1755,10 @@ export function QepVerificationDetailView({
             ) : null}
 
             {verification.context.immutable ? (
-              <p className="mt-3 text-xs text-[var(--color-muted-foreground)]" role="status">
+              <p
+                className="mt-3 text-xs text-[var(--color-muted-foreground)]"
+                role="status"
+              >
                 Immutable context warning — mutating actions remain server-gated.
               </p>
             ) : null}
@@ -1640,7 +1779,8 @@ export function QepVerificationDetailView({
               Confirm {pending}
             </h2>
             <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
-              This action is executed via the server API. The client does not decide eligibility.
+              This action is executed via the server API. The client does not decide
+              eligibility.
             </p>
             {pending === "assign" ? (
               <label className="mt-3 block text-sm">
@@ -1687,7 +1827,12 @@ export function QepVerificationDetailView({
               </p>
             ) : null}
             <div className="mt-4 flex justify-end gap-2">
-              <Button type="button" variant="outline" size="sm" onClick={() => setPending(null)}>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setPending(null)}
+              >
                 Cancel
               </Button>
               <Button

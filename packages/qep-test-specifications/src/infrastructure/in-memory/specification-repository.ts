@@ -8,7 +8,10 @@ import {
   TestSpecificationNotFoundError,
   TestSpecificationRevisionConflictError,
 } from "../../shared/errors";
-import { matchesListFilters, toStoredTestSpecification } from "../mappers/specification-mapper";
+import {
+  matchesListFilters,
+  toStoredTestSpecification,
+} from "../mappers/specification-mapper";
 
 export type TestSpecificationInMemoryStore = {
   readonly specifications: Map<string, StoredTestSpecification>;

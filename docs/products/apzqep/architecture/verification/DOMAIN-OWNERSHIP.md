@@ -12,6 +12,6 @@ Requirements · Trace Links · Relationships · Evidence · Test Cases · Test S
 
 ## Hard rules
 
-- One SoR per concern.  
-- Verification stores governed references to foreign artefacts.  
+- One SoR per concern.
+- Verification stores governed references to foreign artefacts.
 - Foreign domains consume Verification outcomes; they do not redefine them.

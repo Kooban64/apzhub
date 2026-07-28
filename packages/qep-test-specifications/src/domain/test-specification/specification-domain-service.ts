@@ -81,7 +81,9 @@ export const SpecificationVersionService = {
     VersionPolicy.assertOnlyOneAuthoritative(record.isAuthoritative, record.status);
   },
   latestApprovedLabel(records: readonly SpecificationRecord[]): string | undefined {
-    const approved = records.filter((r) => r.status === "approved" && r.isAuthoritative);
+    const approved = records.filter(
+      (r) => r.status === "approved" && r.isAuthoritative,
+    );
     if (approved.length === 0) return undefined;
     return approved
       .map((r) => r.version)

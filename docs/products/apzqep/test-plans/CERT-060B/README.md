@@ -23,13 +23,13 @@ Capability Freeze NOT AUTHORISED
 
 ## Pack
 
-| Document | Path |
-| -------- | ---- |
-| Owner Certification Decision | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) |
-| Certification Report | [CERTIFICATION-REPORT.md](./CERTIFICATION-REPORT.md) |
-| Owner Summary | [OWNER-SUMMARY.md](./OWNER-SUMMARY.md) |
-| Known Limitations Review | [KNOWN-LIMITATIONS-REVIEW.md](./KNOWN-LIMITATIONS-REVIEW.md) |
-| COMPLETE | [COMPLETE.md](./COMPLETE.md) |
+| Document                       | Path                                                                                                   |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| Owner Certification Decision   | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                                                           |
+| Certification Report           | [CERTIFICATION-REPORT.md](./CERTIFICATION-REPORT.md)                                                   |
+| Owner Summary                  | [OWNER-SUMMARY.md](./OWNER-SUMMARY.md)                                                                 |
+| Known Limitations Review       | [KNOWN-LIMITATIONS-REVIEW.md](./KNOWN-LIMITATIONS-REVIEW.md)                                           |
+| COMPLETE                       | [COMPLETE.md](./COMPLETE.md)                                                                           |
 | Component Certification Report | [INFRASTRUCTURE-COMPONENT-CERTIFICATION-REPORT.md](./INFRASTRUCTURE-COMPONENT-CERTIFICATION-REPORT.md) |
 
 ## STOP

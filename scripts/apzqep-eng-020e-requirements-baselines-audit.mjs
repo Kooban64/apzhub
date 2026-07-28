@@ -82,7 +82,9 @@ for (const path of forbiddenPaths) {
   if (existsSync(join(root, path))) fail(`Forbidden route must not exist: ${path}`);
 }
 
-const baselineRoute = read("apps/web/app/api/v1/qep/requirements/baselines/[baselineId]/route.ts");
+const baselineRoute = read(
+  "apps/web/app/api/v1/qep/requirements/baselines/[baselineId]/route.ts",
+);
 const deleteHandlerMatch = baselineRoute.match(
   /export\s+async function\s+DELETE\s*\([^)]*\)\s*\{([\s\S]*?)\n\}/,
 );
@@ -91,7 +93,9 @@ if (deleteHandlerMatch && !/methodNotAllowedResponse/.test(deleteHandlerMatch[1]
 }
 
 // Domain: lockRequirementBaseline / transition must require non-empty membership + integrity.
-const domainAggregate = read("packages/qep-requirements/src/domain/baseline/requirement-baseline.ts");
+const domainAggregate = read(
+  "packages/qep-requirements/src/domain/baseline/requirement-baseline.ts",
+);
 if (!/lockRequirementBaseline/.test(domainAggregate)) {
   fail("Domain aggregate must export lockRequirementBaseline");
 }
@@ -148,7 +152,8 @@ const requiredPermissions = [
   "qep.requirements.baselines.verify",
 ];
 for (const permission of requiredPermissions) {
-  if (!moduleYaml.includes(permission)) fail(`module.yaml missing permission: ${permission}`);
+  if (!moduleYaml.includes(permission))
+    fail(`module.yaml missing permission: ${permission}`);
 }
 if (!/0\.7\.0/.test(moduleYaml)) {
   fail("module.yaml must record version 0.7.0");
@@ -171,7 +176,9 @@ if (!/ACCEPTED\s*\/\s*CLOSED\s*\/\s*COMPLETE/.test(indexTs)) {
   fail("QEP_REQUIREMENTS_PROGRAMME must record ACCEPTED / CLOSED / COMPLETE");
 }
 
-const ownerAcceptance = read("docs/products/apzqep/requirements/baselines/OWNER-ACCEPTANCE.md");
+const ownerAcceptance = read(
+  "docs/products/apzqep/requirements/baselines/OWNER-ACCEPTANCE.md",
+);
 const decisionLine = ownerAcceptance
   .split("\n")
   .find((line) => /^>\s*\*\*Decision:\*\*/.test(line));
@@ -188,9 +195,12 @@ const completionReport = read(
 if (!/ACCEPTED\s*\/\s*CLOSED\s*\/\s*COMPLETE/.test(completionReport)) {
   fail("COMPLETION-REPORT.md must record ACCEPTED / CLOSED / COMPLETE");
 }
-if (!/not authorised/i.test(completionReport) && !/NOT AUTHORISED/i.test(read(
-  "docs/products/apzqep/requirements/baselines/OWNER-ACCEPTANCE.md",
-))) {
+if (
+  !/not authorised/i.test(completionReport) &&
+  !/NOT AUTHORISED/i.test(
+    read("docs/products/apzqep/requirements/baselines/OWNER-ACCEPTANCE.md"),
+  )
+) {
   fail("Baselines pack must state the next programme is not authorised");
 }
 
@@ -265,7 +275,9 @@ for (const file of governanceFiles) {
     continue;
   }
   if (
-    /APZQEP-ENG-020E[^\n]{0,200}(NOT STARTED|AUTHORISED\s*\/\s*NOT STARTED)/i.test(text) ||
+    /APZQEP-ENG-020E[^\n]{0,200}(NOT STARTED|AUTHORISED\s*\/\s*NOT STARTED)/i.test(
+      text,
+    ) ||
     /(NOT STARTED)[^\n]{0,200}APZQEP-ENG-020E/i.test(text)
   ) {
     fail(`${file}: APZQEP-ENG-020E must not report NOT STARTED`);
@@ -280,14 +292,14 @@ for (const file of governanceFiles) {
     /APZQEP-ENG-020E[^\n]{0,200}AWAITING OWNER ACCEPTANCE/i.test(text) ||
     /AWAITING OWNER ACCEPTANCE[^\n]{0,200}APZQEP-ENG-020E/i.test(text)
   ) {
-    fail(`${file}: APZQEP-ENG-020E must not remain AWAITING OWNER ACCEPTANCE after acceptance`);
+    fail(
+      `${file}: APZQEP-ENG-020E must not remain AWAITING OWNER ACCEPTANCE after acceptance`,
+    );
   }
   const acceptedClaim = text
     .split("\n")
     .some(
-      (line) =>
-        /APZQEP-ENG-020E/.test(line) &&
-        /ACCEPTED\s*\/\s*CLOSED/.test(line),
+      (line) => /APZQEP-ENG-020E/.test(line) && /ACCEPTED\s*\/\s*CLOSED/.test(line),
     );
   if (!acceptedClaim && !file.includes("CHANGELOG")) {
     // CHANGELOG may mention historical awaiting wording in older entries; still prefer ACCEPTED nearby.
@@ -300,7 +312,9 @@ if (
   !register.includes("APZQEP-ENG-020E") ||
   !/APZQEP-ENG-020E[\s\S]{0,400}ACCEPTED\s*\/\s*CLOSED\s*\/\s*COMPLETE/.test(register)
 ) {
-  fail("OWNER-ACCEPTANCE-REGISTER must list APZQEP-ENG-020E as ACCEPTED / CLOSED / COMPLETE");
+  fail(
+    "OWNER-ACCEPTANCE-REGISTER must list APZQEP-ENG-020E as ACCEPTED / CLOSED / COMPLETE",
+  );
 }
 
 // Root package.json must expose the audit script itself.

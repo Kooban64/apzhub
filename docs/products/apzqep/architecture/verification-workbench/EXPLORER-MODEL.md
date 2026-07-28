@@ -16,7 +16,7 @@ Filtering · Sorting · Grouping · Saved views · Bulk selection.
 
 ## Rules
 
-- No invented hierarchy  
-- Subject summaries are references only  
-- Server filtering at scale  
+- No invented hierarchy
+- Subject summaries are references only
+- Server filtering at scale
 - Status ≠ Outcome in columns and badges

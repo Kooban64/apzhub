@@ -9,9 +9,12 @@ import { createPlatformApiTracing } from "@/lib/api/v1/request-context";
 
 const ALLOWED = ["DELETE"] as const;
 
-export const DELETE = withPlatformApiAuth(handleRemoveQepTestSpecificationRelationship, {
-  operation: "qep.specification.removeRelationship",
-});
+export const DELETE = withPlatformApiAuth(
+  handleRemoveQepTestSpecificationRelationship,
+  {
+    operation: "qep.specification.removeRelationship",
+  },
+);
 
 export async function GET(request: NextRequest) {
   return methodNotAllowedResponse(ALLOWED, createPlatformApiTracing(), request.method);

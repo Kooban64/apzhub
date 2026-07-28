@@ -34,7 +34,7 @@ const infra = readFileSync(
   join(root, "packages/qep-requirements/src/infrastructure/index.ts"),
   "utf8",
 );
-if (!infra.includes('implemented')) {
+if (!infra.includes("implemented")) {
   fail("Infrastructure status must be implemented");
 }
 
@@ -47,10 +47,7 @@ if (placeholder.includes("Requirements Module Coming Soon")) {
 }
 
 const owner = readFileSync(
-  join(
-    root,
-    "docs/products/apzqep/requirements/crud-foundation/OWNER-ACCEPTANCE.md",
-  ),
+  join(root, "docs/products/apzqep/requirements/crud-foundation/OWNER-ACCEPTANCE.md"),
   "utf8",
 );
 if (!owner.includes("AWAITING OWNER ACCEPTANCE")) {

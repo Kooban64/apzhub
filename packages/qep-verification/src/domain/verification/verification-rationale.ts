@@ -1,7 +1,9 @@
 import { VerificationInvariantViolation } from "../../shared/errors";
 import { VERIFICATION_RATIONALE_MAX_LENGTH } from "./constants";
 
-export type VerificationRationale = string & { readonly __brand: "VerificationRationale" };
+export type VerificationRationale = string & {
+  readonly __brand: "VerificationRationale";
+};
 
 export function createVerificationRationale(value: string): VerificationRationale {
   const normalized = value.trim();

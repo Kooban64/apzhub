@@ -4,14 +4,14 @@
 
 ## Operations
 
-| Operation | Application | HTTP |
-| --------- | ----------- | ---- |
-| Create | `createRequirement` | `POST /api/v1/qep/requirements` |
-| Read | `getRequirement` | `GET /api/v1/qep/requirements/:id` |
-| Update | `updateRequirement` | `PATCH /api/v1/qep/requirements/:id` |
-| Archive | `archiveRequirement` | `DELETE /api/v1/qep/requirements/:id` |
-| List | `listRequirements` | `GET /api/v1/qep/requirements` |
-| Search | `searchRequirements` | `GET /api/v1/qep/requirements/search?q=` |
+| Operation | Application          | HTTP                                     |
+| --------- | -------------------- | ---------------------------------------- |
+| Create    | `createRequirement`  | `POST /api/v1/qep/requirements`          |
+| Read      | `getRequirement`     | `GET /api/v1/qep/requirements/:id`       |
+| Update    | `updateRequirement`  | `PATCH /api/v1/qep/requirements/:id`     |
+| Archive   | `archiveRequirement` | `DELETE /api/v1/qep/requirements/:id`    |
+| List      | `listRequirements`   | `GET /api/v1/qep/requirements`           |
+| Search    | `searchRequirements` | `GET /api/v1/qep/requirements/search?q=` |
 
 ## Rules
 

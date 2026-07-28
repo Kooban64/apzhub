@@ -7,9 +7,7 @@
   "authority": "Owner statement in APZQEP-ARCH-006 programme instruction (Parts 1 and 2 accepted)",
   "finalPartState": "ACCEPTED / CLOSED / COMPLETE",
   "package": "@apzhub/qep-requirements@0.9.0",
-  "implementationEvidence": [
-    "20260726T090200Z-APZQEP-ENG-020F-PART2.json"
-  ],
+  "implementationEvidence": ["20260726T090200Z-APZQEP-ENG-020F-PART2.json"],
   "backendCapabilityComplete": true,
   "part3": {
     "authorised": false,

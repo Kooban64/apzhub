@@ -41,7 +41,12 @@ const membershipFor = (
   }));
 
 function draftWithItem() {
-  return addRequirementBaselineItem(draft(), item(), "2026-07-25T00:01:00.000Z", "user_1");
+  return addRequirementBaselineItem(
+    draft(),
+    item(),
+    "2026-07-25T00:01:00.000Z",
+    "user_1",
+  );
 }
 
 describe("RequirementBaseline", () => {
@@ -63,23 +68,44 @@ describe("RequirementBaseline", () => {
     );
     expect(locked.status).toBe("locked");
     expect(
-      transitionRequirementBaseline(locked, "archived", "2026-07-27T00:00:00.000Z", "user_3"),
+      transitionRequirementBaseline(
+        locked,
+        "archived",
+        "2026-07-27T00:00:00.000Z",
+        "user_3",
+      ),
     ).toMatchObject({ status: "archived" });
     expect(() =>
-      transitionRequirementBaseline(locked, "draft", "2026-07-27T00:00:00.000Z", "user_3"),
+      transitionRequirementBaseline(
+        locked,
+        "draft",
+        "2026-07-27T00:00:00.000Z",
+        "user_3",
+      ),
     ).toThrow();
   });
 
   it("rejects locking a baseline with no content versions", () => {
     expect(() =>
-      transitionRequirementBaseline(draft(), "locked", "2026-07-26T00:00:00.000Z", "user_2", []),
+      transitionRequirementBaseline(
+        draft(),
+        "locked",
+        "2026-07-26T00:00:00.000Z",
+        "user_2",
+        [],
+      ),
     ).toThrow();
   });
 
   it("rejects locking without canonical membership integrity inputs", () => {
     const withItem = draftWithItem();
     expect(() =>
-      transitionRequirementBaseline(withItem, "locked", "2026-07-26T00:00:00.000Z", "user_2"),
+      transitionRequirementBaseline(
+        withItem,
+        "locked",
+        "2026-07-26T00:00:00.000Z",
+        "user_2",
+      ),
     ).toThrow();
   });
 
@@ -93,7 +119,12 @@ describe("RequirementBaseline", () => {
       membershipFor(withItem.items),
     );
     expect(() =>
-      addRequirementBaselineItem(locked, item("rcv_2"), "2026-07-26T00:01:00.000Z", "user_2"),
+      addRequirementBaselineItem(
+        locked,
+        item("rcv_2"),
+        "2026-07-26T00:01:00.000Z",
+        "user_2",
+      ),
     ).toThrow();
     expect(() =>
       updateRequirementBaselineMetadata(
@@ -113,7 +144,12 @@ describe("RequirementBaseline", () => {
       "user_1",
     );
     expect(() =>
-      addRequirementBaselineItem(withItem, item(), "2026-07-25T00:02:00.000Z", "user_1"),
+      addRequirementBaselineItem(
+        withItem,
+        item(),
+        "2026-07-25T00:02:00.000Z",
+        "user_1",
+      ),
     ).toThrow();
   });
 
@@ -139,7 +175,12 @@ describe("RequirementBaseline", () => {
       membershipFor(withItem.items),
     );
     expect(() =>
-      transitionRequirementBaseline(locked, "draft", "2026-07-27T00:00:00.000Z", "user_3"),
+      transitionRequirementBaseline(
+        locked,
+        "draft",
+        "2026-07-27T00:00:00.000Z",
+        "user_3",
+      ),
     ).toThrow();
   });
 

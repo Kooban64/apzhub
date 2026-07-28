@@ -11,27 +11,27 @@ APZQEP-DEF-002 completed depth expansion and consolidation of the APZ QEP Produc
 
 ## What was expanded (DEF-002)
 
-| Area | Expansion |
-| ---- | --------- |
-| **Personas** | 21 full structured persona tables — goals, responsibilities, permissions, workspace access, key workflows, and success criteria (not prose summaries) |
-| **Workflows** | 35 individual workflow definitions — each with actor, trigger, steps, human gates, outcomes, and module references |
-| **Domain models** | Substantive documentation for verification, evidence, traceability, risk, certification, and release readiness models |
-| **UX / IA / navigation** | Enterprise-grade user experience principles, information architecture, role workspaces, and navigation map coverage |
+| Area                     | Expansion                                                                                                                                             |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Personas**             | 21 full structured persona tables — goals, responsibilities, permissions, workspace access, key workflows, and success criteria (not prose summaries) |
+| **Workflows**            | 35 individual workflow definitions — each with actor, trigger, steps, human gates, outcomes, and module references                                    |
+| **Domain models**        | Substantive documentation for verification, evidence, traceability, risk, certification, and release readiness models                                 |
+| **UX / IA / navigation** | Enterprise-grade user experience principles, information architecture, role workspaces, and navigation map coverage                                   |
 
 ## Confirmations
 
-- Platform unchanged (Certified Platform 1.4)  
-- No System Architecture performed  
-- No Database Design performed  
-- No API Design performed  
-- No ADRs created  
-- No Engineering performed  
-- No Product implementation performed  
-- Manual verification remains first-class  
-- AI remains governed and disabled by default  
-- Human certification remains mandatory  
-- DEF-001 product decisions preserved (DEF-D-001 through DEF-D-010)  
-- Expanded Product Definition Baseline ready for Owner Acceptance  
+- Platform unchanged (Certified Platform 1.4)
+- No System Architecture performed
+- No Database Design performed
+- No API Design performed
+- No ADRs created
+- No Engineering performed
+- No Product implementation performed
+- Manual verification remains first-class
+- AI remains governed and disabled by default
+- Human certification remains mandatory
+- DEF-001 product decisions preserved (DEF-D-001 through DEF-D-010)
+- Expanded Product Definition Baseline ready for Owner Acceptance
 
 ## Evidence
 

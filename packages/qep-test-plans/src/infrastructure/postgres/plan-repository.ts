@@ -11,7 +11,10 @@ import { randomUUID } from "node:crypto";
 
 import type { TestPlanApproval } from "../../domain/test-plan/plan-approval";
 import type { TestPlanAssignment } from "../../domain/test-plan/plan-assignment";
-import type { TestPlanHistory, TestPlanHistoryEntry } from "../../domain/test-plan/plan-history";
+import type {
+  TestPlanHistory,
+  TestPlanHistoryEntry,
+} from "../../domain/test-plan/plan-history";
 import type { TestPlanItem } from "../../domain/test-plan/plan-item";
 import type {
   StoredTestPlan,
@@ -181,7 +184,9 @@ function mapPlanRow(
         ? row.externalReferencesJson
         : undefined,
     metadata:
-      row.metadataJson && Object.keys(row.metadataJson).length > 0 ? row.metadataJson : undefined,
+      row.metadataJson && Object.keys(row.metadataJson).length > 0
+        ? row.metadataJson
+        : undefined,
     metrics: mapMetrics(row),
     uncommittedEvents: [],
   };
@@ -210,7 +215,9 @@ function toPlanRowValues(plan: TestPlan) {
     assigneeIdsJson: [...plan.assignment.assigneeIds],
     assignmentUpdatedAt: new Date(plan.assignment.updatedAt),
     assignmentUpdatedBy: plan.assignment.updatedBy,
-    plannedStart: plan.schedule.plannedStart ? new Date(plan.schedule.plannedStart) : null,
+    plannedStart: plan.schedule.plannedStart
+      ? new Date(plan.schedule.plannedStart)
+      : null,
     plannedEnd: plan.schedule.plannedEnd ? new Date(plan.schedule.plannedEnd) : null,
     milestoneRef: plan.schedule.milestoneRef ?? null,
     timezone: plan.schedule.timezone ?? null,
@@ -226,39 +233,67 @@ function toPlanRowValues(plan: TestPlan) {
   };
 }
 
-export function createPostgresTestPlanRepository(db: DatabaseExecutor): TestPlanRepository {
+export function createPostgresTestPlanRepository(
+  db: DatabaseExecutor,
+): TestPlanRepository {
   async function loadItems(tenantId: string, planId: string): Promise<TestPlanItem[]> {
     const rows = await db
       .select()
       .from(qepTestPlanItem)
-      .where(and(eq(qepTestPlanItem.tenantId, tenantId), eq(qepTestPlanItem.planId, planId)))
+      .where(
+        and(eq(qepTestPlanItem.tenantId, tenantId), eq(qepTestPlanItem.planId, planId)),
+      )
       .orderBy(asc(qepTestPlanItem.sequence));
     return rows.map(mapItemRow);
   }
 
-  async function loadApprovals(tenantId: string, planId: string): Promise<TestPlanApproval[]> {
+  async function loadApprovals(
+    tenantId: string,
+    planId: string,
+  ): Promise<TestPlanApproval[]> {
     const rows = await db
       .select()
       .from(qepTestPlanApproval)
-      .where(and(eq(qepTestPlanApproval.tenantId, tenantId), eq(qepTestPlanApproval.planId, planId)))
+      .where(
+        and(
+          eq(qepTestPlanApproval.tenantId, tenantId),
+          eq(qepTestPlanApproval.planId, planId),
+        ),
+      )
       .orderBy(asc(qepTestPlanApproval.decidedAt));
     return rows.map(mapApprovalRow);
   }
 
-  async function loadRevisions(tenantId: string, planId: string): Promise<TestPlanRevision[]> {
+  async function loadRevisions(
+    tenantId: string,
+    planId: string,
+  ): Promise<TestPlanRevision[]> {
     const rows = await db
       .select()
       .from(qepTestPlanRevision)
-      .where(and(eq(qepTestPlanRevision.tenantId, tenantId), eq(qepTestPlanRevision.planId, planId)))
+      .where(
+        and(
+          eq(qepTestPlanRevision.tenantId, tenantId),
+          eq(qepTestPlanRevision.planId, planId),
+        ),
+      )
       .orderBy(asc(qepTestPlanRevision.sealedAt));
     return rows.map(mapRevisionRow);
   }
 
-  async function loadHistory(tenantId: string, planId: string): Promise<TestPlanHistory> {
+  async function loadHistory(
+    tenantId: string,
+    planId: string,
+  ): Promise<TestPlanHistory> {
     const rows = await db
       .select()
       .from(qepTestPlanHistory)
-      .where(and(eq(qepTestPlanHistory.tenantId, tenantId), eq(qepTestPlanHistory.planId, planId)))
+      .where(
+        and(
+          eq(qepTestPlanHistory.tenantId, tenantId),
+          eq(qepTestPlanHistory.planId, planId),
+        ),
+      )
       .orderBy(asc(qepTestPlanHistory.sequence));
     return { entries: rows.map(mapHistoryRow) };
   }
@@ -266,7 +301,12 @@ export function createPostgresTestPlanRepository(db: DatabaseExecutor): TestPlan
   async function syncItems(tenantId: string, plan: TestPlan): Promise<void> {
     await db
       .delete(qepTestPlanItem)
-      .where(and(eq(qepTestPlanItem.tenantId, tenantId), eq(qepTestPlanItem.planId, plan.id)));
+      .where(
+        and(
+          eq(qepTestPlanItem.tenantId, tenantId),
+          eq(qepTestPlanItem.planId, plan.id),
+        ),
+      );
     if (plan.items.length === 0) return;
     await db.insert(qepTestPlanItem).values(
       plan.items.map((item) => ({
@@ -291,7 +331,12 @@ export function createPostgresTestPlanRepository(db: DatabaseExecutor): TestPlan
     const existing = await db
       .select({ id: qepTestPlanApproval.id })
       .from(qepTestPlanApproval)
-      .where(and(eq(qepTestPlanApproval.tenantId, tenantId), eq(qepTestPlanApproval.planId, plan.id)));
+      .where(
+        and(
+          eq(qepTestPlanApproval.tenantId, tenantId),
+          eq(qepTestPlanApproval.planId, plan.id),
+        ),
+      );
     const existingIds = new Set(existing.map((row) => row.id));
     const missing = plan.approvals.filter((approval) => !existingIds.has(approval.id));
     if (missing.length === 0) return;
@@ -315,9 +360,16 @@ export function createPostgresTestPlanRepository(db: DatabaseExecutor): TestPlan
     const existing = await db
       .select({ versionLabel: qepTestPlanRevision.versionLabel })
       .from(qepTestPlanRevision)
-      .where(and(eq(qepTestPlanRevision.tenantId, tenantId), eq(qepTestPlanRevision.planId, plan.id)));
+      .where(
+        and(
+          eq(qepTestPlanRevision.tenantId, tenantId),
+          eq(qepTestPlanRevision.planId, plan.id),
+        ),
+      );
     const existingLabels = new Set(existing.map((row) => row.versionLabel));
-    const missing = plan.revisions.filter((revision) => !existingLabels.has(revision.versionLabel));
+    const missing = plan.revisions.filter(
+      (revision) => !existingLabels.has(revision.versionLabel),
+    );
     if (missing.length === 0) return;
     await db.insert(qepTestPlanRevision).values(
       missing.map((revision) => ({
@@ -338,7 +390,12 @@ export function createPostgresTestPlanRepository(db: DatabaseExecutor): TestPlan
     const existing = await db
       .select()
       .from(qepTestPlanHistory)
-      .where(and(eq(qepTestPlanHistory.tenantId, tenantId), eq(qepTestPlanHistory.planId, plan.id)));
+      .where(
+        and(
+          eq(qepTestPlanHistory.tenantId, tenantId),
+          eq(qepTestPlanHistory.planId, plan.id),
+        ),
+      );
     const start = existing.length;
     if (plan.history.entries.length <= start) return;
     const inserts = plan.history.entries.slice(start).map((entry) => ({
@@ -379,7 +436,10 @@ export function createPostgresTestPlanRepository(db: DatabaseExecutor): TestPlan
   return {
     async create(plan) {
       try {
-        const [row] = await db.insert(qepTestPlan).values(toPlanRowValues(plan)).returning();
+        const [row] = await db
+          .insert(qepTestPlan)
+          .values(toPlanRowValues(plan))
+          .returning();
         if (!row) {
           throw new PlanConflictError("Failed to create Test Plan");
         }

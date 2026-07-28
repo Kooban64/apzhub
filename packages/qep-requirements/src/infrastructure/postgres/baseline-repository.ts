@@ -58,7 +58,9 @@ function mapBaselineRow(
     ...(row.integrityFingerprint !== null
       ? { integrityFingerprint: row.integrityFingerprint }
       : {}),
-    ...(row.integrityAlgorithm !== null ? { integrityAlgorithm: row.integrityAlgorithm } : {}),
+    ...(row.integrityAlgorithm !== null
+      ? { integrityAlgorithm: row.integrityAlgorithm }
+      : {}),
     ...(row.integritySchemaVersion !== null
       ? { integritySchemaVersion: row.integritySchemaVersion }
       : {}),
@@ -112,7 +114,10 @@ export function createPostgresRequirementBaselineRepository(
       .select()
       .from(qepRequirementBaseline)
       .where(
-        and(eq(qepRequirementBaseline.tenantId, tenantId), eq(qepRequirementBaseline.id, id)),
+        and(
+          eq(qepRequirementBaseline.tenantId, tenantId),
+          eq(qepRequirementBaseline.id, id),
+        ),
       )
       .limit(1);
     return rows[0] ?? null;
@@ -230,7 +235,9 @@ export function createPostgresRequirementBaselineRepository(
             "Only draft requirement baselines may be updated",
           );
         }
-        throw new QepBaselineNotFoundError(`Requirement baseline not found: ${baseline.id}`);
+        throw new QepBaselineNotFoundError(
+          `Requirement baseline not found: ${baseline.id}`,
+        );
       }
       const items = await loadItems(baseline.tenantId, baseline.id);
       return mapBaselineRow(updated, items);
@@ -290,20 +297,32 @@ export function createPostgresRequirementBaselineRepository(
         .update(qepRequirementBaseline)
         .set({ updatedAt: new Date(changedAt), updatedBy: changedBy })
         .where(
-          and(eq(qepRequirementBaseline.id, id), eq(qepRequirementBaseline.tenantId, tenantId)),
+          and(
+            eq(qepRequirementBaseline.id, id),
+            eq(qepRequirementBaseline.tenantId, tenantId),
+          ),
         );
       const items = await loadItems(tenantId, id);
       const [row] = await db
         .select()
         .from(qepRequirementBaseline)
         .where(
-          and(eq(qepRequirementBaseline.id, id), eq(qepRequirementBaseline.tenantId, tenantId)),
+          and(
+            eq(qepRequirementBaseline.id, id),
+            eq(qepRequirementBaseline.tenantId, tenantId),
+          ),
         )
         .limit(1);
       return mapBaselineRow(row!, items);
     },
 
-    async removeRequirementVersion(tenantId, id, contentVersionId, changedAt, changedBy) {
+    async removeRequirementVersion(
+      tenantId,
+      id,
+      contentVersionId,
+      changedAt,
+      changedBy,
+    ) {
       const existing = await requireRow(tenantId, id);
       assertDraftMutable(existing);
       const deleted = await db
@@ -325,7 +344,10 @@ export function createPostgresRequirementBaselineRepository(
         .update(qepRequirementBaseline)
         .set({ updatedAt: new Date(changedAt), updatedBy: changedBy })
         .where(
-          and(eq(qepRequirementBaseline.id, id), eq(qepRequirementBaseline.tenantId, tenantId)),
+          and(
+            eq(qepRequirementBaseline.id, id),
+            eq(qepRequirementBaseline.tenantId, tenantId),
+          ),
         )
         .returning();
       const items = await loadItems(tenantId, id);
@@ -369,7 +391,9 @@ export function createPostgresRequirementBaselineRepository(
         )
         .returning();
       if (!row) {
-        throw new QepBaselineInvalidStateError("Requirement baseline could not be locked");
+        throw new QepBaselineInvalidStateError(
+          "Requirement baseline could not be locked",
+        );
       }
       return mapBaselineRow(row, existingItems);
     },
@@ -388,7 +412,10 @@ export function createPostgresRequirementBaselineRepository(
           integrityVerifiedAt: new Date(verification.verifiedAt),
         })
         .where(
-          and(eq(qepRequirementBaseline.id, id), eq(qepRequirementBaseline.tenantId, tenantId)),
+          and(
+            eq(qepRequirementBaseline.id, id),
+            eq(qepRequirementBaseline.tenantId, tenantId),
+          ),
         )
         .returning();
       if (!row) {
@@ -426,7 +453,9 @@ export function createPostgresRequirementBaselineRepository(
         )
         .returning();
       if (!row) {
-        throw new QepBaselineInvalidStateError("Requirement baseline could not be archived");
+        throw new QepBaselineInvalidStateError(
+          "Requirement baseline could not be archived",
+        );
       }
       const items = await loadItems(tenantId, id);
       return mapBaselineRow(row, items);
@@ -477,7 +506,9 @@ export function createPostgresRequirementBaselineRepository(
           ),
         );
       const baselines = await Promise.all(
-        rows.map((row) => loadBaseline(tenantId, row.baselineId as RequirementBaselineId)),
+        rows.map((row) =>
+          loadBaseline(tenantId, row.baselineId as RequirementBaselineId),
+        ),
       );
       return baselines
         .filter((row): row is RequirementBaseline => row !== null)

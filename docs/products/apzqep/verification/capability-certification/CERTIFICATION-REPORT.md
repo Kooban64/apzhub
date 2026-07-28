@@ -1,15 +1,15 @@
 # Certification Report — APZQEP-CERT-040D
 
-| Field | Value |
-| ----- | ----- |
-| Programme | **APZQEP-CERT-040D** |
-| Title | Verification Capability Certification |
-| Package | `@apzhub/qep-verification` **1.0.0** |
-| Status | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
-| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Recommendation | **PRODUCTION READY** |
-| Nature | Documentation / governance only |
-| Date | 2026-07-26 |
+| Field               | Value                                       |
+| ------------------- | ------------------------------------------- |
+| Programme           | **APZQEP-CERT-040D**                        |
+| Title               | Verification Capability Certification       |
+| Package             | `@apzhub/qep-verification` **1.0.0**        |
+| Status              | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
+| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS**       |
+| Recommendation      | **PRODUCTION READY**                        |
+| Nature              | Documentation / governance only             |
+| Date                | 2026-07-26                                  |
 
 ## Decision
 
@@ -21,23 +21,23 @@ The Verification Capability (ARCH-009, ENG-040A, ENG-040B, ARCH-010, ENG-040C) m
 
 Alternative outcomes considered:
 
-| Outcome | Why not selected |
-| ------- | ---------------- |
+| Outcome                               | Why not selected                                                                                   |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | CERTIFIED (without limitations class) | Expected product-scope absences are material enough to retain the PRWL class used for Traceability |
-| NOT_CERTIFIED | No mandatory gate failed |
+| NOT_CERTIFIED                         | No mandatory gate failed                                                                           |
 
 ## Quality gates (snapshot)
 
-| Gate | Result |
-| ---- | ------ |
-| Architecture | PASS |
-| Engineering (domain / infra / workbench / package) | PASS |
-| Documentation | PASS |
-| Testing (161 PASS) | PASS |
-| Security | PASS |
-| Performance | PASS |
-| Operations | PASS |
-| Repository standards | PASS |
+| Gate                                               | Result |
+| -------------------------------------------------- | ------ |
+| Architecture                                       | PASS   |
+| Engineering (domain / infra / workbench / package) | PASS   |
+| Documentation                                      | PASS   |
+| Testing (161 PASS)                                 | PASS   |
+| Security                                           | PASS   |
+| Performance                                        | PASS   |
+| Operations                                         | PASS   |
+| Repository standards                               | PASS   |
 
 ## Version promotion
 

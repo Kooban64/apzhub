@@ -1,5 +1,8 @@
 import type { TestPlan } from "../../domain/test-plan/test-plan";
-import type { StoredTestPlan, TestPlanListQuery } from "../../domain/test-plan/plan-repository";
+import type {
+  StoredTestPlan,
+  TestPlanListQuery,
+} from "../../domain/test-plan/plan-repository";
 
 export function toStoredTestPlan(plan: TestPlan): StoredTestPlan {
   const { uncommittedEvents: _events, ...rest } = plan;
@@ -35,7 +38,10 @@ function overlapsScheduleWindow(
   return true;
 }
 
-export function matchesListFilters(row: StoredTestPlan, query: TestPlanListQuery): boolean {
+export function matchesListFilters(
+  row: StoredTestPlan,
+  query: TestPlanListQuery,
+): boolean {
   if (!query.includeArchived && TERMINAL_STATUSES.has(row.status)) {
     if (!query.status || !TERMINAL_STATUSES.has(query.status)) {
       return false;
@@ -47,7 +53,8 @@ export function matchesListFilters(row: StoredTestPlan, query: TestPlanListQuery
   if (query.priority && row.priority !== query.priority) return false;
   if (query.planType && row.planType !== query.planType) return false;
   if (query.number && row.number !== query.number) return false;
-  if (!overlapsScheduleWindow(row, query.scheduledFrom, query.scheduledTo)) return false;
+  if (!overlapsScheduleWindow(row, query.scheduledFrom, query.scheduledTo))
+    return false;
   if (query.query && !matchesQueryText(row, query.query)) return false;
   return true;
 }

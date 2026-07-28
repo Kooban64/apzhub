@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { createTestSpecification, updateSpecificationContent } from "../../domain/test-specification/test-specification";
+import {
+  createTestSpecification,
+  updateSpecificationContent,
+} from "../../domain/test-specification/test-specification";
 import {
   addSpecificationRelationship,
   approveSpecification,
@@ -65,7 +68,9 @@ describe("TestSpecificationRepository contract (in-memory)", () => {
     const saved = await repo.save(mutated, created.revision);
     expect(saved.revision).toBe(2);
     expect(saved.record.title).toBe("Updated contract title");
-    expect((await repo.listHistory(TENANT, created.record.id)).length).toBeGreaterThan(1);
+    expect((await repo.listHistory(TENANT, created.record.id)).length).toBeGreaterThan(
+      1,
+    );
   });
 
   it("throws revision conflict and not-found for invalid saves", async () => {
@@ -80,9 +85,17 @@ describe("TestSpecificationRepository contract (in-memory)", () => {
       ACTOR,
     );
 
-    await expect(repo.save(mutated, 99)).rejects.toThrow(TestSpecificationRevisionConflictError);
+    await expect(repo.save(mutated, 99)).rejects.toThrow(
+      TestSpecificationRevisionConflictError,
+    );
     await expect(
-      repo.save({ ...mutated, record: { ...mutated.record, id: "tsp_missing" as typeof created.record.id } }, 1),
+      repo.save(
+        {
+          ...mutated,
+          record: { ...mutated.record, id: "tsp_missing" as typeof created.record.id },
+        },
+        1,
+      ),
     ).rejects.toThrow(TestSpecificationNotFoundError);
   });
 
@@ -137,7 +150,10 @@ describe("TestSpecificationRepository contract (in-memory)", () => {
     const versions = await repo.listVersionsByNumber(TENANT, "TS-VERSION-001");
     expect(versions).toHaveLength(2);
 
-    const latestApproved = await repo.findLatestApprovedByNumber(TENANT, "TS-VERSION-001");
+    const latestApproved = await repo.findLatestApprovedByNumber(
+      TENANT,
+      "TS-VERSION-001",
+    );
     expect(latestApproved?.record.id).toBe("tsp_v1");
     expect(latestApproved?.record.status).toBe("approved");
   });

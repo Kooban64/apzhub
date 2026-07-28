@@ -6,17 +6,17 @@ Documentation and version-marker audit only. No functional engineering.
 
 ## Findings
 
-| Check | Result |
-| ----- | ------ |
-| ENG-020D/E/F packs present and accepted | **PASS** |
-| ARCH-005/006 accepted | **PASS** |
-| Part 3 Owner Acceptance recorded under REQ-001 authority | **PASS** |
-| No Traceability/Verification/graph/AI/MCP code introduced by this programme | **PASS** |
-| Package version markers consistent at **1.0.0** | **PASS** (updated this programme) |
-| Governance docs updated to certification state | **PASS** |
-| Historical product-requirements REQ-001 pack preserved | **PASS** |
-| Duplicate competing Workbench shells | **None found** |
-| UI inventing lifecycle without `availableActions` | **None found** (contract tests present) |
+| Check                                                                       | Result                                  |
+| --------------------------------------------------------------------------- | --------------------------------------- |
+| ENG-020D/E/F packs present and accepted                                     | **PASS**                                |
+| ARCH-005/006 accepted                                                       | **PASS**                                |
+| Part 3 Owner Acceptance recorded under REQ-001 authority                    | **PASS**                                |
+| No Traceability/Verification/graph/AI/MCP code introduced by this programme | **PASS**                                |
+| Package version markers consistent at **1.0.0**                             | **PASS** (updated this programme)       |
+| Governance docs updated to certification state                              | **PASS**                                |
+| Historical product-requirements REQ-001 pack preserved                      | **PASS**                                |
+| Duplicate competing Workbench shells                                        | **None found**                          |
+| UI inventing lifecycle without `availableActions`                           | **None found** (contract tests present) |
 
 ## Documentation debt closed by this programme
 

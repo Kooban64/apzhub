@@ -4,7 +4,9 @@ import { computeSpecificationAvailableActions } from "./available-actions";
 
 describe("computeSpecificationAvailableActions", () => {
   it("allows updateDraft and submitForReview from draft when unrestricted", () => {
-    const actions = computeSpecificationAvailableActions({ record: { status: "draft" } as never });
+    const actions = computeSpecificationAvailableActions({
+      record: { status: "draft" } as never,
+    });
     expect(actions).toContain("updateDraft");
     expect(actions).toContain("submitForReview");
     expect(actions).not.toContain("approve");
@@ -32,16 +34,22 @@ describe("computeSpecificationAvailableActions", () => {
 
   it("returns no actions for terminal states", () => {
     expect(
-      computeSpecificationAvailableActions({ record: { status: "withdrawn" } as never }),
+      computeSpecificationAvailableActions({
+        record: { status: "withdrawn" } as never,
+      }),
     ).toEqual([]);
     expect(
-      computeSpecificationAvailableActions({ record: { status: "cancelled" } as never }),
+      computeSpecificationAvailableActions({
+        record: { status: "cancelled" } as never,
+      }),
     ).toEqual([]);
     expect(
       computeSpecificationAvailableActions({ record: { status: "retired" } as never }),
     ).toEqual([]);
     expect(
-      computeSpecificationAvailableActions({ record: { status: "superseded" } as never }),
+      computeSpecificationAvailableActions({
+        record: { status: "superseded" } as never,
+      }),
     ).toEqual([]);
   });
 

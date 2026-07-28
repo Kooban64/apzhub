@@ -26,11 +26,15 @@ describe("computePlanAvailableActions", () => {
 
   it("allows markReady from approved and startExecution from ready", () => {
     expect(computePlanAvailableActions({ status: "approved" })).toContain("markReady");
-    expect(computePlanAvailableActions({ status: "ready" })).toContain("startExecution");
+    expect(computePlanAvailableActions({ status: "ready" })).toContain(
+      "startExecution",
+    );
   });
 
   it("allows complete from in_execution and archive from completed", () => {
-    expect(computePlanAvailableActions({ status: "in_execution" })).toContain("complete");
+    expect(computePlanAvailableActions({ status: "in_execution" })).toContain(
+      "complete",
+    );
     expect(computePlanAvailableActions({ status: "completed" })).toContain("archive");
   });
 
@@ -51,13 +55,19 @@ describe("computePlanAvailableActions", () => {
   });
 
   it("filters actions by explicit permission grants", () => {
-    const readOnly = computePlanAvailableActions({ status: "draft" }, ["qep.plan.read"]);
+    const readOnly = computePlanAvailableActions({ status: "draft" }, [
+      "qep.plan.read",
+    ]);
     expect(readOnly).toEqual([]);
 
-    const submitOnly = computePlanAvailableActions({ status: "draft" }, ["qep.plan.submit"]);
+    const submitOnly = computePlanAvailableActions({ status: "draft" }, [
+      "qep.plan.submit",
+    ]);
     expect(submitOnly).toEqual(["submitForReview"]);
 
-    const wildcard = computePlanAvailableActions({ status: "approved" }, ["qep.plan.*"]);
+    const wildcard = computePlanAvailableActions({ status: "approved" }, [
+      "qep.plan.*",
+    ]);
     expect(wildcard).toContain("markReady");
     expect(wildcard).toContain("supersede");
   });

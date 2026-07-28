@@ -1,18 +1,19 @@
-# APZOR Engineering Standard  
+# APZOR Engineering Standard
+
 # OES-000 — Owner Engineering Specification Standard
 
-| Item | Value |
-| ---- | ----- |
-| Document | **OES-000** |
-| Title | Owner Engineering Specification Standard |
-| Classification | **APZOR Engineering Constitution (Programme Methodology)** |
-| Organisation | APZOR |
-| Owner | APZOR Engineering / Programme Owner |
-| Status | **ACCEPTED / APPROVED / FROZEN** |
-| Version | **1.0.0** (frozen) |
-| Acceptance | [OES-000-OWNER-ACCEPTANCE.md](./OES-000-OWNER-ACCEPTANCE.md) · `20260726T233500Z-OES-000-ACCEPTANCE.json` |
-| Applies to | APZ QEP · APZHUB · ZFConnect · Accord · future APZOR platforms |
-| Related | [Document 000](../../000-apzhub-engineering-constitution.md) · [OES-001](./OES-001-Engineering-Writing-Standard.md) · [Platform Delivery Standard](../platform-delivery/PLATFORM-DELIVERY-STANDARD.md) · [AI Governance](../../governance/AI-GOVERNANCE.md) |
+| Item           | Value                                                                                                                                                                                                                                                       |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document       | **OES-000**                                                                                                                                                                                                                                                 |
+| Title          | Owner Engineering Specification Standard                                                                                                                                                                                                                    |
+| Classification | **APZOR Engineering Constitution (Programme Methodology)**                                                                                                                                                                                                  |
+| Organisation   | APZOR                                                                                                                                                                                                                                                       |
+| Owner          | APZOR Engineering / Programme Owner                                                                                                                                                                                                                         |
+| Status         | **ACCEPTED / APPROVED / FROZEN**                                                                                                                                                                                                                            |
+| Version        | **1.0.0** (frozen)                                                                                                                                                                                                                                          |
+| Acceptance     | [OES-000-OWNER-ACCEPTANCE.md](./OES-000-OWNER-ACCEPTANCE.md) · `20260726T233500Z-OES-000-ACCEPTANCE.json`                                                                                                                                                   |
+| Applies to     | APZ QEP · APZHUB · ZFConnect · Accord · future APZOR platforms                                                                                                                                                                                              |
+| Related        | [Document 000](../../000-apzhub-engineering-constitution.md) · [OES-001](./OES-001-Engineering-Writing-Standard.md) · [Platform Delivery Standard](../platform-delivery/PLATFORM-DELIVERY-STANDARD.md) · [AI Governance](../../governance/AI-GOVERNANCE.md) |
 
 ---
 
@@ -53,11 +54,11 @@ Owner Acceptance → Implementation → Certification → Freeze
 
 ### 2.1 Relationship to Document 000
 
-| Concern | Authority |
-| ------- | --------- |
-| APZHUB layered architecture, technology stack, module/service/connector rules | **Document 000** (supreme) |
+| Concern                                                                                                      | Authority                                       |
+| ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- |
+| APZHUB layered architecture, technology stack, module/service/connector rules                                | **Document 000** (supreme)                      |
 | How Owner Engineering programmes are specified, gated, accepted, certified, and frozen across APZOR products | **OES-000** (supreme for programme methodology) |
-| How OES documents are written (language, RFC 2119, structure, cross-refs) | **OES-001** |
+| How OES documents are written (language, RFC 2119, structure, cross-refs)                                    | **OES-001**                                     |
 
 On conflict about **platform architecture or stack**, Document 000 wins.  
 On conflict about **programme methodology, OES structure, or Owner gates**, OES-000 wins for APZOR engineering programmes.
@@ -103,13 +104,13 @@ Examples:
   APZHUB-OES-ENG-00xx                              → APZHUB engineering OES
 ```
 
-| Class | Meaning |
-| ----- | ------- |
+| Class  | Meaning                                                                                       |
+| ------ | --------------------------------------------------------------------------------------------- |
 | `ARCH` | Architecture / design — documentation only; no production UI/code unless Owner says otherwise |
-| `ENG` | Engineering implementation programme |
-| `CERT` | Capability certification programme |
-| `OR` | Operational readiness programme |
-| `STD` | Cross-cutting standard (reserved; OES-000 uses bare id) |
+| `ENG`  | Engineering implementation programme                                                          |
+| `CERT` | Capability certification programme                                                            |
+| `OR`   | Operational readiness programme                                                               |
+| `STD`  | Cross-cutting standard (reserved; OES-000 uses bare id)                                       |
 
 ---
 
@@ -117,14 +118,14 @@ Examples:
 
 An OES is **mandatory** before:
 
-| Trigger | Minimum OES |
-| ------- | ----------- |
-| New business capability | Capability Architecture OES |
-| Domain model work | Domain Engineering OES (or Architecture OES that explicitly includes Domain) |
-| Persistence / APIs / platform integration | Infrastructure Engineering OES |
-| Any Workbench / presentation UI | **Presentation / Workbench Architecture OES** (complete) before Workbench Engineering |
-| Certification claim | Certification OES |
-| Breaking change to a frozen capability | Future Change Programme OES |
+| Trigger                                   | Minimum OES                                                                           |
+| ----------------------------------------- | ------------------------------------------------------------------------------------- |
+| New business capability                   | Capability Architecture OES                                                           |
+| Domain model work                         | Domain Engineering OES (or Architecture OES that explicitly includes Domain)          |
+| Persistence / APIs / platform integration | Infrastructure Engineering OES                                                        |
+| Any Workbench / presentation UI           | **Presentation / Workbench Architecture OES** (complete) before Workbench Engineering |
+| Certification claim                       | Certification OES                                                                     |
+| Breaking change to a frozen capability    | Future Change Programme OES                                                           |
 
 **Exception:** Trivial maintenance under an existing Freeze may proceed under Maintenance rules (Section 11) without a new Architecture OES — never for new capability surfaces.
 
@@ -162,19 +163,19 @@ Future Change Programme  → (re-enter at the appropriate phase)
 
 ### 5.1 Phase ownership
 
-| Phase | Owns | Does not own |
-| ----- | ---- | ------------ |
-| Capability Architecture | Boundaries, aggregates, lifecycle, governance, non-goals | Code, UI, persistence |
-| Domain Engineering | Business rules, invariants, domain events, pure policies | Persistence, REST, UI |
-| Infrastructure Engineering | Repositories, APIs, transactions, search/audit/permission integration | Business rules, Workbench UI |
-| Presentation / Workbench Architecture | Screens, navigation, UX contracts, a11y, deep links | React/Next implementation, business rules |
-| Presentation / Workbench Engineering | UI implementation against accepted Workbench Architecture + REST | New business rules, new persistence |
-| Operational Readiness | Runbooks, health, ops evidence, go-live checks | Feature invention |
-| Capability Certification | Evidence that the capability meets its OES / DoD | Redesign |
-| Version Promotion | SemVer / baseline promotion decision | Silent unfreeze |
-| Freeze | Immutability of certified baseline | Ongoing feature delivery |
-| Maintenance | Defects, security patches within Freeze rules | Scope expansion |
-| Future Change Programme | Authorised evolution | Bypass of Architecture / Acceptance |
+| Phase                                 | Owns                                                                  | Does not own                              |
+| ------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------- |
+| Capability Architecture               | Boundaries, aggregates, lifecycle, governance, non-goals              | Code, UI, persistence                     |
+| Domain Engineering                    | Business rules, invariants, domain events, pure policies              | Persistence, REST, UI                     |
+| Infrastructure Engineering            | Repositories, APIs, transactions, search/audit/permission integration | Business rules, Workbench UI              |
+| Presentation / Workbench Architecture | Screens, navigation, UX contracts, a11y, deep links                   | React/Next implementation, business rules |
+| Presentation / Workbench Engineering  | UI implementation against accepted Workbench Architecture + REST      | New business rules, new persistence       |
+| Operational Readiness                 | Runbooks, health, ops evidence, go-live checks                        | Feature invention                         |
+| Capability Certification              | Evidence that the capability meets its OES / DoD                      | Redesign                                  |
+| Version Promotion                     | SemVer / baseline promotion decision                                  | Silent unfreeze                           |
+| Freeze                                | Immutability of certified baseline                                    | Ongoing feature delivery                  |
+| Maintenance                           | Defects, security patches within Freeze rules                         | Scope expansion                           |
+| Future Change Programme               | Authorised evolution                                                  | Bypass of Architecture / Acceptance       |
 
 ### 5.2 Hard sequencing rules
 
@@ -189,16 +190,16 @@ Future Change Programme  → (re-enter at the appropriate phase)
 
 ## 6. Layer decision rules
 
-| Decision class | Belongs in | Forbidden in |
-| -------------- | ---------- | ------------ |
-| Business invariants, lifecycle legality | Domain | Infrastructure, Workbench |
-| Persistence schema, concurrency, tenancy | Infrastructure | Domain, Workbench |
-| availableActions, DTO projection | Infrastructure / contracts | Workbench (render only) |
-| Screen layout, navigation, explorer, inspector | Workbench Architecture → Engineering | Domain |
-| Permission *checks* | Infrastructure / Platform Authz | Workbench inventing grants |
-| Permission *catalogue additions* | Owner-authorised programme | Silent AI addition |
-| Search indexing hooks | Infrastructure | Workbench owning search engines |
-| Audit emission | Infrastructure / Platform Audit | Modules inventing audit stores |
+| Decision class                                 | Belongs in                           | Forbidden in                    |
+| ---------------------------------------------- | ------------------------------------ | ------------------------------- |
+| Business invariants, lifecycle legality        | Domain                               | Infrastructure, Workbench       |
+| Persistence schema, concurrency, tenancy       | Infrastructure                       | Domain, Workbench               |
+| availableActions, DTO projection               | Infrastructure / contracts           | Workbench (render only)         |
+| Screen layout, navigation, explorer, inspector | Workbench Architecture → Engineering | Domain                          |
+| Permission _checks_                            | Infrastructure / Platform Authz      | Workbench inventing grants      |
+| Permission _catalogue additions_               | Owner-authorised programme           | Silent AI addition              |
+| Search indexing hooks                          | Infrastructure                       | Workbench owning search engines |
+| Audit emission                                 | Infrastructure / Platform Audit      | Modules inventing audit stores  |
 
 **Principle:** The Workbench never owns business rules and never bypasses REST. The server remains authoritative. The Workbench is optimistic and state-driven via `availableActions`.
 
@@ -208,14 +209,14 @@ Future Change Programme  → (re-enter at the appropriate phase)
 
 The **Programme Owner** (APZOR Owner / delegated Owner):
 
-| Duty | Owner |
-| ---- | ----- |
-| Authorise programmes and OES | ✅ |
-| Accept Architecture / Domain / Infrastructure / Workbench Architecture / Workbench Engineering / OR / Certification | ✅ |
-| Decide Freeze and Version Promotion | ✅ |
-| Amend OES-000 | ✅ |
-| Delegate day-to-day implementation review | May delegate; Acceptance remains Owner |
-| Override AI recommendations | ✅ always |
+| Duty                                                                                                                | Owner                                  |
+| ------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| Authorise programmes and OES                                                                                        | ✅                                     |
+| Accept Architecture / Domain / Infrastructure / Workbench Architecture / Workbench Engineering / OR / Certification | ✅                                     |
+| Decide Freeze and Version Promotion                                                                                 | ✅                                     |
+| Amend OES-000                                                                                                       | ✅                                     |
+| Delegate day-to-day implementation review                                                                           | May delegate; Acceptance remains Owner |
+| Override AI recommendations                                                                                         | ✅ always                              |
 
 No Acceptance, Certification, Freeze, or Version Promotion is valid without Owner Decision recorded in the repository (acceptance evidence JSON and/or OWNER-ACCEPTANCE.md).
 
@@ -260,17 +261,17 @@ AI must **never** decide a Freeze, unfreeze a baseline, or “helpfully” modif
 
 Every ENG / CERT programme must satisfy gates appropriate to its phase. Minimum permanent gates:
 
-| Gate | Architecture OES | Domain | Infrastructure | Workbench Eng | Certification |
-| ---- | ---------------- | ------ | -------------- | ------------- | ------------- |
-| Architecture compliance (001–029 / product ARCH) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Domain purity (no infra in domain) | — | ✅ | ✅ | ✅ | ✅ |
-| No Workbench in Domain/Infra programmes | ✅ | ✅ | ✅ | — | ✅ |
-| Tests + coverage targets in OES | — | ✅ | ✅ | ✅ | ✅ |
-| Typecheck / lint / CI | — | ✅ | ✅ | ✅ | ✅ |
-| Docs pack complete | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Owner Acceptance record | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Accessibility (WCAG AA) for UI | Design req. | — | — | ✅ | ✅ |
-| Security / least privilege | Design req. | ✅ | ✅ | ✅ | ✅ |
+| Gate                                             | Architecture OES | Domain | Infrastructure | Workbench Eng | Certification |
+| ------------------------------------------------ | ---------------- | ------ | -------------- | ------------- | ------------- |
+| Architecture compliance (001–029 / product ARCH) | ✅               | ✅     | ✅             | ✅            | ✅            |
+| Domain purity (no infra in domain)               | —                | ✅     | ✅             | ✅            | ✅            |
+| No Workbench in Domain/Infra programmes          | ✅               | ✅     | ✅             | —             | ✅            |
+| Tests + coverage targets in OES                  | —                | ✅     | ✅             | ✅            | ✅            |
+| Typecheck / lint / CI                            | —                | ✅     | ✅             | ✅            | ✅            |
+| Docs pack complete                               | ✅               | ✅     | ✅             | ✅            | ✅            |
+| Owner Acceptance record                          | ✅               | ✅     | ✅             | ✅            | ✅            |
+| Accessibility (WCAG AA) for UI                   | Design req.      | —      | —              | ✅            | ✅            |
+| Security / least privilege                       | Design req.      | ✅     | ✅             | ✅            | ✅            |
 
 Numeric coverage targets are set per ENG OES (typical APZ QEP: ≥95% lines/functions, ≥90% branches for domain/infra packages).
 
@@ -282,12 +283,12 @@ Numeric coverage targets are set per ENG OES (typical APZ QEP: ≥95% lines/func
 
 Architecture and Workbench Architecture OES documents are written in Parts. Recommended default:
 
-| Part | Contents |
-| ---- | -------- |
-| Part 1 | Executive summary, objectives, context, principles, constraints, non-goals |
-| Part 2 | Information architecture, navigation, explorer, search |
-| Part 3 | Inspector, editors, relationships, version comparison |
-| Part 4 | Dashboards, review/lifecycle UX, accessibility |
+| Part   | Contents                                                                    |
+| ------ | --------------------------------------------------------------------------- |
+| Part 1 | Executive summary, objectives, context, principles, constraints, non-goals  |
+| Part 2 | Information architecture, navigation, explorer, search                      |
+| Part 3 | Inspector, editors, relationships, version comparison                       |
+| Part 4 | Dashboards, review/lifecycle UX, accessibility                              |
 | Part 5 | Performance, security, AI/MCP boundaries, deliverables, acceptance criteria |
 
 Products may adjust Part titles when the capability has no UI (e.g. Domain OES Parts map to Aggregate / Lifecycle / Policies / Events / Services).
@@ -317,13 +318,13 @@ Capability implementation packs remain under `docs/products/...` (or product tre
 
 ### 10.3 Compulsory artefacts at programme close
 
-| Artefact | Required |
-| -------- | -------- |
-| OES (complete for design programmes) | ✅ |
-| Completion report | ✅ |
-| Owner Acceptance record | ✅ |
-| Evidence JSON | ✅ |
-| Governance pointer updates (CURRENT-MILESTONE, etc.) | ✅ |
+| Artefact                                             | Required |
+| ---------------------------------------------------- | -------- |
+| OES (complete for design programmes)                 | ✅       |
+| Completion report                                    | ✅       |
+| Owner Acceptance record                              | ✅       |
+| Evidence JSON                                        | ✅       |
+| Governance pointer updates (CURRENT-MILESTONE, etc.) | ✅       |
 
 ---
 
@@ -355,19 +356,19 @@ Any scope beyond Maintenance requires a new Owner-authorised OES that re-enters 
 
 ### 12.1 Authority matrix
 
-| Role | Human Owner | AI (Cursor / agents) |
-| ---- | ----------- | -------------------- |
-| Product Vision | ✅ Decide | Advisory only |
-| Architecture Approval | ✅ Decide | Recommend |
-| OES authorship | ✅ Authorise / Accept | Draft / assist under Owner direction |
-| Engineering Implementation | Review / Accept | ✅ Implement within accepted OES |
-| Coding Standards | ✅ Define | Apply |
-| Test evidence | Review | Produce |
-| Certification Decision | ✅ Decide | Evidence only |
-| Version Promotion | ✅ Decide | Recommend |
-| Freeze | ✅ Decide | **Never decide** |
-| Unfreeze / scope expansion | ✅ Decide | **Never decide** |
-| Secrets handling | ✅ Accountable | Never invent or commit secrets |
+| Role                       | Human Owner           | AI (Cursor / agents)                 |
+| -------------------------- | --------------------- | ------------------------------------ |
+| Product Vision             | ✅ Decide             | Advisory only                        |
+| Architecture Approval      | ✅ Decide             | Recommend                            |
+| OES authorship             | ✅ Authorise / Accept | Draft / assist under Owner direction |
+| Engineering Implementation | Review / Accept       | ✅ Implement within accepted OES     |
+| Coding Standards           | ✅ Define             | Apply                                |
+| Test evidence              | Review                | Produce                              |
+| Certification Decision     | ✅ Decide             | Evidence only                        |
+| Version Promotion          | ✅ Decide             | Recommend                            |
+| Freeze                     | ✅ Decide             | **Never decide**                     |
+| Unfreeze / scope expansion | ✅ Decide             | **Never decide**                     |
+| Secrets handling           | ✅ Accountable        | Never invent or commit secrets       |
 
 ### 12.2 AI operating rules
 
@@ -395,18 +396,18 @@ Any scope beyond Maintenance requires a new Owner-authorised OES that re-enters 
 
 Every capability OES SHALL open with Document Information and SHALL include, as applicable to its class:
 
-1. Executive Summary  
-2. Programme Objective  
-3. Business Context  
-4. Architectural / Engineering Principles  
-5. Dependencies and Baselines  
-6. Capability Boundaries (owns / does not own)  
-7. Explicit Non-Goals  
-8. Body Parts (IA, Domain, Infra, UX, etc.)  
-9. Quality Gates  
-10. Deliverables  
-11. Acceptance Criteria  
-12. STOP Condition / Next Gate  
+1. Executive Summary
+2. Programme Objective
+3. Business Context
+4. Architectural / Engineering Principles
+5. Dependencies and Baselines
+6. Capability Boundaries (owns / does not own)
+7. Explicit Non-Goals
+8. Body Parts (IA, Domain, Infra, UX, etc.)
+9. Quality Gates
+10. Deliverables
+11. Acceptance Criteria
+12. STOP Condition / Next Gate
 
 Tone: engineering standard — not marketing, not a prompt.
 

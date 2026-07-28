@@ -37,8 +37,14 @@ export const qepTestSpecification = pgTable(
     minorVersion: integer("minor_version").notNull().default(1),
     versionLabel: varchar("version_label", { length: 32 }).notNull(),
     isAuthoritative: boolean("is_authoritative").notNull().default(false),
-    preconditionsJson: jsonb("preconditions_json").$type<string[]>().notNull().default([]),
-    postconditionsJson: jsonb("postconditions_json").$type<string[]>().notNull().default([]),
+    preconditionsJson: jsonb("preconditions_json")
+      .$type<string[]>()
+      .notNull()
+      .default([]),
+    postconditionsJson: jsonb("postconditions_json")
+      .$type<string[]>()
+      .notNull()
+      .default([]),
     acceptanceCriteriaJson: jsonb("acceptance_criteria_json")
       .$type<string[]>()
       .notNull()

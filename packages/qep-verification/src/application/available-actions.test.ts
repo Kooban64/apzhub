@@ -55,22 +55,19 @@ describe("computeVerificationAvailableActions", () => {
   });
 
   it("filters actions by explicit permission grants", () => {
-    const viewOnly = computeVerificationAvailableActions(
-      { status: "draft" },
-      ["qep.verification.view"],
-    );
+    const viewOnly = computeVerificationAvailableActions({ status: "draft" }, [
+      "qep.verification.view",
+    ]);
     expect(viewOnly).toEqual([]);
 
-    const requestOnly = computeVerificationAvailableActions(
-      { status: "draft" },
-      ["qep.verification.request"],
-    );
+    const requestOnly = computeVerificationAvailableActions({ status: "draft" }, [
+      "qep.verification.request",
+    ]);
     expect(requestOnly).toEqual(["request"]);
 
-    const wildcard = computeVerificationAvailableActions(
-      { status: "verified" },
-      ["qep.verification.*"],
-    );
+    const wildcard = computeVerificationAvailableActions({ status: "verified" }, [
+      "qep.verification.*",
+    ]);
     expect(wildcard).toContain("retire");
     expect(wildcard).toContain("supersede");
   });

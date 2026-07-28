@@ -146,7 +146,10 @@ export const qepRelationshipIdParamSchema = z
   .string()
   .min(1)
   .max(128)
-  .regex(relationshipIdPattern, "Invalid QEP requirement relationship identifier format");
+  .regex(
+    relationshipIdPattern,
+    "Invalid QEP requirement relationship identifier format",
+  );
 
 const qepRelationshipEndpointSchema = z
   .object({
@@ -309,18 +312,34 @@ export type QepListQuery = z.infer<typeof qepListQuerySchema>;
 export type QepSearchQuery = z.infer<typeof qepSearchQuerySchema>;
 export type QepRequirementCreateBody = z.infer<typeof qepRequirementCreateBodySchema>;
 export type QepRequirementUpdateBody = z.infer<typeof qepRequirementUpdateBodySchema>;
-export type QepContentVersionCompareBody = z.infer<typeof qepContentVersionCompareBodySchema>;
+export type QepContentVersionCompareBody = z.infer<
+  typeof qepContentVersionCompareBodySchema
+>;
 export type QepBaselineListQuery = z.infer<typeof qepBaselineListQuerySchema>;
 export type QepBaselineCreateBody = z.infer<typeof qepBaselineCreateBodySchema>;
-export type QepBaselineUpdateDraftBody = z.infer<typeof qepBaselineUpdateDraftBodySchema>;
+export type QepBaselineUpdateDraftBody = z.infer<
+  typeof qepBaselineUpdateDraftBodySchema
+>;
 export type QepBaselineAddItemBody = z.infer<typeof qepBaselineAddItemBodySchema>;
 export type QepBaselineCompareBody = z.infer<typeof qepBaselineCompareBodySchema>;
 export type QepRelationshipListQuery = z.infer<typeof qepRelationshipListQuerySchema>;
 export type QepRelationshipCreateBody = z.infer<typeof qepRelationshipCreateBodySchema>;
-export type QepRelationshipUpdateProfileBody = z.infer<typeof qepRelationshipUpdateProfileBodySchema>;
-export type QepRelationshipRationaleBody = z.infer<typeof qepRelationshipRationaleBodySchema>;
-export type QepRelationshipStrengthBody = z.infer<typeof qepRelationshipStrengthBodySchema>;
-export type QepRelationshipClassificationBody = z.infer<typeof qepRelationshipClassificationBodySchema>;
-export type QepRelationshipCriticalityBody = z.infer<typeof qepRelationshipCriticalityBodySchema>;
+export type QepRelationshipUpdateProfileBody = z.infer<
+  typeof qepRelationshipUpdateProfileBodySchema
+>;
+export type QepRelationshipRationaleBody = z.infer<
+  typeof qepRelationshipRationaleBodySchema
+>;
+export type QepRelationshipStrengthBody = z.infer<
+  typeof qepRelationshipStrengthBodySchema
+>;
+export type QepRelationshipClassificationBody = z.infer<
+  typeof qepRelationshipClassificationBodySchema
+>;
+export type QepRelationshipCriticalityBody = z.infer<
+  typeof qepRelationshipCriticalityBodySchema
+>;
 export type QepRelationshipScopeBody = z.infer<typeof qepRelationshipScopeBodySchema>;
-export type QepRelationshipSupersedeBody = z.infer<typeof qepRelationshipSupersedeBodySchema>;
+export type QepRelationshipSupersedeBody = z.infer<
+  typeof qepRelationshipSupersedeBodySchema
+>;

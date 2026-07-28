@@ -3,20 +3,20 @@
 > This is a **pointer**. The canonical, authoritative pack lives at:
 > [`docs/products/apzqep/test-plans/OES-ENG-070A/`](../../../../products/apzqep/test-plans/OES-ENG-070A/README.md)
 
-| Item | Value |
-| ---- | ----- |
-| Document | **APZQEP-OES-ENG-070A** |
-| Title | Test Plans Workbench Engineering Specification |
-| Programme | APZQEP-OES-ENG-070A |
-| Capability | Test Plans |
-| Layer | Presentation / Workbench Engineering Specification |
-| Status | **ACCEPTED / APPROVED / ENGINEERING SPECIFICATION BASELINED / PROGRAMME CLOSED** |
-| Version | 1.0.0-oes |
-| Date | 2026-07-28 |
-| Architecture baseline | [APZQEP-ARCH-014](../OES-ARCH-014-Test-Plans-Workbench-Architecture/README.md) **ACCEPTED / ARCHITECTURE BASELINED / CLOSED** |
-| Domain baseline | `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** (CERT-060A) |
-| Infrastructure baseline | `@apzhub/qep-test-plans` **0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED** (CERT-060B) |
-| Canonical pack | [docs/products/apzqep/test-plans/OES-ENG-070A/](../../../../products/apzqep/test-plans/OES-ENG-070A/README.md) |
+| Item                    | Value                                                                                                                         |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Document                | **APZQEP-OES-ENG-070A**                                                                                                       |
+| Title                   | Test Plans Workbench Engineering Specification                                                                                |
+| Programme               | APZQEP-OES-ENG-070A                                                                                                           |
+| Capability              | Test Plans                                                                                                                    |
+| Layer                   | Presentation / Workbench Engineering Specification                                                                            |
+| Status                  | **ACCEPTED / APPROVED / ENGINEERING SPECIFICATION BASELINED / PROGRAMME CLOSED**                                              |
+| Version                 | 1.0.0-oes                                                                                                                     |
+| Date                    | 2026-07-28                                                                                                                    |
+| Architecture baseline   | [APZQEP-ARCH-014](../OES-ARCH-014-Test-Plans-Workbench-Architecture/README.md) **ACCEPTED / ARCHITECTURE BASELINED / CLOSED** |
+| Domain baseline         | `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** (CERT-060A)                                                                      |
+| Infrastructure baseline | `@apzhub/qep-test-plans` **0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED** (CERT-060B)                                             |
+| Canonical pack          | [docs/products/apzqep/test-plans/OES-ENG-070A/](../../../../products/apzqep/test-plans/OES-ENG-070A/README.md)                |
 
 ## Purpose
 

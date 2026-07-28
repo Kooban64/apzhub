@@ -32,10 +32,27 @@
   "qualityGates": {
     "aggregate": "ALL_MANDATORY_CAPABILITY_GATES_PASS",
     "reverificationCommand": "pnpm exec vitest run packages/qep-test-plans apps/web/components/qep/qep-test-plan-views.test.tsx apps/web/lib/api/v1/handlers/qep-test-plan.test.ts",
-    "reverificationTests": { "testFiles": 11, "total": 124, "failed": 0, "result": "PASS", "reverifiedUtc": "2026-07-28" },
+    "reverificationTests": {
+      "testFiles": 11,
+      "total": 124,
+      "failed": 0,
+      "result": "PASS",
+      "reverifiedUtc": "2026-07-28"
+    },
     "packageTests": { "total": 104, "failed": 0, "result": "PASS" },
-    "presentationSpecificTests": { "routes": 5, "views": 15, "total": 20, "failed": 0, "result": "PASS" },
-    "restHandlerTests": { "total": 5, "failed": 0, "result": "PASS", "file": "apps/web/lib/api/v1/handlers/qep-test-plan.test.ts" },
+    "presentationSpecificTests": {
+      "routes": 5,
+      "views": 15,
+      "total": 20,
+      "failed": 0,
+      "result": "PASS"
+    },
+    "restHandlerTests": {
+      "total": 5,
+      "failed": 0,
+      "result": "PASS",
+      "file": "apps/web/lib/api/v1/handlers/qep-test-plan.test.ts"
+    },
     "typecheck": "PASS",
     "playwrightSpecPresent": true,
     "playwrightSpecPath": "testing/playwright/e2e/apzqep-eng-070a-test-plans-workbench.spec.ts",

@@ -2,12 +2,12 @@
 
 > **PUBLISHED.** APZQEP-CERT-080A is **CERTIFIED / APPROVED / CLOSED**; Version Promotion to **1.0.0** is **APPLIED**; APZQEP-FREEZE-080A is **FROZEN / APPROVED / CLOSED**. `@apzhub/qep-test-plans` is **1.0.0 CERTIFIED / FROZEN / BASELINE ESTABLISHED**.
 
-| Field | Value |
-| ----- | ----- |
-| Package | `@apzhub/qep-test-plans` **1.0.0 CERTIFIED / FROZEN** |
-| Programme | APZQEP-CERT-080A (Certification) · APZQEP-FREEZE-080A (Freeze) |
-| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Date | 2026-07-28 |
+| Field               | Value                                                          |
+| ------------------- | -------------------------------------------------------------- |
+| Package             | `@apzhub/qep-test-plans` **1.0.0 CERTIFIED / FROZEN**          |
+| Programme           | APZQEP-CERT-080A (Certification) · APZQEP-FREEZE-080A (Freeze) |
+| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS**                          |
+| Date                | 2026-07-28                                                     |
 
 ## What's included
 

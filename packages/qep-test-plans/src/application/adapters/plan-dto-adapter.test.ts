@@ -41,14 +41,26 @@ describe("toPlanDto", () => {
     const withItem = addPlanItem(
       stored,
       { actorId: ACTOR, changedAt: LATER },
-      { id: "tpi_1", specificationId: "tsp_1", specificationVersionPin: "1.0", sequence: 0 },
+      {
+        id: "tpi_1",
+        specificationId: "tsp_1",
+        specificationVersionPin: "1.0",
+        sequence: 0,
+      },
     );
     const storedWithItem = await repo.save(withItem, stored.revision);
 
-    const submitted = submitForReview(storedWithItem, { actorId: ACTOR, changedAt: LATER });
+    const submitted = submitForReview(storedWithItem, {
+      actorId: ACTOR,
+      changedAt: LATER,
+    });
     const storedSubmitted = await repo.save(submitted, storedWithItem.revision);
 
-    const approved = approvePlan(storedSubmitted, { actorId: ACTOR, changedAt: LATER, allowSelfApproval: true });
+    const approved = approvePlan(storedSubmitted, {
+      actorId: ACTOR,
+      changedAt: LATER,
+      allowSelfApproval: true,
+    });
     const storedApproved = await repo.save(approved, storedSubmitted.revision);
 
     const dto = toPlanDto(storedApproved);
@@ -58,7 +70,11 @@ describe("toPlanDto", () => {
     expect(dto.title).toBe("DTO plan");
     expect(dto.description).toBe("Description");
     expect(dto.objective).toBe("Objective");
-    expect(dto.scope).toEqual({ class: "release", label: "R1", externalRef: undefined });
+    expect(dto.scope).toEqual({
+      class: "release",
+      label: "R1",
+      externalRef: undefined,
+    });
     expect(dto.status).toBe("approved");
     expect(dto.priority).toBe("high");
     expect(dto.planType).toBe("release");

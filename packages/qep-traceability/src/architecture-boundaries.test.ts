@@ -48,7 +48,7 @@ describe("APZQEP-ENG-030C architecture boundaries", () => {
     const forbidden = [
       "drizzle",
       "postgres",
-      "\"pg\"",
+      '"pg"',
       "'pg'",
       "@apzhub/config",
       "@apzhub/platform-services",
@@ -60,7 +60,9 @@ describe("APZQEP-ENG-030C architecture boundaries", () => {
     for (const file of collectSourceFiles(domainRoot)) {
       const source = readFileSync(file, "utf8");
       for (const token of forbidden) {
-        expect(source.includes(token), `${file} must not reference ${token}`).toBe(false);
+        expect(source.includes(token), `${file} must not reference ${token}`).toBe(
+          false,
+        );
       }
       expect(sqlish.test(source), `${file} must not contain SQL`).toBe(false);
     }
@@ -72,7 +74,9 @@ describe("APZQEP-ENG-030C architecture boundaries", () => {
     for (const file of collectSourceFiles(applicationRoot)) {
       const source = readFileSync(file, "utf8");
       for (const token of forbidden) {
-        expect(source.includes(token), `${file} must not reference ${token}`).toBe(false);
+        expect(source.includes(token), `${file} must not reference ${token}`).toBe(
+          false,
+        );
       }
     }
   });
@@ -87,22 +91,31 @@ describe("APZQEP-ENG-030C architecture boundaries", () => {
 
   it("forbids react/next imports in the presentation layer (route/permission contracts only)", () => {
     const presentationRoot = join(packageRoot, "src", "presentation");
-    const forbidden = ["\"react\"", "'react'", "next/", "react-dom"];
+    const forbidden = ['"react"', "'react'", "next/", "react-dom"];
     for (const file of collectSourceFiles(presentationRoot)) {
       const source = readFileSync(file, "utf8");
       for (const token of forbidden) {
-        expect(source.includes(token), `${file} must not reference ${token}`).toBe(false);
+        expect(source.includes(token), `${file} must not reference ${token}`).toBe(
+          false,
+        );
       }
     }
   });
 
   it("forbids Coverage/Impact engine concerns in the domain layer (ARCH-007 — no graph/coverage/impact)", () => {
     const domainRoot = join(packageRoot, "src", "domain");
-    const forbidden = ["CoverageEngine", "ImpactEngine", "coverage-engine", "impact-engine"];
+    const forbidden = [
+      "CoverageEngine",
+      "ImpactEngine",
+      "coverage-engine",
+      "impact-engine",
+    ];
     for (const file of collectSourceFiles(domainRoot)) {
       const source = readFileSync(file, "utf8");
       for (const token of forbidden) {
-        expect(source.includes(token), `${file} must not reference ${token}`).toBe(false);
+        expect(source.includes(token), `${file} must not reference ${token}`).toBe(
+          false,
+        );
       }
     }
   });

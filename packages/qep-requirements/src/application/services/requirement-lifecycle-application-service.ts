@@ -1,6 +1,9 @@
 import { randomUUID } from "node:crypto";
 
-import type { AvailableLifecycleTransition, LifecycleContext } from "@apzhub/lifecycle-engine";
+import type {
+  AvailableLifecycleTransition,
+  LifecycleContext,
+} from "@apzhub/lifecycle-engine";
 import { LifecycleTransitionError } from "@apzhub/lifecycle-engine";
 
 import { createRequirement } from "../../domain/entities/requirement";
@@ -12,7 +15,10 @@ import type { RequirementAuditRepository } from "../../domain/repositories/requi
 import type { RequirementLifecycleHistoryRepository } from "../../domain/repositories/requirement-lifecycle-history-repository";
 import type { RequirementRepository } from "../../domain/repositories/requirement-repository";
 import { createRequirementId } from "../../domain/value-objects/requirement-id";
-import { createRequirementStatus, type RequirementStatus } from "../../domain/value-objects/requirement-status";
+import {
+  createRequirementStatus,
+  type RequirementStatus,
+} from "../../domain/value-objects/requirement-status";
 import {
   QepForbiddenError,
   QepInvariantViolation,
@@ -101,7 +107,10 @@ async function appendAudit(
 
 function toLifecycleContext(
   ctx: QepRequestContext,
-  input: Pick<RequirementLifecycleTransitionInput, "reason" | "comments" | "metadata"> = {},
+  input: Pick<
+    RequirementLifecycleTransitionInput,
+    "reason" | "comments" | "metadata"
+  > = {},
   deps: RequirementLifecycleApplicationDeps,
   revision?: number,
 ): LifecycleContext {
@@ -151,7 +160,9 @@ function applyTransitionToRequirement(
     createdBy: existing.createdBy,
     updatedBy: ctx.userId,
     revision: existing.revision,
-    ...(archived ? { archivedAt: archived.archivedAt, archivedBy: archived.archivedBy } : {}),
+    ...(archived
+      ? { archivedAt: archived.archivedAt, archivedBy: archived.archivedBy }
+      : {}),
   };
 }
 
@@ -177,11 +188,7 @@ export async function performRequirementLifecycleTransition(
     input.expectedRevision !== undefined &&
     existing.revision !== input.expectedRevision
   ) {
-    throw new QepRevisionConflictError(
-      id,
-      input.expectedRevision,
-      existing.revision,
-    );
+    throw new QepRevisionConflictError(id, input.expectedRevision, existing.revision);
   }
 
   let transitionResult;

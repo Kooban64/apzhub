@@ -21,24 +21,24 @@ OES-001 is accepted as the permanent APZOR engineering writing standard — the 
 
 Every engineering specification SHALL:
 
-- conform to OES-000  
-- conform to OES-001  
-- use RFC 2119 terminology  
-- follow the PART / APPENDIX / COMPLETE structure  
-- include Owner Acceptance criteria  
-- include explicit implementation boundaries  
-- include AI authority boundaries  
-- include traceability to previous accepted artefacts  
-- define quality gates before implementation  
+- conform to OES-000
+- conform to OES-001
+- use RFC 2119 terminology
+- follow the PART / APPENDIX / COMPLETE structure
+- include Owner Acceptance criteria
+- include explicit implementation boundaries
+- include AI authority boundaries
+- include traceability to previous accepted artefacts
+- define quality gates before implementation
 
 No capability OES may deviate without a formal methodology change.
 
 ## Authorises next
 
-- **OES-002** — Engineering Review & Acceptance Standard  
+- **OES-002** — Engineering Review & Acceptance Standard
 - Continuation of **APZQEP-OES-ARCH-012** Parts 2–5 under OES-000 + OES-001 (+ OES-002 once Accepted)
 
 ## Explicit stop
 
-- Do not unfreeze OES-001 without Owner Decision.  
+- Do not unfreeze OES-001 without Owner Decision.
 - Do not begin Workbench Engineering until APZQEP-OES-ARCH-012 `COMPLETE.md` is Owner-Accepted.

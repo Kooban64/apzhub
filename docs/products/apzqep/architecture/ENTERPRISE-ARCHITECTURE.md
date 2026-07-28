@@ -11,13 +11,13 @@ This document provides the **overall Enterprise Architecture (EA) overview** for
 
 ## Product identity (architectural)
 
-| Dimension | Definition |
-| --------- | ---------- |
-| **Product** | APZ QEP — Enterprise Quality Engineering Platform |
-| **Mission** | Govern quality from approved requirements through verification, evidence, and human certification |
-| **Central question** | Can this software be released with sufficient confidence? |
+| Dimension                 | Definition                                                                                                      |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Product**               | APZ QEP — Enterprise Quality Engineering Platform                                                               |
+| **Mission**               | Govern quality from approved requirements through verification, evidence, and human certification               |
+| **Central question**      | Can this software be released with sufficient confidence?                                                       |
 | **Platform relationship** | Native APZHUB product module set; consumes platform identity, permissions, audit, search, notifications, events |
-| **Deployment posture** | Self-host-first modular monolith on APZHUB stack; extraction-ready service boundaries |
+| **Deployment posture**    | Self-host-first modular monolith on APZHUB stack; extraction-ready service boundaries                           |
 
 APZ QEP is **not** architecturally modelled as ALM, SCM, CI/CD, test runner, device cloud, or autonomous release bot. Those systems appear as **engines** behind connectors.
 
@@ -27,31 +27,31 @@ APZ QEP is **not** architecturally modelled as ALM, SCM, CI/CD, test runner, dev
 
 Principles apply across all views. Violations are architectural defects requiring Owner review.
 
-| ID | Principle | Enterprise implication |
-| -- | --------- | ---------------------- |
-| EA-01 | Verification-centric domain | Core aggregates orbit *Verification* and *Evidence*, not sprint or pipeline metaphors |
-| EA-02 | Quality SoR | Write authority for quality domains terminates in QEP Platform Services |
-| EA-03 | Closed-loop governance | No module may short-circuit traceability or certification chain |
-| EA-04 | Human accountability | Certification and risk acceptance require identifiable human actors |
-| EA-05 | Modular monolith first | Single deployable product unit with internal modularity |
-| EA-06 | Extraction readiness | Services communicate via contracts and events, not shared mutable stores |
-| EA-07 | Platform composition | Cross-cutting capabilities are platform-owned, not reimplemented per module |
-| EA-08 | Zero Trust everywhere | Every tier validates authn, authz, tenant scope, and intent |
-| EA-09 | Assist, never decide (AI/MCP) | Assistive layers propose; humans accept into SoR |
-| EA-10 | Explainability | Readiness, traceability, and intelligence must support audit narrative |
+| ID    | Principle                     | Enterprise implication                                                                |
+| ----- | ----------------------------- | ------------------------------------------------------------------------------------- |
+| EA-01 | Verification-centric domain   | Core aggregates orbit _Verification_ and _Evidence_, not sprint or pipeline metaphors |
+| EA-02 | Quality SoR                   | Write authority for quality domains terminates in QEP Platform Services               |
+| EA-03 | Closed-loop governance        | No module may short-circuit traceability or certification chain                       |
+| EA-04 | Human accountability          | Certification and risk acceptance require identifiable human actors                   |
+| EA-05 | Modular monolith first        | Single deployable product unit with internal modularity                               |
+| EA-06 | Extraction readiness          | Services communicate via contracts and events, not shared mutable stores              |
+| EA-07 | Platform composition          | Cross-cutting capabilities are platform-owned, not reimplemented per module           |
+| EA-08 | Zero Trust everywhere         | Every tier validates authn, authz, tenant scope, and intent                           |
+| EA-09 | Assist, never decide (AI/MCP) | Assistive layers propose; humans accept into SoR                                      |
+| EA-10 | Explainability                | Readiness, traceability, and intelligence must support audit narrative                |
 
 ---
 
 ## Architecture views (Zachman-aligned summary)
 
-| View | Question | Primary document |
-| ---- | -------- | ---------------- |
-| **Scope / Context** | Why and who? | BUSINESS-ARCHITECTURE.md |
-| **Business** | What capabilities? | BUSINESS-ARCHITECTURE.md |
-| **Information** | What data and ownership? | INFORMATION-ARCHITECTURE.md |
-| **Application** | What logical services? | APPLICATION-ARCHITECTURE.md |
-| **Domain** | What rules and aggregates? | DOMAIN-ARCHITECTURE.md + BOUNDED-CONTEXTS.md |
-| **Technology** | *(Deferred to ENG-001)* | Not in ARCH-001 |
+| View                | Question                   | Primary document                             |
+| ------------------- | -------------------------- | -------------------------------------------- |
+| **Scope / Context** | Why and who?               | BUSINESS-ARCHITECTURE.md                     |
+| **Business**        | What capabilities?         | BUSINESS-ARCHITECTURE.md                     |
+| **Information**     | What data and ownership?   | INFORMATION-ARCHITECTURE.md                  |
+| **Application**     | What logical services?     | APPLICATION-ARCHITECTURE.md                  |
+| **Domain**          | What rules and aggregates? | DOMAIN-ARCHITECTURE.md + BOUNDED-CONTEXTS.md |
+| **Technology**      | _(Deferred to ENG-001)_    | Not in ARCH-001                              |
 
 ---
 
@@ -141,14 +141,14 @@ flowchart TB
   L5 --> L6
 ```
 
-| Layer | QEP responsibility | Prohibited |
-| ----- | ------------------ | ---------- |
-| **Presentation** | Module UI, navigation registration, permission-filtered rendering | Business rules; direct connector calls |
-| **Application** | Use-case flows crossing aggregates (e.g. hand readiness to certification) | Persistence logic; engine SDK usage |
-| **Domain** | Verification, evidence, certification invariants; state machines | UI concerns; HTTP |
-| **Services** | Orchestration, validation, permissions, audit, events, connector coordination | Module-to-module coupling |
-| **Adapters** | Translate external models; health; error mapping | SoR ownership |
-| **Engines** | External system behaviour | QEP business authority |
+| Layer            | QEP responsibility                                                            | Prohibited                             |
+| ---------------- | ----------------------------------------------------------------------------- | -------------------------------------- |
+| **Presentation** | Module UI, navigation registration, permission-filtered rendering             | Business rules; direct connector calls |
+| **Application**  | Use-case flows crossing aggregates (e.g. hand readiness to certification)     | Persistence logic; engine SDK usage    |
+| **Domain**       | Verification, evidence, certification invariants; state machines              | UI concerns; HTTP                      |
+| **Services**     | Orchestration, validation, permissions, audit, events, connector coordination | Module-to-module coupling              |
+| **Adapters**     | Translate external models; health; error mapping                              | SoR ownership                          |
+| **Engines**      | External system behaviour                                                     | QEP business authority                 |
 
 ---
 
@@ -156,23 +156,23 @@ flowchart TB
 
 ### Monolith-first rationale
 
-| Factor | Decision |
-| ------ | -------- |
-| Team scale (initial) | Single product team benefits from unified deployment and transaction boundaries |
-| Quality loop cohesion | Requirements → verification → execution → evidence → certification spans tight consistency needs |
-| Operational simplicity | Self-host customers prefer one upgradeable unit |
-| MVP timeline | Manual-first path does not justify distributed operational overhead |
+| Factor                 | Decision                                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| Team scale (initial)   | Single product team benefits from unified deployment and transaction boundaries                  |
+| Quality loop cohesion  | Requirements → verification → execution → evidence → certification spans tight consistency needs |
+| Operational simplicity | Self-host customers prefer one upgradeable unit                                                  |
+| MVP timeline           | Manual-first path does not justify distributed operational overhead                              |
 
 ### Extraction-ready markers
 
-| Marker | Architectural requirement |
-| ------ | ------------------------- |
-| **Bounded contexts** | Each context owns vocabulary and SoR slice — see BOUNDED-CONTEXTS.md |
-| **Service interfaces** | Application services expose stable logical interfaces inward to modules |
-| **Domain events** | Cross-context integration prefers events over shared tables |
-| **Anti-corruption layers** | Connectors isolate engine models from domain |
-| **No module-to-module calls** | Modules always route through Platform Services |
-| **Tenant boundary** | All contexts enforce tenant scope identically |
+| Marker                        | Architectural requirement                                               |
+| ----------------------------- | ----------------------------------------------------------------------- |
+| **Bounded contexts**          | Each context owns vocabulary and SoR slice — see BOUNDED-CONTEXTS.md    |
+| **Service interfaces**        | Application services expose stable logical interfaces inward to modules |
+| **Domain events**             | Cross-context integration prefers events over shared tables             |
+| **Anti-corruption layers**    | Connectors isolate engine models from domain                            |
+| **No module-to-module calls** | Modules always route through Platform Services                          |
+| **Tenant boundary**           | All contexts enforce tenant scope identically                           |
 
 Future extraction candidates (non-binding, priority order for later programmes):
 
@@ -207,17 +207,17 @@ Modules **never** call connectors or engines. MCP tools **never** bypass Gateway
 
 Architecture organises around answering the release-confidence question:
 
-| Stage | Architectural anchor | Primary contexts |
-| ----- | -------------------- | ---------------- |
-| Intent | Scope and approved needs | Portfolio/Projects, Requirements |
-| Design | Governed verification specs | Verification |
-| Execute | Sessions and runs | Execution, Automation Management |
-| Prove | Artefacts and lineage | Evidence, Traceability |
-| Remediate | Failures and uncertainty | Defects, Risk |
-| Aggregate | Explainable posture | Release Readiness, Quality Intelligence |
-| Decide | Human attestation | Certification |
-| Learn | Reuse and improve | Knowledge, Reporting |
-| Operate | Policy and investigation | Administration, Identity, Audit, Integration |
+| Stage     | Architectural anchor        | Primary contexts                             |
+| --------- | --------------------------- | -------------------------------------------- |
+| Intent    | Scope and approved needs    | Portfolio/Projects, Requirements             |
+| Design    | Governed verification specs | Verification                                 |
+| Execute   | Sessions and runs           | Execution, Automation Management             |
+| Prove     | Artefacts and lineage       | Evidence, Traceability                       |
+| Remediate | Failures and uncertainty    | Defects, Risk                                |
+| Aggregate | Explainable posture         | Release Readiness, Quality Intelligence      |
+| Decide    | Human attestation           | Certification                                |
+| Learn     | Reuse and improve           | Knowledge, Reporting                         |
+| Operate   | Policy and investigation    | Administration, Identity, Audit, Integration |
 
 ```mermaid
 flowchart LR
@@ -248,29 +248,29 @@ flowchart LR
 
 QEP **consumes** these APZHUB capabilities — does not reimplement:
 
-| Capability | QEP usage |
-| ---------- | --------- |
-| **Identity / Better Auth** | Authentication; QEP owns authorisation catalogue |
-| **PermissionService** | Module and action visibility; certifier separation of duties |
-| **Audit** | Immutable privileged action stream; M21 investigation UI |
-| **Event Bus** | Domain events for async processing |
-| **Search** | Unified index; M22 module; permission-filtered query |
-| **Notifications** | Attention engine; modules publish, never direct SMTP |
-| **Documents / storage** | Evidence file references; pack integrity metadata in QEP SoR |
+| Capability                 | QEP usage                                                    |
+| -------------------------- | ------------------------------------------------------------ |
+| **Identity / Better Auth** | Authentication; QEP owns authorisation catalogue             |
+| **PermissionService**      | Module and action visibility; certifier separation of duties |
+| **Audit**                  | Immutable privileged action stream; M21 investigation UI     |
+| **Event Bus**              | Domain events for async processing                           |
+| **Search**                 | Unified index; M22 module; permission-filtered query         |
+| **Notifications**          | Attention engine; modules publish, never direct SMTP         |
+| **Documents / storage**    | Evidence file references; pack integrity metadata in QEP SoR |
 
 ---
 
 ## Security architecture summary (Zero Trust)
 
-| Control plane | Architectural placement |
-| ------------- | ------------------------ |
-| Authentication | Gateway + platform identity |
-| Authorisation | PermissionService before every service operation |
-| Tenant isolation | Mandatory context on all reads/writes |
-| AI/MCP tool allowlists | Administration policies; default deny |
-| Certification immutability | Domain invariants + audit append-only classes |
-| Connector credentials | Platform secret refs — never in modules |
-| Correlation / causation IDs | Propagated Gateway → Service → Event → Audit |
+| Control plane               | Architectural placement                          |
+| --------------------------- | ------------------------------------------------ |
+| Authentication              | Gateway + platform identity                      |
+| Authorisation               | PermissionService before every service operation |
+| Tenant isolation            | Mandatory context on all reads/writes            |
+| AI/MCP tool allowlists      | Administration policies; default deny            |
+| Certification immutability  | Domain invariants + audit append-only classes    |
+| Connector credentials       | Platform secret refs — never in modules          |
+| Correlation / causation IDs | Propagated Gateway → Service → Event → Audit     |
 
 Detailed security rules remain in QEP Security Constitution; this EA overview requires **architectural compliance**, not replacement.
 
@@ -278,13 +278,13 @@ Detailed security rules remain in QEP Security Constitution; this EA overview re
 
 ## Deployment architecture (logical)
 
-| Topology | Description |
-| -------- | ----------- |
-| **Standard self-host** | APZHUB stack + QEP modules/services as product bundle |
-| **Tenant model** | Single tenant per deployment default; multi-tenant platform metadata where APZHUB supports |
-| **Edition gates** | M14–M18 entitlements enforced at Gateway and module registration |
-| **AI default** | Feature flags OFF; no AI provider required for MVP |
-| **MCP default** | Catalogue defined; connectivity optional post-MVP |
+| Topology               | Description                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------------ |
+| **Standard self-host** | APZHUB stack + QEP modules/services as product bundle                                      |
+| **Tenant model**       | Single tenant per deployment default; multi-tenant platform metadata where APZHUB supports |
+| **Edition gates**      | M14–M18 entitlements enforced at Gateway and module registration                           |
+| **AI default**         | Feature flags OFF; no AI provider required for MVP                                         |
+| **MCP default**        | Catalogue defined; connectivity optional post-MVP                                          |
 
 Physical sizing, containers, and HA patterns belong to Engineering and platform infrastructure programmes.
 
@@ -292,15 +292,15 @@ Physical sizing, containers, and HA patterns belong to Engineering and platform 
 
 ## Quality attributes (architecture drivers)
 
-| Attribute | Target posture |
-| --------- | -------------- |
-| **Auditability** | Every certification and approval reconstructable from SoR + audit |
-| **Explainability** | Readiness and trace views justify decisions in human language |
-| **Consistency** | Strong consistency within aggregate; eventual for search/notify |
-| **Availability** | Aligns with APZHUB platform SLA; ingest async on connector degradation |
-| **Extensibility** | Connectors and module manifest registration without core forks |
-| **Accessibility** | WCAG AA via shared design system (006, 028) |
-| **Privacy** | Tenant data residency; evidence retention policies |
+| Attribute          | Target posture                                                         |
+| ------------------ | ---------------------------------------------------------------------- |
+| **Auditability**   | Every certification and approval reconstructable from SoR + audit      |
+| **Explainability** | Readiness and trace views justify decisions in human language          |
+| **Consistency**    | Strong consistency within aggregate; eventual for search/notify        |
+| **Availability**   | Aligns with APZHUB platform SLA; ingest async on connector degradation |
+| **Extensibility**  | Connectors and module manifest registration without core forks         |
+| **Accessibility**  | WCAG AA via shared design system (006, 028)                            |
+| **Privacy**        | Tenant data residency; evidence retention policies                     |
 
 ---
 
@@ -312,12 +312,12 @@ Modules are **presentation and registration boundaries** aligned to user mental 
 
 ## Governance and change control
 
-| Change type | Authority |
-| ----------- | --------- |
-| Product behaviour | Owner via Definition amendment |
+| Change type            | Authority                                            |
+| ---------------------- | ---------------------------------------------------- |
+| Product behaviour      | Owner via Definition amendment                       |
 | Architecture principle | Owner Architecture Acceptance or amendment programme |
-| Technology selection | Engineering ADRs post ENG-001 |
-| Platform foundation | APZHUB governance |
+| Technology selection   | Engineering ADRs post ENG-001                        |
+| Platform foundation    | APZHUB governance                                    |
 
 ---
 
@@ -344,24 +344,24 @@ flowchart TB
 
 ## Document map
 
-| Need | Read |
-| ---- | ---- |
-| Capabilities and value streams | BUSINESS-ARCHITECTURE.md |
-| Services and orchestration | APPLICATION-ARCHITECTURE.md |
-| Domain rules and events | DOMAIN-ARCHITECTURE.md |
-| DDD contexts | BOUNDED-CONTEXTS.md |
-| Information ownership | INFORMATION-ARCHITECTURE.md |
-| Integration / API / Events | INTEGRATION · API · EVENT |
-| Security / Identity / Authz | SECURITY · IDENTITY · AUTHORISATION |
-| AI / MCP | AI-ARCHITECTURE · MCP-ARCHITECTURE |
-| Ops / Deploy | OBSERVABILITY · DEPLOYMENT · TECHNOLOGY-STANDARDS |
-| Decisions | ARCHITECTURE-DECISION-CATALOGUE.md |
-| Pack control | README.md |
+| Need                           | Read                                              |
+| ------------------------------ | ------------------------------------------------- |
+| Capabilities and value streams | BUSINESS-ARCHITECTURE.md                          |
+| Services and orchestration     | APPLICATION-ARCHITECTURE.md                       |
+| Domain rules and events        | DOMAIN-ARCHITECTURE.md                            |
+| DDD contexts                   | BOUNDED-CONTEXTS.md                               |
+| Information ownership          | INFORMATION-ARCHITECTURE.md                       |
+| Integration / API / Events     | INTEGRATION · API · EVENT                         |
+| Security / Identity / Authz    | SECURITY · IDENTITY · AUTHORISATION               |
+| AI / MCP                       | AI-ARCHITECTURE · MCP-ARCHITECTURE                |
+| Ops / Deploy                   | OBSERVABILITY · DEPLOYMENT · TECHNOLOGY-STANDARDS |
+| Decisions                      | ARCHITECTURE-DECISION-CATALOGUE.md                |
+| Pack control                   | README.md                                         |
 
 ---
 
 ## Document control
 
-| Version | Date | Change |
-| ------- | ---- | ------ |
+| Version    | Date       | Change                                |
+| ---------- | ---------- | ------------------------------------- |
 | 1.0.0-arch | 2026-07-24 | Initial EA overview — APZQEP-ARCH-001 |

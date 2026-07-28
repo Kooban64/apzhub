@@ -2,18 +2,18 @@
 
 ## Smoke test checklist
 
-| # | Check | Expected |
-| --- | --- | --- |
-| 1 | Navigate `/workspace/qep/traceability` | Explorer (or auth redirect proving route) |
-| 2 | Open Trace Links list | Paginated table; filters present |
-| 3 | Open Create | Form renders; submit gated by API |
-| 4 | Open Matrix | Presentation grid or list fallback; **no Coverage %** |
-| 5 | Open Taxonomy | Catalogue list |
-| 6 | Open Detail of known id | Inspector fields + `availableActions`-gated controls |
-| 7 | Open History | Domain history (not Platform Audit console) |
-| 8 | Attempt Validate/Approve/Retire without action | Control absent or API rejects |
-| 9 | Supersede route | Form reachable when permitted |
-| 10 | Deep link from search/list | Authoritative detail reload |
+| #   | Check                                          | Expected                                              |
+| --- | ---------------------------------------------- | ----------------------------------------------------- |
+| 1   | Navigate `/workspace/qep/traceability`         | Explorer (or auth redirect proving route)             |
+| 2   | Open Trace Links list                          | Paginated table; filters present                      |
+| 3   | Open Create                                    | Form renders; submit gated by API                     |
+| 4   | Open Matrix                                    | Presentation grid or list fallback; **no Coverage %** |
+| 5   | Open Taxonomy                                  | Catalogue list                                        |
+| 6   | Open Detail of known id                        | Inspector fields + `availableActions`-gated controls  |
+| 7   | Open History                                   | Domain history (not Platform Audit console)           |
+| 8   | Attempt Validate/Approve/Retire without action | Control absent or API rejects                         |
+| 9   | Supersede route                                | Form reachable when permitted                         |
+| 10  | Deep link from search/list                     | Authoritative detail reload                           |
 
 ## Enablement
 

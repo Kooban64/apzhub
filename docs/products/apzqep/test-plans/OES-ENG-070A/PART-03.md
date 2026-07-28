@@ -1,27 +1,28 @@
 # APZQEP-OES-ENG-070A
+
 # PART 3 — Technical Approach
 
-| Item | Value |
-| ---- | ----- |
-| Document | APZQEP-OES-ENG-070A |
-| Part | **3 of 5** |
-| Programme | APZQEP-OES-ENG-070A |
-| Status | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
+| Item      | Value                                       |
+| --------- | ------------------------------------------- |
+| Document  | APZQEP-OES-ENG-070A                         |
+| Part      | **3 of 5**                                  |
+| Programme | APZQEP-OES-ENG-070A                         |
+| Status    | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
 
 ---
 
 ## 1. Stack (mandatory — Document 000 / 004)
 
-| Concern | Choice |
-| ------- | ------ |
-| App | Next.js **App Router** in `apps/web` |
-| UI | React + TypeScript **strict** + Tailwind + shadcn/ui (`/packages/ui`) |
-| Icons | Lucide only |
+| Concern       | Choice                                                                                      |
+| ------------- | ------------------------------------------------------------------------------------------- |
+| App           | Next.js **App Router** in `apps/web`                                                        |
+| UI            | React + TypeScript **strict** + Tailwind + shadcn/ui (`/packages/ui`)                       |
+| Icons         | Lucide only                                                                                 |
 | Data fetching | TanStack Query (or the platform-equivalent pattern already used by sibling QEP Workbenches) |
-| Forms | React Hook Form (RHF) + Zod (shape validation only — server remains authority) |
-| Tables | TanStack Table for Explorer / Review queue grids |
-| Auth session | Platform shell / Better Auth — no separate login screen |
-| API | `/api/v1/qep/plans/*` via platform client patterns (Document 010) |
+| Forms         | React Hook Form (RHF) + Zod (shape validation only — server remains authority)              |
+| Tables        | TanStack Table for Explorer / Review queue grids                                            |
+| Auth session  | Platform shell / Better Auth — no separate login screen                                     |
+| API           | `/api/v1/qep/plans/*` via platform client patterns (Document 010)                           |
 
 Technology substitution requires Owner approval (Document 004).
 
@@ -29,13 +30,13 @@ Technology substitution requires Owner approval (Document 004).
 
 ## 2. Repository placement (proposed — not created under this OES)
 
-| Artefact | Location |
-| -------- | -------- |
-| Routes / pages | `apps/web` under the QEP Test Plans route tree (Appendix C) — mirrors `/workspace/qep/test-plans/...` |
-| Shared UI extensions | `/packages/ui` only when reusable across Workbenches; otherwise local Test Plans Workbench modules |
-| Feature modules | `modules/qep-test-plans/` presentation slice — **match sibling Workbenches** (Requirements / Traceability / Verification / Test Specifications) rather than inventing a parallel structure |
-| Product docs (future delivery evidence) | `docs/products/apzqep/test-plans/workbench/` (WP-18) |
-| This OES | `docs/products/apzqep/test-plans/OES-ENG-070A/` (canonical) · `docs/engineering/oes/APZQEP/OES-ENG-070A-Test-Plans-Workbench-Engineering/` (pointer) |
+| Artefact                                | Location                                                                                                                                                                                   |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Routes / pages                          | `apps/web` under the QEP Test Plans route tree (Appendix C) — mirrors `/workspace/qep/test-plans/...`                                                                                      |
+| Shared UI extensions                    | `/packages/ui` only when reusable across Workbenches; otherwise local Test Plans Workbench modules                                                                                         |
+| Feature modules                         | `modules/qep-test-plans/` presentation slice — **match sibling Workbenches** (Requirements / Traceability / Verification / Test Specifications) rather than inventing a parallel structure |
+| Product docs (future delivery evidence) | `docs/products/apzqep/test-plans/workbench/` (WP-18)                                                                                                                                       |
+| This OES                                | `docs/products/apzqep/test-plans/OES-ENG-070A/` (canonical) · `docs/engineering/oes/APZQEP/OES-ENG-070A-Test-Plans-Workbench-Engineering/` (pointer)                                       |
 
 Engineers implementing under a future `APZQEP-ENG-070A` **SHALL** inspect the Test Specifications, Requirements, Traceability, and Verification Workbench layouts and **reuse the same patterns** rather than inventing a parallel structure. No file is created by this OES.
 
@@ -79,7 +80,7 @@ NEVER wait-and-guess — if `actions` has not yet loaded, render a loading
       state, not a default-enabled or default-disabled action set.
 ```
 
-This algorithm is the **single normative mechanism** for action visibility across every Workbench surface (Explorer row menu, Inspector Action Bar, Review queue, bulk selection). It directly implements the binding invariant recorded at Owner ARCH-014 Acceptance: *"The Workbench SHALL never determine what a user may do."*
+This algorithm is the **single normative mechanism** for action visibility across every Workbench surface (Explorer row menu, Inspector Action Bar, Review queue, bulk selection). It directly implements the binding invariant recorded at Owner ARCH-014 Acceptance: _"The Workbench SHALL never determine what a user may do."_
 
 ### 4.1 Multi-select / bulk actions
 
@@ -89,13 +90,13 @@ Bulk UI **MAY** enable an action only when it is present in the **intersection**
 
 ## 5. State model
 
-| State | Owner |
-| ----- | ----- |
+| State                                                                  | Owner                                                                               |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | Server Plan DTO (identity, status, items, lineage, `availableActions`) | System of Record via API — never cached as authoritative beyond a request lifecycle |
-| Explorer / Review queue filters, sort, page | URL query state + optional Preference Service (Document 023) |
-| Selected `planId` / active Inspector tab | URL + session restore (Document 018) |
-| Form dirty state (Create / Edit Draft) | Ephemeral client-only; **MAY** use session preferences for UI-state recovery only |
-| `availableActions` | Server only — never derived, cached across mutations, or assumed |
+| Explorer / Review queue filters, sort, page                            | URL query state + optional Preference Service (Document 023)                        |
+| Selected `planId` / active Inspector tab                               | URL + session restore (Document 018)                                                |
+| Form dirty state (Create / Edit Draft)                                 | Ephemeral client-only; **MAY** use session preferences for UI-state recovery only   |
+| `availableActions`                                                     | Server only — never derived, cached across mutations, or assumed                    |
 
 ---
 
@@ -113,7 +114,7 @@ Bulk UI **MAY** enable an action only when it is present in the **intersection**
 
 This is the single most sensitive engineering boundary in this OES. Implementers under a future `APZQEP-ENG-070A` **SHALL**:
 
-1. Ship the route `/workspace/qep/test-plans/plans/{planId}/compare?from={rev}&to={rev}` (Appendix C) as a **live, navigable route** rendering a **governed unavailable state**: *"Version comparison is not yet available for Test Plans"*, with a link back to the Versions panel.
+1. Ship the route `/workspace/qep/test-plans/plans/{planId}/compare?from={rev}&to={rev}` (Appendix C) as a **live, navigable route** rendering a **governed unavailable state**: _"Version comparison is not yet available for Test Plans"_, with a link back to the Versions panel.
 2. **NOT** call any endpoint resembling `GET .../compare` — no such endpoint exists in the certified Infrastructure (CERT-060B). Any code that constructs such a request is a defect.
 3. **NOT** simulate a diff by fetching two full Plan DTOs (by revision) and computing a client-side comparison as a substitute for the server contract — this would silently fabricate a feature Infrastructure has not certified, directly violating ARCH-014 Part 4 §6 rule 4.
 4. Leave the route's activation to a **future, separately authorised** ENG programme once Infrastructure delivers `GET .../compare` — this OES's route contract **SHALL** remain stable so that future delivery is additive, not a URL-breaking change.
@@ -143,14 +144,14 @@ Implementers **SHALL** align UX mechanics with:
 
 ## 10. Traceability
 
-| This Part | Trace |
-| --------- | ----- |
-| Component catalogue | ARCH-014 Part 3 |
-| Action catalogue | ARCH-014 Part 3 §9 · ENG-060B Parts 3–4 |
-| Compare contract | ARCH-014 Part 4 §6 · KNOWN-LIMITATIONS.md L-01 |
-| Items binding | ARCH-014 Part 3 §6.2 · KNOWN-LIMITATIONS.md L-02 |
-| Design System | Documents 006 / 028 |
-| Security | Document 013 · ARCH-014 Part 5 §4 |
+| This Part           | Trace                                            |
+| ------------------- | ------------------------------------------------ |
+| Component catalogue | ARCH-014 Part 3                                  |
+| Action catalogue    | ARCH-014 Part 3 §9 · ENG-060B Parts 3–4          |
+| Compare contract    | ARCH-014 Part 4 §6 · KNOWN-LIMITATIONS.md L-01   |
+| Items binding       | ARCH-014 Part 3 §6.2 · KNOWN-LIMITATIONS.md L-02 |
+| Design System       | Documents 006 / 028                              |
+| Security            | Document 013 · ARCH-014 Part 5 §4                |
 
 ---
 

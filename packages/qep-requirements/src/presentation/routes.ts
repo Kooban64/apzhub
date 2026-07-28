@@ -7,8 +7,7 @@ export const QEP_REQUIREMENTS_ROUTES = {
   list: QEP_REQUIREMENTS_BASE_PATH,
   new: `${QEP_REQUIREMENTS_BASE_PATH}/new`,
   detail: (id: string) => `${QEP_REQUIREMENTS_BASE_PATH}/${encodeURIComponent(id)}`,
-  edit: (id: string) =>
-    `${QEP_REQUIREMENTS_BASE_PATH}/${encodeURIComponent(id)}/edit`,
+  edit: (id: string) => `${QEP_REQUIREMENTS_BASE_PATH}/${encodeURIComponent(id)}/edit`,
   baselines: {
     list: QEP_BASELINES_BASE_PATH,
     new: `${QEP_BASELINES_BASE_PATH}/new`,
@@ -97,7 +96,10 @@ export function parseQepRelationshipRouteId(pathname: string): string | null {
   ) {
     return null;
   }
-  if (isQepRelationshipsNewRoute(normalized) || isQepRelationshipsSupersedeRoute(normalized)) {
+  if (
+    isQepRelationshipsNewRoute(normalized) ||
+    isQepRelationshipsSupersedeRoute(normalized)
+  ) {
     return null;
   }
   const prefix = `${QEP_RELATIONSHIPS_BASE_PATH}/`;
@@ -133,7 +135,10 @@ export function parseQepRequirementRouteId(pathname: string): string | null {
   if (isQepBaselinesRoute(normalized) || isQepRelationshipsRoute(normalized)) {
     return null;
   }
-  if (!isQepRequirementsRoute(normalized) || normalized === QEP_REQUIREMENTS_BASE_PATH) {
+  if (
+    !isQepRequirementsRoute(normalized) ||
+    normalized === QEP_REQUIREMENTS_BASE_PATH
+  ) {
     return null;
   }
   if (isQepRequirementsNewRoute(normalized)) {

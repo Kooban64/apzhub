@@ -1,17 +1,17 @@
 import { createHash } from "node:crypto";
 
 import type { RequirementBaselineItem } from "./requirement-baseline-item";
-import { QepBaselineIntegrityError, QepBaselineInvalidStateError } from "../../shared/errors";
+import {
+  QepBaselineIntegrityError,
+  QepBaselineInvalidStateError,
+} from "../../shared/errors";
 
 export const REQUIREMENT_BASELINE_INTEGRITY_SCHEMA_VERSION =
   "requirement-baseline-integrity/v1" as const;
 export const REQUIREMENT_BASELINE_INTEGRITY_ALGORITHM = "sha256" as const;
 
 export type RequirementBaselineIntegrityVerificationStatus =
-  | "verified"
-  | "not_yet_verified"
-  | "verification_failed"
-  | "unsupported_schema";
+  "verified" | "not_yet_verified" | "verification_failed" | "unsupported_schema";
 
 export type RequirementBaselineIntegrityMembershipInput = {
   readonly requirementId: string;
@@ -121,7 +121,9 @@ export function verifyBaselineIntegrityFingerprint(input: {
     membership: input.membership,
   });
   if (computed.fingerprint !== input.expectedFingerprint) {
-    throw new QepBaselineIntegrityError("Baseline integrity fingerprint verification failed");
+    throw new QepBaselineIntegrityError(
+      "Baseline integrity fingerprint verification failed",
+    );
   }
   return {
     ...computed,

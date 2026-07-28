@@ -32,7 +32,9 @@ export function compareRequirementBaselineMembership(
   targetItems: readonly RequirementBaselineItem[],
 ): RequirementBaselineMembershipComparison {
   const baseByVersion = new Map(baseItems.map((item) => [item.contentVersionId, item]));
-  const targetByVersion = new Map(targetItems.map((item) => [item.contentVersionId, item]));
+  const targetByVersion = new Map(
+    targetItems.map((item) => [item.contentVersionId, item]),
+  );
 
   const added: RequirementBaselineItem[] = [];
   const removed: RequirementBaselineItem[] = [];
@@ -51,7 +53,9 @@ export function compareRequirementBaselineMembership(
     }
   }
 
-  const removedByRequirement = new Map(removed.map((item) => [item.requirementId, item]));
+  const removedByRequirement = new Map(
+    removed.map((item) => [item.requirementId, item]),
+  );
   const versionChanged: RequirementBaselineVersionChange[] = [];
   for (const addedItem of added) {
     const removedItem = removedByRequirement.get(addedItem.requirementId);

@@ -78,21 +78,33 @@ function buildTraceLinkQuery(params?: QepTraceLinkListParams): string {
 
 export function createQepTraceabilityHttpClient(basePath = "/api/v1/qep/traceability") {
   return {
-    async listTraceLinks(params?: QepTraceLinkListParams, options?: QepClientRequestOptions) {
-      const response = await fetch(`${basePath}/trace-links${buildTraceLinkQuery(params)}`, {
-        signal: options?.signal,
-      });
+    async listTraceLinks(
+      params?: QepTraceLinkListParams,
+      options?: QepClientRequestOptions,
+    ) {
+      const response = await fetch(
+        `${basePath}/trace-links${buildTraceLinkQuery(params)}`,
+        {
+          signal: options?.signal,
+        },
+      );
       return parseCollection<QepTraceLinkDto>(response);
     },
 
     async getTraceLink(id: string, options?: QepClientRequestOptions) {
-      const response = await fetch(`${basePath}/trace-links/${encodeURIComponent(id)}`, {
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/trace-links/${encodeURIComponent(id)}`,
+        {
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepTraceLinkDto>(response);
     },
 
-    async createTraceLink(input: CreateQepTraceLinkInput, options?: QepClientRequestOptions) {
+    async createTraceLink(
+      input: CreateQepTraceLinkInput,
+      options?: QepClientRequestOptions,
+    ) {
       const response = await fetch(`${basePath}/trace-links`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -119,10 +131,13 @@ export function createQepTraceabilityHttpClient(basePath = "/api/v1/qep/traceabi
     },
 
     async retireTraceLink(id: string, options?: QepClientRequestOptions) {
-      const response = await fetch(`${basePath}/trace-links/${encodeURIComponent(id)}/retire`, {
-        method: "POST",
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/trace-links/${encodeURIComponent(id)}/retire`,
+        {
+          method: "POST",
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepTraceLinkDto>(response);
     },
 
@@ -182,12 +197,15 @@ export function createQepTraceabilityHttpClient(basePath = "/api/v1/qep/traceabi
       scope: { readonly kind: string; readonly referenceId?: string },
       options?: QepClientRequestOptions,
     ) {
-      const response = await fetch(`${basePath}/trace-links/${encodeURIComponent(id)}/scope`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ scope }),
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/trace-links/${encodeURIComponent(id)}/scope`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ scope }),
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepTraceLinkDto>(response);
     },
 
@@ -271,12 +289,15 @@ export const updateTraceLinkConfidence =
   defaultClient.updateTraceLinkConfidence.bind(defaultClient);
 export const updateTraceLinkAuthority =
   defaultClient.updateTraceLinkAuthority.bind(defaultClient);
-export const updateTraceLinkScope = defaultClient.updateTraceLinkScope.bind(defaultClient);
+export const updateTraceLinkScope =
+  defaultClient.updateTraceLinkScope.bind(defaultClient);
 export const updateTraceLinkRationale =
   defaultClient.updateTraceLinkRationale.bind(defaultClient);
 export const updateTraceLinkMetadata =
   defaultClient.updateTraceLinkMetadata.bind(defaultClient);
-export const getTraceLinkHistory = defaultClient.getTraceLinkHistory.bind(defaultClient);
-export const listTraceLinkTaxonomy = defaultClient.listTraceLinkTaxonomy.bind(defaultClient);
+export const getTraceLinkHistory =
+  defaultClient.getTraceLinkHistory.bind(defaultClient);
+export const listTraceLinkTaxonomy =
+  defaultClient.listTraceLinkTaxonomy.bind(defaultClient);
 export const listTraceLinksByEndpoint =
   defaultClient.listTraceLinksByEndpoint.bind(defaultClient);

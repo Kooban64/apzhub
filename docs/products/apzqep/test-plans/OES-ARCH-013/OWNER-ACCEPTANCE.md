@@ -22,41 +22,41 @@ The architecture satisfies an architecture-only programme. It defines Test Plans
 
 ## Architecture Review Checklist
 
-| Review Area | Result |
-| ----------- | ------ |
-| Document 000 Compliance | ✅ PASS |
-| OES-000 Compliance | ✅ PASS |
-| OES-001 Compliance | ✅ PASS |
-| OES-002 Compliance | ✅ PASS |
-| Capability Boundaries | ✅ PASS |
-| Information Architecture | ✅ PASS |
-| Lifecycle Definition | ✅ PASS |
-| Versioning Strategy | ✅ PASS |
+| Review Area                     | Result  |
+| ------------------------------- | ------- |
+| Document 000 Compliance         | ✅ PASS |
+| OES-000 Compliance              | ✅ PASS |
+| OES-001 Compliance              | ✅ PASS |
+| OES-002 Compliance              | ✅ PASS |
+| Capability Boundaries           | ✅ PASS |
+| Information Architecture        | ✅ PASS |
+| Lifecycle Definition            | ✅ PASS |
+| Versioning Strategy             | ✅ PASS |
 | Relationships to Frozen Quartet | ✅ PASS |
-| Navigation Architecture | ✅ PASS |
-| Dashboard Architecture | ✅ PASS |
-| Explorer Architecture | ✅ PASS |
-| Inspector Architecture | ✅ PASS |
-| Search Architecture | ✅ PASS |
-| REST Resource Catalogue | ✅ PASS |
-| Event Catalogue | ✅ PASS |
-| AI Boundary | ✅ PASS |
-| MCP Boundary | ✅ PASS |
+| Navigation Architecture         | ✅ PASS |
+| Dashboard Architecture          | ✅ PASS |
+| Explorer Architecture           | ✅ PASS |
+| Inspector Architecture          | ✅ PASS |
+| Search Architecture             | ✅ PASS |
+| REST Resource Catalogue         | ✅ PASS |
+| Event Catalogue                 | ✅ PASS |
+| AI Boundary                     | ✅ PASS |
+| MCP Boundary                    | ✅ PASS |
 | Engineering Exclusions Honoured | ✅ PASS |
 
 ## Architectural principles confirmed
 
-1. Test Plans are a distinct capability and **SHALL NOT** duplicate Test Specifications.  
-2. Test Plans orchestrate and organise Test Specifications; they do not redefine or own them.  
-3. Relationships with Requirements, Traceability, Verification, and Test Specifications remain contractual.  
-4. Future capabilities (Test Execution, Test Runs, Evidence, Defects) are integration points only.  
+1. Test Plans are a distinct capability and **SHALL NOT** duplicate Test Specifications.
+2. Test Plans orchestrate and organise Test Specifications; they do not redefine or own them.
+3. Relationships with Requirements, Traceability, Verification, and Test Specifications remain contractual.
+4. Future capabilities (Test Execution, Test Runs, Evidence, Defects) are integration points only.
 5. Clear separation between Domain, Infrastructure, and Presentation is preserved.
 
 ## Owner directives (effective immediately)
 
-- This architecture is the **authoritative baseline** for Test Plans.  
-- No architectural changes without governed change (ADR or approved architecture revision).  
-- No engineering work under **ARCH-013**.  
+- This architecture is the **authoritative baseline** for Test Plans.
+- No architectural changes without governed change (ADR or approved architecture revision).
+- No engineering work under **ARCH-013**.
 - Any implementation **MUST** conform to the accepted architecture.
 
 ## Authorises next

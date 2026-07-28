@@ -53,7 +53,11 @@ function resolveTransition<S extends string>(
 
   throw new LifecycleTransitionError(
     `No transition from ${currentState} via action or target "${target}"`,
-    { from: currentState, action: target, to: isLifecycleState(policy, target) ? target : undefined },
+    {
+      from: currentState,
+      action: target,
+      to: isLifecycleState(policy, target) ? target : undefined,
+    },
   );
 }
 
@@ -70,7 +74,13 @@ export function assertTransition<S extends string>(
 
   const transition = resolveTransition(policy, currentState, targetStateOrAction);
   const validator = options.validator ?? createInlineValidator<S>();
-  validator.assertAllowed(policy, transition.from, transition.to, transition.action, ctx);
+  validator.assertAllowed(
+    policy,
+    transition.from,
+    transition.to,
+    transition.action,
+    ctx,
+  );
 
   return {
     previousState: transition.from,

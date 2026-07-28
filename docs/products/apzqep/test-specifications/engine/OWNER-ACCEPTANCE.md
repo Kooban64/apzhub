@@ -1,16 +1,16 @@
 # Owner Acceptance — APZQEP-ENG-050B
 
-| Field | Value |
-| --- | --- |
-| Programme | **APZQEP-ENG-050B** — Test Specifications Infrastructure Engineering |
-| Decision | **ACCEPTED** |
-| Date | 2026-07-27 |
-| Authority | Owner Decision (capability baseline confirmation) |
-| Evidence | `docs/operations/evidence/portfolio-recert/20260727T002200Z-APZQEP-ENG-050B-ACCEPTANCE.json` |
-| Package | `@apzhub/qep-test-specifications` **0.2.0** |
-| API | `/api/v1/qep/specifications` |
-| Architecture | APZQEP-ARCH-011 **ACCEPTED** |
-| Domain | APZQEP-ENG-050A **ACCEPTED** |
+| Field        | Value                                                                                        |
+| ------------ | -------------------------------------------------------------------------------------------- |
+| Programme    | **APZQEP-ENG-050B** — Test Specifications Infrastructure Engineering                         |
+| Decision     | **ACCEPTED**                                                                                 |
+| Date         | 2026-07-27                                                                                   |
+| Authority    | Owner Decision (capability baseline confirmation)                                            |
+| Evidence     | `docs/operations/evidence/portfolio-recert/20260727T002200Z-APZQEP-ENG-050B-ACCEPTANCE.json` |
+| Package      | `@apzhub/qep-test-specifications` **0.2.0**                                                  |
+| API          | `/api/v1/qep/specifications`                                                                 |
+| Architecture | APZQEP-ARCH-011 **ACCEPTED**                                                                 |
+| Domain       | APZQEP-ENG-050A **ACCEPTED**                                                                 |
 
 ## Effect
 

@@ -1,11 +1,11 @@
 # Operational Readiness Review — APZQEP-TRACE-001
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-TRACE-001 |
-| Date | 2026-07-26 |
-| Verdict | **PASS** |
-| Package | `@apzhub/qep-traceability` **1.0.0** |
+| Field     | Value                                |
+| --------- | ------------------------------------ |
+| Programme | APZQEP-TRACE-001                     |
+| Date      | 2026-07-26                           |
+| Verdict   | **PASS**                             |
+| Package   | `@apzhub/qep-traceability` **1.0.0** |
 
 ## Sources
 
@@ -15,17 +15,17 @@
 
 ## Checklist
 
-| Area | Ready? | Notes |
-| ---- | ------ | ----- |
-| Migrations | **Yes** | 0079 + 0080 documented and ordered |
-| Deploy artefacts | **Yes** | Package + module **1.0.0** + web Workbench |
-| Permissions catalogue | **Yes** | `qep.traceability.*` registered |
-| Health / observability | **Yes** | Platform health + Traceability observations |
-| Audit | **Yes** | Platform audit + history |
-| Search publication | **Yes** | `trace_link` entity; eventual consistency accepted |
-| Runbooks / ops notes | **Yes** | Engine + Workbench packs |
+| Area                   | Ready?              | Notes                                                         |
+| ---------------------- | ------------------- | ------------------------------------------------------------- |
+| Migrations             | **Yes**             | 0079 + 0080 documented and ordered                            |
+| Deploy artefacts       | **Yes**             | Package + module **1.0.0** + web Workbench                    |
+| Permissions catalogue  | **Yes**             | `qep.traceability.*` registered                               |
+| Health / observability | **Yes**             | Platform health + Traceability observations                   |
+| Audit                  | **Yes**             | Platform audit + history                                      |
+| Search publication     | **Yes**             | `trace_link` entity; eventual consistency accepted            |
+| Runbooks / ops notes   | **Yes**             | Engine + Workbench packs                                      |
 | Rollback / concurrency | **Yes with limits** | Revision concurrency; no special Traceability rollback engine |
-| Support surfaces | **Yes with limits** | Workbench Explorer/Inspector; no Coverage/Impact ops |
+| Support surfaces       | **Yes with limits** | Workbench Explorer/Inspector; no Coverage/Impact ops          |
 
 ## Go criteria (ops)
 

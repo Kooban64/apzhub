@@ -9,21 +9,21 @@
 
 ## Binding standards (Platform 1.4)
 
-| Document                                                  | Purpose                                                                    |
-| --------------------------------------------------------- | -------------------------------------------------------------------------- |
-| [framework/](./framework/README.md)                       | **APZHUB-PRODUCTS-002 ACCEPTED** — Engineering Framework                   |
-| [definition/](./definition/README.md)                     | **APZHUB-PRODUCTS-003 ACCEPTED** — Definition Standard                     |
-| [requirements/](./requirements/README.md)                 | **APZHUB-PRODUCTS-004 ACCEPTED** — Requirements Standard                   |
-| [apzqep/](./apzqep/README.md)                             | APZ QEP official root · Transition **ACCEPTED**                            |
-| [apzqep/requirements/](./apzqep/requirements/README.md)   | **APZQEP-REQ-001** — Requirements Baseline (**ACCEPTED**)                  |
-| [apzqep/discovery/](./apzqep/discovery/README.md)         | **APZQEP-DISCOVERY-001** — Product Discovery (**ACCEPTED**)                |
-| [apzqep/constitution/](./apzqep/constitution/README.md)   | **APZQEP-CONSTITUTION-001** — Constitution (**ACCEPTED / CLOSED**)         |
-| [apzqep/product-definition/](./apzqep/product-definition/README.md) | **APZQEP-DEF-002** — Product Definition (**ACCEPTED**) |
-| [apzqep/architecture/](./apzqep/architecture/README.md) | **APZQEP-ARCH-001** — Enterprise Architecture (**ACCEPTED**) |
-| [apzqep/engineering-plan/](./apzqep/engineering-plan/README.md) | **APZQEP-PLAN-001** — Engineering Delivery Plan (**ACCEPTED**) |
-| [apzqep/engineering/](./apzqep/engineering/README.md) | **APZQEP-ENG-010** — Engineering Foundation (**ACCEPTED**) |
+| Document                                                                      | Purpose                                                                                             |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [framework/](./framework/README.md)                                           | **APZHUB-PRODUCTS-002 ACCEPTED** — Engineering Framework                                            |
+| [definition/](./definition/README.md)                                         | **APZHUB-PRODUCTS-003 ACCEPTED** — Definition Standard                                              |
+| [requirements/](./requirements/README.md)                                     | **APZHUB-PRODUCTS-004 ACCEPTED** — Requirements Standard                                            |
+| [apzqep/](./apzqep/README.md)                                                 | APZ QEP official root · Transition **ACCEPTED**                                                     |
+| [apzqep/requirements/](./apzqep/requirements/README.md)                       | **APZQEP-REQ-001** — Requirements Baseline (**ACCEPTED**)                                           |
+| [apzqep/discovery/](./apzqep/discovery/README.md)                             | **APZQEP-DISCOVERY-001** — Product Discovery (**ACCEPTED**)                                         |
+| [apzqep/constitution/](./apzqep/constitution/README.md)                       | **APZQEP-CONSTITUTION-001** — Constitution (**ACCEPTED / CLOSED**)                                  |
+| [apzqep/product-definition/](./apzqep/product-definition/README.md)           | **APZQEP-DEF-002** — Product Definition (**ACCEPTED**)                                              |
+| [apzqep/architecture/](./apzqep/architecture/README.md)                       | **APZQEP-ARCH-001** — Enterprise Architecture (**ACCEPTED**)                                        |
+| [apzqep/engineering-plan/](./apzqep/engineering-plan/README.md)               | **APZQEP-PLAN-001** — Engineering Delivery Plan (**ACCEPTED**)                                      |
+| [apzqep/engineering/](./apzqep/engineering/README.md)                         | **APZQEP-ENG-010** — Engineering Foundation (**ACCEPTED**)                                          |
 | [apzqep/requirements/versioning/](./apzqep/requirements/versioning/README.md) | **APZQEP-ENG-020D** — Requirements Content Versioning (**IMPLEMENTED / AWAITING OWNER ACCEPTANCE**) |
-| [apztcms/requirements/](./apztcms/requirements/README.md) | **APZTCMS-REQ-001** — historical TCMS Requirements (**PRESERVED**)         |
+| [apztcms/requirements/](./apztcms/requirements/README.md)                     | **APZTCMS-REQ-001** — historical TCMS Requirements (**PRESERVED**)                                  |
 
 ---
 

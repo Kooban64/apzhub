@@ -35,12 +35,11 @@ export function compareSnapshots(
   },
 ): RequirementVersionComparison {
   if (base.schemaVersion !== target.schemaVersion) {
-    throw new QepInvalidVersionComparisonError("Snapshots use incompatible schema versions");
+    throw new QepInvalidVersionComparisonError(
+      "Snapshots use incompatible schema versions",
+    );
   }
-  if (
-    meta &&
-    meta.baseVersionNumber === meta.targetVersionNumber
-  ) {
+  if (meta && meta.baseVersionNumber === meta.targetVersionNumber) {
     throw new QepInvalidVersionComparisonError(
       "Base and target content versions must be different",
     );
@@ -50,7 +49,12 @@ export function compareSnapshots(
     .map((field) => {
       const before = base[field as keyof RequirementSnapshot];
       const after = target[field as keyof RequirementSnapshot];
-      return { field, classification: classify(before, after), base: before, target: after };
+      return {
+        field,
+        classification: classify(before, after),
+        base: before,
+        target: after,
+      };
     });
   const changedFieldCount = fieldChanges.filter(
     (change) => change.classification !== "unchanged",
@@ -64,7 +68,10 @@ export function compareSnapshots(
   };
 }
 
-function classify(before: unknown, after: unknown): RequirementSnapshotChangeClassification {
+function classify(
+  before: unknown,
+  after: unknown,
+): RequirementSnapshotChangeClassification {
   if (same(before, after)) return "unchanged";
   if (before === null || before === undefined) return "added";
   if (after === null || after === undefined) return "removed";
@@ -81,6 +88,14 @@ function same(left: unknown, right: unknown): boolean {
 }
 
 function sameSet(left: readonly unknown[], right: readonly unknown[]): boolean {
-  return [...left].map((value) => JSON.stringify(value)).sort().join("|") ===
-    [...right].map((value) => JSON.stringify(value)).sort().join("|");
+  return (
+    [...left]
+      .map((value) => JSON.stringify(value))
+      .sort()
+      .join("|") ===
+    [...right]
+      .map((value) => JSON.stringify(value))
+      .sort()
+      .join("|")
+  );
 }

@@ -76,7 +76,10 @@ export function isQepVerificationSupersedeRoute(pathname: string): boolean {
  */
 export function parseQepVerificationRouteId(pathname: string): string | null {
   const normalized = pathname.replace(/\/+$/, "") || "/";
-  if (!isQepVerificationRoute(normalized) || normalized === QEP_VERIFICATION_BASE_PATH) {
+  if (
+    !isQepVerificationRoute(normalized) ||
+    normalized === QEP_VERIFICATION_BASE_PATH
+  ) {
     return null;
   }
   const prefix = `${QEP_VERIFICATION_BASE_PATH}/`;

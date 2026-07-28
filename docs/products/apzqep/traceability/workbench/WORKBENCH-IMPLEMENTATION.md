@@ -14,12 +14,12 @@ Concise implementation notes. Architecture authority: [ARCH-008](../../architect
 
 ## Architecture conformance
 
-| Baseline | Conformance |
-| --- | --- |
-| ARCH-006 | Reuses Workbench grammar / shell regions; no shell redesign |
-| ARCH-007 | Trace Link SoR ownership preserved; no Coverage/Impact ownership in UI |
+| Baseline | Conformance                                                                                              |
+| -------- | -------------------------------------------------------------------------------------------------------- |
+| ARCH-006 | Reuses Workbench grammar / shell regions; no shell redesign                                              |
+| ARCH-007 | Trace Link SoR ownership preserved; no Coverage/Impact ownership in UI                                   |
 | ARCH-008 | Explorer / Matrix / Inspector / History / Taxonomy / availableActions models implemented as presentation |
-| ENG-030A | Consumes existing APIs/DTOs; no domain or API redesign |
+| ENG-030A | Consumes existing APIs/DTOs; no domain or API redesign                                                   |
 
 ## Explicit non-delivery
 
@@ -27,11 +27,11 @@ Coverage Engine · Impact Engine · graph visualisation · AI · MCP · Traceabi
 
 ## Primary code paths
 
-| Layer | Path |
-| --- | --- |
-| Package presentation | `packages/qep-traceability/src/presentation/` |
-| Views | `apps/web/components/qep/qep-traceability-views.tsx` |
-| HTTP client | `apps/web/lib/qep/qep-traceability-api.ts` |
-| Query keys | `apps/web/lib/qep/query-keys.ts` → `qepQueryKeys.traceability.*` |
-| Module | `modules/qep-traceability/module.yaml` |
-| Playwright smoke | `testing/playwright/e2e/apzqep-eng-030c-traceability-workbench.spec.ts` |
+| Layer                | Path                                                                    |
+| -------------------- | ----------------------------------------------------------------------- |
+| Package presentation | `packages/qep-traceability/src/presentation/`                           |
+| Views                | `apps/web/components/qep/qep-traceability-views.tsx`                    |
+| HTTP client          | `apps/web/lib/qep/qep-traceability-api.ts`                              |
+| Query keys           | `apps/web/lib/qep/query-keys.ts` → `qepQueryKeys.traceability.*`        |
+| Module               | `modules/qep-traceability/module.yaml`                                  |
+| Playwright smoke     | `testing/playwright/e2e/apzqep-eng-030c-traceability-workbench.spec.ts` |

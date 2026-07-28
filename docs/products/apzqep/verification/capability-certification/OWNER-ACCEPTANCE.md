@@ -6,13 +6,13 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-CERT-040D — Verification Capability Certification |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Package | `@apzhub/qep-verification` **1.0.0** |
-| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Freeze | **CERTIFIED / FROZEN** |
+| Field               | Value                                                                                         |
+| ------------------- | --------------------------------------------------------------------------------------------- |
+| Programme           | APZQEP-CERT-040D — Verification Capability Certification                                      |
+| Decision            | **ACCEPTED / CLOSED / COMPLETE**                                                              |
+| Package             | `@apzhub/qep-verification` **1.0.0**                                                          |
+| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS**                                                         |
+| Freeze              | **CERTIFIED / FROZEN**                                                                        |
 | Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T205000Z-APZQEP-CERT-040D-ACCEPTANCE.json` |
 
 ## Effect

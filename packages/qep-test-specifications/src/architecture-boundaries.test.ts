@@ -49,13 +49,13 @@ describe("APZQEP-CERT-050D architecture boundaries", () => {
     const forbidden = [
       "drizzle",
       "postgres",
-      "\"pg\"",
+      '"pg"',
       "'pg'",
       "@apzhub/config",
       "@apzhub/platform-services",
       "next/server",
       "next/",
-      "\"react\"",
+      '"react"',
       "'react'",
       "react-dom",
       "node:fs",
@@ -66,7 +66,9 @@ describe("APZQEP-CERT-050D architecture boundaries", () => {
     for (const file of collectSourceFiles(domainRoot)) {
       const source = readFileSync(file, "utf8");
       for (const token of forbidden) {
-        expect(source.includes(token), `${file} must not reference ${token}`).toBe(false);
+        expect(source.includes(token), `${file} must not reference ${token}`).toBe(
+          false,
+        );
       }
       expect(sqlish.test(source), `${file} must not contain SQL`).toBe(false);
     }
@@ -74,7 +76,13 @@ describe("APZQEP-CERT-050D architecture boundaries", () => {
 
   it("allows Repository port naming in domain without persistence imports", () => {
     const repositoryPort = readFileSync(
-      join(packageRoot, "src", "domain", "test-specification", "specification-repository.ts"),
+      join(
+        packageRoot,
+        "src",
+        "domain",
+        "test-specification",
+        "specification-repository.ts",
+      ),
       "utf8",
     );
     expect(repositoryPort.includes("TestSpecificationRepository")).toBe(true);
@@ -88,7 +96,9 @@ describe("APZQEP-CERT-050D architecture boundaries", () => {
     for (const file of collectSourceFiles(applicationRoot)) {
       const source = readFileSync(file, "utf8");
       for (const token of forbidden) {
-        expect(source.includes(token), `${file} must not reference ${token}`).toBe(false);
+        expect(source.includes(token), `${file} must not reference ${token}`).toBe(
+          false,
+        );
       }
     }
   });
@@ -106,11 +116,13 @@ describe("APZQEP-CERT-050D architecture boundaries", () => {
 
   it("forbids react/next imports anywhere in the package", () => {
     const src = join(packageRoot, "src");
-    const forbidden = ["\"react\"", "'react'", "next/", "react-dom"];
+    const forbidden = ['"react"', "'react'", "next/", "react-dom"];
     for (const file of collectSourceFiles(src)) {
       const source = readFileSync(file, "utf8");
       for (const token of forbidden) {
-        expect(source.includes(token), `${file} must not reference ${token}`).toBe(false);
+        expect(source.includes(token), `${file} must not reference ${token}`).toBe(
+          false,
+        );
       }
     }
   });
@@ -139,7 +151,9 @@ describe("APZQEP-CERT-050D architecture boundaries", () => {
     for (const file of collectSourceFiles(domainRoot)) {
       const source = readFileSync(file, "utf8");
       for (const token of forbidden) {
-        expect(source.includes(token), `${file} must not reference ${token}`).toBe(false);
+        expect(source.includes(token), `${file} must not reference ${token}`).toBe(
+          false,
+        );
       }
     }
   });

@@ -464,7 +464,11 @@ export async function handleRemoveQepBaselineItem(
   );
   const gateway = await requireQepGateway();
   const updated = await invoke(context, () =>
-    gateway.qep.requirements.removeBaselineItem(context.serviceContext, id, contentVersionId),
+    gateway.qep.requirements.removeBaselineItem(
+      context.serviceContext,
+      id,
+      contentVersionId,
+    ),
   );
   return jsonDataResponse(updated, context.tracing);
 }
@@ -613,7 +617,11 @@ export async function handleUpdateQepRelationshipProfile(
   );
   const gateway = await requireQepGateway();
   const updated = await invoke(context, () =>
-    gateway.qep.requirements.updateRelationshipProfile(context.serviceContext, id, body),
+    gateway.qep.requirements.updateRelationshipProfile(
+      context.serviceContext,
+      id,
+      body,
+    ),
   );
   return jsonDataResponse(updated, context.tracing);
 }
@@ -838,7 +846,11 @@ export async function handleListQepRelationshipsByLifecycle(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const lifecycleState = await param(routeContext, "lifecycleState", qepRequirementIdParamSchema);
+  const lifecycleState = await param(
+    routeContext,
+    "lifecycleState",
+    qepRequirementIdParamSchema,
+  );
   const gateway = await requireQepGateway();
   const items = await invoke(context, () =>
     gateway.qep.requirements.listRelationshipsByLifecycle(
@@ -857,7 +869,10 @@ export async function handleListQepRelationshipsByBaseline(
   const baselineId = await param(routeContext, "baselineId", qepBaselineIdParamSchema);
   const gateway = await requireQepGateway();
   const items = await invoke(context, () =>
-    gateway.qep.requirements.listRelationshipsByBaseline(context.serviceContext, baselineId),
+    gateway.qep.requirements.listRelationshipsByBaseline(
+      context.serviceContext,
+      baselineId,
+    ),
   );
   return jsonDataResponse(items, context.tracing);
 }
@@ -887,8 +902,15 @@ export async function handleListQepRequirementRelationships(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const requirementId = await param(routeContext, "requirementId", qepRequirementIdParamSchema);
-  const query = parseQuery(qepRequirementRelationshipsQuerySchema, request.nextUrl.searchParams);
+  const requirementId = await param(
+    routeContext,
+    "requirementId",
+    qepRequirementIdParamSchema,
+  );
+  const query = parseQuery(
+    qepRequirementRelationshipsQuerySchema,
+    request.nextUrl.searchParams,
+  );
   const gateway = await requireQepGateway();
   const items = await invoke(context, () =>
     gateway.qep.requirements.listRelationshipsByRequirement(
@@ -905,10 +927,17 @@ export async function handleListQepInboundRelationships(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const requirementId = await param(routeContext, "requirementId", qepRequirementIdParamSchema);
+  const requirementId = await param(
+    routeContext,
+    "requirementId",
+    qepRequirementIdParamSchema,
+  );
   const gateway = await requireQepGateway();
   const items = await invoke(context, () =>
-    gateway.qep.requirements.listInboundRelationships(context.serviceContext, requirementId),
+    gateway.qep.requirements.listInboundRelationships(
+      context.serviceContext,
+      requirementId,
+    ),
   );
   return jsonDataResponse(items, context.tracing);
 }
@@ -918,10 +947,17 @@ export async function handleListQepOutboundRelationships(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  const requirementId = await param(routeContext, "requirementId", qepRequirementIdParamSchema);
+  const requirementId = await param(
+    routeContext,
+    "requirementId",
+    qepRequirementIdParamSchema,
+  );
   const gateway = await requireQepGateway();
   const items = await invoke(context, () =>
-    gateway.qep.requirements.listOutboundRelationships(context.serviceContext, requirementId),
+    gateway.qep.requirements.listOutboundRelationships(
+      context.serviceContext,
+      requirementId,
+    ),
   );
   return jsonDataResponse(items, context.tracing);
 }

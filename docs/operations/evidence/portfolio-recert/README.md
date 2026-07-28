@@ -3,8 +3,7 @@
 > **Programme:** APZHUB-ENG-0005 · **Backlog:** R12-QA-01 · **KL:** PL12-KL-06  
 > **APZQEP-ENG-020D:** [20260725T160000Z-APZQEP-ENG-020D.json](./20260725T160000Z-APZQEP-ENG-020D.json) · [acceptance](./20260725T170000Z-APZQEP-ENG-020D-ACCEPTANCE.json) · [pack](../../products/apzqep/requirements/versioning/README.md) (**ACCEPTED / CLOSED / COMPLETE**)  
 > **APZQEP-ENG-020E:** [PART1](./20260725T174800Z-APZQEP-ENG-020E-PART1.json) · [PART2](./20260725T190000Z-APZQEP-ENG-020E-PART2.json) · [final](./20260725T203000Z-APZQEP-ENG-020E.json) · [acceptance](./20260726T080000Z-APZQEP-ENG-020E-ACCEPTANCE.json) · [pack](../../products/apzqep/requirements/baselines/README.md) (**ACCEPTED / CLOSED / COMPLETE**)  
-> **APZQEP-ARCH-005:** [refinement](./20260726T073000Z-APZQEP-ARCH-005.json) · [acceptance](./20260726T075000Z-APZQEP-ARCH-005-ACCEPTANCE.json) · [pack](../../products/apzqep/architecture/requirements-relationship/README.md) (**ACCEPTED / CLOSED / COMPLETE**)  
-
+> **APZQEP-ARCH-005:** [refinement](./20260726T073000Z-APZQEP-ARCH-005.json) · [acceptance](./20260726T075000Z-APZQEP-ARCH-005-ACCEPTANCE.json) · [pack](../../products/apzqep/architecture/requirements-relationship/README.md) (**ACCEPTED / CLOSED / COMPLETE**)
 
 > **Latest full suite:** [20260721T120046Z-R12-QA-01-full-FAIL.json](./20260721T120046Z-R12-QA-01-full-FAIL.json) (APZHUB-QA-CERT-001 **ACCEPTED** · FAIL)  
 > **Certification pack:** [docs/quality/portfolio-recertification/](../../quality/portfolio-recertification/README.md)  

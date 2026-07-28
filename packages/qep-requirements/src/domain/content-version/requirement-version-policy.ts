@@ -4,10 +4,7 @@ import {
   createRequirementContentVersionNumber,
   type RequirementContentVersionNumber,
 } from "./requirement-content-version-number";
-import {
-  canonicalizeToJson,
-  type RequirementSnapshot,
-} from "./requirement-snapshot";
+import { canonicalizeToJson, type RequirementSnapshot } from "./requirement-snapshot";
 import { QepInvariantViolation } from "../../shared/errors";
 
 export function nextVersionNumber(
@@ -24,7 +21,9 @@ export function validateParentVersion(
     throw new QepInvariantViolation("Content version 1 must not have a parent");
   }
   if (versionNumber > 1 && (!parent || parent.versionNumber !== versionNumber - 1)) {
-    throw new QepInvariantViolation("Content versions after v1 must parent the immediately preceding version");
+    throw new QepInvariantViolation(
+      "Content versions after v1 must parent the immediately preceding version",
+    );
   }
 }
 

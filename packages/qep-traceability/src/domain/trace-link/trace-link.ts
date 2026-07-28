@@ -2,11 +2,7 @@ import { TraceInvariantViolation } from "../../shared/errors";
 import { createTraceAuthority, type TraceAuthority } from "./trace-authority";
 import { createTraceConfidence, type TraceConfidence } from "./trace-confidence";
 import { createTraceContext, type TraceContext } from "./trace-context";
-import {
-  createTraceEndpoint,
-  type TraceEndpoint,
-  type TraceEndpointReference,
-} from "./trace-endpoint";
+import { createTraceEndpoint, type TraceEndpoint } from "./trace-endpoint";
 import { createTraceDirection, type TraceDirection } from "./trace-direction";
 import {
   buildTraceApprovedEvent,
@@ -31,7 +27,11 @@ import {
   createEmptyTraceHistory,
   type TraceHistory,
 } from "./trace-history";
-import { createTraceMetadata, mergeTraceMetadata, type TraceMetadata } from "./trace-metadata";
+import {
+  createTraceMetadata,
+  mergeTraceMetadata,
+  type TraceMetadata,
+} from "./trace-metadata";
 import { createTraceOrigin, type TraceOrigin } from "./trace-origin";
 import { createTraceProvenance, type TraceProvenance } from "./trace-provenance";
 import { createTraceRationale, type TraceRationale } from "./trace-rationale";
@@ -207,7 +207,9 @@ export function createTraceLink(input: CreateTraceLinkInput): TraceLink {
   const scope = createTraceScope(input.scope ?? { kind: "tenant_global" });
   const context = createTraceContext(input.context);
   const rationale = input.rationale ? createTraceRationale(input.rationale) : undefined;
-  const strength = createTraceStrength(input.strength ?? defaultStrengthForTraceType(type));
+  const strength = createTraceStrength(
+    input.strength ?? defaultStrengthForTraceType(type),
+  );
   const direction = createTraceDirection(input.direction ?? taxonomy.directionDefault);
   const metadata = createTraceMetadata(input.metadata);
 
@@ -273,7 +275,10 @@ export function validateTraceLink(
   trace: TraceLink,
   changedAt: string,
   changedBy: string,
-  context: Omit<TraceValidationContext, "tenantId" | "type" | "source" | "target" | "scope" | "origin" | "rationale">,
+  context: Omit<
+    TraceValidationContext,
+    "tenantId" | "type" | "source" | "target" | "scope" | "origin" | "rationale"
+  >,
 ): TraceLink {
   const base = clearEvents(trace);
   assertTraceLifecycleTransition(base.lifecycleState, "validated");
@@ -562,7 +567,10 @@ export function updateTraceEndpoint(
 ): TraceLink {
   const base = clearEvents(trace);
   assertTraceDraftOrValidated(base.lifecycleState);
-  const endpoint = createTraceEndpoint(role, { ...endpointInput, tenantId: base.tenantId });
+  const endpoint = createTraceEndpoint(role, {
+    ...endpointInput,
+    tenantId: base.tenantId,
+  });
   const source = role === "source" ? endpoint : base.source;
   const target = role === "target" ? endpoint : base.target;
   validateTraceLinkStructure({

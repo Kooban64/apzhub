@@ -13,14 +13,14 @@ Every enterprise has unique tools, policies, and reporting needs. A monolithic p
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| Extension surface | Approved interaction point (API, webhook, MCP, template, policy) |
-| Extension package | Registered bundle with manifest and review status |
-| Custom policy | Tenant-defined certification, risk, or gate rule within platform limits |
-| Connector | Integration adapter ingesting or linking external systems |
-| Partner extension | SI or ISV-delivered package via partner programme |
-| Marketplace package | Later P3 distributable extension |
+| Concept             | Product meaning                                                         |
+| ------------------- | ----------------------------------------------------------------------- |
+| Extension surface   | Approved interaction point (API, webhook, MCP, template, policy)        |
+| Extension package   | Registered bundle with manifest and review status                       |
+| Custom policy       | Tenant-defined certification, risk, or gate rule within platform limits |
+| Connector           | Integration adapter ingesting or linking external systems               |
+| Partner extension   | SI or ISV-delivered package via partner programme                       |
+| Marketplace package | Later P3 distributable extension                                        |
 
 ## Extension surfaces
 
@@ -28,15 +28,15 @@ Product APIs · Webhooks · MCP tools · Integration connectors · AI-provider a
 
 ## Primary objects
 
-| Object | Description |
-| ------ | ----------- |
-| Extension registration | Manifest metadata, version, owner, health |
-| Custom field definition | Additional metadata on governed objects |
-| Custom workflow hook | Trigger points in lifecycle stages |
-| Policy extension | Certification, risk, readiness rule templates |
-| Report extension | Additional report layouts and data slices |
-| Connector registration | Integration capability declaration |
-| Template package | Verification or evidence templates |
+| Object                  | Description                                   |
+| ----------------------- | --------------------------------------------- |
+| Extension registration  | Manifest metadata, version, owner, health     |
+| Custom field definition | Additional metadata on governed objects       |
+| Custom workflow hook    | Trigger points in lifecycle stages            |
+| Policy extension        | Certification, risk, readiness rule templates |
+| Report extension        | Additional report layouts and data slices     |
+| Connector registration  | Integration capability declaration            |
+| Template package        | Verification or evidence templates            |
 
 ## Lifecycle
 
@@ -55,13 +55,13 @@ stateDiagram-v2
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
-| Tenant Administrator | Enables approved extensions for tenant |
-| Platform Administrator | Reviews partner registrations globally |
-| Partner / Integrator | Builds and maintains extension packages |
-| QA Manager | Owns custom verification templates |
-| Compliance Officer | Approves policy extensions in regulated tenants |
+| Role                   | Ownership                                       |
+| ---------------------- | ----------------------------------------------- |
+| Tenant Administrator   | Enables approved extensions for tenant          |
+| Platform Administrator | Reviews partner registrations globally          |
+| Partner / Integrator   | Builds and maintains extension packages         |
+| QA Manager             | Owns custom verification templates              |
+| Compliance Officer     | Approves policy extensions in regulated tenants |
 
 ## Relationships
 
@@ -79,60 +79,60 @@ flowchart TB
 
 ## States
 
-| State | Meaning |
-| ----- | ------- |
-| Registered | Metadata recorded; not enabled |
-| In review | Awaiting security/compliance review |
-| Approved | May be enabled per tenant |
-| Active | Enabled and monitored |
-| Suspended | Disabled for violation or health failure |
-| Rejected | Not permitted |
-| Deprecated | Supported until end date |
+| State      | Meaning                                  |
+| ---------- | ---------------------------------------- |
+| Registered | Metadata recorded; not enabled           |
+| In review  | Awaiting security/compliance review      |
+| Approved   | May be enabled per tenant                |
+| Active     | Enabled and monitored                    |
+| Suspended  | Disabled for violation or health failure |
+| Rejected   | Not permitted                            |
+| Deprecated | Supported until end date                 |
 
 ## Governance expectations
 
-| Rule | Statement |
-| ---- | --------- |
-| SoR | Extensions consume QEP; do not own SoR domains |
-| Authz | Every extension call authorised |
-| Audit | Mutating extensions audited |
-| Certify | No extension may auto-certify |
+| Rule     | Statement                                      |
+| -------- | ---------------------------------------------- |
+| SoR      | Extensions consume QEP; do not own SoR domains |
+| Authz    | Every extension call authorised                |
+| Audit    | Mutating extensions audited                    |
+| Certify  | No extension may auto-certify                  |
 | Manifest | Connectors/providers registered and reviewable |
-| Brand | No engine brand leakage to standard users |
-| Risk | No extension may auto-accept risk |
-| Evidence | No extension may unlock locked packs |
+| Brand    | No engine brand leakage to standard users      |
+| Risk     | No extension may auto-accept risk              |
+| Evidence | No extension may unlock locked packs           |
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
-| EXT-01 | Extensions cannot become authoritative for certification decisions |
-| EXT-02 | Custom policies cannot disable human certification requirement |
-| EXT-03 | MCP and API writes use draft/gated paths where SoR impact |
+| Rule   | Statement                                                             |
+| ------ | --------------------------------------------------------------------- |
+| EXT-01 | Extensions cannot become authoritative for certification decisions    |
+| EXT-02 | Custom policies cannot disable human certification requirement        |
+| EXT-03 | MCP and API writes use draft/gated paths where SoR impact             |
 | EXT-04 | Marketplace packages (P3) follow same governance as tenant extensions |
-| EXT-05 | AI provider adapters replaceable; AI default OFF |
-| EXT-06 | Health reporting mandatory for active connector extensions |
+| EXT-05 | AI provider adapters replaceable; AI default OFF                      |
+| EXT-06 | Health reporting mandatory for active connector extensions            |
 
 ## Approval rules
 
-| Extension type | Approver |
-| -------------- | -------- |
-| Tenant custom field | Tenant Administrator |
+| Extension type          | Approver                                                      |
+| ----------------------- | ------------------------------------------------------------- |
+| Tenant custom field     | Tenant Administrator                                          |
 | Custom cert/risk policy | Compliance Officer in Regulated; QA Manager + Admin otherwise |
-| Partner connector | Platform Administrator + security review |
-| MCP tool package | Security Officer + Tenant Administrator |
-| Report extension | Tenant Administrator |
+| Partner connector       | Platform Administrator + security review                      |
+| MCP tool package        | Security Officer + Tenant Administrator                       |
+| Report extension        | Tenant Administrator                                          |
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| Third-party Integrator | Build within manifest contract |
-| Developer | Uses IDE/MCP extensions within scope |
-| Tenant Administrator | Enable/disable extensions |
-| Security Officer | Review mutating extensions |
-| QA Manager | Curate verification templates |
-| AI Agent | Uses MCP tools only — cannot register extensions |
+| Persona                | Responsibility                                   |
+| ---------------------- | ------------------------------------------------ |
+| Third-party Integrator | Build within manifest contract                   |
+| Developer              | Uses IDE/MCP extensions within scope             |
+| Tenant Administrator   | Enable/disable extensions                        |
+| Security Officer       | Review mutating extensions                       |
+| QA Manager             | Curate verification templates                    |
+| AI Agent               | Uses MCP tools only — cannot register extensions |
 
 ## Reporting
 
@@ -160,12 +160,12 @@ Marketplace P3, verified partner badge programme, low-code policy editor for gat
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Extension registration model | OpenAPI specifications |
-| Policy extension intent | Rule engine implementation |
-| Partner programme rules | Revenue share systems |
-| Template distribution | npm package structure |
+| In boundary                  | Out of boundary            |
+| ---------------------------- | -------------------------- |
+| Extension registration model | OpenAPI specifications     |
+| Policy extension intent      | Rule engine implementation |
+| Partner programme rules      | Revenue share systems      |
+| Template distribution        | npm package structure      |
 
 ## Example scenarios
 

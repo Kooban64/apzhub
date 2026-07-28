@@ -1,21 +1,21 @@
 # APZQEP-ENG-020F Part 1 — Engineering Evidence
 
-| Field | Value |
-| --- | --- |
-| Programme | APZQEP-ENG-020F |
-| Part | 1 — Domain Model and Business Rules |
-| Recorded | 2026-07-26 |
+| Field                   | Value                                    |
+| ----------------------- | ---------------------------------------- |
+| Programme               | APZQEP-ENG-020F                          |
+| Part                    | 1 — Domain Model and Business Rules      |
+| Recorded                | 2026-07-26                               |
 | Architecture compliance | Faithful to APZQEP-ARCH-005; no redesign |
-| Package | `@apzhub/qep-requirements` **0.8.0** |
+| Package                 | `@apzhub/qep-requirements` **0.8.0**     |
 
 ## Validation
 
-| Check | Result |
-| --- | --- |
-| `pnpm --filter @apzhub/qep-requirements typecheck` | PASS |
-| `pnpm --filter @apzhub/qep-requirements test` | PASS (includes 27 relationship domain tests) |
-| Domain infrastructure imports | None (no drizzle/postgres/HTTP in `domain/relationship`) |
-| Persistence / API / UI for relationships | Not present |
+| Check                                              | Result                                                   |
+| -------------------------------------------------- | -------------------------------------------------------- |
+| `pnpm --filter @apzhub/qep-requirements typecheck` | PASS                                                     |
+| `pnpm --filter @apzhub/qep-requirements test`      | PASS (includes 27 relationship domain tests)             |
+| Domain infrastructure imports                      | None (no drizzle/postgres/HTTP in `domain/relationship`) |
+| Persistence / API / UI for relationships           | Not present                                              |
 
 ## Test coverage themes
 

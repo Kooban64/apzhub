@@ -115,9 +115,19 @@ export const qepVerificationPriorityBodySchema = z
 export type QepVerificationListQuery = z.infer<typeof qepVerificationListQuerySchema>;
 export type QepVerificationCreateBody = z.infer<typeof qepVerificationCreateBodySchema>;
 export type QepVerificationAssignBody = z.infer<typeof qepVerificationAssignBodySchema>;
-export type QepVerificationCompleteBody = z.infer<typeof qepVerificationCompleteBodySchema>;
+export type QepVerificationCompleteBody = z.infer<
+  typeof qepVerificationCompleteBodySchema
+>;
 export type QepVerificationRejectBody = z.infer<typeof qepVerificationRejectBodySchema>;
-export type QepVerificationSupersedeBody = z.infer<typeof qepVerificationSupersedeBodySchema>;
-export type QepVerificationMetadataBody = z.infer<typeof qepVerificationMetadataBodySchema>;
-export type QepVerificationRationaleBody = z.infer<typeof qepVerificationRationaleBodySchema>;
-export type QepVerificationPriorityBody = z.infer<typeof qepVerificationPriorityBodySchema>;
+export type QepVerificationSupersedeBody = z.infer<
+  typeof qepVerificationSupersedeBodySchema
+>;
+export type QepVerificationMetadataBody = z.infer<
+  typeof qepVerificationMetadataBodySchema
+>;
+export type QepVerificationRationaleBody = z.infer<
+  typeof qepVerificationRationaleBodySchema
+>;
+export type QepVerificationPriorityBody = z.infer<
+  typeof qepVerificationPriorityBodySchema
+>;

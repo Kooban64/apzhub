@@ -2,16 +2,16 @@
 
 **APZQEP-ENG-040B is Owner-accepted and closed.**
 
-| Field | Value |
-| --- | --- |
-| Programme | APZQEP-ENG-040B |
-| Title | Verification Infrastructure |
-| Status | **ACCEPTED / CLOSED / COMPLETE** |
-| Package | `@apzhub/qep-verification` **0.2.0** |
-| Architecture | APZQEP-ARCH-009 **ACCEPTED** |
-| Domain | APZQEP-ENG-040A **ACCEPTED** |
-| Migrations | **0081**, **0082** |
-| Acceptance | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) · `20260726T190000Z-APZQEP-ENG-040B-ACCEPTANCE.json` |
+| Field        | Value                                                                                             |
+| ------------ | ------------------------------------------------------------------------------------------------- |
+| Programme    | APZQEP-ENG-040B                                                                                   |
+| Title        | Verification Infrastructure                                                                       |
+| Status       | **ACCEPTED / CLOSED / COMPLETE**                                                                  |
+| Package      | `@apzhub/qep-verification` **0.2.0**                                                              |
+| Architecture | APZQEP-ARCH-009 **ACCEPTED**                                                                      |
+| Domain       | APZQEP-ENG-040A **ACCEPTED**                                                                      |
+| Migrations   | **0081**, **0082**                                                                                |
+| Acceptance   | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) · `20260726T190000Z-APZQEP-ENG-040B-ACCEPTANCE.json` |
 
 ## Final repository state (at ENG-040B close)
 

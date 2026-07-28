@@ -460,13 +460,17 @@ function createMetricsServicesBundle(): MetricsPlatformServicesBundle {
   });
 }
 
-function createQepServicesBundle(searchHooksEnabled: boolean): QepPlatformServicesBundle {
+function createQepServicesBundle(
+  searchHooksEnabled: boolean,
+): QepPlatformServicesBundle {
   if (!process.env.DATABASE_URL) {
     throw new Error(
       "APZHUB_QEP enabled requires DATABASE_URL for QEP Requirements PostgreSQL persistence",
     );
   }
-  const searchHooks = searchHooksEnabled ? createQepSearchLifecycleOptions() : undefined;
+  const searchHooks = searchHooksEnabled
+    ? createQepSearchLifecycleOptions()
+    : undefined;
   return createQepPlatformServicesForProduction({
     postgresDb: getDb(),
     onUpserted: searchHooks?.onUpserted,

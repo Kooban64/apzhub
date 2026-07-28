@@ -10,7 +10,10 @@
     "name": "@apzhub/qep-test-specifications",
     "version": "0.2.0"
   },
-  "migrations": ["0083_apz_qep_test_specifications", "0084_apz_qep_test_specifications_rls"],
+  "migrations": [
+    "0083_apz_qep_test_specifications",
+    "0084_apz_qep_test_specifications_rls"
+  ],
   "apiBase": "/api/v1/qep/specifications",
   "baselines": {
     "requirements": "1.0.0 CERTIFIED / FROZEN",

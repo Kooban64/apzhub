@@ -10,9 +10,9 @@
 
 Owner Acceptance (2026-07-27): see [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md).
 
-- ECR: **PASS WITH CONDITIONS** — dispositions C-01…C-04 recorded  
-- Package: `@apzhub/qep-test-plans` **0.2.0** (Domain **0.1.0 CERTIFIED** semantics unchanged)  
-- Limitations: [KNOWN-LIMITATIONS.md](./KNOWN-LIMITATIONS.md)  
+- ECR: **PASS WITH CONDITIONS** — dispositions C-01…C-04 recorded
+- Package: `@apzhub/qep-test-plans` **0.2.0** (Domain **0.1.0 CERTIFIED** semantics unchanged)
+- Limitations: [KNOWN-LIMITATIONS.md](./KNOWN-LIMITATIONS.md)
 - Reference Infrastructure for orchestration capabilities (with limitations)
 
 ## Downstream

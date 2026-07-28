@@ -4,7 +4,7 @@
 
 ## Purpose
 
-The Traceability Model defines how quality-relevant artefacts connect across the APZ QEP SoR — from business objectives through requirements, verification, execution, evidence, defects, risks, releases, approvals, and certification. It answers *can we prove what was required, what was verified, and what was certified?*
+The Traceability Model defines how quality-relevant artefacts connect across the APZ QEP SoR — from business objectives through requirements, verification, execution, evidence, defects, risks, releases, approvals, and certification. It answers _can we prove what was required, what was verified, and what was certified?_
 
 ## Business rationale
 
@@ -12,15 +12,15 @@ Broken traceability is the leading cause of audit findings and release surprises
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| Trace link | Governed relationship between two SoR objects |
-| Forward trace | Requirement → verification → results → cert |
-| Backward trace | Certification / defect → requirement origin |
-| Coverage | Requirements with executed verification per policy |
-| Gap | Missing or stale linkage |
-| Orphan | Object without required parent/child link |
-| Impact slice | Change-set affected requirements and verification |
+| Concept        | Product meaning                                    |
+| -------------- | -------------------------------------------------- |
+| Trace link     | Governed relationship between two SoR objects      |
+| Forward trace  | Requirement → verification → results → cert        |
+| Backward trace | Certification / defect → requirement origin        |
+| Coverage       | Requirements with executed verification per policy |
+| Gap            | Missing or stale linkage                           |
+| Orphan         | Object without required parent/child link          |
+| Impact slice   | Change-set affected requirements and verification  |
 
 ## Linked domains
 
@@ -28,27 +28,27 @@ Business objectives · Requirements · Verification · Execution · Evidence · 
 
 ## Primary objects
 
-| Object | Description |
-| ------ | ----------- |
-| Trace link | Typed edge with creator and timestamp |
-| Trace graph | Computed view for a scope |
-| Coverage record | Requirement verification status aggregate |
-| Gap finding | System-detected missing linkage |
-| Orphan register | Items failing link policy |
-| Impact report | Change-to-verification affect set |
-| Unsupported claim | Cert scope lacking trace/evidence |
+| Object            | Description                               |
+| ----------------- | ----------------------------------------- |
+| Trace link        | Typed edge with creator and timestamp     |
+| Trace graph       | Computed view for a scope                 |
+| Coverage record   | Requirement verification status aggregate |
+| Gap finding       | System-detected missing linkage           |
+| Orphan register   | Items failing link policy                 |
+| Impact report     | Change-to-verification affect set         |
+| Unsupported claim | Cert scope lacking trace/evidence         |
 
 ## Trace views
 
-| View | Purpose |
-| ---- | ------- |
-| Forward | From requirement to verifications, results, certifications |
-| Backward | From certification or defect back to requirements and objectives |
-| Coverage gaps | Missing verification for in-scope requirements |
-| Orphaned requirements | Requirements with no verification links |
-| Unlinked verification | Verification not linked to requirements |
-| Unverified changes | Changes in release scope without verification |
-| Unsupported certification claims | Cert claims lacking evidence or trace |
+| View                             | Purpose                                                          |
+| -------------------------------- | ---------------------------------------------------------------- |
+| Forward                          | From requirement to verifications, results, certifications       |
+| Backward                         | From certification or defect back to requirements and objectives |
+| Coverage gaps                    | Missing verification for in-scope requirements                   |
+| Orphaned requirements            | Requirements with no verification links                          |
+| Unlinked verification            | Verification not linked to requirements                          |
+| Unverified changes               | Changes in release scope without verification                    |
+| Unsupported certification claims | Cert claims lacking evidence or trace                            |
 
 ## Lifecycle
 
@@ -69,13 +69,13 @@ Trace links persist through object versioning; historical links retained when re
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
-| Business Analyst / Product Owner | Objective and requirement linkage integrity |
-| QA Engineer | Verification-to-requirement links |
-| QA Manager | Coverage gap remediation prioritisation |
-| Automation Engineer | Automation asset to verification links |
-| Release Manager | Release scope trace completeness at readiness |
+| Role                             | Ownership                                     |
+| -------------------------------- | --------------------------------------------- |
+| Business Analyst / Product Owner | Objective and requirement linkage integrity   |
+| QA Engineer                      | Verification-to-requirement links             |
+| QA Manager                       | Coverage gap remediation prioritisation       |
+| Automation Engineer              | Automation asset to verification links        |
+| Release Manager                  | Release scope trace completeness at readiness |
 
 ## Relationships
 
@@ -97,26 +97,26 @@ flowchart LR
 
 ## States
 
-| State | Applies to | Meaning |
-| ----- | ---------- | ------- |
-| Linked | Trace link | Valid relationship |
-| Proposed | Trace link | Draft pending review |
-| Broken | Gap finding | Policy violation detected |
-| Waived | Gap finding | Accepted with risk/waiver |
-| Stale | Coverage record | Verification outdated for requirement version |
-| Complete | Coverage record | Policy satisfied |
+| State    | Applies to      | Meaning                                       |
+| -------- | --------------- | --------------------------------------------- |
+| Linked   | Trace link      | Valid relationship                            |
+| Proposed | Trace link      | Draft pending review                          |
+| Broken   | Gap finding     | Policy violation detected                     |
+| Waived   | Gap finding     | Accepted with risk/waiver                     |
+| Stale    | Coverage record | Verification outdated for requirement version |
+| Complete | Coverage record | Policy satisfied                              |
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
+| Rule  | Statement                                                                    |
+| ----- | ---------------------------------------------------------------------------- |
 | TR-01 | Certification scope must be backward-traceable to requirements unless waived |
 | TR-02 | Orphan verification shall not count toward coverage without requirement link |
-| TR-03 | AI-suggested links remain Proposed until human accept |
-| TR-04 | Unsupported certification claims block Ready unless policy waiver |
-| TR-05 | Trace history immutable — links superseded not deleted |
-| TR-06 | Source change references link to requirements — not duplicate code SoR |
-| TR-07 | Continuous signals may flag stale trace — never auto-certify |
+| TR-03 | AI-suggested links remain Proposed until human accept                        |
+| TR-04 | Unsupported certification claims block Ready unless policy waiver            |
+| TR-05 | Trace history immutable — links superseded not deleted                       |
+| TR-06 | Source change references link to requirements — not duplicate code SoR       |
+| TR-07 | Continuous signals may flag stale trace — never auto-certify                 |
 
 ## Approval rules
 
@@ -124,15 +124,15 @@ Proposed trace links from AI or bulk import require QA Engineer or QA Manager ac
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| Business Analyst | Maintains objective → requirement links |
-| QA Engineer | Links verification design to requirements |
-| Manual Tester | Confirms session execution links at completion |
-| Automation Engineer | Maintains automation asset linkage |
-| Release Manager | Reviews trace completeness at readiness |
-| Auditor | Executes backward trace from cert |
-| AI Agent | Proposes links — cannot finalize |
+| Persona             | Responsibility                                 |
+| ------------------- | ---------------------------------------------- |
+| Business Analyst    | Maintains objective → requirement links        |
+| QA Engineer         | Links verification design to requirements      |
+| Manual Tester       | Confirms session execution links at completion |
+| Automation Engineer | Maintains automation asset linkage             |
+| Release Manager     | Reviews trace completeness at readiness        |
+| Auditor             | Executes backward trace from cert              |
+| AI Agent            | Proposes links — cannot finalize               |
 
 ## Reporting
 
@@ -160,12 +160,12 @@ Semantic link suggestions, cross-project reuse graphs, and benchmark coverage me
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Quality trace graph | Full ALM dependency management |
-| Source change **references** | Git hosting |
-| Automation asset references | Pipeline authoring |
-| Gap detection for readiness | Auto-fix links without human |
+| In boundary                  | Out of boundary                |
+| ---------------------------- | ------------------------------ |
+| Quality trace graph          | Full ALM dependency management |
+| Source change **references** | Git hosting                    |
+| Automation asset references  | Pipeline authoring             |
+| Gap detection for readiness  | Auto-fix links without human   |
 
 ## Example scenarios
 

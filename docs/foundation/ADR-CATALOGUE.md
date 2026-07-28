@@ -44,7 +44,7 @@
 | ADR-0071      | Notification Delivery Providers and Routing ≠ Email SoR (**ACCEPTED** — ENG-004 Phase A implemented) · [full](../architecture/adr/ADR-0071-Notification-Delivery-Providers-and-Routing.md) |
 | ADR-0072      | Platform realtime transport SSE Phase A (**ACCEPTED** — Platform-1.3-ADR-0072 / ENG-003) · [full](../architecture/adr/ADR-0072-Platform-Realtime-Transport.md)                             |
 | ADR-0073      | Durable Notification Runtime PostgreSQL-owned (**ACCEPTED** — Platform-1.4-ADR-0073) · [pack](../architecture/adr-0073/ADR-0073.md)                                                        |
-| ADR-0074      | QEP Test Specification Rejected → Draft vs `availableActions` fidelity (**ACCEPTED**) · [ADR-0074](../adr/ADR-0074-qep-test-specification-rejected-return-to-draft-available-actions.md) |
+| ADR-0074      | QEP Test Specification Rejected → Draft vs `availableActions` fidelity (**ACCEPTED**) · [ADR-0074](../adr/ADR-0074-qep-test-specification-rejected-return-to-draft-available-actions.md)   |
 
 Legacy sprint ADRs: [docs/decisions/](../decisions/) — includes APZDOCS-002 document storage ADRs:
 

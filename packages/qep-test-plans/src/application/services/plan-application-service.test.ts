@@ -32,7 +32,9 @@ const READ_ONLY_CTX: QepRequestContext = {
   permissions: ["qep.plan.read"],
 };
 
-function baseCreateInput(overrides: Partial<CreatePlanCommandInput> = {}): CreatePlanCommandInput {
+function baseCreateInput(
+  overrides: Partial<CreatePlanCommandInput> = {},
+): CreatePlanCommandInput {
   return {
     title: "Application service plan",
     objective: "Application service objective",
@@ -57,7 +59,10 @@ function buildService(): {
   return { service, repos };
 }
 
-async function driveToApproved(service: PlanApplicationService, overrides: Partial<CreatePlanCommandInput> = {}) {
+async function driveToApproved(
+  service: PlanApplicationService,
+  overrides: Partial<CreatePlanCommandInput> = {},
+) {
   const created = await service.createPlan(FULL_CTX, baseCreateInput(overrides));
   const withItem = await service.addItem(FULL_CTX, created.id, {
     specificationId: "tsp_app_1",
@@ -169,18 +174,24 @@ describe("PlanApplicationService", () => {
       notes: "Updated note",
       expectedRevision: withItem2.revision,
     });
-    expect(updated.items.find((item) => item.id === "tpi_manage_1")?.notes).toBe("Updated note");
+    expect(updated.items.find((item) => item.id === "tpi_manage_1")?.notes).toBe(
+      "Updated note",
+    );
 
     const reordered = await service.reorderItems(FULL_CTX, created.id, {
       orderedItemIds: ["tpi_manage_2", "tpi_manage_1"],
       expectedRevision: updated.revision,
     });
-    expect(reordered.items.find((item) => item.id === "tpi_manage_2")?.sequence).toBe(0);
+    expect(reordered.items.find((item) => item.id === "tpi_manage_2")?.sequence).toBe(
+      0,
+    );
 
     const removed = await service.removeItem(FULL_CTX, created.id, "tpi_manage_1", {
       expectedRevision: reordered.revision,
     });
-    expect(removed.items.find((item) => item.id === "tpi_manage_1")?.itemStatus).toBe("removed");
+    expect(removed.items.find((item) => item.id === "tpi_manage_1")?.itemStatus).toBe(
+      "removed",
+    );
   });
 
   it("updates content, metadata, ownership, assignment, and schedule", async () => {
@@ -243,7 +254,10 @@ describe("PlanApplicationService", () => {
     await service.createPlan(FULL_CTX, baseCreateInput());
     await service.createPlan(
       FULL_CTX,
-      baseCreateInput({ title: "Searchable regression plan", scope: { class: "regression" } }),
+      baseCreateInput({
+        title: "Searchable regression plan",
+        scope: { class: "regression" },
+      }),
     );
 
     const listed = await service.list(FULL_CTX, {});
@@ -312,7 +326,9 @@ describe("PlanApplicationService", () => {
     const domainEvents: string[] = [];
     let transactionRuns = 0;
 
-    const repos = createQepTestPlanPersistenceForTest({ allowInMemoryPersistence: true });
+    const repos = createQepTestPlanPersistenceForTest({
+      allowInMemoryPersistence: true,
+    });
     const hookedService = createPlanApplicationService({
       plans: repos.plans,
       now: () => "2026-07-27T12:00:00.000Z",
@@ -356,13 +372,18 @@ describe("PlanApplicationService", () => {
       ...FULL_CTX,
       permissions: ["qep.plan.*"],
     };
-    const created = await service.createPlan(wildcardCtx, baseCreateInput({ title: "Wildcard plan" }));
+    const created = await service.createPlan(
+      wildcardCtx,
+      baseCreateInput({ title: "Wildcard plan" }),
+    );
     expect(created.title).toBe("Wildcard plan");
   });
 
   it("supports an injectable assertPermission hook", async () => {
     const calls: Array<readonly string[]> = [];
-    const repos = createQepTestPlanPersistenceForTest({ allowInMemoryPersistence: true });
+    const repos = createQepTestPlanPersistenceForTest({
+      allowInMemoryPersistence: true,
+    });
     const customService = createPlanApplicationService({
       plans: repos.plans,
       now: () => "2026-07-27T12:00:00.000Z",

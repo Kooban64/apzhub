@@ -66,7 +66,8 @@ function buildListQuery(params?: QepVerificationListParams): string {
   if (params.status) search.set("status", params.status);
   if (params.outcome) search.set("outcome", params.outcome);
   if (params.subjectKind) search.set("subjectKind", params.subjectKind);
-  if (params.subjectArtefactId) search.set("subjectArtefactId", params.subjectArtefactId);
+  if (params.subjectArtefactId)
+    search.set("subjectArtefactId", params.subjectArtefactId);
   if (params.authorityActorId) search.set("authorityActorId", params.authorityActorId);
   if (params.limit !== undefined) search.set("limit", String(params.limit));
   if (params.offset !== undefined) search.set("offset", String(params.offset));
@@ -74,7 +75,9 @@ function buildListQuery(params?: QepVerificationListParams): string {
   return query ? `?${query}` : "";
 }
 
-export function createQepVerificationHttpClient(basePath = "/api/v1/qep/verifications") {
+export function createQepVerificationHttpClient(
+  basePath = "/api/v1/qep/verifications",
+) {
   return {
     async listVerifications(
       params?: QepVerificationListParams,
@@ -266,20 +269,25 @@ const defaultClient = createQepVerificationHttpClient();
 export const listVerifications = defaultClient.listVerifications.bind(defaultClient);
 export const getVerification = defaultClient.getVerification.bind(defaultClient);
 export const createVerification = defaultClient.createVerification.bind(defaultClient);
-export const requestVerification = defaultClient.requestVerification.bind(defaultClient);
+export const requestVerification =
+  defaultClient.requestVerification.bind(defaultClient);
 export const assignVerification = defaultClient.assignVerification.bind(defaultClient);
 export const startVerification = defaultClient.startVerification.bind(defaultClient);
-export const completeVerification = defaultClient.completeVerification.bind(defaultClient);
+export const completeVerification =
+  defaultClient.completeVerification.bind(defaultClient);
 export const rejectVerification = defaultClient.rejectVerification.bind(defaultClient);
 export const expireVerification = defaultClient.expireVerification.bind(defaultClient);
-export const withdrawVerification = defaultClient.withdrawVerification.bind(defaultClient);
+export const withdrawVerification =
+  defaultClient.withdrawVerification.bind(defaultClient);
 export const cancelVerification = defaultClient.cancelVerification.bind(defaultClient);
 export const retireVerification = defaultClient.retireVerification.bind(defaultClient);
-export const supersedeVerification = defaultClient.supersedeVerification.bind(defaultClient);
+export const supersedeVerification =
+  defaultClient.supersedeVerification.bind(defaultClient);
 export const updateVerificationMetadata =
   defaultClient.updateVerificationMetadata.bind(defaultClient);
 export const updateVerificationRationale =
   defaultClient.updateVerificationRationale.bind(defaultClient);
 export const updateVerificationPriority =
   defaultClient.updateVerificationPriority.bind(defaultClient);
-export const getVerificationHistory = defaultClient.getVerificationHistory.bind(defaultClient);
+export const getVerificationHistory =
+  defaultClient.getVerificationHistory.bind(defaultClient);

@@ -17,9 +17,18 @@ export const RELATIONSHIP_TYPES = [
   "relates_to",
 ] as const;
 
-export const RELATIONSHIP_STRENGTHS = ["mandatory", "recommended", "informational"] as const;
+export const RELATIONSHIP_STRENGTHS = [
+  "mandatory",
+  "recommended",
+  "informational",
+] as const;
 
-export const RELATIONSHIP_CRITICALITIES = ["critical", "high", "medium", "low"] as const;
+export const RELATIONSHIP_CRITICALITIES = [
+  "critical",
+  "high",
+  "medium",
+  "low",
+] as const;
 
 export const RELATIONSHIP_CLASSIFICATIONS = [
   "structural",
@@ -35,8 +44,16 @@ export const RELATIONSHIP_CLASSIFICATIONS = [
   "integration",
 ] as const;
 
-export const RELATIONSHIP_SCOPES = ["product", "project", "release", "baseline"] as const;
+export const RELATIONSHIP_SCOPES = [
+  "product",
+  "project",
+  "release",
+  "baseline",
+] as const;
 
-export const RELATIONSHIP_ENDPOINT_MODES = ["requirement", "content_version_pinned"] as const;
+export const RELATIONSHIP_ENDPOINT_MODES = [
+  "requirement",
+  "content_version_pinned",
+] as const;
 
 export const RELATIONSHIP_RATIONALE_MAX_LENGTH = 4_000;

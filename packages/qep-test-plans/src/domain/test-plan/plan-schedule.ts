@@ -16,7 +16,9 @@ export function createEmptyTestPlanSchedule(): TestPlanSchedule {
   return {};
 }
 
-export function createTestPlanSchedule(input: CreateTestPlanScheduleInput): TestPlanSchedule {
+export function createTestPlanSchedule(
+  input: CreateTestPlanScheduleInput,
+): TestPlanSchedule {
   const window = createExecutionWindow({
     plannedStart: input.plannedStart,
     plannedEnd: input.plannedEnd,

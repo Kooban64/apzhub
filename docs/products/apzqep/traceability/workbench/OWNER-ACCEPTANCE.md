@@ -6,12 +6,12 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ENG-030C — Traceability Workbench |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Package at acceptance | `@apzhub/qep-traceability` **0.3.0** (subsequently promoted to **1.0.0** under TRACE-001) |
-| Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T164000Z-APZQEP-ENG-030C-ACCEPTANCE.json` |
+| Field                 | Value                                                                                        |
+| --------------------- | -------------------------------------------------------------------------------------------- |
+| Programme             | APZQEP-ENG-030C — Traceability Workbench                                                     |
+| Decision              | **ACCEPTED / CLOSED / COMPLETE**                                                             |
+| Package at acceptance | `@apzhub/qep-traceability` **0.3.0** (subsequently promoted to **1.0.0** under TRACE-001)    |
+| Acceptance evidence   | `docs/operations/evidence/portfolio-recert/20260726T164000Z-APZQEP-ENG-030C-ACCEPTANCE.json` |
 
 ## Effect
 

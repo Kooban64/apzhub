@@ -6,8 +6,8 @@ This directory is the canonical source for APZHUB product and architecture docum
 
 ## APZQEP Requirement Baselines (APZQEP-ENG-020E)
 
-| Document | Description |
-| --- | --- |
+| Document                                                                     | Description                                                                                                                             |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | [Requirements Baselines](./products/apzqep/requirements/baselines/README.md) | **ACCEPTED / CLOSED / COMPLETE** · `@apzhub/qep-requirements` **0.7.0** · Acceptance `20260726T080000Z-APZQEP-ENG-020E-ACCEPTANCE.json` |
 
 ## APZHUB Platform Release 1.0 (APZHUB-PORTFOLIO-001 — ACCEPTED)

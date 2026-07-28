@@ -8,8 +8,8 @@ Draft · In Review · Approved · Rejected · Superseded · Withdrawn · Retired
 
 ## Rules
 
-- Explicit transition commands (future)  
-- Server-authoritative validation  
-- Approved versions immutable  
-- History append-only  
+- Explicit transition commands (future)
+- Server-authoritative validation
+- Approved versions immutable
+- History append-only
 - Supersession preferred over silent rewrite

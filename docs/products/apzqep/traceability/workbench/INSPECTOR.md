@@ -11,11 +11,11 @@ Implements ARCH-008 [INSPECTOR-MODEL.md](../../architecture/traceability-workben
 
 ## availableActions
 
-| Rule | Detail |
-| --- | --- |
-| Source | Server DTO field `availableActions` only |
+| Rule        | Detail                                                               |
+| ----------- | -------------------------------------------------------------------- |
+| Source      | Server DTO field `availableActions` only                             |
 | Computation | Backend `computeTraceLinkAvailableActions` / `@apzhub/qep-contracts` |
-| UI | Buttons/dialogs rendered iff action string present |
-| Forbidden | Inferring actions from lifecycle client-side |
+| UI          | Buttons/dialogs rendered iff action string present                   |
+| Forbidden   | Inferring actions from lifecycle client-side                         |
 
 Contract tests: `qep-traceability-available-actions.test.ts`, detail view tests in `qep-traceability-views.test.tsx`.

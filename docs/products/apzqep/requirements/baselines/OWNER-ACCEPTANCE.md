@@ -6,31 +6,31 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ENG-020E — Requirements Baselines |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Package | `@apzhub/qep-requirements` **0.7.0** |
+| Field                   | Value                                                                                                                                                                           |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Programme               | APZQEP-ENG-020E — Requirements Baselines                                                                                                                                        |
+| Decision                | **ACCEPTED / CLOSED / COMPLETE**                                                                                                                                                |
+| Package                 | `@apzhub/qep-requirements` **0.7.0**                                                                                                                                            |
 | Implementation evidence | `docs/operations/evidence/portfolio-recert/20260725T174800Z-APZQEP-ENG-020E-PART1.json`, `20260725T190000Z-APZQEP-ENG-020E-PART2.json`, `20260725T203000Z-APZQEP-ENG-020E.json` |
-| Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T080000Z-APZQEP-ENG-020E-ACCEPTANCE.json` |
-| Documentation pack | `docs/products/apzqep/requirements/baselines/` |
+| Acceptance evidence     | `docs/operations/evidence/portfolio-recert/20260726T080000Z-APZQEP-ENG-020E-ACCEPTANCE.json`                                                                                    |
+| Documentation pack      | `docs/products/apzqep/requirements/baselines/`                                                                                                                                  |
 
 ## Acceptance assessment (Owner)
 
-| Area | Result |
-| ---- | ------ |
-| Domain and architecture | PASS |
-| Configuration management integrity | PASS |
-| Persistence and tenancy | PASS |
-| Integrity | PASS |
-| Application and API | PASS |
-| Authorisation and security | PASS |
-| Platform integration | PASS |
-| Workbench user experience | PASS |
-| Comparison | PASS |
-| Accessibility | PASS WITH DOCUMENTED EVIDENCE LIMITATION |
-| Operational readiness | PASS |
-| Quality evidence | PASS |
+| Area                               | Result                                   |
+| ---------------------------------- | ---------------------------------------- |
+| Domain and architecture            | PASS                                     |
+| Configuration management integrity | PASS                                     |
+| Persistence and tenancy            | PASS                                     |
+| Integrity                          | PASS                                     |
+| Application and API                | PASS                                     |
+| Authorisation and security         | PASS                                     |
+| Platform integration               | PASS                                     |
+| Workbench user experience          | PASS                                     |
+| Comparison                         | PASS                                     |
+| Accessibility                      | PASS WITH DOCUMENTED EVIDENCE LIMITATION |
+| Operational readiness              | PASS                                     |
+| Quality evidence                   | PASS                                     |
 
 ## Binding foundations (authoritative)
 

@@ -39,5 +39,6 @@ export const QEP_REQUIREMENTS_PERMISSION_LABELS: Record<
   "qep.requirements.relationships.modify": "Modify Requirement Relationships",
   "qep.requirements.relationships.transition": "Transition Requirement Relationships",
   "qep.requirements.relationships.retire": "Retire Requirement Relationships",
-  "qep.requirements.relationships.taxonomy.administer": "Administer Requirement Relationship Taxonomy",
+  "qep.requirements.relationships.taxonomy.administer":
+    "Administer Requirement Relationship Taxonomy",
 };

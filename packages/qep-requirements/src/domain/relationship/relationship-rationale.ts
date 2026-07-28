@@ -10,7 +10,9 @@ export type RelationshipRationale = string & {
 export function createRelationshipRationale(value: string): RelationshipRationale {
   const normalized = value.trim();
   if (!normalized) {
-    throw new QepInvariantViolation("Relationship rationale must not be empty when provided");
+    throw new QepInvariantViolation(
+      "Relationship rationale must not be empty when provided",
+    );
   }
   if (normalized.length > RELATIONSHIP_RATIONALE_MAX_LENGTH) {
     throw new QepInvariantViolation(

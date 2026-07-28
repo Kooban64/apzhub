@@ -59,7 +59,9 @@ export function createVerificationSubject(input: {
     }
     const artefactId = input.artefactId.trim();
     if (!artefactId) {
-      throw new VerificationInvariantViolation("external_reference subject requires artefactId");
+      throw new VerificationInvariantViolation(
+        "external_reference subject requires artefactId",
+      );
     }
     return {
       kind,
@@ -71,13 +73,17 @@ export function createVerificationSubject(input: {
 
   const artefactId = input.artefactId.trim();
   if (!artefactId) {
-    throw new VerificationInvariantViolation("Verification subject requires artefactId");
+    throw new VerificationInvariantViolation(
+      "Verification subject requires artefactId",
+    );
   }
 
   const contentVersionId = input.contentVersionId?.trim() || undefined;
   const baselineId = input.baselineId?.trim() || undefined;
   if (contentVersionId && !/^rcv_[A-Za-z0-9_-]+$/.test(contentVersionId)) {
-    throw new VerificationInvariantViolation("Subject contentVersionId must start with rcv_");
+    throw new VerificationInvariantViolation(
+      "Subject contentVersionId must start with rcv_",
+    );
   }
   if (baselineId && !/^rbl_[A-Za-z0-9_-]+$/.test(baselineId)) {
     throw new VerificationInvariantViolation("Subject baselineId must start with rbl_");

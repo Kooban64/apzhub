@@ -4,14 +4,14 @@
 
 ## MCP may
 
-- Read Verification via authorised APIs  
-- Invoke authorised APIs on behalf of a principal  
+- Read Verification via authorised APIs
+- Invoke authorised APIs on behalf of a principal
 
 ## MCP must never
 
-- Own Verification SoR  
-- Own lifecycle or Workbench state  
-- Bypass IAM or `availableActions` semantics  
+- Own Verification SoR
+- Own lifecycle or Workbench state
+- Bypass IAM or `availableActions` semantics
 
 ## Rule
 

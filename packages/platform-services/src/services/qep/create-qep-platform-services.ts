@@ -23,7 +23,10 @@ import {
 import type { StoredTraceLink, TraceEndpointResolver } from "@apzhub/qep-traceability";
 import type { StoredTestSpecification } from "@apzhub/qep-test-specifications/domain";
 import type { StoredTestPlan } from "@apzhub/qep-test-plans/domain";
-import type { StoredVerification, VerificationSubjectResolver } from "@apzhub/qep-verification";
+import type {
+  StoredVerification,
+  VerificationSubjectResolver,
+} from "@apzhub/qep-verification";
 
 import type { RequestPipeline } from "../../execution/request-pipeline";
 import { wrapServiceWithPipeline } from "../../execution/wrap-service";
@@ -77,13 +80,17 @@ export type QepPlatformServicesBundle = {
 type TraceabilityWiringInput = {
   readonly onTraceLinkUpserted?: (trace: StoredTraceLink) => void | Promise<void>;
   readonly traceabilityEndpointResolver?: TraceEndpointResolver;
-  readonly onVerificationUpserted?: (verification: StoredVerification) => void | Promise<void>;
+  readonly onVerificationUpserted?: (
+    verification: StoredVerification,
+  ) => void | Promise<void>;
   readonly verificationSubjectResolver?: VerificationSubjectResolver;
   readonly onSpecificationUpserted?: (
     specification: StoredTestSpecification,
   ) => void | Promise<void>;
   readonly onPlanUpserted?: (plan: StoredTestPlan) => void | Promise<void>;
-  readonly allocatePlanNumber?: (ctx: { readonly tenantId: string }) => Promise<string> | string;
+  readonly allocatePlanNumber?: (ctx: {
+    readonly tenantId: string;
+  }) => Promise<string> | string;
 };
 
 export type CreateQepPlatformServicesInput = TraceabilityWiringInput & {
@@ -136,8 +143,14 @@ export function wrapQepPlatformGatewayWithPipeline(
       pipeline,
       "qepRequirement",
     ) as QepRequirementPlatformService,
-    traceability: wrapQepTraceabilityPlatformServiceWithPipeline(gateway.traceability, pipeline),
-    verification: wrapQepVerificationPlatformServiceWithPipeline(gateway.verification, pipeline),
+    traceability: wrapQepTraceabilityPlatformServiceWithPipeline(
+      gateway.traceability,
+      pipeline,
+    ),
+    verification: wrapQepVerificationPlatformServiceWithPipeline(
+      gateway.verification,
+      pipeline,
+    ),
     specifications: wrapQepTestSpecificationPlatformServiceWithPipeline(
       gateway.specifications,
       pipeline,
@@ -160,13 +173,17 @@ function buildBundle(input: {
   ) => void | Promise<void>;
   readonly onTraceLinkUpserted?: (trace: StoredTraceLink) => void | Promise<void>;
   readonly traceabilityEndpointResolver?: TraceEndpointResolver;
-  readonly onVerificationUpserted?: (verification: StoredVerification) => void | Promise<void>;
+  readonly onVerificationUpserted?: (
+    verification: StoredVerification,
+  ) => void | Promise<void>;
   readonly verificationSubjectResolver?: VerificationSubjectResolver;
   readonly onSpecificationUpserted?: (
     specification: StoredTestSpecification,
   ) => void | Promise<void>;
   readonly onPlanUpserted?: (plan: StoredTestPlan) => void | Promise<void>;
-  readonly allocatePlanNumber?: (ctx: { readonly tenantId: string }) => Promise<string> | string;
+  readonly allocatePlanNumber?: (ctx: {
+    readonly tenantId: string;
+  }) => Promise<string> | string;
 }): QepPlatformServicesBundle {
   const application = createRequirementApplicationService({
     requirements: input.persistence.requirements,

@@ -9,44 +9,44 @@ The Certification Model governs how organisations formally attest that a defined
 
 ## Business rationale
 
-Informal “sign-offs” in email or chat fail audit and create liability ambiguity. Regulated and enterprise customers require named approvers, immutable evidence at decision time, and clear outcomes (including qualifications and rejections). Certification separates *we are ready to ask* (readiness) from *we attest* (human decision).
+Informal “sign-offs” in email or chat fail audit and create liability ambiguity. Regulated and enterprise customers require named approvers, immutable evidence at decision time, and clear outcomes (including qualifications and rejections). Certification separates _we are ready to ask_ (readiness) from _we attest_ (human decision).
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| Certification request | Formal ask to certify a scope |
-| Evidence pack | Curated proof bundle — locks on approval |
-| Certification decision | Human outcome with rationale |
-| Qualification | Approved with documented operational constraints |
-| Certification statement | Published attestation record |
-| Validity period | Optional policy-bound cert lifetime |
-| Continuous signal | Drift indicator — may request re-cert only |
-| Supersession | Later cert replaces earlier for same scope lineage |
+| Concept                 | Product meaning                                    |
+| ----------------------- | -------------------------------------------------- |
+| Certification request   | Formal ask to certify a scope                      |
+| Evidence pack           | Curated proof bundle — locks on approval           |
+| Certification decision  | Human outcome with rationale                       |
+| Qualification           | Approved with documented operational constraints   |
+| Certification statement | Published attestation record                       |
+| Validity period         | Optional policy-bound cert lifetime                |
+| Continuous signal       | Drift indicator — may request re-cert only         |
+| Supersession            | Later cert replaces earlier for same scope lineage |
 
 ## Decision outcomes
 
-| Outcome | Meaning |
-| ------- | ------- |
-| **Approved** | Certified for scope |
+| Outcome                          | Meaning                                            |
+| -------------------------------- | -------------------------------------------------- |
+| **Approved**                     | Certified for scope                                |
 | **Approved with qualifications** | Certified with recorded operational qualifications |
-| **Rejected** | Not certified; reason required |
-| **Withdrawn** | Request withdrawn before decision |
-| **Expired** | Validity ended per policy |
-| **Superseded** | Replaced by later certification |
+| **Rejected**                     | Not certified; reason required                     |
+| **Withdrawn**                    | Request withdrawn before decision                  |
+| **Expired**                      | Validity ended per policy                          |
+| **Superseded**                   | Replaced by later certification                    |
 
 ## Primary objects
 
-| Object | Description |
-| ------ | ----------- |
-| Certification request | Scope, snapshot refs, approver routing |
-| Review task | Assigned human reviewer checklist |
-| Evidence pack | Linked pack — locks on positive decision |
-| Decision record | Outcome, approvers, timestamp, rationale |
-| Qualification record | Constraints bundled with Approved with qualifications |
-| Certification statement | Customer/audit-facing attestation |
-| Re-certification request | Triggered by drift, expiry, or scope change |
-| Cert history | Immutable chain per release/product line |
+| Object                   | Description                                           |
+| ------------------------ | ----------------------------------------------------- |
+| Certification request    | Scope, snapshot refs, approver routing                |
+| Review task              | Assigned human reviewer checklist                     |
+| Evidence pack            | Linked pack — locks on positive decision              |
+| Decision record          | Outcome, approvers, timestamp, rationale              |
+| Qualification record     | Constraints bundled with Approved with qualifications |
+| Certification statement  | Customer/audit-facing attestation                     |
+| Re-certification request | Triggered by drift, expiry, or scope change           |
+| Cert history             | Immutable chain per release/product line              |
 
 ## Lifecycle
 
@@ -80,13 +80,13 @@ stateDiagram-v2
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
-| Release Manager | Initiates request; primary certifier typical |
-| QA Manager | Co-reviewer; verification/evidence attestation |
-| Compliance Officer | Regulated co-approver when policy requires |
-| Auditor | Observes; independent read — no cert by default |
-| Product Owner | Qualification acceptance for scope trade-offs |
+| Role               | Ownership                                       |
+| ------------------ | ----------------------------------------------- |
+| Release Manager    | Initiates request; primary certifier typical    |
+| QA Manager         | Co-reviewer; verification/evidence attestation  |
+| Compliance Officer | Regulated co-approver when policy requires      |
+| Auditor            | Observes; independent read — no cert by default |
+| Product Owner      | Qualification acceptance for scope trade-offs   |
 
 ## Relationships
 
@@ -106,53 +106,53 @@ flowchart TB
 
 ## States
 
-| State | Meaning |
-| ----- | ------- |
-| Draft | Request preparing |
-| Submitted | Awaiting reviewer assignment |
-| In review | Active human review |
-| Approved / Approved with qualifications | Positive decision — pack locks |
-| Rejected | Negative decision — pack editable |
-| Withdrawn | Cancelled before decision |
-| Expired | Past validity |
-| Superseded | Replaced by newer cert |
+| State                                   | Meaning                           |
+| --------------------------------------- | --------------------------------- |
+| Draft                                   | Request preparing                 |
+| Submitted                               | Awaiting reviewer assignment      |
+| In review                               | Active human review               |
+| Approved / Approved with qualifications | Positive decision — pack locks    |
+| Rejected                                | Negative decision — pack editable |
+| Withdrawn                               | Cancelled before decision         |
+| Expired                                 | Past validity                     |
+| Superseded                              | Replaced by newer cert            |
 
 Formal certification status changes **only** via human decision states above — not via continuous signals or QI scores.
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
-| CERT-01 | Certification shall always be a human decision |
-| CERT-02 | Evidence packs lock on Approved or Approved with qualifications |
-| CERT-03 | History never deleted; supersession retains chain |
+| Rule    | Statement                                                                   |
+| ------- | --------------------------------------------------------------------------- |
+| CERT-01 | Certification shall always be a human decision                              |
+| CERT-02 | Evidence packs lock on Approved or Approved with qualifications             |
+| CERT-03 | History never deleted; supersession retains chain                           |
 | CERT-04 | Continuous signals may **request** re-certification; never auto-flip status |
-| CERT-05 | AI may recommend; never certifies |
-| CERT-06 | Rejected decisions require documented rationale |
-| CERT-07 | Qualifications must be explicit and visible on statement |
-| CERT-08 | Readiness Ready alone is insufficient — cert decision separate |
+| CERT-05 | AI may recommend; never certifies                                           |
+| CERT-06 | Rejected decisions require documented rationale                             |
+| CERT-07 | Qualifications must be explicit and visible on statement                    |
+| CERT-08 | Readiness Ready alone is insufficient — cert decision separate              |
 
 ## Approval rules
 
-| Policy tier | Approvers |
-| ----------- | --------- |
-| Team | Release Manager (default) |
-| Enterprise | Release Manager + QA Manager optional co-sign |
-| Regulated | Multi-approver: Release Manager + Compliance/Security per policy |
-| Qualifications | Same as base tier + Product Owner acknowledgment typical |
+| Policy tier    | Approvers                                                        |
+| -------------- | ---------------------------------------------------------------- |
+| Team           | Release Manager (default)                                        |
+| Enterprise     | Release Manager + QA Manager optional co-sign                    |
+| Regulated      | Multi-approver: Release Manager + Compliance/Security per policy |
+| Qualifications | Same as base tier + Product Owner acknowledgment typical         |
 
 AI Agent, MCP, integrators, and QI **cannot** approve. Delegation per RBAC only.
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| Release Manager | Submit request; certify or reject |
-| QA Manager | Review evidence and verification completeness |
-| Compliance Officer | Co-approve in regulated tenants |
-| Auditor | Verify locked pack matches statement |
-| Executive | Views status — not default certifier |
-| AI Agent | **Cannot certify** |
+| Persona            | Responsibility                                |
+| ------------------ | --------------------------------------------- |
+| Release Manager    | Submit request; certify or reject             |
+| QA Manager         | Review evidence and verification completeness |
+| Compliance Officer | Co-approve in regulated tenants               |
+| Auditor            | Verify locked pack matches statement          |
+| Executive          | Views status — not default certifier          |
+| AI Agent           | **Cannot certify**                            |
 
 ## Reporting
 
@@ -180,12 +180,12 @@ Continuous certification **signals** (entitlement add-on later) enrich drift det
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Human cert decision SoR | CI green = deployed |
-| Lock evidence on approval | Digital signature hardware spec |
-| Re-cert request from signals | Auto-revoke cert on signal |
-| Certification statement | Legal contract issuance |
+| In boundary                  | Out of boundary                 |
+| ---------------------------- | ------------------------------- |
+| Human cert decision SoR      | CI green = deployed             |
+| Lock evidence on approval    | Digital signature hardware spec |
+| Re-cert request from signals | Auto-revoke cert on signal      |
+| Certification statement      | Legal contract issuance         |
 
 ## Example scenarios
 

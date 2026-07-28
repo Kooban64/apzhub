@@ -8,10 +8,10 @@ Activity Bar (QEP) → Sidebar Verification → Dashboard / My Queue / Team Queu
 
 ## Subject navigation
 
-| Target | When available | When not |
-| ------ | -------------- | -------- |
-| Requirements | Navigate to subject | Governed unavailable |
-| Traceability | Navigate to context | Governed unavailable |
-| Future Test Specs / Cases / Executions / Evidence | Slot | Governed unavailable |
+| Target                                            | When available      | When not             |
+| ------------------------------------------------- | ------------------- | -------------------- |
+| Requirements                                      | Navigate to subject | Governed unavailable |
+| Traceability                                      | Navigate to context | Governed unavailable |
+| Future Test Specs / Cases / Executions / Evidence | Slot                | Governed unavailable |
 
 **No placeholder screens.**

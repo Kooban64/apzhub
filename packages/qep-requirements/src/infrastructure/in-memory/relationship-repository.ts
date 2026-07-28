@@ -40,14 +40,18 @@ function assertNoActiveDuplicate(
   candidate: Relationship,
   excludeId?: string,
 ): void {
-  if (candidate.lifecycleState !== "active" && candidate.lifecycleState !== "deprecated") {
+  if (
+    candidate.lifecycleState !== "active" &&
+    candidate.lifecycleState !== "deprecated"
+  ) {
     return;
   }
   const key = computeRelationshipDuplicateKey(candidate);
   for (const row of store.values()) {
     if (row.tenantId !== candidate.tenantId) continue;
     if (excludeId && row.id === excludeId) continue;
-    if (row.lifecycleState !== "active" && row.lifecycleState !== "deprecated") continue;
+    if (row.lifecycleState !== "active" && row.lifecycleState !== "deprecated")
+      continue;
     if (computeRelationshipDuplicateKey(row) === key) {
       throw new QepConflictError(
         "Duplicate relationship for the same type, endpoints, and scope is not allowed",

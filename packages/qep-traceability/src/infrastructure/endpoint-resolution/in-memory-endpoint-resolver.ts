@@ -1,4 +1,7 @@
-import type { EndpointResolutionFact, TraceEndpointResolver } from "./endpoint-resolver";
+import type {
+  EndpointResolutionFact,
+  TraceEndpointResolver,
+} from "./endpoint-resolver";
 
 export type InMemoryEndpointRegistry = Map<string, EndpointResolutionFact>;
 

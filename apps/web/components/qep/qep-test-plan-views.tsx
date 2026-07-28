@@ -165,7 +165,16 @@ function ExplorerTable({
   return (
     <QepTable
       caption="Test Plans"
-      columns={["Number", "Title", "Status", "Version", "Type", "Priority", "Owner", "Updated"]}
+      columns={[
+        "Number",
+        "Title",
+        "Status",
+        "Version",
+        "Type",
+        "Priority",
+        "Owner",
+        "Updated",
+      ]}
       rows={items.map((row) => ({
         id: row.id,
         href: QEP_TEST_PLAN_ROUTES.detail(row.id),
@@ -263,7 +272,9 @@ function PlanExplorerView({
 }) {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [status, setStatus] = useState(initialStatus ?? searchParams.get("status") ?? "");
+  const [status, setStatus] = useState(
+    initialStatus ?? searchParams.get("status") ?? "",
+  );
   const [planType, setPlanType] = useState(searchParams.get("planType") ?? "");
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
   const [applied, setApplied] = useState<QepTestPlanListParams>({
@@ -294,7 +305,9 @@ function PlanExplorerView({
     if (next.planType) sp.set("planType", next.planType);
     if (next.query) sp.set("q", next.query);
     const qs = sp.toString();
-    const base = initialStatus ? QEP_TEST_PLAN_ROUTES.review : QEP_TEST_PLAN_ROUTES.explorer;
+    const base = initialStatus
+      ? QEP_TEST_PLAN_ROUTES.review
+      : QEP_TEST_PLAN_ROUTES.explorer;
     router.replace(qs ? `${base}?${qs}` : base);
   };
 
@@ -332,7 +345,9 @@ function PlanExplorerView({
         <ExplorerTable
           items={list.data.items}
           emptyLabel={
-            initialStatus ? "No Plans awaiting review" : "No Plans match the current filters"
+            initialStatus
+              ? "No Plans awaiting review"
+              : "No Plans match the current filters"
           }
         />
       ) : null}
@@ -387,15 +402,22 @@ function DashboardView() {
             href={card.href}
             className="rounded-lg border border-[var(--color-border)] p-4 hover:bg-[var(--color-muted)]"
           >
-            <p className="text-xs uppercase text-[var(--color-muted-foreground)]">{card.label}</p>
-            <p className="mt-2 text-3xl font-semibold">{card.loading ? "…" : card.total}</p>
+            <p className="text-xs uppercase text-[var(--color-muted-foreground)]">
+              {card.label}
+            </p>
+            <p className="mt-2 text-3xl font-semibold">
+              {card.loading ? "…" : card.total}
+            </p>
           </Link>
         ))}
       </div>
       <QepPanel title="Recently in review">
         {review.isLoading ? <QepLoadingState label="Loading…" /> : null}
         {review.data ? (
-          <ExplorerTable items={review.data.items} emptyLabel="Nothing awaiting review" />
+          <ExplorerTable
+            items={review.data.items}
+            emptyLabel="Nothing awaiting review"
+          />
         ) : null}
       </QepPanel>
     </QepPageShell>
@@ -462,7 +484,9 @@ function ActionDialog({
   useEffect(() => {
     if (!open) return;
     previouslyFocused.current =
-      typeof document !== "undefined" ? (document.activeElement as HTMLElement | null) : null;
+      typeof document !== "undefined"
+        ? (document.activeElement as HTMLElement | null)
+        : null;
     const panel = panelRef.current;
     const focusable = () =>
       panel
@@ -557,7 +581,9 @@ function PlanActions({ dto }: { readonly dto: QepTestPlanDto }) {
   const [schedulePlannedStart, setSchedulePlannedStart] = useState(
     dto.schedule.plannedStart ?? "",
   );
-  const [schedulePlannedEnd, setSchedulePlannedEnd] = useState(dto.schedule.plannedEnd ?? "");
+  const [schedulePlannedEnd, setSchedulePlannedEnd] = useState(
+    dto.schedule.plannedEnd ?? "",
+  );
   const [scheduleMilestoneRef, setScheduleMilestoneRef] = useState(
     dto.schedule.milestoneRef ?? "",
   );
@@ -635,7 +661,9 @@ function PlanActions({ dto }: { readonly dto: QepTestPlanDto }) {
           }
           case "updateMetadata":
             await updatePlanMetadata(dto.id, {
-              metadata: metadataKey.trim() ? { [metadataKey.trim()]: metadataValue } : {},
+              metadata: metadataKey.trim()
+                ? { [metadataKey.trim()]: metadataValue }
+                : {},
               expectedRevision: dto.revision,
             });
             break;
@@ -657,9 +685,13 @@ function PlanActions({ dto }: { readonly dto: QepTestPlanDto }) {
             break;
           case "updateSchedule":
             await updatePlanSchedule(dto.id, {
-              plannedStart: schedulePlannedStart.trim() ? schedulePlannedStart.trim() : null,
+              plannedStart: schedulePlannedStart.trim()
+                ? schedulePlannedStart.trim()
+                : null,
               plannedEnd: schedulePlannedEnd.trim() ? schedulePlannedEnd.trim() : null,
-              milestoneRef: scheduleMilestoneRef.trim() ? scheduleMilestoneRef.trim() : null,
+              milestoneRef: scheduleMilestoneRef.trim()
+                ? scheduleMilestoneRef.trim()
+                : null,
               timezone: scheduleTimezone.trim() ? scheduleTimezone.trim() : null,
               expectedRevision: dto.revision,
             });
@@ -692,7 +724,9 @@ function PlanActions({ dto }: { readonly dto: QepTestPlanDto }) {
     onError: (err) => setError((err as Error).message),
   });
 
-  const primaryActions = dto.availableActions.filter((a) => !ITEM_LEVEL_ACTIONS.includes(a));
+  const primaryActions = dto.availableActions.filter(
+    (a) => !ITEM_LEVEL_ACTIONS.includes(a),
+  );
 
   return (
     <div className="flex flex-wrap gap-2" data-testid="qep-plan-actions">
@@ -713,7 +747,9 @@ function PlanActions({ dto }: { readonly dto: QepTestPlanDto }) {
       ))}
 
       <ActionDialog
-        title={dialog && SIMPLE_CONFIRM_ACTIONS.includes(dialog) ? ACTION_LABELS[dialog] : ""}
+        title={
+          dialog && SIMPLE_CONFIRM_ACTIONS.includes(dialog) ? ACTION_LABELS[dialog] : ""
+        }
         open={Boolean(dialog && SIMPLE_CONFIRM_ACTIONS.includes(dialog))}
         onClose={() => setDialog(null)}
       >
@@ -732,7 +768,11 @@ function PlanActions({ dto }: { readonly dto: QepTestPlanDto }) {
         </div>
       </ActionDialog>
 
-      <ActionDialog title="Approve" open={dialog === "approve"} onClose={() => setDialog(null)}>
+      <ActionDialog
+        title="Approve"
+        open={dialog === "approve"}
+        onClose={() => setDialog(null)}
+      >
         <label className="flex flex-col gap-1 text-sm">
           Comment (optional)
           <Input
@@ -753,7 +793,11 @@ function PlanActions({ dto }: { readonly dto: QepTestPlanDto }) {
         </div>
       </ActionDialog>
 
-      <ActionDialog title="Reject" open={dialog === "reject"} onClose={() => setDialog(null)}>
+      <ActionDialog
+        title="Reject"
+        open={dialog === "reject"}
+        onClose={() => setDialog(null)}
+      >
         <label className="flex flex-col gap-1 text-sm">
           Rationale (required)
           <Input
@@ -801,7 +845,11 @@ function PlanActions({ dto }: { readonly dto: QepTestPlanDto }) {
         </div>
       </ActionDialog>
 
-      <ActionDialog title="Clone" open={dialog === "clone"} onClose={() => setDialog(null)}>
+      <ActionDialog
+        title="Clone"
+        open={dialog === "clone"}
+        onClose={() => setDialog(null)}
+      >
         <label className="flex flex-col gap-1 text-sm">
           New number (optional)
           <Input
@@ -981,7 +1029,9 @@ function InspectorBody({ dto }: { readonly dto: QepTestPlanDto }) {
     <div className="flex flex-col gap-4" data-testid="qep-plan-inspector">
       <div className="flex flex-wrap items-center gap-2">
         <QepStatusBadge status={dto.status} />
-        <span className="text-sm text-[var(--color-muted-foreground)]">{dto.versionLabel}</span>
+        <span className="text-sm text-[var(--color-muted-foreground)]">
+          {dto.versionLabel}
+        </span>
         <span className="rounded bg-[var(--color-muted)] px-2 py-0.5 text-xs font-medium">
           rev {dto.revision}
         </span>
@@ -1046,20 +1096,26 @@ function InspectorBody({ dto }: { readonly dto: QepTestPlanDto }) {
       </QepPanel>
       <QepPanel title={`Items (${dto.metrics.totalItems})`}>
         <p className="text-sm text-[var(--color-muted-foreground)]">
-          Included {dto.metrics.includedCount} · Optional {dto.metrics.optionalCount} · Deferred{" "}
-          {dto.metrics.deferredCount} · Pinned {dto.metrics.pinnedIncludedCount}
+          Included {dto.metrics.includedCount} · Optional {dto.metrics.optionalCount} ·
+          Deferred {dto.metrics.deferredCount} · Pinned{" "}
+          {dto.metrics.pinnedIncludedCount}
         </p>
-        <Link className="mt-2 inline-block text-sm underline" href={QEP_TEST_PLAN_ROUTES.items(dto.id)}>
+        <Link
+          className="mt-2 inline-block text-sm underline"
+          href={QEP_TEST_PLAN_ROUTES.items(dto.id)}
+        >
           Manage items
         </Link>
       </QepPanel>
       <QepPanel title="Relationships">
         {dto.items.length === 0 && (dto.externalReferences ?? []).length === 0 ? (
-          <p className="text-sm text-[var(--color-muted-foreground)]">No relationships</p>
+          <p className="text-sm text-[var(--color-muted-foreground)]">
+            No relationships
+          </p>
         ) : (
           <p className="text-sm text-[var(--color-muted-foreground)]">
-            {dto.items.length} linked Specification(s), {(dto.externalReferences ?? []).length}{" "}
-            external reference(s)
+            {dto.items.length} linked Specification(s),{" "}
+            {(dto.externalReferences ?? []).length} external reference(s)
           </p>
         )}
         <Link
@@ -1074,7 +1130,8 @@ function InspectorBody({ dto }: { readonly dto: QepTestPlanDto }) {
           <ul className="space-y-1 text-sm">
             {dto.approvals.map((approval) => (
               <li key={approval.id}>
-                {approval.decision} by {approval.decidedBy} at {formatDate(approval.decidedAt)}
+                {approval.decision} by {approval.decidedBy} at{" "}
+                {formatDate(approval.decidedAt)}
                 {approval.comment ? ` — ${approval.comment}` : ""}
               </li>
             ))}
@@ -1090,7 +1147,10 @@ function InspectorBody({ dto }: { readonly dto: QepTestPlanDto }) {
           ))}
           {dto.historySummaries.length === 0 ? <li>—</li> : null}
         </ul>
-        <Link className="mt-2 inline-block text-sm underline" href={QEP_TEST_PLAN_ROUTES.audit(dto.id)}>
+        <Link
+          className="mt-2 inline-block text-sm underline"
+          href={QEP_TEST_PLAN_ROUTES.audit(dto.id)}
+        >
           Full audit trail
         </Link>
       </QepPanel>
@@ -1176,11 +1236,19 @@ function ItemsView({
               >
                 Open Specification
               </Link>{" "}
-              <span className="text-[var(--color-muted-foreground)]">({item.itemStatus})</span>
-              {item.notes ? <div className="text-[var(--color-muted-foreground)]">{item.notes}</div> : null}
+              <span className="text-[var(--color-muted-foreground)]">
+                ({item.itemStatus})
+              </span>
+              {item.notes ? (
+                <div className="text-[var(--color-muted-foreground)]">{item.notes}</div>
+              ) : null}
             </div>
             {canRemove ? (
-              <Button type="button" variant="outline" onClick={() => remove.mutate(item.id)}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => remove.mutate(item.id)}
+              >
                 Remove
               </Button>
             ) : null}
@@ -1239,7 +1307,9 @@ function RelationshipsView({ dto }: { readonly dto: QepTestPlanDto }) {
     >
       <QepPanel title="Linked Test Specifications">
         {dto.items.length === 0 ? (
-          <p className="text-sm text-[var(--color-muted-foreground)]">No linked specifications</p>
+          <p className="text-sm text-[var(--color-muted-foreground)]">
+            No linked specifications
+          </p>
         ) : (
           <ul className="space-y-2 text-sm">
             {dto.items.map((item) => (
@@ -1263,7 +1333,9 @@ function RelationshipsView({ dto }: { readonly dto: QepTestPlanDto }) {
       </QepPanel>
       <QepPanel title="External references">
         {(dto.externalReferences ?? []).length === 0 ? (
-          <p className="text-sm text-[var(--color-muted-foreground)]">No external references</p>
+          <p className="text-sm text-[var(--color-muted-foreground)]">
+            No external references
+          </p>
         ) : (
           <ul className="space-y-1 text-sm">
             {(dto.externalReferences ?? []).map((ref) => (
@@ -1307,11 +1379,17 @@ function CompareUnavailableView({ id }: { readonly id: string }) {
   );
 }
 
-function renderHistoryRows(rows: readonly QepTestPlanHistorySummaryDto[], testId: string) {
+function renderHistoryRows(
+  rows: readonly QepTestPlanHistorySummaryDto[],
+  testId: string,
+) {
   return (
     <ul className="space-y-2 text-sm" data-testid={testId}>
       {rows.map((h, i) => (
-        <li key={`${h.at}-${i}`} className="rounded border border-[var(--color-border)] p-3">
+        <li
+          key={`${h.at}-${i}`}
+          className="rounded border border-[var(--color-border)] p-3"
+        >
           <div className="font-medium">
             {h.action} — {formatDate(h.at)}
           </div>
@@ -1324,12 +1402,19 @@ function renderHistoryRows(rows: readonly QepTestPlanHistorySummaryDto[], testId
   );
 }
 
-function HistoryView({ id, dto }: { readonly id: string; readonly dto: QepTestPlanDto }) {
+function HistoryView({
+  id,
+  dto,
+}: {
+  readonly id: string;
+  readonly dto: QepTestPlanDto;
+}) {
   const history = useQuery({
     queryKey: qepQueryKeys.plans.history(id),
     queryFn: ({ signal }) => getPlanHistory(id, { signal }),
   });
-  const rows: readonly QepTestPlanHistorySummaryDto[] = history.data ?? dto.historySummaries;
+  const rows: readonly QepTestPlanHistorySummaryDto[] =
+    history.data ?? dto.historySummaries;
 
   return (
     <QepPageShell
@@ -1355,7 +1440,8 @@ function AuditView({ id, dto }: { readonly id: string; readonly dto: QepTestPlan
     queryKey: qepQueryKeys.plans.history(id),
     queryFn: ({ signal }) => getPlanHistory(id, { signal }),
   });
-  const rows: readonly QepTestPlanHistorySummaryDto[] = history.data ?? dto.historySummaries;
+  const rows: readonly QepTestPlanHistorySummaryDto[] =
+    history.data ?? dto.historySummaries;
 
   return (
     <QepPageShell
@@ -1377,7 +1463,13 @@ function AuditView({ id, dto }: { readonly id: string; readonly dto: QepTestPlan
   );
 }
 
-function VersionsView({ id, dto }: { readonly id: string; readonly dto: QepTestPlanDto }) {
+function VersionsView({
+  id,
+  dto,
+}: {
+  readonly id: string;
+  readonly dto: QepTestPlanDto;
+}) {
   const versions = useQuery({
     queryKey: qepQueryKeys.plans.versions(id),
     queryFn: ({ signal }) => listPlanVersions(id, { signal }),
@@ -1405,8 +1497,8 @@ function VersionsView({ id, dto }: { readonly id: string; readonly dto: QepTestP
           <ul className="space-y-1 text-sm">
             {dto.revisions.map((rev, i) => (
               <li key={`${rev.versionLabel}-${i}`}>
-                {rev.versionLabel} — sealed {formatDate(rev.sealedAt)} by {rev.sealedBy} (
-                {rev.statusAtSeal})
+                {rev.versionLabel} — sealed {formatDate(rev.sealedAt)} by {rev.sealedBy}{" "}
+                ({rev.statusAtSeal})
               </li>
             ))}
           </ul>
@@ -1454,7 +1546,11 @@ function CreatePlanView() {
 
   return (
     <QepPageShell title="New Plan" breadcrumbs={["QEP", "Test Plans", "New"]}>
-      <form className="grid max-w-2xl gap-3" onSubmit={onSubmit} data-testid="qep-plan-create">
+      <form
+        className="grid max-w-2xl gap-3"
+        onSubmit={onSubmit}
+        data-testid="qep-plan-create"
+      >
         <label className="flex flex-col gap-1 text-sm">
           Title
           <Input
@@ -1524,12 +1620,18 @@ function EditContentView({ dto }: { readonly dto: QepTestPlanDto }) {
         title,
         description,
         objective,
-        scope: { class: scopeClass, label: dto.scope.label, externalRef: dto.scope.externalRef },
+        scope: {
+          class: scopeClass,
+          label: dto.scope.label,
+          externalRef: dto.scope.externalRef,
+        },
         priority,
         expectedRevision: dto.revision,
       }),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: qepQueryKeys.plans.detail(dto.id) });
+      await queryClient.invalidateQueries({
+        queryKey: qepQueryKeys.plans.detail(dto.id),
+      });
       router.push(QEP_TEST_PLAN_ROUTES.detail(dto.id));
     },
     onError: (err) => setError((err as Error).message),
@@ -1558,7 +1660,11 @@ function EditContentView({ dto }: { readonly dto: QepTestPlanDto }) {
       >
         <label className="flex flex-col gap-1 text-sm">
           Title
-          <Input value={title} onChange={(e) => setTitle(e.target.value)} aria-label="Title" />
+          <Input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            aria-label="Title"
+          />
         </label>
         <label className="flex flex-col gap-1 text-sm">
           Description
@@ -1663,7 +1769,9 @@ function PlanDetailView({
       <ItemsView
         dto={dto}
         onChanged={() =>
-          void queryClient.invalidateQueries({ queryKey: qepQueryKeys.plans.detail(id) })
+          void queryClient.invalidateQueries({
+            queryKey: qepQueryKeys.plans.detail(id),
+          })
         }
       />
     );

@@ -42,10 +42,14 @@ describe("RequirementsRelationshipRepository contract (in-memory)", () => {
     expect(await repo.get(TENANT, created.id)).toEqual(created);
     expect(await repo.exists(TENANT, created.id)).toBe(true);
 
-    const listed = await repo.list(TENANT, { requirementId: "req_source_1", direction: "outbound" });
+    const listed = await repo.list(TENANT, {
+      requirementId: "req_source_1",
+      direction: "outbound",
+    });
     expect(listed).toHaveLength(1);
 
-    const { changeRelationshipRationale } = await import("../../domain/relationship/relationship");
+    const { changeRelationshipRationale } =
+      await import("../../domain/relationship/relationship");
     const mutated = changeRelationshipRationale(
       created,
       "Updated contract rationale",
@@ -63,7 +67,8 @@ describe("RequirementsRelationshipRepository contract (in-memory)", () => {
     const repo = createInMemoryRequirementsRelationshipRepository(store);
     const first = draftRelationship("rrl_contract_dup_a", "req_dup_1", "req_dup_2");
     await repo.create(first);
-    const { activateRequirementsRelationship } = await import("../../domain/relationship/relationship");
+    const { activateRequirementsRelationship } =
+      await import("../../domain/relationship/relationship");
     const activated = activateRequirementsRelationship(
       (await repo.get(TENANT, first.id))!,
       "2026-07-26T10:05:00.000Z",
@@ -106,7 +111,8 @@ describe("RequirementsRelationshipRepository contract (in-memory)", () => {
       draftRelationship("rrl_contract_rev", "req_rev_1", "req_rev_2"),
     );
 
-    const { changeRelationshipRationale } = await import("../../domain/relationship/relationship");
+    const { changeRelationshipRationale } =
+      await import("../../domain/relationship/relationship");
     const mutated = changeRelationshipRationale(
       created,
       "Updated rationale",
@@ -116,10 +122,7 @@ describe("RequirementsRelationshipRepository contract (in-memory)", () => {
 
     await expect(repo.save(mutated, 99)).rejects.toThrow(QepRevisionConflictError);
     await expect(
-      repo.save(
-        { ...mutated, id: "rrl_missing" as typeof created.id },
-        1,
-      ),
+      repo.save({ ...mutated, id: "rrl_missing" as typeof created.id }, 1),
     ).rejects.toThrow(QepRelationshipNotFoundError);
   });
 

@@ -14,14 +14,14 @@
 
 ## Baselines consumed (immutable)
 
-| Baseline | Status |
-| -------- | ------ |
-| APZQEP-ARCH-014 — Test Plans Workbench Architecture | **ACCEPTED / ARCHITECTURE BASELINED / CLOSED** (2026-07-28) |
-| Domain `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** (CERT-060A) | CLOSED |
-| Infrastructure `@apzhub/qep-test-plans` **0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED** (CERT-060B) | CLOSED |
-| Recorded Infrastructure limitations L-01 / L-02 / L-03 | [KNOWN-LIMITATIONS.md](../infrastructure/KNOWN-LIMITATIONS.md) |
-| Document 000 · OES-000 · OES-001 · OES-002 v1.1.0 | Applicable foundation and methodology standards |
-| Binding invariant (Owner ARCH-014 Acceptance) | **"The Workbench SHALL never determine what a user may do."** |
+| Baseline                                                                                         | Status                                                         |
+| ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
+| APZQEP-ARCH-014 — Test Plans Workbench Architecture                                              | **ACCEPTED / ARCHITECTURE BASELINED / CLOSED** (2026-07-28)    |
+| Domain `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** (CERT-060A)                                  | CLOSED                                                         |
+| Infrastructure `@apzhub/qep-test-plans` **0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED** (CERT-060B) | CLOSED                                                         |
+| Recorded Infrastructure limitations L-01 / L-02 / L-03                                           | [KNOWN-LIMITATIONS.md](../infrastructure/KNOWN-LIMITATIONS.md) |
+| Document 000 · OES-000 · OES-001 · OES-002 v1.1.0                                                | Applicable foundation and methodology standards                |
+| Binding invariant (Owner ARCH-014 Acceptance)                                                    | **"The Workbench SHALL never determine what a user may do."**  |
 
 ## Purpose
 
@@ -31,14 +31,14 @@ Owner Engineering Specification for **implementing** the Test Plans Workbench ag
 
 ## Pack
 
-| Document | Role |
-| -------- | ---- |
-| [COMPLETE.md](./COMPLETE.md) | Authoritative assembly |
-| [PART-01.md](./PART-01.md) … [PART-05.md](./PART-05.md) | Normative parts |
-| [APPENDIX-A.md](./APPENDIX-A.md) … [APPENDIX-E.md](./APPENDIX-E.md) | Appendices |
-| [OWNER-SUMMARY.md](./OWNER-SUMMARY.md) | Owner entry |
-| [ENGINEERING-SPECIFICATION-COMPLETION-REPORT.md](./ENGINEERING-SPECIFICATION-COMPLETION-REPORT.md) | Completion report |
-| [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) | Owner Decision — **PENDING** |
+| Document                                                                                           | Role                         |
+| -------------------------------------------------------------------------------------------------- | ---------------------------- |
+| [COMPLETE.md](./COMPLETE.md)                                                                       | Authoritative assembly       |
+| [PART-01.md](./PART-01.md) … [PART-05.md](./PART-05.md)                                            | Normative parts              |
+| [APPENDIX-A.md](./APPENDIX-A.md) … [APPENDIX-E.md](./APPENDIX-E.md)                                | Appendices                   |
+| [OWNER-SUMMARY.md](./OWNER-SUMMARY.md)                                                             | Owner entry                  |
+| [ENGINEERING-SPECIFICATION-COMPLETION-REPORT.md](./ENGINEERING-SPECIFICATION-COMPLETION-REPORT.md) | Completion report            |
+| [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                                                       | Owner Decision — **PENDING** |
 
 ## Pack structure
 

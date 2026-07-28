@@ -30,7 +30,10 @@ export type TestSpecificationListQuery = {
 export interface TestSpecificationRepository {
   create(spec: TestSpecification): Promise<StoredTestSpecification>;
   get(tenantId: string, id: SpecificationId): Promise<StoredTestSpecification | null>;
-  save(spec: TestSpecification, expectedRevision: number): Promise<StoredTestSpecification>;
+  save(
+    spec: TestSpecification,
+    expectedRevision: number,
+  ): Promise<StoredTestSpecification>;
   list(
     tenantId: string,
     query?: TestSpecificationListQuery,

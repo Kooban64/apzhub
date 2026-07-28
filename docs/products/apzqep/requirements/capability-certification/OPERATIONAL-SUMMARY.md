@@ -23,12 +23,12 @@ Platform audit actions for requirement, content version, baseline, and relations
 
 ## Common failure modes
 
-| Symptom | Likely cause |
-| ------- | ------------ |
-| Read-only actions | Missing permission or empty `availableActions` |
-| Revision conflict | Concurrent edit — reload and retry |
-| Search result stale | Projection lag — open detail from SoR |
-| Immutable edit blocked | Retired/deprecated/baseline-locked context |
+| Symptom                | Likely cause                                   |
+| ---------------------- | ---------------------------------------------- |
+| Read-only actions      | Missing permission or empty `availableActions` |
+| Revision conflict      | Concurrent edit — reload and retry             |
+| Search result stale    | Projection lag — open detail from SoR          |
+| Immutable edit blocked | Retired/deprecated/baseline-locked context     |
 
 ## Rollback
 
@@ -38,13 +38,13 @@ Platform audit actions for requirement, content version, baseline, and relations
 
 ## Smoke (post-deploy)
 
-1. List Requirements; open detail.  
-2. Inspect Content Versions.  
-3. Open Baselines list; inspect locked baseline (read-only).  
-4. Relationships: list → create draft → activate.  
+1. List Requirements; open detail.
+2. Inspect Content Versions.
+3. Open Baselines list; inspect locked baseline (read-only).
+4. Relationships: list → create draft → activate.
 5. Confirm retired/deprecated relationship shows immutable banner.
 
 ## Detailed slice runbooks
 
-- Baselines: [../baselines/OPERATIONAL-READINESS.md](../baselines/OPERATIONAL-READINESS.md)  
+- Baselines: [../baselines/OPERATIONAL-READINESS.md](../baselines/OPERATIONAL-READINESS.md)
 - Relationships: [../relationships/OPERATIONAL-READINESS.md](../relationships/OPERATIONAL-READINESS.md)

@@ -30,7 +30,9 @@ export function createTestPlanAssignment(
   if (leadId === "") {
     throw new PlanValidationError("leadId must be non-empty when provided");
   }
-  const assigneeIds = [...new Set((input.assigneeIds ?? []).map((id) => id.trim()).filter(Boolean))];
+  const assigneeIds = [
+    ...new Set((input.assigneeIds ?? []).map((id) => id.trim()).filter(Boolean)),
+  ];
   return {
     ...(leadId ? { leadId } : {}),
     assigneeIds,

@@ -9,7 +9,10 @@ import {
   QepBaselineArchivedError,
   QepBaselineNotFoundError,
 } from "../../shared/errors";
-import { createEmptyBaselineStore, createInMemoryRequirementBaselineRepository } from "./baseline-repository";
+import {
+  createEmptyBaselineStore,
+  createInMemoryRequirementBaselineRepository,
+} from "./baseline-repository";
 
 const TENANT = "tenant_baseline_contract";
 const ACTOR = "user_baseline_contract";
@@ -46,7 +49,9 @@ const INTEGRITY: RequirementBaselineLockIntegrityInput = {
 
 describe("RequirementBaselineRepository contract (in-memory)", () => {
   it("implements the full create -> membership -> lock -> archive lifecycle", async () => {
-    const repo = createInMemoryRequirementBaselineRepository(createEmptyBaselineStore());
+    const repo = createInMemoryRequirementBaselineRepository(
+      createEmptyBaselineStore(),
+    );
 
     const created = await repo.createBaseline(draftBaseline("rbl_contract_1", 1));
     expect(created.status).toBe("draft");
@@ -82,7 +87,12 @@ describe("RequirementBaselineRepository contract (in-memory)", () => {
     });
     expect(reverified.integrityVerifiedAt).toBe("2026-07-25T10:06:00.000Z");
 
-    const archived = await repo.archiveBaseline(TENANT, created.id, "2026-07-25T10:10:00.000Z", ACTOR);
+    const archived = await repo.archiveBaseline(
+      TENANT,
+      created.id,
+      "2026-07-25T10:10:00.000Z",
+      ACTOR,
+    );
     expect(archived.status).toBe("archived");
 
     const listed = await repo.listBaselines(TENANT);
@@ -96,16 +106,26 @@ describe("RequirementBaselineRepository contract (in-memory)", () => {
   });
 
   it("rejects locking a baseline with no content versions", async () => {
-    const repo = createInMemoryRequirementBaselineRepository(createEmptyBaselineStore());
+    const repo = createInMemoryRequirementBaselineRepository(
+      createEmptyBaselineStore(),
+    );
     const created = await repo.createBaseline(draftBaseline("rbl_contract_2", 1));
 
     await expect(
-      repo.lockBaseline(TENANT, created.id, INTEGRITY, "2026-07-25T10:05:00.000Z", ACTOR),
+      repo.lockBaseline(
+        TENANT,
+        created.id,
+        INTEGRITY,
+        "2026-07-25T10:05:00.000Z",
+        ACTOR,
+      ),
     ).rejects.toThrow(QepBaselineInvalidStateError);
   });
 
   it("rejects locking or archiving a baseline more than once", async () => {
-    const repo = createInMemoryRequirementBaselineRepository(createEmptyBaselineStore());
+    const repo = createInMemoryRequirementBaselineRepository(
+      createEmptyBaselineStore(),
+    );
     const created = await repo.createBaseline(draftBaseline("rbl_contract_3", 1));
     await repo.addRequirementVersion(
       TENANT,
@@ -114,10 +134,22 @@ describe("RequirementBaselineRepository contract (in-memory)", () => {
       "2026-07-25T10:02:00.000Z",
       ACTOR,
     );
-    await repo.lockBaseline(TENANT, created.id, INTEGRITY, "2026-07-25T10:05:00.000Z", ACTOR);
+    await repo.lockBaseline(
+      TENANT,
+      created.id,
+      INTEGRITY,
+      "2026-07-25T10:05:00.000Z",
+      ACTOR,
+    );
 
     await expect(
-      repo.lockBaseline(TENANT, created.id, INTEGRITY, "2026-07-25T10:05:00.000Z", ACTOR),
+      repo.lockBaseline(
+        TENANT,
+        created.id,
+        INTEGRITY,
+        "2026-07-25T10:05:00.000Z",
+        ACTOR,
+      ),
     ).rejects.toThrow(QepBaselineAlreadyLockedError);
 
     await repo.archiveBaseline(TENANT, created.id, "2026-07-25T10:10:00.000Z", ACTOR);
@@ -128,7 +160,9 @@ describe("RequirementBaselineRepository contract (in-memory)", () => {
   });
 
   it("throws not-found for an unknown or cross-tenant baseline id", async () => {
-    const repo = createInMemoryRequirementBaselineRepository(createEmptyBaselineStore());
+    const repo = createInMemoryRequirementBaselineRepository(
+      createEmptyBaselineStore(),
+    );
     await expect(
       repo.addRequirementVersion(
         TENANT,

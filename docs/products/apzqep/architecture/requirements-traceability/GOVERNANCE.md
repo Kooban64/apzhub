@@ -4,11 +4,11 @@
 
 ## Rule classes
 
-| Class | Effect |
-| ----- | ------ |
-| Mandatory traces | Feed missing/uncovered signals |
-| Optional traces | Allowed; soft expectations |
-| Projection-only | Derived from Requirements Relationships |
+| Class            | Effect                                  |
+| ---------------- | --------------------------------------- |
+| Mandatory traces | Feed missing/uncovered signals          |
+| Optional traces  | Allowed; soft expectations              |
+| Projection-only  | Derived from Requirements Relationships |
 
 ## Detections
 
@@ -16,7 +16,7 @@ Orphan Requirements · Broken Traces · Missing Traces · Circular Traces (per-t
 
 ## Authority
 
-- Trace permissions govern Trace Link mutation (future catalogue).  
-- Endpoint domains remain authoritative for endpoint validity.  
-- AI suggestions cannot become authoritative without governed promotion.  
+- Trace permissions govern Trace Link mutation (future catalogue).
+- Endpoint domains remain authoritative for endpoint validity.
+- AI suggestions cannot become authoritative without governed promotion.
 - Certification must not be inferred from connectivity alone.

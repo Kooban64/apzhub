@@ -6,5 +6,13 @@
   "authority": "Owner Certification Programme Instruction APZQEP-CERT-040D",
   "packageAtAcceptance": { "@apzhub/qep-verification": "0.3.0" },
   "effect": "ENG-040C closed. APZQEP-CERT-040D Verification Capability Certification authorised (certification only).",
-  "notAuthorisedUnderCert": ["new functionality", "Evidence", "Coverage", "Impact", "Certification Engine", "AI", "MCP"]
+  "notAuthorisedUnderCert": [
+    "new functionality",
+    "Evidence",
+    "Coverage",
+    "Impact",
+    "Certification Engine",
+    "AI",
+    "MCP"
+  ]
 }

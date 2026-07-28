@@ -77,7 +77,8 @@ function buildBundle(input: {
   // resolve permissively so Trace Link creation is not blocked on those
   // domains landing. Requirements-backed resolvers can be supplied via
   // `endpointResolver` once the caller has requirements persistence in scope.
-  const endpointResolver = input.endpointResolver ?? createInMemoryTraceEndpointResolver();
+  const endpointResolver =
+    input.endpointResolver ?? createInMemoryTraceEndpointResolver();
 
   const application = createTraceLinkApplicationService({
     traceLinks: input.persistence.traceLinks,
@@ -96,7 +97,8 @@ function buildBundle(input: {
       traceabilityEnabled: true,
       persistenceMode: input.persistenceMode,
     },
-    wrapWithPipeline: (pipeline) => wrapQepTraceabilityPlatformServiceWithPipeline(service, pipeline),
+    wrapWithPipeline: (pipeline) =>
+      wrapQepTraceabilityPlatformServiceWithPipeline(service, pipeline),
   };
 }
 
@@ -121,7 +123,9 @@ export function createQepTraceabilityPlatformServicesForProduction(
       "createQepTraceabilityPlatformServicesForProduction requires postgresDb — in-memory fallback is forbidden",
     );
   }
-  const persistence = createQepTraceabilityPersistenceForProduction({ db: input.postgresDb });
+  const persistence = createQepTraceabilityPersistenceForProduction({
+    db: input.postgresDb,
+  });
   return buildBundle({
     persistence,
     persistenceMode: "postgres",

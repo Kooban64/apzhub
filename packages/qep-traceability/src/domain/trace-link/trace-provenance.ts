@@ -22,7 +22,9 @@ export function createTraceProvenance(input: {
   const actorId = input.actorId.trim();
   const correlationId = input.correlationId.trim();
   if (!actorId || !correlationId) {
-    throw new TraceInvariantViolation("Trace provenance requires actorId and correlationId");
+    throw new TraceInvariantViolation(
+      "Trace provenance requires actorId and correlationId",
+    );
   }
   return {
     actorId,

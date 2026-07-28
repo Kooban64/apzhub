@@ -4,15 +4,15 @@
 >
 > [../capability-certification/README.md](../capability-certification/README.md)
 
-| Field | Value |
-| ----- | ----- |
-| Programme | **APZQEP-CERT-080A** |
-| Title | Test Plans Integrated Capability Certification |
-| Status | **CERTIFIED / APPROVED / CLOSED** |
-| Package | `@apzhub/qep-test-plans` **1.0.0 CERTIFIED** |
-| Canonical pack | [../capability-certification/](../capability-certification/README.md) |
+| Field          | Value                                                                                                                                  |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Programme      | **APZQEP-CERT-080A**                                                                                                                   |
+| Title          | Test Plans Integrated Capability Certification                                                                                         |
+| Status         | **CERTIFIED / APPROVED / CLOSED**                                                                                                      |
+| Package        | `@apzhub/qep-test-plans` **1.0.0 CERTIFIED**                                                                                           |
+| Canonical pack | [../capability-certification/](../capability-certification/README.md)                                                                  |
 | Owner Decision | [../capability-certification/OWNER-ACCEPTANCE.md](../capability-certification/OWNER-ACCEPTANCE.md) — **CERTIFIED / APPROVED / CLOSED** |
-| Freeze | **FROZEN / APPROVED / CLOSED** under separate programme **APZQEP-FREEZE-080A** — [../freeze/README.md](../freeze/README.md) |
+| Freeze         | **FROZEN / APPROVED / CLOSED** under separate programme **APZQEP-FREEZE-080A** — [../freeze/README.md](../freeze/README.md)            |
 
 ## STOP
 

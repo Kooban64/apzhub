@@ -23,5 +23,9 @@
   "tests": {
     "presentationAndContract": "11 passed"
   },
-  "notAuthorised": ["Certification", "returnToDraft contract change", "Domain rule changes"]
+  "notAuthorised": [
+    "Certification",
+    "returnToDraft contract change",
+    "Domain rule changes"
+  ]
 }

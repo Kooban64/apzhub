@@ -1,10 +1,10 @@
 # Search Projection
 
-| Field | Value |
-| ----- | ----- |
-| Entity type | `verification_record` |
-| Adapter | `verificationToSearchDraft` / `onVerificationUpserted` in `@apzhub/search-qep` |
-| Wiring | `apps/web/lib/search/wiring/qep-publication.ts` |
+| Field       | Value                                                                          |
+| ----------- | ------------------------------------------------------------------------------ |
+| Entity type | `verification_record`                                                          |
+| Adapter     | `verificationToSearchDraft` / `onVerificationUpserted` in `@apzhub/search-qep` |
+| Wiring      | `apps/web/lib/search/wiring/qep-publication.ts`                                |
 
 Indexed fields (metadata only): Verification status, outcome, subject kind/artefact id, owner (createdBy), rationale summary keywords.
 

@@ -13,18 +13,18 @@
 
 ## Packs
 
-| Pack | Status | Entry |
-| ---- | ------ | ----- |
-| [domain-certification/](./domain-certification/README.md) | **CERTIFIED / CLOSED** | Domain Component |
-| [infrastructure/](./infrastructure/README.md) | **ACCEPTED / CLOSED** | [OWNER-ACCEPTANCE](./infrastructure/OWNER-ACCEPTANCE.md) |
-| [CERT-060B/](./CERT-060B/README.md) | **CERTIFIED / APPROVED / CLOSED** | [OWNER-ACCEPTANCE](./CERT-060B/OWNER-ACCEPTANCE.md) |
-| [OES-ARCH-014/](./OES-ARCH-014/README.md) | **ACCEPTED / ARCHITECTURE BASELINED / CLOSED** | [OWNER-ACCEPTANCE](./OES-ARCH-014/OWNER-ACCEPTANCE.md) |
-| [OES-ENG-070A/](./OES-ENG-070A/README.md) | **ACCEPTED / ENGINEERING SPECIFICATION BASELINED / CLOSED** | [OWNER-ACCEPTANCE](./OES-ENG-070A/OWNER-ACCEPTANCE.md) |
-| [workbench/](./workbench/README.md) | **ACCEPTED / APPROVED / PROGRAMME CLOSED** | [OWNER-ACCEPTANCE](./workbench/OWNER-ACCEPTANCE.md) — **ACCEPTED / CLOSED** |
-| [CERT-070A/](./CERT-070A/README.md) | **CERTIFIED / APPROVED / CLOSED** | [OWNER-ACCEPTANCE](./CERT-070A/OWNER-ACCEPTANCE.md) — **CERTIFIED / CLOSED** |
-| [capability-certification/](./capability-certification/README.md) | **CERTIFIED / APPROVED / CLOSED** | [OWNER-ACCEPTANCE](./capability-certification/OWNER-ACCEPTANCE.md) — **CERTIFIED / APPROVED / CLOSED** |
-| [CERT-080A/](./CERT-080A/README.md) (pointer) | — | → [capability-certification/](./capability-certification/README.md) |
-| [freeze/](./freeze/README.md) | **FROZEN / APPROVED / CLOSED** | [OWNER-FREEZE-DECISION](./freeze/OWNER-FREEZE-DECISION.md) — FROZEN / APPROVED / CLOSED |
+| Pack                                                              | Status                                                      | Entry                                                                                                  |
+| ----------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| [domain-certification/](./domain-certification/README.md)         | **CERTIFIED / CLOSED**                                      | Domain Component                                                                                       |
+| [infrastructure/](./infrastructure/README.md)                     | **ACCEPTED / CLOSED**                                       | [OWNER-ACCEPTANCE](./infrastructure/OWNER-ACCEPTANCE.md)                                               |
+| [CERT-060B/](./CERT-060B/README.md)                               | **CERTIFIED / APPROVED / CLOSED**                           | [OWNER-ACCEPTANCE](./CERT-060B/OWNER-ACCEPTANCE.md)                                                    |
+| [OES-ARCH-014/](./OES-ARCH-014/README.md)                         | **ACCEPTED / ARCHITECTURE BASELINED / CLOSED**              | [OWNER-ACCEPTANCE](./OES-ARCH-014/OWNER-ACCEPTANCE.md)                                                 |
+| [OES-ENG-070A/](./OES-ENG-070A/README.md)                         | **ACCEPTED / ENGINEERING SPECIFICATION BASELINED / CLOSED** | [OWNER-ACCEPTANCE](./OES-ENG-070A/OWNER-ACCEPTANCE.md)                                                 |
+| [workbench/](./workbench/README.md)                               | **ACCEPTED / APPROVED / PROGRAMME CLOSED**                  | [OWNER-ACCEPTANCE](./workbench/OWNER-ACCEPTANCE.md) — **ACCEPTED / CLOSED**                            |
+| [CERT-070A/](./CERT-070A/README.md)                               | **CERTIFIED / APPROVED / CLOSED**                           | [OWNER-ACCEPTANCE](./CERT-070A/OWNER-ACCEPTANCE.md) — **CERTIFIED / CLOSED**                           |
+| [capability-certification/](./capability-certification/README.md) | **CERTIFIED / APPROVED / CLOSED**                           | [OWNER-ACCEPTANCE](./capability-certification/OWNER-ACCEPTANCE.md) — **CERTIFIED / APPROVED / CLOSED** |
+| [CERT-080A/](./CERT-080A/README.md) (pointer)                     | —                                                           | → [capability-certification/](./capability-certification/README.md)                                    |
+| [freeze/](./freeze/README.md)                                     | **FROZEN / APPROVED / CLOSED**                              | [OWNER-FREEZE-DECISION](./freeze/OWNER-FREEZE-DECISION.md) — FROZEN / APPROVED / CLOSED                |
 
 ## Lifecycle
 

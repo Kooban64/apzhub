@@ -11,12 +11,12 @@
 
 ## Decision record (Owner)
 
-| Field | Value |
-| ----- | ----- |
-| Decision | **ACCEPTED** |
-| Date | 2026-07-24 |
-| Authority | Owner |
-| Baseline | APZQEP-ENG-010 Engineering Foundation (0.1.0) |
+| Field      | Value                                                                                                                             |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Decision   | **ACCEPTED**                                                                                                                      |
+| Date       | 2026-07-24                                                                                                                        |
+| Authority  | Owner                                                                                                                             |
+| Baseline   | APZQEP-ENG-010 Engineering Foundation (0.1.0)                                                                                     |
 | Conditions | Foundation Acceptance authorises **APZQEP-ENG-020A** Requirements Domain Foundation; persistence/CRUD require **APZQEP-ENG-020B** |
 
 ## Acceptance checklist (Owner)

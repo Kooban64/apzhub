@@ -10,12 +10,8 @@ import type {
 } from "../../domain/repositories/requirement-repository";
 import type { PersistedRequirement } from "../../domain/persisted-requirement";
 import type { RequirementId } from "../../domain/value-objects/requirement-id";
-import type {
-  RequirementContentVersion,
-} from "../../domain/content-version/requirement-content-version";
-import type {
-  RequirementContentVersionRepository,
-} from "../../domain/repositories/requirement-content-version-repository";
+import type { RequirementContentVersion } from "../../domain/content-version/requirement-content-version";
+import type { RequirementContentVersionRepository } from "../../domain/repositories/requirement-content-version-repository";
 import type { RequirementBaseline } from "../../domain/baseline/requirement-baseline";
 import type { RequirementBaselineRepository } from "../../domain/baseline/requirement-baseline-repository";
 import type {
@@ -28,9 +24,7 @@ import {
   QepNotFoundError,
   QepRevisionConflictError,
 } from "../../shared/errors";
-import {
-  matchesRequirementSearch,
-} from "../mappers/requirement-mapper";
+import { matchesRequirementSearch } from "../mappers/requirement-mapper";
 import {
   createEmptyBaselineStore,
   createInMemoryRequirementBaselineRepository,
@@ -131,7 +125,11 @@ export function createInMemoryQepRequirementsRepositories(
 
     async list(tenantId, query) {
       return applyListFilters(
-        scopedRequirements(stores.requirements, tenantId, query.includeArchived ?? false),
+        scopedRequirements(
+          stores.requirements,
+          tenantId,
+          query.includeArchived ?? false,
+        ),
         query,
       );
     },
@@ -165,7 +163,11 @@ export function createInMemoryQepRequirementsRepositories(
         throw new QepNotFoundError(`Requirement not found: ${record.id}`);
       }
       if (existing.revision !== record.revision) {
-        throw new QepRevisionConflictError(record.id, record.revision, existing.revision);
+        throw new QepRevisionConflictError(
+          record.id,
+          record.revision,
+          existing.revision,
+        );
       }
       const next = { ...record, revision: record.revision + 1 };
       stores.requirements.set(record.id, next);
@@ -277,12 +279,14 @@ export function createInMemoryQepRequirementsRepositories(
       );
     },
     async getLatest(tenantId, requirementId) {
-      return [...stores.contentVersions.values()]
-        .filter(
-          (version) =>
-            version.tenantId === tenantId && version.requirementId === requirementId,
-        )
-        .sort((a, b) => b.versionNumber - a.versionNumber)[0] ?? null;
+      return (
+        [...stores.contentVersions.values()]
+          .filter(
+            (version) =>
+              version.tenantId === tenantId && version.requirementId === requirementId,
+          )
+          .sort((a, b) => b.versionNumber - a.versionNumber)[0] ?? null
+      );
     },
     async listMetadata(tenantId, requirementId, pagination = {}) {
       const offset = pagination.offset ?? 0;
@@ -297,11 +301,13 @@ export function createInMemoryQepRequirementsRepositories(
         .map(({ snapshot: _snapshot, ...metadata }) => metadata);
     },
     async exists(tenantId, requirementId, versionNumber) {
-      return (await contentVersions.getByRequirementAndNumber(
-        tenantId,
-        requirementId,
-        versionNumber,
-      )) !== null;
+      return (
+        (await contentVersions.getByRequirementAndNumber(
+          tenantId,
+          requirementId,
+          versionNumber,
+        )) !== null
+      );
     },
   };
 

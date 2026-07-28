@@ -32,7 +32,9 @@ describe("QEP test specification persistence factories", () => {
       correlationId: "corr_memory",
     });
     await repos.specifications.create(draft);
-    expect(await repos.specifications.exists("tenant_memory", "tsp_memory_mode" as never)).toBe(true);
+    expect(
+      await repos.specifications.exists("tenant_memory", "tsp_memory_mode" as never),
+    ).toBe(true);
   });
 
   it("uses a fresh store when memory mode omits stores", () => {

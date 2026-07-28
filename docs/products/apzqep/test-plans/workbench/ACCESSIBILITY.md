@@ -6,14 +6,14 @@ WCAG 2.2 AA target (OES-ENG-070A Part 4 §4, A11Y-01…06). Design System tokens
 
 ## Gates (A11Y-01…06)
 
-| ID | Requirement | Implementation | Status |
-| -- | ----------- | -------------- | ------ |
-| A11Y-01 | axe clean (serious/critical = 0) on Dashboard, Explorer, Review, Inspector, Compare unavailable slot, primary dialogs | Playwright `axe: dashboard, explorer, inspector, review, compare have no critical/serious` | ✅ |
-| A11Y-02 | Full keyboard operability, Explorer → Inspector → action | Playwright `keyboard path Explorer to Inspector action` | ✅ |
-| A11Y-03 | Focus trap in dialogs; focus restored to triggering control on close | `ActionDialog`-style component; Playwright `dialog focus trap and Escape close` | ✅ |
-| A11Y-04 | Status never colour-only | `QepStatusBadge` renders a text label alongside colour | ✅ |
-| A11Y-05 | `prefers-reduced-motion` respected | No bespoke/infinite animation introduced; Shell/Design System tokens govern motion | ✅ |
-| A11Y-06 | Correct table/grid and tab/region ARIA semantics | `QepTable` (Explorer/Review) + Inspector panel structure reuse shared `qep-ui` primitives | ✅ |
+| ID      | Requirement                                                                                                           | Implementation                                                                             | Status |
+| ------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------ |
+| A11Y-01 | axe clean (serious/critical = 0) on Dashboard, Explorer, Review, Inspector, Compare unavailable slot, primary dialogs | Playwright `axe: dashboard, explorer, inspector, review, compare have no critical/serious` | ✅     |
+| A11Y-02 | Full keyboard operability, Explorer → Inspector → action                                                              | Playwright `keyboard path Explorer to Inspector action`                                    | ✅     |
+| A11Y-03 | Focus trap in dialogs; focus restored to triggering control on close                                                  | `ActionDialog`-style component; Playwright `dialog focus trap and Escape close`            | ✅     |
+| A11Y-04 | Status never colour-only                                                                                              | `QepStatusBadge` renders a text label alongside colour                                     | ✅     |
+| A11Y-05 | `prefers-reduced-motion` respected                                                                                    | No bespoke/infinite animation introduced; Shell/Design System tokens govern motion         | ✅     |
+| A11Y-06 | Correct table/grid and tab/region ARIA semantics                                                                      | `QepTable` (Explorer/Review) + Inspector panel structure reuse shared `qep-ui` primitives  | ✅     |
 
 ## Evidence
 

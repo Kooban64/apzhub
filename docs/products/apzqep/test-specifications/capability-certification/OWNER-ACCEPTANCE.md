@@ -30,17 +30,17 @@ Version 1.0.0
 
 ## Certification assessment (Owner)
 
-| Certification Area | Result |
-| ------------------ | ------ |
-| Governance Compliance | ✅ PASS |
-| Engineering Evidence | ✅ PASS |
-| Architecture Compliance | ✅ PASS |
-| Quality Gates | ✅ PASS |
-| Type Checking | ✅ PASS |
-| Test Suite | ✅ PASS (139 tests) |
-| Operational Readiness | ✅ PASS |
-| Documentation | ✅ PASS |
-| Certification Independence | ✅ PASS |
+| Certification Area         | Result              |
+| -------------------------- | ------------------- |
+| Governance Compliance      | ✅ PASS             |
+| Engineering Evidence       | ✅ PASS             |
+| Architecture Compliance    | ✅ PASS             |
+| Quality Gates              | ✅ PASS             |
+| Type Checking              | ✅ PASS             |
+| Test Suite                 | ✅ PASS (139 tests) |
+| Operational Readiness      | ✅ PASS             |
+| Documentation              | ✅ PASS             |
+| Certification Independence | ✅ PASS             |
 
 ## Freeze (subsequent)
 
@@ -48,8 +48,8 @@ This Certification Decision left freeze **not binding**. Owner Freeze Decision (
 
 ## Effect
 
-- **APZQEP-CERT-050D** is **CLOSED**.  
-- No further certification activity under this programme identifier.  
+- **APZQEP-CERT-050D** is **CLOSED**.
+- No further certification activity under this programme identifier.
 - Package **1.0.0** was **PROMOTED** and **CERTIFIED**; later **FROZEN**.
 
 ## STOP

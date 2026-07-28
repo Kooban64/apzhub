@@ -5,7 +5,11 @@
   "lifecycle": "Product Portfolio",
   "baseline": "APZHUB Platform 1.4",
   "platformClassification": "PRODUCTION READY WITH OPERATIONAL QUALIFICATIONS",
-  "reference": ["Platform-1.4-CERT-001", "APZHUB-PRODUCTS-000", "Platform Delivery Standard"],
+  "reference": [
+    "Platform-1.4-CERT-001",
+    "APZHUB-PRODUCTS-000",
+    "Platform Delivery Standard"
+  ],
   "timestamp": "2026-07-23T19:20:00Z",
   "status": "IMPLEMENTED_AWAITING_OWNER_ACCEPTANCE",
   "recommendation": "READY FOR OWNER PRODUCT FRAMEWORK ACCEPTANCE",

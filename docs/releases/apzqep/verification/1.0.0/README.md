@@ -10,24 +10,24 @@
 
 ## Evidence catalogue
 
-| Artefact | Path |
-| -------- | ---- |
-| Certification Report | [../../../products/apzqep/verification/capability-certification/CERTIFICATION-REPORT.md](../../../products/apzqep/verification/capability-certification/CERTIFICATION-REPORT.md) |
-| Quality Gates | [../../../products/apzqep/verification/capability-certification/QUALITY-GATES.md](../../../products/apzqep/verification/capability-certification/QUALITY-GATES.md) |
-| Known Limitations | [../../../products/apzqep/verification/capability-certification/KNOWN-LIMITATIONS.md](../../../products/apzqep/verification/capability-certification/KNOWN-LIMITATIONS.md) |
-| Version Promotion | [../../../products/apzqep/verification/capability-certification/VERSION-PROMOTION.md](../../../products/apzqep/verification/capability-certification/VERSION-PROMOTION.md) |
-| Freeze Notice | [../../../products/apzqep/verification/capability-certification/FREEZE-NOTICE.md](../../../products/apzqep/verification/capability-certification/FREEZE-NOTICE.md) |
-| Owner Summary | [../../../products/apzqep/verification/capability-certification/OWNER-SUMMARY.md](../../../products/apzqep/verification/capability-certification/OWNER-SUMMARY.md) |
-| Baseline Confirmation | [./BASELINE-CONFIRMATION.md](./BASELINE-CONFIRMATION.md) |
+| Artefact              | Path                                                                                                                                                                             |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Certification Report  | [../../../products/apzqep/verification/capability-certification/CERTIFICATION-REPORT.md](../../../products/apzqep/verification/capability-certification/CERTIFICATION-REPORT.md) |
+| Quality Gates         | [../../../products/apzqep/verification/capability-certification/QUALITY-GATES.md](../../../products/apzqep/verification/capability-certification/QUALITY-GATES.md)               |
+| Known Limitations     | [../../../products/apzqep/verification/capability-certification/KNOWN-LIMITATIONS.md](../../../products/apzqep/verification/capability-certification/KNOWN-LIMITATIONS.md)       |
+| Version Promotion     | [../../../products/apzqep/verification/capability-certification/VERSION-PROMOTION.md](../../../products/apzqep/verification/capability-certification/VERSION-PROMOTION.md)       |
+| Freeze Notice         | [../../../products/apzqep/verification/capability-certification/FREEZE-NOTICE.md](../../../products/apzqep/verification/capability-certification/FREEZE-NOTICE.md)               |
+| Owner Summary         | [../../../products/apzqep/verification/capability-certification/OWNER-SUMMARY.md](../../../products/apzqep/verification/capability-certification/OWNER-SUMMARY.md)               |
+| Baseline Confirmation | [./BASELINE-CONFIRMATION.md](./BASELINE-CONFIRMATION.md)                                                                                                                         |
 
 ## Version baseline
 
-| Field | Value |
-| ----- | ----- |
-| Current certified baseline | **1.0.0 CERTIFIED / FROZEN** |
-| Patch line | **1.0.x** |
-| Next minor (not authorised) | 1.1.0 |
-| Next major (not authorised) | 2.0.0 |
+| Field                       | Value                        |
+| --------------------------- | ---------------------------- |
+| Current certified baseline  | **1.0.0 CERTIFIED / FROZEN** |
+| Patch line                  | **1.0.x**                    |
+| Next minor (not authorised) | 1.1.0                        |
+| Next major (not authorised) | 2.0.0                        |
 
 ## Final repository state (cited)
 

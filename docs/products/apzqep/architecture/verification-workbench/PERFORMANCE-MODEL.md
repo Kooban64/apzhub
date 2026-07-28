@@ -4,11 +4,11 @@
 
 ## Scale targets
 
-| Scale | Approach |
-| ----- | -------- |
-| 100 | Full facets comfortable |
-| 1,000 | Pagination; virtual scroll optional |
-| 10,000 | Server filtering + virtual scroll |
+| Scale   | Approach                                           |
+| ------- | -------------------------------------------------- |
+| 100     | Full facets comfortable                            |
+| 1,000   | Pagination; virtual scroll optional                |
+| 10,000  | Server filtering + virtual scroll                  |
 | 100,000 | Strict pagination, incremental loading, aggregates |
 
 ## Techniques

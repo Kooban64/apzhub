@@ -1,11 +1,11 @@
 # Foundation Completion Statement — APZQEP-PORTFOLIO-001
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-PORTFOLIO-001 |
-| Date | 2026-07-28 |
-| Authority | Owner Acceptance Decision (2026-07-28) |
-| Status | **EFFECTIVE — FOUNDATION FORMALLY COMPLETE** |
+| Field     | Value                                        |
+| --------- | -------------------------------------------- |
+| Programme | APZQEP-PORTFOLIO-001                         |
+| Date      | 2026-07-28                                   |
+| Authority | Owner Acceptance Decision (2026-07-28)       |
+| Status    | **EFFECTIVE — FOUNDATION FORMALLY COMPLETE** |
 
 ## Statement
 
@@ -27,13 +27,13 @@ Certified Production Packages   5
 Portfolio Baseline              ESTABLISHED
 ```
 
-| Capability | Version | Status |
-| ---------- | ------- | ------ |
-| Requirements | 1.0.0 | Certified · Frozen |
-| Traceability | 1.0.0 | Certified · Frozen |
-| Verification | 1.0.0 | Certified · Frozen |
-| Test Specifications | 1.0.0 | Certified · Frozen |
-| Test Plans | 1.0.0 | Certified · Frozen |
+| Capability          | Version | Status             |
+| ------------------- | ------- | ------------------ |
+| Requirements        | 1.0.0   | Certified · Frozen |
+| Traceability        | 1.0.0   | Certified · Frozen |
+| Verification        | 1.0.0   | Certified · Frozen |
+| Test Specifications | 1.0.0   | Certified · Frozen |
+| Test Plans          | 1.0.0   | Certified · Frozen |
 
 ## Phase status
 
@@ -47,7 +47,7 @@ Future Phases                   Platform Consolidation · Analytics · AI · Ent
 
 Expansion being **READY** is not the same as any Wave 2 capability being **authorised**. Owner Acceptance of PORTFOLIO-001:
 
-1. Closes Foundation formally.  
+1. Closes Foundation formally.
 2. Does **not** authorise Test Execution, Test Runs, Test Suites, Evidence, Defects, Coverage & Analytics, Reporting, AI-Assisted Testing, or any other Wave 2 item.
 
 Each Wave 2 capability requires a separate Owner-approved Architecture programme and the full lifecycle:

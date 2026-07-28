@@ -2,14 +2,14 @@
 
 **APZQEP-ENG-040A is ACCEPTED / CLOSED / COMPLETE.**
 
-| Field | Value |
-| --- | --- |
-| Programme | APZQEP-ENG-040A |
-| Title | Verification Domain Model and Business Rules |
-| Status | **ACCEPTED / CLOSED / COMPLETE** |
-| Acceptance | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) · `20260726T180000Z-APZQEP-ENG-040A-ACCEPTANCE.json` |
-| Package at acceptance | `@apzhub/qep-verification` **0.1.0** |
-| Architecture | APZQEP-ARCH-009 **ACCEPTED** |
+| Field                 | Value                                                                                             |
+| --------------------- | ------------------------------------------------------------------------------------------------- |
+| Programme             | APZQEP-ENG-040A                                                                                   |
+| Title                 | Verification Domain Model and Business Rules                                                      |
+| Status                | **ACCEPTED / CLOSED / COMPLETE**                                                                  |
+| Acceptance            | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) · `20260726T180000Z-APZQEP-ENG-040A-ACCEPTANCE.json` |
+| Package at acceptance | `@apzhub/qep-verification` **0.1.0**                                                              |
+| Architecture          | APZQEP-ARCH-009 **ACCEPTED**                                                                      |
 
 ## Final repository state (required)
 
@@ -36,11 +36,11 @@ Workbench UI NOT AUTHORISED
 
 ## Deliverables produced
 
-| Deliverable | Path |
-| --- | --- |
-| Domain package | `packages/qep-verification/**` (domain layer) |
-| Programme docs | `docs/products/apzqep/verification/engine-domain/**` |
-| Portfolio evidence | `docs/operations/evidence/portfolio-recert/20260726T175000Z-APZQEP-ENG-040A.json` |
+| Deliverable         | Path                                                                                         |
+| ------------------- | -------------------------------------------------------------------------------------------- |
+| Domain package      | `packages/qep-verification/**` (domain layer)                                                |
+| Programme docs      | `docs/products/apzqep/verification/engine-domain/**`                                         |
+| Portfolio evidence  | `docs/operations/evidence/portfolio-recert/20260726T175000Z-APZQEP-ENG-040A.json`            |
 | Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T180000Z-APZQEP-ENG-040A-ACCEPTANCE.json` |
 
 ## Aggregates / entities / VOs / policies / services / events

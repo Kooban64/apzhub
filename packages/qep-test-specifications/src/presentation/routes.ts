@@ -83,12 +83,7 @@ export function parseQepTestSpecificationRouteId(pathname: string): string | nul
 }
 
 export type QepTestSpecificationDetailMode =
-  | "detail"
-  | "history"
-  | "versions"
-  | "relationships"
-  | "compare"
-  | "edit";
+  "detail" | "history" | "versions" | "relationships" | "compare" | "edit";
 
 export function parseQepTestSpecificationDetailMode(
   pathname: string,

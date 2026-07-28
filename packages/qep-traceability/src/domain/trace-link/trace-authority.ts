@@ -17,7 +17,9 @@ export function createTraceAuthority(input: {
 }): TraceAuthority {
   const kind = input.kind.trim() as TraceAuthorityKind;
   if (kind !== "user" && kind !== "system" && kind !== "role") {
-    throw new TraceInvariantViolation("Trace authority kind must be user, system, or role");
+    throw new TraceInvariantViolation(
+      "Trace authority kind must be user, system, or role",
+    );
   }
   const actorId = input.actorId.trim();
   if (!actorId) {

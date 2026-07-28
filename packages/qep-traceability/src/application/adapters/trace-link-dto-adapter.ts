@@ -92,7 +92,10 @@ export function toTraceLinkDto(
     supersededBy: stored.supersededBy,
     successorTraceId: stored.successorTraceId,
     historySummaries: stored.history.entries.map(toTraceLinkHistorySummaryDto),
-    availableActions: computeQepTraceLinkAvailableActions(stored.lifecycleState, permissions),
+    availableActions: computeQepTraceLinkAvailableActions(
+      stored.lifecycleState,
+      permissions,
+    ),
   };
 }
 

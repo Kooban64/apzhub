@@ -2,19 +2,19 @@
 
 ## Migrations
 
-| Migration | Purpose |
-| --------- | ------- |
-| `0083_apz_qep_test_specifications.sql` | Tables + indexes |
+| Migration                                  | Purpose            |
+| ------------------------------------------ | ------------------ |
+| `0083_apz_qep_test_specifications.sql`     | Tables + indexes   |
 | `0084_apz_qep_test_specifications_rls.sql` | Row Level Security |
 
 ## Tables
 
-| Table | Role |
-| ----- | ---- |
-| `qep_test_specifications` | Aggregate SoR |
-| `qep_test_specification_versions` | Version lineage index |
+| Table                                  | Role                         |
+| -------------------------------------- | ---------------------------- |
+| `qep_test_specifications`              | Aggregate SoR                |
+| `qep_test_specification_versions`      | Version lineage index        |
 | `qep_test_specification_relationships` | Reference-only relationships |
-| `qep_test_specification_history` | Append-only history |
+| `qep_test_specification_history`       | Append-only history          |
 
 Every table includes `tenant_id`, audit timestamps/actors, and `revision` (optimistic concurrency on the aggregate).
 

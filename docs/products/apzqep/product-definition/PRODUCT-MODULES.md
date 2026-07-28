@@ -18,15 +18,15 @@ Modules do not compete as standalone tools — they form a **closed loop** from 
 
 QEP organises 22 modules into eight product areas. Area boundaries are navigational and ownership groupings — not separate products or deployable units.
 
-| Area | Modules | Contribution to confidence |
-| ---- | ------- | -------------------------- |
-| **Command & navigation** | M01 Home; M22 Search and Navigation | Surfaces assigned work, gates, alerts; fast object access |
-| **Scope** | M02 Portfolio and Projects | Stable quality context for all downstream objects |
-| **Quality core** | M03 Requirements; M04 Verification Library; M05 Verification Design; M06 Execution and Sessions; M07 Automation Management; M08 Defects; M09 Evidence; M10 Traceability; M11 Risk | Defines, executes, proves, and exposes gaps in quality |
-| **Release confidence** | M12 Release Readiness; M13 Certification | Aggregates posture; human certification decision |
-| **Insight** | M14 Quality Intelligence; M15 Reporting and Analytics; M16 Knowledge and Learning | Explains patterns; reports; reuses learning |
-| **Assistive clients** | M17 AI Quality Workspace; M18 MCP and Developer Experience | Governed assist — never autonomous certify |
-| **Platform operations** | M19 Integration Centre; M20 Administration; M21 Audit and Compliance | Connectors, policy, immutable investigation |
+| Area                     | Modules                                                                                                                                                                           | Contribution to confidence                                |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| **Command & navigation** | M01 Home; M22 Search and Navigation                                                                                                                                               | Surfaces assigned work, gates, alerts; fast object access |
+| **Scope**                | M02 Portfolio and Projects                                                                                                                                                        | Stable quality context for all downstream objects         |
+| **Quality core**         | M03 Requirements; M04 Verification Library; M05 Verification Design; M06 Execution and Sessions; M07 Automation Management; M08 Defects; M09 Evidence; M10 Traceability; M11 Risk | Defines, executes, proves, and exposes gaps in quality    |
+| **Release confidence**   | M12 Release Readiness; M13 Certification                                                                                                                                          | Aggregates posture; human certification decision          |
+| **Insight**              | M14 Quality Intelligence; M15 Reporting and Analytics; M16 Knowledge and Learning                                                                                                 | Explains patterns; reports; reuses learning               |
+| **Assistive clients**    | M17 AI Quality Workspace; M18 MCP and Developer Experience                                                                                                                        | Governed assist — never autonomous certify                |
+| **Platform operations**  | M19 Integration Centre; M20 Administration; M21 Audit and Compliance                                                                                                              | Connectors, policy, immutable investigation               |
 
 ---
 
@@ -42,16 +42,16 @@ Do not duplicate catalogue tables here. When module behaviour conflicts, catalog
 
 These capabilities span modules via platform services — modules consume them, they do not reimplement:
 
-| Capability | Module consumption pattern |
-| ---------- | --------------------------- |
-| **Permission-filtered access** | Every module registers actions/objects; UI hides unauthorized surfaces |
-| **Audit** | Mutations emit audit events; M21 aggregates investigation |
-| **Search** | M22 indexes SoR objects from all modules; permission filter at query |
-| **Notifications** | Modules publish events; Home and queues deep-link — no module SMTP/WebSocket |
-| **Entitlements** | Edition gates M14–M18; honest empty states when not entitled |
-| **Retention policies** | Administration defines; Audit/Evidence/Certification consume |
-| **Brand masking** | No backend engine names in standard module UX |
-| **Traceability** | M10 federates links from M03–M09; objects carry cross-links in all modules |
+| Capability                     | Module consumption pattern                                                   |
+| ------------------------------ | ---------------------------------------------------------------------------- |
+| **Permission-filtered access** | Every module registers actions/objects; UI hides unauthorized surfaces       |
+| **Audit**                      | Mutations emit audit events; M21 aggregates investigation                    |
+| **Search**                     | M22 indexes SoR objects from all modules; permission filter at query         |
+| **Notifications**              | Modules publish events; Home and queues deep-link — no module SMTP/WebSocket |
+| **Entitlements**               | Edition gates M14–M18; honest empty states when not entitled                 |
+| **Retention policies**         | Administration defines; Audit/Evidence/Certification consume                 |
+| **Brand masking**              | No backend engine names in standard module UX                                |
+| **Traceability**               | M10 federates links from M03–M09; objects carry cross-links in all modules   |
 
 ---
 
@@ -67,7 +67,7 @@ These capabilities span modules via platform services — modules consume them, 
 
 ### Verification library and design
 
-**M04 Verification Library** holds approved, reusable procedures. **M05 Verification Design** is the authoring and peer-review workflow. Together they implement DEF-D-001: *Verification* is the product noun; classical test cases are a form. **M07 Automation Management** feeds promotion candidates into M04/M05 — automation does not bypass human approval for library entry.
+**M04 Verification Library** holds approved, reusable procedures. **M05 Verification Design** is the authoring and peer-review workflow. Together they implement DEF-D-001: _Verification_ is the product noun; classical test cases are a form. **M07 Automation Management** feeds promotion candidates into M04/M05 — automation does not bypass human approval for library entry.
 
 ### Execution proves requirements
 
@@ -83,7 +83,7 @@ These capabilities span modules via platform services — modules consume them, 
 
 ### Certification closes the loop
 
-**M13 Certification** records human decisions (including *Approved with qualifications*, DEF-D-007). Release Manager primary certifier with co-approvers (DEF-D-010). Locked evidence packs and immutable history. **M14 Quality Intelligence** continuous signals may request re-cert — never auto-flip status.
+**M13 Certification** records human decisions (including _Approved with qualifications_, DEF-D-007). Release Manager primary certifier with co-approvers (DEF-D-010). Locked evidence packs and immutable history. **M14 Quality Intelligence** continuous signals may request re-cert — never auto-flip status.
 
 ### Insight and learning
 
@@ -198,15 +198,15 @@ Solid arrows: primary data/work flow. Dotted: optional/Phase 2+ or supporting in
 
 ## Cross-cutting concerns
 
-| Concern | How modules cooperate |
-| ------- | --------------------- |
-| **Approvals** | M03, M05, M11, M08 (transitions), M07 (promotion) emit approval objects; M01 surfaces queues; M21 records |
-| **Evidence before opinion** | M06/M09 produce; M12/M13 consume; M15 reports; no module claims readiness without M09 linkage |
-| **Manual-first MVP** | M06 polished without M07/M17; M07/M17 show honest disabled states |
-| **Release hub** | M12 orchestrates view; M08, M09, M10, M11, M06 feed; M13 receives handoff |
-| **Immutability** | M13 locks packs; M21 reads all modules; M20 cannot delete cert history |
-| **External systems** | M19 syncs into M02, M06, M08 — never makes QEP a CI server or ALM |
-| **Workspace composition** | M01 + M22 + role workspace pin primary modules per [ROLE-WORKSPACES.md](./ROLE-WORKSPACES.md) |
+| Concern                     | How modules cooperate                                                                                     |
+| --------------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Approvals**               | M03, M05, M11, M08 (transitions), M07 (promotion) emit approval objects; M01 surfaces queues; M21 records |
+| **Evidence before opinion** | M06/M09 produce; M12/M13 consume; M15 reports; no module claims readiness without M09 linkage             |
+| **Manual-first MVP**        | M06 polished without M07/M17; M07/M17 show honest disabled states                                         |
+| **Release hub**             | M12 orchestrates view; M08, M09, M10, M11, M06 feed; M13 receives handoff                                 |
+| **Immutability**            | M13 locks packs; M21 reads all modules; M20 cannot delete cert history                                    |
+| **External systems**        | M19 syncs into M02, M06, M08 — never makes QEP a CI server or ALM                                         |
+| **Workspace composition**   | M01 + M22 + role workspace pin primary modules per [ROLE-WORKSPACES.md](./ROLE-WORKSPACES.md)             |
 
 ---
 
@@ -214,13 +214,13 @@ Solid arrows: primary data/work flow. Dotted: optional/Phase 2+ or supporting in
 
 Some Activity Bar destinations combine catalogue modules at UX level:
 
-| Navigation area | Catalogue modules | Note |
-| --------------- | ----------------- | ---- |
-| Verification | M04 + M05 | Library vs Design tabs; shared object model |
-| Releases | M12 | Release hub may show M06/M08/M09/M11 panels without owning their SoR |
-| Defects | M08 | Quality Issues share module area with distinct object type |
-| Intelligence | M14 | Distinct from M15 operational reporting |
-| AI Workspace | M17 (+ M18 policy) | Hidden when AI OFF |
+| Navigation area | Catalogue modules  | Note                                                                 |
+| --------------- | ------------------ | -------------------------------------------------------------------- |
+| Verification    | M04 + M05          | Library vs Design tabs; shared object model                          |
+| Releases        | M12                | Release hub may show M06/M08/M09/M11 panels without owning their SoR |
+| Defects         | M08                | Quality Issues share module area with distinct object type           |
+| Intelligence    | M14                | Distinct from M15 operational reporting                              |
+| AI Workspace    | M17 (+ M18 policy) | Hidden when AI OFF                                                   |
 
 Splitting M04/M05 or merging Home into shell-only would be an ARCH change — product behaviour must remain (DEF-D-004).
 
@@ -228,16 +228,16 @@ Splitting M04/M05 or merging Home into shell-only would be an ARCH change — pr
 
 ## How modules support the central question
 
-| Stage | Question facet | Primary modules |
-| ----- | -------------- | --------------- |
-| Intent | Do we know what to prove? | M03, M02 |
-| Design | How will we prove it? | M04, M05, M16 |
-| Execute | Did we run proof? | M06, M07 |
-| Record | Is proof captured? | M09, M08 |
-| Understand | Are gaps visible? | M10, M11 |
-| Decide scope | What is in this release? | M12, M02 |
-| Govern | Human accountable release? | M13, M21 |
-| Learn | Do we improve? | M16, M14, M15 |
+| Stage        | Question facet             | Primary modules |
+| ------------ | -------------------------- | --------------- |
+| Intent       | Do we know what to prove?  | M03, M02        |
+| Design       | How will we prove it?      | M04, M05, M16   |
+| Execute      | Did we run proof?          | M06, M07        |
+| Record       | Is proof captured?         | M09, M08        |
+| Understand   | Are gaps visible?          | M10, M11        |
+| Decide scope | What is in this release?   | M12, M02        |
+| Govern       | Human accountable release? | M13, M21        |
+| Learn        | Do we improve?             | M16, M14, M15   |
 
 ---
 
@@ -245,12 +245,12 @@ Splitting M04/M05 or merging Home into shell-only would be an ARCH change — pr
 
 Modules implement **Enterprise Quality Engineering only** — not ALM, CI orchestration, device farms, or autonomous release bots ([PRODUCT-BOUNDARIES.md](./PRODUCT-BOUNDARIES.md), DEF-D-008).
 
-| In scope | Out of scope |
-| -------- | ------------ |
+| In scope                                    | Out of scope                                              |
+| ------------------------------------------- | --------------------------------------------------------- |
 | Verification SoR, execution, evidence, cert | Sprint planning, code repo, build pipelines as primary UX |
-| Readiness aggregation and human cert | Autonomous deploy/certify |
-| Integration ingestion and links | Replacing Jira/GitLab/Jenkins UI |
-| AI/MCP assist when enabled | AI-required MVP; silent SoR writes |
+| Readiness aggregation and human cert        | Autonomous deploy/certify                                 |
+| Integration ingestion and links             | Replacing Jira/GitLab/Jenkins UI                          |
+| AI/MCP assist when enabled                  | AI-required MVP; silent SoR writes                        |
 
 Module splits or merges in architecture phases must **preserve behaviours** documented in MODULE-CATALOGUE and decision register.
 
@@ -264,9 +264,9 @@ Module emphasis by persona is defined in [ROLE-WORKSPACES.md](./ROLE-WORKSPACES.
 
 ## MVP vs later-phase modules
 
-| MVP core | Foundation / Phase 2 depth | Phase 2+ (AI/MCP OFF until authorised) |
-| -------- | --------------------------- | ---------------------------------------- |
-| M01–M06, M08–M10, M12–M13, M15, M20–M22 | M07, M11, M19 | M14, M16, M17, M18 |
+| MVP core                                | Foundation / Phase 2 depth | Phase 2+ (AI/MCP OFF until authorised) |
+| --------------------------------------- | -------------------------- | -------------------------------------- |
+| M01–M06, M08–M10, M12–M13, M15, M20–M22 | M07, M11, M19              | M14, M16, M17, M18                     |
 
 MVP must feel complete for manual verification and certification without M14–M18.
 
@@ -274,10 +274,10 @@ MVP must feel complete for manual verification and certification without M14–M
 
 ## Related documents
 
-| Document | Relationship |
-| -------- | ------------ |
-| [MODULE-CATALOGUE.md](./MODULE-CATALOGUE.md) | Per-module authoritative definitions |
-| [NAVIGATION-MAP.md](./NAVIGATION-MAP.md) | Activity Bar to module mapping |
-| [INFORMATION-ARCHITECTURE.md](./INFORMATION-ARCHITECTURE.md) | Objects modules share |
-| [PRODUCT-OVERVIEW.md](./PRODUCT-OVERVIEW.md) | Product-level flow diagrams |
-| [PRODUCT-DEFINITION-DECISIONS.md](./PRODUCT-DEFINITION-DECISIONS.md) | DEF-001 preserved decisions |
+| Document                                                             | Relationship                         |
+| -------------------------------------------------------------------- | ------------------------------------ |
+| [MODULE-CATALOGUE.md](./MODULE-CATALOGUE.md)                         | Per-module authoritative definitions |
+| [NAVIGATION-MAP.md](./NAVIGATION-MAP.md)                             | Activity Bar to module mapping       |
+| [INFORMATION-ARCHITECTURE.md](./INFORMATION-ARCHITECTURE.md)         | Objects modules share                |
+| [PRODUCT-OVERVIEW.md](./PRODUCT-OVERVIEW.md)                         | Product-level flow diagrams          |
+| [PRODUCT-DEFINITION-DECISIONS.md](./PRODUCT-DEFINITION-DECISIONS.md) | DEF-001 preserved decisions          |

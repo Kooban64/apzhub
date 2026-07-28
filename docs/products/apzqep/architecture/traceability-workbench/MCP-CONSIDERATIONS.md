@@ -6,15 +6,15 @@
 
 Future MCP adapters may consume:
 
-- Traceability REST APIs (ENG-030A Part 2);  
-- Workbench-oriented summary contracts;  
+- Traceability REST APIs (ENG-030A Part 2);
+- Workbench-oriented summary contracts;
 - Platform Search (`trace_link`).
 
 ## MCP must not
 
-- Become part of the Traceability domain;  
-- Autonomously mutate without governed authz / audit;  
-- Treat search indexes as Systems of Record;  
+- Become part of the Traceability domain;
+- Autonomously mutate without governed authz / audit;
+- Treat search indexes as Systems of Record;
 - Bypass `availableActions` / permission checks.
 
 ## Workbench implication

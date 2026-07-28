@@ -234,11 +234,15 @@ export function createQepTestSpecificationPlatformService(
       return found ? toSpecificationDto(found, ctx.permissions) : null;
     },
     async create(ctx, input) {
-      const created = await invoke(ctx, (specCtx) => service.createSpecification(specCtx, input));
+      const created = await invoke(ctx, (specCtx) =>
+        service.createSpecification(specCtx, input),
+      );
       return toSpecificationDto(created, ctx.permissions);
     },
     async updateDraft(ctx, id, input) {
-      const updated = await invoke(ctx, (specCtx) => service.updateDraft(specCtx, id, input));
+      const updated = await invoke(ctx, (specCtx) =>
+        service.updateDraft(specCtx, id, input),
+      );
       return toSpecificationDto(updated, ctx.permissions);
     },
     async submitForReview(ctx, id, input) {
@@ -248,11 +252,15 @@ export function createQepTestSpecificationPlatformService(
       return toSpecificationDto(updated, ctx.permissions);
     },
     async approve(ctx, id, input) {
-      const updated = await invoke(ctx, (specCtx) => service.approve(specCtx, id, input));
+      const updated = await invoke(ctx, (specCtx) =>
+        service.approve(specCtx, id, input),
+      );
       return toSpecificationDto(updated, ctx.permissions);
     },
     async reject(ctx, id, input) {
-      const updated = await invoke(ctx, (specCtx) => service.reject(specCtx, id, input));
+      const updated = await invoke(ctx, (specCtx) =>
+        service.reject(specCtx, id, input),
+      );
       return toSpecificationDto(updated, ctx.permissions);
     },
     async withdraw(ctx, id) {
@@ -260,7 +268,9 @@ export function createQepTestSpecificationPlatformService(
       return toSpecificationDto(updated, ctx.permissions);
     },
     async supersede(ctx, id, input) {
-      const result = await invoke(ctx, (specCtx) => service.supersede(specCtx, id, input));
+      const result = await invoke(ctx, (specCtx) =>
+        service.supersede(specCtx, id, input),
+      );
       return {
         predecessor: toSpecificationDto(result.predecessor, ctx.permissions),
         successor: result.successor
@@ -293,7 +303,9 @@ export function createQepTestSpecificationPlatformService(
       return history.map(toHistoryDto);
     },
     async listVersions(ctx, id) {
-      const versions = await invoke(ctx, (specCtx) => service.listVersions(specCtx, id));
+      const versions = await invoke(ctx, (specCtx) =>
+        service.listVersions(specCtx, id),
+      );
       return versions.map((item) => toSpecificationDto(item, ctx.permissions));
     },
     async findLatestApproved(ctx, number) {
@@ -310,7 +322,11 @@ export function createQepTestSpecificationPlatformService(
     },
     async search(ctx, query, options = {}) {
       const result = await invoke(ctx, (specCtx) =>
-        service.search(specCtx, query, options as Omit<SpecificationListCommandQuery, "query">),
+        service.search(
+          specCtx,
+          query,
+          options as Omit<SpecificationListCommandQuery, "query">,
+        ),
       );
       return {
         items: result.items.map((item) => toSpecificationDto(item, ctx.permissions)),

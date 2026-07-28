@@ -48,7 +48,9 @@ export function createInMemoryRequirementBaselineRepository(
   return {
     async createBaseline(baseline) {
       if (store.has(baseline.id)) {
-        throw new QepConflictError(`Requirement baseline already exists: ${baseline.id}`);
+        throw new QepConflictError(
+          `Requirement baseline already exists: ${baseline.id}`,
+        );
       }
       const numberTaken = [...store.values()].some(
         (row) => row.tenantId === baseline.tenantId && row.number === baseline.number,
@@ -106,7 +108,13 @@ export function createInMemoryRequirementBaselineRepository(
       return updated;
     },
 
-    async removeRequirementVersion(tenantId, id, contentVersionId, changedAt, changedBy) {
+    async removeRequirementVersion(
+      tenantId,
+      id,
+      contentVersionId,
+      changedAt,
+      changedBy,
+    ) {
       const existing = loadOwned(store, tenantId, id);
       assertDraftMutable(existing);
       if (!existing.items.some((row) => row.contentVersionId === contentVersionId)) {

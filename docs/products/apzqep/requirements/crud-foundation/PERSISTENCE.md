@@ -4,10 +4,10 @@
 
 ## Tables
 
-| Table | Purpose |
-| ----- | ------- |
-| `qep_requirement` | Requirements SoR (tenant-scoped) |
-| `qep_requirement_audit` | Append-only mutation audit |
+| Table                   | Purpose                          |
+| ----------------------- | -------------------------------- |
+| `qep_requirement`       | Requirements SoR (tenant-scoped) |
+| `qep_requirement_audit` | Append-only mutation audit       |
 
 ## Fields (requirement)
 

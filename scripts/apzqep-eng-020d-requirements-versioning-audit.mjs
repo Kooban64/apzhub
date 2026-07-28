@@ -51,7 +51,9 @@ if (/\bupdate\s*\(/.test(repository) || /\bdelete\s*\(/.test(repository)) {
   fail("Content-version repository must be append-only (no update/delete)");
 }
 
-const constants = read("packages/qep-requirements/src/domain/content-version/constants.ts");
+const constants = read(
+  "packages/qep-requirements/src/domain/content-version/constants.ts",
+);
 if (!constants.includes("Initial version created during APZQEP-ENG-020D migration")) {
   fail("MIGRATION_REASON constant misaligned");
 }
@@ -72,7 +74,10 @@ const ownerAcceptance = read(
 if (!ownerAcceptance.includes("AWAITING OWNER ACCEPTANCE")) {
   fail("OWNER-ACCEPTANCE.md must remain AWAITING OWNER ACCEPTANCE");
 }
-if (/ACCEPTED\s*\/\s*CLOSED|COMPLETE/.test(ownerAcceptance) && !ownerAcceptance.includes("AWAITING")) {
+if (
+  /ACCEPTED\s*\/\s*CLOSED|COMPLETE/.test(ownerAcceptance) &&
+  !ownerAcceptance.includes("AWAITING")
+) {
   fail("OWNER-ACCEPTANCE.md must not mark programme accepted/closed/complete");
 }
 
@@ -163,7 +168,9 @@ if (
   !register.includes("APZQEP-ENG-020D") ||
   !register.includes("AWAITING OWNER ACCEPTANCE")
 ) {
-  fail("OWNER-ACCEPTANCE-REGISTER must list APZQEP-ENG-020D as AWAITING OWNER ACCEPTANCE");
+  fail(
+    "OWNER-ACCEPTANCE-REGISTER must list APZQEP-ENG-020D as AWAITING OWNER ACCEPTANCE",
+  );
 }
 
 const pkgJson = read("package.json");

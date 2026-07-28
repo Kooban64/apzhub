@@ -41,14 +41,16 @@ function thenableChain(rows: unknown[]) {
   api.where = vi.fn(self);
   api.limit = vi.fn(async () => rows);
   api.orderBy = vi.fn(async () => rows);
-  api.then = (resolve: (value: unknown) => unknown, reject?: (reason: unknown) => unknown) =>
-    Promise.resolve(rows).then(resolve, reject);
+  api.then = (
+    resolve: (value: unknown) => unknown,
+    reject?: (reason: unknown) => unknown,
+  ) => Promise.resolve(rows).then(resolve, reject);
   return api;
 }
 
 function createMockDb(options: MockDbOptions = {}) {
   let selectCall = 0;
-  const values = vi.fn((payload: unknown) => {
+  const values = vi.fn((_payload: unknown) => {
     const builder: Record<string, unknown> = {
       returning: vi.fn(async () => options.insertReturning ?? []),
       onConflictDoUpdate: vi.fn(async () => undefined),
@@ -211,7 +213,9 @@ describe("Postgres TestSpecificationRepository", () => {
     });
     const repo = createPostgresTestSpecificationRepository(db);
 
-    await expect(repo.create(draftSpecification())).rejects.toThrow(TestSpecificationConflictError);
+    await expect(repo.create(draftSpecification())).rejects.toThrow(
+      TestSpecificationConflictError,
+    );
   });
 
   it("returns null when get finds no row", async () => {
@@ -291,9 +295,9 @@ describe("Postgres TestSpecificationRepository", () => {
     });
     const repo = createPostgresTestSpecificationRepository(db);
 
-    await expect(
-      repo.save(draftSpecification("tsp_pg_missing"), 1),
-    ).rejects.toThrow(TestSpecificationNotFoundError);
+    await expect(repo.save(draftSpecification("tsp_pg_missing"), 1)).rejects.toThrow(
+      TestSpecificationNotFoundError,
+    );
   });
 
   it("saves successfully and reloads history and relationships", async () => {
@@ -365,13 +369,7 @@ describe("Postgres TestSpecificationRepository", () => {
       updatedAt: LATER,
     });
     const { db } = createMockDb({
-      selectResults: [
-        [rowA, rowB],
-        [],
-        [],
-        [],
-        [],
-      ],
+      selectResults: [[rowA, rowB], [], [], [], []],
     });
     const repo = createPostgresTestSpecificationRepository(db);
 
@@ -431,7 +429,10 @@ describe("Postgres TestSpecificationRepository", () => {
 
     expect(await repo.exists(TENANT, "tsp_pg_exists" as never)).toBe(true);
     expect(await repo.listHistory(TENANT, "tsp_pg_exists" as never)).toHaveLength(1);
-    const relationships = await repo.listRelationships(TENANT, "tsp_pg_exists" as never);
+    const relationships = await repo.listRelationships(
+      TENANT,
+      "tsp_pg_exists" as never,
+    );
     expect(relationships[0]?.reference.label).toBe("Exists");
     expect(row.id).toBe("tsp_pg_exists");
   });

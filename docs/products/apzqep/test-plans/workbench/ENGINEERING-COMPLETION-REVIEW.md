@@ -1,14 +1,14 @@
 # Engineering Completion Review (ECR) — APZQEP-ENG-070A
 
-| Field | Value |
-| ----- | ----- |
-| Programme | **APZQEP-ENG-070A** — Test Plans Workbench Engineering |
-| Standard | [OES-002](../../../../engineering/oes/OES-002-Engineering-Review-and-Acceptance-Standard.md) **v1.1.0** §10A |
-| Date | 2026-07-28 |
-| Decision | **PASS** |
-| Evidence | `docs/operations/evidence/portfolio-recert/20260728T071000Z-APZQEP-ENG-070A-ECR.json` |
-| Completion Report | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md) |
-| Checklist | [ECR-CHECKLIST.md](./ECR-CHECKLIST.md) |
+| Field             | Value                                                                                                        |
+| ----------------- | ------------------------------------------------------------------------------------------------------------ |
+| Programme         | **APZQEP-ENG-070A** — Test Plans Workbench Engineering                                                       |
+| Standard          | [OES-002](../../../../engineering/oes/OES-002-Engineering-Review-and-Acceptance-Standard.md) **v1.1.0** §10A |
+| Date              | 2026-07-28                                                                                                   |
+| Decision          | **PASS**                                                                                                     |
+| Evidence          | `docs/operations/evidence/portfolio-recert/20260728T071000Z-APZQEP-ENG-070A-ECR.json`                        |
+| Completion Report | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)                                                               |
+| Checklist         | [ECR-CHECKLIST.md](./ECR-CHECKLIST.md)                                                                       |
 
 ## Decision
 
@@ -54,22 +54,22 @@ Confirmed. This ECR does **not** constitute Owner Acceptance. See [Explicit stop
 
 Full matrix: [ECR-CHECKLIST.md](./ECR-CHECKLIST.md).
 
-| Area | Result |
-| ---- | ------ |
-| Module registration / Sidebar IA (WP-01) | ✅ PASS |
-| Routes & deep links, incl. governed Compare slot (WP-02, WP-12) | ✅ PASS |
-| Typed API client (WP-03) | ✅ PASS |
-| Explorer / Dashboard / Review / Search (WP-04, WP-08, WP-09, WP-10) | ✅ PASS |
-| Inspector shell / Relationships / History / Versions (WP-05, WP-11, WP-13) | ✅ PASS |
-| Create / Edit Draft (WP-06) | ✅ PASS |
-| Action Bar & dialogs — `availableActions` fidelity (WP-07) | ✅ PASS |
-| Cross-capability governed unavailable slots (WP-14) | ✅ PASS |
-| Session/URL query persistence (WP-15) | ✅ PASS |
-| Accessibility hardening (WP-16) | ✅ PASS |
-| Playwright journeys (WP-17) | ✅ PASS (E2E-06/07/08/11 partial — recorded honestly, not architecturally gapped) |
-| Documentation & evidence (WP-18) | ✅ PASS |
-| No architectural drift vs ARCH-014 / OES-ENG-070A | ✅ PASS |
-| No Domain/Infrastructure leakage or mutation | ✅ PASS |
+| Area                                                                       | Result                                                                            |
+| -------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Module registration / Sidebar IA (WP-01)                                   | ✅ PASS                                                                           |
+| Routes & deep links, incl. governed Compare slot (WP-02, WP-12)            | ✅ PASS                                                                           |
+| Typed API client (WP-03)                                                   | ✅ PASS                                                                           |
+| Explorer / Dashboard / Review / Search (WP-04, WP-08, WP-09, WP-10)        | ✅ PASS                                                                           |
+| Inspector shell / Relationships / History / Versions (WP-05, WP-11, WP-13) | ✅ PASS                                                                           |
+| Create / Edit Draft (WP-06)                                                | ✅ PASS                                                                           |
+| Action Bar & dialogs — `availableActions` fidelity (WP-07)                 | ✅ PASS                                                                           |
+| Cross-capability governed unavailable slots (WP-14)                        | ✅ PASS                                                                           |
+| Session/URL query persistence (WP-15)                                      | ✅ PASS                                                                           |
+| Accessibility hardening (WP-16)                                            | ✅ PASS                                                                           |
+| Playwright journeys (WP-17)                                                | ✅ PASS (E2E-06/07/08/11 partial — recorded honestly, not architecturally gapped) |
+| Documentation & evidence (WP-18)                                           | ✅ PASS                                                                           |
+| No architectural drift vs ARCH-014 / OES-ENG-070A                          | ✅ PASS                                                                           |
+| No Domain/Infrastructure leakage or mutation                               | ✅ PASS                                                                           |
 
 ---
 

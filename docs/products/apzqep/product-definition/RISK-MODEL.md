@@ -11,45 +11,45 @@ The Risk Model governs how quality, product, release, and operational risks are 
 
 Release confidence depends on known risk, not only on passed verification. Organisations in regulated and enterprise contexts must demonstrate that identified risks were evaluated, treated, or explicitly accepted with authority. Fragmented risk spreadsheets and informal waivers fail audit and recreate release surprises.
 
-Centralising risk in the QEP SoR links risks to requirements, verification gaps, defects, evidence, and release scope — answering *what could go wrong, who accepted it, and on what evidence* without conflating risk with defect tracking or project management.
+Centralising risk in the QEP SoR links risks to requirements, verification gaps, defects, evidence, and release scope — answering _what could go wrong, who accepted it, and on what evidence_ without conflating risk with defect tracking or project management.
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| Risk | A potential adverse effect on quality, release, compliance, or operations |
-| Risk class | Category grouping for policy, reporting, and ownership |
-| Inherent risk | Exposure before controls or treatment |
-| Residual risk | Exposure after treatment or compensating controls |
-| Risk treatment | Planned action to reduce, avoid, transfer, or monitor risk |
-| Risk acceptance | Explicit human decision to proceed despite residual exposure |
-| Risk evidence | Records supporting assessment and acceptance |
-| Risk owner | Accountable party for monitoring and escalation |
+| Concept         | Product meaning                                                           |
+| --------------- | ------------------------------------------------------------------------- |
+| Risk            | A potential adverse effect on quality, release, compliance, or operations |
+| Risk class      | Category grouping for policy, reporting, and ownership                    |
+| Inherent risk   | Exposure before controls or treatment                                     |
+| Residual risk   | Exposure after treatment or compensating controls                         |
+| Risk treatment  | Planned action to reduce, avoid, transfer, or monitor risk                |
+| Risk acceptance | Explicit human decision to proceed despite residual exposure              |
+| Risk evidence   | Records supporting assessment and acceptance                              |
+| Risk owner      | Accountable party for monitoring and escalation                           |
 
 ## Primary objects
 
-| Object | Description |
-| ------ | ----------- |
-| Risk record | Governed SoR entity with class, description, scope, and links |
-| Risk assessment | Scored evaluation with rationale and assessor |
-| Treatment plan | Actions, owners, and target dates |
-| Acceptance record | Human approval with authority level and expiry if policy requires |
-| Risk register view | Filtered list by project, release, class, or owner |
-| Residual risk snapshot | Point-in-time exposure for readiness/certification |
-| Risk trend | Historical movement of open and accepted risks |
+| Object                 | Description                                                       |
+| ---------------------- | ----------------------------------------------------------------- |
+| Risk record            | Governed SoR entity with class, description, scope, and links     |
+| Risk assessment        | Scored evaluation with rationale and assessor                     |
+| Treatment plan         | Actions, owners, and target dates                                 |
+| Acceptance record      | Human approval with authority level and expiry if policy requires |
+| Risk register view     | Filtered list by project, release, class, or owner                |
+| Residual risk snapshot | Point-in-time exposure for readiness/certification                |
+| Risk trend             | Historical movement of open and accepted risks                    |
 
 ## Risk classes
 
-| Class | Typical scope |
-| ----- | ------------- |
-| Quality | Verification gaps, quality debt, escaped defect patterns |
-| Product | Feature scope uncertainty, requirement ambiguity |
-| Release | Schedule, dependency, deployment readiness |
-| Requirement | Unapproved or volatile requirements in release scope |
-| Verification | Insufficient or stale verification for scope |
-| Operational | Runbook, support, monitoring readiness |
-| Security | Security findings not fully remediated |
-| Compliance | Regulatory or contractual obligations |
+| Class        | Typical scope                                            |
+| ------------ | -------------------------------------------------------- |
+| Quality      | Verification gaps, quality debt, escaped defect patterns |
+| Product      | Feature scope uncertainty, requirement ambiguity         |
+| Release      | Schedule, dependency, deployment readiness               |
+| Requirement  | Unapproved or volatile requirements in release scope     |
+| Verification | Insufficient or stale verification for scope             |
+| Operational  | Runbook, support, monitoring readiness                   |
+| Security     | Security findings not fully remediated                   |
+| Compliance   | Regulatory or contractual obligations                    |
 
 ## Lifecycle
 
@@ -74,14 +74,14 @@ stateDiagram-v2
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
-| Risk owner (assigned) | Day-to-day monitoring, treatment progress, escalation |
-| QA Manager | Quality and verification class risks; register hygiene |
-| Release Manager | Release class risks; ensures acceptance visible at readiness |
-| Product Owner | Product/requirement class risks; scope trade-offs |
-| Security Officer | Security class risks; sensitive acceptance policy |
-| Compliance Officer | Compliance class risks; retention and authority rules |
+| Role                  | Ownership                                                    |
+| --------------------- | ------------------------------------------------------------ |
+| Risk owner (assigned) | Day-to-day monitoring, treatment progress, escalation        |
+| QA Manager            | Quality and verification class risks; register hygiene       |
+| Release Manager       | Release class risks; ensures acceptance visible at readiness |
+| Product Owner         | Product/requirement class risks; scope trade-offs            |
+| Security Officer      | Security class risks; sensitive acceptance policy            |
+| Compliance Officer    | Compliance class risks; retention and authority rules        |
 
 Unowned risks are flagged in QI and readiness views until assigned.
 
@@ -103,55 +103,55 @@ flowchart TB
 
 ## States
 
-| State | Meaning |
-| ----- | ------- |
-| Identified | Logged; assessment not complete |
-| Assessed | Scored and owned |
-| In treatment | Active mitigation |
-| Pending acceptance | Awaiting human acceptance decision |
-| Accepted | Human accepted residual risk within authority |
-| Monitored | Accepted risk under ongoing watch |
-| Expired | Acceptance period ended; re-assessment required |
-| Closed | Eliminated or no longer applicable |
-| Rejected (acceptance) | Acceptance request denied |
+| State                 | Meaning                                         |
+| --------------------- | ----------------------------------------------- |
+| Identified            | Logged; assessment not complete                 |
+| Assessed              | Scored and owned                                |
+| In treatment          | Active mitigation                               |
+| Pending acceptance    | Awaiting human acceptance decision              |
+| Accepted              | Human accepted residual risk within authority   |
+| Monitored             | Accepted risk under ongoing watch               |
+| Expired               | Acceptance period ended; re-assessment required |
+| Closed                | Eliminated or no longer applicable              |
+| Rejected (acceptance) | Acceptance request denied                       |
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
+| Rule   | Statement                                                                |
+| ------ | ------------------------------------------------------------------------ |
 | RSK-01 | Risk acceptance shall always be a human decision with recorded authority |
-| RSK-02 | AI may recommend treatment or acceptance wording; never auto-accept |
-| RSK-03 | Accepted risks must appear on readiness and certification context |
-| RSK-04 | Critical-class risks may require multi-approver acceptance per policy |
-| RSK-05 | Expired acceptance blocks “Ready” unless renewed or re-treated |
-| RSK-06 | Risk records are never deleted; closure retains history |
-| RSK-07 | Continuous signals may raise reassessment tasks; never auto-accept |
+| RSK-02 | AI may recommend treatment or acceptance wording; never auto-accept      |
+| RSK-03 | Accepted risks must appear on readiness and certification context        |
+| RSK-04 | Critical-class risks may require multi-approver acceptance per policy    |
+| RSK-05 | Expired acceptance blocks “Ready” unless renewed or re-treated           |
+| RSK-06 | Risk records are never deleted; closure retains history                  |
+| RSK-07 | Continuous signals may raise reassessment tasks; never auto-accept       |
 
 ## Approval rules
 
-| Decision | Typical approver | Notes |
-| -------- | ---------------- | ----- |
-| Standard acceptance | Risk owner + QA Manager | Team edition default |
-| Release-blocking acceptance | Release Manager | Must align with readiness waiver policy |
-| Security residual acceptance | Security Officer | May override lower authority |
-| Compliance residual acceptance | Compliance Officer | Regulated enterprise path |
-| Multi-approver acceptance | Policy-defined co-approvers | Enterprise / Regulated editions |
+| Decision                       | Typical approver            | Notes                                   |
+| ------------------------------ | --------------------------- | --------------------------------------- |
+| Standard acceptance            | Risk owner + QA Manager     | Team edition default                    |
+| Release-blocking acceptance    | Release Manager             | Must align with readiness waiver policy |
+| Security residual acceptance   | Security Officer            | May override lower authority            |
+| Compliance residual acceptance | Compliance Officer          | Regulated enterprise path               |
+| Multi-approver acceptance      | Policy-defined co-approvers | Enterprise / Regulated editions         |
 
 Delegation follows tenant RBAC; AI Agent and integrators cannot approve acceptance.
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| QA Manager | Maintains quality/verification risk register |
-| QA Engineer | Raises risks from execution and gap analysis |
-| Release Manager | Ensures release risks reflected in readiness |
-| Product Owner | Accepts product/requirement trade-off risks within authority |
-| Developer | Contributes technical treatment evidence |
-| Security Officer | Governs security class acceptance |
-| Compliance Officer | Validates acceptance authority and retention |
-| Auditor | Reviews acceptance records against locked evidence packs |
-| AI Agent | Draft recommendations only |
+| Persona            | Responsibility                                               |
+| ------------------ | ------------------------------------------------------------ |
+| QA Manager         | Maintains quality/verification risk register                 |
+| QA Engineer        | Raises risks from execution and gap analysis                 |
+| Release Manager    | Ensures release risks reflected in readiness                 |
+| Product Owner      | Accepts product/requirement trade-off risks within authority |
+| Developer          | Contributes technical treatment evidence                     |
+| Security Officer   | Governs security class acceptance                            |
+| Compliance Officer | Validates acceptance authority and retention                 |
+| Auditor            | Reviews acceptance records against locked evidence packs     |
+| AI Agent           | Draft recommendations only                                   |
 
 ## Reporting
 
@@ -179,12 +179,12 @@ Product evolution may add risk appetite templates by industry, automated reasses
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Quality/release risk register | Enterprise GRC platform replacement |
-| Link risk to verification gaps | Execute mitigations in external tools |
-| Acceptance for readiness waiver | Auto-waive gates |
-| Residual risk in cert context | Independent certification by risk score |
+| In boundary                     | Out of boundary                         |
+| ------------------------------- | --------------------------------------- |
+| Quality/release risk register   | Enterprise GRC platform replacement     |
+| Link risk to verification gaps  | Execute mitigations in external tools   |
+| Acceptance for readiness waiver | Auto-waive gates                        |
+| Residual risk in cert context   | Independent certification by risk score |
 
 QEP is not a full enterprise risk management suite; it owns quality-engineering-relevant risk in the release confidence chain.
 

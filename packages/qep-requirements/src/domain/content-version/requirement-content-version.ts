@@ -12,10 +12,7 @@ import {
   createRequirementContentVersionNumber,
   type RequirementContentVersionNumber,
 } from "./requirement-content-version-number";
-import {
-  computeSnapshotHash,
-  type RequirementSnapshot,
-} from "./requirement-snapshot";
+import { computeSnapshotHash, type RequirementSnapshot } from "./requirement-snapshot";
 
 export type RequirementContentVersion = {
   readonly id: RequirementContentVersionId;
@@ -36,7 +33,10 @@ export type RequirementContentVersion = {
 };
 
 export function createRequirementContentVersion(
-  input: Omit<RequirementContentVersion, "id" | "versionNumber" | "changeReason" | "snapshotHash"> & {
+  input: Omit<
+    RequirementContentVersion,
+    "id" | "versionNumber" | "changeReason" | "snapshotHash"
+  > & {
     readonly id: string;
     readonly versionNumber: number;
     readonly parentVersionNumber?: number;
@@ -51,7 +51,11 @@ export function createRequirementContentVersion(
     id: createRequirementContentVersionId(input.id),
     versionNumber: createRequirementContentVersionNumber(input.versionNumber),
     ...(input.parentVersionNumber !== undefined
-      ? { parentVersionNumber: createRequirementContentVersionNumber(input.parentVersionNumber) }
+      ? {
+          parentVersionNumber: createRequirementContentVersionNumber(
+            input.parentVersionNumber,
+          ),
+        }
       : {}),
     ...(input.parentVersionId
       ? { parentVersionId: createRequirementContentVersionId(input.parentVersionId) }

@@ -2,14 +2,14 @@
 
 **APZQEP-ENG-030A Part 2 is ACCEPTED / CLOSED / COMPLETE.**
 
-| Field | Value |
-| --- | --- |
-| Programme | APZQEP-ENG-030A |
-| Part | 2 |
-| Status | **ACCEPTED / CLOSED / COMPLETE** |
+| Field      | Value                                                                                                               |
+| ---------- | ------------------------------------------------------------------------------------------------------------------- |
+| Programme  | APZQEP-ENG-030A                                                                                                     |
+| Part       | 2                                                                                                                   |
+| Status     | **ACCEPTED / CLOSED / COMPLETE**                                                                                    |
 | Acceptance | [OWNER-ACCEPTANCE-PART2.md](./OWNER-ACCEPTANCE-PART2.md) · `20260726T153000Z-APZQEP-ENG-030A-PART2-ACCEPTANCE.json` |
-| Package | `@apzhub/qep-traceability` **0.2.0** (from 0.1.0) |
-| Migrations | **0079**, **0080** |
+| Package    | `@apzhub/qep-traceability` **0.2.0** (from 0.1.0)                                                                   |
+| Migrations | **0079**, **0080**                                                                                                  |
 
 ## Final repository state (required)
 

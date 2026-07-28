@@ -12,24 +12,24 @@ Authored the complete APZQEP-PORTFOLIO-001 pack: a portfolio-level documentation
 
 ## Deliverables
 
-| Document | Status |
-| -------- | ------ |
-| README.md | Complete |
-| OWNER-SUMMARY.md | Complete |
-| OWNER-ACCEPTANCE.md | Complete — **ACCEPTED / APPROVED / CLOSED** |
-| COMPLETE.md | Complete (this document) |
-| EXECUTIVE-SUMMARY.md | Complete |
-| ENGINEERING-OPERATING-MODEL-VALIDATION-SUMMARY.md | Complete |
-| FROZEN-CAPABILITY-REGISTER.md | Complete |
-| CERTIFICATION-REGISTER.md | Complete |
-| ARCHITECTURE-BASELINE-REGISTER.md | Complete |
-| VERSION-BASELINE-REGISTER.md | Complete |
-| KNOWN-LIMITATIONS-REGISTER.md | Complete |
-| PROGRAMME-METRICS.md | Complete |
-| LESSONS-LEARNED.md | Complete |
-| STANDARD-TEMPLATES-INDEX.md | Complete |
-| WAVE-2-ROADMAP.md | Complete — indicative only |
-| FOUNDATION-COMPLETION-STATEMENT.md | Complete |
+| Document                                          | Status                                      |
+| ------------------------------------------------- | ------------------------------------------- |
+| README.md                                         | Complete                                    |
+| OWNER-SUMMARY.md                                  | Complete                                    |
+| OWNER-ACCEPTANCE.md                               | Complete — **ACCEPTED / APPROVED / CLOSED** |
+| COMPLETE.md                                       | Complete (this document)                    |
+| EXECUTIVE-SUMMARY.md                              | Complete                                    |
+| ENGINEERING-OPERATING-MODEL-VALIDATION-SUMMARY.md | Complete                                    |
+| FROZEN-CAPABILITY-REGISTER.md                     | Complete                                    |
+| CERTIFICATION-REGISTER.md                         | Complete                                    |
+| ARCHITECTURE-BASELINE-REGISTER.md                 | Complete                                    |
+| VERSION-BASELINE-REGISTER.md                      | Complete                                    |
+| KNOWN-LIMITATIONS-REGISTER.md                     | Complete                                    |
+| PROGRAMME-METRICS.md                              | Complete                                    |
+| LESSONS-LEARNED.md                                | Complete                                    |
+| STANDARD-TEMPLATES-INDEX.md                       | Complete                                    |
+| WAVE-2-ROADMAP.md                                 | Complete — indicative only                  |
+| FOUNDATION-COMPLETION-STATEMENT.md                | Complete                                    |
 
 ## Confirmations
 

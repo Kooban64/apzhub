@@ -8,10 +8,10 @@
 
 ## Governing Standards
 
-- Document 000 v1.0.0  
-- OES-000 v1.0.0  
-- OES-001 v1.0.0  
-- OES-002 v1.1.0  
+- Document 000 v1.0.0
+- OES-000 v1.0.0
+- OES-001 v1.0.0
+- OES-002 v1.1.0
 
 ## Decision
 
@@ -47,25 +47,25 @@ Workbench not started · Capability integration not certified · Capability Free
 
 ## Certification assessment (Owner)
 
-| Certification Area | Result |
-| ------------------ | ------ |
-| Governance Compliance | ✅ PASS |
-| Infrastructure Conformance | ✅ PASS |
-| Domain Separation | ✅ PASS |
-| Repository & Persistence | ✅ PASS |
-| REST Layer | ✅ PASS |
-| Permissions | ✅ PASS |
-| Audit & Event Publication | ✅ PASS |
-| Test Suite | ✅ PASS (99 tests) |
-| Type Checking | ✅ PASS |
-| Documentation | ✅ PASS |
-| Certification Independence | ✅ PASS |
+| Certification Area         | Result             |
+| -------------------------- | ------------------ |
+| Governance Compliance      | ✅ PASS            |
+| Infrastructure Conformance | ✅ PASS            |
+| Domain Separation          | ✅ PASS            |
+| Repository & Persistence   | ✅ PASS            |
+| REST Layer                 | ✅ PASS            |
+| Permissions                | ✅ PASS            |
+| Audit & Event Publication  | ✅ PASS            |
+| Test Suite                 | ✅ PASS (99 tests) |
+| Type Checking              | ✅ PASS            |
+| Documentation              | ✅ PASS            |
+| Certification Independence | ✅ PASS            |
 
 ## Effect
 
-- **APZQEP-CERT-060B** is **CLOSED**.  
-- No further certification activity under this identifier.  
-- Infrastructure Component **0.2.0** is **CERTIFIED**.  
+- **APZQEP-CERT-060B** is **CLOSED**.
+- No further certification activity under this identifier.
+- Infrastructure Component **0.2.0** is **CERTIFIED**.
 - Workbench / Capability Certification / Capability Freeze remain **NOT STARTED / NOT AUTHORISED**.
 
 ## Governance observation (Owner)

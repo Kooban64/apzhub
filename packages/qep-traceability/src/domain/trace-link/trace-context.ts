@@ -21,7 +21,9 @@ export function createTraceContext(input?: {
     throw new TraceInvariantViolation("Trace context baselineId must start with rbl_");
   }
   if (contentVersionId && !/^rcv_[A-Za-z0-9_-]+$/.test(contentVersionId)) {
-    throw new TraceInvariantViolation("Trace context contentVersionId must start with rcv_");
+    throw new TraceInvariantViolation(
+      "Trace context contentVersionId must start with rcv_",
+    );
   }
   const immutable = input?.immutable === true || Boolean(baselineId);
   return { baselineId, contentVersionId, immutable };

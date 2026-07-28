@@ -9,11 +9,11 @@
 
 ## Decision record (Owner)
 
-| Field      | Value                                                                 |
-| ---------- | --------------------------------------------------------------------- |
-| Decision   | **ACCEPTED**                                                          |
-| Date       | 2026-07-24                                                            |
-| Authority  | Owner                                                                 |
+| Field      | Value                                                                   |
+| ---------- | ----------------------------------------------------------------------- |
+| Decision   | **ACCEPTED**                                                            |
+| Date       | 2026-07-24                                                              |
+| Authority  | Owner                                                                   |
 | Conditions | Official product identity is **APZ QEP**; next programme APZQEP-REQ-001 |
 
 ## Acceptance checklist (Owner)

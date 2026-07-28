@@ -12,7 +12,11 @@ import {
   createQepTraceabilityPersistenceForTest,
   type QepTraceabilityRepositories,
 } from "../../infrastructure/factories";
-import { TraceForbiddenError, TraceInvariantViolation, TraceNotFoundError } from "../../shared/errors";
+import {
+  TraceForbiddenError,
+  TraceInvariantViolation,
+  TraceNotFoundError,
+} from "../../shared/errors";
 import {
   createTraceLinkApplicationService,
   type CreateTraceLinkCommandInput,
@@ -51,7 +55,9 @@ function buildService(registry: InMemoryEndpointRegistry): {
   service: TraceLinkApplicationService;
   repos: QepTraceabilityRepositories;
 } {
-  const repos = createQepTraceabilityPersistenceForTest({ allowInMemoryPersistence: true });
+  const repos = createQepTraceabilityPersistenceForTest({
+    allowInMemoryPersistence: true,
+  });
   let counter = 0;
   const service = createTraceLinkApplicationService({
     traceLinks: repos.traceLinks,
@@ -124,7 +130,10 @@ describe("TraceLinkApplicationService", () => {
 
     const successor = await service.createTraceLink(
       FULL_CTX,
-      baseCreateInput({ target: { kind: "test_specification", artefactId: "tspec_1" }, type: "requirement_specified_by" }),
+      baseCreateInput({
+        target: { kind: "test_specification", artefactId: "tspec_1" },
+        type: "requirement_specified_by",
+      }),
     );
     const superseded = await service.supersedeTraceLink(FULL_CTX, approved.id, {
       successorTraceId: successor.id,
@@ -144,7 +153,11 @@ describe("TraceLinkApplicationService", () => {
   it("updates confidence, authority, scope, rationale, metadata, origin, endpoint", async () => {
     const created = await service.createTraceLink(FULL_CTX, baseCreateInput());
 
-    const withConfidence = await service.updateConfidence(FULL_CTX, created.id, "provisional");
+    const withConfidence = await service.updateConfidence(
+      FULL_CTX,
+      created.id,
+      "provisional",
+    );
     expect(withConfidence.confidence).toBe("provisional");
 
     const withAuthority = await service.updateAuthority(FULL_CTX, created.id, {
@@ -153,13 +166,21 @@ describe("TraceLinkApplicationService", () => {
     });
     expect(withAuthority.authority.actorId).toBe("user_other");
 
-    const withScope = await service.updateScope(FULL_CTX, created.id, { kind: "tenant_global" });
+    const withScope = await service.updateScope(FULL_CTX, created.id, {
+      kind: "tenant_global",
+    });
     expect(withScope.scope.kind).toBe("tenant_global");
 
-    const withRationale = await service.updateRationale(FULL_CTX, created.id, "Because the workflow requires it");
+    const withRationale = await service.updateRationale(
+      FULL_CTX,
+      created.id,
+      "Because the workflow requires it",
+    );
     expect(withRationale.rationale).toBe("Because the workflow requires it");
 
-    const withMetadata = await service.updateMetadata(FULL_CTX, created.id, { source: "manual" });
+    const withMetadata = await service.updateMetadata(FULL_CTX, created.id, {
+      source: "manual",
+    });
     expect(withMetadata.metadata.entries.source).toBe("manual");
 
     const withOrigin = await service.updateOrigin(FULL_CTX, created.id, "system_rule");
@@ -181,7 +202,9 @@ describe("TraceLinkApplicationService", () => {
     await expect(service.retireTraceLink(VIEW_ONLY_CTX, created.id)).rejects.toThrow(
       TraceForbiddenError,
     );
-    await expect(service.getTraceLink(VIEW_ONLY_CTX, created.id)).resolves.not.toBeNull();
+    await expect(
+      service.getTraceLink(VIEW_ONLY_CTX, created.id),
+    ).resolves.not.toBeNull();
   });
 
   it("throws not found for unknown Trace Link ids", async () => {
@@ -193,7 +216,9 @@ describe("TraceLinkApplicationService", () => {
   it("lists, queries by source/target, inbound/outbound, and history", async () => {
     const created = await service.createTraceLink(FULL_CTX, baseCreateInput());
 
-    const listed = await service.listTraceLinks(FULL_CTX, { sourceArtefactId: "req_1" });
+    const listed = await service.listTraceLinks(FULL_CTX, {
+      sourceArtefactId: "req_1",
+    });
     expect(listed.total).toBe(1);
     expect(listed.items[0]?.id).toBe(created.id);
 

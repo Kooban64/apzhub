@@ -65,10 +65,7 @@ export const qepTestSpecificationListQuerySchema = paginationQuerySchema
     classification: z.string().min(1).max(64).optional(),
     priority: z.string().min(1).max(32).optional(),
     number: z.string().min(1).max(64).optional(),
-    isAuthoritative: z
-      .enum(["true", "false"])
-      .transform((value) => value === "true")
-      .optional(),
+    isAuthoritative: z.enum(["true", "false"]).optional(),
     offset: z.coerce.number().int().min(0).optional(),
   })
   .strict();
@@ -149,7 +146,9 @@ export const qepTestSpecificationAddRelationshipBodySchema = z
   })
   .strict();
 
-export type QepTestSpecificationListQuery = z.infer<typeof qepTestSpecificationListQuerySchema>;
+export type QepTestSpecificationListQuery = z.infer<
+  typeof qepTestSpecificationListQuerySchema
+>;
 export type QepTestSpecificationCreateBody = z.infer<
   typeof qepTestSpecificationCreateBodySchema
 >;

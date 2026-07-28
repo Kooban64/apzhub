@@ -86,9 +86,10 @@ export type QepRequirementContentVersionMetadataDto = {
   readonly correlationId: string;
 };
 
-export type QepRequirementContentVersionDetailDto = QepRequirementContentVersionMetadataDto & {
-  readonly snapshot: Readonly<Record<string, unknown>>;
-};
+export type QepRequirementContentVersionDetailDto =
+  QepRequirementContentVersionMetadataDto & {
+    readonly snapshot: Readonly<Record<string, unknown>>;
+  };
 
 export type QepRequirementVersionComparisonDto = {
   readonly requirementId: string;
@@ -383,7 +384,10 @@ export interface QepRequirementService {
     input: CreateQepRelationshipInput,
   ): Promise<QepRelationshipDto>;
   activateRelationship(ctx: QepRequestContext, id: string): Promise<QepRelationshipDto>;
-  deprecateRelationship(ctx: QepRequestContext, id: string): Promise<QepRelationshipDto>;
+  deprecateRelationship(
+    ctx: QepRequestContext,
+    id: string,
+  ): Promise<QepRelationshipDto>;
   retireRelationship(ctx: QepRequestContext, id: string): Promise<QepRelationshipDto>;
   supersedeRelationship(
     ctx: QepRequestContext,
@@ -419,7 +423,10 @@ export interface QepRequirementService {
     id: string,
     scope: { readonly kind: string; readonly referenceId?: string },
   ): Promise<QepRelationshipDto>;
-  getRelationship(ctx: QepRequestContext, id: string): Promise<QepRelationshipDto | null>;
+  getRelationship(
+    ctx: QepRequestContext,
+    id: string,
+  ): Promise<QepRelationshipDto | null>;
   listRelationships(
     ctx: QepRequestContext,
     query?: ListQepRelationshipsQuery,
@@ -453,12 +460,16 @@ export interface QepRequirementService {
     ctx: QepRequestContext,
     contentVersionId: string,
   ): Promise<readonly QepRelationshipDto[]>;
-  listRelationshipConflicts(ctx: QepRequestContext): Promise<readonly QepRelationshipDto[]>;
+  listRelationshipConflicts(
+    ctx: QepRequestContext,
+  ): Promise<readonly QepRelationshipDto[]>;
   listSupersessionChains(
     ctx: QepRequestContext,
     requirementId?: string,
   ): Promise<readonly QepRelationshipDto[]>;
-  listRelationshipTaxonomy(ctx: QepRequestContext): Promise<readonly QepRelationshipTaxonomyDto[]>;
+  listRelationshipTaxonomy(
+    ctx: QepRequestContext,
+  ): Promise<readonly QepRelationshipTaxonomyDto[]>;
 }
 
 /** Requirement Baseline (configuration-management) contracts — APZQEP-ENG-020E Part 2. */
@@ -473,10 +484,7 @@ export type QepBaselineItemDto = {
 
 /** Baseline integrity verification lifecycle status (APZQEP-ENG-020E Part 3). */
 export type QepBaselineIntegrityVerificationStatus =
-  | "verified"
-  | "not_yet_verified"
-  | "verification_failed"
-  | "unsupported_schema";
+  "verified" | "not_yet_verified" | "verification_failed" | "unsupported_schema";
 
 /** Baseline commands surfaced to the Workbench for the caller's permissions + current state. */
 export const QEP_BASELINE_ACTIONS = [
@@ -528,7 +536,9 @@ export function computeQepBaselineAvailableActions(
 ): readonly QepBaselineAction[] {
   const granted = permissions;
   const has = (permission: QepRequirementsPermission): boolean =>
-    !granted || granted.length === 0 || granted.includes("qep.requirements.*") ||
+    !granted ||
+    granted.length === 0 ||
+    granted.includes("qep.requirements.*") ||
     granted.includes(permission);
 
   const actions: QepBaselineAction[] = [];
@@ -543,7 +553,10 @@ export function computeQepBaselineAvailableActions(
   if (status === "locked" && has("qep.requirements.baselines.archive")) {
     actions.push("archive");
   }
-  if ((status === "locked" || status === "archived") && has("qep.requirements.baselines.verify")) {
+  if (
+    (status === "locked" || status === "archived") &&
+    has("qep.requirements.baselines.verify")
+  ) {
     actions.push("verifyIntegrity");
   }
   if (has("qep.requirements.baselines.compare")) {

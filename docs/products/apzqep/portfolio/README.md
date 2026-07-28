@@ -4,8 +4,8 @@
 
 ## Current programme
 
-| Programme | Title | Status | Pack |
-| --------- | ----- | ------ | ---- |
+| Programme                | Title                                      | Status                                                                                    | Pack                                        |
+| ------------------------ | ------------------------------------------ | ----------------------------------------------------------------------------------------- | ------------------------------------------- |
 | **APZQEP-PORTFOLIO-001** | Foundation Completion & Portfolio Baseline | **ACCEPTED / APPROVED / CLOSED** — APZQEP Foundation COMPLETE, Capability Expansion READY | [PORTFOLIO-001/](./PORTFOLIO-001/README.md) |
 
 ## What lives here

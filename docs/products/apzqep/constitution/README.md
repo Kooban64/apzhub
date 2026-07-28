@@ -36,12 +36,12 @@ Amendments require explicit Owner Decision.
 
 ## Upstream / downstream
 
-| Stage                   | Status                                                         |
-| ----------------------- | -------------------------------------------------------------- |
-| APZQEP-TRANSITION-001   | **ACCEPTED**                                                   |
-| APZQEP-REQ-001          | **ACCEPTED**                                                   |
-| APZQEP-DISCOVERY-001    | **ACCEPTED**                                                   |
-| APZQEP-CONSTITUTION-001 | **ACCEPTED / CLOSED** (this programme)                         |
+| Stage                   | Status                                                                                |
+| ----------------------- | ------------------------------------------------------------------------------------- |
+| APZQEP-TRANSITION-001   | **ACCEPTED**                                                                          |
+| APZQEP-REQ-001          | **ACCEPTED**                                                                          |
+| APZQEP-DISCOVERY-001    | **ACCEPTED**                                                                          |
+| APZQEP-CONSTITUTION-001 | **ACCEPTED / CLOSED** (this programme)                                                |
 | APZQEP-DEF-001          | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** — [pack](../product-definition/README.md) |
 
 ## STOP

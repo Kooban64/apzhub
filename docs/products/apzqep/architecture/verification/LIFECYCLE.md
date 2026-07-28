@@ -12,8 +12,8 @@ Verified · Failed · Partially Verified · Not Verified · Inconclusive · Bloc
 
 ## Rules
 
-- Explicit transition commands  
-- Server-authoritative validation  
-- History on material changes  
-- Supersession preferred over silent rewrite  
-- Future Workbench uses `availableActions` only  
+- Explicit transition commands
+- Server-authoritative validation
+- History on material changes
+- Supersession preferred over silent rewrite
+- Future Workbench uses `availableActions` only

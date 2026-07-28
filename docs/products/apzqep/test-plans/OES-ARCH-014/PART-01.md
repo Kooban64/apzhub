@@ -1,20 +1,21 @@
 # APZQEP-OES-ARCH-014
+
 # PART 1 — Executive Summary, Objectives, Principles, Constraints & Non-Goals
 
-| Item | Value |
-| ---- | ----- |
-| Document | **APZQEP-OES-ARCH-014** |
-| Title | Test Plans Workbench Architecture |
-| Programme | **APZQEP-ARCH-014** |
-| Capability | Test Plans |
-| Layer | Workbench Architecture |
-| Status | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
-| Version | **1.0.0-oes** |
-| Part | **1 of 5** |
-| Governing methodology | [OES-000](../../../../engineering/oes/OES-000-Owner-Engineering-Specification-Standard.md) **FROZEN 1.0.0** |
-| Writing standard | [OES-001](../../../../engineering/oes/OES-001-Engineering-Writing-Standard.md) **FROZEN 1.0.0** |
-| Review standard | [OES-002](../../../../engineering/oes/OES-002-Engineering-Review-and-Acceptance-Standard.md) **FROZEN 1.1.0** |
-| Constitution | Document 000 v1.0.0 |
+| Item                  | Value                                                                                                         |
+| --------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Document              | **APZQEP-OES-ARCH-014**                                                                                       |
+| Title                 | Test Plans Workbench Architecture                                                                             |
+| Programme             | **APZQEP-ARCH-014**                                                                                           |
+| Capability            | Test Plans                                                                                                    |
+| Layer                 | Workbench Architecture                                                                                        |
+| Status                | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE**                                                                   |
+| Version               | **1.0.0-oes**                                                                                                 |
+| Part                  | **1 of 5**                                                                                                    |
+| Governing methodology | [OES-000](../../../../engineering/oes/OES-000-Owner-Engineering-Specification-Standard.md) **FROZEN 1.0.0**   |
+| Writing standard      | [OES-001](../../../../engineering/oes/OES-001-Engineering-Writing-Standard.md) **FROZEN 1.0.0**               |
+| Review standard       | [OES-002](../../../../engineering/oes/OES-002-Engineering-Review-and-Acceptance-Standard.md) **FROZEN 1.1.0** |
+| Constitution          | Document 000 v1.0.0                                                                                           |
 
 **Normative language:** **SHALL** / **MUST** = mandatory; **SHOULD** = strong recommendation; **MAY** = optional (RFC 2119 as applied by OES-001).
 
@@ -50,14 +51,14 @@ Design the complete Workbench Architecture for Test Plans such that a Workbench 
 
 ## 3. Baselines consumed (immutable inputs)
 
-| Baseline | Status | Role |
-| -------- | ------ | ---- |
-| **APZQEP-ARCH-013** | **ACCEPTED / ARCHITECTURE BASELINED / CLOSED** | Test Plans Capability Architecture — domain boundaries, lifecycle, relationships |
-| **APZQEP-OES-ENG-060A / ENG-060A / CERT-060A** | Domain `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** — **DOMAIN_PRODUCTION_READY_WITH_LIMITATIONS** | Certified lifecycle, statuses, invariants, readiness rules |
-| **APZQEP-OES-ENG-060B / ENG-060B / CERT-060B** | Infrastructure `@apzhub/qep-test-plans` **0.2.0** — **INFRASTRUCTURE COMPONENT CERTIFIED** / **INFRASTRUCTURE_PRODUCTION_READY_WITH_LIMITATIONS** | Certified REST surface, permissions, `availableActions`, search projection |
-| Document 000 | Constitution | Supreme authority on conflict |
-| OES-000 / OES-001 / OES-002 | FROZEN | Methodology, writing, review standards |
-| Document 005 / 016 / 017 | Desktop shell / navigation frameworks | Shell grammar this Workbench **SHALL** reuse |
+| Baseline                                       | Status                                                                                                                                            | Role                                                                             |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **APZQEP-ARCH-013**                            | **ACCEPTED / ARCHITECTURE BASELINED / CLOSED**                                                                                                    | Test Plans Capability Architecture — domain boundaries, lifecycle, relationships |
+| **APZQEP-OES-ENG-060A / ENG-060A / CERT-060A** | Domain `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** — **DOMAIN_PRODUCTION_READY_WITH_LIMITATIONS**                                                | Certified lifecycle, statuses, invariants, readiness rules                       |
+| **APZQEP-OES-ENG-060B / ENG-060B / CERT-060B** | Infrastructure `@apzhub/qep-test-plans` **0.2.0** — **INFRASTRUCTURE COMPONENT CERTIFIED** / **INFRASTRUCTURE_PRODUCTION_READY_WITH_LIMITATIONS** | Certified REST surface, permissions, `availableActions`, search projection       |
+| Document 000                                   | Constitution                                                                                                                                      | Supreme authority on conflict                                                    |
+| OES-000 / OES-001 / OES-002                    | FROZEN                                                                                                                                            | Methodology, writing, review standards                                           |
+| Document 005 / 016 / 017                       | Desktop shell / navigation frameworks                                                                                                             | Shell grammar this Workbench **SHALL** reuse                                     |
 
 This architecture **SHALL** treat all rows above as **immutable dependencies**. It **SHALL NOT** redefine Domain lifecycle, Infrastructure REST shape, or permission names. It **SHALL** reference them by contract.
 
@@ -82,19 +83,19 @@ The Workbench **does not** decide any of the above. It renders what the certifie
 
 ## 5. Architectural principles
 
-| # | Principle | Meaning |
-| - | --------- | ------- |
-| W1 | Presentation only | The Workbench owns navigation, layout, panels, dialogs, and rendering — nothing else |
-| W2 | Server authority | Lifecycle legality is expressed exclusively via server `availableActions`; the Workbench never invents a transition |
-| W3 | No persistence | The Workbench never writes to a database, cache, or search index directly |
-| W4 | REST-only consumption | The Workbench consumes `/api/v1/qep/plans/*` (ENG-060B) via the platform gateway; it never bypasses it |
-| W5 | Reference, do not absorb | Requirements, Traceability, Verification, and Test Specifications remain foreign SoRs; the Workbench links to them, never embeds their editors |
-| W6 | Optimistic, not authoritative | The Workbench may show pending UI state after a command but **SHALL** re-fetch and reconcile with the server response |
-| W7 | Deep-linkable | Every Plan, and every primary Inspector panel, **SHALL** have a permanent URL |
-| W8 | Accessible by default | Every interaction **SHALL** be keyboard operable and meet WCAG AA |
-| W9 | Permission-filtered | Navigation, actions, and search results **SHALL** be filtered by Permission Platform grants; the server remains authoritative |
-| W10 | Shell reuse | The Workbench **SHALL** reuse the APZHUB Desktop shell grammar (Activity Bar → Sidebar → Workspace → Context/Inspector) and the Workbench pattern already accepted for Test Specifications (ARCH-012) |
-| W11 | Honest about gaps | Where certified Infrastructure has a recorded limitation (e.g. deferred Compare), the Workbench architecture **SHALL** describe a governed unavailable state or a future contract — it **SHALL NOT** fabricate a working feature |
+| #   | Principle                     | Meaning                                                                                                                                                                                                                          |
+| --- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| W1  | Presentation only             | The Workbench owns navigation, layout, panels, dialogs, and rendering — nothing else                                                                                                                                             |
+| W2  | Server authority              | Lifecycle legality is expressed exclusively via server `availableActions`; the Workbench never invents a transition                                                                                                              |
+| W3  | No persistence                | The Workbench never writes to a database, cache, or search index directly                                                                                                                                                        |
+| W4  | REST-only consumption         | The Workbench consumes `/api/v1/qep/plans/*` (ENG-060B) via the platform gateway; it never bypasses it                                                                                                                           |
+| W5  | Reference, do not absorb      | Requirements, Traceability, Verification, and Test Specifications remain foreign SoRs; the Workbench links to them, never embeds their editors                                                                                   |
+| W6  | Optimistic, not authoritative | The Workbench may show pending UI state after a command but **SHALL** re-fetch and reconcile with the server response                                                                                                            |
+| W7  | Deep-linkable                 | Every Plan, and every primary Inspector panel, **SHALL** have a permanent URL                                                                                                                                                    |
+| W8  | Accessible by default         | Every interaction **SHALL** be keyboard operable and meet WCAG AA                                                                                                                                                                |
+| W9  | Permission-filtered           | Navigation, actions, and search results **SHALL** be filtered by Permission Platform grants; the server remains authoritative                                                                                                    |
+| W10 | Shell reuse                   | The Workbench **SHALL** reuse the APZHUB Desktop shell grammar (Activity Bar → Sidebar → Workspace → Context/Inspector) and the Workbench pattern already accepted for Test Specifications (ARCH-012)                            |
+| W11 | Honest about gaps             | Where certified Infrastructure has a recorded limitation (e.g. deferred Compare), the Workbench architecture **SHALL** describe a governed unavailable state or a future contract — it **SHALL NOT** fabricate a working feature |
 
 ---
 
@@ -147,14 +148,14 @@ This programme **SHALL NOT**:
 
 ## 9. Fidelity to certified Domain and Infrastructure
 
-| Concern | Fidelity requirement |
-| ------- | --------------------- |
-| Lifecycle statuses | `draft` · `review` · `approved` · `ready` · `in_execution` · `completed` · `archived` · `rejected` · `cancelled` · `superseded` (ENG-060A) — Workbench display labels only; no new statuses invented |
-| Lifecycle actions | `submit-for-review` · `approve` · `reject` · `return-to-draft` · `mark-ready` · `start-execution` · `complete` · `archive` · `cancel` · `supersede` · `clone` · `transfer-ownership` · `assign` · `schedule` plus item commands (ENG-060B Part 3/4) — Workbench renders only actions present in `availableActions` |
-| REST base | `/api/v1/qep/plans` and children (ENG-060B Part 4) |
-| Permissions | `qep.plan.*` catalogue (ENG-060B Part 4 §4.1) — Workbench never invents a grant |
-| Known limitations | **L-01** version compare deferred; **L-02** no dedicated `GET .../items` (items ship on the Plan DTO); both **SHALL** be presented honestly (Part 4 §6, Appendix B) |
-| Pagination | Max `pageSize` = 50 (ARCH-013 / ENG-060B) |
+| Concern            | Fidelity requirement                                                                                                                                                                                                                                                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Lifecycle statuses | `draft` · `review` · `approved` · `ready` · `in_execution` · `completed` · `archived` · `rejected` · `cancelled` · `superseded` (ENG-060A) — Workbench display labels only; no new statuses invented                                                                                                               |
+| Lifecycle actions  | `submit-for-review` · `approve` · `reject` · `return-to-draft` · `mark-ready` · `start-execution` · `complete` · `archive` · `cancel` · `supersede` · `clone` · `transfer-ownership` · `assign` · `schedule` plus item commands (ENG-060B Part 3/4) — Workbench renders only actions present in `availableActions` |
+| REST base          | `/api/v1/qep/plans` and children (ENG-060B Part 4)                                                                                                                                                                                                                                                                 |
+| Permissions        | `qep.plan.*` catalogue (ENG-060B Part 4 §4.1) — Workbench never invents a grant                                                                                                                                                                                                                                    |
+| Known limitations  | **L-01** version compare deferred; **L-02** no dedicated `GET .../items` (items ship on the Plan DTO); both **SHALL** be presented honestly (Part 4 §6, Appendix B)                                                                                                                                                |
+| Pagination         | Max `pageSize` = 50 (ARCH-013 / ENG-060B)                                                                                                                                                                                                                                                                          |
 
 ---
 

@@ -68,9 +68,26 @@ const TRACE_ENDPOINT_KIND_OPTIONS = [
 
 const TRACE_DIRECTION_OPTIONS = ["forward", "reverse", "symmetric"] as const;
 const TRACE_STRENGTH_OPTIONS = ["mandatory", "recommended", "informative"] as const;
-const TRACE_CONFIDENCE_OPTIONS = ["authoritative", "asserted", "inferred", "provisional"] as const;
-const TRACE_ORIGIN_OPTIONS = ["user", "import", "system_rule", "ai_suggestion", "migration"] as const;
-const TRACE_SCOPE_KIND_OPTIONS = ["product", "project", "release", "baseline", "tenant_global"] as const;
+const TRACE_CONFIDENCE_OPTIONS = [
+  "authoritative",
+  "asserted",
+  "inferred",
+  "provisional",
+] as const;
+const TRACE_ORIGIN_OPTIONS = [
+  "user",
+  "import",
+  "system_rule",
+  "ai_suggestion",
+  "migration",
+] as const;
+const TRACE_SCOPE_KIND_OPTIONS = [
+  "product",
+  "project",
+  "release",
+  "baseline",
+  "tenant_global",
+] as const;
 const DEFAULT_ACTOR_ID = "workbench-user";
 const PAGE_SIZE = 50;
 
@@ -93,7 +110,10 @@ function endpointLabel(endpoint: QepTraceEndpointDto): string {
 function EndpointSummaryLink({ endpoint }: { readonly endpoint: QepTraceEndpointDto }) {
   if (endpoint.kind === "requirement") {
     return (
-      <Link href={QEP_REQUIREMENTS_ROUTES.detail(endpoint.artefactId)} className="underline">
+      <Link
+        href={QEP_REQUIREMENTS_ROUTES.detail(endpoint.artefactId)}
+        className="underline"
+      >
         {endpointLabel(endpoint)}
       </Link>
     );
@@ -158,7 +178,12 @@ export function QepTraceLinksListView() {
   };
 
   const query = useQuery({
-    queryKey: qepQueryKeys.traceability.list({ ...serverParams, confidence, strength, origin }),
+    queryKey: qepQueryKeys.traceability.list({
+      ...serverParams,
+      confidence,
+      strength,
+      origin,
+    }),
     queryFn: ({ signal }) => listTraceLinks(serverParams, { signal }),
   });
 
@@ -338,7 +363,11 @@ export function QepTraceLinksListView() {
       {query.isLoading ? <QepLoadingState label="Loading trace links…" /> : null}
       {query.isError ? (
         <QepErrorState
-          message={query.error instanceof Error ? query.error.message : "Unable to load trace links"}
+          message={
+            query.error instanceof Error
+              ? query.error.message
+              : "Unable to load trace links"
+          }
           onRetry={() => void query.refetch()}
         />
       ) : null}
@@ -551,7 +580,8 @@ export function QepTraceLinkCreateView() {
   });
 
   const mutation = useMutation({
-    mutationFn: (input: Parameters<typeof createTraceLink>[0]) => createTraceLink(input),
+    mutationFn: (input: Parameters<typeof createTraceLink>[0]) =>
+      createTraceLink(input),
     onSuccess: (created) => {
       emitQepWorkbenchTelemetry({ event: "traceability.create", outcome: "success" });
       router.push(QEP_TRACEABILITY_ROUTES.detail(created.id));
@@ -595,7 +625,11 @@ export function QepTraceLinkCreateView() {
         {mutation.isError ? (
           <div aria-live="polite">
             <QepErrorState
-              message={mutation.error instanceof Error ? mutation.error.message : "Create failed"}
+              message={
+                mutation.error instanceof Error
+                  ? mutation.error.message
+                  : "Create failed"
+              }
             />
           </div>
         ) : null}
@@ -733,7 +767,10 @@ export function QepTraceLinkCreateView() {
           <Button
             type="submit"
             disabled={
-              mutation.isPending || !sourceArtefactId.trim() || !targetArtefactId.trim() || !type
+              mutation.isPending ||
+              !sourceArtefactId.trim() ||
+              !targetArtefactId.trim() ||
+              !type
             }
             data-testid="qep-traceability-create-submit"
           >
@@ -784,7 +821,11 @@ function LifecycleConfirmDialog({
 }
 
 /** Multi-pane trace link detail view — Context | Summary | Inspector. */
-export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: string }) {
+export function QepTraceLinkDetailView({
+  traceLinkId,
+}: {
+  readonly traceLinkId: string;
+}) {
   const queryClient = useQueryClient();
   const [pendingLifecycle, setPendingLifecycle] = useState<
     null | "validate" | "approve" | "retire"
@@ -822,7 +863,9 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
   }, [query.isSuccess, query.isError, startedAt]);
 
   function invalidate() {
-    void queryClient.invalidateQueries({ queryKey: qepQueryKeys.traceability.detail(traceLinkId) });
+    void queryClient.invalidateQueries({
+      queryKey: qepQueryKeys.traceability.detail(traceLinkId),
+    });
     void queryClient.invalidateQueries({ queryKey: qepQueryKeys.traceability.all() });
   }
 
@@ -924,7 +967,9 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
   if (query.isError || !query.data) {
     return (
       <QepErrorState
-        message={query.error instanceof Error ? query.error.message : "Trace link not found"}
+        message={
+          query.error instanceof Error ? query.error.message : "Trace link not found"
+        }
         onRetry={() => void query.refetch()}
       />
     );
@@ -946,7 +991,8 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
           role="status"
           data-testid="qep-traceability-immutable-banner"
         >
-          This trace link is <strong>{traceLink.lifecycleState}</strong> and is immutable.
+          This trace link is <strong>{traceLink.lifecycleState}</strong> and is
+          immutable.
         </p>
       ) : null}
       {traceLink.context.immutable ? (
@@ -956,7 +1002,9 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
           data-testid="qep-traceability-context-banner"
         >
           This trace link is bound to an immutable context
-          {traceLink.context.baselineId ? ` (baseline ${traceLink.context.baselineId})` : ""}
+          {traceLink.context.baselineId
+            ? ` (baseline ${traceLink.context.baselineId})`
+            : ""}
           {traceLink.context.contentVersionId
             ? ` (content version ${traceLink.context.contentVersionId})`
             : ""}
@@ -972,33 +1020,47 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
           <QepPanel title="Context">
             <dl className="space-y-2 text-sm">
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Lifecycle</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Lifecycle
+                </dt>
                 <dd data-testid="qep-traceability-status">
                   <QepStatusBadge status={traceLink.lifecycleState} />{" "}
                   <span>{traceLink.lifecycleState}</span>
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Scope</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Scope
+                </dt>
                 <dd>
                   {traceLink.scope.kind}
-                  {traceLink.scope.referenceId ? ` · ${traceLink.scope.referenceId}` : ""}
+                  {traceLink.scope.referenceId
+                    ? ` · ${traceLink.scope.referenceId}`
+                    : ""}
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Direction</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Direction
+                </dt>
                 <dd>{traceLink.direction}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Revision</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Revision
+                </dt>
                 <dd>{traceLink.revision}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Created</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Created
+                </dt>
                 <dd>{formatDate(traceLink.createdAt)}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Updated</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Updated
+                </dt>
                 <dd>{formatDate(traceLink.updatedAt)}</dd>
               </div>
             </dl>
@@ -1009,47 +1071,65 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
           <QepPanel title="Summary">
             <dl className="grid gap-3 text-sm sm:grid-cols-2">
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Type</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Type
+                </dt>
                 <dd>{traceLink.type}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Origin</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Origin
+                </dt>
                 <dd>{traceLink.origin}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Source</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Source
+                </dt>
                 <dd>
                   <EndpointSummaryLink endpoint={traceLink.source} />
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Target</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Target
+                </dt>
                 <dd>
                   <EndpointSummaryLink endpoint={traceLink.target} />
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Strength</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Strength
+                </dt>
                 <dd>{traceLink.strength}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Confidence</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Confidence
+                </dt>
                 <dd>{traceLink.confidence}</dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Authority</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Authority
+                </dt>
                 <dd>
                   {traceLink.authority.kind}:{traceLink.authority.actorId}
                 </dd>
               </div>
               <div>
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Provenance</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Provenance
+                </dt>
                 <dd>
                   {traceLink.provenance.actorId} · {traceLink.provenance.correlationId}
                 </dd>
               </div>
               <div className="sm:col-span-2">
-                <dt className="font-medium text-[var(--color-muted-foreground)]">Rationale</dt>
+                <dt className="font-medium text-[var(--color-muted-foreground)]">
+                  Rationale
+                </dt>
                 <dd>{traceLink.rationale ?? "—"}</dd>
               </div>
             </dl>
@@ -1160,7 +1240,10 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
                 </Button>
               ) : null}
               {actions.size === 0 ? (
-                <p className="text-sm text-[var(--color-muted-foreground)]" role="status">
+                <p
+                  className="text-sm text-[var(--color-muted-foreground)]"
+                  role="status"
+                >
                   Read-only — no actions available.
                 </p>
               ) : null}
@@ -1169,13 +1252,17 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
             {traceLink.historySummaries.length > 0 ? (
               <div className="mt-4">
                 <h3 className="text-sm font-medium">History</h3>
-                <ol className="mt-2 space-y-2 text-xs" data-testid="qep-traceability-history-preview">
+                <ol
+                  className="mt-2 space-y-2 text-xs"
+                  data-testid="qep-traceability-history-preview"
+                >
                   {traceLink.historySummaries.slice(0, 5).map((entry, index) => (
                     <li
                       key={`${entry.at}-${index}`}
                       className="rounded-md border border-[var(--color-border)] p-2"
                     >
-                      <span className="font-medium">{entry.kind}</span> — {entry.summary}
+                      <span className="font-medium">{entry.kind}</span> —{" "}
+                      {entry.summary}
                       <p className="text-[var(--color-muted-foreground)]">
                         {entry.at} · {entry.by}
                       </p>
@@ -1277,7 +1364,12 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
               <Button type="submit" size="sm" disabled={confidenceMutation.isPending}>
                 Save
               </Button>
-              <Button type="button" variant="outline" size="sm" onClick={() => setEditingField(null)}>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setEditingField(null)}
+              >
                 Cancel
               </Button>
             </div>
@@ -1323,7 +1415,12 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
               <Button type="submit" size="sm" disabled={authorityMutation.isPending}>
                 Save
               </Button>
-              <Button type="button" variant="outline" size="sm" onClick={() => setEditingField(null)}>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setEditingField(null)}
+              >
                 Cancel
               </Button>
             </div>
@@ -1377,7 +1474,12 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
               <Button type="submit" size="sm" disabled={scopeMutation.isPending}>
                 Save
               </Button>
-              <Button type="button" variant="outline" size="sm" onClick={() => setEditingField(null)}>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setEditingField(null)}
+              >
                 Cancel
               </Button>
             </div>
@@ -1418,7 +1520,12 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
               <Button type="submit" size="sm" disabled={rationaleMutation.isPending}>
                 Save
               </Button>
-              <Button type="button" variant="outline" size="sm" onClick={() => setEditingField(null)}>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setEditingField(null)}
+              >
                 Cancel
               </Button>
             </div>
@@ -1430,7 +1537,8 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
         <div aria-live="polite">
           <QepErrorState
             message={(() => {
-              const error = validateMutation.error ?? approveMutation.error ?? retireMutation.error;
+              const error =
+                validateMutation.error ?? approveMutation.error ?? retireMutation.error;
               if (hasRevisionConflict(error)) {
                 return "This trace link was modified elsewhere. Refresh and try again.";
               }
@@ -1444,7 +1552,11 @@ export function QepTraceLinkDetailView({ traceLinkId }: { readonly traceLinkId: 
 }
 
 /** Full history timeline for a Trace Link. */
-export function QepTraceLinkHistoryView({ traceLinkId }: { readonly traceLinkId: string }) {
+export function QepTraceLinkHistoryView({
+  traceLinkId,
+}: {
+  readonly traceLinkId: string;
+}) {
   const startedAt = useMemo(() => Date.now(), []);
 
   const traceLinkQuery = useQuery({
@@ -1496,7 +1608,9 @@ export function QepTraceLinkHistoryView({ traceLinkId }: { readonly traceLinkId:
       {historyQuery.isError ? (
         <QepErrorState
           message={
-            historyQuery.error instanceof Error ? historyQuery.error.message : "Unable to load history"
+            historyQuery.error instanceof Error
+              ? historyQuery.error.message
+              : "Unable to load history"
           }
           onRetry={() => void historyQuery.refetch()}
         />
@@ -1506,7 +1620,10 @@ export function QepTraceLinkHistoryView({ traceLinkId }: { readonly traceLinkId:
       ) : null}
       {historyQuery.isSuccess && historyQuery.data.length > 0 ? (
         <QepPanel title="History timeline">
-          <ol className="space-y-3 text-sm" data-testid="qep-traceability-history-timeline">
+          <ol
+            className="space-y-3 text-sm"
+            data-testid="qep-traceability-history-timeline"
+          >
             {historyQuery.data.map((entry, index) => (
               <li
                 key={`${entry.at}-${index}`}
@@ -1536,9 +1653,15 @@ export function QepTraceLinkSupersedeView() {
   const [successorId, setSuccessorId] = useState("");
 
   const mutation = useMutation({
-    mutationFn: () => supersedeTraceLink(predecessorId.trim(), { successorTraceId: successorId.trim() }),
+    mutationFn: () =>
+      supersedeTraceLink(predecessorId.trim(), {
+        successorTraceId: successorId.trim(),
+      }),
     onSuccess: (updated) => {
-      emitQepWorkbenchTelemetry({ event: "traceability.supersede", outcome: "success" });
+      emitQepWorkbenchTelemetry({
+        event: "traceability.supersede",
+        outcome: "success",
+      });
       router.push(QEP_TRACEABILITY_ROUTES.detail(updated.id));
     },
     onError: () => {
@@ -1562,13 +1685,17 @@ export function QepTraceLinkSupersedeView() {
     >
       <QepPanel title="Supersession">
         <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
-          Successor replaces predecessor for forward traceability. No delete or restore of
-          historical facts.
+          Successor replaces predecessor for forward traceability. No delete or restore
+          of historical facts.
         </p>
         {mutation.isError ? (
           <div aria-live="polite">
             <QepErrorState
-              message={mutation.error instanceof Error ? mutation.error.message : "Supersede failed"}
+              message={
+                mutation.error instanceof Error
+                  ? mutation.error.message
+                  : "Supersede failed"
+              }
             />
           </div>
         ) : null}
@@ -1593,7 +1720,9 @@ export function QepTraceLinkSupersedeView() {
           />
           <Button
             type="submit"
-            disabled={mutation.isPending || !predecessorId.trim() || !successorId.trim()}
+            disabled={
+              mutation.isPending || !predecessorId.trim() || !successorId.trim()
+            }
             data-testid="qep-traceability-supersede-submit"
           >
             {mutation.isPending ? "Submitting…" : "Supersede trace link"}
@@ -1612,7 +1741,8 @@ export function QepTraceMatrixView() {
 
   const query = useQuery({
     queryKey: qepQueryKeys.traceability.matrix({ sourceKind, targetKind }),
-    queryFn: ({ signal }) => listTraceLinks({ sourceKind, targetKind, limit: 100 }, { signal }),
+    queryFn: ({ signal }) =>
+      listTraceLinks({ sourceKind, targetKind, limit: 100 }, { signal }),
   });
 
   useEffect(() => {
@@ -1701,7 +1831,11 @@ export function QepTraceMatrixView() {
       {query.isLoading ? <QepLoadingState label="Loading trace matrix…" /> : null}
       {query.isError ? (
         <QepErrorState
-          message={query.error instanceof Error ? query.error.message : "Unable to load trace matrix"}
+          message={
+            query.error instanceof Error
+              ? query.error.message
+              : "Unable to load trace matrix"
+          }
           onRetry={() => void query.refetch()}
         />
       ) : null}
@@ -1716,8 +1850,9 @@ export function QepTraceMatrixView() {
           >
             <table className="min-w-full text-sm">
               <caption className="sr-only">
-                Trace matrix from {sourceKind} sources to {targetKind} targets. A dash means no
-                trace link was returned for that pair, not that coverage is missing.
+                Trace matrix from {sourceKind} sources to {targetKind} targets. A dash
+                means no trace link was returned for that pair, not that coverage is
+                missing.
               </caption>
               <thead className="bg-[var(--color-muted)]/40 text-left">
                 <tr>
@@ -1742,7 +1877,9 @@ export function QepTraceMatrixView() {
                       return (
                         <td key={colId} className="px-3 py-2 align-top">
                           {links.length === 0 ? (
-                            <span className="text-[var(--color-muted-foreground)]">—</span>
+                            <span className="text-[var(--color-muted-foreground)]">
+                              —
+                            </span>
                           ) : (
                             <ul className="space-y-1">
                               {links.map((link) => (
@@ -1767,17 +1904,23 @@ export function QepTraceMatrixView() {
           </div>
 
           <QepPanel title="List alternative (accessibility)">
-            <ul className="space-y-2 text-sm" data-testid="qep-traceability-matrix-list">
+            <ul
+              className="space-y-2 text-sm"
+              data-testid="qep-traceability-matrix-list"
+            >
               {items.map((link) => (
                 <li
                   key={link.id}
                   className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-[var(--color-border)] p-2"
                 >
                   <span>
-                    {endpointLabel(link.source)} → {endpointLabel(link.target)} ({link.type} ·{" "}
-                    {link.lifecycleState})
+                    {endpointLabel(link.source)} → {endpointLabel(link.target)} (
+                    {link.type} · {link.lifecycleState})
                   </span>
-                  <Link href={QEP_TRACEABILITY_ROUTES.detail(link.id)} className="underline">
+                  <Link
+                    href={QEP_TRACEABILITY_ROUTES.detail(link.id)}
+                    className="underline"
+                  >
                     View
                   </Link>
                 </li>
@@ -1824,7 +1967,11 @@ export function QepTraceTaxonomyBrowserView() {
       {query.isLoading ? <QepLoadingState label="Loading taxonomy…" /> : null}
       {query.isError ? (
         <QepErrorState
-          message={query.error instanceof Error ? query.error.message : "Unable to load taxonomy"}
+          message={
+            query.error instanceof Error
+              ? query.error.message
+              : "Unable to load taxonomy"
+          }
           onRetry={() => void query.refetch()}
         />
       ) : null}

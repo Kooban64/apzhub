@@ -10,22 +10,22 @@
 
 ## Authoritative specification
 
-| Document | Purpose |
-| -------- | ------- |
-| [REQUIREMENTS-RELATIONSHIP-ARCHITECTURE.md](./REQUIREMENTS-RELATIONSHIP-ARCHITECTURE.md) | Complete semantic architecture (**authoritative**) |
-| [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) | Owner Architecture Acceptance — **ACCEPTED / CLOSED / COMPLETE** |
+| Document                                                                                 | Purpose                                                          |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| [REQUIREMENTS-RELATIONSHIP-ARCHITECTURE.md](./REQUIREMENTS-RELATIONSHIP-ARCHITECTURE.md) | Complete semantic architecture (**authoritative**)               |
+| [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                                             | Owner Architecture Acceptance — **ACCEPTED / CLOSED / COMPLETE** |
 
 ## Engineering baseline
 
-| Field | Value |
-| ----- | ----- |
-| Product | APZ QEP |
-| Platform | APZHUB Platform 1.4 — CERTIFIED |
-| Requirements Module | PRODUCTION READY |
+| Field                       | Value                                                                           |
+| --------------------------- | ------------------------------------------------------------------------------- |
+| Product                     | APZ QEP                                                                         |
+| Platform                    | APZHUB Platform 1.4 — CERTIFIED                                                 |
+| Requirements Module         | PRODUCTION READY                                                                |
 | Latest accepted engineering | **APZQEP-ENG-020E** — Requirements Baselines — **ACCEPTED / CLOSED / COMPLETE** |
-| Next engineering programme | **APZQEP-ENG-020F** — Requirements Relationship Model |
-| ENG-020F phase | **PLANNING** |
-| ENG-020F implementation | **AUTHORISED TO BEGIN** |
+| Next engineering programme  | **APZQEP-ENG-020F** — Requirements Relationship Model                           |
+| ENG-020F phase              | **PLANNING**                                                                    |
+| ENG-020F implementation     | **AUTHORISED TO BEGIN**                                                         |
 
 ## Stop
 

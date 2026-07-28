@@ -27,8 +27,25 @@
     "domain": "@apzhub/qep-test-plans 0.1.0 CERTIFIED (APZQEP-OES-ENG-060A / APZQEP-ENG-060A / APZQEP-CERT-060A) — DOMAIN_PRODUCTION_READY_WITH_LIMITATIONS",
     "infrastructure": "@apzhub/qep-test-plans 0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED (APZQEP-OES-ENG-060B / APZQEP-ENG-060B / APZQEP-CERT-060B) — INFRASTRUCTURE_PRODUCTION_READY_WITH_LIMITATIONS",
     "restSurface": "/api/v1/qep/plans/* (discrete lifecycle action POSTs)",
-    "recordedLimitations": ["L-01 deferred Compare", "L-02 no dedicated GET .../items", "L-03 accepted coverage variance"],
-    "foundation": ["Document 000", "OES-000", "OES-001", "OES-002", "Document 005", "Document 006", "Document 015", "Document 016", "Document 017", "Document 018", "Document 021", "Document 028"],
+    "recordedLimitations": [
+      "L-01 deferred Compare",
+      "L-02 no dedicated GET .../items",
+      "L-03 accepted coverage variance"
+    ],
+    "foundation": [
+      "Document 000",
+      "OES-000",
+      "OES-001",
+      "OES-002",
+      "Document 005",
+      "Document 006",
+      "Document 015",
+      "Document 016",
+      "Document 017",
+      "Document 018",
+      "Document 021",
+      "Document 028"
+    ],
     "bindingInvariant": "The Workbench SHALL never determine what a user may do (Owner directive, ARCH-014 Acceptance)"
   },
   "deliverables": [

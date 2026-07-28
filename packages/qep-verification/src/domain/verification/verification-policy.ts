@@ -1,6 +1,9 @@
 import { VerificationInvariantViolation } from "../../shared/errors";
 import type { VerificationAuthority } from "./verification-authority";
-import { isInterimVerificationOutcome, type VerificationOutcome } from "./verification-outcome";
+import {
+  isInterimVerificationOutcome,
+  type VerificationOutcome,
+} from "./verification-outcome";
 import type { VerificationRationale } from "./verification-rationale";
 import type { VerificationStatus } from "./verification-status";
 import type { VerificationSubjectReference } from "./verification-subject";
@@ -26,15 +29,21 @@ export function assertAuthority(authority: VerificationAuthority): void {
   }
 }
 
-export function assertHasSubject(subject: VerificationSubjectReference | undefined): void {
+export function assertHasSubject(
+  subject: VerificationSubjectReference | undefined,
+): void {
   if (!subject || !subject.artefactId.trim()) {
-    throw new VerificationInvariantViolation("Verification requires a subject reference");
+    throw new VerificationInvariantViolation(
+      "Verification requires a subject reference",
+    );
   }
 }
 
 export function assertReference(subject: VerificationSubjectReference): void {
   if (!subject.artefactId.trim()) {
-    throw new VerificationInvariantViolation("Verification subject reference is invalid");
+    throw new VerificationInvariantViolation(
+      "Verification subject reference is invalid",
+    );
   }
   if (subject.kind === "external_reference" && !subject.externalUri) {
     throw new VerificationInvariantViolation(
@@ -92,7 +101,9 @@ export function assertMutable(status: VerificationStatus): void {
   }
 }
 
-export function assertImmutableWhenSupersededOrRetired(status: VerificationStatus): void {
+export function assertImmutableWhenSupersededOrRetired(
+  status: VerificationStatus,
+): void {
   if (status === "superseded" || status === "retired") {
     throw new VerificationInvariantViolation(
       `Verification in ${status} state is immutable`,

@@ -15,16 +15,16 @@
 
 ## Go / No-go checklist
 
-| Check | Go criteria |
-| ----- | ----------- |
-| Migrations | 0079 + 0080 applied without error; RLS active |
-| Health | Platform + QEP health endpoints OK |
-| AuthZ | View-only user cannot mutate; lifecycle permissions gate transitions |
-| Workbench | Open Explorer, Matrix, Inspector, History, Taxonomy under `/workspace/qep/traceability/*` |
-| Smoke | Create draft Trace Link → validate → approve path; history appends |
-| availableActions | UI reflects server DTO; no client-invented transitions |
-| Search | Projection lag acceptable; detail reload from SoR |
-| Isolation | Tenant A cannot read/mutate Tenant B Trace Links |
+| Check            | Go criteria                                                                               |
+| ---------------- | ----------------------------------------------------------------------------------------- |
+| Migrations       | 0079 + 0080 applied without error; RLS active                                             |
+| Health           | Platform + QEP health endpoints OK                                                        |
+| AuthZ            | View-only user cannot mutate; lifecycle permissions gate transitions                      |
+| Workbench        | Open Explorer, Matrix, Inspector, History, Taxonomy under `/workspace/qep/traceability/*` |
+| Smoke            | Create draft Trace Link → validate → approve path; history appends                        |
+| availableActions | UI reflects server DTO; no client-invented transitions                                    |
+| Search           | Projection lag acceptable; detail reload from SoR                                         |
+| Isolation        | Tenant A cannot read/mutate Tenant B Trace Links                                          |
 
 ## Qualifications
 

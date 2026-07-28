@@ -5,7 +5,7 @@
 
 ## Purpose
 
-Automation Management provides the product view of automated verification assets and ingested results — linking frameworks, repositories, pipelines, and runners **by reference** to the same SoR lifecycle as manual verification. It answers *what automation exists, is it healthy, and does it support release confidence?*
+Automation Management provides the product view of automated verification assets and ingested results — linking frameworks, repositories, pipelines, and runners **by reference** to the same SoR lifecycle as manual verification. It answers _what automation exists, is it healthy, and does it support release confidence?_
 
 ## Business rationale
 
@@ -13,28 +13,28 @@ Most enterprises already invest in CI and test runners. Duplicating runner ident
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| Automation asset | Registered reference to tests, suites, or jobs |
-| Framework identity | Declared technology (e.g. Playwright, JUnit) — descriptive |
-| Ingest | Import of run results into QEP SoR |
-| Flakiness | Repeated non-deterministic failure pattern |
-| Automation coverage | Requirements linked to executed automation |
-| Ingest health | Freshness and error state of integration |
-| Manual-to-automation candidate | Promotion suggestion from manual procedures |
+| Concept                        | Product meaning                                            |
+| ------------------------------ | ---------------------------------------------------------- |
+| Automation asset               | Registered reference to tests, suites, or jobs             |
+| Framework identity             | Declared technology (e.g. Playwright, JUnit) — descriptive |
+| Ingest                         | Import of run results into QEP SoR                         |
+| Flakiness                      | Repeated non-deterministic failure pattern                 |
+| Automation coverage            | Requirements linked to executed automation                 |
+| Ingest health                  | Freshness and error state of integration                   |
+| Manual-to-automation candidate | Promotion suggestion from manual procedures                |
 
 ## Primary objects
 
-| Object | Description |
-| ------ | ----------- |
-| Automation asset | Named register entry with ownership |
-| Repository reference | Link to source repo — not code hosting |
+| Object                      | Description                                       |
+| --------------------------- | ------------------------------------------------- |
+| Automation asset            | Named register entry with ownership               |
+| Repository reference        | Link to source repo — not code hosting            |
 | Pipeline / runner reference | Link to CI job or runner — not pipeline authoring |
-| Ingest configuration | Connector policy — product intent |
-| Execution ingest record | Imported run mapped to verification |
-| Flaky marker | Asset/run pattern flag |
-| Health indicator | Last success, lag, failure reason class |
-| Coverage link | Requirement ↔ automation execution |
+| Ingest configuration        | Connector policy — product intent                 |
+| Execution ingest record     | Imported run mapped to verification               |
+| Flaky marker                | Asset/run pattern flag                            |
+| Health indicator            | Last success, lag, failure reason class           |
+| Coverage link               | Requirement ↔ automation execution                |
 
 ## Lifecycle
 
@@ -54,13 +54,13 @@ Assets: Draft → Active → Degraded (ingest issues) → Retired. Ingested runs
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
+| Role                | Ownership                                            |
+| ------------------- | ---------------------------------------------------- |
 | Automation Engineer | Asset registration, ingest health, flaky remediation |
-| QA Manager | Coverage priorities; candidate promotion approval |
-| QA Engineer | Verification linkage integrity |
-| Operations Engineer | Disable broken integrations |
-| Developer | Fix failing tests — not QEP runner ops |
+| QA Manager          | Coverage priorities; candidate promotion approval    |
+| QA Engineer         | Verification linkage integrity                       |
+| Operations Engineer | Disable broken integrations                          |
+| Developer           | Fix failing tests — not QEP runner ops               |
 
 ## Relationships
 
@@ -79,34 +79,34 @@ flowchart LR
 
 ## States
 
-| State | Applies to | Meaning |
-| ----- | ---------- | ------- |
-| Draft | Asset | Registered; not yet Active |
-| Active | Asset | In use; ingest expected |
-| Degraded | Asset | Ingest failing or stale |
-| Retired | Asset | No longer in scope |
-| Ingested | Run | Result in SoR |
-| Failed ingest | Ingest | Error — not counted for coverage |
+| State         | Applies to | Meaning                          |
+| ------------- | ---------- | -------------------------------- |
+| Draft         | Asset      | Registered; not yet Active       |
+| Active        | Asset      | In use; ingest expected          |
+| Degraded      | Asset      | Ingest failing or stale          |
+| Retired       | Asset      | No longer in scope               |
+| Ingested      | Run        | Result in SoR                    |
+| Failed ingest | Ingest     | Error — not counted for coverage |
 
 ## Explicit non-capabilities
 
-| Not in product | Why |
-| -------------- | --- |
+| Not in product                                             | Why                               |
+| ---------------------------------------------------------- | --------------------------------- |
 | Authoring Playwright/Cypress/JUnit runners as QEP identity | Runner ecosystems remain external |
-| CI pipeline authoring UI | Not a CI/CD platform |
-| Device farm control | Not a device cloud |
-| Executing tests as QEP | Not a runner |
+| CI pipeline authoring UI                                   | Not a CI/CD platform              |
+| Device farm control                                        | Not a device cloud                |
+| Executing tests as QEP                                     | Not a runner                      |
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
-| AM-01 | QEP ingests results; never executes as product identity |
+| Rule  | Statement                                                               |
+| ----- | ----------------------------------------------------------------------- |
+| AM-01 | QEP ingests results; never executes as product identity                 |
 | AM-02 | Automation coverage requires requirement linkage per Traceability Model |
-| AM-03 | Stale ingest downgrades QI/readiness confidence |
-| AM-04 | Flaky results may be quarantined per policy — human disposition |
-| AM-05 | Certification never auto-issued from green automation alone |
-| AM-06 | Backend runner brands not shown to standard users |
+| AM-03 | Stale ingest downgrades QI/readiness confidence                         |
+| AM-04 | Flaky results may be quarantined per policy — human disposition         |
+| AM-05 | Certification never auto-issued from green automation alone             |
+| AM-06 | Backend runner brands not shown to standard users                       |
 
 ## Approval rules
 
@@ -114,14 +114,14 @@ Automation asset Active promotion: Automation Engineer + QA Manager typical. Man
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| Automation Engineer | Maintains assets and ingest |
-| QA Manager | Coverage and flaky prioritisation |
-| QA Engineer | Links automation to requirements |
-| Developer | Fixes test code externally |
-| Release Manager | Interprets automation gates at readiness |
-| Manual Tester | Uses hybrid sessions referencing automation results |
+| Persona             | Responsibility                                      |
+| ------------------- | --------------------------------------------------- |
+| Automation Engineer | Maintains assets and ingest                         |
+| QA Manager          | Coverage and flaky prioritisation                   |
+| QA Engineer         | Links automation to requirements                    |
+| Developer           | Fixes test code externally                          |
+| Release Manager     | Interprets automation gates at readiness            |
+| Manual Tester       | Uses hybrid sessions referencing automation results |
 
 ## Reporting
 
@@ -149,12 +149,12 @@ Richer flake analytics, contract tests on ingest schema, marketplace connectors.
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Asset register + ingest | Run tests |
-| Flakiness tracking | Fix test code in QEP |
-| Coverage linkage | Git hosting |
-| Health of integration | Jenkins replacement |
+| In boundary             | Out of boundary      |
+| ----------------------- | -------------------- |
+| Asset register + ingest | Run tests            |
+| Flakiness tracking      | Fix test code in QEP |
+| Coverage linkage        | Git hosting          |
+| Health of integration   | Jenkins replacement  |
 
 ## Example scenarios
 

@@ -1,25 +1,25 @@
 # Owner Portfolio Declaration — APZ QEP Foundation Baseline
 
-| Field | Value |
-| ----- | ----- |
-| Document | Owner Portfolio Declaration |
-| Product | APZ QEP (APZQEP) |
-| Date | 2026-07-28 |
-| Authority | Owner |
-| Status | **DECLARED** |
+| Field             | Value                                                       |
+| ----------------- | ----------------------------------------------------------- |
+| Document          | Owner Portfolio Declaration                                 |
+| Product           | APZ QEP (APZQEP)                                            |
+| Date              | 2026-07-28                                                  |
+| Authority         | Owner                                                       |
+| Status            | **DECLARED**                                                |
 | Related programme | [APZQEP-PORTFOLIO-001](./portfolio/PORTFOLIO-001/README.md) |
 
 ---
 
 ## Portfolio state (recognised)
 
-| Capability | Version | Status |
-| ---------- | ------- | ------ |
-| Requirements | 1.0.0 | ✅ Certified · Frozen |
-| Traceability | 1.0.0 | ✅ Certified · Frozen |
-| Verification | 1.0.0 | ✅ Certified · Frozen |
-| Test Specifications | 1.0.0 | ✅ Certified · Frozen |
-| **Test Plans** | **1.0.0** | **✅ Certified · Frozen** |
+| Capability          | Version   | Status                    |
+| ------------------- | --------- | ------------------------- |
+| Requirements        | 1.0.0     | ✅ Certified · Frozen     |
+| Traceability        | 1.0.0     | ✅ Certified · Frozen     |
+| Verification        | 1.0.0     | ✅ Certified · Frozen     |
+| Test Specifications | 1.0.0     | ✅ Certified · Frozen     |
+| **Test Plans**      | **1.0.0** | **✅ Certified · Frozen** |
 
 ```text
 Requirements         1.0.0  FROZEN
@@ -41,8 +41,8 @@ Document 000 · OES-000 · OES-001 · OES-002 v1.1.0 · Engineering Lifecycle ·
 
 ### Historic firsts (recognised)
 
-1. **First fully governed orchestration capability** — Test Plans completed Architecture → … → Owner Freeze.  
-2. **First end-to-end validation of layered certification** — Component Certification → Capability Certification → Owner Freeze.  
+1. **First fully governed orchestration capability** — Test Plans completed Architecture → … → Owner Freeze.
+2. **First end-to-end validation of layered certification** — Component Certification → Capability Certification → Owner Freeze.
 3. **First end-to-end validation of layered architecture** — Domain → Infrastructure → Workbench, each independently engineered, reviewed, accepted, and certified before assembly.
 
 ### Engineering Operating Model
@@ -51,13 +51,13 @@ Document 000 · OES-000 · OES-001 · OES-002 v1.1.0 · Engineering Lifecycle ·
 
 ### Estimated progress (Owner assessment)
 
-| Area | Progress |
-| ---- | -------: |
-| Engineering Governance | **100%** |
-| Platform Foundation | **100%** |
-| Core QA Foundation | **100%** |
-| First Capability Wave | **100%** |
-| Overall APZQEP Vision | **≈55–60%** |
+| Area                   |    Progress |
+| ---------------------- | ----------: |
+| Engineering Governance |    **100%** |
+| Platform Foundation    |    **100%** |
+| Core QA Foundation     |    **100%** |
+| First Capability Wave  |    **100%** |
+| Overall APZQEP Vision  | **≈55–60%** |
 
 ---
 
@@ -65,14 +65,14 @@ Document 000 · OES-000 · OES-001 · OES-002 v1.1.0 · Engineering Lifecycle ·
 
 APZQEP moves from **foundation** into **expansion**. Wave 2 capability family (indicative, not yet authorised as programmes):
 
-1. Test Execution  
-2. Test Runs  
-3. Test Suites  
-4. Evidence Management  
-5. Defect Management  
-6. Coverage & Quality Analytics  
-7. Reporting & Dashboards  
-8. AI-Assisted Testing  
+1. Test Execution
+2. Test Runs
+3. Test Suites
+4. Evidence Management
+5. Defect Management
+6. Coverage & Quality Analytics
+7. Reporting & Dashboards
+8. AI-Assisted Testing
 
 Each SHALL reuse the validated APZOR governance model.
 

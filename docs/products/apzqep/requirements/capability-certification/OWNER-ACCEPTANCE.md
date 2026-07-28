@@ -6,13 +6,13 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-REQ-001 — Requirements Capability Certification & Baseline |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Package | `@apzhub/qep-requirements` **1.0.0** |
-| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Recommendation | **PRODUCTION READY** |
+| Field               | Value                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------- |
+| Programme           | APZQEP-REQ-001 — Requirements Capability Certification & Baseline                           |
+| Decision            | **ACCEPTED / CLOSED / COMPLETE**                                                            |
+| Package             | `@apzhub/qep-requirements` **1.0.0**                                                        |
+| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS**                                                       |
+| Recommendation      | **PRODUCTION READY**                                                                        |
 | Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T120000Z-APZQEP-REQ-001-ACCEPTANCE.json` |
 
 ## Effect

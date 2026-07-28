@@ -1,7 +1,7 @@
 # Repositories
 
-| Port | Implementations |
-| ---- | ----------------- |
+| Port                     | Implementations      |
+| ------------------------ | -------------------- |
 | `VerificationRepository` | Postgres + in-memory |
 
 ## Capabilities

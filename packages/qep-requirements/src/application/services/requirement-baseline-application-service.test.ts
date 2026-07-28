@@ -122,7 +122,10 @@ describe("RequirementBaselineApplicationService", () => {
     expect(comparison.summary.removedCount).toBe(1);
     expect(comparison.summary.addedCount).toBe(0);
 
-    const history = await service.requirementBaselineHistory(ctx(ALL), version.requirementId);
+    const history = await service.requirementBaselineHistory(
+      ctx(ALL),
+      version.requirementId,
+    );
     expect(history.map((baseline) => baseline.id)).toContain(archived.id);
 
     const listed = await service.listBaselines(ctx(ALL));
@@ -168,7 +171,9 @@ describe("RequirementBaselineApplicationService", () => {
       },
     });
 
-    const created = await service.createBaseline(ctx(ALL), { name: "Observed baseline" });
+    const created = await service.createBaseline(ctx(ALL), {
+      name: "Observed baseline",
+    });
     expect(upserted).toContain(created.id);
     expect(events).toContain("qep.requirement_baseline.created");
   });
@@ -197,7 +202,10 @@ describe("RequirementBaselineApplicationService", () => {
     const persistence = createQepRequirementsPersistenceForTest({
       allowInMemoryPersistence: true,
     });
-    const { version } = await seedRequirementWithVersion(persistence, "REQ-VERIFY-DENY");
+    const { version } = await seedRequirementWithVersion(
+      persistence,
+      "REQ-VERIFY-DENY",
+    );
     const service = createRequirementBaselineApplicationService({
       baselines: persistence.baselines,
       contentVersions: persistence.contentVersions,
@@ -206,11 +214,16 @@ describe("RequirementBaselineApplicationService", () => {
       now: () => "2026-07-25T11:00:00.000Z",
     });
     const created = await service.createBaseline(ctx(ALL), { name: "Verify deny" });
-    await service.addRequirementVersion(ctx(ALL), created.id, { contentVersionId: version.id });
+    await service.addRequirementVersion(ctx(ALL), created.id, {
+      contentVersionId: version.id,
+    });
     await service.lockBaseline(ctx(ALL), created.id);
 
     await expect(
-      service.verifyBaselineIntegrity(ctx(["qep.requirements.baselines.view"]), created.id),
+      service.verifyBaselineIntegrity(
+        ctx(["qep.requirements.baselines.view"]),
+        created.id,
+      ),
     ).rejects.toBeInstanceOf(QepForbiddenError);
   });
 
@@ -247,13 +260,18 @@ describe("RequirementBaselineApplicationService", () => {
       now: () => "2026-07-25T11:00:00.000Z",
     });
     const created = await service.createBaseline(ctx(ALL), { name: "Tamper target" });
-    await service.addRequirementVersion(ctx(ALL), created.id, { contentVersionId: version.id });
+    await service.addRequirementVersion(ctx(ALL), created.id, {
+      contentVersionId: version.id,
+    });
     const locked = await service.lockBaseline(ctx(ALL), created.id);
 
     // Simulate storage-level tampering of the recorded fingerprint.
     const stored = stores.baselines.get(locked.id);
     if (!stored) throw new Error("expected baseline to be stored");
-    stores.baselines.set(locked.id, { ...stored, integrityFingerprint: "0".repeat(64) });
+    stores.baselines.set(locked.id, {
+      ...stored,
+      integrityFingerprint: "0".repeat(64),
+    });
 
     await expect(
       service.verifyBaselineIntegrity(ctx(ALL), created.id),

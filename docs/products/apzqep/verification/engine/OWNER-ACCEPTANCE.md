@@ -6,12 +6,12 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ENG-040B — Verification Infrastructure |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Package at acceptance | `@apzhub/qep-verification` **0.2.0** |
-| Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T190000Z-APZQEP-ENG-040B-ACCEPTANCE.json` |
+| Field                 | Value                                                                                        |
+| --------------------- | -------------------------------------------------------------------------------------------- |
+| Programme             | APZQEP-ENG-040B — Verification Infrastructure                                                |
+| Decision              | **ACCEPTED / CLOSED / COMPLETE**                                                             |
+| Package at acceptance | `@apzhub/qep-verification` **0.2.0**                                                         |
+| Acceptance evidence   | `docs/operations/evidence/portfolio-recert/20260726T190000Z-APZQEP-ENG-040B-ACCEPTANCE.json` |
 
 ## Effect
 

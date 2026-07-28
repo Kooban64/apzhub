@@ -120,7 +120,9 @@ export function buildRelationshipDeprecatedEvent(
   return { ...baseEvent(input), type: "qep.requirements_relationship.deprecated" };
 }
 
-export function buildRelationshipRetiredEvent(input: RelationshipEventInput): RelationshipRetired {
+export function buildRelationshipRetiredEvent(
+  input: RelationshipEventInput,
+): RelationshipRetired {
   return { ...baseEvent(input), type: "qep.requirements_relationship.retired" };
 }
 
@@ -141,7 +143,10 @@ export function buildRelationshipSupersededEvent(
 export function buildRelationshipRationaleChangedEvent(
   input: RelationshipEventInput,
 ): RelationshipRationaleChanged {
-  return { ...baseEvent(input), type: "qep.requirements_relationship.rationale_changed" };
+  return {
+    ...baseEvent(input),
+    type: "qep.requirements_relationship.rationale_changed",
+  };
 }
 
 export function buildRelationshipSemanticProfileChangedEvent(
@@ -165,7 +170,9 @@ export function buildRelationshipStrengthChangedEvent(
 }
 
 export function buildRelationshipClassificationChangedEvent(
-  input: RelationshipEventInput & { readonly classification: RelationshipClassification },
+  input: RelationshipEventInput & {
+    readonly classification: RelationshipClassification;
+  },
 ): RelationshipClassificationChanged {
   return {
     ...baseEvent(input),

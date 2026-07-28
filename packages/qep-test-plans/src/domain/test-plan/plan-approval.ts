@@ -23,7 +23,9 @@ export type CreateTestPlanApprovalInput = {
   readonly toStatus: PlanStatus;
 };
 
-export function createTestPlanApproval(input: CreateTestPlanApprovalInput): TestPlanApproval {
+export function createTestPlanApproval(
+  input: CreateTestPlanApprovalInput,
+): TestPlanApproval {
   const decidedBy = createActorId(input.decidedBy);
   const comment = input.comment?.trim();
   if (input.decision === "rejected") {

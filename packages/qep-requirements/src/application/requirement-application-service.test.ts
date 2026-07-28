@@ -6,7 +6,6 @@ import {
   createRequirementBaselineApplicationService,
   summariseRequirementLifecycle,
 } from "../application";
-import { createRequirementId } from "../domain/value-objects/requirement-id";
 import { createQepRequirementsPersistenceForTest } from "../infrastructure";
 import {
   QepForbiddenError,
@@ -132,11 +131,11 @@ describe("RequirementApplicationService CRUD", () => {
     const dto = await service.createRequirement(
       ctx(["qep.requirements.create", "qep.requirements.versions.view"]),
       {
-      projectId: PROJECT,
-      key: "REQ-ADAPTER",
-      title: "Adapter path",
-      type: "business",
-      priority: "medium",
+        projectId: PROJECT,
+        key: "REQ-ADAPTER",
+        title: "Adapter path",
+        type: "business",
+        priority: "medium",
       },
     );
 
@@ -267,9 +266,13 @@ describe("RequirementApplicationService lifecycle", () => {
       }),
     ).rejects.toBeInstanceOf(QepInvariantViolation);
 
-    const rejected = await service.rejectRequirement(ctx(allLifecyclePermissions()), inReview.id, {
-      reason: "Not ready",
-    });
+    const rejected = await service.rejectRequirement(
+      ctx(allLifecyclePermissions()),
+      inReview.id,
+      {
+        reason: "Not ready",
+      },
+    );
     expect(rejected.status).toBe("rejected");
   });
 

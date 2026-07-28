@@ -1,12 +1,13 @@
 # APZQEP-OES-ARCH-014
+
 # PART 5 — Performance, Accessibility, Security, Observability, AI/MCP Boundaries & Acceptance Criteria
 
-| Item | Value |
-| ---- | ----- |
-| Document | APZQEP-OES-ARCH-014 |
-| Part | **5 of 5** |
-| Programme | APZQEP-ARCH-014 |
-| Status | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
+| Item      | Value                                       |
+| --------- | ------------------------------------------- |
+| Document  | APZQEP-OES-ARCH-014                         |
+| Part      | **5 of 5**                                  |
+| Programme | APZQEP-ARCH-014                             |
+| Status    | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
 
 ---
 
@@ -22,14 +23,14 @@ This Part defines **non-functional architecture**, **AI/MCP authority boundaries
 
 ### 2.1 Targets (Workbench Engineering SHALL meet)
 
-| Concern | Target |
-| ------- | ------ |
-| Explorer / Review queue pagination | Server-driven; **max `pageSize` = 50** (ARCH-013 / ENG-060B Part 2 §5) |
-| Large lists | Virtualisation **SHOULD** be used; unbounded DOM rendering **MUST NOT** occur |
-| Explorer first meaningful paint (warm) | Perceived interactive ≤ 2s on certified baseline environments |
-| Inspector open after selection | ≤ 500ms after DTO available (network excluded) |
-| Search debounce | 200–400ms before query |
-| Dashboard widgets | Bounded queries only |
+| Concern                                | Target                                                                        |
+| -------------------------------------- | ----------------------------------------------------------------------------- |
+| Explorer / Review queue pagination     | Server-driven; **max `pageSize` = 50** (ARCH-013 / ENG-060B Part 2 §5)        |
+| Large lists                            | Virtualisation **SHOULD** be used; unbounded DOM rendering **MUST NOT** occur |
+| Explorer first meaningful paint (warm) | Perceived interactive ≤ 2s on certified baseline environments                 |
+| Inspector open after selection         | ≤ 500ms after DTO available (network excluded)                                |
+| Search debounce                        | 200–400ms before query                                                        |
+| Dashboard widgets                      | Bounded queries only                                                          |
 
 ### 2.2 Rules
 
@@ -44,14 +45,14 @@ This Part defines **non-functional architecture**, **AI/MCP authority boundaries
 
 ### 3.1 Mandatory bar
 
-| Requirement | Standard |
-| ----------- | -------- |
-| Conformance | **WCAG 2.2 AA** (platform target WCAG AA) |
-| Keyboard | All interactive controls operable without a pointer |
-| Focus | Visible focus; dialog focus trap; restore on close |
+| Requirement         | Standard                                             |
+| ------------------- | ---------------------------------------------------- |
+| Conformance         | **WCAG 2.2 AA** (platform target WCAG AA)            |
+| Keyboard            | All interactive controls operable without a pointer  |
+| Focus               | Visible focus; dialog focus trap; restore on close   |
 | Name / role / value | Correct semantics for buttons, tabs, tables, dialogs |
-| Status | Not colour-only; announce changes |
-| Motion | Respect `prefers-reduced-motion` |
+| Status              | Not colour-only; announce changes                    |
+| Motion              | Respect `prefers-reduced-motion`                     |
 
 ### 3.2 Workbench-specific
 
@@ -70,19 +71,19 @@ Tokens and shared components from Document 006 / 028 only — no one-off inacces
 
 Aligned with Document 013 (Zero Trust):
 
-| Control | Workbench rule |
-| ------- | -------------- |
-| Authn | Session via Better Auth / platform shell — no separate login screen |
-| Authz | Permission Platform + server `availableActions` — **UI hide is not security** |
-| Validation | Never trust the client; server validates all commands |
-| Secrets | **MUST NOT** embed tokens in URLs, localStorage business payloads, or logs |
+| Control                   | Workbench rule                                                                                                                                                                                                                 |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Authn                     | Session via Better Auth / platform shell — no separate login screen                                                                                                                                                            |
+| Authz                     | Permission Platform + server `availableActions` — **UI hide is not security**                                                                                                                                                  |
+| Validation                | Never trust the client; server validates all commands                                                                                                                                                                          |
+| Secrets                   | **MUST NOT** embed tokens in URLs, localStorage business payloads, or logs                                                                                                                                                     |
 | No client-invented grants | The Workbench **SHALL NOT** compute, cache, or assume a permission grant the server has not returned; every mutating control's visibility derives solely from `availableActions` / permission-filtered navigation (Part 2 §11) |
-| XSS | Design System / React escaping; no unsanitised HTML injection for Plan content |
-| CSRF | Platform central controls |
-| Deep links | Id only; no capability tokens or `expectedRevision` values in query strings |
-| Error leakage | **MUST NOT** show raw backend/engine errors |
-| Superadmin | Explicit tier UX — not a silent bypass affordance |
-| Audit | Mutations produce server audit; the Workbench **MUST NOT** fabricate audit rows |
+| XSS                       | Design System / React escaping; no unsanitised HTML injection for Plan content                                                                                                                                                 |
+| CSRF                      | Platform central controls                                                                                                                                                                                                      |
+| Deep links                | Id only; no capability tokens or `expectedRevision` values in query strings                                                                                                                                                    |
+| Error leakage             | **MUST NOT** show raw backend/engine errors                                                                                                                                                                                    |
+| Superadmin                | Explicit tier UX — not a silent bypass affordance                                                                                                                                                                              |
+| Audit                     | Mutations produce server audit; the Workbench **MUST NOT** fabricate audit rows                                                                                                                                                |
 
 Every mutating call: authenticated → authorised → validated → executed → audited (server path). The Workbench is presentation only.
 
@@ -90,25 +91,25 @@ Every mutating call: authenticated → authorised → validated → executed →
 
 ## 5. Observability
 
-| Pillar | Workbench contribution |
-| ------ | ------------------------ |
-| Logs | Client **MAY** log UX faults with correlation id; **MUST NOT** log secrets or full PII dumps |
-| Traces | Propagate correlation id on API calls (Document 010) |
-| Metrics | Optional UX telemetry events (§5.1) |
-| Health | Capability health consumed from platform — not owned |
+| Pillar  | Workbench contribution                                                                       |
+| ------- | -------------------------------------------------------------------------------------------- |
+| Logs    | Client **MAY** log UX faults with correlation id; **MUST NOT** log secrets or full PII dumps |
+| Traces  | Propagate correlation id on API calls (Document 010)                                         |
+| Metrics | Optional UX telemetry events (§5.1)                                                          |
+| Health  | Capability health consumed from platform — not owned                                         |
 
 ### 5.1 UI telemetry events (architectural catalogue)
 
 The Workbench **MAY** emit non-authoritative UX telemetry events for Platform Observability, always **in addition to** — never instead of — server-side audit/events:
 
-| Event (UI) | When |
-| ----------- | ---- |
-| `qep.plan.explorer.viewed` | Explorer loaded |
-| `qep.plan.inspector.opened` | Plan Inspector opened |
-| `qep.plan.action.attempted` | User invokes an action dialog |
-| `qep.plan.action.succeeded` / `.failed` | Action command resolves |
-| `qep.plan.search.performed` | Search query executed |
-| `qep.plan.compare.unavailable_viewed` | Governed unavailable Compare slot rendered (Part 4 §6) |
+| Event (UI)                              | When                                                   |
+| --------------------------------------- | ------------------------------------------------------ |
+| `qep.plan.explorer.viewed`              | Explorer loaded                                        |
+| `qep.plan.inspector.opened`             | Plan Inspector opened                                  |
+| `qep.plan.action.attempted`             | User invokes an action dialog                          |
+| `qep.plan.action.succeeded` / `.failed` | Action command resolves                                |
+| `qep.plan.search.performed`             | Search query executed                                  |
+| `qep.plan.compare.unavailable_viewed`   | Governed unavailable Compare slot rendered (Part 4 §6) |
 
 These are **UI telemetry only** — they carry no lifecycle authority and **MUST NOT** be treated as a substitute for Domain events or Infrastructure audit records.
 
@@ -122,12 +123,12 @@ AI is a **future consumer** of the Test Plans Workbench. This programme **SHALL 
 
 ### 6.2 Where AI MAY assist (future, separately authorised)
 
-| Assistance | Constraint |
-| ---------- | ---------- |
+| Assistance                                                        | Constraint                                    |
+| ----------------------------------------------------------------- | --------------------------------------------- |
 | Draft plan content suggestions (title, objective, item selection) | Suggestions only; human confirmation required |
-| Coverage / gap analysis over references | Read-only; no SoR writes without approval |
-| Duplicate plan detection | Suggest; no silent merge |
-| Scheduling assistance | Ordering / date suggestions only |
+| Coverage / gap analysis over references                           | Read-only; no SoR writes without approval     |
+| Duplicate plan detection                                          | Suggest; no silent merge                      |
+| Scheduling assistance                                             | Ordering / date suggestions only              |
 
 ### 6.3 AI MUST NOT (ever, without new governance)
 
@@ -176,28 +177,28 @@ MCP is a **future consumer** interface. This programme **SHALL NOT** implement M
 
 When separately authorised, Workbench Engineering **SHALL**:
 
-| Do | Do not |
-| -- | ------ |
-| Implement presentation per Parts 1–5 | Own business rules |
-| Call `/api/v1/qep/plans/*` (and platform search) | Call Domain packages / DB / connectors |
-| Use Design System + shell regions | Build a parallel shell |
-| Gate actions on `availableActions` | Hardcode a transition matrix as authority |
-| Meet a11y / performance / security gates | Ship without Playwright a11y on primary surfaces |
+| Do                                                                       | Do not                                           |
+| ------------------------------------------------------------------------ | ------------------------------------------------ |
+| Implement presentation per Parts 1–5                                     | Own business rules                               |
+| Call `/api/v1/qep/plans/*` (and platform search)                         | Call Domain packages / DB / connectors           |
+| Use Design System + shell regions                                        | Build a parallel shell                           |
+| Gate actions on `availableActions`                                       | Hardcode a transition matrix as authority        |
+| Meet a11y / performance / security gates                                 | Ship without Playwright a11y on primary surfaces |
 | Present Compare as governed-unavailable until Infrastructure delivers it | Fabricate a client-side diff to simulate Compare |
 
 ---
 
 ## 9. Quality gates before Workbench Engineering starts
 
-| Gate | Criterion |
-| ---- | --------- |
-| G1 | Parts 1–5 filed |
-| G2 | Appendices A–E filed |
-| G3 | `COMPLETE.md` assembled and self-consistent |
-| G4 | Architecture Review PASS (OES-002) |
-| G5 | Owner Acceptance of this OES (OES-002) — ACCEPTED |
-| G6 | No contradiction with ARCH-013, certified Domain (ENG-060A/CERT-060A), or certified Infrastructure (ENG-060B/CERT-060B) |
-| G7 | Known limitations L-01 / L-02 honestly represented, not silently closed |
+| Gate | Criterion                                                                                                               |
+| ---- | ----------------------------------------------------------------------------------------------------------------------- |
+| G1   | Parts 1–5 filed                                                                                                         |
+| G2   | Appendices A–E filed                                                                                                    |
+| G3   | `COMPLETE.md` assembled and self-consistent                                                                             |
+| G4   | Architecture Review PASS (OES-002)                                                                                      |
+| G5   | Owner Acceptance of this OES (OES-002) — ACCEPTED                                                                       |
+| G6   | No contradiction with ARCH-013, certified Domain (ENG-060A/CERT-060A), or certified Infrastructure (ENG-060B/CERT-060B) |
+| G7   | Known limitations L-01 / L-02 honestly represented, not silently closed                                                 |
 
 Workbench Engineering **MUST NOT** start if any of G1–G5 fail.
 
@@ -205,15 +206,15 @@ Workbench Engineering **MUST NOT** start if any of G1–G5 fail.
 
 ## 10. Quality gates during Workbench Engineering (preview)
 
-| Gate | Criterion |
-| ---- | --------- |
-| W1 | Unit / component tests for critical UI state rendering |
-| W2 | Integration tests against API contracts (mocked or test env) |
-| W3 | Playwright journeys: create → submit → approve; reject → return-to-draft; mark-ready → start-execution → complete → archive; supersede; clone; deep link |
-| W4 | axe WCAG AA on primary surfaces |
-| W5 | Permission / `availableActions` negative tests |
-| W6 | Docs + Storybook (shared components) as applicable |
-| W7 | Workbench Review PASS + Owner Acceptance (OES-002) |
+| Gate | Criterion                                                                                                                                                |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| W1   | Unit / component tests for critical UI state rendering                                                                                                   |
+| W2   | Integration tests against API contracts (mocked or test env)                                                                                             |
+| W3   | Playwright journeys: create → submit → approve; reject → return-to-draft; mark-ready → start-execution → complete → archive; supersede; clone; deep link |
+| W4   | axe WCAG AA on primary surfaces                                                                                                                          |
+| W5   | Permission / `availableActions` negative tests                                                                                                           |
+| W6   | Docs + Storybook (shared components) as applicable                                                                                                       |
+| W7   | Workbench Review PASS + Owner Acceptance (OES-002)                                                                                                       |
 
 ---
 
@@ -236,12 +237,12 @@ This OES (`COMPLETE.md`) is **Accepted** only when the Owner confirms:
 
 ### 11.1 Outcomes (OES-002)
 
-| Outcome | Meaning |
-| ------- | ------- |
-| **ACCEPTED** | `COMPLETE.md` is authority; Workbench Engineering **MAY** be authorised separately |
-| **ACCEPTED WITH CONDITIONS** | Listed conditions **MUST** close before or as first Workbench Engineering gate |
-| **REJECTED** | Rework Parts; no Workbench Engineering |
-| **DEFERRED** | Parked; no implementation authority |
+| Outcome                      | Meaning                                                                            |
+| ---------------------------- | ---------------------------------------------------------------------------------- |
+| **ACCEPTED**                 | `COMPLETE.md` is authority; Workbench Engineering **MAY** be authorised separately |
+| **ACCEPTED WITH CONDITIONS** | Listed conditions **MUST** close before or as first Workbench Engineering gate     |
+| **REJECTED**                 | Rework Parts; no Workbench Engineering                                             |
+| **DEFERRED**                 | Parked; no implementation authority                                                |
 
 AI **MUST NOT** issue these outcomes.
 
@@ -261,15 +262,15 @@ NO REACT · NO NEXT.JS · NO PERSISTENCE · NO DOMAIN / INFRASTRUCTURE CHANGES
 
 ## 13. Traceability
 
-| This Part | Trace |
-| --------- | ----- |
-| Security | Document 013 |
-| Observability | Document 014 |
-| Quality / DoD | Document 015 |
-| Design System | Documents 006 / 028 |
-| AI/MCP | OES-000 AI matrix; ARCH-013 Part 5 precedent |
-| Review outcomes | OES-002 |
-| Prior parts | OES-ARCH-014 Parts 1–4 |
+| This Part       | Trace                                        |
+| --------------- | -------------------------------------------- |
+| Security        | Document 013                                 |
+| Observability   | Document 014                                 |
+| Quality / DoD   | Document 015                                 |
+| Design System   | Documents 006 / 028                          |
+| AI/MCP          | OES-000 AI matrix; ARCH-013 Part 5 precedent |
+| Review outcomes | OES-002                                      |
+| Prior parts     | OES-ARCH-014 Parts 1–4                       |
 
 ---
 

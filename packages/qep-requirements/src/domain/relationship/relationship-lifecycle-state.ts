@@ -3,7 +3,9 @@ import { RELATIONSHIP_LIFECYCLE_STATES } from "./constants";
 
 export type RelationshipLifecycleState = (typeof RELATIONSHIP_LIFECYCLE_STATES)[number];
 
-export function createRelationshipLifecycleState(value: string): RelationshipLifecycleState {
+export function createRelationshipLifecycleState(
+  value: string,
+): RelationshipLifecycleState {
   const normalized = value.trim() as RelationshipLifecycleState;
   if (!(RELATIONSHIP_LIFECYCLE_STATES as readonly string[]).includes(normalized)) {
     throw new QepInvariantViolation(

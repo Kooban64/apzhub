@@ -15,7 +15,10 @@ export function assertRequirementBaselineTransition(
   from: RequirementBaselineStatus,
   to: RequirementBaselineStatus,
 ): void {
-  if (!((from === "draft" && to === "locked") || (from === "locked" && to === "archived"))) {
+  if (!(
+    (from === "draft" && to === "locked") ||
+    (from === "locked" && to === "archived")
+  )) {
     throw new QepInvariantViolation(
       `Requirement baseline transition ${from} -> ${to} is not allowed`,
     );

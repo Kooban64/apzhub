@@ -1,26 +1,26 @@
 # APZQEP-ENG-070A — Test Plans Workbench Engineering
 
-| Field | Value |
-| ----- | ----- |
-| Programme | **APZQEP-ENG-070A** |
-| Title | Test Plans Workbench Engineering |
-| Capability | Test Plans |
-| Layer | Presentation (Workbench) |
-| Package | `@apzhub/qep-test-plans` **0.2.0** (unchanged — presentation adds no Domain/Infrastructure surface) |
-| Status | **ACCEPTED / APPROVED / PROGRAMME CLOSED** |
-| ECR | [ENGINEERING-COMPLETION-REVIEW.md](./ENGINEERING-COMPLETION-REVIEW.md) — **PASS** |
-| ECR checklist | [ECR-CHECKLIST.md](./ECR-CHECKLIST.md) |
-| Completion Report | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md) |
-| Accessibility | [ACCESSIBILITY.md](./ACCESSIBILITY.md) |
-| Known limitations | [KNOWN-LIMITATIONS.md](./KNOWN-LIMITATIONS.md) |
-| Owner summary | [OWNER-SUMMARY.md](./OWNER-SUMMARY.md) |
-| Owner Acceptance | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) — **ACCEPTED / APPROVED / CLOSED** (2026-07-28) |
-| OES | [OES-ENG-070A](../OES-ENG-070A/COMPLETE.md) **ACCEPTED / APPROVED / ENGINEERING SPECIFICATION BASELINED / CLOSED** |
-| Architecture | [OES-ARCH-014](../OES-ARCH-014/COMPLETE.md) **ACCEPTED / ARCHITECTURE BASELINED / PROGRAMME CLOSED** |
-| Domain | `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** (CERT-060A) — consumed as immutable |
-| Infrastructure | `@apzhub/qep-test-plans` **0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED** (CERT-060B) — consumed as immutable |
-| Evidence (ECR) | `docs/operations/evidence/portfolio-recert/20260728T071000Z-APZQEP-ENG-070A-ECR.json` |
-| Date | 2026-07-28 |
+| Field             | Value                                                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Programme         | **APZQEP-ENG-070A**                                                                                                |
+| Title             | Test Plans Workbench Engineering                                                                                   |
+| Capability        | Test Plans                                                                                                         |
+| Layer             | Presentation (Workbench)                                                                                           |
+| Package           | `@apzhub/qep-test-plans` **0.2.0** (unchanged — presentation adds no Domain/Infrastructure surface)                |
+| Status            | **ACCEPTED / APPROVED / PROGRAMME CLOSED**                                                                         |
+| ECR               | [ENGINEERING-COMPLETION-REVIEW.md](./ENGINEERING-COMPLETION-REVIEW.md) — **PASS**                                  |
+| ECR checklist     | [ECR-CHECKLIST.md](./ECR-CHECKLIST.md)                                                                             |
+| Completion Report | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)                                                                     |
+| Accessibility     | [ACCESSIBILITY.md](./ACCESSIBILITY.md)                                                                             |
+| Known limitations | [KNOWN-LIMITATIONS.md](./KNOWN-LIMITATIONS.md)                                                                     |
+| Owner summary     | [OWNER-SUMMARY.md](./OWNER-SUMMARY.md)                                                                             |
+| Owner Acceptance  | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) — **ACCEPTED / APPROVED / CLOSED** (2026-07-28)                       |
+| OES               | [OES-ENG-070A](../OES-ENG-070A/COMPLETE.md) **ACCEPTED / APPROVED / ENGINEERING SPECIFICATION BASELINED / CLOSED** |
+| Architecture      | [OES-ARCH-014](../OES-ARCH-014/COMPLETE.md) **ACCEPTED / ARCHITECTURE BASELINED / PROGRAMME CLOSED**               |
+| Domain            | `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** (CERT-060A) — consumed as immutable                                   |
+| Infrastructure    | `@apzhub/qep-test-plans` **0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED** (CERT-060B) — consumed as immutable          |
+| Evidence (ECR)    | `docs/operations/evidence/portfolio-recert/20260728T071000Z-APZQEP-ENG-070A-ECR.json`                              |
+| Date              | 2026-07-28                                                                                                         |
 
 ## Purpose
 
@@ -30,27 +30,27 @@ Delivers the Test Plans Workbench (presentation layer) against the Owner-Accepte
 
 ## What was implemented
 
-| Area | Location |
-| ---- | -------- |
-| Presentation routes | `packages/qep-test-plans/src/presentation/` (`routes.ts`, `navigation.ts`, `permissions.ts`) |
-| Module workbench nav | `modules/qep-test-plans/module.yaml` |
-| HTTP client | `apps/web/lib/qep/qep-test-plan-api.ts` |
-| Views | `apps/web/components/qep/qep-test-plan-views.tsx` |
-| Router wiring | `apps/web/components/qep/qep-workspace-router.tsx` |
+| Area                 | Location                                                                                                                                                 |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Presentation routes  | `packages/qep-test-plans/src/presentation/` (`routes.ts`, `navigation.ts`, `permissions.ts`)                                                             |
+| Module workbench nav | `modules/qep-test-plans/module.yaml`                                                                                                                     |
+| HTTP client          | `apps/web/lib/qep/qep-test-plan-api.ts`                                                                                                                  |
+| Views                | `apps/web/components/qep/qep-test-plan-views.tsx`                                                                                                        |
+| Router wiring        | `apps/web/components/qep/qep-workspace-router.tsx`                                                                                                       |
 | Unit/component tests | `packages/qep-test-plans/src/presentation/routes.test.ts` (5 tests) · `apps/web/components/qep/qep-test-plan-views.test.tsx` (15 tests) — **20/20 PASS** |
-| Playwright E2E | `testing/playwright/e2e/apzqep-eng-070a-test-plans-workbench.spec.ts` |
+| Playwright E2E       | `testing/playwright/e2e/apzqep-eng-070a-test-plans-workbench.spec.ts`                                                                                    |
 
 ## Documentation
 
-| Document | Path |
-| -------- | ---- |
-| Engineering Completion Review | [ENGINEERING-COMPLETION-REVIEW.md](./ENGINEERING-COMPLETION-REVIEW.md) |
-| ECR checklist (full matrix) | [ECR-CHECKLIST.md](./ECR-CHECKLIST.md) |
-| Completion Report | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md) |
-| Accessibility evidence | [ACCESSIBILITY.md](./ACCESSIBILITY.md) |
-| Known limitations (presentation-level) | [KNOWN-LIMITATIONS.md](./KNOWN-LIMITATIONS.md) |
-| Owner summary | [OWNER-SUMMARY.md](./OWNER-SUMMARY.md) |
-| Owner Acceptance | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) — **ACCEPTED / APPROVED / CLOSED** |
+| Document                               | Path                                                                            |
+| -------------------------------------- | ------------------------------------------------------------------------------- |
+| Engineering Completion Review          | [ENGINEERING-COMPLETION-REVIEW.md](./ENGINEERING-COMPLETION-REVIEW.md)          |
+| ECR checklist (full matrix)            | [ECR-CHECKLIST.md](./ECR-CHECKLIST.md)                                          |
+| Completion Report                      | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)                                  |
+| Accessibility evidence                 | [ACCESSIBILITY.md](./ACCESSIBILITY.md)                                          |
+| Known limitations (presentation-level) | [KNOWN-LIMITATIONS.md](./KNOWN-LIMITATIONS.md)                                  |
+| Owner summary                          | [OWNER-SUMMARY.md](./OWNER-SUMMARY.md)                                          |
+| Owner Acceptance                       | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) — **ACCEPTED / APPROVED / CLOSED** |
 
 ## Lifecycle
 

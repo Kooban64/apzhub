@@ -14,14 +14,14 @@
 
 ## Go / No-go checklist
 
-| Check | Go criteria |
-| ----- | ----------- |
-| Migrations | 0072–0078 applied without error |
-| Health | Platform + QEP health endpoints OK |
-| AuthZ | View-only user cannot mutate; modify/transition permissions work |
-| Workbench | Open Requirement, Baseline, Relationship list/detail |
-| Smoke | Create draft relationship → activate; lock baseline path verified previously |
-| Search | Projection lag acceptable; detail reload from SoR |
+| Check      | Go criteria                                                                  |
+| ---------- | ---------------------------------------------------------------------------- |
+| Migrations | 0072–0078 applied without error                                              |
+| Health     | Platform + QEP health endpoints OK                                           |
+| AuthZ      | View-only user cannot mutate; modify/transition permissions work             |
+| Workbench  | Open Requirement, Baseline, Relationship list/detail                         |
+| Smoke      | Create draft relationship → activate; lock baseline path verified previously |
+| Search     | Projection lag acceptable; detail reload from SoR                            |
 
 ## Qualifications
 

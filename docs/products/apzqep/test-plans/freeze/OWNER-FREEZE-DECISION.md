@@ -9,10 +9,10 @@
 
 ## Governing Standards
 
-- Document 000 v1.0.0  
-- OES-000 v1.0.0  
-- OES-001 v1.0.0  
-- OES-002 v1.1.0  
+- Document 000 v1.0.0
+- OES-000 v1.0.0
+- OES-001 v1.0.0
+- OES-002 v1.1.0
 
 ## Decision
 
@@ -28,18 +28,18 @@
 
 ## Freeze assessment
 
-| Freeze Requirement | Result |
-| ------------------ | ------ |
-| Architecture Baseline | ✅ PASS |
-| Engineering Specifications Baselined | ✅ PASS |
-| Engineering Complete | ✅ PASS |
-| Engineering Completion Reviews | ✅ PASS |
-| Owner Acceptance | ✅ PASS |
-| Domain Component Certification | ✅ PASS |
+| Freeze Requirement                     | Result  |
+| -------------------------------------- | ------- |
+| Architecture Baseline                  | ✅ PASS |
+| Engineering Specifications Baselined   | ✅ PASS |
+| Engineering Complete                   | ✅ PASS |
+| Engineering Completion Reviews         | ✅ PASS |
+| Owner Acceptance                       | ✅ PASS |
+| Domain Component Certification         | ✅ PASS |
 | Infrastructure Component Certification | ✅ PASS |
-| Workbench Component Certification | ✅ PASS |
-| Integrated Capability Certification | ✅ PASS |
-| Version Promotion to 1.0.0 | ✅ PASS |
+| Workbench Component Certification      | ✅ PASS |
+| Integrated Capability Certification    | ✅ PASS |
+| Version Promotion to 1.0.0             | ✅ PASS |
 
 All mandatory governance gates have been completed.
 
@@ -66,28 +66,28 @@ Frozen Version **1.0.0** is the authoritative implementation.
 
 ### Engineering restrictions (not permitted on frozen baseline)
 
-- Uncontrolled code changes  
-- Architectural modifications  
-- API contract changes  
-- Behavioural changes  
-- Documentation edits that alter technical intent  
+- Uncontrolled code changes
+- Architectural modifications
+- API contract changes
+- Behavioural changes
+- Documentation edits that alter technical intent
 
 ### Permitted activities (governed programmes only)
 
-- Defect correction  
-- Security updates  
-- Documentation errata  
-- Minor improvements  
-- New capabilities  
-- Future major versions  
+- Defect correction
+- Security updates
+- Documentation errata
+- Minor improvements
+- New capabilities
+- Future major versions
 
 All such work SHALL commence under a **new authorised programme identifier** and follow the full APZOR engineering lifecycle. Semantic version increments (for example **1.0.1** or **1.1.0**) apply according to scope and impact.
 
 ## Effect
 
-- Test Plans capability: **ENGINEERED · CERTIFIED · PROMOTED · FROZEN**  
-- Official baseline: **1.0.0 CERTIFIED / FROZEN**  
-- Owner Freeze Review closed  
+- Test Plans capability: **ENGINEERED · CERTIFIED · PROMOTED · FROZEN**
+- Official baseline: **1.0.0 CERTIFIED / FROZEN**
+- Owner Freeze Review closed
 
 ## Programme closure
 

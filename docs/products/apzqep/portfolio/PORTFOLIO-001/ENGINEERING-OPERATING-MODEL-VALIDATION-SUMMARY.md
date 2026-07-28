@@ -1,11 +1,11 @@
 # Engineering Operating Model Validation Summary — APZQEP-PORTFOLIO-001
 
-| Field | Value |
-| ----- | ----- |
-| Purpose | Summarise, by reference, the Owner's validation of the APZOR Engineering Operating Model |
-| Primary source | [docs/engineering/oes/APZOR-ENGINEERING-OPERATING-MODEL-VALIDATION.md](../../../../engineering/oes/APZOR-ENGINEERING-OPERATING-MODEL-VALIDATION.md) |
-| Secondary source | [docs/products/apzqep/OWNER-PORTFOLIO-DECLARATION.md](../../OWNER-PORTFOLIO-DECLARATION.md) |
-| Status | **FULLY VALIDATED THROUGH PRACTICE** |
+| Field            | Value                                                                                                                                               |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Purpose          | Summarise, by reference, the Owner's validation of the APZOR Engineering Operating Model                                                            |
+| Primary source   | [docs/engineering/oes/APZOR-ENGINEERING-OPERATING-MODEL-VALIDATION.md](../../../../engineering/oes/APZOR-ENGINEERING-OPERATING-MODEL-VALIDATION.md) |
+| Secondary source | [docs/products/apzqep/OWNER-PORTFOLIO-DECLARATION.md](../../OWNER-PORTFOLIO-DECLARATION.md)                                                         |
+| Status           | **FULLY VALIDATED THROUGH PRACTICE**                                                                                                                |
 
 This document does **not** re-argue or replace the validation record. It summarises it for portfolio readers and confirms this pack's alignment with it.
 
@@ -17,13 +17,13 @@ Governing standards (Document 000, OES-000, OES-001, OES-002) function as the en
 
 ## Evidence the model held, across the whole First Capability Wave
 
-| Capability | Architecture → … → Owner Freeze completed without bypass |
-| ---------- | -------------------------------------------------------- |
-| Requirements | ✅ — `@apzhub/qep-requirements` **1.0.0 CERTIFIED / FROZEN** |
-| Traceability | ✅ — `@apzhub/qep-traceability` **1.0.0 CERTIFIED / FROZEN** |
-| Verification | ✅ — `@apzhub/qep-verification` **1.0.0 CERTIFIED / FROZEN** |
-| Test Specifications | ✅ — `@apzhub/qep-test-specifications` **1.0.0 CERTIFIED / FROZEN** |
-| Test Plans | ✅ — `@apzhub/qep-test-plans` **1.0.0 CERTIFIED / FROZEN** (first capability to exercise the **full** layered pattern: Domain Component Certification → Infrastructure Component Certification → Workbench Component Certification → Integrated Capability Certification → Owner Freeze) |
+| Capability          | Architecture → … → Owner Freeze completed without bypass                                                                                                                                                                                                                                 |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Requirements        | ✅ — `@apzhub/qep-requirements` **1.0.0 CERTIFIED / FROZEN**                                                                                                                                                                                                                             |
+| Traceability        | ✅ — `@apzhub/qep-traceability` **1.0.0 CERTIFIED / FROZEN**                                                                                                                                                                                                                             |
+| Verification        | ✅ — `@apzhub/qep-verification` **1.0.0 CERTIFIED / FROZEN**                                                                                                                                                                                                                             |
+| Test Specifications | ✅ — `@apzhub/qep-test-specifications` **1.0.0 CERTIFIED / FROZEN**                                                                                                                                                                                                                      |
+| Test Plans          | ✅ — `@apzhub/qep-test-plans` **1.0.0 CERTIFIED / FROZEN** (first capability to exercise the **full** layered pattern: Domain Component Certification → Infrastructure Component Certification → Workbench Component Certification → Integrated Capability Certification → Owner Freeze) |
 
 ## Two validated patterns
 

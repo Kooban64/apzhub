@@ -101,7 +101,11 @@ export function mapQepDomainError(
       retryable: false,
     });
   }
-  if (error instanceof QepNotFoundError || error instanceof QepBaselineNotFoundError || error instanceof QepRelationshipNotFoundError) {
+  if (
+    error instanceof QepNotFoundError ||
+    error instanceof QepBaselineNotFoundError ||
+    error instanceof QepRelationshipNotFoundError
+  ) {
     return new PlatformServiceError({
       category: "not_found",
       code: "NOT_FOUND",
@@ -312,7 +316,10 @@ export type QepRequirementPlatformService = {
   ): Promise<QepBaselineDto>;
   lockBaseline(ctx: ServiceRequestContext, id: string): Promise<QepBaselineDto>;
   archiveBaseline(ctx: ServiceRequestContext, id: string): Promise<QepBaselineDto>;
-  verifyBaselineIntegrity(ctx: ServiceRequestContext, id: string): Promise<QepBaselineDto>;
+  verifyBaselineIntegrity(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<QepBaselineDto>;
   listBaselineItems(
     ctx: ServiceRequestContext,
     id: string,
@@ -330,14 +337,26 @@ export type QepRequirementPlatformService = {
     ctx: ServiceRequestContext,
     query?: ListQepRelationshipsQuery,
   ): Promise<QepRelationshipListResult>;
-  getRelationship(ctx: ServiceRequestContext, id: string): Promise<QepRelationshipDto | null>;
+  getRelationship(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<QepRelationshipDto | null>;
   createRelationship(
     ctx: ServiceRequestContext,
     input: CreateQepRelationshipInput,
   ): Promise<QepRelationshipDto>;
-  activateRelationship(ctx: ServiceRequestContext, id: string): Promise<QepRelationshipDto>;
-  deprecateRelationship(ctx: ServiceRequestContext, id: string): Promise<QepRelationshipDto>;
-  retireRelationship(ctx: ServiceRequestContext, id: string): Promise<QepRelationshipDto>;
+  activateRelationship(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<QepRelationshipDto>;
+  deprecateRelationship(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<QepRelationshipDto>;
+  retireRelationship(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<QepRelationshipDto>;
   supersedeRelationship(
     ctx: ServiceRequestContext,
     input: SupersedeQepRelationshipInput,
@@ -401,7 +420,9 @@ export type QepRequirementPlatformService = {
     ctx: ServiceRequestContext,
     contentVersionId: string,
   ): Promise<readonly QepRelationshipDto[]>;
-  listRelationshipConflicts(ctx: ServiceRequestContext): Promise<readonly QepRelationshipDto[]>;
+  listRelationshipConflicts(
+    ctx: ServiceRequestContext,
+  ): Promise<readonly QepRelationshipDto[]>;
   listSupersessionChains(
     ctx: ServiceRequestContext,
     requirementId?: string,
@@ -467,7 +488,9 @@ export function createQepRequirementPlatformService(
       return invoke(ctx, (qepCtx) => service.listContentVersions(qepCtx, id, query));
     },
     getVersion(ctx, id, versionNumber) {
-      return invoke(ctx, (qepCtx) => service.getContentVersion(qepCtx, id, versionNumber));
+      return invoke(ctx, (qepCtx) =>
+        service.getContentVersion(qepCtx, id, versionNumber),
+      );
     },
     getLatestVersion(ctx, id) {
       return invoke(ctx, (qepCtx) => service.getLatestContentVersion(qepCtx, id));
@@ -476,7 +499,9 @@ export function createQepRequirementPlatformService(
       return invoke(ctx, (qepCtx) => service.compareContentVersions(qepCtx, id, input));
     },
     verifyVersionIntegrity(ctx, id, versionNumber) {
-      return invoke(ctx, (qepCtx) => service.verifyContentVersionIntegrity(qepCtx, id, versionNumber));
+      return invoke(ctx, (qepCtx) =>
+        service.verifyContentVersionIntegrity(qepCtx, id, versionNumber),
+      );
     },
 
     listBaselines(ctx, query = {}) {
@@ -495,7 +520,9 @@ export function createQepRequirementPlatformService(
       return invoke(ctx, (qepCtx) => service.addBaselineItem(qepCtx, id, input));
     },
     removeBaselineItem(ctx, id, contentVersionId) {
-      return invoke(ctx, (qepCtx) => service.removeBaselineItem(qepCtx, id, contentVersionId));
+      return invoke(ctx, (qepCtx) =>
+        service.removeBaselineItem(qepCtx, id, contentVersionId),
+      );
     },
     lockBaseline(ctx, id) {
       return invoke(ctx, (qepCtx) => service.lockBaseline(qepCtx, id));
@@ -510,7 +537,9 @@ export function createQepRequirementPlatformService(
       return invoke(ctx, (qepCtx) => service.listBaselineItems(qepCtx, id));
     },
     requirementBaselineHistory(ctx, requirementId) {
-      return invoke(ctx, (qepCtx) => service.requirementBaselineHistory(qepCtx, requirementId));
+      return invoke(ctx, (qepCtx) =>
+        service.requirementBaselineHistory(qepCtx, requirementId),
+      );
     },
     compareBaselines(ctx, input) {
       return invoke(ctx, (qepCtx) => service.compareBaselines(qepCtx, input));
@@ -538,13 +567,19 @@ export function createQepRequirementPlatformService(
       return invoke(ctx, (qepCtx) => service.supersedeRelationship(qepCtx, input));
     },
     updateRelationshipRationale(ctx, id, rationale) {
-      return invoke(ctx, (qepCtx) => service.updateRelationshipRationale(qepCtx, id, rationale));
+      return invoke(ctx, (qepCtx) =>
+        service.updateRelationshipRationale(qepCtx, id, rationale),
+      );
     },
     updateRelationshipProfile(ctx, id, input) {
-      return invoke(ctx, (qepCtx) => service.updateRelationshipProfile(qepCtx, id, input));
+      return invoke(ctx, (qepCtx) =>
+        service.updateRelationshipProfile(qepCtx, id, input),
+      );
     },
     updateRelationshipStrength(ctx, id, strength) {
-      return invoke(ctx, (qepCtx) => service.updateRelationshipStrength(qepCtx, id, strength));
+      return invoke(ctx, (qepCtx) =>
+        service.updateRelationshipStrength(qepCtx, id, strength),
+      );
     },
     updateRelationshipClassification(ctx, id, classification) {
       return invoke(ctx, (qepCtx) =>
@@ -557,7 +592,9 @@ export function createQepRequirementPlatformService(
       );
     },
     updateRelationshipScope(ctx, id, scope) {
-      return invoke(ctx, (qepCtx) => service.updateRelationshipScope(qepCtx, id, scope));
+      return invoke(ctx, (qepCtx) =>
+        service.updateRelationshipScope(qepCtx, id, scope),
+      );
     },
     listRelationshipsByRequirement(ctx, requirementId, direction) {
       return invoke(ctx, (qepCtx) =>
@@ -565,19 +602,27 @@ export function createQepRequirementPlatformService(
       );
     },
     listInboundRelationships(ctx, requirementId) {
-      return invoke(ctx, (qepCtx) => service.listInboundRelationships(qepCtx, requirementId));
+      return invoke(ctx, (qepCtx) =>
+        service.listInboundRelationships(qepCtx, requirementId),
+      );
     },
     listOutboundRelationships(ctx, requirementId) {
-      return invoke(ctx, (qepCtx) => service.listOutboundRelationships(qepCtx, requirementId));
+      return invoke(ctx, (qepCtx) =>
+        service.listOutboundRelationships(qepCtx, requirementId),
+      );
     },
     listRelationshipsByTaxonomy(ctx, type) {
       return invoke(ctx, (qepCtx) => service.listRelationshipsByTaxonomy(qepCtx, type));
     },
     listRelationshipsByLifecycle(ctx, lifecycleState) {
-      return invoke(ctx, (qepCtx) => service.listRelationshipsByLifecycle(qepCtx, lifecycleState));
+      return invoke(ctx, (qepCtx) =>
+        service.listRelationshipsByLifecycle(qepCtx, lifecycleState),
+      );
     },
     listRelationshipsByBaseline(ctx, baselineId) {
-      return invoke(ctx, (qepCtx) => service.listRelationshipsByBaseline(qepCtx, baselineId));
+      return invoke(ctx, (qepCtx) =>
+        service.listRelationshipsByBaseline(qepCtx, baselineId),
+      );
     },
     listRelationshipsByContentVersion(ctx, contentVersionId) {
       return invoke(ctx, (qepCtx) =>
@@ -588,7 +633,9 @@ export function createQepRequirementPlatformService(
       return invoke(ctx, (qepCtx) => service.listRelationshipConflicts(qepCtx));
     },
     listSupersessionChains(ctx, requirementId) {
-      return invoke(ctx, (qepCtx) => service.listSupersessionChains(qepCtx, requirementId));
+      return invoke(ctx, (qepCtx) =>
+        service.listSupersessionChains(qepCtx, requirementId),
+      );
     },
     listRelationshipTaxonomy(ctx) {
       return invoke(ctx, (qepCtx) => service.listRelationshipTaxonomy(qepCtx));

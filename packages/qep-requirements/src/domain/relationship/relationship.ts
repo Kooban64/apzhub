@@ -153,7 +153,9 @@ function withChange(
   const at = changedAt.trim();
   const by = changedBy.trim();
   if (!at || !by) {
-    throw new QepInvariantViolation("Relationship change requires changedAt and changedBy");
+    throw new QepInvariantViolation(
+      "Relationship change requires changedAt and changedBy",
+    );
   }
   return {
     ...relationship,

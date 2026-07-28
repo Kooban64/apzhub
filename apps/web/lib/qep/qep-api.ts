@@ -182,7 +182,10 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       return parseCollection<QepRequirementDto>(response);
     },
 
-    async searchRequirements(params: QepListParams & { q: string }, options?: QepClientRequestOptions) {
+    async searchRequirements(
+      params: QepListParams & { q: string },
+      options?: QepClientRequestOptions,
+    ) {
       const search = new URLSearchParams(buildQuery(params).replace(/^\?/, ""));
       search.set("q", params.q);
       const response = await fetch(`${basePath}/search?${search.toString()}`, {
@@ -198,7 +201,10 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       return parseJson<QepRequirementDto>(response);
     },
 
-    async createRequirement(input: CreateQepRequirementInput, options?: QepClientRequestOptions) {
+    async createRequirement(
+      input: CreateQepRequirementInput,
+      options?: QepClientRequestOptions,
+    ) {
       const response = await fetch(basePath, {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -243,12 +249,15 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       input: QepRequirementTransitionInput,
       options?: QepClientRequestOptions,
     ) {
-      const response = await fetch(`${basePath}/${encodeURIComponent(id)}/transitions`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(input),
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/${encodeURIComponent(id)}/transitions`,
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(input),
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepRequirementDto>(response);
     },
 
@@ -259,7 +268,11 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       return parseJson<readonly QepRequirementLifecycleHistoryDto[]>(response);
     },
 
-    async listContentVersions(id: string, params?: QepListParams, options?: QepClientRequestOptions) {
+    async listContentVersions(
+      id: string,
+      params?: QepListParams,
+      options?: QepClientRequestOptions,
+    ) {
       const response = await fetch(
         `${basePath}/${encodeURIComponent(id)}/versions${buildQuery(params)}`,
         { signal: options?.signal },
@@ -267,7 +280,11 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       return parseCollection<QepRequirementContentVersionMetadataDto>(response);
     },
 
-    async getContentVersion(id: string, versionNumber: number, options?: QepClientRequestOptions) {
+    async getContentVersion(
+      id: string,
+      versionNumber: number,
+      options?: QepClientRequestOptions,
+    ) {
       const response = await fetch(
         `${basePath}/${encodeURIComponent(id)}/versions/${versionNumber}`,
         { signal: options?.signal },
@@ -277,15 +294,21 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
 
     async compareContentVersions(
       id: string,
-      input: { readonly baseVersionNumber: number; readonly targetVersionNumber: number },
+      input: {
+        readonly baseVersionNumber: number;
+        readonly targetVersionNumber: number;
+      },
       options?: QepClientRequestOptions,
     ) {
-      const response = await fetch(`${basePath}/${encodeURIComponent(id)}/versions/compare`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(input),
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/${encodeURIComponent(id)}/versions/compare`,
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(input),
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepRequirementVersionComparisonDto>(response);
     },
 
@@ -298,15 +321,23 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
         `${basePath}/${encodeURIComponent(id)}/versions/${versionNumber}/verify`,
         { method: "POST", signal: options?.signal },
       );
-      return parseJson<{ readonly versionNumber: number; readonly valid: boolean }>(response);
+      return parseJson<{ readonly versionNumber: number; readonly valid: boolean }>(
+        response,
+      );
     },
 
     /** Requirement Baseline (configuration-management) operations — APZQEP-ENG-020E. */
 
-    async listBaselines(params?: QepBaselineListParams, options?: QepClientRequestOptions) {
-      const response = await fetch(`${basePath}/baselines${buildBaselineQuery(params)}`, {
-        signal: options?.signal,
-      });
+    async listBaselines(
+      params?: QepBaselineListParams,
+      options?: QepClientRequestOptions,
+    ) {
+      const response = await fetch(
+        `${basePath}/baselines${buildBaselineQuery(params)}`,
+        {
+          signal: options?.signal,
+        },
+      );
       return parseCollection<QepBaselineDto>(response);
     },
 
@@ -317,7 +348,10 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       return parseJson<QepBaselineDto>(response);
     },
 
-    async createBaseline(input: CreateQepBaselineInput, options?: QepClientRequestOptions) {
+    async createBaseline(
+      input: CreateQepBaselineInput,
+      options?: QepClientRequestOptions,
+    ) {
       const response = await fetch(`${basePath}/baselines`, {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -342,9 +376,12 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
     },
 
     async listBaselineItems(id: string, options?: QepClientRequestOptions) {
-      const response = await fetch(`${basePath}/baselines/${encodeURIComponent(id)}/items`, {
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/baselines/${encodeURIComponent(id)}/items`,
+        {
+          signal: options?.signal,
+        },
+      );
       return parseJson<readonly QepBaselineItemDto[]>(response);
     },
 
@@ -353,12 +390,15 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       input: AddQepBaselineItemInput,
       options?: QepClientRequestOptions,
     ) {
-      const response = await fetch(`${basePath}/baselines/${encodeURIComponent(id)}/items`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(input),
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/baselines/${encodeURIComponent(id)}/items`,
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(input),
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepBaselineDto>(response);
     },
 
@@ -375,30 +415,42 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
     },
 
     async lockBaseline(id: string, options?: QepClientRequestOptions) {
-      const response = await fetch(`${basePath}/baselines/${encodeURIComponent(id)}/lock`, {
-        method: "POST",
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/baselines/${encodeURIComponent(id)}/lock`,
+        {
+          method: "POST",
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepBaselineDto>(response);
     },
 
     async archiveBaseline(id: string, options?: QepClientRequestOptions) {
-      const response = await fetch(`${basePath}/baselines/${encodeURIComponent(id)}/archive`, {
-        method: "POST",
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/baselines/${encodeURIComponent(id)}/archive`,
+        {
+          method: "POST",
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepBaselineDto>(response);
     },
 
     async verifyBaselineIntegrity(id: string, options?: QepClientRequestOptions) {
-      const response = await fetch(`${basePath}/baselines/${encodeURIComponent(id)}/verify`, {
-        method: "POST",
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/baselines/${encodeURIComponent(id)}/verify`,
+        {
+          method: "POST",
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepBaselineDto>(response);
     },
 
-    async compareBaselines(input: CompareQepBaselinesInput, options?: QepClientRequestOptions) {
+    async compareBaselines(
+      input: CompareQepBaselinesInput,
+      options?: QepClientRequestOptions,
+    ) {
       const response = await fetch(`${basePath}/baselines/compare`, {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -408,7 +460,10 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       return parseJson<QepBaselineCompareResult>(response);
     },
 
-    async requirementBaselineHistory(requirementId: string, options?: QepClientRequestOptions) {
+    async requirementBaselineHistory(
+      requirementId: string,
+      options?: QepClientRequestOptions,
+    ) {
       const response = await fetch(
         `${basePath}/${encodeURIComponent(requirementId)}/baselines`,
         { signal: options?.signal },
@@ -422,16 +477,22 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       params?: QepRelationshipListParams,
       options?: QepClientRequestOptions,
     ) {
-      const response = await fetch(`${basePath}/relationships${buildRelationshipQuery(params)}`, {
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/relationships${buildRelationshipQuery(params)}`,
+        {
+          signal: options?.signal,
+        },
+      );
       return parseCollection<QepRelationshipDto>(response);
     },
 
     async getRelationship(id: string, options?: QepClientRequestOptions) {
-      const response = await fetch(`${basePath}/relationships/${encodeURIComponent(id)}`, {
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/relationships/${encodeURIComponent(id)}`,
+        {
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepRelationshipDto>(response);
     },
 
@@ -453,36 +514,48 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       input: UpdateQepRelationshipProfileClientInput,
       options?: QepClientRequestOptions,
     ) {
-      const response = await fetch(`${basePath}/relationships/${encodeURIComponent(id)}`, {
-        method: "PATCH",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(input),
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/relationships/${encodeURIComponent(id)}`,
+        {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(input),
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepRelationshipDto>(response);
     },
 
     async activateRelationship(id: string, options?: QepClientRequestOptions) {
-      const response = await fetch(`${basePath}/relationships/${encodeURIComponent(id)}/activate`, {
-        method: "POST",
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/relationships/${encodeURIComponent(id)}/activate`,
+        {
+          method: "POST",
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepRelationshipDto>(response);
     },
 
     async deprecateRelationship(id: string, options?: QepClientRequestOptions) {
-      const response = await fetch(`${basePath}/relationships/${encodeURIComponent(id)}/deprecate`, {
-        method: "POST",
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/relationships/${encodeURIComponent(id)}/deprecate`,
+        {
+          method: "POST",
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepRelationshipDto>(response);
     },
 
     async retireRelationship(id: string, options?: QepClientRequestOptions) {
-      const response = await fetch(`${basePath}/relationships/${encodeURIComponent(id)}/retire`, {
-        method: "POST",
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/relationships/${encodeURIComponent(id)}/retire`,
+        {
+          method: "POST",
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepRelationshipDto>(response);
     },
 
@@ -504,12 +577,15 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       rationale: string,
       options?: QepClientRequestOptions,
     ) {
-      const response = await fetch(`${basePath}/relationships/${encodeURIComponent(id)}/rationale`, {
-        method: "PATCH",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ rationale }),
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/relationships/${encodeURIComponent(id)}/rationale`,
+        {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ rationale }),
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepRelationshipDto>(response);
     },
 
@@ -518,12 +594,15 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       strength: string,
       options?: QepClientRequestOptions,
     ) {
-      const response = await fetch(`${basePath}/relationships/${encodeURIComponent(id)}/strength`, {
-        method: "PATCH",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ strength }),
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/relationships/${encodeURIComponent(id)}/strength`,
+        {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ strength }),
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepRelationshipDto>(response);
     },
 
@@ -566,12 +645,15 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
       scope: { readonly kind: string; readonly referenceId?: string },
       options?: QepClientRequestOptions,
     ) {
-      const response = await fetch(`${basePath}/relationships/${encodeURIComponent(id)}/scope`, {
-        method: "PATCH",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ scope }),
-        signal: options?.signal,
-      });
+      const response = await fetch(
+        `${basePath}/relationships/${encodeURIComponent(id)}/scope`,
+        {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ scope }),
+          signal: options?.signal,
+        },
+      );
       return parseJson<QepRelationshipDto>(response);
     },
 
@@ -606,7 +688,10 @@ export function createQepHttpClient(basePath = "/api/v1/qep/requirements") {
 
 const defaultClient = createQepHttpClient();
 
-export function listRequirements(params?: QepListParams, options?: QepClientRequestOptions) {
+export function listRequirements(
+  params?: QepListParams,
+  options?: QepClientRequestOptions,
+) {
   return defaultClient.listRequirements(params, options);
 }
 
@@ -854,7 +939,11 @@ export function listRelationshipsByRequirement(
   direction?: "inbound" | "outbound" | "both",
   options?: QepClientRequestOptions,
 ) {
-  return defaultClient.listRelationshipsByRequirement(requirementId, direction, options);
+  return defaultClient.listRelationshipsByRequirement(
+    requirementId,
+    direction,
+    options,
+  );
 }
 
 export function listRelationshipConflicts(options?: QepClientRequestOptions) {

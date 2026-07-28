@@ -2,14 +2,7 @@
 
 export const QEP_TEST_PLANS_BASE_PATH = "/workspace/qep/test-plans";
 
-const RESERVED = new Set([
-  "dashboard",
-  "explorer",
-  "review",
-  "search",
-  "new",
-  "plans",
-]);
+const RESERVED = new Set(["dashboard", "explorer", "review", "search", "new", "plans"]);
 
 export const QEP_TEST_PLAN_ROUTES = {
   home: QEP_TEST_PLANS_BASE_PATH,
@@ -23,7 +16,8 @@ export const QEP_TEST_PLAN_ROUTES = {
     `${QEP_TEST_PLANS_BASE_PATH}/plans/${encodeURIComponent(id)}/history`,
   versions: (id: string) =>
     `${QEP_TEST_PLANS_BASE_PATH}/plans/${encodeURIComponent(id)}/versions`,
-  items: (id: string) => `${QEP_TEST_PLANS_BASE_PATH}/plans/${encodeURIComponent(id)}/items`,
+  items: (id: string) =>
+    `${QEP_TEST_PLANS_BASE_PATH}/plans/${encodeURIComponent(id)}/items`,
   relationships: (id: string) =>
     `${QEP_TEST_PLANS_BASE_PATH}/plans/${encodeURIComponent(id)}/relationships`,
   compare: (id: string, fromRev?: string, toRev?: string) => {
@@ -35,8 +29,10 @@ export const QEP_TEST_PLAN_ROUTES = {
     const query = params.toString();
     return query ? `${base}?${query}` : base;
   },
-  audit: (id: string) => `${QEP_TEST_PLANS_BASE_PATH}/plans/${encodeURIComponent(id)}/audit`,
-  edit: (id: string) => `${QEP_TEST_PLANS_BASE_PATH}/plans/${encodeURIComponent(id)}/edit`,
+  audit: (id: string) =>
+    `${QEP_TEST_PLANS_BASE_PATH}/plans/${encodeURIComponent(id)}/audit`,
+  edit: (id: string) =>
+    `${QEP_TEST_PLANS_BASE_PATH}/plans/${encodeURIComponent(id)}/edit`,
 } as const;
 
 export function isQepTestPlansRoute(pathname: string): boolean {
@@ -98,7 +94,9 @@ export type QepTestPlanDetailMode =
   | "audit"
   | "edit";
 
-export function parseQepTestPlanDetailMode(pathname: string): QepTestPlanDetailMode | null {
+export function parseQepTestPlanDetailMode(
+  pathname: string,
+): QepTestPlanDetailMode | null {
   const id = parseQepTestPlanRouteId(pathname);
   if (!id) return null;
   const normalized = pathname.replace(/\/+$/, "") || "/";

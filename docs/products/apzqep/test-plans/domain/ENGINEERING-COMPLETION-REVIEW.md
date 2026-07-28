@@ -1,14 +1,14 @@
 # Engineering Completion Review (ECR) — APZQEP-ENG-060A
 
-| Field | Value |
-| ----- | ----- |
-| Programme | **APZQEP-ENG-060A** — Test Plans Domain Engineering |
-| Standard | [OES-002](../../../../engineering/oes/OES-002-Engineering-Review-and-Acceptance-Standard.md) **v1.1.0** §10A |
-| Date | 2026-07-27 |
-| Decision | **PASS** |
-| Evidence | `docs/operations/evidence/portfolio-recert/20260727T163600Z-APZQEP-ENG-060A-ECR-PASS.json` |
-| Completion Report | [DOMAIN-COMPLETION-REPORT.md](./DOMAIN-COMPLETION-REPORT.md) |
-| Coverage justification | [§ Coverage deviation justification](#coverage-deviation-justification) below |
+| Field                  | Value                                                                                                        |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Programme              | **APZQEP-ENG-060A** — Test Plans Domain Engineering                                                          |
+| Standard               | [OES-002](../../../../engineering/oes/OES-002-Engineering-Review-and-Acceptance-Standard.md) **v1.1.0** §10A |
+| Date                   | 2026-07-27                                                                                                   |
+| Decision               | **PASS**                                                                                                     |
+| Evidence               | `docs/operations/evidence/portfolio-recert/20260727T163600Z-APZQEP-ENG-060A-ECR-PASS.json`                   |
+| Completion Report      | [DOMAIN-COMPLETION-REPORT.md](./DOMAIN-COMPLETION-REPORT.md)                                                 |
+| Coverage justification | [§ Coverage deviation justification](#coverage-deviation-justification) below                                |
 
 ## Decision
 
@@ -24,45 +24,45 @@ Coverage thresholds under OES are treated as **quality objectives**. Remaining u
 
 ## ECR Checklist (Owner Review)
 
-| ID | Criterion | Result |
-| -- | --------- | ------ |
-| ECR-01 | All Work Packages Completed (WP-01…WP-10) | ✅ PASS |
-| ECR-02 | Aggregate behaviour complete | ✅ PASS |
-| ECR-03 | Lifecycle complete (Draft→…→Archived + terminal rules) | ✅ PASS |
+| ID     | Criterion                                                                                   | Result  |
+| ------ | ------------------------------------------------------------------------------------------- | ------- |
+| ECR-01 | All Work Packages Completed (WP-01…WP-10)                                                   | ✅ PASS |
+| ECR-02 | Aggregate behaviour complete                                                                | ✅ PASS |
+| ECR-03 | Lifecycle complete (Draft→…→Archived + terminal rules)                                      | ✅ PASS |
 | ECR-04 | Policies complete (transition, readiness, approval, assignment, clone, supersede, revision) | ✅ PASS |
-| ECR-05 | Versioning complete (seal / revise / revision history) | ✅ PASS |
-| ECR-06 | Clone behaviour complete | ✅ PASS |
-| ECR-07 | Supersede behaviour complete | ✅ PASS |
-| ECR-08 | Domain events complete (`qep.plan.*`) | ✅ PASS |
-| ECR-09 | Business invariants complete | ✅ PASS |
-| ECR-10 | No infrastructure leakage | ✅ PASS |
-| ECR-11 | No REST concerns | ✅ PASS |
-| ECR-12 | No persistence concerns | ✅ PASS |
-| ECR-13 | Defensive coverage justification documented | ✅ PASS |
-| ECR-14 | Coverage deviations explicitly justified | ✅ PASS |
-| ECR-15 | OES-ENG-060A + OES-ARCH-013 fidelity | ✅ PASS |
-| ECR-16 | Documentation + Completion Report complete | ✅ PASS |
-| ECR-17 | Outstanding mandatory engineering items | ✅ NONE |
+| ECR-05 | Versioning complete (seal / revise / revision history)                                      | ✅ PASS |
+| ECR-06 | Clone behaviour complete                                                                    | ✅ PASS |
+| ECR-07 | Supersede behaviour complete                                                                | ✅ PASS |
+| ECR-08 | Domain events complete (`qep.plan.*`)                                                       | ✅ PASS |
+| ECR-09 | Business invariants complete                                                                | ✅ PASS |
+| ECR-10 | No infrastructure leakage                                                                   | ✅ PASS |
+| ECR-11 | No REST concerns                                                                            | ✅ PASS |
+| ECR-12 | No persistence concerns                                                                     | ✅ PASS |
+| ECR-13 | Defensive coverage justification documented                                                 | ✅ PASS |
+| ECR-14 | Coverage deviations explicitly justified                                                    | ✅ PASS |
+| ECR-15 | OES-ENG-060A + OES-ARCH-013 fidelity                                                        | ✅ PASS |
+| ECR-16 | Documentation + Completion Report complete                                                  | ✅ PASS |
+| ECR-17 | Outstanding mandatory engineering items                                                     | ✅ NONE |
 
 ---
 
 ## Behavioural completeness assessment
 
-| Area | Evidence | Result |
-| ---- | -------- | ------ |
-| Aggregate `TestPlan` + 21 commands | Domain tests + public API | ✅ Complete |
-| Entities (Item, Revision, Approval, Assignment, Schedule) | Implemented + exercised | ✅ Complete |
-| Value objects | Unit + domain tests | ✅ Complete |
-| Lifecycle matrix | All transitions + illegal paths tested | ✅ Complete |
-| Policies | All seven policy families exercised | ✅ Complete |
-| Versioning / seal / revise | Seal + revise + revision VO tests | ✅ Complete |
-| Clone | Clone service + command tests | ✅ Complete |
-| Supersede | Supersede command + event tests | ✅ Complete |
-| Domain events | Emission on all mutating commands | ✅ Complete |
-| Business invariants | Duplicate pin, readiness, terminal immutability, etc. | ✅ Complete |
-| Architecture boundaries | No infra/REST/persistence imports | ✅ Complete |
-| Tests | **62 PASS** (domain + VO + architecture) | ✅ Complete |
-| Typecheck | `tsc --noEmit` PASS | ✅ Complete |
+| Area                                                      | Evidence                                              | Result      |
+| --------------------------------------------------------- | ----------------------------------------------------- | ----------- |
+| Aggregate `TestPlan` + 21 commands                        | Domain tests + public API                             | ✅ Complete |
+| Entities (Item, Revision, Approval, Assignment, Schedule) | Implemented + exercised                               | ✅ Complete |
+| Value objects                                             | Unit + domain tests                                   | ✅ Complete |
+| Lifecycle matrix                                          | All transitions + illegal paths tested                | ✅ Complete |
+| Policies                                                  | All seven policy families exercised                   | ✅ Complete |
+| Versioning / seal / revise                                | Seal + revise + revision VO tests                     | ✅ Complete |
+| Clone                                                     | Clone service + command tests                         | ✅ Complete |
+| Supersede                                                 | Supersede command + event tests                       | ✅ Complete |
+| Domain events                                             | Emission on all mutating commands                     | ✅ Complete |
+| Business invariants                                       | Duplicate pin, readiness, terminal immutability, etc. | ✅ Complete |
+| Architecture boundaries                                   | No infra/REST/persistence imports                     | ✅ Complete |
+| Tests                                                     | **62 PASS** (domain + VO + architecture)              | ✅ Complete |
+| Typecheck                                                 | `tsc --noEmit` PASS                                   | ✅ Complete |
 
 ---
 
@@ -70,11 +70,11 @@ Coverage thresholds under OES are treated as **quality objectives**. Remaining u
 
 ### Measured (package-scoped, quality objectives)
 
-| Metric | OES objective | Actual | Status |
-| ------ | ------------- | ------ | ------ |
-| Lines | ≥95% | **92.94%** | Below objective — justified |
-| Functions | ≥95% | **94.59%** | Marginally below — justified |
-| Branches | ≥90% | **78.91%** | Below objective — justified |
+| Metric    | OES objective | Actual     | Status                       |
+| --------- | ------------- | ---------- | ---------------------------- |
+| Lines     | ≥95%          | **92.94%** | Below objective — justified  |
+| Functions | ≥95%          | **94.59%** | Marginally below — justified |
+| Branches  | ≥90%          | **78.91%** | Below objective — justified  |
 
 ### Classification principle (Owner guidance 2026-07-27)
 
@@ -87,15 +87,15 @@ ECR finds all remaining gaps fall into category **2**.
 
 ### File-level residual analysis
 
-| Location | Uncovered | Classification | Rationale |
-| -------- | --------- | -------------- | --------- |
-| `test-plan.ts` `findPlanItem` / `activePlanItems` / `hasDuplicateSpecPin` | Helpers L910–931 | Defensive / unused public helpers | Aggregate commands use inline find/filter; `assertNoDuplicateActiveSpecPins` already covers duplicate-pin invariant; helpers are convenience exports not on the behavioural path |
-| `plan-item.ts` `updateTestPlanItem` | Null-clear / trim ternaries L57–71 | Defensive ternary edges | Same behaviours exercised via aggregate `updateItem` (null clears notes/refs/pin); residual branches are TypeScript optional-chain combinations |
-| `plan-domain-service.ts` clone optional spreads + `resolveSealVersionLabel` tails | L138–140, L164–165 | Defensive optional paths | Clone without metadata/refs exercised; seal version resolution covered via `sealPlan` / `revisePlan`; residual tails are unreachable once predecessor/revision state is set by aggregate invariants |
-| `plan-policy.ts` | Selected denial arms L167–172 etc. | Defensive overlapping guards | Equivalent denials already asserted via aggregate command tests (wrong status, missing approvals, etc.); residual arms are redundant guard combinations |
-| `plan-revision.ts` | Minor branch L42 | Defensive VO edge | Revision creation via seal/revise covers primary path |
-| `plan-schedule.ts` | Branch L36 | Defensive optional | Schedule create/update covered; residual is optional-field ternary |
-| `value-objects.ts` | Selected parse/validate edges | Defensive invalid input | Primary VO validation exercised; residual edges are alternate invalid-input combinations |
+| Location                                                                          | Uncovered                          | Classification                    | Rationale                                                                                                                                                                                           |
+| --------------------------------------------------------------------------------- | ---------------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `test-plan.ts` `findPlanItem` / `activePlanItems` / `hasDuplicateSpecPin`         | Helpers L910–931                   | Defensive / unused public helpers | Aggregate commands use inline find/filter; `assertNoDuplicateActiveSpecPins` already covers duplicate-pin invariant; helpers are convenience exports not on the behavioural path                    |
+| `plan-item.ts` `updateTestPlanItem`                                               | Null-clear / trim ternaries L57–71 | Defensive ternary edges           | Same behaviours exercised via aggregate `updateItem` (null clears notes/refs/pin); residual branches are TypeScript optional-chain combinations                                                     |
+| `plan-domain-service.ts` clone optional spreads + `resolveSealVersionLabel` tails | L138–140, L164–165                 | Defensive optional paths          | Clone without metadata/refs exercised; seal version resolution covered via `sealPlan` / `revisePlan`; residual tails are unreachable once predecessor/revision state is set by aggregate invariants |
+| `plan-policy.ts`                                                                  | Selected denial arms L167–172 etc. | Defensive overlapping guards      | Equivalent denials already asserted via aggregate command tests (wrong status, missing approvals, etc.); residual arms are redundant guard combinations                                             |
+| `plan-revision.ts`                                                                | Minor branch L42                   | Defensive VO edge                 | Revision creation via seal/revise covers primary path                                                                                                                                               |
+| `plan-schedule.ts`                                                                | Branch L36                         | Defensive optional                | Schedule create/update covered; residual is optional-field ternary                                                                                                                                  |
+| `value-objects.ts`                                                                | Selected parse/validate edges      | Defensive invalid input           | Primary VO validation exercised; residual edges are alternate invalid-input combinations                                                                                                            |
 
 ### ECR determination
 

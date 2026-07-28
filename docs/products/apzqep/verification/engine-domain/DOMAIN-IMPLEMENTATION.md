@@ -8,17 +8,17 @@ Programme marker: `APZQEP-ENG-040A IMPLEMENTED AWAITING OWNER ACCEPTANCE`
 
 ## Aggregate
 
-| Aggregate | Module |
-| --------- | ------ |
+| Aggregate      | Module                                    |
+| -------------- | ----------------------------------------- |
 | `Verification` | `src/domain/verification/verification.ts` |
 
 ## Entities / structures
 
-| Entity | Representation |
-| ------ | -------------- |
-| Verification | Aggregate root |
-| VerificationHistory | Append-only history |
-| VerificationMetadata | Extensible string map |
+| Entity               | Representation               |
+| -------------------- | ---------------------------- |
+| Verification         | Aggregate root               |
+| VerificationHistory  | Append-only history          |
+| VerificationMetadata | Extensible string map        |
 | VerificationDecision | Completion decision snapshot |
 
 ## Value objects

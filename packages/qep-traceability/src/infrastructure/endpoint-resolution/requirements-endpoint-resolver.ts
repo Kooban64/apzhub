@@ -1,4 +1,7 @@
-import type { EndpointResolutionFact, TraceEndpointResolver } from "./endpoint-resolver";
+import type {
+  EndpointResolutionFact,
+  TraceEndpointResolver,
+} from "./endpoint-resolver";
 
 /**
  * Structural (duck-typed) ports mirroring the Requirements bounded context's

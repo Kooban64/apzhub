@@ -9,10 +9,10 @@
 
 ## Governing Standards
 
-- Document 000 v1.0.0  
-- OES-000 v1.0.0  
-- OES-001 v1.0.0  
-- OES-002 v1.1.0  
+- Document 000 v1.0.0
+- OES-000 v1.0.0
+- OES-001 v1.0.0
+- OES-002 v1.1.0
 
 ## Decision
 
@@ -28,38 +28,38 @@ The Engineering Completion Review confirms that the Workbench has been implement
 
 The implementation demonstrates:
 
-- Correct consumption of the certified **Domain v0.1.0** without behavioural modification.  
-- Correct consumption of the certified **Infrastructure v0.2.0** without contract changes.  
-- Complete implementation of the Workbench presentation layer.  
-- Explorer, Dashboard, Review, Search, Create/Edit, and Inspector implemented in accordance with the approved architecture.  
-- Compare correctly presented as **governed unavailable** in accordance with limitation **L-01**.  
-- Items presented according to the approved **L-02** contract.  
-- User actions derived exclusively from the Infrastructure `availableActions` contract.  
-- No business rules introduced into the presentation layer.  
+- Correct consumption of the certified **Domain v0.1.0** without behavioural modification.
+- Correct consumption of the certified **Infrastructure v0.2.0** without contract changes.
+- Complete implementation of the Workbench presentation layer.
+- Explorer, Dashboard, Review, Search, Create/Edit, and Inspector implemented in accordance with the approved architecture.
+- Compare correctly presented as **governed unavailable** in accordance with limitation **L-01**.
+- Items presented according to the approved **L-02** contract.
+- User actions derived exclusively from the Infrastructure `availableActions` contract.
+- No business rules introduced into the presentation layer.
 - No duplication of Domain or Infrastructure behaviour.
 
 The programme has achieved its authorised objectives.
 
 ## Owner Acceptance Checklist
 
-| Review Area | Result |
-| ----------- | ------ |
-| Architecture Compliance | ✅ PASS |
+| Review Area                          | Result  |
+| ------------------------------------ | ------- |
+| Architecture Compliance              | ✅ PASS |
 | Engineering Specification Compliance | ✅ PASS |
-| Dashboard | ✅ PASS |
-| Explorer | ✅ PASS |
-| Inspector | ✅ PASS |
-| Review Workspace | ✅ PASS |
-| Search | ✅ PASS |
-| Create / Edit | ✅ PASS |
-| Version History | ✅ PASS |
-| Compare Presentation | ✅ PASS |
-| `availableActions` Contract | ✅ PASS |
-| Accessibility Requirements | ✅ PASS |
-| Domain Separation | ✅ PASS |
+| Dashboard                            | ✅ PASS |
+| Explorer                             | ✅ PASS |
+| Inspector                            | ✅ PASS |
+| Review Workspace                     | ✅ PASS |
+| Search                               | ✅ PASS |
+| Create / Edit                        | ✅ PASS |
+| Version History                      | ✅ PASS |
+| Compare Presentation                 | ✅ PASS |
+| `availableActions` Contract          | ✅ PASS |
+| Accessibility Requirements           | ✅ PASS |
+| Domain Separation                    | ✅ PASS |
 | Infrastructure Contract Preservation | ✅ PASS |
-| ECR | ✅ PASS |
-| Outstanding Mandatory Items | ✅ NONE |
+| ECR                                  | ✅ PASS |
+| Outstanding Mandatory Items          | ✅ NONE |
 
 ## Architectural confirmation (binding)
 
@@ -69,9 +69,9 @@ This principle has been validated through Architecture, Engineering Specificatio
 
 ## Owner directives (effective immediately)
 
-- **APZQEP-ENG-070A is closed.**  
-- No further engineering under this programme identifier.  
-- Any future Workbench enhancement requires a new Engineering programme.  
+- **APZQEP-ENG-070A is closed.**
+- No further engineering under this programme identifier.
+- Any future Workbench enhancement requires a new Engineering programme.
 - The Workbench implementation is the reference presentation implementation for future orchestration capabilities.
 
 ## Authorises next

@@ -11,50 +11,50 @@ The Evidence Model defines how proof of verification, compliance, and accountabl
 
 Opinion and status fields alone fail regulated and enterprise audit. Certification requires demonstrable proof: what was tested, what was observed, who approved it, and that the record has not been tampered with after decision. Scattered attachments in chat, email, or ungoverned drives create chain-of-custody gaps.
 
-QEP centralises evidence as first-class SoR objects linked to verification, defects, risks, and releases — enabling *Evidence before Opinion* in every readiness and certification conversation.
+QEP centralises evidence as first-class SoR objects linked to verification, defects, risks, and releases — enabling _Evidence before Opinion_ in every readiness and certification conversation.
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| Evidence item | A single artefact or reference with metadata and custody |
-| Evidence attachment | Link from evidence to execution step, session, or record |
-| Evidence pack | Curated collection for readiness or certification scope |
-| Pack lock | Immutability of pack contents upon certification approval |
-| Chain of custody | Who captured, reviewed, exported; audit trail |
-| Evidence completeness | Policy measure of required evidence for scope |
+| Concept                     | Product meaning                                                                   |
+| --------------------------- | --------------------------------------------------------------------------------- |
+| Evidence item               | A single artefact or reference with metadata and custody                          |
+| Evidence attachment         | Link from evidence to execution step, session, or record                          |
+| Evidence pack               | Curated collection for readiness or certification scope                           |
+| Pack lock                   | Immutability of pack contents upon certification approval                         |
+| Chain of custody            | Who captured, reviewed, exported; audit trail                                     |
+| Evidence completeness       | Policy measure of required evidence for scope                                     |
 | Supporting vs authoritative | Human decisions and sign-offs authoritative; AI reports supporting until accepted |
 
 ## Primary objects
 
-| Object | Description |
-| ------ | ----------- |
-| Evidence item | File, reference, log extract, or structured observation |
-| Evidence metadata | Capture time, capturer, source, classification, retention class |
-| Evidence review record | Peer or approver review of evidence suitability |
-| Evidence pack | Named bundle for release or certification request |
-| Pack membership | Ordered list of items with rationale for inclusion |
-| Lock record | Timestamp, cert decision, and approver binding pack immutability |
-| Export record | Audited export for external auditors or customers |
-| Correction path | New decision or supplemental pack — never silent edit of locked content |
+| Object                 | Description                                                             |
+| ---------------------- | ----------------------------------------------------------------------- |
+| Evidence item          | File, reference, log extract, or structured observation                 |
+| Evidence metadata      | Capture time, capturer, source, classification, retention class         |
+| Evidence review record | Peer or approver review of evidence suitability                         |
+| Evidence pack          | Named bundle for release or certification request                       |
+| Pack membership        | Ordered list of items with rationale for inclusion                      |
+| Lock record            | Timestamp, cert decision, and approver binding pack immutability        |
+| Export record          | Audited export for external auditors or customers                       |
+| Correction path        | New decision or supplemental pack — never silent edit of locked content |
 
 ## Evidence types
 
-| Type | Typical use |
-| ---- | ----------- |
-| Screenshots | UI state proof |
-| Videos | Session replay or exploratory capture |
-| Documents | Test plans, protocols, signed protocols |
-| Logs | Application or test logs |
-| API outputs | Response captures |
-| Automation results | Ingested runner output references |
-| Performance outputs | Load/latency reports |
-| Security outputs | Scan or pen-test excerpts |
-| Accessibility outputs | a11y check results |
-| AI reports | Non-authoritative until human accepted |
-| Human observations | Qualitative notes from sessions |
-| Approval records | Embedded decision artefacts |
-| Digital sign-offs | Formal sign-off metadata |
+| Type                  | Typical use                             |
+| --------------------- | --------------------------------------- |
+| Screenshots           | UI state proof                          |
+| Videos                | Session replay or exploratory capture   |
+| Documents             | Test plans, protocols, signed protocols |
+| Logs                  | Application or test logs                |
+| API outputs           | Response captures                       |
+| Automation results    | Ingested runner output references       |
+| Performance outputs   | Load/latency reports                    |
+| Security outputs      | Scan or pen-test excerpts               |
+| Accessibility outputs | a11y check results                      |
+| AI reports            | Non-authoritative until human accepted  |
+| Human observations    | Qualitative notes from sessions         |
+| Approval records      | Embedded decision artefacts             |
+| Digital sign-offs     | Formal sign-off metadata                |
 
 ## Lifecycle
 
@@ -76,18 +76,18 @@ flowchart TB
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
-| Manual Tester / QA Engineer | Captures session evidence; ensures completeness |
-| Automation Engineer | Ensures ingested automation artefacts link correctly |
-| QA Manager | Reviews pack completeness before certification request |
-| Release Manager | Owns certification pack submission |
-| Compliance Officer | Retention class, legal hold, export policy |
-| Auditor | Read-only access to locked packs and export audit |
+| Role                        | Ownership                                              |
+| --------------------------- | ------------------------------------------------------ |
+| Manual Tester / QA Engineer | Captures session evidence; ensures completeness        |
+| Automation Engineer         | Ensures ingested automation artefacts link correctly   |
+| QA Manager                  | Reviews pack completeness before certification request |
+| Release Manager             | Owns certification pack submission                     |
+| Compliance Officer          | Retention class, legal hold, export policy             |
+| Auditor                     | Read-only access to locked packs and export audit      |
 
 ## Relationships
 
-Evidence links to verification sessions, runs, steps, defects, risks, readiness snapshots, and certification requests. Traceability views surface *unsupported certification claims* when cert scope lacks linked evidence.
+Evidence links to verification sessions, runs, steps, defects, risks, readiness snapshots, and certification requests. Traceability views surface _unsupported certification claims_ when cert scope lacks linked evidence.
 
 ```mermaid
 flowchart LR
@@ -102,52 +102,52 @@ flowchart LR
 
 ## States
 
-| State | Applies to | Meaning |
-| ----- | ---------- | ------- |
-| Draft | Evidence item | Captured; not yet approved for pack use |
-| Under review | Evidence item | Peer review in progress |
-| Approved | Evidence item | Suitable for packs per policy |
-| Rejected | Evidence item | Not suitable; reason recorded |
-| Assembled | Pack | Items collected; editable |
-| Submitted | Pack | Linked to certification request |
-| Locked | Pack | Certification approved; immutable |
-| Superseded | Pack | Replaced by later certification pack |
+| State        | Applies to    | Meaning                                 |
+| ------------ | ------------- | --------------------------------------- |
+| Draft        | Evidence item | Captured; not yet approved for pack use |
+| Under review | Evidence item | Peer review in progress                 |
+| Approved     | Evidence item | Suitable for packs per policy           |
+| Rejected     | Evidence item | Not suitable; reason recorded           |
+| Assembled    | Pack          | Items collected; editable               |
+| Submitted    | Pack          | Linked to certification request         |
+| Locked       | Pack          | Certification approved; immutable       |
+| Superseded   | Pack          | Replaced by later certification pack    |
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
+| Rule  | Statement                                                                                    |
+| ----- | -------------------------------------------------------------------------------------------- |
 | EV-01 | Evidence packs **lock** on certification approval (Approved or Approved with qualifications) |
-| EV-02 | Locked pack content shall not be edited; corrections use new decisions and packs |
-| EV-03 | History is never deleted; retention and legal hold apply |
-| EV-04 | AI-generated reports remain non-authoritative until human accepted |
-| EV-05 | Exports are audited with exporter identity and scope |
-| EV-06 | Evidence completeness gates may block readiness — configurable by edition/policy |
-| EV-07 | Classification and retention class mandatory where regulated policy enabled |
+| EV-02 | Locked pack content shall not be edited; corrections use new decisions and packs             |
+| EV-03 | History is never deleted; retention and legal hold apply                                     |
+| EV-04 | AI-generated reports remain non-authoritative until human accepted                           |
+| EV-05 | Exports are audited with exporter identity and scope                                         |
+| EV-06 | Evidence completeness gates may block readiness — configurable by edition/policy             |
+| EV-07 | Classification and retention class mandatory where regulated policy enabled                  |
 
 ## Approval rules
 
-| Action | Approver |
-| ------ | -------- |
-| Evidence item approval (when required) | QA peer or QA Manager per policy |
-| Pack completeness sign-off | QA Manager or Release Manager per policy |
-| Certification pack acceptance | Human certification decision — separate from item approval |
-| Export for external audit | Compliance Officer or delegated role |
-| Legal hold placement | Compliance Officer / Tenant Admin |
+| Action                                 | Approver                                                   |
+| -------------------------------------- | ---------------------------------------------------------- |
+| Evidence item approval (when required) | QA peer or QA Manager per policy                           |
+| Pack completeness sign-off             | QA Manager or Release Manager per policy                   |
+| Certification pack acceptance          | Human certification decision — separate from item approval |
+| Export for external audit              | Compliance Officer or delegated role                       |
+| Legal hold placement                   | Compliance Officer / Tenant Admin                          |
 
 Pack lock is automatic upon certification approval — not a separate human toggle.
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| Manual Tester | Capture accurate session evidence |
-| QA Engineer | Attach evidence to procedures and retests |
-| Automation Engineer | Validate ingested artefact integrity |
-| QA Manager | Review completeness; reject unsuitable items |
-| Release Manager | Curates certification pack membership |
-| Compliance Officer | Govern retention and export |
-| Auditor | Verify lock integrity and custody chain |
+| Persona                 | Responsibility                                         |
+| ----------------------- | ------------------------------------------------------ |
+| Manual Tester           | Capture accurate session evidence                      |
+| QA Engineer             | Attach evidence to procedures and retests              |
+| Automation Engineer     | Validate ingested artefact integrity                   |
+| QA Manager              | Review completeness; reject unsuitable items           |
+| Release Manager         | Curates certification pack membership                  |
+| Compliance Officer      | Govern retention and export                            |
+| Auditor                 | Verify lock integrity and custody chain                |
 | Customer Representative | May receive customer-facing export packs when entitled |
 
 ## Reporting
@@ -176,12 +176,12 @@ Future product intent: richer media handling via platform storage, customer evid
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| Govern evidence metadata and packs | Replace enterprise document management |
-| Reference external storage | Store unlimited binary SoR outside platform policy |
-| Lock on certification approval | Lock on continuous signal alone |
-| Chain of custody audit | Email as system of record |
+| In boundary                        | Out of boundary                                    |
+| ---------------------------------- | -------------------------------------------------- |
+| Govern evidence metadata and packs | Replace enterprise document management             |
+| Reference external storage         | Store unlimited binary SoR outside platform policy |
+| Lock on certification approval     | Lock on continuous signal alone                    |
+| Chain of custody audit             | Email as system of record                          |
 
 QEP is not a generic DMS; it governs quality evidence in the certification chain.
 

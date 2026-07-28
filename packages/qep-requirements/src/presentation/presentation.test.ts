@@ -26,9 +26,9 @@ describe("QEP Requirements presentation registration", () => {
     expect(QEP_REQUIREMENTS_PERMISSION_LABELS["qep.requirements.view"]).toBe(
       "View Requirements",
     );
-    expect(QEP_REQUIREMENTS_PERMISSION_LABELS["qep.requirements.relationships.view"]).toBe(
-      "View Requirement Relationships",
-    );
+    expect(
+      QEP_REQUIREMENTS_PERMISSION_LABELS["qep.requirements.relationships.view"],
+    ).toBe("View Requirement Relationships");
     expect(QEP_REQUIREMENTS_PERMISSION_LABELS["qep.requirements.approve"]).toBe(
       "Approve Requirements",
     );
@@ -72,32 +72,44 @@ describe("QEP Requirements presentation registration", () => {
     );
 
     expect(isQepBaselinesRoute("/workspace/qep/requirements/baselines")).toBe(true);
-    expect(isQepRelationshipsRoute("/workspace/qep/requirements/relationships")).toBe(true);
-    expect(isQepRelationshipsRoute("/workspace/qep/requirements/relationships/rrl_1")).toBe(
+    expect(isQepRelationshipsRoute("/workspace/qep/requirements/relationships")).toBe(
       true,
     );
-    expect(isQepBaselinesNewRoute("/workspace/qep/requirements/baselines/new")).toBe(true);
-    expect(isQepBaselinesCompareRoute("/workspace/qep/requirements/baselines/compare")).toBe(
+    expect(
+      isQepRelationshipsRoute("/workspace/qep/requirements/relationships/rrl_1"),
+    ).toBe(true);
+    expect(isQepBaselinesNewRoute("/workspace/qep/requirements/baselines/new")).toBe(
       true,
     );
+    expect(
+      isQepBaselinesCompareRoute("/workspace/qep/requirements/baselines/compare"),
+    ).toBe(true);
     expect(parseQepBaselineRouteId("/workspace/qep/requirements/baselines/rbl_1")).toBe(
       "rbl_1",
     );
-    expect(parseQepBaselineRouteId("/workspace/qep/requirements/baselines/new")).toBeNull();
+    expect(
+      parseQepBaselineRouteId("/workspace/qep/requirements/baselines/new"),
+    ).toBeNull();
     expect(
       parseQepBaselineRouteId("/workspace/qep/requirements/baselines/compare"),
     ).toBeNull();
 
     // Critical: "baselines" itself must never be parsed as a requirement id.
-    expect(parseQepRequirementRouteId("/workspace/qep/requirements/baselines")).toBeNull();
+    expect(
+      parseQepRequirementRouteId("/workspace/qep/requirements/baselines"),
+    ).toBeNull();
     expect(
       parseQepRequirementRouteId("/workspace/qep/requirements/baselines/rbl_1"),
     ).toBeNull();
-    expect(parseQepRequirementRouteId("/workspace/qep/requirements/relationships")).toBeNull();
+    expect(
+      parseQepRequirementRouteId("/workspace/qep/requirements/relationships"),
+    ).toBeNull();
     expect(
       parseQepRequirementRouteId("/workspace/qep/requirements/relationships/rrl_1"),
     ).toBeNull();
-    expect(parseQepRequirementRouteId("/workspace/qep/requirements/req_1")).toBe("req_1");
+    expect(parseQepRequirementRouteId("/workspace/qep/requirements/req_1")).toBe(
+      "req_1",
+    );
   });
 
   it("registers requirement relationship routes distinct from requirement ids", () => {
@@ -114,27 +126,35 @@ describe("QEP Requirements presentation registration", () => {
       "/workspace/qep/requirements/req_1/relationships",
     );
 
-    expect(isQepRelationshipsNewRoute("/workspace/qep/requirements/relationships/new")).toBe(
-      true,
-    );
     expect(
-      isQepRelationshipsSupersedeRoute("/workspace/qep/requirements/relationships/supersede"),
+      isQepRelationshipsNewRoute("/workspace/qep/requirements/relationships/new"),
+    ).toBe(true);
+    expect(
+      isQepRelationshipsSupersedeRoute(
+        "/workspace/qep/requirements/relationships/supersede",
+      ),
     ).toBe(true);
     expect(QEP_REQUIREMENTS_ROUTES.relationships.supersede).toBe(
       "/workspace/qep/requirements/relationships/supersede",
     );
-    expect(parseQepRelationshipRouteId("/workspace/qep/requirements/relationships/rrl_1")).toBe(
-      "rrl_1",
-    );
-    expect(parseQepRelationshipRouteId("/workspace/qep/requirements/relationships/new")).toBeNull();
-    expect(parseQepRelationshipRouteId("/workspace/qep/requirements/relationships")).toBeNull();
+    expect(
+      parseQepRelationshipRouteId("/workspace/qep/requirements/relationships/rrl_1"),
+    ).toBe("rrl_1");
+    expect(
+      parseQepRelationshipRouteId("/workspace/qep/requirements/relationships/new"),
+    ).toBeNull();
+    expect(
+      parseQepRelationshipRouteId("/workspace/qep/requirements/relationships"),
+    ).toBeNull();
   });
 
   it("registers a baselines sidebar entry nested under requirements", () => {
     expect(QEP_REQUIREMENTS_NAVIGATION.baselinesSidebar.href).toBe(
       "/workspace/qep/requirements/baselines",
     );
-    expect(QEP_REQUIREMENTS_NAVIGATION.baselinesSidebar.parent).toBe("qep-requirements");
+    expect(QEP_REQUIREMENTS_NAVIGATION.baselinesSidebar.parent).toBe(
+      "qep-requirements",
+    );
     expect(QEP_REQUIREMENTS_NAVIGATION.baselinesSidebar.permission).toBe(
       "qep.requirements.baselines.view",
     );
@@ -144,7 +164,9 @@ describe("QEP Requirements presentation registration", () => {
     expect(QEP_REQUIREMENTS_NAVIGATION.relationshipsSidebar.href).toBe(
       "/workspace/qep/requirements/relationships",
     );
-    expect(QEP_REQUIREMENTS_NAVIGATION.relationshipsSidebar.parent).toBe("qep-requirements");
+    expect(QEP_REQUIREMENTS_NAVIGATION.relationshipsSidebar.parent).toBe(
+      "qep-requirements",
+    );
     expect(QEP_REQUIREMENTS_NAVIGATION.relationshipsSidebar.permission).toBe(
       "qep.requirements.relationships.view",
     );

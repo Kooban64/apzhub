@@ -113,23 +113,29 @@ function baseDto(
 
 describe("APZQEP-ENG-050C routing helpers", () => {
   it("maps explorer and review routes", () => {
-    expect(isQepTestSpecificationsExplorerRoute(QEP_TEST_SPECIFICATION_ROUTES.explorer)).toBe(
-      true,
-    );
-    expect(isQepTestSpecificationsReviewRoute(QEP_TEST_SPECIFICATION_ROUTES.review)).toBe(true);
+    expect(
+      isQepTestSpecificationsExplorerRoute(QEP_TEST_SPECIFICATION_ROUTES.explorer),
+    ).toBe(true);
+    expect(
+      isQepTestSpecificationsReviewRoute(QEP_TEST_SPECIFICATION_ROUTES.review),
+    ).toBe(true);
   });
 
   it("parses detail and secondary modes", () => {
     const id = "tsp_demo";
-    expect(parseQepTestSpecificationRouteId(QEP_TEST_SPECIFICATION_ROUTES.detail(id))).toBe(id);
-    expect(parseQepTestSpecificationDetailMode(QEP_TEST_SPECIFICATION_ROUTES.history(id))).toBe(
-      "history",
-    );
-    expect(parseQepTestSpecificationDetailMode(QEP_TEST_SPECIFICATION_ROUTES.versions(id))).toBe(
-      "versions",
-    );
     expect(
-      parseQepTestSpecificationDetailMode(QEP_TEST_SPECIFICATION_ROUTES.relationships(id)),
+      parseQepTestSpecificationRouteId(QEP_TEST_SPECIFICATION_ROUTES.detail(id)),
+    ).toBe(id);
+    expect(
+      parseQepTestSpecificationDetailMode(QEP_TEST_SPECIFICATION_ROUTES.history(id)),
+    ).toBe("history");
+    expect(
+      parseQepTestSpecificationDetailMode(QEP_TEST_SPECIFICATION_ROUTES.versions(id)),
+    ).toBe("versions");
+    expect(
+      parseQepTestSpecificationDetailMode(
+        QEP_TEST_SPECIFICATION_ROUTES.relationships(id),
+      ),
     ).toBe("relationships");
   });
 });
@@ -166,12 +172,16 @@ describe("APZQEP-ENG-050C Workbench journeys (mocked API)", () => {
     vi.mocked(createSpecification).mockResolvedValue(baseDto({ id: "tsp_new" }));
 
     render(
-      wrap(<QepTestSpecificationRouterView pathname="/workspace/qep/test-specifications/new" />),
+      wrap(
+        <QepTestSpecificationRouterView pathname="/workspace/qep/test-specifications/new" />,
+      ),
     );
 
     fireEvent.change(screen.getByLabelText("Number"), { target: { value: "TS-002" } });
     fireEvent.change(screen.getByLabelText("Title"), { target: { value: "MFA" } });
-    fireEvent.change(screen.getByLabelText("Description"), { target: { value: "Desc" } });
+    fireEvent.change(screen.getByLabelText("Description"), {
+      target: { value: "Desc" },
+    });
     fireEvent.change(screen.getByLabelText("Objective"), { target: { value: "Obj" } });
     fireEvent.change(screen.getByLabelText("Scope"), { target: { value: "Scope" } });
     fireEvent.click(screen.getByRole("button", { name: /Create draft/i }));
@@ -229,9 +239,13 @@ describe("APZQEP-ENG-050C Workbench journeys (mocked API)", () => {
       ),
     );
 
-    await waitFor(() => expect(screen.getByRole("button", { name: /^Approve$/i })).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: /^Approve$/i })).toBeTruthy(),
+    );
     fireEvent.click(screen.getByRole("button", { name: /^Approve$/i }));
-    await waitFor(() => expect(screen.getByTestId("qep-spec-confirm-approve")).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByTestId("qep-spec-confirm-approve")).toBeTruthy(),
+    );
     fireEvent.click(screen.getByTestId("qep-spec-confirm-approve"));
     await waitFor(() => {
       expect(approveSpecification).toHaveBeenCalled();
@@ -255,7 +269,9 @@ describe("APZQEP-ENG-050C Workbench journeys (mocked API)", () => {
       ),
     );
 
-    await waitFor(() => expect(screen.getByRole("button", { name: /^Reject$/i })).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: /^Reject$/i })).toBeTruthy(),
+    );
     fireEvent.click(screen.getByRole("button", { name: /^Reject$/i }));
     await waitFor(() => expect(screen.getByLabelText(/Rationale/i)).toBeTruthy());
     fireEvent.change(screen.getByLabelText(/Rationale/i), {
@@ -310,7 +326,9 @@ describe("APZQEP-ENG-050C Workbench journeys (mocked API)", () => {
       ),
     );
 
-    await waitFor(() => expect(screen.getByRole("button", { name: /Withdraw/i })).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: /Withdraw/i })).toBeTruthy(),
+    );
     fireEvent.click(screen.getByRole("button", { name: /Withdraw/i }));
     await waitFor(() => {
       expect(withdrawSpecification).toHaveBeenCalledWith("tsp_1");
@@ -335,7 +353,11 @@ describe("APZQEP-ENG-050C Workbench journeys (mocked API)", () => {
         successorSpecificationId: "tsp_2",
         availableActions: [],
       }),
-      successor: baseDto({ id: "tsp_2", status: "draft", availableActions: ["updateDraft"] }),
+      successor: baseDto({
+        id: "tsp_2",
+        status: "draft",
+        availableActions: ["updateDraft"],
+      }),
     });
 
     render(
@@ -344,11 +366,15 @@ describe("APZQEP-ENG-050C Workbench journeys (mocked API)", () => {
       ),
     );
 
-    await waitFor(() => expect(screen.getByRole("button", { name: /Supersede/i })).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: /Supersede/i })).toBeTruthy(),
+    );
     fireEvent.click(screen.getByRole("button", { name: /Supersede/i }));
     await waitFor(() => {
       expect(supersedeSpecification).toHaveBeenCalled();
-      expect(pushMock).toHaveBeenCalledWith(QEP_TEST_SPECIFICATION_ROUTES.detail("tsp_2"));
+      expect(pushMock).toHaveBeenCalledWith(
+        QEP_TEST_SPECIFICATION_ROUTES.detail("tsp_2"),
+      );
     });
   });
 
@@ -423,7 +449,10 @@ describe("APZQEP-ENG-050C Workbench journeys (mocked API)", () => {
     vi.mocked(getSpecification).mockResolvedValue(
       baseDto({ availableActions: ["updateDraft"] }),
     );
-    const conflict = new Error("Revision conflict") as Error & { status?: number; code?: string };
+    const conflict = new Error("Revision conflict") as Error & {
+      status?: number;
+      code?: string;
+    };
     conflict.status = 409;
     conflict.code = "CONFLICT";
     vi.mocked(updateDraft).mockRejectedValue(conflict);

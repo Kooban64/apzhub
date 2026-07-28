@@ -118,24 +118,33 @@ export function createSpecificationRecord(
     objective: createSpecificationObjective(input.objective),
     scope: createSpecificationScope(input.scope),
     status: "draft",
-    version: createSpecificationVersion(input.majorVersion ?? 0, input.minorVersion ?? 1),
+    version: createSpecificationVersion(
+      input.majorVersion ?? 0,
+      input.minorVersion ?? 1,
+    ),
     type: createSpecificationType(input.type),
     priority: createSpecificationPriority(input.priority ?? "medium"),
     complexity: createSpecificationComplexity(input.complexity ?? "moderate"),
     classification: createSpecificationClassification(input.classification),
     owner: createSpecificationOwner(input.owner),
     author: createSpecificationAuthor(input.author),
-    ...(input.reviewer ? { reviewer: createSpecificationReviewer(input.reviewer) } : {}),
+    ...(input.reviewer
+      ? { reviewer: createSpecificationReviewer(input.reviewer) }
+      : {}),
     preconditions: createSpecificationPreconditions(input.preconditions ?? []),
     postconditions: createSpecificationPostconditions(input.postconditions ?? []),
-    acceptanceCriteria: createSpecificationAcceptanceCriteria(input.acceptanceCriteria ?? []),
+    acceptanceCriteria: createSpecificationAcceptanceCriteria(
+      input.acceptanceCriteria ?? [],
+    ),
     risks: (input.risks ?? []).map(createSpecificationRisk),
     dependencies: (input.dependencies ?? []).map(createSpecificationDependency),
     tags: (input.tags ?? []).map(createSpecificationTag),
     isAuthoritative: false,
     ...(input.predecessorSpecificationId
       ? {
-          predecessorSpecificationId: createSpecificationId(input.predecessorSpecificationId),
+          predecessorSpecificationId: createSpecificationId(
+            input.predecessorSpecificationId,
+          ),
         }
       : {}),
     ...(input.comparisonNotes?.trim()

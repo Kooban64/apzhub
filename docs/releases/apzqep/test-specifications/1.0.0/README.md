@@ -9,25 +9,25 @@
 
 ## Evidence catalogue
 
-| Artefact | Path |
-| -------- | ---- |
-| Owner Freeze Decision | [../../../products/apzqep/test-specifications/freeze/OWNER-FREEZE-DECISION.md](../../../products/apzqep/test-specifications/freeze/OWNER-FREEZE-DECISION.md) |
-| Owner Certification Decision | [../../../products/apzqep/test-specifications/capability-certification/OWNER-ACCEPTANCE.md](../../../products/apzqep/test-specifications/capability-certification/OWNER-ACCEPTANCE.md) |
-| Certification Report | [../../../products/apzqep/test-specifications/capability-certification/CERTIFICATION-REPORT.md](../../../products/apzqep/test-specifications/capability-certification/CERTIFICATION-REPORT.md) |
-| Quality Gates | [../../../products/apzqep/test-specifications/capability-certification/QUALITY-GATES.md](../../../products/apzqep/test-specifications/capability-certification/QUALITY-GATES.md) |
-| Known Limitations | [../../../products/apzqep/test-specifications/capability-certification/KNOWN-LIMITATIONS.md](../../../products/apzqep/test-specifications/capability-certification/KNOWN-LIMITATIONS.md) |
-| Version Promotion | [../../../products/apzqep/test-specifications/capability-certification/VERSION-PROMOTION.md](../../../products/apzqep/test-specifications/capability-certification/VERSION-PROMOTION.md) |
-| Freeze Notice | [../../../products/apzqep/test-specifications/capability-certification/FREEZE-NOTICE.md](../../../products/apzqep/test-specifications/capability-certification/FREEZE-NOTICE.md) |
-| Baseline Confirmation | [./BASELINE-CONFIRMATION.md](./BASELINE-CONFIRMATION.md) |
+| Artefact                     | Path                                                                                                                                                                                           |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Owner Freeze Decision        | [../../../products/apzqep/test-specifications/freeze/OWNER-FREEZE-DECISION.md](../../../products/apzqep/test-specifications/freeze/OWNER-FREEZE-DECISION.md)                                   |
+| Owner Certification Decision | [../../../products/apzqep/test-specifications/capability-certification/OWNER-ACCEPTANCE.md](../../../products/apzqep/test-specifications/capability-certification/OWNER-ACCEPTANCE.md)         |
+| Certification Report         | [../../../products/apzqep/test-specifications/capability-certification/CERTIFICATION-REPORT.md](../../../products/apzqep/test-specifications/capability-certification/CERTIFICATION-REPORT.md) |
+| Quality Gates                | [../../../products/apzqep/test-specifications/capability-certification/QUALITY-GATES.md](../../../products/apzqep/test-specifications/capability-certification/QUALITY-GATES.md)               |
+| Known Limitations            | [../../../products/apzqep/test-specifications/capability-certification/KNOWN-LIMITATIONS.md](../../../products/apzqep/test-specifications/capability-certification/KNOWN-LIMITATIONS.md)       |
+| Version Promotion            | [../../../products/apzqep/test-specifications/capability-certification/VERSION-PROMOTION.md](../../../products/apzqep/test-specifications/capability-certification/VERSION-PROMOTION.md)       |
+| Freeze Notice                | [../../../products/apzqep/test-specifications/capability-certification/FREEZE-NOTICE.md](../../../products/apzqep/test-specifications/capability-certification/FREEZE-NOTICE.md)               |
+| Baseline Confirmation        | [./BASELINE-CONFIRMATION.md](./BASELINE-CONFIRMATION.md)                                                                                                                                       |
 
 ## Version baseline
 
-| Field | Value |
-| ----- | ----- |
-| Current certified baseline | **1.0.0 CERTIFIED / FROZEN** |
-| Patch line | **1.0.x** (new Owner programmes only) |
-| Next minor (not authorised) | 1.1.0 |
-| Next major (not authorised) | 2.0.0 |
+| Field                       | Value                                 |
+| --------------------------- | ------------------------------------- |
+| Current certified baseline  | **1.0.0 CERTIFIED / FROZEN**          |
+| Patch line                  | **1.0.x** (new Owner programmes only) |
+| Next minor (not authorised) | 1.1.0                                 |
+| Next major (not authorised) | 2.0.0                                 |
 
 ## Final repository state (cited)
 

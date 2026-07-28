@@ -1,10 +1,10 @@
 # Release Recommendation — APZQEP-CERT-080A
 
-| Field | Value |
-| ----- | ----- |
-| Recommendation | **CAPABILITY CERTIFIED** — class **PRODUCTION_READY_WITH_LIMITATIONS**; promoted to **1.0.0** per Owner Certification Decision |
-| Binding | **BINDING** — Owner Certification Decision recorded: **CERTIFIED / APPROVED / CLOSED** (see [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)) |
-| Date | 2026-07-28 |
+| Field          | Value                                                                                                                                     |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Recommendation | **CAPABILITY CERTIFIED** — class **PRODUCTION_READY_WITH_LIMITATIONS**; promoted to **1.0.0** per Owner Certification Decision            |
+| Binding        | **BINDING** — Owner Certification Decision recorded: **CERTIFIED / APPROVED / CLOSED** (see [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)) |
+| Date           | 2026-07-28                                                                                                                                |
 
 ## Recommendation statement
 
@@ -20,11 +20,11 @@ The Test Plans capability — Domain, Infrastructure, and Workbench, all indepen
 
 ## Owner Decision recorded
 
-| Option | Effect |
-| ------ | ------ |
+| Option                                           | Effect                                                                                                                                                               |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **A — CERTIFIED / APPROVED / CLOSED** (selected) | Capability certified at class **PRODUCTION_READY_WITH_LIMITATIONS**; Version Promotion to 1.0.0 applied; Freeze eligibility recorded (not granted); programme closed |
-| B — CONDITIONAL / HOLD | Not selected |
-| C — NOT CERTIFIED | Not selected |
+| B — CONDITIONAL / HOLD                           | Not selected                                                                                                                                                         |
+| C — NOT CERTIFIED                                | Not selected                                                                                                                                                         |
 
 ## STOP
 

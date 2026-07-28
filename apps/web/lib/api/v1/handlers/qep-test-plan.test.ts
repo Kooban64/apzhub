@@ -105,7 +105,10 @@ describe("APZQEP-ENG-060B qep test plan handlers", () => {
     });
     const ctx = makeContext();
 
-    const list = await handleListQepTestPlans(makeRequest("/api/v1/qep/plans?limit=10"), ctx);
+    const list = await handleListQepTestPlans(
+      makeRequest("/api/v1/qep/plans?limit=10"),
+      ctx,
+    );
     expect(list.status).toBe(200);
     const listBody = await list.json();
     expect(Array.isArray(listBody.data)).toBe(true);
@@ -130,7 +133,9 @@ describe("APZQEP-ENG-060B qep test plan handlers", () => {
 
   it("gets a test plan by id and returns 404 when missing", async () => {
     bootstrap({
-      get: vi.fn(async (_ctx: unknown, id: string) => (id === "tpl_1" ? SAMPLE_PLAN : null)),
+      get: vi.fn(async (_ctx: unknown, id: string) =>
+        id === "tpl_1" ? SAMPLE_PLAN : null,
+      ),
     });
     const ctx = makeContext();
 
@@ -152,7 +157,11 @@ describe("APZQEP-ENG-060B qep test plan handlers", () => {
 
   it("updates plan content with expectedRevision", async () => {
     const gateway = bootstrap({
-      updateContent: vi.fn(async () => ({ ...SAMPLE_PLAN, title: "Updated title", revision: 2 })),
+      updateContent: vi.fn(async () => ({
+        ...SAMPLE_PLAN,
+        title: "Updated title",
+        revision: 2,
+      })),
     });
     const ctx = makeContext();
 
@@ -175,10 +184,20 @@ describe("APZQEP-ENG-060B qep test plan handlers", () => {
   it("adds a plan item, submits for review, and approves through the lifecycle", async () => {
     const gateway = bootstrap({
       addItem: vi.fn(async () => ({ ...SAMPLE_PLAN, revision: 2 })),
-      submitForReview: vi.fn(async () => ({ ...SAMPLE_PLAN, status: "review", revision: 3 })),
+      submitForReview: vi.fn(async () => ({
+        ...SAMPLE_PLAN,
+        status: "review",
+        revision: 3,
+      })),
       approve: vi.fn(async () => ({ ...SAMPLE_PLAN, status: "approved", revision: 4 })),
       listHistory: vi.fn(async () => [
-        { sequence: 1, at: "2026-07-27T10:00:00.000Z", actorId: "user_1", action: "created", summary: "Created" },
+        {
+          sequence: 1,
+          at: "2026-07-27T10:00:00.000Z",
+          actorId: "user_1",
+          action: "created",
+          summary: "Created",
+        },
       ]),
     });
     const ctx = makeContext();

@@ -2,14 +2,14 @@
 
 **Part 3 implemented but not Owner-accepted.**
 
-| Field | Value |
-| --- | --- |
-| Programme | APZQEP-ENG-020F |
-| Part | 3 — Requirements Workbench Exposure, Quality Assurance and Operational Readiness |
-| Status | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** |
-| Architecture | APZQEP-ARCH-006 **ACCEPTED / CLOSED / COMPLETE** |
-| Package | `@apzhub/qep-requirements` **0.10.0** (from 0.9.0) |
-| Evidence | `docs/operations/evidence/portfolio-recert/20260726T100000Z-APZQEP-ENG-020F-PART3.json` |
+| Field        | Value                                                                                   |
+| ------------ | --------------------------------------------------------------------------------------- |
+| Programme    | APZQEP-ENG-020F                                                                         |
+| Part         | 3 — Requirements Workbench Exposure, Quality Assurance and Operational Readiness        |
+| Status       | **IMPLEMENTED / AWAITING OWNER ACCEPTANCE**                                             |
+| Architecture | APZQEP-ARCH-006 **ACCEPTED / CLOSED / COMPLETE**                                        |
+| Package      | `@apzhub/qep-requirements` **0.10.0** (from 0.9.0)                                      |
+| Evidence     | `docs/operations/evidence/portfolio-recert/20260726T100000Z-APZQEP-ENG-020F-PART3.json` |
 
 ## Final repository state (required)
 
@@ -22,34 +22,34 @@ APZQEP-ENG-020F Part 3 — IMPLEMENTED / AWAITING OWNER ACCEPTANCE
 
 ## Files created (primary)
 
-| Path | Role |
-| --- | --- |
-| `apps/web/components/qep/qep-relationships-views.tsx` | Workbench UI |
-| `apps/web/components/qep/qep-relationships-views.test.tsx` | Component tests |
-| `apps/web/components/qep/qep-relationships-available-actions.test.ts` | Action contract tests |
-| `testing/playwright/e2e/apzqep-eng-020f-part3-relationships-workbench.spec.ts` | Route smoke E2E |
-| `docs/products/apzqep/requirements/relationships/PART3-IMPLEMENTATION.md` | Implementation notes |
-| `docs/products/apzqep/requirements/relationships/WORKBENCH-GUIDE.md` | User-facing technical guide |
-| `docs/products/apzqep/requirements/relationships/COMPONENT-ROUTE-MAP.md` | Routes / components |
-| `docs/products/apzqep/requirements/relationships/FRONTEND-API-USAGE.md` | Client API usage |
-| `docs/products/apzqep/requirements/relationships/PERMISSIONS.md` | Permissions |
-| `docs/products/apzqep/requirements/relationships/ACCESSIBILITY-EVIDENCE.md` | A11y evidence |
-| `docs/products/apzqep/requirements/relationships/OPERATIONAL-READINESS.md` | Ops readiness |
-| `docs/products/apzqep/requirements/relationships/ENGINEERING-EVIDENCE-PART3.md` | Engineering evidence |
-| `docs/products/apzqep/requirements/relationships/COMPLETION-REPORT-PART3.md` | This report |
-| `docs/operations/evidence/portfolio-recert/20260726T100000Z-APZQEP-ENG-020F-PART3.json` | Portfolio evidence |
-| `docs/products/apzqep/architecture/requirements-workbench/OWNER-ACCEPTANCE.md` | ARCH-006 acceptance |
+| Path                                                                                    | Role                        |
+| --------------------------------------------------------------------------------------- | --------------------------- |
+| `apps/web/components/qep/qep-relationships-views.tsx`                                   | Workbench UI                |
+| `apps/web/components/qep/qep-relationships-views.test.tsx`                              | Component tests             |
+| `apps/web/components/qep/qep-relationships-available-actions.test.ts`                   | Action contract tests       |
+| `testing/playwright/e2e/apzqep-eng-020f-part3-relationships-workbench.spec.ts`          | Route smoke E2E             |
+| `docs/products/apzqep/requirements/relationships/PART3-IMPLEMENTATION.md`               | Implementation notes        |
+| `docs/products/apzqep/requirements/relationships/WORKBENCH-GUIDE.md`                    | User-facing technical guide |
+| `docs/products/apzqep/requirements/relationships/COMPONENT-ROUTE-MAP.md`                | Routes / components         |
+| `docs/products/apzqep/requirements/relationships/FRONTEND-API-USAGE.md`                 | Client API usage            |
+| `docs/products/apzqep/requirements/relationships/PERMISSIONS.md`                        | Permissions                 |
+| `docs/products/apzqep/requirements/relationships/ACCESSIBILITY-EVIDENCE.md`             | A11y evidence               |
+| `docs/products/apzqep/requirements/relationships/OPERATIONAL-READINESS.md`              | Ops readiness               |
+| `docs/products/apzqep/requirements/relationships/ENGINEERING-EVIDENCE-PART3.md`         | Engineering evidence        |
+| `docs/products/apzqep/requirements/relationships/COMPLETION-REPORT-PART3.md`            | This report                 |
+| `docs/operations/evidence/portfolio-recert/20260726T100000Z-APZQEP-ENG-020F-PART3.json` | Portfolio evidence          |
+| `docs/products/apzqep/architecture/requirements-workbench/OWNER-ACCEPTANCE.md`          | ARCH-006 acceptance         |
 
 ## Files modified (primary)
 
-| Path | Change |
-| --- | --- |
-| `packages/qep-requirements` presentation routes/nav/`module.yaml` | Relationships routes + sidebar |
-| `packages/qep-requirements/src/index.ts` / `package.json` | Version **0.10.0** + programme marker |
-| `apps/web/lib/qep/qep-api.ts`, `query-keys.ts`, `telemetry.ts` | Relationship clients / keys / signals |
-| `apps/web/components/qep/qep-requirements-views.tsx` | Router + Requirement relationships panel |
-| Foundation governance docs | Milestone / state / backlog / catalogues |
-| `docs/products/apzqep/CHANGELOG.md` | Part 3 entry |
+| Path                                                              | Change                                   |
+| ----------------------------------------------------------------- | ---------------------------------------- |
+| `packages/qep-requirements` presentation routes/nav/`module.yaml` | Relationships routes + sidebar           |
+| `packages/qep-requirements/src/index.ts` / `package.json`         | Version **0.10.0** + programme marker    |
+| `apps/web/lib/qep/qep-api.ts`, `query-keys.ts`, `telemetry.ts`    | Relationship clients / keys / signals    |
+| `apps/web/components/qep/qep-requirements-views.tsx`              | Router + Requirement relationships panel |
+| Foundation governance docs                                        | Milestone / state / backlog / catalogues |
+| `docs/products/apzqep/CHANGELOG.md`                               | Part 3 entry                             |
 
 ## Routes implemented
 
@@ -61,14 +61,14 @@ APZQEP-ENG-020F Part 3 — IMPLEMENTED / AWAITING OWNER ACCEPTANCE
 
 ## Workbench components
 
-| Component | Role |
-| --- | --- |
-| `QepRelationshipsListView` | Relationship Explorer |
-| `QepRelationshipCreateView` | Guided create |
-| `QepRelationshipSupersedeView` | Supersede workflow |
-| `QepRelationshipDetailView` | Multi-pane inspector + actions |
-| `QepRequirementRelationshipsPanel` | Requirement-side counts / shortcuts |
-| `QepRelationshipsRouter` | Route dispatch inside Requirements module |
+| Component                          | Role                                      |
+| ---------------------------------- | ----------------------------------------- |
+| `QepRelationshipsListView`         | Relationship Explorer                     |
+| `QepRelationshipCreateView`        | Guided create                             |
+| `QepRelationshipSupersedeView`     | Supersede workflow                        |
+| `QepRelationshipDetailView`        | Multi-pane inspector + actions            |
+| `QepRequirementRelationshipsPanel` | Requirement-side counts / shortcuts       |
+| `QepRelationshipsRouter`           | Route dispatch inside Requirements module |
 
 ## Requirement Explorer changes
 
@@ -128,18 +128,18 @@ Multi-pane detail uses existing Workbench grid; narrower viewports rely on stack
 
 ## Tests added
 
-| Suite | Result |
-| --- | --- |
+| Suite                                    | Result   |
+| ---------------------------------------- | -------- |
 | `@apzhub/qep-requirements` package (105) | **PASS** |
-| Relationships Workbench components (7) | **PASS** |
-| availableActions contract (4) | **PASS** |
-| Playwright route smoke | Added |
+| Relationships Workbench components (7)   | **PASS** |
+| availableActions contract (4)            | **PASS** |
+| Playwright route smoke                   | Added    |
 
 ## Validation / build
 
-- Package tests: PASS  
-- Relationships Vitest: PASS  
-- Architecture boundary marker: `APZQEP-ENG-020F Part 3 IMPLEMENTED AWAITING OWNER ACCEPTANCE`  
+- Package tests: PASS
+- Relationships Vitest: PASS
+- Architecture boundary marker: `APZQEP-ENG-020F Part 3 IMPLEMENTED AWAITING OWNER ACCEPTANCE`
 - Production build of full monorepo not re-run in this turn; package typecheck/tests green
 
 ## Operational documents
@@ -148,8 +148,8 @@ Multi-pane detail uses existing Workbench grid; narrower viewports rely on stack
 
 ## Version changes
 
-| Package | From | To |
-| --- | --- | --- |
+| Package                    | From  | To         |
+| -------------------------- | ----- | ---------- |
 | `@apzhub/qep-requirements` | 0.9.0 | **0.10.0** |
 
 ## Known limitations

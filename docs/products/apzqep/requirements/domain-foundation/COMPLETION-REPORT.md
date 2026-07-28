@@ -22,15 +22,15 @@ Owner brief listed `docs/products/apzqep/requirements/`. That path already holds
 
 ## Deliverables
 
-| Artefact           | Location                                                                |
-| ------------------ | ----------------------------------------------------------------------- |
-| Domain package     | `packages/qep-requirements/`                                            |
-| Module manifest    | `modules/qep-requirements/module.yaml`                                  |
-| Placeholder UI     | `apps/web/components/qep/*`                                             |
-| Unit tests         | `packages/qep-requirements/src/**/*.test.ts`, `tests/contracts.test.ts` |
-| Audit script       | `scripts/apzqep-eng-020a-requirements-foundation-audit.mjs`             |
+| Artefact           | Location                                                                          |
+| ------------------ | --------------------------------------------------------------------------------- |
+| Domain package     | `packages/qep-requirements/`                                                      |
+| Module manifest    | `modules/qep-requirements/module.yaml`                                            |
+| Placeholder UI     | `apps/web/components/qep/*`                                                       |
+| Unit tests         | `packages/qep-requirements/src/**/*.test.ts`, `tests/contracts.test.ts`           |
+| Audit script       | `scripts/apzqep-eng-020a-requirements-foundation-audit.mjs`                       |
 | Evidence           | `docs/operations/evidence/portfolio-recert/20260724T213000Z-APZQEP-ENG-020A.json` |
-| Documentation pack | this directory                                                          |
+| Documentation pack | this directory                                                                    |
 
 ## Confirmations
 

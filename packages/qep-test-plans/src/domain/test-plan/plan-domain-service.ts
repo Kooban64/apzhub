@@ -2,10 +2,15 @@ import { PlanLineageError } from "../../shared/errors";
 import { PLAN_INITIAL_VERSION_LABEL, SUPERSEDE_ELIGIBLE_STATUSES } from "./constants";
 import { createEmptyTestPlanHistory } from "./plan-history";
 import { createTestPlanAssignment } from "./plan-assignment";
-import { clearScheduleDates, createTestPlanSchedule } from "./plan-schedule";
+import { clearScheduleDates } from "./plan-schedule";
 import type { TestPlan } from "./test-plan";
 import { isActiveItem, type TestPlanItem } from "./plan-item";
-import type { ExecutionReadiness, PlanMetrics, PlanScope, PlanStatus } from "./value-objects";
+import type {
+  ExecutionReadiness,
+  PlanMetrics,
+  PlanScope,
+  PlanStatus,
+} from "./value-objects";
 import {
   cloneTitleFromSource,
   createPlanObjective,
@@ -71,11 +76,17 @@ export const PlanReadinessService = {
 
 export const PlanLineageService = {
   assertSupersedeAllowed(plan: TestPlan): void {
-    if (!SUPERSEDE_ELIGIBLE_STATUSES.includes(plan.status as (typeof SUPERSEDE_ELIGIBLE_STATUSES)[number])) {
+    if (
+      !SUPERSEDE_ELIGIBLE_STATUSES.includes(
+        plan.status as (typeof SUPERSEDE_ELIGIBLE_STATUSES)[number],
+      )
+    ) {
       throw new PlanLineageError(`Plan in ${plan.status} status cannot be superseded`);
     }
     if (plan.successorPlanId) {
-      throw new PlanLineageError("Plan already has a successor and cannot be superseded again");
+      throw new PlanLineageError(
+        "Plan already has a successor and cannot be superseded again",
+      );
     }
   },
 };
@@ -98,7 +109,9 @@ export const PlanCloneService = {
   > & {
     readonly revision: 1;
   } {
-    const title = createPlanTitle(input.title ?? cloneTitleFromSource(input.source.title));
+    const title = createPlanTitle(
+      input.title ?? cloneTitleFromSource(input.source.title),
+    );
     const items = input.source.items
       .filter((item) => isActiveItem(item))
       .map((item) => ({ ...item }));
@@ -116,7 +129,9 @@ export const PlanCloneService = {
       planType: input.source.scope.class,
       ownerId: input.source.ownerId,
       versionLabel: PLAN_INITIAL_VERSION_LABEL,
-      ...(input.predecessorPlanId ? { predecessorPlanId: input.predecessorPlanId } : {}),
+      ...(input.predecessorPlanId
+        ? { predecessorPlanId: input.predecessorPlanId }
+        : {}),
       ...(input.predecessorSealedVersionLabel
         ? { predecessorSealedVersionLabel: input.predecessorSealedVersionLabel }
         : {}),
@@ -152,8 +167,9 @@ export const PlanMetricsCalculator = {
       includedCount: included.length,
       optionalCount: active.filter((item) => item.itemStatus === "optional").length,
       deferredCount: active.filter((item) => item.itemStatus === "deferred").length,
-      pinnedIncludedCount: included.filter((item) => Boolean(item.specificationVersionPin?.trim()))
-        .length,
+      pinnedIncludedCount: included.filter((item) =>
+        Boolean(item.specificationVersionPin?.trim()),
+      ).length,
     };
   },
 };

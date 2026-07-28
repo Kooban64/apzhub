@@ -143,9 +143,9 @@ describe("RequirementRelationshipApplicationService", () => {
     );
     expect(audits.some((entry) => entry.action.includes("activated"))).toBe(true);
     expect(audits.some((entry) => entry.action.includes("retired"))).toBe(true);
-    expect(observations.some((entry) => entry.startsWith("relationship.activate:success"))).toBe(
-      true,
-    );
+    expect(
+      observations.some((entry) => entry.startsWith("relationship.activate:success")),
+    ).toBe(true);
   });
 
   it("does not corrupt relationship state when a search hook throws", async () => {

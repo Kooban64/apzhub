@@ -2,15 +2,15 @@
 
 **APZQEP-ENG-040C is Owner-accepted and closed.**
 
-| Field | Value |
-| ----- | ----- |
-| Programme | **APZQEP-ENG-040C** |
-| Title | Verification Workbench Engineering |
-| Package at acceptance | `@apzhub/qep-verification` **0.3.0** |
-| Status | **ACCEPTED / CLOSED / COMPLETE** |
-| Architecture | APZQEP-ARCH-010 **ACCEPTED** |
-| Acceptance | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) |
-| Downstream | **APZQEP-CERT-040D** — [capability-certification](../capability-certification/README.md) |
+| Field                 | Value                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| Programme             | **APZQEP-ENG-040C**                                                                      |
+| Title                 | Verification Workbench Engineering                                                       |
+| Package at acceptance | `@apzhub/qep-verification` **0.3.0**                                                     |
+| Status                | **ACCEPTED / CLOSED / COMPLETE**                                                         |
+| Architecture          | APZQEP-ARCH-010 **ACCEPTED**                                                             |
+| Acceptance            | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                                             |
+| Downstream            | **APZQEP-CERT-040D** — [capability-certification](../capability-certification/README.md) |
 
 ## Delivered
 

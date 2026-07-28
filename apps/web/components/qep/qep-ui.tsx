@@ -41,9 +41,13 @@ export function QepPageShell({
               </ol>
             </nav>
           ) : null}
-          <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">{title}</h1>
+          <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">
+            {title}
+          </h1>
           {description ? (
-            <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">{description}</p>
+            <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+              {description}
+            </p>
           ) : null}
         </div>
         {actions ? (
@@ -86,7 +90,13 @@ export function QepErrorState({
     >
       <p className="text-[var(--color-destructive)]">{message}</p>
       {onRetry ? (
-        <Button type="button" variant="outline" size="sm" className="mt-3" onClick={onRetry}>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="mt-3"
+          onClick={onRetry}
+        >
           Retry
         </Button>
       ) : null}

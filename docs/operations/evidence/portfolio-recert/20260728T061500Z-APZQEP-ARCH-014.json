@@ -24,7 +24,15 @@
     "domain": "@apzhub/qep-test-plans 0.1.0 CERTIFIED (APZQEP-OES-ENG-060A / APZQEP-ENG-060A / APZQEP-CERT-060A) — DOMAIN_PRODUCTION_READY_WITH_LIMITATIONS",
     "infrastructure": "@apzhub/qep-test-plans 0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED (APZQEP-OES-ENG-060B / APZQEP-ENG-060B / APZQEP-CERT-060B) — INFRASTRUCTURE_PRODUCTION_READY_WITH_LIMITATIONS",
     "shellPrecedent": "APZQEP-OES-ARCH-012 (Test Specifications Workbench Architecture)",
-    "foundation": ["Document 000", "OES-000", "OES-001", "OES-002", "Document 005", "Document 016", "Document 017"]
+    "foundation": [
+      "Document 000",
+      "OES-000",
+      "OES-001",
+      "OES-002",
+      "Document 005",
+      "Document 016",
+      "Document 017"
+    ]
   },
   "deliverables": [
     "PART-01.md",

@@ -5,7 +5,9 @@ export type VerificationResultSummary = string & {
   readonly __brand: "VerificationResultSummary";
 };
 
-export function createVerificationResultSummary(value: string): VerificationResultSummary {
+export function createVerificationResultSummary(
+  value: string,
+): VerificationResultSummary {
   const normalized = value.trim();
   if (!normalized) {
     throw new VerificationInvariantViolation(

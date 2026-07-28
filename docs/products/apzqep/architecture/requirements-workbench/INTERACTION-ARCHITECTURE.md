@@ -4,15 +4,15 @@
 
 ## Core interaction rules
 
-| Concern | Rule |
-| --- | --- |
-| Selection | One primary selection; multi-select enters bulk mode |
-| Authority | Server `availableActions` + permissions; UI never invents authority |
-| Mutations | Explicit commands; dirty local draft until save succeeds |
-| Immutability | Locked Baselines, Content Versions, retired Relationships are read-only |
-| Commands | Prefer Command Palette (019) for power paths |
-| Feedback | Validation → inline + Activity; Attention Engine for notifications (021) |
-| Escape hatches | Graph → “Open as list”; compare → open artefacts in split |
+| Concern        | Rule                                                                     |
+| -------------- | ------------------------------------------------------------------------ |
+| Selection      | One primary selection; multi-select enters bulk mode                     |
+| Authority      | Server `availableActions` + permissions; UI never invents authority      |
+| Mutations      | Explicit commands; dirty local draft until save succeeds                 |
+| Immutability   | Locked Baselines, Content Versions, retired Relationships are read-only  |
+| Commands       | Prefer Command Palette (019) for power paths                             |
+| Feedback       | Validation → inline + Activity; Attention Engine for notifications (021) |
+| Escape hatches | Graph → “Open as list”; compare → open artefacts in split                |
 
 ## Keyboard
 

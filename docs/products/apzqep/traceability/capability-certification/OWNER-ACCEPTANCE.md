@@ -6,13 +6,13 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-TRACE-001 — Traceability Capability Certification & Baseline |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Package | `@apzhub/qep-traceability` **1.0.0** |
-| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS** |
-| Recommendation | **PRODUCTION READY** |
+| Field               | Value                                                                                         |
+| ------------------- | --------------------------------------------------------------------------------------------- |
+| Programme           | APZQEP-TRACE-001 — Traceability Capability Certification & Baseline                           |
+| Decision            | **ACCEPTED / CLOSED / COMPLETE**                                                              |
+| Package             | `@apzhub/qep-traceability` **1.0.0**                                                          |
+| Certification class | **PRODUCTION_READY_WITH_LIMITATIONS**                                                         |
+| Recommendation      | **PRODUCTION READY**                                                                          |
 | Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T172000Z-APZQEP-TRACE-001-ACCEPTANCE.json` |
 
 ## Effect

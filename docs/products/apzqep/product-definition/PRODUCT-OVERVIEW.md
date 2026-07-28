@@ -129,13 +129,13 @@ Quality before Testing · Verification before Execution · Evidence before Opini
 
 ## Coexistence of verification methods
 
-| Method | Role | MVP |
-| ------ | ---- | --- |
-| Manual | First-class structured + exploratory | **Required** |
-| Automated | Ingest/govern results; not a runner | Foundation ingest |
-| AI-assisted | Draft/review under human gates | Default OFF |
-| Continuous | Ongoing signals | Later phase |
-| Hybrid | Combine methods against same requirement | Supported pattern |
+| Method      | Role                                     | MVP               |
+| ----------- | ---------------------------------------- | ----------------- |
+| Manual      | First-class structured + exploratory     | **Required**      |
+| Automated   | Ingest/govern results; not a runner      | Foundation ingest |
+| AI-assisted | Draft/review under human gates           | Default OFF       |
+| Continuous  | Ongoing signals                          | Later phase       |
+| Hybrid      | Combine methods against same requirement | Supported pattern |
 
 ## Product boundaries (summary)
 

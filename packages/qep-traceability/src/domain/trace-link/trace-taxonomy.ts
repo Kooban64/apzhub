@@ -306,7 +306,9 @@ export function assertNormativeTaxonomyComplete(): void {
   const taxonomyTypes = new Set(NORMATIVE_TRACE_TAXONOMY.map((d) => d.type));
   for (const type of TRACE_TYPES) {
     if (!taxonomyTypes.has(type)) {
-      throw new TraceInvariantViolation(`Missing taxonomy definition for Trace Type ${type}`);
+      throw new TraceInvariantViolation(
+        `Missing taxonomy definition for Trace Type ${type}`,
+      );
     }
   }
 }

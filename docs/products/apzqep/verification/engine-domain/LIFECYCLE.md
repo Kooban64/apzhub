@@ -23,31 +23,31 @@ withdrawn, cancelled, retired, superseded → (terminal — no further transitio
 
 ## Behavioural rules
 
-| Rule | Detail |
-| ---- | ------ |
-| Create | Always starts in `draft`; no outcome |
-| Completion | `verifyVerification` → `verified` + success outcome; `rejectVerification` → `rejected` + failure outcome |
-| Outcome required | `verified` / `rejected` must carry an outcome |
-| Mutable window | Field updates allowed only in `draft` · `requested` · `assigned` · `in_progress` |
-| Terminal immutability | `withdrawn` · `cancelled` · `retired` · `superseded` are immutable |
-| No delete | History preserved; supersession records successor id |
-| Re-open | `rejected` / `expired` may return to `requested` |
+| Rule                  | Detail                                                                                                   |
+| --------------------- | -------------------------------------------------------------------------------------------------------- |
+| Create                | Always starts in `draft`; no outcome                                                                     |
+| Completion            | `verifyVerification` → `verified` + success outcome; `rejectVerification` → `rejected` + failure outcome |
+| Outcome required      | `verified` / `rejected` must carry an outcome                                                            |
+| Mutable window        | Field updates allowed only in `draft` · `requested` · `assigned` · `in_progress`                         |
+| Terminal immutability | `withdrawn` · `cancelled` · `retired` · `superseded` are immutable                                       |
+| No delete             | History preserved; supersession records successor id                                                     |
+| Re-open               | `rejected` / `expired` may return to `requested`                                                         |
 
 ## Aggregate operations
 
-| Operation | Target status | Events |
-| --------- | ------------- | ------ |
-| `createVerification` | `draft` | `created` |
-| `requestVerification` | `requested` | `requested` |
-| `assignVerification` | `assigned` | `assigned` |
-| `startVerification` | `in_progress` | `started` |
-| `verifyVerification` | `verified` | `verified` + `completed` |
-| `rejectVerification` | `rejected` | `rejected` + `completed` (+ `failed` if outcome=`failed`) |
-| `expireVerification` | `expired` | `expired` |
-| `withdrawVerification` | `withdrawn` | `withdrawn` |
-| `supersedeVerification` | `superseded` | `superseded` |
-| `cancelVerification` | `cancelled` | `cancelled` |
-| `retireVerification` | `retired` | `retired` |
+| Operation               | Target status | Events                                                    |
+| ----------------------- | ------------- | --------------------------------------------------------- |
+| `createVerification`    | `draft`       | `created`                                                 |
+| `requestVerification`   | `requested`   | `requested`                                               |
+| `assignVerification`    | `assigned`    | `assigned`                                                |
+| `startVerification`     | `in_progress` | `started`                                                 |
+| `verifyVerification`    | `verified`    | `verified` + `completed`                                  |
+| `rejectVerification`    | `rejected`    | `rejected` + `completed` (+ `failed` if outcome=`failed`) |
+| `expireVerification`    | `expired`     | `expired`                                                 |
+| `withdrawVerification`  | `withdrawn`   | `withdrawn`                                               |
+| `supersedeVerification` | `superseded`  | `superseded`                                              |
+| `cancelVerification`    | `cancelled`   | `cancelled`                                               |
+| `retireVerification`    | `retired`     | `retired`                                                 |
 
 ## Status ≠ Outcome
 

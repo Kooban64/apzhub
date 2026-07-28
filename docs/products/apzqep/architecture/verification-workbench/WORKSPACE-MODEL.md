@@ -12,8 +12,8 @@ Verification Explorer · My Verification Queue · Team Verification Queue · Ver
 
 ## Pane rules
 
-- Queues / Explorer left-primary  
-- Inspector / Timeline / History share right rail  
-- One primary selection; multi-select for bulk  
-- Future slots: governed unavailable, no placeholders  
+- Queues / Explorer left-primary
+- Inspector / Timeline / History share right rail
+- One primary selection; multi-select for bulk
+- Future slots: governed unavailable, no placeholders
 - UI state via 018/023 only (references + layout)

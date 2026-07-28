@@ -1,10 +1,10 @@
 # Persistence — Trace Links
 
-| Field | Value |
-| --- | --- |
-| Migrations | `0079_apz_qep_trace_link.sql`, `0080_apz_qep_trace_link_rls.sql` |
-| Schema | `packages/config/src/db/qep-traceability-schema.ts` |
-| Tables | `qep_trace_link`, `qep_trace_link_history`, `qep_trace_link_taxonomy` |
+| Field      | Value                                                                 |
+| ---------- | --------------------------------------------------------------------- |
+| Migrations | `0079_apz_qep_trace_link.sql`, `0080_apz_qep_trace_link_rls.sql`      |
+| Schema     | `packages/config/src/db/qep-traceability-schema.ts`                   |
+| Tables     | `qep_trace_link`, `qep_trace_link_history`, `qep_trace_link_taxonomy` |
 
 ## Design notes
 

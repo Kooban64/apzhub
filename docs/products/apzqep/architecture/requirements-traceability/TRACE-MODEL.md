@@ -16,8 +16,8 @@ Requirements projection · Specification · Test design · Execution · Evidence
 
 ## Semantic vs Trace
 
-| Layer | Owner |
-| ----- | ----- |
-| ARCH-005 Relationship Types | Requirements |
-| Cross-domain Trace Types | Traceability |
-| Derived projections | Traceability (read models) |
+| Layer                       | Owner                      |
+| --------------------------- | -------------------------- |
+| ARCH-005 Relationship Types | Requirements               |
+| Cross-domain Trace Types    | Traceability               |
+| Derived projections         | Traceability (read models) |

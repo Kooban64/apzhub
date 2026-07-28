@@ -39,26 +39,26 @@ OES-CERTIFICATION-INDEPENDENCE / OES-CERTIFICATION-LEVELS
 
 ## Pack
 
-| Document | Path |
-| -------- | ---- |
-| Owner Certification Decision (template, PENDING) | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) |
-| Owner Summary | [OWNER-SUMMARY.md](./OWNER-SUMMARY.md) |
-| Certification Report | [CERTIFICATION-REPORT.md](./CERTIFICATION-REPORT.md) |
-| Completion Report | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md) |
-| Architecture Review (cross-layer integration) | [ARCHITECTURE-REVIEW.md](./ARCHITECTURE-REVIEW.md) |
-| Engineering Review (consolidated Domain/Infra/Workbench) | [ENGINEERING-REVIEW.md](./ENGINEERING-REVIEW.md) |
-| Evidence Pack | [EVIDENCE-PACK.md](./EVIDENCE-PACK.md) |
-| Quality Gates | [QUALITY-GATES.md](./QUALITY-GATES.md) |
-| Test Results | [TEST-RESULTS.md](./TEST-RESULTS.md) |
-| Security Review | [SECURITY-REVIEW.md](./SECURITY-REVIEW.md) |
-| Performance Review | [PERFORMANCE-REVIEW.md](./PERFORMANCE-REVIEW.md) |
-| Operational Readiness | [OPERATIONAL-READINESS.md](./OPERATIONAL-READINESS.md) |
-| Accessibility Review | [ACCESSIBILITY-REVIEW.md](./ACCESSIBILITY-REVIEW.md) |
-| Known Limitations (consolidated) | [KNOWN-LIMITATIONS.md](./KNOWN-LIMITATIONS.md) |
-| Version Promotion (recommendation only) | [VERSION-PROMOTION.md](./VERSION-PROMOTION.md) |
-| Release Recommendation | [RELEASE-RECOMMENDATION.md](./RELEASE-RECOMMENDATION.md) |
-| Release Notes (draft, 1.0.0) | [RELEASE-NOTES.md](./RELEASE-NOTES.md) |
-| Freeze Notice (eligibility recommendation only) | [FREEZE-NOTICE.md](./FREEZE-NOTICE.md) |
+| Document                                                 | Path                                                     |
+| -------------------------------------------------------- | -------------------------------------------------------- |
+| Owner Certification Decision (template, PENDING)         | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)             |
+| Owner Summary                                            | [OWNER-SUMMARY.md](./OWNER-SUMMARY.md)                   |
+| Certification Report                                     | [CERTIFICATION-REPORT.md](./CERTIFICATION-REPORT.md)     |
+| Completion Report                                        | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)           |
+| Architecture Review (cross-layer integration)            | [ARCHITECTURE-REVIEW.md](./ARCHITECTURE-REVIEW.md)       |
+| Engineering Review (consolidated Domain/Infra/Workbench) | [ENGINEERING-REVIEW.md](./ENGINEERING-REVIEW.md)         |
+| Evidence Pack                                            | [EVIDENCE-PACK.md](./EVIDENCE-PACK.md)                   |
+| Quality Gates                                            | [QUALITY-GATES.md](./QUALITY-GATES.md)                   |
+| Test Results                                             | [TEST-RESULTS.md](./TEST-RESULTS.md)                     |
+| Security Review                                          | [SECURITY-REVIEW.md](./SECURITY-REVIEW.md)               |
+| Performance Review                                       | [PERFORMANCE-REVIEW.md](./PERFORMANCE-REVIEW.md)         |
+| Operational Readiness                                    | [OPERATIONAL-READINESS.md](./OPERATIONAL-READINESS.md)   |
+| Accessibility Review                                     | [ACCESSIBILITY-REVIEW.md](./ACCESSIBILITY-REVIEW.md)     |
+| Known Limitations (consolidated)                         | [KNOWN-LIMITATIONS.md](./KNOWN-LIMITATIONS.md)           |
+| Version Promotion (recommendation only)                  | [VERSION-PROMOTION.md](./VERSION-PROMOTION.md)           |
+| Release Recommendation                                   | [RELEASE-RECOMMENDATION.md](./RELEASE-RECOMMENDATION.md) |
+| Release Notes (draft, 1.0.0)                             | [RELEASE-NOTES.md](./RELEASE-NOTES.md)                   |
+| Freeze Notice (eligibility recommendation only)          | [FREEZE-NOTICE.md](./FREEZE-NOTICE.md)                   |
 
 ## Lifecycle
 

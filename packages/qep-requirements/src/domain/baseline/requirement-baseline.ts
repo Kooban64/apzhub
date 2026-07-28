@@ -122,7 +122,9 @@ export function removeRequirementBaselineItem(
   changedBy: string,
 ): RequirementBaseline {
   assertRequirementBaselineDraftMutable(baseline);
-  const items = baseline.items.filter((item) => item.contentVersionId !== contentVersionId);
+  const items = baseline.items.filter(
+    (item) => item.contentVersionId !== contentVersionId,
+  );
   if (items.length === baseline.items.length) {
     throw new QepInvariantViolation("Baseline item content version was not included");
   }
@@ -171,7 +173,9 @@ export function transitionRequirementBaseline(
   const actor = changedBy.trim();
   const at = changedAt.trim();
   if (!actor || !at) {
-    throw new QepInvariantViolation("Requirement baseline transition requires changedAt and changedBy");
+    throw new QepInvariantViolation(
+      "Requirement baseline transition requires changedAt and changedBy",
+    );
   }
   if (to === "locked") {
     assertRequirementBaselineLockEligible(baseline);
@@ -214,7 +218,13 @@ export function lockRequirementBaseline(
   changedAt: string,
   changedBy: string,
 ): RequirementBaseline {
-  return transitionRequirementBaseline(baseline, "locked", changedAt, changedBy, membership);
+  return transitionRequirementBaseline(
+    baseline,
+    "locked",
+    changedAt,
+    changedBy,
+    membership,
+  );
 }
 
 export function archiveRequirementBaseline(
@@ -234,7 +244,9 @@ function withDraftChange(
   const actor = changedBy.trim();
   const at = changedAt.trim();
   if (!actor || !at) {
-    throw new QepInvariantViolation("Draft baseline change requires changedAt and changedBy");
+    throw new QepInvariantViolation(
+      "Draft baseline change requires changedAt and changedBy",
+    );
   }
   return { ...baseline, ...change, updatedAt: at, updatedBy: actor };
 }

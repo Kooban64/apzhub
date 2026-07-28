@@ -12,11 +12,21 @@ export type RequirementSnapshot = {
   readonly type: string;
   readonly priority: string;
   readonly category: string | null;
-  readonly owner: { readonly userId: string; readonly displayName: string | null } | null;
+  readonly owner: {
+    readonly userId: string;
+    readonly displayName: string | null;
+  } | null;
   readonly approvalState: string;
-  readonly semver: { readonly major: number; readonly minor: number; readonly patch: number };
+  readonly semver: {
+    readonly major: number;
+    readonly minor: number;
+    readonly patch: number;
+  };
   readonly acceptanceCriteria: { readonly items: readonly string[] } | null;
-  readonly attributes: { readonly tags: readonly string[]; readonly custom: Readonly<Record<string, string>> };
+  readonly attributes: {
+    readonly tags: readonly string[];
+    readonly custom: Readonly<Record<string, string>>;
+  };
   readonly references: readonly {
     readonly system: string;
     readonly externalId: string;
@@ -30,7 +40,9 @@ export type RequirementSnapshot = {
   readonly schemaVersion: typeof SNAPSHOT_SCHEMA_V1;
 };
 
-export function buildCanonicalSnapshot(requirement: PersistedRequirement): RequirementSnapshot {
+export function buildCanonicalSnapshot(
+  requirement: PersistedRequirement,
+): RequirementSnapshot {
   return {
     requirementId: requirement.id,
     key: requirement.key,
@@ -40,7 +52,10 @@ export function buildCanonicalSnapshot(requirement: PersistedRequirement): Requi
     priority: requirement.priority,
     category: requirement.category ?? null,
     owner: requirement.owner
-      ? { userId: requirement.owner.userId, displayName: requirement.owner.displayName ?? null }
+      ? {
+          userId: requirement.owner.userId,
+          displayName: requirement.owner.displayName ?? null,
+        }
       : null,
     approvalState: requirement.approvalState,
     semver: { ...requirement.version },
@@ -50,7 +65,9 @@ export function buildCanonicalSnapshot(requirement: PersistedRequirement): Requi
     attributes: {
       tags: [...requirement.attributes.tags].sort(),
       custom: Object.fromEntries(
-        Object.entries(requirement.attributes.custom).sort(([a], [b]) => a.localeCompare(b)),
+        Object.entries(requirement.attributes.custom).sort(([a], [b]) =>
+          a.localeCompare(b),
+        ),
       ),
     },
     references: requirement.references.map((reference) => ({
@@ -59,7 +76,10 @@ export function buildCanonicalSnapshot(requirement: PersistedRequirement): Requi
       label: reference.label ?? null,
     })),
     baseline: requirement.baseline
-      ? { baselineId: requirement.baseline.baselineId, label: requirement.baseline.label }
+      ? {
+          baselineId: requirement.baseline.baselineId,
+          label: requirement.baseline.label,
+        }
       : null,
     status: requirement.status,
     sourceRevision: requirement.revision,
@@ -89,8 +109,13 @@ export function computeSnapshotHash(snapshot: RequirementSnapshot): string {
   return createHash(HASH_ALG).update(canonicalizeToJson(snapshot)).digest("hex");
 }
 
-export function verifyIntegrity(snapshot: RequirementSnapshot, expectedHash: string): void {
+export function verifyIntegrity(
+  snapshot: RequirementSnapshot,
+  expectedHash: string,
+): void {
   if (computeSnapshotHash(snapshot) !== expectedHash) {
-    throw new QepVersionIntegrityError("Requirement content version snapshot integrity check failed");
+    throw new QepVersionIntegrityError(
+      "Requirement content version snapshot integrity check failed",
+    );
   }
 }

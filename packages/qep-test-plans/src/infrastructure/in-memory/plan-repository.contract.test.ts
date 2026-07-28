@@ -1,8 +1,18 @@
 import { describe, expect, it } from "vitest";
 
-import { createTestPlan, updateTestPlanContent } from "../../domain/test-plan/test-plan";
-import { PlanConcurrencyError, PlanConflictError, PlanNotFoundError } from "../../shared/errors";
-import { createEmptyTestPlanStore, createInMemoryTestPlanRepository } from "./plan-repository";
+import {
+  createTestPlan,
+  updateTestPlanContent,
+} from "../../domain/test-plan/test-plan";
+import {
+  PlanConcurrencyError,
+  PlanConflictError,
+  PlanNotFoundError,
+} from "../../shared/errors";
+import {
+  createEmptyTestPlanStore,
+  createInMemoryTestPlanRepository,
+} from "./plan-repository";
 
 const TENANT = "tenant_plan_contract";
 const ACTOR = "user_plan_contract";
@@ -71,9 +81,9 @@ describe("TestPlanRepository contract (in-memory)", () => {
     const repo = createInMemoryTestPlanRepository(store);
     await repo.create(draftPlan("tpl_dup"));
     await expect(repo.create(draftPlan("tpl_dup"))).rejects.toThrow(PlanConflictError);
-    await expect(repo.create(draftPlan("tpl_dup_number", "TP-CONTRACT-001"))).rejects.toThrow(
-      PlanConflictError,
-    );
+    await expect(
+      repo.create(draftPlan("tpl_dup_number", "TP-CONTRACT-001")),
+    ).rejects.toThrow(PlanConflictError);
   });
 
   it("lists plans filtered by status, owner, and text query, excluding terminal by default", async () => {

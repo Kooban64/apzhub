@@ -17,11 +17,11 @@ Requirement / CV / Relationship / Baseline membership change
 
 ## Principles
 
-- Read-only analysis  
-- Explicit Baseline/CV/current context  
-- Upstream and downstream walks  
-- Strength/criticality-aware ranking  
-- Bounded results declare incompleteness  
-- Paths are explainable via Trace / Relationship IDs  
+- Read-only analysis
+- Explicit Baseline/CV/current context
+- Upstream and downstream walks
+- Strength/criticality-aware ranking
+- Bounded results declare incompleteness
+- Paths are explainable via Trace / Relationship IDs
 
 No impact engine implementation in this programme.

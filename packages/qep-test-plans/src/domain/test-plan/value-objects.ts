@@ -121,13 +121,19 @@ export function createPlanDescription(value?: string): string | undefined {
 }
 
 export function createPlanObjective(value: string): string {
-  return assertMaxLength(assertNonEmpty(value, "objective"), PLAN_OBJECTIVE_MAX, "objective");
+  return assertMaxLength(
+    assertNonEmpty(value, "objective"),
+    PLAN_OBJECTIVE_MAX,
+    "objective",
+  );
 }
 
 export function createPlanNumber(value: string): string {
   const trimmed = assertNonEmpty(value, "number");
   if (trimmed.length > PLAN_NUMBER_MAX) {
-    throw new PlanValidationError(`number exceeds maximum length of ${PLAN_NUMBER_MAX}`);
+    throw new PlanValidationError(
+      `number exceeds maximum length of ${PLAN_NUMBER_MAX}`,
+    );
   }
   if (!/^[A-Za-z0-9._-]+$/.test(trimmed)) {
     throw new PlanValidationError(
@@ -164,7 +170,9 @@ export function createExecutionWindow(input: ExecutionWindow): ExecutionWindow {
   const plannedStart = input.plannedStart?.trim();
   const plannedEnd = input.plannedEnd?.trim();
   if (plannedStart && plannedEnd && plannedEnd < plannedStart) {
-    throw new PlanValidationError("plannedEnd must be greater than or equal to plannedStart");
+    throw new PlanValidationError(
+      "plannedEnd must be greater than or equal to plannedStart",
+    );
   }
   return {
     ...(plannedStart ? { plannedStart } : {}),
@@ -201,7 +209,12 @@ export function deriveApprovalState(
 }
 
 export function computeItemFingerprint(
-  items: readonly { readonly id: string; readonly itemStatus: PlanItemStatus; readonly specificationId: string; readonly specificationVersionPin?: string }[],
+  items: readonly {
+    readonly id: string;
+    readonly itemStatus: PlanItemStatus;
+    readonly specificationId: string;
+    readonly specificationVersionPin?: string;
+  }[],
 ): string {
   const active = items
     .filter((item) => item.itemStatus !== "removed")

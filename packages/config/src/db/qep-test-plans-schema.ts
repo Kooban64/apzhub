@@ -32,18 +32,28 @@ export const qepTestPlan = pgTable(
     ownerId: text("owner_id").notNull(),
     versionLabel: varchar("version_label", { length: 32 }).notNull(),
     predecessorPlanId: text("predecessor_plan_id"),
-    predecessorSealedVersionLabel: varchar("predecessor_sealed_version_label", { length: 32 }),
+    predecessorSealedVersionLabel: varchar("predecessor_sealed_version_label", {
+      length: 32,
+    }),
     successorPlanId: text("successor_plan_id"),
     leadId: text("lead_id"),
     assigneeIdsJson: jsonb("assignee_ids_json").$type<string[]>().notNull().default([]),
-    assignmentUpdatedAt: timestamp("assignment_updated_at", { withTimezone: true }).notNull(),
+    assignmentUpdatedAt: timestamp("assignment_updated_at", {
+      withTimezone: true,
+    }).notNull(),
     assignmentUpdatedBy: text("assignment_updated_by").notNull(),
     plannedStart: timestamp("planned_start", { withTimezone: true }),
     plannedEnd: timestamp("planned_end", { withTimezone: true }),
     milestoneRef: text("milestone_ref"),
     timezone: text("timezone"),
-    externalReferencesJson: jsonb("external_references_json").$type<string[]>().notNull().default([]),
-    metadataJson: jsonb("metadata_json").$type<Record<string, string>>().notNull().default({}),
+    externalReferencesJson: jsonb("external_references_json")
+      .$type<string[]>()
+      .notNull()
+      .default([]),
+    metadataJson: jsonb("metadata_json")
+      .$type<Record<string, string>>()
+      .notNull()
+      .default({}),
     metricsJson: jsonb("metrics_json")
       .$type<{
         totalItems: number;
@@ -89,7 +99,10 @@ export const qepTestPlanItem = pgTable(
     sequence: integer("sequence").notNull().default(0),
     itemStatus: varchar("item_status", { length: 16 }).notNull().default("included"),
     notes: text("notes"),
-    requirementRefsJson: jsonb("requirement_refs_json").$type<string[]>().notNull().default([]),
+    requirementRefsJson: jsonb("requirement_refs_json")
+      .$type<string[]>()
+      .notNull()
+      .default([]),
     revision: integer("revision").notNull().default(1),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     createdBy: text("created_by").notNull(),
@@ -173,7 +186,11 @@ export const qepTestPlanHistory = pgTable(
     revision: integer("revision").notNull().default(1),
   },
   (table) => [
-    uniqueIndex("qep_test_plan_history_seq_uidx").on(table.tenantId, table.planId, table.sequence),
+    uniqueIndex("qep_test_plan_history_seq_uidx").on(
+      table.tenantId,
+      table.planId,
+      table.sequence,
+    ),
     index("qep_test_plan_history_plan_idx").on(table.tenantId, table.planId),
   ],
 );

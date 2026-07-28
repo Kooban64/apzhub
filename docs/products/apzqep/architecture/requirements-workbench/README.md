@@ -14,27 +14,27 @@ Authoritative interaction architecture for the APZ QEP Requirements Workbench an
 
 ## Pack
 
-| Document | Purpose |
-| -------- | ------- |
+| Document                                                                           | Purpose                              |
+| ---------------------------------------------------------------------------------- | ------------------------------------ |
 | [REQUIREMENTS-WORKBENCH-ARCHITECTURE.md](./REQUIREMENTS-WORKBENCH-ARCHITECTURE.md) | Complete authoritative specification |
-| [NAVIGATION-ARCHITECTURE.md](./NAVIGATION-ARCHITECTURE.md) | Navigation companion |
-| [INTERACTION-ARCHITECTURE.md](./INTERACTION-ARCHITECTURE.md) | Interaction companion |
-| [WORKSPACE-ARCHITECTURE.md](./WORKSPACE-ARCHITECTURE.md) | Workspace / pane companion |
-| [USER-WORKFLOW-ARCHITECTURE.md](./USER-WORKFLOW-ARCHITECTURE.md) | Workflow companion |
-| [MODULE-INTEGRATION-ARCHITECTURE.md](./MODULE-INTEGRATION-ARCHITECTURE.md) | Future-module integration |
-| [ACCESSIBILITY-PRINCIPLES.md](./ACCESSIBILITY-PRINCIPLES.md) | Accessibility companion |
-| [EXTENSIBILITY-PRINCIPLES.md](./EXTENSIBILITY-PRINCIPLES.md) | Extensibility companion |
-| [ARCHITECTURE-DECISION-RECORDS.md](./ARCHITECTURE-DECISION-RECORDS.md) | ADR index |
-| [ARCHITECTURE-COMPLETION-REPORT.md](./ARCHITECTURE-COMPLETION-REPORT.md) | Completion report |
+| [NAVIGATION-ARCHITECTURE.md](./NAVIGATION-ARCHITECTURE.md)                         | Navigation companion                 |
+| [INTERACTION-ARCHITECTURE.md](./INTERACTION-ARCHITECTURE.md)                       | Interaction companion                |
+| [WORKSPACE-ARCHITECTURE.md](./WORKSPACE-ARCHITECTURE.md)                           | Workspace / pane companion           |
+| [USER-WORKFLOW-ARCHITECTURE.md](./USER-WORKFLOW-ARCHITECTURE.md)                   | Workflow companion                   |
+| [MODULE-INTEGRATION-ARCHITECTURE.md](./MODULE-INTEGRATION-ARCHITECTURE.md)         | Future-module integration            |
+| [ACCESSIBILITY-PRINCIPLES.md](./ACCESSIBILITY-PRINCIPLES.md)                       | Accessibility companion              |
+| [EXTENSIBILITY-PRINCIPLES.md](./EXTENSIBILITY-PRINCIPLES.md)                       | Extensibility companion              |
+| [ARCHITECTURE-DECISION-RECORDS.md](./ARCHITECTURE-DECISION-RECORDS.md)             | ADR index                            |
+| [ARCHITECTURE-COMPLETION-REPORT.md](./ARCHITECTURE-COMPLETION-REPORT.md)           | Completion report                    |
 
 ## Baselines
 
-| Field | Value |
-| ----- | ----- |
-| Platform | APZHUB 1.4 CERTIFIED · Documents 005, 016–023, 006 |
-| Relationship semantics | APZQEP-ARCH-005 ACCEPTED |
-| Backend Relationships | APZQEP-ENG-020F Parts 1–2 ACCEPTED |
-| Downstream | Requirements **1.0.0** frozen · Traceability architecture **APZQEP-ARCH-007** awaiting Owner Acceptance |
+| Field                  | Value                                                                                                   |
+| ---------------------- | ------------------------------------------------------------------------------------------------------- |
+| Platform               | APZHUB 1.4 CERTIFIED · Documents 005, 016–023, 006                                                      |
+| Relationship semantics | APZQEP-ARCH-005 ACCEPTED                                                                                |
+| Backend Relationships  | APZQEP-ENG-020F Parts 1–2 ACCEPTED                                                                      |
+| Downstream             | Requirements **1.0.0** frozen · Traceability architecture **APZQEP-ARCH-007** awaiting Owner Acceptance |
 
 ## STOP
 

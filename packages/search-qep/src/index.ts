@@ -45,7 +45,9 @@ export type QepSearchMappableRequirement = Pick<
 export function requirementToSearchDraft(
   requirement: QepSearchMappableRequirement,
 ): SearchEntityDraft {
-  const lifecycleState = requirement.archivedAt ? ("archived" as const) : ("published" as const);
+  const lifecycleState = requirement.archivedAt
+    ? ("archived" as const)
+    : ("published" as const);
   return {
     entityId: requirement.id,
     entityType: "requirement",
@@ -56,7 +58,11 @@ export function requirementToSearchDraft(
       status: requirement.status,
       projectId: requirement.projectId,
     },
-    keywords: [requirement.key, requirement.status, requirement.status.replace(/_/g, " ")],
+    keywords: [
+      requirement.key,
+      requirement.status,
+      requirement.status.replace(/_/g, " "),
+    ],
     createdAt: requirement.createdAt,
     updatedAt: requirement.updatedAt,
     lifecycleState,
@@ -82,8 +88,12 @@ export type QepSearchMappableBaseline = Pick<
  * Baselines are configuration-management records, not requirement content —
  * only baseline-level metadata is searchable; items are never indexed standalone.
  */
-export function baselineToSearchDraft(baseline: QepSearchMappableBaseline): SearchEntityDraft {
-  const lifecycleState = baseline.archivedAt ? ("archived" as const) : ("published" as const);
+export function baselineToSearchDraft(
+  baseline: QepSearchMappableBaseline,
+): SearchEntityDraft {
+  const lifecycleState = baseline.archivedAt
+    ? ("archived" as const)
+    : ("published" as const);
   return {
     entityId: baseline.id,
     entityType: "requirement_baseline",
@@ -94,7 +104,12 @@ export function baselineToSearchDraft(baseline: QepSearchMappableBaseline): Sear
       status: baseline.status,
       owner: baseline.createdBy,
     },
-    keywords: [String(baseline.number), baseline.status, baseline.name, baseline.createdBy],
+    keywords: [
+      String(baseline.number),
+      baseline.status,
+      baseline.name,
+      baseline.createdBy,
+    ],
     createdAt: baseline.createdAt,
     updatedAt: baseline.updatedAt,
     lifecycleState,
@@ -124,7 +139,9 @@ export type QepSearchMappableRelationship = Pick<
 export function relationshipToSearchDraft(
   relationship: QepSearchMappableRelationship,
 ): SearchEntityDraft {
-  const lifecycleState = relationship.retiredAt ? ("archived" as const) : ("published" as const);
+  const lifecycleState = relationship.retiredAt
+    ? ("archived" as const)
+    : ("published" as const);
   const summary =
     relationship.rationale ??
     `${relationship.type}: ${relationship.source.requirementId} → ${relationship.target.requirementId}`;
@@ -175,7 +192,9 @@ export type QepSearchMappableTraceLink = Pick<
  * link-level metadata is searchable; endpoint artefact content is never
  * indexed standalone. Retired/superseded links are removed from the index.
  */
-export function traceLinkToSearchDraft(traceLink: QepSearchMappableTraceLink): SearchEntityDraft {
+export function traceLinkToSearchDraft(
+  traceLink: QepSearchMappableTraceLink,
+): SearchEntityDraft {
   const lifecycleState =
     traceLink.retiredAt || traceLink.supersededAt
       ? ("archived" as const)
@@ -319,14 +338,20 @@ export class QepSearchPublisher {
     baseline: QepSearchMappableBaseline,
   ): SearchPublicationResult {
     const draft = baselineToSearchDraft(baseline);
-    return this.options.integrationPublisher.publish(toIntegrationContext(context), draft);
+    return this.options.integrationPublisher.publish(
+      toIntegrationContext(context),
+      draft,
+    );
   }
 
   removeBaseline(
     context: QepSearchPublicationContext,
     baselineId: string,
   ): SearchPublicationResult {
-    return this.options.integrationPublisher.remove(toIntegrationContext(context), baselineId);
+    return this.options.integrationPublisher.remove(
+      toIntegrationContext(context),
+      baselineId,
+    );
   }
 
   publishRelationship(
@@ -334,14 +359,20 @@ export class QepSearchPublisher {
     relationship: QepSearchMappableRelationship,
   ): SearchPublicationResult {
     const draft = relationshipToSearchDraft(relationship);
-    return this.options.integrationPublisher.publish(toIntegrationContext(context), draft);
+    return this.options.integrationPublisher.publish(
+      toIntegrationContext(context),
+      draft,
+    );
   }
 
   removeRelationship(
     context: QepSearchPublicationContext,
     relationshipId: string,
   ): SearchPublicationResult {
-    return this.options.integrationPublisher.remove(toIntegrationContext(context), relationshipId);
+    return this.options.integrationPublisher.remove(
+      toIntegrationContext(context),
+      relationshipId,
+    );
   }
 
   publishTraceLink(
@@ -349,14 +380,20 @@ export class QepSearchPublisher {
     traceLink: QepSearchMappableTraceLink,
   ): SearchPublicationResult {
     const draft = traceLinkToSearchDraft(traceLink);
-    return this.options.integrationPublisher.publish(toIntegrationContext(context), draft);
+    return this.options.integrationPublisher.publish(
+      toIntegrationContext(context),
+      draft,
+    );
   }
 
   removeTraceLink(
     context: QepSearchPublicationContext,
     traceLinkId: string,
   ): SearchPublicationResult {
-    return this.options.integrationPublisher.remove(toIntegrationContext(context), traceLinkId);
+    return this.options.integrationPublisher.remove(
+      toIntegrationContext(context),
+      traceLinkId,
+    );
   }
 
   publishVerification(
@@ -364,14 +401,20 @@ export class QepSearchPublisher {
     verification: QepSearchMappableVerification,
   ): SearchPublicationResult {
     const draft = verificationToSearchDraft(verification);
-    return this.options.integrationPublisher.publish(toIntegrationContext(context), draft);
+    return this.options.integrationPublisher.publish(
+      toIntegrationContext(context),
+      draft,
+    );
   }
 
   removeVerification(
     context: QepSearchPublicationContext,
     verificationId: string,
   ): SearchPublicationResult {
-    return this.options.integrationPublisher.remove(toIntegrationContext(context), verificationId);
+    return this.options.integrationPublisher.remove(
+      toIntegrationContext(context),
+      verificationId,
+    );
   }
 }
 
@@ -410,15 +453,11 @@ export function createQepSearchLifecycleHooks(
       if (requirement.archivedAt) {
         return publisher.remove(context, requirement.id);
       }
-      const prior = publisher
-        .getIntegrationPublisher()
-        .getSink()
-        .get(requirement.id);
+      const prior = publisher.getIntegrationPublisher().getSink().get(requirement.id);
       if (prior && prior.lifecycleState !== "removed") {
-        return publisher.getIntegrationPublisher().update(
-          toIntegrationContext(context),
-          requirementToSearchDraft(requirement),
-        );
+        return publisher
+          .getIntegrationPublisher()
+          .update(toIntegrationContext(context), requirementToSearchDraft(requirement));
       }
       return publisher.publish(context, requirement);
     },
@@ -445,7 +484,10 @@ export function createQepSearchLifecycleHooks(
       if (prior && prior.lifecycleState !== "removed") {
         return publisher
           .getIntegrationPublisher()
-          .update(toIntegrationContext(context), relationshipToSearchDraft(relationship));
+          .update(
+            toIntegrationContext(context),
+            relationshipToSearchDraft(relationship),
+          );
       }
       return publisher.publishRelationship(context, relationship);
     },
@@ -462,14 +504,21 @@ export function createQepSearchLifecycleHooks(
       return publisher.publishTraceLink(context, traceLink);
     },
     onVerificationUpserted(context, verification) {
-      if (verification.retiredAt || verification.supersededAt || verification.cancelledAt) {
+      if (
+        verification.retiredAt ||
+        verification.supersededAt ||
+        verification.cancelledAt
+      ) {
         return publisher.removeVerification(context, verification.id);
       }
       const prior = publisher.getIntegrationPublisher().getSink().get(verification.id);
       if (prior && prior.lifecycleState !== "removed") {
         return publisher
           .getIntegrationPublisher()
-          .update(toIntegrationContext(context), verificationToSearchDraft(verification));
+          .update(
+            toIntegrationContext(context),
+            verificationToSearchDraft(verification),
+          );
       }
       return publisher.publishVerification(context, verification);
     },

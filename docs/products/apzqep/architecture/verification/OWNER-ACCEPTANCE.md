@@ -6,12 +6,12 @@
 
 ## Decision record
 
-| Field | Value |
-| ----- | ----- |
-| Programme | APZQEP-ARCH-009 — Verification Capability Architecture |
-| Decision | **ACCEPTED / CLOSED / COMPLETE** |
-| Classification | Authoritative Architecture |
-| Pack | `docs/products/apzqep/architecture/verification/` |
+| Field               | Value                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------- |
+| Programme           | APZQEP-ARCH-009 — Verification Capability Architecture                                       |
+| Decision            | **ACCEPTED / CLOSED / COMPLETE**                                                             |
+| Classification      | Authoritative Architecture                                                                   |
+| Pack                | `docs/products/apzqep/architecture/verification/`                                            |
 | Acceptance evidence | `docs/operations/evidence/portfolio-recert/20260726T174500Z-APZQEP-ARCH-009-ACCEPTANCE.json` |
 
 ## Effect

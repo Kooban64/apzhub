@@ -2,16 +2,16 @@
 
 Client helpers live in `apps/web/lib/qep/qep-api.ts` under relationship operations.
 
-| Operation | Client | Backend |
-| --- | --- | --- |
-| List | `listRelationships` | `GET …/relationships` |
-| By requirement | `listRelationshipsByRequirement` | `GET …/requirements/{id}/relationships` |
-| Detail | `getRelationship` | `GET …/relationships/{id}` |
-| Taxonomy | `listRelationshipTaxonomy` | `GET …/relationships/taxonomy` |
-| Create | `createRelationship` | `POST …/relationships` |
-| Supersede | `supersedeRelationship` | accepted supersede command |
-| Activate / Deprecate / Retire | matching clients | lifecycle commands |
-| Field updates | rationale / strength / criticality / classification / scope | mutate commands |
+| Operation                     | Client                                                      | Backend                                 |
+| ----------------------------- | ----------------------------------------------------------- | --------------------------------------- |
+| List                          | `listRelationships`                                         | `GET …/relationships`                   |
+| By requirement                | `listRelationshipsByRequirement`                            | `GET …/requirements/{id}/relationships` |
+| Detail                        | `getRelationship`                                           | `GET …/relationships/{id}`              |
+| Taxonomy                      | `listRelationshipTaxonomy`                                  | `GET …/relationships/taxonomy`          |
+| Create                        | `createRelationship`                                        | `POST …/relationships`                  |
+| Supersede                     | `supersedeRelationship`                                     | accepted supersede command              |
+| Activate / Deprecate / Retire | matching clients                                            | lifecycle commands                      |
+| Field updates                 | rationale / strength / criticality / classification / scope | mutate commands                         |
 
 ## Contracts
 

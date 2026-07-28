@@ -8,9 +8,9 @@ Verification Explorer · Inspector · Timeline · History · Search · Dashboard
 
 ## Rules
 
-- Reuse Platform shell and ARCH-006 grammar — no parallel shell  
-- List / inspector first  
-- Server-authoritative `availableActions`  
-- Bounded, paginated queries  
-- Dashboard indicators are presentation, not Coverage Engine  
-- No Workbench implementation under ARCH-009  
+- Reuse Platform shell and ARCH-006 grammar — no parallel shell
+- List / inspector first
+- Server-authoritative `availableActions`
+- Bounded, paginated queries
+- Dashboard indicators are presentation, not Coverage Engine
+- No Workbench implementation under ARCH-009

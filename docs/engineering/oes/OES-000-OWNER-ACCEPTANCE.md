@@ -19,17 +19,17 @@ OES-000 is accepted as the permanent APZOR engineering methodology standard. It 
 
 ## Effect
 
-1. Every new engineering programme SHALL conform to OES-000.  
-2. Changes to methodology require a formal change process (revision via authorised programme, companion standard such as OES-001, or ADR) — not ad hoc edits.  
+1. Every new engineering programme SHALL conform to OES-000.
+2. Changes to methodology require a formal change process (revision via authorised programme, companion standard such as OES-001, or ADR) — not ad hoc edits.
 3. Capability OES documents apply OES-000; they do not redefine it.
 
 ## Authorises next
 
-- **OES-001** — Engineering Writing Standard (documentation quality constitution)  
+- **OES-001** — Engineering Writing Standard (documentation quality constitution)
 - Continuation of **APZQEP-OES-ARCH-012** Parts 2–5 under OES-000 (and OES-001 once Accepted)
 
 ## Explicit stop
 
-- Do not unfreeze OES-000 without Owner Decision.  
-- Do not begin Workbench Engineering until APZQEP-OES-ARCH-012 is complete and Accepted.  
+- Do not unfreeze OES-000 without Owner Decision.
+- Do not begin Workbench Engineering until APZQEP-OES-ARCH-012 is complete and Accepted.
 - AI must never decide Freeze / unfreeze / Version Promotion.

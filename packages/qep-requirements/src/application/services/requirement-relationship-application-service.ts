@@ -30,7 +30,10 @@ import {
 } from "../../domain/relationship";
 import { createRequirementContentVersionId } from "../../domain/content-version/requirement-content-version-id";
 import { createRequirementBaselineId } from "../../domain/baseline/requirement-baseline-id";
-import { createRequirementId, type RequirementId } from "../../domain/value-objects/requirement-id";
+import {
+  createRequirementId,
+  type RequirementId,
+} from "../../domain/value-objects/requirement-id";
 import {
   QepForbiddenError,
   QepInvariantViolation,
@@ -217,7 +220,9 @@ function runInTransaction<T>(
   return deps.runInTransaction ? deps.runInTransaction(work) : work();
 }
 
-function nextRelationshipId(deps: RequirementRelationshipApplicationServiceDeps): string {
+function nextRelationshipId(
+  deps: RequirementRelationshipApplicationServiceDeps,
+): string {
   const generated = deps.id?.() ?? randomUUID().replace(/-/g, "").slice(0, 16);
   return generated.startsWith("rrl_")
     ? createRelationshipId(generated)
@@ -228,7 +233,10 @@ function nextAuditId(deps: RequirementRelationshipApplicationServiceDeps): strin
   return deps.id?.() ?? randomUUID();
 }
 
-function assertAnyPermission(ctx: QepRequestContext, requiredOneOf: readonly string[]): void {
+function assertAnyPermission(
+  ctx: QepRequestContext,
+  requiredOneOf: readonly string[],
+): void {
   const granted = ctx.permissions;
   if (!granted || granted.length === 0) return;
   if (granted.includes("qep.requirements.*")) return;
@@ -263,10 +271,18 @@ async function observe<T>(
   const started = Date.now();
   try {
     const result = await work();
-    deps.onObservation?.({ operation, durationMs: Date.now() - started, outcome: "success" });
+    deps.onObservation?.({
+      operation,
+      durationMs: Date.now() - started,
+      outcome: "success",
+    });
     return result;
   } catch (error) {
-    deps.onObservation?.({ operation, durationMs: Date.now() - started, outcome: "error" });
+    deps.onObservation?.({
+      operation,
+      durationMs: Date.now() - started,
+      outcome: "error",
+    });
     throw error;
   }
 }
@@ -301,7 +317,10 @@ async function buildActivationContext(
   const target = relationship.direction.target;
   const endpointFacts = [];
   for (const endpoint of [source, target]) {
-    const requirement = await deps.requirements.findById(tenantId, endpoint.requirementId);
+    const requirement = await deps.requirements.findById(
+      tenantId,
+      endpoint.requirementId,
+    );
     endpointFacts.push({
       tenantId,
       requirementId: endpoint.requirementId,
@@ -311,7 +330,8 @@ async function buildActivationContext(
 
   const pinFacts = [];
   for (const endpoint of [source, target]) {
-    if (endpoint.mode !== "content_version_pinned" || !endpoint.contentVersionId) continue;
+    if (endpoint.mode !== "content_version_pinned" || !endpoint.contentVersionId)
+      continue;
     const version = await deps.contentVersions.getById(
       tenantId,
       createRequirementContentVersionId(endpoint.contentVersionId),
@@ -322,8 +342,8 @@ async function buildActivationContext(
       contentVersionId: endpoint.contentVersionId,
       valid: Boolean(
         version &&
-          version.requirementId === endpoint.requirementId &&
-          version.tenantId === tenantId,
+        version.requirementId === endpoint.requirementId &&
+        version.tenantId === tenantId,
       ),
     });
   }
@@ -393,7 +413,9 @@ export function createRequirementRelationshipApplicationService(
           createRelationshipType(input.type),
         );
         if (!taxonomy) {
-          throw new QepInvariantViolation("Relationship type is not in the approved taxonomy");
+          throw new QepInvariantViolation(
+            "Relationship type is not in the approved taxonomy",
+          );
         }
 
         for (const endpoint of [input.source, input.target]) {
@@ -476,7 +498,11 @@ export function createRequirementRelationshipApplicationService(
       return observe(deps, "relationship.activate", async () => {
         assertAnyPermission(ctx, ["qep.requirements.relationships.transition"]);
         const existing = await requireRelationship(deps, ctx.tenantId, id);
-        const activationContext = await buildActivationContext(deps, ctx.tenantId, existing);
+        const activationContext = await buildActivationContext(
+          deps,
+          ctx.tenantId,
+          existing,
+        );
         const mutated = activateRequirementsRelationship(
           existing,
           nowIso(deps),
@@ -497,7 +523,11 @@ export function createRequirementRelationshipApplicationService(
       return observe(deps, "relationship.deprecate", async () => {
         assertAnyPermission(ctx, ["qep.requirements.relationships.transition"]);
         const existing = await requireRelationship(deps, ctx.tenantId, id);
-        const mutated = deprecateRequirementsRelationship(existing, nowIso(deps), ctx.userId);
+        const mutated = deprecateRequirementsRelationship(
+          existing,
+          nowIso(deps),
+          ctx.userId,
+        );
         return persistMutation(
           deps,
           ctx,
@@ -512,7 +542,11 @@ export function createRequirementRelationshipApplicationService(
       return observe(deps, "relationship.retire", async () => {
         assertAnyPermission(ctx, ["qep.requirements.relationships.retire"]);
         const existing = await requireRelationship(deps, ctx.tenantId, id);
-        const mutated = retireRequirementsRelationship(existing, nowIso(deps), ctx.userId);
+        const mutated = retireRequirementsRelationship(
+          existing,
+          nowIso(deps),
+          ctx.userId,
+        );
         return persistMutation(
           deps,
           ctx,
@@ -682,7 +716,12 @@ export function createRequirementRelationshipApplicationService(
             );
           }
         }
-        const mutated = changeRelationshipScope(existing, scope, nowIso(deps), ctx.userId);
+        const mutated = changeRelationshipScope(
+          existing,
+          scope,
+          nowIso(deps),
+          ctx.userId,
+        );
         return persistMutation(
           deps,
           ctx,

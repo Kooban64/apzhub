@@ -4,16 +4,16 @@
 
 ## Extension points
 
-| Slot | Contribution |
-| --- | --- |
-| Sidebar | Module navigation entries |
-| Explorer providers | Trees / saved views |
-| Editors | Main tab types |
-| Inspectors | Selection inspectors |
-| Search providers | Platform Search (020) |
-| Commands | Command Palette (019) |
-| Comparison providers | Diff views |
-| Status contributions | Status bar items |
+| Slot                 | Contribution              |
+| -------------------- | ------------------------- |
+| Sidebar              | Module navigation entries |
+| Explorer providers   | Trees / saved views       |
+| Editors              | Main tab types            |
+| Inspectors           | Selection inspectors      |
+| Search providers     | Platform Search (020)     |
+| Commands             | Command Palette (019)     |
+| Comparison providers | Diff views                |
+| Status contributions | Status bar items          |
 
 ## Future modules
 

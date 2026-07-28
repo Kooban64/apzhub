@@ -14,42 +14,42 @@ Clear packaging accelerates sales cycles, prevents bespoke one-off feature deals
 
 ## Core concepts
 
-| Concept | Product meaning |
-| ------- | ---------------- |
-| SKU | Sellable unit mapping to entitlements |
-| Base subscription | Edition-level recurring license |
-| Add-on | Optional capability layer |
-| Consumption meter | Usage-based dimension (automation ingest, AI tokens) |
-| Professional services | Implementation, migration, training |
-| Partner motion | SI and reseller implementation packages |
-| Marketplace (later) | Third-party extensions — P3 intent |
+| Concept               | Product meaning                                      |
+| --------------------- | ---------------------------------------------------- |
+| SKU                   | Sellable unit mapping to entitlements                |
+| Base subscription     | Edition-level recurring license                      |
+| Add-on                | Optional capability layer                            |
+| Consumption meter     | Usage-based dimension (automation ingest, AI tokens) |
+| Professional services | Implementation, migration, training                  |
+| Partner motion        | SI and reseller implementation packages              |
+| Marketplace (later)   | Third-party extensions — P3 intent                   |
 
 ## Package elements
 
-| Package element | Intent |
-| --------------- | ------ |
-| Free / developer access | Evaluation; Developer edition |
-| Team subscription | Team edition capabilities |
-| Enterprise subscription | Enterprise edition |
-| Regulated enterprise | Compliance-oriented SKU atop Enterprise |
-| AI capabilities | Entitled add-on; Constitution-bound; **default OFF** |
-| MCP capabilities | Entitled with enterprise controls |
-| Advanced certification | Multi-approver; continuous signals (later entitlement) |
-| Advanced analytics / QI | Premium / enterprise analytics depth |
-| Marketplace | Later P3 — partner extensions |
-| Premium integrations | Tier-gated connectors |
-| Professional services | Implementation, migration, training |
-| Partner implementation | SI partners deliver governed rollout |
+| Package element         | Intent                                                 |
+| ----------------------- | ------------------------------------------------------ |
+| Free / developer access | Evaluation; Developer edition                          |
+| Team subscription       | Team edition capabilities                              |
+| Enterprise subscription | Enterprise edition                                     |
+| Regulated enterprise    | Compliance-oriented SKU atop Enterprise                |
+| AI capabilities         | Entitled add-on; Constitution-bound; **default OFF**   |
+| MCP capabilities        | Entitled with enterprise controls                      |
+| Advanced certification  | Multi-approver; continuous signals (later entitlement) |
+| Advanced analytics / QI | Premium / enterprise analytics depth                   |
+| Marketplace             | Later P3 — partner extensions                          |
+| Premium integrations    | Tier-gated connectors                                  |
+| Professional services   | Implementation, migration, training                    |
+| Partner implementation  | SI partners deliver governed rollout                   |
 
 ## Primary objects
 
-| Object | Description |
-| ------ | ----------- |
-| Commercial offer | Sales-facing bundle description |
-| Entitlement contract | Customer rights record |
-| Usage meter | Automation volume, AI usage when entitled |
-| Add-on activation | AI, MCP, advanced cert flags |
-| Services statement of work | PS engagement — outside product SoR |
+| Object                     | Description                               |
+| -------------------------- | ----------------------------------------- |
+| Commercial offer           | Sales-facing bundle description           |
+| Entitlement contract       | Customer rights record                    |
+| Usage meter                | Automation volume, AI usage when entitled |
+| Add-on activation          | AI, MCP, advanced cert flags              |
+| Services statement of work | PS engagement — outside product SoR       |
 
 ## Lifecycle
 
@@ -66,12 +66,12 @@ flowchart LR
 
 ## Ownership
 
-| Role | Ownership |
-| ---- | --------- |
-| Owner / Commercial | Pricing authority — not in DEF-002 |
-| Tenant Administrator | Applies entitlements to tenant |
-| Partner | Delivers implementation SOW |
-| Compliance Officer | Validates regulated SKU fit |
+| Role                 | Ownership                          |
+| -------------------- | ---------------------------------- |
+| Owner / Commercial   | Pricing authority — not in DEF-002 |
+| Tenant Administrator | Applies entitlements to tenant     |
+| Partner              | Delivers implementation SOW        |
+| Compliance Officer   | Validates regulated SKU fit        |
 
 ## Relationships
 
@@ -89,25 +89,25 @@ flowchart TB
 
 ## States
 
-| State | Meaning |
-| ----- | ------- |
-| Evaluation | Time or feature limited |
-| Active | Paid or entitled in contract |
-| Over capacity | Usage exceeds meter — policy warning or block |
-| Lapsed | Subscription ended; grace read-only |
-| Add-on pending | Purchased but not tenant-enabled |
-| Add-on active | Enabled and audited |
+| State          | Meaning                                       |
+| -------------- | --------------------------------------------- |
+| Evaluation     | Time or feature limited                       |
+| Active         | Paid or entitled in contract                  |
+| Over capacity  | Usage exceeds meter — policy warning or block |
+| Lapsed         | Subscription ended; grace read-only           |
+| Add-on pending | Purchased but not tenant-enabled              |
+| Add-on active  | Enabled and audited                           |
 
 ## Business rules
 
-| Rule | Statement |
-| ---- | --------- |
-| CP-01 | No final prices in product definition unless Owner authorised |
-| CP-02 | AI add-on does not bypass default OFF at tenant config |
-| CP-03 | MCP add-on requires enterprise-grade authz audit |
-| CP-04 | Advanced certification never implies autonomous cert |
-| CP-05 | Education SKU enforces non-production terms |
-| CP-06 | Marketplace P3 — extensions cannot own SoR domains |
+| Rule  | Statement                                                                                       |
+| ----- | ----------------------------------------------------------------------------------------------- |
+| CP-01 | No final prices in product definition unless Owner authorised                                   |
+| CP-02 | AI add-on does not bypass default OFF at tenant config                                          |
+| CP-03 | MCP add-on requires enterprise-grade authz audit                                                |
+| CP-04 | Advanced certification never implies autonomous cert                                            |
+| CP-05 | Education SKU enforces non-production terms                                                     |
+| CP-06 | Marketplace P3 — extensions cannot own SoR domains                                              |
 | CP-07 | Licensing philosophy: seats / projects / automation volume / AI usage — Owner decides weighting |
 
 ## Approval rules
@@ -118,13 +118,13 @@ Commercial discounting and custom SKUs — Owner approval outside product defini
 
 ## Role responsibilities
 
-| Persona | Responsibility |
-| ------- | ---------------- |
-| Tenant Administrator | Enables purchased entitlements |
-| Platform Administrator | Provisions tenant from contract |
-| Security Officer | Approves AI/MCP enablement |
-| Partner integrator | Delivers within entitled scope |
-| Release Manager | Consumes features present in contract |
+| Persona                | Responsibility                        |
+| ---------------------- | ------------------------------------- |
+| Tenant Administrator   | Enables purchased entitlements        |
+| Platform Administrator | Provisions tenant from contract       |
+| Security Officer       | Approves AI/MCP enablement            |
+| Partner integrator     | Delivers within entitled scope        |
+| Release Manager        | Consumes features present in contract |
 
 ## Reporting
 
@@ -152,12 +152,12 @@ Marketplace revenue share, consumption-only tiers for automation-heavy customers
 
 ## Boundary conditions
 
-| In boundary | Out of boundary |
-| ----------- | --------------- |
-| SKU intent and entitlement mapping | Invoice systems |
-| Add-on product meaning | Payment gateway integration |
-| Licensing dimensions | Tax and legal contract text |
-| Partner package definition | Partner portal implementation |
+| In boundary                        | Out of boundary               |
+| ---------------------------------- | ----------------------------- |
+| SKU intent and entitlement mapping | Invoice systems               |
+| Add-on product meaning             | Payment gateway integration   |
+| Licensing dimensions               | Tax and legal contract text   |
+| Partner package definition         | Partner portal implementation |
 
 ## Example scenarios
 

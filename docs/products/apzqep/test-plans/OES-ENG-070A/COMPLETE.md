@@ -1,23 +1,23 @@
 # APZQEP-OES-ENG-070A — COMPLETE
 
-| Item | Value |
-| ---- | ----- |
-| Document | **APZQEP-OES-ENG-070A** |
-| Programme | **APZQEP-OES-ENG-070A** |
-| Title | Test Plans Workbench Engineering Specification |
-| Capability | Test Plans |
-| Layer | Presentation / Workbench Engineering Specification |
-| Role | Authoritative Workbench Engineering delivery contract (upon Owner Acceptance) |
-| Status | **ACCEPTED / APPROVED / ENGINEERING SPECIFICATION BASELINED / PROGRAMME CLOSED** |
-| Version | **1.0.0-oes** |
-| Date | 2026-07-28 |
-| Acceptance | **ACCEPTED** (2026-07-28) — see [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) · `20260728T065105Z-APZQEP-OES-ENG-070A-ACCEPTANCE.json` |
-| Governing standards | Document 000 · OES-000 · OES-001 · OES-002 v1.1.0 |
-| Architecture baseline | [APZQEP-ARCH-014](../OES-ARCH-014/COMPLETE.md) **ACCEPTED / ARCHITECTURE BASELINED / CLOSED** |
-| Domain baseline | `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** (CERT-060A) |
-| Infrastructure baseline | `@apzhub/qep-test-plans` **0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED** (CERT-060B) |
-| Binding invariant | *"The Workbench SHALL never determine what a user may do"* — Owner directive, ARCH-014 Acceptance |
-| Nature | **Engineering specification only — does NOT authorise coding** |
+| Item                    | Value                                                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Document                | **APZQEP-OES-ENG-070A**                                                                                                               |
+| Programme               | **APZQEP-OES-ENG-070A**                                                                                                               |
+| Title                   | Test Plans Workbench Engineering Specification                                                                                        |
+| Capability              | Test Plans                                                                                                                            |
+| Layer                   | Presentation / Workbench Engineering Specification                                                                                    |
+| Role                    | Authoritative Workbench Engineering delivery contract (upon Owner Acceptance)                                                         |
+| Status                  | **ACCEPTED / APPROVED / ENGINEERING SPECIFICATION BASELINED / PROGRAMME CLOSED**                                                      |
+| Version                 | **1.0.0-oes**                                                                                                                         |
+| Date                    | 2026-07-28                                                                                                                            |
+| Acceptance              | **ACCEPTED** (2026-07-28) — see [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) · `20260728T065105Z-APZQEP-OES-ENG-070A-ACCEPTANCE.json` |
+| Governing standards     | Document 000 · OES-000 · OES-001 · OES-002 v1.1.0                                                                                     |
+| Architecture baseline   | [APZQEP-ARCH-014](../OES-ARCH-014/COMPLETE.md) **ACCEPTED / ARCHITECTURE BASELINED / CLOSED**                                         |
+| Domain baseline         | `@apzhub/qep-test-plans` **0.1.0 CERTIFIED** (CERT-060A)                                                                              |
+| Infrastructure baseline | `@apzhub/qep-test-plans` **0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED** (CERT-060B)                                                     |
+| Binding invariant       | _"The Workbench SHALL never determine what a user may do"_ — Owner directive, ARCH-014 Acceptance                                     |
+| Nature                  | **Engineering specification only — does NOT authorise coding**                                                                        |
 
 ---
 

@@ -26,21 +26,21 @@ Plan Inspector
 
 ## Cross-capability deep links (consume existing)
 
-| From Test Plans | To |
-| ----------------- | -- |
-| Plan Item row | Test Specifications Inspector |
-| Requirement reference | Requirements Workbench |
-| Trace Link reference | Traceability Workbench |
-| Verification subject reference | Verification Inspector |
+| From Test Plans                            | To                                                   |
+| ------------------------------------------ | ---------------------------------------------------- |
+| Plan Item row                              | Test Specifications Inspector                        |
+| Requirement reference                      | Requirements Workbench                               |
+| Trace Link reference                       | Traceability Workbench                               |
+| Verification subject reference             | Verification Inspector                               |
 | Future Execution / Run / Evidence / Defect | Governed unavailable — capability does not yet exist |
 
 ## Inbound deep links (consumed by Test Plans)
 
-| From | To Test Plans |
-| ---- | --------------- |
-| Notification / Attention Engine delivery | `/plans/{planId}` |
-| Global Unified Search result | `/plans/{planId}` |
-| Future Execution capability | `/plans/{planId}` (read reference) |
+| From                                     | To Test Plans                      |
+| ---------------------------------------- | ---------------------------------- |
+| Notification / Attention Engine delivery | `/plans/{planId}`                  |
+| Global Unified Search result             | `/plans/{planId}`                  |
+| Future Execution capability              | `/plans/{planId}` (read reference) |
 
 ## Session restore scope
 
