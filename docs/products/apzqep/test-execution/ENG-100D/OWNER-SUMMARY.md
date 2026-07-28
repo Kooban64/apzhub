@@ -1,0 +1,16 @@
+# Owner Summary — APZQEP-ENG-100D
+
+## Decision recorded
+
+Owner Engineering Wave 4 Decision (2026-07-29): **ACCEPTED / APPROVED / ENGINEERING WAVE 4 BASELINED / CLOSED**.
+
+See [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md).
+
+Evidence: `20260729T143538Z-APZQEP-ENG-100D-ACCEPTANCE.json`
+
+## Programme status
+
+```text
+APZQEP-ENG-100D
+ACCEPTED / ENGINEERING WAVE 4 BASELINED / CLOSED
+```

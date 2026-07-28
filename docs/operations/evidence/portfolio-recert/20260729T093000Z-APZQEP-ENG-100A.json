@@ -1,0 +1,56 @@
+{
+  "evidenceId": "20260729T093000Z-APZQEP-ENG-100A",
+  "programme": "APZQEP-ENG-100A",
+  "title": "Test Execution Repository Scaffolding",
+  "programmeType": "Engineering Wave 1 — Repository Scaffolding",
+  "capability": "Test Execution",
+  "decisionTimestampUtc": "20260729T093000Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ENGINEERING_WAVE_1_DECISION",
+  "validationOutcome": "PASS",
+  "pack": "docs/products/apzqep/test-execution/ENG-100A/",
+  "ownerSummary": "docs/products/apzqep/test-execution/ENG-100A/OWNER-SUMMARY.md",
+  "ownerDecisionTemplate": "docs/products/apzqep/test-execution/ENG-100A/OWNER-ACCEPTANCE.md",
+  "waveCompletionReport": "docs/products/apzqep/test-execution/ENG-100A/WAVE-COMPLETION-REPORT.md",
+  "validationReport": "docs/products/apzqep/test-execution/ENG-100A/VALIDATION-REPORT.md",
+  "engineeringCompletionReport": "docs/products/apzqep/test-execution/ENG-100A/ENGINEERING-COMPLETION-REPORT.md",
+  "deviationRegister": "docs/products/apzqep/test-execution/ENG-100A/DEVIATION-REGISTER.md",
+  "buildContractCompliance": "docs/products/apzqep/test-execution/ENG-100A/BUILD-CONTRACT-COMPLIANCE.md",
+  "eng100bPlanOnly": "docs/products/apzqep/test-execution/ENG-100B-PLAN/",
+  "architectureBaseline": "APZQEP-ARCH-015",
+  "engineeringSpecificationBaseline": "APZQEP-OES-ENG-090A",
+  "buildContract": "IN_FORCE",
+  "operatingModel": "1.1.0_IN_FORCE",
+  "package": {
+    "name": "@apzhub/qep-test-execution",
+    "version": "0.0.0",
+    "path": "packages/qep-test-execution/"
+  },
+  "module": {
+    "id": "qep-test-execution",
+    "path": "modules/qep-test-execution/module.yaml",
+    "status": "scaffolding"
+  },
+  "checksPerformed": [
+    "pnpm --filter @apzhub/qep-test-execution typecheck PASS",
+    "pnpm --filter @apzhub/qep-test-execution lint PASS",
+    "pnpm --filter @apzhub/qep-test-execution test PASS (4)",
+    "prettier check scaffolding paths PASS",
+    "pnpm --filter @apzhub/web typecheck PASS",
+    "No Domain/Application/Infrastructure business behaviour",
+    "No REST handlers",
+    "No Workbench UI",
+    "No migrations",
+    "ENG-100B plan docs only — no Domain implementation",
+    "Frozen baselines unmodified"
+  ],
+  "productionBusinessFunctionality": "NONE",
+  "eng100bImplementation": "NOT_AUTHORISED",
+  "eng100cThrough100e": "NOT_AUTHORISED",
+  "recommendedOwnerDecision": "ACCEPT",
+  "recommendedNextAfterAcceptance": {
+    "id": "APZQEP-ENG-100B",
+    "title": "Test Execution Domain Engineering",
+    "authorised": false
+  },
+  "note": "Engineering Wave 1 scaffolding complete. Owner Engineering Wave 1 Decision required before ENG-100B."
+}

@@ -1,0 +1,43 @@
+{
+  "evidenceId": "20260729T131604Z-APZQEP-ENG-100C-ACCEPTANCE",
+  "programme": "APZQEP-ENG-100C",
+  "title": "Test Execution Application Engineering",
+  "programmeType": "Engineering Wave 3 — Application Layer",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T13:16:04Z",
+  "decisionTimestampUtc": "20260729T131604Z",
+  "decision": "ACCEPTED / APPROVED / ENGINEERING WAVE 3 BASELINED / CLOSED",
+  "authority": "Owner Engineering Wave 3 Decision",
+  "pack": "docs/products/apzqep/test-execution/ENG-100C/",
+  "acceptance": "docs/products/apzqep/test-execution/ENG-100C/OWNER-ACCEPTANCE.md",
+  "implementationEvidence": "docs/operations/evidence/portfolio-recert/20260729T125657Z-APZQEP-ENG-100C.json",
+  "applicationBaseline": "ENGINEERING_WAVE_3_BASELINED",
+  "package": {
+    "name": "@apzhub/qep-test-execution",
+    "version": "0.0.0",
+    "domainStatus": "implemented-eng-100b",
+    "applicationStatus": "implemented-eng-100c",
+    "infrastructureStatus": "scaffolded-awaiting-eng-100d"
+  },
+  "productionBaselines": [
+    "repository_scaffolding",
+    "domain_layer",
+    "application_layer"
+  ],
+  "eng100dPlan": {
+    "path": "docs/products/apzqep/test-execution/ENG-100D-PLAN/",
+    "status": "PLANNING_DELIVERABLE_ACKNOWLEDGED",
+    "authorisesImplementation": false
+  },
+  "authorisesInfrastructureEngineering": false,
+  "recommendedNextProgramme": {
+    "id": "APZQEP-ENG-100D",
+    "title": "Test Execution Infrastructure & API Engineering (Wave 4)",
+    "status": "RECOMMENDATION_ONLY_NOT_AUTHORISED"
+  },
+  "recommendationsNoted": [
+    "Complete Waves 4 and 5 before further Operating Model enhancements",
+    "Evaluate lifecycle refinements at Engineering Completion Review"
+  ],
+  "stopCondition": "APZQEP-ENG-100C ACCEPTED / ENGINEERING WAVE 3 BASELINED / CLOSED — ENG-100D NOT AUTHORISED"
+}

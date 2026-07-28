@@ -1,0 +1,22 @@
+{
+  "evidenceId": "20260729T143538Z-APZQEP-ENG-100D-ACCEPTANCE",
+  "programme": "APZQEP-ENG-100D",
+  "title": "Test Execution Infrastructure & API Engineering",
+  "programmeType": "Engineering Wave 4 — Infrastructure & API",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T14:35:38Z",
+  "decisionTimestampUtc": "20260729T143538Z",
+  "decision": "ACCEPTED / APPROVED / ENGINEERING WAVE 4 BASELINED / CLOSED",
+  "authority": "Owner Engineering Wave 4 Decision",
+  "pack": "docs/products/apzqep/test-execution/ENG-100D/",
+  "acceptance": "docs/products/apzqep/test-execution/ENG-100D/OWNER-ACCEPTANCE.md",
+  "implementationEvidence": "docs/operations/evidence/portfolio-recert/20260729T142836Z-APZQEP-ENG-100D.json",
+  "infrastructureBaseline": "ENGINEERING_WAVE_4_BASELINED",
+  "authorisesWorkbenchEngineering": false,
+  "concurrentAuthorisation": {
+    "id": "APZQEP-ENG-100E",
+    "title": "Test Execution Workbench Engineering (Wave 5)",
+    "status": "AUTHORISED_TO_COMMENCE_SEPARATE_DIRECTIVE"
+  },
+  "stopCondition": "APZQEP-ENG-100D ACCEPTED / ENGINEERING WAVE 4 BASELINED / CLOSED"
+}

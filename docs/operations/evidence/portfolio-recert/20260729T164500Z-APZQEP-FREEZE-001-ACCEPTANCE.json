@@ -1,0 +1,26 @@
+{
+  "evidenceId": "20260729T164500Z-APZQEP-FREEZE-001-ACCEPTANCE",
+  "programme": "APZQEP-FREEZE-001",
+  "title": "Test Execution Production Freeze",
+  "programmeType": "Production Freeze",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T16:45:00Z",
+  "decisionTimestampUtc": "20260729T164500Z",
+  "decision": "ACCEPTED / APPROVED / PRODUCTION BASELINE FROZEN / CLOSED",
+  "authority": "Owner Production Freeze Decision",
+  "pack": "docs/products/apzqep/test-execution/FREEZE-001/",
+  "acceptance": "docs/products/apzqep/test-execution/FREEZE-001/OWNER-ACCEPTANCE.md",
+  "implementationEvidence": "docs/operations/evidence/portfolio-recert/20260729T153121Z-APZQEP-FREEZE-001.json",
+  "releaseCandidate": "1.0.0-rc.1",
+  "frozenBaseline": "1.0.0",
+  "package": "@apzhub/qep-test-execution",
+  "conditionOfAcceptance": "RC must be committed, tagged, and reproducible from source control before deployment — resolved under APZQEP-RELEASE-001",
+  "authorisesRelease": false,
+  "concurrentAuthorisation": {
+    "id": "APZQEP-RELEASE-001",
+    "title": "Test Execution Production Release",
+    "status": "AUTHORISED_TO_COMMENCE_SEPARATE_DIRECTIVE"
+  },
+  "authorisesGa": false,
+  "stopCondition": "APZQEP-FREEZE-001 ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED"
+}

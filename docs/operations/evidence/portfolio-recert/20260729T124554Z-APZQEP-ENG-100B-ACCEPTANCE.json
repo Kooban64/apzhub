@@ -1,0 +1,37 @@
+{
+  "evidenceId": "20260729T124554Z-APZQEP-ENG-100B-ACCEPTANCE",
+  "programme": "APZQEP-ENG-100B",
+  "title": "Test Execution Domain Engineering",
+  "programmeType": "Engineering Wave 2 — Domain Engineering",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T12:45:54Z",
+  "decisionTimestampUtc": "20260729T124554Z",
+  "decision": "ACCEPTED / APPROVED / ENGINEERING WAVE 2 BASELINED / CLOSED",
+  "authority": "Owner Engineering Wave 2 Decision",
+  "pack": "docs/products/apzqep/test-execution/ENG-100B/",
+  "acceptance": "docs/products/apzqep/test-execution/ENG-100B/OWNER-ACCEPTANCE.md",
+  "implementationEvidence": "docs/operations/evidence/portfolio-recert/20260729T100000Z-APZQEP-ENG-100B.json",
+  "domainBaseline": "ENGINEERING_WAVE_2_BASELINED",
+  "package": {
+    "name": "@apzhub/qep-test-execution",
+    "version": "0.0.0",
+    "domainStatus": "implemented-eng-100b"
+  },
+  "eng100cPlan": {
+    "path": "docs/products/apzqep/test-execution/ENG-100C-PLAN/",
+    "status": "PLANNING_DELIVERABLE_ACKNOWLEDGED",
+    "authorisesImplementation": false
+  },
+  "continuousEvidencePractice": {
+    "recognisedAsGoodPractice": true,
+    "mandatory": false,
+    "futureProgrammeRecommendation": "OM Enhancement 1.2.0 — NOT_AUTHORISED"
+  },
+  "authorisesApplicationEngineering": false,
+  "recommendedNextProgramme": {
+    "id": "APZQEP-ENG-100C",
+    "title": "Test Execution Application Engineering (Wave 3)",
+    "status": "RECOMMENDATION_ONLY_NOT_AUTHORISED"
+  },
+  "stopCondition": "APZQEP-ENG-100B ACCEPTED / ENGINEERING WAVE 2 BASELINED / CLOSED — ENG-100C NOT AUTHORISED"
+}

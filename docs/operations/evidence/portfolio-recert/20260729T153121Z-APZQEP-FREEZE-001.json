@@ -1,0 +1,59 @@
+{
+  "evidenceId": "20260729T153121Z-APZQEP-FREEZE-001",
+  "programme": "APZQEP-FREEZE-001",
+  "title": "Test Execution Production Freeze",
+  "programmeType": "Production Freeze",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T15:31:21Z",
+  "decisionTimestampUtc": "20260729T153121Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_PRODUCTION_FREEZE_DECISION",
+  "authority": "Owner Production Freeze Directive AUTHORISED TO COMMENCE — APZQEP-FREEZE-001",
+  "pack": "docs/products/apzqep/test-execution/FREEZE-001/",
+  "releasePack": "docs/releases/apzqep/test-execution/1.0.0-rc.1/",
+  "priorAcceptance": {
+    "cert001": "20260729T152900Z-APZQEP-CERT-001-ACCEPTANCE.json"
+  },
+  "releaseCandidate": {
+    "id": "APZQEP-TEST-EXECUTION-1.0.0-rc.1",
+    "package": "@apzhub/qep-test-execution",
+    "version": "1.0.0-rc.1",
+    "buildIdentifier": "FREEZE-001 / 20260729T153121Z",
+    "gitHeadAtValidation": "9fff73c01f5b785b0e4362463830ea86b64a8a3a",
+    "recommendedFrozenVersion": "1.0.0"
+  },
+  "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "riskAcceptanceApproved": true,
+  "ra02Condition": "Mandatory EvidenceAccessPort remediation before unrestricted GA",
+  "validation": {
+    "packageVitest": "56/56 PASS",
+    "hygiene": "PASS",
+    "dependencyUpgrades": "NONE",
+    "unauthorisedEngineering": false,
+    "repositoryObservation": "WORKING_TREE_CONTAINS_UNCOMMITTED_RC_TREE — commit required before deploy"
+  },
+  "deliverables": {
+    "productionFreezeReport": true,
+    "releaseCandidatePackage": true,
+    "releaseNotes": true,
+    "deploymentGuide": true,
+    "rollbackGuide": true,
+    "operationalRunbook": true,
+    "configurationChecklist": true,
+    "dependencyManifest": true,
+    "finalValidationReport": true,
+    "knownLimitations": true,
+    "ownerSummary": true,
+    "ownerAcceptancePending": true
+  },
+  "recommendation": "PROCEED_TO_PRODUCTION_RELEASE",
+  "notAuthorised": [
+    "production_release",
+    "general_availability",
+    "feature_engineering",
+    "schema_change",
+    "api_change",
+    "dependency_upgrade"
+  ],
+  "strategicSuggestionNoted": "APZ Engineering Lifecycle Standard after Production Release (non-binding; not authorised)",
+  "stopCondition": "IMPLEMENTED / AWAITING OWNER PRODUCTION FREEZE DECISION — RELEASE / GA NOT AUTHORISED"
+}

@@ -68,6 +68,19 @@
       "@apzhub/qep-test-plans/presentation": [
         "../../packages/qep-test-plans/src/presentation/index.ts"
       ],
+      "@apzhub/qep-test-execution": ["../../packages/qep-test-execution/src/index.ts"],
+      "@apzhub/qep-test-execution/domain": [
+        "../../packages/qep-test-execution/src/domain/index.ts"
+      ],
+      "@apzhub/qep-test-execution/application": [
+        "../../packages/qep-test-execution/src/application/index.ts"
+      ],
+      "@apzhub/qep-test-execution/infrastructure": [
+        "../../packages/qep-test-execution/src/infrastructure/index.ts"
+      ],
+      "@apzhub/qep-test-execution/presentation": [
+        "../../packages/qep-test-execution/src/presentation/index.ts"
+      ],
       "@apzhub/qep-verification/presentation": [
         "../../packages/qep-verification/src/presentation/index.ts"
       ],

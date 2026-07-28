@@ -1,0 +1,59 @@
+{
+  "evidenceId": "20260729T164800Z-APZQEP-RELEASE-001",
+  "programme": "APZQEP-RELEASE-001",
+  "title": "Test Execution Production Release",
+  "programmeType": "Production Release",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T16:48:00Z",
+  "decisionTimestampUtc": "20260729T164800Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_PRODUCTION_RELEASE_DECISION",
+  "authority": "Owner Production Release Directive AUTHORISED TO COMMENCE \u2014 APZQEP-RELEASE-001",
+  "pack": "docs/products/apzqep/test-execution/RELEASE-001/",
+  "releasePack": "docs/releases/apzqep/test-execution/1.0.0/",
+  "priorAcceptance": {
+    "freeze001": "20260729T164500Z-APZQEP-FREEZE-001-ACCEPTANCE.json",
+    "cert001": "20260729T152900Z-APZQEP-CERT-001-ACCEPTANCE.json"
+  },
+  "versionPromotion": {
+    "from": "1.0.0-rc.1",
+    "to": "1.0.0",
+    "package": "@apzhub/qep-test-execution"
+  },
+  "sourceControl": {
+    "gitTag": "apzqep-test-execution-v1.0.0",
+    "packageVersion": "1.0.0",
+    "commitSha": "SEE_GIT_TAG",
+    "note": "Authoritative: git rev-parse apzqep-test-execution-v1.0.0^{}"
+  },
+  "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "gaRecommendation": "LIMITED_AVAILABILITY_APPROVED",
+  "unrestrictedGa": false,
+  "unrestrictedGaPrerequisite": "Remediate L-02 EvidenceAccessPort under separate Owner engineering authorisation",
+  "riskAcceptanceInForce": true,
+  "validation": {
+    "packageVitest": "56/56 PASS",
+    "unauthorisedEngineering": false,
+    "functionalChangesInPromotion": false
+  },
+  "deliverables": {
+    "productionReleaseReport": true,
+    "releaseVerificationReport": true,
+    "deploymentReadinessReport": true,
+    "operationalHandoverPack": true,
+    "releaseNotesFinal": true,
+    "knownLimitationsRegister": true,
+    "finalRiskAcceptanceRegister": true,
+    "finalTraceabilityReport": true,
+    "ownerSummary": true,
+    "ownerAcceptancePending": true
+  },
+  "notAuthorised": [
+    "unrestricted_general_availability",
+    "feature_engineering",
+    "schema_change",
+    "api_change",
+    "automatic_live_deployment"
+  ],
+  "strategicSuggestionNoted": "APZ Engineering Lifecycle Standard v1.0 after Release acceptance (non-binding; not authorised)",
+  "stopCondition": "IMPLEMENTED / AWAITING OWNER PRODUCTION RELEASE DECISION \u2014 UNRESTRICTED GA NOT AUTHORISED"
+}

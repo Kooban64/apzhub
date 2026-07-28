@@ -64,6 +64,24 @@ export {
   type QepTestPlanPlatformService,
 } from "./qep-test-plan-service-impl";
 export {
+  createQepTestExecutionPlatformServices,
+  createQepTestExecutionPlatformServicesForProduction,
+  createQepTestExecutionPlatformServicesForTest,
+  wrapQepTestExecutionPlatformServiceWithPipeline,
+  type QepTestExecutionPlatformServicesBundle,
+  type CreateQepTestExecutionPlatformServicesInput,
+  type CreateQepTestExecutionPlatformServicesForProductionInput,
+  type CreateQepTestExecutionPlatformServicesForTestInput,
+} from "./create-qep-test-execution-platform-services";
+export {
+  createQepTestExecutionPlatformService,
+  mapExecutionDomainError,
+  performQepTestExecutionAction,
+  EXECUTION_ACTION_KEYS,
+  type QepTestExecutionPlatformService,
+  type ExecutionActionKey,
+} from "./qep-test-execution-service-impl";
+export {
   createQepVerificationPlatformServices,
   createQepVerificationPlatformServicesForProduction,
   createQepVerificationPlatformServicesForTest,

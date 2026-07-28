@@ -27,6 +27,7 @@ import type {
   StoredVerification,
   VerificationSubjectResolver,
 } from "@apzhub/qep-verification";
+import type { QepTestExecutionPortOverrides } from "@apzhub/qep-test-execution";
 
 import type { RequestPipeline } from "../../execution/request-pipeline";
 import { wrapServiceWithPipeline } from "../../execution/wrap-service";
@@ -45,6 +46,11 @@ import {
   wrapQepTestPlanPlatformServiceWithPipeline,
 } from "./create-qep-test-plan-platform-services";
 import {
+  createQepTestExecutionPlatformServicesForProduction,
+  createQepTestExecutionPlatformServicesForTest,
+  wrapQepTestExecutionPlatformServiceWithPipeline,
+} from "./create-qep-test-execution-platform-services";
+import {
   createQepVerificationPlatformServicesForProduction,
   createQepVerificationPlatformServicesForTest,
   wrapQepVerificationPlatformServiceWithPipeline,
@@ -57,6 +63,7 @@ import { wrapQepTraceabilityPlatformServiceWithPipeline } from "./create-qep-tra
 import type { QepTraceabilityPlatformService } from "./qep-traceability-service-impl";
 import type { QepTestSpecificationPlatformService } from "./qep-test-specification-service-impl";
 import type { QepTestPlanPlatformService } from "./qep-test-plan-service-impl";
+import type { QepTestExecutionPlatformService } from "./qep-test-execution-service-impl";
 import type { QepVerificationPlatformService } from "./qep-verification-service-impl";
 
 export type QepPlatformGatewaySurface = {
@@ -65,6 +72,7 @@ export type QepPlatformGatewaySurface = {
   readonly verification: QepVerificationPlatformService;
   readonly specifications: QepTestSpecificationPlatformService;
   readonly plans: QepTestPlanPlatformService;
+  readonly executions: QepTestExecutionPlatformService;
 };
 
 export type QepPlatformServicesBundle = {
@@ -91,6 +99,7 @@ type TraceabilityWiringInput = {
   readonly allocatePlanNumber?: (ctx: {
     readonly tenantId: string;
   }) => Promise<string> | string;
+  readonly execution?: QepTestExecutionPortOverrides;
 };
 
 export type CreateQepPlatformServicesInput = TraceabilityWiringInput & {
@@ -156,6 +165,10 @@ export function wrapQepPlatformGatewayWithPipeline(
       pipeline,
     ),
     plans: wrapQepTestPlanPlatformServiceWithPipeline(gateway.plans, pipeline),
+    executions: wrapQepTestExecutionPlatformServiceWithPipeline(
+      gateway.executions,
+      pipeline,
+    ),
   };
 }
 
@@ -184,6 +197,7 @@ function buildBundle(input: {
   readonly allocatePlanNumber?: (ctx: {
     readonly tenantId: string;
   }) => Promise<string> | string;
+  readonly execution?: QepTestExecutionPortOverrides;
 }): QepPlatformServicesBundle {
   const application = createRequirementApplicationService({
     requirements: input.persistence.requirements,
@@ -287,12 +301,24 @@ function buildBundle(input: {
           onPlanUpserted: input.onPlanUpserted,
         });
 
+  const executionBundle =
+    input.persistenceMode === "postgres" && input.postgresDb
+      ? createQepTestExecutionPlatformServicesForProduction({
+          postgresDb: input.postgresDb,
+          ...input.execution,
+        })
+      : createQepTestExecutionPlatformServicesForTest({
+          allowInMemoryPersistence: true,
+          ...input.execution,
+        });
+
   const gatewaySurface: QepPlatformGatewaySurface = {
     requirements,
     traceability: traceabilityBundle.service,
     verification: verificationBundle.service,
     specifications: specificationBundle.service,
     plans: planBundle.service,
+    executions: executionBundle.service,
   };
 
   return {
@@ -327,6 +353,7 @@ export function createQepPlatformServices(
     onSpecificationUpserted: input.onSpecificationUpserted,
     onPlanUpserted: input.onPlanUpserted,
     allocatePlanNumber: input.allocatePlanNumber,
+    execution: input.execution,
   });
 }
 
@@ -358,6 +385,7 @@ export function createQepPlatformServicesForProduction(
     onSpecificationUpserted: input.onSpecificationUpserted,
     onPlanUpserted: input.onPlanUpserted,
     allocatePlanNumber: input.allocatePlanNumber,
+    execution: input.execution,
   });
 }
 
@@ -390,5 +418,6 @@ export function createQepPlatformServicesForTest(
     onSpecificationUpserted: input.onSpecificationUpserted,
     onPlanUpserted: input.onPlanUpserted,
     allocatePlanNumber: input.allocatePlanNumber,
+    execution: input.execution,
   });
 }

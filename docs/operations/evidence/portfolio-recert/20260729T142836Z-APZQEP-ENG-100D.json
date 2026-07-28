@@ -1,0 +1,52 @@
+{
+  "evidenceId": "20260729T142836Z-APZQEP-ENG-100D",
+  "programme": "APZQEP-ENG-100D",
+  "title": "Test Execution Infrastructure & API Engineering",
+  "programmeType": "Engineering Wave 4 — Infrastructure & API",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T14:28:36Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ENGINEERING_WAVE_4_DECISION",
+  "authority": "Owner Engineering Directive AUTHORISED TO COMMENCE — inherit governance",
+  "pack": "docs/products/apzqep/test-execution/ENG-100D/",
+  "readinessReview": "docs/products/apzqep/test-execution/ENG-100D/INFRASTRUCTURE-READINESS-REVIEW.md",
+  "package": {
+    "name": "@apzhub/qep-test-execution",
+    "version": "0.0.0",
+    "domainStatus": "implemented-eng-100b",
+    "applicationStatus": "implemented-eng-100c",
+    "infrastructureStatus": "implemented-eng-100d"
+  },
+  "deliverables": {
+    "drizzleSchema": true,
+    "migrations": ["0087_apz_qep_test_execution", "0088_apz_qep_test_execution_rls"],
+    "postgresRepository": true,
+    "outboxAndAudit": true,
+    "platformServices": true,
+    "restApi": "/api/v1/qep/executions",
+    "authzMap": true
+  },
+  "validation": {
+    "packageTypecheck": "PASS",
+    "packageLint": "PASS",
+    "packageTests": "PASS",
+    "packageTestCount": "48/48",
+    "configTypecheck": "PASS",
+    "platformServicesTypecheck": "PASS",
+    "httpHandlerTests": "PASS",
+    "platformServiceTests": "PASS"
+  },
+  "notImplemented": [
+    "workbench",
+    "react_pages",
+    "eng_100e",
+    "ecr",
+    "certification",
+    "freeze"
+  ],
+  "eng100ePlan": {
+    "path": "docs/products/apzqep/test-execution/ENG-100E-PLAN/",
+    "status": "PLANNING_ONLY",
+    "authorisesImplementation": false
+  },
+  "stopCondition": "IMPLEMENTED / AWAITING OWNER ENGINEERING WAVE 4 DECISION — ENG-100E NOT AUTHORISED"
+}

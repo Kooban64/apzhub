@@ -1,0 +1,33 @@
+{
+  "evidenceId": "20260728T171200Z-APZQEP-STANDING-BASELINE-ACKNOWLEDGEMENT",
+  "document": "STANDING-PROGRAMME-RECORD",
+  "title": "Owner Acknowledgement — Official Standing Baseline",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T171200Z",
+  "status": "ACKNOWLEDGED",
+  "authoritativeRecord": "docs/products/apzqep/STANDING-PROGRAMME-RECORD.md",
+  "standingStateEvidence": "docs/operations/evidence/portfolio-recert/20260728T143900Z-APZQEP-STANDING-PROGRAMME-STATE.json",
+  "recognition": {
+    "authoritativeStandingBaseline": true,
+    "governancePause": true,
+    "activeProgrammes": [],
+    "authorisedNextDelivery": null
+  },
+  "nextEligibleProgramme": {
+    "id": "APZQEP-OES-ENG-090A",
+    "title": "Test Execution Engineering Specification",
+    "status": "RECOMMENDATION_ONLY",
+    "authorised": false
+  },
+  "operatingRules": [
+    "Foundation is immutable history",
+    "Engineering Platform v1 governs future capability development",
+    "Five frozen capabilities are immutable production references",
+    "APZQEP-ARCH-015 is authoritative Test Execution architecture baseline",
+    "No automatic lifecycle progression",
+    "Every new programme requires explicit Owner authorisation",
+    "Engineering Specifications must conform to Architecture",
+    "Engineering, Certification, Version Promotion, Freeze remain independent stages"
+  ],
+  "note": "Owner acknowledgement only. No programme authorised. No production changes."
+}

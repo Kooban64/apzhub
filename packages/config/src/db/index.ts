@@ -200,6 +200,19 @@ export {
   qepTestPlanHistory,
 } from "./qep-test-plans-schema";
 export {
+  qepTestExecutionSchema,
+  qepTestExecution,
+  qepTestExecutionManifest,
+  qepTestExecutionStep,
+  qepTestExecutionObservation,
+  qepTestExecutionEvidenceReference,
+  qepTestExecutionReview,
+  qepTestExecutionExternalSubmission,
+  qepTestExecutionHistory,
+  qepTestExecutionAudit,
+  qepTestExecutionOutbox,
+} from "./qep-test-execution-schema";
+export {
   platformAdminSchema,
   platformAdminModule,
   platformAdminCategory,

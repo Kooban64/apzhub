@@ -1,0 +1,29 @@
+{
+  "evidenceId": "20260729T151200Z-APZQEP-ECR-001-ACCEPTANCE",
+  "programme": "APZQEP-ECR-001",
+  "title": "Test Execution Engineering Completion Review",
+  "programmeType": "Engineering Completion Review",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T15:12:00Z",
+  "decisionTimestampUtc": "20260729T151200Z",
+  "decision": "ACCEPTED / APPROVED / ENGINEERING COMPLETION REVIEW BASELINED / CLOSED",
+  "authority": "Owner Engineering Completion Review Decision",
+  "pack": "docs/products/apzqep/test-execution/ECR-001/",
+  "acceptance": "docs/products/apzqep/test-execution/ECR-001/OWNER-ACCEPTANCE.md",
+  "implementationEvidence": "docs/operations/evidence/portfolio-recert/20260729T150751Z-APZQEP-ECR-001.json",
+  "engineeringReadiness": "READY_WITH_LIMITATIONS",
+  "limitationsCarriedToCertification": [
+    "OpenAPI documentation gap",
+    "EvidenceAccessPort default-allow",
+    "Outbox enqueue-only",
+    "Lack of Postgres integration tests"
+  ],
+  "authorisesCertification": false,
+  "concurrentAuthorisation": {
+    "id": "APZQEP-CERT-001",
+    "title": "Test Execution Certification",
+    "status": "AUTHORISED_TO_COMMENCE_SEPARATE_DIRECTIVE"
+  },
+  "authorisesFreeze": false,
+  "stopCondition": "APZQEP-ECR-001 ACCEPTED / ENGINEERING COMPLETION REVIEW BASELINED / CLOSED"
+}

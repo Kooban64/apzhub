@@ -1,0 +1,31 @@
+{
+  "evidenceId": "20260728T173200Z-APZQEP-OPERATING-CONVENTION",
+  "document": "STANDING-PROGRAMME-RECORD",
+  "title": "APZQEP Operating Convention — Permanent Operational Contract",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T173200Z",
+  "status": "IN_FORCE",
+  "path": "docs/products/apzqep/STANDING-PROGRAMME-RECORD.md",
+  "convention": {
+    "ownerDecisionsCreateAuthority": true,
+    "evidenceRecordsOnly": true,
+    "acknowledgeIsStateConfirmationOnly": true,
+    "explicitDecisionVerbs": [
+      "AUTHORISED",
+      "ACCEPTED",
+      "APPROVED",
+      "REJECTED",
+      "RETURN FOR REVISION",
+      "CLOSED",
+      "FROZEN"
+    ],
+    "defaultPremise": "Assume STANDING-PROGRAMME-RECORD.md; no active programmes; proceed only on explicit Owner authorisation"
+  },
+  "programmePosition": {
+    "governancePause": true,
+    "activeProgrammes": [],
+    "recommendedNext": "APZQEP-OES-ENG-090A",
+    "recommendedNextAuthorised": false
+  },
+  "note": "Convention lock only. No programme authorised. No production changes."
+}

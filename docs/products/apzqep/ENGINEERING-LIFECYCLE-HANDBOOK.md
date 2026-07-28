@@ -1,16 +1,16 @@
 # APZQEP Engineering Lifecycle Handbook
 
-| Field             | Value                                                                                                                                                                                                                                                                                                                                                         |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Document          | **APZQEP Engineering Lifecycle Handbook**                                                                                                                                                                                                                                                                                                                     |
-| Classification    | Portfolio-level operational reference                                                                                                                                                                                                                                                                                                                         |
-| Version           | **1.0.0**                                                                                                                                                                                                                                                                                                                                                     |
-| Date              | 2026-07-27                                                                                                                                                                                                                                                                                                                                                    |
-| Authority         | Owner Governance Observation (2026-07-27)                                                                                                                                                                                                                                                                                                                     |
-| Complements       | Document 000 · OES-000 · OES-001 · OES-002 — does **not** replace them                                                                                                                                                                                                                                                                                        |
-| Entry point       | [APZQEP-CONSTITUTION.md](./APZQEP-CONSTITUTION.md) **v1.0.0 — RATIFIED / APPROVED / BASELINED** (2026-07-28) — read the ratified Constitution first, then this handbook                                                                                                                                                                                       |
-| Operating Model   | [APZOR Engineering Operating Model Validation](../../engineering/oes/APZOR-ENGINEERING-OPERATING-MODEL-VALIDATION.md) — **VALIDATED 1.0.0**                                                                                                                                                                                                                   |
-| Foundation status | **APZQEP FOUNDATION FORMALLY COMPLETE** — First Capability Wave (Requirements, Traceability, Verification, Test Specifications, Test Plans) all **1.0.0 CERTIFIED / FROZEN**. See [APZQEP-PORTFOLIO-001](./portfolio/PORTFOLIO-001/README.md) — **ACCEPTED / APPROVED / CLOSED** (2026-07-28). **Capability Expansion READY**; no Wave 2 programme authorised |
+| Field             | Value                                                                                                                                                                                                                                                    |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document          | **APZQEP Engineering Lifecycle Handbook**                                                                                                                                                                                                                |
+| Classification    | Portfolio-level operational reference                                                                                                                                                                                                                    |
+| Version           | **1.1.0**                                                                                                                                                                                                                                                |
+| Date              | 2026-07-29                                                                                                                                                                                                                                               |
+| Authority         | Owner Governance Observation (2026-07-27) · APZQEP-GOV-ENG-BUILD-001 **ACCEPTED** (2026-07-29)                                                                                                                                                           |
+| Complements       | Document 000 · OES-000 · OES-001 · OES-002 · **OES-003** / [Engineering Build Contract](../../engineering/oes/ENGINEERING-BUILD-CONTRACT.md) **IN FORCE** — does **not** replace them                                                                    |
+| Entry point       | [APZQEP-CONSTITUTION.md](./APZQEP-CONSTITUTION.md) **v1.0.0 — RATIFIED / APPROVED / BASELINED** (2026-07-28) — read the ratified Constitution first, then this handbook                                                                                  |
+| Operating Model   | [APZOR Engineering Operating Model Validation](../../engineering/oes/APZOR-ENGINEERING-OPERATING-MODEL-VALIDATION.md) — **VALIDATED 1.0.0** · Enhancement **1.1.0 BASELINED / IN FORCE** ([GOV-ENG-BUILD-001](./governance/GOV-ENG-BUILD-001/README.md)) |
+| Foundation status | **IMMUTABLE HISTORY** — [STANDING-PROGRAMME-RECORD.md](./STANDING-PROGRAMME-RECORD.md) **IN FORCE**. Wave 2: ARCH-015 + OES-ENG-090A **BASELINED / CLOSED**. OM 1.1.0 **IN FORCE**. Engineering Waves **NOT AUTHORISED**.                                |
 
 ## Purpose
 
@@ -18,7 +18,7 @@ Show engineers and AI agents **how APZ QEP capabilities are actually delivered**
 
 **Read [APZQEP-CONSTITUTION.md](./APZQEP-CONSTITUTION.md) first** — **RATIFIED / APPROVED / BASELINED** (2026-07-28) — it is the constitutional entry point for APZQEP and prevails over this handbook on conflict (subject only to Document 000).
 
-## Canonical lifecycle (validated)
+## Canonical lifecycle (validated · Engineering stage enhanced)
 
 ```text
 Architecture
@@ -29,7 +29,9 @@ Owner Engineering Specification (OES)
         ↓
 Owner OES Acceptance
         ↓
-Engineering
+Engineering Build Contract (mandatory for Engineering)
+        ↓
+Engineering Wave(s)  →  Owner Review between Waves
         ↓
 Engineering Completion Review (ECR)
         ↓
@@ -43,6 +45,18 @@ Owner Freeze
 ```
 
 No stage may be bypassed. Certification remains independent of engineering ([OES-CERTIFICATION-INDEPENDENCE](../../engineering/oes/OES-CERTIFICATION-INDEPENDENCE.md)).
+
+### Engineering Build Contract & Waves (Operating Model Enhancement 1.1.0)
+
+Normative:
+
+- [ENGINEERING-BUILD-CONTRACT.md](../../engineering/oes/ENGINEERING-BUILD-CONTRACT.md)
+- [OES-003](../../engineering/oes/OES-003-Engineering-Build-Contract-and-Wave-Engineering-Standard.md)
+- Programme pack: [governance/GOV-ENG-BUILD-001/](./governance/GOV-ENG-BUILD-001/README.md)
+
+**Rule:** Future Engineering is authorised **one Wave at a time**. Monolithic “build the whole capability” Engineering programmes are superseded. Agents **SHALL NOT** redesign Architecture or change Engineering Specifications during Engineering.
+
+**Test Execution:** Waves → ECR → CERT → FREEZE **CLOSED** · baseline **`@apzhub/qep-test-execution` 1.0.0**. **APZQEP-RELEASE-001** — **IMPLEMENTED / AWAITING OWNER DECISION** ([test-execution/RELEASE-001/](./test-execution/RELEASE-001/README.md)) · recommended **LIMITED_AVAILABILITY_APPROVED**. Unrestricted GA **NOT AUTHORISED** until L-02 remediated.
 
 ## Capability status (2026-07-27)
 

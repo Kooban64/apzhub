@@ -1,0 +1,34 @@
+{
+  "evidenceId": "20260728T143900Z-APZQEP-STANDING-PROGRAMME-STATE",
+  "document": "STANDING-PROGRAMME-RECORD",
+  "title": "APZQEP Standing Programme State — Official Standing State",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T143900Z",
+  "status": "IN_FORCE",
+  "role": "Official standing state of the APZQEP programme",
+  "path": "docs/products/apzqep/STANDING-PROGRAMME-RECORD.md",
+  "supersedesPointer": "docs/operations/evidence/portfolio-recert/20260728T125026Z-APZQEP-STANDING-PROGRAMME-RECORD.json",
+  "foundation": "PERMANENTLY_CLOSED",
+  "engineeringPlatform": "v1_STABLE",
+  "constitution": "1.0.0_RATIFIED_BASELINED",
+  "frozenCapabilities": [
+    "requirements-1.0.0",
+    "traceability-1.0.0",
+    "verification-1.0.0",
+    "test-specifications-1.0.0",
+    "test-plans-1.0.0"
+  ],
+  "wave2": {
+    "testExecutionArchitecture": "BASELINED",
+    "programme": "APZQEP-ARCH-015",
+    "programmeStatus": "ACCEPTED / APPROVED / ARCHITECTURE BASELINED / CLOSED",
+    "engineeringSpecification": "NOT_AUTHORISED",
+    "governancePause": true
+  },
+  "authorisedNextDelivery": null,
+  "recommendedNextProgramme": {
+    "id": "APZQEP-OES-ENG-090A",
+    "authorised": false
+  },
+  "note": "Documentation only. No Engineering Specification authorised. No production changes."
+}

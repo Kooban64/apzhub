@@ -1,0 +1,57 @@
+{
+  "evidenceId": "20260728T124501Z-APZQEP-FOUNDATION-FINAL-EXECUTIVE-DECLARATION",
+  "document": "FINAL-EXECUTIVE-DECLARATION",
+  "title": "Final Executive Declaration — APZQEP Foundation",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T124501Z",
+  "decision": {
+    "status": "DECLARED",
+    "foundationProgramme": "PERMANENTLY CLOSED",
+    "engineeringPlatform": "APZQEP Engineering Platform v1 RECOGNISED",
+    "capabilityExpansion": "READY",
+    "wave2Authorised": false
+  },
+  "path": "docs/products/apzqep/FINAL-EXECUTIVE-DECLARATION.md",
+  "related": {
+    "constitution": "docs/products/apzqep/APZQEP-CONSTITUTION.md",
+    "constitutionRatification": "docs/products/apzqep/APZQEP-CONSTITUTION-OWNER-RATIFICATION.md",
+    "milestone": "docs/products/apzqep/ENGINEERING-PLATFORM-V1-MILESTONE.md",
+    "portfolio": "docs/products/apzqep/portfolio/PORTFOLIO-001/README.md",
+    "foundationCompletionStatement": "docs/products/apzqep/portfolio/PORTFOLIO-001/FOUNDATION-COMPLETION-STATEMENT.md",
+    "ownerPortfolioDeclaration": "docs/products/apzqep/OWNER-PORTFOLIO-DECLARATION.md"
+  },
+  "frozenCapabilities": [
+    {
+      "id": "requirements",
+      "package": "@apzhub/qep-requirements",
+      "version": "1.0.0",
+      "status": "CERTIFIED / FROZEN"
+    },
+    {
+      "id": "traceability",
+      "package": "@apzhub/qep-traceability",
+      "version": "1.0.0",
+      "status": "CERTIFIED / FROZEN"
+    },
+    {
+      "id": "verification",
+      "package": "@apzhub/qep-verification",
+      "version": "1.0.0",
+      "status": "CERTIFIED / FROZEN"
+    },
+    {
+      "id": "test-specifications",
+      "package": "@apzhub/qep-test-specifications",
+      "version": "1.0.0",
+      "status": "CERTIFIED / FROZEN"
+    },
+    {
+      "id": "test-plans",
+      "package": "@apzhub/qep-test-plans",
+      "version": "1.0.0",
+      "status": "CERTIFIED / FROZEN"
+    }
+  ],
+  "authorisedNextDelivery": null,
+  "note": "Documentation / declaration only. No Wave 2 Architecture or ENG programme authorised. No frozen package source modified."
+}

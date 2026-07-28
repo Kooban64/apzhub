@@ -1,0 +1,32 @@
+{
+  "evidenceId": "20260729T094459Z-APZQEP-ENG-100A-ACCEPTANCE",
+  "programme": "APZQEP-ENG-100A",
+  "title": "Test Execution Repository Scaffolding",
+  "programmeType": "Engineering Wave 1 — Repository Scaffolding",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T09:44:59Z",
+  "decisionTimestampUtc": "20260729T094459Z",
+  "decision": "ACCEPTED / APPROVED / ENGINEERING WAVE 1 BASELINED / CLOSED",
+  "authority": "Owner Engineering Wave 1 Decision",
+  "pack": "docs/products/apzqep/test-execution/ENG-100A/",
+  "acceptance": "docs/products/apzqep/test-execution/ENG-100A/OWNER-ACCEPTANCE.md",
+  "implementationEvidence": "docs/operations/evidence/portfolio-recert/20260729T093000Z-APZQEP-ENG-100A.json",
+  "package": {
+    "name": "@apzhub/qep-test-execution",
+    "version": "0.0.0",
+    "baseline": "ENGINEERING_WAVE_1_BASELINED"
+  },
+  "eng100bPlan": {
+    "path": "docs/products/apzqep/test-execution/ENG-100B-PLAN/",
+    "status": "PLANNING_DELIVERABLE_ACKNOWLEDGED",
+    "authorisesImplementation": false
+  },
+  "authorisesDomainEngineering": false,
+  "recommendedNextProgramme": {
+    "id": "APZQEP-ENG-100B",
+    "title": "Test Execution Domain Engineering (Wave 2)",
+    "status": "RECOMMENDATION_ONLY_NOT_AUTHORISED"
+  },
+  "productionBusinessFunctionality": "NONE",
+  "stopCondition": "APZQEP-ENG-100A ACCEPTED / ENGINEERING WAVE 1 BASELINED / CLOSED — ENG-100B NOT AUTHORISED"
+}

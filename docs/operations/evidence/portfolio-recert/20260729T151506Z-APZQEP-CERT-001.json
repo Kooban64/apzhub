@@ -1,0 +1,65 @@
+{
+  "evidenceId": "20260729T151506Z-APZQEP-CERT-001",
+  "programme": "APZQEP-CERT-001",
+  "title": "Test Execution Capability Certification",
+  "programmeType": "Certification",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T15:15:06Z",
+  "decisionTimestampUtc": "20260729T151506Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_CERTIFICATION_DECISION",
+  "authority": "Owner Certification Directive AUTHORISED TO COMMENCE — APZQEP-CERT-001",
+  "pack": "docs/products/apzqep/test-execution/CERT-001/",
+  "priorAcceptance": {
+    "ecr001": "20260729T151200Z-APZQEP-ECR-001-ACCEPTANCE.json",
+    "eng100e": "20260729T150347Z-APZQEP-ENG-100E-ACCEPTANCE.json"
+  },
+  "baselines": {
+    "architecture": "APZQEP-ARCH-015",
+    "engineeringSpecification": "APZQEP-OES-ENG-090A",
+    "waves": ["ENG-100A", "ENG-100B", "ENG-100C", "ENG-100D", "ENG-100E"],
+    "ecr": "APZQEP-ECR-001"
+  },
+  "deliverables": {
+    "certificationReport": true,
+    "functionalCertificationReport": true,
+    "apiCertificationReport": true,
+    "securityCertificationReport": true,
+    "performanceCertificationReport": true,
+    "operationalReadinessAssessment": true,
+    "limitationDispositionRegister": true,
+    "releaseReadinessAssessment": true,
+    "riskAcceptanceRegister": true,
+    "validationReport": true,
+    "ownerSummary": true,
+    "ownerAcceptancePending": true
+  },
+  "revalidatedSuites": {
+    "packageVitest": "56/56 PASS",
+    "workbenchAndHandlersVitest": "24/24 PASS",
+    "playwrightWorkbench": "ACCEPTED_FROM_ENG_100E_MOCKED_APIS"
+  },
+  "verdicts": {
+    "recommendedClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+    "freezeRecommendation": "PROCEED_TO_PRODUCTION_FREEZE_WITH_RISK_ACCEPTANCE",
+    "alternateIfRa02Rejected": "RETURN_TO_ENGINEERING_EVIDENCE_ACCESS_PORT",
+    "criticalDefects": 0,
+    "unauthorisedEngineering": false
+  },
+  "limitationDispositions": {
+    "L-01": "ACCEPT_FOR_RELEASE",
+    "L-02": "DEFER_WITH_RISK_ACCEPTANCE_CORRECT_BEFORE_UNRESTRICTED_GA",
+    "L-03": "ACCEPT_FOR_RELEASE_NO_CONSUMER_DEPENDENCY",
+    "L-04": "DEFER_WITH_RISK_ACCEPTANCE"
+  },
+  "notAuthorised": [
+    "production_freeze",
+    "production_release",
+    "general_availability",
+    "feature_engineering",
+    "architecture_change",
+    "version_promotion_applied"
+  ],
+  "packageVersion": "0.0.0",
+  "strategicSuggestionNoted": "APZ Engineering Lifecycle Standard (non-binding; not authorised)",
+  "stopCondition": "IMPLEMENTED / AWAITING OWNER CERTIFICATION DECISION — FREEZE / RELEASE NOT AUTHORISED"
+}

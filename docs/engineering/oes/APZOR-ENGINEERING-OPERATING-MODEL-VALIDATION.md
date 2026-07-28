@@ -1,13 +1,14 @@
 # APZOR Engineering Operating Model — Validation Record
 
-| Field                   | Value                                                                     |
-| ----------------------- | ------------------------------------------------------------------------- |
-| Document                | APZOR Engineering Operating Model Validation                              |
-| Version considered      | **1.0.0** (OES-000 / OES-001 / OES-002 governance trilogy + Document 000) |
-| Date originally filed   | 2026-07-27                                                                |
-| Superseding recognition | **2026-07-28** — Owner Portfolio Declaration + APZQEP-PORTFOLIO-001       |
-| Authority               | Owner                                                                     |
-| Status                  | **FULLY VALIDATED THROUGH PRACTICE**                                      |
+| Field                   | Value                                                                                                              |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Document                | APZOR Engineering Operating Model Validation                                                                       |
+| Version considered      | **1.0.0** (OES trilogy + Document 000) · **Enhancement 1.1.0 IN FORCE** (OES-003 Build Contract + Waves)           |
+| Date originally filed   | 2026-07-27                                                                                                         |
+| Superseding recognition | **2026-07-28** — Owner Portfolio Declaration + APZQEP-PORTFOLIO-001                                                |
+| Enhancement programme   | **APZQEP-GOV-ENG-BUILD-001** — **ACCEPTED / APPROVED / OPERATING MODEL AMENDMENT BASELINED / CLOSED** (2026-07-29) |
+| Authority               | Owner                                                                                                              |
+| Status                  | **FULLY VALIDATED THROUGH PRACTICE** (1.0.0) · **Enhancement 1.1.0 BASELINED / IN FORCE**                          |
 
 ## Observation
 
@@ -19,40 +20,39 @@ The complete APZOR engineering lifecycle has been exercised successfully across 
 2. **Traceability** — **1.0.0 CERTIFIED / FROZEN**
 3. **Verification** — **1.0.0 CERTIFIED / FROZEN**
 4. **Test Specifications** — **1.0.0 CERTIFIED / FROZEN**
-5. **Test Plans** — **1.0.0 CERTIFIED / FROZEN** (first fully governed orchestration capability; Domain / Infrastructure / Workbench Component Certification + Integrated Capability Certification + Freeze)
+5. **Test Plans** — **1.0.0 CERTIFIED / FROZEN**
 
 The lifecycle is therefore **empirically proven**, not theoretical.
 
-## Layered certification pattern (validated)
-
-```text
-Component Certification (Domain / Infrastructure / Workbench as applicable)
-  → Capability Certification
-  → Owner Freeze
-```
-
-## Layered architecture pattern (validated on Test Plans)
-
-```text
-Domain → Infrastructure → Workbench
-```
-
-Each layer independently engineered, reviewed, accepted, and (where applicable) component-certified before capability assembly.
-
-## Owner determination
+## Owner determination (1.0.0)
 
 > **Version 1.0.0 of the APZOR Engineering Operating Model is fully validated.**
 
-Governing standards (Document 000, OES-000, OES-001, OES-002) function as the engineering operating system for the platform. This is no longer a proposed methodology—it has been demonstrated in practice across multiple frozen capabilities, component certifications, one complete orchestration capability, independent assurance, and repeatable Owner governance.
+## Enhancement 1.1.0 — Engineering Build Contract & Wave Engineering — IN FORCE
+
+Accepted via **APZQEP-GOV-ENG-BUILD-001** (2026-07-29). Evidence: `20260729T053932Z-APZQEP-GOV-ENG-BUILD-001-ACCEPTANCE.json`.
+
+| Instrument                                                                       | Status                                              |
+| -------------------------------------------------------------------------------- | --------------------------------------------------- |
+| [ENGINEERING-BUILD-CONTRACT.md](./ENGINEERING-BUILD-CONTRACT.md)                 | **IN FORCE** (mandatory for all future Engineering) |
+| [OES-003](./OES-003-Engineering-Build-Contract-and-Wave-Engineering-Standard.md) | **ACCEPTED / IN FORCE**                             |
+| Wave-Based Engineering                                                           | **IN FORCE**                                        |
+| Monolithic Engineering                                                           | **SUPERSEDED**                                      |
+| OES-000 / OES-002 bodies                                                         | Unchanged (additive addenda only)                   |
+
+Effective immediately: future Engineering **SHALL** use the Build Contract and Owner-gated Waves. Validation of 1.0.0 remains historically true; 1.1.0 is an additive strengthening of Engineering execution.
 
 ## Complementary references
 
 - Operational handbook: [APZQEP Engineering Lifecycle Handbook](../../products/apzqep/ENGINEERING-LIFECYCLE-HANDBOOK.md)
-- Owner Portfolio Declaration: [OWNER-PORTFOLIO-DECLARATION.md](../../products/apzqep/OWNER-PORTFOLIO-DECLARATION.md)
-- Foundation Completion pack: [APZQEP-PORTFOLIO-001](../../products/apzqep/portfolio/PORTFOLIO-001/README.md)
-- Certification independence: [OES-CERTIFICATION-INDEPENDENCE.md](./OES-CERTIFICATION-INDEPENDENCE.md)
-- Certification levels: [OES-CERTIFICATION-LEVELS.md](./OES-CERTIFICATION-LEVELS.md)
+- Governance amendment pack: [GOV-ENG-BUILD-001](../../products/apzqep/governance/GOV-ENG-BUILD-001/README.md)
+- Standing Programme Record: [STANDING-PROGRAMME-RECORD.md](../../products/apzqep/STANDING-PROGRAMME-RECORD.md)
 
 ## STOP
 
-This record does **not** amend frozen OES documents. Future formal OES revisions remain under Owner change control.
+```text
+OPERATING MODEL 1.0.0 = FULLY VALIDATED
+ENHANCEMENT 1.1.0 = BASELINED / IN FORCE
+BUILD CONTRACT = IN FORCE
+WAVE ENGINEERING = IN FORCE
+```

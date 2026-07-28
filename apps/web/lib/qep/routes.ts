@@ -72,3 +72,17 @@ export {
   parseQepTestPlanRouteId,
   parseQepTestPlanDetailMode,
 } from "@apzhub/qep-test-plans/presentation";
+
+export {
+  QEP_TEST_EXECUTION_BASE_PATH,
+  QEP_TEST_EXECUTION_ROUTES,
+  isQepTestExecutionRoute,
+  isQepTestExecutionHomeRoute,
+  isQepTestExecutionExplorerRoute,
+  isQepTestExecutionAssignedRoute,
+  isQepTestExecutionReviewRoute,
+  isQepTestExecutionNewRoute,
+  parseQepTestExecutionRouteId,
+  parseQepTestExecutionDetailMode,
+  type QepTestExecutionDetailMode,
+} from "@apzhub/qep-test-execution/presentation";

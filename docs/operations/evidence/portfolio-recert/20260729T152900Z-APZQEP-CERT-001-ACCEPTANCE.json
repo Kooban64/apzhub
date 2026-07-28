@@ -1,0 +1,32 @@
+{
+  "evidenceId": "20260729T152900Z-APZQEP-CERT-001-ACCEPTANCE",
+  "programme": "APZQEP-CERT-001",
+  "title": "Test Execution Capability Certification",
+  "programmeType": "Certification",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T15:29:00Z",
+  "decisionTimestampUtc": "20260729T152900Z",
+  "decision": "ACCEPTED / APPROVED / CERTIFICATION BASELINED / CLOSED",
+  "authority": "Owner Certification Decision",
+  "pack": "docs/products/apzqep/test-execution/CERT-001/",
+  "acceptance": "docs/products/apzqep/test-execution/CERT-001/OWNER-ACCEPTANCE.md",
+  "implementationEvidence": "docs/operations/evidence/portfolio-recert/20260729T151506Z-APZQEP-CERT-001.json",
+  "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "riskAcceptanceApproved": true,
+  "limitationDispositions": {
+    "L-01": "ACCEPT_FOR_RELEASE",
+    "L-02": "ACCEPT_WITH_RISK_ACCEPTANCE_MANDATORY_REMEDIATION_BEFORE_UNRESTRICTED_GA",
+    "L-03": "ACCEPT_FOR_RELEASE",
+    "L-04": "ACCEPT_WITH_RISK_ACCEPTANCE"
+  },
+  "ra02Condition": "EvidenceAccessPort (L-02) mandatory corrective action before unrestricted GA; acceptable for controlled production/pilot; must not become permanent technical debt",
+  "authorisesFreeze": false,
+  "concurrentAuthorisation": {
+    "id": "APZQEP-FREEZE-001",
+    "title": "Test Execution Production Freeze",
+    "status": "AUTHORISED_TO_COMMENCE_SEPARATE_DIRECTIVE"
+  },
+  "authorisesRelease": false,
+  "authorisesGa": false,
+  "stopCondition": "APZQEP-CERT-001 ACCEPTED / CERTIFICATION BASELINED / CLOSED"
+}

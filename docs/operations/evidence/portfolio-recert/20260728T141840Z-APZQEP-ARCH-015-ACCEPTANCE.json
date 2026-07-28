@@ -1,0 +1,68 @@
+{
+  "evidenceId": "20260728T141840Z-APZQEP-ARCH-015-ACCEPTANCE",
+  "programme": "APZQEP-ARCH-015",
+  "oes": "APZQEP-OES-ARCH-015",
+  "title": "Test Execution Capability Architecture",
+  "recordedAt": "2026-07-28T14:18:40Z",
+  "decisionTimestampUtc": "20260728T141840Z",
+  "decision": "ACCEPTED / APPROVED / ARCHITECTURE BASELINED / CLOSED",
+  "authority": "Owner Architecture Review",
+  "pack": "docs/products/apzqep/test-execution/OES-ARCH-015/",
+  "acceptance": "docs/products/apzqep/test-execution/OES-ARCH-015/OWNER-ACCEPTANCE.md",
+  "complete": "docs/products/apzqep/test-execution/OES-ARCH-015/COMPLETE.md",
+  "ownerSummary": "docs/products/apzqep/test-execution/OES-ARCH-015/OWNER-SUMMARY.md",
+  "validationReport": "docs/products/apzqep/test-execution/OES-ARCH-015/ARCHITECTURE-VALIDATION-REPORT.md",
+  "implementedEvidence": "docs/operations/evidence/portfolio-recert/20260728T131515Z-APZQEP-ARCH-015.json",
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "APZQEP-CONSTITUTION v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0",
+    "STANDING-PROGRAMME-RECORD IN FORCE"
+  ],
+  "assessment": {
+    "programmeScope": "PASS",
+    "constitutionalCompliance": "PASS",
+    "oesCompliance": "PASS",
+    "standingProgrammeRecordCompliance": "PASS",
+    "frozenBaselinePreservation": "PASS",
+    "architectureCompleteness": "PASS",
+    "capabilityBoundaryDefinition": "PASS",
+    "architectureValidation": "PASS",
+    "noEngineeringPerformed": "CONFIRMED"
+  },
+  "adrsAccepted": [
+    "ADR-0075",
+    "ADR-0076",
+    "ADR-0077",
+    "ADR-0078",
+    "ADR-0079",
+    "ADR-0080",
+    "ADR-0081",
+    "ADR-0082",
+    "ADR-0083",
+    "ADR-0084",
+    "ADR-0085",
+    "ADR-0086"
+  ],
+  "frozenBaselineIntegrity": "CONFIRMED",
+  "engineeringUnderArch015": false,
+  "engineeringSpecification": "NOT_STARTED",
+  "authorisesNext": null,
+  "recommendedNextProgramme": {
+    "id": "APZQEP-OES-ENG-090A",
+    "title": "Test Execution Engineering Specification",
+    "authorised": false,
+    "status": "RECOMMENDATION_ONLY"
+  },
+  "notAuthorised": [
+    "Engineering Specification",
+    "Engineering under ARCH-015",
+    "Package creation / source implementation",
+    "Version changes",
+    "Certification",
+    "Freeze",
+    "Any other Wave 2 programme"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "evidenceId": "20260729T145837Z-APZQEP-ENG-100E",
+  "programme": "APZQEP-ENG-100E",
+  "title": "Test Execution Workbench Engineering",
+  "programmeType": "Engineering Wave 5 — Workbench",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T14:58:37Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ENGINEERING_WAVE_5_DECISION",
+  "authority": "Owner Engineering Directive AUTHORISED TO COMMENCE — inherit governance",
+  "pack": "docs/products/apzqep/test-execution/ENG-100E/",
+  "priorAcceptance": {
+    "eng100d": "20260729T143538Z-APZQEP-ENG-100D-ACCEPTANCE.json"
+  },
+  "deliverables": {
+    "moduleYamlWorkbench": true,
+    "presentationRoutes": true,
+    "clientApi": true,
+    "workbenchViews": true,
+    "availableActionsSoleAuthority": true,
+    "workspaceRouterWiring": true,
+    "unitTests": true,
+    "playwrightSpec": true
+  },
+  "validation": {
+    "packageTests": "PASS",
+    "packageTestCount": "56/56",
+    "packageTypecheck": "PASS",
+    "packageLint": "PASS",
+    "workbenchUnitTests": "PASS",
+    "workbenchUnitTestCount": "16"
+  },
+  "notImplemented": [
+    "ecr",
+    "certification",
+    "freeze",
+    "domain_redesign",
+    "new_migrations",
+    "new_rest_endpoints"
+  ],
+  "ecr001Plan": {
+    "path": "docs/products/apzqep/test-execution/ECR-001-PLAN/",
+    "status": "PLANNING_ONLY",
+    "authorisesImplementation": false
+  },
+  "stopCondition": "IMPLEMENTED / AWAITING OWNER ENGINEERING WAVE 5 DECISION — ECR NOT AUTHORISED"
+}

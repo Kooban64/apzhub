@@ -1,0 +1,61 @@
+{
+  "evidenceId": "20260729T150751Z-APZQEP-ECR-001",
+  "programme": "APZQEP-ECR-001",
+  "title": "Test Execution Engineering Completion Review",
+  "programmeType": "Engineering Completion Review",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T15:07:51Z",
+  "decisionTimestampUtc": "20260729T150751Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ENGINEERING_COMPLETION_REVIEW_DECISION",
+  "authority": "Owner Engineering Directive AUTHORISED TO COMMENCE — APZQEP-ECR-001",
+  "pack": "docs/products/apzqep/test-execution/ECR-001/",
+  "priorAcceptance": {
+    "eng100e": "20260729T150347Z-APZQEP-ENG-100E-ACCEPTANCE.json"
+  },
+  "wavesReviewed": ["ENG-100A", "ENG-100B", "ENG-100C", "ENG-100D", "ENG-100E"],
+  "baselines": {
+    "architecture": "APZQEP-ARCH-015",
+    "engineeringSpecification": "APZQEP-OES-ENG-090A",
+    "buildContract": "APZQEP-GOV-ENG-BUILD-001",
+    "operatingModel": "1.1.0"
+  },
+  "deliverables": {
+    "engineeringCompletionReviewReport": true,
+    "engineeringConformanceMatrix": true,
+    "architectureConformanceMatrix": true,
+    "engineeringSpecificationTraceabilityMatrix": true,
+    "technicalDebtRegister": true,
+    "securityReview": true,
+    "performanceReview": true,
+    "testingReview": true,
+    "documentationReview": true,
+    "riskRegister": true,
+    "engineeringReadinessAssessment": true,
+    "certificationReadinessRecommendation": true,
+    "validationReport": true,
+    "ownerSummary": true,
+    "ownerAcceptancePending": true
+  },
+  "verdicts": {
+    "engineeringReadiness": "READY_WITH_LIMITATIONS",
+    "certificationReadinessRecommendation": "READY_WITH_LIMITATIONS",
+    "criticalDefects": 0,
+    "unauthorisedEngineering": false
+  },
+  "highLimitations": [
+    "OpenAPI for /api/v1/qep/executions not published (TD-01)",
+    "EvidenceAccessPort default-allow when check not injected (TD-03 / SEC-01)",
+    "Outbox enqueue-only without dispatcher (TD-02)",
+    "No Postgres repository integration tests (TD-04)"
+  ],
+  "notAuthorised": [
+    "certification",
+    "production_freeze",
+    "release",
+    "feature_engineering",
+    "architecture_change",
+    "engineering_specification_change"
+  ],
+  "strategicSuggestionNoted": "APZ Engineering Lifecycle Standard (non-binding; not authorised)",
+  "stopCondition": "IMPLEMENTED / AWAITING OWNER ENGINEERING COMPLETION REVIEW DECISION — CERTIFICATION / FREEZE NOT AUTHORISED"
+}

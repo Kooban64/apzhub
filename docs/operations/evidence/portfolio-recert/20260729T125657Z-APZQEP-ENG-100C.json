@@ -1,0 +1,52 @@
+{
+  "evidenceId": "20260729T125657Z-APZQEP-ENG-100C",
+  "programme": "APZQEP-ENG-100C",
+  "title": "Test Execution Application Engineering",
+  "programmeType": "Engineering Wave 3 — Application Layer",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T12:56:57Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ENGINEERING_WAVE_3_DECISION",
+  "authority": "Owner Instruction AUTHORISED TO COMMENCE — inherit governance",
+  "pack": "docs/products/apzqep/test-execution/ENG-100C/",
+  "package": {
+    "name": "@apzhub/qep-test-execution",
+    "version": "0.0.0",
+    "domainStatus": "implemented-eng-100b",
+    "applicationStatus": "implemented-eng-100c",
+    "infrastructureStatus": "scaffolded-awaiting-eng-100d"
+  },
+  "deliverables": {
+    "commandService": true,
+    "queryService": true,
+    "externalIngestionService": true,
+    "availableActionsService": true,
+    "portsExpanded": true,
+    "dtoMapping": true,
+    "applicationTests": true
+  },
+  "validation": {
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "tests": "PASS",
+    "testCount": "40/40"
+  },
+  "notImplemented": [
+    "infrastructure_adapters",
+    "postgresql",
+    "rest_api",
+    "workbench",
+    "migrations",
+    "workers"
+  ],
+  "eng100dPlan": {
+    "path": "docs/products/apzqep/test-execution/ENG-100D-PLAN/",
+    "status": "PLANNING_ONLY",
+    "authorisesImplementation": false
+  },
+  "recommendationsNoted": [
+    "Standard Owner Authorisation Template for future waves",
+    "Internal Wave Readiness Reviews after ENG-100E (engineering practice)",
+    "OM Enhancement 1.2.0 continuous evidence (not mandatory yet)"
+  ],
+  "stopCondition": "IMPLEMENTED / AWAITING OWNER ENGINEERING WAVE 3 DECISION — ENG-100D NOT AUTHORISED"
+}

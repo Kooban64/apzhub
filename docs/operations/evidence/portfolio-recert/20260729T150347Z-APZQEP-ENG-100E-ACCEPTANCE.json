@@ -1,0 +1,25 @@
+{
+  "evidenceId": "20260729T150347Z-APZQEP-ENG-100E-ACCEPTANCE",
+  "programme": "APZQEP-ENG-100E",
+  "title": "Test Execution Workbench Engineering",
+  "programmeType": "Engineering Wave 5 — Workbench Engineering",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T15:03:47Z",
+  "decisionTimestampUtc": "20260729T150347Z",
+  "decision": "ACCEPTED / APPROVED / ENGINEERING WAVE 5 BASELINED / CLOSED",
+  "authority": "Owner Engineering Wave 5 Decision",
+  "pack": "docs/products/apzqep/test-execution/ENG-100E/",
+  "acceptance": "docs/products/apzqep/test-execution/ENG-100E/OWNER-ACCEPTANCE.md",
+  "implementationEvidence": "docs/operations/evidence/portfolio-recert/20260729T145837Z-APZQEP-ENG-100E.json",
+  "workbenchBaseline": "ENGINEERING_WAVE_5_BASELINED",
+  "engineeringLifecycleComplete": true,
+  "wavesBaselined": ["ENG-100A", "ENG-100B", "ENG-100C", "ENG-100D", "ENG-100E"],
+  "authorisesCertification": false,
+  "authorisesFreeze": false,
+  "concurrentAuthorisation": {
+    "id": "APZQEP-ECR-001",
+    "title": "Test Execution Engineering Completion Review",
+    "status": "AUTHORISED_TO_COMMENCE_SEPARATE_DIRECTIVE"
+  },
+  "stopCondition": "APZQEP-ENG-100E ACCEPTED / ENGINEERING WAVE 5 BASELINED / CLOSED"
+}

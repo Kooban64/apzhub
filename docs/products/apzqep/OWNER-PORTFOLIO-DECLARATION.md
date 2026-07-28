@@ -88,6 +88,10 @@ Documentation / baseline capture only — no new functionality engineering. Crea
 
 **APZQEP-CONSTITUTION v1.0.0** is **RATIFIED / APPROVED / BASELINED** — see [APZQEP-CONSTITUTION-OWNER-RATIFICATION.md](./APZQEP-CONSTITUTION-OWNER-RATIFICATION.md). It is now the constitutional entry point for APZQEP. This does **not** change the next-step position of this Declaration: **Authorised next delivery: None.** Wave 2 still requires a separate, future Owner-authorised Architecture programme.
 
+## Final Executive Declaration (2026-07-28)
+
+Owner closeout recorded in [FINAL-EXECUTIVE-DECLARATION.md](./FINAL-EXECUTIVE-DECLARATION.md) — **Foundation Programme permanently closed**. Engineering Platform v1 recognised. Capability Expansion remains READY and **not** authorised.
+
 ## STOP
 
 ```text
@@ -97,6 +101,7 @@ FIVE CAPABILITIES 1.0.0 CERTIFIED / FROZEN
 FOUNDATION → EXPANSION HANDOVER COMPLETE VIA PORTFOLIO-001
 
 APZQEP-PORTFOLIO-001: ACCEPTED / APPROVED / CLOSED
+FOUNDATION PROGRAMME: PERMANENTLY CLOSED
 APZQEP-CONSTITUTION 1.0.0: RATIFIED / APPROVED / BASELINED
 APZQEP FOUNDATION FULLY COMPLETE
 ENGINEERING PLATFORM V1

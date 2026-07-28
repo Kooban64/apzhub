@@ -1,0 +1,23 @@
+{
+  "evidenceId": "20260728T142705Z-APZQEP-ARCH-015-OWNER-RECORD",
+  "programme": "APZQEP-ARCH-015",
+  "title": "Owner Record — First Expansion Architecture Programme Complete",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T142705Z",
+  "recognition": {
+    "firstExpansionArchitectureProgramme": true,
+    "architectureBaselined": true,
+    "programmeClosed": true
+  },
+  "path": "docs/products/apzqep/test-execution/OES-ARCH-015/OWNER-RECORD.md",
+  "acceptance": "docs/products/apzqep/test-execution/OES-ARCH-015/OWNER-ACCEPTANCE.md",
+  "acceptanceEvidence": "docs/operations/evidence/portfolio-recert/20260728T141840Z-APZQEP-ARCH-015-ACCEPTANCE.json",
+  "governancePause": true,
+  "engineeringSpecification": "NOT_AUTHORISED",
+  "recommendedNextProgramme": {
+    "id": "APZQEP-OES-ENG-090A",
+    "title": "Test Execution Engineering Specification",
+    "authorised": false
+  },
+  "note": "Owner recognition only. No Engineering Specification authorised. No production changes."
+}

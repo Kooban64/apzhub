@@ -62,6 +62,7 @@ import type { QepRequirementPlatformService } from "../services/qep/qep-service-
 import type { QepTraceabilityPlatformService } from "../services/qep/qep-traceability-service-impl";
 import type { QepTestSpecificationPlatformService } from "../services/qep/qep-test-specification-service-impl";
 import type { QepTestPlanPlatformService } from "../services/qep/qep-test-plan-service-impl";
+import type { QepTestExecutionPlatformService } from "../services/qep/qep-test-execution-service-impl";
 import type { QepVerificationPlatformService } from "../services/qep/qep-verification-service-impl";
 
 /** Platform-wired QEP gateway — short pipeline operation names (list/get/create/...). */
@@ -71,6 +72,7 @@ export type QepPlatformGateway = {
   readonly verification: QepVerificationPlatformService;
   readonly specifications: QepTestSpecificationPlatformService;
   readonly plans: QepTestPlanPlatformService;
+  readonly executions: QepTestExecutionPlatformService;
 };
 
 export interface PlatformServiceGatewayDeps {

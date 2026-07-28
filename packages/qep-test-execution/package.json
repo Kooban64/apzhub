@@ -1,0 +1,23 @@
+{
+  "name": "@apzhub/qep-test-execution",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "APZ QEP Test Execution — Domain + Application + Infrastructure + Workbench. Production baseline 1.0.0 (APZQEP-RELEASE-001). Governed by APZQEP-ARCH-015 + APZQEP-OES-ENG-090A + Engineering Build Contract. Class PRODUCTION_READY_WITH_LIMITATIONS.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./domain": "./src/domain/index.ts",
+    "./application": "./src/application/index.ts",
+    "./infrastructure": "./src/infrastructure/index.ts",
+    "./presentation": "./src/presentation/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-test-execution"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "drizzle-orm": "^0.45.2"
+  }
+}

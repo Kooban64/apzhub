@@ -1,0 +1,42 @@
+{
+  "evidenceId": "20260729T053932Z-APZQEP-GOV-ENG-BUILD-001-ACCEPTANCE",
+  "programme": "APZQEP-GOV-ENG-BUILD-001",
+  "title": "Engineering Build Contract and Wave-Based Engineering Delivery",
+  "programmeType": "Engineering Operating Model Amendment",
+  "recordedAt": "2026-07-29T05:39:32Z",
+  "decisionTimestampUtc": "20260729T053932Z",
+  "decision": "ACCEPTED / APPROVED / OPERATING MODEL AMENDMENT BASELINED / CLOSED",
+  "authority": "Owner Operating Model Amendment Decision",
+  "pack": "docs/products/apzqep/governance/GOV-ENG-BUILD-001/",
+  "acceptance": "docs/products/apzqep/governance/GOV-ENG-BUILD-001/OWNER-ACCEPTANCE.md",
+  "complete": "docs/products/apzqep/governance/GOV-ENG-BUILD-001/COMPLETE.md",
+  "implementationEvidence": "docs/operations/evidence/portfolio-recert/20260728T201800Z-APZQEP-GOV-ENG-BUILD-001.json",
+  "engineeringBuildContract": "docs/engineering/oes/ENGINEERING-BUILD-CONTRACT.md",
+  "oes003": "docs/engineering/oes/OES-003-Engineering-Build-Contract-and-Wave-Engineering-Standard.md",
+  "standingProgrammeRecord": "docs/products/apzqep/STANDING-PROGRAMME-RECORD.md",
+  "operatingModelEnhancement": {
+    "version": "1.1.0",
+    "status": "BASELINED_IN_FORCE",
+    "buildContract": "IN_FORCE",
+    "waveBasedEngineering": "IN_FORCE",
+    "monolithicEngineering": "SUPERSEDED"
+  },
+  "constitutionAmended": false,
+  "frozenOesBodiesEdited": false,
+  "productionEngineering": "NONE",
+  "authorisesEngineeringWaves": false,
+  "waveReservation": {
+    "APZQEP-ENG-100A": "Repository Scaffolding — RESERVED_NOT_AUTHORISED",
+    "APZQEP-ENG-100B": "Domain — RESERVED_NOT_AUTHORISED",
+    "APZQEP-ENG-100C": "Application — RESERVED_NOT_AUTHORISED",
+    "APZQEP-ENG-100D": "Infrastructure & API — RESERVED_NOT_AUTHORISED",
+    "APZQEP-ENG-100E": "Workbench — RESERVED_NOT_AUTHORISED"
+  },
+  "eng100AMeaning": "Repository Scaffolding exclusively",
+  "recommendedNextProgramme": {
+    "id": "APZQEP-ENG-100A",
+    "title": "Test Execution Repository Scaffolding (Engineering Wave 1)",
+    "status": "RECOMMENDATION_ONLY_NOT_AUTHORISED"
+  },
+  "stopCondition": "APZQEP-GOV-ENG-BUILD-001 ACCEPTED / OPERATING MODEL AMENDMENT BASELINED / CLOSED — Build Contract and Waves IN FORCE — no Engineering Wave authorised"
+}

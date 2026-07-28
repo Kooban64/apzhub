@@ -1,8 +1,9 @@
 # Wave 2 Roadmap — APZQEP-PORTFOLIO-001
 
-> **Status: INDICATIVE ONLY. NOT AUTHORISED PROGRAMMES.**
+> **Status: INDICATIVE ONLY for items 2–8.**  
+> **Exception:** Item 1 — **Test Execution** — **APZQEP-ARCH-015** Architecture is **ACCEPTED / APPROVED / CLOSED**. See [test-execution/OES-ARCH-015/](../../test-execution/OES-ARCH-015/README.md). Engineering Specification remains **NOT AUTHORISED**.
 
-This roadmap restates the Wave 2 capability family exactly as named in the [Owner Portfolio Declaration](../../OWNER-PORTFOLIO-DECLARATION.md) (2026-07-28). It exists so that direction is visible; it does **not** create, name, or authorise a single programme identifier. No engineering of any kind may begin against this document.
+This roadmap restates the Wave 2 capability family exactly as named in the [Owner Portfolio Declaration](../../OWNER-PORTFOLIO-DECLARATION.md) (2026-07-28). Aside from the closed ARCH-015 Architecture baseline above, it does **not** authorise Engineering Specification, Engineering, Certification, or Freeze for any item. No engineering of any kind may begin against this document.
 
 ## Indicative capability family
 

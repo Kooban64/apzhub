@@ -1,5 +1,286 @@
 # APZ QEP — Changelog
 
+## 2026-07-29 — APZQEP-RELEASE-001 Production Release · IMPLEMENTED / AWAITING OWNER DECISION
+
+- **APZQEP-FREEZE-001** Owner Decision — **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** (`20260729T164500Z-APZQEP-FREEZE-001-ACCEPTANCE.json`)
+- **APZQEP-RELEASE-001** — Production Release — **IMPLEMENTED / AWAITING OWNER PRODUCTION RELEASE DECISION**
+- Version promotion: `1.0.0-rc.1` → **`@apzhub/qep-test-execution` 1.0.0**
+- Git tag: `apzqep-test-execution-v1.0.0`
+- Pack: [test-execution/RELEASE-001/](./test-execution/RELEASE-001/README.md)
+- Release pack: [docs/releases/apzqep/test-execution/1.0.0/](../../releases/apzqep/test-execution/1.0.0/README.md)
+- GA recommendation: **LIMITED_AVAILABILITY_APPROVED** (L-02 blocks unrestricted GA)
+- Stop: Do **not** commence unrestricted GA or post-release engineering without a separate Owner Instruction
+- Strategic suggestion noted (not authorised): APZ Engineering Lifecycle Standard v1.0
+
+## 2026-07-29 — APZQEP-FREEZE-001 Production Freeze · IMPLEMENTED / AWAITING OWNER DECISION
+
+- **APZQEP-CERT-001** Owner Decision — **ACCEPTED / CERTIFICATION BASELINED / CLOSED** (`20260729T152900Z-APZQEP-CERT-001-ACCEPTANCE.json`)
+- Class **PRODUCTION_READY_WITH_LIMITATIONS** · Risk Acceptance **APPROVED** (RA-02: mandatory L-02 remediation before unrestricted GA)
+- **APZQEP-FREEZE-001** — Production Freeze — **IMPLEMENTED / AWAITING OWNER PRODUCTION FREEZE DECISION**
+- Pack: [test-execution/FREEZE-001/](./test-execution/FREEZE-001/README.md)
+- RC: `@apzhub/qep-test-execution` **1.0.0-rc.1** · Evidence `20260729T153121Z-APZQEP-FREEZE-001.json`
+- Release pack: [docs/releases/apzqep/test-execution/1.0.0-rc.1/](../../releases/apzqep/test-execution/1.0.0-rc.1/README.md)
+- Recommendation: **PROCEED TO PRODUCTION RELEASE** (commit RC tree before deploy)
+- Stop: Do **not** deploy / Release / GA without a separate Owner Instruction
+- Strategic suggestion noted (not authorised): APZ Engineering Lifecycle Standard after Production Release
+
+## 2026-07-29 — APZQEP-CERT-001 Certification · IMPLEMENTED / AWAITING OWNER DECISION
+
+- **APZQEP-ECR-001** Owner Decision — **ACCEPTED / ENGINEERING COMPLETION REVIEW BASELINED / CLOSED** (`20260729T151200Z-APZQEP-ECR-001-ACCEPTANCE.json`)
+- **APZQEP-CERT-001** — Test Execution Capability Certification — **IMPLEMENTED / AWAITING OWNER CERTIFICATION DECISION**
+- Pack: [test-execution/CERT-001/](./test-execution/CERT-001/README.md)
+- Evidence: `20260729T151506Z-APZQEP-CERT-001.json`
+- Revalidated: package 56/56 · Workbench+handlers 24/24
+- Recommended class: **PRODUCTION_READY_WITH_LIMITATIONS**
+- Freeze recommendation: **PROCEED TO PRODUCTION FREEZE** (with Risk Acceptance Register)
+- Limitation dispositions: L-01 Accept · L-02 Defer+RA (Correct before unrestricted GA) · L-03 Accept · L-04 Defer+RA
+- Stop: Do **not** start Freeze / Release / GA without a separate Owner Instruction
+- Strategic suggestion noted (not authorised): APZ Engineering Lifecycle Standard
+
+## 2026-07-29 — APZQEP-ECR-001 Engineering Completion Review · IMPLEMENTED / AWAITING OWNER DECISION
+
+- **APZQEP-ENG-100E** Owner Wave 5 Decision — **ACCEPTED / ENGINEERING WAVE 5 BASELINED / CLOSED** (`20260729T150347Z-APZQEP-ENG-100E-ACCEPTANCE.json`)
+- **APZQEP-ECR-001** — Engineering Completion Review — **IMPLEMENTED / AWAITING OWNER ENGINEERING COMPLETION REVIEW DECISION**
+- Pack: [test-execution/ECR-001/](./test-execution/ECR-001/README.md)
+- Evidence: `20260729T150751Z-APZQEP-ECR-001.json`
+- Waves 1–5 reviewed · conformance matrices · debt/risk/security/performance/testing/docs reviews complete
+- Verdict: **READY_WITH_LIMITATIONS** · Certification recommendation: **READY_WITH_LIMITATIONS**
+- Stop: Do **not** start Certification / Freeze / Release without a separate Owner Instruction
+- Strategic suggestion noted (not authorised): APZ Engineering Lifecycle Standard
+
+## 2026-07-29 — APZQEP-ENG-100E Workbench · IMPLEMENTED / AWAITING OWNER WAVE 5 DECISION
+
+- **APZQEP-ENG-100D** Owner Wave 4 Decision — **ACCEPTED / ENGINEERING WAVE 4 BASELINED / CLOSED** (`20260729T143538Z-APZQEP-ENG-100D-ACCEPTANCE.json`)
+- **APZQEP-ENG-100E** — Engineering Wave 5 Workbench — **IMPLEMENTED / AWAITING OWNER ENGINEERING WAVE 5 DECISION**
+- Pack: [test-execution/ENG-100E/](./test-execution/ENG-100E/README.md)
+- Evidence: `20260729T145837Z-APZQEP-ENG-100E.json`
+- Workbench: module nav · presentation routes · client API · explorer/assigned/review/detail · `availableActions` action bar
+- Validation: package 56/56 · Workbench unit 16 PASS
+- Parallel plan: [ECR-001-PLAN/](./test-execution/ECR-001-PLAN/README.md) — **NOT AUTHORISED**
+- Stop: Do **not** start ECR / Certification / Freeze without a separate Owner Instruction
+
+## 2026-07-29 — APZQEP-ENG-100D Infrastructure & API · IMPLEMENTED / AWAITING OWNER WAVE 4 DECISION
+
+- **APZQEP-ENG-100D** — Engineering Wave 4 Infrastructure & API — **IMPLEMENTED / AWAITING OWNER ENGINEERING WAVE 4 DECISION**
+- Pack: [test-execution/ENG-100D/](./test-execution/ENG-100D/README.md)
+- Evidence: `20260729T142836Z-APZQEP-ENG-100D.json`
+- Persistence: `qep_test_execution*` schema · migrations `0087`/`0088` · postgres adapters · outbox/audit
+- Platform: `gateway.qep.executions` · authz map · REST `/api/v1/qep/executions/*`
+- Marker: `QEP_TEST_EXECUTION_INFRASTRUCTURE_STATUS = implemented-eng-100d`
+- Validation: package 48/48 · config/platform typecheck PASS · handler + platform tests PASS
+- Parallel plan: [ENG-100E-PLAN/](./test-execution/ENG-100E-PLAN/README.md) — **NOT AUTHORISED**
+- Stop: Do **not** start Workbench Engineering without a separate Owner Instruction
+
+## 2026-07-29 — APZQEP-ENG-100C Owner Wave 3 Acceptance · ENGINEERING WAVE 3 BASELINED / CLOSED
+
+- **APZQEP-ENG-100C** — Owner Engineering Wave 3 Decision — **ACCEPTED / APPROVED / ENGINEERING WAVE 3 BASELINED / CLOSED**
+- Decision: [test-execution/ENG-100C/OWNER-ACCEPTANCE.md](./test-execution/ENG-100C/OWNER-ACCEPTANCE.md)
+- Evidence: `20260729T131604Z-APZQEP-ENG-100C-ACCEPTANCE.json`
+- Application Layer baselined (`implemented-eng-100c`)
+- Production baselines: Scaffolding · Domain · Application
+- ENG-100D Infrastructure & API plan acknowledged as planning only — **does not authorise** Infrastructure Engineering
+- Recommended next: **APZQEP-ENG-100D** — **RECOMMENDATION ONLY / NOT AUTHORISED**
+- Owner recommendation: complete Waves 4–5 before further OM enhancements (not an authorisation)
+- Standing Programme Record updated — governance pause; authorised next delivery: **None**
+
+## 2026-07-29 — APZQEP-ENG-100C Application Engineering · IMPLEMENTED / AWAITING OWNER WAVE 3 DECISION
+
+- **APZQEP-ENG-100C** — Engineering Wave 3 Application — **IMPLEMENTED / AWAITING OWNER ENGINEERING WAVE 3 DECISION**
+- Pack: [test-execution/ENG-100C/](./test-execution/ENG-100C/README.md)
+- Evidence: `20260729T125657Z-APZQEP-ENG-100C.json`
+- Application: command/query/ingestion/`availableActions` services · ports expanded · DTOs · 40/40 tests PASS
+- Marker: `QEP_TEST_EXECUTION_APPLICATION_STATUS = implemented-eng-100c`
+- Parallel plan: [ENG-100D-PLAN/](./test-execution/ENG-100D-PLAN/README.md) — **NOT AUTHORISED**
+- Stop: Do **not** start Infrastructure Engineering without a separate Owner Instruction
+
+## 2026-07-29 — APZQEP-ENG-100B Owner Wave 2 Acceptance · ENGINEERING WAVE 2 BASELINED / CLOSED
+
+- **APZQEP-ENG-100B** — Owner Engineering Wave 2 Decision — **ACCEPTED / APPROVED / ENGINEERING WAVE 2 BASELINED / CLOSED**
+- Decision: [test-execution/ENG-100B/OWNER-ACCEPTANCE.md](./test-execution/ENG-100B/OWNER-ACCEPTANCE.md)
+- Evidence: `20260729T124554Z-APZQEP-ENG-100B-ACCEPTANCE.json`
+- Domain Layer baselined (`implemented-eng-100b`)
+- ENG-100C Application plan acknowledged as planning only — **does not authorise** Application Engineering
+- Continuous evidence: recognised good practice; **not mandatory** until future OM 1.2.0 (recommendation only)
+- Recommended next: **APZQEP-ENG-100C** — **RECOMMENDATION ONLY / NOT AUTHORISED**
+- Standing Programme Record updated — governance pause; authorised next delivery: **None**
+
+## 2026-07-29 — APZQEP-ENG-100B Domain Engineering · IMPLEMENTED / AWAITING OWNER WAVE 2 DECISION
+
+- **APZQEP-ENG-100B** — Engineering Wave 2 Domain — **IMPLEMENTED / AWAITING OWNER ENGINEERING WAVE 2 DECISION**
+- Pure `TestExecution` Domain: aggregate, 17 commands, policies, services, events, errors
+- Tests: **27 PASS** · typecheck / lint **PASS**
+- Pack: [test-execution/ENG-100B/](./test-execution/ENG-100B/README.md)
+- Parallel planning: [ENG-100C-PLAN/](./test-execution/ENG-100C-PLAN/) — Application plan only
+- Evidence: `20260729T100000Z-APZQEP-ENG-100B.json`
+- No Application / Infrastructure / API / Workbench implementation
+
+## 2026-07-29 — APZQEP-ENG-100A Owner Wave 1 Acceptance · ENGINEERING WAVE 1 BASELINED / CLOSED
+
+- **APZQEP-ENG-100A** — Owner Engineering Wave 1 Decision — **ACCEPTED / APPROVED / ENGINEERING WAVE 1 BASELINED / CLOSED**
+- Decision: [test-execution/ENG-100A/OWNER-ACCEPTANCE.md](./test-execution/ENG-100A/OWNER-ACCEPTANCE.md)
+- Evidence: `20260729T094459Z-APZQEP-ENG-100A-ACCEPTANCE.json`
+- Repository Scaffolding baselined (`@apzhub/qep-test-execution` **0.0.0**)
+- ENG-100B Domain Engineering Plan acknowledged as planning only — **does not authorise** Domain Engineering
+- Recommended next: **APZQEP-ENG-100B** — **RECOMMENDATION ONLY / NOT AUTHORISED**
+- Standing Programme Record updated — governance pause; authorised next delivery: **None**
+
+## 2026-07-29 — APZQEP-ENG-100A Repository Scaffolding · IMPLEMENTED / AWAITING OWNER WAVE 1 DECISION
+
+- **APZQEP-ENG-100A** — Engineering Wave 1 Repository Scaffolding — **IMPLEMENTED / AWAITING OWNER ENGINEERING WAVE 1 DECISION**
+- Package: `@apzhub/qep-test-execution` **0.0.0** — layer barrels, port identities, boundary tests
+- Module: `modules/qep-test-execution/module.yaml` (permissions; Workbench deferred)
+- Reserved: API path `apps/web/.../qep/executions/`, event catalogue docs
+- Validation: typecheck / lint / tests / prettier / web typecheck **PASS**
+- Parallel planning: [ENG-100B-PLAN/](./test-execution/ENG-100B-PLAN/) — Domain plan only, **no implementation**
+- Pack: [test-execution/ENG-100A/](./test-execution/ENG-100A/README.md)
+- Evidence: `20260729T093000Z-APZQEP-ENG-100A.json`
+- Business functionality: **NONE** · ENG-100B…E **NOT AUTHORISED**
+
+## 2026-07-29 — APZQEP-GOV-ENG-BUILD-001 Owner Acceptance · OPERATING MODEL AMENDMENT BASELINED / CLOSED
+
+- **APZQEP-GOV-ENG-BUILD-001** — Owner Operating Model Amendment Decision — **ACCEPTED / APPROVED / OPERATING MODEL AMENDMENT BASELINED / CLOSED**
+- Decision: [governance/GOV-ENG-BUILD-001/OWNER-ACCEPTANCE.md](./governance/GOV-ENG-BUILD-001/OWNER-ACCEPTANCE.md)
+- Evidence: `20260729T053932Z-APZQEP-GOV-ENG-BUILD-001-ACCEPTANCE.json`
+- Effect: Engineering Build Contract **IN FORCE** · Wave-Based Engineering **IN FORCE** · OM Enhancement **1.1.0 BASELINED** · Monolithic Engineering **SUPERSEDED** · OES-003 **IN FORCE**
+- Engineering Waves **ENG-100A…100E** remain **Reserved · Not Authorised**
+- Recommended next: **APZQEP-ENG-100A — Repository Scaffolding** — **Recommendation Only · Not Authorised**
+- Standing Programme Record updated — governance pause; authorised next delivery: **None**
+
+## 2026-07-28 — APZQEP-GOV-ENG-BUILD-001 Engineering Build Contract & Wave Engineering · AWAITING OWNER DECISION
+
+- **APZQEP-GOV-ENG-BUILD-001** — Engineering Operating Model Amendment — **IMPLEMENTED / AWAITING OWNER OPERATING MODEL AMENDMENT DECISION**
+- Pack: [governance/GOV-ENG-BUILD-001/](./governance/GOV-ENG-BUILD-001/README.md)
+- Normative: [ENGINEERING-BUILD-CONTRACT.md](../engineering/oes/ENGINEERING-BUILD-CONTRACT.md) · [OES-003](../engineering/oes/OES-003-Engineering-Build-Contract-and-Wave-Engineering-Standard.md)
+- Lifecycle Handbook / Standing Record / Operating Model Validation updated for Enhancement 1.1.0 (pending Acceptance)
+- Test Execution Waves reserved: **ENG-100A…100E** — all **NOT AUTHORISED**; monolithic ENG-100A **superseded** as recommendation
+- Evidence: `20260728T201800Z-APZQEP-GOV-ENG-BUILD-001.json`
+- Production code / Engineering Waves: **NONE**
+
+## 2026-07-28 — APZQEP-OES-ENG-090A Owner Engineering Specification Acceptance · ACCEPTED / APPROVED / CLOSED
+
+- **APZQEP-OES-ENG-090A** — Owner Engineering Specification Decision recorded — **ACCEPTED / APPROVED / ENGINEERING SPECIFICATION BASELINED / CLOSED**
+- Decision: [test-execution/OES-ENG-090A/OWNER-ACCEPTANCE.md](./test-execution/OES-ENG-090A/OWNER-ACCEPTANCE.md)
+- Evidence: `20260728T200514Z-APZQEP-OES-ENG-090A-ACCEPTANCE.json`
+- Engineering Specification is now the authoritative implementation blueprint for Test Execution
+- This decision **does not** authorise Engineering
+- Recommended next programme: **APZQEP-ENG-100A** — Test Execution Engineering — **RECOMMENDATION ONLY / NOT AUTHORISED**
+- Standing Programme Record updated — governance pause; authorised next delivery: **None**
+
+## 2026-07-28 — APZQEP-OES-ENG-090A Test Execution Engineering Specification · IMPLEMENTED / AWAITING OWNER DECISION
+
+- **APZQEP-OES-ENG-090A** — Test Execution Engineering Specification — **IMPLEMENTED / AWAITING OWNER ENGINEERING SPECIFICATION DECISION**
+- Owner AUTHORISED TO COMMENCE executed; sole architectural authority **APZQEP-ARCH-015**
+- Pack: [test-execution/OES-ENG-090A/](./test-execution/OES-ENG-090A/README.md) — COMPLETE + PART-01…05 + APPENDIX-A…E + Owner Summary + Owner Decision template + Completion Report (**PASS**)
+- Scope: package boundaries · module structure · Domain · Application · Infrastructure · API · persistence · events · security · Workbench · testing · observability · acceptance · traceability
+- Evidence: `20260728T193500Z-APZQEP-OES-ENG-090A.json`
+- Production code / packages / migrations / Engineering / ECR / certification / freeze: **NONE**
+- Next: Owner Engineering Specification Decision via [OWNER-ACCEPTANCE.md](./test-execution/OES-ENG-090A/OWNER-ACCEPTANCE.md)
+
+## 2026-07-28 — Operating Convention interaction types (Decision / Execution / Exception)
+
+- Standing Programme Record: three interaction types — Governance Decision (Owner), Repository Execution (no Owner), Operational Exception (Owner)
+- Single governance cycle: decision → implement/record → END
+- No lifecycle advancement
+
+## 2026-07-28 — Operating Convention anti-feedback-loop rule
+
+- Standing Programme Record: repository state confirmations do not require Owner acknowledgement unless a governance decision is requested
+- Silence means state unchanged; routine updates end with the recording agent
+- No lifecycle advancement
+
+## 2026-07-28 — Governance model complete · Standing Record as sole bootstrap
+
+- Owner confirms governance model **complete**; [STANDING-PROGRAMME-RECORD.md](./STANDING-PROGRAMME-RECORD.md) is the **single authoritative bootstrap document**
+- Three-layer model recorded: Constitutional (how governed) · Programme (what happened) · Operational (where we are = Standing Record)
+- No further need to re-establish context in conversation; repository-driven state only
+- No lifecycle advancement; governance pause unchanged
+
+## 2026-07-28 — Standing Programme Record bootloader role confirmed
+
+- Standing Programme Record framed as programme **bootloader** for AI agents and new engineers (start from this document alone)
+- Explicit non-behaviours: no Foundation re-open, no inferred authority, no automatic lifecycle advance, acknowledgements ≠ decisions
+- Example Owner transition verbs documented (AUTHORISE ENG-090A / ARCH-016 / constitution / foundation change, RETURN ARCH-015)
+- No lifecycle advancement; governance pause unchanged
+
+## 2026-07-28 — APZQEP Operating Convention locked (permanent operational contract)
+
+- Standing Programme Record encodes the permanent **APZQEP Operating Convention**: Owner decisions create authority; evidence records/proves only; Acknowledge/Recognise/Confirmed = state confirmation unless an explicit Owner decision verb is used
+- Default conversation premise fixed: assume standing baseline; governance pause; no active programmes; proceed only on explicit Owner authorisation
+- Current position unchanged: `APZQEP-OES-ENG-090A` **RECOMMENDATION ONLY / NOT AUTHORISED**
+- No lifecycle advancement
+
+## 2026-07-28 — Standing record operating clarification (Owner decisions vs evidence)
+
+- Clarifies that Owner decisions (Accept / Approve / Close / Authorise) create authority; standing records and evidence JSON only prove decisions occurred
+- Owner “acknowledge / recognise” = confirmation of repository state, not a new governance artefact unless an explicit decision is issued
+- Default future-conversation premise locked in [STANDING-PROGRAMME-RECORD.md](./STANDING-PROGRAMME-RECORD.md): assume standing baseline; no active programmes; proceed only on explicit Owner authorisation
+- No lifecycle advancement; `APZQEP-OES-ENG-090A` remains **NOT AUTHORISED**
+
+## 2026-07-28 — Standing Baseline Owner Acknowledgement
+
+- Owner acknowledges [STANDING-PROGRAMME-RECORD.md](./STANDING-PROGRAMME-RECORD.md) as the authoritative standing baseline for all future APZQEP discussions unless explicitly superseded
+- Operating rules locked: Foundation immutable; Platform v1 governing; five frozen baselines immutable; ARCH-015 baselined; no automatic lifecycle progression; every programme requires explicit Owner authorisation
+- Governance pause confirmed — no active programmes; `APZQEP-OES-ENG-090A` remains **RECOMMENDATION ONLY / NOT AUTHORISED**
+- Evidence: `20260728T171200Z-APZQEP-STANDING-BASELINE-ACKNOWLEDGEMENT.json`
+
+## 2026-07-28 — Standing Programme State · IN FORCE (official standing state)
+
+- [STANDING-PROGRAMME-RECORD.md](./STANDING-PROGRAMME-RECORD.md) updated as the **official standing state** of APZQEP
+- Restates: Foundation permanently closed; Engineering Platform v1 stable; Constitution baselined; five frozen baselines immutable; Test Execution Architecture baselined; Engineering Specification **NOT AUTHORISED**; governance pause; no automatic lifecycle progression
+- Evidence: `20260728T143900Z-APZQEP-STANDING-PROGRAMME-STATE.json`
+- Authorised next delivery: **None**
+- Live status indexes updated for pointer/status only
+
+## 2026-07-28 — APZQEP-ARCH-015 Owner Record · first Expansion Architecture complete · governance pause
+
+- Owner Record filed: [test-execution/OES-ARCH-015/OWNER-RECORD.md](./test-execution/OES-ARCH-015/OWNER-RECORD.md) — recognises ARCH-015 as the first completed Architecture programme of the Expansion era
+- Standing position restated: Test Execution Architecture **BASELINED**; Engineering Specification **PENDING OWNER AUTHORISATION** / **NOT AUTHORISED**
+- Governance pause confirmed — no automatic commencement of `APZQEP-OES-ENG-090A` or any other programme
+- Evidence: `20260728T142705Z-APZQEP-ARCH-015-OWNER-RECORD.json`
+- Live status indexes updated for pointer/status only
+
+## 2026-07-28 — APZQEP-ARCH-015 Owner Architecture Acceptance · ACCEPTED / APPROVED / CLOSED
+
+- **APZQEP-ARCH-015** — Owner Architecture Decision recorded — **ACCEPTED / APPROVED / ARCHITECTURE BASELINED / CLOSED**
+- Decision: [test-execution/OES-ARCH-015/OWNER-ACCEPTANCE.md](./test-execution/OES-ARCH-015/OWNER-ACCEPTANCE.md)
+- Evidence: `20260728T141840Z-APZQEP-ARCH-015-ACCEPTANCE.json`
+- ADRs **ADR-0075…ADR-0086** status updated to **Accepted**
+- Architecture is now the authoritative baseline for Test Execution
+- **Does not** authorise Engineering Specification, Engineering, certification, freeze, or versioning
+- Recommended next programme remains **APZQEP-OES-ENG-090A** — **RECOMMENDATION ONLY / NOT AUTHORISED**
+- Live status indexes updated for pointer/status only
+
+## 2026-07-28 — APZQEP-ARCH-015 Test Execution Capability Architecture · IMPLEMENTED / AWAITING OWNER DECISION
+
+- **APZQEP-ARCH-015** — Test Execution Capability Architecture — **IMPLEMENTED / AWAITING OWNER ARCHITECTURE DECISION**
+- Pack: [test-execution/OES-ARCH-015/](./test-execution/OES-ARCH-015/README.md) — COMPLETE + PART-01…05 + APPENDIX-A…E + Owner Summary + Owner Decision template + Architecture Validation (**PASS**)
+- ADRs **ADR-0075…ADR-0086** filed as **Proposed** pending Architecture Acceptance
+- Frozen baselines preserved by reference only — no production engineering, no Engineering Specification, no certification, no freeze, no version change
+- Evidence: `20260728T131515Z-APZQEP-ARCH-015.json`
+- Recommended Owner decision: **ACCEPT**
+- Recommended next programme (NOT AUTHORISED): `APZQEP-OES-ENG-090A` Domain Engineering Specification
+- **Programme stop: OWNER ARCHITECTURE DECISION REQUIRED**
+
+## 2026-07-28 — Standing Programme Record · IN FORCE
+
+- Standing Programme Record filed: [STANDING-PROGRAMME-RECORD.md](./STANDING-PROGRAMME-RECORD.md) — **IN FORCE — OFFICIAL STARTING STATE**
+- Foundation treated as **immutable history** (no further Foundation workstreams, no retroactive redesign, no reopening of governance without constitutional amendment)
+- Operating principle locked: every new capability begins with an Owner-authorised Architecture programme — nothing else
+- Live status indexes updated for pointer only — no Wave 2 programme invented; no frozen package modified
+- Evidence: `20260728T125026Z-APZQEP-STANDING-PROGRAMME-RECORD.json`
+- **Authorised next delivery: None.**
+
+## 2026-07-28 — Final Executive Declaration · Foundation Programme permanently closed
+
+- Owner Final Executive Declaration filed: [FINAL-EXECUTIVE-DECLARATION.md](./FINAL-EXECUTIVE-DECLARATION.md) — **DECLARED — FOUNDATION PROGRAMME PERMANENTLY CLOSED**
+- Recognises **APZQEP Engineering Platform v1**; restates complete constitutional governance hierarchy; locks Foundation assets and five **1.0.0 CERTIFIED / FROZEN** production baselines as the reference for future capabilities
+- Expansion remains **READY** but **not authorised** — indicative Wave 2 order recorded as planning guidance only; each capability still requires its own Owner-authorised Architecture programme
+- Milestone cross-link updated: [ENGINEERING-PLATFORM-V1-MILESTONE.md](./ENGINEERING-PLATFORM-V1-MILESTONE.md)
+- Live status indexes updated for pointer/status only: this README, foundation indexes — no re-litigation of already-closed decisions; no Wave 2 programme invented
+- Evidence: `20260728T124501Z-APZQEP-FOUNDATION-FINAL-EXECUTIVE-DECLARATION.json`
+- **APZQEP FOUNDATION PROGRAMME PERMANENTLY CLOSED. ENGINEERING PLATFORM V1. CAPABILITY EXPANSION READY. NO WAVE-2 PROGRAMMES AUTHORISED.**
+- Authorised next delivery: **None.**
+
 ## 2026-07-28 — APZQEP-CONSTITUTION v1.0.0 Owner Ratification · RATIFIED / APPROVED / BASELINED
 
 - **APZQEP-CONSTITUTION v1.0.0** — Owner Ratification recorded — **RATIFIED / APPROVED / BASELINED**

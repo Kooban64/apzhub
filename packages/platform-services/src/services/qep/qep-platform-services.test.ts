@@ -11,11 +11,16 @@ import {
 import { PLATFORM_SERVICE_PERMISSION_CATALOGUE } from "../../authorization/permission-catalogue";
 import { resolveOperationAuthorization } from "../../authorization/operation-authorization-map";
 import { createPlatformServices } from "../create-platform-services";
+import { QEP_TEST_EXECUTION_PERMISSIONS } from "./qep-test-execution-permissions";
 
 import {
   createQepPlatformServicesForProduction,
   createQepPlatformServicesForTest,
 } from "./create-qep-platform-services";
+import {
+  createQepTestExecutionPlatformServicesForProduction,
+  createQepTestExecutionPlatformServicesForTest,
+} from "./create-qep-test-execution-platform-services";
 import { isQepServiceEnabled } from "./qep-env";
 
 const ctx = () => ({
@@ -51,6 +56,13 @@ const planCtx = () => ({
   userId: "user_1",
   correlationId: "corr_qep_060b",
   permissions: ["qep.plan.*"],
+});
+
+const executionCtx = () => ({
+  tenantId: "tenant_a",
+  userId: "user_1",
+  correlationId: "corr_qep_100d",
+  permissions: ["qep.execution.*"],
 });
 
 describe("APZQEP-ENG-020C qep platform services", () => {
@@ -416,5 +428,124 @@ describe("APZQEP-ENG-020C qep platform services", () => {
 
     const history = await gateway.qep.plans.listHistory(planCtx(), created.id);
     expect(history.length).toBeGreaterThan(0);
+  });
+
+  it("registers qep test execution permissions in the platform catalogue", () => {
+    for (const key of QEP_TEST_EXECUTION_PERMISSIONS) {
+      expect(PLATFORM_SERVICE_PERMISSION_CATALOGUE).toContain(key);
+    }
+  });
+
+  it("maps gateway operations to qep test execution permissions", () => {
+    expect(
+      resolveOperationAuthorization("qepTestExecution", "list")?.requiredPermission,
+    ).toBe("qep.execution.read");
+    expect(
+      resolveOperationAuthorization("qepTestExecution", "createExecution")
+        ?.requiredPermission,
+    ).toBe("qep.execution.create");
+    expect(
+      resolveOperationAuthorization("qepTestExecution", "prepareExecution")
+        ?.requiredPermission,
+    ).toBe("qep.execution.prepare");
+    expect(
+      resolveOperationAuthorization("qepTestExecution", "assignExecutor")
+        ?.requiredPermission,
+    ).toBe("qep.execution.assign");
+    expect(
+      resolveOperationAuthorization("qepTestExecution", "startExecution")
+        ?.requiredPermission,
+    ).toBe("qep.execution.execute");
+    expect(
+      resolveOperationAuthorization("qepTestExecution", "submitForReview")
+        ?.requiredPermission,
+    ).toBe("qep.execution.execute");
+    expect(
+      resolveOperationAuthorization("qepTestExecution", "acceptExecution")
+        ?.requiredPermission,
+    ).toBe("qep.execution.review");
+    expect(
+      resolveOperationAuthorization("qepTestExecution", "supersedeExecution")
+        ?.requiredPermission,
+    ).toBe("qep.execution.supersede");
+    expect(
+      resolveOperationAuthorization("qepTestExecution", "ingestExternalResult")
+        ?.requiredPermission,
+    ).toBe("qep.execution.ingest");
+  });
+
+  it("requires explicit postgres for production and explicit memory for tests (execution)", () => {
+    expect(() =>
+      createQepTestExecutionPlatformServicesForProduction({} as never),
+    ).toThrow(/postgresDb/);
+    expect(() => createQepTestExecutionPlatformServicesForTest({})).toThrow(
+      /allowInMemoryPersistence/,
+    );
+  });
+
+  it("wires the execution gateway through the full happy-path lifecycle", async () => {
+    const qep = createQepPlatformServicesForTest({ allowInMemoryPersistence: true });
+    const bundle = createPlatformServices({ qepPlatform: qep });
+    const gateway = bundle.gateway;
+
+    let dto = await gateway.qep.executions.createExecution(executionCtx(), {
+      projectId: "proj_1",
+      workspaceId: "ws_1",
+      sourceRefs: {
+        planRef: { capability: "plan", id: "plan_1", versionLabel: "1.0.0" },
+      },
+    });
+    expect(dto.status).toBe("draft");
+
+    dto = await gateway.qep.executions.prepareExecution(executionCtx(), dto.id, {
+      expectedRevision: dto.revision,
+    });
+    expect(dto.status).toBe("ready");
+
+    dto = await gateway.qep.executions.assignExecutor(executionCtx(), dto.id, {
+      expectedRevision: dto.revision,
+      executorId: "user_executor",
+      reviewerId: "user_reviewer",
+    });
+    expect(dto.assignment?.executorId).toBe("user_executor");
+
+    dto = await gateway.qep.executions.startExecution(executionCtx(), dto.id, {
+      expectedRevision: dto.revision,
+    });
+    expect(dto.status).toBe("in_progress");
+
+    dto = await gateway.qep.executions.recordStepResult(executionCtx(), dto.id, {
+      expectedRevision: dto.revision,
+      order: 1,
+      outcome: "passed",
+      actualResult: "Loaded successfully",
+    });
+    dto = await gateway.qep.executions.recordStepResult(executionCtx(), dto.id, {
+      expectedRevision: dto.revision,
+      order: 2,
+      outcome: "passed",
+      actualResult: "Dashboard visible",
+    });
+
+    dto = await gateway.qep.executions.completeExecution(executionCtx(), dto.id, {
+      expectedRevision: dto.revision,
+    });
+    expect(dto.status).toBe("completed");
+
+    dto = await gateway.qep.executions.submitForReview(executionCtx(), dto.id, {
+      expectedRevision: dto.revision,
+    });
+    expect(dto.status).toBe("submitted_for_review");
+
+    dto = await gateway.qep.executions.acceptExecution(executionCtx(), dto.id, {
+      expectedRevision: dto.revision,
+    });
+    expect(dto.status).toBe("accepted");
+
+    const history = await gateway.qep.executions.getHistory(executionCtx(), dto.id);
+    expect(history.entries.length).toBeGreaterThan(0);
+
+    const steps = await gateway.qep.executions.getSteps(executionCtx(), dto.id);
+    expect(steps.length).toBeGreaterThan(0);
   });
 });

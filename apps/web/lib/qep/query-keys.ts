@@ -1,4 +1,5 @@
 import type { QepBaselineListParams, QepListParams } from "./qep-api";
+import type { QepTestExecutionListParams } from "./qep-test-execution-api";
 
 export const qepQueryKeys = {
   all: () => ["qep"] as const,
@@ -109,5 +110,23 @@ export const qepQueryKeys = {
     detail: (id: string) => [...qepQueryKeys.plans.all(), "detail", id] as const,
     history: (id: string) => [...qepQueryKeys.plans.all(), "history", id] as const,
     versions: (id: string) => [...qepQueryKeys.plans.all(), "versions", id] as const,
+  },
+  executions: {
+    all: () => [...qepQueryKeys.all(), "executions"] as const,
+    list: (params?: QepTestExecutionListParams) =>
+      [...qepQueryKeys.executions.all(), "list", params ?? {}] as const,
+    assigned: (params?: QepTestExecutionListParams) =>
+      [...qepQueryKeys.executions.all(), "assigned", params ?? {}] as const,
+    reviewQueue: (params?: QepTestExecutionListParams) =>
+      [...qepQueryKeys.executions.all(), "reviewQueue", params ?? {}] as const,
+    detail: (id: string) => [...qepQueryKeys.executions.all(), "detail", id] as const,
+    history: (id: string) => [...qepQueryKeys.executions.all(), "history", id] as const,
+    availableActions: (id: string) =>
+      [...qepQueryKeys.executions.all(), "availableActions", id] as const,
+    steps: (id: string) => [...qepQueryKeys.executions.all(), "steps", id] as const,
+    manifest: (id: string) =>
+      [...qepQueryKeys.executions.all(), "manifest", id] as const,
+    planProgress: (planId: string) =>
+      [...qepQueryKeys.executions.all(), "planProgress", planId] as const,
   },
 };

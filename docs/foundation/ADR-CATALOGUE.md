@@ -5,8 +5,8 @@
 > **Authoritative references:** [docs/adr/README.md](../adr/README.md) · Individual ADR files  
 > **Related documents:** [DECISION-REGISTER](./DECISION-REGISTER.md)  
 > **Reading order:** When researching past decisions or drafting new ADRs  
-> **Last updated:** 2026-07-27  
-> **Current status:** Active — cross-reference index; **74** ADR files · ADR-0070–0072 under `docs/architecture/adr/`; ADR-0073 pack under `docs/architecture/adr-0073/`; ADR-0074 under `docs/adr/`
+> **Last updated:** 2026-07-28  
+> **Current status:** Active — cross-reference index; **86** ADR numbers allocated · ADR-0070–0072 under `docs/architecture/adr/`; ADR-0073 pack under `docs/architecture/adr-0073/`; ADR-0074–0086 under `docs/adr/`
 
 ---
 
@@ -45,6 +45,18 @@
 | ADR-0072      | Platform realtime transport SSE Phase A (**ACCEPTED** — Platform-1.3-ADR-0072 / ENG-003) · [full](../architecture/adr/ADR-0072-Platform-Realtime-Transport.md)                             |
 | ADR-0073      | Durable Notification Runtime PostgreSQL-owned (**ACCEPTED** — Platform-1.4-ADR-0073) · [pack](../architecture/adr-0073/ADR-0073.md)                                                        |
 | ADR-0074      | QEP Test Specification Rejected → Draft vs `availableActions` fidelity (**ACCEPTED**) · [ADR-0074](../adr/ADR-0074-qep-test-specification-rejected-return-to-draft-available-actions.md)   |
+| ADR-0075      | Test Execution Aggregate Root (**ACCEPTED** — APZQEP-ARCH-015) · [ADR-0075](../adr/ADR-0075-test-execution-aggregate.md)                                                                   |
+| ADR-0076      | Execution Manifest Source Integrity (**ACCEPTED** — APZQEP-ARCH-015) · [ADR-0076](../adr/ADR-0076-test-execution-manifest-source-integrity.md)                                             |
+| ADR-0077      | Test Execution vs Test Runs Boundary (**ACCEPTED** — APZQEP-ARCH-015) · [ADR-0077](../adr/ADR-0077-test-execution-vs-test-runs-boundary.md)                                                |
+| ADR-0078      | Test Execution Outcome Model (**ACCEPTED** — APZQEP-ARCH-015) · [ADR-0078](../adr/ADR-0078-test-execution-outcome-model.md)                                                                |
+| ADR-0079      | Manual and Automated Execution Unification (**ACCEPTED** — APZQEP-ARCH-015) · [ADR-0079](../adr/ADR-0079-test-execution-manual-automated-unification.md)                                   |
+| ADR-0080      | Evidence Ownership Boundary (**ACCEPTED** — APZQEP-ARCH-015) · [ADR-0080](../adr/ADR-0080-test-execution-evidence-boundary.md)                                                             |
+| ADR-0081      | Observations vs Defects Boundary (**ACCEPTED** — APZQEP-ARCH-015) · [ADR-0081](../adr/ADR-0081-test-execution-observation-defect-boundary.md)                                              |
+| ADR-0082      | Review and Finalisation Model (**ACCEPTED** — APZQEP-ARCH-015) · [ADR-0082](../adr/ADR-0082-test-execution-review-finalisation.md)                                                         |
+| ADR-0083      | availableActions Derivation and Transport (**ACCEPTED** — APZQEP-ARCH-015) · [ADR-0083](../adr/ADR-0083-test-execution-available-actions.md)                                               |
+| ADR-0084      | External Result Ingestion Trust Boundary (**ACCEPTED** — APZQEP-ARCH-015) · [ADR-0084](../adr/ADR-0084-test-execution-external-ingestion-trust.md)                                         |
+| ADR-0085      | Historical Correction and Supersession (**ACCEPTED** — APZQEP-ARCH-015) · [ADR-0085](../adr/ADR-0085-test-execution-correction-supersession.md)                                            |
+| ADR-0086      | AI Assistance Boundary (**ACCEPTED** — APZQEP-ARCH-015) · [ADR-0086](../adr/ADR-0086-test-execution-ai-assistance-boundary.md)                                                             |
 
 Legacy sprint ADRs: [docs/decisions/](../decisions/) — includes APZDOCS-002 document storage ADRs:
 

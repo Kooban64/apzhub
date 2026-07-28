@@ -274,6 +274,14 @@ export {
   wrapQepVerificationPlatformServiceWithPipeline,
   createQepVerificationPlatformService,
   mapVerificationDomainError,
+  createQepTestExecutionPlatformServices,
+  createQepTestExecutionPlatformServicesForProduction,
+  createQepTestExecutionPlatformServicesForTest,
+  wrapQepTestExecutionPlatformServiceWithPipeline,
+  createQepTestExecutionPlatformService,
+  mapExecutionDomainError,
+  performQepTestExecutionAction,
+  EXECUTION_ACTION_KEYS,
   type QepPlatformServicesBundle,
   type CreateQepPlatformServicesInput,
   type CreateQepPlatformServicesForProductionInput,
@@ -289,6 +297,12 @@ export {
   type CreateQepVerificationPlatformServicesForProductionInput,
   type CreateQepVerificationPlatformServicesForTestInput,
   type QepVerificationPlatformService,
+  type QepTestExecutionPlatformServicesBundle,
+  type CreateQepTestExecutionPlatformServicesInput,
+  type CreateQepTestExecutionPlatformServicesForProductionInput,
+  type CreateQepTestExecutionPlatformServicesForTestInput,
+  type QepTestExecutionPlatformService,
+  type ExecutionActionKey,
 } from "./services/qep";
 export type { QepPlatformGatewaySurface } from "./services/qep/create-qep-platform-services";
 

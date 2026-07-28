@@ -1,0 +1,24 @@
+{
+  "evidenceId": "20260728T185200Z-APZQEP-GOVERNANCE-MODEL-COMPLETE",
+  "document": "STANDING-PROGRAMME-RECORD",
+  "title": "APZQEP Governance Model Complete — Sole Bootstrap Confirmed",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T185200Z",
+  "status": "IN_FORCE",
+  "path": "docs/products/apzqep/STANDING-PROGRAMME-RECORD.md",
+  "recognition": {
+    "governanceModelComplete": true,
+    "soleAuthoritativeBootstrap": "STANDING-PROGRAMME-RECORD.md",
+    "layers": ["constitutional", "programme", "operational"],
+    "repositoryDrivenState": true,
+    "conversationalContinuityNotRequired": true
+  },
+  "programmePosition": {
+    "governancePause": true,
+    "activeProgrammes": [],
+    "authorisedNextDelivery": null,
+    "recommendedNext": "APZQEP-OES-ENG-090A",
+    "recommendedNextAuthorised": false
+  },
+  "note": "Governance-complete recognition only. No programme authorised. No production changes."
+}

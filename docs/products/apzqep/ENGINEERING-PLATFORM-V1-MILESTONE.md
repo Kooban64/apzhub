@@ -81,6 +81,10 @@ Owner Ratification (2026-07-28): **RATIFIED / APPROVED / BASELINED** — [APZQEP
 
 The APZQEP Foundation Programme is **fully complete**. Engineering Platform **Version 1** is constitutionally governed and operationally validated, with five certified and frozen production capabilities. Capability Expansion awaits a separate Owner Architecture authorisation for the first Wave 2 capability.
 
+Canonical Owner closeout: [FINAL-EXECUTIVE-DECLARATION.md](./FINAL-EXECUTIVE-DECLARATION.md) — **DECLARED — FOUNDATION PROGRAMME PERMANENTLY CLOSED** (2026-07-28).
+
+Standing starting state: [STANDING-PROGRAMME-RECORD.md](./STANDING-PROGRAMME-RECORD.md) — **IN FORCE** (Foundation = immutable history; every new capability begins at Architecture).
+
 ## STOP
 
 ```text
@@ -88,7 +92,7 @@ ENGINEERING PLATFORM V1
 RECOGNISED
 
 APZQEP-CONSTITUTION 1.0.0 RATIFIED / BASELINED
-FOUNDATION FULLY COMPLETE
+FOUNDATION PROGRAMME PERMANENTLY CLOSED
 EXPANSION READY
 NO WAVE-2 AUTHORISED
 ```

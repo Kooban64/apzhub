@@ -1,0 +1,101 @@
+manifestSchemaVersion: "1.0"
+id: qep-test-execution
+name: Test Execution
+version: 1.0.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Test Execution Workbench module — Production baseline 1.0.0 (APZQEP-RELEASE-001). Package @apzhub/qep-test-execution. Architecture APZQEP-ARCH-015. Engineering Specification APZQEP-OES-ENG-090A PART-04 §3 (Workbench contracts). Class PRODUCTION_READY_WITH_LIMITATIONS."
+  product: apzqep
+  moduleCatalogueId: M-test-execution
+  slug: test-execution
+  programme: APZQEP-RELEASE-001
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+  packages:
+    - "@apzhub/qep-test-execution"
+
+module:
+  category: quality-engineering
+  status: workbench-implemented
+
+permissions:
+  - id: qep.execution.read
+    label: View Test Executions
+  - id: qep.execution.create
+    label: Create Test Executions
+  - id: qep.execution.prepare
+    label: Prepare Test Executions
+  - id: qep.execution.assign
+    label: Assign Test Executions
+  - id: qep.execution.execute
+    label: Execute Test Executions
+  - id: qep.execution.control
+    label: Control Test Executions
+  - id: qep.execution.review
+    label: Review Test Executions
+  - id: qep.execution.supersede
+    label: Supersede Test Executions
+  - id: qep.execution.ingest
+    label: Ingest External Test Execution Results
+  - id: qep.execution.admin
+    label: Administer Test Executions
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Test Execution
+    icon: play
+    route: /workspace/qep/test-execution
+    order: 100
+    permission: qep.execution.read
+  view:
+    title: Test Execution
+    workspace: qep
+    route: /workspace/qep/test-execution
+    permission: qep.execution.read
+  additionalViews:
+    - id: qep-test-execution-explorer
+      title: Explorer
+      workspace: qep
+      route: /workspace/qep/test-execution/explorer
+      permission: qep.execution.read
+      navigation:
+        level: sidebar
+        parent: qep-test-execution
+        label: Explorer
+        icon: list
+        order: 101
+        permission: qep.execution.read
+    - id: qep-test-execution-assigned
+      title: Assigned
+      workspace: qep
+      route: /workspace/qep/test-execution/assigned
+      permission: qep.execution.read
+      navigation:
+        level: sidebar
+        parent: qep-test-execution
+        label: Assigned
+        icon: user-check
+        order: 102
+        permission: qep.execution.read
+    - id: qep-test-execution-review
+      title: Review
+      workspace: qep
+      route: /workspace/qep/test-execution/review
+      permission: qep.execution.review
+      navigation:
+        level: sidebar
+        parent: qep-test-execution
+        label: Review
+        icon: clipboard-check
+        order: 103
+        permission: qep.execution.review
+
+# Reserved conceptual routes (OES-ENG-090A PART-04 §3): execution workspace (detail/history), new.

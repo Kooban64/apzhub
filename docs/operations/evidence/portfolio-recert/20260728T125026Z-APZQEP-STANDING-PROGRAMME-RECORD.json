@@ -1,0 +1,26 @@
+{
+  "evidenceId": "20260728T125026Z-APZQEP-STANDING-PROGRAMME-RECORD",
+  "document": "STANDING-PROGRAMME-RECORD",
+  "title": "Standing Programme Record — APZQEP",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T125026Z",
+  "decision": {
+    "status": "IN_FORCE",
+    "role": "Official starting state for all future APZQEP conversations",
+    "foundation": "IMMUTABLE_HISTORY",
+    "foundationProgramme": "PERMANENTLY_CLOSED",
+    "engineeringPlatform": "v1_RECOGNISED_STABLE",
+    "capabilityExpansion": "READY",
+    "wave2Authorised": false
+  },
+  "path": "docs/products/apzqep/STANDING-PROGRAMME-RECORD.md",
+  "operatingPrinciple": "Every new capability begins with an Owner-authorised Architecture programme.",
+  "related": {
+    "finalExecutiveDeclaration": "docs/products/apzqep/FINAL-EXECUTIVE-DECLARATION.md",
+    "constitution": "docs/products/apzqep/APZQEP-CONSTITUTION.md",
+    "milestone": "docs/products/apzqep/ENGINEERING-PLATFORM-V1-MILESTONE.md",
+    "portfolio": "docs/products/apzqep/portfolio/PORTFOLIO-001/README.md"
+  },
+  "authorisedNextDelivery": null,
+  "note": "Documentation only. No Wave 2 Architecture or ENG programme authorised. No frozen package source modified."
+}

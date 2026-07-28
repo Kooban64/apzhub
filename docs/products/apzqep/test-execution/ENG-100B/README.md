@@ -1,0 +1,18 @@
+# APZQEP-ENG-100B — Domain Engineering (Wave 2)
+
+> **Status:** **ACCEPTED / APPROVED / ENGINEERING WAVE 2 BASELINED / CLOSED**  
+> **Acceptance:** [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) · `20260729T124554Z-APZQEP-ENG-100B-ACCEPTANCE.json`  
+> **Package:** `@apzhub/qep-test-execution` · Domain **BASELINED** (`implemented-eng-100b`)
+
+## Next
+
+**APZQEP-ENG-100C — Application** — **RECOMMENDATION ONLY / NOT AUTHORISED**  
+Plan: [ENG-100C-PLAN/](../ENG-100C-PLAN/README.md)
+
+## STOP
+
+```text
+APZQEP-ENG-100B
+ACCEPTED / ENGINEERING WAVE 2 BASELINED / CLOSED
+ENG-100C = NOT AUTHORISED
+```
