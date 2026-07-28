@@ -1,0 +1,27 @@
+manifestSchemaVersion: "1.0"
+id: qep-defect
+name: Defect Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: defects
+  description: "Defect Service placeholder for APZ QEP (APZQEP-ENG-010). No business implementation."
+  contractPackage: "@apzhub/qep-contracts"
+  contractVersion: "0.1.0"
+  owner: APZHUB
+  tags:
+    - qep
+    - stub
+
+dependencies:
+  platform: []
+  integrations: []
+
+integrations: []
+
+service:
+  category: defects
+  status: stub
+
+permissions: []

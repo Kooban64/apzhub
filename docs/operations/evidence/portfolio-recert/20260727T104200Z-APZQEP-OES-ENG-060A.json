@@ -1,0 +1,58 @@
+{
+  "programme": "APZQEP-OES-ENG-060A",
+  "title": "Test Plans Domain Engineering Specification",
+  "recordedAt": "2026-07-27T10:42:00Z",
+  "status": "IMPLEMENTED / AWAITING OWNER ACCEPTANCE",
+  "classification": "Owner Engineering Specification (Domain)",
+  "nature": "Domain specification only — no implementation / no production code",
+  "version": "1.0.0-oes",
+  "architectureBaseline": "APZQEP-ARCH-013 ACCEPTED / ARCHITECTURE BASELINED",
+  "pack": "docs/products/apzqep/test-plans/OES-ENG-060A/",
+  "complete": "docs/products/apzqep/test-plans/OES-ENG-060A/COMPLETE.md",
+  "ownerSummary": "docs/products/apzqep/test-plans/OES-ENG-060A/OWNER-SUMMARY.md",
+  "completionReport": "docs/products/apzqep/test-plans/OES-ENG-060A/ENGINEERING-SPECIFICATION-COMPLETION-REPORT.md",
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "frozenDependencies": {
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN",
+    "verification": "1.0.0 CERTIFIED / FROZEN",
+    "testSpecifications": "1.0.0 CERTIFIED / FROZEN"
+  },
+  "specified": [
+    "TestPlan aggregate",
+    "Entities",
+    "Value objects",
+    "Lifecycle",
+    "Versioning",
+    "Policies",
+    "Domain services",
+    "Domain events",
+    "Business rules",
+    "Domain error model",
+    "AI boundary"
+  ],
+  "exclusionsHonoured": [
+    "PostgreSQL",
+    "Repositories",
+    "REST",
+    "Search",
+    "Application commands/queries",
+    "API",
+    "Workbench",
+    "React",
+    "Permissions implementation",
+    "Infrastructure",
+    "Authentication",
+    "AI implementation",
+    "MCP",
+    "Production code"
+  ],
+  "ownerAcceptanceRecorded": false,
+  "domainImplementationAuthorised": false,
+  "stopCondition": "APZQEP-OES-ENG-060A IMPLEMENTED / AWAITING OWNER ACCEPTANCE — do not begin ENG-060A implementation"
+}

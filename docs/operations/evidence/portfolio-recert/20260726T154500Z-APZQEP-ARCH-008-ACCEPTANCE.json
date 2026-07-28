@@ -1,0 +1,23 @@
+{
+  "programme": "APZQEP-ARCH-008",
+  "title": "Traceability Workbench Architecture",
+  "recordedAt": "2026-07-26T15:45:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Engineering Programme Instruction — APZQEP-ENG-030C",
+  "finalProgrammeState": "ACCEPTED / CLOSED / COMPLETE",
+  "revision": "1.0.0-arch",
+  "documentationPack": "docs/products/apzqep/architecture/traceability-workbench/",
+  "authorises": {
+    "programme": "APZQEP-ENG-030C",
+    "title": "Traceability Workbench UI",
+    "state": "AUTHORISED TO IMPLEMENT"
+  },
+  "exclusionsRetained": [
+    "Traceability Certification NOT AUTHORISED",
+    "Coverage Engine",
+    "Impact Engine",
+    "AI",
+    "MCP",
+    "graph visualisation as SoR"
+  ]
+}

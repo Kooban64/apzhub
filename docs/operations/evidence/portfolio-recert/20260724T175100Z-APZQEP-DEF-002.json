@@ -1,0 +1,40 @@
+{
+  "programme": "APZQEP-DEF-002",
+  "title": "APZ QEP Product Definition Expansion & Consolidation",
+  "classification": "PRODUCT_DEFINITION",
+  "lifecycle": "Product Engineering",
+  "baseline": "APZQEP-DEF-001 IMPLEMENTED_INCOMPLETE_THEN_EXPANDED",
+  "reference": [
+    "APZQEP-CONSTITUTION-001",
+    "APZQEP-REQ-001",
+    "APZQEP-DISCOVERY-001",
+    "APZQEP-DEF-001"
+  ],
+  "timestamp": "2026-07-24T17:51:00Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER PRODUCT DEFINITION ACCEPTANCE",
+  "baselineVersion": "1.0.0-def-expanded",
+  "packRoot": "docs/products/apzqep/product-definition/",
+  "expansion": {
+    "personas": 21,
+    "personaFieldStandard": 32,
+    "workflows": 35,
+    "workflowFieldStandard": 29,
+    "modules": 22,
+    "modelDocumentsExpanded": true,
+    "uxIaNavExpanded": true,
+    "redesign": false
+  },
+  "platformUnchanged": true,
+  "systemArchitecture": false,
+  "databaseDesign": false,
+  "apiDesign": false,
+  "adrs": false,
+  "engineering": false,
+  "productImplementation": false,
+  "manualVerificationFirstClass": true,
+  "aiDefaultOff": true,
+  "humanCertificationMandatory": true,
+  "nextProgramme": "APZQEP-ARCH-001",
+  "nextProgrammeStatus": "NOT_AUTHORISED_UNTIL_DEFINITION_ACCEPTANCE"
+}

@@ -152,7 +152,9 @@ describe("@apzhub/search-contracts (APZSEARCH-001)", () => {
         "vector_future",
       ]),
     );
-    expect(SEARCH_PRODUCTS).toHaveLength(9);
+    expect(SEARCH_PRODUCTS).toHaveLength(12);
+    expect(isSearchProductId("time")).toBe(true);
+    expect(isSearchProductId("law")).toBe(true);
     expect(isSearchScope("tenant")).toBe(true);
     expect(isSearchScope("galaxy")).toBe(false);
     expect(isSearchProviderKind("meilisearch")).toBe(true);
@@ -315,8 +317,12 @@ describe("@apzhub/search-contracts (APZSEARCH-001)", () => {
       "analytics",
       "identity",
       "administration",
+      "time",
+      "law",
     ]);
     expect(isDeclaredProductSearchAdapter("documents")).toBe(true);
+    expect(isDeclaredProductSearchAdapter("time")).toBe(true);
+    expect(isDeclaredProductSearchAdapter("law")).toBe(true);
     expect(isDeclaredProductSearchAdapter("plane")).toBe(false);
   });
 

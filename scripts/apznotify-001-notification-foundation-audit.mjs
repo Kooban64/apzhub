@@ -123,7 +123,7 @@ for (const pkg of packageRoots) {
   const pkgJson = JSON.parse(readFileSync(packageJsonPath, "utf8"));
   const allowed = pkg.includes("notification-persistence")
     ? new Set(["0.1.0"])
-    : new Set(["0.1.0", "0.2.0"]);
+    : new Set(["0.1.0", "0.2.0", "0.3.5"]);
   if (!allowed.has(pkgJson.version)) {
     violations.push({
       file: rel(packageJsonPath),
@@ -164,7 +164,7 @@ for (const pkg of packageRoots) {
     join(ROOT, "packages/notification-contracts/src/version.ts"),
     "utf8",
   );
-  if (!version.includes('NOTIFICATION_CONTRACTS_VERSION = "0.2.0"')) {
+  if (!version.includes('NOTIFICATION_CONTRACTS_VERSION = "0.3.5"')) {
     violations.push({
       file: "packages/notification-contracts/src/version.ts",
       line: 1,

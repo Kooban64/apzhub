@@ -1,0 +1,20 @@
+{
+  "programme": "APZQEP-ARCH-006",
+  "title": "Requirements Workbench Architecture",
+  "recordedAt": "2026-07-26T09:50:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Engineering Programme Instruction — APZQEP-ENG-020F Part 3",
+  "finalProgrammeState": "ACCEPTED / CLOSED / COMPLETE",
+  "revision": "1.0.0-arch",
+  "documentationPack": "docs/products/apzqep/architecture/requirements-workbench/",
+  "authorises": {
+    "programme": "APZQEP-ENG-020F",
+    "part": "3",
+    "title": "Requirements Workbench Exposure, Quality Assurance and Operational Readiness",
+    "state": "AUTHORISED TO BEGIN"
+  },
+  "exclusionsRetained": [
+    "no Traceability/Verification/graph analytics under ARCH-006 alone",
+    "no AI/MCP"
+  ]
+}

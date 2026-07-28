@@ -1,0 +1,63 @@
+{
+  "programme": "APZQEP-CERT-050D",
+  "title": "Test Specifications Capability Certification",
+  "recordedAt": "2026-07-27T07:30:00Z",
+  "status": "IMPLEMENTED / AWAITING OWNER CERTIFICATION DECISION",
+  "classification": "Owner Certification Programme",
+  "nature": "Independent assurance — SHALL NOT perform engineering",
+  "independence": "docs/engineering/oes/OES-CERTIFICATION-INDEPENDENCE.md",
+  "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "recommendation": "PRODUCTION READY",
+  "outcome": "PASS",
+  "package": { "@apzhub/qep-test-specifications": "1.0.0" },
+  "promotedFrom": "0.3.0",
+  "breakingChanges": false,
+  "pack": "docs/products/apzqep/test-specifications/capability-certification/",
+  "releaseEvidence": "docs/releases/apzqep/test-specifications/1.0.0/",
+  "baselines": {
+    "ARCH-011": "ACCEPTED",
+    "ENG-050A": "ACCEPTED",
+    "ENG-050B": "ACCEPTED",
+    "OES-ARCH-012": "ACCEPTED",
+    "OES-ENG-050C": "ACCEPTED",
+    "ENG-050C": "ACCEPTED / CLOSED",
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN",
+    "verification": "1.0.0 CERTIFIED / FROZEN"
+  },
+  "qualityGates": {
+    "architecture": "PASS",
+    "engineering": "PASS",
+    "documentation": "PASS",
+    "testing": "PASS",
+    "security": "PASS",
+    "performance": "PASS",
+    "operations": "PASS",
+    "repositoryStandards": "PASS",
+    "adr0074": "PASS"
+  },
+  "tests": {
+    "files": 12,
+    "total": 139,
+    "passed": 139,
+    "failed": 0,
+    "skipped": 0,
+    "typecheck": "PASS",
+    "executedAt": "2026-07-27T06:24:35Z"
+  },
+  "knownLimitationsNonBlocking": [
+    "Evidence",
+    "Coverage",
+    "Impact",
+    "Certification Engine",
+    "AI",
+    "MCP",
+    "ADR-0074 returnToDraft delta",
+    "Playwright API mocks",
+    "Module discovery roots",
+    "Preference Service named views"
+  ],
+  "ownerAcceptanceRecorded": false,
+  "freezeBinding": false,
+  "stopCondition": "APZQEP-CERT-050D IMPLEMENTED / AWAITING OWNER CERTIFICATION DECISION — freeze not binding"
+}

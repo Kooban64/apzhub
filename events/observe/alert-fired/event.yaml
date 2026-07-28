@@ -1,0 +1,26 @@
+manifestSchemaVersion: "1.0"
+id: observe-alert-fired
+name: Observe Alert Fired
+version: 1.0.0
+kind: event
+
+metadata:
+  category: observability
+  description: Emitted when an Observe alert transitions to firing (ADR-0070 Phase A).
+
+event:
+  category: business
+  publisher: observe-service
+  subscribers:
+    - notification:observe.delivery-hook
+    - activity:observe.activity
+    - audit:platform.audit
+  payload:
+    alertStateId: string
+    alertDefinitionId: string
+    state: string
+    severity: string
+    fingerprint: string
+
+documentation:
+  eventKey: observe.alert.fired

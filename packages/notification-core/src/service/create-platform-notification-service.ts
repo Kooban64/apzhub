@@ -145,14 +145,14 @@ export type PlatformNotificationDomainService = {
   diagnosticsHealth(ctx: NotificationRequestContext): Promise<{
     readonly status: "healthy" | "degraded" | "unavailable";
     readonly persistenceMode: "postgres" | "memory";
-    readonly deliveryEnabled: false;
+    readonly deliveryEnabled: boolean;
     readonly checkedAt: string;
   }>;
   diagnosticsReadiness(ctx: NotificationRequestContext): Promise<{
     readonly ready: boolean;
     readonly notificationEnabled: true;
     readonly persistenceMode: "postgres" | "memory";
-    readonly deliveryEnabled: false;
+    readonly deliveryEnabled: boolean;
     readonly capabilities: readonly string[];
   }>;
   diagnosticsCapabilities(ctx: NotificationRequestContext): Promise<{

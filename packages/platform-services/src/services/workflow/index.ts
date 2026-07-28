@@ -31,3 +31,17 @@ export {
 } from "./workflow-engine-service-impls";
 export { createUnavailableWorkflowEngineServices } from "./unavailable-workflow-engine-services";
 export { isWorkflowServiceEnabled } from "./workflow-env";
+export { createMockWorkflowOpsProvider } from "./n8n-ops-provider";
+export { createInMemoryWorkflowRuntimeRegistry } from "./in-memory-workflow-runtime-registry";
+export {
+  ApprovalServiceImpl,
+  CapabilityServiceImpl,
+  HealthServiceImpl,
+  NotificationServiceImpl,
+  WorkflowRunServiceImpl,
+  WorkflowScheduleServiceImpl,
+  WorkflowServiceImpl,
+  WorkflowTaskServiceImpl,
+  createWorkflowRuntimeServiceImpls,
+} from "./workflow-runtime-service-impls";
+export type { WorkflowRuntimeServiceImpls } from "./workflow-runtime-service-impls";

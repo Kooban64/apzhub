@@ -63,6 +63,7 @@ describe("Zammad core service capabilities", () => {
 
   it("exposes core services on adapter.core", async () => {
     const { adapter } = await createAdapter();
+    // Authoritative catalogue: ZAMMAD_CORE_SERVICE_CAPABILITIES (11 core services).
     expect(adapter.core.discoverCapabilities().length).toBe(11);
     expect(adapter.core.support).toBeDefined();
     expect(adapter.core.organizations).toBeDefined();

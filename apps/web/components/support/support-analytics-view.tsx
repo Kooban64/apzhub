@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { isSupportApiError } from "@/lib/support/errors";
+import { isSupportApiError, shouldRetrySupportQuery } from "@/lib/support/errors";
 import { formatSupportDate } from "@/lib/support/format";
 import { supportQueryKeys } from "@/lib/support/query-keys";
 import { getSupportAnalytics } from "@/lib/support/support-api";
@@ -13,9 +13,10 @@ export function SupportAnalyticsView() {
   const query = useQuery({
     queryKey: supportQueryKeys.analytics(),
     queryFn: ({ signal }) => getSupportAnalytics({ signal }),
+    retry: shouldRetrySupportQuery,
   });
 
-  if (query.isLoading) {
+  if (query.isPending) {
     return (
       <PageShell title="Analytics" description="Support intelligence snapshot">
         <LoadingState />

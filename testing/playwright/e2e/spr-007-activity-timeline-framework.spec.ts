@@ -1,25 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const DEV_EMAIL = "dev@apzhub.local";
-const DEV_PASSWORD = "DevPassword123!";
-
-async function signIn(page: import("@playwright/test").Page) {
-  await page.goto("/login");
-  await page.getByLabel("Email").fill(DEV_EMAIL);
-  await page.getByLabel("Password").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "Sign in" }).click();
-
-  try {
-    await expect(page).toHaveURL(/\/workspace\/home/, { timeout: 5000 });
-  } catch {
-    await page.goto("/register");
-    await page.getByLabel("Name").fill("Dev User");
-    await page.getByLabel("Email").fill(DEV_EMAIL);
-    await page.getByLabel("Password").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "Register" }).click();
-    await expect(page).toHaveURL(/\/workspace\/home/, { timeout: 15_000 });
-  }
-}
+import { signInDevUser } from "./auth-helpers";
 
 function contextPanel(page: import("@playwright/test").Page) {
   return page.getByTestId("workbench-context-panel");
@@ -109,7 +90,7 @@ test.describe("SPR-007 Activity & Timeline Framework integration", () => {
   test("authenticated shell mounts Activity Timeline providers with hidden diagnostics hooks", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     await expect(page.getByTestId("workbench-layout-with-context-panel")).toBeVisible();
     await expect(contextPanel(page)).toBeVisible();
@@ -158,7 +139,7 @@ test.describe("SPR-007 Activity & Timeline Framework integration", () => {
   test("context panel Activity tab is visible and supports open/close behaviour", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     const panel = contextPanel(page);
     await expect(panel.getByTestId("activity-timeline-panel-experience")).toBeVisible();
@@ -178,7 +159,7 @@ test.describe("SPR-007 Activity & Timeline Framework integration", () => {
   test("action execution flows through Event Bus to Activity Timeline and parallel notifications", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     const panel = contextPanel(page);
     const notifications = shellNotifications(page);
@@ -215,7 +196,7 @@ test.describe("SPR-007 Activity & Timeline Framework integration", () => {
   test("activity actionRef delegates through Action Framework execute", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     const panel = contextPanel(page);
     await waitForE2eHooks(page);
@@ -251,7 +232,7 @@ test.describe("SPR-007 Activity & Timeline Framework integration", () => {
   test("diagnostic hooks are hidden and do not render visible debug UI", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     await expect(page.getByTestId("activity-timeline-diagnostics")).toBeHidden();
     await expect(

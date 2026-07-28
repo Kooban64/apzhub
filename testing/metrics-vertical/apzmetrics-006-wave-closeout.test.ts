@@ -25,7 +25,7 @@ describe("APZMETRICS-006 Metrics Wave Closeout", () => {
       "packages/metrics-contracts/package.json": "0.2.0",
       "packages/metrics-core/package.json": "0.2.0",
       "packages/metrics-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.26.1",
+      "packages/platform-services/package.json": "0.32.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const actual = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;

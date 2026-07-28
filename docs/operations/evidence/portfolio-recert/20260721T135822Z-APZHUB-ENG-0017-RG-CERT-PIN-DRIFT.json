@@ -1,0 +1,46 @@
+{
+  "programme": "APZHUB-ENG-0017",
+  "title": "Implement RG-CERT-PIN-DRIFT",
+  "baseline": "1.2.0",
+  "wave": 2,
+  "step": 2,
+  "timestampUtc": "20260721T135822Z",
+  "preconditions": {
+    "APZHUB-ENG-0016": "ACCEPTED",
+    "group": "RG-CERT-PIN-DRIFT",
+    "statusBefore": "OPEN"
+  },
+  "remediationGroup": {
+    "id": "RG-CERT-PIN-DRIFT",
+    "status": "REMEDIATED",
+    "failuresCleared": "QA2-V-001…050 (50 Vitest)",
+    "vitestPinScope": {
+      "beforeFailed": 50,
+      "afterFailed": 0,
+      "afterPassed": 280
+    },
+    "pins": {
+      "platform-services": "0.30.0",
+      "platform-service-contracts": "0.18.0",
+      "workflow-contracts": "0.4.2",
+      "integration-zammad": "0.8.0",
+      "openapi": "1.12.0 allowed"
+    }
+  },
+  "remainingVsCert001AfterEng0016And0017": {
+    "playwrightHard": 12,
+    "playwrightFlaky": 30,
+    "vitest": 32,
+    "lint": 0,
+    "typecheck": 0
+  },
+  "recommendation": "READY FOR OWNER ACCEPTANCE",
+  "stop": [
+    "no RG-LAW-API-AUTHZ",
+    "no ENG-0018",
+    "no Email SoR",
+    "no FIN-001",
+    "no Workflow Execute",
+    "no Release 1.3"
+  ]
+}

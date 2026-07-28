@@ -1,0 +1,49 @@
+{
+  "programme": "APZQEP-ARCH-005",
+  "title": "Requirements Relationship Architecture",
+  "recordedAt": "2026-07-26T07:50:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "classification": "Authoritative Architecture",
+  "authority": "Owner Architecture Acceptance",
+  "documentRevision": "1.1.0-arch",
+  "specification": "docs/products/apzqep/architecture/requirements-relationship/REQUIREMENTS-RELATIONSHIP-ARCHITECTURE.md",
+  "refinementEvidence": "20260726T073000Z-APZQEP-ARCH-005.json",
+  "bindingFoundations": [
+    "Relationship Taxonomy",
+    "Relationship Behaviour Model",
+    "Relationship Strength",
+    "Relationship Criticality",
+    "Relationship Classification",
+    "Relationship Scope",
+    "Relationship Semantic Profile",
+    "Relationship Lifecycle",
+    "Relationship Integrity",
+    "Version Interaction",
+    "Baseline Interaction",
+    "Traceability Consumption Model",
+    "AI Governance",
+    "Taxonomy Governance",
+    "Implementation Neutrality"
+  ],
+  "preservedFoundations": [
+    "ENG-020D Content Version immutability",
+    "ENG-020E Baseline immutability",
+    "Requirements Relationship SoR ownership",
+    "Platform 1.4 shared services ownership",
+    "Traceability as downstream consumer",
+    "Tenant isolation",
+    "Historical engineering fact immutability"
+  ],
+  "engineeringConsequence": {
+    "programme": "APZQEP-ENG-020F",
+    "phase": "PLANNING",
+    "implementation": "AUTHORISED TO BEGIN",
+    "note": "Separate Owner Engineering Programme Instruction required before coding. Recommended: Owner Engineering Specification (three-part) before implementation."
+  },
+  "doesNotAuthorise": [
+    "Immediate ENG-020F code without engineering programme instruction",
+    "Traceability implementation",
+    "Verification/Execution/Evidence/Certification engineering",
+    "AI/MCP implementation"
+  ]
+}

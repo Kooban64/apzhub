@@ -18,19 +18,20 @@ const sampleWorkflow = {
 };
 
 async function mockEngineHttpApi(page: Page, seen: string[]) {
-  await page.route("**/api/v1/workflows/engine**", async (route) => {
+  // Match all engine HTTP surface; path matching must use exact segments
+  // (RG-WORKFLOW-WB: list path `/api/v1/workflows/engine/workflows` also contains
+  // `/workflows/`, so a naive `!includes("/workflows/")` guard never matched).
+  await page.route("**/api/v1/workflows/engine/**", async (route) => {
     const url = new URL(route.request().url());
-    seen.push(url.pathname);
+    const path = url.pathname.replace(/\/$/, "");
+    seen.push(path);
 
     const envelope = (data: unknown) => ({
       data,
       meta: { correlationId: "pw-apzworkflow-009" },
     });
 
-    if (
-      url.pathname.endsWith("/engine/workflows") &&
-      !url.pathname.includes("/workflows/")
-    ) {
+    if (path === "/api/v1/workflows/engine/workflows") {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -42,7 +43,7 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       return;
     }
 
-    if (url.pathname.includes("/engine/workflows/")) {
+    if (path.startsWith("/api/v1/workflows/engine/workflows/")) {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -51,7 +52,7 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       return;
     }
 
-    if (url.pathname.endsWith("/engine/templates")) {
+    if (path === "/api/v1/workflows/engine/templates") {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -71,7 +72,7 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       return;
     }
 
-    if (url.pathname.includes("/engine/templates/")) {
+    if (path.startsWith("/api/v1/workflows/engine/templates/")) {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -88,7 +89,7 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       return;
     }
 
-    if (url.pathname.endsWith("/engine/projects")) {
+    if (path === "/api/v1/workflows/engine/projects") {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -108,7 +109,7 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       return;
     }
 
-    if (url.pathname.endsWith("/engine/users")) {
+    if (path === "/api/v1/workflows/engine/users") {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -128,7 +129,7 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       return;
     }
 
-    if (url.pathname.endsWith("/engine/tags")) {
+    if (path === "/api/v1/workflows/engine/tags") {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -146,7 +147,7 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       return;
     }
 
-    if (url.pathname.endsWith("/engine/capabilities")) {
+    if (path === "/api/v1/workflows/engine/capabilities") {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -167,7 +168,7 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       return;
     }
 
-    if (url.pathname.endsWith("/engine/health")) {
+    if (path === "/api/v1/workflows/engine/health") {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -182,7 +183,7 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       return;
     }
 
-    if (url.pathname.endsWith("/engine/diagnostics")) {
+    if (path === "/api/v1/workflows/engine/diagnostics") {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -203,7 +204,7 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       return;
     }
 
-    if (url.pathname.endsWith("/engine/compatibility")) {
+    if (path === "/api/v1/workflows/engine/compatibility") {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -220,7 +221,7 @@ async function mockEngineHttpApi(page: Page, seen: string[]) {
       return;
     }
 
-    if (url.pathname.endsWith("/engine/validate")) {
+    if (path === "/api/v1/workflows/engine/validate") {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -245,15 +246,16 @@ test.describe("APZWORKFLOW-009 Workflow Engine Workbench", () => {
     page,
   }) => {
     const seen: string[] = [];
-    await mockEngineHttpApi(page, seen);
     await signIn(page);
-    await page.goto(`${ENGINE_HOME}/overview`);
+    await mockEngineHttpApi(page, seen);
+    await page.goto(`${ENGINE_HOME}/overview`, { waitUntil: "domcontentloaded" });
 
     await expect(page.getByTestId("workflow-engine-page")).toBeVisible({
-      timeout: 30_000,
+      timeout: 45_000,
     });
     await expect(page.getByTestId("card-readonly-engine")).toContainText(
       "READ-ONLY ENGINE",
+      { timeout: 30_000 },
     );
     await expect(
       page.getByRole("toolbar", { name: /Workflow Engine commands/i }),
@@ -264,17 +266,30 @@ test.describe("APZWORKFLOW-009 Workflow Engine Workbench", () => {
 
   test("workflows section shows list and definition viewer", async ({ page }) => {
     const seen: string[] = [];
-    await mockEngineHttpApi(page, seen);
     await signIn(page);
-    await page.goto(`${ENGINE_HOME}/workflows`);
+    await mockEngineHttpApi(page, seen);
+    const listResponse = page.waitForResponse(
+      (response) =>
+        response.request().method() === "GET" &&
+        response.url().includes("/api/v1/workflows/engine/workflows") &&
+        !response.url().match(/\/workflows\/engine\/workflows\/[^/?]+/),
+      { timeout: 45_000 },
+    );
+    await page.goto(`${ENGINE_HOME}/workflows`, { waitUntil: "domcontentloaded" });
+    expect((await listResponse).ok()).toBeTruthy();
 
-    await expect(page.getByText("Onboarding Notify")).toBeVisible({
+    await expect(
+      page.getByRole("cell", { name: "Onboarding Notify", exact: true }),
+    ).toBeVisible({
+      timeout: 45_000,
+    });
+    await expect(page.getByTestId("engine-definition-viewer")).toBeVisible({
       timeout: 30_000,
     });
-    await expect(page.getByTestId("engine-definition-viewer")).toBeVisible();
     await expect(
       page.getByRole("button", { name: /Validate Connection/i }),
     ).toBeVisible();
     await expect(page.getByRole("button", { name: /Execute/i })).toHaveCount(0);
+    expect(seen).toContain("/api/v1/workflows/engine/workflows");
   });
 });

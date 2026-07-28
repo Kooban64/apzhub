@@ -60,6 +60,10 @@ describe("ViewEngine", () => {
     expect(engine.resolveViewIdForRoute("/workspace/home/overview")).toBe(
       "platform-home-overview",
     );
+    expect(engine.resolveViewIdForRoute("/workspace/home")).toBe("platform-home");
+    expect(engine.resolveViewIdForRoute("/workspace/home/overview/extra")).toBe(
+      "platform-home-overview",
+    );
     expect(
       engine.resolveViewIdForNavigationItem({
         id: "platform-home-overview",
@@ -67,6 +71,31 @@ describe("ViewEngine", () => {
         route: "/workspace/home/overview",
       }),
     ).toBe("platform-home-overview");
+  });
+
+  it("resolves product deep links to the longest matching workspace view", () => {
+    const projectsView: ViewDescriptor = {
+      viewId: "projects",
+      capabilityId: "projects",
+      capabilityKind: "module",
+      title: "Projects",
+      workspace: "projects",
+      route: "/workspace/projects",
+      default: true,
+    };
+    const engine = createViewEngine({
+      permissionAdapter: createAllowAllWorkbenchPermissionAdapter(),
+      descriptors: [homeView, overviewView, projectsView],
+    });
+
+    expect(
+      engine.resolveViewIdForRoute(
+        "/workspace/projects/proj_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      ),
+    ).toBe("projects");
+    expect(engine.resolveViewIdForRoute("/workspace/home/overview")).toBe(
+      "platform-home-overview",
+    );
   });
 
   it("returns default view for workspace", () => {

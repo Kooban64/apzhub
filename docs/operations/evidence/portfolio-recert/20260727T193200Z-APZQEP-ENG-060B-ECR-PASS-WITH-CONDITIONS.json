@@ -1,0 +1,57 @@
+{
+  "id": "20260727T193200Z-APZQEP-ENG-060B-ECR-PASS-WITH-CONDITIONS",
+  "timestamp": "2026-07-27T19:32:00Z",
+  "programme": "APZQEP-ENG-060B",
+  "title": "Test Plans Infrastructure Engineering — Engineering Completion Review",
+  "type": "engineering-completion-review",
+  "standard": "OES-002 v1.1.0 §10A",
+  "decision": "PASS_WITH_CONDITIONS",
+  "readyForOwnerAcceptance": true,
+  "engineeringPerformed": false,
+  "tests": { "package": 99, "failed": 0, "typecheck": "PASS" },
+  "coverage": {
+    "scope": "packages/qep-test-plans",
+    "lines": 77.07,
+    "functions": 90.31,
+    "branches": 84.02,
+    "applicationServiceLines": 97.95,
+    "justified": true
+  },
+  "domainIntegrity": "PASS",
+  "conditions": [
+    {
+      "id": "C-01",
+      "topic": "compare-versions-missing",
+      "severity": "known-limitation-or-remediation"
+    },
+    {
+      "id": "C-02",
+      "topic": "get-items-route-missing",
+      "severity": "items-on-plan-dto-variance"
+    },
+    {
+      "id": "C-03",
+      "topic": "discrete-action-paths",
+      "severity": "accepted-specs-aligned-variance"
+    },
+    {
+      "id": "C-04",
+      "topic": "coverage-below-line-objective",
+      "severity": "postgres-adapter-and-presentation-stubs"
+    }
+  ],
+  "documents": [
+    "docs/products/apzqep/test-plans/infrastructure/ENGINEERING-COMPLETION-REVIEW.md",
+    "docs/products/apzqep/test-plans/infrastructure/INFRASTRUCTURE-ECR-CHECKLIST.md",
+    "docs/products/apzqep/test-plans/infrastructure/OWNER-SUMMARY.md"
+  ],
+  "explicitlyNotAuthorised": [
+    "owner-acceptance",
+    "component-certification",
+    "workbench",
+    "capability-certification",
+    "freeze",
+    "version-promotion",
+    "remediation-under-ecr"
+  ]
+}

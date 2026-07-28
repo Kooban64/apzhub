@@ -1,0 +1,43 @@
+{
+  "programme": "APZQEP-ENG-020F",
+  "part": "2",
+  "title": "Requirements Relationship Engine — Persistence, Application Services, APIs and Platform Integration",
+  "recordedAt": "2026-07-26T09:02:00Z",
+  "architecture": "APZQEP-ARCH-005 — ACCEPTED / CLOSED / COMPLETE",
+  "part1": "APZQEP-ENG-020F Part 1 — ACCEPTED / CLOSED / COMPLETE",
+  "state": "PART 2 IMPLEMENTED — AWAITING OWNER ACCEPTANCE",
+  "package": {
+    "@apzhub/qep-requirements": "0.9.0"
+  },
+  "migrations": [
+    "0077_apz_qep_requirements_relationship",
+    "0078_apz_qep_requirements_relationship_rls"
+  ],
+  "delivered": [
+    "Relationship + taxonomy + history persistence models",
+    "PostgreSQL and in-memory repositories",
+    "Application commands and queries",
+    "REST APIs under /api/v1/qep/requirements/relationships",
+    "Permissions qep.requirements.relationships.*",
+    "Audit integration",
+    "Search projection (requirement_relationship)",
+    "Observability onObservation hooks",
+    "Infrastructure and application tests",
+    "Part 2 documentation pack"
+  ],
+  "notDelivered": [
+    "Workbench / Relationship Editor UI",
+    "Graph visualisation / Relationship Explorer",
+    "Traceability / Coverage / Verification",
+    "AI / MCP",
+    "Part 3",
+    "Operational readiness pack"
+  ],
+  "tests": {
+    "qepRequirements": "PASS",
+    "qepContracts": "PASS",
+    "searchQep": "PASS",
+    "platformServicesTypecheck": "PASS"
+  },
+  "stopRule": "Do not begin Part 3 (Workbench/UI) until Owner issues explicit authorisation."
+}

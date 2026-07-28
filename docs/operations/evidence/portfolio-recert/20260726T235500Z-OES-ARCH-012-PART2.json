@@ -1,0 +1,17 @@
+{
+  "programme": "APZQEP-OES-ARCH-012",
+  "title": "Test Specifications Workbench Architecture — Part 2",
+  "recordedAt": "2026-07-26T23:55:00Z",
+  "decision": "FILED",
+  "part": "PART-02-Information-Architecture",
+  "path": "docs/engineering/oes/APZQEP/OES-ARCH-012-Test-Specifications-Workbench-Architecture/PART-02-Information-Architecture.md",
+  "governingStandards": ["OES-000 FROZEN", "OES-001 FROZEN", "OES-002 AUTHORISED"],
+  "covers": [
+    "Shell placement and Sidebar IA",
+    "Permanent URL / deep-link contracts",
+    "Explorer / Review queue / Search models",
+    "Cross-capability navigation rules"
+  ],
+  "completeMdReady": false,
+  "notAuthorised": ["Workbench Engineering", "React / Next.js implementation"]
+}

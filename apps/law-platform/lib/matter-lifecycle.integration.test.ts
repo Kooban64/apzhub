@@ -70,6 +70,12 @@ import {
   resetMatterLifecycleValidationState,
   type MatterLifecycleStepReport,
 } from "./matter-lifecycle-report";
+import {
+  createLawPersistenceContext,
+  DEFAULT_LAW_TENANT_ID,
+  resetLawPersistenceScope,
+  setSessionLawPersistenceContext,
+} from "./persistence";
 
 const workspaceRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -112,6 +118,10 @@ function createLifecycleKnowledgeContext() {
 
 describe("matter lifecycle end-to-end validation", () => {
   beforeEach(() => {
+    resetLawPersistenceScope();
+    setSessionLawPersistenceContext(
+      createLawPersistenceContext({ tenantId: DEFAULT_LAW_TENANT_ID }),
+    );
     resetMatterLifecycleValidationState();
   });
 

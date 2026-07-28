@@ -1,0 +1,30 @@
+{
+  "evidenceId": "20260728T102538Z-APZQEP-CONSTITUTION-1.0.0",
+  "document": "APZQEP-CONSTITUTION",
+  "version": "1.0.0",
+  "title": "APZ QEP Product Constitution — prepared for Owner Ratification",
+  "status": "IMPLEMENTED / AWAITING OWNER RATIFICATION",
+  "date": "2026-07-28",
+  "decisionTimestampUtc": "20260728T102538Z",
+  "path": "docs/products/apzqep/APZQEP-CONSTITUTION.md",
+  "ratificationTemplate": "docs/products/apzqep/APZQEP-CONSTITUTION-OWNER-RATIFICATION.md",
+  "relatedMilestone": "docs/products/apzqep/ENGINEERING-PLATFORM-V1-MILESTONE.md",
+  "nature": "Permanent product constitution — references Document 000, OES trilogy, constitution companion articles; does not engineer Wave 2",
+  "invariants": [
+    "I-1 Domain / Infrastructure / Workbench separation",
+    "I-2 Workbench never owns business behaviour",
+    "I-3 availableActions sole UI action authority",
+    "I-4 Honest limitations; no simulated unavailable features",
+    "I-5 Certification independence",
+    "I-6 Layered certification before capability claims",
+    "I-7 Freeze separate from CERT",
+    "I-8 Correlation IDs and typed error envelopes"
+  ],
+  "foundationBaseline": {
+    "frozenCapabilities": 5,
+    "engineeringPlatform": "v1 recognised",
+    "phase1": "COMPLETE",
+    "phase2": "READY",
+    "wave2Authorised": false
+  }
+}

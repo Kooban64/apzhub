@@ -1,0 +1,79 @@
+{
+  "evidenceId": "20260728T094331Z-APZQEP-PORTFOLIO-001",
+  "programme": "APZQEP-PORTFOLIO-001",
+  "title": "Foundation Completion & Portfolio Baseline",
+  "recordType": "portfolio-documentation-baseline",
+  "date": "2026-07-28",
+  "timestampUtc": "20260728T094331Z",
+  "status": {
+    "value": "IMPLEMENTED",
+    "awaiting": "OWNER ACCEPTANCE"
+  },
+  "nature": "Portfolio / documentation baseline only — no new functionality, no React/Next.js, no Domain/Infrastructure/Workbench engineering, no version bumps to frozen packages",
+  "authority": [
+    "Owner Portfolio Declaration 2026-07-28",
+    "Recommendation to insert this programme before Wave 2"
+  ],
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "pack": "docs/products/apzqep/portfolio/PORTFOLIO-001/",
+  "pointer": "docs/products/apzqep/portfolio/README.md",
+  "consolidates": {
+    "capabilities": [
+      { "name": "Requirements", "package": "@apzhub/qep-requirements", "version": "1.0.0", "status": "FROZEN" },
+      { "name": "Traceability", "package": "@apzhub/qep-traceability", "version": "1.0.0", "status": "FROZEN" },
+      { "name": "Verification", "package": "@apzhub/qep-verification", "version": "1.0.0", "status": "FROZEN" },
+      { "name": "Test Specifications", "package": "@apzhub/qep-test-specifications", "version": "1.0.0", "status": "FROZEN" },
+      { "name": "Test Plans", "package": "@apzhub/qep-test-plans", "version": "1.0.0", "status": "FROZEN" }
+    ],
+    "certificationProgrammes": [
+      "APZQEP-REQ-001", "APZQEP-TRACE-001", "APZQEP-CERT-040D", "APZQEP-CERT-050D",
+      "APZQEP-CERT-060A", "APZQEP-CERT-060B", "APZQEP-CERT-070A", "APZQEP-CERT-080A"
+    ],
+    "architectureProgrammes": [
+      "APZQEP-ARCH-001", "APZQEP-ARCH-005", "APZQEP-ARCH-006", "APZQEP-ARCH-007",
+      "APZQEP-ARCH-008", "APZQEP-ARCH-009", "APZQEP-ARCH-010", "APZQEP-ARCH-011",
+      "APZQEP-OES-ARCH-012", "APZQEP-ARCH-013", "APZQEP-ARCH-014"
+    ],
+    "freezeProgrammes": [
+      "APZQEP-REQ-001 (combined)",
+      "APZQEP-TRACE-001 (combined)",
+      "APZQEP-CERT-040D (combined)",
+      "Test Specifications Owner Freeze Decision (separate)",
+      "APZQEP-FREEZE-080A (separate)"
+    ]
+  },
+  "operatingModelValidation": {
+    "reference": "docs/engineering/oes/APZOR-ENGINEERING-OPERATING-MODEL-VALIDATION.md",
+    "status": "FULLY VALIDATED THROUGH PRACTICE"
+  },
+  "ownerProgressEstimate": {
+    "engineeringGovernance": "100%",
+    "platformFoundation": "100%",
+    "coreQaFoundation": "100%",
+    "firstCapabilityWave": "100%",
+    "overallApzqepVision": "≈55–60%"
+  },
+  "wave2Roadmap": {
+    "status": "INDICATIVE ONLY — NOT AUTHORISED",
+    "capabilities": [
+      "Test Execution", "Test Runs", "Test Suites", "Evidence Management",
+      "Defect Management", "Coverage & Quality Analytics", "Reporting & Dashboards",
+      "AI-Assisted Testing"
+    ],
+    "rule": "Each capability requires its own separate Owner-authorised Architecture programme; no ENG authorised by this evidence record"
+  },
+  "confirmations": {
+    "frozenPackageSourceModified": false,
+    "versionBumpsApplied": false,
+    "engineeringPerformed": false,
+    "newLimitationsInvented": false,
+    "wave2ProgrammeAuthorised": false
+  },
+  "recommendation": "READY FOR OWNER ACCEPTANCE",
+  "downstream": "Owner Acceptance of APZQEP-PORTFOLIO-001 closes the Foundation phase. No Wave 2 programme is authorised by this evidence record."
+}

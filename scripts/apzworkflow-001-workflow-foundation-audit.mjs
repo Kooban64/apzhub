@@ -89,7 +89,11 @@ for (const root of packageRoots) {
       rule: "no-workbench",
       pattern: /workbench-framework|PlatformWorkflowView|\/workspace\/workflow/,
     },
-    { rule: "no-n8n", pattern: /\bn8n\b|n8n-workflow|n8n-core/ },
+    {
+      rule: "no-n8n",
+      pattern:
+        /@apzhub\/integration-n8n|from\s+["']n8n(?:\/|["'])|n8n-workflow|n8n-core/,
+    },
     {
       rule: "no-event-bus",
       pattern: /@apzhub\/event-notification-framework|EventBus|publishEvent\(/,
@@ -119,7 +123,7 @@ scan(walk(join(ROOT, "packages/workflow-core")), [
 // Package versions — APZWORKFLOW-001 certified floor 0.1.0; subsequent sanctioned bumps allowed
 const allowedPackageVersions = {
   // 0.3.0 sanctioned by APZWORKFLOW-007 (engine gateway contracts); SoR floor unchanged.
-  "packages/workflow-contracts": new Set(["0.1.0", "0.2.0", "0.3.0"]),
+  "packages/workflow-contracts": new Set(["0.1.0", "0.2.0", "0.3.0", "0.4.2"]),
   "packages/workflow-core": new Set(["0.1.0", "0.1.1"]),
   "packages/workflow-persistence": new Set(["0.1.0", "0.1.1"]),
 };
@@ -184,13 +188,13 @@ for (const pkg of packageRoots) {
   if (
     !version.includes('WORKFLOW_CONTRACTS_VERSION = "0.1.0"') &&
     !version.includes('WORKFLOW_CONTRACTS_VERSION = "0.2.0"') &&
-    !version.includes('WORKFLOW_CONTRACTS_VERSION = "0.3.0"')
+    !version.includes('WORKFLOW_CONTRACTS_VERSION = "0.4.2"')
   ) {
     violations.push({
       file: "packages/workflow-contracts/src/version.ts",
       line: 1,
       rule: "contracts-version-export",
-      detail: "WORKFLOW_CONTRACTS_VERSION must be 0.1.0, 0.2.0, or 0.3.0",
+      detail: "WORKFLOW_CONTRACTS_VERSION must be 0.1.0, 0.2.0, 0.3.0, or 0.4.2",
     });
   }
   for (const symbol of [

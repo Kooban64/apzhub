@@ -1,0 +1,59 @@
+{
+  "programme": "APZHUB-ENG-0018",
+  "title": "Implement RG-LAW-API-AUTHZ + RG-LAW-SEARCH-INT",
+  "baseline": "1.2.0",
+  "wave": 2,
+  "step": 3,
+  "timestampUtc": "20260721T143546Z",
+  "preconditions": {
+    "APZHUB-ENG-0017": "ACCEPTED",
+    "groups": ["RG-LAW-API-AUTHZ", "RG-LAW-SEARCH-INT"],
+    "statusBefore": "OPEN"
+  },
+  "remediationGroups": [
+    {
+      "id": "RG-LAW-API-AUTHZ",
+      "status": "REMEDIATED",
+      "failuresCleared": "QA2-V-051…074 (24 Vitest)",
+      "rootCause": "RCA-04"
+    },
+    {
+      "id": "RG-LAW-SEARCH-INT",
+      "status": "REMEDIATED",
+      "failuresCleared": "QA2-V-075…081 (7 Vitest)",
+      "rootCause": "RCA-07"
+    }
+  ],
+  "vitestAffectedScope": {
+    "beforeFailed": 31,
+    "afterFailed": 0,
+    "afterPassed": 75,
+    "files": 10
+  },
+  "gates": {
+    "typescript": "PASS",
+    "lint": "PASS",
+    "vitest": "PASS",
+    "playwright": "N/A"
+  },
+  "remainingVsCert001AfterEng0016To0018": {
+    "playwrightHard": 12,
+    "playwrightFlaky": 30,
+    "vitest": 1,
+    "lint": 0,
+    "typecheck": 0
+  },
+  "recommendation": "READY FOR OWNER ACCEPTANCE",
+  "stop": [
+    "no RG-AUTH-SHELL-RESIDUAL",
+    "no RG-SUPPORT-CERT",
+    "no RG-OBSERVE-WB",
+    "no RG-VISUAL-INBOX",
+    "no RG-TESTING-ARCH",
+    "no ENG-0019",
+    "no Email SoR",
+    "no FIN-001",
+    "no Workflow Execute",
+    "no Release 1.3"
+  ]
+}

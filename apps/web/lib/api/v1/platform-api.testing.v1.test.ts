@@ -634,6 +634,7 @@ describe("APZTCMS-012 Testing HTTP API", () => {
     expect(handlerSource.includes("@apzhub/testing-services")).toBe(false);
     expect(handlerSource.includes("@apzhub/testing-persistence")).toBe(false);
     expect(handlerSource.includes("integration-github-actions")).toBe(false);
+    expect(handlerSource.includes("integration-gitlab-ci")).toBe(false);
     expect(handlerSource.includes("getPlatformServiceGateway")).toBe(true);
   });
 });

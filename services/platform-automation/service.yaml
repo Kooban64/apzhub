@@ -1,0 +1,59 @@
+manifestSchemaVersion: "1.0"
+id: platform-automation-service
+name: Platform Cross-Product Automation Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: platform
+  description: >
+    Platform-owned Cross-Product Automation Foundation (APZHUB-1.1-004).
+    Provides automation registration, event-driven dispatch, and
+    workflow-triggered automation intents. Consumed by Platform Services
+    and the domain Event Bus — not a product-specific automation engine.
+  contractPackage: "@apzhub/platform-services"
+  contractVersion: "0.28.0"
+  implementationPackage: "@apzhub/platform-services"
+  implementationVersion: "0.28.0"
+  owner: APZHUB
+  tags:
+    - automation
+    - event-bus
+    - workflow
+    - platform-services
+    - cross-product
+
+dependencies:
+  platform:
+    - event-bus
+    - workflow
+    - notification-foundation
+    - identity
+  integrations: []
+
+integrations: []
+
+service:
+  category: platform
+
+permissions:
+  - platform.automation.view
+  - platform.automation.manage
+
+events:
+  publishes:
+    - platform.automation.executed
+  consumes:
+    - support.*
+    - projects.*
+    - platform.*
+
+health:
+  enabled: true
+
+documentation:
+  governanceCapabilityKey: platform-automation
+  governanceCapabilityType: platform
+  featureFlagKey: capability.platform.automation.enabled
+  lifecycleProductId: platform
+  operationsCapabilityId: platform-automation

@@ -15,31 +15,32 @@
 
 ## Quick navigation
 
-| Need                        | Document                                                            |
-| --------------------------- | ------------------------------------------------------------------- |
-| **AI bootstrap (primary)**  | [AI-MANIFEST](./AI-MANIFEST.md) · [AI-BOOTSTRAP](./AI-BOOTSTRAP.md) |
-| **New session (AI or dev)** | [SESSION-START](./SESSION-START.md)                                 |
-| Executive overview          | [APZHUB-MASTER-BRIEF](./APZHUB-MASTER-BRIEF.md)                     |
-| Immutable principles        | [APZHUB-CONSTITUTION](./APZHUB-CONSTITUTION.md)                     |
-| Where development stops     | [CURRENT-MILESTONE](./CURRENT-MILESTONE.md)                         |
-| Implementation snapshot     | [CURRENT-STATE](./CURRENT-STATE.md)                                 |
-| How to work                 | [AI-WORKFLOW](./AI-WORKFLOW.md)                                     |
-| Programme history           | [PROJECT-BIBLE](./PROJECT-BIBLE.md)                                 |
-| All documentation           | [DOCUMENT-MAP](./DOCUMENT-MAP.md)                                   |
-| Repository layout           | [REPOSITORY-GUIDE](./REPOSITORY-GUIDE.md)                           |
+| Need                        | Document                                                                                                                                                            |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **AI bootstrap (primary)**  | [AI-MANIFEST](./AI-MANIFEST.md) · [AI-BOOTSTRAP](./AI-BOOTSTRAP.md)                                                                                                 |
+| **New session (AI or dev)** | [SESSION-START](./SESSION-START.md)                                                                                                                                 |
+| Executive overview          | [APZHUB-MASTER-BRIEF](./APZHUB-MASTER-BRIEF.md)                                                                                                                     |
+| Immutable principles        | [APZHUB-CONSTITUTION](./APZHUB-CONSTITUTION.md)                                                                                                                     |
+| Where development stops     | [CURRENT-MILESTONE](./CURRENT-MILESTONE.md)                                                                                                                         |
+| Foundation closure          | [FOUNDATION-CLOSURE](./FOUNDATION-CLOSURE.md) · [OPERATIONAL-TRANSITION](./OPERATIONAL-TRANSITION.md) · [OWNER-ACCEPTANCE-REGISTER](./OWNER-ACCEPTANCE-REGISTER.md) |
+| Implementation snapshot     | [CURRENT-STATE](./CURRENT-STATE.md)                                                                                                                                 |
+| How to work                 | [AI-WORKFLOW](./AI-WORKFLOW.md)                                                                                                                                     |
+| Programme history           | [PROJECT-BIBLE](./PROJECT-BIBLE.md)                                                                                                                                 |
+| All documentation           | [DOCUMENT-MAP](./DOCUMENT-MAP.md)                                                                                                                                   |
+| Repository layout           | [REPOSITORY-GUIDE](./REPOSITORY-GUIDE.md)                                                                                                                           |
 
 ---
 
 ## Layers
 
-| Layer               | Documents                                                                                                                                     |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1 — Executive**   | MASTER-BRIEF, CONSTITUTION, VISION                                                                                                            |
-| **2 — Engineering** | ENGINEERING-HANDBOOK, ARCHITECTURE-HANDBOOK, 5 catalogues                                                                                     |
-| **3 — Programme**   | PROJECT-BIBLE                                                                                                                                 |
-| **4 — Decisions**   | DECISION-REGISTER, ADR-CATALOGUE                                                                                                              |
-| **5 — AI**          | AI-MANIFEST, AI-BOOTSTRAP, SESSION-START, AI-CONTEXT, AI-ENGINEERING-STANDARDS, AI-WORKFLOW, CURRENT-STATE, CURRENT-MILESTONE, ACTIVE-BACKLOG |
-| **6 — Navigation**  | PROJECT-INDEX, DOCUMENT-MAP, REPOSITORY-GUIDE                                                                                                 |
+| Layer               | Documents                                                                                                                                                                                                          |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1 — Executive**   | MASTER-BRIEF, CONSTITUTION, VISION                                                                                                                                                                                 |
+| **2 — Engineering** | ENGINEERING-HANDBOOK, ARCHITECTURE-HANDBOOK, 5 catalogues                                                                                                                                                          |
+| **3 — Programme**   | PROJECT-BIBLE                                                                                                                                                                                                      |
+| **4 — Decisions**   | DECISION-REGISTER, ADR-CATALOGUE                                                                                                                                                                                   |
+| **5 — AI**          | AI-MANIFEST, AI-BOOTSTRAP, SESSION-START, AI-CONTEXT, AI-ENGINEERING-STANDARDS, AI-WORKFLOW, CURRENT-STATE, CURRENT-MILESTONE, ACTIVE-BACKLOG · Platform Delivery Standard (`docs/engineering/platform-delivery/`) |
+| **6 — Navigation**  | PROJECT-INDEX, DOCUMENT-MAP, REPOSITORY-GUIDE                                                                                                                                                                      |
 
 ---
 

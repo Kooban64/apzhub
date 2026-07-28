@@ -6,6 +6,17 @@
 
 ---
 
+## Platform Delivery Standard
+
+Mandatory methodology for platform capabilities and commercial products:
+
+- [Platform Delivery Standard](../engineering/platform-delivery/PLATFORM-DELIVERY-STANDARD.md) (APZHUB-ENGINEERING-001)
+- Lifecycle · stage gates · quality gates · programme governance · package standards · [templates](../engineering/platform-delivery/templates/)
+
+Cite the standard in Owner Approvals; do not recreate ad-hoc engineering instructions.
+
+---
+
 ## Welcome
 
 APZHUB is an enterprise operating platform built as a TypeScript monorepo. You will work across three primary layers:

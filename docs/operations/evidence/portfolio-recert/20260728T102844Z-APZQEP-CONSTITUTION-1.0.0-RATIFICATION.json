@@ -1,0 +1,38 @@
+{
+  "evidenceId": "20260728T102844Z-APZQEP-CONSTITUTION-1.0.0-RATIFICATION",
+  "document": "APZQEP-CONSTITUTION",
+  "version": "1.0.0",
+  "title": "APZ QEP Product Constitution — Owner Ratification",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T102844Z",
+  "decision": {
+    "status": "RATIFIED",
+    "approved": true,
+    "baselined": true
+  },
+  "path": "docs/products/apzqep/APZQEP-CONSTITUTION.md",
+  "ratificationRecord": "docs/products/apzqep/APZQEP-CONSTITUTION-OWNER-RATIFICATION.md",
+  "preparedEvidence": "docs/operations/evidence/portfolio-recert/20260728T102538Z-APZQEP-CONSTITUTION-1.0.0.json",
+  "governingAuthority": [
+    "Document 000 v1.0.0",
+    "APZQEP-CONSTITUTION v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "role": "Constitutional entry point for APZQEP (after Document 000)",
+  "amendmentRule": "Dedicated Owner-authorised constitutional programme only; no indirect amendment via ENG/ARCH/capability docs",
+  "foundationDeclaration": {
+    "foundationProgramme": "FULLY COMPLETE",
+    "engineeringPlatform": "Version 1",
+    "capabilityExpansion": "READY — requires separate Owner Architecture authorisation for each Wave 2 capability",
+    "wave2Authorised": false
+  },
+  "governanceStack": [
+    "Document 000",
+    "APZQEP Constitution",
+    "OES trilogy",
+    "Capability lifecycle",
+    "Frozen capability baselines (5 × 1.0.0)"
+  ]
+}

@@ -268,11 +268,11 @@ export interface UpdateSupportGroupInput {
   readonly active?: boolean;
 }
 
-/** Attachment metadata descriptor for article create — no filesystem paths or binary. */
+/** Attachment descriptor for article create — inline base64 binary (R12-SUP-02). */
 export interface SupportArticleAttachmentDescriptor {
   readonly filename: string;
   readonly contentType?: string;
-  /** Base64 data only when the provider requires inline association; prefer omit. */
+  /** Required for binary upload; max ~1 MiB decoded. */
   readonly dataBase64?: string;
   readonly sizeBytes?: number;
 }

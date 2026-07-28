@@ -42,6 +42,7 @@ import {
   type N8nRuntimeDiagnosticsSnapshot,
 } from "./operations";
 import { N8N_ADAPTER_VERSION } from "./version";
+import { N8nClient } from "./n8n-client";
 
 export { N8N_ADAPTER_VERSION };
 
@@ -49,6 +50,7 @@ export interface N8nDiagnosticsExtension {
   readonly apiStatus: "reachable" | "degraded" | "unavailable" | "not_tested";
   readonly authenticationStatus: "valid" | "missing" | "invalid" | "unknown";
   readonly authMode: string;
+  readonly detectedVersionTag?: string;
   readonly extendedCapabilities: readonly string[];
   readonly coreServices: readonly {
     readonly serviceId: string;
@@ -74,10 +76,13 @@ export interface N8nAdapterOptions {
 
 /**
  * n8n Workflow Engine Reference Adapter — extends IntegrationAdapterBase.
- * APZWORKFLOW-006: metadata discovery only; no execute/create/update/delete.
+ * APZHUB-INTEGRATION-N8N-001 / APZWORKFLOW-006: metadata discovery only;
+ * no execute/create/update/delete.
  */
 export class N8nAdapter extends IntegrationAdapterBase {
   readonly n8nConfig: N8nConfiguration;
+  /** Public client facade — never exposes secrets or raw vendor DTOs. */
+  readonly client: N8nClient;
   readonly core: N8nCoreServices;
   readonly operations: N8nOperationsService;
   private readonly restClient: N8nRestClient;
@@ -88,6 +93,7 @@ export class N8nAdapter extends IntegrationAdapterBase {
   private apiStatus: N8nDiagnosticsExtension["apiStatus"] = "not_tested";
   private authenticationStatus: N8nDiagnosticsExtension["authenticationStatus"] =
     "unknown";
+  private detectedVersionTag?: string;
 
   constructor(
     context: AdapterContext,
@@ -111,6 +117,11 @@ export class N8nAdapter extends IntegrationAdapterBase {
       getAuth: async () => this.resolveAuthMaterial(),
     });
 
+    this.client = new N8nClient(this.restClient, {
+      baseUrl: configuration.n8n.baseUrl,
+      fetchFn: options.fetchFn,
+    });
+
     this.core = createN8nCoreServices({ client: this.restClient });
 
     this.operations = createN8nOperationsService({
@@ -118,7 +129,7 @@ export class N8nAdapter extends IntegrationAdapterBase {
       getAuthenticationStatus: () => this.authenticationStatus,
       getAuthMode: () => this.n8nConfig.authMode,
       getLastLatencyMs: () =>
-        this.lastConnectionTest?.latencyMs ?? this.restClient.getLastLatencyMs(),
+        this.lastConnectionTest?.latencyMs ?? this.client.getLastLatencyMs(),
     });
   }
 
@@ -131,6 +142,7 @@ export class N8nAdapter extends IntegrationAdapterBase {
       apiStatus: this.apiStatus,
       authenticationStatus: this.authenticationStatus,
       authMode: this.n8nConfig.authMode,
+      detectedVersionTag: this.detectedVersionTag,
       extendedCapabilities: [
         ...getN8nExtendedCapabilities(this.configuration as N8nBootstrapConfiguration),
       ],
@@ -177,7 +189,7 @@ export class N8nAdapter extends IntegrationAdapterBase {
       return {
         ok: false,
         message:
-          "OAuth authentication is not implemented in APZWORKFLOW-006 — use api_key, personal_access_token, or basic",
+          "OAuth authentication is not implemented in APZHUB-INTEGRATION-N8N-001 — use api_key, personal_access_token, or basic",
       };
     }
 
@@ -189,7 +201,9 @@ export class N8nAdapter extends IntegrationAdapterBase {
         return authCheck;
       }
 
-      const result = await this.restClient.testConnection(context);
+      const version = await this.client.detectVersion(context);
+      this.detectedVersionTag = version.tag;
+      const result = await this.client.testConnection(context);
       this.lastConnectionTest = result;
       this.lastConnectionTestAt = this.context.clock.now();
       this.apiStatus = "reachable";
@@ -208,11 +222,13 @@ export class N8nAdapter extends IntegrationAdapterBase {
         operation: "connection_test",
         durationMs: result.latencyMs,
         result: "success",
+        versionTag: version.tag,
+        versionSource: version.source,
       });
 
       return {
         ok: true,
-        message: `n8n connection verified (${result.versionHint ?? "api"})`,
+        message: `n8n connection verified (${version.tag ?? result.versionHint ?? "api"})`,
       };
     } catch (error) {
       const translated = mapN8nUnknownError(

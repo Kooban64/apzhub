@@ -1,0 +1,31 @@
+{
+  "programme": "APZQEP-OES-ENG-050C",
+  "title": "Test Specifications Workbench Engineering OES",
+  "recordedAt": "2026-07-27T00:30:00Z",
+  "decision": "READY_FOR_OWNER_REVIEW",
+  "path": "docs/engineering/oes/APZQEP/OES-ENG-050C-Test-Specifications-Workbench-Engineering/COMPLETE.md",
+  "prerequisites": [
+    "OES-000 FROZEN",
+    "OES-001 FROZEN",
+    "OES-002 FROZEN",
+    "OES-ARCH-012 ACCEPTED",
+    "ENG-050B ACCEPTED",
+    "ADR-0074 ACCEPTED"
+  ],
+  "filed": [
+    "PART-01",
+    "PART-02",
+    "PART-03",
+    "PART-04",
+    "PART-05",
+    "APPENDIX-A",
+    "APPENDIX-B",
+    "APPENDIX-C",
+    "APPENDIX-D",
+    "APPENDIX-E",
+    "COMPLETE.md"
+  ],
+  "notAuthorised": [
+    "React / Next.js / Workbench implementation before Owner Acceptance of this OES"
+  ]
+}

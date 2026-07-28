@@ -1,0 +1,41 @@
+{
+  "programme": "APZQEP-ENG-020C",
+  "title": "Requirements Lifecycle Engine & State Machine",
+  "classification": "ENGINEERING_IMPLEMENTATION",
+  "lifecycle": "Engineering",
+  "timestamp": "2026-07-25T07:13:00Z",
+  "ownerDecision": "ACCEPTED",
+  "repositoryStatus": "CLOSED",
+  "classificationStatus": "COMPLETE",
+  "baseline": "APZQEP-ENG-020C Requirements Lifecycle Engine — authoritative",
+  "packRoot": "docs/products/apzqep/requirements/lifecycle/",
+  "ownerAcceptance": "docs/products/apzqep/requirements/lifecycle/OWNER-ACCEPTANCE.md",
+  "implementationEvidence": "20260724T230000Z-APZQEP-ENG-020C.json",
+  "acceptedFoundations": {
+    "reusableLifecycleEngine": "@apzhub/lifecycle-engine@0.1.0",
+    "requirementsPackage": "@apzhub/qep-requirements@0.3.0",
+    "states": [
+      "draft",
+      "proposed",
+      "in_review",
+      "approved",
+      "rejected",
+      "implemented",
+      "verified",
+      "deprecated",
+      "archived"
+    ],
+    "primaryLifecycle": "draft → proposed → in_review → approved → implemented → verified → deprecated → archived",
+    "statusViaLifecycleOnly": true,
+    "auditTriad": ["platform_audit", "lifecycle_history", "domain_event"],
+    "serverAuthoritativeUiActions": true,
+    "multiStageApprovals": false,
+    "baselines": false,
+    "ai": false,
+    "mcp": false
+  },
+  "bindingRuleCount": 10,
+  "nextProgramme": "APZQEP-ENG-020D",
+  "nextProgrammeTitle": "Requirements Versioning & Baselines",
+  "nextProgrammeStatus": "AUTHORISED_NOT_STARTED_AWAITING_PROGRAMME_INSTRUCTION"
+}

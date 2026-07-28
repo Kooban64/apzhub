@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isSupportApiError, SupportApiError } from "./errors";
+import { isSupportApiError, shouldRetrySupportQuery, SupportApiError } from "./errors";
 
 describe("SupportApiError", () => {
   it("maps statuses and sanitizes provider leakage", () => {
@@ -52,5 +52,22 @@ describe("SupportApiError", () => {
       message: "stack mapping missing",
     });
     expect(error.message).toBe("The requested Support resource was not found.");
+  });
+
+  it("does not retry terminal Support API codes", () => {
+    const forbidden = SupportApiError.fromHttp({
+      status: 403,
+      code: "FORBIDDEN",
+    });
+    expect(shouldRetrySupportQuery(0, forbidden)).toBe(false);
+
+    const unavailable = SupportApiError.fromHttp({
+      status: 503,
+      code: "UNAVAILABLE",
+    });
+    expect(shouldRetrySupportQuery(0, unavailable)).toBe(false);
+
+    expect(shouldRetrySupportQuery(0, new Error("network"))).toBe(true);
+    expect(shouldRetrySupportQuery(1, new Error("network"))).toBe(false);
   });
 });

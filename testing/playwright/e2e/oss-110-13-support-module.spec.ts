@@ -1,7 +1,6 @@
 import { expect, test, type Page, type Route } from "@playwright/test";
 
-const DEV_EMAIL = "dev@apzhub.local";
-const DEV_PASSWORD = "DevPassword123!";
+import { signInDevUser } from "./auth-helpers";
 
 const REQUEST_ID = "sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 const ARTICLE_ID = "sart_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
@@ -43,39 +42,7 @@ async function ensureWorkspace(page: Page) {
 }
 
 async function signIn(page: Page) {
-  await page.goto("/login", { waitUntil: "domcontentloaded" });
-  await page.getByLabel("Email").fill(DEV_EMAIL);
-  await page.getByLabel("Password").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "Sign in" }).click();
-
-  try {
-    await expect(page).toHaveURL(/\/workspace\/|\/$/, { timeout: 15_000 });
-    await ensureWorkspace(page);
-    return;
-  } catch {
-    // Fall through to register / retry login.
-  }
-
-  const uniqueEmail = `support-e2e-${Date.now()}@apzhub.local`;
-  await page.goto("/register", { waitUntil: "domcontentloaded" });
-  await page.getByLabel("Name").fill("Support E2E User");
-  await page.getByLabel("Email").fill(uniqueEmail);
-  await page.getByLabel("Password").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "Register" }).click();
-
-  try {
-    await expect(page).toHaveURL(/\/workspace\/|\/$/, { timeout: 20_000 });
-    await ensureWorkspace(page);
-    return;
-  } catch {
-    // Registration may fail if auth backend is busy; retry known-dev login.
-  }
-
-  await page.goto("/login", { waitUntil: "domcontentloaded" });
-  await page.getByLabel("Email").fill(DEV_EMAIL);
-  await page.getByLabel("Password").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "Sign in" }).click();
-  await expect(page).toHaveURL(/\/workspace\/|\/$/, { timeout: 20_000 });
+  await signInDevUser(page);
   await ensureWorkspace(page);
 }
 

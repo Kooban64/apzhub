@@ -161,6 +161,10 @@ export class WorkbenchRequestBusImpl implements WorkbenchRequestBus {
     this.manager.disableSessionPersistence();
   }
 
+  flushPendingPersist(): Promise<void> {
+    return this.manager.flushPendingPersist();
+  }
+
   clearSession(userId: string): Promise<void> {
     return this.manager.clearSession(userId);
   }

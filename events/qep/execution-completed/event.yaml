@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: qep-execution-completed
+name: Execution Completed
+version: 0.1.0
+kind: event
+
+metadata:
+  category: quality-engineering
+  description: "Execution Completed event stub for APZ QEP (APZQEP-ENG-010). Payload schema reserved; no publishers implemented."
+
+event:
+  category: business
+  publisher: qep-execution
+  subscribers:
+    - audit:platform.audit
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: qep.execution.completed

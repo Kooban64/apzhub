@@ -1,0 +1,66 @@
+{
+  "programme": "APZQEP-ENG-030C",
+  "title": "Traceability Workbench UI",
+  "recordedAt": "2026-07-26T15:50:00Z",
+  "state": "IMPLEMENTED — AWAITING OWNER ACCEPTANCE",
+  "architecture": {
+    "APZQEP-ARCH-006": "ACCEPTED",
+    "APZQEP-ARCH-007": "ACCEPTED",
+    "APZQEP-ARCH-008": "ACCEPTED",
+    "APZQEP-ENG-030A-Part1": "ACCEPTED",
+    "APZQEP-ENG-030A-Part2": "ACCEPTED"
+  },
+  "versions": {
+    "@apzhub/qep-traceability": "0.3.0",
+    "modules/qep-traceability": "0.3.0"
+  },
+  "routes": [
+    "/workspace/qep/traceability",
+    "/workspace/qep/traceability/trace-links",
+    "/workspace/qep/traceability/trace-links/new",
+    "/workspace/qep/traceability/trace-links/supersede",
+    "/workspace/qep/traceability/trace-links/{id}",
+    "/workspace/qep/traceability/trace-links/{id}/history",
+    "/workspace/qep/traceability/matrix",
+    "/workspace/qep/traceability/taxonomy"
+  ],
+  "components": [
+    "QepTraceLinksListView",
+    "QepTraceLinkCreateView",
+    "QepTraceLinkDetailView",
+    "QepTraceLinkHistoryView",
+    "QepTraceLinkSupersedeView",
+    "QepTraceMatrixView",
+    "QepTraceTaxonomyBrowserView",
+    "QepTraceabilityRouterView"
+  ],
+  "tests": {
+    "packageVitest": { "count": 52, "result": "PASS" },
+    "uiVitest": { "count": 13, "result": "PASS" },
+    "playwrightSmoke": "apzqep-eng-030c-traceability-workbench.spec.ts"
+  },
+  "gates": {
+    "availableActions": "server DTO only",
+    "coverageImpact": "EXCLUDED",
+    "aiMcp": "EXCLUDED",
+    "certification": "NOT AUTHORISED"
+  },
+  "exclusions": [
+    "Owner Acceptance of ENG-030C",
+    "Traceability Certification",
+    "Coverage Engine",
+    "Impact Engine",
+    "AI",
+    "MCP"
+  ],
+  "documentationPack": "docs/products/apzqep/traceability/workbench/",
+  "finalState": {
+    "APZQEP-ARCH-007": "ACCEPTED",
+    "APZQEP-ENG-030A-Part1": "ACCEPTED",
+    "APZQEP-ENG-030A-Part2": "ACCEPTED",
+    "APZQEP-ARCH-008": "ACCEPTED",
+    "APZQEP-ENG-030C": "IMPLEMENTED / AWAITING OWNER ACCEPTANCE",
+    "TraceabilityCertification": "NOT AUTHORISED"
+  },
+  "stopRule": "Await Owner Acceptance of ENG-030C. Do not declare Traceability Certification. No Coverage/Impact/AI/MCP."
+}

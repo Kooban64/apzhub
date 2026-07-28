@@ -1,0 +1,25 @@
+manifestSchemaVersion: "1.0"
+id: observe-alert-acknowledged
+name: Observe Alert Acknowledged
+version: 1.0.0
+kind: event
+
+metadata:
+  category: observability
+  description: Emitted when an operator acknowledges an Observe alert (ADR-0070 Phase A). Acknowledgement is not resolution.
+
+event:
+  category: business
+  publisher: observe-service
+  subscribers:
+    - notification:observe.delivery-hook
+    - activity:observe.activity
+    - audit:platform.audit
+  payload:
+    alertStateId: string
+    alertDefinitionId: string
+    state: string
+    fingerprint: string
+
+documentation:
+  eventKey: observe.alert.acknowledged

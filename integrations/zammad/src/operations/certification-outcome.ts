@@ -64,13 +64,12 @@ export function decideZammadCertificationOutcome(
 }
 
 export const ZAMMAD_KNOWN_LIMITATIONS = [
-  "Binary attachment transfer is not implemented (metadata only via articles)",
-  "Webhook HTTP ingress is not implemented",
-  "Platform Event Bus publication is not implemented",
+  "Binary attachment upload/download available via articles (R12-SUP-02); delete not exposed; max 1 MiB",
+  "Webhook HTTP ingress available via Platform POST /api/v1/integrations/zammad/webhooks (R12-SUP-01); attachment events translated as metadata",
   "Persistent synchronisation state is not implemented (in-memory only)",
   "Article update and delete are unsupported",
   "Article sync is not implemented",
   "OAuth authentication is not implemented (API token only)",
   "Analytics includes heuristic metrics — not authoritative SLA calculations",
-  "Platform SupportService / HTTP / UI exposure is out of scope until a later milestone",
+  "Support realtime WS/SSE deferred (R12-SUP-03)",
 ] as const;

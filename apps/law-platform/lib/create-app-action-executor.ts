@@ -43,6 +43,7 @@ import { TaskWorkflowService } from "./tasks/task-workflow-service";
 import { getSharedTaskRepository } from "./tasks/in-memory-task-repository";
 import { TimeEntryWorkflowService } from "./time/time-entry-workflow-service";
 import { getSharedTimeEntryRepository } from "./time/in-memory-time-entry-repository";
+import { wireLawSearchPublication } from "./search/law-publication-wiring";
 
 export interface CreateAppActionExecutorOptions {
   readonly dto: ActionRegistryDto;
@@ -88,29 +89,38 @@ export function createAppActionExecutorBundle(
 
   const invoiceRepository = getSharedInvoiceRepository();
 
-  const clientWorkflow = new ClientWorkflowService({
+  const clientWorkflowRaw = new ClientWorkflowService({
     repository: clientRepository,
     eventBus,
     actorId: options.actorId,
   });
 
-  const matterWorkflow = new MatterWorkflowService({
+  const matterWorkflowRaw = new MatterWorkflowService({
     repository: matterRepository,
     eventBus,
     actorId: options.actorId,
   });
 
-  const documentWorkflow = new DocumentWorkflowService({
+  const documentWorkflowRaw = new DocumentWorkflowService({
     repository: documentRepository,
     eventBus,
     actorId: options.actorId,
   });
 
-  const taskWorkflow = new TaskWorkflowService({
+  const taskWorkflowRaw = new TaskWorkflowService({
     repository: taskRepository,
     eventBus,
     actorId: options.actorId,
   });
+
+  const { clientWorkflow, matterWorkflow, documentWorkflow, taskWorkflow } =
+    wireLawSearchPublication({
+      clientWorkflow: clientWorkflowRaw,
+      matterWorkflow: matterWorkflowRaw,
+      documentWorkflow: documentWorkflowRaw,
+      taskWorkflow: taskWorkflowRaw,
+      env: { actorUserId: options.actorId },
+    });
 
   const calendarEventWorkflow = new CalendarEventWorkflowService({
     repository: calendarEventRepository,

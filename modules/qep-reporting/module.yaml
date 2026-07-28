@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: qep-reporting
+name: Reporting and Analytics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Reporting and Analytics (M15) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  product: apzqep
+  moduleCatalogueId: M15
+  slug: reporting
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: stub
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Reporting and Analytics
+    icon: flask-conical
+    route: /workspace/qep/reporting
+    order: 150
+    permission: qep.reporting.read
+  view:
+    title: Reporting and Analytics
+    workspace: qep
+    route: /workspace/qep/reporting
+    permission: qep.reporting.read

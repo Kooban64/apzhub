@@ -78,13 +78,24 @@ export type {
 export {
   DefaultActivityService,
   DefaultActivitySessionStore,
+  PersistedActivitySessionStore,
   PlaceholderActivityService,
   compareActivityDocuments,
   createDefaultActivityService,
   createDefaultActivitySessionStore,
+  createPersistedActivitySessionStore,
+  createLawActivityPersistenceStorageKey,
+  createPostgresActivityPersistenceStorage,
+  createProductionPostgresActivitySessionStore,
+  loadPostgresActivitySessionSnapshot,
+  savePostgresActivitySessionSnapshot,
   createPlaceholderActivityService,
 } from "./service";
-export type { ActivitySessionStore } from "./service";
+export type {
+  ActivitySessionStore,
+  ActivityPersistenceStorage,
+  PersistedActivitySessionStoreOptions,
+} from "./service";
 
 export type {
   ActivityDescriptor,

@@ -1,0 +1,62 @@
+{
+  "programme": "APZQEP-ENG-020C",
+  "title": "Requirements Lifecycle Engine & State Machine",
+  "classification": "ENGINEERING_IMPLEMENTATION",
+  "lifecycle": "Engineering",
+  "baseline": "APZQEP-ENG-020B ACCEPTED",
+  "reference": [
+    "Platform-1.4-CERT-001",
+    "APZQEP-CONSTITUTION-001",
+    "APZQEP-DEF-002",
+    "APZQEP-ARCH-001",
+    "APZQEP-PLAN-001",
+    "APZQEP-ENG-010",
+    "APZQEP-ENG-020A",
+    "APZQEP-ENG-020B"
+  ],
+  "timestamp": "2026-07-24T23:00:00Z",
+  "status": "ACCEPTED_CLOSED",
+  "recommendation": "READY FOR OWNER LIFECYCLE ACCEPTANCE",
+  "ownerDecision": "ACCEPTED",
+  "acceptedAt": "2026-07-25T07:13:00Z",
+  "acceptanceEvidence": "20260725T071300Z-APZQEP-ENG-020C-ACCEPTANCE.json",
+  "baselineVersion": "0.3.0-requirements-lifecycle",
+  "packRoot": "docs/products/apzqep/requirements/lifecycle/",
+  "repository": {
+    "lifecycleEnginePackage": "@apzhub/lifecycle-engine@0.1.0",
+    "requirementsPackage": "@apzhub/qep-requirements@0.3.0",
+    "states": [
+      "draft",
+      "proposed",
+      "in_review",
+      "approved",
+      "rejected",
+      "implemented",
+      "verified",
+      "deprecated",
+      "archived"
+    ],
+    "transitions": 11,
+    "historyTable": "qep_requirement_lifecycle_history",
+    "migrations": [
+      "0070_apz_qep_requirement_lifecycle_history",
+      "0071_apz_qep_requirement_lifecycle_history_rls"
+    ],
+    "multiStageApprovals": false,
+    "baselines": false,
+    "ai": false,
+    "mcp": false,
+    "workflowOrchestration": false
+  },
+  "validation": {
+    "targetedTests": 41,
+    "typecheckLifecycleEngine": true,
+    "typecheckQepRequirements": true,
+    "lint": true
+  },
+  "platformUnchanged": true,
+  "businessValue": "Requirements Lifecycle Engine — reusable shared business engine for QEP modules",
+  "nextProgramme": "APZQEP-ENG-020D",
+  "nextProgrammeTitle": "Requirements Versioning & Baselines",
+  "nextProgrammeStatus": "AUTHORISED_NOT_STARTED_AWAITING_PROGRAMME_INSTRUCTION"
+}

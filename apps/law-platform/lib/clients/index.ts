@@ -17,7 +17,7 @@ export { InMemoryClientRepository } from "./in-memory-client-repository";
 export {
   getSharedClientRepository,
   resetSharedClientRepository,
-} from "../persistence/repository-factory";
+} from "./in-memory-client-repository";
 export { SEED_CLIENTS } from "./seed-clients";
 export {
   validateClientForm,

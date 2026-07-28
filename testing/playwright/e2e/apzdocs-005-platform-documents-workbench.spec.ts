@@ -136,7 +136,8 @@ test.describe("APZDOCS-005 Platform Documents workbench", () => {
     await expect(
       page.getByRole("heading", { level: 1, name: /Overview/i }),
     ).toBeVisible();
-    await expect(page.getByText("Playwright Policy")).toBeVisible();
+    // Title appears in table cell and detail panel — target the list cell (RG-SELECTORS).
+    await expect(page.getByRole("cell", { name: "Playwright Policy" })).toBeVisible();
 
     expect(seen.some((p) => p.includes("/api/v1/documents"))).toBe(true);
   });

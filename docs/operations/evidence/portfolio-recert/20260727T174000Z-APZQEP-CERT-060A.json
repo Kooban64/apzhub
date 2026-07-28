@@ -1,0 +1,40 @@
+{
+  "id": "20260727T174000Z-APZQEP-CERT-060A",
+  "timestamp": "2026-07-27T17:40:00Z",
+  "programme": "APZQEP-CERT-060A",
+  "title": "Test Plans Domain Certification",
+  "type": "domain-certification-assurance",
+  "status": "IMPLEMENTED_AWAITING_OWNER_CERTIFICATION_DECISION",
+  "package": {
+    "name": "@apzhub/qep-test-plans",
+    "version": "0.1.0",
+    "versionRecommendation": "remain-0.1.0"
+  },
+  "recommendedClass": "DOMAIN_PRODUCTION_READY_WITH_LIMITATIONS",
+  "independence": true,
+  "engineeringPerformed": false,
+  "qualityGates": {
+    "aggregate": "ALL_MANDATORY_DOMAIN_GATES_PASS",
+    "tests": { "total": 62, "failed": 0, "result": "PASS" },
+    "typecheck": "PASS"
+  },
+  "upstream": {
+    "architecture": "APZQEP-ARCH-013 ACCEPTED",
+    "oes": "APZQEP-OES-ENG-060A ACCEPTED",
+    "engineering": "APZQEP-ENG-060A ACCEPTED CLOSED",
+    "ecr": "PASS"
+  },
+  "documents": [
+    "docs/products/apzqep/test-plans/domain-certification/README.md",
+    "docs/products/apzqep/test-plans/domain-certification/CERTIFICATION-REPORT.md",
+    "docs/products/apzqep/ENGINEERING-LIFECYCLE-HANDBOOK.md",
+    "docs/engineering/oes/APZOR-ENGINEERING-OPERATING-MODEL-VALIDATION.md"
+  ],
+  "explicitlyNotAuthorised": [
+    "capability-1.0.0-promotion",
+    "capability-freeze",
+    "infrastructure",
+    "workbench",
+    "remediation-engineering"
+  ]
+}

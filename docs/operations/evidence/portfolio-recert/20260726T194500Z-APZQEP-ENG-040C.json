@@ -1,0 +1,30 @@
+{
+  "programme": "APZQEP-ENG-040C",
+  "title": "Verification Workbench Engineering",
+  "recordedAt": "2026-07-26T19:45:00Z",
+  "status": "IMPLEMENTED / AWAITING OWNER ACCEPTANCE",
+  "package": { "@apzhub/qep-verification": "0.3.0" },
+  "architecture": "APZQEP-ARCH-010 ACCEPTED",
+  "pack": "docs/products/apzqep/verification/workbench/",
+  "routes": [
+    "/workspace/qep/verification",
+    "/workspace/qep/verification/queue",
+    "/workspace/qep/verification/team",
+    "/workspace/qep/verification/search",
+    "/workspace/qep/verification/history",
+    "/workspace/qep/verification/dashboard",
+    "/workspace/qep/verification/:id"
+  ],
+  "notAuthorised": [
+    "Coverage",
+    "Impact",
+    "Evidence",
+    "Certification",
+    "AI",
+    "MCP",
+    "new REST APIs",
+    "new persistence",
+    "1.0.0 certification"
+  ],
+  "stopCondition": "APZQEP-ENG-040C IMPLEMENTED / AWAITING OWNER ACCEPTANCE — await Owner review; do not certify"
+}

@@ -193,7 +193,7 @@ const forbiddenSegments = [
   "retry",
   "schedule",
   "cancel-delivery",
-  "providers",
+  // ENG-004 / Platform 1.4: providers route is authorised platform surface
   "smtp",
   "sms",
   "push",
@@ -274,7 +274,7 @@ if (!/version:\s*1\.(?:[4-9]|\d{2,})\.\d+/.test(openapi.slice(0, 400))) {
 for (const bad of [
   "/notifications/send",
   "/notifications/deliver",
-  "/notifications/providers",
+  // /notifications/providers authorised under ENG-004
 ]) {
   if (openapi.includes(`\n  ${bad}:`)) {
     violations.push({

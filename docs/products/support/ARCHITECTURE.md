@@ -51,7 +51,8 @@ Native products use Platform Services → platform persistence (still no Module 
 
 ## Events published
 
-- None — Event Bus not wired for Support (documented limitation)
+- Support Platform Service publishes `support.request.*` / `support.article.created` (APZHUB-1.1-003)
+- ENF Attention path consumes Support domain events for in-app notifications
 
 ## Events consumed
 
@@ -71,8 +72,9 @@ Workbench module · Search provider · typed client under apps/web/lib/support.
 
 ## Platform work still required
 
-- Optional Event Bus / webhook ingress (explicitly out of certified scope)
+- Zammad webhook HTTP ingress (explicitly out of certified 1.0 scope)
 - Binary attachments (metadata-only today)
+- Realtime WS/SSE transport (in-app ENF Attention delivered under APZHUB-1.1-003)
 - Product packaging / UX polish programmes only with Owner approval
 
 ## Architecture references

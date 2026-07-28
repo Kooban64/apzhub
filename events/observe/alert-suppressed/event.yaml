@@ -1,0 +1,25 @@
+manifestSchemaVersion: "1.0"
+id: observe-alert-suppressed
+name: Observe Alert Suppressed
+version: 1.0.0
+kind: event
+
+metadata:
+  category: observability
+  description: Emitted when an Observe alert is suppressed (silenced). Suppressed is not healthy (ADR-0070 Phase A).
+
+event:
+  category: business
+  publisher: observe-service
+  subscribers:
+    - notification:observe.delivery-hook
+    - activity:observe.activity
+    - audit:platform.audit
+  payload:
+    alertStateId: string
+    alertDefinitionId: string
+    state: string
+    fingerprint: string
+
+documentation:
+  eventKey: observe.alert.suppressed

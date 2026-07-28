@@ -1,5 +1,6 @@
 /**
- * @apzhub/notification-contracts — Platform Notification SoR contracts (APZNOTIFY-001/002).
+ * @apzhub/notification-contracts — Platform Notification SoR contracts (APZNOTIFY-001/002)
+ * plus additive Notification Delivery plane contracts (ADR-0071 / ENG-004).
  */
 
 export { NOTIFICATION_CONTRACTS_VERSION } from "./version";
@@ -10,3 +11,4 @@ export * from "./common/context";
 export * from "./domain/notification";
 export * from "./services/notification-service";
 export * from "./services/platform-gateway";
+export * from "./delivery";

@@ -1,0 +1,43 @@
+{
+  "programme": "APZHUB-PRODUCTS-004",
+  "title": "Requirements Engineering Standard",
+  "classification": "PRODUCT_GOVERNANCE",
+  "lifecycle": "Product Engineering",
+  "baseline": "Certified Platform 1.4",
+  "reference": [
+    "Platform-1.4-CERT-001",
+    "APZHUB-PRODUCTS-003",
+    "Platform Delivery Standard"
+  ],
+  "timestamp": "2026-07-24T06:30:00Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER REQUIREMENTS ACCEPTANCE",
+  "platformFrozen": true,
+  "platformEngineering": false,
+  "productDefinition": false,
+  "architecture": false,
+  "implementation": false,
+  "pack": "docs/products/requirements/",
+  "documents": [
+    "README.md",
+    "REQUIREMENTS-ENGINEERING-STANDARD.md",
+    "REQUIREMENTS-TEMPLATE.md",
+    "FUNCTIONAL-REQUIREMENTS-STANDARD.md",
+    "NON-FUNCTIONAL-REQUIREMENTS-STANDARD.md",
+    "REGULATORY-REQUIREMENTS-STANDARD.md",
+    "AI-REQUIREMENTS-STANDARD.md",
+    "ACCEPTANCE-CRITERIA-STANDARD.md",
+    "TRACEABILITY-STANDARD.md",
+    "REQUIREMENTS-CHECKLIST.md",
+    "COMPLETION-REPORT.md",
+    "OWNER-ACCEPTANCE.md"
+  ],
+  "hardGate": "No Product Definition until PRODUCTS-004 Accepted and Requirements Baseline Approved",
+  "lifecycleOrder": [
+    "Requirements",
+    "Requirements Approval",
+    "Product Definition",
+    "Business Approval",
+    "Architecture"
+  ]
+}

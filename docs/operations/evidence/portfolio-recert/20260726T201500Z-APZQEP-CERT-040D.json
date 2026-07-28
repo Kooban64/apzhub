@@ -1,0 +1,51 @@
+{
+  "programme": "APZQEP-CERT-040D",
+  "title": "Verification Capability Certification",
+  "recordedAt": "2026-07-26T20:15:00Z",
+  "status": "IMPLEMENTED / AWAITING OWNER ACCEPTANCE",
+  "classification": "Owner Certification Programme",
+  "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "recommendation": "PRODUCTION READY",
+  "package": { "@apzhub/qep-verification": "1.0.0" },
+  "promotedFrom": "0.3.0",
+  "breakingChanges": false,
+  "pack": "docs/products/apzqep/verification/capability-certification/",
+  "releaseEvidence": "docs/releases/apzqep/verification/1.0.0/",
+  "baselines": {
+    "ARCH-009": "ACCEPTED",
+    "ENG-040A": "ACCEPTED",
+    "ENG-040B": "ACCEPTED",
+    "ARCH-010": "ACCEPTED",
+    "ENG-040C": "ACCEPTED",
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN"
+  },
+  "qualityGates": {
+    "architecture": "PASS",
+    "engineering": "PASS",
+    "documentation": "PASS",
+    "testing": "PASS",
+    "security": "PASS",
+    "performance": "PASS",
+    "operations": "PASS",
+    "repositoryStandards": "PASS"
+  },
+  "tests": {
+    "files": 9,
+    "total": 161,
+    "passed": 161,
+    "failed": 0,
+    "skipped": 0,
+    "typecheck": "PASS"
+  },
+  "knownLimitationsNonBlocking": [
+    "Evidence",
+    "Coverage",
+    "Impact",
+    "Certification Engine",
+    "AI",
+    "MCP"
+  ],
+  "ownerAcceptanceRecorded": false,
+  "stopCondition": "APZQEP-CERT-040D IMPLEMENTED / AWAITING OWNER ACCEPTANCE — await Owner review; do not begin next capability"
+}

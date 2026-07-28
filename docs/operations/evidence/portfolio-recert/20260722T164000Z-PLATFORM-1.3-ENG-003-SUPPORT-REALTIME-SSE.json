@@ -1,0 +1,111 @@
+{
+  "programme": "Platform-1.3-ENG-003",
+  "epic": "P13-E03",
+  "title": "Support Realtime (SSE)",
+  "baseline": "Platform 1.3 Engineering",
+  "acceptedAdr": "ADR-0072",
+  "timestamp": "2026-07-22T16:40:00Z",
+  "status": "READY_FOR_OWNER_ENGINEERING_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER ENGINEERING ACCEPTANCE",
+  "packagesChanged": ["@apzhub/platform-services"],
+  "applicationsChanged": ["apps/web"],
+  "databaseChanges": "none",
+  "contractsChanged": [
+    "RealtimeSubscriptionService",
+    "SUPPORT_REALTIME_WIRE_EVENTS",
+    "mapSupportDomainEventToWire"
+  ],
+  "apisChanged": [
+    "GET /api/v1/realtime/stream",
+    "GET /api/v1/realtime/diagnostics",
+    "GET /api/v1/realtime/health",
+    "GET /api/v1/support/events/stream"
+  ],
+  "openapiVersion": "1.13.0",
+  "configurationAdded": {
+    "APZHUB_REALTIME_SSE_ENABLED": {
+      "default": "disabled when unset/invalid",
+      "allowed": ["true", "1", "on"]
+    },
+    "APZHUB_REALTIME_MAX_CONNECTIONS_GLOBAL": { "default": "200" },
+    "APZHUB_REALTIME_MAX_CONNECTIONS_PER_TENANT": { "default": "50" },
+    "APZHUB_REALTIME_MAX_QUEUE_PER_CONNECTION": { "default": "64" }
+  },
+  "testsExecuted": [
+    {
+      "suite": "packages/platform-services/src/services/realtime/realtime-subscription-service.test.ts",
+      "result": "13/13 PASS"
+    },
+    {
+      "suite": "apps/web/lib/api/v1/handlers/realtime.test.ts",
+      "result": "4/4 PASS"
+    },
+    {
+      "suite": "apps/web/lib/support/realtime/use-support-realtime.test.tsx",
+      "result": "3/3 PASS"
+    },
+    {
+      "suite": "apps/web/components/support/support-workspace-router.test.tsx",
+      "result": "2/2 PASS"
+    }
+  ],
+  "engineeringRequirements": {
+    "platformRuntimeOnly": true,
+    "noParallelRealtimeFramework": true,
+    "connectionAuthentication": true,
+    "sessionValidation": true,
+    "tenantIsolation": true,
+    "organisationIsolation": true,
+    "permissionFiltering": true,
+    "automaticReconnect": true,
+    "lastEventId": true,
+    "heartbeatEvents": true,
+    "idleTimeout": true,
+    "gracefulDisconnect": true,
+    "serverShutdownHandling": true,
+    "backPressure": true,
+    "boundedQueues": true,
+    "eventCoalescing": true,
+    "replayPrevention": true,
+    "duplicateSuppression": true,
+    "structuredLogging": true,
+    "diagnostics": true,
+    "metrics": true,
+    "healthClassification": true,
+    "auditEvents": true,
+    "noEngineEventsToClients": true,
+    "realtimeSubscriptionServiceOnlyOutbound": true
+  },
+  "gatesSkippedOrUnavailable": [
+    {
+      "gate": "Full repository Playwright portfolio",
+      "classification": "NOT_RUN_THIS_PROGRAMME",
+      "reason": "Affected Support workbench unit/SSE gateway gates executed; full portfolio not required for Phase A SSE delivery evidence"
+    }
+  ],
+  "architectureVerification": "PASS — Transport Abstraction + SSE only; REST mutations; Event Bus reused; Integration SDK untouched",
+  "compatibilityVerification": "PASS — additive OpenAPI 1.13.0 + RealtimeSubscriptionService; no service redesign",
+  "securityVerification": "PASS — session auth; deny-by-default flag; permission check; tenant isolation; connection capacity",
+  "knownLimitationClassification": {
+    "PL12-KL-05": "PARTIALLY_REMEDIATED"
+  },
+  "residuals": [
+    "ENG003-R-01",
+    "ENG003-R-02",
+    "ENG003-R-03",
+    "ENG003-R-04",
+    "ENG003-R-05"
+  ],
+  "explicitNonGoalsConfirmed": {
+    "websocket": false,
+    "notificationDelivery": false,
+    "adr0071": false,
+    "emailSoR": false,
+    "fin001": false,
+    "workflowExecute": "remains_gated",
+    "observeRealtime": false,
+    "supportChat": false,
+    "collaborativeEditing": false
+  },
+  "pack": "docs/engineering/platform-1.3-eng-003/"
+}

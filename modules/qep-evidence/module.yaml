@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: qep-evidence
+name: Evidence
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Evidence (M09) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  product: apzqep
+  moduleCatalogueId: M09
+  slug: evidence
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: stub
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Evidence
+    icon: flask-conical
+    route: /workspace/qep/evidence
+    order: 90
+    permission: qep.evidence.read
+  view:
+    title: Evidence
+    workspace: qep
+    route: /workspace/qep/evidence
+    permission: qep.evidence.read

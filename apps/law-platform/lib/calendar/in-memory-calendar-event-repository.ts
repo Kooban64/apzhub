@@ -65,7 +65,14 @@ export class InMemoryCalendarEventRepository implements WritableCalendarEventRep
   }
 }
 
-export {
-  getSharedCalendarEventRepository,
-  resetSharedCalendarEventRepository,
-} from "../persistence/repository-factory";
+/** Client-safe memory singleton — must not import repository-factory (pulls pg). */
+let sharedCalendarEventRepository: InMemoryCalendarEventRepository | undefined;
+
+export function getSharedCalendarEventRepository(): InMemoryCalendarEventRepository {
+  sharedCalendarEventRepository ??= new InMemoryCalendarEventRepository();
+  return sharedCalendarEventRepository;
+}
+
+export function resetSharedCalendarEventRepository(): void {
+  sharedCalendarEventRepository = undefined;
+}

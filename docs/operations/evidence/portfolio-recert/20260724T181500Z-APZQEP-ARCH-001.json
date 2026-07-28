@@ -1,0 +1,33 @@
+{
+  "programme": "APZQEP-ARCH-001",
+  "title": "APZ QEP Enterprise Architecture Baseline",
+  "classification": "ENTERPRISE_ARCHITECTURE",
+  "lifecycle": "Architecture",
+  "baseline": "APZQEP-DEF-002 ACCEPTED",
+  "reference": [
+    "Platform-1.4-CERT-001",
+    "APZQEP-TRANSITION-001",
+    "APZQEP-REQ-001",
+    "APZQEP-DISCOVERY-001",
+    "APZQEP-CONSTITUTION-001",
+    "APZQEP-DEF-001",
+    "APZQEP-DEF-002"
+  ],
+  "timestamp": "2026-07-24T18:15:00Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER ARCHITECTURE ACCEPTANCE",
+  "baselineVersion": "1.0.0-arch",
+  "packRoot": "docs/products/apzqep/architecture/",
+  "deliverableCount": 26,
+  "platformUnchanged": true,
+  "engineering": false,
+  "databaseDesign": false,
+  "apiSpecification": false,
+  "productionCode": false,
+  "adrsImplementation": false,
+  "modularMonolithFirst": true,
+  "aiDefaultOff": true,
+  "humanCertificationMandatory": true,
+  "nextProgramme": "APZQEP-ENG-001",
+  "nextProgrammeStatus": "NOT_AUTHORISED_UNTIL_ARCHITECTURE_ACCEPTANCE"
+}

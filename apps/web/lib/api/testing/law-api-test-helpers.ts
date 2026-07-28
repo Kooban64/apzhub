@@ -22,6 +22,37 @@ import { DEFAULT_LAW_TENANT_ID } from "../tenant/law-tenant-ids";
 export const mockGetValidatedSession = vi.fn();
 export const mockIsDevRegistrationAllowed = vi.fn(() => false);
 
+/** Controllable Platform Authorization mock for Law API route tests (RG-LAW-API-AUTHZ). */
+export const mockResolveSessionAuthorization = vi.fn(
+  async (_input?: unknown): Promise<{ roles: string[]; permissions: string[] }> => ({
+    roles: [],
+    permissions: ["*"],
+  }),
+);
+
+/**
+ * Deferred mock entry for `vi.mock` factories (hoisted). Do not pass the fn
+ * reference directly into the factory — Vitest forbids capturing imports there.
+ */
+export function resolveSessionAuthorizationForLawApiTest(
+  input?: unknown,
+): Promise<{ roles: string[]; permissions: string[] }> {
+  return mockResolveSessionAuthorization(input);
+}
+export function grantAllLawApiTestPermissions(): void {
+  mockResolveSessionAuthorization.mockResolvedValue({
+    roles: ["law.counsel"],
+    permissions: ["*"],
+  });
+}
+
+export function denyAllLawApiTestPermissions(): void {
+  mockResolveSessionAuthorization.mockResolvedValue({
+    roles: [],
+    permissions: [],
+  });
+}
+
 export function setupLawApiTestMocks(): void {
   vi.mock("@apzhub/auth/server", () => ({
     getValidatedSession: (...args: unknown[]) => mockGetValidatedSession(...args),
@@ -64,6 +95,7 @@ export function configureLawApiTestEnv(): void {
   });
   mockGetValidatedSession.mockReset();
   mockIsDevRegistrationAllowed.mockReturnValue(false);
+  grantAllLawApiTestPermissions();
   vi.stubEnv("NODE_ENV", "test");
   vi.stubEnv("LAW_REPOSITORY_MODE", "memory");
   process.env.LAW_API_ALLOW_DEV_TENANT_FALLBACK = "false";
@@ -72,6 +104,7 @@ export function configureLawApiTestEnv(): void {
 export function enableDevPermissions(): void {
   mockGetValidatedSession.mockResolvedValue(mockSession);
   mockIsDevRegistrationAllowed.mockReturnValue(true);
+  grantAllLawApiTestPermissions();
 }
 
 const SEED_ATTORNEY_ID = "a1000001-0001-4000-8000-000000000001";

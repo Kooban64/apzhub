@@ -1,0 +1,70 @@
+manifestSchemaVersion: "1.0"
+id: workflow-service
+name: Workflow Platform Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: workflow
+  description: >
+    Canonical APZHUB Workflow Platform Services (APZHUB-PLATFORM-WORKFLOW-004).
+    Consumed by Workflow HTTP API and Workflow Workbench.
+  contractPackage: "@apzhub/workflow-contracts"
+  contractVersion: "0.4.2"
+  implementationPackage: "@apzhub/platform-services"
+  implementationVersion: "0.28.0"
+  owner: APZHUB
+  tags:
+    - workflow
+    - orchestration
+    - platform-services
+    - n8n
+
+dependencies:
+  platform: []
+  integrations:
+    - n8n
+
+integrations:
+  - n8n
+
+service:
+  category: workflow
+
+permissions:
+  - workflow.*
+  - workflow.view
+  - workflow.create
+  - workflow.update
+  - workflow.delete
+  - workflow.publish
+  - workflow.admin
+  - workflow.runs.view
+  - workflow.runs.start
+  - workflow.runs.cancel
+  - workflow.schedules.view
+  - workflow.schedules.manage
+  - workflow.tasks.view
+  - workflow.tasks.claim
+  - workflow.tasks.complete
+  - workflow.tasks.approve
+  - workflow.credentials.view
+  - workflow.credentials.manage
+  - workflow.engine.read
+  - workflow.engine.health
+  - workflow.engine.capabilities
+
+events:
+  publishes: []
+
+health:
+  enabled: true
+
+documentation:
+  governanceCapabilityKey: workflow
+  governanceCapabilityType: workflow
+  featureFlagKey: capability.workflow.enabled
+  lifecycleProductId: workflow
+  operationsCapabilityId: workflow
+  operationsConnectorId: n8n
+  diagnosticsExtension: workflowDiagnostics

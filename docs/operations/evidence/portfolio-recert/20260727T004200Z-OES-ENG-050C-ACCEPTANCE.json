@@ -1,0 +1,19 @@
+{
+  "programme": "APZQEP-OES-ENG-050C",
+  "title": "Test Specifications Workbench Engineering",
+  "recordedAt": "2026-07-27T00:42:00Z",
+  "decision": "ACCEPTED / APPROVED / IMPLEMENTATION AUTHORISED",
+  "authority": "Owner Review under OES-002",
+  "path": "docs/engineering/oes/APZQEP/OES-ENG-050C-Test-Specifications-Workbench-Engineering/COMPLETE.md",
+  "acceptance": "docs/engineering/oes/APZQEP/OES-ENG-050C-Test-Specifications-Workbench-Engineering/OWNER-ACCEPTANCE.md",
+  "authorises": ["APZQEP-ENG-050C Workbench implementation WP-01 through WP-18"],
+  "directives": [
+    "Presentation layer only",
+    "No client business rules",
+    "availableActions sole action authority",
+    "REST contracts as published",
+    "ADR-0074 authoritative — no returnToDraft in ENG-050C",
+    "Architectural changes via ADR or change request"
+  ],
+  "adr0074": "NO_CHANGE_IN_ENG-050C — separate delta programme for returnToDraft evaluation"
+}

@@ -488,12 +488,12 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/workflow-contracts/package.json",
-  "0.3.0",
+  "0.4.2",
   "version-workflow-contracts",
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.26.1",
+  "0.32.0",
   "version-platform-services",
 );
 

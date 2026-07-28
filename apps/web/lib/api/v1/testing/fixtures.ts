@@ -139,6 +139,7 @@ export const API_TEST_SORG_ID = "sorg_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2";
 export const API_TEST_SGRP_ID = "sgrp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3";
 export const API_TEST_SUSER_ID = "suser_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4";
 export const API_TEST_SART_ID = "sart_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa5";
+export const API_TEST_SATT_ID = "satt_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa6";
 
 // Testing test IDs
 export const API_TEST_REQ_ID = "req_apztcms_012";
@@ -1307,6 +1308,18 @@ export function createMockPlatformGateway(
         body: input.body,
         visibility: input.visibility,
       });
+    },
+    downloadAttachment: async (ctx, ticketId, articleId, attachmentId) => {
+      track("supportArticles", "downloadAttachment", ctx);
+      return {
+        id: attachmentId,
+        articleId,
+        supportTicketId: ticketId,
+        filename: "note.txt",
+        contentType: "text/plain",
+        sizeBytes: 5,
+        dataBase64: "aGVsbG8=",
+      };
     },
     ...options.supportArticles,
   };
@@ -8799,6 +8812,9 @@ export function installMockGateway(
         workflowEnabled: true,
         persistenceMode: "memory",
         executionEnabled: false,
+        runtimePlaneEnabled: true,
+        providerExecuteSupported: false,
+        opsProviderId: "mock",
         engineEnabled: false,
         engineProvider: "none",
       },
@@ -8837,6 +8853,7 @@ export function installMockGateway(
         observeEnabled: true,
         persistenceMode: "memory",
         providerExecutionEnabled: false,
+        alertEvaluationEnabled: false,
       },
       metricsEnabled: true,
       metricsReadiness: {

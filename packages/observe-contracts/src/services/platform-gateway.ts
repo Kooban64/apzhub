@@ -4,6 +4,14 @@
  */
 
 import type {
+  AcknowledgeAlertStateInput,
+  ObserveAlertEvaluationBatchResult,
+  ObserveAlertEvaluationDiagnostics,
+  ObserveAlertEvaluationHealth,
+  ResolveAlertStateInput,
+  SuppressAlertStateInput,
+} from "../domain/alert-rule";
+import type {
   HealthCheck,
   ReadinessCheck,
   LivenessCheck,
@@ -444,6 +452,32 @@ export type ObserveAlertStatesService = {
     ctx: ObservePlatformServiceContext,
     input: UpdateAlertStateInput,
   ): Promise<AlertState>;
+  /** Operator acknowledgement — does not resolve (ADR-0070). */
+  acknowledge(
+    ctx: ObservePlatformServiceContext,
+    input: AcknowledgeAlertStateInput,
+  ): Promise<AlertState>;
+  /** Manual or evaluation-driven resolution. */
+  resolve(
+    ctx: ObservePlatformServiceContext,
+    input: ResolveAlertStateInput,
+  ): Promise<AlertState>;
+  /** Suppression → silenced; not represented as healthy. */
+  suppress(
+    ctx: ObservePlatformServiceContext,
+    input: SuppressAlertStateInput,
+  ): Promise<AlertState>;
+};
+
+/** Observe Live Alerts Phase A — evaluation orchestration (ADR-0070). */
+export type ObserveAlertEvaluationService = {
+  evaluateBatch(
+    ctx: ObservePlatformServiceContext,
+  ): Promise<ObserveAlertEvaluationBatchResult>;
+  getDiagnostics(
+    ctx: ObservePlatformServiceContext,
+  ): Promise<ObserveAlertEvaluationDiagnostics>;
+  getHealth(ctx: ObservePlatformServiceContext): Promise<ObserveAlertEvaluationHealth>;
 };
 
 export type CreateDashboardDefinitionInput = {
@@ -825,6 +859,7 @@ export type ObservePlatformGateway = {
   readonly metricSamples: ObserveMetricSamplesService;
   readonly alertDefinitions: ObserveAlertDefinitionsService;
   readonly alertStates: ObserveAlertStatesService;
+  readonly alertEvaluation: ObserveAlertEvaluationService;
   readonly dashboardDefinitions: ObserveDashboardDefinitionsService;
   readonly logSources: ObserveLogSourcesService;
   readonly traceDefinitions: ObserveTraceDefinitionsService;

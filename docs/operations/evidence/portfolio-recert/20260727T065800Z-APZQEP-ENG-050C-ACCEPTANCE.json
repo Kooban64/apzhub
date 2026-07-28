@@ -1,0 +1,37 @@
+{
+  "programme": "APZQEP-ENG-050C",
+  "title": "Test Specifications Workbench Engineering",
+  "recordedAt": "2026-07-27T06:58:00Z",
+  "decision": "ACCEPTED / APPROVED / PROGRAMME CLOSED",
+  "authority": "Owner Acceptance Review under OES-002 v1.1.0",
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "prerequisites": [
+    "OES-ENG-050C ACCEPTED",
+    "OES-ARCH-012 ACCEPTED",
+    "ENG-050A ACCEPTED",
+    "ENG-050B ACCEPTED",
+    "ECR PASS 20260727T063400Z"
+  ],
+  "path": "docs/products/apzqep/test-specifications/workbench/",
+  "acceptance": "docs/products/apzqep/test-specifications/workbench/OWNER-ACCEPTANCE.md",
+  "ecr": "docs/products/apzqep/test-specifications/workbench/ENGINEERING-COMPLETION-REVIEW.md",
+  "package": {
+    "name": "@apzhub/qep-test-specifications",
+    "version": "0.3.0"
+  },
+  "adr0074": "HONOURED",
+  "authorises": [
+    "Capability Certification programme for Test Specifications"
+  ],
+  "notAuthorised": [
+    "Version Promotion to 1.0.0 without Certification",
+    "Freeze without Owner Freeze Decision",
+    "Further ENG-050C engineering work"
+  ],
+  "next": "Capability Certification (separate Owner-instructed CERT programme)"
+}

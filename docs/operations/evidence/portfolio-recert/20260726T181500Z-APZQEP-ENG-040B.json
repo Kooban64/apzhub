@@ -1,0 +1,58 @@
+{
+  "programme": "APZQEP-ENG-040B",
+  "title": "Verification Engine — Persistence, Application Services, APIs and Platform Integration",
+  "recordedAt": "2026-07-26T18:15:00Z",
+  "architecture": "APZQEP-ARCH-009 — ACCEPTED",
+  "domain": "APZQEP-ENG-040A — ACCEPTED",
+  "state": "IMPLEMENTED — AWAITING OWNER ACCEPTANCE",
+  "package": {
+    "@apzhub/qep-verification": "0.2.0"
+  },
+  "baselines": {
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN",
+    "arch009": "ACCEPTED",
+    "eng040a": "ACCEPTED"
+  },
+  "migrations": ["0081_apz_qep_verification", "0082_apz_qep_verification_rls"],
+  "apiBase": "/api/v1/qep/verifications",
+  "searchEntity": "verification_record",
+  "searchAdapters": ["verificationToSearchDraft", "onVerificationUpserted"],
+  "permissionsFamily": "qep.verification.*",
+  "delivered": [
+    "Persistence tables qep_verification / qep_verification_history",
+    "Migrations 0081 / 0082 (RLS)",
+    "PostgreSQL + in-memory repositories with contract tests",
+    "Subject resolution contract + in-memory / Requirements / Trace Link adapters",
+    "Application service commands and queries",
+    "availableActions (server-authoritative)",
+    "REST /api/v1/qep/verifications/*",
+    "Permissions qep.verification.*",
+    "Audit actions qep.verification.*",
+    "Search projection verification_record",
+    "Observability onObservation hooks",
+    "Platform Services Verification facet",
+    "Documentation pack docs/products/apzqep/verification/engine/",
+    "Module stub modules/qep-verification/module.yaml 0.2.0 (no Workbench routes)"
+  ],
+  "notDelivered": [
+    "Workbench UI",
+    "Coverage Engine",
+    "Impact Engine",
+    "Evidence",
+    "Certification",
+    "AI",
+    "MCP",
+    "Owner Acceptance of ENG-040B"
+  ],
+  "tests": {
+    "vitest": "PASS (133)"
+  },
+  "finalState": {
+    "APZQEP-ARCH-009": "ACCEPTED",
+    "APZQEP-ENG-040A": "ACCEPTED",
+    "APZQEP-ENG-040B": "IMPLEMENTED / AWAITING OWNER ACCEPTANCE",
+    "Workbench": "NOT AUTHORISED"
+  },
+  "stopRule": "Await Owner Acceptance. Do not begin Workbench. Do not declare Owner Acceptance of ENG-040B."
+}

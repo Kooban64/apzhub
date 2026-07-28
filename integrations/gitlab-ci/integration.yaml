@@ -1,0 +1,51 @@
+manifestSchemaVersion: "1.0"
+id: gitlab-ci
+name: GitLab CI Engine Integration
+version: 0.1.0
+kind: integration
+
+metadata:
+  category: integrations
+  description: Read-only GitLab CI reference adapter for APZ TCMS CI/CD. Not user-facing.
+  owner: APZHUB
+  tags:
+    - gitlab-ci
+    - cicd
+    - pipeline
+    - adapter
+
+dependencies:
+  platform: []
+
+integration:
+  type: oss-application
+  capabilities:
+    - health
+    - authentication-bridge
+    - error-translation
+    - diagnostics
+    - repositories
+    - workflows
+    - pipeline-runs
+    - jobs
+    - steps
+    - artifacts
+    - logs-metadata
+    - approvals
+    - summary
+
+health:
+  enabled: true
+
+documentation:
+  userVisible: false
+  engineBranding: hidden
+  supportedApiVersions:
+    - "v4"
+  supportedEngineVersionMin: "GitLab REST API v4"
+  supportedEngineVersionMax: "GitLab REST API v4"
+  adapterImplementation: R12-TCMS-01
+
+tests:
+  contract: in-progress
+  integration: planned

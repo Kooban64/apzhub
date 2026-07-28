@@ -1,0 +1,18 @@
+{
+  "id": "20260727T173800Z-APZQEP-ENG-060A-CERTIFICATION-HOLD",
+  "timestamp": "2026-07-27T17:38:00Z",
+  "programme": "APZQEP-ENG-060A",
+  "type": "certification-hold",
+  "status": "ACTIVE",
+  "summary": "ENG-060A closed; Certification Hold active; CERT-060A authorised for Domain independent assurance only",
+  "nextProgramme": "APZQEP-CERT-060A",
+  "prohibited": [
+    "capability-1.0.0-promotion",
+    "capability-freeze",
+    "infrastructure-under-eng-060a",
+    "engineering-under-cert-060a"
+  ],
+  "documents": [
+    "docs/products/apzqep/test-plans/CERTIFICATION-HOLD.md"
+  ]
+}

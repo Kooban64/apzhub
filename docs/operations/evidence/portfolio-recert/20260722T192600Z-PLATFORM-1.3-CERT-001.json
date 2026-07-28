@@ -1,0 +1,67 @@
+{
+  "programme": "Platform-1.3-CERT-001",
+  "title": "Platform 1.3 Certification & Release Readiness",
+  "classification": "CERTIFICATION",
+  "baseline": "Platform 1.3",
+  "timestamp": "2026-07-22T19:26:00Z",
+  "status": "AWAITING_OWNER_CERTIFICATION_ACCEPTANCE",
+  "recommendation": "NOT READY FOR PRODUCTION",
+  "acceptedProgrammesVerified": [
+    "ENG-001 ACCEPTED",
+    "ADR-0070 ACCEPTED",
+    "ENG-002 ACCEPTED",
+    "ADR-0072 ACCEPTED",
+    "ENG-003 ACCEPTED",
+    "ADR-0071 ACCEPTED",
+    "ENG-004 ACCEPTED"
+  ],
+  "architectureCompliance": "PASS",
+  "integrationSdkVersion": "1.0.0",
+  "integrationSdkCertify": "PASS_WITH_LIMITED_COVERAGE",
+  "openapiVersion": "1.14.0",
+  "openapiValidate": "PASS",
+  "qualityGates": {
+    "lint": "PASS",
+    "typecheck": "FAIL",
+    "build": "FAIL",
+    "formatCheck": "FAIL",
+    "certifyIntegrationSdk": "PASS_PRODUCTION_READY_WITH_LIMITATIONS",
+    "openapiValidatePlatform": "PASS",
+    "platform13TargetedVitest": "PARTIAL_86_of_87",
+    "fullMonorepoTest": "NOT_RUN",
+    "playwrightPortfolio": "NOT_RUN"
+  },
+  "blockingDefects": [
+    {
+      "id": "P13-CERT-QF-01",
+      "command": "pnpm build",
+      "detail": "apps/web/components/notifications/notification-inbox-view.tsx Button variant secondary invalid"
+    },
+    {
+      "id": "P13-CERT-QF-02",
+      "command": "pnpm typecheck",
+      "detail": "packages/observe-core create-alert-evaluation-domain.ts TS2540 readonly suppressed* fields"
+    }
+  ],
+  "nonBlockingFindings": [
+    "P13-CERT-QF-03 realtime.test.ts OpenAPI version expects 1.13.0 actual 1.14.0",
+    "P13-CERT-QF-04 Integration SDK wave audit CURRENT-MILESTONE pattern",
+    "P13-CERT-QF-05 Prettier drift 1209 files"
+  ],
+  "database": {
+    "destructiveMigrationsFound": false,
+    "latestMigration": "0065_apz_platform_notification_delivery.sql"
+  },
+  "fencesStillInForce": [
+    "Email SoR excluded",
+    "FIN-001 STOP",
+    "Workflow Execute gated",
+    "WebSockets unauthorised",
+    "SMTP delivery deferred",
+    "Integration SDK 1.0.0 frozen"
+  ],
+  "documentationPack": "docs/engineering/platform-1.3-cert-001/",
+  "remediationUnderThisProgramme": false,
+  "platform14Begun": false,
+  "explicitStop": "Await Owner Certification Acceptance"
+}

@@ -1,0 +1,31 @@
+{
+  "programme": "APZHUB-ENG-0011",
+  "remediationGroup": "RG-SELECTORS",
+  "baseline": "1.2.0",
+  "timestamp": "2026-07-21T06:17:00Z",
+  "playwright": {
+    "results": {
+      "passed": 3,
+      "failed": 0,
+      "flaky": 1
+    },
+    "tests": [
+      {
+        "id": "QA-F-003",
+        "after": "PASS"
+      },
+      {
+        "id": "QA-F-010",
+        "after": "PASS"
+      },
+      {
+        "id": "QA-F-013",
+        "after": "PASS (flaky \u2014 heading hydration; cell locator OK on retry)"
+      },
+      {
+        "id": "QA-F-056",
+        "after": "PASS"
+      }
+    ]
+  }
+}

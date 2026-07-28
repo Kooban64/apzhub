@@ -21,11 +21,17 @@ import {
 import { GET as exportTrustReport } from "../../../app/api/law/v1/trust/reports/[reportId]/export/route";
 import { GET as listTrustApprovals } from "../../../app/api/law/v1/trust/approvals/route";
 import { resetTrustApiRepositories } from "@/lib/api/trust";
-import { DEFAULT_LAW_TENANT_ID } from "@/lib/api";
+import {
+  authHeaders,
+  configureLawApiTestEnv,
+  denyAllLawApiTestPermissions,
+  grantAllLawApiTestPermissions,
+  mockGetValidatedSession,
+  mockIsDevRegistrationAllowed,
+  mockSession,
+  resolveSessionAuthorizationForLawApiTest,
+} from "@/lib/api/testing/law-api-test-helpers";
 import { resetLawPersistenceScope } from "@apzhub/law-platform/api";
-
-const mockGetValidatedSession = vi.fn();
-const mockIsDevRegistrationAllowed = vi.fn(() => false);
 
 vi.mock("@apzhub/auth/server", () => ({
   getValidatedSession: (...args: unknown[]) => mockGetValidatedSession(...args),
@@ -40,40 +46,21 @@ vi.mock("@apzhub/config", async (importOriginal) => {
 });
 
 vi.mock("@apzhub/platform-authorization/server", () => ({
-  resolveSessionAuthorization: vi.fn(async () => ({ roles: [], permissions: [] })),
+  resolveSessionAuthorization: (input?: unknown) =>
+    resolveSessionAuthorizationForLawApiTest(input),
 }));
-
-const mockSession = {
-  session: { id: "sess-1", expiresAt: new Date(Date.now() + 60_000).toISOString() },
-  user: {
-    id: "user-1",
-    email: "trust@example.com",
-    name: "Trust Officer",
-    emailVerified: true,
-  },
-};
-
-function authHeaders(extra: Record<string, string> = {}): Record<string, string> {
-  return {
-    "x-tenant-id": DEFAULT_LAW_TENANT_ID,
-    ...extra,
-  };
-}
 
 describe("Law Trust API", () => {
   beforeEach(() => {
-    mockGetValidatedSession.mockReset();
-    mockIsDevRegistrationAllowed.mockReturnValue(false);
+    configureLawApiTestEnv();
     resetTrustApiRepositories();
     resetLawPersistenceScope();
-    vi.stubEnv("NODE_ENV", "test");
-    vi.stubEnv("LAW_REPOSITORY_MODE", "memory");
-    process.env.LAW_DEV_PERMISSIONS = "true";
+    mockGetValidatedSession.mockResolvedValue(mockSession);
+    grantAllLawApiTestPermissions();
   });
 
   afterEach(() => {
     vi.unstubAllEnvs();
-    delete process.env.LAW_DEV_PERMISSIONS;
   });
 
   it("returns 401 when unauthenticated", async () => {
@@ -147,6 +134,7 @@ describe("Law Trust API", () => {
 
   it("returns 403 when permission is missing", async () => {
     mockGetValidatedSession.mockResolvedValue(mockSession);
+    denyAllLawApiTestPermissions();
     vi.stubEnv("NODE_ENV", "production");
 
     const response = await listTrustAccounts(
@@ -383,6 +371,7 @@ describe("Law Trust API", () => {
 
   it("returns 403 when export permission is missing", async () => {
     mockGetValidatedSession.mockResolvedValue(mockSession);
+    denyAllLawApiTestPermissions();
     vi.stubEnv("NODE_ENV", "production");
 
     const response = await exportTrustReport(

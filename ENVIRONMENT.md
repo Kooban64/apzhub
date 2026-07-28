@@ -101,6 +101,8 @@ Internet → host nginx (:443 TLS) → Docker nginx-gateway (:8080) → app cont
 
 Dedicated ports for `/home/ubuntu/apz-portal` — chosen to avoid `apz-stack` conflicts (`54333`, `8080`, `18081–18088`, etc.).
 
+**Controls (R12-OPS-03):** [docs/operations/HOST-COEXISTENCE-CONTROLS.md](./docs/operations/HOST-COEXISTENCE-CONTROLS.md) · audit via `pnpm ops:host-coexistence-audit`.
+
 | Service                 | Host port | Notes                             |
 | ----------------------- | --------- | --------------------------------- |
 | `@apzhub/web` (Next.js) | **3300**  | `pnpm dev`                        |

@@ -45,9 +45,15 @@ describe("@apzhub/integration-n8n boundaries", () => {
   it("manifest declares read-only adapter metadata", () => {
     const yaml = readFileSync(join(PKG, "integration.yaml"), "utf8");
     expect(yaml).toContain("id: n8n");
-    expect(yaml).toContain("APZWORKFLOW-006");
+    expect(yaml).toContain("APZHUB-INTEGRATION-N8N-001");
     expect(yaml).toContain("engineBranding: hidden");
     expect(yaml).not.toMatch(/\bexecute\b/i);
+  });
+
+  it("public index exports N8nClient but not N8nRestClient", () => {
+    const index = readFileSync(join(PKG, "src/index.ts"), "utf8");
+    expect(index).toContain("N8nClient");
+    expect(index).not.toContain("N8nRestClient");
   });
 
   it("platform consumers may depend on the adapter package, never the vendor n8n SDK", () => {

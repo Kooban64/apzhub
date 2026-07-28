@@ -1,0 +1,96 @@
+{
+  "programme": "APZQEP-ARCH-014",
+  "oes": "APZQEP-OES-ARCH-014",
+  "title": "Test Plans Workbench Architecture",
+  "recordedAt": "2026-07-28T06:15:00Z",
+  "status": "IMPLEMENTED / AWAITING OWNER ACCEPTANCE",
+  "classification": "Owner Architecture Programme",
+  "layer": "Workbench Architecture",
+  "nature": "Architecture only — no engineering / no React / no Next.js / no production code",
+  "version": "1.0.0-oes",
+  "pack": "docs/products/apzqep/test-plans/OES-ARCH-014/",
+  "complete": "docs/products/apzqep/test-plans/OES-ARCH-014/COMPLETE.md",
+  "ownerSummary": "docs/products/apzqep/test-plans/OES-ARCH-014/OWNER-SUMMARY.md",
+  "completionReport": "docs/products/apzqep/test-plans/OES-ARCH-014/ARCHITECTURE-COMPLETION-REPORT.md",
+  "pointer": "docs/engineering/oes/APZQEP/OES-ARCH-014-Test-Plans-Workbench-Architecture/README.md",
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "baselinesConsumed": {
+    "capabilityArchitecture": "APZQEP-ARCH-013 ACCEPTED / ARCHITECTURE BASELINED / CLOSED",
+    "domain": "@apzhub/qep-test-plans 0.1.0 CERTIFIED (APZQEP-OES-ENG-060A / APZQEP-ENG-060A / APZQEP-CERT-060A) — DOMAIN_PRODUCTION_READY_WITH_LIMITATIONS",
+    "infrastructure": "@apzhub/qep-test-plans 0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED (APZQEP-OES-ENG-060B / APZQEP-ENG-060B / APZQEP-CERT-060B) — INFRASTRUCTURE_PRODUCTION_READY_WITH_LIMITATIONS",
+    "shellPrecedent": "APZQEP-OES-ARCH-012 (Test Specifications Workbench Architecture)",
+    "foundation": ["Document 000", "OES-000", "OES-001", "OES-002", "Document 005", "Document 016", "Document 017"]
+  },
+  "deliverables": [
+    "PART-01.md",
+    "PART-02.md",
+    "PART-03.md",
+    "PART-04.md",
+    "PART-05.md",
+    "APPENDIX-A.md",
+    "APPENDIX-B.md",
+    "APPENDIX-C.md",
+    "APPENDIX-D.md",
+    "APPENDIX-E.md",
+    "COMPLETE.md",
+    "OWNER-SUMMARY.md",
+    "ARCHITECTURE-COMPLETION-REPORT.md",
+    "OWNER-ACCEPTANCE.md"
+  ],
+  "checklist": {
+    "document000": "PASS",
+    "oes000": "PASS",
+    "oes001": "PASS",
+    "oes002": "PASS",
+    "fidelityToArch013": "PASS",
+    "fidelityToCertifiedDomain": "PASS",
+    "fidelityToCertifiedInfrastructure": "PASS",
+    "informationArchitecture": "PASS",
+    "componentArchitecture": "PASS",
+    "workflowLifecycleUx": "PASS",
+    "personaJourneys": "PASS",
+    "honestLimitationHandling": "PASS",
+    "performance": "PASS",
+    "accessibilityWcagAa": "PASS",
+    "security": "PASS",
+    "observability": "PASS",
+    "aiBoundary": "PASS",
+    "mcpBoundary": "PASS",
+    "engineeringExclusions": "PASS"
+  },
+  "knownLimitationsHonoured": [
+    {
+      "id": "L-01",
+      "topic": "Version compare deferred",
+      "treatment": "Governed unavailable slot with forward-compatible presentation contract; no Infrastructure change required or performed under ARCH-014"
+    },
+    {
+      "id": "L-02",
+      "topic": "No dedicated GET .../items endpoint",
+      "treatment": "Items panel binds to items[] on the Plan DTO as delivered; no dedicated endpoint invented"
+    }
+  ],
+  "exclusionsHonoured": [
+    "React components",
+    "Next.js pages/routes",
+    "Hooks/stores/state managers",
+    "REST clients/DTOs",
+    "Domain changes",
+    "Infrastructure changes",
+    "Database/migrations",
+    "Search engine implementation",
+    "Permissions enforcement code",
+    "AI",
+    "MCP",
+    "Production code",
+    "Workbench Engineering authorisation"
+  ],
+  "ownerAcceptanceRecorded": false,
+  "engineeringAuthorised": false,
+  "stopCondition": "APZQEP-ARCH-014 IMPLEMENTED / AWAITING OWNER ACCEPTANCE — no Workbench ENG, no UI code"
+}

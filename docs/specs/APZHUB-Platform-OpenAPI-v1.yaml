@@ -1,10 +1,19 @@
 openapi: 3.1.0
 info:
   title: APZHUB Platform HTTP API
-  version: 1.10.0
+  version: 1.14.0
   description: |
     Production HTTP surface over PlatformServiceGateway (OSS-110-07, OSS-110-11).
     Routes contain no business logic and never call integration adapters directly.
+    Platform Realtime (Platform-1.3-ENG-003 / ADR-0072): SSE-only subscription under
+    /realtime/* and /support/events/stream — read-only; mutations remain REST.
+    Analytics domain (APZHUB-PLATFORM-ANALYTICS-005): vendor-neutral analytics via
+    gateway.analytics.* under /analytics/* — health, readiness, capabilities,
+    dashboards, categories, datasets, reports, saved views. No Workbench / APZ Analytics.
+    Workflow domain (APZHUB-PLATFORM-WORKFLOW-005): provider-neutral workflow via
+    gateway.workflow.* under /workflow/* — health, readiness, capabilities, definitions,
+    runs, schedules, tasks, approvals, notifications. Distinct from /workflows (SoR) and
+    /workflows/engine. No Workbench / APZ Workflow product.
     Time domain (APZHUB-TIME-HTTP-001): vendor-neutral time tracking via gateway.time.*
     under /time/* — Timesheets, Entries (alias), Activities, Customers, Time Projects, Tags,
     foundation Reporting/Search/Health/Diagnostics. No Workbench / APZ Time product.
@@ -21,6 +30,10 @@ tags:
   - name: Projects
   - name: Teams
   - name: Tasks
+  - name: Platform Realtime
+    description: >
+      ADR-0072 Phase A — Server-Sent Events only. Read-only Event Bus fan-out to
+      authenticated Workbench clients. No WebSocket transport in Platform 1.3.
   - name: Support Requests
     description: >
       Vendor-neutral support ticket operations. DELETE = soft-close (not hard delete).
@@ -223,6 +236,18 @@ tags:
     description: Foundation reporting capabilities/health only — no analytics UI or exports.
   - name: Time Diagnostics
     description: Health, diagnostics, readiness, compatibility, and connection test.
+  - name: Analytics
+    description: >
+      Canonical Analytics Platform HTTP API (APZHUB-PLATFORM-ANALYTICS-005).
+      Provider-neutral surface over gateway.analytics.* — no Metabase DTOs.
+      DELETE /analytics/saved/{savedId} archives (soft). Controlled 503 when
+      APZHUB_ANALYTICS_ENABLED is false. Workbench/product not authorised.
+  - name: Workflow
+    description: >
+      Canonical Workflow Platform HTTP API (APZHUB-PLATFORM-WORKFLOW-005).
+      Provider-neutral surface over gateway.workflow.* — no n8n / provider DTOs.
+      Distinct from Platform Workflow (/workflows) and Workflow Engine (/workflows/engine).
+      Controlled 503 when APZHUB_WORKFLOW_ENABLED is false. Workbench not authorised.
 security:
   - sessionCookie: []
 paths:
@@ -1152,6 +1177,89 @@ paths:
           $ref: "#/components/responses/InternalError"
 
   # ---------------------------------------------------------------------------
+  # Platform Realtime SSE (Platform-1.3-ENG-003 / ADR-0072)
+  # ---------------------------------------------------------------------------
+  /realtime/stream:
+    get:
+      operationId: subscribePlatformRealtimeSse
+      tags: [Platform Realtime]
+      summary: Subscribe to platform realtime events (SSE)
+      description: |
+        ADR-0072 Phase A — Server-Sent Events only. Read-only event propagation.
+        Mutations remain REST. Deny-by-default via APZHUB_REALTIME_SSE_ENABLED.
+      parameters:
+        - name: lastEventId
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        "200":
+          description: text/event-stream
+          content:
+            text/event-stream:
+              schema: { type: string }
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          description: Realtime disabled or unavailable
+      x-apzhub-permissions: [support.requests.read]
+      x-apzhub-transport: sse
+  /realtime/diagnostics:
+    get:
+      operationId: getPlatformRealtimeDiagnostics
+      tags: [Platform Realtime]
+      summary: Realtime transport diagnostics
+      responses:
+        "200":
+          description: Realtime diagnostics snapshot
+          content:
+            application/json:
+              schema:
+                type: object
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [support.requests.read]
+  /realtime/health:
+    get:
+      operationId: getPlatformRealtimeHealth
+      tags: [Platform Realtime]
+      summary: Realtime transport health
+      responses:
+        "200":
+          description: Realtime health snapshot
+          content:
+            application/json:
+              schema:
+                type: object
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [support.requests.read]
+  /support/events/stream:
+    get:
+      operationId: subscribeSupportRealtimeSse
+      tags: [Support, Platform Realtime]
+      summary: Support workbench realtime stream (SSE alias)
+      description: Product-scoped alias of /realtime/stream for Support Workbench.
+      responses:
+        "200":
+          description: text/event-stream
+          content:
+            text/event-stream:
+              schema: { type: string }
+      x-apzhub-permissions: [support.requests.read]
+      x-apzhub-transport: sse
+
+  # ---------------------------------------------------------------------------
   # Support Requests (OSS-110-11)
   # ---------------------------------------------------------------------------
   /support-requests:
@@ -1672,6 +1780,30 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SupportArticleSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /support-requests/{supportRequestId}/articles/{articleId}/attachments/{attachmentId}:
+    parameters:
+      - $ref: "#/components/parameters/SupportRequestId"
+      - $ref: "#/components/parameters/ArticleId"
+      - $ref: "#/components/parameters/AttachmentId"
+    get:
+      operationId: downloadSupportAttachment
+      tags: [Support Articles]
+      summary: Download binary attachment content (base64; max 1 MiB)
+      x-required-permission: support.articles.attachment.download
+      responses:
+        "200":
+          description: Attachment binary content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportArticleAttachmentContentSuccess"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
@@ -4050,6 +4182,127 @@ paths:
       summary: Safe notification diagnostics (no secrets)
       responses: *TestingResourceResponses
       x-apzhub-permissions: [notification.read]
+  /notifications/inbox:
+    get:
+      operationId: listNotificationInbox
+      tags: [Notification Delivery]
+      summary: List in-app notifications for the authenticated user (ENG-004)
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [notifications.read]
+  /notifications/inbox/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getNotificationInboxItem
+      tags: [Notification Delivery]
+      summary: Get in-app notification by id
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notifications.read]
+  /notifications/inbox/{id}/read:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: markNotificationInboxRead
+      tags: [Notification Delivery]
+      summary: Mark in-app notification read (does not alter delivery outcome)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notifications.read]
+  /notifications/inbox/{id}/unread:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: markNotificationInboxUnread
+      tags: [Notification Delivery]
+      summary: Mark in-app notification unread
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notifications.read]
+  /notifications/inbox/read-all:
+    post:
+      operationId: markAllNotificationInboxRead
+      tags: [Notification Delivery]
+      summary: Mark all in-app notifications read for the user
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notifications.read]
+  /notifications/intents:
+    post:
+      operationId: createNotificationIntent
+      tags: [Notification Delivery]
+      summary: Create notification intent (command intake)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notifications.send]
+  /notifications/deliveries:
+    get:
+      operationId: listNotificationDeliveries
+      tags: [Notification Delivery]
+      summary: List notification deliveries
+      responses: *TestingCollectionResponses
+      x-apzhub-permissions: [notifications.read]
+  /notifications/deliveries/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    get:
+      operationId: getNotificationDelivery
+      tags: [Notification Delivery]
+      summary: Get notification delivery
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notifications.read]
+  /notifications/deliveries/{id}/retry:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: retryNotificationDelivery
+      tags: [Notification Delivery]
+      summary: Authorised retry of a delivery
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notifications.retry]
+  /notifications/dead-letter/{id}/replay:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: replayNotificationDeadLetter
+      tags: [Notification Delivery]
+      summary: Authorised replay of a terminal failure
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notifications.retry]
+  /notifications/delivery-health:
+    get:
+      operationId: getNotificationDeliveryHealth
+      tags: [Notification Delivery]
+      summary: Notification Delivery health (SMTP deferred)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notifications.health]
+  /notifications/delivery-diagnostics:
+    get:
+      operationId: getNotificationDeliveryDiagnostics
+      tags: [Notification Delivery]
+      summary: Notification Delivery diagnostics (no PII/secrets)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notifications.diagnostics]
+  /notifications/providers:
+    get:
+      operationId: listNotificationProviders
+      tags: [Notification Delivery]
+      summary: Provider/adapter capability status (Phase A in_app only)
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [notifications.providers]
   /notifications/templates:
     get:
       operationId: listNotificationTemplates
@@ -6069,6 +6322,70 @@ paths:
       summary: Update AlertState metadata
       responses: *TestingResourceResponses
       x-apzhub-permissions: [observe.alerts]
+
+  /observe/alert-states/{alertStateId}/acknowledge:
+    parameters:
+      - name: alertStateId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: acknowledgeObserveAlertState
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: Acknowledge an Observe alert (does not resolve)
+      description: ADR-0070 Phase A — records actor and timestamp; state remains firing/pending.
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.alerts]
+  /observe/alert-states/{alertStateId}/resolve:
+    parameters:
+      - name: alertStateId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: resolveObserveAlertState
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: Manually resolve an Observe alert
+      description: ADR-0070 Phase A — distinct from acknowledgement.
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.alerts]
+  /observe/alert-states/{alertStateId}/suppress:
+    parameters:
+      - name: alertStateId
+        in: path
+        required: true
+        schema: { type: string, maxLength: 128 }
+    post:
+      operationId: suppressObserveAlertState
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: Suppress (silence) an Observe alert
+      description: ADR-0070 Phase A — silenced is not healthy.
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.alerts]
+  /observe/alert-evaluation:
+    post:
+      operationId: evaluateObserveAlerts
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: Run Observe alert evaluation batch
+      description: |
+        ADR-0070 Phase A. Deny-by-default via APZHUB_OBSERVE_ALERT_EVALUATION_ENABLED.
+        Evaluates metadata signals only — no PromQL / provider SDKs.
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.manage]
+  /observe/alert-evaluation/diagnostics:
+    get:
+      operationId: getObserveAlertEvaluationDiagnostics
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: Observe alert evaluation diagnostics
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.diagnostics]
+  /observe/alert-evaluation/health:
+    get:
+      operationId: getObserveAlertEvaluationHealth
+      tags: [Platform Observability Administration, Observability Alerts]
+      summary: Observe alert evaluation health
+      responses: *TestingResourceResponses
+      x-apzhub-permissions: [observe.health]
 
   /observe/dashboard-definitions:
     get:
@@ -8435,6 +8752,808 @@ paths:
           $ref: "#/components/responses/NotImplemented"
       x-apzhub-permissions: [time.manage]
 
+  /analytics/health:
+    get:
+      operationId: getAnalyticsHealth
+      tags: [Analytics]
+      summary: Analytics platform health
+      responses:
+        "200":
+          description: Health snapshot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [analytics.dashboard.view]
+  /analytics/readiness:
+    get:
+      operationId: getAnalyticsReadiness
+      tags: [Analytics]
+      summary: Analytics readiness
+      responses:
+        "200":
+          description: Readiness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [analytics.dashboard.view]
+  /analytics/capabilities:
+    get:
+      operationId: getAnalyticsCapabilities
+      tags: [Analytics]
+      summary: Analytics capabilities
+      responses:
+        "200":
+          description: Capabilities
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [analytics.dashboard.view]
+  /analytics/dashboards:
+    get:
+      operationId: listAnalyticsDashboards
+      tags: [Analytics]
+      summary: List analytics dashboards (catalogue)
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: categoryId
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, published, deprecated, archived]
+        - name: tag
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Dashboard catalogue page
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsCollectionSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [analytics.dashboard.view]
+  /analytics/dashboards/{dashboardId}:
+    get:
+      operationId: getAnalyticsDashboard
+      tags: [Analytics]
+      summary: Get analytics dashboard
+      parameters:
+        - name: dashboardId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Dashboard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [analytics.dashboard.view]
+  /analytics/categories:
+    get:
+      operationId: listAnalyticsCategories
+      tags: [Analytics]
+      summary: List dashboard categories
+      responses:
+        "200":
+          description: Categories
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [analytics.dashboard.view]
+  /analytics/datasets:
+    get:
+      operationId: listAnalyticsDatasets
+      tags: [Analytics]
+      summary: List analytics datasets
+      responses:
+        "200":
+          description: Datasets
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [analytics.dataset.view]
+  /analytics/reports:
+    get:
+      operationId: listAnalyticsReports
+      tags: [Analytics]
+      summary: List analytics report links
+      responses:
+        "200":
+          description: Report links
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [analytics.report.run]
+  /analytics/saved:
+    get:
+      operationId: listAnalyticsSaved
+      tags: [Analytics]
+      summary: List saved dashboards
+      responses:
+        "200":
+          description: Saved dashboards
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [analytics.saved.manage]
+    post:
+      operationId: createAnalyticsSaved
+      tags: [Analytics]
+      summary: Create saved dashboard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAnalyticsSavedRequest"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [analytics.saved.manage]
+  /analytics/saved/{savedId}:
+    patch:
+      operationId: updateAnalyticsSaved
+      tags: [Analytics]
+      summary: Update saved dashboard
+      parameters:
+        - name: savedId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAnalyticsSavedRequest"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [analytics.saved.manage]
+    delete:
+      operationId: archiveAnalyticsSaved
+      tags: [Analytics]
+      summary: Archive saved dashboard (soft delete)
+      parameters:
+        - name: savedId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Archived
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [analytics.saved.manage]
+
+  /workflow/health:
+    get:
+      operationId: getWorkflowHealth
+      tags: [Workflow]
+      summary: Workflow platform health
+      responses:
+        "200":
+          description: Health snapshot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.engine.health]
+  /workflow/readiness:
+    get:
+      operationId: getWorkflowReadiness
+      tags: [Workflow]
+      summary: Workflow readiness
+      responses:
+        "200":
+          description: Readiness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.view]
+  /workflow/capabilities:
+    get:
+      operationId: getWorkflowCapabilities
+      tags: [Workflow]
+      summary: Workflow capabilities and providers
+      responses:
+        "200":
+          description: Capabilities
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.engine.capabilities]
+  /workflow/definitions:
+    get:
+      operationId: listWorkflowDefinitions
+      tags: [Workflow]
+      summary: List workflow definitions (catalogue)
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: query
+          in: query
+          schema:
+            type: string
+        - name: lifecycle
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Definition summaries
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowCollectionSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.view]
+  /workflow/definitions/{definitionId}:
+    get:
+      operationId: getWorkflowDefinition
+      tags: [Workflow]
+      summary: Get workflow definition
+      parameters:
+        - name: definitionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Definition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.view]
+  /workflow/runs:
+    get:
+      operationId: listWorkflowRuns
+      tags: [Workflow]
+      summary: List workflow runs
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: workflowId
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Runs page
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowCollectionSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.runs.view]
+    post:
+      operationId: createWorkflowRun
+      tags: [Workflow]
+      summary: Start a workflow run
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWorkflowRunRequest"
+      responses:
+        "201":
+          description: Run created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.runs.start]
+  /workflow/runs/{runId}:
+    get:
+      operationId: getWorkflowRun
+      tags: [Workflow]
+      summary: Get workflow run
+      parameters:
+        - name: runId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Run
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.runs.view]
+  /workflow/runs/{runId}/cancel:
+    post:
+      operationId: cancelWorkflowRun
+      tags: [Workflow]
+      summary: Cancel a workflow run
+      parameters:
+        - name: runId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelWorkflowRunRequest"
+      responses:
+        "200":
+          description: Cancelled run
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.runs.cancel]
+  /workflow/schedules:
+    get:
+      operationId: listWorkflowSchedules
+      tags: [Workflow]
+      summary: List workflow schedules
+      parameters:
+        - name: workflowId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Schedules
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.schedules.view]
+    post:
+      operationId: createWorkflowSchedule
+      tags: [Workflow]
+      summary: Create workflow schedule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWorkflowScheduleRequest"
+      responses:
+        "201":
+          description: Schedule created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.schedules.manage]
+  /workflow/schedules/{scheduleId}:
+    patch:
+      operationId: patchWorkflowSchedule
+      tags: [Workflow]
+      summary: Arm, pause, or retire a schedule
+      parameters:
+        - name: scheduleId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchWorkflowScheduleRequest"
+      responses:
+        "200":
+          description: Updated schedule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.schedules.manage]
+    delete:
+      operationId: deleteWorkflowSchedule
+      tags: [Workflow]
+      summary: Retire a schedule
+      parameters:
+        - name: scheduleId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Retired schedule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.schedules.manage]
+  /workflow/tasks:
+    get:
+      operationId: listWorkflowTasks
+      tags: [Workflow]
+      summary: List workflow tasks (inbox)
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: runId
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: kind
+          in: query
+          schema:
+            type: string
+            enum: [manual, approval, human]
+      responses:
+        "200":
+          description: Tasks page
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowCollectionSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.tasks.view]
+  /workflow/tasks/{taskId}:
+    get:
+      operationId: getWorkflowTask
+      tags: [Workflow]
+      summary: Get workflow task
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.tasks.view]
+    patch:
+      operationId: patchWorkflowTask
+      tags: [Workflow]
+      summary: Claim or complete a task
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchWorkflowTaskRequest"
+      responses:
+        "200":
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.tasks.claim, workflow.tasks.complete]
+  /workflow/approvals:
+    get:
+      operationId: listWorkflowApprovals
+      tags: [Workflow]
+      summary: List approval tasks
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: Approvals page
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowCollectionSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.tasks.view]
+  /workflow/approvals/{approvalId}:
+    patch:
+      operationId: patchWorkflowApproval
+      tags: [Workflow]
+      summary: Approve or reject an approval task
+      parameters:
+        - name: approvalId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchWorkflowApprovalRequest"
+      responses:
+        "200":
+          description: Updated approval
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowDataSuccess"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.tasks.approve]
+  /workflow/notifications:
+    get:
+      operationId: listWorkflowNotifications
+      tags: [Workflow]
+      summary: List workflow notification intents
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: Notification intents
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowCollectionSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+      x-apzhub-permissions: [workflow.runs.view]
+
 components:
   securitySchemes:
     sessionCookie:
@@ -8504,6 +9623,14 @@ components:
         type: string
         pattern: "^sart_[0-9a-fA-F]{32}$"
       example: sart_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa5
+    AttachmentId:
+      name: attachmentId
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: "^satt_[0-9a-fA-F]{32}$"
+      example: satt_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa6
     OrganizationId:
       name: organizationId
       in: path
@@ -9859,6 +10986,27 @@ components:
           type: string
           format: date-time
 
+    SupportArticleAttachmentDescriptor:
+      type: object
+      required: [filename, dataBase64]
+      additionalProperties: false
+      properties:
+        filename:
+          type: string
+          minLength: 1
+          maxLength: 255
+        contentType:
+          type: string
+          maxLength: 200
+        dataBase64:
+          type: string
+          minLength: 1
+          maxLength: 1400000
+        sizeBytes:
+          type: integer
+          minimum: 0
+          maximum: 1048576
+
     CreateInternalNoteBody:
       type: object
       required: [body]
@@ -9866,6 +11014,7 @@ components:
       description: >
         Internal note — visibility is always internal, channel is always note.
         Visibility field is not accepted (strict schema).
+        Optional binary attachments (base64; max 1 MiB each).
       properties:
         body:
           type: string
@@ -9876,6 +11025,11 @@ components:
         subject:
           type: string
           maxLength: 500
+        attachments:
+          type: array
+          maxItems: 10
+          items:
+            $ref: "#/components/schemas/SupportArticleAttachmentDescriptor"
 
     CreateCustomerReplyBody:
       type: object
@@ -9885,6 +11039,7 @@ components:
         Customer reply — visibility is always public.
         Channel must be a public channel (email, phone, web, chat, sms, fax).
         note and unknown channels are rejected.
+        Optional binary attachments (base64; max 1 MiB each).
       properties:
         body:
           type: string
@@ -9898,6 +11053,11 @@ components:
         channel:
           type: string
           enum: [email, phone, web, chat, sms, fax]
+        attachments:
+          type: array
+          maxItems: 10
+          items:
+            $ref: "#/components/schemas/SupportArticleAttachmentDescriptor"
         to:
           type: array
           items:
@@ -10253,6 +11413,39 @@ components:
         meta:
           $ref: "#/components/schemas/Meta"
 
+    SupportArticleAttachmentContent:
+      type: object
+      required:
+        [id, articleId, supportTicketId, filename, contentType, sizeBytes, dataBase64]
+      properties:
+        id:
+          type: string
+          pattern: "^satt_[0-9a-fA-F]{32}$"
+        articleId:
+          type: string
+          pattern: "^sart_[0-9a-fA-F]{32}$"
+        supportTicketId:
+          type: string
+          pattern: "^sreq_[0-9a-fA-F]{32}$"
+        filename:
+          type: string
+        contentType:
+          type: string
+        sizeBytes:
+          type: integer
+          minimum: 0
+        dataBase64:
+          type: string
+
+    SupportArticleAttachmentContentSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          $ref: "#/components/schemas/SupportArticleAttachmentContent"
+        meta:
+          $ref: "#/components/schemas/Meta"
+
     SupportArticleCollection:
       type: object
       required: [data, page, meta]
@@ -10591,6 +11784,170 @@ components:
           $ref: "#/components/schemas/Page"
         meta:
           $ref: "#/components/schemas/Meta"
+
+    WorkflowDataSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+        meta:
+          $ref: "#/components/schemas/Meta"
+    WorkflowCollectionSuccess:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    CreateWorkflowRunRequest:
+      type: object
+      required: [workflowId]
+      additionalProperties: false
+      properties:
+        workflowId:
+          type: string
+        versionId:
+          type: string
+        input:
+          type: object
+          additionalProperties: true
+        correlationId:
+          type: string
+        triggerId:
+          type: string
+    CancelWorkflowRunRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        reason:
+          type: string
+    CreateWorkflowScheduleRequest:
+      type: object
+      required: [workflowId, cron]
+      additionalProperties: false
+      properties:
+        workflowId:
+          type: string
+        versionId:
+          type: string
+        triggerId:
+          type: string
+        cron:
+          type: string
+        timezone:
+          type: string
+    PatchWorkflowScheduleRequest:
+      type: object
+      required: [status]
+      additionalProperties: false
+      properties:
+        status:
+          type: string
+          enum: [armed, paused, retired]
+    PatchWorkflowTaskRequest:
+      type: object
+      required: [action]
+      additionalProperties: false
+      properties:
+        action:
+          type: string
+          enum: [claim, complete]
+        formValues:
+          type: object
+          additionalProperties: true
+    PatchWorkflowApprovalRequest:
+      type: object
+      required: [decision]
+      additionalProperties: false
+      properties:
+        decision:
+          type: string
+          enum: [approved, rejected]
+        comment:
+          type: string
+
+    AnalyticsDataSuccess:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+        meta:
+          $ref: "#/components/schemas/Meta"
+    AnalyticsCollectionSuccess:
+      type: object
+      required: [data, page, meta]
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        page:
+          $ref: "#/components/schemas/Page"
+        meta:
+          $ref: "#/components/schemas/Meta"
+    CreateAnalyticsSavedRequest:
+      type: object
+      additionalProperties: false
+      required: [dashboardId, name]
+      properties:
+        id:
+          type: string
+        dashboardId:
+          type: string
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+        description:
+          type: string
+          maxLength: 4000
+        filterSnapshot:
+          type: object
+          additionalProperties: true
+        parameterSnapshot:
+          type: object
+          additionalProperties: true
+        status:
+          type: string
+          enum: [draft, published, deprecated, archived]
+    UpdateAnalyticsSavedRequest:
+      type: object
+      additionalProperties: false
+      minProperties: 1
+      properties:
+        dashboardId:
+          type: string
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+        description:
+          type: string
+          nullable: true
+          maxLength: 4000
+        filterSnapshot:
+          type: object
+          nullable: true
+          additionalProperties: true
+        parameterSnapshot:
+          type: object
+          nullable: true
+          additionalProperties: true
+        status:
+          type: string
+          enum: [draft, published, deprecated, archived]
+
     CreateTimesheetRequest:
       type: object
       additionalProperties: false

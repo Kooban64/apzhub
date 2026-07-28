@@ -1,0 +1,25 @@
+{
+  "name": "@apzhub/qep-test-specifications",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "APZ QEP Test Specifications — 1.0.0 CERTIFIED / FROZEN. PRODUCTION_READY_WITH_LIMITATIONS. Baseline reference implementation. Changes require new Owner-authorised programmes.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./domain": "./src/domain/index.ts",
+    "./application": "./src/application/index.ts",
+    "./infrastructure": "./src/infrastructure/index.ts",
+    "./presentation": "./src/presentation/index.ts",
+    "./shared": "./src/shared/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-test-specifications"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/qep-contracts": "workspace:*",
+    "drizzle-orm": "^0.45.2"
+  }
+}

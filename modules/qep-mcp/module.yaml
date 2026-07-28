@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: qep-mcp
+name: MCP and Developer Experience
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "MCP and Developer Experience (M18) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  product: apzqep
+  moduleCatalogueId: M18
+  slug: mcp-dx
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: stub
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: MCP and Developer Experience
+    icon: flask-conical
+    route: /workspace/qep/mcp-dx
+    order: 180
+    permission: qep.mcp-dx.read
+  view:
+    title: MCP and Developer Experience
+    workspace: qep
+    route: /workspace/qep/mcp-dx
+    permission: qep.mcp-dx.read

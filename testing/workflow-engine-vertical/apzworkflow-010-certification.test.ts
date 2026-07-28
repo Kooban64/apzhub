@@ -158,8 +158,8 @@ describe("APZWORKFLOW-010 Workflow Engine Vertical Certification", () => {
   it("keeps frozen package versions for the engine vertical", () => {
     const versions = {
       "integrations/n8n/package.json": "0.1.0",
-      "packages/workflow-contracts/package.json": "0.3.0",
-      "packages/platform-services/package.json": "0.26.1",
+      "packages/workflow-contracts/package.json": "0.4.2",
+      "packages/platform-services/package.json": "0.32.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const version = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;

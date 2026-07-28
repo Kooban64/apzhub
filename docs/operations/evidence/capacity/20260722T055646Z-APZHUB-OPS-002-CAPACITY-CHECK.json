@@ -1,0 +1,20 @@
+{
+  "programme": "APZHUB-OPS-002",
+  "timestamp": "20260722T055646Z",
+  "disk": {
+    "usePercent": 45,
+    "available": "107G",
+    "status": "ok"
+  },
+  "memoryAvailableGbApprox": 14.0,
+  "hostCoexistenceLive": "PASS",
+  "reservedPorts": "3300=free;54334=LISTEN;6380=LISTEN;3080=LISTEN;3443=LISTEN;6006=free;",
+  "recommendations": [
+    "Keep disk below 80% before cutover",
+    "Run pnpm ops:host-coexistence-audit -- --live immediately before Change",
+    "Postgres volume growth: monitor apzhub_postgres_prod",
+    "Redis maxmemory 384mb (prod conf) \u2014 sessions are ephemeral-acceptable",
+    "Web container memory limit 2G; scale vertically before horizontal on shared host"
+  ],
+  "verdict": "PASS"
+}

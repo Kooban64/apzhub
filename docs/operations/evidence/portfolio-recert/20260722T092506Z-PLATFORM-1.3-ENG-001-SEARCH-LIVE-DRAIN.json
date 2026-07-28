@@ -1,0 +1,22 @@
+{
+  "programme": "Platform-1.3-ENG-001",
+  "epic": "P13-E01",
+  "title": "Search Live Drain",
+  "timestamp": "20260722T092506Z",
+  "baseline": "1.2.0",
+  "arch001": "ACCEPTED",
+  "recommendation": "READY FOR OWNER ENGINEERING ACCEPTANCE",
+  "pl12Kl01": "CLOSED",
+  "quality": {
+    "webTypecheck": "PASS",
+    "lawTypecheck": "PASS",
+    "eslintWiring": "PASS",
+    "timeUnit": "PASS",
+    "lawUnit": "PASS",
+    "searchOrchestrator": "PASS 30/30"
+  },
+  "adr007xImplemented": false,
+  "sdkChanged": false,
+  "platformServicesSourcesChanged": false,
+  "pack": "docs/engineering/platform-1.3-eng-001/"
+}

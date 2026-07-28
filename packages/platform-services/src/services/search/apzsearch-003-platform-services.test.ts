@@ -63,7 +63,7 @@ const baseConfig = {
 
 describe("APZSEARCH-003 search platform services", () => {
   it("exports platform services version 0.26.1", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.26.1");
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.32.0");
   });
 
   it("registers search permissions in the platform catalogue", () => {

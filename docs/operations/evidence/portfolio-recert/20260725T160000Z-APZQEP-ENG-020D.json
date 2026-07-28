@@ -1,0 +1,46 @@
+{
+  "programme": "APZQEP-ENG-020D",
+  "title": "Requirements Content Versioning",
+  "recordedAt": "2026-07-25T16:00:00Z",
+  "reconciledAt": "2026-07-25T16:30:00Z",
+  "baseline": "APZQEP-ENG-020C — ACCEPTED / CLOSED / COMPLETE",
+  "state": "IMPLEMENTED",
+  "acceptance": "AWAITING OWNER ACCEPTANCE",
+  "scope": "Requirement content versioning (immutable snapshots, history, comparison, integrity)",
+  "excluded": [
+    "baselines",
+    "generic versioning engine",
+    "relationships",
+    "traceability",
+    "AI",
+    "MCP",
+    "ENG-020E"
+  ],
+  "migrations": [
+    "0072_apz_qep_requirement_content_version.sql",
+    "0073_apz_qep_requirement_content_version_rls.sql"
+  ],
+  "backfill": {
+    "library": "packages/qep-requirements/src/infrastructure/backfill/backfill-requirement-content-versions.ts",
+    "script": "scripts/apzqep-eng-020d-backfill-content-versions.mjs",
+    "npmScript": "backfill:qep-requirements-content-versions",
+    "migrationReason": "Initial version created during APZQEP-ENG-020D migration",
+    "migrationActor": "system:apzqep-eng-020d-migration",
+    "platformBusinessAudit": false,
+    "idempotent": true
+  },
+  "packages": {
+    "@apzhub/qep-requirements": "0.4.0"
+  },
+  "documentation": "docs/products/apzqep/requirements/versioning/",
+  "gates": {
+    "qepTestSuite": "PASS",
+    "versioningAudit": "PASS",
+    "governanceReconciliation": "PASS"
+  },
+  "notes": [
+    "Content version separate from concurrency revision and lifecycle history.",
+    "No baselines or generic versioning engine introduced.",
+    "Programme must not be marked ACCEPTED, CLOSED, or COMPLETE without Owner acceptance."
+  ]
+}

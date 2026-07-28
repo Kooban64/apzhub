@@ -8,7 +8,7 @@ import {
 } from "@apzhub/legal-business-core";
 
 import type { DocumentFormValues } from "./document-types";
-import { getSharedMatterRepository } from "../persistence/repository-factory";
+import { getSharedMatterRepository } from "../matters/in-memory-matter-repository";
 
 export type DocumentValidationResult = ValidationResult;
 

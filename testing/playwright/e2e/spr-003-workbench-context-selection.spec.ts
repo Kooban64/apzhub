@@ -1,66 +1,59 @@
 import { test, expect } from "@playwright/test";
 
-const DEV_EMAIL = "dev@apzhub.local";
-const DEV_PASSWORD = "DevPassword123!";
+import { signInDevUser } from "./auth-helpers";
 
-async function signIn(page: import("@playwright/test").Page) {
-  await page.goto("/login");
-  await page.getByLabel("Email").fill(DEV_EMAIL);
-  await page.getByLabel("Password").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "Sign in" }).click();
-  await expect(page).toHaveURL(/\/workspace\/home/);
+async function readPersistedWorkbenchLayout(
+  page: import("@playwright/test").Page,
+): Promise<{
+  focusedViewId: string | null;
+  activeWorkspace: string | null;
+}> {
+  // Platform Personalisation SessionStore (M8-04) — not browser localStorage.
+  const response = await page.request.get(
+    "/api/platform/v1/personalisation/workbench-layout",
+  );
+  if (!response.ok()) {
+    return { focusedViewId: null, activeWorkspace: null };
+  }
+  const body = (await response.json()) as {
+    data?: { layout?: { focusedViewId?: string; activeWorkspace?: string } | null };
+  };
+  const layout = body.data?.layout;
+  return {
+    focusedViewId: layout?.focusedViewId ?? null,
+    activeWorkspace: layout?.activeWorkspace ?? null,
+  };
 }
 
 test.describe("SPR-003 workbench context and selection", () => {
   test("navigation updates persisted workbench context after sidebar selection", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
+
+    // Deterministic sync: wait for Personalisation PUT after Overview activation
+    // (debounced SessionStore persist) instead of arbitrary sleeps.
+    const layoutPersist = page.waitForResponse(
+      (response) =>
+        response.url().includes("/api/platform/v1/personalisation/workbench-layout") &&
+        response.request().method() === "PUT" &&
+        response.ok(),
+    );
 
     await page.getByRole("button", { name: "Overview" }).click();
-    await expect(page).toHaveURL(/\/workspace\/home\/overview/);
+    await expect(page).toHaveURL(/\/workspace\/home\/overview/, { timeout: 15_000 });
+    await expect(page.getByRole("heading", { name: "Overview" })).toBeVisible({
+      timeout: 15_000,
+    });
+    await layoutPersist;
 
     await expect
-      .poll(async () =>
-        page.evaluate(() => {
-          const key = Object.keys(localStorage).find((entry) =>
-            entry.startsWith("apzhub:workbench:session:"),
-          );
-          if (!key) {
-            return null;
-          }
-
-          const raw = localStorage.getItem(key);
-          if (!raw) {
-            return null;
-          }
-
-          const session = JSON.parse(raw) as {
-            focusedViewId?: string;
-            activeWorkspace?: string;
-          };
-
-          return session.focusedViewId ?? null;
-        }),
-      )
+      .poll(async () => (await readPersistedWorkbenchLayout(page)).focusedViewId, {
+        timeout: 15_000,
+      })
       .toBe("platform-home-overview");
 
-    const activeWorkspace = await page.evaluate(() => {
-      const key = Object.keys(localStorage).find((entry) =>
-        entry.startsWith("apzhub:workbench:session:"),
-      );
-      if (!key) {
-        return null;
-      }
-
-      const raw = localStorage.getItem(key);
-      if (!raw) {
-        return null;
-      }
-
-      return (JSON.parse(raw) as { activeWorkspace?: string }).activeWorkspace ?? null;
-    });
-
+    const activeWorkspace = (await readPersistedWorkbenchLayout(page)).activeWorkspace;
     expect(activeWorkspace).toBe("home");
   });
 });

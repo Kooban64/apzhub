@@ -1,0 +1,28 @@
+{
+  "evidenceId": "20260728T090300Z-APZQEP-FREEZE-080A",
+  "programme": "APZQEP-FREEZE-080A",
+  "title": "Test Plans Capability Freeze Decision — pack prepared",
+  "capability": "Test Plans",
+  "layer": "Owner Freeze Review",
+  "status": "IMPLEMENTED / AWAITING OWNER FREEZE DECISION",
+  "decisionDate": null,
+  "package": {
+    "name": "@apzhub/qep-test-plans",
+    "version": "1.0.0",
+    "label": "CERTIFIED",
+    "freezeEligible": true,
+    "frozen": false
+  },
+  "prerequisites": {
+    "capabilityCertification": "APZQEP-CERT-080A CERTIFIED / APPROVED / CLOSED",
+    "versionPromotion": "0.2.0 → 1.0.0 APPLIED",
+    "productionClassification": "PRODUCTION_READY_WITH_LIMITATIONS"
+  },
+  "pack": "docs/products/apzqep/test-plans/freeze/",
+  "decisionTemplate": "docs/products/apzqep/test-plans/freeze/OWNER-FREEZE-DECISION.md",
+  "exclusions": [
+    "Freeze not executed under this preparation",
+    "No engineering",
+    "No further certification under FREEZE-080A"
+  ]
+}

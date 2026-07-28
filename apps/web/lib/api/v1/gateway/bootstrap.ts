@@ -34,8 +34,12 @@ import {
   isObserveServiceEnabled,
   createMetricsPlatformServicesForProduction,
   isMetricsServiceEnabled,
+  createQepPlatformServicesForProduction,
+  isQepServiceEnabled,
   createTimePlatformServicesForTest,
   createTimePlatformServicesWithKimai,
+  createAnalyticsPlatformServicesForTest,
+  createAnalyticsPlatformServicesWithMetabase,
 } from "@apzhub/platform-services";
 import type {
   TestingPlatformServicesBundle,
@@ -51,9 +55,17 @@ import type {
   IdentityPlatformServicesBundle,
   ObservePlatformServicesBundle,
   MetricsPlatformServicesBundle,
+  QepPlatformServicesBundle,
   TimePlatformServicesBundle,
+  AnalyticsPlatformServicesBundle,
 } from "@apzhub/platform-services";
 import type { DocumentStorageConfig } from "@apzhub/document-core";
+
+import {
+  createObserveDeliveryHookFromBootstrap,
+  isNotificationDeliveryHttpEnabled,
+} from "./notification-delivery-bootstrap";
+import { createQepSearchLifecycleOptions } from "../../../search/wiring/qep-publication";
 
 export interface PlatformApiGatewayBootstrap {
   readonly gateway: PlatformServiceGateway;
@@ -73,9 +85,13 @@ export interface PlatformApiGatewayBootstrap {
   readonly identityEnabled: boolean;
   readonly observeEnabled: boolean;
   readonly metricsEnabled: boolean;
+  readonly qepEnabled: boolean;
   /** APZHUB-TIME-HTTP-001 — Time Platform Services registered on gateway. */
   readonly timeEnabled: boolean;
   readonly timeReadiness?: TimePlatformServicesBundle["readiness"];
+  /** APZHUB-PLATFORM-ANALYTICS-005 — Analytics Platform Services registered on gateway. */
+  readonly analyticsEnabled: boolean;
+  readonly analyticsReadiness?: AnalyticsPlatformServicesBundle["readiness"];
   readonly testingReadiness?: TestingReadinessIndicators;
   readonly documentsReadiness?: DocumentPlatformServicesBundle["readiness"];
   readonly searchReadiness?: SearchPlatformServicesBundle["readiness"];
@@ -87,6 +103,7 @@ export interface PlatformApiGatewayBootstrap {
   readonly identityReadiness?: IdentityPlatformServicesBundle["readiness"];
   readonly observeReadiness?: ObservePlatformServicesBundle["readiness"];
   readonly metricsReadiness?: MetricsPlatformServicesBundle["readiness"];
+  readonly qepReadiness?: QepPlatformServicesBundle["readiness"];
   readonly platformServicesVersion: string;
 }
 
@@ -125,6 +142,57 @@ function isKimaiIntegrationEnabled(env: NodeJS.ProcessEnv = process.env): boolea
   const value = env.KIMAI_INTEGRATION_ENABLED?.trim().toLowerCase();
   if (value === "0" || value === "false" || value === "off") return false;
   return value === "1" || value === "true" || value === "on";
+}
+
+/** Platform Analytics HTTP / services enablement (APZHUB-PLATFORM-ANALYTICS-005). */
+function isAnalyticsServiceEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+  const value = env.APZHUB_ANALYTICS_ENABLED?.trim().toLowerCase();
+  if (value === "0" || value === "false" || value === "off") return false;
+  return value === "1" || value === "true" || value === "on";
+}
+
+function isMetabaseIntegrationEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+  const value = env.METABASE_INTEGRATION_ENABLED?.trim().toLowerCase();
+  if (value === "0" || value === "false" || value === "off") return false;
+  return value === "1" || value === "true" || value === "on";
+}
+
+async function createAnalyticsServicesBundle(): Promise<AnalyticsPlatformServicesBundle> {
+  const domainMode = process.env.APZHUB_ANALYTICS_DOMAIN_MODE?.trim().toLowerCase();
+  const allowInMemory =
+    domainMode === "in_memory" && process.env.NODE_ENV !== "production";
+  const tenantId =
+    process.env.METABASE_BOOTSTRAP_TENANT_ID?.trim() ||
+    process.env.APZHUB_ANALYTICS_BOOTSTRAP_TENANT_ID?.trim() ||
+    "platform";
+
+  if (isMetabaseIntegrationEnabled()) {
+    const { createMetabaseAdapter } = await import("@apzhub/integration-metabase");
+    const baseUrl = process.env.METABASE_BASE_URL ?? "http://localhost:3000";
+    const apiBaseUrl =
+      process.env.METABASE_API_BASE_URL ?? `${baseUrl.replace(/\/$/, "")}/api`;
+    const result = await createMetabaseAdapter({
+      tenantId,
+      metabase: {
+        baseUrl,
+        apiBaseUrl,
+        authMode: (process.env.METABASE_AUTH_MODE?.trim() || "api_key") as
+          "api_key" | "session",
+        apiKeyRef: process.env.METABASE_API_KEY_REF ?? "metabase/api-key",
+      },
+      apiKey: process.env.METABASE_API_KEY,
+      autoInitialise: false,
+    });
+    return createAnalyticsPlatformServicesWithMetabase(result.adapter, { tenantId });
+  }
+
+  if (allowInMemory) {
+    return createAnalyticsPlatformServicesForTest({ tenantId });
+  }
+
+  throw new Error(
+    "APZHUB_ANALYTICS_ENABLED=true requires METABASE_INTEGRATION_ENABLED=true (or APZHUB_ANALYTICS_DOMAIN_MODE=in_memory in non-production)",
+  );
 }
 
 async function createTimeServicesBundle(): Promise<TimePlatformServicesBundle> {
@@ -392,7 +460,28 @@ function createMetricsServicesBundle(): MetricsPlatformServicesBundle {
   });
 }
 
-function createObserveServicesBundle(): ObservePlatformServicesBundle {
+function createQepServicesBundle(searchHooksEnabled: boolean): QepPlatformServicesBundle {
+  if (!process.env.DATABASE_URL) {
+    throw new Error(
+      "APZHUB_QEP enabled requires DATABASE_URL for QEP Requirements PostgreSQL persistence",
+    );
+  }
+  const searchHooks = searchHooksEnabled ? createQepSearchLifecycleOptions() : undefined;
+  return createQepPlatformServicesForProduction({
+    postgresDb: getDb(),
+    onUpserted: searchHooks?.onUpserted,
+    onArchived: searchHooks?.onArchived,
+    onBaselineUpserted: searchHooks?.onBaselineUpserted,
+    onRelationshipUpserted: searchHooks?.onRelationshipUpserted,
+    onTraceLinkUpserted: searchHooks?.onTraceLinkUpserted,
+    onVerificationUpserted: searchHooks?.onVerificationUpserted,
+    onSpecificationUpserted: searchHooks?.onSpecificationUpserted,
+  });
+}
+
+function createObserveServicesBundle(
+  eventPublisher?: import("@apzhub/platform-services").DomainEventPublisher,
+): ObservePlatformServicesBundle {
   if (!process.env.DATABASE_URL) {
     throw new Error(
       "APZHUB_OBSERVE_ENABLED=true requires DATABASE_URL for Observability PostgreSQL persistence",
@@ -400,6 +489,12 @@ function createObserveServicesBundle(): ObservePlatformServicesBundle {
   }
   return createObservePlatformServicesForProduction({
     postgresDb: getDb(),
+    eventPublisher,
+    env: process.env,
+    // ENG-004: Observe alert lifecycle remains in Observe; delivery via central service.
+    deliveryHook: isNotificationDeliveryHttpEnabled()
+      ? createObserveDeliveryHookFromBootstrap()
+      : undefined,
   });
 }
 
@@ -479,7 +574,9 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
   const identityEnabled = isIdentityServiceEnabled(process.env);
   const observeEnabled = isObserveServiceEnabled(process.env);
   const metricsEnabled = isMetricsServiceEnabled(process.env);
+  const qepEnabled = isQepServiceEnabled(process.env);
   const timeEnabled = isTimeServiceEnabled(process.env);
+  const analyticsEnabled = isAnalyticsServiceEnabled(process.env);
   let providersRegistered = false;
 
   // Mapping store from env (postgres in production by default).
@@ -564,9 +661,32 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
     ? createAdministrationServicesBundle()
     : undefined;
   const identity = identityEnabled ? createIdentityServicesBundle() : undefined;
-  const observe = observeEnabled ? createObserveServicesBundle() : undefined;
+
+  const {
+    getOrCreateServerDomainEventPublisher,
+    getOrCreateServerAutomationFoundation,
+  } = await import("./domain-event-bus");
+
+  const domainEventPublisher = getOrCreateServerDomainEventPublisher();
+  const observe = observeEnabled
+    ? createObserveServicesBundle(domainEventPublisher)
+    : undefined;
   const metrics = metricsEnabled ? createMetricsServicesBundle() : undefined;
-  const time = timeEnabled ? await createTimeServicesBundle() : undefined;
+  const qep =
+    qepEnabled && process.env.DATABASE_URL
+      ? createQepServicesBundle(searchEnabled)
+      : undefined;
+  const timeRaw = timeEnabled ? await createTimeServicesBundle() : undefined;
+  const time = timeRaw
+    ? (
+        await import("../../../search/wiring/time-publication")
+      ).wireTimeBundleSearchPublication(timeRaw)
+    : undefined;
+  const analytics = analyticsEnabled
+    ? await createAnalyticsServicesBundle()
+    : undefined;
+
+  const automation = getOrCreateServerAutomationFoundation();
 
   const bundle = createPlatformServices({
     registry,
@@ -585,7 +705,11 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
     identity,
     observe,
     metricsPlatform: metrics,
+    qepPlatform: qep,
     time,
+    analytics,
+    domainEventPublisher,
+    automation,
   });
 
   return {
@@ -606,8 +730,11 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
     identityEnabled,
     observeEnabled,
     metricsEnabled,
+    qepEnabled: Boolean(qep),
     timeEnabled,
     timeReadiness: time?.readiness,
+    analyticsEnabled,
+    analyticsReadiness: analytics?.readiness,
     testingReadiness: testing?.readiness,
     documentsReadiness: documents?.readiness,
     searchReadiness: searchPlatform?.readiness,
@@ -619,6 +746,7 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
     identityReadiness: identity?.readiness,
     observeReadiness: observe?.readiness,
     metricsReadiness: metrics?.readiness,
+    qepReadiness: qep?.readiness,
     platformServicesVersion: PLATFORM_SERVICES_VERSION,
   };
 }
@@ -646,8 +774,11 @@ export function createTestPlatformApiGatewayBootstrap(
     identityEnabled: overrides.identityEnabled ?? false,
     observeEnabled: overrides.observeEnabled ?? false,
     metricsEnabled: overrides.metricsEnabled ?? false,
+    qepEnabled: overrides.qepEnabled ?? false,
     timeEnabled: overrides.timeEnabled ?? false,
     timeReadiness: overrides.timeReadiness,
+    analyticsEnabled: overrides.analyticsEnabled ?? false,
+    analyticsReadiness: overrides.analyticsReadiness,
     testingReadiness: overrides.testingReadiness,
     documentsReadiness: overrides.documentsReadiness,
     searchReadiness: overrides.searchReadiness,
@@ -659,6 +790,7 @@ export function createTestPlatformApiGatewayBootstrap(
     identityReadiness: overrides.identityReadiness,
     observeReadiness: overrides.observeReadiness,
     metricsReadiness: overrides.metricsReadiness,
+    qepReadiness: overrides.qepReadiness,
     platformServicesVersion:
       overrides.platformServicesVersion ?? PLATFORM_SERVICES_VERSION,
   };

@@ -12,8 +12,33 @@ export interface AuthSessionPermissionInput {
 }
 
 /**
+ * Match a granted permission pattern against a requested key.
+ * Mirrors `@apzhub/platform-authorization` `permissionPatternMatches` without a package dependency.
+ */
+export function workbenchPermissionPatternMatches(
+  granted: string,
+  requested: string,
+): boolean {
+  if (granted === "*") {
+    return true;
+  }
+
+  if (granted === requested) {
+    return true;
+  }
+
+  if (granted.endsWith(".*")) {
+    const prefix = granted.slice(0, -2);
+    return requested === prefix || requested.startsWith(`${prefix}.`);
+  }
+
+  return false;
+}
+
+/**
  * Session-backed permission adapter (ADR-0023 Phase 7).
  * Deny-by-default for manifest-declared permission keys until RBAC is populated.
+ * Granted wildcards (`legal.*`, `*`) match via {@link workbenchPermissionPatternMatches}.
  */
 export class AuthWorkbenchPermissionAdapter implements WorkbenchPermissionAdapter {
   readonly kind = "auth" as const;
@@ -46,11 +71,13 @@ export class AuthWorkbenchPermissionAdapter implements WorkbenchPermissionAdapte
       return false;
     }
 
-    if (active.permissions.has("*")) {
-      return true;
+    for (const granted of active.permissions) {
+      if (workbenchPermissionPatternMatches(granted, permission)) {
+        return true;
+      }
     }
 
-    return active.permissions.has(permission);
+    return false;
   }
 
   filter<T extends { permission?: string }>(

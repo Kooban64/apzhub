@@ -238,7 +238,8 @@ test.describe("APZOBSERVE-004 Observability Workbench (mocked HTTP)", () => {
     await expect(page.getByTestId("card-health-checks-count")).toBeVisible();
 
     await page.goto(`${OBSERVE_HOME}/health-checks`);
-    await expect(page.getByText("hc_pw")).toBeVisible();
+    // id appears in table cell and detail inspector — target the list cell (RG-OBSERVE-WB).
+    await expect(page.getByRole("cell", { name: "hc_pw" })).toBeVisible();
     await expect(page.getByTestId("observability-detail")).toBeVisible();
 
     await page.goto(`${OBSERVE_HOME}/service-health`);
@@ -246,10 +247,11 @@ test.describe("APZOBSERVE-004 Observability Workbench (mocked HTTP)", () => {
     await expect(page.getByTestId("status-badge").first()).toBeVisible();
 
     await page.goto(`${OBSERVE_HOME}/metric-definitions`);
-    await expect(page.getByText("md_pw")).toBeVisible();
+    await expect(page.getByRole("cell", { name: "md_pw" })).toBeVisible();
 
     await page.goto(`${OBSERVE_HOME}/alert-definitions`);
-    await expect(page.getByText("ad_pw")).toBeVisible();
+    // id appears in table cell and detail inspector — target the list cell (RG-SELECTORS).
+    await expect(page.getByRole("cell", { name: "ad_pw" })).toBeVisible();
 
     await page.goto(`${OBSERVE_HOME}/maintenance-windows`);
     await expect(page.getByTestId("facet-maintenance-windows")).toBeVisible();

@@ -1,0 +1,25 @@
+# APZHUB-OPS-002 — Docker build context exclusions
+.git
+.github
+.next
+**/.next
+**/node_modules
+**/dist
+**/coverage
+**/.turbo
+**/.cache
+test-results
+playwright-report
+docs/operations/evidence
+*.md
+!README.md
+.env
+.env.*
+!.env.production.example
+!.env.example
+apps/law-platform/.next
+apps/web/.next
+**/*.log
+.cursor
+agent-transcripts
+terminals

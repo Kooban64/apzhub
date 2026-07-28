@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: workflow-definitions
+name: Definitions
+version: 0.1.0
+kind: module
+
+metadata:
+  category: workflow
+  description: Workflow Workbench — Definitions view (APZHUB-PLATFORM-WORKFLOW-006).
+
+dependencies:
+  platform: []
+  services:
+    - workflow-service
+
+module:
+  category: workflow
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflow
+    parent: workflow
+    label: Definitions
+    icon: file-code
+    route: /workspace/workflow/definitions
+    order: 10
+    permission: workflow.view
+  view:
+    title: Definitions
+    workspace: workflow
+    route: /workspace/workflow/definitions
+    permission: workflow.view

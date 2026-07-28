@@ -457,19 +457,18 @@ describe("APZNOTIFY-003 notification handlers", () => {
     ).rejects.toMatchObject({ status: 404 });
   });
 
-  it("proves forbidden delivery route segments are absent", () => {
+  it("proves forbidden external-provider route segments remain absent", () => {
     const routesRoot = join(process.cwd(), "apps/web/app/api/v1/notifications");
     const files = walkRoutes(routesRoot);
     const joined = files.join("\n");
+    // ENG-004 authorises retry (under deliveries) and providers (status only).
     const forbidden = [
       "send",
       "resend",
       "deliver",
       "dispatch",
-      "retry",
       "schedule",
       "cancel-delivery",
-      "providers",
       "smtp",
       "sms",
       "push",
@@ -488,9 +487,11 @@ describe("APZNOTIFY-003 notification handlers", () => {
       expect(joined.endsWith(`/notifications/${segment}/route.ts`)).toBe(false);
       expect(joined.includes(`/notifications/${segment}/route.ts`)).toBe(false);
     }
+    expect(joined.includes("/notifications/providers/route.ts")).toBe(true);
+    expect(joined.includes("/notifications/deliveries/")).toBe(true);
   });
 
-  it("documents notification paths in OpenAPI without delivery routes", () => {
+  it("documents notification metadata and ENG-004 delivery paths in OpenAPI", () => {
     const spec = loadPlatformOpenApiSpecObject() as {
       paths: Record<string, unknown>;
       tags?: { name: string }[];
@@ -499,11 +500,13 @@ describe("APZNOTIFY-003 notification handlers", () => {
     expect(spec.paths["/notifications/{notificationId}/transition"]).toBeDefined();
     expect(spec.paths["/notifications/templates"]).toBeDefined();
     expect(spec.paths["/notifications/capabilities"]).toBeDefined();
+    expect(spec.paths["/notifications/inbox"]).toBeDefined();
+    expect(spec.paths["/notifications/providers"]).toBeDefined();
+    expect(spec.paths["/notifications/delivery-health"]).toBeDefined();
     expect(spec.tags?.some((t) => t.name === "Platform Notifications")).toBe(true);
     for (const bad of [
       "/notifications/send",
       "/notifications/deliver",
-      "/notifications/providers",
       "/notifications/smtp",
       "/notifications/workers",
       "/notifications/realtime",

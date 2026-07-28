@@ -4,11 +4,17 @@ import {
   createLawPersistenceContext,
   type LawPersistenceContext,
 } from "./law-persistence-context";
+import {
+  getSessionLawPersistenceContext,
+  resetLawPersistenceSession,
+} from "./law-persistence-session";
 
 const persistenceStorage = new AsyncLocalStorage<LawPersistenceContext>();
 
-/** Client/session-scoped context for browser bundle wiring (LAW-012-03). */
-let sessionPersistenceContext: LawPersistenceContext | undefined;
+export {
+  getSessionLawPersistenceContext,
+  setSessionLawPersistenceContext,
+} from "./law-persistence-session";
 
 export function runWithLawPersistenceContext<T>(
   context: LawPersistenceContext,
@@ -24,19 +30,9 @@ export async function runWithLawPersistenceContextAsync<T>(
   return persistenceStorage.run(context, operation);
 }
 
-export function setSessionLawPersistenceContext(
-  context: LawPersistenceContext | undefined,
-): void {
-  sessionPersistenceContext = context;
-}
-
-export function getSessionLawPersistenceContext(): LawPersistenceContext | undefined {
-  return sessionPersistenceContext;
-}
-
 export function getActiveLawPersistenceContext(): LawPersistenceContext {
   return (
-    sessionPersistenceContext ??
+    getSessionLawPersistenceContext() ??
     persistenceStorage.getStore() ??
     createLawPersistenceContext()
   );
@@ -44,9 +40,9 @@ export function getActiveLawPersistenceContext(): LawPersistenceContext {
 
 /** Returns context only when explicitly bound via session or ALS (PRH-007 search isolation). */
 export function getExplicitLawPersistenceContext(): LawPersistenceContext | undefined {
-  return sessionPersistenceContext ?? persistenceStorage.getStore();
+  return getSessionLawPersistenceContext() ?? persistenceStorage.getStore();
 }
 
 export function resetLawPersistenceScope(): void {
-  sessionPersistenceContext = undefined;
+  resetLawPersistenceSession();
 }

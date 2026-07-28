@@ -36,11 +36,17 @@ describe("@apzhub/integration-n8n adapter", () => {
     const connected = await adapter.connect(ctx());
     expect(connected.ok).toBe(true);
 
+    const version = await adapter.client.detectVersion(ctx());
+    expect(version.tag).toBe("1.45.0");
+
     const workflows = await adapter.core.listWorkflows(ctx());
     expect(workflows).toHaveLength(1);
     expect(workflows[0]?.engine).toBe("n8n");
     expect(workflows[0]?.name).toBe("Onboarding Notify");
     expect(workflows[0]?.nodeCount).toBe(2);
+
+    const viaClient = await adapter.client.listWorkflowsMetadata(ctx());
+    expect(viaClient).toHaveLength(1);
 
     const health = await adapter.health(ctx());
     expect(health.status === "healthy" || health.status === "degraded").toBe(true);
@@ -48,6 +54,7 @@ describe("@apzhub/integration-n8n adapter", () => {
     const diagnostics = await adapter.diagnostics(ctx());
     expect(diagnostics.recommendations.join(" ")).toMatch(/Execute/i);
     expect(JSON.stringify(diagnostics)).not.toMatch(/test-key/);
+    expect(adapter.diagnosticsExtension.detectedVersionTag).toBe("1.45.0");
 
     await disposeN8nAdapter(adapter, factory);
   });

@@ -79,7 +79,14 @@ export class InMemoryDocumentRepository implements WritableDocumentRepository {
   }
 }
 
-export {
-  getSharedDocumentRepository,
-  resetSharedDocumentRepository,
-} from "../persistence/repository-factory";
+/** Client-safe memory singleton — must not import repository-factory (pulls pg). */
+let sharedDocumentRepository: InMemoryDocumentRepository | undefined;
+
+export function getSharedDocumentRepository(): InMemoryDocumentRepository {
+  sharedDocumentRepository ??= new InMemoryDocumentRepository();
+  return sharedDocumentRepository;
+}
+
+export function resetSharedDocumentRepository(): void {
+  sharedDocumentRepository = undefined;
+}

@@ -1,0 +1,43 @@
+{
+  "programme": "APZHUB-QA-CERT-001",
+  "baseline": "1.2.0",
+  "timestampUtc": "20260721T120154Z",
+  "recommendation": "CERTIFICATION FAILED",
+  "gates": {
+    "lint": {
+      "exit": 1,
+      "summary": "1 ESLint error (law-platform unused import)"
+    },
+    "typecheck": {
+      "exit": 2,
+      "summary": "law-platform tsc fail (r12-persist-02-boundary.test.ts)"
+    },
+    "unitIntegration": {
+      "exit": 1,
+      "summary": "82 failed / 4929 passed / 66 skipped (885 files)"
+    },
+    "pathRecert": {
+      "exit": 0,
+      "verdict": "PASS",
+      "evidence": "20260721T110600Z-R12-QA-01-path-PASS.json"
+    },
+    "fullRecert": {
+      "exit": 1,
+      "verdict": "FAIL",
+      "evidence": "20260721T120046Z-R12-QA-01-full-FAIL.json"
+    },
+    "playwright": {
+      "passed": 84,
+      "failed": 19,
+      "flaky": 30,
+      "duration": "53.8m"
+    },
+    "architecture": "PASS (no engineering mutation; Platform 1.2.0 packaging intact; no OPEN remediation groups)",
+    "compatibility": "PASS (SemVer packaging not mutated by this programme; public APIs unchanged by cert)"
+  },
+  "remediationClosure": {
+    "engineeringComplete": true,
+    "openRemediationGroups": [],
+    "portfolioGreen": false
+  }
+}

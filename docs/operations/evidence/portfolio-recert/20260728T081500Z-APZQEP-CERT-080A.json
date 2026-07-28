@@ -1,0 +1,118 @@
+{
+  "id": "20260728T081500Z-APZQEP-CERT-080A",
+  "timestamp": "2026-07-28T08:15:00Z",
+  "programme": "APZQEP-CERT-080A",
+  "title": "Test Plans Integrated Capability Certification",
+  "type": "capability-certification-assurance",
+  "status": "IMPLEMENTED_AWAITING_OWNER_CERTIFICATION_DECISION",
+  "certificationLevel": "CAPABILITY",
+  "component": "domain+infrastructure+workbench",
+  "package": {
+    "name": "@apzhub/qep-test-plans",
+    "version": "0.2.0",
+    "versionRecommendation": "promote-0.2.0-to-1.0.0-upon-owner-certification-decision",
+    "versionBumpApplied": false
+  },
+  "recommendedClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "freezeEligibility": "ELIGIBLE_UPON_OWNER_CERTIFICATION_ACCEPTANCE_SEPARATE_OWNER_FREEZE_DECISION_REQUIRED",
+  "freezeExecuted": false,
+  "independence": true,
+  "engineeringPerformed": false,
+  "remediationPerformed": false,
+  "reactNextEditsPerformed": false,
+  "migrationsPerformed": false,
+  "baselinesConsumed": {
+    "capabilityArchitecture": "APZQEP-ARCH-013 ACCEPTED / ARCHITECTURE BASELINED / CLOSED",
+    "domain": "APZQEP-OES-ENG-060A / ENG-060A / CERT-060A CERTIFIED / APPROVED / CLOSED — @apzhub/qep-test-plans 0.1.0 CERTIFIED (DOMAIN_PRODUCTION_READY_WITH_LIMITATIONS)",
+    "infrastructure": "APZQEP-OES-ENG-060B / ENG-060B / CERT-060B CERTIFIED / APPROVED / CLOSED — @apzhub/qep-test-plans 0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED (INFRASTRUCTURE_PRODUCTION_READY_WITH_LIMITATIONS)",
+    "workbenchArchitecture": "APZQEP-ARCH-014 ACCEPTED / ARCHITECTURE BASELINED / PROGRAMME CLOSED",
+    "workbench": "APZQEP-OES-ENG-070A / ENG-070A / CERT-070A CERTIFIED / APPROVED / CLOSED — @apzhub/qep-test-plans 0.2.0 WORKBENCH COMPONENT CERTIFIED (WORKBENCH_PRODUCTION_READY_WITH_LIMITATIONS)",
+    "governance": "Document 000, OES-000, OES-001, OES-002, OES-CERTIFICATION-INDEPENDENCE, OES-CERTIFICATION-LEVELS"
+  },
+  "qualityGates": {
+    "aggregate": "ALL_MANDATORY_CAPABILITY_GATES_PASS",
+    "reverificationCommand": "pnpm exec vitest run packages/qep-test-plans apps/web/components/qep/qep-test-plan-views.test.tsx apps/web/lib/api/v1/handlers/qep-test-plan.test.ts",
+    "reverificationTests": { "testFiles": 11, "total": 124, "failed": 0, "result": "PASS", "reverifiedUtc": "2026-07-28" },
+    "packageTests": { "total": 104, "failed": 0, "result": "PASS" },
+    "presentationSpecificTests": { "routes": 5, "views": 15, "total": 20, "failed": 0, "result": "PASS" },
+    "restHandlerTests": { "total": 5, "failed": 0, "result": "PASS", "file": "apps/web/lib/api/v1/handlers/qep-test-plan.test.ts" },
+    "typecheck": "PASS",
+    "playwrightSpecPresent": true,
+    "playwrightSpecPath": "testing/playwright/e2e/apzqep-eng-070a-test-plans-workbench.spec.ts",
+    "playwrightReexecuted": false
+  },
+  "crossLayerIntegration": {
+    "availableActionsSoleAuthorityDomainToInfrastructureToWorkbench": true,
+    "negativeTestPresent": true,
+    "invertedTransitionsFound": false,
+    "layerBoundaryViolationsFound": false,
+    "architecturalDriftFound": false
+  },
+  "lifecycleCompleteness": {
+    "allCatalogedActionsReachableEndToEnd": true,
+    "compareDeferredHonestlyRepresented": true
+  },
+  "securityAndPermissions": {
+    "permissionPrefix": "qep.plan.*",
+    "serverAuthoritative": true,
+    "clientInventedTransitionsFound": false,
+    "tenantIsolation": true
+  },
+  "auditAndObservability": {
+    "auditTrailPresent": true,
+    "domainEventsPresent": true,
+    "searchProjectionPresent": true,
+    "workbenchTelemetryPresent": true
+  },
+  "limitationsConsolidated": {
+    "L-01": "compare-not-implemented-inherited-infrastructure",
+    "L-02": "items-dto-bound-inherited-infrastructure",
+    "L-03": "package-line-coverage-below-aspirational-objective-justified-inherited-infrastructure",
+    "P-01": "playwright-journey-breadth-test-authoring-gap-inherited-workbench",
+    "P-02": "not-found-404-not-separately-asserted-test-authoring-gap-inherited-workbench",
+    "P-03": "create-edit-relationships-history-versions-not-separately-axe-scanned-inherited-workbench",
+    "P-04": "preference-service-named-saved-views-not-implemented-approved-scope-boundary-inherited-workbench",
+    "blockCapabilityCertification": false
+  },
+  "accessibility": {
+    "wcagAaIntent": true,
+    "axeCriticalSeriousCount": 0,
+    "keyboardOperability": true,
+    "focusTrapAndRestore": true,
+    "statusColourIndependent": true
+  },
+  "documentationCompleteness": true,
+  "operationalReadiness": "PASS",
+  "benchmark": "reference-capability-certification-mirrors-cert-050d",
+  "documents": [
+    "docs/products/apzqep/test-plans/capability-certification/README.md",
+    "docs/products/apzqep/test-plans/capability-certification/OWNER-SUMMARY.md",
+    "docs/products/apzqep/test-plans/capability-certification/OWNER-ACCEPTANCE.md",
+    "docs/products/apzqep/test-plans/capability-certification/CERTIFICATION-REPORT.md",
+    "docs/products/apzqep/test-plans/capability-certification/COMPLETION-REPORT.md",
+    "docs/products/apzqep/test-plans/capability-certification/ARCHITECTURE-REVIEW.md",
+    "docs/products/apzqep/test-plans/capability-certification/ENGINEERING-REVIEW.md",
+    "docs/products/apzqep/test-plans/capability-certification/EVIDENCE-PACK.md",
+    "docs/products/apzqep/test-plans/capability-certification/QUALITY-GATES.md",
+    "docs/products/apzqep/test-plans/capability-certification/TEST-RESULTS.md",
+    "docs/products/apzqep/test-plans/capability-certification/SECURITY-REVIEW.md",
+    "docs/products/apzqep/test-plans/capability-certification/PERFORMANCE-REVIEW.md",
+    "docs/products/apzqep/test-plans/capability-certification/OPERATIONAL-READINESS.md",
+    "docs/products/apzqep/test-plans/capability-certification/ACCESSIBILITY-REVIEW.md",
+    "docs/products/apzqep/test-plans/capability-certification/KNOWN-LIMITATIONS.md",
+    "docs/products/apzqep/test-plans/capability-certification/VERSION-PROMOTION.md",
+    "docs/products/apzqep/test-plans/capability-certification/RELEASE-RECOMMENDATION.md",
+    "docs/products/apzqep/test-plans/capability-certification/RELEASE-NOTES.md",
+    "docs/products/apzqep/test-plans/capability-certification/FREEZE-NOTICE.md",
+    "docs/products/apzqep/test-plans/CERT-080A/README.md",
+    "docs/releases/apzqep/test-plans/1.0.0/README.md"
+  ],
+  "explicitlyNotAuthorised": [
+    "owner-certification-decision",
+    "version-1.0.0-bump-applied",
+    "capability-freeze-execution",
+    "engineering-remediation",
+    "react-next-code-changes",
+    "migrations"
+  ]
+}

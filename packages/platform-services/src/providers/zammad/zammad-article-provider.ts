@@ -82,5 +82,16 @@ export function createZammadArticleProvider(
         core.articles.create(toIntegrationContext(ctx), input),
       );
     },
+
+    downloadAttachment(ctx, supportTicketId, articleId, attachmentId) {
+      return withProviderErrorMapping(ctx.correlationId, () =>
+        core.articles.downloadAttachment(
+          toIntegrationContext(ctx),
+          supportTicketId,
+          articleId,
+          attachmentId,
+        ),
+      );
+    },
   };
 }

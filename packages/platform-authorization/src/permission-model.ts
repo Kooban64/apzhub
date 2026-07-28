@@ -21,6 +21,7 @@ export const CANONICAL_PERMISSION_NAMESPACES = [
   "legal",
   "trust",
   "testing",
+  "qep",
   "certification",
   "evidence",
   "traceability",

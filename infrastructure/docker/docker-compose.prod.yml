@@ -1,33 +1,168 @@
-# Production scaffold — SPR-001 (structure only, no deploy automation)
+# APZHUB-OPS-002 A1 — Production compose stack (Platform 1.2.0)
+# Coexistence-safe host ports (ENVIRONMENT.md / R12-OPS-03):
+#   Caddy 3080/3443 · optional Postgres 54334 · optional Redis 6380
+# Do NOT bind forbidden legacy ports (54333, 8080, 18081–18088).
+# Dedicated-host 80/443 mode: see docs/operations/platform-1.2.0-production-readiness/TLS-CONFIGURATION.md
+#
+# Prerequisites:
+#   1. Copy .env.production.example → .env.production and harden secrets
+#   2. Build image: pnpm docker:build:prod
+#   3. Start: pnpm docker:up:prod
+
+name: apzhub-prod
 
 services:
   postgres:
     image: postgres:16-alpine
+    container_name: apzhub-postgres-prod
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-apzhub}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
       POSTGRES_DB: ${POSTGRES_DB:-apzhub}
     volumes:
       - apzhub_postgres_prod:/var/lib/postgresql/data
+      - ../postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+      - apzhub_postgres_backup:/backups
+    ports:
+      # Reserved APZHUB host port — never 54333
+      - "${APZHUB_POSTGRES_HOST_PORT:-54334}:5432"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-apzhub} -d ${POSTGRES_DB:-apzhub}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 256M
+    networks:
+      - apzhub_prod
 
   redis:
     image: redis:7-alpine
+    container_name: apzhub-redis-prod
     restart: unless-stopped
+    command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
       - apzhub_redis_prod:/data
+      - ../redis/redis.prod.conf:/usr/local/etc/redis/redis.conf:ro
+    ports:
+      # Reserved APZHUB host port
+      - "${APZHUB_REDIS_HOST_PORT:-6380}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 64M
+    networks:
+      - apzhub_prod
+
+  web:
+    image: ${APZHUB_WEB_IMAGE:-apzhub/web:1.2.0}
+    container_name: apzhub-web-prod
+    restart: unless-stopped
+    env_file:
+      - path: ../../.env.production
+        required: false
+    environment:
+      NODE_ENV: production
+      PORT: "3300"
+      HOSTNAME: "0.0.0.0"
+      PLATFORM_VERSION: ${PLATFORM_VERSION:-1.2.0}
+      BUILD_NUMBER: ${BUILD_NUMBER:-local}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-apzhub}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-apzhub}
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    expose:
+      - "3300"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3300/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      start_period: 60s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+    networks:
+      - apzhub_prod
 
   caddy:
     image: caddy:2-alpine
+    container_name: apzhub-caddy-prod
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      # Coexistence-safe defaults (host nginx may terminate public TLS and proxy here)
+      - "${APZHUB_CADDY_HTTP_HOST_PORT:-3080}:80"
+      - "${APZHUB_CADDY_HTTPS_HOST_PORT:-3443}:443"
+    environment:
+      APZHUB_HOSTNAME: ${APZHUB_HOSTNAME:-localhost}
+      APZHUB_TLS_MODE: ${APZHUB_TLS_MODE:-internal}
     volumes:
       - ../caddy/Caddyfile.prod:/etc/caddy/Caddyfile:ro
-      - apzhub_caddy_prod:/data
+      - apzhub_caddy_prod_data:/data
+      - apzhub_caddy_prod_config:/config
+    depends_on:
+      web:
+        condition: service_healthy
+    networks:
+      - apzhub_prod
+
+  # Optional scheduled backup sidecar (host cron preferred — see BACKUP-PROCEDURES.md)
+  postgres-backup:
+    image: postgres:16-alpine
+    container_name: apzhub-postgres-backup
+    restart: "no"
+    profiles: ["backup"]
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD:-}
+      POSTGRES_USER: ${POSTGRES_USER:-apzhub}
+      POSTGRES_DB: ${POSTGRES_DB:-apzhub}
+      BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-14}
+    volumes:
+      - apzhub_postgres_backup:/backups
+      - ../scripts/postgres-backup.sh:/usr/local/bin/postgres-backup.sh:ro
+    entrypoint: ["/bin/sh", "/usr/local/bin/postgres-backup.sh"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - apzhub_prod
+
+networks:
+  apzhub_prod:
+    name: apzhub_prod
+    driver: bridge
 
 volumes:
   apzhub_postgres_prod:
   apzhub_redis_prod:
-  apzhub_caddy_prod:
+  apzhub_caddy_prod_data:
+  apzhub_caddy_prod_config:
+  apzhub_postgres_backup:

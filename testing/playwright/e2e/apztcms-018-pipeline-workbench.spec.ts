@@ -116,7 +116,8 @@ test.describe("APZTCMS-018 Pipeline workbench", () => {
     await gotoTestingSection(page, PIPELINES_RUNS);
     await expectTestingHeading(page, /Workflow runs/i);
     await expect(page.getByRole("search")).toBeVisible();
-    await expect(page.getByText("CI")).toBeVisible();
+    // "CI" can match multiple nodes (run name vs other chrome) — target the runs table cell (RG-SELECTORS).
+    await expect(page.getByRole("cell", { name: "CI", exact: true })).toBeVisible();
 
     const viewport = page.viewportSize();
     expect(viewport?.width).toBeGreaterThan(0);

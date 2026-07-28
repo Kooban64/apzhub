@@ -193,6 +193,12 @@ export type {
   NotificationService,
   ListNotificationsOptions,
   AddNotificationsResult,
+  NotificationSessionStore,
+  NotificationSessionEntry,
+  NotificationSessionAppendResult,
+  NotificationPersistenceStorage,
+  PersistedNotificationSessionStoreOptions,
+  DefaultNotificationServiceOptions,
 } from "./notification";
 
 export {
@@ -215,6 +221,10 @@ export {
   createDefaultNotificationService,
   DefaultNotificationSessionStore,
   createDefaultNotificationSessionStore,
+  PersistedNotificationSessionStore,
+  createPersistedNotificationSessionStore,
+  createLawNotificationPersistenceStorageKey,
+  /* Postgres SoR factories: import from @apzhub/event-notification-framework/server */
   PlaceholderNotificationRegistry,
   PlaceholderNotificationMapper,
   PlaceholderNotificationService,
@@ -268,6 +278,7 @@ export {
   publishActionExecutedEventToBus,
   buildPlatformActionExecutedEventEnvelope,
   wireNotificationMapperToService,
+  wireDomainEventNotifications,
   type CreateActionAuditEventBusHookOptions,
   type PublishActionExecutedEventToBusOptions,
 } from "./integration";

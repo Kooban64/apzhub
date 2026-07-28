@@ -1,0 +1,56 @@
+{
+  "programme": "APZHUB-ENG-0016",
+  "title": "Implement RG-LAW-SUITE-SCOPE + RG-LAW-HOST-QUALITY",
+  "baseline": "1.2.0",
+  "wave": 2,
+  "timestampUtc": "20260721T132122Z",
+  "preconditions": {
+    "APZHUB-QA-RECERT-002": "ACCEPTED",
+    "engineeringPlanStep": 1,
+    "groups": ["RG-LAW-SUITE-SCOPE", "RG-LAW-HOST-QUALITY"]
+  },
+  "remediationGroups": [
+    {
+      "id": "RG-LAW-SUITE-SCOPE",
+      "status": "REMEDIATED",
+      "failuresCleared": [
+        "QA2-F-002",
+        "QA2-F-003",
+        "QA2-F-004",
+        "QA2-F-005",
+        "QA2-F-006",
+        "QA2-F-007",
+        "QA2-F-008"
+      ],
+      "playwright": {
+        "mainList": "126 tests — law-015 absent",
+        "lawList": "7 tests — law-015 present",
+        "lawRun": "7 passed"
+      }
+    },
+    {
+      "id": "RG-LAW-HOST-QUALITY",
+      "status": "REMEDIATED",
+      "failuresCleared": ["QA2-L-001", "QA2-T-001"],
+      "lint": "PASS",
+      "typecheck": "law-platform PASS",
+      "vitestPersistence": "10 passed"
+    }
+  ],
+  "remainingVsCert001": {
+    "playwrightHard": 12,
+    "playwrightFlaky": 30,
+    "lint": 0,
+    "typecheck": 0,
+    "vitest": 82
+  },
+  "recommendation": "READY FOR OWNER ACCEPTANCE",
+  "stop": [
+    "no RG-CERT-PIN-DRIFT",
+    "no ENG-0017",
+    "no Email SoR",
+    "no FIN-001",
+    "no Workflow Execute",
+    "no Release 1.3"
+  ]
+}

@@ -1,9 +1,9 @@
 {
   "name": "@apzhub/platform-services",
-  "version": "0.26.1",
+  "version": "0.32.0",
   "private": true,
   "type": "module",
-  "description": "Platform service implementations — Projects + Support + Reporting + Documents + Search + Workflow + Notification + Configuration + Administration + Identity + Observability + Metrics + Time (APZHUB-PLATFORM-TIME-001)",
+  "description": "Platform service implementations — Projects + Support + Reporting + Documents + Search + Workflow (APZHUB-PLATFORM-WORKFLOW-004) + Notification + Configuration + Administration + Identity + Observability + Metrics + Time + Analytics",
   "exports": {
     ".": "./src/index.ts",
     "./testing": "./src/testing/index.ts",
@@ -19,9 +19,12 @@
     "@apzhub/integration-plane": "workspace:*",
     "@apzhub/integration-zammad": "workspace:*",
     "@apzhub/integration-github-actions": "workspace:*",
+    "@apzhub/integration-gitlab-ci": "workspace:*",
     "@apzhub/integration-n8n": "workspace:*",
     "@apzhub/integration-kimai": "workspace:*",
+    "@apzhub/integration-metabase": "workspace:*",
     "@apzhub/integration-sdk": "workspace:*",
+    "@apzhub/analytics-contracts": "workspace:*",
     "@apzhub/platform-authorization": "workspace:*",
     "@apzhub/platform-service-contracts": "workspace:*",
     "@apzhub/reporting-contracts": "workspace:*",
@@ -39,6 +42,7 @@
     "@apzhub/notification-contracts": "workspace:*",
     "@apzhub/notification-core": "workspace:*",
     "@apzhub/notification-persistence": "workspace:*",
+    "@apzhub/notification-delivery-persistence": "workspace:*",
     "@apzhub/configuration-contracts": "workspace:*",
     "@apzhub/configuration-core": "workspace:*",
     "@apzhub/configuration-persistence": "workspace:*",
@@ -57,6 +61,12 @@
     "drizzle-orm": "^0.45.2",
     "@apzhub/metrics-contracts": "workspace:*",
     "@apzhub/metrics-core": "workspace:*",
-    "@apzhub/metrics-persistence": "workspace:*"
+    "@apzhub/metrics-persistence": "workspace:*",
+    "@apzhub/qep-contracts": "workspace:*",
+    "@apzhub/qep-requirements": "workspace:*",
+    "@apzhub/qep-traceability": "workspace:*",
+    "@apzhub/qep-test-specifications": "workspace:*",
+    "@apzhub/qep-test-plans": "workspace:*",
+    "@apzhub/qep-verification": "workspace:*"
   }
 }

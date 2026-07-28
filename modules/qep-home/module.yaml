@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: qep-home
+name: Home and Command Centre
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Home and Command Centre (M01) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  product: apzqep
+  moduleCatalogueId: M01
+  slug: home
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: stub
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Home and Command Centre
+    icon: flask-conical
+    route: /workspace/qep/home
+    order: 10
+    permission: qep.home.read
+  view:
+    title: Home and Command Centre
+    workspace: qep
+    route: /workspace/qep/home
+    permission: qep.home.read

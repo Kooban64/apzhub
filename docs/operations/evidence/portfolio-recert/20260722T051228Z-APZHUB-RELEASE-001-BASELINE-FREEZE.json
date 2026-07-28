@@ -1,0 +1,37 @@
+{
+  "programme": "APZHUB-RELEASE-001",
+  "title": "Platform 1.2.0 Baseline Freeze & Release Approval",
+  "baseline": "1.2.0",
+  "rootVersion": "0.1.0-foundation",
+  "timestamp": "20260722T051228Z",
+  "classification": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "recommendation": "READY FOR OWNER RELEASE ACCEPTANCE",
+  "preconditions": {
+    "APZHUB-QA-CERT-004": "ACCEPTED (Owner Decision)",
+    "engineeringAuthorised": false,
+    "qualityRemediationAuthorised": false,
+    "sourceCodeModified": false
+  },
+  "freezes": [
+    "engineering-baseline",
+    "certification-baseline",
+    "architecture",
+    "contracts",
+    "package-versions",
+    "openapi-1.12.0",
+    "documentation"
+  ],
+  "qualityReference": {
+    "cert003": "20260721T193500Z-APZHUB-QA-CERT-003-SUMMARY.json",
+    "cert004": "20260721T194900Z-APZHUB-QA-CERT-004-VISUAL-REVIEW.json",
+    "vitestPassed": 5013,
+    "playwrightCert003": { "passed": 119, "failed": 1, "flaky": 6 },
+    "visualSuiteCert004": "3/3 PASS"
+  },
+  "pack": "docs/releases/platform-1.2.0/",
+  "packageInventory": {
+    "applications": 2,
+    "integrations": 8,
+    "packages": 74
+  }
+}

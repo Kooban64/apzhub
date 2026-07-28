@@ -1,6 +1,41 @@
-# Production Caddyfile scaffold — configure hostnames and TLS before deploy
+# APZHUB-OPS-002 A2 — Production edge (Platform 1.2.0)
+# Default: coexistence / staging with Caddy internal TLS.
+# Public Let's Encrypt: use Caddyfile.prod.public (see TLS-CONFIGURATION.md).
+# Compose maps host 3080→80 and 3443→443 by default (never collide with legacy stack).
 
-:80 {
-	encode gzip
-	reverse_proxy web:3300
+{
+	email {$APZHUB_ACME_EMAIL:ops@localhost}
+}
+
+http://{$APZHUB_HOSTNAME:localhost} {
+	redir https://{host}{uri} permanent
+}
+
+{$APZHUB_HOSTNAME:localhost} {
+	tls internal
+
+	encode gzip zstd
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		-Server
+	}
+
+	handle /api/health* {
+		reverse_proxy web:3300
+	}
+
+	handle {
+		reverse_proxy web:3300 {
+			header_up X-Forwarded-Proto {scheme}
+			header_up X-Real-IP {remote_host}
+			health_uri /api/health
+			health_interval 30s
+			health_timeout 5s
+		}
+	}
 }

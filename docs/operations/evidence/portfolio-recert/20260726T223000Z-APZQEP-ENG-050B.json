@@ -1,0 +1,51 @@
+{
+  "programme": "APZQEP-ENG-050B",
+  "title": "Test Specifications Infrastructure Engineering",
+  "recordedAt": "2026-07-26T22:30:00Z",
+  "decision": "IMPLEMENTED / AWAITING OWNER ACCEPTANCE",
+  "authority": "Owner Engineering Programme Instruction APZQEP-ENG-050B",
+  "architecture": "APZQEP-ARCH-011 ACCEPTED",
+  "domainProgramme": "APZQEP-ENG-050A ACCEPTED",
+  "package": {
+    "name": "@apzhub/qep-test-specifications",
+    "version": "0.2.0"
+  },
+  "migrations": ["0083_apz_qep_test_specifications", "0084_apz_qep_test_specifications_rls"],
+  "apiBase": "/api/v1/qep/specifications",
+  "baselines": {
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN",
+    "verification": "1.0.0 CERTIFIED / FROZEN"
+  },
+  "deliverables": [
+    "packages/qep-test-specifications/",
+    "packages/qep-contracts/src/test-specification.ts",
+    "packages/config/drizzle/0083_apz_qep_test_specifications.sql",
+    "packages/config/drizzle/0084_apz_qep_test_specifications_rls.sql",
+    "packages/config/src/db/qep-test-specifications-schema.ts",
+    "packages/platform-services/src/services/qep/qep-test-specification-service-impl.ts",
+    "packages/platform-services/src/services/qep/create-qep-test-specification-platform-services.ts",
+    "apps/web/app/api/v1/qep/specifications/",
+    "docs/products/apzqep/test-specifications/engine/"
+  ],
+  "quality": {
+    "packageTestsPassed": 116,
+    "coverageLinesApprox": 99.22,
+    "coverageFunctions": 100,
+    "coverageBranchesApprox": 91.33,
+    "typecheck": "PASS"
+  },
+  "notAuthorised": [
+    "Workbench Architecture",
+    "Workbench Engineering",
+    "Certification",
+    "Evidence Engine",
+    "Coverage Engine",
+    "Impact Engine",
+    "AI",
+    "MCP",
+    "Execution",
+    "Test Cases"
+  ],
+  "stop": "APZQEP-ENG-050B IMPLEMENTED AWAITING OWNER ACCEPTANCE"
+}

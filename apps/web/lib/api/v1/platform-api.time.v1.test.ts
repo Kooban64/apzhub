@@ -326,7 +326,7 @@ describe("APZHUB-TIME-HTTP-001 Time HTTP API", () => {
       paths: Record<string, unknown>;
     };
     expect(spec.openapi.startsWith("3.1")).toBe(true);
-    expect(spec.info.version).toBe("1.10.0");
+    expect(spec.info.version).toBe("1.14.0");
     expect(spec.paths["/time/health"]).toBeTruthy();
     expect(spec.paths["/time/timesheets"]).toBeTruthy();
     expect(spec.paths["/time/entries"]).toBeTruthy();

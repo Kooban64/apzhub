@@ -1,7 +1,15 @@
 /**
  * Adapter-local canonical Workflow Engine metadata.
- * Maps to APZHUB Workflow management concepts without exposing raw n8n internals.
+ * Maps to the Workflow Information Model (docs/platform/workflow/WORKFLOW-INFORMATION-MODEL.md)
+ * without exposing raw n8n DTOs beyond the integration boundary.
  * Secrets, tokens, and execution payloads are never present.
+ *
+ * Mapping (foundation / metadata):
+ * - CanonicalWorkflowMetadata → Workflow (catalogue metadata)
+ * - CanonicalWorkflowTemplateMetadata → WorkflowTemplate
+ * - CanonicalCredentialMetadata → WorkflowCredential (refs only)
+ * - CanonicalVariableMetadata → WorkflowVariable (values never included)
+ * - CanonicalExecutionMetadata → WorkflowRun (metadata only; no payload)
  */
 
 export type CanonicalSupport = "supported" | "partial" | "not_supported";

@@ -1,0 +1,43 @@
+{
+  "programme": "APZQEP-ENG-020F",
+  "part": "1",
+  "title": "Requirements Relationship Engine — Domain Model and Business Rules",
+  "recordedAt": "2026-07-26T08:16:00Z",
+  "architecture": "APZQEP-ARCH-005 — ACCEPTED / CLOSED / COMPLETE",
+  "baseline": "APZQEP-ENG-020E — ACCEPTED / CLOSED / COMPLETE",
+  "state": "PART 1 DOMAIN COMPLETE",
+  "acceptance": "PROGRAMME NOT ACCEPTED — AWAITING PART 2 AUTHORISATION",
+  "package": {
+    "@apzhub/qep-requirements": "0.8.0"
+  },
+  "delivered": [
+    "RequirementsRelationship aggregate / Relationship entity",
+    "RelationshipTaxonomyDefinition (normative seven types)",
+    "Value objects (id, type, endpoint, direction, strength, criticality, classification, scope, lifecycle, semantic profile, rationale)",
+    "Policies (cycle, duplicate, taxonomy, supersession, semantic/rationale, endpoint, pin, scope, baseline interaction)",
+    "Pure domain service validateRelationshipForActivation",
+    "Domain event types/builders (no messaging infrastructure)",
+    "Comprehensive domain tests (27)",
+    "docs/products/apzqep/requirements/relationships/ Part 1 pack"
+  ],
+  "notDelivered": [
+    "persistence/migrations",
+    "repositories",
+    "application commands/queries",
+    "REST APIs",
+    "permissions/audit/search/observability runtime",
+    "Workbench UI",
+    "graph visualisation",
+    "Traceability / Verification / AI / MCP",
+    "ENG-020F Part 2+"
+  ],
+  "tests": {
+    "command": "pnpm --filter @apzhub/qep-requirements test",
+    "result": "PASS — relationship domain 27 tests; package suite green"
+  },
+  "typecheck": {
+    "command": "pnpm --filter @apzhub/qep-requirements typecheck",
+    "result": "PASS"
+  },
+  "stopRule": "No Part 2 (persistence, repositories, APIs, UI) until Owner issues explicit authorisation."
+}

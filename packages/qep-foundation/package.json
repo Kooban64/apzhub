@@ -1,0 +1,19 @@
+{
+  "name": "@apzhub/qep-foundation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZ QEP engineering foundation helpers (APZQEP-ENG-010) \u2014 registry/bootstrap only",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts packages/qep-foundation"
+  },
+  "dependencies": {
+    "@apzhub/qep-types": "workspace:*",
+    "@apzhub/qep-contracts": "workspace:*"
+  }
+}

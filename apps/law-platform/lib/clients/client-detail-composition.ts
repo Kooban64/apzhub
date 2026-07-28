@@ -1,6 +1,6 @@
-import { getSharedDocumentRepository } from "../persistence/repository-factory";
-import { getSharedInvoiceRepository } from "../persistence/repository-factory";
-import { getSharedMatterRepository } from "../persistence/repository-factory";
+import { getSharedInvoiceRepository } from "../billing/in-memory-invoice-repository";
+import { getSharedDocumentRepository } from "../documents/in-memory-document-repository";
+import { getSharedMatterRepository } from "../matters/in-memory-matter-repository";
 import {
   formatInvoiceAmount,
   invoiceDetailRoute,

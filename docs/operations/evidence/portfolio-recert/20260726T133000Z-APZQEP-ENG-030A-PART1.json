@@ -1,0 +1,39 @@
+{
+  "programme": "APZQEP-ENG-030A",
+  "part": "1",
+  "title": "Traceability Engine — Domain Model and Business Rules",
+  "recordedAt": "2026-07-26T13:30:00Z",
+  "architecture": "APZQEP-ARCH-007 — ACCEPTED / CLOSED / COMPLETE",
+  "state": "PART 1 IMPLEMENTED — AWAITING OWNER ACCEPTANCE",
+  "package": {
+    "@apzhub/qep-traceability": "0.1.0"
+  },
+  "delivered": [
+    "TraceLink aggregate",
+    "TraceEndpoint / TraceHistory / TraceMetadata entities",
+    "Value objects (id, type, direction, scope, strength, confidence, origin, authority, provenance, rationale, context, endpoint reference)",
+    "Normative Trace taxonomy (16 types)",
+    "Lifecycle draft→validated→approved→retired/superseded",
+    "Persistence-independent policies",
+    "Pure domain services",
+    "Domain event builders",
+    "Domain tests (27) + architecture boundaries"
+  ],
+  "notDelivered": [
+    "persistence",
+    "repositories",
+    "APIs",
+    "coverage calculations",
+    "impact engine",
+    "Workbench",
+    "AI",
+    "MCP",
+    "Part 2",
+    "Owner Acceptance of Part 1"
+  ],
+  "tests": {
+    "typecheck": "PASS",
+    "vitest": "PASS (27)"
+  },
+  "stopRule": "Await Owner Acceptance. Do not begin Part 2."
+}

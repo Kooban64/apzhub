@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: qep-audit
+name: Audit and Compliance
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Audit and Compliance (M21) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  product: apzqep
+  moduleCatalogueId: M21
+  slug: audit
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: stub
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Audit and Compliance
+    icon: flask-conical
+    route: /workspace/qep/audit
+    order: 210
+    permission: qep.audit.read
+  view:
+    title: Audit and Compliance
+    workspace: qep
+    route: /workspace/qep/audit
+    permission: qep.audit.read

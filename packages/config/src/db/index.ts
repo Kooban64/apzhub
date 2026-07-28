@@ -95,6 +95,13 @@ export {
   platformNotificationAudit,
 } from "./platform-notification-schema";
 export {
+  platformNotificationDeliverySchema,
+  platformNotificationIntent,
+  platformNotificationDeliveryRecord,
+  platformNotificationDeliveryTry,
+  platformNotificationInAppItem,
+} from "./platform-notification-delivery-schema";
+export {
   platformConfigurationSchema,
   platformConfigurationNamespace,
   platformConfigurationGroup,
@@ -154,6 +161,44 @@ export {
   platformMetricsRelationship,
   platformMetricsMetadata,
 } from "./platform-metrics-schema";
+export {
+  qepRequirementsSchema,
+  qepRequirement,
+  qepRequirementAudit,
+  qepRequirementLifecycleHistory,
+  qepRequirementContentVersion,
+  qepRequirementBaseline,
+  qepRequirementBaselineItem,
+  qepRequirementsRelationship,
+  qepRequirementsRelationshipHistory,
+  qepRequirementsRelationshipTaxonomy,
+} from "./qep-requirements-schema";
+export {
+  qepTraceabilitySchema,
+  qepTraceLink,
+  qepTraceLinkHistory,
+  qepTraceLinkTaxonomy,
+} from "./qep-traceability-schema";
+export {
+  qepVerificationSchema,
+  qepVerification,
+  qepVerificationHistory,
+} from "./qep-verification-schema";
+export {
+  qepTestSpecificationsSchema,
+  qepTestSpecification,
+  qepTestSpecificationVersion,
+  qepTestSpecificationRelationship,
+  qepTestSpecificationHistory,
+} from "./qep-test-specifications-schema";
+export {
+  qepTestPlansSchema,
+  qepTestPlan,
+  qepTestPlanItem,
+  qepTestPlanApproval,
+  qepTestPlanRevision,
+  qepTestPlanHistory,
+} from "./qep-test-plans-schema";
 export {
   platformAdminSchema,
   platformAdminModule,

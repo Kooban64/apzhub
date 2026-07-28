@@ -1,4 +1,3 @@
-import { isDevRegistrationAllowed } from "@apzhub/config";
 import { resolveSessionAuthorization } from "@apzhub/platform-authorization/server";
 import { createWorkbenchPermissionAdapter } from "@apzhub/workbench-framework";
 import { createAuthPermissionContextFromUser } from "@apzhub/workbench-framework/server";
@@ -20,7 +19,10 @@ export interface ResolveLawApiPermissionsInput {
   readonly permissions?: readonly string[];
 }
 
-/** Permission resolver — delegates to Platform AuthorizationService (M8-02). */
+/**
+ * Permission resolver — delegates to Platform AuthorizationService (M8-02).
+ * Always uses auth adapter mode (OBS-LAW-01) — no allow-all / `*` dev injection on Law API.
+ */
 export async function resolveLawApiPermissions(
   input: ResolveLawApiPermissionsInput = {},
 ): Promise<LawApiPermissionChecker> {
@@ -37,10 +39,6 @@ export async function resolveLawApiPermissions(
     permissions = [...authz.permissions];
   }
 
-  if ((permissions?.length ?? 0) === 0 && isDevRegistrationAllowed() && input.user) {
-    permissions = ["*"];
-  }
-
   const authContext = createAuthPermissionContextFromUser(
     input.user ? { id: input.user.userId } : null,
     {
@@ -50,9 +48,8 @@ export async function resolveLawApiPermissions(
   );
 
   const adapter = createWorkbenchPermissionAdapter({
+    mode: "auth",
     authContext,
-    nodeEnv: process.env.NODE_ENV,
-    allowDevRegistration: isDevRegistrationAllowed(),
   });
 
   const diagnostics = adapter.getDiagnostics?.();

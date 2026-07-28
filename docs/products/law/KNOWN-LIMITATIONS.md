@@ -14,9 +14,12 @@
 
 - Placeholder UX surfaces remain in places
 - Financial Engine extraction deferred (FIN-001)
-- OBS-LAW-01: M8 PermissionService deferred — legal permission keys may use dev adapter initially
-- OBS-LAW-02: Persistent activity/notification stores deferred
 - Auth tenant claim placeholder noted in readiness review
+
+## Resolved (Release 1.1)
+
+- OBS-LAW-01: Law authorization wiring — APZHUB-1.1-001 (**ACCEPTED**)
+- OBS-LAW-02: Durable platform activity/notification session stores — APZHUB-1.1-002; see `docs/releases/1.1/APZHUB-1.1-002/`
 
 ## Honesty rule
 

@@ -6,13 +6,11 @@ import {
   type ValidationResult,
 } from "@apzhub/legal-business-core";
 
-import {
-  getSharedClientRepository,
-  getSharedDocumentRepository,
-  getSharedMatterRepository,
-  getSharedTaskRepository,
-  getSharedTimeEntryRepository,
-} from "../persistence/repository-factory";
+import { getSharedClientRepository } from "../clients/in-memory-client-repository";
+import { getSharedDocumentRepository } from "../documents/in-memory-document-repository";
+import { getSharedMatterRepository } from "../matters/in-memory-matter-repository";
+import { getSharedTaskRepository } from "../tasks/in-memory-task-repository";
+import { getSharedTimeEntryRepository } from "../time/in-memory-time-entry-repository";
 import {
   CALENDAR_EVENT_STATUSES,
   type CalendarEventFormValues,

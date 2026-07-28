@@ -1,0 +1,51 @@
+{
+  "programme": "APZQEP-ENG-060A",
+  "title": "Test Plans Domain Engineering",
+  "recordedAt": "2026-07-27T15:55:00Z",
+  "status": "IMPLEMENTED / AWAITING ENGINEERING COMPLETION REVIEW (ECR)",
+  "classification": "Engineering Programme — Domain only",
+  "package": {
+    "name": "@apzhub/qep-test-plans",
+    "version": "0.1.0"
+  },
+  "baselines": {
+    "ARCH-013": "ACCEPTED / ARCHITECTURE BASELINED",
+    "OES-ENG-060A": "ACCEPTED / ENGINEERING SPECIFICATION BASELINED"
+  },
+  "pack": "docs/products/apzqep/test-plans/domain/",
+  "tests": {
+    "total": 62,
+    "passed": 62,
+    "failed": 0,
+    "typecheck": "PASS"
+  },
+  "coveragePackageScoped": {
+    "lines": 92.94,
+    "functions": 94.59,
+    "branches": 78.91,
+    "statements": 92.94,
+    "note": "Aspirational OES targets 95/95/90 not fully met on branches; behavioural suite complete — ECR to assess"
+  },
+  "exclusionsHonoured": [
+    "PostgreSQL",
+    "Redis",
+    "Repositories",
+    "Infrastructure",
+    "REST",
+    "API",
+    "Workbench",
+    "React",
+    "Next.js",
+    "Migrations",
+    "AI",
+    "MCP"
+  ],
+  "notAuthorised": [
+    "ECR execution without Owner authorisation",
+    "Owner Acceptance",
+    "Certification",
+    "Version Promotion",
+    "Freeze"
+  ],
+  "stopCondition": "APZQEP-ENG-060A IMPLEMENTED / AWAITING ECR"
+}

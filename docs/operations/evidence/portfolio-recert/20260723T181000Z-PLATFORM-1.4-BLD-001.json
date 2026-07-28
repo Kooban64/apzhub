@@ -1,0 +1,39 @@
+{
+  "programme": "Platform-1.4-BLD-001",
+  "title": "Platform 1.4 Build & Release Validation",
+  "classification": "BUILD_VALIDATION",
+  "baseline": "Platform 1.4",
+  "reference": ["Platform-1.4-REM-001", "Platform-1.4-OR-001", "ADR-0073"],
+  "timestamp": "2026-07-23T18:10:00Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER BUILD ACCEPTANCE",
+  "rootCause": {
+    "summary": "Shell NODE_ENV=development causes Next.js 16 /_global-error prerender useContext null",
+    "ownershipPrimary": "Environment",
+    "ownershipContributing": ["Framework"],
+    "platformOwned": false
+  },
+  "buildResults": {
+    "pnpmBuildWithNodeEnvDevelopment": "FAIL",
+    "envUnsetNodeEnvPnpmBuild": "PASS",
+    "nodeEnvTestWebBuild": "PASS"
+  },
+  "remediationPerformed": false,
+  "platformImplementationChanged": false,
+  "featureFlagDefault": "OFF",
+  "processLocalRuntimeRetained": true,
+  "newFunctionality": false,
+  "architectureChanges": false,
+  "qualityGates": {
+    "buildCorrectEnv": "PASS",
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "formatCheck": "PASS",
+    "affectedVitest": "PASS_60",
+    "certificationAffected": "PASS"
+  },
+  "pack": "docs/operations/platform-1.4-bld-001/",
+  "nextProgramme": "Platform-1.4-CERT-001",
+  "nextProgrammeStatus": "PROPOSED_BLOCKED",
+  "followOnBacklog": "Optional Repository/Tooling harden build script to unset NODE_ENV"
+}

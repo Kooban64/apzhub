@@ -1,0 +1,17 @@
+manifestSchemaVersion: "1.0"
+id: qep-github
+name: QEP GitHub Integration
+version: 0.1.0
+kind: integration
+
+metadata:
+  category: quality-engineering
+  description: GitHub Actions result ingest connector stub for APZ QEP (APZQEP-ENG-010). No connector implementation.
+  product: apzqep
+  ossFirst: true
+
+integration:
+  status: stub
+  capabilities: []
+  health:
+    selfReport: false

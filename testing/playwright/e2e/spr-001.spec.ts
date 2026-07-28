@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const DEV_EMAIL = "dev@apzhub.local";
-const DEV_PASSWORD = "DevPassword123!";
+import { signInDevUser } from "./auth-helpers";
 
 test.describe("SPR-001 acceptance", () => {
   test("login page renders without console errors", async ({ page }) => {
@@ -38,21 +37,7 @@ test.describe("SPR-001 acceptance", () => {
   });
 
   test("registration and desktop shell", async ({ page }) => {
-    await page.goto("/login");
-    await page.getByLabel("Email").fill(DEV_EMAIL);
-    await page.getByLabel("Password").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "Sign in" }).click();
-
-    try {
-      await expect(page).toHaveURL(/\/workspace\/home/, { timeout: 5000 });
-    } catch {
-      await page.goto("/register");
-      await page.getByLabel("Name").fill("Dev User");
-      await page.getByLabel("Email").fill(DEV_EMAIL);
-      await page.getByLabel("Password").fill(DEV_PASSWORD);
-      await page.getByRole("button", { name: "Register" }).click();
-      await expect(page).toHaveURL(/\/workspace\/home/);
-    }
+    await signInDevUser(page);
     await expect(page.getByRole("heading", { name: "Home" })).toBeVisible();
     await expect(page.getByText("APZHUB", { exact: true })).toBeVisible();
     await expect(page.getByLabel("Home workspace")).toBeVisible();
@@ -60,11 +45,7 @@ test.describe("SPR-001 acceptance", () => {
   });
 
   test("theme switching persists", async ({ page }) => {
-    await page.goto("/login");
-    await page.getByLabel("Email").fill(DEV_EMAIL);
-    await page.getByLabel("Password").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "Sign in" }).click();
-    await expect(page).toHaveURL(/\/workspace\/home/);
+    await signInDevUser(page);
 
     const html = page.locator("html");
     const before = await html.evaluate((el) => el.className);
@@ -80,10 +61,7 @@ test.describe("SPR-001 acceptance", () => {
   });
 
   test("sign out returns to login", async ({ page }) => {
-    await page.goto("/login");
-    await page.getByLabel("Email").fill(DEV_EMAIL);
-    await page.getByLabel("Password").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "Sign in" }).click();
+    await signInDevUser(page);
     await page.getByRole("button", { name: "Sign out" }).click();
     await expect(page).toHaveURL(/\/login/);
   });

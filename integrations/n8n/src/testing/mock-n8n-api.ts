@@ -80,16 +80,31 @@ export interface MockN8nApiOptions {
   readonly missVariables?: boolean;
 }
 
-function jsonResponse(body: unknown, status = 200): Response {
+function jsonResponse(
+  body: unknown,
+  status = 200,
+  extraHeaders?: Record<string, string>,
+): Response {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "x-n8n-version": "1.45.0",
+      ...extraHeaders,
+    },
   });
 }
 
 export function createMockN8nFetch(options: MockN8nApiOptions = {}): FetchFn {
   return async (input: string, init?: RequestInit) => {
     const url = input;
+    const parsed = new URL(url, "https://n8n.example.test");
+    const pathname = parsed.pathname;
+
+    if (pathname === "/healthz") {
+      return jsonResponse({ version: "1.45.0" }, 200);
+    }
+
     const headers = new Headers(init?.headers);
     const apiKey = headers.get("X-N8N-API-KEY");
     const auth = headers.get("Authorization");
@@ -98,10 +113,7 @@ export function createMockN8nFetch(options: MockN8nApiOptions = {}): FetchFn {
       return jsonResponse({ message: "Unauthorized" }, 401);
     }
 
-    const path = new URL(url, "https://n8n.example.test").pathname.replace(
-      /^\/api\/v1/,
-      "",
-    );
+    const path = pathname.replace(/^\/api\/v1/, "");
 
     if (path === "/workflows" || path.startsWith("/workflows?")) {
       return jsonResponse({ data: [MOCK_WORKFLOW], nextCursor: null });

@@ -1,0 +1,38 @@
+{
+  "programme": "APZQEP-ARCH-009",
+  "title": "Verification Capability Architecture",
+  "recordedAt": "2026-07-26T17:30:00Z",
+  "state": "IMPLEMENTED — AWAITING OWNER ACCEPTANCE",
+  "nature": "Architecture only — no implementation",
+  "revision": "1.0.0-arch",
+  "pack": "docs/products/apzqep/architecture/verification/",
+  "baselines": {
+    "Requirements": "1.0.0 CERTIFIED / FROZEN",
+    "Traceability": "1.0.0 CERTIFIED / FROZEN",
+    "ARCH-006": "ACCEPTED",
+    "TRACE-001": "ACCEPTED"
+  },
+  "deliverables": [
+    "VERIFICATION-ARCHITECTURE.md",
+    "ARCHITECTURE-OVERVIEW.md",
+    "DOMAIN-OWNERSHIP.md",
+    "VERIFICATION-MODEL.md",
+    "LIFECYCLE.md",
+    "GOVERNANCE.md",
+    "RELATIONSHIPS.md",
+    "WORKBENCH-PRINCIPLES.md",
+    "AI-CONSIDERATIONS.md",
+    "MCP-CONSIDERATIONS.md",
+    "ARCHITECTURE-DECISION-RECORDS.md",
+    "ARCHITECTURE-COMPLETION-REPORT.md",
+    "README.md"
+  ],
+  "notDelivered": [
+    "Domain packages",
+    "Persistence",
+    "APIs",
+    "Workbench",
+    "Owner Acceptance of ARCH-009"
+  ],
+  "stopRule": "Await Owner Acceptance. Do not begin Verification engineering."
+}

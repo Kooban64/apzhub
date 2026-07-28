@@ -137,6 +137,7 @@ export type {
   SupportArticleAuthor,
   SupportArticleRecipients,
   SupportArticleAttachment,
+  SupportArticleAttachmentContent,
   SupportSearchHitKind,
   SupportSearchHit,
   SupportSearchResult,

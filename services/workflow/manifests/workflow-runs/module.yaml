@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: workflow-runs
+name: Runs
+version: 0.1.0
+kind: module
+
+metadata:
+  category: workflow
+  description: Workflow Workbench — Runs view (APZHUB-PLATFORM-WORKFLOW-006).
+
+dependencies:
+  platform: []
+  services:
+    - workflow-service
+
+module:
+  category: workflow
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflow
+    parent: workflow
+    label: Runs
+    icon: play
+    route: /workspace/workflow/runs
+    order: 20
+    permission: workflow.runs.view
+  view:
+    title: Runs
+    workspace: workflow
+    route: /workspace/workflow/runs
+    permission: workflow.runs.view

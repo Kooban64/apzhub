@@ -1,0 +1,41 @@
+{
+  "programme": "APZHUB-QA-RECERT-002",
+  "title": "Residual Portfolio Certification Failure Analysis",
+  "classification": "QUALITY ANALYSIS",
+  "baseline": "1.2.0",
+  "timestampUtc": "20260721T125415Z",
+  "inputs": [
+    "20260721T120046Z-R12-QA-01-full-FAIL.json",
+    "20260721T120154Z-APZHUB-QA-CERT-001-SUMMARY.json"
+  ],
+  "preconditions": {
+    "APZHUB-QA-CERT-001": "ACCEPTED",
+    "certificationResult": "CERTIFICATION FAILED",
+    "orders1to6": "CLOSED"
+  },
+  "counts": {
+    "playwrightHard": 19,
+    "playwrightFlaky": 30,
+    "lint": 1,
+    "typecheck": 1,
+    "vitestFailed": 82,
+    "vitestPassed": 4929,
+    "unit": 28,
+    "integration": 7,
+    "regression": 47,
+    "rootCauses": 10,
+    "remediationGroups": 10,
+    "estimatedEngineeringProgrammes": 6
+  },
+  "pack": "docs/quality/residual-analysis/",
+  "engineeringPlan": "docs/quality/residual-analysis/ENGINEERING-PLAN.md",
+  "recommendation": "READY FOR OWNER REVIEW",
+  "stop": [
+    "no source changes",
+    "no ENG-0016",
+    "no Email SoR",
+    "no FIN-001",
+    "no Workflow Execute",
+    "no Release 1.3"
+  ]
+}

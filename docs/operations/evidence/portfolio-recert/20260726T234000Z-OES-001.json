@@ -1,0 +1,20 @@
+{
+  "programme": "OES-001",
+  "title": "Engineering Writing Standard",
+  "recordedAt": "2026-07-26T23:40:00Z",
+  "decision": "AUTHORISED",
+  "authority": "Owner Decision following OES-000 Freeze",
+  "path": "docs/engineering/oes/OES-001-Engineering-Writing-Standard.md",
+  "governs": [
+    "OES document language and voice",
+    "RFC 2119 keyword usage",
+    "PART / APPENDIX / COMPLETE.md pack layout",
+    "Cross-referencing, acceptance criteria, change history"
+  ],
+  "prerequisite": "OES-000 ACCEPTED / FROZEN",
+  "next": [
+    "Owner Acceptance of OES-001 to freeze",
+    "APZQEP-OES-ARCH-012 Parts 2-5 under OES-000 + OES-001"
+  ],
+  "notAuthorised": ["Workbench Engineering from incomplete OES-ARCH-012"]
+}

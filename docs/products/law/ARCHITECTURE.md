@@ -62,7 +62,7 @@ Not fully declared in reviewed event manifests (UNKNOWN beyond platform ENF cons
 
 ## Security model
 
-Platform AuthN · AuthZ (OBS-LAW-01) · legal permission keys · tenant isolation goals per readiness · trust controls per LAW-015.
+Platform AuthN · AuthZ (OBS-LAW-01 closed — APZHUB-1.1-001) · legal permission keys · tenant isolation goals per readiness · trust controls per LAW-015.
 
 ## Provisioning model
 
@@ -75,8 +75,8 @@ Law workbench modules · knowledge registration · outbox drafts · ENF hooks.
 ## Platform work still required
 
 - Product validation polish (readiness approved for product validation)
-- PermissionService production wiring observations (OBS-LAW-01)
-- Persistent activity/notification stores (OBS-LAW-02 session-only UX risk)
+- PermissionService production wiring — OBS-LAW-01 closed (APZHUB-1.1-001)
+- Persistent activity/notification stores — OBS-LAW-02 closed (APZHUB-1.1-002 durable platform session stores)
 - Financial Engine extraction deferred (FIN-001)
 - Placeholder UX surfaces remaining in places
 

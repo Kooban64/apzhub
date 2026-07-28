@@ -7,6 +7,7 @@ export * from "./identifiers";
 export * from "./common/context";
 export * from "./enums/catalogue";
 export * from "./domain/observability";
+export * from "./domain/alert-rule";
 export * from "./permissions/catalogue";
 export * from "./services/observe-service";
 export * from "./services/platform-gateway";

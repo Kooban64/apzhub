@@ -148,6 +148,15 @@ importers:
       '@apzhub/platform-security':
         specifier: workspace:*
         version: link:../../packages/platform-security
+      '@apzhub/search-integration':
+        specifier: workspace:*
+        version: link:../../packages/search-integration
+      '@apzhub/search-law':
+        specifier: workspace:*
+        version: link:../../packages/search-law
+      '@apzhub/search-orchestrator':
+        specifier: workspace:*
+        version: link:../../packages/search-orchestrator
       '@apzhub/shared':
         specifier: workspace:*
         version: link:../../packages/shared
@@ -218,6 +227,9 @@ importers:
       '@apzhub/admin-contracts':
         specifier: workspace:*
         version: link:../../packages/admin-contracts
+      '@apzhub/analytics-contracts':
+        specifier: workspace:*
+        version: link:../../packages/analytics-contracts
       '@apzhub/auth':
         specifier: workspace:*
         version: link:../../packages/auth
@@ -239,6 +251,9 @@ importers:
       '@apzhub/integration-kimai':
         specifier: workspace:*
         version: link:../../integrations/kimai
+      '@apzhub/integration-metabase':
+        specifier: workspace:*
+        version: link:../../integrations/metabase
       '@apzhub/integration-n8n':
         specifier: workspace:*
         version: link:../../integrations/n8n
@@ -305,15 +320,42 @@ importers:
       '@apzhub/platform-services':
         specifier: workspace:*
         version: link:../../packages/platform-services
+      '@apzhub/qep-contracts':
+        specifier: workspace:*
+        version: link:../../packages/qep-contracts
+      '@apzhub/qep-requirements':
+        specifier: workspace:*
+        version: link:../../packages/qep-requirements
+      '@apzhub/qep-test-plans':
+        specifier: workspace:*
+        version: link:../../packages/qep-test-plans
+      '@apzhub/qep-test-specifications':
+        specifier: workspace:*
+        version: link:../../packages/qep-test-specifications
+      '@apzhub/qep-traceability':
+        specifier: workspace:*
+        version: link:../../packages/qep-traceability
+      '@apzhub/qep-verification':
+        specifier: workspace:*
+        version: link:../../packages/qep-verification
       '@apzhub/reporting-contracts':
         specifier: workspace:*
         version: link:../../packages/reporting-contracts
+      '@apzhub/search-integration':
+        specifier: workspace:*
+        version: link:../../packages/search-integration
       '@apzhub/search-orchestrator':
         specifier: workspace:*
         version: link:../../packages/search-orchestrator
       '@apzhub/search-publication-admin':
         specifier: workspace:*
         version: link:../../packages/search-publication-admin
+      '@apzhub/search-qep':
+        specifier: workspace:*
+        version: link:../../packages/search-qep
+      '@apzhub/search-time':
+        specifier: workspace:*
+        version: link:../../packages/search-time
       '@apzhub/shared':
         specifier: workspace:*
         version: link:../../packages/shared
@@ -400,6 +442,15 @@ importers:
         specifier: workspace:*
         version: link:../../packages/testing-contracts
 
+  integrations/gitlab-ci:
+    dependencies:
+      '@apzhub/integration-sdk':
+        specifier: workspace:*
+        version: link:../../packages/integration-sdk
+      '@apzhub/testing-contracts':
+        specifier: workspace:*
+        version: link:../../packages/testing-contracts
+
   integrations/kimai:
     dependencies:
       '@apzhub/integration-sdk':
@@ -418,6 +469,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/search-contracts
 
+  integrations/metabase:
+    dependencies:
+      '@apzhub/integration-sdk':
+        specifier: workspace:*
+        version: link:../../packages/integration-sdk
+
   integrations/n8n:
     dependencies:
       '@apzhub/integration-sdk':
@@ -433,6 +490,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/platform-service-contracts
 
+  integrations/qep-github: {}
+
   integrations/zammad:
     dependencies:
       '@apzhub/integration-sdk':
@@ -447,6 +506,9 @@ importers:
       '@apzhub/command-framework':
         specifier: workspace:*
         version: link:../command-framework
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
       '@apzhub/event-notification-framework':
         specifier: workspace:*
         version: link:../event-notification-framework
@@ -459,6 +521,9 @@ importers:
       '@apzhub/workbench-framework':
         specifier: workspace:*
         version: link:../workbench-framework
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
       react:
         specifier: ^19.0.0
         version: 19.2.4
@@ -485,6 +550,8 @@ importers:
       drizzle-orm:
         specifier: '>=0.45.2'
         version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/analytics-contracts: {}
 
   packages/auth:
     dependencies:
@@ -598,9 +665,15 @@ importers:
       '@apzhub/command-framework':
         specifier: workspace:*
         version: link:../command-framework
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
       '@apzhub/workbench-framework':
         specifier: workspace:*
         version: link:../workbench-framework
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
       react:
         specifier: ^19.0.0
         version: 19.2.4
@@ -659,6 +732,8 @@ importers:
 
   packages/legal-business-core: {}
 
+  packages/lifecycle-engine: {}
+
   packages/metrics-contracts: {}
 
   packages/metrics-core:
@@ -689,6 +764,18 @@ importers:
       '@apzhub/notification-contracts':
         specifier: workspace:*
         version: link:../notification-contracts
+
+  packages/notification-delivery-persistence:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/notification-contracts':
+        specifier: workspace:*
+        version: link:../notification-contracts
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
 
   packages/notification-persistence:
     dependencies:
@@ -886,6 +973,9 @@ importers:
       '@apzhub/admin-persistence':
         specifier: workspace:*
         version: link:../admin-persistence
+      '@apzhub/analytics-contracts':
+        specifier: workspace:*
+        version: link:../analytics-contracts
       '@apzhub/config':
         specifier: workspace:*
         version: link:../config
@@ -922,12 +1012,18 @@ importers:
       '@apzhub/integration-github-actions':
         specifier: workspace:*
         version: link:../../integrations/github-actions
+      '@apzhub/integration-gitlab-ci':
+        specifier: workspace:*
+        version: link:../../integrations/gitlab-ci
       '@apzhub/integration-kimai':
         specifier: workspace:*
         version: link:../../integrations/kimai
       '@apzhub/integration-meilisearch':
         specifier: workspace:*
         version: link:../../integrations/meilisearch
+      '@apzhub/integration-metabase':
+        specifier: workspace:*
+        version: link:../../integrations/metabase
       '@apzhub/integration-n8n':
         specifier: workspace:*
         version: link:../../integrations/n8n
@@ -955,6 +1051,9 @@ importers:
       '@apzhub/notification-core':
         specifier: workspace:*
         version: link:../notification-core
+      '@apzhub/notification-delivery-persistence':
+        specifier: workspace:*
+        version: link:../notification-delivery-persistence
       '@apzhub/notification-persistence':
         specifier: workspace:*
         version: link:../notification-persistence
@@ -973,6 +1072,24 @@ importers:
       '@apzhub/platform-service-contracts':
         specifier: workspace:*
         version: link:../platform-service-contracts
+      '@apzhub/qep-contracts':
+        specifier: workspace:*
+        version: link:../qep-contracts
+      '@apzhub/qep-requirements':
+        specifier: workspace:*
+        version: link:../qep-requirements
+      '@apzhub/qep-test-plans':
+        specifier: workspace:*
+        version: link:../qep-test-plans
+      '@apzhub/qep-test-specifications':
+        specifier: workspace:*
+        version: link:../qep-test-specifications
+      '@apzhub/qep-traceability':
+        specifier: workspace:*
+        version: link:../qep-traceability
+      '@apzhub/qep-verification':
+        specifier: workspace:*
+        version: link:../qep-verification
       '@apzhub/reporting-contracts':
         specifier: workspace:*
         version: link:../reporting-contracts
@@ -1003,6 +1120,101 @@ importers:
       '@apzhub/workflow-persistence':
         specifier: workspace:*
         version: link:../workflow-persistence
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/qep-contracts:
+    dependencies:
+      '@apzhub/qep-types':
+        specifier: workspace:*
+        version: link:../qep-types
+
+  packages/qep-foundation:
+    dependencies:
+      '@apzhub/qep-contracts':
+        specifier: workspace:*
+        version: link:../qep-contracts
+      '@apzhub/qep-types':
+        specifier: workspace:*
+        version: link:../qep-types
+
+  packages/qep-requirements:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/lifecycle-engine':
+        specifier: workspace:*
+        version: link:../lifecycle-engine
+      '@apzhub/qep-contracts':
+        specifier: workspace:*
+        version: link:../qep-contracts
+      '@apzhub/qep-types':
+        specifier: workspace:*
+        version: link:../qep-types
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/qep-test-plans:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/qep-contracts':
+        specifier: workspace:*
+        version: link:../qep-contracts
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/qep-test-specifications:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/qep-contracts':
+        specifier: workspace:*
+        version: link:../qep-contracts
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/qep-traceability:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/qep-contracts':
+        specifier: workspace:*
+        version: link:../qep-contracts
+      '@apzhub/qep-types':
+        specifier: workspace:*
+        version: link:../qep-types
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/qep-types: {}
+
+  packages/qep-ui:
+    dependencies:
+      '@apzhub/qep-types':
+        specifier: workspace:*
+        version: link:../qep-types
+
+  packages/qep-verification:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      '@apzhub/qep-contracts':
+        specifier: workspace:*
+        version: link:../qep-contracts
+      '@apzhub/qep-types':
+        specifier: workspace:*
+        version: link:../qep-types
       drizzle-orm:
         specifier: '>=0.45.2'
         version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
@@ -1043,6 +1255,21 @@ importers:
       '@apzhub/search-contracts':
         specifier: workspace:*
         version: link:../search-contracts
+
+  packages/search-law:
+    dependencies:
+      '@apzhub/legal-business-core':
+        specifier: workspace:*
+        version: link:../legal-business-core
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../platform-service-contracts
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../search-contracts
+      '@apzhub/search-integration':
+        specifier: workspace:*
+        version: link:../search-integration
 
   packages/search-orchestrator:
     dependencies:
@@ -1085,6 +1312,18 @@ importers:
       '@apzhub/search-orchestrator':
         specifier: workspace:*
         version: link:../search-orchestrator
+
+  packages/search-qep:
+    dependencies:
+      '@apzhub/qep-contracts':
+        specifier: workspace:*
+        version: link:../qep-contracts
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../search-contracts
+      '@apzhub/search-integration':
+        specifier: workspace:*
+        version: link:../search-integration
 
   packages/search-reporting:
     dependencies:
@@ -1130,6 +1369,18 @@ importers:
       '@apzhub/testing-contracts':
         specifier: workspace:*
         version: link:../testing-contracts
+
+  packages/search-time:
+    dependencies:
+      '@apzhub/platform-service-contracts':
+        specifier: workspace:*
+        version: link:../platform-service-contracts
+      '@apzhub/search-contracts':
+        specifier: workspace:*
+        version: link:../search-contracts
+      '@apzhub/search-integration':
+        specifier: workspace:*
+        version: link:../search-integration
 
   packages/shared:
     dependencies:
@@ -1661,11 +1912,11 @@ packages:
 
   '@esbuild-kit/core-utils@3.3.2':
     resolution: {integrity: sha512-sPRAnw9CdSsRmEtnsl2WXWdyquogVpB3yZ3dgwJfe8zrOzTsV7cJvmwrKVa+0ma5BoiGJ+BoqkMvawbayKUsqQ==}
-    deprecated: 'Merged into tsx: https://tsx.is'
+    deprecated: 'Merged into tsx: https://tsx.hirok.io'
 
   '@esbuild-kit/esm-loader@2.6.5':
     resolution: {integrity: sha512-FxEMIkJKnodyA1OaCUoEvbYRkoZlLZ4d/eXFu9Fh8CbBBgP5EmZxrfTRyN0qpXZ4vOvqnE5YdRdcrmUUXuU+dA==}
-    deprecated: 'Merged into tsx: https://tsx.is'
+    deprecated: 'Merged into tsx: https://tsx.hirok.io'
 
   '@esbuild/aix-ppc64@0.25.12':
     resolution: {integrity: sha512-Hhmwd6CInZ3dwpuGTF8fJG6yoWmsToE+vYgD4nytZVxcu1ulHpUQRAB1UJ8+N1Am3Mz4+xOByoQoSZf4D+CpkA==}

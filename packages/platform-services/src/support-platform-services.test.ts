@@ -497,7 +497,7 @@ async function seedSupportMappings(store: InMemoryEntityMappingStore) {
 
 describe("OSS-110-10 package version", () => {
   it("bumps platform-services to 0.26.1", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.26.1");
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.32.0");
   });
 });
 
@@ -959,5 +959,42 @@ describe("Support provider failure translation", () => {
     await expect(
       bundle.support.listSupportRequests(TEST_SERVICE_CONTEXT),
     ).rejects.toBeInstanceOf(PlatformServiceError);
+  });
+});
+
+describe("Support Event Bus publish (APZHUB-1.1-003)", () => {
+  it("publishes domain events on create, assign, and close", async () => {
+    const registry = new ProviderRegistry();
+    registerZammadProviders({ registry, zammadCore: createMockZammadCore() as never });
+    const mappingStore = new InMemoryEntityMappingStore();
+    const ids = await seedSupportMappings(mappingStore);
+    const published: string[] = [];
+    const bundle = createPlatformServices({
+      registry,
+      mappingStore,
+      domainEventPublisher: {
+        publish(envelope) {
+          published.push(envelope.eventId);
+          return { ok: true, envelopeId: envelope.envelopeId };
+        },
+      },
+    });
+
+    const created = await bundle.support.createSupportRequest(TEST_SERVICE_CONTEXT, {
+      title: "VPN down",
+      groupId: ids.groupId,
+      requesterId: ids.requesterId,
+      priority: "normal",
+    });
+    expect(created.id.startsWith("sreq_")).toBe(true);
+
+    await bundle.support.assignSupportRequest(TEST_SERVICE_CONTEXT, created.id, {
+      assigneeId: ids.assigneeId,
+    });
+    await bundle.support.closeSupportRequest(TEST_SERVICE_CONTEXT, created.id);
+
+    expect(published).toContain("support.request.created");
+    expect(published).toContain("support.request.assigned");
+    expect(published).toContain("support.request.closed");
   });
 });

@@ -216,6 +216,20 @@ export class RequestPipeline {
         if (decision.effect === "deny") {
           throw denialToError(decision, context.correlationId);
         }
+
+        // Propagate matched grants into context so domain services that also
+        // evaluate ctx.permissions (e.g. Analytics) see pipeline-authorised keys.
+        // HTTP builds ServiceRequestContext with permissions: [] by design.
+        if (decision.matchedPermissions && decision.matchedPermissions.length > 0) {
+          const merged = new Set([
+            ...context.permissions,
+            ...decision.matchedPermissions,
+          ]);
+          context = {
+            ...context,
+            permissions: [...merged],
+          };
+        }
       }
 
       const invokeArgs =

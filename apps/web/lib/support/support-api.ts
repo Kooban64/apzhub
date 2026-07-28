@@ -4,10 +4,15 @@
  */
 
 import { SupportApiError } from "./errors";
+import {
+  publishSupportArticleClientEvent,
+  publishSupportRequestClientEvent,
+} from "./support-client-event-bridge";
 import type {
   CreateCustomerReplyInput,
   CreateGroupInput,
   CreateInternalNoteInput,
+  SupportArticleAttachmentContent,
   CreateOrganizationInput,
   CreateSupportRequestInput,
   GroupListParams,
@@ -201,7 +206,18 @@ export async function createSupportRequest(
   input: CreateSupportRequestInput,
   options?: SupportApiRequestOptions,
 ): Promise<SupportDataResult<SupportRequest>> {
-  return mutateData<SupportRequest>("/support-requests", "POST", input, options);
+  const result = await mutateData<SupportRequest>(
+    "/support-requests",
+    "POST",
+    input,
+    options,
+  );
+  publishSupportRequestClientEvent(
+    "support.request.created",
+    result.data,
+    result.meta?.correlationId ?? options?.correlationId,
+  );
+  return result;
 }
 
 export async function updateSupportRequest(
@@ -209,36 +225,54 @@ export async function updateSupportRequest(
   input: UpdateSupportRequestInput,
   options?: SupportApiRequestOptions,
 ): Promise<SupportDataResult<SupportRequest>> {
-  return mutateData<SupportRequest>(
+  const result = await mutateData<SupportRequest>(
     `/support-requests/${supportRequestId}`,
     "PATCH",
     input,
     options,
   );
+  publishSupportRequestClientEvent(
+    "support.request.updated",
+    result.data,
+    result.meta?.correlationId ?? options?.correlationId,
+  );
+  return result;
 }
 
 export async function closeSupportRequest(
   supportRequestId: string,
   options?: SupportApiRequestOptions,
 ): Promise<SupportDataResult<SupportRequest>> {
-  return mutateData<SupportRequest>(
+  const result = await mutateData<SupportRequest>(
     `/support-requests/${supportRequestId}/close`,
     "POST",
     {},
     options,
   );
+  publishSupportRequestClientEvent(
+    "support.request.closed",
+    result.data,
+    result.meta?.correlationId ?? options?.correlationId,
+  );
+  return result;
 }
 
 export async function reopenSupportRequest(
   supportRequestId: string,
   options?: SupportApiRequestOptions,
 ): Promise<SupportDataResult<SupportRequest>> {
-  return mutateData<SupportRequest>(
+  const result = await mutateData<SupportRequest>(
     `/support-requests/${supportRequestId}/reopen`,
     "POST",
     {},
     options,
   );
+  publishSupportRequestClientEvent(
+    "support.request.updated",
+    result.data,
+    result.meta?.correlationId ?? options?.correlationId,
+  );
+  return result;
 }
 
 export async function changeSupportRequestState(
@@ -272,12 +306,18 @@ export async function assignSupportRequestOwner(
   assigneeId: string,
   options?: SupportApiRequestOptions,
 ): Promise<SupportDataResult<SupportRequest>> {
-  return mutateData<SupportRequest>(
+  const result = await mutateData<SupportRequest>(
     `/support-requests/${supportRequestId}/owner`,
     "POST",
     { assigneeId },
     options,
   );
+  publishSupportRequestClientEvent(
+    "support.request.assigned",
+    result.data,
+    result.meta?.correlationId ?? options?.correlationId,
+  );
+  return result;
 }
 
 export async function removeSupportRequestOwner(
@@ -337,12 +377,18 @@ export async function createInternalNote(
   input: CreateInternalNoteInput,
   options?: SupportApiRequestOptions,
 ): Promise<SupportDataResult<SupportArticle>> {
-  return mutateData<SupportArticle>(
+  const result = await mutateData<SupportArticle>(
     `/support-requests/${supportRequestId}/articles/notes`,
     "POST",
     input,
     options,
   );
+  publishSupportArticleClientEvent(
+    result.data,
+    supportRequestId,
+    result.meta?.correlationId ?? options?.correlationId,
+  );
+  return result;
 }
 
 export async function createCustomerReply(
@@ -350,10 +396,28 @@ export async function createCustomerReply(
   input: CreateCustomerReplyInput,
   options?: SupportApiRequestOptions,
 ): Promise<SupportDataResult<SupportArticle>> {
-  return mutateData<SupportArticle>(
+  const result = await mutateData<SupportArticle>(
     `/support-requests/${supportRequestId}/articles/replies`,
     "POST",
     input,
+    options,
+  );
+  publishSupportArticleClientEvent(
+    result.data,
+    supportRequestId,
+    result.meta?.correlationId ?? options?.correlationId,
+  );
+  return result;
+}
+
+export async function downloadSupportAttachment(
+  supportRequestId: string,
+  articleId: string,
+  attachmentId: string,
+  options?: SupportApiRequestOptions,
+): Promise<SupportDataResult<SupportArticleAttachmentContent>> {
+  return getData<SupportArticleAttachmentContent>(
+    `/support-requests/${supportRequestId}/articles/${articleId}/attachments/${attachmentId}`,
     options,
   );
 }

@@ -1,0 +1,134 @@
+manifestSchemaVersion: "1.0"
+id: qep-requirements
+name: Requirements
+version: 1.0.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Requirements (M03) for APZ QEP — requirement relationships Workbench UI. APZQEP-ENG-020F Part 3 IMPLEMENTED AWAITING OWNER ACCEPTANCE."
+  product: apzqep
+  moduleCatalogueId: M03
+  slug: requirements
+  programme: APZQEP-ENG-020F
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+  packages:
+    - "@apzhub/qep-requirements"
+    - "@apzhub/qep-contracts"
+    - "@apzhub/lifecycle-engine"
+    - "@apzhub/search-qep"
+
+module:
+  category: quality-engineering
+  status: implemented-awaiting-acceptance
+
+permissions:
+  - id: qep.requirements.view
+    label: View Requirements
+  - id: qep.requirements.create
+    label: Create Requirements
+  - id: qep.requirements.edit
+    label: Edit Requirements
+  - id: qep.requirements.delete
+    label: Delete Requirements
+  - id: qep.requirements.submit
+    label: Submit Requirement
+  - id: qep.requirements.review
+    label: Review Requirement
+  - id: qep.requirements.approve
+    label: Approve Requirement
+  - id: qep.requirements.reject
+    label: Reject Requirement
+  - id: qep.requirements.implement
+    label: Implement Requirement
+  - id: qep.requirements.verify
+    label: Verify Requirement
+  - id: qep.requirements.deprecate
+    label: Deprecate Requirement
+  - id: qep.requirements.archive
+    label: Archive Requirement
+  - id: qep.requirements.baseline
+    label: Baseline Requirements
+  - id: qep.requirements.export
+    label: Export Requirements
+  - id: qep.requirements.import
+    label: Import Requirements
+  - id: qep.requirements.versions.history
+    label: View Requirement Version History
+  - id: qep.requirements.versions.view
+    label: View Requirement Content Versions
+  - id: qep.requirements.versions.compare
+    label: Compare Requirement Content Versions
+  - id: qep.requirements.versions.verify
+    label: Verify Requirement Content Version Integrity
+  - id: qep.requirements.baselines.view
+    label: View Requirement Baselines
+  - id: qep.requirements.baselines.create
+    label: Create Requirement Baselines
+  - id: qep.requirements.baselines.modify
+    label: Modify Draft Requirement Baselines
+  - id: qep.requirements.baselines.lock
+    label: Lock Requirement Baselines
+  - id: qep.requirements.baselines.archive
+    label: Archive Requirement Baselines
+  - id: qep.requirements.baselines.compare
+    label: Compare Requirement Baselines
+  - id: qep.requirements.baselines.verify
+    label: Verify Requirement Baseline Integrity
+  - id: qep.requirements.relationships.view
+    label: View Requirement Relationships
+  - id: qep.requirements.relationships.create
+    label: Create Requirement Relationships
+  - id: qep.requirements.relationships.modify
+    label: Modify Requirement Relationships
+  - id: qep.requirements.relationships.transition
+    label: Transition Requirement Relationships
+  - id: qep.requirements.relationships.retire
+    label: Retire Requirement Relationships
+  - id: qep.requirements.relationships.taxonomy.administer
+    label: Administer Requirement Relationship Taxonomy
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Requirements
+    icon: flask-conical
+    route: /workspace/qep/requirements
+    order: 30
+    permission: qep.requirements.view
+  view:
+    title: Requirements
+    workspace: qep
+    route: /workspace/qep/requirements
+    permission: qep.requirements.view
+  additionalViews:
+    - id: qep-requirements-baselines
+      title: Baselines
+      workspace: qep
+      route: /workspace/qep/requirements/baselines
+      permission: qep.requirements.baselines.view
+      navigation:
+        level: sidebar
+        parent: qep-requirements
+        label: Baselines
+        icon: git-branch
+        order: 31
+        permission: qep.requirements.baselines.view
+    - id: qep-requirements-relationships
+      title: Relationships
+      workspace: qep
+      route: /workspace/qep/requirements/relationships
+      permission: qep.requirements.relationships.view
+      navigation:
+        level: sidebar
+        parent: qep-requirements
+        label: Relationships
+        icon: link-2
+        order: 32
+        permission: qep.requirements.relationships.view

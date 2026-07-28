@@ -1,19 +1,25 @@
 /**
  * Bootstrap Search Publication Administration (APZSEARCH-017).
- * Does not modify platform-services or Search Orchestrator internals.
+ * Platform-1.3-ENG-001: shares orchestration runtime with product composition wiring.
  */
 
-import { getDb } from "@apzhub/config/db";
 import {
   createSearchPublicationAdmin,
   type SearchPublicationAdminFramework,
 } from "@apzhub/search-publication-admin";
-import { createProductionSearchOrchestration } from "@apzhub/search-orchestrator";
+
+import {
+  getSearchCompositionRegistration,
+  getSearchPublicationRuntime,
+  isSearchCompositionFullyRegisteredForLiveDrain,
+  resetSearchPublicationRuntimeForTests,
+} from "./publication-runtime";
 
 let cached: SearchPublicationAdminFramework | null = null;
 
 export function resetSearchPublicationAdminForTests(): void {
   cached = null;
+  resetSearchPublicationRuntimeForTests();
 }
 
 export function setSearchPublicationAdminForTests(
@@ -25,21 +31,16 @@ export function setSearchPublicationAdminForTests(
 export async function getSearchPublicationAdmin(): Promise<SearchPublicationAdminFramework> {
   if (cached) return cached;
 
-  if (process.env.NODE_ENV === "test") {
-    cached = createSearchPublicationAdmin({
-      allowInMemoryOrchestration: true,
-      env: { APZHUB_SEARCH_ORCHESTRATION_ENABLED: "true" },
-    });
-    return cached;
-  }
-
-  const runtime = createProductionSearchOrchestration({
-    postgresDb: getDb(),
-    env: process.env,
-  });
+  const runtime = getSearchPublicationRuntime(process.env);
+  const registration = getSearchCompositionRegistration();
   cached = createSearchPublicationAdmin({
     runtime,
-    compositionRegistered: true,
+    compositionRegistered:
+      isSearchCompositionFullyRegisteredForLiveDrain() ||
+      registration.time ||
+      registration.law ||
+      registration.projects ||
+      process.env.NODE_ENV === "test",
   });
   return cached;
 }

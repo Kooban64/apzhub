@@ -1,0 +1,90 @@
+{
+  "programme": "APZQEP-ARCH-005",
+  "title": "Requirements Relationship Architecture",
+  "activity": "Architecture refinement and finalisation",
+  "recordedAt": "2026-07-26T07:30:00Z",
+  "documentRevision": "1.1.0-arch",
+  "status": "READY FOR OWNER ARCHITECTURE ACCEPTANCE REVIEW",
+  "pack": "docs/products/apzqep/architecture/requirements-relationship/",
+  "authoritativeSpecification": "docs/products/apzqep/architecture/requirements-relationship/REQUIREMENTS-RELATIONSHIP-ARCHITECTURE.md",
+  "engineeringBaseline": {
+    "latestAccepted": "APZQEP-ENG-020E",
+    "status": "ACCEPTED / CLOSED / COMPLETE",
+    "requirementsModule": "PRODUCTION READY"
+  },
+  "eng020F": {
+    "phase": "PLANNING",
+    "implementation": "NOT AUTHORISED"
+  },
+  "filesChanged": [
+    "docs/products/apzqep/architecture/requirements-relationship/README.md",
+    "docs/products/apzqep/architecture/requirements-relationship/REQUIREMENTS-RELATIONSHIP-ARCHITECTURE.md",
+    "docs/products/apzqep/architecture/requirements-relationship/OWNER-ACCEPTANCE.md",
+    "docs/products/apzqep/architecture/README.md",
+    "docs/foundation/DOCUMENT-MAP.md",
+    "docs/foundation/PROJECT-INDEX.md",
+    "docs/foundation/CURRENT-MILESTONE.md",
+    "docs/foundation/ACTIVE-BACKLOG.md",
+    "docs/products/apzqep/README.md",
+    "docs/operations/evidence/portfolio-recert/README.md",
+    "docs/operations/evidence/portfolio-recert/20260726T073000Z-APZQEP-ARCH-005.json",
+    "scripts/apzqep-arch-005-relationship-architecture-audit.mjs",
+    "package.json"
+  ],
+  "sectionsAdded": [
+    "Relationship Behaviour Model",
+    "Relationship Strength",
+    "Relationship Criticality",
+    "Relationship Classification",
+    "Relationship Scope",
+    "Relationship Semantic Profile",
+    "Taxonomy Governance",
+    "Graph Integrity and Conflict Handling",
+    "Baseline and Certification clarifications",
+    "Traceability clarifications",
+    "AI-Assisted Relationship Analysis",
+    "Implementation Neutrality"
+  ],
+  "decisionsPreserved": [
+    "Requirements ownership of Relationship SoR",
+    "Typed taxonomy with normative types",
+    "Directed relationships with symmetric canonicalisation for conflicts_with",
+    "Lifecycle draft/active/deprecated/retired with no ordinary deletion",
+    "ENG-020D Content Version immutability",
+    "ENG-020E Baseline immutability and membership fingerprint independence",
+    "Traceability as downstream consumer",
+    "Platform 1.4 boundaries",
+    "Tenant isolation",
+    "ENG-020F not authorised for implementation"
+  ],
+  "prohibitedImplementationConfirmedAbsent": [
+    "No ENG-020F code",
+    "No migrations",
+    "No packages",
+    "No APIs",
+    "No UI",
+    "No persistence",
+    "No repositories",
+    "No runtime permissions",
+    "No Traceability/Verification/AI/MCP implementation"
+  ],
+  "validation": {
+    "commands": [
+      "pnpm audit:qep-arch-005-relationships",
+      "pnpm audit:qep-requirements-baselines",
+      "scan for ENG-020F implementation claims / relationship domain paths"
+    ],
+    "results": {
+      "audit:qep-arch-005-relationships": "PASS",
+      "audit:qep-requirements-baselines": "PASS",
+      "forbiddenImplementationPaths": "ABSENT",
+      "unrelatedFailures": "none observed in ARCH-005 validation scope"
+    }
+  },
+  "knownLimitations": [
+    "Architecture only — no ENG-020F engineering",
+    "No formal WCAG or runtime tests apply to this architecture programme",
+    "Owner Architecture Acceptance not yet recorded"
+  ],
+  "recommendation": "READY FOR OWNER ARCHITECTURE ACCEPTANCE REVIEW"
+}

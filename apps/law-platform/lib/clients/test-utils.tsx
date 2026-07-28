@@ -12,7 +12,7 @@ import { createAppActivityTimelineContext } from "../create-app-activity-timelin
 import { createAppEventNotificationContext } from "../create-app-event-notification-context";
 import { ClientWorkflowProvider } from "./client-workflow-context";
 import { ClientWorkflowService } from "./client-workflow-service";
-import { getSharedClientRepository } from "../persistence/repository-factory";
+import { getSharedClientRepository } from "./in-memory-client-repository";
 
 const activityTimelineBundle = sampleActivityTimelineHydrationBundle();
 const activityTimelineContext =

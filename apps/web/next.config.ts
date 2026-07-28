@@ -7,6 +7,8 @@ import { withSecurityHeaders } from "./lib/security-headers";
 loadEnv({ path: path.resolve(__dirname, "../../.env") });
 
 const nextConfig: NextConfig = withSecurityHeaders({
+  // OPS-002 A1 — enables slim production container images (no user-facing behaviour change)
+  output: "standalone",
   transpilePackages: [
     "@apzhub/activity-timeline-framework",
     "@apzhub/auth",

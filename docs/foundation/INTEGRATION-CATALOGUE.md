@@ -156,14 +156,15 @@ See [026](../026-integration-sdk-adapter-framework-integration-manifest-specific
 
 ### Certified / frozen adapters on disk
 
-| Package                              | Version   | Role                                                                                   |
-| ------------------------------------ | --------- | -------------------------------------------------------------------------------------- |
-| `@apzhub/integration-plane`          | **0.6.0** | Projects Reference Adapter (Wave 1)                                                    |
-| `@apzhub/integration-zammad`         | **0.6.0** | Support adapter (Wave 2 CERTIFIED_WITH_LIMITATIONS)                                    |
-| `@apzhub/integration-meilisearch`    | **0.1.0** | Search Reference Adapter                                                               |
-| `@apzhub/integration-n8n`            | **0.1.0** | Workflow Engine Reference Adapter (frozen)                                             |
-| `@apzhub/integration-kimai`          | **0.2.0** | Kimai CE domain adapter (APZHUB-INTEGRATION-KIMAI-002 **ACCEPTED** · CERTIFIED_DOMAIN) |
-| `@apzhub/integration-github-actions` | **0.1.0** | CI/CD Reference Adapter (frozen)                                                       |
-| `@apzhub/integration-search-sdk`     | **0.1.0** | Search Integration SDK                                                                 |
+| Package                              | Version   | Role                                                                                                  |
+| ------------------------------------ | --------- | ----------------------------------------------------------------------------------------------------- |
+| `@apzhub/integration-plane`          | **0.6.0** | Projects Reference Adapter (Wave 1)                                                                   |
+| `@apzhub/integration-zammad`         | **0.6.0** | Support adapter (Wave 2 CERTIFIED_WITH_LIMITATIONS)                                                   |
+| `@apzhub/integration-meilisearch`    | **0.1.0** | Search Reference Adapter                                                                              |
+| `@apzhub/integration-n8n`            | **0.1.0** | Workflow Engine Reference Adapter (frozen)                                                            |
+| `@apzhub/integration-kimai`          | **0.2.0** | Kimai CE domain adapter (APZHUB-INTEGRATION-KIMAI-002 **ACCEPTED** · CERTIFIED_DOMAIN)                |
+| `@apzhub/integration-metabase`       | **0.1.0** | Metabase Analytics foundation (APZHUB-INTEGRATION-METABASE-001 · CERTIFIED_FOUNDATION · **ACCEPTED**) |
+| `@apzhub/integration-github-actions` | **0.1.0** | CI/CD Reference Adapter (frozen)                                                                      |
+| `@apzhub/integration-search-sdk`     | **0.1.0** | Search Integration SDK                                                                                |
 
 See [OSS-100-11 Completion Report](../sprint/OSS-100-11-completion-report.md) · [Freeze Notice](../architecture/APZHUB-Integration-SDK-Architecture-Freeze-Notice.md) · [Reference Standard](../architecture/APZHUB-Integration-SDK-Reference-Standard.md) · [Inventory](./INTEGRATION-PRODUCT-CAPABILITY-INVENTORY.md).

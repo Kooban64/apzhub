@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "evidenceId": "20260727T165200Z-APZQEP-ENG-060A-ACCEPTANCE",
+  "recordedAt": "2026-07-27T16:52:00.000Z",
+  "programme": "APZQEP-ENG-060A",
+  "capability": "Test Plans Domain Engineering",
+  "package": "@apzhub/qep-test-plans",
+  "packageVersion": "0.1.0",
+  "reviewType": "OWNER_ACCEPTANCE_REVIEW",
+  "decision": "ACCEPTED / APPROVED / PROGRAMME CLOSED",
+  "statusAfterAcceptance": "READY_FOR_DOMAIN_CERTIFICATION",
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "prerequisites": {
+    "architecture": "APZQEP-ARCH-013 ACCEPTED / ARCHITECTURE BASELINED",
+    "engineeringSpecification": "APZQEP-OES-ENG-060A ACCEPTED / ENGINEERING SPECIFICATION BASELINED",
+    "ecr": "PASS",
+    "ecrEvidence": "20260727T163600Z-APZQEP-ENG-060A-ECR-PASS.json"
+  },
+  "checklist": {
+    "engineeringSpecificationCompliance": "PASS",
+    "architectureFidelity": "PASS",
+    "aggregateBehaviour": "PASS",
+    "lifecycleImplementation": "PASS",
+    "domainPolicies": "PASS",
+    "versioningAndSupersede": "PASS",
+    "domainEvents": "PASS",
+    "businessInvariants": "PASS",
+    "ecr": "PASS",
+    "coverageJustification": "ACCEPTED",
+    "outstandingMandatoryItems": "NONE"
+  },
+  "coveragePrecedent": "Behavioural completeness takes precedence over raw coverage percentages when deviation is independently reviewed, justified, and documented",
+  "artifacts": [
+    "docs/products/apzqep/test-plans/domain/OWNER-ACCEPTANCE.md",
+    "docs/products/apzqep/test-plans/domain/ENGINEERING-COMPLETION-REVIEW.md",
+    "docs/products/apzqep/test-plans/domain/DOMAIN-COMPLETION-REPORT.md",
+    "packages/qep-test-plans/"
+  ],
+  "authorisesNext": "APZQEP-CERT-060A — Test Plans Domain Certification (separate Owner Programme Instruction required)",
+  "notAuthorised": [
+    "Further engineering under ENG-060A",
+    "CERT-060A execution without Owner Instruction",
+    "Version Promotion to 1.0.0",
+    "Freeze",
+    "ENG-060B Infrastructure",
+    "REST",
+    "Workbench",
+    "AI",
+    "MCP"
+  ],
+  "stopCondition": "APZQEP-ENG-060A ACCEPTED / APPROVED / CLOSED — READY FOR DOMAIN CERTIFICATION — await Owner Instruction for APZQEP-CERT-060A"
+}

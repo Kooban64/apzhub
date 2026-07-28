@@ -1,0 +1,16 @@
+{
+  "programme": "APZQEP-ARCH-009",
+  "title": "Verification Capability Architecture",
+  "recordedAt": "2026-07-26T17:45:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Engineering Programme Instruction APZQEP-ENG-040A",
+  "effect": "ARCH-009 closed. APZQEP-ENG-040A Verification Domain Model authorised (domain only).",
+  "notAuthorisedUnder040A": [
+    "Persistence",
+    "Repositories",
+    "REST APIs",
+    "Workbench",
+    "AI",
+    "MCP"
+  ]
+}

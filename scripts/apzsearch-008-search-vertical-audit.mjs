@@ -180,7 +180,11 @@ scan(walk(join(ROOT, "apps/web/components/search")), [
 // Layer 2 — Typed client
 // ---------------------------------------------------------------------------
 scan(walk(join(ROOT, "apps/web/lib/search")), [
-  { rule: "client-no-platform-services", pattern: /@apzhub\/platform-services/ },
+  {
+    rule: "client-no-platform-services",
+    pattern: /@apzhub\/platform-services/,
+    allow: (path) => path.includes("/lib/search/wiring/"),
+  },
   {
     rule: "client-no-meili",
     pattern: /@apzhub\/integration-meilisearch|from\s+["']meilisearch["']/,
@@ -501,7 +505,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.26.1",
+  "0.32.0",
   "version-platform-services",
 );
 

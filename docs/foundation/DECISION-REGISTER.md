@@ -192,10 +192,11 @@ For full Problem / Decision / Alternatives / Consequences, read the linked ADR.
 
 ## Decisions not yet ADR'd
 
-| Topic                            | Current status                        | Reference                                                        |
-| -------------------------------- | ------------------------------------- | ---------------------------------------------------------------- |
-| Financial Engine extraction      | **DEFER**                             | [FIN-001 Review](../reviews/FIN-001-Architecture-Review.md)      |
-| Quality Engineering architecture | **Superseded** by APZ TCMS (ADR-0059) | [APZ TCMS Vision](../strategy/APZHUB-APZ-TCMS-Product-Vision.md) |
-| SaaS deployment model            | Future                                | [Commercial Roadmap](../strategy/APZHUB-Commercial-Roadmap.md)   |
+| Topic                                            | Current status                                  | Reference                                                           |
+| ------------------------------------------------ | ----------------------------------------------- | ------------------------------------------------------------------- |
+| [ADR-0073](../architecture/adr-0073/ADR-0073.md) | Durable Notification Runtime (PostgreSQL-owned) | Option A accepted; ENG-001A design awaiting Owner Design Acceptance | Accepted (Platform-1.4-ADR-0073) |
+| Financial Engine extraction                      | **DEFER**                                       | [FIN-001 Review](../reviews/FIN-001-Architecture-Review.md)         |
+| Quality Engineering architecture                 | **Superseded** by APZ TCMS (ADR-0059)           | [APZ TCMS Vision](../strategy/APZHUB-APZ-TCMS-Product-Vision.md)    |
+| SaaS deployment model                            | Future                                          | [Commercial Roadmap](../strategy/APZHUB-Commercial-Roadmap.md)      |
 
 New significant decisions require ADR before implementation.

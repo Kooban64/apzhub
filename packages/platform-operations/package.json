@@ -1,6 +1,6 @@
 {
   "name": "@apzhub/platform-operations",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "private": true,
   "type": "module",
   "description": "Canonical Platform Operations Control Plane and production verification (PRH-008)",

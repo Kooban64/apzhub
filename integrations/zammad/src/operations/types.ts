@@ -129,8 +129,8 @@ export interface ZammadRuntimeDiagnosticsSnapshot {
   readonly syncReadiness: "ready" | "not_ready" | "degraded" | "unknown";
   readonly eventTranslationReadiness: boolean;
   readonly persistentSyncStateSupport: false;
-  readonly webhookIngressSupport: false;
-  readonly binaryAttachmentSupport: false;
+  readonly webhookIngressSupport: true;
+  readonly binaryAttachmentSupport: true;
   readonly apiLatencySummary: {
     readonly lastConnectionLatencyMs?: number;
     readonly p95Ms?: number;
@@ -187,6 +187,7 @@ export const ZAMMAD_CERTIFICATION_CAPABILITY_IDS = [
   "groups",
   "users",
   "articles",
+  "attachments",
   "search",
   "history",
   "analytics",

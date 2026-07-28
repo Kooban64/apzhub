@@ -5,11 +5,9 @@ import {
   type ValidationResult,
 } from "@apzhub/legal-business-core";
 
-import {
-  getSharedDocumentRepository,
-  getSharedMatterRepository,
-  getSharedTaskRepository,
-} from "../persistence/repository-factory";
+import { getSharedDocumentRepository } from "../documents/in-memory-document-repository";
+import { getSharedMatterRepository } from "../matters/in-memory-matter-repository";
+import { getSharedTaskRepository } from "../tasks/in-memory-task-repository";
 import {
   parseDurationMinutesInput,
   resolveFormDurationMinutes,

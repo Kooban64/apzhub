@@ -17,6 +17,7 @@ export type ZammadServiceOperation =
   | "searchByTitle"
   | "createNote"
   | "createReply"
+  | "downloadAttachment"
   | "searchSupportRequests"
   | "searchOrganizations"
   | "searchGroups"
@@ -107,14 +108,21 @@ export const ZAMMAD_CORE_SERVICE_CAPABILITIES: readonly ZammadServiceCapability[
   },
   {
     serviceId: "articles",
-    operations: ["list", "get", "create", "createNote", "createReply"],
+    operations: [
+      "list",
+      "get",
+      "create",
+      "createNote",
+      "createReply",
+      "downloadAttachment",
+    ],
     supportsPaging: true,
     supportsFiltering: true,
     supportsSorting: true,
     implemented: true,
     notes: [
       "Attachment metadata readable on articles",
-      "Binary attachment upload/download not implemented",
+      "Binary attachment upload/download via CE (R12-SUP-02; max 1 MiB; delete not exposed)",
       "Article update/delete unsupported on Zammad CE public API",
     ],
   },

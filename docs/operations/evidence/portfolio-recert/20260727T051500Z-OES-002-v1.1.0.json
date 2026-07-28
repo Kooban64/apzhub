@@ -1,0 +1,16 @@
+{
+  "programme": "OES-002",
+  "title": "Engineering Review & Acceptance Standard",
+  "recordedAt": "2026-07-27T05:15:00Z",
+  "decision": "MINOR_REVISION_FROZEN",
+  "version": "1.1.0",
+  "priorVersion": "1.0.0",
+  "authority": "Owner Recommendation during APZQEP-ENG-050C interim review",
+  "change": "Engineering Completion Review (ECR) mandatory before ENG Owner Acceptance",
+  "path": "docs/engineering/oes/OES-002-Engineering-Review-and-Acceptance-Standard.md",
+  "changeNote": "docs/engineering/oes/OES-002-v1.1.0-CHANGE.md",
+  "notAuthorised": [
+    "New foundational OES standard",
+    "Reopening prior Accepted programmes"
+  ]
+}

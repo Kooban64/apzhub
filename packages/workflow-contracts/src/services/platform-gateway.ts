@@ -33,6 +33,11 @@ import type {
   ValidateWorkflowInput,
 } from "./workflow-service";
 import type { WorkflowEngineGateway } from "./engine-gateway";
+import type { ApprovalService, WorkflowTaskService } from "./task-service";
+import type { CapabilityService, HealthService } from "./capability-service";
+import type { NotificationService } from "./notification-service";
+import type { WorkflowRunService } from "./run-service";
+import type { WorkflowScheduleService } from "./schedule-service";
 
 /**
  * Gateway request context for workflow platform services.
@@ -155,9 +160,10 @@ export type WorkflowAuditService = {
 };
 
 /**
- * Nested workflow gateway surface (APZWORKFLOW-002 / APZWORKFLOW-007).
+ * Nested workflow gateway surface (APZWORKFLOW-002 / 007 + APZHUB-PLATFORM-WORKFLOW-004).
  * Products consume via PlatformServiceGateway.workflow — never persistence repos.
  * `engine` is the read-only Workflow Engine adapter surface (n8n via Platform Services).
+ * Runtime facets (runs/schedules/tasks/…) are platform orchestration ports.
  */
 export type WorkflowPlatformGateway = {
   readonly workflows: WorkflowService;
@@ -168,4 +174,12 @@ export type WorkflowPlatformGateway = {
   readonly validation: WorkflowValidationService;
   readonly audit: WorkflowAuditService;
   readonly engine: WorkflowEngineGateway;
+  /** Runtime plane (APZHUB-PLATFORM-WORKFLOW-004). */
+  readonly runs: WorkflowRunService;
+  readonly schedules: WorkflowScheduleService;
+  readonly tasks: WorkflowTaskService;
+  readonly approvals: ApprovalService;
+  readonly notifications: NotificationService;
+  readonly capabilities: CapabilityService;
+  readonly health: HealthService;
 };

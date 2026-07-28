@@ -32,6 +32,12 @@ export const SEARCH_PRODUCTS = [
   "analytics",
   "identity",
   "administration",
+  /** Additive catalogue member for Release 1.2 R12-SEARCH-01 (`@apzhub/search-time`). */
+  "time",
+  /** Additive catalogue member for Release 1.2 R12-SEARCH-02 (`@apzhub/search-law`). */
+  "law",
+  /** Additive catalogue member for APZQEP-ENG-020B (`@apzhub/search-qep`). */
+  "qep",
 ] as const;
 export type SearchProductId = (typeof SEARCH_PRODUCTS)[number];
 

@@ -6,9 +6,1243 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- **APZQEP-ENG-020D** Requirements Content Versioning — **ACCEPTED / CLOSED / COMPLETE** · `@apzhub/qep-requirements` **0.4.0** · migrations `0072`/`0073` · pack [requirements/versioning](./docs/products/apzqep/requirements/versioning/README.md) · evidence `20260725T160000Z-APZQEP-ENG-020D.json`
+- **APZQEP-ENG-020E** Requirements Baselines (Parts 1–3) — **ACCEPTED / CLOSED / COMPLETE** · `@apzhub/qep-requirements` **0.7.0** · migrations `0074`/`0075`/`0076` · integrity fingerprinting (SHA-256, empty-lock rejection), `verifyBaselineIntegrity`, Workbench UI · pack [requirements/baselines](./docs/products/apzqep/requirements/baselines/README.md) · evidence `20260725T174800Z-APZQEP-ENG-020E-PART1.json`, `20260725T190000Z-APZQEP-ENG-020E-PART2.json`, `20260725T203000Z-APZQEP-ENG-020E.json` · acceptance `20260726T080000Z-APZQEP-ENG-020E-ACCEPTANCE.json`
+- **APZQEP-ARCH-005** Requirements Relationship Architecture — **ACCEPTED / CLOSED / COMPLETE** (Authoritative Architecture) · pack [architecture/requirements-relationship](./docs/products/apzqep/architecture/requirements-relationship/README.md) · evidence `20260726T073000Z-APZQEP-ARCH-005.json` · acceptance `20260726T075000Z-APZQEP-ARCH-005-ACCEPTANCE.json`
+- **APZQEP-ENG-020F Parts 1–2** Requirements Relationship Engine (domain + backend) — **ACCEPTED / CLOSED / COMPLETE** · `@apzhub/qep-requirements` **0.9.0** · migrations `0077`/`0078` · pack [requirements/relationships](./docs/products/apzqep/requirements/relationships/README.md)
+- **APZQEP-ARCH-006** Requirements Workbench Architecture — **ACCEPTED / CLOSED / COMPLETE** · pack [architecture/requirements-workbench](./docs/products/apzqep/architecture/requirements-workbench/README.md) · acceptance `20260726T095000Z-APZQEP-ARCH-006-ACCEPTANCE.json`
+- **APZQEP-ENG-020F Part 3** Requirements Relationship Workbench — **ACCEPTED / CLOSED / COMPLETE** · evidence `20260726T100000Z-APZQEP-ENG-020F-PART3.json` · acceptance `20260726T103000Z-APZQEP-ENG-020F-PART3-ACCEPTANCE.json`
+- **APZQEP-REQ-001** Requirements Capability Certification & Baseline — **ACCEPTED / CLOSED / COMPLETE** · `@apzhub/qep-requirements` **1.0.0 CERTIFIED / FROZEN** · acceptance `20260726T120000Z-APZQEP-REQ-001-ACCEPTANCE.json`
+- **APZQEP-ARCH-007** Requirements Traceability Architecture — **ACCEPTED / CLOSED / COMPLETE** · acceptance `20260726T130000Z-APZQEP-ARCH-007-ACCEPTANCE.json`
+- **APZQEP-ENG-030A Part 1** Traceability Engine Domain — **ACCEPTED / CLOSED / COMPLETE** · acceptance `20260726T140000Z-APZQEP-ENG-030A-PART1-ACCEPTANCE.json`
+- **APZQEP-ENG-030A Part 2** Traceability Engine Backend — **ACCEPTED / CLOSED / COMPLETE** · `@apzhub/qep-traceability` **0.2.0** · migrations `0079`/`0080` · pack [engine](./docs/products/apzqep/traceability/engine/README.md) · acceptance `20260726T153000Z-APZQEP-ENG-030A-PART2-ACCEPTANCE.json`
+- **APZQEP-ARCH-008** Traceability Workbench Architecture — **ACCEPTED / CLOSED / COMPLETE** · pack [traceability-workbench](./docs/products/apzqep/architecture/traceability-workbench/README.md) · acceptance `20260726T154500Z-APZQEP-ARCH-008-ACCEPTANCE.json`
+- **APZQEP-ENG-030C** Traceability Workbench UI — **ACCEPTED / CLOSED / COMPLETE** · pack [workbench](./docs/products/apzqep/traceability/workbench/README.md) · acceptance `20260726T164000Z-APZQEP-ENG-030C-ACCEPTANCE.json`
+- **APZQEP-TRACE-001** Traceability Capability Certification & Baseline — **ACCEPTED / CLOSED / COMPLETE** · `@apzhub/qep-traceability` **1.0.0 CERTIFIED / FROZEN** · acceptance `20260726T172000Z-APZQEP-TRACE-001-ACCEPTANCE.json`
+- **APZQEP-ARCH-009** Verification Capability Architecture — **ACCEPTED** · pack [architecture/verification](./docs/products/apzqep/architecture/verification/README.md) · acceptance `20260726T174500Z-APZQEP-ARCH-009-ACCEPTANCE.json`
+- **APZQEP-ENG-040A** Verification Engine Domain — **ACCEPTED** · `@apzhub/qep-verification` **0.1.0** domain baseline · pack [verification/engine-domain](./docs/products/apzqep/verification/engine-domain/README.md) · acceptance `20260726T180000Z-APZQEP-ENG-040A-ACCEPTANCE.json`
+- **APZQEP-ENG-040B** Verification Infrastructure — **ACCEPTED / CLOSED / COMPLETE** · `@apzhub/qep-verification` infrastructure · migrations `0081`/`0082` · REST `/api/v1/qep/verifications/*` · pack [verification/engine](./docs/products/apzqep/verification/engine/README.md) · acceptance `20260726T190000Z-APZQEP-ENG-040B-ACCEPTANCE.json`
+- **APZQEP-ARCH-010** Verification Workbench Architecture — **ACCEPTED / CLOSED / COMPLETE** · pack [architecture/verification-workbench](./docs/products/apzqep/architecture/verification-workbench/README.md) · acceptance `20260726T193000Z-APZQEP-ARCH-010-ACCEPTANCE.json`
+- **APZQEP-ENG-040C** Verification Workbench — **ACCEPTED / CLOSED / COMPLETE** · pack [verification/workbench](./docs/products/apzqep/verification/workbench/README.md) · acceptance `20260726T200000Z-APZQEP-ENG-040C-ACCEPTANCE.json`
+- **APZQEP-CERT-040D** Verification Capability Certification — **ACCEPTED / CLOSED / COMPLETE** · `@apzhub/qep-verification` **1.0.0 CERTIFIED / FROZEN** · class **PRODUCTION_READY_WITH_LIMITATIONS** · pack [capability-certification](./docs/products/apzqep/verification/capability-certification/README.md) · acceptance `20260726T205000Z-APZQEP-CERT-040D-ACCEPTANCE.json`
+- **APZQEP-ARCH-011** Test Specifications Capability Architecture — **ACCEPTED / CLOSED / COMPLETE** · pack [architecture/test-specifications](./docs/products/apzqep/architecture/test-specifications/README.md) · evidence `20260726T210000Z-APZQEP-ARCH-011.json` · acceptance `20260726T212000Z-APZQEP-ARCH-011-ACCEPTANCE.json`
+- **APZQEP-ENG-050A** Test Specifications Domain Model — **ACCEPTED / CLOSED / COMPLETE** · pack [test-specifications/engine-domain](./docs/products/apzqep/test-specifications/engine-domain/README.md) · evidence `20260726T214500Z-APZQEP-ENG-050A.json`
+- **APZQEP-ENG-050B** Test Specifications Infrastructure — **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** · `@apzhub/qep-test-specifications` **0.2.0** · migrations **0083/0084** · REST `/api/v1/qep/specifications` · pack [test-specifications/engine](./docs/products/apzqep/test-specifications/engine/README.md) · evidence `20260726T223000Z-APZQEP-ENG-050B.json`
+- **APZQEP-ENG-060B** Test Plans Infrastructure Engineering — **IMPLEMENTED / AWAITING ENGINEERING COMPLETION REVIEW (ECR)** · `@apzhub/qep-test-plans` **0.2.0** · migrations **0085/0086** · REST `/api/v1/qep/plans` · pack [test-plans/infrastructure](./docs/products/apzqep/test-plans/infrastructure/README.md) · evidence `20260727T182000Z-APZQEP-ENG-060B.json`
+- **OES-000** APZOR Owner Engineering Specification Standard — **ACCEPTED / APPROVED / FROZEN** · [OES-000](./docs/engineering/oes/OES-000-Owner-Engineering-Specification-Standard.md) · acceptance `20260726T233500Z-OES-000-ACCEPTANCE.json`
+- **OES-001** APZOR Engineering Writing Standard — **AUTHORISED** · [OES-001](./docs/engineering/oes/OES-001-Engineering-Writing-Standard.md)
+- **APZQEP-OES-ARCH-012** Test Specifications Workbench Architecture — **IN DRAFT** Part 1 filed · `COMPLETE.md` not ready · [OES-ARCH-012](./docs/engineering/oes/APZQEP/OES-ARCH-012-Test-Specifications-Workbench-Architecture/README.md)
+
 ### Changed
 
-- (none pending Owner direction)
+- Governance: OES-000 methodology **FROZEN**. OES-001 writing standard authorised. OES-ARCH-012 Part 1 filed under COMPLETE.md pack layout. Workbench Engineering **NOT AUTHORISED** until `COMPLETE.md` Accepted. ENG-050B awaiting Acceptance. Evidence / Coverage / Impact / Certification Engine / AI / MCP **NOT AUTHORISED**.
+
+## [Platform-1.3-CERT-001] — 2026-07-22 — AWAITING OWNER CERTIFICATION ACCEPTANCE
+
+Platform 1.3 Certification & Release Readiness (certification only). Pack: [engineering/platform-1.3-cert-001](./docs/engineering/platform-1.3-cert-001/README.md). Evidence: [20260722T192600Z-PLATFORM-1.3-CERT-001.json](./docs/operations/evidence/portfolio-recert/20260722T192600Z-PLATFORM-1.3-CERT-001.json).
+
+### Certification result
+
+- Recommendation: **NOT READY FOR PRODUCTION**
+- Blocking: `pnpm build` FAIL (notification inbox) · `pnpm typecheck` FAIL (observe-core)
+- Architecture compliance: PASS · OpenAPI validate: PASS · Lint: PASS
+- ENG-004 recorded **ACCEPTED** (Owner Decision CERT-001 bootstrap)
+
+### Not changed
+
+- No feature remediation under CERT-001 · No Platform 1.4 · Integration SDK **1.0.0** remains frozen
+
+## [Platform-1.3-ENG-004] — 2026-07-22 — ACCEPTED
+
+Notification Delivery Phase A (P13-E04) under ADR-0071 Option D. Pack: [engineering/platform-1.3-eng-004](./docs/engineering/platform-1.3-eng-004/README.md). Evidence: [20260722T190500Z-PLATFORM-1.3-ENG-004-NOTIFICATION-DELIVERY.json](./docs/operations/evidence/portfolio-recert/20260722T190500Z-PLATFORM-1.3-ENG-004-NOTIFICATION-DELIVERY.json).
+
+### Added
+
+- Hybrid Central Notification Delivery Service (event + command intake)
+- Delivery contracts (`@apzhub/notification-contracts` **0.3.0**) · migration **0065**
+- In-app certified path · Workbench inbox · SSE wire events via ADR-0072
+- Admin APIs: intents, deliveries, retry, dead-letter replay, delivery health/diagnostics, providers
+- Deny-by-default `APZHUB_NOTIFICATION_*` delivery flags
+
+### Changed
+
+- ADR-0071 recorded **ACCEPTED**; realtime topic model includes `notifications`
+
+### Deferred
+
+- **SMTP DELIVERY DEFERRED** (no approved outbound path)
+
+### Not changed
+
+- Integration SDK **1.0.0** frozen · Email SoR excluded · FIN-001 STOP · Workflow Execute gated · No WebSockets · No CERT-001
+
+## [Platform-1.3-ADR-0071] — 2026-07-22 — ACCEPTED
+
+ADR-0071 Notification Delivery Providers and Routing Architecture. Canonical: [architecture/adr/ADR-0071-…](./docs/architecture/adr/ADR-0071-Notification-Delivery-Providers-and-Routing.md).
+
+### Added
+
+- Full ADR: Option D Hybrid (central Notification Delivery Service + event-driven + command intake)
+- OWNER-ACCEPTANCE · PRECONDITION-VERIFICATION · RISK-REGISTER packs
+- Explicit fences vs Email SoR · Realtime · Workflow Execute
+
+### Changed
+
+- Status **Accepted** (Owner Decision ENG-004 bootstrap)
+- Implementation under ENG-004
+
+## [Platform-1.3-ENG-003] — 2026-07-22 — ACCEPTED
+
+Support Realtime (SSE) for P13-E03 under ADR-0072. Pack: [engineering/platform-1.3-eng-003](./docs/engineering/platform-1.3-eng-003/README.md). Evidence: [20260722T164000Z-PLATFORM-1.3-ENG-003-SUPPORT-REALTIME-SSE.json](./docs/operations/evidence/portfolio-recert/20260722T164000Z-PLATFORM-1.3-ENG-003-SUPPORT-REALTIME-SSE.json).
+
+### Added
+
+- `RealtimeSubscriptionService` SSE adapter (`@apzhub/platform-services`)
+- Gateway `GET /api/v1/realtime/{stream,diagnostics,health}` + Support alias `/support/events/stream`
+- Support Workbench EventSource live refresh (`SupportRealtimeProvider`)
+- OpenAPI **1.13.0** Platform Realtime paths
+- Feature flag `APZHUB_REALTIME_SSE_ENABLED` (deny-by-default) + capacity env vars
+
+### Changed
+
+- PL12-KL-05 **PARTIALLY REMEDIATED** (realtime SUP-03; attachment delete residual)
+- ADR-0072 recorded **ACCEPTED**
+
+### Confirmed non-goals
+
+- No WebSocket · No Notification Delivery · No ADR-0071 · No Email SoR · No FIN-001 · Workflow Execute remains gated
+
+## [Platform-1.3-ADR-0072] — 2026-07-22 — ACCEPTED
+
+ADR-0072 Platform Realtime Transport Architecture. Canonical: [architecture/adr/ADR-0072-…](./docs/architecture/adr/ADR-0072-Platform-Realtime-Transport.md). Evidence: [20260722T160600Z-PLATFORM-1.3-ADR-0072.json](./docs/operations/evidence/portfolio-recert/20260722T160600Z-PLATFORM-1.3-ADR-0072.json).
+
+### Added
+
+- Full ADR: SSE Phase A behind Realtime Subscription transport abstraction; WebSocket deferred
+- Programme OWNER-ACCEPTANCE pack
+
+### Changed
+
+- Platform-1.3-ENG-002 recorded **ACCEPTED**
+- No application source modifications
+
+### Not changed
+
+- Realtime runtime · Support Realtime (ENG-003) · ADR-0071 · Notification delivery · Email SoR · FIN-001 · Workflow Execute
+
+## [Platform-1.3-ENG-002] — 2026-07-22 — ACCEPTED
+
+Observe Live Alerts Phase A (P13-E02 / ADR-0070). Pack: [engineering/platform-1.3-eng-002](./docs/engineering/platform-1.3-eng-002/README.md). Evidence: [docs/operations/evidence/portfolio-recert/20260722T133800Z-PLATFORM-1.3-ENG-002-OBSERVE-LIVE-ALERTS.json](./docs/operations/evidence/portfolio-recert/20260722T133800Z-PLATFORM-1.3-ENG-002-OBSERVE-LIVE-ALERTS.json).
+
+### Added
+
+- Observe alert evaluation domain (metadata signals), fingerprint dedup, ack/resolve/suppress
+- Events `observe.alert.*` + delivery hook seam (no providers)
+- Deny-by-default `APZHUB_OBSERVE_ALERT_EVALUATION_ENABLED`
+- Additive `/api/v1/observe/alert-evaluation*` and lifecycle routes · OpenAPI paths
+- ENG-002 unit suite (18 tests)
+
+### Changed
+
+- ADR-0070 recorded **ACCEPTED**; PL12-KL-02 **PARTIALLY REMEDIATED**
+
+### Not changed
+
+- Notification delivery providers · ADR-0071/0072 · Email SoR · FIN-001 · Workflow Execute · Integration SDK
+
+## [Platform-1.3-ADR-0070] — 2026-07-22 — ACCEPTED
+
+ADR-0070 Observe Live Alert Evaluation and Delivery. Canonical: [architecture/adr/ADR-0070-…](./docs/architecture/adr/ADR-0070-Observe-Live-Alert-Evaluation-and-Delivery.md).
+
+### Added
+
+- Full ADR defining Observe alert evaluation/delivery plane (lifecycle, rules, suppression, delivery hooks, Phase A/B)
+- Programme pack under `docs/architecture/adr/`
+
+### Changed
+
+- Platform-1.3-ENG-001 recorded **ACCEPTED**
+- Owner Decision ACCEPTED under Platform-1.3-ENG-002 bootstrap
+
+### Not changed (by ADR programme alone)
+
+- Observe runtime remained unmodified until ENG-002
+
+## [Platform-1.3-ENG-001] — 2026-07-22 — ACCEPTED
+
+Search Live Drain (P13-E01). Pack: [engineering/platform-1.3-eng-001](./docs/engineering/platform-1.3-eng-001/README.md). Evidence: [20260722T092506Z-PLATFORM-1.3-ENG-001-SEARCH-LIVE-DRAIN.json](./docs/operations/evidence/portfolio-recert/20260722T092506Z-PLATFORM-1.3-ENG-001-SEARCH-LIVE-DRAIN.json).
+
+### Added
+
+- Time/Law composition-root Search publication wiring · shared orchestration runtime · optional Meilisearch mirror sink
+- Unit evidence for Time + Law live drain
+
+### Changed
+
+- Platform-1.3-ARCH-001 recorded **ACCEPTED** · PL12-KL-01 **CLOSED**
+- Env examples document `APZHUB_SEARCH_ORCHESTRATION_ENABLED`
+
+### Not changed
+
+- Integration SDK · platform-services sources · ADR-0070/0071/0072 · other 1.3 epics
+
+## [Platform-1.3-ARCH-001] — 2026-07-22 — ACCEPTED
+
+Platform 1.3 Architecture Confirmation. Pack: [architecture/platform-1.3-confirmation](./docs/architecture/platform-1.3-confirmation/README.md). Evidence: [20260722T084543Z-PLATFORM-1.3-ARCH-001-CONFIRMATION.json](./docs/operations/evidence/portfolio-recert/20260722T084543Z-PLATFORM-1.3-ARCH-001-CONFIRMATION.json).
+
+### Added
+
+- Architecture review · epic assessment · dependency review · programme confirmation
+- Proposed ADR-0070 (Observe live evaluation) · ADR-0071 (Notify delivery ≠ Email SoR) · ADR-0072 (Platform realtime transport)
+
+### Changed
+
+- PLAN-001 recorded **ACCEPTED** · no architectural redesign required · no application source modifications
+
+## [APZHUB-PLAN-001] — 2026-07-22 — ACCEPTED
+
+Platform 1.3 Product Portfolio, Roadmap and Delivery Plan. Pack: [strategy/platform-1.3](./docs/strategy/platform-1.3/README.md). Evidence: [20260722T072958Z-APZHUB-PLAN-001-PORTFOLIO-ROADMAP.json](./docs/operations/evidence/portfolio-recert/20260722T072958Z-APZHUB-PLAN-001-PORTFOLIO-ROADMAP.json).
+
+### Added
+
+- Official Product Portfolio · maturity · roadmap 1.3/1.4/2.0 · epics P13-E01…E12 · programme sequence ENG-001…011 + CERT-001
+
+### Changed
+
+- Platform 1.2 programme recorded **CLOSED** · OPS-002 **ACCEPTED**
+- Planning only — no application source modifications
+
+## [APZHUB-OPS-002] — 2026-07-22 — ACCEPTED (READY FOR OWNER PRODUCTION ACCEPTANCE)
+
+Platform 1.2.0 production readiness implementation (OPS-001 actions A1–A8). Pack: [platform-1.2.0-production-readiness](./docs/operations/platform-1.2.0-production-readiness/README.md). Evidence: [20260722T060500Z-APZHUB-OPS-002-PRODUCTION-READINESS.json](./docs/operations/evidence/portfolio-recert/20260722T060500Z-APZHUB-OPS-002-PRODUCTION-READINESS.json).
+
+### Added
+
+- Production Dockerfile (`apps/web`) · compose stack · Caddy TLS configs · `.env.production.example`
+- Backup/capacity scripts · go-live/rollback/on-call documentation pack
+- Verified `apzhub/web:1.2.0` image build **PASS**
+
+### Changed
+
+- Next.js `output: "standalone"` for container images (no user-facing behaviour change)
+- Records APZHUB-OPS-001 **ACCEPTED**
+- Workflow Execute remains gated
+
+## [APZHUB-OPS-001] — 2026-07-22 — ACCEPTED (PRODUCTION READY WITH ACTIONS)
+
+Platform 1.2.0 operational readiness assessment. Pack: [platform-1.2.0-operational-readiness](./docs/operations/platform-1.2.0-operational-readiness/README.md). Evidence: [20260722T053224Z-APZHUB-OPS-001-OPERATIONAL-READINESS.json](./docs/operations/evidence/portfolio-recert/20260722T053224Z-APZHUB-OPS-001-OPERATIONAL-READINESS.json).
+
+### Added
+
+- Operational readiness pack covering deployment, infrastructure, security, backup, monitoring, performance, runbooks, risks
+- Before-production action list **A1–A8**
+
+### Changed
+
+- Records APZHUB-RELEASE-001 **ACCEPTED**
+- Classification **PRODUCTION READY WITH ACTIONS**
+- No application source modifications
+
+## [APZHUB-RELEASE-001] — 2026-07-22 — ACCEPTED (READY FOR OWNER RELEASE ACCEPTANCE)
+
+Platform 1.2.0 baseline freeze & release approval. Pack: [platform-1.2.0](./docs/releases/platform-1.2.0/README.md). Evidence: [20260722T051228Z-APZHUB-RELEASE-001-BASELINE-FREEZE.json](./docs/operations/evidence/portfolio-recert/20260722T051228Z-APZHUB-RELEASE-001-BASELINE-FREEZE.json).
+
+### Added
+
+- Official freeze pack `docs/releases/platform-1.2.0/` (architecture, quality, certification, packages, products, KL, risks)
+- Complete workspace package inventory (2 apps · 8 integrations · 74 packages)
+
+### Changed
+
+- Declares Platform **1.2.0** repository-certified baseline freeze (**PRODUCTION READY WITH LIMITATIONS**)
+- Records APZHUB-QA-CERT-004 **ACCEPTED** (Owner Decision)
+- No application source modifications
+
+## [APZHUB-QA-CERT-004] — 2026-07-21 — ACCEPTED (READY FOR OWNER VISUAL ACCEPTANCE)
+
+Platform 1.2.0 visual certification review of Support Analytics snapshot. Pack: [platform-1.2.0-visual-review](./docs/quality/platform-1.2.0-visual-review/README.md). Evidence: [20260721T194900Z-APZHUB-QA-CERT-004-VISUAL-REVIEW.json](./docs/operations/evidence/portfolio-recert/20260721T194900Z-APZHUB-QA-CERT-004-VISUAL-REVIEW.json).
+
+### Changed
+
+- Decision **B**: incorrect baseline (Home placeholder) vs correct Support Analytics render — not a product regression
+- Updated Playwright snapshot only: `support-analytics-chromium-linux.png` (1280×1064)
+- Visual suite verify **3/3 PASS**; no application source modifications
+
+## [APZHUB-QA-CERT-003] — 2026-07-21 — Awaiting Certification Acceptance (CERTIFICATION FAILED)
+
+Platform 1.2.0 final portfolio certification. Pack: [platform-1.2.0-certification](./docs/quality/platform-1.2.0-certification/README.md). Evidence: [20260721T193500Z-APZHUB-QA-CERT-003-SUMMARY.json](./docs/operations/evidence/portfolio-recert/20260721T193500Z-APZHUB-QA-CERT-003-SUMMARY.json).
+
+### Changed
+
+- APZHUB-ENG-0022 recorded **ACCEPTED / CLOSED**
+- Gates: lint **PASS**; typecheck **PASS**; Vitest **PASS** (5013); OpenAPI **PASS**; path **PASS**; Playwright full **FAIL** (119 pass · 1 hard · 6 flaky)
+- No source code modifications under this programme
+
+## [APZHUB-ENG-0022] — 2026-07-21 — ACCEPTED / CLOSED (READY FOR FINAL PLATFORM CERTIFICATION)
+
+Platform 1.2 final certification punch list (QA-CERT-002 residuals). Pack: [APZHUB-ENG-0022](./docs/engineering/APZHUB-ENG-0022/README.md). Evidence: [20260721T190028Z-APZHUB-ENG-0022-CERTIFICATION-PUNCHLIST.json](./docs/operations/evidence/portfolio-recert/20260721T190028Z-APZHUB-ENG-0022-CERTIFICATION-PUNCHLIST.json).
+
+### Changed
+
+- Lint: remove `no-useless-escape` in workflow foundation audit script
+- Zammad: align `discoverCapabilities()` test to authoritative **11** core services
+- Workbench: longest-prefix view resolution for product deep links; Personalisation persist flush
+- Configuration / SPR-003 Playwright: cell locator + deterministic layout PUT wait
+- Law API DX routes verified in `apps/web` (no duplication) — affected suite green
+- Full lint **PASS**; affected Playwright **19/19 PASS**
+
+## [APZHUB-QA-CERT-002] — 2026-07-21 — Awaiting Certification Acceptance (CERTIFICATION FAILED)
+
+Platform 1.2 final portfolio re-certification after Engineering Wave 2. Pack: [final-certification](./docs/quality/final-certification/README.md). Evidence: [20260721T183157Z-APZHUB-QA-CERT-002-SUMMARY.json](./docs/operations/evidence/portfolio-recert/20260721T183157Z-APZHUB-QA-CERT-002-SUMMARY.json).
+
+### Changed
+
+- APZHUB-ENG-0021 recorded **ACCEPTED / CLOSED**; Engineering Wave 2 **COMPLETE**
+- Final gates: typecheck **PASS**; path **PASS**; lint **FAIL** (2); Vitest **FAIL** (1/5011); Playwright full **FAIL** (115 pass · 10 fail · 1 flaky)
+- No source code modifications under this programme
+
+## [APZHUB-ENG-0021] — 2026-07-21 — ACCEPTED / CLOSED (RG-TESTING-ARCH)
+
+Wave 2 Step 6 (final) — Testing CI/CD architecture boundary. Pack: [APZHUB-ENG-0021](./docs/engineering/APZHUB-ENG-0021/README.md). Evidence: [20260721T170044Z-APZHUB-ENG-0021-RG-TESTING-ARCH.json](./docs/operations/evidence/portfolio-recert/20260721T170044Z-APZHUB-ENG-0021-RG-TESTING-ARCH.json).
+
+### Changed
+
+- APZHUB-ENG-0020 recorded **ACCEPTED / CLOSED**
+- CI/CD boundary test forbids live provider SDKs/HTTP only (not `@apzhub/integration-*`); excludes `*.test.ts` from production-layer scan
+- Architecture boundary Vitest **13/13 PASS** (QA2-V-082 cleared)
+- All repository-approved remediation groups complete
+
+## [APZHUB-ENG-0020] — 2026-07-21 — ACCEPTED / CLOSED (RG-SUPPORT-CERT + RG-OBSERVE-WB + RG-VISUAL-INBOX)
+
+Wave 2 Step 5 — Support certification residual, Observe workbench locators, Support inbox visual baseline. Pack: [APZHUB-ENG-0020](./docs/engineering/APZHUB-ENG-0020/README.md). Evidence: [20260721T164923Z-APZHUB-ENG-0020-SUPPORT-OBSERVE-VISUAL.json](./docs/operations/evidence/portfolio-recert/20260721T164923Z-APZHUB-ENG-0020-SUPPORT-OBSERVE-VISUAL.json).
+
+### Changed
+
+- APZHUB-ENG-0019 recorded **ACCEPTED / CLOSED**
+- Support terminal API errors no longer auto-retried; detail keeps cached UI on refetch; article create invalidates articles only
+- Observe workbench `hc_pw`/`md_pw` cell locators; Support inbox screenshot baseline refreshed
+- Scoped Playwright **20/20 PASS** (QA2-F-001 · QA2-F-009…015)
+
+## [APZHUB-ENG-0017] — 2026-07-21 — Awaiting Acceptance (RG-CERT-PIN-DRIFT)
+
+Wave 2 Step 2 — certification SemVer / OpenAPI pin refresh. Pack: [APZHUB-ENG-0017](./docs/engineering/APZHUB-ENG-0017/README.md). Evidence: [20260721T135822Z-APZHUB-ENG-0017-RG-CERT-PIN-DRIFT.json](./docs/operations/evidence/portfolio-recert/20260721T135822Z-APZHUB-ENG-0017-RG-CERT-PIN-DRIFT.json).
+
+### Changed
+
+- APZHUB-ENG-0016 recorded **ACCEPTED / CLOSED**
+- Frozen pins aligned: platform-services **0.30.0**, platform-service-contracts **0.18.0**, workflow-contracts **0.4.2**, integration-zammad **0.8.0**, OpenAPI **1.12.0**
+- `PLATFORM_SERVICES_VERSION` constant aligned to **0.30.0**
+- Pin-scope certification Vitest **280/280 PASS** (was 50 failing)
+
+## [APZHUB-ENG-0016] — 2026-07-21 — ACCEPTED / CLOSED (RG-LAW-SUITE-SCOPE + RG-LAW-HOST-QUALITY)
+
+Wave 2 Step 1 residual remediation. Pack: [APZHUB-ENG-0016](./docs/engineering/APZHUB-ENG-0016/README.md). Evidence: [20260721T132122Z-APZHUB-ENG-0016-WAVE2.json](./docs/operations/evidence/portfolio-recert/20260721T132122Z-APZHUB-ENG-0016-WAVE2.json).
+
+### Changed
+
+- APZHUB-QA-RECERT-002 recorded **ACCEPTED / CLOSED** (Wave 2 plan authorised)
+- Main Playwright config ignores `law-015-trust-workflow.spec.ts` (Law suite retained under `test:e2e:law` — 7/7 PASS)
+- Law host unused-import lint + TS2493 boundary-test hygiene cleared
+- Full `pnpm lint` PASS; `@apzhub/law-platform` typecheck PASS
+
+## [APZHUB-QA-RECERT-002] — 2026-07-21 — ACCEPTED / CLOSED (READY FOR OWNER REVIEW → Accepted)
+
+Residual Portfolio Certification Failure Analysis (analysis only). Pack: [residual-analysis](./docs/quality/residual-analysis/README.md). Evidence: [20260721T125415Z-APZHUB-QA-RECERT-002-ANALYSIS.json](./docs/operations/evidence/portfolio-recert/20260721T125415Z-APZHUB-QA-RECERT-002-ANALYSIS.json).
+
+### Changed
+
+- APZHUB-QA-CERT-001 recorded **ACCEPTED / CLOSED** (result **CERTIFICATION FAILED**)
+- Classified residual CERT-001 failures: 19 PW hard · 30 flaky · 1 lint · 1 TS · 82 Vitest (28 unit · 7 integration · 47 regression)
+- Created 10 root-cause remediation groups and new ENGINEERING-PLAN (6 suggested ENG programmes)
+- Owner Accepted analysis; Engineering Wave 2 authorised (ENG-0016 first)
+
+## [APZHUB-QA-CERT-001] — 2026-07-21 — ACCEPTED / CLOSED (CERTIFICATION FAILED)
+
+Platform 1.2 portfolio full re-certification & remediation engineering closure. Evidence: [portfolio-recertification](./docs/quality/portfolio-recertification/README.md).
+
+### Changed
+
+- APZHUB-ENG-0015 recorded **ACCEPTED / CLOSED**
+- Playwright Remediation engineering initiative formally **CLOSED** (no OPEN Orders 1–6 groups)
+- Portfolio full re-cert evidence: **FAIL** (84 passed · 19 failed · 30 flaky)
+- Lint / typecheck / Vitest gates recorded **FAIL** (no engineering fixes under this programme)
+- Owner Accepted certification result as FAIL (not silent GA)
+
+## [APZHUB-ENG-0015] — 2026-07-21 — ACCEPTED / CLOSED (RG-VISUAL)
+
+Order 6 Support visual residual — refreshed detail + analytics Chromium Linux screenshot baselines. Evidence: [APZHUB-ENG-0015](./docs/engineering/APZHUB-ENG-0015/IMPLEMENTATION-SUMMARY.md).
+
+### Fixed
+
+- Support visual Playwright certs for detail and analytics match current UI baselines
+
+### Changed
+
+- APZHUB-ENG-0014 recorded **ACCEPTED / CLOSED**
+- RG-VISUAL marked **REMEDIATED** (2/2 PASS)
+- Playwright Remediation Programme (Orders 1–6) engineering complete — no OPEN groups remain
+
+## [APZHUB-ENG-0014] — 2026-07-21 — ACCEPTED / CLOSED (RG-WORKFLOW-WB)
+
+Order 6 Workflow Engine workbench residual — exact `/api/v1/workflows/engine` list/detail mock paths. Evidence: [APZHUB-ENG-0014](./docs/engineering/APZHUB-ENG-0014/IMPLEMENTATION-SUMMARY.md).
+
+### Fixed
+
+- Workflow Engine Playwright certs show READ-ONLY ENGINE overview and workflow list + definition viewer after corrected HTTP mocks
+
+### Changed
+
+- APZHUB-ENG-0013 recorded **ACCEPTED / CLOSED**
+- RG-WORKFLOW-WB marked **REMEDIATED** (2/2 PASS)
+
+## [APZHUB-ENG-0013] — 2026-07-21 — ACCEPTED / CLOSED (RG-TCMS-WB)
+
+Order 6 TCMS workbench residual — mock `/api/v1/testing` dashboard + certification for APZTCMS-010. Evidence: [APZHUB-ENG-0013](./docs/engineering/APZHUB-ENG-0013/IMPLEMENTATION-SUMMARY.md).
+
+### Fixed
+
+- Testing workbench Playwright certs mount `testing-dashboard-stats` and certification detail `testing-page` / gates / advisory after HTTP mocks
+
+### Changed
+
+- APZHUB-ENG-0012 recorded **ACCEPTED / CLOSED**
+- RG-TCMS-WB marked **REMEDIATED** (2/2 PASS)
+
+## [APZHUB-ENG-0012] — 2026-07-21 — ACCEPTED / CLOSED (RG-METRICS-WB)
+
+Order 6 Metrics workbench residual — authenticate before mocked metrics navigation. Evidence: [APZHUB-ENG-0012](./docs/engineering/APZHUB-ENG-0012/IMPLEMENTATION-SUMMARY.md).
+
+### Fixed
+
+- Metrics workbench Playwright certs mount `metrics-page` / `metrics-unavailable` after DEV `signIn`
+
+### Changed
+
+- APZHUB-ENG-0011 recorded **ACCEPTED / CLOSED**
+- RG-METRICS-WB marked **REMEDIATED** (2/2 PASS)
+
+## [APZHUB-ENG-0011] — 2026-07-21 — ACCEPTED / CLOSED (RG-SELECTORS)
+
+Playwright strict-mode locator hygiene — role-based cell/row selectors. Evidence: [APZHUB-ENG-0011](./docs/engineering/APZHUB-ENG-0011/IMPLEMENTATION-SUMMARY.md).
+
+### Fixed
+
+- Documents / Search / TCMS pipelines / Observe workbench Playwright specs avoid ambiguous `getByText` collisions
+
+### Changed
+
+- APZHUB-ENG-0010 recorded **ACCEPTED / CLOSED**
+- RG-SELECTORS marked **REMEDIATED** (4/4 PASS; 1 flaky residual)
+
+## [APZHUB-ENG-0010] — 2026-07-21 — ACCEPTED / CLOSED (RG-PW-API)
+
+Playwright API hygiene — `getByLabelText` → `getByLabel`. Evidence: [APZHUB-ENG-0010](./docs/engineering/APZHUB-ENG-0010/IMPLEMENTATION-SUMMARY.md).
+
+### Fixed
+
+- Reporting and TCMS Engineering Intelligence Playwright specs use `page.getByLabel`
+
+### Changed
+
+- APZHUB-ENG-0009 recorded **ACCEPTED / CLOSED**
+- RG-PW-API marked **REMEDIATED** (3/3 PASS; 1 flaky residual)
+
+## [APZHUB-ENG-0009] — 2026-07-21 — ACCEPTED / CLOSED (RG-MOCK-FETCH)
+
+Playwright HTTP mock hygiene — absolute `baseURL` origin for `page.evaluate` fetch. Evidence: [APZHUB-ENG-0009](./docs/engineering/APZHUB-ENG-0009/IMPLEMENTATION-SUMMARY.md).
+
+### Fixed
+
+- Administration / Identity / Metrics / Observe `*-003` Playwright mock-fetch specs (relative fetch on `about:blank`)
+
+### Changed
+
+- APZHUB-ENG-0008 recorded **ACCEPTED / CLOSED**
+- RG-MOCK-FETCH marked **REMEDIATED** (4/4 PASS)
+
+## [APZHUB-ENG-0008] — 2026-07-21 — ACCEPTED / CLOSED (RG-A11Y-CONTRAST)
+
+Design-system contrast remediation for login + Support axe certs. Evidence: [APZHUB-ENG-0008](./docs/engineering/APZHUB-ENG-0008/IMPLEMENTATION-SUMMARY.md).
+
+### Fixed
+
+- Primary button text uses `--color-primary-foreground` (theme CSS contract + Tailwind `@source` for `packages/ui`)
+- Light `--color-success` / `--color-warning` text tokens meet WCAG AA on surface/white
+
+### Changed
+
+- APZHUB-ENG-0007 recorded **ACCEPTED / CLOSED**
+- RG-A11Y-CONTRAST marked **REMEDIATED** (4/4 PASS)
+
+## [APZHUB-ENG-0007] — 2026-07-21 — ACCEPTED / CLOSED (RG-LAW-DNS)
+
+Law Trust Playwright remediation — keep `pg` off the Law client bundle and preserve trust deep links. Evidence: [APZHUB-ENG-0007](./docs/engineering/APZHUB-ENG-0007/IMPLEMENTATION-SUMMARY.md).
+
+### Fixed
+
+- Law-platform client import graph no longer pulls `pg` / `dns` (memory singletons; no persistence barrel on client)
+- Workbench deep-link rewind under active view routes (trust sub-routes)
+- Law Playwright harness (env merge, globalSetup, API DEV sign-in)
+
+### Changed
+
+- APZHUB-ENG-0006 recorded **ACCEPTED / CLOSED**
+- RG-LAW-DNS marked **REMEDIATED** (7/7 PASS)
+
+## [APZHUB-ENG-0006] — 2026-07-20 — ACCEPTED / CLOSED (RG-HEALTH-503 → RG-AUTH-SHELL)
+
+Portfolio Playwright health/auth remediation. Evidence: [APZHUB-ENG-0006](./docs/engineering/APZHUB-ENG-0006/IMPLEMENTATION-SUMMARY.md).
+
+### Fixed
+
+- `integrations/n8n/integration.yaml` documentation field so `n8n` discovers and runtime bootstrap succeeds (`/api/health` 200)
+- Playwright `webServer.env` merge + globalSetup deterministic DEV auth
+
+### Changed
+
+- APZHUB-QA-RECERT-001 recorded **ACCEPTED / CLOSED**
+- PL12-KL-06 narrowed (health path green; auth root cause closed; 4 residual shell UI fails)
+
+## [APZHUB-QA-RECERT-001] — 2026-07-20 — ACCEPTED / CLOSED (analysis)
+
+Platform 1.2 portfolio Playwright failure analysis & remediation planning. Evidence: [playwright-remediation](./docs/quality/playwright-remediation/README.md).
+
+### Added
+
+- Analysis pack under `docs/quality/playwright-remediation/` (55 failures + 1 flaky classified; 11 remediation groups; 6 suggested ENG programmes)
+
+### Changed
+
+- APZHUB-ENG-0005 recorded **ACCEPTED / CLOSED**
+- No product code, packages, APIs, or Platform **1.2.0** packaging changes
+
+## [APZHUB-ENG-0005] — 2026-07-20 — ACCEPTED / CLOSED (R12-QA-01)
+
+Portfolio Playwright/Docker re-cert path. Evidence: [APZHUB-ENG-0005](./docs/engineering/APZHUB-ENG-0005/IMPLEMENTATION-SUMMARY.md).
+
+### Added
+
+- `pnpm ops:portfolio-recert` (`path` · `docker` · `playwright` · `full`) + runbook + evidence directory
+- `@apzhub/platform-operations` **0.1.4** portfolio re-cert audit helpers
+
+### Changed
+
+- APZHUB-ENG-0004 recorded **ACCEPTED / CLOSED**
+- PL12-KL-06 narrowed (path executed; host Playwright suite residual FAIL classified)
+
+## [APZHUB-ENG-0004] — 2026-07-20 — ACCEPTED / CLOSED (R12-SUP-02)
+
+Support binary attachments (Zammad CE). Evidence: [APZHUB-ENG-0004](./docs/engineering/APZHUB-ENG-0004/IMPLEMENTATION-SUMMARY.md).
+
+### Added
+
+- Binary upload (base64 on note/reply create) and download via `GET .../articles/{articleId}/attachments/{attachmentId}`
+- `@apzhub/integration-zammad` **0.8.0**; `@apzhub/platform-service-contracts` **0.18.0**; `@apzhub/platform-services` **0.30.0**
+- Support UI attach + download
+
+### Changed
+
+- APZHUB-ENG-0003 recorded **ACCEPTED / CLOSED**
+- PL12-KL-05 narrowed (Theme E webhook + binary closed; delete/realtime residual)
+
+## [APZHUB-ENG-0003] — 2026-07-20 — ACCEPTED / CLOSED (R12-SUP-01)
+
+Support webhook ingress (Zammad CE). Evidence: [APZHUB-ENG-0003](./docs/engineering/APZHUB-ENG-0003/IMPLEMENTATION-SUMMARY.md).
+
+### Added
+
+- `createZammadWebhookVerifier` / ingress pipeline in `@apzhub/integration-zammad` **0.7.0**
+- `POST /api/v1/integrations/zammad/webhooks` (HMAC-SHA1 / `X-Hub-Signature`)
+- Support catalogue domain-event fan-out from accepted ingress events
+
+### Changed
+
+- APZHUB-ENG-0002 recorded **ACCEPTED / CLOSED**
+- PL12-KL-05 narrowed (webhook ingress done; binary attachments remain)
+
+## [APZHUB-ENG-0002] — 2026-07-20 — ACCEPTED / CLOSED (R12-PERSIST-02)
+
+Law activity/notification session stores PostgreSQL System of Record. Evidence: [APZHUB-ENG-0002](./docs/engineering/APZHUB-ENG-0002/IMPLEMENTATION-SUMMARY.md).
+
+### Added
+
+- Drizzle migrations `0063_apz_platform_law_session_stores` + `0064_*_rls`
+- Postgres session snapshot adapters in ATF/ENF (`/server`)
+- Platform API `GET/PUT /api/platform/v1/law/session/{activity|notification}`
+- Client dual-write storage (localStorage L1 + API → Postgres SoR)
+
+### Changed
+
+- APZHUB-ENG-0001 recorded **ACCEPTED / CLOSED**
+- PL12-KL-04 Theme D Law session residual closed under ENG-0002 (Awaiting Acceptance)
+
+## [APZHUB-ENG-0001] — 2026-07-20 — ACCEPTED / CLOSED (R12-PERSIST-01)
+
+Automation execution journal PostgreSQL System of Record. Evidence: [APZHUB-ENG-0001](./docs/engineering/APZHUB-ENG-0001/IMPLEMENTATION-SUMMARY.md).
+
+### Added
+
+- Drizzle migrations `0061_apz_platform_automation_execution_journal` + `0062_*_rls`
+- `createPostgresAutomationExecutionJournal` / `createProductionAutomationExecutionJournal` in `@apzhub/platform-services` **0.29.0**
+
+### Changed
+
+- `AutomationExecutionJournal` / `AutomationFoundation.listExecutions` are async
+- Server automation bootstrap uses Postgres journal when `DATABASE_URL` is set
+- APZHUB-BACKLOG-001 recorded **ACCEPTED**; R12-PERSIST-01 marked implemented (awaiting ENG-0001 Acceptance)
+- PL12-KL-04 narrowed (automation journal SoR done; Law session residual remains)
+
+## [APZHUB-BACKLOG-001] — 2026-07-20 — ACCEPTED (Backlog Assessment)
+
+Release backlog assessment & engineering recommendation (documentation only). Recommendation: **READY FOR OWNER BACKLOG SELECTION**. Evidence: [backlog](./docs/product-lifecycle/backlog/README.md).
+
+### Added
+
+- `docs/product-lifecycle/backlog/` assessment pack
+
+### Changed
+
+- APZHUB-PRODUCT-LIFECYCLE-001 recorded **ACCEPTED / CLOSED**
+
+## [APZHUB-PRODUCT-LIFECYCLE-001] — 2026-07-20 — ACCEPTED / CLOSED (Continuous Product Lifecycle)
+
+Transition from project delivery to continuous product delivery (documentation only). Recommendation: **CONTINUOUS PRODUCT LIFECYCLE READY**. Evidence: [product-lifecycle](./docs/product-lifecycle/README.md).
+
+### Added
+
+- `docs/product-lifecycle/` — continuous backlog, intake, engineering workflow, release trains, hotfix/versioning/LTS/EOL, continuous certification, Owner Approval
+
+### Changed
+
+- APZHUB-POST-IMPLEMENTATION-001 recorded **ACCEPTED / CLOSED**
+- Future routine trains intended to be backlog-driven (after Owner Acceptance of this lifecycle)
+
+## [APZHUB-POST-IMPLEMENTATION-001] — 2026-07-20 — ACCEPTED / CLOSED (Platform 1.2.0 PIR)
+
+Post-Implementation Review for Platform **1.2.0** (documentation only). Evidence: [post-implementation](./docs/releases/platform/1.2.0/post-implementation/README.md).
+
+### Added
+
+- `docs/releases/platform/1.2.0/post-implementation/` — PIR, lessons, metrics, timeline, process improvements, recommendations
+
+### Changed
+
+- APZHUB-1.2-009 / Platform **1.2.0** recorded **ACCEPTED / CLOSED** as Production Baseline
+- Release 1.2 closed; baseline content unchanged by PIR
+
+## [APZHUB-1.2-009] — 2026-07-20 — ACCEPTED / CLOSED (Platform 1.2.0 Certification)
+
+Platform Release 1.2 Portfolio Packaging & Certification (documentation only). Class: **PRODUCTION_READY_WITH_LIMITATIONS**. Evidence: [platform/1.2.0](./docs/releases/platform/1.2.0/README.md).
+
+### Added
+
+- `docs/releases/platform/1.2.0/` — portfolio certification pack (notes, catalogues, matrices, KL, risks, ops/prod readiness, manifest, acceptance)
+
+### Changed
+
+- APZHUB-1.2-008 recorded **ACCEPTED / CLOSED**
+- Platform Production Baseline **1.1.0 → 1.2.0**
+
+## [APZHUB-1.2-008] — 2026-07-20 — ACCEPTED / CLOSED (Release 1.2 Readiness)
+
+Release 1.2 Readiness Review & Certification Planning (documentation only). Evidence: [readiness pack](./docs/releases/1.2/readiness/README.md).
+
+### Added
+
+- `docs/releases/1.2/readiness/` — readiness assessment, exec/scope/quality/risk/KL, operational & production readiness, completion & acceptance reports
+
+### Changed
+
+- APZHUB-1.2-007 recorded **ACCEPTED / CLOSED**
+- Engineering paused; authorised Platform 1.2.0 certification programme
+
+## [APZHUB-1.2-007] — 2026-07-20 — ACCEPTED / CLOSED (R12-TCMS-01)
+
+GitLab CI Reference Adapter (metadata). Evidence: [APZHUB-1.2-007](./docs/releases/1.2/APZHUB-1.2-007/IMPLEMENTATION-SUMMARY.md).
+
+### Added
+
+- `@apzhub/integration-gitlab-ci` **0.1.0** — GitLab CI read-only reference adapter (`audit:gitlab-ci`)
+- Platform providers + `createPlatformServicesWithGitLabCi` / `registerGitLabCiProviders` (additive)
+
+### Changed
+
+- APZHUB-1.2-006 recorded **ACCEPTED / CLOSED**
+- TCMS Known Limitations / Integrations — GitLab CI metadata adapter present (dispatch/rerun/cancel/download still unsupported)
+
+## [APZHUB-1.2-006] — 2026-07-20 — ACCEPTED / CLOSED (R12-SEARCH-02)
+
+Law Search Publication Adapter (engineering). Evidence: [APZHUB-1.2-006](./docs/releases/1.2/APZHUB-1.2-006/IMPLEMENTATION-SUMMARY.md).
+
+### Added
+
+- `@apzhub/search-law` **0.1.0** — Law → Search Integration publication adapter (`audit:search-law`)
+- Additive Search product id **`law`** in `@apzhub/search-contracts` **0.4.0** catalogue
+
+### Changed
+
+- APZHUB-1.2-005 recorded **ACCEPTED / CLOSED**
+- Law Known Limitations KL-LAW-11 — `search-law` adapter present (composition hooks / live drain still limited; no financial publication)
+
+## [APZHUB-1.2-005] — 2026-07-20 — ACCEPTED / CLOSED (R12-SEARCH-01)
+
+Time Search Publication Adapter (engineering). Evidence: [APZHUB-1.2-005](./docs/releases/1.2/APZHUB-1.2-005/IMPLEMENTATION-SUMMARY.md).
+
+### Added
+
+- `@apzhub/search-time` **0.1.0** — Time → Search Integration publication adapter (`audit:search-time`)
+- Additive Search product id **`time`** in `@apzhub/search-contracts` **0.4.0** catalogue
+
+### Changed
+
+- APZHUB-1.2-004 recorded **ACCEPTED / CLOSED**
+- Time Known Limitations — `search-time` adapter present (composition hooks / live drain still limited)
+
+## [APZHUB-1.2-004] — 2026-07-20 — ACCEPTED / CLOSED (R12-OPS-03)
+
+Host coexistence capacity controls (engineering). Evidence: [APZHUB-1.2-004](./docs/releases/1.2/APZHUB-1.2-004/IMPLEMENTATION-SUMMARY.md).
+
+### Added
+
+- `@apzhub/platform-operations` host coexistence port catalogue + capacity thresholds + audit (`ops:host-coexistence-audit`)
+- Ops HOST-COEXISTENCE-CONTROLS + coexistence runbook + evidence (OPS-R-01)
+
+### Changed
+
+- APZHUB-1.2-003 recorded **ACCEPTED / CLOSED**
+
+## [APZHUB-1.2-003] — 2026-07-20 — ACCEPTED / CLOSED (R12-OPS-02)
+
+Alert strategy / Observe runbook depth (engineering). Recommendation: **READY FOR OWNER ACCEPTANCE**. Evidence: [APZHUB-1.2-003](./docs/releases/1.2/APZHUB-1.2-003/IMPLEMENTATION-SUMMARY.md).
+
+### Added
+
+- `@apzhub/platform-operations` alert strategy catalogue + audit (`ops:alert-strategy-audit`)
+- Minimum Production runbooks under `docs/operations/runbooks/`
+- Deepened monitoring/alerting strategy (OPS-R-05)
+
+### Changed
+
+- APZHUB-1.2-002 recorded **ACCEPTED / CLOSED**
+
+## [APZHUB-1.2-002] — 2026-07-20 — ACCEPTED / CLOSED (R12-OPS-01)
+
+Backup restore drill + recovery evidence (engineering). Recommendation: **READY FOR OWNER ACCEPTANCE**. Evidence: [APZHUB-1.2-002](./docs/releases/1.2/APZHUB-1.2-002/README.md).
+
+### Added
+
+- `@apzhub/platform-operations` backup restore drill module + tests
+- `pnpm ops:backup-restore-drill` runner (dry-run + live isolated DB)
+- Ops runbook + recovery evidence records (OPS-R-04)
+
+### Changed
+
+- APZHUB-1.2-001 Release 1.2 Planning recorded **ACCEPTED / CLOSED**
+
+## [APZHUB-1.2-001] — 2026-07-20 — ACCEPTED / CLOSED (Release 1.2 Planning)
+
+Release 1.2 Implementation Planning & Prioritisation (documentation only). **ACCEPTED**. Evidence: [docs/releases/1.2-planning/](./docs/releases/1.2-planning/README.md).
+
+### Added
+
+- Release 1.2 planning pack (scope, backlog, priorities, product/platform roadmaps, KL disposition, deferred/STOP, sequence, programmes)
+
+### Changed
+
+- APZHUB-STRATEGY-001 Commercialisation Strategy recorded **ACCEPTED / CLOSED**
+
+## [APZHUB-STRATEGY-001] — 2026-07-20 — ACCEPTED / CLOSED (Commercialisation & GTM)
+
+Commercialisation & Go-To-Market Strategy (documentation only). **ACCEPTED**. Evidence: [docs/strategy/commercial/](./docs/strategy/commercial/README.md).
+
+### Added
+
+- Commercial execution pack (executive strategy, GTM, pricing/packaging/licensing, sales, partners, CS, launch, revenue, KPIs, risk)
+
+### Changed
+
+- APZHUB-GOVERNANCE-001 Enterprise Operating Model recorded **ACCEPTED / CLOSED**
+
+## [APZHUB-GOVERNANCE-001] — 2026-07-20 — ACCEPTED / CLOSED (Enterprise Operating Model)
+
+Enterprise Operating Model for APZOR around APZHUB (documentation only). **ACCEPTED**. Evidence: [docs/governance/](./docs/governance/README.md).
+
+### Added
+
+- Enterprise Operating Model catalogue (org, RACI, committees, product/portfolio/change/risk/compliance/knowledge/AI governance, cadence)
+
+### Changed
+
+- APZHUB-OPERATIONS-001 Platform Operations Framework recorded **ACCEPTED / CLOSED**
+- Prior Engineering Governance Dashboard Spec retained (no UI)
+
+## [APZHUB-OPERATIONS-001] — 2026-07-20 — ACCEPTED / CLOSED (Platform Operations Framework)
+
+Platform Operations Framework (documentation only). **ACCEPTED**. Evidence: [docs/operations/](./docs/operations/README.md).
+
+## [APZHUB-1.1-006] — 2026-07-20 — ACCEPTED / CLOSED
+
+APZHUB Platform Release **1.1.0** Portfolio Packaging & Certification (documentation only). **ACCEPTED** as Production Baseline · **PRODUCTION_READY_WITH_LIMITATIONS**. Evidence: [platform/1.1.0](./docs/releases/platform/1.1.0/README.md) · [completion](./docs/sprint/APZHUB-1.1-006-completion-report.md).
+
+## [APZHUB-1.1-005] — 2026-07-20 — ACCEPTED / CLOSED
+
+Release **1.1** — Readiness Review & Certification Planning (documentation only). Accepted via Owner Decision authorising **APZHUB-1.1-006**. Evidence: [readiness pack](./docs/releases/1.1/readiness/README.md) · [completion](./docs/sprint/APZHUB-1.1-005-completion-report.md).
+
+### Added
+
+- `docs/releases/1.1/readiness/` — assessment, executive summary, scope, quality, risk, known limitations, completion/acceptance
+
+### Changed
+
+- APZHUB-1.1-004 recorded **ACCEPTED / CLOSED**
+- Platform KL rows PL-KL-02 / PL-KL-09 refreshed for ACCEPTED 1.1 closures
+
+## [APZHUB-1.1-004] — 2026-07-20 — ACCEPTED / CLOSED
+
+Release **1.1** — Cross-Product Automation Foundation. Accepted via Owner Decision authorising **APZHUB-1.1-005**. Evidence: [APZHUB-1.1-004](./docs/releases/1.1/APZHUB-1.1-004/README.md) · [completion](./docs/sprint/APZHUB-1.1-004-completion-report.md).
+
+### Added
+
+- Platform `AutomationFoundation` — registration, handlers, idempotent journal
+- Event-driven automation wire (`wireEventAutomation`) on server domain Event Bus
+- Workflow-triggered automation path (deferred while execute gated)
+- Default Support → `automation.journal` registrations
+- `services/platform-automation/service.yaml` · `events/platform/automation-executed/event.yaml`
+- Programme evidence pack `docs/releases/1.1/APZHUB-1.1-004/`
+
+### Changed
+
+- PL-KL-02 / R11-XPR-01 / P0-4: foundation delivered (product AU-* remain Owner-gated)
+
+## [APZHUB-1.1-003] — 2026-07-20 — ACCEPTED / CLOSED
+
+Release **1.1** — Cross-Platform Event Bus & Notification Foundation. Accepted via Owner Decision authorising **APZHUB-1.1-004**. Evidence: [APZHUB-1.1-003](./docs/releases/1.1/APZHUB-1.1-003/README.md) · [completion](./docs/sprint/APZHUB-1.1-003-completion-report.md).
+
+### Added
+
+- Platform `DomainEventPublisher` port + Support domain event publish (fail-soft)
+- Support event manifests `events/support/**`
+- ENF `wireDomainEventNotifications` reusable helper
+- apps/web Support event/notification registration + Attention wire + client bridge
+- Programme evidence pack `docs/releases/1.1/APZHUB-1.1-003/`
+
+### Changed
+
+- Support Known Limitations: Event Bus publish + in-app ENF notifications closed (realtime still out)
+
+## [APZHUB-1.1-002] — 2026-07-19 — ACCEPTED / CLOSED
+
+Release **1.1** — Law Operational Hardening (**OBS-LAW-02**). Recommendation: **READY FOR OWNER ACCEPTANCE**. Evidence: [APZHUB-1.1-002](./docs/releases/1.1/APZHUB-1.1-002/README.md) · [completion](./docs/sprint/APZHUB-1.1-002-completion-report.md). Accepted via Owner Decision authorising **APZHUB-1.1-003**.
+
+### Changed
+
+- Law client shell uses durable platform ENF/ATF session stores scoped by tenant/user
+- Known Limitations: KL-LAW-04 / OBS-LAW-02 closed
+
+### Added
+
+- `PersistedActivitySessionStore` / `PersistedNotificationSessionStore` (platform-owned)
+- Programme evidence pack `docs/releases/1.1/APZHUB-1.1-002/`
+- Operational persistence regression tests
+
+## [APZHUB-1.1-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+Release **1.1** — Law Authorization Hardening (**OBS-LAW-01**). Recommendation: **READY FOR OWNER ACCEPTANCE**. Evidence: [APZHUB-1.1-001](./docs/releases/1.1/APZHUB-1.1-001/README.md) · [completion](./docs/sprint/APZHUB-1.1-001-completion-report.md). Accepted via Owner Decision authorising **APZHUB-1.1-002**.
+
+### Changed
+
+- Law Platform hydration + client shell force Workbench auth adapter with session AuthorizationService grants
+- Law API `resolveLawApiPermissions` — no empty-grant `*` injection; always `mode: "auth"`
+- `AuthWorkbenchPermissionAdapter` honors `*` / `namespace.*` patterns
+- Known Limitations: KL-LAW-03 / OBS-LAW-01 closed
+
+### Added
+
+- Programme evidence pack `docs/releases/1.1/APZHUB-1.1-001/`
+- AuthZ regression tests for pattern match and no `*` injection
+
+## [APZHUB-RELEASE-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+APZHUB Release **1.1** Planning & Roadmap (**documentation only**). Recommendation: **READY TO START RELEASE 1.1**. Evidence: [1.1-planning](./docs/releases/1.1-planning/README.md) · [completion](./docs/sprint/APZHUB-RELEASE-001-completion-report.md). Accepted via Owner Decision authorising **APZHUB-1.1-001**.
+
+### Added
+
+- Release 1.1 planning pack `docs/releases/1.1-planning/`
+- Classification register · product/platform roadmaps · customer/debt/security/compliance/ops/performance backlogs · Owner priorities
+- APZHUB Platform **1.0.0** marked **ACCEPTED / CLOSED** (Production Baseline)
+- No production code, packages, tests, or builds
+
+## [APZHUB-PORTFOLIO-001 Platform 1.0] — 2026-07-19 — ACCEPTED / CLOSED
+
+APZHUB Platform Release **1.0.0** portfolio certification (**documentation only**). Recommendation: **PRODUCTION READY**. Certification class: **PRODUCTION_READY_WITH_LIMITATIONS**. Evidence: [1.0.0](./docs/releases/platform/1.0.0/README.md) · [completion](./docs/sprint/APZHUB-PORTFOLIO-001-platform-1.0-completion-report.md). Accepted via Owner Decision authorising APZHUB-RELEASE-001.
+
+### Added
+
+- Platform release pack `docs/releases/platform/` + SemVer evidence `1.0.0/`
+- Portfolio catalogues · matrices · guides · KL/risk registers · readiness · certification reports
+- APZ-LAW-002 · APZ-ANALYTICS-002 · APZ-WORKFLOW-002 marked **ACCEPTED / CLOSED**
+- No production code, packages, tests, or builds
+
+## [APZ-LAW-002] — 2026-07-19 — ACCEPTED / CLOSED
+
+APZ Law Platform Release **1.0.0** certification (**product packaging** — no platform rebuild). Recommendation: **PRODUCTION READY**. Certification class: **PRODUCTION_READY_WITH_LIMITATIONS**. Evidence: [1.0.0](./docs/releases/law/1.0.0/README.md) · [completion](./docs/sprint/APZ-LAW-002-completion-report.md). Accepted via Owner Decision authorising APZHUB-PORTFOLIO-001 (Platform 1.0).
+
+### Added
+
+- Release pack `docs/releases/law/` + SemVer evidence `1.0.0/`
+- Certification · Completion · Acceptance reports · Product/Admin/Practitioner guides · licensing · quality/ops/production readiness
+- Product `RELEASES.md` · portfolio release register · catalogue updates
+- APZ-LAW-001 marked **ACCEPTED / CLOSED**
+- No production code, packages, tests, or builds
+
+## [APZ-LAW-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+APZ Law Platform Release **1.0** Planning (**documentation only**). Recommendation: **READY WITH CONDITIONS**. Delivery path: **Existing Platform → Commercial Packaging**. Evidence: [pack](./docs/products/apz-law/README.md) · [completion](./docs/sprint/APZ-LAW-001-completion-report.md). Accepted via Owner Decision authorising APZ-LAW-002.
+
+### Added
+
+- Commercial planning pack `docs/products/apz-law/`
+- Delivery-path determination · repository assessment · integrations · editions · IR · KL · certification/testing/ops strategies · roadmap
+- Completion + Acceptance reports for APZ-LAW-001
+- APZ-TCMS-002 marked **ACCEPTED / CLOSED**
+- No production code, packages, tests, or builds
+
+## [APZ-TCMS-002] — 2026-07-19 — ACCEPTED / CLOSED
+
+APZ TCMS Release **1.0.0** certification (**product packaging** — no platform rebuild). Recommendation: **PRODUCTION READY**. Certification class: **PRODUCTION_READY_WITH_LIMITATIONS**. Evidence: [1.0.0](./docs/releases/tcms/1.0.0/README.md) · [completion](./docs/sprint/APZ-TCMS-002-completion-report.md). Accepted via Owner Decision authorising APZ-LAW-001.
+
+### Added
+
+- Release pack `docs/releases/tcms/` + SemVer evidence `1.0.0/`
+- Certification · Completion · Acceptance reports · Product/Admin/Tester guides · licensing · quality/ops/production readiness
+- Product `RELEASES.md` · portfolio release register · catalogue updates
+- APZ-TCMS-001 marked **ACCEPTED / CLOSED**
+- No production code, packages, tests, or builds
+
+## [APZ-TCMS-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+APZ TCMS Release **1.0** Planning (**documentation only**). Recommendation: **READY WITH CONDITIONS**. Delivery path: **Existing Platform → Commercial Packaging**. Evidence: [pack](./docs/products/apz-tcms/README.md) · [completion](./docs/sprint/APZ-TCMS-001-completion-report.md). Accepted via Owner Decision authorising APZ-TCMS-002.
+
+### Added
+
+- Commercial planning pack `docs/products/apz-tcms/`
+- Delivery-path determination · repository assessment · cross-product integrations
+- Completion + Acceptance reports for APZ-TCMS-001
+- APZ-DOCUMENTS-002 marked **ACCEPTED / CLOSED**
+- No production code, packages, tests, or builds
+
+## [APZ-DOCUMENTS-002] — 2026-07-19 — ACCEPTED / CLOSED
+
+APZ Documents Release **1.0.0** certification (**product packaging** — no platform rebuild). Recommendation: **PRODUCTION READY**. Certification class: **PRODUCTION_READY_WITH_LIMITATIONS**. Evidence: [1.0.0](./docs/releases/documents/1.0.0/README.md) · [completion](./docs/sprint/APZ-DOCUMENTS-002-completion-report.md). Accepted via Owner Decision authorising APZ-TCMS-001.
+
+### Added
+
+- Release pack `docs/releases/documents/` + SemVer evidence `1.0.0/`
+- Certification · Completion · Acceptance reports · guides · licensing · quality/ops/production readiness
+- Product `RELEASES.md` · portfolio release register · catalogue updates
+- APZ-DOCUMENTS-001 marked **ACCEPTED / CLOSED**
+- No production code, packages, tests, or builds
+
+## [APZ-DOCUMENTS-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+APZ Documents Release **1.0** Planning (**documentation only**). Recommendation: **READY WITH CONDITIONS**. Evidence: [pack](./docs/products/apz-documents/README.md) · [completion](./docs/sprint/APZ-DOCUMENTS-001-completion-report.md). Accepted via Owner Decision authorising APZ-DOCUMENTS-002.
+
+### Added
+
+- Commercial planning pack `docs/products/apz-documents/`
+- Platform alignment (Identity · Workflow · Analytics · Search · Integration)
+- Completion + Acceptance reports for APZ-DOCUMENTS-001
+- APZHUB-ENGINEERING-001 marked **ACCEPTED / CLOSED**
+- No production code, packages, tests, or builds
+
+## [APZHUB-ENGINEERING-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+APZHUB Platform Delivery Standard (**documentation only**). Recommendation: **STANDARD READY**. Evidence: [pack](./docs/engineering/platform-delivery/README.md) · [completion](./docs/sprint/APZHUB-ENGINEERING-001-completion-report.md). Accepted via Owner Decision authorising APZ-DOCUMENTS-001.
+
+### Added
+
+- `docs/engineering/platform-delivery/` — lifecycle, stage gates, quality gates, programme governance, package standards, best practices, examples, templates
+- Completion + Acceptance reports for APZHUB-ENGINEERING-001
+- KF / handbook / AI workflow / repository guide index updates
+- No production code, packages, tests, or builds
+
+## [APZ-WORKFLOW-002] — 2026-07-19 — Awaiting Acceptance
+
+APZ Workflow Release **1.0.0** certification (**production release** — packaging only). Recommendation: **PRODUCTION READY**. Certification class: **PRODUCTION_READY_WITH_LIMITATIONS**. Evidence: [1.0.0](./docs/releases/workflow/1.0.0/README.md) · [completion](./docs/sprint/APZ-WORKFLOW-002-completion-report.md).
+
+### Added
+
+- Release pack `docs/releases/workflow/` + SemVer evidence `1.0.0/`
+- Product `RELEASES.md` · updated Known Limitations / portfolio / commercial catalogue / release register
+- Quality Evidence · Compatibility · Operational/Production Readiness · Certification Report
+- APZHUB-PLATFORM-WORKFLOW-006 marked **ACCEPTED / CLOSED**
+- No new product features
+
+## [APZHUB-PLATFORM-WORKFLOW-006] — 2026-07-19 — ACCEPTED / CLOSED
+
+Workflow Workbench Module (**production code**). `/workspace/workflow/*` · HTTP OpenAPI **1.12.0**. Recommendation: **WORKBENCH READY**. Evidence: [completion](./docs/sprint/APZHUB-PLATFORM-WORKFLOW-006-completion-report.md) · [workbench](./docs/workbench/workflow/README.md). Accepted via Owner Decision authorising APZ-WORKFLOW-002.
+
+### Added
+
+- Manifests under `services/workflow/manifests/workflow*`
+- Typed client `apps/web/lib/workflow` → `/api/v1/workflow/*` only
+- Workbench views + `WorkflowWorkspaceRouter` mounted in shell
+- Unit / component / navigation / boundary / Playwright tests
+- Docs pack `docs/workbench/workflow/`
+- APZHUB-PLATFORM-WORKFLOW-005 marked **ACCEPTED / CLOSED**
+- No commercial APZ Workflow packaging (at 006 delivery)
+
+## [APZHUB-PLATFORM-WORKFLOW-005] — 2026-07-19 — ACCEPTED / CLOSED
+
+Workflow HTTP API (**production code**). OpenAPI **1.12.0** · `/api/v1/workflow/*` · platform-services **0.28.0** · workflow-contracts **0.4.2**. Recommendation: **HTTP API READY**. Evidence: [completion](./docs/sprint/APZHUB-PLATFORM-WORKFLOW-005-completion-report.md) · [http](./docs/http/workflow/README.md). Accepted via Owner Decision authorising APZHUB-PLATFORM-WORKFLOW-006.
+
+### Added
+
+- App Router routes under `apps/web/app/api/v1/workflow/**`
+- Handlers calling `gateway.workflow.*` only (no `integration-n8n`)
+- OpenAPI **1.12.0** `/workflow/*` paths, schemas, AuthZ annotations
+- Tests `platform-api.workflow.v1.test.ts` (7) PASS
+- HTTP docs pack `docs/http/workflow/`
+- APZHUB-PLATFORM-WORKFLOW-004 marked **ACCEPTED / CLOSED**
+- No Workflow Workbench / commercial APZ Workflow (at 005 delivery)
+
+## [APZHUB-PLATFORM-WORKFLOW-004] — 2026-07-19 — ACCEPTED / CLOSED
+
+Workflow Platform Services (**production code**). `gateway.workflow` runtime plane on platform-services **0.28.0**; contracts **0.4.1** (later **0.4.2** for HTTP). Recommendation: **SERVICES READY**. Evidence: [services](./docs/platform/workflow/WORKFLOW-PLATFORM-SERVICES.md) · [completion](./docs/sprint/APZHUB-PLATFORM-WORKFLOW-004-completion-report.md). Accepted via Owner Decision authorising APZHUB-PLATFORM-WORKFLOW-005.
+
+### Added
+
+- Runtime service impls (runs / schedules / tasks / approvals / notifications / capabilities / health)
+- In-memory runtime registry + mock / n8n ops providers
+- AuthZ mappings for runtime facets
+- `services/workflow/service.yaml`
+- Tests **41** workflow suite PASS; contracts **0.4.1**
+- APZHUB-PLATFORM-WORKFLOW-003 marked **ACCEPTED / CLOSED**
+- No Workflow HTTP / Workbench (at 004 delivery)
+
+## [APZHUB-PLATFORM-WORKFLOW-003] — 2026-07-19 — ACCEPTED / CLOSED
+
+Workflow Platform Contracts (**production code**). Package `@apzhub/workflow-contracts` **0.4.1** (from **0.3.0** via **0.4.0**). Recommendation: **CONTRACTS READY**. Evidence: [contracts](./docs/platform/workflow/WORKFLOW-CONTRACTS.md) · [completion](./docs/sprint/APZHUB-PLATFORM-WORKFLOW-003-completion-report.md). Accepted via Owner Decision authorising APZHUB-PLATFORM-WORKFLOW-004.
+
+### Added
+
+- Runtime IM models (`WorkflowRun`, schedules, tasks, secrets refs, health, capability, provider, …)
+- Service interfaces: Run / Schedule / Task / Approval / Notification / Capability / Health
+- `WorkflowCanonicalGateway` composition type
+- Runtime permission keys + operation mappings
+- Docs pack · tests **8** PASS
+- APZHUB-INTEGRATION-N8N-001 marked **ACCEPTED / CLOSED**
+- No Workflow Platform Services / HTTP / Workbench
+
+## [APZHUB-INTEGRATION-N8N-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+n8n Integration Foundation (**production code**). Package `@apzhub/integration-n8n` **0.1.0**. Recommendation: **CERTIFIED_FOUNDATION**. Evidence: [cert](./docs/integrations/n8n/CERTIFICATION-REPORT.md) · [completion](./docs/sprint/APZHUB-INTEGRATION-N8N-001-completion-report.md). Accepted via Owner Decision authorising APZHUB-PLATFORM-WORKFLOW-003.
+
+### Added
+
+- Public `N8nClient` facade · version detection (headers / healthz / API capability)
+- Certification pack under `docs/integrations/n8n/`
+- Tests **22** PASS; typecheck/lint PASS
+- PLATFORM-WORKFLOW-002 marked **ACCEPTED / CLOSED**
+- No Workflow Contracts / Services / HTTP / Workbench
+
+## [APZHUB-PLATFORM-WORKFLOW-002] — 2026-07-19 — ACCEPTED / CLOSED
+
+Workflow Information Model (**documentation only**). Recommendation **FOUNDATION COMPLETE**. Evidence: [info model](./docs/platform/workflow/WORKFLOW-INFORMATION-MODEL.md) · [acceptance](./docs/foundation/completion-reports/APZHUB-PLATFORM-WORKFLOW-002-programme-acceptance-report.md). Accepted via Owner Decision authorising APZHUB-INTEGRATION-N8N-001.
+
+### Added
+
+- Information Model · Domain Model · Glossary · Entity Relationships · Contract Planning under `docs/platform/workflow/`
+- Completion + acceptance reports; APZHUB-PLATFORM-WORKFLOW-001 marked **ACCEPTED / CLOSED**
+- No code · no packages · no tests · no builds · APZWORKFLOW freeze held
+
+## [APZHUB-PLATFORM-WORKFLOW-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+Workflow Platform Foundation (**documentation only**). Recommendation **FOUNDATION READY**. Evidence: [pack](./docs/platform/workflow/README.md) · [acceptance](./docs/foundation/completion-reports/APZHUB-PLATFORM-WORKFLOW-001-programme-acceptance-report.md). Accepted via Owner Decision authorising APZHUB-PLATFORM-WORKFLOW-002.
+
+### Added
+
+- `docs/platform/workflow/` — Platform · Architecture · Provider Strategy · Capabilities · Lifecycle · Execution · Security · Operational · Limitations · Compatibility
+- [ADR-0068](./docs/adr/ADR-0068-workflow-platform-first-class-capability.md) · [ADR-0069](./docs/adr/ADR-0069-n8n-workflow-engine-provider.md) (**Accepted**)
+- Completion + acceptance reports; APZ-WORKFLOW-001 marked **ACCEPTED / CLOSED**
+- No code · no packages · no tests · no builds · APZWORKFLOW freeze held
+
+## [APZ-WORKFLOW-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+APZ Workflow Release 1.0 Planning (**documentation only**). Commercial maturity **Planning** · recommendation **READY WITH CONDITIONS**. Evidence: [pack](./docs/products/apz-workflow/README.md) · [acceptance](./docs/foundation/completion-reports/APZ-WORKFLOW-001-programme-acceptance-report.md). Accepted via Owner Decision authorising APZHUB-PLATFORM-WORKFLOW-001.
+
+### Added
+
+- `docs/products/apz-workflow/` — Release Definition · Feature Catalogue · Release Plan · Roadmap · Backlog · Integrations · Testing · Certification · Operational Readiness · Known Limitations · Compatibility · Release Checklist · Implementation Readiness
+- Completion + acceptance reports for APZ-WORKFLOW-001
+- No code · no packages · no ADRs from this planning pack
+
+## [APZ-ANALYTICS-002] — 2026-07-19 — Awaiting Acceptance
+
+APZ Analytics Release 1.0 Certification & Production Readiness (**PRODUCTION RELEASE** — certification/packaging only). SemVer **1.0.0** · recommendation **PRODUCTION READY** · class **PRODUCTION_READY_WITH_LIMITATIONS**. Evidence: [1.0.0 pack](./docs/releases/analytics/1.0.0/README.md) · [acceptance](./docs/foundation/completion-reports/APZ-ANALYTICS-002-programme-acceptance-report.md).
+
+### Added
+
+- Release Notes, CHANGELOG entry, Known Limitations, Compatibility, Operational/Production Readiness, Quality Evidence, Certification Report, Completion/Acceptance reports
+- Portfolio / commercial / EA catalogue promotion to Production **1.0.0** (Awaiting Acceptance)
+- ANALYTICS-006 Owner Acceptance recorded (**ACCEPTED / CLOSED**)
+
+### Fixed
+
+- Web typecheck: `buildQuery` params spread for Analytics dashboard list client
+
+## [APZHUB-PLATFORM-ANALYTICS-006] — 2026-07-19 — ACCEPTED / CLOSED
+
+Analytics Workbench Module (**production code**). `/workspace/analytics/*` · manifest `analytics` **0.1.0**. Evidence: [completion](./docs/sprint/APZHUB-PLATFORM-ANALYTICS-006-completion-report.md) · [workbench](./docs/workbench/analytics/README.md). Accepted via Owner Decision with APZ-ANALYTICS-002.
+
+### Added
+
+- Workbench module UI, router, typed `/api/v1/analytics` client, navigation manifest
+- Release 1.0 curated suite views + Saved / Datasets / Reports / Search / Health / Diagnostics
+- Vitest + Playwright workbench coverage; docs under `docs/workbench/analytics/`
+- No AI / predictive / external BI / custom SQL builders
+
+## [APZHUB-PLATFORM-ANALYTICS-005] — 2026-07-19 — ACCEPTED / CLOSED
+
+Analytics HTTP API (**production code**). OpenAPI **1.11.0** · `/api/v1/analytics/*` · platform-services **0.28.0** · analytics-contracts **0.1.1**. Evidence: [completion](./docs/sprint/APZHUB-PLATFORM-ANALYTICS-005-completion-report.md) · [http](./docs/http/analytics/README.md). Accepted via Owner Decision authorising APZHUB-PLATFORM-ANALYTICS-006.
+
+### Added
+
+- App Router routes + handlers + Zod schemas for Owner analytics endpoint set
+- Gateway bootstrap `APZHUB_ANALYTICS_ENABLED` (Metabase or non-prod in-memory)
+- OpenAPI paths/schemas/permissions; quality docs under `docs/http/analytics/`
+- Pipeline permission propagation for HTTP empty-permissions pattern
+
+## [APZHUB-PLATFORM-ANALYTICS-004] — 2026-07-19 — ACCEPTED / CLOSED
+
+Analytics Platform Services (**production code**). `@apzhub/platform-services` **0.27.0** delivery (package now **0.28.0**). `services/analytics/service.yaml` **0.1.0**. Evidence: [completion](./docs/sprint/APZHUB-PLATFORM-ANALYTICS-004-completion-report.md) · [services](./docs/platform/analytics/ANALYTICS-PLATFORM-SERVICES.md). Accepted via Owner Decision authorising APZHUB-PLATFORM-ANALYTICS-005.
+
+### Added
+
+- Analytics `*ServiceImpl` + Metabase/mock providers + gateway.analytics + AuthZ map
+- No Workbench / APZ Analytics (HTTP delivered separately as ANALYTICS-005)
+
+## [APZHUB-PLATFORM-ANALYTICS-003] — 2026-07-19 — ACCEPTED / CLOSED
+
+Analytics Platform Contracts (**production code**). Package `@apzhub/analytics-contracts` **0.1.0**. Evidence: [completion](./docs/sprint/APZHUB-PLATFORM-ANALYTICS-003-completion-report.md) · [contracts](./docs/platform/analytics/ANALYTICS-CONTRACTS.md).
+
+### Added
+
+- `packages/analytics-contracts/` — provider-neutral models, permissions, service interfaces, examples, tests
+- Accepted via Owner Decision authorising APZHUB-PLATFORM-ANALYTICS-004
+
+## [APZHUB-INTEGRATION-METABASE-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+Metabase Integration Foundation (**production code**). Package `@apzhub/integration-metabase` **0.1.0**. Recommendation: **CERTIFIED_FOUNDATION**. Evidence: [completion](./docs/sprint/APZHUB-INTEGRATION-METABASE-001-completion-report.md) · [cert](./docs/integrations/metabase/CERTIFICATION-REPORT.md).
+
+### Added
+
+- `integrations/metabase/` — adapter, client, auth, health, diagnostics, version/capability detection, mock, tests
+- Certification pack under `docs/integrations/metabase/`
+- Accepted via Owner Decision authorising APZHUB-PLATFORM-ANALYTICS-003
+
+## [APZHUB-PLATFORM-ANALYTICS-002] — 2026-07-19 — ACCEPTED / CLOSED
+
+Analytics Information Model (**documentation only**). Recommendation: **FOUNDATION COMPLETE**. Evidence: [completion](./docs/sprint/APZHUB-PLATFORM-ANALYTICS-002-completion-report.md) · [model](./docs/platform/analytics/ANALYTICS-INFORMATION-MODEL.md).
+
+### Added
+
+- Glossary · domain model · entity relationships · contract planning under `docs/platform/analytics/`
+- Accepted via Owner Decision authorising APZHUB-INTEGRATION-METABASE-001
+
+## [APZHUB-PLATFORM-ANALYTICS-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+Analytics Platform Foundation (**documentation only**). Recommendation: **FOUNDATION READY**. Evidence: [completion](./docs/sprint/APZHUB-PLATFORM-ANALYTICS-001-completion-report.md) · [pack](./docs/platform/analytics/README.md).
+
+### Added
+
+- `docs/platform/analytics/` — platform, services, capabilities, integration, roadmap, readiness
+- [ADR-0066](./docs/adr/ADR-0066-analytics-platform-boundaries.md) · [ADR-0067](./docs/adr/ADR-0067-metabase-analytics-provider.md) (**Accepted**)
+- No Metabase/Analytics implementation; no package or frozen-plane changes
+
+## [APZ-ANALYTICS-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+APZ Analytics Release 1.0 Product Planning & Implementation Readiness (**documentation only**). Recommendation: **READY WITH CONDITIONS**. Maturity: **Planning**. Evidence: [completion](./docs/sprint/APZ-ANALYTICS-001-completion-report.md) · [pack](./docs/products/apz-analytics/README.md).
+
+### Added
+
+- `docs/products/apz-analytics/` Release Definition Pack (definition, plan, backlog, readiness, quality/test/cert plans, checklist, post-1.0 roadmap)
+- No production code, Metabase adapter, package, or architecture changes
+
+## [APZHUB-OWNER-001] — 2026-07-19 — ACCEPTED / CLOSED
+
+Foundation Acceptance & Operational Transition (**documentation only**). Evidence: [completion](./docs/sprint/APZHUB-OWNER-001-completion-report.md) · [FOUNDATION-CLOSURE](./docs/foundation/FOUNDATION-CLOSURE.md) · [OWNER-ACCEPTANCE-REGISTER](./docs/foundation/OWNER-ACCEPTANCE-REGISTER.md).
+
+### Changed
+
+- Repository Foundation phase **CLOSED**; Operational Delivery **ACTIVE**
+- Accepted / closed: ARCHITECTURE-001 · PRODUCT-MANAGEMENT-001 · PORTFOLIO-001 · RELEASES-001 · GOVERNANCE-001 · Support 1.0.0 packaging
+- No production code, package, or architecture changes
+
+## [APZHUB-PRODUCT-MANAGEMENT-001] — 2026-07-19 — ACCEPTED / CLOSED / Operational
+
+Commercial Product Management Framework (**documentation only**). Accepted via [APZHUB-OWNER-001](./docs/foundation/OWNER-ACCEPTANCE-REGISTER.md). Evidence: [completion](./docs/sprint/APZHUB-PRODUCT-MANAGEMENT-001-completion-report.md) · [framework](./docs/product-management/README.md).
+
+### Added
+
+- `docs/product-management/` — handbook, lifecycle, editions, licensing, pricing principles, feature/roadmap/journey/personas/KPIs/GTM/release/competitors
+- [COMMERCIAL-PRODUCT-CATALOGUE.md](./docs/product-management/COMMERCIAL-PRODUCT-CATALOGUE.md) · [PRODUCT-EDITION-MATRIX.md](./docs/product-management/PRODUCT-EDITION-MATRIX.md) · [COMMERCIAL-ROADMAP.md](./docs/product-management/COMMERCIAL-ROADMAP.md)
+- No production code, package, architecture, pricing, or licensing enforcement
+
+## [APZHUB-ARCHITECTURE-001] — 2026-07-19 — ACCEPTED / CLOSED / Operational
+
+Enterprise Architecture Catalogue (**documentation only**). Accepted via [APZHUB-OWNER-001](./docs/foundation/OWNER-ACCEPTANCE-REGISTER.md). Evidence: [completion](./docs/sprint/APZHUB-ARCHITECTURE-001-completion-report.md) · [catalogue](./docs/architecture/ENTERPRISE-ARCHITECTURE-CATALOGUE.md).
+
+### Added
+
+- [ENTERPRISE-ARCHITECTURE-CATALOGUE.md](./docs/architecture/ENTERPRISE-ARCHITECTURE-CATALOGUE.md) and domain catalogues (platform, product, integration, infrastructure, observability, security, quality)
+- [ARCHITECTURE-RELATIONSHIPS.md](./docs/architecture/ARCHITECTURE-RELATIONSHIPS.md) · [ARCHITECTURE-MATURITY-MATRIX.md](./docs/architecture/ARCHITECTURE-MATURITY-MATRIX.md)
+- No production code, package, or architecture changes
+
+## [APZHUB-GOVERNANCE-001] — 2026-07-19 — ACCEPTED / CLOSED / Operational
+
+Engineering Governance Dashboard Specification (**documentation only**). Accepted via [APZHUB-OWNER-001](./docs/foundation/OWNER-ACCEPTANCE-REGISTER.md). Evidence: [completion](./docs/sprint/APZHUB-GOVERNANCE-001-completion-report.md) · [spec](./docs/governance/ENGINEERING-GOVERNANCE-DASHBOARD.md).
+
+### Added
+
+- `docs/governance/ENGINEERING-GOVERNANCE-DASHBOARD.md` and companion status / health / lifecycle / KPI / data-model specs
+- No dashboard UI, Grafana, APIs, or monitoring
+
+## [APZHUB-PORTFOLIO-001] — 2026-07-19 — ACCEPTED / CLOSED / Operational
+
+Cross-Product Integration & Automation Strategy (**documentation only**). Accepted via [APZHUB-OWNER-001](./docs/foundation/OWNER-ACCEPTANCE-REGISTER.md). Evidence: [completion](./docs/sprint/APZHUB-PORTFOLIO-001-completion-report.md) · [strategy](./docs/products/PORTFOLIO-INTEGRATION-STRATEGY.md).
+
+### Added
+
+- [PORTFOLIO-INTEGRATION-STRATEGY.md](./docs/products/PORTFOLIO-INTEGRATION-STRATEGY.md)
+- [PLATFORM-EVENT-CATALOGUE.md](./docs/products/PLATFORM-EVENT-CATALOGUE.md)
+- [AUTOMATION-ROADMAP.md](./docs/products/AUTOMATION-ROADMAP.md)
+- [PORTFOLIO-INTERACTION-DIAGRAM.md](./docs/products/PORTFOLIO-INTERACTION-DIAGRAM.md)
+
+## [APZHUB-RELEASES-001] — 2026-07-19 — ACCEPTED / CLOSED / Operational
+
+Portfolio Release Baseline Standardisation (**documentation only**). Accepted via [APZHUB-OWNER-001](./docs/foundation/OWNER-ACCEPTANCE-REGISTER.md). Evidence: [completion](./docs/sprint/APZHUB-RELEASES-001-completion-report.md) · [register](./docs/releases/PORTFOLIO-RELEASE-REGISTER.md).
+
+### Added
+
+- [PORTFOLIO-RELEASE-REGISTER.md](./docs/releases/PORTFOLIO-RELEASE-REGISTER.md)
+- [RELEASE-GOVERNANCE-CHECKLIST.md](./docs/releases/RELEASE-GOVERNANCE-CHECKLIST.md) (mandatory before future Owner Acceptance)
+- Support SemVer packaging **1.0.0** under `docs/releases/support/1.0.0/` (indexes OSS-110 Production — no code)
+
+## [APZ Support 1.0.0] — 2026-07-19 — Packaging (APZHUB-RELEASES-001)
+
+Current Production SemVer for APZ Support (documentation packaging of OSS-110-12/14). Evidence: [docs/releases/support/1.0.0/](./docs/releases/support/1.0.0/README.md).
+
+### Added
+
+- Product `RELEASES.md`, Release Notes, Compatibility, Quality Evidence, Baseline Confirmation
+- No production code, package, or architecture changes
+
+### Compatibility
+
+- `@apzhub/integration-zammad` **0.6.0** unchanged · Integration SDK **1.0.0** unchanged
 
 ## [APZ Time 1.0.0] — 2026-07-19 — ACCEPTED / CLOSED
 

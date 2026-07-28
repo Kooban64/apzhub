@@ -16,3 +16,4 @@ export {
 } from "./notification-service-impls";
 export type { NotificationPlatformServiceImpls } from "./notification-service-impls";
 export { isNotificationServiceEnabled } from "./notification-env";
+export * from "./delivery";

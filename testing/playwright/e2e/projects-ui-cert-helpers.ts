@@ -1,7 +1,8 @@
-import { expect, type Page, type Route } from "@playwright/test";
+import { type Page, type Route } from "@playwright/test";
 
-export const DEV_EMAIL = "dev@apzhub.local";
-export const DEV_PASSWORD = "DevPassword123!";
+import { DEV_EMAIL, DEV_PASSWORD, signInDevUser } from "./auth-helpers";
+
+export { DEV_EMAIL, DEV_PASSWORD };
 
 export const PROJECT_ID = "proj_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 export const WORKSPACE_ID = "ws_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -86,48 +87,8 @@ async function json(route: Route, body: unknown, status = 200) {
   });
 }
 
-async function ensureWorkspace(page: Page) {
-  if (!/\/workspace\//.test(page.url())) {
-    await page.goto("/workspace/home", { waitUntil: "domcontentloaded" });
-  }
-  await expect(page).toHaveURL(/\/workspace\//, { timeout: 20_000 });
-}
-
 export async function signIn(page: Page) {
-  await page.goto("/login", { waitUntil: "domcontentloaded" });
-  await page.getByLabel("Email").fill(DEV_EMAIL);
-  await page.getByLabel("Password").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "Sign in" }).click();
-
-  try {
-    await expect(page).toHaveURL(/\/workspace\/|\/$/, { timeout: 15_000 });
-    await ensureWorkspace(page);
-    return;
-  } catch {
-    // Fall through to register / retry login.
-  }
-
-  const uniqueEmail = `projects-e2e-${Date.now()}@apzhub.local`;
-  await page.goto("/register", { waitUntil: "domcontentloaded" });
-  await page.getByLabel("Name").fill("Projects E2E User");
-  await page.getByLabel("Email").fill(uniqueEmail);
-  await page.getByLabel("Password").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "Register" }).click();
-
-  try {
-    await expect(page).toHaveURL(/\/workspace\/|\/$/, { timeout: 20_000 });
-    await ensureWorkspace(page);
-    return;
-  } catch {
-    // Registration may fail if auth backend is busy; retry known-dev login.
-  }
-
-  await page.goto("/login", { waitUntil: "domcontentloaded" });
-  await page.getByLabel("Email").fill(DEV_EMAIL);
-  await page.getByLabel("Password").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "Sign in" }).click();
-  await expect(page).toHaveURL(/\/workspace\/|\/$/, { timeout: 20_000 });
-  await ensureWorkspace(page);
+  await signInDevUser(page);
 }
 
 export async function mockProjectsApi(page: Page) {

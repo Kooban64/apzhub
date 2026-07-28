@@ -17,7 +17,7 @@ Follow [PRODUCT-BACKLOG-STANDARD](../PRODUCT-BACKLOG-STANDARD.md).
 ## Current backlog themes (no invented IDs)
 
 - UX polish / packaging
-- Known-limitation remediation (Event Bus, attachments) — not authorised
+- Known-limitation remediation (webhook ingress, attachments, realtime) — not authorised; Event Bus + in-app ENF closed under APZHUB-1.1-003 (Awaiting Acceptance)
 - Derive stories from Owner-approved backlog when authorised
 
 ## Rule

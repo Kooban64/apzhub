@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: qep-certification
+name: Certification
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Certification (M13) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  product: apzqep
+  moduleCatalogueId: M13
+  slug: certification
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: stub
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Certification
+    icon: flask-conical
+    route: /workspace/qep/certification
+    order: 130
+    permission: qep.certification.read
+  view:
+    title: Certification
+    workspace: qep
+    route: /workspace/qep/certification
+    permission: qep.certification.read

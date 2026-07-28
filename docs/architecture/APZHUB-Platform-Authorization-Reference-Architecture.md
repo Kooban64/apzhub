@@ -141,15 +141,18 @@ getValidatedSession()
 
 ### Law Platform
 
-- Hydration: `createLawPlatformAuthPermissionContext()` in all registry loaders
-- Law API: `resolveLawApiPermissions()` async → AuthorizationService
+- Hydration: `createLawPlatformAuthPermissionContext()` in all registry loaders with `mode: "auth"` (OBS-LAW-01 / APZHUB-1.1-001)
+- Client shell: RSC layout passes `authPermissionContext` into `WorkbenchProvider` (`permissionMode: "auth"`)
+- Law API: `resolveLawApiPermissions()` async → AuthorizationService; always auth adapter; **no** empty-grant `*` injection
+- Workbench `AuthWorkbenchPermissionAdapter` honors `*` / `namespace.*` patterns (parity with `permissionPatternMatches`)
 - Trust commands: inherit permission adapter from Workbench shell (no product-owned RBAC)
+- Health summaries may still use explicit `mode: "allow-all"` for ops visibility only
 
 ### Platform web
 
 - `createPlatformAuthPermissionContext()` for Workbench hydration
 
-Dev fallback: `isDevRegistrationAllowed()` grants `["*"]` when no assignments exist (unchanged behaviour).
+Evidence: [APZHUB-1.1-001](../releases/1.1/APZHUB-1.1-001/ARCHITECTURE-NOTES.md).
 
 ---
 

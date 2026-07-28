@@ -51,6 +51,7 @@ function scan(files, rules) {
       const line = lines[i];
       for (const rule of rules) {
         if (rule.pattern.test(line)) {
+          if (rule.allow?.(path, line)) continue;
           violations.push({
             file: path,
             line: i + 1,
@@ -120,6 +121,8 @@ scan(walk(join(ROOT, "apps/web/lib/search")), [
     rule: "client-no-platform-services",
     pattern:
       /@apzhub\/platform-services|@apzhub\/integration-meilisearch|getPlatformServiceGateway/,
+    // Composition-root wiring may import platform-services types (REM-001 / OR-DEF-002)
+    allow: (path) => path.includes("/lib/search/wiring/"),
   },
   {
     rule: "client-path-constraint",

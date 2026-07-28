@@ -24,17 +24,17 @@
 
 ## Review summary (repository evidence)
 
-| Artefact                    | Outcome                                                                                                       |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Product Definition Pack     | Complete — maturity **Production**                                                                            |
-| IMPLEMENTATION-READINESS    | **Production**; Operational **PARTIAL**                                                                       |
-| ARCHITECTURE / CAPABILITIES | Wave 2 + Support services + HTTP + Workbench + search-support on disk                                         |
-| INTEGRATIONS                | `@apzhub/integration-zammad` **0.6.0** CERTIFIED_WITH_LIMITATIONS                                             |
-| KNOWN-LIMITATIONS           | No Event Bus publish · no webhook ingress · no binary attachments · no Support notifications/realtime         |
-| RELEASE-PLAN                | Engineering baselines OSS-110-12/14; **no commercial SemVer** / `docs/releases/support/` product baseline     |
-| Product Release Roadmap     | Support Production; packaging/polish; no Support **2.0.0** baseline filed                                     |
-| Reference Implementation    | Support Workbench is the clone pattern for Projects/Time; Support itself already delivered                    |
-| Engineering Operating Model | DoR still applies to any **new named programme** (Owner Approval + Sprint Guide) even for Production products |
+| Artefact                    | Outcome                                                                                                                                   |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Product Definition Pack     | Complete — maturity **Production**                                                                                                        |
+| IMPLEMENTATION-READINESS    | **Production**; Operational **PARTIAL**                                                                                                   |
+| ARCHITECTURE / CAPABILITIES | Wave 2 + Support services + HTTP + Workbench + search-support on disk                                                                     |
+| INTEGRATIONS                | `@apzhub/integration-zammad` **0.6.0** CERTIFIED_WITH_LIMITATIONS                                                                         |
+| KNOWN-LIMITATIONS           | Webhook ingress · binary attachments · realtime WS/SSE remain; Event Bus publish + in-app ENF closed (APZHUB-1.1-003 Awaiting Acceptance) |
+| RELEASE-PLAN                | Engineering baselines OSS-110-12/14; **no commercial SemVer** / `docs/releases/support/` product baseline                                 |
+| Product Release Roadmap     | Support Production; packaging/polish; no Support **2.0.0** baseline filed                                                                 |
+| Reference Implementation    | Support Workbench is the clone pattern for Projects/Time; Support itself already delivered                                                |
+| Engineering Operating Model | DoR still applies to any **new named programme** (Owner Approval + Sprint Guide) even for Production products                             |
 
 ---
 
@@ -53,7 +53,7 @@
 | Health                       | **PARTIAL (product UI)** | Adapter/service health exist; **no** dedicated Support Workbench health view (unlike Projects/Time) |
 | Diagnostics                  | **PARTIAL (product UI)** | Platform/adapter diagnostics paths exist; **no** dedicated Support Workbench diagnostics view       |
 | Audit                        | **PARTIAL**              | Platform pipeline patterns; Support-specific audit product surface thin                             |
-| Notification integration     | **FAIL (vertical)**      | Explicit limitation — Support vertical not wired to Attention Engine / notifications                |
+| Notification integration     | **PASS (in-app ENF)**    | APZHUB-1.1-003 — Support domain events → ENF Attention; realtime WS/SSE still open                  |
 | Future analytics             | **PARTIAL**              | Support analytics spine present; Metabase/Analytics product absent (portfolio Concept)              |
 
 ---

@@ -75,7 +75,8 @@ for (const root of workflowPackages) {
     // Dependency import only — docs may say "no n8n"
     {
       rule: "workflow-no-n8n-import",
-      pattern: /from\s+["'][^"']*n8n[^"']*["']|require\(["'][^"']*n8n/,
+      pattern:
+        /from\s+["'](?!\.\/)[^"']*n8n[^"']*["']|require\(["'](?!\.\/)[^"']*n8n|@apzhub\/integration-n8n/,
     },
     { rule: "workflow-no-apps", pattern: /from\s+["'][^"']*apps\// },
   ]);
@@ -87,7 +88,7 @@ const workflowServiceFiles = walk(
 /** SoR workflow services remain n8n-free; engine façade files are APZWORKFLOW-007. */
 const workflowSorFiles = workflowServiceFiles.filter((file) => {
   const path = rel(file);
-  return !/workflow-engine|unavailable-workflow-engine|create-workflow-engine/.test(
+  return !/workflow-engine|unavailable-workflow-engine|create-workflow-engine|n8n-ops-provider/.test(
     path,
   );
 });
@@ -102,7 +103,8 @@ scan(workflowServiceFiles, [
 scan(workflowSorFiles, [
   {
     rule: "services-no-n8n-import",
-    pattern: /from\s+["'][^"']*n8n[^"']*["']|require\(["'][^"']*n8n/,
+    pattern:
+      /from\s+["'](?!\.\/)[^"']*n8n[^"']*["']|require\(["'](?!\.\/)[^"']*n8n|@apzhub\/integration-n8n/,
   },
 ]);
 
@@ -178,20 +180,20 @@ const contractsStub = readFileSync(
   "utf8",
 );
 
-if (contractsPkg.version !== "0.3.0") {
+if (contractsPkg.version !== "0.4.2") {
   violations.push({
     file: "packages/workflow-contracts/package.json",
     line: 1,
     rule: "version-workflow-contracts",
-    detail: `Expected 0.3.0, got ${contractsPkg.version}`,
+    detail: `Expected 0.4.2, got ${contractsPkg.version}`,
   });
 }
-if (!["0.21.0", "0.25.0", "0.26.1"].includes(platformPkg.version)) {
+if (!["0.21.0", "0.25.0", "0.30.0", "0.32.0"].includes(platformPkg.version)) {
   violations.push({
     file: "packages/platform-services/package.json",
     line: 1,
     rule: "version-platform-services",
-    detail: `Expected 0.21.0, 0.25.0 or 0.26.1, got ${platformPkg.version}`,
+    detail: `Expected 0.21.0, 0.25.0 0.30.0 or 0.32.0, got ${platformPkg.version}`,
   });
 }
 if (!/workflow-contracts/.test(contractsStub)) {
@@ -236,5 +238,5 @@ console.log(
 console.log("  - platform workflow services exclude HTTP / n8n / EventBus / execution");
 console.log("  - gateway exposes workflow nested facets");
 console.log("  - authorization catalogue + workflowPlatformOps present");
-console.log("  - versions: workflow-contracts@0.3.0 platform-services@0.26.1");
+console.log("  - versions: workflow-contracts@0.4.2 platform-services@0.32.0");
 process.exit(0);

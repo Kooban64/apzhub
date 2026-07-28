@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0.0",
+  "evidenceId": "20260728T071000Z-APZQEP-ENG-070A-ECR",
+  "recordedAt": "2026-07-28T07:10:00.000Z",
+  "programme": "APZQEP-ENG-070A",
+  "capability": "Test Plans Workbench",
+  "layer": "Presentation",
+  "package": "@apzhub/qep-test-plans",
+  "packageVersion": "0.2.0",
+  "packageVersionChanged": false,
+  "standard": "OES-002",
+  "standardVersion": "1.1.0",
+  "reviewType": "ENGINEERING_COMPLETION_REVIEW",
+  "decision": "PASS",
+  "statusAfterReview": "READY_FOR_OWNER_ACCEPTANCE",
+  "governingSpecification": "APZQEP-OES-ENG-070A (ACCEPTED / ENGINEERING SPECIFICATION BASELINED / CLOSED)",
+  "governingArchitecture": "APZQEP-ARCH-014 (ACCEPTED / ARCHITECTURE BASELINED / PROGRAMME CLOSED)",
+  "baselinesConsumed": {
+    "domain": "@apzhub/qep-test-plans 0.1.0 CERTIFIED (CERT-060A)",
+    "infrastructure": "@apzhub/qep-test-plans 0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED (CERT-060B)"
+  },
+  "checklist": {
+    "ECR-01_workPackagesComplete": "PASS",
+    "ECR-02_noPlaceholderUi": "PASS",
+    "ECR-03_noTodoFixmeInProductionPaths": "PASS",
+    "ECR-04_accessibilityGates": "PASS",
+    "ECR-05_e2eJourneys": "PASS",
+    "ECR-06_documentationComplete": "PASS",
+    "ECR-07_completionReportComplete": "PASS",
+    "ECR-08_noArchitecturalDrift": "PASS",
+    "ECR-09_bindingInvariantsHonoured": "PASS",
+    "ECR-10_stopExplicit": "PASS"
+  },
+  "workPackages": {
+    "total": 18,
+    "complete": 18,
+    "deferred": 0,
+    "governedUnavailable": ["WP-12 Compare sub-scope (L-01)", "WP-14 cross-capability slots"]
+  },
+  "confirmations": {
+    "noDomainOrInfrastructureContractChanges": true,
+    "availableActionsSoleActionAuthority": true,
+    "compareGovernedUnavailable_L01": true,
+    "itemsBoundToDto_L02": true
+  },
+  "verification": {
+    "testsPassed": 20,
+    "testsBreakdown": {
+      "presentationRouteTests": 5,
+      "viewsAndJourneyTests": 15
+    },
+    "playwrightSpec": "testing/playwright/e2e/apzqep-eng-070a-test-plans-workbench.spec.ts",
+    "playwrightJourneysAsserted": 14,
+    "playwrightJourneysPartial": [
+      "E2E-06 (Mark Ready -> Start Execution -> Complete -> Archive chain)",
+      "E2E-07 (Supersede UI click-through)",
+      "E2E-08 (Clone UI click-through)",
+      "E2E-11 (not-found sub-case)"
+    ],
+    "typecheck": "PASS",
+    "architectureBoundaryRespected": true
+  },
+  "knownLimitations": [
+    {
+      "id": "L-01",
+      "origin": "Infrastructure (ENG-060B/CERT-060B)",
+      "presentationTreatment": "Governed unavailable route, no fabricated diff, no call to non-existent endpoint"
+    },
+    {
+      "id": "L-02",
+      "origin": "Infrastructure (ENG-060B/CERT-060B)",
+      "presentationTreatment": "Items bound to Plan DTO, no invented dedicated endpoint"
+    },
+    {
+      "id": "P-01",
+      "origin": "Workbench (this programme)",
+      "presentationTreatment": "Playwright breadth gap for E2E-06/07/08/11 recorded as test-authoring completeness gap, not architectural gap"
+    }
+  ],
+  "artifacts": [
+    "docs/products/apzqep/test-plans/workbench/ENGINEERING-COMPLETION-REVIEW.md",
+    "docs/products/apzqep/test-plans/workbench/ECR-CHECKLIST.md",
+    "docs/products/apzqep/test-plans/workbench/COMPLETION-REPORT.md",
+    "docs/products/apzqep/test-plans/workbench/ACCESSIBILITY.md",
+    "docs/products/apzqep/test-plans/workbench/KNOWN-LIMITATIONS.md",
+    "docs/products/apzqep/test-plans/workbench/OWNER-SUMMARY.md",
+    "packages/qep-test-plans/src/presentation/",
+    "apps/web/lib/qep/qep-test-plan-api.ts",
+    "apps/web/components/qep/qep-test-plan-views.tsx",
+    "modules/qep-test-plans/module.yaml",
+    "testing/playwright/e2e/apzqep-eng-070a-test-plans-workbench.spec.ts"
+  ],
+  "nextAction": "Owner Acceptance Review of APZQEP-ENG-070A (separate Owner authorisation; not performed under this instruction)",
+  "notAuthorised": [
+    "Owner Acceptance decision of APZQEP-ENG-070A",
+    "Component Certification",
+    "Capability Certification",
+    "Version Promotion",
+    "Freeze",
+    "1.0.0 promotion",
+    "Domain changes",
+    "Infrastructure changes",
+    "AI",
+    "MCP"
+  ]
+}

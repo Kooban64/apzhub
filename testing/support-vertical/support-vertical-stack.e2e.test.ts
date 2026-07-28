@@ -192,8 +192,8 @@ describe("OSS-110-12 Support Vertical mocked E2E stack", () => {
   // -------------------------------------------------------------------------
 
   it("verifies platform versions", () => {
-    expect(ZAMMAD_ADAPTER_VERSION).toBe("0.6.0");
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.26.1");
+    expect(ZAMMAD_ADAPTER_VERSION).toBe("0.8.0");
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.32.0");
   });
 
   // -------------------------------------------------------------------------

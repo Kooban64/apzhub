@@ -50,7 +50,12 @@ describe("SupportConversation", () => {
       },
     ];
 
-    render(<SupportConversation articles={articles} />);
+    render(
+      <SupportConversation
+        supportRequestId="sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        articles={articles}
+      />,
+    );
     const items = screen.getAllByTestId("support-conversation-item");
     expect(items).toHaveLength(3);
     expect(screen.getAllByText("Internal note").length).toBeGreaterThan(0);
@@ -63,6 +68,7 @@ describe("SupportConversation", () => {
   it("sanitizes HTML article bodies to text", () => {
     render(
       <SupportConversation
+        supportRequestId="sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         articles={[
           {
             ...base,

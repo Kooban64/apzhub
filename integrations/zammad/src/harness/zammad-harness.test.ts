@@ -41,6 +41,6 @@ describe("Zammad SDK harness adoption", () => {
     const meta = getZammadHarnessMetadata();
     expect(meta.packageName).toBe("@apzhub/integration-zammad");
     expect(meta.extendsAdapterBase).toBe(true);
-    expect(meta.adapterVersion).toBe("0.6.0");
+    expect(meta.adapterVersion).toBe("0.8.0");
   });
 });

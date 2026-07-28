@@ -71,7 +71,14 @@ export class InMemoryTimeEntryRepository implements WritableTimeEntryRepository 
   }
 }
 
-export {
-  getSharedTimeEntryRepository,
-  resetSharedTimeEntryRepository,
-} from "../persistence/repository-factory";
+/** Client-safe memory singleton — must not import repository-factory (pulls pg). */
+let sharedTimeEntryRepository: InMemoryTimeEntryRepository | undefined;
+
+export function getSharedTimeEntryRepository(): InMemoryTimeEntryRepository {
+  sharedTimeEntryRepository ??= new InMemoryTimeEntryRepository();
+  return sharedTimeEntryRepository;
+}
+
+export function resetSharedTimeEntryRepository(): void {
+  sharedTimeEntryRepository = undefined;
+}

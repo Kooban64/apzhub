@@ -394,6 +394,10 @@ const packageAliases = {
     __dirname,
     "integrations/github-actions/src/index.ts",
   ),
+  "@apzhub/integration-gitlab-ci": path.resolve(
+    __dirname,
+    "integrations/gitlab-ci/src/index.ts",
+  ),
   "@apzhub/integration-meilisearch": path.resolve(
     __dirname,
     "integrations/meilisearch/src/index.ts",
@@ -426,6 +430,97 @@ const packageAliases = {
   "@apzhub/testing-services": path.resolve(
     __dirname,
     "packages/testing-services/src/index.ts",
+  ),
+  "@apzhub/qep-types": path.resolve(__dirname, "packages/qep-types/src/index.ts"),
+  "@apzhub/qep-contracts": path.resolve(
+    __dirname,
+    "packages/qep-contracts/src/index.ts",
+  ),
+  "@apzhub/qep-foundation": path.resolve(
+    __dirname,
+    "packages/qep-foundation/src/index.ts",
+  ),
+  "@apzhub/qep-ui": path.resolve(__dirname, "packages/qep-ui/src/index.ts"),
+  "@apzhub/qep-requirements/domain": path.resolve(
+    __dirname,
+    "packages/qep-requirements/src/domain/index.ts",
+  ),
+  "@apzhub/qep-requirements/application": path.resolve(
+    __dirname,
+    "packages/qep-requirements/src/application/index.ts",
+  ),
+  "@apzhub/qep-requirements/presentation": path.resolve(
+    __dirname,
+    "packages/qep-requirements/src/presentation/index.ts",
+  ),
+  "@apzhub/qep-requirements/shared": path.resolve(
+    __dirname,
+    "packages/qep-requirements/src/shared/index.ts",
+  ),
+  "@apzhub/qep-requirements/infrastructure": path.resolve(
+    __dirname,
+    "packages/qep-requirements/src/infrastructure/index.ts",
+  ),
+  "@apzhub/qep-requirements": path.resolve(
+    __dirname,
+    "packages/qep-requirements/src/index.ts",
+  ),
+  "@apzhub/qep-test-specifications/domain": path.resolve(
+    __dirname,
+    "packages/qep-test-specifications/src/domain/index.ts",
+  ),
+  "@apzhub/qep-test-specifications/shared": path.resolve(
+    __dirname,
+    "packages/qep-test-specifications/src/shared/index.ts",
+  ),
+  "@apzhub/qep-test-specifications/presentation": path.resolve(
+    __dirname,
+    "packages/qep-test-specifications/src/presentation/index.ts",
+  ),
+  "@apzhub/qep-test-specifications/application": path.resolve(
+    __dirname,
+    "packages/qep-test-specifications/src/application/index.ts",
+  ),
+  "@apzhub/qep-test-specifications/infrastructure": path.resolve(
+    __dirname,
+    "packages/qep-test-specifications/src/infrastructure/index.ts",
+  ),
+  "@apzhub/qep-test-specifications": path.resolve(
+    __dirname,
+    "packages/qep-test-specifications/src/index.ts",
+  ),
+  "@apzhub/qep-test-plans/domain": path.resolve(
+    __dirname,
+    "packages/qep-test-plans/src/domain/index.ts",
+  ),
+  "@apzhub/qep-test-plans/shared": path.resolve(
+    __dirname,
+    "packages/qep-test-plans/src/shared/index.ts",
+  ),
+  "@apzhub/qep-test-plans/presentation": path.resolve(
+    __dirname,
+    "packages/qep-test-plans/src/presentation/index.ts",
+  ),
+  "@apzhub/qep-test-plans/application": path.resolve(
+    __dirname,
+    "packages/qep-test-plans/src/application/index.ts",
+  ),
+  "@apzhub/qep-test-plans/infrastructure": path.resolve(
+    __dirname,
+    "packages/qep-test-plans/src/infrastructure/index.ts",
+  ),
+  "@apzhub/qep-test-plans": path.resolve(
+    __dirname,
+    "packages/qep-test-plans/src/index.ts",
+  ),
+  "@apzhub/lifecycle-engine": path.resolve(
+    __dirname,
+    "packages/lifecycle-engine/src/index.ts",
+  ),
+  "@apzhub/search-qep": path.resolve(__dirname, "packages/search-qep/src/index.ts"),
+  "@apzhub/integration-qep-github": path.resolve(
+    __dirname,
+    "integrations/qep-github/src/index.ts",
   ),
   "@apzhub/reporting-contracts": path.resolve(
     __dirname,
@@ -474,6 +569,10 @@ const packageAliases = {
   "@apzhub/notification-persistence": path.resolve(
     __dirname,
     "packages/notification-persistence/src/index.ts",
+  ),
+  "@apzhub/notification-delivery-persistence": path.resolve(
+    __dirname,
+    "packages/notification-delivery-persistence/src/index.ts",
   ),
   "@apzhub/configuration-contracts": path.resolve(
     __dirname,
@@ -554,6 +653,8 @@ const packageAliases = {
     __dirname,
     "packages/search-support/src/index.ts",
   ),
+  "@apzhub/search-time": path.resolve(__dirname, "packages/search-time/src/index.ts"),
+  "@apzhub/search-law": path.resolve(__dirname, "packages/search-law/src/index.ts"),
   "@apzhub/search-documents": path.resolve(
     __dirname,
     "packages/search-documents/src/index.ts",
@@ -613,12 +714,14 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./testing/fixtures/vitest.setup.ts"],
+    exclude: ["**/node_modules/**", "**/dist/**", "**/.next/**", "**/coverage/**"],
     include: [
       "packages/**/*.test.{ts,tsx}",
       "apps/**/*.test.{ts,tsx}",
       "integrations/**/*.test.{ts,tsx}",
       "testing/wave1/**/*.test.{ts,tsx}",
       "testing/wave2/**/*.test.{ts,tsx}",
+      "testing/playwright/**/*.test.{ts,tsx}",
       "testing/support-vertical/**/*.test.{ts,tsx}",
       "testing/sdk-v1/**/*.test.{ts,tsx}",
       "testing/reporting-vertical/**/*.test.{ts,tsx}",

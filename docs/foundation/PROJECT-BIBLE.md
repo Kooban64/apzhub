@@ -5,8 +5,8 @@
 > **Authoritative references:** [docs/sprint/](../sprint/) completion reports · [docs/reviews/](../reviews/) · [000](../000-apzhub-engineering-constitution.md)  
 > **Related documents:** [PROJECT-INDEX](./PROJECT-INDEX.md) · [DECISION-REGISTER](./DECISION-REGISTER.md) · [APZHUB-MASTER-BRIEF](./APZHUB-MASTER-BRIEF.md)  
 > **Reading order:** After Master Brief; for historical context  
-> **Last updated:** 2026-07-10  
-> **Current status:** Active — living historical record
+> **Last updated:** 2026-07-22  
+> **Current status:** Active — living historical record · Platform **1.2.0** baseline freeze [APZHUB-RELEASE-001](../releases/platform-1.2.0/README.md)
 
 ---
 
@@ -252,18 +252,27 @@ See [FIN-001 Architecture Review](../reviews/FIN-001-Architecture-Review.md).
 
 ---
 
+## Chapter — Platform 1.2.0 certification train & baseline freeze (2026-07)
+
+After Production packaging (APZHUB-1.2-009), Continuous Product Lifecycle, and Backlog Assessment, the repository executed Engineering Waves 1–2 (ENG-0001…0022), portfolio certification programmes (QA-CERT-001…003), and Visual Certification Review (QA-CERT-004 **ACCEPTED**). **APZHUB-RELEASE-001** (**ACCEPTED**) freezes Platform **1.2.0** as the official repository baseline. **APZHUB-OPS-001** assesses operational cutover readiness as **PRODUCTION READY WITH ACTIONS**. Packs: [platform-1.2.0](../releases/platform-1.2.0/README.md) · [operational-readiness](../operations/platform-1.2.0-operational-readiness/README.md).
+
 ## Future evolution
 
-| Horizon         | Direction                                                                             |
-| --------------- | ------------------------------------------------------------------------------------- |
-| **Near term**   | OSS-100-03 (health/diagnostics), OSS-100-05 (AdapterBase), OSS-101-04 (Plane adapter) |
-| **Medium term** | Remaining OSS waves, PCv2-02 (workers, vault, HA), APZTCMS-002+                       |
-| **Long term**   | Commercial GA, SaaS tier, Financial Engine extraction, new verticals                  |
+| Horizon         | Direction                                                                                   |
+| --------------- | ------------------------------------------------------------------------------------------- |
+| **Near term**   | Owner ADR Acceptance of ADR-0070 — then named Platform-1.3-ENG-002 Approval                 |
+| **Medium term** | Owner-authorised backlog items (Email SoR · FIN-001 · Workflow Execute · product residuals) |
+| **Long term**   | Commercial GA, SaaS tier, Financial Engine extraction, new verticals                        |
 
-See [APZHUB-VISION](./APZHUB-VISION.md) · [CURRENT-MILESTONE](./CURRENT-MILESTONE.md).
+See [APZHUB-VISION](./APZHUB-VISION.md) · [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [platform-1.2.0 freeze](../releases/platform-1.2.0/README.md).
 
 ---
 
 ## How to use this document
 
 This Bible is the **narrative** companion to the **technical** foundation docs. For implementation details, follow links to sprint completion reports, architecture documents, and ADRs. Do not treat this chapter summary as authoritative over those sources.
+
+## Platform release baselines
+
+- Platform **1.3** — **CLOSED** — **PRODUCTION READY WITH LIMITATIONS**
+- Platform **1.4** — Architecture Confirmation in progress: [strategy/platform-1.4](../strategy/platform-1.4/README.md) (awaiting Owner Architecture Acceptance; no implementation)

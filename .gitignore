@@ -37,9 +37,14 @@ storybook-static/
 
 # Misc
 *.local
+.local/
 
 # Secrets and local credentials (never commit)
 .secrets/
 
 # Cursor IDE
 .cursor/
+
+.env.production
+.env.production.*
+!.env.production.example

@@ -1,0 +1,20 @@
+{
+  "programme": "APZQEP-ENG-030A",
+  "part": "2",
+  "title": "Traceability Engine — Persistence, Application Services, APIs and Platform Integration",
+  "recordedAt": "2026-07-26T15:30:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Architecture Programme Instruction APZQEP-ARCH-008",
+  "package": {
+    "@apzhub/qep-traceability": "0.2.0"
+  },
+  "migrations": ["0079_apz_qep_trace_link", "0080_apz_qep_trace_link_rls"],
+  "effect": "Part 2 closed. ARCH-008 Traceability Workbench Architecture authorised (architecture only).",
+  "notAuthorised": [
+    "Workbench UI engineering",
+    "Coverage Engine",
+    "Impact Engine",
+    "AI",
+    "MCP"
+  ]
+}

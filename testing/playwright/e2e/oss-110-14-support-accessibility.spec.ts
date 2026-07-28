@@ -56,6 +56,12 @@ test.describe("OSS-110-14 Support accessibility", () => {
     const filter = page.getByTestId("support-filter-status");
     await expect(create.or(filter).first()).toBeVisible();
 
+    // Start inside Support workspace (shell chrome is outside this certification scope).
+    await page.getByTestId("support-page").evaluate((el) => {
+      el.setAttribute("tabindex", "-1");
+      (el as HTMLElement).focus();
+    });
+
     let reached = false;
     for (let i = 0; i < 40; i += 1) {
       await page.keyboard.press("Tab");

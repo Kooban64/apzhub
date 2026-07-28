@@ -77,7 +77,14 @@ export class InMemoryMatterRepository implements WritableMatterRepository {
   }
 }
 
-export {
-  getSharedMatterRepository,
-  resetSharedMatterRepository,
-} from "../persistence/repository-factory";
+/** Client-safe memory singleton — must not import repository-factory (pulls pg). */
+let sharedMatterRepository: InMemoryMatterRepository | undefined;
+
+export function getSharedMatterRepository(): InMemoryMatterRepository {
+  sharedMatterRepository ??= new InMemoryMatterRepository();
+  return sharedMatterRepository;
+}
+
+export function resetSharedMatterRepository(): void {
+  sharedMatterRepository = undefined;
+}

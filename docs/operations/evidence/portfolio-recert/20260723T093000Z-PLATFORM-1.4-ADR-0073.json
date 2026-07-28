@@ -1,0 +1,42 @@
+{
+  "programme": "Platform-1.4-ADR-0073",
+  "title": "Durable Notification Runtime Architecture Decision",
+  "classification": "ARCHITECTURE_DECISION_RECORD",
+  "baseline": "Platform 1.4",
+  "parentProgramme": "Platform-1.4-ARCH-001",
+  "timestamp": "2026-07-23T09:30:00Z",
+  "status": "COMPLETED_AWAITING_OWNER_ADR_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER ADR ACCEPTANCE",
+  "preconditions": "PASS",
+  "selectedArchitecture": "OPTION_A_POSTGRESQL_OWNED_DURABLE_RUNTIME",
+  "rejectedOptions": [
+    "B_POSTGRES_REDIS",
+    "C_EVENT_BUS_OUTBOX_AS_QUEUE",
+    "D_EXTERNAL_BROKER",
+    "E_PROCESS_LOCAL"
+  ],
+  "authoritativeSystemOfRecord": "platform_postgresql_notification_delivery_plane_0065",
+  "workClaimingModel": "transaction_safe_row_leases_skip_locked_class",
+  "proposedEngineeringProgramme": {
+    "id": "Platform-1.4-ENG-001",
+    "status": "PROPOSED_BLOCKED_PENDING_ADR_0073_OWNER_ACCEPTANCE"
+  },
+  "futureAdrDependencies": ["ADR-0074_conditional", "ADR-0075_conditional"],
+  "sourceChanges": false,
+  "packageChanges": false,
+  "databaseChanges": false,
+  "migrations": false,
+  "providerChanges": false,
+  "implementation": false,
+  "smtpActivation": false,
+  "emailSorWork": false,
+  "workflowExecuteWork": false,
+  "fin001Work": false,
+  "websocketWork": false,
+  "integrationSdkUnchanged": true,
+  "adr0071Unchanged": true,
+  "adr0072Unchanged": true,
+  "platform14EngineeringStarted": false,
+  "documentationPack": "docs/architecture/adr-0073/",
+  "explicitStop": "Await Owner ADR Acceptance"
+}

@@ -1,0 +1,27 @@
+{
+  "programme": "APZQEP-ENG-050C",
+  "title": "Test Specifications Workbench Engineering",
+  "recordedAt": "2026-07-27T01:00:00Z",
+  "decision": "IN_IMPLEMENTATION",
+  "authority": "OES-ENG-050C ACCEPTED / IMPLEMENTATION AUTHORISED",
+  "package": {
+    "name": "@apzhub/qep-test-specifications",
+    "version": "0.3.0"
+  },
+  "deliverablesStarted": [
+    "packages/qep-test-specifications/src/presentation/",
+    "modules/qep-test-specifications/module.yaml",
+    "apps/web/lib/qep/qep-test-specification-api.ts",
+    "apps/web/components/qep/qep-test-specification-views.tsx",
+    "apps/web/components/qep/qep-workspace-router.tsx",
+    "apps/web/app/api/v1/qep/specifications/[specificationId]/relationships/[relationshipId]/route.ts",
+    "testing/playwright/e2e/apzqep-eng-050c-test-specifications-workbench.spec.ts",
+    "docs/products/apzqep/test-specifications/workbench/"
+  ],
+  "workPackages": "WP-01 through WP-18 in progress / substantially delivered in initial cut",
+  "adr0074": "NO_CHANGE — rejected exposes withdraw/cancel only",
+  "tests": {
+    "presentationAndContract": "11 passed"
+  },
+  "notAuthorised": ["Certification", "returnToDraft contract change", "Domain rule changes"]
+}

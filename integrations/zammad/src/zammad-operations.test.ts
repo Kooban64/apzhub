@@ -59,8 +59,8 @@ describe("OSS-102-07 capability certification", () => {
     await adapter.testConnection(ctx);
 
     const certifications = adapter.operations.certifyCapabilities();
-    expect(ZAMMAD_ADAPTER_VERSION).toBe("0.6.0");
-    expect(ZAMMAD_OPERATIONS_ADAPTER_VERSION).toBe("0.6.0");
+    expect(ZAMMAD_ADAPTER_VERSION).toBe("0.8.0");
+    expect(ZAMMAD_OPERATIONS_ADAPTER_VERSION).toBe("0.8.0");
     expect(certifications.length).toBeGreaterThanOrEqual(12);
 
     const support = certifications.find((entry) => entry.capabilityId === "support");
@@ -93,27 +93,29 @@ describe("OSS-102-07 capability certification", () => {
     await disposeZammadAdapter(adapter, factory);
   });
 
-  it("does not falsely certify placeholders, binary attachments, or ingress", () => {
+  it("certifies binary attachments and ingress; keeps delete and persistent sync limited", () => {
     const attachments = certifyAttachmentPlaceholder();
-    expect(attachments.implemented).toBe(false);
-    expect(attachments.available).toBe(false);
-    expect(attachments.unsupportedOperations).toContain("uploadBinaryAttachment");
+    expect(attachments.implemented).toBe(true);
+    expect(attachments.available).toBe(true);
+    expect(attachments.supportedOperations).toContain("uploadBinaryAttachment");
+    expect(attachments.supportedOperations).toContain("downloadBinaryAttachment");
+    expect(attachments.unsupportedOperations).toContain("deleteBinaryAttachment");
 
     const certifications = certifyZammadCapabilities({
       serviceAvailable: () => true,
       providerReachable: true,
       authenticationValid: true,
     });
-    expect(certifications.every((c) => c.capabilityId !== "attachments")).toBe(true);
+    expect(certifications.some((c) => c.capabilityId === "attachments")).toBe(true);
     expect(
       certifications
         .find((c) => c.capabilityId === "webhooks")
-        ?.unsupportedOperations.includes("webhookHttpIngress"),
+        ?.supportedOperations.includes("webhookHttpIngress"),
     ).toBe(true);
     expect(
       certifications
         .find((c) => c.capabilityId === "events")
-        ?.unsupportedOperations.includes("platformEventPublication"),
+        ?.supportedOperations.includes("platformEventPublication"),
     ).toBe(true);
     expect(
       certifications
@@ -686,11 +688,11 @@ describe("Diagnostics, reports, and certification summary", () => {
     await adapter.detectFeatures(ctx);
 
     const snapshot = adapter.getRuntimeDiagnosticsSnapshot();
-    expect(snapshot.adapterVersion).toBe("0.6.0");
+    expect(snapshot.adapterVersion).toBe("0.8.0");
     expect(snapshot.providerVersion).toBeDefined();
     expect(snapshot.persistentSyncStateSupport).toBe(false);
-    expect(snapshot.webhookIngressSupport).toBe(false);
-    expect(snapshot.binaryAttachmentSupport).toBe(false);
+    expect(snapshot.webhookIngressSupport).toBe(true);
+    expect(snapshot.binaryAttachmentSupport).toBe(true);
     expect(snapshot.capabilityCount).toBeGreaterThan(0);
     assertNoSecrets(snapshot);
 

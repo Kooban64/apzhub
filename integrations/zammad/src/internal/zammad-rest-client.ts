@@ -1,5 +1,5 @@
 import type { IntegrationRequestContext } from "@apzhub/integration-sdk";
-import type { IntegrationClient } from "@apzhub/integration-sdk/client";
+import type { FetchFn, IntegrationClient } from "@apzhub/integration-sdk/client";
 
 import type {
   ZammadArticleRecord,
@@ -13,6 +13,9 @@ import type {
   ZammadWebhookRecord,
 } from "./zammad-api-types";
 
+/** CE binary attachment transfer limit (matches Platform API 1 MiB body budget). */
+export const ZAMMAD_ATTACHMENT_MAX_BYTES = 1_048_576;
+
 export interface ZammadRestClientAuth {
   readonly apiToken: string;
 }
@@ -20,6 +23,17 @@ export interface ZammadRestClientAuth {
 export interface ZammadRestClientOptions {
   readonly client: IntegrationClient;
   readonly getAuth: () => Promise<ZammadRestClientAuth>;
+  /** Required for binary attachment download (IntegrationClient JSON-only). */
+  readonly fetchFn?: FetchFn;
+  readonly apiBaseUrl?: string;
+  readonly timeoutMs?: number;
+}
+
+export interface ZammadAttachmentBinaryResult {
+  readonly bytes: Uint8Array;
+  readonly contentType: string;
+  readonly filename?: string;
+  readonly sizeBytes: number;
 }
 
 export interface ZammadCurrentUserRecord {
@@ -47,10 +61,16 @@ export interface ZammadConnectionTestResult {
 export class ZammadRestClient {
   private readonly client: IntegrationClient;
   private readonly getAuth: () => Promise<ZammadRestClientAuth>;
+  private readonly fetchFn: FetchFn;
+  private readonly apiBaseUrl: string | undefined;
+  private readonly timeoutMs: number;
 
   constructor(options: ZammadRestClientOptions) {
     this.client = options.client;
     this.getAuth = options.getAuth;
+    this.fetchFn = options.fetchFn ?? globalThis.fetch.bind(globalThis);
+    this.apiBaseUrl = options.apiBaseUrl?.replace(/\/+$/, "");
+    this.timeoutMs = options.timeoutMs ?? 30_000;
   }
 
   async getCurrentUser(context: IntegrationRequestContext): Promise<{
@@ -241,6 +261,90 @@ export class ZammadRestClient {
     return this.request(context, "POST", "/api/v1/ticket_articles", body);
   }
 
+  /**
+   * Download binary attachment bytes via Zammad CE
+   * `GET /api/v1/ticket_attachment/:ticket_id/:article_id/:id`.
+   * Uses adapter-local fetch (IntegrationClient remains JSON-oriented / SDK freeze).
+   */
+  async downloadTicketAttachment(
+    context: IntegrationRequestContext,
+    ticketId: string | number,
+    articleId: string | number,
+    attachmentId: string | number,
+  ): Promise<ZammadAttachmentBinaryResult> {
+    void context;
+    if (!this.apiBaseUrl) {
+      throw Object.assign(
+        new Error("Zammad apiBaseUrl is required for binary download"),
+        {
+          category: "configuration" as const,
+          code: "zammad.config.missing_api_base_url",
+          message: "Zammad apiBaseUrl is required for binary download",
+          retryable: false,
+          correlationId: context.correlationId,
+        },
+      );
+    }
+
+    const auth = await this.getAuth();
+    const path = `/api/v1/ticket_attachment/${ticketId}/${articleId}/${attachmentId}`;
+    const url = `${this.apiBaseUrl}${path}`;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), this.timeoutMs);
+    try {
+      const response = await this.fetchFn(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Token token=${auth.apiToken}`,
+          Accept: "*/*",
+        },
+        signal: controller.signal,
+      });
+
+      if (!response.ok) {
+        throw Object.assign(
+          new Error(`Zammad attachment download failed (${response.status})`),
+          {
+            category:
+              response.status === 404 ? ("not_found" as const) : ("provider" as const),
+            code: "zammad.attachment.download_failed",
+            message: `Zammad attachment download failed (${response.status})`,
+            retryable: response.status >= 500,
+            correlationId: context.correlationId,
+          },
+        );
+      }
+
+      const buffer = new Uint8Array(await response.arrayBuffer());
+      if (buffer.byteLength > ZAMMAD_ATTACHMENT_MAX_BYTES) {
+        throw Object.assign(new Error("Attachment exceeds maximum allowed size"), {
+          category: "validation" as const,
+          code: "zammad.attachment.too_large",
+          message: `Attachment exceeds maximum allowed size (${ZAMMAD_ATTACHMENT_MAX_BYTES} bytes)`,
+          retryable: false,
+          correlationId: context.correlationId,
+        });
+      }
+
+      const contentType =
+        response.headers.get("content-type")?.split(";")[0]?.trim() ||
+        "application/octet-stream";
+      const disposition = response.headers.get("content-disposition") ?? undefined;
+      const filename = disposition
+        ? parseContentDispositionFilename(disposition)
+        : undefined;
+
+      return {
+        bytes: buffer,
+        contentType,
+        filename,
+        sizeBytes: buffer.byteLength,
+      };
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
   async searchOrganizations(
     context: IntegrationRequestContext,
     queryText: string,
@@ -396,6 +500,19 @@ function extractVersionFromHeaders(
     Object.entries(headers).map(([key, value]) => [key.toLowerCase(), value]),
   );
   return lower["x-zammad-version"] ?? lower["x-app-version"];
+}
+
+function parseContentDispositionFilename(disposition: string): string | undefined {
+  const utf8 = /filename\*=UTF-8''([^;]+)/i.exec(disposition);
+  if (utf8?.[1]) {
+    try {
+      return decodeURIComponent(utf8[1].trim());
+    } catch {
+      return utf8[1].trim();
+    }
+  }
+  const plain = /filename="?([^";]+)"?/i.exec(disposition);
+  return plain?.[1]?.trim();
 }
 
 function extractEditionFromHeaders(

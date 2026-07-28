@@ -1,0 +1,58 @@
+{
+  "programme": "APZHUB-QA-CERT-002",
+  "title": "Platform 1.2 Final Portfolio Re-certification",
+  "baseline": "1.2.0",
+  "timestampUtc": "20260721T183157Z",
+  "preconditions": {
+    "APZHUB-ENG-0021": "ACCEPTED",
+    "engineeringWave2": "COMPLETE",
+    "sourceCodeChangesAuthorised": false
+  },
+  "recommendation": "CERTIFICATION FAILED",
+  "gates": {
+    "lint": {
+      "exit": 1,
+      "summary": "2 ESLint errors (scripts/apzworkflow-001-workflow-foundation-audit.mjs no-useless-escape)"
+    },
+    "typecheck": {
+      "exit": 0,
+      "summary": "pnpm typecheck PASS (all workspace packages including apps/web, law-platform)"
+    },
+    "unitIntegration": {
+      "exit": 1,
+      "summary": "1 failed / 5011 passed / 66 skipped (885 files, ~327s)"
+    },
+    "pathRecert": {
+      "exit": 0,
+      "verdict": "PASS",
+      "evidence": "20260721T180329Z-R12-QA-01-path-PASS.json"
+    },
+    "fullRecert": {
+      "exit": 1,
+      "verdict": "FAIL",
+      "evidence": "20260721T183118Z-R12-QA-01-full-FAIL.json"
+    },
+    "playwright": {
+      "passed": 115,
+      "failed": 10,
+      "flaky": 1,
+      "duration": "15.2m"
+    },
+    "architecture": "PASS (certification-only; no source mutation; Platform 1.2.0 packaging intact; Wave 2 remediation groups complete)",
+    "compatibility": "PASS (SemVer packaging / public APIs / contracts not mutated by this programme)"
+  },
+  "comparisonToQaCert001": {
+    "lint": "still FAIL (different findings)",
+    "typecheck": "FAIL → PASS",
+    "vitestFailed": "82 → 1",
+    "playwrightFailed": "19 → 10",
+    "playwrightFlaky": "30 → 1",
+    "playwrightPassed": "84 → 115"
+  },
+  "wave2RemediationClosure": {
+    "engineeringComplete": true,
+    "openRemediationGroups": [],
+    "portfolioGreen": false
+  },
+  "pack": "docs/quality/final-certification/"
+}

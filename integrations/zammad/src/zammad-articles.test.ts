@@ -57,7 +57,7 @@ describe("Zammad article capability registration", () => {
     const extension = adapter.zammadDiagnosticsExtension;
     expect(extension.articleServiceRegistered).toBe(true);
     expect(extension.attachmentMetadataSupport).toBe(true);
-    expect(extension.binaryAttachmentSupport).toBe(false);
+    expect(extension.binaryAttachmentSupport).toBe(true);
     expect(extension.unsupportedArticleMutations).toEqual(["update", "delete"]);
     expect(JSON.stringify(extension)).not.toMatch(/password|customer@example/i);
   });
@@ -361,7 +361,7 @@ describe("Zammad article create helpers", () => {
     ).toBe(true);
   });
 
-  it("creates note with attachment metadata descriptors", async () => {
+  it("creates note with binary attachment and downloads content", async () => {
     const { adapter } = await createAdapter();
     const created = await adapter.core.articles.createNote(ctx, {
       supportTicketId: ticketId,
@@ -372,6 +372,16 @@ describe("Zammad article create helpers", () => {
     });
     expect(created.attachments.length).toBeGreaterThanOrEqual(1);
     expect(created.attachments[0]?.filename).toBe("log.txt");
+    const attachmentId = created.attachments[0]!.id;
+    const content = await adapter.core.articles.downloadAttachment(
+      ctx,
+      ticketId,
+      created.id,
+      attachmentId,
+    );
+    expect(content.filename).toBe("log.txt");
+    expect(content.dataBase64).toBe("aGVsbG8=");
+    expect(content.sizeBytes).toBe(5);
   });
 
   it("routes public create with note channel to internal note path", async () => {

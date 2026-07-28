@@ -1,0 +1,53 @@
+{
+  "evidenceId": "20260728T062849Z-APZQEP-ARCH-014-ACCEPTANCE",
+  "programme": "APZQEP-ARCH-014",
+  "title": "Test Plans Workbench Architecture — Owner Architecture Acceptance",
+  "capability": "Test Plans",
+  "layer": "Workbench Architecture",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T062849Z",
+  "decision": {
+    "status": "ACCEPTED",
+    "approved": true,
+    "architectureBaselined": true,
+    "programmeClosed": true
+  },
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "baselinesConsumed": {
+    "architecture": "APZQEP-ARCH-013 ACCEPTED",
+    "domain": "@apzhub/qep-test-plans 0.1.0 CERTIFIED (CERT-060A)",
+    "infrastructure": "@apzhub/qep-test-plans 0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED (CERT-060B)"
+  },
+  "pack": "docs/products/apzqep/test-plans/OES-ARCH-014/",
+  "preparedEvidence": "docs/operations/evidence/portfolio-recert/20260728T061500Z-APZQEP-ARCH-014.json",
+  "checklist": {
+    "architectureCompliance": "PASS",
+    "workbenchInformationArchitecture": "PASS",
+    "workspaceIntegration": "PASS",
+    "explorerInspectorPattern": "PASS",
+    "dashboardPattern": "PASS",
+    "reviewWorkspace": "PASS",
+    "availableActionsContract": "PASS",
+    "personaJourneys": "PASS",
+    "certifiedComponentConsumption": "PASS",
+    "accessibilityWcagAa": "PASS",
+    "securityBoundary": "PASS",
+    "aiBoundary": "PASS",
+    "separationOfConcerns": "PASS",
+    "productionCodeIntroduced": "NONE"
+  },
+  "bindingPrinciple": "The Workbench SHALL never determine what a user may do. Actions render only from Infrastructure availableActions.",
+  "authorisesNext": "APZQEP-OES-ENG-070A — Test Plans Workbench Engineering Specification",
+  "exclusions": [
+    "Workbench Engineering implementation",
+    "Production UI code under ARCH-014",
+    "Capability Certification",
+    "Capability Freeze",
+    "Promote to 1.0.0"
+  ]
+}

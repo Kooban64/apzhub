@@ -1,0 +1,43 @@
+{
+  "programme": "APZQEP-ENG-050A",
+  "title": "Test Specifications Domain Model",
+  "recordedAt": "2026-07-26T21:45:00Z",
+  "decision": "IMPLEMENTED / AWAITING OWNER ACCEPTANCE",
+  "authority": "Owner Engineering Programme Instruction APZQEP-ENG-050A",
+  "architecture": "APZQEP-ARCH-011 ACCEPTED",
+  "package": {
+    "name": "@apzhub/qep-test-specifications",
+    "version": "0.1.0"
+  },
+  "baselines": {
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN",
+    "verification": "1.0.0 CERTIFIED / FROZEN"
+  },
+  "deliverables": [
+    "packages/qep-test-specifications/",
+    "docs/products/apzqep/test-specifications/engine-domain/"
+  ],
+  "quality": {
+    "testsPassed": 50,
+    "coverageLinesApprox": 98.97,
+    "typecheck": "PASS",
+    "architectureBoundaryTests": "PASS"
+  },
+  "notAuthorised": [
+    "Infrastructure",
+    "Persistence",
+    "PostgreSQL",
+    "Repositories",
+    "REST APIs",
+    "Search",
+    "Audit",
+    "Permissions",
+    "Workbench",
+    "React",
+    "Next.js",
+    "AI",
+    "MCP"
+  ],
+  "stop": "APZQEP-ENG-050A IMPLEMENTED AWAITING OWNER ACCEPTANCE"
+}

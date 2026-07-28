@@ -58,6 +58,10 @@ export const DECLARED_PRODUCT_SEARCH_ADAPTERS: readonly ProductSearchAdapterId[]
   "analytics",
   "identity",
   "administration",
+  /** Additive — Release 1.2 R12-SEARCH-01 (`@apzhub/search-time`). */
+  "time",
+  /** Additive — Release 1.2 R12-SEARCH-02 (`@apzhub/search-law`). */
+  "law",
 ] as const;
 
 export function isDeclaredProductSearchAdapter(

@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: qep-knowledge
+name: Knowledge and Learning
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Knowledge and Learning (M16) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  product: apzqep
+  moduleCatalogueId: M16
+  slug: knowledge
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: stub
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Knowledge and Learning
+    icon: flask-conical
+    route: /workspace/qep/knowledge
+    order: 160
+    permission: qep.knowledge.read
+  view:
+    title: Knowledge and Learning
+    workspace: qep
+    route: /workspace/qep/knowledge
+    permission: qep.knowledge.read

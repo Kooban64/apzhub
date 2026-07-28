@@ -477,13 +477,13 @@ describe("APZIDENTITY-005 Identity Vertical Certification", () => {
     expect(existsSync(join(ROOT, "apps/web/app/workspace/identity"))).toBe(false);
   });
 
-  it("certifies OpenAPI 1.9.x Identity surface and route count", () => {
+  it("certifies OpenAPI 1.9.x–1.14.x Identity surface and route count", () => {
     const openapi = readFileSync(
       join(ROOT, "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml"),
       "utf8",
     );
     expect(openapi).toContain("Platform Identity Administration");
-    expect(openapi).toMatch(/version:\s*1\.(9|10)\.\d+/);
+    expect(openapi).toMatch(/version:\s*1\.(9|10|11|12|13|14)\.\d+/);
     for (const path of [
       "/identity/users",
       "/identity/groups",
@@ -518,7 +518,7 @@ describe("APZIDENTITY-005 Identity Vertical Certification", () => {
       "packages/identity-contracts/package.json": "0.2.0",
       "packages/identity-core/package.json": "0.2.0",
       "packages/identity-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.26.1",
+      "packages/platform-services/package.json": "0.32.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const version = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;

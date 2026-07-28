@@ -1,0 +1,30 @@
+{
+  "programme": "APZQEP-ENG-030A",
+  "part": "2",
+  "title": "Traceability Engine — Persistence, Application Services, APIs and Platform Integration",
+  "recordedAt": "2026-07-26T14:15:00Z",
+  "architecture": "APZQEP-ARCH-007 — ACCEPTED / CLOSED / COMPLETE",
+  "part1": "ACCEPTED / CLOSED / COMPLETE",
+  "state": "PART 2 IMPLEMENTED — AWAITING OWNER ACCEPTANCE",
+  "package": {
+    "@apzhub/qep-traceability": "0.2.0"
+  },
+  "migrations": ["0079_apz_qep_trace_link", "0080_apz_qep_trace_link_rls"],
+  "apiBase": "/api/v1/qep/traceability",
+  "searchEntity": "trace_link",
+  "permissionsFamily": "qep.traceability.*",
+  "tests": {
+    "qepTraceability": "PASS (47)",
+    "searchQep": "PASS",
+    "platformServices": "PASS (includes traceability smoke)"
+  },
+  "notDelivered": [
+    "Part 3 Workbench",
+    "Coverage Engine",
+    "Impact Engine",
+    "AI",
+    "MCP",
+    "Owner Acceptance of Part 2"
+  ],
+  "stopRule": "Await Owner Acceptance. Do not begin Part 3."
+}

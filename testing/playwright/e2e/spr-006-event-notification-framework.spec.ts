@@ -1,25 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const DEV_EMAIL = "dev@apzhub.local";
-const DEV_PASSWORD = "DevPassword123!";
-
-async function signIn(page: import("@playwright/test").Page) {
-  await page.goto("/login");
-  await page.getByLabel("Email").fill(DEV_EMAIL);
-  await page.getByLabel("Password").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "Sign in" }).click();
-
-  try {
-    await expect(page).toHaveURL(/\/workspace\/home/, { timeout: 5000 });
-  } catch {
-    await page.goto("/register");
-    await page.getByLabel("Name").fill("Dev User");
-    await page.getByLabel("Email").fill(DEV_EMAIL);
-    await page.getByLabel("Password").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "Register" }).click();
-    await expect(page).toHaveURL(/\/workspace\/home/);
-  }
-}
+import { signInDevUser } from "./auth-helpers";
 
 function shellNotifications(page: import("@playwright/test").Page) {
   return page.getByTestId("workbench-notifications");
@@ -85,7 +66,7 @@ test.describe("SPR-006 Event & Notification Framework integration", () => {
   test("authenticated shell mounts notification providers with hidden diagnostics hooks", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     await expect(shellNotifications(page)).toBeVisible();
     await expect(page.getByTestId("notification-badge")).toBeVisible();
@@ -122,7 +103,7 @@ test.describe("SPR-006 Event & Notification Framework integration", () => {
   test("notification panel shows empty state, opens, and closes from badge", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     const notifications = shellNotifications(page);
     const badge = notifications.getByTestId("notification-badge");
@@ -142,7 +123,7 @@ test.describe("SPR-006 Event & Notification Framework integration", () => {
   test("action execution flows through to badge and panel notifications", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     const notifications = shellNotifications(page);
     await executeSuccessfulWorkbenchAction(page);
@@ -176,7 +157,7 @@ test.describe("SPR-006 Event & Notification Framework integration", () => {
   test("notification panel supports mark read and mark all read with badge updates", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     const notifications = shellNotifications(page);
     await executeSuccessfulWorkbenchAction(page);
@@ -212,7 +193,7 @@ test.describe("SPR-006 Event & Notification Framework integration", () => {
   test("diagnostic hooks are hidden and do not render visible debug UI", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     await expect(page.getByTestId("event-notification-diagnostics")).toBeHidden();
     await expect(

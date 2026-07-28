@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "programmeId": "APZHUB-1.2-003",
+  "backlogItemId": "R12-OPS-02",
+  "riskId": "OPS-R-05",
+  "executedAt": "2026-07-20T08:52:29.059Z",
+  "environment": "dev",
+  "policyCount": 9,
+  "runbookPaths": [
+    "docs/operations/runbooks/identity-unavailable.md",
+    "docs/operations/runbooks/gateway-5xx.md",
+    "docs/operations/runbooks/platform-db-restore.md",
+    "docs/operations/runbooks/redis-session-storm.md",
+    "docs/operations/runbooks/support-adapter-unhealthy.md",
+    "docs/operations/runbooks/law-authz-denials-spike.md",
+    "docs/operations/runbooks/event-bus-publish-failures.md",
+    "docs/operations/runbooks/automation-deferred-flood.md",
+    "docs/operations/runbooks/observe-unavailable.md"
+  ],
+  "findings": [
+    {
+      "id": "artefacts.present",
+      "severity": "pass",
+      "message": "Required alert-strategy artefacts are present."
+    },
+    {
+      "id": "policy.valid.alert.identity.unavailable",
+      "severity": "pass",
+      "message": "alert.identity.unavailable is complete."
+    },
+    {
+      "id": "runbook.present.alert.identity.unavailable",
+      "severity": "pass",
+      "message": "Runbook present for alert.identity.unavailable."
+    },
+    {
+      "id": "policy.valid.alert.gateway.5xx",
+      "severity": "pass",
+      "message": "alert.gateway.5xx is complete."
+    },
+    {
+      "id": "runbook.present.alert.gateway.5xx",
+      "severity": "pass",
+      "message": "Runbook present for alert.gateway.5xx."
+    },
+    {
+      "id": "policy.valid.alert.platform-db.restore",
+      "severity": "pass",
+      "message": "alert.platform-db.restore is complete."
+    },
+    {
+      "id": "runbook.present.alert.platform-db.restore",
+      "severity": "pass",
+      "message": "Runbook present for alert.platform-db.restore."
+    },
+    {
+      "id": "policy.valid.alert.redis.session-storm",
+      "severity": "pass",
+      "message": "alert.redis.session-storm is complete."
+    },
+    {
+      "id": "runbook.present.alert.redis.session-storm",
+      "severity": "pass",
+      "message": "Runbook present for alert.redis.session-storm."
+    },
+    {
+      "id": "policy.valid.alert.support.adapter-unhealthy",
+      "severity": "pass",
+      "message": "alert.support.adapter-unhealthy is complete."
+    },
+    {
+      "id": "runbook.present.alert.support.adapter-unhealthy",
+      "severity": "pass",
+      "message": "Runbook present for alert.support.adapter-unhealthy."
+    },
+    {
+      "id": "policy.valid.alert.law.authz-denials-spike",
+      "severity": "pass",
+      "message": "alert.law.authz-denials-spike is complete."
+    },
+    {
+      "id": "runbook.present.alert.law.authz-denials-spike",
+      "severity": "pass",
+      "message": "Runbook present for alert.law.authz-denials-spike."
+    },
+    {
+      "id": "policy.valid.alert.event-bus.publish-failures",
+      "severity": "pass",
+      "message": "alert.event-bus.publish-failures is complete."
+    },
+    {
+      "id": "runbook.present.alert.event-bus.publish-failures",
+      "severity": "pass",
+      "message": "Runbook present for alert.event-bus.publish-failures."
+    },
+    {
+      "id": "policy.valid.alert.automation.deferred-flood",
+      "severity": "pass",
+      "message": "alert.automation.deferred-flood is complete."
+    },
+    {
+      "id": "runbook.present.alert.automation.deferred-flood",
+      "severity": "pass",
+      "message": "Runbook present for alert.automation.deferred-flood."
+    },
+    {
+      "id": "policy.valid.alert.observe.unavailable",
+      "severity": "pass",
+      "message": "alert.observe.unavailable is complete."
+    },
+    {
+      "id": "runbook.present.alert.observe.unavailable",
+      "severity": "pass",
+      "message": "Runbook present for alert.observe.unavailable."
+    }
+  ],
+  "verdict": "PASS",
+  "notes": [
+    "Alert strategy is metadata + manual triage only.",
+    "No Email SoR, notification delivery, or live Observe evaluation authorised."
+  ],
+  "artefactPaths": [
+    "docs/operations/MONITORING-AND-ALERTING.md",
+    "docs/operations/RUNBOOK-STANDARDS.md",
+    "docs/operations/runbooks/README.md",
+    "docs/operations/evidence/alert-strategy/README.md"
+  ]
+}

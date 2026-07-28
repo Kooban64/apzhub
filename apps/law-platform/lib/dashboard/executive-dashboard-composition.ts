@@ -1,12 +1,10 @@
-import {
-  getSharedCalendarEventRepository,
-  getSharedClientRepository,
-  getSharedDocumentRepository,
-  getSharedInvoiceRepository,
-  getSharedMatterRepository,
-  getSharedTaskRepository,
-  getSharedTimeEntryRepository,
-} from "../persistence/repository-factory";
+import { getSharedInvoiceRepository } from "../billing/in-memory-invoice-repository";
+import { getSharedCalendarEventRepository } from "../calendar/in-memory-calendar-event-repository";
+import { getSharedClientRepository } from "../clients/in-memory-client-repository";
+import { getSharedDocumentRepository } from "../documents/in-memory-document-repository";
+import { getSharedMatterRepository } from "../matters/in-memory-matter-repository";
+import { getSharedTaskRepository } from "../tasks/in-memory-task-repository";
+import { getSharedTimeEntryRepository } from "../time/in-memory-time-entry-repository";
 import { clientDetailRoute } from "../clients/client-routes";
 import { matterWorkspaceRoute } from "../matters/matter-routes";
 import { documentDetailRoute } from "../documents/document-routes";

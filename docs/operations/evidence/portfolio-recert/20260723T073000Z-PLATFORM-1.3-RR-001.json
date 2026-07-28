@@ -1,0 +1,70 @@
+{
+  "programme": "Platform-1.3-RR-001",
+  "title": "Platform 1.3 Release Readiness Remediation",
+  "classification": "RELEASE_READINESS_REMEDIATION",
+  "baseline": "Platform 1.3",
+  "timestamp": "2026-07-23T07:30:00Z",
+  "status": "ACCEPTED",
+  "acceptedAt": "2026-07-23",
+  "acceptedUnder": "Platform-1.3-CERT-002 Owner Programme Approval",
+  "recommendation": "READY FOR OWNER REMEDIATION ACCEPTANCE",
+  "authoritativeInput": "Platform-1.3-CERT-001",
+  "certificationStatusUnchanged": true,
+  "certificationRecommendationStill": "NOT READY FOR PRODUCTION",
+  "downstreamProgramme": "Platform-1.3-CERT-002",
+  "blockersRemediated": [
+    {
+      "id": "P13-CERT-QF-01",
+      "detail": "notification-inbox-view Button variant secondary -> outline",
+      "gate": "pnpm build PASS"
+    },
+    {
+      "id": "P13-CERT-QF-02",
+      "detail": "observe-core readonly suppressed* immutable reassignment",
+      "gate": "pnpm typecheck PASS"
+    },
+    {
+      "id": "P13-CERT-QF-03",
+      "detail": "OpenAPI version assertions updated to 1.14.0",
+      "gate": "affected Vitest PASS"
+    },
+    {
+      "id": "P13-CERT-QF-04",
+      "detail": "pnpm format + format:check",
+      "gate": "pnpm format:check PASS"
+    }
+  ],
+  "qualityGates": {
+    "build": "PASS",
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "formatCheck": "PASS",
+    "openapiValidatePlatform": "PASS",
+    "certifyIntegrationSdk": "PASS_PRODUCTION_READY_WITH_LIMITATIONS",
+    "platform13AffectedVitest": "PASS_168_of_168",
+    "fullMonorepoTest": "NOT_RUN",
+    "playwrightPortfolio": "NOT_RUN"
+  },
+  "architectureUnchanged": true,
+  "integrationSdkVersion": "1.0.0",
+  "openapiVersion": "1.14.0",
+  "database": {
+    "migrationsChanged": false,
+    "latestMigration": "0065_apz_platform_notification_delivery.sql",
+    "destructiveMigrations": false
+  },
+  "fencesStillInForce": [
+    "Email SoR excluded",
+    "FIN-001 STOP",
+    "Workflow Execute gated",
+    "WebSockets unauthorised",
+    "SMTP delivery deferred",
+    "Integration SDK 1.0.0 frozen"
+  ],
+  "documentationPack": "docs/engineering/platform-1.3-rr-001/",
+  "featureWork": false,
+  "architectureWork": false,
+  "platform14Begun": false,
+  "cert002Begun": true,
+  "explicitStop": "Accepted — CERT-002 authorised"
+}

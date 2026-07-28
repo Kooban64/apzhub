@@ -1,6 +1,9 @@
 export { N8nAdapter, N8N_ADAPTER_VERSION } from "./n8n-adapter";
 export type { N8nDiagnosticsExtension, N8nAdapterOptions } from "./n8n-adapter";
 
+export { N8nClient } from "./n8n-client";
+export type { N8nClientOptions } from "./n8n-client";
+
 export type {
   N8nConfiguration,
   N8nConfigurationInput,

@@ -1,0 +1,60 @@
+/** APZQEP-ENG-040C — Verification Workbench navigation contributions (ARCH-010). */
+
+export const QEP_VERIFICATION_NAVIGATION = {
+  workspace: "qep",
+  sidebar: {
+    id: "qep-verification",
+    label: "Verification",
+    icon: "shield-check",
+    href: "/workspace/qep/verification",
+    order: 110,
+    permission: "qep.verification.view",
+  },
+  additionalViews: [
+    {
+      id: "qep-verification-dashboard",
+      label: "Dashboard",
+      icon: "layout-dashboard",
+      href: "/workspace/qep/verification/dashboard",
+      order: 111,
+      parent: "qep-verification",
+      permission: "qep.verification.view",
+    },
+    {
+      id: "qep-verification-queue",
+      label: "My Queue",
+      icon: "list-todo",
+      href: "/workspace/qep/verification/queue",
+      order: 112,
+      parent: "qep-verification",
+      permission: "qep.verification.view",
+    },
+    {
+      id: "qep-verification-team",
+      label: "Team Queue",
+      icon: "users",
+      href: "/workspace/qep/verification/team",
+      order: 113,
+      parent: "qep-verification",
+      permission: "qep.verification.view",
+    },
+    {
+      id: "qep-verification-search",
+      label: "Search",
+      icon: "search",
+      href: "/workspace/qep/verification/search",
+      order: 114,
+      parent: "qep-verification",
+      permission: "qep.verification.search",
+    },
+    {
+      id: "qep-verification-history",
+      label: "History",
+      icon: "history",
+      href: "/workspace/qep/verification/history",
+      order: 115,
+      parent: "qep-verification",
+      permission: "qep.verification.history.view",
+    },
+  ],
+} as const;

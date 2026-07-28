@@ -1,0 +1,39 @@
+{
+  "programme": "APZHUB-ENG-0010",
+  "remediationGroup": "RG-PW-API",
+  "baseline": "1.2.0",
+  "timestamp": "2026-07-21T06:07:00Z",
+  "playwright": {
+    "command": "CI=true pnpm exec playwright test apzreport-002 apztcms-022 -g landmarks|Engineering Intelligence|panel tabs",
+    "results": {
+      "passed": 2,
+      "failed": 0,
+      "flaky": 1
+    },
+    "tests": [
+      {
+        "id": "QA-F-009",
+        "title": "exposes command toolbar and a11y landmarks",
+        "before": "FAIL",
+        "after": "PASS"
+      },
+      {
+        "id": "QA-F-014",
+        "title": "opens Engineering Intelligence through mocked /api/v1/testing",
+        "before": "FAIL",
+        "after": "PASS"
+      },
+      {
+        "id": "QA-F-015",
+        "title": "supports panel tabs and a11y landmarks",
+        "before": "FAIL",
+        "after": "PASS (flaky \u2014 tablist hydration; getByLabel OK on retry)"
+      }
+    ]
+  },
+  "quality": {
+    "lint": "PASS",
+    "architecture": "PASS (test hygiene)",
+    "compatibility": "PASS"
+  }
+}

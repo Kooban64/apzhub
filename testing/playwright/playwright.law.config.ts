@@ -2,9 +2,15 @@ import { config as loadEnv } from "dotenv";
 import { defineConfig, devices } from "@playwright/test";
 import path from "node:path";
 
+import { buildPlaywrightWebServerEnv } from "./web-server-env";
+
 loadEnv({ path: path.resolve(__dirname, "../../.env") });
 
-/** Playwright config for Law Platform UI validation (@apzhub/law-platform on port 3301). */
+const LAW_PORT = process.env.PLAYWRIGHT_LAW_PORT ?? "3302";
+const LAW_BASE_URL =
+  process.env.PLAYWRIGHT_LAW_BASE_URL ?? `http://localhost:${LAW_PORT}`;
+
+/** Playwright config for Law Platform UI validation (@apzhub/law-platform). */
 export default defineConfig({
   testDir: "./e2e",
   testMatch: /law-015-trust-workflow\.spec\.ts/,
@@ -13,8 +19,9 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: 1,
   reporter: "list",
+  globalSetup: path.resolve(__dirname, "./global-setup-law.ts"),
   use: {
-    baseURL: process.env.PLAYWRIGHT_LAW_BASE_URL ?? "http://localhost:3302",
+    baseURL: LAW_BASE_URL,
     trace: "on-first-retry",
   },
   projects: [
@@ -22,7 +29,7 @@ export default defineConfig({
       name: "law-trust",
       use: {
         ...devices["Desktop Chrome"],
-        baseURL: process.env.PLAYWRIGHT_LAW_BASE_URL ?? "http://localhost:3302",
+        baseURL: LAW_BASE_URL,
       },
     },
   ],
@@ -30,20 +37,21 @@ export default defineConfig({
     ? {}
     : {
         webServer: {
-          command: "pnpm --filter @apzhub/law-platform exec next dev --port 3302",
-          url: "http://localhost:3302/login",
+          command: `pnpm --filter @apzhub/law-platform exec next dev --port ${LAW_PORT}`,
+          url: `${LAW_BASE_URL}/login`,
           reuseExistingServer: !process.env.CI,
           timeout: 180_000,
           cwd: path.resolve(__dirname, "../.."),
-          env: {
+          env: buildPlaywrightWebServerEnv({
             NEXT_PUBLIC_E2E_TEST_HOOKS: "true",
             ALLOW_DEV_REGISTRATION: "true",
             NEXT_PUBLIC_ALLOW_DEV_REGISTRATION: "true",
-            PORT: "3302",
-            APP_URL: "http://localhost:3302",
-            NEXT_PUBLIC_APP_URL: "http://localhost:3302",
-            BETTER_AUTH_URL: "http://localhost:3302",
-          },
+            PORT: LAW_PORT,
+            APP_URL: LAW_BASE_URL,
+            NEXT_PUBLIC_APP_URL: LAW_BASE_URL,
+            BETTER_AUTH_URL: LAW_BASE_URL,
+            NODE_ENV: "development",
+          }),
         },
       }),
 });

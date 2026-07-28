@@ -1,0 +1,20 @@
+{
+  "name": "@apzhub/search-qep",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB QEP Search Publication Adapter — canonical QEP Requirements → Search Integration Framework (APZQEP-ENG-020B)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/search-qep"
+  },
+  "dependencies": {
+    "@apzhub/qep-contracts": "workspace:*",
+    "@apzhub/search-contracts": "workspace:*",
+    "@apzhub/search-integration": "workspace:*"
+  }
+}

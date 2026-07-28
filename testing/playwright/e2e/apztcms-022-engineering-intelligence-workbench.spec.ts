@@ -139,7 +139,7 @@ test.describe("APZTCMS-022 Engineering Intelligence workbench", () => {
     await gotoTestingSection(page, EI_HOME);
     await expectTestingPageVisible(page);
     await expectTestingHeading(page, /Engineering Intelligence/i);
-    await expect(page.getByLabelText(/Quality score/i)).toBeVisible();
+    await expect(page.getByLabel(/Quality score/i)).toBeVisible();
 
     expect(seen).toContain("/api/v1/testing/engineering-intelligence/score");
     expect(seen).toContain("/api/v1/testing/engineering-intelligence/health");
@@ -156,7 +156,7 @@ test.describe("APZTCMS-022 Engineering Intelligence workbench", () => {
 
     await page.getByRole("tab", { name: "Trends" }).click();
     await expect(page.getByText("Quality & delivery trends")).toBeVisible();
-    await expect(page.getByLabelText("Search trends")).toBeVisible();
+    await expect(page.getByLabel("Search trends")).toBeVisible();
 
     await page.setViewportSize({ width: 390, height: 844 });
     await expect(

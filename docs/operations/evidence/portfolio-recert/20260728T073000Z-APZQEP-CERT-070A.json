@@ -1,0 +1,88 @@
+{
+  "id": "20260728T073000Z-APZQEP-CERT-070A",
+  "timestamp": "2026-07-28T07:30:00Z",
+  "programme": "APZQEP-CERT-070A",
+  "title": "Test Plans Workbench Component Certification",
+  "type": "workbench-component-certification-assurance",
+  "status": "IMPLEMENTED_AWAITING_OWNER_CERTIFICATION_DECISION",
+  "certificationLevel": "COMPONENT",
+  "component": "workbench",
+  "package": {
+    "name": "@apzhub/qep-test-plans",
+    "version": "0.2.0",
+    "versionRecommendation": "remain-0.2.0",
+    "domainSemantics": "0.1.0 CERTIFIED unchanged",
+    "infrastructureSemantics": "0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED unchanged"
+  },
+  "recommendedClass": "WORKBENCH_PRODUCTION_READY_WITH_LIMITATIONS",
+  "freezeEligibility": "NOT_RECOMMENDED",
+  "independence": true,
+  "engineeringPerformed": false,
+  "reactNextEditsPerformed": false,
+  "baselinesAssessed": {
+    "architecture": "APZQEP-ARCH-014 ACCEPTED / ARCHITECTURE BASELINED / PROGRAMME CLOSED",
+    "engineeringSpecification": "APZQEP-OES-ENG-070A ACCEPTED / ENGINEERING SPECIFICATION BASELINED / CLOSED",
+    "engineering": "APZQEP-ENG-070A ACCEPTED / APPROVED / PROGRAMME CLOSED (2026-07-28)",
+    "domain": "@apzhub/qep-test-plans 0.1.0 CERTIFIED (CERT-060A)",
+    "infrastructure": "@apzhub/qep-test-plans 0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED (CERT-060B)"
+  },
+  "qualityGates": {
+    "aggregate": "ALL_MANDATORY_WORKBENCH_COMPONENT_GATES_PASS",
+    "packageTests": { "total": 104, "failed": 0, "result": "PASS", "reverifiedUtc": "2026-07-28" },
+    "presentationSpecificTests": { "routes": 5, "views": 15, "total": 20, "failed": 0, "result": "PASS" },
+    "typecheck": "PASS",
+    "playwrightSpecPresent": true,
+    "playwrightSpecPath": "testing/playwright/e2e/apzqep-eng-070a-test-plans-workbench.spec.ts",
+    "playwrightReexecuted": false
+  },
+  "availableActionsContract": {
+    "soleActionAuthority": true,
+    "negativeTestPresent": true,
+    "invertedTransitionsFound": false
+  },
+  "domainInfrastructurePreservation": {
+    "domainSourceChanged": false,
+    "infrastructureSourceChanged": false,
+    "newMigrations": false,
+    "packageVersionChanged": false
+  },
+  "limitations": {
+    "L-01": "compare-governed-unavailable-inherited-infrastructure",
+    "L-02": "items-dto-bound-inherited-infrastructure",
+    "P-01": "playwright-journey-breadth-test-authoring-gap",
+    "P-02": "not-found-404-not-separately-asserted-test-authoring-gap",
+    "P-03": "create-edit-relationships-history-versions-not-separately-axe-scanned",
+    "P-04": "preference-service-named-saved-views-not-implemented-approved-scope-boundary",
+    "blockProductionClass": false
+  },
+  "accessibility": {
+    "wcagAaIntent": true,
+    "axeCriticalSeriousCount": 0,
+    "keyboardOperability": true,
+    "focusTrapAndRestore": true,
+    "statusColourIndependent": true
+  },
+  "benchmark": "reference-workbench-component-certification",
+  "documents": [
+    "docs/products/apzqep/test-plans/CERT-070A/README.md",
+    "docs/products/apzqep/test-plans/CERT-070A/COMPLETE.md",
+    "docs/products/apzqep/test-plans/CERT-070A/OWNER-SUMMARY.md",
+    "docs/products/apzqep/test-plans/CERT-070A/OWNER-ACCEPTANCE.md",
+    "docs/products/apzqep/test-plans/CERT-070A/CERTIFICATION-REPORT.md",
+    "docs/products/apzqep/test-plans/CERT-070A/WORKBENCH-COMPONENT-CERTIFICATION-REPORT.md",
+    "docs/products/apzqep/test-plans/CERT-070A/EVIDENCE-PACK.md",
+    "docs/products/apzqep/test-plans/CERT-070A/QUALITY-GATES.md",
+    "docs/products/apzqep/test-plans/CERT-070A/OPERATIONAL-READINESS.md",
+    "docs/products/apzqep/test-plans/CERT-070A/KNOWN-LIMITATIONS-REVIEW.md",
+    "docs/products/apzqep/test-plans/CERT-070A/VERSION-RECOMMENDATION.md",
+    "docs/products/apzqep/test-plans/CERT-070A/RELEASE-RECOMMENDATION.md"
+  ],
+  "explicitlyNotAuthorised": [
+    "owner-certification-decision",
+    "capability-certification",
+    "capability-freeze",
+    "version-1.0.0-promotion",
+    "engineering-remediation",
+    "react-next-code-changes"
+  ]
+}

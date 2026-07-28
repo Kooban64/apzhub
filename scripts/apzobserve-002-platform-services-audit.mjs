@@ -175,12 +175,12 @@ if (!existsSync(join(ROOT, observeDir))) {
       detail: "createPlatformServices must accept and wire observe bundle",
     });
   }
-  if (!create.includes('PLATFORM_SERVICES_VERSION = "0.26.1"')) {
+  if (!create.includes('PLATFORM_SERVICES_VERSION = "0.32.0"')) {
     violations.push({
       file: "packages/platform-services/src/services/create-platform-services.ts",
       line: 1,
       rule: "platform-services-version",
-      detail: "PLATFORM_SERVICES_VERSION must be 0.26.1",
+      detail: "PLATFORM_SERVICES_VERSION must be 0.32.0",
     });
   }
 }
@@ -233,12 +233,12 @@ if (!existsSync(join(ROOT, observeDir))) {
       });
     }
   }
-  if (pkg.version !== "0.26.1") {
+  if (pkg.version !== "0.32.0") {
     violations.push({
       file: "packages/platform-services/package.json",
       line: 1,
       rule: "platform-services-pkg-version",
-      detail: `Expected 0.26.1, found ${pkg.version}`,
+      detail: `Expected 0.32.0, found ${pkg.version}`,
     });
   }
 }

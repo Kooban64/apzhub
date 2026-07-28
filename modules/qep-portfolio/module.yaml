@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: qep-portfolio
+name: Portfolio and Projects
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Portfolio and Projects (M02) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  product: apzqep
+  moduleCatalogueId: M02
+  slug: portfolio
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: stub
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Portfolio and Projects
+    icon: flask-conical
+    route: /workspace/qep/portfolio
+    order: 20
+    permission: qep.portfolio.read
+  view:
+    title: Portfolio and Projects
+    workspace: qep
+    route: /workspace/qep/portfolio
+    permission: qep.portfolio.read

@@ -9,19 +9,11 @@ export interface ZammadPlaceholderCapability {
 
 /**
  * Deferred capability catalogue — metadata only.
- * Articles (OSS-102-04), search/history/analytics (OSS-102-05),
- * and events/synchronisation/webhooks (OSS-102-06) are implemented.
- * Attachments remain metadata-only via articles until binary transfer lands.
+ * Attachments binary transfer delivered under R12-SUP-02 / APZHUB-ENG-0004.
+ * No remaining Wave 2 placeholders.
  */
-export const ZAMMAD_PLACEHOLDER_CAPABILITIES: readonly ZammadPlaceholderCapability[] = [
-  {
-    capabilityId: "attachments",
-    registered: true,
-    implemented: false,
-    description:
-      "Binary attachment transfer deferred — metadata available via articles capability",
-  },
-] as const;
+export const ZAMMAD_PLACEHOLDER_CAPABILITIES: readonly ZammadPlaceholderCapability[] =
+  [] as const;
 
 export function getZammadPlaceholderCapability(
   capabilityId: ZammadExtendedCapabilityId,

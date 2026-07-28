@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0.0",
+  "evidenceId": "20260727T163600Z-APZQEP-ENG-060A-ECR-PASS",
+  "recordedAt": "2026-07-27T16:36:00.000Z",
+  "programme": "APZQEP-ENG-060A",
+  "capability": "Test Plans Domain",
+  "package": "@apzhub/qep-test-plans",
+  "packageVersion": "0.1.0",
+  "standard": "OES-002",
+  "standardVersion": "1.1.0",
+  "reviewType": "ENGINEERING_COMPLETION_REVIEW",
+  "decision": "PASS",
+  "statusAfterReview": "READY_FOR_OWNER_ACCEPTANCE",
+  "checklist": {
+    "ECR-01_workPackagesComplete": "PASS",
+    "ECR-02_aggregateBehaviourComplete": "PASS",
+    "ECR-03_lifecycleComplete": "PASS",
+    "ECR-04_policiesComplete": "PASS",
+    "ECR-05_versioningComplete": "PASS",
+    "ECR-06_cloneBehaviourComplete": "PASS",
+    "ECR-07_supersedeBehaviourComplete": "PASS",
+    "ECR-08_domainEventsComplete": "PASS",
+    "ECR-09_businessInvariantsComplete": "PASS",
+    "ECR-10_noInfrastructureLeakage": "PASS",
+    "ECR-11_noRestConcerns": "PASS",
+    "ECR-12_noPersistenceConcerns": "PASS",
+    "ECR-13_defensiveCoverageJustificationDocumented": "PASS",
+    "ECR-14_coverageDeviationsJustified": "PASS",
+    "ECR-15_oesFidelity": "PASS",
+    "ECR-16_documentationComplete": "PASS",
+    "ECR-17_outstandingMandatoryItems": "NONE"
+  },
+  "verification": {
+    "testsPassed": 62,
+    "typecheck": "PASS",
+    "architectureBoundaryTests": "PASS"
+  },
+  "coverage": {
+    "treatment": "quality_objectives_not_absolute_acceptance_alone",
+    "lines": { "objective": 95, "actual": 92.94, "status": "JUSTIFIED_DEVIATION" },
+    "functions": { "objective": 95, "actual": 94.59, "status": "JUSTIFIED_DEVIATION" },
+    "branches": { "objective": 90, "actual": 78.91, "status": "JUSTIFIED_DEVIATION" },
+    "residualClassification": "defensive_unreachable_guard_ternary_helper_paths",
+    "behaviouralCompleteness": "DEMONSTRATED",
+    "artificialCoverageInflationRequired": false
+  },
+  "artifacts": [
+    "docs/products/apzqep/test-plans/domain/ENGINEERING-COMPLETION-REVIEW.md",
+    "docs/products/apzqep/test-plans/domain/DOMAIN-COMPLETION-REPORT.md",
+    "packages/qep-test-plans/"
+  ],
+  "nextAction": "Owner Acceptance Review (separate Owner authorisation)",
+  "notAuthorised": [
+    "Owner Acceptance decision",
+    "Capability Certification",
+    "Version Promotion",
+    "Freeze",
+    "ENG-060B Infrastructure",
+    "REST",
+    "Workbench",
+    "AI",
+    "MCP"
+  ]
+}

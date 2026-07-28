@@ -73,7 +73,14 @@ export class InMemoryTaskRepository implements WritableTaskRepository {
   }
 }
 
-export {
-  getSharedTaskRepository,
-  resetSharedTaskRepository,
-} from "../persistence/repository-factory";
+/** Client-safe memory singleton — must not import repository-factory (pulls pg). */
+let sharedTaskRepository: InMemoryTaskRepository | undefined;
+
+export function getSharedTaskRepository(): InMemoryTaskRepository {
+  sharedTaskRepository ??= new InMemoryTaskRepository();
+  return sharedTaskRepository;
+}
+
+export function resetSharedTaskRepository(): void {
+  sharedTaskRepository = undefined;
+}

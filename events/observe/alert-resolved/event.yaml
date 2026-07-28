@@ -1,0 +1,25 @@
+manifestSchemaVersion: "1.0"
+id: observe-alert-resolved
+name: Observe Alert Resolved
+version: 1.0.0
+kind: event
+
+metadata:
+  category: observability
+  description: Emitted when an Observe alert is resolved manually or by healthy evaluation (ADR-0070 Phase A).
+
+event:
+  category: business
+  publisher: observe-service
+  subscribers:
+    - notification:observe.delivery-hook
+    - activity:observe.activity
+    - audit:platform.audit
+  payload:
+    alertStateId: string
+    alertDefinitionId: string
+    state: string
+    fingerprint: string
+
+documentation:
+  eventKey: observe.alert.resolved

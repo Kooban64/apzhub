@@ -1,0 +1,38 @@
+{
+  "evidenceId": "20260728T090246Z-APZQEP-CERT-080A-ACCEPTANCE",
+  "programme": "APZQEP-CERT-080A",
+  "title": "Test Plans Integrated Capability Certification — Owner Certification Decision",
+  "capability": "Test Plans",
+  "certificationLevel": "Capability Certification",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T090246Z",
+  "decision": {
+    "status": "CERTIFIED",
+    "approved": true,
+    "programmeClosed": true
+  },
+  "productionClassification": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "version": {
+    "package": "@apzhub/qep-test-plans",
+    "from": "0.2.0",
+    "to": "1.0.0",
+    "promotionAuthorised": true,
+    "promotionApplied": true,
+    "label": "CERTIFIED"
+  },
+  "freeze": {
+    "eligible": true,
+    "authorised": false,
+    "reason": "Freeze requires separate Owner programme APZQEP-FREEZE-080A"
+  },
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "assuranceEvidence": "docs/operations/evidence/portfolio-recert/20260728T081500Z-APZQEP-CERT-080A.json",
+  "pack": "docs/products/apzqep/test-plans/capability-certification/",
+  "authorisesNext": "APZQEP-FREEZE-080A — Test Plans Capability Freeze Decision",
+  "historicMilestone": "First APZQEP capability certified end-to-end across Domain, Infrastructure, and Workbench with integrated Capability Certification and 1.0.0 promotion"
+}

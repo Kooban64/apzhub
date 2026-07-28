@@ -1,0 +1,9 @@
+{
+  "programme": "APZQEP-ARCH-010",
+  "title": "Verification Workbench Architecture",
+  "recordedAt": "2026-07-26T19:30:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Engineering Programme Instruction APZQEP-ENG-040C",
+  "effect": "ARCH-010 closed. APZQEP-ENG-040C Verification Workbench Engineering authorised.",
+  "notAuthorised": ["Coverage", "Impact", "Evidence", "Certification", "AI", "MCP"]
+}

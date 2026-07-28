@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 
-import { isSupportApiError } from "@/lib/support/errors";
+import { isSupportApiError, shouldRetrySupportQuery } from "@/lib/support/errors";
 import { formatSupportDate } from "@/lib/support/format";
 import {
   canCreateSupportRequest,
@@ -78,6 +78,7 @@ export function SupportInboxView({
   const query = useQuery({
     queryKey: supportQueryKeys.requests.list(params),
     queryFn: ({ signal }) => listSupportRequests(params, { signal }),
+    retry: shouldRetrySupportQuery,
   });
 
   function updateParam(key: string, value: string) {
@@ -188,7 +189,7 @@ export function SupportInboxView({
         </label>
       </div>
 
-      {query.isLoading ? <LoadingState /> : null}
+      {query.isPending ? <LoadingState /> : null}
       {query.isError ? (
         <ErrorState
           message={

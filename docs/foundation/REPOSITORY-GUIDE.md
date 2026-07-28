@@ -3,10 +3,10 @@
 > **Purpose:** Explain monorepo structure, conventions, and where things live  
 > **Audience:** Engineers, AI agents  
 > **Authoritative references:** [004 — Technology Stack](../004-technology-stack-repository-standards-development-environment.md) · [BUILD-001](../build/BUILD-001-repository-bootstrap-guide.md)  
-> **Related documents:** [PACKAGE-CATALOGUE](./PACKAGE-CATALOGUE.md) · [ENGINEERING-HANDBOOK](./ENGINEERING-HANDBOOK.md)  
+> **Related documents:** [PACKAGE-CATALOGUE](./PACKAGE-CATALOGUE.md) · [ENGINEERING-HANDBOOK](./ENGINEERING-HANDBOOK.md) · [Platform Delivery Standard](../engineering/platform-delivery/PLATFORM-DELIVERY-STANDARD.md)  
 > **Reading order:** Early onboarding  
-> **Last updated:** 2026-07-10  
-> **Current status:** Active
+> **Last updated:** 2026-07-22  
+> **Current status:** Active — Platform **1.2.0 CLOSED** · PLAN-001 **ACCEPTED** · ARCH-001 **ACCEPTED** · ENG-001 **ACCEPTED** · [ADR-0070](../architecture/adr/ADR-0070-Observe-Live-Alert-Evaluation-and-Delivery.md)
 
 ---
 
@@ -21,6 +21,10 @@ apz-portal/
 ├── modules/                 Business module manifests
 ├── events/                  Platform event manifests
 ├── docs/                    All documentation
+│   ├── releases/platform-1.2.0/  Official Platform 1.2.0 freeze (APZHUB-RELEASE-001 ACCEPTED)
+│   ├── operations/platform-1.2.0-operational-readiness/  OPS-001 (ACCEPTED)
+│   ├── strategy/platform-1.3/                           PLAN-001 portfolio/roadmap (**ACCEPTED**)
+│   └── architecture/platform-1.3-confirmation/          ARCH-001 architecture confirmation
 ├── testing/                 Playwright E2E, fixtures
 ├── infrastructure/          Docker, Caddy configs
 ├── scripts/                 Tooling scripts
@@ -35,6 +39,8 @@ apz-portal/
 ├── tsconfig.base.json       Shared TypeScript config
 └── vitest.config.ts         Test runner config
 ```
+
+**AI / release entry:** [AI-MANIFEST](./AI-MANIFEST.md) · [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [ARCH-001](../architecture/platform-1.3-confirmation/README.md) · [PLAN-001](../strategy/platform-1.3/README.md)
 
 ---
 
@@ -95,24 +101,27 @@ Discovery: `@apzhub/platform-runtime` scans these at bootstrap.
 
 ## Documentation (`docs/`)
 
-| Directory            | Contents                                  |
-| -------------------- | ----------------------------------------- |
-| `docs/foundation/`   | **Knowledge Foundation (APZHUB-000)**     |
-| `docs/` (root)       | Foundation docs 000–029, quick references |
-| `docs/architecture/` | Architecture documents                    |
-| `docs/adr/`          | Architecture Decision Records             |
-| `docs/strategy/`     | Master strategy and roadmaps              |
-| `docs/specs/`        | Technical specifications                  |
-| `docs/backlog/`      | Engineering backlogs                      |
-| `docs/sprint/`       | Sprint guides and completion reports      |
-| `docs/reviews/`      | Architecture and readiness reviews        |
-| `docs/governance/`   | Engineering and operational guides        |
-| `docs/developer/`    | Developer onboarding guides               |
-| `docs/security/`     | Security audits and compliance            |
-| `docs/releases/`     | Release notes                             |
-| `docs/roadmap/`      | Roadmaps                                  |
-| `docs/build/`        | Build guides                              |
-| `docs/operator/`     | Operator guides                           |
+| Directory            | Contents                                                           |
+| -------------------- | ------------------------------------------------------------------ |
+| `docs/foundation/`   | **Knowledge Foundation (APZHUB-000)**                              |
+| `docs/` (root)       | Foundation docs 000–029, quick references                          |
+| `docs/architecture/` | Architecture documents                                             |
+| `docs/adr/`          | Architecture Decision Records                                      |
+| `docs/strategy/`     | Master strategy and roadmaps                                       |
+| `docs/specs/`        | Technical specifications                                           |
+| `docs/backlog/`      | Engineering backlogs                                               |
+| `docs/sprint/`       | Sprint guides and completion reports                               |
+| `docs/reviews/`      | Architecture and readiness reviews                                 |
+| `docs/governance/`   | Engineering and operational guides                                 |
+| `docs/engineering/`  | Cross-cutting engineering methodology (Platform Delivery Standard) |
+| `docs/developer/`    | Developer onboarding guides                                        |
+| `docs/security/`     | Security audits and compliance                                     |
+| `docs/releases/`     | Release notes                                                      |
+| `docs/roadmap/`      | Roadmaps                                                           |
+| `docs/build/`        | Build guides                                                       |
+| `docs/operator/`     | Operator guides                                                    |
+
+**Delivery methodology:** [docs/engineering/platform-delivery/](../engineering/platform-delivery/README.md) — mandatory for platform capabilities and commercial products.
 
 Navigation: [PROJECT-INDEX](./PROJECT-INDEX.md) · [DOCUMENT-MAP](./DOCUMENT-MAP.md)
 
@@ -201,3 +210,7 @@ pnpm test               # Verify setup
 ```
 
 Read [ENGINEERING-HANDBOOK](./ENGINEERING-HANDBOOK.md) and [AI-CONTEXT](./AI-CONTEXT.md) before contributing.
+
+## Platform 1.4
+
+Architecture confirmation pack: [`docs/strategy/platform-1.4/`](../strategy/platform-1.4/README.md). Platform 1.3 is **CLOSED** (PRWL). No Platform 1.4 engineering without Owner Architecture Acceptance + named Approval.

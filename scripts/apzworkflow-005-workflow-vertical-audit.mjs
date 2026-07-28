@@ -130,7 +130,7 @@ function forbidDeps(pkgJsonPath, forbidden, rule) {
 // ---------------------------------------------------------------------------
 /** Real n8n integration / package import — capability flags like `n8n: false` are allowed. */
 const N8N_INTEGRATION =
-  /@n8n\b|from\s+["'][^"']*n8n|require\(["'][^"']*n8n|integration-n8n|n8n-workflow|n8nClient|connectN8n|n8nAdapter/i;
+  /@apzhub\/integration-n8n|from\s+["'](?!\.\/)[^"']*n8n|require\(["'](?!\.\/)[^"']*n8n|n8n-workflow|n8nClient|connectN8n|n8nAdapter|@n8n\//i;
 
 scan(walk(join(ROOT, "apps/web/components/workflows")), [
   { rule: "workbench-no-platform-services", pattern: /@apzhub\/platform-services/ },
@@ -443,7 +443,7 @@ for (const child of [
 // core/persistence remain SoR 0.1.1). Closeout APZWORKFLOW-011 certification defect fix.
 requirePackageVersion(
   "packages/workflow-contracts/package.json",
-  "0.3.0",
+  "0.4.2",
   "version-workflow-contracts",
 );
 requirePackageVersion(
@@ -458,12 +458,12 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.26.1",
+  "0.32.0",
   "version-platform-services",
 );
 requirePackageVersion(
   "packages/platform-service-contracts/package.json",
-  "0.17.1",
+  "0.18.0",
   "version-platform-service-contracts",
 );
 

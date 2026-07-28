@@ -5,37 +5,46 @@
 > **Authoritative references:** [docs/adr/README.md](../adr/README.md) · Individual ADR files  
 > **Related documents:** [DECISION-REGISTER](./DECISION-REGISTER.md)  
 > **Reading order:** When researching past decisions or drafting new ADRs  
-> **Last updated:** 2026-07-18  
-> **Current status:** Active — cross-reference index; **65** ADR files on disk through **ADR-0065** (reconciled under APZHUB-KF-001)
+> **Last updated:** 2026-07-27  
+> **Current status:** Active — cross-reference index; **74** ADR files · ADR-0070–0072 under `docs/architecture/adr/`; ADR-0073 pack under `docs/architecture/adr-0073/`; ADR-0074 under `docs/adr/`
 
 ---
 
 ## ADR numbering
 
-| Range         | Category                                                     |
-| ------------- | ------------------------------------------------------------ |
-| ADR-0001–0007 | Core platform architecture                                   |
-| ADR-0008–0018 | Platform packages and runtime                                |
-| ADR-0009–0017 | Registry and manifests                                       |
-| ADR-0019–0023 | Workbench framework                                          |
-| ADR-0024–0026 | Command / Action framework                                   |
-| ADR-0027–0029 | Knowledge & Discovery                                        |
-| ADR-0030–0032 | Event & Notification                                         |
-| ADR-0033–0035 | Activity & Timeline                                          |
-| ADR-0036–0039 | Trust Accounting (Law)                                       |
-| ADR-0040–0045 | Platform Core M8                                             |
-| ADR-0046      | Production readiness (PCv2-01)                               |
-| ADR-0047      | OSS integration (Projects/Plane)                             |
-| ADR-0048      | APZHUB global entity ID strategy                             |
-| ADR-0049      | Persistent entity mapping store (PostgreSQL)                 |
-| ADR-0050      | Production authorisation & policy enforcement                |
-| ADR-0051      | Platform HTTP API surface (v1)                               |
-| ADR-0052–0056 | Integration SDK webhook & polling (OSS-100-08)               |
-| ADR-0057      | SDK harness vs adapter operations certification (OSS-100-09) |
-| ADR-0058      | Integration SDK v1.0 readiness & limitations (OSS-100-10)    |
-| ADR-0059      | APZ TCMS native product architecture (APZTCMS-001)           |
-| ADR-0060–0064 | Search platform / publication / HTTP (APZSEARCH)             |
-| ADR-0065      | Integration SDK v1.0.0 Architecture Freeze (OSS-100-11)      |
+| Range         | Category                                                                                                                                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ADR-0001–0007 | Core platform architecture                                                                                                                                                                 |
+| ADR-0008–0018 | Platform packages and runtime                                                                                                                                                              |
+| ADR-0009–0017 | Registry and manifests                                                                                                                                                                     |
+| ADR-0019–0023 | Workbench framework                                                                                                                                                                        |
+| ADR-0024–0026 | Command / Action framework                                                                                                                                                                 |
+| ADR-0027–0029 | Knowledge & Discovery                                                                                                                                                                      |
+| ADR-0030–0032 | Event & Notification                                                                                                                                                                       |
+| ADR-0033–0035 | Activity & Timeline                                                                                                                                                                        |
+| ADR-0036–0039 | Trust Accounting (Law)                                                                                                                                                                     |
+| ADR-0040–0045 | Platform Core M8                                                                                                                                                                           |
+| ADR-0046      | Production readiness (PCv2-01)                                                                                                                                                             |
+| ADR-0047      | OSS integration (Projects/Plane)                                                                                                                                                           |
+| ADR-0048      | APZHUB global entity ID strategy                                                                                                                                                           |
+| ADR-0049      | Persistent entity mapping store (PostgreSQL)                                                                                                                                               |
+| ADR-0050      | Production authorisation & policy enforcement                                                                                                                                              |
+| ADR-0051      | Platform HTTP API surface (v1)                                                                                                                                                             |
+| ADR-0052–0056 | Integration SDK webhook & polling (OSS-100-08)                                                                                                                                             |
+| ADR-0057      | SDK harness vs adapter operations certification (OSS-100-09)                                                                                                                               |
+| ADR-0058      | Integration SDK v1.0 readiness & limitations (OSS-100-10)                                                                                                                                  |
+| ADR-0059      | APZ TCMS native product architecture (APZTCMS-001)                                                                                                                                         |
+| ADR-0060–0064 | Search platform / publication / HTTP (APZSEARCH)                                                                                                                                           |
+| ADR-0065      | Integration SDK v1.0.0 Architecture Freeze (OSS-100-11)                                                                                                                                    |
+| ADR-0066      | Analytics Platform boundaries vs Observe / Metrics / Reporting                                                                                                                             |
+| ADR-0067      | Metabase as Analytics provider · future provider abstraction                                                                                                                               |
+| ADR-0068      | Workflow Platform as first-class platform capability                                                                                                                                       |
+| ADR-0069      | n8n as primary Workflow Engine provider · multi-provider abstraction                                                                                                                       |
+| ADR-0070      | Observe live alert evaluation & delivery plane (**ACCEPTED** — Platform-1.3-ADR-0070 / ENG-002) · [full](../architecture/adr/ADR-0070-Observe-Live-Alert-Evaluation-and-Delivery.md)       |
+| ADR-0071      | Notification Delivery Providers and Routing ≠ Email SoR (**ACCEPTED** — ENG-004 Phase A implemented) · [full](../architecture/adr/ADR-0071-Notification-Delivery-Providers-and-Routing.md) |
+| ADR-0072      | Platform realtime transport SSE Phase A (**ACCEPTED** — Platform-1.3-ADR-0072 / ENG-003) · [full](../architecture/adr/ADR-0072-Platform-Realtime-Transport.md)                             |
+| ADR-0073      | Durable Notification Runtime PostgreSQL-owned (**ACCEPTED** — Platform-1.4-ADR-0073) · [pack](../architecture/adr-0073/ADR-0073.md)                                                        |
+| ADR-0074      | QEP Test Specification Rejected → Draft vs `availableActions` fidelity (**ACCEPTED**) · [ADR-0074](../adr/ADR-0074-qep-test-specification-rejected-return-to-draft-available-actions.md) |
 
 Legacy sprint ADRs: [docs/decisions/](../decisions/) — includes APZDOCS-002 document storage ADRs:
 
@@ -189,6 +198,8 @@ Legacy sprint ADRs: [docs/decisions/](../decisions/) — includes APZDOCS-002 do
 | 0057            | [026](../026-integration-sdk-adapter-framework-integration-manifest-specification.md), [REFERENCE-ADAPTER-STANDARD](../architecture/REFERENCE-ADAPTER-STANDARD.md)                                                                                                     | `@apzhub/integration-sdk` `/harness`                                  |
 | 0058            | [026](../026-integration-sdk-adapter-framework-integration-manifest-specification.md), [SDK-V1-CERTIFICATION](../../packages/integration-sdk/docs/SDK-V1-CERTIFICATION.md)                                                                                             | `@apzhub/integration-sdk` readiness (remained 0.9.0 until OSS-100-11) |
 | 0065            | [026](../026-integration-sdk-adapter-framework-integration-manifest-specification.md), [Freeze Notice](../architecture/APZHUB-Integration-SDK-Architecture-Freeze-Notice.md)                                                                                           | `@apzhub/integration-sdk` **1.0.0** · **Architecture Frozen**         |
+| 0066–0067       | [Analytics Platform](../platform/analytics/README.md)                                                                                                                                                                                                                  | Analytics Platform Foundation                                         |
+| 0068–0069       | [Workflow Platform](../platform/workflow/README.md)                                                                                                                                                                                                                    | Workflow Platform Foundation                                          |
 
 ---
 

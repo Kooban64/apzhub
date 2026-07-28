@@ -1,0 +1,68 @@
+# APZOR Owner Engineering Specifications (OES)
+
+> **Methodology (FROZEN 1.0.0):** [OES-000](./OES-000-Owner-Engineering-Specification-Standard.md)  
+> **Writing (FROZEN 1.0.0):** [OES-001](./OES-001-Engineering-Writing-Standard.md)  
+> **Review (FROZEN 1.1.0):** [OES-002](./OES-002-Engineering-Review-and-Acceptance-Standard.md) — includes Engineering Completion Review (ECR)  
+> **Organisation:** APZOR  
+> **Change control:** Semantic versioning for future revisions — no new foundational OES without a demonstrated gap and Owner Decision.
+
+## Hierarchy of authority
+
+```text
+Document 000 / Product Constitution     → platform & repository architecture
+        ↓
+OES-000 (FROZEN 1.0.0)                   → engineering methodology
+        ↓
+OES-001 (FROZEN 1.0.0)                   → engineering writing standard
+        ↓
+OES-002 (FROZEN 1.0.0)                   → engineering review & acceptance
+        ↓
+Capability OES documents                 → programme design / delivery contract
+        ↓
+Owner Acceptance → Implementation → Operational Readiness → Certification
+  → Version Promotion → Freeze
+```
+
+| Rank | Document | Authority |
+| ---- | -------- | --------- |
+| 1 | [Document 000](../../000-apzhub-engineering-constitution.md) | Supreme on APZHUB architecture / stack |
+| 2 | [OES-000](./OES-000-Owner-Engineering-Specification-Standard.md) | Methodology — **FROZEN 1.0.0** |
+| 3 | [OES-001](./OES-001-Engineering-Writing-Standard.md) | Writing — **FROZEN 1.0.0** |
+| 4 | [OES-002](./OES-002-Engineering-Review-and-Acceptance-Standard.md) | Review & Acceptance — **FROZEN 1.0.0** |
+| 5 | Product / capability OES | Programme design authority |
+| 6 | Implementation packs / code | Must conform to accepted OES |
+
+## Catalogue
+
+| Document | Product | Status |
+| -------- | ------- | ------ |
+| [OES-000](./OES-000-Owner-Engineering-Specification-Standard.md) | APZOR | **ACCEPTED / FROZEN 1.0.0** |
+| [OES-001](./OES-001-Engineering-Writing-Standard.md) | APZOR | **ACCEPTED / FROZEN 1.0.0** |
+| [OES-002](./OES-002-Engineering-Review-and-Acceptance-Standard.md) | APZOR | **ACCEPTED / FROZEN 1.1.0** |
+| [OES-ARCH-012](./APZQEP/OES-ARCH-012-Test-Specifications-Workbench-Architecture/README.md) | APZ QEP | **ACCEPTED / ARCHITECTURE BASELINED** |
+| [OES-ENG-050C](./APZQEP/OES-ENG-050C-Test-Specifications-Workbench-Engineering/README.md) | APZ QEP | **ACCEPTED / IMPLEMENTATION AUTHORISED** |
+| [OES-ENG-060B](./APZQEP/OES-ENG-060B-Test-Plans-Infrastructure-Engineering/README.md) | APZ QEP | **ACCEPTED / ENGINEERING SPECIFICATION BASELINED / CLOSED** — [canonical pack](../../products/apzqep/test-plans/OES-ENG-060B/README.md) |
+| [OES-ARCH-014](./APZQEP/OES-ARCH-014-Test-Plans-Workbench-Architecture/README.md) | APZ QEP | **ACCEPTED / ARCHITECTURE BASELINED / PROGRAMME CLOSED** — [canonical pack](../../products/apzqep/test-plans/OES-ARCH-014/README.md) |
+| [OES-ENG-070A](./APZQEP/OES-ENG-070A-Test-Plans-Workbench-Engineering/README.md) | APZ QEP | **ACCEPTED / ENGINEERING SPECIFICATION BASELINED / CLOSED** — [canonical pack](../../products/apzqep/test-plans/OES-ENG-070A/README.md) · authorised **APZQEP-ENG-070A** — **ACCEPTED / APPROVED / PROGRAMME CLOSED** — [workbench pack](../../products/apzqep/test-plans/workbench/README.md) · then **APZQEP-CERT-070A** — Workbench Component Certification — **CERTIFIED / APPROVED / CLOSED** — [CERT-070A pack](../../products/apzqep/test-plans/CERT-070A/README.md) · then **APZQEP-CERT-080A** — Test Plans Integrated Capability Certification — **CERTIFIED / APPROVED / CLOSED** · `@apzhub/qep-test-plans` **1.0.0 CERTIFIED** — [capability-certification pack](../../products/apzqep/test-plans/capability-certification/README.md) · then **APZQEP-FREEZE-080A** — Test Plans Capability Freeze Decision — **FROZEN / APPROVED / CLOSED** · `@apzhub/qep-test-plans` **1.0.0 CERTIFIED / FROZEN / BASELINE ESTABLISHED** — [freeze pack](../../products/apzqep/test-plans/freeze/README.md) |
+
+## Product trees
+
+| Product | Path |
+| ------- | ---- |
+| APZ QEP | [APZQEP/](./APZQEP/README.md) |
+
+## Practice notes (non-normative until absorbed)
+
+| Note | Status |
+| ---- | ------ |
+| [OES-CERTIFICATION-INDEPENDENCE.md](./OES-CERTIFICATION-INDEPENDENCE.md) | Established practice — CERT SHALL NOT perform engineering |
+| [OES-CERTIFICATION-LEVELS.md](./OES-CERTIFICATION-LEVELS.md) | Established practice — Component / Capability / Platform certification levels |
+| [OES-COVERAGE-AND-BEHAVIOURAL-COMPLETENESS.md](./OES-COVERAGE-AND-BEHAVIOURAL-COMPLETENESS.md) | Candidate for OES-000 v1.1.0 — coverage objectives vs behavioural completeness / ECR justified deviations |
+| [APZOR-ENGINEERING-OPERATING-MODEL-VALIDATION.md](./APZOR-ENGINEERING-OPERATING-MODEL-VALIDATION.md) | Owner observation — Operating Model **1.0.0 VALIDATED** through practice; superseding recognition via **APZQEP-PORTFOLIO-001** |
+| [APZQEP Engineering Lifecycle Handbook](../../products/apzqep/ENGINEERING-LIFECYCLE-HANDBOOK.md) | Portfolio operational map — complements OES; does not replace |
+| [APZQEP-PORTFOLIO-001](../../products/apzqep/portfolio/PORTFOLIO-001/README.md) | Foundation Completion & Portfolio Baseline — **ACCEPTED / APPROVED / CLOSED** (2026-07-28) — APZQEP Foundation formally complete, Capability Expansion READY; consolidates the validated Operating Model evidence across all five frozen capabilities; portfolio / documentation only; no Wave 2 authorised |
+
+## STOP
+
+Do **not** amend frozen OES-000/001/002 without formal change control.  
+Do **not** invent Owner Acceptance, CERT, or Freeze without Owner Decision.

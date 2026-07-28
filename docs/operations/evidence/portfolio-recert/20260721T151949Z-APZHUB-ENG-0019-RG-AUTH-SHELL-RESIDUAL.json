@@ -1,0 +1,49 @@
+{
+  "programme": "APZHUB-ENG-0019",
+  "title": "Implement RG-AUTH-SHELL-RESIDUAL",
+  "baseline": "1.2.0",
+  "wave": 2,
+  "step": 4,
+  "timestampUtc": "20260721T151949Z",
+  "preconditions": {
+    "APZHUB-ENG-0018": "ACCEPTED",
+    "group": "RG-AUTH-SHELL-RESIDUAL",
+    "statusBefore": "OPEN"
+  },
+  "remediationGroup": {
+    "id": "RG-AUTH-SHELL-RESIDUAL",
+    "status": "REMEDIATED",
+    "failuresCleared": "QA2-F-016…019 (4 hard) + QA2-FL-001…030 (30 flaky root cause)",
+    "rootCause": "RCA-05",
+    "playwright": {
+      "spr003005": "11/11 PASS",
+      "smokeAccessibilitySpr003005": "8/8 PASS"
+    }
+  },
+  "changes": [
+    "API-first signInDevUser",
+    "shared product UI cert helpers delegate to signInDevUser",
+    "workbench-page nested-route fallback removed",
+    "SPR-003 context polls Personalisation workbench-layout API",
+    "SPR-005 knowledge Overview recovery to Home"
+  ],
+  "remainingVsCert001AfterEng0016To0019": {
+    "playwrightHard": 8,
+    "playwrightFlakyAuthShellAttributed": 0,
+    "vitest": 1,
+    "lint": 0,
+    "typecheck": 0
+  },
+  "recommendation": "READY FOR OWNER ACCEPTANCE",
+  "stop": [
+    "no RG-SUPPORT-CERT",
+    "no RG-OBSERVE-WB",
+    "no RG-VISUAL-INBOX",
+    "no RG-TESTING-ARCH",
+    "no ENG-0020",
+    "no Email SoR",
+    "no FIN-001",
+    "no Workflow Execute",
+    "no Release 1.3"
+  ]
+}

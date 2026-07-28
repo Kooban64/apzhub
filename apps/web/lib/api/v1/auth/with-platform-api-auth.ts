@@ -36,7 +36,7 @@ export type PlatformApiRouteHandler = (
   request: NextRequest,
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
-) => NextResponse | Promise<NextResponse>;
+) => NextResponse | Response | Promise<NextResponse | Response>;
 
 export interface WithPlatformApiAuthOptions {
   readonly operation?: string;
@@ -52,7 +52,7 @@ export function withPlatformApiAuth(
 ): (
   request: NextRequest,
   routeContext?: { params: Promise<Record<string, string>> },
-) => Promise<NextResponse> {
+) => Promise<NextResponse | Response> {
   return async (request, routeContext) => {
     const started = Date.now();
     const tracingResult = resolvePlatformApiTracing(request);

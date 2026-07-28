@@ -1,0 +1,33 @@
+{
+  "programme": "Platform-1.3-ADR-0072",
+  "adrId": "ADR-0072",
+  "title": "Platform Realtime Transport Architecture",
+  "baseline": "Platform 1.3 Engineering",
+  "timestamp": "2026-07-22T16:06:00Z",
+  "status": "READY_FOR_OWNER_ADR_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER ADR ACCEPTANCE",
+  "preferredArchitecture": "Option C — Transport Abstraction with SSE as sole Phase A concrete transport",
+  "prerequisitesRecorded": {
+    "Platform-1.3-ENG-002": "ACCEPTED",
+    "Platform-1.3-ENG-001": "ACCEPTED",
+    "ADR-0070": "ACCEPTED",
+    "Platform-1.3-ARCH-001": "ACCEPTED"
+  },
+  "applicationSourceChanges": "none",
+  "platformServicesChanges": "none",
+  "integrationSdkChanges": "none",
+  "canonicalDocument": "docs/architecture/adr/ADR-0072-Platform-Realtime-Transport.md",
+  "indexStub": "docs/adr/ADR-0072-platform-realtime-transport.md",
+  "ownerAcceptance": "docs/architecture/adr/OWNER-ACCEPTANCE-ADR-0072.md",
+  "explicitNonGoalsConfirmed": {
+    "realtimeImplementation": false,
+    "supportRealtimeEng003": false,
+    "notificationDelivery": false,
+    "emailSoR": false,
+    "fin001": false,
+    "workflowExecute": "remains_gated",
+    "adr0071Implementation": false,
+    "websocketPhaseA": false
+  },
+  "completionRecommendation": "READY FOR OWNER ADR ACCEPTANCE"
+}

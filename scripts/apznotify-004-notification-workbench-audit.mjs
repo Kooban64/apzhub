@@ -76,6 +76,11 @@ scan(
 
 scan(componentFiles, [
   {
+    rule: "ui-no-realtime",
+    pattern: /\bWebSocket\b/,
+    // ENG-003 SSE inbox: EventSource authorised; WebSocket remains forbidden
+  },
+  {
     rule: "ui-no-event-bus",
     pattern: /\bEventBus\b/,
   },
@@ -86,10 +91,6 @@ scan(componentFiles, [
   {
     rule: "ui-no-designer",
     pattern: /\btemplate designer\b/i,
-  },
-  {
-    rule: "ui-no-realtime",
-    pattern: /\bWebSocket\b|\bEventSource\b|\brealtime subscribe\b/i,
   },
 ]);
 

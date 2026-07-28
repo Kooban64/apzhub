@@ -122,7 +122,8 @@ export type UpdateNotificationPreferenceInput = {
 export type NotificationDiagnosticsHealth = {
   readonly status: "healthy" | "degraded" | "unavailable";
   readonly persistenceMode: "postgres" | "memory";
-  readonly deliveryEnabled: false;
+  /** ENG-004: true when delivery plane feature flags enable in-app delivery. */
+  readonly deliveryEnabled: boolean;
   readonly checkedAt: string;
 };
 
@@ -130,12 +131,12 @@ export type NotificationDiagnosticsReadiness = {
   readonly ready: boolean;
   readonly notificationEnabled: true;
   readonly persistenceMode: "postgres" | "memory";
-  readonly deliveryEnabled: false;
+  readonly deliveryEnabled: boolean;
   readonly capabilities: readonly string[];
 };
 
 export type NotificationDiagnosticsCapabilities = {
-  readonly delivery: false;
+  readonly delivery: boolean;
   readonly channelsModelled: readonly NotificationChannelKind[];
   readonly lifecycle: readonly NotificationStatus[];
   readonly facets: readonly string[];

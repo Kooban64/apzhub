@@ -1,0 +1,35 @@
+{
+  "programme": "APZQEP-ENG-020F",
+  "part": "3",
+  "title": "Requirements Workbench Exposure, Quality Assurance and Operational Readiness",
+  "recordedAt": "2026-07-26T10:00:00Z",
+  "architecture": "APZQEP-ARCH-006 — ACCEPTED / CLOSED / COMPLETE",
+  "state": "PART 3 IMPLEMENTED — AWAITING OWNER ACCEPTANCE",
+  "package": {
+    "@apzhub/qep-requirements": "0.10.0"
+  },
+  "delivered": [
+    "Relationships Workbench routes and sidebar",
+    "Relationship Explorer (list-first)",
+    "Create and supersede workflows",
+    "Multi-pane detail inspector with availableActions",
+    "Requirement detail relationships panel",
+    "Baseline/CV/immutable context banners",
+    "Frontend telemetry",
+    "Component + contract tests",
+    "Playwright route smoke",
+    "Operational readiness and Workbench docs"
+  ],
+  "notDelivered": [
+    "graph visualisation",
+    "Traceability / Verification / AI / MCP",
+    "bulk mutation UI",
+    "Owner Acceptance of Part 3 / programme close"
+  ],
+  "tests": {
+    "qepRequirementsPackage": "PASS",
+    "relationshipsWorkbenchComponents": "PASS",
+    "availableActionsContract": "PASS"
+  },
+  "stopRule": "Await Owner Acceptance. Do not begin Traceability, Verification, graphs, AI, or MCP."
+}

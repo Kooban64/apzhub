@@ -130,7 +130,7 @@ export interface SupportArticleRecipients {
   readonly replyTo?: readonly string[];
 }
 
-/** Attachment metadata only — no binary content. */
+/** Attachment metadata — binary content retrieved via downloadAttachment. */
 export interface SupportArticleAttachment {
   readonly id: SupportArticleAttachmentId;
   readonly articleId: SupportArticleId;
@@ -140,6 +140,17 @@ export interface SupportArticleAttachment {
   readonly disposition?: string;
   readonly contentId?: string;
   readonly createdAt?: string;
+}
+
+/** Binary attachment content (base64) — R12-SUP-02. */
+export interface SupportArticleAttachmentContent {
+  readonly id: SupportArticleAttachmentId;
+  readonly articleId: SupportArticleId;
+  readonly supportTicketId: SupportTicketId;
+  readonly filename: string;
+  readonly contentType: string;
+  readonly sizeBytes: number;
+  readonly dataBase64: string;
 }
 
 export interface SupportArticle {

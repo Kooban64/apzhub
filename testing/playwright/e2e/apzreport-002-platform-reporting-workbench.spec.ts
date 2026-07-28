@@ -108,7 +108,7 @@ test.describe("APZREPORT-002 Platform Reporting workbench", () => {
       page.getByRole("heading", { level: 2, name: /Preview/i }),
     ).toBeVisible();
     await expect(page.getByTestId("reporting-page")).toBeVisible();
-    await expect(page.getByLabelText("Filter reporting list")).toBeVisible();
+    await expect(page.getByLabel("Filter reporting list")).toBeVisible();
 
     await page.setViewportSize({ width: 390, height: 844 });
     await expect(

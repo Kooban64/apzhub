@@ -3,16 +3,18 @@
 > **Purpose:** Onboarding and daily engineering reference for the Knowledge Foundation  
 > **Audience:** All engineers and AI agents writing code  
 > **Authoritative references:** [000](../000-apzhub-engineering-constitution.md) · [004 — Technology Stack](../004-technology-stack-repository-standards-development-environment.md) · [015 — Quality](../015-software-quality-testing-qa-cicd-release-management-framework.md) · [Governance Engineering Handbook](../governance/APZHUB-Engineering-Handbook.md)  
-> **Related documents:** [ARCHITECTURE-HANDBOOK](./ARCHITECTURE-HANDBOOK.md) · [REPOSITORY-GUIDE](./REPOSITORY-GUIDE.md) · [AI-ENGINEERING-STANDARDS](./AI-ENGINEERING-STANDARDS.md)  
+> **Related documents:** [ARCHITECTURE-HANDBOOK](./ARCHITECTURE-HANDBOOK.md) · [REPOSITORY-GUIDE](./REPOSITORY-GUIDE.md) · [AI-ENGINEERING-STANDARDS](./AI-ENGINEERING-STANDARDS.md) · [Platform Delivery Standard](../engineering/platform-delivery/PLATFORM-DELIVERY-STANDARD.md)  
 > **Reading order:** After Constitution and Master Brief  
-> **Last updated:** 2026-07-18  
-> **Current status:** Active — **OSS-100-11 COMPLETE** — Integration SDK **1.0.0** · **Architecture Frozen** (`pnpm certify:integration-sdk`); Search Publication **Architecture Frozen**; Administration/Configuration/Notification/Workflow/Observability/Identity/Metrics programmes frozen
+> **Last updated:** 2026-07-19  
+> **Current status:** Active — **OSS-100-11 COMPLETE** — Integration SDK **1.0.0** · **Architecture Frozen** (`pnpm certify:integration-sdk`); Search Publication **Architecture Frozen**; Administration/Configuration/Notification/Workflow/Observability/Identity/Metrics programmes frozen; **Platform Delivery Standard** filed (APZHUB-ENGINEERING-001)
 
 ---
 
 ## Overview
 
 This handbook orients engineers to **how APZHUB is built**. Detailed process guides live in [governance/APZHUB-Engineering-Handbook.md](../governance/APZHUB-Engineering-Handbook.md). This document is the Knowledge Foundation entry point.
+
+**Platform Delivery Standard (mandatory):** Every future platform capability and commercial product programme follows [docs/engineering/platform-delivery/](../engineering/platform-delivery/README.md) — lifecycle, stage gates, quality gates, programme governance, and templates. Cite that pack instead of recreating engineering instructions.
 
 ---
 

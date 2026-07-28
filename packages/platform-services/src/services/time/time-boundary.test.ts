@@ -21,7 +21,7 @@ describe("Time platform services boundaries", () => {
       dependencies?: Record<string, string>;
       version: string;
     };
-    expect(pkg.version).toBe("0.26.1");
+    expect(pkg.version).toBe("0.32.0");
     expect(pkg.dependencies?.["@apzhub/integration-kimai"]).toBe("workspace:*");
     expect(pkg.dependencies?.["@apzhub/platform-service-contracts"]).toBe(
       "workspace:*",

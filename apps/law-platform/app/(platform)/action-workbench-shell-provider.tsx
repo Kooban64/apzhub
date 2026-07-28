@@ -31,6 +31,7 @@ import type {
   TimelineRegistryHydrationDiagnostics,
 } from "@apzhub/activity-timeline-framework/server";
 import type { EventBus } from "@apzhub/event-notification-framework";
+import type { AuthSessionPermissionInput } from "@apzhub/workbench-framework";
 import { WorkbenchProvider } from "@apzhub/workbench-framework/react";
 import type { WorkbenchRegistryDto } from "@apzhub/workbench-framework/server";
 import { useCallback, useMemo, useState, type ReactNode } from "react";
@@ -44,7 +45,7 @@ import { EventNotificationDiagnostics } from "@/components/event-notification-di
 import { KnowledgeDiscoveryDiagnostics } from "@/components/knowledge-discovery-diagnostics";
 import { createAppActionExecutorBundle } from "@/lib/create-app-action-executor";
 import { createLawPersistenceContextFromSession } from "@/lib/persistence/tenant-resolver";
-import { setSessionLawPersistenceContext } from "@/lib/persistence/law-persistence-scope";
+import { setSessionLawPersistenceContext } from "@/lib/persistence/law-persistence-session";
 import { ClientWorkflowProvider } from "@/lib/clients/client-workflow-context";
 import type { ClientWorkflowService } from "@/lib/clients/client-workflow-service";
 import { MatterWorkflowProvider } from "@/lib/matters/matter-workflow-context";
@@ -79,6 +80,7 @@ export interface ActionWorkbenchShellProviderProps {
   readonly activityTimelineBundle: ActivityTimelineHydrationBundle;
   readonly activityDiagnostics: ActivityRegistryHydrationDiagnostics;
   readonly timelineDiagnostics: TimelineRegistryHydrationDiagnostics;
+  readonly authPermissionContext?: AuthSessionPermissionInput | null;
   readonly initialTheme?: "light" | "dark" | "system";
   readonly children: ReactNode;
 }
@@ -191,6 +193,7 @@ function EventNotificationShell({
   commandDiagnostics,
   userId,
   sessionTenantId,
+  authPermissionContext,
   initialTheme,
   children,
 }: {
@@ -206,12 +209,20 @@ function EventNotificationShell({
   readonly commandDiagnostics: ActionRegistryHydrationDiagnostics;
   readonly userId?: string;
   readonly sessionTenantId?: string;
+  readonly authPermissionContext?: AuthSessionPermissionInput | null;
   readonly initialTheme?: "light" | "dark" | "system";
   readonly children: ReactNode;
 }) {
-  const eventNotificationContext = useAppEventNotificationContext();
+  const eventNotificationContext = useAppEventNotificationContext({
+    userId,
+    tenantId: sessionTenantId,
+  });
   const activityTimelineContext = useAppActivityTimelineContext(
     eventNotificationContext,
+    {
+      userId,
+      tenantId: sessionTenantId,
+    },
   );
   const sessionStore = useMemo(
     () => (userId ? createPlatformPersonalisationSessionStore() : undefined),
@@ -283,6 +294,8 @@ function EventNotificationShell({
         <WorkbenchProvider
           initialRegistry={registry}
           userId={userId}
+          authPermissionContext={authPermissionContext}
+          permissionMode="auth"
           sessionStore={sessionStore}
           sessionStorageBackend={sessionStore ? "memory" : "localStorage"}
           resolveActionExecutor={resolveActionExecutor}
@@ -369,6 +382,7 @@ export function ActionWorkbenchShellProvider({
   activityTimelineBundle,
   activityDiagnostics,
   timelineDiagnostics,
+  authPermissionContext,
   initialTheme,
   children,
 }: ActionWorkbenchShellProviderProps) {
@@ -392,6 +406,7 @@ export function ActionWorkbenchShellProvider({
           ?.activeTenantId ??
         (session?.user as { tenantId?: string } | undefined)?.tenantId
       }
+      authPermissionContext={authPermissionContext}
       initialTheme={initialTheme}
     >
       {children}

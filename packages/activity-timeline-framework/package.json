@@ -14,10 +14,12 @@
   },
   "dependencies": {
     "@apzhub/command-framework": "workspace:*",
+    "@apzhub/config": "workspace:*",
     "@apzhub/event-notification-framework": "workspace:*",
     "@apzhub/platform-runtime": "workspace:*",
     "@apzhub/ui": "workspace:*",
-    "@apzhub/workbench-framework": "workspace:*"
+    "@apzhub/workbench-framework": "workspace:*",
+    "drizzle-orm": "^0.45.2"
   },
   "peerDependencies": {
     "react": "^19.0.0"

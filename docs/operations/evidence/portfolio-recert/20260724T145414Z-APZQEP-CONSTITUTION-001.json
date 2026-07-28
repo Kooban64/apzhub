@@ -1,0 +1,27 @@
+{
+  "programme": "APZQEP-CONSTITUTION-001",
+  "title": "APZ QEP Product Constitution & Engineering Guardrails",
+  "classification": "PRODUCT_GOVERNANCE",
+  "lifecycle": "Product Governance",
+  "baseline": "APZQEP-DISCOVERY-001 ACCEPTED",
+  "reference": [
+    "Platform-1.4-CERT-001",
+    "APZQEP-TRANSITION-001",
+    "APZQEP-REQ-001",
+    "APZQEP-DISCOVERY-001"
+  ],
+  "timestamp": "2026-07-24T14:54:14Z",
+  "status": "ACCEPTED_CLOSED",
+  "recommendation": "READY FOR OWNER CONSTITUTION ACCEPTANCE",
+  "packRoot": "docs/products/apzqep/constitution/",
+  "authority": "Highest for APZ QEP after Product Vision",
+  "platformUnchanged": true,
+  "productDefinition": false,
+  "architecture": false,
+  "engineering": false,
+  "productGovernancePhase": "CLOSED",
+  "nextProgramme": "APZQEP-DEF-001",
+  "nextProgrammeStatus": "AUTHORISED_IMPLEMENTED_AWAITING_OWNER_ACCEPTANCE",
+  "acceptedAt": "2026-07-24",
+  "ownerDecision": "ACCEPTED / CLOSED \u2014 Product Governance complete; authorises APZQEP-DEF-001"
+}

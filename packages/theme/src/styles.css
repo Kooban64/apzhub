@@ -1,1 +1,10 @@
 @import "./tokens.css";
+
+/*
+ * Primary action surfaces must use --color-primary-foreground on --color-primary.
+ * Guarantees WCAG AA contrast even when Tailwind has not yet emitted the
+ * text-[var(--color-primary-foreground)] utility from packages/ui.
+ */
+button[class*="bg-[var(--color-primary)]"] {
+  color: var(--color-primary-foreground);
+}

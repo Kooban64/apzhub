@@ -1,0 +1,25 @@
+{
+  "id": "20260728T060500Z-APZQEP-CERT-060B-ACCEPTANCE",
+  "timestamp": "2026-07-28T06:05:00Z",
+  "programme": "APZQEP-CERT-060B",
+  "title": "Test Plans Infrastructure Component Certification",
+  "type": "owner-certification-decision",
+  "decision": "CERTIFIED",
+  "approved": true,
+  "programmeClosed": true,
+  "certificationLevel": "COMPONENT",
+  "component": "infrastructure",
+  "classification": "INFRASTRUCTURE_PRODUCTION_READY_WITH_LIMITATIONS",
+  "package": {
+    "name": "@apzhub/qep-test-plans",
+    "version": "0.2.0",
+    "status": "INFRASTRUCTURE_COMPONENT_CERTIFIED",
+    "promotedTo100": false
+  },
+  "freeze": "NOT_AUTHORISED",
+  "nextProgramme": "APZQEP-ARCH-014",
+  "documents": [
+    "docs/products/apzqep/test-plans/CERT-060B/OWNER-ACCEPTANCE.md",
+    "docs/products/apzqep/test-plans/CERT-060B/CERTIFICATION-REPORT.md"
+  ]
+}

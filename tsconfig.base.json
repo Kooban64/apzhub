@@ -183,6 +183,7 @@
       "@apzhub/integration-github-actions": [
         "./integrations/github-actions/src/index.ts"
       ],
+      "@apzhub/integration-gitlab-ci": ["./integrations/gitlab-ci/src/index.ts"],
       "@apzhub/integration-meilisearch": ["./integrations/meilisearch/src/index.ts"],
       "@apzhub/platform-service-contracts": [
         "./packages/platform-service-contracts/src/index.ts"
@@ -198,6 +199,29 @@
       "@apzhub/testing-foundation": ["./packages/testing-foundation/src/index.ts"],
       "@apzhub/testing-persistence": ["./packages/testing-persistence/src/index.ts"],
       "@apzhub/testing-services": ["./packages/testing-services/src/index.ts"],
+      "@apzhub/qep-types": ["./packages/qep-types/src/index.ts"],
+      "@apzhub/qep-contracts": ["./packages/qep-contracts/src/index.ts"],
+      "@apzhub/qep-foundation": ["./packages/qep-foundation/src/index.ts"],
+      "@apzhub/qep-ui": ["./packages/qep-ui/src/index.ts"],
+      "@apzhub/qep-requirements": ["./packages/qep-requirements/src/index.ts"],
+      "@apzhub/qep-requirements/domain": [
+        "./packages/qep-requirements/src/domain/index.ts"
+      ],
+      "@apzhub/qep-requirements/application": [
+        "./packages/qep-requirements/src/application/index.ts"
+      ],
+      "@apzhub/qep-requirements/presentation": [
+        "./packages/qep-requirements/src/presentation/index.ts"
+      ],
+      "@apzhub/qep-requirements/shared": [
+        "./packages/qep-requirements/src/shared/index.ts"
+      ],
+      "@apzhub/qep-requirements/infrastructure": [
+        "./packages/qep-requirements/src/infrastructure/index.ts"
+      ],
+      "@apzhub/lifecycle-engine": ["./packages/lifecycle-engine/src/index.ts"],
+      "@apzhub/search-qep": ["./packages/search-qep/src/index.ts"],
+      "@apzhub/integration-qep-github": ["./integrations/qep-github/src/index.ts"],
       "@apzhub/reporting-contracts": ["./packages/reporting-contracts/src/index.ts"],
       "@apzhub/reporting-core": ["./packages/reporting-core/src/index.ts"],
       "@apzhub/document-contracts": ["./packages/document-contracts/src/index.ts"],
@@ -213,6 +237,9 @@
       "@apzhub/notification-core": ["./packages/notification-core/src/index.ts"],
       "@apzhub/notification-persistence": [
         "./packages/notification-persistence/src/index.ts"
+      ],
+      "@apzhub/notification-delivery-persistence": [
+        "./packages/notification-delivery-persistence/src/index.ts"
       ],
       "@apzhub/configuration-contracts": [
         "./packages/configuration-contracts/src/index.ts"
@@ -242,6 +269,8 @@
       ],
       "@apzhub/search-projects": ["./packages/search-projects/src/index.ts"],
       "@apzhub/search-support": ["./packages/search-support/src/index.ts"],
+      "@apzhub/search-time": ["./packages/search-time/src/index.ts"],
+      "@apzhub/search-law": ["./packages/search-law/src/index.ts"],
       "@apzhub/search-documents": ["./packages/search-documents/src/index.ts"],
       "@apzhub/search-testing": ["./packages/search-testing/src/index.ts"],
       "@apzhub/search-reporting": ["./packages/search-reporting/src/index.ts"],

@@ -51,6 +51,7 @@ function scan(files, rules) {
       }
       for (const rule of rules) {
         if (rule.pattern.test(line)) {
+          if (rule.allow?.(path, line)) continue;
           violations.push({
             file: path,
             line: i + 1,
@@ -76,7 +77,12 @@ if (!existsSync(join(ROOT, notifyDir))) {
     { rule: "no-http-routes", pattern: /\/api\/v1\/|NextRequest|createRouteHandler/ },
     { rule: "no-workbench", pattern: /workbench-framework|\/workspace\/notification/ },
     { rule: "no-delivery", pattern: /nodemailer|twilio|web-push|@slack\/web-api/ },
-    { rule: "no-event-bus", pattern: /EventBus|publishEvent\(/ },
+    {
+      rule: "no-event-bus",
+      pattern: /EventBus|publishEvent\(/,
+      // ENG-004 / ENG-001B delivery plane EventBus port (platform-owned)
+      allow: (path) => path.includes("/services/notification/delivery/"),
+    },
     { rule: "no-queues", pattern: /BullMQ|bullmq|node-cron/ },
   ]);
 }
@@ -163,12 +169,12 @@ if (!existsSync(join(ROOT, notifyDir))) {
       detail: "createPlatformServices must accept and wire notification bundle",
     });
   }
-  if (!create.includes('PLATFORM_SERVICES_VERSION = "0.26.1"')) {
+  if (!create.includes('PLATFORM_SERVICES_VERSION = "0.32.0"')) {
     violations.push({
       file: "packages/platform-services/src/services/create-platform-services.ts",
       line: 1,
       rule: "version",
-      detail: "PLATFORM_SERVICES_VERSION must be 0.26.1",
+      detail: "PLATFORM_SERVICES_VERSION must be 0.32.0",
     });
   }
 }
@@ -177,12 +183,12 @@ if (!existsSync(join(ROOT, notifyDir))) {
   const pkg = JSON.parse(
     readFileSync(join(ROOT, "packages/platform-services/package.json"), "utf8"),
   );
-  if (pkg.version !== "0.26.1") {
+  if (pkg.version !== "0.32.0") {
     violations.push({
       file: "packages/platform-services/package.json",
       line: 1,
       rule: "package-version",
-      detail: `Expected 0.26.1, found ${pkg.version}`,
+      detail: `Expected 0.32.0, found ${pkg.version}`,
     });
   }
   for (const dep of [
@@ -205,12 +211,12 @@ if (!existsSync(join(ROOT, notifyDir))) {
   const contractsPkg = JSON.parse(
     readFileSync(join(ROOT, "packages/notification-contracts/package.json"), "utf8"),
   );
-  if (contractsPkg.version !== "0.2.0") {
+  if (contractsPkg.version !== "0.3.5") {
     violations.push({
       file: "packages/notification-contracts/package.json",
       line: 1,
       rule: "contracts-version",
-      detail: `Expected 0.2.0, found ${contractsPkg.version}`,
+      detail: `Expected 0.3.5, found ${contractsPkg.version}`,
     });
   }
   const corePkg = JSON.parse(

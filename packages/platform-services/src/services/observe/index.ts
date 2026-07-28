@@ -13,4 +13,13 @@ export {
   mapObserveDomainError,
   type ObservePlatformServiceImpls,
 } from "./observe-service-impls";
-export { isObserveServiceEnabled } from "./observe-env";
+export {
+  isObserveServiceEnabled,
+  isObserveAlertEvaluationEnabled,
+} from "./observe-env";
+export {
+  createNoopObserveAlertDeliveryHook,
+  createRecordingObserveAlertDeliveryHook,
+  type ObserveAlertDeliveryHook,
+  type ObserveAlertDeliveryHookInput,
+} from "./alert-delivery-hook";

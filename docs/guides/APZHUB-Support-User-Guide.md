@@ -71,7 +71,7 @@ Mixing these up can expose private content — treat the warning seriously.
 
 ## Attachments
 
-APZHUB currently shows **attachment metadata only** (filename, type, size). Binary download/upload is **not available**. If you need the file contents, use your organisation’s approved process outside this UI until binary support is delivered.
+APZHUB supports **binary attachment upload and download** on Support notes and replies (max **1 MiB** per file). Attachment delete and realtime updates remain unavailable.
 
 ---
 

@@ -1,0 +1,86 @@
+{
+  "programme": "Platform-1.3-ENG-002",
+  "epic": "P13-E02",
+  "title": "Observe Live Alerts — Phase A",
+  "baseline": "Platform 1.3 Engineering",
+  "acceptedAdr": "ADR-0070",
+  "timestamp": "2026-07-22T13:38:00Z",
+  "status": "READY_FOR_OWNER_ENGINEERING_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER ENGINEERING ACCEPTANCE",
+  "packagesChanged": [
+    "@apzhub/observe-contracts",
+    "@apzhub/observe-core",
+    "@apzhub/platform-services"
+  ],
+  "applicationsChanged": ["apps/web"],
+  "databaseChanges": "none — Phase A uses AlertDefinition/AlertState metadata_json",
+  "contractsChanged": [
+    "ObserveAlertRuleConfig",
+    "ObserveAlertLifecycleMetadata",
+    "ObserveAlertEvaluationService",
+    "alertStates.acknowledge|resolve|suppress"
+  ],
+  "apisChanged": [
+    "POST /api/v1/observe/alert-states/{id}/acknowledge",
+    "POST /api/v1/observe/alert-states/{id}/resolve",
+    "POST /api/v1/observe/alert-states/{id}/suppress",
+    "POST /api/v1/observe/alert-evaluation",
+    "GET /api/v1/observe/alert-evaluation/diagnostics",
+    "GET /api/v1/observe/alert-evaluation/health"
+  ],
+  "configurationAdded": {
+    "APZHUB_OBSERVE_ALERT_EVALUATION_ENABLED": {
+      "default": "disabled when unset/invalid",
+      "allowed": ["true", "1", "on"],
+      "productionRecommendation": "enable only after rule inventory + ops readiness"
+    }
+  },
+  "testsExecuted": [
+    {
+      "suite": "packages/platform-services/src/services/observe/eng002-observe-live-alerts.test.ts",
+      "result": "18/18 PASS"
+    },
+    {
+      "suite": "packages/platform-services/src/services/observe/apzobserve-002-platform-services.test.ts",
+      "result": "PASS"
+    },
+    {
+      "suite": "packages/observe-core",
+      "result": "PASS"
+    },
+    {
+      "suite": "packages/observe-contracts",
+      "result": "PASS"
+    }
+  ],
+  "gatesSkippedOrUnavailable": [
+    {
+      "gate": "Full repository Playwright portfolio",
+      "classification": "NOT_RUN_THIS_PROGRAMME",
+      "reason": "Affected Observe unit/service gates executed; full portfolio not required for Phase A service delivery evidence"
+    },
+    {
+      "gate": "Database migration tests",
+      "classification": "N/A",
+      "reason": "No migration in Phase A"
+    }
+  ],
+  "architectureVerification": "PASS — no new layer; Integration SDK untouched; delivery hook seam only",
+  "compatibilityVerification": "PASS — additive Observe contracts/gateway/API",
+  "securityVerification": "PASS — deny-by-default evaluation flag + operation authorization map",
+  "knownLimitationClassification": {
+    "PL12-KL-02": "PARTIALLY_REMEDIATED"
+  },
+  "residuals": ["ENG002-R-01", "ENG002-R-02", "ENG002-R-03", "ENG002-R-04"],
+  "explicitNonGoalsConfirmed": {
+    "notificationProviders": false,
+    "emailSoR": false,
+    "fin001": false,
+    "workflowExecute": "remains_gated",
+    "adr0071": false,
+    "adr0072": false,
+    "eng003": false
+  },
+  "documentationPack": "docs/engineering/platform-1.3-eng-002/",
+  "completionRecommendation": "READY FOR OWNER ENGINEERING ACCEPTANCE"
+}

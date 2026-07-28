@@ -1,0 +1,46 @@
+{
+  "programme": "APZHUB-ENG-0009",
+  "remediationGroup": "RG-MOCK-FETCH",
+  "baseline": "1.2.0",
+  "timestamp": "2026-07-21T05:30:00Z",
+  "playwright": {
+    "command": "CI=true pnpm exec playwright test --config testing/playwright/playwright.config.ts --retries=1 apzadmin-003 apzidentity-003 apzmetrics-003 apzobserve-003",
+    "results": {
+      "passed": 4,
+      "failed": 0,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "id": "QA-F-002",
+        "title": "mock fetch to /api/v1/administration serves module list envelope",
+        "before": "FAIL",
+        "after": "PASS"
+      },
+      {
+        "id": "QA-F-004",
+        "title": "mock fetch to /api/v1/identity serves user list envelope",
+        "before": "FAIL",
+        "after": "PASS"
+      },
+      {
+        "id": "QA-F-005",
+        "title": "mock fetch to /api/v1/metrics serves metrics list envelope",
+        "before": "FAIL",
+        "after": "PASS"
+      },
+      {
+        "id": "QA-F-008",
+        "title": "mock fetch to /api/v1/observe serves health-check list envelope",
+        "before": "FAIL",
+        "after": "PASS"
+      }
+    ]
+  },
+  "quality": {
+    "lint": "PASS",
+    "typecheck": "N/A (Playwright test-only)",
+    "architecture": "PASS (test hygiene only)",
+    "compatibility": "PASS"
+  }
+}

@@ -36,6 +36,12 @@ import {
 import { clientDetailRoute } from "./clients/client-routes";
 import { SEED_CLIENTS } from "./clients/seed-clients";
 import { SEED_MATTERS } from "./matters/seed-matters";
+import {
+  createLawPersistenceContext,
+  DEFAULT_LAW_TENANT_ID,
+  resetLawPersistenceScope,
+  setSessionLawPersistenceContext,
+} from "./persistence";
 
 const workspaceRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -57,6 +63,10 @@ function createIntegrationKnowledgeService() {
 
 describe("legal search workflow integration", () => {
   beforeEach(() => {
+    resetLawPersistenceScope();
+    setSessionLawPersistenceContext(
+      createLawPersistenceContext({ tenantId: DEFAULT_LAW_TENANT_ID }),
+    );
     resetLegalSearchWorkflowDiagnostics();
     resetLegalSearchRecentSearches();
     resetLegalSearchEventEnvelopeCounter();

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "n8n read-only Workflow Engine Reference Adapter for APZHUB (APZWORKFLOW-006)",
+  "description": "n8n Integration Foundation for APZHUB (APZHUB-INTEGRATION-N8N-001) — read-only Workflow Engine Reference Adapter",
   "exports": {
     ".": "./src/index.ts"
   },

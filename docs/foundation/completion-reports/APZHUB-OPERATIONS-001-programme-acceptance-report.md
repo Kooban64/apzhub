@@ -1,55 +1,29 @@
 # APZHUB-OPERATIONS-001 — Programme Acceptance Report
 
 > **Programme:** APZHUB-OPERATIONS-001  
-> **Title:** Engineering Operating Model  
-> **Classification:** Documentation only  
-> **Status:** **ACCEPTED / CLOSED**  
-> **Owner Acceptance:** 2026-07-19  
-> **Completion Report:** [APZHUB-OPERATIONS-001-completion-report](../../sprint/APZHUB-OPERATIONS-001-completion-report.md)
+> **Waves:**
+>
+> 1. Engineering Operating Model — **ACCEPTED / CLOSED** (2026-07-19)
+> 2. Platform Operations Framework — **ACCEPTED / CLOSED** (2026-07-20)  
+>    **Canonical framework:** [docs/operations/README.md](../../operations/README.md)  
+>    **Completion (ops framework):** [docs/operations/COMPLETION-REPORT.md](../../operations/COMPLETION-REPORT.md)  
+>    **Acceptance (ops framework):** [docs/operations/ACCEPTANCE-REPORT.md](../../operations/ACCEPTANCE-REPORT.md)
 
 ---
 
-## Owner Decision
+## Wave 1 — Engineering Operating Model
 
-The Engineering Operating Model has been reviewed. **APZHUB-OPERATIONS-001 is formally ACCEPTED.** The programme is **CLOSED**.
+**ACCEPTED** 2026-07-19. Engineering delivery standards remain in force.
 
-The APZHUB Engineering Foundation is **COMPLETE**. The Engineering Operating Model is the permanent operational standard for APZHUB.
+## Wave 2 — Platform Operations Framework
 
----
+### Owner decision
 
-## Implementation
+| Field      | Value                                                                      |
+| ---------- | -------------------------------------------------------------------------- |
+| Decision   | **ACCEPTED**                                                               |
+| Date       | 2026-07-20                                                                 |
+| Conditions | None                                                                       |
+| Next phase | Enterprise Governance — APZHUB-GOVERNANCE-001 (Enterprise Operating Model) |
 
-Documentation suite under `docs/operations/` (14 operating documents including README). Navigation wired into Knowledge Foundation. No code or package changes.
-
-## Architecture
-
-| Check                                        | Result |
-| -------------------------------------------- | ------ |
-| No architecture redesign                     | PASS   |
-| Complements KF / Product Framework / 000–029 | PASS   |
-| No parallel governance framework invented    | PASS   |
-| Freezes respected                            | PASS   |
-
-## Tests
-
-Not applicable (documentation-only programme).
-
-## Certification
-
-Documentation completeness against Owner programme brief: **PASS**.
-
-## Transition (Owner)
-
-Effective on Acceptance:
-
-- Repository-wide governance programmes are **CLOSED**
-- Future work: Product Releases · Platform Releases · Approved ADRs · routine engineering
-- New governance programmes only if explicitly authorised by the Owner
-
-Release roadmaps filed separately under [docs/releases/](../../releases/README.md).
-
-## Known Limitations
-
-- Operating model describes processes; host-specific deploy runbooks remain in ops/ENVIRONMENT docs.
-- External status page / SOC tooling remain out of scope (per existing Incident Response Guide).
-- `develop` branch is optional — teams may use feature→`main` only.
+Acceptance means Platform Operations Framework is authoritative ops governance for Production Platform **1.1.0**; monitoring/dashboard implementation still requires named Approval; STOP items remain STOP.

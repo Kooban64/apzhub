@@ -1,0 +1,16 @@
+{
+  "name": "@apzhub/analytics-contracts",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Analytics Platform contracts — provider-neutral models, permissions, service interfaces (APZHUB-PLATFORM-ANALYTICS-003)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/analytics-contracts"
+  },
+  "dependencies": {}
+}

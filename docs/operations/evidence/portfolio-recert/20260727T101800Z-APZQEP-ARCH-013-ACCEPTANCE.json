@@ -1,0 +1,52 @@
+{
+  "programme": "APZQEP-ARCH-013",
+  "oes": "APZQEP-OES-ARCH-013",
+  "title": "Test Plans Capability Architecture",
+  "recordedAt": "2026-07-27T10:18:00Z",
+  "decision": "ACCEPTED / APPROVED / ARCHITECTURE BASELINED / CLOSED",
+  "authority": "Owner Architecture Review",
+  "pack": "docs/products/apzqep/test-plans/OES-ARCH-013/",
+  "acceptance": "docs/products/apzqep/test-plans/OES-ARCH-013/OWNER-ACCEPTANCE.md",
+  "complete": "docs/products/apzqep/test-plans/OES-ARCH-013/COMPLETE.md",
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "frozenDependencies": {
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN",
+    "verification": "1.0.0 CERTIFIED / FROZEN",
+    "testSpecifications": "1.0.0 CERTIFIED / FROZEN"
+  },
+  "checklist": {
+    "document000": "PASS",
+    "oes000": "PASS",
+    "oes001": "PASS",
+    "oes002": "PASS",
+    "capabilityBoundaries": "PASS",
+    "informationArchitecture": "PASS",
+    "lifecycle": "PASS",
+    "versioning": "PASS",
+    "frozenQuartetRelationships": "PASS",
+    "navigation": "PASS",
+    "dashboard": "PASS",
+    "explorer": "PASS",
+    "inspector": "PASS",
+    "search": "PASS",
+    "restCatalogue": "PASS",
+    "eventCatalogue": "PASS",
+    "aiBoundary": "PASS",
+    "mcpBoundary": "PASS",
+    "engineeringExclusions": "PASS"
+  },
+  "engineeringUnderArch013": false,
+  "authorisesNext": "APZQEP-OES-ENG-060A — Test Plans Domain Engineering Specification",
+  "notAuthorised": [
+    "Engineering under ARCH-013",
+    "Domain / Infrastructure / Workbench implementation without OES Acceptance",
+    "Uncontrolled architecture changes"
+  ],
+  "stopCondition": "APZQEP-ARCH-013 ACCEPTED / ARCHITECTURE BASELINED / CLOSED — next OES-ENG-060A under separate Owner Instruction"
+}

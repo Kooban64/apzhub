@@ -1,0 +1,48 @@
+{
+  "id": "20260727T201000Z-APZQEP-CERT-060B",
+  "timestamp": "2026-07-27T20:10:00Z",
+  "programme": "APZQEP-CERT-060B",
+  "title": "Test Plans Infrastructure Component Certification",
+  "type": "infrastructure-component-certification-assurance",
+  "status": "IMPLEMENTED_AWAITING_OWNER_CERTIFICATION_DECISION",
+  "certificationLevel": "COMPONENT",
+  "component": "infrastructure",
+  "package": {
+    "name": "@apzhub/qep-test-plans",
+    "version": "0.2.0",
+    "versionRecommendation": "remain-0.2.0",
+    "domainSemantics": "0.1.0 CERTIFIED unchanged"
+  },
+  "recommendedClass": "INFRASTRUCTURE_PRODUCTION_READY_WITH_LIMITATIONS",
+  "freezeEligibility": "NOT_RECOMMENDED",
+  "independence": true,
+  "engineeringPerformed": false,
+  "qualityGates": {
+    "aggregate": "ALL_MANDATORY_INFRASTRUCTURE_COMPONENT_GATES_PASS",
+    "tests": { "total": 99, "failed": 0, "result": "PASS" },
+    "typecheck": "PASS",
+    "coverageLines": 77.07,
+    "coverageJustified": true
+  },
+  "limitations": {
+    "C-01": "deferred-capability-scope",
+    "C-02": "approved-variance-scope",
+    "C-03": "closed-accepted-variance",
+    "C-04": "coverage-justification-accepted",
+    "blockProductionClass": false
+  },
+  "benchmark": "reference-infrastructure-component-certification",
+  "documents": [
+    "docs/products/apzqep/test-plans/CERT-060B/COMPLETE.md",
+    "docs/products/apzqep/test-plans/CERT-060B/CERTIFICATION-REPORT.md",
+    "docs/products/apzqep/test-plans/CERT-060B/OWNER-SUMMARY.md"
+  ],
+  "explicitlyNotAuthorised": [
+    "owner-certification-decision",
+    "capability-certification",
+    "workbench",
+    "capability-freeze",
+    "version-1.0.0-promotion",
+    "engineering-remediation"
+  ]
+}

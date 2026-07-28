@@ -10,27 +10,28 @@
 
 ## Matrix
 
-| Product           | Overall            | Business | Architecture | Platform deps | Provisioning | Governance | Integration | Testing | Certification | Operational |
-| ----------------- | ------------------ | -------- | ------------ | ------------- | ------------ | ---------- | ----------- | ------- | ------------- | ----------- |
-| **APZ Projects**  | **Production**     | PASS     | PASS         | PASS          | PASS         | PASS       | PASS        | PASS    | PASS          | PARTIAL     |
-| **APZ Time**      | **Production**     | PASS     | PASS         | PASS          | PARTIAL      | PASS       | PASS        | PASS    | PASS          | PARTIAL     |
-| **APZ Support**   | **Production**     | PASS     | PASS         | PASS          | PASS         | PASS       | PASS        | PASS    | PASS          | PARTIAL     |
-| **APZ Documents** | **Production**     | PASS     | PASS         | PASS          | PASS         | PASS       | PASS        | PASS    | PASS          | PARTIAL     |
-| **APZ Analytics** | **Concept**        | PARTIAL  | FAIL         | PARTIAL       | FAIL         | FAIL       | FAIL        | FAIL    | FAIL          | FAIL        |
-| **APZ Workflow**  | **Production**     | PASS     | PASS         | PASS          | PASS         | PASS       | PASS        | PASS    | PASS          | PARTIAL     |
-| **Law Platform**  | **In Development** | PASS     | PASS         | PASS          | PARTIAL      | PARTIAL    | PASS        | PASS    | PARTIAL       | PARTIAL     |
+| Product           | Overall                        | Business | Architecture | Platform deps | Provisioning | Governance | Integration | Testing | Certification | Operational |
+| ----------------- | ------------------------------ | -------- | ------------ | ------------- | ------------ | ---------- | ----------- | ------- | ------------- | ----------- |
+| **APZ Projects**  | **Production**                 | PASS     | PASS         | PASS          | PASS         | PASS       | PASS        | PASS    | PASS          | PARTIAL     |
+| **APZ Time**      | **Production**                 | PASS     | PASS         | PASS          | PARTIAL      | PASS       | PASS        | PASS    | PASS          | PARTIAL     |
+| **APZ Support**   | **Production**                 | PASS     | PASS         | PASS          | PASS         | PASS       | PASS        | PASS    | PASS          | PARTIAL     |
+| **APZ Documents** | **Production**                 | PASS     | PASS         | PASS          | PASS         | PASS       | PASS        | PASS    | PASS          | PARTIAL     |
+| **APZ Analytics** | **Production**                 | PASS     | PASS         | PASS          | PASS         | PASS       | PASS        | PASS    | PASS          | PARTIAL     |
+| **APZ Workflow**  | **Production** / **Planning*** | PASS     | PASS         | PASS          | PASS         | PASS       | PASS        | PASS    | PASS          | PARTIAL     |
+| **Law Platform**  | **In Development**             | PASS     | PASS         | PASS          | PARTIAL      | PARTIAL    | PASS        | PASS    | PARTIAL       | PARTIAL     |
 
 ---
 
 ## Notes
 
-| Product                            | Notes                                                                                               |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------- |
-| APZ Projects                       | Production **1.1.0** (**ACCEPTED / CLOSED**)                                                        |
-| APZ Time                           | Production **1.0.0** Phase 1 (**ACCEPTED / CLOSED**) — [evidence](../releases/time/1.0.0/README.md) |
-| APZ Support / Documents / Workflow | Unchanged Production slices                                                                         |
-| Law Platform                       | Unchanged In Development                                                                            |
-| APZ Analytics                      | Unchanged Concept                                                                                   |
+| Product                 | Notes                                                                                                                     |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| APZ Projects            | Production **1.1.0** (**ACCEPTED / CLOSED**)                                                                              |
+| APZ Time                | Production **1.0.0** Phase 1 (**ACCEPTED / CLOSED**) — [evidence](../releases/time/1.0.0/README.md)                       |
+| APZ Support / Documents | Unchanged Production slices                                                                                               |
+| APZ Workflow            | Platform PRWL frozen · commercial Release 1.0 **Planning** (APZ-WORKFLOW-001) · [pack](./apz-workflow/README.md)          |
+| Law Platform            | Unchanged In Development                                                                                                  |
+| APZ Analytics           | Production **1.0.0** PRWL — APZ-ANALYTICS-002 **Awaiting Acceptance** · [evidence](../releases/analytics/1.0.0/README.md) |
 
 ---
 

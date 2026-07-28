@@ -14,6 +14,7 @@ import type { ObservePlatformGateway } from "@apzhub/observe-contracts";
 import type { ObserveRequestContext } from "@apzhub/observe-contracts";
 import {
   ObserveDomainError,
+  type ObserveAlertEvaluationDomain,
   type PlatformObserveDomainService,
 } from "@apzhub/observe-core";
 
@@ -113,8 +114,10 @@ export type ObservePlatformServiceImpls = ObservePlatformGateway;
 
 export function createObservePlatformServiceImpls(input: {
   readonly domain: PlatformObserveDomainService;
+  readonly alertEvaluation: ObserveAlertEvaluationDomain;
 }): ObservePlatformServiceImpls {
   const domain = input.domain;
+  const alertEvaluation = input.alertEvaluation;
 
   return {
     healthChecks: {
@@ -287,6 +290,32 @@ export function createObservePlatformServiceImpls(input: {
       update: (ctx, updateInput) =>
         withObserveErrorMapping(ctx, () =>
           domain.updateAlertState(toObserveCtx(ctx), updateInput),
+        ),
+      acknowledge: (ctx, ackInput) =>
+        withObserveErrorMapping(ctx, () =>
+          alertEvaluation.acknowledgeAlertState(toObserveCtx(ctx), ackInput),
+        ),
+      resolve: (ctx, resolveInput) =>
+        withObserveErrorMapping(ctx, () =>
+          alertEvaluation.resolveAlertState(toObserveCtx(ctx), resolveInput),
+        ),
+      suppress: (ctx, suppressInput) =>
+        withObserveErrorMapping(ctx, () =>
+          alertEvaluation.suppressAlertState(toObserveCtx(ctx), suppressInput),
+        ),
+    },
+    alertEvaluation: {
+      evaluateBatch: (ctx) =>
+        withObserveErrorMapping(ctx, () =>
+          alertEvaluation.evaluateBatch(toObserveCtx(ctx)),
+        ),
+      getDiagnostics: (ctx) =>
+        withObserveErrorMapping(ctx, () =>
+          alertEvaluation.getDiagnostics(toObserveCtx(ctx)),
+        ),
+      getHealth: (ctx) =>
+        withObserveErrorMapping(ctx, () =>
+          alertEvaluation.getHealth(toObserveCtx(ctx)),
         ),
     },
     dashboardDefinitions: {

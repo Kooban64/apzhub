@@ -1,0 +1,32 @@
+{
+  "programme": "APZHUB-OPS-002",
+  "title": "Platform 1.2.0 Production Readiness Implementation",
+  "baseline": "1.2.0",
+  "timestamp": "20260722T060500Z",
+  "recommendation": "READY FOR OWNER PRODUCTION ACCEPTANCE",
+  "preconditions": {
+    "APZHUB-OPS-001": "ACCEPTED (Owner Decision)",
+    "featureDevelopment": false,
+    "workflowExecuteGated": true
+  },
+  "actions": {
+    "A1": "COMPLETE",
+    "A2": "COMPLETE",
+    "A3": "COMPLETE",
+    "A4": "COMPLETE",
+    "A5": "COMPLETE",
+    "A6": "COMPLETE",
+    "A7": "COMPLETE",
+    "A8": "COMPLETE"
+  },
+  "verification": {
+    "dockerImageBuild": "PASS",
+    "imageTags": ["apzhub/web:1.2.0", "apzhub/web:1.2.0-ops002-validate"],
+    "composeConfig": "PASS",
+    "capacityCheck": "PASS",
+    "capacityEvidence": "docs/operations/evidence/capacity/20260722T055646Z-APZHUB-OPS-002-CAPACITY-CHECK.json",
+    "hostCoexistenceLive": "PASS"
+  },
+  "pack": "docs/operations/platform-1.2.0-production-readiness/",
+  "applicationFunctionalityChanged": false
+}

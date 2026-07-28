@@ -14,9 +14,12 @@ import { resetInvoiceApiMetadataCache } from "@/lib/api/invoices";
 import {
   authHeaders,
   configureLawApiTestEnv,
+  denyAllLawApiTestPermissions,
   enableDevPermissions,
   mockGetValidatedSession,
   mockIsDevRegistrationAllowed,
+  mockSession,
+  resolveSessionAuthorizationForLawApiTest,
   seedLawApiClientAndMatter,
   seedLawApiTimeEntry,
 } from "@/lib/api/testing/law-api-test-helpers";
@@ -39,6 +42,11 @@ vi.mock("@apzhub/config", async (importOriginal) => {
     isDevRegistrationAllowed: () => mockIsDevRegistrationAllowed(),
   };
 });
+
+vi.mock("@apzhub/platform-authorization/server", () => ({
+  resolveSessionAuthorization: (input?: unknown) =>
+    resolveSessionAuthorizationForLawApiTest(input),
+}));
 
 function invoiceCreateBody(
   clientId: string,
@@ -97,15 +105,8 @@ describe("Law Invoice API", () => {
   });
 
   it("returns 403 when permission is missing", async () => {
-    mockGetValidatedSession.mockResolvedValue({
-      session: { id: "sess-1", expiresAt: new Date(Date.now() + 60_000).toISOString() },
-      user: {
-        id: "user-1",
-        email: "counsel@example.com",
-        name: "Alex Morgan",
-        emailVerified: true,
-      },
-    });
+    mockGetValidatedSession.mockResolvedValue(mockSession);
+    denyAllLawApiTestPermissions();
     vi.stubEnv("NODE_ENV", "production");
 
     const response = await listInvoices(

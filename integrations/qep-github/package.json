@@ -1,0 +1,15 @@
+{
+  "name": "@apzhub/integration-qep-github",
+  "version": "0.0.0-stub",
+  "private": true,
+  "type": "module",
+  "description": "QEP GitHub integration stub (APZQEP-ENG-010) \u2014 no connector logic",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts integrations/qep-github"
+  }
+}

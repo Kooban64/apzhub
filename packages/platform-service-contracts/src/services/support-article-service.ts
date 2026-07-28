@@ -1,16 +1,20 @@
 import type { ServiceRequestContext } from "../common/context";
 import type { ListQuery } from "../common/list-query";
 import type { PageResult } from "../common/paging";
-import type { SupportArticle } from "../domain";
+import type { SupportArticle, SupportArticleAttachmentContent } from "../domain";
 import type {
   CreateSupportArticleInput,
   CreateSupportCustomerReplyInput,
   CreateSupportInternalNoteInput,
 } from "../inputs";
 import type { SupportArticleListFilter, SupportArticleSortField } from "../queries";
-import type { SupportArticleId, SupportTicketId } from "../domain/identifiers";
+import type {
+  SupportArticleAttachmentId,
+  SupportArticleId,
+  SupportTicketId,
+} from "../domain/identifiers";
 
-/** Vendor-neutral Support article / conversation operations (no binary). */
+/** Vendor-neutral Support article / conversation operations (binary via base64). */
 export interface SupportArticleService {
   list(
     ctx: ServiceRequestContext,
@@ -38,4 +42,12 @@ export interface SupportArticleService {
     ctx: ServiceRequestContext,
     input: CreateSupportArticleInput,
   ): Promise<SupportArticle>;
+
+  /** Download binary attachment content (base64). Max 1 MiB. */
+  downloadAttachment(
+    ctx: ServiceRequestContext,
+    supportTicketId: SupportTicketId,
+    articleId: SupportArticleId,
+    attachmentId: SupportArticleAttachmentId,
+  ): Promise<SupportArticleAttachmentContent>;
 }

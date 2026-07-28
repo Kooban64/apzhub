@@ -45,7 +45,14 @@ export class InMemoryInvoiceRepository implements WritableInvoiceRepository {
   }
 }
 
-export {
-  getSharedInvoiceRepository,
-  resetSharedInvoiceRepository,
-} from "../persistence/repository-factory";
+/** Client-safe memory singleton — must not import repository-factory (pulls pg). */
+let sharedInvoiceRepository: InMemoryInvoiceRepository | undefined;
+
+export function getSharedInvoiceRepository(): InMemoryInvoiceRepository {
+  sharedInvoiceRepository ??= new InMemoryInvoiceRepository();
+  return sharedInvoiceRepository;
+}
+
+export function resetSharedInvoiceRepository(): void {
+  sharedInvoiceRepository = undefined;
+}

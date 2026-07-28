@@ -34,7 +34,10 @@ import {
 import { registerLegalSearchKnowledgeProviders } from "./knowledge/register-legal-search-knowledge";
 import {
   createLawPersistenceContext,
+  DEFAULT_LAW_TENANT_ID,
+  resetLawPersistenceScope,
   runWithLawPersistenceContextAsync,
+  setSessionLawPersistenceContext,
 } from "./persistence";
 import { resetLegalCalendarEventEnvelopeCounter } from "./publish-legal-calendar-event";
 
@@ -45,6 +48,10 @@ const workspaceRoot = path.resolve(
 
 describe("calendar event workflow integration", () => {
   beforeEach(() => {
+    resetLawPersistenceScope();
+    setSessionLawPersistenceContext(
+      createLawPersistenceContext({ tenantId: DEFAULT_LAW_TENANT_ID }),
+    );
     resetSharedCalendarEventRepository();
     resetCalendarEventWorkflowDiagnostics();
     resetLegalCalendarEventEnvelopeCounter();

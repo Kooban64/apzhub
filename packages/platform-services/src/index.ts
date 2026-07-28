@@ -4,9 +4,11 @@ export {
   createPlatformServicesWithPlane,
   createPlatformServicesWithZammad,
   createPlatformServicesWithGitHubActions,
+  createPlatformServicesWithGitLabCi,
   registerPlaneProviders,
   registerZammadProviders,
   registerGitHubActionsProviders,
+  registerGitLabCiProviders,
   PLATFORM_SERVICES_VERSION,
 } from "./services/create-platform-services";
 
@@ -88,6 +90,19 @@ export {
   type PlatformTimePermission,
 } from "./services/time";
 export {
+  createAnalyticsPlatformServicesForTest,
+  createAnalyticsPlatformServicesWithMetabase,
+  wrapAnalyticsPlatformGatewayWithPipeline,
+  createInMemoryAnalyticsRegistry,
+  createDefaultAnalyticsRegistrySeed,
+  createMetabaseOpsProvider,
+  createMockAnalyticsOpsProvider,
+  aggregateAnalyticsReadiness,
+  type AnalyticsPlatformServicesBundle,
+  type AnalyticsOpsProvider,
+  type AnalyticsRegistryProvider,
+} from "./services/analytics";
+export {
   createSearchPlatformServices,
   createSearchPlatformServicesForProduction,
   createSearchPlatformServicesForTest,
@@ -137,6 +152,38 @@ export {
   createNotificationPlatformServiceImpls,
   isNotificationServiceEnabled,
   mapNotificationDomainError,
+  createNotificationDeliveryService,
+  createObserveNotificationDeliveryHook,
+  createDurableNotificationRuntimeBootstrap,
+  createDurableDeliveryStoreFromDb,
+  createDurableDeliveryStoreForTest,
+  createUnimplementedDurableDeliveryStore,
+  createDurableNotificationWorker,
+  createDurableNotificationWorkerIfEnabled,
+  createDurableDispatchOrchestrator,
+  dispatchInAppChannel,
+  createNotificationDeliveryAdminService,
+  isNotificationDeliveryEnabled,
+  isNotificationDurableRuntimeEnabled,
+  isNotificationInAppEnabled,
+  isNotificationEventIntakeEnabled,
+  isNotificationCommandIntakeEnabled,
+  isNotificationWorkerEnabled,
+} from "./services/notification";
+export type {
+  DurableNotificationRuntimeBootstrap,
+  CreateDurableNotificationRuntimeBootstrapInput,
+  DurableNotificationWorker,
+  DurableNotificationWorkerConfig,
+  DurableWorkerTickResult,
+  DurableDispatchOrchestrator,
+  DurableDispatchOrchestratorConfig,
+  DurableDispatchOutcome,
+  DurableDispatchResult,
+  InAppChannelDispatchInput,
+  InAppChannelDispatchResult,
+  CreateNotificationDeliveryAdminServiceInput,
+  NotificationDeliveryEnv,
 } from "./services/notification";
 export {
   createConfigurationPlatformServices,
@@ -172,8 +219,27 @@ export {
   wrapObservePlatformGatewayWithPipeline,
   createObservePlatformServiceImpls,
   isObserveServiceEnabled,
+  isObserveAlertEvaluationEnabled,
+  createNoopObserveAlertDeliveryHook,
+  createRecordingObserveAlertDeliveryHook,
   mapObserveDomainError,
 } from "./services/observe";
+export {
+  createRealtimeSubscriptionService,
+  isRealtimeSseEnabled,
+  mapSupportDomainEventToWire,
+  SUPPORT_REALTIME_WIRE_EVENTS,
+  type CreateRealtimeSubscriptionServiceInput,
+  type RealtimeDiagnostics,
+  type RealtimeEventBusPort,
+  type RealtimeHealth,
+  type RealtimeSessionValidator,
+  type RealtimeStructuredLogger,
+  type RealtimeSubscriptionService,
+  type RealtimeSubscriptionTopic,
+  type RealtimeWireMessage,
+  type SupportRealtimeWireEvent,
+} from "./services/realtime";
 export {
   isMetricsServiceEnabled,
   createMetricsPlatformServices,
@@ -188,15 +254,54 @@ export {
   type CreateMetricsPlatformServicesForTestInput,
   type MetricsPlatformServiceImpls,
 } from "./services/metrics";
+export {
+  isQepServiceEnabled,
+  createQepPlatformServices,
+  createQepPlatformServicesForProduction,
+  createQepPlatformServicesForTest,
+  wrapQepPlatformGatewayWithPipeline,
+  createQepRequirementPlatformService,
+  mapQepDomainError,
+  createQepTraceabilityPlatformServices,
+  createQepTraceabilityPlatformServicesForProduction,
+  createQepTraceabilityPlatformServicesForTest,
+  wrapQepTraceabilityPlatformServiceWithPipeline,
+  createQepTraceabilityPlatformService,
+  mapTraceDomainError,
+  createQepVerificationPlatformServices,
+  createQepVerificationPlatformServicesForProduction,
+  createQepVerificationPlatformServicesForTest,
+  wrapQepVerificationPlatformServiceWithPipeline,
+  createQepVerificationPlatformService,
+  mapVerificationDomainError,
+  type QepPlatformServicesBundle,
+  type CreateQepPlatformServicesInput,
+  type CreateQepPlatformServicesForProductionInput,
+  type CreateQepPlatformServicesForTestInput,
+  type QepRequirementPlatformService,
+  type QepTraceabilityPlatformServicesBundle,
+  type CreateQepTraceabilityPlatformServicesInput,
+  type CreateQepTraceabilityPlatformServicesForProductionInput,
+  type CreateQepTraceabilityPlatformServicesForTestInput,
+  type QepTraceabilityPlatformService,
+  type QepVerificationPlatformServicesBundle,
+  type CreateQepVerificationPlatformServicesInput,
+  type CreateQepVerificationPlatformServicesForProductionInput,
+  type CreateQepVerificationPlatformServicesForTestInput,
+  type QepVerificationPlatformService,
+} from "./services/qep";
+export type { QepPlatformGatewaySurface } from "./services/qep/create-qep-platform-services";
 
 export type {
   CreatePlatformServicesInput,
   CreatePlatformServicesFromEnvInput,
   CreatePlatformServicesWithGitHubActionsOptions,
+  CreatePlatformServicesWithGitLabCiOptions,
   PlatformServicesBundle,
   RegisterPlaneProvidersInput,
   RegisterZammadProvidersInput,
   RegisterGitHubActionsProvidersInput,
+  RegisterGitLabCiProvidersInput,
 } from "./services/create-platform-services";
 export type {
   CreateDocumentPlatformServicesForProductionInput,
@@ -303,6 +408,62 @@ export {
   SupportHistoryServiceImpl,
   SupportAnalyticsServiceImpl,
 } from "./services/support-service-impls";
+
+export {
+  createDomainEventEnvelopeId,
+  createDomainEventPublisherFromBus,
+  publishDomainEventFailSoft,
+  resetDomainEventEnvelopeCounter,
+  SUPPORT_DOMAIN_EVENT_IDS,
+  publishSupportArticleEvent,
+  publishSupportRequestEvent,
+  fanOutSupportDomainEventsFromSourceEvents,
+  OBSERVE_ALERT_DOMAIN_EVENT_IDS,
+  publishObserveAlertEvent,
+  type DomainEventCategory,
+  type DomainEventEnvelope,
+  type DomainEventPublishResult,
+  type DomainEventPublisher,
+  type SupportArticleEventPayload,
+  type SupportDomainEventId,
+  type SupportRequestEventPayload,
+  type ObserveAlertDomainEventId,
+  type ObserveAlertEventPayload,
+} from "./events";
+
+export {
+  AUTOMATION_JOURNAL_HANDLER_ID,
+  createAutomationFoundation,
+  createAutomationHandlerRegistry,
+  createAutomationJournalHandler,
+  createInMemoryAutomationExecutionJournal,
+  createPostgresAutomationExecutionJournal,
+  createProductionAutomationExecutionJournal,
+  createInMemoryAutomationRegistrationStore,
+  matchesEventPattern,
+  nextAutomationExecutionId,
+  registerDefaultSupportAutomationRegistrations,
+  registerWorkflowTriggerAsAutomation,
+  resetAutomationExecutionSeq,
+  resetAutomationRegistrationSeq,
+  wireEventAutomation,
+  type AutomationActionKind,
+  type AutomationEventBus,
+  type AutomationExecutionJournal,
+  type AutomationExecutionRecord,
+  type AutomationExecutionStatus,
+  type AutomationFoundation,
+  type AutomationHandler,
+  type AutomationHandlerContext,
+  type AutomationHandlerRegistry,
+  type AutomationHandlerResult,
+  type AutomationRegistration,
+  type AutomationRegistrationStore,
+  type CreateAutomationFoundationOptions,
+  type RegisterAutomationInput,
+  type WorkflowEventTriggerBindingView,
+  type WorkflowEventTriggerSource,
+} from "./services/automation";
 
 export { ProviderRegistry } from "./providers/registry/provider-registry";
 export { ProviderResolver } from "./providers/registry/provider-resolver";
@@ -509,7 +670,10 @@ export type {
 } from "./reconciliation/reconcile-entity-mappings";
 
 export { PlatformServiceGateway } from "./gateway/platform-service-gateway";
-export type { PlatformServiceGatewayDeps } from "./gateway/platform-service-gateway";
+export type {
+  PlatformServiceGatewayDeps,
+  QepPlatformGateway,
+} from "./gateway/platform-service-gateway";
 
 export { RequestPipeline } from "./execution/request-pipeline";
 export type {

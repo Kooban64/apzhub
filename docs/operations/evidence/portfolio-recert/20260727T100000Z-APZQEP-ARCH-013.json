@@ -1,0 +1,59 @@
+{
+  "programme": "APZQEP-ARCH-013",
+  "oes": "APZQEP-OES-ARCH-013",
+  "title": "Test Plans Capability Architecture",
+  "recordedAt": "2026-07-27T10:00:00Z",
+  "status": "IMPLEMENTED / AWAITING OWNER ACCEPTANCE",
+  "classification": "Owner Architecture Programme",
+  "nature": "Architecture only — no engineering / no production code",
+  "version": "1.0.0-arch",
+  "pack": "docs/products/apzqep/test-plans/OES-ARCH-013/",
+  "complete": "docs/products/apzqep/test-plans/OES-ARCH-013/COMPLETE.md",
+  "ownerSummary": "docs/products/apzqep/test-plans/OES-ARCH-013/OWNER-SUMMARY.md",
+  "completionReport": "docs/products/apzqep/test-plans/OES-ARCH-013/ARCHITECTURE-COMPLETION-REPORT.md",
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "frozenDependencies": {
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN",
+    "verification": "1.0.0 CERTIFIED / FROZEN",
+    "testSpecifications": "1.0.0 CERTIFIED / FROZEN"
+  },
+  "deliverables": [
+    "PART-01.md",
+    "PART-02.md",
+    "PART-03.md",
+    "PART-04.md",
+    "PART-05.md",
+    "APPENDIX-A.md",
+    "APPENDIX-B.md",
+    "APPENDIX-C.md",
+    "APPENDIX-D.md",
+    "APPENDIX-E.md",
+    "COMPLETE.md",
+    "OWNER-SUMMARY.md",
+    "ARCHITECTURE-COMPLETION-REPORT.md",
+    "OWNER-ACCEPTANCE.md"
+  ],
+  "exclusionsHonoured": [
+    "Domain",
+    "Repositories",
+    "REST implementation",
+    "Workbench",
+    "Database",
+    "Search",
+    "Permissions catalogues",
+    "Testing",
+    "Infrastructure",
+    "AI",
+    "MCP",
+    "Production code"
+  ],
+  "ownerAcceptanceRecorded": false,
+  "engineeringAuthorised": false,
+  "stopCondition": "APZQEP-ARCH-013 IMPLEMENTED / AWAITING OWNER ACCEPTANCE — do not begin Domain Engineering"
+}

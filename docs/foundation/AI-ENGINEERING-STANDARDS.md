@@ -3,10 +3,23 @@
 > **Purpose:** Coding, architecture, documentation, testing, and review expectations for AI agents  
 > **Audience:** AI coding agents  
 > **Authoritative references:** [015 — Quality Framework](../015-software-quality-testing-qa-cicd-release-management-framework.md) · [004 — Technology Stack](../004-technology-stack-repository-standards-development-environment.md) · [AI-CONTEXT](./AI-CONTEXT.md)  
-> **Related documents:** [AI-WORKFLOW](./AI-WORKFLOW.md) · [ENGINEERING-HANDBOOK](./ENGINEERING-HANDBOOK.md)  
+> **Related documents:** [AI-WORKFLOW](./AI-WORKFLOW.md) · [ENGINEERING-HANDBOOK](./ENGINEERING-HANDBOOK.md) · [Platform Delivery Standard](../engineering/platform-delivery/PLATFORM-DELIVERY-STANDARD.md)  
 > **Reading order:** After AI-CONTEXT  
-> **Last updated:** 2026-07-10  
+> **Last updated:** 2026-07-19  
 > **Current status:** Active
+
+---
+
+## Platform delivery methodology
+
+| Rule                   | Requirement                                                                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Authoritative standard | [PLATFORM-DELIVERY-STANDARD](../engineering/platform-delivery/PLATFORM-DELIVERY-STANDARD.md)                                   |
+| Lifecycle              | Commercial Planning → … → Production Release — do not skip without Owner scope                                                 |
+| Programme planning     | Cite the standard; use [templates/](../engineering/platform-delivery/templates/); do not paste ad-hoc engineering instructions |
+| Quality                | [QUALITY-GATES](../engineering/platform-delivery/QUALITY-GATES.md) per phase                                                   |
+| Governance             | [PROGRAMME-GOVERNANCE](../engineering/platform-delivery/PROGRAMME-GOVERNANCE.md)                                               |
+| Packages               | [PACKAGE-STANDARDS](../engineering/platform-delivery/PACKAGE-STANDARDS.md)                                                     |
 
 ---
 

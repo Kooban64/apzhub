@@ -1,0 +1,30 @@
+{
+  "programme": "Platform-1.4-ENG-001A",
+  "title": "Durable Notification Runtime Technical Design",
+  "classification": "ENGINEERING_DESIGN",
+  "baseline": "Platform 1.4",
+  "parentAdr": "ADR-0073",
+  "timestamp": "2026-07-23T10:00:00Z",
+  "status": "COMPLETED_AWAITING_OWNER_DESIGN_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER DESIGN ACCEPTANCE",
+  "preconditions": "PASS",
+  "selectedArchitecture": "OPTION_A_POSTGRESQL_OWNED_DURABLE_RUNTIME",
+  "proposedMigration": "0066_apz_platform_notification_delivery_leases",
+  "proposedFeatureFlag": "APZHUB_NOTIFICATION_DURABLE_RUNTIME",
+  "downstreamProgramme": {
+    "id": "Platform-1.4-ENG-001B",
+    "status": "PROPOSED_BLOCKED_PENDING_OWNER_DESIGN_ACCEPTANCE"
+  },
+  "implementation": false,
+  "applicationSourceChanges": false,
+  "packageSourceChanges": false,
+  "databaseMigrationCreated": false,
+  "providerImplementation": false,
+  "smtp": false,
+  "emailSor": false,
+  "workflowExecute": false,
+  "fin001": false,
+  "websockets": false,
+  "documentationPack": "docs/engineering/platform-1.4-eng-001a/",
+  "explicitStop": "Await Owner Design Acceptance"
+}

@@ -1,0 +1,44 @@
+{
+  "programme": "APZQEP-ARCH-008",
+  "title": "Traceability Workbench Architecture",
+  "recordedAt": "2026-07-26T15:35:00Z",
+  "state": "IMPLEMENTED — AWAITING OWNER ACCEPTANCE",
+  "nature": "Architecture only — no UI implementation",
+  "pack": "docs/products/apzqep/architecture/traceability-workbench/",
+  "revision": "1.0.0-arch",
+  "baselines": {
+    "ARCH-006": "ACCEPTED",
+    "ARCH-007": "ACCEPTED",
+    "ENG-030A-Part1": "ACCEPTED",
+    "ENG-030A-Part2": "ACCEPTED"
+  },
+  "deliverables": [
+    "TRACEABILITY-WORKBENCH-ARCHITECTURE.md",
+    "ARCHITECTURE-OVERVIEW.md",
+    "WORKSPACE-MODEL.md",
+    "EXPLORER-MODEL.md",
+    "MATRIX-MODEL.md",
+    "INSPECTOR-MODEL.md",
+    "NAVIGATION-MODEL.md",
+    "ANALYSIS-MODEL.md",
+    "PERFORMANCE-MODEL.md",
+    "ACCESSIBILITY-MODEL.md",
+    "FUTURE-GRAPH-STRATEGY.md",
+    "AI-CONSIDERATIONS.md",
+    "MCP-CONSIDERATIONS.md",
+    "ARCHITECTURE-DECISION-RECORDS.md",
+    "ARCHITECTURE-COMPLETION-REPORT.md",
+    "README.md"
+  ],
+  "notDelivered": [
+    "React / Next.js / components",
+    "Workbench routes",
+    "Coverage Engine",
+    "Impact Engine",
+    "Graph visualisation",
+    "AI",
+    "MCP",
+    "Owner Acceptance of ARCH-008"
+  ],
+  "stopRule": "Await Owner Acceptance. Do not begin Workbench engineering."
+}

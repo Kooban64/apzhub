@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "programmeId": "APZHUB-ENG-0006",
+  "remediationGroups": ["RG-HEALTH-503", "RG-AUTH-SHELL"],
+  "executedAt": "2026-07-20T19:02:08Z",
+  "scopedSuite": {
+    "command": "CI=true pnpm exec playwright test --config testing/playwright/playwright.config.ts <SPR-001..007 specs>",
+    "passed": 22,
+    "flaky": 8,
+    "failed": 4,
+    "duration": "~10.4m",
+    "log": "/tmp/eng-0006-playwright-final.log"
+  },
+  "rgHealth503": {
+    "previouslyFailing": 6,
+    "nowPassing": 6,
+    "remainingFailures": 0
+  },
+  "rgAuthShell": {
+    "previouslyFailing": 20,
+    "approxNowPassingIncludingFlaky": 16,
+    "remainingHardFailures": [
+      "spr-003-workbench-context-selection: navigation updates persisted workbench context after sidebar selection",
+      "spr-003-workbench-session: restores sidebar selection and active view after reload",
+      "spr-004-action-framework: command palette executes an action through the registry pipeline",
+      "spr-005-knowledge-discovery-framework: palette knowledge mode delegates navigation through Workbench paths"
+    ]
+  },
+  "rootCausesFixed": [
+    "n8n integration.yaml documentation.supportedApiVersions array rejected by z.record \u2192 workflow-service missing n8n \u2192 runtime bootstrap failed \u2192 /api/health 503",
+    "Playwright webServer.env replaced process.env (DATABASE_URL/REDIS lost) \u2014 now merged via buildPlaywrightWebServerEnv",
+    "Deterministic DEV credentials via global-setup (Origin header + reset script)"
+  ],
+  "outOfScopeNotTouched": [
+    "RG-LAW-DNS",
+    "RG-A11Y-CONTRAST",
+    "RG-MOCK-FETCH",
+    "RG-PW-API",
+    "RG-SELECTORS",
+    "RG-METRICS-WB",
+    "RG-TCMS-WB",
+    "RG-WORKFLOW-WB",
+    "RG-VISUAL"
+  ]
+}

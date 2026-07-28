@@ -1,0 +1,103 @@
+manifestSchemaVersion: "1.0"
+id: qep-test-specifications
+name: Test Specifications
+version: 1.0.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Test Specifications for APZ QEP — 1.0.0 CERTIFIED / FROZEN. PRODUCTION_READY_WITH_LIMITATIONS. Baseline reference implementation. ADR-0074: no invented returnToDraft. Changes require new Owner-authorised programmes."
+  product: apzqep
+  moduleCatalogueId: M-test-specifications
+  slug: test-specifications
+  programme: APZQEP-CERT-050D
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+  packages:
+    - "@apzhub/qep-test-specifications"
+    - "@apzhub/qep-contracts"
+    - "@apzhub/search-qep"
+
+module:
+  category: quality-engineering
+  status: certified-frozen
+
+permissions:
+  - id: qep.specification.read
+    label: View Test Specifications
+  - id: qep.specification.create
+    label: Create Test Specifications
+  - id: qep.specification.update
+    label: Update Test Specifications
+  - id: qep.specification.review
+    label: Submit Test Specifications for Review
+  - id: qep.specification.approve
+    label: Approve Test Specifications
+  - id: qep.specification.reject
+    label: Reject Test Specifications
+  - id: qep.specification.withdraw
+    label: Withdraw Test Specifications
+  - id: qep.specification.retire
+    label: Retire Test Specifications
+  - id: qep.specification.cancel
+    label: Cancel Test Specifications
+  - id: qep.specification.search
+    label: Search Test Specifications
+  - id: qep.specification.history.view
+    label: View Test Specification History
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Test Specifications
+    icon: file-text
+    route: /workspace/qep/test-specifications
+    order: 90
+    permission: qep.specification.read
+  view:
+    title: Test Specifications
+    workspace: qep
+    route: /workspace/qep/test-specifications
+    permission: qep.specification.read
+  additionalViews:
+    - id: qep-test-specifications-explorer
+      title: Explorer
+      workspace: qep
+      route: /workspace/qep/test-specifications/explorer
+      permission: qep.specification.read
+      navigation:
+        level: sidebar
+        parent: qep-test-specifications
+        label: Explorer
+        icon: list
+        order: 92
+        permission: qep.specification.read
+    - id: qep-test-specifications-review
+      title: Review
+      workspace: qep
+      route: /workspace/qep/test-specifications/review
+      permission: qep.specification.read
+      navigation:
+        level: sidebar
+        parent: qep-test-specifications
+        label: Review
+        icon: clipboard-check
+        order: 93
+        permission: qep.specification.read
+    - id: qep-test-specifications-search
+      title: Search
+      workspace: qep
+      route: /workspace/qep/test-specifications/search
+      permission: qep.specification.search
+      navigation:
+        level: sidebar
+        parent: qep-test-specifications
+        label: Search
+        icon: search
+        order: 94
+        permission: qep.specification.search

@@ -47,6 +47,50 @@ export function isObserveAlertStateKind(value: string): value is ObserveAlertSta
   return (OBSERVE_ALERT_STATES as readonly string[]).includes(value);
 }
 
+/** ADR-0070 alert category model — metadata classification, not a separate SoR. */
+export const OBSERVE_ALERT_CATEGORIES = [
+  "platform_health",
+  "component",
+  "capacity",
+  "security",
+  "integration",
+  "custom",
+] as const;
+export type ObserveAlertCategory = (typeof OBSERVE_ALERT_CATEGORIES)[number];
+export function isObserveAlertCategory(value: string): value is ObserveAlertCategory {
+  return (OBSERVE_ALERT_CATEGORIES as readonly string[]).includes(value);
+}
+
+/** Phase A evaluation signal sources — Observe metadata SoR only (no PromQL). */
+export const OBSERVE_ALERT_SIGNAL_SOURCES = [
+  "serviceHealth",
+  "componentStatus",
+  "healthSummary",
+  "serviceStatus",
+  "readinessCheck",
+  "livenessCheck",
+] as const;
+export type ObserveAlertSignalSource = (typeof OBSERVE_ALERT_SIGNAL_SOURCES)[number];
+export function isObserveAlertSignalSource(
+  value: string,
+): value is ObserveAlertSignalSource {
+  return (OBSERVE_ALERT_SIGNAL_SOURCES as readonly string[]).includes(value);
+}
+
+export const OBSERVE_ALERT_EVALUATION_OUTCOMES = [
+  "match",
+  "clear",
+  "unknown",
+  "error",
+] as const;
+export type ObserveAlertEvaluationOutcome =
+  (typeof OBSERVE_ALERT_EVALUATION_OUTCOMES)[number];
+export function isObserveAlertEvaluationOutcome(
+  value: string,
+): value is ObserveAlertEvaluationOutcome {
+  return (OBSERVE_ALERT_EVALUATION_OUTCOMES as readonly string[]).includes(value);
+}
+
 export const OBSERVE_METRIC_KINDS = [
   "counter",
   "gauge",

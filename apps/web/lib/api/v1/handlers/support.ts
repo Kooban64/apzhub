@@ -27,6 +27,7 @@ import {
   articleIdParamSchema,
   assignSupportCustomerBodySchema,
   assignSupportOwnerBodySchema,
+  attachmentIdParamSchema,
   changeSupportPriorityBodySchema,
   changeSupportStateBodySchema,
   createCustomerReplyBodySchema,
@@ -439,6 +440,7 @@ export async function handleCreateInternalNote(
     body: body.body,
     bodyFormat: body.bodyFormat as CreateSupportArticleInput["bodyFormat"],
     subject: body.subject,
+    attachments: body.attachments,
   };
   const gateway = await getPlatformServiceGateway();
   const article = await gateway.supportArticles.createNote(
@@ -477,6 +479,7 @@ export async function handleCreateCustomerReply(
     to: body.to,
     cc: body.cc,
     bcc: body.bcc,
+    attachments: body.attachments,
   };
   const gateway = await getPlatformServiceGateway();
   const article = await gateway.supportArticles.createReply(
@@ -484,6 +487,37 @@ export async function handleCreateCustomerReply(
     input,
   );
   return jsonDataResponse(article, context.tracing, { status: 201 });
+}
+
+export async function handleDownloadSupportAttachment(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: { params: Promise<Record<string, string>> },
+) {
+  const params = await routeContext?.params;
+  const supportRequestId = parsePathParam(
+    supportRequestIdParamSchema,
+    params?.supportRequestId ?? "",
+    "supportRequestId",
+  );
+  const articleId = parsePathParam(
+    articleIdParamSchema,
+    params?.articleId ?? "",
+    "articleId",
+  );
+  const attachmentId = parsePathParam(
+    attachmentIdParamSchema,
+    params?.attachmentId ?? "",
+    "attachmentId",
+  );
+  const gateway = await getPlatformServiceGateway();
+  const content = await gateway.supportArticles.downloadAttachment(
+    context.serviceContext,
+    supportRequestId,
+    articleId,
+    attachmentId,
+  );
+  return jsonDataResponse(content, context.tracing);
 }
 
 // ---------------------------------------------------------------------------

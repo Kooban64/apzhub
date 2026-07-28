@@ -1,0 +1,45 @@
+{
+  "evidenceId": "20260728T092059Z-APZQEP-TEST-PLANS-1.0.0-FREEZE",
+  "programme": "APZQEP-FREEZE-080A",
+  "title": "Test Plans Capability Freeze Decision",
+  "capability": "Test Plans",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T092059Z",
+  "decision": {
+    "status": "FROZEN",
+    "approved": true,
+    "baselineEstablished": true,
+    "programmeClosed": true
+  },
+  "package": {
+    "name": "@apzhub/qep-test-plans",
+    "version": "1.0.0",
+    "label": "CERTIFIED / FROZEN",
+    "productionClassification": "PRODUCTION_READY_WITH_LIMITATIONS"
+  },
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "prerequisites": {
+    "architecture": "ARCH-013 / ARCH-014 ACCEPTED",
+    "engineeringSpecifications": "OES-ENG-060A / 060B / 070A ACCEPTED",
+    "engineering": "ENG-060A / 060B / 070A ACCEPTED",
+    "componentCertification": "CERT-060A / CERT-060B / CERT-070A CERTIFIED",
+    "capabilityCertification": "APZQEP-CERT-080A CERTIFIED / CLOSED",
+    "versionPromotion": "1.0.0 APPLIED"
+  },
+  "recordedLimitations": ["L-01", "L-02", "L-03", "P-01", "P-02", "P-03", "P-04"],
+  "pack": "docs/products/apzqep/test-plans/freeze/",
+  "releaseEvidence": "docs/releases/apzqep/test-plans/1.0.0/",
+  "portfolioStatus": {
+    "requirements": "1.0.0 FROZEN",
+    "traceability": "1.0.0 FROZEN",
+    "verification": "1.0.0 FROZEN",
+    "testSpecifications": "1.0.0 FROZEN",
+    "testPlans": "1.0.0 FROZEN"
+  },
+  "historicMilestone": "First APZQEP capability to complete the entire APZOR Engineering Operating Model from conception to frozen production baseline; first fully governed orchestration capability"
+}

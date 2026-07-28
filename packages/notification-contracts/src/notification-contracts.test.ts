@@ -14,8 +14,8 @@ import {
 } from "./index";
 
 describe("notification-contracts", () => {
-  it("exports version 0.2.0", () => {
-    expect(NOTIFICATION_CONTRACTS_VERSION).toBe("0.2.0");
+  it("exports version 0.3.5", () => {
+    expect(NOTIFICATION_CONTRACTS_VERSION).toBe("0.3.5");
   });
 
   it("includes required permission keys", () => {
@@ -27,6 +27,8 @@ describe("notification-contracts", () => {
       "notification.preference",
       "notification.audit",
       "notification.delivery",
+      "notifications.admin",
+      "notifications.replay",
     ]) {
       expect(PLATFORM_NOTIFICATION_PERMISSIONS).toContain(key);
       expect(isPlatformNotificationPermission(key)).toBe(true);

@@ -1,0 +1,19 @@
+{
+  "programme": "OES-000",
+  "title": "Owner Engineering Specification Standard",
+  "recordedAt": "2026-07-26T23:35:00Z",
+  "decision": "ACCEPTED / APPROVED / FROZEN",
+  "authority": "Owner Decision — APZOR Engineering Standard",
+  "path": "docs/engineering/oes/OES-000-Owner-Engineering-Specification-Standard.md",
+  "acceptance": "docs/engineering/oes/OES-000-OWNER-ACCEPTANCE.md",
+  "effect": [
+    "Every new engineering programme SHALL conform to OES-000",
+    "Methodology changes require formal change process (OES revision, OES-001, or ADR)",
+    "OES-001 Engineering Writing Standard authorised as next methodology document"
+  ],
+  "authorisesNext": ["OES-001", "APZQEP-OES-ARCH-012 Parts 2-5 (documentation only)"],
+  "notAuthorised": [
+    "Workbench Engineering",
+    "Unfreeze of OES-000 without Owner Decision"
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "programme": "APZQEP-ENG-020E",
+  "title": "Requirements Baselines — Parts 1–3 (Programme Completion)",
+  "recordedAt": "2026-07-25T20:30:00Z",
+  "baseline": "APZQEP-ENG-020D — ACCEPTED / CLOSED / COMPLETE",
+  "state": "IMPLEMENTED",
+  "acceptance": "AWAITING OWNER ACCEPTANCE",
+  "supersedes": [
+    "20260725T174800Z-APZQEP-ENG-020E-PART1.json",
+    "20260725T190000Z-APZQEP-ENG-020E-PART2.json"
+  ],
+  "scope": "Requirement Baselines — immutable, integrity-fingerprinted, numbered collections of Requirement Content Versions, with full lifecycle (draft -> locked -> archived), persistence, API, permissions, and Workbench UI",
+  "parts": {
+    "part1": {
+      "title": "Domain & Architecture Foundations",
+      "evidence": "20260725T174800Z-APZQEP-ENG-020E-PART1.json",
+      "delivered": [
+        "RequirementBaseline aggregate and value objects",
+        "Draft/Locked/Archived state policy (no unlock/reverse transition)",
+        "Membership items reference content versions only",
+        "Repository port and domain event contracts",
+        "Domain tests"
+      ]
+    },
+    "part2": {
+      "title": "Application Service, Persistence, API, Permissions",
+      "evidence": "20260725T190000Z-APZQEP-ENG-020E-PART2.json",
+      "delivered": [
+        "RequirementBaselineApplicationService orchestration (create, update draft, add/remove item, lock, archive, list, get, history, compare)",
+        "PostgreSQL + in-memory repository adapters",
+        "Migrations 0074/0075 (baseline table + RLS)",
+        "REST API routes and permissions qep.requirements.baselines.{view,create,modify,lock,archive,compare}",
+        "Domain event publication through the application service"
+      ]
+    },
+    "part3": {
+      "title": "Integrity Fingerprinting & Workbench UI",
+      "delivered": [
+        "Baseline integrity fingerprinting: SHA-256 canonical hash over membership + content-version snapshots (requirement-baseline-integrity.ts)",
+        "Empty-lock rejection: lockRequirementBaseline / transitionRequirementBaseline require at least one content-version member and computed integrity metadata",
+        "lockBaseline (application service) loads each content version, verifies integrity, builds membership inputs with snapshotHash, and persists integrity metadata (algorithm, schema version, verification status, verified-at)",
+        "verifyBaselineIntegrity command + POST /api/v1/qep/requirements/baselines/{baselineId}/verify + permission qep.requirements.baselines.verify",
+        "availableActions computed on the baseline DTO from status + permissions (edit, addItem, removeItem, lock, archive, compare, verifyIntegrity)",
+        "Migration 0076 (integrity columns)",
+        "Baseline comparison versionChanged detection (same requirementId, different content version) exposed via compareBaselines and the Compare Baselines UI",
+        "Workbench UI: list, create, detail (metadata, integrity status, contents table, add/remove version, lock/archive/verify confirmations), add-version flow, compare, and a Baseline History panel on the Requirement detail view",
+        "Client API and query keys for all baseline operations (apps/web/lib/qep/qep-api.ts, query-keys.ts)",
+        "Routes /workspace/qep/requirements/baselines, /new, /:id, /compare registered in presentation/routes.ts, navigation, and module.yaml"
+      ]
+    }
+  },
+  "excluded": [
+    "clone",
+    "unlock",
+    "restore",
+    "delete",
+    "merge",
+    "import/export",
+    "requirement relationships",
+    "Verification domain capabilities",
+    "AI",
+    "MCP"
+  ],
+  "package": {
+    "@apzhub/qep-requirements": "0.7.0"
+  },
+  "migrations": [
+    "0074_apz_qep_requirement_baseline.sql",
+    "0075_apz_qep_requirement_baseline_rls.sql",
+    "0076_apz_qep_requirement_baseline_integrity.sql"
+  ],
+  "documentation": "docs/products/apzqep/requirements/baselines/",
+  "tests": {
+    "command": "pnpm --filter @apzhub/qep-requirements test",
+    "result": "PASS — 15 test files, 68 tests"
+  },
+  "typecheck": {
+    "command": "pnpm --filter @apzhub/qep-requirements typecheck",
+    "result": "PASS"
+  },
+  "audit": {
+    "command": "pnpm audit:qep-requirements-baselines",
+    "result": "PASS"
+  },
+  "gates": {
+    "qepTestSuite": "PASS",
+    "baselinesAudit": "PASS",
+    "governanceReconciliation": "PASS"
+  },
+  "notes": [
+    "Programme must not be marked ACCEPTED, CLOSED, or COMPLETE without Owner acceptance.",
+    "Next programme after ENG-020E is NOT AUTHORISED.",
+    "Preserve ENG-020A-020D and ENG-020E Parts 1-2 decisions; Part 3 only adds integrity + UI on top of the Part 2 runtime."
+  ]
+}

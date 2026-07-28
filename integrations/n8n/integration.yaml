@@ -6,7 +6,10 @@ kind: integration
 
 metadata:
   category: integrations
-  description: Read-only n8n Workflow Engine Reference Adapter. Metadata discovery only. Not user-facing. Not a Platform Service.
+  description: >-
+    n8n Integration Foundation (APZHUB-INTEGRATION-N8N-001). Read-only Workflow Engine
+    Reference Adapter via Integration SDK. Metadata discovery only. Not user-facing.
+    Not a Platform Service.
   owner: APZHUB
   tags:
     - n8n
@@ -14,6 +17,7 @@ metadata:
     - workflow-engine
     - adapter
     - reference
+    - foundation
 
 dependencies:
   platform: []
@@ -42,12 +46,13 @@ health:
 documentation:
   userVisible: false
   engineBranding: hidden
-  supportedApiVersions:
-    - "v1"
+  # Manifest documentation is z.record(string|boolean|number) — use singular string (see metabase).
+  supportedApiVersion: "v1"
   supportedEngineVersionMin: "n8n 1.0.0"
   supportedEngineVersionMax: "n8n 1.x"
-  adapterImplementation: APZWORKFLOW-006
+  adapterImplementation: APZHUB-INTEGRATION-N8N-001
+  priorWave: APZWORKFLOW-006
 
 tests:
-  contract: in-progress
+  contract: present
   integration: planned

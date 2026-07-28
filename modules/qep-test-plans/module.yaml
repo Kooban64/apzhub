@@ -1,0 +1,114 @@
+manifestSchemaVersion: "1.0"
+id: qep-test-plans
+name: Test Plans
+version: 1.0.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Test Plans for APZ QEP — 1.0.0 CERTIFIED / FROZEN. PRODUCTION_READY_WITH_LIMITATIONS. Baseline reference orchestration capability. Changes require new Owner-authorised programmes."
+  product: apzqep
+  moduleCatalogueId: M-test-plans
+  slug: test-plans
+  programme: APZQEP-FREEZE-080A
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+  packages:
+    - "@apzhub/qep-test-plans"
+    - "@apzhub/qep-contracts"
+
+module:
+  category: quality-engineering
+  status: certified-frozen
+
+permissions:
+  - id: qep.plan.read
+    label: View Test Plans
+  - id: qep.plan.create
+    label: Create Test Plans
+  - id: qep.plan.update
+    label: Update Test Plans
+  - id: qep.plan.submit
+    label: Submit Test Plans for Review
+  - id: qep.plan.approve
+    label: Approve Test Plans
+  - id: qep.plan.reject
+    label: Reject Test Plans
+  - id: qep.plan.ready
+    label: Mark Test Plans Ready
+  - id: qep.plan.execute
+    label: Start Test Plan Execution
+  - id: qep.plan.complete
+    label: Complete Test Plans
+  - id: qep.plan.archive
+    label: Archive Test Plans
+  - id: qep.plan.cancel
+    label: Cancel Test Plans
+  - id: qep.plan.clone
+    label: Clone Test Plans
+  - id: qep.plan.supersede
+    label: Supersede Test Plans
+  - id: qep.plan.assign
+    label: Assign Test Plans
+  - id: qep.plan.schedule
+    label: Schedule Test Plans
+  - id: qep.plan.search
+    label: Search Test Plans
+  - id: qep.plan.history.view
+    label: View Test Plan History
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Test Plans
+    icon: clipboard-list
+    route: /workspace/qep/test-plans
+    order: 95
+    permission: qep.plan.read
+  view:
+    title: Test Plans
+    workspace: qep
+    route: /workspace/qep/test-plans
+    permission: qep.plan.read
+  additionalViews:
+    - id: qep-test-plans-explorer
+      title: Explorer
+      workspace: qep
+      route: /workspace/qep/test-plans/explorer
+      permission: qep.plan.read
+      navigation:
+        level: sidebar
+        parent: qep-test-plans
+        label: Explorer
+        icon: list
+        order: 96
+        permission: qep.plan.read
+    - id: qep-test-plans-review
+      title: Review
+      workspace: qep
+      route: /workspace/qep/test-plans/review
+      permission: qep.plan.read
+      navigation:
+        level: sidebar
+        parent: qep-test-plans
+        label: Review
+        icon: clipboard-check
+        order: 97
+        permission: qep.plan.read
+    - id: qep-test-plans-search
+      title: Search
+      workspace: qep
+      route: /workspace/qep/test-plans/search
+      permission: qep.plan.search
+      navigation:
+        level: sidebar
+        parent: qep-test-plans
+        label: Search
+        icon: search
+        order: 98
+        permission: qep.plan.search

@@ -2,6 +2,20 @@
 
 Foundation architecture documents (000–029) live at `docs/` root. See [docs/README.md](../README.md) for the full registry.
 
+## Platform 1.3 ADR-0070
+
+| Document                                                                                                                   | Status                                                                 |
+| -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [adr/ADR-0070-Observe-Live-Alert-Evaluation-and-Delivery.md](./adr/ADR-0070-Observe-Live-Alert-Evaluation-and-Delivery.md) | **Awaiting Owner ADR Acceptance** · **READY FOR OWNER ADR ACCEPTANCE** |
+
+## Platform 1.3 Architecture Confirmation (Platform-1.3-ARCH-001 — ACCEPTED)
+
+| Document                                                                  | Status                 |
+| ------------------------------------------------------------------------- | ---------------------- |
+| [platform-1.3-confirmation](./platform-1.3-confirmation/README.md)        | **ACCEPTED**           |
+| [EPIC-ASSESSMENT](./platform-1.3-confirmation/EPIC-ASSESSMENT.md)         | Per-epic compatibility |
+| [ADR-RECOMMENDATIONS](./platform-1.3-confirmation/ADR-RECOMMENDATIONS.md) | Proposed ADR-0070…0072 |
+
 ## Platform Baseline v3.0
 
 | Document                                                                                        | Status                                                 |

@@ -1,6 +1,9 @@
 @import "@apzhub/theme/styles.css";
 @import "tailwindcss";
 
+/* Scan shared UI package so Button/token utilities (e.g. primary-foreground) are emitted. */
+@source "../../../packages/ui/src";
+
 html,
 body,
 #__next {

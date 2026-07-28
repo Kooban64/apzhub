@@ -8,6 +8,7 @@ import { expect, test } from "@playwright/test";
 test.describe("APZMETRICS-003 Metrics HTTP typed client (mocked)", () => {
   test("mock fetch to /api/v1/metrics serves metrics list envelope", async ({
     page,
+    baseURL,
   }) => {
     await page.route("**/api/v1/metrics/**", async (route) => {
       const url = new URL(route.request().url());
@@ -65,19 +66,21 @@ test.describe("APZMETRICS-003 Metrics HTTP typed client (mocked)", () => {
       });
     });
 
-    const result = await page.evaluate(async () => {
-      const listRes = await fetch("/api/v1/metrics/metrics", {
+    // Absolute URLs — relative fetch has no document base on about:blank (RG-MOCK-FETCH).
+    const origin = new URL(baseURL ?? "http://localhost:3300").origin;
+    const result = await page.evaluate(async (origin) => {
+      const listRes = await fetch(`${origin}/api/v1/metrics/metrics`, {
         credentials: "include",
         headers: { accept: "application/json" },
       });
       const list = await listRes.json();
-      const capsRes = await fetch("/api/v1/metrics/capabilities", {
+      const capsRes = await fetch(`${origin}/api/v1/metrics/capabilities`, {
         credentials: "include",
         headers: { accept: "application/json" },
       });
       const caps = await capsRes.json();
       return { list, caps };
-    });
+    }, origin);
 
     expect(result.list.data[0].key).toBe("latency");
     expect(result.caps.data.formulaExecutionEnabled).toBe(false);

@@ -77,7 +77,7 @@ describe("OSS-100-11 Integration SDK v1.0.0 Wave Certification", () => {
   it("retains certified provider and Search publication pins", () => {
     const pins: Record<string, string> = {
       "integrations/plane/package.json": "0.6.0",
-      "integrations/zammad/package.json": "0.6.0",
+      "integrations/zammad/package.json": "0.8.0",
       "integrations/meilisearch/package.json": "0.1.0",
       "integrations/n8n/package.json": "0.1.0",
       "packages/search-integration/package.json": "0.2.0",

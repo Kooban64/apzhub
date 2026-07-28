@@ -1,4 +1,7 @@
-/** Branded platform global identifiers for Workflow Platform entities (APZWORKFLOW-001). */
+/**
+ * Branded platform global identifiers for Workflow Platform entities.
+ * APZWORKFLOW-001 baseline + APZHUB-PLATFORM-WORKFLOW-003 runtime plane.
+ */
 
 declare const brand: unique symbol;
 
@@ -17,6 +20,23 @@ export type WorkflowConditionId = Brand<string, "WorkflowConditionId">;
 export type WorkflowConnectionId = Brand<string, "WorkflowConnectionId">;
 export type WorkflowAuditId = Brand<string, "WorkflowAuditId">;
 export type WorkflowMetadataId = Brand<string, "WorkflowMetadataId">;
+
+/** Runtime / operations plane (APZHUB-PLATFORM-WORKFLOW-003). */
+export type WorkflowRunId = Brand<string, "WorkflowRunId">;
+export type WorkflowRunStepId = Brand<string, "WorkflowRunStepId">;
+export type WorkflowScheduleId = Brand<string, "WorkflowScheduleId">;
+export type WorkflowEventId = Brand<string, "WorkflowEventId">;
+export type WorkflowTaskId = Brand<string, "WorkflowTaskId">;
+export type WorkflowQueueId = Brand<string, "WorkflowQueueId">;
+export type WorkflowCredentialId = Brand<string, "WorkflowCredentialId">;
+export type WorkflowSecretReferenceId = Brand<string, "WorkflowSecretReferenceId">;
+export type WorkflowArtifactId = Brand<string, "WorkflowArtifactId">;
+export type WorkflowNotificationId = Brand<string, "WorkflowNotificationId">;
+export type WorkflowRetryId = Brand<string, "WorkflowRetryId">;
+export type WorkflowCompensationId = Brand<string, "WorkflowCompensationId">;
+export type WorkflowCapabilityId = Brand<string, "WorkflowCapabilityId">;
+export type WorkflowProviderId = Brand<string, "WorkflowProviderId">;
+export type WorkflowInstanceId = Brand<string, "WorkflowInstanceId">;
 
 const ID_PATTERN = /^[a-zA-Z0-9][a-zA-Z0-9_.:-]{1,127}$/;
 
@@ -68,5 +88,50 @@ export function asWorkflowAuditId(value: string): WorkflowAuditId {
   return brandId(value);
 }
 export function asWorkflowMetadataId(value: string): WorkflowMetadataId {
+  return brandId(value);
+}
+export function asWorkflowRunId(value: string): WorkflowRunId {
+  return brandId(value);
+}
+export function asWorkflowRunStepId(value: string): WorkflowRunStepId {
+  return brandId(value);
+}
+export function asWorkflowScheduleId(value: string): WorkflowScheduleId {
+  return brandId(value);
+}
+export function asWorkflowEventId(value: string): WorkflowEventId {
+  return brandId(value);
+}
+export function asWorkflowTaskId(value: string): WorkflowTaskId {
+  return brandId(value);
+}
+export function asWorkflowQueueId(value: string): WorkflowQueueId {
+  return brandId(value);
+}
+export function asWorkflowCredentialId(value: string): WorkflowCredentialId {
+  return brandId(value);
+}
+export function asWorkflowSecretReferenceId(value: string): WorkflowSecretReferenceId {
+  return brandId(value);
+}
+export function asWorkflowArtifactId(value: string): WorkflowArtifactId {
+  return brandId(value);
+}
+export function asWorkflowNotificationId(value: string): WorkflowNotificationId {
+  return brandId(value);
+}
+export function asWorkflowRetryId(value: string): WorkflowRetryId {
+  return brandId(value);
+}
+export function asWorkflowCompensationId(value: string): WorkflowCompensationId {
+  return brandId(value);
+}
+export function asWorkflowCapabilityId(value: string): WorkflowCapabilityId {
+  return brandId(value);
+}
+export function asWorkflowProviderId(value: string): WorkflowProviderId {
+  return brandId(value);
+}
+export function asWorkflowInstanceId(value: string): WorkflowInstanceId {
   return brandId(value);
 }

@@ -1,0 +1,31 @@
+{
+  "programme": "APZQEP-OES-ARCH-012",
+  "title": "Test Specifications Workbench Architecture",
+  "recordedAt": "2026-07-27T00:05:00Z",
+  "decision": "READY_FOR_OWNER_REVIEW",
+  "path": "docs/engineering/oes/APZQEP/OES-ARCH-012-Test-Specifications-Workbench-Architecture/COMPLETE.md",
+  "governingStandards": ["OES-000 FROZEN", "OES-001 FROZEN", "OES-002 AUTHORISED"],
+  "filed": [
+    "PART-01",
+    "PART-02",
+    "PART-03",
+    "PART-04",
+    "PART-05",
+    "APPENDIX-A",
+    "APPENDIX-B",
+    "APPENDIX-C",
+    "APPENDIX-D",
+    "APPENDIX-E",
+    "COMPLETE.md"
+  ],
+  "next": [
+    "Owner Review under OES-002",
+    "Optional Owner freeze of OES-002",
+    "Workbench Engineering only after OES Acceptance + separate programme instruction"
+  ],
+  "notAuthorised": [
+    "Workbench Engineering",
+    "React / Next.js implementation",
+    "AI-issued Acceptance"
+  ]
+}

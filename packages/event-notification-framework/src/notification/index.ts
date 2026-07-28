@@ -52,6 +52,21 @@ export {
 } from "./default-notification-session-store";
 
 export {
+  PersistedNotificationSessionStore,
+  createPersistedNotificationSessionStore,
+  createLawNotificationPersistenceStorageKey,
+  type NotificationPersistenceStorage,
+  type PersistedNotificationSessionStoreOptions,
+} from "./persisted-notification-session-store";
+
+export {
+  createPostgresNotificationPersistenceStorage,
+  createProductionPostgresNotificationSessionStore,
+  loadPostgresNotificationSessionSnapshot,
+  savePostgresNotificationSessionSnapshot,
+} from "./postgres-notification-session-snapshot";
+
+export {
   DefaultNotificationService,
   createDefaultNotificationService,
   type DefaultNotificationServiceOptions,

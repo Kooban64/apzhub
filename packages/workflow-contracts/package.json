@@ -1,9 +1,9 @@
 {
   "name": "@apzhub/workflow-contracts",
-  "version": "0.3.0",
+  "version": "0.4.2",
   "private": true,
   "type": "module",
-  "description": "APZHUB Platform Workflow contracts — canonical models, gateway facets, engine surface, permissions (APZWORKFLOW-007)",
+  "description": "APZHUB Workflow Platform contracts — provider-neutral models, permissions, service interfaces (APZHUB-PLATFORM-WORKFLOW-003)",
   "exports": {
     ".": "./src/index.ts"
   },

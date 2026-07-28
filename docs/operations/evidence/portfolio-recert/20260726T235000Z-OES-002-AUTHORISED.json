@@ -1,0 +1,23 @@
+{
+  "programme": "OES-002",
+  "title": "Engineering Review & Acceptance Standard",
+  "recordedAt": "2026-07-26T23:50:00Z",
+  "decision": "AUTHORISED",
+  "authority": "Owner Decision following OES-001 Freeze",
+  "path": "docs/engineering/oes/OES-002-Engineering-Review-and-Acceptance-Standard.md",
+  "governs": [
+    "Owner / Architecture / Engineering / Infrastructure / Workbench / Certification review classes",
+    "PASS / FAIL criteria and ACCEPTED / REJECTED / CONDITIONAL outcomes",
+    "Review evidence shape and retention",
+    "Version Promotion and Freeze approval rules"
+  ],
+  "prerequisite": "OES-000 ACCEPTED / FROZEN · OES-001 ACCEPTED / FROZEN",
+  "next": [
+    "Owner Acceptance of OES-002 to freeze",
+    "APZQEP-OES-ARCH-012 Parts 2-5 under OES-000 + OES-001 (+ OES-002 for reviews)"
+  ],
+  "notAuthorised": [
+    "AI-issued Acceptance / Rejection / Freeze / Version Promotion",
+    "Workbench Engineering from incomplete OES-ARCH-012"
+  ]
+}

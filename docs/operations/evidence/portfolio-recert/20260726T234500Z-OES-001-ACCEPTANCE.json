@@ -1,0 +1,20 @@
+{
+  "programme": "OES-001",
+  "title": "Engineering Writing Standard",
+  "recordedAt": "2026-07-26T23:45:00Z",
+  "decision": "ACCEPTED / APPROVED / FROZEN",
+  "authority": "Owner Decision — APZOR Engineering Standard",
+  "path": "docs/engineering/oes/OES-001-Engineering-Writing-Standard.md",
+  "acceptance": "docs/engineering/oes/OES-001-OWNER-ACCEPTANCE.md",
+  "effect": [
+    "Every engineering specification SHALL conform to OES-000 and OES-001",
+    "PART / APPENDIX / COMPLETE structure is mandatory",
+    "RFC 2119 terminology is mandatory for normative OES text",
+    "OES-002 Engineering Review & Acceptance Standard authorised as next methodology document",
+    "APZQEP-OES-ARCH-012 Parts 2-5 authorised under frozen OES-000 and OES-001"
+  ],
+  "notAuthorised": [
+    "Workbench Engineering before OES-ARCH-012 COMPLETE.md Acceptance",
+    "Unfreeze of OES-001 without Owner Decision"
+  ]
+}

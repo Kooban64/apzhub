@@ -105,3 +105,24 @@ export class SupportApiError extends Error {
 export function isSupportApiError(value: unknown): value is SupportApiError {
   return value instanceof SupportApiError;
 }
+
+/** Terminal Support errors must not be auto-retried (safe error UI must surface promptly). */
+const NON_RETRYABLE_SUPPORT_CODES: ReadonlySet<SupportApiErrorCode> = new Set([
+  "UNAUTHORIZED",
+  "FORBIDDEN",
+  "NOT_FOUND",
+  "UNAVAILABLE",
+  "VALIDATION",
+  "CONFLICT",
+]);
+
+/**
+ * TanStack Query `retry` predicate for Support reads.
+ * Transient/unknown failures may retry once; terminal API codes never retry.
+ */
+export function shouldRetrySupportQuery(failureCount: number, error: unknown): boolean {
+  if (isSupportApiError(error) && NON_RETRYABLE_SUPPORT_CODES.has(error.code)) {
+    return false;
+  }
+  return failureCount < 1;
+}

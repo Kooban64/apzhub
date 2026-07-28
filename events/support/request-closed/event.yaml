@@ -1,0 +1,25 @@
+manifestSchemaVersion: "1.0"
+id: support-request-closed
+name: Support Request Closed
+version: 1.0.0
+kind: event
+
+metadata:
+  category: productivity
+  description: Emitted when an APZHUB Support request is closed.
+
+event:
+  category: business
+  publisher: support-service
+  subscribers:
+    - notification:support.attention
+    - activity:support.activity
+    - audit:platform.audit
+  payload:
+    supportRequestId: string
+    title: string
+    status: string
+    priority: string
+
+documentation:
+  eventKey: support.request.closed

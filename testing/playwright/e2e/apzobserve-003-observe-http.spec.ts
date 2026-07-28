@@ -8,6 +8,7 @@ import { expect, test } from "@playwright/test";
 test.describe("APZOBSERVE-003 Observability HTTP typed client (mocked)", () => {
   test("mock fetch to /api/v1/observe serves health-check list envelope", async ({
     page,
+    baseURL,
   }) => {
     await page.route("**/api/v1/observe/**", async (route) => {
       const url = new URL(route.request().url());
@@ -66,19 +67,21 @@ test.describe("APZOBSERVE-003 Observability HTTP typed client (mocked)", () => {
       });
     });
 
-    const result = await page.evaluate(async () => {
-      const listRes = await fetch("/api/v1/observe/health-checks", {
+    // Absolute URLs — relative fetch has no document base on about:blank (RG-MOCK-FETCH).
+    const origin = new URL(baseURL ?? "http://localhost:3300").origin;
+    const result = await page.evaluate(async (origin) => {
+      const listRes = await fetch(`${origin}/api/v1/observe/health-checks`, {
         credentials: "include",
         headers: { accept: "application/json" },
       });
       const list = await listRes.json();
-      const capsRes = await fetch("/api/v1/observe/capabilities", {
+      const capsRes = await fetch(`${origin}/api/v1/observe/capabilities`, {
         credentials: "include",
         headers: { accept: "application/json" },
       });
       const caps = await capsRes.json();
       return { list, caps };
-    });
+    }, origin);
 
     expect(result.list.data[0].id).toBe("hc_pw");
     expect(result.list.page).toBeDefined();

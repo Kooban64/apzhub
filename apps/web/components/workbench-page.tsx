@@ -20,7 +20,9 @@ import { ProjectsWorkspaceRouter } from "@/components/projects/projects-workspac
 import { SearchWorkspaceRouter } from "@/components/search/search-workspace-router";
 import { SupportWorkspaceRouter } from "@/components/support/support-workspace-router";
 import { TestingWorkspaceRouter } from "@/components/testing/testing-workspace-router";
+import { AnalyticsWorkspaceRouter } from "@/components/analytics/analytics-workspace-router";
 import { TimeWorkspaceRouter } from "@/components/time/time-workspace-router";
+import { WorkflowWorkspaceRouter } from "@/components/workflow/workflow-workspace-router";
 import { WorkflowEngineWorkspaceRouter } from "@/components/workflow-engine/workflow-engine-workspace-router";
 import { WorkflowsWorkspaceRouter } from "@/components/workflows/workflows-workspace-router";
 import { NotificationsWorkspaceRouter } from "@/components/notifications/notifications-workspace-router";
@@ -29,6 +31,7 @@ import { ConfigurationWorkspaceRouter } from "@/components/configuration/configu
 import { IdentityWorkspaceRouter } from "@/components/identity/identity-workspace-router";
 import { ObserveWorkspaceRouter } from "@/components/observe/observe-workspace-router";
 import { MetricsWorkspaceRouter } from "@/components/metrics/metrics-workspace-router";
+import { QepWorkspaceRouter } from "@/components/qep/qep-workspace-router";
 import { useE2eActivityTimelinePresentationRefresh } from "@/lib/e2e-activity-timeline-presentation-refresh";
 import {
   isPlatformOperationsRoute,
@@ -46,8 +49,11 @@ import { isSearchRoute } from "@/lib/search/routes";
 import { isProjectsRoute } from "@/lib/projects/routes";
 import { isSupportRoute } from "@/lib/support/routes";
 import { isTestingRoute } from "@/lib/testing/routes";
+import { isAnalyticsRoute } from "@/lib/analytics/routes";
 import { isTimeRoute } from "@/lib/time/routes";
+import { isWorkflowRoute } from "@/lib/workflow/routes";
 import { isWorkflowEngineRoute, isWorkflowsRoute } from "@/lib/workflows/routes";
+import { isQepWorkspaceRoute } from "@/lib/qep/routes";
 import { resolveCommandPaletteMode } from "@/lib/resolve-command-palette-mode";
 
 export function WorkbenchPage() {
@@ -110,12 +116,10 @@ export function WorkbenchPage() {
   );
 
   useEffect(() => {
+    // Longest-prefix view resolution activates the matching workspace view for deep links
+    // (e.g. /workspace/projects/{id} → Projects) while still preferring longer exact routes
+    // such as /workspace/home/overview over /workspace/home (RG-AUTH-SHELL-RESIDUAL).
     activateViewForRoute(pathname);
-    // Deep-link fallback: activate the workspace root view when nested routes have no exact descriptor.
-    const segments = pathname.split("/").filter(Boolean);
-    if (segments[0] === "workspace" && segments[1] && segments.length > 2) {
-      activateViewForRoute(`/workspace/${segments[1]}`);
-    }
   }, [pathname, activateViewForRoute]);
 
   useEffect(() => {
@@ -140,10 +144,12 @@ export function WorkbenchPage() {
     : null;
   const projectsActive = isProjectsRoute(pathname);
   const timeActive = isTimeRoute(pathname);
+  const analyticsActive = isAnalyticsRoute(pathname);
   const supportActive = isSupportRoute(pathname);
   const testingActive = isTestingRoute(pathname);
   const reportingActive = isReportingRoute(pathname);
   const documentsActive = isDocumentsRoute(pathname);
+  const workflowActive = isWorkflowRoute(pathname);
   const workflowEngineActive = isWorkflowEngineRoute(pathname);
   const workflowsActive = isWorkflowsRoute(pathname);
   const notificationsActive = isNotificationsRoute(pathname);
@@ -153,6 +159,7 @@ export function WorkbenchPage() {
   const metricsActive = isMetricsRoute(pathname);
   const administrationActive = isAdministrationRoute(pathname);
   const searchActive = isSearchRoute(pathname);
+  const qepActive = isQepWorkspaceRoute(pathname);
 
   return (
     <DesktopShell
@@ -183,6 +190,8 @@ export function WorkbenchPage() {
         <ProjectsWorkspaceRouter />
       ) : timeActive ? (
         <TimeWorkspaceRouter />
+      ) : analyticsActive ? (
+        <AnalyticsWorkspaceRouter />
       ) : supportActive ? (
         <SupportWorkspaceRouter />
       ) : testingActive ? (
@@ -191,6 +200,8 @@ export function WorkbenchPage() {
         <ReportingWorkspaceRouter />
       ) : documentsActive ? (
         <DocumentsWorkspaceRouter />
+      ) : workflowActive ? (
+        <WorkflowWorkspaceRouter />
       ) : workflowEngineActive ? (
         <WorkflowEngineWorkspaceRouter />
       ) : workflowsActive ? (
@@ -209,6 +220,8 @@ export function WorkbenchPage() {
         <AdministrationWorkspaceRouter />
       ) : searchActive ? (
         <SearchWorkspaceRouter />
+      ) : qepActive ? (
+        <QepWorkspaceRouter />
       ) : (
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-semibold">{activeView?.title ?? "Workspace"}</h1>

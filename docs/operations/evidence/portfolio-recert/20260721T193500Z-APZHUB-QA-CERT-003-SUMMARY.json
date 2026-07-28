@@ -1,0 +1,72 @@
+{
+  "programme": "APZHUB-QA-CERT-003",
+  "title": "Platform 1.2.0 Final Portfolio Certification",
+  "baseline": "1.2.0",
+  "rootVersion": "0.1.0-foundation",
+  "timestamp": "20260721T193400Z",
+  "preconditions": {
+    "APZHUB-ENG-0022": "ACCEPTED (Owner Decision)",
+    "engineeringAuthorised": false
+  },
+  "gates": {
+    "lint": {
+      "result": "PASS",
+      "exit": 0
+    },
+    "typecheck": {
+      "result": "PASS",
+      "exit": 0
+    },
+    "vitest": {
+      "result": "PASS",
+      "exit": 0,
+      "passed": 5013,
+      "skipped": 66,
+      "failed": 0,
+      "files": 885
+    },
+    "integration": {
+      "result": "PASS",
+      "note": "No pnpm test:integration script; covered by vitest run (unit+integration)"
+    },
+    "openapiPlatform": {
+      "result": "PASS"
+    },
+    "openapiLaw": {
+      "result": "PASS"
+    },
+    "portfolioPath": {
+      "result": "PASS",
+      "evidence": "20260721T192226Z-R12-QA-01-path-PASS.json"
+    },
+    "portfolioFull": {
+      "result": "FAIL",
+      "evidence": "20260721T193400Z-R12-QA-01-full-FAIL.json",
+      "playwright": {
+        "passed": 119,
+        "failed": 1,
+        "flaky": 6
+      }
+    }
+  },
+  "hardFailures": [
+    {
+      "id": "CERT3-PW-001",
+      "spec": "oss-110-14-support-visual.spec.ts",
+      "title": "analytics screenshot",
+      "product": "Support",
+      "package": "apps/web (Support workbench UI)",
+      "platformService": "Support / Presentation",
+      "rootCause": "toHaveScreenshot('support-analytics.png') visual baseline mismatch across 3 attempts"
+    }
+  ],
+  "flaky": [
+    "apznotify-004 notifications section lists metadata",
+    "apztcms-010 dashboard loads with testing page shell",
+    "apztcms-012 opens workbench and lists plans",
+    "apztcms-022 supports panel tabs and a11y landmarks",
+    "apztcms-023 opens QA dashboard and remains responsive",
+    "oss-110-14-support-performance.baseline Soft timings"
+  ],
+  "recommendation": "CERTIFICATION FAILED"
+}

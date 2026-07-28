@@ -3,10 +3,23 @@
 > **Purpose:** Exact procedure for how future AI-assisted work should proceed  
 > **Audience:** AI coding agents  
 > **Authoritative references:** [AI-MANIFEST](./AI-MANIFEST.md) · [AI-BOOTSTRAP](./AI-BOOTSTRAP.md) · [AI-CONTEXT](./AI-CONTEXT.md) · [015 — Quality](../015-software-quality-testing-qa-cicd-release-management-framework.md) · [0017 — Review Gate](../adr/ADR-0017-phased-implementation-review-gate.md)  
-> **Related documents:** [AI-ENGINEERING-STANDARDS](./AI-ENGINEERING-STANDARDS.md) · [CURRENT-MILESTONE](./CURRENT-MILESTONE.md)  
+> **Related documents:** [AI-ENGINEERING-STANDARDS](./AI-ENGINEERING-STANDARDS.md) · [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [Platform Delivery Standard](../engineering/platform-delivery/PLATFORM-DELIVERY-STANDARD.md)  
 > **Reading order:** After AI-MANIFEST / CURRENT-MILESTONE / AI-BOOTSTRAP; with AI-ENGINEERING-STANDARDS during approved work  
-> **Last updated:** 2026-07-18  
-> **Current status:** Active — includes mandatory **APZHUB Engineering Lifecycle**
+> **Last updated:** 2026-07-19  
+> **Current status:** Active — includes mandatory **APZHUB Engineering Lifecycle** + **Platform Delivery Standard**
+
+---
+
+## Platform Delivery Standard (mandatory for capabilities & products)
+
+Every platform capability and commercial product programme **must** follow [PLATFORM-DELIVERY-STANDARD](../engineering/platform-delivery/PLATFORM-DELIVERY-STANDARD.md) (APZHUB-ENGINEERING-001). Do **not** recreate engineering instructions in programme Approvals — cite the standard and name the lifecycle phase.
+
+```text
+Commercial Planning → Platform Foundation → Information Model → Provider Integration
+→ Contracts → Platform Services → HTTP API → Workbench → Certification → Production Release
+```
+
+Companions: [ENGINEERING-LIFECYCLE](../engineering/platform-delivery/ENGINEERING-LIFECYCLE.md) · [STAGE-GATES](../engineering/platform-delivery/STAGE-GATES.md) · [QUALITY-GATES](../engineering/platform-delivery/QUALITY-GATES.md) · [PROGRAMME-GOVERNANCE](../engineering/platform-delivery/PROGRAMME-GOVERNANCE.md) · [templates/](../engineering/platform-delivery/templates/).
 
 ---
 

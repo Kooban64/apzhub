@@ -1,0 +1,40 @@
+{
+  "programme": "APZQEP-CERT-050D",
+  "title": "Test Specifications Capability Certification",
+  "recordedAt": "2026-07-27T08:11:00Z",
+  "decision": "CERTIFIED / APPROVED / PROGRAMME CLOSED",
+  "authority": "Owner Certification Decision",
+  "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "package": {
+    "name": "@apzhub/qep-test-specifications",
+    "version": "1.0.0",
+    "status": "PROMOTED / CERTIFIED"
+  },
+  "assessment": {
+    "governanceCompliance": "PASS",
+    "engineeringEvidence": "PASS",
+    "architectureCompliance": "PASS",
+    "qualityGates": "PASS",
+    "typeChecking": "PASS",
+    "testSuite": "PASS (139)",
+    "operationalReadiness": "PASS",
+    "documentation": "PASS",
+    "certificationIndependence": "PASS"
+  },
+  "freeze": {
+    "eligible": true,
+    "granted": false,
+    "binding": false,
+    "next": "Owner Freeze Review — Test Specifications Capability v1.0.0"
+  },
+  "pack": "docs/products/apzqep/test-specifications/capability-certification/",
+  "acceptance": "docs/products/apzqep/test-specifications/capability-certification/OWNER-ACCEPTANCE.md",
+  "knownLimitations": "docs/products/apzqep/test-specifications/capability-certification/KNOWN-LIMITATIONS.md",
+  "independence": "docs/engineering/oes/OES-CERTIFICATION-INDEPENDENCE.md",
+  "notAuthorised": [
+    "Automatic freeze",
+    "Further activity under APZQEP-CERT-050D",
+    "Reopening ENG-050C"
+  ],
+  "next": "Owner Freeze Review — Test Specifications Capability v1.0.0"
+}

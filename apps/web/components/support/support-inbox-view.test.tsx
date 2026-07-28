@@ -14,6 +14,7 @@ vi.mock("@/lib/support/support-api", () => ({
   listSupportRequests: vi.fn(),
 }));
 
+import { SupportApiError } from "@/lib/support/errors";
 import { listSupportRequests } from "@/lib/support/support-api";
 
 import { SupportInboxView } from "./support-inbox-view";
@@ -62,7 +63,9 @@ describe("SupportInboxView", () => {
   it("shows error with retry", async () => {
     const user = userEvent.setup();
     vi.mocked(listSupportRequests)
-      .mockRejectedValueOnce(new Error("boom"))
+      .mockRejectedValueOnce(
+        SupportApiError.fromHttp({ status: 403, code: "FORBIDDEN" }),
+      )
       .mockResolvedValueOnce({
         data: [],
         page: { cursor: null, nextCursor: null, limit: 20, hasMore: false },

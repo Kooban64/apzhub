@@ -1,0 +1,30 @@
+manifestSchemaVersion: "1.0"
+id: qep-platform-service
+name: APZ QEP Platform Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: quality-engineering
+  description: APZ QEP orchestration service shell (APZQEP-ENG-010). Domain behaviour is not implemented.
+  contractPackage: "@apzhub/qep-contracts"
+  contractVersion: "0.1.0"
+  implementationPackage: "@apzhub/qep-foundation"
+  implementationVersion: "0.1.0"
+  owner: APZHUB
+  tags:
+    - qep
+    - quality
+    - foundation
+
+dependencies:
+  platform: []
+  integrations: []
+
+integrations: []
+
+service:
+  category: quality-engineering
+  status: stub
+
+permissions: []

@@ -1,0 +1,28 @@
+{
+  "programme": "APZHUB-OPS-001",
+  "title": "Platform 1.2.0 Operational Readiness",
+  "baseline": "1.2.0",
+  "rootVersion": "0.1.0-foundation",
+  "timestamp": "20260722T053224Z",
+  "classification": "PRODUCTION_READY_WITH_ACTIONS",
+  "preconditions": {
+    "APZHUB-RELEASE-001": "ACCEPTED (Owner Decision)",
+    "engineeringAuthorised": false,
+    "qualityRemediationAuthorised": false,
+    "sourceCodeModified": false
+  },
+  "domains": {
+    "deployment": "PARTIAL",
+    "infrastructure": "PARTIAL",
+    "security": "PARTIAL",
+    "backupRecovery": "PARTIAL",
+    "monitoring": "PARTIAL",
+    "performance": "PARTIAL",
+    "runbooks": "READY",
+    "documentation": "READY"
+  },
+  "beforeProductionActions": ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8"],
+  "pack": "docs/operations/platform-1.2.0-operational-readiness/",
+  "applicationsReviewed": ["@apzhub/web", "@apzhub/law-platform"],
+  "integrationsReviewed": 8
+}

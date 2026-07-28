@@ -1,0 +1,23 @@
+{
+  "programme": "APZQEP-ENG-020F",
+  "part": "2",
+  "title": "Requirements Relationship Engine — Persistence, Application Services, APIs and Platform Integration",
+  "recordedAt": "2026-07-26T09:29:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner statement in APZQEP-ARCH-006 programme instruction (Parts 1 and 2 accepted)",
+  "finalPartState": "ACCEPTED / CLOSED / COMPLETE",
+  "package": "@apzhub/qep-requirements@0.9.0",
+  "implementationEvidence": [
+    "20260726T090200Z-APZQEP-ENG-020F-PART2.json"
+  ],
+  "backendCapabilityComplete": true,
+  "part3": {
+    "authorised": false,
+    "state": "NOT AUTHORISED — gated on APZQEP-ARCH-006 acceptance + Owner Engineering Instruction"
+  },
+  "nextArchitecture": {
+    "programme": "APZQEP-ARCH-006",
+    "title": "Requirements Workbench Architecture",
+    "state": "AWAITING OWNER ACCEPTANCE"
+  }
+}

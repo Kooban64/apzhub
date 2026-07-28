@@ -63,3 +63,7 @@ export function extractSupportUserZammadId(id: string): string {
 export function extractSupportArticleZammadId(id: string): string {
   return extractZammadId(id, "sart");
 }
+
+export function extractSupportArticleAttachmentZammadId(id: string): string {
+  return extractZammadId(id, "satt");
+}

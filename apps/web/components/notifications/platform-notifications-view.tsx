@@ -281,6 +281,10 @@ const SECTION_META: Record<
     description:
       "Notification metadata dashboard — delivery providers are not available.",
   },
+  inbox: {
+    title: "Inbox",
+    description: "In-application notification delivery inbox.",
+  },
   notifications: {
     title: "Notifications",
     description: "Notification inbox and lifecycle metadata.",

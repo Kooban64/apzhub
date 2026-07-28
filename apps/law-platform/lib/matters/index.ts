@@ -19,7 +19,7 @@ export { InMemoryMatterRepository } from "./in-memory-matter-repository";
 export {
   getSharedMatterRepository,
   resetSharedMatterRepository,
-} from "../persistence/repository-factory";
+} from "./in-memory-matter-repository";
 export { SEED_MATTERS } from "./seed-matters";
 export { SEED_ATTORNEYS, getAttorneyDisplayName } from "./seed-attorneys";
 export {

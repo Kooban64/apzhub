@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: qep-ai-workspace
+name: AI Quality Workspace
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "AI Quality Workspace (M17) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  product: apzqep
+  moduleCatalogueId: M17
+  slug: ai-workspace
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: stub
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: AI Quality Workspace
+    icon: flask-conical
+    route: /workspace/qep/ai-workspace
+    order: 170
+    permission: qep.ai-workspace.read
+  view:
+    title: AI Quality Workspace
+    workspace: qep
+    route: /workspace/qep/ai-workspace
+    permission: qep.ai-workspace.read

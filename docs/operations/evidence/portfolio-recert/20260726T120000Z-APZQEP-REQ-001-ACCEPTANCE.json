@@ -1,0 +1,18 @@
+{
+  "programme": "APZQEP-REQ-001",
+  "title": "Requirements Capability Certification & Baseline",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "recordedAt": "2026-07-26T12:00:00Z",
+  "authority": "Owner Architecture Programme Instruction — APZQEP-ARCH-007",
+  "package": {
+    "@apzhub/qep-requirements": "1.0.0"
+  },
+  "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "recommendation": "PRODUCTION READY",
+  "effect": [
+    "Requirements Capability Certified, Frozen at 1.0.0",
+    "No further Requirements engineering authorised",
+    "APZQEP-ARCH-007 Traceability Architecture authorised (architecture only)"
+  ],
+  "certificationEvidence": "20260726T110000Z-APZQEP-REQ-001.json"
+}

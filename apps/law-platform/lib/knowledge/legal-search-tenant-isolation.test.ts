@@ -10,6 +10,7 @@ import {
   DEFAULT_LAW_TENANT_ID,
   resetLawPersistenceScope,
   runWithLawPersistenceContextAsync,
+  setSessionLawPersistenceContext,
 } from "../persistence";
 import { LEGAL_CLIENT_SEARCH_SOURCE_ID } from "./legal-search-source-ids";
 import {
@@ -45,6 +46,8 @@ describe("legal search tenant isolation", () => {
     const tenantContext = createLawPersistenceContext({
       tenantId: DEFAULT_LAW_TENANT_ID,
     });
+    // Providers resolve tenant via session binding (ENG-0007 client-safe scope).
+    setSessionLawPersistenceContext(tenantContext);
 
     const client = ClientFactory.create({
       displayName: "Scoped Search Client",

@@ -1,0 +1,264 @@
+# APZHUB Owner Acceptance Register
+
+> **Programme:** APZHUB-OWNER-001  
+> **Classification:** DOCUMENTATION ONLY  
+> **Date:** 2026-07-19  
+> **Purpose:** Permanent register of Owner Acceptance decisions enacted under Foundation Closure  
+> **Authority:** Owner Programme Approval APZHUB-OWNER-001
+
+---
+
+## Decision summary
+
+On **2026-07-19**, under **APZHUB-OWNER-001**, the Owner formally accepted the completed repository foundation and transitioned the repository to **Operational Delivery**.
+
+---
+
+## Programmes accepted (this decision)
+
+| Programme                         | Title                                           | Prior status                            | New status                          | Acceptance report                                                                           |
+| --------------------------------- | ----------------------------------------------- | --------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------- |
+| **APZHUB-ARCHITECTURE-001**       | Enterprise Architecture Catalogue               | Awaiting Acceptance                     | **ACCEPTED / CLOSED / Operational** | [report](./completion-reports/APZHUB-ARCHITECTURE-001-programme-acceptance-report.md)       |
+| **APZHUB-PRODUCT-MANAGEMENT-001** | Commercial Product Management Framework         | Awaiting Acceptance                     | **ACCEPTED / CLOSED / Operational** | [report](./completion-reports/APZHUB-PRODUCT-MANAGEMENT-001-programme-acceptance-report.md) |
+| **APZHUB-PORTFOLIO-001**          | Cross-Product Integration & Automation Strategy | Awaiting Acceptance                     | **ACCEPTED / CLOSED / Operational** | [report](./completion-reports/APZHUB-PORTFOLIO-001-programme-acceptance-report.md)          |
+| **APZHUB-RELEASES-001**           | Portfolio Release Baseline Standardisation      | Awaiting Acceptance                     | **ACCEPTED / CLOSED / Operational** | [report](./completion-reports/APZHUB-RELEASES-001-programme-acceptance-report.md)           |
+| **APZHUB-GOVERNANCE-001**         | Engineering Governance Dashboard Specification  | Awaiting Acceptance                     | **ACCEPTED / CLOSED / Operational** | [report](./completion-reports/APZHUB-GOVERNANCE-001-programme-acceptance-report.md)         |
+| **APZ Support 1.0.0 packaging**   | Production SemVer packaging                     | Awaiting Acceptance (with RELEASES-001) | **ACCEPTED / CLOSED**               | [report](./completion-reports/APZ-SUPPORT-1.0-release-acceptance-report.md)                 |
+| **APZHUB-OWNER-001**              | Foundation Acceptance & Operational Transition  | —                                       | **ACCEPTED / CLOSED**               | [completion](../sprint/APZHUB-OWNER-001-completion-report.md)                               |
+
+**Note:** APZHUB-PORTFOLIO-001, APZHUB-RELEASES-001, and APZHUB-GOVERNANCE-001 are accepted under Objective 1 (“accept all completed programmes awaiting Owner Acceptance”) and Foundation Closure completeness (Portfolio Management · Release Governance · Operational Governance). Explicit Owner list highlighted ARCHITECTURE-001 and PRODUCT-MANAGEMENT-001 as primary acceptances.
+
+---
+
+## Already closed (retained)
+
+| Programme / baseline                                         | Status                             |
+| ------------------------------------------------------------ | ---------------------------------- |
+| Platform Foundation (APZHUB-FOUNDATION-001)                  | ACCEPTED / CLOSED                  |
+| Engineering Operating Model (APZHUB-OPERATIONS-001 wave 1)   | ACCEPTED / CLOSED                  |
+| Platform Operations Framework (APZHUB-OPERATIONS-001 wave 2) | **ACCEPTED / CLOSED**              |
+| Enterprise Operating Model (APZHUB-GOVERNANCE-001 wave 2)    | **ACCEPTED / CLOSED**              |
+| Commercialisation Strategy (APZHUB-STRATEGY-001)             | **ACCEPTED / CLOSED**              |
+| Release 1.2 Planning (APZHUB-1.2-001)                        | **ACCEPTED / CLOSED**              |
+| APZHUB-1.2-002 (R12-OPS-01)                                  | **ACCEPTED / CLOSED**              |
+| APZHUB-1.2-003 (R12-OPS-02)                                  | **ACCEPTED / CLOSED**              |
+| APZHUB-1.2-004 (R12-OPS-03)                                  | **ACCEPTED / CLOSED**              |
+| APZHUB-1.2-005 (R12-SEARCH-01)                               | **ACCEPTED / CLOSED**              |
+| APZHUB-1.2-006 (R12-SEARCH-02)                               | **ACCEPTED / CLOSED**              |
+| APZHUB-1.2-007 (R12-TCMS-01)                                 | **ACCEPTED / CLOSED**              |
+| APZHUB-1.2-008 (Readiness)                                   | **ACCEPTED / CLOSED**              |
+| APZHUB-1.2-009 (Platform 1.2.0)                              | **ACCEPTED / CLOSED**              |
+| APZHUB-POST-IMPLEMENTATION-001                               | **ACCEPTED / CLOSED**              |
+| APZHUB-PRODUCT-LIFECYCLE-001                                 | **ACCEPTED / CLOSED**              |
+| APZHUB-BACKLOG-001                                           | **ACCEPTED / CLOSED**              |
+| APZHUB-ENG-0001 (R12-PERSIST-01)                             | **ACCEPTED / CLOSED**              |
+| APZHUB-ENG-0002 (R12-PERSIST-02)                             | **ACCEPTED / CLOSED**              |
+| APZHUB-ENG-0003 (R12-SUP-01)                                 | **ACCEPTED / CLOSED**              |
+| APZHUB-ENG-0004 (R12-SUP-02)                                 | Awaiting Acceptance                |
+| QA-002 Repository Quality                                    | ACCEPTED — **PRODUCTION READY**    |
+| APZ Projects **1.1.0**                                       | ACCEPTED / CLOSED                  |
+| APZ Time **1.0.0**                                           | ACCEPTED / CLOSED                  |
+| Integration SDK **1.0.0**                                    | Architecture Frozen · PRWL         |
+| Product Engineering Framework (PRODUCTS-000…002)             | COMPLETE / ACCEPTED where declared |
+
+---
+
+## Subsequent acceptances (post OWNER-001)
+
+| Programme                                              | Status                                                                                                                                                                          | Date       |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **APZ-ANALYTICS-001**                                  | **ACCEPTED / CLOSED** — READY WITH CONDITIONS                                                                                                                                   | 2026-07-19 |
+| **APZHUB-PLATFORM-ANALYTICS-001**                      | **ACCEPTED / CLOSED** — FOUNDATION READY · ADR-0066/0067 Accepted                                                                                                               | 2026-07-19 |
+| **APZHUB-PLATFORM-ANALYTICS-002**                      | **ACCEPTED / CLOSED** — FOUNDATION COMPLETE (Owner Decision with METABASE-001)                                                                                                  | 2026-07-19 |
+| **APZHUB-INTEGRATION-METABASE-001**                    | **ACCEPTED / CLOSED** — CERTIFIED_FOUNDATION `@apzhub/integration-metabase` **0.1.0**                                                                                           | 2026-07-19 |
+| **APZHUB-PLATFORM-ANALYTICS-003**                      | **ACCEPTED / CLOSED** — `@apzhub/analytics-contracts` **0.1.0**                                                                                                                 | 2026-07-19 |
+| **APZHUB-PLATFORM-ANALYTICS-004**                      | **ACCEPTED / CLOSED** — Analytics Platform Services (Owner Decision with ANALYTICS-005)                                                                                         | 2026-07-19 |
+| **APZHUB-PLATFORM-ANALYTICS-005**                      | **ACCEPTED / CLOSED** — Analytics HTTP API · OpenAPI **1.11.0** (Owner Decision with ANALYTICS-006)                                                                             | 2026-07-19 |
+| **APZHUB-PLATFORM-ANALYTICS-006**                      | **ACCEPTED / CLOSED** — Analytics Workbench Module (Owner Decision with APZ-ANALYTICS-002)                                                                                      | 2026-07-19 |
+| **APZ-ANALYTICS-002**                                  | **ACCEPTED / CLOSED** — Analytics **1.0.0** · **PRODUCTION READY** (PRWL) (Owner Decision with Platform 1.0)                                                                    | 2026-07-19 |
+| **APZ-WORKFLOW-001**                                   | **ACCEPTED / CLOSED** — Workflow Release 1.0 Planning · **READY WITH CONDITIONS** (Owner Decision with PLATFORM-WORKFLOW-001)                                                   | 2026-07-19 |
+| **APZHUB-PLATFORM-WORKFLOW-001**                       | **ACCEPTED / CLOSED** — Workflow Platform Foundation · **FOUNDATION READY** · ADR-0068/0069 (Owner Decision with PLATFORM-WORKFLOW-002)                                         | 2026-07-19 |
+| **APZHUB-PLATFORM-WORKFLOW-002**                       | **ACCEPTED / CLOSED** — Workflow Information Model · **FOUNDATION COMPLETE** (Owner Decision with N8N-001)                                                                      | 2026-07-19 |
+| **APZHUB-INTEGRATION-N8N-001**                         | **ACCEPTED / CLOSED** — CERTIFIED_FOUNDATION `@apzhub/integration-n8n` **0.1.0** (Owner Decision with WORKFLOW-003)                                                             | 2026-07-19 |
+| **APZHUB-PLATFORM-WORKFLOW-003**                       | **ACCEPTED / CLOSED** — `@apzhub/workflow-contracts` **0.4.2** · **CONTRACTS READY** (Owner Decision with WORKFLOW-004)                                                         | 2026-07-19 |
+| **APZHUB-PLATFORM-WORKFLOW-004**                       | **ACCEPTED / CLOSED** — Workflow Platform Services · **SERVICES READY** (Owner Decision with WORKFLOW-005)                                                                      | 2026-07-19 |
+| **APZHUB-PLATFORM-WORKFLOW-005**                       | **ACCEPTED / CLOSED** — Workflow HTTP API · OpenAPI **1.12.0** · **HTTP API READY** (Owner Decision with WORKFLOW-006)                                                          | 2026-07-19 |
+| **APZHUB-PLATFORM-WORKFLOW-006**                       | **ACCEPTED / CLOSED** — Workflow Workbench · `/workspace/workflow/*` · **WORKBENCH READY** (Owner Decision with APZ-WORKFLOW-002)                                               | 2026-07-19 |
+| **APZ-WORKFLOW-002**                                   | **ACCEPTED / CLOSED** — Workflow **1.0.0** · **PRODUCTION READY** (PRWL) (Owner Decision with Platform 1.0)                                                                     | 2026-07-19 |
+| **APZHUB-ENGINEERING-001**                             | **ACCEPTED / CLOSED** — Platform Delivery Standard · **STANDARD READY** (Owner Decision with APZ-DOCUMENTS-001)                                                                 | 2026-07-19 |
+| **APZ-DOCUMENTS-001**                                  | **ACCEPTED / CLOSED** — APZ Documents Release 1.0 Planning · **READY WITH CONDITIONS** (Owner Decision with APZ-DOCUMENTS-002)                                                  | 2026-07-19 |
+| **APZ-DOCUMENTS-002**                                  | **ACCEPTED / CLOSED** — APZ Documents **1.0.0** · **PRODUCTION READY** (PRWL) (Owner Decision with APZ-TCMS-001)                                                                | 2026-07-19 |
+| **APZ-TCMS-001**                                       | **ACCEPTED / CLOSED** — APZ TCMS Release 1.0 Planning · **READY WITH CONDITIONS** · path **Existing Platform → Commercial Packaging** (Owner Decision with APZ-TCMS-002)        | 2026-07-19 |
+| **APZ-TCMS-002**                                       | **ACCEPTED / CLOSED** — APZ TCMS **1.0.0** · **PRODUCTION READY** (PRWL) (Owner Decision with APZ-LAW-001)                                                                      | 2026-07-19 |
+| **APZ-LAW-001**                                        | **ACCEPTED / CLOSED** — APZ Law Platform Release 1.0 Planning · **READY WITH CONDITIONS** · path **Existing Platform → Commercial Packaging** (Owner Decision with APZ-LAW-002) | 2026-07-19 |
+| **APZ-LAW-002**                                        | **ACCEPTED / CLOSED** — Law **1.0.0** · **PRODUCTION READY** (PRWL) (Owner Decision with Platform 1.0)                                                                          | 2026-07-19 |
+| **APZHUB-PORTFOLIO-001 (Platform 1.0)**                | **ACCEPTED / CLOSED** — APZHUB Platform **1.0.0** · **PRODUCTION READY** (PRWL) (Owner Decision with APZHUB-RELEASE-001)                                                        | 2026-07-19 |
+| **APZHUB-RELEASE-001**                                 | **ACCEPTED / CLOSED** — Release 1.1 Planning & Roadmap · first delivery **APZHUB-1.1-001**                                                                                      | 2026-07-19 |
+| **APZHUB-1.1-001**                                     | **ACCEPTED / CLOSED** — Law Authorization Hardening (OBS-LAW-01) · OBS-LAW-01 closed                                                                                            | 2026-07-19 |
+| **APZHUB-1.1-002**                                     | **ACCEPTED / CLOSED** — Law Operational Hardening (OBS-LAW-02) · OBS-LAW-02 closed                                                                                              | 2026-07-19 |
+| **APZHUB-1.1-003**                                     | **ACCEPTED / CLOSED** — Cross-Platform Event Bus & Notification Foundation · next **APZHUB-1.1-004**                                                                            | 2026-07-20 |
+| **APZHUB-1.1-004**                                     | **ACCEPTED / CLOSED** — Cross-Product Automation Foundation · next **APZHUB-1.1-005**                                                                                           | 2026-07-20 |
+| **APZHUB-1.1-005**                                     | **ACCEPTED / CLOSED** — Release 1.1 Readiness Review · next **APZHUB-1.1-006**                                                                                                  | 2026-07-20 |
+| **APZHUB-1.1-006**                                     | **ACCEPTED / CLOSED** — Platform **1.1.0** Production Baseline · **PRODUCTION_READY_WITH_LIMITATIONS**                                                                          | 2026-07-20 |
+| **APZHUB-OPERATIONS-001** (Platform Ops Framework)     | **ACCEPTED / CLOSED** — next Enterprise Governance                                                                                                                              | 2026-07-20 |
+| **APZHUB-GOVERNANCE-001** (Enterprise Operating Model) | **ACCEPTED / CLOSED** — next Commercial Execution                                                                                                                               | 2026-07-20 |
+| **APZHUB-STRATEGY-001** (Commercialisation & GTM)      | **ACCEPTED / CLOSED** — next Release 1.2 Planning                                                                                                                               | 2026-07-20 |
+| **APZHUB-1.2-001** (Release 1.2 Planning)              | **ACCEPTED / CLOSED** — engineering authorised per plan                                                                                                                         | 2026-07-20 |
+| **APZHUB-1.2-002** (R12-OPS-01)                        | **ACCEPTED / CLOSED** — next R12-OPS-02                                                                                                                                         | 2026-07-20 |
+| **APZHUB-1.2-003** (R12-OPS-02)                        | **ACCEPTED / CLOSED** — next R12-OPS-03                                                                                                                                         | 2026-07-20 |
+| **APZHUB-1.2-004** (R12-OPS-03)                        | **ACCEPTED / CLOSED**                                                                                                                                                           | 2026-07-20 |
+| **APZHUB-1.2-005** (R12-SEARCH-01)                     | **ACCEPTED / CLOSED**                                                                                                                                                           | 2026-07-20 |
+| **APZHUB-1.2-006** (R12-SEARCH-02)                     | **ACCEPTED / CLOSED** — authorises APZHUB-1.2-007                                                                                                                               | 2026-07-20 |
+| **APZHUB-1.2-007** (R12-TCMS-01)                       | **ACCEPTED / CLOSED** — authorises APZHUB-1.2-008                                                                                                                               | 2026-07-20 |
+| **APZHUB-1.2-008** (Readiness)                         | **ACCEPTED / CLOSED** — authorises APZHUB-1.2-009                                                                                                                               | 2026-07-20 |
+| **APZHUB-1.2-009** (Platform 1.2.0)                    | **ACCEPTED / CLOSED** — Production Baseline **1.2.0** · PRWL                                                                                                                    | 2026-07-20 |
+| **APZHUB-POST-IMPLEMENTATION-001**                     | **ACCEPTED / CLOSED** — authorises continuous lifecycle transition                                                                                                              | 2026-07-20 |
+| **APZHUB-PRODUCT-LIFECYCLE-001**                       | **ACCEPTED / CLOSED** — Continuous Product Lifecycle                                                                                                                            | 2026-07-20 |
+| **APZHUB-BACKLOG-001**                                 | **ACCEPTED / CLOSED** — authorises APZHUB-ENG-0001 (R12-PERSIST-01)                                                                                                             | 2026-07-20 |
+| **APZHUB-ENG-0001** (R12-PERSIST-01)                   | **ACCEPTED / CLOSED** — authorises continuous delivery next item                                                                                                                | 2026-07-20 |
+| **APZHUB-ENG-0002** (R12-PERSIST-02)                   | **ACCEPTED / CLOSED** — authorises continuous delivery next item                                                                                                                | 2026-07-20 |
+| **APZHUB-ENG-0003** (R12-SUP-01)                       | **ACCEPTED / CLOSED** — authorises continuous delivery next item                                                                                                                | 2026-07-20 |
+| **APZHUB-ENG-0004** (R12-SUP-02)                       | **ACCEPTED / CLOSED** — authorises continuous delivery next item                                                                                                                | 2026-07-20 |
+| **APZHUB-ENG-0005** (R12-QA-01)                        | **ACCEPTED / CLOSED** — authorises analysis programme APZHUB-QA-RECERT-001                                                                                                      | 2026-07-20 |
+| **APZHUB-QA-RECERT-001**                               | **ACCEPTED / CLOSED** — authorises remediation ENG programmes per Owner Approval                                                                                                | 2026-07-20 |
+| **APZHUB-ENG-0006** (RG-HEALTH-503 → RG-AUTH-SHELL)    | **ACCEPTED / CLOSED**                                                                                                                                                           | 2026-07-20 |
+| **APZHUB-ENG-0007** (RG-LAW-DNS)                       | **ACCEPTED / CLOSED**                                                                                                                                                           | 2026-07-21 |
+| **APZHUB-ENG-0008** (RG-A11Y-CONTRAST)                 | **ACCEPTED / CLOSED**                                                                                                                                                           | 2026-07-21 |
+| **APZHUB-ENG-0009** (RG-MOCK-FETCH)                    | **ACCEPTED / CLOSED**                                                                                                                                                           | 2026-07-21 |
+| **APZHUB-ENG-0010** (RG-PW-API)                        | **ACCEPTED / CLOSED**                                                                                                                                                           | 2026-07-21 |
+| **APZHUB-ENG-0011** (RG-SELECTORS)                     | **ACCEPTED / CLOSED**                                                                                                                                                           | 2026-07-21 |
+| **APZHUB-ENG-0012** (RG-METRICS-WB)                    | **ACCEPTED / CLOSED**                                                                                                                                                           | 2026-07-21 |
+| **APZHUB-ENG-0013** (RG-TCMS-WB)                       | **ACCEPTED / CLOSED**                                                                                                                                                           | 2026-07-21 |
+| **APZHUB-ENG-0014** (RG-WORKFLOW-WB)                   | **ACCEPTED / CLOSED**                                                                                                                                                           | 2026-07-21 |
+| **APZHUB-ENG-0015** (RG-VISUAL)                        | **ACCEPTED / CLOSED**                                                                                                                                                           | 2026-07-21 |
+| **APZHUB-QA-CERT-001**                                 | **ACCEPTED / CLOSED** — result **CERTIFICATION FAILED** · residual analysis → QA-RECERT-002                                                                                     | 2026-07-21 |
+| **APZHUB-QA-RECERT-002**                               | **ACCEPTED / CLOSED** — Wave 2 engineering plan · authorises ENG-0016                                                                                                           | 2026-07-21 |
+| **APZHUB-ENG-0016**                                    | **ACCEPTED / CLOSED** — RG-LAW-SUITE-SCOPE + RG-LAW-HOST-QUALITY · authorises ENG-0017                                                                                          | 2026-07-21 |
+| **APZHUB-ENG-0017**                                    | **ACCEPTED / CLOSED** — RG-CERT-PIN-DRIFT · authorises ENG-0018                                                                                                                 | 2026-07-21 |
+| **APZHUB-ENG-0018**                                    | **ACCEPTED / CLOSED** — RG-LAW-API-AUTHZ + RG-LAW-SEARCH-INT · authorises ENG-0019                                                                                              | 2026-07-21 |
+| **APZHUB-ENG-0019**                                    | **ACCEPTED / CLOSED** — RG-AUTH-SHELL-RESIDUAL · authorises ENG-0020                                                                                                            | 2026-07-21 |
+| **APZHUB-ENG-0020**                                    | **ACCEPTED / CLOSED** — RG-SUPPORT-CERT + RG-OBSERVE-WB + RG-VISUAL-INBOX · authorises ENG-0021                                                                                 | 2026-07-21 |
+| **APZHUB-ENG-0021**                                    | **ACCEPTED / CLOSED** — RG-TESTING-ARCH · Wave 2 complete · authorises QA-CERT-002                                                                                              | 2026-07-21 |
+| **APZHUB-QA-CERT-002**                                 | Awaiting Certification Acceptance — result **CERTIFICATION FAILED**                                                                                                             | 2026-07-21 |
+| **Platform-1.3-ADR-0070**                              | **ACCEPTED** — Observe Live Alert Evaluation & Delivery                                                                                                                         | 2026-07-22 |
+| **Platform-1.3-ENG-002**                               | **ACCEPTED** — Observe Live Alerts Phase A                                                                                                                                      | 2026-07-22 |
+| **Platform-1.3-ADR-0072**                              | **ACCEPTED** — Platform Realtime Transport (SSE) · authorises ENG-003                                                                                                           | 2026-07-22 |
+| **Platform-1.3-ENG-003**                               | **ACCEPTED** — Support Realtime SSE · authorises ADR-0071 programme                                                                                                             | 2026-07-22 |
+| **Platform-1.3-ADR-0071**                              | **ACCEPTED** — Notification Delivery Providers and Routing (Option D)                                                                                                           | 2026-07-22 |
+| **Platform-1.3-ENG-004**                               | **ACCEPTED** — Notification Delivery Phase A                                                                                                                                    | 2026-07-22 |
+| **Platform-1.3-CERT-001**                              | **HISTORICAL** — recommendation **NOT READY FOR PRODUCTION** (not overwritten by CERT-002)                                                                                      | 2026-07-22 |
+| **Platform-1.3-RR-001**                                | **ACCEPTED** — CERT QF-01…04 remediated · [pack](../engineering/platform-1.3-rr-001/README.md)                                                                                  | 2026-07-23 |
+| **Platform-1.3-CERT-002**                              | **ACCEPTED** — Platform 1.3 **CLOSED** · **PRODUCTION READY WITH LIMITATIONS** · [pack](../engineering/platform-1.3-cert-002/README.md)                                         | 2026-07-23 |
+| **Platform-1.4-ARCH-001**                              | **ACCEPTED** — Platform 1.4 theme & scope · [pack](../strategy/platform-1.4/README.md)                                                                                          | 2026-07-23 |
+| **Platform-1.4-ADR-0073**                              | **ACCEPTED** — Option A PostgreSQL durable runtime · [pack](../architecture/adr-0073/README.md)                                                                                 | 2026-07-23 |
+| **Platform-1.4-ENG-001A**                              | **ACCEPTED** — Durable Notification Runtime Technical Design · [pack](../engineering/platform-1.4-eng-001a/README.md)                                                           | 2026-07-23 |
+| **Platform-1.4-ENG-001B-P0**                           | **ACCEPTED** — Phase 0 contracts & schema · [pack](../engineering/platform-1.4-eng-001b-p0/README.md)                                                                           | 2026-07-23 |
+| **Platform-1.4-ENG-001B-P1**                           | **ACCEPTED** — Phase 1 persistence · [pack](../engineering/platform-1.4-eng-001b-p1/README.md)                                                                                  | 2026-07-23 |
+| **Platform-1.4-ENG-001B-P2**                           | **ACCEPTED / CLOSED** — Phase 2 claim & lease · [pack](../engineering/platform-1.4-eng-001b-p2/README.md)                                                                       | 2026-07-23 |
+| **Platform-1.4-ENG-001B-P3**                           | **ACCEPTED** — Phase 3 dispatch · [pack](../engineering/platform-1.4-eng-001b-p3/README.md)                                                                                     | 2026-07-23 |
+| **Platform-1.4-ENG-001B-P4**                           | **ACCEPTED** — Phase 4 admin/ops · [pack](../engineering/platform-1.4-eng-001b-p4/README.md)                                                                                    | 2026-07-23 |
+| **Platform-1.4-ENG-001B-P5**                           | **PROPOSED / BLOCKED** · engineering closed · [stub](../engineering/platform-1.4-eng-001b-p5/README.md)                                                                         | 2026-07-23 |
+| **Platform-1.4-OR-001**                                | **ACCEPTED** — Operational readiness · [pack](../operations/platform-1.4-or-001/README.md)                                                                                      | 2026-07-23 |
+| **Platform-1.4-REM-001**                               | **ACCEPTED** — OR-DEF remediation · [pack](../operations/platform-1.4-rem-001/README.md)                                                                                        | 2026-07-23 |
+| **Platform-1.4-BLD-001**                               | **ACCEPTED** — Build & release validation · [pack](../operations/platform-1.4-bld-001/README.md)                                                                                | 2026-07-23 |
+| **Platform-1.4-CERT-001**                              | **ACCEPTED** — **PRODUCTION READY WITH OPERATIONAL QUALIFICATIONS** · [pack](../operations/platform-1.4-cert-001/README.md)                                                     | 2026-07-23 |
+| **APZHUB-PRODUCTS-002**                                | **ACCEPTED** — Product Engineering Framework Certification · [pack](../products/framework/README.md)                                                                            | 2026-07-23 |
+| **APZHUB-PRODUCTS-003**                                | **ACCEPTED** — Product Definition Standard · [pack](../products/definition/README.md)                                                                                           | 2026-07-24 |
+| **APZHUB-PRODUCTS-004**                                | **ACCEPTED** — Requirements Engineering Standard · [pack](../products/requirements/README.md)                                                                                   | 2026-07-24 |
+| **APZTCMS-REQ-001**                                    | **PRESERVED** — historical TCMS Requirements Baseline (product → APZ QEP) · [pack](../products/apztcms/requirements/README.md) · input to **APZQEP-REQ-001**                    | 2026-07-24 |
+| **APZQEP-TRANSITION-001**                              | **ACCEPTED** — APZ QEP Product Vision & Repository Transition · [pack](../products/apzqep/README.md)                                                                            | 2026-07-24 |
+| **APZQEP-REQ-001**                                     | **ACCEPTED** — APZ QEP Product Requirements Baseline · [pack](../products/apzqep/requirements/README.md)                                                                        | 2026-07-24 |
+| **APZQEP-DISCOVERY-001**                               | **ACCEPTED** — APZ QEP Product Discovery & Competitive Intelligence · [pack](../products/apzqep/discovery/README.md)                                                            | 2026-07-24 |
+| **APZQEP-CONSTITUTION-001**                            | **ACCEPTED / CLOSED** — APZ QEP Product Constitution & Engineering Guardrails · [pack](../products/apzqep/constitution/README.md)                                                | 2026-07-24 |
+| **APZQEP-DEF-001**                                     | **ACCEPTED** — APZ QEP Product Definition Baseline (structure) · [pack](../products/apzqep/product-definition/README.md)                                                        | 2026-07-24 |
+| **APZQEP-DEF-002**                                     | **ACCEPTED** — Product Definition Expansion & Consolidation · [pack](../products/apzqep/product-definition/README.md)                                                           | 2026-07-24 |
+| **APZQEP-ARCH-001**                                    | **ACCEPTED** — Enterprise Architecture Baseline · [pack](../products/apzqep/architecture/README.md)                                                                              | 2026-07-24 |
+| **APZQEP-PLAN-001**                                    | **ACCEPTED** — Engineering Delivery Plan & Implementation Roadmap · [pack](../products/apzqep/engineering-plan/README.md)                                                        | 2026-07-24 |
+| **APZQEP-ENG-010**                                     | **ACCEPTED** — Engineering Foundation & Repository Bootstrap · [pack](../products/apzqep/engineering/README.md)                                                                  | 2026-07-24 |
+| **APZQEP-ENG-020A**                                    | **ACCEPTED / CLOSED** — Requirements Domain Foundation · [pack](../products/apzqep/requirements/domain-foundation/README.md) · [acceptance](../products/apzqep/requirements/domain-foundation/OWNER-ACCEPTANCE.md) | 2026-07-24 |
+| **APZQEP-ENG-020B**                                    | **ACCEPTED / CLOSED** — Requirements Persistence & CRUD Foundation · [pack](../products/apzqep/requirements/crud-foundation/README.md) · [acceptance](../products/apzqep/requirements/crud-foundation/OWNER-ACCEPTANCE.md) | 2026-07-24 |
+| **APZQEP-ENG-020C**                                    | **ACCEPTED / CLOSED** — Requirements Lifecycle Engine · [pack](../products/apzqep/requirements/lifecycle/README.md) · [acceptance](../products/apzqep/requirements/lifecycle/OWNER-ACCEPTANCE.md)               | 2026-07-25 |
+| **APZQEP-ENG-020D**                                    | **ACCEPTED / CLOSED / COMPLETE** — Requirements Content Versioning · [pack](../products/apzqep/requirements/versioning/README.md) · [acceptance](../products/apzqep/requirements/versioning/OWNER-ACCEPTANCE.md) · Evidence `20260725T160000Z-APZQEP-ENG-020D.json` · Acceptance `20260725T170000Z-APZQEP-ENG-020D-ACCEPTANCE.json` | 2026-07-25 |
+| **APZQEP-ENG-020E** (Parts 1–3)                        | **ACCEPTED / CLOSED / COMPLETE** — Requirements Baselines · [pack](../products/apzqep/requirements/baselines/README.md) · [acceptance](../products/apzqep/requirements/baselines/OWNER-ACCEPTANCE.md) · Evidence `20260725T174800Z-APZQEP-ENG-020E-PART1.json`, `20260725T190000Z-APZQEP-ENG-020E-PART2.json`, `20260725T203000Z-APZQEP-ENG-020E.json` · Acceptance `20260726T080000Z-APZQEP-ENG-020E-ACCEPTANCE.json` | 2026-07-26 |
+| **APZQEP-ARCH-005**                                    | **ACCEPTED / CLOSED / COMPLETE** — Requirements Relationship Architecture (Authoritative) · [pack](../products/apzqep/architecture/requirements-relationship/README.md) · [acceptance](../products/apzqep/architecture/requirements-relationship/OWNER-ACCEPTANCE.md) · Evidence `20260726T073000Z-APZQEP-ARCH-005.json` · Acceptance `20260726T075000Z-APZQEP-ARCH-005-ACCEPTANCE.json` | 2026-07-26 |
+
+---
+
+## Not accepted by this register (remain open)
+
+| Item                                                                         | Status                                                                    |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| APZ Support **2.0** planning                                                 | Awaiting Acceptance (product planning — not Foundation)                   |
+| APZ-ANALYTICS-002                                                            | **ACCEPTED / CLOSED** (Owner Decision with Platform 1.0)                  |
+| APZ-WORKFLOW-002                                                             | **ACCEPTED / CLOSED** (Owner Decision with Platform 1.0)                  |
+| APZ-TCMS-002                                                                 | **ACCEPTED / CLOSED** (Owner Decision with APZ-LAW-001)                   |
+| APZ-LAW-001                                                                  | **ACCEPTED / CLOSED** (Owner Decision with APZ-LAW-002)                   |
+| APZ-LAW-002                                                                  | **ACCEPTED / CLOSED** (Owner Decision with Platform 1.0)                  |
+| APZHUB-PORTFOLIO-001 (Platform 1.0)                                          | **ACCEPTED / CLOSED** (Owner Decision with APZHUB-RELEASE-001)            |
+| APZHUB-RELEASE-001                                                           | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.1-001                                                               | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.1-002                                                               | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.1-003                                                               | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.1-004                                                               | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.1-005                                                               | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.1-006                                                               | **ACCEPTED / CLOSED** — Platform **1.1.0** Production Baseline            |
+| APZHUB-OPERATIONS-001 (Platform Ops Framework)                               | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-GOVERNANCE-001 (Enterprise Operating Model)                           | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-STRATEGY-001 (Commercialisation & GTM)                                | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.2-001 (Release 1.2 Planning)                                        | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.2-002 (R12-OPS-01 Backup restore drill)                             | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.2-003 (R12-OPS-02 Alert strategy)                                   | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.2-004 (R12-OPS-03 Host coexistence)                                 | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.2-005 (R12-SEARCH-01)                                               | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.2-006 (R12-SEARCH-02)                                               | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.2-007 (R12-TCMS-01 GitLab CI)                                       | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.2-008 (Release 1.2 Readiness)                                       | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-1.2-009 (Platform 1.2.0 Certification)                                | **ACCEPTED / CLOSED** — Production Baseline **1.2.0**                     |
+| APZHUB-POST-IMPLEMENTATION-001 (Platform 1.2.0 PIR)                          | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-PRODUCT-LIFECYCLE-001 (Continuous Product Lifecycle)                  | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-BACKLOG-001 (Backlog Assessment)                                      | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0001 (R12-PERSIST-01 Automation journal Postgres SoR)             | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0002 (R12-PERSIST-02 Law session stores Postgres SoR)             | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0003 (R12-SUP-01 Support webhook ingress CE)                      | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0004 (R12-SUP-02 Support binary attachments CE)                   | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0005 (R12-QA-01 Portfolio Playwright/Docker re-cert path)         | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-QA-RECERT-001 (Playwright failure analysis & remediation planning)    | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0006 (RG-HEALTH-503 → RG-AUTH-SHELL)                              | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0007 (RG-LAW-DNS)                                                 | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0008 (RG-A11Y-CONTRAST)                                           | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0009 (RG-MOCK-FETCH)                                              | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0010 (RG-PW-API)                                                  | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0011 (RG-SELECTORS)                                               | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0012 (RG-METRICS-WB)                                              | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0013 (RG-TCMS-WB)                                                 | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0014 (RG-WORKFLOW-WB)                                             | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-ENG-0015 (RG-VISUAL)                                                  | **ACCEPTED / CLOSED**                                                     |
+| APZHUB-QA-CERT-001                                                           | **ACCEPTED / CLOSED** — result **CERTIFICATION FAILED**                   |
+| APZHUB-QA-RECERT-002                                                         | **ACCEPTED / CLOSED** — Wave 2 plan                                       |
+| APZHUB-ENG-0016                                                              | **ACCEPTED / CLOSED** — RG-LAW-SUITE-SCOPE + RG-LAW-HOST-QUALITY          |
+| APZHUB-ENG-0017                                                              | **ACCEPTED / CLOSED** — RG-CERT-PIN-DRIFT                                 |
+| APZHUB-ENG-0018                                                              | **ACCEPTED / CLOSED** — RG-LAW-API-AUTHZ + RG-LAW-SEARCH-INT              |
+| APZHUB-ENG-0019                                                              | **ACCEPTED / CLOSED** — RG-AUTH-SHELL-RESIDUAL                            |
+| APZHUB-ENG-0020                                                              | **ACCEPTED / CLOSED** — RG-SUPPORT-CERT + RG-OBSERVE-WB + RG-VISUAL-INBOX |
+| APZHUB-ENG-0021                                                              | **ACCEPTED / CLOSED** — RG-TESTING-ARCH · Wave 2 complete                 |
+| APZHUB-QA-CERT-002                                                           | Filed — Awaiting Certification Acceptance (**CERTIFICATION FAILED**)      |
+| Post-1.0 Workflow (designer / providers / AI / execute unlock)               | Not authorised without named Approval                                     |
+| Post-1.0 Analytics (AI / predictive / external BI / custom SQL / live embed) | Not authorised without named Approval                                     |
+| Governance dashboard **UI**                                                  | Spec only — implementation not authorised                                 |
+| Pricing / licensing enforcement                                              | Not authorised                                                            |
+
+---
+
+## Acceptance means (global)
+
+1. Accepted artefacts are **binding operational references**.
+2. Acceptance does **not** authorise implementation, architecture change, or Patch/Minor/Major releases.
+3. Delivery still requires a **separate named Owner Approval**.
+4. Repository remains **PRODUCTION READY** · Architecture **Frozen** · Foundation **Closed** · Operational Delivery **Active**.
+
+---
+
+## Related
+
+- [FOUNDATION-CLOSURE.md](./FOUNDATION-CLOSURE.md)
+- [OPERATIONAL-TRANSITION.md](./OPERATIONAL-TRANSITION.md)

@@ -1,0 +1,39 @@
+{
+  "programme": "APZQEP-ENG-020E",
+  "part": "1",
+  "title": "Requirements Baselines — Domain & Architecture Foundations",
+  "recordedAt": "2026-07-25T17:48:00Z",
+  "baseline": "APZQEP-ENG-020D — ACCEPTED / CLOSED / COMPLETE",
+  "state": "PART 1 FOUNDATIONS COMPLETE",
+  "acceptance": "AWAITING REMAINDER OF PROGRAMME SPECIFICATION",
+  "package": {
+    "@apzhub/qep-requirements": "0.5.0"
+  },
+  "delivered": [
+    "RequirementBaseline aggregate and value objects",
+    "Draft/Locked/Archived state policy (no unlock)",
+    "Membership items reference content versions only",
+    "Repository port (interfaces only)",
+    "Domain event types/builders",
+    "Domain tests",
+    "docs/products/apzqep/requirements/baselines/"
+  ],
+  "notDelivered": [
+    "persistence/migrations",
+    "application command services",
+    "REST APIs",
+    "Workbench UI",
+    "baseline comparison/integrity runtime",
+    "search indexing",
+    "baselines Part 2+"
+  ],
+  "tests": {
+    "command": "pnpm --filter @apzhub/qep-requirements test",
+    "result": "PASS — 11 files, 39 tests"
+  },
+  "typecheck": {
+    "command": "pnpm --filter @apzhub/qep-requirements typecheck",
+    "result": "PASS"
+  },
+  "stopRule": "No implementation beyond architectural and domain foundations until Owner issues remainder of ENG-020E programme specification."
+}

@@ -28,6 +28,7 @@ import {
   handleGetSupportArticle,
   handleCreateInternalNote,
   handleCreateCustomerReply,
+  handleDownloadSupportAttachment,
   handleGetSupportHistory,
   handleListOrganizations,
   handleGetOrganization,
@@ -57,6 +58,7 @@ import {
   API_TEST_SGRP_ID,
   API_TEST_SUSER_ID,
   API_TEST_SART_ID,
+  API_TEST_SATT_ID,
   buildMockSession,
   buildTestServiceContext,
   installMockGateway,
@@ -388,6 +390,29 @@ describe("OSS-110-11 Support HTTP API", () => {
       );
       expect(response.status).toBe(200);
       expect((await response.json()).data.id).toBe(API_TEST_SART_ID);
+    });
+
+    it("downloads a binary attachment", async () => {
+      const calls: string[] = [];
+      installMockGateway({ onCall: (s, o) => calls.push(`${s}.${o}`) });
+      const response = await handleDownloadSupportAttachment(
+        makeRequest(
+          `/api/v1/support-requests/${API_TEST_SREQ_ID}/articles/${API_TEST_SART_ID}/attachments/${API_TEST_SATT_ID}`,
+        ),
+        makeContext(),
+        {
+          params: Promise.resolve({
+            supportRequestId: API_TEST_SREQ_ID,
+            articleId: API_TEST_SART_ID,
+            attachmentId: API_TEST_SATT_ID,
+          }),
+        },
+      );
+      expect(response.status).toBe(200);
+      const body = await response.json();
+      expect(body.data.id).toBe(API_TEST_SATT_ID);
+      expect(body.data.dataBase64).toBe("aGVsbG8=");
+      expect(calls).toContain("supportArticles.downloadAttachment");
     });
   });
 
@@ -868,6 +893,11 @@ describe("OSS-110-11 Support HTTP API", () => {
       ).toBeTruthy();
       expect(
         spec.paths["/support-requests/{supportRequestId}/articles/{articleId}"],
+      ).toBeTruthy();
+      expect(
+        spec.paths[
+          "/support-requests/{supportRequestId}/articles/{articleId}/attachments/{attachmentId}"
+        ],
       ).toBeTruthy();
       expect(spec.paths["/support-requests/{supportRequestId}/history"]).toBeTruthy();
       expect(spec.paths["/support-organizations"]).toBeTruthy();

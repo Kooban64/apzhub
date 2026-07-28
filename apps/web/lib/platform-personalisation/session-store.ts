@@ -26,12 +26,17 @@ export function createPlatformPersonalisationSessionStore(): SessionStore {
     },
 
     async save(_userId: string, payload: WorkbenchSessionPayload): Promise<void> {
-      await fetch(LAYOUT_URL, {
+      const response = await fetch(LAYOUT_URL, {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+      if (!response.ok) {
+        throw new Error(
+          `Workbench layout persist failed: HTTP ${String(response.status)}`,
+        );
+      }
     },
 
     async clear(_userId: string): Promise<void> {

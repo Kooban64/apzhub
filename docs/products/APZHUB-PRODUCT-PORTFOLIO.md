@@ -27,17 +27,17 @@ Product Engineering (ACTIVE — portfolio defined; no implementation authorised)
 
 ## 2. Portfolio overview
 
-| User-facing product | Portfolio folder           | Type                              | Primary commercial role         |
-| ------------------- | -------------------------- | --------------------------------- | ------------------------------- |
-| **APZ Projects**    | [projects/](./projects/)   | Productivity product (OSS-backed) | Suite                           |
-| **APZ Time**        | [time/](./time/)           | Productivity product (OSS-backed) | Suite                           |
-| **APZ Support**     | [support/](./support/)     | Productivity product (OSS-backed) | Suite                           |
-| **APZ Documents**   | [documents/](./documents/) | Platform-native documents product | Suite                           |
-| **APZ Analytics**   | [analytics/](./analytics/) | Productivity product (OSS-backed) | Suite                           |
-| **APZ Workflow**    | [workflow/](./workflow/)   | Workflow / automation product     | Suite                           |
-| **Law Platform**    | [law/](./law/)             | Vertical product (native)         | **Primary commercial offering** |
+| User-facing product | Portfolio folder                                                                       | Type                              | Primary commercial role         |
+| ------------------- | -------------------------------------------------------------------------------------- | --------------------------------- | ------------------------------- |
+| **APZ Projects**    | [projects/](./projects/)                                                               | Productivity product (OSS-backed) | Suite                           |
+| **APZ Time**        | [time/](./time/)                                                                       | Productivity product (OSS-backed) | Suite                           |
+| **APZ Support**     | [support/](./support/)                                                                 | Productivity product (OSS-backed) | Suite                           |
+| **APZ Documents**   | [documents/](./documents/) · [apz-documents/](./apz-documents/) (Release 1.0 planning) | Platform-native documents product | Suite                           |
+| **APZ Analytics**   | [analytics/](./analytics/) · [apz-analytics/](./apz-analytics/)                        | Productivity product (OSS-backed) | Suite                           |
+| **APZ Workflow**    | [workflow/](./workflow/)                                                               | Workflow / automation product     | Suite                           |
+| **Law Platform**    | [law/](./law/)                                                                         | Vertical product (native)         | **Primary commercial offering** |
 
-Related platform / specialised products (indexed in KF; not Phase 3 portfolio folders above): **APZ TCMS** (Testing), Platform Administration / Identity / Configuration / Notifications / Observability / Metrics / Search / Reporting — see [PRODUCT-CATALOGUE](../foundation/PRODUCT-CATALOGUE.md).
+Related platform / specialised products (indexed in KF; not Phase 3 portfolio folders above): **APZ TCMS** (Testing) — commercial SemVer **1.0.0** [evidence](../releases/tcms/1.0.0/README.md) (APZ-TCMS-002 **ACCEPTED / CLOSED**); **APZ Law** — commercial SemVer **1.0.0** [evidence](../releases/law/1.0.0/README.md) (APZ-LAW-002 **ACCEPTED / CLOSED**); Platform Administration / Identity / Configuration / Notifications / Observability / Metrics / Search / Reporting — see [PRODUCT-CATALOGUE](../foundation/PRODUCT-CATALOGUE.md).
 
 ---
 
@@ -93,65 +93,65 @@ Related platform / specialised products (indexed in KF; not Phase 3 portfolio fo
 
 ### 3.4 APZ Documents
 
-| Field                     | Detail                                                                                          |
-| ------------------------- | ----------------------------------------------------------------------------------------------- |
-| **Purpose**               | Enterprise document metadata, versions, and discovery inside APZHUB                             |
-| **Business value**        | Single document plane for products (incl. Law); searchable, permissioned content                |
-| **Primary users**         | Knowledge workers, legal staff, project teams                                                   |
-| **Major capabilities**    | Document metadata SoR, versions, permissions, Search publication, Workbench                     |
-| **Platform dependencies** | Document contracts/core/persistence · Search · IAM/Authz · Gateway · Workbench                  |
-| **External integrations** | **Native platform Documents** (APZDOCS-001…006 frozen). **No Paperless-ngx adapter** on disk    |
-| **Current maturity**      | **Production** (platform Documents **PRODUCTION_READY_WITH_LIMITATIONS** · architecture frozen) |
-| **Future roadmap**        | Product packaging; optional future OSS engine only via ADR + Owner                              |
-| **Known limitations**     | Metadata-first posture; binary/engine choices constrained by freeze                             |
+| Field                     | Detail                                                                                                                                                                     |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Purpose**               | Enterprise document metadata, versions, and discovery inside APZHUB                                                                                                        |
+| **Business value**        | Single document plane for products (incl. Law); searchable, permissioned content                                                                                           |
+| **Primary users**         | Knowledge workers, legal staff, project teams                                                                                                                              |
+| **Major capabilities**    | Document metadata SoR, versions, permissions, Search publication, Workbench                                                                                                |
+| **Platform dependencies** | Document contracts/core/persistence · Search · IAM/Authz · Gateway · Workbench                                                                                             |
+| **External integrations** | **Native platform Documents** (APZDOCS-001…006 frozen). **No Paperless-ngx adapter** on disk                                                                               |
+| **Current maturity**      | **Production** — SemVer **1.0.0** PRWL · APZ-DOCUMENTS-002 **ACCEPTED / CLOSED** · recommendation **PRODUCTION READY** ([evidence](../releases/documents/1.0.0/README.md)) |
+| **Future roadmap**        | Patch/Minor/Major naming only; optional Paperless only via ADR + Owner                                                                                                     |
+| **Known limitations**     | Metadata-first posture; binary/engine choices constrained by freeze; no Paperless adapter                                                                                  |
 
 ---
 
 ### 3.5 APZ Analytics
 
-| Field                     | Detail                                                                           |
-| ------------------------- | -------------------------------------------------------------------------------- |
-| **Purpose**               | Cross-product analytics and dashboards for operators and leaders                 |
-| **Business value**        | Decision support without exposing Metabase (or other) branding                   |
-| **Primary users**         | Executives, ops leads, product owners                                            |
-| **Major capabilities**    | Dashboards, datasets, governed queries (planned)                                 |
-| **Platform dependencies** | Workbench · IAM/Authz · Metrics/Reporting (adjacent) · Gateway                   |
-| **External integrations** | **Metabase** (planned) — **absent on disk**                                      |
-| **Current maturity**      | **Concept**                                                                      |
-| **Future roadmap**        | Strategy → ADR → Integration SDK adapter → Platform Analytics service → UI       |
-| **Known limitations**     | No package or connector; do not confuse with platform Metrics/Observability SoRs |
+| Field                     | Detail                                                                                                                                                                              |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Purpose**               | Cross-product analytics and dashboards for operators and leaders                                                                                                                    |
+| **Business value**        | Decision support without exposing Metabase (or other) branding                                                                                                                      |
+| **Primary users**         | Executives, ops leads, product owners                                                                                                                                               |
+| **Major capabilities**    | Curated suites · dashboards · datasets · reports · saved · search · health · diagnostics                                                                                            |
+| **Platform dependencies** | Workbench · IAM/Authz · Analytics Platform Services · Gateway                                                                                                                       |
+| **External integrations** | **Metabase** — `@apzhub/integration-metabase` **0.1.0** CERTIFIED_FOUNDATION                                                                                                        |
+| **Current maturity**      | **Production** — **1.0.0** (**Awaiting Acceptance** APZ-ANALYTICS-002 **ACCEPTED / CLOSED**; PRODUCTION_READY_WITH_LIMITATIONS) · [evidence](../releases/analytics/1.0.0/README.md) |
+| **Future roadmap**        | 1.0.x / 1.1.0 / 2.0.0 naming only — Owner Approvals required; no AI/SQL/external BI without Approval                                                                                |
+| **Known limitations**     | [apz-analytics/KNOWN-LIMITATIONS.md](./apz-analytics/KNOWN-LIMITATIONS.md) — no live embed; in-memory registry MVP; Metabase foundation                                             |
 
 ---
 
 ### 3.6 APZ Workflow
 
-| Field                     | Detail                                                                                                                          |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| **Purpose**               | Define, govern, and observe automation workflows under APZHUB                                                                   |
-| **Business value**        | Orchestration across products without n8n-facing UX                                                                             |
-| **Primary users**         | Automation builders, ops, product admins                                                                                        |
-| **Major capabilities**    | Workflow SoR (metadata) · Workflow Engine (read-only discovery/diagnostics) · templates                                         |
-| **Platform dependencies** | Workflow contracts/core/persistence · Integration SDK · Gateway · Workbench · Authz                                             |
-| **External integrations** | **n8n** — `@apzhub/integration-n8n` **0.1.0** Reference Adapter (APZWORKFLOW-006…011 frozen)                                    |
-| **Current maturity**      | **Production** (**PRODUCTION_READY_WITH_LIMITATIONS**; read-only engine wave)                                                   |
-| **Future roadmap**        | Further engine capabilities only via Owner-approved roadmap (e.g. historically noted APZWORKFLOW-012) — **no ID invented here** |
-| **Known limitations**     | No execution/scheduling/credential mutation in certified wave; env-gated live adapter                                           |
+| Field                     | Detail                                                                                                                                                    |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Purpose**               | Define, govern, and observe automation workflows under APZHUB                                                                                             |
+| **Business value**        | Orchestration across products without n8n-facing UX                                                                                                       |
+| **Primary users**         | Automation builders, ops, product admins                                                                                                                  |
+| **Major capabilities**    | Definitions · runs · schedules · tasks · approvals · notifications · health/diagnostics · Workbench                                                       |
+| **Platform dependencies** | Workflow contracts/core/persistence · Integration SDK · Gateway · Workbench · Authz · Workflow Platform Services/HTTP                                     |
+| **External integrations** | **n8n** — `@apzhub/integration-n8n` **0.1.0** CERTIFIED_FOUNDATION; future providers planned                                                              |
+| **Current maturity**      | **Production** — **1.0.0** (**ACCEPTED / CLOSED** APZ-WORKFLOW-002; PRODUCTION_READY_WITH_LIMITATIONS) · [evidence](../releases/workflow/1.0.0/README.md) |
+| **Future roadmap**        | 1.0.x / 1.1.0 / 2.0.0 naming only — Owner Approvals required; no designer/AI/extra providers/execute unlock without Approval                              |
+| **Known limitations**     | [apz-workflow/KNOWN-LIMITATIONS.md](./apz-workflow/KNOWN-LIMITATIONS.md) — n8n foundation execute limits; in-memory modes; no designer-first UX           |
 
 ---
 
 ### 3.7 Law Platform
 
-| Field                     | Detail                                                                                                                        |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| **Purpose**               | Legal practice management — matters, clients, documents, time, billing, trust                                                 |
-| **Business value**        | **Primary commercial vertical**; demonstrates APZHUB as an enterprise operating platform                                      |
-| **Primary users**         | Lawyers, paralegals, practice managers, trust accountants                                                                     |
-| **Major capabilities**    | Matters · Clients · Documents · Tasks · Time · Invoices · Calendar · Trust Accounting (LAW-015 closed)                        |
-| **Platform dependencies** | Workbench · IAM/Authz · Search/Knowledge · Notifications · Activity · Documents patterns · Events/Outbox · Gateway            |
-| **External integrations** | Native Law persistence (platform PostgreSQL schemas); consumes platform capabilities — not Plane/Zammad for core Law SoR      |
-| **Current maturity**      | **In Development** — LAW-001…015 milestones closed; readiness approved for product validation; commercial packaging continues |
-| **Future roadmap**        | Owner-approved Law product programmes for validation polish, UX, and commercial readiness (no IDs invented)                   |
-| **Known limitations**     | Placeholder UX surfaces remain in places; Financial Engine extraction **deferred** (FIN-001)                                  |
+| Field                     | Detail                                                                                                                   |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Purpose**               | Legal practice management — matters, clients, documents, time, billing, trust                                            |
+| **Business value**        | **Primary commercial vertical**; demonstrates APZHUB as an enterprise operating platform                                 |
+| **Primary users**         | Lawyers, paralegals, practice managers, trust accountants                                                                |
+| **Major capabilities**    | Matters · Clients · Documents · Tasks · Time · Invoices · Calendar · Trust Accounting (LAW-015 closed)                   |
+| **Platform dependencies** | Workbench · IAM/Authz · Search/Knowledge · Notifications · Activity · Documents patterns · Events/Outbox · Gateway       |
+| **External integrations** | Native Law persistence (platform PostgreSQL schemas); consumes platform capabilities — not Plane/Zammad for core Law SoR |
+| **Current maturity**      | **Production** — SemVer **1.0.0** PRWL · APZ-LAW-002 **ACCEPTED / CLOSED** ([evidence](../releases/law/1.0.0/README.md)) |
+| **Future roadmap**        | Patch/Minor/Major naming only; polish / OBS / FIN-001 / Email SoR only via Owner                                         |
+| **Known limitations**     | Placeholder UX surfaces remain in places; Financial Engine extraction **deferred** (FIN-001)                             |
 
 ---
 
@@ -179,15 +179,15 @@ Related platform / specialised products (indexed in KF; not Phase 3 portfolio fo
            Kimai **0.2.0** · (Metabase · Paperless — planned / absent)
 ```
 
-| Product       | Requires platform       | Shared capabilities used                           | Integration (today)   |
-| ------------- | ----------------------- | -------------------------------------------------- | --------------------- |
-| APZ Projects  | Gateway, Workbench, IAM | Search, Events, Notifications                      | Plane **0.6.0**       |
-| APZ Time      | Gateway, Workbench, IAM | Reporting (future), Events                         | Kimai **0.2.0**       |
-| APZ Support   | Gateway, Workbench, IAM | Search, Notifications                              | Zammad **0.6.0**      |
-| APZ Documents | Gateway, Workbench, IAM | Search publication, Permissions                    | Native Documents SoR  |
-| APZ Analytics | Gateway, Workbench, IAM | Metrics/Reporting adjacency                        | Metabase — **absent** |
-| APZ Workflow  | Gateway, Workbench, IAM | Workflow SoR/Engine, Integration SDK               | n8n **0.1.0**         |
-| Law Platform  | Gateway, Workbench, IAM | Documents, Search, Notifications, Activity, Outbox | Native Law schemas    |
+| Product       | Requires platform       | Shared capabilities used                           | Integration (today)                     |
+| ------------- | ----------------------- | -------------------------------------------------- | --------------------------------------- |
+| APZ Projects  | Gateway, Workbench, IAM | Search, Events, Notifications                      | Plane **0.6.0**                         |
+| APZ Time      | Gateway, Workbench, IAM | Reporting (future), Events                         | Kimai **0.2.0**                         |
+| APZ Support   | Gateway, Workbench, IAM | Search, Notifications                              | Zammad **0.6.0**                        |
+| APZ Documents | Gateway, Workbench, IAM | Search publication, Permissions                    | Native Documents SoR                    |
+| APZ Analytics | Gateway, Workbench, IAM | Metrics/Reporting adjacency                        | Metabase **0.1.0** CERTIFIED_FOUNDATION |
+| APZ Workflow  | Gateway, Workbench, IAM | Workflow SoR/Engine, Integration SDK               | n8n **0.1.0**                           |
+| Law Platform  | Gateway, Workbench, IAM | Documents, Search, Notifications, Activity, Outbox | Native Law schemas                      |
 
 **Layer rule (mandatory):** Module → Platform Service → Connector → Engine. Products never call engines or connectors directly.
 
@@ -197,15 +197,15 @@ Related platform / specialised products (indexed in KF; not Phase 3 portfolio fo
 
 Strategic recommendation only. **Does not authorise implementation.** **Does not invent programme IDs.**
 
-| Order | Product           | Rationale                                                                           |
-| ----- | ----------------- | ----------------------------------------------------------------------------------- |
-| **1** | **Law Platform**  | Highest commercial value; deepest vertical delivery; primary offering               |
-| **2** | **APZ Support**   | Already production-certified with limitations; high user impact; packaging/polish   |
-| **3** | **APZ Projects**  | **Production 1.1.0** (**ACCEPTED / CLOSED**); further releases Owner-gated          |
-| **4** | **APZ Documents** | Platform Documents production-ready; product packaging + Law adjacency              |
-| **5** | **APZ Workflow**  | Engine/SoR frozen; product UX and governed expansion under Owner control            |
-| **6** | **APZ Time**      | **Production 1.0.0** — further releases Owner-gated                                 |
-| **7** | **APZ Analytics** | Valuable but lowest technical readiness (Metabase absent); depends on data maturity |
+| Order | Product           | Rationale                                                                                   |
+| ----- | ----------------- | ------------------------------------------------------------------------------------------- |
+| **1** | **Law Platform**  | Highest commercial value; deepest vertical delivery; primary offering                       |
+| **2** | **APZ Support**   | Already production-certified with limitations; high user impact; packaging/polish           |
+| **3** | **APZ Projects**  | **Production 1.1.0** (**ACCEPTED / CLOSED**); further releases Owner-gated                  |
+| **4** | **APZ Documents** | Platform Documents production-ready; product packaging + Law adjacency                      |
+| **5** | **APZ Workflow**  | Engine/SoR frozen; product UX and governed expansion under Owner control                    |
+| **6** | **APZ Time**      | **Production 1.0.0** — further releases Owner-gated                                         |
+| **7** | **APZ Analytics** | **Production 1.0.0** — further releases Owner-gated (Awaiting Acceptance APZ-ANALYTICS-002) |
 
 Scoring dimensions used: business value · technical readiness · platform maturity · user impact · implementation complexity.
 
@@ -213,15 +213,15 @@ Scoring dimensions used: business value · technical readiness · platform matur
 
 ## 6. Portfolio maturity assessment
 
-| Product       | Maturity           | Evidence summary                                                               |
-| ------------- | ------------------ | ------------------------------------------------------------------------------ |
-| APZ Projects  | **Production**     | **1.1.0** ACCEPTED/CLOSED — current Production Release; limitations documented |
-| APZ Time      | **Production**     | **1.0.0** Phase 1 ACCEPTED/CLOSED — limitations documented                     |
-| APZ Support   | **Production**     | Wave 2 + UI certified with limitations                                         |
-| APZ Documents | **Production**     | APZDOCS wave frozen PRWL                                                       |
-| APZ Analytics | **Concept**        | Planned Metabase; no implementation                                            |
-| APZ Workflow  | **Production**     | APZWORKFLOW SoR + Engine frozen PRWL                                           |
-| Law Platform  | **In Development** | LAW-001…015 closed; commercial validation path open                            |
+| Product       | Maturity              | Evidence summary                                                                                             |
+| ------------- | --------------------- | ------------------------------------------------------------------------------------------------------------ |
+| APZ Projects  | **Production**        | **1.1.0** ACCEPTED/CLOSED — current Production Release; limitations documented                               |
+| APZ Time      | **Production**        | **1.0.0** Phase 1 ACCEPTED/CLOSED — limitations documented                                                   |
+| APZ Support   | **Production**        | **1.0.0** SemVer packaging (OSS-110 PRWL) — [evidence](../releases/support/1.0.0/README.md)                  |
+| APZ Documents | **Production**        | APZDOCS wave frozen PRWL                                                                                     |
+| APZ Analytics | **Production**        | **1.0.0** PRWL — Awaiting Acceptance (APZ-ANALYTICS-002) · [evidence](../releases/analytics/1.0.0/README.md) |
+| APZ Workflow  | **Production**        | **1.0.0** PRWL — Awaiting Acceptance (APZ-WORKFLOW-002) · [evidence](../releases/workflow/1.0.0/README.md)   |
+| Law Platform  | **Production** (PRWL) | SemVer **1.0.0** · APZ-LAW-002 **ACCEPTED** · [evidence](../releases/law/1.0.0/README.md)                    |
 
 ### Maturity legend
 

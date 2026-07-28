@@ -7,6 +7,7 @@ export const NOTIFICATIONS_WORKSPACE_BASE = "/workspace/notifications";
 
 export const NOTIFICATIONS_SECTIONS = [
   "overview",
+  "inbox",
   "notifications",
   "templates",
   "preferences",
@@ -20,16 +21,18 @@ export const NOTIFICATIONS_SECTIONS = [
 
 export type NotificationsSection = (typeof NOTIFICATIONS_SECTIONS)[number];
 
-/** Forbidden HTTP segments — never shipped under /api/v1/notifications. */
+/**
+ * Forbidden HTTP segments under /api/v1/notifications.
+ * ENG-004 authorises `retry` and `providers` (status/capability only).
+ * External provider channels and parallel realtime remain forbidden.
+ */
 export const NOTIFICATION_FORBIDDEN_HTTP_SEGMENTS = [
   "send",
   "resend",
   "deliver",
   "dispatch",
-  "retry",
   "schedule",
   "cancel-delivery",
-  "providers",
   "smtp",
   "sms",
   "push",
@@ -43,6 +46,9 @@ export const NOTIFICATION_FORBIDDEN_HTTP_SEGMENTS = [
   "subscribe",
   "realtime",
 ] as const;
+
+/** ENG-004 delivery-plane workspace section (in-app inbox). */
+export const NOTIFICATIONS_DELIVERY_SECTIONS = ["inbox"] as const;
 
 export function isNotificationApiPath(pathname: string): boolean {
   return (

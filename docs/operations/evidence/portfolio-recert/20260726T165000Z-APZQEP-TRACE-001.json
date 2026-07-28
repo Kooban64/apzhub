@@ -1,0 +1,46 @@
+{
+  "programme": "APZQEP-TRACE-001",
+  "title": "Traceability Capability Certification & Baseline",
+  "recordedAt": "2026-07-26T16:50:00Z",
+  "state": "IMPLEMENTED — AWAITING OWNER ACCEPTANCE",
+  "nature": "Certification only — no functional engineering",
+  "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "package": { "@apzhub/qep-traceability": "1.0.0" },
+  "module": { "qep-traceability": "1.0.0" },
+  "programmesAccepted": [
+    "APZQEP-ARCH-007",
+    "APZQEP-ENG-030A Part 1",
+    "APZQEP-ENG-030A Part 2",
+    "APZQEP-ARCH-008",
+    "APZQEP-ENG-030C"
+  ],
+  "qualityGates": {
+    "typecheck": "PASS",
+    "packageTests": "PASS (52)",
+    "uiAndPackageTests": "PASS (65)",
+    "architectureBoundaries": "PASS"
+  },
+  "versionPromotion": { "from": "0.3.0", "to": "1.0.0", "applied": true },
+  "pack": "docs/products/apzqep/traceability/capability-certification/",
+  "releaseEvidence": "docs/releases/apzqep/traceability/1.0.0/",
+  "exclusions": [
+    "Owner Acceptance of TRACE-001",
+    "Coverage Engine",
+    "Impact Engine",
+    "Verification",
+    "Evidence capability",
+    "AI",
+    "MCP",
+    "Functional code changes"
+  ],
+  "finalState": {
+    "APZQEP-ARCH-007": "ACCEPTED",
+    "APZQEP-ENG-030A-Part1": "ACCEPTED",
+    "APZQEP-ENG-030A-Part2": "ACCEPTED",
+    "APZQEP-ARCH-008": "ACCEPTED",
+    "APZQEP-ENG-030C": "ACCEPTED",
+    "APZQEP-TRACE-001": "IMPLEMENTED / AWAITING OWNER ACCEPTANCE",
+    "@apzhub/qep-traceability": "1.0.0"
+  },
+  "stopRule": "Await Owner Acceptance of TRACE-001. Do not begin Coverage, Impact, Verification, AI, or MCP."
+}

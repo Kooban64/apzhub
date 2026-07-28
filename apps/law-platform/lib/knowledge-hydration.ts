@@ -1,7 +1,6 @@
 import { headers } from "next/headers";
 
 import { getValidatedSession } from "@apzhub/auth/server";
-import { isDevRegistrationAllowed } from "@apzhub/config";
 import { mapPlatformCapabilitiesToActionRecords } from "@apzhub/command-framework/server";
 import {
   bootstrapKnowledgeRegistry,
@@ -145,9 +144,8 @@ export async function loadKnowledgeSourceRegistryDto(): Promise<KnowledgeSourceR
   const session = await getValidatedSession(await headers());
   const authContext = await createLawPlatformAuthPermissionContext(session);
   const permissionAdapter = createWorkbenchPermissionAdapter({
+    mode: "auth",
     authContext,
-    nodeEnv: process.env.NODE_ENV,
-    allowDevRegistration: isDevRegistrationAllowed(),
   });
   const filteredDto = filterKnowledgeSourceRegistryDto(
     unfilteredDto,

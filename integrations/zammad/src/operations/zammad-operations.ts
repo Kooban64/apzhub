@@ -4,10 +4,7 @@ import type { IntegrationMetricsSummary } from "@apzhub/integration-sdk/observab
 
 import { ZAMMAD_INTEGRATION_ID } from "../zammad-error-mapper";
 import type { ZammadCoreServices } from "../services/zammad-core-services";
-import {
-  certifyAttachmentPlaceholder,
-  certifyZammadCapabilities,
-} from "./capability-certification";
+import { certifyZammadCapabilities } from "./capability-certification";
 import {
   decideZammadCertificationOutcome,
   ZAMMAD_KNOWN_LIMITATIONS,
@@ -30,7 +27,7 @@ import type {
   ZammadRuntimeDiagnosticsSnapshot,
 } from "./types";
 
-const ADAPTER_VERSION = "0.6.0";
+const ADAPTER_VERSION = "0.8.0";
 const SDK_VERSION = "0.5.0";
 
 export const ZAMMAD_REFERENCE_ADAPTER_PATTERNS = [
@@ -44,7 +41,7 @@ export const ZAMMAD_REFERENCE_ADAPTER_PATTERNS = [
   "Use ZammadOperationRunner for logging, metrics, and circuit-breaker participation",
   "Expose operational reports for future administration tooling — no UI required in adapter",
   "Keep PlatformService / HTTP / UI out of the adapter package boundary",
-  "Binary attachments, webhook ingress, and Platform Event Bus remain explicitly unimplemented",
+  "Attachment delete and Support realtime remain explicitly unimplemented",
 ] as const;
 
 export interface ZammadOperationsContext {
@@ -90,7 +87,7 @@ export class ZammadOperationsService {
       providerReachable: this.deps.getApiStatus() === "reachable",
       authenticationValid: this.deps.getAuthenticationStatus() === "valid",
     });
-    return [...certified, certifyAttachmentPlaceholder()];
+    return certified;
   }
 
   getCompatibilityMatrix(): ZammadCompatibilityMatrix {
@@ -119,9 +116,7 @@ export class ZammadOperationsService {
   ): Promise<ZammadReadinessResult> {
     void context;
     const configurationValidation = await this.deps.validateConfiguration();
-    const capabilities = this.certifyCapabilities().filter(
-      (c) => c.capabilityId !== "attachments",
-    );
+    const capabilities = this.certifyCapabilities();
     const compatibility = this.getCompatibilityMatrix();
     const syncHealth = this.deps.core.synchronisation.getDiagnostics().syncHealth;
 
@@ -218,8 +213,8 @@ export class ZammadOperationsService {
               : "unknown",
       eventTranslationReadiness: Boolean(this.deps.core.events),
       persistentSyncStateSupport: false,
-      webhookIngressSupport: false,
-      binaryAttachmentSupport: false,
+      webhookIngressSupport: true,
+      binaryAttachmentSupport: true,
       apiLatencySummary: {
         lastConnectionLatencyMs: this.deps.getLastConnectionLatencyMs(),
         p95Ms: metrics.latencyP95Ms,

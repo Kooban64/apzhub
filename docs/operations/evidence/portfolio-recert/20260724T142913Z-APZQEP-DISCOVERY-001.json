@@ -1,0 +1,25 @@
+{
+  "programme": "APZQEP-DISCOVERY-001",
+  "title": "APZ QEP Product Discovery & Competitive Intelligence",
+  "classification": "PRODUCT_DISCOVERY",
+  "lifecycle": "Product Discovery",
+  "baseline": "APZQEP-REQ-001 ACCEPTED",
+  "reference": [
+    "Platform-1.4-CERT-001",
+    "APZHUB-PRODUCTS-004",
+    "APZQEP-TRANSITION-001",
+    "APZQEP-REQ-001"
+  ],
+  "timestamp": "2026-07-24T14:29:13Z",
+  "status": "ACCEPTED",
+  "acceptedAt": "2026-07-24",
+  "recommendation": "READY FOR OWNER DISCOVERY ACCEPTANCE",
+  "ownerDecision": "ACCEPTED — authorises APZQEP-CONSTITUTION-001 before DEF-001",
+  "packRoot": "docs/products/apzqep/discovery/",
+  "platformUnchanged": true,
+  "productDefinition": false,
+  "architecture": false,
+  "engineering": false,
+  "nextProgramme": "APZQEP-DEF-001",
+  "nextProgrammeStatus": "NOT_AUTHORISED_UNTIL_DISCOVERY_ACCEPTANCE"
+}

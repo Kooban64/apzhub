@@ -150,24 +150,24 @@ requireContains(
 const pkg = JSON.parse(
   readFileSync(join(ROOT, "packages/platform-services/package.json"), "utf8"),
 );
-if (pkg.version !== "0.26.1") {
+if (pkg.version !== "0.32.0") {
   violations.push({
     file: "packages/platform-services/package.json",
     line: 1,
     rule: "platform-services-version",
-    detail: `Expected 0.26.1, found ${pkg.version}`,
+    detail: `Expected 0.32.0, found ${pkg.version}`,
   });
 }
 
 const contractsPkg = JSON.parse(
   readFileSync(join(ROOT, "packages/workflow-contracts/package.json"), "utf8"),
 );
-if (contractsPkg.version !== "0.3.0") {
+if (contractsPkg.version !== "0.4.2") {
   violations.push({
     file: "packages/workflow-contracts/package.json",
     line: 1,
     rule: "workflow-contracts-version",
-    detail: `Expected 0.3.0, found ${contractsPkg.version}`,
+    detail: `Expected 0.4.2, found ${contractsPkg.version}`,
   });
 }
 
@@ -185,5 +185,5 @@ console.log(
   "  - apps/web must not import @apzhub/integration-n8n (gateway bootstrap allowed after 008)",
 );
 console.log("  - gateway.workflow.engine + workflowEngineOps + permissions present");
-console.log("  - versions: platform-services 0.26.1, workflow-contracts 0.3.0");
+console.log("  - versions: platform-services 0.32.0, workflow-contracts 0.4.2");
 process.exit(0);

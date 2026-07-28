@@ -4,8 +4,12 @@
 > **Framework:** [APZHUB-PRODUCTS-000](../README.md)  
 > **Definition Pack:** APZHUB-PRODUCTS-002  
 > **Status:** Definition Pack complete — **no product implementation authorised**  
-> **Maturity:** **Production**  
+> **Maturity:** **Production** — commercial SemVer **1.0.0** ([evidence](../../releases/documents/1.0.0/README.md)) · APZ-DOCUMENTS-002 **Awaiting Acceptance**  
 > **Portfolio entry:** [APZHUB-PRODUCT-PORTFOLIO](../APZHUB-PRODUCT-PORTFOLIO.md)
+
+## Commercial Release 1.0
+
+See **[docs/products/apz-documents/](../apz-documents/README.md)** and **[docs/releases/documents/1.0.0/](../../releases/documents/1.0.0/README.md)** (APZ-DOCUMENTS-002).
 
 ## Product Definition Pack
 

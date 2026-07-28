@@ -1,0 +1,196 @@
+/** APZ QEP product module identifiers (DEF-002 / ARCH-001). No business behaviour. */
+export const QEP_PRODUCT_ID = "apzqep" as const;
+export const QEP_PRODUCT_NAME = "APZ QEP" as const;
+export const QEP_PRODUCT_EXPANDED = "APZ Quality Engineering Platform" as const;
+
+export const QEP_MODULE_IDS = [
+  "M01",
+  "M02",
+  "M03",
+  "M04",
+  "M05",
+  "M06",
+  "M07",
+  "M08",
+  "M09",
+  "M10",
+  "M11",
+  "M12",
+  "M13",
+  "M14",
+  "M15",
+  "M16",
+  "M17",
+  "M18",
+  "M19",
+  "M20",
+  "M21",
+  "M22",
+] as const;
+
+export type QepModuleId = (typeof QEP_MODULE_IDS)[number];
+
+export type QepModuleDescriptor = {
+  id: QepModuleId;
+  slug: string;
+  packageName: string;
+  title: string;
+  status: "stub" | "planned" | "enabled";
+};
+
+export const QEP_MODULES: readonly QepModuleDescriptor[] = [
+  {
+    id: "M01",
+    slug: "home",
+    packageName: "qep-home",
+    title: "Home and Command Centre",
+    status: "stub",
+  },
+  {
+    id: "M02",
+    slug: "portfolio",
+    packageName: "qep-portfolio",
+    title: "Portfolio and Projects",
+    status: "stub",
+  },
+  {
+    id: "M03",
+    slug: "requirements",
+    packageName: "qep-requirements",
+    title: "Requirements",
+    status: "stub",
+  },
+  {
+    id: "M04",
+    slug: "verification-library",
+    packageName: "qep-verification-library",
+    title: "Verification Library",
+    status: "stub",
+  },
+  {
+    id: "M05",
+    slug: "verification-design",
+    packageName: "qep-verification-design",
+    title: "Verification Design",
+    status: "stub",
+  },
+  {
+    id: "M06",
+    slug: "execution",
+    packageName: "qep-execution",
+    title: "Execution and Sessions",
+    status: "stub",
+  },
+  {
+    id: "M07",
+    slug: "automation",
+    packageName: "qep-automation",
+    title: "Automation Management",
+    status: "stub",
+  },
+  {
+    id: "M08",
+    slug: "defects",
+    packageName: "qep-defects",
+    title: "Defects and Quality Issues",
+    status: "stub",
+  },
+  {
+    id: "M09",
+    slug: "evidence",
+    packageName: "qep-evidence",
+    title: "Evidence",
+    status: "stub",
+  },
+  {
+    id: "M10",
+    slug: "traceability",
+    packageName: "qep-traceability",
+    title: "Traceability",
+    status: "stub",
+  },
+  {
+    id: "M11",
+    slug: "risk",
+    packageName: "qep-risk",
+    title: "Risk Management",
+    status: "stub",
+  },
+  {
+    id: "M12",
+    slug: "release-readiness",
+    packageName: "qep-release-readiness",
+    title: "Release Readiness",
+    status: "stub",
+  },
+  {
+    id: "M13",
+    slug: "certification",
+    packageName: "qep-certification",
+    title: "Certification",
+    status: "stub",
+  },
+  {
+    id: "M14",
+    slug: "quality-intelligence",
+    packageName: "qep-quality-intelligence",
+    title: "Quality Intelligence",
+    status: "stub",
+  },
+  {
+    id: "M15",
+    slug: "reporting",
+    packageName: "qep-reporting",
+    title: "Reporting and Analytics",
+    status: "stub",
+  },
+  {
+    id: "M16",
+    slug: "knowledge",
+    packageName: "qep-knowledge",
+    title: "Knowledge and Learning",
+    status: "stub",
+  },
+  {
+    id: "M17",
+    slug: "ai-workspace",
+    packageName: "qep-ai-workspace",
+    title: "AI Quality Workspace",
+    status: "stub",
+  },
+  {
+    id: "M18",
+    slug: "mcp-dx",
+    packageName: "qep-mcp",
+    title: "MCP and Developer Experience",
+    status: "stub",
+  },
+  {
+    id: "M19",
+    slug: "integrations",
+    packageName: "qep-integrations",
+    title: "Integration Centre",
+    status: "stub",
+  },
+  {
+    id: "M20",
+    slug: "administration",
+    packageName: "qep-administration",
+    title: "Administration",
+    status: "stub",
+  },
+  {
+    id: "M21",
+    slug: "audit",
+    packageName: "qep-audit",
+    title: "Audit and Compliance",
+    status: "stub",
+  },
+  {
+    id: "M22",
+    slug: "search-nav",
+    packageName: "qep-search",
+    title: "Search and Navigation",
+    status: "stub",
+  },
+] as const;

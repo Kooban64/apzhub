@@ -6,8 +6,8 @@
 > **Authoritative references:** [AI-CONTEXT](./AI-CONTEXT.md) · [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [000 — Engineering Constitution](../000-apzhub-engineering-constitution.md)  
 > **Related documents:** [PROJECT-INDEX](./PROJECT-INDEX.md) · [AI-WORKFLOW](./AI-WORKFLOW.md)  
 > **Reading order:** **AI-MANIFEST first** — then this map / CURRENT-MILESTONE  
-> **Last updated:** 2026-07-19  
-> **Current status:** **Operational Delivery**; Engineering Foundation **COMPLETE**; Operating Model **ACTIVE**; QA-002 **PRODUCTION READY**; Product Engineering **ACTIVE**; APZ Projects **1.1.0** Production Release **ACCEPTED / CLOSED**; SDK frozen
+> **Last updated:** 2026-07-26  
+> **Current status:** Platform 1.4 **CERTIFIED** · Platform Engineering **CLOSED** · Maintenance Mode · Official product **APZ QEP** · Requirements / Traceability / Verification **1.0.0 CERTIFIED / FROZEN** · **APZQEP-ARCH-011** **ACCEPTED** · **APZQEP-ENG-050A** **ACCEPTED** · **APZQEP-ENG-050B** **IMPLEMENTED / AWAITING OWNER ACCEPTANCE** — [CURRENT-MILESTONE](./CURRENT-MILESTONE.md)
 
 ---
 
@@ -46,7 +46,7 @@
 | Status line at top of `docs/README.md`          | Programme-wide stop point                   |
 | "Next approved milestone (pending owner)"       | CURRENT-MILESTONE                           |
 
-**As of last update:** **Operational Delivery**. Projects **1.1.0** and Time **1.0.0** Production **ACCEPTED / CLOSED**. Support **2.0** planning **Awaiting Acceptance** (already Production — IR N/A). Do not implement Support 2.0. See [CURRENT-MILESTONE](./CURRENT-MILESTONE.md).
+**As of last update:** Platform 1.4 **CERTIFIED** · Maintenance Mode. Official product **APZ QEP**. Requirements / Traceability / Verification **1.0.0 CERTIFIED / FROZEN**. **APZQEP-ARCH-011** / **ENG-050A** **ACCEPTED**. **APZQEP-ENG-050B** Test Specifications Infrastructure — **IMPLEMENTED / AWAITING OWNER ACCEPTANCE**. Workbench **NOT AUTHORISED**. See [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [ENG-050B pack](../products/apzqep/test-specifications/engine/README.md).
 
 ---
 

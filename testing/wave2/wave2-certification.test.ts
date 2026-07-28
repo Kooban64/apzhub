@@ -30,7 +30,7 @@ import {
 const ctx = { correlationId: TEST_CORRELATION_ID, tenantId: TEST_TENANT_ID };
 
 describe("OSS-102-08 Wave 2 capability certification claims", () => {
-  it("does not certify binary attachments, webhook ingress, event bus, or persistent sync", async () => {
+  it("certifies webhook ingress and binary attachments; does not certify persistent sync", async () => {
     const { adapter, factory } = await createZammadAdapter({
       zammad: DEFAULT_TEST_ZAMMAD_CONFIG,
       tenantId: TEST_TENANT_ID,
@@ -40,22 +40,23 @@ describe("OSS-102-08 Wave 2 capability certification claims", () => {
     await adapter.testConnection(ctx);
     const caps = adapter.operations.certifyCapabilities();
     const attachments = caps.find((c) => c.capabilityId === "attachments");
-    expect(attachments?.implemented).toBe(false);
-    expect(certifyAttachmentPlaceholder().implemented).toBe(false);
+    expect(attachments?.implemented).toBe(true);
+    expect(certifyAttachmentPlaceholder().implemented).toBe(true);
 
     const webhooks = caps.find((c) => c.capabilityId === "webhooks");
-    expect(webhooks?.unsupportedOperations).toContain("webhookHttpIngress");
-    expect(webhooks?.unsupportedOperations).toContain("platformEventPublication");
+    expect(webhooks?.supportedOperations).toContain("webhookHttpIngress");
+    expect(webhooks?.supportedOperations).toContain("platformEventPublication");
 
     const sync = caps.find((c) => c.capabilityId === "synchronisation");
     expect(sync?.unsupportedOperations).toContain("persistentSyncState");
 
     const events = caps.find((c) => c.capabilityId === "events");
-    expect(events?.unsupportedOperations).toContain("platformEventPublication");
+    expect(events?.supportedOperations).toContain("platformEventPublication");
+    expect(events?.unsupportedOperations).toContain("platformEventSubscription");
 
     const report = await adapter.buildOperationalReport(ctx);
-    expect(report.diagnostics.binaryAttachmentSupport).toBe(false);
-    expect(report.diagnostics.webhookIngressSupport).toBe(false);
+    expect(report.diagnostics.binaryAttachmentSupport).toBe(true);
+    expect(report.diagnostics.webhookIngressSupport).toBe(true);
     expect(report.diagnostics.persistentSyncStateSupport).toBe(false);
     expect(report.knownLimitations).toEqual(
       expect.arrayContaining([...ZAMMAD_KNOWN_LIMITATIONS]),

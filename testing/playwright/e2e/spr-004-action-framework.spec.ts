@@ -1,25 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const DEV_EMAIL = "dev@apzhub.local";
-const DEV_PASSWORD = "DevPassword123!";
-
-async function signIn(page: import("@playwright/test").Page) {
-  await page.goto("/login");
-  await page.getByLabel("Email").fill(DEV_EMAIL);
-  await page.getByLabel("Password").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "Sign in" }).click();
-
-  try {
-    await expect(page).toHaveURL(/\/workspace\/home/, { timeout: 5000 });
-  } catch {
-    await page.goto("/register");
-    await page.getByLabel("Name").fill("Dev User");
-    await page.getByLabel("Email").fill(DEV_EMAIL);
-    await page.getByLabel("Password").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "Register" }).click();
-    await expect(page).toHaveURL(/\/workspace\/home/);
-  }
-}
+import { signInDevUser } from "./auth-helpers";
 
 test.describe("SPR-004 Action Framework integration", () => {
   test("health endpoint includes Action Framework hydration summary", async ({
@@ -45,7 +26,7 @@ test.describe("SPR-004 Action Framework integration", () => {
   test("authenticated shell hydrates workbench surfaces from Action Registry", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     await expect(page.getByTestId("toolbar")).toBeVisible();
     await expect(
@@ -65,7 +46,7 @@ test.describe("SPR-004 Action Framework integration", () => {
   });
 
   test("command palette opens and lists platform actions", async ({ page }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     await page.keyboard.press("Control+Shift+P");
     await expect(page.getByRole("dialog")).toBeVisible();
@@ -75,7 +56,7 @@ test.describe("SPR-004 Action Framework integration", () => {
   test("command palette executes an action through the registry pipeline", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     await page.keyboard.press("Control+Shift+P");
     await expect(page.getByRole("dialog")).toBeVisible();

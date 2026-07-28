@@ -1,0 +1,27 @@
+{
+  "programme": "APZQEP-REQ-001",
+  "title": "APZ QEP Product Requirements Baseline",
+  "classification": "PRODUCT_REQUIREMENTS",
+  "lifecycle": "Requirements Engineering",
+  "baseline": "APZQEP-TRANSITION-001 ACCEPTED",
+  "reference": [
+    "Platform-1.4-CERT-001",
+    "APZHUB-PRODUCTS-004",
+    "APZQEP-TRANSITION-001"
+  ],
+  "timestamp": "2026-07-24T14:08:26Z",
+  "status": "ACCEPTED",
+  "acceptedAt": "2026-07-24",
+  "recommendation": "READY FOR OWNER REQUIREMENTS ACCEPTANCE",
+  "ownerDecision": "ACCEPTED — authorises APZQEP-DISCOVERY-001 before DEF-001",
+  "officialProductName": "APZ QEP",
+  "baselineVersion": "1.0.0-req",
+  "packRoot": "docs/products/apzqep/requirements/",
+  "evolvedFrom": "docs/products/apztcms/requirements/",
+  "platformUnchanged": true,
+  "productDefinition": false,
+  "architecture": false,
+  "engineering": false,
+  "nextProgramme": "APZQEP-DEF-001",
+  "nextProgrammeStatus": "NOT_AUTHORISED_UNTIL_REQUIREMENTS_ACCEPTANCE"
+}

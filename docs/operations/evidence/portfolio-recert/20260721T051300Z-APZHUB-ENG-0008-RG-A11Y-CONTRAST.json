@@ -1,0 +1,47 @@
+{
+  "programme": "APZHUB-ENG-0008",
+  "remediationGroup": "RG-A11Y-CONTRAST",
+  "baseline": "1.2.0",
+  "timestamp": "2026-07-21T05:13:00Z",
+  "playwright": {
+    "command": "CI=true pnpm exec playwright test --config testing/playwright/playwright.config.ts --retries=1 accessibility.spec.ts oss-110-14-support-accessibility.spec.ts -g login|inbox|search|organizations",
+    "results": {
+      "passed": 4,
+      "failed": 0,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "id": "QA-F-001",
+        "title": "login page has no critical axe violations",
+        "before": "FAIL",
+        "after": "PASS"
+      },
+      {
+        "id": "QA-F-025",
+        "title": "inbox has no critical/serious axe violations",
+        "before": "FAIL",
+        "after": "PASS"
+      },
+      {
+        "id": "QA-F-026",
+        "title": "search has no critical/serious axe violations",
+        "before": "FAIL",
+        "after": "PASS"
+      },
+      {
+        "id": "QA-F-027",
+        "title": "organizations has no critical/serious axe violations",
+        "before": "FAIL",
+        "after": "PASS"
+      }
+    ]
+  },
+  "quality": {
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "unit": "PASS (ui passWithNoTests; status-bar separate)",
+    "architecture": "PASS",
+    "compatibility": "PASS"
+  }
+}

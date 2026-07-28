@@ -6,7 +6,21 @@ import type { EventNotificationContext } from "@apzhub/event-notification-framew
 
 import { createAppEventNotificationContext } from "./create-app-event-notification-context";
 
-/** Client session EventNotificationContext — shared by audit hook and notification providers. */
-export function useAppEventNotificationContext(): EventNotificationContext {
-  return useMemo(() => createAppEventNotificationContext(), []);
+export interface UseAppEventNotificationContextOptions {
+  readonly userId?: string;
+  readonly tenantId?: string;
+}
+
+/** Client session EventNotificationContext — durable store when user/tenant scoped (OBS-LAW-02). */
+export function useAppEventNotificationContext(
+  options: UseAppEventNotificationContextOptions = {},
+): EventNotificationContext {
+  const { userId, tenantId } = options;
+  return useMemo(
+    () =>
+      createAppEventNotificationContext({
+        persistenceScope: userId || tenantId ? { userId, tenantId } : undefined,
+      }),
+    [userId, tenantId],
+  );
 }

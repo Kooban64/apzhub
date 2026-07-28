@@ -1,0 +1,36 @@
+export const QEP_REQUIREMENTS_NAVIGATION = {
+  workspace: "qep",
+  activityBar: {
+    id: "qep",
+    label: "Quality",
+    icon: "flask-conical",
+    href: "/workspace/qep",
+    permission: "qep.requirements.view",
+  },
+  sidebar: {
+    id: "qep-requirements",
+    label: "Requirements",
+    icon: "list-checks",
+    href: "/workspace/qep/requirements",
+    order: 30,
+    permission: "qep.requirements.view",
+  },
+  baselinesSidebar: {
+    id: "qep-requirements-baselines",
+    label: "Baselines",
+    icon: "git-branch",
+    href: "/workspace/qep/requirements/baselines",
+    order: 31,
+    parent: "qep-requirements",
+    permission: "qep.requirements.baselines.view",
+  },
+  relationshipsSidebar: {
+    id: "qep-requirements-relationships",
+    label: "Relationships",
+    icon: "link-2",
+    href: "/workspace/qep/requirements/relationships",
+    order: 32,
+    parent: "qep-requirements",
+    permission: "qep.requirements.relationships.view",
+  },
+} as const;

@@ -19,7 +19,7 @@ import {
 import type { ZammadCapabilityCertification } from "../operations";
 
 /** Keep in sync with package.json / zammad-adapter — avoid circular import via index. */
-const ZAMMAD_ADAPTER_VERSION = "0.6.0";
+const ZAMMAD_ADAPTER_VERSION = "0.8.0";
 
 export interface ZammadHarnessMetadata {
   readonly vendorId: "zammad";

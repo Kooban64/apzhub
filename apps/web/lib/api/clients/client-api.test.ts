@@ -11,14 +11,20 @@ import {
   DELETE as deleteClient,
 } from "../../../app/api/law/v1/clients/[clientId]/route";
 import { resetClientApiMetadataCache } from "@/lib/api/clients";
-import { DEFAULT_LAW_TENANT_ID } from "@/lib/api";
+import {
+  authHeaders,
+  configureLawApiTestEnv,
+  denyAllLawApiTestPermissions,
+  enableDevPermissions,
+  mockGetValidatedSession,
+  mockIsDevRegistrationAllowed,
+  mockSession,
+  resolveSessionAuthorizationForLawApiTest,
+} from "@/lib/api/testing/law-api-test-helpers";
 import {
   resetSharedClientRepository,
   resetLawPersistenceScope,
 } from "@apzhub/law-platform/api";
-
-const mockGetValidatedSession = vi.fn();
-const mockIsDevRegistrationAllowed = vi.fn(() => false);
 
 vi.mock("@apzhub/auth/server", () => ({
   getValidatedSession: (...args: unknown[]) => mockGetValidatedSession(...args),
@@ -33,36 +39,16 @@ vi.mock("@apzhub/config", async (importOriginal) => {
 });
 
 vi.mock("@apzhub/platform-authorization/server", () => ({
-  resolveSessionAuthorization: vi.fn(async () => ({ roles: [], permissions: [] })),
+  resolveSessionAuthorization: (input?: unknown) =>
+    resolveSessionAuthorizationForLawApiTest(input),
 }));
-
-const mockSession = {
-  session: { id: "sess-1", expiresAt: new Date(Date.now() + 60_000).toISOString() },
-  user: {
-    id: "user-1",
-    email: "counsel@example.com",
-    name: "Alex Morgan",
-    emailVerified: true,
-  },
-};
-
-function authHeaders(extra: Record<string, string> = {}): Record<string, string> {
-  return {
-    "x-tenant-id": DEFAULT_LAW_TENANT_ID,
-    ...extra,
-  };
-}
 
 describe("Law Client API", () => {
   beforeEach(() => {
-    mockGetValidatedSession.mockReset();
-    mockIsDevRegistrationAllowed.mockReturnValue(false);
+    configureLawApiTestEnv();
     resetSharedClientRepository();
     resetLawPersistenceScope();
     resetClientApiMetadataCache();
-    vi.stubEnv("NODE_ENV", "test");
-    vi.stubEnv("LAW_REPOSITORY_MODE", "memory");
-    process.env.LAW_API_ALLOW_DEV_TENANT_FALLBACK = "false";
   });
 
   afterEach(() => {
@@ -84,6 +70,7 @@ describe("Law Client API", () => {
 
   it("returns 403 when permission is missing", async () => {
     mockGetValidatedSession.mockResolvedValue(mockSession);
+    denyAllLawApiTestPermissions();
     vi.stubEnv("NODE_ENV", "production");
 
     const response = await listClients(
@@ -97,8 +84,7 @@ describe("Law Client API", () => {
   });
 
   it("lists clients with pagination envelope", async () => {
-    mockGetValidatedSession.mockResolvedValue(mockSession);
-    mockIsDevRegistrationAllowed.mockReturnValue(true);
+    enableDevPermissions();
 
     await createClient(
       new NextRequest("http://localhost/api/law/v1/clients", {
@@ -128,8 +114,7 @@ describe("Law Client API", () => {
   });
 
   it("filters clients by query", async () => {
-    mockGetValidatedSession.mockResolvedValue(mockSession);
-    mockIsDevRegistrationAllowed.mockReturnValue(true);
+    enableDevPermissions();
 
     await createClient(
       new NextRequest("http://localhost/api/law/v1/clients", {
@@ -159,8 +144,7 @@ describe("Law Client API", () => {
   });
 
   it("creates a client and returns 201 envelope", async () => {
-    mockGetValidatedSession.mockResolvedValue(mockSession);
-    mockIsDevRegistrationAllowed.mockReturnValue(true);
+    enableDevPermissions();
 
     const response = await createClient(
       new NextRequest("http://localhost/api/law/v1/clients", {
@@ -183,8 +167,7 @@ describe("Law Client API", () => {
   });
 
   it("returns validation error for invalid create body", async () => {
-    mockGetValidatedSession.mockResolvedValue(mockSession);
-    mockIsDevRegistrationAllowed.mockReturnValue(true);
+    enableDevPermissions();
 
     const response = await createClient(
       new NextRequest("http://localhost/api/law/v1/clients", {
@@ -204,8 +187,7 @@ describe("Law Client API", () => {
   });
 
   it("gets client by id", async () => {
-    mockGetValidatedSession.mockResolvedValue(mockSession);
-    mockIsDevRegistrationAllowed.mockReturnValue(true);
+    enableDevPermissions();
 
     const created = await createClient(
       new NextRequest("http://localhost/api/law/v1/clients", {
@@ -237,8 +219,7 @@ describe("Law Client API", () => {
   });
 
   it("returns 404 for unknown client", async () => {
-    mockGetValidatedSession.mockResolvedValue(mockSession);
-    mockIsDevRegistrationAllowed.mockReturnValue(true);
+    enableDevPermissions();
 
     const response = await getClient(
       new NextRequest("http://localhost/api/law/v1/clients/missing-client-id", {
@@ -252,8 +233,7 @@ describe("Law Client API", () => {
   });
 
   it("updates a client via PATCH", async () => {
-    mockGetValidatedSession.mockResolvedValue(mockSession);
-    mockIsDevRegistrationAllowed.mockReturnValue(true);
+    enableDevPermissions();
 
     const created = await createClient(
       new NextRequest("http://localhost/api/law/v1/clients", {
@@ -284,8 +264,7 @@ describe("Law Client API", () => {
   });
 
   it("soft deletes a client", async () => {
-    mockGetValidatedSession.mockResolvedValue(mockSession);
-    mockIsDevRegistrationAllowed.mockReturnValue(true);
+    enableDevPermissions();
 
     const created = await createClient(
       new NextRequest("http://localhost/api/law/v1/clients", {
@@ -324,8 +303,7 @@ describe("Law Client API", () => {
   });
 
   it("paginates with cursor", async () => {
-    mockGetValidatedSession.mockResolvedValue(mockSession);
-    mockIsDevRegistrationAllowed.mockReturnValue(true);
+    enableDevPermissions();
 
     for (const name of ["Alpha Legal", "Beta Legal", "Gamma Legal"]) {
       await createClient(
@@ -362,8 +340,7 @@ describe("Law Client API", () => {
   });
 
   it("retrieves a created client in the same tenant", async () => {
-    mockGetValidatedSession.mockResolvedValue(mockSession);
-    mockIsDevRegistrationAllowed.mockReturnValue(true);
+    enableDevPermissions();
 
     const created = await createClient(
       new NextRequest("http://localhost/api/law/v1/clients", {

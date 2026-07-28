@@ -18,7 +18,7 @@ import {
   type InvoiceWorkflowStageRecord,
 } from "./invoice-workflow-diagnostics";
 import { validateInvoiceForm } from "./invoice-validation";
-import { getSharedTimeEntryRepository } from "../persistence/repository-factory";
+import { getSharedTimeEntryRepository } from "../time/in-memory-time-entry-repository";
 import type { WritableInvoiceRepository } from "./writable-invoice-repository";
 
 export interface InvoiceWorkflowServiceOptions {

@@ -2,6 +2,22 @@
 
 > **Authority:** PCS-001 — Platform Core Strategy (master planning milestone)
 
+## Commercial execution (APZHUB-STRATEGY-001)
+
+| Document                                                   | Description                                       |
+| ---------------------------------------------------------- | ------------------------------------------------- |
+| [Commercialisation & GTM Strategy](./commercial/README.md) | **ACCEPTED / CLOSED** — commercial execution pack |
+
+## Platform 1.3 Portfolio & Roadmap (APZHUB-PLAN-001)
+
+| Document                                                                                                                     | Description                                                                                             |
+| ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| [platform-1.3](./platform-1.3/README.md)                                                                                     | Official Product Portfolio & Roadmap — **ACCEPTED**                                                     |
+| [../architecture/platform-1.3-confirmation](../architecture/platform-1.3-confirmation/README.md)                             | Platform-1.3-ARCH-001 — **Awaiting Owner Architecture Acceptance** · **READY FOR PLATFORM-1.3-ENG-001** |
+| [ROADMAP](./platform-1.3/ROADMAP.md) · [EPICS](./platform-1.3/EPICS.md) · [PROGRAMME-PLAN](./platform-1.3/PROGRAMME-PLAN.md) | 1.3/1.4/2.0 · epics · ENG sequence                                                                      |
+
+Complements Accepted [Product Management Framework](../product-management/README.md). No numeric prices; no marketing assets or customer portals in this programme.
+
 ## Master strategy
 
 | Document                                                               | Description                                                            |
@@ -163,3 +179,8 @@
 | [OSS Integration Standards](../governance/APZHUB-OSS-Integration-Standards.md)                       | Mandatory standards       |
 | [OSS Integration Risk Register](../governance/APZHUB-OSS-Integration-Risk-Register.md)               | Risk register             |
 | [OSS-001 Completion Report](../sprint/OSS-001-completion-report.md)                                  | Milestone closeout        |
+
+| Pack                                      | Status                                                         |
+| ----------------------------------------- | -------------------------------------------------------------- |
+| [platform-1.3/](./platform-1.3/README.md) | Platform 1.3 planning — ACCEPTED; programme CLOSED PRWL        |
+| [platform-1.4/](./platform-1.4/README.md) | Platform-1.4-ARCH-001 — AWAITING OWNER ARCHITECTURE ACCEPTANCE |

@@ -7,10 +7,8 @@ import {
   type ValidationResult,
 } from "@apzhub/legal-business-core";
 
-import {
-  getSharedDocumentRepository,
-  getSharedMatterRepository,
-} from "../persistence/repository-factory";
+import { getSharedDocumentRepository } from "../documents/in-memory-document-repository";
+import { getSharedMatterRepository } from "../matters/in-memory-matter-repository";
 import type { TaskFormValues } from "./task-types";
 
 export type TaskValidationResult = ValidationResult;

@@ -1,0 +1,37 @@
+{
+  "programme": "APZTCMS-REQ-001",
+  "title": "APZ TCMS Product Requirements Baseline",
+  "classification": "PRODUCT_REQUIREMENTS",
+  "lifecycle": "Requirements Engineering",
+  "baseline": "Certified Platform 1.4",
+  "product": "APZ TCMS",
+  "productMode": "Native APZHUB",
+  "reference": [
+    "Platform-1.4-CERT-001",
+    "APZHUB-PRODUCTS-004",
+    "Product Engineering Standard",
+    "Requirements Engineering Standard"
+  ],
+  "timestamp": "2026-07-24T07:00:00Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER REQUIREMENTS ACCEPTANCE",
+  "platformUnchanged": true,
+  "productDefinition": false,
+  "architecture": false,
+  "engineering": false,
+  "pack": "docs/products/apztcms/requirements/",
+  "requirementClasses": {
+    "business": "BR-001..017",
+    "stakeholder": "SR-001..014",
+    "functional": "FR-001..030",
+    "ux": "UX-001..007",
+    "nfr": "NFR-001..015",
+    "compliance": "RR-001..010",
+    "ai": "AIR-001..013",
+    "integration": "IR-001..018",
+    "commercial": "CR-001..011"
+  },
+  "conflictsUnresolved": false,
+  "nextProgramme": "APZTCMS-DEF-001",
+  "nextProgrammeStatus": "NOT_AUTHORISED_UNTIL_REQ_ACCEPTANCE"
+}

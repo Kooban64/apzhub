@@ -1,0 +1,38 @@
+{
+  "programme": "APZQEP-ARCH-011",
+  "title": "Test Specifications Capability Architecture",
+  "recordedAt": "2026-07-26T21:00:00Z",
+  "status": "IMPLEMENTED / AWAITING OWNER ACCEPTANCE",
+  "classification": "Owner Architecture Programme",
+  "revision": "1.0.0-arch",
+  "pack": "docs/products/apzqep/architecture/test-specifications/",
+  "authoritativeDocument": "docs/products/apzqep/architecture/test-specifications/TEST-SPECIFICATIONS-ARCHITECTURE.md",
+  "baselines": {
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN",
+    "verification": "1.0.0 CERTIFIED / FROZEN",
+    "ARCH-006": "ACCEPTED",
+    "CERT-040D": "ACCEPTED"
+  },
+  "validation": {
+    "consistencyWithBaselines": "PASS",
+    "contradictions": "NONE",
+    "engineeringDelivered": false
+  },
+  "notAuthorised": [
+    "domain",
+    "infrastructure",
+    "Workbench",
+    "REST",
+    "persistence",
+    "repositories",
+    "packages",
+    "Coverage",
+    "Impact",
+    "Evidence",
+    "Certification",
+    "AI",
+    "MCP"
+  ],
+  "stopCondition": "APZQEP-ARCH-011 IMPLEMENTED / AWAITING OWNER ACCEPTANCE — await Owner review; no Domain Engineering"
+}

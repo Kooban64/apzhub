@@ -132,17 +132,20 @@ describe("testing architecture boundaries", () => {
   });
 
   it("keeps CI/CD pipeline integration free of live provider SDKs and HTTP", () => {
+    // Production/service layer only — *.test.ts may inject Integration SDK adapters
+    // (@apzhub/integration-gitlab-ci / integration-github-actions) via DI for SoR tests.
+    // Forbid live provider SDKs / raw HTTP clients — not approved Integration SDK packages.
+    const forbiddenLiveSdkOrHttp =
+      /@octokit\/|@actions\/|@gitbeaker\/|from\s+["']gitlab["']|from\s+["']jenkins["']|azure-devops|@circleci\/|buildkite|node-fetch|axios|from\s+["']node:http["']|from\s+["']undici["']/;
     const roots = [
       join(REPO_ROOT, "packages/testing-services/src/pipelines"),
       join(REPO_ROOT, "packages/platform-services/src/services/testing"),
     ];
     for (const root of roots) {
-      expect(
-        importViolations(
-          root,
-          /@octokit\/|@actions\/|gitlab|jenkins|azure-devops|circleci|buildkite|node-fetch|axios|from\s+["']node:http["']|from\s+["']undici["']/,
-        ),
-      ).toEqual([]);
+      const violations = importViolations(root, forbiddenLiveSdkOrHttp).filter(
+        (entry) => !/\.(test|spec)\.(ts|tsx)$/.test(entry.path),
+      );
+      expect(violations).toEqual([]);
     }
   });
 });

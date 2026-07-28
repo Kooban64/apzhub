@@ -1,0 +1,36 @@
+{
+  "evidenceId": "20260728T065105Z-APZQEP-OES-ENG-070A-ACCEPTANCE",
+  "programme": "APZQEP-OES-ENG-070A",
+  "title": "Test Plans Workbench Engineering Specification — Owner Acceptance",
+  "capability": "Test Plans",
+  "layer": "Workbench Engineering Specification",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T065105Z",
+  "decision": {
+    "status": "ACCEPTED",
+    "approved": true,
+    "engineeringSpecificationBaselined": true,
+    "programmeClosed": true
+  },
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "baselinesConsumed": {
+    "architecture": "APZQEP-ARCH-014 ACCEPTED / ARCHITECTURE BASELINED / CLOSED",
+    "domain": "@apzhub/qep-test-plans 0.1.0 CERTIFIED (CERT-060A)",
+    "infrastructure": "@apzhub/qep-test-plans 0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED (CERT-060B)"
+  },
+  "pack": "docs/products/apzqep/test-plans/OES-ENG-070A/",
+  "preparedEvidence": "docs/operations/evidence/portfolio-recert/20260728T063000Z-APZQEP-OES-ENG-070A.json",
+  "authorisesNext": "APZQEP-ENG-070A — Test Plans Workbench Engineering",
+  "eng070aStopCondition": "Engineering Completion Review (ECR) — no Owner Acceptance / Certification / Freeze / 1.0.0 without separate Owner authorisation",
+  "bindingInvariants": [
+    "Workbench SHALL never determine business behaviour",
+    "Workbench SHALL render only actions from availableActions",
+    "Workbench SHALL accurately represent known limitations and SHALL NOT simulate unavailable functionality",
+    "Workbench SHALL remain a presentation layer over certified Domain and Infrastructure"
+  ]
+}

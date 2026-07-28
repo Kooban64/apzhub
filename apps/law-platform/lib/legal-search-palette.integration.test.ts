@@ -19,6 +19,12 @@ import {
   resetLegalSearchWorkflowQueryDepth,
   wrapKnowledgeServiceForLegalSearchTracking,
 } from "./search";
+import {
+  createLawPersistenceContext,
+  DEFAULT_LAW_TENANT_ID,
+  resetLawPersistenceScope,
+  setSessionLawPersistenceContext,
+} from "./persistence";
 
 function createPaletteKnowledgeService(
   eventBus: ReturnType<typeof createAppEventNotificationContext>["eventBus"],
@@ -37,6 +43,10 @@ function createPaletteKnowledgeService(
 
 describe("legal search palette integration", () => {
   beforeEach(() => {
+    resetLawPersistenceScope();
+    setSessionLawPersistenceContext(
+      createLawPersistenceContext({ tenantId: DEFAULT_LAW_TENANT_ID }),
+    );
     resetLegalSearchWorkflowDiagnostics();
     resetLegalSearchRecentSearches();
     resetLegalSearchEventEnvelopeCounter();

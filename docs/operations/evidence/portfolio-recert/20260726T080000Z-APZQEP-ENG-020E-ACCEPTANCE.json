@@ -1,0 +1,51 @@
+{
+  "programme": "APZQEP-ENG-020E",
+  "title": "Requirements Baselines",
+  "recordedAt": "2026-07-26T08:00:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Acceptance — Requirements Baselines",
+  "finalProgrammeState": "ACCEPTED / CLOSED / COMPLETE",
+  "package": "@apzhub/qep-requirements@0.7.0",
+  "implementationEvidence": [
+    "20260725T174800Z-APZQEP-ENG-020E-PART1.json",
+    "20260725T190000Z-APZQEP-ENG-020E-PART2.json",
+    "20260725T203000Z-APZQEP-ENG-020E.json"
+  ],
+  "documentationPack": "docs/products/apzqep/requirements/baselines/",
+  "assessment": {
+    "domainAndArchitecture": "PASS",
+    "configurationManagementIntegrity": "PASS",
+    "persistenceAndTenancy": "PASS",
+    "integrity": "PASS",
+    "applicationAndApi": "PASS",
+    "authorisationAndSecurity": "PASS",
+    "platformIntegration": "PASS",
+    "workbenchUserExperience": "PASS",
+    "comparison": "PASS",
+    "accessibility": "PASS WITH DOCUMENTED EVIDENCE LIMITATION",
+    "operationalReadiness": "PASS",
+    "qualityEvidence": "PASS"
+  },
+  "qualityGatesReported": {
+    "qepRequirementsPackageTests": "68 passed",
+    "qepRequirementsTypecheck": "PASS",
+    "qepRegressionSuite": "125 passed",
+    "baselinesProgrammeAudit": "PASS",
+    "baselineUiTests": "8 passed",
+    "securityRouteTests": "PASS",
+    "architectureBoundaryChecks": "PASS",
+    "governanceReconciliation": "PASS"
+  },
+  "nextProgramme": {
+    "likely": "APZQEP-ENG-020F — Requirements Relationships",
+    "authorised": false,
+    "note": "NOT AUTHORISED until complete Owner Programme Instruction is issued. Traceability remains a separate subsequent programme."
+  },
+  "exclusionsRetained": [
+    "no unlock/restore/delete/clone",
+    "no relationships/traceability",
+    "no Verification/Execution/Evidence/Certification domains",
+    "no AI/MCP",
+    "no electronic signatures"
+  ]
+}

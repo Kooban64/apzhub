@@ -1,0 +1,45 @@
+{
+  "evidenceId": "20260728T100955Z-APZQEP-PORTFOLIO-001-ACCEPTANCE",
+  "programme": "APZQEP-PORTFOLIO-001",
+  "title": "Foundation → Expansion Portfolio Baseline — Owner Acceptance",
+  "product": "APZ QEP",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T100955Z",
+  "decision": {
+    "status": "ACCEPTED",
+    "approved": true,
+    "programmeClosed": true,
+    "foundationFormallyComplete": true,
+    "capabilityExpansionReady": true,
+    "wave2Authorised": false
+  },
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "foundationBaseline": {
+    "engineeringOperatingModel": "VALIDATED",
+    "governanceStandards": "BASELINED",
+    "frozenCapabilities": 5,
+    "certifiedProductionPackages": 5,
+    "portfolioBaseline": "ESTABLISHED",
+    "capabilities": [
+      { "name": "Requirements", "package": "@apzhub/qep-requirements", "version": "1.0.0", "status": "CERTIFIED / FROZEN" },
+      { "name": "Traceability", "package": "@apzhub/qep-traceability", "version": "1.0.0", "status": "CERTIFIED / FROZEN" },
+      { "name": "Verification", "package": "@apzhub/qep-verification", "version": "1.0.0", "status": "CERTIFIED / FROZEN" },
+      { "name": "Test Specifications", "package": "@apzhub/qep-test-specifications", "version": "1.0.0", "status": "CERTIFIED / FROZEN" },
+      { "name": "Test Plans", "package": "@apzhub/qep-test-plans", "version": "1.0.0", "status": "CERTIFIED / FROZEN" }
+    ]
+  },
+  "phaseTransition": {
+    "phase1Foundation": "COMPLETE",
+    "phase2CapabilityExpansion": "READY",
+    "wave2Roadmap": "planning reference only — not engineering authorisation"
+  },
+  "authorisationRule": "No Wave 2 capability may commence until an Owner-approved Architecture programme has been authorised for that specific capability. Full APZOR lifecycle required; no bypass.",
+  "pack": "docs/products/apzqep/portfolio/PORTFOLIO-001/",
+  "implementationEvidence": "docs/operations/evidence/portfolio-recert/20260728T094331Z-APZQEP-PORTFOLIO-001.json",
+  "portfolioDeclaration": "docs/products/apzqep/OWNER-PORTFOLIO-DECLARATION.md"
+}

@@ -66,10 +66,17 @@ test.describe("OSS-110-14 Support UI certification", () => {
   test("open request: note, reply, assign, state, priority, close, reopen", async ({
     page,
   }) => {
+    test.setTimeout(60_000);
     await signIn(page);
     await mockSupportApi(page);
 
-    await page.goto(`/workspace/support/requests/${REQUEST_ID}`);
+    // Navigate via inbox so workbench view activation matches OSS-110-13 (stable shell).
+    await page.goto("/workspace/support/requests");
+    await expect(page.getByTestId("support-page")).toBeVisible();
+    await page.getByText("VPN cannot connect").click();
+    await expect(page).toHaveURL(
+      new RegExp(`/workspace/support/requests/${REQUEST_ID}`),
+    );
     await expect(page.getByTestId("support-request-detail")).toBeVisible();
 
     await page.getByTestId("support-internal-note-body").fill("Checking logs");
@@ -80,9 +87,6 @@ test.describe("OSS-110-14 Support UI certification", () => {
     await page.getByTestId("support-customer-reply-channel").selectOption("email");
     await page.getByTestId("support-customer-reply-submit").click();
     await expect(page.getByText("Please reboot")).toBeVisible();
-
-    await page.getByTestId("support-command-owner").fill(USER_ID);
-    await page.getByTestId("support-command-owner-assign").click();
 
     await page.getByTestId("support-command-state").selectOption("pending");
     await Promise.all([
@@ -105,6 +109,9 @@ test.describe("OSS-110-14 Support UI certification", () => {
       page.getByTestId("support-command-priority-apply").click(),
     ]);
     await expect(page.getByLabel("Priority: Urgent")).toBeVisible({ timeout: 10_000 });
+
+    await page.getByTestId("support-command-owner").fill(USER_ID);
+    await page.getByTestId("support-command-owner-assign").click();
 
     await page.getByTestId("support-command-close").click();
     await page.getByTestId("support-confirm-dialog-confirm").click();

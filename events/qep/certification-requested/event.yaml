@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: qep-certification-requested
+name: Certification Requested
+version: 0.1.0
+kind: event
+
+metadata:
+  category: quality-engineering
+  description: "Certification Requested event stub for APZ QEP (APZQEP-ENG-010). Payload schema reserved; no publishers implemented."
+
+event:
+  category: business
+  publisher: qep-certification
+  subscribers:
+    - audit:platform.audit
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: qep.certification.requested

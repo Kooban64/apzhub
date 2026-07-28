@@ -1,0 +1,43 @@
+{
+  "id": "20260727T174500Z-APZQEP-CERT-060A-ACCEPTANCE",
+  "timestamp": "2026-07-27T17:45:00Z",
+  "programme": "APZQEP-CERT-060A",
+  "title": "Test Plans Domain Certification",
+  "type": "owner-certification-decision",
+  "decision": "CERTIFIED",
+  "approved": true,
+  "programmeClosed": true,
+  "certificationLevel": "COMPONENT",
+  "classification": "DOMAIN_PRODUCTION_READY_WITH_LIMITATIONS",
+  "package": {
+    "name": "@apzhub/qep-test-plans",
+    "version": "0.1.0",
+    "status": "CERTIFIED",
+    "promotedTo100": false
+  },
+  "freeze": "NOT_AUTHORISED",
+  "independence": true,
+  "assessment": {
+    "governanceCompliance": "PASS",
+    "domainCorrectness": "PASS",
+    "engineeringEvidence": "PASS",
+    "typeChecking": "PASS",
+    "testSuite": "PASS",
+    "tests": 62,
+    "mandatoryDomainGates": "PASS",
+    "documentation": "PASS",
+    "certificationIndependence": "PASS"
+  },
+  "nextNamedProgramme": "APZQEP-OES-ENG-060B",
+  "documents": [
+    "docs/products/apzqep/test-plans/domain-certification/OWNER-ACCEPTANCE.md",
+    "docs/engineering/oes/OES-CERTIFICATION-LEVELS.md"
+  ],
+  "explicitlyNotAuthorised": [
+    "capability-1.0.0-promotion",
+    "capability-freeze",
+    "capability-certification",
+    "infrastructure-under-cert-060a",
+    "domain-behaviour-modification"
+  ]
+}

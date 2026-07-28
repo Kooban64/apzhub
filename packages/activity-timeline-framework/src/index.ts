@@ -118,13 +118,21 @@ export type {
 export {
   DefaultActivityService,
   DefaultActivitySessionStore,
+  PersistedActivitySessionStore,
   PlaceholderActivityService,
   compareActivityDocuments,
   createDefaultActivityService,
   createDefaultActivitySessionStore,
+  createPersistedActivitySessionStore,
+  createLawActivityPersistenceStorageKey,
   createPlaceholderActivityService,
 } from "./service";
-export type { ActivitySessionStore } from "./service";
+/* Postgres SoR factories: import from @apzhub/activity-timeline-framework/server */
+export type {
+  ActivitySessionStore,
+  ActivityPersistenceStorage,
+  PersistedActivitySessionStoreOptions,
+} from "./service";
 
 export { createActivityTimelineContext } from "./di";
 

@@ -2,7 +2,11 @@ import type { Database } from "@apzhub/config";
 
 import { resolveLawTenantId } from "./default-tenant";
 
-/** Tenant-scoped persistence context for law repository adapters (LAW-012-02). */
+/**
+ * Tenant-scoped persistence context for law repository adapters (LAW-012-02).
+ * `Database` is type-only — runtime `pg` must not enter the client graph
+ * (APZHUB-ENG-0007 / RG-LAW-DNS).
+ */
 export interface LawPersistenceContext {
   readonly tenantId: string;
   readonly actorId?: string;

@@ -1,0 +1,93 @@
+{
+  "programme": "Platform-1.4-ARCH-001",
+  "title": "Platform 1.4 Architecture Confirmation and Delivery Scope",
+  "classification": "ARCHITECTURE_CONFIRMATION",
+  "baseline": "Platform 1.4",
+  "predecessorBaseline": "Platform 1.3",
+  "timestamp": "2026-07-23T09:00:00Z",
+  "status": "COMPLETED_AWAITING_OWNER_ARCHITECTURE_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER ARCHITECTURE ACCEPTANCE",
+  "prerequisites": {
+    "platform13Cert002": "ACCEPTED",
+    "platform13Lifecycle": "CLOSED",
+    "platform13Classification": "PRODUCTION READY WITH LIMITATIONS",
+    "cert001HistoricalPreserved": true,
+    "rr001Accepted": true,
+    "integrationSdkFrozen": "1.0.0",
+    "emailSorExcluded": true,
+    "workflowExecuteGated": true,
+    "fin001Stop": true,
+    "websocketsUnauthorised": true,
+    "noPlatform14EngineeringActive": true
+  },
+  "preconditionVerification": "PASS",
+  "releaseTheme": "Production Operational Maturity for Durable Notification Delivery & Shared-Host Resilience",
+  "businessDrivers": [
+    "restart-safe notification delivery for production adoption",
+    "capacity evidence before shared-host enablement",
+    "POPIA formal pathway before external delivery",
+    "honest full regression and Playwright evidence"
+  ],
+  "architectureDrivers": [
+    "persistence durability",
+    "fault isolation",
+    "provider isolation",
+    "operational visibility",
+    "queue resilience",
+    "compliance evidence"
+  ],
+  "inheritedArchitecture": "Presentation → Platform Services → Connector → Engine RETAINED",
+  "candidateEpics": {
+    "recommended": ["P14-E01", "P14-E02", "P14-E03", "P14-E04"],
+    "conditional": ["P14-E05", "P14-E06", "P14-E07"],
+    "deferred": ["P14-E10"],
+    "excludedImplementation": ["P14-E08", "P14-E09"]
+  },
+  "proposedAdrs": ["ADR-0073", "ADR-0074", "ADR-0075"],
+  "recommendedScope": {
+    "MUST": [
+      "durable notification runtime",
+      "capacity evidence",
+      "POPIA pack",
+      "full regression/Playwright",
+      "certification train"
+    ],
+    "SHOULD": [
+      "admin maturity",
+      "runbooks",
+      "release automation",
+      "conditional transactional provider"
+    ],
+    "MAY": ["preference improvements", "light Observe/Support/Search ops"],
+    "WILL_NOT": [
+      "Email SoR",
+      "Workflow Execute",
+      "FIN-001",
+      "WebSockets",
+      "Integration SDK thaw",
+      "SMS/push"
+    ]
+  },
+  "gateRecommendations": {
+    "workflowExecute": "KEEP GATED",
+    "emailSor": "REMAIN EXCLUDED",
+    "fin001": "REMAIN STOPPED"
+  },
+  "sourceChanges": false,
+  "packageChanges": false,
+  "databaseChanges": false,
+  "migrations": false,
+  "implementation": false,
+  "providerImplementation": false,
+  "platform14EngineeringStarted": false,
+  "workflowExecuteWork": false,
+  "fin001Work": false,
+  "emailSorWork": false,
+  "websocketWork": false,
+  "integrationSdkUnchanged": true,
+  "adr0070Unchanged": true,
+  "adr0071Unchanged": true,
+  "adr0072Unchanged": true,
+  "documentationPack": "docs/strategy/platform-1.4/",
+  "explicitStop": "Await Owner Architecture Acceptance"
+}

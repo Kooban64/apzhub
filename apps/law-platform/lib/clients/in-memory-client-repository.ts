@@ -78,7 +78,14 @@ export class InMemoryClientRepository implements WritableClientRepository {
   }
 }
 
-export {
-  getSharedClientRepository,
-  resetSharedClientRepository,
-} from "../persistence/repository-factory";
+/** Client-safe memory singleton — must not import repository-factory (pulls pg). */
+let sharedClientRepository: InMemoryClientRepository | undefined;
+
+export function getSharedClientRepository(): InMemoryClientRepository {
+  sharedClientRepository ??= new InMemoryClientRepository();
+  return sharedClientRepository;
+}
+
+export function resetSharedClientRepository(): void {
+  sharedClientRepository = undefined;
+}

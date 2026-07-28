@@ -7,6 +7,7 @@ import { loadEventNotificationHydration } from "@/lib/event-notification-hydrati
 import { loadKnowledgeSourceRegistryDto } from "@/lib/knowledge-hydration";
 import { loadWorkbenchRegistryDto } from "@/lib/workbench-hydration";
 import { createLawPlatformPersonalisationContext } from "@/lib/session-personalisation-context";
+import { createLawPlatformAuthPermissionContext } from "@/lib/session-permission-context";
 
 import { ActionWorkbenchShellProvider } from "./action-workbench-shell-provider";
 
@@ -31,7 +32,10 @@ export default async function PlatformLayout({
     getValidatedSession(await headers()),
   ]);
 
-  const personalisation = await createLawPlatformPersonalisationContext(session);
+  const [personalisation, authPermissionContext] = await Promise.all([
+    createLawPlatformPersonalisationContext(session),
+    createLawPlatformAuthPermissionContext(session),
+  ]);
 
   return (
     <div className="flex h-full min-h-screen flex-col">
@@ -46,6 +50,7 @@ export default async function PlatformLayout({
         activityTimelineBundle={activityTimelineHydration.bundle}
         activityDiagnostics={activityTimelineHydration.activityDiagnostics}
         timelineDiagnostics={activityTimelineHydration.timelineDiagnostics}
+        authPermissionContext={authPermissionContext}
         initialTheme={personalisation?.appearance.theme}
       >
         {children}

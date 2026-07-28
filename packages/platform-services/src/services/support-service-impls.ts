@@ -52,6 +52,12 @@ import type {
   UpdateSupportTicketInput,
 } from "@apzhub/platform-service-contracts";
 
+import type { DomainEventPublisher } from "../events/domain-event-publisher";
+import {
+  SUPPORT_DOMAIN_EVENT_IDS,
+  publishSupportArticleEvent,
+  publishSupportRequestEvent,
+} from "../events/support-domain-events";
 import type { MappingOrchestrator } from "../orchestration/mapping-orchestrator";
 import type { ProviderResolver } from "../providers/registry/provider-resolver";
 import type { ProviderRegistration } from "../providers/types";
@@ -68,6 +74,7 @@ export class SupportServiceImpl implements SupportService {
   constructor(
     private readonly resolver: ProviderResolver,
     private readonly mapping: MappingOrchestrator,
+    private readonly domainEventPublisher?: DomainEventPublisher,
   ) {}
 
   async listSupportRequests(
@@ -144,7 +151,24 @@ export class SupportServiceImpl implements SupportService {
       integrationId: registration.integrationId,
       providerEntityId: created.id,
     });
-    return this.normalizeTicket(ctx, registration, created, mapping.platformId);
+    const ticket = await this.normalizeTicket(
+      ctx,
+      registration,
+      created,
+      mapping.platformId,
+    );
+    publishSupportRequestEvent(
+      this.domainEventPublisher,
+      ctx,
+      SUPPORT_DOMAIN_EVENT_IDS.requestCreated,
+      {
+        supportRequestId: ticket.id,
+        title: ticket.title,
+        status: ticket.status,
+        priority: ticket.priority,
+      },
+    );
+    return ticket;
   }
 
   async updateSupportRequest(
@@ -163,12 +187,24 @@ export class SupportServiceImpl implements SupportService {
       resolved.providerNativeId,
       providerInput,
     );
-    return this.normalizeTicket(
+    const ticket = await this.normalizeTicket(
       ctx,
       registration,
       updated,
       resolved.mapping.platformId,
     );
+    publishSupportRequestEvent(
+      this.domainEventPublisher,
+      ctx,
+      SUPPORT_DOMAIN_EVENT_IDS.requestUpdated,
+      {
+        supportRequestId: ticket.id,
+        title: ticket.title,
+        status: ticket.status,
+        priority: ticket.priority,
+      },
+    );
+    return ticket;
   }
 
   async closeSupportRequest(
@@ -181,7 +217,24 @@ export class SupportServiceImpl implements SupportService {
       supportRequestId,
     );
     const closed = await provider.closeSupportRequest(ctx, resolved.providerNativeId);
-    return this.normalizeTicket(ctx, registration, closed, resolved.mapping.platformId);
+    const ticket = await this.normalizeTicket(
+      ctx,
+      registration,
+      closed,
+      resolved.mapping.platformId,
+    );
+    publishSupportRequestEvent(
+      this.domainEventPublisher,
+      ctx,
+      SUPPORT_DOMAIN_EVENT_IDS.requestClosed,
+      {
+        supportRequestId: ticket.id,
+        title: ticket.title,
+        status: ticket.status,
+        priority: ticket.priority,
+      },
+    );
+    return ticket;
   }
 
   async reopenSupportRequest(
@@ -197,12 +250,24 @@ export class SupportServiceImpl implements SupportService {
       ctx,
       resolved.providerNativeId,
     );
-    return this.normalizeTicket(
+    const ticket = await this.normalizeTicket(
       ctx,
       registration,
       reopened,
       resolved.mapping.platformId,
     );
+    publishSupportRequestEvent(
+      this.domainEventPublisher,
+      ctx,
+      SUPPORT_DOMAIN_EVENT_IDS.requestUpdated,
+      {
+        supportRequestId: ticket.id,
+        title: ticket.title,
+        status: ticket.status,
+        priority: ticket.priority,
+      },
+    );
+    return ticket;
   }
 
   async assignSupportRequest(
@@ -221,12 +286,25 @@ export class SupportServiceImpl implements SupportService {
       resolved.providerNativeId,
       providerInput,
     );
-    return this.normalizeTicket(
+    const ticket = await this.normalizeTicket(
       ctx,
       registration,
       assigned,
       resolved.mapping.platformId,
     );
+    publishSupportRequestEvent(
+      this.domainEventPublisher,
+      ctx,
+      SUPPORT_DOMAIN_EVENT_IDS.requestAssigned,
+      {
+        supportRequestId: ticket.id,
+        title: ticket.title,
+        status: ticket.status,
+        priority: ticket.priority,
+        assigneeId: ticket.assigneeId,
+      },
+    );
+    return ticket;
   }
 
   async changeSupportRequestPriority(
@@ -933,6 +1011,7 @@ export class SupportArticleServiceImpl implements SupportArticleService {
   constructor(
     private readonly resolver: ProviderResolver,
     private readonly mapping: MappingOrchestrator,
+    private readonly domainEventPublisher?: DomainEventPublisher,
   ) {}
 
   async list(
@@ -1046,6 +1125,43 @@ export class SupportArticleServiceImpl implements SupportArticleService {
     );
   }
 
+  async downloadAttachment(
+    ctx: ServiceRequestContext,
+    supportTicketId: SupportTicketId,
+    articleId: SupportArticleId,
+    attachmentId: string,
+  ): Promise<
+    import("@apzhub/platform-service-contracts").SupportArticleAttachmentContent
+  > {
+    assertRequestContext(ctx);
+    const ticket = await this.mapping.resolveExisting(
+      ctx,
+      supportTicketId,
+      "support_request",
+    );
+    const articleResolved = await this.mapping.resolveExisting(
+      ctx,
+      articleId,
+      "support_article",
+    );
+    const provider = this.resolver.resolveSupportArticleProvider(ctx, {
+      mappedProviderId: ticket.providerId,
+      mappedIntegrationId: ticket.integrationId,
+    });
+    const content = await provider.downloadAttachment(
+      ctx,
+      ticket.providerNativeId,
+      articleResolved.providerNativeId,
+      toProviderAttachmentId(attachmentId),
+    );
+    return {
+      ...content,
+      id: toPlatformAttachmentId(attachmentId),
+      articleId: articleResolved.mapping.platformId,
+      supportTicketId: ticket.mapping.platformId,
+    };
+  }
+
   private async createArticle(
     ctx: ServiceRequestContext,
     input: { supportTicketId: string },
@@ -1083,13 +1199,19 @@ export class SupportArticleServiceImpl implements SupportArticleService {
       parentPlatformId: ticket.mapping.platformId,
       parentProviderNativeId: ticket.providerNativeId,
     });
-    return this.normalizeArticle(
+    const article = await this.normalizeArticle(
       ctx,
       registration,
       created,
       ticket.mapping.platformId,
       mapping.platformId,
     );
+    publishSupportArticleEvent(this.domainEventPublisher, ctx, {
+      articleId: article.id,
+      supportRequestId: ticket.mapping.platformId,
+      articleType: article.channel,
+    });
+    return article;
   }
 
   private async translateArticleFilterOutbound(
@@ -1154,8 +1276,37 @@ export class SupportArticleServiceImpl implements SupportArticleService {
       tenantId: ctx.tenantId,
       supportTicketId,
       author: { ...article.author, userId: authorUserId },
+      attachments: article.attachments.map((attachment) => ({
+        ...attachment,
+        id: toPlatformAttachmentId(attachment.id),
+        articleId: platformId,
+      })),
     };
   }
+}
+
+/** Deterministic reversible Support attachment IDs (satt_ + 32 hex of CE numeric id). */
+export function toPlatformAttachmentId(provisionalOrNative: string): string {
+  if (/^satt_[0-9a-f]{32}$/i.test(provisionalOrNative)) {
+    return provisionalOrNative.toLowerCase();
+  }
+  const native = provisionalOrNative.includes("_")
+    ? provisionalOrNative.split("_").pop()!
+    : provisionalOrNative;
+  if (!/^\d+$/.test(native)) {
+    return provisionalOrNative;
+  }
+  return `satt_${BigInt(native).toString(16).padStart(32, "0")}`;
+}
+
+export function toProviderAttachmentId(platformOrProvisional: string): string {
+  if (/^satt_[0-9a-f]{32}$/i.test(platformOrProvisional)) {
+    return BigInt(`0x${platformOrProvisional.slice(5)}`).toString();
+  }
+  if (platformOrProvisional.startsWith("satt_zammad_")) {
+    return platformOrProvisional.slice("satt_zammad_".length);
+  }
+  return platformOrProvisional;
 }
 
 /** Mapping-aware SupportSearchService. */

@@ -1,0 +1,56 @@
+{
+  "programme": "APZQEP-ENG-020F",
+  "part": "1",
+  "title": "Requirements Relationship Engine — Domain Model and Business Rules",
+  "recordedAt": "2026-07-26T08:30:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Decision — Requirements Relationship Engine Part 1",
+  "finalPartState": "ACCEPTED / CLOSED / COMPLETE",
+  "architecture": "APZQEP-ARCH-005 — ACCEPTED / CLOSED / COMPLETE",
+  "package": "@apzhub/qep-requirements@0.8.0",
+  "implementationEvidence": [
+    "20260726T081600Z-APZQEP-ENG-020F-PART1.json"
+  ],
+  "documentationPack": "docs/products/apzqep/requirements/relationships/",
+  "assessment": {
+    "architectureFidelity": "PASS",
+    "businessSemanticsInDomain": "PASS",
+    "noInfrastructureContamination": "PASS",
+    "foundationForSubsequentPhases": "PASS"
+  },
+  "foundationsAccepted": [
+    "Relationship Aggregate",
+    "Relationship Entity",
+    "Relationship Taxonomy",
+    "Relationship Semantic Profile",
+    "Relationship Lifecycle",
+    "Relationship Policies",
+    "Relationship Domain Services",
+    "Relationship Domain Events",
+    "Relationship Value Objects",
+    "Relationship Domain Tests"
+  ],
+  "constraintsPreserved": [
+    "domain persistence-independent",
+    "domain API-independent",
+    "domain UI-independent",
+    "domain Platform-independent",
+    "relationship semantics owned by Requirements",
+    "Traceability downstream consumer",
+    "ENG-020D and ENG-020E remain authoritative"
+  ],
+  "nextPhase": {
+    "part": "2",
+    "title": "Persistence, Application Services, Repositories, Commands, Queries, APIs, Permissions, Audit, Search, Observability integration",
+    "authorised": true,
+    "state": "AUTHORISED TO BEGIN"
+  },
+  "part3": {
+    "authorised": false,
+    "state": "NOT AUTHORISED"
+  },
+  "programmeAcceptance": {
+    "fullProgrammeAccepted": false,
+    "note": "Part 1 only accepted. Full ENG-020F acceptance awaits later parts."
+  }
+}

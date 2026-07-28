@@ -1,23 +1,51 @@
 import type { WritableDocumentRepository } from "../documents/writable-document-repository";
-import { InMemoryDocumentRepository } from "../documents/in-memory-document-repository";
+import {
+  InMemoryDocumentRepository,
+  getSharedDocumentRepository as getSharedMemoryDocumentRepository,
+  resetSharedDocumentRepository as resetSharedMemoryDocumentRepository,
+} from "../documents/in-memory-document-repository";
 import { PostgresDocumentRepository } from "../documents/postgres-document-repository";
 import type { WritableTaskRepository } from "../tasks/writable-task-repository";
-import { InMemoryTaskRepository } from "../tasks/in-memory-task-repository";
+import {
+  InMemoryTaskRepository,
+  getSharedTaskRepository as getSharedMemoryTaskRepository,
+  resetSharedTaskRepository as resetSharedMemoryTaskRepository,
+} from "../tasks/in-memory-task-repository";
 import { PostgresTaskRepository } from "../tasks/postgres-task-repository";
 import type { WritableCalendarEventRepository } from "../calendar/writable-calendar-event-repository";
-import { InMemoryCalendarEventRepository } from "../calendar/in-memory-calendar-event-repository";
+import {
+  InMemoryCalendarEventRepository,
+  getSharedCalendarEventRepository as getSharedMemoryCalendarEventRepository,
+  resetSharedCalendarEventRepository as resetSharedMemoryCalendarEventRepository,
+} from "../calendar/in-memory-calendar-event-repository";
 import { PostgresCalendarEventRepository } from "../calendar/postgres-calendar-event-repository";
 import type { WritableTimeEntryRepository } from "../time/writable-time-entry-repository";
-import { InMemoryTimeEntryRepository } from "../time/in-memory-time-entry-repository";
+import {
+  InMemoryTimeEntryRepository,
+  getSharedTimeEntryRepository as getSharedMemoryTimeEntryRepository,
+  resetSharedTimeEntryRepository as resetSharedMemoryTimeEntryRepository,
+} from "../time/in-memory-time-entry-repository";
 import { PostgresTimeEntryRepository } from "../time/postgres-time-entry-repository";
 import type { WritableInvoiceRepository } from "../billing/writable-invoice-repository";
-import { InMemoryInvoiceRepository } from "../billing/in-memory-invoice-repository";
+import {
+  InMemoryInvoiceRepository,
+  getSharedInvoiceRepository as getSharedMemoryInvoiceRepository,
+  resetSharedInvoiceRepository as resetSharedMemoryInvoiceRepository,
+} from "../billing/in-memory-invoice-repository";
 import { PostgresInvoiceRepository } from "../billing/postgres-invoice-repository";
 import type { WritableClientRepository } from "../clients/writable-client-repository";
-import { InMemoryClientRepository } from "../clients/in-memory-client-repository";
+import {
+  InMemoryClientRepository,
+  getSharedClientRepository as getSharedMemoryClientRepository,
+  resetSharedClientRepository as resetSharedMemoryClientRepository,
+} from "../clients/in-memory-client-repository";
 import { PostgresClientRepository } from "../clients/postgres-client-repository";
 import type { WritableMatterRepository } from "../matters/writable-matter-repository";
-import { InMemoryMatterRepository } from "../matters/in-memory-matter-repository";
+import {
+  InMemoryMatterRepository,
+  getSharedMatterRepository as getSharedMemoryMatterRepository,
+  resetSharedMatterRepository as resetSharedMemoryMatterRepository,
+} from "../matters/in-memory-matter-repository";
 import { PostgresMatterRepository } from "../matters/postgres-matter-repository";
 import { SEED_CLIENTS } from "../clients/seed-clients";
 import { SEED_MATTERS } from "../matters/seed-matters";
@@ -37,13 +65,6 @@ import { getLawRepositoryMode } from "./repository-mode";
 import { runSync } from "./run-sync";
 import { seedPostgresLawDataAsync } from "./postgres-test-utils";
 
-let sharedMemoryClientRepository: InMemoryClientRepository | undefined;
-let sharedMemoryMatterRepository: InMemoryMatterRepository | undefined;
-let sharedMemoryDocumentRepository: InMemoryDocumentRepository | undefined;
-let sharedMemoryTaskRepository: InMemoryTaskRepository | undefined;
-let sharedMemoryCalendarEventRepository: InMemoryCalendarEventRepository | undefined;
-let sharedMemoryTimeEntryRepository: InMemoryTimeEntryRepository | undefined;
-let sharedMemoryInvoiceRepository: InMemoryInvoiceRepository | undefined;
 const postgresClientRepositories = new Map<string, WritableClientRepository>();
 const postgresMatterRepositories = new Map<string, WritableMatterRepository>();
 const postgresDocumentRepositories = new Map<string, WritableDocumentRepository>();
@@ -162,8 +183,7 @@ export function getSharedClientRepository(): WritableClientRepository {
   const context = getActiveLawPersistenceContext();
 
   if (getLawRepositoryMode() === "memory") {
-    sharedMemoryClientRepository ??= new InMemoryClientRepository();
-    return sharedMemoryClientRepository;
+    return getSharedMemoryClientRepository();
   }
 
   const cacheKey = repositoryCacheKey(context);
@@ -181,8 +201,7 @@ export function getSharedMatterRepository(): WritableMatterRepository {
   const context = getActiveLawPersistenceContext();
 
   if (getLawRepositoryMode() === "memory") {
-    sharedMemoryMatterRepository ??= new InMemoryMatterRepository();
-    return sharedMemoryMatterRepository;
+    return getSharedMemoryMatterRepository();
   }
 
   const cacheKey = repositoryCacheKey(context);
@@ -201,8 +220,7 @@ export function getSharedDocumentRepository(): WritableDocumentRepository {
   const context = getActiveLawPersistenceContext();
 
   if (getLawRepositoryMode() === "memory") {
-    sharedMemoryDocumentRepository ??= new InMemoryDocumentRepository();
-    return sharedMemoryDocumentRepository;
+    return getSharedMemoryDocumentRepository();
   }
 
   const cacheKey = repositoryCacheKey(context);
@@ -222,8 +240,7 @@ export function getSharedTaskRepository(): WritableTaskRepository {
   const context = getActiveLawPersistenceContext();
 
   if (getLawRepositoryMode() === "memory") {
-    sharedMemoryTaskRepository ??= new InMemoryTaskRepository();
-    return sharedMemoryTaskRepository;
+    return getSharedMemoryTaskRepository();
   }
 
   const cacheKey = repositoryCacheKey(context);
@@ -244,8 +261,7 @@ export function getSharedTimeEntryRepository(): WritableTimeEntryRepository {
   const context = getActiveLawPersistenceContext();
 
   if (getLawRepositoryMode() === "memory") {
-    sharedMemoryTimeEntryRepository ??= new InMemoryTimeEntryRepository();
-    return sharedMemoryTimeEntryRepository;
+    return getSharedMemoryTimeEntryRepository();
   }
 
   const cacheKey = repositoryCacheKey(context);
@@ -267,8 +283,7 @@ export function getSharedCalendarEventRepository(): WritableCalendarEventReposit
   const context = getActiveLawPersistenceContext();
 
   if (getLawRepositoryMode() === "memory") {
-    sharedMemoryCalendarEventRepository ??= new InMemoryCalendarEventRepository();
-    return sharedMemoryCalendarEventRepository;
+    return getSharedMemoryCalendarEventRepository();
   }
 
   const cacheKey = repositoryCacheKey(context);
@@ -287,8 +302,7 @@ export function getSharedInvoiceRepository(): WritableInvoiceRepository {
   const context = getActiveLawPersistenceContext();
 
   if (getLawRepositoryMode() === "memory") {
-    sharedMemoryInvoiceRepository ??= new InMemoryInvoiceRepository();
-    return sharedMemoryInvoiceRepository;
+    return getSharedMemoryInvoiceRepository();
   }
 
   const cacheKey = repositoryCacheKey(context);
@@ -306,37 +320,37 @@ export function getSharedInvoiceRepository(): WritableInvoiceRepository {
 }
 
 export function resetSharedClientRepository(): void {
-  sharedMemoryClientRepository = undefined;
+  resetSharedMemoryClientRepository();
   postgresClientRepositories.clear();
 }
 
 export function resetSharedMatterRepository(): void {
-  sharedMemoryMatterRepository = undefined;
+  resetSharedMemoryMatterRepository();
   postgresMatterRepositories.clear();
 }
 
 export function resetSharedDocumentRepository(): void {
-  sharedMemoryDocumentRepository = undefined;
+  resetSharedMemoryDocumentRepository();
   postgresDocumentRepositories.clear();
 }
 
 export function resetSharedTaskRepository(): void {
-  sharedMemoryTaskRepository = undefined;
+  resetSharedMemoryTaskRepository();
   postgresTaskRepositories.clear();
 }
 
 export function resetSharedCalendarEventRepository(): void {
-  sharedMemoryCalendarEventRepository = undefined;
+  resetSharedMemoryCalendarEventRepository();
   postgresCalendarEventRepositories.clear();
 }
 
 export function resetSharedTimeEntryRepository(): void {
-  sharedMemoryTimeEntryRepository = undefined;
+  resetSharedMemoryTimeEntryRepository();
   postgresTimeEntryRepositories.clear();
 }
 
 export function resetSharedInvoiceRepository(): void {
-  sharedMemoryInvoiceRepository = undefined;
+  resetSharedMemoryInvoiceRepository();
   postgresInvoiceRepositories.clear();
 }
 

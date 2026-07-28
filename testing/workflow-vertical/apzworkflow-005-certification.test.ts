@@ -158,11 +158,11 @@ describe("APZWORKFLOW-005 Workflow Vertical Certification", () => {
   it("asserts certified package versions", () => {
     // Frozen after APZWORKFLOW-007…011 (contracts/services bumped for engine track).
     const versions: Record<string, string> = {
-      "packages/workflow-contracts/package.json": "0.3.0",
+      "packages/workflow-contracts/package.json": "0.4.2",
       "packages/workflow-core/package.json": "0.1.1",
       "packages/workflow-persistence/package.json": "0.1.1",
-      "packages/platform-services/package.json": "0.26.1",
-      "packages/platform-service-contracts/package.json": "0.17.1",
+      "packages/platform-services/package.json": "0.32.0",
+      "packages/platform-service-contracts/package.json": "0.18.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const actual = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;

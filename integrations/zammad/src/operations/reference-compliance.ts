@@ -190,7 +190,7 @@ export function defaultZammadReferenceCompliance(): ZammadReferenceAdapterCompli
     documentedDeviations: [
       "Persistent sync state deferred — in-memory only (documented limitation)",
       "Webhook ingress and Platform Event Bus deferred to later milestones",
-      "Binary attachment transfer deferred — metadata only",
+      "Binary attachment delete deferred; upload/download via articles (R12-SUP-02)",
     ],
   });
 }

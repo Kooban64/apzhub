@@ -1,0 +1,26 @@
+manifestSchemaVersion: "1.0"
+id: support-request-assigned
+name: Support Request Assigned
+version: 1.0.0
+kind: event
+
+metadata:
+  category: productivity
+  description: Emitted when an APZHUB Support request is assigned.
+
+event:
+  category: business
+  publisher: support-service
+  subscribers:
+    - notification:support.attention
+    - activity:support.activity
+    - audit:platform.audit
+  payload:
+    supportRequestId: string
+    title: string
+    status: string
+    priority: string
+    assigneeId: string
+
+documentation:
+  eventKey: support.request.assigned

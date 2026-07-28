@@ -51,7 +51,7 @@ import {
   type ZammadRuntimeDiagnosticsSnapshot,
 } from "./operations";
 
-export const ZAMMAD_ADAPTER_VERSION = "0.6.0";
+export const ZAMMAD_ADAPTER_VERSION = "0.8.0";
 
 export interface ZammadDiagnosticsExtension {
   readonly zammadVersion?: string;
@@ -74,7 +74,7 @@ export interface ZammadDiagnosticsExtension {
   readonly customerReplyCreationAvailable: boolean;
   readonly supportedArticleChannels: readonly string[];
   readonly attachmentMetadataSupport: boolean;
-  readonly binaryAttachmentSupport: false;
+  readonly binaryAttachmentSupport: true;
   readonly unsupportedArticleMutations: readonly string[];
   readonly searchServiceAvailable: boolean;
   readonly historyServiceAvailable: boolean;
@@ -169,6 +169,9 @@ export class ZammadAdapter extends IntegrationAdapterBase {
 
     this.restClient = new ZammadRestClient({
       client: transport,
+      fetchFn: options.fetchFn,
+      apiBaseUrl: configuration.zammad.apiBaseUrl,
+      timeoutMs: configuration.zammad.timeoutMs,
       getAuth: async () => {
         const apiToken = await this.resolveApiToken(configuration.zammad.apiTokenRef, {
           correlationId: "zammad-client-auth",
@@ -182,6 +185,7 @@ export class ZammadAdapter extends IntegrationAdapterBase {
       context,
       configuration,
       client: transport,
+      fetchFn: options.fetchFn,
       resolveApiToken: async (credentialRef, tenantId, correlationId) =>
         this.resolveApiToken(credentialRef, { correlationId, tenantId }),
     });
@@ -258,7 +262,7 @@ export class ZammadAdapter extends IntegrationAdapterBase {
       customerReplyCreationAvailable: coreAvailable,
       supportedArticleChannels: ["note", "email", "phone", "web", "chat", "sms", "fax"],
       attachmentMetadataSupport: true,
-      binaryAttachmentSupport: false,
+      binaryAttachmentSupport: true,
       unsupportedArticleMutations: ["update", "delete"],
       searchServiceAvailable: coreAvailable,
       historyServiceAvailable: coreAvailable,
@@ -570,7 +574,7 @@ export class ZammadAdapter extends IntegrationAdapterBase {
         status: this.apiStatus === "reachable" ? "pass" : "warn",
         message:
           this.apiStatus === "reachable"
-            ? "Article service available (metadata attachments only; no update/delete)"
+            ? "Article service available (binary attachments via CE; no update/delete)"
             : "Article service availability unknown until API is reachable",
       },
       {
@@ -695,7 +699,7 @@ export class ZammadAdapter extends IntegrationAdapterBase {
         ...(compatibility.compatibilityStatus === "incompatible"
           ? ["Upgrade Zammad to the supported range 6.3.0–6.5.x"]
           : []),
-        "Binary attachment transfer, webhook ingress, and Platform Event Bus remain deferred",
+        "Attachment delete and Support realtime WS/SSE remain deferred",
         ...(extension.searchLimitations.length
           ? [`Search limitations: ${extension.searchLimitations.join("; ")}`]
           : []),

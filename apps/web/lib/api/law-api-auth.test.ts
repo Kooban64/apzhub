@@ -167,6 +167,29 @@ describe("resolveLawApiPermissions", () => {
 
     expect(checker.can("legal.nav.dashboard.view")).toBe(true);
   });
+
+  it("does not inject * when grants are empty even if dev registration is allowed", async () => {
+    mockIsDevRegistrationAllowed.mockReturnValue(true);
+
+    const checker = await resolveLawApiPermissions({
+      user: { userId: "user-1", email: "a@b.com", name: "A", emailVerified: true },
+      permissions: [],
+    });
+
+    expect(checker.adapterKind).toBe("auth");
+    expect(checker.permissions).toEqual([]);
+    expect(checker.can("legal.nav.dashboard.view")).toBe(false);
+  });
+
+  it("honours legal.* namespace grants via pattern match", async () => {
+    const checker = await resolveLawApiPermissions({
+      user: { userId: "user-1", email: "a@b.com", name: "A", emailVerified: true },
+      permissions: ["legal.*"],
+    });
+
+    expect(checker.can("legal.nav.dashboard.view")).toBe(true);
+    expect(checker.can("platform.impersonation.use")).toBe(false);
+  });
 });
 
 describe("buildLawApiAuthenticatedContext", () => {
@@ -235,16 +258,34 @@ describe("buildLawApiAuthenticatedContext", () => {
       headers: { "x-tenant-id": "t0000001-0000-4000-8000-000000000001" },
     });
 
+    // Default provisioned Law roles grant legal.* / law.* / trust.* — use a key outside that set.
     const result = await buildLawApiAuthenticatedContext(request, {
       requireAuth: true,
       requireTenant: true,
-      requiredPermission: "legal.nav.dashboard.view",
+      requiredPermission: "platform.impersonation.use",
     });
 
     expect(result.ok).toBe(false);
     if (!result.ok) {
       expect(result.response.status).toBe(403);
     }
+  });
+
+  it("allows legal.* wildcard grants for Law navigation permissions", async () => {
+    mockGetValidatedSession.mockResolvedValue(mockSession);
+    vi.stubEnv("NODE_ENV", "production");
+
+    const request = new NextRequest("http://localhost/api/law/v1/diagnostics", {
+      headers: { "x-tenant-id": "t0000001-0000-4000-8000-000000000001" },
+    });
+
+    const result = await buildLawApiAuthenticatedContext(request, {
+      requireAuth: true,
+      requireTenant: true,
+      requiredPermission: "legal.nav.dashboard.view",
+    });
+
+    expect(result.ok).toBe(true);
   });
 });
 

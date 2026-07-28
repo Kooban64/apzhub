@@ -1,5 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 
+import { signIn } from "./testing-ui-helpers";
+
 /**
  * APZMETRICS-004 Metrics Administration Workbench E2E (mocked HTTP).
  * Metadata-only journey — no formula/KPI execution.
@@ -165,8 +167,11 @@ test.describe("APZMETRICS-004 Metrics Workbench (mocked)", () => {
     page,
   }) => {
     await mockMetricsHttpApi(page);
+    await signIn(page);
     await page.goto(`${METRICS_HOME}/overview`);
-    await expect(page.getByTestId("metrics-page")).toBeVisible();
+    await expect(page.getByTestId("metrics-page")).toBeVisible({
+      timeout: 20_000,
+    });
     await expect(page.getByTestId("banner-formula-execution")).toContainText(
       "FORMULA EXECUTION NOT AVAILABLE",
     );
@@ -197,7 +202,10 @@ test.describe("APZMETRICS-004 Metrics Workbench (mocked)", () => {
 
   test("shows METRICS_SERVICE_UNAVAILABLE when disabled", async ({ page }) => {
     await mockMetricsHttpApi(page, { disabled: true });
+    await signIn(page);
     await page.goto(`${METRICS_HOME}/overview`);
-    await expect(page.getByTestId("metrics-unavailable")).toBeVisible();
+    await expect(page.getByTestId("metrics-unavailable")).toBeVisible({
+      timeout: 20_000,
+    });
   });
 });

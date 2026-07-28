@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: qep-automation
+name: Automation Management
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Automation Management (M07) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  product: apzqep
+  moduleCatalogueId: M07
+  slug: automation
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: stub
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Automation Management
+    icon: flask-conical
+    route: /workspace/qep/automation
+    order: 70
+    permission: qep.automation.read
+  view:
+    title: Automation Management
+    workspace: qep
+    route: /workspace/qep/automation
+    permission: qep.automation.read

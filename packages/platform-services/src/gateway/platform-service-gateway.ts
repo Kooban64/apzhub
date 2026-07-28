@@ -28,6 +28,7 @@ import type { AdministrationPlatformGateway } from "@apzhub/admin-contracts";
 import type { IdentityPlatformGateway } from "@apzhub/identity-contracts";
 import type { ObservePlatformGateway } from "@apzhub/observe-contracts";
 import type { MetricsPlatformGateway } from "@apzhub/metrics-contracts";
+import type { AnalyticsPlatformGateway } from "@apzhub/analytics-contracts";
 import type { WorkflowPlatformGateway } from "@apzhub/workflow-contracts";
 import { PlatformServiceError } from "@apzhub/platform-service-contracts";
 
@@ -57,6 +58,20 @@ import type {
 import type { TestingPlatformGatewayWithReporting } from "../services/testing";
 import type { SearchPlatformServiceImpls } from "../services/search/search-service-impls";
 import type { SearchExecutionServiceImpls } from "../services/search-execution/create-search-execution-services";
+import type { QepRequirementPlatformService } from "../services/qep/qep-service-impl";
+import type { QepTraceabilityPlatformService } from "../services/qep/qep-traceability-service-impl";
+import type { QepTestSpecificationPlatformService } from "../services/qep/qep-test-specification-service-impl";
+import type { QepTestPlanPlatformService } from "../services/qep/qep-test-plan-service-impl";
+import type { QepVerificationPlatformService } from "../services/qep/qep-verification-service-impl";
+
+/** Platform-wired QEP gateway — short pipeline operation names (list/get/create/...). */
+export type QepPlatformGateway = {
+  readonly requirements: QepRequirementPlatformService;
+  readonly traceability: QepTraceabilityPlatformService;
+  readonly verification: QepVerificationPlatformService;
+  readonly specifications: QepTestSpecificationPlatformService;
+  readonly plans: QepTestPlanPlatformService;
+};
 
 export interface PlatformServiceGatewayDeps {
   readonly workspace: WorkspaceServiceImpl;
@@ -100,10 +115,12 @@ export interface PlatformServiceGatewayDeps {
   readonly identityApi?: IdentityPlatformGateway;
   readonly observeApi?: ObservePlatformGateway;
   readonly metricsApi?: MetricsPlatformGateway;
+  readonly qepApi?: QepPlatformGateway;
   readonly platformQualityApi?: PlatformQualityGateway;
   readonly platformReleaseApi?: PlatformReleaseGateway;
   readonly platformGovernanceApi?: PlatformGovernanceGateway;
   readonly timeApi?: TimePlatformGateway;
+  readonly analyticsApi?: AnalyticsPlatformGateway;
   readonly mapping: MappingOrchestrator;
   readonly resolver: ProviderResolver;
   readonly registry: ProviderRegistry;
@@ -135,6 +152,16 @@ function unsupportedTimeCapability(): PlatformServiceError {
     category: "configuration",
     code: "PROVIDER_CAPABILITY_UNSUPPORTED",
     message: "Time platform services are not enabled",
+    correlationId: "platform-gateway",
+    retryable: false,
+  });
+}
+
+function unsupportedAnalyticsCapability(): PlatformServiceError {
+  return new PlatformServiceError({
+    category: "configuration",
+    code: "PROVIDER_CAPABILITY_UNSUPPORTED",
+    message: "Analytics platform services are not enabled",
     correlationId: "platform-gateway",
     retryable: false,
   });
@@ -275,6 +302,14 @@ export class PlatformServiceGateway {
     return this.deps.timeApi;
   }
 
+  /** Analytics platform capability (APZHUB-PLATFORM-ANALYTICS-004) — available when Analytics bundle is registered. */
+  get analytics(): AnalyticsPlatformGateway {
+    if (!this.deps.analyticsApi) {
+      throw unsupportedAnalyticsCapability();
+    }
+    return this.deps.analyticsApi;
+  }
+
   /**
    * Platform reporting capability (APZREPORT-002).
    * Backed by the shared reporting engine; first consumer ports from Testing when enabled.
@@ -354,10 +389,10 @@ export class PlatformServiceGateway {
   }
 
   /**
-   * Workflow Platform capability (APZWORKFLOW-002).
-   * Nested facets — metadata / lifecycle only; never execution / n8n.
+   * Workflow Platform capability (APZWORKFLOW-002/007 + APZHUB-PLATFORM-WORKFLOW-004).
+   * Nested facets — SoR + engine discovery + runtime orchestration ports.
    *
-   * Shape: gateway.workflow.{workflows,versions,templates,categories,folders,validation,audit}
+   * Shape: gateway.workflow.{workflows,versions,templates,…,engine,runs,schedules,tasks,approvals,notifications,capabilities,health}
    */
   get workflow(): WorkflowPlatformGateway {
     return this.workflowGateway;
@@ -407,7 +442,7 @@ export class PlatformServiceGateway {
    * Observability Platform capability (APZOBSERVE-002).
    * Nested facets — metadata / lifecycle only; never provider execution.
    *
-   * Shape: gateway.observe.{healthChecks,readinessChecks,livenessChecks,serviceHealth,serviceStatus,componentStatus,metricDefinitions,metricSamples,alertDefinitions,alertStates,dashboardDefinitions,logSources,traceDefinitions,traceSpans,incidentReferences,maintenanceWindows,healthSummaries,metadata,diagnostics}
+   * Shape: gateway.observe.{healthChecks,readinessChecks,livenessChecks,serviceHealth,serviceStatus,componentStatus,metricDefinitions,metricSamples,alertDefinitions,alertStates,alertEvaluation,dashboardDefinitions,logSources,traceDefinitions,traceSpans,incidentReferences,maintenanceWindows,healthSummaries,metadata,diagnostics}
    */
   get observe(): ObservePlatformGateway {
     return this.observeGateway;
@@ -421,6 +456,20 @@ export class PlatformServiceGateway {
    */
   get metrics(): MetricsPlatformGateway {
     return this.metricsGateway;
+  }
+
+  /** QEP Requirements capability (APZQEP-ENG-020B). */
+  get qep(): QepPlatformGateway {
+    if (!this.deps.qepApi) {
+      throw new PlatformServiceError({
+        category: "configuration",
+        code: "PROVIDER_CAPABILITY_UNSUPPORTED",
+        message: "QEP platform services are not enabled",
+        correlationId: "platform-gateway",
+        retryable: false,
+      });
+    }
+    return this.deps.qepApi;
   }
 
   /**

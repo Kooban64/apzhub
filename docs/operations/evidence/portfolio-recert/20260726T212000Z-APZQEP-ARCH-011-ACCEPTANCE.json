@@ -1,0 +1,9 @@
+{
+  "programme": "APZQEP-ARCH-011",
+  "title": "Test Specifications Capability Architecture",
+  "recordedAt": "2026-07-26T21:20:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Engineering Programme Instruction APZQEP-ENG-050A",
+  "effect": "ARCH-011 closed. APZQEP-ENG-050A Test Specifications Domain Model authorised (domain only).",
+  "notAuthorised": ["Infrastructure", "Persistence", "REST", "Workbench", "AI", "MCP"]
+}

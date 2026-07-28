@@ -1,0 +1,61 @@
+{
+  "programme": "APZQEP-ARCH-010",
+  "title": "Verification Workbench Architecture",
+  "recordedAt": "2026-07-26T19:15:00Z",
+  "status": "IMPLEMENTED / AWAITING OWNER ACCEPTANCE",
+  "classification": "Owner Architecture Programme",
+  "revision": "1.0.0-arch",
+  "pack": "docs/products/apzqep/architecture/verification-workbench/",
+  "authoritativeDocument": "docs/products/apzqep/architecture/verification-workbench/VERIFICATION-WORKBENCH-ARCHITECTURE.md",
+  "baselines": {
+    "ARCH-006": "ACCEPTED",
+    "ARCH-009": "ACCEPTED",
+    "ENG-040A": "ACCEPTED",
+    "ENG-040B": "ACCEPTED",
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN",
+    "package": "@apzhub/qep-verification@0.2.0"
+  },
+  "deliverables": [
+    "VERIFICATION-WORKBENCH-ARCHITECTURE.md",
+    "ARCHITECTURE-OVERVIEW.md",
+    "WORKSPACE-MODEL.md",
+    "EXPLORER-MODEL.md",
+    "QUEUE-MODEL.md",
+    "ASSIGNMENT-MODEL.md",
+    "DECISION-WORKFLOW.md",
+    "INSPECTOR-MODEL.md",
+    "TIMELINE-MODEL.md",
+    "HISTORY-MODEL.md",
+    "DASHBOARD-MODEL.md",
+    "SEARCH-MODEL.md",
+    "NAVIGATION-MODEL.md",
+    "PERFORMANCE-MODEL.md",
+    "ACCESSIBILITY-MODEL.md",
+    "AI-CONSIDERATIONS.md",
+    "MCP-CONSIDERATIONS.md",
+    "ARCHITECTURE-DECISION-RECORDS.md",
+    "ARCHITECTURE-COMPLETION-REPORT.md",
+    "README.md"
+  ],
+  "validation": {
+    "consistencyWithBaselines": "PASS",
+    "contradictions": "NONE",
+    "engineeringDelivered": false
+  },
+  "notAuthorised": [
+    "React",
+    "Next.js",
+    "routes",
+    "Workbench UI",
+    "REST API changes",
+    "persistence",
+    "Coverage",
+    "Impact",
+    "Evidence",
+    "Certification",
+    "AI",
+    "MCP"
+  ],
+  "stopCondition": "APZQEP-ARCH-010 IMPLEMENTED / AWAITING OWNER ACCEPTANCE — await Owner review; no Workbench engineering"
+}

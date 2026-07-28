@@ -45,7 +45,12 @@ export function getPool(connectionString?: string): pg.Pool {
 }
 
 export function createDb(connectionString?: string) {
-  return drizzle(getPool(connectionString), { schema: fullSchema });
+  // Explicit connection strings must not reuse the process-global pool
+  // (e.g. RLS tester role vs superuser DATABASE_URL — REM-001 / OR-DEF-003).
+  if (connectionString) {
+    return drizzle(createPool(connectionString), { schema: fullSchema });
+  }
+  return drizzle(getPool(), { schema: fullSchema });
 }
 
 export type Database = ReturnType<typeof createDb>;

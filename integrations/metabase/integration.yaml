@@ -1,0 +1,54 @@
+manifestSchemaVersion: "1.0"
+id: metabase
+name: Metabase Analytics Integration
+version: 0.1.0
+kind: integration
+
+metadata:
+  category: integrations
+  description: >
+    Metabase Community Edition Integration Foundation adapter for the APZHUB
+    Analytics Platform. Health, auth, diagnostics, version/capability detection.
+    Not user-facing. Does not implement Analytics Platform Services or Workbench.
+  owner: APZHUB
+  tags:
+    - metabase
+    - analytics
+    - adapter
+    - foundation
+    - oss
+
+dependencies:
+  platform: []
+
+integration:
+  type: oss-application
+  capabilities:
+    - health
+    - authentication-bridge
+    - error-translation
+    - diagnostics
+    - version
+    - compatibility
+    - readiness
+    - feature-detection
+    - capability-detection
+    - metrics
+    - logging
+    - collections-metadata
+    - dashboard-embed-planned
+
+health:
+  enabled: true
+
+documentation:
+  userVisible: false
+  engineBranding: hidden
+  supportedApiVersion: "v1"
+  supportedEngineVersionMin: "Metabase 0.49.0"
+  supportedEngineVersionMax: "Metabase 0.5x"
+  adapterImplementation: APZHUB-INTEGRATION-METABASE-001
+
+tests:
+  contract: pass
+  integration: pass

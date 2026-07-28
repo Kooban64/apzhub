@@ -1,0 +1,43 @@
+{
+  "programme": "APZQEP-ENG-020E",
+  "part": "2",
+  "title": "Requirements Baselines — Application Service, Persistence, API, Permissions",
+  "recordedAt": "2026-07-25T19:00:00Z",
+  "baseline": "APZQEP-ENG-020E Part 1 — PART 1 FOUNDATIONS COMPLETE",
+  "state": "PART 2 IMPLEMENTED",
+  "acceptance": "AWAITING REMAINDER OF PROGRAMME SPECIFICATION",
+  "package": {
+    "@apzhub/qep-requirements": "0.6.0"
+  },
+  "delivered": [
+    "RequirementBaselineApplicationService — createBaseline, updateDraftBaseline, addRequirementVersion, removeRequirementVersion, lockBaseline, archiveBaseline, listBaselines, getBaseline, listBaselineItems, requirementBaselineHistory, compareBaselines",
+    "In-memory baseline repository adapter (test/dev)",
+    "PostgreSQL baseline repository adapter",
+    "Migrations 0074_apz_qep_requirement_baseline.sql, 0075_apz_qep_requirement_baseline_rls.sql (tenant RLS)",
+    "REST API routes: list/create/read/update draft, add/remove item, lock, archive, compare, requirement baseline history",
+    "Permissions qep.requirements.baselines.{view,create,modify,lock,archive,compare}",
+    "Domain events published via application service (BaselineCreated, BaselineItemAdded, BaselineItemRemoved, BaselineLocked, BaselineArchived, BaselineCompared)",
+    "Application-level orchestration tests (creation, membership, permission enforcement, event publication)"
+  ],
+  "notDelivered": [
+    "Integrity fingerprinting and verifyBaselineIntegrity (Part 3)",
+    "Empty-lock rejection enforced at the domain/application boundary with integrity metadata (Part 3)",
+    "availableActions on the baseline DTO (Part 3)",
+    "Workbench UI (Part 3)",
+    "clone/unlock/restore/delete",
+    "requirement relationships",
+    "Verification domain capabilities",
+    "AI",
+    "MCP"
+  ],
+  "tests": {
+    "command": "pnpm --filter @apzhub/qep-requirements test",
+    "result": "PASS — application service and repository suites green at time of Part 2 delivery"
+  },
+  "typecheck": {
+    "command": "pnpm --filter @apzhub/qep-requirements typecheck",
+    "result": "PASS"
+  },
+  "stopRule": "No integrity fingerprinting, verifyBaselineIntegrity, or Workbench UI until Part 3 is authorised and delivered.",
+  "supersededBy": "20260725T203000Z-APZQEP-ENG-020E.json"
+}

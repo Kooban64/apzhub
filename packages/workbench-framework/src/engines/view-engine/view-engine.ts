@@ -69,9 +69,28 @@ export class ViewEngine implements WorkbenchEngine {
     return workspaceViews.find((descriptor) => descriptor.default) ?? workspaceViews[0];
   }
 
+  /**
+   * Resolve the best registered view for a pathname.
+   * Prefers the longest matching view route (exact or prefix) so product deep links
+   * such as `/workspace/projects/{id}` activate the workspace view instead of leaving
+   * a stale Home focus that the shell route-sync effect would rewind to.
+   */
   resolveViewIdForRoute(route: string): string | undefined {
-    return this.getVisibleDescriptors().find((descriptor) => descriptor.route === route)
-      ?.viewId;
+    let best: { viewId: string; routeLength: number } | undefined;
+
+    for (const descriptor of this.getVisibleDescriptors()) {
+      const candidate = descriptor.route;
+      if (!candidate) {
+        continue;
+      }
+      if (route === candidate || route.startsWith(`${candidate}/`)) {
+        if (!best || candidate.length > best.routeLength) {
+          best = { viewId: descriptor.viewId, routeLength: candidate.length };
+        }
+      }
+    }
+
+    return best?.viewId;
   }
 
   resolveViewIdForNavigationItem(item: {

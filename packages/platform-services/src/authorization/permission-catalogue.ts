@@ -42,6 +42,22 @@ import {
   PLATFORM_TIME_PERMISSIONS,
   type PlatformTimePermission,
 } from "../services/time/time-permissions";
+import {
+  PLATFORM_ANALYTICS_PERMISSIONS,
+  type PlatformAnalyticsPermission,
+} from "@apzhub/analytics-contracts";
+import {
+  QEP_REQUIREMENTS_PERMISSIONS,
+  type QepRequirementsPermission,
+  QEP_TRACEABILITY_PERMISSIONS,
+  type QepTraceabilityPermission,
+  QEP_VERIFICATION_PERMISSIONS,
+  type QepVerificationPermission,
+  QEP_TEST_SPECIFICATION_PERMISSIONS,
+  type QepTestSpecificationPermission,
+  QEP_TEST_PLAN_PERMISSIONS,
+  type QepTestPlanPermission,
+} from "@apzhub/qep-contracts";
 
 /**
  * Platform permission catalogue for gateway-exposed capabilities (OSS-110-06 / OSS-110-08).
@@ -111,6 +127,12 @@ export type PlatformPermissionKey =
   | PlatformObservePermission
   | PlatformMetricsPermission
   | PlatformTimePermission
+  | PlatformAnalyticsPermission
+  | QepRequirementsPermission
+  | QepTraceabilityPermission
+  | QepVerificationPermission
+  | QepTestSpecificationPermission
+  | QepTestPlanPermission
   | "platform.impersonation.use";
 
 export function permissionKey(
@@ -230,6 +252,18 @@ export const PLATFORM_SERVICE_PERMISSION_CATALOGUE = [
   ...PLATFORM_METRICS_PERMISSIONS,
   // Time platform services (APZHUB-PLATFORM-TIME-001)
   ...PLATFORM_TIME_PERMISSIONS,
+  // Analytics platform services (APZHUB-PLATFORM-ANALYTICS-004)
+  ...PLATFORM_ANALYTICS_PERMISSIONS,
+  // QEP Requirements platform services (APZQEP-ENG-020B)
+  ...QEP_REQUIREMENTS_PERMISSIONS,
+  // QEP Traceability platform services (APZQEP-ENG-030A Part 2)
+  ...QEP_TRACEABILITY_PERMISSIONS,
+  // QEP Verification platform services (APZQEP-ENG-040B Part 2)
+  ...QEP_VERIFICATION_PERMISSIONS,
+  // QEP Test Specification platform services (APZQEP-ENG-050B Part 2)
+  ...QEP_TEST_SPECIFICATION_PERMISSIONS,
+  // QEP Test Plans platform services (APZQEP-ENG-060B Part 2)
+  ...QEP_TEST_PLAN_PERMISSIONS,
   // Legacy Administration / provider / mapping capability keys
   "administration.manage",
   "administration.administer",

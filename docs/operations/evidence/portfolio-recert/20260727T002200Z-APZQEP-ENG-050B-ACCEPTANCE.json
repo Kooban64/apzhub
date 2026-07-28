@@ -1,0 +1,24 @@
+{
+  "programme": "APZQEP-ENG-050B",
+  "title": "Test Specifications Infrastructure Engineering",
+  "recordedAt": "2026-07-27T00:22:00Z",
+  "decision": "ACCEPTED",
+  "authority": "Owner Decision — capability baseline confirmation alongside OES-ARCH-012 Acceptance",
+  "path": "docs/products/apzqep/test-specifications/engine/README.md",
+  "acceptance": "docs/products/apzqep/test-specifications/engine/OWNER-ACCEPTANCE.md",
+  "package": {
+    "name": "@apzhub/qep-test-specifications",
+    "version": "0.2.0"
+  },
+  "apiBase": "/api/v1/qep/specifications",
+  "migrations": ["0083", "0084"],
+  "relatedAdr": "ADR-0074",
+  "authorises": [
+    "API baseline for Workbench Engineering (after OES-ENG-050C Acceptance)"
+  ],
+  "notAuthorised": [
+    "Workbench Engineering implementation before OES-ENG-050C Acceptance",
+    "Certification",
+    "Test Cases / Executions / Evidence engines"
+  ]
+}

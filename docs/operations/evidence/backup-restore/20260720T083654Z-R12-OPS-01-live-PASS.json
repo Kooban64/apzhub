@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0.0",
+  "programmeId": "APZHUB-1.2-002",
+  "backlogItemId": "R12-OPS-01",
+  "riskId": "OPS-R-04",
+  "mode": "live",
+  "executedAt": "2026-07-20T08:36:54.574Z",
+  "environment": "dev",
+  "target": {
+    "dataClass": "platform-postgresql",
+    "containerName": "apzhub-postgres",
+    "databaseName": "apzhub_restore_drill"
+  },
+  "steps": [
+    {
+      "id": "artefacts.present",
+      "title": "Backup/recovery docs and drill runbook present",
+      "status": "pass",
+      "detail": "Required backup/recovery artefacts are present."
+    },
+    {
+      "id": "scope.platform-postgres",
+      "title": "Drill scoped to platform PostgreSQL only",
+      "status": "pass",
+      "detail": "Target database apzhub_restore_drill on container apzhub-postgres (platform PostgreSQL only)."
+    },
+    {
+      "id": "marker.write",
+      "title": "Write restore-verification marker",
+      "status": "pass",
+      "detail": "Marker r12-ops-01-1784536613202 written."
+    },
+    {
+      "id": "backup.create",
+      "title": "Create logical backup (pg_dump)",
+      "status": "pass",
+      "detail": "Logical dump written to local artefact path (gitignored)."
+    },
+    {
+      "id": "restore.apply",
+      "title": "Restore backup into drill database",
+      "status": "pass",
+      "detail": "Dump restored into isolated drill database."
+    },
+    {
+      "id": "marker.verify",
+      "title": "Verify marker after restore",
+      "status": "pass",
+      "detail": "Marker verified after restore."
+    },
+    {
+      "id": "evidence.write",
+      "title": "Persist recovery evidence record",
+      "status": "pass",
+      "detail": "Evidence persistence step reached."
+    }
+  ],
+  "verdict": "PASS",
+  "notes": [
+    "Live drill used isolated database apzhub_restore_drill.",
+    "Dump artefact retained under .local/ops/backup-restore/ (not committed)."
+  ],
+  "artefactPaths": [
+    "docs/operations/BACKUP-AND-RECOVERY.md",
+    "docs/operations/BACKUP-RESTORE-DRILL-RUNBOOK.md",
+    "docs/operations/evidence/backup-restore/README.md"
+  ]
+}

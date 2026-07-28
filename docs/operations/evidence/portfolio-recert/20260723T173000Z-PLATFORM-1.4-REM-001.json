@@ -1,0 +1,37 @@
+{
+  "programme": "Platform-1.4-REM-001",
+  "title": "Platform 1.4 Operational Readiness Remediation",
+  "classification": "REMEDIATION",
+  "baseline": "Platform 1.4",
+  "reference": ["Platform-1.4-OR-001", "ADR-0073"],
+  "timestamp": "2026-07-23T17:30:00Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER REMEDIATION ACCEPTANCE",
+  "defectsClosed": ["OR-DEF-001", "OR-DEF-002", "OR-DEF-003"],
+  "defectsReclassified": {
+    "OR-DEF-004": ["APZ Notify", "APZ TCMS", "APZ Support"]
+  },
+  "migrations": {
+    "0065": "verified",
+    "0066": "verified",
+    "0067": "verified",
+    "liveMigrationCount": 68
+  },
+  "featureFlagDefault": "OFF",
+  "processLocalRuntimeRetained": true,
+  "newFunctionality": false,
+  "architectureChanges": false,
+  "qualityGates": {
+    "build": "FAIL_global_error_prerender_known_next16",
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "formatCheck": "PASS",
+    "affectedVitest": "PASS_79",
+    "certificationAffected": "PASS",
+    "migrationVerification": "PASS",
+    "rlsIntegration": "PASS_3"
+  },
+  "pack": "docs/operations/platform-1.4-rem-001/",
+  "nextProgramme": "Platform-1.4-CERT-001",
+  "nextProgrammeStatus": "PROPOSED_BLOCKED"
+}

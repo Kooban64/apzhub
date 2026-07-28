@@ -273,7 +273,7 @@ test.describe("APZCONFIG-004 Configuration Workbench", () => {
     await mockConfigurationHttpApi(page);
     await signIn(page);
     await page.goto(`${CONFIGURATION_HOME}/configurations`);
-    await expect(page.getByText("cfg_pw")).toBeVisible();
+    await expect(page.getByRole("cell", { name: "cfg_pw" })).toBeVisible();
     await expect(page.getByTestId("value-hidden-notice")).toContainText("VALUE HIDDEN");
 
     await page.goto(`${CONFIGURATION_HOME}/diagnostics`);

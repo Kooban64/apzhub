@@ -8,6 +8,7 @@ import { expect, test } from "@playwright/test";
 test.describe("APZADMIN-003 Administration HTTP typed client (mocked)", () => {
   test("mock fetch to /api/v1/administration serves module list envelope", async ({
     page,
+    baseURL,
   }) => {
     await page.route("**/api/v1/administration/**", async (route) => {
       const url = new URL(route.request().url());
@@ -63,19 +64,24 @@ test.describe("APZADMIN-003 Administration HTTP typed client (mocked)", () => {
       });
     });
 
-    const result = await page.evaluate(async () => {
-      const modulesRes = await fetch("/api/v1/administration/modules", {
+    // Absolute URLs — relative fetch has no document base on about:blank (RG-MOCK-FETCH).
+    const origin = new URL(baseURL ?? "http://localhost:3300").origin;
+    const result = await page.evaluate(async (origin) => {
+      const modulesRes = await fetch(`${origin}/api/v1/administration/modules`, {
         credentials: "include",
         headers: { accept: "application/json" },
       });
       const modules = await modulesRes.json();
-      const capsRes = await fetch("/api/v1/administration/management-capabilities", {
-        credentials: "include",
-        headers: { accept: "application/json" },
-      });
+      const capsRes = await fetch(
+        `${origin}/api/v1/administration/management-capabilities`,
+        {
+          credentials: "include",
+          headers: { accept: "application/json" },
+        },
+      );
       const caps = await capsRes.json();
       return { modules, caps };
-    });
+    }, origin);
 
     expect(result.modules.data[0].id).toBe("mod_pw");
     expect(result.caps.data.httpEnabled).toBe(true);

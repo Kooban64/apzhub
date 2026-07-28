@@ -84,7 +84,7 @@ const versions = [
     "version-integration-search-sdk",
   ],
   ["integrations/meilisearch/package.json", "0.1.0", "version-integration-meilisearch"],
-  ["packages/platform-services/package.json", "0.26.1", "version-platform-services"],
+  ["packages/platform-services/package.json", "0.32.0", "version-platform-services"],
 ];
 for (const [path, expected, rule] of versions) {
   requirePackageVersion(path, expected, rule);

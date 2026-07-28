@@ -22,7 +22,7 @@
 | Architecture readiness  | PASS — reference architecture + LAW milestones                                               |       |
 | Platform dependencies   | PASS — consumes closed platform foundation                                                   |       |
 | Provisioning readiness  | PARTIAL — app exists; commercial onboarding continues                                        |       |
-| Governance readiness    | PARTIAL — OBS-LAW-01 permission wiring                                                       |       |
+| Governance readiness    | READY — OBS-LAW-01 closed (APZHUB-1.1-001)                                                   |       |
 | Integration readiness   | PASS — native SoR (no OSS engine for core Law)                                               |       |
 | Testing readiness       | PASS — extensive Law tests exist (some placeholder UX)                                       |       |
 | Certification readiness | PARTIAL — readiness approved for product validation; not full commercial GA declaration here |       |

@@ -77,6 +77,10 @@ import {
   alertStateIdParamSchema,
   createAlertStatesBodySchema,
   updateAlertStatesBodySchema,
+  acknowledgeAlertStateBodySchema,
+  resolveAlertStateBodySchema,
+  suppressAlertStateBodySchema,
+  evaluateAlertsBodySchema,
   dashboardDefinitionIdParamSchema,
   createDashboardDefinitionsBodySchema,
   updateDashboardDefinitionsBodySchema,
@@ -1591,5 +1595,106 @@ export async function handleUpdatePlatformDiagnostic(
     id,
     ...body,
   });
+  return jsonDataResponse(result, context.tracing);
+}
+
+// ---------------------------------------------------------------------------
+// Alert lifecycle + evaluation (ADR-0070 Phase A / Platform-1.3-ENG-002)
+// ---------------------------------------------------------------------------
+
+export async function handleAcknowledgeAlertState(
+  request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: RouteContext,
+) {
+  const id = asAlertStateId(
+    await param(routeContext, "alertStateId", alertStateIdParamSchema),
+  );
+  const body = await parseJsonBody(
+    request,
+    acknowledgeAlertStateBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
+  const gateway = await requireObserveGateway();
+  const result = await gateway.observe.alertStates.acknowledge(context.serviceContext, {
+    id,
+    note: body.note,
+  });
+  return jsonDataResponse(result, context.tracing);
+}
+
+export async function handleResolveAlertState(
+  request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: RouteContext,
+) {
+  const id = asAlertStateId(
+    await param(routeContext, "alertStateId", alertStateIdParamSchema),
+  );
+  const body = await parseJsonBody(
+    request,
+    resolveAlertStateBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
+  const gateway = await requireObserveGateway();
+  const result = await gateway.observe.alertStates.resolve(context.serviceContext, {
+    id,
+    note: body.note,
+  });
+  return jsonDataResponse(result, context.tracing);
+}
+
+export async function handleSuppressAlertState(
+  request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: RouteContext,
+) {
+  const id = asAlertStateId(
+    await param(routeContext, "alertStateId", alertStateIdParamSchema),
+  );
+  const body = await parseJsonBody(
+    request,
+    suppressAlertStateBodySchema,
+    PLATFORM_API_MAX_BODY_BYTES,
+  );
+  const gateway = await requireObserveGateway();
+  const result = await gateway.observe.alertStates.suppress(context.serviceContext, {
+    id,
+    reason: body.reason,
+  });
+  return jsonDataResponse(result, context.tracing);
+}
+
+export async function handleEvaluateAlerts(
+  request: NextRequest,
+  context: PlatformApiRequestContext,
+) {
+  await parseJsonBody(request, evaluateAlertsBodySchema, PLATFORM_API_MAX_BODY_BYTES);
+  const gateway = await requireObserveGateway();
+  const result = await gateway.observe.alertEvaluation.evaluateBatch(
+    context.serviceContext,
+  );
+  return jsonDataResponse(result, context.tracing);
+}
+
+export async function handleGetAlertEvaluationDiagnostics(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+) {
+  const gateway = await requireObserveGateway();
+  const result = await gateway.observe.alertEvaluation.getDiagnostics(
+    context.serviceContext,
+  );
+  return jsonDataResponse(result, context.tracing);
+}
+
+export async function handleGetAlertEvaluationHealth(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+) {
+  const gateway = await requireObserveGateway();
+  const result = await gateway.observe.alertEvaluation.getHealth(
+    context.serviceContext,
+  );
   return jsonDataResponse(result, context.tracing);
 }

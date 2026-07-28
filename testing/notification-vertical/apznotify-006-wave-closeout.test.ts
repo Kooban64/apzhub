@@ -24,11 +24,11 @@ describe("APZNOTIFY-006 Notification Wave Closeout", () => {
 
   it("retains frozen package versions", () => {
     const versions: Record<string, string> = {
-      "packages/notification-contracts/package.json": "0.2.0",
+      "packages/notification-contracts/package.json": "0.3.5",
       "packages/notification-core/package.json": "0.2.0",
       "packages/notification-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.26.1",
-      "packages/platform-service-contracts/package.json": "0.17.1",
+      "packages/platform-services/package.json": "0.32.0",
+      "packages/platform-service-contracts/package.json": "0.18.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const actual = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;
@@ -51,10 +51,10 @@ describe("APZNOTIFY-006 Notification Wave Closeout", () => {
     expect(completion).toMatch(/do not implement/i);
   });
 
-  it("keeps delivery routes absent at freeze", () => {
+  it("keeps unauthorised delivery routes absent at freeze", () => {
+    // /providers authorised under ENG-004; keep send/email freeze.
     for (const omitted of [
       "apps/web/app/api/v1/notifications/send",
-      "apps/web/app/api/v1/notifications/providers",
       "apps/web/app/api/v1/notifications/email",
     ]) {
       expect(existsSync(join(ROOT, omitted)), omitted).toBe(false);

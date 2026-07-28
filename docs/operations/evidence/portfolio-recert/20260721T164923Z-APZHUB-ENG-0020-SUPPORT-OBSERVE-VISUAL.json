@@ -1,0 +1,68 @@
+{
+  "programme": "APZHUB-ENG-0020",
+  "title": "Implement RG-SUPPORT-CERT + RG-OBSERVE-WB + RG-VISUAL-INBOX",
+  "baseline": "1.2.0",
+  "wave": 2,
+  "step": 5,
+  "timestampUtc": "20260721T164923Z",
+  "preconditions": {
+    "APZHUB-ENG-0019": "ACCEPTED",
+    "groups": ["RG-SUPPORT-CERT", "RG-OBSERVE-WB", "RG-VISUAL-INBOX"],
+    "statusBefore": "OPEN"
+  },
+  "remediationGroups": [
+    {
+      "id": "RG-SUPPORT-CERT",
+      "status": "REMEDIATED",
+      "failuresCleared": "QA2-F-009…014 (6 hard)",
+      "rootCause": "RCA-06"
+    },
+    {
+      "id": "RG-OBSERVE-WB",
+      "status": "REMEDIATED",
+      "failuresCleared": "QA2-F-001 (1 hard)",
+      "rootCause": "RCA-08"
+    },
+    {
+      "id": "RG-VISUAL-INBOX",
+      "status": "REMEDIATED",
+      "failuresCleared": "QA2-F-015 (1 hard)",
+      "rootCause": "RCA-09"
+    }
+  ],
+  "quality": {
+    "vitestAffected": "11/11 PASS",
+    "eslintAffected": "PASS",
+    "playwrightAffected": "20/20 PASS (0 flaky)",
+    "suites": [
+      "apzobserve-004-observe-workbench.spec.ts",
+      "oss-110-13-support-module.spec.ts",
+      "oss-110-14-support-accessibility.spec.ts",
+      "oss-110-14-support-ui-certification.spec.ts",
+      "oss-110-14-support-visual.spec.ts"
+    ]
+  },
+  "changes": [
+    "shouldRetrySupportQuery — no retry on terminal Support API codes",
+    "Support detail keeps cached UI on refetch; article create invalidates articles only",
+    "Observe hc_pw/md_pw cell locators (strict-mode)",
+    "Support a11y Tab starts inside support-page",
+    "Support cert lifecycle navigates via inbox; support-inbox snapshot refreshed"
+  ],
+  "remainingVsCert001AfterEng0020": {
+    "playwrightHard": 0,
+    "playwrightFlakyAuthShellAttributed": 0,
+    "vitest": 1,
+    "lint": 0,
+    "typecheck": 0
+  },
+  "recommendation": "READY FOR OWNER ACCEPTANCE",
+  "stop": [
+    "no RG-TESTING-ARCH",
+    "no ENG-0021",
+    "no Email SoR",
+    "no FIN-001",
+    "no Workflow Execute",
+    "no Release 1.3"
+  ]
+}

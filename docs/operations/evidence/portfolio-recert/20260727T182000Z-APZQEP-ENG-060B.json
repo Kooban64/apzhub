@@ -1,0 +1,63 @@
+{
+  "programme": "APZQEP-ENG-060B",
+  "title": "Test Plans Infrastructure Engineering",
+  "recordedAt": "2026-07-27T18:20:00Z",
+  "decision": "IMPLEMENTED / AWAITING ENGINEERING COMPLETION REVIEW (ECR)",
+  "authority": "Owner Engineering Programme Instruction APZQEP-ENG-060B",
+  "architecture": "APZQEP-ARCH-013 ACCEPTED / BASELINED / CLOSED",
+  "infrastructureSpecification": "APZQEP-OES-ENG-060B ACCEPTED / BASELINED / CLOSED",
+  "domainProgramme": "APZQEP-ENG-060A ACCEPTED / CLOSED",
+  "domainCertification": "APZQEP-CERT-060A CERTIFIED / CLOSED — @apzhub/qep-test-plans 0.1.0 CERTIFIED",
+  "package": {
+    "name": "@apzhub/qep-test-plans",
+    "version": "0.2.0"
+  },
+  "migrations": ["0085_apz_qep_test_plans", "0086_apz_qep_test_plans_rls"],
+  "apiBase": "/api/v1/qep/plans",
+  "baselines": {
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN",
+    "verification": "1.0.0 CERTIFIED / FROZEN",
+    "testSpecifications": "1.0.0 CERTIFIED / FROZEN"
+  },
+  "deliverables": [
+    "packages/qep-test-plans/",
+    "packages/qep-test-plans/src/domain/test-plan/plan-repository.ts",
+    "packages/qep-contracts/src/test-plan.ts",
+    "packages/config/drizzle/0085_apz_qep_test_plans.sql",
+    "packages/config/drizzle/0086_apz_qep_test_plans_rls.sql",
+    "packages/config/src/db/qep-test-plans-schema.ts",
+    "packages/platform-services/src/services/qep/qep-test-plan-service-impl.ts",
+    "packages/platform-services/src/services/qep/create-qep-test-plan-platform-services.ts",
+    "apps/web/app/api/v1/qep/plans/",
+    "apps/web/lib/api/v1/handlers/qep-test-plan.ts",
+    "apps/web/lib/api/v1/schemas/qep-test-plan.ts",
+    "modules/qep-test-plans/module.yaml",
+    "docs/products/apzqep/test-plans/infrastructure/"
+  ],
+  "quality": {
+    "packageTestsPassed": 99,
+    "packageTestFiles": 8,
+    "coverageLinesApprox": 77.24,
+    "coverageFunctionsApprox": 89.84,
+    "coverageBranchesApprox": 83.87,
+    "typecheck": "PASS",
+    "platformServicesQepTestsPassed": 17,
+    "webApiV1TestsPassed": 230,
+    "webApiV1TestFiles": 31
+  },
+  "domainChange": "None — Domain command/lifecycle behaviour, invariants, and events unchanged from 0.1.0 CERTIFIED baseline. Only additive change is the TestPlanRepository port (plan-repository.ts).",
+  "notAuthorised": [
+    "Workbench Architecture",
+    "Workbench Engineering",
+    "Certification",
+    "Evidence Engine",
+    "Coverage Engine",
+    "Impact Engine",
+    "AI",
+    "MCP",
+    "Execution",
+    "Test Cases"
+  ],
+  "stop": "APZQEP-ENG-060B IMPLEMENTED AWAITING ENGINEERING COMPLETION REVIEW (ECR)"
+}

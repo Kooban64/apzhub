@@ -1,0 +1,135 @@
+manifestSchemaVersion: "1.0"
+id: qep-verification
+name: Verification
+version: 1.0.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Verification for APZ QEP — 1.0.0 CERTIFIED / FROZEN (APZQEP-CERT-040D ACCEPTED). Package @apzhub/qep-verification 1.0.0. No Coverage / Impact / Evidence / Certification Engine / AI / MCP without further Owner Instruction."
+  product: apzqep
+  moduleCatalogueId: M-verification
+  slug: verification
+  programme: APZQEP-CERT-040D
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+  packages:
+    - "@apzhub/qep-verification"
+    - "@apzhub/qep-contracts"
+    - "@apzhub/search-qep"
+
+module:
+  category: quality-engineering
+  status: certified-frozen
+
+permissions:
+  - id: qep.verification.view
+    label: View Verifications
+  - id: qep.verification.create
+    label: Create Verifications
+  - id: qep.verification.request
+    label: Request Verifications
+  - id: qep.verification.assign
+    label: Assign Verifications
+  - id: qep.verification.start
+    label: Start Verifications
+  - id: qep.verification.complete
+    label: Complete Verifications
+  - id: qep.verification.reject
+    label: Reject Verifications
+  - id: qep.verification.expire
+    label: Expire Verifications
+  - id: qep.verification.withdraw
+    label: Withdraw Verifications
+  - id: qep.verification.supersede
+    label: Supersede Verifications
+  - id: qep.verification.cancel
+    label: Cancel Verifications
+  - id: qep.verification.retire
+    label: Retire Verifications
+  - id: qep.verification.modify
+    label: Modify Verifications
+  - id: qep.verification.history.view
+    label: View Verification History
+  - id: qep.verification.search
+    label: Search Verifications
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Verification
+    icon: shield-check
+    route: /workspace/qep/verification
+    order: 110
+    permission: qep.verification.view
+  view:
+    title: Verification
+    workspace: qep
+    route: /workspace/qep/verification
+    permission: qep.verification.view
+  additionalViews:
+    - id: qep-verification-dashboard
+      title: Dashboard
+      workspace: qep
+      route: /workspace/qep/verification/dashboard
+      permission: qep.verification.view
+      navigation:
+        level: sidebar
+        parent: qep-verification
+        label: Dashboard
+        icon: layout-dashboard
+        order: 111
+        permission: qep.verification.view
+    - id: qep-verification-queue
+      title: My Queue
+      workspace: qep
+      route: /workspace/qep/verification/queue
+      permission: qep.verification.view
+      navigation:
+        level: sidebar
+        parent: qep-verification
+        label: My Queue
+        icon: list-todo
+        order: 112
+        permission: qep.verification.view
+    - id: qep-verification-team
+      title: Team Queue
+      workspace: qep
+      route: /workspace/qep/verification/team
+      permission: qep.verification.view
+      navigation:
+        level: sidebar
+        parent: qep-verification
+        label: Team Queue
+        icon: users
+        order: 113
+        permission: qep.verification.view
+    - id: qep-verification-search
+      title: Search
+      workspace: qep
+      route: /workspace/qep/verification/search
+      permission: qep.verification.search
+      navigation:
+        level: sidebar
+        parent: qep-verification
+        label: Search
+        icon: search
+        order: 114
+        permission: qep.verification.search
+    - id: qep-verification-history
+      title: History
+      workspace: qep
+      route: /workspace/qep/verification/history
+      permission: qep.verification.history.view
+      navigation:
+        level: sidebar
+        parent: qep-verification
+        label: History
+        icon: history
+        order: 115
+        permission: qep.verification.history.view

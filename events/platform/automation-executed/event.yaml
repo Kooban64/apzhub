@@ -1,0 +1,29 @@
+manifestSchemaVersion: "1.0"
+id: platform-automation-executed
+name: Platform Automation Executed
+version: 1.0.0
+kind: event
+
+metadata:
+  category: platform
+  description: >
+    Emitted when the Cross-Product Automation Foundation records an
+    automation execution (succeeded, deferred, failed, or skipped).
+    APZHUB-1.1-004.
+
+event:
+  category: system
+  publisher: platform-automation-service
+  subscribers:
+    - audit:platform.audit
+    - activity:platform.activity
+  payload:
+    registrationKey: string
+    eventId: string
+    envelopeId: string
+    status: string
+    reason: string
+    correlationId: string
+
+documentation:
+  eventKey: platform.automation.executed

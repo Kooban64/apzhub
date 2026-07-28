@@ -1,0 +1,22 @@
+{
+  "programme": "APZHUB-QA-CERT-004",
+  "title": "Platform 1.2.0 Visual Certification Review",
+  "baseline": "1.2.0",
+  "timestamp": "20260721T194900Z",
+  "decision": "B_EXPECTED_BASELINE_UPDATE",
+  "recommendation": "READY FOR OWNER VISUAL ACCEPTANCE",
+  "finding": {
+    "expectedWas": "Home placeholder (/workspace/home) \u2014 incorrect baseline content",
+    "actualIs": "Support Analytics page with intelligence cards and distributions",
+    "dimensions": {
+      "expectedBefore": "1280x928",
+      "actualAndNewBaseline": "1280x1064"
+    },
+    "artifactUpdated": "testing/playwright/e2e/oss-110-14-support-visual.spec.ts-snapshots/support-analytics-chromium-linux.png"
+  },
+  "quality": {
+    "visualSuiteUpdate": "3/3 PASS",
+    "visualSuiteVerify": "see pw-verify.log"
+  },
+  "sourceCodeModified": false
+}

@@ -1,0 +1,22 @@
+{
+  "programme": "APZHUB-ENG-0007",
+  "remediationGroup": "RG-LAW-DNS",
+  "baseline": "Platform 1.2.0",
+  "timestamp": "20260721T023130Z",
+  "playwright": {
+    "config": "testing/playwright/playwright.law.config.ts",
+    "spec": "testing/playwright/e2e/law-015-trust-workflow.spec.ts",
+    "previouslyFailing": 7,
+    "nowPassing": 7,
+    "remainingFailures": 0,
+    "remainingFlaky": 0,
+    "result": "7 passed",
+    "log": "/tmp/eng-0007-playwright-deeplink.log"
+  },
+  "rootCause": "Client import graph pulled pg via repository-factory / persistence barrel / workbench deep-link rewind",
+  "quality": {
+    "vitestScoped": "18 passed",
+    "lawPlatformBuild": "PASS",
+    "dnsOverlay": "eliminated"
+  }
+}

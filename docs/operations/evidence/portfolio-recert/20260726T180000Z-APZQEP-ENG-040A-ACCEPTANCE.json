@@ -1,0 +1,10 @@
+{
+  "programme": "APZQEP-ENG-040A",
+  "title": "Verification Domain Model",
+  "recordedAt": "2026-07-26T18:00:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Engineering Programme Instruction APZQEP-ENG-040B",
+  "package": { "@apzhub/qep-verification": "0.1.0" },
+  "effect": "ENG-040A closed. APZQEP-ENG-040B Verification Infrastructure authorised (no Workbench).",
+  "notAuthorised": ["Workbench", "React", "Coverage", "Impact", "AI", "MCP"]
+}

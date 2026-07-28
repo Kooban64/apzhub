@@ -103,7 +103,7 @@ requirePackageVersion(
 // Certified providers remain at prior versions (no forced bumps)
 const providerPins = [
   ["integrations/plane/package.json", "0.6.0"],
-  ["integrations/zammad/package.json", "0.6.0"],
+  ["integrations/zammad/package.json", "0.8.0"],
   ["integrations/meilisearch/package.json", "0.1.0"],
   ["integrations/n8n/package.json", "0.1.0"],
   ["integrations/github-actions/package.json", "0.1.0"],

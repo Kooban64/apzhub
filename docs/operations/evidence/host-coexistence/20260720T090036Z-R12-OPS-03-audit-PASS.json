@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "1.0.0",
+  "programmeId": "APZHUB-1.2-004",
+  "backlogItemId": "R12-OPS-03",
+  "riskId": "OPS-R-01",
+  "executedAt": "2026-07-20T09:00:36.797Z",
+  "environment": "dev",
+  "findings": [
+    {
+      "id": "artefacts.present",
+      "severity": "pass",
+      "message": "Required host-coexistence artefacts are present."
+    },
+    {
+      "id": "compose.reserved.3080",
+      "severity": "pass",
+      "message": "Compose port 3080 is APZHUB-reserved."
+    },
+    {
+      "id": "compose.reserved.3443",
+      "severity": "pass",
+      "message": "Compose port 3443 is APZHUB-reserved."
+    },
+    {
+      "id": "compose.reserved.6380",
+      "severity": "pass",
+      "message": "Compose port 6380 is APZHUB-reserved."
+    },
+    {
+      "id": "compose.reserved.54334",
+      "severity": "pass",
+      "message": "Compose port 54334 is APZHUB-reserved."
+    },
+    {
+      "id": "threshold.valid.capacity.disk.used-percent",
+      "severity": "pass",
+      "message": "capacity.disk.used-percent threshold defined."
+    },
+    {
+      "id": "threshold.valid.capacity.docker.volume-growth",
+      "severity": "pass",
+      "message": "capacity.docker.volume-growth threshold defined."
+    },
+    {
+      "id": "threshold.valid.capacity.ports.conflict",
+      "severity": "pass",
+      "message": "capacity.ports.conflict threshold defined."
+    },
+    {
+      "id": "threshold.valid.capacity.postgres.connections",
+      "severity": "pass",
+      "message": "capacity.postgres.connections threshold defined."
+    },
+    {
+      "id": "threshold.valid.capacity.redis.memory",
+      "severity": "pass",
+      "message": "capacity.redis.memory threshold defined."
+    },
+    {
+      "id": "live.conflicts.none",
+      "severity": "pass",
+      "message": "No live reserved-port conflicts reported to audit."
+    }
+  ],
+  "verdict": "PASS",
+  "reservedApzhubPorts": [3300, 6006, 54334, 6380, 3080, 3443],
+  "forbiddenLegacyPorts": [
+    22, 80, 443, 8080, 54333, 15678, 18081, 18082, 18083, 18084, 18085, 18086, 18087,
+    18088, 18090, 18091, 18092, 18443, 19443, 3001, 3100, 3200
+  ],
+  "composePorts": [3080, 3443, 6380, 54334],
+  "notes": [
+    "Controls are coexistence guards — they do not remap legacy apz-stack ports.",
+    "Host Changes that disrupt legacy stack require Owner Approval."
+  ],
+  "artefactPaths": [
+    "ENVIRONMENT.md",
+    "docs/operations/CAPACITY-PLANNING.md",
+    "docs/operations/HOST-COEXISTENCE-CONTROLS.md",
+    "infrastructure/docker/docker-compose.dev.yml",
+    "docs/operations/evidence/host-coexistence/README.md"
+  ]
+}

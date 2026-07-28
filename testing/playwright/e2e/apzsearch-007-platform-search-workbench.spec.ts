@@ -132,7 +132,8 @@ test.describe("APZSEARCH-007 platform search workbench", () => {
     await signIn(page);
     await page.goto(`${SEARCH_HOME}/query`);
     await expect(page.getByTestId("search-page")).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByText("Playwright Policy")).toBeVisible();
+    // Title and highlight snippet both contain the same string — assert the hit row (RG-SELECTORS).
+    await expect(page.getByRole("row", { name: /Playwright Policy/ })).toBeVisible();
     expect(seen.some((p) => p.includes("/search/query"))).toBeTruthy();
   });
 });

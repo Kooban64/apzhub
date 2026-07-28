@@ -64,11 +64,12 @@ describe("APZNOTIFY-005 Notification Vertical Certification", () => {
     expect(openapi).toContain("Platform Notifications");
   });
 
-  it("asserts delivery and provider routes are absent", () => {
+  it("asserts unauthorised delivery routes remain absent", () => {
+    // ENG-004 / Platform 1.4: /providers and /deliveries* are authorised platform surfaces.
+    // Keep freeze against send / singular deliver / channel-specific / workers / queues / realtime.
     for (const omitted of [
       "apps/web/app/api/v1/notifications/send",
       "apps/web/app/api/v1/notifications/deliver",
-      "apps/web/app/api/v1/notifications/providers",
       "apps/web/app/api/v1/notifications/email",
       "apps/web/app/api/v1/notifications/sms",
       "apps/web/app/api/v1/notifications/push",
@@ -85,8 +86,8 @@ describe("APZNOTIFY-005 Notification Vertical Certification", () => {
       "utf8",
     );
     expect(openapi).not.toContain("/notifications/send");
-    expect(openapi).not.toContain("/notifications/deliver");
-    expect(openapi).not.toContain("/notifications/providers");
+    // Exact path only — must not false-positive on /notifications/deliveries or delivery-*
+    expect(openapi).not.toMatch(/\n {2}\/notifications\/deliver:/);
   });
 
   it("exposes typed client surface and mock parity exports", () => {
@@ -160,11 +161,11 @@ describe("APZNOTIFY-005 Notification Vertical Certification", () => {
 
   it("asserts certified package versions", () => {
     const versions: Record<string, string> = {
-      "packages/notification-contracts/package.json": "0.2.0",
+      "packages/notification-contracts/package.json": "0.3.5",
       "packages/notification-core/package.json": "0.2.0",
       "packages/notification-persistence/package.json": "0.1.0",
-      "packages/platform-services/package.json": "0.26.1",
-      "packages/platform-service-contracts/package.json": "0.17.1",
+      "packages/platform-services/package.json": "0.32.0",
+      "packages/platform-service-contracts/package.json": "0.18.0",
     };
     for (const [path, expected] of Object.entries(versions)) {
       const actual = JSON.parse(readFileSync(join(ROOT, path), "utf8")).version;

@@ -5,14 +5,18 @@ import {
   bootstrapTimelineRegistry,
   createDefaultActivityService,
   createDefaultEventToActivityMapper,
+  createLawActivityPersistenceStorageKey,
+  createPersistedActivitySessionStore,
   type ActivityCapabilityRecord,
   type ActivityContext,
   type ActivityRegistryHydrationDiagnostics,
   type ActivityService,
   type ActivityMapper,
+  type ActivitySessionStore,
   type TimelineRegistryHydrationDiagnostics,
 } from "@apzhub/activity-timeline-framework/server";
 
+import { createLawSessionDualWriteStorage } from "./persistence/law-session-dual-write-storage";
 import { wireAppActivityTimeline } from "./wire-app-activity-timeline";
 import { wireLegalDomainActivities } from "./wire-legal-domain-events";
 import { registerLawActivityTypes } from "./register-law-activity-types";
@@ -20,6 +24,12 @@ import { registerLawActivityTypes } from "./register-law-activity-types";
 export interface CreateAppActivityTimelineContextOptions {
   readonly eventBus?: EventBus;
   readonly capabilityRecords?: readonly ActivityCapabilityRecord[];
+  /** When set, uses durable platform activity store (OBS-LAW-02). */
+  readonly persistenceScope?: {
+    readonly userId?: string;
+    readonly tenantId?: string;
+  };
+  readonly activityStore?: ActivitySessionStore;
 }
 
 export interface AppActivityTimelineContext extends ActivityContext {
@@ -51,7 +61,26 @@ export function createAppActivityTimelineContext(
   const mapper: ActivityMapper = createDefaultEventToActivityMapper({
     activityRegistry: activityBootstrap.registry,
   });
-  const service: ActivityService = createDefaultActivityService();
+  const store =
+    options.activityStore ??
+    (options.persistenceScope
+      ? (() => {
+          const storageKey = createLawActivityPersistenceStorageKey(
+            options.persistenceScope,
+          );
+          return createPersistedActivitySessionStore({
+            storageKey,
+            storage: createLawSessionDualWriteStorage({
+              kind: "activity",
+              storageKey,
+              scope: options.persistenceScope!,
+            }),
+          });
+        })()
+      : undefined);
+  const service: ActivityService = createDefaultActivityService(
+    store ? { store } : undefined,
+  );
 
   let subscriberId: string | undefined;
 

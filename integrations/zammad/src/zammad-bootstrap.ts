@@ -62,7 +62,7 @@ export function createZammadBootstrapConfiguration(
       integrationId: ZAMMAD_INTEGRATION_ID,
       adapterId: "zammad-adapter",
       name: "Zammad Engine Integration",
-      version: "0.6.0",
+      version: "0.8.0",
       capabilityId: "integration.zammad",
       declaredCapabilities: [...ZAMMAD_SDK_CAPABILITIES],
       owner: "APZHUB",

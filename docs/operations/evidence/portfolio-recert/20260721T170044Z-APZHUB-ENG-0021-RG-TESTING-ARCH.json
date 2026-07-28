@@ -1,0 +1,44 @@
+{
+  "programme": "APZHUB-ENG-0021",
+  "title": "Implement RG-TESTING-ARCH",
+  "baseline": "1.2.0",
+  "wave": 2,
+  "step": 6,
+  "timestampUtc": "20260721T170044Z",
+  "preconditions": {
+    "APZHUB-ENG-0020": "ACCEPTED",
+    "group": "RG-TESTING-ARCH",
+    "statusBefore": "OPEN"
+  },
+  "remediationGroup": {
+    "id": "RG-TESTING-ARCH",
+    "status": "REMEDIATED",
+    "failuresCleared": "QA2-V-082 (1 Vitest)",
+    "rootCause": "RCA-10",
+    "vitest": {
+      "platformServicesBoundary": "6/6 PASS",
+      "webUiBoundary": "7/7 PASS",
+      "total": "13/13 PASS"
+    }
+  },
+  "changes": [
+    "CI/CD architecture boundary: forbid live provider SDKs/HTTP only (not @apzhub/integration-*)",
+    "Exclude *.test.ts / *.spec.ts from production-layer CI SDK scan"
+  ],
+  "remainingVsCert001AfterEng0021": {
+    "playwrightHardAssignedResidual": 0,
+    "vitestAssignedResidual": 0,
+    "lint": 0,
+    "typecheck": 0,
+    "note": "All Wave 2 repository-approved remediation groups remediated; portfolio full re-cert not run under this programme"
+  },
+  "recommendation": "READY FOR OWNER ACCEPTANCE",
+  "stop": [
+    "no new engineering programme",
+    "no portfolio re-certification",
+    "no Email SoR",
+    "no FIN-001",
+    "no Workflow Execute",
+    "no Release 1.3"
+  ]
+}

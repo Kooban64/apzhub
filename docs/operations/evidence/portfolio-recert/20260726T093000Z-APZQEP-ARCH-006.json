@@ -1,0 +1,31 @@
+{
+  "programme": "APZQEP-ARCH-006",
+  "title": "Requirements Workbench Architecture",
+  "recordedAt": "2026-07-26T09:30:00Z",
+  "state": "ARCHITECTURE COMPLETE — AWAITING OWNER ACCEPTANCE",
+  "revision": "1.0.0-arch",
+  "documentationPack": "docs/products/apzqep/architecture/requirements-workbench/",
+  "authoritativeSpecification": "REQUIREMENTS-WORKBENCH-ARCHITECTURE.md",
+  "deliverables": [
+    "REQUIREMENTS-WORKBENCH-ARCHITECTURE.md",
+    "NAVIGATION-ARCHITECTURE.md",
+    "INTERACTION-ARCHITECTURE.md",
+    "WORKSPACE-ARCHITECTURE.md",
+    "USER-WORKFLOW-ARCHITECTURE.md",
+    "MODULE-INTEGRATION-ARCHITECTURE.md",
+    "ACCESSIBILITY-PRINCIPLES.md",
+    "EXTENSIBILITY-PRINCIPLES.md",
+    "ARCHITECTURE-DECISION-RECORDS.md",
+    "ARCHITECTURE-COMPLETION-REPORT.md",
+    "README.md"
+  ],
+  "explicitNonDelivery": [
+    "Part 3 UI",
+    "React/components",
+    "graph rendering",
+    "state management implementation",
+    "APIs/databases",
+    "operational readiness"
+  ],
+  "stopRule": "Await Owner Acceptance of ARCH-006. Do not begin ENG-020F Part 3 until separate Owner Engineering Programme Instruction."
+}

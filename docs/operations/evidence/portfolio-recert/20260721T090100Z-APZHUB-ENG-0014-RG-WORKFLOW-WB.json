@@ -1,0 +1,38 @@
+{
+  "programme": "APZHUB-ENG-0014",
+  "remediationGroup": "RG-WORKFLOW-WB",
+  "baseline": "1.2.0",
+  "timestampUtc": "20260721T090100Z",
+  "scopedPlaywright": {
+    "config": "testing/playwright/playwright.config.ts",
+    "file": "testing/playwright/e2e/apzworkflow-009-workflow-engine-workbench.spec.ts",
+    "retries": 1,
+    "summary": {
+      "passed": 2,
+      "failed": 0,
+      "flaky": 0,
+      "durationApprox": "51.2s"
+    },
+    "members": [
+      {
+        "title": "overview shows READ-ONLY ENGINE via mocked typed-client path",
+        "inventoryId": "QA-F-016",
+        "result": "PASS"
+      },
+      {
+        "title": "workflows section shows list and definition viewer",
+        "inventoryId": "QA-F-017",
+        "result": "PASS"
+      }
+    ]
+  },
+  "quality": {
+    "lint": "PASS",
+    "typecheck": "N/A",
+    "unit": "N/A",
+    "integration": "N/A",
+    "architecture": "PASS",
+    "compatibility": "PASS"
+  },
+  "log": "/tmp/eng-0014-playwright-final.log"
+}

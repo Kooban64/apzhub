@@ -1,0 +1,16 @@
+{
+  "programme": "APZQEP-OES-ARCH-012",
+  "title": "Test Specifications Workbench Architecture",
+  "recordedAt": "2026-07-27T00:20:00Z",
+  "decision": "ACCEPTED / APPROVED / ARCHITECTURE BASELINED",
+  "authority": "Owner Review under OES-002",
+  "path": "docs/engineering/oes/APZQEP/OES-ARCH-012-Test-Specifications-Workbench-Architecture/COMPLETE.md",
+  "acceptance": "docs/engineering/oes/APZQEP/OES-ARCH-012-Test-Specifications-Workbench-Architecture/OWNER-ACCEPTANCE.md",
+  "reviewResults": "ALL_PASS",
+  "relatedAdr": "ADR-0074",
+  "authorises": ["Preparation of APZQEP-OES-ENG-050C"],
+  "notAuthorised": [
+    "Workbench Engineering implementation before OES-ENG-050C Acceptance",
+    "UI invention of availableActions not returned by server"
+  ]
+}

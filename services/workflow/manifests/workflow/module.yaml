@@ -1,0 +1,218 @@
+manifestSchemaVersion: "1.0"
+id: workflow
+name: Workflow
+version: 0.1.0
+kind: module
+
+metadata:
+  category: workflow
+  description: >
+    APZHUB Workflow Workbench module (APZHUB-PLATFORM-WORKFLOW-006).
+    Presentation over Workflow HTTP API `/api/v1/workflow/*` only.
+    Distinct from Platform Workflows SoR (`/workspace/workflows`) and Workflow Engine.
+  owner: APZHUB
+  icon: workflow
+  tags:
+    - workflow
+    - orchestration
+    - workbench
+
+dependencies:
+  platform: []
+  services:
+    - workflow-service
+
+compatibility:
+  platformVersion: ">=0.1.0"
+
+module:
+  category: workflow
+  status: enabled
+  description: Workflow Workbench module (APZHUB-PLATFORM-WORKFLOW-006).
+
+permissions:
+  - id: workflow.view
+    description: View Workflow workspace and definitions.
+  - id: workflow.runs.view
+    description: View workflow runs.
+  - id: workflow.runs.start
+    description: Start workflow runs.
+  - id: workflow.runs.cancel
+    description: Cancel workflow runs.
+  - id: workflow.schedules.view
+    description: View workflow schedules.
+  - id: workflow.schedules.manage
+    description: Manage workflow schedules.
+  - id: workflow.tasks.view
+    description: View workflow tasks and approvals.
+  - id: workflow.tasks.claim
+    description: Claim workflow tasks.
+  - id: workflow.tasks.complete
+    description: Complete workflow tasks.
+  - id: workflow.tasks.approve
+    description: Approve or reject approval tasks.
+  - id: workflow.engine.health
+    description: View workflow health.
+  - id: workflow.engine.capabilities
+    description: View workflow capabilities.
+
+navigation:
+  activityBar:
+    enabled: true
+    label: Workflow
+    icon: workflow
+    order: 29
+    permission: workflow.view
+  sidebar:
+    - id: workflow.home
+      label: Home
+      route: /workspace/workflow
+      icon: layout-dashboard
+      permission: workflow.view
+    - id: workflow.definitions
+      label: Definitions
+      route: /workspace/workflow/definitions
+      icon: file-code
+      permission: workflow.view
+    - id: workflow.runs
+      label: Runs
+      route: /workspace/workflow/runs
+      icon: play
+      permission: workflow.runs.view
+    - id: workflow.schedules
+      label: Schedules
+      route: /workspace/workflow/schedules
+      icon: calendar-clock
+      permission: workflow.schedules.view
+    - id: workflow.tasks
+      label: Tasks
+      route: /workspace/workflow/tasks
+      icon: list-todo
+      permission: workflow.tasks.view
+    - id: workflow.approvals
+      label: Approvals
+      route: /workspace/workflow/approvals
+      icon: check-circle
+      permission: workflow.tasks.view
+    - id: workflow.notifications
+      label: Notifications
+      route: /workspace/workflow/notifications
+      icon: bell
+      permission: workflow.runs.view
+    - id: workflow.search
+      label: Search
+      route: /workspace/workflow/search
+      icon: search
+      permission: workflow.view
+    - id: workflow.health
+      label: Health
+      route: /workspace/workflow/health
+      icon: activity
+      permission: workflow.engine.health
+    - id: workflow.diagnostics
+      label: Diagnostics
+      route: /workspace/workflow/diagnostics
+      icon: stethoscope
+      permission: workflow.view
+    - id: workflow.capabilities
+      label: Capabilities
+      route: /workspace/workflow/capabilities
+      icon: puzzle
+      permission: workflow.engine.capabilities
+
+commands:
+  - id: workflow.home.open
+    label: Open Workflow Home
+    category: Workflow
+    permission: workflow.view
+  - id: workflow.definitions.open
+    label: Open Workflow Definitions
+    category: Workflow
+    permission: workflow.view
+  - id: workflow.runs.open
+    label: Open Workflow Runs
+    category: Workflow
+    permission: workflow.runs.view
+  - id: workflow.tasks.open
+    label: Open Workflow Tasks
+    category: Workflow
+    permission: workflow.tasks.view
+  - id: workflow.search.open
+    label: Search Workflow Definitions
+    category: Workflow
+    permission: workflow.view
+  - id: workflow.health.open
+    label: Open Workflow Health
+    category: Workflow
+    permission: workflow.engine.health
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: workflow
+    label: Workflow
+    icon: workflow
+    route: /workspace/workflow
+    order: 29
+    permission: workflow.view
+  view:
+    title: Workflow
+    workspace: workflow
+    route: /workspace/workflow
+    default: true
+    permission: workflow.view
+  actions:
+    - id: workflow.home.open
+      label: Open Workflow Home
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: workflow.view
+      palette: true
+      group: Workflow
+      icon: layout-dashboard
+      order: 10
+      description: Open Workflow Home in the Workbench.
+    - id: workflow.definitions.open
+      label: Open Workflow Definitions
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: workflow.view
+      palette: true
+      group: Workflow
+      icon: file-code
+      order: 20
+      description: Open Workflow Definitions.
+    - id: workflow.runs.open
+      label: Open Workflow Runs
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: workflow.runs.view
+      palette: true
+      group: Workflow
+      icon: play
+      order: 30
+      description: Open Workflow Runs.
+    - id: workflow.tasks.open
+      label: Open Workflow Tasks
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: workflow.tasks.view
+      palette: true
+      group: Workflow
+      icon: list-todo
+      order: 40
+      description: Open Workflow Tasks.
+    - id: workflow.search.open
+      label: Search Workflow Definitions
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: workflow.view
+      palette: true
+      group: Workflow
+      icon: search
+      order: 50
+      description: Search the Workflow definition catalogue.
+    - id: workflow.health.open
+      label: Open Workflow Health
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: workflow.engine.health
+      palette: true
+      group: Workflow
+      icon: activity
+      order: 60
+      description: Open Workflow health diagnostics.

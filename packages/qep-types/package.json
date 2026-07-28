@@ -1,0 +1,15 @@
+{
+  "name": "@apzhub/qep-types",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZ QEP shared product identifiers and foundation types (APZQEP-ENG-010) \u2014 no business logic",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts packages/qep-types"
+  }
+}

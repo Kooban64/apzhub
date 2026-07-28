@@ -218,6 +218,7 @@ export {
   AuthWorkbenchPermissionAdapter,
   createAuthWorkbenchPermissionAdapter,
   mapAuthSessionToContext,
+  workbenchPermissionPatternMatches,
   type AuthSessionPermissionInput,
 } from "./permission/auth-permission-adapter";
 export {

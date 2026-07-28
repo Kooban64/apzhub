@@ -1,0 +1,19 @@
+{
+  "programme": "APZQEP-ENG-020F",
+  "part": "3",
+  "title": "Requirements Workbench Exposure, Quality Assurance and Operational Readiness",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "recordedAt": "2026-07-26T10:30:00Z",
+  "authority": "Owner Programme Instruction — APZQEP-REQ-001 Requirements Capability Certification & Baseline",
+  "architecture": "APZQEP-ARCH-006 — ACCEPTED / CLOSED / COMPLETE",
+  "packageAtAcceptance": {
+    "@apzhub/qep-requirements": "0.10.0"
+  },
+  "effect": [
+    "ENG-020F Parts 1–3 ACCEPTED / CLOSED / COMPLETE",
+    "Requirements Relationship Engine feature-complete within authorised scope",
+    "No further ENG-020F engineering authorised",
+    "Capability certification programme APZQEP-REQ-001 authorised"
+  ],
+  "implementationEvidence": "20260726T100000Z-APZQEP-ENG-020F-PART3.json"
+}

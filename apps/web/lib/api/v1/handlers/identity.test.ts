@@ -246,7 +246,9 @@ describe("APZIDENTITY-003 identity handlers", () => {
       paths?: Record<string, unknown>;
       tags?: Array<{ name?: string }>;
     };
-    expect(["1.9.0", "1.10.0"]).toContain(spec.info?.version);
+    expect(["1.9.0", "1.10.0", "1.11.0", "1.12.0", "1.13.0", "1.14.0"]).toContain(
+      spec.info?.version,
+    );
 
     const expectedPaths = [
       "/identity/users",

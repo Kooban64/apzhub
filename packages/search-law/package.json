@@ -1,0 +1,21 @@
+{
+  "name": "@apzhub/search-law",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Law Search Publication Adapter — canonical Law → Search Integration Framework (R12-SEARCH-02)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/search-law"
+  },
+  "dependencies": {
+    "@apzhub/legal-business-core": "workspace:*",
+    "@apzhub/platform-service-contracts": "workspace:*",
+    "@apzhub/search-contracts": "workspace:*",
+    "@apzhub/search-integration": "workspace:*"
+  }
+}

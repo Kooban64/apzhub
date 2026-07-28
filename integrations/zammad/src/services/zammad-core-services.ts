@@ -1,5 +1,5 @@
 import type { AdapterContext } from "@apzhub/integration-sdk/adapter";
-import type { IntegrationClient } from "@apzhub/integration-sdk/client";
+import type { FetchFn, IntegrationClient } from "@apzhub/integration-sdk/client";
 
 import {
   discoverZammadCoreServiceCapabilities,
@@ -28,6 +28,7 @@ export interface CreateZammadCoreServicesInput {
   readonly context: AdapterContext;
   readonly configuration: ZammadBootstrapConfiguration;
   readonly client: IntegrationClient;
+  readonly fetchFn?: FetchFn;
   readonly resolveApiToken: (
     credentialRef: string,
     tenantId: string,
@@ -86,6 +87,9 @@ export function createZammadCoreServices(
 
   const restClient = new ZammadRestClient({
     client: input.client,
+    fetchFn: input.fetchFn,
+    apiBaseUrl: configuration.zammad.apiBaseUrl,
+    timeoutMs: configuration.zammad.timeoutMs,
     getAuth: async () => ({
       apiToken: await input.resolveApiToken(
         configuration.zammad.apiTokenRef,

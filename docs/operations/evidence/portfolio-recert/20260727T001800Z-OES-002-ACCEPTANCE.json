@@ -1,0 +1,21 @@
+{
+  "programme": "OES-002",
+  "title": "Engineering Review & Acceptance Standard",
+  "recordedAt": "2026-07-27T00:18:00Z",
+  "decision": "ACCEPTED / APPROVED / FROZEN",
+  "authority": "Owner Decision",
+  "path": "docs/engineering/oes/OES-002-Engineering-Review-and-Acceptance-Standard.md",
+  "acceptance": "docs/engineering/oes/OES-002-OWNER-ACCEPTANCE.md",
+  "version": "1.0.0",
+  "assessment": "Completes governance trilogy with OES-000 and OES-001. No further foundational governance standards required unless genuine gap identified.",
+  "changeControl": "Future enhancements via semantic versioning and formal change control",
+  "authorises": [
+    "APZQEP-OES-ARCH-012 Owner Review under OES-002",
+    "Preparation of APZQEP-OES-ENG-050C"
+  ],
+  "notAuthorised": [
+    "Workbench Engineering implementation before OES-ENG-050C Acceptance",
+    "AI-issued Acceptance / Freeze / Version Promotion",
+    "Unfreeze without Owner Decision"
+  ]
+}

@@ -122,10 +122,28 @@ export interface UpdateSupportRequestInput {
   readonly tags?: readonly string[];
 }
 
+export interface SupportArticleAttachmentUpload {
+  readonly filename: string;
+  readonly contentType?: string;
+  readonly dataBase64: string;
+  readonly sizeBytes?: number;
+}
+
+export interface SupportArticleAttachmentContent {
+  readonly id: string;
+  readonly articleId: string;
+  readonly supportTicketId: string;
+  readonly filename: string;
+  readonly contentType: string;
+  readonly sizeBytes: number;
+  readonly dataBase64: string;
+}
+
 export interface CreateInternalNoteInput {
   readonly body: string;
   readonly bodyFormat?: SupportArticleBodyFormat;
   readonly subject?: string;
+  readonly attachments?: readonly SupportArticleAttachmentUpload[];
 }
 
 export type CustomerReplyChannel = Exclude<SupportArticleChannel, "note" | "unknown">;
@@ -138,6 +156,7 @@ export interface CreateCustomerReplyInput {
   readonly to?: readonly string[];
   readonly cc?: readonly string[];
   readonly bcc?: readonly string[];
+  readonly attachments?: readonly SupportArticleAttachmentUpload[];
 }
 
 export interface OrganizationListParams extends SupportPaginationParams {

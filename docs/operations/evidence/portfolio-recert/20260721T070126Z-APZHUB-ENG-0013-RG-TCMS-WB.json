@@ -1,0 +1,39 @@
+{
+  "programme": "APZHUB-ENG-0013",
+  "remediationGroup": "RG-TCMS-WB",
+  "baseline": "1.2.0",
+  "timestampUtc": "20260721T070126Z",
+  "scopedPlaywright": {
+    "config": "testing/playwright/playwright.config.ts",
+    "file": "testing/playwright/e2e/apztcms-010-testing-workbench.spec.ts",
+    "grep": "dashboard loads with testing page shell|certification detail shows gates and advisory recommendation",
+    "retries": 1,
+    "summary": {
+      "passed": 2,
+      "failed": 0,
+      "flaky": 0,
+      "durationApprox": "51.3s"
+    },
+    "members": [
+      {
+        "title": "dashboard loads with testing page shell",
+        "inventoryId": "QA-F-011",
+        "result": "PASS"
+      },
+      {
+        "title": "certification detail shows gates and advisory recommendation",
+        "inventoryId": "QA-F-012",
+        "result": "PASS"
+      }
+    ]
+  },
+  "quality": {
+    "lint": "PASS",
+    "typecheck": "N/A",
+    "unit": "N/A",
+    "integration": "N/A",
+    "architecture": "PASS",
+    "compatibility": "PASS"
+  },
+  "log": "/tmp/eng-0013-playwright-final.log"
+}

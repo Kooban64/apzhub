@@ -145,6 +145,20 @@ export {
 export type { ZammadWebhookManagerAdapter } from "./events/sdk-events";
 
 export {
+  ZAMMAD_WEBHOOK_SIGNATURE_HEADER,
+  ZAMMAD_WEBHOOK_DELIVERY_HEADER,
+  ZAMMAD_WEBHOOK_SECRET_CREDENTIAL_REF,
+  createZammadWebhookVerifier,
+  computeZammadWebhookSignature,
+} from "./events/zammad-webhook-verifier";
+export type { ZammadWebhookVerifierOptions } from "./events/zammad-webhook-verifier";
+export { createZammadWebhookTranslator } from "./events/zammad-webhook-translator";
+export {
+  createZammadJsonWebhookDecoder,
+  createZammadWebhookIngressPipeline,
+} from "./events/zammad-webhook-ingress-pipeline";
+
+export {
   createZammadPollingSource,
   toZammadPollingCursor,
   ZAMMAD_POLLING_SOURCE_DEFINITION,

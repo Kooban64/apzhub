@@ -1,0 +1,15 @@
+{
+  "name": "@apzhub/lifecycle-engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Generic lifecycle state machine engine for APZHUB bounded contexts (APZQEP-ENG-020C).",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/lifecycle-engine"
+  }
+}

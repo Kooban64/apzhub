@@ -1,0 +1,22 @@
+{
+  "programme": "APZHUB-ENG-0012",
+  "remediationGroup": "RG-METRICS-WB",
+  "order": 6,
+  "baseline": "1.2.0",
+  "timestamp": "2026-07-21T06:41:00Z",
+  "playwright": {
+    "passed": 2,
+    "failed": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "id": "QA-F-006",
+      "after": "PASS"
+    },
+    {
+      "id": "QA-F-007",
+      "after": "PASS"
+    }
+  ]
+}

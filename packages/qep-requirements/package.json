@@ -1,0 +1,27 @@
+{
+  "name": "@apzhub/qep-requirements",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "APZ QEP Requirements bounded context — certified capability baseline 1.0.0 (ENG-020A–020F, ARCH-005/006).",
+  "exports": {
+    ".": "./src/index.ts",
+    "./domain": "./src/domain/index.ts",
+    "./application": "./src/application/index.ts",
+    "./presentation": "./src/presentation/index.ts",
+    "./infrastructure": "./src/infrastructure/index.ts",
+    "./shared": "./src/shared/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-requirements"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/lifecycle-engine": "workspace:*",
+    "@apzhub/qep-types": "workspace:*",
+    "@apzhub/qep-contracts": "workspace:*",
+    "drizzle-orm": "^0.45.2"
+  }
+}

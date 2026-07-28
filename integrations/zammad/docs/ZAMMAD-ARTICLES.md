@@ -104,9 +104,10 @@ Supported on article DTOs:
 
 - id, filename, contentType, sizeBytes, disposition, contentId, createdAt
 
-**Not implemented:** binary upload/download, streaming, object storage, virus scan, preview, attachment HTTP routes.
+**Implemented (R12-SUP-02):** binary upload (base64 on create) and download (`downloadAttachment` / CE `ticket_attachment`). Max 1 MiB.  
+**Not implemented:** attachment delete, streaming, object storage, virus scan, preview.
 
-`attachments` capability remains a **placeholder** (binary deferred). Article capability notes document metadata-only support.
+`attachments` capability is certified for upload/download (R12-SUP-02); delete remains unsupported.
 
 Inline `dataBase64` on create descriptors is optional for provider association only — never filesystem paths.
 

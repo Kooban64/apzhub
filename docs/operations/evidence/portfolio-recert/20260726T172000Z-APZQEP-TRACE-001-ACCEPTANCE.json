@@ -1,0 +1,17 @@
+{
+  "programme": "APZQEP-TRACE-001",
+  "title": "Traceability Capability Certification & Baseline",
+  "recordedAt": "2026-07-26T17:20:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Architecture Programme Instruction APZQEP-ARCH-009",
+  "package": { "@apzhub/qep-traceability": "1.0.0" },
+  "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "effect": "Traceability 1.0.0 CERTIFIED / FROZEN. APZQEP-ARCH-009 Verification Architecture authorised (architecture only).",
+  "notAuthorised": [
+    "Coverage Engine",
+    "Impact Engine",
+    "Verification engineering",
+    "AI",
+    "MCP"
+  ]
+}

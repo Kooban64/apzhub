@@ -1,13 +1,16 @@
 /**
- * Observability Platform Services factories (APZOBSERVE-002).
+ * Observability Platform Services factories (APZOBSERVE-002 + ADR-0070 Phase A).
  * Production: PostgreSQL — no silent in-memory / allow-all authz fallbacks.
  */
 
 import type { DatabaseExecutor } from "@apzhub/config";
 import type { ObservePlatformGateway } from "@apzhub/observe-contracts";
 import {
+  createObserveAlertEvaluationDomain,
   createObserveFoundation,
   createPlatformObserveService,
+  readAlertLifecycleMetadata,
+  type ObserveAlertEvaluationMetrics,
   type ObserveFoundationRepos,
 } from "@apzhub/observe-core";
 import {
@@ -16,8 +19,19 @@ import {
   type ObservePersistenceBundle,
 } from "@apzhub/observe-persistence";
 
+import type { DomainEventPublisher } from "../../events/domain-event-publisher";
+import {
+  OBSERVE_ALERT_DOMAIN_EVENT_IDS,
+  publishObserveAlertEvent,
+  type ObserveAlertDomainEventId,
+} from "../../events/observe-domain-events";
 import type { RequestPipeline } from "../../execution/request-pipeline";
 import { wrapServiceWithPipeline } from "../../execution/wrap-service";
+import {
+  createNoopObserveAlertDeliveryHook,
+  type ObserveAlertDeliveryHook,
+} from "./alert-delivery-hook";
+import { isObserveAlertEvaluationEnabled } from "./observe-env";
 import {
   createObservePlatformServiceImpls,
   type ObservePlatformServiceImpls,
@@ -32,6 +46,7 @@ export type ObservePlatformServicesBundle = {
     readonly observeEnabled: true;
     readonly persistenceMode: "postgres" | "memory";
     readonly providerExecutionEnabled: false;
+    readonly alertEvaluationEnabled: boolean;
   };
   wrapWithPipeline(pipeline: RequestPipeline): ObservePlatformGateway;
 };
@@ -41,12 +56,19 @@ export type CreateObservePlatformServicesInput = {
   readonly persistence?: ObservePersistenceBundle;
   readonly now?: () => string;
   readonly id?: () => string;
+  readonly eventPublisher?: DomainEventPublisher;
+  readonly deliveryHook?: ObserveAlertDeliveryHook;
+  readonly env?: Readonly<Record<string, string | undefined>>;
+  readonly evaluationMetrics?: ObserveAlertEvaluationMetrics;
 };
 
 export type CreateObservePlatformServicesForProductionInput = {
   readonly postgresDb: DatabaseExecutor;
   readonly now?: () => string;
   readonly id?: () => string;
+  readonly eventPublisher?: DomainEventPublisher;
+  readonly deliveryHook?: ObserveAlertDeliveryHook;
+  readonly env?: Readonly<Record<string, string | undefined>>;
 };
 
 export type CreateObservePlatformServicesForTestInput = {
@@ -54,6 +76,10 @@ export type CreateObservePlatformServicesForTestInput = {
   readonly allowInMemoryPersistence?: boolean;
   readonly now?: () => string;
   readonly id?: () => string;
+  readonly eventPublisher?: DomainEventPublisher;
+  readonly deliveryHook?: ObserveAlertDeliveryHook;
+  readonly env?: Readonly<Record<string, string | undefined>>;
+  readonly evaluationMetrics?: ObserveAlertEvaluationMetrics;
 };
 
 export function wrapObservePlatformGatewayWithPipeline(
@@ -111,6 +137,11 @@ export function wrapObservePlatformGatewayWithPipeline(
       pipeline,
       "observeAlertStates",
     ),
+    alertEvaluation: wrapServiceWithPipeline(
+      gateway.alertEvaluation,
+      pipeline,
+      "observeAlertEvaluation",
+    ),
     dashboardDefinitions: wrapServiceWithPipeline(
       gateway.dashboardDefinitions,
       pipeline,
@@ -160,18 +191,73 @@ function buildBundle(input: {
   readonly persistenceMode: "postgres" | "memory";
   readonly now?: () => string;
   readonly id?: () => string;
+  readonly eventPublisher?: DomainEventPublisher;
+  readonly deliveryHook?: ObserveAlertDeliveryHook;
+  readonly env?: Readonly<Record<string, string | undefined>>;
+  readonly evaluationMetrics?: ObserveAlertEvaluationMetrics;
 }): ObservePlatformServicesBundle {
   createObserveFoundation({ repos: input.persistence });
   let seq = 0;
   const now = input.now ?? (() => new Date().toISOString());
   const id = input.id ?? (() => `obs_${Date.now().toString(36)}_${++seq}`);
+  const env = input.env ?? process.env;
+  const deliveryHook = input.deliveryHook ?? createNoopObserveAlertDeliveryHook();
+  const metrics = input.evaluationMetrics;
+
   const domain = createPlatformObserveService({
     repos: input.persistence,
     now,
     id,
     persistenceMode: input.persistenceMode,
   });
-  const impls = createObservePlatformServiceImpls({ domain });
+
+  const alertEvaluation = createObserveAlertEvaluationDomain({
+    repos: input.persistence,
+    now,
+    id,
+    hooks: {
+      isEvaluationEnabled: () => isObserveAlertEvaluationEnabled(env),
+      metrics,
+      deliveryHook: ({ eventId, alertState, definition }) => {
+        deliveryHook({ eventId, alertState, definition });
+      },
+      publishLifecycleEvent: ({ eventId, ctx, alertState, definition }) => {
+        const life = readAlertLifecycleMetadata(alertState.metadata);
+        const mapped = eventId as ObserveAlertDomainEventId;
+        if (
+          mapped !== OBSERVE_ALERT_DOMAIN_EVENT_IDS.fired &&
+          mapped !== OBSERVE_ALERT_DOMAIN_EVENT_IDS.acknowledged &&
+          mapped !== OBSERVE_ALERT_DOMAIN_EVENT_IDS.resolved &&
+          mapped !== OBSERVE_ALERT_DOMAIN_EVENT_IDS.suppressed
+        ) {
+          return { ok: false };
+        }
+        const result = publishObserveAlertEvent(
+          input.eventPublisher,
+          {
+            tenantId: ctx.tenantId,
+            userId: ctx.userId,
+            correlationId: ctx.correlationId ?? "observe-eval",
+            organisationId: ctx.organisationId,
+            permissions: ctx.permissions ?? [],
+          },
+          mapped,
+          {
+            alertStateId: alertState.id,
+            alertDefinitionId: alertState.alertDefinitionId,
+            state: alertState.state,
+            severity: definition.severity,
+            fingerprint: life?.fingerprint,
+            organisationId: alertState.organisationId,
+            message: alertState.message,
+          },
+        );
+        return { ok: result.ok };
+      },
+    },
+  });
+
+  const impls = createObservePlatformServiceImpls({ domain, alertEvaluation });
   const gatewaySurface = impls;
 
   return {
@@ -183,6 +269,7 @@ function buildBundle(input: {
       observeEnabled: true,
       persistenceMode: input.persistenceMode,
       providerExecutionEnabled: false,
+      alertEvaluationEnabled: isObserveAlertEvaluationEnabled(env),
     },
     wrapWithPipeline: (pipeline) =>
       wrapObservePlatformGatewayWithPipeline(gatewaySurface, pipeline),
@@ -200,6 +287,10 @@ export function createObservePlatformServices(
     persistenceMode: input.persistenceMode ?? "memory",
     now: input.now,
     id: input.id,
+    eventPublisher: input.eventPublisher,
+    deliveryHook: input.deliveryHook,
+    env: input.env,
+    evaluationMetrics: input.evaluationMetrics,
   });
 }
 
@@ -219,6 +310,9 @@ export function createObservePlatformServicesForProduction(
     persistenceMode: "postgres",
     now: input.now,
     id: input.id,
+    eventPublisher: input.eventPublisher,
+    deliveryHook: input.deliveryHook,
+    env: input.env,
   });
 }
 
@@ -239,5 +333,9 @@ export function createObservePlatformServicesForTest(
     persistenceMode: input.postgresDb ? "postgres" : "memory",
     now: input.now,
     id: input.id,
+    eventPublisher: input.eventPublisher,
+    deliveryHook: input.deliveryHook,
+    env: input.env,
+    evaluationMetrics: input.evaluationMetrics,
   });
 }

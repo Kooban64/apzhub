@@ -29,7 +29,11 @@ const BANNERS = [
   { text: "OPENTELEMETRY INTEGRATION NOT AVAILABLE", testId: "banner-otel" },
   { text: "ALERTMANAGER INTEGRATION NOT AVAILABLE", testId: "banner-alertmanager" },
   {
-    text: "ALERT NOTIFICATION DELIVERY NOT AVAILABLE",
+    text: "LIVE ALERT EVALUATION IS DENY-BY-DEFAULT — ENABLE APZHUB_OBSERVE_ALERT_EVALUATION_ENABLED FOR PHASE A",
+    testId: "banner-alert-evaluation",
+  },
+  {
+    text: "NOTIFICATION DELIVERY PROVIDERS NOT AVAILABLE — DELIVERY HOOK SEAM ONLY (ADR-0071)",
     testId: "banner-alert-delivery",
   },
   {
@@ -191,7 +195,8 @@ const FACETS: readonly FacetConfig[] = [
     section: "alert-definitions",
     facet: "alertDefinitions",
     title: "Alert Definitions",
-    description: "Alert definition metadata — thresholds are not evaluated here.",
+    description:
+      "Alert definition metadata — Phase A rules attach via metadata.rule (ADR-0070).",
     columns: ["ID", "Key", "Name", "Severity", "Status"],
     cellKeys: ["id", "key", "name", "severity", "status"],
     createDefaults: {
@@ -206,7 +211,8 @@ const FACETS: readonly FacetConfig[] = [
     section: "alert-states",
     facet: "alertStates",
     title: "Alert States",
-    description: "Recorded alert state metadata — notifications are not delivered.",
+    description:
+      "Recorded alert state metadata — acknowledge/resolve via Platform Services; unknown ≠ healthy.",
     columns: ["ID", "Definition", "State", "Severity msg", "Provider"],
     cellKeys: ["id", "alertDefinitionId", "state", "message", "providerKind"],
     createDefaults: {

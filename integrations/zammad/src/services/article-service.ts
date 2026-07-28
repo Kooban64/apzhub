@@ -1,14 +1,17 @@
 import type { IntegrationRequestContext } from "@apzhub/integration-sdk";
 
 import type { ZammadArticleRecord } from "../internal/zammad-api-types";
+import { ZAMMAD_ATTACHMENT_MAX_BYTES } from "../internal/zammad-rest-client";
 import {
   mapSupportArticleToZammadCreateBody,
   mapZammadArticle,
 } from "../mappers/article-mapper";
 import {
+  extractSupportArticleAttachmentZammadId,
   extractSupportArticleZammadId,
   extractSupportTicketZammadId,
 } from "../mappers/mapper-context";
+import type { SupportArticleAttachmentContent } from "../models/attachment-content";
 import type { SupportArticle } from "../models/canonical";
 import type {
   CreateSupportArticleInput,
@@ -162,6 +165,7 @@ export class ZammadArticleService {
     );
 
     return this.deps.runner.run(context, "zammad.articles.createNote", async () => {
+      validateAttachmentDescriptors(input.attachments, "articles.createNote");
       const payload = mapSupportArticleToZammadCreateBody({
         supportTicketId: input.supportTicketId,
         body: input.body,
@@ -230,6 +234,7 @@ export class ZammadArticleService {
     }
 
     return this.deps.runner.run(context, "zammad.articles.createReply", async () => {
+      validateAttachmentDescriptors(input.attachments, "articles.createReply");
       const payload = mapSupportArticleToZammadCreateBody({
         supportTicketId: input.supportTicketId,
         body: input.body,
@@ -336,6 +341,137 @@ export class ZammadArticleService {
       attachments: input.attachments,
     });
   }
+
+  async downloadAttachment(
+    context: IntegrationRequestContext,
+    supportTicketId: string,
+    articleId: string,
+    attachmentId: string,
+  ): Promise<SupportArticleAttachmentContent> {
+    assertValid(
+      mergeValidation(
+        validateRequiredString(supportTicketId, "supportTicketId"),
+        validateRequiredString(articleId, "articleId"),
+        validateRequiredString(attachmentId, "attachmentId"),
+      ),
+      "articles.downloadAttachment",
+    );
+
+    return this.deps.runner.run(
+      context,
+      "zammad.articles.downloadAttachment",
+      async () => {
+        const ticketZammadId = extractSupportTicketZammadId(supportTicketId);
+        const articleZammadId = extractSupportArticleZammadId(articleId);
+        const attachmentZammadId =
+          extractSupportArticleAttachmentZammadId(attachmentId);
+
+        const article = await this.deps.client.getTicketArticle(
+          context,
+          articleZammadId,
+        );
+        assertValid(validateZammadArticleResponse(article), "article.entity");
+        if (String(article.ticket_id) !== ticketZammadId) {
+          throw Object.assign(
+            new Error("Article does not belong to the requested support ticket"),
+            {
+              category: "not_found" as const,
+              code: "zammad.article.ticket_mismatch",
+              message: "Article does not belong to the requested support ticket",
+              retryable: false,
+              correlationId: context.correlationId,
+            },
+          );
+        }
+
+        const meta = (article.attachments ?? []).find(
+          (item) => String(item.id) === attachmentZammadId,
+        );
+        if (!meta) {
+          throw Object.assign(new Error("Attachment not found on article"), {
+            category: "not_found" as const,
+            code: "zammad.attachment.not_found",
+            message: "Attachment not found on article",
+            retryable: false,
+            correlationId: context.correlationId,
+          });
+        }
+
+        const binary = await this.deps.client.downloadTicketAttachment(
+          context,
+          ticketZammadId,
+          articleZammadId,
+          attachmentZammadId,
+        );
+
+        const filename =
+          binary.filename?.trim() ||
+          meta.filename?.trim() ||
+          `attachment-${attachmentZammadId}`;
+        const contentType =
+          binary.contentType ||
+          (typeof meta.preferences?.["Mime-Type"] === "string"
+            ? meta.preferences["Mime-Type"]
+            : "application/octet-stream");
+
+        return {
+          id: attachmentId,
+          articleId,
+          supportTicketId,
+          filename,
+          contentType,
+          sizeBytes: binary.sizeBytes,
+          dataBase64: uint8ToBase64(binary.bytes),
+        };
+      },
+    );
+  }
+}
+
+function validateAttachmentDescriptors(
+  attachments: CreateSupportArticleInput["attachments"],
+  operation: string,
+): void {
+  if (!attachments?.length) return;
+  for (const attachment of attachments) {
+    assertValid(
+      validateRequiredString(attachment.filename, "attachments.filename"),
+      operation,
+    );
+    if (!attachment.dataBase64) {
+      throw Object.assign(
+        new Error("Attachment binary dataBase64 is required for upload"),
+        {
+          category: "validation" as const,
+          code: "zammad.attachment.data_required",
+          message: "Attachment binary dataBase64 is required for upload",
+          retryable: false,
+          correlationId: "zammad-validation",
+        },
+      );
+    }
+    const approxBytes = Math.floor((attachment.dataBase64.length * 3) / 4);
+    if (approxBytes > ZAMMAD_ATTACHMENT_MAX_BYTES) {
+      throw Object.assign(new Error("Attachment exceeds maximum allowed size"), {
+        category: "validation" as const,
+        code: "zammad.attachment.too_large",
+        message: `Attachment exceeds maximum allowed size (${ZAMMAD_ATTACHMENT_MAX_BYTES} bytes)`,
+        retryable: false,
+        correlationId: "zammad-validation",
+      });
+    }
+  }
+}
+
+function uint8ToBase64(bytes: Uint8Array): string {
+  if (typeof Buffer !== "undefined") {
+    return Buffer.from(bytes).toString("base64");
+  }
+  let binary = "";
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte);
+  }
+  return btoa(binary);
 }
 
 function matchesArticleFilter(

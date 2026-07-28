@@ -1,0 +1,38 @@
+{
+  "programme": "APZHUB-PRODUCTS-003",
+  "title": "Product Definition Standard",
+  "classification": "PRODUCT_GOVERNANCE",
+  "lifecycle": "Product Engineering",
+  "baseline": "Certified Platform 1.4",
+  "reference": [
+    "Platform-1.4-CERT-001",
+    "APZHUB-PRODUCTS-002",
+    "Platform Delivery Standard"
+  ],
+  "timestamp": "2026-07-23T20:05:00Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER PRODUCT DEFINITION ACCEPTANCE",
+  "platformFrozen": true,
+  "platformEngineering": false,
+  "productImplementation": false,
+  "individualProductDefinitions": false,
+  "pack": "docs/products/definition/",
+  "documents": [
+    "README.md",
+    "PRODUCT-DEFINITION-STANDARD.md",
+    "PRODUCT-DEFINITION-TEMPLATE.md",
+    "PRODUCT-LIFECYCLE.md",
+    "PRODUCT-BUSINESS-STANDARD.md",
+    "PRODUCT-ARCHITECTURE-HANDOFF.md",
+    "PRODUCT-SECURITY-STANDARD.md",
+    "PRODUCT-AI-STANDARD.md",
+    "PRODUCT-TESTING-STANDARD.md",
+    "PRODUCT-RELEASE-STANDARD.md",
+    "PRODUCT-ROADMAP-STANDARD.md",
+    "PRODUCT-DEFINITION-CHECKLIST.md",
+    "COMPLETION-REPORT.md",
+    "OWNER-ACCEPTANCE.md"
+  ],
+  "hardGate": "No Architecture until PRODUCTS-003 Accepted and product Definition Business-approved",
+  "historicalNote": "Earlier repository programme used APZHUB-PRODUCTS-003 for Product Readiness Advancement. Artefact retained. Owner Decision re-authorises APZHUB-PRODUCTS-003 as Product Definition Standard."
+}

@@ -6,7 +6,10 @@ import { expect, test } from "@playwright/test";
  */
 
 test.describe("APZIDENTITY-003 Identity HTTP typed client (mocked)", () => {
-  test("mock fetch to /api/v1/identity serves user list envelope", async ({ page }) => {
+  test("mock fetch to /api/v1/identity serves user list envelope", async ({
+    page,
+    baseURL,
+  }) => {
     await page.route("**/api/v1/identity/**", async (route) => {
       const url = new URL(route.request().url());
       const path = url.pathname;
@@ -63,19 +66,21 @@ test.describe("APZIDENTITY-003 Identity HTTP typed client (mocked)", () => {
       });
     });
 
-    const result = await page.evaluate(async () => {
-      const usersRes = await fetch("/api/v1/identity/users", {
+    // Absolute URLs — relative fetch has no document base on about:blank (RG-MOCK-FETCH).
+    const origin = new URL(baseURL ?? "http://localhost:3300").origin;
+    const result = await page.evaluate(async (origin) => {
+      const usersRes = await fetch(`${origin}/api/v1/identity/users`, {
         credentials: "include",
         headers: { accept: "application/json" },
       });
       const users = await usersRes.json();
-      const capsRes = await fetch("/api/v1/identity/management-capabilities", {
+      const capsRes = await fetch(`${origin}/api/v1/identity/management-capabilities`, {
         credentials: "include",
         headers: { accept: "application/json" },
       });
       const caps = await capsRes.json();
       return { users, caps };
-    });
+    }, origin);
 
     expect(result.users.data[0].id).toBe("user_pw");
     expect(result.users.page).toBeDefined();

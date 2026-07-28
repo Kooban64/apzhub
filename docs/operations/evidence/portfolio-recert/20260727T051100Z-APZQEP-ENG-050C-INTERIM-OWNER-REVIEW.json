@@ -1,0 +1,28 @@
+{
+  "programme": "APZQEP-ENG-050C",
+  "title": "Test Specifications Workbench Engineering",
+  "recordedAt": "2026-07-27T05:11:00Z",
+  "decision": "INTERIM_OWNER_REVIEW",
+  "status": "IMPLEMENTATION IN PROGRESS — NOT YET READY FOR OWNER ACCEPTANCE",
+  "authority": "Owner Interim Review under OES-002",
+  "assessmentPass": [
+    "Workbench Architecture Fidelity",
+    "OES-ENG-050C Compliance (to date)",
+    "ADR-0074 Compliance",
+    "Presentation Layer Separation",
+    "availableActions Authority",
+    "Navigation / Explorer / Inspector / History / Versions / Relationships / Compare / Create-Edit / Action Dialogs"
+  ],
+  "outstandingMandatoryGates": [
+    "WP-16 Accessibility Hardening",
+    "Playwright End-to-End Journeys (beyond smoke)",
+    "Completion Report"
+  ],
+  "notAuthorised": [
+    "Owner Acceptance of ENG-050C",
+    "Certification",
+    "Version Promotion",
+    "Freeze"
+  ],
+  "recommendation": "OES-002 v1.1.0 Engineering Completion Review (ECR) before Owner Acceptance"
+}

@@ -50,6 +50,25 @@ describe("AuthWorkbenchPermissionAdapter", () => {
     ).toEqual([{ permission: "platform.nav.administration.view" }]);
   });
 
+  it("allows namespace wildcards (legal.*) and global *", () => {
+    const adapter = createAuthWorkbenchPermissionAdapter({
+      userId: "user-1",
+      roles: ["law-operator"],
+      permissions: ["legal.*"],
+    });
+
+    expect(adapter.can("legal.nav.dashboard.view")).toBe(true);
+    expect(adapter.can("legal.client.manage")).toBe(true);
+    expect(adapter.can("platform.nav.administration.view")).toBe(false);
+
+    const star = createAuthWorkbenchPermissionAdapter({
+      userId: "user-1",
+      permissions: ["*"],
+    });
+    expect(star.can("legal.nav.dashboard.view")).toBe(true);
+    expect(star.can("platform.impersonation.use")).toBe(true);
+  });
+
   it("updates session context at runtime", () => {
     const adapter = createAuthWorkbenchPermissionAdapter(null);
     expect(adapter.getContext()).toBeNull();

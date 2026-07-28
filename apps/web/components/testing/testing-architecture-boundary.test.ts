@@ -123,6 +123,9 @@ describe("testing UI architecture boundary", () => {
       if (/integration-github-actions/.test(executable)) {
         violations.push(`${rel}: imports integration-github-actions`);
       }
+      if (/integration-gitlab-ci/.test(executable)) {
+        violations.push(`${rel}: imports integration-gitlab-ci`);
+      }
       if (
         /multipart|formData\(|request\.formData|Content-Type["']?\s*,\s*["']multipart/i.test(
           executable,
@@ -142,7 +145,7 @@ describe("testing UI architecture boundary", () => {
     expect(clientSource).toContain('const API_BASE = "/api/v1"');
     expect(clientSource).toContain('path.startsWith("/testing/pipelines")');
     expect(clientSource).not.toMatch(
-      /@apzhub\/platform-services|@apzhub\/testing-services|testing-persistence|integration-github-actions/,
+      /@apzhub\/platform-services|@apzhub\/testing-services|testing-persistence|integration-github-actions|integration-gitlab-ci/,
     );
   });
 
@@ -155,7 +158,7 @@ describe("testing UI architecture boundary", () => {
       'path.startsWith("/testing/engineering-intelligence")',
     );
     expect(clientSource).not.toMatch(
-      /@apzhub\/platform-services|@apzhub\/testing-services|testing-persistence|integration-github-actions/,
+      /@apzhub\/platform-services|@apzhub\/testing-services|testing-persistence|integration-github-actions|integration-gitlab-ci/,
     );
   });
 

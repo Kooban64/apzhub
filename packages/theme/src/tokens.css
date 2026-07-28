@@ -3,6 +3,7 @@
   --color-foreground: #0f172a;
   --color-surface: #ffffff;
   --color-border: #e2e8f0;
+  /* Primary pair: white on #1d4ed8 ≈ 6.7:1 (WCAG AA ≥ 4.5:1 for text) */
   --color-primary: #1d4ed8;
   --color-primary-foreground: #ffffff;
   --color-muted: #f1f5f9;
@@ -10,9 +11,11 @@
   --color-accent: #e0e7ff;
   --color-accent-foreground: #1e3a8a;
   --color-destructive: #dc2626;
-  --color-success: #16a34a;
+  /* Success text on surface/white ≈ 5.0:1 (was #16a34a ≈ 3.3:1) */
+  --color-success: #15803d;
   --color-success-foreground: #ffffff;
-  --color-warning: #d97706;
+  /* Warning text on surface/white ≈ 5.0:1 (was #d97706 ≈ 3.2:1) */
+  --color-warning: #b45309;
   --color-warning-foreground: #ffffff;
   --color-ring: #3b82f6;
   --radius-sm: 0.25rem;
@@ -34,6 +37,7 @@
   --color-foreground: #e2e8f0;
   --color-surface: #111827;
   --color-border: #1f2937;
+  /* Primary pair: #0b1220 on #3b82f6 ≈ 5.1:1 (WCAG AA ≥ 4.5:1 for text) */
   --color-primary: #3b82f6;
   --color-primary-foreground: #0b1220;
   --color-muted: #1f2937;

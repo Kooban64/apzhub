@@ -67,7 +67,7 @@ function validGraph(): WorkflowGraphSnapshot {
 
 describe("APZWORKFLOW-002 workflow platform services", () => {
   it("exports platform services version 0.26.1", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.26.1");
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.32.0");
   });
 
   it("registers workflow permissions in the platform catalogue", () => {
@@ -242,14 +242,11 @@ describe("APZWORKFLOW-002 workflow platform services", () => {
     expect(conflict.category).toBe("conflict");
   });
 
-  it("does not import n8n / EventBus / HTTP into workflow service dirs", () => {
+  it("keeps SoR workflow-service-impls free of EventBus / HTTP / OpenAPI", () => {
     const root = join(__dirname);
-    for (const file of [
-      "workflow-service-impls.ts",
-      "create-workflow-platform-services.ts",
-      "index.ts",
-      "workflow-env.ts",
-    ]) {
+    // APZHUB-PLATFORM-WORKFLOW-004 authorises provider ops via dedicated ops modules;
+    // SoR thin wrappers remain free of EventBus / HTTP surfaces.
+    for (const file of ["workflow-service-impls.ts", "workflow-env.ts"]) {
       const content = readFileSync(join(root, file), "utf8");
       expect(content).not.toMatch(/\bn8n\b|EventBus|NextRequest|OpenAPIHono|\/api\/v1/);
     }

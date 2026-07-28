@@ -1,0 +1,47 @@
+{
+  "programme": "APZQEP-ENG-040A",
+  "title": "Verification Engine — Domain Model and Business Rules",
+  "recordedAt": "2026-07-26T17:50:00Z",
+  "architecture": "APZQEP-ARCH-009 — ACCEPTED",
+  "state": "IMPLEMENTED — AWAITING OWNER ACCEPTANCE",
+  "package": {
+    "@apzhub/qep-verification": "0.1.0"
+  },
+  "baselines": {
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN",
+    "arch009": "ACCEPTED"
+  },
+  "delivered": [
+    "Verification aggregate",
+    "VerificationHistory / VerificationMetadata / VerificationDecision",
+    "Value objects (id, status, outcome, subject, authority, context, scope, priority, origin, rationale, reason, comment, result summary, timestamp)",
+    "Lifecycle draft→requested→assigned→in_progress→verified|rejected (+ expire/withdraw/supersede/cancel/retire/re-open)",
+    "Status ≠ Outcome separation",
+    "Persistence-independent policies",
+    "Pure domain services",
+    "Domain event builders (13 types)",
+    "Domain tests (107) + architecture boundaries (5) = 112 PASS",
+    "Documentation pack docs/products/apzqep/verification/engine-domain/",
+    "Optional module stub modules/qep-verification/module.yaml (domain-only, no Workbench routes)"
+  ],
+  "notDelivered": [
+    "persistence",
+    "repositories",
+    "migrations",
+    "APIs",
+    "Workbench",
+    "Event Bus wiring",
+    "Coverage",
+    "Impact",
+    "Evidence",
+    "Certification",
+    "AI",
+    "MCP",
+    "Owner Acceptance of ENG-040A"
+  ],
+  "tests": {
+    "vitest": "PASS (112)"
+  },
+  "stopRule": "Await Owner Acceptance. Do not begin persistence, APIs, or Workbench."
+}

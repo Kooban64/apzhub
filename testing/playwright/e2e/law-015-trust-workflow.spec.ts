@@ -1,8 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 
-const DEV_EMAIL = "dev@apzhub.local";
-const DEV_PASSWORD = "DevPassword123!";
-const LAW_BASE_URL = process.env.PLAYWRIGHT_LAW_BASE_URL ?? "http://localhost:3302";
+import { signInLawDevUser } from "./law-auth-helpers";
 
 const TRUST_ROUTES = [
   {
@@ -47,33 +45,9 @@ const TRUST_ROUTES = [
   },
 ] as const;
 
-async function signIn(page: Page) {
-  await page.goto(`${LAW_BASE_URL}/login`, { waitUntil: "networkidle" });
-  await page
-    .locator('input[name="email"]')
-    .waitFor({ state: "visible", timeout: 20_000 });
-  await page.locator('input[name="email"]').fill(DEV_EMAIL);
-  await page.locator('input[name="password"]').fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "Sign in" }).click();
-
-  try {
-    await expect(page).toHaveURL(/\/workspace\/home/, { timeout: 10_000 });
-  } catch {
-    await page.goto(`${LAW_BASE_URL}/register`, { waitUntil: "networkidle" });
-    await page
-      .locator('input[name="name"]')
-      .waitFor({ state: "visible", timeout: 20_000 });
-    await page.locator('input[name="name"]').fill("Dev User");
-    await page.locator('input[name="email"]').fill(DEV_EMAIL);
-    await page.locator('input[name="password"]').fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "Register" }).click();
-    await expect(page).toHaveURL(/\/workspace\/home/, { timeout: 20_000 });
-  }
-}
-
 async function openTrustDashboard(page: Page) {
-  await signIn(page);
-  await page.goto(`${LAW_BASE_URL}/workspace/law/trust`, { waitUntil: "networkidle" });
+  await signInLawDevUser(page);
+  await page.goto("/workspace/law/trust", { waitUntil: "domcontentloaded" });
   await expect(page.getByTestId("trust-dashboard-page")).toBeVisible({
     timeout: 20_000,
   });
@@ -83,7 +57,7 @@ test.describe("LAW-015-13 Trust Accounting E2E validation", () => {
   test("navigates to trust via Law Platform workspace and sidebar", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInLawDevUser(page);
 
     await page.getByRole("button", { name: "Law Platform workspace" }).click();
     await expect(page).toHaveURL(/\/workspace\/law/);
@@ -111,7 +85,7 @@ test.describe("LAW-015-13 Trust Accounting E2E validation", () => {
     await openTrustDashboard(page);
 
     for (const route of TRUST_ROUTES) {
-      await page.goto(`${LAW_BASE_URL}${route.path}`, { waitUntil: "networkidle" });
+      await page.goto(route.path, { waitUntil: "domcontentloaded" });
       await expect(page.getByTestId(route.pageTestId)).toBeVisible();
       await expect(page.getByTestId("trust-sub-nav")).toBeVisible();
       await expect(page.getByTestId(`trust-sub-nav-${route.kind}`)).toBeVisible();
@@ -123,36 +97,36 @@ test.describe("LAW-015-13 Trust Accounting E2E validation", () => {
   }) => {
     await openTrustDashboard(page);
 
-    await page.goto(`${LAW_BASE_URL}/workspace/law/trust/transactions`, {
-      waitUntil: "networkidle",
+    await page.goto("/workspace/law/trust/transactions", {
+      waitUntil: "domcontentloaded",
     });
     await expect(
       page.locator('[data-testid^="trust-transaction-row-"]').first(),
     ).toBeVisible();
 
-    await page.goto(`${LAW_BASE_URL}/workspace/law/trust/allocations`, {
-      waitUntil: "networkidle",
+    await page.goto("/workspace/law/trust/allocations", {
+      waitUntil: "domcontentloaded",
     });
     await expect(
       page.locator('[data-testid^="trust-allocation-row-"]').first(),
     ).toBeVisible();
 
-    await page.goto(`${LAW_BASE_URL}/workspace/law/trust/reconciliation`, {
-      waitUntil: "networkidle",
+    await page.goto("/workspace/law/trust/reconciliation", {
+      waitUntil: "domcontentloaded",
     });
     await expect(
       page.locator('[data-testid^="trust-reconciliation-row-"]').first(),
     ).toBeVisible();
 
-    await page.goto(`${LAW_BASE_URL}/workspace/law/trust/interest`, {
-      waitUntil: "networkidle",
+    await page.goto("/workspace/law/trust/interest", {
+      waitUntil: "domcontentloaded",
     });
     await expect(
       page.locator('[data-testid^="trust-interest-row-"]').first(),
     ).toBeVisible();
 
-    await page.goto(`${LAW_BASE_URL}/workspace/law/trust/transfers`, {
-      waitUntil: "networkidle",
+    await page.goto("/workspace/law/trust/transfers", {
+      waitUntil: "domcontentloaded",
     });
     await expect(
       page.locator('[data-testid^="trust-transfer-row-"]').first(),
@@ -161,8 +135,8 @@ test.describe("LAW-015-13 Trust Accounting E2E validation", () => {
 
   test("generates a trust report and enables export actions", async ({ page }) => {
     await openTrustDashboard(page);
-    await page.goto(`${LAW_BASE_URL}/workspace/law/trust/reports`, {
-      waitUntil: "networkidle",
+    await page.goto("/workspace/law/trust/reports", {
+      waitUntil: "domcontentloaded",
     });
 
     await page.getByTestId("trust-report-type-select").selectOption("trial_balance");
@@ -177,8 +151,8 @@ test.describe("LAW-015-13 Trust Accounting E2E validation", () => {
     context,
   }) => {
     await openTrustDashboard(page);
-    await page.goto(`${LAW_BASE_URL}/workspace/law/trust/reports`, {
-      waitUntil: "networkidle",
+    await page.goto("/workspace/law/trust/reports", {
+      waitUntil: "domcontentloaded",
     });
 
     await page.getByTestId("trust-report-type-select").selectOption("ledger");
@@ -204,8 +178,8 @@ test.describe("LAW-015-13 Trust Accounting E2E validation", () => {
       .locator("..");
     await expect(ledgerRuns).toContainText(/\d+/);
 
-    await page.goto(`${LAW_BASE_URL}/workspace/law/trust/accounts`, {
-      waitUntil: "networkidle",
+    await page.goto("/workspace/law/trust/accounts", {
+      waitUntil: "domcontentloaded",
     });
     await expect(page.getByTestId("trust-diagnostics-panel")).toBeVisible();
     await expect(page.getByTestId("trust-accounts-table")).toBeVisible();

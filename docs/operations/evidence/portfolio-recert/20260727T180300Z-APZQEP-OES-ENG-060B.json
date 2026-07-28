@@ -1,0 +1,31 @@
+{
+  "id": "20260727T180300Z-APZQEP-OES-ENG-060B",
+  "timestamp": "2026-07-27T18:03:00Z",
+  "programme": "APZQEP-OES-ENG-060B",
+  "title": "Test Plans Infrastructure Engineering Specification",
+  "type": "owner-engineering-specification",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ACCEPTANCE",
+  "layer": "infrastructure",
+  "productionCode": false,
+  "consumes": {
+    "architecture": "APZQEP-ARCH-013",
+    "domainOes": "APZQEP-OES-ENG-060A",
+    "domainPackage": "@apzhub/qep-test-plans@0.1.0",
+    "domainCertification": "APZQEP-CERT-060A"
+  },
+  "domainImmutable": true,
+  "referenceImplementationIntent": "orchestration-infrastructure-patterns",
+  "documents": [
+    "docs/products/apzqep/test-plans/OES-ENG-060B/COMPLETE.md",
+    "docs/products/apzqep/test-plans/OES-ENG-060B/OWNER-SUMMARY.md",
+    "docs/products/apzqep/test-plans/OES-ENG-060B/INFRASTRUCTURE-ENGINEERING-SPECIFICATION-COMPLETION-REPORT.md"
+  ],
+  "explicitlyNotAuthorised": [
+    "migrations",
+    "repository-implementation",
+    "rest-controllers",
+    "workbench",
+    "eng-060b-implementation",
+    "domain-modification"
+  ]
+}

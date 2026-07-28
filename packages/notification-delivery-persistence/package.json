@@ -1,0 +1,20 @@
+{
+  "name": "@apzhub/notification-delivery-persistence",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Notification Delivery durable persistence + claim/lease/completion/admin (ADR-0073 / ENG-001B-P1–P4)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/notification-delivery-persistence"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/notification-contracts": "workspace:*",
+    "drizzle-orm": "^0.45.2"
+  }
+}

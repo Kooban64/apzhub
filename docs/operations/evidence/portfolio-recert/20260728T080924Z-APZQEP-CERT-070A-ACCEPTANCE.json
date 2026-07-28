@@ -1,0 +1,40 @@
+{
+  "evidenceId": "20260728T080924Z-APZQEP-CERT-070A-ACCEPTANCE",
+  "programme": "APZQEP-CERT-070A",
+  "title": "Test Plans Workbench Component Certification — Owner Certification Decision",
+  "capability": "Test Plans",
+  "layer": "Workbench Component Certification",
+  "certificationLevel": "Component Certification",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T080924Z",
+  "decision": {
+    "status": "CERTIFIED",
+    "approved": true,
+    "programmeClosed": true
+  },
+  "productionClassification": "WORKBENCH_PRODUCTION_READY_WITH_LIMITATIONS",
+  "version": {
+    "package": "@apzhub/qep-test-plans",
+    "version": "0.2.0",
+    "label": "WORKBENCH COMPONENT CERTIFIED",
+    "promoteTo100": false
+  },
+  "freeze": {
+    "authorised": false,
+    "reason": "Capability Certification not yet completed"
+  },
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "assuranceEvidence": "docs/operations/evidence/portfolio-recert/20260728T073000Z-APZQEP-CERT-070A.json",
+  "pack": "docs/products/apzqep/test-plans/CERT-070A/",
+  "authorisesNext": "APZQEP-CERT-080A — Test Plans Integrated Capability Certification",
+  "componentStack": {
+    "domain": "CERT-060A CERTIFIED 0.1.0",
+    "infrastructure": "CERT-060B CERTIFIED 0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED",
+    "workbench": "CERT-070A CERTIFIED 0.2.0 WORKBENCH COMPONENT CERTIFIED"
+  }
+}

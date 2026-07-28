@@ -1,0 +1,39 @@
+{
+  "id": "20260727T194000Z-APZQEP-ENG-060B-ACCEPTANCE",
+  "timestamp": "2026-07-27T19:40:00Z",
+  "programme": "APZQEP-ENG-060B",
+  "title": "Test Plans Infrastructure Engineering",
+  "type": "owner-acceptance",
+  "decision": "ACCEPTED_WITH_RECORDED_LIMITATIONS",
+  "approved": true,
+  "programmeClosed": true,
+  "ecr": {
+    "decision": "PASS_WITH_CONDITIONS",
+    "evidence": "20260727T193200Z-APZQEP-ENG-060B-ECR-PASS-WITH-CONDITIONS.json"
+  },
+  "conditionDispositions": {
+    "C-01": "ACCEPTED_AS_DEFERRED_CAPABILITY",
+    "C-02": "ACCEPTED_AS_APPROVED_VARIANCE",
+    "C-03": "ACCEPTED",
+    "C-04": "ACCEPTED_WITH_DOCUMENTED_JUSTIFICATION"
+  },
+  "package": {
+    "name": "@apzhub/qep-test-plans",
+    "version": "0.2.0",
+    "domainSemantics": "0.1.0 CERTIFIED unchanged"
+  },
+  "referenceImplementation": true,
+  "nextNamedProgramme": "APZQEP-CERT-060B",
+  "documents": [
+    "docs/products/apzqep/test-plans/infrastructure/OWNER-ACCEPTANCE.md",
+    "docs/products/apzqep/test-plans/infrastructure/KNOWN-LIMITATIONS.md"
+  ],
+  "explicitlyNotAuthorised": [
+    "cert-060b-execution-without-instruction",
+    "workbench",
+    "capability-certification",
+    "freeze",
+    "version-1.0.0-promotion",
+    "engineering-under-eng-060b"
+  ]
+}

@@ -167,6 +167,13 @@ export {
   platformNotificationAudit,
 } from "./platform-notification-schema";
 export {
+  platformNotificationDeliverySchema,
+  platformNotificationIntent,
+  platformNotificationDeliveryRecord,
+  platformNotificationDeliveryTry,
+  platformNotificationInAppItem,
+} from "./platform-notification-delivery-schema";
+export {
   platformConfigurationSchema,
   platformConfigurationNamespace,
   platformConfigurationGroup,
@@ -226,6 +233,18 @@ export {
   platformMetricsRelationship,
   platformMetricsMetadata,
 } from "./platform-metrics-schema";
+export {
+  qepRequirementsSchema,
+  qepRequirement,
+  qepRequirementAudit,
+  qepRequirementLifecycleHistory,
+  qepRequirementContentVersion,
+  qepRequirementBaseline,
+  qepRequirementBaselineItem,
+  qepRequirementsRelationship,
+  qepRequirementsRelationshipHistory,
+  qepRequirementsRelationshipTaxonomy,
+} from "./qep-requirements-schema";
 export {
   platformAdminSchema,
   platformAdminModule,

@@ -136,7 +136,9 @@ export function WorkbenchProvider({
 
     return () => {
       active = false;
-      instance.disableSessionPersistence();
+      void instance.flushPendingPersist().finally(() => {
+        instance.disableSessionPersistence();
+      });
     };
   }, [
     authPermissionContext,

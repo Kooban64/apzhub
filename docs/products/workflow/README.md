@@ -4,8 +4,14 @@
 > **Framework:** [APZHUB-PRODUCTS-000](../README.md)  
 > **Definition Pack:** APZHUB-PRODUCTS-002  
 > **Status:** Definition Pack complete — **no product implementation authorised**  
-> **Maturity:** **Production**  
+> **Maturity:** Platform **Production** (PRWL · frozen). Commercial Release 1.0: **Planning** — see [apz-workflow/](../apz-workflow/README.md) (APZ-WORKFLOW-001)  
 > **Portfolio entry:** [APZHUB-PRODUCT-PORTFOLIO](../APZHUB-PRODUCT-PORTFOLIO.md)
+
+## Commercial Release 1.0 Planning
+
+| Document                                   | Purpose                                                                               |
+| ------------------------------------------ | ------------------------------------------------------------------------------------- |
+| [apz-workflow/](../apz-workflow/README.md) | APZ-WORKFLOW-001 — commercial Release 1.0 Definition Pack · **READY WITH CONDITIONS** |
 
 ## Product Definition Pack
 

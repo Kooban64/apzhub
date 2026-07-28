@@ -37,7 +37,7 @@ const CAPABILITY_SPECS: readonly CapabilitySpec[] = [
     configurationRequirements: ["baseUrl", "apiToken"],
     knownLimitations: [
       "Ticket delete is not exposed through the Support domain contract",
-      "Binary attachment transfer is out of scope",
+      "Binary attachments via articles capability (R12-SUP-02); delete not exposed",
     ],
     testEvidenceRef: "tests/zammad-support-core.test.ts",
   },
@@ -96,18 +96,32 @@ const CAPABILITY_SPECS: readonly CapabilitySpec[] = [
       "getArticle",
       "createInternalNote",
       "createCustomerReply",
+      "uploadBinaryAttachment",
+      "downloadBinaryAttachment",
     ],
-    unsupportedOperations: [
-      "updateArticle",
-      "deleteArticle",
-      "transferBinaryAttachment",
-    ],
+    unsupportedOperations: ["updateArticle", "deleteArticle", "deleteBinaryAttachment"],
     dependencyRequirements: ["rest_client", "operation_runner", "auth", "support"],
     configurationRequirements: ["baseUrl", "apiToken"],
     knownLimitations: [
       "Article update and delete are unsupported",
-      "Attachment metadata only — binary transfer not implemented",
+      "Binary attachments via article create (upload) and ticket_attachment download (R12-SUP-02)",
+      "Attachment delete is not exposed",
       "Internal notes must never become customer-visible",
+    ],
+    testEvidenceRef: "tests/zammad-articles.test.ts",
+  },
+  {
+    capabilityId: "attachments",
+    serviceId: "articles",
+    optional: false,
+    supportedOperations: ["uploadBinaryAttachment", "downloadBinaryAttachment"],
+    unsupportedOperations: ["deleteBinaryAttachment"],
+    dependencyRequirements: ["rest_client", "operation_runner", "auth", "articles"],
+    configurationRequirements: ["baseUrl", "apiToken"],
+    knownLimitations: [
+      "Upload is inline base64 on article create (max 1 MiB)",
+      "Download uses Zammad CE ticket_attachment endpoint",
+      "Attachment delete is not exposed",
     ],
     testEvidenceRef: "tests/zammad-articles.test.ts",
   },
@@ -168,14 +182,15 @@ const CAPABILITY_SPECS: readonly CapabilitySpec[] = [
       "updateWebhook",
       "deleteWebhook",
       "validateWebhook",
+      "webhookHttpIngress",
+      "platformEventPublication",
     ],
-    unsupportedOperations: ["webhookHttpIngress", "platformEventPublication"],
+    unsupportedOperations: [],
     dependencyRequirements: ["rest_client", "operation_runner", "auth"],
     configurationRequirements: ["baseUrl", "apiToken"],
     knownLimitations: [
-      "Webhook registration/management only",
-      "HTTP ingress is not implemented",
-      "Platform Event Bus publication is not implemented",
+      "HTTP ingress via Platform POST /api/v1/integrations/zammad/webhooks (R12-SUP-01)",
+      "Attachment webhook events translated as metadata (R12-SUP-02)",
       "Webhook secrets never appear in diagnostics",
     ],
     testEvidenceRef: "tests/zammad-sync-events-webhooks.test.ts",
@@ -184,12 +199,16 @@ const CAPABILITY_SPECS: readonly CapabilitySpec[] = [
     capabilityId: "events",
     serviceId: "events",
     optional: false,
-    supportedOperations: ["translateProviderEvent", "listSupportedEventTypes"],
-    unsupportedOperations: ["platformEventPublication", "platformEventSubscription"],
+    supportedOperations: [
+      "translateProviderEvent",
+      "listSupportedEventTypes",
+      "platformEventPublication",
+    ],
+    unsupportedOperations: ["platformEventSubscription"],
     dependencyRequirements: ["canonical_event_contracts"],
     configurationRequirements: [],
     knownLimitations: [
-      "Canonical event translation only — no Platform Event Bus",
+      "Ingress publishes IntegrationSourceEvent + Support catalogue events (R12-SUP-01)",
       "Unknown events are handled safely without throwing",
     ],
     testEvidenceRef: "tests/zammad-sync-events-webhooks.test.ts",
@@ -333,36 +352,19 @@ export function certifyZammadCapabilities(
   });
 }
 
-/** Binary attachments remain a placeholder — never falsely certified. */
+/**
+ * @deprecated Use certifyZammadCapabilities attachments entry (R12-SUP-02).
+ * Kept for import stability — returns implemented attachments certification.
+ */
 export function certifyAttachmentPlaceholder(): ZammadCapabilityCertification {
-  return {
-    capabilityId: "attachments",
-    serviceId: "attachments",
-    implemented: false,
-    registered: false,
-    available: false,
-    enabled: false,
-    certificationStatus: "unavailable",
-    status: "unavailable",
-    supportedOperations: [],
-    unsupportedOperations: [
-      "uploadBinaryAttachment",
-      "downloadBinaryAttachment",
-      "deleteBinaryAttachment",
-    ],
-    optional: true,
-    degraded: false,
-    degradationReasons: [],
-    dependencyRequirements: [],
-    minimumZammadVersion: VERSION_MIN,
-    maximumVerifiedZammadVersion: VERSION_MAX,
-    editionApplicability: ["community", "enterprise"],
-    configurationRequirements: [],
-    knownLimitations: [
-      "Binary attachment transfer is explicitly out of scope",
-      "Attachment metadata is available via the articles capability",
-    ],
-    testEvidenceRef: "tests/zammad-operations.test.ts",
-    reasons: ["placeholder_not_implemented"],
-  };
+  const certified = certifyZammadCapabilities({
+    serviceAvailable: (serviceId) => serviceId === "articles",
+    providerReachable: true,
+    authenticationValid: true,
+  });
+  const attachments = certified.find((c) => c.capabilityId === "attachments");
+  if (!attachments) {
+    throw new Error("attachments capability missing from certification catalogue");
+  }
+  return attachments;
 }

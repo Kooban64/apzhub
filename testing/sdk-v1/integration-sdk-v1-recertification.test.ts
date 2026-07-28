@@ -87,7 +87,7 @@ describe("OSS-100-10 Integration SDK v1.0 re-certification", () => {
     expect(result.capabilityCertifications.length).toBe(
       ZAMMAD_CERTIFICATION_CAPABILITY_IDS.length,
     );
-    expect(ZAMMAD_CERTIFICATION_CAPABILITY_IDS.length).toBe(11);
+    expect(ZAMMAD_CERTIFICATION_CAPABILITY_IDS.length).toBe(12);
 
     const architecture = result.sdkCertification.categories.find(
       (c) => c.category === "Architecture",
@@ -147,6 +147,6 @@ describe("OSS-100-10 Integration SDK v1.0 re-certification", () => {
     const zMeta = getZammadHarnessMetadata();
     const zammadCert = certifyAdapter(zMeta);
     expect(zammadCert.overall).not.toBe("fail");
-    expect(zMeta.adapterVersion).toBe("0.6.0");
+    expect(zMeta.adapterVersion).toBe("0.8.0");
   });
 });

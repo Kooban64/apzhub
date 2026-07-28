@@ -68,7 +68,7 @@ function requirePackageVersion(pkgJsonPath, expected, rule) {
 // ---------------------------------------------------------------------------
 requirePackageVersion(
   "packages/notification-contracts/package.json",
-  "0.2.0",
+  "0.3.5",
   "version-notification-contracts",
 );
 requirePackageVersion(
@@ -83,12 +83,12 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.26.1",
+  "0.32.0",
   "version-platform-services",
 );
 requirePackageVersion(
   "packages/platform-service-contracts/package.json",
-  "0.17.1",
+  "0.18.0",
   "version-platform-service-contracts",
 );
 
@@ -152,11 +152,10 @@ requireContains(
   "Operational Readiness must state delivery unavailable",
 );
 
-// Delivery routes must remain absent
+// Unauthorised delivery routes must remain absent (providers authorised under ENG-004)
 for (const omitted of [
   "apps/web/app/api/v1/notifications/send",
   "apps/web/app/api/v1/notifications/deliver",
-  "apps/web/app/api/v1/notifications/providers",
   "apps/web/app/api/v1/notifications/email",
   "apps/web/app/api/v1/notifications/sms",
 ]) {
@@ -165,7 +164,7 @@ for (const omitted of [
       file: omitted,
       line: 1,
       rule: "delivery-route-present",
-      detail: "Delivery route must not exist at wave freeze",
+      detail: "Unauthorised delivery route must not exist at wave freeze",
     });
   }
 }

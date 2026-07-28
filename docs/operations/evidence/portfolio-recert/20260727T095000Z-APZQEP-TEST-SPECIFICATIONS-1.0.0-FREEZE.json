@@ -1,0 +1,49 @@
+{
+  "type": "OwnerFreezeDecision",
+  "capability": "Test Specifications",
+  "package": "@apzhub/qep-test-specifications",
+  "version": "1.0.0",
+  "recordedAt": "2026-07-27T09:50:00Z",
+  "decision": "FROZEN / BASELINE ESTABLISHED / REFERENCE IMPLEMENTATION",
+  "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "prerequisite": {
+    "programme": "APZQEP-CERT-050D",
+    "status": "CERTIFIED / APPROVED / CLOSED",
+    "acceptance": "20260727T081100Z-APZQEP-CERT-050D-ACCEPTANCE.json"
+  },
+  "lifecycle": {
+    "architecture": "ACCEPTED",
+    "engineeringSpecification": "ACCEPTED",
+    "implementation": "COMPLETE",
+    "ecr": "PASS",
+    "ownerAcceptance": "PASS",
+    "independentCertification": "PASS",
+    "versionPromotion": "1.0.0",
+    "productionClassification": "PRODUCTION_READY_WITH_LIMITATIONS",
+    "freeze": "FROZEN"
+  },
+  "restrictions": [
+    "Uncontrolled code changes",
+    "Architectural modifications",
+    "API contract changes",
+    "Behavioural changes",
+    "Documentation edits that alter technical intent"
+  ],
+  "permittedViaNewProgrammes": [
+    "Defect correction",
+    "Security updates",
+    "Documentation errata",
+    "Minor improvements",
+    "New capabilities",
+    "Future major versions"
+  ],
+  "decisionRecord": "docs/products/apzqep/test-specifications/freeze/OWNER-FREEZE-DECISION.md",
+  "releaseEvidence": "docs/releases/apzqep/test-specifications/1.0.0/",
+  "portfolio": {
+    "requirements": "1.0.0 CERTIFIED / FROZEN",
+    "traceability": "1.0.0 CERTIFIED / FROZEN",
+    "verification": "1.0.0 CERTIFIED / FROZEN",
+    "testSpecifications": "1.0.0 CERTIFIED / FROZEN"
+  },
+  "stopCondition": "Test Specifications 1.0.0 CERTIFIED / FROZEN — baseline established; no uncontrolled changes"
+}

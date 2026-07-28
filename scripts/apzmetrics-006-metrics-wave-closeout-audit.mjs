@@ -80,7 +80,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.26.1",
+  "0.32.0",
   "version-platform-services",
 );
 
@@ -156,9 +156,9 @@ requireContains(
 );
 requireContains(
   "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
-  /version:\s*1\.(9|10)\.\d+/,
+  /version:\s*1\.(9|10|11|12|13|14)\.\d+/,
   "openapi-version",
-  "OpenAPI must remain at 1.9.x or 1.10.x (Metrics freeze floor retained)",
+  "OpenAPI must remain at 1.9.x–1.14.x (Metrics freeze floor retained)",
 );
 requireContains(
   "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",

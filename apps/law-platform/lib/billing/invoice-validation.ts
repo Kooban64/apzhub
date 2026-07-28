@@ -5,11 +5,9 @@ import {
   type ValidationResult,
 } from "@apzhub/legal-business-core";
 
-import {
-  getSharedClientRepository,
-  getSharedMatterRepository,
-  getSharedTimeEntryRepository,
-} from "../persistence/repository-factory";
+import { getSharedClientRepository } from "../clients/in-memory-client-repository";
+import { getSharedMatterRepository } from "../matters/in-memory-matter-repository";
+import { getSharedTimeEntryRepository } from "../time/in-memory-time-entry-repository";
 import {
   parsePlaceholderAmount,
   parseTimeEntryIdsInput,

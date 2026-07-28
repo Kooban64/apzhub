@@ -1,0 +1,31 @@
+{
+  "programme": "APZQEP-REQ-001",
+  "title": "Requirements Capability Certification & Baseline",
+  "recordedAt": "2026-07-26T11:00:00Z",
+  "state": "CERTIFICATION COMPLETE — AWAITING OWNER ACCEPTANCE",
+  "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "recommendation": "PRODUCTION READY",
+  "package": {
+    "@apzhub/qep-requirements": "1.0.0"
+  },
+  "acceptedProgrammes": [
+    "APZQEP-ENG-020A",
+    "APZQEP-ENG-020B",
+    "APZQEP-ENG-020C",
+    "APZQEP-ENG-020D",
+    "APZQEP-ENG-020E",
+    "APZQEP-ENG-020F Parts 1-3",
+    "APZQEP-ARCH-005",
+    "APZQEP-ARCH-006"
+  ],
+  "gates": {
+    "typecheck": "PASS",
+    "packageTests": "PASS (105)",
+    "workbenchComponentTests": "PASS",
+    "architectureBoundaries": "PASS",
+    "noFunctionalEngineering": "PASS"
+  },
+  "pack": "docs/products/apzqep/requirements/capability-certification/",
+  "releaseEvidence": "docs/releases/apzqep/requirements/1.0.0/",
+  "stopRule": "Await Owner Acceptance. Do not begin APZQEP-ARCH-007, Traceability, Verification, graphs, AI, or MCP."
+}

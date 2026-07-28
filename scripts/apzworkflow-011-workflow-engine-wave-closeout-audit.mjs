@@ -73,7 +73,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/workflow-contracts/package.json",
-  "0.3.0",
+  "0.4.2",
   "version-workflow-contracts",
 );
 requirePackageVersion(
@@ -88,7 +88,7 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.26.1",
+  "0.32.0",
   "version-platform-services",
 );
 
@@ -209,7 +209,7 @@ console.log("  - SoR vertical (001–005 via audit:workflow-vertical): PASS");
 console.log("  - Engine vertical (006–010 via audit:workflow-engine-vertical): PASS");
 console.log("  - Reference Adapter Standard + Architecture Freeze artefacts present");
 console.log(
-  "  - Frozen versions: integration-n8n 0.1.0 · contracts 0.3.0 · platform-services 0.26.1",
+  "  - Frozen versions: integration-n8n 0.1.0 · contracts 0.4.2 · platform-services 0.32.0",
 );
 if (observations.length > 0) {
   console.log("Observations:");

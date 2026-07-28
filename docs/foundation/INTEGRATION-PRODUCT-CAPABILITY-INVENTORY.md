@@ -27,27 +27,34 @@
 | **Zammad**         | Support                         | `@apzhub/integration-zammad`         | **0.6.0**      | OSS-102-01…08; OSS-110-10…14                                        | Wave 2 **CERTIFIED_WITH_LIMITATIONS**; UI **PRODUCTION_READY_WITH_LIMITATIONS** (OSS-110-14)  | No further OSS-102 stories listed                       |
 | **Meilisearch**    | Search engine (platform Search) | `@apzhub/integration-meilisearch`    | **0.1.0**      | APZSEARCH-005 (+ platform 001–008 / publication 009–019 consume it) | Search Platform + Publication **Architecture Frozen** (008 / 019)                             | Further Search needs ADR + owner                        |
 | **n8n**            | Workflow Engine                 | `@apzhub/integration-n8n`            | **0.1.0**      | APZWORKFLOW-006…011                                                 | Official Reference Adapter; wave **frozen**; read-only; **PRODUCTION_READY_WITH_LIMITATIONS** | **APZWORKFLOW-012** roadmap only                        |
-| **GitHub Actions** | CI/CD (APZ TCMS)                | `@apzhub/integration-github-actions` | **0.1.0**      | APZTCMS-016…020                                                     | CI/CD Reference Adapter **frozen**; vertical **PRODUCTION_READY_WITH_LIMITATIONS** (019)      | **GitLab CI** future (awaiting owner + milestone)       |
+| **GitHub Actions** | CI/CD (APZ TCMS)                | `@apzhub/integration-github-actions` | **0.1.0**      | APZTCMS-016…020                                                     | CI/CD Reference Adapter **frozen**; vertical **PRODUCTION_READY_WITH_LIMITATIONS** (019)      | Standard remains frozen                                 |
+| **GitLab CI**      | CI/CD (APZ TCMS)                | `@apzhub/integration-gitlab-ci`      | **0.1.0**      | R12-TCMS-01 / APZHUB-1.2-007                                        | Metadata/read-only Reference Adapter (mirrors GHA posture)                                    | No dispatch/rerun/cancel/download                       |
 
-**Absent on disk (no `integrations/{id}/` directory):** Paperless-ngx · Metabase · Grafana · Prometheus · Loki · Kiwi TCMS · Greenbone · MobSF · Faraday · GitLab CI adapter.
+**Absent on disk (no `integrations/{id}/` directory):** Paperless-ngx · Grafana · Prometheus · Loki · Kiwi TCMS · Greenbone · MobSF · Faraday.
 
 **Present domain adapter (no Time product UI):** Kimai — `@apzhub/integration-kimai` **0.2.0** (APZHUB-INTEGRATION-KIMAI-002 **ACCEPTED** · CERTIFIED_DOMAIN).
+
+**Present Analytics provider foundation (no Analytics Services/UI):** Metabase — `@apzhub/integration-metabase` **0.1.0** (APZHUB-INTEGRATION-METABASE-001 **ACCEPTED** · CERTIFIED_FOUNDATION).
+
+**Present Analytics contracts:** `@apzhub/analytics-contracts` **0.1.0** (APZHUB-PLATFORM-ANALYTICS-003 **ACCEPTED**).
+
+**Present Analytics Platform Services (no HTTP/UI):** `@apzhub/platform-services` **0.27.0** · `services/analytics/service.yaml` **0.1.0** (APZHUB-PLATFORM-ANALYTICS-004 **Awaiting Acceptance**).
 
 ---
 
 ## B. OSS nine-wave roadmap vs repository reality
 
-| Wave | Engine                                          | APZHUB name                          | Repository reality                                                                                       |
-| ---- | ----------------------------------------------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| 1    | Plane                                           | Projects                             | **Implemented** — `integrations/plane` **0.6.0**; Wave 1 closed                                          |
-| 2    | Zammad                                          | Support                              | **Implemented** — adapter + Support platform/HTTP/UI (OSS-110-10…14)                                     |
-| 3    | Kimai                                           | Time Tracking                        | **Production** — Kimai **0.2.0** + services **0.26.1** + HTTP **1.10.0** + Workbench **1.0.0** ACCEPTED  |
-| 4    | Paperless-ngx                                   | Documents                            | **No Paperless adapter.** Native Documents platform exists (**APZDOCS-001…006**, architecture frozen)    |
-| 5    | Metabase                                        | Analytics                            | **Not implemented**                                                                                      |
-| 6    | n8n                                             | Automation / Workflow Engine         | **Implemented** — `integrations/n8n` **0.1.0**; frozen                                                   |
-| 7    | Kiwi TCMS                                       | Testing                              | **SUPERSEDED** by APZ TCMS (ADR-0059); no Kiwi adapter                                                   |
-| 8    | Greenbone / Faraday (+ Grafana/Prometheus/Loki) | Security Ops / Observability engines | **Not implemented** as OSS adapters. Native Observability SoR (**APZOBSERVE-006**) frozen metadata plane |
-| 9    | MobSF                                           | Mobile Security                      | **Not implemented**                                                                                      |
+| Wave | Engine                                          | APZHUB name                          | Repository reality                                                                                                                       |
+| ---- | ----------------------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | Plane                                           | Projects                             | **Implemented** — `integrations/plane` **0.6.0**; Wave 1 closed                                                                          |
+| 2    | Zammad                                          | Support                              | **Implemented** — adapter + Support platform/HTTP/UI (OSS-110-10…14)                                                                     |
+| 3    | Kimai                                           | Time Tracking                        | **Production** — Kimai **0.2.0** + services **0.26.1** + HTTP **1.10.0** + Workbench **1.0.0** ACCEPTED                                  |
+| 4    | Paperless-ngx                                   | Documents                            | **No Paperless adapter.** Native Documents platform exists (**APZDOCS-001…006**, architecture frozen)                                    |
+| 5    | Metabase                                        | Analytics                            | **Foundation ACCEPTED** — `integrations/metabase` **0.1.0**; contracts `@apzhub/analytics-contracts` **0.1.0**; no Analytics Services/UI |
+| 6    | n8n                                             | Automation / Workflow Engine         | **Implemented** — `integrations/n8n` **0.1.0**; frozen                                                                                   |
+| 7    | Kiwi TCMS                                       | Testing                              | **SUPERSEDED** by APZ TCMS (ADR-0059); no Kiwi adapter                                                                                   |
+| 8    | Greenbone / Faraday (+ Grafana/Prometheus/Loki) | Security Ops / Observability engines | **Not implemented** as OSS adapters. Native Observability SoR (**APZOBSERVE-006**) frozen metadata plane                                 |
+| 9    | MobSF                                           | Mobile Security                      | **Not implemented**                                                                                                                      |
 
 ---
 
@@ -71,7 +78,7 @@
 | **Configuration**                       | APZCONFIG-001…006                           | **closed/frozen** · PRODUCTION_READY_WITH_LIMITATIONS                                           | **APZCONFIG-007** roadmap only                                                   |
 | **Notifications**                       | APZNOTIFY-001…006                           | **closed/frozen** · PRODUCTION_READY_WITH_LIMITATIONS                                           | **APZNOTIFY-007** roadmap only                                                   |
 | **Identity Administration**             | APZIDENTITY-001…006                         | **closed/frozen**                                                                               | Further Identity needs ADR + owner                                               |
-| **APZ TCMS**                            | APZTCMS-001…024                             | Vertical slices PRODUCTION_READY_WITH_LIMITATIONS where certified; GHA Reference Adapter frozen | **GitLab CI** future · **AI Assist** deferred                                    |
+| **APZ TCMS**                            | APZTCMS-001…024                             | Vertical slices PRODUCTION_READY_WITH_LIMITATIONS where certified; GHA Reference Adapter frozen | **GitLab CI** metadata adapter **0.1.0** (R12-TCMS-01) · **AI Assist** deferred  |
 | **Law Platform**                        | LAW-001…015                                 | Milestone closed                                                                                | Product validation                                                               |
 | **Trust Accounting**                    | LAW-015-*                                   | Closed                                                                                          | —                                                                                |
 | **Platform Core v2**                    | PRH-001…018 · **PCv2-02** · **OSS-100-12+** | PRH / outbox / provisioning **ACCEPTED / CLOSED**                                               | M17 await owner                                                                  |
@@ -89,6 +96,7 @@
 | `@apzhub/integration-meilisearch`                        | **0.1.0**  | Search Reference Adapter                |
 | `@apzhub/integration-n8n`                                | **0.1.0**  | Workflow Engine Reference Adapter       |
 | `@apzhub/integration-github-actions`                     | **0.1.0**  | CI/CD Reference Adapter                 |
+| `@apzhub/integration-gitlab-ci`                          | **0.1.0**  | GitLab CI Reference Adapter (metadata)  |
 | `@apzhub/integration-search-sdk`                         | **0.1.0**  | Search Integration SDK                  |
 | `@apzhub/platform-services`                              | **0.26.1** | Gateway facade + Time Platform Services |
 | `@apzhub/platform-outbox`                                | **0.1.0**  | PCv2-02 outbox worker                   |
@@ -108,28 +116,28 @@
 | `@apzhub/configuration-contracts` / `core`               | **0.2.0**  | Configuration (frozen)                  |
 | `@apzhub/reporting-contracts` / `core`                   | **0.1.0**  | Platform Reporting                      |
 
-Search publication adapters (frozen): `search-projects` **0.1.0** · `search-support` **0.1.0** · `search-documents` **0.1.0** · `search-testing` **0.1.1** · `search-reporting` **0.1.0**.
+Search publication adapters (frozen wave): `search-projects` **0.1.0** · `search-support` **0.1.0** · `search-documents` **0.1.0** · `search-testing` **0.1.1** · `search-reporting` **0.1.0**. Additive Release 1.2: `search-time` **0.1.0** (R12-SEARCH-01) · `search-law` **0.1.0** (R12-SEARCH-02).
 
 ---
 
 ## E. Product capabilities (user-facing)
 
-| Capability                                            | Type                                  | Implementation path                                 | Status                                                                                |
-| ----------------------------------------------------- | ------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| **Projects**                                          | OSS-backed                            | Plane adapter + platform services; UI deferred      | Adapter certified                                                                     |
-| **Support**                                           | OSS-backed                            | Zammad adapter + Support HTTP/UI                    | CERTIFIED_WITH_LIMITATIONS / UI PRODUCTION_READY_WITH_LIMITATIONS                     |
-| **Documents**                                         | Native platform                       | APZDOCS (not Paperless)                             | PRODUCTION_READY_WITH_LIMITATIONS · frozen                                            |
-| **Search**                                            | Native platform + Meilisearch adapter | APZSEARCH 001–019                                   | Architecture Frozen                                                                   |
-| **Workflow**                                          | Native SoR + n8n adapter              | APZWORKFLOW 001–011                                 | Frozen                                                                                |
-| **Testing / Certification**                           | Native APZ TCMS                       | APZTCMS 001–024                                     | GHA adapter frozen; GitLab future                                                     |
-| **Reporting**                                         | Native platform (+ TCMS reporting)    | APZREPORT 001–003                                   | PRODUCTION_READY_WITH_LIMITATIONS                                                     |
-| **Time Tracking**                                     | OSS (Kimai) · Production              | APZ Time **1.0.0**                                  | Adapter **0.2.0** CERTIFIED_DOMAIN; Workbench **1.0.0** Phase 1 **ACCEPTED / CLOSED** |
-| **Analytics**                                         | Planned OSS (Metabase)                | —                                                   | **Not started**                                                                       |
-| **Observability (ops SoR)**                           | Native metadata SoR                   | APZOBSERVE 001–006                                  | Frozen — **not** Grafana/Prometheus/Loki adapters                                     |
-| **Metrics (SoR)**                                     | Native metadata SoR                   | APZMETRICS 001–006                                  | Frozen                                                                                |
-| **Administration / Config / Notify / Identity Admin** | Native SoR waves                      | APZADMIN / APZCONFIG / APZNOTIFY / APZIDENTITY …006 | Frozen / closed                                                                       |
-| **Law Platform / Trust**                              | Native vertical                       | LAW-001…015                                         | Milestone closed                                                                      |
-| **Security Ops**                                      | Planned OSS                           | —                                                   | **Not started**                                                                       |
+| Capability                                            | Type                                                           | Implementation path                                 | Status                                                                                |
+| ----------------------------------------------------- | -------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **Projects**                                          | OSS-backed                                                     | Plane adapter + platform services; UI deferred      | Adapter certified                                                                     |
+| **Support**                                           | OSS-backed                                                     | Zammad adapter + Support HTTP/UI                    | CERTIFIED_WITH_LIMITATIONS / UI PRODUCTION_READY_WITH_LIMITATIONS                     |
+| **Documents**                                         | Native platform                                                | APZDOCS (not Paperless)                             | PRODUCTION_READY_WITH_LIMITATIONS · frozen                                            |
+| **Search**                                            | Native platform + Meilisearch adapter                          | APZSEARCH 001–019                                   | Architecture Frozen                                                                   |
+| **Workflow**                                          | Native SoR + n8n adapter                                       | APZWORKFLOW 001–011                                 | Frozen                                                                                |
+| **Testing / Certification**                           | Native APZ TCMS                                                | APZTCMS 001–024                                     | GHA adapter frozen; GitLab metadata adapter 0.1.0 (R12-TCMS-01)                       |
+| **Reporting**                                         | Native platform (+ TCMS reporting)                             | APZREPORT 001–003                                   | PRODUCTION_READY_WITH_LIMITATIONS                                                     |
+| **Time Tracking**                                     | OSS (Kimai) · Production                                       | APZ Time **1.0.0**                                  | Adapter **0.2.0** CERTIFIED_DOMAIN; Workbench **1.0.0** Phase 1 **ACCEPTED / CLOSED** |
+| **Analytics**                                         | Metabase **0.1.0** + contracts **0.1.0** + services **0.27.0** | —                                                   | Adapter + contracts + Platform Services; HTTP/UI **not started**                      |
+| **Observability (ops SoR)**                           | Native metadata SoR                                            | APZOBSERVE 001–006                                  | Frozen — **not** Grafana/Prometheus/Loki adapters                                     |
+| **Metrics (SoR)**                                     | Native metadata SoR                                            | APZMETRICS 001–006                                  | Frozen                                                                                |
+| **Administration / Config / Notify / Identity Admin** | Native SoR waves                                               | APZADMIN / APZCONFIG / APZNOTIFY / APZIDENTITY …006 | Frozen / closed                                                                       |
+| **Law Platform / Trust**                              | Native vertical                                                | LAW-001…015                                         | Milestone closed                                                                      |
+| **Security Ops**                                      | Planned OSS                                                    | —                                                   | **Not started**                                                                       |
 
 ---
 
@@ -158,17 +166,17 @@ If a future change creates new drift, prefer disk `package.json` + completion re
 
 ## H. Direct answers to common “what exists?” questions
 
-| Question                                               | Answer from repository                                                                                            |
-| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| Is **APZ Testing / APZ TCMS** implemented?             | **Yes** — native packages through APZTCMS-024; Workbench/HTTP/gateway present; not Kiwi                           |
-| Is **Kiwi TCMS** integrated?                           | **No** — path superseded (ADR-0059); no `integrations/kiwi`                                                       |
-| Is **Zammad / Support** done?                          | **Yes** — adapter 0.6.0 + Support vertical/UI certified with limitations                                          |
-| Is **Kimai** started?                                  | **Yes** — **0.2.0** CERTIFIED_DOMAIN; APZ Time **1.0.0** Production (**ACCEPTED**)                                |
-| Is **Paperless** started?                              | **No** adapter; native Documents platform is separate and frozen                                                  |
-| Is **Metabase / Grafana / Prometheus / Loki** started? | **No** adapters; native Metrics/Observability SoRs are metadata governance only                                   |
-| Is **n8n** started?                                    | **Yes** — frozen Workflow Engine Reference Adapter 0.1.0                                                          |
-| Is **Meilisearch** started?                            | **Yes** — Search Reference Adapter 0.1.0; Search programmes frozen                                                |
-| What is the current stop?                              | Support **2.0** planning **Awaiting Acceptance** (already Production); no Support 2.0 impl without named Approval |
+| Question                                               | Answer from repository                                                                                                                                                            |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Is **APZ Testing / APZ TCMS** implemented?             | **Yes** — native packages through APZTCMS-024; Workbench/HTTP/gateway present; not Kiwi                                                                                           |
+| Is **Kiwi TCMS** integrated?                           | **No** — path superseded (ADR-0059); no `integrations/kiwi`                                                                                                                       |
+| Is **Zammad / Support** done?                          | **Yes** — adapter 0.6.0 + Support vertical/UI certified with limitations                                                                                                          |
+| Is **Kimai** started?                                  | **Yes** — **0.2.0** CERTIFIED_DOMAIN; APZ Time **1.0.0** Production (**ACCEPTED**)                                                                                                |
+| Is **Paperless** started?                              | **No** adapter; native Documents platform is separate and frozen                                                                                                                  |
+| Is **Metabase / Grafana / Prometheus / Loki** started? | **Metabase foundation** `@apzhub/integration-metabase` **0.1.0** on disk; Grafana/Prometheus/Loki adapters **No**; native Metrics/Observability SoRs are metadata governance only |
+| Is **n8n** started?                                    | **Yes** — frozen Workflow Engine Reference Adapter 0.1.0                                                                                                                          |
+| Is **Meilisearch** started?                            | **Yes** — Search Reference Adapter 0.1.0; Search programmes frozen                                                                                                                |
+| What is the current stop?                              | **ANALYTICS-004** Awaiting Acceptance; no Analytics HTTP/Workbench without named Approval; Support **2.0** planning also Awaiting Acceptance                                      |
 
 ---
 

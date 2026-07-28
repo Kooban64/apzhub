@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
 
 import type { SupportPermissionSource } from "@/lib/support/permissions";
 import { resolveSupportRoute } from "@/lib/support/routes";
@@ -9,6 +10,7 @@ import { SupportAnalyticsView } from "./support-analytics-view";
 import { SupportGroupsView } from "./support-groups-view";
 import { SupportInboxView } from "./support-inbox-view";
 import { SupportOrganizationsView } from "./support-organizations-view";
+import { SupportRealtimeProvider } from "./support-realtime-provider";
 import { SupportRequestCreateView } from "./support-request-create-view";
 import { SupportRequestDetailView } from "./support-request-detail-view";
 import { SupportSearchView } from "./support-search-view";
@@ -26,41 +28,53 @@ export function SupportWorkspaceRouter({
   const pathname = usePathname();
   const route = resolveSupportRoute(pathname);
 
+  let content: ReactNode;
   switch (route.kind) {
     case "inbox":
-      return <SupportInboxView permissions={permissions} />;
+      content = <SupportInboxView permissions={permissions} />;
+      break;
     case "create":
-      return <SupportRequestCreateView />;
+      content = <SupportRequestCreateView />;
+      break;
     case "detail":
-      return (
+      content = (
         <SupportRequestDetailView
           supportRequestId={route.supportRequestId}
           permissions={permissions}
         />
       );
+      break;
     case "organizations":
-      return <SupportOrganizationsView permissions={permissions} />;
+      content = <SupportOrganizationsView permissions={permissions} />;
+      break;
     case "organization-detail":
-      return (
+      content = (
         <SupportOrganizationsView
           organizationId={route.organizationId}
           permissions={permissions}
         />
       );
+      break;
     case "groups":
-      return <SupportGroupsView permissions={permissions} />;
+      content = <SupportGroupsView permissions={permissions} />;
+      break;
     case "group-detail":
-      return <SupportGroupsView groupId={route.groupId} permissions={permissions} />;
+      content = <SupportGroupsView groupId={route.groupId} permissions={permissions} />;
+      break;
     case "users":
-      return <SupportUsersView />;
+      content = <SupportUsersView />;
+      break;
     case "user-detail":
-      return <SupportUsersView userId={route.userId} />;
+      content = <SupportUsersView userId={route.userId} />;
+      break;
     case "search":
-      return <SupportSearchView />;
+      content = <SupportSearchView />;
+      break;
     case "analytics":
-      return <SupportAnalyticsView />;
+      content = <SupportAnalyticsView />;
+      break;
     default:
-      return (
+      content = (
         <PageShell title="Support">
           <EmptyState
             title="Unknown Support route"
@@ -69,4 +83,6 @@ export function SupportWorkspaceRouter({
         </PageShell>
       );
   }
+
+  return <SupportRealtimeProvider>{content}</SupportRealtimeProvider>;
 }

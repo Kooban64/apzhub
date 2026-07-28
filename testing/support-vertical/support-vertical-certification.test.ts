@@ -64,12 +64,12 @@ function readSource(rel: string): string {
 // ---------------------------------------------------------------------------
 
 describe("OSS-110-12 Cert A — Package versions", () => {
-  it("ZAMMAD_ADAPTER_VERSION is 0.6.0", () => {
-    expect(ZAMMAD_ADAPTER_VERSION).toBe("0.6.0");
+  it("ZAMMAD_ADAPTER_VERSION is 0.8.0", () => {
+    expect(ZAMMAD_ADAPTER_VERSION).toBe("0.8.0");
   });
 
-  it("PLATFORM_SERVICES_VERSION is 0.26.1", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.26.1");
+  it("PLATFORM_SERVICES_VERSION is 0.32.0", () => {
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.32.0");
   });
 });
 

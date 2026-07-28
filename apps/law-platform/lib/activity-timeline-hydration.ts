@@ -1,7 +1,6 @@
 import { headers } from "next/headers";
 
 import { getValidatedSession } from "@apzhub/auth/server";
-import { isDevRegistrationAllowed } from "@apzhub/config";
 import {
   buildActivityRegistryHydrationDiagnostics,
   buildActivityTimelineHydrationBundle,
@@ -46,9 +45,8 @@ export async function loadActivityTimelineHydration(): Promise<ActivityTimelineH
   const session = await getValidatedSession(await headers());
   const authContext = await createLawPlatformAuthPermissionContext(session);
   const permissionAdapter = createWorkbenchPermissionAdapter({
+    mode: "auth",
     authContext,
-    nodeEnv: process.env.NODE_ENV,
-    allowDevRegistration: isDevRegistrationAllowed(),
   });
 
   const activityDto = filterActivityRegistryDto(

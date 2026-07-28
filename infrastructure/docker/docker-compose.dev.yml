@@ -1,3 +1,6 @@
+# APZHUB host ports (R12-OPS-03 / ENVIRONMENT.md) — do not collide with legacy apz-stack:
+# web 3300 · storybook 6006 · postgres 54334 · redis 6380 · caddy 3080/3443
+# Forbidden examples: 54333 (apzpg), 8080 (nginx-gateway), 18081–18088 (engines)
 services:
   postgres:
     image: postgres:16-alpine

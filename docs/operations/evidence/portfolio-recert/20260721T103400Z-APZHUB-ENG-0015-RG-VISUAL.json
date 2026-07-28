@@ -1,0 +1,41 @@
+{
+  "programme": "APZHUB-ENG-0015",
+  "remediationGroup": "RG-VISUAL",
+  "baseline": "1.2.0",
+  "timestampUtc": "20260721T103400Z",
+  "scopedPlaywright": {
+    "config": "testing/playwright/playwright.config.ts",
+    "file": "testing/playwright/e2e/oss-110-14-support-visual.spec.ts",
+    "grep": "detail screenshot|analytics screenshot",
+    "retries": 1,
+    "summary": {
+      "passed": 2,
+      "failed": 0,
+      "flaky": 0,
+      "durationApprox": "39.4s"
+    },
+    "members": [
+      {
+        "title": "detail screenshot",
+        "inventoryId": "QA-F-028",
+        "result": "PASS",
+        "baseline": "support-detail-chromium-linux.png"
+      },
+      {
+        "title": "analytics screenshot",
+        "inventoryId": "QA-F-029",
+        "result": "PASS",
+        "baseline": "support-analytics-chromium-linux.png"
+      }
+    ]
+  },
+  "quality": {
+    "lint": "PASS",
+    "typecheck": "N/A",
+    "unit": "N/A",
+    "integration": "N/A",
+    "architecture": "PASS",
+    "compatibility": "PASS"
+  },
+  "log": "/tmp/eng-0015-playwright-final.log"
+}

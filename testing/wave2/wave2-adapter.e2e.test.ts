@@ -42,7 +42,7 @@ describe("OSS-102-08 Wave 2 mocked adapter E2E", () => {
   it("bootstraps, authenticates, detects version, and reports health/diagnostics", async () => {
     await boot({ engineVersion: "6.4.1", edition: "community" });
     expect(adapter.isInitialised).toBe(true);
-    expect(ZAMMAD_ADAPTER_VERSION).toBe("0.6.0");
+    expect(ZAMMAD_ADAPTER_VERSION).toBe("0.8.0");
 
     const connected = await adapter.testConnection(ctx);
     expect(connected.ok).toBe(true);
@@ -174,17 +174,22 @@ describe("OSS-102-08 Wave 2 mocked adapter E2E", () => {
       report.certificationOutcome,
     );
     expect(report.diagnostics.persistentSyncStateSupport).toBe(false);
-    expect(report.diagnostics.webhookIngressSupport).toBe(false);
-    expect(report.diagnostics.binaryAttachmentSupport).toBe(false);
+    expect(report.diagnostics.webhookIngressSupport).toBe(true);
+    expect(report.diagnostics.binaryAttachmentSupport).toBe(true);
 
     const caps = adapter.operations.certifyCapabilities();
-    expect(caps.some((c) => c.capabilityId === "attachments" && !c.implemented)).toBe(
+    expect(caps.some((c) => c.capabilityId === "attachments" && c.implemented)).toBe(
       true,
     );
     expect(
       caps
+        .find((c) => c.capabilityId === "attachments")
+        ?.unsupportedOperations.includes("deleteBinaryAttachment"),
+    ).toBe(true);
+    expect(
+      caps
         .find((c) => c.capabilityId === "webhooks")
-        ?.unsupportedOperations.includes("webhookHttpIngress"),
+        ?.supportedOperations.includes("webhookHttpIngress"),
     ).toBe(true);
 
     const serialized = JSON.stringify(report);

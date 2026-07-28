@@ -106,8 +106,21 @@ async function withWorkflowErrorMapping<T>(
   }
 }
 
-/** SoR facets only — engine composed separately (APZWORKFLOW-007). */
-export type WorkflowPlatformServiceImpls = Omit<WorkflowPlatformGateway, "engine">;
+/**
+ * SoR facets only — engine + runtime composed separately
+ * (APZWORKFLOW-007 / APZHUB-PLATFORM-WORKFLOW-004).
+ */
+export type WorkflowPlatformServiceImpls = Omit<
+  WorkflowPlatformGateway,
+  | "engine"
+  | "runs"
+  | "schedules"
+  | "tasks"
+  | "approvals"
+  | "notifications"
+  | "capabilities"
+  | "health"
+>;
 
 /**
  * Thin wrappers: map ServiceRequestContext → WorkflowRequestContext and translate errors.

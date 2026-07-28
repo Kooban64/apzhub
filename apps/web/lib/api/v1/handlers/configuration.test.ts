@@ -606,9 +606,18 @@ describe("APZCONFIG-003 configuration handlers", () => {
       tags?: { name: string }[];
       info?: { version?: string };
     };
-    expect(["1.5.0", "1.6.0", "1.7.0", "1.8.0", "1.9.0", "1.10.0"]).toContain(
-      spec.info?.version,
-    );
+    expect([
+      "1.5.0",
+      "1.6.0",
+      "1.7.0",
+      "1.8.0",
+      "1.9.0",
+      "1.10.0",
+      "1.11.0",
+      "1.12.0",
+      "1.13.0",
+      "1.14.0",
+    ]).toContain(spec.info?.version);
     expect(spec.paths["/configuration/configurations"]).toBeDefined();
     expect(spec.paths["/configuration/capabilities"]).toBeDefined();
     expect(spec.paths["/configuration/validation"]).toBeDefined();

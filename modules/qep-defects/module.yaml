@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: qep-defects
+name: Defects and Quality Issues
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Defects and Quality Issues (M08) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  product: apzqep
+  moduleCatalogueId: M08
+  slug: defects
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: stub
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Defects and Quality Issues
+    icon: flask-conical
+    route: /workspace/qep/defects
+    order: 80
+    permission: qep.defects.read
+  view:
+    title: Defects and Quality Issues
+    workspace: qep
+    route: /workspace/qep/defects
+    permission: qep.defects.read

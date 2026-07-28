@@ -2,6 +2,8 @@ import type { PlaneCoreServices } from "@apzhub/integration-plane";
 import type { ZammadCoreServices } from "@apzhub/integration-zammad";
 import type { GitHubActionsCoreServices } from "@apzhub/integration-github-actions";
 import { createGitHubActionsPipelineResultAdapter } from "@apzhub/integration-github-actions";
+import type { GitLabCiCoreServices } from "@apzhub/integration-gitlab-ci";
+import { createGitLabCiPipelineResultAdapter } from "@apzhub/integration-gitlab-ci";
 import { createGenericCiAdapter } from "@apzhub/testing-services";
 import type {
   ProjectService,
@@ -71,6 +73,7 @@ import {
 } from "../providers/plane/plane-workspace-provider";
 import { registerZammadProviders } from "../providers/zammad/register-zammad-providers";
 import { registerGitHubActionsProviders } from "../providers/github-actions/register-github-actions-providers";
+import { registerGitLabCiProviders } from "../providers/gitlab-ci/register-gitlab-ci-providers";
 import { ProviderRegistry } from "../providers/registry/provider-registry";
 import { ProviderResolver } from "../providers/registry/provider-resolver";
 import {
@@ -107,7 +110,11 @@ import type { AdministrationPlatformServicesBundle } from "./administration";
 import type { IdentityPlatformServicesBundle } from "./identity";
 import type { ObservePlatformServicesBundle } from "./observe";
 import type { MetricsPlatformServicesBundle } from "./metrics";
+import type { QepPlatformServicesBundle } from "./qep";
 import type { TimePlatformServicesBundle } from "./time";
+import type { AnalyticsPlatformServicesBundle } from "./analytics";
+import type { DomainEventPublisher } from "../events/domain-event-publisher";
+import { createAutomationFoundation, type AutomationFoundation } from "./automation";
 
 export interface PlatformServicesBundle {
   readonly registry: ProviderRegistry;
@@ -141,7 +148,11 @@ export interface PlatformServicesBundle {
   readonly identity?: IdentityPlatformServicesBundle;
   readonly observe?: ObservePlatformServicesBundle;
   readonly metricsPlatform?: MetricsPlatformServicesBundle;
+  readonly qepPlatform?: QepPlatformServicesBundle;
   readonly time?: TimePlatformServicesBundle;
+  readonly analytics?: AnalyticsPlatformServicesBundle;
+  /** Platform-owned Cross-Product Automation Foundation (APZHUB-1.1-004). */
+  readonly automation: AutomationFoundation;
   readonly gateway: PlatformServiceGateway;
 }
 
@@ -174,7 +185,13 @@ export interface CreatePlatformServicesInput {
   readonly identity?: IdentityPlatformServicesBundle;
   readonly observe?: ObservePlatformServicesBundle;
   readonly metricsPlatform?: MetricsPlatformServicesBundle;
+  readonly qepPlatform?: QepPlatformServicesBundle;
   readonly time?: TimePlatformServicesBundle;
+  readonly analytics?: AnalyticsPlatformServicesBundle;
+  /** Optional platform-owned domain event publisher (APZHUB-1.1-003). */
+  readonly domainEventPublisher?: DomainEventPublisher;
+  /** Optional Automation Foundation (APZHUB-1.1-004). Created when omitted. */
+  readonly automation?: AutomationFoundation;
 }
 
 export interface CreatePlatformServicesFromEnvInput extends Omit<
@@ -278,11 +295,15 @@ export function createPlatformServices(
   const team = new TeamServiceImpl(resolver, mapping);
   const user = new UserServiceImpl(resolver, mapping);
   const search = new SearchServiceImpl(resolver, mapping);
-  const support = new SupportServiceImpl(resolver, mapping);
+  const support = new SupportServiceImpl(resolver, mapping, input.domainEventPublisher);
   const supportOrganization = new SupportOrganizationServiceImpl(resolver, mapping);
   const supportGroup = new SupportGroupServiceImpl(resolver, mapping);
   const supportUser = new SupportUserServiceImpl(resolver, mapping);
-  const supportArticle = new SupportArticleServiceImpl(resolver, mapping);
+  const supportArticle = new SupportArticleServiceImpl(
+    resolver,
+    mapping,
+    input.domainEventPublisher,
+  );
   const supportSearch = new SupportSearchServiceImpl(resolver, mapping);
   const supportHistory = new SupportHistoryServiceImpl(resolver, mapping);
   const supportAnalytics = new SupportAnalyticsServiceImpl(resolver);
@@ -387,7 +408,11 @@ export function createPlatformServices(
   const identityApi = input.identity?.wrapWithPipeline(pipeline);
   const observeApi = input.observe?.wrapWithPipeline(pipeline);
   const metricsApi = input.metricsPlatform?.wrapWithPipeline(pipeline);
+  const qepApi = input.qepPlatform?.wrapWithPipeline(pipeline);
   const timeApi = input.time?.wrapWithPipeline(pipeline);
+  const analyticsApi = input.analytics?.wrapWithPipeline(pipeline);
+
+  const automation = input.automation ?? createAutomationFoundation();
 
   const gateway = new PlatformServiceGateway({
     workspace,
@@ -430,10 +455,12 @@ export function createPlatformServices(
     identityApi,
     observeApi,
     metricsApi,
+    qepApi,
     platformQualityApi,
     platformReleaseApi,
     platformGovernanceApi,
     timeApi,
+    analyticsApi,
     mapping,
     resolver,
     registry,
@@ -472,7 +499,10 @@ export function createPlatformServices(
     identity: input.identity,
     observe: input.observe,
     metricsPlatform: input.metricsPlatform,
+    qepPlatform: input.qepPlatform,
     time: input.time,
+    analytics: input.analytics,
+    automation,
     gateway,
   };
 }
@@ -552,9 +582,44 @@ export function createPlatformServicesWithGitHubActions(
   });
 }
 
+export type CreatePlatformServicesWithGitLabCiOptions =
+  CreatePlatformServicesWithGitHubActionsOptions;
+
+/** Convenience factory — registers GitLab CI pipeline providers (R12-TCMS-01). */
+export function createPlatformServicesWithGitLabCi(
+  gitlabCiCore: GitLabCiCoreServices,
+  options: CreatePlatformServicesWithGitLabCiOptions = {},
+): PlatformServicesBundle {
+  const registry = new ProviderRegistry();
+  registerGitLabCiProviders({ registry, gitlabCiCore });
+  const resolver = new ProviderResolver({ registry });
+
+  const testing =
+    options.testing ??
+    (options.createTestingBundle === false
+      ? undefined
+      : createTestingPlatformServicesForTest({
+          allowInMemoryPersistence: true,
+          providerResolver: resolver,
+          pipelineAdapters: [
+            createGenericCiAdapter(),
+            createGitLabCiPipelineResultAdapter(),
+          ],
+        }));
+
+  return createPlatformServices({
+    registry,
+    resolver,
+    mappingStore: options.mappingStore,
+    testing,
+  });
+}
+
 export { registerZammadProviders } from "../providers/zammad/register-zammad-providers";
 export type { RegisterZammadProvidersInput } from "../providers/zammad/register-zammad-providers";
 export { registerGitHubActionsProviders } from "../providers/github-actions/register-github-actions-providers";
 export type { RegisterGitHubActionsProvidersInput } from "../providers/github-actions/register-github-actions-providers";
+export { registerGitLabCiProviders } from "../providers/gitlab-ci/register-gitlab-ci-providers";
+export type { RegisterGitLabCiProvidersInput } from "../providers/gitlab-ci/register-gitlab-ci-providers";
 
-export const PLATFORM_SERVICES_VERSION = "0.26.1";
+export const PLATFORM_SERVICES_VERSION = "0.32.0";

@@ -177,8 +177,12 @@ export function VisibilityBadge({
 
 export function AttachmentMetadataList({
   attachments,
+  supportRequestId,
+  onDownload,
 }: {
   readonly attachments: readonly SupportArticleAttachment[];
+  readonly supportRequestId?: string;
+  readonly onDownload?: (attachment: SupportArticleAttachment) => void;
 }) {
   if (attachments.length === 0) return null;
   return (
@@ -199,7 +203,18 @@ export function AttachmentMetadataList({
           {" · "}
           {formatBytes(attachment.sizeBytes)}
           {attachment.disposition ? ` · ${attachment.disposition}` : ""}
-          <span className="block italic">Binary access not available</span>
+          {supportRequestId && onDownload ? (
+            <button
+              type="button"
+              className="mt-1 block text-[var(--color-foreground)] underline"
+              data-testid="support-attachment-download"
+              onClick={() => onDownload(attachment)}
+            >
+              Download
+            </button>
+          ) : (
+            <span className="block italic">Binary access not available</span>
+          )}
         </li>
       ))}
     </ul>

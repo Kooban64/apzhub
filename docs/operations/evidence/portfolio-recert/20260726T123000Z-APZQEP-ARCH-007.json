@@ -1,0 +1,45 @@
+{
+  "programme": "APZQEP-ARCH-007",
+  "title": "Requirements Traceability Architecture",
+  "recordedAt": "2026-07-26T12:30:00Z",
+  "state": "ARCHITECTURE COMPLETE — AWAITING OWNER ACCEPTANCE",
+  "revision": "1.0.0-arch",
+  "nature": "architecture-only",
+  "baselines": {
+    "requirementsCapability": "1.0.0 CERTIFIED FROZEN",
+    "req001": "ACCEPTED / CLOSED / COMPLETE",
+    "arch005": "ACCEPTED",
+    "arch006": "ACCEPTED",
+    "platform": "1.4 CERTIFIED"
+  },
+  "pack": "docs/products/apzqep/architecture/requirements-traceability/",
+  "delivered": [
+    "TRACEABILITY-ARCHITECTURE.md",
+    "Architecture Overview",
+    "Domain Ownership",
+    "Trace Model",
+    "Coverage Architecture",
+    "Impact Architecture",
+    "Governance",
+    "Lifecycle",
+    "Consumers",
+    "Integration Model",
+    "AI Considerations",
+    "MCP Considerations",
+    "Architecture Decision Records",
+    "Completion Report"
+  ],
+  "notDelivered": [
+    "domain model code",
+    "persistence",
+    "APIs",
+    "Workbench UI",
+    "coverage calculations",
+    "impact engine",
+    "Verification / Execution / Evidence / Certification engineering",
+    "AI",
+    "MCP",
+    "Owner Acceptance of ARCH-007"
+  ],
+  "stopRule": "Await Owner Acceptance. Do not begin Traceability engineering or create packages/code."
+}

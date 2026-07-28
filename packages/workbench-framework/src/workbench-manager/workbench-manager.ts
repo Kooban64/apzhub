@@ -100,6 +100,8 @@ export class DefaultWorkbenchManager
 
   private persistTimer: ReturnType<typeof setTimeout> | undefined;
 
+  private persistChain: Promise<void> = Promise.resolve();
+
   private isRestoring = false;
 
   private readonly enginesById: Map<string, WorkbenchEngine>;
@@ -310,12 +312,29 @@ export class DefaultWorkbenchManager
   }
 
   disableSessionPersistence(): void {
-    this.persistUserId = undefined;
-    this.sessionEngine.setPersistenceEnabled(false);
-    if (this.persistTimer) {
+    const userId = this.persistUserId;
+    if (this.persistTimer && userId && !this.isRestoring) {
+      clearTimeout(this.persistTimer);
+      this.persistTimer = undefined;
+      // Flush pending debounce so Personalisation layout is not dropped on teardown.
+      this.enqueuePersist(userId);
+    } else if (this.persistTimer) {
       clearTimeout(this.persistTimer);
       this.persistTimer = undefined;
     }
+    this.persistUserId = undefined;
+    this.sessionEngine.setPersistenceEnabled(false);
+  }
+
+  /** Await any debounced or in-flight Personalisation layout persist (deterministic sync). */
+  async flushPendingPersist(): Promise<void> {
+    const userId = this.persistUserId;
+    if (this.persistTimer && userId && !this.isRestoring) {
+      clearTimeout(this.persistTimer);
+      this.persistTimer = undefined;
+      this.enqueuePersist(userId);
+    }
+    await this.persistChain;
   }
 
   async clearSession(userId: string): Promise<void> {
@@ -517,12 +536,21 @@ export class DefaultWorkbenchManager
     }
 
     this.persistTimer = setTimeout(() => {
-      void this.sessionEngine.persist(
-        userId,
-        this.getState(),
-        this.navigationEngine.getState(),
-      );
+      this.persistTimer = undefined;
+      this.enqueuePersist(userId);
     }, this.persistDebounceMs);
+  }
+
+  private enqueuePersist(userId: string): void {
+    this.persistChain = this.persistChain
+      .catch(() => undefined)
+      .then(() =>
+        this.sessionEngine.persist(
+          userId,
+          this.getState(),
+          this.navigationEngine.getState(),
+        ),
+      );
   }
 }
 

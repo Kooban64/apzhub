@@ -5,8 +5,12 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { isSupportApiError } from "@/lib/support/errors";
+import { readAttachmentFiles } from "@/lib/support/read-attachment-files";
 import { createCustomerReply } from "@/lib/support/support-api";
-import type { CustomerReplyChannel } from "@/lib/support/types";
+import type {
+  CustomerReplyChannel,
+  SupportArticleAttachmentUpload,
+} from "@/lib/support/types";
 
 const CHANNELS: readonly CustomerReplyChannel[] = [
   "email",
@@ -28,6 +32,9 @@ export function CustomerReplyComposer({
 }) {
   const [body, setBody] = useState("");
   const [channel, setChannel] = useState<CustomerReplyChannel>("email");
+  const [attachments, setAttachments] = useState<
+    readonly SupportArticleAttachmentUpload[]
+  >([]);
   const [error, setError] = useState<string | null>(null);
 
   const mutation = useMutation({
@@ -35,9 +42,11 @@ export function CustomerReplyComposer({
       createCustomerReply(supportRequestId, {
         body: body.trim(),
         channel,
+        attachments: attachments.length > 0 ? attachments : undefined,
       }),
     onSuccess: () => {
       setBody("");
+      setAttachments([]);
       setError(null);
       onCreated?.();
     },
@@ -96,6 +105,36 @@ export function CustomerReplyComposer({
         aria-label="Customer reply body"
         data-testid="support-customer-reply-body"
       />
+      <input
+        type="file"
+        multiple
+        disabled={submitting || disabled}
+        aria-label="Attach files to customer reply"
+        data-testid="support-customer-reply-attachments"
+        onChange={(event) => {
+          const files = event.target.files;
+          if (!files?.length) {
+            setAttachments([]);
+            return;
+          }
+          void readAttachmentFiles(files)
+            .then((next) => {
+              setAttachments(next);
+              setError(null);
+            })
+            .catch((cause: unknown) => {
+              setAttachments([]);
+              setError(
+                cause instanceof Error ? cause.message : "Unable to read files.",
+              );
+            });
+        }}
+      />
+      {attachments.length > 0 ? (
+        <p className="text-xs text-[var(--color-muted-foreground)]">
+          {attachments.length} file(s) ready to upload
+        </p>
+      ) : null}
       {error ? (
         <p className="text-sm text-[var(--color-muted-foreground)]" role="alert">
           {error}

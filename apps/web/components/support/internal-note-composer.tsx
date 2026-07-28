@@ -5,7 +5,9 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { isSupportApiError } from "@/lib/support/errors";
+import { readAttachmentFiles } from "@/lib/support/read-attachment-files";
 import { createInternalNote } from "@/lib/support/support-api";
+import type { SupportArticleAttachmentUpload } from "@/lib/support/types";
 
 export function InternalNoteComposer({
   supportRequestId,
@@ -17,12 +19,20 @@ export function InternalNoteComposer({
   readonly disabled?: boolean;
 }) {
   const [body, setBody] = useState("");
+  const [attachments, setAttachments] = useState<
+    readonly SupportArticleAttachmentUpload[]
+  >([]);
   const [error, setError] = useState<string | null>(null);
 
   const mutation = useMutation({
-    mutationFn: () => createInternalNote(supportRequestId, { body: body.trim() }),
+    mutationFn: () =>
+      createInternalNote(supportRequestId, {
+        body: body.trim(),
+        attachments: attachments.length > 0 ? attachments : undefined,
+      }),
     onSuccess: () => {
       setBody("");
+      setAttachments([]);
       setError(null);
       onCreated?.();
     },
@@ -60,6 +70,36 @@ export function InternalNoteComposer({
         aria-label="Internal note body"
         data-testid="support-internal-note-body"
       />
+      <input
+        type="file"
+        multiple
+        disabled={submitting || disabled}
+        aria-label="Attach files to internal note"
+        data-testid="support-internal-note-attachments"
+        onChange={(event) => {
+          const files = event.target.files;
+          if (!files?.length) {
+            setAttachments([]);
+            return;
+          }
+          void readAttachmentFiles(files)
+            .then((next) => {
+              setAttachments(next);
+              setError(null);
+            })
+            .catch((cause: unknown) => {
+              setAttachments([]);
+              setError(
+                cause instanceof Error ? cause.message : "Unable to read files.",
+              );
+            });
+        }}
+      />
+      {attachments.length > 0 ? (
+        <p className="text-xs text-[var(--color-muted-foreground)]">
+          {attachments.length} file(s) ready to upload
+        </p>
+      ) : null}
       <input type="hidden" name="visibility" value="internal" readOnly />
       {error ? (
         <p className="text-sm text-[var(--color-muted-foreground)]" role="alert">

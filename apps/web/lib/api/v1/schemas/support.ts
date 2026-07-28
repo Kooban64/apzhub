@@ -8,6 +8,7 @@ import { globalIdWithPrefix, paginationQuerySchema } from "./common";
 
 export const supportRequestIdParamSchema = globalIdWithPrefix("sreq");
 export const articleIdParamSchema = globalIdWithPrefix("sart");
+export const attachmentIdParamSchema = globalIdWithPrefix("satt");
 export const organizationIdParamSchema = globalIdWithPrefix("sorg");
 export const groupIdParamSchema = globalIdWithPrefix("sgrp");
 export const supportUserIdParamSchema = globalIdWithPrefix("suser");
@@ -139,11 +140,21 @@ const bodyFormatValues = ["text/plain", "text/html", "unknown"] as const;
  * Internal note — visibility is always "internal"; channel always "note".
  * Strict schema rejects any attempt to pass visibility.
  */
+const attachmentDescriptorSchema = z
+  .object({
+    filename: z.string().min(1).max(255),
+    contentType: z.string().max(200).optional(),
+    dataBase64: z.string().min(1).max(1_400_000),
+    sizeBytes: z.number().int().nonnegative().max(1_048_576).optional(),
+  })
+  .strict();
+
 export const createInternalNoteBodySchema = z
   .object({
     body: z.string().min(1).max(100_000),
     bodyFormat: z.enum(bodyFormatValues).optional(),
     subject: z.string().max(500).optional(),
+    attachments: z.array(attachmentDescriptorSchema).max(10).optional(),
   })
   .strict();
 
@@ -157,6 +168,7 @@ export const createCustomerReplyBodySchema = z
     to: z.array(z.string().max(500)).max(50).optional(),
     cc: z.array(z.string().max(500)).max(50).optional(),
     bcc: z.array(z.string().max(500)).max(50).optional(),
+    attachments: z.array(attachmentDescriptorSchema).max(10).optional(),
   })
   .strict();
 

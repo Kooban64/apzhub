@@ -38,7 +38,7 @@ describe("OSS-102-06 capability registration", () => {
       expect.arrayContaining(["webhooks", "events", "synchronisation"]),
     );
     expect(capabilities).toHaveLength(11);
-    expect(ZAMMAD_ADAPTER_VERSION).toBe("0.6.0");
+    expect(ZAMMAD_ADAPTER_VERSION).toBe("0.8.0");
   });
 
   it("exposes sync/events/webhooks on adapter.core and diagnostics", async () => {
@@ -46,7 +46,7 @@ describe("OSS-102-06 capability registration", () => {
     expect(adapter.core.webhooks).toBeDefined();
     expect(adapter.core.events).toBeDefined();
     expect(adapter.core.synchronisation).toBeDefined();
-    expect(adapter.listPlaceholderCapabilities()).toEqual(["attachments"]);
+    expect(adapter.listPlaceholderCapabilities()).toEqual([]);
 
     await adapter.initialise();
     await adapter.connect(ctx);

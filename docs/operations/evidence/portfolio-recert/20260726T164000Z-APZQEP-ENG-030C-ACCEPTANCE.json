@@ -1,0 +1,9 @@
+{
+  "programme": "APZQEP-ENG-030C",
+  "title": "Traceability Workbench",
+  "recordedAt": "2026-07-26T16:40:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Certification Programme Instruction APZQEP-TRACE-001",
+  "packageAtAcceptance": { "@apzhub/qep-traceability": "0.3.0" },
+  "effect": "ENG-030C closed. APZQEP-TRACE-001 Traceability Capability Certification authorised."
+}

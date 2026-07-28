@@ -1,0 +1,32 @@
+{
+  "programme": "APZQEP-TRANSITION-001",
+  "title": "APZ QEP Product Vision & Repository Transition",
+  "classification": "PRODUCT_GOVERNANCE",
+  "lifecycle": "Product Transition",
+  "baseline": "Certified Platform 1.4",
+  "reference": [
+    "Platform-1.4-CERT-001",
+    "APZHUB-PRODUCTS-004",
+    "APZTCMS-REQ-001"
+  ],
+  "timestamp": "2026-07-24T08:30:00Z",
+  "status": "ACCEPTED",
+  "acceptedAt": "2026-07-24",
+  "recommendation": "READY FOR OWNER TRANSITION ACCEPTANCE",
+  "ownerDecision": "ACCEPTED — authorises APZQEP-REQ-001",
+  "formerProductName": "APZ TCMS",
+  "officialProductName": "APZ QEP",
+  "officialProductExpansion": "APZ Quality Engineering Platform",
+  "platformUnchanged": true,
+  "engineering": false,
+  "productImplementation": false,
+  "historicalDocumentationPreserved": true,
+  "officialRoot": "docs/products/apzqep/",
+  "preservedRoots": [
+    "docs/products/apz-tcms/",
+    "docs/products/apztcms/",
+    "docs/releases/tcms/"
+  ],
+  "nextProgramme": "APZQEP-REQ-001",
+  "nextProgrammeStatus": "NOT_AUTHORISED_UNTIL_TRANSITION_ACCEPTANCE"
+}

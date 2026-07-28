@@ -1,0 +1,13 @@
+{
+  "programme": "APZQEP-ARCH-007",
+  "title": "Requirements Traceability Architecture",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "recordedAt": "2026-07-26T13:00:00Z",
+  "authority": "Owner Engineering Programme Instruction — APZQEP-ENG-030A Part 1",
+  "effect": [
+    "ARCH-007 ACCEPTED / CLOSED / COMPLETE",
+    "APZQEP-ENG-030A Part 1 authorised (domain only)",
+    "No persistence, APIs, UI, coverage, or impact under Part 1"
+  ],
+  "architectureEvidence": "20260726T123000Z-APZQEP-ARCH-007.json"
+}

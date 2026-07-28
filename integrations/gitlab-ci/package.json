@@ -1,0 +1,19 @@
+{
+  "name": "@apzhub/integration-gitlab-ci",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "GitLab CI read-only reference adapter for APZ TCMS CI/CD (R12-TCMS-01)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts integrations/gitlab-ci"
+  },
+  "dependencies": {
+    "@apzhub/integration-sdk": "workspace:*",
+    "@apzhub/testing-contracts": "workspace:*"
+  }
+}

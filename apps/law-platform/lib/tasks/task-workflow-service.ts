@@ -2,7 +2,7 @@ import type { EventBus } from "@apzhub/event-notification-framework";
 import { TaskFactory } from "@apzhub/legal-business-core";
 
 import { publishLegalTaskEvent } from "../publish-legal-task-event";
-import { getSharedMatterRepository } from "../persistence/repository-factory";
+import { getSharedMatterRepository } from "../matters/in-memory-matter-repository";
 import type { ManagedTask, TaskFormValues, TaskListCriteria } from "./task-types";
 import {
   getTaskWorkflowDiagnostics,

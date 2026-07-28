@@ -192,7 +192,10 @@ export function WorkbenchPage() {
   const isCalendarRoute = isCalendarModuleRoute(activeRoute);
   const isTimeEntryRoute = isTimeEntryModuleRoute(activeRoute);
   const isInvoiceRoute = isInvoiceModuleRoute(activeRoute);
-  const isTrustRoute = isTrustModuleRoute(activeRoute);
+  // Prefer URL pathname so trust deep-links (/trust/accounts, …) mount the router
+  // even when the focused workbench view route is still the trust module base
+  // (APZHUB-ENG-0007 / RG-LAW-DNS).
+  const isTrustRoute = isTrustModuleRoute(pathname) || isTrustModuleRoute(activeRoute);
   const isLegalSearchRoute = isLegalSearchModuleRoute(activeRoute);
   const isDashboardRoute = isDashboardModuleRoute(activeRoute);
   const clientSearchQuery = searchParams.get("q") ?? undefined;
@@ -250,9 +253,19 @@ export function WorkbenchPage() {
   }, [router]);
 
   useEffect(() => {
-    if (activeView?.route && activeView.route !== pathname) {
-      router.push(activeView.route);
+    if (!activeView?.route) {
+      return;
     }
+    if (activeView.route === pathname) {
+      return;
+    }
+    // Preserve deep links under the active view (e.g. /workspace/law/trust/accounts).
+    // Pushing the view base route here rewound trust/client sub-routes and blocked
+    // LAW-015 E2E after the RG-LAW-DNS client-bundle fix (APZHUB-ENG-0007).
+    if (pathname.startsWith(`${activeView.route}/`)) {
+      return;
+    }
+    router.push(activeView.route);
   }, [activeView?.route, pathname, router]);
 
   async function handleSignOut() {
@@ -303,7 +316,7 @@ export function WorkbenchPage() {
     />
   ) : isTrustRoute ? (
     <TrustManagementRouter
-      pathname={activeRoute}
+      pathname={pathname}
       initialSearchQuery={trustSearchQuery ?? undefined}
     />
   ) : isLegalSearchRoute ? (

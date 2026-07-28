@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const pathnameState = vi.hoisted(() => ({ value: "/workspace/support/requests" }));
@@ -50,6 +51,9 @@ vi.mock("./support-search-view", () => ({
 }));
 vi.mock("./support-analytics-view", () => ({
   SupportAnalyticsView: () => <div data-testid="route-analytics" />,
+}));
+vi.mock("./support-realtime-provider", () => ({
+  SupportRealtimeProvider: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
 
 import { SupportWorkspaceRouter } from "./support-workspace-router";

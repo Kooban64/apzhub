@@ -1,0 +1,101 @@
+manifestSchemaVersion: "1.0"
+id: qep-traceability
+name: Traceability
+version: 1.0.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Traceability (M10) for APZ QEP — CERTIFIED / FROZEN 1.0.0. Trace Links domain, APIs, Platform integration, and Workbench. APZQEP-TRACE-001 ACCEPTED."
+  product: apzqep
+  moduleCatalogueId: M10
+  slug: traceability
+  programme: APZQEP-TRACE-001
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+  packages:
+    - "@apzhub/qep-traceability"
+    - "@apzhub/qep-contracts"
+    - "@apzhub/search-qep"
+
+module:
+  category: quality-engineering
+  status: certified-frozen
+
+permissions:
+  - id: qep.traceability.trace_links.view
+    label: View Trace Links
+  - id: qep.traceability.trace_links.create
+    label: Create Trace Links
+  - id: qep.traceability.trace_links.modify
+    label: Modify Trace Links
+  - id: qep.traceability.trace_links.validate
+    label: Validate Trace Links
+  - id: qep.traceability.trace_links.approve
+    label: Approve Trace Links
+  - id: qep.traceability.trace_links.retire
+    label: Retire Trace Links
+  - id: qep.traceability.trace_links.supersede
+    label: Supersede Trace Links
+  - id: qep.traceability.trace_links.history.view
+    label: View Trace Link History
+  - id: qep.traceability.taxonomy.view
+    label: View Trace Link Taxonomy
+  - id: qep.traceability.taxonomy.administer
+    label: Administer Trace Link Taxonomy
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Traceability
+    icon: flask-conical
+    route: /workspace/qep/traceability
+    order: 100
+    permission: qep.traceability.trace_links.view
+  view:
+    title: Traceability
+    workspace: qep
+    route: /workspace/qep/traceability
+    permission: qep.traceability.trace_links.view
+  additionalViews:
+    - id: qep-traceability-trace-links
+      title: Trace Links
+      workspace: qep
+      route: /workspace/qep/traceability/trace-links
+      permission: qep.traceability.trace_links.view
+      navigation:
+        level: sidebar
+        parent: qep-traceability
+        label: Trace Links
+        icon: link-2
+        order: 101
+        permission: qep.traceability.trace_links.view
+    - id: qep-traceability-matrix
+      title: Trace Matrix
+      workspace: qep
+      route: /workspace/qep/traceability/matrix
+      permission: qep.traceability.trace_links.view
+      navigation:
+        level: sidebar
+        parent: qep-traceability
+        label: Trace Matrix
+        icon: grid-3x3
+        order: 102
+        permission: qep.traceability.trace_links.view
+    - id: qep-traceability-taxonomy
+      title: Trace Taxonomy
+      workspace: qep
+      route: /workspace/qep/traceability/taxonomy
+      permission: qep.traceability.taxonomy.view
+      navigation:
+        level: sidebar
+        parent: qep-traceability
+        label: Trace Taxonomy
+        icon: tags
+        order: 103
+        permission: qep.traceability.taxonomy.view

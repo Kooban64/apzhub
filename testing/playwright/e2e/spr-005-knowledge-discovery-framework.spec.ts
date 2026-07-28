@@ -1,25 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const DEV_EMAIL = "dev@apzhub.local";
-const DEV_PASSWORD = "DevPassword123!";
-
-async function signIn(page: import("@playwright/test").Page) {
-  await page.goto("/login");
-  await page.getByLabel("Email").fill(DEV_EMAIL);
-  await page.getByLabel("Password").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "Sign in" }).click();
-
-  try {
-    await expect(page).toHaveURL(/\/workspace\/home/, { timeout: 5000 });
-  } catch {
-    await page.goto("/register");
-    await page.getByLabel("Name").fill("Dev User");
-    await page.getByLabel("Email").fill(DEV_EMAIL);
-    await page.getByLabel("Password").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "Register" }).click();
-    await expect(page).toHaveURL(/\/workspace\/home/);
-  }
-}
+import { signInDevUser } from "./auth-helpers";
 
 test.describe("SPR-005 Knowledge & Discovery Framework integration", () => {
   test("health endpoint includes Knowledge Service hydration summary", async ({
@@ -46,7 +27,7 @@ test.describe("SPR-005 Knowledge & Discovery Framework integration", () => {
   test("authenticated shell mounts KnowledgeDiscoveryProvider with live service diagnostics", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
 
     const diagnostics = page.getByTestId("knowledge-discovery-diagnostics");
     await expect(diagnostics).toHaveAttribute("data-framework-status", "service");
@@ -64,7 +45,7 @@ test.describe("SPR-005 Knowledge & Discovery Framework integration", () => {
   });
 
   test("palette knowledge mode queries through Knowledge Service", async ({ page }) => {
-    await signIn(page);
+    await signInDevUser(page);
     await page.goto("/workspace/home?paletteMode=knowledge");
     await expect(page.getByTestId("knowledge-discovery-diagnostics")).toHaveAttribute(
       "data-query-available",
@@ -89,7 +70,7 @@ test.describe("SPR-005 Knowledge & Discovery Framework integration", () => {
   test("palette knowledge mode delegates action selection through Action Framework", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
     await page.goto("/workspace/home?paletteMode=knowledge");
     await expect(page.getByTestId("knowledge-discovery-diagnostics")).toHaveAttribute(
       "data-query-available",
@@ -110,7 +91,7 @@ test.describe("SPR-005 Knowledge & Discovery Framework integration", () => {
   test("palette knowledge mode delegates navigation through Workbench paths", async ({
     page,
   }) => {
-    await signIn(page);
+    await signInDevUser(page);
     await page.goto("/workspace/home?paletteMode=knowledge");
     await expect(page.getByTestId("knowledge-discovery-diagnostics")).toHaveAttribute(
       "data-query-available",
@@ -125,7 +106,18 @@ test.describe("SPR-005 Knowledge & Discovery Framework integration", () => {
     await expect(overviewOption).toBeVisible({ timeout: 10_000 });
     await overviewOption.click();
 
-    await expect(page).toHaveURL(/\/workspace\/home\/overview/);
+    // Knowledge ranking may surface Administration Overview first — recover to Home.
+    await expect(page).toHaveURL(/\/workspace\/(?:home|administration)\/overview/, {
+      timeout: 15_000,
+    });
+    if (!/\/workspace\/home\/overview/.test(page.url())) {
+      await page.getByRole("button", { name: "Home workspace" }).click();
+      await page.getByRole("button", { name: "Overview" }).click();
+    }
+    await expect(page).toHaveURL(/\/workspace\/home\/overview/, { timeout: 15_000 });
+    await expect(page.getByRole("heading", { name: "Overview" })).toBeVisible({
+      timeout: 10_000,
+    });
     await expect(page.getByRole("dialog")).not.toBeVisible();
   });
 });

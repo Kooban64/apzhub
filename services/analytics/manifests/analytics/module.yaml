@@ -1,0 +1,216 @@
+manifestSchemaVersion: "1.0"
+id: analytics
+name: Analytics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: analytics
+  description: >
+    APZHUB Analytics Workbench module (APZHUB-PLATFORM-ANALYTICS-006).
+    Presentation over Analytics HTTP API `/api/v1/analytics/*` only.
+    Release 1.0 curated suites — no AI, predictive, or external BI.
+  owner: APZHUB
+  icon: chart-column
+  tags:
+    - analytics
+    - dashboards
+    - workbench
+
+dependencies:
+  platform: []
+  services:
+    - analytics-service
+
+compatibility:
+  platformVersion: ">=0.1.0"
+
+module:
+  category: analytics
+  status: enabled
+  description: Analytics Workbench module (APZHUB-PLATFORM-ANALYTICS-006).
+
+permissions:
+  - id: analytics.view
+    description: View Analytics workspace and authorised catalogues.
+  - id: analytics.manage
+    description: Manage Analytics saved dashboards and share/embed controls.
+  - id: analytics.admin
+    description: Administer Analytics workspace settings.
+  - id: analytics.dashboard.view
+    description: View Analytics dashboards.
+  - id: analytics.dataset.view
+    description: View Analytics datasets.
+  - id: analytics.kpi.view
+    description: View Analytics KPIs.
+  - id: analytics.report.run
+    description: View Analytics report links.
+  - id: analytics.saved.manage
+    description: Manage saved Analytics dashboards.
+  - id: analytics.dashboard.share
+    description: Share Analytics dashboards.
+  - id: analytics.dashboard.embed
+    description: Embed Analytics dashboards.
+
+navigation:
+  activityBar:
+    enabled: true
+    label: Analytics
+    icon: chart-column
+    order: 28
+    permission: analytics.dashboard.view
+  sidebar:
+    - id: analytics.home
+      label: Home
+      route: /workspace/analytics
+      icon: layout-dashboard
+      permission: analytics.dashboard.view
+    - id: analytics.executive
+      label: Executive
+      route: /workspace/analytics/executive
+      icon: gauge
+      permission: analytics.dashboard.view
+    - id: analytics.operational
+      label: Operational
+      route: /workspace/analytics/operational
+      icon: activity
+      permission: analytics.dashboard.view
+    - id: analytics.projects
+      label: Projects
+      route: /workspace/analytics/projects
+      icon: folder-kanban
+      permission: analytics.dashboard.view
+    - id: analytics.time
+      label: Time
+      route: /workspace/analytics/time
+      icon: clock
+      permission: analytics.dashboard.view
+    - id: analytics.support
+      label: Support
+      route: /workspace/analytics/support
+      icon: life-buoy
+      permission: analytics.dashboard.view
+    - id: analytics.platform-health
+      label: Platform Health
+      route: /workspace/analytics/platform-health
+      icon: heart-pulse
+      permission: analytics.dashboard.view
+    - id: analytics.repository-metrics
+      label: Repository Metrics
+      route: /workspace/analytics/repository-metrics
+      icon: chart-bar
+      permission: analytics.dashboard.view
+    - id: analytics.saved
+      label: Saved
+      route: /workspace/analytics/saved
+      icon: bookmark
+      permission: analytics.saved.manage
+    - id: analytics.datasets
+      label: Datasets
+      route: /workspace/analytics/datasets
+      icon: database
+      permission: analytics.dataset.view
+    - id: analytics.reports
+      label: Reports
+      route: /workspace/analytics/reports
+      icon: file-bar-chart
+      permission: analytics.report.run
+    - id: analytics.search
+      label: Search
+      route: /workspace/analytics/search
+      icon: search
+      permission: analytics.dashboard.view
+    - id: analytics.health
+      label: Health
+      route: /workspace/analytics/health
+      icon: activity
+      permission: analytics.dashboard.view
+    - id: analytics.diagnostics
+      label: Diagnostics
+      route: /workspace/analytics/diagnostics
+      icon: stethoscope
+      permission: analytics.dashboard.view
+
+commands:
+  - id: analytics.home.open
+    label: Open Analytics Home
+    category: Analytics
+    permission: analytics.dashboard.view
+  - id: analytics.executive.open
+    label: Open Executive Dashboard
+    category: Analytics
+    permission: analytics.dashboard.view
+  - id: analytics.saved.open
+    label: Open Saved Dashboards
+    category: Analytics
+    permission: analytics.saved.manage
+  - id: analytics.search.open
+    label: Search Analytics Dashboards
+    category: Analytics
+    permission: analytics.dashboard.view
+  - id: analytics.health.open
+    label: Open Analytics Health
+    category: Analytics
+    permission: analytics.dashboard.view
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: analytics
+    label: Analytics
+    icon: chart-column
+    route: /workspace/analytics
+    order: 28
+    permission: analytics.dashboard.view
+  view:
+    title: Analytics
+    workspace: analytics
+    route: /workspace/analytics
+    default: true
+    permission: analytics.dashboard.view
+  actions:
+    - id: analytics.home.open
+      label: Open Analytics Home
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: analytics.dashboard.view
+      palette: true
+      group: Analytics
+      icon: layout-dashboard
+      order: 10
+      description: Open Analytics Home in the Workbench.
+    - id: analytics.executive.open
+      label: Open Executive Dashboard
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: analytics.dashboard.view
+      palette: true
+      group: Analytics
+      icon: gauge
+      order: 20
+      description: Open the Executive Analytics suite.
+    - id: analytics.saved.open
+      label: Open Saved Dashboards
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: analytics.saved.manage
+      palette: true
+      group: Analytics
+      icon: bookmark
+      order: 30
+      description: Open Saved Analytics dashboards.
+    - id: analytics.search.open
+      label: Search Analytics Dashboards
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: analytics.dashboard.view
+      palette: true
+      group: Analytics
+      icon: search
+      order: 40
+      description: Search the Analytics dashboard catalogue.
+    - id: analytics.health.open
+      label: Open Analytics Health
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: analytics.dashboard.view
+      palette: true
+      group: Analytics
+      icon: activity
+      order: 50
+      description: Open Analytics health diagnostics.

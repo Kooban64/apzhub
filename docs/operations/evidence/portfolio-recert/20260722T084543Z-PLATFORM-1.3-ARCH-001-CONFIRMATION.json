@@ -1,0 +1,29 @@
+{
+  "programme": "Platform-1.3-ARCH-001",
+  "title": "Platform 1.3 Architecture Confirmation",
+  "timestamp": "20260722T084543Z",
+  "baseline": "1.2.0",
+  "plan001": "ACCEPTED",
+  "recommendation": "READY FOR PLATFORM-1.3-ENG-001",
+  "status": "Awaiting Owner Architecture Acceptance",
+  "structuralRedesignRequired": false,
+  "proposedAdrs": ["ADR-0070", "ADR-0071", "ADR-0072"],
+  "epics": {
+    "COMPATIBLE": [
+      "P13-E01",
+      "P13-E05",
+      "P13-E06",
+      "P13-E07",
+      "P13-E08",
+      "P13-E09",
+      "P13-E10",
+      "P13-E11",
+      "P13-E12"
+    ],
+    "COMPATIBLE_WITH_ADR": ["P13-E02", "P13-E03", "P13-E04"],
+    "INCOMPATIBLE": []
+  },
+  "pack": "docs/architecture/platform-1.3-confirmation/",
+  "sourceModifications": false,
+  "engineering": false
+}

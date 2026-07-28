@@ -194,9 +194,10 @@ describe("ZammadAdapter lifecycle", () => {
     await adapter.initialise();
 
     const ids = adapter.listPlaceholderCapabilities();
-    expect(ids).toContain("attachments");
+    expect(ids).not.toContain("attachments");
     expect(ids).not.toContain("events");
     expect(ids).not.toContain("synchronisation");
+    expect(ids).toEqual([]);
     expect(ids).not.toContain("webhooks");
     expect(ids).not.toContain("search");
     expect(ids).not.toContain("analytics");

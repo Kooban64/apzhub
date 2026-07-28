@@ -1,0 +1,49 @@
+{
+  "programme": "APZQEP-ENG-020B",
+  "title": "Requirements Persistence & CRUD Foundation",
+  "classification": "ENGINEERING_IMPLEMENTATION",
+  "lifecycle": "Engineering",
+  "baseline": "APZQEP-ENG-020A ACCEPTED",
+  "reference": [
+    "Platform-1.4-CERT-001",
+    "APZQEP-CONSTITUTION-001",
+    "APZQEP-DEF-002",
+    "APZQEP-ARCH-001",
+    "APZQEP-PLAN-001",
+    "APZQEP-ENG-010",
+    "APZQEP-ENG-020A"
+  ],
+  "timestamp": "2026-07-24T22:30:00Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER REQUIREMENTS CRUD ACCEPTANCE",
+  "baselineVersion": "0.2.0-requirements-crud-foundation",
+  "packRoot": "docs/products/apzqep/requirements/crud-foundation/",
+  "repository": {
+    "package": "@apzhub/qep-requirements",
+    "version": "0.2.0",
+    "contracts": "@apzhub/qep-contracts@0.2.0",
+    "searchAdapter": "@apzhub/search-qep@0.1.0",
+    "migrations": ["0068_apz_qep_requirements", "0069_apz_qep_requirements_rls"],
+    "persistence": true,
+    "crud": true,
+    "softDelete": true,
+    "hardDelete": false,
+    "restore": false,
+    "searchProduct": "qep",
+    "approvalWorkflows": false,
+    "baselines": false,
+    "ai": false,
+    "mcp": false
+  },
+  "validation": {
+    "testQep": true,
+    "typecheckQep": true,
+    "platformServicesQepTests": true,
+    "handlerTests": true,
+    "auditQepRequirementsCrud": true
+  },
+  "platformUnchanged": true,
+  "nextProgramme": "APZQEP-ENG-020C",
+  "nextProgrammeTitle": "Requirements Business Rules & Lifecycle",
+  "nextProgrammeStatus": "NOT_AUTHORISED_UNTIL_REQUIREMENTS_CRUD_ACCEPTANCE"
+}

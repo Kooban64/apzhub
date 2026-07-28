@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0.0",
+  "programmeId": "APZHUB-ENG-0005",
+  "backlogItemId": "R12-QA-01",
+  "knownLimitationId": "PL12-KL-06",
+  "executedAt": "2026-07-21T18:03:29.069Z",
+  "environment": "dev",
+  "mode": "path",
+  "findings": [
+    {
+      "id": "artefact.composeFile",
+      "severity": "pass",
+      "message": "Docker Compose dev file present"
+    },
+    {
+      "id": "artefact.playwrightConfig",
+      "severity": "pass",
+      "message": "Playwright config present"
+    },
+    {
+      "id": "artefact.ciWorkflow",
+      "severity": "pass",
+      "message": "CI workflow present"
+    },
+    {
+      "id": "artefact.ciRunsPlaywright",
+      "severity": "pass",
+      "message": "CI invokes pnpm test:e2e"
+    },
+    {
+      "id": "artefact.runbook",
+      "severity": "pass",
+      "message": "Portfolio re-cert runbook present"
+    },
+    {
+      "id": "artefact.evidenceDirectory",
+      "severity": "pass",
+      "message": "Evidence directory README present"
+    },
+    {
+      "id": "artefact.packageScript",
+      "severity": "pass",
+      "message": "pnpm ops:portfolio-recert script present"
+    },
+    {
+      "id": "docker.skipped",
+      "severity": "pass",
+      "message": "Docker stage skipped (mode=path)"
+    },
+    {
+      "id": "playwright.skipped",
+      "severity": "pass",
+      "message": "Playwright stage skipped (mode=path); CI path still documented"
+    }
+  ],
+  "verdict": "PASS",
+  "artefacts": {
+    "composeFile": true,
+    "playwrightConfig": true,
+    "ciWorkflow": true,
+    "ciRunsPlaywright": true,
+    "runbook": true,
+    "evidenceDirectory": true,
+    "packageScript": true
+  },
+  "docker": null,
+  "playwright": null,
+  "portfolioProducts": [
+    "APZHUB Platform shell (SPR)",
+    "APZ Projects",
+    "APZ Time",
+    "APZ Support",
+    "APZ Documents",
+    "APZ TCMS",
+    "APZ Analytics",
+    "APZ Workflow",
+    "APZ Law (main suite + optional law config)",
+    "Platform Search / Identity / Metrics / Observe / Admin / Notifications"
+  ],
+  "notes": [
+    "R12-QA-01 closes PL12-KL-06 hygiene residual (path executed with evidence).",
+    "Ordinary CI continues to run pnpm test:e2e on PR/main.",
+    "Docker Compose rebuild/health is the half CI service containers do not cover."
+  ],
+  "artefactPaths": [
+    "infrastructure/docker/docker-compose.dev.yml",
+    "testing/playwright/playwright.config.ts",
+    ".github/workflows/ci.yml",
+    "docs/operations/PORTFOLIO-PLAYWRIGHT-DOCKER-RECERT.md",
+    "docs/operations/evidence/portfolio-recert/README.md"
+  ]
+}

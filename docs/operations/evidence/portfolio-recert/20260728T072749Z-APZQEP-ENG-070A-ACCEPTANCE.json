@@ -1,0 +1,39 @@
+{
+  "evidenceId": "20260728T072749Z-APZQEP-ENG-070A-ACCEPTANCE",
+  "programme": "APZQEP-ENG-070A",
+  "title": "Test Plans Workbench Engineering — Owner Acceptance",
+  "capability": "Test Plans",
+  "layer": "Workbench / Presentation",
+  "decisionDate": "2026-07-28",
+  "decisionTimestampUtc": "20260728T072749Z",
+  "decision": {
+    "status": "ACCEPTED",
+    "approved": true,
+    "programmeClosed": true
+  },
+  "governingStandards": [
+    "Document 000 v1.0.0",
+    "OES-000 v1.0.0",
+    "OES-001 v1.0.0",
+    "OES-002 v1.1.0"
+  ],
+  "precedingReviews": {
+    "ecr": "PASS",
+    "ecrEvidence": "docs/operations/evidence/portfolio-recert/20260728T071000Z-APZQEP-ENG-070A-ECR.json"
+  },
+  "baselinesConsumed": {
+    "architecture": "APZQEP-ARCH-014 ACCEPTED",
+    "engineeringSpecification": "APZQEP-OES-ENG-070A ACCEPTED",
+    "domain": "@apzhub/qep-test-plans 0.1.0 CERTIFIED (CERT-060A)",
+    "infrastructure": "@apzhub/qep-test-plans 0.2.0 INFRASTRUCTURE COMPONENT CERTIFIED (CERT-060B)"
+  },
+  "pack": "docs/products/apzqep/test-plans/workbench/",
+  "bindingInvariant": "The Workbench is a pure presentation layer. It renders state supplied by the certified Infrastructure and executes only actions explicitly authorised through the availableActions contract.",
+  "authorisesNext": "APZQEP-CERT-070A — Test Plans Workbench Component Certification",
+  "exclusions": [
+    "Further engineering under APZQEP-ENG-070A",
+    "Capability Certification",
+    "Capability Freeze",
+    "Promote to 1.0.0"
+  ]
+}

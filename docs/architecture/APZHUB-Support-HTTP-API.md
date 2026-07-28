@@ -71,7 +71,7 @@ Never expose `tickets`, `issues`, or Zammad provisional IDs (`*_zammad_*`).
 | POST   | `.../articles/notes`       | `createNote` (always internal)        |
 | POST   | `.../articles/replies`     | `createReply` (always public channel) |
 
-No article update/delete. No binary attachment upload/download.
+No article update/delete. Binary attachment upload (on note/reply create) and download (`GET .../attachments/{attachmentId}`) available (R12-SUP-02; max 1 MiB). Attachment delete not exposed.
 
 ### Organisations / groups / users / search / history / analytics
 
@@ -92,7 +92,7 @@ No article update/delete. No binary attachment upload/download.
 ## Intentionally excluded
 
 - `/api/v1/support-sync`, `/api/v1/support-webhooks`, webhook ingress
-- Binary attachments, article mutation beyond note/reply create
+- Attachment delete; article mutation beyond note/reply create; realtime WS/SSE
 - Support UI / agent workspace
 - Event Bus / notifications / WebSockets
 - Platform identity administration via Support user routes

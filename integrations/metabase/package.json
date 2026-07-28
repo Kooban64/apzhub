@@ -1,0 +1,18 @@
+{
+  "name": "@apzhub/integration-metabase",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Metabase CE Integration Foundation adapter for APZHUB Analytics Platform (APZHUB-INTEGRATION-METABASE-001)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts integrations/metabase"
+  },
+  "dependencies": {
+    "@apzhub/integration-sdk": "workspace:*"
+  }
+}

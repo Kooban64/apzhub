@@ -1,0 +1,17 @@
+{
+  "programme": "APZQEP-ENG-030A",
+  "part": "1",
+  "title": "Traceability Engine — Domain Model and Business Rules",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "recordedAt": "2026-07-26T14:00:00Z",
+  "authority": "Owner Engineering Programme Instruction — APZQEP-ENG-030A Part 2",
+  "packageAtAcceptance": {
+    "@apzhub/qep-traceability": "0.1.0"
+  },
+  "effect": [
+    "Part 1 ACCEPTED / CLOSED / COMPLETE",
+    "Part 2 authorised (persistence, application, APIs, Platform integration)",
+    "Part 3 NOT AUTHORISED"
+  ],
+  "implementationEvidence": "20260726T133000Z-APZQEP-ENG-030A-PART1.json"
+}

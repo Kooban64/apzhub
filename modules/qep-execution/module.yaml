@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: qep-execution
+name: Execution and Sessions
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Execution and Sessions (M06) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  product: apzqep
+  moduleCatalogueId: M06
+  slug: execution
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: stub
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Execution and Sessions
+    icon: flask-conical
+    route: /workspace/qep/execution
+    order: 60
+    permission: qep.execution.read
+  view:
+    title: Execution and Sessions
+    workspace: qep
+    route: /workspace/qep/execution
+    permission: qep.execution.read

@@ -1,0 +1,12 @@
+{
+  "programme": "APZQEP-CERT-040D",
+  "title": "Verification Capability Certification",
+  "recordedAt": "2026-07-26T20:50:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Architecture Programme Instruction APZQEP-ARCH-011",
+  "package": { "@apzhub/qep-verification": "1.0.0" },
+  "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "freeze": "CERTIFIED / FROZEN",
+  "effect": "Verification 1.0.0 frozen. APZQEP-ARCH-011 Test Specifications Capability Architecture authorised (architecture only).",
+  "notAuthorised": ["Evidence", "Coverage", "Impact", "Certification Engine", "AI", "MCP", "Test Specifications engineering"]
+}

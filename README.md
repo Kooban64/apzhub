@@ -4,21 +4,25 @@ Working name for a unified internal productivity platform — one desktop-style 
 
 ## Current phase
 
-**Operational Delivery** — Engineering Foundation **COMPLETE**.
+**Operational Delivery** — Foundation phase **CLOSED**. Platform **1.2.0** programme **CLOSED**. Portfolio planning [APZHUB-PLAN-001](./docs/strategy/platform-1.3/README.md) — **Awaiting Owner Portfolio Acceptance** (**READY FOR OWNER PORTFOLIO ACCEPTANCE**).
 
 | Pillar                      | Status                                                                                                     |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Foundation                  | **CLOSED** — no further Foundation programmes unless Owner-approved                                        |
+| Platform baseline           | **1.2.0** · **PRWL** · freeze pack [platform-1.2.0](./docs/releases/platform-1.2.0/README.md)              |
 | Engineering Operating Model | **ACTIVE** — [docs/operations/](./docs/operations/README.md) (APZHUB-OPERATIONS-001 **ACCEPTED / CLOSED**) |
-| Releases                    | [docs/releases/](./docs/releases/README.md) — Product / Platform roadmaps                                  |
-| Repository quality          | **PRODUCTION READY** (QA-002)                                                                              |
-| Product Engineering         | **ACTIVE** — APZ Projects **1.1.0** current Production Release (**ACCEPTED / CLOSED**)                     |
+| Product Management          | **Operational** — [docs/product-management/](./docs/product-management/README.md)                          |
+| Enterprise Architecture     | **Operational** — [EA Catalogue](./docs/architecture/ENTERPRISE-ARCHITECTURE-CATALOGUE.md) · **Frozen**    |
+| Releases                    | **Operational** — [docs/releases/](./docs/releases/README.md) · Production SemVer register                 |
+| Repository quality          | **PRODUCTION READY** (QA-002) · CERT-004 **ACCEPTED** · Waves 1–2 **COMPLETE**                             |
+| Product Engineering         | Capability **ACTIVE** — Projects **1.1.0** · Time/Support/Documents/TCMS/Law/Analytics/Workflow **1.0.0**  |
 | Platform Foundation         | **CLOSED**                                                                                                 |
 
-Future delivery: Product Releases · Platform Releases · ADRs · routine engineering — not repository-wide governance programmes.
+Future work requires named Owner Approval after Release Acceptance. Do **not** begin Platform **1.3**, Email SoR, FIN-001, or Workflow Execute under this freeze.
 
-AI / status entry: [docs/foundation/AI-MANIFEST.md](./docs/foundation/AI-MANIFEST.md) · [CURRENT-MILESTONE](./docs/foundation/CURRENT-MILESTONE.md).
+AI / status entry: [docs/foundation/AI-MANIFEST.md](./docs/foundation/AI-MANIFEST.md) · [CURRENT-MILESTONE](./docs/foundation/CURRENT-MILESTONE.md) · [platform-1.2.0 freeze](./docs/releases/platform-1.2.0/README.md).
 
-Foundation documentation (**000**, **001–029**) is complete.
+Foundation documentation (**000**, **001–029**) is complete and the Foundation phase is **closed**.
 
 **BUILD-001**, **SPR-001** through **SPR-007** are **complete** — formally reviewed and accepted for release.
 

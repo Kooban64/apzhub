@@ -1,0 +1,26 @@
+{
+  "name": "@apzhub/qep-traceability",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "APZ QEP Traceability bounded context — APZ QEP Traceability Capability — CERTIFIED baseline 1.0.0 (ARCH-007/008, ENG-030A, ENG-030C).",
+  "exports": {
+    ".": "./src/index.ts",
+    "./domain": "./src/domain/index.ts",
+    "./application": "./src/application/index.ts",
+    "./presentation": "./src/presentation/index.ts",
+    "./infrastructure": "./src/infrastructure/index.ts",
+    "./shared": "./src/shared/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-traceability"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "@apzhub/qep-contracts": "workspace:*",
+    "@apzhub/qep-types": "workspace:*",
+    "drizzle-orm": "^0.45.2"
+  }
+}

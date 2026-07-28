@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: workflow-health
+name: Health
+version: 0.1.0
+kind: module
+
+metadata:
+  category: workflow
+  description: Workflow Workbench — Health view (APZHUB-PLATFORM-WORKFLOW-006).
+
+dependencies:
+  platform: []
+  services:
+    - workflow-service
+
+module:
+  category: workflow
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflow
+    parent: workflow
+    label: Health
+    icon: activity
+    route: /workspace/workflow/health
+    order: 80
+    permission: workflow.engine.health
+  view:
+    title: Health
+    workspace: workflow
+    route: /workspace/workflow/health
+    permission: workflow.engine.health

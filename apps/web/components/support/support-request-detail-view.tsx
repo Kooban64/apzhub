@@ -3,7 +3,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { isSupportApiError } from "@/lib/support/errors";
+import { isSupportApiError, shouldRetrySupportQuery } from "@/lib/support/errors";
 import { formatSupportDate } from "@/lib/support/format";
 import {
   canCreateSupportArticle,
@@ -36,6 +36,7 @@ export function SupportRequestDetailView({
   const requestQuery = useQuery({
     queryKey: supportQueryKeys.requests.detail(supportRequestId),
     queryFn: ({ signal }) => getSupportRequest(supportRequestId, { signal }),
+    retry: shouldRetrySupportQuery,
   });
 
   const articlesQuery = useQuery({
@@ -43,6 +44,7 @@ export function SupportRequestDetailView({
     queryFn: ({ signal }) =>
       listSupportArticles(supportRequestId, undefined, { signal }),
     enabled: canListSupportArticles(permissions) || permissions === undefined,
+    retry: shouldRetrySupportQuery,
   });
 
   const historyQuery = useQuery({
@@ -50,28 +52,34 @@ export function SupportRequestDetailView({
     queryFn: ({ signal }) =>
       listSupportHistory(supportRequestId, undefined, { signal }),
     enabled: tab === "history",
+    retry: shouldRetrySupportQuery,
   });
 
-  function invalidateAll() {
-    void queryClient.invalidateQueries({
-      queryKey: supportQueryKeys.requests.all,
-    });
-    void queryClient.invalidateQueries({
-      queryKey: supportQueryKeys.requests.detail(supportRequestId),
-    });
+  function invalidateArticles() {
+    // Articles only — do not invalidate request lists (avoids workbench/query storms).
     void queryClient.invalidateQueries({
       queryKey: supportQueryKeys.requests.articles(supportRequestId),
     });
+  }
+
+  function invalidateAll() {
+    void queryClient.invalidateQueries({
+      queryKey: supportQueryKeys.requests.detail(supportRequestId),
+    });
+    invalidateArticles();
     void queryClient.invalidateQueries({
       queryKey: supportQueryKeys.requests.history(supportRequestId),
+    });
+    void queryClient.invalidateQueries({
+      queryKey: supportQueryKeys.requests.lists(),
     });
     void queryClient.invalidateQueries({
       queryKey: supportQueryKeys.analytics(),
     });
   }
 
-  if (requestQuery.isLoading) return <LoadingState />;
-  if (requestQuery.isError || !requestQuery.data) {
+  if (requestQuery.isPending && !requestQuery.data) return <LoadingState />;
+  if (requestQuery.isError && !requestQuery.data) {
     return (
       <ErrorState
         message={
@@ -83,6 +91,7 @@ export function SupportRequestDetailView({
       />
     );
   }
+  if (!requestQuery.data) return <LoadingState />;
 
   const request = requestQuery.data.data;
   const canCompose = canCreateSupportArticle(permissions) || permissions === undefined;
@@ -160,10 +169,10 @@ export function SupportRequestDetailView({
 
       {tab === "conversation" ? (
         <div className="flex flex-col gap-4" data-testid="support-conversation-panel">
-          {articlesQuery.isLoading ? (
+          {articlesQuery.isPending && !articlesQuery.data ? (
             <LoadingState label="Loading conversation…" />
           ) : null}
-          {articlesQuery.isError ? (
+          {articlesQuery.isError && !articlesQuery.data ? (
             <ErrorState
               message={
                 isSupportApiError(articlesQuery.error)
@@ -174,25 +183,30 @@ export function SupportRequestDetailView({
             />
           ) : null}
           {articlesQuery.data ? (
-            <SupportConversation articles={articlesQuery.data.data} />
+            <SupportConversation
+              supportRequestId={supportRequestId}
+              articles={articlesQuery.data.data}
+            />
           ) : null}
           {canCompose ? (
             <div className="grid gap-4 lg:grid-cols-2">
               <InternalNoteComposer
                 supportRequestId={supportRequestId}
-                onCreated={invalidateAll}
+                onCreated={invalidateArticles}
               />
               <CustomerReplyComposer
                 supportRequestId={supportRequestId}
-                onCreated={invalidateAll}
+                onCreated={invalidateArticles}
               />
             </div>
           ) : null}
         </div>
       ) : (
         <div data-testid="support-history-panel">
-          {historyQuery.isLoading ? <LoadingState label="Loading history…" /> : null}
-          {historyQuery.isError ? (
+          {historyQuery.isPending && !historyQuery.data ? (
+            <LoadingState label="Loading history…" />
+          ) : null}
+          {historyQuery.isError && !historyQuery.data ? (
             <ErrorState
               message={
                 isSupportApiError(historyQuery.error)

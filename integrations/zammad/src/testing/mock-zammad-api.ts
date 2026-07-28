@@ -77,6 +77,8 @@ interface MutableStore {
   articles: ZammadArticleRecord[];
   history: ZammadHistoryRecord[];
   webhooks: ZammadWebhookRecord[];
+  /** key: ticketId:articleId:attachmentId → raw bytes */
+  attachmentBytes: Map<string, Uint8Array>;
   nextTicketId: number;
   nextOrgId: number;
   nextGroupId: number;
@@ -145,6 +147,7 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
     ],
     history: [...(options.seedHistory ?? MOCK_HISTORY).map((h) => ({ ...h }))],
     webhooks: [...(options.seedWebhooks ?? [MOCK_WEBHOOK]).map((w) => ({ ...w }))],
+    attachmentBytes: new Map<string, Uint8Array>(),
     nextTicketId: 200,
     nextOrgId: 50,
     nextGroupId: 20,
@@ -639,25 +642,32 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
         return jsonError(404, "TICKET_NOT_FOUND", "Ticket not found");
       }
 
+      const createdArticleId = store.nextArticleId++;
       const attachments = Array.isArray(body.attachments)
-        ? (body.attachments as Record<string, unknown>[]).map((attachment) => ({
-            id: store.nextAttachmentId++,
-            filename: String(attachment.filename ?? "file.bin"),
-            size:
-              typeof attachment.data === "string"
-                ? Math.ceil((attachment.data as string).length * 0.75)
-                : 0,
-            preferences: {
-              "Mime-Type": String(
-                attachment["mime-type"] ?? "application/octet-stream",
-              ),
-            },
-            created_at: "2026-07-11T12:00:00.000Z",
-          }))
+        ? (body.attachments as Record<string, unknown>[]).map((attachment) => {
+            const id = store.nextAttachmentId++;
+            const dataBase64 =
+              typeof attachment.data === "string" ? attachment.data : "";
+            const bytes = dataBase64
+              ? Uint8Array.from(Buffer.from(dataBase64, "base64"))
+              : new Uint8Array();
+            store.attachmentBytes.set(`${ticketId}:${createdArticleId}:${id}`, bytes);
+            return {
+              id,
+              filename: String(attachment.filename ?? "file.bin"),
+              size: bytes.byteLength,
+              preferences: {
+                "Mime-Type": String(
+                  attachment["mime-type"] ?? "application/octet-stream",
+                ),
+              },
+              created_at: "2026-07-11T12:00:00.000Z",
+            };
+          })
         : [];
 
       const created: ZammadArticleRecord = {
-        id: store.nextArticleId++,
+        id: createdArticleId,
         ticket_id: ticketId,
         type: typeof body.type === "string" ? body.type : "note",
         sender: typeof body.sender === "string" ? body.sender : "Agent",
@@ -683,6 +693,50 @@ export function createMockZammadFetch(options: MockZammadApiOptions = {}): Fetch
       return new Response(JSON.stringify(created), {
         status: 201,
         headers: commonHeaders,
+      });
+    }
+
+    const attachmentMatch = path.match(
+      /\/api\/v1\/ticket_attachment\/(\d+)\/(\d+)\/(\d+)$/,
+    );
+    if (attachmentMatch && method === "GET") {
+      if (articlesStatus >= 400) {
+        return jsonError(
+          articlesStatus,
+          "VENDOR_UNAVAILABLE",
+          "Attachments unavailable",
+          commonHeaders,
+        );
+      }
+      const ticketId = Number(attachmentMatch[1]);
+      const articleId = Number(attachmentMatch[2]);
+      const attachmentId = Number(attachmentMatch[3]);
+      const article = store.articles.find(
+        (entry) => entry.id === articleId && entry.ticket_id === ticketId,
+      );
+      const meta = article?.attachments?.find((item) => item.id === attachmentId);
+      if (!article || !meta) {
+        return jsonError(404, "ATTACHMENT_NOT_FOUND", "Attachment not found");
+      }
+      const key = `${ticketId}:${articleId}:${attachmentId}`;
+      let bytes = store.attachmentBytes.get(key);
+      if (!bytes) {
+        // Seeded metadata-only fixtures get a deterministic payload for download tests.
+        bytes = new TextEncoder().encode(`mock-attachment-${attachmentId}`);
+        store.attachmentBytes.set(key, bytes);
+      }
+      const contentType =
+        typeof meta.preferences?.["Mime-Type"] === "string"
+          ? meta.preferences["Mime-Type"]
+          : "application/octet-stream";
+      return new Response(Buffer.from(bytes), {
+        status: 200,
+        headers: {
+          ...commonHeaders,
+          "Content-Type": contentType,
+          "Content-Disposition": `attachment; filename="${meta.filename ?? `attachment-${attachmentId}`}"`,
+          "Content-Length": String(bytes.byteLength),
+        },
       });
     }
 

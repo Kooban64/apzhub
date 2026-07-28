@@ -1,7 +1,6 @@
 import { headers } from "next/headers";
 
 import { getValidatedSession } from "@apzhub/auth/server";
-import { isDevRegistrationAllowed } from "@apzhub/config";
 import { Runtime } from "@apzhub/platform-runtime/server";
 import {
   createEmptyWorkbenchRegistryDto,
@@ -29,9 +28,8 @@ export async function loadWorkbenchRegistryDto(): Promise<WorkbenchRegistryDto> 
   const session = await getValidatedSession(await headers());
   const authContext = await createLawPlatformAuthPermissionContext(session);
   const permissionAdapter = createWorkbenchPermissionAdapter({
+    mode: "auth",
     authContext,
-    nodeEnv: process.env.NODE_ENV,
-    allowDevRegistration: isDevRegistrationAllowed(),
   });
 
   return filterWorkbenchRegistryDto(dto, permissionAdapter);

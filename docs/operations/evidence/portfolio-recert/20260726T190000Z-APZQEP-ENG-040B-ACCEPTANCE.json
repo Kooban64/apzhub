@@ -1,0 +1,11 @@
+{
+  "programme": "APZQEP-ENG-040B",
+  "title": "Verification Infrastructure",
+  "recordedAt": "2026-07-26T19:00:00Z",
+  "decision": "ACCEPTED / CLOSED / COMPLETE",
+  "authority": "Owner Architecture Programme Instruction APZQEP-ARCH-010",
+  "package": { "@apzhub/qep-verification": "0.2.0" },
+  "migrations": ["0081_apz_qep_verification", "0082_apz_qep_verification_rls"],
+  "effect": "ENG-040B closed. APZQEP-ARCH-010 Verification Workbench Architecture authorised (architecture only).",
+  "notAuthorised": ["Workbench UI engineering", "Coverage", "Impact", "AI", "MCP"]
+}

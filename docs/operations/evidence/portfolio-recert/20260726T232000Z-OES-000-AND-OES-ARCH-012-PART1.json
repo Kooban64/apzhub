@@ -1,0 +1,27 @@
+{
+  "recordedAt": "2026-07-26T23:20:00Z",
+  "programmes": [
+    {
+      "id": "OES-000",
+      "title": "Owner Engineering Specification Standard",
+      "decision": "AUTHORISED",
+      "path": "docs/engineering/oes/OES-000-Owner-Engineering-Specification-Standard.md",
+      "note": "APZOR engineering methodology constitution. Awaiting Owner Acceptance to freeze."
+    },
+    {
+      "id": "APZQEP-OES-ARCH-012",
+      "title": "Test Specifications Workbench Architecture",
+      "decision": "IN DRAFT — PART 1 FILED",
+      "path": "docs/engineering/oes/APZQEP/OES-ARCH-012-Test-Specifications-Workbench-Architecture/",
+      "partFiled": "PART-01-Executive-Summary-Objectives-Constraints.md",
+      "partsPending": ["PART-02", "PART-03", "PART-04", "PART-05"],
+      "notAuthorised": [
+        "Workbench Engineering",
+        "React",
+        "Next.js UI",
+        "Certification"
+      ]
+    }
+  ],
+  "stop": "Complete OES-ARCH-012 Parts 2-5 and Owner Review before Workbench Engineering."
+}

@@ -1,0 +1,25 @@
+{
+  "type": "OwnerAcknowledgement",
+  "programmeClosed": "APZQEP-ENG-050C",
+  "recordedAt": "2026-07-27T07:21:00Z",
+  "status": "ACCEPTED / APPROVED / CLOSED",
+  "repositoryState": "Consistent with APZOR Engineering Governance Framework",
+  "certificationHold": {
+    "active": true,
+    "prohibitsUntilCertOwnerAcceptance": [
+      "Owner-binding Version 1.0.0 freeze",
+      "Owner-binding Production classification",
+      "Freeze",
+      "Owner-binding Release recommendation",
+      "Owner-binding Operational readiness declaration"
+    ],
+    "authorises": ["APZQEP-CERT-050D preparation and execution"]
+  },
+  "nextProgramme": {
+    "id": "APZQEP-CERT-050D",
+    "title": "Test Specifications Capability Certification",
+    "nature": "Independent assurance — SHALL NOT perform engineering"
+  },
+  "independencePrinciple": "docs/engineering/oes/OES-CERTIFICATION-INDEPENDENCE.md",
+  "path": "docs/products/apzqep/test-specifications/CERTIFICATION-HOLD.md"
+}

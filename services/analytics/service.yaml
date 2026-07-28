@@ -1,0 +1,66 @@
+manifestSchemaVersion: "1.0"
+id: analytics-service
+name: Analytics Platform Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: analytics
+  description: >
+    Canonical APZHUB Analytics Platform Services (APZHUB-PLATFORM-ANALYTICS-004).
+    Consumed by Analytics HTTP API and Analytics Workbench (ANALYTICS-005/006).
+  contractPackage: "@apzhub/analytics-contracts"
+  contractVersion: "0.1.1"
+  implementationPackage: "@apzhub/platform-services"
+  implementationVersion: "0.28.0"
+  owner: APZHUB
+  tags:
+    - analytics
+    - dashboards
+    - platform-services
+    - metabase
+
+dependencies:
+  platform: []
+  integrations:
+    - metabase
+
+integrations:
+  - metabase
+
+service:
+  category: analytics
+
+permissions:
+  - analytics.*
+  - analytics.view
+  - analytics.manage
+  - analytics.admin
+  - analytics.dashboard.view
+  - analytics.dataset.view
+  - analytics.kpi.view
+  - analytics.report.run
+  - analytics.saved.manage
+  - analytics.dashboard.share
+  - analytics.dashboard.embed
+
+events:
+  publishes: []
+
+health:
+  enabled: true
+
+documentation:
+  governanceCapabilityKey: analytics
+  governanceCapabilityType: analytics
+  featureFlagKey: capability.analytics.enabled
+  lifecycleProductId: analytics
+  operationsCapabilityId: analytics
+  operationsConnectorId: metabase
+  diagnosticsExtension: analyticsDiagnostics
+  adapterImplementation: APZHUB-PLATFORM-ANALYTICS-004
+  userVisibleProduct: true
+
+tests:
+  contract: pass
+  integration: pass

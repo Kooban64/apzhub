@@ -57,6 +57,7 @@ export interface WorkbenchManager {
   restoreSession(userId: string): Promise<SessionRestoreResult>;
   enableSessionPersistence(userId: string): void;
   disableSessionPersistence(): void;
+  flushPendingPersist(): Promise<void>;
   clearSession(userId: string): Promise<void>;
   activateDefaultViewForActiveWorkspace(): WorkbenchRequestResult;
   activateViewForRoute(route: string): WorkbenchRequestResult;
@@ -81,6 +82,7 @@ export interface WorkbenchRequestBus {
   restoreSession(userId: string): Promise<SessionRestoreResult>;
   enableSessionPersistence(userId: string): void;
   disableSessionPersistence(): void;
+  flushPendingPersist(): Promise<void>;
   clearSession(userId: string): Promise<void>;
   activateDefaultViewForActiveWorkspace(): WorkbenchRequestResult;
   activateViewForRoute(route: string): WorkbenchRequestResult;

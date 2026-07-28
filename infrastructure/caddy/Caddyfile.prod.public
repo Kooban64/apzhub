@@ -1,0 +1,38 @@
+# APZHUB-OPS-002 A2 — Public ACME TLS edge (dedicated host / public DNS)
+# Requires: APZHUB_HOSTNAME resolves publicly; host ports 80+443 reachable (or dedicated host).
+# Swap into compose: set Caddyfile volume to Caddyfile.prod.public and map 80/443.
+
+{
+	email {$APZHUB_ACME_EMAIL}
+}
+
+http://{$APZHUB_HOSTNAME} {
+	redir https://{host}{uri} permanent
+}
+
+{$APZHUB_HOSTNAME} {
+	encode gzip zstd
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		-Server
+	}
+
+	handle /api/health* {
+		reverse_proxy web:3300
+	}
+
+	handle {
+		reverse_proxy web:3300 {
+			header_up X-Forwarded-Proto {scheme}
+			header_up X-Real-IP {remote_host}
+			health_uri /api/health
+			health_interval 30s
+			health_timeout 5s
+		}
+	}
+}

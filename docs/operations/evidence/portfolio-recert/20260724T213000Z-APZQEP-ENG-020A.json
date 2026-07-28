@@ -1,0 +1,55 @@
+{
+  "programme": "APZQEP-ENG-020A",
+  "title": "Requirements Domain Foundation (Domain Skeleton)",
+  "classification": "ENGINEERING_IMPLEMENTATION",
+  "lifecycle": "Engineering",
+  "baseline": "APZQEP-ENG-010 ACCEPTED",
+  "reference": [
+    "Platform-1.4-CERT-001",
+    "APZQEP-CONSTITUTION-001",
+    "APZQEP-DEF-002",
+    "APZQEP-ARCH-001",
+    "APZQEP-PLAN-001",
+    "APZQEP-ENG-010"
+  ],
+  "timestamp": "2026-07-24T21:30:00Z",
+  "status": "ACCEPTED_CLOSED",
+  "recommendation": "READY FOR OWNER REQUIREMENTS FOUNDATION ACCEPTANCE",
+  "ownerDecision": "ACCEPTED",
+  "acceptedAt": "2026-07-24T22:00:00Z",
+  "acceptanceEvidence": "20260724T220000Z-APZQEP-ENG-020A-ACCEPTANCE.json",
+  "baselineVersion": "0.1.0-requirements-domain-foundation",
+  "packRoot": "docs/products/apzqep/requirements/domain-foundation/",
+  "packRootNote": "Filed under requirements/domain-foundation/ to preserve APZQEP-REQ-001 product requirements pack",
+  "repository": {
+    "package": "@apzhub/qep-requirements",
+    "version": "0.1.0",
+    "layers": [
+      "domain",
+      "application",
+      "infrastructure",
+      "presentation",
+      "shared",
+      "tests"
+    ],
+    "persistence": false,
+    "crud": false,
+    "restApis": false,
+    "graphql": false,
+    "databaseMigrations": false,
+    "eventBusImplementation": false,
+    "placeholderUi": true,
+    "placeholderText": "Requirements Module Coming Soon"
+  },
+  "validation": {
+    "pnpmInstall": true,
+    "typecheckQep": true,
+    "testQepRequirements": true,
+    "auditQepRequirementsFoundation": true,
+    "architectureBoundaries": true
+  },
+  "platformUnchanged": true,
+  "nextProgramme": "APZQEP-ENG-020B",
+  "nextProgrammeTitle": "Requirements Persistence & CRUD Foundation",
+  "nextProgrammeStatus": "AUTHORISED_NOT_STARTED"
+}

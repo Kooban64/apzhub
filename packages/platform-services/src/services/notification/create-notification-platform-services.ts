@@ -31,7 +31,7 @@ export type NotificationPlatformServicesBundle = {
   readonly readiness: {
     readonly notificationEnabled: true;
     readonly persistenceMode: "postgres" | "memory";
-    readonly deliveryEnabled: false;
+    readonly deliveryEnabled: boolean;
   };
   wrapWithPipeline(pipeline: RequestPipeline): NotificationPlatformGateway;
 };

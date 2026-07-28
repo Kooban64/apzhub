@@ -1,0 +1,52 @@
+{
+  "programme": "Platform-1.4-ENG-001B-P2",
+  "title": "Durable Notification Runtime Implementation – Phase 2 (Claim & Lease Engine)",
+  "classification": "ENGINEERING_IMPLEMENTATION",
+  "baseline": "Platform 1.4",
+  "parentProgramme": "Platform-1.4-ENG-001B",
+  "parentDesign": "Platform-1.4-ENG-001A",
+  "authoritativeAdr": "ADR-0073",
+  "timestamp": "2026-07-23T13:00:00Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_ACCEPTANCE",
+  "recommendation": "READY FOR OWNER PHASE 2 ACCEPTANCE",
+  "preconditions": "PASS",
+  "packages": {
+    "notification-delivery-persistence": "0.2.0",
+    "notification-contracts": "0.3.3"
+  },
+  "featureFlag": "APZHUB_NOTIFICATION_DURABLE_RUNTIME",
+  "featureFlagDefault": "OFF",
+  "runtimeBehaviourChanged": false,
+  "processLocalRuntimeUnchanged": true,
+  "deliveryServiceWiredToDurableStore": false,
+  "workerSkeletonImplemented": true,
+  "claimLogicImplemented": true,
+  "leaseEngineImplemented": true,
+  "dispatchImplemented": false,
+  "retryExecutionImplemented": false,
+  "deadLetterExecutionImplemented": false,
+  "manualReplayImplemented": false,
+  "runtimeActivation": false,
+  "smtp": false,
+  "emailSor": false,
+  "workflowExecute": false,
+  "fin001": false,
+  "websockets": false,
+  "quality": {
+    "build": "PASS",
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "formatCheck": "PASS",
+    "affectedVitest": "PASS",
+    "affectedVitestCount": 47,
+    "livePostgresIntegration": "NOT_RUN",
+    "fullMonorepoTest": "NOT_RUN",
+    "playwright": "NOT_RUN"
+  },
+  "documentationPack": "docs/engineering/platform-1.4-eng-001b-p2/",
+  "downstreamProgramme": {
+    "id": "Platform-1.4-ENG-001B-P3",
+    "status": "PROPOSED_BLOCKED"
+  },
+  "explicitStop": "Await Owner Phase 2 Acceptance"
+}

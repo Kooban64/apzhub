@@ -38,7 +38,7 @@ function ctx(overrides?: Partial<ServiceRequestContext>): ServiceRequestContext 
 
 describe("APZADMIN-002 administration platform services", () => {
   it("exports platform services version 0.26.1", () => {
-    expect(PLATFORM_SERVICES_VERSION).toBe("0.26.1");
+    expect(PLATFORM_SERVICES_VERSION).toBe("0.32.0");
   });
 
   it("registers admin permissions in the platform catalogue", () => {

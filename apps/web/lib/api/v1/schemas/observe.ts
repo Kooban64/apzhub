@@ -353,6 +353,27 @@ export const updateAlertStatesBodySchema = z
   })
   .strict();
 
+/** ADR-0070 Phase A — acknowledge / resolve / suppress */
+export const acknowledgeAlertStateBodySchema = z
+  .object({
+    note: z.string().min(1).max(512).optional(),
+  })
+  .strict();
+
+export const resolveAlertStateBodySchema = z
+  .object({
+    note: z.string().min(1).max(512).optional(),
+  })
+  .strict();
+
+export const suppressAlertStateBodySchema = z
+  .object({
+    reason: z.string().min(1).max(512).optional(),
+  })
+  .strict();
+
+export const evaluateAlertsBodySchema = z.object({}).strict();
+
 export const createDashboardDefinitionsBodySchema = z
   .object({
     key: z.string().min(1).max(256),

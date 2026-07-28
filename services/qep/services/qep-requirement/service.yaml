@@ -1,0 +1,27 @@
+manifestSchemaVersion: "1.0"
+id: qep-requirement
+name: Requirement Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: requirements
+  description: "Requirement Service placeholder for APZ QEP (APZQEP-ENG-010). No business implementation."
+  contractPackage: "@apzhub/qep-contracts"
+  contractVersion: "0.1.0"
+  owner: APZHUB
+  tags:
+    - qep
+    - stub
+
+dependencies:
+  platform: []
+  integrations: []
+
+integrations: []
+
+service:
+  category: requirements
+  status: stub
+
+permissions: []

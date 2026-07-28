@@ -1,0 +1,24 @@
+manifestSchemaVersion: "1.0"
+id: support-article-created
+name: Support Article Created
+version: 1.0.0
+kind: event
+
+metadata:
+  category: productivity
+  description: Emitted when an APZHUB Support article (note/reply) is created.
+
+event:
+  category: business
+  publisher: support-service
+  subscribers:
+    - notification:support.attention
+    - activity:support.activity
+    - audit:platform.audit
+  payload:
+    articleId: string
+    supportRequestId: string
+    articleType: string
+
+documentation:
+  eventKey: support.article.created

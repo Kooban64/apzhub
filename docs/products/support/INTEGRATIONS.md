@@ -12,7 +12,7 @@
 
 ## Integration summary
 
-`@apzhub/integration-zammad` **0.6.0** — Wave 2 closed.
+`@apzhub/integration-zammad` **0.8.0** — Wave 2 closed · R12-SUP-01 webhook ingress · R12-SUP-02 binary attachments (APZHUB-ENG-0004).
 
 ## Adapter rules
 

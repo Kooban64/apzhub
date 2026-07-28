@@ -9,15 +9,23 @@ import {
   type AppActivityTimelineContext,
 } from "./create-app-activity-timeline-context";
 
-/** Client session ActivityTimelineContext — shares Event Bus with EventNotificationContext. */
+export interface UseAppActivityTimelineContextOptions {
+  readonly userId?: string;
+  readonly tenantId?: string;
+}
+
+/** Client session ActivityTimelineContext — durable store when user/tenant scoped (OBS-LAW-02). */
 export function useAppActivityTimelineContext(
   eventNotificationContext: EventNotificationContext,
+  options: UseAppActivityTimelineContextOptions = {},
 ): AppActivityTimelineContext {
+  const { userId, tenantId } = options;
   return useMemo(
     () =>
       createAppActivityTimelineContext({
         eventBus: eventNotificationContext.eventBus,
+        persistenceScope: userId || tenantId ? { userId, tenantId } : undefined,
       }),
-    [eventNotificationContext.eventBus],
+    [eventNotificationContext.eventBus, userId, tenantId],
   );
 }

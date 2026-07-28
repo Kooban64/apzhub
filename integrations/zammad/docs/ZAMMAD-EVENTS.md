@@ -1,7 +1,7 @@
 # Zammad Events (`adapter.core.events`)
 
 **Milestone:** OSS-102-06  
-**Package:** `@apzhub/integration-zammad` **v0.6.0**  
+**Package:** `@apzhub/integration-zammad` **v0.7.0**  
 **Access:** `adapter.core.events` (`ZammadEventService`)
 
 ---
@@ -10,7 +10,7 @@
 
 Translate Zammad webhook payloads into **canonical Support integration events**.
 
-Does **not** publish to a Platform Event Bus. Does **not** receive HTTP webhooks.
+HTTP reception is owned by Platform ingress (`POST /api/v1/integrations/zammad/webhooks`, R12-SUP-01). The adapter translates verified payloads; Platform Services fan out Support catalogue domain events (notify/index path). Attachment webhook events are translated as metadata (R12-SUP-02); binary transfer uses the articles API.
 
 ```text
 adapter.core.events.translate(payload)

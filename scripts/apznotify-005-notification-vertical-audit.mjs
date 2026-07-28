@@ -144,8 +144,17 @@ scan(walk(join(ROOT, "apps/web/components/notifications")), [
   { rule: "workbench-no-persistence", pattern: /@apzhub\/notification-persistence/ },
   { rule: "workbench-no-event-bus", pattern: /\bEventBus\b|@apzhub\/event-bus/ },
   { rule: "workbench-no-delivery-methods", pattern: DELIVERY_METHOD },
-  { rule: "workbench-no-delivery-providers", pattern: DELIVERY_PROVIDER },
-  { rule: "workbench-no-realtime", pattern: /\bWebSocket\b|\bEventSource\b/ },
+  {
+    rule: "workbench-no-delivery-providers",
+    pattern: DELIVERY_PROVIDER,
+    // ENG-004 deferred copy may mention SMTP without implementing a provider
+    allow: (_path, line) => /deferred/i.test(line),
+  },
+  {
+    rule: "workbench-no-realtime",
+    pattern: /\bWebSocket\b/,
+    // ENG-003 SSE inbox uses EventSource (authorised); WebSocket remains forbidden
+  },
 ]);
 
 scan(
@@ -172,6 +181,7 @@ scan(
       pattern: /fetch\(|\/api\/v1\//,
       allow: (path, line) =>
         path.includes("notification-client.ts") ||
+        path.includes("notification-delivery-api.ts") ||
         path.includes("mock-") ||
         path.includes("routes.ts") ||
         /\/api\/v1\/notifications/.test(line) ||
@@ -302,7 +312,7 @@ scan(httpFiles, [
 for (const omitted of [
   "apps/web/app/api/v1/notifications/send",
   "apps/web/app/api/v1/notifications/deliver",
-  "apps/web/app/api/v1/notifications/providers",
+  // ENG-004 / Platform 1.4: providers + deliveries/delivery-* are authorised
   "apps/web/app/api/v1/notifications/email",
   "apps/web/app/api/v1/notifications/sms",
   "apps/web/app/api/v1/notifications/push",
@@ -317,7 +327,7 @@ for (const omitted of [
       file: omitted,
       line: 1,
       rule: "delivery-route-present",
-      detail: "Delivery/provider/worker route must not exist",
+      detail: "Unauthorised delivery/channel/worker route must not exist",
     });
   }
 }
@@ -356,9 +366,19 @@ forbidDeps(
 
 scan(walk(join(ROOT, "packages/platform-services/src/services/notification")), [
   { rule: "services-no-http", pattern: /apps\/web|next\/server|NextRequest/ },
-  { rule: "services-no-event-bus", pattern: /\bEventBus\b|@apzhub\/event-bus/ },
+  {
+    rule: "services-no-event-bus",
+    pattern: /\bEventBus\b|@apzhub\/event-bus/,
+    // Delivery plane EventBus port types authorised under ENG-004 / ENG-001B
+    allow: (path) => path.includes("/services/notification/delivery/"),
+  },
   { rule: "services-no-delivery-methods", pattern: DELIVERY_METHOD },
-  { rule: "services-no-delivery-providers", pattern: DELIVERY_PROVIDER },
+  {
+    rule: "services-no-delivery-providers",
+    pattern: DELIVERY_PROVIDER,
+    allow: (_path, line) =>
+      /deferred/i.test(line) || /services\/notification\/delivery\//.test(_path),
+  },
 ]);
 
 scan(walk(join(ROOT, "packages/notification-core/src")), [
@@ -445,8 +465,6 @@ for (const child of [
   }
   for (const forbidden of [
     "/notifications/send",
-    "/notifications/deliver",
-    "/notifications/providers",
     "/notifications/email",
     "/notifications/sms",
   ]) {
@@ -459,11 +477,20 @@ for (const child of [
       });
     }
   }
+  // Exact singular /deliver only — do not match /deliveries or /delivery-*
+  if (/\n {2}\/notifications\/deliver:/.test(openapi)) {
+    violations.push({
+      file: "docs/specs/APZHUB-Platform-OpenAPI-v1.yaml",
+      line: 1,
+      rule: "openapi-delivery-leak",
+      detail: "OpenAPI must not publish /notifications/deliver",
+    });
+  }
 }
 
 requirePackageVersion(
   "packages/notification-contracts/package.json",
-  "0.2.0",
+  "0.3.5",
   "version-notification-contracts",
 );
 requirePackageVersion(
@@ -478,12 +505,12 @@ requirePackageVersion(
 );
 requirePackageVersion(
   "packages/platform-services/package.json",
-  "0.26.1",
+  "0.32.0",
   "version-platform-services",
 );
 requirePackageVersion(
   "packages/platform-service-contracts/package.json",
-  "0.17.1",
+  "0.18.0",
   "version-platform-service-contracts",
 );
 

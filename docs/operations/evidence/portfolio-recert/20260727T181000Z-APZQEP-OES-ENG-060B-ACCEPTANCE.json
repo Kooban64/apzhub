@@ -1,0 +1,18 @@
+{
+  "id": "20260727T181000Z-APZQEP-OES-ENG-060B-ACCEPTANCE",
+  "timestamp": "2026-07-27T18:10:00Z",
+  "programme": "APZQEP-OES-ENG-060B",
+  "title": "Test Plans Infrastructure Engineering Specification",
+  "type": "owner-acceptance",
+  "decision": "ACCEPTED",
+  "approved": true,
+  "programmeClosed": true,
+  "baselined": true,
+  "productionCode": false,
+  "nextProgramme": "APZQEP-ENG-060B",
+  "architecturalObservation": "Reusable artefacts are patterns/contracts/conventions — not shared business components",
+  "documents": [
+    "docs/products/apzqep/test-plans/OES-ENG-060B/OWNER-ACCEPTANCE.md",
+    "docs/products/apzqep/test-plans/OES-ENG-060B/COMPLETE.md"
+  ]
+}
