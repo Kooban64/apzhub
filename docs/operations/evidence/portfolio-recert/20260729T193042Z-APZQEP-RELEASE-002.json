@@ -12,6 +12,8 @@
     "version": "1.0.1"
   },
   "tag": "apzqep-test-execution-v1.0.1",
+  "gitHead": "3c71852d523b462b8765c5b0bf81d3c8af8b76e5",
+  "workingTreeAtReleaseCommit": "clean",
   "priorProduction": {
     "version": "1.0.0",
     "tag": "apzqep-test-execution-v1.0.0"
