@@ -1,0 +1,26 @@
+# ACCESS-DECISION-MATRIX — APZQEP-REM-001
+
+Security Verification Matrix (L-02).
+
+| Scenario                        | Actor                         | Tenant Relationship | Evidence Relationship      | Expected Decision      | Actual Result                                          | Evidence                                                                       |
+| ------------------------------- | ----------------------------- | ------------------- | -------------------------- | ---------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| Explicit allow                  | Authenticated executor        | Same tenant         | Valid https URI            | allowed                | PASS — associate succeeds                              | `evidence-access-port.test.ts` · `evidence-access-enforcement.service.test.ts` |
+| Explicit deny                   | Authenticated executor        | Same tenant         | Valid URI + deny check     | denied                 | PASS — Forbidden + audit                               | enforcement test                                                               |
+| Missing / unconfigured check    | Authenticated executor        | Same tenant         | Valid URI                  | denied                 | PASS — `evidence_access_check_not_configured`          | port + enforcement tests                                                       |
+| Undefined check result          | Authenticated executor        | Same tenant         | Valid URI                  | indeterminate → deny   | PASS                                                   | port test                                                                      |
+| Null check result               | Authenticated executor        | Same tenant         | Valid URI                  | indeterminate → deny   | PASS                                                   | port test                                                                      |
+| Adapter throw / unavailable     | Authenticated executor        | Same tenant         | Valid URI                  | unavailable → deny     | PASS                                                   | port + enforcement tests                                                       |
+| Malformed URI                   | Authenticated executor        | Same tenant         | Invalid URI                | invalid_request        | PASS — ValidationError                                 | port test                                                                      |
+| Unsupported scheme (`file:`)    | Authenticated executor        | Same tenant         | file URI                   | denied                 | PASS                                                   | port test                                                                      |
+| Missing userId                  | Unauthenticated / empty actor | Same tenant         | Valid URI                  | denied                 | PASS                                                   | port test                                                                      |
+| Missing tenant                  | Authenticated                 | Empty tenant        | Valid URI                  | denied                 | PASS                                                   | port test                                                                      |
+| Insufficient role (read only)   | Reader                        | Same tenant         | Valid URI + allow port     | forbidden (permission) | PASS                                                   | enforcement test                                                               |
+| Cross-tenant get                | Executor of other tenant      | Cross-tenant        | Associated evidence exists | not found (null)       | PASS                                                   | enforcement test                                                               |
+| Baseline affirmative policy     | Authenticated                 | Same tenant         | Valid https URI            | allowed                | PASS                                                   | port test                                                                      |
+| Download action denied by check | Authenticated                 | Same tenant         | Valid URI                  | denied for download    | PASS                                                   | port test                                                                      |
+| Direct API associate            | Via handler → service         | Same tenant         | Server-enforced            | Same as application    | PASS — handler suite green; enforcement in application | `qep-test-execution.test.ts` (mocked service) + application tests              |
+| Workbench override              | UI client                     | N/A                 | Cannot grant access        | Server denies          | PASS by design — Workbench uses availableActions only  | Workbench available-actions tests                                              |
+
+## Default-allow residual
+
+**None.** Unconfigured port denies. Application always calls `assertAccessible`.

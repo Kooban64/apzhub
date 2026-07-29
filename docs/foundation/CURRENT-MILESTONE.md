@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-07-29  
-> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · Test Execution lifecycle **COMPLETE** (Limited Availability · **1.0.0**) · `APZQEP-LIFECYCLE-001` **IMPLEMENTED / AWAITING OWNER LIFECYCLE STANDARD DECISION** · Authorised next delivery: **Owner Lifecycle Standard Decision only**.
+> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · Lifecycle Standard **v1.0 BASELINED** · FREEZE-002 **CLOSED** · `APZQEP-RELEASE-002` **IMPLEMENTED / AWAITING OWNER PATCH PRODUCTION RELEASE DECISION** (package **1.0.1** · LIMITED_AVAILABILITY) · Authorised next delivery: **Owner Patch Production Release Decision only**.
 
 ---
 
@@ -77,13 +77,47 @@
 - Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/test-execution/RELEASE-001/OWNER-ACCEPTANCE.md)
 - Evidence: `20260729T174800Z-APZQEP-RELEASE-001-ACCEPTANCE.json`
 
-**APZQEP-LIFECYCLE-001 — APZ Engineering Lifecycle Standard v1.0 — AWAITING OWNER DECISION:**
+**APZQEP-LIFECYCLE-001 — APZ Engineering Lifecycle Standard v1.0 — CLOSED:**
 
 - Pack: [LIFECYCLE-001/](../products/apzqep/LIFECYCLE-001/README.md)
 - Suite: [lifecycle-standard/v1.0/](../engineering/lifecycle-standard/v1.0/README.md)
-- Status: **IMPLEMENTED / AWAITING OWNER LIFECYCLE STANDARD DECISION**
-- Evidence: `20260729T175000Z-APZQEP-LIFECYCLE-001.json`
-- Stop: Do **not** apply the standard to another product without a separate Owner Instruction.
+- Status: **ACCEPTED / APPROVED / APZ ENGINEERING LIFECYCLE STANDARD v1.0 BASELINED / CLOSED**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/LIFECYCLE-001/OWNER-ACCEPTANCE.md)
+- Evidence: `20260729T182300Z-APZQEP-LIFECYCLE-001-ACCEPTANCE.json`
+
+**APZQEP-REM-001 — L-02 Security Remediation — CLOSED:**
+
+- Pack: [test-execution/REM-001/](../products/apzqep/test-execution/REM-001/README.md)
+- Status: **ACCEPTED / APPROVED / SECURITY REMEDIATION BASELINED / CLOSED**
+- Candidate: `@apzhub/qep-test-execution` **1.0.1-rc.1**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/test-execution/REM-001/OWNER-ACCEPTANCE.md)
+- Evidence: `20260729T190527Z-APZQEP-REM-001-ACCEPTANCE.json`
+
+**APZQEP-CERT-002 — Delta Security Certification — CLOSED:**
+
+- Pack: [test-execution/CERT-002/](../products/apzqep/test-execution/CERT-002/README.md)
+- Status: **ACCEPTED / APPROVED / DELTA CERTIFICATION BASELINED / CLOSED**
+- Verdict: **CERTIFIED_WITH_LIMITATIONS**
+- L-02: **CLOSED** · RA-02: **RETIRED**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/test-execution/CERT-002/OWNER-ACCEPTANCE.md)
+- Evidence: `20260729T192222Z-APZQEP-CERT-002-ACCEPTANCE.json`
+
+**APZQEP-FREEZE-002 — Patch Production Freeze — CLOSED:**
+
+- Pack: [test-execution/FREEZE-002/](../products/apzqep/test-execution/FREEZE-002/README.md)
+- Status: **ACCEPTED / APPROVED / PATCH PRODUCTION BASELINE FROZEN / CLOSED**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/test-execution/FREEZE-002/OWNER-ACCEPTANCE.md)
+- Evidence: `20260729T193042Z-APZQEP-FREEZE-002-ACCEPTANCE.json`
+
+**APZQEP-RELEASE-002 — Patch Production Release — AWAITING OWNER DECISION:**
+
+- Pack: [test-execution/RELEASE-002/](../products/apzqep/test-execution/RELEASE-002/README.md)
+- Status: **IMPLEMENTED / AWAITING OWNER PATCH PRODUCTION RELEASE DECISION**
+- Package: `@apzhub/qep-test-execution` **1.0.1** · tag `apzqep-test-execution-v1.0.1`
+- Availability: **LIMITED_AVAILABILITY_APPROVED**
+- GA-001 plan: [GA-001-PLAN/](../products/apzqep/test-execution/GA-001-PLAN/README.md) — **NOT AUTHORISED**
+- Evidence: `20260729T193042Z-APZQEP-RELEASE-002.json`
+- Stop: Do **not** deploy unrestricted GA, execute GA-001, or begin a new capability without a separate Owner Instruction.
 
 **APZQEP-GOV-ENG-BUILD-001 — Engineering Build Contract & Wave Engineering — CLOSED:**
 
@@ -135,7 +169,7 @@
 - Evidence: `20260728T102844Z-APZQEP-CONSTITUTION-1.0.0-RATIFICATION.json`
 - Nature: documentation only — **no Wave 2 engineering**
 
-**Stop condition:** Foundation is immutable history. Test Execution lifecycle is **COMPLETE** (Limited Availability). LIFECYCLE-001 awaits Owner Decision. Do **not** apply the Lifecycle Standard to another product without further Owner Instructions. Authorised next delivery: **Owner Lifecycle Standard Decision only**.
+**Stop condition:** Foundation is immutable history. Lifecycle Standard v1.0 is **BASELINED**. FREEZE-002 is **CLOSED**. RELEASE-002 awaits Owner Patch Production Release Decision for **1.0.1** under Limited Availability. Do **not** execute GA-001 or unrestricted GA without further Owner Instructions. Authorised next delivery: **Owner Patch Production Release Decision only**.
 
 **APZQEP-PORTFOLIO-001 — Foundation Completion & Portfolio Baseline — CLOSED:**
 

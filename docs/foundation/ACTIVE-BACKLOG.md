@@ -6,7 +6,7 @@
 > **Related documents:** [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [docs/backlog/](../backlog/)  
 > **Reading order:** When identifying approved work  
 > **Last updated:** 2026-07-29  
-> **Current status:** [Standing Programme Record](../products/apzqep/STANDING-PROGRAMME-RECORD.md) **IN FORCE**; Foundation permanently closed; OM **1.1.0 IN FORCE**; Test Execution lifecycle **COMPLETE** (Limited Availability · **1.0.0**); **APZQEP-LIFECYCLE-001** **AWAITING OWNER LIFECYCLE STANDARD DECISION**; Authorised next delivery: **Owner Lifecycle Standard Decision only**
+> **Current status:** [Standing Programme Record](../products/apzqep/STANDING-PROGRAMME-RECORD.md) **IN FORCE**; Foundation permanently closed; OM **1.1.0 IN FORCE**; Lifecycle Standard **v1.0 BASELINED**; FREEZE-002 **CLOSED**; **APZQEP-RELEASE-002** **AWAITING OWNER PATCH PRODUCTION RELEASE DECISION** (package **1.0.1** · LIMITED_AVAILABILITY); Authorised next delivery: **Owner Patch Production Release Decision only**
 
 ---
 

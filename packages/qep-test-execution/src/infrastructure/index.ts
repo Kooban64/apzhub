@@ -40,6 +40,8 @@ export {
 } from "./adapters/source-resolution-port";
 export {
   createEvidenceAccessPort,
+  createBaselineEvidenceAccessCheck,
+  validateEvidenceAccessRequest,
   type EvidenceAccessCheckFn,
 } from "./adapters/evidence-access-port";
 export { createSystemClockPort, createUuidIdPort } from "./adapters/clock-id-ports";

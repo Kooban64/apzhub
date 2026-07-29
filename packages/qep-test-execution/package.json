@@ -1,9 +1,9 @@
 {
   "name": "@apzhub/qep-test-execution",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
-  "description": "APZ QEP Test Execution — Domain + Application + Infrastructure + Workbench. Production baseline 1.0.0 (APZQEP-RELEASE-001). Governed by APZQEP-ARCH-015 + APZQEP-OES-ENG-090A + Engineering Build Contract. Class PRODUCTION_READY_WITH_LIMITATIONS.",
+  "description": "APZ QEP Test Execution — Domain + Application + Infrastructure + Workbench. Production patch baseline 1.0.1 (APZQEP-RELEASE-002). L-02 CLOSED. LIMITED_AVAILABILITY_APPROVED. Security remediation verified under CERT-002.",
   "exports": {
     ".": "./src/index.ts",
     "./domain": "./src/domain/index.ts",

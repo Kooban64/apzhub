@@ -1,0 +1,97 @@
+{
+  "programmeId": "APZQEP-CERT-002",
+  "title": "Delta Security Certification — L-02 Evidence Access Remediation",
+  "status": "IMPLEMENTED_AWAITING_OWNER_DELTA_CERTIFICATION_DECISION",
+  "timestampUtc": "20260729T191210Z",
+  "candidate": {
+    "package": "@apzhub/qep-test-execution",
+    "version": "1.0.1-rc.1"
+  },
+  "productionBaseline": {
+    "package": "@apzhub/qep-test-execution",
+    "version": "1.0.0",
+    "availability": "LIMITED_AVAILABILITY_APPROVED"
+  },
+  "verdict": "CERTIFIED_WITH_LIMITATIONS",
+  "recommendations": {
+    "L02": "CLOSE",
+    "RA02": "RETIRE",
+    "GA": "LIMITED_AVAILABILITY_REMAINS",
+    "patchRelease": "PROCEED_TO_PATCH_FREEZE"
+  },
+  "defects": {
+    "critical": 0,
+    "high": 0,
+    "medium": 2,
+    "low": 2
+  },
+  "validation": {
+    "typecheck": {
+      "result": "PASS",
+      "exitCode": 0,
+      "startUtc": "2026-07-29T19:05:27Z",
+      "endUtc": "2026-07-29T19:05:41Z"
+    },
+    "lint": {
+      "result": "PASS",
+      "exitCode": 0,
+      "startUtc": "2026-07-29T19:05:41Z",
+      "endUtc": "2026-07-29T19:05:43Z"
+    },
+    "packageTests": {
+      "result": "PASS",
+      "count": "77/77",
+      "exitCode": 0,
+      "startUtc": "2026-07-29T19:05:43Z",
+      "endUtc": "2026-07-29T19:05:48Z"
+    },
+    "apiWorkbenchPlatformTests": {
+      "result": "PASS",
+      "count": "33/33",
+      "exitCode": 0,
+      "startUtc": "2026-07-29T19:06:07Z",
+      "endUtc": "2026-07-29T19:06:21Z"
+    },
+    "securityTests": {
+      "result": "PASS",
+      "notes": "15 port + 6 enforcement included in package suite"
+    },
+    "prettierCheck": { "result": "STYLE_DRIFT", "files": 5, "severity": "Low" },
+    "playwright": {
+      "result": "ATTEMPTED_PARTIAL",
+      "exitCode": 1,
+      "passed": 2,
+      "failed": 8,
+      "total": 10,
+      "startUtc": "2026-07-29T19:08:07Z",
+      "endUtc": "2026-07-29T19:12:10Z",
+      "limitation": "Authenticated journeys timed out; spec mocks evidence-references 201; not L-02 deny proof"
+    },
+    "build": { "result": "N/A_NO_PACKAGE_BUILD_SCRIPT", "typecheckProxy": "PASS" }
+  },
+  "securityVerification": {
+    "defaultDeny": "PASS",
+    "explicitAllow": "PASS",
+    "crossTenant": "PASS",
+    "directApiBypass": "PASS",
+    "dependencyFailure": "PASS",
+    "audit": "PASS"
+  },
+  "compatibility": "COMPATIBLE_WITH_DOCUMENTED_CHANGE",
+  "productEngineering": "NONE",
+  "parallelPlanning": {
+    "programme": "APZQEP-FREEZE-002",
+    "status": "PLANNING_ONLY_NOT_AUTHORISED",
+    "path": "docs/products/apzqep/test-execution/FREEZE-002-PLAN/"
+  },
+  "documentationPack": "docs/products/apzqep/test-execution/CERT-002/",
+  "notDelivered": [
+    "Authoritative L-02 closure",
+    "Authoritative RA-02 retirement",
+    "FREEZE-002 execution",
+    "1.0.1 promotion",
+    "Deployment",
+    "Unrestricted GA"
+  ],
+  "predecessorAcceptance": "20260729T190527Z-APZQEP-REM-001-ACCEPTANCE.json"
+}

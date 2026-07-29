@@ -3,10 +3,10 @@
  * Domain (ENG-100B) + Application (ENG-100C) + Infrastructure (ENG-100D).
  */
 
-export const QEP_TEST_EXECUTION_VERSION = "1.0.0" as const;
+export const QEP_TEST_EXECUTION_VERSION = "1.0.1" as const;
 
 export const QEP_TEST_EXECUTION_PROGRAMME =
-  "APZQEP-RELEASE-001 — PRODUCTION BASELINE 1.0.0" as const;
+  "APZQEP-RELEASE-002 — PRODUCTION PATCH BASELINE 1.0.1" as const;
 
 export { QEP_TEST_EXECUTION_DOMAIN_STATUS, QEP_TEST_EXECUTION_LAYER } from "./domain";
 export * from "./domain/test-execution";
@@ -26,6 +26,8 @@ export {
   type ClockPort,
   type CreateExecutionCommand,
   type EventOutboxPort,
+  type EvidenceAccessAction,
+  type EvidenceAccessDecision,
   type EvidenceAccessPort,
   type ExecutionAuditEntry,
   type ExecutionCommandService,
@@ -73,9 +75,13 @@ export {
 
 export { QEP_TEST_EXECUTION_INFRASTRUCTURE_STATUS } from "./infrastructure";
 export {
+  createBaselineEvidenceAccessCheck,
+  createEvidenceAccessPort,
   createQepTestExecutionPersistence,
   createQepTestExecutionPersistenceForProduction,
   createQepTestExecutionPersistenceForTest,
+  validateEvidenceAccessRequest,
+  type EvidenceAccessCheckFn,
   type QepTestExecutionPorts,
   type QepTestExecutionPortOverrides,
   type CreateQepTestExecutionPersistenceInput,

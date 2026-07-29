@@ -38,8 +38,8 @@ export type CreateTestExecutionApplicationServicesInput = {
   readonly clock: ClockPort;
   readonly ids: IdPort;
   readonly search?: SearchPublicationPort;
-  /** Optional — OES PART-04 evidence accessibility check (ENG-100D). */
-  readonly evidenceAccess?: EvidenceAccessPort;
+  /** Required — APZQEP-REM-001 fail-closed evidence access (L-02). */
+  readonly evidenceAccess: EvidenceAccessPort;
   readonly runInTransaction?: <T>(work: () => Promise<T>) => Promise<T>;
   readonly policy?: DomainPolicyConfig;
   readonly allocateNumber?: (

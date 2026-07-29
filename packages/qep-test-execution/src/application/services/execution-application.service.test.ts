@@ -5,6 +5,7 @@ import type { ExecutionRequestContext } from "../context";
 import { EXECUTION_PERMISSIONS } from "../permissions";
 import { createTestExecutionApplicationServices } from "./create-application-services";
 import {
+  createAllowEvidencePort,
   createFixedClockPort,
   createInMemoryAuditPort,
   createInMemoryHistoryStore,
@@ -45,6 +46,7 @@ function createHarness() {
     audit,
     outbox,
     search: createNoopSearchPort(),
+    evidenceAccess: createAllowEvidencePort(),
     clock: createFixedClockPort(),
     ids: createSequenceIdPort(),
     allocateNumber: () => "TE-APP-001",

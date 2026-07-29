@@ -1,45 +1,55 @@
 # Standing Programme Record — APZQEP
 
-| Field                       | Value                                                                                                    |
-| --------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Document                    | Standing Programme Record                                                                                |
-| Date                        | 2026-07-29                                                                                               |
-| Status                      | **IN FORCE — OFFICIAL STANDING STATE**                                                                   |
-| Build Contract              | **IN FORCE**                                                                                             |
-| Test Execution lifecycle    | **COMPLETE** (ARCH → ES → Waves → ECR → CERT → FREEZE → RELEASE)                                         |
-| Test Execution baseline     | `@apzhub/qep-test-execution` **1.0.0** · tag `apzqep-test-execution-v1.0.0`                              |
-| Test Execution availability | **LIMITED_AVAILABILITY_APPROVED** (unrestricted GA blocked on L-02)                                      |
-| LIFECYCLE-001               | [LIFECYCLE-001/](./LIFECYCLE-001/README.md) **IMPLEMENTED / AWAITING OWNER LIFECYCLE STANDARD DECISION** |
+| Field                         | Value                                                                                                                                    |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Document                      | Standing Programme Record                                                                                                                |
+| Date                          | 2026-07-29                                                                                                                               |
+| Status                        | **IN FORCE — OFFICIAL STANDING STATE**                                                                                                   |
+| Lifecycle Standard            | **v1.0 BASELINED** (greenfield + post-release maintenance proven)                                                                        |
+| Test Execution production     | `@apzhub/qep-test-execution` **1.0.1** (patch; awaiting Owner RELEASE-002 acceptance)                                                    |
+| Prior baseline                | **1.0.0** · tag `apzqep-test-execution-v1.0.0`                                                                                           |
+| Patch tag (local)             | `apzqep-test-execution-v1.0.1`                                                                                                           |
+| Availability                  | **LIMITED_AVAILABILITY_APPROVED**                                                                                                        |
+| L-02                          | **CLOSED**                                                                                                                               |
+| RA-02                         | **RETIRED**                                                                                                                              |
+| Security readiness            | **APPROVED**                                                                                                                             |
+| Operational browser readiness | **PARTIALLY VERIFIED** (L-OP-01)                                                                                                         |
+| FREEZE-002                    | **ACCEPTED / CLOSED**                                                                                                                    |
+| RELEASE-002                   | [test-execution/RELEASE-002/](./test-execution/RELEASE-002/README.md) **IMPLEMENTED / AWAITING OWNER PATCH PRODUCTION RELEASE DECISION** |
+| Unrestricted GA               | **NOT APPROVED**                                                                                                                         |
 
 ### Default premise
 
-- Test Execution product lifecycle is **complete** at Limited Availability.
-- Unrestricted GA requires separate Owner authorisation after L-02 remediation.
-- **APZ Engineering Lifecycle Standard v1.0** documentation suite is implemented pending Owner Decision.
-- Do **not** apply the Lifecycle Standard to another product without a new Owner Directive.
+- Lifecycle Standard proven for initial delivery **and** controlled maintenance.
+- Prefer using the proven standard to accelerate next capabilities over adding governance.
+- Unrestricted GA requires separate **APZQEP-GA-001** (planning only).
 - Progression only via explicit Owner authorisation.
 
 ---
 
-## Expansion — Lifecycle Standard position
+## Current position
 
 ```text
-Test Execution capability lifecycle
-✅ COMPLETE (Limited Availability)
+APZQEP-FREEZE-002
+✅ CLOSED
 
-APZ Engineering Lifecycle Standard v1.0 (APZQEP-LIFECYCLE-001)
-⏳ IMPLEMENTED / AWAITING OWNER LIFECYCLE STANDARD DECISION
-Deliverable: docs/engineering/lifecycle-standard/v1.0/
+APZQEP-RELEASE-002
+⏳ IMPLEMENTED / AWAITING OWNER PATCH PRODUCTION RELEASE DECISION
+Package: 1.0.1
+Availability: LIMITED_AVAILABILITY_APPROVED
 
-Application to next product
-⏸ NOT AUTHORISED
+APZQEP-GA-001
+⏸ PLANNING ONLY — NOT AUTHORISED
+
+Unrestricted GA
+❌ NOT APPROVED
 ```
 
 ---
 
 ## Authorised next delivery
 
-**Owner Lifecycle Standard Decision on APZQEP-LIFECYCLE-001 only.**
+**Owner Patch Production Release Decision on APZQEP-RELEASE-002 only.**
 
 ---
 
@@ -49,9 +59,10 @@ Application to next product
 STANDING PROGRAMME RECORD
 IN FORCE
 
-TEST EXECUTION = LIFECYCLE COMPLETE (LIMITED AVAILABILITY)
-APZQEP-LIFECYCLE-001 = IMPLEMENTED / AWAITING OWNER DECISION
+FREEZE-002 = CLOSED
+RELEASE-002 = AWAITING OWNER DECISION
+GA-001 = PLANNING ONLY / NOT AUTHORISED
+UNRESTRICTED GA = NOT APPROVED
 
-NO PRODUCT APPLICATION OF STANDARD AUTHORISED
-AUTHORISED NEXT DELIVERY = OWNER LIFECYCLE STANDARD DECISION ONLY
+AUTHORISED NEXT DELIVERY = OWNER PATCH PRODUCTION RELEASE DECISION ONLY
 ```

@@ -15,6 +15,8 @@ export type {
   AuditPort,
   ClockPort,
   EventOutboxPort,
+  EvidenceAccessAction,
+  EvidenceAccessDecision,
   EvidenceAccessPort,
   ExecutionAuditEntry,
   ExecutionHistoryStore,
@@ -59,6 +61,7 @@ export {
 
 export {
   createAllowEvidencePort,
+  createDenyEvidencePort,
   createFixedClockPort,
   createInMemoryAuditPort,
   createInMemoryHistoryStore,

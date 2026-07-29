@@ -6,7 +6,6 @@ import {
   ExecutionConcurrencyError,
   ExecutionForbiddenError,
 } from "../../shared/errors";
-import type { ExecutionRequestContext } from "../context";
 import { EXECUTION_PERMISSIONS } from "../permissions";
 import type {
   AuditPort,
@@ -243,11 +242,33 @@ export function createNoopSearchPort(): SearchPublicationPort {
   };
 }
 
+/** Explicit allow — test harness only. Production MUST NOT use this as a default. */
 export function createAllowEvidencePort(): EvidenceAccessPort {
   return {
     portId: "EvidenceAccessPort",
-    async assertAccessible(_ctx: ExecutionRequestContext, _uri: string) {
-      /* Application Wave: accessibility enforced in ENG-100D adapters */
+    async evaluateAccess() {
+      return { outcome: "allowed", reason: "test_explicit_allow" };
+    },
+    async assertAccessible() {
+      /* Explicit test allow */
+    },
+  };
+}
+
+/** Explicit deny — security tests. */
+export function createDenyEvidencePort(): EvidenceAccessPort {
+  return {
+    portId: "EvidenceAccessPort",
+    async evaluateAccess() {
+      return { outcome: "denied", reason: "test_explicit_deny" };
+    },
+    async assertAccessible() {
+      throw new ExecutionForbiddenError(
+        "Evidence is not accessible to the current user",
+        {
+          reason: "test_explicit_deny",
+        },
+      );
     },
   };
 }

@@ -1,0 +1,8 @@
+{
+  "programmeId": "APZQEP-FREEZE-002",
+  "decision": "ACCEPTED_APPROVED_PATCH_PRODUCTION_BASELINE_FROZEN_CLOSED",
+  "timestampUtc": "20260729T193042Z",
+  "candidate": "@apzhub/qep-test-execution@1.0.1-rc.1",
+  "nextProgramme": "APZQEP-RELEASE-002",
+  "acceptanceDocument": "docs/products/apzqep/test-execution/FREEZE-002/OWNER-ACCEPTANCE.md"
+}

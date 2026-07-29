@@ -1,5 +1,78 @@
 # APZ QEP — Changelog
 
+## 2026-07-29 — APZQEP-RELEASE-002 Patch Production Release · AWAITING OWNER DECISION
+
+- **APZQEP-FREEZE-002** Owner Decision — **ACCEPTED / PATCH PRODUCTION BASELINE FROZEN / CLOSED** (`20260729T193042Z-APZQEP-FREEZE-002-ACCEPTANCE.json`)
+- **APZQEP-RELEASE-002** — Patch Production Release — **IMPLEMENTED / AWAITING OWNER PATCH PRODUCTION RELEASE DECISION**
+- Version promotion: `1.0.1-rc.1` → **`@apzhub/qep-test-execution` 1.0.1**
+- Git tag (local): `apzqep-test-execution-v1.0.1`
+- Availability: **LIMITED_AVAILABILITY_APPROVED** (security verified; browser readiness L-OP-01 holds unrestricted GA)
+- Pack: [test-execution/RELEASE-002/](./test-execution/RELEASE-002/README.md) · Evidence `20260729T193042Z-APZQEP-RELEASE-002.json`
+- Release pack: [docs/releases/apzqep/test-execution/1.0.1/](../../releases/apzqep/test-execution/1.0.1/README.md)
+- Parallel planning: [test-execution/GA-001-PLAN/](./test-execution/GA-001-PLAN/README.md) — **NOT AUTHORISED**
+- Stop: Do **not** approve unrestricted GA or execute GA-001 without further Owner Instruction
+
+## 2026-07-29 — APZQEP-FREEZE-002 Patch Production Freeze · ACCEPTED / CLOSED
+
+- Owner Decision — **ACCEPTED / APPROVED / PATCH PRODUCTION BASELINE FROZEN / CLOSED**
+- Candidate **1.0.1-rc.1** frozen for patch release
+- Acceptance evidence: `20260729T193042Z-APZQEP-FREEZE-002-ACCEPTANCE.json`
+
+## 2026-07-29 — APZQEP-FREEZE-002 Patch Production Freeze · AWAITING OWNER DECISION
+
+- **APZQEP-CERT-002** Owner Decision — **ACCEPTED / DELTA CERTIFICATION BASELINED / CLOSED** (`20260729T192222Z-APZQEP-CERT-002-ACCEPTANCE.json`)
+- L-02 **CLOSED** · RA-02 **RETIRED** · Security Readiness **APPROVED** · Browser readiness **PARTIALLY VERIFIED**
+- **APZQEP-FREEZE-002** — Patch Production Freeze — **IMPLEMENTED / AWAITING OWNER PATCH PRODUCTION FREEZE DECISION**
+- Candidate: `@apzhub/qep-test-execution` **1.0.1-rc.1** · Recommendation: **PROCEED TO PATCH PRODUCTION RELEASE**
+- Pack: [test-execution/FREEZE-002/](./test-execution/FREEZE-002/README.md) · Evidence `20260729T192222Z-APZQEP-FREEZE-002.json`
+- Parallel planning: [test-execution/RELEASE-002-PLAN/](./test-execution/RELEASE-002-PLAN/README.md) — **NOT AUTHORISED**
+- Availability: **LIMITED_AVAILABILITY** remains (GA hold is operational browser readiness, not L-02)
+- Stop: Do **not** deploy, publish, execute RELEASE-002, or approve unrestricted GA without further Owner Instruction
+
+## 2026-07-29 — APZQEP-CERT-002 Delta Security Certification · ACCEPTED / CLOSED
+
+- Owner Decision — **ACCEPTED / APPROVED / DELTA CERTIFICATION BASELINED / CLOSED**
+- Verdict **CERTIFIED_WITH_LIMITATIONS** accepted
+- L-02 **CLOSED** · RA-02 **RETIRED**
+- Acceptance evidence: `20260729T192222Z-APZQEP-CERT-002-ACCEPTANCE.json`
+
+## 2026-07-29 — APZQEP-CERT-002 Delta Security Certification · AWAITING OWNER DECISION
+
+- **APZQEP-REM-001** Owner Decision — **ACCEPTED / SECURITY REMEDIATION BASELINED / CLOSED** (`20260729T190527Z-APZQEP-REM-001-ACCEPTANCE.json`)
+- **APZQEP-CERT-002** — Delta Security Certification — **IMPLEMENTED / AWAITING OWNER DELTA CERTIFICATION DECISION**
+- Recommended verdict: **CERTIFIED_WITH_LIMITATIONS**
+- Recommendations: L-02 **CLOSE** · RA-02 **RETIRE** · Patch **PROCEED_TO_PATCH_FREEZE** · GA **LIMITED_AVAILABILITY_REMAINS**
+- Pack: [test-execution/CERT-002/](./test-execution/CERT-002/README.md) · Evidence `20260729T191210Z-APZQEP-CERT-002.json`
+- Parallel planning: [test-execution/FREEZE-002-PLAN/](./test-execution/FREEZE-002-PLAN/README.md) — **NOT AUTHORISED**
+- Stop: Do **not** close L-02/RA-02 authoritatively, execute FREEZE-002, promote 1.0.1, deploy, or approve unrestricted GA without further Owner Instruction
+
+## 2026-07-29 — APZQEP-REM-001 L-02 Security Remediation · ACCEPTED / CLOSED
+
+- Owner Decision — **ACCEPTED / APPROVED / SECURITY REMEDIATION BASELINED / CLOSED**
+- Candidate `@apzhub/qep-test-execution` **1.0.1-rc.1** accepted as CERT-002 input
+- L-02 remained **REMEDIATED_PENDING_VERIFICATION** at REM close (pending CERT-002)
+- Acceptance evidence: `20260729T190527Z-APZQEP-REM-001-ACCEPTANCE.json`
+
+## 2026-07-29 — APZQEP-REM-001 L-02 Security Remediation · IMPLEMENTED / AWAITING OWNER DECISION
+
+- **APZQEP-LIFECYCLE-001** Owner Decision — **ACCEPTED / APZ ENGINEERING LIFECYCLE STANDARD v1.0 BASELINED / CLOSED** (`20260729T182300Z-APZQEP-LIFECYCLE-001-ACCEPTANCE.json`)
+- **APZQEP-REM-001** — EvidenceAccessPort default-deny remediation — **IMPLEMENTED / AWAITING OWNER SECURITY REMEDIATION DECISION**
+- Candidate: `@apzhub/qep-test-execution` **1.0.1-rc.1** (production baseline remains **1.0.0**)
+- L-02 disposition: **REMEDIATED_PENDING_VERIFICATION** (RA-02 remains binding)
+- Pack: [test-execution/REM-001/](./test-execution/REM-001/README.md) · Evidence `20260729T182830Z-APZQEP-REM-001.json`
+- Parallel planning: [test-execution/CERT-002-PLAN/](./test-execution/CERT-002-PLAN/README.md) — **NOT AUTHORISED**
+- Stop: Do **not** execute CERT-002, close L-02, promote final 1.0.1, or approve unrestricted GA without further Owner Instruction
+
+## 2026-07-29 — APZQEP-LIFECYCLE-001 Lifecycle Standard v1.0 · ACCEPTED / BASELINED / CLOSED
+
+- **APZQEP-RELEASE-001** Owner Decision — **ACCEPTED / PRODUCTION RELEASE BASELINED / CLOSED** (`20260729T174800Z-APZQEP-RELEASE-001-ACCEPTANCE.json`)
+- Test Execution lifecycle **COMPLETE** · baseline `@apzhub/qep-test-execution` **1.0.0** · **LIMITED_AVAILABILITY_APPROVED**
+- **APZQEP-LIFECYCLE-001** — APZ Engineering Lifecycle Standard v1.0 — **ACCEPTED / APPROVED / BASELINED / CLOSED**
+- Suite: [docs/engineering/lifecycle-standard/v1.0/](../../engineering/lifecycle-standard/v1.0/README.md)
+- Pack: [LIFECYCLE-001/](./LIFECYCLE-001/README.md) · Evidence `20260729T175000Z-APZQEP-LIFECYCLE-001.json` · Acceptance `20260729T182300Z-APZQEP-LIFECYCLE-001-ACCEPTANCE.json`
+- Includes: stages, Waves 1–5, Build Contract (continuous evidence mandatory), templates, Cursor directives, Owner forms
+- Effect: Future APZOR engineering programmes adopt this standard unless Owner exception applies
+
 ## 2026-07-29 — APZQEP-LIFECYCLE-001 Lifecycle Standard v1.0 · IMPLEMENTED / AWAITING OWNER DECISION
 
 - **APZQEP-RELEASE-001** Owner Decision — **ACCEPTED / PRODUCTION RELEASE BASELINED / CLOSED** (`20260729T174800Z-APZQEP-RELEASE-001-ACCEPTANCE.json`)

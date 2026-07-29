@@ -1,82 +1,52 @@
-# OWNER ACCEPTANCE — APZQEP-LIFECYCLE-001
+# OWNER LIFECYCLE STANDARD DECISION
 
-| Item          | Value                                         |
-| ------------- | --------------------------------------------- |
-| Programme     | **APZQEP-LIFECYCLE-001**                      |
-| Deliverable   | APZ Engineering Lifecycle Standard **v1.0.0** |
-| Path          | `docs/engineering/lifecycle-standard/v1.0/`   |
-| Status        | **PENDING OWNER ACCEPTANCE**                  |
-| Template date | 2026-07-29                                    |
+**Programme:** APZQEP-LIFECYCLE-001  
+**Programme Type:** Engineering Governance Standardisation  
+**Date:** 2026-07-29  
+**Deliverable:** `docs/engineering/lifecycle-standard/v1.0/`  
+**Evidence (implementation):** `docs/operations/evidence/portfolio-recert/20260729T175000Z-APZQEP-LIFECYCLE-001.json`  
+**Evidence (acceptance):** `docs/operations/evidence/portfolio-recert/20260729T182300Z-APZQEP-LIFECYCLE-001-ACCEPTANCE.json`
 
----
+## Decision
 
-## Decision (Owner completes)
+**ACCEPTED**
 
-**PENDING**
+**APPROVED**
 
-<!-- Owner selects exactly one outcome and replaces PENDING above.
+**APZ ENGINEERING LIFECYCLE STANDARD v1.0 BASELINED**
 
-ACCEPTED
+**PROGRAMME CLOSED**
 
-APPROVED
+## Assessment
 
-LIFECYCLE STANDARD v1.0.0 BASELINED
+| Assessment Area                        | Result  |
+| -------------------------------------- | ------- |
+| Product-agnostic lifecycle standard    | ✅ PASS |
+| Architecture through Release lifecycle | ✅ PASS |
+| GA, Maintenance and End-of-Life stages | ✅ PASS |
+| Engineering Waves 1–5                  | ✅ PASS |
+| Engineering Build Contract             | ✅ PASS |
+| Continuous evidence requirement        | ✅ PASS |
+| Owner governance templates             | ✅ PASS |
+| Cursor directive library               | ✅ PASS |
+| Repository and release standards       | ✅ PASS |
+| Test Execution provenance              | ✅ PASS |
+| Product engineering performed          | ✅ NONE |
 
-PROGRAMME CLOSED
+## Effect
 
-— or —
+All future APZOR engineering programmes **SHALL** adopt this standard unless an explicit Owner-approved exception applies.
 
-RETURN FOR REVISION
-(conditions: …)
+## Concurrent authorisation
 
-— or —
-
-REJECTED
-(reason: …)
-
--->
-
----
-
-## Acceptance checklist (Owner)
-
-| Check                                                                                     | Result (Owner) |
-| ----------------------------------------------------------------------------------------- | -------------- |
-| Suite is product-agnostic and suitable for all APZOR products                             | ☐              |
-| Stage sequence ARCH→ES→Waves→ECR→CERT→FREEZE→RELEASE→GA/MAINT/EOL is correct              | ☐              |
-| Continuous evidence is mandatory in the Build Contract                                    | ☐              |
-| Related IN FORCE OES Build Contract / OES-003 are correctly referenced                    | ☐              |
-| Wave 01–05 definitions include objectives, scope, prohibitions, success, stop, Owner gate | ☐              |
-| No production code was modified under this programme                                      | ☐              |
-| Standard is not yet applied to another product (correct for this programme)               | ☐              |
-
----
-
-## Baseline declaration (when Accepted)
-
-Upon Acceptance, Owner declares:
-
-> **APZ Engineering Lifecycle Standard version 1.0.0** at `docs/engineering/lifecycle-standard/v1.0/` is the Owner-baselined lifecycle authority for APZOR product programmes adopting it.
-
-Related IN FORCE OES artefacts remain binding until Owner directs supersession.
-
----
-
-## Sign-off
-
-| Field                    | Value |
-| ------------------------ | ----- |
-| Owner                    |       |
-| Date                     |       |
-| Evidence JSON (if filed) |       |
-| Notes                    |       |
-
----
+**APZQEP-REM-001** (L-02 EvidenceAccessPort security remediation) was authorised separately.
 
 ## STOP
 
 ```text
 APZQEP-LIFECYCLE-001
-OWNER-ACCEPTANCE
-PENDING
+ACCEPTED
+APPROVED
+APZ ENGINEERING LIFECYCLE STANDARD v1.0 BASELINED
+CLOSED
 ```

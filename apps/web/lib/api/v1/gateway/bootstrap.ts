@@ -1,5 +1,6 @@
 import { createInMemoryAuthorizationService } from "@apzhub/platform-authorization";
 import { getDb } from "@apzhub/config/db";
+import { createBaselineEvidenceAccessCheck } from "@apzhub/qep-test-execution";
 import type { PlatformServiceGateway } from "@apzhub/platform-services";
 import {
   createPlatformServices,
@@ -480,6 +481,10 @@ function createQepServicesBundle(
     onTraceLinkUpserted: searchHooks?.onTraceLinkUpserted,
     onVerificationUpserted: searchHooks?.onVerificationUpserted,
     onSpecificationUpserted: searchHooks?.onSpecificationUpserted,
+    // APZQEP-REM-001 / L-02 — affirmative evidence-access policy (never omit).
+    execution: {
+      evidenceCheck: createBaselineEvidenceAccessCheck(),
+    },
   });
 }
 

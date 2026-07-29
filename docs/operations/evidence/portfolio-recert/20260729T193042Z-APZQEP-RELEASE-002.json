@@ -1,0 +1,46 @@
+{
+  "programmeId": "APZQEP-RELEASE-002",
+  "title": "Patch Production Release — Test Execution 1.0.1",
+  "status": "IMPLEMENTED_AWAITING_OWNER_PATCH_PRODUCTION_RELEASE_DECISION",
+  "timestampUtc": "20260729T193042Z",
+  "promotion": {
+    "from": "1.0.1-rc.1",
+    "to": "1.0.1"
+  },
+  "package": {
+    "name": "@apzhub/qep-test-execution",
+    "version": "1.0.1"
+  },
+  "tag": "apzqep-test-execution-v1.0.1",
+  "priorProduction": {
+    "version": "1.0.0",
+    "tag": "apzqep-test-execution-v1.0.0"
+  },
+  "limitationL02": "CLOSED",
+  "riskAcceptanceRA02": "RETIRED",
+  "availability": "LIMITED_AVAILABILITY_APPROVED",
+  "securityReadiness": "APPROVED",
+  "operationalBrowserReadiness": "PARTIALLY_VERIFIED",
+  "unrestrictedGa": "NOT_APPROVED",
+  "availabilityStatement": "Security remediation has been completed and verified. Limited Availability remains in effect pending completion of operational browser readiness activities.",
+  "productEngineering": "NONE",
+  "recommendation": {
+    "acceptRelease": true,
+    "futureGaProgramme": "APZQEP-GA-001",
+    "gaStatus": "PLANNING_ONLY_NOT_AUTHORISED"
+  },
+  "parallelPlanning": {
+    "programme": "APZQEP-GA-001",
+    "path": "docs/products/apzqep/test-execution/GA-001-PLAN/"
+  },
+  "documentationPack": "docs/products/apzqep/test-execution/RELEASE-002/",
+  "releasePack": "docs/releases/apzqep/test-execution/1.0.1/",
+  "notDelivered": [
+    "Remote push",
+    "Production deploy",
+    "npm publish",
+    "Unrestricted GA",
+    "GA-001 execution"
+  ],
+  "predecessorAcceptance": "20260729T193042Z-APZQEP-FREEZE-002-ACCEPTANCE.json"
+}

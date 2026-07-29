@@ -25,6 +25,7 @@ import {
   type SourceResolveFn,
 } from "./adapters/source-resolution-port";
 import {
+  createBaselineEvidenceAccessCheck,
   createEvidenceAccessPort,
   type EvidenceAccessCheckFn,
 } from "./adapters/evidence-access-port";
@@ -69,6 +70,18 @@ export type CreateQepTestExecutionPersistenceInput = QepTestExecutionPortOverrid
   readonly db?: DatabaseExecutor;
 };
 
+/**
+ * Resolve the evidence-access check for factory wiring.
+ * Production/test factories always inject an affirmative policy (baseline or
+ * caller override). The port itself still DENIES when constructed with no check
+ * (APZQEP-REM-001 / L-02 — configuration omission must not grant access).
+ */
+function resolveEvidenceCheck(
+  evidenceCheck: EvidenceAccessCheckFn | undefined,
+): EvidenceAccessCheckFn {
+  return evidenceCheck ?? createBaselineEvidenceAccessCheck();
+}
+
 function buildPostgresPorts(
   db: DatabaseExecutor,
   overrides: QepTestExecutionPortOverrides = {},
@@ -81,7 +94,9 @@ function buildPostgresPorts(
     audit: createPostgresAuditPort(db),
     outbox: createPostgresEventOutboxPort(db),
     search: createSearchPublicationPort(overrides.searchHook),
-    evidenceAccess: createEvidenceAccessPort(overrides.evidenceCheck),
+    evidenceAccess: createEvidenceAccessPort(
+      resolveEvidenceCheck(overrides.evidenceCheck),
+    ),
     clock: createSystemClockPort(),
     ids: createUuidIdPort(),
   };
@@ -100,7 +115,9 @@ function buildInMemoryPorts(
     audit: createInMemoryAuditPort(),
     outbox: createInMemoryOutboxPort(),
     search: createNoopSearchPort(),
-    evidenceAccess: createEvidenceAccessPort(overrides.evidenceCheck),
+    evidenceAccess: createEvidenceAccessPort(
+      resolveEvidenceCheck(overrides.evidenceCheck),
+    ),
     clock: createSystemClockPort(),
     ids: createUuidIdPort(),
   };

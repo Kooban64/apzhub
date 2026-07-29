@@ -107,9 +107,35 @@ export type SearchPublicationPort = {
   publish(execution: StoredTestExecution): Promise<void>;
 };
 
+/** Evidence access actions evaluated by EvidenceAccessPort (APZQEP-REM-001). */
+export type EvidenceAccessAction = "associate" | "view_metadata" | "list" | "download";
+
+/**
+ * Explicit access decision — never ambiguous.
+ * Only `allowed` grants access. All other outcomes deny.
+ */
+export type EvidenceAccessDecision = {
+  readonly outcome:
+    "allowed" | "denied" | "indeterminate" | "unavailable" | "invalid_request";
+  readonly reason: string;
+};
+
 export type EvidenceAccessPort = {
   readonly portId: "EvidenceAccessPort";
-  assertAccessible(ctx: ExecutionRequestContext, uri: string): Promise<void>;
+  evaluateAccess(
+    ctx: ExecutionRequestContext,
+    uri: string,
+    action?: EvidenceAccessAction,
+  ): Promise<EvidenceAccessDecision>;
+  /**
+   * Throws ExecutionForbiddenError / ExecutionValidationError unless outcome is `allowed`.
+   * MUST NOT succeed when the decision is missing, indeterminate, or unavailable.
+   */
+  assertAccessible(
+    ctx: ExecutionRequestContext,
+    uri: string,
+    action?: EvidenceAccessAction,
+  ): Promise<void>;
 };
 
 export type ClockPort = {

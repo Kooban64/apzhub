@@ -1,0 +1,20 @@
+{
+  "evidenceId": "20260729T182300Z-APZQEP-LIFECYCLE-001-ACCEPTANCE",
+  "programme": "APZQEP-LIFECYCLE-001",
+  "title": "APZ Engineering Lifecycle Standard v1.0",
+  "programmeType": "Engineering Governance Standardisation",
+  "recordedAt": "2026-07-29T18:23:00Z",
+  "decisionTimestampUtc": "20260729T182300Z",
+  "decision": "ACCEPTED / APPROVED / APZ ENGINEERING LIFECYCLE STANDARD v1.0 BASELINED / CLOSED",
+  "authority": "Owner Lifecycle Standard Decision",
+  "pack": "docs/products/apzqep/LIFECYCLE-001/",
+  "deliverableSuite": "docs/engineering/lifecycle-standard/v1.0/",
+  "standardVersion": "1.0.0",
+  "effect": "All future APZOR engineering programmes SHALL adopt this standard unless Owner-approved exception",
+  "concurrentAuthorisation": {
+    "id": "APZQEP-REM-001",
+    "title": "L-02 EvidenceAccessPort Security Remediation",
+    "status": "AUTHORISED_TO_COMMENCE_SEPARATE_DIRECTIVE"
+  },
+  "stopCondition": "APZQEP-LIFECYCLE-001 ACCEPTED / LIFECYCLE STANDARD v1.0 BASELINED / CLOSED"
+}

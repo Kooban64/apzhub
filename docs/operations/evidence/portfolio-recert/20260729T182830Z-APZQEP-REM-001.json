@@ -1,0 +1,89 @@
+{
+  "programmeId": "APZQEP-REM-001",
+  "title": "L-02 Security Remediation — Evidence Access Enforcement",
+  "status": "IMPLEMENTED_AWAITING_OWNER_SECURITY_REMEDIATION_DECISION",
+  "timestampUtc": "20260729T182830Z",
+  "capability": "test-execution",
+  "productionBaseline": {
+    "package": "@apzhub/qep-test-execution",
+    "version": "1.0.0",
+    "availability": "LIMITED_AVAILABILITY_APPROVED",
+    "unrestrictedGa": "NOT_APPROVED"
+  },
+  "candidate": {
+    "package": "@apzhub/qep-test-execution",
+    "version": "1.0.1-rc.1"
+  },
+  "limitation": {
+    "id": "L-02",
+    "title": "EvidenceAccessPort default-allow behaviour",
+    "disposition": "REMEDIATED_PENDING_VERIFICATION",
+    "closed": false
+  },
+  "riskAcceptance": {
+    "id": "RA-02",
+    "binding": true,
+    "closed": false
+  },
+  "defaultAllowPath": {
+    "adapter": "packages/qep-test-execution/src/infrastructure/adapters/evidence-access-port.ts",
+    "priorBehaviour": "if (!check) return — allow",
+    "remediatedBehaviour": "if (!check) deny evidence_access_check_not_configured",
+    "commandSkipPath": "associateEvidence previously skipped when evidenceAccess omitted — now required and always asserted"
+  },
+  "filesInspected": [
+    "packages/qep-test-execution/src/application/ports/index.ts",
+    "packages/qep-test-execution/src/infrastructure/adapters/evidence-access-port.ts",
+    "packages/qep-test-execution/src/application/services/execution-command-service.ts",
+    "packages/qep-test-execution/src/infrastructure/factories.ts",
+    "packages/platform-services/src/services/qep/create-qep-test-execution-platform-services.ts",
+    "apps/web/lib/api/v1/gateway/bootstrap.ts",
+    "apps/web/app/api/v1/qep/executions/[executionId]/evidence-references/route.ts",
+    "docs/products/apzqep/test-execution/ECR-001/SECURITY-REVIEW.md",
+    "docs/products/apzqep/test-execution/RELEASE-001/KNOWN-LIMITATIONS-REGISTER.md"
+  ],
+  "implementationChanges": [
+    "Typed EvidenceAccessDecision + evaluateAccess",
+    "Fail-closed createEvidenceAccessPort",
+    "createBaselineEvidenceAccessCheck affirmative policy",
+    "Required evidenceAccess on application services",
+    "evidence_access_denied audit on associate denial",
+    "Factory + bootstrap wiring of baseline check",
+    "Security and enforcement tests added",
+    "Candidate version 1.0.1-rc.1"
+  ],
+  "validation": {
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "packageTests": "PASS 77/77",
+    "securityTests": "PASS",
+    "platformQepTests": "PASS 21/21",
+    "apiHandlerTests": "PASS 8/8",
+    "workbenchTests": "PASS 4/4",
+    "playwright": "NOT_RUN_ENVIRONMENT_LIMITATION"
+  },
+  "compatibility": {
+    "migration": "none",
+    "breakingApiPaths": false,
+    "securitySemanticsTightened": true
+  },
+  "unchangedProtectedBaselines": [
+    "apzqep-test-execution-v1.0.0 production tag identity",
+    "CERT-001 / FREEZE-001 / RELEASE-001 closed packs",
+    "APZ Engineering Lifecycle Standard v1.0 suite"
+  ],
+  "parallelPlanning": {
+    "programme": "APZQEP-CERT-002",
+    "status": "PLANNING_ONLY_NOT_AUTHORISED",
+    "path": "docs/products/apzqep/test-execution/CERT-002-PLAN/"
+  },
+  "notDelivered": [
+    "CERT-002 execution",
+    "Final L-02 closure",
+    "Final 1.0.1 promotion",
+    "Unrestricted GA",
+    "Deployment"
+  ],
+  "documentationPack": "docs/products/apzqep/test-execution/REM-001/",
+  "nextStageRecommendation": "Owner Security Remediation Decision; then authorise CERT-002 if accepted"
+}

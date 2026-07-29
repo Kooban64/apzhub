@@ -33,9 +33,9 @@ function collectSourceFiles(dir: string): string[] {
 
 describe("APZQEP-ENG-100A/100B/100C/100D architecture boundaries", () => {
   it("exports programme markers for Domain, Application and Infrastructure Waves", () => {
-    expect(QEP_TEST_EXECUTION_VERSION).toBe("1.0.0");
+    expect(QEP_TEST_EXECUTION_VERSION).toBe("1.0.1");
     expect(QEP_TEST_EXECUTION_PROGRAMME).toBe(
-      "APZQEP-RELEASE-001 — PRODUCTION BASELINE 1.0.0",
+      "APZQEP-RELEASE-002 — PRODUCTION PATCH BASELINE 1.0.1",
     );
     expect(QEP_TEST_EXECUTION_DOMAIN_STATUS).toBe("implemented-eng-100b");
     expect(QEP_TEST_EXECUTION_APPLICATION_STATUS).toBe("implemented-eng-100c");

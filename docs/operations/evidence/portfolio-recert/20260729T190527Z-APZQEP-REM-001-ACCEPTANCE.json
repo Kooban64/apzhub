@@ -1,0 +1,10 @@
+{
+  "programmeId": "APZQEP-REM-001",
+  "decision": "ACCEPTED_APPROVED_SECURITY_REMEDIATION_BASELINED_CLOSED",
+  "timestampUtc": "20260729T190527Z",
+  "candidate": "@apzhub/qep-test-execution@1.0.1-rc.1",
+  "limitationL02": "REMEDIATED_PENDING_VERIFICATION",
+  "ra02": "REMAINS_IN_FORCE",
+  "nextProgramme": "APZQEP-CERT-002",
+  "acceptanceDocument": "docs/products/apzqep/test-execution/REM-001/OWNER-ACCEPTANCE.md"
+}

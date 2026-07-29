@@ -1,16 +1,16 @@
 manifestSchemaVersion: "1.0"
 id: qep-test-execution
 name: Test Execution
-version: 1.0.0
+version: 1.0.1
 kind: module
 
 metadata:
   category: quality-engineering
-  description: "Test Execution Workbench module — Production baseline 1.0.0 (APZQEP-RELEASE-001). Package @apzhub/qep-test-execution. Architecture APZQEP-ARCH-015. Engineering Specification APZQEP-OES-ENG-090A PART-04 §3 (Workbench contracts). Class PRODUCTION_READY_WITH_LIMITATIONS."
+  description: "Test Execution Workbench module — Production patch baseline 1.0.1 (APZQEP-RELEASE-002). Package @apzhub/qep-test-execution. L-02 CLOSED. LIMITED_AVAILABILITY_APPROVED. Architecture APZQEP-ARCH-015. Engineering Specification APZQEP-OES-ENG-090A PART-04 §3 (Workbench contracts)."
   product: apzqep
   moduleCatalogueId: M-test-execution
   slug: test-execution
-  programme: APZQEP-RELEASE-001
+  programme: APZQEP-RELEASE-002
 
 dependencies:
   platform: []

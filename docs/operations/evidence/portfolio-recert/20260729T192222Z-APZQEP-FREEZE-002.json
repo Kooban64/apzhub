@@ -1,0 +1,54 @@
+{
+  "programmeId": "APZQEP-FREEZE-002",
+  "title": "Patch Production Freeze — Test Execution 1.0.1-rc.1",
+  "status": "IMPLEMENTED_AWAITING_OWNER_PATCH_PRODUCTION_FREEZE_DECISION",
+  "timestampUtc": "20260729T192222Z",
+  "candidate": {
+    "package": "@apzhub/qep-test-execution",
+    "version": "1.0.1-rc.1"
+  },
+  "productionBaseline": {
+    "package": "@apzhub/qep-test-execution",
+    "version": "1.0.0",
+    "tag": "apzqep-test-execution-v1.0.0"
+  },
+  "git": {
+    "head": "3b3bb6915c7e55f4708e9720743a4642cde6d985",
+    "workingTree": "dirty_uncommitted_candidate_artefacts",
+    "remote": "ahead_3_behind_1"
+  },
+  "certification": {
+    "CERT-002": "ACCEPTED_CLOSED",
+    "verdict": "CERTIFIED_WITH_LIMITATIONS"
+  },
+  "limitationL02": "CLOSED",
+  "riskAcceptanceRA02": "RETIRED",
+  "availability": "LIMITED_AVAILABILITY_APPROVED",
+  "securityReadiness": "APPROVED",
+  "operationalBrowserReadiness": "PARTIALLY_VERIFIED",
+  "unrestrictedGa": "NOT_APPROVED",
+  "changeScope": {
+    "functional": "L-02_remediation_only",
+    "unrelatedProductionChanges": "NONE"
+  },
+  "recommendation": "PROCEED_TO_PATCH_PRODUCTION_RELEASE",
+  "observations": [
+    "Commit candidate tree before deploy for reproducibility",
+    "Resolve origin ahead/behind via authorised operational git sequence; stop on rebase conflicts"
+  ],
+  "parallelPlanning": {
+    "programme": "APZQEP-RELEASE-002",
+    "status": "PLANNING_ONLY_NOT_AUTHORISED",
+    "path": "docs/products/apzqep/test-execution/RELEASE-002-PLAN/"
+  },
+  "documentationPack": "docs/products/apzqep/test-execution/FREEZE-002/",
+  "productEngineering": "NONE",
+  "notDelivered": [
+    "Deploy",
+    "Publish",
+    "RELEASE-002 execution",
+    "Final 1.0.1 promotion",
+    "Unrestricted GA"
+  ],
+  "predecessorAcceptance": "20260729T192222Z-APZQEP-CERT-002-ACCEPTANCE.json"
+}

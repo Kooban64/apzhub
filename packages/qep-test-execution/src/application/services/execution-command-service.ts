@@ -36,12 +36,8 @@ import type { EvidenceAccessPort, SourceResolutionPort } from "../ports";
 
 export type ExecutionCommandServiceDeps = ApplicationOrchestrationDeps & {
   readonly sources: SourceResolutionPort;
-  /**
-   * Optional — OES PART-04 security requires an accessibility check before
-   * evidence is associated with an execution/step. Omitted in Application
-   * Wave tests; wired by Infrastructure (ENG-100D) in production.
-   */
-  readonly evidenceAccess?: EvidenceAccessPort;
+  /** Required — APZQEP-REM-001 fail-closed evidence access (L-02). */
+  readonly evidenceAccess: EvidenceAccessPort;
   readonly allocateNumber?: (ctx: ExecutionRequestContext) => Promise<string> | string;
 };
 
@@ -328,8 +324,28 @@ export function createExecutionCommandService(
         EXECUTION_PERMISSIONS.WILDCARD,
       ]);
       const existing = await requireExecution(deps, ctx, id);
-      if (deps.evidenceAccess) {
-        await deps.evidenceAccess.assertAccessible(ctx, input.uri);
+      try {
+        await deps.evidenceAccess.assertAccessible(ctx, input.uri, "associate");
+      } catch (error) {
+        try {
+          await deps.audit.append({
+            id: deps.ids.nextId("aud"),
+            tenantId: ctx.tenantId,
+            executionId: id,
+            action: "evidence_access_denied",
+            actorUserId: ctx.userId,
+            correlationId: ctx.correlationId,
+            resultingStatus: existing.status,
+            createdAt: deps.clock.now(),
+            details: {
+              outcome: "denied",
+              accessAction: "associate",
+            },
+          });
+        } catch {
+          // Audit failure must not mask the access denial.
+        }
+        throw error;
       }
       const mutated = associateEvidence(
         existing,
