@@ -22,8 +22,8 @@
   "sourceControl": {
     "gitTag": "apzqep-test-execution-v1.0.0",
     "packageVersion": "1.0.0",
-    "commitSha": "SEE_GIT_TAG",
-    "note": "Authoritative: git rev-parse apzqep-test-execution-v1.0.0^{}"
+    "commitSha": "62d4e38e2b98e49db15bf74778c6bb1843255570",
+    "note": "commitSha is the release content commit; tag apzqep-test-execution-v1.0.0 may include this stamp commit after retag"
   },
   "certificationClass": "PRODUCTION_READY_WITH_LIMITATIONS",
   "gaRecommendation": "LIMITED_AVAILABILITY_APPROVED",

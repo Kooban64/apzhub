@@ -16,13 +16,17 @@
 
 ## Reproducibility
 
-| Item            | Value                                           |
-| --------------- | ----------------------------------------------- |
-| Production tag  | `apzqep-test-execution-v1.0.0`                  |
-| Package version | `1.0.0`                                         |
-| Checkout        | `git checkout apzqep-test-execution-v1.0.0`     |
-| Install         | `pnpm install --frozen-lockfile`                |
-| Test            | `pnpm --filter @apzhub/qep-test-execution test` |
+| Item                         | Value                                             |
+| ---------------------------- | ------------------------------------------------- |
+| Production tag               | `apzqep-test-execution-v1.0.0`                    |
+| Package version              | `1.0.0`                                           |
+| Release commit (at tag peel) | `62d4e38e2b98e49db15bf74778c6bb1843255570`        |
+| Resolve                      | `git rev-parse 'apzqep-test-execution-v1.0.0^{}'` |
+| Checkout                     | `git checkout apzqep-test-execution-v1.0.0`       |
+| Install                      | `pnpm install --frozen-lockfile`                  |
+| Test                         | `pnpm --filter @apzhub/qep-test-execution test`   |
+
+Monorepo note: commitlint type is `chore(apzqep):`; package SemVer is **1.0.0**. Tag is capability-scoped for monorepo safety (not a bare `v1.0.0` platform tag).
 
 ## Blockers
 
