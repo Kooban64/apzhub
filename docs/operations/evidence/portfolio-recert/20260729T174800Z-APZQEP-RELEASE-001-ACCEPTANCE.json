@@ -1,0 +1,29 @@
+{
+  "evidenceId": "20260729T174800Z-APZQEP-RELEASE-001-ACCEPTANCE",
+  "programme": "APZQEP-RELEASE-001",
+  "title": "Test Execution Production Release",
+  "programmeType": "Production Release",
+  "capability": "Test Execution",
+  "recordedAt": "2026-07-29T17:48:00Z",
+  "decisionTimestampUtc": "20260729T174800Z",
+  "decision": "ACCEPTED / APPROVED / PRODUCTION RELEASE BASELINED / CLOSED",
+  "authority": "Owner Production Release Decision",
+  "pack": "docs/products/apzqep/test-execution/RELEASE-001/",
+  "acceptance": "docs/products/apzqep/test-execution/RELEASE-001/OWNER-ACCEPTANCE.md",
+  "implementationEvidence": "docs/operations/evidence/portfolio-recert/20260729T164800Z-APZQEP-RELEASE-001.json",
+  "package": "@apzhub/qep-test-execution",
+  "version": "1.0.0",
+  "gitTag": "apzqep-test-execution-v1.0.0",
+  "availability": "LIMITED_AVAILABILITY_APPROVED",
+  "unrestrictedGa": false,
+  "unrestrictedGaBlocker": "L-02 EvidenceAccessPort — mandatory remediation before unrestricted GA",
+  "lifecycleCompleteForCapability": true,
+  "authorisesUnrestrictedGa": false,
+  "concurrentAuthorisation": {
+    "id": "APZQEP-LIFECYCLE-001",
+    "title": "APZ Engineering Lifecycle Standard v1.0",
+    "status": "AUTHORISED_TO_COMMENCE_SEPARATE_DIRECTIVE"
+  },
+  "operationalNote": "Push branch and publish tag authorised as operational activities without further Owner approval",
+  "stopCondition": "APZQEP-RELEASE-001 ACCEPTED / PRODUCTION RELEASE BASELINED / CLOSED"
+}

@@ -1,5 +1,15 @@
 # APZ QEP — Changelog
 
+## 2026-07-29 — APZQEP-LIFECYCLE-001 Lifecycle Standard v1.0 · IMPLEMENTED / AWAITING OWNER DECISION
+
+- **APZQEP-RELEASE-001** Owner Decision — **ACCEPTED / PRODUCTION RELEASE BASELINED / CLOSED** (`20260729T174800Z-APZQEP-RELEASE-001-ACCEPTANCE.json`)
+- Test Execution lifecycle **COMPLETE** · baseline `@apzhub/qep-test-execution` **1.0.0** · **LIMITED_AVAILABILITY_APPROVED**
+- **APZQEP-LIFECYCLE-001** — APZ Engineering Lifecycle Standard v1.0 — **IMPLEMENTED / AWAITING OWNER LIFECYCLE STANDARD DECISION**
+- Suite: [docs/engineering/lifecycle-standard/v1.0/](../../engineering/lifecycle-standard/v1.0/README.md)
+- Pack: [LIFECYCLE-001/](./LIFECYCLE-001/README.md) · Evidence `20260729T175000Z-APZQEP-LIFECYCLE-001.json`
+- Includes: stages, Waves 1–5, Build Contract (continuous evidence mandatory), templates, Cursor directives, Owner forms
+- Stop: Do **not** apply the standard to another product without a separate Owner Instruction
+
 ## 2026-07-29 — APZQEP-RELEASE-001 Production Release · IMPLEMENTED / AWAITING OWNER DECISION
 
 - **APZQEP-FREEZE-001** Owner Decision — **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** (`20260729T164500Z-APZQEP-FREEZE-001-ACCEPTANCE.json`)

@@ -2,10 +2,11 @@
 
 Cross-cutting engineering methodology and standards (not product/capability packs).
 
-| Pack                                                | Purpose                                                                                                                                | Status                        |
-| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| [oes/](./oes/README.md)                             | **APZOR OES** — OES-000 / 001 / 002 (**FROZEN 1.0.0**) · product OES catalogue                                                         | Governance trilogy **FROZEN** |
-| [platform-delivery/](./platform-delivery/README.md) | **APZHUB Platform Delivery Standard** (APZHUB-ENGINEERING-001) — mandatory lifecycle for platform capabilities and commercial products | **ACCEPTED / CLOSED**         |
+| Pack                                                            | Purpose                                                                                                                                | Status                           |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| [lifecycle-standard/v1.0/](./lifecycle-standard/v1.0/README.md) | **APZ Engineering Lifecycle Standard v1.0** (APZQEP-LIFECYCLE-001) — product-agnostic ARCH→ES→Waves→ECR→CERT→FREEZE→RELEASE→GA/EOL     | **IMPLEMENTED / AWAITING OWNER** |
+| [oes/](./oes/README.md)                                         | **APZOR OES** — OES-000 / 001 / 002 (**FROZEN 1.0.0**) · product OES catalogue                                                         | Governance trilogy **FROZEN**    |
+| [platform-delivery/](./platform-delivery/README.md)             | **APZHUB Platform Delivery Standard** (APZHUB-ENGINEERING-001) — mandatory lifecycle for platform capabilities and commercial products | **ACCEPTED / CLOSED**            |
 
 ## Platform 1.3 programmes (index)
 

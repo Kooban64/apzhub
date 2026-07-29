@@ -1,10 +1,11 @@
 # APZQEP-RELEASE-001 — Test Execution Production Release
 
-> **Status:** **IMPLEMENTED / AWAITING OWNER PRODUCTION RELEASE DECISION**  
+> **Status:** **ACCEPTED / APPROVED / PRODUCTION RELEASE BASELINED / CLOSED**  
 > **Capability:** Test Execution  
 > **Type:** Production Release (release governance — no engineering)  
 > **Baseline:** `@apzhub/qep-test-execution` **1.0.0**  
-> **GA recommendation:** **LIMITED_AVAILABILITY_APPROVED**  
+> **Availability:** **LIMITED_AVAILABILITY_APPROVED**  
+> **Acceptance:** [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) · `20260729T174800Z-APZQEP-RELEASE-001-ACCEPTANCE.json`  
 > **Evidence:** `docs/operations/evidence/portfolio-recert/20260729T164800Z-APZQEP-RELEASE-001.json`  
 > **Release pack:** [../../../../releases/apzqep/test-execution/1.0.0/](../../../../releases/apzqep/test-execution/1.0.0/README.md)
 
@@ -27,7 +28,8 @@
 
 ```text
 APZQEP-RELEASE-001
-IMPLEMENTED
-AWAITING OWNER PRODUCTION RELEASE DECISION
-GA = NOT AUTOMATICALLY COMMENCED
+ACCEPTED / PRODUCTION RELEASE BASELINED / CLOSED
+BASELINE: 1.0.0
+AVAILABILITY: LIMITED
+UNRESTRICTED GA = NOT APPROVED
 ```

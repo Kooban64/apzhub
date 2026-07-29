@@ -56,7 +56,7 @@ Normative:
 
 **Rule:** Future Engineering is authorised **one Wave at a time**. Monolithic “build the whole capability” Engineering programmes are superseded. Agents **SHALL NOT** redesign Architecture or change Engineering Specifications during Engineering.
 
-**Test Execution:** Waves → ECR → CERT → FREEZE **CLOSED** · baseline **`@apzhub/qep-test-execution` 1.0.0**. **APZQEP-RELEASE-001** — **IMPLEMENTED / AWAITING OWNER DECISION** ([test-execution/RELEASE-001/](./test-execution/RELEASE-001/README.md)) · recommended **LIMITED_AVAILABILITY_APPROVED**. Unrestricted GA **NOT AUTHORISED** until L-02 remediated.
+**Test Execution:** lifecycle **COMPLETE** · **`@apzhub/qep-test-execution` 1.0.0** · **LIMITED_AVAILABILITY_APPROVED** ([RELEASE-001](./test-execution/RELEASE-001/README.md)). Unrestricted GA **NOT APPROVED** until L-02 remediated. **APZQEP-LIFECYCLE-001** — APZ Engineering Lifecycle Standard v1.0 — **IMPLEMENTED / AWAITING OWNER DECISION** ([LIFECYCLE-001](./LIFECYCLE-001/README.md) · [suite](../../engineering/lifecycle-standard/v1.0/README.md)).
 
 ## Capability status (2026-07-27)
 

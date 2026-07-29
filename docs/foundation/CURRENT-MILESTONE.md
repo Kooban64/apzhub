@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-07-29  
-> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · ENG→ECR→CERT→FREEZE **CLOSED** · baseline **`@apzhub/qep-test-execution` 1.0.0** · `APZQEP-RELEASE-001` **IMPLEMENTED / AWAITING OWNER PRODUCTION RELEASE DECISION** · Unrestricted GA **NOT AUTHORISED** · Authorised next delivery: **Owner Production Release Decision only**.
+> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · Test Execution lifecycle **COMPLETE** (Limited Availability · **1.0.0**) · `APZQEP-LIFECYCLE-001` **IMPLEMENTED / AWAITING OWNER LIFECYCLE STANDARD DECISION** · Authorised next delivery: **Owner Lifecycle Standard Decision only**.
 
 ---
 
@@ -68,14 +68,22 @@
 - Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/test-execution/FREEZE-001/OWNER-ACCEPTANCE.md)
 - Evidence: `20260729T164500Z-APZQEP-FREEZE-001-ACCEPTANCE.json`
 
-**APZQEP-RELEASE-001 — Test Execution Production Release — AWAITING OWNER RELEASE DECISION:**
+**APZQEP-RELEASE-001 — Test Execution Production Release — CLOSED:**
 
 - Pack: [test-execution/RELEASE-001/](../products/apzqep/test-execution/RELEASE-001/README.md)
-- Status: **IMPLEMENTED / AWAITING OWNER PRODUCTION RELEASE DECISION**
-- Tag: `apzqep-test-execution-v1.0.0`
-- GA recommendation: **LIMITED_AVAILABILITY_APPROVED**
-- Evidence: `20260729T164800Z-APZQEP-RELEASE-001.json`
-- Stop: Do **not** commence unrestricted GA without a separate Owner Instruction.
+- Status: **ACCEPTED / APPROVED / PRODUCTION RELEASE BASELINED / CLOSED**
+- Baseline: `@apzhub/qep-test-execution` **1.0.0** · tag `apzqep-test-execution-v1.0.0`
+- Availability: **LIMITED_AVAILABILITY_APPROVED**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/test-execution/RELEASE-001/OWNER-ACCEPTANCE.md)
+- Evidence: `20260729T174800Z-APZQEP-RELEASE-001-ACCEPTANCE.json`
+
+**APZQEP-LIFECYCLE-001 — APZ Engineering Lifecycle Standard v1.0 — AWAITING OWNER DECISION:**
+
+- Pack: [LIFECYCLE-001/](../products/apzqep/LIFECYCLE-001/README.md)
+- Suite: [lifecycle-standard/v1.0/](../engineering/lifecycle-standard/v1.0/README.md)
+- Status: **IMPLEMENTED / AWAITING OWNER LIFECYCLE STANDARD DECISION**
+- Evidence: `20260729T175000Z-APZQEP-LIFECYCLE-001.json`
+- Stop: Do **not** apply the standard to another product without a separate Owner Instruction.
 
 **APZQEP-GOV-ENG-BUILD-001 — Engineering Build Contract & Wave Engineering — CLOSED:**
 
@@ -127,7 +135,7 @@
 - Evidence: `20260728T102844Z-APZQEP-CONSTITUTION-1.0.0-RATIFICATION.json`
 - Nature: documentation only — **no Wave 2 engineering**
 
-**Stop condition:** Foundation is immutable history. Engineering through Freeze for Test Execution are **CLOSED**. RELEASE-001 awaits Owner Decision. Do **not** commence unrestricted GA without further Owner Instructions. Authorised next delivery: **Owner Production Release Decision only**.
+**Stop condition:** Foundation is immutable history. Test Execution lifecycle is **COMPLETE** (Limited Availability). LIFECYCLE-001 awaits Owner Decision. Do **not** apply the Lifecycle Standard to another product without further Owner Instructions. Authorised next delivery: **Owner Lifecycle Standard Decision only**.
 
 **APZQEP-PORTFOLIO-001 — Foundation Completion & Portfolio Baseline — CLOSED:**
 

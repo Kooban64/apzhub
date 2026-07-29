@@ -1,49 +1,45 @@
 # Standing Programme Record — APZQEP
 
-| Field                     | Value                                                                                                                              |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| Document                  | Standing Programme Record                                                                                                          |
-| Date                      | 2026-07-29                                                                                                                         |
-| Status                    | **IN FORCE — OFFICIAL STANDING STATE**                                                                                             |
-| Build Contract            | **IN FORCE**                                                                                                                       |
-| ENG → ECR → CERT → FREEZE | **ALL CLOSED / BASELINED**                                                                                                         |
-| CERT class                | **PRODUCTION_READY_WITH_LIMITATIONS**                                                                                              |
-| Frozen baseline           | `@apzhub/qep-test-execution` **1.0.0**                                                                                             |
-| RELEASE-001               | [test-execution/RELEASE-001/](./test-execution/RELEASE-001/README.md) **IMPLEMENTED / AWAITING OWNER PRODUCTION RELEASE DECISION** |
+| Field                       | Value                                                                                                    |
+| --------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Document                    | Standing Programme Record                                                                                |
+| Date                        | 2026-07-29                                                                                               |
+| Status                      | **IN FORCE — OFFICIAL STANDING STATE**                                                                   |
+| Build Contract              | **IN FORCE**                                                                                             |
+| Test Execution lifecycle    | **COMPLETE** (ARCH → ES → Waves → ECR → CERT → FREEZE → RELEASE)                                         |
+| Test Execution baseline     | `@apzhub/qep-test-execution` **1.0.0** · tag `apzqep-test-execution-v1.0.0`                              |
+| Test Execution availability | **LIMITED_AVAILABILITY_APPROVED** (unrestricted GA blocked on L-02)                                      |
+| LIFECYCLE-001               | [LIFECYCLE-001/](./LIFECYCLE-001/README.md) **IMPLEMENTED / AWAITING OWNER LIFECYCLE STANDARD DECISION** |
 
 ### Default premise
 
-- Test Execution engineering, certification, and freeze are **complete**.
-- Production baseline identity **1.0.0** established under release governance.
-- Availability recommendation: **LIMITED_AVAILABILITY_APPROVED** (L-02 blocks unrestricted GA).
-- Unrestricted GA / post-release engineering **NOT AUTHORISED** without new Owner decision.
+- Test Execution product lifecycle is **complete** at Limited Availability.
+- Unrestricted GA requires separate Owner authorisation after L-02 remediation.
+- **APZ Engineering Lifecycle Standard v1.0** documentation suite is implemented pending Owner Decision.
+- Do **not** apply the Lifecycle Standard to another product without a new Owner Directive.
 - Progression only via explicit Owner authorisation.
 
 ---
 
-## Expansion — Release position
+## Expansion — Lifecycle Standard position
 
 ```text
-Architecture → ES → Waves 1–5 → ECR → Certification → Freeze
-✅ ALL CLOSED / BASELINED
+Test Execution capability lifecycle
+✅ COMPLETE (Limited Availability)
 
-Production Release (APZQEP-RELEASE-001)
-⏳ IMPLEMENTED / AWAITING OWNER PRODUCTION RELEASE DECISION
-Baseline: @apzhub/qep-test-execution 1.0.0
-Tag: apzqep-test-execution-v1.0.0
-GA recommendation: LIMITED_AVAILABILITY_APPROVED
+APZ Engineering Lifecycle Standard v1.0 (APZQEP-LIFECYCLE-001)
+⏳ IMPLEMENTED / AWAITING OWNER LIFECYCLE STANDARD DECISION
+Deliverable: docs/engineering/lifecycle-standard/v1.0/
 
-Unrestricted GA
-⏸ NOT AUTHORISED (L-02 mandatory remediation)
+Application to next product
+⏸ NOT AUTHORISED
 ```
 
 ---
 
 ## Authorised next delivery
 
-**Owner Production Release Decision on APZQEP-RELEASE-001 only.**
-
-Strategic suggestion recorded (not authorised): declare **APZ Engineering Lifecycle Standard v1.0** after Release acceptance.
+**Owner Lifecycle Standard Decision on APZQEP-LIFECYCLE-001 only.**
 
 ---
 
@@ -53,9 +49,9 @@ Strategic suggestion recorded (not authorised): declare **APZ Engineering Lifecy
 STANDING PROGRAMME RECORD
 IN FORCE
 
-FREEZE-001 = CLOSED · BASELINE 1.0.0
-APZQEP-RELEASE-001 = IMPLEMENTED / AWAITING OWNER RELEASE DECISION
+TEST EXECUTION = LIFECYCLE COMPLETE (LIMITED AVAILABILITY)
+APZQEP-LIFECYCLE-001 = IMPLEMENTED / AWAITING OWNER DECISION
 
-UNRESTRICTED GA = NOT AUTHORISED
-AUTHORISED NEXT DELIVERY = OWNER PRODUCTION RELEASE DECISION ONLY
+NO PRODUCT APPLICATION OF STANDARD AUTHORISED
+AUTHORISED NEXT DELIVERY = OWNER LIFECYCLE STANDARD DECISION ONLY
 ```

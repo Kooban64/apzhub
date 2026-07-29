@@ -1,0 +1,45 @@
+{
+  "evidenceId": "20260729T175000Z-APZQEP-LIFECYCLE-001",
+  "programme": "APZQEP-LIFECYCLE-001",
+  "title": "APZ Engineering Lifecycle Standard v1.0",
+  "programmeType": "Engineering Governance Standardisation",
+  "recordedAt": "2026-07-29T17:50:00Z",
+  "decisionTimestampUtc": "20260729T175000Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_LIFECYCLE_STANDARD_DECISION",
+  "authority": "Owner Directive AUTHORISED TO COMMENCE — APZQEP-LIFECYCLE-001",
+  "pack": "docs/products/apzqep/LIFECYCLE-001/",
+  "deliverableSuite": "docs/engineering/lifecycle-standard/v1.0/",
+  "standardVersion": "1.0.0",
+  "priorAcceptance": {
+    "release001": "20260729T174800Z-APZQEP-RELEASE-001-ACCEPTANCE.json"
+  },
+  "provenance": "APZQEP Test Execution full lifecycle (ARCH→ES→Waves→ECR→CERT→FREEZE→RELEASE)",
+  "nature": "DOCUMENTATION_AND_GOVERNANCE_ONLY",
+  "deliverables": {
+    "engineeringLifecycle": true,
+    "operatingModel": true,
+    "buildContract": true,
+    "ownerGovernance": true,
+    "programmeLifecycle": true,
+    "stageGuides": true,
+    "waveDefinitions01to05": true,
+    "templates": true,
+    "cursorDirectives": true,
+    "ownerDecisionForms": true,
+    "repositoryStandards": true,
+    "lifecycleDiagram": true,
+    "testExecutionProvenanceExample": true,
+    "completionReport": true,
+    "ownerSummary": true,
+    "ownerAcceptancePending": true
+  },
+  "continuousEvidenceMandatory": true,
+  "productionCodeModified": false,
+  "appliedToOtherProduct": false,
+  "notAuthorised": [
+    "application_to_next_product",
+    "production_engineering",
+    "unrestricted_ga_for_test_execution"
+  ],
+  "stopCondition": "IMPLEMENTED / AWAITING OWNER LIFECYCLE STANDARD DECISION — NO PRODUCT APPLICATION STARTED"
+}
