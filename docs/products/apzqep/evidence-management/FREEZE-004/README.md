@@ -3,7 +3,8 @@
 > **Status:** **IMPLEMENTED / AWAITING OWNER EVIDENCE MANAGEMENT PRODUCTION FREEZE DECISION**  
 > **Capability:** Evidence Management  
 > **Type:** Production Freeze (post-REM-002)  
-> **RC:** `@apzhub/qep-evidence` **1.0.0-rc.2**  
+> **RC:** `@apzhub/qep-evidence` **1.0.0-rc.2** @ `4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5`
+
 > **Recommended frozen baseline on acceptance:** **1.0.0**  
 > **Supersedes:** FREEZE-003 / **1.0.0-rc.1** @ `ce220a5d` (not for release)  
 > **Depends on:** CERT-003 · REM-002 **APPROVED**  

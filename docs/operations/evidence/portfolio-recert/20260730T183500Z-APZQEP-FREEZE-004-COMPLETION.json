@@ -16,7 +16,7 @@
   "class": "PRODUCTION_READY_WITH_LIMITATIONS",
   "suitability": "LIMITED_AVAILABILITY",
   "recordedAt": "20260730T183500Z",
-  "candidateCommit": "PENDING",
+  "candidateCommit": "4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5",
   "validation": {
     "qepEvidenceTypecheck": "PASS",
     "qepEvidenceLint": "PASS",

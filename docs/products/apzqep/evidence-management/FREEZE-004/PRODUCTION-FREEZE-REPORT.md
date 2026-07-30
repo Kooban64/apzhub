@@ -6,6 +6,7 @@
 | Capability          | Evidence Management                                                             |
 | Package             | `@apzhub/qep-evidence` **1.0.0-rc.2**                                           |
 | Module              | `modules/qep-evidence` **1.0.0-rc.2**                                           |
+| Candidate commit    | `4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5`                                      |
 | Status              | **IMPLEMENTED / AWAITING OWNER EVIDENCE MANAGEMENT PRODUCTION FREEZE DECISION** |
 | Prior RC            | **1.0.0-rc.1** @ `ce220a5d` — **SUPERSEDED FOR RELEASE**                        |
 | REM-002             | **APPROVED AND CLOSED**                                                         |

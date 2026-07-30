@@ -221,7 +221,7 @@
 
 - Pack: [evidence-management/FREEZE-004/](../products/apzqep/evidence-management/FREEZE-004/README.md)
 - Status: **IMPLEMENTED / AWAITING OWNER EVIDENCE MANAGEMENT PRODUCTION FREEZE DECISION**
-- RC: `@apzhub/qep-evidence` **1.0.0-rc.2**
+- RC: `@apzhub/qep-evidence` **1.0.0-rc.2** @ `4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5`
 - Evidence: `20260730T183500Z-APZQEP-FREEZE-004-COMPLETION.json`
 - Stop: Do **not** resume RELEASE-003 from `ce220a5d`; await FREEZE-004 acceptance.
 
