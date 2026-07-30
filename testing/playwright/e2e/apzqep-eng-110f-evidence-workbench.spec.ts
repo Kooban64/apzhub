@@ -204,11 +204,15 @@ test.describe("APZQEP-ENG-110F Evidence Workbench", () => {
     });
 
     test("provenance sub-view loads timeline", async ({ page }) => {
+      test.setTimeout(90_000);
       await page.goto(`${BASE}/items/ev_e2e_1`);
       await expect(page.getByTestId("qep-evidence-actions")).toBeVisible({
         timeout: 30_000,
       });
       await page.getByRole("link", { name: /^Provenance$/i }).click();
+      await expect(page).toHaveURL(
+        /\/workspace\/qep\/evidence\/items\/ev_e2e_1\/provenance$/,
+      );
       await expect(page.getByText("Initial capture")).toBeVisible({
         timeout: 30_000,
       });
@@ -236,6 +240,63 @@ test.describe("APZQEP-ENG-110F Evidence Workbench", () => {
         (v) => v.impact === "critical" || v.impact === "serious",
       );
       expect(violations).toEqual([]);
+    });
+  });
+
+  /**
+   * APZQEP-FREEZE-004 — nested Evidence deep-link stability (post-REM-002).
+   * Confirms provenance remains mounted and Home rewind does not occur.
+   */
+  test.describe("FREEZE-004 nested deep-link stability", () => {
+    test.beforeEach(async ({ page }) => {
+      await signInDevUser(page);
+      await mockEvidenceApi(page);
+    });
+
+    test("direct provenance navigation stays mounted", async ({ page }) => {
+      test.setTimeout(90_000);
+      await page.goto(`${BASE}/items/ev_e2e_1/provenance`);
+      await expect(page).toHaveURL(
+        /\/workspace\/qep\/evidence\/items\/ev_e2e_1\/provenance$/,
+      );
+      await expect(page.getByText("Initial capture")).toBeVisible({ timeout: 30_000 });
+      await expect(page).not.toHaveURL(/\/workspace\/home$/);
+    });
+
+    test("provenance survives refresh", async ({ page }) => {
+      test.setTimeout(90_000);
+      await page.goto(`${BASE}/items/ev_e2e_1/provenance`);
+      await expect(page.getByText("Initial capture")).toBeVisible({ timeout: 30_000 });
+      await page.reload({ waitUntil: "domcontentloaded" });
+      await expect(page).toHaveURL(
+        /\/workspace\/qep\/evidence\/items\/ev_e2e_1\/provenance$/,
+      );
+      await expect(page.getByText("Initial capture")).toBeVisible({ timeout: 30_000 });
+      await expect(page).not.toHaveURL(/\/workspace\/home$/);
+    });
+
+    test("backward and forward navigation retain provenance", async ({ page }) => {
+      test.setTimeout(120_000);
+      await page.goto(`${BASE}/items/ev_e2e_1`);
+      await expect(page.getByTestId("qep-evidence-actions")).toBeVisible({
+        timeout: 30_000,
+      });
+      await page.getByRole("link", { name: /^Provenance$/i }).click();
+      await expect(page).toHaveURL(/\/provenance$/);
+      await expect(page.getByText("Initial capture")).toBeVisible({ timeout: 30_000 });
+
+      await page.goBack();
+      await expect(page).toHaveURL(/\/workspace\/qep\/evidence\/items\/ev_e2e_1$/);
+      await expect(page.getByTestId("qep-evidence-actions")).toBeVisible({
+        timeout: 30_000,
+      });
+
+      await page.goForward();
+      await expect(page).toHaveURL(
+        /\/workspace\/qep\/evidence\/items\/ev_e2e_1\/provenance$/,
+      );
+      await expect(page.getByText("Initial capture")).toBeVisible({ timeout: 30_000 });
+      await expect(page).not.toHaveURL(/\/workspace\/home$/);
     });
   });
 });

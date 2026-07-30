@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-07-30  
-> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · Lifecycle Standard **v1.0 VALIDATED** · TE **1.0.1** · ARCH-016 / OES-ENG-091A / ENG-110A…F / OPS-001 / CERT-003 / FREEZE-003 **CLOSED** · `APZQEP-RELEASE-003` **BLOCKED** (`@apzhub/qep-evidence` **1.0.0-rc.1** @ `ce220a5d` · remote push + Playwright provenance blockers) · Authorised next delivery: **Owner Release Remediation Decision on RELEASE-003 only**.
+> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · Lifecycle Standard **v1.0 VALIDATED** · TE **1.0.1** · REM-002 **APPROVED AND CLOSED** · FREEZE-003 **SUPERSEDED FOR RELEASE** · `APZQEP-FREEZE-004` **AWAITING OWNER FREEZE DECISION** (RC **1.0.0-rc.2**) · RELEASE-003 **STOPPED** (must not resume from `ce220a5d`) · Authorised next delivery: **Owner Freeze Decision on FREEZE-004 only**.
 
 ---
 
@@ -207,10 +207,23 @@
 **APZQEP-RELEASE-003 — Evidence Management Production Release — BLOCKED:**
 
 - Pack: [evidence-management/RELEASE-003/](../products/apzqep/evidence-management/RELEASE-003/README.md)
-- Status: **BLOCKED / AWAITING OWNER RELEASE REMEDIATION DECISION**
-- Blockers: remote push (B-01) · Playwright provenance 6/7 (B-02)
+- Status: **BLOCKED**
+- Blockers: remote push (B-01 operational) · Playwright B-02 → REM-002
 - Evidence: `20260730T173500Z-APZQEP-RELEASE-003-BLOCKED.json`
-- Stop: Do **not** promote 1.0.0, tag, or deploy until Owner remediation decision.
+
+**APZQEP-REM-002 — Provenance Playwright Remediation — CLOSED:**
+
+- Pack: [evidence-management/REM-002/](../products/apzqep/evidence-management/REM-002/README.md)
+- Status: **APPROVED AND CLOSED**
+- Acceptance: `20260730T182900Z-APZQEP-REM-002-ACCEPTANCE.json`
+
+**APZQEP-FREEZE-004 — Post-REM-002 Release Candidate Freeze — AWAITING OWNER DECISION:**
+
+- Pack: [evidence-management/FREEZE-004/](../products/apzqep/evidence-management/FREEZE-004/README.md)
+- Status: **IMPLEMENTED / AWAITING OWNER EVIDENCE MANAGEMENT PRODUCTION FREEZE DECISION**
+- RC: `@apzhub/qep-evidence` **1.0.0-rc.2**
+- Evidence: `20260730T183500Z-APZQEP-FREEZE-004-COMPLETION.json`
+- Stop: Do **not** resume RELEASE-003 from `ce220a5d`; await FREEZE-004 acceptance.
 
 **APZQEP-GOV-ENG-BUILD-001 — Engineering Build Contract & Wave Engineering — CLOSED:**
 
@@ -262,7 +275,7 @@
 - Evidence: `20260728T102844Z-APZQEP-CONSTITUTION-1.0.0-RATIFICATION.json`
 - Nature: documentation only — **no Wave 2 engineering**
 
-**Stop condition:** Foundation is immutable history. Lifecycle Standard v1.0 is **VALIDATED**. ARCH-016, OES-ENG-091A, ENG-110A…F, OPS-001, CERT-003, FREEZE-003 are **CLOSED**. RELEASE-003 is **BLOCKED**. Do **not** promote 1.0.0, tag, deploy, or implement deferred items without further Owner Instructions. Authorised next delivery: **Owner Release Remediation Decision on RELEASE-003 only**.
+**Stop condition:** Foundation is immutable history. Lifecycle Standard v1.0 is **VALIDATED**. REM-002 is **CLOSED**. FREEZE-003 is superseded for release. FREEZE-004 awaits Owner Freeze Decision (RC **1.0.0-rc.2**). RELEASE-003 must not resume from `ce220a5d`. Authorised next delivery: **Owner Freeze Decision on FREEZE-004 only**.
 
 **APZQEP-PORTFOLIO-001 — Foundation Completion & Portfolio Baseline — CLOSED:**
 

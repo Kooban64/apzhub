@@ -1,5 +1,21 @@
 # APZ QEP — Changelog
 
+## 2026-07-30 — APZQEP-FREEZE-004 Post-REM-002 Release Candidate · AWAITING OWNER DECISION
+
+- **APZQEP-REM-002** Owner Decision — **APPROVED AND CLOSED** (`20260730T182900Z-APZQEP-REM-002-ACCEPTANCE.json`)
+- **FREEZE-003** — **SUPERSEDED FOR RELEASE** (`ce220a5d` / **1.0.0-rc.1**)
+- **APZQEP-FREEZE-004** — **IMPLEMENTED / AWAITING OWNER FREEZE DECISION** · RC `@apzhub/qep-evidence` **1.0.0-rc.2**
+- Validation: Evidence **54** · targeted **35** · TE **77** · Playwright **10** · typecheck/lint **PASS**
+- Pack: [evidence-management/FREEZE-004/](./evidence-management/FREEZE-004/README.md) · Evidence `20260730T183500Z-APZQEP-FREEZE-004-COMPLETION.json`
+- RELEASE-003 remains **STOPPED** — must not resume from `ce220a5d`
+
+## 2026-07-30 — APZQEP-REM-002 Provenance Playwright Remediation · APPROVED / CLOSED
+
+- **APZQEP-REM-002** — Release Remediation for RELEASE-003 **B-02** — **APPROVED AND CLOSED**
+- Classification: **Workbench defect** (shell route-sync rewind of Evidence provenance deep links)
+- Fix: `apps/web/components/workbench-page.tsx` (+ Playwright URL assertion hygiene)
+- Pack: [evidence-management/REM-002/](./evidence-management/REM-002/README.md) · Acceptance `20260730T182900Z-APZQEP-REM-002-ACCEPTANCE.json`
+
 ## 2026-07-30 — APZQEP-RELEASE-003 Evidence Management Production Release · BLOCKED
 
 - **APZQEP-FREEZE-003** Owner Decision — **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** (`20260730T171800Z-APZQEP-FREEZE-003-ACCEPTANCE.json`)

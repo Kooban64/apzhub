@@ -1,0 +1,30 @@
+{
+  "programme": "APZQEP-REM-002",
+  "capability": "Evidence Management",
+  "programmeType": "Release Remediation",
+  "status": "AWAITING_OWNER_DECISION",
+  "completionState": "IMPLEMENTED",
+  "trigger": "APZQEP-RELEASE-003-B-02",
+  "defectClassification": "Workbench defect",
+  "recommendation": "NEW_FREEZE_REQUIRED",
+  "recordedAt": "20260730T180000Z",
+  "priorFreezeCandidate": "ce220a5d3cac706896299797bb56695037f85621",
+  "package": "@apzhub/qep-evidence",
+  "packageVersion": "1.0.0-rc.1",
+  "filesChanged": [
+    "apps/web/components/workbench-page.tsx",
+    "testing/playwright/e2e/apzqep-eng-110f-evidence-workbench.spec.ts"
+  ],
+  "validation": {
+    "qepEvidenceTests": 54,
+    "targetedTransportWorkbenchTests": 35,
+    "testExecutionTests": 77,
+    "testExecutionVersion": "1.0.1",
+    "playwrightWorkbench": 7,
+    "typecheck": "PASS",
+    "lint": "PASS"
+  },
+  "behaviourDelta": true,
+  "unauthorisedWork": "none",
+  "b01RepositoryPush": "out_of_scope_operational"
+}

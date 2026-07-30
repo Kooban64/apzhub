@@ -11,7 +11,7 @@ import {
 } from "@apzhub/workbench-framework/react";
 import { DesktopShell } from "@apzhub/workspace";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { OperationsWorkspaceRouter } from "@/components/platform-operations/operations-workspace-router";
 import { DocumentsWorkspaceRouter } from "@/components/documents/documents-workspace-router";
@@ -122,12 +122,24 @@ export function WorkbenchPage() {
     activateViewForRoute(pathname);
   }, [pathname, activateViewForRoute]);
 
+  const previousActiveViewRoute = useRef<string | undefined>(undefined);
   useEffect(() => {
-    if (!activeView?.route) return;
-    if (pathname === activeView.route) return;
-    // Allow Workbench deep links under the active view route (e.g. /workspace/projects/{id}).
-    if (pathname.startsWith(`${activeView.route}/`)) return;
-    router.push(activeView.route);
+    const nextRoute = activeView?.route;
+    if (!nextRoute) return;
+
+    const previousRoute = previousActiveViewRoute.current;
+    previousActiveViewRoute.current = nextRoute;
+
+    // Initial focus and same-view deep links are owned by activateViewForRoute.
+    // Only rewind the URL when the selected view route actually changes (Activity
+    // Bar / Sidebar). Depending on pathname here rewound nested Evidence routes
+    // such as …/items/{id}/provenance to a stale Home focus (APZQEP-REM-002 / B-02).
+    if (previousRoute === undefined || previousRoute === nextRoute) {
+      return;
+    }
+    if (pathname === nextRoute) return;
+    if (pathname.startsWith(`${nextRoute}/`)) return;
+    router.push(nextRoute);
   }, [activeView?.route, pathname, router]);
 
   async function handleSignOut() {

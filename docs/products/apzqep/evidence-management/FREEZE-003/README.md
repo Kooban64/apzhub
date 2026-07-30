@@ -1,15 +1,11 @@
 # APZQEP-FREEZE-003 — Evidence Management Production Freeze
 
-> **Status:** **ACCEPTED / APPROVED / PRODUCTION BASELINE FROZEN / CLOSED**  
+> **Status:** **ACCEPTED / CLOSED — SUPERSEDED FOR RELEASE PURPOSES**  
 > **Capability:** Evidence Management  
-> **Type:** Production Freeze (release governance — no feature engineering)  
-> **RC baseline:** `@apzhub/qep-evidence` **1.0.0-rc.1**  
-> **Frozen baseline:** `@apzhub/qep-evidence` **1.0.0**  
+> **RC baseline:** `@apzhub/qep-evidence` **1.0.0-rc.1** @ `ce220a5d`  
+> **Release use:** **PROHIBITED** after REM-002 behaviour delta  
 > **Acceptance:** [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) · `20260730T171800Z-APZQEP-FREEZE-003-ACCEPTANCE.json`  
-> **Certification:** [../CERT-003/](../CERT-003/README.md) — **CLOSED** · **PRODUCTION_READY_WITH_LIMITATIONS** · **LIMITED_AVAILABILITY**  
-> **Evidence:** `docs/operations/evidence/portfolio-recert/20260730T091500Z-APZQEP-FREEZE-003-COMPLETION.json`  
-> **Release pack (RC):** [../../../../releases/apzqep/evidence-management/1.0.0-rc.1/](../../../../releases/apzqep/evidence-management/1.0.0-rc.1/README.md)  
-> **Successor:** [RELEASE-003](../RELEASE-003/README.md)
+> **Successor freeze:** [FREEZE-004](../FREEZE-004/README.md) (**1.0.0-rc.2**)
 
 ## Pack
 

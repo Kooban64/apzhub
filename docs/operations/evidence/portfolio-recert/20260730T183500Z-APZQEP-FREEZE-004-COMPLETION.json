@@ -1,0 +1,36 @@
+{
+  "programme": "APZQEP-FREEZE-004",
+  "capability": "Evidence Management",
+  "programmeType": "Production Freeze",
+  "status": "AWAITING_OWNER_DECISION",
+  "completionState": "IMPLEMENTED",
+  "package": "@apzhub/qep-evidence",
+  "rcVersion": "1.0.0-rc.2",
+  "recommendedFrozenBaseline": "1.0.0",
+  "supersedes": {
+    "programme": "APZQEP-FREEZE-003",
+    "rcVersion": "1.0.0-rc.1",
+    "commit": "ce220a5d3cac706896299797bb56695037f85621"
+  },
+  "rem002": "APPROVED",
+  "class": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "suitability": "LIMITED_AVAILABILITY",
+  "recordedAt": "20260730T183500Z",
+  "candidateCommit": "PENDING",
+  "validation": {
+    "qepEvidenceTypecheck": "PASS",
+    "qepEvidenceLint": "PASS",
+    "qepEvidenceTests": 54,
+    "targetedTransportWorkbenchTests": 35,
+    "testExecutionTests": 77,
+    "testExecutionVersion": "1.0.1",
+    "playwrightWorkbench": 10,
+    "platformServicesTypecheck": "PASS"
+  },
+  "intendedBehaviouralChange": "workbench_route_sync_rem002",
+  "unrelatedBehaviouralChanges": "none",
+  "lockfileDependencyUpgrades": "none",
+  "b01PushAccess": "out_of_scope_operational",
+  "release003": "STOPPED_MUST_NOT_RESUME_FROM_ce220a5d",
+  "successorGate": "OWNER_EVIDENCE_MANAGEMENT_PRODUCTION_FREEZE_DECISION"
+}

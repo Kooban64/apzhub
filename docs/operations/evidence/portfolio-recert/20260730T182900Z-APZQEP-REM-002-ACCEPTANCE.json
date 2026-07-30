@@ -1,0 +1,14 @@
+{
+  "programme": "APZQEP-REM-002",
+  "capability": "Evidence Management",
+  "programmeType": "Release Remediation",
+  "decision": "APPROVED",
+  "status": "CLOSED",
+  "defectClassification": "Workbench defect",
+  "recordedAt": "20260730T182900Z",
+  "freeze003SupersededForRelease": true,
+  "release003MustNotResumeFrom": "ce220a5d3cac706896299797bb56695037f85621",
+  "successor": "APZQEP-FREEZE-004",
+  "expectedRcVersion": "1.0.0-rc.2",
+  "b01OutOfScope": true
+}

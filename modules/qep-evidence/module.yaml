@@ -1,16 +1,16 @@
 manifestSchemaVersion: "1.0"
 id: qep-evidence
 name: Evidence
-version: 1.0.0-rc.1
+version: 1.0.0-rc.2
 kind: module
 
 metadata:
   category: quality-engineering
-  description: "Evidence Management (M09) — Production freeze candidate 1.0.0-rc.1 (APZQEP-FREEZE-003). CERT-003 PRODUCTION_READY_WITH_LIMITATIONS. LIMITED_AVAILABILITY. Package @apzhub/qep-evidence. ADR-0088 storage undecided."
+  description: "Evidence Management (M09) — Production freeze candidate 1.0.0-rc.2 (APZQEP-FREEZE-004 / post-REM-002). CERT-003 PRODUCTION_READY_WITH_LIMITATIONS. LIMITED_AVAILABILITY. Package @apzhub/qep-evidence. ADR-0088 storage undecided."
   product: apzqep
   moduleCatalogueId: M09
   slug: evidence
-  programme: APZQEP-FREEZE-003
+  programme: APZQEP-FREEZE-004
 
 dependencies:
   platform: []
