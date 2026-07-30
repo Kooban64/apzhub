@@ -1,0 +1,49 @@
+{
+  "programme": "APZQEP-RELEASE-003",
+  "capability": "Evidence Management",
+  "programmeType": "Production Release",
+  "status": "BLOCKED",
+  "completionState": "BLOCKED",
+  "recommendation": "RELEASE_BLOCKED_OWNER_INTERVENTION_REQUIRED",
+  "package": "@apzhub/qep-evidence",
+  "candidateVersion": "1.0.0-rc.1",
+  "candidateCommit": "ce220a5d3cac706896299797bb56695037f85621",
+  "targetVersion": "1.0.0",
+  "versionPromoted": false,
+  "tagCreated": false,
+  "remoteSynchronised": false,
+  "recordedAt": "20260730T173500Z",
+  "class": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "suitability": "LIMITED_AVAILABILITY",
+  "validation": {
+    "qepEvidenceTypecheck": "PASS",
+    "qepEvidenceLint": "PASS",
+    "qepEvidenceTests": 54,
+    "targetedTransportWorkbenchTests": 35,
+    "platformServicesTypecheck": "PASS",
+    "testExecutionTests": 77,
+    "testExecutionVersion": "1.0.1",
+    "playwrightWorkbench": {
+      "expected": 7,
+      "passed": 6,
+      "failed": 1,
+      "failedTest": "provenance sub-view loads timeline"
+    }
+  },
+  "blockers": [
+    {
+      "id": "B-01",
+      "type": "remote_synchronisation",
+      "detail": "push_auth_or_access_failure_for_kooban-apzor_apz-portal"
+    },
+    {
+      "id": "B-02",
+      "type": "playwright_validation",
+      "detail": "provenance_timeline_Initial_capture_not_visible"
+    }
+  ],
+  "unauthorisedEngineering": "none",
+  "behaviouralChanges": "none",
+  "deferredFunctionalityImplemented": "none",
+  "successorGate": "OWNER_RELEASE_REMEDIATION_DECISION"
+}

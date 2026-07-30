@@ -1,13 +1,21 @@
 # APZ QEP — Changelog
 
-## 2026-07-30 — APZQEP-FREEZE-003 Evidence Management Production Freeze · AWAITING OWNER DECISION
+## 2026-07-30 — APZQEP-RELEASE-003 Evidence Management Production Release · BLOCKED
+
+- **APZQEP-FREEZE-003** Owner Decision — **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** (`20260730T171800Z-APZQEP-FREEZE-003-ACCEPTANCE.json`)
+- Frozen candidate persisted locally: `@apzhub/qep-evidence` **1.0.0-rc.1** @ `ce220a5d`
+- **APZQEP-RELEASE-003** — **BLOCKED / AWAITING OWNER RELEASE REMEDIATION DECISION**
+- Blockers: **B-01** remote push auth/access · **B-02** Playwright provenance **6/7**
+- Pack: [evidence-management/RELEASE-003/](./evidence-management/RELEASE-003/README.md) · Evidence `20260730T173500Z-APZQEP-RELEASE-003-BLOCKED.json`
+- Unit validation green (54 / 35 / 77); **1.0.0 not promoted**; **no release tag**
+
+## 2026-07-30 — APZQEP-FREEZE-003 Evidence Management Production Freeze · ACCEPTED / CLOSED
 
 - **APZQEP-CERT-003** Owner Decision — **ACCEPTED / CERTIFICATION BASELINED / CLOSED** (`20260730T090800Z-APZQEP-CERT-003-ACCEPTANCE.json`) · **PRODUCTION_READY_WITH_LIMITATIONS** · **LIMITED_AVAILABILITY**
-- **APZQEP-FREEZE-003** — Production Freeze — **IMPLEMENTED / AWAITING OWNER EVIDENCE MANAGEMENT PRODUCTION FREEZE DECISION**
-- RC: `@apzhub/qep-evidence` **1.0.0-rc.1** · recommended frozen baseline **1.0.0**
-- Pack: [evidence-management/FREEZE-003/](./evidence-management/FREEZE-003/README.md) · Evidence `20260730T091500Z-APZQEP-FREEZE-003-COMPLETION.json` · Release pack [releases/apzqep/evidence-management/1.0.0-rc.1/](../../releases/apzqep/evidence-management/1.0.0-rc.1/README.md)
-- Validation: Evidence **54** · targeted **35** · TE **77** · Playwright **7** · typecheck/lint **PASS**
-- Nature: packaging/docs freeze only — **no storage / Release / behaviour change**
+- **APZQEP-FREEZE-003** — Production Freeze — **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED**
+- RC: `@apzhub/qep-evidence` **1.0.0-rc.1** · frozen baseline authorised **1.0.0**
+- Pack: [evidence-management/FREEZE-003/](./evidence-management/FREEZE-003/README.md) · Completion `20260730T091500Z-APZQEP-FREEZE-003-COMPLETION.json` · Acceptance `20260730T171800Z-APZQEP-FREEZE-003-ACCEPTANCE.json`
+- Nature: packaging/docs freeze only — **no storage / behaviour change**
 
 ## 2026-07-30 — APZQEP-CERT-003 Evidence Management Certification · ACCEPTED / CLOSED
 
