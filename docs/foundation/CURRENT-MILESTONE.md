@@ -1,8 +1,8 @@
 # APZHUB Current Milestone
 
 > **Purpose:** Where development currently stops and what requires owner approval  
-> **Last updated:** 2026-07-29  
-> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · Lifecycle Standard **v1.0 BASELINED** · FREEZE-002 **CLOSED** · `APZQEP-RELEASE-002` **IMPLEMENTED / AWAITING OWNER PATCH PRODUCTION RELEASE DECISION** (package **1.0.1** · LIMITED_AVAILABILITY) · Authorised next delivery: **Owner Patch Production Release Decision only**.
+> **Last updated:** 2026-07-30  
+> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · Lifecycle Standard **v1.0 VALIDATED** · TE **1.0.1** · ARCH-016 / OES-ENG-091A / ENG-110A…F / OPS-001 / CERT-003 **CLOSED** · `APZQEP-FREEZE-003` **AWAITING OWNER EVIDENCE MANAGEMENT PRODUCTION FREEZE DECISION** (`@apzhub/qep-evidence` **1.0.0-rc.1** · **PRODUCTION_READY_WITH_LIMITATIONS** · **LIMITED_AVAILABILITY**) · Authorised next delivery: **Owner Evidence Management Production Freeze Decision on FREEZE-003 only**.
 
 ---
 
@@ -109,15 +109,102 @@
 - Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/test-execution/FREEZE-002/OWNER-ACCEPTANCE.md)
 - Evidence: `20260729T193042Z-APZQEP-FREEZE-002-ACCEPTANCE.json`
 
-**APZQEP-RELEASE-002 — Patch Production Release — AWAITING OWNER DECISION:**
+**APZQEP-RELEASE-002 — Patch Production Release — CLOSED:**
 
 - Pack: [test-execution/RELEASE-002/](../products/apzqep/test-execution/RELEASE-002/README.md)
-- Status: **IMPLEMENTED / AWAITING OWNER PATCH PRODUCTION RELEASE DECISION**
+- Status: **ACCEPTED / APPROVED / PATCH PRODUCTION RELEASE BASELINED / CLOSED**
 - Package: `@apzhub/qep-test-execution` **1.0.1** · tag `apzqep-test-execution-v1.0.1`
-- Availability: **LIMITED_AVAILABILITY_APPROVED**
-- GA-001 plan: [GA-001-PLAN/](../products/apzqep/test-execution/GA-001-PLAN/README.md) — **NOT AUTHORISED**
-- Evidence: `20260729T193042Z-APZQEP-RELEASE-002.json`
-- Stop: Do **not** deploy unrestricted GA, execute GA-001, or begin a new capability without a separate Owner Instruction.
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/test-execution/RELEASE-002/OWNER-ACCEPTANCE.md)
+- Evidence: `20260729T194720Z-APZQEP-RELEASE-002-ACCEPTANCE.json`
+
+**APZQEP-CAPABILITY-002 — Next Product Capability — CLOSED:**
+
+- Pack: [CAPABILITY-002/](../products/apzqep/CAPABILITY-002/README.md)
+- Status: **ACCEPTED / APPROVED / CAPABILITY SELECTION BASELINED / PROGRAMME CLOSED**
+- Selected: **Evidence Management**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/CAPABILITY-002/OWNER-ACCEPTANCE.md)
+- Evidence: `20260730T001241Z-APZQEP-CAPABILITY-002-ACCEPTANCE.json`
+
+**APZQEP-ARCH-016 — Evidence Management Capability Architecture — CLOSED:**
+
+- Pack: [evidence-management/OES-ARCH-016/](../products/apzqep/evidence-management/OES-ARCH-016/README.md)
+- Status: **ACCEPTED / APPROVED / ARCHITECTURE BASELINED / CLOSED**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/evidence-management/OES-ARCH-016/OWNER-ACCEPTANCE.md)
+- Evidence: `20260730T023000Z-APZQEP-ARCH-016-ACCEPTANCE.json`
+- ADRs: ADR-0087 … ADR-0091 (**Accepted**)
+
+**APZQEP-OES-ENG-091A — Evidence Management Engineering Specification — CLOSED:**
+
+- Pack: [evidence-management/OES-ENG-091A/](../products/apzqep/evidence-management/OES-ENG-091A/README.md)
+- Status: **ACCEPTED / APPROVED / ENGINEERING SPECIFICATION BASELINED / CLOSED**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/evidence-management/OES-ENG-091A/OWNER-ACCEPTANCE.md)
+- Evidence: `20260730T024000Z-APZQEP-OES-ENG-091A-ACCEPTANCE.json`
+
+**APZQEP-ENG-110A — Evidence Management Repository Scaffolding — CLOSED:**
+
+- Pack: [evidence-management/ENG-110A/](../products/apzqep/evidence-management/ENG-110A/README.md)
+- Status: **ACCEPTED / APPROVED / REPOSITORY SCAFFOLDING BASELINED / CLOSED**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/evidence-management/ENG-110A/OWNER-ACCEPTANCE.md)
+- Evidence: `20260730T025000Z-APZQEP-ENG-110A-ACCEPTANCE.json`
+
+**APZQEP-ENG-110B — Evidence Management Feature Wave 1 (Core Domain) — CLOSED:**
+
+- Pack: [evidence-management/ENG-110B/](../products/apzqep/evidence-management/ENG-110B/README.md)
+- Status: **ACCEPTED / APPROVED / CORE DOMAIN BASELINED / CLOSED**
+- Package: `@apzhub/qep-evidence` **0.0.0** · Domain `implemented-eng-110b`
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/evidence-management/ENG-110B/OWNER-ACCEPTANCE.md)
+- Evidence: `20260730T025500Z-APZQEP-ENG-110B.json` · Acceptance `20260730T030000Z-APZQEP-ENG-110B-ACCEPTANCE.json`
+
+**APZQEP-ENG-110C — Evidence Management Feature Wave 2 (Persistence & Storage Abstractions) — CLOSED:**
+
+- Pack: [evidence-management/ENG-110C/](../products/apzqep/evidence-management/ENG-110C/README.md)
+- Status: **ACCEPTED / APPROVED / PERSISTENCE & STORAGE ABSTRACTIONS BASELINED / CLOSED**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/evidence-management/ENG-110C/OWNER-ACCEPTANCE.md)
+- Evidence: `20260730T031500Z-APZQEP-ENG-110C.json` · Acceptance `20260730T032000Z-APZQEP-ENG-110C-ACCEPTANCE.json`
+
+**APZQEP-ENG-110D — Evidence Management Feature Wave 3 (Application Services) — CLOSED:**
+
+- Pack: [evidence-management/ENG-110D/](../products/apzqep/evidence-management/ENG-110D/README.md)
+- Status: **ACCEPTED / APPROVED / APPLICATION SERVICES BASELINED / CLOSED**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/evidence-management/ENG-110D/OWNER-ACCEPTANCE.md)
+- Evidence: `20260730T033000Z-APZQEP-ENG-110D.json` · Acceptance `20260730T033500Z-APZQEP-ENG-110D-ACCEPTANCE.json`
+
+**APZQEP-ENG-110E — Evidence Management Feature Wave 4 (Security & Policy) — CLOSED:**
+
+- Pack: [evidence-management/ENG-110E/](../products/apzqep/evidence-management/ENG-110E/README.md)
+- Status: **ACCEPTED / APPROVED / SECURITY & POLICY INTEGRATION BASELINED / CLOSED**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/evidence-management/ENG-110E/OWNER-ACCEPTANCE.md)
+- Evidence: `20260730T034500Z-APZQEP-ENG-110E.json` · Acceptance `20260730T070000Z-APZQEP-ENG-110E-ACCEPTANCE.json`
+
+**APZQEP-ENG-110F — Evidence Management Feature Wave 5 (Transport & Workbench) — CLOSED:**
+
+- Pack: [evidence-management/ENG-110F/](../products/apzqep/evidence-management/ENG-110F/README.md)
+- Status: **ACCEPTED / APPROVED / TRANSPORT LAYER & WORKBENCH BASELINED / CLOSED**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/evidence-management/ENG-110F/OWNER-ACCEPTANCE.md)
+- Evidence: Completion `20260730T080000Z-APZQEP-ENG-110F-COMPLETION.json` · Acceptance `20260730T081900Z-APZQEP-ENG-110F-ACCEPTANCE.json`
+
+**APZQEP-OPS-001 — Evidence Management Operational Readiness — CLOSED:**
+
+- Pack: [evidence-management/OPS-001/](../products/apzqep/evidence-management/OPS-001/README.md)
+- Status: **ACCEPTED / OPERATIONAL READINESS BASELINED / CLOSED** · **OPERATIONALLY READY · PASS WITH LIMITATIONS**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/evidence-management/OPS-001/OWNER-ACCEPTANCE.md)
+- Evidence: Completion `20260730T082000Z-APZQEP-OPS-001-COMPLETION.json` · Acceptance `20260730T083200Z-APZQEP-OPS-001-ACCEPTANCE.json`
+
+**APZQEP-CERT-003 — Evidence Management Certification — CLOSED:**
+
+- Pack: [evidence-management/CERT-003/](../products/apzqep/evidence-management/CERT-003/README.md)
+- Status: **ACCEPTED / CERTIFICATION BASELINED / CLOSED** · **PRODUCTION_READY_WITH_LIMITATIONS** · **LIMITED_AVAILABILITY**
+- Acceptance: [OWNER-ACCEPTANCE.md](../products/apzqep/evidence-management/CERT-003/OWNER-ACCEPTANCE.md)
+- Evidence: Completion `20260730T084500Z-APZQEP-CERT-003-COMPLETION.json` · Acceptance `20260730T090800Z-APZQEP-CERT-003-ACCEPTANCE.json`
+
+**APZQEP-FREEZE-003 — Evidence Management Production Freeze — AWAITING OWNER DECISION:**
+
+- Pack: [evidence-management/FREEZE-003/](../products/apzqep/evidence-management/FREEZE-003/README.md)
+- Status: **IMPLEMENTED / AWAITING OWNER EVIDENCE MANAGEMENT PRODUCTION FREEZE DECISION**
+- RC: `@apzhub/qep-evidence` **1.0.0-rc.1** · recommended frozen baseline **1.0.0**
+- Evidence: `20260730T091500Z-APZQEP-FREEZE-003-COMPLETION.json`
+- Release pack: [releases/apzqep/evidence-management/1.0.0-rc.1/](../releases/apzqep/evidence-management/1.0.0-rc.1/README.md)
+- Stop: Do **not** begin Release, durable storage, or event publication without further Owner Instructions.
 
 **APZQEP-GOV-ENG-BUILD-001 — Engineering Build Contract & Wave Engineering — CLOSED:**
 
@@ -169,7 +256,7 @@
 - Evidence: `20260728T102844Z-APZQEP-CONSTITUTION-1.0.0-RATIFICATION.json`
 - Nature: documentation only — **no Wave 2 engineering**
 
-**Stop condition:** Foundation is immutable history. Lifecycle Standard v1.0 is **BASELINED**. FREEZE-002 is **CLOSED**. RELEASE-002 awaits Owner Patch Production Release Decision for **1.0.1** under Limited Availability. Do **not** execute GA-001 or unrestricted GA without further Owner Instructions. Authorised next delivery: **Owner Patch Production Release Decision only**.
+**Stop condition:** Foundation is immutable history. Lifecycle Standard v1.0 is **VALIDATED**. ARCH-016, OES-ENG-091A, ENG-110A…F, OPS-001, CERT-003 are **CLOSED**. FREEZE-003 awaits Owner Evidence Management Production Freeze Decision. Do **not** commence Release, storage provider selection, or event publication without further Owner Instructions. Authorised next delivery: **Owner Evidence Management Production Freeze Decision on FREEZE-003 only**.
 
 **APZQEP-PORTFOLIO-001 — Foundation Completion & Portfolio Baseline — CLOSED:**
 

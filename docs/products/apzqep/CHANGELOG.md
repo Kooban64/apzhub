@@ -1,5 +1,113 @@
 # APZ QEP — Changelog
 
+## 2026-07-30 — APZQEP-FREEZE-003 Evidence Management Production Freeze · AWAITING OWNER DECISION
+
+- **APZQEP-CERT-003** Owner Decision — **ACCEPTED / CERTIFICATION BASELINED / CLOSED** (`20260730T090800Z-APZQEP-CERT-003-ACCEPTANCE.json`) · **PRODUCTION_READY_WITH_LIMITATIONS** · **LIMITED_AVAILABILITY**
+- **APZQEP-FREEZE-003** — Production Freeze — **IMPLEMENTED / AWAITING OWNER EVIDENCE MANAGEMENT PRODUCTION FREEZE DECISION**
+- RC: `@apzhub/qep-evidence` **1.0.0-rc.1** · recommended frozen baseline **1.0.0**
+- Pack: [evidence-management/FREEZE-003/](./evidence-management/FREEZE-003/README.md) · Evidence `20260730T091500Z-APZQEP-FREEZE-003-COMPLETION.json` · Release pack [releases/apzqep/evidence-management/1.0.0-rc.1/](../../releases/apzqep/evidence-management/1.0.0-rc.1/README.md)
+- Validation: Evidence **54** · targeted **35** · TE **77** · Playwright **7** · typecheck/lint **PASS**
+- Nature: packaging/docs freeze only — **no storage / Release / behaviour change**
+
+## 2026-07-30 — APZQEP-CERT-003 Evidence Management Certification · ACCEPTED / CLOSED
+
+- **APZQEP-OPS-001** Owner Decision — **ACCEPTED / OPERATIONAL READINESS BASELINED / CLOSED** (`20260730T083200Z-APZQEP-OPS-001-ACCEPTANCE.json`) · **OPERATIONALLY READY · PASS WITH LIMITATIONS**
+- **APZQEP-CERT-003** — Certification — **ACCEPTED / CERTIFICATION BASELINED / CLOSED** · **PRODUCTION_READY_WITH_LIMITATIONS** · **LIMITED_AVAILABILITY**
+- Pack: [evidence-management/CERT-003/](./evidence-management/CERT-003/README.md) · Completion `20260730T084500Z-APZQEP-CERT-003-COMPLETION.json` · Acceptance `20260730T090800Z-APZQEP-CERT-003-ACCEPTANCE.json`
+- Nature: verification only — **no storage / Freeze / Release / event bus / observability features**
+
+## 2026-07-30 — APZQEP-OPS-001 Evidence Management Operational Readiness · ACCEPTED / CLOSED
+
+- **APZQEP-ENG-110F** Owner Decision — **ACCEPTED / TRANSPORT LAYER & WORKBENCH BASELINED / CLOSED** (`20260730T081900Z-APZQEP-ENG-110F-ACCEPTANCE.json`)
+- **APZQEP-OPS-001** — Operational Readiness — **ACCEPTED / OPERATIONAL READINESS BASELINED / CLOSED** · **OPERATIONALLY READY · PASS WITH LIMITATIONS**
+- Pack: [evidence-management/OPS-001/](./evidence-management/OPS-001/README.md) · Completion `20260730T082000Z-APZQEP-OPS-001-COMPLETION.json` · Acceptance `20260730T083200Z-APZQEP-OPS-001-ACCEPTANCE.json`
+- Nature: ops assessment only — **no storage / SQL / event bus / new APIs** · memory persistence (ADR-0088) documented
+
+## 2026-07-30 — APZQEP-ENG-110F Evidence Management Transport & Workbench · ACCEPTED / CLOSED
+
+- **APZQEP-ENG-110E** Owner Decision — **ACCEPTED / SECURITY & POLICY INTEGRATION BASELINED / CLOSED** (`20260730T070000Z-APZQEP-ENG-110E-ACCEPTANCE.json`)
+- **APZQEP-ENG-110F** — Feature Wave 5 Transport Layer & Workbench Integration — **ACCEPTED / TRANSPORT LAYER & WORKBENCH BASELINED / CLOSED**
+- Package: `@apzhub/qep-evidence` **0.0.0** · API / Presentation `implemented-eng-110f`
+- Pack: [evidence-management/ENG-110F/](./evidence-management/ENG-110F/README.md) · Completion `20260730T080000Z-APZQEP-ENG-110F-COMPLETION.json` · Acceptance `20260730T081900Z-APZQEP-ENG-110F-ACCEPTANCE.json`
+- Nature: REST `/api/v1/qep/evidence` + Workbench `/workspace/qep/evidence` — **no SQL / storage tech / auth providers / event bus** · in-memory ports (ADR-0088 undecided)
+
+## 2026-07-30 — APZQEP-ENG-110E Evidence Management Security & Policy · ACCEPTED / CLOSED
+
+- **APZQEP-ENG-110D** Owner Decision — **ACCEPTED / APPLICATION SERVICES BASELINED / CLOSED** (`20260730T033500Z-APZQEP-ENG-110D-ACCEPTANCE.json`)
+- **APZQEP-ENG-110E** — Feature Wave 4 Security & Policy Integration — **ACCEPTED / SECURITY & POLICY INTEGRATION BASELINED / CLOSED**
+- Package: `@apzhub/qep-evidence` **0.0.0** · Application `secured-eng-110e`
+- Pack: [evidence-management/ENG-110E/](./evidence-management/ENG-110E/README.md) · Evidence `20260730T034500Z-APZQEP-ENG-110E.json`
+- Validation: 52 package tests PASS · TE 1.0.1 typecheck + 77 tests PASS
+- Nature: L-02 fail-closed security only — **no REST / Workbench / storage / event bus** · recommended **APZQEP-ENG-110F** **NOT AUTHORISED**
+
+## 2026-07-30 — APZQEP-ENG-110D Evidence Management Application Services · ACCEPTED / CLOSED
+
+- **APZQEP-ENG-110C** Owner Decision — **ACCEPTED / PERSISTENCE & STORAGE ABSTRACTIONS BASELINED / CLOSED** (`20260730T032000Z-APZQEP-ENG-110C-ACCEPTANCE.json`)
+- **APZQEP-ENG-110D** — Feature Wave 3 Application Services — **ACCEPTED / APPLICATION SERVICES BASELINED / CLOSED**
+- Pack: [evidence-management/ENG-110D/](./evidence-management/ENG-110D/README.md) · Acceptance `20260730T033500Z-APZQEP-ENG-110D-ACCEPTANCE.json`
+- Nature: orchestration only — successor **APZQEP-ENG-110E** authorised by separate Owner Directive
+
+## 2026-07-30 — APZQEP-ENG-110C Evidence Management Persistence Abstractions · ACCEPTED / CLOSED
+
+- **APZQEP-ENG-110B** Owner Decision — **ACCEPTED / CORE DOMAIN BASELINED / CLOSED** (`20260730T030000Z-APZQEP-ENG-110B-ACCEPTANCE.json`)
+- **APZQEP-ENG-110C** — Feature Wave 2 Persistence & Storage Abstractions — **ACCEPTED / PERSISTENCE & STORAGE ABSTRACTIONS BASELINED / CLOSED**
+- Package: `@apzhub/qep-evidence` **0.0.0** · Infrastructure `abstractions-eng-110c`
+- Pack: [evidence-management/ENG-110C/](./evidence-management/ENG-110C/README.md) · Evidence `20260730T031500Z-APZQEP-ENG-110C.json` · Acceptance `20260730T032000Z-APZQEP-ENG-110C-ACCEPTANCE.json`
+- Nature: ports/adapters/mappers only — successor **APZQEP-ENG-110D** authorised by separate Owner Directive
+
+## 2026-07-30 — APZQEP-ENG-110B Evidence Management Core Domain · ACCEPTED / CLOSED
+
+- **APZQEP-ENG-110A** Owner Decision — **ACCEPTED / REPOSITORY SCAFFOLDING BASELINED / CLOSED** (`20260730T025000Z-APZQEP-ENG-110A-ACCEPTANCE.json`)
+- **APZQEP-ENG-110B** — Feature Wave 1 Core Domain — **ACCEPTED / CORE DOMAIN BASELINED / CLOSED**
+- Package: `@apzhub/qep-evidence` **0.0.0** · Domain `implemented-eng-110b`
+- Pack: [evidence-management/ENG-110B/](./evidence-management/ENG-110B/README.md) · Evidence `20260730T025500Z-APZQEP-ENG-110B.json` · Acceptance `20260730T030000Z-APZQEP-ENG-110B-ACCEPTANCE.json`
+- Validation: domain tests PASS · TE 1.0.1 typecheck + 77 tests PASS
+- Nature: domain only — **no persistence / API / crypto / Workbench** · successor **APZQEP-ENG-110C** authorised by separate Owner Directive
+
+## 2026-07-30 — APZQEP-ENG-110A Evidence Management Scaffolding · AWAITING OWNER DECISION
+
+- **APZQEP-OES-ENG-091A** Owner Decision — **ACCEPTED / ENGINEERING SPECIFICATION BASELINED / CLOSED** (`20260730T024000Z-APZQEP-OES-ENG-091A-ACCEPTANCE.json`)
+- **APZQEP-ENG-110A** — Repository Scaffolding (Foundation Wave) — **IMPLEMENTED / AWAITING OWNER REPOSITORY SCAFFOLDING DECISION**
+- Package: `@apzhub/qep-evidence` **0.0.0** · module `qep-evidence` scaffolding
+- Pack: [evidence-management/ENG-110A/](./evidence-management/ENG-110A/README.md) · Evidence `20260730T024500Z-APZQEP-ENG-110A.json`
+- Validation: package typecheck/lint + 5 boundary tests PASS · TE 1.0.1 typecheck + 77 tests PASS
+- Nature: structure only — **no business functionality** · recommended **APZQEP-ENG-110B** **NOT AUTHORISED**
+
+## 2026-07-30 — APZQEP-OES-ENG-091A Evidence Management Eng Spec · AWAITING OWNER DECISION
+
+- **APZQEP-ARCH-016** Owner Decision — **ACCEPTED / ARCHITECTURE BASELINED / CLOSED** (`20260730T023000Z-APZQEP-ARCH-016-ACCEPTANCE.json`)
+- ADRs ADR-0087 … ADR-0091 **Accepted**
+- **APZQEP-OES-ENG-091A** — Evidence Management Engineering Specification — **IMPLEMENTED / AWAITING OWNER EVIDENCE MANAGEMENT ENGINEERING SPECIFICATION DECISION**
+- Pack: [evidence-management/OES-ENG-091A/](./evidence-management/OES-ENG-091A/README.md) · Evidence `20260730T023500Z-APZQEP-OES-ENG-091A.json`
+- Nature: Eng Spec only — **no production code** · recommended **APZQEP-ENG-110A** **NOT AUTHORISED**
+- Stop: Do **not** begin Engineering waves / schemas / APIs / UI
+
+## 2026-07-30 — APZQEP-ARCH-016 Evidence Management Architecture · AWAITING OWNER DECISION
+
+- **APZQEP-CAPABILITY-002** Owner Decision — **ACCEPTED / CAPABILITY SELECTION BASELINED / CLOSED** (`20260730T001241Z-APZQEP-CAPABILITY-002-ACCEPTANCE.json`) · selected **Evidence Management**
+- **APZQEP-ARCH-016** — Evidence Management Capability Architecture — **IMPLEMENTED / AWAITING OWNER EVIDENCE MANAGEMENT ARCHITECTURE DECISION**
+- Pack: [evidence-management/OES-ARCH-016/](./evidence-management/OES-ARCH-016/README.md) · Evidence `20260730T021800Z-APZQEP-ARCH-016.json`
+- ADRs ADR-0087 … ADR-0091 **Proposed**
+- Operating premise: Lifecycle Stability → Capability Delivery → Customer Value (≥90/10)
+- Stop: Do **not** begin Eng Spec / engineering. Recommended next **APZQEP-OES-ENG-091A** **NOT AUTHORISED**
+
+## 2026-07-29 — APZQEP-CAPABILITY-002 Next Capability Selection · AWAITING OWNER DECISION
+
+- **APZQEP-RELEASE-002** Owner Decision — **ACCEPTED / PATCH PRODUCTION RELEASE BASELINED / CLOSED** (`20260729T194720Z-APZQEP-RELEASE-002-ACCEPTANCE.json`)
+- Test Execution **1.0.1** production patch baselined · Lifecycle Standard **validated for production use**
+- **APZQEP-CAPABILITY-002** — Next Product Capability — **IMPLEMENTED / AWAITING OWNER NEXT CAPABILITY DECISION**
+- Recommendation: **Evidence Management** (rank 2: Test Runs; rank 3: Defects)
+- Pack: [CAPABILITY-002/](./CAPABILITY-002/README.md) · Evidence `20260729T194720Z-APZQEP-CAPABILITY-002.json`
+- Operating rule recorded: ≥90% user value / ≤10% governance evolution
+- GA-001: **NOT AUTHORISED**
+- Stop: Do **not** commence Architecture or engineering without a separate Owner Architecture Directive
+
+## 2026-07-29 — APZQEP-RELEASE-002 Patch Production Release · ACCEPTED / CLOSED
+
+- Owner Decision — **ACCEPTED / APPROVED / PATCH PRODUCTION RELEASE BASELINED / CLOSED**
+- Package `@apzhub/qep-test-execution` **1.0.1** · tag `apzqep-test-execution-v1.0.1`
+- Acceptance evidence: `20260729T194720Z-APZQEP-RELEASE-002-ACCEPTANCE.json`
+
 ## 2026-07-29 — APZQEP-RELEASE-002 Patch Production Release · AWAITING OWNER DECISION
 
 - **APZQEP-FREEZE-002** Owner Decision — **ACCEPTED / PATCH PRODUCTION BASELINE FROZEN / CLOSED** (`20260729T193042Z-APZQEP-FREEZE-002-ACCEPTANCE.json`)

@@ -1,0 +1,54 @@
+{
+  "programme": "APZQEP-CERT-003",
+  "capability": "Evidence Management",
+  "programmeType": "Certification",
+  "status": "AWAITING_OWNER_DECISION",
+  "completionState": "IMPLEMENTED",
+  "recommendedClass": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "recommendedSuitability": "LIMITED_AVAILABILITY",
+  "package": "@apzhub/qep-evidence",
+  "version": "0.0.0",
+  "recordedAt": "20260730T084500Z",
+  "dependsOn": [
+    "APZQEP-ARCH-016",
+    "APZQEP-OES-ENG-091A",
+    "APZQEP-ENG-110A",
+    "APZQEP-ENG-110B",
+    "APZQEP-ENG-110C",
+    "APZQEP-ENG-110D",
+    "APZQEP-ENG-110E",
+    "APZQEP-ENG-110F",
+    "APZQEP-OPS-001"
+  ],
+  "validation": {
+    "qepEvidenceTests": 54,
+    "testExecutionTests": 77,
+    "testExecutionVersion": "1.0.1",
+    "targetedTransportWorkbenchTests": 35,
+    "implementationChanges": "none"
+  },
+  "assessments": {
+    "architectureConformance": "PASS",
+    "engineeringConformance": "PASS_WITH_LIMITATIONS",
+    "operationalReadinessVerification": "PASS_WITH_LIMITATIONS",
+    "regression": "PASS",
+    "unauthorisedWork": "none"
+  },
+  "limitations": [
+    "L-EM-STOR-01_adr_0088_memory",
+    "L-EM-OBS-01_observability_deferred",
+    "L-EM-EVT-01_event_publication_deferred",
+    "L-EM-01_list_search_tenant_permission_scope",
+    "L-EM-UI-01_workbench_surface_depth",
+    "L-EM-HASH-01_caller_supplied_hash",
+    "L-EM-VER-01_semver_0_0_0"
+  ],
+  "successorGate": "OWNER_EVIDENCE_MANAGEMENT_CERTIFICATION_DECISION",
+  "notAuthorised": [
+    "freeze",
+    "release",
+    "durable_storage_implementation",
+    "event_publication",
+    "observability_features"
+  ]
+}

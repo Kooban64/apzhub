@@ -1,0 +1,24 @@
+{
+  "name": "@apzhub/qep-evidence",
+  "version": "1.0.0-rc.1",
+  "private": true,
+  "type": "module",
+  "description": "APZ QEP Evidence Management — Domain + persistence abstractions + Application + L-02 security + REST/Workbench. Production freeze candidate 1.0.0-rc.1 (APZQEP-FREEZE-003). CERT-003 PRODUCTION_READY_WITH_LIMITATIONS. LIMITED_AVAILABILITY. ADR-0088 storage undecided.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./domain": "./src/domain/index.ts",
+    "./application": "./src/application/index.ts",
+    "./infrastructure": "./src/infrastructure/index.ts",
+    "./shared": "./src/shared/index.ts",
+    "./api": "./src/api/index.ts",
+    "./presentation": "./src/presentation/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-evidence"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*"
+  }
+}

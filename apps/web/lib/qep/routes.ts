@@ -86,3 +86,18 @@ export {
   parseQepTestExecutionDetailMode,
   type QepTestExecutionDetailMode,
 } from "@apzhub/qep-test-execution/presentation";
+
+export {
+  QEP_EVIDENCE_BASE_PATH,
+  QEP_EVIDENCE_ROUTES,
+  isQepEvidenceRoute,
+  isQepEvidenceHomeRoute,
+  isQepEvidenceExplorerRoute,
+  isQepEvidenceCollectionsRoute,
+  isQepEvidenceNewRoute,
+  parseQepEvidenceRouteId,
+  parseQepEvidenceDetailMode,
+  parseQepEvidenceCollectionId,
+  parseQepEvidenceSetId,
+  type QepEvidenceDetailMode,
+} from "@apzhub/qep-evidence/presentation";

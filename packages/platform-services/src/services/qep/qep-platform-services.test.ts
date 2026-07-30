@@ -12,6 +12,7 @@ import { PLATFORM_SERVICE_PERMISSION_CATALOGUE } from "../../authorization/permi
 import { resolveOperationAuthorization } from "../../authorization/operation-authorization-map";
 import { createPlatformServices } from "../create-platform-services";
 import { QEP_TEST_EXECUTION_PERMISSIONS } from "./qep-test-execution-permissions";
+import { QEP_EVIDENCE_PERMISSIONS } from "./qep-evidence-permissions";
 
 import {
   createQepPlatformServicesForProduction,
@@ -481,6 +482,65 @@ describe("APZQEP-ENG-020C qep platform services", () => {
     expect(() => createQepTestExecutionPlatformServicesForTest({})).toThrow(
       /allowInMemoryPersistence/,
     );
+  });
+
+  it("registers qep evidence permissions in the platform catalogue", () => {
+    for (const key of QEP_EVIDENCE_PERMISSIONS) {
+      expect(PLATFORM_SERVICE_PERMISSION_CATALOGUE).toContain(key);
+    }
+  });
+
+  it("maps gateway operations to qep evidence permissions", () => {
+    expect(
+      resolveOperationAuthorization("qepEvidence", "list")?.requiredPermission,
+    ).toBe("qep.evidence.read");
+    expect(
+      resolveOperationAuthorization("qepEvidence", "capture")?.requiredPermission,
+    ).toBe("qep.evidence.create");
+    expect(
+      resolveOperationAuthorization("qepEvidence", "download")?.requiredPermission,
+    ).toBe("qep.evidence.download");
+    expect(
+      resolveOperationAuthorization("qepEvidence", "verify")?.requiredPermission,
+    ).toBe("qep.evidence.verify");
+    expect(
+      resolveOperationAuthorization("qepEvidence", "grantAccess")?.requiredPermission,
+    ).toBe("qep.evidence.admin");
+  });
+
+  it("wires the evidence gateway through capture and validate", async () => {
+    const qep = createQepPlatformServicesForTest({ allowInMemoryPersistence: true });
+    const bundle = createPlatformServices({ qepPlatform: qep });
+    const evidenceCtx = {
+      tenantId: "tenant_a",
+      userId: "user_1",
+      correlationId: "corr_qep_evidence",
+      permissions: [...QEP_EVIDENCE_PERMISSIONS],
+    };
+
+    const captured = await bundle.gateway.qep.evidence.capture(evidenceCtx, {
+      projectId: "proj_1",
+      sourceKind: "manual_upload",
+      mediaType: "text/plain",
+      contentBase64: Buffer.from("hello").toString("base64"),
+      contentHash: "a".repeat(64),
+      title: "Demo",
+    });
+    expect(captured.status).toBe("captured");
+    expect(captured.availableActions).toContain("validateEvidence");
+
+    const validated = await bundle.gateway.qep.evidence.performAction(
+      evidenceCtx,
+      captured.id,
+      "validate",
+      { expectedRevision: captured.revision },
+    );
+    expect(validated.status).toBe("validated");
+
+    const listed = await bundle.gateway.qep.evidence.list(evidenceCtx, {
+      projectId: "proj_1",
+    });
+    expect(listed.total).toBeGreaterThan(0);
   });
 
   it("wires the execution gateway through the full happy-path lifecycle", async () => {

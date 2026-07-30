@@ -1,0 +1,15 @@
+{
+  "evidenceId": "20260730T033500Z-APZQEP-ENG-110D-ACCEPTANCE",
+  "programme": "APZQEP-ENG-110D",
+  "title": "Owner Application Services Decision — ACCEPTED",
+  "decisionDate": "2026-07-30",
+  "decisionTimestampUtc": "20260730T033500Z",
+  "status": "ACCEPTED_APPROVED_APPLICATION_SERVICES_BASELINED_CLOSED",
+  "implementationEvidence": "20260730T033000Z-APZQEP-ENG-110D",
+  "authorisedNext": {
+    "programme": "APZQEP-ENG-110E",
+    "title": "Feature Wave 4 — Security & Policy Integration",
+    "authorised": true
+  },
+  "layeringRuleFrozen": "Presentation → Transport → Application → Domain → Repository Contracts → Storage Port → Adapters → Infrastructure"
+}

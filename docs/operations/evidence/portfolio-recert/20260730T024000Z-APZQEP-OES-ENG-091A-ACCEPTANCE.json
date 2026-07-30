@@ -1,0 +1,20 @@
+{
+  "evidenceId": "20260730T024000Z-APZQEP-OES-ENG-091A-ACCEPTANCE",
+  "programme": "APZQEP-OES-ENG-091A",
+  "oes": "APZQEP-OES-ENG-091A",
+  "title": "Evidence Management Engineering Specification \u2014 Owner Acceptance",
+  "programmeType": "Engineering Specification",
+  "capability": "Evidence Management",
+  "decisionDate": "2026-07-30",
+  "decisionTimestampUtc": "20260730T024000Z",
+  "decision": "ACCEPTED / APPROVED / ENGINEERING SPECIFICATION BASELINED / CLOSED",
+  "implementationEvidence": "20260730T023500Z-APZQEP-OES-ENG-091A",
+  "pack": "docs/products/apzqep/evidence-management/OES-ENG-091A/",
+  "ownerAcceptance": "docs/products/apzqep/evidence-management/OES-ENG-091A/OWNER-ACCEPTANCE.md",
+  "architectureAuthority": "APZQEP-ARCH-016",
+  "authorisesEngineering": false,
+  "authorisedNextProgramme": "APZQEP-ENG-110A",
+  "authorisesEngineeringWaves": "SCAFFOLDING_ONLY_VIA_SEPARATE_DIRECTIVE",
+  "productionEngineering": "NONE",
+  "note": "Eng Spec baselined. ENG-110A Repository Scaffolding authorised separately by Owner Directive."
+}

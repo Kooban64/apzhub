@@ -1,0 +1,53 @@
+{
+  "evidenceId": "20260730T034500Z-APZQEP-ENG-110E",
+  "programme": "APZQEP-ENG-110E",
+  "title": "Evidence Management Feature Wave 4 — Security & Policy Integration",
+  "programmeType": "Feature Wave",
+  "wave": "Feature Wave 4 — Security & Policy Integration",
+  "capability": "Evidence Management",
+  "decisionDate": "2026-07-30",
+  "decisionTimestampUtc": "20260730T034500Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_SECURITY_POLICY_INTEGRATION_DECISION",
+  "package": "@apzhub/qep-evidence",
+  "packageVersion": "0.0.0",
+  "domainStatus": "implemented-eng-110b",
+  "applicationStatus": "secured-eng-110e",
+  "infrastructureStatus": "abstractions-eng-110c",
+  "pack": "docs/products/apzqep/evidence-management/ENG-110E/",
+  "ownerSummary": "docs/products/apzqep/evidence-management/ENG-110E/OWNER-SUMMARY.md",
+  "ownerDecisionTemplate": "docs/products/apzqep/evidence-management/ENG-110E/OWNER-ACCEPTANCE.md",
+  "validationReport": "docs/products/apzqep/evidence-management/ENG-110E/VALIDATION-REPORT.md",
+  "dependsOn": [
+    "APZQEP-ARCH-016",
+    "APZQEP-OES-ENG-091A",
+    "APZQEP-ENG-110A",
+    "APZQEP-ENG-110B",
+    "APZQEP-ENG-110C",
+    "APZQEP-ENG-110D",
+    "APZQEP-REM-001-L02"
+  ],
+  "eng110dAcceptance": "20260730T033500Z-APZQEP-ENG-110D-ACCEPTANCE",
+  "securityModel": "L02_FAIL_CLOSED_DEFAULT_DENY",
+  "policyEngine": "REUSED_GRANTS_AND_PERMISSION_CONTEXT_NO_NEW_ENGINE",
+  "restHandlers": "NONE",
+  "workbench": "NONE",
+  "authenticationProviders": "NONE",
+  "storageTechnologySelected": "NONE",
+  "eventPublication": "NONE",
+  "testExecutionPackagesModified": "NONE",
+  "validation": {
+    "packageTypecheck": "PASS",
+    "packageLint": "PASS",
+    "packageTests": "PASS_52",
+    "testExecutionTypecheck": "PASS",
+    "testExecutionTests": "PASS_77"
+  },
+  "recommendedOwnerDecision": "ACCEPT",
+  "recommendedNextAfterAcceptance": {
+    "title": "Feature Wave 5 — Transport (REST/API) & Workbench Integration",
+    "suggestedId": "APZQEP-ENG-110F",
+    "authorised": false,
+    "note": "Recommend distinct REST and Workbench sub-streams within ENG-110F"
+  },
+  "note": "Security enforcement only. Owner Security & Policy Integration Decision required before Feature Wave 5."
+}

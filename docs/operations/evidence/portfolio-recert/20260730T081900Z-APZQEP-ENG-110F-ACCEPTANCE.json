@@ -1,0 +1,14 @@
+{
+  "programme": "APZQEP-ENG-110F",
+  "capability": "Evidence Management",
+  "programmeType": "Feature Wave 5 – Transport Layer & Workbench Integration",
+  "decision": "ACCEPTED",
+  "status": "PROGRAMME_CLOSED",
+  "baselined": "TRANSPORT_LAYER_AND_WORKBENCH",
+  "package": "@apzhub/qep-evidence",
+  "version": "0.0.0",
+  "recordedAt": "20260730T081900Z",
+  "successor": "APZQEP-OPS-001",
+  "testExecutionBaseline": "1.0.1",
+  "notes": "Owner accepted REST transport and Workbench integration. Permanent execution flow baselined. No certification authorised under this programme."
+}

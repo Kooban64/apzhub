@@ -1,0 +1,41 @@
+{
+  "programmeId": "APZQEP-CAPABILITY-002",
+  "title": "Next Product Capability Selection",
+  "status": "IMPLEMENTED_AWAITING_OWNER_NEXT_CAPABILITY_DECISION",
+  "timestampUtc": "20260729T194720Z",
+  "recommendation": {
+    "capability": "Evidence Management",
+    "suggestedArchitectureProgrammeId": "APZQEP-ARCH-016",
+    "rank2": "Test Runs",
+    "rank3": "Defect Management"
+  },
+  "candidatesEvaluated": [
+    "Test Suites",
+    "Test Runs",
+    "Requirements (already delivered)",
+    "Evidence Management",
+    "Defects",
+    "Test Planning (already delivered)",
+    "Reporting",
+    "Analytics",
+    "AI Assistance",
+    "Dashboards"
+  ],
+  "sources": [
+    "docs/products/apzqep/portfolio/PORTFOLIO-001/WAVE-2-ROADMAP.md",
+    "docs/products/apzqep/OWNER-PORTFOLIO-DECLARATION.md",
+    "docs/products/apzqep/product-definition/MODULE-CATALOGUE.md",
+    "docs/adr/ADR-0080 (Evidence references vs SoR)",
+    "docs/adr/ADR-0077 (Test Runs vs Execution)",
+    "docs/products/apzqep/test-execution/OES-ARCH-015/PART-05.md",
+    "Test Execution 1.0.1 release notes / CERT-002 residuals"
+  ],
+  "productEngineering": "NONE",
+  "architectureCommenced": false,
+  "governanceExpansion": "NONE",
+  "lifecycleStandard": "v1.0 USE_AS_IS",
+  "operatingRule": ">=90% user value / <=10% governance evolution",
+  "ga001": "NOT_AUTHORISED",
+  "documentationPack": "docs/products/apzqep/CAPABILITY-002/",
+  "predecessorAcceptance": "20260729T194720Z-APZQEP-RELEASE-002-ACCEPTANCE.json"
+}

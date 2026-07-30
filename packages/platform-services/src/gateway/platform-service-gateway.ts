@@ -64,6 +64,7 @@ import type { QepTestSpecificationPlatformService } from "../services/qep/qep-te
 import type { QepTestPlanPlatformService } from "../services/qep/qep-test-plan-service-impl";
 import type { QepTestExecutionPlatformService } from "../services/qep/qep-test-execution-service-impl";
 import type { QepVerificationPlatformService } from "../services/qep/qep-verification-service-impl";
+import type { QepEvidencePlatformService } from "../services/qep/qep-evidence-service-impl";
 
 /** Platform-wired QEP gateway — short pipeline operation names (list/get/create/...). */
 export type QepPlatformGateway = {
@@ -73,6 +74,7 @@ export type QepPlatformGateway = {
   readonly specifications: QepTestSpecificationPlatformService;
   readonly plans: QepTestPlanPlatformService;
   readonly executions: QepTestExecutionPlatformService;
+  readonly evidence: QepEvidencePlatformService;
 };
 
 export interface PlatformServiceGatewayDeps {

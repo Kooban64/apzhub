@@ -1,0 +1,26 @@
+{
+  "programme": "APZQEP-OPS-001",
+  "capability": "Evidence Management",
+  "programmeType": "Operational Readiness",
+  "decision": "ACCEPTED",
+  "status": "CLOSED",
+  "classification": "OPERATIONALLY_READY_PASS_WITH_LIMITATIONS",
+  "package": "@apzhub/qep-evidence",
+  "version": "0.0.0",
+  "recordedAt": "20260730T083200Z",
+  "dependsOn": [
+    "APZQEP-ENG-110A",
+    "APZQEP-ENG-110B",
+    "APZQEP-ENG-110C",
+    "APZQEP-ENG-110D",
+    "APZQEP-ENG-110E",
+    "APZQEP-ENG-110F"
+  ],
+  "limitationsAccepted": [
+    "adr_0088_storage_undecided",
+    "evidence_specific_observability_deferred",
+    "event_publication_deferred"
+  ],
+  "successor": "APZQEP-CERT-003",
+  "unrestrictedCertificationAuthorised": false
+}

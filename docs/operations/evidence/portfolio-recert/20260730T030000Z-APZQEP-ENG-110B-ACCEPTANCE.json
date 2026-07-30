@@ -1,0 +1,12 @@
+{
+  "evidenceId": "20260730T030000Z-APZQEP-ENG-110B-ACCEPTANCE",
+  "programme": "APZQEP-ENG-110B",
+  "title": "Evidence Management Feature Wave 1 Core Domain \u2014 Owner Acceptance",
+  "decision": "ACCEPTED / APPROVED / CORE DOMAIN BASELINED / CLOSED",
+  "decisionDate": "2026-07-30",
+  "decisionTimestampUtc": "20260730T030000Z",
+  "implementationEvidence": "20260730T025500Z-APZQEP-ENG-110B",
+  "authorisedNextProgramme": "APZQEP-ENG-110C",
+  "authorisesPersistenceImplementation": false,
+  "note": "Core Domain closed. ENG-110C Persistence & Storage Abstractions authorised separately."
+}

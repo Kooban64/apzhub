@@ -31,6 +31,10 @@ export type AuthorizationResourceType =
   | "qep_test_plan_history"
   | "qep_test_execution"
   | "qep_test_execution_history"
+  | "qep_evidence"
+  | "qep_evidence_collection"
+  | "qep_evidence_set"
+  | "qep_evidence_audit"
   | "testing_execution"
   | "testing_evidence"
   | "testing_automation"
@@ -8402,6 +8406,146 @@ const qepTestExecutionOps: OperationAuthorizationMapping[] = [
   ),
 ];
 
+const qepEvidenceOps: OperationAuthorizationMapping[] = [
+  testingOp("qepEvidence", "list", "qep_evidence", "list", "qep.evidence.read"),
+  testingOp("qepEvidence", "get", "qep_evidence", "read", "qep.evidence.read", 0),
+  testingOp(
+    "qepEvidence",
+    "download",
+    "qep_evidence",
+    "read",
+    "qep.evidence.download",
+    0,
+  ),
+  testingOp("qepEvidence", "capture", "qep_evidence", "create", "qep.evidence.create"),
+  testingOp(
+    "qepEvidence",
+    "performAction",
+    "qep_evidence",
+    "update",
+    "qep.evidence.read",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "verify",
+    "qep_evidence",
+    "execute",
+    "qep.evidence.verify",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "getRelationships",
+    "qep_evidence",
+    "read",
+    "qep.evidence.read",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "associate",
+    "qep_evidence",
+    "update",
+    "qep.evidence.associate",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "getProvenance",
+    "qep_evidence",
+    "read",
+    "qep.evidence.read",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "getAudit",
+    "qep_evidence_audit",
+    "read",
+    "qep.evidence.audit",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "getVersions",
+    "qep_evidence",
+    "read",
+    "qep.evidence.read",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "getAvailableActions",
+    "qep_evidence",
+    "read",
+    "qep.evidence.read",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "checkAccess",
+    "qep_evidence",
+    "execute",
+    "qep.evidence.access_check",
+  ),
+  testingOp(
+    "qepEvidence",
+    "createCollection",
+    "qep_evidence_collection",
+    "create",
+    "qep.evidence.collection.manage",
+  ),
+  testingOp(
+    "qepEvidence",
+    "getCollection",
+    "qep_evidence_collection",
+    "read",
+    "qep.evidence.read",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "addCollectionMember",
+    "qep_evidence_collection",
+    "update",
+    "qep.evidence.collection.manage",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "sealCollection",
+    "qep_evidence_collection",
+    "update",
+    "qep.evidence.seal",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "getSet",
+    "qep_evidence_set",
+    "read",
+    "qep.evidence.read",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "grantAccess",
+    "qep_evidence",
+    "administer",
+    "qep.evidence.admin",
+    0,
+  ),
+  testingOp(
+    "qepEvidence",
+    "revokeAccess",
+    "qep_evidence",
+    "administer",
+    "qep.evidence.admin",
+    0,
+  ),
+];
+
 export const OPERATION_AUTHORIZATION_MAPPINGS: readonly OperationAuthorizationMapping[] =
   [
     ...workspaceOps,
@@ -8466,6 +8610,7 @@ export const OPERATION_AUTHORIZATION_MAPPINGS: readonly OperationAuthorizationMa
     ...qepTestSpecificationOps,
     ...qepTestPlanOps,
     ...qepTestExecutionOps,
+    ...qepEvidenceOps,
     ...timePlatformOps,
     ...analyticsPlatformOps,
   ];

@@ -82,6 +82,25 @@ export {
   type ExecutionActionKey,
 } from "./qep-test-execution-service-impl";
 export {
+  createQepEvidencePlatformServices,
+  createQepEvidencePlatformServicesForProduction,
+  createQepEvidencePlatformServicesForTest,
+  wrapQepEvidencePlatformServiceWithPipeline,
+  type QepEvidencePlatformServicesBundle,
+} from "./create-qep-evidence-platform-services";
+export {
+  createQepEvidencePlatformService,
+  mapEvidenceDomainError,
+  isEvidenceApiActionKey,
+  type QepEvidencePlatformService,
+  type EvidenceDownloadDto,
+} from "./qep-evidence-service-impl";
+export type { EvidenceApiActionKey } from "@apzhub/qep-evidence";
+export {
+  QEP_EVIDENCE_PERMISSIONS,
+  type QepEvidencePermission,
+} from "./qep-evidence-permissions";
+export {
   createQepVerificationPlatformServices,
   createQepVerificationPlatformServicesForProduction,
   createQepVerificationPlatformServicesForTest,

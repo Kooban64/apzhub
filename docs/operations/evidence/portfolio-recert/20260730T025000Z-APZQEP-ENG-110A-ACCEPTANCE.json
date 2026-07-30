@@ -1,0 +1,16 @@
+{
+  "evidenceId": "20260730T025000Z-APZQEP-ENG-110A-ACCEPTANCE",
+  "programme": "APZQEP-ENG-110A",
+  "title": "Evidence Management Repository Scaffolding \u2014 Owner Acceptance",
+  "programmeType": "Repository Scaffolding",
+  "capability": "Evidence Management",
+  "decisionDate": "2026-07-30",
+  "decisionTimestampUtc": "20260730T025000Z",
+  "decision": "ACCEPTED / APPROVED / REPOSITORY SCAFFOLDING BASELINED / CLOSED",
+  "implementationEvidence": "20260730T024500Z-APZQEP-ENG-110A",
+  "package": "@apzhub/qep-evidence",
+  "packageVersion": "0.0.0",
+  "authorisesFeatureWaves": false,
+  "authorisedNextProgramme": "APZQEP-ENG-110B",
+  "note": "Foundation Wave closed. Feature Wave 1 Core Domain authorised separately."
+}

@@ -1,0 +1,52 @@
+{
+  "evidenceId": "20260730T033000Z-APZQEP-ENG-110D",
+  "programme": "APZQEP-ENG-110D",
+  "title": "Evidence Management Feature Wave 3 — Application Services & Use Case Orchestration",
+  "programmeType": "Feature Wave",
+  "wave": "Feature Wave 3 — Application Services & Use Case Orchestration",
+  "capability": "Evidence Management",
+  "decisionDate": "2026-07-30",
+  "decisionTimestampUtc": "20260730T033000Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_APPLICATION_SERVICES_DECISION",
+  "package": "@apzhub/qep-evidence",
+  "packageVersion": "0.0.0",
+  "domainStatus": "implemented-eng-110b",
+  "applicationStatus": "implemented-eng-110d",
+  "infrastructureStatus": "abstractions-eng-110c",
+  "pack": "docs/products/apzqep/evidence-management/ENG-110D/",
+  "ownerSummary": "docs/products/apzqep/evidence-management/ENG-110D/OWNER-SUMMARY.md",
+  "ownerDecisionTemplate": "docs/products/apzqep/evidence-management/ENG-110D/OWNER-ACCEPTANCE.md",
+  "validationReport": "docs/products/apzqep/evidence-management/ENG-110D/VALIDATION-REPORT.md",
+  "dependsOn": [
+    "APZQEP-ARCH-016",
+    "APZQEP-OES-ENG-091A",
+    "APZQEP-ENG-110A",
+    "APZQEP-ENG-110B",
+    "APZQEP-ENG-110C"
+  ],
+  "eng110cAcceptance": "20260730T032000Z-APZQEP-ENG-110C-ACCEPTANCE",
+  "restHandlers": "NONE",
+  "workbench": "NONE",
+  "authentication": "NONE",
+  "authorisation": "NONE",
+  "aclEvaluation": "DEFERRED_ENG_110E",
+  "storageTechnologySelected": "NONE",
+  "eventPublication": "NONE_COLLECTED_ONLY",
+  "hashingAlgorithms": "NONE",
+  "testExecutionPackagesModified": "NONE",
+  "domainAddition": "updateEvidenceMetadata (thin metadata mutator; rules in Domain)",
+  "validation": {
+    "packageTypecheck": "PASS",
+    "packageLint": "PASS",
+    "packageTests": "PASS_44",
+    "testExecutionTypecheck": "PASS",
+    "testExecutionTests": "PASS_77"
+  },
+  "recommendedOwnerDecision": "ACCEPT",
+  "recommendedNextAfterAcceptance": {
+    "title": "Feature Wave 4 — Security & Policy Integration",
+    "suggestedId": "APZQEP-ENG-110E",
+    "authorised": false
+  },
+  "note": "Application orchestration only. Owner Application Services Decision required before Feature Wave 4."
+}

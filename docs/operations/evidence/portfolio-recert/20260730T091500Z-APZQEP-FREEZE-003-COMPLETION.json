@@ -1,0 +1,42 @@
+{
+  "programme": "APZQEP-FREEZE-003",
+  "capability": "Evidence Management",
+  "programmeType": "Production Freeze",
+  "status": "AWAITING_OWNER_DECISION",
+  "completionState": "IMPLEMENTED",
+  "package": "@apzhub/qep-evidence",
+  "rcVersion": "1.0.0-rc.1",
+  "recommendedFrozenBaseline": "1.0.0",
+  "class": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "suitability": "LIMITED_AVAILABILITY",
+  "recordedAt": "20260730T091500Z",
+  "gitHeadAtValidation": "8ddb1f68aaa7a157190efa979604ec74960b3156",
+  "dependsOn": ["APZQEP-CERT-003"],
+  "validation": {
+    "qepEvidenceTypecheck": "PASS",
+    "qepEvidenceLint": "PASS",
+    "qepEvidenceTests": 54,
+    "targetedTransportWorkbenchTests": 35,
+    "platformServicesTypecheck": "PASS",
+    "testExecutionTests": 77,
+    "testExecutionVersion": "1.0.1",
+    "playwrightWorkbench": 7
+  },
+  "packagingOnlyChanges": [
+    "version_0.0.0_to_1.0.0-rc.1",
+    "programme_marker_freeze_003",
+    "module_yaml_version",
+    "package_readme"
+  ],
+  "unauthorisedEngineering": "none",
+  "observations": ["rc_tree_not_fully_persisted_to_origin_main"],
+  "successorGate": "OWNER_EVIDENCE_MANAGEMENT_PRODUCTION_FREEZE_DECISION",
+  "notAuthorised": [
+    "release",
+    "durable_storage",
+    "adr_0088_resolution",
+    "event_publication",
+    "observability_features",
+    "api_or_workbench_behaviour_change"
+  ]
+}

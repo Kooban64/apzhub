@@ -51,6 +51,11 @@ import {
   wrapQepTestExecutionPlatformServiceWithPipeline,
 } from "./create-qep-test-execution-platform-services";
 import {
+  createQepEvidencePlatformServicesForProduction,
+  createQepEvidencePlatformServicesForTest,
+  wrapQepEvidencePlatformServiceWithPipeline,
+} from "./create-qep-evidence-platform-services";
+import {
   createQepVerificationPlatformServicesForProduction,
   createQepVerificationPlatformServicesForTest,
   wrapQepVerificationPlatformServiceWithPipeline,
@@ -65,6 +70,7 @@ import type { QepTestSpecificationPlatformService } from "./qep-test-specificati
 import type { QepTestPlanPlatformService } from "./qep-test-plan-service-impl";
 import type { QepTestExecutionPlatformService } from "./qep-test-execution-service-impl";
 import type { QepVerificationPlatformService } from "./qep-verification-service-impl";
+import type { QepEvidencePlatformService } from "./qep-evidence-service-impl";
 
 export type QepPlatformGatewaySurface = {
   readonly requirements: QepRequirementPlatformService;
@@ -73,6 +79,7 @@ export type QepPlatformGatewaySurface = {
   readonly specifications: QepTestSpecificationPlatformService;
   readonly plans: QepTestPlanPlatformService;
   readonly executions: QepTestExecutionPlatformService;
+  readonly evidence: QepEvidencePlatformService;
 };
 
 export type QepPlatformServicesBundle = {
@@ -169,6 +176,7 @@ export function wrapQepPlatformGatewayWithPipeline(
       gateway.executions,
       pipeline,
     ),
+    evidence: wrapQepEvidencePlatformServiceWithPipeline(gateway.evidence, pipeline),
   };
 }
 
@@ -312,6 +320,12 @@ function buildBundle(input: {
           ...input.execution,
         });
 
+  // Evidence: memory-backed Application runtime until storage selection (ADR-0088).
+  const evidenceBundle =
+    input.persistenceMode === "postgres"
+      ? createQepEvidencePlatformServicesForProduction()
+      : createQepEvidencePlatformServicesForTest();
+
   const gatewaySurface: QepPlatformGatewaySurface = {
     requirements,
     traceability: traceabilityBundle.service,
@@ -319,6 +333,7 @@ function buildBundle(input: {
     specifications: specificationBundle.service,
     plans: planBundle.service,
     executions: executionBundle.service,
+    evidence: evidenceBundle.service,
   };
 
   return {

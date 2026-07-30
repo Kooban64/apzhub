@@ -62,6 +62,10 @@ import {
   QEP_TEST_EXECUTION_PERMISSIONS,
   type QepTestExecutionPermission,
 } from "../services/qep/qep-test-execution-permissions";
+import {
+  QEP_EVIDENCE_PERMISSIONS,
+  type QepEvidencePermission,
+} from "../services/qep/qep-evidence-permissions";
 
 /**
  * Platform permission catalogue for gateway-exposed capabilities (OSS-110-06 / OSS-110-08).
@@ -138,6 +142,7 @@ export type PlatformPermissionKey =
   | QepTestSpecificationPermission
   | QepTestPlanPermission
   | QepTestExecutionPermission
+  | QepEvidencePermission
   | "platform.impersonation.use";
 
 export function permissionKey(
@@ -271,6 +276,8 @@ export const PLATFORM_SERVICE_PERMISSION_CATALOGUE = [
   ...QEP_TEST_PLAN_PERMISSIONS,
   // QEP Test Execution platform services (APZQEP-ENG-100D)
   ...QEP_TEST_EXECUTION_PERMISSIONS,
+  // QEP Evidence platform services (APZQEP-ENG-110F)
+  ...QEP_EVIDENCE_PERMISSIONS,
   // Legacy Administration / provider / mapping capability keys
   "administration.manage",
   "administration.administer",

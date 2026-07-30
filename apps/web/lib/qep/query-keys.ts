@@ -1,4 +1,5 @@
 import type { QepBaselineListParams, QepListParams } from "./qep-api";
+import type { QepEvidenceListParams } from "./qep-evidence-api";
 import type { QepTestExecutionListParams } from "./qep-test-execution-api";
 
 export const qepQueryKeys = {
@@ -128,5 +129,23 @@ export const qepQueryKeys = {
       [...qepQueryKeys.executions.all(), "manifest", id] as const,
     planProgress: (planId: string) =>
       [...qepQueryKeys.executions.all(), "planProgress", planId] as const,
+  },
+  evidence: {
+    all: () => [...qepQueryKeys.all(), "evidence"] as const,
+    list: (params?: QepEvidenceListParams) =>
+      [...qepQueryKeys.evidence.all(), "list", params ?? {}] as const,
+    detail: (id: string) => [...qepQueryKeys.evidence.all(), "detail", id] as const,
+    availableActions: (id: string) =>
+      [...qepQueryKeys.evidence.all(), "availableActions", id] as const,
+    relationships: (id: string) =>
+      [...qepQueryKeys.evidence.all(), "relationships", id] as const,
+    provenance: (id: string) =>
+      [...qepQueryKeys.evidence.all(), "provenance", id] as const,
+    audit: (id: string, params?: { limit?: number; offset?: number }) =>
+      [...qepQueryKeys.evidence.all(), "audit", id, params ?? {}] as const,
+    versions: (id: string) => [...qepQueryKeys.evidence.all(), "versions", id] as const,
+    collection: (id: string) =>
+      [...qepQueryKeys.evidence.all(), "collection", id] as const,
+    set: (id: string) => [...qepQueryKeys.evidence.all(), "set", id] as const,
   },
 };

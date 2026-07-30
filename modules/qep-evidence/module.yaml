@@ -1,24 +1,59 @@
 manifestSchemaVersion: "1.0"
 id: qep-evidence
 name: Evidence
-version: 0.1.0
+version: 1.0.0-rc.1
 kind: module
 
 metadata:
   category: quality-engineering
-  description: "Evidence (M09) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: "Evidence Management (M09) — Production freeze candidate 1.0.0-rc.1 (APZQEP-FREEZE-003). CERT-003 PRODUCTION_READY_WITH_LIMITATIONS. LIMITED_AVAILABILITY. Package @apzhub/qep-evidence. ADR-0088 storage undecided."
   product: apzqep
   moduleCatalogueId: M09
   slug: evidence
+  programme: APZQEP-FREEZE-003
 
 dependencies:
   platform: []
+  packages:
+    - "@apzhub/qep-evidence"
   services:
     - qep-platform-service
 
 module:
   category: quality-engineering
-  status: stub
+  status: workbench-implemented
+
+permissions:
+  - id: qep.evidence.read
+    label: View Evidence
+  - id: qep.evidence.create
+    label: Capture Evidence
+  - id: qep.evidence.download
+    label: Download Evidence
+  - id: qep.evidence.associate
+    label: Associate Evidence
+  - id: qep.evidence.classify
+    label: Classify Evidence
+  - id: qep.evidence.review
+    label: Review Evidence
+  - id: qep.evidence.seal
+    label: Seal Evidence
+  - id: qep.evidence.hold
+    label: Manage Legal Hold
+  - id: qep.evidence.archive
+    label: Archive Evidence
+  - id: qep.evidence.dispose
+    label: Dispose Evidence
+  - id: qep.evidence.verify
+    label: Verify Evidence Integrity
+  - id: qep.evidence.audit
+    label: View Evidence Audit
+  - id: qep.evidence.access_check
+    label: Check Evidence Access
+  - id: qep.evidence.collection.manage
+    label: Manage Evidence Collections
+  - id: qep.evidence.admin
+    label: Administer Evidence Access
 
 workbench:
   navigation:
@@ -35,3 +70,42 @@ workbench:
     workspace: qep
     route: /workspace/qep/evidence
     permission: qep.evidence.read
+  additionalViews:
+    - id: qep-evidence-explorer
+      title: Explorer
+      workspace: qep
+      route: /workspace/qep/evidence/explorer
+      permission: qep.evidence.read
+      navigation:
+        level: sidebar
+        parent: qep-evidence
+        label: Explorer
+        icon: list
+        order: 91
+        permission: qep.evidence.read
+    - id: qep-evidence-collections
+      title: Collections
+      workspace: qep
+      route: /workspace/qep/evidence/collections
+      permission: qep.evidence.read
+      navigation:
+        level: sidebar
+        parent: qep-evidence
+        label: Collections
+        icon: folder
+        order: 92
+        permission: qep.evidence.read
+    - id: qep-evidence-capture
+      title: Capture
+      workspace: qep
+      route: /workspace/qep/evidence/new
+      permission: qep.evidence.create
+      navigation:
+        level: sidebar
+        parent: qep-evidence
+        label: Capture
+        icon: plus
+        order: 93
+        permission: qep.evidence.create
+
+# Reserved conceptual routes (OES-ENG-091A PART-04 §3): detail/provenance/versions/relationships, sets.

@@ -1,29 +1,65 @@
-# OWNER-ACCEPTANCE — APZQEP-RELEASE-002
+# OWNER PATCH PRODUCTION RELEASE DECISION
 
-| Field           | Value                                                              |
-| --------------- | ------------------------------------------------------------------ |
-| Programme       | APZQEP-RELEASE-002                                                 |
-| Prepared status | **IMPLEMENTED / AWAITING OWNER PATCH PRODUCTION RELEASE DECISION** |
-| Package         | `@apzhub/qep-test-execution` **1.0.1**                             |
-| Tag             | `apzqep-test-execution-v1.0.1`                                     |
+**Programme:** APZQEP-RELEASE-002  
+**Capability:** Test Execution  
+**Programme Type:** Patch Production Release  
+**Date:** 2026-07-29  
+**Package:** `@apzhub/qep-test-execution` **1.0.1**  
+**Tag:** `apzqep-test-execution-v1.0.1`  
+**Evidence (implementation):** `docs/operations/evidence/portfolio-recert/20260729T193042Z-APZQEP-RELEASE-002.json`  
+**Evidence (acceptance):** `docs/operations/evidence/portfolio-recert/20260729T194720Z-APZQEP-RELEASE-002-ACCEPTANCE.json`
 
-## Owner decision (pending)
+## Decision
+
+**ACCEPTED**
+
+**APPROVED**
+
+**PATCH PRODUCTION RELEASE BASELINED**
+
+**PROGRAMME CLOSED**
+
+## Release Assessment
+
+| Assessment                | Result  |
+| ------------------------- | ------- |
+| Patch Candidate Promotion | ✅ PASS |
+| Version Promotion         | ✅ PASS |
+| Package Identity          | ✅ PASS |
+| Repository Integrity      | ✅ PASS |
+| Functional Delta          | ✅ PASS |
+| Documentation             | ✅ PASS |
+| Security Verification     | ✅ PASS |
+| Engineering Activity      | ✅ NONE |
+| Release Evidence          | ✅ PASS |
+
+## Repository Status (authoritative)
 
 ```text
-☐ ACCEPTED — PATCH PRODUCTION RELEASE BASELINED / CLOSED
-☐ ACCEPTED WITH CONDITIONS
-☐ RETURNED
-☐ REJECTED
+Version: 1.0.1
+Production Status: PATCH PRODUCTION RELEASE BASELINED
+L-02: CLOSED
+RA-02: RETIRED
+Availability: LIMITED_AVAILABILITY_APPROVED
+Operational Browser Readiness: PENDING (L-OP-01)
+Unrestricted General Availability: NOT APPROVED
 ```
 
-## Remains true regardless
+## Lifecycle completion
 
-- Limited Availability remains until a separate GA decision.
-- Unrestricted GA is not approved by RELEASE-002.
-- GA-001 remains planning-only until authorised.
+Greenfield path to **1.0.0** and controlled maintenance path to **1.0.1** are both complete. APZ Engineering Lifecycle Standard v1.0 is **validated for production use**.
 
-## Sign-off
+## Concurrent authorisation
 
-| Role  | Name | Date | Record |
-| ----- | ---- | ---- | ------ |
-| Owner |      |      |        |
+**APZQEP-CAPABILITY-002** — Next Product Capability selection (planning only) — authorised separately.  
+**GA-001** — not authorised at this time (operational programme; later).
+
+## STOP
+
+```text
+APZQEP-RELEASE-002
+ACCEPTED
+APPROVED
+PATCH PRODUCTION RELEASE BASELINED
+CLOSED
+```

@@ -81,6 +81,23 @@
       "@apzhub/qep-test-execution/presentation": [
         "../../packages/qep-test-execution/src/presentation/index.ts"
       ],
+      "@apzhub/qep-evidence": ["../../packages/qep-evidence/src/index.ts"],
+      "@apzhub/qep-evidence/domain": [
+        "../../packages/qep-evidence/src/domain/index.ts"
+      ],
+      "@apzhub/qep-evidence/application": [
+        "../../packages/qep-evidence/src/application/index.ts"
+      ],
+      "@apzhub/qep-evidence/infrastructure": [
+        "../../packages/qep-evidence/src/infrastructure/index.ts"
+      ],
+      "@apzhub/qep-evidence/shared": [
+        "../../packages/qep-evidence/src/shared/index.ts"
+      ],
+      "@apzhub/qep-evidence/api": ["../../packages/qep-evidence/src/api/index.ts"],
+      "@apzhub/qep-evidence/presentation": [
+        "../../packages/qep-evidence/src/presentation/index.ts"
+      ],
       "@apzhub/qep-verification/presentation": [
         "../../packages/qep-verification/src/presentation/index.ts"
       ],

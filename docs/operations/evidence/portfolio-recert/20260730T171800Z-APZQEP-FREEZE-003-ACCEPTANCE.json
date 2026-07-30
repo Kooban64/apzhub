@@ -1,0 +1,15 @@
+{
+  "programme": "APZQEP-FREEZE-003",
+  "capability": "Evidence Management",
+  "programmeType": "Production Freeze",
+  "decision": "ACCEPTED",
+  "status": "CLOSED",
+  "package": "@apzhub/qep-evidence",
+  "rcVersion": "1.0.0-rc.1",
+  "frozenBaseline": "1.0.0",
+  "class": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "suitability": "LIMITED_AVAILABILITY",
+  "recordedAt": "20260730T171800Z",
+  "successor": "APZQEP-RELEASE-003",
+  "repositoryPersistenceCondition": "no_production_deploy_until_remote_sync"
+}

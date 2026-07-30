@@ -1,0 +1,35 @@
+{
+  "programme": "APZQEP-OPS-001",
+  "capability": "Evidence Management",
+  "programmeType": "Operational Readiness",
+  "status": "AWAITING_OWNER_DECISION",
+  "completionState": "IMPLEMENTED",
+  "verdict": "PASS_WITH_LIMITATIONS",
+  "package": "@apzhub/qep-evidence",
+  "version": "0.0.0",
+  "recordedAt": "20260730T082000Z",
+  "dependsOn": [
+    "APZQEP-ENG-110A",
+    "APZQEP-ENG-110B",
+    "APZQEP-ENG-110C",
+    "APZQEP-ENG-110D",
+    "APZQEP-ENG-110E",
+    "APZQEP-ENG-110F"
+  ],
+  "validation": {
+    "qepEvidenceTests": 54,
+    "testExecutionTests": 77,
+    "targetedTransportWorkbenchTests": 35,
+    "playwrightWorkbench": 7,
+    "typecheck": "PASS",
+    "lint": "PASS"
+  },
+  "limitations": [
+    "memory_persistence_adr_0088",
+    "no_evidence_specific_health_metrics",
+    "no_event_bus_publication",
+    "certification_not_started"
+  ],
+  "unauthorisedWork": "none",
+  "successorGate": "OWNER_OPERATIONAL_READINESS_DECISION"
+}

@@ -232,6 +232,19 @@
       "@apzhub/qep-test-execution/presentation": [
         "./packages/qep-test-execution/src/presentation/index.ts"
       ],
+      "@apzhub/qep-evidence": ["./packages/qep-evidence/src/index.ts"],
+      "@apzhub/qep-evidence/domain": ["./packages/qep-evidence/src/domain/index.ts"],
+      "@apzhub/qep-evidence/application": [
+        "./packages/qep-evidence/src/application/index.ts"
+      ],
+      "@apzhub/qep-evidence/infrastructure": [
+        "./packages/qep-evidence/src/infrastructure/index.ts"
+      ],
+      "@apzhub/qep-evidence/shared": ["./packages/qep-evidence/src/shared/index.ts"],
+      "@apzhub/qep-evidence/api": ["./packages/qep-evidence/src/api/index.ts"],
+      "@apzhub/qep-evidence/presentation": [
+        "./packages/qep-evidence/src/presentation/index.ts"
+      ],
       "@apzhub/lifecycle-engine": ["./packages/lifecycle-engine/src/index.ts"],
       "@apzhub/search-qep": ["./packages/search-qep/src/index.ts"],
       "@apzhub/integration-qep-github": ["./integrations/qep-github/src/index.ts"],

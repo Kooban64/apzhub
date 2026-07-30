@@ -1,0 +1,19 @@
+# APZQEP-ENG-110D — Evidence Management Feature Wave 3 (Application Services)
+
+> **Programme:** APZQEP-ENG-110D  
+> **Status:** **ACCEPTED / APPLICATION SERVICES BASELINED / CLOSED**  
+> **Evidence:** `20260730T033000Z-APZQEP-ENG-110D.json` · Acceptance `20260730T033500Z-APZQEP-ENG-110D-ACCEPTANCE.json`
+
+## Next
+
+**APZQEP-ENG-110E** — Security & Policy Integration — [ENG-110E](../ENG-110E/README.md).
+
+## STOP
+
+```text
+APZQEP-ENG-110D
+ACCEPTED
+APPROVED
+APPLICATION SERVICES BASELINED
+PROGRAMME CLOSED
+```

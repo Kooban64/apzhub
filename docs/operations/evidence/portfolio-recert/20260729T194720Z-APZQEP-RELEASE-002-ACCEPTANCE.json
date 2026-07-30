@@ -1,0 +1,15 @@
+{
+  "programmeId": "APZQEP-RELEASE-002",
+  "decision": "ACCEPTED_APPROVED_PATCH_PRODUCTION_RELEASE_BASELINED_CLOSED",
+  "timestampUtc": "20260729T194720Z",
+  "package": "@apzhub/qep-test-execution@1.0.1",
+  "tag": "apzqep-test-execution-v1.0.1",
+  "availability": "LIMITED_AVAILABILITY_APPROVED",
+  "limitationL02": "CLOSED",
+  "riskAcceptanceRA02": "RETIRED",
+  "unrestrictedGa": "NOT_APPROVED",
+  "lifecycleStandard": "VALIDATED_FOR_PRODUCTION_USE",
+  "ga001": "NOT_AUTHORISED",
+  "nextProgramme": "APZQEP-CAPABILITY-002",
+  "acceptanceDocument": "docs/products/apzqep/test-execution/RELEASE-002/OWNER-ACCEPTANCE.md"
+}

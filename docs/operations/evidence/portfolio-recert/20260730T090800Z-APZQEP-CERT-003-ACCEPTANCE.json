@@ -1,0 +1,21 @@
+{
+  "programme": "APZQEP-CERT-003",
+  "capability": "Evidence Management",
+  "programmeType": "Independent Certification",
+  "decision": "ACCEPTED",
+  "status": "CLOSED",
+  "class": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "suitability": "LIMITED_AVAILABILITY",
+  "package": "@apzhub/qep-evidence",
+  "versionAtCertification": "0.0.0",
+  "recordedAt": "20260730T090800Z",
+  "acceptedLimitations": [
+    "ADR-0088",
+    "observability_deferred",
+    "event_publication_deferred",
+    "L-EM-01"
+  ],
+  "generalAvailabilityApproved": false,
+  "unrestrictedSorApproved": false,
+  "successor": "APZQEP-FREEZE-003"
+}

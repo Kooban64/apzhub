@@ -1,0 +1,63 @@
+{
+  "evidenceId": "20260730T031500Z-APZQEP-ENG-110C",
+  "programme": "APZQEP-ENG-110C",
+  "title": "Evidence Management Feature Wave 2 — Persistence & Storage Abstractions",
+  "programmeType": "Feature Wave",
+  "wave": "Feature Wave 2 — Persistence & Storage Abstractions",
+  "capability": "Evidence Management",
+  "decisionDate": "2026-07-30",
+  "decisionTimestampUtc": "20260730T031500Z",
+  "status": "IMPLEMENTED_AWAITING_OWNER_PERSISTENCE_STORAGE_ABSTRACTIONS_DECISION",
+  "package": "@apzhub/qep-evidence",
+  "packageVersion": "0.0.0",
+  "domainStatus": "implemented-eng-110b",
+  "applicationStatus": "ports-specified-eng-110c",
+  "infrastructureStatus": "abstractions-eng-110c",
+  "pack": "docs/products/apzqep/evidence-management/ENG-110C/",
+  "ownerSummary": "docs/products/apzqep/evidence-management/ENG-110C/OWNER-SUMMARY.md",
+  "ownerDecisionTemplate": "docs/products/apzqep/evidence-management/ENG-110C/OWNER-ACCEPTANCE.md",
+  "validationReport": "docs/products/apzqep/evidence-management/ENG-110C/VALIDATION-REPORT.md",
+  "dependsOn": [
+    "APZQEP-ARCH-016",
+    "APZQEP-OES-ENG-091A",
+    "APZQEP-ENG-110A",
+    "APZQEP-ENG-110B"
+  ],
+  "eng110bAcceptance": "20260730T030000Z-APZQEP-ENG-110B-ACCEPTANCE",
+  "repositoryInterfaces": [
+    "EvidenceRepository",
+    "EvidenceCollectionRepository",
+    "EvidenceSetRepository",
+    "EvidenceRelationshipRepository",
+    "EvidenceVersionRepository",
+    "EvidenceAccessGrantRepository",
+    "EvidenceAuditRepository",
+    "EvidenceUnitOfWork"
+  ],
+  "storagePort": "SPECIFIED_TECHNOLOGY_UNDECIDED",
+  "persistenceImplementation": "NONE_SKELETONS_ONLY",
+  "storageTechnologySelected": "NONE",
+  "schemasMigrationsSql": "NONE",
+  "cryptoHashing": "NONE",
+  "restHandlers": "NONE",
+  "workbench": "NONE",
+  "aclEvaluation": "NONE",
+  "eventPublication": "NONE_CONTRACTS_ONLY",
+  "testExecutionPackagesModified": "NONE",
+  "principle": "Domain owns truth; infrastructure owns persistence. Domain never knows where or how Evidence is stored.",
+  "dependencyDirection": "Domain → Ports → Adapters → Infrastructure",
+  "validation": {
+    "packageTypecheck": "PASS",
+    "packageLint": "PASS",
+    "packageTests": "PASS_35",
+    "testExecutionTypecheck": "PASS",
+    "testExecutionTests": "PASS_77"
+  },
+  "recommendedOwnerDecision": "ACCEPT",
+  "recommendedNextAfterAcceptance": {
+    "title": "Feature Wave 3 — Application services and API orchestration",
+    "suggestedId": "APZQEP-ENG-110D",
+    "authorised": false
+  },
+  "note": "Persistence contracts and adapter skeletons only. Owner Persistence & Storage Abstractions Decision required before Feature Wave 3."
+}

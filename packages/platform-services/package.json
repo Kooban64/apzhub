@@ -68,6 +68,7 @@
     "@apzhub/qep-test-specifications": "workspace:*",
     "@apzhub/qep-test-plans": "workspace:*",
     "@apzhub/qep-test-execution": "workspace:*",
+    "@apzhub/qep-evidence": "workspace:*",
     "@apzhub/qep-verification": "workspace:*"
   }
 }

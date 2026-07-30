@@ -282,6 +282,15 @@ export {
   mapExecutionDomainError,
   performQepTestExecutionAction,
   EXECUTION_ACTION_KEYS,
+  createQepEvidencePlatformServices,
+  createQepEvidencePlatformServicesForProduction,
+  createQepEvidencePlatformServicesForTest,
+  wrapQepEvidencePlatformServiceWithPipeline,
+  createQepEvidencePlatformService,
+  mapEvidenceDomainError,
+  isEvidenceApiActionKey,
+  QEP_EVIDENCE_PERMISSIONS,
+  type EvidenceApiActionKey,
   type QepPlatformServicesBundle,
   type CreateQepPlatformServicesInput,
   type CreateQepPlatformServicesForProductionInput,
@@ -303,6 +312,10 @@ export {
   type CreateQepTestExecutionPlatformServicesForTestInput,
   type QepTestExecutionPlatformService,
   type ExecutionActionKey,
+  type QepEvidencePlatformServicesBundle,
+  type QepEvidencePlatformService,
+  type QepEvidencePermission,
+  type EvidenceDownloadDto,
 } from "./services/qep";
 export type { QepPlatformGatewaySurface } from "./services/qep/create-qep-platform-services";
 

@@ -1,0 +1,15 @@
+{
+  "evidenceId": "20260730T070000Z-APZQEP-ENG-110E-ACCEPTANCE",
+  "programme": "APZQEP-ENG-110E",
+  "title": "Owner Security & Policy Integration Decision — ACCEPTED",
+  "decisionDate": "2026-07-30",
+  "decisionTimestampUtc": "20260730T070000Z",
+  "status": "ACCEPTED_APPROVED_SECURITY_POLICY_INTEGRATION_BASELINED_CLOSED",
+  "implementationEvidence": "20260730T034500Z-APZQEP-ENG-110E",
+  "authorisedNext": {
+    "programme": "APZQEP-ENG-110F",
+    "title": "Feature Wave 5 — Transport Layer & Workbench Integration",
+    "authorised": true
+  },
+  "securityRuleFrozen": "Request → Security & Policy → Application → Domain → Persistence Contracts → Infrastructure"
+}

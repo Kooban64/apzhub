@@ -1,0 +1,20 @@
+{
+  "evidenceId": "20260730T023000Z-APZQEP-ARCH-016-ACCEPTANCE",
+  "programme": "APZQEP-ARCH-016",
+  "oes": "APZQEP-OES-ARCH-016",
+  "title": "Evidence Management Capability Architecture \u2014 Owner Acceptance",
+  "programmeType": "Capability Architecture",
+  "capability": "Evidence Management",
+  "decisionDate": "2026-07-30",
+  "decisionTimestampUtc": "20260730T023000Z",
+  "decision": "ACCEPTED / APPROVED / ARCHITECTURE BASELINED / CLOSED",
+  "implementationEvidence": "20260730T021800Z-APZQEP-ARCH-016",
+  "pack": "docs/products/apzqep/evidence-management/OES-ARCH-016/",
+  "ownerAcceptance": "docs/products/apzqep/evidence-management/OES-ARCH-016/OWNER-ACCEPTANCE.md",
+  "adrsAccepted": ["ADR-0087", "ADR-0088", "ADR-0089", "ADR-0090", "ADR-0091"],
+  "authorisesEngineeringSpecification": true,
+  "authorisedNextProgramme": "APZQEP-OES-ENG-091A",
+  "authorisesEngineering": false,
+  "productionEngineering": "NONE",
+  "note": "Architecture baselined. Eng Spec separately authorised by Owner Directive APZQEP-OES-ENG-091A."
+}
