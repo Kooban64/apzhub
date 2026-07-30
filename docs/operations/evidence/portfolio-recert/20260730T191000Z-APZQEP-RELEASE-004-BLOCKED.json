@@ -1,0 +1,38 @@
+{
+  "programme": "APZQEP-RELEASE-004",
+  "capability": "Evidence Management",
+  "programmeType": "Production Release",
+  "status": "BLOCKED",
+  "completionState": "BLOCKED",
+  "recommendation": "RELEASE_BLOCKED_OWNER_INTERVENTION_REQUIRED",
+  "package": "@apzhub/qep-evidence",
+  "candidateVersion": "1.0.0-rc.2",
+  "candidateCommit": "4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5",
+  "targetVersion": "1.0.0",
+  "versionPromoted": false,
+  "tagCreated": false,
+  "remoteSynchronised": false,
+  "recordedAt": "20260730T191000Z",
+  "class": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "suitability": "LIMITED_AVAILABILITY",
+  "dependsOn": "APZQEP-FREEZE-004",
+  "replaces": "APZQEP-RELEASE-003",
+  "preconditions": {
+    "pushAccessRestored": false,
+    "candidatePresentOnRemote": false,
+    "repositoryMatchesFrozenCandidate": "local_candidate_present_remote_unreachable",
+    "noUnauthorisedEvidenceCommitsAfterFreeze": "pass_docs_stamp_only_d0da96e8"
+  },
+  "blockers": [
+    {
+      "id": "B-01",
+      "type": "remote_synchronisation",
+      "detail": "push_auth_or_access_failure_for_kooban-apzor_apz-portal",
+      "classification": "operational_not_engineering"
+    }
+  ],
+  "unauthorisedEngineering": "none",
+  "behaviouralChanges": "none",
+  "deferredFunctionalityImplemented": "none",
+  "successorGate": "OWNER_REPOSITORY_PUSH_ACCESS_RESTORATION"
+}

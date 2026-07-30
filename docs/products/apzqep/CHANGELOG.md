@@ -1,13 +1,21 @@
 # APZ QEP — Changelog
 
-## 2026-07-30 — APZQEP-FREEZE-004 Post-REM-002 Release Candidate · AWAITING OWNER DECISION
+## 2026-07-30 — APZQEP-FREEZE-004 ACCEPTED · APZQEP-RELEASE-004 BLOCKED (B-01)
+
+- **APZQEP-FREEZE-004** Owner Decision — **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** (`20260730T190800Z-APZQEP-FREEZE-004-ACCEPTANCE.json`)
+- Frozen candidate: `@apzhub/qep-evidence` **1.0.0-rc.2** @ `4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5`
+- **APZQEP-RELEASE-004** authorised · **BLOCKED** at preconditions — **B-01** push access (`20260730T191000Z-APZQEP-RELEASE-004-BLOCKED.json`)
+- **RELEASE-003** — **STOPPED / REPLACED BY RELEASE-004** — must not resume
+- Pack: [evidence-management/RELEASE-004/](./evidence-management/RELEASE-004/README.md)
+- **1.0.0 not promoted**; **no release tag**; **no production deploy**
+
+## 2026-07-30 — APZQEP-FREEZE-004 Post-REM-002 Release Candidate · IMPLEMENTED
 
 - **APZQEP-REM-002** Owner Decision — **APPROVED AND CLOSED** (`20260730T182900Z-APZQEP-REM-002-ACCEPTANCE.json`)
 - **FREEZE-003** — **SUPERSEDED FOR RELEASE** (`ce220a5d` / **1.0.0-rc.1**)
-- **APZQEP-FREEZE-004** — **IMPLEMENTED / AWAITING OWNER FREEZE DECISION** · RC `@apzhub/qep-evidence` **1.0.0-rc.2**
+- **APZQEP-FREEZE-004** — RC `@apzhub/qep-evidence` **1.0.0-rc.2** @ `4e1b6f01`
 - Validation: Evidence **54** · targeted **35** · TE **77** · Playwright **10** · typecheck/lint **PASS**
 - Pack: [evidence-management/FREEZE-004/](./evidence-management/FREEZE-004/README.md) · Evidence `20260730T183500Z-APZQEP-FREEZE-004-COMPLETION.json`
-- RELEASE-003 remains **STOPPED** — must not resume from `ce220a5d`
 
 ## 2026-07-30 — APZQEP-REM-002 Provenance Playwright Remediation · APPROVED / CLOSED
 

@@ -2,8 +2,10 @@
   "programme": "APZQEP-FREEZE-004",
   "capability": "Evidence Management",
   "programmeType": "Production Freeze",
-  "status": "AWAITING_OWNER_DECISION",
-  "completionState": "IMPLEMENTED",
+  "status": "CLOSED",
+  "completionState": "ACCEPTED_PRODUCTION_BASELINE_FROZEN",
+  "ownerDecision": "ACCEPTED",
+  "acceptanceEvidence": "20260730T190800Z-APZQEP-FREEZE-004-ACCEPTANCE.json",
   "package": "@apzhub/qep-evidence",
   "rcVersion": "1.0.0-rc.2",
   "recommendedFrozenBaseline": "1.0.0",
@@ -32,5 +34,6 @@
   "lockfileDependencyUpgrades": "none",
   "b01PushAccess": "out_of_scope_operational",
   "release003": "STOPPED_MUST_NOT_RESUME_FROM_ce220a5d",
-  "successorGate": "OWNER_EVIDENCE_MANAGEMENT_PRODUCTION_FREEZE_DECISION"
+  "successor": "APZQEP-RELEASE-004",
+  "successorGate": "RELEASE_004_PRECONDITIONS"
 }

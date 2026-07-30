@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-07-30  
-> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · Lifecycle Standard **v1.0 VALIDATED** · TE **1.0.1** · REM-002 **APPROVED AND CLOSED** · FREEZE-003 **SUPERSEDED FOR RELEASE** · `APZQEP-FREEZE-004` **AWAITING OWNER FREEZE DECISION** (RC **1.0.0-rc.2**) · RELEASE-003 **STOPPED** (must not resume from `ce220a5d`) · Authorised next delivery: **Owner Freeze Decision on FREEZE-004 only**.
+> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · Lifecycle Standard **v1.0 VALIDATED** · TE **1.0.1** · REM-002 **APPROVED AND CLOSED** · FREEZE-003 **SUPERSEDED FOR RELEASE** · `APZQEP-FREEZE-004` **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** (RC **1.0.0-rc.2** @ `4e1b6f01`) · RELEASE-003 **STOPPED / REPLACED** · `APZQEP-RELEASE-004` **BLOCKED** (B-01 push access) · Authorised next delivery: **Restore push access, then resume RELEASE-004 from `4e1b6f01` only**.
 
 ---
 
@@ -204,11 +204,10 @@
 - RC: `@apzhub/qep-evidence` **1.0.0-rc.1** @ `ce220a5d` · frozen baseline authorised **1.0.0**
 - Acceptance: `20260730T171800Z-APZQEP-FREEZE-003-ACCEPTANCE.json`
 
-**APZQEP-RELEASE-003 — Evidence Management Production Release — BLOCKED:**
+**APZQEP-RELEASE-003 — Evidence Management Production Release — STOPPED / REPLACED:**
 
 - Pack: [evidence-management/RELEASE-003/](../products/apzqep/evidence-management/RELEASE-003/README.md)
-- Status: **BLOCKED**
-- Blockers: remote push (B-01 operational) · Playwright B-02 → REM-002
+- Status: **STOPPED / REPLACED BY RELEASE-004 — MUST NOT RESUME**
 - Evidence: `20260730T173500Z-APZQEP-RELEASE-003-BLOCKED.json`
 
 **APZQEP-REM-002 — Provenance Playwright Remediation — CLOSED:**
@@ -217,13 +216,20 @@
 - Status: **APPROVED AND CLOSED**
 - Acceptance: `20260730T182900Z-APZQEP-REM-002-ACCEPTANCE.json`
 
-**APZQEP-FREEZE-004 — Post-REM-002 Release Candidate Freeze — AWAITING OWNER DECISION:**
+**APZQEP-FREEZE-004 — Post-REM-002 Release Candidate Freeze — CLOSED:**
 
 - Pack: [evidence-management/FREEZE-004/](../products/apzqep/evidence-management/FREEZE-004/README.md)
-- Status: **IMPLEMENTED / AWAITING OWNER EVIDENCE MANAGEMENT PRODUCTION FREEZE DECISION**
+- Status: **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED**
 - RC: `@apzhub/qep-evidence` **1.0.0-rc.2** @ `4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5`
-- Evidence: `20260730T183500Z-APZQEP-FREEZE-004-COMPLETION.json`
-- Stop: Do **not** resume RELEASE-003 from `ce220a5d`; await FREEZE-004 acceptance.
+- Acceptance: `20260730T190800Z-APZQEP-FREEZE-004-ACCEPTANCE.json`
+
+**APZQEP-RELEASE-004 — Evidence Management Limited Availability Production Release — BLOCKED:**
+
+- Pack: [evidence-management/RELEASE-004/](../products/apzqep/evidence-management/RELEASE-004/README.md)
+- Status: **BLOCKED** at preconditions (**B-01** push access)
+- Source: `4e1b6f01` only · **1.0.0 not promoted** · no release tag
+- Evidence: `20260730T191000Z-APZQEP-RELEASE-004-BLOCKED.json`
+- Stop: Restore repository push access before resuming RELEASE-004.
 
 **APZQEP-GOV-ENG-BUILD-001 — Engineering Build Contract & Wave Engineering — CLOSED:**
 
@@ -275,7 +281,7 @@
 - Evidence: `20260728T102844Z-APZQEP-CONSTITUTION-1.0.0-RATIFICATION.json`
 - Nature: documentation only — **no Wave 2 engineering**
 
-**Stop condition:** Foundation is immutable history. Lifecycle Standard v1.0 is **VALIDATED**. REM-002 is **CLOSED**. FREEZE-003 is superseded for release. FREEZE-004 awaits Owner Freeze Decision (RC **1.0.0-rc.2**). RELEASE-003 must not resume from `ce220a5d`. Authorised next delivery: **Owner Freeze Decision on FREEZE-004 only**.
+**Stop condition:** Foundation is immutable history. Lifecycle Standard v1.0 is **VALIDATED**. REM-002 is **CLOSED**. FREEZE-004 is **CLOSED** (RC **1.0.0-rc.2** @ `4e1b6f01`). RELEASE-003 must not resume. RELEASE-004 is **BLOCKED** on B-01. Authorised next delivery: **restore push access, then resume RELEASE-004 from `4e1b6f01` only**.
 
 **APZQEP-PORTFOLIO-001 — Foundation Completion & Portfolio Baseline — CLOSED:**
 

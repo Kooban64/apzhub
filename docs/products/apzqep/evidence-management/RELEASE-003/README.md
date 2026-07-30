@@ -1,11 +1,12 @@
 # APZQEP-RELEASE-003 — Evidence Management Limited Availability Production Release
 
-> **Status:** **BLOCKED / AWAITING OWNER RELEASE REMEDIATION DECISION**  
+> **Status:** **STOPPED / REPLACED BY RELEASE-004 — MUST NOT RESUME**  
 > **Capability:** Evidence Management  
-> **Type:** Production Release (operational — no feature engineering)  
-> **Candidate:** `@apzhub/qep-evidence` **1.0.0-rc.1** · commit `ce220a5d3cac706896299797bb56695037f85621`  
-> **Target:** `@apzhub/qep-evidence` **1.0.0** — **NOT PROMOTED** (release stopped)  
-> **Freeze:** [../FREEZE-003/](../FREEZE-003/README.md) — **CLOSED**  
+> **Type:** Production Release (historical record only)  
+> **Candidate:** `@apzhub/qep-evidence` **1.0.0-rc.1** · commit `ce220a5d3cac706896299797bb56695037f85621` — **RETIRED FOR RELEASE**  
+> **Target:** `@apzhub/qep-evidence` **1.0.0** — **NOT PROMOTED**  
+> **Freeze:** [../FREEZE-003/](../FREEZE-003/README.md) — **SUPERSEDED FOR RELEASE**  
+> **Successor:** [../RELEASE-004/](../RELEASE-004/README.md)  
 > **Evidence:** `docs/operations/evidence/portfolio-recert/20260730T173500Z-APZQEP-RELEASE-003-BLOCKED.json`
 
 ## Blockers
@@ -39,9 +40,7 @@
 
 ```text
 APZQEP-RELEASE-003
-BLOCKED
-AWAITING OWNER RELEASE REMEDIATION DECISION
-NO 1.0.0 PROMOTION
-NO RELEASE TAG
-NO PRODUCTION DEPLOY
+STOPPED
+REPLACED BY APZQEP-RELEASE-004
+MUST NOT RESUME FROM ce220a5d
 ```

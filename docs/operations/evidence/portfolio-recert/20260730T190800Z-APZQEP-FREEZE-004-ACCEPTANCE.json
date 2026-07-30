@@ -1,0 +1,23 @@
+{
+  "programme": "APZQEP-FREEZE-004",
+  "capability": "Evidence Management",
+  "programmeType": "Production Freeze",
+  "decision": "ACCEPTED",
+  "status": "CLOSED",
+  "package": "@apzhub/qep-evidence",
+  "rcVersion": "1.0.0-rc.2",
+  "candidateCommit": "4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5",
+  "frozenBaseline": "1.0.0",
+  "class": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "suitability": "LIMITED_AVAILABILITY",
+  "recordedAt": "20260730T190800Z",
+  "supersedes": {
+    "programme": "APZQEP-FREEZE-003",
+    "rcVersion": "1.0.0-rc.1",
+    "commit": "ce220a5d3cac706896299797bb56695037f85621"
+  },
+  "rem002": "APPROVED_AND_CLOSED",
+  "successor": "APZQEP-RELEASE-004",
+  "release003": "MUST_NOT_RESUME",
+  "repositoryPersistenceCondition": "no_production_deploy_until_remote_sync"
+}
