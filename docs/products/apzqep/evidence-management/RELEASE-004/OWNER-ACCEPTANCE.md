@@ -3,19 +3,21 @@
 **Programme:** APZQEP-RELEASE-004  
 **Capability:** Evidence Management  
 **Classification:** Production Release  
-**Date:** _pending_  
-**Candidate:** `@apzhub/qep-evidence` **1.0.0-rc.2** (`4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5`)  
-**Target:** **1.0.0** — not released  
-**Evidence:** `docs/operations/evidence/portfolio-recert/20260730T191000Z-APZQEP-RELEASE-004-BLOCKED.json`
+**Date:** 2026-07-31  
+**Released version:** `@apzhub/qep-evidence` **1.0.0** (`79d9851f4d473a9d0a249dc76bb9a0676aaf2f03`)  
+**Tag:** `apzqep-evidence-v1.0.0`  
+**Evidence:** `docs/operations/evidence/portfolio-recert/20260731T231358Z-APZQEP-RELEASE-004-COMPLETION.json`
 
 ## Decision
 
-**PENDING — RELEASE BLOCKED — AWAITING OWNER REPOSITORY PUSH ACCESS RESTORATION**
+**RELEASE EXECUTION COMPLETE — LIMITED AVAILABILITY — AWAITING OWNER ACCEPTANCE OF OPERATIONAL DEPLOYMENT**
 
-## STOP
+Governance promotion and remote artefacts are complete. Live deploy remains a separate operational act.
+
+## STOP (programme)
 
 ```text
 APZQEP-RELEASE-004
-BLOCKED
-NOT ACCEPTED
+CLOSED
+NO UNRESTRICTED GA
 ```

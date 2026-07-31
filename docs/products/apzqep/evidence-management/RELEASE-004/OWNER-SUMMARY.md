@@ -7,33 +7,29 @@ APZQEP-FREEZE-004
 ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED
 
 APZQEP-RELEASE-004
-AUTHORISED
-BLOCKED AT PRECONDITIONS
-B-01 PUSH ACCESS
+CLOSED / COMPLETE
+@apzhub/qep-evidence 1.0.0
+LIMITED_AVAILABILITY
 ```
 
 | Field        | Value                                                       |
 | ------------ | ----------------------------------------------------------- |
-| Package      | `@apzhub/qep-evidence`                                      |
+| Package      | `@apzhub/qep-evidence` **1.0.0**                            |
 | Candidate    | **1.0.0-rc.2** @ `4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5` |
-| Target       | **1.0.0** — not promoted                                    |
+| Promotion    | `79d9851f4d473a9d0a249dc76bb9a0676aaf2f03`                  |
+| Tag          | `apzqep-evidence-v1.0.0`                                    |
 | Freeze       | FREEZE-004 **CLOSED**                                       |
-| Replaces     | RELEASE-003 (must not resume)                               |
 | Class        | **PRODUCTION_READY_WITH_LIMITATIONS**                       |
-| Availability | **LIMITED_AVAILABILITY**                                    |
-| Blocker      | **B-01** operational push access                            |
+| Availability | **LIMITED_AVAILABILITY** (unrestricted GA **not** approved) |
 
 ## What was done
 
-1. Recorded FREEZE-004 Owner acceptance.
-2. Opened RELEASE-004 with RELEASE-003 process + required substitutions.
-3. Verified release preconditions.
-4. Stopped immediately on B-01 — no promotion, tag, or deploy.
+1. Cleared **B-01** via Owner-authorised HTTPS push (identity **kooban-apzor**).
+2. Synchronised remote `main` including candidate ancestry.
+3. Promoted identity markers to **1.0.0** (no behavioural change).
+4. Created and pushed annotated tag `apzqep-evidence-v1.0.0`.
+5. Recorded deployment readiness; **no** live deploy in this programme.
 
-## Required Owner action
+## Owner decision surface
 
-Restore push rights to `kooban-apzor/apz-portal`, then authorise resumption of RELEASE-004 from candidate `4e1b6f01` only.
-
-## Strategic recommendation (recorded, not implemented)
-
-Owner recommended a permanent Lifecycle Standard rule: any post-certification remediation that changes behaviour automatically supersedes the current Production Freeze and requires a new Freeze and Release programme; a Release must never resume from a superseded frozen candidate. Formal adoption into the Lifecycle Standard requires a separate authorised programme.
+See [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md) for production release acceptance boundary (LIMITED_AVAILABILITY).

@@ -1,0 +1,49 @@
+{
+  "evidenceId": "20260731T231358Z-APZQEP-RELEASE-004-COMPLETION",
+  "programme": "APZQEP-RELEASE-004",
+  "capability": "Evidence Management",
+  "programmeType": "Production Release",
+  "status": "CLOSED",
+  "completionState": "COMPLETE",
+  "goNoGo": {
+    "decision": "GO",
+    "recordedAt": "20260731T192454Z"
+  },
+  "recordedAt": "20260731T231358Z",
+  "package": "@apzhub/qep-evidence",
+  "candidateVersion": "1.0.0-rc.2",
+  "candidateCommit": "4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5",
+  "releasedVersion": "1.0.0",
+  "versionPromoted": true,
+  "promotionCommit": "79d9851f4d473a9d0a249dc76bb9a0676aaf2f03",
+  "prePromotionSyncCommit": "d3d26349f9146d0c828f2dd80e861e7612b3c499",
+  "gitTag": "apzqep-evidence-v1.0.0",
+  "tagCreated": true,
+  "remoteSynchronised": true,
+  "class": "PRODUCTION_READY_WITH_LIMITATIONS",
+  "suitability": "LIMITED_AVAILABILITY",
+  "unrestrictedGa": false,
+  "liveDeployExecuted": false,
+  "deploymentReadiness": "DOCUMENTED_LIMITED_AVAILABILITY",
+  "dependsOn": "APZQEP-FREEZE-004",
+  "replaces": "APZQEP-RELEASE-003",
+  "supersedesBlockedEvidence": "20260730T191000Z-APZQEP-RELEASE-004-BLOCKED.json",
+  "sourceControl": {
+    "originalRemoteUrl": "git@github.com:kooban-apzor/apz-portal.git",
+    "temporaryRemoteUrl": "https://github.com/kooban-apzor/apz-portal.git",
+    "releaseIdentityLogin": "kooban-apzor",
+    "sshAuthorisedForRelease": false,
+    "httpsAskpassScript": "/tmp/apzqep-release-askpass.sh"
+  },
+  "validation": {
+    "qepEvidenceTests": "54/54 PASS",
+    "functionalChangesInPromotion": false,
+    "unauthorisedEngineering": "none"
+  },
+  "notAuthorised": [
+    "unrestricted_general_availability",
+    "automatic_live_deployment_in_this_programme",
+    "ssh_push_for_release_execution"
+  ],
+  "pack": "docs/products/apzqep/evidence-management/RELEASE-004/"
+}

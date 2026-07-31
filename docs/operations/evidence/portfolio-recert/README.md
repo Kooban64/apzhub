@@ -1,3 +1,5 @@
+> **APZQEP-RELEASE-004:** [20260731T231358Z-APZQEP-RELEASE-004-COMPLETION.json](./20260731T231358Z-APZQEP-RELEASE-004-COMPLETION.json) · [pack](../../../products/apzqep/evidence-management/RELEASE-004/README.md) (**CLOSED / COMPLETE** · Evidence **1.0.0**)
+
 # Portfolio Playwright / Docker re-cert evidence
 
 > **APZQEP-RELEASE-004:** [20260730T191000Z-APZQEP-RELEASE-004-BLOCKED.json](./20260730T191000Z-APZQEP-RELEASE-004-BLOCKED.json) · [pack](../../products/apzqep/evidence-management/RELEASE-004/README.md) (**BLOCKED** · B-01 · source `4e1b6f01`)  

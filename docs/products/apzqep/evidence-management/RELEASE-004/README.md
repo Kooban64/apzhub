@@ -1,67 +1,40 @@
 # APZQEP-RELEASE-004 — Evidence Management Limited Availability Production Release
 
-> **Status:** **BLOCKED / AWAITING OWNER REPOSITORY PUSH ACCESS RESTORATION**  
+> **Status:** **CLOSED / COMPLETE**  
 > **Capability:** Evidence Management  
-> **Type:** Production Release (operational — no feature engineering)  
+> **Type:** Production Release (operational — identity promotion only)  
 > **Candidate:** `@apzhub/qep-evidence` **1.0.0-rc.2** · commit `4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5`  
-> **Target:** `@apzhub/qep-evidence` **1.0.0** — **NOT PROMOTED** (release stopped at preconditions)  
+> **Released:** `@apzhub/qep-evidence` **1.0.0** · promotion commit `79d9851f4d473a9d0a249dc76bb9a0676aaf2f03`  
+> **Tag:** `apzqep-evidence-v1.0.0`  
+> **Go/No-Go:** **GO** @ `20260731T192454Z`  
 > **Freeze:** [../FREEZE-004/](../FREEZE-004/README.md) — **CLOSED**  
 > **Replaces:** [../RELEASE-003/](../RELEASE-003/README.md) — **MUST NOT RESUME**  
-> **Evidence:** `docs/operations/evidence/portfolio-recert/20260730T191000Z-APZQEP-RELEASE-004-BLOCKED.json`
+> **Evidence:** `docs/operations/evidence/portfolio-recert/20260731T231358Z-APZQEP-RELEASE-004-COMPLETION.json`
 
-## Specification basis
+## Outcome
 
-Reuses the approved **RELEASE-003** specification in its entirety with substitutions only:
-
-| Replace     | With                                     |
-| ----------- | ---------------------------------------- |
-| RELEASE-003 | RELEASE-004                              |
-| FREEZE-003  | FREEZE-004                               |
-| 1.0.0-rc.1  | 1.0.0-rc.2                               |
-| ce220a5d    | 4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5 |
-
-No other process changes are authorised.
-
-## Release preconditions (verified 2026-07-30)
-
-| #   | Precondition                                                         | Result                                |
-| --- | -------------------------------------------------------------------- | ------------------------------------- |
-| 1   | Repository push access restored                                      | **FAIL**                              |
-| 2   | Candidate `4e1b6f01` present on authorised remote                    | **FAIL**                              |
-| 3   | Repository state matches frozen candidate                            | Local OK · remote unreachable         |
-| 4   | No unauthorised Evidence Management product commits after FREEZE-004 | **PASS** (docs stamp `d0da96e8` only) |
-
-## Blockers
-
-| ID   | Blocker                                                                                  | Classification                          |
-| ---- | ---------------------------------------------------------------------------------------- | --------------------------------------- |
-| B-01 | Remote push/fetch to `origin` failed — no authorised access to `kooban-apzor/apz-portal` | Operational (not an engineering defect) |
-
-B-02 from RELEASE-003 is closed via REM-002 and is **not** a RELEASE-004 blocker.
+Controlled release execution completed via temporary **HTTPS** push identity **kooban-apzor**. SSH was **not** authorised for this release. Remote synchronisation, version promotion, and annotated tag are **COMPLETE**. **LIMITED_AVAILABILITY** remains in force; **unrestricted GA is not approved**.
 
 ## Pack
 
-| Document                                                               | Role                                     |
-| ---------------------------------------------------------------------- | ---------------------------------------- |
-| [OWNER-SUMMARY.md](./OWNER-SUMMARY.md)                                 | Owner decision surface                   |
-| [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                           | Placeholder (pending successful release) |
-| [RELEASE-COMPLETION-REPORT.md](./RELEASE-COMPLETION-REPORT.md)         | Completion / blocked report              |
-| [REPOSITORY-INTEGRITY-REPORT.md](./REPOSITORY-INTEGRITY-REPORT.md)     | Pre-release repo state                   |
-| [REMOTE-SYNCHRONISATION-REPORT.md](./REMOTE-SYNCHRONISATION-REPORT.md) | Push / auth failure                      |
-| [VERSION-PROMOTION-REPORT.md](./VERSION-PROMOTION-REPORT.md)           | Promotion not applied                    |
-| [TAG-VERIFICATION-REPORT.md](./TAG-VERIFICATION-REPORT.md)             | Tag not created                          |
-| [KNOWN-LIMITATIONS-REGISTER.md](./KNOWN-LIMITATIONS-REGISTER.md)       | Accepted CERT-003 limitations            |
+| Document                                                               | Role                              |
+| ---------------------------------------------------------------------- | --------------------------------- |
+| [OWNER-SUMMARY.md](./OWNER-SUMMARY.md)                                 | Owner decision surface            |
+| [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                           | Owner production release decision |
+| [RELEASE-COMPLETION-REPORT.md](./RELEASE-COMPLETION-REPORT.md)         | Completion report                 |
+| [REPOSITORY-INTEGRITY-REPORT.md](./REPOSITORY-INTEGRITY-REPORT.md)     | Repo state                        |
+| [REMOTE-SYNCHRONISATION-REPORT.md](./REMOTE-SYNCHRONISATION-REPORT.md) | HTTPS push / restore              |
+| [VERSION-PROMOTION-REPORT.md](./VERSION-PROMOTION-REPORT.md)           | 1.0.0 promotion                   |
+| [TAG-VERIFICATION-REPORT.md](./TAG-VERIFICATION-REPORT.md)             | Tag verification                  |
+| [DEPLOYMENT-READINESS-REPORT.md](./DEPLOYMENT-READINESS-REPORT.md)     | Readiness (no live deploy)        |
+| [KNOWN-LIMITATIONS-REGISTER.md](./KNOWN-LIMITATIONS-REGISTER.md)       | Accepted CERT-003 limitations     |
 
-Full validation / deployment / rollback artefacts from the RELEASE-003 template remain deferred until B-01 is cleared and release execution resumes from `4e1b6f01` only.
-
-## STOP
+## STOP (superseded)
 
 ```text
 APZQEP-RELEASE-004
-BLOCKED
-AWAITING OWNER REPOSITORY PUSH ACCESS RESTORATION
-NO 1.0.0 PROMOTION
-NO RELEASE TAG
-NO PRODUCTION DEPLOY
-SOURCE REMAINS 4e1b6f01
+CLOSED
+@apzhub/qep-evidence 1.0.0 PROMOTED
+TAG apzqep-evidence-v1.0.0
+LIMITED_AVAILABILITY — NO UNRESTRICTED GA
 ```

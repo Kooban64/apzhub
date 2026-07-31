@@ -1,3 +1,11 @@
+## 2026-07-31 — APZQEP-RELEASE-004 COMPLETE · Evidence Management 1.0.0
+
+- Released: `@apzhub/qep-evidence` **1.0.0** @ `79d9851f4d473a9d0a249dc76bb9a0676aaf2f03` · tag `apzqep-evidence-v1.0.0`
+- Promoted from FREEZE-004 RC **1.0.0-rc.2** @ `4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5`
+- **APZQEP-RELEASE-004** **CLOSED / COMPLETE** — identity promotion + remote sync (`20260731T231358Z-APZQEP-RELEASE-004-COMPLETION.json`)
+- **LIMITED_AVAILABILITY** — unrestricted GA not approved
+- Pack: [evidence-management/RELEASE-004/](./evidence-management/RELEASE-004/README.md)
+
 # APZ QEP — Changelog
 
 ## 2026-07-30 — APZQEP-FREEZE-004 ACCEPTED · APZQEP-RELEASE-004 BLOCKED (B-01)

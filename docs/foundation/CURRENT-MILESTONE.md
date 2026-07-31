@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-07-30  
-> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · Lifecycle Standard **v1.0 VALIDATED** · TE **1.0.1** · REM-002 **APPROVED AND CLOSED** · FREEZE-003 **SUPERSEDED FOR RELEASE** · `APZQEP-FREEZE-004` **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** (RC **1.0.0-rc.2** @ `4e1b6f01`) · RELEASE-003 **STOPPED / REPLACED** · `APZQEP-RELEASE-004` **BLOCKED** (B-01 push access) · Authorised next delivery: **Restore push access, then resume RELEASE-004 from `4e1b6f01` only**.
+> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · Lifecycle Standard **v1.0 VALIDATED** · TE **1.0.1** · REM-002 **APPROVED AND CLOSED** · FREEZE-003 **SUPERSEDED FOR RELEASE** · `APZQEP-FREEZE-004` **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** (RC **1.0.0-rc.2** @ `4e1b6f01`) · RELEASE-003 **STOPPED / REPLACED** · `APZQEP-RELEASE-004` **CLOSED / COMPLETE** (`@apzhub/qep-evidence` **1.0.0**, tag `apzqep-evidence-v1.0.0`) · Authorised next delivery: **Owner deploy decision / future GA (not opened)**.
 
 ---
 
@@ -223,13 +223,13 @@
 - RC: `@apzhub/qep-evidence` **1.0.0-rc.2** @ `4e1b6f01cc5950eab03e21ed595e9afe8b27f8c5`
 - Acceptance: `20260730T190800Z-APZQEP-FREEZE-004-ACCEPTANCE.json`
 
-**APZQEP-RELEASE-004 — Evidence Management Limited Availability Production Release — BLOCKED:**
+**APZQEP-RELEASE-004 — Evidence Management Limited Availability Production Release — CLOSED / COMPLETE:**
 
 - Pack: [evidence-management/RELEASE-004/](../products/apzqep/evidence-management/RELEASE-004/README.md)
 - Status: **BLOCKED** at preconditions (**B-01** push access)
 - Source: `4e1b6f01` only · **1.0.0 not promoted** · no release tag
-- Evidence: `20260730T191000Z-APZQEP-RELEASE-004-BLOCKED.json`
-- Stop: Restore repository push access before resuming RELEASE-004.
+- Evidence: `20260731T231358Z-APZQEP-RELEASE-004-COMPLETION.json`
+- Released: **1.0.0** · LIMITED_AVAILABILITY · no unrestricted GA.
 
 **APZQEP-GOV-ENG-BUILD-001 — Engineering Build Contract & Wave Engineering — CLOSED:**
 
@@ -281,7 +281,7 @@
 - Evidence: `20260728T102844Z-APZQEP-CONSTITUTION-1.0.0-RATIFICATION.json`
 - Nature: documentation only — **no Wave 2 engineering**
 
-**Stop condition:** Foundation is immutable history. Lifecycle Standard v1.0 is **VALIDATED**. REM-002 is **CLOSED**. FREEZE-004 is **CLOSED** (RC **1.0.0-rc.2** @ `4e1b6f01`). RELEASE-003 must not resume. RELEASE-004 is **BLOCKED** on B-01. Authorised next delivery: **restore push access, then resume RELEASE-004 from `4e1b6f01` only**.
+**Stop condition:** Foundation is immutable history. Lifecycle Standard v1.0 is **VALIDATED**. REM-002 is **CLOSED**. FREEZE-004 is **CLOSED** (RC **1.0.0-rc.2** @ `4e1b6f01`). RELEASE-003 must not resume. RELEASE-004 is **CLOSED / COMPLETE** (1.0.0). Authorised next delivery: **Owner deploy decision / future GA programme (not opened)**.
 
 **APZQEP-PORTFOLIO-001 — Foundation Completion & Portfolio Baseline — CLOSED:**
 

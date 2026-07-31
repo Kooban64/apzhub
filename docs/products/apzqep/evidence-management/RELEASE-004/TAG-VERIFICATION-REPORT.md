@@ -1,10 +1,11 @@
 # Tag Verification Report — APZQEP-RELEASE-004
 
-| Field        | Value                                   |
-| ------------ | --------------------------------------- |
-| Intended tag | `apzqep-evidence-1.0.0` (logical)       |
-| Created      | **NO**                                  |
-| Pushed       | **NO**                                  |
-| Reason       | Release preconditions failed (**B-01**) |
+| Field     | Value                                           |
+| --------- | ----------------------------------------------- |
+| Tag       | `apzqep-evidence-v1.0.0`                        |
+| Points to | `79d9851f4d473a9d0a249dc76bb9a0676aaf2f03`      |
+| Annotated | **YES**                                         |
+| Pushed    | **YES** (`origin`)                              |
+| Message   | APZQEP-RELEASE-004 — @apzhub/qep-evidence 1.0.0 |
 
-No production tag may be created until push access is restored and RELEASE-004 executes from `4e1b6f01`.
+Remote tag object verified after HTTPS push. No force-push. No tag rewrite.
