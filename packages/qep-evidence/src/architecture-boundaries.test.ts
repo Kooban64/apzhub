@@ -42,11 +42,11 @@ function collectSourceFiles(dir: string): string[] {
   return files;
 }
 
-describe("APZQEP-FREEZE-004 architecture boundaries", () => {
-  it("exports programme and layer markers at post-REM-002 freeze candidate", () => {
-    expect(QEP_EVIDENCE_VERSION).toBe("1.0.0-rc.2");
+describe("APZQEP-RELEASE-004 architecture boundaries", () => {
+  it("exports programme and layer markers at RELEASE-004 production baseline", () => {
+    expect(QEP_EVIDENCE_VERSION).toBe("1.0.0");
     expect(QEP_EVIDENCE_PROGRAMME).toBe(
-      "APZQEP-FREEZE-004 — POST-REM-002 PRODUCTION FREEZE CANDIDATE 1.0.0-rc.2",
+      "APZQEP-RELEASE-004 — PRODUCTION BASELINE 1.0.0",
     );
     expect(QEP_EVIDENCE_DOMAIN_STATUS).toBe("implemented-eng-110b");
     expect(QEP_EVIDENCE_APPLICATION_STATUS).toBe("secured-eng-110e");

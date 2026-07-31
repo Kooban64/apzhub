@@ -2,9 +2,9 @@
  * @apzhub/qep-evidence — Evidence Management
  * Domain: ENG-110B · Persistence abstractions: ENG-110C · Application: ENG-110D
  */
-export const QEP_EVIDENCE_VERSION = "1.0.0-rc.2" as const;
+export const QEP_EVIDENCE_VERSION = "1.0.0" as const;
 export const QEP_EVIDENCE_PROGRAMME =
-  "APZQEP-FREEZE-004 — POST-REM-002 PRODUCTION FREEZE CANDIDATE 1.0.0-rc.2" as const;
+  "APZQEP-RELEASE-004 — PRODUCTION BASELINE 1.0.0" as const;
 
 export { QEP_EVIDENCE_DOMAIN_STATUS } from "./domain/index";
 export { QEP_EVIDENCE_APPLICATION_STATUS } from "./application/index";

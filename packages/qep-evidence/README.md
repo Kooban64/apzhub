@@ -1,13 +1,13 @@
 # `@apzhub/qep-evidence`
 
-| Field         | Value                                                             |
-| ------------- | ----------------------------------------------------------------- |
-| Capability    | Evidence Management (M09)                                         |
-| Version       | **1.0.0-rc.2**                                                    |
-| Class         | **PRODUCTION_READY_WITH_LIMITATIONS**                             |
-| Suitability   | **LIMITED_AVAILABILITY**                                          |
-| Programme     | **APZQEP-FREEZE-004** (post-REM-002)                              |
-| Supersedes RC | **1.0.0-rc.1** @ `ce220a5d` (FREEZE-003 — superseded for release) |
+| Field         | Value                                        |
+| ------------- | -------------------------------------------- |
+| Capability    | Evidence Management (M09)                    |
+| Version       | **1.0.0**                                    |
+| Class         | **PRODUCTION_READY_WITH_LIMITATIONS**        |
+| Suitability   | **LIMITED_AVAILABILITY**                     |
+| Programme     | **APZQEP-RELEASE-004** (production baseline) |
+| Promoted from | **1.0.0-rc.2** @ `4e1b6f01` (FREEZE-004)     |
 
 ## Live surfaces
 
