@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-01  
-> **Current status:** **APZQEP v1.0 Lifecycle Complete** ([APZQEP-PROGRAMME-CLOSURE-REPORT.md](../products/apzqep/APZQEP-PROGRAMME-CLOSURE-REPORT.md)) · Standing Programme **IN FORCE** · TE **1.0.1** · Evidence **`@apzhub/qep-evidence` 1.0.0** (`apzqep-evidence-v1.0.0` → `79d9851f`) · FREEZE-004 **CLOSED / IMMUTABLE** · RELEASE-004 **CLOSED** · REM-005 **CLOSED** · CLOSE-001 **CLOSED** · Maintained product · **LIMITED_AVAILABILITY** · Next active APZQEP programme: **NONE**.
+> **Current status:** **APZHUB-FOUNDATION-002 CLOSED** — Portfolio Governance Complete · **APZQEP v1.0 Lifecycle Complete** · Maintained product · **LIMITED_AVAILABILITY** · Next active APZQEP programme: **NONE** · Default mode: **product engineering** under Owner-authorised programmes.
 
 ---
 

@@ -1,0 +1,37 @@
+{
+  "evidenceId": "20260801T080000Z-APZHUB-FOUNDATION-002",
+  "programme": "APZHUB-FOUNDATION-002",
+  "title": "Portfolio Governance Completion",
+  "classification": "Portfolio governance — documentation only",
+  "status": "CLOSED",
+  "completionState": "COMPLETE",
+  "recordedAt": "20260801T080000Z",
+  "scope": [
+    "APZHUB-AI-OPERATIONAL-FRAMEWORK",
+    "APZHUB-LIFECYCLE-STANDARD",
+    "APZHUB-ENGINEERING-STANDARD",
+    "PRODUCT-CATALOGUE"
+  ],
+  "method": "Inventory existing governance; update where authoritative; create portfolio entry documents only for gaps; cross-reference rather than duplicate",
+  "filesChanged": [
+    "docs/governance/APZHUB-AI-OPERATIONAL-FRAMEWORK.md",
+    "docs/governance/APZHUB-LIFECYCLE-STANDARD.md",
+    "docs/governance/APZHUB-ENGINEERING-STANDARD.md",
+    "docs/products/PRODUCT-CATALOGUE.md",
+    "docs/governance/README.md",
+    "docs/governance/AI-GOVERNANCE.md",
+    "docs/foundation/PRODUCT-CATALOGUE.md",
+    "docs/foundation/DOCUMENT-MAP.md",
+    "docs/foundation/ACTIVE-BACKLOG.md",
+    "docs/foundation/CURRENT-MILESTONE.md",
+    "docs/products/README.md",
+    "docs/operations/evidence/foundation/20260801T080000Z-APZHUB-FOUNDATION-002.json"
+  ],
+  "engineeringChanges": "none",
+  "packageMutation": "none",
+  "releaseChanges": "none",
+  "deployment": "none",
+  "validation": "PASS",
+  "outstandingGovernance": "NONE",
+  "recommendation": "APZHUB Foundation Complete. Future work through product engineering programmes. No further Foundation Programmes without explicit Owner authorisation."
+}

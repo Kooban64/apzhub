@@ -2,7 +2,8 @@
 
 > **Programme:** APZHUB-GOVERNANCE-001  
 > **Date:** 2026-07-20  
-> **Related:** [AI-ENGINEERING-OPERATIONS.md](../operations/AI-ENGINEERING-OPERATIONS.md) · AI-MANIFEST
+> **Related:** [AI-ENGINEERING-OPERATIONS.md](../operations/AI-ENGINEERING-OPERATIONS.md) · AI-MANIFEST  
+> **Operational roles / stop rules (IN FORCE):** [APZHUB-AI-OPERATIONAL-FRAMEWORK.md](./APZHUB-AI-OPERATIONAL-FRAMEWORK.md) — **APZHUB-FOUNDATION-002**
 
 ---
 

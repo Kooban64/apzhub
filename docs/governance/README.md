@@ -33,26 +33,29 @@ This is **enterprise governance** — not engineering delivery and not day-to-da
 
 ## Enterprise Operating Model catalogue
 
-| Document                   | Path                                                             |
-| -------------------------- | ---------------------------------------------------------------- |
-| Enterprise Operating Model | [ENTERPRISE-OPERATING-MODEL.md](./ENTERPRISE-OPERATING-MODEL.md) |
-| Organisational Model       | [ORGANISATIONAL-MODEL.md](./ORGANISATIONAL-MODEL.md)             |
-| RACI                       | [RACI.md](./RACI.md)                                             |
-| Roles and Responsibilities | [ROLES-AND-RESPONSIBILITIES.md](./ROLES-AND-RESPONSIBILITIES.md) |
-| Governance Committees      | [GOVERNANCE-COMMITTEES.md](./GOVERNANCE-COMMITTEES.md)           |
-| Decision Making            | [DECISION-MAKING.md](./DECISION-MAKING.md)                       |
-| Product Governance         | [PRODUCT-GOVERNANCE.md](./PRODUCT-GOVERNANCE.md)                 |
-| Portfolio Governance       | [PORTFOLIO-GOVERNANCE.md](./PORTFOLIO-GOVERNANCE.md)             |
-| Change Governance          | [CHANGE-GOVERNANCE.md](./CHANGE-GOVERNANCE.md)                   |
-| Risk Governance            | [RISK-GOVERNANCE.md](./RISK-GOVERNANCE.md)                       |
-| Compliance Governance      | [COMPLIANCE-GOVERNANCE.md](./COMPLIANCE-GOVERNANCE.md)           |
-| Knowledge Governance       | [KNOWLEDGE-GOVERNANCE.md](./KNOWLEDGE-GOVERNANCE.md)             |
-| AI Governance              | [AI-GOVERNANCE.md](./AI-GOVERNANCE.md)                           |
-| Continuous Improvement     | [CONTINUOUS-IMPROVEMENT.md](./CONTINUOUS-IMPROVEMENT.md)         |
-| Meeting Cadence            | [MEETING-CADENCE.md](./MEETING-CADENCE.md)                       |
-| Reporting Cadence          | [REPORTING-CADENCE.md](./REPORTING-CADENCE.md)                   |
-| Completion Report          | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)                   |
-| Acceptance Report          | [ACCEPTANCE-REPORT.md](./ACCEPTANCE-REPORT.md)                   |
+| Document                     | Path                                                                                                     |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Enterprise Operating Model   | [ENTERPRISE-OPERATING-MODEL.md](./ENTERPRISE-OPERATING-MODEL.md)                                         |
+| Organisational Model         | [ORGANISATIONAL-MODEL.md](./ORGANISATIONAL-MODEL.md)                                                     |
+| RACI                         | [RACI.md](./RACI.md)                                                                                     |
+| Roles and Responsibilities   | [ROLES-AND-RESPONSIBILITIES.md](./ROLES-AND-RESPONSIBILITIES.md)                                         |
+| Governance Committees        | [GOVERNANCE-COMMITTEES.md](./GOVERNANCE-COMMITTEES.md)                                                   |
+| Decision Making              | [DECISION-MAKING.md](./DECISION-MAKING.md)                                                               |
+| Product Governance           | [PRODUCT-GOVERNANCE.md](./PRODUCT-GOVERNANCE.md)                                                         |
+| Portfolio Governance         | [PORTFOLIO-GOVERNANCE.md](./PORTFOLIO-GOVERNANCE.md)                                                     |
+| Change Governance            | [CHANGE-GOVERNANCE.md](./CHANGE-GOVERNANCE.md)                                                           |
+| Risk Governance              | [RISK-GOVERNANCE.md](./RISK-GOVERNANCE.md)                                                               |
+| Compliance Governance        | [COMPLIANCE-GOVERNANCE.md](./COMPLIANCE-GOVERNANCE.md)                                                   |
+| Knowledge Governance         | [KNOWLEDGE-GOVERNANCE.md](./KNOWLEDGE-GOVERNANCE.md)                                                     |
+| AI Governance                | [AI-GOVERNANCE.md](./AI-GOVERNANCE.md)                                                                   |
+| **AI Operational Framework** | [APZHUB-AI-OPERATIONAL-FRAMEWORK.md](./APZHUB-AI-OPERATIONAL-FRAMEWORK.md) **IN FORCE** (FOUNDATION-002) |
+| **Lifecycle Standard**       | [APZHUB-LIFECYCLE-STANDARD.md](./APZHUB-LIFECYCLE-STANDARD.md) **IN FORCE** (FOUNDATION-002)             |
+| **Engineering Standard**     | [APZHUB-ENGINEERING-STANDARD.md](./APZHUB-ENGINEERING-STANDARD.md) **IN FORCE** (FOUNDATION-002)         |
+| Continuous Improvement       | [CONTINUOUS-IMPROVEMENT.md](./CONTINUOUS-IMPROVEMENT.md)                                                 |
+| Meeting Cadence              | [MEETING-CADENCE.md](./MEETING-CADENCE.md)                                                               |
+| Reporting Cadence            | [REPORTING-CADENCE.md](./REPORTING-CADENCE.md)                                                           |
+| Completion Report            | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)                                                           |
+| Acceptance Report            | [ACCEPTANCE-REPORT.md](./ACCEPTANCE-REPORT.md)                                                           |
 
 ---
 

@@ -5,8 +5,8 @@
 > **Authoritative references:** [APZHUB Product Portfolio (PRODUCTS-001)](../products/APZHUB-PRODUCT-PORTFOLIO.md) · [Product Portfolio Strategy (PCS-001 historical)](../strategy/APZHUB-Product-Portfolio-Strategy.md) · [002 — Terminology](../002-product-naming-positioning-terminology-standard.md)  
 > **Related documents:** [OSS-CATALOGUE](./OSS-CATALOGUE.md) · [PLATFORM-CAPABILITY-CATALOGUE](./PLATFORM-CAPABILITY-CATALOGUE.md) · [INTEGRATION-PRODUCT-CAPABILITY-INVENTORY](./INTEGRATION-PRODUCT-CAPABILITY-INVENTORY.md)  
 > **Reading order:** After Master Brief  
-> **Last updated:** 2026-07-18  
-> **Current status:** Active — reconciled under **APZHUB-KF-001** to repository + completion reports. Engineering packages unchanged since **OSS-100-11** (Integration SDK **1.0.0** · Architecture Frozen).
+> **Last updated:** 2026-08-01  
+> **Current status:** Active — reconciled under **APZHUB-KF-001**. **Portfolio operational index:** [../products/PRODUCT-CATALOGUE.md](../products/PRODUCT-CATALOGUE.md) (**APZHUB-FOUNDATION-002**). Integration SDK **1.0.0**. APZQEP Evidence **1.0.0** / TE **1.0.1** (LIMITED_AVAILABILITY where declared).
 
 ---
 

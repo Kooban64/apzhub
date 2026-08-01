@@ -6,7 +6,7 @@
 > **Related documents:** [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [docs/backlog/](../backlog/)  
 > **Reading order:** When identifying approved work  
 > **Last updated:** 2026-08-01  
-> **Current status:** [Standing Programme Record](../products/apzqep/STANDING-PROGRAMME-RECORD.md) **IN FORCE**; **APZQEP v1.0 Lifecycle Complete** ([CLOSE-001](../products/apzqep/APZQEP-PROGRAMME-CLOSURE-REPORT.md)); Foundation permanently closed; OM **1.1.0 IN FORCE**; Lifecycle Standard **v1.0 VALIDATED**; TE **1.0.1**; Evidence **`@apzhub/qep-evidence` 1.0.0** (tag `apzqep-evidence-v1.0.0`); FREEZE-004 **CLOSED / IMMUTABLE**; RELEASE-004 **CLOSED / COMPLETE**; REM-005 **CLOSED**; Maintained product · **LIMITED_AVAILABILITY**; Authorised next APZQEP programme: **NONE** (future work via new Owner programme or APZHUB Governance)
+> **Current status:** **APZHUB-FOUNDATION-002 CLOSED** — Portfolio Governance Complete ([AI Framework](../governance/APZHUB-AI-OPERATIONAL-FRAMEWORK.md) · [Lifecycle Standard](../governance/APZHUB-LIFECYCLE-STANDARD.md) · [Engineering Standard](../governance/APZHUB-ENGINEERING-STANDARD.md) · [Product Catalogue](../products/PRODUCT-CATALOGUE.md)); APZQEP v1.0 Lifecycle Complete; Authorised next APZQEP programme: **NONE**; default mode: **product engineering** (Owner-authorised programmes only)
 
 ---
 
