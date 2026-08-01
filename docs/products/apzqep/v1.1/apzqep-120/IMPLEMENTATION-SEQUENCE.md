@@ -31,7 +31,7 @@
 ## Critical path
 
 ```text
-S01 → S02 → D-001 → S03 → S04 → S05 → S06
+S01 → S02 → S03 (Storage Provider + Local) → S04 (PG metadata) → S05 → S06
                  → S07 → S08 → S09 → S10 → S11 → S12 → S13
                                               → S17 → S19 → S20
 ```
@@ -45,14 +45,14 @@ S18 after meaningful worker/search load exists.
 
 ## Parallel workstreams
 
-| Track               | Slices        | Owner coordination |
-| ------------------- | ------------- | ------------------ |
-| Security/ACL        | S01→S02→…→S19 | Security Architect |
-| Evidence durability | S03→S06       | Blocked on D-001   |
-| Async platform      | S07→S10       | SRE + Platform     |
-| Discovery/notify    | S11→S14       | After events       |
-| TE contracts/runner | S15, S16      | TE lead            |
-| Close               | S17→S20       | Programme lead     |
+| Track               | Slices        | Owner coordination                                |
+| ------------------- | ------------- | ------------------------------------------------- |
+| Security/ACL        | S01→S02→…→S19 | Security Architect                                |
+| Evidence durability | S03→S06       | S03 Local first (ADR-0094); D-001 for cloud later |
+| Async platform      | S07→S10       | SRE + Platform                                    |
+| Discovery/notify    | S11→S14       | After events                                      |
+| TE contracts/runner | S15, S16      | TE lead                                           |
+| Close               | S17→S20       | Programme lead                                    |
 
 Unsafe overlap: concurrent writers to Evidence schema (S03/S04/S05/S06) — **serialise**.
 
@@ -60,12 +60,12 @@ Unsafe overlap: concurrent writers to Evidence schema (S03/S04/S05/S06) — **se
 
 ## Blockers
 
-| Blocker                        | Impact                                   |
-| ------------------------------ | ---------------------------------------- |
-| D-001 unresolved               | Cannot start S03–S04                     |
-| D-002 unresolved               | S06 uses hooks with TBD policy constants |
-| Missing infra credentials      | S04/S16 enablement                       |
-| Platform bus/outbox regression | S07–S09                                  |
+| Blocker                        | Impact                                              |
+| ------------------------------ | --------------------------------------------------- |
+| D-001 unresolved               | Blocks cloud content providers only — not S03 Local |
+| D-002 unresolved               | S06 uses hooks with TBD policy constants            |
+| Missing infra credentials      | S04/S16 enablement                                  |
+| Platform bus/outbox regression | S07–S09                                             |
 
 ---
 
