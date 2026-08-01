@@ -15,6 +15,7 @@
 | RELEASE-003    | **STOPPED / REPLACED BY RELEASE-004** — must not resume                                                                                                                          |
 | RELEASE-004    | [evidence-management/RELEASE-004/](./evidence-management/RELEASE-004/README.md) **CLOSED / COMPLETE** · **1.0.0** · `apzqep-evidence-v1.0.0` → `79d9851f`                        |
 | CLOSE-001      | **CLOSED** — [APZQEP-PROGRAMME-CLOSURE-REPORT.md](./APZQEP-PROGRAMME-CLOSURE-REPORT.md) · Archive [APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md](./APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md) |
+| APZQEP-110     | **COMPLETE / AWAITING OWNER APPROVAL** — [v1.1 Product Planning](./v1.1/README.md) — planning only; engineering not authorised                                                   |
 
 ### Default premise
 
@@ -64,8 +65,7 @@ Next active APZQEP programme: NONE
 
 ## Authorised next delivery
 
-**None under APZQEP v1.0 identifiers.** Optional LIMITED_AVAILABILITY operational deployment decision, unrestricted GA, or enhancements require a new Owner-authorised programme. Cross-cutting standards → APZHUB Governance.
-
+**Owner Product Board decision on APZQEP-110 (v1.1 roadmap).** Engineering begins only after roadmap approval and a new Owner-authorised programme (recommended first: **APZQEP-111** Architecture). Cross-cutting standards → APZHUB Governance.
 ---
 
 ## STOP

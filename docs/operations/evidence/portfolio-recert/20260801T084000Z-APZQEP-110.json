@@ -1,0 +1,28 @@
+{
+  "evidenceId": "20260801T084000Z-APZQEP-110",
+  "programme": "APZQEP-110",
+  "title": "APZQEP v1.1 Product Planning & Roadmap",
+  "classification": "Product Planning — documentation only",
+  "status": "COMPLETE_AWAITING_OWNER_APPROVAL",
+  "recordedAt": "20260801T084000Z",
+  "engineeringChanges": "none",
+  "packageMutation": "none",
+  "releaseChanges": "none",
+  "deployment": "none",
+  "governanceRedesign": "none",
+  "pack": "docs/products/apzqep/v1.1/",
+  "deliverables": [
+    "README.md",
+    "EXECUTIVE-SUMMARY.md",
+    "CURRENT-CAPABILITY-ASSESSMENT.md",
+    "PRODUCT-ROADMAP.md",
+    "FEATURE-CATALOGUE.md",
+    "AI-STRATEGY.md",
+    "UX-STRATEGY.md",
+    "TECHNICAL-ROADMAP.md",
+    "PROGRAMME-BACKLOG.md",
+    "RELEASE-PLAN.md"
+  ],
+  "recommendation": "Ready for Owner approval. Engineering may begin only after roadmap approval.",
+  "recommendedFirstEngineeringProgramme": "APZQEP-111"
+}
