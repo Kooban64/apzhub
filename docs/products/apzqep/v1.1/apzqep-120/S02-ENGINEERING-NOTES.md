@@ -1,12 +1,13 @@
 # APZQEP-120-S02 — Engineering Notes
 
-| Field      | Value                                                     |
-| ---------- | --------------------------------------------------------- |
-| Slice      | APZQEP-120-S02 Evidence Query Service & Permission Engine |
-| Reference  | L-EM-02                                                   |
-| Process    | APZHUB-ENG-001 · ADR-0092                                 |
-| Date       | 2026-08-01                                                |
-| Depends on | APZQEP-120-S01 (L-EM-01 CLOSED)                           |
+| Field         | Value                                                     |
+| ------------- | --------------------------------------------------------- |
+| Slice         | APZQEP-120-S02 Evidence Query Service & Permission Engine |
+| Reference     | L-EM-02                                                   |
+| Process       | APZHUB-ENG-001 · ADR-0092                                 |
+| Date          | 2026-08-01                                                |
+| Depends on    | APZQEP-120-S01 (L-EM-01 CLOSED)                           |
+| Product Board | **CERTIFIED** (2026-08-01) — 10/10                        |
 
 ---
 

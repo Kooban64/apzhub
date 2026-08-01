@@ -4,8 +4,9 @@
 | --------------------- | ------------------------------------------------------------------- |
 | Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                |
 | Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                            |
-| Execution planning    | **APZQEP-120** — COMPLETE — AWAITING PRODUCT BOARD REVIEW           |
-| Engineering           | **NOT AUTHORISED** — per-slice Owner directive required after Board |
+| Execution planning    | **APZQEP-120** — IN PROGRESS · S01 COMPLETE · **S02 CERTIFIED**     |
+| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP |
+| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)               |
 | Date                  | 2026-08-01                                                          |
 
 ---

@@ -100,6 +100,8 @@ Canonical ADRs for APZHUB platform engineering decisions.
 | [ADR-0090](./ADR-0090-evidence-sealing-and-sets.md)                                         | Evidence Sealing and EvidenceSet                       | **Accepted** (APZQEP-ARCH-016)                                                                                                   | 2026-07-30 |
 | [ADR-0091](./ADR-0091-evidence-collection-and-consumer-reference.md)                        | Collections vs Sets; Consumer EvidenceReference        | **Accepted** (APZQEP-ARCH-016)                                                                                                   | 2026-07-30 |
 | [ADR-0092](./ADR-0092-engineering-slice-standard-freeze.md)                                 | Engineering Slice Standard Freeze (APZHUB-ENG-001)     | **Accepted**                                                                                                                     | 2026-08-01 |
+| [ADR-0093](./ADR-0093-application-service-layer.md)                                         | Application Service Layer                              | **Accepted**                                                                                                                     | 2026-08-01 |
+| [ADR-0094](./ADR-0094-evidence-storage-provider-first.md)                                   | Evidence Storage Provider First                        | **Accepted**                                                                                                                     | 2026-08-01 |
 
 ## Legacy decisions (`docs/decisions/`)
 

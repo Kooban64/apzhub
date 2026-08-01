@@ -1,0 +1,30 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S02",
+  "classification": "Product Board Review",
+  "decision": "CERTIFIED",
+  "score": "10/10",
+  "timestampUtc": "20260801T181200Z",
+  "results": {
+    "architecture": "PASS",
+    "serviceLayer": "PASS",
+    "permissionModel": "PASS",
+    "queryBuilder": "PASS",
+    "aclReuse": "PASS",
+    "tenantIsolation": "PASS",
+    "repositoryIntegrity": "PASS",
+    "documentation": "PASS",
+    "certification": "PASS"
+  },
+  "followOnDecisionsRecorded": [
+    "ADR-0093 Application Service Layer",
+    "ADR-0094 Evidence Storage Provider First",
+    "PRODUCT-POSITIONING.md Enterprise Quality Engineering Platform",
+    "TE EvidenceAccessPort wiring remains deferred",
+    "Next recommended slice: APZQEP-120-S03 Storage Provider + Local"
+  ],
+  "engineeringCommits": {
+    "implementation": "aab20c21e25209e5bfafa466095f084f53dc0af5",
+    "documentation": "4b7d1321c78cd13d2246638090e466cd202b9911"
+  }
+}

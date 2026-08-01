@@ -1,17 +1,18 @@
 # APZQEP-120 — Enterprise Core Platform
 
-| Field                     | Value                                                                                                       |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Programme                 | **APZQEP-120**                                                                                              |
-| Title                     | Enterprise Core Platform                                                                                    |
-| Classification            | **Engineering Execution Planning** + slice engineering                                                      |
-| Planning status           | **COMPLETE**                                                                                                |
-| Implementation authority  | **OPEN** (per-slice)                                                                                        |
-| Active / completed slices | **S01 COMPLETE** · **S02 COMPLETE** — [S01](./S01-ENGINEERING-NOTES.md) · [S02](./S02-ENGINEERING-NOTES.md) |
-| Inspected HEAD            | `4ff22aac6d250241383bda9c7b281b3bfc2c48d9`                                                                  |
-| Baseline                  | APZQEP v1.0 · Evidence **1.0.0** · TE **1.0.1** · LIMITED_AVAILABILITY                                      |
-| Architecture              | APZQEP-111 **APPROVED**                                                                                     |
-| Date                      | 2026-08-01                                                                                                  |
+| Field                     | Value                                                                                                        |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Programme                 | **APZQEP-120**                                                                                               |
+| Title                     | Enterprise Core Platform                                                                                     |
+| Classification            | **Engineering Execution Planning** + slice engineering                                                       |
+| Planning status           | **COMPLETE**                                                                                                 |
+| Implementation authority  | **OPEN** (per-slice)                                                                                         |
+| Active / completed slices | **S01 COMPLETE** · **S02 CERTIFIED** — [S01](./S01-ENGINEERING-NOTES.md) · [S02](./S02-ENGINEERING-NOTES.md) |
+| Product positioning       | [../PRODUCT-POSITIONING.md](../PRODUCT-POSITIONING.md) — Enterprise Quality Engineering Platform             |
+| Inspected HEAD            | `4ff22aac6d250241383bda9c7b281b3bfc2c48d9`                                                                   |
+| Baseline                  | APZQEP v1.0 · Evidence **1.0.0** · TE **1.0.1** · LIMITED_AVAILABILITY                                       |
+| Architecture              | APZQEP-111 **APPROVED**                                                                                      |
+| Date                      | 2026-08-01                                                                                                   |
 
 ---
 

@@ -16,8 +16,8 @@ Executable engineering slices. Future instruction: _Implement APZQEP-120-SNN exa
 | --- | ------------------------------------------- | --- | --- | --- | --- | ---- | ----------------- |
 | S01 | Evidence list/search ACL (L-EM-01)          | B   | P0  | 1   | R0  | M    | 3–5               |
 | S02 | Evidence Query Service & Permission Engine  | B   | P0  | 2   | R0  | M    | 3–5               |
-| S03 | Evidence PostgreSQL metadata SoR            | A   | P0  | 3*  | R2  | L    | 8–12              |
-| S04 | Evidence StoragePort durable adapter        | A   | P0  | 4*  | R2  | L    | 8–12              |
+| S03 | Evidence Storage Provider + Local provider  | A   | P0  | 3   | R2  | L    | 8–12              |
+| S04 | Evidence PostgreSQL metadata SoR            | A   | P0  | 4*  | R2  | L    | 8–12              |
 | S05 | Server-side content hashing & integrity     | A   | P0  | 5   | R2  | M    | 4–6               |
 | S06 | Evidence audit durability & retention hooks | A/J | P0  | 6   | R2  | M    | 4–6               |
 | S07 | QEP domain event catalogue & publish        | D   | P0  | 7   | R1  | M    | 5–7               |
@@ -35,7 +35,7 @@ Executable engineering slices. Future instruction: _Implement APZQEP-120-SNN exa
 | S19 | Security verification suite (tenant/upload) | J   | P0  | 19  | R4  | M    | 5–7               |
 | S20 | APZQEP-120 programme certification gate     | —   | P3  | 20  | R4  | M    | 3–5               |
 
-\* S03–S04 blocked on Owner **D-001** (ADR-0088 technology).
+\* S04 (PG metadata) and later cloud providers still depend on Owner **D-001** where production cloud backends are chosen. **S03** is provider-first + Local per [ADR-0094](../../../../adr/ADR-0094-evidence-storage-provider-first.md) — not direct S3.
 
 ---
 
@@ -127,19 +127,20 @@ Revert commit; behavior returns to prior (less secure) list — treat as emergen
 
 ### Identification
 
-| Field            | Value                                               |
-| ---------------- | --------------------------------------------------- |
-| ID               | APZQEP-120-S02                                      |
-| Title            | Evidence Query Service & Permission Engine          |
-| Reference        | L-EM-02 (capability id — not a prior CERT residual) |
-| Workstream       | B                                                   |
-| Priority         | P0                                                  |
-| Sequence         | 2                                                   |
-| Release boundary | R0                                                  |
-| Implementation   | **COMPLETE** (2026-08-01)                           |
-| Process          | APZHUB-ENG-001 / ADR-0092                           |
+| Field            | Value                                                                                  |
+| ---------------- | -------------------------------------------------------------------------------------- |
+| ID               | APZQEP-120-S02                                                                         |
+| Title            | Evidence Query Service & Permission Engine                                             |
+| Reference        | L-EM-02 (capability id — not a prior CERT residual)                                    |
+| Workstream       | B                                                                                      |
+| Priority         | P0                                                                                     |
+| Sequence         | 2                                                                                      |
+| Release boundary | R0                                                                                     |
+| Implementation   | **COMPLETE** (2026-08-01)                                                              |
+| Product Board    | **CERTIFIED** (2026-08-01) — Architecture/Service/ACL/Tenant/Docs **PASS** · **10/10** |
+| Process          | APZHUB-ENG-001 / ADR-0092                                                              |
 
-> **Owner supersession:** This slice was redefined by Owner instruction to deliver the permission-aware Evidence enumeration pipeline. The former catalogue scope (_Wire TE EvidenceAccessPort → Evidence ACL_) is **deferred** and requires a separate Owner slice instruction (recommended next R0 security item).
+> **Owner supersession:** This slice was redefined by Owner instruction to deliver the permission-aware Evidence enumeration pipeline. TE EvidenceAccessPort wiring remains **deferred** (execution workstream — do not pull forward).
 
 ### Objective
 
@@ -147,7 +148,7 @@ Single authoritative permission-aware Evidence enumeration path (list/search) fo
 
 ### Current state
 
-**After S02:** `EvidencePermissionEngine`, `EvidenceQueryBuilder`, and `EvidenceEnumerationService` orchestrate list/search; secured facade delegates; S01 ACL semantics preserved (no second authz framework). Memory SoR unchanged (SQL push-down → S03+).
+**After S02:** `EvidencePermissionEngine`, `EvidenceQueryBuilder`, and `EvidenceEnumerationService` orchestrate list/search; secured facade delegates; S01 ACL semantics preserved (no second authz framework). Memory metadata SoR unchanged (PG metadata → S04; SQL ACL push-down after durable metadata).
 
 ### Scope
 
@@ -194,26 +195,96 @@ Independently releasable with S01; LA security/structure hardening.
 
 ---
 
-# APZQEP-120-S03 — Evidence PostgreSQL metadata SoR
+# APZQEP-120-S03 — Evidence Storage Provider + Local provider
+
+### Identification
+
+| Field            | Value                                                                   |
+| ---------------- | ----------------------------------------------------------------------- |
+| ID               | APZQEP-120-S03                                                          |
+| Title            | Evidence Storage Provider + Local provider                              |
+| Workstream       | A                                                                       |
+| Priority         | P0                                                                      |
+| Sequence         | 3                                                                       |
+| Release boundary | R2                                                                      |
+| Guidance         | [ADR-0094](../../../../adr/ADR-0094-evidence-storage-provider-first.md) |
+
+### Objective
+
+Establish the platform-neutral **Evidence Storage Provider** contract and a **Local** provider implementation. APZQEP never depends on a specific cloud object store.
+
+### Current state
+
+`StoragePort` exists; durable adapter is skeleton/throws. No Local provider production path.
+
+### Scope
+
+- EvidenceStorageProvider (or completed StoragePort) interface — upload/get/delete-restriction hooks
+- Local filesystem (or equivalent LA) provider
+- Factory wiring behind Application Services
+- Health/failure typed errors (no vendor leakage)
+- Tests for Local provider round-trip
+
+### Explicit exclusions
+
+- Direct S3 / Azure / GCS SDK integration in this slice
+- PostgreSQL metadata SoR (S04)
+- Server-side hashing productisation (S05)
+- TE EvidenceAccessPort wiring
+
+### Dependencies
+
+- S01–S02 COMPLETE
+- ADR-0088 · ADR-0094
+- Local path/config for LA
+
+### Architecture
+
+```text
+Evidence Application
+  → StoragePort / EvidenceStorageProvider
+      → LocalProvider (S03)
+      → S3CompatibleProvider | Azure | GCS | MinIO (later slices)
+```
+
+### Acceptance criteria
+
+1. Provider contract documented and implemented for Local
+2. Capture/retrieve durable bytes via Local in secured path (or flag-gated)
+3. No cloud vendor SDK in Application/Domain
+4. Typed errors; secrets not logged
+5. API clients unchanged
+
+### Complexity / effort
+
+**L** · 8–12 eng-days.
+
+### Releasability
+
+Feature-flagged; R2 content path.
+
+---
+
+# APZQEP-120-S04 — Evidence PostgreSQL metadata SoR
 
 ### Identification
 
 | Field            | Value                                         |
 | ---------------- | --------------------------------------------- |
-| ID               | APZQEP-120-S03                                |
+| ID               | APZQEP-120-S04                                |
 | Title            | Evidence PostgreSQL metadata system of record |
 | Workstream       | A                                             |
 | Priority         | P0                                            |
-| Sequence         | 3                                             |
+| Sequence         | 4                                             |
 | Release boundary | R2                                            |
 
 ### Objective
 
-Replace memory-only Evidence metadata with tenant-scoped PostgreSQL SoR (additive migration).
+Replace memory-only Evidence **metadata** with tenant-scoped PostgreSQL SoR (additive migration). Content bytes remain behind Storage Provider (ADR-0088 / ADR-0094 / S03 Local).
 
 ### Current state
 
-Memory repository in production factory; no Evidence tables in platform schema.
+Memory repository in production factory; no Evidence metadata tables in platform schema.
 
 ### Scope
 
@@ -224,13 +295,14 @@ Memory repository in production factory; no Evidence tables in platform schema.
 
 ### Explicit exclusions
 
-- Blob/object storage (S04); server hash (S05); bus (S07).
+- Cloud object-store providers (later); server hash productisation (S05); bus (S07).
+- Content provider work already covered by S03.
 
 ### Dependencies
 
-- **D-001** Owner decision on storage architecture (metadata always PG; blobs TBD).
 - Platform PostgreSQL.
-- S01 recommended first.
+- S01–S03 preferred (enumeration + Local content path).
+- D-001 only where cloud content backends are later selected — not required for PG metadata itself.
 
 ### Architecture
 
@@ -252,7 +324,7 @@ Unit repo · Integration PG · Migration up/down · Tenant isolation · Compatib
 
 ### Data/migration
 
-See [DATA-AND-MIGRATION-PLAN.md](./DATA-AND-MIGRATION-PLAN.md) §S03.
+See [DATA-AND-MIGRATION-PLAN.md](./DATA-AND-MIGRATION-PLAN.md) (metadata SoR section; renumbered from former S03).
 
 ### Complexity / effort
 
@@ -261,64 +333,6 @@ See [DATA-AND-MIGRATION-PLAN.md](./DATA-AND-MIGRATION-PLAN.md) §S03.
 ### Releasability
 
 Feature-flagged cutover; internal prerelease then R2.
-
----
-
-# APZQEP-120-S04 — Evidence StoragePort durable adapter
-
-### Identification
-
-| Field            | Value                                |
-| ---------------- | ------------------------------------ |
-| ID               | APZQEP-120-S04                       |
-| Title            | Evidence StoragePort durable adapter |
-| Workstream       | A                                    |
-| Priority         | P0                                   |
-| Sequence         | 4                                    |
-| Release boundary | R2                                   |
-
-### Objective
-
-Implement StoragePort against Owner-approved provider (D-001); upload/retrieve durable bytes.
-
-### Current state
-
-Port exists; durable adapter throws/skeleton.
-
-### Scope
-
-- Adapter for approved provider (S3-compatible / filesystem / other per D-001).
-- Upload, download, delete-restriction hooks, size limits (D-003).
-- Malware/content-safety **integration points** (interfaces only unless Owner mandates).
-- Failure recovery: orphan blob reconciliation job stub interface for S10.
-
-### Explicit exclusions
-
-- Full AV product; export productisation beyond basic retrieve.
-
-### Dependencies
-
-- **D-001**, **D-003**; S03 metadata; infrastructure credentials.
-
-### Acceptance criteria
-
-1. Upload then retrieve byte-identical content.
-2. Missing object → typed error (no raw provider leak).
-3. Size over limit rejected before store.
-4. Secrets not logged.
-5. Health probe for storage (feeds S17).
-
-### Tests
-
-Integration against testbucket/minio or equiv · Failure paths · Security (path traversal / content-type) · no secrets in logs.
-
-### Complexity / effort
-
-**L** · 8–12 eng-days.
-
-### Releasability
-
-Feature-flagged with S03; R2 LA Evidence hardening.
 
 ---
 
