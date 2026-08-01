@@ -7,6 +7,8 @@
   "status": "COMPLETE",
   "timestampUtc": "20260801T182606Z",
   "process": "APZHUB-ENG-001 / ADR-0092 / ADR-0094",
+  "engineeringCommit": "85fa69ff6662ea8009f481e39c85372089cd44a4",
+  "documentationCommit": "0a4b2c09a53af4a71d41aa7e77c365b54740a97b",
   "phases": {
     "inspection": "COMPLETE",
     "architectureConfirmation": "COMPLETE — Owner Storage Platform (not Local-as-product) accepted",

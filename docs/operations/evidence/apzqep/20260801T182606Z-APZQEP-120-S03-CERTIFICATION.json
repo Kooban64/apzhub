@@ -49,7 +49,7 @@
     {
       "id": "AC-REPO",
       "text": "Repository clean after commit",
-      "result": "PENDING_COMMIT"
+      "result": "PASS"
     }
   ],
   "validationCommands": [
@@ -63,6 +63,8 @@
     "typecheckPlatformServices": "PASS",
     "todosTemporaryDebug": "NONE"
   },
+  "engineeringCommit": "85fa69ff6662ea8009f481e39c85372089cd44a4",
+  "documentationCommit": "0a4b2c09a53af4a71d41aa7e77c365b54740a97b",
   "ownerClarification": "S03 is Storage Platform; Local is reference provider only",
   "recommendation": "Ready for APZQEP-120-S04"
 }
