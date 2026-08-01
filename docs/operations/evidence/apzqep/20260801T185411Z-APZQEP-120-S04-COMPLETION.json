@@ -18,5 +18,6 @@
   ],
   "nextAuthorisedSlice": "APZQEP-120-S05",
   "implementationAuthorityConsumed": "APZQEP-120-S04 only",
-  "engineeringCommit": "4358d7509687f0fafdf79df8ffd44c195cdb0756"
+  "engineeringCommit": "4358d7509687f0fafdf79df8ffd44c195cdb0756",
+  "documentationCommit": "71cc3cd31a51c36e4693dd7eff09b30ac1d05a57"
 }

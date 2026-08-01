@@ -9,5 +9,6 @@
   "releaseTag": "apzqep-evidence-v1.0.0 \u2014 unchanged",
   "deployment": "NONE",
   "recommendation": "Ready for APZQEP-120-S05",
-  "engineeringCommit": "4358d7509687f0fafdf79df8ffd44c195cdb0756"
+  "engineeringCommit": "4358d7509687f0fafdf79df8ffd44c195cdb0756",
+  "documentationCommit": "71cc3cd31a51c36e4693dd7eff09b30ac1d05a57"
 }
