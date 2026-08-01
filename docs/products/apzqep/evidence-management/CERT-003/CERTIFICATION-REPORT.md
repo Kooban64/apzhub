@@ -36,7 +36,7 @@ Material limitations remain **intentional architectural deferrals** and **Owner-
 1. ADR-0088 — memory persistence (durable SoR not implemented)
 2. Evidence-specific observability deferred
 3. Event publication deferred
-4. L-EM-01 — list/search permission-gated at tenant scope (ENG-110E baselined); per-item ACL applies to identified-resource operations only
+4. L-EM-01 — **CLOSED** by APZQEP-120-S01 (was: list/search permission-gated at tenant scope only; ENG-110E baselined residual)
 
 Certification honestly reflects what was built and approved. Unrestricted GA / durable SoR certification is **not** recommended.
 
@@ -60,20 +60,20 @@ Certification honestly reflects what was built and approved. Unrestricted GA / d
 
 ## Certification activity summary
 
-| Area                      | Result                    | Detail                                                                             |
-| ------------------------- | ------------------------- | ---------------------------------------------------------------------------------- |
-| Architecture conformance  | **PASS**                  | [ARCHITECTURE-CONFORMANCE-ASSESSMENT.md](./ARCHITECTURE-CONFORMANCE-ASSESSMENT.md) |
-| Engineering conformance   | **PASS WITH LIMITATIONS** | [ENGINEERING-CONFORMANCE-ASSESSMENT.md](./ENGINEERING-CONFORMANCE-ASSESSMENT.md)   |
-| Domain correctness        | **PASS**                  | Markers `implemented-eng-110b`; invariants/lifecycle tests                         |
-| Persistence abstraction   | **PASS**                  | Contracts + StoragePort; ADR-0088 undecided preserved                              |
-| Application orchestration | **PASS**                  | Business logic in Application; thin handlers/UI                                    |
-| Security / L-02           | **PASS WITH LIMITATIONS** | Fail-closed resource ops; L-EM-01 enumeration residual                             |
-| Transport                 | **PASS**                  | `/api/v1/qep/evidence` thin handlers                                               |
-| Workbench                 | **PASS WITH LIMITATIONS** | Explorer/collections/capture; audit/preview/download surfaces limited              |
-| Operational readiness     | **PASS WITH LIMITATIONS** | OPS-001 ACCEPTED                                                                   |
-| Regression                | **PASS**                  | Evidence 54 · targeted 35 · TE 77 · TE version 1.0.1                               |
-| Documentation             | **PASS**                  | Wave + OPS packs complete                                                          |
-| Unauthorised work         | **NONE FOUND**            |                                                                                    |
+| Area                      | Result                    | Detail                                                                              |
+| ------------------------- | ------------------------- | ----------------------------------------------------------------------------------- |
+| Architecture conformance  | **PASS**                  | [ARCHITECTURE-CONFORMANCE-ASSESSMENT.md](./ARCHITECTURE-CONFORMANCE-ASSESSMENT.md)  |
+| Engineering conformance   | **PASS WITH LIMITATIONS** | [ENGINEERING-CONFORMANCE-ASSESSMENT.md](./ENGINEERING-CONFORMANCE-ASSESSMENT.md)    |
+| Domain correctness        | **PASS**                  | Markers `implemented-eng-110b`; invariants/lifecycle tests                          |
+| Persistence abstraction   | **PASS**                  | Contracts + StoragePort; ADR-0088 undecided preserved                               |
+| Application orchestration | **PASS**                  | Business logic in Application; thin handlers/UI                                     |
+| Security / L-02           | **PASS WITH LIMITATIONS** | Fail-closed resource ops; L-EM-01 enumeration residual **closed** by APZQEP-120-S01 |
+| Transport                 | **PASS**                  | `/api/v1/qep/evidence` thin handlers                                                |
+| Workbench                 | **PASS WITH LIMITATIONS** | Explorer/collections/capture; audit/preview/download surfaces limited               |
+| Operational readiness     | **PASS WITH LIMITATIONS** | OPS-001 ACCEPTED                                                                    |
+| Regression                | **PASS**                  | Evidence 54 · targeted 35 · TE 77 · TE version 1.0.1                                |
+| Documentation             | **PASS**                  | Wave + OPS packs complete                                                           |
+| Unauthorised work         | **NONE FOUND**            |                                                                                     |
 
 ## Independence statement
 

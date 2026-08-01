@@ -17,7 +17,7 @@
 | CLOSE-001      | **CLOSED** — [APZQEP-PROGRAMME-CLOSURE-REPORT.md](./APZQEP-PROGRAMME-CLOSURE-REPORT.md) · Archive [APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md](./APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md) |
 | APZQEP-110     | **APPROVED** — [v1.1 Product Planning](./v1.1/README.md)                                                                                                                         |
 | APZQEP-111     | **APPROVED** — [v1.1 Solution Architecture](./v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md)                                                                                            |
-| APZQEP-120     | **PLANNING COMPLETE / AWAITING PRODUCT BOARD REVIEW** — [apzqep-120/](./v1.1/apzqep-120/README.md) — implementation **NOT AUTHORISED**                                           |
+| APZQEP-120     | **IN PROGRESS** — planning complete; **S01 COMPLETE** — [apzqep-120/](./v1.1/apzqep-120/README.md) · [S01 notes](./v1.1/apzqep-120/S01-ENGINEERING-NOTES.md)                     |
 
 ### Default premise
 
@@ -27,7 +27,7 @@
 - **APZQEP-CLOSE-001** closed the APZQEP v1.0 programme and returned the product to the APZHUB portfolio.
 - B-01 is historical only (cleared before RELEASE-004 execution via authorised `kooban-apzor` HTTPS credentials).
 - Future cross-cutting governance belongs under **APZHUB Governance**.
-- **APZQEP-110** and **APZQEP-111** are approved. **APZQEP-120** engineering execution planning is complete; implementation requires Product Board review and a per-slice Owner directive.
+- **APZQEP-110** and **APZQEP-111** are approved. **APZQEP-120** is in progress under per-slice Owner authority. **APZQEP-120-S01** (Evidence list/search ACL / L-EM-01) is **COMPLETE**.
 
 ### REM-005 note
 
@@ -68,16 +68,17 @@ APZQEP-111
 ✅ APPROVED
 
 APZQEP-120
-⏳ PLANNING COMPLETE / AWAITING PRODUCT BOARD REVIEW
-Engineering implementation: NOT AUTHORISED
-First recommended slice: APZQEP-120-S01
+✅ PLANNING COMPLETE
+🔄 IN PROGRESS (per-slice)
+✅ APZQEP-120-S01 COMPLETE (L-EM-01 CLOSED)
+Next slice: APZQEP-120-S02 (requires Owner instruction)
 ```
 
 ---
 
 ## Authorised next delivery
 
-**Product Board review of the APZQEP-120 Engineering Execution Plan** ([v1.1/apzqep-120/](./v1.1/apzqep-120/README.md)). Implementation begins only after Board approval and an explicit Owner instruction for a named slice (recommended first: **APZQEP-120-S01**). Cross-cutting standards → APZHUB Governance.
+**APZQEP-120-S02** (TE EvidenceAccessPort → Evidence ACL) — only after a separate Owner slice instruction. Cross-cutting standards → APZHUB Governance.
 
 ---
 
@@ -94,7 +95,7 @@ REM-005 = CLOSED
 CLOSE-001 = CLOSED
 APZQEP-110 = APPROVED
 APZQEP-111 = APPROVED
-APZQEP-120 = PLANNING COMPLETE / AWAITING PRODUCT BOARD REVIEW
-IMPLEMENTATION AUTHORITY = NOT GRANTED
-NEXT = BOARD REVIEW → OPTIONAL SLICE DIRECTIVE (S01)
+APZQEP-120 = IN PROGRESS
+APZQEP-120-S01 = COMPLETE (L-EM-01 CLOSED)
+NEXT = OWNER DIRECTIVE FOR APZQEP-120-S02
 ```

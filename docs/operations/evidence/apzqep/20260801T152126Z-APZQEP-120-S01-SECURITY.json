@@ -1,0 +1,57 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S01",
+  "title": "Evidence List / Search ACL — Security Validation",
+  "timestampUtc": "20260801T152126Z",
+  "limitation": "L-EM-01",
+  "result": "PASS",
+  "checks": [
+    {
+      "id": "ACL-ENUM-01",
+      "name": "listEvidence hides unauthorized items",
+      "result": "PASS",
+      "evidence": "security.enforcement.test.ts — APZQEP-120-S01: listEvidence hides unauthorized items"
+    },
+    {
+      "id": "ACL-ENUM-02",
+      "name": "searchEvidence enforces ACL",
+      "result": "PASS",
+      "evidence": "security.enforcement.test.ts — APZQEP-120-S01: searchEvidence enforces ACL, pagination, and sort"
+    },
+    {
+      "id": "TENANT-01",
+      "name": "Cross-tenant list returns empty",
+      "result": "PASS",
+      "evidence": "security.enforcement.test.ts — APZQEP-120-S01: listEvidence never leaks across tenants"
+    },
+    {
+      "id": "PERM-01",
+      "name": "Anonymous / no-permission list denied and audited",
+      "result": "PASS",
+      "evidence": "security.enforcement.test.ts — APZQEP-120-S01: listEvidence denies callers without read permission"
+    },
+    {
+      "id": "BYPASS-01",
+      "name": "No bypass of per-item ACL on enumeration for non-admin",
+      "result": "PASS",
+      "notes": "Secured facade applies getEvidence-equivalent evaluate before return; fail-closed omit"
+    },
+    {
+      "id": "ADMIN-01",
+      "name": "Admin short-circuit remains tenant-scoped",
+      "result": "PASS",
+      "evidence": "enumeration-acl.test.ts — admin short-circuits per-item evaluation within tenant"
+    },
+    {
+      "id": "ELEV-01",
+      "name": "Existing privilege escalation tests still pass",
+      "result": "PASS",
+      "evidence": "security.enforcement.test.ts dispose without permission"
+    }
+  ],
+  "residualRisks": [
+    "Platform search-index ACL (S12) not in scope",
+    "TE EvidenceAccessPort wiring (S02) not in scope",
+    "Memory SoR (ADR-0088) unchanged"
+  ]
+}

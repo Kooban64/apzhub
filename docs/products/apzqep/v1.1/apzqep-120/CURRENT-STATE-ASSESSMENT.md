@@ -17,18 +17,18 @@
 
 ## Workstream rollup
 
-| WS  | Name                               | Overall      | Headline gap                                                             |
-| --- | ---------------------------------- | ------------ | ------------------------------------------------------------------------ |
-| A   | Evidence Platform Hardening        | **PARTIAL**  | Memory SoR; no durable StoragePort; client hash; no bus                  |
-| B   | Access Control & Tenant Boundaries | **PARTIAL**  | L-EM-01 list/search ACL; TE EvidenceAccessPort not wired to Evidence ACL |
-| C   | Test Execution Operability         | **PARTIAL**  | Outbox enqueue-only; mocked Playwright; no OpenAPI                       |
-| D   | Domain & Operational Events        | **PARTIAL**  | Manifest stubs; no QEP→bus publish                                       |
-| E   | Search Foundation                  | **PARTIAL**  | 5 entity types only (no spec/plan/exec/evidence)                         |
-| F   | Notification Foundation            | **DEFERRED** | Architecture docs; no QEP wiring                                         |
-| G   | Background Processing              | **PARTIAL**  | Platform outbox exists; QEP TE table undrained                           |
-| H   | Observability                      | **PARTIAL**  | Platform health only; no QEP-specific probes                             |
-| I   | Performance & Resilience           | **PARTIAL**  | 1 MiB body / page caps; no QEP SLOs                                      |
-| J   | Security Hardening                 | **PARTIAL**  | Strong gateway+facades; upload/hash/audit durability gaps                |
+| WS  | Name                               | Overall      | Headline gap                                                                    |
+| --- | ---------------------------------- | ------------ | ------------------------------------------------------------------------------- |
+| A   | Evidence Platform Hardening        | **PARTIAL**  | Memory SoR; no durable StoragePort; client hash; no bus                         |
+| B   | Access Control & Tenant Boundaries | **PARTIAL**  | L-EM-01 **CLOSED** (S01); TE EvidenceAccessPort not wired to Evidence ACL (S02) |
+| C   | Test Execution Operability         | **PARTIAL**  | Outbox enqueue-only; mocked Playwright; no OpenAPI                              |
+| D   | Domain & Operational Events        | **PARTIAL**  | Manifest stubs; no QEP→bus publish                                              |
+| E   | Search Foundation                  | **PARTIAL**  | 5 entity types only (no spec/plan/exec/evidence)                                |
+| F   | Notification Foundation            | **DEFERRED** | Architecture docs; no QEP wiring                                                |
+| G   | Background Processing              | **PARTIAL**  | Platform outbox exists; QEP TE table undrained                                  |
+| H   | Observability                      | **PARTIAL**  | Platform health only; no QEP-specific probes                                    |
+| I   | Performance & Resilience           | **PARTIAL**  | 1 MiB body / page caps; no QEP SLOs                                             |
+| J   | Security Hardening                 | **PARTIAL**  | Strong gateway+facades; upload/hash/audit durability gaps                       |
 
 ---
 
@@ -56,7 +56,7 @@
 | PG metadata SoR           | MISSING                            | no evidence schema in config                        |
 | Runtime mode              | PARTIAL                            | memory-only production factory                      |
 | Per-item ACL              | COMPLETE                           | access-policy + secure-services                     |
-| List/search ACL           | PARTIAL                            | **L-EM-01**                                         |
+| List/search ACL           | **COMPLETE** (APZQEP-120-S01)      | L-EM-01 **CLOSED**                                  |
 | Bus publish               | DEFERRED                           | CERT-003                                            |
 | ADR-0088                  | ACCEPTED arch / **tech undecided** | `docs/adr/ADR-0088-evidence-storage-abstraction.md` |
 

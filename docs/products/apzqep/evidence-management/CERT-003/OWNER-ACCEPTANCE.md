@@ -48,12 +48,12 @@ General Availability and unrestricted Evidence System of Record deployment are *
 
 ## Accepted Limitations
 
-| ID                | Limitation                                                                         | Disposition                                         |
-| ----------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------- |
-| ADR-0088          | Durable storage deferred                                                           | Accepted for LA                                     |
-| Observability     | Evidence-specific metrics/health deferred                                          | Accepted for LA                                     |
-| Event publication | Deferred                                                                           | Accepted for LA                                     |
-| L-EM-01           | List/search permission+tenant scoped; per-item ACL on identified-resource ops only | Accepted for LA — future change = new ENG programme |
+| ID                | Limitation                                                                         | Disposition                                                             |
+| ----------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| ADR-0088          | Durable storage deferred                                                           | Accepted for LA                                                         |
+| Observability     | Evidence-specific metrics/health deferred                                          | Accepted for LA                                                         |
+| Event publication | Deferred                                                                           | Accepted for LA                                                         |
+| L-EM-01           | List/search permission+tenant scoped; per-item ACL on identified-resource ops only | Accepted for LA at CERT-003 — **CLOSED** by APZQEP-120-S01 (2026-08-01) |
 
 ## Effect
 

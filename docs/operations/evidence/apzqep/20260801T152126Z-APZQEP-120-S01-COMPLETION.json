@@ -1,0 +1,27 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S01",
+  "title": "Evidence List / Search ACL",
+  "classification": "Enterprise Engineering Slice",
+  "status": "COMPLETE",
+  "timestampUtc": "20260801T152126Z",
+  "baselineInspected": "2c37a0c649f773b13d9a71f9180a2121f8919f5d",
+  "engineeringCommit": "5707c39a8c0ebba5e964a916693711f7010cd96a",
+  "limitationClosed": "L-EM-01",
+  "phases": {
+    "inspection": "COMPLETE",
+    "architectureConfirmation": "COMPLETE — matches APZQEP-111 (close list/search ACL gap)",
+    "design": "COMPLETE",
+    "engineering": "COMPLETE",
+    "testing": "COMPLETE",
+    "securityValidation": "PASS",
+    "documentation": "UPDATED",
+    "certification": "PASS"
+  },
+  "securityEvidence": "docs/operations/evidence/apzqep/20260801T152126Z-APZQEP-120-S01-SECURITY.json",
+  "certificationEvidence": "docs/operations/evidence/apzqep/20260801T152126Z-APZQEP-120-S01-CERTIFICATION.json",
+  "engineeringNotes": "docs/products/apzqep/v1.1/apzqep-120/S01-ENGINEERING-NOTES.md",
+  "outstandingIssues": "NONE",
+  "nextAuthorisedSlice": "APZQEP-120-S02 (requires separate Owner instruction)",
+  "implementationAuthorityConsumed": "APZQEP-120-S01 only"
+}

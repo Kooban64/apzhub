@@ -1,0 +1,66 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S01",
+  "title": "Evidence List / Search ACL — Slice Certification",
+  "timestampUtc": "20260801T152126Z",
+  "classification": "Slice certification (not full product CERT)",
+  "result": "PASS",
+  "acceptanceCriteria": [
+    {
+      "id": "AC-1",
+      "text": "Caller without read ACL on item X never sees X in list or search",
+      "result": "PASS"
+    },
+    {
+      "id": "AC-2",
+      "text": "Cross-tenant principal never receives other-tenant rows",
+      "result": "PASS"
+    },
+    {
+      "id": "AC-3",
+      "text": "Existing per-item ACL tests still pass",
+      "result": "PASS"
+    },
+    {
+      "id": "AC-4",
+      "text": "L-EM-01 marked CLOSED in Evidence CERT docs with test refs",
+      "result": "PASS"
+    },
+    {
+      "id": "AC-5",
+      "text": "Package remains buildable; LA posture unchanged except security fix",
+      "result": "PASS"
+    }
+  ],
+  "validationCommands": [
+    "pnpm exec vitest run packages/qep-evidence/src/application/security/",
+    "pnpm exec vitest run packages/qep-evidence apps/web/lib/api/v1/handlers/qep-evidence.test.ts",
+    "pnpm --filter @apzhub/qep-evidence typecheck"
+  ],
+  "validationResults": {
+    "securityTests": "15 passed",
+    "packageAndHandlerTests": "63 passed",
+    "typecheckQepEvidence": "PASS",
+    "todosTemporaryDebug": "NONE"
+  },
+  "documentationUpdated": [
+    "docs/products/apzqep/evidence-management/CERT-003/LIMITATION-ASSESSMENT.md",
+    "docs/products/apzqep/evidence-management/CERT-003/CERTIFICATION-REPORT.md",
+    "docs/products/apzqep/evidence-management/CERT-003/RISK-ASSESSMENT.md",
+    "docs/products/apzqep/evidence-management/CERT-003/OWNER-ACCEPTANCE.md",
+    "docs/products/apzqep/evidence-management/RELEASE-004/KNOWN-LIMITATIONS-REGISTER.md",
+    "docs/products/apzqep/v1.1/apzqep-120/S01-ENGINEERING-NOTES.md",
+    "docs/products/apzqep/v1.1/apzqep-120/SLICE-CATALOGUE.md",
+    "packages/qep-evidence/README.md"
+  ],
+  "engineeringChanges": [
+    "packages/qep-evidence/src/application/security/enumeration-acl.ts",
+    "packages/qep-evidence/src/application/security/secure-services.ts",
+    "packages/qep-evidence/src/application/queries/types.ts",
+    "packages/platform-services/src/services/qep/qep-evidence-service-impl.ts",
+    "apps/web/lib/api/v1/handlers/qep-evidence.ts",
+    "apps/web/lib/qep/qep-evidence-api.ts"
+  ],
+  "packageVersionBump": "NONE (LA security fix; release bump awaits Owner release programme)",
+  "recommendation": "Ready for APZQEP-120-S02"
+}

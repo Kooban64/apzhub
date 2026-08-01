@@ -43,14 +43,15 @@ Executable engineering slices. Future instruction: _Implement APZQEP-120-SNN exa
 
 ### Identification
 
-| Field            | Value                    |
-| ---------------- | ------------------------ |
-| ID               | APZQEP-120-S01           |
-| Title            | Evidence list/search ACL |
-| Workstream       | B                        |
-| Priority         | P0                       |
-| Sequence         | 1                        |
-| Release boundary | R0                       |
+| Field            | Value                     |
+| ---------------- | ------------------------- |
+| ID               | APZQEP-120-S01            |
+| Title            | Evidence list/search ACL  |
+| Workstream       | B                         |
+| Priority         | P0                        |
+| Sequence         | 1                         |
+| Release boundary | R0                        |
+| Implementation   | **COMPLETE** (2026-08-01) |
 
 ### Objective
 
@@ -58,7 +59,8 @@ Close **L-EM-01**: list and search endpoints must not return evidence outside th
 
 ### Current state
 
-Per-item get/download ACL enforced via `access-policy` + secured services. List/search can leak IDs/metadata across ACL boundary (CERT limitation L-EM-01).
+**After S01:** Secured list/search apply getEvidence-equivalent ACL, tenant defence-in-depth, sort, and post-ACL pagination. L-EM-01 **CLOSED**.  
+_(Pre-S01: per-item get/download ACL only; list/search tenant+permission scoped.)_
 
 ### Scope
 
