@@ -1,3 +1,17 @@
+## 2026-08-01 — APZQEP-CLOSE-001 · APZQEP v1.0 Programme Closure
+
+- **APZQEP-CLOSE-001** **CLOSED** — Final Programme Closure & Archive
+- Product state: **Lifecycle Complete · Maintained Product · LIMITED_AVAILABILITY**
+- Returned to APZHUB Product Portfolio · next active APZQEP programme: **NONE**
+- Reports: [APZQEP-PROGRAMME-CLOSURE-REPORT.md](./APZQEP-PROGRAMME-CLOSURE-REPORT.md) · [APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md](./APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md)
+- Evidence: `20260801T074500Z-APZQEP-CLOSE-001.json`
+
+## 2026-08-01 — APZQEP-REM-005 · Standing Programme Record remediation
+
+- **APZQEP-REM-005** **CLOSED** — documentation-only post-release remediation
+- Corrected unsubstituted placeholders and stale B-01 wording in [STANDING-PROGRAMME-RECORD.md](./STANDING-PROGRAMME-RECORD.md)
+- Evidence: `20260801T065900Z-APZQEP-REM-005.json` · commit `cd696ebb`
+
 ## 2026-07-31 — APZQEP-RELEASE-004 COMPLETE · Evidence Management 1.0.0
 
 - Released: `@apzhub/qep-evidence` **1.0.0** @ `79d9851f4d473a9d0a249dc76bb9a0676aaf2f03` · tag `apzqep-evidence-v1.0.0`

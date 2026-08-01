@@ -1,8 +1,8 @@
 # APZHUB Current Milestone
 
 > **Purpose:** Where development currently stops and what requires owner approval  
-> **Last updated:** 2026-07-30  
-> **Current status:** **Standing Programme State IN FORCE** ([STANDING-PROGRAMME-RECORD.md](../products/apzqep/STANDING-PROGRAMME-RECORD.md)) · Lifecycle Standard **v1.0 VALIDATED** · TE **1.0.1** · REM-002 **APPROVED AND CLOSED** · FREEZE-003 **SUPERSEDED FOR RELEASE** · `APZQEP-FREEZE-004` **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** (RC **1.0.0-rc.2** @ `4e1b6f01`) · RELEASE-003 **STOPPED / REPLACED** · `APZQEP-RELEASE-004` **CLOSED / COMPLETE** (`@apzhub/qep-evidence` **1.0.0**, tag `apzqep-evidence-v1.0.0`) · Authorised next delivery: **Owner deploy decision / future GA (not opened)**.
+> **Last updated:** 2026-08-01  
+> **Current status:** **APZQEP v1.0 Lifecycle Complete** ([APZQEP-PROGRAMME-CLOSURE-REPORT.md](../products/apzqep/APZQEP-PROGRAMME-CLOSURE-REPORT.md)) · Standing Programme **IN FORCE** · TE **1.0.1** · Evidence **`@apzhub/qep-evidence` 1.0.0** (`apzqep-evidence-v1.0.0` → `79d9851f`) · FREEZE-004 **CLOSED / IMMUTABLE** · RELEASE-004 **CLOSED** · REM-005 **CLOSED** · CLOSE-001 **CLOSED** · Maintained product · **LIMITED_AVAILABILITY** · Next active APZQEP programme: **NONE**.
 
 ---
 
@@ -281,7 +281,7 @@
 - Evidence: `20260728T102844Z-APZQEP-CONSTITUTION-1.0.0-RATIFICATION.json`
 - Nature: documentation only — **no Wave 2 engineering**
 
-**Stop condition:** Foundation is immutable history. Lifecycle Standard v1.0 is **VALIDATED**. REM-002 is **CLOSED**. FREEZE-004 is **CLOSED** (RC **1.0.0-rc.2** @ `4e1b6f01`). RELEASE-003 must not resume. RELEASE-004 is **CLOSED / COMPLETE** (1.0.0). Authorised next delivery: **Owner deploy decision / future GA programme (not opened)**.
+**Stop condition:** Foundation is immutable history. Lifecycle Standard v1.0 is **VALIDATED**. FREEZE-004 is **CLOSED / IMMUTABLE**. RELEASE-004 is **CLOSED / COMPLETE** (`@apzhub/qep-evidence` **1.0.0**). REM-005 **CLOSED**. **APZQEP-CLOSE-001 CLOSED** — APZQEP v1.0 Lifecycle Complete · Maintained Product · **LIMITED_AVAILABILITY**. Authorised next APZQEP programme: **NONE**.
 
 **APZQEP-PORTFOLIO-001 — Foundation Completion & Portfolio Baseline — CLOSED:**
 

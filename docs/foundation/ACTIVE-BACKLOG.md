@@ -5,8 +5,8 @@
 > **Authoritative references:** Individual backlog documents — **full content lives there**  
 > **Related documents:** [CURRENT-MILESTONE](./CURRENT-MILESTONE.md) · [docs/backlog/](../backlog/)  
 > **Reading order:** When identifying approved work  
-> **Last updated:** 2026-07-30  
-> **Current status:** [Standing Programme Record](../products/apzqep/STANDING-PROGRAMME-RECORD.md) **IN FORCE**; Foundation permanently closed; OM **1.1.0 IN FORCE**; Lifecycle Standard **v1.0 VALIDATED**; TE **1.0.1**; REM-002 **APPROVED AND CLOSED**; FREEZE-003 **SUPERSEDED FOR RELEASE**; **APZQEP-FREEZE-004** **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** (RC **1.0.0-rc.2** @ `4e1b6f01`); RELEASE-003 **STOPPED / REPLACED**; **APZQEP-RELEASE-004** **CLOSED / COMPLETE** (`@apzhub/qep-evidence` **1.0.0**, tag `apzqep-evidence-v1.0.0`); Authorised next delivery: **Owner LIMITED_AVAILABILITY deploy decision / future GA programme (not opened)**
+> **Last updated:** 2026-08-01  
+> **Current status:** [Standing Programme Record](../products/apzqep/STANDING-PROGRAMME-RECORD.md) **IN FORCE**; **APZQEP v1.0 Lifecycle Complete** ([CLOSE-001](../products/apzqep/APZQEP-PROGRAMME-CLOSURE-REPORT.md)); Foundation permanently closed; OM **1.1.0 IN FORCE**; Lifecycle Standard **v1.0 VALIDATED**; TE **1.0.1**; Evidence **`@apzhub/qep-evidence` 1.0.0** (tag `apzqep-evidence-v1.0.0`); FREEZE-004 **CLOSED / IMMUTABLE**; RELEASE-004 **CLOSED / COMPLETE**; REM-005 **CLOSED**; Maintained product · **LIMITED_AVAILABILITY**; Authorised next APZQEP programme: **NONE** (future work via new Owner programme or APZHUB Governance)
 
 ---
 

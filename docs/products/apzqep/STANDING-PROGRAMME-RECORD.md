@@ -1,68 +1,70 @@
 # Standing Programme Record — APZQEP
 
-| Field          | Value                                                                                                                                                     |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Document       | Standing Programme Record                                                                                                                                 |
-| Date           | 2026-08-01                                                                                                                                                |
-| Status         | **IN FORCE — OFFICIAL STANDING STATE**                                                                                                                    |
-| Test Execution | `@apzhub/qep-test-execution` **1.0.1**                                                                                                                    |
-| REM-002        | **APPROVED AND CLOSED**                                                                                                                                   |
-| REM-005        | **APPROVED AND CLOSED** — documentation-only post-release remediation (standing record after RELEASE-004)                                                 |
-| FREEZE-003     | **SUPERSEDED FOR RELEASE** (`ce220a5d` / **1.0.0-rc.1**)                                                                                                  |
-| FREEZE-004     | **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** · RC **1.0.0-rc.2** @ `4e1b6f01` · **IMMUTABLE**                                                       |
-| RELEASE-003    | **STOPPED / REPLACED BY RELEASE-004** — must not resume                                                                                                   |
-| RELEASE-004    | [evidence-management/RELEASE-004/](./evidence-management/RELEASE-004/README.md) **CLOSED / COMPLETE** · **1.0.0** · `apzqep-evidence-v1.0.0` → `79d9851f` |
+| Field          | Value                                                                                                                                                                            |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document       | Standing Programme Record                                                                                                                                                        |
+| Date           | 2026-08-01                                                                                                                                                                       |
+| Status         | **IN FORCE — OFFICIAL STANDING STATE**                                                                                                                                           |
+| Product state  | **APZQEP v1.0 — Lifecycle Complete · Maintained Product · LIMITED_AVAILABILITY**                                                                                                 |
+| Test Execution | `@apzhub/qep-test-execution` **1.0.1**                                                                                                                                           |
+| Evidence Mgmt  | `@apzhub/qep-evidence` **1.0.0** · tag `apzqep-evidence-v1.0.0` → `79d9851f`                                                                                                     |
+| REM-002        | **APPROVED AND CLOSED**                                                                                                                                                          |
+| REM-005        | **APPROVED AND CLOSED** — documentation-only post-release remediation                                                                                                            |
+| FREEZE-003     | **SUPERSEDED FOR RELEASE** (`ce220a5d` / **1.0.0-rc.1**)                                                                                                                         |
+| FREEZE-004     | **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** · RC **1.0.0-rc.2** @ `4e1b6f01` · **IMMUTABLE**                                                                              |
+| RELEASE-003    | **STOPPED / REPLACED BY RELEASE-004** — must not resume                                                                                                                          |
+| RELEASE-004    | [evidence-management/RELEASE-004/](./evidence-management/RELEASE-004/README.md) **CLOSED / COMPLETE** · **1.0.0** · `apzqep-evidence-v1.0.0` → `79d9851f`                        |
+| CLOSE-001      | **CLOSED** — [APZQEP-PROGRAMME-CLOSURE-REPORT.md](./APZQEP-PROGRAMME-CLOSURE-REPORT.md) · Archive [APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md](./APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md) |
 
 ### Default premise
 
 - Production baseline: `@apzhub/qep-evidence` **1.0.0** @ `79d9851f` (from FREEZE-004 RC @ `4e1b6f01`; tag `apzqep-evidence-v1.0.0`).
 - RELEASE-004 completed successfully under **LIMITED_AVAILABILITY**. No live production deployment. Unrestricted general availability is not authorised.
-- RELEASE-003 must not resume under any circumstances.
-- FREEZE-004 remains closed and immutable. RELEASE-004 remains closed and complete.
-- B-01 is **not** a current blocker. RELEASE-004 was initially blocked at B-01 due to the configured SSH identity lacking repository access. Owner-authorised HTTPS credentials for the `kooban-apzor` identity were subsequently verified, the Go/No-Go gate passed, and controlled release execution completed.
+- FREEZE-004 remains closed and immutable. RELEASE-004 remains closed and complete. REM-005 remains closed.
+- **APZQEP-CLOSE-001** closed the APZQEP v1.0 programme and returned the product to the APZHUB portfolio. No active APZQEP engineering programme remains.
+- B-01 is historical only (cleared before RELEASE-004 execution via authorised `kooban-apzor` HTTPS credentials).
+- Future cross-cutting governance belongs under **APZHUB Governance**. Product enhancements require a new Owner-authorised programme.
 
 ### REM-005 note
 
-Documentation-only correction of unsubstituted placeholders (`{tag}`, `{promotion}`) and stale B-01 wording in this standing record after RELEASE-004 closure. No engineering, package, tag, deployment, freeze, or release reopen. Evidence: `docs/operations/evidence/portfolio-recert/20260801T065900Z-APZQEP-REM-005.json`.
+Documentation-only correction of unsubstituted placeholders (`{tag}`, `{promotion}`) and stale B-01 wording after RELEASE-004 closure. Evidence: `docs/operations/evidence/portfolio-recert/20260801T065900Z-APZQEP-REM-005.json`.
 
 ---
 
 ## Current position
 
 ```text
-APZQEP-REM-002
-✅ APPROVED AND CLOSED
-
-APZQEP-FREEZE-003
-⛔ SUPERSEDED FOR RELEASE
+APZQEP v1.0
+✅ LIFECYCLE COMPLETE
+✅ ENGINEERING COMPLETE
+✅ CERTIFIED
+✅ RELEASED
+✅ MAINTAINED PRODUCT
+Availability: LIMITED_AVAILABILITY
 
 APZQEP-FREEZE-004
-✅ ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED / IMMUTABLE
+✅ CLOSED / IMMUTABLE
 RC: 1.0.0-rc.2 @ 4e1b6f01
-
-APZQEP-RELEASE-003
-⛔ STOPPED / REPLACED BY RELEASE-004
 
 APZQEP-RELEASE-004
 ✅ CLOSED / COMPLETE
 Package: @apzhub/qep-evidence 1.0.0
 Tag: apzqep-evidence-v1.0.0 → 79d9851f
-Availability: LIMITED_AVAILABILITY
-Live deploy: none
-Unrestricted GA: not authorised
-Release identity: kooban-apzor (HTTPS)
-Historical: initially blocked at B-01 (SSH identity lacked access); B-01 cleared before execution
 
 APZQEP-REM-005
-✅ APPROVED AND CLOSED
-Documentation-only standing-record remediation
+✅ CLOSED
+
+APZQEP-CLOSE-001
+✅ CLOSED
+Returned to APZHUB Product Portfolio
+Next active APZQEP programme: NONE
 ```
 
 ---
 
 ## Authorised next delivery
 
-**Owner acceptance of LIMITED_AVAILABILITY operational deployment (optional); unrestricted GA requires separate programme.**
+**None under APZQEP v1.0 identifiers.** Optional LIMITED_AVAILABILITY operational deployment decision, unrestricted GA, or enhancements require a new Owner-authorised programme. Cross-cutting standards → APZHUB Governance.
 
 ---
 
@@ -72,8 +74,10 @@ Documentation-only standing-record remediation
 STANDING PROGRAMME RECORD
 IN FORCE
 
+APZQEP v1.0 = LIFECYCLE COMPLETE / MAINTAINED PRODUCT
 FREEZE-004 = CLOSED / IMMUTABLE
 RELEASE-004 = CLOSED / COMPLETE (1.0.0 · apzqep-evidence-v1.0.0 → 79d9851f)
-REM-005 = CLOSED (docs-only)
-AUTHORISED NEXT DELIVERY = OWNER DEPLOYMENT DECISION / FUTURE GA PROGRAMME (NOT OPENED)
+REM-005 = CLOSED
+CLOSE-001 = CLOSED
+NEXT ACTIVE APZQEP PROGRAMME = NONE
 ```
