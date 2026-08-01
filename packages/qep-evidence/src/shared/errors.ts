@@ -125,3 +125,43 @@ export class PersistenceNotImplementedError extends Error {
     this.operation = operation;
   }
 }
+
+/**
+ * Storage Platform failures — APZQEP-120-S03.
+ * Messages MUST NOT leak filesystem paths or provider internals to clients.
+ */
+export type EvidenceStorageErrorCode =
+  | "STORAGE_NOT_FOUND"
+  | "STORAGE_INVALID_REQUEST"
+  | "STORAGE_CONFLICT"
+  | "STORAGE_UNAVAILABLE"
+  | "STORAGE_FORBIDDEN"
+  | "STORAGE_LIMIT_EXCEEDED"
+  | "STORAGE_PROVIDER_UNKNOWN";
+
+export class EvidenceStorageError extends Error {
+  readonly code: EvidenceStorageErrorCode;
+  readonly category:
+    "not_found" | "validation" | "conflict" | "unavailable" | "forbidden";
+
+  constructor(
+    code: EvidenceStorageErrorCode,
+    message: string,
+    category?: EvidenceStorageError["category"],
+  ) {
+    super(message);
+    this.name = "EvidenceStorageError";
+    this.code = code;
+    this.category =
+      category ??
+      (code === "STORAGE_NOT_FOUND"
+        ? "not_found"
+        : code === "STORAGE_CONFLICT"
+          ? "conflict"
+          : code === "STORAGE_UNAVAILABLE" || code === "STORAGE_PROVIDER_UNKNOWN"
+            ? "unavailable"
+            : code === "STORAGE_FORBIDDEN"
+              ? "forbidden"
+              : "validation");
+  }
+}

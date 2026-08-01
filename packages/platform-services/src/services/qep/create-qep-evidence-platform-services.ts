@@ -1,7 +1,7 @@
 /**
- * Platform QEP Evidence Services factory (APZQEP-ENG-110F).
- * Uses in-memory Application ports until Owner-authorised storage selection
- * (ADR-0088). Not a silent production DB fallback for other QEP capabilities.
+ * Platform QEP Evidence Services factory (APZQEP-ENG-110F / APZQEP-120-S03).
+ * Content bytes via Evidence Storage Platform (ADR-0094). Metadata remains
+ * in-memory until S04. Default provider is memory; Local via env/config only.
  */
 
 import {
@@ -23,7 +23,7 @@ export type QepEvidencePlatformServicesBundle = {
   readonly service: QepEvidencePlatformService;
   readonly readiness: {
     readonly evidenceEnabled: true;
-    readonly persistenceMode: "memory";
+    readonly persistenceMode: EvidenceRuntimeBundle["persistenceMode"];
   };
   wrapWithPipeline(pipeline: RequestPipeline): QepEvidencePlatformService;
 };
@@ -48,7 +48,7 @@ function buildBundle(
     service,
     readiness: {
       evidenceEnabled: true,
-      persistenceMode: "memory",
+      persistenceMode: runtime.persistenceMode,
     },
     wrapWithPipeline: (pipeline) =>
       wrapQepEvidencePlatformServiceWithPipeline(service, pipeline),
@@ -60,8 +60,8 @@ export function createQepEvidencePlatformServices(): QepEvidencePlatformServices
 }
 
 /**
- * Production Evidence runtime — memory until storage technology is selected.
- * Explicitly distinct from Postgres-backed QEP capabilities.
+ * Production Evidence runtime — Storage Platform from env (default memory).
+ * Explicitly distinct from Postgres-backed QEP metadata (S04).
  */
 export function createQepEvidencePlatformServicesForProduction(): QepEvidencePlatformServicesBundle {
   return buildBundle(createEvidenceRuntimeForProduction());

@@ -50,7 +50,7 @@ describe("APZQEP-RELEASE-004 architecture boundaries", () => {
     );
     expect(QEP_EVIDENCE_DOMAIN_STATUS).toBe("implemented-eng-110b");
     expect(QEP_EVIDENCE_APPLICATION_STATUS).toBe("secured-eng-110e");
-    expect(QEP_EVIDENCE_INFRASTRUCTURE_STATUS).toBe("abstractions-eng-110c");
+    expect(QEP_EVIDENCE_INFRASTRUCTURE_STATUS).toBe("storage-platform-s03");
     expect(QEP_EVIDENCE_MODULE_ID).toBe("qep-evidence");
     expect(QEP_EVIDENCE_API_BASE_PATH).toBe("/api/v1/qep/evidence");
     expect(QEP_EVIDENCE_API_STATUS).toBe("implemented-eng-110f");
@@ -159,6 +159,42 @@ describe("APZQEP-RELEASE-004 architecture boundaries", () => {
     expect(storage.includes("@aws-sdk")).toBe(false);
     expect(storage.includes("minio")).toBe(false);
     expect(storage.includes("node:fs")).toBe(false);
+  });
+
+  it("Storage Platform isolates filesystem I/O to Local provider only", () => {
+    const storageRoot = join(packageRoot, "src", "infrastructure", "storage");
+    const localRoot = join(storageRoot, "providers", "local");
+    const forbiddenOutsideLocal = ["node:fs", "fs/promises"];
+    for (const file of collectSourceFiles(storageRoot)) {
+      if (
+        file.startsWith(localRoot) ||
+        file.includes(`${join("providers", "local")}`)
+      ) {
+        continue;
+      }
+      const source = readFileSync(file, "utf8");
+      for (const token of forbiddenOutsideLocal) {
+        expect(
+          source.includes(token),
+          `${file} must not reference ${token} (Local provider only)`,
+        ).toBe(false);
+      }
+      expect(source.includes("@aws-sdk")).toBe(false);
+      expect(source.includes("minio")).toBe(false);
+    }
+
+    const platformManager = readFileSync(
+      join(storageRoot, "platform", "evidence-storage-manager.ts"),
+      "utf8",
+    );
+    expect(platformManager.includes("EvidenceStorageManager")).toBe(true);
+    expect(platformManager.includes("createLocalEvidenceStorageProvider")).toBe(false);
+
+    const localProvider = readFileSync(
+      join(localRoot, "local-evidence-storage-provider.ts"),
+      "utf8",
+    );
+    expect(localProvider.includes("node:fs")).toBe(true);
   });
 
   it("infrastructure persistence adapters contain no SQL or provider I/O", () => {

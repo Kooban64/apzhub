@@ -44,12 +44,15 @@ export type StorageGetResult = {
 /**
  * Optional stream handle — adapters may return bytes via get() instead.
  * No concrete stream library types (technology independence).
+ * Prefer `chunks()` for large objects when the provider supports streaming.
  */
 export type StorageStreamHandle = {
   readonly kind: "storage-stream";
   readonly storageLocator: StorageLocator;
   readonly mediaType: string;
   readonly byteSize: number;
+  /** Chunked reader — avoids loading entire object into memory when present. */
+  readonly chunks?: () => AsyncIterable<Uint8Array>;
 };
 
 export type StoragePort = {

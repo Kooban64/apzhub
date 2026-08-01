@@ -8,6 +8,7 @@ export * from "./models";
 export * from "./mappers";
 export * from "./repository-adapters";
 export * from "./persistence-events";
+export * from "./create-evidence-persistence";
 
 export type PersistenceAdapterScaffoldId =
   | "EvidenceMetadataPersistenceAdapter"

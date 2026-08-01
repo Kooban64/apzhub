@@ -1,7 +1,9 @@
 /**
- * Evidence persistence factory for Application wiring — APZQEP-ENG-110F.
- * Uses in-memory ports only (storage technology remains undecided — ADR-0088).
- * Not a production storage selection.
+ * Evidence persistence factory — APZQEP-ENG-110F / APZQEP-120-S03.
+ *
+ * Metadata repositories remain in-memory until S04.
+ * Content bytes flow through EvidenceStorageManager (StoragePort).
+ * Default provider is memory; Local is selected only via configuration.
  */
 
 import {
@@ -9,33 +11,75 @@ import {
   createInMemoryAuditPort,
   createInMemoryClockPort,
   createInMemoryIdPort,
-  createInMemoryStoragePort,
   createInMemoryUnitOfWork,
   type EvidenceApplicationServices,
+  type StoragePort,
 } from "../../application";
+import {
+  createEvidenceStorageSync,
+  resolveEvidenceStorageConfigFromEnv,
+} from "../storage/platform/create-evidence-storage";
+import type { EvidenceStoragePlatformConfig } from "../storage/platform/types";
+
+export type EvidencePersistenceMode = "memory" | "local";
 
 export type EvidenceRuntimeBundle = {
   readonly application: EvidenceApplicationServices;
-  readonly persistenceMode: "memory";
+  readonly persistenceMode: EvidencePersistenceMode;
+  readonly storage: StoragePort;
 };
 
-/**
- * Build secured Application services backed by in-memory ports.
- * Suitable for transport/Workbench integration until a storage wave selects technology.
- */
-export function createEvidenceRuntimeForMemory(input?: {
+function buildRuntime(input: {
+  readonly storageConfig: EvidenceStoragePlatformConfig;
   readonly now?: string;
 }): EvidenceRuntimeBundle {
+  const { manager } = createEvidenceStorageSync(input.storageConfig);
   const uow = createInMemoryUnitOfWork();
   const application = createEvidenceApplicationServices({
     uow,
-    storage: createInMemoryStoragePort(),
-    clock: createInMemoryClockPort(input?.now),
+    storage: manager,
+    clock: createInMemoryClockPort(input.now),
     ids: createInMemoryIdPort(),
     audit: createInMemoryAuditPort(),
     secure: true,
   });
-  return { application, persistenceMode: "memory" };
+  return {
+    application,
+    persistenceMode: input.storageConfig.provider,
+    storage: manager,
+  };
+}
+
+/**
+ * Build secured Application services with memory content provider.
+ */
+export function createEvidenceRuntimeForMemory(input?: {
+  readonly now?: string;
+}): EvidenceRuntimeBundle {
+  return buildRuntime({
+    storageConfig: { provider: "memory" },
+    now: input?.now,
+  });
+}
+
+/**
+ * Build secured Application services with Local content provider (LA).
+ */
+export function createEvidenceRuntimeForLocal(input: {
+  readonly rootDirectory: string;
+  readonly maxObjectBytes?: number;
+  readonly now?: string;
+}): EvidenceRuntimeBundle {
+  return buildRuntime({
+    storageConfig: {
+      provider: "local",
+      local: {
+        rootDirectory: input.rootDirectory,
+        maxObjectBytes: input.maxObjectBytes,
+      },
+    },
+    now: input.now,
+  });
 }
 
 export function createEvidenceRuntimeForTest(): EvidenceRuntimeBundle {
@@ -43,9 +87,11 @@ export function createEvidenceRuntimeForTest(): EvidenceRuntimeBundle {
 }
 
 /**
- * Production Evidence runtime — memory until Owner-authorised storage selection.
- * Explicitly named so callers do not confuse this with a silent DB fallback.
+ * Production Evidence runtime — resolves provider from environment.
+ * Defaults to memory until Local/root (or later providers) are configured.
  */
 export function createEvidenceRuntimeForProduction(): EvidenceRuntimeBundle {
-  return createEvidenceRuntimeForMemory();
+  return buildRuntime({
+    storageConfig: resolveEvidenceStorageConfigFromEnv(),
+  });
 }
