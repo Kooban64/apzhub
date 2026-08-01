@@ -8,6 +8,14 @@ import type {
   StoragePort,
 } from "../ports";
 import {
+  createEvidenceEnumerationService,
+  createEvidencePermissionEngine,
+  createEvidenceQueryBuilder,
+  type EvidenceEnumerationService,
+  type EvidencePermissionEngine,
+  type EvidenceQueryBuilder,
+} from "../query";
+import {
   createEvidenceAccessPolicyService,
   createEvidenceSecurityGate,
   createPermissionPort,
@@ -52,6 +60,10 @@ export type EvidenceApplicationServices = {
   readonly securityAudit: SecurityAuditService;
   readonly permissions: PermissionPort;
   readonly secured: boolean;
+  /** APZQEP-120-S02 — reusable permission-aware enumeration pipeline. */
+  readonly permissionEngine: EvidencePermissionEngine;
+  readonly queryBuilder: EvidenceQueryBuilder;
+  readonly enumeration: EvidenceEnumerationService | undefined;
 };
 
 /**
@@ -90,6 +102,17 @@ export function createEvidenceApplicationServices(
   const innerQueries = createEvidenceQueryService(deps);
   const secure = input.secure !== false;
 
+  const permissionEngine = createEvidencePermissionEngine(securityGate);
+  const queryBuilder = createEvidenceQueryBuilder();
+  const enumeration = secure
+    ? createEvidenceEnumerationService({
+        inner: innerQueries,
+        permissions: permissionEngine,
+        queryBuilder,
+        securityAudit,
+      })
+    : undefined;
+
   const commands = secure
     ? createSecuredEvidenceCommandService(innerCommands, securityGate)
     : innerCommands;
@@ -102,6 +125,7 @@ export function createEvidenceApplicationServices(
           }
           return found;
         },
+        enumeration,
       })
     : innerQueries;
 
@@ -115,5 +139,8 @@ export function createEvidenceApplicationServices(
     securityAudit,
     permissions,
     secured: secure,
+    permissionEngine,
+    queryBuilder,
+    enumeration,
   };
 }

@@ -6,3 +6,4 @@ export * from "./access-policy";
 export * from "./security-audit";
 export * from "./security-gate";
 export * from "./secure-services";
+export * from "./enumeration-acl";

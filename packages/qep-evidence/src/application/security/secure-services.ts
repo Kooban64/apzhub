@@ -8,6 +8,7 @@ import type { EvidenceCommandService } from "../services/evidence-command-servic
 import type { EvidenceQueryService } from "../services/evidence-query-service";
 import type { EvidenceAccessCheckResult } from "../dto/evidence-dto";
 import { computeLifecycleAvailableActions } from "../available-actions";
+import type { EvidenceEnumerationService } from "../query";
 import { applyEnumerationAcl } from "./enumeration-acl";
 import type { EvidenceSecurityGate } from "./security-gate";
 import type { EvidenceSecurityOperation } from "./operations";
@@ -195,6 +196,11 @@ export function createSecuredEvidenceQueryService(
       ctx: EvidenceRequestContext,
       evidenceId: string,
     ) => Promise<Parameters<typeof computeLifecycleAvailableActions>[0]>;
+    /**
+     * APZQEP-120-S02 — authoritative permission-aware enumeration path.
+     * When provided, list/search must not construct ACL filters in callers.
+     */
+    readonly enumeration?: EvidenceEnumerationService;
   },
 ): EvidenceQueryService {
   return {
@@ -203,8 +209,11 @@ export function createSecuredEvidenceQueryService(
       return inner.getEvidence(ctx, query);
     },
     async listEvidence(ctx, query) {
+      if (deps.enumeration) {
+        return deps.enumeration.list(ctx, query);
+      }
+      // Legacy fallback (S01 path) — prefer EvidenceEnumerationService.
       await gate.authorize(ctx, "listEvidence");
-      // Load full tenant+filter candidate set, then ACL-filter before paging (L-EM-01).
       const candidates = await inner.listEvidence(ctx, {
         ...query,
         page: undefined,
@@ -215,8 +224,10 @@ export function createSecuredEvidenceQueryService(
       });
     },
     async searchEvidence(ctx, query) {
+      if (deps.enumeration) {
+        return deps.enumeration.search(ctx, query);
+      }
       await gate.authorize(ctx, "searchEvidence");
-      // Search text filter first (unpaged), then ACL-filter, sort, page (L-EM-01).
       const candidates = await inner.searchEvidence(ctx, {
         ...query,
         page: undefined,

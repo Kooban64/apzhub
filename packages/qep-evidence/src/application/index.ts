@@ -16,3 +16,4 @@ export * from "./services/index";
 export * from "./testing/in-memory-ports";
 export * from "./security/index";
 export * from "./policy/index";
+export * from "./query/index";
