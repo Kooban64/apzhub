@@ -15,7 +15,8 @@
 | RELEASE-003    | **STOPPED / REPLACED BY RELEASE-004** — must not resume                                                                                                                          |
 | RELEASE-004    | [evidence-management/RELEASE-004/](./evidence-management/RELEASE-004/README.md) **CLOSED / COMPLETE** · **1.0.0** · `apzqep-evidence-v1.0.0` → `79d9851f`                        |
 | CLOSE-001      | **CLOSED** — [APZQEP-PROGRAMME-CLOSURE-REPORT.md](./APZQEP-PROGRAMME-CLOSURE-REPORT.md) · Archive [APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md](./APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md) |
-| APZQEP-110     | **COMPLETE / AWAITING OWNER APPROVAL** — [v1.1 Product Planning](./v1.1/README.md) — planning only; engineering not authorised                                                   |
+| APZQEP-110     | **APPROVED** — [v1.1 Product Planning](./v1.1/README.md)                                                                                                                         |
+| APZQEP-111     | **COMPLETE / AWAITING PRODUCT BOARD APPROVAL** — [v1.1 Solution Architecture](./v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md) — engineering not authorised                             |
 
 ### Default premise
 
@@ -57,15 +58,22 @@ APZQEP-REM-005
 
 APZQEP-CLOSE-001
 ✅ CLOSED
-Returned to APZHUB Product Portfolio
-Next active APZQEP programme: NONE
+
+APZQEP-110
+✅ APPROVED
+
+APZQEP-111
+⏳ COMPLETE / AWAITING PRODUCT BOARD APPROVAL
+Engineering: NOT AUTHORISED
+Recommended next engineering band: APZQEP-120
 ```
 
 ---
 
 ## Authorised next delivery
 
-**Owner Product Board decision on APZQEP-110 (v1.1 roadmap).** Engineering begins only after roadmap approval and a new Owner-authorised programme (recommended first: **APZQEP-111** Architecture). Cross-cutting standards → APZHUB Governance.
+**Owner Product Board decision on APZQEP-111 (v1.1 Solution Architecture).** Engineering begins only after architecture approval and a new Owner-authorised programme (recommended first: **APZQEP-120** Enterprise Foundation). Cross-cutting standards → APZHUB Governance.
+
 ---
 
 ## STOP
@@ -79,5 +87,7 @@ FREEZE-004 = CLOSED / IMMUTABLE
 RELEASE-004 = CLOSED / COMPLETE (1.0.0 · apzqep-evidence-v1.0.0 → 79d9851f)
 REM-005 = CLOSED
 CLOSE-001 = CLOSED
-NEXT ACTIVE APZQEP PROGRAMME = NONE
+APZQEP-110 = APPROVED
+APZQEP-111 = AWAITING PRODUCT BOARD APPROVAL
+NEXT ENGINEERING PROGRAMME = NONE UNTIL 111 APPROVED (THEN APZQEP-120)
 ```

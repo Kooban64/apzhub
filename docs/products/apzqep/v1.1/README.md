@@ -1,68 +1,58 @@
-# APZQEP-110 — APZQEP v1.1 Product Planning & Roadmap
+# APZQEP v1.1 — Product Planning & Solution Architecture
 
-| Field          | Value                                                                                                   |
-| -------------- | ------------------------------------------------------------------------------------------------------- |
-| Programme      | **APZQEP-110**                                                                                          |
-| Classification | **Product Planning** — documentation only                                                               |
-| Status         | **COMPLETE — AWAITING OWNER APPROVAL**                                                                  |
-| Baseline       | APZQEP v1.0 Lifecycle Complete (CLOSE-001)                                                              |
-| Date           | 2026-08-01                                                                                              |
-| Roles          | Product Architect · Product Manager · Solution Architect · Senior UX Architect · AI Solutions Architect |
+| Field                 | Value                                                       |
+| --------------------- | ----------------------------------------------------------- |
+| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                        |
+| Solution architecture | **APZQEP-111** — COMPLETE — AWAITING PRODUCT BOARD APPROVAL |
+| Engineering           | **NOT AUTHORISED** until 111 approved + programme directive |
+| Date                  | 2026-08-01                                                  |
 
 ---
 
-## Purpose
+## Product planning pack (APZQEP-110)
 
-Design the complete **APZQEP Version 1.1** product direction for Owner approval **before** any engineering begins.
-
-This pack does **not** authorise engineering, release, freeze, remediation, or governance redesign.
-
----
-
-## Pack
-
-| Document                                                               | Role                                         |
-| ---------------------------------------------------------------------- | -------------------------------------------- |
-| [EXECUTIVE-SUMMARY.md](./EXECUTIVE-SUMMARY.md)                         | Board-level summary and ask                  |
-| [CURRENT-CAPABILITY-ASSESSMENT.md](./CURRENT-CAPABILITY-ASSESSMENT.md) | What v1.0 delivers                           |
-| [PRODUCT-ROADMAP.md](./PRODUCT-ROADMAP.md)                             | Vision, themes, release themes               |
-| [FEATURE-CATALOGUE.md](./FEATURE-CATALOGUE.md)                         | Capability catalogue by domain               |
-| [AI-STRATEGY.md](./AI-STRATEGY.md)                                     | AI product strategy                          |
-| [UX-STRATEGY.md](./UX-STRATEGY.md)                                     | UX / dashboard / productivity strategy       |
-| [TECHNICAL-ROADMAP.md](./TECHNICAL-ROADMAP.md)                         | Programme breakdown                          |
-| [PROGRAMME-BACKLOG.md](./PROGRAMME-BACKLOG.md)                         | Prioritised backlog with acceptance criteria |
-| [RELEASE-PLAN.md](./RELEASE-PLAN.md)                                   | 1.1 · 1.2 · 1.3 · 2.0 allocation             |
+| Document                                                               | Role                                                   |
+| ---------------------------------------------------------------------- | ------------------------------------------------------ |
+| [EXECUTIVE-SUMMARY.md](./EXECUTIVE-SUMMARY.md)                         | Board ask (planning)                                   |
+| [CURRENT-CAPABILITY-ASSESSMENT.md](./CURRENT-CAPABILITY-ASSESSMENT.md) | v1.0 assessment                                        |
+| [PRODUCT-ROADMAP.md](./PRODUCT-ROADMAP.md)                             | Themes                                                 |
+| [FEATURE-CATALOGUE.md](./FEATURE-CATALOGUE.md)                         | Features                                               |
+| [AI-STRATEGY.md](./AI-STRATEGY.md)                                     | AI product strategy                                    |
+| [UX-STRATEGY.md](./UX-STRATEGY.md)                                     | UX strategy                                            |
+| [TECHNICAL-ROADMAP.md](./TECHNICAL-ROADMAP.md)                         | Historical provisional programmes (superseded for IDs) |
+| [PROGRAMME-BACKLOG.md](./PROGRAMME-BACKLOG.md)                         | Backlog                                                |
+| [RELEASE-PLAN.md](./RELEASE-PLAN.md)                                   | 1.1–2.0 allocation                                     |
 
 ---
 
-## Non-goals
+## Solution architecture pack (APZQEP-111)
 
-- No source, package, lockfile, CI, tag, or deployment changes
-- No redesign of APZHUB Foundation / Lifecycle / AI Operational Framework
-- No reopening of FREEZE-004, RELEASE-004, REM-005, or CLOSE-001
-- No competitor cloning — competitive awareness only
+| Document                                                                 | Role                                      |
+| ------------------------------------------------------------------------ | ----------------------------------------- |
+| [EXECUTIVE-ARCHITECTURE-SUMMARY.md](./EXECUTIVE-ARCHITECTURE-SUMMARY.md) | Board ask (architecture)                  |
+| [SOLUTION-ARCHITECTURE.md](./SOLUTION-ARCHITECTURE.md)                   | End-to-end solution architecture          |
+| [DOMAIN-MODEL.md](./DOMAIN-MODEL.md)                                     | Domain catalogue                          |
+| [INFORMATION-ARCHITECTURE.md](./INFORMATION-ARCHITECTURE.md)             | Navigation & IA                           |
+| [UX-ARCHITECTURE.md](./UX-ARCHITECTURE.md)                               | Personas & UX architecture                |
+| [AI-ARCHITECTURE.md](./AI-ARCHITECTURE.md)                               | AI platform architecture                  |
+| [QUALITY-INTELLIGENCE-ENGINE.md](./QUALITY-INTELLIGENCE-ENGINE.md)       | QI Engine specification                   |
+| [DATA-ARCHITECTURE.md](./DATA-ARCHITECTURE.md)                           | Data & migration                          |
+| [ENGINEERING-PROGRAMMES.md](./ENGINEERING-PROGRAMMES.md)                 | **Authoritative** programme bands 120–180 |
+| [IMPLEMENTATION-ROADMAP.md](./IMPLEMENTATION-ROADMAP.md)                 | Delivery waves                            |
 
 ---
 
-## Decision required
+## Authority note
 
-```text
-Owner Product Board approval of this roadmap
-        ↓
-Authorise first v1.1 engineering programme(s)
-        ↓
-Engineering begins under Lifecycle Standard + AI Operational Framework
-```
-
-Until approval: **planning only**.
+Provisional engineering IDs in `TECHNICAL-ROADMAP.md` (112–126) are **superseded** by bands in `ENGINEERING-PROGRAMMES.md` (**120 / 130 / 140 / 150 / 160 / 170 / 180**).
 
 ---
 
 ## STOP
 
 ```text
-APZQEP-110
+APZQEP-111
 COMPLETE
-AWAITING OWNER APPROVAL
+AWAITING PRODUCT BOARD APPROVAL
 ENGINEERING NOT AUTHORISED
 ```

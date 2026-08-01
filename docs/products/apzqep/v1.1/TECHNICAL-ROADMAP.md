@@ -1,5 +1,9 @@
 # Technical Roadmap — APZQEP v1.1 Programmes
 
+> **Status:** Historical planning artefact from **APZQEP-110**.  
+> **Authoritative engineering programme IDs** are defined in [ENGINEERING-PROGRAMMES.md](./ENGINEERING-PROGRAMMES.md) (**APZQEP-111**): bands **120 / 130 / 140 / 150 / 160 / 170 / 180**.  
+> Do not authorise engineering against the provisional 112–126 IDs below.
+
 Programmes are independently deliverable and closable under the Lifecycle Standard. Estimates are planning bands (S/M/L/XL), not commitments.
 
 | Band | Meaning                                       |

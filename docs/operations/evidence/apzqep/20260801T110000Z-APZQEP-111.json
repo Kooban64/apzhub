@@ -1,0 +1,51 @@
+{
+  "evidenceId": "20260801T110000Z-APZQEP-111",
+  "programme": "APZQEP-111",
+  "title": "Version 1.1 Solution Architecture Programme",
+  "classification": "Solution Architecture — documentation only",
+  "status": "COMPLETE_AWAITING_PRODUCT_BOARD_APPROVAL",
+  "recordedAt": "20260801T110000Z",
+  "baseline": {
+    "apzqepVersion": "1.0",
+    "planningProgramme": "APZQEP-110",
+    "planningStatus": "APPROVED"
+  },
+  "engineeringChanges": "none",
+  "packageMutation": "none",
+  "releaseChanges": "none",
+  "deployment": "none",
+  "governanceRedesign": "none",
+  "documentsCreated": [
+    "docs/products/apzqep/v1.1/SOLUTION-ARCHITECTURE.md",
+    "docs/products/apzqep/v1.1/DOMAIN-MODEL.md",
+    "docs/products/apzqep/v1.1/INFORMATION-ARCHITECTURE.md",
+    "docs/products/apzqep/v1.1/UX-ARCHITECTURE.md",
+    "docs/products/apzqep/v1.1/AI-ARCHITECTURE.md",
+    "docs/products/apzqep/v1.1/QUALITY-INTELLIGENCE-ENGINE.md",
+    "docs/products/apzqep/v1.1/DATA-ARCHITECTURE.md",
+    "docs/products/apzqep/v1.1/ENGINEERING-PROGRAMMES.md",
+    "docs/products/apzqep/v1.1/IMPLEMENTATION-ROADMAP.md",
+    "docs/products/apzqep/v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md"
+  ],
+  "documentsUpdated": [
+    "docs/products/apzqep/v1.1/README.md",
+    "docs/products/apzqep/v1.1/TECHNICAL-ROADMAP.md",
+    "docs/products/apzqep/README.md",
+    "docs/products/apzqep/STANDING-PROGRAMME-RECORD.md"
+  ],
+  "validation": {
+    "noEngineeringImplementation": true,
+    "noPackageChanges": true,
+    "noReleaseChanges": true,
+    "consistentWithV1": true,
+    "consistentWith110": true,
+    "consistentWithApzhubStandards": true,
+    "programmeIds": "Authoritative bands 120-180 supersede provisional 112-126"
+  },
+  "outstandingRisks": [
+    "ADR-0088 Evidence storage Owner decision required before APZQEP-120 Evidence track",
+    "AI trust requires eval harness and human approval discipline in APZQEP-150",
+    "Scope control across XL bands — prefer splits (120A/B/C) under Owner direction"
+  ],
+  "recommendation": "Product Board review required. Engineering implementation may begin only after APZQEP-111 is approved. Recommended first engineering programme: APZQEP-120 Enterprise Foundation."
+}
