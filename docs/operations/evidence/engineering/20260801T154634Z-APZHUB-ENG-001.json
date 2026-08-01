@@ -1,0 +1,44 @@
+{
+  "programme": "APZHUB-ENG-001",
+  "title": "Engineering Slice Standard",
+  "classification": "Engineering Operating Standard",
+  "status": "COMPLETE",
+  "timestampUtc": "20260801T154634Z",
+  "engineeringChanges": "NONE",
+  "packageChanges": "NONE",
+  "releaseChanges": "NONE",
+  "deploymentChanges": "NONE",
+  "documentsCreated": [
+    "docs/engineering/ENGINEERING-SLICE-STANDARD.md",
+    "docs/engineering/ENGINEERING-SLICE-TEMPLATE.md",
+    "docs/engineering/ENGINEERING-CHECKLIST.md",
+    "docs/engineering/SLICE-CERTIFICATION.md",
+    "docs/engineering/AI-ENGINEERING-WORKFLOW.md",
+    "docs/engineering/S01-REFERENCE-PATTERN.md",
+    "docs/operations/evidence/engineering/20260801T154634Z-APZHUB-ENG-001.json"
+  ],
+  "documentsUpdated": [
+    "docs/engineering/README.md",
+    "docs/governance/APZHUB-ENGINEERING-STANDARD.md",
+    "docs/governance/APZHUB-AI-OPERATIONAL-FRAMEWORK.md",
+    "docs/governance/README.md",
+    "docs/products/apzqep/v1.1/apzqep-120/S01-ENGINEERING-NOTES.md"
+  ],
+  "referencedNotDuplicated": [
+    "docs/governance/APZHUB-ENGINEERING-STANDARD.md",
+    "docs/governance/APZHUB-LIFECYCLE-STANDARD.md",
+    "docs/governance/APZHUB-AI-OPERATIONAL-FRAMEWORK.md",
+    "docs/engineering/lifecycle-standard/v1.0/",
+    "docs/engineering/oes/",
+    "docs/engineering/platform-delivery/"
+  ],
+  "referenceSlice": "APZQEP-120-S01",
+  "validation": {
+    "requiredDeliverables": 6,
+    "present": 6,
+    "sourceChanges": "NONE",
+    "conflictsWithGovernance": "NONE — slice standard specialises day-to-day execution; portfolio docs remain authoritative for freeze/release/GA"
+  },
+  "finalRecommendation": "All future APZHUB engineering shall use the Engineering Slice Standard. Future slice prompts may reference the standard instead of redefining the engineering process.",
+  "nextAuthorisedAction": "Product delivery slices (e.g. APZQEP-120-S02) under short Owner prompts"
+}

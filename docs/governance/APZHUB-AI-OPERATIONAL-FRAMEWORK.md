@@ -16,13 +16,14 @@ Standard operating model for AI-assisted engineering across every APZHUB reposit
 
 This framework **consolidates** and does **not** replace:
 
-| Existing authority          | Path                                                                                                                   |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| AI Manifest (bootstrap)     | [../foundation/AI-MANIFEST.md](../foundation/AI-MANIFEST.md)                                                           |
-| AI Workflow                 | [../foundation/AI-WORKFLOW.md](../foundation/AI-WORKFLOW.md)                                                           |
-| AI Engineering Standards    | [../foundation/AI-ENGINEERING-STANDARDS.md](../foundation/AI-ENGINEERING-STANDARDS.md)                                 |
-| AI Governance (enterprise)  | [AI-GOVERNANCE.md](./AI-GOVERNANCE.md)                                                                                 |
-| Lifecycle Cursor directives | [../engineering/lifecycle-standard/v1.0/cursor-directives/](../engineering/lifecycle-standard/v1.0/cursor-directives/) |
+| Existing authority             | Path                                                                                                                   |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| AI Manifest (bootstrap)        | [../foundation/AI-MANIFEST.md](../foundation/AI-MANIFEST.md)                                                           |
+| AI Workflow                    | [../foundation/AI-WORKFLOW.md](../foundation/AI-WORKFLOW.md)                                                           |
+| AI Engineering Standards       | [../foundation/AI-ENGINEERING-STANDARDS.md](../foundation/AI-ENGINEERING-STANDARDS.md)                                 |
+| AI Governance (enterprise)     | [AI-GOVERNANCE.md](./AI-GOVERNANCE.md)                                                                                 |
+| Lifecycle Cursor directives    | [../engineering/lifecycle-standard/v1.0/cursor-directives/](../engineering/lifecycle-standard/v1.0/cursor-directives/) |
+| **Engineering slice workflow** | [../engineering/AI-ENGINEERING-WORKFLOW.md](../engineering/AI-ENGINEERING-WORKFLOW.md) **IN FORCE** (APZHUB-ENG-001)   |
 
 ---
 

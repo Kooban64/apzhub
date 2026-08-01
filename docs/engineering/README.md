@@ -2,6 +2,25 @@
 
 Cross-cutting engineering methodology and standards (not product/capability packs).
 
+## Engineering Slice Standard (APZHUB-ENG-001) — **IN FORCE**
+
+Permanent day-to-day slice delivery model. Future Owner prompts stay short; process is inherited.
+
+| Document                                                         | Purpose                                        |
+| ---------------------------------------------------------------- | ---------------------------------------------- |
+| [ENGINEERING-SLICE-STANDARD.md](./ENGINEERING-SLICE-STANDARD.md) | Slice lifecycle (inspect → certify → clean)    |
+| [ENGINEERING-SLICE-TEMPLATE.md](./ENGINEERING-SLICE-TEMPLATE.md) | Short Owner prompt + expanded fields           |
+| [ENGINEERING-CHECKLIST.md](./ENGINEERING-CHECKLIST.md)           | Executable completion checklist                |
+| [SLICE-CERTIFICATION.md](./SLICE-CERTIFICATION.md)               | PASS / FAIL / Conditional PASS / Blocked       |
+| [AI-ENGINEERING-WORKFLOW.md](./AI-ENGINEERING-WORKFLOW.md)       | AI engineer operating rules for slices         |
+| [S01-REFERENCE-PATTERN.md](./S01-REFERENCE-PATTERN.md)           | APZQEP-120-S01 as the reference implementation |
+
+Does **not** replace [APZHUB Engineering Standard](../governance/APZHUB-ENGINEERING-STANDARD.md), [Lifecycle Standard](../governance/APZHUB-LIFECYCLE-STANDARD.md), or [AI Operational Framework](../governance/APZHUB-AI-OPERATIONAL-FRAMEWORK.md) — those remain portfolio authority.
+
+---
+
+## Other packs
+
 | Pack                                                            | Purpose                                                                                                                                | Status                           |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
 | [lifecycle-standard/v1.0/](./lifecycle-standard/v1.0/README.md) | **APZ Engineering Lifecycle Standard v1.0** (APZQEP-LIFECYCLE-001) — product-agnostic ARCH→ES→Waves→ECR→CERT→FREEZE→RELEASE→GA/EOL     | **IMPLEMENTED / AWAITING OWNER** |

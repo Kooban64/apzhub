@@ -1,10 +1,11 @@
 # APZQEP-120-S01 — Engineering Notes
 
-| Field             | Value                                     |
-| ----------------- | ----------------------------------------- |
-| Slice             | APZQEP-120-S01 Evidence List / Search ACL |
-| Limitation closed | **L-EM-01**                               |
-| Date              | 2026-08-01                                |
+| Field             | Value                                                                                         |
+| ----------------- | --------------------------------------------------------------------------------------------- |
+| Slice             | APZQEP-120-S01 Evidence List / Search ACL                                                     |
+| Limitation closed | **L-EM-01**                                                                                   |
+| Date              | 2026-08-01                                                                                    |
+| Reference pattern | [S01-REFERENCE-PATTERN.md](../../../../engineering/S01-REFERENCE-PATTERN.md) (APZHUB-ENG-001) |
 
 ## Design (implemented)
 
