@@ -3,7 +3,7 @@
 | Field       | Value                                                                               |
 | ----------- | ----------------------------------------------------------------------------------- |
 | Programme   | APZQEP-111                                                                          |
-| Status      | COMPLETE — AWAITING PRODUCT BOARD APPROVAL                                          |
+| Status      | **APPROVED** — execution planning [APZQEP-120](./apzqep-120/README.md)              |
 | Extends     | APZQEP v1.0 production baseline                                                     |
 | Governed by | Document 000 · Lifecycle Standard · Engineering Standard · AI Operational Framework |
 

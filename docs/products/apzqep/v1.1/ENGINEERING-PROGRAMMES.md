@@ -3,23 +3,25 @@
 Authoritative programme band structure for post-architecture engineering.  
 **Supersedes** provisional IDs APZQEP-112…126 in [TECHNICAL-ROADMAP.md](./TECHNICAL-ROADMAP.md) (retained as historical planning).
 
-Engineering is **not** authorised until Product Board approves APZQEP-111 and issues a programme directive.
+**APZQEP-111** is **APPROVED**. Engineering implementation remains **not** authorised until Product Board reviews [APZQEP-120 execution planning](./apzqep-120/README.md) and issues a **per-slice** Owner directive.
 
 Estimates: S / M / L / XL (planning bands).
 
 ---
 
-## APZQEP-120 — Enterprise Foundation
+## APZQEP-120 — Enterprise Core Platform
 
 | Field               | Value                                                                                                                                                                                             |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Title (Owner)       | Enterprise Core Platform (also referenced historically as Enterprise Foundation)                                                                                                                  |
 | Objective           | Make v1.0 LA capabilities trustworthy and wire cross-cutting discovery                                                                                                                            |
 | Scope               | Evidence durable storage path + ACL; TE operability/E2E/OpenAPI; domain event publication; unified search providers; notifications; command palette registration; QI skeleton (QS/RC/EVCOMP/RISK) |
 | Out of scope        | Suites/Runs/Defects UI domains; AI skills; ALM sync                                                                                                                                               |
-| Dependencies        | APZQEP-111 approved; Owner ADR-0088 decision                                                                                                                                                      |
+| Dependencies        | APZQEP-111 approved; Owner ADR-0088 decision (D-001) for durable storage slices                                                                                                                   |
 | Acceptance criteria | LA limitations updated; events on bus; search covers v1.0 entities + hooks for new; UCP actions for existing modules; QI API returns MVP scores; CERT delta pack                                  |
 | Release target      | 1.1                                                                                                                                                                                               |
-| Estimate            | XL (multi-track) — may split into 120A Evidence / 120B TE / 120C Discovery / 120D QI skeleton under same band                                                                                     |
+| Estimate            | XL (multi-track) — **sliced as APZQEP-120-S01…S20** in [apzqep-120/SLICE-CATALOGUE.md](./apzqep-120/SLICE-CATALOGUE.md)                                                                           |
+| Execution planning  | **COMPLETE** — [apzqep-120/](./apzqep-120/README.md) — Board review pending; implementation authority **NOT GRANTED**                                                                             |
 | Business value      | Critical — trust & platform integration                                                                                                                                                           |
 
 ---

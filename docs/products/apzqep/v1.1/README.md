@@ -1,11 +1,12 @@
-# APZQEP v1.1 — Product Planning & Solution Architecture
+# APZQEP v1.1 — Product Planning, Architecture & Execution Planning
 
-| Field                 | Value                                                       |
-| --------------------- | ----------------------------------------------------------- |
-| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                        |
-| Solution architecture | **APZQEP-111** — COMPLETE — AWAITING PRODUCT BOARD APPROVAL |
-| Engineering           | **NOT AUTHORISED** until 111 approved + programme directive |
-| Date                  | 2026-08-01                                                  |
+| Field                 | Value                                                               |
+| --------------------- | ------------------------------------------------------------------- |
+| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                |
+| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                            |
+| Execution planning    | **APZQEP-120** — COMPLETE — AWAITING PRODUCT BOARD REVIEW           |
+| Engineering           | **NOT AUTHORISED** — per-slice Owner directive required after Board |
+| Date                  | 2026-08-01                                                          |
 
 ---
 
@@ -42,17 +43,32 @@
 
 ---
 
+## Engineering execution planning pack (APZQEP-120)
+
+| Document                                                                               | Role                      |
+| -------------------------------------------------------------------------------------- | ------------------------- |
+| [apzqep-120/README.md](./apzqep-120/README.md)                                         | Pack hub                  |
+| [apzqep-120/OWNER-APPROVAL-SUMMARY.md](./apzqep-120/OWNER-APPROVAL-SUMMARY.md)         | Board decision surface    |
+| [apzqep-120/SLICE-CATALOGUE.md](./apzqep-120/SLICE-CATALOGUE.md)                       | S01–S20 executable slices |
+| [apzqep-120/ENGINEERING-EXECUTION-PLAN.md](./apzqep-120/ENGINEERING-EXECUTION-PLAN.md) | Programme plan            |
+
+Full pack listing: [apzqep-120/README.md](./apzqep-120/README.md).
+
+---
+
 ## Authority note
 
 Provisional engineering IDs in `TECHNICAL-ROADMAP.md` (112–126) are **superseded** by bands in `ENGINEERING-PROGRAMMES.md` (**120 / 130 / 140 / 150 / 160 / 170 / 180**).
+
+APZQEP-120 **planning** does not grant implementation authority. First recommended slice after Board approval: **APZQEP-120-S01**.
 
 ---
 
 ## STOP
 
 ```text
-APZQEP-111
-COMPLETE
-AWAITING PRODUCT BOARD APPROVAL
-ENGINEERING NOT AUTHORISED
+APZQEP-110 = APPROVED
+APZQEP-111 = APPROVED
+APZQEP-120 PLANNING = COMPLETE / AWAITING PRODUCT BOARD REVIEW
+ENGINEERING IMPLEMENTATION = NOT AUTHORISED
 ```

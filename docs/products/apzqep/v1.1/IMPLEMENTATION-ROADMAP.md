@@ -23,14 +23,17 @@ Maps architecture to time-ordered delivery. Not an authorisation to code.
 ## Critical path (1.1)
 
 ```text
-Board approve 111
-    → Owner ADR-0088 decision
-    → 120 (Evidence durable + TE harden + events + search/notify/UCP + QI skeleton)
+111 APPROVED
+    → APZQEP-120 planning COMPLETE (see apzqep-120/)
+    → Board review 120 plan + D-001 (ADR-0088)
+    → Per-slice Owner directives (S01 → … → S20)
     → 130 (Suites → Runs → Defects)
     → 140 (UX)
     → 150 (AI)  [may overlap late 130/140 with care]
     → 1.1 certification & limited release
 ```
+
+Slice sequence detail: [apzqep-120/IMPLEMENTATION-SEQUENCE.md](./apzqep-120/IMPLEMENTATION-SEQUENCE.md).
 
 ---
 

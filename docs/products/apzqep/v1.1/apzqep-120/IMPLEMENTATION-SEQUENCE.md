@@ -1,0 +1,76 @@
+# Implementation Sequence — APZQEP-120
+
+## Ordered sequence (recommended)
+
+| Seq | Slice            | Notes                                                |
+| --- | ---------------- | ---------------------------------------------------- |
+| 1   | S01              | ACL first — no Owner storage decision                |
+| 2   | S02              | TE↔Evidence ACL                                      |
+| —   | **BOARD: D-001** | Hard gate before S03                                 |
+| 3   | S03              | PG metadata                                          |
+| 4   | S04              | Durable storage                                      |
+| 5   | S05              | Server hash                                          |
+| 6   | S06              | Audit/retention                                      |
+| 7   | S07              | Event catalogue/publish                              |
+| 8   | S08              | Outbox drain                                         |
+| 9   | S09              | Retries/DLQ/fairness                                 |
+| 10  | S10              | Failure evidence/reconcile                           |
+| 11  | S11              | Search providers                                     |
+| 12  | S12              | Search ACL/reindex                                   |
+| 13  | S13              | Notifications                                        |
+| 14  | S14              | UCP registration                                     |
+| 15  | S15              | TE OpenAPI _(may start after S02 in parallel track)_ |
+| 16  | S16              | Live Playwright (flagged)                            |
+| 17  | S17              | Observability                                        |
+| 18  | S18              | Perf baselines + QI skeleton                         |
+| 19  | S19              | Security suite                                       |
+| 20  | S20              | Programme certification                              |
+
+---
+
+## Critical path
+
+```text
+S01 → S02 → D-001 → S03 → S04 → S05 → S06
+                 → S07 → S08 → S09 → S10 → S11 → S12 → S13
+                                              → S17 → S19 → S20
+```
+
+S16 joins after S08–S09 and S02.  
+S15 parallel track from post-S02.  
+S14 after S01 (+ preferably S11).  
+S18 after meaningful worker/search load exists.
+
+---
+
+## Parallel workstreams
+
+| Track               | Slices        | Owner coordination |
+| ------------------- | ------------- | ------------------ |
+| Security/ACL        | S01→S02→…→S19 | Security Architect |
+| Evidence durability | S03→S06       | Blocked on D-001   |
+| Async platform      | S07→S10       | SRE + Platform     |
+| Discovery/notify    | S11→S14       | After events       |
+| TE contracts/runner | S15, S16      | TE lead            |
+| Close               | S17→S20       | Programme lead     |
+
+Unsafe overlap: concurrent writers to Evidence schema (S03/S04/S05/S06) — **serialise**.
+
+---
+
+## Blockers
+
+| Blocker                        | Impact                                   |
+| ------------------------------ | ---------------------------------------- |
+| D-001 unresolved               | Cannot start S03–S04                     |
+| D-002 unresolved               | S06 uses hooks with TBD policy constants |
+| Missing infra credentials      | S04/S16 enablement                       |
+| Platform bus/outbox regression | S07–S09                                  |
+
+---
+
+## First recommended slice
+
+**APZQEP-120-S01 — Evidence list/search ACL (L-EM-01)**
+
+Rationale: closes known security limitation; no storage decision; independently releasable; unblocks S02 and search ACL confidence.

@@ -36,7 +36,8 @@
 > **APZQEP-REM-005** — Standing Programme Record remediation — **CLOSED** — Evidence `20260801T065900Z-APZQEP-REM-005.json`  
 > **APZQEP-CLOSE-001** — Final Programme Closure & Archive — **CLOSED** — [APZQEP-PROGRAMME-CLOSURE-REPORT.md](./APZQEP-PROGRAMME-CLOSURE-REPORT.md) · [APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md](./APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md) · Evidence `20260801T074500Z-APZQEP-CLOSE-001.json` · **APZQEP v1.0 Lifecycle Complete · Maintained Product · LIMITED_AVAILABILITY · Returned to APZHUB Product Portfolio**  
 > **APZQEP-110** — v1.1 Product Planning & Roadmap — **APPROVED** — [v1.1/](./v1.1/README.md)  
-> **APZQEP-111** — v1.1 Solution Architecture — **COMPLETE / AWAITING PRODUCT BOARD APPROVAL** — [v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md](./v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md) — **architecture only · engineering not authorised**
+> **APZQEP-111** — v1.1 Solution Architecture — **APPROVED** — [v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md](./v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md)  
+> **APZQEP-120** — Enterprise Core Platform Engineering Execution Planning — **PLANNING COMPLETE / AWAITING PRODUCT BOARD REVIEW** — [v1.1/apzqep-120/](./v1.1/apzqep-120/README.md) — **implementation not authorised**
 
 > **APZQEP-ARCH-015** — Test Execution Capability Architecture — **ACCEPTED / APPROVED / ARCHITECTURE BASELINED / CLOSED** — [test-execution/OES-ARCH-015/](./test-execution/OES-ARCH-015/README.md) · [OWNER-RECORD](./test-execution/OES-ARCH-015/OWNER-RECORD.md)  
 > **APZQEP-OES-ENG-090A** — Test Execution Engineering Specification — **ACCEPTED / APPROVED / ENGINEERING SPECIFICATION BASELINED / CLOSED** — [test-execution/OES-ENG-090A/](./test-execution/OES-ENG-090A/README.md) · [OWNER-ACCEPTANCE](./test-execution/OES-ENG-090A/OWNER-ACCEPTANCE.md)  

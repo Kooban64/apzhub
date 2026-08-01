@@ -1,5 +1,11 @@
 # Product Roadmap — APZQEP v1.1
 
+| Field                          | Value                                                                             |
+| ------------------------------ | --------------------------------------------------------------------------------- |
+| Planning                       | APZQEP-110 **APPROVED**                                                           |
+| Architecture                   | APZQEP-111 **APPROVED**                                                           |
+| Enterprise Core execution plan | [APZQEP-120](./apzqep-120/README.md) **PLANNING COMPLETE** — Board review pending |
+
 ## Vision
 
 APZQEP becomes the **operating system for quality engineering** at APZOR: every requirement, test, execution, defect, and evidence artefact is discoverable, governed, AI-assisted, and release-aware — without abandoning the v1.0 foundation.

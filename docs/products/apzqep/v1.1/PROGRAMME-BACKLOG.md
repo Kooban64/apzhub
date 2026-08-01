@@ -1,6 +1,8 @@
 # Programme Backlog — APZQEP v1.1
 
-Prioritised product backlog. Engineering is **not** authorised until Owner approval of APZQEP-110 and a subsequent programme directive.
+Prioritised product backlog. **APZQEP-110** and **APZQEP-111** are approved. Engineering implementation is **not** authorised until Product Board reviews [APZQEP-120](./apzqep-120/README.md) and issues a per-slice Owner directive.
+
+**Authoritative engineering band for trust/discovery items:** [APZQEP-120 slice catalogue](./apzqep-120/SLICE-CATALOGUE.md) (S01–S20). Provisional programme IDs 112–126 in older rows are historical labels — prefer 120 slice IDs.
 
 Priority: **P0** must-have for 1.1 · **P1** should-have · **P2** 1.2 · **P3** later
 
@@ -15,8 +17,8 @@ Priority: **P0** must-have for 1.1 · **P1** should-have · **P2** 1.2 · **P3**
 | Description         | Resolve ADR-0088; implement Owner-selected durable SoR path for Evidence (or explicit deferred design with timeline)                       |
 | Business value      | Unblocks trust and future GA                                                                                                               |
 | Priority            | P0                                                                                                                                         |
-| Dependencies        | APZQEP-111; Owner storage decision                                                                                                         |
-| Programme           | APZQEP-112                                                                                                                                 |
+| Dependencies        | APZQEP-111; Owner storage decision (D-001)                                                                                                 |
+| Programme           | **APZQEP-120** · slices **S03–S06** · decision **D-001**                                                                                   |
 | Release             | 1.1                                                                                                                                        |
 | Acceptance criteria | ADR updated or addendum; persistence not memory-only **or** Owner-signed deferral with date; CERT limitation register updated; no GA claim |
 
@@ -27,8 +29,8 @@ Priority: **P0** must-have for 1.1 · **P1** should-have · **P2** 1.2 · **P3**
 | Description         | Enforce per-item ACL on list/search consistent with read model                         |
 | Business value      | Security correctness for LA pilots                                                     |
 | Priority            | P0                                                                                     |
-| Dependencies        | BK-001 soft                                                                            |
-| Programme           | APZQEP-112                                                                             |
+| Dependencies        | None hard (preferred before durable storage)                                           |
+| Programme           | **APZQEP-120-S01** (+ **S02** TE wiring)                                               |
 | Release             | 1.1                                                                                    |
 | Acceptance criteria | Unauthorised items never returned; tests prove deny; limitation closed or reclassified |
 
@@ -39,8 +41,8 @@ Priority: **P0** must-have for 1.1 · **P1** should-have · **P2** 1.2 · **P3**
 | Description         | Complete critical authenticated Playwright journeys for TE                |
 | Business value      | Operability confidence                                                    |
 | Priority            | P0                                                                        |
-| Dependencies        | APZQEP-113                                                                |
-| Programme           | APZQEP-113                                                                |
+| Dependencies        | APZQEP-120 worker slices preferred                                        |
+| Programme           | **APZQEP-120-S16** (flagged) · support **S08–S09**, **S15**               |
 | Release             | 1.1                                                                       |
 | Acceptance criteria | Agreed journey set green in CI; L-OP-01 closed or Owner-accepted residual |
 
@@ -51,8 +53,8 @@ Priority: **P0** must-have for 1.1 · **P1** should-have · **P2** 1.2 · **P3**
 | Description         | Publish past-tense domain events to platform bus; enable notifications/search indexing          |
 | Business value      | Platform integration; attention engine                                                          |
 | Priority            | P0                                                                                              |
-| Dependencies        | Event SDK; APZQEP-113/112                                                                       |
-| Programme           | APZQEP-113 (TE) · APZQEP-112 (Evidence)                                                         |
+| Dependencies        | Event SDK; APZQEP-120                                                                           |
+| Programme           | **APZQEP-120-S07** (+ **S08–S10** workers)                                                      |
 | Release             | 1.1                                                                                             |
 | Acceptance criteria | event.yaml manifests; at-least-once publish; subscribers documented; L-03/L-EM-EVT-01 addressed |
 

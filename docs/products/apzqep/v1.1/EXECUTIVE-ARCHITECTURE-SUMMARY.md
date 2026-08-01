@@ -1,12 +1,12 @@
 # Executive Architecture Summary — APZQEP v1.1
 
-| Field          | Value                                          |
-| -------------- | ---------------------------------------------- |
-| Programme      | **APZQEP-111**                                 |
-| Classification | Solution Architecture                          |
-| Status         | **COMPLETE — AWAITING PRODUCT BOARD APPROVAL** |
-| Baseline       | APZQEP v1.0 · APZQEP-110 (approved)            |
-| Date           | 2026-08-01                                     |
+| Field          | Value                                                                                                                           |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Programme      | **APZQEP-111**                                                                                                                  |
+| Classification | Solution Architecture                                                                                                           |
+| Status         | **APPROVED** — engineering via [APZQEP-120](./apzqep-120/README.md) planning (implementation not granted by architecture alone) |
+| Baseline       | APZQEP v1.0 · APZQEP-110 (approved)                                                                                             |
+| Date           | 2026-08-01                                                                                                                      |
 
 ---
 

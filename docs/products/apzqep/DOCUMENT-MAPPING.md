@@ -33,6 +33,15 @@
 | APZTCMS-DEF-001 (planned)       | Superseded → **APZQEP-DEF-001** after Requirements Acceptance |
 | APZTCMS-REQ-001                 | Preserved; evolved into **APZQEP-REQ-001**                    |
 
+## v1.1 programme document map (active)
+
+| Programme                                 | Path                                                                     | Status                                                              |
+| ----------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| APZQEP-110 Product Planning               | `docs/products/apzqep/v1.1/`                                             | **APPROVED**                                                        |
+| APZQEP-111 Solution Architecture          | `docs/products/apzqep/v1.1/*ARCHITECTURE*` · `ENGINEERING-PROGRAMMES.md` | **APPROVED**                                                        |
+| APZQEP-120 Engineering Execution Planning | `docs/products/apzqep/v1.1/apzqep-120/`                                  | **PLANNING COMPLETE** — Board review; implementation not authorised |
+| Standing record                           | `docs/products/apzqep/STANDING-PROGRAMME-RECORD.md`                      | **IN FORCE**                                                        |
+
 ## Indexes updated in this programme
 
 - `docs/foundation/CURRENT-STATE.md`
