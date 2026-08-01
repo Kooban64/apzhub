@@ -311,6 +311,201 @@ describe("ENG-110E L-02 security enforcement", () => {
     ).rejects.toBeInstanceOf(EvidenceForbiddenError);
   });
 
+  it("APZQEP-120-S01: listEvidence hides unauthorized items (L-EM-01)", async () => {
+    const { services } = createSecured();
+    const owned = await services.commands.captureEvidence(adminCtx(), {
+      kind: "captureEvidence",
+      projectId: "p1",
+      ownerId: "owner-1",
+      source: { kind: "manual_upload" },
+      content: {
+        mediaType: "text/plain",
+        bytes: new Uint8Array([1]),
+        contentHash: HASH_A,
+      },
+      metadata: { title: "owned-alpha" },
+    });
+    const secret = await services.commands.captureEvidence(
+      {
+        tenantId: "tenant-1",
+        userId: "owner-2",
+        permissions: ["qep.evidence.admin"],
+      },
+      {
+        kind: "captureEvidence",
+        projectId: "p1",
+        ownerId: "owner-2",
+        source: { kind: "manual_upload" },
+        content: {
+          mediaType: "text/plain",
+          bytes: new Uint8Array([2]),
+          contentHash: "b".repeat(64),
+        },
+        metadata: { title: "secret-bravo" },
+      },
+    );
+
+    const asOwner = await services.queries.listEvidence(
+      {
+        tenantId: "tenant-1",
+        userId: "owner-1",
+        permissions: ["qep.evidence.read"],
+      },
+      { kind: "listEvidence" },
+    );
+    expect(asOwner.items.map((item) => item.id)).toEqual([owned.data.id]);
+    expect(asOwner.total).toBe(1);
+    expect(asOwner.items.some((item) => item.id === secret.data.id)).toBe(false);
+
+    await services.commands.grantAccess(adminCtx(), {
+      kind: "grantAccess",
+      evidenceId: secret.data.id,
+      principalId: "reader-1",
+      action: "qep.evidence.read",
+    });
+
+    const asGrantee = await services.queries.listEvidence(readerCtx(), {
+      kind: "listEvidence",
+      sort: "title",
+      order: "asc",
+    });
+    expect(asGrantee.items.map((item) => item.id)).toEqual([secret.data.id]);
+    expect(asGrantee.total).toBe(1);
+
+    const stranger = await services.queries.listEvidence(
+      {
+        tenantId: "tenant-1",
+        userId: "stranger-1",
+        permissions: ["qep.evidence.read"],
+      },
+      { kind: "listEvidence" },
+    );
+    expect(stranger.items).toEqual([]);
+    expect(stranger.total).toBe(0);
+  });
+
+  it("APZQEP-120-S01: searchEvidence enforces ACL, pagination, and sort", async () => {
+    const { services } = createSecured();
+    await services.commands.captureEvidence(adminCtx(), {
+      kind: "captureEvidence",
+      projectId: "p1",
+      ownerId: "owner-1",
+      source: { kind: "manual_upload" },
+      content: {
+        mediaType: "text/plain",
+        bytes: new Uint8Array([1]),
+        contentHash: HASH_A,
+      },
+      metadata: { title: "needle-owned" },
+    });
+    await services.commands.captureEvidence(
+      {
+        tenantId: "tenant-1",
+        userId: "owner-2",
+        permissions: ["qep.evidence.admin"],
+      },
+      {
+        kind: "captureEvidence",
+        projectId: "p1",
+        ownerId: "owner-2",
+        source: { kind: "manual_upload" },
+        content: {
+          mediaType: "text/plain",
+          bytes: new Uint8Array([2]),
+          contentHash: "b".repeat(64),
+        },
+        metadata: { title: "needle-secret" },
+      },
+    );
+
+    const search = await services.queries.searchEvidence(
+      {
+        tenantId: "tenant-1",
+        userId: "owner-1",
+        permissions: ["qep.evidence.read"],
+      },
+      {
+        kind: "searchEvidence",
+        text: "needle",
+        sort: "title",
+        order: "asc",
+        page: { limit: 10, offset: 0 },
+      },
+    );
+    expect(search.total).toBe(1);
+    expect(search.items).toHaveLength(1);
+    expect(search.items[0]?.title).toBe("needle-owned");
+    expect(search.items.some((item) => item.title === "needle-secret")).toBe(false);
+
+    const adminSearch = await services.queries.searchEvidence(adminCtx(), {
+      kind: "searchEvidence",
+      text: "needle",
+      sort: "title",
+      order: "asc",
+      page: { limit: 1, offset: 0 },
+    });
+    expect(adminSearch.total).toBe(2);
+    expect(adminSearch.items).toHaveLength(1);
+    expect(adminSearch.items[0]?.title).toBe("needle-owned");
+
+    const page2 = await services.queries.searchEvidence(adminCtx(), {
+      kind: "searchEvidence",
+      text: "needle",
+      sort: "title",
+      order: "asc",
+      page: { limit: 1, offset: 1 },
+    });
+    expect(page2.items[0]?.title).toBe("needle-secret");
+  });
+
+  it("APZQEP-120-S01: listEvidence never leaks across tenants", async () => {
+    const { services } = createSecured();
+    await services.commands.captureEvidence(adminCtx(), {
+      kind: "captureEvidence",
+      projectId: "p1",
+      ownerId: "owner-1",
+      source: { kind: "manual_upload" },
+      content: {
+        mediaType: "text/plain",
+        bytes: new Uint8Array([1]),
+        contentHash: HASH_A,
+      },
+      metadata: { title: "tenant-1-item" },
+    });
+
+    const otherTenant = await services.queries.listEvidence(
+      {
+        tenantId: "tenant-OTHER",
+        userId: "owner-1",
+        permissions: ["qep.evidence.admin"],
+      },
+      { kind: "listEvidence" },
+    );
+    expect(otherTenant.items).toEqual([]);
+    expect(otherTenant.total).toBe(0);
+  });
+
+  it("APZQEP-120-S01: listEvidence denies callers without read permission", async () => {
+    const { services, audit } = createSecured();
+    await expect(
+      services.queries.listEvidence(
+        {
+          tenantId: "tenant-1",
+          userId: "nobody",
+          permissions: [],
+        },
+        { kind: "listEvidence" },
+      ),
+    ).rejects.toBeInstanceOf(EvidenceForbiddenError);
+
+    expect(
+      audit.entries.some(
+        (entry) =>
+          entry.outcome === "denied" && String(entry.action).includes("listEvidence"),
+      ),
+    ).toBe(true);
+  });
+
   it("maps invalid EvidenceReference on associate path to validation failure class", async () => {
     const permissions = createPermissionPort();
     const policy = createEvidenceAccessPolicyService({

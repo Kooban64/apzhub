@@ -38,8 +38,13 @@ export type QepEvidenceListParams = {
   readonly classification?: string;
   readonly ownerId?: string;
   readonly legalHold?: boolean;
+  /** Free-text search (same GET list route; ACL-filtered server-side). */
+  readonly text?: string;
   readonly limit?: number;
   readonly offset?: number;
+  /** Allowed: createdAt | updatedAt | title | id | status */
+  readonly sort?: string;
+  readonly order?: "asc" | "desc";
 };
 
 export type QepClientRequestOptions = {
@@ -205,8 +210,11 @@ function buildListQuery(params?: QepEvidenceListParams): string {
   if (params.classification) search.set("classification", params.classification);
   if (params.ownerId) search.set("ownerId", params.ownerId);
   if (params.legalHold !== undefined) search.set("legalHold", String(params.legalHold));
+  if (params.text) search.set("text", params.text);
   if (params.limit !== undefined) search.set("limit", String(params.limit));
   if (params.offset !== undefined) search.set("offset", String(params.offset));
+  if (params.sort) search.set("sort", params.sort);
+  if (params.order) search.set("order", params.order);
   const query = search.toString();
   return query ? `?${query}` : "";
 }

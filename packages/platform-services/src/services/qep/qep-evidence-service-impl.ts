@@ -124,10 +124,13 @@ export type QepEvidencePlatformService = {
     ctx: ServiceRequestContext,
     query?: {
       readonly projectId?: string;
+      readonly workspaceId?: string;
       readonly status?: string;
       readonly text?: string;
       readonly limit?: number;
       readonly offset?: number;
+      readonly sort?: string;
+      readonly order?: "asc" | "desc";
     },
   ): Promise<Page<EvidenceDto>>;
   get(ctx: ServiceRequestContext, id: string): Promise<EvidenceDto>;
@@ -253,18 +256,24 @@ export function createQepEvidencePlatformService(
             text: query.text,
             filter: {
               projectId: query.projectId,
+              workspaceId: query.workspaceId,
               status: query.status as never,
             },
             page: { limit: query.limit, offset: query.offset },
+            sort: query.sort,
+            order: query.order,
           });
         }
         return queries.listEvidence(evidenceCtx, {
           kind: "listEvidence",
           filter: {
             projectId: query.projectId,
+            workspaceId: query.workspaceId,
             status: query.status as never,
           },
           page: { limit: query.limit, offset: query.offset },
+          sort: query.sort,
+          order: query.order,
         });
       });
     },

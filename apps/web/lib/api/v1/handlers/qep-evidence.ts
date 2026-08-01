@@ -122,10 +122,13 @@ export async function handleListQepEvidence(
   const page = await invoke(context, () =>
     service.list(context.serviceContext, {
       projectId: query.projectId,
+      workspaceId: query.workspaceId,
       status: query.status,
       text: query.text,
       limit,
       offset,
+      sort: query.sort,
+      order: query.order,
     }),
   );
   return jsonCollectionResponse(

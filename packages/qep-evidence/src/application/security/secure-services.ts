@@ -8,6 +8,7 @@ import type { EvidenceCommandService } from "../services/evidence-command-servic
 import type { EvidenceQueryService } from "../services/evidence-query-service";
 import type { EvidenceAccessCheckResult } from "../dto/evidence-dto";
 import { computeLifecycleAvailableActions } from "../available-actions";
+import { applyEnumerationAcl } from "./enumeration-acl";
 import type { EvidenceSecurityGate } from "./security-gate";
 import type { EvidenceSecurityOperation } from "./operations";
 import { decisionGrantsAccess } from "./types";
@@ -203,11 +204,27 @@ export function createSecuredEvidenceQueryService(
     },
     async listEvidence(ctx, query) {
       await gate.authorize(ctx, "listEvidence");
-      return inner.listEvidence(ctx, query);
+      // Load full tenant+filter candidate set, then ACL-filter before paging (L-EM-01).
+      const candidates = await inner.listEvidence(ctx, {
+        ...query,
+        page: undefined,
+      });
+      return applyEnumerationAcl(ctx, gate, candidates.items, query.page, {
+        sort: query.sort,
+        order: query.order,
+      });
     },
     async searchEvidence(ctx, query) {
       await gate.authorize(ctx, "searchEvidence");
-      return inner.searchEvidence(ctx, query);
+      // Search text filter first (unpaged), then ACL-filter, sort, page (L-EM-01).
+      const candidates = await inner.searchEvidence(ctx, {
+        ...query,
+        page: undefined,
+      });
+      return applyEnumerationAcl(ctx, gate, candidates.items, query.page, {
+        sort: query.sort,
+        order: query.order,
+      });
     },
     async downloadEvidence(ctx, query) {
       await gate.authorize(ctx, "downloadEvidence", {

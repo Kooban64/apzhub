@@ -17,4 +17,4 @@
 
 ## Accepted limitations (CERT-003)
 
-ADR-0088 memory-only · Evidence observability deferred · event publication deferred · L-EM-01 · GA not approved
+ADR-0088 memory-only · Evidence observability deferred · event publication deferred · L-EM-01 **CLOSED** (APZQEP-120-S01) · GA not approved

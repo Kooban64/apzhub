@@ -9,6 +9,9 @@ export type ListEvidenceQuery = {
   readonly kind: "listEvidence";
   readonly filter?: EvidenceListFilter;
   readonly page?: PageRequest;
+  /** Allowed: createdAt | updatedAt | title | id | status (default createdAt). */
+  readonly sort?: string;
+  readonly order?: "asc" | "desc";
 };
 
 export type SearchEvidenceQuery = {
@@ -17,6 +20,9 @@ export type SearchEvidenceQuery = {
   readonly page?: PageRequest;
   /** Free-text structural filter against title/description/tags (no search index). */
   readonly text?: string;
+  /** Allowed: createdAt | updatedAt | title | id | status (default createdAt). */
+  readonly sort?: string;
+  readonly order?: "asc" | "desc";
 };
 
 export type DownloadEvidenceQuery = {

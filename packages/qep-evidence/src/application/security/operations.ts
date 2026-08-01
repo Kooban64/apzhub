@@ -130,6 +130,13 @@ export const OPERATION_GRANT_ACTIONS: Record<
   getVersions: ["qep.evidence.read"],
 };
 
+/**
+ * Operations that require an evidenceId (or collection/set) at authorize time.
+ *
+ * listEvidence / searchEvidence remain false here: authorize checks platform
+ * permission only. Per-item visibility is enforced by the secured query facade
+ * via enumeration ACL (APZQEP-120-S01 / L-EM-01) before results are returned.
+ */
 export function operationRequiresEvidenceResource(
   operation: EvidenceSecurityOperation,
 ): boolean {
