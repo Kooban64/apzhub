@@ -2,9 +2,10 @@
 
 Cross-cutting engineering methodology and standards (not product/capability packs).
 
-## Engineering Slice Standard (APZHUB-ENG-001) — **IN FORCE**
+## Engineering Slice Standard (APZHUB-ENG-001) — **IN FORCE / FROZEN**
 
-Permanent day-to-day slice delivery model. Future Owner prompts stay short; process is inherited.
+Permanent day-to-day slice delivery model. Future Owner prompts stay short; process is inherited.  
+**Freeze:** [ADR-0092](../adr/ADR-0092-engineering-slice-standard-freeze.md) — changes require Owner approval.
 
 | Document                                                         | Purpose                                        |
 | ---------------------------------------------------------------- | ---------------------------------------------- |
