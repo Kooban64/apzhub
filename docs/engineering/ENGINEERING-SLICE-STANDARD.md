@@ -4,10 +4,13 @@
 | --------------- | ----------------------------------------------------------------------------- |
 | Document        | Engineering Slice Standard                                                    |
 | Programme       | **APZHUB-ENG-001**                                                            |
-| Status          | **IN FORCE**                                                                  |
+| Status          | **IN FORCE / FROZEN**                                                         |
+| Freeze ADR      | [ADR-0092](../adr/ADR-0092-engineering-slice-standard-freeze.md)              |
 | Classification  | Engineering Operating Standard                                                |
 | Reference slice | [APZQEP-120-S01](../products/apzqep/v1.1/apzqep-120/S01-ENGINEERING-NOTES.md) |
 | Date            | 2026-08-01                                                                    |
+
+**Freeze:** Changes to this standard require explicit Owner approval ([ADR-0092](../adr/ADR-0092-engineering-slice-standard-freeze.md)). Slice instructions shall reference this document — not redefine the workflow.
 
 ---
 

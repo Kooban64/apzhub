@@ -1,12 +1,12 @@
 # AI Engineering Workflow
 
-| Field             | Value                                                                               |
-| ----------------- | ----------------------------------------------------------------------------------- |
-| Document          | AI Engineering Workflow                                                             |
-| Programme         | **APZHUB-ENG-001**                                                                  |
-| Status            | **IN FORCE**                                                                        |
-| Classification    | Operating standard for AI-assisted slice engineering                                |
-| Governance parent | [APZHUB AI Operational Framework](../governance/APZHUB-AI-OPERATIONAL-FRAMEWORK.md) |
+| Field             | Value                                                                                                   |
+| ----------------- | ------------------------------------------------------------------------------------------------------- |
+| Document          | AI Engineering Workflow                                                                                 |
+| Programme         | **APZHUB-ENG-001**                                                                                      |
+| Status            | **IN FORCE** (frozen with ENG-001 via [ADR-0092](../adr/ADR-0092-engineering-slice-standard-freeze.md)) |
+| Classification    | Operating standard for AI-assisted slice engineering                                                    |
+| Governance parent | [APZHUB AI Operational Framework](../governance/APZHUB-AI-OPERATIONAL-FRAMEWORK.md)                     |
 
 ---
 
