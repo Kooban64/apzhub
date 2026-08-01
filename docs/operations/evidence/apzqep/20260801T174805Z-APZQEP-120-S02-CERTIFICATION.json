@@ -1,0 +1,38 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S02",
+  "title": "Evidence Query Service & Permission Engine — Slice Certification",
+  "timestampUtc": "20260801T174805Z",
+  "classification": "Slice certification (APZHUB-ENG-001)",
+  "result": "PASS",
+  "acceptanceCriteria": [
+    {
+      "id": "AC-EQS",
+      "text": "Evidence Query / Enumeration Service exists",
+      "result": "PASS"
+    },
+    { "id": "AC-PE", "text": "Permission Engine exists", "result": "PASS" },
+    { "id": "AC-QB", "text": "Query Builder exists", "result": "PASS" },
+    {
+      "id": "AC-ACL",
+      "text": "ACL enforced centrally on list/search",
+      "result": "PASS"
+    },
+    { "id": "AC-SEARCH", "text": "Search uses the service", "result": "PASS" },
+    { "id": "AC-PAGE-SORT", "text": "Pagination and sorting work", "result": "PASS" },
+    { "id": "AC-TENANT", "text": "Tenant isolation passes", "result": "PASS" },
+    { "id": "AC-SEC", "text": "Security validation passes", "result": "PASS" },
+    { "id": "AC-COMPAT", "text": "No breaking v1.0 API change", "result": "PASS" }
+  ],
+  "validationCommands": [
+    "pnpm exec vitest run packages/qep-evidence",
+    "pnpm --filter @apzhub/qep-evidence typecheck"
+  ],
+  "validationResults": {
+    "packageTests": "68 passed",
+    "typecheck": "PASS",
+    "todosTemporaryDebug": "NONE"
+  },
+  "catalogueNote": "Owner redefined S02; TE EvidenceAccessPort wiring deferred to a future Owner-authorised slice",
+  "recommendation": "Ready for APZQEP-120-S03 (or Owner-authorised TE ACL wiring slice)"
+}

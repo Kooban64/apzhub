@@ -1,0 +1,40 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S02",
+  "title": "Evidence Query Service & Permission Engine — Security Validation",
+  "timestampUtc": "20260801T174805Z",
+  "result": "PASS",
+  "checks": [
+    {
+      "id": "ACL-CENTRAL-01",
+      "name": "Enumeration uses EvidenceEnumerationService / PermissionEngine",
+      "result": "PASS"
+    },
+    {
+      "id": "ACL-S01-REG",
+      "name": "S01 list/search ACL regression suite green",
+      "result": "PASS",
+      "evidence": "security.enforcement.test.ts + enumeration-acl.test.ts"
+    },
+    {
+      "id": "TENANT-01",
+      "name": "Cross-tenant / invisible rows omitted from search metadata",
+      "result": "PASS"
+    },
+    {
+      "id": "QUERY-TAMPER-01",
+      "name": "Invalid sort/filters rejected; invalid_query audited",
+      "result": "PASS"
+    },
+    {
+      "id": "NO-SECOND-AUTHZ",
+      "name": "PermissionEngine delegates to AccessPolicy/SecurityGate",
+      "result": "PASS"
+    }
+  ],
+  "residualRisks": [
+    "TE EvidenceAccessPort wiring deferred (former catalogue S02)",
+    "N+1 per-item ACL evaluation on memory SoR — SQL push-down after S03",
+    "ADR-0088 memory persistence unchanged"
+  ]
+}

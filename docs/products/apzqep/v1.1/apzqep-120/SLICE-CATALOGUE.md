@@ -15,7 +15,7 @@ Executable engineering slices. Future instruction: _Implement APZQEP-120-SNN exa
 | ID  | Title                                       | WS  | Pri | Seq | Rel | Size | Effort (eng-days) |
 | --- | ------------------------------------------- | --- | --- | --- | --- | ---- | ----------------- |
 | S01 | Evidence list/search ACL (L-EM-01)          | B   | P0  | 1   | R0  | M    | 3–5               |
-| S02 | Wire TE EvidenceAccessPort → Evidence ACL   | B   | P0  | 2   | R0  | S    | 2–3               |
+| S02 | Evidence Query Service & Permission Engine  | B   | P0  | 2   | R0  | M    | 3–5               |
 | S03 | Evidence PostgreSQL metadata SoR            | A   | P0  | 3*  | R2  | L    | 8–12              |
 | S04 | Evidence StoragePort durable adapter        | A   | P0  | 4*  | R2  | L    | 8–12              |
 | S05 | Server-side content hashing & integrity     | A   | P0  | 5   | R2  | M    | 4–6               |
@@ -71,7 +71,7 @@ _(Pre-S01: per-item get/download ACL only; list/search tenant+permission scoped.
 
 ### Explicit exclusions
 
-- Durable storage; TE wiring (S02); events; search index ACL (S12).
+- Durable storage; TE EvidenceAccessPort wiring (deferred post-S02); events; search index ACL (S12).
 
 ### Dependencies
 
@@ -123,74 +123,74 @@ Revert commit; behavior returns to prior (less secure) list — treat as emergen
 
 ---
 
-# APZQEP-120-S02 — Wire TE EvidenceAccessPort → Evidence ACL
+# APZQEP-120-S02 — Evidence Query Service & Permission Engine
 
 ### Identification
 
-| Field            | Value                                   |
-| ---------------- | --------------------------------------- |
-| ID               | APZQEP-120-S02                          |
-| Title            | TE EvidenceAccessPort production wiring |
-| Workstream       | B                                       |
-| Priority         | P0                                      |
-| Sequence         | 2                                       |
-| Release boundary | R0                                      |
+| Field            | Value                                               |
+| ---------------- | --------------------------------------------------- |
+| ID               | APZQEP-120-S02                                      |
+| Title            | Evidence Query Service & Permission Engine          |
+| Reference        | L-EM-02 (capability id — not a prior CERT residual) |
+| Workstream       | B                                                   |
+| Priority         | P0                                                  |
+| Sequence         | 2                                                   |
+| Release boundary | R0                                                  |
+| Implementation   | **COMPLETE** (2026-08-01)                           |
+| Process          | APZHUB-ENG-001 / ADR-0092                           |
+
+> **Owner supersession:** This slice was redefined by Owner instruction to deliver the permission-aware Evidence enumeration pipeline. The former catalogue scope (_Wire TE EvidenceAccessPort → Evidence ACL_) is **deferred** and requires a separate Owner slice instruction (recommended next R0 security item).
 
 ### Objective
 
-Production TE factory uses Evidence ACL adapter so attachment/link ops are not fail-closed stubs or permissive bypasses.
+Single authoritative permission-aware Evidence enumeration path (list/search) for APZQEP: Permission Engine + Query Builder + Enumeration Service. Controllers must not construct ACL filters.
 
 ### Current state
 
-`EvidenceAccessPort` exists; fail-closed without wiring; not connected to Evidence ACL in prod factory.
+**After S02:** `EvidencePermissionEngine`, `EvidenceQueryBuilder`, and `EvidenceEnumerationService` orchestrate list/search; secured facade delegates; S01 ACL semantics preserved (no second authz framework). Memory SoR unchanged (SQL push-down → S03+).
 
 ### Scope
 
-- Implement adapter mapping TE evidence ops → Evidence permission evaluation.
-- Wire factory; integration tests TE+Evidence ACL.
-- Denied attachment attempts audited if audit hook exists.
+- Permission Engine (delegates to existing AccessPolicy / SecurityGate)
+- Query Builder (validate/merge filters, sort, pagination, text)
+- Enumeration Service (authorize → candidates → ACL → sort → page)
+- Factory wiring; API compatibility retained
+- Tests + docs + evidence
 
 ### Explicit exclusions
 
-- Evidence persistence; new permissions model; Suites/Runs.
+Uploads · downloads · deletion · durable storage · TE EvidenceAccessPort wiring · Suites/Runs/Defects · QI · AI · workers
 
 ### Dependencies
 
-- **S01** (list ACL) preferred before/at same release band.
-- Packages: `qep-test-execution`, `qep-evidence`.
+- **S01** COMPLETE (L-EM-01)
+- Package: `qep-evidence`
 
 ### Architecture
 
-- Adapter in TE (or thin integration package) — no module→connector bypass.
-- No competing authz framework.
+```text
+Handler → Platform Service → Secured Query Facade
+  → EvidenceEnumerationService
+    → PermissionEngine → AccessPolicy/Gate
+    → QueryBuilder
+    → EvidenceRepository (via inner query)
+```
 
 ### Acceptance criteria
 
-1. Unauthorised attach/link denied.
-2. Authorised attach succeeds when Evidence grants.
-3. Cross-tenant denied.
-4. Fail-closed if Evidence unavailable (no silent allow).
-5. Docs update TE CERT wiring note.
-
-### Tests
-
-Unit adapter · Integration TE+Evidence · Tenant isolation · Failure-path unavailable Evidence.
-
-### Evidence / Docs / Gate
-
-Test refs · CERT note · PASS on AC.
-
-### Rollback
-
-Feature flag or factory revert to fail-closed (safer than permissive).
+1. Enumeration Service is the secured list/search path
+2. Permission Engine + Query Builder exist and are reused
+3. ACL/tenant isolation preserved (S01 regression green)
+4. Invalid queries rejected + audited
+5. No breaking API change for v1.0 clients
 
 ### Complexity / effort
 
-**S** · 2–3 eng-days.
+**M** · 3–5 eng-days.
 
 ### Releasability
 
-Independently releasable with S01 preferred same band.
+Independently releasable with S01; LA security/structure hardening.
 
 ---
 

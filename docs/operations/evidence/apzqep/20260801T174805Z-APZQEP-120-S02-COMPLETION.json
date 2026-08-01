@@ -1,0 +1,32 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S02",
+  "title": "Evidence Query Service & Permission Engine",
+  "reference": "L-EM-02",
+  "classification": "Enterprise Engineering Slice",
+  "status": "COMPLETE",
+  "timestampUtc": "20260801T174805Z",
+  "process": "APZHUB-ENG-001 / ADR-0092",
+  "baselineInspected": "c86aa3e21a9aa294d528fd99d1f250a7b40975ce",
+  "engineeringCommit": "aab20c21e25209e5bfafa466095f084f53dc0af5",
+  "phases": {
+    "inspection": "COMPLETE",
+    "architectureConfirmation": "COMPLETE — Owner redefine of catalogue S02 accepted; TE wiring deferred",
+    "design": "COMPLETE",
+    "engineering": "COMPLETE",
+    "testing": "COMPLETE",
+    "securityValidation": "PASS",
+    "documentation": "UPDATED",
+    "certification": "PASS"
+  },
+  "securityEvidence": "docs/operations/evidence/apzqep/20260801T174805Z-APZQEP-120-S02-SECURITY.json",
+  "certificationEvidence": "docs/operations/evidence/apzqep/20260801T174805Z-APZQEP-120-S02-CERTIFICATION.json",
+  "engineeringNotes": "docs/products/apzqep/v1.1/apzqep-120/S02-ENGINEERING-NOTES.md",
+  "outstandingIssues": "NONE",
+  "deferred": [
+    "TE EvidenceAccessPort → Evidence ACL (former catalogue S02)",
+    "SQL ACL push-down (requires S03 durable SoR)"
+  ],
+  "nextAuthorisedSlice": "APZQEP-120-S03 (per catalogue) or Owner-directed TE ACL wiring",
+  "implementationAuthorityConsumed": "APZQEP-120-S02 only"
+}
