@@ -73,7 +73,8 @@ APZQEP-120
 ✅ APZQEP-120-S01 COMPLETE (L-EM-01 CLOSED)
 ✅ APZQEP-120-S02 COMPLETE + Product Board **CERTIFIED** (10/10)
 ✅ APZQEP-120-S03 COMPLETE (Evidence Storage Platform — ADR-0094)
-Next slice: APZQEP-120-S04 Evidence PostgreSQL metadata SoR — requires Owner instruction
+✅ APZQEP-120-S04 COMPLETE (Evidence Integrity Platform)
+Next slice: APZQEP-120-S05 Evidence PostgreSQL metadata SoR — requires Owner instruction
 TE EvidenceAccessPort wiring: **deferred** (do not pull forward)
 ```
 
@@ -81,7 +82,7 @@ TE EvidenceAccessPort wiring: **deferred** (do not pull forward)
 
 ## Authorised next delivery
 
-**APZQEP-120-S04** (Evidence PostgreSQL metadata SoR) after Owner slice instruction. Storage Platform + Local reference provider delivered in S03 per [ADR-0094](../../adr/ADR-0094-evidence-storage-provider-first.md). TE EvidenceAccessPort wiring remains deferred. Cross-cutting standards → APZHUB Governance. Application Service layering → [ADR-0093](../../adr/ADR-0093-application-service-layer.md).
+**APZQEP-120-S05** (Evidence PostgreSQL metadata SoR) after Owner slice instruction. Integrity Platform delivered in S04. Storage Platform in S03 per [ADR-0094](../../adr/ADR-0094-evidence-storage-provider-first.md). TE EvidenceAccessPort wiring remains deferred.
 
 ---
 
@@ -102,5 +103,6 @@ APZQEP-120 = IN PROGRESS
 APZQEP-120-S01 = COMPLETE (L-EM-01 CLOSED)
 APZQEP-120-S02 = CERTIFIED (Query / Permission Engine)
 APZQEP-120-S03 = COMPLETE (Evidence Storage Platform)
-NEXT = OWNER DIRECTIVE FOR APZQEP-120-S04 (PostgreSQL metadata SoR)
+APZQEP-120-S04 = COMPLETE (Evidence Integrity Platform)
+NEXT = OWNER DIRECTIVE FOR APZQEP-120-S05 (PostgreSQL metadata SoR)
 ```

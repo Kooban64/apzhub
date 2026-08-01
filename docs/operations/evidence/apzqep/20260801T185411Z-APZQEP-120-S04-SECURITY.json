@@ -1,0 +1,45 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S04",
+  "title": "Evidence Integrity Platform — Security Validation",
+  "timestampUtc": "20260801T185411Z",
+  "result": "PASS",
+  "checks": [
+    {
+      "id": "ACL-01",
+      "name": "Integrity ops reuse SecurityGate; default deny",
+      "result": "PASS"
+    },
+    {
+      "id": "TENANT-01",
+      "name": "Cross-tenant integrity status denied",
+      "result": "PASS"
+    },
+    { "id": "HASH-LEAK-01", "name": "Public status omits digests", "result": "PASS" },
+    {
+      "id": "CAPTURE-01",
+      "name": "Client hash must match server SHA-256",
+      "result": "PASS"
+    },
+    {
+      "id": "MISMATCH-01",
+      "name": "Expected digest not overwritten on MISMATCH",
+      "result": "PASS"
+    },
+    {
+      "id": "MISSING-01",
+      "name": "CONTENT_MISSING distinct from MISMATCH",
+      "result": "PASS"
+    },
+    {
+      "id": "NO-FS-01",
+      "name": "Integrity service never imports node:fs / Local Provider",
+      "result": "PASS"
+    },
+    {
+      "id": "TIMING-01",
+      "name": "Digest compare uses timingSafeEqual",
+      "result": "PASS"
+    }
+  ]
+}

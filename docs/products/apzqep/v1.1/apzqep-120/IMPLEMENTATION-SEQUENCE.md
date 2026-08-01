@@ -2,36 +2,36 @@
 
 ## Ordered sequence (recommended)
 
-| Seq | Slice     | Notes                                                        |
-| --- | --------- | ------------------------------------------------------------ |
-| 1   | S01       | ACL first — no Owner storage decision                        |
-| 2   | S02       | Query Service & Permission Engine — **COMPLETE**             |
-| 3   | S03       | Evidence Storage Platform + Local (ADR-0094) — **COMPLETE**  |
-| 4   | S04       | PG metadata SoR                                              |
-| —   | **D-001** | Cloud content backends later — not required for S03 Platform |
-| 5   | S05       | Server hash                                                  |
-| 6   | S06       | Audit/retention                                              |
-| 7   | S07       | Event catalogue/publish                                      |
-| 8   | S08       | Outbox drain                                                 |
-| 9   | S09       | Retries/DLQ/fairness                                         |
-| 10  | S10       | Failure evidence/reconcile                                   |
-| 11  | S11       | Search providers                                             |
-| 12  | S12       | Search ACL/reindex                                           |
-| 13  | S13       | Notifications                                                |
-| 14  | S14       | UCP registration                                             |
-| 15  | S15       | TE OpenAPI _(may start after S02 in parallel track)_         |
-| 16  | S16       | Live Playwright (flagged)                                    |
-| 17  | S17       | Observability                                                |
-| 18  | S18       | Perf baselines + QI skeleton                                 |
-| 19  | S19       | Security suite                                               |
-| 20  | S20       | Programme certification                                      |
+| Seq | Slice     | Notes                                                       |
+| --- | --------- | ----------------------------------------------------------- |
+| 1   | S01       | ACL first — no Owner storage decision                       |
+| 2   | S02       | Query Service & Permission Engine — **COMPLETE**            |
+| 3   | S03       | Evidence Storage Platform + Local (ADR-0094) — **COMPLETE** |
+| 4   | S04       | Evidence Integrity Platform — **COMPLETE**                  |
+| 5   | S05       | PG metadata SoR                                             |
+| —   | **D-001** | Cloud content backends later — not required for S03/S04     |
+| 6   | S06       | Audit/retention                                             |
+| 7   | S07       | Event catalogue/publish                                     |
+| 8   | S08       | Outbox drain                                                |
+| 9   | S09       | Retries/DLQ/fairness                                        |
+| 10  | S10       | Failure evidence/reconcile                                  |
+| 11  | S11       | Search providers                                            |
+| 12  | S12       | Search ACL/reindex                                          |
+| 13  | S13       | Notifications                                               |
+| 14  | S14       | UCP registration                                            |
+| 15  | S15       | TE OpenAPI _(may start after S02 in parallel track)_        |
+| 16  | S16       | Live Playwright (flagged)                                   |
+| 17  | S17       | Observability                                               |
+| 18  | S18       | Perf baselines + QI skeleton                                |
+| 19  | S19       | Security suite                                              |
+| 20  | S20       | Programme certification                                     |
 
 ---
 
 ## Critical path
 
 ```text
-S01 → S02 → S03 (Storage Platform + Local) → S04 (PG metadata) → S05 → S06
+S01 → S02 → S03 (Storage Platform) → S04 (Integrity) → S05 (PG metadata) → S06
                  → S07 → S08 → S09 → S10 → S11 → S12 → S13
                                               → S17 → S19 → S20
 ```

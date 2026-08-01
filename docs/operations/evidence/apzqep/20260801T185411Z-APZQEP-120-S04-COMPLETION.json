@@ -1,0 +1,22 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S04",
+  "title": "Evidence Integrity Platform",
+  "status": "COMPLETE",
+  "timestampUtc": "20260801T185411Z",
+  "baselineCommit": "a487a66ba560a994a12bd51e4bd2a9e56007d6cd",
+  "process": "APZHUB-ENG-001 / ADR-0092 / ADR-0093 / ADR-0094",
+  "ownerClarification": "S04 redefined as Integrity Platform (absorbs former catalogue hashing); PG SoR becomes S05",
+  "outstandingIssues": "NONE",
+  "deferred": [
+    "PostgreSQL metadata SoR (S05)",
+    "Cloud providers (D-001)",
+    "Digital signatures / PKI / TSA",
+    "Platform event bus publish (S07)",
+    "Bulk integrity backfill",
+    "TE EvidenceAccessPort wiring"
+  ],
+  "nextAuthorisedSlice": "APZQEP-120-S05",
+  "implementationAuthorityConsumed": "APZQEP-120-S04 only",
+  "engineeringCommit": "4358d7509687f0fafdf79df8ffd44c195cdb0756"
+}

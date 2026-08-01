@@ -17,8 +17,8 @@ Executable engineering slices. Future instruction: _Implement APZQEP-120-SNN exa
 | S01 | Evidence list/search ACL (L-EM-01)           | B   | P0  | 1   | R0  | M    | 3–5               |
 | S02 | Evidence Query Service & Permission Engine   | B   | P0  | 2   | R0  | M    | 3–5               |
 | S03 | Evidence Storage Platform (+ Local provider) | A   | P0  | 3   | R2  | L    | 8–12              |
-| S04 | Evidence PostgreSQL metadata SoR             | A   | P0  | 4*  | R2  | L    | 8–12              |
-| S05 | Server-side content hashing & integrity      | A   | P0  | 5   | R2  | M    | 4–6               |
+| S04 | Evidence Integrity Platform                  | A   | P0  | 4   | R2  | L    | 8–12              |
+| S05 | Evidence PostgreSQL metadata SoR             | A   | P0  | 5*  | R2  | L    | 10–15             |
 | S06 | Evidence audit durability & retention hooks  | A/J | P0  | 6   | R2  | M    | 4–6               |
 | S07 | QEP domain event catalogue & publish         | D   | P0  | 7   | R1  | M    | 5–7               |
 | S08 | TE outbox drain worker (L-03)                | C/G | P0  | 8   | R1  | L    | 7–10              |
@@ -35,7 +35,7 @@ Executable engineering slices. Future instruction: _Implement APZQEP-120-SNN exa
 | S19 | Security verification suite (tenant/upload)  | J   | P0  | 19  | R4  | M    | 5–7               |
 | S20 | APZQEP-120 programme certification gate      | —   | P3  | 20  | R4  | M    | 3–5               |
 
-\* S04 (PG metadata) and later cloud providers still depend on Owner **D-001** where production cloud backends are chosen. **S03** is the **Evidence Storage Platform** (abstraction + Manager + Local reference provider) per [ADR-0094](../../../../adr/ADR-0094-evidence-storage-provider-first.md) — not “local storage as the product,” and not direct S3.
+\* **S04** = Evidence Integrity Platform (Owner redefine; absorbs former catalogue hashing scope). **S05** = PostgreSQL metadata SoR. Cloud content backends still depend on Owner **D-001**.
 
 ---
 
@@ -268,22 +268,55 @@ Config-selected provider; R2 content path.
 
 ---
 
-# APZQEP-120-S04 — Evidence PostgreSQL metadata SoR
+# APZQEP-120-S04 — Evidence Integrity Platform
+
+### Identification
+
+| Field            | Value                                                                                                                           |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| ID               | APZQEP-120-S04                                                                                                                  |
+| Title            | Evidence Integrity Platform                                                                                                     |
+| Workstream       | A                                                                                                                               |
+| Priority         | P0                                                                                                                              |
+| Sequence         | 4                                                                                                                               |
+| Release boundary | R2                                                                                                                              |
+| Status           | **COMPLETE** (2026-08-01)                                                                                                       |
+| Notes            | [S04-ENGINEERING-NOTES.md](./S04-ENGINEERING-NOTES.md) · [EVIDENCE-INTEGRITY-PLATFORM.md](../../EVIDENCE-INTEGRITY-PLATFORM.md) |
+
+### Objective
+
+Provider-neutral **content integrity verification**: establish, verify, detect mismatch / missing content. SHA-256 reference algorithm. Integrity policy owned by Application — never by storage providers.
+
+### Current state (post-S04)
+
+`EvidenceIntegrityPlatformService` + SHA-256 streaming; capture server-hash validation; verify without client hash; Memory + Local validated.
+
+### Explicit exclusions
+
+Digital signatures · PKI · TSA · blockchain · AV · retention · cloud providers · PG SoR (S05) · bus publish (S07)
+
+### Acceptance criteria
+
+See Owner S04 instruction §34 — all PASS at certification.
+
+---
+
+# APZQEP-120-S05 — Evidence PostgreSQL metadata SoR
 
 ### Identification
 
 | Field            | Value                                         |
 | ---------------- | --------------------------------------------- |
-| ID               | APZQEP-120-S04                                |
+| ID               | APZQEP-120-S05                                |
 | Title            | Evidence PostgreSQL metadata system of record |
 | Workstream       | A                                             |
 | Priority         | P0                                            |
-| Sequence         | 4                                             |
+| Sequence         | 5                                             |
 | Release boundary | R2                                            |
 
 ### Objective
 
-Replace memory-only Evidence **metadata** with tenant-scoped PostgreSQL SoR (additive migration). Content bytes remain behind Storage Provider (ADR-0088 / ADR-0094 / S03 Local).
+Replace memory-only Evidence **metadata** with tenant-scoped PostgreSQL SoR (additive migration). Content bytes remain behind Storage Platform (S03). Integrity metadata fields persist with the aggregate (S04).
 
 ### Current state
 
@@ -291,35 +324,30 @@ Memory repository in production factory; no Evidence metadata tables in platform
 
 ### Scope
 
-- Additive migration: evidence metadata tables (ids, tenant, project refs, classification, links, versions, hash refs, lifecycle, audit fields per 011).
+- Additive migration: evidence metadata tables (ids, tenant, project refs, classification, links, versions, hash/integrity fields, lifecycle, audit fields per 011).
 - Repository adapter implementing existing ports.
 - Factory switch: memory → PG (config/env).
-- Migration tests + dual-read validation optional during cutover.
 
 ### Explicit exclusions
 
-- Cloud object-store providers (later); server hash productisation (S05); bus (S07).
-- Content provider work already covered by S03.
+- Cloud object-store providers (later); integrity algorithm work (S04 COMPLETE); bus (S07).
 
 ### Dependencies
 
-- Platform PostgreSQL.
-- S01–S03 preferred (enumeration + Local content path).
-- D-001 only where cloud content backends are later selected — not required for PG metadata itself.
+- Platform PostgreSQL · S01–S04 preferred.
 
 ### Architecture
 
 - Platform DB owns metadata only; blobs never in PG as SoR.
 - RLS/tenant columns mandatory.
-- Additive migration; no destructive drop.
 
 ### Acceptance criteria
 
 1. Evidence create/get/list survives process restart.
 2. Tenant RLS/isolation proven.
 3. Memory mode remains for tests if needed.
-4. Migration rollback script documented (down migration additive-safe).
-5. No v1.0 API break for existing clients.
+4. Migration rollback documented.
+5. No v1.0 API break.
 
 ### Tests
 
@@ -327,70 +355,15 @@ Unit repo · Integration PG · Migration up/down · Tenant isolation · Compatib
 
 ### Data/migration
 
-See [DATA-AND-MIGRATION-PLAN.md](./DATA-AND-MIGRATION-PLAN.md) (metadata SoR section; renumbered from former S03).
+See [DATA-AND-MIGRATION-PLAN.md](./DATA-AND-MIGRATION-PLAN.md).
 
 ### Complexity / effort
 
-**L** · 8–12 eng-days.
+**L** · 10–15 eng-days.
 
 ### Releasability
 
 Feature-flagged cutover; internal prerelease then R2.
-
----
-
-# APZQEP-120-S05 — Server-side content hashing & integrity
-
-### Identification
-
-| Field            | Value                                     |
-| ---------------- | ----------------------------------------- |
-| ID               | APZQEP-120-S05                            |
-| Title            | Server-side content hashing and integrity |
-| Workstream       | A                                         |
-| Priority         | P0                                        |
-| Sequence         | 5                                         |
-| Release boundary | R2                                        |
-
-### Objective
-
-Server computes and verifies content hash; reject client-only trust for integrity.
-
-### Current state
-
-Client-supplied hash accepted (integrity gap).
-
-### Scope
-
-- Hash on upload (SHA-256 or platform standard).
-- Store canonical hash on metadata; verify on retrieve/export.
-- Mismatch → typed integrity error + audit.
-
-### Explicit exclusions
-
-- Encryption-at-rest provider config (infra); legal hold product.
-
-### Dependencies
-
-S03–S04.
-
-### Acceptance criteria
-
-1. Upload without client hash still stores server hash.
-2. Tampered blob detected on retrieve.
-3. Client-supplied wrong hash rejected or overridden per documented policy (prefer server authoritative).
-
-### Tests
-
-Unit hash · Integration tamper · Audit event present.
-
-### Complexity / effort
-
-**M** · 4–6 eng-days.
-
-### Releasability
-
-With R2.
 
 ---
 

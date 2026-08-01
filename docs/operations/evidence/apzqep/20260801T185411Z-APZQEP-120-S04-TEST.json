@@ -1,0 +1,20 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S04",
+  "title": "Evidence Integrity Platform — Testing Evidence",
+  "timestampUtc": "20260801T185411Z",
+  "result": "PASS",
+  "totals": { "packages/qep-evidence": "97 passed / 0 failed" },
+  "suites": [
+    "evidence-integrity-platform.test.ts",
+    "architecture-boundaries.test.ts",
+    "S01 security.enforcement regression",
+    "S02 enumeration/query regression",
+    "S03 storage-platform regression"
+  ],
+  "performanceObservations": [
+    "Stream hashing via StoragePort.openStream().chunks() for Local; Memory yields chunked full buffer",
+    "getIntegrityStatus does not retrieve content bytes",
+    "No enterprise SLO claimed"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S04",
+  "title": "Evidence Integrity Platform \u2014 Engineering Evidence",
+  "timestampUtc": "20260801T185411Z",
+  "baselineCommit": "a487a66ba560a994a12bd51e4bd2a9e56007d6cd",
+  "result": "COMPLETE",
+  "algorithm": "sha256",
+  "architecture": {
+    "path": "Application \u2192 EvidenceIntegrityPlatformService \u2192 StoragePort \u2192 Provider",
+    "domainCrypto": false,
+    "providerOwnsPolicy": false
+  },
+  "aclReuse": "S01/S02 SecurityGate operations establishIntegrity/verifyIntegrity/getIntegrityStatus",
+  "persistence": "Evidence aggregate integrity fields (additive; memory SoR until S05 PG)",
+  "migration": "No destructive backfill; existing evidence without integrity remains NOT_ESTABLISHED-compatible via status mapping; capture establishes integrity",
+  "engineeringCommit": "4358d7509687f0fafdf79df8ffd44c195cdb0756"
+}

@@ -1,0 +1,13 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S04",
+  "title": "Evidence Integrity Platform \u2014 Slice Certification",
+  "timestampUtc": "20260801T185411Z",
+  "classification": "Slice certification (APZHUB-ENG-001)",
+  "result": "PASS",
+  "package": "@apzhub/qep-evidence 1.0.0 \u2014 unchanged",
+  "releaseTag": "apzqep-evidence-v1.0.0 \u2014 unchanged",
+  "deployment": "NONE",
+  "recommendation": "Ready for APZQEP-120-S05",
+  "engineeringCommit": "4358d7509687f0fafdf79df8ffd44c195cdb0756"
+}
