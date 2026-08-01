@@ -1,0 +1,34 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S03",
+  "title": "Evidence Storage Platform — Testing Evidence",
+  "timestampUtc": "20260801T182606Z",
+  "result": "PASS",
+  "suites": [
+    {
+      "name": "evidence-storage-platform.test.ts",
+      "coverage": [
+        "configuration",
+        "manager + memory",
+        "local round-trip",
+        "path traversal negatives",
+        "size limit",
+        "health unavailable",
+        "path non-leak",
+        "metadata separation"
+      ]
+    },
+    {
+      "name": "architecture-boundaries.test.ts",
+      "coverage": ["FS isolation to Local provider", "infrastructure status"]
+    },
+    {
+      "name": "S01/S02 regression",
+      "coverage": ["security.enforcement", "enumeration", "query builder"],
+      "result": "PASS"
+    }
+  ],
+  "totals": {
+    "packages/qep-evidence": "82 passed / 0 failed"
+  }
+}

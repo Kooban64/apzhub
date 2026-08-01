@@ -1,0 +1,44 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S03",
+  "title": "Evidence Storage Platform",
+  "reference": "L-EM-03",
+  "classification": "Enterprise Engineering Slice",
+  "status": "COMPLETE",
+  "timestampUtc": "20260801T182606Z",
+  "process": "APZHUB-ENG-001 / ADR-0092 / ADR-0094",
+  "phases": {
+    "inspection": "COMPLETE",
+    "architectureConfirmation": "COMPLETE — Owner Storage Platform (not Local-as-product) accepted",
+    "design": "COMPLETE",
+    "engineering": "COMPLETE",
+    "testing": "COMPLETE",
+    "securityValidation": "PASS",
+    "documentation": "UPDATED",
+    "certification": "PASS"
+  },
+  "deliverables": [
+    "EvidenceStorageProvider contract",
+    "EvidenceStorageManager (implements StoragePort)",
+    "LocalEvidenceStorageProvider (reference)",
+    "MemoryEvidenceStorageProvider (default/tests)",
+    "Configuration / env resolution",
+    "Error translation (EvidenceStorageError)",
+    "Audit hooks on Manager",
+    "Unit/integration/negative tests",
+    "STORAGE-PLATFORM.md + S03-ENGINEERING-NOTES.md"
+  ],
+  "securityEvidence": "docs/operations/evidence/apzqep/20260801T182606Z-APZQEP-120-S03-SECURITY.json",
+  "certificationEvidence": "docs/operations/evidence/apzqep/20260801T182606Z-APZQEP-120-S03-CERTIFICATION.json",
+  "storageValidationEvidence": "docs/operations/evidence/apzqep/20260801T182606Z-APZQEP-120-S03-STORAGE-VALIDATION.json",
+  "engineeringNotes": "docs/products/apzqep/v1.1/apzqep-120/S03-ENGINEERING-NOTES.md",
+  "outstandingIssues": "NONE",
+  "deferred": [
+    "S3 / Azure / GCS / MinIO providers",
+    "Encryption at rest / AV / retention / versioning",
+    "PostgreSQL metadata SoR (S04)",
+    "TE EvidenceAccessPort wiring"
+  ],
+  "nextAuthorisedSlice": "APZQEP-120-S04",
+  "implementationAuthorityConsumed": "APZQEP-120-S03 only"
+}

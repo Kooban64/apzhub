@@ -12,30 +12,30 @@ Executable engineering slices. Future instruction: _Implement APZQEP-120-SNN exa
 
 ## Catalogue index
 
-| ID  | Title                                       | WS  | Pri | Seq | Rel | Size | Effort (eng-days) |
-| --- | ------------------------------------------- | --- | --- | --- | --- | ---- | ----------------- |
-| S01 | Evidence list/search ACL (L-EM-01)          | B   | P0  | 1   | R0  | M    | 3–5               |
-| S02 | Evidence Query Service & Permission Engine  | B   | P0  | 2   | R0  | M    | 3–5               |
-| S03 | Evidence Storage Provider + Local provider  | A   | P0  | 3   | R2  | L    | 8–12              |
-| S04 | Evidence PostgreSQL metadata SoR            | A   | P0  | 4*  | R2  | L    | 8–12              |
-| S05 | Server-side content hashing & integrity     | A   | P0  | 5   | R2  | M    | 4–6               |
-| S06 | Evidence audit durability & retention hooks | A/J | P0  | 6   | R2  | M    | 4–6               |
-| S07 | QEP domain event catalogue & publish        | D   | P0  | 7   | R1  | M    | 5–7               |
-| S08 | TE outbox drain worker (L-03)               | C/G | P0  | 8   | R1  | L    | 7–10              |
-| S09 | Worker retries, DLQ, idempotency, fairness  | G   | P0  | 9   | R1  | M    | 5–7               |
-| S10 | Event failure evidence & reconciliation     | D/G | P1  | 10  | R1  | M    | 4–6               |
-| S11 | Search providers: Spec/Plan/Exec/Evidence   | E   | P1  | 11  | R3  | L    | 7–10              |
-| S12 | Search ACL + tenant filter + reindex jobs   | E   | P1  | 12  | R3  | M    | 5–7               |
-| S13 | QEP notification foundation (ENF)           | F   | P1  | 13  | R3  | M    | 5–7               |
-| S14 | UCP/command registration (QEP actions)      | E   | P2  | 14  | R3  | S    | 2–3               |
-| S15 | TE OpenAPI contract (L-01)                  | C   | P1  | 15  | R1  | M    | 4–6               |
-| S16 | Live Playwright runner (flagged, L-OP-01)   | C   | P1  | 16  | R3  | L    | 8–12              |
-| S17 | QEP observability probes & runbooks         | H   | P1  | 17  | R3  | M    | 4–6               |
-| S18 | Performance baselines & QI skeleton         | I   | P2  | 18  | R3  | M    | 4–6               |
-| S19 | Security verification suite (tenant/upload) | J   | P0  | 19  | R4  | M    | 5–7               |
-| S20 | APZQEP-120 programme certification gate     | —   | P3  | 20  | R4  | M    | 3–5               |
+| ID  | Title                                        | WS  | Pri | Seq | Rel | Size | Effort (eng-days) |
+| --- | -------------------------------------------- | --- | --- | --- | --- | ---- | ----------------- |
+| S01 | Evidence list/search ACL (L-EM-01)           | B   | P0  | 1   | R0  | M    | 3–5               |
+| S02 | Evidence Query Service & Permission Engine   | B   | P0  | 2   | R0  | M    | 3–5               |
+| S03 | Evidence Storage Platform (+ Local provider) | A   | P0  | 3   | R2  | L    | 8–12              |
+| S04 | Evidence PostgreSQL metadata SoR             | A   | P0  | 4*  | R2  | L    | 8–12              |
+| S05 | Server-side content hashing & integrity      | A   | P0  | 5   | R2  | M    | 4–6               |
+| S06 | Evidence audit durability & retention hooks  | A/J | P0  | 6   | R2  | M    | 4–6               |
+| S07 | QEP domain event catalogue & publish         | D   | P0  | 7   | R1  | M    | 5–7               |
+| S08 | TE outbox drain worker (L-03)                | C/G | P0  | 8   | R1  | L    | 7–10              |
+| S09 | Worker retries, DLQ, idempotency, fairness   | G   | P0  | 9   | R1  | M    | 5–7               |
+| S10 | Event failure evidence & reconciliation      | D/G | P1  | 10  | R1  | M    | 4–6               |
+| S11 | Search providers: Spec/Plan/Exec/Evidence    | E   | P1  | 11  | R3  | L    | 7–10              |
+| S12 | Search ACL + tenant filter + reindex jobs    | E   | P1  | 12  | R3  | M    | 5–7               |
+| S13 | QEP notification foundation (ENF)            | F   | P1  | 13  | R3  | M    | 5–7               |
+| S14 | UCP/command registration (QEP actions)       | E   | P2  | 14  | R3  | S    | 2–3               |
+| S15 | TE OpenAPI contract (L-01)                   | C   | P1  | 15  | R1  | M    | 4–6               |
+| S16 | Live Playwright runner (flagged, L-OP-01)    | C   | P1  | 16  | R3  | L    | 8–12              |
+| S17 | QEP observability probes & runbooks          | H   | P1  | 17  | R3  | M    | 4–6               |
+| S18 | Performance baselines & QI skeleton          | I   | P2  | 18  | R3  | M    | 4–6               |
+| S19 | Security verification suite (tenant/upload)  | J   | P0  | 19  | R4  | M    | 5–7               |
+| S20 | APZQEP-120 programme certification gate      | —   | P3  | 20  | R4  | M    | 3–5               |
 
-\* S04 (PG metadata) and later cloud providers still depend on Owner **D-001** where production cloud backends are chosen. **S03** is provider-first + Local per [ADR-0094](../../../../adr/ADR-0094-evidence-storage-provider-first.md) — not direct S3.
+\* S04 (PG metadata) and later cloud providers still depend on Owner **D-001** where production cloud backends are chosen. **S03** is the **Evidence Storage Platform** (abstraction + Manager + Local reference provider) per [ADR-0094](../../../../adr/ADR-0094-evidence-storage-provider-first.md) — not “local storage as the product,” and not direct S3.
 
 ---
 
@@ -195,65 +195,68 @@ Independently releasable with S01; LA security/structure hardening.
 
 ---
 
-# APZQEP-120-S03 — Evidence Storage Provider + Local provider
+# APZQEP-120-S03 — Evidence Storage Platform
 
 ### Identification
 
-| Field            | Value                                                                   |
-| ---------------- | ----------------------------------------------------------------------- |
-| ID               | APZQEP-120-S03                                                          |
-| Title            | Evidence Storage Provider + Local provider                              |
-| Workstream       | A                                                                       |
-| Priority         | P0                                                                      |
-| Sequence         | 3                                                                       |
-| Release boundary | R2                                                                      |
-| Guidance         | [ADR-0094](../../../../adr/ADR-0094-evidence-storage-provider-first.md) |
+| Field            | Value                                                                                                 |
+| ---------------- | ----------------------------------------------------------------------------------------------------- |
+| ID               | APZQEP-120-S03                                                                                        |
+| Title            | Evidence Storage Platform (Storage Provider Abstraction + Local Provider)                             |
+| Workstream       | A                                                                                                     |
+| Priority         | P0                                                                                                    |
+| Sequence         | 3                                                                                                     |
+| Release boundary | R2                                                                                                    |
+| Status           | **COMPLETE** (2026-08-01)                                                                             |
+| Guidance         | [ADR-0094](../../../../adr/ADR-0094-evidence-storage-provider-first.md)                               |
+| Notes            | [S03-ENGINEERING-NOTES.md](./S03-ENGINEERING-NOTES.md) · [STORAGE-PLATFORM.md](./STORAGE-PLATFORM.md) |
 
 ### Objective
 
-Establish the platform-neutral **Evidence Storage Provider** contract and a **Local** provider implementation. APZQEP never depends on a specific cloud object store.
+Design and implement the platform-neutral **Evidence Storage Platform**. Primary outcome is a stable abstraction isolating APZQEP from physical storage. **Local Provider** is the reference implementation only.
 
-### Current state
+### Current state (post-S03)
 
-`StoragePort` exists; durable adapter is skeleton/throws. No Local provider production path.
+Storage Platform + Manager + Provider contract + Local + Memory providers implemented. Application consumes `StoragePort` via Manager only. Default runtime provider remains `memory`; Local via env/config.
 
 ### Scope
 
-- EvidenceStorageProvider (or completed StoragePort) interface — upload/get/delete-restriction hooks
-- Local filesystem (or equivalent LA) provider
-- Factory wiring behind Application Services
-- Health/failure typed errors (no vendor leakage)
-- Tests for Local provider round-trip
+- Storage Provider Interface · Storage Manager · Local Provider · configuration / resolution
+- File metadata (content-side) · stream/upload/download/exists/delete · health
+- Provider registration/discovery · validation · error translation · audit hooks
+- Unit/integration/negative tests · docs · evidence · certification
 
 ### Explicit exclusions
 
-- Direct S3 / Azure / GCS SDK integration in this slice
-- PostgreSQL metadata SoR (S04)
-- Server-side hashing productisation (S05)
-- TE EvidenceAccessPort wiring
+- Direct S3 / Azure / GCS / MinIO SDK integration
+- Encryption at rest · virus scanning · retention · versioning · lifecycle productisation
+- PostgreSQL metadata SoR (S04) · TE EvidenceAccessPort wiring · AI / dashboard
 
 ### Dependencies
 
 - S01–S02 COMPLETE
 - ADR-0088 · ADR-0094
-- Local path/config for LA
+- Local path/config for LA when provider=`local`
 
 ### Architecture
 
 ```text
-Evidence Application
-  → StoragePort / EvidenceStorageProvider
-      → LocalProvider (S03)
-      → S3CompatibleProvider | Azure | GCS | MinIO (later slices)
+EvidenceService / Application
+  → StoragePort
+      → EvidenceStorageManager
+          → EvidenceStorageProvider
+              → LocalStorageProvider (reference)
+              → MemoryProvider (default/tests)
+              → S3 | Azure | GCS | MinIO | NAS | vault (later)
 ```
 
 ### Acceptance criteria
 
-1. Provider contract documented and implemented for Local
-2. Capture/retrieve durable bytes via Local in secured path (or flag-gated)
-3. No cloud vendor SDK in Application/Domain
-4. Typed errors; secrets not logged
-5. API clients unchanged
+1. Storage abstraction, Manager, and Provider interface exist
+2. Local Provider implemented as reference only
+3. No application component accesses filesystem directly
+4. Metadata remains logical (opaque locators)
+5. Security validation + documentation + certification PASS
 
 ### Complexity / effort
 
@@ -261,7 +264,7 @@ Evidence Application
 
 ### Releasability
 
-Feature-flagged; R2 content path.
+Config-selected provider; R2 content path.
 
 ---
 

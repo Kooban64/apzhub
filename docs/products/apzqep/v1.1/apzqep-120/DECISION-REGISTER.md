@@ -8,13 +8,14 @@ Owner / Product Board decisions required before or during implementation. Planni
 
 | Field          | Value                                                                        |
 | -------------- | ---------------------------------------------------------------------------- |
-| Status         | **REQUIRED**                                                                 |
-| Blocks         | S03–S04 (hard), S05–S06 (soft)                                               |
-| Question       | Which durable blob provider for Evidence StoragePort?                        |
+| Status         | **PARTIAL — Storage Platform shipped (S03); cloud backend still REQUIRED**   |
+| Blocks         | Cloud content providers (hard); production object-store choice               |
+| Resolved (S03) | Evidence Storage Platform + Local reference provider (ADR-0094)              |
+| Question       | Which durable **cloud/self-hosted object** provider for production content?  |
 | Recommendation | S3-compatible (MinIO/self-hosted) for OSS-first alignment with stack **004** |
-| Alternatives   | Local filesystem (dev-only risk); cloud S3; Azure Blob                       |
-| Consequences   | Credentials, backup, residency, adapter code path                            |
-| Deadline       | Before authorising S03                                                       |
+| Alternatives   | Cloud S3; Azure Blob; GCS; remain on Local for constrained LA                |
+| Consequences   | Credentials, backup, residency, adapter registration behind Storage Manager  |
+| Deadline       | Before authorising cloud provider slice (post-S03)                           |
 
 ## D-002 — Retention periods & deletion policy
 

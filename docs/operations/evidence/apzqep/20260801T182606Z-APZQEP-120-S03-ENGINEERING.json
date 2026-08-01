@@ -1,0 +1,25 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S03",
+  "title": "Evidence Storage Platform — Engineering Evidence",
+  "timestampUtc": "20260801T182606Z",
+  "result": "COMPLETE",
+  "architecture": {
+    "layers": [
+      "Application StoragePort (unchanged boundary)",
+      "EvidenceStorageManager",
+      "EvidenceStorageProvider",
+      "LocalEvidenceStorageProvider",
+      "MemoryEvidenceStorageProvider"
+    ],
+    "infrastructureStatus": "storage-platform-s03",
+    "adr": ["ADR-0088", "ADR-0094", "ADR-0093"]
+  },
+  "sourceRoots": [
+    "packages/qep-evidence/src/infrastructure/storage/platform/",
+    "packages/qep-evidence/src/infrastructure/storage/providers/",
+    "packages/qep-evidence/src/infrastructure/persistence/create-evidence-persistence.ts",
+    "packages/platform-services/src/services/qep/create-qep-evidence-platform-services.ts"
+  ],
+  "notes": "docs/products/apzqep/v1.1/apzqep-120/S03-ENGINEERING-NOTES.md"
+}

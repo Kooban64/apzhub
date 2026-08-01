@@ -20,11 +20,16 @@ Product Board guidance after S02: do not jump to direct S3 (or other cloud) inte
 
 ## Decision
 
-1. Content durability work **SHALL** introduce (or complete) an **Evidence Storage Provider** contract consumed only via the Evidence Application / StoragePort boundary.
-2. The first concrete implementation **SHALL** be a **Local** (filesystem / process-local) provider suitable for LA and tests — not a mandatory cloud vendor.
-3. Later providers (S3-compatible, MinIO, Azure Blob, GCS, etc.) are **adapters** behind the same interface. APZQEP Application Services and modules never call vendor SDKs directly.
-4. **Metadata SoR** (PostgreSQL) remains a separate concern per ADR-0088 and Document 011 — provider-first does not mean “skip metadata durability.” Sequencing of metadata vs content slices is set by the authorised APZQEP-120 slice instruction.
-5. Technology selection for production cloud backends remains an Owner decision (D-001 / ADR-0088) and does not change the provider contract.
+1. Content durability work **SHALL** deliver an **Evidence Storage Platform**: provider-agnostic contract + Storage Manager, consumed only via the Evidence Application / `StoragePort` boundary.
+2. The primary outcome is the **abstraction**, not a particular backend. Application code outside the Storage Platform **SHALL NOT** know filesystem paths, buckets, drivers, or cloud vendors.
+3. The first concrete implementation **SHALL** be a **Local Provider** (reference implementation for LA/tests) — not a mandatory cloud vendor.
+4. Later providers (S3-compatible, MinIO, Azure Blob, GCS, NAS, encrypted vault, etc.) are **adapters** behind the same interface. APZQEP Application Services and modules never call vendor SDKs or Local Provider APIs directly — only the Storage Manager.
+5. **Metadata SoR** (PostgreSQL) remains a separate concern per ADR-0088 and Document 011 — provider-first does not mean “skip metadata durability.” Sequencing of metadata vs content slices is set by the authorised APZQEP-120 slice instruction.
+6. Technology selection for production cloud backends remains an Owner decision (D-001 / ADR-0088) and does not change the provider contract.
+
+### Clarification (Owner — APZQEP-120-S03)
+
+S03 is titled **Evidence Storage Platform**. Local storage is the first provider, not the product outcome.
 
 ## Consequences
 

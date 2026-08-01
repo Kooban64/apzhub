@@ -1,0 +1,49 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S03",
+  "title": "Evidence Storage Platform — Storage Validation",
+  "timestampUtc": "20260801T182606Z",
+  "result": "PASS",
+  "checks": [
+    {
+      "id": "ABS-01",
+      "name": "Storage Provider interface exists (store/retrieve/stream/exists/delete/health/metadata/capabilities)",
+      "result": "PASS"
+    },
+    {
+      "id": "MGR-01",
+      "name": "EvidenceStorageManager implements StoragePort and selects provider by config",
+      "result": "PASS"
+    },
+    {
+      "id": "LOCAL-01",
+      "name": "Local Provider round-trip store/retrieve/stream/exists/archive/delete/health",
+      "result": "PASS"
+    },
+    {
+      "id": "MEM-01",
+      "name": "Memory Provider available via same Manager contract",
+      "result": "PASS"
+    },
+    {
+      "id": "META-01",
+      "name": "Logical opaque locators; physical paths not exposed above Manager",
+      "result": "PASS"
+    },
+    {
+      "id": "STREAM-01",
+      "name": "Local stream chunks() uses filesystem streaming (no full buffer required for stream API)",
+      "result": "PASS"
+    },
+    {
+      "id": "CFG-01",
+      "name": "Env/config selects provider; Local never assumed by default",
+      "result": "PASS"
+    }
+  ],
+  "validationCommands": [
+    "pnpm exec vitest run packages/qep-evidence",
+    "pnpm --filter @apzhub/qep-evidence typecheck",
+    "pnpm --filter @apzhub/platform-services typecheck"
+  ]
+}

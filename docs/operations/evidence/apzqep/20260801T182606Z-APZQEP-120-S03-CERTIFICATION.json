@@ -1,0 +1,68 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S03",
+  "title": "Evidence Storage Platform — Slice Certification",
+  "timestampUtc": "20260801T182606Z",
+  "classification": "Slice certification (APZHUB-ENG-001)",
+  "result": "PASS",
+  "acceptanceCriteria": [
+    {
+      "id": "AC-ABS",
+      "text": "Storage abstraction exists",
+      "result": "PASS"
+    },
+    {
+      "id": "AC-MGR",
+      "text": "Storage Manager exists",
+      "result": "PASS"
+    },
+    {
+      "id": "AC-IFACE",
+      "text": "Provider interface exists",
+      "result": "PASS"
+    },
+    {
+      "id": "AC-LOCAL",
+      "text": "Local Provider implemented as reference",
+      "result": "PASS"
+    },
+    {
+      "id": "AC-NO-FS",
+      "text": "No application component accesses filesystem directly",
+      "result": "PASS"
+    },
+    {
+      "id": "AC-META",
+      "text": "Metadata remains logical (opaque locators)",
+      "result": "PASS"
+    },
+    {
+      "id": "AC-SEC",
+      "text": "Security validation passes",
+      "result": "PASS"
+    },
+    {
+      "id": "AC-DOC",
+      "text": "Documentation updated",
+      "result": "PASS"
+    },
+    {
+      "id": "AC-REPO",
+      "text": "Repository clean after commit",
+      "result": "PENDING_COMMIT"
+    }
+  ],
+  "validationCommands": [
+    "pnpm exec vitest run packages/qep-evidence",
+    "pnpm --filter @apzhub/qep-evidence typecheck",
+    "pnpm --filter @apzhub/platform-services typecheck"
+  ],
+  "validationResults": {
+    "packageTests": "82 passed",
+    "typecheckEvidence": "PASS",
+    "typecheckPlatformServices": "PASS",
+    "todosTemporaryDebug": "NONE"
+  },
+  "ownerClarification": "S03 is Storage Platform; Local is reference provider only",
+  "recommendation": "Ready for APZQEP-120-S04"
+}

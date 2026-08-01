@@ -1,0 +1,46 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S03",
+  "title": "Evidence Storage Platform — Security Validation",
+  "timestampUtc": "20260801T182606Z",
+  "result": "PASS",
+  "checks": [
+    {
+      "id": "FS-BOUNDARY-01",
+      "name": "node:fs confined to providers/local; Application/Domain/persistence forbid FS",
+      "result": "PASS",
+      "evidence": "architecture-boundaries.test.ts"
+    },
+    {
+      "id": "PATH-TRAV-01",
+      "name": "Unsafe tenant, locator traversal, non-UUID locators rejected",
+      "result": "PASS",
+      "evidence": "evidence-storage-platform.test.ts"
+    },
+    {
+      "id": "NO-PATH-LEAK-01",
+      "name": "EvidenceStorageError messages do not include absolute filesystem paths",
+      "result": "PASS"
+    },
+    {
+      "id": "OVERWRITE-01",
+      "name": "store creates new opaque locator; archived replace forbidden",
+      "result": "PASS"
+    },
+    {
+      "id": "MANAGER-ONLY-01",
+      "name": "Manager does not hard-code Local; Application uses StoragePort only",
+      "result": "PASS"
+    },
+    {
+      "id": "NO-CLOUD-SDK-01",
+      "name": "No @aws-sdk / minio / Azure / GCS in Storage Platform",
+      "result": "PASS"
+    }
+  ],
+  "residualRisks": [
+    "Default production provider remains memory until Local root or cloud provider configured",
+    "Local filesystem permissions are host-dependent — ops must harden root directory ACLs",
+    "D-001 cloud backend selection still open for production object store"
+  ]
+}
