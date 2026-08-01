@@ -2,29 +2,29 @@
 
 ## Ordered sequence (recommended)
 
-| Seq | Slice            | Notes                                                |
-| --- | ---------------- | ---------------------------------------------------- |
-| 1   | S01              | ACL first — no Owner storage decision                |
-| 2   | S02              | TE↔Evidence ACL                                      |
-| —   | **BOARD: D-001** | Hard gate before S03                                 |
-| 3   | S03              | PG metadata                                          |
-| 4   | S04              | Durable storage                                      |
-| 5   | S05              | Server hash                                          |
-| 6   | S06              | Audit/retention                                      |
-| 7   | S07              | Event catalogue/publish                              |
-| 8   | S08              | Outbox drain                                         |
-| 9   | S09              | Retries/DLQ/fairness                                 |
-| 10  | S10              | Failure evidence/reconcile                           |
-| 11  | S11              | Search providers                                     |
-| 12  | S12              | Search ACL/reindex                                   |
-| 13  | S13              | Notifications                                        |
-| 14  | S14              | UCP registration                                     |
-| 15  | S15              | TE OpenAPI _(may start after S02 in parallel track)_ |
-| 16  | S16              | Live Playwright (flagged)                            |
-| 17  | S17              | Observability                                        |
-| 18  | S18              | Perf baselines + QI skeleton                         |
-| 19  | S19              | Security suite                                       |
-| 20  | S20              | Programme certification                              |
+| Seq | Slice     | Notes                                                     |
+| --- | --------- | --------------------------------------------------------- |
+| 1   | S01       | ACL first — no Owner storage decision                     |
+| 2   | S02       | TE↔Evidence ACL                                           |
+| 3   | S03       | Evidence Storage Provider + Local (ADR-0094)              |
+| 4   | S04       | PG metadata SoR                                           |
+| —   | **D-001** | Cloud content backends later — not required for S03 Local |
+| 5   | S05       | Server hash                                               |
+| 6   | S06       | Audit/retention                                           |
+| 7   | S07       | Event catalogue/publish                                   |
+| 8   | S08       | Outbox drain                                              |
+| 9   | S09       | Retries/DLQ/fairness                                      |
+| 10  | S10       | Failure evidence/reconcile                                |
+| 11  | S11       | Search providers                                          |
+| 12  | S12       | Search ACL/reindex                                        |
+| 13  | S13       | Notifications                                             |
+| 14  | S14       | UCP registration                                          |
+| 15  | S15       | TE OpenAPI _(may start after S02 in parallel track)_      |
+| 16  | S16       | Live Playwright (flagged)                                 |
+| 17  | S17       | Observability                                             |
+| 18  | S18       | Perf baselines + QI skeleton                              |
+| 19  | S19       | Security suite                                            |
+| 20  | S20       | Programme certification                                   |
 
 ---
 
