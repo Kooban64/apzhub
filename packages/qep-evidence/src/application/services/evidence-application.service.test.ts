@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 
 import { EvidenceApplicationValidationError } from "../../shared/errors";
@@ -12,8 +13,10 @@ import {
   createInMemoryUnitOfWork,
 } from "../testing/in-memory-ports";
 
-const HASH_A = "a".repeat(64);
-const HASH_B = "b".repeat(64);
+const BYTES_CAPTURE = new Uint8Array([1, 2, 3, 4]);
+const BYTES_B = new Uint8Array([9, 9]);
+const HASH_A = createHash("sha256").update(BYTES_CAPTURE).digest("hex");
+const HASH_B = createHash("sha256").update(BYTES_B).digest("hex");
 const SEAL_HASH = "c".repeat(64);
 
 function ctx(): EvidenceRequestContext {
@@ -47,7 +50,7 @@ async function captureReady() {
     source: { kind: "manual_upload" },
     content: {
       mediaType: "image/png",
-      bytes: new Uint8Array([1, 2, 3, 4]),
+      bytes: BYTES_CAPTURE,
       contentHash: HASH_A,
     },
     metadata: { title: "Shot", tags: ["ui"] },
@@ -157,7 +160,7 @@ describe("ENG-110D application orchestration", () => {
         expectedRevision: current.revision,
         content: {
           mediaType: "image/png",
-          bytes: new Uint8Array([9, 9]),
+          bytes: BYTES_B,
           contentHash: HASH_B,
         },
       })
@@ -261,7 +264,7 @@ describe("ENG-110D application orchestration", () => {
       evidenceId: captured.data.id,
     });
     expect(download.byteSize).toBe(4);
-    expect(download.bytes).toEqual(new Uint8Array([1, 2, 3, 4]));
+    expect(download.bytes).toEqual(BYTES_CAPTURE);
 
     const verified = await services.commands.verifyIntegrity(ctx(), {
       kind: "verifyIntegrity",

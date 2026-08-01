@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -20,7 +21,10 @@ import {
 import { validateEvidenceReference } from "./evidence-reference";
 import { createPermissionPort } from "./permission-port";
 
-const HASH_A = "a".repeat(64);
+const BYTES_1 = new Uint8Array([1]);
+const BYTES_2 = new Uint8Array([2]);
+const HASH_A = createHash("sha256").update(BYTES_1).digest("hex");
+const HASH_B = createHash("sha256").update(BYTES_2).digest("hex");
 
 function adminCtx(overrides?: Partial<EvidenceRequestContext>): EvidenceRequestContext {
   return {
@@ -69,7 +73,7 @@ describe("ENG-110E L-02 security enforcement", () => {
         source: { kind: "manual_upload" },
         content: {
           mediaType: "text/plain",
-          bytes: new Uint8Array([1]),
+          bytes: BYTES_1,
           contentHash: HASH_A,
         },
       },
@@ -89,7 +93,7 @@ describe("ENG-110E L-02 security enforcement", () => {
           source: { kind: "manual_upload" },
           content: {
             mediaType: "text/plain",
-            bytes: new Uint8Array([1]),
+            bytes: BYTES_1,
             contentHash: HASH_A,
           },
         },
@@ -105,7 +109,7 @@ describe("ENG-110E L-02 security enforcement", () => {
       source: { kind: "manual_upload" },
       content: {
         mediaType: "text/plain",
-        bytes: new Uint8Array([1]),
+        bytes: BYTES_1,
         contentHash: HASH_A,
       },
     });
@@ -139,7 +143,7 @@ describe("ENG-110E L-02 security enforcement", () => {
       source: { kind: "manual_upload" },
       content: {
         mediaType: "text/plain",
-        bytes: new Uint8Array([1]),
+        bytes: BYTES_1,
         contentHash: HASH_A,
       },
     });
@@ -241,7 +245,7 @@ describe("ENG-110E L-02 security enforcement", () => {
       source: { kind: "manual_upload" },
       content: {
         mediaType: "text/plain",
-        bytes: new Uint8Array([1]),
+        bytes: BYTES_1,
         contentHash: HASH_A,
       },
     });
@@ -289,7 +293,7 @@ describe("ENG-110E L-02 security enforcement", () => {
       source: { kind: "manual_upload" },
       content: {
         mediaType: "text/plain",
-        bytes: new Uint8Array([1]),
+        bytes: BYTES_1,
         contentHash: HASH_A,
       },
     });
@@ -320,7 +324,7 @@ describe("ENG-110E L-02 security enforcement", () => {
       source: { kind: "manual_upload" },
       content: {
         mediaType: "text/plain",
-        bytes: new Uint8Array([1]),
+        bytes: BYTES_1,
         contentHash: HASH_A,
       },
       metadata: { title: "owned-alpha" },
@@ -338,8 +342,8 @@ describe("ENG-110E L-02 security enforcement", () => {
         source: { kind: "manual_upload" },
         content: {
           mediaType: "text/plain",
-          bytes: new Uint8Array([2]),
-          contentHash: "b".repeat(64),
+          bytes: BYTES_2,
+          contentHash: HASH_B,
         },
         metadata: { title: "secret-bravo" },
       },
@@ -393,7 +397,7 @@ describe("ENG-110E L-02 security enforcement", () => {
       source: { kind: "manual_upload" },
       content: {
         mediaType: "text/plain",
-        bytes: new Uint8Array([1]),
+        bytes: BYTES_1,
         contentHash: HASH_A,
       },
       metadata: { title: "needle-owned" },
@@ -411,8 +415,8 @@ describe("ENG-110E L-02 security enforcement", () => {
         source: { kind: "manual_upload" },
         content: {
           mediaType: "text/plain",
-          bytes: new Uint8Array([2]),
-          contentHash: "b".repeat(64),
+          bytes: BYTES_2,
+          contentHash: HASH_B,
         },
         metadata: { title: "needle-secret" },
       },
@@ -467,7 +471,7 @@ describe("ENG-110E L-02 security enforcement", () => {
       source: { kind: "manual_upload" },
       content: {
         mediaType: "text/plain",
-        bytes: new Uint8Array([1]),
+        bytes: BYTES_1,
         contentHash: HASH_A,
       },
       metadata: { title: "tenant-1-item" },

@@ -27,6 +27,10 @@ import {
   type SecurityAuditService,
 } from "../security";
 import {
+  createEvidenceIntegrityPlatformService,
+  type EvidenceIntegrityPlatformService,
+} from "../integrity";
+import {
   createEvidenceCommandService,
   type EvidenceCommandService,
 } from "./evidence-command-service";
@@ -64,6 +68,8 @@ export type EvidenceApplicationServices = {
   readonly permissionEngine: EvidencePermissionEngine;
   readonly queryBuilder: EvidenceQueryBuilder;
   readonly enumeration: EvidenceEnumerationService | undefined;
+  /** APZQEP-120-S04 — content integrity verification platform. */
+  readonly integrity: EvidenceIntegrityPlatformService;
 };
 
 /**
@@ -129,6 +135,11 @@ export function createEvidenceApplicationServices(
       })
     : innerQueries;
 
+  const integrity = createEvidenceIntegrityPlatformService({
+    deps,
+    securityGate,
+  });
+
   return {
     programme: "APZQEP-ENG-110E",
     commands,
@@ -142,5 +153,6 @@ export function createEvidenceApplicationServices(
     permissionEngine,
     queryBuilder,
     enumeration,
+    integrity,
   };
 }

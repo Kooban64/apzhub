@@ -27,6 +27,9 @@ import {
   verifyIntegrity,
 } from "../../domain/evidence";
 import { EvidenceApplicationValidationError } from "../../shared/errors";
+import { createSha256IntegrityAlgorithm } from "../integrity/algorithms/sha256-integrity-algorithm";
+import { digestContentFromStorage } from "../integrity/digest-from-storage";
+import { EvidenceIntegrityPlatformError } from "../integrity/errors";
 import type { EvidenceRequestContext } from "../context";
 import type {
   AddToCollectionCommand,
@@ -226,12 +229,28 @@ export function createEvidenceCommandService(
   return {
     async captureEvidence(ctx, command) {
       assertCaptureCommand(command);
+      const sha256 = createSha256IntegrityAlgorithm();
+      const algorithmId = (command.content.hashAlgorithm ?? "sha256").toLowerCase();
+      if (algorithmId !== "sha256") {
+        throw new EvidenceIntegrityPlatformError(
+          "INTEGRITY_ALGORITHM_UNSUPPORTED",
+          "Integrity algorithm is not supported",
+          { algorithmId },
+        );
+      }
+      const serverDigest = sha256.digestBytes(command.content.bytes);
+      if (!sha256.digestsEqual(command.content.contentHash, serverDigest)) {
+        throw new EvidenceIntegrityPlatformError(
+          "INTEGRITY_MISMATCH",
+          "Client content hash does not match server-computed digest",
+        );
+      }
       const put = await deps.storage.put({
         tenantId: ctx.tenantId,
         bytes: command.content.bytes,
         mediaType: command.content.mediaType,
-        contentHash: command.content.contentHash,
-        hashAlgorithm: command.content.hashAlgorithm,
+        contentHash: serverDigest,
+        hashAlgorithm: "sha256",
       });
       const id = command.id?.trim() || deps.ids.createId("ev");
       const evidence = captureEvidence({
@@ -246,8 +265,8 @@ export function createEvidenceCommandService(
         content: {
           mediaType: command.content.mediaType,
           byteSize: put.byteSize,
-          contentHash: command.content.contentHash,
-          hashAlgorithm: command.content.hashAlgorithm,
+          contentHash: serverDigest,
+          hashAlgorithm: "sha256",
           storageLocator: put.storageLocator,
         },
         retentionClass: command.retentionClass,
@@ -258,6 +277,7 @@ export function createEvidenceCommandService(
       });
       const { stored, events } = await persistEvidenceCreate(deps, evidence);
       await recordAudit(deps, ctx, stored.id, "captureEvidence");
+      await recordAudit(deps, ctx, stored.id, "evidence.integrity.established");
       return { data: toEvidenceDto(stored), collectedEvents: events };
     },
 
@@ -447,14 +467,30 @@ export function createEvidenceCommandService(
           "versionEvidence requires existing storageLocator",
         );
       }
+      const sha256 = createSha256IntegrityAlgorithm();
+      const algorithmId = (command.content.hashAlgorithm ?? "sha256").toLowerCase();
+      if (algorithmId !== "sha256") {
+        throw new EvidenceIntegrityPlatformError(
+          "INTEGRITY_ALGORITHM_UNSUPPORTED",
+          "Integrity algorithm is not supported",
+          { algorithmId },
+        );
+      }
+      const serverDigest = sha256.digestBytes(command.content.bytes);
+      if (!sha256.digestsEqual(command.content.contentHash, serverDigest)) {
+        throw new EvidenceIntegrityPlatformError(
+          "INTEGRITY_MISMATCH",
+          "Client content hash does not match server-computed digest",
+        );
+      }
       const put = await deps.storage.update(
         ctx.tenantId,
         current.content.storageLocator,
         {
           bytes: command.content.bytes,
           mediaType: command.content.mediaType,
-          contentHash: command.content.contentHash,
-          hashAlgorithm: command.content.hashAlgorithm,
+          contentHash: serverDigest,
+          hashAlgorithm: "sha256",
         },
       );
       const mutated = replaceContent(
@@ -463,8 +499,8 @@ export function createEvidenceCommandService(
         {
           mediaType: command.content.mediaType,
           byteSize: put.byteSize,
-          contentHash: command.content.contentHash,
-          hashAlgorithm: command.content.hashAlgorithm,
+          contentHash: serverDigest,
+          hashAlgorithm: "sha256",
           storageLocator: put.storageLocator,
         },
       );
@@ -561,33 +597,70 @@ export function createEvidenceCommandService(
 
     async verifyIntegrity(ctx, command) {
       assertEvidenceIdCommand(command);
-      if (!command.providedActualHash?.trim()) {
-        throw new EvidenceApplicationValidationError(
-          "providedActualHash is required (hashing not implemented in Application)",
+      const current = await requireEvidence(deps, ctx, command.evidenceId);
+      if (!current.integrity) {
+        throw new EvidenceIntegrityPlatformError(
+          "INTEGRITY_NOT_ESTABLISHED",
+          "Content integrity has not been established",
         );
       }
-      const current = await requireEvidence(deps, ctx, command.evidenceId);
+
+      let providedActualHash = command.providedActualHash?.trim().toLowerCase();
+      if (!providedActualHash) {
+        if (!current.content?.storageLocator) {
+          throw new EvidenceIntegrityPlatformError(
+            "INTEGRITY_CONTENT_MISSING",
+            "Evidence content is missing from storage",
+          );
+        }
+        const algorithm = createSha256IntegrityAlgorithm();
+        try {
+          const hashed = await digestContentFromStorage({
+            storage: deps.storage,
+            tenantId: ctx.tenantId,
+            storageLocator: current.content.storageLocator,
+            algorithm,
+          });
+          providedActualHash = hashed.digest;
+        } catch (error) {
+          if (
+            error instanceof EvidenceIntegrityPlatformError &&
+            error.integrityCode === "INTEGRITY_CONTENT_MISSING"
+          ) {
+            throw error;
+          }
+          throw error;
+        }
+      }
+
       if (current.content?.storageLocator) {
         const exists = await deps.storage.exists(
           ctx.tenantId,
           current.content.storageLocator,
         );
         if (!exists) {
-          throw new EvidenceApplicationValidationError(
-            "Storage content missing for integrity verification",
+          throw new EvidenceIntegrityPlatformError(
+            "INTEGRITY_CONTENT_MISSING",
+            "Evidence content is missing from storage",
           );
         }
       }
+
       const mutated = verifyIntegrity(
         current,
         commandContext(deps, ctx, command.expectedRevision),
-        { providedActualHash: command.providedActualHash },
+        { providedActualHash },
       );
       const { stored, events } = await persistEvidenceMutation(
         deps,
         mutated,
         command.expectedRevision,
       );
+      const auditAction =
+        stored.integrity?.verificationState === "failed"
+          ? "evidence.integrity.mismatch"
+          : "evidence.integrity.verified";
+      await recordAudit(deps, ctx, stored.id, auditAction);
       await recordAudit(deps, ctx, stored.id, "verifyIntegrity");
       return { data: toEvidenceDto(stored), collectedEvents: events };
     },

@@ -2,7 +2,7 @@
  * Application layer — ENG-110D orchestration + ENG-110E security enforcement.
  * Business rules remain in Domain. Transport remains absent.
  */
-export const QEP_EVIDENCE_APPLICATION_STATUS = "secured-eng-110e" as const;
+export const QEP_EVIDENCE_APPLICATION_STATUS = "integrity-platform-s04" as const;
 
 export * from "./ports/index";
 export * from "./context";
@@ -17,3 +17,4 @@ export * from "./testing/in-memory-ports";
 export * from "./security/index";
 export * from "./policy/index";
 export * from "./query/index";
+export * from "./integrity/index";

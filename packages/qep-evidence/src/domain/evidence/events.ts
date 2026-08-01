@@ -18,6 +18,8 @@ export type EvidenceDomainEventType =
   | "evidence.disposed"
   | "evidence.integrity_verified"
   | "evidence.integrity_failed"
+  | "evidence.integrity_established"
+  | "evidence.integrity_content_missing"
   | "evidence.collection_changed"
   | "evidence.set_sealed";
 
@@ -160,6 +162,19 @@ export function buildEvidenceIntegrityFailedEvent(
   base: EventBase,
 ): EvidenceDomainEvent {
   return build("evidence.integrity_failed", base, {});
+}
+
+export function buildEvidenceIntegrityEstablishedEvent(
+  base: EventBase,
+  payload: Readonly<Record<string, unknown>> = {},
+): EvidenceDomainEvent {
+  return build("evidence.integrity_established", base, payload);
+}
+
+export function buildEvidenceIntegrityContentMissingEvent(
+  base: EventBase,
+): EvidenceDomainEvent {
+  return build("evidence.integrity_content_missing", base, {});
 }
 
 export function buildEvidenceCollectionChangedEvent(

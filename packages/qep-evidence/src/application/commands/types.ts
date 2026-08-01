@@ -115,10 +115,14 @@ export type DisposeEvidenceCommand = EvidenceIdCommandBase & {
 export type VerifyIntegrityCommand = EvidenceIdCommandBase & {
   readonly kind: "verifyIntegrity";
   /**
-   * Precomputed hash of StoragePort bytes (hashing algorithms not authorised under ENG-110D).
-   * When omitted, Application loads bytes and requires this field — must be supplied by caller.
+   * Optional precomputed hash. When omitted (APZQEP-120-S04), Application
+   * computes SHA-256 via StoragePort streaming.
    */
-  readonly providedActualHash: string;
+  readonly providedActualHash?: string;
+};
+
+export type EstablishIntegrityCommand = EvidenceIdCommandBase & {
+  readonly kind: "establishIntegrity";
 };
 
 export type CreateCollectionCommand = {

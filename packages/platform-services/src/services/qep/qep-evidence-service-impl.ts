@@ -69,7 +69,7 @@ export function mapEvidenceDomainError(
     case "integrity_failed":
       return new PlatformServiceError({
         category: "conflict",
-        code: "CONFLICT",
+        code: error.code.startsWith("INTEGRITY_") ? error.code : "CONFLICT",
         message: error.message,
         correlationId,
         retryable: false,
@@ -162,8 +162,44 @@ export type QepEvidencePlatformService = {
   verify(
     ctx: ServiceRequestContext,
     id: string,
-    input: { readonly expectedRevision: number; readonly providedActualHash: string },
+    input: {
+      readonly expectedRevision: number;
+      /** Optional — when omitted, server hashes content via StoragePort (S04). */
+      readonly providedActualHash?: string;
+    },
   ): Promise<EvidenceDto>;
+  getIntegrityStatus(
+    ctx: ServiceRequestContext,
+    id: string,
+  ): Promise<{
+    readonly evidenceId: string;
+    readonly status: string;
+    readonly algorithm?: string;
+    readonly lastVerifiedAt?: string;
+    readonly sealed: boolean;
+  }>;
+  establishIntegrity(
+    ctx: ServiceRequestContext,
+    id: string,
+    input: { readonly expectedRevision: number },
+  ): Promise<{
+    readonly evidenceId: string;
+    readonly status: string;
+    readonly algorithm: string;
+    readonly digest: string;
+    readonly contentLength: number;
+    readonly idempotent: boolean;
+  }>;
+  verifyIntegrityPlatform(
+    ctx: ServiceRequestContext,
+    id: string,
+    input: { readonly expectedRevision: number; readonly providedActualHash?: string },
+  ): Promise<{
+    readonly evidenceId: string;
+    readonly status: string;
+    readonly algorithm: string;
+    readonly verifiedAt: string;
+  }>;
   getRelationships(
     ctx: ServiceRequestContext,
     id: string,
@@ -245,7 +281,7 @@ function base64ToBytes(value: string): Uint8Array {
 export function createQepEvidencePlatformService(
   application: EvidenceApplicationServices,
 ): QepEvidencePlatformService {
-  const { commands, queries } = application;
+  const { commands, queries, integrity } = application;
 
   return {
     async list(ctx, query = {}) {
@@ -491,6 +527,46 @@ export function createQepEvidencePlatformService(
           providedActualHash: input.providedActualHash,
         });
         return result.data;
+      });
+    },
+
+    async getIntegrityStatus(ctx, id) {
+      return invoke(ctx, (evidenceCtx) =>
+        integrity.getIntegrityStatus(evidenceCtx, id),
+      );
+    },
+
+    async establishIntegrity(ctx, id, input) {
+      return invoke(ctx, async (evidenceCtx) => {
+        const result = await integrity.establishIntegrity(evidenceCtx, {
+          evidenceId: id,
+          expectedRevision: input.expectedRevision,
+        });
+        return {
+          evidenceId: result.evidenceId,
+          status: result.status,
+          algorithm: String(result.algorithm),
+          digest: result.digest,
+          contentLength: result.contentLength,
+          idempotent: result.idempotent,
+        };
+      });
+    },
+
+    async verifyIntegrityPlatform(ctx, id, input) {
+      return invoke(ctx, async (evidenceCtx) => {
+        const result = await integrity.verifyIntegrity(evidenceCtx, {
+          evidenceId: id,
+          expectedRevision: input.expectedRevision,
+          providedActualHash: input.providedActualHash,
+        });
+        // Narrow response — digests omitted from platform surface by default.
+        return {
+          evidenceId: result.evidenceId,
+          status: result.status,
+          algorithm: String(result.algorithm),
+          verifiedAt: result.verifiedAt,
+        };
       });
     },
 

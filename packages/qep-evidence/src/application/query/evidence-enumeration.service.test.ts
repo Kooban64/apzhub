@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 
 import { EvidenceApplicationValidationError } from "../../shared/errors";
@@ -11,7 +12,10 @@ import {
   createInMemoryUnitOfWork,
 } from "../testing/in-memory-ports";
 
-const HASH_A = "a".repeat(64);
+const BYTES_1 = new Uint8Array([1]);
+const BYTES_2 = new Uint8Array([2]);
+const HASH_A = createHash("sha256").update(BYTES_1).digest("hex");
+const HASH_B = createHash("sha256").update(BYTES_2).digest("hex");
 
 function adminCtx(): EvidenceRequestContext {
   return {
@@ -53,7 +57,7 @@ describe("APZQEP-120-S02 EvidenceEnumerationService", () => {
       source: { kind: "manual_upload" },
       content: {
         mediaType: "text/plain",
-        bytes: new Uint8Array([1]),
+        bytes: BYTES_1,
         contentHash: HASH_A,
       },
       metadata: { title: "visible-item" },
@@ -71,8 +75,8 @@ describe("APZQEP-120-S02 EvidenceEnumerationService", () => {
         source: { kind: "manual_upload" },
         content: {
           mediaType: "text/plain",
-          bytes: new Uint8Array([2]),
-          contentHash: "b".repeat(64),
+          bytes: BYTES_2,
+          contentHash: HASH_B,
         },
         metadata: { title: "hidden-item" },
       },
@@ -122,7 +126,7 @@ describe("APZQEP-120-S02 EvidenceEnumerationService", () => {
       source: { kind: "manual_upload" },
       content: {
         mediaType: "text/plain",
-        bytes: new Uint8Array([1]),
+        bytes: BYTES_1,
         contentHash: HASH_A,
       },
       metadata: { title: "shared-needle" },
@@ -140,8 +144,8 @@ describe("APZQEP-120-S02 EvidenceEnumerationService", () => {
         source: { kind: "manual_upload" },
         content: {
           mediaType: "text/plain",
-          bytes: new Uint8Array([2]),
-          contentHash: "b".repeat(64),
+          bytes: BYTES_2,
+          contentHash: HASH_B,
         },
         metadata: { title: "secret-needle" },
       },

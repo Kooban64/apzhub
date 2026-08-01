@@ -33,7 +33,17 @@ export const EVIDENCE_CLASSIFICATIONS = [
   "other",
 ] as const;
 
-export const VERIFICATION_STATES = ["unverified", "verified", "failed"] as const;
+/**
+ * Domain verification states (content integrity).
+ * Application Integrity Platform maps these to product statuses
+ * (ESTABLISHED / VERIFIED / MISMATCH / CONTENT_MISSING / …).
+ */
+export const VERIFICATION_STATES = [
+  "unverified",
+  "verified",
+  "failed",
+  "content_missing",
+] as const;
 
 export const HASH_ALGORITHMS = ["sha256"] as const;
 

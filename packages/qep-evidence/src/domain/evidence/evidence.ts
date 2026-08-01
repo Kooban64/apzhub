@@ -13,6 +13,8 @@ import {
   buildEvidenceClassifiedEvent,
   buildEvidenceContentReplacedEvent,
   buildEvidenceDisposedEvent,
+  buildEvidenceIntegrityContentMissingEvent,
+  buildEvidenceIntegrityEstablishedEvent,
   buildEvidenceIntegrityFailedEvent,
   buildEvidenceIntegrityVerifiedEvent,
   buildEvidenceLegalHoldAppliedEvent,
@@ -42,9 +44,11 @@ import {
   SealPolicy,
 } from "./policies";
 import {
+  createContentHash,
   createEvidenceClassification,
   createEvidenceContent,
   createEvidenceId,
+  createEvidenceIntegrity,
   createEvidenceMetadata,
   createEvidenceOwnership,
   createEvidencePolicyReference,
@@ -61,6 +65,7 @@ import {
   type EvidenceRetention,
   type EvidenceSource,
   type EvidenceStatus,
+  type HashAlgorithm,
 } from "./value-objects";
 
 export type EvidenceVersion = {
@@ -723,6 +728,79 @@ export function disposeEvidence(
 }
 
 /**
+ * Establish content integrity metadata from a hash computed outside Domain.
+ * Idempotent when the same digest is already recorded. Does not replace a
+ * differing established digest (Application must treat that as mismatch).
+ */
+export function establishIntegrity(
+  evidence: Evidence,
+  ctx: CommandContext,
+  input: {
+    readonly contentHash: string;
+    readonly hashAlgorithm?: string;
+    readonly byteSize?: number;
+  },
+): Evidence {
+  const current = beginCommand(evidence, ctx);
+  LifecyclePolicy.assertNotTerminal(current.status, "establishIntegrity");
+  if (!current.content?.storageLocator) {
+    throw new EvidencePreconditionError("establishIntegrity requires stored content");
+  }
+
+  const nextHash = createContentHash(
+    input.contentHash,
+    (input.hashAlgorithm as HashAlgorithm | undefined) ?? "sha256",
+  );
+
+  if (current.integrity) {
+    if (current.integrity.contentHash === nextHash) {
+      // Idempotent: same baseline — no duplicate record.
+      return current;
+    }
+    throw new EvidenceIntegrityFailedError(
+      "Integrity baseline already established with a different digest",
+      {
+        evidenceId: current.id,
+        expectedDigest: current.integrity.contentHash,
+        actualDigest: nextHash,
+      },
+    );
+  }
+
+  const content =
+    input.byteSize !== undefined && input.byteSize !== current.content.byteSize
+      ? {
+          ...current.content,
+          byteSize: input.byteSize,
+          contentHash: nextHash,
+          hashAlgorithm: (input.hashAlgorithm as HashAlgorithm | undefined) ?? "sha256",
+        }
+      : {
+          ...current.content,
+          contentHash: nextHash,
+          hashAlgorithm: (input.hashAlgorithm as HashAlgorithm | undefined) ?? "sha256",
+        };
+
+  const integrity = EvidenceIntegrityService.fromContent(content);
+  return withMutation(
+    current,
+    ctx,
+    {
+      content,
+      integrity,
+      provenance: appendProvenance(current, "integrity_established", ctx),
+    },
+    "establishIntegrity",
+    "Evidence content integrity established",
+    [
+      buildEvidenceIntegrityEstablishedEvent(eventBase(current, ctx), {
+        algorithm: integrity.hashAlgorithm,
+      }),
+    ],
+  );
+}
+
+/**
  * Integrity verification using a hash computed outside Domain (no crypto here).
  */
 export function verifyIntegrity(
@@ -763,6 +841,41 @@ export function verifyIntegrity(
     "verifyIntegrity",
     "Evidence integrity verified",
     [buildEvidenceIntegrityVerifiedEvent(eventBase(current, ctx))],
+  );
+}
+
+/**
+ * Record that authoritative integrity exists but content bytes are missing.
+ * Does not delete the integrity record or overwrite the expected digest.
+ */
+export function recordIntegrityContentMissing(
+  evidence: Evidence,
+  ctx: CommandContext,
+): Evidence {
+  const current = beginCommand(evidence, ctx);
+  LifecyclePolicy.assertNotTerminal(current.status, "recordIntegrityContentMissing");
+  if (!current.integrity) {
+    throw new EvidencePreconditionError(
+      "recordIntegrityContentMissing requires integrity metadata",
+    );
+  }
+  const integrity = createEvidenceIntegrity({
+    contentHash: current.integrity.contentHash,
+    hashAlgorithm: current.integrity.hashAlgorithm,
+    verificationState: "content_missing",
+    lastVerifiedAt: ctx.changedAt,
+    sealed: current.integrity.sealed,
+  });
+  return withMutation(
+    current,
+    ctx,
+    {
+      integrity,
+      provenance: appendProvenance(current, "integrity_content_missing", ctx),
+    },
+    "recordIntegrityContentMissing",
+    "Evidence content missing during integrity verification",
+    [buildEvidenceIntegrityContentMissingEvent(eventBase(current, ctx))],
   );
 }
 
