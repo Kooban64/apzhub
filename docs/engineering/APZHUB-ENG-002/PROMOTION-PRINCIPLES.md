@@ -37,7 +37,52 @@ This principle is **mandatory**. It cannot be waived by informal agreement.
 
 ---
 
-## 3. What promotion is not
+## 3. Abstraction Principle (permanent)
+
+```text
+Enterprise standards shall never be derived by duplication.
+They shall be derived by abstraction.
+```
+
+This principle is **mandatory** and permanent.
+
+### 3.1 Required promotion method
+
+```text
+Review product standard (reference implementation)
+  → Extract generic content
+  → Remove product-specific material
+  → Architecture Review
+  → Product Board Review
+  → Publish APZHUB enterprise standard
+  → Update Standards Catalogue status
+```
+
+### 3.2 Forbidden
+
+- Copy/paste of product standard text into an enterprise document as the promotion method
+- Treating a product framework as automatic enterprise law
+- Retaining product package names, paths, or domain jargon as normative enterprise requirements (except as non-normative reference notes)
+
+### 3.3 Ownership distinction
+
+| Role                | Actor                          |
+| ------------------- | ------------------------------ |
+| Proven source       | Product (e.g. APZQEP)          |
+| Enterprise owner    | APZHUB                         |
+| Enterprise standard | Abstraction under catalogue ID |
+
+Instruction wording for authorship SHALL prefer:
+
+> Author the APZHUB Enterprise \<Standard\>, using the product standard as the **reference implementation**.
+
+Not:
+
+> Promote / copy the product standard.
+
+---
+
+## 4. What promotion is not
 
 Promotion is **not**:
 
@@ -48,7 +93,7 @@ Promotion is **not**:
 
 ---
 
-## 4. Reference implementation rule
+## 5. Reference implementation rule
 
 A **reference implementation** (initially APZQEP Engineering Framework v1.0) demonstrates fitness. It does **not** auto-promote.
 
@@ -56,14 +101,16 @@ Each candidate standard MUST pass this document’s criteria independently.
 
 ---
 
-## 5. Working dispositions
+## 6. Working dispositions
 
 Candidate list and SPLIT/KEEP/PROMOTE dispositions: [PROMOTION-MATRIX.md](./PROMOTION-MATRIX.md).
 
-The matrix is design guidance. Binding promotion still requires Phase 1+ authority **after** Charter certification.
+The matrix is design guidance. Binding promotion requires Charter certification (satisfied) and catalogue registration before body authorship.
 
 ---
 
-## 6. Phase 0 constraint
+## 7. Phase constraints
 
-**No standards are promoted during Phase 0.**
+- **Phase 0:** No standards promoted (satisfied — CERTIFIED).
+- **Phase 1 Opening:** Catalogue only (CERTIFIED).
+- **Phase 1+ body promotions:** Catalogue row first; abstraction method mandatory.

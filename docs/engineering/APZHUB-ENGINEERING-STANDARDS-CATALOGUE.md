@@ -5,9 +5,10 @@
 | Document          | APZHUB-ENGINEERING-STANDARDS-CATALOGUE                                                             |
 | Programme         | APZHUB-ENG-002                                                                                     |
 | Classification    | Enterprise Engineering Governance                                                                  |
-| Status            | **ACTIVE** (inventory)                                                                             |
+| Status            | **CERTIFIED** (Product Board — Phase 1 Opening)                                                    |
 | Authority         | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) (**CERTIFIED**) |
 | Technical content | **NONE** — inventory and status only                                                               |
+| Role              | Single source of truth for enterprise engineering standards                                        |
 | Engineering       | NONE                                                                                               |
 
 ---
@@ -22,11 +23,15 @@ It answers:
 
 - which enterprise standards exist or are proposed;
 - their lifecycle status;
-- which product proved them;
-- which version is current;
-- where the normative document will live (or lives).
+- current approved version;
+- which product / framework proved them;
+- Product Board decision references;
+- ownership, review cadence, and supersession;
+- where the normative document lives.
 
 Promotions under APZHUB-ENG-002 SHALL update this catalogue. Isolated standard documents without a catalogue row are governance defects.
+
+**Rows are never removed.** Lifecycle changes update status (and related audit fields) only.
 
 ---
 
@@ -47,59 +52,79 @@ Aligned with [PORTFOLIO-LIFECYCLE.md](./APZHUB-ENG-002/PORTFOLIO-LIFECYCLE.md).
 
 ---
 
-## 3. Enterprise standards inventory
+## 3. Register columns
 
-### 3.1 Already enterprise (pre-ENG-002)
-
-| ID     | Standard                   | Status             | Source         | Version           | Normative home                                   |
-| ------ | -------------------------- | ------------------ | -------------- | ----------------- | ------------------------------------------------ |
-| ES-000 | Engineering Slice Standard | Already Enterprise | APZHUB-ENG-001 | Frozen (ADR-0092) | `docs/engineering/ENGINEERING-SLICE-STANDARD.md` |
-
-### 3.2 Promotion wave candidates (registered)
-
-| ID     | Standard                                               | Status       | Source product               | Source version | Planned enterprise home                                               | Promotion order |
-| ------ | ------------------------------------------------------ | ------------ | ---------------------------- | -------------- | --------------------------------------------------------------------- | --------------- |
-| ES-001 | Testing Standard                                       | **Proposed** | APZQEP                       | 1.0            | `docs/engineering/APZHUB-TESTING-STANDARD.md` (TBD)                   | **1**           |
-| ES-002 | Certification Standard                                 | **Proposed** | APZQEP                       | 1.0            | `docs/engineering/APZHUB-CERTIFICATION-STANDARD.md` (TBD)             | **2**           |
-| ES-003 | Engineering Specification Template                     | **Proposed** | APZQEP                       | 1.0            | `docs/engineering/APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md` (TBD) | **3**           |
-| ES-004 | Engineering Workflow                                   | **Proposed** | APZQEP / APZHUB-ENG-001 pack | —              | Align `AI-ENGINEERING-WORKFLOW.md` + checklists                       | **4**           |
-| ES-005 | Enterprise Engineering Standards (generic conventions) | **Proposed** | APZQEP (SPLIT)               | 1.0            | `docs/engineering/APZHUB-ENGINEERING-STANDARDS.md` (TBD)              | **5**           |
-
-### 3.3 Deferred (not in current wave)
-
-| ID     | Standard                              | Status   | Source                   | Notes                                         |
-| ------ | ------------------------------------- | -------- | ------------------------ | --------------------------------------------- |
-| ES-010 | API Standard                          | Deferred | APZQEP (planned)         | KEEP PRODUCT initially                        |
-| ES-011 | Database Standard                     | Deferred | APZQEP (planned)         | KEEP PRODUCT initially; Foundation 011 exists |
-| ES-012 | Domain Event Standard                 | Deferred | APZQEP (planned)         | KEEP PRODUCT initially                        |
-| ES-013 | Documentation Standard                | Deferred | APZQEP (planned)         | Promote later if generic                      |
-| ES-014 | Product Engineering Framework Pattern | Deferred | APZQEP Framework concept | Concept promotion after wave 1–5              |
+| Field                  | Purpose                              |
+| ---------------------- | ------------------------------------ |
+| ID                     | Permanent catalogue identifier       |
+| Title                  | Enterprise standard name             |
+| Status                 | Lifecycle state                      |
+| Current Version        | Current approved / candidate version |
+| Source Framework       | Proving framework citation           |
+| Source Product         | Product that proved the practice     |
+| Product Board Decision | Decision reference / evidence        |
+| Promotion Date         | Date status entered Active (UTC)     |
+| Owner                  | Governance owner                     |
+| Review Frequency       | Cadence for reaffirmation            |
+| Superseded By          | Successor ID/version when applicable |
+| Normative Home         | Path to enterprise standard body     |
 
 ---
 
-## 4. Recommended promotion sequence
+## 4. Enterprise standards register
 
-1. **ES-001** Testing Standard — lowest risk; product-independent; proven
-2. **ES-002** Certification Standard
-3. **ES-003** Engineering Specification Template
-4. **ES-004** Engineering Workflow
+### 4.1 Already enterprise (pre-ENG-002)
+
+| ID     | Title                      | Status             | Current Version   | Source Framework | Source Product | Product Board Decision | Promotion Date | Owner         | Review Frequency             | Superseded By | Normative Home                                   |
+| ------ | -------------------------- | ------------------ | ----------------- | ---------------- | -------------- | ---------------------- | -------------- | ------------- | ---------------------------- | ------------- | ------------------------------------------------ |
+| ES-000 | Engineering Slice Standard | Already Enterprise | Frozen (ADR-0092) | APZHUB-ENG-001   | APZHUB         | ADR-0092               | —              | Product Board | Major release / Owner change | —             | `docs/engineering/ENGINEERING-SLICE-STANDARD.md` |
+
+### 4.2 Promotion wave
+
+| ID     | Title                                         | Status           | Current Version | Source Framework                          | Source Product  | Product Board Decision                         | Promotion Date | Owner                                             | Review Frequency       | Superseded By | Normative Home                                                        |
+| ------ | --------------------------------------------- | ---------------- | --------------- | ----------------------------------------- | --------------- | ---------------------------------------------- | -------------- | ------------------------------------------------- | ---------------------- | ------------- | --------------------------------------------------------------------- |
+| ES-001 | Enterprise Testing Standard                   | **Under Review** | 1.0 (candidate) | APZQEP Engineering Framework v1.0         | APZQEP          | Phase 1 Proceed with ES-001; body CERT pending | —              | Product Board / Enterprise Engineering Governance | Annual / Major release | —             | `docs/engineering/APZHUB-TESTING-STANDARD.md`                         |
+| ES-002 | Enterprise Certification Standard             | **Proposed**     | —               | APZQEP Engineering Framework v1.0         | APZQEP          | —                                              | —              | Product Board / Enterprise Engineering Governance | Annual / Major release | —             | `docs/engineering/APZHUB-CERTIFICATION-STANDARD.md` (TBD)             |
+| ES-003 | Enterprise Engineering Specification Template | **Proposed**     | —               | APZQEP Engineering Framework v1.0         | APZQEP          | —                                              | —              | Product Board / Enterprise Engineering Governance | Annual / Major release | —             | `docs/engineering/APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md` (TBD) |
+| ES-004 | Enterprise Engineering Workflow               | **Proposed**     | —               | APZQEP / APZHUB-ENG-001 pack              | APZQEP / APZHUB | —                                              | —              | Product Board / Enterprise Engineering Governance | Annual / Major release | —             | Align `AI-ENGINEERING-WORKFLOW.md` + checklists (TBD)                 |
+| ES-005 | Enterprise Engineering Standards              | **Proposed**     | —               | APZQEP Engineering Framework v1.0 (SPLIT) | APZQEP          | —                                              | —              | Product Board / Enterprise Engineering Governance | Annual / Major release | —             | `docs/engineering/APZHUB-ENGINEERING-STANDARDS.md` (TBD)              |
+
+### 4.3 Deferred (not in current wave)
+
+| ID     | Title                                 | Status   | Current Version | Source Framework         | Source Product | Product Board Decision | Promotion Date | Owner         | Review Frequency       | Superseded By | Normative Home |
+| ------ | ------------------------------------- | -------- | --------------- | ------------------------ | -------------- | ---------------------- | -------------- | ------------- | ---------------------- | ------------- | -------------- |
+| ES-010 | Enterprise API Standard               | Deferred | —               | APZQEP (planned)         | APZQEP         | —                      | —              | Product Board | Annual / Major release | —             | TBD            |
+| ES-011 | Enterprise Database Standard          | Deferred | —               | APZQEP (planned)         | APZQEP         | —                      | —              | Product Board | Annual / Major release | —             | TBD            |
+| ES-012 | Enterprise Domain Event Standard      | Deferred | —               | APZQEP (planned)         | APZQEP         | —                      | —              | Product Board | Annual / Major release | —             | TBD            |
+| ES-013 | Enterprise Documentation Standard     | Deferred | —               | APZQEP (planned)         | APZQEP         | —                      | —              | Product Board | Annual / Major release | —             | TBD            |
+| ES-014 | Product Engineering Framework Pattern | Deferred | —               | APZQEP Framework concept | APZQEP         | —                      | —              | Product Board | Annual / Major release | —             | TBD            |
+
+---
+
+## 5. Recommended promotion sequence
+
+1. **ES-001** Enterprise Testing Standard — least product-coupled; proven
+2. **ES-002** Enterprise Certification Standard
+3. **ES-003** Enterprise Engineering Specification Template
+4. **ES-004** Enterprise Engineering Workflow
 5. **ES-005** Enterprise Engineering Standards (generic portion only)
 
 API / Database / Domain Event remain **Deferred** until Board revisits.
 
 ---
 
-## 5. Catalogue change rules
+## 6. Catalogue change rules
 
 1. Register a row **before** drafting the enterprise standard body.
 2. Status moves only with evidence (review pack, Board decision).
-3. On Active: record `Adopted` date, Board decision ID/timestamp, and normative path.
-4. Never delete historical rows; use Superseded / Retired.
+3. On Active: set Current Version, Promotion Date, Product Board Decision, and Normative Home.
+4. **Never delete rows**; use Superseded / Retired and fill Superseded By.
 5. Product-specific standards do **not** appear here unless proposed for enterprise adoption.
+6. Enterprise standards SHALL be derived by **abstraction**, never by duplication ([PROMOTION-PRINCIPLES.md](./APZHUB-ENG-002/PROMOTION-PRINCIPLES.md)).
 
 ---
 
-## 6. Provenance (source paths)
+## 7. Provenance (source paths)
 
 | ID     | Source artefact                                                                           |
 | ------ | ----------------------------------------------------------------------------------------- |
@@ -109,32 +134,16 @@ API / Database / Domain Event remain **Deferred** until Board revisits.
 | ES-004 | `docs/engineering/AI-ENGINEERING-WORKFLOW.md` · `ENGINEERING-CHECKLIST.md`                |
 | ES-005 | `docs/products/apzqep/engineering/APZQEP-ENGINEERING-STANDARDS.md` (generic extract only) |
 
-Reference baseline: APZQEP Engineering Framework v1.0.  
-Promotion Principle: [PROMOTION-PRINCIPLES.md](./APZHUB-ENG-002/PROMOTION-PRINCIPLES.md).
-
----
-
-## 7. Audit fields (to complete on promotion)
-
-When a standard becomes Active, append to §8 Promotion log:
-
-| Field                     | Required |
-| ------------------------- | -------- |
-| ID / Version              | YES      |
-| Adopted (UTC)             | YES      |
-| Board decision evidence   | YES      |
-| Proving product           | YES      |
-| Genericisation notes path | YES      |
-| Normative document path   | YES      |
-
 ---
 
 ## 8. Promotion log
 
-| When (UTC) | ID      | Event                                                       | Evidence                       |
-| ---------- | ------- | ----------------------------------------------------------- | ------------------------------ |
-| 2026-08-02 | —       | Catalogue established; ES-001…ES-005 registered as Proposed | APZHUB-ENG-002 Phase 1 opening |
-| —          | ES-001… | _(future promotions)_                                       | —                              |
+| When (UTC)       | ID     | Event                                                             | Evidence                                            |
+| ---------------- | ------ | ----------------------------------------------------------------- | --------------------------------------------------- |
+| 2026-08-02       | —      | Catalogue established; ES-001…ES-005 registered as Proposed       | Phase 1 opening                                     |
+| 20260802T112512Z | —      | Catalogue ACTIVE (establishment)                                  | `20260802T112512Z-APZHUB-ENG-002-PHASE1-CATALOGUE*` |
+| 20260802T113012Z | —      | Catalogue **CERTIFIED** (Product Board Phase 1 Opening)           | Board decision                                      |
+| 20260802T113012Z | ES-001 | Status → **Under Review**; candidate body authored by abstraction | `APZHUB-TESTING-STANDARD.md` · `ES-001-*`           |
 
 ---
 

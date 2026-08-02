@@ -1,0 +1,16 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "catalogueId": "ES-001",
+  "title": "Enterprise Testing Standard",
+  "status": "UNDER_REVIEW",
+  "version": "1.0-candidate",
+  "timestampUtc": "20260802T113012Z",
+  "derivation": "abstraction",
+  "referenceSource": "docs/products/apzqep/engineering/APZQEP-TESTING-STANDARD.md",
+  "normativePath": "docs/engineering/APZHUB-TESTING-STANDARD.md",
+  "genericisationNotes": "docs/engineering/APZHUB-ENG-002/ES-001-GENERICISATION-NOTES.md",
+  "promotionPack": "docs/engineering/APZHUB-ENG-002/ES-001-PROMOTION-PACK.md",
+  "engineering": "NONE",
+  "copyPastePromotion": "PROHIBITED",
+  "outstandingIssues": "NONE — awaiting Product Board Certification of ES-001 body"
+}

@@ -1,0 +1,12 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "phase": "1",
+  "title": "Enterprise Engineering Standards Catalogue",
+  "status": "CERTIFIED",
+  "timestampUtc": "20260802T113012Z",
+  "engineering": "NONE",
+  "cataloguePath": "docs/engineering/APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md",
+  "registerExtended": true,
+  "recommendation": "Proceed with ES-001",
+  "outstandingIssues": "NONE"
+}

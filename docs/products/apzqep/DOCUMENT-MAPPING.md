@@ -50,8 +50,9 @@
 | APZQEP Portfolio Status Snapshot                  | `docs/products/apzqep/engineering/APZQEP-PORTFOLIO-STATUS.md`                | **IN FORCE** (Board closure snapshot)                                 |
 | APZQEP Engineering Framework Changelog            | `docs/products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md` | **ACTIVE** — governance evolution record                              |
 | APZQEP → APZHUB Promotion Review                  | `docs/products/apzqep/engineering/APZQEP-ENG-001-PROMOTION-REVIEW.md`        | **CERTIFIED** — Standards SPLIT refinement                            |
-| APZHUB-ENG-002 Portfolio Engineering Standards    | `docs/engineering/APZHUB-ENG-002/`                                           | Phase 0 **CERTIFIED** · Catalogue ACTIVE · ES body promotions pending |
-| APZHUB Enterprise Engineering Standards Catalogue | `docs/engineering/APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md`                 | **ACTIVE** — inventory only; ES-001…ES-005 Proposed                   |
+| APZHUB-ENG-002 Portfolio Engineering Standards    | `docs/engineering/APZHUB-ENG-002/`                                           | Phase 0 **CERTIFIED** · Catalogue **CERTIFIED** · ES-001 Under Review |
+| APZHUB Enterprise Engineering Standards Catalogue | `docs/engineering/APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md`                 | **CERTIFIED** — governance register; ES-001 Under Review              |
+| APZHUB Enterprise Testing Standard (ES-001)       | `docs/engineering/APZHUB-TESTING-STANDARD.md`                                | **Under Review** — abstracted from APZQEP Testing Standard v1.0       |
 
 ## Indexes updated in this programme
 

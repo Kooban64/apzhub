@@ -203,7 +203,8 @@ Products inherit enterprise changes by citation update in their next authorised 
 3. No promotion without the Promotion Principle.
 4. No Phase 1+ standards **body** promotion under APZHUB-ENG-002 until this Charter is Product Board **CERTIFIED** _(satisfied — Phase 0 CERTIFIED)_.
 5. No enterprise standard body without a prior row in the [Enterprise Engineering Standards Catalogue](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md).
-6. Documentation-only programmes remain documentation-only unless Owner expands authority.
+6. Enterprise standards shall never be derived by duplication; they shall be derived by **abstraction** ([PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)).
+7. Documentation-only programmes remain documentation-only unless Owner expands authority.
 
 ---
 

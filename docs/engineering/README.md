@@ -20,20 +20,21 @@ Does **not** replace [APZHUB Engineering Standard](../governance/APZHUB-ENGINEER
 
 ---
 
-## Portfolio Engineering Standards (APZHUB-ENG-002) — **Phase 0 CERTIFIED · Catalogue ACTIVE**
+## Portfolio Engineering Standards (APZHUB-ENG-002) — **Catalogue CERTIFIED · ES-001 Under Review**
 
-Enterprise governance for promoting proven product engineering standards. APZQEP remains **reference implementation**.
+Enterprise governance for promoting proven product engineering standards by **abstraction**. APZQEP remains **reference implementation**.
 
-| Document                                                                                             | Purpose                                      |
-| ---------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)             | **Enterprise standards inventory** (no tech) |
-| [APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) | **Governing Charter** (**CERTIFIED**)        |
-| [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                               | Programme face                               |
-| [APZHUB-ENG-002/DOCUMENT-MAP.md](./APZHUB-ENG-002/DOCUMENT-MAP.md)                                   | Full pack index                              |
-| [APZHUB-ENG-002/PHASE-0-COMPLETION.md](./APZHUB-ENG-002/PHASE-0-COMPLETION.md)                       | Phase 0 completion                           |
-| [APZHUB-ENG-002/PHASE-1-CATALOGUE-OPENING.md](./APZHUB-ENG-002/PHASE-1-CATALOGUE-OPENING.md)         | Catalogue opening record                     |
+| Document                                                                                             | Purpose                                     |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)             | **Enterprise standards register** (no tech) |
+| [APZHUB-TESTING-STANDARD.md](./APZHUB-TESTING-STANDARD.md)                                           | **ES-001** candidate (Under Review)         |
+| [APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) | **Governing Charter** (**CERTIFIED**)       |
+| [APZHUB-ENG-002/PROMOTION-PRINCIPLES.md](./APZHUB-ENG-002/PROMOTION-PRINCIPLES.md)                   | Promotion + Abstraction Principle           |
+| [APZHUB-ENG-002/ES-001-PROMOTION-PACK.md](./APZHUB-ENG-002/ES-001-PROMOTION-PACK.md)                 | ES-001 Board pack                           |
+| [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                               | Programme face                              |
+| [APZHUB-ENG-002/DOCUMENT-MAP.md](./APZHUB-ENG-002/DOCUMENT-MAP.md)                                   | Full pack index                             |
 
-**Status:** Phase 0 **CERTIFIED**. Catalogue **ACTIVE** (ES-001…ES-005 Proposed). First body promotion (ES-001 Testing) awaits Owner instruction. APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
+**Status:** Phase 0 **CERTIFIED**. Catalogue **CERTIFIED**. ES-001 Under Review (abstraction authored). APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
 
 ---
 

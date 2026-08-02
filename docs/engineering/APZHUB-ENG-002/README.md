@@ -1,37 +1,45 @@
 # APZHUB-ENG-002 — Portfolio Engineering Standards
 
-| Field                    | Value                                                                     |
-| ------------------------ | ------------------------------------------------------------------------- |
-| Programme                | **APZHUB-ENG-002**                                                        |
-| Title                    | Portfolio Engineering Standards                                           |
-| Classification           | Enterprise Engineering Governance                                         |
-| Phase                    | **1 — Standards Catalogue (opening)**                                     |
-| Status                   | Phase 0 **CERTIFIED** · Catalogue **ACTIVE** · ES body promotions pending |
-| Predecessor              | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`)                                  |
-| Reference implementation | APZQEP Engineering Framework v1.0 (not automatic enterprise standard)     |
-| Engineering              | **NONE** (governance + inventory only to date)                            |
-| Next promotion           | **ES-001** Testing Standard (requires dedicated Owner instruction)        |
+| Field                    | Value                                                                      |
+| ------------------------ | -------------------------------------------------------------------------- |
+| Programme                | **APZHUB-ENG-002**                                                         |
+| Title                    | Portfolio Engineering Standards                                            |
+| Classification           | Enterprise Engineering Governance                                          |
+| Phase                    | **1 — ES-001 Under Review**                                                |
+| Status                   | Phase 0 **CERTIFIED** · Catalogue **CERTIFIED** · ES-001 body Under Review |
+| Predecessor              | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`)                                   |
+| Reference implementation | APZQEP Engineering Framework v1.0 (not automatic enterprise standard)      |
+| Engineering              | **NONE**                                                                   |
+| Next decision            | Product Board Certification of **ES-001** Enterprise Testing Standard      |
 
 ---
 
 ## Purpose
 
-Establish the **governance model** under which engineering standards may be promoted from products into the APZHUB enterprise baseline.
-
-Phase 0 defines governance. Phase 1+ registers and then promotes engineering standards. Those concerns remain separate.
+Establish the **governance model** under which engineering standards may be promoted from products into the APZHUB enterprise baseline — then author those standards by **abstraction**, not duplication.
 
 ---
 
 ## Authoritative inventory
 
-| Document                                                                                  | Role                               |
-| ----------------------------------------------------------------------------------------- | ---------------------------------- |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | **Enterprise standards inventory** |
-| [PHASE-1-CATALOGUE-OPENING.md](./PHASE-1-CATALOGUE-OPENING.md)                            | Phase 1 opening record             |
+| Document                                                                                  | Role                              |
+| ----------------------------------------------------------------------------------------- | --------------------------------- |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | **Enterprise standards register** |
+| [PHASE-1-CATALOGUE-OPENING.md](./PHASE-1-CATALOGUE-OPENING.md)                            | Catalogue opening (**CERTIFIED**) |
 
 ---
 
-## Phase 0 pack (CERTIFIED — read in this order)
+## ES-001 pack (Under Review)
+
+| Document                                                           | Role                        |
+| ------------------------------------------------------------------ | --------------------------- |
+| [APZHUB-TESTING-STANDARD.md](../APZHUB-TESTING-STANDARD.md)        | Candidate enterprise body   |
+| [ES-001-GENERICISATION-NOTES.md](./ES-001-GENERICISATION-NOTES.md) | Abstraction evidence        |
+| [ES-001-PROMOTION-PACK.md](./ES-001-PROMOTION-PACK.md)             | Product Board decision pack |
+
+---
+
+## Phase 0 pack (CERTIFIED)
 
 | #   | Document                                                               | Role                      |
 | --- | ---------------------------------------------------------------------- | ------------------------- |
@@ -49,19 +57,13 @@ Retained design inputs: [PROGRAMME-DESIGN.md](./PROGRAMME-DESIGN.md) · [PROMOTI
 
 ---
 
-## Authoritative baselines
-
-Immutable unless maintenance change control applies: APZHUB Foundation, Governance, Engineering Operating Standard, Engineering Slice Standard, APZQEP Release Governance, APZQEP Engineering Framework v1.0, **APZQEP-ENG-001 ARCHIVED**.
-
----
-
 ## Gate
 
 ```text
 Phase 0: CERTIFIED
-Standards Catalogue: ACTIVE
-ES-001…ES-005: Proposed (registered)
-First body promotion (ES-001 Testing): NOT STARTED — awaits Owner instruction
+Standards Catalogue: CERTIFIED
+ES-001: Under Review (abstraction authored)
+ES-001 Active: NOT YET — awaits Product Board Certification of the standard body
 ```
 
 ---
