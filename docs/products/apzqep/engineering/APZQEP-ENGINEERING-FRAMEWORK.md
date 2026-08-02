@@ -4,9 +4,9 @@
 | ------------------- | ---------------------------------------------------------------------------------------- |
 | Product             | **APZQEP Engineering Framework**                                                         |
 | Version             | **1.0**                                                                                  |
-| Status              | **BASELINED** · **MAINTENANCE**                                                          |
+| Status              | **BASELINED** · Maintenance **ACTIVE**                                                   |
 | Changelog           | [APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md](./APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md) |
-| Programme           | APZQEP-ENG-001 **COMPLETE**                                                              |
+| Programme           | APZQEP-ENG-001 **CLOSED**                                                                |
 | Classification      | Product Engineering Framework                                                            |
 | Baseline date (UTC) | 2026-08-02                                                                               |
 | Engineering         | NONE — documentation product                                                             |

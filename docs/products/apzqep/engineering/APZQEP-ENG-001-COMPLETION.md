@@ -1,106 +1,131 @@
 # APZQEP-ENG-001 — Completion Report
 
-| Field                          | Value                               |
-| ------------------------------ | ----------------------------------- |
-| Programme                      | APZQEP-ENG-001                      |
-| Title                          | Engineering Documentation Framework |
-| Product                        | APZQEP Engineering Framework v1.0   |
-| Status                         | **COMPLETE**                        |
-| Mode                           | **MAINTENANCE**                     |
-| Classification                 | Product Engineering Documentation   |
-| Engineering                    | NONE                                |
-| Package / Release / Deployment | NONE                                |
-| Handover                       | **COMPLETE** → APZHUB-ENG-002       |
+| Field                 | Value                                  |
+| --------------------- | -------------------------------------- |
+| Programme             | APZQEP-ENG-001                         |
+| Title                 | Engineering Documentation Framework    |
+| Classification        | Product Engineering Framework          |
+| Status                | **CLOSED**                             |
+| Engineering           | **COMPLETE** (documentation programme) |
+| Repository            | **CLEAN**                              |
+| Engineering Framework | **BASELINED** v1.0                     |
+| Promotion Review      | **CERTIFIED**                          |
+| Handover              | **COMPLETE**                           |
+| Maintenance State     | **ACTIVE**                             |
+| Successor Programme   | **APZHUB-ENG-002**                     |
+| Recommendation        | **CLOSED**                             |
 
 ---
 
-## Final Board record
+## Product Board Final Decision
 
 ```text
+Programme:
 APZQEP-ENG-001
 
+Title:
+Engineering Documentation Framework
+
 Status:
+CLOSED
+
+Classification:
+Product Engineering Framework
+
+Engineering:
 COMPLETE
+
+Repository:
+CLEAN
 
 Engineering Framework:
 BASELINED
 
+Framework Version:
+1.0
+
 Promotion Review:
-COMPLETE / CERTIFIED
+CERTIFIED
 
 Handover:
 COMPLETE
 
-Recommendation:
-Transition governance responsibility to APZHUB-ENG-002.
+Maintenance State:
+ACTIVE
 
-APZQEP engineering framework enters maintenance mode.
+Successor Programme:
+APZHUB-ENG-002
+
+Recommendation:
+CLOSED
 ```
 
 ---
 
 ## Delivered
 
-| Component                          | Status                        |
-| ---------------------------------- | ----------------------------- |
-| README                             | COMPLETE                      |
-| Engineering Constitution           | COMPLETE                      |
-| Engineering Framework v1.0         | BASELINED (`41741490`)        |
-| Engineering Handbook               | COMPLETE / Board CERTIFIED    |
-| Engineering Standards v1.0         | COMPLETE / Board CERTIFIED    |
-| Engineering Specification Template | COMPLETE / Board CERTIFIED    |
-| Testing Standard v1.0              | COMPLETE / Board CERTIFIED    |
-| Certification Standard v1.0        | COMPLETE / Board CERTIFIED    |
-| Framework Changelog                | ACTIVE                        |
-| Promotion Review                   | COMPLETE / Board CERTIFIED    |
-| APZHUB-ENG-002 design handoff      | COMPLETE (execution deferred) |
+| Component                          | Status    |
+| ---------------------------------- | --------- |
+| Engineering Constitution           | COMPLETE  |
+| Engineering Framework v1.0         | BASELINED |
+| Engineering Handbook               | COMPLETE  |
+| Engineering Standards              | COMPLETE  |
+| Engineering Specification Template | COMPLETE  |
+| Testing Standard                   | COMPLETE  |
+| Certification Standard             | COMPLETE  |
+| Framework Changelog                | ACTIVE    |
+| Promotion Review                   | CERTIFIED |
+| APZHUB Handover (ENG-002 design)   | COMPLETE  |
 
 ---
 
-## Explicitly not delivered (paused by design)
+## Explicitly out of programme (by design)
 
-| Item                   | Reason                                                 |
-| ---------------------- | ------------------------------------------------------ |
-| API Standard           | KEEP PRODUCT initially; write after ENG-002 sequencing |
-| Database Standard      | KEEP PRODUCT initially                                 |
-| Domain Event Standard  | KEEP PRODUCT initially                                 |
-| Documentation Standard | Deferred                                               |
-| Engineering Checklists | Deferred / merge with portfolio                        |
+API · Database · Domain Event · Documentation · Checklists specialised standards — deferred pending APZHUB-ENG-002.
 
 ---
 
-## Commits (programme spine)
+## Programme spine commits
 
-| Milestone                      | Commit                                     |
-| ------------------------------ | ------------------------------------------ |
-| Framework v1.0 baseline        | `41741490e9de0caa33cca9383281b25d8541a0c8` |
-| Testing Standard Phase 5       | `54cae6fa81d3caab57c527749f0062729adf4a8f` |
-| Certification Standard Phase 6 | `fc8a8d1d3d08aa72165011c3b92ef7f39aebb1cc` |
-
----
-
-## Maintenance mode rules
-
-1. Framework v1.0 core MUST NOT be casually rewritten.
-2. Normative core changes require Framework version bump + changelog.
-3. Specialised APZQEP standards MAY resume only after APZHUB-ENG-002 Owner decisions (or explicit Board exception).
-4. APZQEP remains the **reference implementation**; APZHUB owns enterprise governance via ENG-002+.
+| Milestone                  | Commit                                           |
+| -------------------------- | ------------------------------------------------ |
+| Framework v1.0 baseline    | `41741490e9de0caa33cca9383281b25d8541a0c8`       |
+| Testing Standard           | `54cae6fa81d3caab57c527749f0062729adf4a8f`       |
+| Certification Standard     | `fc8a8d1d3d08aa72165011c3b92ef7f39aebb1cc`       |
+| Programme close / handover | `41720188…` (prior) · this closure certification |
 
 ---
 
-## Strategic distinction (preserved)
+## Maintenance mode (ACTIVE)
 
-| Layer      | Owns                                                       |
-| ---------- | ---------------------------------------------------------- |
-| **APZHUB** | Enterprise engineering governance                          |
-| **APZQEP** | Exemplar product demonstrating those standards in practice |
-
----
-
-## Next programme
-
-[APZHUB-ENG-002 — Portfolio Engineering Standards](../../../engineering/APZHUB-ENG-002/README.md) — opening programme of the **next** governance session (not this one).
+1. Framework v1.0 is the citation baseline: `Conforms to APZQEP Engineering Framework v1.0`.
+2. Core documents are not casually rewritten; version bumps + changelog required for normative change.
+3. Specialised APZQEP standards resume only after APZHUB-ENG-002 Owner decisions (or Board exception).
+4. APZQEP remains the **reference implementation**; APZHUB owns enterprise methodology via ENG-002+.
 
 ---
 
-_End of APZQEP-ENG-001_
+## Strategic distinction
+
+| Layer      | Owns                                                             |
+| ---------- | ---------------------------------------------------------------- |
+| **APZHUB** | Enterprise engineering governance                                |
+| **APZQEP** | Exemplar product that consumes and demonstrates that methodology |
+
+---
+
+## Successor
+
+Next governance session opens:
+
+```text
+Programme: APZHUB-ENG-002
+Title: Portfolio Engineering Standards
+Status: OPEN (requires Owner Authorisation)
+```
+
+Design pack: [docs/engineering/APZHUB-ENG-002/](../../../engineering/APZHUB-ENG-002/README.md)
+
+---
+
+_APZQEP-ENG-001 — CLOSED_

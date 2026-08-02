@@ -1,23 +1,25 @@
 # Standing Programme Record — APZQEP
 
-| Field          | Value                                                                                                                                                                                                       |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Document       | Standing Programme Record                                                                                                                                                                                   |
-| Date           | 2026-08-01                                                                                                                                                                                                  |
-| Status         | **IN FORCE — OFFICIAL STANDING STATE**                                                                                                                                                                      |
-| Product state  | **APZQEP v1.0 — Lifecycle Complete · Maintained Product · LIMITED_AVAILABILITY**                                                                                                                            |
-| Test Execution | `@apzhub/qep-test-execution` **1.0.1**                                                                                                                                                                      |
-| Evidence Mgmt  | `@apzhub/qep-evidence` **1.0.0** · tag `apzqep-evidence-v1.0.0` → `79d9851f`                                                                                                                                |
-| REM-002        | **APPROVED AND CLOSED**                                                                                                                                                                                     |
-| REM-005        | **APPROVED AND CLOSED** — documentation-only post-release remediation                                                                                                                                       |
-| FREEZE-003     | **SUPERSEDED FOR RELEASE** (`ce220a5d` / **1.0.0-rc.1**)                                                                                                                                                    |
-| FREEZE-004     | **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** · RC **1.0.0-rc.2** @ `4e1b6f01` · **IMMUTABLE**                                                                                                         |
-| RELEASE-003    | **STOPPED / REPLACED BY RELEASE-004** — must not resume                                                                                                                                                     |
-| RELEASE-004    | [evidence-management/RELEASE-004/](./evidence-management/RELEASE-004/README.md) **CLOSED / COMPLETE** · **1.0.0** · `apzqep-evidence-v1.0.0` → `79d9851f`                                                   |
-| CLOSE-001      | **CLOSED** — [APZQEP-PROGRAMME-CLOSURE-REPORT.md](./APZQEP-PROGRAMME-CLOSURE-REPORT.md) · Archive [APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md](./APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md)                            |
-| APZQEP-110     | **APPROVED** — [v1.1 Product Planning](./v1.1/README.md)                                                                                                                                                    |
-| APZQEP-111     | **APPROVED** — [v1.1 Solution Architecture](./v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md)                                                                                                                       |
-| APZQEP-120     | **IN PROGRESS** — **S01 COMPLETE** · **S02 CERTIFIED** — [apzqep-120/](./v1.1/apzqep-120/README.md) · [S01](./v1.1/apzqep-120/S01-ENGINEERING-NOTES.md) · [S02](./v1.1/apzqep-120/S02-ENGINEERING-NOTES.md) |
+| Field          | Value                                                                                                                                                                                               |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document       | Standing Programme Record                                                                                                                                                                           |
+| Date           | 2026-08-02                                                                                                                                                                                          |
+| Status         | **IN FORCE — OFFICIAL STANDING STATE**                                                                                                                                                              |
+| APZQEP-ENG-001 | **CLOSED** — Engineering Framework v1.0 BASELINED · MAINTENANCE ACTIVE · [completion](./engineering/APZQEP-ENG-001-COMPLETION.md) · Successor **APZHUB-ENG-002** (designed; awaiting authorisation) |
+| Product state  | **APZQEP v1.0 — Lifecycle Complete · Maintained Product · LIMITED_AVAILABILITY**                                                                                                                    |
+| Test Execution | `@apzhub/qep-test-execution` **1.0.1**                                                                                                                                                              |
+| Evidence Mgmt  | `@apzhub/qep-evidence` **1.0.0** · tag `apzqep-evidence-v1.0.0` → `79d9851f`                                                                                                                        |
+| REM-002        | **APPROVED AND CLOSED**                                                                                                                                                                             |
+| REM-005        | **APPROVED AND CLOSED** — documentation-only post-release remediation                                                                                                                               |
+| FREEZE-003     | **SUPERSEDED FOR RELEASE** (`ce220a5d` / **1.0.0-rc.1**)                                                                                                                                            |
+| FREEZE-004     | **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** · RC **1.0.0-rc.2** @ `4e1b6f01` · **IMMUTABLE**                                                                                                 |
+| RELEASE-003    | **STOPPED / REPLACED BY RELEASE-004** — must not resume                                                                                                                                             |
+| RELEASE-004    | [evidence-management/RELEASE-004/](./evidence-management/RELEASE-004/README.md) **CLOSED / COMPLETE** · **1.0.0** · `apzqep-evidence-v1.0.0` → `79d9851f`                                           |
+| CLOSE-001      | **CLOSED** — [APZQEP-PROGRAMME-CLOSURE-REPORT.md](./APZQEP-PROGRAMME-CLOSURE-REPORT.md) · Archive [APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md](./APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md)                    |
+| APZQEP-110     | **APPROVED** — [v1.1 Product Planning](./v1.1/README.md)                                                                                                                                            |
+| APZQEP-111     | **APPROVED** — [v1.1 Solution Architecture](./v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md)                                                                                                               |
+| APZQEP-120     | **S01–S06 COMPLETE** — next **S07** requires Owner instruction — [apzqep-120/](./v1.1/apzqep-120/README.md)                                                                                         |
+| APZHUB-ENG-002 | **DESIGNED** — awaiting Owner authorisation — [docs/engineering/APZHUB-ENG-002/](../../engineering/APZHUB-ENG-002/README.md)                                                                        |
 
 ### Default premise
 
@@ -78,6 +80,11 @@ APZQEP-120
 ✅ APZQEP-120-S06 COMPLETE (Evidence Lifecycle & Governance Platform)
 Next slice: APZQEP-120-S07 QEP domain event catalogue & publish — requires Owner instruction
 TE EvidenceAccessPort wiring: **deferred** (do not pull forward)
+
+APZQEP-ENG-001
+✅ CLOSED
+Engineering Framework v1.0 BASELINED · MAINTENANCE ACTIVE
+Handover → APZHUB-ENG-002 (designed; awaiting authorisation)
 ```
 
 ---
@@ -108,5 +115,7 @@ APZQEP-120-S03 = COMPLETE (Evidence Storage Platform)
 APZQEP-120-S04 = COMPLETE (Evidence Integrity Platform)
 APZQEP-120-S05 = COMPLETE (Evidence Catalogue Platform)
 APZQEP-120-S06 = COMPLETE (Evidence Lifecycle & Governance Platform)
-NEXT = OWNER DIRECTIVE FOR APZQEP-120-S07 (domain event catalogue & publish)
+APZQEP-ENG-001 = CLOSED (Framework v1.0 BASELINED · MAINTENANCE)
+APZHUB-ENG-002 = DESIGNED (AWAITING AUTHORISATION)
+NEXT = OWNER DIRECTIVE FOR APZQEP-120-S07 OR OPEN APZHUB-ENG-002
 ```

@@ -1,13 +1,13 @@
 # APZQEP-ENG-001 — APZHUB Promotion Review
 
-| Field           | Value                                          |
-| --------------- | ---------------------------------------------- |
-| Programme       | APZQEP-ENG-001                                 |
-| Review          | APZHUB Promotion Review                        |
-| Status          | **CERTIFIED**                                  |
-| Date            | 2026-08-02                                     |
-| Phase 6         | Product Board CERTIFIED                        |
-| Programme close | APZQEP-ENG-001 **COMPLETE** → maintenance mode |
+| Field           | Value                                              |
+| --------------- | -------------------------------------------------- |
+| Programme       | APZQEP-ENG-001                                     |
+| Review          | APZHUB Promotion Review                            |
+| Status          | **CERTIFIED**                                      |
+| Date            | 2026-08-02                                         |
+| Phase 6         | Product Board CERTIFIED                            |
+| Programme close | APZQEP-ENG-001 **CLOSED** · Maintenance **ACTIVE** |
 
 ---
 

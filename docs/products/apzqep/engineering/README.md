@@ -1,14 +1,14 @@
 # APZQEP Engineering Documentation Framework
 
-| Field          | Value                                                                    |
-| -------------- | ------------------------------------------------------------------------ |
-| Programme      | APZQEP-ENG-001                                                           |
-| Title          | Engineering Documentation Framework                                      |
-| Product        | [APZQEP Engineering Framework v1.0](./APZQEP-ENGINEERING-FRAMEWORK.md)   |
-| Classification | Product Engineering Documentation                                        |
-| Path           | `docs/products/apzqep/engineering/`                                      |
-| Engineering    | **NONE** — documentation only                                            |
-| Status         | **APZQEP-ENG-001 COMPLETE** — Framework v1.0 BASELINED · **MAINTENANCE** |
+| Field          | Value                                                                         |
+| -------------- | ----------------------------------------------------------------------------- |
+| Programme      | APZQEP-ENG-001                                                                |
+| Title          | Engineering Documentation Framework                                           |
+| Product        | [APZQEP Engineering Framework v1.0](./APZQEP-ENGINEERING-FRAMEWORK.md)        |
+| Classification | Product Engineering Documentation                                             |
+| Path           | `docs/products/apzqep/engineering/`                                           |
+| Engineering    | **NONE** — documentation only                                                 |
+| Status         | **APZQEP-ENG-001 CLOSED** — Framework v1.0 BASELINED · Maintenance **ACTIVE** |
 
 ---
 

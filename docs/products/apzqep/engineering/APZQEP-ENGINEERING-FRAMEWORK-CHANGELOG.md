@@ -57,10 +57,17 @@ Do **not** list every documentation typo or evidence file. Prefer concise, dated
 ### 2026-08-02 — Promotion Review CERTIFIED · APZQEP-ENG-001 CLOSED
 
 - **Promotion Review:** CERTIFIED
-- **Programme:** APZQEP-ENG-001 → **COMPLETE** · Framework enters **MAINTENANCE**
+- **Programme:** APZQEP-ENG-001 → **CLOSED** · Framework maintenance **ACTIVE**
 - **Matrix refinement:** Engineering Standards **SPLIT** (APZHUB portfolio doc + APZQEP product doc) — not “partial”
 - **Handover:** governance responsibility transitions to APZHUB-ENG-002 (next session)
 - **Not started:** APZHUB-ENG-002 execution (deferred by Board)
+
+### 2026-08-02 — Product Board Final Decision · programme CLOSED
+
+- **Final decision:** APZQEP-ENG-001 **CLOSED**
+- **Framework:** v1.0 BASELINED · Maintenance ACTIVE
+- **Successor:** APZHUB-ENG-002 (Designed / Awaiting Authorisation)
+- **Portfolio snapshot:** [APZQEP-PORTFOLIO-STATUS.md](./APZQEP-PORTFOLIO-STATUS.md)
 
 ---
 

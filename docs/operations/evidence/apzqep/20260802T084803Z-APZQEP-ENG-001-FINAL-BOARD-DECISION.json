@@ -1,0 +1,31 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "title": "Engineering Documentation Framework",
+  "decision": "CLOSED",
+  "decisionAuthority": "Product Board",
+  "timestampUtc": "20260802T084803Z",
+  "classification": "Product Engineering Framework",
+  "engineering": "COMPLETE",
+  "repository": "CLEAN",
+  "engineeringFramework": "BASELINED",
+  "frameworkVersion": "1.0",
+  "promotionReview": "CERTIFIED",
+  "handover": "COMPLETE",
+  "maintenanceState": "ACTIVE",
+  "successorProgramme": "APZHUB-ENG-002",
+  "recommendation": "CLOSED",
+  "completionReport": "docs/products/apzqep/engineering/APZQEP-ENG-001-COMPLETION.md",
+  "portfolioSnapshot": "docs/products/apzqep/engineering/APZQEP-PORTFOLIO-STATUS.md",
+  "standingRecordUpdated": "docs/products/apzqep/STANDING-PROGRAMME-RECORD.md",
+  "nextSession": {
+    "programme": "APZHUB-ENG-002",
+    "title": "Portfolio Engineering Standards",
+    "status": "OPEN requires Owner Authorisation",
+    "purpose": "Promote proven engineering standards from APZQEP into the APZHUB enterprise engineering baseline"
+  },
+  "strategicInversion": {
+    "before": "APZQEP drove methodology because methodology did not exist",
+    "after": "APZHUB owns methodology; APZQEP consumes and demonstrates; future products inherit governance"
+  },
+  "outstandingIssues": "NONE"
+}

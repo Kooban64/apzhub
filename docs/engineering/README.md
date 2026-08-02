@@ -30,7 +30,7 @@ Promote proven APZQEP Engineering Framework assets into APZHUB portfolio standar
 | [APZHUB-ENG-002/PROMOTION-MATRIX.md](./APZHUB-ENG-002/PROMOTION-MATRIX.md) | Promote / keep / share / never-duplicate matrix |
 | [APZHUB-ENG-002/PROGRAMME-DESIGN.md](./APZHUB-ENG-002/PROGRAMME-DESIGN.md) | Phased execution design (Owner-gated)           |
 
-**Status:** Designed — promotion matrix **ACCEPTED**; execution deferred to the next governance session. APZQEP-ENG-001 is **COMPLETE** (Framework in maintenance).
+**Status:** Designed — promotion matrix **ACCEPTED**; awaiting Owner authorisation. APZQEP-ENG-001 is **CLOSED** (Framework maintenance ACTIVE).
 
 Reference source: [APZQEP Engineering Framework v1.0](../products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK.md).
 
