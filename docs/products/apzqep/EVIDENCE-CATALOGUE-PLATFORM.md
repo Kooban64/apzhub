@@ -67,14 +67,16 @@ Catalogue records reuse the existing Evidence aggregate and `EvidenceRepository`
 
 Derived catalogue states (separate from storage state):
 
-| Catalogue state   | Meaning                                        |
-| ----------------- | ---------------------------------------------- |
-| ACTIVE            | Normal logical record                          |
-| UNAVAILABLE       | Content missing (`content_missing`)            |
-| ARCHIVED          | Archived lifecycle                             |
-| RESTRICTED        | Quarantined                                    |
-| DELETED_LOGICALLY | Disposed (record retained; content may differ) |
-| SUPERSEDED        | Reserved for future lifecycle (S06+)           |
+| Catalogue state   | Meaning                                            |
+| ----------------- | -------------------------------------------------- |
+| ACTIVE            | Normal logical record                              |
+| UNAVAILABLE       | Content missing (`content_missing`)                |
+| ARCHIVED          | Archived lifecycle                                 |
+| RESTRICTED        | Quarantined                                        |
+| LOGICALLY_DELETED | Logical deletion; catalogue/history retained (S06) |
+| ARCHIVE_ELIGIBLE  | Logical archival readiness (S06)                   |
+| DISPOSAL_ELIGIBLE | Disposal eligibility without purge (S06)           |
+| SUPERSEDED        | Governed supersession (S06)                        |
 
 ## Relationships
 

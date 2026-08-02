@@ -10,7 +10,7 @@
 | 4   | S04       | Evidence Integrity Platform — **COMPLETE**                  |
 | 5   | S05       | Evidence Catalogue Platform (PG first durable adapter)      |
 | —   | **D-001** | Cloud content backends later — not required for S03/S04     |
-| 6   | S06       | Audit/retention                                             |
+| 6   | S06       | Evidence Lifecycle & Governance Platform                    |
 | 7   | S07       | Event catalogue/publish                                     |
 | 8   | S08       | Outbox drain                                                |
 | 9   | S09       | Retries/DLQ/fairness                                        |

@@ -1,0 +1,25 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S06",
+  "title": "Evidence Lifecycle & Governance Platform",
+  "status": "COMPLETE",
+  "timestampUtc": "20260802T071642Z",
+  "baselineCommit": "456844153ccf90dadb3c26eef7d3d7999213d42d",
+  "process": "APZHUB-ENG-001 / ADR-0092 / ADR-0093 / ADR-0094",
+  "outstandingIssues": "NONE",
+  "deferred": [
+    "S07 domain event catalogue & publish",
+    "Retention period defaults (D-002)",
+    "Legal-hold productisation",
+    "Physical archive / cold storage",
+    "Hard delete / purge",
+    "TE EvidenceAccessPort wiring",
+    "Live PG upgrade soak (DATABASE_URL unset)",
+    "Package promotion / release / deployment"
+  ],
+  "nextAuthorisedSlice": "APZQEP-120-S07",
+  "implementationAuthorityConsumed": "APZQEP-120-S06 only",
+  "engineeringCommit": "2a9dd1a59407339026219673bb48f164feb9628a",
+  "documentationCommit": "PENDING",
+  "evidenceCommit": "PENDING"
+}

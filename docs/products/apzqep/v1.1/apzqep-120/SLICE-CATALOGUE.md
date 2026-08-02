@@ -350,18 +350,19 @@ See Owner S05 instruction §36 — certification evidence under `docs/operations
 
 ---
 
-# APZQEP-120-S06 — Evidence audit durability & retention hooks
+# APZQEP-120-S06 — Evidence Lifecycle & Governance Platform
 
 ### Identification
 
-| Field            | Value                                         |
-| ---------------- | --------------------------------------------- |
-| ID               | APZQEP-120-S06                                |
-| Title            | Evidence audit durability and retention hooks |
-| Workstream       | A/J                                           |
-| Priority         | P0                                            |
-| Sequence         | 6                                             |
-| Release boundary | R2                                            |
+| Field            | Value                                       |
+| ---------------- | ------------------------------------------- |
+| ID               | APZQEP-120-S06                              |
+| Title            | Evidence Lifecycle & Governance Platform    |
+| Status           | **COMPLETE** (Owner instruction 2026-08-02) |
+| Workstream       | A/J                                         |
+| Priority         | P0                                          |
+| Sequence         | 6                                           |
+| Release boundary | R2                                          |
 
 ### Objective
 

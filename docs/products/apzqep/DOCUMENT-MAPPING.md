@@ -43,6 +43,8 @@
 | Standing record                           | `docs/products/apzqep/STANDING-PROGRAMME-RECORD.md`                      | **IN FORCE**                                                        |
 | Evidence Catalogue Platform (S05)         | `docs/products/apzqep/EVIDENCE-CATALOGUE-PLATFORM.md`                    | **IMPLEMENTED** (LA)                                                |
 | S05 engineering notes                     | `docs/products/apzqep/v1.1/apzqep-120/S05-ENGINEERING-NOTES.md`          | **COMPLETE**                                                        |
+| Evidence Lifecycle & Governance (S06)     | `docs/products/apzqep/EVIDENCE-LIFECYCLE-GOVERNANCE.md`                  | **IMPLEMENTED** (LA)                                                |
+| S06 engineering notes                     | `docs/products/apzqep/v1.1/apzqep-120/S06-ENGINEERING-NOTES.md`          | **COMPLETE**                                                        |
 
 ## Indexes updated in this programme
 

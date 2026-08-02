@@ -1,0 +1,23 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S06",
+  "title": "Evidence Lifecycle & Governance Platform — Testing Evidence",
+  "timestampUtc": "20260802T071642Z",
+  "result": "PASS",
+  "totals": {
+    "packages/qep-evidence": "120 passed / 0 failed",
+    "packages/platform-services qep-platform-services.test.ts": "24 passed / 0 failed"
+  },
+  "suites": [
+    "evidence-lifecycle-platform.test.ts",
+    "catalogue-state.test.ts",
+    "migration.validation.test.ts (0091/0092)",
+    "S01–S05 regression suites"
+  ],
+  "performanceObservations": [
+    "Lifecycle state lookup does not load evidence bytes",
+    "History listing is paginated",
+    "Normal evidence list does not load full lifecycle history",
+    "No enterprise SLO claimed"
+  ]
+}

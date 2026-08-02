@@ -1,0 +1,16 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S06",
+  "title": "Evidence Lifecycle & Governance Platform — Migration Evidence",
+  "timestampUtc": "20260802T071642Z",
+  "result": "PASS",
+  "strategy": "Additive column + history table + RLS; no id/content/digest rewrite",
+  "files": [
+    "packages/config/drizzle/0091_apz_qep_evidence_lifecycle.sql",
+    "packages/config/drizzle/0092_apz_qep_evidence_lifecycle_rls.sql",
+    "packages/config/drizzle/meta/_journal.json"
+  ],
+  "defaults": "Empty lifecycle_governance_json → derive ACTIVE / NOT_CONFIGURED / NOT_HELD",
+  "validation": "migration.validation.test.ts covers additive SQL and RLS",
+  "liveUpgradeTest": "SKIPPED — DATABASE_URL unset"
+}

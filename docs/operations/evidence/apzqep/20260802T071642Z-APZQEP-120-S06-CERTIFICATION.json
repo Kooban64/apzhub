@@ -1,0 +1,14 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S06",
+  "title": "Evidence Lifecycle & Governance Platform — Slice Certification",
+  "timestampUtc": "20260802T071642Z",
+  "classification": "Slice certification (APZHUB-ENG-001)",
+  "result": "PASS",
+  "package": "@apzhub/qep-evidence 1.0.0 — unchanged",
+  "releaseTag": "apzqep-evidence-v1.0.0 — unchanged",
+  "deployment": "NONE",
+  "recommendation": "Ready for APZQEP-120-S07",
+  "engineeringCommit": "2a9dd1a59407339026219673bb48f164feb9628a",
+  "documentationCommit": "PENDING"
+}

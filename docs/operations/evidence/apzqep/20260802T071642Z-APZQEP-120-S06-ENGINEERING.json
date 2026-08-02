@@ -1,0 +1,31 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S06",
+  "title": "Evidence Lifecycle & Governance Platform — Engineering Evidence",
+  "timestampUtc": "20260802T071642Z",
+  "baselineCommit": "456844153ccf90dadb3c26eef7d3d7999213d42d",
+  "result": "COMPLETE",
+  "architecture": {
+    "rule": "Lifecycle Service owns transition policy; Catalogue owns authoritative lifecycle state; Permission Engine owns authority; Integrity/Storage unchanged",
+    "path": "EvidenceLifecyclePlatformService → ACL → applyLifecycleGovernanceTransition → EvidenceRepository + LifecycleHistoryRepository"
+  },
+  "states": [
+    "ACTIVE",
+    "RESTRICTED",
+    "ARCHIVE_ELIGIBLE",
+    "ARCHIVED",
+    "SUPERSEDED",
+    "DISPOSAL_ELIGIBLE",
+    "LOGICALLY_DELETED",
+    "UNAVAILABLE"
+  ],
+  "behaviourChange": "disposeEvidence no longer hard-deletes storage bytes (logical deletion only)",
+  "migrations": [
+    "0091_apz_qep_evidence_lifecycle.sql",
+    "0092_apz_qep_evidence_lifecycle_rls.sql"
+  ],
+  "packageImpact": "@apzhub/qep-evidence 1.0.0 unchanged (no promotion)",
+  "releaseImpact": "apzqep-evidence-v1.0.0 unchanged",
+  "deploymentImpact": "NONE",
+  "engineeringCommit": "2a9dd1a59407339026219673bb48f164feb9628a"
+}

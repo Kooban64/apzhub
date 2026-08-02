@@ -1,0 +1,19 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S06",
+  "title": "Evidence Lifecycle & Governance Platform — Security Evidence",
+  "timestampUtc": "20260802T071642Z",
+  "result": "PASS",
+  "controls": [
+    "Default deny via SecurityGate on getEvidence/getAudit for lifecycle APIs",
+    "Transition matrix permission checks",
+    "Hold blocks disposal eligibility and logical deletion",
+    "Stale revision rejected",
+    "Supersession loop / cross-project denial",
+    "No arbitrary lifecycle state patching",
+    "History retrieval requires audit permission",
+    "FORCE RLS on lifecycle history table",
+    "No content/secrets in lifecycle history payloads"
+  ],
+  "defaultDeny": true
+}
