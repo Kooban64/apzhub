@@ -1,0 +1,22 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "title": "Portfolio Engineering Standards",
+  "status": "DESIGNED",
+  "timestampUtc": "20260802T081031Z",
+  "executionAuthorised": false,
+  "path": "docs/engineering/APZHUB-ENG-002/",
+  "deliverables": ["README.md", "PROMOTION-MATRIX.md", "PROGRAMME-DESIGN.md"],
+  "proposedPhases": [
+    "0 Authorisation",
+    "1 Portfolio Testing Standard",
+    "2 Portfolio Certification Standard",
+    "3 Portfolio Engineering Specification Template",
+    "4 Workflow and checklists alignment",
+    "5 Partial Engineering Standards promotion",
+    "6 Framework pattern (optional)",
+    "7 Closure"
+  ],
+  "sourceReference": "APZQEP Engineering Framework v1.0",
+  "engineering": "NONE",
+  "nextOwnerDecision": "DESIGN ACCEPTED / REVISED / DEFERRED; authorise Phase 0/1 or NONE"
+}

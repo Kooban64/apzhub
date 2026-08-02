@@ -47,18 +47,32 @@ Do **not** list every documentation typo or evidence file. Prefer concise, dated
 - **Commit:** `fc8a8d1d3d08aa72165011c3b92ef7f39aebb1cc`
 - **Impact:** Framework core unchanged; PASS / FAIL / STOP, gates, evidence, Board vs engineering vs release certification
 
+### 2026-08-02 — Phase 6 CERTIFIED · specialised expansion paused
+
+- **Product Board:** Phase 6 CERTIFIED
+- **Decision:** Pause APZQEP specialised standard authoring
+- **Review:** [APZQEP-ENG-001-PROMOTION-REVIEW.md](./APZQEP-ENG-001-PROMOTION-REVIEW.md)
+- **Handoff:** [APZHUB-ENG-002 Portfolio Engineering Standards](../../../engineering/APZHUB-ENG-002/README.md) designed
+
+### 2026-08-02 — Promotion Review CERTIFIED · APZQEP-ENG-001 CLOSED
+
+- **Promotion Review:** CERTIFIED
+- **Programme:** APZQEP-ENG-001 → **COMPLETE** · Framework enters **MAINTENANCE**
+- **Matrix refinement:** Engineering Standards **SPLIT** (APZHUB portfolio doc + APZQEP product doc) — not “partial”
+- **Handover:** governance responsibility transitions to APZHUB-ENG-002 (next session)
+- **Not started:** APZHUB-ENG-002 execution (deferred by Board)
+
 ---
 
-## Planned (not yet recorded as complete)
+## Planned (paused pending APZHUB-ENG-002)
 
-| Item                    | Intent                                                  |
-| ----------------------- | ------------------------------------------------------- |
-| API Standard            | Extension                                               |
-| Domain Event Standard   | Extension                                               |
-| Database Standard       | Extension                                               |
-| Documentation Standard  | Extension                                               |
-| Engineering Checklists  | Extension                                               |
-| APZHUB promotion review | After Testing + Certification — assess enterprise reuse |
+| Item                   | Intent                                     | Status     |
+| ---------------------- | ------------------------------------------ | ---------- |
+| API Standard           | Product extension (initially KEEP PRODUCT) | **PAUSED** |
+| Domain Event Standard  | Product extension (initially KEEP PRODUCT) | **PAUSED** |
+| Database Standard      | Product extension (initially KEEP PRODUCT) | **PAUSED** |
+| Documentation Standard | Likely later portfolio promote             | **PAUSED** |
+| Engineering Checklists | Merge with portfolio checklists            | **PAUSED** |
 
 ---
 

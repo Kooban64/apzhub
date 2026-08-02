@@ -1,0 +1,36 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "title": "APZHUB Promotion Review",
+  "status": "COMPLETE",
+  "timestampUtc": "20260802T081031Z",
+  "engineering": "NONE",
+  "apzqepSpecialisedExpansion": "PAUSED",
+  "handoffProgramme": "APZHUB-ENG-002",
+  "handoffPath": "docs/engineering/APZHUB-ENG-002/",
+  "handoffStatus": "DESIGNED — awaiting Owner execution authority",
+  "artefacts": [
+    "docs/products/apzqep/engineering/APZQEP-ENG-001-PROMOTION-REVIEW.md",
+    "docs/engineering/APZHUB-ENG-002/README.md",
+    "docs/engineering/APZHUB-ENG-002/PROMOTION-MATRIX.md",
+    "docs/engineering/APZHUB-ENG-002/PROGRAMME-DESIGN.md"
+  ],
+  "promote": [
+    "Testing Standard",
+    "Certification Standard",
+    "Engineering Specification Template",
+    "Engineering Workflow (align)",
+    "Engineering Standards (partial)",
+    "Framework concept"
+  ],
+  "keepProduct": [
+    "Engineering Constitution",
+    "Engineering Handbook",
+    "Domain Event Standard (planned)",
+    "API Standard (planned)",
+    "Database Standard (planned)"
+  ],
+  "alreadyApzhHub": ["Engineering Slice Standard (APZHUB-ENG-001)"],
+  "doNotStart": "APZQEP API Standard until ENG-002 strategy accepted",
+  "outstandingIssues": "NONE for review design",
+  "recommendation": "Owner session to accept APZHUB-ENG-002 design; keep APZQEP specialised standards paused"
+}

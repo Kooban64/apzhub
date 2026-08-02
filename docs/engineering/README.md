@@ -20,6 +20,22 @@ Does **not** replace [APZHUB Engineering Standard](../governance/APZHUB-ENGINEER
 
 ---
 
+## Portfolio Engineering Standards (APZHUB-ENG-002) — **DESIGNED**
+
+Promote proven APZQEP Engineering Framework assets into APZHUB portfolio standards. APZQEP remains reference implementation.
+
+| Document                                                                   | Purpose                                         |
+| -------------------------------------------------------------------------- | ----------------------------------------------- |
+| [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                     | Programme face                                  |
+| [APZHUB-ENG-002/PROMOTION-MATRIX.md](./APZHUB-ENG-002/PROMOTION-MATRIX.md) | Promote / keep / share / never-duplicate matrix |
+| [APZHUB-ENG-002/PROGRAMME-DESIGN.md](./APZHUB-ENG-002/PROGRAMME-DESIGN.md) | Phased execution design (Owner-gated)           |
+
+**Status:** Designed — promotion matrix **ACCEPTED**; execution deferred to the next governance session. APZQEP-ENG-001 is **COMPLETE** (Framework in maintenance).
+
+Reference source: [APZQEP Engineering Framework v1.0](../products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK.md).
+
+---
+
 ## Other packs
 
 | Pack                                                            | Purpose                                                                                                                                | Status                           |

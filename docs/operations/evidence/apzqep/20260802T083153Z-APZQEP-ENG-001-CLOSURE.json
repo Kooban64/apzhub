@@ -1,0 +1,16 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "title": "Engineering Documentation Framework",
+  "status": "COMPLETE",
+  "timestampUtc": "20260802T083153Z",
+  "engineeringFramework": "v1.0 BASELINED · MAINTENANCE",
+  "promotionReview": "CERTIFIED",
+  "handover": "COMPLETE",
+  "recommendation": "Transition governance responsibility to APZHUB-ENG-002. APZQEP engineering framework enters maintenance mode.",
+  "baselineCommit": "41741490e9de0caa33cca9383281b25d8541a0c8",
+  "phase5Commit": "54cae6fa81d3caab57c527749f0062729adf4a8f",
+  "phase6Commit": "fc8a8d1d3d08aa72165011c3b92ef7f39aebb1cc",
+  "completionReport": "docs/products/apzqep/engineering/APZQEP-ENG-001-COMPLETION.md",
+  "outstandingIssues": "NONE",
+  "nextProgramme": "APZHUB-ENG-002 (next governance session)"
+}

@@ -1,14 +1,14 @@
 # APZQEP Engineering Documentation Framework
 
-| Field          | Value                                                                  |
-| -------------- | ---------------------------------------------------------------------- |
-| Programme      | APZQEP-ENG-001                                                         |
-| Title          | Engineering Documentation Framework                                    |
-| Product        | [APZQEP Engineering Framework v1.0](./APZQEP-ENGINEERING-FRAMEWORK.md) |
-| Classification | Product Engineering Documentation                                      |
-| Path           | `docs/products/apzqep/engineering/`                                    |
-| Engineering    | **NONE** — documentation only                                          |
-| Status         | **Framework v1.0 BASELINED** — specialised standards continue          |
+| Field          | Value                                                                    |
+| -------------- | ------------------------------------------------------------------------ |
+| Programme      | APZQEP-ENG-001                                                           |
+| Title          | Engineering Documentation Framework                                      |
+| Product        | [APZQEP Engineering Framework v1.0](./APZQEP-ENGINEERING-FRAMEWORK.md)   |
+| Classification | Product Engineering Documentation                                        |
+| Path           | `docs/products/apzqep/engineering/`                                      |
+| Engineering    | **NONE** — documentation only                                            |
+| Status         | **APZQEP-ENG-001 COMPLETE** — Framework v1.0 BASELINED · **MAINTENANCE** |
 
 ---
 
@@ -65,7 +65,8 @@ Conforms to APZQEP Engineering Framework v1.0
 | [APZQEP-DATABASE-STANDARD.md](./APZQEP-DATABASE-STANDARD.md)                             | Schema, migration, repository rules            | SKELETON                                     |
 | [APZQEP-DOCUMENTATION-STANDARD.md](./APZQEP-DOCUMENTATION-STANDARD.md)                   | Doc structure and lifecycle                    | SKELETON                                     |
 | [APZQEP-CHECKLISTS.md](./APZQEP-CHECKLISTS.md)                                           | Reusable review checklists                     | SKELETON                                     |
-| [APZQEP-ENG-001-COMPLETION.md](./APZQEP-ENG-001-COMPLETION.md)                           | Programme completion report                    | DRAFT                                        |
+| [APZQEP-ENG-001-PROMOTION-REVIEW.md](./APZQEP-ENG-001-PROMOTION-REVIEW.md)               | APZHUB promotion review / pause handoff        | **COMPLETE**                                 |
+| [APZQEP-ENG-001-COMPLETION.md](./APZQEP-ENG-001-COMPLETION.md)                           | Programme completion report                    | DRAFT (paused)                               |
 
 Specialised standards are **extensions** to Framework v1.0. They do not reopen the baseline unless Product Board versions the Framework.
 
@@ -159,17 +160,16 @@ On conflict:
 5. Engineering Specification Template — COMPLETE / Board CERTIFIED (Phase 4)
 6. **Engineering Framework v1.0 BASELINED** (commit `41741490`)
 7. Testing Standard — **COMPLETE** / Product Board **CERTIFIED** (Phase 5)
-8. Certification Standard — **COMPLETE** v1.0 Normative (Phase 6)
+8. Certification Standard — **COMPLETE** / Product Board **CERTIFIED** (Phase 6)
 9. Framework Changelog — established
-10. API Standard — next
-11. Domain Event Standard
-12. Database Standard
-13. Documentation Standard
-14. Engineering Checklists
-15. Completion Report (final)
-16. **APZHUB promotion review** (after Testing + Certification — Product Board session)
+10. **APZHUB Promotion Review** — **COMPLETE** (design handoff) → [APZQEP-ENG-001-PROMOTION-REVIEW.md](./APZQEP-ENG-001-PROMOTION-REVIEW.md)
+11. **APZHUB-ENG-002** designed — [docs/engineering/APZHUB-ENG-002/](../../../engineering/APZHUB-ENG-002/README.md) — awaiting Owner execution authority
+12. API / Domain Event / Database / Documentation / Checklists — **PAUSED** until ENG-002 decisions
+13. Completion Report (final) — after resume or programme close
 
 Until a specialised document’s status is **COMPLETE**, treat it as non-authoritative skeleton. Normative documents state `Status: Normative` in their header.
+
+**Pause rule:** Do not author APZQEP API Standard (or other paused specialised standards) until Product Board accepts the APZHUB-ENG-002 promotion strategy.
 
 ---
 

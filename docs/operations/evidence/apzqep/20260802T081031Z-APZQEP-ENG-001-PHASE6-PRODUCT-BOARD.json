@@ -1,0 +1,17 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "phase": "6",
+  "title": "Certification Standard",
+  "decision": "CERTIFIED",
+  "decisionAuthority": "Product Board",
+  "timestampUtc": "20260802T081031Z",
+  "certificationStandard": "APPROVED",
+  "engineeringFramework": "v1.0",
+  "repository": "CLEAN",
+  "recommendation": "Pause engineering framework expansion; Conduct APZHUB Promotion Review",
+  "qualityTriad": [
+    "Engineering Standards",
+    "Testing Standard",
+    "Certification Standard"
+  ]
+}

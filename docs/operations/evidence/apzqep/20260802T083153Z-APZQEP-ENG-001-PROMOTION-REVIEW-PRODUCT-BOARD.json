@@ -1,0 +1,27 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "title": "APZHUB Promotion Review",
+  "decision": "CERTIFIED",
+  "decisionAuthority": "Product Board",
+  "timestampUtc": "20260802T083153Z",
+  "programmeStatus": "COMPLETE",
+  "frameworkStatus": "BASELINED · MAINTENANCE",
+  "handover": "COMPLETE → APZHUB-ENG-002",
+  "refinement": {
+    "rejected": "Engineering Standards (partial)",
+    "accepted": "SPLIT into APZHUB Engineering Standards + APZQEP Engineering Standards"
+  },
+  "apzhHubEng002": {
+    "status": "DESIGNED",
+    "matrix": "ACCEPTED",
+    "execution": "DEFERRED to next governance session"
+  },
+  "doNot": [
+    "Start APZQEP API Standard",
+    "Start APZHUB-ENG-002 execution in this session"
+  ],
+  "strategicDistinction": {
+    "APZHUB": "Enterprise engineering governance",
+    "APZQEP": "Exemplar / reference implementation"
+  }
+}
