@@ -1,0 +1,63 @@
+manifestSchemaVersion: "1.0"
+id: qep-execution-workspace
+name: Execution Workspace
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Enterprise Test Execution Workspace — APZQEP Capability C (APZQEP-140-C). User-facing execution from Cap B handoffs. Immutable completed results. Consumes Evidence Platform by reference. Does not redesign planning or Processing Engine."
+  product: apzqep
+  moduleCatalogueId: M-EWS
+  slug: execution-workspace
+  programme: APZQEP-140-C
+  capability: C
+  stakeholderName: Enterprise Test Execution Workspace
+
+dependencies:
+  platform: []
+  packages:
+    - "@apzhub/qep-execution-workspace"
+    - "@apzhub/qep-execution-plans"
+    - "@apzhub/qep-knowledge-index"
+    - "@apzhub/qep-notification"
+    - "@apzhub/qep-command"
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: workbench-implemented
+
+permissions:
+  - id: qep.execution_workspace.read
+    label: View Execution Workspace
+  - id: qep.execution_workspace.create
+    label: Create Execution Sessions
+  - id: qep.execution_workspace.execute
+    label: Record Execution Results
+  - id: qep.execution_workspace.lifecycle
+    label: Manage Execution Session Lifecycle
+  - id: qep.execution_workspace.amend
+    label: Amend Completed Results
+  - id: qep.execution_workspace.admin
+    label: Administer Execution Workspace
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Execution Workspace
+    icon: play
+    route: /workspace/qep/execution-workspace
+    order: 30
+    permission: qep.execution_workspace.read
+  view:
+    title: Execution Workspace
+    workspace: qep
+    route: /workspace/qep/execution-workspace
+    permission: qep.execution_workspace.read
+
+api:
+  basePath: /api/v1/qep/execution-sessions

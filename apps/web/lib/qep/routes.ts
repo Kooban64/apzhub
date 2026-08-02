@@ -104,6 +104,13 @@ export {
 } from "@apzhub/qep-execution-plans/presentation";
 
 export {
+  QEP_EXECUTION_WORKSPACE_BASE_PATH,
+  QEP_EXECUTION_WORKSPACE_ROUTES,
+  isQepExecutionWorkspaceRoute,
+  parseQepExecutionSessionRouteId,
+} from "@apzhub/qep-execution-workspace/presentation";
+
+export {
   QEP_EVIDENCE_BASE_PATH,
   QEP_EVIDENCE_ROUTES,
   isQepEvidenceRoute,

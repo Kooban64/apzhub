@@ -329,6 +329,9 @@ importers:
       '@apzhub/qep-execution-plans':
         specifier: workspace:*
         version: link:../../packages/qep-execution-plans
+      '@apzhub/qep-execution-workspace':
+        specifier: workspace:*
+        version: link:../../packages/qep-execution-workspace
       '@apzhub/qep-requirements':
         specifier: workspace:*
         version: link:../../packages/qep-requirements
@@ -1183,6 +1186,27 @@ importers:
       '@apzhub/qep-command':
         specifier: workspace:*
         version: link:../qep-command
+      '@apzhub/qep-knowledge-index':
+        specifier: workspace:*
+        version: link:../qep-knowledge-index
+      '@apzhub/qep-notification':
+        specifier: workspace:*
+        version: link:../qep-notification
+      '@apzhub/qep-suites':
+        specifier: workspace:*
+        version: link:../qep-suites
+
+  packages/qep-execution-workspace:
+    dependencies:
+      '@apzhub/platform-processing':
+        specifier: workspace:*
+        version: link:../platform-processing
+      '@apzhub/qep-command':
+        specifier: workspace:*
+        version: link:../qep-command
+      '@apzhub/qep-execution-plans':
+        specifier: workspace:*
+        version: link:../qep-execution-plans
       '@apzhub/qep-knowledge-index':
         specifier: workspace:*
         version: link:../qep-knowledge-index

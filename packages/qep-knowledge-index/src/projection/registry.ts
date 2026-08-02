@@ -87,3 +87,25 @@ export const EXECUTION_PLAN_PROJECTION_DEFINITION: ProjectionDefinition = {
     "qep.execution-plan.archived",
   ],
 };
+
+export const EXECUTION_SESSION_PROJECTION_DEFINITION: ProjectionDefinition = {
+  projectionId: "qep.knowledge.execution.v1",
+  entityKind: "execution",
+  version: QEP_KNOWLEDGE_INDEX_PROJECTION_VERSION,
+  description:
+    "Enterprise Test Execution Workspace Knowledge Index projection (APZQEP-140-C)",
+  eventTypes: [
+    "qep.execution.created",
+    "qep.execution.started",
+    "qep.execution.paused",
+    "qep.execution.resumed",
+    "qep.execution.blocked",
+    "qep.execution.completed",
+    "qep.execution.cancelled",
+    "qep.execution.result_recorded",
+    "qep.execution.evidence_attached",
+    "qep.execution.progress_updated",
+    "qep.execution.archived",
+    "qep.execution.amended",
+  ],
+};

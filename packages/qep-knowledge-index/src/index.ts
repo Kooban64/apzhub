@@ -22,12 +22,14 @@ export {
   EVIDENCE_PROJECTION_DEFINITION,
   SUITE_PROJECTION_DEFINITION,
   EXECUTION_PLAN_PROJECTION_DEFINITION,
+  EXECUTION_SESSION_PROJECTION_DEFINITION,
   type ProjectionRegistry,
 } from "./projection/registry";
 
 export { buildEvidenceProjection } from "./projection/evidence-builder";
 export { buildSuiteProjection } from "./projection/suite-builder";
 export { buildExecutionPlanProjection } from "./projection/execution-plan-builder";
+export { buildExecutionProjection } from "./projection/execution-builder";
 
 export {
   createProjectionEngine,

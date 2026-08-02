@@ -1,13 +1,11 @@
 # Capability Progress — APZQEP-140
 
-| Field     | Value                                                 |
-| --------- | ----------------------------------------------------- |
-| Programme | APZQEP-140                                            |
-| Status    | **IN FORCE** — primary progress surface               |
-| Timestamp | 20260802T171000Z                                      |
-| Authority | Product Board (post Cap A CERTIFIED · Cap B COMPLETE) |
-
-> Progress measured by **capability completion**, not infrastructure slice IDs.
+| Field     | Value                                   |
+| --------- | --------------------------------------- |
+| Programme | APZQEP-140                              |
+| Status    | **IN FORCE** — primary progress surface |
+| Timestamp | 20260802T174000Z                        |
+| Authority | Product Board (Caps A–C COMPLETE)       |
 
 ---
 
@@ -28,9 +26,9 @@ Enterprise Test Execution Planning
 
 Capability C
 
-Enterprise Test Execution
+Enterprise Test Execution Workspace
 
-□□□□□□□□□□ 0%
+██████████ 100%
 
 Capability D
 
@@ -55,15 +53,15 @@ Enterprise Reporting & Analytics
 | ---------- | -------------------------------------- | ------------ | ---------: |
 | **A**      | Enterprise Test Suite Management       | APZQEP-140-A |   **100%** |
 | **B**      | Enterprise Test Execution Planning     | APZQEP-140-B |   **100%** |
-| **C**      | Enterprise Test Execution              | APZQEP-140-C |     **0%** |
+| **C**      | Enterprise Test Execution Workspace    | APZQEP-140-C |   **100%** |
 | **D**      | Enterprise Defect Management           | APZQEP-140-D |     **0%** |
 | **E**      | Enterprise Requirements & Traceability | APZQEP-140-E |     **0%** |
 | **F**      | Enterprise Reporting & Analytics       | APZQEP-140-F |     **0%** |
 
-Packs: [a/](./a/) · [b/](./b/) · Product rule: [PRODUCT-RULE-SUITE-PLAN-EXECUTION.md](./PRODUCT-RULE-SUITE-PLAN-EXECUTION.md)
+Packs: [a/](./a/) · [b/](./b/) · [c/](./c/)
 
 ---
 
 ## Next
 
-**APZQEP-140-C — Enterprise Test Execution** — Owner Authorisation required. Cap B handoff contract is ready for consumption.
+**APZQEP-140-D — Enterprise Defect Management** — Owner Authorisation required.

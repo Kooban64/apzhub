@@ -7,6 +7,7 @@ import type { QepEvidenceEventEnvelope } from "@apzhub/qep-evidence/application"
 
 import type { KnowledgeIndexDocument } from "../domain/types";
 import { buildEvidenceProjection } from "./evidence-builder";
+import { buildExecutionProjection } from "./execution-builder";
 import { buildExecutionPlanProjection } from "./execution-plan-builder";
 import { buildSuiteProjection } from "./suite-builder";
 import type { ProjectionRegistry } from "./registry";
@@ -176,6 +177,42 @@ export function createProjectionEngine(options: {
             await options.repository.remove({
               tenantId: built.tenantId,
               entityKind: "run",
+              entityId: built.entityId,
+            });
+            lastAppliedAt = input.now;
+            return { ok: true, action: "removed", documentId: built.entityId };
+          }
+          const doc = built as KnowledgeIndexDocument;
+          await options.repository.upsert(doc);
+          lastAppliedAt = input.now;
+          return { ok: true, action: "upserted", documentId: doc.documentId };
+        }
+
+        if (defs.some((d) => d.entityKind === "execution")) {
+          const sessionId =
+            typeof input.payload.sessionId === "string"
+              ? input.payload.sessionId
+              : undefined;
+          const previous =
+            sessionId != null
+              ? await options.repository.get({
+                  tenantId: input.tenantId,
+                  entityKind: "execution",
+                  entityId: sessionId,
+                })
+              : undefined;
+          const built = buildExecutionProjection({
+            eventType: input.eventType,
+            tenantId: input.tenantId,
+            payload: input.payload,
+            ...(input.correlationId ? { correlationId: input.correlationId } : {}),
+            now: input.now,
+            ...(previous ? { previous } : {}),
+          });
+          if ("remove" in built && built.remove) {
+            await options.repository.remove({
+              tenantId: built.tenantId,
+              entityKind: "execution",
               entityId: built.entityId,
             });
             lastAppliedAt = input.now;
