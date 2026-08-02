@@ -1,18 +1,19 @@
 # APZHUB Engineering Governance
 
-| Field                 | Value                                                                                  |
-| --------------------- | -------------------------------------------------------------------------------------- |
-| Document              | APZHUB-ENGINEERING-GOVERNANCE                                                          |
-| Programme             | APZHUB-ENG-002                                                                         |
-| Classification        | Enterprise Engineering Governance                                                      |
-| Version               | **1.0**                                                                                |
-| Status                | **STABLE**                                                                             |
-| Product Board         | **FINAL CERTIFIED** (Phase 1A)                                                         |
-| Declared (UTC)        | 20260802T121905Z                                                                       |
-| Authority             | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md)     |
-| Technical content     | **NONE**                                                                               |
-| Engineering           | NONE                                                                                   |
-| Non-normative history | [APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md](./APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md) |
+| Field                  | Value                                                                                  |
+| ---------------------- | -------------------------------------------------------------------------------------- |
+| Document               | APZHUB-ENGINEERING-GOVERNANCE                                                          |
+| Programme              | APZHUB-ENG-002                                                                         |
+| Classification         | Enterprise Engineering Governance                                                      |
+| Version                | **1.0**                                                                                |
+| Status                 | **STABLE**                                                                             |
+| Product Board          | Phase 1A **FINAL CERTIFIED** · **ACCEPTED**                                            |
+| Declared (UTC)         | 20260802T121905Z                                                                       |
+| Board resolution (UTC) | 20260802T122139Z                                                                       |
+| Authority              | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md)     |
+| Technical content      | **NONE**                                                                               |
+| Engineering            | NONE                                                                                   |
+| Non-normative history  | [APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md](./APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md) |
 
 ---
 
@@ -68,8 +69,31 @@ Established
 | Enterprise Governance Model     | **Stable** |
 | Stable Baseline Policy          | **Stable** |
 | Governance Process Freeze       | **Stable** |
+| Enterprise Enhancement Policy   | **Stable** |
 
-The governance framework itself is **not experimental**.
+The governance framework itself is **not experimental**. Engineering governance is a **managed product**.
+
+---
+
+## Hierarchy
+
+```text
+Governance
+        │
+        ▼
+Enterprise Baseline
+        │
+        ▼
+Enterprise Standards
+        │
+        ▼
+Product Frameworks
+        │
+        ▼
+Engineering Delivery
+```
+
+Every future enhancement SHALL fit within this hierarchy.
 
 ---
 
@@ -83,10 +107,11 @@ Ordinary Enterprise Standard promotions SHALL NOT modify:
 4. Dual Approval Rule (Charter §12)
 5. Stable Baseline Policy (Charter §13)
 6. Governance Process Freeze (Charter §14)
+7. Enterprise Enhancement Policy (Charter §15)
 
 Catalogue **rows** and Baseline **adopted-set listings** update when standards become Active. That is Baseline / Catalogue **content**, not process redesign.
 
-See [GOVERNANCE-PROCESS-FREEZE.md](./APZHUB-ENG-002/GOVERNANCE-PROCESS-FREEZE.md).
+See [GOVERNANCE-PROCESS-FREEZE.md](./APZHUB-ENG-002/GOVERNANCE-PROCESS-FREEZE.md) · [ENTERPRISE-ENHANCEMENT-POLICY.md](./APZHUB-ENG-002/ENTERPRISE-ENHANCEMENT-POLICY.md).
 
 ---
 

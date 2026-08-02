@@ -135,22 +135,21 @@ The matrix is design guidance. Binding promotion requires Charter certification 
 
 ## 8. Enhancement promotions (after Baseline STABLE)
 
-When the Enterprise Engineering Baseline series is declared **STABLE** ([STABLE-BASELINE-POLICY.md](./STABLE-BASELINE-POLICY.md)):
+When Governance Version **1.0** and Enterprise Baseline series **1.x** are **STABLE** ([ENTERPRISE-ENHANCEMENT-POLICY.md](./ENTERPRISE-ENHANCEMENT-POLICY.md) · Charter §15):
 
-1. New Active standards are **enhancements** to the stable series — not foundational establishment work.
-2. Promotion packs SHALL state: `Classification: Enhancement to Stable Baseline 1.x`.
-3. Dual Approval + Abstraction rules still apply in full.
-4. Stability is **not** re-opened by each enhancement; major re-baselining requires Product Board decision.
-
-ES-004 (when authorised) is the **first enhancement** candidate under Baseline **1.x STABLE**.
-
-Promotion packs for ES-004+ SHALL also state governance context, for example:
+1. New Active standards are **enhancements** — not foundational establishment work.
+2. Promotion packs SHALL state:
 
 ```text
-Classification: Enhancement to Stable Baseline 1.x
-Governance context: Enhancement after Governance Era 1 COMPLETE
-Governance Version: 1.0 STABLE (unchanged by this promotion)
+Classification: Enhancement to Enterprise Engineering Baseline 1.x (Governance 1.0 STABLE)
 ```
+
+3. Enhancements SHALL preserve backwards compatibility unless explicitly approved otherwise.
+4. Enhancements SHALL NOT modify governance processes, invalidate existing ACTIVE standards, or redefine the enterprise engineering capability.
+5. Dual Approval + Abstraction rules still apply in full.
+6. Stability is **not** re-opened by each enhancement; major re-baselining requires Product Board decision.
+
+ES-004 (when authorised) is the **first enhancement** candidate under Baseline **1.x STABLE**.
 
 ---
 

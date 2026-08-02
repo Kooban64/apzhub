@@ -7,7 +7,7 @@
 | Normative             | **NO** — does not create obligations                                   |
 | Companion (normative) | [APZHUB-ENGINEERING-GOVERNANCE.md](./APZHUB-ENGINEERING-GOVERNANCE.md) |
 | Programme             | APZHUB-ENG-002                                                         |
-| Last updated (UTC)    | 20260802T121905Z                                                       |
+| Last updated (UTC)    | 20260802T122139Z                                                       |
 
 This document explains **why** the governance model looks the way it does. For current rules, use the Charter, Catalogue, Baseline, and Governance Version face.
 
@@ -39,15 +39,16 @@ The model exists so future architects inherit a durable engineering organisation
 
 ### Enterprise build (APZHUB-ENG-002)
 
-| Milestone                               | Outcome                                                 |
-| --------------------------------------- | ------------------------------------------------------- |
-| Phase 0 — Portfolio Engineering Charter | CERTIFIED — supreme enterprise engineering authority    |
-| Phase 1 Opening — Standards Catalogue   | CERTIFIED — inventory of all enterprise standards       |
-| ES-001 Active → Baseline **1.0**        | Enterprise testing                                      |
-| ES-002 Active → Baseline **1.1**        | Testing + certification (Dual Approval proven)          |
-| ES-003 Active → Baseline **1.2**        | Specify → Test → Certify lifecycle complete             |
-| Phase 1A system review                  | Baseline 1.2 ACCEPTED; series **1.x STABLE**            |
-| Phase 1A **FINAL CERTIFIED**            | Governance capability mature; Governance **1.0 STABLE** |
+| Milestone                               | Outcome                                                    |
+| --------------------------------------- | ---------------------------------------------------------- |
+| Phase 0 — Portfolio Engineering Charter | CERTIFIED — supreme enterprise engineering authority       |
+| Phase 1 Opening — Standards Catalogue   | CERTIFIED — inventory of all enterprise standards          |
+| ES-001 Active → Baseline **1.0**        | Enterprise testing                                         |
+| ES-002 Active → Baseline **1.1**        | Testing + certification (Dual Approval proven)             |
+| ES-003 Active → Baseline **1.2**        | Specify → Test → Certify lifecycle complete                |
+| Phase 1A system review                  | Baseline 1.2 ACCEPTED; series **1.x STABLE**               |
+| Phase 1A **FINAL CERTIFIED**            | Governance capability mature; Governance **1.0 STABLE**    |
+| Phase 1A **ACCEPTED**                   | Enhancement Policy adopted; Governance Foundation Complete |
 
 ---
 
@@ -92,7 +93,8 @@ Full audit trail: Catalogue promotion log.
 4. **Reference implementation** — APZQEP proves; APZHUB owns enterprise rules.
 5. **Stable Baseline Policy** — after STABLE, new standards are enhancements.
 6. **Governance Process Freeze** — process changes need a governance programme and version bump.
-7. **Two version axes** — Governance Version (how) vs Baseline Version (what).
+7. **Enterprise Enhancement Policy** — new standards extend capability without redefining it.
+8. **Two version axes** — Governance Version (how) vs Baseline Version (what).
 
 ---
 
@@ -108,12 +110,10 @@ Full audit trail: Catalogue promotion log.
 
 ## 8. ES-004 context (for future promotion packs)
 
-When authorised, ES-004 promotion packs SHOULD state:
+When authorised, ES-004 promotion packs SHALL state:
 
 ```text
-Classification: Enhancement to Stable Baseline 1.x
-Governance context: First enhancement after Governance Era 1 COMPLETE
-Governance Version: 1.0 STABLE (unchanged by this promotion)
+Classification: Enhancement to Enterprise Engineering Baseline 1.x (Governance 1.0 STABLE)
 ```
 
 ES-004 is **not** foundational establishment work.

@@ -50,7 +50,7 @@
 | APZQEP Portfolio Status Snapshot                     | `docs/products/apzqep/engineering/APZQEP-PORTFOLIO-STATUS.md`                | **IN FORCE** (Board closure snapshot)                               |
 | APZQEP Engineering Framework Changelog               | `docs/products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md` | **ACTIVE** — governance evolution record                            |
 | APZQEP → APZHUB Promotion Review                     | `docs/products/apzqep/engineering/APZQEP-ENG-001-PROMOTION-REVIEW.md`        | **CERTIFIED** — Standards SPLIT refinement                          |
-| APZHUB-ENG-002 Portfolio Engineering Standards       | `docs/engineering/APZHUB-ENG-002/`                                           | Governance **1.0 STABLE** · Era 1 COMPLETE                          |
+| APZHUB-ENG-002 Portfolio Engineering Standards       | `docs/engineering/APZHUB-ENG-002/`                                           | Governance **1.0 STABLE** · Phase 1A **ACCEPTED**                   |
 | APZHUB Engineering Governance                        | `docs/engineering/APZHUB-ENGINEERING-GOVERNANCE.md`                          | Governance Version **1.0 STABLE**                                   |
 | APZHUB Engineering Governance History                | `docs/engineering/APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md`                  | Non-normative historical record                                     |
 | APZHUB Enterprise Engineering Standards Catalogue    | `docs/engineering/APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md`                 | ES-001…ES-003 Active; ES-004 = first enhancement candidate          |
@@ -58,11 +58,13 @@
 | APZHUB Enterprise Testing Standard (ES-001)          | `docs/engineering/APZHUB-TESTING-STANDARD.md`                                | **ACTIVE** v1.0                                                     |
 | APZHUB Enterprise Certification Standard (ES-002)    | `docs/engineering/APZHUB-CERTIFICATION-STANDARD.md`                          | **ACTIVE** v1.0                                                     |
 | APZHUB Enterprise Engineering Spec Template (ES-003) | `docs/engineering/APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md`              | **ACTIVE** v1.0 — Specify (Baseline 1.2)                            |
-| APZHUB-ENG-002 Phase 1A Baseline 1.2 Review          | `docs/engineering/APZHUB-ENG-002/PHASE-1A-BASELINE-1.2-REVIEW.md`            | **FINAL CERTIFIED**                                                 |
+| APZHUB-ENG-002 Phase 1A Baseline 1.2 Review          | `docs/engineering/APZHUB-ENG-002/PHASE-1A-BASELINE-1.2-REVIEW.md`            | **FINAL CERTIFIED / ACCEPTED**                                      |
+| APZHUB-ENG-002 Phase 1A Board Resolution             | `docs/engineering/APZHUB-ENG-002/PRODUCT-BOARD-RESOLUTION-PHASE-1A.md`       | **ACCEPTED**                                                        |
 | APZHUB-ENG-002 Baseline 1.x STABLE                   | `docs/engineering/APZHUB-ENG-002/BASELINE-1.x-STABLE.md`                     | **DECLARED** — evolving era                                         |
 | APZHUB-ENG-002 Governance Era 1                      | `docs/engineering/APZHUB-ENG-002/ENGINEERING-GOVERNANCE-ERA-1.md`            | **COMPLETE**                                                        |
 | APZHUB-ENG-002 Stable Baseline Policy                | `docs/engineering/APZHUB-ENG-002/STABLE-BASELINE-POLICY.md`                  | **NORMATIVE**                                                       |
 | APZHUB-ENG-002 Governance Process Freeze             | `docs/engineering/APZHUB-ENG-002/GOVERNANCE-PROCESS-FREEZE.md`               | **NORMATIVE**                                                       |
+| APZHUB-ENG-002 Enterprise Enhancement Policy         | `docs/engineering/APZHUB-ENG-002/ENTERPRISE-ENHANCEMENT-POLICY.md`           | **NORMATIVE**                                                       |
 
 ## Indexes updated in this programme
 

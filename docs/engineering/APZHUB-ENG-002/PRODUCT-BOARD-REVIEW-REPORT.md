@@ -5,7 +5,7 @@
 | Programme             | APZHUB-ENG-002                                               |
 | Phase                 | 1A                                                           |
 | Title                 | Enterprise Engineering Baseline 1.2 Review                   |
-| Status                | **FINAL CERTIFIED**                                          |
+| Status                | **FINAL CERTIFIED** · **ACCEPTED**                           |
 | Review pack (UTC)     | 20260802T121256Z                                             |
 | CERTIFIED (UTC)       | 20260802T121525Z                                             |
 | FINAL CERTIFIED (UTC) | 20260802T121905Z                                             |
@@ -21,17 +21,20 @@
 
 ```text
 Phase 1A: FINAL CERTIFIED
+Decision: ACCEPTED
 Board question: YES — every product can adopt Baseline 1.2 without ambiguity
 Baseline 1.2: ACCEPTED
 Enterprise Engineering Baseline 1.x: STABLE
 APZHUB Engineering Governance: 1.0 STABLE
 Engineering Governance Era 1: COMPLETE
 Governance Process Freeze: ADOPTED
+Enterprise Enhancement Policy: ADOPTED
+Recommendation: Governance Foundation Complete
 ```
 
 Further standards (ES-004+) are **enhancements** to a stable baseline, not foundational establishment.
 
-Records: [PHASE-1A-CERTIFICATION.md](./PHASE-1A-CERTIFICATION.md) · [ENGINEERING-GOVERNANCE-ERA-1.md](./ENGINEERING-GOVERNANCE-ERA-1.md) · [APZHUB-ENGINEERING-GOVERNANCE.md](../APZHUB-ENGINEERING-GOVERNANCE.md)
+Records: [PRODUCT-BOARD-RESOLUTION-PHASE-1A.md](./PRODUCT-BOARD-RESOLUTION-PHASE-1A.md) · [PHASE-1A-CERTIFICATION.md](./PHASE-1A-CERTIFICATION.md) · [ENGINEERING-GOVERNANCE-ERA-1.md](./ENGINEERING-GOVERNANCE-ERA-1.md) · [APZHUB-ENGINEERING-GOVERNANCE.md](../APZHUB-ENGINEERING-GOVERNANCE.md)
 
 ---
 

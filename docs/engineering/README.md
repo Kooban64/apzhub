@@ -24,20 +24,21 @@ Does **not** replace [APZHUB Engineering Standard](../governance/APZHUB-ENGINEER
 
 Enterprise engineering **system** (Specify → Test → Certify). Governance capability mature. Era: **Evolve the Enterprise**.
 
-| Document                                                                                           | Purpose                                          |
-| -------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| [APZHUB-ENGINEERING-GOVERNANCE.md](./APZHUB-ENGINEERING-GOVERNANCE.md)                             | Governance Version **1.0 STABLE**                |
-| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md)           | **What is mandatory** (**1.2** · **1.x STABLE**) |
-| [APZHUB-ENG-002/ENGINEERING-GOVERNANCE-ERA-1.md](./APZHUB-ENG-002/ENGINEERING-GOVERNANCE-ERA-1.md) | Era 1 **COMPLETE**                               |
-| [APZHUB-ENG-002/GOVERNANCE-PROCESS-FREEZE.md](./APZHUB-ENG-002/GOVERNANCE-PROCESS-FREEZE.md)       | Process freeze                                   |
-| [APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md](./APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md)             | Non-normative history                            |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)           | Standards register                               |
-| [APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md](./APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md)     | **ES-003** Specify                               |
-| [APZHUB-TESTING-STANDARD.md](./APZHUB-TESTING-STANDARD.md)                                         | **ES-001** Test                                  |
-| [APZHUB-CERTIFICATION-STANDARD.md](./APZHUB-CERTIFICATION-STANDARD.md)                             | **ES-002** Certify                               |
-| [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                             | Programme face                                   |
+| Document                                                                                             | Purpose                                          |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| [APZHUB-ENGINEERING-GOVERNANCE.md](./APZHUB-ENGINEERING-GOVERNANCE.md)                               | Governance Version **1.0 STABLE**                |
+| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md)             | **What is mandatory** (**1.2** · **1.x STABLE**) |
+| [APZHUB-ENG-002/ENGINEERING-GOVERNANCE-ERA-1.md](./APZHUB-ENG-002/ENGINEERING-GOVERNANCE-ERA-1.md)   | Era 1 **COMPLETE**                               |
+| [APZHUB-ENG-002/GOVERNANCE-PROCESS-FREEZE.md](./APZHUB-ENG-002/GOVERNANCE-PROCESS-FREEZE.md)         | Process freeze                                   |
+| [APZHUB-ENG-002/ENTERPRISE-ENHANCEMENT-POLICY.md](./APZHUB-ENG-002/ENTERPRISE-ENHANCEMENT-POLICY.md) | Enhancement Policy                               |
+| [APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md](./APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md)               | Non-normative history                            |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)             | Standards register                               |
+| [APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md](./APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md)       | **ES-003** Specify                               |
+| [APZHUB-TESTING-STANDARD.md](./APZHUB-TESTING-STANDARD.md)                                           | **ES-001** Test                                  |
+| [APZHUB-CERTIFICATION-STANDARD.md](./APZHUB-CERTIFICATION-STANDARD.md)                               | **ES-002** Certify                               |
+| [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                               | Programme face                                   |
 
-**Status:** Governance **1.0 STABLE**. Baseline **1.x STABLE**. Phase 1A **FINAL CERTIFIED**. ES-004 = first enhancement (awaits authorisation). APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
+**Status:** Governance **1.0 STABLE**. Baseline **1.x STABLE**. Phase 1A **FINAL CERTIFIED / ACCEPTED**. Governance Foundation Complete. ES-004 = first enhancement (awaits authorisation). APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
 
 ---
 

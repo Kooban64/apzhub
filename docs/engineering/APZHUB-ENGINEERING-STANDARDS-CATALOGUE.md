@@ -144,25 +144,26 @@ API / Database / Domain Event remain **Deferred** until Board revisits.
 
 ## 8. Promotion log
 
-| When (UTC)       | ID     | Event                                                                                                                    | Evidence                                                               |
-| ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
-| 2026-08-02       | —      | Catalogue established; ES-001…ES-005 registered as Proposed                                                              | Phase 1 opening                                                        |
-| 20260802T112512Z | —      | Catalogue ACTIVE (establishment)                                                                                         | `20260802T112512Z-APZHUB-ENG-002-PHASE1-CATALOGUE*`                    |
-| 20260802T113012Z | —      | Catalogue **CERTIFIED** (Product Board Phase 1 Opening)                                                                  | Board decision                                                         |
-| 20260802T113012Z | ES-001 | Status → **Under Review**; candidate body authored by abstraction                                                        | `APZHUB-TESTING-STANDARD.md` · `ES-001-*`                              |
-| 20260802T113408Z | ES-001 | Product Board **CERTIFIED**; Status → **APPROVED → ACTIVE** v1.0                                                         | `ES-001-PROMOTION-PACK.md` · evidence CERTIFIED                        |
-| 20260802T113952Z | —      | Enterprise Engineering Baseline **1.0** established (ES-001)                                                             | `APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md`                            |
-| 20260802T114211Z | —      | Baseline **1.0** Product Board **CERTIFIED**                                                                             | `BASELINE-1.0-CERTIFICATION.md`                                        |
-| 20260802T114832Z | ES-002 | Authorised for Review; body authored by abstraction; Arch Review PASS; Status → **Under Review**; Baseline **unchanged** | `APZHUB-CERTIFICATION-STANDARD.md` · `ES-002-*`                        |
-| 20260802T115728Z | ES-002 | Dual Approval complete; Product Board **CERTIFIED**; Status → **APPROVED → ACTIVE** v1.0                                 | `ES-002-PROMOTION-PACK.md` · evidence CERTIFIED                        |
-| 20260802T115728Z | —      | Enterprise Engineering Baseline **1.0 → 1.1** (ES-001, ES-002)                                                           | `APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md` · `BASELINE-1.1-*`         |
-| 20260802T120151Z | ES-003 | Authorised for Review; body authored by abstraction; Arch Review PASS; Status → **Under Review**; Baseline **unchanged** | `APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md` · `ES-003-*`            |
-| 20260802T120716Z | ES-003 | Dual Approval complete; Product Board **CERTIFIED**; Status → **APPROVED → ACTIVE** v1.0                                 | `ES-003-PROMOTION-PACK.md` · evidence CERTIFIED                        |
-| 20260802T120716Z | —      | Enterprise Engineering Baseline **1.1 → 1.2** (ES-001, ES-002, ES-003) · **ESTABLISHED**                                 | `BASELINE-1.2-*` · `GOVERNANCE-MILESTONE-BASELINE-1.2.md`              |
-| 20260802T120716Z | —      | Phase **1A** Baseline 1.2 Review **OPEN**; ES-004 not authorised                                                         | `PHASE-1A-BASELINE-1.2-REVIEW.md`                                      |
-| 20260802T121256Z | —      | Phase **1A** review pack **COMPLETE**; Board decision pending; Baseline version **unchanged**                            | `PRODUCT-BOARD-REVIEW-REPORT.md` · `PHASE-1A-COMPLETION.md`            |
-| 20260802T121525Z | —      | Phase **1A CERTIFIED**; Baseline 1.2 ACCEPTED; Baseline **1.x STABLE**; era → evolving enhancements                      | `PHASE-1A-CERTIFICATION.md` · `BASELINE-1.x-STABLE.md`                 |
-| 20260802T121905Z | —      | Phase **1A FINAL CERTIFIED**; Governance **1.0 STABLE**; Era 1 **COMPLETE**; Process Freeze adopted                      | `APZHUB-ENGINEERING-GOVERNANCE.md` · `ENGINEERING-GOVERNANCE-ERA-1.md` |
+| When (UTC)       | ID     | Event                                                                                                                    | Evidence                                                                    |
+| ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| 2026-08-02       | —      | Catalogue established; ES-001…ES-005 registered as Proposed                                                              | Phase 1 opening                                                             |
+| 20260802T112512Z | —      | Catalogue ACTIVE (establishment)                                                                                         | `20260802T112512Z-APZHUB-ENG-002-PHASE1-CATALOGUE*`                         |
+| 20260802T113012Z | —      | Catalogue **CERTIFIED** (Product Board Phase 1 Opening)                                                                  | Board decision                                                              |
+| 20260802T113012Z | ES-001 | Status → **Under Review**; candidate body authored by abstraction                                                        | `APZHUB-TESTING-STANDARD.md` · `ES-001-*`                                   |
+| 20260802T113408Z | ES-001 | Product Board **CERTIFIED**; Status → **APPROVED → ACTIVE** v1.0                                                         | `ES-001-PROMOTION-PACK.md` · evidence CERTIFIED                             |
+| 20260802T113952Z | —      | Enterprise Engineering Baseline **1.0** established (ES-001)                                                             | `APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md`                                 |
+| 20260802T114211Z | —      | Baseline **1.0** Product Board **CERTIFIED**                                                                             | `BASELINE-1.0-CERTIFICATION.md`                                             |
+| 20260802T114832Z | ES-002 | Authorised for Review; body authored by abstraction; Arch Review PASS; Status → **Under Review**; Baseline **unchanged** | `APZHUB-CERTIFICATION-STANDARD.md` · `ES-002-*`                             |
+| 20260802T115728Z | ES-002 | Dual Approval complete; Product Board **CERTIFIED**; Status → **APPROVED → ACTIVE** v1.0                                 | `ES-002-PROMOTION-PACK.md` · evidence CERTIFIED                             |
+| 20260802T115728Z | —      | Enterprise Engineering Baseline **1.0 → 1.1** (ES-001, ES-002)                                                           | `APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md` · `BASELINE-1.1-*`              |
+| 20260802T120151Z | ES-003 | Authorised for Review; body authored by abstraction; Arch Review PASS; Status → **Under Review**; Baseline **unchanged** | `APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md` · `ES-003-*`                 |
+| 20260802T120716Z | ES-003 | Dual Approval complete; Product Board **CERTIFIED**; Status → **APPROVED → ACTIVE** v1.0                                 | `ES-003-PROMOTION-PACK.md` · evidence CERTIFIED                             |
+| 20260802T120716Z | —      | Enterprise Engineering Baseline **1.1 → 1.2** (ES-001, ES-002, ES-003) · **ESTABLISHED**                                 | `BASELINE-1.2-*` · `GOVERNANCE-MILESTONE-BASELINE-1.2.md`                   |
+| 20260802T120716Z | —      | Phase **1A** Baseline 1.2 Review **OPEN**; ES-004 not authorised                                                         | `PHASE-1A-BASELINE-1.2-REVIEW.md`                                           |
+| 20260802T121256Z | —      | Phase **1A** review pack **COMPLETE**; Board decision pending; Baseline version **unchanged**                            | `PRODUCT-BOARD-REVIEW-REPORT.md` · `PHASE-1A-COMPLETION.md`                 |
+| 20260802T121525Z | —      | Phase **1A CERTIFIED**; Baseline 1.2 ACCEPTED; Baseline **1.x STABLE**; era → evolving enhancements                      | `PHASE-1A-CERTIFICATION.md` · `BASELINE-1.x-STABLE.md`                      |
+| 20260802T121905Z | —      | Phase **1A FINAL CERTIFIED**; Governance **1.0 STABLE**; Era 1 **COMPLETE**; Process Freeze adopted                      | `APZHUB-ENGINEERING-GOVERNANCE.md` · `ENGINEERING-GOVERNANCE-ERA-1.md`      |
+| 20260802T122139Z | —      | Phase 1A **ACCEPTED**; Enhancement Policy adopted; Governance Foundation Complete                                        | `PRODUCT-BOARD-RESOLUTION-PHASE-1A.md` · `ENTERPRISE-ENHANCEMENT-POLICY.md` |
 
 ---
 

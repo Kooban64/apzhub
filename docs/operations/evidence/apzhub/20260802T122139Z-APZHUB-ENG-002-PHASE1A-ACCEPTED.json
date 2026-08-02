@@ -1,0 +1,19 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "phase": "1A",
+  "status": "FINAL CERTIFIED",
+  "decision": "ACCEPTED",
+  "timestampUtc": "20260802T122139Z",
+  "governanceVersion": "1.0",
+  "governanceState": "STABLE",
+  "baselineSeries": "1.x",
+  "baselineSeriesStatus": "STABLE",
+  "baselineCurrentMinor": "1.2",
+  "engineeringGovernanceEra": "1",
+  "eraStatus": "COMPLETE",
+  "operatingMode": "Evolve the Enterprise",
+  "recommendation": "Governance Foundation Complete",
+  "enterpriseEnhancementPolicy": "ADOPTED",
+  "es004Authorised": false,
+  "engineering": "NONE"
+}

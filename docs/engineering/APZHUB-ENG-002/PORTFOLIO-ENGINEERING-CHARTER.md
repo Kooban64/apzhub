@@ -276,7 +276,35 @@ Formally adopted by Product Board with Phase 1A **FINAL CERTIFIED** and Engineer
 
 ---
 
-## 15. Change control
+## 15. Enterprise Enhancement Policy (permanent)
+
+```text
+Enterprise Enhancement Policy
+
+Once Governance Version 1.0 and Enterprise Baseline 1.x are declared STABLE:
+
+• Every new Enterprise Standard shall be classified as an enhancement.
+
+• Enhancements shall preserve backwards compatibility unless explicitly
+  approved otherwise.
+
+• Enhancements shall not modify governance processes.
+
+• Enhancements shall not invalidate existing ACTIVE standards.
+
+• Enhancements shall extend the enterprise engineering capability
+  without redefining it.
+```
+
+This policy is **permanent Charter law**. It complements §14 by defining expectations for future standards.
+
+Operating detail: [ENTERPRISE-ENHANCEMENT-POLICY.md](./ENTERPRISE-ENHANCEMENT-POLICY.md).
+
+Formally adopted by Product Board with Phase 1A **FINAL CERTIFIED / ACCEPTED** (`20260802T122139Z`).
+
+---
+
+## 16. Change control
 
 1. No silent enterprise standards.
 2. No dual competing authorities for one concern.
@@ -286,13 +314,14 @@ Formally adopted by Product Board with Phase 1A **FINAL CERTIFIED** and Engineer
 6. Enterprise standards shall never be derived by duplication; they shall be derived by **abstraction** ([PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)).
 7. When a standard becomes Active, the [Enterprise Engineering Baseline](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) SHALL be updated to a new version listing the full adopted set.
 8. Dual Approval Rule (§12) MUST be satisfied before catalogue **Active**.
-9. When the Baseline series is **STABLE**, new Active standards are **enhancements** (§13); they do not reopen stability evaluation.
+9. When the Baseline series is **STABLE**, new Active standards are **enhancements** (§13 · §15); they do not reopen stability evaluation.
 10. Governance process artefacts SHALL NOT change during ordinary promotions (§14); process change requires Governance Version increment.
-11. Documentation-only programmes remain documentation-only unless Owner expands authority.
+11. Enhancements SHALL satisfy Enterprise Enhancement Policy (§15).
+12. Documentation-only programmes remain documentation-only unless Owner expands authority.
 
 ---
 
-## 16. Success criteria
+## 17. Success criteria
 
 The Charter succeeds when Product Board can answer:
 
@@ -304,7 +333,7 @@ Measurable criteria: [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)
 
 ---
 
-## 17. Exit criteria (Phase 0)
+## 18. Exit criteria (Phase 0)
 
 | Criterion                                   | Required                  |
 | ------------------------------------------- | ------------------------- |
@@ -320,7 +349,7 @@ Measurable criteria: [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)
 
 ---
 
-## 18. Related documents
+## 19. Related documents
 
 | Document                                                                                  | Role                                    |
 | ----------------------------------------------------------------------------------------- | --------------------------------------- |
@@ -332,6 +361,8 @@ Measurable criteria: [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)
 | [BASELINE-1.x-STABLE.md](./BASELINE-1.x-STABLE.md)                                        | Baseline 1.x STABLE declaration         |
 | [STABLE-BASELINE-POLICY.md](./STABLE-BASELINE-POLICY.md)                                  | Stable Baseline Policy                  |
 | [GOVERNANCE-PROCESS-FREEZE.md](./GOVERNANCE-PROCESS-FREEZE.md)                            | Governance Process Freeze               |
+| [ENTERPRISE-ENHANCEMENT-POLICY.md](./ENTERPRISE-ENHANCEMENT-POLICY.md)                    | Enterprise Enhancement Policy           |
+| [PRODUCT-BOARD-RESOLUTION-PHASE-1A.md](./PRODUCT-BOARD-RESOLUTION-PHASE-1A.md)            | Phase 1A FINAL CERTIFIED / ACCEPTED     |
 | [ENGINEERING-GOVERNANCE-ERA-1.md](./ENGINEERING-GOVERNANCE-ERA-1.md)                      | Era 1 COMPLETE milestone                |
 | [PORTFOLIO-GOVERNANCE-MODEL.md](./PORTFOLIO-GOVERNANCE-MODEL.md)                          | Decision rights and conflict resolution |
 | [PORTFOLIO-LIFECYCLE.md](./PORTFOLIO-LIFECYCLE.md)                                        | Standard lifecycle states               |

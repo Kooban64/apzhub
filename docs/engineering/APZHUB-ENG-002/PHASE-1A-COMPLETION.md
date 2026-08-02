@@ -1,19 +1,19 @@
 # APZHUB-ENG-002 — Phase 1A Completion Report
 
-| Field                 | Value                                            |
-| --------------------- | ------------------------------------------------ |
-| Programme             | APZHUB-ENG-002                                   |
-| Phase                 | 1A                                               |
-| Title                 | Enterprise Engineering Baseline 1.2 Review       |
-| Status                | **COMPLETE** · Product Board **FINAL CERTIFIED** |
-| Review pack (UTC)     | 20260802T121256Z                                 |
-| CERTIFIED (UTC)       | 20260802T121525Z                                 |
-| FINAL CERTIFIED (UTC) | 20260802T121905Z                                 |
-| Engineering           | NONE                                             |
-| Baseline version      | **UNCHANGED (1.2)**                              |
-| Series                | **1.x STABLE**                                   |
-| Governance Version    | **1.0 STABLE**                                   |
-| ES-004                | First enhancement candidate — not yet authorised |
+| Field                 | Value                                                       |
+| --------------------- | ----------------------------------------------------------- |
+| Programme             | APZHUB-ENG-002                                              |
+| Phase                 | 1A                                                          |
+| Title                 | Enterprise Engineering Baseline 1.2 Review                  |
+| Status                | **COMPLETE** · Product Board **FINAL CERTIFIED / ACCEPTED** |
+| Review pack (UTC)     | 20260802T121256Z                                            |
+| CERTIFIED (UTC)       | 20260802T121525Z                                            |
+| FINAL CERTIFIED (UTC) | 20260802T121905Z                                            |
+| Engineering           | NONE                                                        |
+| Baseline version      | **UNCHANGED (1.2)**                                         |
+| Series                | **1.x STABLE**                                              |
+| Governance Version    | **1.0 STABLE**                                              |
+| ES-004                | First enhancement candidate — not yet authorised            |
 
 ---
 
@@ -38,13 +38,15 @@
 ```text
 Programme: APZHUB-ENG-002
 Phase: 1A
-Status: COMPLETE · FINAL CERTIFIED
+Status: COMPLETE · FINAL CERTIFIED · ACCEPTED
 Engineering: NONE
 Baseline 1.2: ACCEPTED
 Baseline 1.x: STABLE
 Governance: 1.0 STABLE
 Era 1: COMPLETE
 Process Freeze: ADOPTED
+Enhancement Policy: ADOPTED
+Recommendation: Governance Foundation Complete
 Repository: CLEAN
 Outstanding Issues: NONE
 Operating mode: Evolve the Enterprise
