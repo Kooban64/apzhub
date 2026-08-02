@@ -246,6 +246,6 @@ describe("APZQEP-120-S11 Quality Knowledge Index", () => {
     const diag = await qki.engine.diagnostics();
     expect(diag.evidenceCount).toBe(1);
     expect(diag.health).toBe("healthy");
-    expect(diag.registeredProjections).toBe(4);
+    expect(diag.registeredProjections).toBe(5);
   });
 });

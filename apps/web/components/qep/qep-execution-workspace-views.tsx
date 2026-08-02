@@ -22,6 +22,7 @@ import {
 import { listExecutionPlans } from "@/lib/qep/qep-execution-plans-api";
 import { qepQueryKeys } from "@/lib/qep/query-keys";
 import {
+  QEP_DEFECT_ROUTES,
   QEP_EXECUTION_WORKSPACE_ROUTES,
   parseQepExecutionSessionRouteId,
 } from "@/lib/qep/routes";
@@ -389,6 +390,16 @@ function SessionDetailView({ sessionId }: { readonly sessionId: string }) {
                     <p className="mt-1 text-xs text-[var(--color-destructive)]">
                       {step.failureNotes}
                     </p>
+                  ) : null}
+                  {step.outcome === "fail" || step.outcome === "block" ? (
+                    <div className="mt-2">
+                      <Link
+                        href={`${QEP_DEFECT_ROUTES.new}?sessionId=${encodeURIComponent(session.sessionId)}&stepId=${encodeURIComponent(step.stepId)}`}
+                        className="text-xs text-[var(--color-primary)] underline-offset-2 hover:underline"
+                      >
+                        Raise defect
+                      </Link>
+                    </div>
                   ) : null}
                 </li>
               ))}

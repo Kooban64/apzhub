@@ -109,3 +109,20 @@ export const EXECUTION_SESSION_PROJECTION_DEFINITION: ProjectionDefinition = {
     "qep.execution.amended",
   ],
 };
+
+export const DEFECT_PROJECTION_DEFINITION: ProjectionDefinition = {
+  projectionId: "qep.knowledge.defect.v1",
+  entityKind: "defect",
+  version: QEP_KNOWLEDGE_INDEX_PROJECTION_VERSION,
+  description: "Enterprise Defect Management Knowledge Index projection (APZQEP-140-D)",
+  eventTypes: [
+    "qep.defect.created",
+    "qep.defect.updated",
+    "qep.defect.assigned",
+    "qep.defect.fixed",
+    "qep.defect.verified",
+    "qep.defect.closed",
+    "qep.defect.reopened",
+    "qep.defect.status_changed",
+  ],
+};

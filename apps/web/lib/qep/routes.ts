@@ -111,6 +111,14 @@ export {
 } from "@apzhub/qep-execution-workspace/presentation";
 
 export {
+  QEP_DEFECTS_BASE_PATH,
+  QEP_DEFECT_ROUTES,
+  isQepDefectsRoute,
+  isQepDefectsNewRoute,
+  parseQepDefectRouteId,
+} from "@apzhub/qep-defects/presentation";
+
+export {
   QEP_EVIDENCE_BASE_PATH,
   QEP_EVIDENCE_ROUTES,
   isQepEvidenceRoute,

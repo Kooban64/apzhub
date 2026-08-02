@@ -1,6 +1,7 @@
 import type { QepBaselineListParams, QepListParams } from "./qep-api";
 import type { QepEvidenceListParams } from "./qep-evidence-api";
 import type { QepExecutionPlanListParams } from "./qep-execution-plans-api";
+import type { QepDefectListParams } from "./qep-defects-api";
 import type { QepExecutionSessionListParams } from "./qep-execution-workspace-api";
 import type { QepSuiteListParams } from "./qep-suites-api";
 import type { QepTestExecutionListParams } from "./qep-test-execution-api";
@@ -171,5 +172,12 @@ export const qepQueryKeys = {
       [...qepQueryKeys.executionWorkspace.all(), "list", params ?? {}] as const,
     detail: (id: string) =>
       [...qepQueryKeys.executionWorkspace.all(), "detail", id] as const,
+  },
+  defects: {
+    all: () => [...qepQueryKeys.all(), "defects"] as const,
+    list: (params?: QepDefectListParams) =>
+      [...qepQueryKeys.defects.all(), "list", params ?? {}] as const,
+    detail: (id: string) => [...qepQueryKeys.defects.all(), "detail", id] as const,
+    history: (id: string) => [...qepQueryKeys.defects.all(), "history", id] as const,
   },
 };

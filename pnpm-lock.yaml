@@ -323,6 +323,9 @@ importers:
       '@apzhub/qep-contracts':
         specifier: workspace:*
         version: link:../../packages/qep-contracts
+      '@apzhub/qep-defects':
+        specifier: workspace:*
+        version: link:../../packages/qep-defects
       '@apzhub/qep-evidence':
         specifier: workspace:*
         version: link:../../packages/qep-evidence
@@ -1162,6 +1165,24 @@ importers:
       '@apzhub/qep-types':
         specifier: workspace:*
         version: link:../qep-types
+
+  packages/qep-defects:
+    dependencies:
+      '@apzhub/platform-processing':
+        specifier: workspace:*
+        version: link:../platform-processing
+      '@apzhub/qep-command':
+        specifier: workspace:*
+        version: link:../qep-command
+      '@apzhub/qep-execution-workspace':
+        specifier: workspace:*
+        version: link:../qep-execution-workspace
+      '@apzhub/qep-knowledge-index':
+        specifier: workspace:*
+        version: link:../qep-knowledge-index
+      '@apzhub/qep-notification':
+        specifier: workspace:*
+        version: link:../qep-notification
 
   packages/qep-evidence:
     dependencies:

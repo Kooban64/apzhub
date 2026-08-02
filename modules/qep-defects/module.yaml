@@ -1,37 +1,58 @@
 manifestSchemaVersion: "1.0"
 id: qep-defects
-name: Defects and Quality Issues
+name: Defect Management
 version: 0.1.0
 kind: module
 
 metadata:
   category: quality-engineering
-  description: "Defects and Quality Issues (M08) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: "Enterprise Defect Management — APZQEP Capability D (APZQEP-140-D). Investigation records referencing immutable Cap C execution and Evidence Platform artefacts. Does not store evidence bytes or mutate execution results."
   product: apzqep
   moduleCatalogueId: M08
   slug: defects
+  programme: APZQEP-140-D
+  capability: D
+  stakeholderName: Enterprise Defect Management
 
 dependencies:
   platform: []
+  packages:
+    - "@apzhub/qep-defects"
+    - "@apzhub/qep-execution-workspace"
+    - "@apzhub/qep-knowledge-index"
+    - "@apzhub/qep-notification"
+    - "@apzhub/qep-command"
   services:
     - qep-platform-service
 
 module:
   category: quality-engineering
-  status: stub
+  status: workbench-implemented
+
+permissions:
+  - id: qep.defects.read
+    label: View Defects
+  - id: qep.defects.create
+    label: Create Defects
+  - id: qep.defects.update
+    label: Update Defects
+  - id: qep.defects.lifecycle
+    label: Manage Defect Lifecycle
+  - id: qep.defects.admin
+    label: Administer Defects
 
 workbench:
   navigation:
     level: sidebar
     workspace: qep
     parent: qep
-    label: Defects and Quality Issues
-    icon: flask-conical
+    label: Defect Management
+    icon: bug
     route: /workspace/qep/defects
     order: 80
     permission: qep.defects.read
   view:
-    title: Defects and Quality Issues
+    title: Defect Management
     workspace: qep
     route: /workspace/qep/defects
     permission: qep.defects.read

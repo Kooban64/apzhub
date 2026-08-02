@@ -7,6 +7,7 @@ import type { ProcessorRegistry } from "@apzhub/platform-processing";
 import { createProjectionEngine, type ProjectionEngine } from "./projection/engine";
 import {
   createProjectionRegistry,
+  DEFECT_PROJECTION_DEFINITION,
   EVIDENCE_PROJECTION_DEFINITION,
   EXECUTION_PLAN_PROJECTION_DEFINITION,
   EXECUTION_SESSION_PROJECTION_DEFINITION,
@@ -40,6 +41,7 @@ export function createQualityKnowledgeIndex(
     SUITE_PROJECTION_DEFINITION,
     EXECUTION_PLAN_PROJECTION_DEFINITION,
     EXECUTION_SESSION_PROJECTION_DEFINITION,
+    DEFECT_PROJECTION_DEFINITION,
   ]);
   const engine = createProjectionEngine({ repository, registry });
   const search = createKnowledgeSearchService(repository);
