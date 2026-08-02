@@ -1,41 +1,41 @@
-# APZHUB-ENG-002 — ES-002 Completion (authorship / Under Review)
+# APZHUB-ENG-002 — ES-002 Completion
 
 | Field               | Value                                    |
 | ------------------- | ---------------------------------------- |
 | Programme           | APZHUB-ENG-002                           |
 | Catalogue ID        | ES-002                                   |
 | Title               | APZHUB Enterprise Certification Standard |
-| Version             | 1.0 (candidate)                          |
-| Authorship status   | **COMPLETE**                             |
-| Catalogue status    | **UNDER REVIEW**                         |
+| Version             | 1.0                                      |
+| Decision            | **CERTIFIED**                            |
+| Catalogue status    | **APPROVED → ACTIVE**                    |
 | Architecture Review | **PASS**                                 |
-| Product Board       | **PENDING**                              |
+| Baseline            | **1.1** (ES-001, ES-002)                 |
 | Promotion method    | Abstraction                              |
+| Decision (UTC)      | 20260802T115728Z                         |
 | Engineering         | NONE                                     |
-| Baseline            | **UNCHANGED (1.0)**                      |
-
----
-
-## Deliverables
-
-| Deliverable                       | Path                                                | Status                 |
-| --------------------------------- | --------------------------------------------------- | ---------------------- |
-| Enterprise Certification Standard | `docs/engineering/APZHUB-CERTIFICATION-STANDARD.md` | COMPLETE               |
-| Genericisation Notes              | `ES-002-GENERICISATION-NOTES.md`                    | COMPLETE               |
-| Architecture Review               | `ES-002-ARCHITECTURE-REVIEW.md`                     | PASS                   |
-| Promotion Pack                    | `ES-002-PROMOTION-PACK.md`                          | COMPLETE               |
-| Completion Report                 | This document                                       | COMPLETE               |
-| Catalogue update                  | UNDER REVIEW                                        | COMPLETE               |
-| Baseline update                   | —                                                   | **NOT DONE** (correct) |
+| Next                | ES-003 (awaits dedicated instruction)    |
 
 ---
 
 ## Dual Approval
 
-| Approval                    | Status      |
-| --------------------------- | ----------- |
-| Architecture Review         | **PASS**    |
-| Product Board Certification | **PENDING** |
+| Approval                    | Status        |
+| --------------------------- | ------------- |
+| Architecture Review         | **PASS**      |
+| Product Board Certification | **CERTIFIED** |
+
+---
+
+## Artefacts
+
+| Artefact             | Path                                                | Status    |
+| -------------------- | --------------------------------------------------- | --------- |
+| Normative standard   | `docs/engineering/APZHUB-CERTIFICATION-STANDARD.md` | ACTIVE    |
+| Genericisation notes | `ES-002-GENERICISATION-NOTES.md`                    | COMPLETE  |
+| Architecture Review  | `ES-002-ARCHITECTURE-REVIEW.md`                     | PASS      |
+| Promotion pack       | `ES-002-PROMOTION-PACK.md`                          | CERTIFIED |
+| Catalogue row        | Active                                              | COMPLETE  |
+| Baseline             | 1.1                                                 | COMPLETE  |
 
 ---
 
@@ -44,18 +44,15 @@
 ```text
 Programme: APZHUB-ENG-002
 Standard: ES-002
-Title: Enterprise Certification Standard
-Status: COMPLETE
+Title: APZHUB Enterprise Certification Standard
+Version: 1.0
+Decision: CERTIFIED
+Catalogue: APPROVED → ACTIVE
+Baseline: 1.0 → 1.1 (ES-001, ES-002)
 Promotion Method: ABSTRACTION
+Dual Approval: Architecture Review PASS · Product Board CERTIFIED
+Ownership: APZHUB Engineering Governance
 Engineering: NONE
 Repository: CLEAN
-Enterprise Certification Standard: COMPLETE
-Promotion Pack: COMPLETE
-Genericisation: COMPLETE
-Evidence: COMPLETE
-Catalogue Status: UNDER REVIEW
-Enterprise Baseline: UNCHANGED (1.0)
-Outstanding Issues: NONE
-Recommendation: Await Product Board Certification.
-If certified: Catalogue APPROVED → ACTIVE; Baseline 1.0 → 1.1 (ES-001, ES-002)
+Next: ES-003 Enterprise Engineering Specification Template
 ```

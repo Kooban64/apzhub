@@ -1,0 +1,13 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "artefact": "APZHUB-ENTERPRISE-ENGINEERING-BASELINE",
+  "baselineVersion": "1.1",
+  "status": "ACTIVE",
+  "includedStandards": ["ES-001", "ES-002"],
+  "supersedes": "1.0",
+  "timestampUtc": "20260802T115728Z",
+  "trigger": "ES-002 CERTIFIED",
+  "engineering": "NONE",
+  "nextPlanned": "1.2 after ES-003 ACTIVE",
+  "path": "docs/engineering/APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md"
+}

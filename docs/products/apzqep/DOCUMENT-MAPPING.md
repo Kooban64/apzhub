@@ -50,11 +50,11 @@
 | APZQEP Portfolio Status Snapshot                  | `docs/products/apzqep/engineering/APZQEP-PORTFOLIO-STATUS.md`                | **IN FORCE** (Board closure snapshot)                               |
 | APZQEP Engineering Framework Changelog            | `docs/products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md` | **ACTIVE** — governance evolution record                            |
 | APZQEP → APZHUB Promotion Review                  | `docs/products/apzqep/engineering/APZQEP-ENG-001-PROMOTION-REVIEW.md`        | **CERTIFIED** — Standards SPLIT refinement                          |
-| APZHUB-ENG-002 Portfolio Engineering Standards    | `docs/engineering/APZHUB-ENG-002/`                                           | Baseline 1.0 · ES-001 ACTIVE · ES-002 Under Review                  |
-| APZHUB Enterprise Engineering Standards Catalogue | `docs/engineering/APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md`                 | **CERTIFIED** — ES-001 Active; ES-002 Under Review                  |
-| APZHUB Enterprise Engineering Baseline            | `docs/engineering/APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md`                 | **1.0 CERTIFIED** — ES-001 only; unchanged during ES-002 review     |
+| APZHUB-ENG-002 Portfolio Engineering Standards    | `docs/engineering/APZHUB-ENG-002/`                                           | Baseline **1.1** · ES-001 ACTIVE · ES-002 ACTIVE                    |
+| APZHUB Enterprise Engineering Standards Catalogue | `docs/engineering/APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md`                 | **CERTIFIED** — ES-001/ES-002 Active; next ES-003                   |
+| APZHUB Enterprise Engineering Baseline            | `docs/engineering/APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md`                 | **1.1 ACTIVE** — ES-001, ES-002                                     |
 | APZHUB Enterprise Testing Standard (ES-001)       | `docs/engineering/APZHUB-TESTING-STANDARD.md`                                | **ACTIVE** v1.0                                                     |
-| APZHUB Enterprise Certification Standard (ES-002) | `docs/engineering/APZHUB-CERTIFICATION-STANDARD.md`                          | **Under Review** — abstracted from APZQEP Certification Standard    |
+| APZHUB Enterprise Certification Standard (ES-002) | `docs/engineering/APZHUB-CERTIFICATION-STANDARD.md`                          | **ACTIVE** v1.0 — Dual Approval satisfied                           |
 
 ## Indexes updated in this programme
 

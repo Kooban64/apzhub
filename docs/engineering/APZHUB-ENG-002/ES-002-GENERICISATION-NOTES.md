@@ -103,7 +103,7 @@ After ES-002 becomes **Active**:
 - [x] Dual Approval principle reflected
 - [x] Baseline not modified
 - [x] Architecture Review recorded (see ES-002-ARCHITECTURE-REVIEW.md)
-- [ ] Product Board Certification of ES-002 body (pending)
+- [x] Product Board Certification of ES-002 body — **CERTIFIED** 20260802T115728Z → ACTIVE · Baseline 1.1
 
 ---
 

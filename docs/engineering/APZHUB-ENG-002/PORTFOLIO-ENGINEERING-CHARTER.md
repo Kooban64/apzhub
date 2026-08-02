@@ -196,7 +196,26 @@ Products inherit enterprise changes by citation update in their next authorised 
 
 ---
 
-## 12. Change control
+## 12. Enterprise Standards Dual Approval Rule (permanent)
+
+```text
+No Enterprise Engineering Standard shall become ACTIVE unless:
+
+1. Architecture Review — PASS
+AND
+2. Product Board Certification — CERTIFIED
+
+Both approvals are mandatory.
+Neither approval may substitute for the other.
+```
+
+This rule is **permanent Charter law**. It separates **technical suitability** (Architecture Review) from **governance authority** (Product Board). Detail and operating procedure: [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md) §2.
+
+Formally adopted by Product Board with ES-002 certification (`20260802T115728Z`).
+
+---
+
+## 13. Change control
 
 1. No silent enterprise standards.
 2. No dual competing authorities for one concern.
@@ -205,12 +224,12 @@ Products inherit enterprise changes by citation update in their next authorised 
 5. No enterprise standard body without a prior row in the [Enterprise Engineering Standards Catalogue](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md).
 6. Enterprise standards shall never be derived by duplication; they shall be derived by **abstraction** ([PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)).
 7. When a standard becomes Active, the [Enterprise Engineering Baseline](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) SHALL be updated to a new version listing the full adopted set.
-8. No enterprise standard may become Active without **Architecture Review** and **Product Board Certification** (Dual Approval — [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)).
+8. Dual Approval Rule (§12) MUST be satisfied before catalogue **Active**.
 9. Documentation-only programmes remain documentation-only unless Owner expands authority.
 
 ---
 
-## 13. Success criteria
+## 14. Success criteria
 
 The Charter succeeds when Product Board can answer:
 
@@ -222,7 +241,7 @@ Measurable criteria: [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)
 
 ---
 
-## 14. Exit criteria (Phase 0)
+## 15. Exit criteria (Phase 0)
 
 | Criterion                                   | Required                  |
 | ------------------------------------------- | ------------------------- |
@@ -238,7 +257,7 @@ Measurable criteria: [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)
 
 ---
 
-## 15. Related documents
+## 16. Related documents
 
 | Document                                                                                  | Role                                    |
 | ----------------------------------------------------------------------------------------- | --------------------------------------- |

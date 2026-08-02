@@ -5,83 +5,83 @@
 | Programme           | APZHUB-ENG-002                                      |
 | Catalogue ID        | ES-002                                              |
 | Title               | APZHUB Enterprise Certification Standard            |
-| Version             | 1.0 (candidate)                                     |
-| Status              | **Under Review**                                    |
+| Version             | 1.0                                                 |
+| Status              | **CERTIFIED** · Catalogue **APPROVED → ACTIVE**     |
 | Architecture Review | **PASS** (`20260802T114832Z`)                       |
-| Product Board       | **PENDING**                                         |
+| Product Board       | **CERTIFIED** (`20260802T115728Z`)                  |
+| Decision (UTC)      | 20260802T115728Z                                    |
 | Engineering         | NONE                                                |
 | Derivation          | Abstraction from APZQEP Certification Standard v1.0 |
-| Baseline impact     | **NONE** (remains 1.0 until CERTIFIED → ACTIVE)     |
+| Baseline            | **1.0 → 1.1**                                       |
 
 ---
 
-## Decision requested
+## Product Board decision
 
 ```text
-Certify / Reject / Defer
-
-Document: APZHUB Enterprise Certification Standard v1.0
-Catalogue ID: ES-002
-Dual Approval: Architecture Review PASS · Product Board _____
-Target catalogue status: Approved → Active
-Target Baseline: 1.0 → 1.1 (ES-001, ES-002)
+Programme: APZHUB-ENG-002
+Phase: 1
+Standard: ES-002
+Title: APZHUB Enterprise Certification Standard
+Version: 1.0
+Decision: CERTIFIED
+Promotion Method: ABSTRACTION
+Architecture Review: PASS
+Product Board: CERTIFIED
+Engineering: NONE
+Repository: CLEAN
 ```
+
+### Catalogue disposition
+
+| Field             | Value                           |
+| ----------------- | ------------------------------- |
+| Status            | **APPROVED**                    |
+| Operational state | **ACTIVE**                      |
+| Ownership         | APZHUB Engineering Governance   |
+| Review frequency  | Annual                          |
+| Superseded by     | None                            |
+| Promotion date    | 2026-08-02 (`20260802T115728Z`) |
+
+### Baseline disposition
+
+| Field    | Value          |
+| -------- | -------------- |
+| Version  | **1.1**        |
+| Included | ES-001, ES-002 |
 
 ---
 
-## Reading order
+## Dual Approval (satisfied)
 
-1. [APZHUB-CERTIFICATION-STANDARD.md](../APZHUB-CERTIFICATION-STANDARD.md)
-2. [ES-002-GENERICISATION-NOTES.md](./ES-002-GENERICISATION-NOTES.md)
-3. [ES-002-ARCHITECTURE-REVIEW.md](./ES-002-ARCHITECTURE-REVIEW.md)
-4. [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md) (Abstraction + Dual Approval)
-5. [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)
-6. [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) (confirm still 1.0)
-7. Reference only: `docs/products/apzqep/engineering/APZQEP-CERTIFICATION-STANDARD.md`
+| Approval                    | Result        |
+| --------------------------- | ------------- |
+| Architecture Review         | **PASS**      |
+| Product Board Certification | **CERTIFIED** |
+
+Permanent Charter rule: [PORTFOLIO-ENGINEERING-CHARTER.md](./PORTFOLIO-ENGINEERING-CHARTER.md) §12.
 
 ---
 
 ## Promotion Principle checklist
 
-| #   | Criterion                          | Result                                                      |
-| --- | ---------------------------------- | ----------------------------------------------------------- |
-| 1   | Production-grade product use       | PASS — APZQEP under Framework v1.0                          |
-| 2   | Engineering certification          | PASS — source standard Board CERTIFIED under APZQEP-ENG-001 |
-| 3   | Product Board source certification | PASS — APZQEP Certification Standard CERTIFIED              |
-| 4   | Operational value                  | PASS — used across APZQEP engineering                       |
-| 5   | Product-specific content removed   | PASS — Genericisation Notes                                 |
-| 6   | Architecture Review                | **PASS**                                                    |
-| 7   | Enterprise approval                | **PENDING** — this decision                                 |
+| #   | Criterion                    | Result                                |
+| --- | ---------------------------- | ------------------------------------- |
+| 1–5 | Source / value / abstraction | PASS (prior pack)                     |
+| 6   | Architecture Review          | **PASS**                              |
+| 7   | Enterprise approval          | **PASS — CERTIFIED 20260802T115728Z** |
 
 ---
 
-## Abstraction confirmation
+## Normative artefact
+
+[APZHUB-CERTIFICATION-STANDARD.md](../APZHUB-CERTIFICATION-STANDARD.md) — **ACTIVE** v1.0
+
+---
+
+## Next standard
 
 ```text
-Method: Abstraction — NOT duplication
-Enterprise owner: APZHUB Engineering Governance
-Proven source: APZQEP
+ES-003 Enterprise Engineering Specification Template
+Status: AUTHORISATION PENDING
 ```
-
----
-
-## Recommended decision text
-
-```text
-APZHUB-ENG-002
-ES-002 Enterprise Certification Standard v1.0: CERTIFIED / REJECTED / DEFERRED
-Architecture Review: PASS (recorded)
-Catalogue status: Approved → Active (if CERTIFIED)
-Enterprise Engineering Baseline: 1.0 → 1.1
-Included Standards: ES-001, ES-002
-```
-
----
-
-## Constraints confirmed
-
-- No copy/paste promotion
-- APZQEP-ENG-001 not reopened
-- Enterprise Baseline **not** modified in this pack
-- Catalogue not set to ACTIVE in this pack
-- Engineering implementation: NONE

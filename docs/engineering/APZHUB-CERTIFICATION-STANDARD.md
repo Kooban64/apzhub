@@ -1,26 +1,29 @@
 # APZHUB Enterprise Certification Standard
 
-| Field                    | Value                                                                                                                     |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| Document                 | APZHUB-CERTIFICATION-STANDARD                                                                                             |
-| Catalogue ID             | **ES-002**                                                                                                                |
-| Programme                | APZHUB-ENG-002                                                                                                            |
-| Classification           | Enterprise Engineering Standard                                                                                           |
-| Status                   | **DRAFT — Under Review** (awaiting Dual Approval → Active)                                                                |
-| Version                  | **1.0** (candidate)                                                                                                       |
-| Authority                | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md)                                        |
-| Catalogue                | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)                                  |
-| Baseline                 | [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) **1.0** (unchanged until Active) |
-| Ownership                | APZHUB Engineering Governance                                                                                             |
-| Implementation authority | All APZHUB products (when Active)                                                                                         |
-| Reference source         | APZQEP Certification Standard v1.0 (reference implementation — abstracted, not duplicated)                                |
-| Source framework         | APZQEP Engineering Framework v1.0                                                                                         |
-| Promotion method         | Abstraction                                                                                                               |
-| Related Active standard  | [ES-001 Enterprise Testing Standard](./APZHUB-TESTING-STANDARD.md)                                                        |
-| Process parents          | APZHUB-ENG-001 / ADR-0092 · Lifecycle Standard                                                                            |
-| Scope                    | All APZHUB portfolio engineering certification                                                                            |
-| Compliance               | **Mandatory** when Active                                                                                                 |
-| Exceptions               | Only by approved ADR                                                                                                      |
+| Field                    | Value                                                                                            |
+| ------------------------ | ------------------------------------------------------------------------------------------------ |
+| Document                 | APZHUB-CERTIFICATION-STANDARD                                                                    |
+| Catalogue ID             | **ES-002**                                                                                       |
+| Programme                | APZHUB-ENG-002                                                                                   |
+| Classification           | **Enterprise Engineering Standard**                                                              |
+| Status                   | **ACTIVE**                                                                                       |
+| Version                  | **1.0**                                                                                          |
+| Authority                | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md)               |
+| Catalogue                | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)         |
+| Baseline                 | [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) **1.1** |
+| Ownership                | APZHUB Engineering Governance                                                                    |
+| Implementation authority | All APZHUB products                                                                              |
+| Reference source         | APZQEP Certification Standard v1.0 (reference implementation — abstracted, not duplicated)       |
+| Source framework         | APZQEP Engineering Framework v1.0                                                                |
+| Promotion method         | Abstraction                                                                                      |
+| Architecture Review      | PASS (`20260802T114832Z`)                                                                        |
+| Certified                | Product Board — 2026-08-02 (`20260802T115728Z`)                                                  |
+| Related Active standard  | [ES-001 Enterprise Testing Standard](./APZHUB-TESTING-STANDARD.md)                               |
+| Process parents          | APZHUB-ENG-001 / ADR-0092 · Lifecycle Standard                                                   |
+| Scope                    | All APZHUB portfolio engineering certification                                                   |
+| Compliance               | **Mandatory**                                                                                    |
+| Review frequency         | Annual                                                                                           |
+| Exceptions               | Only by approved ADR                                                                             |
 
 ---
 
@@ -28,9 +31,9 @@
 
 The key words **MUST**, **MUST NOT**, **SHALL**, **SHALL NOT**, **SHOULD**, and **MAY** are to be interpreted as RFC 2119 obligations.
 
-This document is the candidate **enterprise** Certification Standard (ES-002). It becomes mandatory portfolio law only when the catalogue status for ES-002 is **Active** and the Enterprise Engineering Baseline includes ES-002.
+This document is the **Active** enterprise Certification Standard (ES-002). It is mandatory portfolio law for all APZHUB products and is included in Enterprise Engineering Baseline **1.1**.
 
-Until then, APZHUB-ENG-001 slice certification practice and product certification standards remain operable for in-flight work.
+Product certification standards MAY remain as specialisations; they MUST NOT contradict this standard.
 
 This standard does **not** replace portfolio CERT programmes, freeze, or GA gates under the Lifecycle Standard. A unit-of-work **PASS** MUST NOT be presented as release readiness, GA, or package promotion authority.
 
@@ -434,9 +437,9 @@ Baseline:     bumps only after Active (not during Under Review)
 
 ## Document history
 
-| Version | Programme phase        | Status               | Notes                                                                   |
-| ------- | ---------------------- | -------------------- | ----------------------------------------------------------------------- |
-| 1.0     | APZHUB-ENG-002 Phase 1 | DRAFT — Under Review | First enterprise Certification Standard; abstracted from APZQEP CS v1.0 |
+| Version | Programme phase        | Status     | Notes                                                                                     |
+| ------- | ---------------------- | ---------- | ----------------------------------------------------------------------------------------- |
+| 1.0     | APZHUB-ENG-002 Phase 1 | **Active** | Dual Approval satisfied; abstracted from APZQEP Certification Standard v1.0; Baseline 1.1 |
 
 ---
 
