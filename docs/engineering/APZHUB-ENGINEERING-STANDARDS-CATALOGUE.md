@@ -92,7 +92,7 @@ Aligned with [PORTFOLIO-LIFECYCLE.md](./APZHUB-ENG-002/PORTFOLIO-LIFECYCLE.md).
 | ES-001 | Enterprise Testing Standard                   | **Active**   | **1.0**         | APZQEP Engineering Framework v1.0         | APZQEP          | CERTIFIED 20260802T113408Z · APPROVED → ACTIVE                    | 2026-08-02     | APZHUB Engineering Governance                     | Annual or major framework revision | —             | `docs/engineering/APZHUB-TESTING-STANDARD.md`                   |
 | ES-002 | Enterprise Certification Standard             | **Active**   | **1.0**         | APZQEP Engineering Framework v1.0         | APZQEP          | CERTIFIED 20260802T115728Z · Arch Review PASS · APPROVED → ACTIVE | 2026-08-02     | APZHUB Engineering Governance                     | Annual                             | —             | `docs/engineering/APZHUB-CERTIFICATION-STANDARD.md`             |
 | ES-003 | Enterprise Engineering Specification Template | **Active**   | **1.0**         | APZQEP Engineering Framework v1.0         | APZQEP          | CERTIFIED 20260802T120716Z · Arch Review PASS · APPROVED → ACTIVE | 2026-08-02     | APZHUB Engineering Governance                     | Annual                             | —             | `docs/engineering/APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md` |
-| ES-004 | Enterprise Engineering Workflow               | **Proposed** | —               | APZQEP / APZHUB-ENG-001 pack              | APZQEP / APZHUB | —                                                                 | —              | Product Board / Enterprise Engineering Governance | Annual / Major release             | —             | Align `AI-ENGINEERING-WORKFLOW.md` + checklists (TBD)           |
+| ES-004 | Enterprise Engineering Workflow               | **Proposed** | —               | APZQEP / APZHUB-ENG-001 pack              | APZQEP / APZHUB | First **enhancement** to Stable Baseline 1.x — not yet authorised | —              | APZHUB Engineering Governance                     | Annual                             | —             | Align `AI-ENGINEERING-WORKFLOW.md` + checklists (TBD)           |
 | ES-005 | Enterprise Engineering Standards              | **Proposed** | —               | APZQEP Engineering Framework v1.0 (SPLIT) | APZQEP          | —                                                                 | —              | Product Board / Enterprise Engineering Governance | Annual / Major release             | —             | `docs/engineering/APZHUB-ENGINEERING-STANDARDS.md` (TBD)        |
 
 ### 4.3 Deferred (not in current wave)
@@ -112,7 +112,7 @@ Aligned with [PORTFOLIO-LIFECYCLE.md](./APZHUB-ENG-002/PORTFOLIO-LIFECYCLE.md).
 1. **ES-001** Enterprise Testing Standard — **ACTIVE** (first APZHUB-owned enterprise engineering standard)
 2. **ES-002** Enterprise Certification Standard — **ACTIVE**
 3. **ES-003** Enterprise Engineering Specification Template — **ACTIVE** (Baseline **1.2 ESTABLISHED**)
-4. **ES-004** Enterprise Engineering Workflow — **PAUSED** (Phase 1A before authorisation)
+4. **ES-004** Enterprise Engineering Workflow — first **enhancement** to Stable Baseline 1.x (not authorised)
 5. **ES-005** Enterprise Engineering Standards (generic portion only)
 
 API / Database / Domain Event remain **Deferred** until Board revisits.
@@ -161,6 +161,7 @@ API / Database / Domain Event remain **Deferred** until Board revisits.
 | 20260802T120716Z | —      | Enterprise Engineering Baseline **1.1 → 1.2** (ES-001, ES-002, ES-003) · **ESTABLISHED**                                 | `BASELINE-1.2-*` · `GOVERNANCE-MILESTONE-BASELINE-1.2.md`      |
 | 20260802T120716Z | —      | Phase **1A** Baseline 1.2 Review **OPEN**; ES-004 not authorised                                                         | `PHASE-1A-BASELINE-1.2-REVIEW.md`                              |
 | 20260802T121256Z | —      | Phase **1A** review pack **COMPLETE**; Board decision pending; Baseline version **unchanged**                            | `PRODUCT-BOARD-REVIEW-REPORT.md` · `PHASE-1A-COMPLETION.md`    |
+| 20260802T121525Z | —      | Phase **1A CERTIFIED**; Baseline 1.2 ACCEPTED; Baseline **1.x STABLE**; era → evolving enhancements                      | `PHASE-1A-CERTIFICATION.md` · `BASELINE-1.x-STABLE.md`         |
 
 ---
 

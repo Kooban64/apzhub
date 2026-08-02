@@ -1,0 +1,20 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "phase": "1A",
+  "title": "Enterprise Engineering Baseline 1.2 Review",
+  "decision": "CERTIFIED",
+  "timestampUtc": "20260802T121525Z",
+  "boardQuestion": "Can every APZHUB product adopt Baseline 1.2 without ambiguity?",
+  "boardAnswer": "YES",
+  "baseline12": "ACCEPTED",
+  "baselineSeries": "1.x",
+  "seriesStatus": "STABLE",
+  "classification": "Enterprise Engineering System",
+  "engineering": "NONE",
+  "baselineVersionUnchanged": "1.2",
+  "governanceEra": "evolving",
+  "es004Classification": "enhancement",
+  "es004Authorised": false,
+  "stableBaselinePolicy": "ADOPTED",
+  "outstandingIssues": "NONE"
+}

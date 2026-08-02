@@ -1,35 +1,31 @@
 # Phase 1A — Product Board Review Report
 
-| Field           | Value                                          |
-| --------------- | ---------------------------------------------- |
-| Programme       | APZHUB-ENG-002                                 |
-| Phase           | 1A                                             |
-| Title           | Enterprise Engineering Baseline 1.2 Review     |
-| Status          | **COMPLETE — AWAITING PRODUCT BOARD DECISION** |
-| Timestamp (UTC) | 20260802T121256Z                               |
-| Engineering     | NONE                                           |
-| ES-004          | **NOT AUTHORISED**                             |
+| Field             | Value                                                        |
+| ----------------- | ------------------------------------------------------------ |
+| Programme         | APZHUB-ENG-002                                               |
+| Phase             | 1A                                                           |
+| Title             | Enterprise Engineering Baseline 1.2 Review                   |
+| Status            | **CERTIFIED**                                                |
+| Review pack (UTC) | 20260802T121256Z                                             |
+| Decision (UTC)    | 20260802T121525Z                                             |
+| Engineering       | NONE                                                         |
+| Series outcome    | Baseline **1.x STABLE**                                      |
+| ES-004            | First **enhancement** candidate — awaits Owner authorisation |
 
 ---
 
-## Decision requested
+## Product Board decision (recorded)
 
 ```text
-Baseline 1.2 ACCEPTED
-  or
-Baseline 1.2 REQUIRES REMEDIATION
+Phase 1A: CERTIFIED
+Board question: YES — every product can adopt Baseline 1.2 without ambiguity
+Baseline 1.2: ACCEPTED
+Enterprise Engineering Baseline 1.x: STABLE
 ```
 
-Only after **ACCEPTED** may Product Board authorise ES-004 (or revise sequence).
+Further standards (ES-004+) are **enhancements** to a stable baseline, not foundational establishment.
 
-Optional follow-on declaration (recommended if ACCEPTED):
-
-```text
-Enterprise Engineering Baseline 1.x
-STABLE
-```
-
-Meaning: further standards (ES-004+) are **enhancements** to a stable baseline, not part of establishing it.
+Records: [PHASE-1A-CERTIFICATION.md](./PHASE-1A-CERTIFICATION.md) · [BASELINE-1.x-STABLE.md](./BASELINE-1.x-STABLE.md)
 
 ---
 
@@ -37,11 +33,11 @@ Meaning: further standards (ES-004+) are **enhancements** to a stable baseline, 
 
 > Can every APZHUB product adopt Baseline 1.2 without ambiguity?
 
-**Review answer: YES.**
+**Decision: YES.**
 
 ---
 
-## Reading order
+## Reading order (review pack)
 
 1. [BASELINE-1.2-REVIEW.md](./BASELINE-1.2-REVIEW.md)
 2. [RESPONSIBILITY-MATRIX.md](./RESPONSIBILITY-MATRIX.md)
@@ -49,46 +45,27 @@ Meaning: further standards (ES-004+) are **enhancements** to a stable baseline, 
 4. [GAP-ANALYSIS.md](./GAP-ANALYSIS.md)
 5. [BASELINE-READINESS-REPORT.md](./BASELINE-READINESS-REPORT.md)
 6. [PHASE-1A-COMPLETION.md](./PHASE-1A-COMPLETION.md)
-7. Baseline face: [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) (version **unchanged** at 1.2)
 
 ---
 
-## Consolidated findings
+## Consolidated findings (accepted)
 
-| Review                 | Result                                          |
-| ---------------------- | ----------------------------------------------- |
-| Baseline Structure     | PASS — MVP capability present                   |
-| Responsibility Matrix  | PASS — Specify / Test / Certify clear           |
-| Product Adoption       | PASS — unambiguous path                         |
-| Governance consistency | PASS                                            |
-| Terminology            | PASS (minor editorial debt)                     |
-| Gap Analysis           | No structural gaps; candidates are enhancements |
-| Readiness              | **READY**                                       |
-
----
-
-## Recommendation
-
-```text
-Product Board Decision recommendation:
-
-1. Baseline 1.2 ACCEPTED
-
-2. Declare Enterprise Engineering Baseline 1.x STABLE
-
-3. Authorise optional editorial maintenance (stale “when Active” phrases)
-   under maintenance change control — not as remediation of Baseline 1.2
-
-4. Keep ES-004 NOT AUTHORISED until explicit post-acceptance instruction
-```
+| Review                 | Result                            |
+| ---------------------- | --------------------------------- |
+| Baseline Structure     | PASS                              |
+| Responsibility Matrix  | PASS                              |
+| Product Adoption       | PASS                              |
+| Governance consistency | PASS                              |
+| Terminology            | PASS (editorial maintenance only) |
+| Gap Analysis           | No structural gaps                |
+| Readiness              | READY → **ACCEPTED**              |
 
 ---
 
-## Constraints observed
+## Governance transition
 
-- No ES-004 authored
-- No standards rewritten for promotion
-- Baseline version **not** changed
-- Active standards normative text **not** modified in this review
-- APZQEP / Framework not modified
-- Documentation only
+| From                                       | To                                                  |
+| ------------------------------------------ | --------------------------------------------------- |
+| Building the enterprise engineering system | **Evolving** a stable enterprise engineering system |
+
+Foundation complete. Stability no longer under evaluation.

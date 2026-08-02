@@ -133,8 +133,23 @@ The matrix is design guidance. Binding promotion requires Charter certification 
 
 ---
 
-## 8. Phase constraints
+## 8. Enhancement promotions (after Baseline STABLE)
+
+When the Enterprise Engineering Baseline series is declared **STABLE** ([STABLE-BASELINE-POLICY.md](./STABLE-BASELINE-POLICY.md)):
+
+1. New Active standards are **enhancements** to the stable series — not foundational establishment work.
+2. Promotion packs SHALL state: `Classification: Enhancement to Stable Baseline 1.x`.
+3. Dual Approval + Abstraction rules still apply in full.
+4. Stability is **not** re-opened by each enhancement; major re-baselining requires Product Board decision.
+
+ES-004 (when authorised) is the **first enhancement** candidate under Baseline **1.x STABLE**.
+
+---
+
+## 9. Phase constraints
 
 - **Phase 0:** No standards promoted (satisfied — CERTIFIED).
 - **Phase 1 Opening:** Catalogue only (CERTIFIED).
-- **Phase 1+ body promotions:** Catalogue row first; abstraction method mandatory; Dual Approval before Active.
+- **Phase 1 body promotions ES-001…ES-003:** Foundational (COMPLETE).
+- **Phase 1A:** System review — CERTIFIED; Baseline **1.x STABLE**.
+- **Post-STABLE enhancements:** Catalogue row first; abstraction; Dual Approval; minor Baseline bump; enhancement classification mandatory.

@@ -1,29 +1,32 @@
 # APZHUB-ENG-002 — Phase 1A Completion Report
 
-| Field            | Value                                          |
-| ---------------- | ---------------------------------------------- |
-| Programme        | APZHUB-ENG-002                                 |
-| Phase            | 1A                                             |
-| Title            | Enterprise Engineering Baseline 1.2 Review     |
-| Status           | **COMPLETE** — awaiting Product Board decision |
-| Timestamp (UTC)  | 20260802T121256Z                               |
-| Engineering      | NONE                                           |
-| Baseline version | **UNCHANGED (1.2)**                            |
-| ES-004           | **NOT AUTHORISED**                             |
+| Field             | Value                                            |
+| ----------------- | ------------------------------------------------ |
+| Programme         | APZHUB-ENG-002                                   |
+| Phase             | 1A                                               |
+| Title             | Enterprise Engineering Baseline 1.2 Review       |
+| Status            | **COMPLETE** · Product Board **CERTIFIED**       |
+| Review pack (UTC) | 20260802T121256Z                                 |
+| Decision (UTC)    | 20260802T121525Z                                 |
+| Engineering       | NONE                                             |
+| Baseline version  | **UNCHANGED (1.2)**                              |
+| Series            | **1.x STABLE**                                   |
+| ES-004            | First enhancement candidate — not yet authorised |
 
 ---
 
 ## Deliverables
 
-| Deliverable                 | Path                           | Status   |
-| --------------------------- | ------------------------------ | -------- |
-| Baseline Structure Review   | BASELINE-1.2-REVIEW.md         | COMPLETE |
-| Responsibility Matrix       | RESPONSIBILITY-MATRIX.md       | COMPLETE |
-| Product Adoption Review     | PRODUCT-ADOPTION-REVIEW.md     | COMPLETE |
-| Gap Analysis                | GAP-ANALYSIS.md                | COMPLETE |
-| Baseline Readiness Report   | BASELINE-READINESS-REPORT.md   | COMPLETE |
-| Product Board Review Report | PRODUCT-BOARD-REVIEW-REPORT.md | COMPLETE |
-| Phase 1A Completion         | This document                  | COMPLETE |
+| Deliverable                 | Path                           | Status        |
+| --------------------------- | ------------------------------ | ------------- |
+| Baseline Structure Review   | BASELINE-1.2-REVIEW.md         | COMPLETE      |
+| Responsibility Matrix       | RESPONSIBILITY-MATRIX.md       | COMPLETE      |
+| Product Adoption Review     | PRODUCT-ADOPTION-REVIEW.md     | COMPLETE      |
+| Gap Analysis                | GAP-ANALYSIS.md                | COMPLETE      |
+| Baseline Readiness Report   | BASELINE-READINESS-REPORT.md   | COMPLETE      |
+| Product Board Review Report | PRODUCT-BOARD-REVIEW-REPORT.md | **CERTIFIED** |
+| Phase 1A Certification      | PHASE-1A-CERTIFICATION.md      | CERTIFIED     |
+| Phase 1A Completion         | This document                  | COMPLETE      |
 
 ---
 
@@ -32,22 +35,12 @@
 ```text
 Programme: APZHUB-ENG-002
 Phase: 1A
-Status: COMPLETE
+Status: COMPLETE · CERTIFIED
 Engineering: NONE
-Baseline Review: COMPLETE
-Governance Review: COMPLETE
-Responsibility Matrix: COMPLETE
-Adoption Review: COMPLETE
-Gap Analysis: COMPLETE
-Readiness Report: COMPLETE
+Baseline 1.2: ACCEPTED
+Baseline 1.x: STABLE
 Repository: CLEAN
-Evidence: COMPLETE
 Outstanding Issues: NONE
-Recommendation:
-  Product Board Decision:
-  1. Baseline 1.2 ACCEPTED
-  or
-  2. Baseline 1.2 REQUIRES REMEDIATION
-Only after Product Board acceptance may ES-004 be authorised.
-Review recommendation: ACCEPTED (+ optional declare Baseline 1.x STABLE)
+Era: Evolving a stable enterprise engineering system
+ES-004: first enhancement candidate (awaits Owner authorisation)
 ```

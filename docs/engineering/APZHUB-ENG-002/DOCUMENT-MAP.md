@@ -1,37 +1,37 @@
 # APZHUB-ENG-002 — Document Map
 
-| Field     | Value                                                             |
-| --------- | ----------------------------------------------------------------- |
-| Programme | APZHUB-ENG-002                                                    |
-| Phase     | Baseline **1.2** · Phase **1A COMPLETE** (Board decision pending) |
+| Field     | Value                                            |
+| --------- | ------------------------------------------------ |
+| Programme | APZHUB-ENG-002                                   |
+| Status    | Baseline **1.x STABLE** · Phase 1A **CERTIFIED** |
 
 ---
 
-## Phase 1A
+## Stable baseline
 
-| Document                                                             | Status         |
-| -------------------------------------------------------------------- | -------------- |
-| [PHASE-1A-BASELINE-1.2-REVIEW.md](./PHASE-1A-BASELINE-1.2-REVIEW.md) | COMPLETE       |
-| [BASELINE-1.2-REVIEW.md](./BASELINE-1.2-REVIEW.md)                   | COMPLETE       |
-| [RESPONSIBILITY-MATRIX.md](./RESPONSIBILITY-MATRIX.md)               | COMPLETE       |
-| [PRODUCT-ADOPTION-REVIEW.md](./PRODUCT-ADOPTION-REVIEW.md)           | COMPLETE       |
-| [GAP-ANALYSIS.md](./GAP-ANALYSIS.md)                                 | COMPLETE       |
-| [BASELINE-READINESS-REPORT.md](./BASELINE-READINESS-REPORT.md)       | COMPLETE       |
-| [PRODUCT-BOARD-REVIEW-REPORT.md](./PRODUCT-BOARD-REVIEW-REPORT.md)   | AWAITING BOARD |
-| [PHASE-1A-COMPLETION.md](./PHASE-1A-COMPLETION.md)                   | COMPLETE       |
+| Document                                                                                  | Status                          |
+| ----------------------------------------------------------------------------------------- | ------------------------------- |
+| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | **1.2 ACTIVE** · **1.x STABLE** |
+| [BASELINE-1.x-STABLE.md](./BASELINE-1.x-STABLE.md)                                        | DECLARED                        |
+| [STABLE-BASELINE-POLICY.md](./STABLE-BASELINE-POLICY.md)                                  | NORMATIVE                       |
+| [PHASE-1A-CERTIFICATION.md](./PHASE-1A-CERTIFICATION.md)                                  | CERTIFIED                       |
 
 ---
 
-## Baseline & catalogue
+## Phase 1A pack
 
-| Document                                                                                  | Status              |
-| ----------------------------------------------------------------------------------------- | ------------------- |
-| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | **1.2 ESTABLISHED** |
-| [GOVERNANCE-MILESTONE-BASELINE-1.2.md](./GOVERNANCE-MILESTONE-BASELINE-1.2.md)            | COMPLETE            |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | CERTIFIED           |
+| Document                                                           | Status    |
+| ------------------------------------------------------------------ | --------- |
+| [PRODUCT-BOARD-REVIEW-REPORT.md](./PRODUCT-BOARD-REVIEW-REPORT.md) | CERTIFIED |
+| [PHASE-1A-COMPLETION.md](./PHASE-1A-COMPLETION.md)                 | COMPLETE  |
+| Supporting reviews                                                 | COMPLETE  |
 
 ---
 
-## Active standards
+## Governance
 
-ES-001 · ES-002 · ES-003 — **ACTIVE**
+| Document                                                                                  | Role                                       |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------ |
+| [PORTFOLIO-ENGINEERING-CHARTER.md](./PORTFOLIO-ENGINEERING-CHARTER.md)                    | §§12 Dual Approval · §13 Stable Baseline   |
+| [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)                                      | Abstraction · Dual Approval · Enhancements |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Register                                   |

@@ -215,7 +215,35 @@ Formally adopted by Product Board with ES-002 certification (`20260802T115728Z`)
 
 ---
 
-## 13. Change control
+## 13. Stable Baseline Policy (permanent)
+
+```text
+Once an Enterprise Engineering Baseline is declared STABLE:
+
+• New Enterprise Standards shall be treated as enhancements.
+
+• Existing Enterprise Standards shall not be modified except through
+  approved maintenance or supersession.
+
+• Enterprise Baseline major versions shall only be created by
+  Product Board decision.
+
+• Minor versions shall continue to represent the activation of
+  additional Enterprise Standards.
+
+• Stability reviews shall occur only when requested by the Product Board
+  or after major baseline revisions.
+```
+
+This policy is **permanent Charter law**. It separates **maintenance**, **enhancement**, and **re-baselining**.
+
+Operating detail: [STABLE-BASELINE-POLICY.md](./STABLE-BASELINE-POLICY.md).
+
+Formally adopted by Product Board with Phase 1A CERTIFIED and Baseline **1.x STABLE** (`20260802T121525Z`).
+
+---
+
+## 14. Change control
 
 1. No silent enterprise standards.
 2. No dual competing authorities for one concern.
@@ -225,11 +253,12 @@ Formally adopted by Product Board with ES-002 certification (`20260802T115728Z`)
 6. Enterprise standards shall never be derived by duplication; they shall be derived by **abstraction** ([PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)).
 7. When a standard becomes Active, the [Enterprise Engineering Baseline](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) SHALL be updated to a new version listing the full adopted set.
 8. Dual Approval Rule (§12) MUST be satisfied before catalogue **Active**.
-9. Documentation-only programmes remain documentation-only unless Owner expands authority.
+9. When the Baseline series is **STABLE**, new Active standards are **enhancements** (§13); they do not reopen stability evaluation.
+10. Documentation-only programmes remain documentation-only unless Owner expands authority.
 
 ---
 
-## 14. Success criteria
+## 15. Success criteria
 
 The Charter succeeds when Product Board can answer:
 
@@ -241,7 +270,7 @@ Measurable criteria: [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)
 
 ---
 
-## 15. Exit criteria (Phase 0)
+## 16. Exit criteria (Phase 0)
 
 | Criterion                                   | Required                  |
 | ------------------------------------------- | ------------------------- |
@@ -257,13 +286,15 @@ Measurable criteria: [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)
 
 ---
 
-## 16. Related documents
+## 17. Related documents
 
 | Document                                                                                  | Role                                    |
 | ----------------------------------------------------------------------------------------- | --------------------------------------- |
 | [PROGRAMME-CHARTER.md](./PROGRAMME-CHARTER.md)                                            | APZHUB-ENG-002 programme charter        |
 | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Enterprise standards inventory          |
 | [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | Adopted enterprise standards set        |
+| [BASELINE-1.x-STABLE.md](./BASELINE-1.x-STABLE.md)                                        | Baseline 1.x STABLE declaration         |
+| [STABLE-BASELINE-POLICY.md](./STABLE-BASELINE-POLICY.md)                                  | Stable Baseline Policy                  |
 | [PORTFOLIO-GOVERNANCE-MODEL.md](./PORTFOLIO-GOVERNANCE-MODEL.md)                          | Decision rights and conflict resolution |
 | [PORTFOLIO-LIFECYCLE.md](./PORTFOLIO-LIFECYCLE.md)                                        | Standard lifecycle states               |
 | [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)                                      | Mandatory promotion rules               |
