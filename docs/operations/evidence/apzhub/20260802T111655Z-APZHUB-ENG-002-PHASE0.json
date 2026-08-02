@@ -1,0 +1,41 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "phase": "0",
+  "title": "Portfolio Engineering Charter",
+  "classification": "Enterprise Engineering Governance",
+  "status": "PHASE_0_COMPLETE",
+  "timestampUtc": "20260802T111655Z",
+  "ownerAuthorisation": "AUTHORISED",
+  "engineering": "NONE",
+  "packageChanges": "NONE",
+  "releaseChanges": "NONE",
+  "deployment": "NONE",
+  "standardsPromotion": "NOT_AUTHORISED",
+  "charterStatus": "DRAFT — awaiting Product Board Certification",
+  "predecessor": {
+    "programme": "APZQEP-ENG-001",
+    "status": "ARCHIVED",
+    "closure": "b9626ada",
+    "role": "Reference implementation only — not automatic enterprise standard"
+  },
+  "deliverables": [
+    "PORTFOLIO-ENGINEERING-CHARTER.md",
+    "PROGRAMME-CHARTER.md",
+    "PORTFOLIO-GOVERNANCE-MODEL.md",
+    "PORTFOLIO-LIFECYCLE.md",
+    "PROMOTION-PRINCIPLES.md",
+    "OWNERSHIP-MODEL.md",
+    "SUCCESS-CRITERIA.md",
+    "DOCUMENT-MAP.md",
+    "PHASE-0-COMPLETION.md",
+    "README.md"
+  ],
+  "outOfScopeObserved": [
+    "No standards promoted",
+    "APZQEP-ENG-001 not reopened",
+    "No product/framework rewrites",
+    "Documentation only"
+  ],
+  "recommendation": "Await Product Board Certification. Phase 1 NOT AUTHORISED until Charter certification.",
+  "outstandingIssues": "NONE"
+}

@@ -20,19 +20,18 @@ Does **not** replace [APZHUB Engineering Standard](../governance/APZHUB-ENGINEER
 
 ---
 
-## Portfolio Engineering Standards (APZHUB-ENG-002) — **DESIGNED**
+## Portfolio Engineering Standards (APZHUB-ENG-002) — **Phase 0 COMPLETE**
 
-Promote proven APZQEP Engineering Framework assets into APZHUB portfolio standards. APZQEP remains reference implementation.
+Enterprise governance for promoting proven product engineering standards. APZQEP remains **reference implementation**.
 
-| Document                                                                   | Purpose                                         |
-| -------------------------------------------------------------------------- | ----------------------------------------------- |
-| [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                     | Programme face                                  |
-| [APZHUB-ENG-002/PROMOTION-MATRIX.md](./APZHUB-ENG-002/PROMOTION-MATRIX.md) | Promote / keep / share / never-duplicate matrix |
-| [APZHUB-ENG-002/PROGRAMME-DESIGN.md](./APZHUB-ENG-002/PROGRAMME-DESIGN.md) | Phased execution design (Owner-gated)           |
+| Document                                                                                             | Purpose                                  |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| [APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) | **Governing Charter** (await Board CERT) |
+| [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                               | Programme face                           |
+| [APZHUB-ENG-002/DOCUMENT-MAP.md](./APZHUB-ENG-002/DOCUMENT-MAP.md)                                   | Full pack index                          |
+| [APZHUB-ENG-002/PHASE-0-COMPLETION.md](./APZHUB-ENG-002/PHASE-0-COMPLETION.md)                       | Phase 0 completion                       |
 
-**Status:** Designed — promotion matrix **ACCEPTED**; awaiting Owner authorisation. APZQEP-ENG-001 is **CLOSED** (Framework maintenance ACTIVE).
-
-Reference source: [APZQEP Engineering Framework v1.0](../products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK.md).
+**Status:** Phase 0 COMPLETE — Charter DRAFT awaiting Product Board Certification. Phase 1 promotion **NOT AUTHORISED**. APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
 
 ---
 

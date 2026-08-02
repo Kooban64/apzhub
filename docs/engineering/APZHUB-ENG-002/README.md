@@ -1,87 +1,60 @@
 # APZHUB-ENG-002 — Portfolio Engineering Standards
 
-| Field                    | Value                                                                    |
-| ------------------------ | ------------------------------------------------------------------------ |
-| Programme                | **APZHUB-ENG-002**                                                       |
-| Title                    | Portfolio Engineering Standards                                          |
-| Classification           | Enterprise Engineering Governance                                        |
-| Status                   | **AUTHORISATION PENDING** — design complete; matrix ACCEPTED; not opened |
-| Predecessor              | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`) — no further programme activity |
-| Prerequisite             | APZQEP Engineering Framework v1.0 BASELINED · ENG-001 archived           |
-| Reference implementation | APZQEP (flagship proving ground)                                         |
-| Engineering              | **NONE** until Owner opens execution phases                              |
-| Release / Deployment     | NONE                                                                     |
+| Field                    | Value                                                                     |
+| ------------------------ | ------------------------------------------------------------------------- |
+| Programme                | **APZHUB-ENG-002**                                                        |
+| Title                    | Portfolio Engineering Standards                                           |
+| Classification           | Enterprise Engineering Governance                                         |
+| Phase                    | **0 — Portfolio Engineering Charter**                                     |
+| Status                   | **Phase 0 COMPLETE** — Charter DRAFT awaiting Product Board Certification |
+| Predecessor              | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`)                                  |
+| Reference implementation | APZQEP Engineering Framework v1.0 (not automatic enterprise standard)     |
+| Engineering              | **NONE**                                                                  |
+| Standards promotion      | **NOT AUTHORISED** until Charter CERTIFIED                                |
 
 ---
 
 ## Purpose
 
-Promote selected, **proven** engineering assets from APZQEP into the APZHUB engineering baseline so that every APZHUB product inherits the same quality of:
+Establish the **governance model** under which engineering standards may be promoted from products into the APZHUB enterprise baseline.
 
-- how engineering is specified;
-- how engineering is verified;
-- how engineering is accepted.
-
-APZQEP remains the **reference implementation**.  
-APZHUB becomes the **enterprise standard**.
-
-This programme MUST NOT copy APZQEP documents verbatim. It MUST:
-
-1. identify generic content;
-2. remove product-specific references;
-3. publish portfolio-level standards;
-4. establish versioned governance;
-5. leave product-specific methodology with the product.
+Phase 0 defines governance. Phase 1+ defines engineering standards. Those concerns remain separate.
 
 ---
 
-## Why now
+## Phase 0 pack (read in this order)
 
-APZQEP-ENG-001 delivered a baselined Engineering Framework and the minimum mature quality set:
+| #   | Document                                                               | Role                      |
+| --- | ---------------------------------------------------------------------- | ------------------------- |
+| 1   | [PORTFOLIO-ENGINEERING-CHARTER.md](./PORTFOLIO-ENGINEERING-CHARTER.md) | **Governing Charter**     |
+| 2   | [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)                   | Mandatory promotion rules |
+| 3   | [OWNERSHIP-MODEL.md](./OWNERSHIP-MODEL.md)                             | Who owns what             |
+| 4   | [PORTFOLIO-GOVERNANCE-MODEL.md](./PORTFOLIO-GOVERNANCE-MODEL.md)       | Decision rights           |
+| 5   | [PORTFOLIO-LIFECYCLE.md](./PORTFOLIO-LIFECYCLE.md)                     | Draft → Archived          |
+| 6   | [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)                           | Success / exit            |
+| 7   | [PROGRAMME-CHARTER.md](./PROGRAMME-CHARTER.md)                         | Programme charter         |
+| 8   | [DOCUMENT-MAP.md](./DOCUMENT-MAP.md)                                   | Full index                |
+| 9   | [PHASE-0-COMPLETION.md](./PHASE-0-COMPLETION.md)                       | Phase completion          |
 
-- Engineering Standards
-- Testing Standard
-- Certification Standard
-
-together with the Engineering Specification Template and Framework product abstraction.
-
-Continuing to write APZQEP specialised standards (API, Database, …) **before** promotion strategy is agreed risks dual maintenance of near-identical portfolio rules.
-
-Product Board therefore **paused** APZQEP framework expansion pending this programme’s design acceptance.
-
----
-
-## Documents in this pack
-
-| Document                                     | Role                                                                      |
-| -------------------------------------------- | ------------------------------------------------------------------------- |
-| [PROMOTION-MATRIX.md](./PROMOTION-MATRIX.md) | What promotes, stays, is shared by reference, or must never be duplicated |
-| [PROGRAMME-DESIGN.md](./PROGRAMME-DESIGN.md) | Phases, deliverables, non-goals, acceptance criteria                      |
-| This README                                  | Programme face                                                            |
-
-Related APZQEP source:
-
-- [APZQEP Engineering Framework v1.0](../../products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK.md)
-- [APZQEP-ENG-001 promotion review note](../../products/apzqep/engineering/APZQEP-ENG-001-PROMOTION-REVIEW.md)
+Retained design inputs: [PROGRAMME-DESIGN.md](./PROGRAMME-DESIGN.md) · [PROMOTION-MATRIX.md](./PROMOTION-MATRIX.md)
 
 ---
 
-## Authority
+## Authoritative baselines
 
-| Layer                             | Role                                        |
-| --------------------------------- | ------------------------------------------- |
-| Document 000 / Foundation 001–029 | Supreme platform authority                  |
-| APZHUB Engineering Standard       | Portfolio engineering index                 |
-| APZHUB-ENG-001 / ADR-0092         | Slice process (already portfolio)           |
-| **APZHUB-ENG-002**                | Portfolio promotion of proven APZQEP assets |
-| APZQEP Engineering Framework v1.0 | Product reference implementation            |
+Immutable unless maintenance change control applies: APZHUB Foundation, Governance, Engineering Operating Standard, Engineering Slice Standard, APZQEP Release Governance, APZQEP Engineering Framework v1.0, **APZQEP-ENG-001 ARCHIVED**.
 
 ---
 
-## Execution gate
+## Gate
 
-No portfolio standard may be rewritten or published under this programme until Owner / Product Board authorises execution with an explicit phase instruction.
+```text
+Phase 1 Standards Promotion: NOT AUTHORISED
+until Product Board Certification of the Portfolio Engineering Charter.
+```
 
-Design artefacts in this folder are documentation only.
+---
 
-**Session boundary:** APZQEP-ENG-001 is **ARCHIVED / IMMUTABLE** (`b9626ada`) — reference only. Next governance session opens ENG-002 Phase 0 with a **Portfolio Engineering Charter** (see entry/exit criteria in [PROGRAMME-DESIGN.md](./PROGRAMME-DESIGN.md)); Phase 1 only after Product Board Certification of that Charter.
+## Evidence
+
+Filed under `docs/operations/evidence/` with programme prefix `APZHUB-ENG-002` / Phase 0.
