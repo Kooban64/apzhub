@@ -1,12 +1,13 @@
 # APZQEP-120-S11 — Product Board Recommendation
 
-| Field        | Value                                                       |
-| ------------ | ----------------------------------------------------------- |
-| Status       | **SUPERSEDED** — Owner authorised; S11 **COMPLETE** / PASS  |
-| Prerequisite | APZQEP-120-S10 Product Board **CERTIFIED**                  |
-| Framing      | **Quality Knowledge Index** (not “a search page”)           |
-| Timestamp    | 20260802T145908Z                                            |
-| Completed    | 20260802T150615Z — [S11-COMPLETION.md](./S11-COMPLETION.md) |
+| Field        | Value                                                                                         |
+| ------------ | --------------------------------------------------------------------------------------------- |
+| Status       | **SUPERSEDED** — S11 **COMPLETE** / PASS · Product Board **CERTIFIED**                        |
+| Prerequisite | APZQEP-120-S10 Product Board **CERTIFIED**                                                    |
+| Framing      | **Quality Knowledge Index** (not “a search page”)                                             |
+| Timestamp    | 20260802T145908Z                                                                              |
+| Completed    | 20260802T150615Z — [S11-COMPLETION.md](./S11-COMPLETION.md)                                   |
+| Board        | 20260802T155724Z — [S11-PRODUCT-BOARD-CERTIFICATION.md](./S11-PRODUCT-BOARD-CERTIFICATION.md) |
 
 ---
 

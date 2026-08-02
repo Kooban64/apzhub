@@ -8,7 +8,9 @@
 | Status          | **COMPLETE**            |
 | Engineering     | **COMPLETE**            |
 | Certification   | **PASS**                |
+| Product Board   | **CERTIFIED**           |
 | Timestamp (UTC) | 20260802T150615Z        |
+| Board (UTC)     | 20260802T155724Z        |
 
 ---
 
@@ -51,6 +53,9 @@ COMPLETE
 Certification:
 PASS
 
+Product Board:
+CERTIFIED
+
 Regression:
 PASS
 
@@ -59,5 +64,8 @@ NONE
 
 Recommendation:
 
-Ready for APZQEP-120-S12.
+Ready for APZQEP-120-S12 — Notification & Subscription Platform
+(requires Owner Authorisation Pack).
 ```
+
+Board: [S11-PRODUCT-BOARD-CERTIFICATION.md](./S11-PRODUCT-BOARD-CERTIFICATION.md) · Next: [S12-PRODUCT-BOARD-RECOMMENDATION.md](./S12-PRODUCT-BOARD-RECOMMENDATION.md)

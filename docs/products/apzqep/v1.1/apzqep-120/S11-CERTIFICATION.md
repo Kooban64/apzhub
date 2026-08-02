@@ -1,11 +1,12 @@
 # APZQEP-120-S11 — Certification
 
-| Field           | Value            |
-| --------------- | ---------------- |
-| Slice           | APZQEP-120-S11   |
-| Standard        | ES-002           |
-| Outcome         | **PASS**         |
-| Timestamp (UTC) | 20260802T150615Z |
+| Field           | Value                              |
+| --------------- | ---------------------------------- |
+| Slice           | APZQEP-120-S11                     |
+| Standard        | ES-002                             |
+| Outcome         | **PASS**                           |
+| Product Board   | **CERTIFIED** (`20260802T155724Z`) |
+| Timestamp (UTC) | 20260802T150615Z                   |
 
 ## Gates
 
@@ -22,6 +23,7 @@
 
 ```text
 PASS
+Product Board: CERTIFIED
 ```
 
-Ready for Owner instruction on **APZQEP-120-S12**.
+S11 closed. Enterprise read model established. Ready for Owner instruction on **APZQEP-120-S12** (Notification & Subscription Platform). See [S11-PRODUCT-BOARD-CERTIFICATION.md](./S11-PRODUCT-BOARD-CERTIFICATION.md).

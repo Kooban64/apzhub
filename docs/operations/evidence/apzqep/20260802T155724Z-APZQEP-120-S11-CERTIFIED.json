@@ -1,0 +1,22 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "S11",
+  "title": "Quality Knowledge Index",
+  "productBoardDecision": "CERTIFIED",
+  "engineeringCertification": "PASS",
+  "timestampUtc": "20260802T155724Z",
+  "milestone": "Architectural backbone effectively complete; enterprise read model established",
+  "recommendedNext": "APZQEP-120-S12 Notification & Subscription Platform",
+  "maturity": {
+    "governance": "100%",
+    "engineeringFramework": "100%",
+    "evidencePlatform": "90%",
+    "eventPlatform": "95%",
+    "knowledgePlatform": "70%",
+    "backend": "85-87%",
+    "frontend": "20-25%",
+    "overallProduct": "78-80%"
+  },
+  "governance": "UNCHANGED",
+  "baseline": "UNCHANGED"
+}

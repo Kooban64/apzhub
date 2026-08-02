@@ -1,11 +1,11 @@
 # Quality Knowledge Index — APZQEP-120-S11
 
-| Field     | Value                                   |
-| --------- | --------------------------------------- |
-| Programme | APZQEP-120                              |
-| Slice     | S11                                     |
-| Package   | `@apzhub/qep-knowledge-index` **0.1.0** |
-| Status    | **ACTIVE**                              |
+| Field     | Value                                    |
+| --------- | ---------------------------------------- |
+| Programme | APZQEP-120                               |
+| Slice     | S11                                      |
+| Package   | `@apzhub/qep-knowledge-index` **0.1.0**  |
+| Status    | **ACTIVE** · Product Board **CERTIFIED** |
 
 ## Principle
 
