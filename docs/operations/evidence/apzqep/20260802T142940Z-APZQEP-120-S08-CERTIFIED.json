@@ -1,0 +1,13 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "S08",
+  "title": "Reliable Event Delivery (Outbox Drain)",
+  "productBoardDecision": "CERTIFIED",
+  "engineeringCertification": "PASS",
+  "timestampUtc": "20260802T142940Z",
+  "platformPackage": "@apzhub/platform-outbox@0.2.0",
+  "platformRule": "No APZHUB product may implement its own Outbox engine; consume @apzhub/platform-outbox",
+  "recommendedNext": "APZQEP-120-S09 Reliable Processing",
+  "governance": "UNCHANGED",
+  "baseline": "UNCHANGED"
+}

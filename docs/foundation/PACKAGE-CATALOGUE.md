@@ -130,7 +130,7 @@
 | `@apzhub/search-orchestrator`       | `packages/search-orchestrator/`       | 0.1.0      | Product Indexing Orchestration — **frozen** (APZSEARCH-019)                                                                                         |
 | `@apzhub/search-publication-admin`  | `packages/search-publication-admin/`  | 0.1.0      | Publication Operations & Administration — **frozen** (APZSEARCH-019)                                                                                |
 | `@apzhub/platform-services`         | `packages/platform-services/`         | **0.27.0** | Gateway + Metrics + Observability + Identity + Administration + Configuration + Notification + Workflow + Search + Documents + Time + **Analytics** |
-| `@apzhub/platform-outbox`           | `packages/platform-outbox/`           | **0.1.0**  | Outbox workers — drain / retry / DLQ / replay (PCv2-02)                                                                                             |
+| `@apzhub/platform-outbox`           | `packages/platform-outbox/`           | **0.2.0**  | Reliable delivery — drain / retry / DLQ hooks / transport port (PCv2-02 · APZQEP-120-S08 CERTIFIED)                                                 |
 | `@apzhub/platform-event-bus`        | `packages/platform-event-bus/`        | **0.1.0**  | Event Bus + webhook ingress + outbox relay (OSS-100-12)                                                                                             |
 
 ## Product packages
@@ -182,7 +182,7 @@ See [Platform Dependency Review](../reviews/APZHUB-Platform-Dependency-Review.md
 | `@apzhub/integration-github-actions` | `0.1.0`            | CI/CD Reference Adapter (frozen)                          |
 | `@apzhub/integration-search-sdk`     | `0.1.0`            | APZSEARCH-004                                             |
 | `@apzhub/platform-services`          | `0.27.0`           | Gateway facade + Time + Analytics Platform Services       |
-| `@apzhub/platform-outbox`            | `0.1.0`            | PCv2-02 outbox worker MVP                                 |
+| `@apzhub/platform-outbox`            | `0.2.0`            | Reliable delivery · APZQEP-120-S08 CERTIFIED              |
 | `@apzhub/platform-event-bus`         | `0.1.0`            | OSS-100-12 Event Bus + webhook ingress                    |
 | `@apzhub/platform-service-contracts` | `0.17.1`           | Platform service contracts (+ Time)                       |
 | `@apzhub/search-integration`         | `0.2.0`            | Frozen (APZSEARCH-019)                                    |

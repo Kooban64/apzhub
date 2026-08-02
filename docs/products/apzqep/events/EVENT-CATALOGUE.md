@@ -1,16 +1,16 @@
 # APZQEP Evidence Domain Event Catalogue
 
-| Field             | Value                                          |
-| ----------------- | ---------------------------------------------- |
-| Document          | EVENT-CATALOGUE                                |
-| Product           | APZQEP                                         |
-| Domain            | Evidence                                       |
-| Programme         | APZQEP-120-S07                                 |
-| Catalogue version | **1.0.2**                                      |
-| Status            | **ACTIVE** · Product Board **CERTIFIED** (S07) |
-| Publisher         | `qep-evidence` (Application Services)          |
-| Delivery          | Platform Outbox (S08) · transport-neutral      |
-| Timestamp (UTC)   | 20260802T141518Z                               |
+| Field             | Value                                                             |
+| ----------------- | ----------------------------------------------------------------- |
+| Document          | EVENT-CATALOGUE                                                   |
+| Product           | APZQEP                                                            |
+| Domain            | Evidence                                                          |
+| Programme         | APZQEP-120-S07                                                    |
+| Catalogue version | **1.0.2**                                                         |
+| Status            | **ACTIVE** · S07 Board **CERTIFIED** · S08 delivery **CERTIFIED** |
+| Publisher         | `qep-evidence` (Application Services)                             |
+| Delivery          | `@apzhub/platform-outbox` (S08 Board **CERTIFIED**)               |
+| Timestamp (UTC)   | 20260802T141518Z                                                  |
 
 This catalogue is a **first-class product asset**. Event semantics are owned by the Evidence domain. Infrastructure transports events; it does not define them.
 

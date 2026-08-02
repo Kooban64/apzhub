@@ -5,6 +5,7 @@
 | Slice           | APZQEP-120-S08                         |
 | Standard        | ES-002 / APZQEP Certification Standard |
 | Outcome         | **PASS**                               |
+| Product Board   | **CERTIFIED** (`20260802T142940Z`)     |
 | Timestamp (UTC) | 20260802T141518Z                       |
 
 ## Gates
@@ -23,6 +24,7 @@
 
 ```text
 PASS
+Product Board: CERTIFIED
 ```
 
-Ready for Owner instruction on **APZQEP-120-S09**.
+S08 closed. Platform Outbox ownership rule recorded. Ready for Owner instruction on **APZQEP-120-S09** (Reliable Processing). See [S08-PRODUCT-BOARD-CERTIFICATION.md](./S08-PRODUCT-BOARD-CERTIFICATION.md).

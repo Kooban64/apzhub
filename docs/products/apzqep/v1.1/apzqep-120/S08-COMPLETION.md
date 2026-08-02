@@ -1,14 +1,15 @@
 # APZQEP-120-S08 — Completion Report
 
-| Field           | Value                                  |
-| --------------- | -------------------------------------- |
-| Programme       | APZQEP-120                             |
-| Slice           | S08                                    |
-| Title           | Reliable Event Delivery (Outbox Drain) |
-| Status          | **COMPLETE**                           |
-| Engineering     | **COMPLETE**                           |
-| Certification   | **PASS**                               |
-| Timestamp (UTC) | 20260802T141518Z                       |
+| Field           | Value                                      |
+| --------------- | ------------------------------------------ |
+| Programme       | APZQEP-120                                 |
+| Slice           | S08                                        |
+| Title           | Reliable Event Delivery (Outbox Drain)     |
+| Status          | **COMPLETE** · Product Board **CERTIFIED** |
+| Engineering     | **COMPLETE**                               |
+| Certification   | **PASS** · Board **CERTIFIED**             |
+| Timestamp (UTC) | 20260802T141518Z                           |
+| Board (UTC)     | 20260802T142940Z                           |
 
 ---
 
