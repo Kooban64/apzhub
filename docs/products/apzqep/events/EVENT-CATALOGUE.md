@@ -1,17 +1,18 @@
 # APZQEP Evidence Domain Event Catalogue
 
-| Field             | Value                                                              |
-| ----------------- | ------------------------------------------------------------------ |
-| Document          | EVENT-CATALOGUE                                                    |
-| Product           | APZQEP                                                             |
-| Domain            | Evidence                                                           |
-| Programme         | APZQEP-120-S07                                                     |
-| Catalogue version | **1.0.3**                                                          |
-| Status            | **ACTIVE** · S07–S08 Board **CERTIFIED** · S10 Board **CERTIFIED** |
-| Publisher         | `qep-evidence` (Application Services)                              |
-| Delivery          | `@apzhub/platform-outbox` (S08 Board **CERTIFIED**)                |
-| Processing        | `@apzhub/platform-processing` + Evidence processor bundle (S10)    |
-| Timestamp (UTC)   | 20260802T145206Z                                                   |
+| Field             | Value                                                       |
+| ----------------- | ----------------------------------------------------------- |
+| Document          | EVENT-CATALOGUE                                             |
+| Product           | APZQEP                                                      |
+| Domain            | Evidence                                                    |
+| Programme         | APZQEP-120-S07                                              |
+| Catalogue version | **1.0.4**                                                   |
+| Status            | **ACTIVE** · S07–S10 Board **CERTIFIED** · S11 QKI **PASS** |
+| Publisher         | `qep-evidence` (Application Services)                       |
+| Delivery          | `@apzhub/platform-outbox` (S08 Board **CERTIFIED**)         |
+| Processing        | `@apzhub/platform-processing` + Evidence processors (S10)   |
+| Projection        | `@apzhub/qep-knowledge-index` Quality Knowledge Index (S11) |
+| Timestamp (UTC)   | 20260802T150615Z                                            |
 
 This catalogue is a **first-class product asset**. Event semantics are owned by the Evidence domain. Infrastructure transports events; it does not define them.
 
@@ -68,7 +69,23 @@ See [BUSINESS-PROCESSORS.md](../v1.1/apzqep-120/BUSINESS-PROCESSORS.md). Event s
 
 ---
 
-## Registered events (v1.0.3 — semantics unchanged from v1.0.1)
+## Search / projection consumer metadata (S11)
+
+| Field             | Value                                                   |
+| ----------------- | ------------------------------------------------------- |
+| Consumer          | Quality Knowledge Index (`@apzhub/qep-knowledge-index`) |
+| Projection        | `qep.knowledge.evidence.v1`                             |
+| Indexing path     | Event Platform only — never queries Evidence SoR        |
+| Consistency       | Eventually consistent                                   |
+| Rebuild           | Replay via `rebuildFromEvents`                          |
+| First UI consumer | Search Query Service (projection-only)                  |
+| Future consumers  | Command Palette, QI, AI, Executive Dashboards           |
+
+See [QUALITY-KNOWLEDGE-INDEX.md](../v1.1/apzqep-120/QUALITY-KNOWLEDGE-INDEX.md).
+
+---
+
+## Registered events (v1.0.4 — semantics unchanged from v1.0.1)
 
 | Event ID                             | Name                           | Version | Stability | Introduced In  | Status | Processor                 | Doc                                                                                    |
 | ------------------------------------ | ------------------------------ | ------- | --------- | -------------- | ------ | ------------------------- | -------------------------------------------------------------------------------------- |

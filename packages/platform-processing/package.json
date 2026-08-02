@@ -1,6 +1,6 @@
 {
   "name": "@apzhub/platform-processing",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "APZHUB Platform Processing — reliable event execution engine (APZQEP-120-S09). Knows how to execute, never why.",

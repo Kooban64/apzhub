@@ -10,6 +10,11 @@ export type ProcessorRegistry = {
   getById(processorId: string): EventProcessor | undefined;
   /** Resolve first processor that advertises the event type, or `*`. */
   resolve(eventType: string): EventProcessor | undefined;
+  /**
+   * Resolve all processors for an event type (exact matches, else `*`).
+   * Additive — enables product bundles (Evidence + Knowledge Index) to share events.
+   */
+  resolveAll(eventType: string): readonly EventProcessor[];
   list(): readonly EventProcessor[];
   capabilities(): ReadonlyArray<{
     readonly processorId: string;
@@ -42,16 +47,20 @@ export function createProcessorRegistry(
       return byId.get(processorId);
     },
     resolve(eventType) {
+      return this.resolveAll(eventType)[0];
+    },
+    resolveAll(eventType) {
+      const exact: EventProcessor[] = [];
+      const wild: EventProcessor[] = [];
       for (const processor of byId.values()) {
         const caps = processor.descriptor.capabilities;
-        if (caps.some((c) => c.eventType === eventType)) return processor;
-      }
-      for (const processor of byId.values()) {
-        if (processor.descriptor.capabilities.some((c) => c.eventType === "*")) {
-          return processor;
+        if (caps.some((c) => c.eventType === eventType)) {
+          exact.push(processor);
+        } else if (caps.some((c) => c.eventType === "*")) {
+          wild.push(processor);
         }
       }
-      return undefined;
+      return exact.length > 0 ? exact : wild;
     },
     list() {
       return [...byId.values()];

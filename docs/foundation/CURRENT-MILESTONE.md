@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120-S10 CERTIFIED** · Recommended next: **APZQEP-120-S11 Quality Knowledge Index** (Owner Auth Pack required) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120-S11 COMPLETE** · Recommended next: **APZQEP-120-S12 Notifications** (Owner instruction required) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
 
 ---
 
@@ -29,21 +29,17 @@
 
 ### Latest completed product slice
 
-**APZQEP-120-S10 — Business Processor Integration — COMPLETE / PASS / Product Board CERTIFIED**
+**APZQEP-120-S11 — Quality Knowledge Index — COMPLETE / PASS**
 
-- Board: [S10-PRODUCT-BOARD-CERTIFICATION.md](../products/apzqep/v1.1/apzqep-120/S10-PRODUCT-BOARD-CERTIFICATION.md)
-- Completion: [S10-COMPLETION.md](../products/apzqep/v1.1/apzqep-120/S10-COMPLETION.md)
-- Processors: [BUSINESS-PROCESSORS.md](../products/apzqep/v1.1/apzqep-120/BUSINESS-PROCESSORS.md)
-- Catalogue: [EVENT-CATALOGUE.md](../products/apzqep/events/EVENT-CATALOGUE.md) **v1.0.3**
-- Transition: platform engineering → **product engineering**
+- Completion: [S11-COMPLETION.md](../products/apzqep/v1.1/apzqep-120/S11-COMPLETION.md)
+- Index: [QUALITY-KNOWLEDGE-INDEX.md](../products/apzqep/v1.1/apzqep-120/QUALITY-KNOWLEDGE-INDEX.md)
+- Package: `@apzhub/qep-knowledge-index` **0.1.0**
+- Catalogue: [EVENT-CATALOGUE.md](../products/apzqep/events/EVENT-CATALOGUE.md) **v1.0.4**
+- Pipeline: event → processing → projection **complete**
 
 ### Recommended next product programme (not authorised)
 
-**APZQEP-120-S11 — Quality Knowledge Index** — [recommendation](../products/apzqep/v1.1/apzqep-120/S11-PRODUCT-BOARD-RECOMMENDATION.md)
-
-- Indexing capability (not a search page); Search consumes Event Platform projections
-- Platform Rule: Search never queries business services to build its index
-- Awaits Owner Authorisation Pack
+**APZQEP-120-S12 — Notifications** — Owner instruction required.
 
 ---
 

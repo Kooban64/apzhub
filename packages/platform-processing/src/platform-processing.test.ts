@@ -37,8 +37,59 @@ function workInput(
 }
 
 describe("APZQEP-120-S09 Reliable Event Processing Engine", () => {
-  it("exports platform processing version 0.1.0", () => {
-    expect(PLATFORM_PROCESSING_VERSION).toBe("0.1.0");
+  it("exports platform processing version 0.1.1", () => {
+    expect(PLATFORM_PROCESSING_VERSION).toBe("0.1.1");
+  });
+
+  it("fans out to all processors registered for an event type", async () => {
+    const store = createInMemoryProcessingStore();
+    const seen: string[] = [];
+    const registry = createProcessorRegistry([
+      {
+        descriptor: {
+          processorId: "a",
+          name: "A",
+          capabilities: [{ eventType: "shared.event" }],
+          replayCompatible: true,
+        },
+        async execute() {
+          seen.push("a");
+          return { outcome: "acknowledged" };
+        },
+      },
+      {
+        descriptor: {
+          processorId: "b",
+          name: "B",
+          capabilities: [{ eventType: "shared.event" }],
+          replayCompatible: true,
+        },
+        async execute() {
+          seen.push("b");
+          return { outcome: "acknowledged" };
+        },
+      },
+    ]);
+    expect(registry.resolveAll("shared.event")).toHaveLength(2);
+
+    await enqueueProcessingWork(store, {
+      workItemId: "pw_fan",
+      tenantId: "t",
+      eventType: "shared.event",
+      payload: {},
+      idempotencyKey: "fan-1",
+      createdAt: "2026-08-02T19:00:00.000Z",
+    });
+
+    await createProcessingWorker({
+      store,
+      registry,
+      workerId: "fan-worker",
+      now: () => "2026-08-02T19:00:01.000Z",
+      leasePolicy: { leaseTtlMs: 60_000, processingTimeoutMs: 30_000 },
+    }).runOnce();
+
+    expect(seen).toEqual(["a", "b"]);
   });
 
   it("defines Processing Contract transitions", () => {

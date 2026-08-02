@@ -68,6 +68,22 @@ function leaseExpiryIso(now: string, ttlMs: number): string {
   return new Date(Date.parse(now) + ttlMs).toISOString();
 }
 
+/** Worst outcome wins when multiple product processors handle one event. */
+function combineProcessingResults(
+  results: readonly ProcessingResult[],
+): ProcessingResult {
+  if (results.length === 0) {
+    return { outcome: "terminal_failure", message: "NO_RESULT", permanent: true };
+  }
+  const dead = results.find(
+    (r) => r.outcome === "dead_letter" || r.outcome === "terminal_failure",
+  );
+  if (dead) return dead;
+  const retry = results.find((r) => r.outcome === "retry");
+  if (retry) return retry;
+  return results[0]!;
+}
+
 async function executeWithTimeout(
   promise: Promise<ProcessingResult>,
   timeoutMs: number,
@@ -254,10 +270,10 @@ export function createProcessingEngine(
           continue;
         }
 
-        const processor = options.registry.resolve(item.eventType);
+        const processors = options.registry.resolveAll(item.eventType);
         const startedAt = now();
 
-        if (!processor) {
+        if (processors.length === 0) {
           await options.store.markDeadLetter({
             workItemId: item.workItemId,
             now: startedAt,
@@ -292,25 +308,26 @@ export function createProcessingEngine(
           now: startedAt,
         });
 
-        let result: ProcessingResult;
-        try {
-          const timeoutMs = Math.min(
-            item.processingTimeoutMs,
-            leasePolicy.processingTimeoutMs,
-          );
-          result = await executeWithTimeout(
-            processor.execute(toContext(leased, workerId, leaseExpiresAt, startedAt)),
-            timeoutMs,
-          );
-        } catch (error) {
-          result = {
-            outcome: "retry",
-            message: error instanceof Error ? error.message : "PROCESSOR_THREW",
-            retryable: true,
-          };
+        const timeoutMs = Math.min(
+          item.processingTimeoutMs,
+          leasePolicy.processingTimeoutMs,
+        );
+        const context = toContext(leased, workerId, leaseExpiresAt, startedAt);
+        const results: ProcessingResult[] = [];
+        for (const processor of processors) {
+          try {
+            results.push(
+              await executeWithTimeout(processor.execute(context), timeoutMs),
+            );
+          } catch (error) {
+            results.push({
+              outcome: "retry",
+              message: error instanceof Error ? error.message : "PROCESSOR_THREW",
+              retryable: true,
+            });
+          }
         }
 
-        // Lease expiry check after execution
         const finishedAt = now();
         if (Date.parse(leaseExpiresAt) < Date.parse(finishedAt)) {
           await options.store.markRetry({
@@ -322,7 +339,7 @@ export function createProcessingEngine(
           });
           obs?.onAttempt?.({
             workItemId: item.workItemId,
-            processorId: processor.descriptor.processorId,
+            processorId: processors.map((p) => p.descriptor.processorId).join(","),
             workerId,
             attempt: item.attemptCount,
             startedAt,
@@ -337,13 +354,9 @@ export function createProcessingEngine(
           continue;
         }
 
-        const branch = await handleResult(
-          item,
-          processor,
-          result,
-          startedAt,
-          finishedAt,
-        );
+        const result = combineProcessingResults(results);
+        const primary = processors[0]!;
+        const branch = await handleResult(item, primary, result, startedAt, finishedAt);
         if (branch === "acknowledged") acknowledged += 1;
         else if (branch === "retried") retried += 1;
         else deadLetter += 1;

@@ -1,0 +1,20 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "S11",
+  "title": "Quality Knowledge Index",
+  "status": "COMPLETE",
+  "certification": "PASS",
+  "timestampUtc": "20260802T150615Z",
+  "packages": {
+    "qep-knowledge-index": "0.1.0",
+    "platform-processing": "0.1.1"
+  },
+  "tests": {
+    "qep-knowledge-index": "8/8",
+    "platform-processing": "14/14",
+    "qep-evidence": "138/138"
+  },
+  "initialDomain": "evidence",
+  "outstandingIssues": [],
+  "recommendation": "Ready for APZQEP-120-S12"
+}

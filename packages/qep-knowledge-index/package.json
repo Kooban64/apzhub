@@ -1,0 +1,19 @@
+{
+  "name": "@apzhub/qep-knowledge-index",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZQEP Quality Knowledge Index — event-driven enterprise read model (APZQEP-120-S11). Search is the first consumer.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-knowledge-index"
+  },
+  "dependencies": {
+    "@apzhub/platform-processing": "workspace:*",
+    "@apzhub/qep-evidence": "workspace:*"
+  }
+}

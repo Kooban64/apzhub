@@ -1172,6 +1172,15 @@ importers:
         specifier: workspace:*
         version: link:../qep-types
 
+  packages/qep-knowledge-index:
+    dependencies:
+      '@apzhub/platform-processing':
+        specifier: workspace:*
+        version: link:../platform-processing
+      '@apzhub/qep-evidence':
+        specifier: workspace:*
+        version: link:../qep-evidence
+
   packages/qep-requirements:
     dependencies:
       '@apzhub/config':

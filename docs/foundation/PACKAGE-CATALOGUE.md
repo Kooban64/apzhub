@@ -131,7 +131,8 @@
 | `@apzhub/search-publication-admin`  | `packages/search-publication-admin/`  | 0.1.0      | Publication Operations & Administration — **frozen** (APZSEARCH-019)                                                                                |
 | `@apzhub/platform-services`         | `packages/platform-services/`         | **0.27.0** | Gateway + Metrics + Observability + Identity + Administration + Configuration + Notification + Workflow + Search + Documents + Time + **Analytics** |
 | `@apzhub/platform-outbox`           | `packages/platform-outbox/`           | **0.2.0**  | Reliable delivery — drain / retry / DLQ hooks / transport port (PCv2-02 · APZQEP-120-S08 CERTIFIED)                                                 |
-| `@apzhub/platform-processing`       | `packages/platform-processing/`       | **0.1.0**  | Reliable execution — registry / lease / worker / ack-retry-DLQ (APZQEP-120-S09)                                                                     |
+| `@apzhub/platform-processing`       | `packages/platform-processing/`       | **0.1.1**  | Reliable execution — registry / lease / fan-out / ack-retry-DLQ (APZQEP-120-S09/S11)                                                                |
+| `@apzhub/qep-knowledge-index`       | `packages/qep-knowledge-index/`       | **0.1.0**  | Quality Knowledge Index — event-driven read model + search (APZQEP-120-S11)                                                                         |
 | `@apzhub/platform-event-bus`        | `packages/platform-event-bus/`        | **0.1.0**  | Event Bus + webhook ingress + outbox relay (OSS-100-12)                                                                                             |
 
 ## Product packages
@@ -184,7 +185,8 @@ See [Platform Dependency Review](../reviews/APZHUB-Platform-Dependency-Review.md
 | `@apzhub/integration-search-sdk`     | `0.1.0`            | APZSEARCH-004                                             |
 | `@apzhub/platform-services`          | `0.27.0`           | Gateway facade + Time + Analytics Platform Services       |
 | `@apzhub/platform-outbox`            | `0.2.0`            | Reliable delivery · APZQEP-120-S08 CERTIFIED              |
-| `@apzhub/platform-processing`        | `0.1.0`            | Reliable execution · APZQEP-120-S09                       |
+| `@apzhub/platform-processing`        | `0.1.1`            | Reliable execution · fan-out · APZQEP-120-S09/S11         |
+| `@apzhub/qep-knowledge-index`        | `0.1.0`            | Quality Knowledge Index · APZQEP-120-S11                  |
 | `@apzhub/platform-event-bus`         | `0.1.0`            | OSS-100-12 Event Bus + webhook ingress                    |
 | `@apzhub/platform-service-contracts` | `0.17.1`           | Platform service contracts (+ Time)                       |
 | `@apzhub/search-integration`         | `0.2.0`            | Frozen (APZSEARCH-019)                                    |
