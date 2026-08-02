@@ -22,10 +22,11 @@ Establish the **governance model** under which engineering standards may be prom
 
 ## Authoritative inventory
 
-| Document                                                                                  | Role                              |
-| ----------------------------------------------------------------------------------------- | --------------------------------- |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | **Enterprise standards register** |
-| [PHASE-1-CATALOGUE-OPENING.md](./PHASE-1-CATALOGUE-OPENING.md)                            | Catalogue opening (**CERTIFIED**) |
+| Document                                                                                  | Role                                       |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------ |
+| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | **What currently defines APZHUB** (v1.0)   |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Enterprise standards register (all states) |
+| [PHASE-1-CATALOGUE-OPENING.md](./PHASE-1-CATALOGUE-OPENING.md)                            | Catalogue opening (**CERTIFIED**)          |
 
 ---
 
@@ -70,8 +71,9 @@ Retained design inputs: [PROGRAMME-DESIGN.md](./PROGRAMME-DESIGN.md) · [PROMOTI
 ```text
 Phase 0: CERTIFIED
 Standards Catalogue: CERTIFIED
+Enterprise Engineering Baseline: 1.0 (ES-001)
 ES-001: ACTIVE v1.0 (first APZHUB-owned enterprise engineering standard)
-ES-002: Proposed — authorship NOT STARTED (awaits Owner instruction)
+ES-002: Proposed — authorship NOT STARTED (awaits Owner instruction; Baseline → 1.1 when Active)
 ```
 
 ---

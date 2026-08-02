@@ -1,0 +1,18 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "artefact": "APZHUB-ENTERPRISE-ENGINEERING-BASELINE",
+  "baselineVersion": "1.0",
+  "status": "ACTIVE",
+  "includedStandards": ["ES-001"],
+  "timestampUtc": "20260802T113952Z",
+  "effectiveDate": "2026-08-02",
+  "engineering": "NONE",
+  "path": "docs/engineering/APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md",
+  "distinction": {
+    "catalogue": "everything that exists",
+    "baseline": "what currently defines APZHUB"
+  },
+  "nextPlanned": "1.1 after ES-002 ACTIVE",
+  "es002Authorship": "NOT_STARTED",
+  "outstandingIssues": "NONE"
+}

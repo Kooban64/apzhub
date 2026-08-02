@@ -1,19 +1,20 @@
 # APZHUB-ENG-002 — Document Map
 
-| Field     | Value                                                   |
-| --------- | ------------------------------------------------------- |
-| Programme | APZHUB-ENG-002                                          |
-| Phase     | 0 CERTIFIED · 1 Catalogue CERTIFIED · ES-001 **ACTIVE** |
-| Status    | First enterprise standard promoted; next ES-002         |
+| Field     | Value                                                                |
+| --------- | -------------------------------------------------------------------- |
+| Programme | APZHUB-ENG-002                                                       |
+| Phase     | 0 CERTIFIED · Catalogue CERTIFIED · Baseline **1.0** · ES-001 ACTIVE |
+| Status    | First enterprise standard in Baseline; next ES-002                   |
 
 ---
 
 ## Enterprise inventory
 
-| Document                                                                                  | Role                             | Status    |
-| ----------------------------------------------------------------------------------------- | -------------------------------- | --------- |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Authoritative standards register | CERTIFIED |
-| [PHASE-1-CATALOGUE-OPENING.md](./PHASE-1-CATALOGUE-OPENING.md)                            | Catalogue establishment record   | CERTIFIED |
+| Document                                                                                  | Role                             | Status         |
+| ----------------------------------------------------------------------------------------- | -------------------------------- | -------------- |
+| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | Adopted enterprise set           | **1.0 ACTIVE** |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Authoritative standards register | CERTIFIED      |
+| [PHASE-1-CATALOGUE-OPENING.md](./PHASE-1-CATALOGUE-OPENING.md)                            | Catalogue establishment record   | CERTIFIED      |
 
 ---
 

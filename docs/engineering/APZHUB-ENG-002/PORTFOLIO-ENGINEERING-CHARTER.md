@@ -204,7 +204,8 @@ Products inherit enterprise changes by citation update in their next authorised 
 4. No Phase 1+ standards **body** promotion under APZHUB-ENG-002 until this Charter is Product Board **CERTIFIED** _(satisfied — Phase 0 CERTIFIED)_.
 5. No enterprise standard body without a prior row in the [Enterprise Engineering Standards Catalogue](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md).
 6. Enterprise standards shall never be derived by duplication; they shall be derived by **abstraction** ([PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)).
-7. Documentation-only programmes remain documentation-only unless Owner expands authority.
+7. When a standard becomes Active, the [Enterprise Engineering Baseline](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) SHALL be updated to a new version listing the full adopted set.
+8. Documentation-only programmes remain documentation-only unless Owner expands authority.
 
 ---
 
@@ -242,6 +243,7 @@ Measurable criteria: [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)
 | ----------------------------------------------------------------------------------------- | --------------------------------------- |
 | [PROGRAMME-CHARTER.md](./PROGRAMME-CHARTER.md)                                            | APZHUB-ENG-002 programme charter        |
 | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Enterprise standards inventory          |
+| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | Adopted enterprise standards set        |
 | [PORTFOLIO-GOVERNANCE-MODEL.md](./PORTFOLIO-GOVERNANCE-MODEL.md)                          | Decision rights and conflict resolution |
 | [PORTFOLIO-LIFECYCLE.md](./PORTFOLIO-LIFECYCLE.md)                                        | Standard lifecycle states               |
 | [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)                                      | Mandatory promotion rules               |

@@ -1,15 +1,16 @@
 # APZHUB Enterprise Engineering Standards Catalogue
 
-| Field             | Value                                                                                              |
-| ----------------- | -------------------------------------------------------------------------------------------------- |
-| Document          | APZHUB-ENGINEERING-STANDARDS-CATALOGUE                                                             |
-| Programme         | APZHUB-ENG-002                                                                                     |
-| Classification    | Enterprise Engineering Governance                                                                  |
-| Status            | **CERTIFIED** (Product Board — Phase 1 Opening)                                                    |
-| Authority         | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) (**CERTIFIED**) |
-| Technical content | **NONE** — inventory and status only                                                               |
-| Role              | Single source of truth for enterprise engineering standards                                        |
-| Engineering       | NONE                                                                                               |
+| Field             | Value                                                                                                  |
+| ----------------- | ------------------------------------------------------------------------------------------------------ |
+| Document          | APZHUB-ENGINEERING-STANDARDS-CATALOGUE                                                                 |
+| Programme         | APZHUB-ENG-002                                                                                         |
+| Classification    | Enterprise Engineering Governance                                                                      |
+| Status            | **CERTIFIED** (Product Board — Phase 1 Opening)                                                        |
+| Authority         | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) (**CERTIFIED**)     |
+| Technical content | **NONE** — inventory and status only                                                                   |
+| Role              | Inventory of every enterprise standard (all lifecycle states)                                          |
+| Companion         | [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) — adopted set |
+| Engineering       | NONE                                                                                                   |
 
 ---
 
@@ -29,7 +30,12 @@ It answers:
 - ownership, review cadence, and supersession;
 - where the normative document lives.
 
-Promotions under APZHUB-ENG-002 SHALL update this catalogue. Isolated standard documents without a catalogue row are governance defects.
+| Artefact                                                                | Role                                                |
+| ----------------------------------------------------------------------- | --------------------------------------------------- |
+| **This Catalogue**                                                      | Everything that exists                              |
+| **[Engineering Baseline](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md)** | What currently defines the enterprise (adopted set) |
+
+Promotions under APZHUB-ENG-002 SHALL update this catalogue **and**, when a standard becomes Active, the Baseline version. Isolated standard documents without a catalogue row are governance defects.
 
 **Rows are never removed.** Lifecycle changes update status (and related audit fields) only.
 
@@ -117,7 +123,7 @@ API / Database / Domain Event remain **Deferred** until Board revisits.
 
 1. Register a row **before** drafting the enterprise standard body.
 2. Status moves only with evidence (review pack, Board decision).
-3. On Active: set Current Version, Promotion Date, Product Board Decision, and Normative Home.
+3. On Active: set Current Version, Promotion Date, Product Board Decision, and Normative Home; then publish a new [Engineering Baseline](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) version.
 4. **Never delete rows**; use Superseded / Retired and fill Superseded By.
 5. Product-specific standards do **not** appear here unless proposed for enterprise adoption.
 6. Enterprise standards SHALL be derived by **abstraction**, never by duplication ([PROMOTION-PRINCIPLES.md](./APZHUB-ENG-002/PROMOTION-PRINCIPLES.md)).
@@ -145,6 +151,7 @@ API / Database / Domain Event remain **Deferred** until Board revisits.
 | 20260802T113012Z | —      | Catalogue **CERTIFIED** (Product Board Phase 1 Opening)           | Board decision                                      |
 | 20260802T113012Z | ES-001 | Status → **Under Review**; candidate body authored by abstraction | `APZHUB-TESTING-STANDARD.md` · `ES-001-*`           |
 | 20260802T113408Z | ES-001 | Product Board **CERTIFIED**; Status → **APPROVED → ACTIVE** v1.0  | `ES-001-PROMOTION-PACK.md` · evidence CERTIFIED     |
+| 20260802T113952Z | —      | Enterprise Engineering Baseline **1.0** established (ES-001)      | `APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md`         |
 
 ---
 
